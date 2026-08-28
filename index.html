@@ -50,7 +50,12 @@
      @font-face in redesign-system.css (assets/fonts/sacramento.woff2). The old Google-CDN <link>
      used a media="print" trick that never loaded in the WKWebView, so the app fell back to a
      different cursive. Self-hosting renders it identically on web + app. -->
-<link rel="stylesheet" href="/redesign-system.css?v=oncotile1">
+<!-- Bricolage Grotesque is the display face for the interstitials (@font-face in
+     redesign-system.css). It is font-display:block so the brand word-mark never flashes in a
+     fallback, and the interstitials are the very first paint, so start the fetch here rather
+     than waiting for the stylesheet to be parsed. Same-origin, so no crossorigin mismatch. -->
+<link rel="preload" href="/assets/fonts/bricolage-grotesque.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/redesign-system.css?v=splashv2d">
 <link rel="stylesheet" href="/motion.css?v=gold1">
 <link rel="stylesheet" href="/maik-ask.css?v=maik1">
 <script>/* Redesign flag → html.rds-on early (before boot) so the onboarding gate is covered too. */
@@ -341,8 +346,18 @@ body.smd-ddi-open #smdBackToTop{display:none!important}
   html.smd-splash-v2 #smdBootSplash{background:radial-gradient(280px 280px at 6% 4%,rgba(14,110,99,.09) 0%,rgba(14,110,99,0) 70%),radial-gradient(300px 300px at 98% 96%,rgba(146,98,10,.05) 0%,rgba(146,98,10,0) 70%),#fbfdfc}
   html.smd-splash-v2 #smdBootSplash.sbs-dark{background:radial-gradient(280px 280px at 4% 2%,rgba(63,199,179,.3) 0%,rgba(63,199,179,0) 70%),radial-gradient(300px 300px at 100% 98%,rgba(240,192,96,.14) 0%,rgba(240,192,96,0) 70%),radial-gradient(120% 90% at 18% 8%,#1a4a42 0%,#0e2e2a 32%,#0d1b26 62%,#0a141c 100%)}
   html.smd-splash-v2 #smdBootSplash .sbs-center{gap:14px}
-  html.smd-splash-v2 #smdBootSplash .sbs-word{font-size:29px;font-weight:800;letter-spacing:-.02em}
-  html.smd-splash-v2 #smdBootSplash .sbs-tag{font-size:13px;font-weight:500;color:#6b8398;letter-spacing:.01em}
+  /* the mark is the hero here too: bigger, with its own shadow, so the boot screen is a brand
+     moment rather than a spinner with an icon above it */
+  html.smd-splash-v2 #smdBootSplash .sbs-logo,
+  html.smd-splash-v2 #smdBootSplash .sbs-mark{width:126px;height:126px}
+  /* the glow goes ONLY on .sbs-mark, which is a CSS mask and therefore genuinely transparent.
+     .sbs-logo is /logo.png, whose bitmap is opaque to its edges, so a drop-shadow on it renders
+     as a square halo around the artwork instead of following the mark. */
+  html.smd-splash-v2 #smdBootSplash.sbs-dark .sbs-mark{filter:drop-shadow(0 0 38px rgba(63,199,179,.34))}
+  /* the same light/extrabold lock-up the poster and the landing splash use */
+  html.smd-splash-v2 #smdBootSplash .sbs-word{font-family:var(--smd-dsp);font-size:40px;font-weight:300;letter-spacing:-.045em;line-height:1}
+  html.smd-splash-v2 #smdBootSplash .sbs-word span{font-weight:800}
+  html.smd-splash-v2 #smdBootSplash .sbs-tag{font-family:var(--smd-dsp);font-size:9.5px;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:#7d94a6}
   html.smd-splash-v2 #smdBootSplash.sbs-dark .sbs-tag{color:rgba(246,247,245,.6)}
   /* progress becomes a translucent glass pill (Direction C) */
   html.smd-splash-v2 #smdBootSplash .sbs-bar{width:auto;height:auto;margin-top:8px;padding:9px 18px;border-radius:999px;background:rgba(14,110,99,.05);border:1px solid rgba(14,110,99,.14);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);overflow:visible;position:relative}
@@ -353,23 +368,23 @@ body.smd-ddi-open #smdBackToTop{display:none!important}
   /* "developed by MaiK" foot: a glass bar carrying the REAL MaiK logo (light/dark swap kept) */
   html.smd-splash-v2 #smdBootSplash .sbs-foot{left:24px;right:24px;bottom:max(30px,env(safe-area-inset-bottom,30px));flex-direction:row;align-items:center;justify-content:center;gap:11px;padding:11px 18px;border-radius:18px;background:rgba(14,110,99,.045);border:1px solid rgba(14,110,99,.12);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
   html.smd-splash-v2 #smdBootSplash.sbs-dark .sbs-foot{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.1)}
-  html.smd-splash-v2 #smdBootSplash .sbs-by{font-size:9.5px;font-weight:600;letter-spacing:.1em}
+  html.smd-splash-v2 #smdBootSplash .sbs-by{font-family:var(--smd-dsp);font-size:9px;font-weight:600;letter-spacing:.2em}
   html.smd-splash-v2 #smdBootSplash .sbs-maik{height:30px}
   /* ── personalised state only ── */
   html.smd-splash-v2 #smdBootSplash.sbs-personal .sbs-logo,
-  html.smd-splash-v2 #smdBootSplash.sbs-personal .sbs-mark{width:66px;height:66px}
+  html.smd-splash-v2 #smdBootSplash.sbs-personal .sbs-mark{width:92px;height:92px}
   html.smd-splash-v2 #smdBootSplash.sbs-personal .sbs-word{display:none}
   html.smd-splash-v2 #smdBootSplash.sbs-personal .sbs-tag{display:none}
   html.smd-splash-v2 #smdBootSplash .sbs-hello[hidden]{display:none}
   html.smd-splash-v2 #smdBootSplash .sbs-hello{display:flex;flex-direction:column;align-items:center;gap:14px;margin-top:6px;max-width:min(88vw,320px);animation:sbsFade .55s .26s ease both}
-  html.smd-splash-v2 #smdBootSplash .sbs-dp{position:relative;flex:0 0 auto;width:84px;height:84px;border-radius:50%;background:linear-gradient(135deg,#3fc7b3,#0e6e63) center/cover no-repeat;box-shadow:0 16px 40px rgba(14,110,99,.32);display:flex;align-items:center;justify-content:center;font-size:26px;font-weight:800;color:#0a141c;letter-spacing:-.02em}
+  html.smd-splash-v2 #smdBootSplash .sbs-dp{position:relative;flex:0 0 auto;width:84px;height:84px;border-radius:50%;background:linear-gradient(135deg,#3fc7b3,#0e6e63) center/cover no-repeat;box-shadow:0 16px 40px rgba(14,110,99,.32);display:flex;align-items:center;justify-content:center;font-family:var(--smd-dsp);font-size:30px;font-weight:800;color:#0a141c;letter-spacing:-.03em}
   html.smd-splash-v2 #smdBootSplash .sbs-dp.has-pic{background-color:#0e6e63;box-shadow:0 16px 40px rgba(14,110,99,.32),inset 0 0 0 2px rgba(255,255,255,.16)}
   /* online-status accent (generated decoration, no brand asset involved) */
   html.smd-splash-v2 #smdBootSplash .sbs-dp::after{content:"";position:absolute;right:5px;bottom:5px;width:16px;height:16px;border-radius:50%;background:#4dd68c;border:3px solid #fbfdfc}
   html.smd-splash-v2 #smdBootSplash.sbs-dark .sbs-dp::after{border-color:#0d1922}
   html.smd-splash-v2 #smdBootSplash .sbs-hello-txt{display:flex;flex-direction:column;align-items:center;gap:4px;min-width:0;text-align:center;max-width:100%}
-  html.smd-splash-v2 #smdBootSplash .sbs-hello-k{font-size:13px;font-weight:500;letter-spacing:.01em;text-transform:none;color:#6b8398;line-height:1.2}
-  html.smd-splash-v2 #smdBootSplash .sbs-hello-n{font-size:20px;font-weight:700;letter-spacing:-.01em;color:#0f172a;line-height:1.3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
+  html.smd-splash-v2 #smdBootSplash .sbs-hello-k{font-family:var(--smd-dsp);font-size:9.5px;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:#7d94a6;line-height:1.2}
+  html.smd-splash-v2 #smdBootSplash .sbs-hello-n{font-family:var(--smd-dsp);font-size:23px;font-weight:700;letter-spacing:-.032em;color:#0f172a;line-height:1.25;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
   html.smd-splash-v2 #smdBootSplash.sbs-dark .sbs-hello-k{color:rgba(246,247,245,.55)}
   html.smd-splash-v2 #smdBootSplash.sbs-dark .sbs-hello-n{color:#f6f7f5}
   @keyframes sbsGlow{0%,100%{opacity:1}50%{opacity:.55}}
@@ -413,11 +428,32 @@ document.body.classList.toggle("dark",dark);}catch(e){}})();</script>
 <!-- ===== INTERSTITIAL REVAMP (html.smd-splash-v2) - DIRECTION C =====
      Presentation-only override layer for the intro poster and the landing splash: a deep
      teal-to-navy radial gradient mesh with soft off-edge glows, glass cards (translucent fill,
-     hairline border, blur, generous radius, soft elevation), bold tight-tracked display type
-     and tinted pill chips. Nothing here changes markup or logic, so ?splashv2=0 falls straight
-     back to the previous look. Brand marks are the REAL assets (/mark-white.png and
-     /maik-logo-white.png), swapped in via CSS so the markup stays untouched. -->
+     hairline border, blur, generous radius, soft elevation) and depth. Nothing here changes
+     markup or logic, so ?splashv2=0 falls straight back to the previous look. Brand marks are
+     the REAL assets (/mark-white.png and /maik-logo-white.png), swapped in via CSS so the
+     markup stays untouched.
+
+     CRAFT PASS on top of that foundation, after review:
+     - TYPE. One display face, Bricolage Grotesque (self-hosted, see redesign-system.css), does
+       every brand and headline moment; supporting copy stays on the app sans (var(--sans)), so
+       the two roles read as two voices instead of one font at five weights. The recurring
+       device is weight contrast on a single line: "Steward" at 300 against "MD" at 800, the
+       AMR headline at 800 against its kicker at 200. Display sizes are set tight (-.04em and
+       negative leading) and the small labels are set loose (.22em+) so the hierarchy is
+       optical, not just numeric.
+     - LOGO. The mark is the hero, not an icon: 152px on the poster and 118px on the landing
+       splash, standing free with its own glow and drop-shadow instead of being parked in a
+       rounded glass tile (that tile was the single most template-looking thing here).
+     - COMPOSITION. The poster is left-aligned and top-weighted rather than centred in a void,
+       so phases 1-3 share one axis, and the AMR figures are an open editorial list on a teal
+       rule instead of a third identical glass card. Cards are now the exception (the credit
+       and the case preview) rather than the default, which is what makes them read. -->
 <style>
+/* The display face for every brand/headline moment on the interstitials. Supporting copy stays
+   on var(--sans) so the two roles stay audibly different. The fallbacks matter: if the woff2 is
+   ever missing, the layout must still be sane rather than collapsing to a serif. */
+html.smd-splash-v2{--smd-dsp:'Bricolage Grotesque','Inter Variable',system-ui,-apple-system,sans-serif}
+
 /* -- Intro poster (first-run, brand-led) -- */
 html.smd-splash-v2 #introPoster{padding:calc(env(safe-area-inset-top,0px) + 20px) 0 calc(env(safe-area-inset-bottom,0px) + 92px)}
 /* the base .ip-bg animates the background shorthand, which would otherwise win over any static value */
@@ -425,41 +461,68 @@ html.smd-splash-v2 .ip-bg{animation:none;background:radial-gradient(280px 280px 
 html.smd-splash-v2 .ip-phase{max-width:392px;padding:0 26px;animation:ipRise .62s cubic-bezier(.2,.75,.25,1) both}
 @keyframes ipRise{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
 
-/* Phase 1 - the real app mark inside a glass tile, then the word-mark */
-html.smd-splash-v2 #ipPhase1{gap:0}
-html.smd-splash-v2 .ip-logo-wrap{width:96px!important;height:96px!important;margin-bottom:24px!important;border-radius:26px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);box-shadow:0 20px 50px rgba(0,0,0,.35),0 0 60px rgba(63,199,179,.25)}
-html.smd-splash-v2 .ip-logo-fallback{width:58px!important;height:58px;background:url("/mark-white.png") center/contain no-repeat;animation:ipBreathe 5.2s ease-in-out infinite}
+/* Phase 1 - the hero brand moment: a big free-standing mark over a light/bold word-mark.
+   Left-aligned on the same axis as phases 2 and 3, so the poster reads as one composition
+   instead of three centred slides. */
+/* offset with position, not transform or margin: .ip-phase is a centred flex child running the
+   ipRise animation, so a transform here would be overwritten and a margin would just re-centre.
+   Dropping the stack below the optical centre turns the empty upper half into deliberate sky
+   rather than the even top-and-bottom void of a dead-centred lock-up. */
+html.smd-splash-v2 #ipPhase1{gap:0;align-items:flex-start;text-align:left;position:relative;top:58px}
+/* the glass tile is gone: the mark carries its own light. .ip-logo-wrap keeps only the job of
+   positioning, and ::before is the glow the mark sits in (drawn behind, never clipping it). */
+html.smd-splash-v2 .ip-logo-wrap{position:relative;width:100%!important;height:auto!important;margin-bottom:30px!important;justify-content:flex-start;border-radius:0;background:none;border:0;-webkit-backdrop-filter:none;backdrop-filter:none;box-shadow:none}
+html.smd-splash-v2 .ip-logo-wrap::before{content:"";position:absolute;left:-46px;top:-62px;width:264px;height:264px;border-radius:50%;background:radial-gradient(circle,rgba(63,199,179,.26) 0%,rgba(63,199,179,.07) 46%,rgba(63,199,179,0) 70%);pointer-events:none}
+/* the element carries inline width/display, hence the !important the base layer already needed */
+html.smd-splash-v2 .ip-logo-fallback{position:relative;width:152px!important;height:152px;background:url("/mark-white.png") left center/contain no-repeat;filter:drop-shadow(0 20px 44px rgba(0,0,0,.5)) drop-shadow(0 0 34px rgba(63,199,179,.3));animation:ipBreathe 5.2s ease-in-out infinite}
 html.smd-splash-v2 .ip-logo-img{display:none!important}
-html.smd-splash-v2 .ip-appname{font-size:30px;font-weight:800;letter-spacing:-.02em;margin-bottom:0}
-html.smd-splash-v2 .ip-in{font-size:17px;vertical-align:super;opacity:.8}
-html.smd-splash-v2 .ip-tagline-sub{margin-top:8px;font-size:10.5px;font-weight:600;letter-spacing:.14em;color:rgba(246,247,245,.55)}
-/* decorative pulse line (generated decoration, not a brand mark) */
-html.smd-splash-v2 #ipPhase1::after{content:"";position:absolute;left:50%;bottom:-104px;transform:translateX(-50%);width:100%;height:40px;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 40'%3E%3Cpath d='M0 20 H60 L70 5 L82 35 L94 20 H140 L150 8 L160 32 L172 20 H200' stroke='%233fc7b3' stroke-width='1.4' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/contain no-repeat;opacity:.4;pointer-events:none}
+/* the lock-up: one word, two weights. 300 against 800 is the whole idea, so the size is set
+   large and the tracking tight enough that the pair reads as a single drawn mark. */
+html.smd-splash-v2 .ip-appname{width:100%;font-family:var(--smd-dsp);font-size:54px;font-weight:300;letter-spacing:-.045em;line-height:.94;margin-bottom:0;text-align:left}
+html.smd-splash-v2 .ip-appname span{font-weight:800;color:#3fc7b3}
+html.smd-splash-v2 .ip-in{font-size:15px;font-weight:500;letter-spacing:.01em;vertical-align:super;color:rgba(246,247,245,.45);opacity:1}
+/* the label is set as loose as the word-mark is tight, on a rule that is tealed for its first
+   46px - a small piece of drawing that is cheaper and calmer than another glass panel. */
+html.smd-splash-v2 .ip-tagline-sub{position:relative;width:100%;margin-top:22px;padding-top:15px;border-top:1px solid rgba(255,255,255,.11);font-family:var(--smd-dsp);font-size:9.5px;font-weight:600;letter-spacing:.24em;line-height:1.4;color:rgba(246,247,245,.44);text-align:left}
+html.smd-splash-v2 .ip-tagline-sub::before{content:"";position:absolute;left:0;top:-1px;width:46px;height:1px;background:#3fc7b3}
+/* decorative pulse line (generated decoration, not a brand mark), now anchored to the same
+   left edge and bleeding off it rather than floating centred under the phase */
+html.smd-splash-v2 #ipPhase1::after{content:"";position:absolute;left:26px;right:auto;bottom:-56px;transform:none;width:196px;height:28px;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 40'%3E%3Cpath d='M0 20 H60 L70 5 L82 35 L94 20 H140 L150 8 L160 32 L172 20 H200' stroke='%233fc7b3' stroke-width='1.4' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") left center/contain no-repeat;opacity:.3;pointer-events:none}
 
-/* Phase 2 - AMR, as a left-aligned glass stat card */
+/* Phase 2 - AMR. The headline is the scale moment of the poster and the figures are an open
+   editorial list on a teal rule, NOT a third glass card: three identical panels in a row was
+   most of what made the set feel templated. */
 html.smd-splash-v2 #ipPhase2{align-items:stretch;text-align:left}
-html.smd-splash-v2 .ip-amr-head{font-size:25px;font-weight:800;line-height:1.28;letter-spacing:-.01em;margin-bottom:0}
-html.smd-splash-v2 .ip-amr-sub{font-size:25px;font-weight:800;letter-spacing:-.01em;display:inline-block}
-html.smd-splash-v2 .ip-amr-desc{font-size:13px;line-height:1.6;color:rgba(246,247,245,.65);max-width:300px;margin:10px 0 24px}
-html.smd-splash-v2 .ip-stats{display:grid;grid-template-columns:1fr;gap:18px;padding:24px 20px;border-radius:22px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);box-shadow:0 20px 50px rgba(0,0,0,.3);margin-bottom:20px}
-html.smd-splash-v2 .ip-stat{display:flex;flex-direction:row;align-items:center;gap:14px;padding:0;text-align:left}
-html.smd-splash-v2 .ip-stat-num{flex:0 0 auto;min-width:64px;font-size:26px;font-weight:800;font-family:var(--sans);font-variant-numeric:tabular-nums;letter-spacing:-.02em;line-height:1.05;margin-bottom:0}
-html.smd-splash-v2 .ip-stat-label{font-size:12px;line-height:1.4;color:rgba(246,247,245,.7)}
+html.smd-splash-v2 .ip-amr-head{font-family:var(--smd-dsp);font-size:40px;font-weight:800;line-height:.98;letter-spacing:-.042em;margin-bottom:0}
+/* the kicker drops to the lightest weight on the axis - same size, opposite mass */
+html.smd-splash-v2 .ip-amr-sub{font-family:var(--smd-dsp);font-size:40px;font-weight:200;letter-spacing:-.03em;line-height:1.06;display:inline-block;color:#3fc7b3}
+html.smd-splash-v2 .ip-amr-desc{font-family:var(--sans);font-size:13px;line-height:1.65;color:rgba(246,247,245,.56);max-width:288px;margin:18px 0 26px}
+html.smd-splash-v2 .ip-stats{display:grid;grid-template-columns:1fr;gap:0;padding:2px 0 2px 20px;border:0;border-left:1px solid rgba(63,199,179,.4);border-radius:0;background:none;-webkit-backdrop-filter:none;backdrop-filter:none;box-shadow:none;margin-bottom:26px}
+html.smd-splash-v2 .ip-stat{display:flex;flex-direction:row;align-items:baseline;gap:14px;padding:13px 0;text-align:left}
+html.smd-splash-v2 .ip-stat-num{flex:0 0 auto;min-width:100px;font-family:var(--smd-dsp);font-size:34px;font-weight:800;font-variant-numeric:tabular-nums;letter-spacing:-.05em;line-height:1;margin-bottom:0;color:#f6f7f5}
+html.smd-splash-v2 .ip-stat-label{font-family:var(--sans);font-size:11.5px;line-height:1.45;color:rgba(246,247,245,.52)}
 html.smd-splash-v2 .ip-stat:nth-child(5) .ip-stat-num{color:#f0c060}
-html.smd-splash-v2 .ip-stat-div{width:auto;height:1px;align-self:auto;background:rgba(255,255,255,.1)}
-html.smd-splash-v2 .ip-together{font-size:12px;font-weight:700;letter-spacing:.01em;line-height:1.5;color:rgba(246,247,245,.82)}
-html.smd-splash-v2 .ip-together span{display:inline-block;margin-top:6px;font-size:11.5px;color:rgba(246,247,245,.55)}
+html.smd-splash-v2 .ip-stat-div{width:auto;height:1px;align-self:auto;background:rgba(255,255,255,.08)}
+html.smd-splash-v2 .ip-together{font-family:var(--smd-dsp);font-size:14px;font-weight:700;letter-spacing:-.005em;line-height:1.35;color:#f6f7f5}
+html.smd-splash-v2 .ip-together span{display:block;margin-top:10px;font-family:var(--sans);font-size:11.5px;font-weight:400;letter-spacing:.01em;line-height:1.55;color:rgba(246,247,245,.48)}
 
-/* Phase 3 - the quote and the real MaiK credit, on one glass card */
-html.smd-splash-v2 #ipPhase3{width:300px;max-width:calc(100vw - 48px);padding:34px 26px;gap:22px;border-radius:24px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);box-shadow:0 24px 60px rgba(0,0,0,.35)}
-html.smd-splash-v2 .ip-grave{order:1;margin:0;padding:0 0 22px;border-left:none;text-align:center;font-style:normal;font-size:15px;font-weight:500;line-height:1.6;color:rgba(246,247,245,.9);position:relative}
-html.smd-splash-v2 .ip-grave::after{content:"";position:absolute;left:50%;bottom:0;transform:translateX(-50%);width:32px;height:1px;background:rgba(63,199,179,.5)}
-html.smd-splash-v2 .ip-dev-company{order:2;gap:10px;margin-bottom:0}
-html.smd-splash-v2 .ip-dev-product-of{font-size:9.5px;font-weight:600;letter-spacing:.16em;color:rgba(246,247,245,.4)}
+/* Phase 3 - the quote and the real MaiK credit. This is where the ONE glass card is spent, so
+   it has to earn it: the quote is set large and light on the same left axis as phases 1-2, and
+   the card's bottom-left corner is cut back to 8px so the panel is a shape rather than another
+   evenly-rounded rectangle. */
+html.smd-splash-v2 #ipPhase3{width:322px;max-width:calc(100vw - 44px);align-items:flex-start;text-align:left;padding:32px 26px 26px;gap:22px;border-radius:26px 26px 26px 8px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);box-shadow:0 24px 60px rgba(0,0,0,.35)}
+/* the markup hard-wraps the quote mid-sentence; at this size it should set on its own measure */
+/* NB: the quote's <br> STAYS. The markup is "...the only thing<br>standing between...", with no
+   space on either side of it, so suppressing the break sets "thingstanding". At 18px on this
+   measure the forced break falls where the line would have wrapped anyway. */
+html.smd-splash-v2 .ip-grave{order:1;margin:0;padding:0 0 22px;border-left:none;text-align:left;font-family:var(--smd-dsp);font-style:normal;font-size:18px;font-weight:300;line-height:1.46;letter-spacing:-.022em;color:#f6f7f5;position:relative}
+html.smd-splash-v2 .ip-grave::after{content:"";position:absolute;left:0;bottom:0;transform:none;width:40px;height:1px;background:#3fc7b3}
+html.smd-splash-v2 .ip-dev-company{order:2;align-items:flex-start;gap:9px;margin-bottom:0}
+html.smd-splash-v2 .ip-dev-product-of{font-family:var(--smd-dsp);font-size:9px;font-weight:600;letter-spacing:.24em;color:rgba(246,247,245,.38)}
 /* the REAL MaiK word-mark (white asset on the dark poster) replaces the inline placeholder image */
 html.smd-splash-v2 .ip-dev-maik-logo{display:none!important}
-html.smd-splash-v2 .ip-dev-company::after{content:"";display:block;width:112px;height:45px;background:url("/maik-logo-white.png") center/contain no-repeat}
-html.smd-splash-v2 .ip-copy{order:3;font-size:9.5px;letter-spacing:.05em;color:rgba(246,247,245,.35)}
+html.smd-splash-v2 .ip-dev-company::after{content:"";display:block;width:124px;height:50px;background:url("/maik-logo-white.png") left center/contain no-repeat}
+html.smd-splash-v2 .ip-copy{order:3;text-align:left;font-size:9.5px;letter-spacing:.05em;color:rgba(246,247,245,.32)}
 
 /* Poster chrome - progress reads as progress, skip is a glass pill */
 html.smd-splash-v2 .ip-footer{bottom:max(24px,env(safe-area-inset-bottom,24px));padding:0 22px}
@@ -472,19 +535,27 @@ html.smd-splash-v2 .ip-skip:active{transform:scale(.96);background:rgba(255,255,
 /* -- Landing splash (#splash) -- */
 html.smd-splash-v2 #splash{background:radial-gradient(280px 280px at 100% 0%,rgba(63,199,179,.3) 0%,rgba(63,199,179,0) 70%),radial-gradient(300px 300px at 0% 100%,rgba(240,192,96,.14) 0%,rgba(240,192,96,0) 70%),radial-gradient(120% 90% at 18% 8%,#1a4a42 0%,#0e2e2a 32%,#0d1b26 62%,#0a141c 100%)}
 html.smd-splash-v2 #splash .splash-inner{max-width:404px;padding:0 24px}
-html.smd-splash-v2 #splash .splash-mark{width:88px;height:88px;margin:0 auto 18px;border-radius:24px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);box-shadow:0 20px 50px rgba(0,0,0,.35),0 0 60px rgba(63,199,179,.22)}
+/* The landing header is the second hero moment, so it gets the same treatment as poster phase
+   1: a big free-standing mark on the left axis, no tile, its own glow. The demo card below it
+   stays centred-content and untouched, which is what gives the screen its scale contrast. */
+html.smd-splash-v2 #splash .splash-mark{position:relative;width:auto;height:auto;margin:0 0 18px;justify-content:flex-start;border-radius:0;background:none;border:0;-webkit-backdrop-filter:none;backdrop-filter:none;box-shadow:none}
+html.smd-splash-v2 #splash .splash-mark::before{content:"";position:absolute;left:-40px;top:-48px;width:210px;height:210px;border-radius:50%;background:radial-gradient(circle,rgba(63,199,179,.24) 0%,rgba(63,199,179,.06) 46%,rgba(63,199,179,0) 70%);pointer-events:none}
 /* the REAL white app mark, in place of the masked-logo silhouette */
-html.smd-splash-v2 #splash .splash-mark-logo{width:54px;height:54px;-webkit-mask:none;mask:none;background:url("/mark-white.png") center/contain no-repeat}
-html.smd-splash-v2 #splash .splash-name{font-size:26px;font-weight:800;letter-spacing:-.02em}
-html.smd-splash-v2 #splash .splash-tagline{margin-top:6px;font-size:12.5px;font-weight:500;letter-spacing:.01em;color:rgba(246,247,245,.6)}
-html.smd-splash-v2 #splash .splash-modules{gap:6px;margin-top:14px}
-html.smd-splash-v2 #splash .splash-module-pill{font-size:10px;font-weight:600;letter-spacing:.01em;padding:5px 11px;border-radius:20px;border:none;background:rgba(63,199,179,.16);color:#6fe0cf}
+html.smd-splash-v2 #splash .splash-mark-logo{position:relative;width:118px;height:118px;-webkit-mask:none;mask:none;background:url("/mark-white.png") left center/contain no-repeat;filter:drop-shadow(0 16px 36px rgba(0,0,0,.5)) drop-shadow(0 0 28px rgba(63,199,179,.28))}
+html.smd-splash-v2 #splash .splash-name{font-family:var(--smd-dsp);font-size:42px;font-weight:300;letter-spacing:-.045em;line-height:1;text-align:left}
+html.smd-splash-v2 #splash .splash-name .accent{font-weight:800;color:#3fc7b3}
+html.smd-splash-v2 #splash .splash-tagline{text-align:left;margin-top:11px;font-family:var(--smd-dsp);font-size:9.5px;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:rgba(246,247,245,.44)}
+html.smd-splash-v2 #splash .splash-modules{justify-content:flex-start;gap:6px;margin-top:18px}
+/* chips, not pills: squared-off hairline tags, with only the first one filled so the row has a
+   start instead of five identical lozenges */
+html.smd-splash-v2 #splash .splash-module-pill{font-family:var(--smd-dsp);font-size:9.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:5px 9px;border-radius:6px;border:1px solid rgba(63,199,179,.24);background:none;color:rgba(246,247,245,.6)}
+html.smd-splash-v2 #splash .splash-module-pill:first-child{border-color:transparent;background:rgba(63,199,179,.18);color:#7fe6d6}
 html.smd-splash-v2 #splash .demo-wrap{margin-top:22px}
-html.smd-splash-v2 #splash .demo-label{margin-bottom:12px;font-size:10px;font-weight:600;letter-spacing:.04em;text-transform:none;color:rgba(246,247,245,.5)}
+html.smd-splash-v2 #splash .demo-label{text-align:left;margin-bottom:12px;font-family:var(--smd-dsp);font-size:9.5px;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:rgba(246,247,245,.42)}
 html.smd-splash-v2 #splash .demo-card{border-radius:22px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.14);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);box-shadow:0 24px 60px rgba(0,0,0,.35)}
 html.smd-splash-v2 #splash .demo-case-head{padding:16px 18px 14px;border-bottom-color:rgba(255,255,255,.1)}
 html.smd-splash-v2 #splash .demo-case-icon{border-radius:14px;background:rgba(63,199,179,.14);border-color:rgba(63,199,179,.22)}
-html.smd-splash-v2 #splash .demo-case-title{font-size:17px;font-weight:700;line-height:1.3;letter-spacing:-.01em;margin-bottom:7px}
+html.smd-splash-v2 #splash .demo-case-title{font-family:var(--smd-dsp);font-size:18px;font-weight:700;line-height:1.24;letter-spacing:-.028em;margin-bottom:7px}
 html.smd-splash-v2 #splash .demo-case-tags{gap:6px}
 html.smd-splash-v2 #splash .demo-case-tag{border-radius:20px;padding:4px 10px;font-size:10px;font-weight:600;letter-spacing:.01em;border:none;background:rgba(63,199,179,.16);color:#6fe0cf}
 html.smd-splash-v2 #splash .demo-rx{background:rgba(63,199,179,.06);border-bottom-color:rgba(255,255,255,.1)}
@@ -495,7 +566,7 @@ html.smd-splash-v2 #splash .demo-notes-row:last-child{color:rgba(246,247,245,.55
 html.smd-splash-v2 #splash .demo-notes-row:last-child .demo-dot{background:#f0c060}
 html.smd-splash-v2 #splash .demo-dot-btn{border-radius:3px;transition:width .3s cubic-bezier(.2,.75,.25,1),background .3s ease}
 html.smd-splash-v2 #splash .demo-dot-btn.active{width:20px;height:5px;border-radius:3px;transform:none}
-html.smd-splash-v2 #splash .demo-cta{margin-top:16px;padding:16px;border-radius:16px;font-size:14px;font-weight:700;letter-spacing:.005em;background:linear-gradient(135deg,#3fc7b3,#0e6e63);color:#0a141c;box-shadow:0 12px 30px rgba(63,199,179,.35);transition:opacity .15s ease,transform .12s ease}
+html.smd-splash-v2 #splash .demo-cta{margin-top:16px;padding:16px;border-radius:16px;font-family:var(--smd-dsp);font-size:15px;font-weight:700;letter-spacing:-.015em;background:linear-gradient(135deg,#3fc7b3,#0e6e63);color:#0a141c;box-shadow:0 12px 30px rgba(63,199,179,.35);transition:opacity .15s ease,transform .12s ease}
 html.smd-splash-v2 #splash .demo-cta:active{transform:scale(.985)}
 html.smd-splash-v2 #splash .splash-foot{margin-top:18px;font-size:11px;line-height:1.65;color:rgba(246,247,245,.35)}
 

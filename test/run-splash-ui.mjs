@@ -6,6 +6,10 @@
  *   - the first-run landing splash (#splash) renders with the glass case card and gradient CTA,
  *   - the REAL brand assets are used and resolve: /mark-white.png for the app mark and
  *     /maik-logo-white.png (+ /maik-logo.png for light theme) for the MaiK credit,
+ *   - the craft pass holds: the self-hosted Bricolage Grotesque display face genuinely LOADS
+ *     (a silent fallback to the system sans would undo the change while leaving the layout
+ *     intact), the mark is a hero size with no glass tile around it, and the brand lock-up is
+ *     set with light-against-extrabold weight contrast,
  *   - a returning signed-in clinician gets the personalised boot splash (84px avatar, status
  *     dot, loading pill), read from the SAME localStorage "stewardmd_account" record the
  *     sidebar/profile use, in both the light and dark themes,
@@ -93,6 +97,28 @@ try {
     "flag applies by default (html.smd-splash-v2)");
   ok(await ev(`var e=document.getElementById("introPoster"); return !!e && getComputedStyle(e).display!=="none";`) === true,
     "#introPoster renders for a first-time user");
+
+  /* ---- the display face must REALLY load ----------------------------------------------
+     These screens paint before any network is guaranteed inside the Capacitor shell, so the
+     font is self-hosted (assets/fonts/bricolage-grotesque.woff2, @font-face in
+     redesign-system.css). A silent fallback to the system sans would leave the layout intact
+     and quietly undo the whole change, so assert the family is (a) requested by the CSS,
+     (b) actually loaded in document.fonts, and (c) genuinely drawing different glyphs from
+     the fallback stack, which is the only check a fallback cannot pass. */
+  ok(await ev(`var e=document.querySelector(".ip-appname"); return e ? /Bricolage Grotesque/.test(getComputedStyle(e).fontFamily||"") : false;`) === true,
+    "the brand word-mark asks for the Bricolage Grotesque display face");
+  ok(await ev(`return document.fonts && document.fonts.check("300 54px 'Bricolage Grotesque'") === true;`) === true,
+    "Bricolage Grotesque is loaded in document.fonts (300 54px)");
+  ok(await ev(`return document.fonts && document.fonts.check("800 34px 'Bricolage Grotesque'") === true;`) === true,
+    "the extrabold end of the weight axis is loaded too (800 34px)");
+  okv(await ev(`var loaded=[]; document.fonts.forEach(function(f){ if(f.family.indexOf("Bricolage")>=0) loaded.push(f.family+" "+f.weight+" "+f.status); });
+      return loaded.join(",")||"NOT LOADED";`), "Bricolage Grotesque 200 800 loaded",
+    "the self-hosted variable face is in the loaded font set with its full weight axis");
+  ok(await ev(`
+      function w(fam){var c=document.createElement("canvas").getContext("2d");c.font="300 54px "+fam;return c.measureText("StewardMD").width;}
+      var dsp=w("'Bricolage Grotesque'"), fb=w("'Inter Variable',system-ui,sans-serif");
+      return Math.abs(dsp-fb) > 1;`) === true,
+    "the display face actually draws (its metrics differ from the fallback stack)");
   ok(await ev(`var e=document.querySelector(".ip-dot.active"); return e ? getComputedStyle(e).width : "";`) === "20px",
     "revamped progress dots in effect (active dot 20px)");
   ok(await ev(`var e=document.querySelector(".ip-skip"); return e ? getComputedStyle(e).borderTopLeftRadius : "";`) === "999px",
@@ -101,8 +127,16 @@ try {
     "poster background is the Direction C radial gradient mesh");
   ok(await ev(`var e=document.querySelector(".ip-logo-fallback"); return e ? /mark-white\\.png/.test(getComputedStyle(e).backgroundImage||"") : false;`) === true,
     "phase 1 uses the REAL /mark-white.png app mark");
-  ok(await ev(`var e=document.querySelector(".ip-logo-wrap"); return e ? getComputedStyle(e).borderTopLeftRadius : "";`) === "26px",
-    "phase 1 mark sits in the glass tile (radius 26px)");
+  /* the craft pass: the mark is a hero, not an icon in a tile. Assert the SIZE (that is the
+     owner-visible change) and the absence of the tile chrome that used to box it in. */
+  okv(await ev(`var e=document.querySelector(".ip-logo-fallback"); return e ? Math.round(parseFloat(getComputedStyle(e).width)) : 0;`), 152,
+    "phase 1 mark is a hero lock-up (152px), not a small tiled icon");
+  okv(await ev(`var e=document.querySelector(".ip-logo-wrap"); if(!e)return "no wrap";
+      var s=getComputedStyle(e);
+      return s.borderTopLeftRadius + " " + s.backgroundImage + " " + s.borderTopWidth;`), "0px none 0px",
+    "the generic rounded glass tile around the mark is gone");
+  ok(await ev(`var e=document.querySelector(".ip-logo-fallback"); return e ? /drop-shadow/.test(getComputedStyle(e).filter||"") : false;`) === true,
+    "the mark carries its own depth (drop-shadow/glow) rather than sitting flat");
   // the poster must clear its own footer: the phase content stops above the dots/skip row
   ok(await ev(`var p=document.getElementById("ipPhase1"),f=document.querySelector(".ip-footer");
       if(!p||!f)return false; return p.getBoundingClientRect().bottom <= f.getBoundingClientRect().top + 1;`) === true,
@@ -115,15 +149,34 @@ try {
     "tap advances to the AMR phase");
   ok(await ev(`var e=document.querySelector(".ip-stats"); return e ? getComputedStyle(e).display : "";`) === "grid",
     "AMR stat block is a grid");
-  ok(await ev(`var e=document.querySelector(".ip-stats"); return e ? getComputedStyle(e).borderTopLeftRadius : "";`) === "22px",
-    "AMR stats sit on a Direction C glass card (radius 22px)");
+  /* the craft pass de-carded this block on purpose: three identical glass panels in a row was
+     the most template-looking thing in the set, so the figures are now an open list hung off a
+     teal rule. Assert the card chrome is gone and the rule is there. */
+  okv(await ev(`var e=document.querySelector(".ip-stats"); if(!e)return "no stats";
+      var s=getComputedStyle(e);
+      return s.borderTopLeftRadius + " " + s.backgroundImage + " " + s.borderTopWidth;`), "0px none 0px",
+    "AMR figures are no longer boxed in a third identical glass card");
+  ok(await ev(`var e=document.querySelector(".ip-stats"); if(!e)return false;
+      var s=getComputedStyle(e); return parseFloat(s.borderLeftWidth) >= 1 && /rgba?\\(/.test(s.borderLeftColor||"");`) === true,
+    "AMR figures hang off a teal rule instead");
+  ok(await ev(`var e=document.querySelector(".ip-stat-num"); return e ? /Bricolage Grotesque/.test(getComputedStyle(e).fontFamily||"") : false;`) === true,
+    "the AMR figures are set in the display face");
+  ok(await ev(`var e=document.querySelector(".ip-amr-head"),k=document.querySelector(".ip-amr-sub");
+      if(!e||!k)return false;
+      return parseInt(getComputedStyle(e).fontWeight,10) >= 700 && parseInt(getComputedStyle(k).fontWeight,10) <= 300;`) === true,
+    "the AMR headline uses real weight contrast (bold head against a light kicker)");
   await shot("splash-02-intro-phase2-amr");
 
   await ev(`var p=document.getElementById("introPoster"); p.click(); return 1;`); await sleep(900);
   ok(await ev(`var e=document.getElementById("ipPhase3"); return !!e && !e.classList.contains("ip-hidden");`) === true,
     "tap advances to the credit phase");
-  ok(await ev(`var e=document.getElementById("ipPhase3"); return e ? getComputedStyle(e).borderTopLeftRadius : "";`) === "24px",
-    "credit phase is one Direction C glass card (radius 24px)");
+  okv(await ev(`var e=document.getElementById("ipPhase3"); if(!e)return "no phase";
+      var s=getComputedStyle(e); return s.borderTopLeftRadius + "/" + s.borderBottomLeftRadius;`), "26px/8px",
+    "credit phase is the one glass card, cut back at the bottom-left so it reads as a shape");
+  ok(await ev(`var e=document.querySelector(".ip-grave"); if(!e)return false;
+      var s=getComputedStyle(e);
+      return /Bricolage Grotesque/.test(s.fontFamily||"") && parseInt(s.fontWeight,10) <= 300 && parseFloat(s.fontSize) >= 18;`) === true,
+    "the quote is a large light display setting, not another 15px semibold paragraph");
   ok(await ev(`var e=document.querySelector(".ip-dev-company"); if(!e)return false;
       return /maik-logo-white\\.png/.test(getComputedStyle(e,"::after").backgroundImage||"");`) === true,
     "credit uses the REAL /maik-logo-white.png word-mark (not a drawn lock-up)");
@@ -145,6 +198,19 @@ try {
     "primary CTA uses the Direction C teal gradient");
   ok(await ev(`var e=document.querySelector("#splash .splash-mark-logo"); return e ? /mark-white\\.png/.test(getComputedStyle(e).backgroundImage||"") : false;`) === true,
     "landing splash uses the REAL /mark-white.png app mark (not a mask or inline SVG)");
+  /* the landing hero gets the same craft pass as poster phase 1 */
+  okv(await ev(`var e=document.querySelector("#splash .splash-mark-logo"); return e ? Math.round(parseFloat(getComputedStyle(e).width)) : 0;`), 118,
+    "landing mark is a hero lock-up (118px), not an icon in a tile");
+  okv(await ev(`var e=document.querySelector("#splash .splash-mark"); if(!e)return "no mark";
+      var s=getComputedStyle(e);
+      return s.borderTopLeftRadius + " " + s.backgroundImage + " " + s.borderTopWidth;`), "0px none 0px",
+    "the rounded glass tile is gone from the landing hero too");
+  ok(await ev(`var n=document.querySelector("#splash .splash-name"),a=document.querySelector("#splash .splash-name .accent");
+      if(!n||!a)return false;
+      var sn=getComputedStyle(n), sa=getComputedStyle(a);
+      return /Bricolage Grotesque/.test(sn.fontFamily||"") && parseFloat(sn.fontSize) >= 40 &&
+             parseInt(sn.fontWeight,10) <= 300 && parseInt(sa.fontWeight,10) >= 800;`) === true,
+    "the 'Steward|MD' lock-up is large and set with light-against-extrabold weight contrast");
   await shot("splash-04-landing");
 
   /* ---------- 2. RETURNING signed-in clinician: personalised boot splash ---------- */
@@ -207,6 +273,14 @@ try {
   await sleep(1500);
   ok(await ev(`var e=document.getElementById("sbsHello"); return !e || e.hidden===true;`) === true,
     "guest sees no personalised row (brand tagline retained)");
+  ok(await ev(`var w=document.querySelector("#smdBootSplash .sbs-word"),s=w&&w.querySelector("span");
+      if(!w||!s)return false;
+      var sw=getComputedStyle(w), ss=getComputedStyle(s);
+      return /Bricolage Grotesque/.test(sw.fontFamily||"") && parseFloat(sw.fontSize) >= 38 &&
+             parseInt(sw.fontWeight,10) <= 300 && parseInt(ss.fontWeight,10) >= 800;`) === true,
+    "the boot splash carries the same large light-against-extrabold word-mark");
+  okv(await ev(`var e=document.querySelector("#smdBootSplash .sbs-logo"); return e ? Math.round(parseFloat(getComputedStyle(e).width)) : 0;`), 126,
+    "the boot splash mark is the hero size (126px)");
 
   /* ---------- 4. Flag OFF reverts cleanly ---------- */
   await newTab();
@@ -239,7 +313,8 @@ try {
   await call("Emulation.setEmulatedMedia", { features: [] });
 
   /* ---------- 6. The real brand assets actually resolve (no 404 placeholders) ---------- */
-  for (const asset of ["mark-white.png", "maik-logo-white.png", "maik-logo.png"]) {
+  for (const asset of ["mark-white.png", "maik-logo-white.png", "maik-logo.png",
+                       "assets/fonts/bricolage-grotesque.woff2"]) {
     let status = 0;
     try { status = (await fetch(BASE + asset)).status; } catch {}
     ok(status === 200, "/" + asset + " resolves (200, got " + status + ")");

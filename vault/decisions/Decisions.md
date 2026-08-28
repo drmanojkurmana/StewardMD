@@ -276,3 +276,48 @@ before; the guest and first-run paths are structurally unchanged. Reduced-motion
 previous layer is retained and now also stills the loading pill. `sw.js` `CACHE` bumped to
 `...-splashv2c`. Test: `test/run-splash-ui.mjs`, extended to assert the Direction C treatment, that the
 real brand assets resolve 200 (not 404 placeholders), the dark boot splash, and reduced-motion.
+
+## 2026-08-28 — The interstitials get a display face (Bricolage Grotesque) and a hero mark
+Review of the Direction C interstitials: *"looks like created by generic vibe coding"*, *"make font
+better"*, *"I want StewardMD logo to look big and better"*. Direction C's foundations (gradient mesh,
+depth, palette, real brand assets) were kept; what read as templated was the type and the composition.
+
+**One self-hosted display face, not another weight of the UI sans.** `Bricolage Grotesque` (SIL OFL
+1.1) now does every brand and headline moment on the five interstitials; supporting copy stays on
+`var(--sans)`, so the two roles read as two voices. It was picked for having actual idiosyncrasy in the
+letterforms while staying clinical, and for its 200..800 weight axis, which is what carries the
+recurring device: **weight contrast on one line** ("Steward" at 300 against "MD" at 800; the AMR
+headline at 800 against its kicker at 200). Display sizes are set tight (-.045em) and small labels
+loose (.24em) so the hierarchy is optical rather than numeric.
+
+`@font-face` lives in `redesign-system.css` with the other faces, `font-display:block` (as Sacramento
+does) so the word-mark never flashes in a fallback, plus a `<link rel=preload>` in `index.html` so that
+block period is effectively zero. **Self-hosting is not optional here**: the interstitials paint before
+any network is guaranteed inside the Capacitor shell, so a runtime Google Fonts `<link>` would silently
+fall back to the system sans offline — exactly the failure that would undo the change invisibly.
+`assets/fonts/bricolage-grotesque.woff2` is the Latin subset trimmed to the characters these screens
+use with both axes kept, 48 KB (the same size as the bundled Inter). `scripts/build-www.sh` already
+copies `assets/fonts/*`, so it ships in the native bundle with no build change.
+
+**The mark is a hero, not an icon in a tile.** 152px on poster phase 1, 118px on the landing splash,
+126px on the boot splash, standing free with its own glow and drop-shadow. The rounded glass tile that
+used to box it in is gone — it was the single most template-looking element in the set. Note the glow
+goes only on `.sbs-mark` (a CSS mask, genuinely transparent); `/logo.png` is opaque to its edges, so a
+drop-shadow on `.sbs-logo` renders as a square halo around the artwork.
+
+**Composition.** The poster is left-aligned and top-weighted so phases 1-3 share one axis instead of
+being three centred slides, and phase 1 is dropped 58px below the optical centre (via `position`, since
+`.ip-phase` runs the ipRise transform) so the empty upper half reads as sky. The AMR figures are an open
+list hung off a teal rule rather than a third identical glass card; cards are now the exception (the
+credit, the case preview), which is what makes them read. Landing module pills became squared hairline
+chips with only the first filled.
+
+Gotcha worth keeping: **phase 3's quote `<br>` must stay.** The markup is `...the only thing<br>standing
+between...` with no space either side, so `br{display:none}` sets "thingstanding".
+
+Still presentation-only and inside `html.smd-splash-v2`: no markup, ID or logic changes, flag and
+`?splashv2=0` revert unchanged, reduced-motion still covered. `sw.js` `CACHE` and the
+`redesign-system.css` token bumped to `splashv2d`. `test/run-splash-ui.mjs` extended to assert the face
+genuinely LOADS (`document.fonts.check` on both ends of the axis, the loaded-font set, canvas metrics
+differing from the fallback stack, and the woff2 returning 200) alongside the hero sizes, the absent
+tile chrome and the weight contrast.
