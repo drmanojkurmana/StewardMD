@@ -42,7 +42,7 @@ try {
   const fills = await ev(`return [].slice.call(document.querySelectorAll(".mkdoc-svg rect")).map(function(r){return r.getAttribute("fill");}).filter(function(v,i,a){return a.indexOf(v)===i;}).sort().join(",");`);
   ok(fills.indexOf("#F2F6F7") >= 0 && fills.indexOf("#E9B48C") >= 0 && fills.indexOf("#2DD4BF") >= 0,
     "he is a doctor: coat, skin and stethoscope teal in the palette — got " + fills);
-  ok(await ev(`return document.querySelectorAll(".mkdoc-svg > g").length;`) === 10, "ten frames mounted");
+  ok(await ev(`return document.querySelectorAll(".mkdoc-svg > g").length;`) === 12, "twelve frames mounted (incl. clipboard writing)");
 
   // ── he TRAVELS right to left ──
   const s1 = await ev(`return __MAIK_TEST.docState();`);
@@ -75,9 +75,22 @@ try {
   ok(await ev(`var d=__MAIK_TEST.docState(); return d&&d.state;`) === "run", "then he sprints");
   ok(await ev(`__MAIK_TEST.docCue("done"); var d=__MAIK_TEST.docState(); return d&&d.state;`) === "wave", "the answer landing gets a wave");
 
-  // ── busy: a question in flight quickens him ──
+  // ── tap the floor: he sprints there and skids in ──
+  const tap = await ev(`
+    var s=document.getElementById("maikSheet");
+    s.dispatchEvent(new PointerEvent("pointerdown",{bubbles:true,clientX:60,clientY:400}));
+    var d=__MAIK_TEST.docState(); return d&&d.state;`);
+  ok(tap === "run", "a tap on the sheet floor sends him running — " + tap);
+  const skidSeen = {};
+  for (let i = 0; i < 30; i++) { const s = await ev(`var d=__MAIK_TEST.docState(); return d&&d.state;`); if (s) skidSeen[s] = 1; await sleep(90); }
+  ok(!!skidSeen.skid, "he skids in on arrival — states: " + Object.keys(skidSeen).sort().join(","));
+
+  // ── busy: a question in flight puts him to WORK ──
   await ev(`__MAIK_TEST.buddyBusy(true); return 1;`); await sleep(100);
   ok(await ev(`return document.querySelector(".mkdoc").classList.contains("busy");`) === true, "a question in flight perks him up");
+  const busySeen = {};
+  for (let i = 0; i < 45; i++) { const s = await ev(`var d=__MAIK_TEST.docState(); return d&&d.state;`); if (s) busySeen[s] = 1; await sleep(90); }
+  ok(!!busySeen.write, "while the answer generates he writes on his clipboard — states: " + Object.keys(busySeen).sort().join(","));
   await ev(`__MAIK_TEST.buddyBusy(false); return 1;`);
 
   // ── the kill switch restores the old resident ──

@@ -3747,7 +3747,15 @@
     [ // 9 startle, arms up
     "............", ".s..hhhh..s.", ".s.hhhhhh.s.", ".w.hssssh.w.", "...skssks...", "....ssks....",
     "...wwwwww...", "..wwgwwgww..", "..wwgggwww..", "..wwwgwwww..", "..wrwdwwww..", "..wwwwwwww..",
-    "..cwwwwwwc..", "..pp....pp..", "..pp....pp..", "..kk....kk.."]
+    "..cwwwwwwc..", "..pp....pp..", "..pp....pp..", "..kk....kk.."],
+    [ // 10 write A: clipboard up, pen out, eyes on the pad
+    "............", "....hhhh....", "...hhhhhh...", "...hssssh...", "...skssks...", "....ssss....",
+    "...wwwwww...", "..wwgwwgww..", "ccwwgggwww..", "cckwwgwwww..", "ccwrwdwwww..", "..wwwwwwww..",
+    "..cwwwwwwc..", "...pp..pp...", "...pp..pp...", "...kk..kk..."],
+    [ // 11 write B: pen moves, a glance down
+    "............", "....hhhh....", "...hhhhhh...", "...hssssh...", "...ssssss...", "....ssss....",
+    "...wwwwww...", "..wwgwwgww..", "ccwwgggwww..", "ckcwwgwwww..", "ccwrwdwwww..", "..wwwwwwww..",
+    "..cwwwwwwc..", "...pp..pp...", "...pp..pp...", "...kk..kk..."]
   ];
   var MAIK_DOC_HEART = [".r.r.", "rrrrr", "rrrrr", ".rrr.", "..r.."];
   var MAIK_DOC_ANIM = {
@@ -3758,13 +3766,16 @@
     listen:  { f: [7, 8], fps: 3 },
     startle: { f: [9], fps: 1 },
     jump:    { f: [2], fps: 1 },
-    flip:    { f: [3], fps: 1 }
+    flip:    { f: [3], fps: 1 },
+    skid:    { f: [2], fps: 1 },
+    write:   { f: [10, 11], fps: 2.6 }
   };
   var MAIK_DOC_SC = 2.75, MAIK_DOC_W = 12 * MAIK_DOC_SC, MAIK_DOC_H = 16 * MAIK_DOC_SC;
-  var _mkdRaf = 0, _mkdState = null, _mkdOnRz = null, _mkdCueFn = null;
+  var _mkdRaf = 0, _mkdState = null, _mkdOnRz = null, _mkdCueFn = null, _mkdOnTap = null;
   function maikDocStop() {
     if (_mkdRaf) { cancelAnimationFrame(_mkdRaf); _mkdRaf = 0; }
     if (_mkdOnRz) { try { window.removeEventListener("resize", _mkdOnRz); } catch (e) {} _mkdOnRz = null; }
+    if (_mkdOnTap) { try { _mkdOnTap.el.removeEventListener("pointerdown", _mkdOnTap.fn); } catch (e) {} _mkdOnTap = null; }
     _mkdState = null; _mkdCueFn = null;
   }
   /* He listens to the QUESTION. A sent question is classified and he acts it out:
@@ -3809,7 +3820,7 @@
     var W = cmp.clientWidth;
     _mkdOnRz = function () { try { if (cmp.isConnected) W = cmp.clientWidth; } catch (e) {} };
     window.addEventListener("resize", _mkdOnRz);
-    var D = _mkdState = { x: W + MAIK_DOC_W, dir: -1, state: "walk", t0: 0, until: 0, gone: 0, next: 0 };
+    var D = _mkdState = { x: W + MAIK_DOC_W, dir: -1, state: "walk", t0: 0, until: 0, gone: 0, next: 0, target: null };
     function rnd(a, b) { return a + Math.random() * (b - a); }
     function setSt(s, dur) {
       D.state = s; D.t0 = performance.now(); D.until = dur ? D.t0 + dur : 0;
@@ -3824,6 +3835,17 @@
     }
     function sched() { D.next = performance.now() + (box.classList.contains("busy") ? rnd(1500, 3000) : rnd(2600, 5200)); }
     function stunt() {
+      // While an answer generates he WORKS: clipboard out, pen scribbling, with the
+      // occasional pace across the strip. The stunts are for off-duty time.
+      if (box.classList.contains("busy")) {
+        if (D.state !== "write") {
+          setSt("write", rnd(2200, 3600));
+          if (Math.random() < 0.6) maikDocFx(box, '<span class="mkdoc-bub">...</span>', D.dir === -1 ? -26 : MAIK_DOC_W + 4, -16, 1400);
+        } else {
+          setSt("run", rnd(500, 900));   // stretch his legs, then back to the pad
+        }
+        sched(); return;
+      }
       var r = Math.random();
       if (r < 0.30) setSt("jump", JUMP_MS);
       else if (r < 0.52) setSt("flip", FLIP_MS);
@@ -3850,6 +3872,24 @@
       sched();
     }
     actor.addEventListener("pointerdown", function (e) { e.preventDefault(); e.stopPropagation(); react(); });
+    /* Tap ANYWHERE on the sheet and he sprints to that x and skids in. The listener
+     * is purely an observer: no preventDefault, no stopPropagation - every button,
+     * bubble and the composer behave exactly as before, he just also comes running.
+     * (Taps on the doctor himself stop propagation above, so they never reach this.) */
+    var sheetEl = cmp.closest ? cmp.closest("#maikSheet") : null;
+    if (sheetEl) {
+      _mkdOnTap = { el: sheetEl, fn: function (e) {
+        try {
+          if (!_mkdState || _mkdState !== D) return;
+          if (D.state === "startle" || D.state === "listen") return;   // let a scene finish
+          var px = e.clientX - cmp.getBoundingClientRect().left - MAIK_DOC_W / 2;
+          D.target = Math.max(4, Math.min(W - MAIK_DOC_W - 4, px));
+          D.dir = D.target > D.x ? 1 : -1;
+          setSt("run", 0);
+        } catch (err) {}
+      } };
+      sheetEl.addEventListener("pointerdown", _mkdOnTap.fn);
+    }
     /* Question-aware acting. Each cue is a short scene built from the states he already has. */
     _mkdCueFn = function (kind) {
       if (kind === "urgent") {          // emergency wording: startled, then sprints to help
@@ -3895,8 +3935,20 @@
           break;
         case "run":
           D.x += RUN_V * D.dir * dt; rot = D.dir * 6;
-          if (D.until && now > D.until) setSt("walk", 0);
+          if (D.target !== null && D.target !== undefined) {
+            if ((D.dir === -1 && D.x <= D.target) || (D.dir === 1 && D.x >= D.target)) {
+              D.x = D.target; D.target = null;
+              setSt("skid", 340);        // arrives with a lean-back skid
+            }
+          } else if (D.until && now > D.until) setSt("walk", 0);
           break;
+        case "skid": {
+          var sp = Math.min(1, (now - D.t0) / 340);
+          D.x += RUN_V * (1 - sp) * D.dir * dt;   // bleeding off speed
+          rot = -D.dir * 14 * (1 - sp * 0.4);     // leaned back against the slide
+          if (sp >= 1) { sq = 0.86; if (Math.random() < 0.35) setSt("flip", FLIP_MS); else setSt("walk", 0); }
+          break;
+        }
         case "jump": case "flip":
           var dur = D.state === "flip" ? FLIP_MS : JUMP_MS;
           var pr = Math.min(1, (now - D.t0) / dur);
