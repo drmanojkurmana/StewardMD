@@ -262,7 +262,7 @@
       "body.dark .fc-sheet.fcai .mai-hero,body.v3-dark .fc-sheet.fcai .mai-hero{background:linear-gradient(130deg,#0a3b3a 0%,#0e6e63 42%,#0a8fb0 100%);box-shadow:0 24px 66px -22px rgba(20,184,166,.6),0 0 0 1px rgba(94,234,212,.28)}",
       ".mai-aura{position:absolute;inset:-45%;z-index:0;pointer-events:none;background:radial-gradient(circle at 28% 22%,rgba(94,234,212,.4),transparent 42%),radial-gradient(circle at 82% 78%,rgba(56,189,248,.34),transparent 46%);animation:maiAura 8s ease-in-out infinite}",
       ".mai-dot{animation:maiPulse 2.4s ease-out infinite}",
-      // StewardMD corner watermark — same masked-logo technique as ONCqis's .oh-hero-mark
+      // StewardMD corner watermark — same masked-logo technique as ONCQIS's .oh-hero-mark
       // (onco-home.css), so every module hero card carries the identical brand mark.
       ".mai-mark{position:absolute;right:-14px;bottom:-20px;width:128px;height:128px;opacity:.16;-webkit-mask:url(/logo.png) center/contain no-repeat;mask:url(/logo.png) center/contain no-repeat;background:#fff;pointer-events:none}",
 

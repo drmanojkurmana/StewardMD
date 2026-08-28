@@ -547,7 +547,7 @@
     var el = rootEl();
     el.innerHTML =
       '<div class="oh-top"><button class="oh-back" data-oh-act="close" aria-label="Close">&lsaquo; Close</button>' +
-      '<div class="oh-title">ONCqis</div><span style="width:64px"></span></div>' +
+      '<div class="oh-title">ONCQIS</div><span style="width:64px"></span></div>' +
       '<div class="oh-body">' + heroHtml() +
       '<input id="ohSearch" class="oh-search" type="text" placeholder="Explore tools, drugs and content" autocomplete="off" value="' + esc(st.q) + '">' +
       '<div id="ohResults"></div></div>';
@@ -560,7 +560,7 @@
   // creatinine, renal, diagnosis }. Falls back to a best-effort Ward Sync identity read; hides the
   // strip entirely if nothing is available.
   function open(ctx) {
-    if (!flagOn()) { toast("ONCqis is off"); return; }
+    if (!flagOn()) { toast("ONCQIS is off"); return; }
     st.q = ""; st.mode = null; st.ctx = ctx || livePatientContext();
     loadProtocols();
     var el = rootEl();
@@ -569,9 +569,9 @@
     el.classList.add("on"); el.classList.remove("oh-bg"); document.body.classList.add("oh-lock");
   }
   function close() { var el = document.getElementById("smdOncoHome"); if (el) { el.classList.remove("on"); el.classList.remove("oh-bg"); } document.body.classList.remove("oh-lock"); }
-  // Background: keep ONCqis mounted but below a sub-view overlay (so dismissing the sub returns here).
+  // Background: keep ONCQIS mounted but below a sub-view overlay (so dismissing the sub returns here).
   function background() { var el = document.getElementById("smdOncoHome"); if (el) el.classList.add("oh-bg"); }
-  // Foreground: restore full z-index once the user interacts with ONCqis again (returned from a sub-view).
+  // Foreground: restore full z-index once the user interacts with ONCQIS again (returned from a sub-view).
   function foreground() { var el = document.getElementById("smdOncoHome"); if (el) el.classList.remove("oh-bg"); }
 
   try { document.addEventListener("keydown", function (e) { if (e.key === "Escape" && document.getElementById("smdOncoHome") && document.getElementById("smdOncoHome").classList.contains("on")) close(); }); } catch (e) {}
