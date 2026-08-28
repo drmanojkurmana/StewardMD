@@ -230,6 +230,11 @@
         });
       });
   }
+  /* Remove a programme created by mistake. The server refuses with 409 while anyone is enrolled, so
+   * this never has to decide that for itself - it reports what came back. */
+  function deleteProgramme(id) {
+    return req("/programmes/" + encodeURIComponent(id), { method: "DELETE" });
+  }
   function createProgramme(orgId, body) {
     return req("/programmes", { method: "POST", body: Object.assign({ orgId: orgId }, body || {}) })
       .then(function (r) { return r.programme; });
@@ -424,7 +429,7 @@
     notifications: notifications, markRead: markRead, config: config, setConfig: setConfig,
     facultyRoster: facultyRoster, verifyCode: verifyCode,
     // academic-cell writes
-    createInstitution: createInstitution, createProgramme: createProgramme, enrolPerson: enrolPerson,
+    createInstitution: createInstitution, createProgramme: createProgramme, deleteProgramme: deleteProgramme, enrolPerson: enrolPerson,
     myInstitutions: myInstitutions,
     certificates: certificates, certificate: certificate, requestCertificate: requestCertificate,
     signCertificate: signCertificate, revokeCertificate: revokeCertificate,

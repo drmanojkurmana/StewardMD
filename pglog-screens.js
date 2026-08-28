@@ -711,9 +711,15 @@
       '<div class="pgl-card"><h3>PG programmes</h3>' +
       (progs.length
         ? progs.map(function (pr) {
+            /* Remove is offered for every programme; the SERVER decides whether it is allowed, and
+             * refuses with 409 while anyone is enrolled. Hiding the control from a count this screen
+             * happens to hold would just be a second, staler copy of that rule. */
             return '<div class="pgl-row static"><span class="pgl-row-ic">' + ic("school") + "</span>" +
               '<span class="pgl-row-main"><span class="pgl-row-t">' + esc(pr.name || pr.specialtyId || pr.id) + "</span>" +
-              '<span class="pgl-row-s">' + esc((pr.degree || "") + " · " + (pr.durationMonths || 36) + " months") + "</span></span></div>";
+              '<span class="pgl-row-s">' + esc((pr.degree || "") + " · " + (pr.durationMonths || 36) + " months") + "</span></span>" +
+              '<button class="pgl-chip" data-pgl="del-prog" data-id="' + attr(pr.id) + '" data-n="' +
+              attr(pr.name || pr.specialtyId || pr.id) + '"' + (state.progBusy === pr.id ? " disabled" : "") + ">" +
+              (state.progBusy === pr.id ? "Removing…" : "Remove") + "</button></div>";
           }).join("")
         : I.progErr
           // "None yet" and "we could not ask" are different answers, and only one of them means
@@ -2250,6 +2256,7 @@
       }
       case "attest-month": return doAttestMonth(id, t.getAttribute("data-p"));
       case "add-rotation": return doAddRotation(id);
+      case "del-prog": return doDeleteProgramme(id, t.getAttribute("data-n"));
       case "resubmit": return doResubmit(id);
       case "withdraw": return doWithdraw(id);
       case "amend": return doAmend(id);
@@ -2349,6 +2356,30 @@
       toast((e && e.userMessage) || attestErr(e));
     });
   }
+  /* Remove a programme created by mistake. The server refuses with 409 while anyone is still
+   * enrolled - deleting one out from under a resident would leave their entries, rotations,
+   * assessments and attestations pointing at a programme that no longer exists - so this asks and
+   * reports the answer rather than deciding for itself. */
+  function doDeleteProgramme(id, name) {
+    var st = ST();
+    if (!id) return;
+    var ask = (typeof window !== "undefined" && window.confirm) ? window.confirm : null;
+    if (ask && !ask("Remove the programme \"" + (name || id) + "\"?\n\nThis cannot be undone. It is " +
+                    "refused if any resident is still enrolled on it.")) return;
+    state.progBusy = id; render();
+    return st.deleteProgramme(id).then(function () {
+      state.progBusy = null;
+      toast("Programme removed.");
+      return loadInstitution().then(render, render);
+    }, function (e) {
+      state.progBusy = null; haptic("warning"); render();
+      toast((e && e.userMessage) ||
+        (e && e.code === "programme_in_use"
+          ? "Residents are still enrolled on that programme."
+          : "Could not remove that programme."));
+    });
+  }
+
   /* Record a posting. The dates decide which department the work counts toward and feed the
    * residential-posting requirement, so both are required rather than defaulted. */
   function doAddRotation(residentId) {

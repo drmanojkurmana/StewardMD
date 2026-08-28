@@ -541,6 +541,56 @@ try {
      /"departmentId":"dept-medicine"/.test(String(rots)),
      `the posting is recorded against that resident (sent: ${String(rots).slice(0, 150)})`);
 
+  /* ── 16. A programme created by mistake must be removable ──
+   * The console could create a programme and never remove one, so a mistyped or duplicated
+   * programme was permanent. The control is offered for every programme and the SERVER decides:
+   * it refuses with 409 while anyone is still enrolled. */
+  await ev(`
+    var s=window.SMD_PGLOG_STORE, cur={orgId:"cccc7777cccc7777cccc7777cccc7777"};
+    s.context=function(){return cur};
+    s.setContext=function(o){ if(o&&"orgId" in o) cur.orgId=o.orgId; return cur };
+    s.seedDemo=function(){return null};
+    s.myInstitutions=function(){return Promise.resolve([])};
+    s.me=function(id){return Promise.resolve({uid:"fb:cell-1",orgId:id,orgCode:"SMD-DEL001",
+      orgName:"Sim Medical College",orgKind:"institution",role:"academic_cell",
+      caps:["pglog.configure","pglog.view.institution"], resident:null, programme:null, rotations:[]});};
+    window.__dels = [];
+    s.programmes=function(){ return Promise.resolve({ programmes:[
+      {id:"prog-keep", name:"General Medicine", degree:"MD", durationMonths:36},
+      {id:"prog-dupe", name:"Duplicate created by mistake", degree:"MD", durationMonths:36}]}); };
+    s.deleteProgramme=function(pid){
+      window.__dels.push(pid);
+      if (pid === "prog-keep") { var e=new Error("programme_in_use"); e.code="programme_in_use";
+        e.userMessage="4 resident(s) are still on this programme."; return Promise.reject(e); }
+      return Promise.resolve({ok:true, deleted:true, id:pid});
+    };
+    window.SMD_PGLOG_SCREENS._state.ctx = null;
+    window.SMD_PGLOG_SCREENS._state.dash = null;
+    window.SMD_PGLOG_SCREENS._state.inst = {};
+    window.confirm = function(){ return true; };
+    return 1;`);
+  await ev(`window.PGLOG.close && window.PGLOG.close(); return 1;`);
+  await sleep(400);
+  await ev(`window.PGLOG.open(); return 1;`);
+  await sleep(1500);
+  await tap("setting up our institution|Institution");
+  await sleep(1800);
+
+  const tDel = String(await txt());
+  ok(/Remove/.test(tDel), `each programme offers a Remove control (got: ${JSON.stringify(tDel.slice(0, 160))})`);
+
+  ok(await ev(`var b=document.querySelector('[data-pgl="del-prog"][data-id="prog-keep"]');
+     if(!b) return false; b.click(); return true;`) === true, "the in-use programme has a control too");
+  await sleep(1400);
+  ok(await ev(`return window.__dels.indexOf("prog-keep") > -1`) === true,
+     "removing an in-use programme is ATTEMPTED and refused by the server, not hidden by the client");
+
+  ok(await ev(`var b=document.querySelector('[data-pgl="del-prog"][data-id="prog-dupe"]');
+     if(!b) return false; b.click(); return true;`) === true, "the duplicate can be removed");
+  await sleep(1400);
+  ok(await ev(`return window.__dels.indexOf("prog-dupe") > -1`) === true,
+     "and the delete reaches the server for the empty one");
+
   console.log(fails ? `\n${fails} check(s) FAILED` : "\nall checks passed");
 } finally {
   try { ws && ws.close(); } catch {}

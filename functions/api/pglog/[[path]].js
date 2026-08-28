@@ -28,6 +28,7 @@
  *   GET    /v/:code                            -> PUBLIC, PHI-free signature verification
  *   GET    /me?orgId=                          -> { role, resident, programme, rotations, caps }
  *   GET    /programmes?orgId=                  POST /programmes            PATCH /programmes/:id
+ *                                              DELETE /programmes/:id  (refused while enrolled)
  *   GET    /residents?orgId=&departmentId=...  POST /residents             PATCH /residents/:id
  *   GET    /rotations?residentId=              POST /rotations             PATCH /rotations/:id
  *   GET    /entries?residentId=&kind=&status=  POST /entries
@@ -317,6 +318,16 @@ export async function onRequest(context_) {
         const ctx = await context(request, env, body.orgId);
         await S.gate(env, ctx.actorUid, body.orgId, CAPS.PGLOG_CONFIGURE);
         return json({ ok: true, programme: await S.createProgramme(env, body.orgId, body, ctx.actorUid) });
+      }
+      /* Remove a programme created by mistake. Gated on CONFIGURE like every other structural change
+       * here, and gated AGAIN by the store, which refuses while anyone is enrolled - deleting a
+       * programme out from under a signed training record is the failure this is guarding. */
+      if (method === "DELETE" && id) {
+        const prog = await S.getProgramme(env, id);
+        if (!prog) return json({ error: "not_found" }, 404);
+        const ctx = await context(request, env, prog.orgId);
+        await S.gate(env, ctx.actorUid, prog.orgId, CAPS.PGLOG_CONFIGURE);
+        return json({ ok: true, ...(await S.deleteProgramme(env, id, ctx.actorUid)) });
       }
       if (method === "PATCH" && id) {
         const cur = await S.getProgramme(env, id);

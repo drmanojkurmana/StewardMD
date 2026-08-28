@@ -26,7 +26,7 @@
  * wCreate,wUpdate,qAudit,now} so node --test can run the whole draft -> submit -> verify -> amend
  * flow against fakes. Production callers never pass deps.
  */
-import { fsGet, fsQuery, fsCommit, wCreate, wUpdate } from "./_fbfirestore.js";
+import { fsGet, fsQuery, fsCommit, wCreate, wUpdate, wDelete } from "./_fbfirestore.js";
 import { qAudit } from "./_queue_engine.js";
 import { getOrg, getMembership, listMembers } from "./_opd_org_store.js";
 import { authorizeOrgAccess } from "./_opd_org.js";
@@ -50,7 +50,7 @@ const COL = {
   config: "pg_config"
 };
 
-const D = (deps) => Object.assign({ fsGet, fsQuery, fsCommit, wCreate, wUpdate, qAudit, now: Date.now }, deps || {});
+const D = (deps) => Object.assign({ fsGet, fsQuery, fsCommit, wCreate, wUpdate, wDelete, qAudit, now: Date.now }, deps || {});
 function sanitize(x) { return String(x == null ? "" : x).replace(/[^A-Za-z0-9_-]/g, "-").slice(0, 100); }
 function newId() { return crypto.randomUUID().replace(/-/g, ""); }
 const withId = (id, f) => Object.assign({ id }, f || {});
@@ -125,6 +125,27 @@ export async function updateProgramme(env, id, patch, actorUid, deps) {
 // Deterministic id per (programme, uid), so enrolling twice is idempotent rather than creating a
 // second training record for the same person.
 function residentId(programmeId, uid) { return sanitize(programmeId) + "__" + sanitize(uid); }
+
+/* Remove a programme. REFUSES while anyone is enrolled on it, including a resident who has merely
+ * been deactivated: their entries, rotations, assessments and attestations all hang off this id, and
+ * deleting it would leave a signed training record pointing at a programme that no longer exists.
+ * Emptying it first is the caller's decision, not something to do implicitly on their behalf. */
+export async function deleteProgramme(env, id, actorUid, deps) {
+  const d = D(deps);
+  const cur = await getProgramme(env, id, deps);
+  if (!cur) throw e404("programme");
+  const enrolled = await listResidents(env, cur.orgId, { programmeId: sanitize(id) }, deps);
+  if (enrolled.length) {
+    throw Object.assign(new Error("programme_in_use"), {
+      status: 409, count: enrolled.length,
+      userMessage: enrolled.length + " resident(s) are still on this programme. Move them to another " +
+        "programme first - deleting it would orphan their records.",
+    });
+  }
+  await d.fsCommit(env, [d.wDelete(env, COL.programme + "/" + sanitize(id))]);
+  await audit(env, cur.orgId, actorUid, "pglog:programme:delete", (cur.name || "") + " " + (cur.degree || ""), deps);
+  return { deleted: true, id: sanitize(id) };
+}
 
 export async function enrolResident(env, orgId, body, actorUid, deps) {
   const d = D(deps);

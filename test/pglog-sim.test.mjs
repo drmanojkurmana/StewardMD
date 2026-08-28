@@ -54,6 +54,8 @@ function fakeDb() {
     },
     wCreate: (env, path, fields) => ({ __path: path, __fields: fields, __exists: false }),
     wUpdate: (env, path, fields) => ({ __path: path, __fields: fields, __mask: true }),
+    // The real wDelete returns { delete: <doc name> }; this fake keys on __path like the others.
+    wDelete: (env, path) => ({ delete: true, __path: path }),
     async qAudit(env, ev) { audits.push(ev); },
     async sendNativePush() { return { sent: 0 }; },
     // gate() calls the REAL getOrg/getMembership against Firestore. The suite convention is to
@@ -340,6 +342,39 @@ test("INTEGRITY · the clinical report's columns and rows stay in step", () => {
     assert.equal(hasDiagnosis, includeCaseRef,
       "the Diagnosis column appears only when it will actually be filled");
   }
+});
+
+/* ══ DELETE ══ a programme can be removed, but never out from under a resident ══
+ * The console could create a programme and never remove one, so a mistyped programme was permanent.
+ * The dangerous version of this feature deletes one that residents are still on: their entries,
+ * rotations, assessments and attestations all carry programmeId, and a signed training record would
+ * end up pointing at a programme that no longer exists. */
+test("DELETE · a programme is removable only once nobody is enrolled on it", async () => {
+  const db = fakeDb();
+  const { progs, residents } = await buildCollege(db);
+  const target = progs[0];
+
+  await assert.rejects(
+    () => S.deleteProgramme(env, target.id, ACADEMIC, db),
+    (e) => /programme_in_use/.test(String((e && e.message) || "")),
+    "a programme with residents on it must not be deletable");
+
+  assert.ok(await S.getProgramme(env, target.id, db), "the refused delete changed nothing");
+
+  // An empty programme - the mistyped-duplicate case this exists for.
+  const spare = await S.createProgramme(env, ORG, {
+    name: "Duplicate created by mistake", degree: "MD", specialtyId: "md-general-medicine",
+    curriculumId: "md-general-medicine", departmentId: "dept-medicine", durationMonths: 36,
+  }, ACADEMIC, db);
+  assert.ok(await S.getProgramme(env, spare.id, db), "the spare exists before deleting");
+
+  const out = await S.deleteProgramme(env, spare.id, ACADEMIC, db);
+  assert.equal(out.deleted, true);
+  assert.equal(await S.getProgramme(env, spare.id, db), null, "and it is gone afterwards");
+
+  // The residents and their own programme are untouched.
+  assert.equal((await S.listResidents(env, ORG, {}, db)).length, residents.length);
+  assert.ok(await S.getProgramme(env, target.id, db));
 });
 
 /* ══ HARD 2 ══ cross-resident reads must never carry clinical identifiers ══ */
