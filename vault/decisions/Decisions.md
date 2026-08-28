@@ -1589,3 +1589,33 @@ every report's "verified entries carrying the signer's registration" count was r
 123px. That was not the QR: the app carries a root `zoom` of 1.08 for the OS text-size setting. The
 assertion was wrong, not the code — so it now tests **module uniformity and squareness**, which is
 what actually decides whether a scanner can read it, and is zoom-independent.
+
+## 2026-08-28 — Ask MaiK inside the insulin calculator: MaiK fills the form, it does not answer the dose
+
+**Decision (owner, "B").** A doctor describes the situation in free text ("patient on 16 units
+regular, sugar 320 now, how much?") and MaiK responds by **pre-filling the calculator** — mode plus
+every input — for the doctor to check and press Calculate. It does NOT print a dose inline.
+
+**Why the LLM never produces the number.** insulin.js already separates the maths (`INSULIN_ENGINE`:
+`correctionDose`, `mealBolus`, `firstDoseCorrection`, `combinedDose`, `basalInitiation`, `isfFromTdd`,
+`icrFromTdd`, `activeInsulin`, `pediatricInit`, `dkaInsulin`) from the presentation, and
+`INSULIN_SAFETY.evaluate(ctx, input, res)` from both. So the agent's whole job is EXTRACTION: choose
+the engine function and fill its arguments. The dose then comes from the same validated code path the
+calculator has always used, and every existing safety warning and `interrupt` still fires. An LLM that
+emitted units directly would bypass all of it.
+
+**Why pre-fill rather than an inline answer.** Both were considered. Inline is one tap faster, but the
+failure mode is "the AI said 6 units" — a number a busy doctor may accept without auditing inputs the
+AI inferred. Pre-fill makes the failure mode "the AI filled these five fields, check them", on the
+screen the clinician already reads, with the existing confirm/acknowledge flow intact. For insulin
+that trade is worth the tap. An inline answer can be layered on later once extraction is shown to be
+reliable in practice.
+
+**Rules the implementation must keep.**
+- Missing required input (no ISF, no weight, no time since last dose) -> ASK, never assume a default.
+  Silent defaulting is where the real danger is, not the arithmetic.
+- Show the extracted inputs as an editable summary with a one-line rationale, before any result.
+- A safety `interrupt` blocks the answer exactly as it does in the manual flow.
+- Never auto-confirm or auto-log a dose on the doctor's behalf.
+
+Not yet implemented — recorded so it can be built from a clean context.
