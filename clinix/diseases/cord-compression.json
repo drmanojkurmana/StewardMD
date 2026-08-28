@@ -1,0 +1,982 @@
+{
+  "_comment": "Spinal cord compression (compressive myelopathy) is neurology's other classic long case: a spastic paraplegia with a sensory level. Built on the shared exam skills (tone_power, reflexes, sensory, gait) plus genuinely new local content: finding and interpreting a sensory level, the extradural-vs-intradural bedside distinction, and sphincter/autonomic involvement, all grounded in the book's own patterns table.",
+  "id": "cord-compression",
+  "name": "Spinal cord compression",
+  "fullName": "Compressive myelopathy presenting as spastic paraplegia",
+  "system": "neurology",
+  "kbRef": "spinal_cord_compression",
+  "oneLine": "A spastic paraplegia with a level: find it, and you have found the lesion",
+  "estMinutes": 70,
+  "review": {
+    "status": "ai_drafted"
+  },
+  "version": 1,
+  "chapters": [
+    {
+      "id": "basics",
+      "title": "Basics",
+      "blurb": "What compressive myelopathy is, and why UMN-below/LMN-at-the-level is the whole exam",
+      "skills": [
+        "skill.cord.basics"
+      ]
+    },
+    {
+      "id": "approach",
+      "title": "Approach to the patient",
+      "blurb": "Before a single question",
+      "skills": [
+        "skill.approach.hygiene",
+        "skill.approach.introduce",
+        "skill.approach.consent",
+        "skill.approach.position"
+      ]
+    },
+    {
+      "id": "particulars",
+      "title": "Patient particulars",
+      "blurb": "Age and background change the likely cause of a cord syndrome",
+      "skills": [
+        "skill.particulars.demographics"
+      ],
+      "emphasis": {
+        "skill.particulars.demographics": {
+          "expect": "In India, tuberculosis of the spine (Pott's disease) remains a leading cause of compressive myelopathy at any age, alongside malignancy and disc disease in older patients and trauma in the young. Occupation and any history of constitutional symptoms or a known primary cancer matter as much as age here."
+        }
+      }
+    },
+    {
+      "id": "history",
+      "title": "History of presenting illness",
+      "blurb": "Back pain, a level, and the two functions nobody volunteers",
+      "skills": [
+        "skill.hx.chief_complaints",
+        "skill.hx.neuro.approach",
+        "skill.hx.cord.sphincter"
+      ],
+      "emphasis": {
+        "skill.hx.chief_complaints": {
+          "expect": "A typical compressive myelopathy history is weakness of both legs that has been getting steadily worse over days to weeks, often with a band of altered sensation around the trunk and a change in bladder habit the patient may not mention unless asked directly."
+        },
+        "skill.hx.neuro.approach": {
+          "expect": "The onset here is usually subacute, over days to a few weeks, which the book itself flags as the tempo typical of infective, inflammatory or space-occupying causes. Ask specifically whether the weakness climbed from the feet upward (ascending, typical of an extramedullary compressive lesion) or spread from the hands downward (descending, typical of an intramedullary lesion)."
+        }
+      }
+    },
+    {
+      "id": "past_personal_drug_family",
+      "title": "Past, personal and family history",
+      "blurb": "Tuberculosis contact, a known cancer, and trauma",
+      "skills": [
+        "skill.hx.cord.aetiology"
+      ]
+    },
+    {
+      "id": "general_exam",
+      "title": "General examination",
+      "blurb": "Weight loss and a spine that will not bend",
+      "skills": [
+        "skill.gen.appearance",
+        "skill.gen.vitals"
+      ],
+      "emphasis": {
+        "skill.gen.appearance": {
+          "expect": "Look for wasting and pallor of chronic illness, and inspect the whole spine for a gibbus (an angular kyphotic deformity), which is the classic external sign of tuberculous (Pott's) spinal disease before you have even touched the patient."
+        }
+      }
+    },
+    {
+      "id": "systemic_exam",
+      "title": "Spinal and neurological examination",
+      "blurb": "Palpate the spine, then find the level with the shared exam skills",
+      "skills": [
+        "skill.exam.cord.spine",
+        "skill.exam.neuro.tone_power",
+        "skill.exam.neuro.reflexes",
+        "skill.exam.neuro.sensory",
+        "skill.exam.neuro.gait"
+      ],
+      "emphasis": {
+        "skill.exam.neuro.tone_power": {
+          "expect": "Expect symmetrically increased tone and reduced power in BOTH lower limbs (spastic paraparesis), with the upper limbs spared unless the compression is in the cervical cord. Right at the level of the lesion itself, a band of lower motor neurone signs, wasting or fasciculation in the segment supplied, can coexist with the upper motor neurone picture below it."
+        },
+        "skill.exam.neuro.reflexes": {
+          "expect": "Expect exaggerated knee and ankle jerks with bilateral extensor plantar responses below the level of the lesion. Abdominal reflexes are lost below a thoracic lesion and are a genuinely useful, easily forgotten localising sign."
+        },
+        "skill.exam.neuro.sensory": {
+          "expect": "This is the single most important finding in this case: map a definite sensory LEVEL, a horizontal line below which all modalities are lost, by testing pin-prick from the feet upward until sensation is first reported as normal, and mark it against a dermatomal landmark. A vague, ungraded sensory change is not the same finding as a mapped level and does not carry the same localising weight."
+        },
+        "skill.exam.neuro.gait": {
+          "expect": "Expect a spastic (scissoring) gait: stiff, extended legs that cross over each other with each short, effortful step, the opposite pattern to the circumducting hemiplegic gait of a stroke."
+        }
+      }
+    },
+    {
+      "id": "disease_findings",
+      "title": "Putting the level together",
+      "blurb": "Motor level, sensory level, and whether it is extradural or intradural",
+      "skills": [
+        "skill.cord.level"
+      ]
+    },
+    {
+      "id": "summary",
+      "title": "Clinical summary",
+      "blurb": "The book's own worked example for this exact case",
+      "skills": [
+        "skill.cord.summary"
+      ]
+    },
+    {
+      "id": "differential",
+      "title": "Differential diagnosis",
+      "blurb": "Compressive versus non-compressive, and the mimics of a paraplegia",
+      "skills": [
+        "skill.cord.differential"
+      ]
+    },
+    {
+      "id": "investigations",
+      "title": "Investigations",
+      "blurb": "One scan localises and often names the cause",
+      "skills": [
+        "skill.ix.cord.imaging"
+      ]
+    },
+    {
+      "id": "diagnosis",
+      "title": "Diagnosis",
+      "blurb": "Level, cause, and how urgent it is",
+      "skills": [
+        "skill.cord.diagnosis"
+      ]
+    },
+    {
+      "id": "treatment",
+      "title": "Treatment",
+      "blurb": "Why this is a surgical emergency until proven otherwise",
+      "skills": [
+        "skill.tx.cord.principles"
+      ]
+    },
+    {
+      "id": "case",
+      "title": "Case presentation",
+      "blurb": "Present this patient to your consultant",
+      "skills": [
+        "skill.present.case"
+      ]
+    }
+  ],
+  "osce": {
+    "stations": [
+      {
+        "id": "osce.cord.exam",
+        "title": "Examine this patient's legs and find the level",
+        "task": "This 34-year-old man has had progressive weakness of both legs for three weeks, with back pain. Examine his nervous system and localise the lesion.",
+        "seconds": 420,
+        "skills": [
+          "skill.approach.hygiene",
+          "skill.approach.introduce",
+          "skill.approach.consent",
+          "skill.exam.cord.spine",
+          "skill.exam.neuro.tone_power",
+          "skill.exam.neuro.reflexes",
+          "skill.exam.neuro.sensory"
+        ],
+        "examinerQuestions": [
+          "How do you actually find and mark a sensory level at the bedside?",
+          "What single question, not yet asked, would you regret missing in this history?",
+          "This patient has spinal tenderness. Does that favour an extradural or an intradural lesion?"
+        ]
+      }
+    ]
+  },
+  "cases": [
+    {
+      "id": "case.cord.suresh",
+      "title": "A young man who can no longer climb the ladder at work",
+      "opening": "Suresh Nayak, 34, a construction labourer, has come with three weeks of worsening weakness in both legs and a band-like tightness around his lower chest. Introduce yourself and take a history.",
+      "fallback": "I am not sure what you mean, doctor. Can you ask that a different way?",
+      "patient": {
+        "name": "Suresh Nayak",
+        "age": 34,
+        "sex": "male",
+        "occupation": "Construction labourer",
+        "residence": "Rural, migrated to the city for work, lives in a labour colony"
+      },
+      "history": {
+        "presenting": {
+          "cues": [
+            "what brings you",
+            "what is the problem",
+            "why have you come",
+            "complaint",
+            "tell me about",
+            "how can i help"
+          ],
+          "reply": "Doctor, my legs have become weak over the last three weeks. At first I just felt tired climbing the ladder at the site, now I can barely walk without holding onto something.",
+          "key": true
+        },
+        "onset": {
+          "cues": [
+            "when did it start",
+            "how did it start",
+            "sudden or gradual",
+            "onset"
+          ],
+          "reply": "It came on slowly, over about three weeks. Not suddenly.",
+          "key": true
+        },
+        "progression_pattern": {
+          "cues": [
+            "which came first",
+            "started in the feet",
+            "started in the hands",
+            "spread",
+            "ascending",
+            "climbed up"
+          ],
+          "reply": "It started in my feet and ankles first, and over the weeks it has climbed up to involve my whole legs now.",
+          "key": true
+        },
+        "sensory_band": {
+          "cues": [
+            "tightness",
+            "band",
+            "girdle",
+            "belt-like",
+            "around your chest",
+            "around your waist"
+          ],
+          "reply": "Yes, there is a strange tight feeling like a belt around my lower chest, just below my nipples.",
+          "key": true
+        },
+        "back_pain": {
+          "cues": [
+            "back pain",
+            "pain in your back",
+            "spine pain"
+          ],
+          "reply": "Yes, my mid-back has been aching for about two months now, before the legs even got weak. It is worse at night.",
+          "key": true
+        },
+        "bladder": {
+          "cues": [
+            "urine",
+            "bladder",
+            "passing water",
+            "urinate",
+            "difficulty passing urine"
+          ],
+          "reply": "I have noticed I have to strain to pass urine the last few days, and once I did not feel it coming until it had already started.",
+          "key": true
+        },
+        "bowel": {
+          "cues": [
+            "bowel",
+            "constipation",
+            "motion",
+            "stool"
+          ],
+          "reply": "I have been constipated the last week, that is true.",
+          "key": true
+        },
+        "weight": {
+          "cues": [
+            "weight",
+            "appetite",
+            "losing weight"
+          ],
+          "reply": "I have lost some weight, maybe four kilos in the last two months. My appetite is also less.",
+          "key": true
+        },
+        "fever": {
+          "cues": [
+            "fever",
+            "night sweats",
+            "temperature"
+          ],
+          "reply": "I have had a low fever most evenings for about two months, and I sweat a lot at night."
+        },
+        "cough": {
+          "cues": [
+            "cough",
+            "breathing",
+            "chest symptoms"
+          ],
+          "reply": "No cough."
+        },
+        "tb_contact": {
+          "cues": [
+            "tuberculosis",
+            "tb",
+            "contact",
+            "anyone with tb"
+          ],
+          "reply": "My uncle who I used to live with had tuberculosis of the lungs a few years ago.",
+          "key": true
+        },
+        "trauma": {
+          "cues": [
+            "injury",
+            "fall",
+            "accident",
+            "trauma"
+          ],
+          "reply": "No injury or fall that I remember."
+        },
+        "sensory_symptoms": {
+          "cues": [
+            "numbness",
+            "tingling",
+            "pins and needles"
+          ],
+          "reply": "My feet feel a bit numb, and the tightness around my chest, but I have not had any pins and needles in my hands."
+        },
+        "arms": {
+          "cues": [
+            "arms",
+            "hands",
+            "upper limbs"
+          ],
+          "reply": "My arms and hands feel completely normal, full strength."
+        },
+        "neck_flexion": {
+          "cues": [
+            "bending your neck",
+            "looking down",
+            "electric shock down"
+          ],
+          "reply": "I have not noticed anything like that."
+        },
+        "prior_illness": {
+          "cues": [
+            "past illness",
+            "diabetes",
+            "hypertension",
+            "any operations"
+          ],
+          "reply": "I have been generally healthy before this. No diabetes, no blood pressure problem."
+        },
+        "occupation_exposure": {
+          "cues": [
+            "your work",
+            "job",
+            "what do you do"
+          ],
+          "reply": "I carry cement bags and climb scaffolding at construction sites. I cannot do that work anymore since this started."
+        }
+      },
+      "exam": {
+        "skill.gen.appearance": {
+          "finding": "Thin, mildly pale, looks unwell. No gibbus deformity visible on inspection of the spine, but the mid-thoracic spine looks slightly prominent.",
+          "abnormal": true
+        },
+        "skill.gen.vitals": {
+          "finding": "Temperature 37.8 C. Pulse 92, blood pressure 110/70. Respiratory rate 18.",
+          "abnormal": true
+        },
+        "skill.exam.cord.spine": {
+          "finding": "Tenderness on percussion over the T7-T8 spinous processes. No visible deformity or gibbus. No paraspinal swelling. Straight leg raise not limited.",
+          "abnormal": true
+        },
+        "skill.exam.neuro.tone_power": {
+          "finding": "Tone increased in both lower limbs (spastic). Power in both lower limbs 3/5 throughout, symmetrical. Upper limb tone and power normal, 5/5 throughout.",
+          "abnormal": true
+        },
+        "skill.exam.neuro.reflexes": {
+          "finding": "Knee and ankle jerks exaggerated bilaterally. Both plantar responses extensor. Abdominal reflexes absent below the umbilicus, present above it. Upper limb reflexes normal.",
+          "abnormal": true
+        },
+        "skill.exam.neuro.sensory": {
+          "finding": "A definite sensory level to pin-prick and light touch at T8, below which all modalities are reduced; normal sensation above this level, including normal sensation in both upper limbs.",
+          "abnormal": true
+        },
+        "skill.exam.neuro.gait": {
+          "finding": "Unable to walk unaided; with support, a stiff, scissoring gait with both legs held extended and crossing slightly with each step.",
+          "abnormal": true
+        }
+      },
+      "essentialInvestigations": [
+        "mri_spine",
+        "xray_spine",
+        "fbc_esr",
+        "chest_xray"
+      ],
+      "investigations": {
+        "mri_spine": {
+          "label": "MRI whole spine with contrast",
+          "indicated": true,
+          "result": "Collapse of the T7 and T8 vertebral bodies with a paraspinal soft-tissue collection extending into the epidural space and compressing the cord at that level. Preserved disc spaces relative to the degree of bone destruction.",
+          "note": "This is the test that both localises the compression precisely and, together with the clinical picture, strongly suggests the cause: the pattern of vertebral body collapse with disc preservation and a paraspinal collection is classic for tuberculous (Pott's) spine rather than malignancy, which more often destroys the disc space itself."
+        },
+        "xray_spine": {
+          "label": "Plain radiograph, dorsal spine",
+          "indicated": true,
+          "result": "Loss of height of the T7 and T8 vertebral bodies with a paraspinal soft-tissue shadow.",
+          "note": "A reasonable first-line test, but it cannot show the cord itself or the degree of compression; MRI is needed for that."
+        },
+        "fbc_esr": {
+          "label": "Full blood count and ESR",
+          "indicated": true,
+          "result": "Haemoglobin 10.8 g/dL. White cell count normal. ESR 68 mm/hr.",
+          "note": "A markedly raised ESR supports an infective or inflammatory process, consistent with tuberculosis, though it is nonspecific on its own."
+        },
+        "chest_xray": {
+          "label": "Chest radiograph",
+          "indicated": true,
+          "result": "Old fibrotic changes at the right apex, no active infiltrate.",
+          "note": "Looked for evidence of pulmonary tuberculosis given the contact history; old, healed changes support prior exposure rather than proving current activity."
+        },
+        "csf": {
+          "label": "Lumbar puncture and CSF analysis",
+          "indicated": false,
+          "result": "Not performed.",
+          "note": "Not indicated, and potentially unsafe, once a compressive spinal lesion is confirmed on imaging: a lumbar puncture below a block can precipitate acute deterioration and adds little once MRI has already localised and characterised the lesion."
+        },
+        "psa": {
+          "label": "Prostate-specific antigen",
+          "indicated": false,
+          "result": "Not done.",
+          "note": "Not indicated in a 34-year-old with a clinical and radiological picture already fitting tuberculous spondylitis; screening for a prostatic primary would be relevant in an older man where metastatic disease was the leading concern."
+        }
+      },
+      "differentialModel": {
+        "answer": "Compressive myelopathy at T7-T8, most likely tuberculous (Pott's) spine given the subacute course, constitutional symptoms, TB contact history and the MRI pattern. Consider metastatic vertebral disease, an epidural abscess, and a primary spinal tumour.",
+        "accept": [
+          "cord compression",
+          "myelopathy",
+          "pott",
+          "tuberculosis",
+          "tb spine",
+          "metastasis",
+          "metastatic",
+          "abscess",
+          "tumor",
+          "tumour"
+        ],
+        "minMatch": 2
+      },
+      "diagnosis": {
+        "answer": "Compressive myelopathy at the T7-T8 level, extradural, with a sensory level at T8 and sphincter involvement, most likely due to tuberculous (Pott's) spine, given the subacute course, constitutional symptoms, TB contact, raised ESR and the MRI pattern of vertebral body collapse with disc preservation.",
+        "accept": [
+          "cord compression",
+          "myelopathy",
+          "pott",
+          "tuberculous"
+        ],
+        "minMatch": 1
+      },
+      "managementModel": {
+        "answer": "Treat this as a spinal emergency: urgent MRI has already been obtained, urgent orthopaedic or neurosurgical opinion for consideration of decompression given the progressive deficit and sphincter involvement, spinal immobilisation and careful positioning while awaiting definitive treatment, a bladder care plan since retention with overflow is a real risk, tissue or radiological confirmation of the cause where safely possible, and disease-specific therapy for the confirmed cause (anti-tuberculous therapy for confirmed Pott's spine) started under specialist guidance with monitoring of the neurological status.",
+        "accept": [
+          "emergency",
+          "mri",
+          "decompression",
+          "surgical",
+          "neurosurg",
+          "orthopaedic",
+          "immobilis",
+          "bladder",
+          "anti-tuberculous",
+          "att"
+        ],
+        "minMatch": 3
+      },
+      "teachingPoints": [
+        "The sensory level at T8 is not a vague finding, it is a mapped, reproducible line, and it is what converts 'weak legs' into 'a cord lesion at a named level'. Finding it is worth more than any single other step in this exam.",
+        "Weakness that climbed from his feet upward over three weeks is the ascending pattern the book associates with an extramedullary compressive lesion, the opposite of the descending, hands-first pattern of an intramedullary process.",
+        "He did not volunteer his bladder symptoms; they only emerged on direct questioning. Sphincter involvement is a red flag that changes the urgency of this case and must always be asked about directly.",
+        "Spinal tenderness on percussion at the level of the MRI lesion, together with a symmetrical onset, both favour an extradural rather than an intradural process, consistent with the vertebral collapse found on imaging.",
+        "Two months of back pain preceded the weakness by weeks. In retrospect that pain was the first sign; a mid-back pain that is worse at night, in a patient with constitutional symptoms, deserves the same seriousness as a new neurological deficit.",
+        "This is treated as a surgical/medical emergency because the deficit is progressive and sphincter function is already involved; deciding to wait risks a change from a recoverable to an irreversible deficit."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  ],
+  "viva": {
+    "skills": [
+      "skill.cord.basics",
+      "skill.exam.cord.spine",
+      "skill.exam.neuro.sensory",
+      "skill.exam.neuro.reflexes",
+      "skill.cord.level",
+      "skill.cord.differential",
+      "skill.ix.cord.imaging",
+      "skill.tx.cord.principles"
+    ]
+  },
+  "skills": {
+    "skill.cord.basics": {
+      "id": "skill.cord.basics",
+      "kind": "reasoning",
+      "system": "neurology",
+      "title": "What compressive myelopathy is",
+      "oneLine": "Something is pressing on the cord, and the exam is built to answer where and how urgently",
+      "why": "A spastic paraplegia can come from many places, but a mapped sensory level plus symmetrical upper motor neurone signs below it point specifically at the spinal cord, and once the cord is implicated, the possibility of a treatable, decompressible lesion makes this one of the true neurological emergencies a student will meet.",
+      "body": "Spinal cord compression is a mechanical narrowing of the spinal canal, from a lesion inside or outside the cord, that damages cord function at and below the level of compression and is potentially reversible if relieved before the damage becomes permanent.",
+      "keyPoints": [
+        "The exam is built around three questions: is this a spinal cord problem at all (a level, symmetry, sphincter involvement), where exactly is the level, and is the lesion extradural or intradural, since extradural, compressive lesions are the ones most often treatable by urgent decompression.",
+        "Classic compressive myelopathy gives a triad: symmetrical spastic paraparesis, a sensory level, and bladder/bowel involvement, developing over a subacute timescale.",
+        "Onset speed still carries the same meaning it does everywhere else in neurology: sudden onset favours a vascular or traumatic cause, subacute favours infective, inflammatory or a growing mass, and a very slow, chronic course favours a degenerative process.",
+        "This is a genuine emergency specifically BECAUSE the damage is potentially reversible early and increasingly irreversible the longer decompression is delayed, unlike most other causes of paraparesis."
+      ],
+      "pitfalls": [
+        "Treating every paraparesis as automatically a cord problem, without confirming a level and symmetry first.",
+        "Underestimating the urgency because the patient can still walk with support; the point of finding this early is to act before that changes.",
+        "Forgetting that the timescale itself is diagnostic information, not just a detail for the history section."
+      ],
+      "media": [],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What is the classic clinical triad of compressive myelopathy?",
+          "a": "A symmetrical spastic paraparesis, a sensory level, and bladder/bowel involvement.",
+          "accept": [
+            "spastic paraparesis",
+            "sensory level",
+            "bladder",
+            "bowel"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "Why is compressive myelopathy considered a true emergency, unlike most other causes of paraparesis?",
+          "a": "The cord damage is potentially reversible if the compression is relieved early, but becomes progressively more likely to be permanent the longer decompression is delayed.",
+          "accept": [
+            "reversible",
+            "delay",
+            "irreversible",
+            "early"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Neurology: compressive myelopathy"
+        },
+        {
+          "source": "Alagappan, Manual of Practical Medicine",
+          "locator": "Nervous system: approach to spinal cord disease"
+        },
+        {
+          "source": "Harrison's Principles of Internal Medicine",
+          "locator": "Diseases of the spinal cord"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.cord.level": {
+      "id": "skill.cord.level",
+      "kind": "reasoning",
+      "system": "neurology",
+      "title": "Putting the level together",
+      "oneLine": "Motor level, sensory level, and the pattern of loss, read as one localising statement",
+      "why": "A vague statement like 'weak legs with reduced sensation' does not localise anything. A precisely mapped motor and sensory level, read together with the pattern of loss, tells you almost exactly where the lesion sits and how far around the cord it extends.",
+      "body": "Combine the motor level (the lowest working segment), the sensory level (the lowest normal segment), and the pattern of any dissociation to build the localisation.",
+      "keyPoints": [
+        "A definite sensory level, below which ALL modalities are lost, is the finding most specific for a spinal cord lesion; a graded, glove-and-stocking loss instead suggests peripheral neuropathy, and a hemisensory pattern (same-side face and body) suggests a lesion above the cord altogether, at the internal capsule or thalamus.",
+        "Ascending sensory loss (lower limbs progressing upward) suggests an extramedullary compressive lesion; descending sensory loss (upper limbs progressing downward) suggests an intramedullary process instead.",
+        "A dissociated sensory loss, pain and temperature lost while joint position and vibration are preserved, or the reverse, suggests the lesion is intramedullary rather than a simple external compression, because it selectively affects one tract's arrangement within the cord rather than compressing the whole cross-section from outside.",
+        "Complete cord transection gives loss of ALL sensory modalities below the level, spastic paraplegia below the level with LMN signs AT the level, and loss of bladder, bowel and sexual function; a Brown-Sequard (hemicord) pattern instead gives ipsilateral loss of power and joint position/vibration with contralateral loss of pain and temperature.",
+        "The sensory level found clinically is usually one to two segments below the true level of cord compression, because the ascending sensory fibres travel up a short distance within the cord before crossing, so the true bony or compressive level should be assumed to be slightly higher than the mapped sensory level."
+      ],
+      "pitfalls": [
+        "Accepting a vague description of sensory change instead of mapping an actual level with pin-prick testing from below upward.",
+        "Missing a dissociated pattern because only light touch, not pin-prick and vibration separately, was tested.",
+        "Assuming the mapped sensory level IS the exact level of the compressive lesion, rather than a close estimate that sits slightly below it.",
+        "Forgetting that a segmental band of lower motor neurone signs can coexist at the level of the lesion itself, alongside upper motor neurone signs below it."
+      ],
+      "media": [],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What single sensory finding is most specific for a spinal cord lesion, as opposed to a peripheral neuropathy?",
+          "a": "A definite sensory level, below which all modalities are lost. A graded glove-and-stocking loss instead suggests peripheral neuropathy.",
+          "accept": [
+            "sensory level",
+            "definite level"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "A patient's weakness started in the feet three weeks ago and has climbed to involve the whole leg. Does this favour an extramedullary or an intramedullary lesion?",
+          "a": "Extramedullary (ascending sensory/motor loss is the pattern associated with an extramedullary compressive lesion).",
+          "accept": [
+            "extramedullary"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "Describe the Brown-Sequard (hemicord) pattern.",
+          "a": "Ipsilateral loss of motor power and joint position/vibration sense below the lesion, with contralateral loss of pain and temperature sensation below the lesion, from damage to one lateral half of the cord.",
+          "accept": [
+            "ipsilateral",
+            "contralateral",
+            "hemicord",
+            "brown-sequard"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "level",
+          "text": "Correctly maps a sensory level from below upward",
+          "critical": true
+        },
+        {
+          "id": "pattern",
+          "text": "Uses ascending/descending and dissociation to distinguish extramedullary from intramedullary"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Neurology: localising a spinal cord lesion"
+        },
+        {
+          "source": "Alagappan, Manual of Practical Medicine",
+          "locator": "Nervous system: spinal cord syndromes, sensory levels"
+        },
+        {
+          "source": "Harrison's Principles of Internal Medicine",
+          "locator": "Diseases of the spinal cord"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.cord.summary": {
+      "id": "skill.cord.summary",
+      "kind": "reasoning",
+      "system": "neurology",
+      "title": "The clinical summary",
+      "oneLine": "Onset, symmetry, level, and the three functions it involves",
+      "why": "A compressive myelopathy summary follows an almost fixed formula, because the examiner is checking that you have actually gathered the pieces that build a level, not just noted 'weak legs'.",
+      "body": "State the tempo, the symmetry, the motor and sensory levels, sphincter involvement, and any vertebral finding, then your working diagnosis of the likely cause.",
+      "keyPoints": [
+        "Tempo: acute, subacute, or chronic, and whether reversible, stable, or progressive.",
+        "The pattern: symmetrical spastic paraparesis, with a stated sensory level.",
+        "Sphincter and autonomic involvement, stated explicitly, since its presence changes urgency.",
+        "Any spinal finding: tenderness, deformity, or vertebral level, mapped against the neurological level.",
+        "A worked example: 'Subacute onset, over three weeks, of a symmetrical spastic paraparesis with a sensory level at T8, bladder involvement, and spinal tenderness at T7-T8, with no cranial nerve involvement, in a patient with constitutional symptoms and a tuberculosis contact: most likely a compressive myelopathy from Pott's spine.'"
+      ],
+      "pitfalls": [
+        "Omitting the sensory level number, which is the single most load-bearing fact in the whole summary.",
+        "Leaving out sphincter involvement, so the listener cannot judge the true urgency.",
+        "Naming a cause before the level and pattern have actually been stated."
+      ],
+      "media": [],
+      "probes": [
+        {
+          "level": 2,
+          "q": "What five elements does a complete cord compression summary need?",
+          "a": "Tempo, symmetry of weakness, the sensory level, sphincter involvement, and any spinal finding (tenderness/deformity/level).",
+          "accept": [
+            "tempo",
+            "symmetry",
+            "sensory level",
+            "sphincter",
+            "spinal"
+          ],
+          "minMatch": 3
+        }
+      ],
+      "rubric": [
+        {
+          "id": "level",
+          "text": "States a specific sensory level"
+        },
+        {
+          "id": "sphincter",
+          "text": "States sphincter involvement explicitly"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Neurology: cord compression problem representation"
+        },
+        {
+          "source": "Alagappan, Manual of Practical Medicine",
+          "locator": "Nervous system: worked case summary, spinal cord disease"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.cord.differential": {
+      "id": "skill.cord.differential",
+      "kind": "reasoning",
+      "system": "neurology",
+      "title": "Differential diagnosis",
+      "oneLine": "Compressive versus non-compressive first, then the cause",
+      "why": "Not every symmetrical spastic paraparesis is a compressive lesion, and treating a non-compressive cause as if it were surgical, or the reverse, delays the right treatment either way. This layer of reasoning has to come before naming a specific cause.",
+      "body": "First decide compressive versus non-compressive (a lesion that will not be helped by decompression), then, within compressive causes, gradual versus sudden onset, which changes the likely pathology.",
+      "keyPoints": [
+        "Non-compressive (medical) causes of spastic paraparesis to actively exclude: transverse myelitis, subacute combined degeneration (vitamin B12 deficiency), multiple sclerosis, anterior spinal artery thrombosis, and motor neurone disease. None of these improves with surgery, and several have their own specific, time-critical treatment.",
+        "Compressive causes with a gradual onset: a parasagittal meningioma, hydrocephalus (cerebral causes mimicking a cord picture), or, in the spine itself, a slowly growing tumour.",
+        "Compressive causes with a sudden onset: vertebral fracture-dislocation, disc prolapse, spinal epidural abscess, or an epidural haematoma.",
+        "Distinguishing compressive from noncompressive at the bedside: a definite level, spinal tenderness, and asymmetry early favour a compressive lesion; a symmetrical onset with no spinal tenderness and no bony finding favours a non-compressive medical cause.",
+        "A subacute, symmetrical paraparesis with constitutional symptoms and a raised inflammatory marker, in an appropriate population, should always raise tuberculous spondylitis as a real possibility, alongside metastatic disease and an epidural abscess."
+      ],
+      "pitfalls": [
+        "Sending every paraparesis for surgical opinion without first considering a non-compressive medical cause that would not benefit from it.",
+        "Missing subacute combined degeneration, which is treatable and has a specific cause, because attention went straight to imaging the spine.",
+        "Not considering tuberculosis or an epidural abscess in a febrile patient with back pain and a progressive deficit."
+      ],
+      "media": [],
+      "probes": [
+        {
+          "level": 2,
+          "q": "Name three non-compressive causes of a symmetrical spastic paraparesis.",
+          "a": "Transverse myelitis, subacute combined degeneration (B12 deficiency), multiple sclerosis, anterior spinal artery thrombosis, or motor neurone disease.",
+          "accept": [
+            "transverse myelitis",
+            "subacute combined degeneration",
+            "b12",
+            "multiple sclerosis",
+            "motor neurone"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "A patient has fever, back pain, and a rapidly progressive paraparesis over two days. What must be urgently excluded, and why can it not wait?",
+          "a": "A spinal epidural abscess, which is a neurosurgical and infective emergency; delay in decompression and treatment risks permanent paralysis, and it can also progress faster than most other compressive causes.",
+          "accept": [
+            "epidural abscess",
+            "abscess"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [
+        {
+          "id": "branch",
+          "text": "Separates compressive from non-compressive causes before naming a specific one"
+        },
+        {
+          "id": "danger",
+          "text": "Names at least one time-critical cause (abscess, haematoma, tuberculous spine)"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Neurology: differential of spastic paraparesis"
+        },
+        {
+          "source": "Alagappan, Manual of Practical Medicine",
+          "locator": "Nervous system: causes of spastic paraplegia"
+        },
+        {
+          "source": "Harrison's Principles of Internal Medicine",
+          "locator": "Diseases of the spinal cord"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.ix.cord.imaging": {
+      "id": "skill.ix.cord.imaging",
+      "kind": "investigation",
+      "system": "neurology",
+      "title": "Imaging the cord",
+      "oneLine": "MRI localises, characterises, and often names the cause, in one test",
+      "why": "Unlike many neurological presentations, a single well-chosen investigation in compressive myelopathy usually does almost all of the diagnostic work at once, which is exactly why it is obtained urgently rather than after a long panel of blood tests.",
+      "body": "Order the localising, cause-defining test first and urgently; use the rest of the workup to characterise the likely cause and assess safety.",
+      "keyPoints": [
+        "MRI of the whole spine with contrast is the investigation of choice: it shows the cord directly, localises the compression precisely, and its pattern (bone destruction, disc involvement, a paraspinal collection, an epidural mass) very often points strongly to a specific cause.",
+        "A plain spinal radiograph can show vertebral collapse or a bony lesion but cannot show the cord itself or the degree of compression, and should not substitute for MRI where cord compression is suspected clinically.",
+        "Inflammatory markers (ESR, CRP) and a full blood count support an infective or inflammatory cause when raised, though they are nonspecific.",
+        "A lumbar puncture is generally AVOIDED once a compressive lesion is identified or strongly suspected on imaging, because it can precipitate acute deterioration below a spinal block, and it adds little once MRI has already localised the lesion.",
+        "Tissue diagnosis (biopsy, or in tuberculosis, a search for acid-fast bacilli or a compatible clinical-radiological picture) may be needed to confirm the specific cause once the level and general nature of the lesion are known, guided by the specialist team."
+      ],
+      "pitfalls": [
+        "Ordering a plain radiograph alone and treating a normal result as reassuring when the cord itself has not been imaged.",
+        "Performing a lumbar puncture in a patient with a clinically obvious compressive lesion before it has been excluded or characterised on MRI.",
+        "Delaying MRI to complete a full blood panel first, when the scan is both the urgent and the most informative step."
+      ],
+      "media": [],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What is the single investigation of choice in suspected spinal cord compression?",
+          "a": "MRI of the whole spine, with contrast.",
+          "accept": [
+            "mri"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "Why is lumbar puncture generally avoided once a compressive spinal lesion is suspected?",
+          "a": "It can precipitate acute clinical deterioration in a patient with a spinal block, and MRI already provides the localising and characterising information a lumbar puncture would add little to.",
+          "accept": [
+            "deterioration",
+            "block",
+            "avoid"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Neurology: investigation of cord compression"
+        },
+        {
+          "source": "Harrison's Principles of Internal Medicine",
+          "locator": "Diseases of the spinal cord"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.cord.diagnosis": {
+      "id": "skill.cord.diagnosis",
+      "kind": "reasoning",
+      "system": "neurology",
+      "title": "Stating the diagnosis",
+      "oneLine": "Level, extradural or intradural, cause, and urgency, every time",
+      "why": "'Cord compression' alone does not direct treatment. A complete statement gives the level, whether it is extradural or intradural, the probable cause, and the urgency, because each changes the immediate plan.",
+      "body": "Build the diagnosis in the same order the exam built it: confirm a cord syndrome, state the level, state extradural or intradural, name the probable cause, and state the urgency given any progression or sphincter involvement.",
+      "keyPoints": [
+        "The syndrome: compressive myelopathy (or the specific pattern, complete transection, Brown-Sequard, central cord).",
+        "The level, from the mapped sensory level and any vertebral finding.",
+        "Extradural or intradural, from the bedside features and imaging.",
+        "The probable cause, stated as probable rather than certain until confirmed, with the evidence that supports it.",
+        "The urgency: explicitly note progression and sphincter involvement, since these are what make this an emergency rather than an urgent referral.",
+        "A worked example: 'Compressive myelopathy, extradural, at T7-T8, with sphincter involvement and a progressive course, most likely tuberculous (Pott's) spine given the constitutional symptoms, TB contact and MRI pattern; treat as an emergency.'"
+      ],
+      "pitfalls": [
+        "Writing 'paraparesis' or 'cord compression' with no level stated.",
+        "Naming the cause with more certainty than the evidence supports before tissue or microbiological confirmation.",
+        "Omitting the urgency statement, so the diagnosis does not communicate how quickly this needs to be acted on."
+      ],
+      "media": [],
+      "probes": [
+        {
+          "level": 2,
+          "q": "What are the four elements of a complete compressive myelopathy diagnosis?",
+          "a": "The level, extradural versus intradural, the probable cause, and the urgency (progression and sphincter involvement).",
+          "accept": [
+            "level",
+            "extradural",
+            "intradural",
+            "cause",
+            "urgency"
+          ],
+          "minMatch": 3
+        }
+      ],
+      "rubric": [
+        {
+          "id": "level",
+          "text": "States a specific level"
+        },
+        {
+          "id": "urgency",
+          "text": "Explicitly states progression and sphincter status as an urgency marker",
+          "critical": true
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Neurology: cord compression diagnosis"
+        },
+        {
+          "source": "Harrison's Principles of Internal Medicine",
+          "locator": "Diseases of the spinal cord"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.tx.cord.principles": {
+      "id": "skill.tx.cord.principles",
+      "kind": "treatment",
+      "system": "neurology",
+      "title": "Management principles",
+      "oneLine": "Treat as a surgical emergency until proven otherwise, then treat the actual cause",
+      "why": "The single most important management decision here is speed: a compressive lesion causing a progressive deficit is managed as an emergency because sphincter and motor recovery are both time-sensitive, and delay converts a reversible deficit into a permanent one.",
+      "body": "Manage in a fixed sequence: recognise the emergency, get the urgent localising scan, get an urgent specialist opinion, protect the patient while that is arranged, then treat the confirmed underlying cause.",
+      "keyPoints": [
+        "Recognise urgency immediately: a progressive deficit, or any sphincter involvement, means this cannot wait for a routine referral.",
+        "Obtain urgent MRI of the whole spine, since it both localises the lesion and very often points to the cause, and do this before extensive lower-priority investigation.",
+        "Urgent orthopaedic or neurosurgical referral for consideration of decompression, particularly for an extradural, mechanically compressive lesion causing a progressive deficit; the decision to operate, and its timing, is a specialist one, but the referral itself should never be delayed by the student or junior clinician recognising the picture.",
+        "Careful positioning and spinal precautions while the definitive plan is arranged, particularly where instability or a bony lesion is suspected.",
+        "A bladder care plan (assessment for retention, catheterisation if needed) since urinary retention with overflow is a real and easily missed risk once sphincter involvement has begun.",
+        "Once the cause is identified, treat it specifically: for example, anti-tuberculous therapy under specialist guidance for confirmed tuberculous spondylitis, radiotherapy or oncological management for metastatic disease, or drainage and antimicrobial therapy for an epidural abscess, each following current guideline-directed regimens.",
+        "Monitor neurological status serially and explicitly, since a change in the level, in power, or in sphincter function is what should trigger re-escalation."
+      ],
+      "pitfalls": [
+        "Treating a progressive deficit as routine because the patient can still walk with support.",
+        "Delaying specialist referral to complete a full non-urgent workup first.",
+        "Missing urinary retention because bladder symptoms were never actively asked about or examined for.",
+        "Assuming every compressive lesion needs surgery, when a confirmed medical cause such as tuberculosis is treated primarily with disease-specific medical therapy, with surgery reserved for specific indications."
+      ],
+      "media": [],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What two clinical features push a compressive myelopathy from urgent toward emergency management?",
+          "a": "A progressive neurological deficit, and sphincter (bladder/bowel) involvement.",
+          "accept": [
+            "progressive",
+            "sphincter",
+            "bladder",
+            "bowel"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "Why should the urgent MRI not be delayed to complete a full battery of blood tests first?",
+          "a": "Because motor and especially sphincter recovery are time-sensitive; the MRI is what both localises the lesion and enables the urgent specialist decision about decompression, so any delay directly risks converting a reversible deficit into a permanent one.",
+          "accept": [
+            "time-sensitive",
+            "delay",
+            "irreversible",
+            "reversible"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Neurology: management of compressive myelopathy"
+        },
+        {
+          "source": "Harrison's Principles of Internal Medicine",
+          "locator": "Diseases of the spinal cord, management"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "dosingNote": "This module teaches management at the level of sequence and principle only. The decision to operate and its timing, the specific anti-tuberculous or oncological regimen, and any antimicrobial choice and dose must come from the treating specialist team following current institutional and national guidelines. CliniX does not prescribe."
+    }
+  }
+}

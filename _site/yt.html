@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>CliniX video</title>
+<!--
+  yt.html — an https origin for the YouTube player, nothing else.
+
+  WHY THIS FILE EXISTS
+  The native app is a Capacitor WebView served from capacitor://localhost. YouTube's player refuses
+  to initialise when the embedding page's origin is not http(s), which surfaces to the user as
+  "Error 153: Video player configuration error". Verified on a real device: three URL variants
+  (youtube-nocookie, youtube.com, and youtube.com with an explicit origin param) all loaded the
+  iframe and none ever reported onReady.
+
+  Changing the app's own scheme to https would fix the origin, but the origin IS the storage key,
+  so it would orphan every user's localStorage and IndexedDB across the whole app. Far too much to
+  pay for inline video.
+
+  So the app iframes THIS page over https instead. YouTube then sees an https origin
+  (stewardmd.in), the player runs, and the video plays inside the lesson. Nothing is downloaded,
+  nothing is re-hosted: this is still the rights holder's own player, one frame further out.
+
+  ABUSE SURFACE, DELIBERATELY CLOSED
+  A page that embeds any ?v= you hand it is a generic embedder someone else could point at their
+  own content while it sits on our domain. The allow-list below means it will only ever play the
+  videos CliniX actually teaches with. Adding a video to CliniX means adding its id here too.
+-->
+<style>
+  html, body { margin: 0; padding: 0; height: 100%; background: #000; overflow: hidden; }
+  iframe { display: block; border: 0; width: 100%; height: 100%; }
+  .msg {
+    display: flex; align-items: center; justify-content: center; height: 100%;
+    color: #cfd8dd; background: #0d1b24; text-align: center; padding: 24px;
+    font: 500 15px/1.5 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  }
+</style>
+</head>
+<body>
+<script>
+(function () {
+  "use strict";
+  // Only the videos CliniX teaches with. Each was verified embeddable via the YouTube oEmbed
+  // endpoint (HTTP 200 = public AND embedding enabled by the rights holder).
+  var ALLOW = {
+    "0sqCIzuotWo": 1,   // Deep Tendon Reflexes - Stanford Medicine 25
+    "4Ii_lFmd7hw": 1,   // Cerebellar Examination - OSCE Guide - Geeky Medics
+    "7KF5_Br9MaE": 1,   // Respiratory History - OSCE Tips - Geeky Medics
+    "7SyTpEdhBLw": 1,   // Abnormal Gait Exam: Parkinsonian Gait Demonstration - onlinemedicalvideo
+    "8VDA5n0d_IM": 1,   // Cranial Nerve Examination: CN 9, 10 & 12 - Soton Brain Hub
+    "DBif1jjAfKk": 1,   // Examination of the Liver - AMBOSS: Medical Knowledge Distilled
+    "EJH9GIKtZ_s": 1,   // How To Auscultate The Lungs - Lecturio Medical
+    "Ez7KsKRi8e8": 1,   // Measuring Jugular Venous Pressure (JVP) - OSCE Guide - Geeky Medics
+    "H1lJ5VbJzQ0": 1,   // Corneal Reflex Assessment | CN V | OSCE Clip - Geeky Medics
+    "HGtzB8txgIY": 1,   // Cranial Nerves IX and X: Gag Reflex - Dr. Ray Pulmano DC
+    "HoyBvpr9kuM": 1,   // Meningeal signs / Signs of meningeal irritation - Endeavour for Child Health
+    "IUX_NPLcnss": 1,   // Guillain-Barre syndrome - Simon Downes MD, PhD
+    "K_BWCw7s1Xo": 1,   // Where to listen for Heart Sounds (Auscultatory Areas) - Medzcool
+    "LH-HuLSGNC8": 1,   // Motor Assessment of the Lower Limbs - OSCE Guide - Geeky Medics
+    "PYAnF6GJY2I": 1,   // Abdominal Examination - OSCE Guide (Latest) - Geeky Medics
+    "QMI23Admrg4": 1,   // Clinical examination of Muscles of Mastication - Manubhai Patel Dental College, Vadodara
+    "ZKcepS8GWr8": 1,   // Cranial Nerve XI: Motor Testing of the SCM and Trapezius - Dr. Ray Pulmano DC
+    "b_RgpYUfi8Q": 1,   // NIH Stroke Scale Demonstration - ND Health and Human Services
+    "esRIQcxal6s": 1,   // Gait Assessment & Romberg's Test | OSCE Clip - Geeky Medics
+    "4uAAjYzi7SY": 1,   // Upper Limb Neurological Examination | OSCE Guide - Geeky Medics
+    "XU_xeUMJ3Zc": 1,   // Cardiovascular Examination | OSCE Guide - Geeky Medics
+    "gRWSyqatWQQ": 1,   // Respiratory Examination | OSCE Guide - Geeky Medics
+    "h2SIN7Mn0YA": 1,   // Glasgow Coma Scale made easy - Brainbook
+    "pcACFYqdOtY": 1,   // Assessing parasternal heave and thrills - Top Hat Tutorials
+    "rKsqO1tAKvs": 1,   // Examination of the Spleen - AMBOSS: Medical Knowledge Distilled
+    "wE-xzCh8DpM": 1,   // Lung sounds made easy - Geeky Medics
+    "xddT24a5XYc": 1,   // Lung sounds | Breathing Sounds | Auscultation - Geeky Medics
+    "yZ5kV7dJoZw": 1,   // Cranial Nerve Examination | OSCE Guide - Geeky Medics
+    "qYaU5Xo2i58": 1,   // Rinne & Weber Test - OSCE Guide (Clip) - Geeky Medics
+    "4SDJJviPvMI": 1,   // Sensory Assessment of the Lower Limbs - OSCE Clip - Geeky Medics
+    "5oCPtZo4pUY": 1,   // Mitral Stenosis Heart Sound - Medzcool
+    "98HM1fr3cq4": 1,   // Fixed Split S2 - Heart Sounds - Medzcool
+    "ECrIdk8Fhb0": 1,   // Transient Split S2 - Heart Sounds - Medzcool
+    "JZ4F9Z2W0kE": 1    // Flapping Tremor - Asterixis - Doctor O'Donovan
+  };
+
+  function param(name) {
+    var m = String(location.search || "").match(new RegExp("[?&]" + name + "=([^&]+)"));
+    return m ? decodeURIComponent(m[1]) : "";
+  }
+  function fail(text) {
+    var d = document.createElement("div");
+    d.className = "msg";
+    d.textContent = text;
+    document.body.appendChild(d);
+  }
+
+  var v = param("v");
+  // Structural check first, so a malformed id never reaches the allow-list lookup or the DOM.
+  if (!/^[A-Za-z0-9_-]{11}$/.test(v)) { fail("No video requested."); return; }
+  if (ALLOW[v] !== 1) { fail("That video is not part of CliniX."); return; }
+
+  var f = document.createElement("iframe");
+  // enablejsapi so the parent can detect that the player really started, and fall back to a
+  // link card if it did not. playsinline keeps it in the lesson on iOS instead of going fullscreen.
+  f.src = "https://www.youtube.com/embed/" + v +
+          "?rel=0&modestbranding=1&playsinline=1&enablejsapi=1&origin=" +
+          encodeURIComponent(location.origin);
+  f.setAttribute("allow", "accelerometer; encrypted-media; gyroscope; picture-in-picture; fullscreen");
+  f.setAttribute("allowfullscreen", "");
+  f.setAttribute("title", "CliniX teaching video");
+  document.body.appendChild(f);
+
+  // Relay the player's own events up to the app, so it can tell "playing" from "silently broken".
+  window.addEventListener("message", function (e) {
+    if (String(e.origin).indexOf("youtube.com") < 0) return;
+    try { parent.postMessage({ clinixYt: true, v: v, data: e.data }, "*"); } catch (x) {}
+  });
+  try { parent.postMessage({ clinixYt: true, v: v, shim: "loaded" }, "*"); } catch (x) {}
+})();
+</script>
+</body>
+</html>

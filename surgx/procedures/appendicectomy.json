@@ -1,0 +1,148 @@
+{
+  "id": "appendicectomy",
+  "title": "Appendicectomy",
+  "subtitle": "Open and laparoscopic",
+  "system": "gastrointestinal",
+  "aliases": ["appendectomy", "appendix removal"],
+  "estMinutes": 45,
+  "educationalOnly": true,
+  "review": { "status": "ai_drafted", "reviewer": "", "date": "" },
+  "kbRef": "acute_appendicitis",
+  "sources": [
+    { "id": "wses-app", "org": "World Society of Emergency Surgery (WSES)", "title": "Diagnosis and treatment of acute appendicitis: Jerusalem guidelines, 2020 update", "year": 2020, "url": "https://wjes.biomedcentral.com/", "accessed": "2026-08-24" }
+  ],
+  "calcs": ["alvarado", "air_score", "caprini"],
+  "chapters": {
+    "indications": [
+      "Acute appendicitis diagnosed clinically and supported by a scoring instrument, imaging, or both.",
+      "Appendiceal mass or abscess that has failed non-operative management.",
+      "Incidental appendicectomy is not routine and is decided case by case.",
+      "Non-operative management with antibiotics is a recognised alternative in selected uncomplicated appendicitis; it is a discussion with the patient, not a default."
+    ],
+    "contraindications": [
+      "A patient too unstable for anaesthesia who has not yet been resuscitated.",
+      "A well-formed appendiceal phlegmon or abscess responding to antibiotics and drainage, where interval surgery is safer.",
+      "Uncorrected coagulopathy, unless the operation is itself the treatment for the deterioration."
+    ],
+    "preparation": [
+      "Resuscitate: fluids, analgesia, antiemetic, and nil by mouth.",
+      "Pregnancy test in every woman of childbearing age.",
+      "Antibiotic prophylaxis against enteric Gram-negatives and anaerobes, timed to the incision.",
+      "Consent must include conversion to open, the possibility of a normal appendix, stoma in rare circumstances, and the risk of a collection."
+    ],
+    "positioning": [
+      "Supine, both arms tucked for laparoscopy so the surgeon and assistant can stand on the patient's left.",
+      "Bladder emptied. A urinary catheter only if the operation is expected to be long or the pelvis needs to be empty.",
+      "Table capable of steep Trendelenburg with left tilt."
+    ],
+    "equipment": [
+      "Laparoscopic stack, 30-degree scope, three ports (typically 10 mm umbilical, 5 mm left iliac fossa, 5 mm suprapubic).",
+      "Atraumatic graspers, hook diathermy or an energy device, endoloops or a linear stapler.",
+      "Retrieval bag, suction irrigation.",
+      "For an open approach: a self-retaining retractor and a standard general set."
+    ],
+    "anatomy": [
+      "The appendix arises from the posteromedial caecum where the three taeniae coli converge. Following a taenia to its convergence finds it every time.",
+      "The appendicular artery is an end artery running in the mesoappendix, a branch of the ileocolic artery, which is why appendicitis progresses to gangrene.",
+      "Position is highly variable: retrocaecal is commonest, then pelvic. A retrocaecal appendix explains a soft abdomen with marked tenderness on rectal examination.",
+      "The right ureter and gonadal vessels lie in the retroperitoneum behind the caecum and are at risk during mobilisation."
+    ],
+    "criticalSafety": [
+      "Identify the base of the appendix and the caecal wall clearly before dividing anything.",
+      "Do not divide the base flush with an inflamed caecum: an inadequate or ischaemic caecal cuff is how a stump leak happens.",
+      "Convert without hesitation. Conversion is a judgement, not a failure."
+    ],
+    "structuresAtRisk": [
+      "Right ureter, in a retrocaecal or inflamed field",
+      "Ileocolic vessels",
+      "Right gonadal vessels",
+      "Terminal ileum, from traction or diathermy"
+    ],
+    "commonErrors": [
+      "Removing a normal appendix without inspecting the terminal ileum, the pelvis and the tubes and ovaries.",
+      "Inadequate port triangulation, forcing an awkward dissection at the base.",
+      "Using diathermy near the base and devascularising the caecal cuff.",
+      "Failing to send the specimen for histology, so a neuroendocrine tumour or mucinous neoplasm is missed."
+    ],
+    "complications": [
+      "Surgical site infection, more common after an open procedure and after perforation.",
+      "Intra-abdominal or pelvic collection, presenting around days five to seven with swinging fever and ileus.",
+      "Stump appendicitis after incomplete removal.",
+      "Stump leak, ileus, small bowel obstruction from adhesions, and port-site hernia.",
+      "Unexpected histology: neuroendocrine tumour, mucinous neoplasm, or ileocaecal tuberculosis, which is a real consideration in India."
+    ],
+    "postop": [
+      "Uncomplicated appendicitis: no post-operative antibiotics, early oral intake, discharge when eating and comfortable.",
+      "Complicated appendicitis: a defined short course of antibiotics with a documented stop date, not an open-ended prescription.",
+      "Warn about the day five to seven collection specifically, and give a route back in.",
+      "Follow up the histology. Somebody must own that result."
+    ]
+  },
+  "steps": [
+    { "ref": "step.core.consent-check" },
+    { "ref": "step.core.timeout" },
+    { "ref": "step.core.prophylaxis" },
+    { "ref": "step.core.positioning", "emphasis": "Steep Trendelenburg with left tilt slides the small bowel out of the right iliac fossa and does most of the retraction for you." },
+    { "ref": "step.core.prep-drape" },
+    { "ref": "step.lap.access" },
+    { "ref": "step.lap.ports", "emphasis": "Umbilical camera port, left iliac fossa and suprapubic working ports. Placing both working ports on the left keeps the surgeon out of their own way." },
+    { "ref": "step.lap.survey", "emphasis": "Inspect the terminal ileum for Meckel diverticulum and Crohn disease, and the pelvis for gynaecological pathology, before committing to the appendix." },
+    { "ref": "step.app.mobilise" },
+    { "ref": "step.app.mesoappendix" },
+    { "ref": "step.app.base" },
+    { "ref": "step.abd.lavage", "emphasis": "Aspirate contaminated fluid from the pelvis and both paracolic gutters. Do not irrigate widely in a contaminated abdomen: it spreads what it does not remove." },
+    { "ref": "step.lap.specimen-retrieval" },
+    { "ref": "step.core.haemostasis" },
+    { "ref": "step.core.counts" },
+    { "ref": "step.core.specimen", "emphasis": "Every appendix goes to histology, including the ones that look normal." },
+    { "ref": "step.lap.closure" },
+    { "ref": "step.core.skin-closure" },
+    { "ref": "step.core.debrief" }
+  ],
+  "steps_local": {
+    "step.app.mobilise": {
+      "id": "step.app.mobilise", "kind": "dissection",
+      "title": "Identifying and mobilising the appendix",
+      "why": "The appendix is found by anatomy, not by searching. Following a taenia coli to the convergence point locates the base even when the tip is buried.",
+      "how": [
+        "Grasp the caecum, not the appendix: an inflamed appendix tears.",
+        "Follow a taenia coli distally to the convergence of the three taeniae; the base is there.",
+        "Mobilise a retrocaecal appendix by taking down the lateral peritoneal reflection of the caecum, staying anterior to the retroperitoneum."
+      ],
+      "structuresAtRisk": ["Right ureter", "Right gonadal vessels", "Caecal wall"],
+      "pitfalls": ["Grasping and fragmenting a gangrenous appendix.", "Dissecting into the retroperitoneum while chasing a retrocaecal tip."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.app.mesoappendix": {
+      "id": "step.app.mesoappendix", "kind": "dissection",
+      "title": "Dividing the mesoappendix",
+      "why": "The appendicular artery is an end artery. It must be controlled deliberately, and a slipped clip on it retracts into the mesentery.",
+      "how": [
+        "Create a window at the base of the mesoappendix, adjacent to the appendix base.",
+        "Divide the mesoappendix with an energy device, clips or a stapler, working from the base towards the tip.",
+        "Keep close to the appendix to stay away from the ileocolic vessels."
+      ],
+      "structuresAtRisk": ["Appendicular artery", "Ileocolic vessels"],
+      "pitfalls": ["Working tip to base and losing the plane.", "Relying on diathermy alone on a thickened oedematous mesoappendix."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.app.base": {
+      "id": "step.app.base", "kind": "resection", "critical": true,
+      "title": "Securing and dividing the base",
+      "why": "A stump leak is the complication that turns a routine appendicectomy into a re-laparotomy. It is prevented at this step and nowhere else.",
+      "how": [
+        "Clear the base circumferentially and see healthy caecal wall on both sides before applying anything.",
+        "Secure with two endoloops (or a stapler across healthy caecum if the base is necrotic or perforated) and divide leaving an adequate cuff.",
+        "Inspect the staple or loop line and the caecal wall afterwards.",
+        "If the base and adjacent caecum are necrotic, this is no longer an appendicectomy: consider a caecal resection and get senior help."
+      ],
+      "structuresAtRisk": ["Caecal wall", "Terminal ileum"],
+      "pitfalls": ["Applying a loop to an inflamed, friable base which then cheese-wires through.", "Leaving a long stump, which can become stump appendicitis."],
+      "review": { "status": "ai_drafted" }
+    }
+  },
+  "media": {
+    "anatomy": ["med.surgx.appendix-anatomy"],
+    "steps": ["med.surgx.appendix-base"]
+  }
+}

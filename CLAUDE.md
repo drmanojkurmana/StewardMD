@@ -28,6 +28,43 @@ The architecture/knowledge lives in the Obsidian vault at **`vault/`** (git-trac
 `find ios/DerivedData -name App.app`, verify the built `public/index.html` `?v=` token + a code marker
 BEFORE installing, then `devicectl uninstall` before install (drops the stale service worker).
 
+**INSTALLING WIPES APP DATA.** Every `devicectl device install app` creates a NEW container
+(`/private/var/containers/Bundle/Application/<new-uuid>/`), so everything device-local is destroyed:
+the GHIS session, the Firebase sign-in, and **SURGX notes — which are encrypted device-local and
+have no server copy** (`vault/modules/SURGX.md`). Get the whole flow staged, THEN test; a reinstall
+mid-test costs you the setup. Cost this session: a linked note, twice.
+
+**Verify the RUNNING bundle, not the install message.** `devicectl` reported "App installed" twice
+while the phone kept running the previous bundle; only the third took. After installing, read the
+`?v=` token out of the live WebView (below) rather than trusting the CLI.
+
+**No `.xcworkspace`** — this is Capacitor SPM, not CocoaPods. Build the `App` scheme of
+`ios/App/App.xcodeproj`; `-workspace ios/App/App.xcworkspace` fails with "does not exist".
+`xcode-select` points at CommandLineTools (no iOS SDK), so pass the real Xcode per-command:
+`export DEVELOPER_DIR="/Users/diwakarkumar/Downloads/Xcode-beta 2.app/Contents/Developer"` —
+don't `xcode-select -s` (needs sudo, changes it for every other worktree/session).
+
+**Plugin symbols are NOT in `App.app/App`.** Xcode 16+ Debug builds put the code in
+`App.app/App.debug.dylib`. Grepping the main binary shows zero `CapacitorUpdater`/`WatchBridge` and
+looks exactly like the plugin-dropped regression in `vault/modules/…` — check the dylib instead.
+
+## Debugging the iOS WebView (no CDP)
+Android exposes the WebView over the Chrome DevTools Protocol; **iOS does not**. Use
+`ios_webkit_debug_proxy` (note underscores — `brew list` shows the binary as
+`ios_webkit_debug_proxy`, not the hyphenated formula name; reusable client: `test/ios-webkit-cdp.mjs`):
+`ios_webkit_debug_proxy -c null:9221,:9222-9250`, then `curl localhost:9222/json` for the page's ws URL.
+
+- **USB only.** A Wi-Fi-paired iPhone installs fine but the proxy fails with "Could not connect to
+  lockdownd". `idevice_id -l` must list it (`-n` = network-only, not enough).
+- **Device must be UNLOCKED**, with Auto-Lock off and the app foregrounded. A locked phone fails the
+  launch with `FBSOpenApplicationServiceErrorDomain error 1` and stops exposing the WebView entirely.
+- **iOS 26/27 rejects plain CDP.** Bare `Runtime.evaluate` returns `"'Runtime' domain was not found"`:
+  modern WebKit is multi-target, so wrap every command in `Target.sendMessageToTarget({targetId,
+  message})` and unwrap replies from `Target.dispatchMessageFromTarget`. The `targetId` only arrives
+  in `Target.targetCreated`, which fires on a FRESH page — relaunch the app before each attach.
+- **`awaitPromise` is ignored**, so async expressions come back as `[object Object]`. Assign the
+  result to `window.__x` and poll for it instead.
+
 ## Deploy
 Push to `main` → Cloudflare Pages auto-deploys (repo root static + `functions/`). Worker
 `stewardmd-api` deploys via `wrangler deploy`. Server (`functions/`) changes are live on push; client

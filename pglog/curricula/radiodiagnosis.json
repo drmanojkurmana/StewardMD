@@ -1,0 +1,144 @@
+{
+  "id": "radiodiagnosis",
+  "programmeType": "PG",
+  "degree": "MD",
+  "specialty": "Radiodiagnosis",
+  "durationMonths": 36,
+  "version": "2026-08-27",
+  "extends": [
+    "_pgmer-common"
+  ],
+  "source": {
+    "title": "Guidelines for Competency Based Postgraduate Training Programme for MD in Radiodiagnosis",
+    "publisher": "National Medical Commission",
+    "year": 2019,
+    "url": "https://www.nmc.org.in/wp-content/uploads/2019/09/MD-Radiodiagnosis.pdf",
+    "retrieved": "2026-08-27"
+  },
+  "requirements": [
+    {
+      "target": null,
+      "per": "course",
+      "source": "nmc_curriculum",
+      "mandatoryForExam": false,
+      "id": "rd_logbook",
+      "kind": "meta",
+      "label": "Log book checked and signed regularly by the faculty-in-charge",
+      "clause": "Training components — 5",
+      "quote": "A log book should be maintained by the student and will be checked and signed regularly by the faculty-in-charge during the training program."
+    },
+    {
+      "target": null,
+      "per": "course",
+      "source": "nmc_curriculum",
+      "mandatoryForExam": false,
+      "id": "rd_seminar",
+      "kind": "academic",
+      "label": "Seminars, case discussion, journal club",
+      "match": {
+        "academicType": "seminar"
+      },
+      "clause": "Training components — 3",
+      "quote": "Seminars, case discussion, journal club."
+    },
+    {
+      "target": null,
+      "per": "course",
+      "source": "nmc_curriculum",
+      "mandatoryForExam": false,
+      "id": "rd_journal_club",
+      "kind": "academic",
+      "label": "Journal club",
+      "match": {
+        "academicType": "journal_club"
+      },
+      "clause": "Training components — 3",
+      "quote": "Seminars, case discussion, journal club."
+    },
+    {
+      "target": null,
+      "per": "course",
+      "source": "nmc_curriculum",
+      "mandatoryForExam": false,
+      "id": "rd_case_discussion",
+      "kind": "academic",
+      "label": "Case discussion",
+      "match": {
+        "academicType": "case_discussion"
+      },
+      "clause": "Training components — 3",
+      "quote": "Seminars, case discussion, journal club."
+    },
+    {
+      "target": null,
+      "per": "course",
+      "source": "nmc_curriculum",
+      "mandatoryForExam": false,
+      "id": "rd_subspecialty_rotation",
+      "kind": "rotation",
+      "label": "Rotational posting in sub-specialties",
+      "clause": "Training components — 2",
+      "quote": "Rotational posting in various sub-specialties."
+    },
+    {
+      "target": null,
+      "per": "course",
+      "source": "nmc_curriculum",
+      "mandatoryForExam": false,
+      "id": "rd_ug_teaching",
+      "kind": "academic",
+      "label": "Teaching and training of undergraduates and interns",
+      "match": {
+        "academicType": "ug_teaching"
+      },
+      "clause": "Training components — 6",
+      "quote": "The postgraduate students shall be required to participate in the teaching and training program of undergraduate students and interns.",
+      "note": "MD Radiodiagnosis writes 'program'; the other 2019-era guidelines write 'programme'. Quoted as printed."
+    },
+    {
+      "target": 1,
+      "per": "course",
+      "source": "nmc_curriculum",
+      "mandatoryForExam": true,
+      "id": "rd_poster",
+      "kind": "research",
+      "label": "One poster presentation",
+      "match": {
+        "subtype": "poster"
+      },
+      "clause": "Training components — 7",
+      "quote": "The postgraduate student would be required to present one poster presentation, to read one paper at a national/state conference and to submit one research paper which should be published or accepted for publication or sent for publication to a peer reviewed journal, during the period of his/her postgraduate studies so as to make him/her eligible to appear at the postgraduate degree examination."
+    },
+    {
+      "target": 1,
+      "per": "course",
+      "source": "nmc_curriculum",
+      "mandatoryForExam": true,
+      "id": "rd_conference_paper",
+      "kind": "research",
+      "label": "One paper read at a national/state conference",
+      "match": {
+        "subtype": "conference_paper"
+      },
+      "clause": "Training components — 7",
+      "quote": "…to read one paper at a national/state conference…"
+    },
+    {
+      "target": 1,
+      "per": "course",
+      "source": "nmc_curriculum",
+      "mandatoryForExam": true,
+      "id": "rd_publication",
+      "kind": "research",
+      "label": "One research paper submitted to a peer-reviewed journal",
+      "match": {
+        "subtype": "publication"
+      },
+      "clause": "Training components — 7",
+      "quote": "…to submit one research paper which should be published or accepted for publication or sent for publication to a peer reviewed journal…"
+    }
+  ],
+  "procedures": [],
+  "proceduresNote": "No procedure/study counts in the MD Radiodiagnosis guidelines.",
+  "disclaimer": "Requirements are traced to the NMC source named above. A requirement with target null is one the source mandates WITHOUT giving a number — it is counted, never scored against an invented target. This pack does not certify compliance; see NMC_PG_LOGBOOK_REQUIREMENTS.md."
+}

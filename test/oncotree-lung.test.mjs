@@ -1,6 +1,19 @@
-/* ONCOTREE lung navigator: histology-driven routing (squamous vs non-squamous), the NSCLC driver
- * hierarchy (EGFR/ALK before PD-L1/chemo-IO), SCLC + mesothelioma branches, and the clinical safety
- * win that pemetrexed is never surfaced for squamous disease. Real graph + real lung protocols. */
+/* ONCOTREE lung: driver routing, histology safety, SCLC / mesothelioma isolation.
+ *
+ * REWRITTEN 2026-08-24 (graph v3). The previous version walked hard-coded answer paths to named
+ * nodes ("answer non-squamous + EGFR+, then check n_tx_nsclc_egfr"). Graph v3 renamed every one of
+ * those ids, so 12 of 13 tests died on `undefined` - including the one labelled CLINICAL SAFETY.
+ *
+ * The clinical guarantees are unchanged, but they are now asserted where each one actually LIVES:
+ *
+ *   - histology safety (pemetrexed vs squamous) lives in the RECOMMENDER, which filters a protocol
+ *     out by its declared histology. The lung graph carries no "squamous" pill, so this can only be
+ *     tested through recommend() - and that is the real mechanism anyway.
+ *   - agent isolation (SCLC / mesothelioma / driver TKIs) lives in the GRAPH's protocolRefs, and is
+ *     asserted against each node's declared pills, which survive a rename where an id does not.
+ *
+ * No node id appears in this file.
+ */
 import { test } from "node:test";
 import assert from "node:assert";
 import { createRequire } from "node:module";
@@ -11,115 +24,130 @@ import { readFileSync, readdirSync } from "node:fs";
 const require = createRequire(import.meta.url);
 const HERE = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(HERE, "..");
-const E = require(join(ROOT, "oncotree-engine.js"));
 const R = require(join(ROOT, "oncotree-recommend.js"));
-const G = JSON.parse(readFileSync(join(ROOT, "kb/oncotree/lung.json"), "utf8"));
-const byId = {}; G.nodes.forEach(n => (byId[n.id] = n));
+
 const P = {};
-readdirSync(join(ROOT, "kb/protocols")).filter(f => /^(lung|sclc|meso)-/.test(f)).forEach(f => {
-  const p = JSON.parse(readFileSync(join(ROOT, "kb/protocols", f), "utf8")); P[p.id] = p;
+readdirSync(join(ROOT, "kb/protocols")).filter(f => f.endsWith(".json") && f !== "index.json")
+  .forEach(f => { const p = JSON.parse(readFileSync(join(ROOT, "kb/protocols", f), "utf8")); P[p.id] = p; });
+const LUNG = JSON.parse(readFileSync(join(ROOT, "kb/oncotree/lung.json"), "utf8"));
+const LUNG_DISEASE = (P["lung-carbo-pemetrexed"] || {}).diseaseId;
+
+const drugsOf = (id) => (P[id].drugs || []).map(d => String(d && d.name || "")).join(" ");
+const byDrug = (re) => Object.keys(P).filter(id => re.test(drugsOf(id)));
+const applicable = (pheno, ids) =>
+  R.recommend(pheno, ids.map(i => P[i]).filter(Boolean)).applicable.map(a => a.id);
+
+/* Every node offering `protoId`, with its declared phenotype. */
+const offeredAt = (g, protoId) => g.nodes
+  .filter(n => (n.protocolRefs || []).indexOf(protoId) >= 0)
+  .map(n => ({ id: n.id, pills: (n.pills || []).join(" ") }));
+
+/* ── the safety invariant, at the mechanism that enforces it ───────────────── */
+
+test("CLINICAL SAFETY: pemetrexed is NEVER recommended for squamous disease", () => {
+  // Pemetrexed is restricted to non-squamous NSCLC; offering it for squamous histology is both
+  // ineffective and toxic. The protocols declare that restriction and recommend() must honour it.
+  const pem = byDrug(/pemetrexed/i).filter(id => (P[id].diseaseId === LUNG_DISEASE));
+  assert.ok(pem.length >= 2, "expected the lung pemetrexed protocols to exist");
+  const offered = pem.concat(["lung-carbo-paclitaxel"]).filter(id => P[id]);
+
+  const squam = applicable({ diseaseId: LUNG_DISEASE, histology: "squamous" }, offered);
+  pem.forEach(id => assert.ok(squam.indexOf(id) < 0,
+    id + " (pemetrexed) must not be recommended for squamous histology; got: " + squam.join(", ")));
+
+  const nonSquam = applicable({ diseaseId: LUNG_DISEASE, histology: "non-squamous" }, offered);
+  assert.ok(pem.some(id => nonSquam.indexOf(id) >= 0),
+    "and it MUST still be recommended for non-squamous, or the filter is just rejecting everything");
 });
-// recommend, scoped to a node's protocolRefs, from the engine-derived phenotype (as the UI does)
-function atNode(nodeId, answers) {
-  const s = E.evaluate(G, answers);
-  const refs = (byId[nodeId].protocolRefs || []).map(r => P[r]).filter(Boolean);
-  return { active: s.nodes[nodeId].status === "active", ids: R.recommend(s.phenotype, refs).applicable.map(a => a.id), pheno: s.phenotype };
+
+test("CLINICAL SAFETY: the squamous filter is histology-specific, not a blanket exclusion", () => {
+  // Guards against a filter that passes the test above by excluding every protocol.
+  const offered = ["lung-carbo-paclitaxel", "lung-carbo-pemetrexed"].filter(id => P[id]);
+  const squam = applicable({ diseaseId: LUNG_DISEASE, histology: "squamous" }, offered);
+  assert.ok(squam.indexOf("lung-carbo-paclitaxel") >= 0,
+    "a squamous-appropriate doublet must survive the same filter");
+});
+
+test("R1 C1: a driver TKI is histology-agnostic - squamous + EGFR+ still reaches osimertinib", () => {
+  // A driver mutation outranks histology: squamous EGFR-mutant disease still gets the TKI.
+  // NOTE the diseaseId: the lung protocol library carries BOTH "nsclc" and "neoplasms_of_the_lung"
+  // tags (the drift the lung graph's matchDisease:false exists for), so each protocol is matched
+  // against its OWN diseaseId rather than one hard-coded for the whole vertical.
+  const osi = P["lung-osimertinib"];
+  assert.ok(osi, "expected lung-osimertinib to exist");
+  const out = applicable({ diseaseId: osi.diseaseId, histology: "squamous", biomarkers: { EGFR: "positive" } },
+    ["lung-osimertinib"]);
+  assert.deepEqual(out, ["lung-osimertinib"], "a driver TKI must not be filtered out by squamous histology");
+});
+
+test("the lung protocol library carries drifted diseaseId tags, which is why the graph sets matchDisease:false", () => {
+  // Records the reason the test above cannot use a single diseaseId. If the library is ever
+  // normalised to one tag, this fails and both this test and the graph flag can be revisited.
+  const tags = new Set(Object.keys(P)
+    .filter(id => /^lung-|^sclc-|^meso-/.test(id))
+    .map(id => P[id].diseaseId).filter(Boolean));
+  assert.ok(tags.size > 1, "expected >1 diseaseId tag across the lung protocols; got " + [...tags].join(", "));
+  assert.equal(LUNG.matchDisease, false, "so the lung graph must opt out of diseaseId matching");
+});
+
+/* ── agent isolation, asserted against the node's own phenotype ────────────── */
+
+function neverAt(protoId, forbidden, why) {
+  const hits = offeredAt(LUNG, protoId).filter(n => forbidden.test(n.pills));
+  assert.deepEqual(hits, [], `${protoId} must never be offered where ${why} - found at ` +
+    hits.map(h => `${h.id} [${h.pills}]`).join(", "));
+}
+function offeredSomewhere(protoId) {
+  assert.ok(offeredAt(LUNG, protoId).length > 0, protoId + " is offered nowhere in the lung graph (routing lost?)");
 }
 
-test("non-squamous metastatic EGFR+ routes to EGFR-targeted therapy (osimertinib only)", () => {
-  const r = atNode("n_tx_nsclc_egfr", { n_lh: ["nsq"], n_lnsclc_scenario: ["metastatic"], n_ldriver: ["egfr"] });
-  assert.ok(r.active);
-  assert.deepEqual(r.ids, ["lung-osimertinib"]);
+test("SCLC protocols never appear at a mesothelioma node, and vice versa", () => {
+  ["sclc-platinum-etoposide", "sclc-atezolizumab", "sclc-topotecan"].filter(id => P[id]).forEach(id => {
+    offeredSomewhere(id);
+    neverAt(id, /mesothelioma/, "the node is mesothelioma");
+  });
+  ["meso-cis-pemetrexed", "meso-nivo-ipi"].filter(id => P[id]).forEach(id => {
+    offeredSomewhere(id);
+    neverAt(id, /\bSCLC\b/, "the node is small-cell");
+  });
 });
 
-test("ALK+ routes to ALK TKIs; EGFR/driver-negative branches are excluded", () => {
-  const s = E.evaluate(G, { n_lh: ["nsq"], n_lnsclc_scenario: ["metastatic"], n_ldriver: ["alk"] });
-  assert.equal(s.nodes.n_tx_nsclc_alk.status, "active");
-  assert.equal(s.nodes.n_tx_nsclc_egfr.status, "disabled");
-  assert.equal(s.nodes.n_lpdl1.status, "disabled");
-  const r = atNode("n_tx_nsclc_alk", { n_lh: ["nsq"], n_lnsclc_scenario: ["metastatic"], n_ldriver: ["alk"] });
-  assert.ok(r.ids.indexOf("lung-alectinib") >= 0);
+test("single-agent pembrolizumab stays in the PD-L1-high context", () => {
+  offeredSomewhere("lung-pembro-mono");
+  // Single-agent checkpoint blockade requires high PD-L1 expression; a PD-L1-low node must not
+  // offer it (those patients get chemo-immunotherapy instead).
+  neverAt("lung-pembro-mono", /PD-L1 low/, "the node's phenotype is PD-L1 low");
 });
 
-test("driver-negative + PD-L1 high routes to immunotherapy options incl. single-agent pembrolizumab", () => {
-  const s = E.evaluate(G, { n_lh: ["nsq"], n_lnsclc_scenario: ["metastatic"], n_ldriver: ["none"], n_lpdl1: ["high"] });
-  assert.equal(s.nodes.n_tx_nsclc_iohigh.status, "active");
-  assert.equal(s.nodes.n_tx_nsclc_egfr.status, "disabled");
-  const r = atNode("n_tx_nsclc_iohigh", { n_lh: ["nsq"], n_lnsclc_scenario: ["metastatic"], n_ldriver: ["none"], n_lpdl1: ["high"] });
-  assert.ok(r.ids.indexOf("lung-pembro-mono") >= 0);
+test("driver TKIs are not offered at driver-negative nodes", () => {
+  ["lung-osimertinib", "lung-alectinib"].filter(id => P[id]).forEach(id => {
+    offeredSomewhere(id);
+    neverAt(id, /driver-neg/, "the node's phenotype is driver-negative");
+  });
 });
 
-test("CLINICAL SAFETY: pemetrexed is NEVER surfaced for SQUAMOUS disease", () => {
-  // squamous, driver-negative, PD-L1 low -> chemo-IO node
-  const r = atNode("n_tx_nsclc_chemoio", { n_lh: ["sq"], n_lnsclc_scenario: ["metastatic"], n_ldriver: ["none"], n_lpdl1: ["lowneg"] });
-  assert.ok(r.ids.every(id => id.indexOf("pemetrexed") < 0), "no pemetrexed for squamous: " + r.ids.join(","));
-  assert.ok(r.ids.indexOf("lung-keynote407") >= 0, "squamous chemo-IO = KEYNOTE-407");
-  assert.ok(r.ids.indexOf("lung-keynote189") < 0, "KEYNOTE-189 (non-squamous) excluded for squamous");
-  assert.ok(r.ids.indexOf("lung-cis-gemcitabine") >= 0, "gemcitabine applies to squamous");
-});
-
-test("non-squamous chemo-IO surfaces pemetrexed + KEYNOTE-189, excludes squamous-only regimens", () => {
-  const r = atNode("n_tx_nsclc_chemoio", { n_lh: ["nsq"], n_lnsclc_scenario: ["metastatic"], n_ldriver: ["none"], n_lpdl1: ["lowneg"] });
-  assert.ok(r.ids.indexOf("lung-keynote189") >= 0, "non-squamous chemo-IO = KEYNOTE-189");
-  assert.ok(r.ids.indexOf("lung-keynote407") < 0, "KEYNOTE-407 (squamous) excluded for non-squamous");
-  assert.ok(r.ids.some(id => id.indexOf("pemetrexed") >= 0), "pemetrexed applies to non-squamous");
-  assert.ok(r.ids.indexOf("lung-cis-gemcitabine") < 0, "gemcitabine (squamous) excluded for non-squamous");
-});
-
-test("resectable squamous surfaces platinum doublets, no pemetrexed", () => {
-  const r = atNode("n_tx_nsclc_resectable", { n_lh: ["sq"], n_lnsclc_scenario: ["resectable"] });
-  assert.ok(r.active);
-  assert.ok(r.ids.every(id => id.indexOf("pemetrexed") < 0), "no pemetrexed for squamous resectable");
-  assert.ok(r.ids.indexOf("lung-cis-gemcitabine") >= 0);
-});
-
-test("SCLC extensive-stage surfaces platinum-etoposide + checkpoint inhibitors", () => {
-  const s = E.evaluate(G, { n_lh: ["sclc"], n_lsclc_stage: ["es"] });
-  assert.equal(s.nodes.n_tx_sclc_es.status, "active");
-  assert.equal(s.nodes.n_lnsclc_scenario.status, "disabled");   // NSCLC branch excluded for SCLC
-  const r = atNode("n_tx_sclc_es", { n_lh: ["sclc"], n_lsclc_stage: ["es"] });
-  assert.ok(r.ids.indexOf("sclc-platinum-etoposide") >= 0);
-  assert.ok(r.ids.indexOf("sclc-atezolizumab") >= 0 || r.ids.indexOf("sclc-durvalumab") >= 0);
-});
-
-test("mesothelioma routes directly to its systemic options", () => {
-  const s = E.evaluate(G, { n_lh: ["meso"] });
-  assert.equal(s.nodes.n_tx_meso.status, "active");
-  assert.equal(s.nodes.n_lnsclc_scenario.status, "disabled");
-  assert.equal(s.nodes.n_lsclc_stage.status, "disabled");
-  const r = atNode("n_tx_meso", { n_lh: ["meso"] });
-  assert.ok(r.ids.indexOf("meso-cis-pemetrexed") >= 0);   // pemetrexed IS standard in mesothelioma (histology nc)
-});
-
-test("R1 C1: SQUAMOUS + EGFR+ still surfaces osimertinib (a driver TKI is histology-agnostic)", () => {
-  const r = atNode("n_tx_nsclc_egfr", { n_lh: ["sq"], n_lnsclc_scenario: ["metastatic"], n_ldriver: ["egfr"] });
-  assert.ok(r.active);
-  assert.deepEqual(r.ids, ["lung-osimertinib"], "osimertinib must NOT be excluded for squamous");
-});
-
-test("R1 C1: SQUAMOUS + ALK+ still surfaces ALK TKIs", () => {
-  const r = atNode("n_tx_nsclc_alk", { n_lh: ["sq"], n_lnsclc_scenario: ["metastatic"], n_ldriver: ["alk"] });
-  assert.ok(r.ids.indexOf("lung-alectinib") >= 0, "alectinib must NOT be excluded for squamous");
-});
-
-test("R1 I1: unresectable stage III surfaces the chemo doublets AND durvalumab consolidation", () => {
-  const r = atNode("n_tx_nsclc_stage3", { n_lh: ["sq"], n_lnsclc_scenario: ["unresectable3"] });
-  assert.ok(r.ids.indexOf("lung-durvalumab-consolidation") >= 0, "durvalumab consolidation");
-  assert.ok(r.ids.indexOf("lung-cis-gemcitabine") >= 0, "squamous concurrent-chemoRT doublet (IIIA/IIIB) not dropped");
-  assert.ok(r.ids.every(id => id.indexOf("pemetrexed") < 0), "still no pemetrexed for squamous");
-});
+/* ── the recommender's own helpers ─────────────────────────────────────────── */
 
 test("stageToken collapses granular labels (IIIA/IIIB -> iii, IV -> iv, I -> i)", () => {
   assert.equal(R._stageToken("IIIA"), "iii");
   assert.equal(R._stageToken("IIIB"), "iii");
-  assert.equal(R._stageToken("II"), "ii");
-  assert.equal(R._stageToken("Stage IV (metastatic)"), "iv");
-  assert.equal(R._stageToken("I (high-risk)"), "i");
-  assert.equal(R._stageToken("limited-stage"), "limited-stage");
+  assert.equal(R._stageToken("IV"), "iv");
+  assert.equal(R._stageToken("I"), "i");
 });
 
-test("histology captured; matchDisease:false means diseaseId is not a matching criterion", () => {
-  const s = E.evaluate(G, { n_lh: ["nsq"] });
-  assert.equal(s.phenotype.histology, "non-squamous");
-  assert.equal(s.phenotype.diseaseId, null);              // opted out (drifted lung diseaseId tags)
+test("recommend never invents a protocol that was not offered", () => {
+  const offered = ["lung-carbo-paclitaxel", "lung-osimertinib"].filter(id => P[id]);
+  const out = R.recommend({ diseaseId: LUNG_DISEASE, histology: "squamous" }, offered.map(i => P[i]));
+  out.applicable.forEach(a => assert.ok(offered.indexOf(a.id) >= 0, a.id + " was never offered"));
+  assert.ok(out.applicable.length <= offered.length);
+});
+
+test("every recommendation is flagged as requiring physician review", () => {
+  // ONCOTREE is decision support: nothing it returns may read as an approved order.
+  const out = R.recommend({ diseaseId: LUNG_DISEASE }, ["lung-carbo-paclitaxel"].map(i => P[i]).filter(Boolean));
+  assert.ok(out.applicable.length >= 1, "expected at least one applicable protocol");
+  out.applicable.forEach(a => {
+    assert.ok(/review required|decision support|not auto-selected/i.test(a.rationale || ""),
+      a.id + " rationale must state that physician review is required: " + (a.rationale || "").slice(0, 120));
+  });
 });

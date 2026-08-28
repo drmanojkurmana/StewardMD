@@ -1,0 +1,1050 @@
+{
+  "id": "emergency-medicine",
+  "programmeType": "PG",
+  "degree": "MD",
+  "specialty": "Emergency Medicine",
+  "durationMonths": 36,
+  "version": "2026-08-27",
+  "extends": [
+    "_pgmer-common"
+  ],
+  "source": {
+    "title": "NMC MD Emergency Medicine Curriculum V6 (revised)",
+    "publisher": "National Medical Commission",
+    "year": 2024,
+    "url": "https://www.nmc.org.in/wp-content/uploads/2024/10/NMC%20MD%20EM%20CURRICULUM-V6%20with%20logo%20revised-1.pdf",
+    "retrieved": "2026-08-27"
+  },
+  "requirements": [
+    {
+      "target": 1,
+      "per": "week",
+      "source": "nmc_curriculum",
+      "mandatoryForExam": false,
+      "id": "em_elogbook",
+      "kind": "meta",
+      "label": "Dynamic e-log book, updated weekly, authenticated monthly by the guide",
+      "engine": "weeklyCadence",
+      "clause": "LOG BOOK",
+      "quote": "Post-graduate students of Emergency Medicine shall maintain a dynamic e-log book which needs to be updated on a weekly basis about the work being carried out by them and the training programme undergone during the period of training. It shall be the duty of the Post-graduate guide imparting the training to assess and authenticate monthly the record (e-Log) books."
+    },
+    {
+      "target": 1,
+      "per": "month",
+      "source": "nmc_curriculum",
+      "mandatoryForExam": false,
+      "id": "em_monthly_proforma",
+      "kind": "meta",
+      "label": "Monthly observation proforma captured in the logbook",
+      "engine": "assessment:wpba_shift",
+      "clause": "Monthly observation Proforma",
+      "quote": "Residents' medical knowledge, patient care, procedural & academic skills, interpersonal skills, professionalism, self-directed learning and ability to practice in the system will be assessed continuously on the ED floor. Attendance (number of authorized leaves and number of absences) and reporting time at work will be recorded. Directly observed procedural skills will be assessed (Performa in Annexure I). A Shift based work placed based assessment will be done daily (Performa in Annexure II). Workplace based assessment of clinical skills will be assessed (Performa in Annexure III)."
+    },
+    {
+      "target": 1,
+      "per": "day",
+      "source": "nmc_curriculum",
+      "mandatoryForExam": false,
+      "id": "em_shift_wpba",
+      "kind": "meta",
+      "label": "Shift-based workplace assessment, daily",
+      "engine": "assessment:wpba_shift",
+      "clause": "Monthly observation Proforma",
+      "quote": "A Shift based work placed based assessment will be done daily (Performa in Annexure II)."
+    },
+    {
+      "target": null,
+      "per": "course",
+      "source": "nmc_curriculum",
+      "mandatoryForExam": false,
+      "id": "em_academic_journal_club",
+      "kind": "academic",
+      "label": "Journal club presentation",
+      "match": {
+        "academicType": "journal_club"
+      },
+      "clause": "Academic activities (consolidated)",
+      "quote": "Journal Club Presentation performance",
+      "note": "Printed as a bullet under: Academic activities (consolidated –within department/peripheral posting/outside department/outside institution)"
+    },
+    {
+      "target": null,
+      "per": "course",
+      "source": "nmc_curriculum",
+      "mandatoryForExam": false,
+      "id": "em_academic_thesis_review",
+      "kind": "academic",
+      "label": "Thesis review presentation",
+      "match": {
+        "academicType": "thesis_presentation"
+      },
+      "clause": "Academic activities (consolidated)",
+      "quote": "Thesis review Presentation & performance",
+      "note": "Printed as a bullet under: Academic activities (consolidated –within department/peripheral posting/outside department/outside institution)"
+    },
+    {
+      "target": null,
+      "per": "course",
+      "source": "nmc_curriculum",
+      "mandatoryForExam": false,
+      "id": "em_academic_seminar",
+      "kind": "academic",
+      "label": "Seminar presentation",
+      "match": {
+        "academicType": "seminar"
+      },
+      "clause": "Academic activities (consolidated)",
+      "quote": "Seminar Presentation",
+      "note": "Printed as a bullet under: Academic activities (consolidated –within department/peripheral posting/outside department/outside institution)"
+    },
+    {
+      "target": null,
+      "per": "course",
+      "source": "nmc_curriculum",
+      "mandatoryForExam": false,
+      "id": "em_academic_conference",
+      "kind": "academic",
+      "label": "Presentation in conferences & CME",
+      "match": {
+        "academicType": "cme_conference"
+      },
+      "clause": "Academic activities (consolidated)",
+      "quote": "Presentation in conferences & CME",
+      "note": "Printed as a bullet under: Academic activities (consolidated –within department/peripheral posting/outside department/outside institution)"
+    },
+    {
+      "target": null,
+      "per": "course",
+      "source": "nmc_curriculum",
+      "mandatoryForExam": false,
+      "id": "em_academic_mm",
+      "kind": "academic",
+      "label": "Mortality & morbidity audit",
+      "match": {
+        "academicType": "mortality_morbidity"
+      },
+      "clause": "Academic activities (consolidated)",
+      "quote": "Mortality & Morbidity audit",
+      "note": "Printed as a bullet under: Academic activities (consolidated –within department/peripheral posting/outside department/outside institution)"
+    }
+  ],
+  "procedures": [
+    {
+      "id": "em_airway_basic",
+      "label": "Basic airway management (opening airway by various methods)",
+      "target": 100,
+      "per": "course",
+      "source": "nmc_curriculum",
+      "clause": "Procedural skills (Minimum number of procedures that a candidate needs to perform are:)",
+      "quote": "Basic airway management (opening airway by various methods) (100)"
+    },
+    {
+      "id": "em_bmv",
+      "label": "Bag mask ventilation",
+      "target": 100,
+      "per": "course",
+      "source": "nmc_curriculum",
+      "clause": "Procedural skills (Minimum number of procedures that a candidate needs to perform are:)",
+      "quote": "Bag mask ventilation (100)"
+    },
+    {
+      "id": "em_airway_advanced",
+      "label": "Advanced airway management",
+      "target": 25,
+      "per": "course",
+      "source": "nmc_curriculum",
+      "clause": "Procedural skills (Minimum number of procedures that a candidate needs to perform are:)",
+      "quote": "Advanced airway management (25)"
+    },
+    {
+      "id": "em_intubation",
+      "label": "Tracheal intubation",
+      "target": 100,
+      "per": "course",
+      "source": "nmc_curriculum",
+      "clause": "Procedural skills (Minimum number of procedures that a candidate needs to perform are:)",
+      "quote": "Tracheal intubation (100)"
+    },
+    {
+      "id": "em_airway_alternative",
+      "label": "Alternative airway procedures (non-surgical and surgical)",
+      "target": 25,
+      "per": "course",
+      "source": "nmc_curriculum",
+      "clause": "Procedural skills (Minimum number of procedures that a candidate needs to perform are:)",
+      "quote": "Alternative airway procedures (non-surgical and surgical) (25)"
+    },
+    {
+      "id": "em_airway_paediatric",
+      "label": "Paediatric airway management",
+      "target": 25,
+      "per": "course",
+      "source": "nmc_curriculum",
+      "clause": "Procedural skills (Minimum number of procedures that a candidate needs to perform are:)",
+      "quote": "Paediatric airway management (25)"
+    },
+    {
+      "id": "em_airway_neonatal",
+      "label": "Neonatal airway management",
+      "target": 5,
+      "per": "course",
+      "source": "nmc_curriculum",
+      "clause": "Procedural skills (Minimum number of procedures that a candidate needs to perform are:)",
+      "quote": "Neonatal airway management (5)"
+    },
+    {
+      "id": "em_cpr_basic",
+      "label": "Cardiopulmonary resuscitation — Basic",
+      "target": 50,
+      "per": "course",
+      "source": "nmc_curriculum",
+      "clause": "Procedural skills (Minimum number of procedures that a candidate needs to perform are:)",
+      "quote": "Cardiopulmonary resuscitation — Basic (50)"
+    },
+    {
+      "id": "em_cpr_advanced",
+      "label": "Cardiopulmonary resuscitation — Advanced",
+      "target": 50,
+      "per": "course",
+      "source": "nmc_curriculum",
+      "clause": "Procedural skills (Minimum number of procedures that a candidate needs to perform are:)",
+      "quote": "Cardiopulmonary resuscitation — Advanced (50)"
+    },
+    {
+      "id": "em_cardioversion",
+      "label": "Cardioversion / defibrillation",
+      "target": 40,
+      "per": "course",
+      "source": "nmc_curriculum",
+      "clause": "Procedural skills (Minimum number of procedures that a candidate needs to perform are:)",
+      "quote": "Cardioversion / defibrillation (40)"
+    },
+    {
+      "id": "em_pacing",
+      "label": "Temporary cardiac pacing",
+      "target": 10,
+      "per": "course",
+      "source": "nmc_curriculum",
+      "clause": "Procedural skills (Minimum number of procedures that a candidate needs to perform are:)",
+      "quote": "Temporary cardiac pacing (10)"
+    },
+    {
+      "id": "em_ecg",
+      "label": "ECG interpretation",
+      "target": 250,
+      "per": "course",
+      "source": "nmc_curriculum",
+      "clause": "Procedural skills (Minimum number of procedures that a candidate needs to perform are:)",
+      "quote": "ECG interpretation (250)"
+    },
+    {
+      "id": "em_ventilator",
+      "label": "Ventilator management",
+      "target": 100,
+      "per": "course",
+      "source": "nmc_curriculum",
+      "clause": "Procedural skills (Minimum number of procedures that a candidate needs to perform are:)",
+      "quote": "Ventilator management (100)"
+    },
+    {
+      "id": "em_atls",
+      "label": "Basic trauma management and Advanced Trauma Life Support",
+      "target": 100,
+      "per": "course",
+      "source": "nmc_curriculum",
+      "clause": "Procedural skills (Minimum number of procedures that a candidate needs to perform are:)",
+      "quote": "Basic trauma management and Advanced Trauma Life Support (100)"
+    },
+    {
+      "id": "em_icd",
+      "label": "Intercostal chest tube",
+      "target": 10,
+      "per": "course",
+      "source": "nmc_curriculum",
+      "clause": "Procedural skills (Minimum number of procedures that a candidate needs to perform are:)",
+      "quote": "Intercostal chest tube (10)"
+    },
+    {
+      "id": "em_needle_thoracentesis",
+      "label": "Needle thoracentesis",
+      "target": 10,
+      "per": "course",
+      "source": "nmc_curriculum",
+      "clause": "Procedural skills (Minimum number of procedures that a candidate needs to perform are:)",
+      "quote": "Needle thoracentesis (10)"
+    },
+    {
+      "id": "em_ed_thoracotomy",
+      "label": "ED thoracotomy",
+      "target": 1,
+      "per": "course",
+      "source": "nmc_curriculum",
+      "clause": "Procedural skills (Minimum number of procedures that a candidate needs to perform are:)",
+      "quote": "ED thoracotomy (1)"
+    },
+    {
+      "id": "em_cricothyroidotomy",
+      "label": "Surgical and needle cricothyroidotomy",
+      "target": 5,
+      "per": "course",
+      "source": "nmc_curriculum",
+      "clause": "Procedural skills (Minimum number of procedures that a candidate needs to perform are:)",
+      "quote": "Surgical and needle cricothyroidotomy (5)"
+    },
+    {
+      "id": "em_suprapubic_cath",
+      "label": "Suprapubic catheterization",
+      "target": 4,
+      "per": "course",
+      "source": "nmc_curriculum",
+      "clause": "Procedural skills (Minimum number of procedures that a candidate needs to perform are:)",
+      "quote": "Suprapubic catheterization (4)"
+    },
+    {
+      "id": "em_cvc",
+      "label": "Central venous access",
+      "target": 25,
+      "per": "course",
+      "source": "nmc_curriculum",
+      "clause": "Procedural skills (Minimum number of procedures that a candidate needs to perform are:)",
+      "quote": "Central venous access (25)"
+    },
+    {
+      "id": "em_suture",
+      "label": "Suture technique",
+      "target": 100,
+      "per": "course",
+      "source": "nmc_curriculum",
+      "clause": "Procedural skills (Minimum number of procedures that a candidate needs to perform are:)",
+      "quote": "Suture technique (100)"
+    },
+    {
+      "id": "em_arterial_puncture",
+      "label": "Arterial puncture",
+      "target": 100,
+      "per": "course",
+      "source": "nmc_curriculum",
+      "clause": "Procedural skills (Minimum number of procedures that a candidate needs to perform are:)",
+      "quote": "Arterial puncture (100)"
+    },
+    {
+      "id": "em_nasal_packing_trauma",
+      "label": "Nasal packing",
+      "target": 10,
+      "per": "course",
+      "source": "nmc_curriculum",
+      "clause": "Procedural skills (Minimum number of procedures that a candidate needs to perform are:)",
+      "quote": "Nasal packing (10)"
+    },
+    {
+      "id": "em_fb_removal",
+      "label": "Foreign body removal",
+      "target": 10,
+      "per": "course",
+      "source": "nmc_curriculum",
+      "clause": "Procedural skills (Minimum number of procedures that a candidate needs to perform are:)",
+      "quote": "Foreign body removal (10)"
+    },
+    {
+      "id": "em_foley",
+      "label": "Foley's catheterization",
+      "target": 50,
+      "per": "course",
+      "source": "nmc_curriculum",
+      "clause": "Procedural skills (Minimum number of procedures that a candidate needs to perform are:)",
+      "quote": "Foley's catheterization (50)"
+    },
+    {
+      "id": "em_invasive_vent",
+      "label": "Invasive ventilation principles",
+      "target": null,
+      "per": "course",
+      "source": "nmc_curriculum",
+      "clause": "Procedural skills (Minimum number of procedures that a candidate needs to perform are:)",
+      "quote": "Listed under 'Procedural skills' with no minimum number stated."
+    },
+    {
+      "id": "em_thoracentesis",
+      "label": "Thoracentesis",
+      "target": null,
+      "per": "course",
+      "source": "nmc_curriculum",
+      "clause": "Procedural skills (Minimum number of procedures that a candidate needs to perform are:)",
+      "quote": "Listed under 'Procedural skills' with no minimum number stated."
+    },
+    {
+      "id": "em_thoracostomy",
+      "label": "Needle / tube thoracostomy",
+      "target": null,
+      "per": "course",
+      "source": "nmc_curriculum",
+      "clause": "Procedural skills (Minimum number of procedures that a candidate needs to perform are:)",
+      "quote": "Listed under 'Procedural skills' with no minimum number stated."
+    },
+    {
+      "id": "em_cardiac_compression",
+      "label": "Cardiac compression",
+      "target": 100,
+      "per": "course",
+      "source": "nmc_curriculum",
+      "clause": "Procedural skills (Minimum number of procedures that a candidate needs to perform are:)",
+      "quote": "Cardiac compression (100)"
+    },
+    {
+      "id": "em_io_access",
+      "label": "Intra-osseous access",
+      "target": 10,
+      "per": "course",
+      "source": "nmc_curriculum",
+      "clause": "Procedural skills (Minimum number of procedures that a candidate needs to perform are:)",
+      "quote": "Intra-osseous access (10)"
+    },
+    {
+      "id": "em_pericardiocentesis",
+      "label": "Pericardiocentesis",
+      "target": 10,
+      "per": "course",
+      "source": "nmc_curriculum",
+      "clause": "Procedural skills (Minimum number of procedures that a candidate needs to perform are:)",
+      "quote": "Pericardiocentesis (10)"
+    },
+    {
+      "id": "em_gastric_lavage",
+      "label": "Gastric lavage",
+      "target": 10,
+      "per": "course",
+      "source": "nmc_curriculum",
+      "clause": "Procedural skills (Minimum number of procedures that a candidate needs to perform are:)",
+      "quote": "Gastric lavage (10)"
+    },
+    {
+      "id": "em_skin_eye_decon",
+      "label": "Skin / eye decontamination",
+      "target": null,
+      "per": "course",
+      "source": "nmc_curriculum",
+      "clause": "Procedural skills (Minimum number of procedures that a candidate needs to perform are:)",
+      "quote": "Listed under 'Procedural skills' with no minimum number stated."
+    },
+    {
+      "id": "em_paracentesis",
+      "label": "Paracentesis",
+      "target": 25,
+      "per": "course",
+      "source": "nmc_curriculum",
+      "clause": "Procedural skills (Minimum number of procedures that a candidate needs to perform are:)",
+      "quote": "Paracentesis (25)"
+    },
+    {
+      "id": "em_lumbar_puncture",
+      "label": "Lumbar puncture",
+      "target": 10,
+      "per": "course",
+      "source": "nmc_curriculum",
+      "clause": "Procedural skills (Minimum number of procedures that a candidate needs to perform are:)",
+      "quote": "Lumbar puncture (10)"
+    },
+    {
+      "id": "em_wound_prep",
+      "label": "Wound preparation",
+      "target": 50,
+      "per": "course",
+      "source": "nmc_curriculum",
+      "clause": "Procedural skills (Minimum number of procedures that a candidate needs to perform are:)",
+      "quote": "Wound preparation (50)"
+    },
+    {
+      "id": "em_wound_closure",
+      "label": "Wound closure techniques",
+      "target": 50,
+      "per": "course",
+      "source": "nmc_curriculum",
+      "clause": "Procedural skills (Minimum number of procedures that a candidate needs to perform are:)",
+      "quote": "Wound closure techniques (50)"
+    },
+    {
+      "id": "em_debridement",
+      "label": "Debridement",
+      "target": 25,
+      "per": "course",
+      "source": "nmc_curriculum",
+      "clause": "Procedural skills (Minimum number of procedures that a candidate needs to perform are:)",
+      "quote": "Debridement (25)"
+    },
+    {
+      "id": "em_dressing",
+      "label": "Dressing techniques",
+      "target": 50,
+      "per": "course",
+      "source": "nmc_curriculum",
+      "clause": "Procedural skills (Minimum number of procedures that a candidate needs to perform are:)",
+      "quote": "Dressing techniques (50)"
+    },
+    {
+      "id": "em_wound_fb",
+      "label": "Removal of foreign bodies (wound)",
+      "target": 10,
+      "per": "course",
+      "source": "nmc_curriculum",
+      "clause": "Procedural skills (Minimum number of procedures that a candidate needs to perform are:)",
+      "quote": "Removal of foreign bodies (wound) (10)"
+    },
+    {
+      "id": "em_splinting",
+      "label": "Splinting / immobilization",
+      "target": 50,
+      "per": "course",
+      "source": "nmc_curriculum",
+      "clause": "Procedural skills (Minimum number of procedures that a candidate needs to perform are:)",
+      "quote": "Splinting / immobilization (50)"
+    },
+    {
+      "id": "em_spinal_immobilisation",
+      "label": "Spinal immobilization",
+      "target": 50,
+      "per": "course",
+      "source": "nmc_curriculum",
+      "clause": "Procedural skills (Minimum number of procedures that a candidate needs to perform are:)",
+      "quote": "Spinal immobilization (50)"
+    },
+    {
+      "id": "em_logroll",
+      "label": "Logrolling",
+      "target": 50,
+      "per": "course",
+      "source": "nmc_curriculum",
+      "clause": "Procedural skills (Minimum number of procedures that a candidate needs to perform are:)",
+      "quote": "Logrolling (50)"
+    },
+    {
+      "id": "em_helmet_removal",
+      "label": "Helmet removal",
+      "target": 10,
+      "per": "course",
+      "source": "nmc_curriculum",
+      "clause": "Procedural skills (Minimum number of procedures that a candidate needs to perform are:)",
+      "quote": "Helmet removal (10)"
+    },
+    {
+      "id": "em_fasciotomy",
+      "label": "Fasciotomy",
+      "target": null,
+      "per": "course",
+      "source": "nmc_curriculum",
+      "clause": "Procedural skills (Minimum number of procedures that a candidate needs to perform are:)",
+      "quote": "Listed under 'Procedural skills' with no minimum number stated."
+    },
+    {
+      "id": "em_dislocation_reduction",
+      "label": "Reduction of dislocations",
+      "target": 20,
+      "per": "course",
+      "source": "nmc_curriculum",
+      "clause": "Procedural skills (Minimum number of procedures that a candidate needs to perform are:)",
+      "quote": "Reduction of dislocations (20)"
+    },
+    {
+      "id": "em_traction_splint",
+      "label": "Traction splints",
+      "target": 10,
+      "per": "course",
+      "source": "nmc_curriculum",
+      "clause": "Procedural skills (Minimum number of procedures that a candidate needs to perform are:)",
+      "quote": "Traction splints (10)"
+    },
+    {
+      "id": "em_plaster",
+      "label": "Plaster techniques for various fractures",
+      "target": 25,
+      "per": "course",
+      "source": "nmc_curriculum",
+      "clause": "Procedural skills (Minimum number of procedures that a candidate needs to perform are:)",
+      "quote": "Plaster techniques for various fractures (25)"
+    },
+    {
+      "id": "em_joint_aspiration",
+      "label": "Joint aspiration",
+      "target": 10,
+      "per": "course",
+      "source": "nmc_curriculum",
+      "clause": "Procedural skills (Minimum number of procedures that a candidate needs to perform are:)",
+      "quote": "Joint aspiration (10)"
+    },
+    {
+      "id": "em_cervical_collar",
+      "label": "Cervical collar application",
+      "target": 50,
+      "per": "course",
+      "source": "nmc_curriculum",
+      "clause": "Procedural skills (Minimum number of procedures that a candidate needs to perform are:)",
+      "quote": "Cervical collar application (50)"
+    },
+    {
+      "id": "em_pelvic_stabilisation",
+      "label": "Pelvic stabilization techniques",
+      "target": 2,
+      "per": "course",
+      "source": "nmc_curriculum",
+      "clause": "Procedural skills (Minimum number of procedures that a candidate needs to perform are:)",
+      "quote": "Pelvic stabilization techniques (2)"
+    },
+    {
+      "id": "em_sedation",
+      "label": "Local and regional anaesthesia: conscious sedation and analgesia",
+      "target": 50,
+      "per": "course",
+      "source": "nmc_curriculum",
+      "clause": "Procedural skills (Minimum number of procedures that a candidate needs to perform are:)",
+      "quote": "Local and regional anaesthesia: conscious sedation and analgesia (50)"
+    },
+    {
+      "id": "em_indirect_laryngoscopy",
+      "label": "Indirect laryngoscopy",
+      "target": 10,
+      "per": "course",
+      "source": "nmc_curriculum",
+      "clause": "Procedural skills (Minimum number of procedures that a candidate needs to perform are:)",
+      "quote": "Indirect laryngoscopy (10)"
+    },
+    {
+      "id": "em_nasal_packing_ent",
+      "label": "Nasal packing (ENT)",
+      "target": 10,
+      "per": "course",
+      "source": "nmc_curriculum",
+      "clause": "Procedural skills (Minimum number of procedures that a candidate needs to perform are:)",
+      "quote": "Nasal packing (ENT) (10)"
+    },
+    {
+      "id": "em_ent_fb",
+      "label": "Removal of foreign bodies (ENT)",
+      "target": 10,
+      "per": "course",
+      "source": "nmc_curriculum",
+      "clause": "Procedural skills (Minimum number of procedures that a candidate needs to perform are:)",
+      "quote": "Removal of foreign bodies (ENT) (10)"
+    },
+    {
+      "id": "em_tracheostomy_trouble",
+      "label": "Troubleshooting tracheostomy tube problems",
+      "target": 5,
+      "per": "course",
+      "source": "nmc_curriculum",
+      "clause": "Procedural skills (Minimum number of procedures that a candidate needs to perform are:)",
+      "quote": "Troubleshooting tracheostomy tube problems (5)"
+    },
+    {
+      "id": "em_dental_anaesthesia",
+      "label": "Dental anaesthesia",
+      "target": 4,
+      "per": "course",
+      "source": "nmc_curriculum",
+      "clause": "Procedural skills (Minimum number of procedures that a candidate needs to perform are:)",
+      "quote": "Dental anaesthesia (4)"
+    },
+    {
+      "id": "em_dental_socket_suture",
+      "label": "Dental socket suture",
+      "target": 4,
+      "per": "course",
+      "source": "nmc_curriculum",
+      "clause": "Procedural skills (Minimum number of procedures that a candidate needs to perform are:)",
+      "quote": "Dental socket suture (4)"
+    },
+    {
+      "id": "em_slit_lamp",
+      "label": "Slit lamp",
+      "target": 20,
+      "per": "course",
+      "source": "nmc_curriculum",
+      "clause": "Procedural skills (Minimum number of procedures that a candidate needs to perform are:)",
+      "quote": "Slit lamp (20)"
+    },
+    {
+      "id": "em_ocular_fb",
+      "label": "Ocular foreign body removal",
+      "target": 4,
+      "per": "course",
+      "source": "nmc_curriculum",
+      "clause": "Procedural skills (Minimum number of procedures that a candidate needs to perform are:)",
+      "quote": "Ocular foreign body removal (4)"
+    },
+    {
+      "id": "em_transport_intra",
+      "label": "Intra-hospital transportation of patients",
+      "target": 25,
+      "per": "course",
+      "source": "nmc_curriculum",
+      "clause": "Procedural skills (Minimum number of procedures that a candidate needs to perform are:)",
+      "quote": "Intra-hospital transportation of patients (25)"
+    },
+    {
+      "id": "em_transport_inter",
+      "label": "Inter-hospital transportation of patients",
+      "target": 10,
+      "per": "course",
+      "source": "nmc_curriculum",
+      "clause": "Procedural skills (Minimum number of procedures that a candidate needs to perform are:)",
+      "quote": "Inter-hospital transportation of patients (10)"
+    },
+    {
+      "id": "em_comm_patients",
+      "label": "Communication skills — patients and relatives",
+      "target": 50,
+      "per": "course",
+      "source": "nmc_curriculum",
+      "clause": "Procedural skills (Minimum number of procedures that a candidate needs to perform are:)",
+      "quote": "Communication skills — patients and relatives (50)"
+    },
+    {
+      "id": "em_comm_colleagues",
+      "label": "Communication skills — colleagues and other personnel",
+      "target": 50,
+      "per": "course",
+      "source": "nmc_curriculum",
+      "clause": "Procedural skills (Minimum number of procedures that a candidate needs to perform are:)",
+      "quote": "Communication skills — colleagues and other personnel (50)"
+    },
+    {
+      "id": "em_fast",
+      "label": "FAST / E-FAST",
+      "target": 50,
+      "per": "course",
+      "source": "nmc_curriculum",
+      "clause": "Procedural skills (Minimum number of procedures that a candidate needs to perform are:)",
+      "quote": "FAST / E-FAST (50)"
+    },
+    {
+      "id": "em_focused_echo",
+      "label": "Focused ECHO",
+      "target": 50,
+      "per": "course",
+      "source": "nmc_curriculum",
+      "clause": "Procedural skills (Minimum number of procedures that a candidate needs to perform are:)",
+      "quote": "Focused ECHO (50)"
+    },
+    {
+      "id": "em_airway_us",
+      "label": "Airway ultrasound",
+      "target": 25,
+      "per": "course",
+      "source": "nmc_curriculum",
+      "clause": "Procedural skills (Minimum number of procedures that a candidate needs to perform are:)",
+      "quote": "Airway ultrasound (25)"
+    },
+    {
+      "id": "em_shock_us",
+      "label": "Shock assessment ultrasound",
+      "target": 50,
+      "per": "course",
+      "source": "nmc_curriculum",
+      "clause": "Procedural skills (Minimum number of procedures that a candidate needs to perform are:)",
+      "quote": "Shock assessment ultrasound (50)"
+    },
+    {
+      "id": "em_lung_us",
+      "label": "Pulmonary ultrasound",
+      "target": 50,
+      "per": "course",
+      "source": "nmc_curriculum",
+      "clause": "Procedural skills (Minimum number of procedures that a candidate needs to perform are:)",
+      "quote": "Pulmonary ultrasound (50)"
+    },
+    {
+      "id": "em_lateral_canthotomy",
+      "label": "Lateral Canthotomy",
+      "target": 1,
+      "per": "course",
+      "source": "nmc_curriculum",
+      "clause": "Procedural skills (Minimum number of procedures that a candidate needs to perform are:)",
+      "quote": "Lateral Canthotomy (1)"
+    },
+    {
+      "id": "em_iop",
+      "label": "IOP measurement",
+      "target": 5,
+      "per": "course",
+      "source": "nmc_curriculum",
+      "clause": "Procedural skills (Minimum number of procedures that a candidate needs to perform are:)",
+      "quote": "IOP measurement (5)"
+    },
+    {
+      "id": "em_delivery",
+      "label": "Delivery",
+      "target": 10,
+      "per": "course",
+      "source": "nmc_curriculum",
+      "clause": "Procedural skills (Minimum number of procedures that a candidate needs to perform are:)",
+      "quote": "Delivery (10)"
+    },
+    {
+      "id": "em_speculum",
+      "label": "Speculum examination",
+      "target": 10,
+      "per": "course",
+      "source": "nmc_curriculum",
+      "clause": "Procedural skills (Minimum number of procedures that a candidate needs to perform are:)",
+      "quote": "Speculum examination (10)"
+    },
+    {
+      "id": "em_perimortem_caesarean",
+      "label": "Perimortem Caesarean section",
+      "target": null,
+      "per": "course",
+      "source": "nmc_curriculum",
+      "clause": "Procedural skills (Minimum number of procedures that a candidate needs to perform are:)",
+      "quote": "Listed under 'Procedural skills' with no minimum number stated."
+    },
+    {
+      "id": "em_paraphimosis",
+      "label": "Reducing paraphimosis",
+      "target": 2,
+      "per": "course",
+      "source": "nmc_curriculum",
+      "clause": "Procedural skills (Minimum number of procedures that a candidate needs to perform are:)",
+      "quote": "Reducing paraphimosis (2)"
+    },
+    {
+      "id": "em_ng_tube",
+      "label": "Nasogastric tube insertion",
+      "target": 100,
+      "per": "course",
+      "source": "nmc_curriculum",
+      "clause": "Procedural skills (Minimum number of procedures that a candidate needs to perform are:)",
+      "quote": "Nasogastric tube insertion (100)"
+    },
+    {
+      "id": "em_abscess",
+      "label": "Incision and drainage of abscess",
+      "target": 20,
+      "per": "course",
+      "source": "nmc_curriculum",
+      "clause": "Procedural skills (Minimum number of procedures that a candidate needs to perform are:)",
+      "quote": "Incision and drainage of abscess (20)"
+    },
+    {
+      "id": "em_nerve_block",
+      "label": "Nerve blocks",
+      "target": 20,
+      "per": "course",
+      "source": "nmc_curriculum",
+      "clause": "Procedural skills (Minimum number of procedures that a candidate needs to perform are:)",
+      "quote": "Nerve blocks (20)"
+    },
+    {
+      "id": "em_testis_detorsion",
+      "label": "Detorsion of torsion of testis",
+      "target": 2,
+      "per": "course",
+      "source": "nmc_curriculum",
+      "clause": "Procedural skills (Minimum number of procedures that a candidate needs to perform are:)",
+      "quote": "Detorsion of torsion of testis (2)"
+    },
+    {
+      "id": "em_abdo_renal_pocus",
+      "label": "Abdominal and Renal POCUS",
+      "target": 50,
+      "per": "course",
+      "source": "nmc_curriculum",
+      "clause": "Procedural skills (Minimum number of procedures that a candidate needs to perform are:)",
+      "quote": "Abdominal and Renal POCUS (50)"
+    },
+    {
+      "id": "em_soft_tissue_us",
+      "label": "Soft tissue and skin ultrasound",
+      "target": 25,
+      "per": "course",
+      "source": "nmc_curriculum",
+      "clause": "Procedural skills (Minimum number of procedures that a candidate needs to perform are:)",
+      "quote": "Soft tissue and skin ultrasound (25)"
+    },
+    {
+      "id": "em_joint_fracture_us",
+      "label": "Joint and fracture assessment",
+      "target": 25,
+      "per": "course",
+      "source": "nmc_curriculum",
+      "clause": "Procedural skills (Minimum number of procedures that a candidate needs to perform are:)",
+      "quote": "Joint and fracture assessment (25)"
+    },
+    {
+      "id": "em_arrest_pocus",
+      "label": "Cardiac arrest POCUS/TEE",
+      "target": 5,
+      "per": "course",
+      "source": "nmc_curriculum",
+      "clause": "Procedural skills (Minimum number of procedures that a candidate needs to perform are:)",
+      "quote": "Cardiac arrest POCUS/TEE (5)"
+    },
+    {
+      "id": "em_procedural_guidance_us",
+      "label": "Procedural guidance",
+      "target": 50,
+      "per": "course",
+      "source": "nmc_curriculum",
+      "clause": "Procedural skills (Minimum number of procedures that a candidate needs to perform are:)",
+      "quote": "Procedural guidance (50)"
+    },
+    {
+      "id": "em_ocular_us",
+      "label": "Ocular ultrasound",
+      "target": 25,
+      "per": "course",
+      "source": "nmc_curriculum",
+      "clause": "Procedural skills (Minimum number of procedures that a candidate needs to perform are:)",
+      "quote": "Ocular ultrasound (25)"
+    },
+    {
+      "id": "em_investigation_interpretation",
+      "label": "Interpretation of laboratory investigations/plain X-rays/CT/MRI",
+      "target": 100,
+      "per": "course",
+      "source": "nmc_curriculum",
+      "clause": "Procedural skills (Minimum number of procedures that a candidate needs to perform are:)",
+      "quote": "Interpretation of laboratory investigations/plain X-rays/CT/MRI (100)"
+    },
+    {
+      "id": "em_major_incident",
+      "label": "Major incident planning",
+      "target": 10,
+      "per": "course",
+      "source": "nmc_curriculum",
+      "clause": "Procedural skills (Minimum number of procedures that a candidate needs to perform are:)",
+      "quote": "Major incident planning (10)"
+    }
+  ],
+  "proceduresNote": "MD Emergency Medicine 2024 is the only NMC curriculum in this set that prints procedure minima. Entries with target null are named in the list WITHOUT a number and are counted, not targeted.",
+  "rotations": {
+    "note": "The curriculum prints a suggested three-year posting schedule. The Academic Cell instantiates it; it is a template, not a record.",
+    "clause": "Rotation: Schedule for three years of MD Emergency Medicine postings",
+    "schedule": [
+      {
+        "year": 1,
+        "name": "Emergency Department",
+        "months": 8
+      },
+      {
+        "year": 1,
+        "name": "Paediatric Emergency",
+        "months": 1
+      },
+      {
+        "year": 1,
+        "name": "Dermatology",
+        "months": 0.5
+      },
+      {
+        "year": 1,
+        "name": "Forensic Medicine",
+        "months": 0.5
+      },
+      {
+        "year": 1,
+        "name": "Cardiology",
+        "months": 0.5
+      },
+      {
+        "year": 1,
+        "name": "Wound care and Procedural sedation",
+        "months": 0.5
+      },
+      {
+        "year": 1,
+        "name": "Orthopedics (in ED)",
+        "months": 0.5
+      },
+      {
+        "year": 1,
+        "name": "Medicine",
+        "months": 0.5
+      },
+      {
+        "year": 2,
+        "name": "Emergency Department",
+        "months": 5
+      },
+      {
+        "year": 2,
+        "name": "Critical Care",
+        "months": 1
+      },
+      {
+        "year": 2,
+        "name": "OBG",
+        "months": 1
+      },
+      {
+        "year": 2,
+        "name": "Orthopaedics (ward and OPD)",
+        "months": 0.5
+      },
+      {
+        "year": 2,
+        "name": "District residency posting",
+        "months": 3,
+        "kind": "drp"
+      },
+      {
+        "year": 2,
+        "name": "Surgery (ward and minor OT)",
+        "months": 1
+      },
+      {
+        "year": 2,
+        "name": "Ophthalmology",
+        "months": 0.5
+      },
+      {
+        "year": 3,
+        "name": "Emergency Department",
+        "months": 7
+      },
+      {
+        "year": 3,
+        "name": "Radiology (CT, MRI, USG)",
+        "months": 0.5
+      },
+      {
+        "year": 3,
+        "name": "Psychiatry",
+        "months": 0.5
+      },
+      {
+        "year": 3,
+        "name": "NICU",
+        "months": 0.5
+      },
+      {
+        "year": 3,
+        "name": "PICU",
+        "months": 0.5
+      },
+      {
+        "year": 3,
+        "name": "Neurology",
+        "months": 0.5
+      },
+      {
+        "year": 3,
+        "name": "ENT",
+        "months": 0.5
+      },
+      {
+        "year": 3,
+        "name": "Orthopedics (in ED)",
+        "months": 0.5
+      },
+      {
+        "year": 3,
+        "name": "Paediatric Emergency",
+        "months": 1
+      },
+      {
+        "year": 3,
+        "name": "Elective",
+        "months": 0.5
+      }
+    ]
+  },
+  "disclaimer": "Requirements are traced to the NMC source named above. A requirement with target null is one the source mandates WITHOUT giving a number — it is counted, never scored against an invented target. This pack does not certify compliance; see NMC_PG_LOGBOOK_REQUIREMENTS.md."
+}

@@ -12,6 +12,7 @@ import com.getcapacitor.Bridge;
 import com.getcapacitor.BridgeActivity;
 import com.getcapacitor.BridgeWebViewClient;
 import com.getcapacitor.community.speechrecognition.SpeechRecognition;
+import in.stewardmd.whisper.WhisperPlugin;
 
 public class MainActivity extends BridgeActivity {
     @Override
@@ -21,6 +22,12 @@ public class MainActivity extends BridgeActivity {
         registerPlugin(SpeechRecognition.class);
         registerPlugin(AppOrientationPlugin.class);
         registerPlugin(FundxDepthPlugin.class);
+        // Built (native whisper.cpp JNI, gradle-wired), never registered - which is the whole
+        // reason voice.js's whisperAvailable() gate has been silently false on every Android
+        // device: Capacitor.Plugins.Whisper never existed. Owner decision 2026-08-14 (see
+        // local-plugins/capacitor-whisper/package.json) is on-device Whisper as the production
+        // ASR target on Android too, matching iOS.
+        registerPlugin(WhisperPlugin.class);
         super.onCreate(savedInstanceState);
         setupSafeAreaInsets();
         setupRenderProcessRecovery();

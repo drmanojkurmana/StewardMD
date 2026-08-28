@@ -27,6 +27,9 @@ export const AI_MODULES = {
   fundx:       { id: "fundx",       label: "FundX AI",           group: "FundX",         daily: 20,  provider: "vertex" },
   followcare:  { id: "followcare",  label: "FollowCare AI",      group: "FollowCare",    daily: 100, provider: "vertex" },
   kb:          { id: "kb",          label: "Knowledge Base",     group: "Knowledge Base", daily: 0,  provider: "local"  }, // semantic search — unlimited
+  clinix:      { id: "clinix",      label: "CliniX tutor",       group: "CliniX",        daily: 60,  provider: "vertex" }, // student tutor turns. Higher than maik's 50 because a Socratic lesson is many SHORT turns, not few long ones. Counted separately so a student's revision never eats their MaiK clinical allowance (and vice versa).
+  surgx_note:  { id: "surgx_note",  label: "SURGX note structuring", group: "SURGX",     daily: 30,  provider: "vertex" }, // dictation -> note FIELD PLACEMENT only (never content). Its own bucket so a surgeon's documentation load is visible separately from their MaiK questions, and so exhausting one never blocks the other.
+  surgx_case:  { id: "surgx_case",  label: "SURGX Senior Surgeon Mode", group: "SURGX",  daily: 40,  provider: "vertex" }, // case mentor turns. Many SHORT turns per case, like the clinix tutor, so it is metered apart from maik's 50/day.
   stt:         { id: "stt",         label: "Speech-to-Text",     group: "Voice",         daily: 50,  provider: "vertex" },
   tts:         { id: "tts",         label: "Text-to-Speech",     group: "Voice",         daily: 50,  provider: "vertex" },
   scribe:      { id: "scribe",      label: "MaiK Scribe",        group: "Voice",         daily: 0,   provider: "vertex" }, // Pro-only voice EMR fill; capped by TIME not call-count (see scribeCaps/checkScribeTime)
@@ -34,6 +37,10 @@ export const AI_MODULES = {
 import { costCapOn, dailyCostCap, checkCostCap } from "./_credits.js";
 import { cfgFlag, warmBillingCfg } from "./_billingcfg.js";
 export function isAiModule(m) { return Object.prototype.hasOwnProperty.call(AI_MODULES, m); }
+// Are the per-module daily caps actually being ENFORCED right now? (See checkModuleQuota: at launch
+// they are not.) Exported so the doctor's dashboard can stop drawing "27 / 50" bars for a limit that
+// blocks nobody — showing a cap that isn't real is worse than showing no cap.
+export function capsEnforced(env) { return String(cfgFlag(env, "MAIK_ENFORCE_CAPS")) === "1"; }
 export function aiModuleList() { return Object.keys(AI_MODULES).map((k) => ({ id: k, label: AI_MODULES[k].label, group: AI_MODULES[k].group, daily: AI_MODULES[k].daily })); }
 
 // Per-module daily limit, env-overridable via AI_LIMIT_<MODULE> (e.g. AI_LIMIT_ECG=20). 0 = unlimited.
@@ -76,9 +83,10 @@ export const MODEL_RATES = {
   "gemini-2.5-flash-lite":  { in: 0.003, out: 0.012 },
   "gemini-2.5-pro":         { in: 0.110, out: 0.880 },
   // Gemini 3.x — ESTIMATED (Google's exact rates "to follow"); tune via AI_RATE_* env before relying on cost.
-  "gemini-3.5-flash":       { in: 0.008, out: 0.028 },
-  "gemini-3.5-flash-lite":  { in: 0.003, out: 0.012 },
-  "gemini-3.1-flash-lite":  { in: 0.003, out: 0.012 },
+  // `est: true` is load-bearing: a doctor is never shown a price we are guessing at (see rateConfirmed).
+  "gemini-3.5-flash":       { in: 0.008, out: 0.028, est: true },
+  "gemini-3.5-flash-lite":  { in: 0.003, out: 0.012, est: true },
+  "gemini-3.1-flash-lite":  { in: 0.003, out: 0.012, est: true },
 };
 const DEFAULT_RATE = { in: 0.007, out: 0.025 };
 export function modelRate(env, model) {
@@ -86,6 +94,18 @@ export function modelRate(env, model) {
   const rin = env && Number(env[up + "_IN"]), rout = env && Number(env[up + "_OUT"]);
   const base = MODEL_RATES[model] || DEFAULT_RATE;
   return { in: Number.isFinite(rin) && rin >= 0 ? rin : base.in, out: Number.isFinite(rout) && rout >= 0 ? rout : base.out };
+}
+// Is this model's price a real published rate, or our own estimate? A doctor's rate card may only
+// ever show CONFIRMED numbers — quoting a guess to someone deciding what to spend is worse than
+// showing no rate card at all. An explicit AI_RATE_<MODEL>_IN/_OUT override counts as confirmed:
+// the owner has entered the published figure. Internal costing/metering still uses the estimate.
+export function rateConfirmed(env, model) {
+  const base = MODEL_RATES[model];
+  if (!base) return false;                       // unknown model → DEFAULT_RATE, i.e. a guess
+  if (!base.est) return true;
+  const up = "AI_RATE_" + String(model || "").toUpperCase().replace(/[^A-Z0-9]/g, "_");
+  const rin = env && Number(env[up + "_IN"]), rout = env && Number(env[up + "_OUT"]);
+  return Number.isFinite(rin) && rin >= 0 && Number.isFinite(rout) && rout >= 0;
 }
 // extras: { images, audioSeconds } — flat add-ons (image/audio cost, env-overridable).
 export function estCostInr(env, model, inTok, outTok, extras) {
@@ -204,7 +224,7 @@ export async function checkModuleQuota(env, store, moduleId, doctorId, now) {
   // this is the SECOND cap system (aiu:mod:*) that must ALSO be uniform, else web-signed-in accounts hit
   // maik:50 / research:2 while guests/natives (ip-keyed) don't. Usage is still RECORDED for dashboards
   // (recordAiUsage runs regardless). Flip env MAIK_ENFORCE_CAPS="1" to re-enable the caps.
-  if (String(cfgFlag(env, "MAIK_ENFORCE_CAPS")) !== "1") return { ok: true, unlimited: true, limit: 0 };
+  if (!capsEnforced(env)) return { ok: true, unlimited: true, limit: 0 };
   const limit = resolveLimit(env, moduleId, await limitOverrides(store));   // KV override > env > default
   if (limit === 0) return { ok: true, unlimited: true, limit: 0 };
   const day = _day(now), key = "aiu:mod:" + doctorId + ":" + moduleId + ":" + day;
@@ -239,6 +259,32 @@ export async function recordAiUsage(env, store, rec, now) {
     g.docs[rec.doctorId] = (g.docs[rec.doctorId] || 0) + 1; // active-doctor count + top-users
     await store.put(gKey, JSON.stringify(g), { expirationTtl: AIU_TTL });
   } catch (e) { /* fail-open — never break the AI response on metering */ }
+}
+
+// Add REAL per-user spend to the day's rollup — the record checkCostCap reads to decide the free
+// allowance, the wallet debits from, and the AI Usage dashboard shows.
+//
+// WHY THIS EXISTS: recordAiUsage runs PRE-call (from gateAndCount), before any token is generated, so
+// every record it writes carries estCostInr 0 and totalTokens 0. `cost` and `tok` on aiu:doc therefore
+// stayed permanently zero, while the real figures went only to _usage.js's separate maik:* rollup. The
+// consequence was silent and total: with AI_COST_CAP_ON=1 the cap could never trigger, so a purchased
+// wallet could never be debited, and the dashboard's token/spend tiles always read 0. _usage.js
+// recordUsage now calls this once per completed call, where the true token counts exist.
+//
+// ponytail: KV read-modify-write, so concurrent calls can lose an increment. It fails in the SAFE
+// direction (under-counted spend = the doctor gets more free AI than they paid for, never less), and
+// the ceiling is one day's drift. For exact per-user accounting, mirror it into D1 the way
+// _usage.js addDailyCostInr does for the project-wide figure.
+export async function addAiSpend(store, costKey, day, inr, tokens) {
+  if (!store || !costKey || !day) return;
+  if (!(inr > 0) && !(tokens > 0)) return;
+  try {
+    const k = "aiu:doc:" + costKey + ":" + day;
+    const d = (await store.get(k, "json")) || { req: 0, tok: 0, cost: 0, latSum: 0, fail: 0, byModule: {} };
+    d.cost = Math.round(((d.cost || 0) + (inr || 0)) * 10000) / 10000;
+    d.tok = (d.tok || 0) + Math.max(0, tokens | 0);
+    await store.put(k, JSON.stringify(d), { expirationTtl: AIU_TTL });
+  } catch (e) { /* fail-open — metering must never break a clinical answer */ }
 }
 
 // Doctor's own daily summary (for the in-app AI Usage page). Never another doctor's data.
@@ -282,7 +328,14 @@ export async function setLimitOverride(store, moduleId, limit) {
 
 // ---- Phase 5: emergency override (kill switch), runtime budget, and admin audit log. ----
 export const EMERGENCY_MODES = ["off", "pause", "cheap"]; // off=normal, pause=block all AI, cheap=force cheapest
-export const CHEAP_MODEL = "gemini-2.5-flash-lite";
+// Confirmed live (2026-08-24, /api/ai/health's last_failover): "gemini-2.5-flash-lite" 404s on the
+// Developer API ("no longer available") - every call requesting it silently fails the lookup, THEN
+// retries on the slower Vertex fallback, which is worse than just resolving cleanly on a model that
+// still exists. "gemini-2.5-flash" (non-lite) is the confirmed-working default everywhere else in
+// this file, so it's the safe choice here too, even at a higher per-token rate, until a real
+// gemini-3.x-flash-lite id is verified end-to-end (it appears in ALLOWED_MODELS/MODEL_RATES as
+// "ESTIMATED", not yet confirmed live) and can replace this.
+export const CHEAP_MODEL = "gemini-2.5-flash";
 export async function getEmergency(store) {
   try { const e = store ? await store.get("ai:emergency", "json") : null; return (e && EMERGENCY_MODES.indexOf(e.mode) > -1) ? e : { mode: "off" }; } catch (e) { return { mode: "off" }; }
 }
@@ -348,18 +401,51 @@ export async function poolKeyFor(store, doctorId) {
 // no store / unknown module / unlimited (daily=0) → allowed, uncounted. The count is per ATTEMPT
 // (recorded before the AI call) so the cap can never be exceeded by a slow/failed call; token/cost
 // detail is layered on separately by the endpoint's own precise metering.
-export async function gateAndCount(env, store, moduleId, doctorId, subscription, now, email) {
-  try { await warmBillingCfg(store); } catch (e) {}        // live enforce/cost-cap flags (cached 30s)
-  doctorId = await poolKeyFor(store, doctorId);            // co-resident pair shares ONE AI bucket
+/* waitUntil (optional): defer the ANALYTICS rollup past the response. Measured on production, this
+ * whole function cost ~1.1s in front of every answer — the single largest non-model stage.
+ *
+ * What must stay synchronous, and does: the per-module quota count. Its own contract is that the
+ * count is recorded per ATTEMPT, BEFORE the AI call, so a slow or failed call can never exceed the
+ * cap — deferring that would let a burst slip past the limit. The cost cap likewise still blocks
+ * before returning. Only recordAiUsage — the admin rollup, which gates nothing — is deferred.
+ *
+ * warmBillingCfg and poolKeyFor are independent of each other, so they are started together. */
+/* ownerExempt (optional): the caller is a verified OWNER (functions/_adminauth.js ownerOK).
+ *
+ * WHY: _usage.js checkQuota already exempts owners from its per-USER throttles, but this SECOND cap
+ * system did not — so an owner could be blocked by a limit meant for regular users while being
+ * exempt from the equivalent limit one layer up. That inconsistency is the bug.
+ *
+ * Scope of the exemption is deliberately narrow, mirroring checkQuota: it skips the per-module daily
+ * cap and the per-USER cost cap. It does NOT skip metering — recordAiUsage still runs, so owner spend
+ * is still counted in the dashboards and still feeds the PROJECT-WIDE daily-cost circuit breaker,
+ * which nothing exempts anybody from. An owner can be uncapped without being invisible. */
+export async function gateAndCount(env, store, moduleId, doctorId, subscription, now, email, waitUntil, ownerExempt) {
+  const _t = { t0: Date.now() };
+  const [, pooled] = await Promise.all([
+    warmBillingCfg(store).catch(function () {}),           // live enforce/cost-cap flags (cached 30s)
+    poolKeyFor(store, doctorId)                            // co-resident pair shares ONE AI bucket
+  ]);
+  doctorId = pooled;
+  _t.warm = Date.now() - _t.t0;
   const q = await checkModuleQuota(env, store, moduleId, doctorId, now);
-  if (!q.ok) return q;                                     // at the per-module daily cap → block
+  _t.quota = Date.now() - _t.t0;
+  // An owner is never blocked by the per-module cap — but usage is still recorded below.
+  if (!q.ok && !ownerExempt) return q;                     // at the per-module daily cap → block
   // Per-user daily AI-COST cap (rupees), then prepaid credits. Inert unless AI_COST_CAP_ON=1.
-  if (costCapOn(env)) {
+  if (costCapOn(env) && !ownerExempt) {
     const cap = await dailyCostCap(env, store, email, null);   // role-based cap wired in Phase 4
     const cc = await checkCostCap(env, store, doctorId, cap, now);
     if (!cc.ok) return cc;                                 // { ok:false, reason:"ai-cost-cap", resetAt, ... }
   }
-  try { await recordAiUsage(env, store, buildUsageRecord({ doctorId: doctorId, module: moduleId, subscription: subscription, ts: now || 0, email: email }), now); } catch (e) {}
+  _t.cost = Date.now() - _t.t0;
+  const rec = function () {
+    return recordAiUsage(env, store, buildUsageRecord({ doctorId: doctorId, module: moduleId, subscription: subscription, ts: now || 0, email: email }), now);
+  };
+  if (typeof waitUntil === "function") { try { waitUntil(rec().catch(function () {})); } catch (e) {} }
+  else { try { await rec(); } catch (e) {} }
+  _t.rec = Date.now() - _t.t0;
+  try { q._ms = _t; } catch (e) {}                         // stage attribution; callers ignore extras
   return q;                                                // allowed; carries used/limit/remaining
 }
 

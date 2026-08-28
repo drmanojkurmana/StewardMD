@@ -233,7 +233,7 @@
     if (!root || root.querySelector("#abgRotate")) return;
     var h = document.createElement("div");
     h.className = "abg-rotate"; h.id = "abgRotate";
-    h.innerHTML = '<span class="abg-rotate-ic">🔄</span><span class="abg-rotate-tx">Rotate your phone for a wider view of the grid.</span><button class="abg-rotate-x" data-act="rotate-dismiss" aria-label="Dismiss">' + abIco("close") + '</button>';
+    h.innerHTML = '<span class="abg-rotate-ic">' + abIco("refresh") + '</span><span class="abg-rotate-tx">Rotate your phone for a wider view of the grid.</span><button class="abg-rotate-x" data-act="rotate-dismiss" aria-label="Dismiss">' + abIco("close") + '</button>';
     root.appendChild(h);
     requestAnimationFrame(function () { h.classList.add("on"); });
     h.addEventListener("click", function (e) { if (e.target.closest("[data-act='rotate-dismiss']")) hideRotateHint(); });
@@ -569,7 +569,7 @@
       ".abg-toast.on{opacity:1;transform:translateX(-50%)}",
       ".abg-rotate{position:fixed;left:50%;top:calc(14px + env(safe-area-inset-top));transform:translateX(-50%) translateY(-8px);display:flex;align-items:center;gap:9px;background:var(--tl,#0f766e);color:#fff;font:600 13px/1.35 var(--f);padding:10px 10px 10px 14px;border-radius:12px;z-index:990;opacity:0;transition:opacity .2s,transform .2s;box-shadow:0 8px 26px rgba(8,15,26,.32);max-width:92vw}",
       ".abg-rotate.on{opacity:1;transform:translateX(-50%)}",
-      ".abg-rotate-ic{font-size:16px;animation:abgrot 1.6s ease-in-out infinite}",
+      ".abg-rotate-ic{display:flex;animation:abgrot 1.6s ease-in-out infinite}.abg-rotate-ic svg{width:16px;height:16px}",
       "@keyframes abgrot{0%,60%,100%{transform:rotate(0)}75%{transform:rotate(-28deg)}88%{transform:rotate(8deg)}}",
       ".abg-rotate-tx{flex:1}",
       ".abg-rotate-x{border:none;background:rgba(255,255,255,.22);color:#fff;width:22px;height:22px;border-radius:999px;font:700 12px var(--f);cursor:pointer;line-height:1;flex:none}"

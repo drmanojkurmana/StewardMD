@@ -25,6 +25,11 @@ CREATE TABLE IF NOT EXISTS drugs (
 
 CREATE INDEX IF NOT EXISTS idx_drugs_brand ON drugs(brand);
 CREATE INDEX IF NOT EXISTS idx_drugs_comp  ON drugs(composition);
+-- Browse-by-class (/classes, /class): without this the class pages full-scan the table.
+-- Apply to an already-imported DB with:
+--   wrangler d1 execute stewardmd-prod --remote \
+--     --command "CREATE INDEX IF NOT EXISTS idx_drugs_action ON drugs(action_class);"
+CREATE INDEX IF NOT EXISTS idx_drugs_action ON drugs(action_class);
 
 -- Full-text search over the searchable columns (external-content FTS5),
 -- so search reads only matching rows (cost- and latency-minimal).

@@ -7,6 +7,8 @@
  *      screen back to the previous page instead of dismissing all the way to home).
  *   2. Else the clinical engine (5-step form / Clinical Decision output) → window._SMD_goBack().
  *   3. Else (home/root) → nothing (iOS); Android exits the app.
+ * At HOME the same edge-drag has nothing to go back to, so it SLIDES THE MENU OPEN instead
+ * (gesture only — Android's hardware back still exits at root).
  * Reuses each screen's own back logic — no per-screen wiring. The edge-handle appears on
  * every screen that can go back, so no module is a dead-end even without its own button.
  *
@@ -81,8 +83,61 @@
     var backs = top.filter(isBack);
     return backs.length ? backs[backs.length - 1] : top[top.length - 1];
   }
+  // Home is the true foreground screen (nothing covering it) — the same check refreshFab() in
+  // home.js uses for the FAB's own visibility. If home owns the screen center there is nowhere
+  // further "back" to go (see #3 in the file header), no matter what topBackControl()'s
+  // pattern-matching (BACK_SEL is necessarily broad — any "-close"/"-back" class or aria-label
+  // prefix) thinks it found on the page; a stray match there must never win over this.
+  /* Is a LIVE overlay stacked above home right now? Structural, not a hit test.
+   *
+   * homeIsForeground() used to ask elementFromPoint() about ONE pixel — the exact centre of the
+   * viewport. Anything that does not cover that pixel was invisible to it: a bottom sheet shorter
+   * than half the screen, a small confirm dialog, a top-anchored panel. On those screens home still
+   * looked like the foreground, so the left-edge swipe opened the MENU instead of dismissing the
+   * thing on top — the "sidebar opens on every page" report.
+   *
+   * Measured on the real app: at home every layer above #homeV2 (sbBackdrop, hvScrim,
+   * harrisonQuotePopup) is opacity:0 AND pointer-events:none, while an open sheet's scrim/sheet are
+   * opacity:1 and pointer-events:auto. So "live" = on screen, not transparent, and not click-through.
+   * Both conditions are required, so a parked-but-present layer can never suppress the home menu. */
+  function overlayAboveHome() {
+    var h = document.getElementById("homeV2");
+    if (!h || !document.body) return false;
+    var hz = parseInt(window.getComputedStyle(h).zIndex, 10); if (isNaN(hz)) hz = 0;
+    var kids = document.body.children;
+    for (var i = 0; i < kids.length; i++) {
+      var n = kids[i];
+      if (n === h || n.id === "smdTopBack") continue;
+      var cs = window.getComputedStyle(n);
+      if (cs.position !== "fixed" && cs.position !== "absolute") continue;
+      if (cs.display === "none" || cs.visibility === "hidden") continue;
+      if (parseFloat(cs.opacity || "1") < 0.05) continue;          // parked scrim
+      if (cs.pointerEvents === "none") continue;                   // click-through -> not a real layer
+      var z = parseInt(cs.zIndex, 10); if (isNaN(z) || z <= hz) continue;
+      var r = n.getBoundingClientRect();
+      if (r.width < 120 || r.height < 80) continue;                // toasts/badges are not screens
+      if (r.right <= 0 || r.left >= window.innerWidth) continue;   // parked off-screen (closed drawer)
+      if (r.bottom <= 0 || r.top >= window.innerHeight) continue;  // parked below (closed sheet)
+      return true;
+    }
+    return false;
+  }
+  function homeIsForeground() {
+    var h = document.getElementById("homeV2");
+    if (!h || !h.classList.contains("on")) return false;
+    var cs = window.getComputedStyle(h);
+    if (cs.display === "none" || cs.visibility === "hidden") return false;
+    if (overlayAboveHome()) return false;          // a sheet/dialog is up -> home is NOT the root screen
+    try {
+      // Kept as a second, independent condition: it still catches an overlay rendered INSIDE #homeV2,
+      // which the body-level scan above cannot see. Both must agree that home owns the screen.
+      var el = document.elementFromPoint(Math.round(window.innerWidth / 2), Math.round(window.innerHeight / 2));
+      return !!(el && h.contains(el));
+    } catch (e) { return false; }
+  }
   // True when there is somewhere to go back to (drives the universal edge back-handle's visibility).
   function canGoBack() {
+    if (homeIsForeground()) return false;
     try { if (window.ATLAS && window.ATLAS.isOpen && window.ATLAS.isOpen()) return true; } catch (e) {}
     try { if (window.FUNDX && window.FUNDX.isOpen && window.FUNDX.isOpen()) return true; } catch (e) {}
     if (topBackControl()) return true;
@@ -96,6 +151,15 @@
     // 0) FundX / Atlas AI full-screen overlay owns back while open.
     try { if (window.ATLAS && window.ATLAS.isOpen && window.ATLAS.isOpen()) { _last = now; return window.ATLAS.back() !== false; }
     if (window.FUNDX && window.FUNDX.isOpen && window.FUNDX.isOpen()) { _last = now; return window.FUNDX.back() !== false; } } catch (e) {}
+    // 0b) home's bottom-sheet system (#hvSheet + #hvScrim): the More sheet, the settings sheets,
+    // Customize tools, Account. Its rows are `.hv-mi` buttons and it ships NO back/close control, so
+    // the BACK_SEL scan below finds nothing inside it and instead clicks a stray match on the home
+    // screen UNDERNEATH — leaving the sheet open and doing something the user never asked for. The
+    // scrim's own click handler is closeSheet(), so that is the dismissal the app already defines.
+    try {
+      var _sheet = document.getElementById("hvSheet"), _scrim = document.getElementById("hvScrim");
+      if (_sheet && _scrim && _sheet.classList.contains("on")) { _last = now; _scrim.click(); return true; }
+    } catch (e) {}
     // 1) top-most open overlay → its BACK control (never Close, so we step back, not jump home)
     var ctrl = topBackControl();
     if (ctrl) { _last = now; try { ctrl.click(); } catch (e) {} return true; }
@@ -108,6 +172,29 @@
       return true;
     }
     return false;                                              // 3) at root
+  }
+
+  // At HOME there is nowhere to go back to (step 3 above), so the same left-edge rightward drag
+  // opens the main menu instead of doing nothing — the drawer slides in on release (its own CSS
+  // transition). Gesture-only: the Android hardware back must still exit at root, so this is NOT
+  // inside goBack(). No-op when the drawer is already open or home isn't the foreground screen.
+  function openMenuAtHome() {
+    if (!homeIsForeground()) return false;
+    try { var d = document.getElementById("sbDrawer"); if (d && d.classList.contains("open")) return false; } catch (e) {}
+    try { if (window.SB && typeof SB.open === "function") { SB.open(); return true; } } catch (e) {}
+    return false;
+  }
+  // With the menu already open it covers the left edge, so a further RIGHTWARD drag on it is a
+  // no-op (it closes by swiping left, tapping the backdrop, or hardware back — all unchanged).
+  /* The two behaviours are MUTUALLY EXCLUSIVE, and "go back" is the default everywhere.
+   * This was `openMenuAtHome() || goBack()`, which meant any false positive from the home test
+   * opened the menu on a screen the user expected to step back from, and — when SB was missing —
+   * could fall through to goBack() ON HOME and click whatever stray "-close" element BACK_SEL
+   * matched there. Home (and only home) opens the menu; every other screen goes back. */
+  function edgeSwipeAction() {
+    try { var d = document.getElementById("sbDrawer"); if (d && d.classList.contains("open")) return true; } catch (e) {}
+    if (homeIsForeground()) return openMenuAtHome();
+    return goBack();
   }
 
   // The screen to slide during an interactive edge-drag = the largest positioned (fixed/absolute) ancestor
@@ -163,7 +250,22 @@
     }
     return false;
   }
-  function syncHandle() { try { ensureBackBtn().style.display = (canGoBack() && !hasTopLeftControl()) ? "flex" : "none"; } catch (e) {} }
+  // hasTopLeftControl() only catches a BACK_SEL match sitting top-left. A bottom sheet like MaiK
+  // (height:86vh) leaves home's OWN top-left header button genuinely visible above it, while MaiK's
+  // Close sits top-RIGHT — so hasTopLeftControl sees no top-left match and would show our button
+  // right on top of home's. Detect that by asking whether the topmost overlay's own root even
+  // reaches the top of the viewport: if it doesn't, home is exposed above it and our button would
+  // double up on home's control regardless of where the overlay's own control sits. A full-screen
+  // overlay (root.top===0) doesn't expose home, so this never falsely suppresses the button on a
+  // dead-end screen that has no back control of its own.
+  function topExposesHome() {
+    var ctrl = topBackControl();
+    var root = ctrl && overlayRootOf(ctrl);
+    return !!(root && root.getBoundingClientRect().top > 8);
+  }
+  function syncHandle() {
+    try { ensureBackBtn().style.display = (canGoBack() && !hasTopLeftControl() && !topExposesHome()) ? "flex" : "none"; } catch (e) {}
+  }
 
   var enable = isNative || (window.matchMedia && window.matchMedia("(display-mode: standalone)").matches);
   if (enable) {
@@ -178,7 +280,7 @@
     }
     function endDrag(complete) {
       var el = dragEl; dragging = false; dragEl = null;
-      if (complete) { goBack(); if (el) { try { el.style.transition = ""; el.style.transform = ""; el.style.boxShadow = ""; } catch (e) {} } setTimeout(syncHandle, 80); }
+      if (complete) { edgeSwipeAction(); if (el) { try { el.style.transition = ""; el.style.transform = ""; el.style.boxShadow = ""; } catch (e) {} } setTimeout(syncHandle, 80); }
       else if (el) { setX(el, 0, true); setTimeout(function () { try { el.style.transition = ""; } catch (e) {} }, 220); }
     }
     document.addEventListener("touchstart", function (e) {
@@ -207,7 +309,7 @@
       var dx = t ? (t.clientX - sx) : curDx;
       var far = curDx >= vw() * 0.32 || (dx >= DIST && dt <= MAXTIME);
       if (dragging) endDrag(far);
-      else if (far) goBack();                                 // valid edge flick with no draggable overlay
+      else if (far) edgeSwipeAction();                          // valid edge flick with no draggable overlay (at home: opens the menu)
     }, { passive: true });
   }
 
@@ -226,5 +328,5 @@
     }
   } catch (e) {}
 
-  window.SMD_SWIPE_BACK = { goBack: goBack, canGoBack: canGoBack, enabled: enable, engineActive: engineActive, syncHandle: syncHandle };
+  window.SMD_SWIPE_BACK = { goBack: goBack, canGoBack: canGoBack, openMenuAtHome: openMenuAtHome, edgeSwipeAction: edgeSwipeAction, enabled: enable, engineActive: engineActive, syncHandle: syncHandle };
 })();

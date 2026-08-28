@@ -1,0 +1,4245 @@
+{
+  "_comment": "CliniX cardiovascular skills. Shared across every cardiac disease; a disease adds emphasis rather than copying.",
+  "version": 1,
+  "system": "cardiovascular",
+  "skills": {
+    "skill.hx.cvs.chestpain": {
+      "id": "skill.hx.cvs.chestpain",
+      "kind": "history",
+      "system": "cardiovascular",
+      "title": "Chest pain",
+      "oneLine": "Site, character, radiation, and what it does on exertion",
+      "why": "Chest pain is the symptom where a careful history outperforms every test you can order in the first ten minutes. The character and the relationship to exertion separate cardiac pain from the many things that mimic it, and getting it wrong in either direction is dangerous.",
+      "media": [],
+      "asks": [
+        {
+          "text": "Where exactly is it? Ask them to point with one finger."
+        },
+        {
+          "text": "What does it feel like? Heaviness, tightness, burning, sharp, tearing."
+        },
+        {
+          "text": "Does it go anywhere? Jaw, neck, either arm, back."
+        },
+        {
+          "text": "What brings it on, and how much exertion does it take?"
+        },
+        {
+          "text": "What relieves it, and how fast? Rest, nitrates, antacids, leaning forward."
+        },
+        {
+          "text": "How long does an episode last? Seconds, minutes, or hours."
+        },
+        {
+          "text": "Anything with it? Sweating, nausea, breathlessness, palpitations."
+        },
+        {
+          "text": "Does it happen at night or at rest, not just on exertion?"
+        },
+        {
+          "text": "In an elderly or diabetic patient without clear pain: any unexplained breathlessness, sweating, fatigue, or vague upper abdominal discomfort instead?"
+        }
+      ],
+      "teach": [
+        {
+          "heading": "Cardiac pain has a shape, and it is not sharp",
+          "body": "Ischaemic pain is typically a heaviness, tightness or squeezing behind the sternum, brought on by exertion and relieved within minutes by rest. Patients often describe it with a fist over the sternum rather than a pointing finger.\n\nPain a patient can localise with one fingertip is rarely ischaemic. So is pain that is purely sharp, that lasts seconds, or that is reproduced exactly by pressing on the chest wall.",
+          "note": "The exertion relationship is the single most useful question. Pain that reliably appears at the same workload and goes within minutes of stopping is angina until proven otherwise."
+        },
+        {
+          "heading": "The patterns that must not be missed",
+          "table": {
+            "cols": [
+              "Pattern",
+              "Suggests"
+            ],
+            "rows": [
+              [
+                "Heavy, central, on exertion, eased by rest",
+                "Stable angina"
+              ],
+              [
+                "The same but at rest, longer, or newly worse",
+                "Acute coronary syndrome"
+              ],
+              [
+                "Sudden, tearing, radiating to the back, unequal pulses",
+                "Aortic dissection"
+              ],
+              [
+                "Sharp, pleuritic, worse lying flat, better sitting forward",
+                "Pericarditis"
+              ],
+              [
+                "Sudden, pleuritic, with breathlessness and calf pain",
+                "Pulmonary embolism"
+              ],
+              [
+                "Burning, after food or lying down, eased by antacid",
+                "Reflux"
+              ],
+              [
+                "Reproduced by pressing on the chest wall",
+                "Musculoskeletal"
+              ]
+            ]
+          },
+          "note": "Three of those seven kill quickly. Dissection, ACS and embolism are the ones you actively exclude, not the ones you wait to declare themselves."
+        },
+        {
+          "heading": "Grade the exertion, do not just record it",
+          "body": "'Chest pain on walking' is not enough. Ask how far on the flat, how many stairs, and whether that distance has changed in the last weeks.\n\nA stable threshold that has been the same for two years is a different problem from the same pain at half the distance it was last month.",
+          "note": "Use the Canadian Cardiovascular Society grading the same way you use mMRC for breathlessness: anchor the symptom to an activity so it can be compared over time."
+        },
+        {
+          "heading": "Angina has named subtypes, and each one changes what you do next",
+          "points": [
+            {
+              "t": "Stable angina.",
+              "d": "Not a new symptom, and no recent change in frequency, severity or duration."
+            },
+            {
+              "t": "Unstable angina.",
+              "d": "Angina at rest or minimal exertion lasting over 10 minutes, of new onset within the last 4 to 6 weeks, or in a distinctly worsening crescendo pattern. Any one of these three makes it unstable and an acute coronary syndrome."
+            },
+            {
+              "t": "Variant (Prinzmetal) angina.",
+              "d": "Caused by coronary vasospasm rather than fixed obstruction, and classically occurs at rest."
+            },
+            {
+              "t": "Microvascular angina / cardiac syndrome X.",
+              "d": "Angina-type pain with normal epicardial coronary arteries on angiography."
+            },
+            {
+              "t": "Angina decubitus.",
+              "d": "Angina brought on by lying down, not necessarily at night, thought to reflect gravity redistributing fluid and increasing venous return."
+            },
+            {
+              "t": "Nocturnal angina.",
+              "d": "Classically described in severe aortic regurgitation: diastole is prolonged at night, the regurgitant volume and dilated, hypertrophied left ventricle increase demand, and the diastolic AR jet can itself divert coronary flow."
+            },
+            {
+              "t": "Angina sine dolore.",
+              "d": "Silent, painless myocardial ischaemia, particularly associated with diabetic autonomic neuropathy."
+            }
+          ],
+          "note": "Unstable angina is the one label on this list that changes management immediately: it is an acute coronary syndrome regardless of the troponin result."
+        },
+        {
+          "heading": "Angina equivalents: when there is no pain at all",
+          "body": "In the elderly and in diabetics with autonomic neuropathy, ischaemia often does not announce itself as pain. It can present instead as breathlessness, diaphoresis, syncope, upper abdominal nausea or vomiting, unexplained fatigue, or confusion.",
+          "note": "Actively ask about these in anyone at risk who denies chest pain outright. A negative answer to 'any chest pain' is not the end of the ischaemia screen in this group."
+        }
+      ],
+      "pitfalls": [
+        "Accepting 'chest pain on walking' without quantifying distance and whether it has changed.",
+        "Not asking whether pain occurs at rest or at night, which is what separates stable from unstable angina.",
+        "Missing angina equivalents in an elderly or diabetic patient who denies pain outright.",
+        "Forgetting that unstable angina is defined by three specific features, not just 'worse than before'."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What single feature best separates angina from most mimics?",
+          "a": "Its reliable relationship to exertion, and relief within minutes of rest.",
+          "accept": [
+            "exertion",
+            "rest"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "Sudden tearing chest pain going through to the back. What must you exclude?",
+          "a": "Aortic dissection. Check for unequal pulses and a blood pressure difference between the arms.",
+          "accept": [
+            "dissection",
+            "aortic"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "Pain that is sharp, worse lying flat and better sitting forward. What is it, and what would you listen for?",
+          "a": "Pericarditis. Listen for a pericardial rub, best heard with the patient sitting forward in expiration.",
+          "accept": [
+            "pericarditis",
+            "rub"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 4,
+          "q": "Give the three features, any one of which makes angina 'unstable'.",
+          "a": "Occurring at rest or with minimal exertion and lasting more than 10 minutes; new onset within the last 4 to 6 weeks; or a crescendo pattern of increasing severity, duration or frequency.",
+          "accept": [
+            "rest",
+            "new onset",
+            "crescendo"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "site",
+          "text": "Establishes site and asks the patient to point"
+        },
+        {
+          "id": "character",
+          "text": "Elicits the character in the patient's own words"
+        },
+        {
+          "id": "exertion",
+          "text": "Anchors it to a level of exertion",
+          "critical": true
+        },
+        {
+          "id": "redflags",
+          "text": "Screens for dissection, ACS and embolism"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Cardiovascular: chest pain"
+        },
+        {
+          "source": "Macleod's Clinical Examination",
+          "locator": "The cardiovascular system: the history"
+        },
+        {
+          "source": "Alagappan, Manual of Practical Medicine",
+          "locator": "Cardiovascular system: symptomatology"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.exam.cvs.pulse": {
+      "id": "skill.exam.cvs.pulse",
+      "kind": "exam",
+      "system": "cardiovascular",
+      "title": "The arterial pulse",
+      "oneLine": "Rate, rhythm, volume, character, vessel wall, and every peripheral pulse",
+      "why": "The pulse is far more than one observation. Students record a rate and stop, and in doing so miss the character that names the valve lesion, the delay that names a coarctation or dissection, and the peripheral pulses that name a vascular disease elsewhere in the body.",
+      "media": [],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Where should you assess pulse CHARACTER?",
+          "a": "At a large artery, the carotid or brachial, because the waveform is damped at the wrist.",
+          "accept": [
+            "carotid",
+            "brachial",
+            "large"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "An irregularly irregular pulse. What is it until proven otherwise?",
+          "a": "Atrial fibrillation.",
+          "accept": [
+            "atrial fibrillation",
+            "af"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "Why check radio-femoral delay in a young hypertensive?",
+          "a": "To detect coarctation of the aorta, which is a correctable cause of hypertension and is easily missed if you never compare the two.",
+          "accept": [
+            "coarctation"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 4,
+          "q": "How do you elicit a collapsing pulse, and what makes it feel that way?",
+          "a": "Feel the radial pulse with your wrist wrapped around the forearm so the metacarpal heads overlie the artery, then abruptly raise the patient's arm above the shoulder; a collapsing pulse gives an abrupt thrust followed by rapid collapse, from a rapid, large-volume ejection followed by diastolic run-off, as in aortic regurgitation.",
+          "accept": [
+            "raise",
+            "elevat",
+            "collapse",
+            "run-off",
+            "runoff"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [
+        {
+          "id": "fingers",
+          "text": "Uses finger pads, not the thumb"
+        },
+        {
+          "id": "rhythm",
+          "text": "States the rhythm explicitly"
+        },
+        {
+          "id": "character",
+          "text": "Assesses character at a central artery",
+          "critical": true
+        },
+        {
+          "id": "symmetry",
+          "text": "Compares both sides"
+        },
+        {
+          "id": "peripheral",
+          "text": "Checks at least one peripheral pulse beyond the radial"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Cardiovascular: arterial pulse"
+        },
+        {
+          "source": "Macleod's Clinical Examination",
+          "locator": "The cardiovascular system: the pulse"
+        },
+        {
+          "source": "Alagappan, Manual of Practical Medicine",
+          "locator": "Cardiovascular system: pulse"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "teach": [
+        {
+          "heading": "Five things, in this order",
+          "points": [
+            {
+              "t": "Rate.",
+              "d": "Count properly. A full minute if it is at all irregular."
+            },
+            {
+              "t": "Rhythm.",
+              "d": "Regular, regularly irregular (as in second-degree block), or irregularly irregular (atrial fibrillation)."
+            },
+            {
+              "t": "Volume.",
+              "d": "Low in shock and tight aortic stenosis, high in fever, anaemia, thyrotoxicosis and aortic regurgitation. Grade it 0 (absent) to 4 (bounding) against the other side."
+            },
+            {
+              "t": "Character.",
+              "d": "Feel this at the CAROTID, not the radial. The waveform is damped by the time it reaches the wrist."
+            },
+            {
+              "t": "Symmetry and delay.",
+              "d": "Both radials together, then radial against femoral."
+            }
+          ],
+          "note": "Character at the radial is the commonest technical error in the cardiovascular examination. A slow-rising pulse can feel almost normal at the wrist and is unmistakable at the neck."
+        },
+        {
+          "heading": "Grading pulse volume",
+          "table": {
+            "cols": [
+              "Grade",
+              "Description"
+            ],
+            "rows": [
+              [
+                "0",
+                "Complete absence of pulsation"
+              ],
+              [
+                "1",
+                "Small, feeble or reduced pulsation"
+              ],
+              [
+                "2",
+                "Palpable but diminished compared with the other side"
+              ],
+              [
+                "3",
+                "Normal pulsation"
+              ],
+              [
+                "4",
+                "Large, high volume or bounding pulsation"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Characters worth recognising",
+          "table": {
+            "cols": [
+              "Character",
+              "Lesion"
+            ],
+            "rows": [
+              [
+                "Slow rising, late peak (pulsus parvus et tardus)",
+                "Severe aortic stenosis"
+              ],
+              [
+                "Anacrotic, single low-volume peak",
+                "Severe aortic stenosis"
+              ],
+              [
+                "Collapsing, water hammer, Watson's/Corrigan's pulse",
+                "Aortic regurgitation, PDA, large AV fistula, or another high-output state"
+              ],
+              [
+                "Bisferiens, two peaks in systole",
+                "Severe aortic regurgitation, mixed aortic valve disease, HOCM"
+              ],
+              [
+                "Spike and dome",
+                "Hypertrophic obstructive cardiomyopathy"
+              ],
+              [
+                "Dicroticus, one systolic and one diastolic peak",
+                "Typhoid fever, severe LV failure, dehydration, dilated cardiomyopathy, endotoxic shock"
+              ],
+              [
+                "Pulsus alternans, alternating strong and weak, regular rhythm",
+                "Severe left ventricular failure"
+              ],
+              [
+                "Pulsus bigeminus, a normal beat then a premature beat and pause",
+                "Digoxin toxicity"
+              ],
+              [
+                "Pulsus paradoxus, falls markedly on inspiration",
+                "Tamponade, severe asthma or COPD, tension pneumothorax, massive PE"
+              ]
+            ]
+          },
+          "note": "Pulsus paradoxus is not paradoxical, it is an exaggeration of normal. A fall of more than 10 mmHg in systolic pressure on inspiration is the threshold. Character is best felt at the carotid or brachial, with two exceptions: a collapsing pulse is better appreciated at the radial, and pulsus bisferiens at the brachial."
+        },
+        {
+          "heading": "Eliciting collapsing pulse and pulsus paradoxus properly",
+          "points": [
+            {
+              "t": "Collapsing pulse.",
+              "d": "Palpate the radial artery, wrap your hand around the forearm so the metacarpal heads overlie it, then abruptly raise the arm above the shoulder. A true collapsing pulse gives a sharp thrust followed by an equally abrupt collapse, from the diastolic run-off of aortic regurgitation. Check the shoulder is pain-free first."
+            },
+            {
+              "t": "Pulsus paradoxus.",
+              "d": "Inflate a BP cuff 20 mmHg above systolic and deflate slowly; note the pressure at which Korotkoff sounds are first heard only in expiration, then the pressure at which they are heard throughout the respiratory cycle. A difference over 10 mmHg is positive. Let the patient breathe normally; instructing them to breathe deeply or differently artificially exaggerates the finding."
+            }
+          ],
+          "note": "The real paradox in pulsus paradoxus is clinical, not physiological: in constrictive pericarditis or tamponade, inspiration can drop the peripheral pulse enough to disappear while the heart sounds remain clearly audible."
+        },
+        {
+          "heading": "Peripheral pulses, one by one",
+          "points": [
+            {
+              "t": "Carotid.",
+              "d": "Index and middle fingers (never the thumb, which has its own strong pulse) between sternomastoid and trachea at the level of the cricoid cartilage. Auscultate for a bruit before you palpate, to avoid dislodging a plaque, and never compress both sides at once."
+            },
+            {
+              "t": "Brachial.",
+              "d": "Curl your fingers over the front of the elbow, medial to the biceps tendon, with the arm slightly flexed and externally rotated."
+            },
+            {
+              "t": "Femoral.",
+              "d": "One-third of the way from the pubic symphysis to the anterior superior iliac spine, just below the inguinal ligament; press firmly."
+            },
+            {
+              "t": "Popliteal.",
+              "d": "Deep in the popliteal fossa with the knee relaxed and slightly flexed, encircling the knee with both hands."
+            },
+            {
+              "t": "Posterior tibial.",
+              "d": "Just behind the medial malleolus, between it and the Achilles tendon."
+            },
+            {
+              "t": "Dorsalis pedis.",
+              "d": "On the dorsum of the foot, lateral to the extensor hallucis tendon. Congenitally absent in roughly 10% of people, so its absence alone is not pathological."
+            }
+          ]
+        },
+        {
+          "heading": "Radio-radial and radio-femoral delay",
+          "body": "Feel both radials, or a radial against a femoral, simultaneously and compare the timing of the upstroke, not just the presence of a pulse.",
+          "table": {
+            "cols": [
+              "Delay",
+              "Causes"
+            ],
+            "rows": [
+              [
+                "Radio-radial",
+                "Pre-subclavian coarctation, cervical rib or thoracic inlet syndrome, Takayasu's arteritis, aortic arch aneurysm"
+              ],
+              [
+                "Radio-femoral",
+                "Coarctation of the aorta; rarely, aortoarteritis"
+              ]
+            ]
+          },
+          "note": "Normally the radial pulse arrives 5 to 10 milliseconds after the femoral, too short to perceive; a delay you can actually feel is abnormal. Anisosphygmia, unequal pulse volume between the two arms, is a separate finding seen in Takayasu's arteritis."
+        }
+      ],
+      "steps": [
+        {
+          "text": "Use the radial pulse with the pads of three fingers, never your thumb."
+        },
+        {
+          "text": "Count the rate for a full 30 seconds, 60 if irregular."
+        },
+        {
+          "text": "Judge the rhythm: regular, regularly irregular, or irregularly irregular."
+        },
+        {
+          "text": "Assess volume against grade 0 to 4, and compare the two radials for radio-radial delay."
+        },
+        {
+          "text": "Assess character at a large artery, the carotid or brachial, not the radial."
+        },
+        {
+          "text": "Check radio-femoral delay in any hypertensive or young patient."
+        },
+        {
+          "text": "Palpate the remaining peripheral pulses: brachial, femoral, popliteal, posterior tibial, dorsalis pedis."
+        }
+      ],
+      "normal": "Rate 60 to 100, regular, normal volume and character, symmetrical with no delay, all peripheral pulses present.",
+      "abnormal": "Tachycardia or bradycardia, an irregularly irregular rhythm, a slow-rising or collapsing character, any asymmetry or delay, or an absent peripheral pulse.",
+      "significance": "Character names the lesion: slow-rising in aortic stenosis, collapsing in aortic regurgitation. Radio-radial or radio-femoral delay points to dissection or coarctation. An irregularly irregular pulse is atrial fibrillation until an ECG says otherwise. Absent peripheral pulses point to peripheral arterial disease or, if acute, embolism.",
+      "pitfalls": [
+        "Using the thumb, so you feel your own pulse.",
+        "Assessing character at the radial instead of the carotid.",
+        "Recording a rate and nothing else.",
+        "Never comparing the two sides, so a dissection or coarctation is missed.",
+        "Instructing the patient to breathe deeply when checking for pulsus paradoxus, which artificially exaggerates it.",
+        "Stopping at the radial pulse and never examining the rest of the peripheral tree."
+      ]
+    },
+    "skill.exam.cvs.jvp": {
+      "id": "skill.exam.cvs.jvp",
+      "kind": "exam",
+      "system": "cardiovascular",
+      "title": "The jugular venous pressure",
+      "oneLine": "Right atrial pressure, read off the neck, at 45 degrees",
+      "why": "The JVP is the only place you can see right atrial pressure directly, with no equipment. It is also the sign students most often skip, because it takes correct positioning and patience, and because a wrong angle makes it simply invisible rather than obviously wrong.",
+      "media": [
+        "media.img.jvpwave",
+        "media.vid.jvp2"
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "From which landmark do you measure the JVP?",
+          "a": "The sternal angle.",
+          "accept": [
+            "sternal angle",
+            "angle of louis"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "Give two ways to tell the JVP from the carotid.",
+          "a": "The JVP has two peaks per beat, is impalpable, is obliterated by light pressure, falls as the patient sits up, and falls on inspiration.",
+          "accept": [
+            "two peak",
+            "impalpable",
+            "not palpable",
+            "pressure",
+            "sits up",
+            "inspiration"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "Giant v waves. What is the lesion?",
+          "a": "Tricuspid regurgitation.",
+          "accept": [
+            "tricuspid regurg",
+            "tr"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 4,
+          "q": "What is Kussmaul sign and what does it mean?",
+          "a": "The JVP rises on inspiration rather than falling. It indicates that the right heart cannot accommodate increased venous return, classically in constrictive pericarditis.",
+          "accept": [
+            "rise",
+            "inspiration",
+            "constrictive"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 4,
+          "q": "Why is the RIGHT internal jugular vein preferred over the left for assessing the JVP?",
+          "a": "The right internal jugular vein connects to the right atrium in a straight line, while the left crosses the mediastinum and can be compressed by the normal aorta, which can make the left-sided JVP look elevated even when the true right atrial pressure is normal.",
+          "accept": [
+            "straight",
+            "mediastin",
+            "compress",
+            "aorta"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [
+        {
+          "id": "position",
+          "text": "Positions the patient at 45 degrees",
+          "critical": true
+        },
+        {
+          "id": "identify",
+          "text": "Confirms the pulsation is venous"
+        },
+        {
+          "id": "measure",
+          "text": "Measures vertically from the sternal angle"
+        },
+        {
+          "id": "hjr",
+          "text": "Tests the hepatojugular reflux"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Cardiovascular: JVP"
+        },
+        {
+          "source": "Macleod's Clinical Examination",
+          "locator": "The cardiovascular system: the JVP"
+        },
+        {
+          "source": "Alagappan, Manual of Practical Medicine",
+          "locator": "Cardiovascular system: jugular venous system"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "teach": [
+        {
+          "heading": "Venous or arterial? Settle this first",
+          "body": "Everything else is worthless if you are looking at the carotid. Ten features separate them.",
+          "table": {
+            "cols": [
+              "",
+              "Venous (JVP)",
+              "Arterial (carotid)"
+            ],
+            "rows": [
+              [
+                "Better assessed by",
+                "Seeing",
+                "Feeling"
+              ],
+              [
+                "Waveform",
+                "Two peaks per beat",
+                "One peak per beat"
+              ],
+              [
+                "Palpable",
+                "No",
+                "Yes"
+              ],
+              [
+                "Obliterated by light pressure",
+                "Yes",
+                "No"
+              ],
+              [
+                "Position seen",
+                "Laterally, upper part of the neck",
+                "Medially, lower part of the neck"
+              ],
+              [
+                "Definite upper level",
+                "Present",
+                "Absent"
+              ],
+              [
+                "Impulse",
+                "Retractile (inward)",
+                "Expansile (outward)"
+              ],
+              [
+                "Effect of position",
+                "Falls as the patient sits up",
+                "Unchanged"
+              ],
+              [
+                "With inspiration",
+                "Falls",
+                "Unchanged"
+              ],
+              [
+                "With abdominal compression",
+                "Rises (hepatojugular reflux)",
+                "Unchanged"
+              ]
+            ]
+          },
+          "note": "The quickest bedside test: press gently at the root of the neck. A venous pulsation disappears; a carotid does not."
+        },
+        {
+          "heading": "Why the right internal jugular, and not the external jugular",
+          "body": "The right internal jugular vein sits in a straight line to the right atrium. The left-sided vein has to cross the mediastinum, where the normal aorta can compress it and make the JVP look falsely raised even when right atrial pressure is normal, which is why the right side is always preferred.",
+          "points": [
+            "The internal jugular has fewer valves than the external.",
+            "It is less kinked by fascial planes.",
+            "It is less affected by sympathetic tone, so it stays a reliable guide even when the external jugular vasoconstricts and becomes hard to see in a hypotensive, low-output patient."
+          ]
+        },
+        {
+          "heading": "Why 45 degrees, and not any other angle",
+          "body": "The measurement is the vertical height of the blood column above the sternal angle, which sits about 5 cm above the right atrium whatever the patient's position.\n\nAt 45 degrees a normal column is visible in the neck. Lie the patient flat and it rises above the jaw where you cannot see it; sit them fully upright and it drops behind the clavicle. Either way you see nothing, and 'JVP not raised' becomes a false statement rather than a finding.",
+          "note": "If you cannot see it at 45, change the angle deliberately and say so, rather than recording a normal JVP you never actually saw."
+        },
+        {
+          "heading": "The waveform, and when it matters",
+          "points": [
+            {
+              "t": "a wave.",
+              "d": "Atrial contraction, precedes S1. Absent in atrial fibrillation. Giant in tricuspid stenosis or pulmonary hypertension. Cannon waves when the atrium contracts against a closed tricuspid valve, as in complete heart block or ventricular ectopics."
+            },
+            {
+              "t": "x descent.",
+              "d": "Atrial relaxation, follows S1."
+            },
+            {
+              "t": "v wave.",
+              "d": "Atrial filling against a closed valve, precedes S2. Giant, and fused with the c wave, in tricuspid regurgitation."
+            },
+            {
+              "t": "y descent.",
+              "d": "Tricuspid opening, follows any audible opening snap. Sharp in constriction, slow in tricuspid stenosis."
+            }
+          ],
+          "note": "You do not need every wave in every patient. Absent a waves, giant v waves and cannon waves are the three that change a diagnosis at the bedside."
+        },
+        {
+          "heading": "Two extra manoeuvres worth doing",
+          "points": [
+            {
+              "t": "Hepatojugular reflux.",
+              "d": "Press firmly over the right upper abdomen for 15 seconds. A sustained rise of more than 3 cm suggests the right heart cannot handle the extra return."
+            },
+            {
+              "t": "Kussmaul sign.",
+              "d": "The JVP RISES on inspiration instead of falling. Seen in constrictive pericarditis, and it is the opposite of what should happen."
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Sit the patient at 45 degrees, supported, with the head turned slightly away."
+        },
+        {
+          "text": "Use good tangential lighting across the neck, not from in front."
+        },
+        {
+          "text": "Look between the two heads of sternocleidomastoid for the internal jugular pulsation."
+        },
+        {
+          "text": "Confirm it is venous, not the carotid, before measuring anything."
+        },
+        {
+          "text": "Measure the vertical height of the top of the pulsation above the sternal angle."
+        },
+        {
+          "text": "Add 5 cm to give the right atrial pressure, and test the hepatojugular reflux."
+        }
+      ],
+      "normal": "A pulsation visible no more than 3 to 4 cm above the sternal angle, falling on inspiration, with a visible double waveform.",
+      "abnormal": "Raised above 4 cm, absent when it should be visible, or rising on inspiration (Kussmaul sign).",
+      "significance": "A raised JVP means raised right atrial pressure: right heart failure, fluid overload, tamponade, or constriction. In chronic lung disease a raised JVP with dependent oedema is cor pulmonale.",
+      "pitfalls": [
+        "Measuring from the wrong reference point. It is the sternal angle, always.",
+        "Recording 'JVP not raised' when the patient was not at 45 degrees.",
+        "Mistaking the carotid for the JVP.",
+        "Using the external jugular, which is unreliable because it is easily kinked and more affected by sympathetic tone."
+      ]
+    },
+    "skill.exam.cvs.inspection": {
+      "id": "skill.exam.cvs.inspection",
+      "kind": "exam",
+      "system": "cardiovascular",
+      "title": "Inspection of the precordium",
+      "oneLine": "Chest shape, visible pulsations, scars, before you touch the chest",
+      "why": "General inspection sets up everything palpation will confirm. A precordial bulge, a surgical scar, or a chest wall deformity can point straight at a diagnosis, and every one of them is easy to miss if you skip straight to the stethoscope.",
+      "steps": [
+        {
+          "text": "Stand at the foot of the bed with the chest fully exposed and look at shape and symmetry."
+        },
+        {
+          "text": "Note any chest wall deformity: barrel shaped, shield-like, pectus carinatum or excavatum, or loss of the normal thoracic curve (straight back)."
+        },
+        {
+          "text": "Look specifically for a precordial bulge."
+        },
+        {
+          "text": "Look for visible pulsations at the apex, the aortic and pulmonary areas, the left parasternal region, the epigastrium, and the sternoclavicular joints."
+        },
+        {
+          "text": "Note breast changes: gynaecomastia or hypomastia."
+        },
+        {
+          "text": "Look for surgical scars and for distended or dilated veins."
+        }
+      ],
+      "normal": "A symmetrical chest with no deformity, no visible precordial bulge, no visible pulsation except sometimes a faint one at the apex in a thin patient, and no scars.",
+      "abnormal": "A precordial bulge, visible pulsations at an abnormal site, a chest wall deformity, a surgical scar, or dilated veins.",
+      "significance": "Certain deformities cluster with specific syndromes. A precordial bulge implies right ventricular overload that began in childhood, before the costal cartilages fused. A scar tells you the surgical history before you have asked a single question.",
+      "teach": [
+        {
+          "heading": "Chest wall deformity and what it points to",
+          "table": {
+            "cols": [
+              "Deformity",
+              "Associated with"
+            ],
+            "rows": [
+              [
+                "Barrel shaped chest",
+                "COPD and cor pulmonale"
+              ],
+              [
+                "Broad, shield-like chest",
+                "Turner syndrome, Noonan syndrome"
+              ],
+              [
+                "Pectus carinatum",
+                "Marfan syndrome, Noonan syndrome"
+              ],
+              [
+                "Pectus excavatum",
+                "Marfan syndrome, homocystinuria"
+              ],
+              [
+                "Straight back syndrome (loss of normal thoracic curve)",
+                "Expiratory splitting of S2, a midsystolic murmur, and a prominent pulmonary artery"
+              ],
+              [
+                "Male gynaecomastia",
+                "Digoxin or spironolactone therapy"
+              ],
+              [
+                "Female hypomastia",
+                "Mitral valve prolapse"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Precordial bulge, and why age matters",
+          "body": "Costal cartilage fuses by about 16 years of age. A precordial bulge therefore implies right ventricular dilatation that began in childhood, before the chest wall stopped being able to deform, and is classically seen with congenital lesions such as an atrial septal defect.",
+          "note": "The one acquired exception on the case sheet is juvenile mitral stenosis, which begins early enough in life to still bulge the growing chest wall."
+        },
+        {
+          "heading": "Non-cardiac causes of a precordial bulge",
+          "points": [
+            "A skeletal deformity unrelated to the heart.",
+            "Bronchogenic carcinoma.",
+            "A mediastinal growth."
+          ],
+          "note": "Cardiovascular causes divide by whether the ribs themselves are involved: long-standing cardiac enlargement involves the ribs, while a pericardial effusion typically does not."
+        },
+        {
+          "heading": "Scars that change the differential before you've touched the patient",
+          "points": [
+            {
+              "t": "Median sternotomy.",
+              "d": "Coronary artery bypass grafting, or any procedure needing the heart-lung machine."
+            },
+            {
+              "t": "Lateral thoracotomy.",
+              "d": "Valve replacement surgery, or PDA ligation."
+            }
+          ]
+        }
+      ],
+      "pitfalls": [
+        "Inspecting only from the side of the bed and missing a precordial bulge that is only obvious from the foot of the bed.",
+        "Noting a chest deformity without connecting it to its likely syndrome.",
+        "Overlooking a surgical scar, which changes the whole differential before you have examined anything else."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Why does costal cartilage fusion around age 16 matter for a precordial bulge?",
+          "a": "A precordial bulge needs a still-pliable chest wall to deform, so it implies the underlying right ventricular overload began in childhood, before the cartilage fused.",
+          "accept": [
+            "childhood",
+            "fus",
+            "16"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "A patient has a median sternotomy scar. What does that tell you before you ask a single question?",
+          "a": "They have previously had open-heart surgery requiring cardiopulmonary bypass, most commonly coronary artery bypass grafting.",
+          "accept": [
+            "bypass",
+            "cabg",
+            "open heart",
+            "open-heart"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "Name the one common ACQUIRED heart disease (not congenital) that can still produce a precordial bulge.",
+          "a": "Juvenile mitral stenosis, because it begins early enough in life for the chest wall to still deform.",
+          "accept": [
+            "juvenile mitral stenosis",
+            "mitral stenosis"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 4,
+          "q": "A patient has female hypomastia and a pectus excavatum. What single cardiac lesion links both findings?",
+          "a": "Mitral valve prolapse, which is associated with hypomastia, and pectus excavatum is separately associated with Marfan syndrome, in which mitral valve prolapse and aortic root disease also occur.",
+          "accept": [
+            "mitral valve prolapse",
+            "mvp",
+            "marfan"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [
+        {
+          "id": "expose",
+          "text": "Exposes the chest adequately and inspects from the foot of the bed"
+        },
+        {
+          "id": "shape",
+          "text": "Comments explicitly on chest shape and any deformity"
+        },
+        {
+          "id": "bulge",
+          "text": "Specifically looks for a precordial bulge"
+        },
+        {
+          "id": "scars",
+          "text": "Notes scars and dilated veins"
+        }
+      ],
+      "media": [
+        "media.vid.cvsexam",
+        "media.cvs.inspection.precordium"
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Cardiovascular: inspection of the precordium"
+        },
+        {
+          "source": "Macleod's Clinical Examination",
+          "locator": "The cardiovascular system: inspection"
+        },
+        {
+          "source": "Alagappan, Manual of Practical Medicine",
+          "locator": "Cardiovascular system: precordium"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.exam.cvs.precordium_palpation": {
+      "id": "skill.exam.cvs.precordium_palpation",
+      "kind": "exam",
+      "system": "cardiovascular",
+      "title": "Palpating the precordium: heaves, thrills and palpable sounds",
+      "oneLine": "The apex is only one of several things the palpating hand should find",
+      "why": "Apex beat is its own skill; this is everything else the hand should check. A heave localises right heart overload, a thrill is a murmur you can feel, and a positive tracheal tug means the aortic arch itself is pulling on the trachea, all before you have listened to anything.",
+      "steps": [
+        {
+          "text": "Use the fingertips to localise pulsations, the heel of the hand to feel for a heave, and the metacarpal heads to feel for a thrill."
+        },
+        {
+          "text": "Palpate the left parasternal area, 3rd to 5th intercostal spaces, with the heel of the hand cocked up or the ulnar border of the hand, for a heave. If breathing obscures it, ask the patient to hold their breath briefly."
+        },
+        {
+          "text": "In a child or thin patient, place a pen on the parasternal area, parallel to the sternal margin, and watch the tip for movement if the heave is difficult to feel directly."
+        },
+        {
+          "text": "Sitting the patient forward, palpate the aortic and pulmonary areas (2nd intercostal space, both sides) for a thrill or a palpable second heart sound."
+        },
+        {
+          "text": "Palpate the epigastrium with the fingertip pointing towards the patient's head, asking for a deep breath, to check for a right ventricular impulse."
+        },
+        {
+          "text": "Check for tracheal tug (Oliver's sign): raise the chin and apply gentle upward pressure either side of the cricoid cartilage, feeling for a downward tug with each heartbeat."
+        }
+      ],
+      "normal": "No parasternal heave, no thrill, no palpable second heart sound, no epigastric impulse, and a negative tracheal tug.",
+      "abnormal": "A palpable heave of any grade, a thrill, a palpable A2 or P2, an epigastric right ventricular impulse, or a positive tracheal tug.",
+      "significance": "The grade of a heave tells you how much of systole the right ventricle is committed to. A thrill localises a lesion exactly the way murmur site does, since it is simply a murmur loud enough to feel. A positive tracheal tug means the aortic arch is tugging on the trachea with every beat, which points to an aortic aneurysm.",
+      "teach": [
+        {
+          "heading": "Three tools for three findings",
+          "points": [
+            {
+              "t": "Fingertips.",
+              "d": "For localising pulsations precisely."
+            },
+            {
+              "t": "Metacarpal heads.",
+              "d": "For appreciating thrills."
+            },
+            {
+              "t": "Heel of the hand.",
+              "d": "For appreciating a heave."
+            }
+          ],
+          "note": "Using the wrong part of the hand for the wrong finding is one of the easiest ways to miss something that was actually there to feel."
+        },
+        {
+          "heading": "Grading a parasternal heave",
+          "body": "Grade it by whether it is visible only, or also palpable, and if palpable, whether it can be pressed out and how much of systole it fills.",
+          "wideTable": {
+            "cols": [
+              "Grade",
+              "Visible",
+              "Palpable",
+              "Obliterable",
+              "Duration"
+            ],
+            "rows": [
+              [
+                "I",
+                "Yes",
+                "No",
+                "-",
+                "Ill-sustained"
+              ],
+              [
+                "II",
+                "Yes",
+                "Yes",
+                "Yes",
+                "More than half of systole"
+              ],
+              [
+                "III",
+                "Yes",
+                "Yes",
+                "No",
+                "Full systole"
+              ]
+            ]
+          },
+          "note": "This is the AIIMS grading, and the higher grades pack in two facts at once: obliterability falls and duration lengthens as right ventricular overload gets worse."
+        },
+        {
+          "heading": "Is it right ventricle or left atrium?",
+          "table": {
+            "cols": [
+              "",
+              "Right ventricular heave",
+              "Left atrial heave"
+            ],
+            "rows": [
+              [
+                "Timing",
+                "Synchronous with the apex",
+                "Not synchronous with the apex"
+              ],
+              [
+                "Phase",
+                "Systolic",
+                "Diastolic"
+              ]
+            ]
+          },
+          "note": "A left parasternal heave IS classically present in tetralogy of Fallot, from right ventricular hypertrophy driven by pulmonary stenosis: the VSD itself is typically large and non-restrictive, which is why RV and LV pressures equalise rather than the RV being protected from overload. When mitral stenosis coexists with mitral regurgitation, both left atrial enlargement and right ventricular hypertrophy are present, so the heave is often unusually prominent."
+        },
+        {
+          "heading": "Thrills: a palpable murmur, nothing more",
+          "body": "A thrill is simply a murmur of grade 4 intensity or louder, felt as a purring vibration with the metacarpal heads. It can be systolic, diastolic, or continuous.",
+          "table": {
+            "cols": [
+              "Site",
+              "Timing",
+              "Cause"
+            ],
+            "rows": [
+              [
+                "Mitral (apex)",
+                "Systolic",
+                "Severe mitral regurgitation"
+              ],
+              [
+                "Mitral (apex)",
+                "Diastolic",
+                "Mitral stenosis"
+              ],
+              [
+                "Left sternal border",
+                "Systolic",
+                "Ventricular septal defect"
+              ],
+              [
+                "Pulmonary area",
+                "Systolic",
+                "Pulmonary stenosis"
+              ],
+              [
+                "Aortic area",
+                "Systolic",
+                "Aortic stenosis"
+              ],
+              [
+                "Aortic area",
+                "Diastolic",
+                "Acute, severe aortic regurgitation"
+              ],
+              [
+                "Left 1st intercostal space",
+                "Continuous",
+                "PDA, or rupture of a sinus of Valsalva"
+              ]
+            ]
+          },
+          "note": "As a rule of thumb, apical thrills are diastolic and thrills at the base are systolic; the two named exceptions to learn are the systolic thrill of acute severe mitral regurgitation and the diastolic thrill of acute severe aortic regurgitation."
+        },
+        {
+          "heading": "Epigastric pulsation: which structure are you feeling",
+          "points": [
+            {
+              "t": "Right ventricular impulse.",
+              "d": "Pushes the tip of your palpating finger downward, toward the feet. Seen with any cause of right ventricular hypertrophy."
+            },
+            {
+              "t": "Transmitted aortic pulsation.",
+              "d": "Strikes the pulp of your fingers or thumb rather than pushing them down. Seen in a thin build, a descending aortic aneurysm, or aortic regurgitation."
+            },
+            {
+              "t": "Transmitted hepatic pulsation.",
+              "d": "Felt from the right side, against the lateral aspect of the examining finger. Presystolic or diastolic in tricuspid stenosis, systolic in tricuspid regurgitation."
+            }
+          ]
+        },
+        {
+          "heading": "Tracheal tug (Oliver's sign), precisely",
+          "body": "Raise the patient's chin and apply gentle upward pressure on either side of the cricoid cartilage. A downward tug of the larynx with each heartbeat is a positive sign, from an aortic arch aneurysm tugging on the trachea via the mediastinum.",
+          "note": "A false positive can come from an unrelated mediastinal mass; a false negative occurs if the aneurysm itself has thrombosed and no longer pulsates."
+        },
+        {
+          "heading": "Percussion still has a place on the case sheet",
+          "body": "Percuss the right heart border from above downward in the midclavicular line to the edge of liver dullness, then one space above that towards the sternum. Percuss the left heart border from the midaxillary line medially, in the same intercostal space as the apex, keeping the pleximeter finger parallel to the presumed border.",
+          "note": "Rotch's sign, dullness obliterating the normal cardiohepatic angle, is described with a large pericardial effusion. In modern practice this is rarely relied on once echocardiography is available, but it still appears on the case sheet and in viva questions."
+        }
+      ],
+      "pitfalls": [
+        "Mistaking respiratory movement of the chest wall for a true heave, instead of confirming it with a brief breath-hold.",
+        "Grading a heave without checking whether it is obliterable.",
+        "Palpating the epigastrium straight down instead of angling the fingertip toward the head, and missing a right ventricular impulse.",
+        "Checking for a thrill only at the apex, rather than sweeping every auscultatory area."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Which part of the hand is best for detecting a thrill?",
+          "a": "The metacarpal heads.",
+          "accept": [
+            "metacarpal"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "What is the minimum murmur grade at which a thrill becomes palpable?",
+          "a": "Grade 4.",
+          "accept": [
+            "4",
+            "grade 4",
+            "four"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "How do you tell a right ventricular parasternal heave from a left atrial one?",
+          "a": "The right ventricular heave is synchronous with the apex beat and systolic; the left atrial heave is not synchronous with the apex and is diastolic.",
+          "accept": [
+            "synchronous",
+            "systolic",
+            "diastolic"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 4,
+          "q": "You feel an epigastric impulse that strikes the pulp of your fingers rather than pushing them downward. Right ventricle or aorta, and why?",
+          "a": "This suggests a transmitted aortic pulsation rather than a right ventricular impulse, because a right ventricular impulse characteristically pushes the fingertip downward toward the feet, while a transmitted aortic pulsation strikes the pulp.",
+          "accept": [
+            "aort",
+            "pulp",
+            "transmitted"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [
+        {
+          "id": "tools",
+          "text": "Uses the correct part of the hand for pulsations, thrills and heave"
+        },
+        {
+          "id": "heave",
+          "text": "Palpates the left parasternal area and grades any heave found"
+        },
+        {
+          "id": "thrill",
+          "text": "Sweeps all auscultatory areas for a thrill",
+          "critical": true
+        },
+        {
+          "id": "epigastric",
+          "text": "Palpates the epigastrium correctly, angled toward the head"
+        }
+      ],
+      "media": [
+        "media.vid.parasternal"
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Cardiovascular: precordial palpation"
+        },
+        {
+          "source": "Macleod's Clinical Examination",
+          "locator": "The cardiovascular system: palpation"
+        },
+        {
+          "source": "Alagappan, Manual of Practical Medicine",
+          "locator": "Cardiovascular system: precordium"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.exam.cvs.apex": {
+      "id": "skill.exam.cvs.apex",
+      "kind": "exam",
+      "system": "cardiovascular",
+      "title": "The apex beat",
+      "oneLine": "The lowest, outermost point where the impulse is felt, and what its character means",
+      "why": "The apex beat locates the mediastinum and its character tells you what kind of overload the left ventricle is under. Missing it, or mislocating it, is one of the commonest reasons students miss a diagnosis that was obvious on palpation.",
+      "steps": [
+        {
+          "text": "With the patient supine at 45 degrees, place the flat of your hand over the precordium."
+        },
+        {
+          "text": "Find the lowest, most lateral point where you feel a definite impulse."
+        },
+        {
+          "text": "Localise it by intercostal space, counting down from the sternal angle, and by distance from the midclavicular or midsternal line."
+        },
+        {
+          "text": "If not felt supine, turn the patient to the left lateral position and try again."
+        },
+        {
+          "text": "Assess character, extent and duration: tapping, hyperdynamic, heaving, or diffuse."
+        },
+        {
+          "text": "Watch for medial versus lateral retraction as the impulse withdraws in late systole."
+        }
+      ],
+      "normal": "In the 5th left intercostal space, 1-2 cm medial to the midclavicular line (or within 10 cm of the midsternal line), a brief, localised tapping impulse under 3 cm in diameter, lasting under half of systole.",
+      "abnormal": "Displaced beyond the midclavicular line or below the 6th space, an impulse over 3 cm or occupying more than one intercostal space, or a sustained heaving, thrusting or diffuse impulse.",
+      "significance": "Displacement means the heart has enlarged or the mediastinum has shifted. A heaving, sustained apex is pressure overload (aortic stenosis, hypertension). A hyperdynamic, displaced apex is volume overload (aortic or mitral regurgitation). A tapping apex you can feel but that corresponds to a loud S1 suggests mitral stenosis.",
+      "teach": [
+        {
+          "heading": "The precise definition, and why it matters",
+          "body": "The apex is the outermost and lowermost point of maximum cardiac impulse, giving a perpendicular thrust in early systole with slight medial retraction in late systole. Palpate first with the flat palm to get a general sense of it, then localise precisely with the fingertip.",
+          "note": "The normal impulse comes from anticlockwise rotation of the left ventricle during early systole and clockwise rotation with medial retraction in late systole; understanding that mechanism is what lets you interpret an abnormal one."
+        },
+        {
+          "heading": "Locate it precisely, every time",
+          "body": "Count intercostal spaces down from the sternal angle, which sits opposite the 2nd rib. Do not estimate by eye.",
+          "note": "Record it as a space AND a distance: '5th left intercostal space, 1 cm lateral to the midclavicular line', not 'apex normal'."
+        },
+        {
+          "heading": "Character tells you the type of overload",
+          "table": {
+            "cols": [
+              "Character",
+              "Extent and duration",
+              "Means"
+            ],
+            "rows": [
+              [
+                "Tapping",
+                "Normal extent",
+                "Palpable S1, as in mitral stenosis"
+              ],
+              [
+                "Hyperdynamic",
+                "Increased amplitude, one-third to two-thirds of systole, more than one ICS (diffuse)",
+                "LV volume overload: AR, MR, VSD, PDA, AV fistula, or physiological in a thin chest or high-output state"
+              ],
+              [
+                "Heaving",
+                "Increased amplitude, over two-thirds of systole, confined to one ICS",
+                "LV pressure overload: aortic stenosis, systemic hypertension, HCM, coarctation"
+              ],
+              [
+                "Double, triple or quadruple/wavy",
+                "-",
+                "HOCM; a double impulse alone can also be an LV aneurysm or LV dyssynergy"
+              ],
+              [
+                "Retractile",
+                "-",
+                "Severe tricuspid regurgitation"
+              ],
+              [
+                "See-saw",
+                "-",
+                "LV aneurysm"
+              ],
+              [
+                "Impalpable",
+                "-",
+                "Obesity, emphysema, pericardial effusion, dextrocardia, a thick chest wall, or death of the underlying myocardium"
+              ]
+            ]
+          },
+          "note": "An impalpable apex is not automatically abnormal. Check the easy explanations, a thick chest wall or hyperinflated lungs, before assuming cardiac disease."
+        },
+        {
+          "heading": "Which ventricle is causing the impulse",
+          "body": "During systole the heart generally withdraws from the chest wall except at the apex; the inward movement this produces elsewhere is called retraction.",
+          "table": {
+            "cols": [
+              "",
+              "RV apex",
+              "LV apex"
+            ],
+            "rows": [
+              [
+                "Position",
+                "Rotated and shifted laterally",
+                "May be shifted down and out"
+              ],
+              [
+                "Retraction",
+                "Lateral (abnormal)",
+                "Medial"
+              ]
+            ]
+          },
+          "note": "A wide-area apex with medial retraction implies left ventricular enlargement. Lateral retraction identifies the impulse as right ventricular in origin, which is itself an abnormal finding. In constrictive or adhesive pericarditis, systolic retraction of the apex followed by diastolic expansion is called Skoda's sign."
+        },
+        {
+          "heading": "Displacement, and what it means",
+          "table": {
+            "cols": [
+              "Direction",
+              "Causes"
+            ],
+            "rows": [
+              [
+                "Upward",
+                "Children, ascites, an abdominal tumour, pericardial effusion"
+              ],
+              [
+                "Downward",
+                "A mediastinal growth, an aortic aneurysm"
+              ],
+              [
+                "Lateral, with the trachea also shifted",
+                "Mediastinal shift from lung fibrosis, collapse, pneumothorax, or a skeletal abnormality"
+              ],
+              [
+                "Lateral, with the trachea central",
+                "Left ventricular enlargement (down and out) or right ventricular enlargement (lateral only)"
+              ]
+            ]
+          }
+        }
+      ],
+      "pitfalls": [
+        "Estimating the space by eye instead of counting ribs.",
+        "Recording 'apex normal' with no space or distance.",
+        "Forgetting the left lateral position when supine palpation fails.",
+        "Calling any displaced apex 'left ventricular' without also checking the trachea."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Where is the normal apex beat?",
+          "a": "5th left intercostal space, within the midclavicular line.",
+          "accept": [
+            "5th",
+            "fifth",
+            "midclavicular"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "A heaving, sustained, non-displaced apex. What kind of overload?",
+          "a": "Pressure overload, as in aortic stenosis or hypertension.",
+          "accept": [
+            "pressure",
+            "aortic stenosis",
+            "hypertension"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "Give three causes of an impalpable apex that are not cardiac.",
+          "a": "Obesity, a hyperinflated chest as in COPD, and a thick chest wall.",
+          "accept": [
+            "obes",
+            "copd",
+            "hyperinflat",
+            "chest wall"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 4,
+          "q": "The apex is displaced laterally and the trachea is also shifted. What does the shifted trachea tell you about the cause?",
+          "a": "It points to a mediastinal shift, from a cause such as lung fibrosis, collapse, pneumothorax or a skeletal abnormality, rather than simple left or right ventricular enlargement, which displaces the apex without moving the trachea.",
+          "accept": [
+            "mediastinal shift",
+            "fibrosis",
+            "collapse",
+            "pneumothorax"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [
+        {
+          "id": "locate",
+          "text": "States the intercostal space and distance from a landmark"
+        },
+        {
+          "id": "character",
+          "text": "Assesses character, extent and duration, not just location"
+        },
+        {
+          "id": "lateral",
+          "text": "Uses the left lateral position if supine palpation fails"
+        }
+      ],
+      "media": [
+        "media.cvs.apex.1",
+        "media.cvs.apex.2"
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Cardiovascular: apex beat"
+        },
+        {
+          "source": "Macleod's Clinical Examination",
+          "locator": "The cardiovascular system: palpation"
+        },
+        {
+          "source": "Alagappan, Manual of Practical Medicine",
+          "locator": "Cardiovascular system: precordium"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.exam.cvs.bp": {
+      "id": "skill.exam.cvs.bp",
+      "kind": "exam",
+      "system": "cardiovascular",
+      "title": "Blood pressure measurement",
+      "oneLine": "Cuff size, Korotkoff sounds, and the errors that quietly change the number",
+      "why": "A wrongly sized cuff or a rushed technique can change the reading by enough to change the diagnosis. Blood pressure is the vital sign most casually measured and most consequentially wrong.",
+      "steps": [
+        {
+          "text": "Seat the patient comfortably, back supported, legs uncrossed, feet flat, for 5 minutes of quiet rest; no caffeine, exercise or smoking in the preceding 30 minutes, and an empty bladder. Nobody talks during the reading."
+        },
+        {
+          "text": "Support the bare arm at heart level and choose a cuff sized to the arm circumference, with the bladder centred over the brachial artery and its lower edge 3 cm above the elbow crease."
+        },
+        {
+          "text": "Palpate the radial pulse while inflating, then inflate 30 mmHg above the point it disappears."
+        },
+        {
+          "text": "Place the stethoscope over the brachial artery and deflate at about 2 mmHg per heartbeat."
+        },
+        {
+          "text": "Take the first Korotkoff sound as systolic, and the point the sound disappears as diastolic; if sounds persist to zero, use the point of muffling instead."
+        },
+        {
+          "text": "At the first visit, measure both arms and use the arm with the higher reading afterwards. Average at least two readings on at least two occasions."
+        },
+        {
+          "text": "If a postural cause is suspected, repeat supine and again within 2 to 5 minutes of standing."
+        }
+      ],
+      "normal": "Systolic under 120 mmHg and diastolic under 80 mmHg, no postural drop of 20 mmHg systolic or 10 mmHg diastolic, and no significant arm-to-arm difference.",
+      "abnormal": "Elevated, stage 1 or stage 2 hypertension by the standard thresholds; a systolic below 90 or diastolic below 60 mmHg (hypotension); a marked arm-to-arm difference; or a postural drop meeting the diagnostic threshold.",
+      "significance": "An undersized cuff overestimates BP and an oversized cuff underestimates it. An arm-to-arm difference on the first visit tells you which arm to trust from then on, and a large difference itself has vascular significance. Orthostatic drop identifies autonomic failure or volume depletion, often before the patient reports dizziness.",
+      "teach": [
+        {
+          "heading": "Choosing the cuff, by arm circumference",
+          "table": {
+            "cols": [
+              "Arm circumference",
+              "Cuff size"
+            ],
+            "rows": [
+              [
+                "22-26 cm",
+                "Small adult"
+              ],
+              [
+                "27-34 cm",
+                "Adult"
+              ],
+              [
+                "35-44 cm",
+                "Large adult"
+              ],
+              [
+                "45-52 cm",
+                "Adult thigh cuff"
+              ]
+            ]
+          },
+          "note": "Bladder width should be close to 40% of the arm circumference, and the bladder should cover 80 to 100% of it. Getting this wrong is one of the most reproducible sources of a wrong BP in clinical practice."
+        },
+        {
+          "heading": "The five Korotkoff phases",
+          "table": {
+            "cols": [
+              "Phase",
+              "Sound",
+              "What it marks"
+            ],
+            "rows": [
+              [
+                "1",
+                "A thud",
+                "Systolic blood pressure"
+              ],
+              [
+                "2",
+                "A blowing noise",
+                "-"
+              ],
+              [
+                "3",
+                "A softer thud",
+                "-"
+              ],
+              [
+                "4",
+                "A disappearing, muffled blowing noise",
+                "Used as diastolic if sounds persist to zero"
+              ],
+              [
+                "5",
+                "Silence",
+                "Diastolic blood pressure"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Errors that quietly move the number",
+          "points": [
+            {
+              "t": "Cuff too small.",
+              "d": "Falsely raises the reading."
+            },
+            {
+              "t": "Cuff too large.",
+              "d": "Falsely lowers the reading."
+            },
+            {
+              "t": "Unsupported arm, talking, or recent caffeine or exercise.",
+              "d": "Falsely raises the reading."
+            },
+            {
+              "t": "Deflating too fast.",
+              "d": "Overestimates the true systolic and underestimates the true diastolic pressure."
+            },
+            {
+              "t": "Arm below heart level.",
+              "d": "Falsely raises the reading; above heart level falsely lowers it."
+            }
+          ]
+        },
+        {
+          "heading": "Pseudohypertension and Osler's sign",
+          "body": "Pseudohypertension is a cuff diastolic reading at least 15 mmHg higher than the true intra-arterial pressure, caused by Monckeberg's medial sclerosis stiffening the artery so it resists cuff compression.",
+          "note": "Osler's sign is a radial artery that stays palpable, though pulseless, once the cuff is inflated above systolic pressure. A positive sign should make you doubt an unexpectedly high cuff reading in an elderly patient."
+        },
+        {
+          "heading": "Postural (orthostatic) hypotension, defined precisely",
+          "body": "Measure within 2 to 5 minutes of standing after 5 minutes of supine rest. The finding is positive if systolic falls by at least 20 mmHg, or diastolic falls by at least 10 mmHg.",
+          "points": [
+            {
+              "t": "Autonomic failure.",
+              "d": "Diabetic neuropathy, Parkinson's disease, multiple system atrophy, spinal cord lesions."
+            },
+            {
+              "t": "Volume depletion.",
+              "d": "Diuretics, haemorrhage, vomiting, or chronic hypovolaemia."
+            }
+          ]
+        }
+      ],
+      "pitfalls": [
+        "Using a cuff sized for the wrong arm circumference.",
+        "Letting the patient talk, or deflating the cuff too quickly.",
+        "Never measuring both arms at the first visit.",
+        "Measuring supine only, in a patient whose symptoms suggest a postural cause.",
+        "Instructing the patient to breathe differently while assessing a related finding such as pulsus paradoxus, which artificially exaggerates it."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What defines the systolic blood pressure on auscultation?",
+          "a": "The appearance of the first Korotkoff sound.",
+          "accept": [
+            "first korotkoff",
+            "phase 1"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "A cuff that is too small for the arm. Does it over- or under-estimate the blood pressure?",
+          "a": "It overestimates the true blood pressure.",
+          "accept": [
+            "overestimat",
+            "falsely high",
+            "raise"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "Define postural hypotension.",
+          "a": "A fall of at least 20 mmHg in systolic pressure, or at least 10 mmHg in diastolic pressure, within 2 to 5 minutes of standing after a period of supine rest.",
+          "accept": [
+            "20",
+            "10",
+            "standing"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 4,
+          "q": "An elderly patient has a radial pulse that stays palpable, though pulseless, when the cuff is inflated above systolic pressure. What is this called and why does it matter?",
+          "a": "Osler's sign, from Monckeberg's medial arterial sclerosis; its presence should make you suspect pseudohypertension, where the cuff reading overstates the true intra-arterial pressure.",
+          "accept": [
+            "osler",
+            "pseudohypertension",
+            "monckeberg"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [
+        {
+          "id": "cuff",
+          "text": "Selects a correctly sized cuff for the arm"
+        },
+        {
+          "id": "technique",
+          "text": "Uses correct deflation rate and identifies systolic/diastolic correctly",
+          "critical": true
+        },
+        {
+          "id": "botharms",
+          "text": "Measures both arms at least once"
+        }
+      ],
+      "media": [
+        "media.cvs.bp.cuff"
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Cardiovascular: blood pressure measurement"
+        },
+        {
+          "source": "Macleod's Clinical Examination",
+          "locator": "The cardiovascular system: blood pressure"
+        },
+        {
+          "source": "Harrison's Principles of Internal Medicine",
+          "locator": "Hypertensive vascular disease: measurement of blood pressure"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.exam.cvs.heartsounds": {
+      "id": "skill.exam.cvs.heartsounds",
+      "kind": "exam",
+      "system": "cardiovascular",
+      "title": "Heart sounds: S1 to S4",
+      "oneLine": "Four sounds, a systematic route to hear them, and what each one is the closing or filling of",
+      "why": "Every heart sound is a mechanical event, not a noise to memorise. Knowing what causes each one lets you predict what an abnormal sound means rather than recalling it, and knowing where to listen and with what pressure is what actually lets you hear it.",
+      "steps": [
+        {
+          "text": "Auscultate in sequence: mitral area in the left lateral position, tricuspid supine, aortic and pulmonary areas sitting forward in expiration (Erb's manoeuvre)."
+        },
+        {
+          "text": "Identify S1 and S2 first, using the carotid pulse to time them if unsure; findings synchronous with the carotid upstroke are systolic, findings asynchronous with it are diastolic."
+        },
+        {
+          "text": "Listen specifically for a third or fourth sound at the apex with the bell, patient in left lateral position, and again at the left sternal edge for right-sided S3/S4."
+        },
+        {
+          "text": "Assess splitting of S2 at the pulmonary area, comparing inspiration and expiration."
+        },
+        {
+          "text": "Work through the remaining areas: axilla, epigastrium, carotids, and the back if a coarctation or PDA is suspected."
+        }
+      ],
+      "normal": "A single S1, a single or physiologically split S2 that splits wider on inspiration, and no S3 or S4.",
+      "abnormal": "A loud or soft S1, fixed or reversed splitting of S2, an audible S3 or S4, or an added click, snap or knock.",
+      "significance": "S3 in someone over 40 usually means left ventricular failure. S4 means a stiff, non-compliant ventricle, as in hypertension or aortic stenosis, and is never heard in atrial fibrillation because it needs organised atrial contraction.",
+      "teach": [
+        {
+          "heading": "What each sound actually is",
+          "points": [
+            {
+              "t": "S1.",
+              "d": "Closure of the mitral and tricuspid valves. Marks the start of systole and coincides with the carotid upstroke."
+            },
+            {
+              "t": "S2.",
+              "d": "Closure of the aortic and pulmonary valves. Marks the start of diastole."
+            },
+            {
+              "t": "S3.",
+              "d": "Rapid ventricular filling striking an already-full or stiff ventricle. Occurs just after S2, needs a non-obstructed AV valve, and is never heard at the base."
+            },
+            {
+              "t": "S4.",
+              "d": "Atrial contraction pushing blood into a stiff ventricle. Occurs just before S1, and needs a contracting atrium plus a non-compliant ventricle, which is why it disappears in atrial fibrillation."
+            }
+          ],
+          "note": "A useful trick: S3 sounds like the 'y' in 'Ken-tuc-ky' (S1-S2-S3); S4 sounds like the 'Ten' in 'Ten-nes-see' (S4-S1-S2)."
+        },
+        {
+          "heading": "Where you listen, systematically",
+          "table": {
+            "cols": [
+              "Area",
+              "Location"
+            ],
+            "rows": [
+              [
+                "Mitral",
+                "Apex, normally left 5th ICS, 1-2 cm medial to the midclavicular line"
+              ],
+              [
+                "Tricuspid",
+                "Lower left sternal edge, 5th ICS"
+              ],
+              [
+                "Aortic",
+                "Right 2nd ICS"
+              ],
+              [
+                "Erb's (neo-aortic)",
+                "Left 3rd ICS"
+              ],
+              [
+                "Pulmonary",
+                "Left 2nd ICS"
+              ],
+              [
+                "Axilla",
+                "Pansystolic murmur of MR"
+              ],
+              [
+                "Epigastrium",
+                "Pansystolic murmur of TR"
+              ],
+              [
+                "Carotid",
+                "Conducted AS murmur, or a carotid bruit"
+              ],
+              [
+                "Gibson's area, left 1st ICS",
+                "PDA"
+              ],
+              [
+                "Roger's area, left 4th ICS",
+                "Small VSD"
+              ],
+              [
+                "Interscapular area, back",
+                "Coarctation, or a descending aortic aneurysm"
+              ],
+              [
+                "Subclavian (supraclavicular)",
+                "Bruit of aortoarteritis"
+              ],
+              [
+                "Femoral artery",
+                "Duroziez's murmur of aortic regurgitation"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Position changes what you can hear",
+          "table": {
+            "cols": [
+              "Position",
+              "Best for"
+            ],
+            "rows": [
+              [
+                "Left lateral decubitus",
+                "Mitral area: S1, LV S3/S4, opening snap, MS and MR"
+              ],
+              [
+                "Supine",
+                "Tricuspid area"
+              ],
+              [
+                "Sitting forward, breath held in expiration (Erb's manoeuvre)",
+                "Aortic or pulmonary area, and the murmur of AR"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Bell versus diaphragm",
+          "table": {
+            "cols": [
+              "",
+              "Low frequency",
+              "High frequency"
+            ],
+            "rows": [
+              [
+                "Threshold",
+                "Under 125 Hz",
+                "Over 300 Hz"
+              ],
+              [
+                "Character",
+                "Rough, rumbling",
+                "Soft, blowing"
+              ],
+              [
+                "Examples",
+                "S3, S4, pericardial knock, mid-diastolic murmur of MS/TS",
+                "S1, S2, ejection click, opening snap, systolic murmurs of MR/AR"
+              ],
+              [
+                "Use",
+                "Bell, light pressure",
+                "Diaphragm, firm pressure"
+              ]
+            ]
+          },
+          "note": "Firm pressure with the diaphragm can itself abolish a low-frequency sound by stretching the skin taut, which is the trap that hides a genuine S3 or S4."
+        },
+        {
+          "heading": "S1: loud, soft, or variable",
+          "table": {
+            "cols": [
+              "Loud",
+              "Soft",
+              "Variable"
+            ],
+            "rows": [
+              [
+                "Mild to moderate MS, TS, ASD, tachycardia, a short PR interval, a hyperdynamic circulation, a thin build",
+                "MR or TR (wide, poorly coapting valves), severe calcific MS, AR (premature mitral closure), bradycardia, a long PR interval or heart block, obesity, emphysema, effusion",
+                "Atrial fibrillation, ventricular tachycardia, or complete heart block (cannon sounds)"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Splitting of S2, and what fixed splitting means",
+          "body": "Normally S2 splits into its aortic and pulmonary components, and the split widens on inspiration because increased venous return delays pulmonary closure.",
+          "table": {
+            "cols": [
+              "Pattern",
+              "Meaning"
+            ],
+            "rows": [
+              [
+                "Normal, widens on inspiration",
+                "Physiological"
+              ],
+              [
+                "Wide and fixed, no change with breathing",
+                "Atrial septal defect"
+              ],
+              [
+                "Reversed (P2 before A2), widens on expiration",
+                "Left bundle branch block, severe aortic stenosis, severe systemic hypertension, HCM"
+              ]
+            ]
+          },
+          "note": "Fixed splitting is genuinely fixed: it does not respond to respiration at all, because the two atria are already in free communication, and the pulmonary hang-out interval is already at its maximum."
+        },
+        {
+          "heading": "Clicks, snaps, and the opening snap of mitral stenosis",
+          "points": [
+            {
+              "t": "Ejection clicks.",
+              "d": "Early systolic. A vascular click (a dilated great vessel, as in systemic hypertension or an aortic root aneurysm) or a valvular click (a bicuspid aortic valve, or congenital pulmonary stenosis)."
+            },
+            {
+              "t": "Non-ejection clicks.",
+              "d": "Mid to late systolic, from mitral or tricuspid valve prolapse."
+            },
+            {
+              "t": "Opening snap.",
+              "d": "A high-pitched diastolic sound 0.04 to 0.12 seconds after A2, from a stenotic mitral or tricuspid leaflet snapping open. It is the single most important auscultatory sign of valvular involvement in mitral stenosis; its absence suggests the leaflets are calcified and no longer mobile, and the A2-to-OS interval shortens as the stenosis worsens."
+            }
+          ]
+        },
+        {
+          "heading": "Telling apart the opening snap, a split S2, and S3",
+          "table": {
+            "cols": [
+              "",
+              "Opening snap",
+              "Split S2",
+              "S3"
+            ],
+            "rows": [
+              [
+                "Area",
+                "Medial to the apex",
+                "Base of the heart",
+                "At the apex"
+              ],
+              [
+                "On standing",
+                "A2-OS interval increases",
+                "A2-P2 gap decreases",
+                "Disappears"
+              ],
+              [
+                "Pitch",
+                "High",
+                "High",
+                "Low"
+              ],
+              [
+                "Best heard with",
+                "Diaphragm",
+                "Diaphragm",
+                "Bell"
+              ]
+            ]
+          }
+        }
+      ],
+      "pitfalls": [
+        "Not timing S1 and S2 against the carotid pulse when confused.",
+        "Missing S3 or S4 by using the diaphragm with firm pressure instead of the bell.",
+        "Calling any extra sound a murmur without timing it first.",
+        "Mistaking S4 for a split S1: firm diaphragm pressure abolishes S4 but not a true split S1."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What produces S1?",
+          "a": "Closure of the mitral and tricuspid valves.",
+          "accept": [
+            "mitral",
+            "tricuspid",
+            "closure"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "Wide, FIXED splitting of S2 that does not change with breathing. What does it suggest?",
+          "a": "An atrial septal defect.",
+          "accept": [
+            "asd",
+            "atrial septal"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "A 62-year-old has an S3. What does it usually mean, and why is that different from a 22-year-old with the same sound?",
+          "a": "In a 62-year-old it usually indicates left ventricular failure from a stiff or overloaded ventricle. In a young adult the same sound can be physiological, reflecting a healthy, rapidly-filling ventricle, so age changes the interpretation of an identical finding.",
+          "accept": [
+            "failure",
+            "physiologic",
+            "age"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 4,
+          "q": "How do you tell a genuine S4 from a split S1 at the bedside?",
+          "a": "Apply firm pressure with the diaphragm: this abolishes a true S4, which is low-pitched and needs the bell to hear, but does not abolish a genuinely split S1.",
+          "accept": [
+            "firm pressure",
+            "diaphragm",
+            "abolish"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [
+        {
+          "id": "sequence",
+          "text": "Auscultates all areas in the correct sequence and position"
+        },
+        {
+          "id": "identify",
+          "text": "Correctly identifies S1 and S2"
+        },
+        {
+          "id": "extra",
+          "text": "Specifically listens for S3/S4 with the bell"
+        }
+      ],
+      "media": [
+        "media.img.auscultareas",
+        "media.vid.auscultareas"
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Cardiovascular: heart sounds"
+        },
+        {
+          "source": "Macleod's Clinical Examination",
+          "locator": "The cardiovascular system: auscultation"
+        },
+        {
+          "source": "Alagappan, Manual of Practical Medicine",
+          "locator": "Cardiovascular system: heart sounds"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.exam.cvs.murmurs": {
+      "id": "skill.exam.cvs.murmurs",
+      "kind": "exam",
+      "system": "cardiovascular",
+      "title": "Murmurs",
+      "oneLine": "Timing first, then eleven more things, and everything falls into place",
+      "why": "A murmur description with no timing is not a description. The book describes a murmur under eleven separate headings, and every one beyond timing exists to choose between the handful of lesions timing alone leaves you with.",
+      "steps": [
+        {
+          "text": "Time it against the carotid pulse or S1/S2: systolic (between S1 and S2) or diastolic (between S2 and S1)."
+        },
+        {
+          "text": "Find where it is loudest, and follow it to see where it radiates or conducts."
+        },
+        {
+          "text": "Grade its intensity: 1 to 6 for systolic murmurs, 1 to 4 for diastolic."
+        },
+        {
+          "text": "Note its quality, pitch and configuration (crescendo, decrescendo, crescendo-decrescendo, or plateau)."
+        },
+        {
+          "text": "Decide whether the diaphragm or bell brings it out best, and in which patient position."
+        },
+        {
+          "text": "Use manoeuvres: inspiration and expiration, sitting forward, left lateral position, squatting or handgrip if the diagnosis is still unclear."
+        }
+      ],
+      "normal": "No murmur.",
+      "abnormal": "Any murmur, timed, graded and localised.",
+      "significance": "Timing plus site plus radiation is close to diagnostic for the common valve lesions.",
+      "teach": [
+        {
+          "heading": "Timing splits the whole problem in two",
+          "table": {
+            "cols": [
+              "Timing",
+              "Common lesions"
+            ],
+            "rows": [
+              [
+                "Ejection systolic",
+                "Aortic stenosis, pulmonary stenosis, HOCM"
+              ],
+              [
+                "Pansystolic",
+                "Mitral regurgitation, tricuspid regurgitation, VSD"
+              ],
+              [
+                "Early diastolic",
+                "Aortic regurgitation, pulmonary regurgitation"
+              ],
+              [
+                "Mid-diastolic",
+                "Mitral stenosis, tricuspid stenosis"
+              ],
+              [
+                "Continuous",
+                "Patent ductus arteriosus"
+              ]
+            ]
+          },
+          "note": "As a broad rule: early murmurs are regurgitant lesions, mid murmurs are stenotic lesions, and late systolic murmurs point to prolapse or papillary muscle dysfunction. Get the timing right and you have already narrowed a long list to two or three lesions before considering anything else."
+        },
+        {
+          "heading": "Describing a murmur completely: eleven items",
+          "points": [
+            "Timing: systolic, diastolic, or continuous.",
+            "Grade: intensity on the standard scale.",
+            "Quality: blowing, musical, harsh, rasping, rumbling, and so on.",
+            "Pitch: high, medium or low, which tracks the velocity of flow at its origin.",
+            "Configuration: the shape of the murmur over time.",
+            "Radiation or conduction: where else it is heard, and why.",
+            "Best heard with diaphragm or bell.",
+            "Patient position that brings it out best.",
+            "Whether it is louder held in inspiration or expiration.",
+            "Its response to dynamic manoeuvres.",
+            "The site of maximum intensity."
+          ],
+          "note": "A description missing even one of the first three (timing, grade, site) is not usable on a case sheet."
+        },
+        {
+          "heading": "Configuration: the shape of the murmur",
+          "points": [
+            {
+              "t": "Crescendo.",
+              "d": "Progressively increasing intensity."
+            },
+            {
+              "t": "Decrescendo.",
+              "d": "Progressively decreasing intensity."
+            },
+            {
+              "t": "Crescendo-decrescendo (diamond or kite-shaped).",
+              "d": "Rises then falls, the classic shape of an ejection systolic murmur."
+            },
+            {
+              "t": "Plateau.",
+              "d": "Roughly constant intensity throughout, typical of a pansystolic murmur."
+            }
+          ]
+        },
+        {
+          "heading": "Grading murmurs, systolic and diastolic",
+          "body": "Systolic murmurs use the six-point Levine-Freeman scale; diastolic murmurs are graded on a shorter four-point scale, since they never reach the very loud, at-a-distance intensities a systolic murmur can.",
+          "wideTable": {
+            "cols": [
+              "Grade",
+              "Systolic (Levine-Freeman)",
+              "Diastolic (AIIMS)",
+              "Thrill"
+            ],
+            "rows": [
+              [
+                "1",
+                "Heard only after special effort",
+                "Very soft",
+                "Absent"
+              ],
+              [
+                "2",
+                "Faint, but immediately audible",
+                "Soft",
+                "Absent"
+              ],
+              [
+                "3",
+                "Moderately loud",
+                "Loud",
+                "Absent"
+              ],
+              [
+                "4",
+                "Loud, with a palpable thrill",
+                "Very loud",
+                "Present"
+              ],
+              [
+                "5",
+                "Very loud, audible with the stethoscope edge barely touching the chest",
+                "-",
+                "Present"
+              ],
+              [
+                "6",
+                "Audible with the stethoscope just off the chest wall",
+                "-",
+                "Present"
+              ]
+            ]
+          },
+          "note": "A thrill, a palpable murmur, only accompanies grade 4 or louder. If you cannot feel a thrill, do not grade the murmur 4 or above."
+        },
+        {
+          "heading": "Radiation and conduction are not the same thing",
+          "body": "Radiation travels through non-cardiac tissue and fades with distance; conduction follows the anatomical continuity of the blood flow itself, and its intensity can stay the same or fall only gradually.",
+          "points": [
+            "Mitral regurgitation (pansystolic) radiates to the axilla.",
+            "Tricuspid regurgitation (pansystolic) radiates to the epigastrium.",
+            "Aortic stenosis (ejection systolic) conducts to the carotids.",
+            "Pulmonary stenosis (ejection systolic) conducts toward the clavicle.",
+            "Aortic regurgitation (early diastolic) at the right 2nd ICS radiates down to the left 3rd ICS (Erb's point).",
+            "PDA murmur, loudest at the infraclavicular area, radiates to the back."
+          ]
+        },
+        {
+          "heading": "Site, radiation and the manoeuvre that confirms it",
+          "table": {
+            "cols": [
+              "Murmur",
+              "Best heard",
+              "Radiates to",
+              "Confirm with"
+            ],
+            "rows": [
+              [
+                "Aortic stenosis",
+                "Aortic area, 2nd right ICS",
+                "Carotids",
+                "Sitting forward, expiration"
+              ],
+              [
+                "Mitral regurgitation",
+                "Apex",
+                "Axilla",
+                "Left lateral position"
+              ],
+              [
+                "Aortic regurgitation",
+                "Left sternal edge (Erb's area)",
+                "Down the left sternal border",
+                "Sitting forward, expiration, breath held"
+              ],
+              [
+                "Mitral stenosis",
+                "Apex, localised",
+                "Does not radiate widely",
+                "Left lateral position, bell, after exercise"
+              ],
+              [
+                "Tricuspid regurgitation",
+                "Lower left sternal edge",
+                "",
+                "Louder on inspiration (Carvallo's sign)"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Respiration: the right side answers to inspiration, the left to expiration",
+          "body": "Breathing affects the right side of the heart more than the left, because inspiration increases venous return to the right heart while the pulmonary venous capacitance vessels simultaneously reduce return to the left.",
+          "table": {
+            "cols": [
+              "Louder on inspiration (right-sided)",
+              "Louder on expiration (left-sided)"
+            ],
+            "rows": [
+              [
+                "TS, TR (Carvallo's sign), PR, PS",
+                "MS, MR, AS, AR, VSD, pericardial rub"
+              ]
+            ]
+          },
+          "note": "Carvallo's sign, a right-sided murmur getting louder on inspiration, is one of the few bedside signs that reliably lateralises a murmur to the right heart. The effect can be amplified with Muller's manoeuvre, a forced inspiration against a closed glottis."
+        },
+        {
+          "heading": "Position and other manoeuvres",
+          "table": {
+            "cols": [
+              "Manoeuvre",
+              "Accentuates"
+            ],
+            "rows": [
+              [
+                "Left lateral decubitus",
+                "S1, LV S3/S4, opening snap of MS; the murmurs of MS, MR, MVP click-murmur, and the Austin Flint murmur"
+              ],
+              [
+                "Sitting forward, expiration",
+                "AR and PR"
+              ],
+              [
+                "Lying flat, or passive leg raise",
+                "S3 and S4; the murmurs of valvular AS/PS and TR. It attenuates the early diastolic murmur of AR and the murmur of HOCM, and delays the click and murmur of MVP."
+              ],
+              [
+                "Squatting",
+                "MS, MR, AS, AR (increased venous return and afterload); attenuates HOCM and delays MVP"
+              ],
+              [
+                "Valsalva strain / standing",
+                "HOCM and the MVP click-murmur (earlier); attenuates AS, AR, MR, MS"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Named murmurs worth recognising",
+          "table": {
+            "cols": [
+              "Name",
+              "Description"
+            ],
+            "rows": [
+              [
+                "Austin Flint murmur",
+                "A mid-to-late diastolic murmur heard in severe aortic regurgitation, from the regurgitant jet striking the anterior mitral leaflet"
+              ],
+              [
+                "Graham Steell murmur",
+                "A high-pitched early diastolic murmur of pulmonary regurgitation, classically from severe pulmonary hypertension"
+              ],
+              [
+                "Carey Coombs murmur",
+                "A mid-diastolic murmur described in acute rheumatic fever, with active carditis"
+              ],
+              [
+                "Gibson's murmur",
+                "The continuous, machinery-like murmur of a patent ductus arteriosus"
+              ],
+              [
+                "Still's murmur",
+                "An innocent, vibratory systolic murmur at the lower left sternal border, typical of childhood"
+              ],
+              [
+                "Duroziez's murmur",
+                "A to-and-fro murmur heard over the femoral artery on gentle compression, in aortic regurgitation"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Innocent murmurs exist, and they are common in children",
+          "body": "An innocent murmur is not due to any recognisable structural lesion of the heart or vessels. Examples include Still's murmur, a pulmonic flow murmur, a mammary souffle, a peripheral pulmonic flow murmur, and a supraclavicular or brachiocephalic flow murmur; a venous hum is the classic innocent continuous murmur.",
+          "note": "Every diastolic murmur is pathological. There is no such thing as an innocent diastolic murmur, which makes timing the first and most important safety check you perform."
+        }
+      ],
+      "pitfalls": [
+        "Describing a murmur with no timing.",
+        "Grading a murmur 4 or above without a palpable thrill.",
+        "Forgetting to check whether a right-sided murmur changes with inspiration.",
+        "Calling any diastolic murmur innocent; none are."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What must you establish about a murmur before anything else?",
+          "a": "Its timing: systolic or diastolic.",
+          "accept": [
+            "timing",
+            "systolic",
+            "diastolic"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "An ejection systolic murmur at the aortic area radiating to the carotids. What is it?",
+          "a": "Aortic stenosis.",
+          "accept": [
+            "aortic stenosis"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "A murmur becomes louder on inspiration. What does that tell you?",
+          "a": "It is right-sided, Carvallo's sign, typically tricuspid regurgitation, because inspiration increases venous return to the right heart.",
+          "accept": [
+            "right",
+            "carvallo",
+            "tricuspid"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 4,
+          "q": "You feel a thrill at the apex. What is the minimum grade you can assign the murmur?",
+          "a": "Grade 4, since a thrill only accompanies grade 4 or louder.",
+          "accept": [
+            "4",
+            "grade 4",
+            "four"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 4,
+          "q": "A mid-to-late diastolic murmur is heard at the apex in a patient with severe aortic regurgitation, but the mitral valve itself is structurally normal. What is this called and what causes it?",
+          "a": "The Austin Flint murmur, caused by the regurgitant aortic jet striking the anterior mitral leaflet, not by any intrinsic mitral valve disease.",
+          "accept": [
+            "austin flint"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [
+        {
+          "id": "timing",
+          "text": "States timing correctly",
+          "critical": true
+        },
+        {
+          "id": "site",
+          "text": "Locates and follows radiation or conduction"
+        },
+        {
+          "id": "grade",
+          "text": "Grades intensity, checking for a thrill before grading 4+"
+        }
+      ],
+      "media": [
+        "media.img.phonocardiogram",
+        "media.vid.mitralstenosis"
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Cardiovascular: murmurs"
+        },
+        {
+          "source": "Macleod's Clinical Examination",
+          "locator": "The cardiovascular system: murmurs"
+        },
+        {
+          "source": "Alagappan, Manual of Practical Medicine",
+          "locator": "Cardiovascular system: murmurs"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.exam.cvs.heart_failure_signs": {
+      "id": "skill.exam.cvs.heart_failure_signs",
+      "kind": "exam",
+      "system": "cardiovascular",
+      "title": "Signs of heart failure, as one syndrome check",
+      "oneLine": "Raised JVP, a third sound, basal crepitations, hepatomegaly and oedema, read together",
+      "why": "No single sign of heart failure is sensitive or specific enough alone. The case sheet asks you to check the whole cluster deliberately, because it is the combination, not any one finding, that lets you say 'in failure' with confidence, and to say whether it is predominantly left, right, or congestive.",
+      "steps": [
+        {
+          "text": "Look for the general signs of low cardiac output first: fatigue, a resting tachycardia, cool peripheries, a narrow pulse pressure."
+        },
+        {
+          "text": "Check the JVP at 45 degrees; a raised JVP is the single most useful sign of right-sided decompensation."
+        },
+        {
+          "text": "Palpate the liver for tender hepatomegaly, and check for ascites, both markers of systemic venous congestion."
+        },
+        {
+          "text": "Examine both legs for pitting, dependent oedema, and the sacrum in a bedbound patient."
+        },
+        {
+          "text": "Auscultate the lung bases for fine, late-inspiratory crepitations that do not clear with coughing, a sign of pulmonary venous congestion."
+        },
+        {
+          "text": "Auscultate the heart specifically for a third heart sound and a displaced, diffuse apex."
+        }
+      ],
+      "normal": "JVP not raised, no hepatomegaly or ascites, no dependent oedema, clear lung bases, no S3.",
+      "abnormal": "Any combination of a raised JVP, tender hepatomegaly, ascites, dependent oedema, basal crepitations, and an S3 gallop.",
+      "significance": "Right-sided signs (raised JVP, hepatomegaly, oedema, ascites) predominate in isolated right heart failure or cor pulmonale. Left-sided signs (basal crepitations, S3, a displaced diffuse apex) predominate in isolated left heart failure. When both clusters are present together, the patient is in congestive cardiac failure, and the NYHA class should be recorded alongside the finding.",
+      "teach": [
+        {
+          "heading": "Two clusters, and what each means on its own",
+          "table": {
+            "cols": [
+              "Left-sided signs",
+              "Right-sided signs"
+            ],
+            "rows": [
+              [
+                "Exertional breathlessness, orthopnoea, PND; basal crepitations; an S3; a displaced, diffuse apex",
+                "A raised JVP; tender (sometimes pulsatile) hepatomegaly; ascites; dependent pitting oedema"
+              ]
+            ]
+          },
+          "note": "The two clusters do not always appear together. A patient can be breathless with clear legs and a normal JVP, purely left-sided, or swollen with clear lungs, purely right-sided, particularly in cor pulmonale."
+        },
+        {
+          "heading": "Why the crepitations must be fine, late-inspiratory, and basal",
+          "body": "Pulmonary venous congestion produces crepitations that start at the lung bases, are fine and late in inspiration, and persist despite coughing. Coarse or early crepitations that clear with a cough are more likely secretions than true congestion."
+        },
+        {
+          "heading": "Grade and record it, do not just say 'in failure'",
+          "body": "Once you have identified the syndrome, state whether it is predominantly left, right or congestive, and record the NYHA functional class taken from the history alongside the examination finding, so the finding and the functional grade travel together on the case sheet."
+        },
+        {
+          "heading": "Oedema is not always cardiac",
+          "body": "The same dependent, pitting pattern that worsens by evening and improves after a night flat is what marks oedema as venous or cardiac in origin. A renal or hepatic cause needs the same bedside distinction: check for facial puffiness and oliguria (renal), or jaundice and ascites out of proportion to the leg swelling (hepatic), before assuming a cardiac cause."
+        }
+      ],
+      "pitfalls": [
+        "Declaring 'no heart failure' from a normal JVP alone, without checking the lung bases.",
+        "Missing bibasal crepitations because only the upper zones were auscultated.",
+        "Forgetting to grade the NYHA class once failure is confirmed.",
+        "Calling ascites and pedal oedema cardiac without checking for a hepatic or renal cause."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Name three examination findings you would look for to confirm right-sided heart failure.",
+          "a": "A raised JVP, tender hepatomegaly, ascites, and dependent pitting oedema.",
+          "accept": [
+            "jvp",
+            "hepatomegaly",
+            "oedema",
+            "edema",
+            "ascites"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "What kind of crepitations, and where, point to pulmonary venous congestion?",
+          "a": "Fine, late-inspiratory crepitations at the lung bases that do not clear with coughing.",
+          "accept": [
+            "fine",
+            "late-inspiratory",
+            "basal",
+            "bases"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "A patient has a raised JVP, tender hepatomegaly and pedal oedema, but clear lung fields and no S3. What best describes this, and why does the distinction matter?",
+          "a": "Predominantly isolated right-sided heart failure (or cor pulmonale if driven by lung disease); it matters because the differential and the driving disease differ from left-sided failure.",
+          "accept": [
+            "right",
+            "cor pulmonale"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 4,
+          "q": "Why is a single sign, on its own, never enough to call 'heart failure' on a case sheet?",
+          "a": "No individual sign is sufficiently sensitive or specific; it is the combination of right- and/or left-sided signs together that gives diagnostic confidence, since each sign taken alone also has other causes.",
+          "accept": [
+            "combination",
+            "cluster",
+            "sensitive",
+            "specific"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [
+        {
+          "id": "cluster",
+          "text": "Checks both left- and right-sided signs rather than stopping at one"
+        },
+        {
+          "id": "crepitations",
+          "text": "Auscultates both lung bases specifically"
+        },
+        {
+          "id": "grade",
+          "text": "States which side predominates, and records the NYHA class"
+        }
+      ],
+      "media": [
+        "media.cvs.heartfailure.signs"
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Cardiovascular: signs of heart failure"
+        },
+        {
+          "source": "Macleod's Clinical Examination",
+          "locator": "The cardiovascular system: examination"
+        },
+        {
+          "source": "Harrison's Principles of Internal Medicine",
+          "locator": "Heart failure: physical examination"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.hx.cvs.dyspnea_edema": {
+      "id": "skill.hx.cvs.dyspnea_edema",
+      "kind": "history",
+      "system": "cardiovascular",
+      "title": "Breathlessness and swelling, the cardiac history",
+      "oneLine": "Orthopnoea, PND, ankle swelling, and the functional class",
+      "why": "Cardiac breathlessness has its own pattern, and asking about orthopnoea, PND and ankle swelling together turns a vague symptom into a syndrome you can grade and follow over time.",
+      "asks": [
+        {
+          "text": "Are you more breathless lying flat? How many pillows do you use?"
+        },
+        {
+          "text": "Do you wake at night gasping for breath? What do you do about it?"
+        },
+        {
+          "text": "Any swelling of the ankles? Worse by evening, better after a night's rest?"
+        },
+        {
+          "text": "How much can you do before you stop: housework, one flight of stairs, across a room?"
+        },
+        {
+          "text": "Any palpitations, chest pain, or blackouts with exertion?"
+        },
+        {
+          "text": "Any decreased urine output, or unusual tiredness that has crept up over weeks?"
+        },
+        {
+          "text": "Any past history of rheumatic fever, or fever with joint pains as a child?"
+        }
+      ],
+      "teach": [
+        {
+          "heading": "Grade it like breathlessness anywhere else",
+          "body": "The New York Heart Association class does for cardiac symptoms what mMRC does for COPD: it anchors the sensation to what the patient can actually do.",
+          "points": [
+            "Class I: no limitation, ordinary activity causes no symptoms.",
+            "Class II: slight limitation, comfortable at rest, ordinary activity causes symptoms.",
+            "Class III: marked limitation, comfortable at rest, less than ordinary activity causes symptoms.",
+            "Class IV: symptoms at rest, any activity increases discomfort."
+          ]
+        },
+        {
+          "heading": "Ankle swelling: ask WHEN, not just whether",
+          "body": "Cardiac oedema is classically dependent and worse by evening, better after a night flat in bed, because gravity pools the fluid during the day and redistributes it overnight.",
+          "note": "Swelling that is the same all day, or worse in the morning, points away from a simple cardiac cause and towards a renal or lymphatic one. Unilateral swelling points to a local cause, such as DVT or cellulitis, rather than a systemic one."
+        },
+        {
+          "heading": "Beyond orthopnoea: three less common but genuine patterns",
+          "points": [
+            {
+              "t": "Trepopnea.",
+              "d": "Breathlessness that appears lying on one side and eases lying on the other."
+            },
+            {
+              "t": "Platypnea.",
+              "d": "Breathlessness that appears sitting or standing up and eases lying flat, the opposite pattern to orthopnoea; classically associated with an intracardiac or intrapulmonary shunt (platypnea-orthodeoxia)."
+            },
+            {
+              "t": "Bendopnea.",
+              "d": "Breathlessness that appears within roughly 30 seconds of bending forward, described as a marker of advanced heart failure with elevated cardiac filling pressures."
+            }
+          ],
+          "note": "These are worth asking about specifically in a patient whose breathlessness pattern does not fit simple orthopnoea, rather than assuming the history is negative."
+        },
+        {
+          "heading": "The rest of the cardiac symptom cluster, in one pass",
+          "points": [
+            {
+              "t": "Palpitations.",
+              "d": "Ask fast or slow, regular or irregular, how it starts and stops, and whether it is followed by a bout of passing more urine than usual (post-palpitation diuresis), which is a recognised feature of atrial fibrillation from natriuretic peptide release."
+            },
+            {
+              "t": "Syncope.",
+              "d": "Distinguish true loss of consciousness from presyncope (feeling about to black out), and ask about precipitating factors and any warning."
+            },
+            {
+              "t": "Cyanotic spells and squatting.",
+              "d": "In a child, ask about blue spells and whether they squat after exertion; squatting increases systemic vascular resistance and briefly improves a right-to-left shunt, a pattern classically described in cyanotic congenital heart disease."
+            },
+            {
+              "t": "Rheumatic fever and infective endocarditis.",
+              "d": "Ask specifically about a past history of rheumatic fever (fever with joint pains, a rash, or chorea as a child) and about fever, weight loss or dental procedures that might point to endocarditis."
+            }
+          ]
+        }
+      ],
+      "pitfalls": [
+        "Not grading the exertion, so 'breathless' means nothing comparable over time.",
+        "Not asking whether ankle swelling settles overnight, which is what marks it as dependent.",
+        "Assuming a negative answer to 'breathless lying flat' rules out platypnea or bendopnea, which have the opposite or a different pattern.",
+        "Never asking about rheumatic fever or endocarditis risk factors in a patient with valvular disease."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What NYHA class describes symptoms with less than ordinary activity, comfortable at rest?",
+          "a": "Class III.",
+          "accept": [
+            "iii",
+            "3",
+            "three"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "Why does dependent oedema classically improve overnight?",
+          "a": "Lying flat removes the gravitational pooling that collects fluid in the legs during the day, allowing it to redistribute and be reabsorbed.",
+          "accept": [
+            "gravity",
+            "redistribut",
+            "flat",
+            "lying"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "What is platypnea, and how does it differ from orthopnoea?",
+          "a": "Breathlessness that appears on sitting or standing and eases lying flat, the opposite pattern to orthopnoea, classically associated with an intracardiac or intrapulmonary shunt.",
+          "accept": [
+            "sitting",
+            "standing",
+            "opposite",
+            "shunt"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 4,
+          "q": "A patient describes an irregular, pounding sensation in the neck along with their palpitations. What does this suggest, and why?",
+          "a": "It suggests atrioventricular dissociation, with the atrium occasionally contracting against a closed tricuspid valve, producing a cannon A wave in the jugular pulse; this occurs with ventricular ectopics, complete heart block, or ventricular tachycardia.",
+          "accept": [
+            "cannon",
+            "dissociation",
+            "av dissociation"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [
+        {
+          "id": "grade",
+          "text": "Grades breathlessness against activity"
+        },
+        {
+          "id": "orthopnd",
+          "text": "Distinguishes orthopnoea from PND"
+        },
+        {
+          "id": "oedema",
+          "text": "Asks about the timing and distribution of ankle swelling"
+        }
+      ],
+      "media": [],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Cardiovascular: dyspnoea and oedema"
+        },
+        {
+          "source": "Macleod's Clinical Examination",
+          "locator": "The cardiovascular system: the history"
+        },
+        {
+          "source": "Alagappan, Manual of Practical Medicine",
+          "locator": "Cardiovascular system: symptomatology"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.hx.rhd.rheumatic_fever": {
+      "id": "skill.hx.rhd.rheumatic_fever",
+      "kind": "history",
+      "system": "cardiovascular",
+      "title": "The rheumatic fever and prophylaxis history",
+      "oneLine": "A childhood sore throat and joint pains, then whether the injections actually happened",
+      "why": "This history is often the only place the aetiology of a valve lesion becomes clear, and the prophylaxis question is the only genuinely actionable item in the whole encounter. Both are routinely skipped because they require asking about events from years or decades ago that the patient may not immediately connect to today's breathlessness.",
+      "asks": [
+        {
+          "text": "As a child, did you ever have a fever together with painful, swollen joints that moved from one joint to another?"
+        },
+        {
+          "text": "Was there ever a rash, or jerky, uncontrolled movements, around that time?"
+        },
+        {
+          "text": "Did anyone ever tell you that you had a heart murmur, and if so, at what age was it first found?"
+        },
+        {
+          "text": "Have you ever been told you need a monthly (or three-weekly) injection to protect your heart? Are you still getting it?"
+        },
+        {
+          "text": "Since then, have you had any further episodes of sore throat with fever and joint pains?"
+        },
+        {
+          "text": "Any recent dental work, tooth extraction, or other procedure, and any fever since?"
+        }
+      ],
+      "teach": [
+        {
+          "heading": "What to listen for in a vague childhood story",
+          "body": "Most adult patients will not say 'I had rheumatic fever'. They will describe a fever with joint pains that moved around, sometimes with a rash or clumsiness that was never properly explained, usually in childhood or adolescence, usually never actually seen by a doctor.",
+          "note": "A migratory pattern, one joint settling as another flares, is the detail that most reliably separates this from a simple viral arthralgia."
+        },
+        {
+          "heading": "Why the prophylaxis question changes the plan",
+          "body": "A patient already diagnosed and on regular benzathine penicillin needs her regimen reviewed and continued. A patient who was told once, years ago, and never followed up needs prophylaxis restarted today, which is the single most correctable intervention in the whole visit.",
+          "note": "Ask HOW they take it, not just WHETHER: an oral regimen taken irregularly is a different problem from an injectable regimen the patient simply stopped attending for."
+        }
+      ],
+      "pitfalls": [
+        "Asking only 'did you have rheumatic fever' and accepting a 'no' without describing the symptom pattern in plain language.",
+        "Never asking specifically about prophylaxis adherence, which is the one thing you can fix today.",
+        "Forgetting to ask about recent dental or surgical procedures and subsequent fever, which raises endocarditis on an already-damaged valve."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What childhood symptom pattern should make you ask about rheumatic fever, even if the patient does not use that name?",
+          "a": "A fever with painful, swollen joints that move from one joint to another (migratory polyarthritis).",
+          "accept": [
+            "migrat",
+            "joint",
+            "fever"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "Why is asking about prophylaxis adherence more useful than simply asking whether the patient is 'on treatment'?",
+          "a": "Because a patient can be nominally prescribed prophylaxis while actually missing most doses; adherence, not prescription, is what has been protecting the valve, and lapsed adherence is directly correctable.",
+          "accept": [
+            "adherence",
+            "missed",
+            "actually"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "A patient with known rheumatic mitral stenosis had a tooth extraction two weeks ago and now has fever. What must you specifically ask about and examine for?",
+          "a": "Infective endocarditis on the already-damaged valve: ask about the fever pattern, night sweats and weight loss, and examine for a changing murmur, splinter haemorrhages, Osler's nodes, Janeway lesions and splenomegaly.",
+          "accept": [
+            "endocarditis",
+            "murmur",
+            "splinter"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [
+        {
+          "id": "throat",
+          "text": "Describes the migratory joint/fever pattern in plain language rather than only naming rheumatic fever",
+          "critical": true
+        },
+        {
+          "id": "prophylaxis",
+          "text": "Asks specifically about ongoing secondary prophylaxis and adherence"
+        },
+        {
+          "id": "recurrence",
+          "text": "Screens for further episodes and for recent procedures raising endocarditis risk"
+        }
+      ],
+      "media": [],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Cardiovascular: rheumatic fever history"
+        },
+        {
+          "source": "Macleod's Clinical Examination",
+          "locator": "The cardiovascular system: the history"
+        },
+        {
+          "source": "Alagappan, Manual of Practical Medicine",
+          "locator": "Cardiovascular system: symptomatology"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.hx.ccf.precipitants": {
+      "id": "skill.hx.ccf.precipitants",
+      "kind": "history",
+      "system": "cardiovascular",
+      "title": "What tipped a stable patient into decompensation",
+      "oneLine": "Diet, drugs, infection, arrhythmia, ischaemia: the short, deliberate list you actually ask about",
+      "why": "A stable heart failure patient rarely decompensates for no reason. Finding the trigger is not an academic exercise, treating it is often as important as treating the congestion itself, and missing it means the same admission happens again.",
+      "asks": [
+        {
+          "text": "Have you missed any of your regular tablets recently, particularly your water tablet or your heart tablets? How many days?"
+        },
+        {
+          "text": "Any change in your diet lately: a celebration, eating out, extra salt, pickles or papad?"
+        },
+        {
+          "text": "Have you taken any new tablets, including over-the-counter painkillers or anti-inflammatories?"
+        },
+        {
+          "text": "Any fever, cough, or symptoms of an infection recently?"
+        },
+        {
+          "text": "Any new palpitations, or an irregular heartbeat?"
+        },
+        {
+          "text": "Any new or worsening chest pain?"
+        },
+        {
+          "text": "For a woman: could you be pregnant, or have you recently delivered?"
+        },
+        {
+          "text": "Any new or worsening kidney or thyroid problem that you know of?"
+        }
+      ],
+      "teach": [
+        {
+          "heading": "Cardiac precipitants, ask about these first",
+          "points": [
+            {
+              "t": "Dietary or medication non-adherence.",
+              "d": "The single commonest precipitant. Ask specifically and non-judgementally; patients often under-report this unless asked directly."
+            },
+            {
+              "t": "A new arrhythmia, especially atrial fibrillation.",
+              "d": "Loss of the atrial contribution to filling and a fast ventricular rate both reduce cardiac output."
+            },
+            {
+              "t": "Myocardial ischaemia or infarction.",
+              "d": "A new event can decompensate a previously stable heart, sometimes without dramatic pain."
+            }
+          ],
+          "note": "These three account for most decompensations and are the ones a clinician should rule out by reflex."
+        },
+        {
+          "heading": "Systemic precipitants, easy to miss because they sit outside the heart",
+          "points": [
+            {
+              "t": "Infection.",
+              "d": "Increases metabolic demand and heart rate, and can precipitate decompensation even when mild."
+            },
+            {
+              "t": "A new drug.",
+              "d": "NSAIDs cause sodium and fluid retention; some calcium channel blockers, corticosteroids and thiazolidinediones can also precipitate or worsen congestion."
+            },
+            {
+              "t": "Uncontrolled hypertension.",
+              "d": "A sudden rise in afterload can precipitate acute pulmonary oedema even in a previously compensated ventricle."
+            },
+            {
+              "t": "Anaemia, thyroid disease, renal deterioration and pregnancy.",
+              "d": "Each increases demand on, or fluid retention by, an already-limited heart."
+            }
+          ],
+          "note": "Asking this list takes under two minutes and regularly changes both the immediate management and the discharge plan."
+        }
+      ],
+      "pitfalls": [
+        "Treating the congestion without ever asking what triggered this particular admission.",
+        "Accepting 'I take my tablets' without asking specifically about the last two weeks.",
+        "Forgetting that a common over-the-counter painkiller can be the whole explanation."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Name three common precipitants of acute decompensation in a previously stable heart failure patient.",
+          "a": "Dietary or medication non-adherence, a new arrhythmia, infection, myocardial ischaemia, or a new drug such as an NSAID.",
+          "accept": [
+            "non-adherence",
+            "arrhythmia",
+            "infection",
+            "ischaemia",
+            "nsaid"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "Why can an NSAID precipitate heart failure decompensation?",
+          "a": "NSAIDs cause sodium and fluid retention and can reduce renal perfusion, both of which promote congestion in a patient with limited cardiac reserve.",
+          "accept": [
+            "sodium",
+            "fluid retention",
+            "renal"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "Why is finding the precipitant as important as treating the congestion itself?",
+          "a": "Because treating congestion without addressing the trigger leaves the same vulnerability in place, and the patient is likely to decompensate again in the same way; identifying and correcting the precipitant is part of preventing readmission.",
+          "accept": [
+            "readmission",
+            "recur",
+            "same",
+            "prevent"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [
+        {
+          "id": "screen",
+          "text": "Systematically screens the short precipitant list rather than asking only about symptoms",
+          "critical": true
+        },
+        {
+          "id": "adherence",
+          "text": "Specifically checks recent medication and dietary adherence"
+        }
+      ],
+      "media": [],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Cardiovascular: precipitants of decompensated heart failure"
+        },
+        {
+          "source": "Harrison's Principles of Internal Medicine",
+          "locator": "Heart failure: precipitating factors"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.hx.ihd.riskfactors": {
+      "id": "skill.hx.ihd.riskfactors",
+      "kind": "history",
+      "system": "cardiovascular",
+      "title": "The coronary risk factor history",
+      "oneLine": "The modifiable and non-modifiable factors, asked by name, not assumed from age",
+      "why": "Pretest probability in chest pain is built almost entirely from the risk factor profile, and every one of these factors is also a treatment target once the diagnosis is made. Asking them by name, rather than a general 'any health problems', is what makes both the diagnosis and the secondary prevention plan complete.",
+      "asks": [
+        {
+          "text": "Do you have diabetes, and if so, for how long and how well controlled?"
+        },
+        {
+          "text": "Do you have high blood pressure? For how long, and are you taking your tablets regularly?"
+        },
+        {
+          "text": "Has your cholesterol ever been checked, and were you told it was high?"
+        },
+        {
+          "text": "Do you smoke, or have you ever smoked? How many, and for how long?"
+        },
+        {
+          "text": "Has anyone in your immediate family had a heart attack or sudden cardiac death, and at what age?"
+        },
+        {
+          "text": "Have you had a heart attack, angioplasty, stent, or bypass surgery before?"
+        },
+        {
+          "text": "How much do you exercise, and what does your usual diet look like?"
+        },
+        {
+          "text": "What is your weight and waist size, roughly, and has that changed recently?"
+        }
+      ],
+      "teach": [
+        {
+          "heading": "Why age at family history matters, not just its presence",
+          "body": "A family history only counts as a strong risk factor when it is PREMATURE: generally a first-degree relative affected before about 55 in a man or 65 in a woman. 'My father had a heart attack at 78' carries much less weight than 'my father had a heart attack at 48'.",
+          "note": "Ask the age specifically. Patients volunteer the fact readily but rarely the age unless asked."
+        },
+        {
+          "heading": "Non-modifiable versus modifiable, and why the split matters clinically",
+          "points": [
+            {
+              "t": "Non-modifiable.",
+              "d": "Age, male sex (or postmenopausal status in women), and family history of premature disease. These raise pretest probability but are not treatment targets themselves."
+            },
+            {
+              "t": "Modifiable.",
+              "d": "Diabetes, hypertension, dyslipidaemia, smoking, obesity, sedentary lifestyle and diet. Every one of these becomes a secondary prevention target the moment the diagnosis is confirmed."
+            }
+          ],
+          "note": "Documenting the modifiable factors is not just diagnostic bookkeeping, it is the first draft of the treatment plan."
+        }
+      ],
+      "pitfalls": [
+        "Asking about family history without asking the age it occurred.",
+        "Accepting 'my sugar is fine' without asking when it was last actually checked.",
+        "Treating risk factor history as background detail rather than the first draft of the secondary prevention plan."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Name four modifiable risk factors for ischaemic heart disease.",
+          "a": "Diabetes, hypertension, dyslipidaemia, smoking, obesity, and a sedentary lifestyle.",
+          "accept": [
+            "diabetes",
+            "hypertension",
+            "dyslipid",
+            "cholesterol",
+            "smoking",
+            "obesity"
+          ],
+          "minMatch": 3
+        },
+        {
+          "level": 2,
+          "q": "At what age of onset does a family history of coronary disease in a first-degree relative count as 'premature'?",
+          "a": "Roughly before 55 in a man, or before 65 in a woman.",
+          "accept": [
+            "55",
+            "65"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "Why does asking risk factors 'by name' matter more here than in most other histories?",
+          "a": "Because each named factor both raises or lowers pretest probability for the current presentation and independently becomes a specific secondary prevention target once the diagnosis is confirmed, so a vague general question loses information that changes two separate downstream decisions.",
+          "accept": [
+            "pretest",
+            "prevention",
+            "target"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [
+        {
+          "id": "byname",
+          "text": "Asks each major risk factor explicitly by name",
+          "critical": true
+        },
+        {
+          "id": "familyage",
+          "text": "Establishes the age of onset in a positive family history"
+        }
+      ],
+      "media": [],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Cardiovascular: coronary risk factor history"
+        },
+        {
+          "source": "Harrison's Principles of Internal Medicine",
+          "locator": "Risk factors for coronary heart disease"
+        },
+        {
+          "source": "Alagappan, Manual of Practical Medicine",
+          "locator": "Cardiovascular system: symptomatology"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.hx.ie.history": {
+      "id": "skill.hx.ie.history",
+      "kind": "history",
+      "system": "cardiovascular",
+      "title": "The infective endocarditis history",
+      "oneLine": "A known valve, a recent portal of entry, and the fever pattern that has been going on longer than it should",
+      "why": "This history is where the diagnosis is usually first suspected, days before any test confirms it. Missing the portal-of-entry question is the single commonest reason the diagnosis is delayed.",
+      "asks": [
+        {
+          "text": "Do you have a known heart murmur, valve problem, or a prosthetic heart valve?"
+        },
+        {
+          "text": "How has your fever behaved: continuous, or coming and going, with chills or drenching sweats?"
+        },
+        {
+          "text": "Any dental work, tooth extraction, or ongoing dental problems in the last few months?"
+        },
+        {
+          "text": "Do you inject any drugs, or have you had any recent procedure, catheter, piercing or tattoo?"
+        },
+        {
+          "text": "Any weight loss, loss of appetite, or generalised joint and muscle aches?"
+        },
+        {
+          "text": "Any new skin spots, painful lumps on your fingers or toes, or changes in your vision?"
+        },
+        {
+          "text": "Any new weakness, numbness, or difficulty speaking, which could suggest a stroke from an embolus?"
+        },
+        {
+          "text": "Any breathlessness that might suggest the valve itself is now failing?"
+        }
+      ],
+      "teach": [
+        {
+          "heading": "The portal of entry is a question you must ask, not wait to be told",
+          "body": "Patients rarely connect a tooth extraction three weeks ago with a fever today. Ask directly about dental work, injecting drug use, and any recent invasive procedure, since finding the portal both supports the diagnosis and identifies what needs addressing afterward.",
+          "note": "In practice, no portal of entry is found in a substantial proportion of cases, so a negative answer does not argue against the diagnosis; it simply means you did not find one this time."
+        },
+        {
+          "heading": "Read the fever, don't just record it",
+          "body": "A subacute course, low-grade or intermittent fever over weeks with malaise, weight loss and night sweats, points towards a less virulent organism on an already-damaged valve. A more acute, high, sustained fever with a rapidly unwell patient points towards a more virulent organism, often on a previously normal valve."
+        }
+      ],
+      "pitfalls": [
+        "Never asking specifically about dental work or intravenous drug use.",
+        "Treating a negative portal-of-entry history as evidence against the diagnosis.",
+        "Not asking about embolic symptoms (weakness, vision change, abdominal or flank pain) because the presenting complaint was simply 'fever'."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Name two classic portals of entry you should always ask about.",
+          "a": "Dental work or extraction, and intravenous drug use (or another recent invasive procedure or catheter).",
+          "accept": [
+            "dental",
+            "iv drug",
+            "catheter",
+            "procedure"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "What fever pattern, together with weeks of malaise and weight loss, suggests a subacute presentation?",
+          "a": "A low-grade, intermittent fever over an extended period, typically with a less virulent organism on an already-damaged valve.",
+          "accept": [
+            "low-grade",
+            "intermittent",
+            "weeks"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "A patient has fever and a known heart murmur but denies any dental work, drug use or recent procedure. Does this make endocarditis unlikely?",
+          "a": "No. A portal of entry is not identified in a substantial proportion of genuine cases, so its absence does not argue against the diagnosis; the fever and murmur combination still needs to be actively investigated.",
+          "accept": [
+            "no",
+            "not unlikely",
+            "still investigate"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [
+        {
+          "id": "portal",
+          "text": "Actively asks about dental work, IV drug use and recent procedures",
+          "critical": true
+        },
+        {
+          "id": "feverpattern",
+          "text": "Characterises the fever pattern and its duration"
+        },
+        {
+          "id": "embolic",
+          "text": "Screens for embolic and immunologic symptoms"
+        }
+      ],
+      "media": [],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Cardiovascular: infective endocarditis history"
+        },
+        {
+          "source": "Alagappan, Manual of Practical Medicine",
+          "locator": "Cardiovascular system: symptomatology"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.exam.ie.stigmata": {
+      "id": "skill.exam.ie.stigmata",
+      "kind": "general_exam",
+      "system": "cardiovascular",
+      "title": "The peripheral stigmata of infective endocarditis",
+      "oneLine": "Splinter haemorrhages, Osler's nodes, Janeway lesions and Roth spots, and which mechanism produces each",
+      "why": "These findings are frequently taught as a list to memorise for an exam and then never actually looked for on the ward. Each one is genuinely a bedside sign of active endocarditis, and each is either embolic or immunologic in origin, which is the detail that makes them memorable rather than arbitrary.",
+      "steps": [
+        {
+          "text": "Examine both hands closely: the fingertip pulps for tender nodules, the nail beds under good light for linear haemorrhages, and the palms for small erythematous macules."
+        },
+        {
+          "text": "Examine the conjunctivae for petechiae and any subconjunctival haemorrhage."
+        },
+        {
+          "text": "Perform fundoscopy specifically looking for retinal haemorrhages with a pale centre."
+        },
+        {
+          "text": "Palpate the abdomen for splenomegaly."
+        },
+        {
+          "text": "Re-examine the fingers for clubbing, which develops later, in a more prolonged, subacute course."
+        }
+      ],
+      "normal": "No splinter haemorrhages, no tender nodules on the pulps, no palmar or plantar macules, no conjunctival petechiae, no retinal changes, no splenomegaly, no clubbing.",
+      "abnormal": "Splinter haemorrhages under the nails, tender erythematous nodules on the finger or toe pulps (Osler's nodes), painless erythematous or haemorrhagic macules on the palms or soles (Janeway lesions), retinal haemorrhages with a pale centre (Roth spots), conjunctival petechiae, splenomegaly, or clubbing.",
+      "significance": "Splinter haemorrhages, Janeway lesions and splenomegaly are embolic phenomena, from tiny fragments of the vegetation lodging distally. Osler's nodes, Roth spots and conjunctival petechiae are immunologic phenomena, from circulating immune complexes depositing in small vessels. Finding any of these in a febrile patient, especially with a known or changing murmur, should move endocarditis to the top of the differential.",
+      "teach": [
+        {
+          "heading": "Embolic versus immunologic, and why the distinction is worth keeping",
+          "table": {
+            "cols": [
+              "Embolic phenomena",
+              "Immunologic phenomena"
+            ],
+            "rows": [
+              [
+                "Splinter haemorrhages, Janeway lesions, splenomegaly, and, systemically, stroke or renal/splenic infarcts",
+                "Osler's nodes, Roth spots, conjunctival petechiae, and glomerulonephritis"
+              ]
+            ]
+          },
+          "note": "Osler's nodes are classically described as tender; Janeway lesions are classically described as painless. That single difference, tender versus painless, is the fastest way to tell them apart at the bedside."
+        },
+        {
+          "heading": "Where to actually look",
+          "points": [
+            {
+              "t": "Hands and nails.",
+              "d": "Splinter haemorrhages under the nail beds, and the finger pulps for Osler's nodes."
+            },
+            {
+              "t": "Palms and soles.",
+              "d": "Janeway lesions - flat, non-tender, and easy to miss unless you look directly."
+            },
+            {
+              "t": "Eyes.",
+              "d": "Conjunctival petechiae on the lower lid, and fundoscopy for Roth spots if you have an ophthalmoscope."
+            },
+            {
+              "t": "Urine and vitals.",
+              "d": "Dipstick for haematuria, and a fever chart, since the immunologic and embolic signs both sit alongside evidence of the underlying infective process."
+            }
+          ],
+          "note": "None of these signs is sensitive on its own. Finding two or more in a febrile patient with a murmur is what should prompt blood cultures and an echocardiogram."
+        }
+      ],
+      "pitfalls": [
+        "Examining only the hands and skipping fundoscopy and the abdomen.",
+        "Confusing Osler's nodes with Janeway lesions; the tender-versus-painless distinction is the key.",
+        "Treating the absence of stigmata as evidence against the diagnosis; they are far from universally present, especially early in the illness.",
+        "Forgetting that splinter haemorrhages have several non-infective causes, including trauma, and are not specific on their own."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Name two peripheral stigmata of infective endocarditis and where you would look for each.",
+          "a": "Splinter haemorrhages under the nails, and Osler's nodes on the finger or toe pulps (or Janeway lesions on the palms/soles, or Roth spots on fundoscopy).",
+          "accept": [
+            "splinter",
+            "osler",
+            "janeway",
+            "roth"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "What is the key clinical difference between an Osler's node and a Janeway lesion?",
+          "a": "Osler's nodes are tender; Janeway lesions are painless.",
+          "accept": [
+            "tender",
+            "painless"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "Classify Osler's nodes, Roth spots, splinter haemorrhages and Janeway lesions as embolic or immunologic.",
+          "a": "Splinter haemorrhages and Janeway lesions are embolic, from vegetation fragments; Osler's nodes and Roth spots are immunologic, from circulating immune complexes.",
+          "accept": [
+            "splinter embolic",
+            "janeway embolic",
+            "osler immunologic",
+            "roth immunologic"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "hands",
+          "text": "Examines the hands systematically for nodules and splinter haemorrhages"
+        },
+        {
+          "id": "fundoscopy",
+          "text": "Performs or documents fundoscopy specifically for Roth spots"
+        },
+        {
+          "id": "distinguish",
+          "text": "Correctly distinguishes Osler's nodes from Janeway lesions"
+        }
+      ],
+      "media": [
+        "media.img.splinterhem",
+        "media.img.oslernodes",
+        "media.img.janewaylesion"
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Cardiovascular: peripheral signs of endocarditis"
+        },
+        {
+          "source": "Macleod's Clinical Examination",
+          "locator": "The cardiovascular system: peripheral signs"
+        },
+        {
+          "source": "Alagappan, Manual of Practical Medicine",
+          "locator": "Cardiovascular system: infective endocarditis"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.hx.chd.history": {
+      "id": "skill.hx.chd.history",
+      "kind": "history",
+      "system": "cardiovascular",
+      "title": "The congenital heart disease history",
+      "oneLine": "Growth, effort tolerance, cyanotic spells, and the antenatal story",
+      "why": "In a child, growth and effort tolerance carry the diagnostic weight that breathlessness grading carries in an adult, and both parent and child need age-appropriate versions of the same questions. Missing the antenatal history and the family history means missing a clue to an associated syndrome that can point straight at the specific lesion.",
+      "asks": [
+        {
+          "text": "How has the child's growth been: is weight gain and height tracking normally on the growth chart?"
+        },
+        {
+          "text": "As a baby, did feeding take a long time, or did the baby get tired, sweaty or breathless while feeding?"
+        },
+        {
+          "text": "How is the child's effort tolerance compared to other children the same age: running, playing, keeping up?"
+        },
+        {
+          "text": "Has the child had recurrent chest infections, more than would be expected for age?"
+        },
+        {
+          "text": "Has anyone ever noticed the child turning blue, especially around the lips, or during crying or feeding?"
+        },
+        {
+          "text": "Does the child ever squat down suddenly after exertion?"
+        },
+        {
+          "text": "Was the pregnancy uneventful: any infection (particularly rubella), medication, or maternal illness such as diabetes during it?"
+        },
+        {
+          "text": "Is there any family history of congenital heart disease, or a known genetic syndrome?"
+        }
+      ],
+      "teach": [
+        {
+          "heading": "Growth is the paediatric equivalent of grading breathlessness",
+          "body": "A significant left-to-right shunt increases metabolic demand and can cause difficulty feeding in infancy, from breathlessness and fatigue during feeds, leading to poor weight gain. Ask specifically about feeding as an infant, not just current appetite.",
+          "note": "A well-grown, asymptomatic child with an incidentally found murmur is itself useful evidence that the lesion is small, exactly as normal growth argued for a small VSD in the worked case."
+        },
+        {
+          "heading": "Squatting is a specific clue, not a general one",
+          "body": "Squatting after exertion is described classically in cyanotic lesions such as tetralogy of Fallot: it increases systemic vascular resistance, which transiently reduces the right-to-left shunt and improves oxygenation. Its presence points away from a simple acyanotic shunt and towards a cyanotic lesion instead.",
+          "note": "Absence of squatting in an otherwise well child is a genuine negative finding worth documenting, not just a box to tick."
+        }
+      ],
+      "pitfalls": [
+        "Asking about current appetite instead of feeding difficulty as an infant, which is the more specific historical clue.",
+        "Never asking about squatting, cyanotic spells, or antenatal exposures.",
+        "Treating an asymptomatic incidental murmur as needing no history at all, when growth and effort tolerance still need to be actively established."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Why does poor weight gain matter in an infant with a suspected congenital heart lesion?",
+          "a": "A significant left-to-right shunt increases metabolic demand and can cause feeding difficulty from breathlessness and fatigue, leading to failure to thrive; poor growth is a genuine marker of a haemodynamically significant lesion.",
+          "accept": [
+            "metabolic demand",
+            "feeding",
+            "significant lesion"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "What does squatting after exertion classically suggest?",
+          "a": "A cyanotic lesion, classically tetralogy of Fallot, since squatting increases systemic vascular resistance and transiently reduces the right-to-left shunt.",
+          "accept": [
+            "cyanotic",
+            "tetralogy",
+            "fallot"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "Why is the antenatal history relevant to a suspected congenital heart lesion?",
+          "a": "Certain maternal exposures, particularly rubella infection, and certain maternal conditions such as diabetes, are recognised associations with specific congenital heart lesions, so the antenatal history can raise or narrow suspicion before any examination finding.",
+          "accept": [
+            "rubella",
+            "maternal",
+            "diabetes",
+            "exposure"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [
+        {
+          "id": "growth",
+          "text": "Establishes growth and infant feeding history",
+          "critical": true
+        },
+        {
+          "id": "cyanoticspells",
+          "text": "Screens for cyanosis and squatting"
+        },
+        {
+          "id": "antenatal",
+          "text": "Asks about the antenatal and family history"
+        }
+      ],
+      "media": [],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Cardiovascular: congenital heart disease history"
+        },
+        {
+          "source": "Alagappan, Manual of Practical Medicine",
+          "locator": "Cardiovascular system: history in congenital heart disease"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.hx.cvs.palpitations": {
+      "id": "skill.hx.cvs.palpitations",
+      "kind": "history",
+      "system": "cardiovascular",
+      "title": "Palpitations",
+      "oneLine": "Fast or slow, regular or irregular, and what the patient felt at the start and the end",
+      "why": "Palpitation is an awareness of the heartbeat, and the arrhythmia has usually gone by the time you see the patient. The history is often the only recording you will ever get, so it has to be taken as if you were reading a rhythm strip.",
+      "asks": [
+        {
+          "text": "Tap out on the table what your heart was doing. Ask them to actually do it."
+        },
+        {
+          "text": "Was it fast or slow, and was it regular or irregular?"
+        },
+        {
+          "text": "Did it start suddenly, like a switch, or build up gradually?"
+        },
+        {
+          "text": "How did it stop: suddenly, or did it fade away?"
+        },
+        {
+          "text": "How long did it last: seconds, minutes, or hours?"
+        },
+        {
+          "text": "What were you doing when it started? Standing up quickly, exertion, or at rest?"
+        },
+        {
+          "text": "Did you pass a lot of urine after the attack settled?"
+        },
+        {
+          "text": "Any blackout, chest pain, breathlessness or severe fatigue with it?"
+        },
+        {
+          "text": "Coffee, alcohol, tobacco, inhalers, thyroid symptoms, or new medicines?"
+        }
+      ],
+      "teach": [
+        {
+          "heading": "Tapping it out is worth more than any adjective",
+          "body": "Ask the patient to tap the rhythm. A regular fast tapping, abrupt at both ends, is a paroxysmal supraventricular tachycardia. An irregularly irregular tapping is atrial fibrillation. A single thump followed by a pause is an ectopic beat and its compensatory pause, which is the commonest and most benign of all.",
+          "table": {
+            "cols": [
+              "What they describe",
+              "Suggests"
+            ],
+            "rows": [
+              [
+                "Sudden on, sudden off, fast and regular",
+                "Paroxysmal supraventricular tachycardia"
+              ],
+              [
+                "Irregularly irregular, no pattern",
+                "Atrial fibrillation"
+              ],
+              [
+                "A skipped beat, then a thump",
+                "Ectopics with a compensatory pause"
+              ],
+              [
+                "Gradual onset and gradual offset, with anxiety",
+                "Sinus tachycardia"
+              ],
+              [
+                "Slow, with blackouts",
+                "Complete heart block"
+              ]
+            ]
+          },
+          "note": "Onset and offset are the most discriminating parts of the history. A switch-like start and stop means a re-entrant circuit."
+        },
+        {
+          "heading": "Post-palpitation diuresis",
+          "body": "A patient who passes a large volume of urine once the palpitation settles has given you a clue worth having. Atrial stretch during the tachycardia drives natriuretic peptide secretion, and the diuresis follows when the rhythm breaks. It points to an atrial arrhythmia, classically atrial fibrillation.",
+          "note": "Patients volunteer this rarely and remember it clearly once asked. It costs one question."
+        },
+        {
+          "heading": "The features that make this structural rather than benign",
+          "points": [
+            {
+              "t": "Syncope with the palpitation.",
+              "d": "Stokes-Adams attacks are sudden loss of consciousness from a transient arrest of cerebral perfusion, classically in complete heart block. This is not a benign palpitation."
+            },
+            {
+              "t": "Chest pain, breathlessness or severe fatigue with it.",
+              "d": "Suggests underlying structural heart disease rather than an isolated rhythm disturbance."
+            },
+            {
+              "t": "Occurring on exertion.",
+              "d": "Raises exercise-induced ventricular arrhythmia, which is dangerous."
+            },
+            {
+              "t": "Family history of sudden cardiac death.",
+              "d": "Ask it explicitly. It changes the urgency completely."
+            }
+          ]
+        },
+        {
+          "heading": "Posture and precipitant",
+          "body": "Palpitations that begin immediately on standing suggest orthostatic intolerance, including postural tachycardia syndrome. Those tied to anxiety or panic are usually a sinus tachycardia secondary to the mental state, which is a diagnosis of exclusion and not a first assumption. Always ask about caffeine, alcohol, tobacco, inhaled beta agonists and thyroid symptoms."
+        }
+      ],
+      "pitfalls": [
+        "Recording 'palpitations' without rate, rhythm, onset and offset, which is the whole diagnosis.",
+        "Not asking the patient to tap it out, and settling for the word 'fast'.",
+        "Missing syncope accompanying the palpitation, which turns a benign symptom into an urgent one.",
+        "Attributing it to anxiety before asking about exertion, family history of sudden death, and thyroid symptoms."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Sudden onset, sudden offset, fast and regular. What rhythm?",
+          "a": "A paroxysmal supraventricular tachycardia. The abrupt start and stop reflect a re-entrant circuit beginning and terminating.",
+          "accept": [
+            "supraventric",
+            "svt",
+            "re-entr",
+            "reentr",
+            "paroxysmal"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "Why does a patient pass a large volume of urine after an episode of atrial fibrillation settles?",
+          "a": "Atrial stretch during the tachycardia stimulates natriuretic peptide release, producing a diuresis once the rhythm converts. It points to an atrial arrhythmia.",
+          "accept": [
+            "natriuretic",
+            "atrial",
+            "stretch",
+            "peptide"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "Palpitations with sudden loss of consciousness and rapid full recovery. What is the mechanism and what is the underlying rhythm likely to be?",
+          "a": "A Stokes-Adams attack: a transient failure of cardiac output, usually from complete heart block or a ventricular arrhythmia, causing abrupt cerebral hypoperfusion. Recovery is rapid and complete once the rhythm resumes, with no post-ictal confusion.",
+          "accept": [
+            "stokes",
+            "stoke",
+            "heart block",
+            "asystol",
+            "ventricular"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [
+        {
+          "id": "rhythm",
+          "text": "Establishes rate and regularity, ideally by asking the patient to tap it out"
+        },
+        {
+          "id": "onsetoffset",
+          "text": "Asks about the manner of onset and offset"
+        },
+        {
+          "id": "diuresis",
+          "text": "Asks about post-palpitation diuresis"
+        },
+        {
+          "id": "danger",
+          "text": "Screens for syncope, exertional onset and family history of sudden death"
+        }
+      ],
+      "media": [],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Cardiovascular: symptomatology"
+        },
+        {
+          "source": "Macleod's Clinical Examination",
+          "locator": "The cardiovascular system: the history"
+        },
+        {
+          "source": "Harrison's Principles of Internal Medicine 22e",
+          "locator": "Palpitations and syncope"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.hx.cvs.syncope": {
+      "id": "skill.hx.cvs.syncope",
+      "kind": "history",
+      "system": "cardiovascular",
+      "title": "Syncope and blackouts",
+      "oneLine": "Before, during and after, which is what separates cardiac syncope from a seizure and from a faint",
+      "why": "Syncope is a transient loss of consciousness from inadequate cerebral perfusion, with spontaneous recovery and no resuscitation. Roughly a third of people have an episode in their lifetime and most are benign. The task is finding the cardiac ones, which carry a substantially worse prognosis: cardiac syncope is associated with around 30 percent mortality at one year in the Framingham cohort.",
+      "asks": [
+        {
+          "text": "What were you doing at the moment it happened: standing, standing up, exerting, or sitting?"
+        },
+        {
+          "text": "Was there any warning: light-headedness, nausea, sweating, tunnel vision?"
+        },
+        {
+          "text": "Ask a witness. How long were you out, and were there any jerking movements?"
+        },
+        {
+          "text": "Were you confused afterwards, or clear-headed straight away?"
+        },
+        {
+          "text": "Any tongue biting, particularly the side, or incontinence?"
+        },
+        {
+          "text": "How many attacks, over what period?"
+        },
+        {
+          "text": "Any palpitation, chest pain or breathlessness just before?"
+        },
+        {
+          "text": "Any family history of sudden death under 40?"
+        },
+        {
+          "text": "Any black stools, vomiting of blood, abdominal or back pain? Any chance of pregnancy?"
+        }
+      ],
+      "teach": [
+        {
+          "heading": "Syncope, seizure or a fall: the three-part history",
+          "table": {
+            "cols": [
+              "Feature",
+              "Cardiac syncope",
+              "Vasovagal faint",
+              "Seizure"
+            ],
+            "rows": [
+              [
+                "Warning",
+                "None, or brief palpitation",
+                "Nausea, sweating, tunnel vision",
+                "Aura may occur"
+              ],
+              [
+                "Posture",
+                "Any, including sitting or lying",
+                "Usually upright, prolonged standing",
+                "Any"
+              ],
+              [
+                "During",
+                "Pale, still; brief jerks possible",
+                "Pale, sweaty",
+                "Sustained rhythmic jerking"
+              ],
+              [
+                "Recovery",
+                "Immediate and complete",
+                "Rapid, may feel washed out",
+                "Confused for minutes"
+              ],
+              [
+                "Tongue",
+                "Not bitten",
+                "Not bitten",
+                "Lateral tongue bite"
+              ]
+            ]
+          },
+          "note": "Brief jerking during a faint is common and does NOT make it a seizure. Post-event confusion and a lateral tongue bite are what point to a seizure."
+        },
+        {
+          "heading": "The circumstance names the mechanism",
+          "points": [
+            {
+              "t": "On standing up.",
+              "d": "Orthostatic hypotension. Ask about diuretics, antihypertensives, alpha blockers, dehydration and autonomic neuropathy."
+            },
+            {
+              "t": "Prolonged standing, heat, pain, the sight of blood, venepuncture.",
+              "d": "Classical vasovagal syncope, with a clear prodrome."
+            },
+            {
+              "t": "DURING exertion.",
+              "d": "The dangerous one: aortic stenosis, hypertrophic cardiomyopathy, or an exercise-induced arrhythmia. Syncope on exertion is cardiac until proven otherwise."
+            },
+            {
+              "t": "After exertion stops.",
+              "d": "More often vasovagal, but does not exclude a cardiac cause."
+            },
+            {
+              "t": "On turning the head or with a tight collar.",
+              "d": "Carotid sinus hypersensitivity."
+            },
+            {
+              "t": "On micturition, coughing or swallowing.",
+              "d": "Situational syncope."
+            }
+          ]
+        },
+        {
+          "heading": "What makes it cardiac, and therefore urgent",
+          "body": "No prodrome, occurring while sitting or lying, occurring during exertion, preceded by palpitation, or in a patient with known structural heart disease or a family history of sudden death under 40. Any one of these moves the patient from reassurance to investigation.",
+          "note": "Presyncope carries the same significance as syncope. A patient who nearly blacked out on exertion needs the same workup as one who did."
+        },
+        {
+          "heading": "Syncope as the first sign of blood loss",
+          "body": "Not every blackout is a rhythm or a reflex. Syncope can be the presenting feature of hypovolaemia, and these patients look well between episodes until they do not.",
+          "points": [
+            {
+              "t": "Gastrointestinal bleeding.",
+              "d": "Ask about melaena and haematemesis in every faint, particularly in an older patient on antiplatelets or anticoagulants."
+            },
+            {
+              "t": "Ruptured ectopic pregnancy.",
+              "d": "In any woman of reproductive age. Ask the date of the last period and do a pregnancy test."
+            },
+            {
+              "t": "Ruptured abdominal aortic aneurysm.",
+              "d": "Syncope with back or abdominal pain in an older patient."
+            },
+            {
+              "t": "Pulmonary embolism.",
+              "d": "Syncope is an under-recognised presentation, and implies a large clot burden."
+            }
+          ],
+          "note": "Two things belong in every first presentation of syncope: a capillary glucose and a 12 lead ECG."
+        }
+      ],
+      "pitfalls": [
+        "Taking the history only from the patient, when the useful part is what the witness saw.",
+        "Calling brief jerking a seizure, and missing a cardiac cause.",
+        "Not separating syncope ON exertion from syncope AFTER exertion.",
+        "Dismissing presyncope as less important than a completed blackout."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Which single feature most strongly suggests a seizure rather than a faint?",
+          "a": "Prolonged post-event confusion, along with a lateral tongue bite. Brief jerking alone occurs in faints too.",
+          "accept": [
+            "confus",
+            "post-ictal",
+            "postictal",
+            "tongue"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "Why is syncope occurring DURING exertion so much more worrying than syncope after it?",
+          "a": "During exertion the demand for cardiac output is highest, so syncope implies a fixed obstruction such as aortic stenosis or hypertrophic cardiomyopathy, or an exercise-induced arrhythmia. Post-exertional syncope is more often vasovagal, as venous return falls when the muscle pump stops.",
+          "accept": [
+            "aortic stenos",
+            "obstruct",
+            "hypertroph",
+            "arrhythm",
+            "output"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "A patient blacks out while seated, with no warning, and recovers fully within seconds. Why does the absence of a prodrome point to a cardiac cause?",
+          "a": "A vasovagal faint develops over seconds through autonomic activation, which produces nausea, sweating and visual dimming. An abrupt arrhythmic loss of cardiac output gives no time for any prodrome, so consciousness is lost without warning and returns as soon as the rhythm recovers.",
+          "accept": [
+            "arrhythm",
+            "abrupt",
+            "no warning",
+            "cardiac output",
+            "prodrome"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [
+        {
+          "id": "circumstance",
+          "text": "Establishes posture and activity at the moment of the event"
+        },
+        {
+          "id": "prodrome",
+          "text": "Asks about warning symptoms"
+        },
+        {
+          "id": "witness",
+          "text": "Seeks a witness account of duration and movements"
+        },
+        {
+          "id": "recovery",
+          "text": "Distinguishes immediate recovery from post-event confusion"
+        },
+        {
+          "id": "danger",
+          "text": "Screens for exertional onset, palpitation and family history of sudden death"
+        },
+        {
+          "id": "bleed",
+          "text": "Considers occult blood loss and pregnancy as causes"
+        }
+      ],
+      "media": [],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Cardiovascular: symptomatology"
+        },
+        {
+          "source": "Macleod's Clinical Examination",
+          "locator": "The cardiovascular system: the history"
+        },
+        {
+          "source": "Harrison's Principles of Internal Medicine 22e",
+          "locator": "Palpitations and syncope"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.hx.cvs.treatment": {
+      "id": "skill.hx.cvs.treatment",
+      "kind": "history",
+      "system": "cardiovascular",
+      "title": "The treatment history, and what it tells you",
+      "oneLine": "The schedule of a drug often names the diagnosis before the patient does",
+      "why": "Patients frequently cannot name their medicines but can describe how they take them. A dosing schedule, a monitoring blood test, or an injection interval is often enough to infer the diagnosis, and it is information no investigation will give you.",
+      "asks": [
+        {
+          "text": "Bring me everything you take, including the strips and the old prescriptions."
+        },
+        {
+          "text": "How often do you take each one? Every day, or only on certain days?"
+        },
+        {
+          "text": "Do you have a regular blood test for any of them? Which one, and how often?"
+        },
+        {
+          "text": "Do you get any injections? How often, and where do you get them?"
+        },
+        {
+          "text": "How long have you been on each, and has anything been stopped recently?"
+        },
+        {
+          "text": "Have you missed any doses in the last week? Ask how many, not whether."
+        }
+      ],
+      "teach": [
+        {
+          "heading": "Read the schedule, infer the diagnosis",
+          "body": "A patient who says only that they take 'a heart tablet' has still told you a great deal if you ask how and when.",
+          "table": {
+            "cols": [
+              "What the patient describes",
+              "Likely drug",
+              "Which implies"
+            ],
+            "rows": [
+              [
+                "Taken five days a week, with a gap",
+                "Digoxin (historical practice)",
+                "Atrial fibrillation or heart failure. Drug holidays are obsolete; recognise it, do not copy it"
+              ],
+              [
+                "A regular blood test to adjust the dose",
+                "Warfarin, monitored by INR",
+                "A metallic valve, atrial fibrillation or venous thrombosis"
+              ],
+              [
+                "An intramuscular injection every three to four weeks",
+                "Benzathine penicillin",
+                "Rheumatic heart disease, on secondary prophylaxis"
+              ],
+              [
+                "A tablet under the tongue for chest pain",
+                "Sublingual nitrate",
+                "Angina"
+              ],
+              [
+                "A water tablet, with the dose doubled on bad days",
+                "A loop diuretic",
+                "Heart failure with a self-adjusted regimen"
+              ]
+            ]
+          },
+          "note": "The injection is the one most often missed, and it establishes rheumatic heart disease and adherence in a single question. The STANDARD interval is every 4 weeks (1.2 million units, or 0.6 million units under 27 kg). Three-weekly is reserved for higher risk: established rheumatic heart disease, breakthrough acute rheumatic fever, or a high-incidence setting, which is why it is common in Indian practice."
+        },
+        {
+          "heading": "Adherence, asked in a way that gets an honest answer",
+          "body": "Do not ask whether the patient is compliant, because the answer is always yes. Ask how many doses they missed in the last week, and ask what they do when they run out or cannot afford the next strip. Cost and supply are among the commonest reasons for decompensation and are almost never volunteered."
+        },
+        {
+          "heading": "What was stopped, and when",
+          "body": "A recently stopped beta blocker, a diuretic held for a procedure, or an anticoagulant interrupted for dental work can each explain the presentation in front of you. Ask specifically about anything stopped in the last month, and who stopped it."
+        }
+      ],
+      "pitfalls": [
+        "Accepting 'some heart tablets' and moving on, when the schedule would have named them.",
+        "Not asking about injections, and missing benzathine penicillin prophylaxis, which may be 3 or 4 weekly.",
+        "Not asking about monitoring blood tests, and missing warfarin.",
+        "Asking whether the patient is compliant instead of how many doses were missed.",
+        "Failing to ask what was stopped recently, which often explains the admission."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "A patient has an intramuscular injection every three to four weeks. What is it, and what does it imply?",
+          "a": "Benzathine penicillin for secondary prophylaxis of rheumatic fever, implying established rheumatic heart disease. The standard interval is 4-weekly; 3-weekly is used in higher risk patients.",
+          "accept": [
+            "benzathine",
+            "penicillin",
+            "rheumatic",
+            "prophylax"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "A patient reports a regular blood test to adjust one of their tablets. Which drug, and what should you ask next?",
+          "a": "Warfarin, monitored by INR. Ask the target range, the most recent value, and the indication: a metallic valve, atrial fibrillation, or venous thromboembolism.",
+          "accept": [
+            "warfarin",
+            "inr",
+            "anticoag"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "Why does a drug taken five days a week rather than daily suggest digoxin, and what must you check before increasing any cardiac drug in that patient?",
+          "a": "Digoxin has a narrow therapeutic index and a long half life, so drug-free days were a traditional way to limit accumulation. Before changing anything, check renal function and potassium, since both alter digoxin toxicity, and ask about nausea, visual disturbance and confusion.",
+          "accept": [
+            "digoxin",
+            "renal",
+            "potassium",
+            "toxic",
+            "narrow"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [
+        {
+          "id": "inventory",
+          "text": "Obtains an actual inventory rather than a recollection"
+        },
+        {
+          "id": "schedule",
+          "text": "Uses schedule, monitoring and injections to infer the drug"
+        },
+        {
+          "id": "adherence",
+          "text": "Asks adherence in a way that permits an honest answer"
+        },
+        {
+          "id": "stopped",
+          "text": "Asks what was stopped recently, and by whom"
+        }
+      ],
+      "media": [],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Cardiovascular: symptomatology"
+        },
+        {
+          "source": "Macleod's Clinical Examination",
+          "locator": "The cardiovascular system: the history"
+        },
+        {
+          "source": "Harrison's Principles of Internal Medicine 22e",
+          "locator": "Palpitations and syncope"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.annex.defs.cvs": {
+      "id": "skill.annex.defs.cvs",
+      "kind": "annexure",
+      "system": "cardiovascular",
+      "title": "Definitions: the hypertension family",
+      "oneLine": "Resistant, refractory, pseudoresistant, masked and white coat are five different problems",
+      "why": "A patient whose blood pressure will not come down is not automatically resistant hypertension. Most are pseudoresistant, and the management of each of these five is completely different, so the label decides what happens next.",
+      "teach": [
+        {
+          "heading": "Five labels, five different next steps",
+          "table": {
+            "cols": [
+              "Term",
+              "What it means",
+              "What to do"
+            ],
+            "rows": [
+              [
+                "Resistant hypertension",
+                "Above target despite three drugs at optimal dose, one of them a diuretic",
+                "Confirm adherence, then screen for secondary causes"
+              ],
+              [
+                "Refractory hypertension",
+                "Above target despite five or more drugs including a diuretic and a mineralocorticoid antagonist",
+                "Specialist referral; a much smaller group"
+              ],
+              [
+                "Pseudoresistant",
+                "Appears resistant, but from poor technique, poor adherence, or white coat effect",
+                "Fix the measurement and the adherence FIRST"
+              ],
+              [
+                "White coat hypertension",
+                "Raised in clinic, normal outside it",
+                "Confirm with ambulatory or home readings"
+              ],
+              [
+                "Masked hypertension",
+                "Normal in clinic, raised outside it",
+                "The dangerous one, because it is missed"
+              ]
+            ]
+          },
+          "note": "Pseudoresistance is the commonest of these by a wide margin. Wrong cuff size, an unrested patient, and unreported non-adherence explain more apparent resistance than any endocrine cause."
+        },
+        {
+          "heading": "Emergency, urgency and malignant",
+          "points": [
+            {
+              "t": "Hypertensive emergency.",
+              "d": "Severe hypertension WITH acute target organ damage: encephalopathy, pulmonary oedema, dissection, acute kidney injury, eclampsia. The organ damage defines it, not the number."
+            },
+            {
+              "t": "Hypertensive urgency.",
+              "d": "Severe hypertension WITHOUT acute organ damage. Lowered over days with oral therapy, not acutely."
+            },
+            {
+              "t": "Malignant hypertension.",
+              "d": "Severe hypertension with retinal haemorrhages, exudates or papilloedema, and often renal impairment."
+            }
+          ],
+          "note": "The distinction between emergency and urgency is made by examining the patient, most usefully the fundi, not by the height of the reading."
+        },
+        {
+          "heading": "Pseudohypertension",
+          "body": "In heavily calcified, incompressible arteries the cuff must be inflated well above true intra-arterial pressure to occlude the vessel, so the recorded pressure is falsely high. Suspect it in an elderly patient with very high readings, few end-organ changes, and symptoms of over-treatment such as dizziness on standing."
+        }
+      ],
+      "pitfalls": [
+        "Labelling a patient resistant before excluding poor technique and non-adherence.",
+        "Deciding emergency versus urgency from the number rather than from target organ assessment.",
+        "Missing masked hypertension because clinic readings are normal and nobody measures outside.",
+        "Escalating drugs in an elderly patient with pseudohypertension, causing postural symptoms."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What separates a hypertensive emergency from an urgency?",
+          "a": "Acute target organ damage. The emergency has it; the urgency does not. The blood pressure reading itself does not decide.",
+          "accept": [
+            "organ",
+            "damage",
+            "end-organ",
+            "target"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "Why is masked hypertension more dangerous than white coat hypertension?",
+          "a": "Because it is missed. The clinic reading is normal, so the patient is never treated, while the pressure is genuinely raised for most of the day and organ damage accumulates.",
+          "accept": [
+            "missed",
+            "untreated",
+            "normal in clinic",
+            "damage"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "An 80 year old has readings of 200/110, no retinopathy, no left ventricular hypertrophy, and becomes dizzy on treatment. What should be suspected and why?",
+          "a": "Pseudohypertension. Calcified, incompressible arteries need cuff pressures far above the true intra-arterial pressure to occlude, so the recorded value overstates reality. Treating to the recorded number then produces genuine hypotension.",
+          "accept": [
+            "pseudohypertension",
+            "calcif",
+            "incompress",
+            "arterial"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [
+        {
+          "id": "pseudo",
+          "text": "Excludes pseudoresistance before labelling resistance"
+        },
+        {
+          "id": "organ",
+          "text": "Separates emergency from urgency by target organ damage"
+        },
+        {
+          "id": "outside",
+          "text": "Considers masked hypertension when clinic readings are normal"
+        }
+      ],
+      "media": [],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Annexure: definitions"
+        },
+        {
+          "source": "Harrison's Principles of Internal Medicine 22e",
+          "locator": "Hypertensive vascular disease"
+        },
+        {
+          "source": "Macleod's Clinical Examination",
+          "locator": "The cardiovascular system"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  }
+}

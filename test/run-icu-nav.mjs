@@ -65,7 +65,9 @@ try {
   await clickAct(`openpt:cur`); await sleep(150);
   const topTabs = JSON.parse(await ev(`return JSON.stringify(Array.prototype.map.call(document.querySelectorAll('.icu-v2-tabs .icu-v2-tab'), function(x){return x.textContent;}));`));
   ok(topTabs.length === 5, "patient workspace shows 5 segmented top-tabs (" + topTabs.length + ")");
-  ok(JSON.stringify(topTabs) === JSON.stringify(["Overview", "Monitoring", "Care Plan", "Rounds", "Documents"]), "top-tab labels: " + topTabs.join(" / "));
+  // 5th tab's internal id/workspace is still "documents" (see icu.js) but its top-tab LABEL was
+  // renamed to "Records" - kept in sync with the actual WORKSPACES definition, not the old text.
+  ok(JSON.stringify(topTabs) === JSON.stringify(["Overview", "Monitoring", "Care Plan", "Rounds", "Records"]), "top-tab labels: " + topTabs.join(" / "));
   ok(await ev(`return !document.querySelector('.icu-v2-board');`) === true, "the board is replaced by the patient workspace");
 
   // 4) camera FAB + sub-nav pills present in Monitoring

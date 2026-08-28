@@ -88,7 +88,8 @@ function fakeModel(n) {
   ok("primary pack exact byte count", M.totalBytes("maik-mxcore") === 2489894976);
   ok("primary pack sizeLabel", M.sizeLabel("maik-mxcore") === "2.49 GB");
   ok("third tier is MAiK Horizon", M.PACKS["maik-horizon"].label === "MAiK Horizon");
-  ok("tiers come back in recommended order", M.packIds().join(",") === "maik-mxcore,maik-neural,maik-horizon,maik-apex");
+  // maik-lite (MedPsy 1.7B) is tier 0: the entry pack, smallest download, offered first.
+  ok("tiers come back in recommended order", M.packIds().join(",") === "maik-lite,maik-mxcore,maik-neural,maik-horizon,maik-apex");
   ok("MAiK Neural (Q5) present with the exact size", M.totalBytes("maik-neural") === 2829699136);
   ok("Neural still fits the 8 GB iPhone budget", M.totalBytes("maik-neural") < 3.0e9);
   ok("Neural sha256 is explicitly null (unverified), not a guess", M.PACKS["maik-neural"].files[0].sha256 === null);
@@ -230,12 +231,19 @@ function fakeModel(n) {
 // ── NATIVE background download (OS DownloadManager) ──
 // The JS chunk loop dies when the app backgrounds, which is exactly when someone starts a 2.5 GB
 // download and switches apps. On native the transfer belongs to the OS.
-function loadNative({ script = [], onDisk = 0, freeBytes = 50e9, existingId = null } = {}) {
+function loadNative({ script = [], onDisk = 0, freeBytes = 50e9, existingId = null, forFile = "medgemma-1.5-4b-it-Q4_K_M.gguf" } = {}) {
   const calls = { start: 0, status: 0, cancel: 0, del: 0, chunkRanges: 0 };
   let step = 0;
   const Llama = {
     downloadStart: async () => { calls.start++; return { id: "77", path: "/ext/maik-models/m.gguf" }; },
-    downloadStatus: async () => { calls.status++; return script[Math.min(step++, script.length - 1)]; },
+    /* Name-aware, like the real native side: a transfer belongs to ONE file. The blanket version
+       answered for whichever pack asked first, so adding a new tier-0 pack silently reassigned the
+       in-flight download to it. `for` narrows the script to one filename; default keeps mxcore. */
+    downloadStatus: async ({ name } = {}) => {
+      calls.status++;
+      if (forFile && name && name !== forFile) return { state: "none" };
+      return script[Math.min(step++, script.length - 1)];
+    },
     downloadCancel: async () => { calls.cancel++; },
     modelPath: async () => ({ path: "/ext/maik-models/m.gguf", bytes: onDisk, freeBytes }),
     modelDelete: async () => { calls.del++; return { ok: true }; }
@@ -468,7 +476,7 @@ function loadNative({ script = [], onDisk = 0, freeBytes = 50e9, existingId = nu
   const p = M.PACKS["maik-apex"];
   ok("Apex exists as a fourth tier", !!p && p.tier === 4);
   ok("Apex is last in the recommended order",
-     M.packIds().join(",") === "maik-mxcore,maik-neural,maik-horizon,maik-apex");
+     M.packIds().join(",") === "maik-lite,maik-mxcore,maik-neural,maik-horizon,maik-apex");
   ok("Apex byte count is the exact verified value", M.totalBytes("maik-apex") === 3156921120);
   ok("Apex carries a real sha256, not null",
      /^[0-9a-f]{64}$/.test(p.files[0].sha256 || "") &&
@@ -638,4 +646,9 @@ function loadNative({ script = [], onDisk = 0, freeBytes = 50e9, existingId = nu
 }
 
 console.log(`\nmaik-models: ${pass} passed, ${fail} failed`);
-if (fail) process.exit(1);
+// Exit explicitly. The last case re-attaches to a LIVE transfer, which starts the module's download
+// poll — a deliberately perpetual 1.5s loop that only ends when the native download reports done,
+// and nothing ever completes in the fake environment. Without this the process stayed alive after
+// every assertion had passed, which is what hung `node --test test/*.test.mjs` in CI until the
+// 15-minute timeout killed the job (ironically, only when the file was GREEN).
+process.exit(fail ? 1 : 0);

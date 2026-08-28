@@ -88,10 +88,18 @@ test("UI renders: confirm sheet, live card, review — with safety copy, no diag
   const card = A._renderCard({ question: "Is it one side or both?", n: 2, of: 6, state: "listening" });
   assert.match(card, /Listening/);
   assert.match(card, /data-mka="stop"/);
-  const rv = A._renderReview({ asked: 3, findings: [{ target: "location", value: "right-sided" }], stoppedReason: "complete" }, pw);
+  assert.match(card, /data-mka="done"/, "Done ends the answer without waiting for the mic cap");
+  const rv = A._renderReview({ asked: 3, findings: [{ target: "location", value: "right-sided" }],
+    transcript: "Q1. Which side?\nA. kudi vaipu", stoppedReason: "complete" }, pw);
   assert.match(rv, /Location:/);
   assert.match(rv, /right-sided/);
-  assert.match(rv, /Review in record/);
+  // Confirm gate (replaced the old "Review in record" button): editable transcript + tick boxes,
+  // and an explicit statement that nothing is written until the doctor saves.
+  assert.match(rv, /id="mkaTx"/);
+  assert.match(rv, /kudi vaipu/);
+  assert.match(rv, /class="mka-pick"/);
+  assert.match(rv, /data-mka="save"/);
+  assert.match(rv, /Nothing is saved until you tap Save/);
 });
 
 test("TTS lang map: te/hi/en -> -IN locales", () => {

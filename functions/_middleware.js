@@ -192,8 +192,16 @@ export async function onRequest(context) {
   //     module and its public-domain NLM imagery only — the clinical app bundle (app.js, engine, kb/,
   //     MaiK) stays 404'd. Considered trade-off: without it there is no reachable sign-off sheet, which
   //     means shipping unverified anatomy labels to students. Delete these two lines to close it again.
+  //   • /pglog/v/* — the login-free PG logbook signature verification page. An examiner holding a
+  //     PRINTED logbook scans the QR on it; they have no StewardMD account, no app and no /realapp
+  //     cookie, so it must resolve for an anonymous visitor or every printed QR lands on the
+  //     marketing page instead. Safe to expose: the code in the URL is an opaque 80-bit handle, the
+  //     page is PHI-free by construction (functions/_pglog_public.js decides what it may say), it is
+  //     rate-limited per IP, and it is served noindex. NOT /pglog/* — the curriculum packs under
+  //     /pglog/ are app assets and stay 404'd by the asset rule below.
   if (url.pathname.startsWith("/api/") || url.pathname.startsWith("/admin") ||
       url.pathname.startsWith("/vendor/") || url.pathname.startsWith("/followcare") ||
+      url.pathname.startsWith("/pglog/v/") ||
       url.pathname === "/atlas.js" || url.pathname === "/atlas.css" ||
       url.pathname.startsWith("/atlas/")) {
     return next();
@@ -223,7 +231,10 @@ export async function onRequest(context) {
   // marks each atlas module verified / needs-fix / rejected before the atlas is exposed to students, so it
   // must resolve for that anonymous reviewer. Its own passphrase plus the APPEND-ONLY /api/validation
   // record are what protect the sign-off; no PHI is involved at any point.
-  const PUBLIC_PAGES = ["privacy", "terms", "disclaimer", "support", "refunds", "delete-account", "copyright", "followcare", "queue", "opd", "opd-display", "validation"];
+  // "subscribe" is the login-free (Google sign-in happens ON the page) web checkout for StewardMD Pro —
+  // stewardmd.in/subscribe — Razorpay Standard Checkout. Must resolve for anonymous visitors since the
+  // clinical app itself stays native-only; this is the ONLY way to buy Pro from a browser.
+  const PUBLIC_PAGES = ["privacy", "terms", "disclaimer", "support", "refunds", "delete-account", "copyright", "followcare", "queue", "opd", "opd-display", "validation", "subscribe"];
   if (PUBLIC_PAGES.indexOf(hitPath.replace(/\.html$/, "")) > -1) {
     return next();
   }

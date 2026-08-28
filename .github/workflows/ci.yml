@@ -18,8 +18,11 @@ jobs:
         with:
           node-version: '22'
       # Pure ES-module unit tests (no deps needed for the *.test.mjs suite).
+      # --experimental-test-module-mocks matches `npm test`: several suites use mock.module(), which
+      # without the flag throws "mock.module is not a function" and fails the file rather than the
+      # assertion. CI must run the suite the same way the repo's own script does.
       - name: Run unit tests
-        run: node --test test/*.test.mjs
+        run: node --test --experimental-test-module-mocks test/*.test.mjs
 
   atlas-checks:
     runs-on: ubuntu-latest
@@ -63,7 +66,12 @@ jobs:
 
   web-preflight:
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    # 5 was too tight, and it was failing this job on PRs whose code was fine. The work below is a
+    # grep and two node --check calls (seconds); the whole budget was being spent inside
+    # actions/checkout, whose `git fetch` of the PR merge ref intermittently stalls and is then
+    # cancelled at the cap - "The operation was canceled", with no step of ours ever running. Seen on
+    # #777 and #778, at 5m02s and 5m04s. Raising the ceiling does not weaken the check.
+    timeout-minutes: 12
     steps:
       - uses: actions/checkout@v4
       # Config-only preflight (google-services.json is gitignored / not in CI, so skip that hard-fail

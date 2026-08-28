@@ -16,6 +16,9 @@ function fakeKv(seed = {}) {
   };
 }
 const DAY = "2026-07-31T10:00:00.000Z"; // fixed "now" so the day-key is stable
+// Per-module daily caps are OPT-IN since #596 (launch default = unlimited for every account),
+// so the cap tests below must ask for them explicitly, exactly as test/ai-usage.test.mjs does.
+const CAPS_ON = { MAIK_ENFORCE_CAPS: "1" };
 
 // ── Registry ────────────────────────────────────────────────────────────────
 test("AI_MODULES.research is registered with a 2/day cap in the MaiK group", () => {
@@ -60,9 +63,9 @@ test("RESEARCH_PUBTYPE_FILTER keeps evidence retrieval to guideline/SR/meta-anal
 // ── 2/day cap via the existing usage machinery ──────────────────────────────
 test("gateAndCount enforces exactly 2 research requests per user per day", async () => {
   const kv = fakeKv();
-  const g1 = await gateAndCount({}, kv, "research", "doc1", "unknown", DAY);
-  const g2 = await gateAndCount({}, kv, "research", "doc1", "unknown", DAY);
-  const g3 = await gateAndCount({}, kv, "research", "doc1", "unknown", DAY);
+  const g1 = await gateAndCount(CAPS_ON, kv, "research", "doc1", "unknown", DAY);
+  const g2 = await gateAndCount(CAPS_ON, kv, "research", "doc1", "unknown", DAY);
+  const g3 = await gateAndCount(CAPS_ON, kv, "research", "doc1", "unknown", DAY);
   assert.equal(g1.ok, true);
   assert.equal(g2.ok, true);
   assert.equal(g3.ok, false, "3rd request must be blocked");
@@ -84,13 +87,22 @@ test("cache HIT is served without consuming a daily slot; MISS at cap is blocked
   assert.ok(cached && cached.text, "cache should hit");
   assert.equal(researchConsumesSlot(!!cached), false, "a cache hit must not consume a slot");
   // Read-only quota check for the "used of 2" counter must NOT increment.
-  const q = await checkModuleQuota({}, kv, "research", "doc9", DAY);
+  const q = await checkModuleQuota(CAPS_ON, kv, "research", "doc9", DAY);
   assert.equal(q.used, 2);
   assert.equal(await kv.get("aiu:mod:doc9:research:2026-07-31"), "2", "counter unchanged on cache hit");
 
   // A genuine MISS at the cap DOES gate -> blocked (no slot beyond the cap is granted).
   assert.equal(researchConsumesSlot(false), true);
-  const miss = await gateAndCount({}, kv, "research", "doc9", "unknown", DAY);
+  const miss = await gateAndCount(CAPS_ON, kv, "research", "doc9", "unknown", DAY);
   assert.equal(miss.ok, false, "a miss at the cap must be blocked");
   assert.equal(miss.reason, "module-daily");
+});
+
+// The launch default is the other half of the contract: with caps opt-in, research is unlimited.
+test("launch default (no MAIK_ENFORCE_CAPS): research is unlimited, not capped at 2", async () => {
+  const kv = fakeKv();
+  const q = await checkModuleQuota({}, kv, "research", "doc2", DAY);
+  assert.equal(q.ok, true);
+  assert.equal(q.unlimited, true);
+  assert.equal(q.limit, 0);
 });

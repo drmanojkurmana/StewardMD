@@ -27,17 +27,23 @@ export async function createOrg(env, body, ownerUid) {
   body = body || {};
   const id = body.id ? sanitize(body.id) : newId();
   const code = await uniqueOrgCode(env);
-  const f = M.org({ id, code, name: body.name, mode: body.mode, connectorId: body.connectorId, ownerUid, thresholds: body.thresholds, createdAt: now() });
+  const f = M.org({ id, code, name: body.name, kind: body.kind, mode: body.mode, connectorId: body.connectorId, ownerUid, thresholds: body.thresholds, createdAt: now() });
   await fsCommit(env, [wCreate(env, "q_orgs/" + id, f)]);
   await audit(env, id, ownerUid, "org:create", f.mode + " " + code);
   return f;
 }
 export async function getOrg(env, orgId) {
-  const d = await fsGet(env, "q_orgs/" + sanitize(orgId)); if (!d) return null;
-  const o = M.org(withId(sanitize(orgId), d.fields));
+  let id = sanitize(orgId);
+  let d = await fsGet(env, "q_orgs/" + id);
+  /* Document ids are lower-case hex, and clients have upper-cased them: the pglog setup screen
+   * applied .toUpperCase() to every handle a user typed, which is correct for an SMD-XXXXXX code
+   * and fatal for a pasted org id. Retry once folded so those devices resolve instead of 404ing. */
+  if (!d && /^[0-9A-F]{32}$/.test(id)) { id = id.toLowerCase(); d = await fsGet(env, "q_orgs/" + id); }
+  if (!d) return null;
+  const o = M.org(withId(id, d.fields));
   if (!o.code) {   // lazy-assign a StewardMD ID to a legacy org on first load
     o.code = await uniqueOrgCode(env);
-    try { await fsCommit(env, [wUpdate(env, "q_orgs/" + sanitize(orgId), { code: o.code })]); } catch (e) {}
+    try { await fsCommit(env, [wUpdate(env, "q_orgs/" + id, { code: o.code })]); } catch (e) {}
   }
   return o;
 }
@@ -59,6 +65,12 @@ export async function userSmdId(env, uid, email) {
   const smdId = M.genSmdCode("SMD-U-", 5);
   try { await fsCommit(env, [wUpdate(env, "q_users/" + id, { smdId, email: String(email || "").toLowerCase(), createdAt: now() })]); } catch (e) {}
   return smdId;
+}
+// Every institution, for the PLATFORM owner's tenant console only (never an org-scoped caller).
+// Decoding goes through M.org/withId like every other read in this file, so the shape cannot drift.
+export async function listAllOrgs(env, limit) {
+  const r = await fsQuery(env, "q_orgs", { limit: limit || 300 });
+  return r.map((x) => M.org(withId(x.id, x.fields)));
 }
 export async function listOrgsForOwner(env, ownerUid) {
   const r = await fsQuery(env, "q_orgs", { where: { field: "ownerUid", value: String(ownerUid) }, limit: 100 });
@@ -116,7 +128,20 @@ export async function updateRoom(env, roomId, patch, actorId) {
 function memberId(orgId, identity) { return sanitize(orgId) + "__" + sanitize(identity); }
 export async function setMembership(env, orgId, identity, body, actorId) {
   const id = memberId(orgId, identity);
-  const f = M.membership({ id, orgId, identity, role: (body || {}).role, scope: (body || {}).scope, active: (body || {}).active !== false, createdAt: now() });
+  /* MERGE, do not overwrite. M.membership() fills an omitted scope with {departments:[],opds:[],
+   * rooms:[]}, and an EMPTY scope means whole-org (see withinScope in _opd_org.js). wUpdate's mask
+   * covers every key present, so a caller that sends no scope - /api/pglog/enrol never does -
+   * silently promoted an HoD scoped to one department into institution-wide access, and flipped
+   * `active` back to true. Re-enrolling someone to fix a typo must not widen what they can see. */
+  const prev = (await getMembership(env, orgId, identity)) || null;
+  const b = body || {};
+  const f = M.membership({
+    id, orgId, identity,
+    role: b.role,
+    scope: b.scope !== undefined ? b.scope : (prev && prev.scope),
+    active: b.active !== undefined ? b.active !== false : (prev ? prev.active !== false : true),
+    createdAt: (prev && prev.createdAt) || now(),
+  });
   await fsCommit(env, [wUpdate(env, "q_members/" + id, f)]);
   await audit(env, orgId, actorId, "member:set", identity + ":" + f.role); return f;
 }
@@ -187,7 +212,14 @@ export async function authorizeOrg(env, actor, orgId, cap, target) {
   if (!orgDoc) return { ok: false, reason: "org_not_found" };
   const actorId = actor && actor.id ? actor.id : "";
   if (M.isOwnerOfOrg(orgDoc, actorId)) return M.authorizeOrgAccess(orgDoc, null, actorId, orgId, cap, target);
-  const m = await getMembership(env, orgId, actorId);
+  let m = await getMembership(env, orgId, actorId);
+  // An invited doctor/staffer is added by EMAIL or login name (the console's member form), but a
+  // Firebase sign-in presents the account UID as actor.id - so the uid lookup misses and the person is
+  // "not a member" in the phone app while the SAME account works on the console (a staff session
+  // carries the identity as its id). Fall back to the email before deciding they have no membership.
+  // Owners never reach here: isOwnerOfOrg short-circuits above, which is why this only ever bit the
+  // second doctor in a clinic.
+  if (!m && actor && actor.email) m = await getMembership(env, orgId, actor.email);
   return M.authorizeOrgAccess(orgDoc, m, actorId, orgId, cap, target);
 }
 

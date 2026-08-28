@@ -305,14 +305,14 @@
     +   '<div class="ece-bc">ICU Dashboard › <b>Electrolyte Correction</b></div>'
     + '</div>'
     + '<div class="ece-scroll" id="eceScroll">'
-    +   '<header class="ece-hero"><div class="ece-h1">🧪 Electrolyte Correction Engine</div><div class="ece-sub">Evidence-based ICU electrolyte management</div></header>'
+    +   '<header class="ece-hero"><div class="ece-h1">Electrolyte Correction Engine</div><div class="ece-sub">Evidence-based ICU electrolyte management</div></header>'
     +   '<section class="ece-sec"><h3>Patient information</h3><div class="ece-grid">'+PT_FIELDS.map(function(f){return fieldCard(f,S.pt[f.k]);}).join("")+'</div>'
     +     '<div class="ece-toggles">'+PT_TOGGLES.map(function(t){return '<button class="ece-tog'+(S.pt[t.k]?" on":"")+'" data-tog="'+t.k+'">'+esc(t.l)+'</button>';}).join("")+'</div></section>'
     +   '<section class="ece-sec"><div class="ece-sec-h"><h3>Electrolytes & labs</h3><div class="ece-units"><button data-units="conv" class="'+(S.units!=="si"?"on":"")+'">Conventional</button><button data-units="si" class="'+(S.units==="si"?"on":"")+'">SI</button></div></div><div class="ece-grid">'+LAB_FIELDS.map(function(f){return labCard(f);}).join("")+'</div></section>'
     +   '<div id="eceResults">'+(S.analyzed?results():'')+'</div>'
     +   '<div class="ece-disc">Decision support only — conservative, guideline-referenced values. Verify every dose & rate against local protocol and the clinical context. Pending clinician review.</div>'
     + '</div>'
-    + '<div class="ece-cta"><button class="ece-go" data-act="analyze">🧮 Analyze & Generate ICU Recommendations</button></div>';
+    + '<div class="ece-cta"><button class="ece-go" data-act="analyze">Analyze & Generate ICU Recommendations</button></div>';
   }
 
   function disp(r){ // headline value + unit converted to the chosen unit system
@@ -320,11 +320,14 @@
     if(S.units==="si"&&key&&typeof r.value==="number"){ return { v:Math.round(toDisplay(key,r.value,"si")*100)/100, u:CONV[key].si }; }
     return { v:r.value, u:r.unit };
   }
-  function chip(r){ var d=disp(r); return '<div class="ece-chip '+r.level+'"><span class="nm">'+esc(r.name)+'</span><span class="vl">'+esc(d.v)+'</span><span class="sv">'+dot(r.level)+' '+esc(r.severity)+'</span></div>'; }
-  function dot(l){ return l==="crit"||l==="red"?"🔴":l==="amber"?"🟠":"🟢"; }
+  // BUG (2026-08-23, WhatsApp bug report): dot() added a red/amber/green emoji circle that was
+  // pure redundant decoration — .ece-chip/.ece-card/.pill already color-code by r.level via CSS
+  // (border-left-color, background) — removed rather than kept as a second, AI-flavoured way of
+  // saying the same thing the color already says.
+  function chip(r){ var d=disp(r); return '<div class="ece-chip '+r.level+'"><span class="nm">'+esc(r.name)+'</span><span class="vl">'+esc(d.v)+'</span><span class="sv">'+esc(r.severity)+'</span></div>'; }
   function card(r){
     var d=disp(r);
-    return '<div class="ece-card '+r.level+'"><div class="ece-card-h"><span>'+esc(r.name)+'</span><b>'+esc(d.v)+' '+esc(d.u)+'</b><em class="pill '+r.level+'">'+dot(r.level)+' '+esc(r.severity)+'</em></div>'
+    return '<div class="ece-card '+r.level+'"><div class="ece-card-h"><span>'+esc(r.name)+'</span><b>'+esc(d.v)+' '+esc(d.u)+'</b><em class="pill '+r.level+'">'+esc(r.severity)+'</em></div>'
       + r.lines.map(function(ln){return '<div class="ece-row"><span class="k">'+esc(ln[0])+'</span><span class="v">'+ln[1]+'</span></div>';}).join("")
       + (r.ev&&r.ev.length?'<div class="ece-ev">'+r.ev.map(function(e){return '<span>'+esc(e)+'</span>';}).join("")+'</div>':'')
       + '</div>';
@@ -333,9 +336,9 @@
   function results(){
     var R=S.results; if(!R) return '';
     var summary='<section class="ece-sec"><h3>Clinical summary</h3><div class="ece-chips">'+R.cards.map(chip).join("")+'</div></section>';
-    var warns = R.warnings.length? '<section class="ece-sec"><h3>Clinical warnings</h3>'+R.warnings.map(function(w){return '<div class="ece-warn"><div class="wt">🚨 '+esc(w.t)+'</div><div class="wd">'+esc(w.d)+'</div></div>';}).join("")+'</section>' : '';
+    var warns = R.warnings.length? '<section class="ece-sec"><h3>Clinical warnings</h3>'+R.warnings.map(function(w){return '<div class="ece-warn"><div class="wt">'+esc(w.t)+'</div><div class="wd">'+esc(w.d)+'</div></div>';}).join("")+'</section>' : '';
     var engine='<section class="ece-sec"><h3>Correction engine</h3>'+R.cards.map(card).join("")+'</section>';
-    var insights = R.insights.length? '<section class="ece-sec"><h3>Smart clinical insights</h3>'+R.insights.map(function(i){return '<div class="ece-ins">💡 '+esc(i)+'</div>';}).join("")+'</section>' : '';
+    var insights = R.insights.length? '<section class="ece-sec"><h3>Smart clinical insights</h3>'+R.insights.map(function(i){return '<div class="ece-ins">'+esc(i)+'</div>';}).join("")+'</section>' : '';
     var mon='<section class="ece-sec"><h3>Monitoring plan</h3><div class="ece-card ok">'+R.monitoring.map(function(m){return '<div class="ece-row"><span class="k">'+esc(m[0])+'</span><span class="v">'+esc(m[1])+'</span></div>';}).join("")+'</div></section>';
     var ev='<section class="ece-sec"><h3>Evidence</h3><div class="ece-ev big">'+EVIDENCE.map(function(e){return '<span>'+esc(e)+'</span>';}).join("")+'</div></section>';
     return summary+warns+engine+insights+mon+ev;

@@ -336,28 +336,76 @@
     var drugIn = line.querySelector('[data-f="drug"]'), brandIn = line.querySelector('[data-f="brand"]'), r1 = line.querySelector(".r1");
     if (!drugIn || !brandIn || !r1) return; line._brandWired = true;
     var box = null, brands = [], loadedFor = "", loading = false;
+    var typed = [], typedFor = "", typing = false, _deb = null;      // direct brand-name hits
     function closeB() { if (box) { box.remove(); box = null; } }
+    function rowsHTML(list) {
+      return list.slice(0, 50).map(function (b, i) { var meta = [b.manufacturer, b.form].filter(Boolean).join(" · "); return '<button type="button" class="rx-ac-item" data-i="' + i + '"><span class="rx-ac-g">' + esc(b.brand) + '</span>' + (b.mrp != null ? ' <span class="rx-ac-b">₹' + b.mrp + '</span>' : '') + (b.discontinued ? ' <span class="rx-ac-x">disc.</span>' : '') + (meta ? '<span class="rx-ac-d">' + esc(meta) + '</span>' : '') + '</button>'; }).join("");
+    }
     function draw(msg) {
       if (!box) { box = document.createElement("div"); box.className = "rx-ac"; r1.insertAdjacentElement("afterend", box); }
       if (msg) { box.innerHTML = '<div class="rx-ac-empty">' + esc(msg) + '</div>'; return; }
       var q = (brandIn.value || "").trim().toLowerCase();
-      var list = q ? brands.filter(function (b) { return String(b.brand || "").toLowerCase().indexOf(q) >= 0; }) : brands;
-      if (!list.length) { box.innerHTML = '<div class="rx-ac-empty">' + (brands.length ? "No matching brand" : "Type the drug first, then tap here for brands") + '</div>'; return; }
-      box.innerHTML = list.slice(0, 50).map(function (b, i) { var meta = [b.manufacturer, b.form].filter(Boolean).join(" · "); return '<button type="button" class="rx-ac-item" data-i="' + i + '"><span class="rx-ac-g">' + esc(b.brand) + '</span>' + (b.mrp != null ? ' <span class="rx-ac-b">₹' + b.mrp + '</span>' : '') + (b.discontinued ? ' <span class="rx-ac-x">disc.</span>' : '') + (meta ? '<span class="rx-ac-d">' + esc(meta) + '</span>' : '') + '</button>'; }).join("");
-      Array.prototype.forEach.call(box.querySelectorAll(".rx-ac-item"), function (btn) { btn.addEventListener("mousedown", function (e) { e.preventDefault(); brandIn.value = list[+btn.getAttribute("data-i")].brand; closeB(); }); });
+      /* Merge in brands matched BY NAME (rx-brand-match.js owns the rules, and is unit-tested).
+       * Without this the field could only ever show brands of the molecule the drug field resolved
+       * to, so typing a brand the clinician actually knows found nothing whenever the drug field
+       * held a shorthand the composition index does not carry ("Amoxiclav" for Amoxycillin +
+       * Clavulanic Acid) - while the Drugs Database, which queries BOTH endpoints, listed those same
+       * brands instantly. Same backend, one missing query. */
+      var B = window.SMD_RX_BRANDS;
+      var merged = B ? B.merge(brands, typed, q) : brands;
+      if (!merged.length) {
+        var why = B ? B.emptyMessage(drugIn.value, q, loading || typing)
+          : "Type the drug first, then tap here for brands";
+        box.innerHTML = '<div class="rx-ac-empty">' + esc(why) + "</div>"; return;
+      }
+      box.innerHTML = rowsHTML(merged);
+      Array.prototype.forEach.call(box.querySelectorAll(".rx-ac-item"), function (btn) { btn.addEventListener("mousedown", function (e) { e.preventDefault(); brandIn.value = merged[+btn.getAttribute("data-i")].brand; closeB(); }); });
     }
+    /* Brand-name search, the same endpoint the Drugs Database pairs with the composition lookup. */
+    function loadTyped(q) {
+      q = String(q || "").trim();
+      var B0 = window.SMD_RX_BRANDS;
+      if (!(B0 ? B0.shouldSearchBrands(q) : q.length >= 3) || !window.MEDAPI || !MEDAPI.searchBrands) {
+        // Clearing the field must clear the suggestions too, and REDRAW: without the redraw the
+        // previous brand's hits stayed on screen under a drug they have nothing to do with.
+        var had = typed.length; typed = []; typedFor = q; typing = false;
+        if (had) draw();
+        return;
+      }
+      if (q === typedFor) return;
+      typing = true; typedFor = q;
+      MEDAPI.searchBrands(q, 20).then(function (d) {
+        if (String(brandIn.value || "").trim() !== q) return;    // a later keystroke superseded this
+        typed = ((d && d.results) || []).filter(Boolean);
+        typing = false; draw();
+      }).catch(function () { typing = false; typed = []; draw(); });
+    }
+    /* `if (loading) return` used to DROP a newer drug while an older lookup was still in flight, and
+     * loadedFor kept the stale value, so the field could sit on the wrong molecule's brands forever.
+     * Requests now supersede: the newest drug wins and late replies for a drug the user has already
+     * moved off are discarded. */
     function load(drug) {
-      drug = (drug || "").trim(); if (!drug || !window.MEDAPI || !MEDAPI.searchCompositions) { draw("Type the drug first, then tap here for brands"); return; }
+      drug = (drug || "").trim(); if (!drug || !window.MEDAPI || !MEDAPI.searchCompositions) { draw(); return; }
       if (drug === loadedFor) { draw(); return; }
-      if (loading) return; loading = true; draw("Loading brands for " + drug + "…");
-      MEDAPI.searchCompositions(drug, 6).then(function (d) {
+      var want = drug; loading = true; draw();
+      var current = function () { return want === String(drugIn.value || "").trim(); };
+      MEDAPI.searchCompositions(want, 6).then(function (d) {
+        if (!current()) { loading = false; return; }
         var comp = ((d && d.results) || []).map(function (r) { return r.composition; }).filter(Boolean)[0];
-        if (!comp) { loading = false; brands = []; loadedFor = drug; draw("No match for “" + drug + "” — check the spelling"); return; }
-        return MEDAPI.composition(comp, "price", "all", 60, 0).then(function (c) { brands = (c && c.brands) || []; loadedFor = drug; loading = false; draw(); });
-      }).catch(function () { loading = false; brands = []; loadedFor = drug; draw("Couldn’t load brands — check connection"); });
+        // No composition is NOT a dead end any more: the brand-name search can still answer.
+        if (!comp) { loading = false; brands = []; loadedFor = want; draw(); return; }
+        return MEDAPI.composition(comp, "price", "all", 60, 0).then(function (c) {
+          if (!current()) { loading = false; return; }
+          brands = (c && c.brands) || []; loadedFor = want; loading = false; draw();
+        });
+      }).catch(function () { loading = false; if (current()) { brands = []; loadedFor = want; draw(); } });
     }
-    brandIn.addEventListener("focus", function () { load(drugIn.value); });
-    brandIn.addEventListener("input", function () { if ((drugIn.value || "").trim() === loadedFor) draw(); else load(drugIn.value); });
+    brandIn.addEventListener("focus", function () { load(drugIn.value); loadTyped(brandIn.value); });
+    brandIn.addEventListener("input", function () {
+      if ((drugIn.value || "").trim() !== loadedFor) load(drugIn.value);
+      draw();
+      clearTimeout(_deb); _deb = setTimeout(function () { loadTyped(brandIn.value); }, 220);
+    });
     brandIn.addEventListener("blur", function () { setTimeout(closeB, 200); });
   }
 
@@ -430,6 +478,19 @@
   // ---- Voice-to-Rx: parse a spoken line like "amox 500 TDS 5 days" into a drug row. Brand->generic via
   // the Drug Index; frequency abbreviations + duration recognized. Best-effort; the doctor edits after. ----
   var RX_FREQ = { od: "OD", "once daily": "OD", "once a day": "OD", bd: "BD", "twice daily": "BD", "twice a day": "BD", "two times": "BD", tds: "TDS", tid: "TDS", "thrice": "TDS", "three times": "TDS", qid: "QID", "four times": "QID", hs: "HS", "at night": "HS", "bed time": "HS", bedtime: "HS", sos: "SOS", "as needed": "SOS", prn: "SOS", stat: "STAT" };
+  // Dictation plumbing. voice.js reports WHY it stopped; a doctor who taps Dictate and gets silence
+  // cannot tell a denied microphone from a broken button, so every code gets a plain sentence.
+  var RX_MIC_TITLE = "Dictate a drug, e.g. amox 500 TDS 5 days";
+  var RX_VOICE_ERR = {
+    "mic-denied": "Microphone is blocked - allow mic access for StewardMD, then try again.",
+    "no-voice-engine": "This device has no dictation engine available.",
+    "stt-unavailable": "On-device dictation is not available on this build.",
+    "clinical-unavailable": "Clinical dictation is not ready on this device.",
+    "transcription-failed": "Could not transcribe that - try again.",
+    "speech-error": "Dictation stopped - try again.",
+  };
+  function rxSay(m) { try { if (window.toast) window.toast(m); } catch (e) {} }
+
   function parseVoiceRx(text) {
     var t = String(text || "").trim(); if (!t) return null;
     var lower = t.toLowerCase();
@@ -446,6 +507,16 @@
   function renderRx(topic, lines, regNo) {
     var now = new Date();
     var date = now.toISOString().slice(0, 10);
+    /* Opened with no regimen (the Hospital hub's Prescription tile, or any answer that carried no
+     * drugs) the pad rendered no DRUG row at all, so the first thing a doctor had to do was hunt for
+     * "+ Add drug" before they could type anything. Note the test is "no drug row", not "no rows":
+     * regimenFromCtx() always seeds a "Lifestyle & general measures" ADVICE row, which has no drug or
+     * brand input, so a length check alone never fires. An empty row collects as nothing until a drug
+     * is typed, so Sign & Export still refuses an empty prescription. */
+    lines = lines || [];
+    var _hasDrugRow = false;
+    for (var _li = 0; _li < lines.length; _li++) if (lines[_li] && !lines[_li].isAdvice) { _hasDrugRow = true; break; }
+    if (!_hasDrugRow) lines = lines.concat([{ drug: "", brand: "", dose: "", freq: "", duration: "", unverified: false, isAdvice: false }]);
     var body =
       '<div class="rx-head"><div class="rx-title">Prescription</div><button class="rx-x" id="rxX" aria-label="Close">'+rxIco("close")+'</button></div>' +
       '<div class="rx-disc">Draft prescription — verify every drug, dose, route and interaction against the patient and local protocol. The prescriber is responsible for what they sign.</div>' +
@@ -494,14 +565,29 @@
     // Voice-to-Rx: dictate a drug line ("amox 500 TDS 5 days"), parse it, add the row.
     var _mic = sheet.querySelector("#rxMic");
     if (_mic) _mic.onclick = function () {
-      if (!(window.SMD_VOICE && SMD_VOICE.listen)) { try { window.toast && window.toast("Voice not available on this device"); } catch (e) {} return; }
-      if (_mic._sess) { try { _mic._sess.stop(); } catch (e) {} _mic._sess = null; _mic.classList.remove("on"); return; }
+      if (!(window.SMD_VOICE && SMD_VOICE.listen)) { rxSay("Voice not available on this device"); return; }
+      // Idle the button. voice.js has NO onEnd callback — a session ends by delivering onFinal OR
+      // onError, so BOTH must reset here. Passing `onEnd` (which is never called) left the mic stuck
+      // "on" after every successful dictation: the next tap only cancelled it, so Dictate looked dead.
+      function idle() { _mic.classList.remove("on"); _mic._sess = null; try { _mic.title = RX_MIC_TITLE; } catch (e) {} }
+      if (_mic._sess) { try { _mic._sess.stop(); } catch (e) {} idle(); return; }
       _mic.classList.add("on");
-      var stop = function () { _mic.classList.remove("on"); _mic._sess = null; };
       try {
-        _mic._sess = SMD_VOICE.listen({ onFinal: function (txt) { var p = parseVoiceRx(txt); if (p && p.drug) applyTemplate([p]); }, onError: stop, onEnd: stop });
-        if (!_mic._sess) { stop(); try { window.toast && window.toast("Could not start voice"); } catch (e) {} }
-      } catch (e) { stop(); }
+        _mic._sess = SMD_VOICE.listen({
+          // Live feedback while speaking — without it the button gave no sign it was listening.
+          onPartial: function (t) { try { _mic.title = t ? ("Heard: " + t) : RX_MIC_TITLE; } catch (e) {} },
+          onFinal: function (txt) {
+            idle();
+            var p = parseVoiceRx(txt);
+            if (p && p.drug) { applyTemplate([p]); rxSay("Added: " + p.drug); return; }
+            // Silence here was indistinguishable from a broken button. Say what was heard.
+            var heard = String(txt || "").trim();
+            rxSay(heard ? ('Could not read a drug from "' + heard.slice(0, 40) + '"') : "Nothing was heard - try again.");
+          },
+          onError: function (code) { idle(); rxSay(RX_VOICE_ERR[code] || "Dictation stopped."); }
+        });
+        if (!_mic._sess) idle();     // listen() already reported the reason through onError
+      } catch (e) { idle(); rxSay("Could not start dictation."); }
     };
     function bindDel() { sheet.querySelectorAll(".rx-del").forEach(function (b) { b.onclick = function () { var ln = b.closest(".rx-line"); if (ln) { ln.remove(); refreshSafety(); } }; }); }
   }
@@ -670,4 +756,22 @@
   }
 
   window.SMD_RX = { open: open, canPrescribe: canPrescribe, verifiedInfo: verifiedInfo, _getNmc: getNmc, _setNmc: setNmc, getClinic: getClinic, _parseVoiceRx: parseVoiceRx };
+
+  /* Prime the verification cache at boot.
+   * canPrescribe() is a SYNCHRONOUS read of _vcache, but ONLY verifiedInfo() fills it — and that
+   * used to run just when the Rx pad opened. So any consumer asking earlier got a false negative
+   * on a fully verified account: SURGX Notes' gate (surgx-entitlement.js notesAccess()) returned
+   * "verify_required" and re-demanded verification from a doctor who was already verified
+   * (user report + device-confirmed 2026-08-24: claim verified:true, /api/verify-doctor
+   * "verified", yet canPrescribe() === false). Fixing it here rather than in each caller keeps
+   * one source of truth. Fire-and-forget; failures leave the cache as-is (fail-closed). */
+  (function primeVerified(n) {
+    function prime() { try { verifiedInfo(); } catch (e) {} }
+    var a = null;
+    try { a = window.SMD_AUTH || (window.firebase && firebase.auth && firebase.auth()); } catch (e) {}
+    if (a && a.onAuthStateChanged) { a.onAuthStateChanged(prime); }
+    else if (n < 80) { setTimeout(function () { primeVerified(n + 1); }, 250); return; }
+    try { if (window.SMD_ACCOUNT && window.SMD_ACCOUNT.onChange) window.SMD_ACCOUNT.onChange(prime); } catch (e) {}
+    prime();
+  })(0);
 })();

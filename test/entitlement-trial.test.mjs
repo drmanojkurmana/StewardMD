@@ -5,8 +5,12 @@ import { isPro, entitlementState, trialState, trialDaysFor } from "../functions/
 
 const DAY = 86400000;
 const CUT = Date.parse("2026-09-15T23:59:59+05:30");
-const promoPast = { PRO_FREE_UNTIL: "2020-01-01" };   // promo OFF → real gating
-const promoOn = {};                                    // default promo (far future) ON
+/* These cases describe the pre-verification-gate behaviour, so they pin VERIFY_REQUIRED_FOR_PRO=0
+ * explicitly. That is the whole point of the flag: turning it off must restore this contract
+ * byte for byte. The enforcement path has its own suite in test/verify-gate.test.mjs. */
+const OFF = { VERIFY_REQUIRED_FOR_PRO: "0" };
+const promoPast = { ...OFF, PRO_FREE_UNTIL: "2020-01-01" };   // promo OFF → real gating
+const promoOn = { ...OFF };                                    // default promo (far future) ON
 const now = Date.parse("2026-10-01T10:00:00Z");        // after cutover + after promoPast
 
 test("trialDaysFor: 14 up to cutover, 7 after", () => {

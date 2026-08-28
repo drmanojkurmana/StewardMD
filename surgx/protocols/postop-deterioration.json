@@ -1,0 +1,68 @@
+{
+  "id": "postop-deterioration",
+  "title": "Post-operative deterioration",
+  "subtitle": "It is a leak until proven otherwise",
+  "category": "perioperative",
+  "review": { "status": "ai_drafted", "reviewer": "", "date": "" },
+  "updated": "2026-08-24",
+  "nextReviewDue": "2027-02-28",
+  "sources": [
+    { "id": "ssc", "org": "Surviving Sepsis Campaign", "title": "International guidelines for management of sepsis and septic shock", "year": 2021, "url": "https://www.sccm.org/SurvivingSepsisCampaign/Guidelines", "accessed": "2026-08-24" },
+    { "id": "wses-iai", "org": "World Society of Emergency Surgery (WSES)", "title": "Guidelines for the management of intra-abdominal infections", "year": 2017, "url": "https://wjes.biomedcentral.com/", "accessed": "2026-08-24" },
+    { "id": "clavien", "org": "Dindo, Demartines and Clavien", "title": "Classification of surgical complications: a new proposal with evaluation in a cohort of 6336 patients", "year": 2004, "url": "https://pubmed.ncbi.nlm.nih.gov/15273542/", "accessed": "2026-08-24" }
+  ],
+  "bands": {
+    "red_flags": [
+      { "text": "Unexplained tachycardia after an anastomosis. The single most reliable early sign of a leak, and the most frequently explained away." },
+      { "text": "New atrial fibrillation after abdominal surgery. It is a marker of a septic or ischaemic complication, not a cardiology problem." },
+      { "text": "Rising oxygen requirement, or a respiratory rate above 20 that nobody has recorded." },
+      { "text": "Oliguria that does not respond to a fluid challenge." },
+      { "text": "Pain that increases after day two, or pain that needs more analgesia today than yesterday." },
+      { "text": "Confusion or agitation in an elderly post-operative patient. Assume sepsis or hypoxia before delirium." },
+      { "text": "Feculent, bilious or enteric drain output, however small the volume." }
+    ],
+    "do_now": [
+      { "text": "See the patient yourself. A deteriorating post-operative patient described over the phone is the classic route to a delayed re-laparotomy.", "timeCritical": true, "evidenceRef": "wses-iai" },
+      { "text": "Full set of observations including respiratory rate, plus a lactate and a venous gas.", "timeCritical": true, "evidenceRef": "ssc" },
+      { "text": "If septic, start the sepsis pathway now and hunt the surgical source in parallel rather than afterwards.", "timeCritical": true, "evidenceRef": "ssc" },
+      { "text": "Inform the operating surgeon. The person who did the operation knows what is most likely to have failed.", "timeCritical": true, "evidenceRef": "wses-iai" }
+    ],
+    "assess": [
+      { "text": "Score the deterioration objectively so the escalation is not a matter of opinion.", "calcs": ["news2", "qsofa", "sofa"] },
+      { "text": "Work through the differential by day: day 1 to 2 bleeding, atelectasis, cardiac; day 3 to 5 anastomotic leak, chest and urinary infection; day 5 onwards collection, wound, venous thromboembolism." },
+      { "text": "Examine the wound and every drain personally, and look at the actual output rather than the chart entry." },
+      { "text": "Review the operation note: what was anastomosed, what was left in, what the surgeon was worried about." },
+      { "text": "Review the drug chart for missed thromboprophylaxis, omitted usual medication, and analgesia that has been escalating quietly." }
+    ],
+    "investigate": [
+      { "text": "FBC, U&E, LFT, CRP, lactate, coagulation, blood cultures. CRP from day three onwards is a useful negative predictor for leak." },
+      { "text": "Contrast CT of the operated compartment. If the question is a leak, the answer is a CT, not another 24 hours of observation." },
+      { "text": "Chest radiograph and ECG for the respiratory or cardiac presentations; CT pulmonary angiography if embolism is plausible.", "calcs": ["wells_pe"] },
+      { "text": "Amylase on drain fluid after pancreatic surgery, and bilirubin on drain fluid after biliary surgery." },
+      { "text": "Urinalysis and culture, and a bladder scan: retention and catheter-associated infection are common and easily missed." }
+    ],
+    "resuscitate": [
+      { "text": "Oxygen, fluid to a measured response, and analgesia adequate to allow deep breathing and mobilisation.", "evidenceRef": "ssc" },
+      { "text": "Broad-spectrum antimicrobials against the local antibiogram once cultures are taken and a source is suspected.", "evidenceRef": "ssc" },
+      { "text": "Correct electrolytes and glucose, restart thromboprophylaxis if it is safe, and stop the drug that is making things worse.", "evidenceRef": "ssc" },
+      { "text": "Escalate the level of care while the diagnosis is still uncertain, not after it is confirmed.", "evidenceRef": "ssc" }
+    ],
+    "definitive": [
+      { "text": "Source control: percutaneous drainage of a discrete collection, or re-operation for a leak, ischaemia or uncontrolled contamination.", "timeCritical": true, "evidenceRef": "wses-iai" },
+      { "text": "A negative CT in a patient who continues to deteriorate is not reassurance. Re-image or re-explore.", "evidenceRef": "wses-iai" },
+      { "text": "Where a leak is confirmed, decide early between proximal diversion, repair, or resection with a stoma. Delayed indecision is what kills.", "evidenceRef": "wses-iai" },
+      { "text": "Grade and record the complication consistently so the unit's outcomes mean something.", "evidenceRef": "clavien" }
+    ],
+    "escalate": [
+      { "text": "Consultant surgeon, and critical care, at the point of recognition rather than at the point of certainty." },
+      { "text": "Interventional radiology for a drainable collection; theatre for anything that will not drain through a tube." },
+      { "text": "If the patient is not clearly improving within 12 to 24 hours of a plan, the plan is wrong. Change it rather than extend it." }
+    ]
+  },
+  "notes": [
+    "Unexplained tachycardia after an anastomosis is a leak until a CT says otherwise. There is no safer default.",
+    "Most delayed re-laparotomies were preceded by 24 hours of somebody being reassured by a normal blood pressure.",
+    "The operating surgeon should always be told. Not to apportion blame, but because they hold information no chart contains."
+  ],
+  "calcs": ["news2", "qsofa", "sofa", "wells_pe", "caprini", "crcl", "kdigo_aki"]
+}

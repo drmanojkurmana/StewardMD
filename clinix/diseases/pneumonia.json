@@ -1,0 +1,1179 @@
+{
+  "_comment": "Third disease. Same architecture as COPD and pleural effusion: almost every finding is an emphasis overlay on a shared core/respiratory skill. Pneumonia's own contribution is consolidation as a mechanism (voice and breath sounds move TOGETHER, upward), CURB-65 as the severity anchor, and site-of-care as the management decision.",
+  "id": "pneumonia",
+  "name": "Pneumonia",
+  "fullName": "Community-acquired pneumonia",
+  "system": "respiratory",
+  "kbRef": "community_acquired_pneumonia",
+  "oneLine": "Acute infection of the lung parenchyma, and the decision of where it can safely be treated",
+  "estMinutes": 60,
+  "review": {
+    "status": "ai_drafted"
+  },
+  "version": 1,
+  "chapters": [
+    {
+      "id": "basics",
+      "title": "Basics",
+      "blurb": "What community-acquired pneumonia is, and what it is not",
+      "skills": [
+        "skill.pneumonia.basics"
+      ]
+    },
+    {
+      "id": "approach",
+      "title": "Approach to the patient",
+      "blurb": "Before a single question",
+      "skills": [
+        "skill.approach.hygiene",
+        "skill.approach.introduce",
+        "skill.approach.consent",
+        "skill.approach.position"
+      ]
+    },
+    {
+      "id": "particulars",
+      "title": "Patient particulars",
+      "blurb": "Age and comorbidity set the pre-test probability before a symptom is mentioned",
+      "skills": [
+        "skill.particulars.demographics"
+      ],
+      "emphasis": {
+        "skill.particulars.demographics": {
+          "expect": "In suspected pneumonia, age at the extremes and occupation carry real weight: the very young, the very old, and anyone in a crowded institutional setting (hostel, barracks, care home) are all at higher risk, and severity is systematically under-recognised in the elderly because fever and tachypnoea are blunted."
+        }
+      }
+    },
+    {
+      "id": "history",
+      "title": "History of presenting illness",
+      "blurb": "Days, not years, and a fever with a shape",
+      "skills": [
+        "skill.hx.chief_complaints",
+        "skill.hx.resp.dyspnea",
+        "skill.hx.resp.cough_sputum"
+      ],
+      "emphasis": {
+        "skill.hx.chief_complaints": {
+          "expect": "A typical presentation reads in days, not years: fever 3 days, cough with rusty or purulent sputum 3 days, breathlessness and pleuritic chest pain 2 days. That tempo alone should move you away from a chronic airway disease before anything else is known."
+        },
+        "skill.hx.resp.dyspnea": {
+          "expect": "Expect breathlessness that is recent and progressive over hours to days, not months. Ask specifically about pleuritic chest pain, which is sharp, worse on inspiration and coughing, and points to pleural involvement over the consolidated area."
+        },
+        "skill.hx.resp.cough_sputum": {
+          "expect": "Expect a cough of days' duration, initially dry and then productive. Rust-coloured sputum classically suggests pneumococcal pneumonia; sputum resembling redcurrant jelly suggests Klebsiella. A change in colour and volume over hours to days, not years, is the pattern here, and the sputum is new, not an exacerbation of an old one."
+        }
+      }
+    },
+    {
+      "id": "past_personal_drug_family",
+      "title": "Past, personal, drug and family history",
+      "blurb": "The risk factors that change the organism and the required level of care",
+      "skills": [
+        "skill.hx.resp.smoking",
+        "skill.hx.pneumonia.risk"
+      ],
+      "emphasis": {
+        "skill.hx.resp.smoking": {
+          "expect": "Smoking impairs mucociliary clearance and raises pneumonia risk, but here it is one risk factor among several. Ask about alcohol in the same breath: heavy alcohol use raises both aspiration risk and the risk of pneumococcal and Klebsiella pneumonia."
+        }
+      }
+    },
+    {
+      "id": "general_exam",
+      "title": "General examination",
+      "blurb": "A sick patient, and the signs of sepsis that outrank the chest",
+      "skills": [
+        "skill.gen.appearance",
+        "skill.gen.vitals",
+        "skill.gen.cyanosis",
+        "skill.gen.clubbing",
+        "skill.gen.edema"
+      ],
+      "emphasis": {
+        "skill.gen.appearance": {
+          "expect": "Look for an acutely unwell, flushed, sweating patient, sometimes with herpes labialis, classically associated with pneumococcal pneumonia. Confusion of new onset in an elderly patient is a severity marker, not a separate problem, and is easily missed if you do not ask a relative whether the patient is their usual self."
+        },
+        "skill.gen.vitals": {
+          "expect": "Expect fever, tachypnoea and tachycardia. A continuous or sustained fever, one that does not touch the baseline over 24 hours, fits lobar pneumonia. A respiratory rate of 30 or more, and a systolic blood pressure under 90, are both severity markers that change the management plan on their own, independent of the chest signs."
+        },
+        "skill.gen.clubbing": {
+          "expect": "Clubbing is not a feature of acute pneumonia. If present, it points to an underlying chronic process, such as bronchiectasis, lung abscess or an obstructing carcinoma with a post-obstructive pneumonia behind it."
+        },
+        "skill.gen.edema": {
+          "expect": "Not a typical finding in uncomplicated pneumonia. Bilateral oedema with a raised JVP should make you reconsider heart failure or fluid overload as a contributor to the breathlessness, or as a coexisting problem."
+        }
+      }
+    },
+    {
+      "id": "systemic_exam",
+      "title": "Respiratory examination",
+      "blurb": "Consolidation: dull, loud, and bronchial, over one area",
+      "skills": [
+        "skill.exam.resp.inspection",
+        "skill.exam.resp.trachea",
+        "skill.exam.resp.expansion",
+        "skill.exam.resp.percussion",
+        "skill.exam.resp.auscultation",
+        "skill.exam.resp.added_sounds",
+        "skill.exam.resp.vocal_resonance"
+      ],
+      "emphasis": {
+        "skill.exam.resp.inspection": {
+          "expect": "Expect tachypnoea, shallow breathing to guard against pleuritic pain, and reduced movement localised to the affected side, rather than the symmetrical hyperinflation of COPD."
+        },
+        "skill.exam.resp.trachea": {
+          "expect": "The trachea stays central in uncomplicated pneumonia, because consolidated lung does not lose or gain volume the way collapse or a large effusion does. A deviated trachea means something else is present, most often an associated effusion or collapse from mucus plugging."
+        },
+        "skill.exam.resp.expansion": {
+          "expect": "Expect asymmetrically reduced expansion over the consolidated lobe. Localised, not the symmetrical reduction of COPD."
+        },
+        "skill.exam.resp.percussion": {
+          "expect": "Expect a dull, woody percussion note over the consolidated area, not the stony dullness of fluid. This is the same manoeuvre as in effusion, but a different quality of note, and it is often confused by students who have not felt both."
+        },
+        "skill.exam.resp.auscultation": {
+          "expect": "Expect bronchial breathing over the consolidated area: a hollow, blowing sound with a gap between inspiration and expiration and an expiratory phase as loud as the inspiratory one. This is the sign that makes pneumonia unmistakable at the bedside, and it is the opposite of the reduced breath sounds you would find over fluid or air."
+        },
+        "skill.exam.resp.added_sounds": {
+          "expect": "Expect coarse crackles over the affected area, especially as the pneumonia begins to resolve and air starts moving through partially aerated alveoli again. Early in dense consolidation, crackles may be minimal or absent, with bronchial breathing as the dominant sign."
+        },
+        "skill.exam.resp.vocal_resonance": {
+          "expect": "Expect INCREASED vocal resonance over the consolidated area, with whispering pectoriloquy audible on request. Vocal resonance and breath sounds move together here, both increased, which is the opposite direction to effusion and is the single fastest way to tell the two apart at the bedside."
+        }
+      }
+    },
+    {
+      "id": "disease_findings",
+      "title": "Putting the pneumonia picture together",
+      "blurb": "Solid lung conducts better; that one fact explains everything you found",
+      "skills": [
+        "skill.pneumonia.signs"
+      ]
+    },
+    {
+      "id": "summary",
+      "title": "Clinical summary",
+      "blurb": "Three sentences that contain the case",
+      "skills": [
+        "skill.pneumonia.summary"
+      ]
+    },
+    {
+      "id": "differential",
+      "title": "Differential diagnosis",
+      "blurb": "What else looks like this, and what a non-resolving film means",
+      "skills": [
+        "skill.pneumonia.differential"
+      ]
+    },
+    {
+      "id": "investigations",
+      "title": "Investigations",
+      "blurb": "Confirm it, grade it, and never let a test delay the first dose",
+      "skills": [
+        "skill.ix.pneumonia.workup"
+      ]
+    },
+    {
+      "id": "diagnosis",
+      "title": "Diagnosis and severity",
+      "blurb": "CURB-65, and the decision it actually drives",
+      "skills": [
+        "skill.pneumonia.diagnosis"
+      ]
+    },
+    {
+      "id": "treatment",
+      "title": "Treatment",
+      "blurb": "Empirical antibiotics by severity, plus everything that is not an antibiotic",
+      "skills": [
+        "skill.tx.pneumonia"
+      ]
+    },
+    {
+      "id": "case",
+      "title": "Case presentation",
+      "blurb": "Present this patient to your consultant",
+      "skills": [
+        "skill.present.case"
+      ]
+    }
+  ],
+  "osce": {
+    "stations": [
+      {
+        "id": "osce.pneumonia.resp_exam",
+        "title": "Examine the respiratory system",
+        "task": "This 58-year-old man has had fever and cough for three days. Examine his respiratory system and present your findings.",
+        "seconds": 360,
+        "skills": [
+          "skill.approach.hygiene",
+          "skill.approach.introduce",
+          "skill.approach.consent",
+          "skill.approach.position",
+          "skill.exam.resp.inspection",
+          "skill.exam.resp.expansion",
+          "skill.exam.resp.percussion",
+          "skill.exam.resp.auscultation",
+          "skill.exam.resp.added_sounds",
+          "skill.exam.resp.vocal_resonance"
+        ],
+        "examinerQuestions": [
+          "You found dullness with increased vocal resonance. Why does the voice get louder here and not in an effusion?",
+          "Where would you expect bronchial breathing, and why does it disappear as the pneumonia resolves?",
+          "Name two findings that would make you reconsider the diagnosis."
+        ]
+      },
+      {
+        "id": "osce.pneumonia.history",
+        "title": "Take a history and assess severity",
+        "task": "This 72-year-old man has had fever and cough for two days. Take a focused history in six minutes and be ready to grade his severity.",
+        "seconds": 360,
+        "skills": [
+          "skill.approach.introduce",
+          "skill.approach.consent",
+          "skill.hx.chief_complaints",
+          "skill.hx.resp.dyspnea",
+          "skill.hx.resp.cough_sputum",
+          "skill.hx.pneumonia.risk"
+        ],
+        "examinerQuestions": [
+          "Calculate his CURB-65 score from what you found, and state each component.",
+          "Is he safe to treat at home? What would change that answer?",
+          "Which single finding in an elderly patient with pneumonia is most often missed?"
+        ]
+      }
+    ]
+  },
+  "viva": {
+    "skills": [
+      "skill.pneumonia.basics",
+      "skill.exam.resp.auscultation",
+      "skill.exam.resp.vocal_resonance",
+      "skill.pneumonia.signs",
+      "skill.pneumonia.differential",
+      "skill.ix.pneumonia.workup",
+      "skill.pneumonia.diagnosis",
+      "skill.tx.pneumonia"
+    ]
+  },
+  "skills": {
+    "skill.pneumonia.basics": {
+      "id": "skill.pneumonia.basics",
+      "kind": "reasoning",
+      "system": "respiratory",
+      "title": "What community-acquired pneumonia is",
+      "oneLine": "Acute infection of the lung parenchyma, acquired outside hospital, with a new infiltrate",
+      "why": "Pneumonia is defined by a combination of an acute clinical illness and a new radiographic infiltrate, not by fever and cough alone. Getting that definition exact is what stops acute bronchitis, an exacerbation of COPD, and a viral upper respiratory infection all being labelled pneumonia.",
+      "body": "Community-acquired pneumonia (CAP) is an acute infection of the lung parenchyma in a patient who has not recently been hospitalised, presenting with an acute illness plus a new infiltrate on chest imaging.",
+      "keyPoints": [
+        "The diagnosis needs BOTH an acute clinical illness (fever, cough, breathlessness, pleuritic pain) AND a new infiltrate on imaging. Symptoms alone give you a working diagnosis; the film, when available, confirms it.",
+        "Streptococcus pneumoniae remains the most frequently identified bacterial cause of CAP. Atypical organisms (Mycoplasma pneumoniae, Chlamydophila pneumoniae, Legionella) and respiratory viruses also cause a substantial share, and mixed infection is common.",
+        "Classic lobar pneumonia is a single, abruptly-onset, dense consolidation confined to one lobe. Bronchopneumonia is patchy and multifocal, more typical in the very young, the elderly, and those with pre-existing lung disease.",
+        "Aspiration is an important and under-recognised route, particularly after stroke, with impaired consciousness, or with a poor swallow, and should be actively asked about rather than assumed absent.",
+        "Distinguish CAP from hospital-acquired pneumonia, which by convention has its onset from about 48 hours after admission and carries a different, more resistant organism profile."
+      ],
+      "pitfalls": [
+        "Labelling every febrile cough as pneumonia without a new infiltrate or a convincing clinical picture.",
+        "Treating pneumonia as a single disease rather than a syndrome with several different likely organisms depending on the patient.",
+        "Forgetting to ask about swallowing and aspiration risk in an elderly or neurologically impaired patient.",
+        "Assuming a hospital-acquired organism profile in a patient who has genuinely been in the community."
+      ],
+      "media": [],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What two things does the diagnosis of pneumonia require?",
+          "a": "An acute clinical illness (fever, cough, breathlessness, or pleuritic pain) together with a new infiltrate on chest imaging.",
+          "accept": [
+            "acute",
+            "infiltrate",
+            "imaging",
+            "x-ray"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "What is the most frequently identified bacterial cause of community-acquired pneumonia?",
+          "a": "Streptococcus pneumoniae.",
+          "accept": [
+            "pneumococc",
+            "streptococcus"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "How does bronchopneumonia differ from lobar pneumonia, and in whom is it more typical?",
+          "a": "Bronchopneumonia is patchy and multifocal rather than a single dense lobar consolidation, and is more typical in the very young, the elderly, and patients with pre-existing lung disease.",
+          "accept": [
+            "patchy",
+            "multifocal",
+            "elderly",
+            "pre-existing"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [],
+      "sources": [
+        {
+          "source": "Harrison's Principles of Internal Medicine 22e",
+          "locator": "Pneumonia"
+        },
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Respiratory: community-acquired pneumonia"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.pneumonia.signs": {
+      "id": "skill.pneumonia.signs",
+      "kind": "reasoning",
+      "system": "respiratory",
+      "title": "The pneumonia picture",
+      "oneLine": "One mechanism, consolidation, and why everything moves in the same direction",
+      "why": "Consolidation is the cleanest example in the whole respiratory examination of a single mechanism generating a coherent set of findings. Solid, airless lung conducts sound better than air-filled lung, so breath sounds and vocal resonance both increase together, which is the opposite of what happens with fluid or air in the pleural space.",
+      "body": "Alveoli filled with inflammatory exudate become a better conductor of sound than air-filled alveoli, and stop moving air locally. Every local sign follows from that.",
+      "keyPoints": [
+        "Percussion: dull, sometimes described as woody, over the consolidated area. Not the stony dullness of fluid.",
+        "Auscultation: bronchial breathing over the consolidated area, the single most specific sign, with coarse crackles as the pneumonia begins to resolve and some air movement returns.",
+        "Vocal resonance: INCREASED over the consolidated area, with audible whispering pectoriloquy. This is the detail that separates consolidation from effusion at the bedside, since both are dull but move the voice in opposite directions.",
+        "Expansion: reduced, localised to the affected side, not the symmetrical reduction of COPD.",
+        "Trachea: stays central. Deviation means something else has happened, usually a coexisting effusion or lobar collapse from a mucus plug.",
+        "Systemic signature: fever, often continuous or sustained rather than swinging, tachypnoea and tachycardia. Confusion of new onset, hypotension and a respiratory rate of 30 or more are all severity markers that matter as much as the chest signs."
+      ],
+      "pitfalls": [
+        "Calling dullness over consolidation stony, or confusing it with effusion without checking the direction the vocal resonance moves.",
+        "Waiting for crackles before believing the diagnosis. Dense early consolidation can be relatively silent, with bronchial breathing as the dominant sign.",
+        "Examining only the chest and missing the systemic severity markers, which in an elderly patient are often more informative than the local chest signs."
+      ],
+      "media": [
+        "media.img.consolidationtriad"
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What is the single most specific auscultatory finding in lobar pneumonia?",
+          "a": "Bronchial breathing over the consolidated area.",
+          "accept": [
+            "bronchial"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "Percussion is dull at the right base. How do you tell consolidation from effusion at the bedside?",
+          "a": "Check vocal resonance and breath sounds. Consolidation gives increased vocal resonance with bronchial breathing; effusion gives reduced vocal resonance with absent breath sounds.",
+          "accept": [
+            "vocal resonance",
+            "increased",
+            "reduced",
+            "bronchial"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "Explain, from first principles, why vocal resonance increases over consolidated lung.",
+          "a": "Normal air-filled alveoli scatter and filter high-frequency sound. When alveoli fill with inflammatory exudate the lung becomes a denser, more solid conducting medium, so the voice generated in the central airways is transmitted to the chest wall with less loss, and even a whisper becomes clearly audible.",
+          "accept": [
+            "conduct",
+            "solid",
+            "exudate",
+            "filter"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [],
+      "sources": [
+        {
+          "source": "Macleod's Clinical Examination",
+          "locator": "The respiratory system"
+        },
+        {
+          "source": "Harrison's Principles of Internal Medicine 22e",
+          "locator": "Pneumonia"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.pneumonia.summary": {
+      "id": "skill.pneumonia.summary",
+      "kind": "reasoning",
+      "system": "respiratory",
+      "title": "The clinical summary",
+      "oneLine": "Problem representation for an acute illness measured in days, not years",
+      "why": "The summary for an acute infective illness has a different shape from a chronic one: the tempo is days or hours, and the severity markers belong in the same sentence as the syndrome, because they change what happens in the next hour.",
+      "body": "State the patient with the risk factors that matter, the tempo, the syndrome in abstract terms, and the severity, in that order.",
+      "keyPoints": [
+        "Name the patient with the relevant risk factors: age, comorbidity, immunosuppression, aspiration risk.",
+        "State the tempo: acute, over hours to a few days. This alone separates pneumonia from a chronic airway or parenchymal disease.",
+        "State the syndrome in abstract terms: 'acute febrile illness with a productive cough and pleuritic chest pain, and examination findings of consolidation'.",
+        "Include the severity in the same summary, since it determines the plan: 'with two CURB-65 points, warranting hospital admission'.",
+        "A worked example: 'A 58-year-old man with no significant past history presents with three days of fever, cough productive of rusty sputum and right-sided pleuritic chest pain. Examination shows a temperature of 39.1C, a respiratory rate of 26, and bronchial breathing with dullness and increased vocal resonance at the right base. This is community-acquired pneumonia, right lower lobe, with a CURB-65 score of 1.'"
+      ],
+      "pitfalls": [
+        "Omitting the severity score from the summary, so the listener cannot tell whether this patient needs admission.",
+        "Describing the tempo as chronic out of habit, when the whole illness is days old.",
+        "Leaving out relevant negatives, such as the absence of confusion or hypotension, which are doing real work."
+      ],
+      "media": [],
+      "probes": [
+        {
+          "level": 2,
+          "q": "What element belongs in a pneumonia summary that would not usually appear in a chronic disease summary?",
+          "a": "The severity score (CURB-65), because it directly determines the immediate plan.",
+          "accept": [
+            "severity",
+            "curb"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "Why does tempo matter so much in an acute infective illness summary?",
+          "a": "It is what distinguishes an acute process needing urgent treatment from a chronic one, and it is often the single most discriminating detail in the whole history.",
+          "accept": [
+            "acute",
+            "urgent",
+            "discriminat"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [
+        {
+          "id": "risk",
+          "text": "States the patient with relevant risk factors"
+        },
+        {
+          "id": "tempo",
+          "text": "States the tempo as acute"
+        },
+        {
+          "id": "severity",
+          "text": "Includes a severity assessment"
+        }
+      ],
+      "sources": [
+        {
+          "source": "Macleod's Clinical Examination",
+          "locator": "Clinical reasoning"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.pneumonia.differential": {
+      "id": "skill.pneumonia.differential",
+      "kind": "reasoning",
+      "system": "respiratory",
+      "title": "Differential diagnosis",
+      "oneLine": "What else looks like this, and what a film that will not clear is telling you",
+      "why": "Most fevers with a cough are exactly what they look like, but the ones that are not are dangerous to miss: pulmonary embolism, tuberculosis, and a cancer hiding behind a pneumonia that never fully resolves. The differential does not stop once antibiotics are started.",
+      "body": "For an acute febrile illness with cough and focal chest signs, work through infective, vascular, cardiac and neoplastic causes.",
+      "keyPoints": [
+        "Pulmonary tuberculosis: favoured by a longer, subacute course over weeks, weight loss, evening fever, night sweats, a TB contact history, and apical rather than basal findings. In India this must always be actively considered, not treated as an afterthought.",
+        "Pulmonary embolism with infarction: favoured by pleuritic pain with risk factors for venous thromboembolism, a less impressive fever, and haemoptysis, with a chest film that can look deceptively like a pneumonia.",
+        "Acute heart failure or pulmonary oedema: favoured by orthopnoea, a raised JVP, a third heart sound and bilateral basal fine crackles without the localised consolidation signs of pneumonia.",
+        "Lung abscess: favoured by a more prolonged, swinging fever, foul-smelling sputum, and a cavity on imaging, often in a patient with a predisposition to aspiration or poor dentition.",
+        "Malignancy with post-obstructive pneumonia: favoured by an older smoker, weight loss, and a pneumonia that fails to resolve on a repeat film. A non-resolving pneumonia in this group needs a follow-up chest radiograph, usually around six weeks later, to confirm clearance.",
+        "COPD exacerbation and acute bronchitis: no new focal consolidation; symmetrical bronchitic findings rather than a localised dull, bronchial area.",
+        "Pneumothorax and ARDS as alternative or coexisting causes of acute breathlessness with abnormal chest signs, particularly where the picture does not fit a single lobe."
+      ],
+      "pitfalls": [
+        "Not considering tuberculosis because the presentation looks acute. TB can present subacutely with a picture that overlaps considerably with bacterial pneumonia.",
+        "Discharging a patient with a presumed resolved pneumonia without arranging a follow-up film when risk factors for malignancy are present.",
+        "Missing pulmonary embolism because a fever and a chest radiograph abnormality were assumed to mean infection.",
+        "Treating a non-resolving pneumonia with a second or third course of antibiotics without asking why it has not resolved."
+      ],
+      "media": [],
+      "probes": [
+        {
+          "level": 2,
+          "q": "Name three differentials for an acute febrile illness with a focal chest sign and a new radiographic opacity.",
+          "a": "Tuberculosis, pulmonary embolism with infarction, heart failure, lung abscess, and malignancy with post-obstructive pneumonia.",
+          "accept": [
+            "tuberculosis",
+            "tb",
+            "embolism",
+            "heart failure",
+            "abscess",
+            "malignan",
+            "cancer"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "A 64-year-old smoker's pneumonia is clinically better but the chest radiograph is unchanged after treatment. What do you do?",
+          "a": "Arrange a follow-up film, typically around six weeks after treatment, to confirm radiographic resolution, and investigate further, including consideration of bronchoscopy or CT, if it does not clear, because of the risk of an underlying obstructing lesion.",
+          "accept": [
+            "follow-up",
+            "repeat",
+            "resolve",
+            "malignan",
+            "obstruct"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [
+        {
+          "id": "breadth",
+          "text": "Offers a differential spanning infective, vascular, cardiac and neoplastic causes"
+        },
+        {
+          "id": "tb",
+          "text": "Explicitly considers tuberculosis"
+        },
+        {
+          "id": "followup",
+          "text": "States the need to confirm radiographic resolution in the at-risk patient"
+        }
+      ],
+      "sources": [
+        {
+          "source": "Harrison's Principles of Internal Medicine 22e",
+          "locator": "Pneumonia (differential diagnosis)"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.ix.pneumonia.workup": {
+      "id": "skill.ix.pneumonia.workup",
+      "kind": "investigation",
+      "system": "respiratory",
+      "title": "Confirming and grading the illness",
+      "oneLine": "The film confirms it, the bloods grade it, and nothing should delay the first dose",
+      "why": "Investigations in pneumonia serve two separate jobs, confirming the diagnosis and grading its severity, and understanding which test does which stops a student waiting for a culture result before starting treatment in a genuinely sick patient.",
+      "body": "Group investigations by what they answer: confirm, grade severity, identify the organism, and find complications.",
+      "keyPoints": [
+        "CONFIRM: chest radiograph for a new infiltrate. It can lag behind the clinical picture, especially with dehydration, so a normal early film in a convincing clinical picture does not exclude the diagnosis.",
+        "GRADE SEVERITY: full blood count, urea and electrolytes (urea is a direct component of CURB-65), CRP, and pulse oximetry or an arterial blood gas where saturation is low or the patient looks unwell.",
+        "IDENTIFY THE ORGANISM: sputum Gram stain and culture, and blood cultures, ideally sent before the first antibiotic dose in moderate to severe disease, though sending them must never delay that first dose. Urinary pneumococcal and Legionella antigen testing is reserved for more severe disease or a suggestive epidemiological picture.",
+        "CONSIDER: an HIV test where risk factors are present or the illness or its severity is otherwise unexplained.",
+        "FIND COMPLICATIONS: a repeat or lateral film, or ultrasound, where a parapneumonic effusion is suspected clinically, since this can need drainage in its own right.",
+        "The single most important principle: in a patient who looks unwell, give the first dose of antibiotic promptly. No investigation result is worth delaying that for."
+      ],
+      "pitfalls": [
+        "Waiting for a chest radiograph before starting treatment in a patient who is clinically septic.",
+        "Delaying the first antibiotic dose to draw cultures. Draw them quickly, but do not let them be the bottleneck.",
+        "Treating a normal early film as excluding pneumonia in a convincing clinical picture.",
+        "Never testing for HIV in a patient with an unexplained or unusually severe pneumonia."
+      ],
+      "media": [],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What confirms the diagnosis of pneumonia radiologically?",
+          "a": "A new infiltrate on the chest radiograph, in keeping with the clinical picture.",
+          "accept": [
+            "infiltrate",
+            "radiograph",
+            "x-ray"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "Which blood test result is a direct component of the CURB-65 score?",
+          "a": "Blood urea.",
+          "accept": [
+            "urea"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "A patient looks septic with pneumonia. You have not yet sent blood cultures. What do you do?",
+          "a": "Give the first dose of antibiotic without delay. Send cultures as quickly as practical, ideally before or very shortly after that dose, but never let the wait for cultures postpone treatment in a genuinely unwell patient.",
+          "accept": [
+            "do not delay",
+            "without delay",
+            "promptly",
+            "first dose"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [],
+      "sources": [
+        {
+          "source": "Harrison's Principles of Internal Medicine 22e",
+          "locator": "Pneumonia (diagnosis)"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.pneumonia.diagnosis": {
+      "id": "skill.pneumonia.diagnosis",
+      "kind": "reasoning",
+      "system": "respiratory",
+      "title": "Diagnosis and severity: CURB-65",
+      "oneLine": "Five simple facts that decide where this patient is treated",
+      "why": "A diagnosis of 'pneumonia' does not say whether the patient goes home with tablets or to intensive care. CURB-65 is a bedside score built from facts you already have within minutes of seeing the patient, and it is the single tool that most directly changes the plan.",
+      "body": "CURB-65 scores one point for each of five features. The total maps to a broad risk band that guides, but does not replace, clinical judgement about the site of care.",
+      "keyPoints": [
+        "CONFUSION of new onset (an abbreviated mental test score of 8 or less, or simple clinical impression that the patient is not their usual self) scores 1 point.",
+        "UREA greater than 7 mmol/L (about 19 mg/dL) scores 1 point.",
+        "RESPIRATORY RATE of 30 breaths per minute or more scores 1 point.",
+        "BLOOD PRESSURE: systolic under 90 mmHg, or diastolic 60 mmHg or less, scores 1 point.",
+        "AGE 65 years or older scores 1 point.",
+        "A score of 0 to 1 is broadly low risk and often suitable for outpatient treatment; a score of 2 is intermediate risk and prompts consideration of a short admission or closely supervised care; a score of 3 or more is high risk and prompts consideration of hospital admission with, at the upper end, assessment for a higher level of care. These bands guide judgement, they do not replace it: a low score in a frail patient, or one who cannot manage oral intake or medication at home, may still need admission.",
+        "A complete diagnostic statement names the illness, the affected lobe or pattern where known, the CURB-65 score, and any complications such as a parapneumonic effusion or type 1 respiratory failure."
+      ],
+      "pitfalls": [
+        "Treating CURB-65 as the whole decision rather than one input alongside the overall clinical picture, home circumstances and the ability to take oral treatment.",
+        "Scoring confusion only when it is dramatic. A subtle change from a relative's account still counts.",
+        "Forgetting that CURB-65 was derived and validated for community-acquired pneumonia and does not directly transfer to other causes of acute breathlessness.",
+        "Stating the diagnosis without a severity score, leaving the reader unable to judge the urgency."
+      ],
+      "media": [],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Name the five components of CURB-65.",
+          "a": "Confusion, Urea above 7 mmol/L, Respiratory rate 30 or more, Blood pressure (systolic under 90 or diastolic 60 or less), and Age 65 or over.",
+          "accept": [
+            "confusion",
+            "urea",
+            "respiratory rate",
+            "blood pressure",
+            "age"
+          ],
+          "minMatch": 4
+        },
+        {
+          "level": 2,
+          "q": "A 70-year-old with a respiratory rate of 32 and no other abnormal feature. What is his CURB-65 score?",
+          "a": "2: one point for age 65 or over, one point for a respiratory rate of 30 or more.",
+          "accept": [
+            "2",
+            "two"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "A 40-year-old scores 0 on CURB-65 but lives alone, is vomiting, and cannot keep tablets down. Is outpatient treatment appropriate?",
+          "a": "Not necessarily. CURB-65 guides but does not replace judgement. Inability to take oral treatment reliably, lack of a safe home situation, or another reason for concern can justify admission even at a low score.",
+          "accept": [
+            "not necessarily",
+            "judgement",
+            "oral",
+            "admission"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [
+        {
+          "id": "components",
+          "text": "States all five CURB-65 components correctly"
+        },
+        {
+          "id": "band",
+          "text": "Links the score to a broad management band"
+        },
+        {
+          "id": "judgement",
+          "text": "Recognises the score as a guide, not a replacement for judgement"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Respiratory: severity scoring in pneumonia"
+        },
+        {
+          "source": "Harrison's Principles of Internal Medicine 22e",
+          "locator": "Pneumonia (severity assessment)"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.tx.pneumonia": {
+      "id": "skill.tx.pneumonia",
+      "kind": "treatment",
+      "system": "respiratory",
+      "title": "Managing pneumonia",
+      "oneLine": "Antibiotics chosen by severity, supportive care alongside, and a plan for after",
+      "why": "The site-of-care decision and the breadth of antibiotic cover both follow directly from severity, and getting either wrong in either direction, undertreating a sick patient or overtreating a well one, has real cost. The supportive and preventive measures around the antibiotic are as much a part of the answer as the antibiotic itself.",
+      "body": "Decide the site of care from the overall clinical picture including CURB-65, choose empirical antibiotic cover for the likely organisms by severity, and run supportive care and prevention alongside.",
+      "keyPoints": [
+        "Site of care follows the severity assessment: low risk often suitable for outpatient oral treatment; intermediate risk usually warrants a period of hospital observation or admission; high risk warrants admission, with the most severe patients assessed for a higher level of care.",
+        "Empirical antibiotic choice covers the likely organisms for the setting and severity, typically providing cover for Streptococcus pneumoniae and, at higher severity or where clinically suggested, for atypical organisms as well. The specific agent, route and combination are set by your current national or institutional guideline and local resistance patterns, not memorised here.",
+        "Review the patient at 48 to 72 hours. Most patients improve within this window; failure to improve should prompt reconsideration of the diagnosis, the organism, a complication such as a parapneumonic effusion, or non-adherence rather than a reflexive change of antibiotic.",
+        "Switch from intravenous to oral treatment once the patient is clinically stable and able to take oral medication reliably, which shortens hospital stay without harm in appropriately selected patients.",
+        "Duration of treatment is set by the current guideline and by clinical response, generally the shortest course that achieves clinical resolution; treating for longer than needed increases the risk of resistance and side effects without added benefit.",
+        "Supportive care: oxygen to a defined saturation target, adequate fluids, analgesia for pleuritic pain which also helps the patient breathe and cough effectively, and thromboprophylaxis in an admitted, immobile patient.",
+        "Before discharge: smoking cessation advice, pneumococcal and influenza vaccination where not already given, safety-netting advice on when to seek help again, and a plan for a follow-up chest radiograph in a smoker or older adult to confirm resolution and exclude an underlying lesion."
+      ],
+      "pitfalls": [
+        "Choosing antibiotic cover without considering atypical organisms where the severity or clinical picture suggests them.",
+        "Escalating or changing antibiotics reflexively at 48 hours without first asking why the patient has not improved.",
+        "Discharging a patient without addressing modifiable risk, including vaccination and smoking.",
+        "Continuing intravenous treatment longer than clinically necessary once the patient can safely take oral medication.",
+        "Forgetting the follow-up film in a smoker or an older adult, which is how a cancer behind a pneumonia gets missed."
+      ],
+      "media": [],
+      "probes": [
+        {
+          "level": 1,
+          "q": "When should you review a patient's response to treatment for pneumonia?",
+          "a": "At 48 to 72 hours.",
+          "accept": [
+            "48",
+            "72",
+            "two to three days"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "A patient fails to improve at 48 hours. What is your first step, before changing antibiotics?",
+          "a": "Reconsider the diagnosis and look for a reason: the wrong organism or resistance, a complication such as a parapneumonic effusion or empyema, non-adherence, or an alternative or additional diagnosis, rather than reflexively broadening antibiotic cover.",
+          "accept": [
+            "reconsider",
+            "complication",
+            "effusion",
+            "adherence",
+            "diagnosis"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "What should happen at discharge for a smoker treated for pneumonia?",
+          "a": "Smoking cessation advice, vaccination review, safety-netting on when to return, and a plan for a follow-up chest radiograph, usually around six weeks later, to confirm resolution given the malignancy risk in this group.",
+          "accept": [
+            "smoking",
+            "vaccin",
+            "follow-up",
+            "radiograph",
+            "malignan"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [],
+      "sources": [
+        {
+          "source": "Harrison's Principles of Internal Medicine 22e",
+          "locator": "Pneumonia (treatment)"
+        },
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Respiratory: community-acquired pneumonia management"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "dosingNote": "This module teaches management at the level of drug CLASS and principle. Specific agents, routes, combinations and durations must be taken from your current national or institutional guideline and local resistance data at the time of prescribing. CliniX does not prescribe."
+    }
+  },
+  "cases": [
+    {
+      "id": "case.pneumonia.anil",
+      "title": "A farmer with three days of fever and a stitch in his side",
+      "opening": "Anil Kamble, 52, has been brought to the emergency department by his son. He is flushed, breathing fast, and wincing each time he takes a deep breath. Introduce yourself and take a history.",
+      "fallback": "I am not sure what you mean, doctor. Can you ask that a different way?",
+      "patient": {
+        "name": "Anil Kamble",
+        "age": 52,
+        "sex": "male",
+        "occupation": "Farmer, grows cotton and sorghum",
+        "residence": "Rural, lives with his wife and two sons"
+      },
+      "history": {
+        "presenting": {
+          "cues": [
+            "what brings you",
+            "what is the problem",
+            "why have you come",
+            "complaint",
+            "tell me about",
+            "how can i help",
+            "what is troubling"
+          ],
+          "reply": "Doctor, since three days I have high fever, a bad cough, and this sharp pain in my right side when I breathe in deeply.",
+          "key": true,
+          "skillId": "skill.hx.chief_complaints"
+        },
+        "onset": {
+          "cues": [
+            "when did it start",
+            "how long ago",
+            "onset",
+            "since when",
+            "sudden or gradual"
+          ],
+          "reply": "It came on quite suddenly, three days ago. One evening I was fine, and by the next morning I was shivering and could not get warm.",
+          "key": true
+        },
+        "fever_pattern": {
+          "cues": [
+            "fever",
+            "temperature",
+            "chills",
+            "rigors",
+            "shivering",
+            "how high"
+          ],
+          "reply": "It has stayed high the whole time, not really coming down between doses of paracetamol. I had one bad bout of shivering the first night.",
+          "key": true
+        },
+        "chest_pain": {
+          "cues": [
+            "chest pain",
+            "pain in the chest",
+            "pain in the side",
+            "stitch",
+            "where is the pain",
+            "worse on breathing"
+          ],
+          "reply": "It is on the right side, low down, like a stitch. It is much worse when I breathe in deeply or cough. If I hold my breath it settles a little.",
+          "key": true
+        },
+        "cough": {
+          "cues": [
+            "cough",
+            "how long have you had the cough"
+          ],
+          "reply": "The cough started the same day as the fever, three days ago. I never usually cough.",
+          "key": true,
+          "skillId": "skill.hx.resp.cough_sputum"
+        },
+        "sputum": {
+          "cues": [
+            "sputum",
+            "phlegm",
+            "bring anything up",
+            "spit",
+            "what colour",
+            "colour of",
+            "rusty"
+          ],
+          "reply": "Yes, I am bringing up sputum, it looks rust-coloured, almost like dried blood mixed in with it.",
+          "key": true
+        },
+        "haemoptysis": {
+          "cues": [
+            "blood",
+            "haemoptysis",
+            "hemoptysis",
+            "cough up blood",
+            "coughing blood"
+          ],
+          "reply": "No fresh blood, just this rusty colour in the phlegm since yesterday.",
+          "key": true
+        },
+        "breathlessness": {
+          "cues": [
+            "breathless",
+            "short of breath",
+            "difficulty breathing",
+            "breathing fast"
+          ],
+          "reply": "Yes, I feel breathless, especially when I try to walk to the toilet. Sitting still it is a little easier.",
+          "key": true,
+          "skillId": "skill.hx.resp.dyspnea"
+        },
+        "confusion": {
+          "cues": [
+            "confused",
+            "drowsy",
+            "not himself",
+            "memory",
+            "alert"
+          ],
+          "reply": "My son says I have been myself, just tired and unwell, not confused.",
+          "key": true
+        },
+        "weight_appetite": {
+          "cues": [
+            "weight",
+            "appetite",
+            "losing weight",
+            "eating",
+            "over the last months"
+          ],
+          "reply": "My appetite has been fine until these three days. I have not lost any weight before this, my clothes still fit the same.",
+          "key": true
+        },
+        "tb_contact": {
+          "cues": [
+            "tuberculosis",
+            "tb",
+            "contact with tb",
+            "anyone with a chronic cough",
+            "night sweats",
+            "evening fever"
+          ],
+          "reply": "No, nobody at home has TB or a long-standing cough. And I have not had this kind of fever pattern before, this only started three days back.",
+          "key": true,
+          "skillId": "skill.hx.tb.exposure"
+        },
+        "smoking": {
+          "cues": [
+            "smoke",
+            "smoking",
+            "cigarette",
+            "bidi",
+            "tobacco"
+          ],
+          "reply": "No, I have never smoked.",
+          "key": true,
+          "skillId": "skill.hx.resp.smoking"
+        },
+        "alcohol": {
+          "cues": [
+            "alcohol",
+            "drink",
+            "drinking"
+          ],
+          "reply": "I drink occasionally at festivals, nothing regular."
+        },
+        "comorbidity": {
+          "cues": [
+            "diabetes",
+            "blood pressure",
+            "hypertension",
+            "heart",
+            "past illness",
+            "other illness",
+            "kidney"
+          ],
+          "reply": "No diabetes, no blood pressure problems. I have never been admitted to hospital before this.",
+          "key": true
+        },
+        "prior_episodes": {
+          "cues": [
+            "pneumonia before",
+            "chest infection before",
+            "similar illness before",
+            "hospital before"
+          ],
+          "reply": "No, this has never happened to me before.",
+          "key": true
+        },
+        "medications": {
+          "cues": [
+            "medicine",
+            "medication",
+            "drugs",
+            "taking anything",
+            "steroids",
+            "immunosuppressant"
+          ],
+          "reply": "Just paracetamol tablets since yesterday, nothing else regularly.",
+          "key": true,
+          "skillId": "skill.hx.resp.drug"
+        },
+        "vaccination": {
+          "cues": [
+            "vaccine",
+            "vaccination",
+            "pneumonia vaccine",
+            "flu shot",
+            "immunised"
+          ],
+          "reply": "No, I have never had any vaccination for the chest, doctor."
+        },
+        "occupation_exposure": {
+          "cues": [
+            "your work",
+            "what work",
+            "job",
+            "occupation",
+            "dust",
+            "fumes",
+            "exposure"
+          ],
+          "reply": "I work in the fields, mostly outdoors. No factory dust or fumes."
+        },
+        "family": {
+          "cues": [
+            "family",
+            "anyone else sick",
+            "household",
+            "hereditary"
+          ],
+          "reply": "Nobody else at home is unwell right now."
+        }
+      },
+      "exam": {
+        "skill.gen.appearance": {
+          "finding": "Flushed and unwell-looking, lying still on the right side to splint the chest wall. Breathing rapidly and shallowly, guarding the right lower chest with each breath.",
+          "abnormal": true
+        },
+        "skill.gen.vitals": {
+          "finding": "Temperature 39.2 C. Respiratory rate 28 per minute. Pulse 110 regular. Blood pressure 112/72. SpO2 92 percent on room air.",
+          "abnormal": true
+        },
+        "skill.gen.cyanosis": {
+          "finding": "No central or peripheral cyanosis.",
+          "abnormal": false
+        },
+        "skill.gen.clubbing": {
+          "finding": "No clubbing.",
+          "abnormal": false
+        },
+        "skill.gen.edema": {
+          "finding": "No pedal oedema.",
+          "abnormal": false
+        },
+        "skill.exam.resp.inspection": {
+          "finding": "Visibly reduced movement of the right lower chest wall compared with the left. No accessory muscle use. No chest wall deformity.",
+          "abnormal": true
+        },
+        "skill.exam.resp.trachea": {
+          "finding": "Trachea central.",
+          "abnormal": false
+        },
+        "skill.exam.resp.expansion": {
+          "finding": "Chest expansion reduced on the right, localised to the lower zone. Left side normal.",
+          "abnormal": true
+        },
+        "skill.exam.resp.percussion": {
+          "finding": "Dull, woody note over the right lower zone posteriorly. Resonant elsewhere.",
+          "abnormal": true
+        },
+        "skill.exam.resp.auscultation": {
+          "finding": "Bronchial breathing over the right lower zone. Normal vesicular breathing elsewhere. No prolonged expiration.",
+          "abnormal": true
+        },
+        "skill.exam.resp.added_sounds": {
+          "finding": "Coarse crackles over the right lower zone, not clearing with cough. No wheeze.",
+          "abnormal": true
+        },
+        "skill.exam.resp.vocal_resonance": {
+          "finding": "Increased vocal resonance over the right lower zone, with whispering pectoriloquy. Normal elsewhere.",
+          "abnormal": true
+        }
+      },
+      "essentialInvestigations": [
+        "cxr",
+        "fbc",
+        "urea",
+        "sputumcx",
+        "bloodcx"
+      ],
+      "investigations": {
+        "cxr": {
+          "label": "Chest radiograph",
+          "indicated": true,
+          "result": "Right lower zone dense, homogeneous opacity with air bronchograms. No effusion. No cavitation. Heart borders and mediastinum normal.",
+          "note": "This confirms the new infiltrate the clinical picture already predicted, it is the second half of the diagnosis, not the first."
+        },
+        "fbc": {
+          "label": "Full blood count",
+          "indicated": true,
+          "result": "Haemoglobin 13.4 g/dL. Total leucocyte count 16,800 per mm3 with 82 percent neutrophils.",
+          "note": "A neutrophil leucocytosis fits an acute bacterial process and helps grade how unwell he is."
+        },
+        "urea": {
+          "label": "Urea and electrolytes",
+          "indicated": true,
+          "result": "Urea 46 mg/dL, approximately 7.7 mmol/L. Creatinine 1.0 mg/dL. Sodium 133 mmol/L.",
+          "note": "Urea above 7 mmol/L is one CURB-65 point on its own, independent of how well he looks."
+        },
+        "sputumcx": {
+          "label": "Sputum Gram stain and culture",
+          "indicated": true,
+          "result": "Sent before the first antibiotic dose. Gram-positive diplococci seen on smear. Culture pending.",
+          "note": "Worth sending in a patient this unwell, but sending it must never delay the first dose of antibiotic."
+        },
+        "bloodcx": {
+          "label": "Blood cultures",
+          "indicated": true,
+          "result": "Sent, two sets. Result pending at 48 hours.",
+          "note": "Reasonable before the first antibiotic dose in a patient this febrile, again without delaying treatment."
+        },
+        "sputum_afb": {
+          "label": "Sputum for acid-fast bacilli",
+          "indicated": false,
+          "result": "Not sent.",
+          "note": "Not indicated as a first step here: this is a three-day acute illness with lobar consolidation and rusty sputum, not the weeks-long subacute course, evening fever and weight loss that would raise tuberculosis. It stays on the list to reconsider only if he fails to improve."
+        },
+        "ctpa": {
+          "label": "CT pulmonary angiogram",
+          "indicated": false,
+          "result": "No embolus. Right lower lobe consolidation confirmed.",
+          "note": "Not indicated: he has no risk factors for venous thromboembolism, and the pleuritic pain has a straightforward explanation in the consolidation right under it. Ordered from reflex pattern-matching on pleuritic pain, at the cost of a contrast load he did not need."
+        },
+        "hiv": {
+          "label": "HIV test",
+          "indicated": false,
+          "result": "Negative.",
+          "note": "Not indicated as a universal reflex screen. It is appropriate when risk factors are present or the illness or its severity is otherwise unexplained, neither of which applies here."
+        }
+      },
+      "differentialModel": {
+        "answer": "Community-acquired pneumonia, right lower lobe. Consider pulmonary tuberculosis, pulmonary embolism with infarction, a lung abscess, and a parapneumonic effusion.",
+        "accept": [
+          "pneumonia",
+          "tuberculosis",
+          "tb",
+          "embolism",
+          "abscess",
+          "effusion",
+          "malignancy",
+          "heart failure"
+        ],
+        "minMatch": 2
+      },
+      "diagnosis": {
+        "answer": "Community-acquired pneumonia, right lower lobe, CURB-65 score 1.",
+        "accept": [
+          "pneumonia",
+          "cap"
+        ],
+        "minMatch": 1
+      },
+      "managementModel": {
+        "answer": "Oxygen to correct the hypoxaemia, prompt empirical antibiotics chosen by severity and covering the likely organisms, antipyretics and fluids, review at 48 to 72 hours, and a follow-up chest radiograph at about six weeks to confirm the pneumonia has cleared.",
+        "accept": [
+          "oxygen",
+          "antibiotic",
+          "review",
+          "48",
+          "72",
+          "follow-up",
+          "chest radiograph",
+          "fluids"
+        ],
+        "minMatch": 3
+      },
+      "teachingPoints": [
+        "The tempo alone should move you towards an acute infective process before a single test is run: three days, not the weeks of tuberculosis or the years of a chronic airway disease.",
+        "Increased vocal resonance with bronchial breathing over stony-sounding dullness is what separates consolidation from an effusion at the same base. Both are dull; they move the voice in opposite directions.",
+        "The trachea stayed central. Deviation here would mean something else has happened, usually a coexisting effusion or a mucus-plug collapse, and would need explaining.",
+        "Rusty sputum is a classic clue pointing towards pneumococcal disease, though the diagnosis never depends on identifying the organism before treating.",
+        "Urea crossing 7 mmol/L is one CURB-65 point in its own right, independent of how unwell he looks on the bed, which is why the score is calculated rather than eyeballed.",
+        "No clubbing, no weeks-long cough, and no weight loss beforehand: these negatives argue against tuberculosis and malignancy without needing further tests to invoke them.",
+        "Sending cultures should never delay the first antibiotic dose. His fever was already 39.2 C when he was seen, and that first dose matters more than any pending result."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  ]
+}

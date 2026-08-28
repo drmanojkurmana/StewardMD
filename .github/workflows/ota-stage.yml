@@ -1,0 +1,44 @@
+name: OTA — stage build
+
+# Builds www/ from every push to main and stages it in R2 as an OTA "candidate" — the same bundle
+# a native rebuild would ship. This is deliberately NOT the same as going live: staging only makes
+# a build visible to the admin console at stewardmd.in/admin; a human still has to press "Push to
+# devices" before any phone is offered it. See functions/_ota.js for why that separation exists.
+#
+# Never gates on this: if it fails, nothing has shipped anywhere (unlike a failed store submission,
+# there's no partial state to clean up) — worst case the admin console just shows yesterday's build
+# as the latest candidate until the next push succeeds.
+on:
+  push:
+    branches: [main]
+
+concurrency:
+  group: ota-stage
+  cancel-in-progress: true   # only the LATEST push to main needs to be staged
+
+jobs:
+  stage:
+    runs-on: ubuntu-latest
+    # BUG (2026-08-22/23): 15m was too tight for a first-ever (cold-cache) run - `wrangler r2
+    # object put`'s ~15-20s CLI overhead per file means 815 new files at 24-way concurrency needs
+    # ~10-15 min on its own, before checkout/build. Every push to main timed out here 3 times
+    # tonight. Generous margin for the cold case; a warm run (most files already known/deduped)
+    # finishes in well under a minute regardless.
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Install wrangler
+        run: npm install -g wrangler@4.107.0   # pinned to match .github/workflows/deploy-worker.yml
+      - name: Build www/
+        run: npm run build:www
+      - name: Stage to R2 (candidate only — does not go live)
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          node scripts/ota-stage.mjs \
+            --commit "${{ github.sha }}" \
+            --message "$(git log -1 --format=%s)"

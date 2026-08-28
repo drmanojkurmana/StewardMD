@@ -60,7 +60,7 @@
 </style>
 </head>
 <body>
-<header><div class="hd"><span class="mk" aria-hidden="true"></span><h1>Steward<span>MD</span> Billing</h1><span class="tag">Cashier</span></div></header>
+<header><div class="hd"><span class="mk" aria-hidden="true"></span><h1>Steward<span>MD</span> <span id="stnName">Billing</span></h1><span class="tag" id="stnTag">Cashier</span></div></header>
 <main id="app"></main>
 <script>
 (function(){
@@ -68,6 +68,9 @@
   var P = new URLSearchParams(location.search);
   var app = document.getElementById("app");
   var MOCK = P.get("mock") === "1";
+  // Same page, two stations. The pharmacy reads the SAME order lifecycle the cashier writes
+  // to - it is the next state after "paid", not a separate system.
+  var STATION = P.get("station") === "pharmacy" ? "pharmacy" : "billing";
   var tok = "", tt = "";
   try { tok = localStorage.getItem("smd_opd_staff_tok") || ""; tt = localStorage.getItem("smd_opd_toktype") || ""; } catch (e) {}
   var orgId = ""; try { orgId = localStorage.getItem("smd_opd_hospital") || ""; } catch (e) {}
@@ -87,6 +90,52 @@
     if (tt === "firebase") return fbToken().then(function(t){ if(t) h["Authorization"]="Bearer "+t; return send(); });   // clinic owner: mint an id-token like /opd does
     if (tok) h["X-Staff-Token"] = tok;   // staff cashier session
     return send();
+  }
+
+  // ---- pharmacy station ------------------------------------------------------------------------
+  // Medication orders that are PAID but not yet handed over. Investigations never appear: they have no
+  // dispensing step. The server enforces the same rule, so an unpaid order cannot be released even if
+  // this list were stale.
+  function pharmacyView(){
+    app.innerHTML = '<section class="card"><div class="msg">'+ms("hourglass_empty")+'Loading dispense list…</div></section>';
+    api("pharmacy?orgId="+encodeURIComponent(orgId)).then(function(r){
+      if (!r || !r.ok) {
+        app.innerHTML = '<section class="card"><div class="msg">'+ms("lock")+
+          (r && r.error === "billing_disabled" ? "The pharmacy station is not switched on for this clinic yet." : "Could not load the dispense list.")+'</div></section>';
+        return;
+      }
+      renderPharmacy((r.orders)||[]);
+    });
+  }
+  function renderPharmacy(orders){
+    if (!orders.length) {
+      app.innerHTML = '<section class="card"><h2>'+ms("done_all")+'Nothing to dispense</h2>'+
+        '<div class="msg">Every paid medicine has been handed over.</div>'+
+        '<button class="btn" id="rf">'+ms("refresh")+'Refresh</button></section>';
+      document.getElementById("rf").onclick = pharmacyView;
+      return;
+    }
+    var rows = orders.map(function(o){
+      return '<div class="line"><span class="k med">Rx</span>'+
+        '<span class="nm">'+esc(o.name)+(o.qty>1?' <small>x'+o.qty+'</small>':'')+
+        '<br><small>'+esc(o.patientId||"")+'</small></span>'+
+        '<button class="btn" style="margin:0;width:auto;padding:8px 14px" data-disp="'+esc(o.id)+'">'+ms("check")+'Dispense</button></div>';
+    }).join("");
+    app.innerHTML = '<section class="card"><h2>'+ms("medication")+'To dispense <small>('+orders.length+')</small></h2>'+
+      rows+'<div class="err" id="err"></div>'+
+      '<button class="btn" id="rf" style="background:#e2e8f0;color:#0f172a">'+ms("refresh")+'Refresh</button></section>';
+    document.getElementById("rf").onclick = pharmacyView;
+    Array.prototype.forEach.call(app.querySelectorAll("[data-disp]"), function(b){
+      b.onclick = function(){
+        b.disabled = true; b.textContent = "Dispensing…";
+        api("dispense", { method:"POST", body:{ orgId:orgId, orderId:b.getAttribute("data-disp") } }).then(function(r){
+          if (r && r.ok) { pharmacyView(); return; }
+          b.disabled = false; b.innerHTML = ms("check")+"Dispense";
+          document.getElementById("err").textContent =
+            (r && r.error === "not_dispensable") ? "That order is not paid yet - send the patient to billing first." : "Could not record the dispense. Try again.";
+        });
+      };
+    });
   }
 
   function lookupView(prefill){
@@ -156,6 +205,15 @@
     });
   }
 
+  // One entry point for both stations.
+  function start(){
+    if (STATION === "pharmacy") {
+      try { document.getElementById("stnName").textContent = "Pharmacy"; document.getElementById("stnTag").textContent = "Dispense"; } catch(e){}
+      pharmacyView(); return;
+    }
+    lookupView();
+  }
+
   // ---- boot ----
   if (MOCK) {
     review({ patient: { id:"SMD-AB12CD-0007", name:"Asha Kumar", ageYears:34, sex:"F" },
@@ -166,11 +224,11 @@
     // Clinic owner: the Google session restores asynchronously - wait for it before the first authed call.
     app.innerHTML = '<section class="card"><div class="msg">'+ms("hourglass_empty")+'Loading…</div></section>';
     var signInPrompt = function(){ app.innerHTML = '<section class="card"><div class="msg">'+ms("lock")+'Please sign in at the OPD console first, then reopen this page.</div><a class="btn" href="/opd" style="text-decoration:none">'+ms("open_in_new")+'Open OPD console</a></section>'; };
-    try { firebase.auth().onAuthStateChanged(function(u){ if(u) lookupView(); else signInPrompt(); }); } catch(e){ lookupView(); }
+    try { firebase.auth().onAuthStateChanged(function(u){ if(u) start(); else signInPrompt(); }); } catch(e){ start(); }
   } else if (!tok) {
     app.innerHTML = '<section class="card"><div class="msg">'+ms("lock")+'Please sign in at the OPD console first, then reopen this page.</div><a class="btn" href="/opd" style="text-decoration:none">'+ms("open_in_new")+'Open OPD console</a></section>';
   } else {
-    lookupView();
+    start();
   }
 })();
 </script>

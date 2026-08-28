@@ -1,0 +1,55 @@
+{
+  "_comment": "SURGX catalog. Small on purpose: the app fetches this first (no-store, so it is never the stale copy), then only the unit the clinician actually opened. Modelled on clinix/manifest.json and atlas/modules.json, deliberately NOT on kardiox-content-pack.js (a 1.9 MB array parsed on every page load). Protocols marked kind:'engine' are NOT authored here - they are projections of the ws-surgery.js decision engine, which remains the single home of that clinical logic.",
+  "schemaVersion": 1,
+  "contentVersion": "0.1.1-review-pending",
+  "updated": "2026-08-24",
+  "categories": [
+    { "id": "trauma", "title": "Trauma" },
+    { "id": "resuscitation", "title": "Shock and resuscitation" },
+    { "id": "abdomen", "title": "Acute abdomen" },
+    { "id": "infection", "title": "Surgical infection" },
+    { "id": "perioperative", "title": "Peri-operative" }
+  ],
+  "protocols": [
+    { "id": "atls-primary-survey", "kind": "authored", "title": "Trauma primary survey (ABCDE)", "subtitle": "The first ten minutes", "category": "trauma", "file": "protocols/atls-primary-survey.json", "review": "ai_drafted" },
+    { "id": "haemorrhagic-shock", "kind": "authored", "title": "Haemorrhagic shock", "subtitle": "Recognise, stop the bleeding, resuscitate", "category": "resuscitation", "file": "protocols/haemorrhagic-shock.json", "review": "ai_drafted" },
+    { "id": "surgical-sepsis", "kind": "authored", "title": "Sepsis with a surgical source", "subtitle": "Source control is the treatment", "category": "resuscitation", "file": "protocols/surgical-sepsis.json", "review": "ai_drafted" },
+    { "id": "chest-trauma", "kind": "authored", "title": "Chest trauma", "subtitle": "The six that kill early", "category": "trauma", "file": "protocols/chest-trauma.json", "review": "ai_drafted" },
+    { "id": "head-injury", "kind": "authored", "title": "Head injury", "subtitle": "Who scans, who transfers, who watches", "category": "trauma", "file": "protocols/head-injury.json", "review": "ai_drafted" },
+    { "id": "burns", "kind": "authored", "title": "Major burns", "subtitle": "Airway, area, fluids, transfer", "category": "trauma", "file": "protocols/burns.json", "review": "ai_drafted" },
+    { "id": "upper-gi-bleed", "kind": "authored", "title": "Upper GI bleeding", "subtitle": "Resuscitate, risk-stratify, scope", "category": "abdomen", "file": "protocols/upper-gi-bleed.json", "review": "ai_drafted" },
+    { "id": "postop-deterioration", "kind": "authored", "title": "Post-operative deterioration", "subtitle": "It is a leak until proven otherwise", "category": "perioperative", "file": "protocols/postop-deterioration.json", "review": "ai_drafted" },
+
+    { "id": "acute_abdomen", "kind": "engine", "category": "abdomen", "subtitle": "Interactive - select findings" },
+    { "id": "gi_perforation", "kind": "engine", "category": "abdomen", "subtitle": "Interactive - select findings" },
+    { "id": "bowel_obstruction", "kind": "engine", "category": "abdomen", "subtitle": "Interactive - select findings" },
+    { "id": "cholecystitis", "kind": "engine", "category": "abdomen", "subtitle": "Interactive - select findings" },
+    { "id": "cholangitis", "kind": "engine", "category": "abdomen", "subtitle": "Shared with Internal Medicine" },
+    { "id": "liver_abscess", "kind": "engine", "category": "abdomen", "subtitle": "Shared with Internal Medicine" },
+    { "id": "colitis", "kind": "engine", "category": "abdomen", "subtitle": "Shared with Internal Medicine" },
+    { "id": "hernia", "kind": "engine", "category": "abdomen", "subtitle": "Interactive - select findings" },
+    { "id": "nec_sti", "kind": "engine", "category": "infection", "subtitle": "Surgical emergency" },
+    { "id": "abscess", "kind": "engine", "category": "infection", "subtitle": "Interactive - select findings" },
+    { "id": "cellulitis", "kind": "engine", "category": "infection", "subtitle": "Interactive - select findings" },
+    { "id": "wound_infection", "kind": "engine", "category": "infection", "subtitle": "Interactive - select findings" },
+    { "id": "diabetic_foot", "kind": "engine", "category": "infection", "subtitle": "Interactive - select findings" }
+  ],
+  "stepPacks": [
+    { "id": "core", "file": "steps/core.json", "title": "Steps shared by every operation", "shared": true },
+    { "id": "laparoscopy", "file": "steps/laparoscopy.json", "title": "Laparoscopic access and closure", "shared": true },
+    { "id": "abdomen", "file": "steps/abdomen.json", "title": "Open abdominal steps", "shared": true },
+    { "id": "softtissue", "file": "steps/softtissue.json", "title": "Soft-tissue and drainage steps", "shared": true }
+  ],
+  "procedures": [
+    { "id": "appendicectomy", "title": "Appendicectomy", "subtitle": "Open and laparoscopic", "system": "gastrointestinal", "file": "procedures/appendicectomy.json", "stepPacks": ["core", "laparoscopy", "abdomen"], "review": "ai_drafted", "estMinutes": 45 },
+    { "id": "lap-cholecystectomy", "title": "Laparoscopic cholecystectomy", "subtitle": "Critical View of Safety", "system": "hepatobiliary", "file": "procedures/lap-cholecystectomy.json", "stepPacks": ["core", "laparoscopy"], "review": "ai_drafted", "estMinutes": 60 },
+    { "id": "hernia-repair", "title": "Open inguinal hernia repair", "subtitle": "Lichtenstein tension-free mesh", "system": "abdominal wall", "file": "procedures/hernia-repair.json", "stepPacks": ["core", "abdomen"], "review": "ai_drafted", "estMinutes": 50 },
+    { "id": "laparotomy", "title": "Exploratory laparotomy", "subtitle": "Systematic exploration and damage control", "system": "gastrointestinal", "file": "procedures/laparotomy.json", "stepPacks": ["core", "abdomen"], "review": "ai_drafted", "estMinutes": 90 },
+    { "id": "abscess-drainage", "title": "Abscess incision and drainage", "subtitle": "Source control at its simplest", "system": "soft tissue", "file": "procedures/abscess-drainage.json", "stepPacks": ["core", "softtissue"], "review": "ai_drafted", "estMinutes": 20 }
+  ],
+  "cases": [
+    { "id": "rlq-pain-young-man", "title": "Right iliac fossa pain", "subtitle": "Emergency - who goes to theatre", "file": "cases/rlq-pain-young-man.json", "levels": ["student", "intern", "resident", "surgeon"], "review": "ai_drafted" },
+    { "id": "preop-cardiac-risk", "title": "Fit for surgery?", "subtitle": "Pre-operative decision-making", "file": "cases/preop-cardiac-risk.json", "levels": ["intern", "resident", "surgeon"], "review": "ai_drafted" },
+    { "id": "pod3-tachycardia", "title": "Tachycardia on day three", "subtitle": "Post-operative deterioration", "file": "cases/pod3-tachycardia.json", "levels": ["intern", "resident", "surgeon"], "review": "ai_drafted" }
+  ]
+}

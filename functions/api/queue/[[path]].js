@@ -17,16 +17,20 @@
  */
 import { queueEnabled, isQueueConfigured, mintDisplayToken, verifyDisplayToken } from "../../_queue.js";
 import { identify } from "../../_usage.js";
-import { ownerEmails } from "../../_adminauth.js";
-import { CAPS, can, requireCap, roleForActor, capsFor } from "../../_queue_roles.js";
+import { ownerEmails, ownerOK } from "../../_adminauth.js";
+// NOTE: roleForActor is deliberately NOT imported. It prefers actor.role, which resolveActor
+// hardcodes to "viewer" for staff sessions, so using it here would silently demote every nurse
+// and receptionist to read-only. Org roles resolve through ORG.authorizeOrg / whoami instead.
+import { CAPS, can, requireCap, capsFor } from "../../_queue_roles.js";
 import * as Q from "../../_queue_engine.js";
 import * as QT from "../../_queue_timeline.js";
 import { notifyTimeline } from "../../_queue_notify.js";
 import { importRoster, importFromSource } from "../../_queue_ghis.js";
 import * as ORG from "../../_opd_org_store.js";
+import * as PAT from "../../_opd_patient_store.js";
 import { resolveRoomDoctor, roomStatus, roomForActor } from "../../_opd_org.js";
 import { brandingFor, putBranding, validateLogo, logoKey, bucket as brandBucket } from "../../_clinic_branding.js";
-import { proFromRequest } from "../../_entitlement.js";
+import { proFromRequest, requirePro, needsProBody } from "../../_entitlement.js";
 import * as BILL from "../../_clinic_billing_store.js";
 import { orderQueue, orderRoomView, displayBoard } from "../../_queue_eta.js";
 import { verifyStaffSession, verifySecret, pinLocked, nextPinState, mintStaffSession } from "../../_opd_auth.js";
@@ -250,8 +254,10 @@ export async function onRequest(context) {
       const orgId = url.searchParams.get("orgId") || "";
       const az = await ORG.authorizeOrg(env, actor, orgId, CAPS.STAFF_ADMIN);
       if (!az.ok) return json({ ok: false, error: "forbidden" }, 403, request);
-      let pro = false; try { pro = (await proFromRequest(env, request)).pro; } catch (e) {}
-      if (!pro) return json({ ok: false, error: "pro_required" }, 402, request);
+      let _pg = { ok: false, reason: "none" };
+      try { _pg = await requirePro(env, request); } catch (e) {}
+      // Keep the legacy `error: "pro_required"` key for any older client, and add the reason.
+      if (!_pg.ok) return json(needsProBody(_pg, { ok: false, error: "pro_required", feature: "queue-branding" }), 402, request);
       const bkt = brandBucket(env);
       if (!bkt) return json({ ok: false, error: "storage_unavailable" }, 503, request);
       const ct = request.headers.get("Content-Type") || "";
@@ -261,6 +267,36 @@ export async function onRequest(context) {
       await bkt.put(logoKey(orgId, v.ext), bytes, { httpMetadata: { contentType: ct } });
       const res = await putBranding(env, orgId, { clinicName: url.searchParams.get("name") || "", ext: v.ext, updatedBy: actor.id || "" });
       return json(Object.assign({ ok: true }, res), 200, request);
+    }
+
+    // ---- Patient registration (ABDM-ready identity + MR allocation) -----------------------------
+    // ONE place decides who issues the MR: the WORKPLACE, never whether a number was typed in.
+    // The client does not re-implement validation - it renders the field-keyed errors returned here.
+    if (seg === "patient") {
+      const body = method === "POST" ? await readBody(request) : {};
+      const pOrg = url.searchParams.get("orgId") || body.orgId || "";
+      if (sub === "register" && method === "POST") {
+        const az = await ORG.authorizeOrg(env, actor, pOrg, CAPS.QUEUE_ADD);
+        if (!az.ok) return json({ ok: false, error: "forbidden" }, 403, request);
+        const org = await ORG.getOrg(env, pOrg);
+        if (!org) return json({ ok: false, error: "org_not_found" }, 404, request);
+        const r = await PAT.registerPatient(env, org, body, actor.id || "");
+        // invalid / duplicate are EXPECTED outcomes the form renders, not server errors.
+        return json(r, r.ok ? 200 : 200, request);
+      }
+      if (sub === "get" && method === "GET") {
+        const az = await ORG.authorizeOrg(env, actor, pOrg, CAPS.QUEUE_VIEW);
+        if (!az.ok) return json({ ok: false, error: "forbidden" }, 403, request);
+        const p = await PAT.getPatient(env, pOrg, url.searchParams.get("mrn") || "");
+        return json(p ? { ok: true, patient: p } : { ok: false, error: "not_found" }, 200, request);
+      }
+      // The hospital EMR issued a real MR for someone queued on a provisional id.
+      if (sub === "link-mrn" && method === "POST") {
+        const az = await ORG.authorizeOrg(env, actor, pOrg, CAPS.QUEUE_ADD);
+        if (!az.ok) return json({ ok: false, error: "forbidden" }, 403, request);
+        return json(await PAT.linkHospitalMrn(env, pOrg, body.provisionalMrn || "", body.mrn || "", body.mrSource || "ghis", actor.id || ""), 200, request);
+      }
+      return json({ ok: false, error: "not_found" }, 404, request);
     }
 
     // ---- Clinic operations: BILLING station (lean MVP). /api/queue/bill/<action>. Inert unless
@@ -273,7 +309,10 @@ export async function onRequest(context) {
         patient: method === "POST" ? CAPS.QUEUE_ADD : CAPS.ORDER_READ,
         order: CAPS.ORDER_CREATE, orders: CAPS.ORDER_READ, queue: CAPS.BILLING_VIEW,
         tariff: method === "POST" ? CAPS.STAFF_ADMIN : CAPS.BILLING_VIEW,
-        invoice: method === "POST" ? CAPS.BILLING_CHARGE : CAPS.BILLING_VIEW, pay: CAPS.BILLING_CHARGE
+        invoice: method === "POST" ? CAPS.BILLING_CHARGE : CAPS.BILLING_VIEW, pay: CAPS.BILLING_CHARGE,
+        // Pharmacy station: read what is owed, and hand it over. Separate caps from billing on purpose -
+        // the person releasing medicines is never the person taking the money.
+        pharmacy: CAPS.ORDER_READ, dispense: CAPS.ORDER_DISPENSE
       };
       const need = capFor[sub]; if (!need) return json({ ok: false, error: "not_found" }, 404, request);
       const bAz = await ORG.authorizeOrg(env, actor, bOrg, need);
@@ -289,6 +328,8 @@ export async function onRequest(context) {
       if (sub === "invoice" && method === "POST") return json(await BILL.createInvoice(env, bOrg, body.patientId || "", aid), 200, request);
       if (sub === "invoice" && method === "GET") { const inv = await BILL.getInvoice(env, bOrg, url.searchParams.get("id") || ""); return json(inv ? Object.assign({ ok: true }, inv) : { ok: false, error: "not_found" }, 200, request); }
       if (sub === "pay" && method === "POST") return json(await BILL.payInvoice(env, bOrg, body.invoiceId || "", body.method || "cash", aid), 200, request);
+      if (sub === "pharmacy" && method === "GET") return json({ ok: true, orders: await BILL.pharmacyQueue(env, bOrg) }, 200, request);
+      if (sub === "dispense" && method === "POST") return json(await BILL.dispenseOrder(env, bOrg, body.orderId || "", aid), 200, request);
       return json({ ok: false, error: "not_found" }, 404, request);
     }
 
@@ -299,7 +340,7 @@ export async function onRequest(context) {
       if (actor.kind !== "firebase" && orgId) { const az = await ORG.authorizeOrg(env, actor, orgId, null); if (az.ok) role = az.role; }
       const smdId = actor.kind === "firebase" ? await ORG.userSmdId(env, actor.id, actor.email) : "";   // StewardMD ID per account
       let orgCode = ""; if (orgId) { const o = await ORG.getOrg(env, orgId); if (o) orgCode = o.code || ""; }
-      return json({ ok: true, role: role, caps: capsFor(role), kind: actor.kind, orgId: orgId, orgCode: orgCode, smdId: smdId, name: actor.name, hospitalId: actor.hospitalId || "" }, 200, request);
+      return json({ ok: true, role: role, caps: capsFor(role), kind: actor.kind, orgId: orgId, orgCode: orgCode, smdId: smdId, name: actor.name, hospitalId: actor.hospitalId || "", billing: BILL.billingEnabled(env) }, 200, request);
     }
 
     // ---- org / rooms / members config (Phase 3: multi-tenant, isolation-gated) ----
@@ -383,7 +424,11 @@ export async function onRequest(context) {
     if (method === "GET" && seg === "list") {
       const { s, err } = await loadSessionFor(env, url.searchParams.get("sessionId"), actor); if (err) return err;
       await requireSessionCap(env, actor, s, CAPS.QUEUE_VIEW);
-      return json({ ok: true, session: s, tickets: await ticketView(env, await Q.listTickets(env, s.id)) }, 200, request);
+      // Only ACTIVE tickets, matching /my-room. The clients already ignore finished ones
+      // (queue.js isQueued), but without this every poll shipped completed and cancelled patients to
+      // every signed-in client holding queue.view - reception and interns included. Data minimisation.
+      const all = await Q.listTickets(env, s.id);
+      return json({ ok: true, session: s, tickets: await ticketView(env, all.filter((t) => ACTIVE.indexOf(t.status) > -1)) }, 200, request);
     }
 
     // Audit timeline (transparency / anti-misuse) — anyone who can view the queue can see the trail.
@@ -499,7 +544,16 @@ export async function onRequest(context) {
       const azOrg = async (cap, target) => ORG.authorizeOrg(env, actor, body.orgId, cap, target);
       const deny = (az) => json({ ok: false, error: az.reason || "forbidden" }, az.reason === "org_not_found" ? 404 : 403, request);
       const needAccount = () => actor.kind !== "firebase";   // creating an org needs a StewardMD account (= the owner)
-      if (seg === "org" && !sub) { if (needAccount()) return json({ ok: false, error: "account_required" }, 403, request); return json({ ok: true, org: await ORG.createOrg(env, body, actor.id) }, 200, request); }
+      if (seg === "org" && !sub) {
+        if (needAccount()) return json({ ok: false, error: "account_required" }, 403, request);
+        /* A PG institution is SOLD, not self-served: it is provisioned for a college through the
+         * owner-gated /api/tenants route, which also names its admin. Anyone may still create a
+         * clinic here - that is the existing OPD flow and is unchanged - but minting an institution
+         * would put a self-appointed "Academic Cell" in charge of a recognised programme. */
+        if (String(body && body.kind) === "institution" && !(await ownerOK(request, env)))
+          return json({ ok: false, error: "institution_provisioning_required" }, 403, request);
+        return json({ ok: true, org: await ORG.createOrg(env, body, actor.id) }, 200, request);
+      }
       if (seg === "org" && sub === "update") { const az = await azOrg(CAPS.STAFF_ADMIN); if (!az.ok) return deny(az); return json({ ok: true, org: await ORG.updateOrg(env, body.orgId, body, actor.id) }, 200, request); }
       if (seg === "org" && sub === "delete") { const az = await azOrg(CAPS.STAFF_ADMIN); if (!az.ok) return deny(az); return json({ ok: true, deleted: await ORG.deleteOrg(env, body.orgId, actor.id) }, 200, request); }
       // One-tap: turn a Connect EMR connection into an OPD hospital (so it appears in the app's Hospital list
@@ -544,7 +598,20 @@ export async function onRequest(context) {
       if (seg === "pool") {   // register a department-level walk-in into the central unassigned pool
         const az = await azOrg(CAPS.QUEUE_ADD); if (!az.ok) return deny(az);
         const org = await ORG.getOrg(env, body.orgId);
-        const t = await Q.addToPool(env, org, body, actor.id);
+        let t = await Q.addToPool(env, org, body, actor.id);
+        // AUTO-ROUTE (2026-08-24): the pool exists so a big hospital's reception can triage into many
+        // rooms. A clinic with exactly ONE staffed room has nothing to triage - but the ticket still sat
+        // in the pool until someone tapped "Route to a room", and the doctor's app (which polls only its
+        // OWN room session) never saw the patient. Staff reasonably read "Add to pool" as done.
+        // So when there is exactly one room with a resolved doctor, route it there immediately.
+        // Multi-room orgs are untouched: they still get the explicit triage step.
+        try {
+          const staffed = (await ORG.listRooms(env, org.id)).filter((r) => resolveRoomDoctor(r));
+          if (staffed.length === 1) {
+            await Q.assignToRoom(env, org, t.id, staffed[0], { date: body.date }, actor.id);
+            t = (await Q.getTicket(env, t.id)) || t;
+          }
+        } catch (e) { /* routing is best-effort: the ticket still exists in the pool to route by hand */ }
         return json({ ok: true, ticket: (await ticketView(env, [t]))[0], board: await boardForOrg(env, org, body.date || "") }, 200, request);
       }
       if (seg === "assign-room") {   // nurse assigns a pool/room ticket to a specific room

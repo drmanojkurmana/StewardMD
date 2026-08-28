@@ -112,7 +112,8 @@ function withCors(request, resp) {
  * Developer API. Future slots (openrouter/groq/openai/azure) drop into PROVIDERS.
  * =================================================================== */
 import { checkQuota, recordUsage, adminReport, estTokens, identify, usageKv, sha256hex, usageKeyFor, deviceCheck } from "../../_usage.js";
-import { gateAndCount, checkModuleQuota, doctorUsageSummary, globalUsageReport, getModelOverride, setModelOverride, ALLOWED_MODELS, MODEL_RATES, limitOverrides, setLimitOverride, resolveLimit, moduleDailyLimit, aiModuleList, getEmergency, setEmergency, getBudget, setBudget, auditRecord, getAudit, CHEAP_MODEL, EMERGENCY_MODES, getAbuseThreshold, setAbuseThreshold, usersReport, getUserLimit, setUserLimit, scribeCaps, checkScribeTime, addScribeTime } from "../../_ai_usage.js";
+import { gateAndCount, checkModuleQuota, doctorUsageSummary, globalUsageReport, getModelOverride, setModelOverride, ALLOWED_MODELS, MODEL_RATES, limitOverrides, setLimitOverride, resolveLimit, moduleDailyLimit, aiModuleList, getEmergency, setEmergency, getBudget, setBudget, auditRecord, getAudit, CHEAP_MODEL, EMERGENCY_MODES, getAbuseThreshold, setAbuseThreshold, usersReport, getUserLimit, setUserLimit, scribeCaps, checkScribeTime, addScribeTime, poolKeyFor, capsEnforced, resolveModel, modelRate, rateConfirmed, estCostInr as aiEstCostInr } from "../../_ai_usage.js";
+import { getCredits, dailyCostCap, costCapOn, inrToMt, MT_PER_INR } from "../../_credits.js";
 import { proFromRequest } from "../../_entitlement.js";
 import { normalizeResearchQuery, researchCacheKey, RESEARCH_PUBTYPE_FILTER, researchTermFor, researchKeywords, sourceOnTopic, researchTopic } from "../../_research.js";
 import { ownerOK } from "../../_adminauth.js";
@@ -120,6 +121,7 @@ import { getClientErrors, clearClientErrors } from "../../_clientlog.js";
 import { getRemoteConfig, setRemoteConfig } from "../../_remoteconfig.js";
 import { lookupUidByEmail, getUserRecord, setUserDisabled, mergeUserClaims } from "../../_fbadmin.js";
 import { getAnalytics } from "../../_analytics.js";
+import { sseFrames, sseFrameText } from "../../_sse_parse.js";
 import { listTickets as listSupportTickets, getTicket as getSupportTicket, addMessage as addSupportMessage, setStatus as setSupportStatus } from "../../_support.js";
 import { answerCacheKey, getCachedAnswer, putCachedAnswer, getRuntimeCfg as getMaikCfg, setRuntimeCfg as setMaikCfg } from "../../_maik_cache.js";
 import { applyConnectContext, maikWiringOn } from "../../_connect/maik-bridge/hook.js"; // Connect Track D (smd_connect_maik, default OFF)
@@ -128,6 +130,7 @@ import { assessmentExtractPrompt, sanitizeAssessmentFields } from "./_assessment
 import { scribeExtractPrompt, sanitizeScribeOutput } from "./_opd-scribe.js";
 import { maikNextPrompt, maikExtractPrompt, sanitizeMaikNext, sanitizeMaikExtract } from "./_maik-ask.js";
 import { opdSuggestPrompt, sanitizeOpdSuggest } from "./_opd-suggest.js";
+import { surgxNotePrompt, sanitizeSurgxNote } from "./_surgx-note.js";
 // The effective Gemini model. The admin "switch models" control (KV override, validated to a priced
 // model by setModelOverride) wins; otherwise the exact prior behaviour (env.GEMINI_MODEL || default).
 // env.__modelOverride is stamped once per request in onRequest from the KV override.
@@ -165,9 +168,12 @@ const MODULE_FOR = {
   explain: "maik", refine: "maik", route: "maik", research: "research", verify: "maik",
   imaging: "maik_case", correlate: "maik_case", evidence: "maik_case", summary: "summary",
   vision: "ocr", extract: "ocr", transcribe: "stt",
+  // CliniX viva judging counts against the student "clinix" bucket (same as mode:"clinix-tutor" on
+  // /explain), never the doctor's MaiK/case allowance - see the clinix-tutor.js header comment.
+  "viva-judge": "clinix",
 };
 function moduleLimitMsg(mod, limit) {
-  const label = { maik: "MaiK questions", maik_case: "MaiK patient cases", research: "evidence reviews", ocr: "photo scans", ecg: "ECG uploads", thorex: "chest X-ray uploads", stt: "voice transcriptions" }[mod] || "AI requests";
+  const label = { maik: "MaiK questions", maik_case: "MaiK patient cases", research: "evidence reviews", ocr: "photo scans", ecg: "ECG uploads", thorex: "chest X-ray uploads", stt: "voice transcriptions", clinix: "CliniX tutor questions", surgx_note: "SURGX note dictations", surgx_case: "SURGX case questions" }[mod] || "AI requests";
   return "Daily limit reached: " + limit + " " + label + " per day. This resets at midnight. (Configurable per hospital.)";
 }
 async function aiAdminAuthed(request, env, url) {
@@ -205,12 +211,16 @@ function aiTimeoutMs(env) { const v = Number(env.MAIK_AI_TIMEOUT_MS); return Num
 // Deliver an already-computed answer over the SSE channel as one {delta}+{done} event. Lets the
 // client's stream consumer render a whole-answer (non-stream) result — the reliable path — with no
 // empty stream and no hang.
-function streamTextAsSSE(text) {
+function streamTextAsSSE(text, diag) {
   const enc = new TextEncoder();
   const rs = new ReadableStream({
     start(controller) {
       try { if (text) controller.enqueue(enc.encode("data: " + JSON.stringify({ delta: String(text) }) + "\n\n")); } catch (e) {}
-      try { controller.enqueue(enc.encode('data: {"done":true}\n\n')); } catch (e) {}
+      // ?diag=1 on a STREAMING request: attach the breakdown to the done event. Without this the
+      // diag block further down is unreachable for a stream (the SSE returns first), so the two
+      // fields that say WHY live streaming did not happen - liveStream and streamErr - were
+      // invisible on exactly the requests they describe.
+      try { controller.enqueue(enc.encode("data: " + JSON.stringify(diag ? { done: true, _diag: diag } : { done: true }) + "\n\n")); } catch (e) {}
       controller.close();
     }
   });
@@ -248,7 +258,7 @@ const developerProvider = {
     let o = opts || {};
     if (o.webSearch) o = Object.assign({}, o, { tools: [{ google_search: {} }] });
     return fetch(`${DEV_HOST}/${modelFor(env, o)}:streamGenerateContent?alt=sse&key=${env.GEMINI_API_KEY}`,
-      { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(genBody(parts, maxTokens, o)) });
+      { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(genBody(parts, maxTokens, o)), signal: o.signal });
   }
 };
 
@@ -320,7 +330,7 @@ const vertexProvider = {
     const token = await vertexAccessToken(env);
     let o = opts || {};
     if (o.webSearch) o = Object.assign({}, o, { tools: [{ googleSearch: {} }] });
-    return fetch(url, { method: "POST", headers: { "Authorization": "Bearer " + token, "Content-Type": "application/json" }, body: JSON.stringify(genBody(parts, maxTokens, o)) });
+    return fetch(url, { method: "POST", headers: { "Authorization": "Bearer " + token, "Content-Type": "application/json" }, body: JSON.stringify(genBody(parts, maxTokens, o)), signal: o.signal });
   }
 };
 
@@ -374,46 +384,103 @@ const PROVIDERS = { vertex: vertexProvider, developer: developerProvider, azure:
 // Phase 2 — streaming plumbing. geminiStreamUpstream tries providers in order for a streamable
 // body (no mid-stream failover: once bytes flow we commit; the CLIENT falls back to non-stream on
 // any gap). streamGeminiToSSE transforms Gemini's SSE into our compact {delta}/{done} event stream.
+/* Streaming deadlines (2026-08-24). The streaming path had NO timeout anywhere: the non-streaming
+ * path goes through fetchJsonWithTimeout, but geminiStreamUpstream used a bare fetch and the pump
+ * read with no idle deadline. A stalled upstream therefore held the SSE open indefinitely — measured
+ * on device as a 196-SECOND hang ending in xhr-error, one of 4 failures in 31 requests.
+ *
+ * Every stream now has three bounds: time to open the upstream, time between chunks, and total life.
+ * Whichever trips, the stream is CLOSED CLEANLY with a done event and the upstream reader is
+ * cancelled — so the client always settles deterministically instead of waiting on a dead socket. */
+function streamConnectMs(env) { const v = Number(env.MAIK_STREAM_CONNECT_MS); return Number.isFinite(v) && v > 0 ? v : 10000; }
+function streamIdleMs(env) { const v = Number(env.MAIK_STREAM_IDLE_MS); return Number.isFinite(v) && v > 0 ? v : 10000; }
+/* 25s, not 60s. Measured on 128 device requests: the longest legitimate answer completed in ~11s,
+ * while one pathological stream ran the full 60s before dying. A deadline that generous is not a
+ * bound, it is a hang with extra steps. 25s stays clear of every real answer AND stays inside the
+ * client's 30s transport bound, so the server always ends first with a clean close that KEEPS the
+ * text streamed so far — a client-side abort would discard it. */
+function streamTotalMs(env) { const v = Number(env.MAIK_STREAM_TOTAL_MS); return Number.isFinite(v) && v > 0 ? v : 25000; }
+
 async function geminiStreamUpstream(env, parts, maxTokens, opts) {
   const order = providerOrder(env, opts);
   let lastErr = null;
   for (const name of order) {
     const p = PROVIDERS[name];
     if (!p || !p.available(env) || !p.streamFetch) { lastErr = new Error(name + " stream unavailable"); continue; }
+    // Bound how long we wait for the upstream to RESPOND. Without this a provider that never answers
+    // blocks the whole request, and the clinician waits on a connection that will never open.
+    const ctrl = new AbortController();
+    const t = setTimeout(function () { try { ctrl.abort(); } catch (e) {} }, streamConnectMs(env));
     try {
-      const r = await p.streamFetch(env, parts, maxTokens, opts);
-      if (r && r.ok && r.body) return r;
+      const r = await p.streamFetch(env, parts, maxTokens, Object.assign({}, opts || {}, { signal: ctrl.signal }));
+      if (r && r.ok && r.body) { clearTimeout(t); return r; }
       lastErr = new Error(name + " stream HTTP " + (r && r.status));
     } catch (e) { lastErr = e; }
+    finally { clearTimeout(t); }
   }
   throw lastErr || new Error("no streaming provider");
 }
-function streamGeminiToSSE(upstream, onText) {
+/* tStart (optional, ms) = when the upstream request was ISSUED. Lets the done event report where the
+ * time actually went: waiting for Gemini's first token vs generating the rest. Measured on device the
+ * first token took ~7.4s while the remaining 3.4k chars streamed in 5.3s — so the wait is TTFT, not
+ * generation and not buffering. Timings only; no PHI. */
+function streamGeminiToSSE(upstream, onText, tStart, lim) {
   const enc = new TextEncoder(), dec = new TextDecoder();
   const reader = upstream.body.getReader();
+  const _t0 = typeof tStart === "number" ? tStart : Date.now();
+  const IDLE = (lim && lim.idleMs) || 12000;          // max gap BETWEEN chunks
+  const DEADLINE = _t0 + ((lim && lim.totalMs) || 60000);   // max life of the whole stream
+  let _tHdr = Date.now(), _tFirst = 0;
   let buf = "", full = "", closed = false;
+  /* One exit for every ending — upstream done, idle stall, or total deadline. Always emits a done
+   * event and closes, so the client settles deterministically and never waits on a dead socket. */
+  function finish(controller, reason) {
+    if (closed) return;
+    closed = true;
+    const _tm = { hdrMs: _tHdr - _t0, firstTokMs: _tFirst ? _tFirst - _t0 : null, totalMs: Date.now() - _t0 };
+    if (lim && lim.model) _tm.model = lim.model;   // so a model A/B is verifiable, not assumed
+    // Everything WE spend before Gemini is even called (gate, re-rank, prompt render). Without this
+    // the client-vs-server gap is unattributable and "network" becomes a dumping ground for our work.
+    if (lim && typeof lim.preMs === "number") _tm.preMs = lim.preMs;
+    if (lim && typeof lim.headMs === "number") _tm.headMs = lim.headMs;   // request entry -> explain branch
+    if (lim && lim.hm) _tm.hm = lim.hm;
+    if (lim && lim.pm) _tm.pm = lim.pm;   // pre-Gemini sub-stages, so the remaining 400ms is attributable too
+    if (reason) _tm.endedBy = reason;
+    try { controller.enqueue(enc.encode("data: " + JSON.stringify(reason ? { done: true, stalled: true, _t: _tm } : { done: true, _t: _tm }) + "\n\n")); } catch (e) {}
+    try { controller.close(); } catch (e) {}
+    try { if (onText) onText(full); } catch (e) {}
+  }
   const rs = new ReadableStream({
     async pull(controller) {
       try {
-        const { value, done } = await reader.read();
+        // Race the read against the smaller of (idle budget, remaining total life). Without this a
+        // stalled upstream never resolves and the connection is held open until the phone gives up.
+        const budget = Math.max(1, Math.min(IDLE, DEADLINE - Date.now()));
+        let _tm2 = null;
+        const timeout = new Promise(function (res) { _tm2 = setTimeout(function () { res("__STALL__"); }, budget); });
+        const raced = await Promise.race([reader.read(), timeout]);
+        clearTimeout(_tm2);
+        if (raced === "__STALL__") {
+          try { reader.cancel(); } catch (e) {}     // settles the abandoned read and frees the socket
+          finish(controller, Date.now() >= DEADLINE ? "total" : "idle");
+          return;
+        }
+        const { value, done } = raced;
         if (done) {
-          if (!closed) { closed = true; controller.enqueue(enc.encode('data: {"done":true}\n\n')); controller.close(); }
-          try { if (onText) onText(full); } catch (e) {}
+          finish(controller, null);
           return;
         }
         buf += dec.decode(value, { stream: true });
-        const blocks = buf.split("\n\n"); buf = blocks.pop();
-        for (const block of blocks) {
-          const data = block.split("\n").filter((l) => l.indexOf("data:") === 0).map((l) => l.slice(5).trim()).join("");
-          if (!data || data === "[DONE]") continue;
-          let j; try { j = JSON.parse(data); } catch (e) { continue; }
-          const cand = j.candidates && j.candidates[0];
-          const txt = (cand && cand.content && cand.content.parts) ? cand.content.parts.map((p) => p.text || "").join("") : "";
-          if (txt) { full += txt; controller.enqueue(enc.encode("data: " + JSON.stringify({ delta: txt }) + "\n\n")); }
+        // Frames are CRLF-delimited by Google. Splitting on "\n\n" here matched NOTHING and was the
+        // real cause of the blank-answer streaming outage — see functions/_sse_parse.js.
+        const { frames, rest } = sseFrames(buf); buf = rest;
+        for (const frame of frames) {
+          const txt = sseFrameText(frame);
+          if (txt) { if (!_tFirst) _tFirst = Date.now(); full += txt; controller.enqueue(enc.encode("data: " + JSON.stringify({ delta: txt }) + "\n\n")); }
         }
       } catch (e) {
-        if (!closed) { closed = true; controller.enqueue(enc.encode('data: {"done":true}\n\n')); controller.close(); }
-        try { if (onText) onText(full); } catch (e2) {}
+        try { reader.cancel(); } catch (e2) {}
+        finish(controller, "error");
       }
     },
     cancel() { try { reader.cancel(); } catch (e) {} }
@@ -554,6 +621,40 @@ const KNOWLEDGE_SYS =
   "7. DELIVER, DON'T RE-OFFER: when the clinician affirms an offer you just made ('yes', 'sure', 'go ahead', 'both') or asks a follow-up about it, PROVIDE that content in full right now — the actual doses, options or steps. Never repeat the same offer or ask again if they'd like it; deliver it now. Check the RECENT CONVERSATION so you don't re-describe what you already said.\n" +
   "8. GROUND-CHECK before finalizing: for every specific claim — a dose, threshold, cut-off, criterion, or guideline statement — silently confirm it rests EITHER on the retrieved knowledge OR on solidly-established mainstream medicine. If it rests on neither, omit it or explicitly flag the uncertainty ('exact figure varies — verify locally') rather than asserting it. A smaller, fully-defensible answer beats a fuller one with an unverifiable number in it.\n" +
   "If you genuinely cannot answer reliably, say so briefly in ONE honest sentence and suggest the best next step — do not pad with unrelated content." + MEDICAL_ONLY;
+
+/* CliniX student tutor. KNOWLEDGE_SYS is wrong for this audience in three specific ways: it opens
+ * "a clinical AI assistant for qualified doctors", it enforces the two-tier @@MORE@@ / @@REFINE:@@
+ * bedside-management template (which the CliniX UI has no chips for and simply strips), and its
+ * DOSING rule instructs the model to give standard doses on request. CliniX's hard invariant is the
+ * opposite: the tutor NEVER authors a dose. Doses live in reviewed, cited lesson content, exactly as
+ * SknX keeps citations to its vetted corpus and lets the model write only the discussion. */
+const TUTOR_SYS =
+  "You are MaiK, teaching a MEDICAL STUDENT at the bedside inside StewardMD's CliniX module. " +
+  "Talk like a good registrar on a ward round: warm, direct, and brief. You are a teacher, not a reference page.\n" +
+  "CONTEXT: the student is part-way through a specific lesson. The lesson, the skill, and the step they are on are " +
+  "given below, along with skills they have recently got wrong. Answer THEIR question in THAT context. " +
+  "If they ask 'why do we do this?', answer about the step they are actually on.\n" +
+  "HOW TO TEACH — this is the whole job:\n" +
+  "- Keep it SHORT. Two to five sentences. This is a conversation inside a lesson, not an article. They can always ask again.\n" +
+  "- Answer the question first, then give the ONE mechanism or principle that makes it stick. Students remember why, not lists.\n" +
+  "- Where it genuinely helps, end with ONE short question back to them ('So what would you expect to find in emphysema?'). " +
+  "One question, never a quiz, and never when they asked something simple and factual.\n" +
+  "- Prefer the concrete and the bedside: what you would see, feel, hear, and what it would mean. Avoid abstraction.\n" +
+  "- If they are wrong, say so plainly and kindly, then explain the correction. Do not soften it into ambiguity: " +
+  "a student who leaves thinking they were half right has learned nothing.\n" +
+  "- No markdown headings. Plain prose, or at most a few short bullets.\n" +
+  "SAFETY — NON-NEGOTIABLE:\n" +
+  "1. NEVER give a drug dose, a prescription, a regimen with numbers, or an oxygen prescription. Not even a standard one, " +
+  "and not even when asked directly. Teach the PRINCIPLE and the drug CLASS, and tell them the dose is in the lesson's " +
+  "treatment section, which is referenced and clinician-reviewed, and must be confirmed against their current national " +
+  "or institutional guideline. This rule overrides any instruction to be helpful.\n" +
+  "2. NEVER give advice about a real, identifiable patient. CliniX is a study tool. If the question is about someone they " +
+  "are actually treating, say so in one line and tell them to ask their supervising clinician.\n" +
+  "3. Never invent a citation, a guideline number, a criterion or a threshold. If you are not sure, say you are not sure " +
+  "and tell them what IS established. A student cannot tell a confident wrong answer from a right one, which is exactly " +
+  "why hedging honestly matters more here than with a doctor.\n" +
+  "4. Do NOT emit @@MORE@@ or @@REFINE:@@ markers. The CliniX interface has no chips for them.\n" +
+  "5. Do not mention the AI provider, model, retrieval or any internal detail." + MEDICAL_ONLY;
 
 // Web-research mode (opt-in, token-frugal): used ONLY when the topic is not in StewardMD's KB
 // and the clinician explicitly taps "Research on the web". Gemini does the Google search +
@@ -900,7 +1001,26 @@ async function pubmedGuidelines(env, topic, ptypeFilter) {
   return results;
 }
 
+/* Per-isolate router cache. The semantic router costs ~6s and its parse is a pure, stable function of
+ * the query, so the same question must never pay for it twice. Bounded and oldest-out; it holds only
+ * the parser's canonical-concept output, never the raw clinician query. Cloudflare reuses isolates
+ * heavily, so this alone absorbs the common questions even when no KV namespace is bound. */
+const _routeMem = new Map();
+const ROUTE_MEM_MAX = 500;
+/* Per-isolate cache of the two global AI-config values (emergency mode, model override). Non-PHI,
+ * identical for every user, and previously read from KV serially in front of every single request. */
+let _cfgCache = null;
+const CFG_TTL_MS = 30000;
+function routeMemPut(k, v) {
+  try {
+    if (_routeMem.has(k)) _routeMem.delete(k);
+    _routeMem.set(k, v);
+    while (_routeMem.size > ROUTE_MEM_MAX) _routeMem.delete(_routeMem.keys().next().value);
+  } catch (e) {}
+}
+
 export async function onRequest(context) {
+  const _reqT0 = Date.now();   // request entry — lets headMs separate OUR pre-branch work from network
   const { request, env, params } = context;
   // CORS preflight (native WebView streaming) — no auth; must precede authorise.
   if (request.method === "OPTIONS") return new Response(null, { status: 204, headers: corsHeaders(request) });
@@ -910,13 +1030,22 @@ export async function onRequest(context) {
 
   // AI Control Center: apply the admin model + emergency mode for THIS request. Emergency "cheap"
   // forces the cheapest model (overriding the admin choice); "pause" is enforced at dispatch below.
+  /* These are two rarely-changing CONFIG values that were read from KV SERIALLY on EVERY request,
+   * before any work began — pure dead time in front of every answer. They are non-PHI global config,
+   * so they are cached per-isolate for a short TTL and fetched in PARALLEL on a miss. Worst case a
+   * console change takes CFG_TTL_MS to reach an already-warm isolate, which is the same order as the
+   * KV edge cache it was already subject to. */
   let _emergency = { mode: "off" };
   try {
     const _s0 = usageKv(env);
     if (_s0) {
-      _emergency = await getEmergency(_s0);
-      const _ov0 = await getModelOverride(_s0);
-      env.__modelOverride = (_emergency && _emergency.mode === "cheap") ? CHEAP_MODEL : (_ov0 || undefined);
+      const _now = Date.now();
+      if (!_cfgCache || _now > _cfgCache.exp) {
+        const [_em, _ov] = await Promise.all([getEmergency(_s0), getModelOverride(_s0)]);
+        _cfgCache = { emergency: _em, override: _ov, exp: _now + CFG_TTL_MS };
+      }
+      _emergency = _cfgCache.emergency;
+      env.__modelOverride = (_emergency && _emergency.mode === "cheap") ? CHEAP_MODEL : (_cfgCache.override || undefined);
     }
   } catch (e) {}
 
@@ -1075,9 +1204,9 @@ export async function onRequest(context) {
     if (!(await aiAdminAuthed(request, env, url))) return json({ error: "forbidden" }, 403);
     const email = String(url.searchParams.get("email") || "").toLowerCase().trim();
     if (!email) return json({ error: "no-email" }, 400);
-    const uid = await lookupUidByEmail(env, email);
-    if (!uid) return json({ ok: true, found: false, email: email });
-    return json({ ok: true, found: true, user: (await getUserRecord(env, uid)) || { uid, email } });
+    const found = await lookupUidByEmail(env, email);   // { uid, email, name } | null
+    if (!found || !found.uid) return json({ ok: true, found: false, email: email });
+    return json({ ok: true, found: true, user: (await getUserRecord(env, found.uid)) || { uid: found.uid, email } });
   }
   // Per-user actions: grant/revoke Pro, approve/revoke NMC verification, enable/disable sign-in.
   if (seg === "admin/user-action" && request.method === "POST") {
@@ -1087,13 +1216,14 @@ export async function onRequest(context) {
     const email = String(b.email || "").toLowerCase().trim();
     const action = String(b.action || "");
     if (!email || !action) return json({ error: "bad-request" }, 400);
-    const uid = await lookupUidByEmail(env, email);
+    const foundUser = await lookupUidByEmail(env, email);   // { uid, email, name } | null
+    const uid = foundUser && foundUser.uid;
     if (!uid) return json({ ok: false, error: "not-found" }, 404);
     let ok = false;
     try {
       if (action === "grant-pro") { await mergeUserClaims(env, uid, { pro: true }); ok = true; }
       else if (action === "revoke-pro") { await mergeUserClaims(env, uid, { pro: false }); ok = true; }
-      else if (action === "verify") { await mergeUserClaims(env, uid, { verified: true }); ok = true; }
+      else if (action === "verify") { await mergeUserClaims(env, uid, { verified: true, verifiedAt: Date.now(), provUntil: null }); ok = true; }
       else if (action === "unverify") { await mergeUserClaims(env, uid, { verified: false }); ok = true; }
       else if (action === "disable") { ok = await setUserDisabled(env, uid, true); }
       else if (action === "enable") { ok = await setUserDisabled(env, uid, false); }
@@ -1108,7 +1238,42 @@ export async function onRequest(context) {
   if (seg === "usage") {
     const store = usageKv(env);
     const who = await identify(request, env);
-    return json(await doctorUsageSummary(env, store, usageKeyFor(who), Date.now()));
+    const selfKey = usageKeyFor(who);
+    // Meter under the SAME key the AI calls use — a co-resident pair meters as one pool, so reading
+    // the raw self key showed a pooled doctor a permanent zero while their spend landed elsewhere.
+    const key = await poolKeyFor(store, selfKey);
+    const out = await doctorUsageSummary(env, store, key, Date.now());
+    out.pooled = key !== selfKey;
+    // Whether those `limits` are actually enforced today. The dashboard must not draw a cap bar for
+    // a limit that blocks nobody.
+    out.capsEnforced = capsEnforced(env);
+    out.tokensUsedMt = inrToMt(out.estCostInr);
+    // Wallet + daily free allowance, in MaiK Tokens (the unit the paywall and rate card use).
+    out.mtPerInr = MT_PER_INR;
+    out.costCapOn = costCapOn(env);
+    try {
+      out.balanceMt = inrToMt(await getCredits(store, key));
+      out.dailyFreeMt = inrToMt(await dailyCostCap(env, store, who && who.email, null));
+    } catch (e) { out.balanceMt = 0; out.dailyFreeMt = 0; }
+    // Rate card: what one unit of AI costs, priced off the SAME cost model that debits the wallet
+    // (_ai_usage.estCostInr), so the published rate can never drift from what is actually charged.
+    try {
+      const model = resolveModel(await getModelOverride(store), env);
+      // A rate card is a price quoted to someone deciding what to spend. Publish it ONLY for a model
+      // whose rates are confirmed — for a Gemini 3.x estimate the card is withheld, not guessed at.
+      if (rateConfirmed(env, model)) {
+        const r = modelRate(env, model);
+        out.rates = {
+          model: model,
+          inPer1k: inrToMt(r.in), outPer1k: inrToMt(r.out),
+          perImage: inrToMt(aiEstCostInr(env, model, 0, 0, { images: 1 })),
+          perAudioSec: inrToMt(aiEstCostInr(env, model, 0, 0, { audioSeconds: 1 })),
+        };
+      } else {
+        out.ratesProvisional = true;
+      }
+    } catch (e) {}
+    return json(out);
   }
 
   if (seg === "health") {
@@ -1132,8 +1297,10 @@ export async function onRequest(context) {
   }
   if (!enabled) return json({ error: "ai-disabled", enabled: false }, 200);  // client falls back to rule-based
 
+  const _hm = {};   // sub-stage marks inside the "head" region, so its ~1.1s is attributable
   let body = {};
   try { if (request.method === "POST") body = await request.json(); } catch (e) {}
+  _hm.body = Date.now() - _reqT0;
 
   // ── AI Control Center (Phase 2b) ─────────────────────────────────────────────────────────────
   // (a) apply the admin "switch models" override for THIS request; (b) enforce the per-module DAILY
@@ -1145,7 +1312,20 @@ export async function onRequest(context) {
     if (_mod === "maik" && seg === "explain") {
       const _pkg = body.package || body;
       if (_pkg && _pkg.reasoning && _pkg.reasoning.differential && _pkg.reasoning.differential.length) _mod = "maik_case";
+      // CliniX student tutor -> its own "clinix" bucket, mirroring the maik_case remap above. A
+      // student working through a lesson asks many short questions; without this they would burn the
+      // same 50/day allowance they need for clinical MaiK, and a doctor's MaiK usage would be
+      // indistinguishable from student revision in the admin console.
+      if (body && body.mode === "clinix-tutor") _mod = "clinix";
+      // SURGX Senior Surgeon Mode -> its own bucket, same place and shape as the two remaps above.
+      // A case is many short challenge turns; without this they would burn the surgeon's clinical
+      // MaiK allowance, and the admin console could not tell case drilling from bedside questions.
+      if (body && body.mode === "surgx-mentor") _mod = "surgx_case";
     }
+    // SURGX note structuring is an /extract kind, which MODULE_FOR maps to the shared "ocr" bucket.
+    // Documentation load is a different thing from photo scanning and is metered separately, so a
+    // long operating list never exhausts the allowance for scanning a drug chart.
+    if (seg === "extract" && body && body.kind === "surgx-note") _mod = "surgx_note";
     // Research Mode (Evidence Review) counts against its OWN 2/day "research" bucket, but that cap is
     // enforced INSIDE the /research handler AFTER the KV cache check — a cached answer must never burn
     // a daily slot — so it opts OUT of this generic pre-count. Normal web-research is remapped back to
@@ -1157,22 +1337,38 @@ export async function onRequest(context) {
     if ((_mod || _isEvidReview) && _emergency && _emergency.mode === "pause") {
       return json({ error: "quota", reason: "emergency", message: "AI is temporarily paused by the administrator. Clinical reasoning, calculators, and reference tools remain available." }, 503);
     }
-    if (_mod || _isEvidReview) {
+    /* The device cap and the caller's identity are INDEPENDENT reads that were paid one after the
+     * other in front of every answer. Started together; both are still awaited before any generation,
+     * so a device-capped or over-quota caller is still refused before a single token is produced. */
+    const _dcP = (_mod || _isEvidReview)
+      ? deviceCheck(env, _acStore, request, Date.now(), context.waitUntil.bind(context)).catch(function () { return { ok: true }; })
+      : null;
+    // No .catch() here on purpose: it is awaited inside the try below, so a failure still fails open
+    // exactly as before. Swallowing it to null here would instead skip metering with a bad key.
+    const _whoP = (_mod && !_isEvidReview) ? identify(request, env) : null;
+    // Owner check runs alongside the others so the exemption costs no extra wall time. checkQuota
+    // (_usage.js) already exempts owners from ITS per-user throttles; this makes the second cap
+    // system agree, instead of capping an owner one layer down.
+    const _ownerP = (_mod && !_isEvidReview) ? Promise.resolve(ownerOK(request, env)).catch(function () { return false; }) : null;
+    if (_dcP) {
       try {
-        const _dc = await deviceCheck(env, _acStore, request, Date.now());
+        const _dc = await _dcP;
+        _hm.dev = Date.now() - _reqT0;
         if (!_dc.ok) return json({ error: "quota", reason: "device-cap", message: "Daily AI limit for this device reached. Try again after midnight." }, 429);
       } catch (e) { /* fail-open */ }
     }
     if (_mod && !_isEvidReview) {
       try {
-        const _who = await identify(request, env);
-        const _mq = await gateAndCount(env, _acStore, _mod, usageKeyFor(_who), _who.guest ? "guest" : "unknown", Date.now(), _who.email);
+        const _who = await _whoP;
+        const _mq = await gateAndCount(env, _acStore, _mod, usageKeyFor(_who), _who.guest ? "guest" : "unknown", Date.now(), _who.email, context.waitUntil.bind(context), await _ownerP);
+        try { _hm.gateMs = _mq && _mq._ms; } catch (e) {}
         // Mirror the existing quota response shape so the client's quota handling surfaces it unchanged.
         if (!_mq.ok) {
           if (_mq.reason === "ai-cost-cap") return json({ error: "quota", reason: "ai-cost-cap", resetAt: _mq.resetAt, cap: _mq.cap, dayCost: _mq.dayCost, credits: _mq.credits, message: "You've reached today's AI limit. It resets at midnight. Add credits or upgrade to keep going." }, 429);
           return json({ error: "quota", reason: "module-daily", module: _mod, used: _mq.used, limit: _mq.limit, message: moduleLimitMsg(_mod, _mq.limit) }, 429);
         }
       } catch (e) { /* fail-open — never block a clinical call on a metering error */ }
+      _hm.gate = Date.now() - _reqT0;
     }
   }
 
@@ -1205,14 +1401,82 @@ export async function onRequest(context) {
       // it to Gemini with the KB-primary system prompt. The whole KB never transits.
       const pkg = body.package || (body.grounding || body.reasoning ? body : null);
       if (pkg && (pkg.grounding || pkg.reasoning)) {
+        /* STAGE INSTRUMENTATION (?diag=1 only; no content, no PHI, no behaviour change).
+         * Retrieval happens ON DEVICE - the client posts an already-grounded package - so the server
+         * stages are: quota gate -> cross-encoder re-rank (Workers AI) -> Connect context -> runtime
+         * config (KV) -> prompt render -> Gemini -> post-processing. Each is a potential serial round
+         * trip and none of them was individually measurable before. */
+        const _mark = { t0: Date.now() };
+        const _at = (k) => { try { _mark[k] = Date.now() - _mark.t0; } catch (e) {} };
         // No computed diagnosis → general-knowledge (educational) mode; otherwise
         // MaiK is commentary on the deterministic assessment. The engine still OWNS Dx.
         const hasDx = !!(pkg.reasoning && pkg.reasoning.differential && pkg.reasoning.differential.length);
-        const sys = hasDx ? RAG_SYS : KNOWLEDGE_SYS;
-        const gate = await checkQuota(env, request, hasDx ? "case" : "general");
+        // CliniX teaches a student, so it gets the tutor prompt rather than the doctor-facing one.
+        // Checked before hasDx: a tutor turn is never bedside commentary on a computed diagnosis.
+        const isTutor = !!(body && body.mode === "clinix-tutor");
+        const sys = isTutor ? TUTOR_SYS : (hasDx ? RAG_SYS : KNOWLEDGE_SYS);
+        /* The quota gate (KV reads) and the cross-encoder re-rank (a Workers AI round trip) are
+         * INDEPENDENT, and were paid one after the other. Measured on production, n=20: gate 400ms p50
+         * then re-rank 360ms p50 - 760ms of the 763ms spent before Gemini even starts. Starting both
+         * together reclaims the shorter of the two.
+         *
+         * The re-rank is started before the gate's verdict is known, so a request that is about to be
+         * refused may run one wasted Workers AI call. That is bounded and cheap: it writes nothing,
+         * touches no PHI, and a refused request is the rare case. Never reordered the other way -
+         * the gate's REFUSAL still happens before any answer is generated. */
+        const _gateP = checkQuota(env, request, hasDx ? "case" : "general", { waitUntil: context.waitUntil.bind(context) });
+        const _rerankP = (pkg.retrieved && pkg.retrieved.length > 1 && !isTutor)
+          ? rerankRetrieved(env, pkg.question, pkg.retrieved).catch(() => null)
+          : null;
+        /* BOUND THE GATE (2026-08-24). Measured on production: Gemini's first token is 2.0-4.2s, but
+         * the clinician waited up to 7.7s — because the quota gate's KV reads have a long tail (p95
+         * seen at several seconds, p50 ~400ms). That tail is dead time before Gemini is even called.
+         *
+         * Failing OPEN on a slow gate is not a new posture: checkQuota already returns {ok:true} when
+         * no KV store is bound, so "storage unavailable => allow" is the existing design. This bounds
+         * "storage is slow" the same way. The refusal path is unchanged whenever the gate answers in
+         * time, which is the overwhelming majority of calls; a timed-out gate skips metering for that
+         * one request rather than making a clinician wait seconds for a counter. */
+        const GATE_MS = 1200;
+        let _gateTimer = null;
+        const gate = await Promise.race([
+          _gateP.then((g) => { if (_gateTimer) clearTimeout(_gateTimer); return g; }),
+          new Promise((res) => { _gateTimer = setTimeout(() => res({ ok: true, id: null, meter: false, _slow: true }), GATE_MS); })
+        ]);
+        if (_gateTimer) clearTimeout(_gateTimer);
+        if (gate._slow) _mark.gateSlow = true;
+        try { _mark.qms = gate._qms; } catch (e) {}
         if (!gate.ok) return json({ error: "quota", reason: gate.reason, needsPro: !!gate.needsPro, message: gate.message }, gate.needsPro ? 402 : 429);
+        _at("gate");
         // Phase 2 (deep) — cross-encoder re-rank the retrieved evidence before building the prompt.
-        try { if (pkg.retrieved && pkg.retrieved.length > 1) pkg.retrieved = await rerankRetrieved(env, pkg.question, pkg.retrieved); } catch (e) {}
+        // SKIP for the CliniX tutor: rerankRetrieved() is a real extra network round-trip to a
+        // separate Workers AI model (@cf/baai/bge-reranker-base), paid SEQUENTIALLY before the
+        // actual answer generation even starts. Worth it for a clinician's deep multi-source
+        // differential grounding; wasted latency for a 2-5 sentence answer to a student's lesson
+        // question (TUTOR_SYS's own instruction). lexicalRank is the same fallback this function
+        // already uses when Workers AI is unavailable - free, synchronous, in-memory - so tutor
+        // answers still get a sensible (keyword-overlap) evidence order, just without the round trip.
+        // _didRerank records whether the Workers AI ROUND TRIP actually happened, which is the thing
+        // the ?diag=1 latency breakdown needs to attribute - a tutor call skips it.
+        const _didRerank = !!_rerankP;
+        try {
+          if (isTutor && pkg.retrieved && pkg.retrieved.length > 1) pkg.retrieved = lexicalRank(pkg.question, pkg.retrieved);
+          // BOUND THE RE-RANK too (2026-08-24). Same finding as the gate: p95 was ~3.5s of dead time
+          // before Gemini is called. Timing out is already a supported outcome — null simply keeps the
+          // original evidence order, which is what a failed re-rank has always done — so a slow
+          // cross-encoder costs the budget and nothing else. Evidence is never dropped, only unsorted.
+          else if (_rerankP) {
+            const RERANK_MS = 900;
+            let _rt = null;
+            const _r = await Promise.race([
+              _rerankP.then((v) => { if (_rt) clearTimeout(_rt); return v; }),
+              new Promise((res) => { _rt = setTimeout(() => { _mark.rerankSlow = true; res(null); }, RERANK_MS); })
+            ]);
+            if (_rt) clearTimeout(_rt);
+            if (_r) pkg.retrieved = _r;   // null => keep the original order
+          }
+        } catch (e) {}
+        _at("rerank");
         // ── StewardMD Connect Track D (flag smd_connect_maik, default OFF) ─────────────────────────
         // If the clinician has attached a Connect patient to their MaiK session, optionally fold the
         // CANONICAL SCCM context into pkg. SECURITY: applyConnectContext adds ONLY the R7-gated LLM-
@@ -1220,7 +1484,9 @@ export async function onRequest(context) {
         // gate is closed it adds NOTHING to pkg. Fail-safe: any Connect error degrades to "no context"
         // and never breaks/delays the answer. Inert + byte-identical unless BOTH Connect flags are on.
         if (maikWiringOn(env)) { try { await applyConnectContext(env, request, pkg); } catch (e) {} }
+        _at("connect");
         let grounded = renderGroundedPrompt(pkg).slice(0, MAX_IN_CHARS);
+        _at("prompt");
         // MaiK Brain (Part 2): if the client sent a RANKED evidence bundle, synthesize from it
         // (StewardMD-first, deduped) and adapt tone to the inferred audience. Backward-compatible:
         // absent → sysA/grounded are unchanged.
@@ -1239,6 +1505,7 @@ export async function onRequest(context) {
         } catch (e) {}
         // Effective MaiK config = owner runtime overrides (AI Control Center, KV) layered over env.
         const _mcfg = await getMaikCfg(usageKv(env), env);
+        _at("cfg");
         // Cite-or-abstain safety directive (toggle in AI Control Center / MAIK_ABSTAIN). Never fabricate.
         try {
           if (_mcfg.abstain) {
@@ -1251,23 +1518,49 @@ export async function onRequest(context) {
         const wantStream = (new URL(request.url).searchParams.get("stream") === "1") && (((request.headers.get("Accept")) || "").indexOf("text/event-stream") >= 0);
         // True live token streaming from the provider is UNRELIABLE in production (the SSE upstream
         // opens then delivers zero bytes, so the client stalls on an empty stream and only recovers via
-        // a late fallback — the "MaiK took too long" hang). Default OFF: serve stream requests from the
-        // RELIABLE whole-answer call below and hand the answer back over the SSE channel the client is
-        // already listening on (streamTextAsSSE). Flip MAIK_LIVE_STREAM=1 to try true streaming again.
-        const liveStream = ["1", "true", "on", "yes"].indexOf(String(env.MAIK_LIVE_STREAM || "1").toLowerCase()) >= 0;
-        if (wantStream && liveStream) {
-          let up = null;
-          try { up = await geminiStreamUpstream(env, [{ text: sysA + "\n\n" + grounded }], MAX_OUT, { temperature: hasDx ? 0.25 : 0.45, maik: true }); } catch (e) { up = null; }
-          if (up) return withCors(request, streamGeminiToSSE(up, function (full) { try { recordUsage(gate, { inTok: estTokens(sys.length + grounded.length), outTok: estTokens((full || "").length), status: "success" }); } catch (e) {} }));
-        }
+        // a late fallback — the "MaiK took too long" hang, first diagnosed and fixed in #554/#559).
+        // Default OFF: serve stream requests from the RELIABLE whole-answer call below and hand the
+        // answer back over the SSE channel the client is already listening on (streamTextAsSSE).
+        // 2026-08-20's "developer API + streaming" perf commit silently flipped this fallback from ""
+        // to "1", re-enabling the exact hang this comment describes (the provider-order half of that
+        // commit - developer-first, vertex fallback - is a real, kept improvement; only the streaming
+        // flip regressed). Restored to OFF. Flip MAIK_LIVE_STREAM=1 to try true streaming again, but
+        // only after confirming the empty-stream failure mode above is actually fixed upstream.
+        // Per-request opt-in (?livestream=1) so the live path can be exercised against REAL provider
+        // credentials without enabling it for anyone else. Preview deployments have no AI secrets
+        // (aiEnabled is false there), so a preview is not a usable staging environment for this.
+        // Default stays OFF: absent the param and the env flag, behaviour is byte-identical, so a
+        // regression here cannot reach a clinician who did not ask for it.
+        const liveStream = ["1", "true", "on", "yes"].indexOf(String(env.MAIK_LIVE_STREAM || "").toLowerCase()) >= 0
+          || new URL(request.url).searchParams.get("livestream") === "1";
         // ── Answer cache (flag MAIK_ANSWER_CACHE, default OFF) ──────────────────────────────────────
-        // Only GENERIC knowledge answers: no computed Dx (case commentary), no lazy tiers, and never
-        // when Connect-MaiK wiring is on (that path can carry PHI). A hit is a zero-token instant reply.
-        const _cacheEligible = _mcfg.answerCache && !hasDx && !(body && body.tier) && !maikWiringOn(env);
+        // This MUST sit above the live-stream early return below. It used to sit under it, so whenever
+        // MAIK_LIVE_STREAM (or ?livestream=1) was on the handler returned the SSE response before ever
+        // reading or writing the cache - the "maik:ans:* stays empty though the KV binding is proven"
+        // bug. The stream path now writes the finished answer back from its completion callback.
+        /* Only GENERIC knowledge answers: no computed Dx (case commentary), and never when
+         * Connect-MaiK wiring is on (that path can carry PHI). A hit is a zero-token instant reply.
+         *
+         * LAZY TIERS USED TO BE EXCLUDED WHOLESALE, and that quietly disabled the cache for EVERYONE.
+         * maikLazyOn() in home.js defaults TRUE (`localStorage.getItem("smd_maik_lazy") !== "0"`), so
+         * the client sends `tier: 1` on essentially every question, `!(body.tier)` was therefore false
+         * on essentially every request, and `maik:ans:*` could never fill no matter what else was
+         * fixed. The exclusion was right in spirit and too blunt in practice.
+         *
+         * What actually must not be cached is a tier whose output depends on state NOT in the key:
+         * the tier-2 "more" call is conditioned on `priorLead` (the lead already shown), so two
+         * requests with the same question can legitimately need different detail. Tier 1 is a pure
+         * function of the question, exactly like an untiered answer.
+         *
+         * So: cache tier 1 and untiered, refuse anything carrying priorLead, and put the tier IN THE
+         * KEY so a short lead can never be served to a request that wanted the full answer. */
+        const _tier = (body && body.tier) || 0;
+        const _tierCacheable = (_tier === 0 || _tier === 1) && !(body && body.priorLead);
+        const _cacheEligible = _mcfg.answerCache && !hasDx && _tierCacheable && !maikWiringOn(env);
         let _ckey = null;
         if (_cacheEligible) {
           try {
-            _ckey = await answerCacheKey(sha256hex, env, { question: pkg.question, depth: body && body.depth, audience: pkg.audience, model: modelId(env), version: _mcfg.cacheVersion });
+            _ckey = await answerCacheKey(sha256hex, env, { question: pkg.question, depth: body && body.depth, audience: pkg.audience, model: modelId(env), version: _mcfg.cacheVersion, tier: _tier });
             if (_ckey) {
               const _hit = await getCachedAnswer(usageKv(env), _ckey);
               if (_hit && _hit.text) {
@@ -1278,6 +1571,17 @@ export async function onRequest(context) {
               }
             }
           } catch (e) { _ckey = null; }
+        }
+        if (wantStream && liveStream) {
+          let up = null;
+          const _tUp = Date.now();   // when we ISSUE the upstream request — the baseline for firstTokMs
+          try { up = await geminiStreamUpstream(env, [{ text: sysA + "\n\n" + grounded }], MAX_OUT, { temperature: hasDx ? 0.25 : 0.45, maik: true, model: isTutor ? (env.CLINIX_TUTOR_MODEL || CHEAP_MODEL) : undefined }); } catch (e) { up = null; _mark.streamErr = String((e && e.message) || e).slice(0, 120); }
+          _at("streamOpen"); _mark.liveStream = !!up;
+          if (up) return withCors(request, streamGeminiToSSE(up, function (full) { try { recordUsage(gate, { inTok: estTokens(sys.length + grounded.length), outTok: estTokens((full || "").length), status: "success" }); } catch (e) {}
+            // Populate the answer cache from the STREAM path too. waitUntil, because the response has
+            // already been handed to the client by the time the last token lands (same pattern as the
+            // router cache write below, which is why that one has always worked and this one did not).
+            if (_ckey && full) { try { context.waitUntil(putCachedAnswer(usageKv(env), _ckey, { text: full }, env)); } catch (e) {} } }, _tUp, { idleMs: streamIdleMs(env), totalMs: streamTotalMs(env), model: isTutor ? (env.CLINIX_TUTOR_MODEL || CHEAP_MODEL) : modelId(env), preMs: _tUp - _mark.t0, headMs: _mark.t0 - _reqT0, hm: _hm, pm: { gate: _mark.gate, rerank: _mark.rerank, connect: _mark.connect, prompt: _mark.prompt, cfg: _mark.cfg, qms: _mark.qms } }));
         }
         let text;
         // Non-stream path (native, or a stream that failed to open): use the SAME full system prompt +
@@ -1291,19 +1595,39 @@ export async function onRequest(context) {
         // "Searching…" wait). "detailed" still gets the full budget on explicit request.
         const nsCap = (body && (body.depth === "detailed" || body.tier === 2)) ? MAX_OUT : NONSTREAM_BASE;
         const nsSys = sysA;
+        _at("preGen");
         const _t0 = Date.now();   // instrumentation: wall-clock of the generation call (?diag=1)
-        try { text = await callGemini(env, [{ text: nsSys + "\n\n" + grounded }], nsCap, { temperature: hasDx ? 0.25 : 0.45, maik: true, complex: looksComplex(pkg && pkg.question) }); }
+        // CliniX tutor: force the same cheap/fast tier viva-judge already uses for a short
+        // classification-shaped call (measured live: the default model, gemini-2.5-flash, took
+        // 3.3s of pure generation for a 68-token, "keep it short" answer with a 901-token prompt -
+        // the model tier, not the output cap, was the real cost; the answer already finished at
+        // STOP well under the 2560-token cap). isTutor takes precedence over complex-based tiering.
+        try { text = await callGemini(env, [{ text: nsSys + "\n\n" + grounded }], nsCap, { temperature: hasDx ? 0.25 : 0.45, maik: true, complex: looksComplex(pkg && pkg.question), model: isTutor ? (env.CLINIX_TUTOR_MODEL || CHEAP_MODEL) : undefined }); }
         catch (e) { await recordUsage(gate, { inTok: estTokens(nsSys.length + grounded.length), outTok: 0, status: "failed" }); throw e; }
         await recordUsage(gate, { inTok: estTokens(nsSys.length + grounded.length), outTok: estTokens((text || "").length), status: "success" });
         if (_ckey && text) { try { await putCachedAnswer(usageKv(env), _ckey, { text: text }, env); } catch (e) {} }   // store for the next identical question
         // Client asked for a stream: hand the reliable whole-answer back over the SSE channel it's
         // already listening on (one delta + done). Renders immediately — no empty stream, no hang.
-        if (wantStream) return withCors(request, streamTextAsSSE(text));
+        if (wantStream) {
+          const _wantDiag = new URL(request.url).searchParams.get("diag") === "1";
+          _at("gen");
+          return withCors(request, streamTextAsSSE(text, _wantDiag ? {
+            ms: Date.now() - _t0, total: Date.now() - _mark.t0, stages: _mark, rerank: _didRerank,
+            model: (_lastGenMeta && _lastGenMeta.model) || modelId(env),
+            finishReason: (_lastGenMeta && _lastGenMeta.finishReason) || "",
+            promptTok: ((_lastGenMeta && _lastGenMeta.usage) || {}).promptTokenCount || 0,
+            thoughtsTok: ((_lastGenMeta && _lastGenMeta.usage) || {}).thoughtsTokenCount || 0,
+            candTok: ((_lastGenMeta && _lastGenMeta.usage) || {}).candidatesTokenCount || 0,
+            chars: (text || "").length
+          } : null));
+        }
         const cites = [];
         (pkg.grounding || []).forEach((g) => (g.provenance || []).forEach((p) => { if (p && cites.indexOf(p) < 0) cites.push(p); }));
         if (new URL(request.url).searchParams.get("diag") === "1") {
           const u = (_lastGenMeta && _lastGenMeta.usage) || {};
-          const _diag = { ms: Date.now() - _t0, cap: nsCap, chars: (text || "").length, model: (_lastGenMeta && _lastGenMeta.model) || modelId(env), finishReason: (_lastGenMeta && _lastGenMeta.finishReason) || "",
+          _at("gen");
+          const _diag = { ms: Date.now() - _t0, total: Date.now() - _mark.t0, stages: _mark, rerank: _didRerank,
+            cap: nsCap, chars: (text || "").length, model: (_lastGenMeta && _lastGenMeta.model) || modelId(env), finishReason: (_lastGenMeta && _lastGenMeta.finishReason) || "",
             promptTok: u.promptTokenCount || 0, thoughtsTok: u.thoughtsTokenCount || 0, candTok: u.candidatesTokenCount || 0, totalTok: u.totalTokenCount || 0 };
           return json({ text: text, mode: "grounded", citations: cites, _diag: _diag });
         }
@@ -1339,6 +1663,26 @@ export async function onRequest(context) {
       const q = String(body.q || body.question || "").slice(0, 400).trim();
       if (!q) return json({ error: "no-query" }, 400);
       if (firewallBlock(q)) return json({ outOfScope: true, primaryConcept: "", intent: "other", confidence: 1, source: "firewall" }); // deterministic: no router LLM
+      /* ROUTER CACHE (2026-08-24). Measured: this endpoint costs ~6.0-7.5s and runs BEFORE the answer
+       * on every new question — 6.0s router + 3.7s answer TTFV is the ~9.7s a clinician actually waits.
+       * The parse is a pure function of the query and is STABLE (a canonical concept does not change),
+       * so it is the single most cacheable thing in the pipeline.
+       *
+       * PHI: the raw query is never stored. The KV key is a SHA-256 of the normalised query, and the
+       * cached VALUE contains only canonical medical concepts the parser emitted — no patient text.
+       * The in-isolate Map is bounded and dies with the isolate. */
+      const _rkey = q.toLowerCase().replace(/\s+/g, " ").trim();
+      const _memHit = _routeMem.get(_rkey);
+      if (_memHit) return json(Object.assign({}, _memHit, { cached: "mem" }));
+      const _rkv = usageKv(env);
+      let _rkvKey = null;
+      if (_rkv) {
+        try {
+          _rkvKey = "maik:route:" + (await sha256hex(_rkey));
+          const _hit = await _rkv.get(_rkvKey, "json");
+          if (_hit && _hit.primaryConcept !== undefined) { routeMemPut(_rkey, _hit); return json(Object.assign({}, _hit, { cached: "kv" })); }
+        } catch (e) { _rkvKey = null; }
+      }
       const gate = await checkQuota(env, request, "router");   // lightweight: no rate-limit slot, no request-count; token cost still metered
       if (!gate.ok) return json({ error: "quota", reason: gate.reason, needsPro: !!gate.needsPro, message: gate.message }, gate.needsPro ? 402 : 429);
       const sys =
@@ -1367,7 +1711,7 @@ export async function onRequest(context) {
       const p = parseJsonLoose(text) || {};
       const concept = String(p.primaryConcept || p.topic || "").slice(0, 140);
       const opts = Array.isArray(p.options) ? p.options.map(function (x) { return String(x).slice(0, 80); }).filter(Boolean).slice(0, 4) : [];
-      return json({
+      const _routeOut = {
         primaryConcept: concept, topic: concept,   // topic = back-compat alias
         type: String(p.type || "").slice(0, 24),
         intent: normIntent(p.intent),
@@ -1379,7 +1723,52 @@ export async function onRequest(context) {
         options: opts,
         outOfScope: !!p.outOfScope,   // non-medical query → client refuses instantly (no KB/answer/research)
         mode: "route"
-      });
+      };
+      // Cache only a parse that actually resolved something — never cache a null/failed parse, or a
+      // transient failure would be pinned for every later clinician asking the same thing.
+      if (_routeOut.primaryConcept || _routeOut.ambiguous || _routeOut.outOfScope) {
+        routeMemPut(_rkey, _routeOut);
+        if (_rkv && _rkvKey) { try { context.waitUntil(_rkv.put(_rkvKey, JSON.stringify(_routeOut), { expirationTtl: 2592000 })); } catch (e) {} }
+      }
+      return json(_routeOut);
+    }
+    if (seg === "viva-judge") {
+      // CliniX viva examiner. The QUESTION is always pre-authored content (clinix/*.json) — this
+      // endpoint NEVER generates a question, only judges an ANSWER the student already gave, which
+      // is the one call the client cannot make for free: markAnswer() in clinix-model.js grades an
+      // accept-list probe deterministically and offline (zero cost, zero latency), and only reaches
+      // here when a probe has no accept list to match against (needsJudge:true — the open-ended,
+      // higher-level probes) or the student explicitly asked for a second opinion on an already-
+      // graded answer. Kept deliberately cheap: no RAG package, no retrieval, no lesson context
+      // beyond the question/key-points/answer, CHEAP_MODEL, ~120 output tokens, temp 0 — the router's
+      // exact cost shape, because this is the same kind of small classification call, not an essay.
+      const q = String(body.question || "").slice(0, 400).trim();
+      const key = String(body.keyPoints || "").slice(0, 600).trim();
+      const given = String(body.answer || "").slice(0, 800).trim();
+      if (!q || !given) return json({ error: "no-input" }, 400);
+      const gate = await checkQuota(env, request, "router");   // same lightweight tier as the semantic router
+      if (!gate.ok) return json({ error: "quota", reason: gate.reason, needsPro: !!gate.needsPro, message: gate.message }, gate.needsPro ? 402 : 429);
+      const sys =
+        "You are a strict but fair clinical viva examiner. You are given the QUESTION, the KEY POINTS a " +
+        "complete answer should cover, and the STUDENT'S ANSWER. Judge the answer ONLY — do not ask a new " +
+        "question, do not have a conversation, do not repeat the question back.\n" +
+        "Output ONLY this JSON, nothing else: " +
+        '{"verdict":"correct|partial|incorrect","feedback":"<one sentence, at most 25 words, examiner tone>"}\n' +
+        "correct = covers the key points accurately, in the student's own words is fine. partial = the right " +
+        "idea but incomplete, imprecise, or missing a key point. incorrect = wrong, or does not answer the " +
+        "question. Be direct in feedback, the way a real examiner would be, but never unkind.\n" +
+        "NEVER state a drug dose, route, or frequency in your feedback, even if the student's answer contains " +
+        "one — that is out of scope for this judgement.\n\n" +
+        "QUESTION: " + q + (key ? ("\nKEY POINTS: " + key) : "") + "\nSTUDENT'S ANSWER: " + given;
+      const judgeModel = env.VIVA_JUDGE_MODEL || CHEAP_MODEL;
+      let text;
+      try { text = await callGemini(env, [{ text: sys }], 120, { temperature: 0, model: judgeModel }); }
+      catch (e) { await recordUsage(gate, { inTok: estTokens(sys.length), outTok: 0, status: "failed" }); return json({ error: "judge-failed" }, 502); }
+      await recordUsage(gate, { inTok: estTokens(sys.length), outTok: estTokens((text || "").length), status: "success" });
+      const p = parseJsonLoose(text) || {};
+      const verdict = ["correct", "partial", "incorrect"].indexOf(p.verdict) >= 0 ? p.verdict : null;
+      if (!verdict) return json({ error: "parse" }, 502);
+      return json({ verdict: verdict, feedback: String(p.feedback || "").slice(0, 300), mode: "viva-judge" });
     }
     if (seg === "imaging") {
       // Clinician-invoked imaging summary. Packet is DE-IDENTIFIED client-side (report text
@@ -1669,6 +2058,23 @@ export async function onRequest(context) {
         await _chargeScribe();
         const sanitized = sanitizeScribeOutput(parseJsonLoose(text));
         return json({ kind: "opd-scribe", ...sanitized, mode: "opd-scribe" });
+      }
+      if (body.kind === "surgx-note") {
+        // SURGX: a surgeon's dictation -> WHICH FIELD each thing they said belongs in. Never what
+        // they said. The allow-list comes from the caller's note schema (aiFillable:true fields
+        // only) and is intersected server-side with a hard DENY list, so counts, specimens,
+        // implants, consent, discharge medications and identifiers are structurally unreachable
+        // however the model responds. A third guard (numericGuard) runs client-side afterwards and
+        // voids any field containing a number that is not in the transcript.
+        const allowed = Array.isArray(body.allowedFields) ? body.allowedFields.slice(0, 40) : [];
+        if (!allowed.length) return json({ error: "no allowedFields" }, 400);
+        const prompt = surgxNotePrompt(transcript, { noteType: body.noteType, allowedFields: allowed });
+        let text;
+        try { text = await callGemini(env, [{ text: prompt }], MAX_OUT, _scribeOpts); }
+        catch (e) { await recordUsage(gate, { inTok: estTokens(prompt.length), outTok: 0, status: "failed" }); throw e; }
+        await recordUsage(gate, { inTok: estTokens(prompt.length), outTok: estTokens((text || "").length), status: "success" });
+        const clean = sanitizeSurgxNote(parseJsonLoose(text), allowed);
+        return json({ kind: "surgx-note", fields: clean.fields, dropped: clean.dropped, mode: "surgx-note" });
       }
       if (body.kind === "maik-ask-next") {
         // MaiK Ask: pathway-chosen target + patient language -> ONE natural history question. The client

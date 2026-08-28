@@ -1693,6 +1693,10 @@
     window.SMD_THOREX_WIPE = wipe;
   }
 
+  /* At LOAD, not on mount: a module the student never opened this session would otherwise
+   * keep the previous account's data through a sign-out. wireSignout() is idempotent. */
+  wireSignout();
+
   if (typeof window !== "undefined") {
     window.SMD_THOREX_ROUTER = { mountLanding: mountLanding, nav: go, runPipeline: runPipeline, wipe: wipe };
   }

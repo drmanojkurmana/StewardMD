@@ -37,8 +37,13 @@ Spec + plan: `docs/superpowers/specs/2026-08-14-maik-ask-design.md`, `docs/super
 - **Red flags** — a positive red flag STOPS routine questioning and alerts the doctor; it never diagnoses.
 - **Privacy** — audio stays on device (existing on-device ASR); only the minimum text/ctx goes to the
   server, never the whole consult.
-- **Nothing auto-saves** — findings land in the EMR *draft* for the doctor to review + save via the
-  existing flow.
+- **Nothing auto-saves without confirmation** — with `smd_maik_ask_fast` (default ON, 2026-08-23) the
+  interview ends on a confirmation gate: the doctor sees the **editable transcript** plus a tick box per
+  extracted field, and NOTHING is applied or written until they tap Save. On save the ticked findings go
+  into the EMR *draft* (as before) and the transcript is also mirrored to the patient's visit timeline.
+  That timeline write is new; it supersedes the previous "nothing auto-saves" behaviour, and it is gated
+  on both the doctor's Save and `smd_opd_emr_write`. With the flag off, the old serial path is restored.
+  See `vault/modules/MaiK Ask.md`.
 
 ## ⚠ Before real patient use (owner action required)
 1. **Clinical review of the pathways** — `clinical-pathways/*.json` are marked `"reviewed": false`. You

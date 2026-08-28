@@ -1712,6 +1712,9 @@
           '<button type="button" class="kx-lib-chip" data-tier="core" aria-pressed="false">Core</button>' +
           '<button type="button" class="kx-lib-chip" data-tier="emergency" aria-pressed="false">Emergency</button>' +
           '<button type="button" class="kx-lib-chip" data-tier="rare" aria-pressed="false">Rare</button>' +
+          // The 1,041-lesson textbook pack is all tier:"atlas"; without this chip it is reachable
+          // only under "All", and every tier filter silently hides it.
+          '<button type="button" class="kx-lib-chip" data-tier="atlas" aria-pressed="false">Atlas</button>' +
         '</div>' +
         '<div id="kxLibSections"></div>' +
       '</div>';
@@ -2845,7 +2848,14 @@
       show("settings");
     } catch (e) {}
   }
-  function toggleBookmark() { var P = providers(); if (P && P.library && state.lessonId) { Promise.resolve(P.library.toggleBookmark(state.lessonId)).then(function () { haptic("light"); }); } }
+  /* NOTE: there is deliberately no router-level bookmark toggle. `data-act="kx-bookmark"` is emitted
+   * in exactly ONE place (the lesson screen, render09) and that screen handles it locally — it owns
+   * the aria-pressed/label update and the toast. A duplicate case here ALSO fired, because the
+   * screen's host.onclick sits on #kxScroll and the click then bubbles to this delegated listener on
+   * #kardioxRoot: one tap toggled the store twice and netted zero, so bookmarks never stuck. That was
+   * invisible while toggleBookmark only mutated the in-memory content record (already lost on reload);
+   * it became THE remaining bug once the 2026-08-26 sweep made the store real. Pinned by
+   * test/run-kardiox-progress-ui.mjs. */
 
   // Capture a real ECG image and return its bytes as a Blob. Native: Capacitor Camera (camera/photo) or
   // FilePicker (files/pdf); Web: a hidden <input type=file>. Rejects with {cancelled:true} on user cancel.
@@ -2960,7 +2970,7 @@
       case "kx-toggle-odimage": haptic("light"); toggleOdImage(); return;
       case "kx-toggle-parity": haptic("light"); toggleParity(); return;
       case "kx-ondevice-ai": haptic("light"); ondeviceAction(); return;
-      case "kx-bookmark": toggleBookmark(); return;
+      /* "kx-bookmark" is intentionally absent — render09 owns it locally (see the note by captureImage). */
     }
     if (act.indexOf("kxnav:") === 0) { deferred(act.slice(6)); return; }
     /* other data-act values are screen-internal (chips, quiz options, flip, tabs) — screens handle them. */
@@ -2973,8 +2983,12 @@
   function wireSignout() {
     if (_signoutWired || typeof window === "undefined") return; _signoutWired = true;
     ["smd:signout", "smd-signout", "signout", "smd:logout"].forEach(function (ev) { try { window.addEventListener(ev, wipe); } catch (e) {} });
-    window.SMD_KARDIOX_WIPE = wipe;   // StewardMD sign-out can call this directly. 🔧 hook the real signout.
+    window.SMD_KARDIOX_WIPE = wipe;   // Also callable directly; signout-fix.js dispatches the event.
   }
+
+  /* At LOAD, not on mount: a module the student never opened this session would otherwise
+   * keep the previous account's data through a sign-out. wireSignout() is idempotent. */
+  wireSignout();
 
   if (typeof window !== "undefined") window.SMD_KARDIOX_ROUTER = { mountLanding: mountLanding, nav: go, runPipeline: runPipeline, wipe: wipe };
 

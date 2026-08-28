@@ -1,0 +1,434 @@
+{
+  "id": "_pgmer-common",
+  "kindOfPack": "regulation",
+  "programmeType": "PG",
+  "label": "PGMER-2023 — requirements that apply to every PG student",
+  "version": "2026-08-27",
+  "appliesTo": "All broad-specialty and super-specialty PG students (MD / MS / DM / M.Ch / PG Diploma), irrespective of specialty.",
+  "source": {
+    "title": "Post-Graduate Medical Education Regulations, 2023 (PGMER-23)",
+    "publisher": "National Medical Commission — Post-Graduate Medical Education Board",
+    "fileNo": "N-P016(11)/2/2023-PGMEB-NMC",
+    "gazette": "THE GAZETTE OF INDIA : EXTRAORDINARY, PART III — SEC. 4 · CG-DL-E-03012024-251108 · New Delhi, the 29th December, 2023",
+    "url": "https://www.nmc.org.in/MCIRest/open/getDocument?path=/Documents/Public/Portal/LatestNews/PGMER%202023.pdf",
+    "retrieved": "2026-08-27",
+    "note": "RE-CITED 2026-08-27 against the PUBLISHED GAZETTE. Every clause number in this file was previously taken from the pre-publication draft (LatestNews/MER.pdf, headed \"[To be published in the Gazette of India...]\"), whose numbering and some of whose wording differ. See NMC_PG_LOGBOOK_REQUIREMENTS.md section 16."
+  },
+  "readMe": "Every requirement here quotes its clause. Nothing in this file is inferred. Where the regulation mandates an activity without giving a number, target is null and the module COUNTS rather than showing a denominator — see NMC_PG_LOGBOOK_REQUIREMENTS.md.",
+  "requirements": [
+    {
+      "id": "pgmer_elogbook_weekly",
+      "kind": "meta",
+      "label": "e-logbook updated weekly",
+      "target": 1,
+      "per": "week",
+      "engine": "weeklyCadence",
+      "source": "nmc_regulation",
+      "clause": "5.2(vi)",
+      "quote": "Post-graduate students of broad and super Speciality degree courses shall maintain a dynamic e-log book which needs to be updated on a weekly basis about the work being carried out by them and the training programme undergone during the period of training. Provided that M.S. /M.Ch students shall mandatorily enter details of surgical procedures assisted or done independently."
+    },
+    {
+      "id": "pgmer_monthly_attestation",
+      "kind": "meta",
+      "label": "Log book checked, assessed and authenticated monthly by the PG guide",
+      "target": 1,
+      "per": "month",
+      "engine": "attestationStatus",
+      "source": "nmc_regulation",
+      "clause": "5.2(vii)",
+      "quote": "It shall be the duty of the Post-graduate guide imparting the training to assess and authenticate monthly the record (e-Log) books."
+    },
+    {
+      "id": "pgmer_surgical_log",
+      "kind": "procedure",
+      "label": "Surgical procedures assisted or done independently",
+      "target": null,
+      "per": "course",
+      "appliesToDegrees": [
+        "MS",
+        "MCh"
+      ],
+      "match": {
+        "roles": [
+          "observed",
+          "assisted",
+          "performed_supervised",
+          "performed_independent"
+        ]
+      },
+      "source": "nmc_regulation",
+      "clause": "5.2(vi)",
+      "quote": "Provided that M.S. /M.Ch students shall mandatorily enter details of surgical procedures assisted or done independently.",
+      "note": "The regulation mandates the ENTRY, not a number. No count is claimed."
+    },
+    {
+      "id": "pgmer_ug_teaching",
+      "kind": "academic",
+      "label": "Teaching and training of undergraduate students and interns",
+      "target": null,
+      "per": "course",
+      "match": {
+        "academicType": "ug_teaching"
+      },
+      "source": "nmc_regulation",
+      "clause": "5.2(viii)",
+      "quote": "The post-graduate students shall essentially be required to participate in the teaching and training programme of undergraduate students and interns."
+    },
+    {
+      "id": "pgmer_seminar",
+      "kind": "academic",
+      "label": "Seminars",
+      "target": null,
+      "per": "course",
+      "match": {
+        "academicType": "seminar"
+      },
+      "source": "nmc_regulation",
+      "clause": "5.2(i)",
+      "quote": "Post-graduate training shall consist of training of the students through lectures, seminars, journal clubs, group discussions, participation in laboratory and experimental work, involvement in research, clinical meetings, grand rounds, clinicopathological conferences, practical training in the diagnosis and medical and surgical treatment, training in the basic medical sciences as well as in allied clinical specialties, etc. as per the requirement of Speciality training."
+    },
+    {
+      "id": "pgmer_journal_club",
+      "kind": "academic",
+      "label": "Journal clubs",
+      "target": null,
+      "per": "course",
+      "match": {
+        "academicType": "journal_club"
+      },
+      "source": "nmc_regulation",
+      "clause": "5.2(i)",
+      "quote": "Post-graduate training shall consist of training of the students through lectures, seminars, journal clubs, group discussions, participation in laboratory and experimental work, involvement in research, clinical meetings, grand rounds, clinicopathological conferences, practical training in the diagnosis and medical and surgical treatment, training in the basic medical sciences as well as in allied clinical specialties, etc. as per the requirement of Speciality training."
+    },
+    {
+      "id": "pgmer_clinical_meeting",
+      "kind": "academic",
+      "label": "Clinical meetings",
+      "target": null,
+      "per": "course",
+      "match": {
+        "academicType": "clinical_meeting"
+      },
+      "source": "nmc_regulation",
+      "clause": "5.2(i)",
+      "quote": "Post-graduate training shall consist of training of the students through lectures, seminars, journal clubs, group discussions, participation in laboratory and experimental work, involvement in research, clinical meetings, grand rounds, clinicopathological conferences, practical training in the diagnosis and medical and surgical treatment, training in the basic medical sciences as well as in allied clinical specialties, etc. as per the requirement of Speciality training."
+    },
+    {
+      "id": "pgmer_grand_round",
+      "kind": "academic",
+      "label": "Grand rounds",
+      "target": null,
+      "per": "course",
+      "match": {
+        "academicType": "grand_round"
+      },
+      "source": "nmc_regulation",
+      "clause": "5.2(i)",
+      "quote": "Post-graduate training shall consist of training of the students through lectures, seminars, journal clubs, group discussions, participation in laboratory and experimental work, involvement in research, clinical meetings, grand rounds, clinicopathological conferences, practical training in the diagnosis and medical and surgical treatment, training in the basic medical sciences as well as in allied clinical specialties, etc. as per the requirement of Speciality training."
+    },
+    {
+      "id": "pgmer_cpc",
+      "kind": "academic",
+      "label": "Clinico-pathological conferences",
+      "target": null,
+      "per": "course",
+      "match": {
+        "academicType": "cpc"
+      },
+      "source": "nmc_regulation",
+      "clause": "5.2(i)",
+      "quote": "Post-graduate training shall consist of training of the students through lectures, seminars, journal clubs, group discussions, participation in laboratory and experimental work, involvement in research, clinical meetings, grand rounds, clinicopathological conferences, practical training in the diagnosis and medical and surgical treatment, training in the basic medical sciences as well as in allied clinical specialties, etc. as per the requirement of Speciality training."
+    },
+    {
+      "id": "pgmer_lecture",
+      "kind": "academic",
+      "label": "Lectures",
+      "target": null,
+      "per": "course",
+      "match": {
+        "academicType": "lecture"
+      },
+      "source": "nmc_regulation",
+      "clause": "5.2(i)",
+      "quote": "Post-graduate training shall consist of training of the students through lectures, seminars, journal clubs, group discussions, participation in laboratory and experimental work, involvement in research, clinical meetings, grand rounds, clinicopathological conferences, practical training in the diagnosis and medical and surgical treatment, training in the basic medical sciences as well as in allied clinical specialties, etc. as per the requirement of Speciality training."
+    },
+    {
+      "id": "pgmer_group_discussion",
+      "kind": "academic",
+      "label": "Group discussions",
+      "target": null,
+      "per": "course",
+      "match": {
+        "academicType": "group_discussion"
+      },
+      "source": "nmc_regulation",
+      "clause": "5.2(i)",
+      "quote": "Post-graduate training shall consist of training of the students through lectures, seminars, journal clubs, group discussions, participation in laboratory and experimental work, involvement in research, clinical meetings, grand rounds, clinicopathological conferences, practical training in the diagnosis and medical and surgical treatment, training in the basic medical sciences as well as in allied clinical specialties, etc. as per the requirement of Speciality training."
+    },
+    {
+      "id": "pgmer_lab_work",
+      "kind": "academic",
+      "label": "Laboratory / experimental work",
+      "target": null,
+      "per": "course",
+      "match": {
+        "academicType": "laboratory_work"
+      },
+      "source": "nmc_regulation",
+      "clause": "5.2(i)",
+      "quote": "Post-graduate training shall consist of training of the students through lectures, seminars, journal clubs, group discussions, participation in laboratory and experimental work, involvement in research, clinical meetings, grand rounds, clinicopathological conferences, practical training in the diagnosis and medical and surgical treatment, training in the basic medical sciences as well as in allied clinical specialties, etc. as per the requirement of Speciality training."
+    },
+    {
+      "id": "pgmer_dissemination",
+      "kind": "research",
+      "label": "One poster presentation, OR one paper read at a national/zonal/state conference, OR one first-author paper published/accepted",
+      "target": 1,
+      "per": "course",
+      "disjunction": true,
+      "engine": "examEligibility",
+      "mandatoryForExam": true,
+      "match": {
+        "subtype": "poster"
+      },
+      "source": "nmc_regulation",
+      "clause": "5.2(x)",
+      "quote": "A post-graduate student of a degree course in broad specialty/super specialty will do at least one of the following to make him/her eligible to appear in his/her final examination: a. Poster presentation at a National/Zonal/State conference of his/her speciality; b. Podium presentation at a National/Zonal/State conference of his/her speciality; c. Have one research paper published/accepted for publication in journal of his/her speciality as first author",
+      "note": "The GAZETTE names the middle option a PODIUM presentation; the pre-publication draft said \"to read one paper\". Evaluated as a real OR by pglog-model.examEligibility(), not as three targets."
+    },
+    {
+      "id": "pgmer_cert_research_methodology",
+      "kind": "certification",
+      "label": "Course in Research Methodology (online) — first year",
+      "target": 1,
+      "per": "course",
+      "dueByMonths": 12,
+      "mandatoryForExam": true,
+      "requiresEvidence": true,
+      "match": {
+        "subtype": "research_methodology"
+      },
+      "source": "nmc_regulation",
+      "clause": "5.2(xi)",
+      "quote": "All post-graduate students shall complete an online course in Research Methodology. The students shall have to register on the portal of the designated training institutions. The students are expected to complete the course in the first year. The online certificate generated on successful completion of the course and examination thereafter, will be acceptable evidence of having completed this course. The above certification shall be a mandatory requirement to be eligible to appear for the final examination of the respective post-graduate course."
+    },
+    {
+      "id": "pgmer_cert_ethics",
+      "kind": "certification",
+      "label": "Course in Ethics incl. Good Clinical Practices / Good Laboratory Practices — first year",
+      "target": 1,
+      "per": "course",
+      "dueByMonths": 12,
+      "mandatoryForExam": true,
+      "requiresEvidence": true,
+      "match": {
+        "subtype": "ethics_gcp_glp"
+      },
+      "source": "nmc_regulation",
+      "clause": "5.2(xii)",
+      "quote": "All post-graduate students shall complete course in ethics including Good Clinical Practices and Good Laboratory Practices, whichever is relevant to them, to be conducted by institutions/Universities. The students are expected to complete the course in the first year. No post-graduate student shall be permitted to appear in the examination without the above certification."
+    },
+    {
+      "id": "pgmer_cert_bcls_acls",
+      "kind": "certification",
+      "label": "Basic + Advanced Cardiac Life Support (BCLS / ACLS) — first year",
+      "target": 1,
+      "per": "course",
+      "dueByMonths": 12,
+      "mandatoryForExam": true,
+      "requiresEvidence": true,
+      "match": {
+        "subtype": "bcls_acls"
+      },
+      "source": "nmc_regulation",
+      "clause": "5.2(xiii)",
+      "quote": "All post-graduate students shall complete a course in Basic Cardiac Life Support (BCLS) and Advanced Cardiac Life Support (ACLS) skills to be conducted by the institution. The students are expected to complete the course in the first year. No post-graduate student shall be permitted to appear in the examination without the above certification."
+    },
+    {
+      "id": "pgmer_drp",
+      "kind": "rotation",
+      "label": "District Residency Programme — 3 months, in the 3rd, 4th or 5th semester",
+      "target": 3,
+      "unit": "months",
+      "per": "course",
+      "rotationKind": "drp",
+      "appliesToDegrees": [
+        "MD",
+        "MS",
+        "Diploma"
+      ],
+      "mandatoryForExam": true,
+      "source": "nmc_regulation",
+      "clause": "5.2(xv)V, VIII(c)",
+      "quote": "All post-graduate students pursuing M.D./M.S. in broad specialties in all medical colleges/institutions under the purview of the National Medical Commission shall undergo a compulsory residential rotation of three months in District Hospitals/ District Health System as a part of the course curriculum. Such rotation shall take place in the 3rd or 4th or 5th semester of the post-graduate programme. In the case of those students who have taken admission after completion of the Diploma in the relevant Speciality, the District Residency Programme shall take place in the third semester only. Similarly, the post-graduate diploma students shall undergo the District Residency Programme in the third semester."
+    },
+    {
+      "id": "pgmer_thesis",
+      "kind": "research",
+      "label": "Thesis — written, submitted and accepted",
+      "target": 1,
+      "per": "course",
+      "mandatoryForExam": true,
+      "match": {
+        "subtype": "thesis_milestone"
+      },
+      "source": "nmc_regulation",
+      "clause": "5.2(iii)",
+      "quote": "All broad-speciality and super-speciality students will do thesis related research and will write thesis.",
+      "note": "The pre-publication draft has NO thesis clause, which is why this module previously stated that PGMER-2023 contained none. The published gazette carries it as 5.2(iii)."
+    },
+    {
+      "id": "pgmer_attendance",
+      "kind": "attendance",
+      "label": "80% attendance",
+      "target": 80,
+      "unit": "percent",
+      "per": "course",
+      "engine": "attendanceSummary",
+      "advisory": true,
+      "source": "nmc_regulation",
+      "clause": "5.5",
+      "quote": "If candidate avails leave in excess of the permitted number of days, his/her term of course shall be extended by the same number of days to complete the training period. However, one shall be able to appear in the examination if one has 80% (eighty per cent) of the attendance.",
+      "secondary": {
+        "days": {
+          "24": 501,
+          "36": 751
+        },
+        "source": "nmc_faq",
+        "clause": "PGMEB FAQ 10.04.2024, Q2 (F.No. N-P016(11)/2/2023-PGMEB-NMC)",
+        "note": "PRIMARY as of 2026-08-27: the PGMEB FAQ PDF was obtained and is checked into pglog-sources/PGMEB-FAQ-2024-04-10.txt. It was carried as nmc_faq_secondary while it was known only from news coverage. It settles the DENOMINATOR: 80% is of WORKING days (calendar days minus 52 weekly offs a year), not of calendar days and not of the days a resident happens to have recorded.",
+        "quote": "For Three-Year Course: Total days in a three-year course will be 1095 days. So the total working days will be 939 days after deducting weekly offs (52 x 3 years = 156 days). A student will require 80 per cent attendance of working days (i.e. 751 days of 939 days) for appearing in the examination. However, period of training will be extended by the same number of days for which maternity/paternity leave and total excess casual leave have been availed in three years.",
+        "workingDays": {
+          "36": 939,
+          "24": 626
+        }
+      }
+    },
+    {
+      "id": "pgmer_leave_paid",
+      "kind": "attendance",
+      "label": "Paid leave entitlement — minimum 20 days per year",
+      "target": 20,
+      "unit": "days",
+      "per": "year",
+      "informational": true,
+      "source": "nmc_regulation",
+      "clause": "5.5(a)",
+      "quote": "Every post-graduate student will be given minimum 20 days of paid leave (casual leave) per year."
+    },
+    {
+      "id": "pgmer_leave_academic",
+      "kind": "attendance",
+      "label": "Academic paid leave entitlement — 5 days per year",
+      "target": 5,
+      "unit": "days",
+      "per": "year",
+      "informational": true,
+      "source": "nmc_regulation",
+      "clause": "5.5(e)",
+      "quote": "In addition to 20 days' paid leave, the candidates will be allowed academic paid leave of 5 days per year.",
+      "note": "PGMEB FAQ 10.04.2024 Q1 settles that this leave is counted as duty — see pgmer_faq_academic_leave_duty."
+    },
+    {
+      "id": "pgmer_faq_digital_logbook",
+      "kind": "meta",
+      "label": "Log book maintained digitally — PG students from the 2023-24 batch",
+      "target": 1,
+      "per": "course",
+      "source": "nmc_faq",
+      "clause": "PGMEB FAQ 10.04.2024, Q7",
+      "quote": "The PG students from 2023-24 batch will maintain log book digitally.",
+      "note": "The applicability date for the DIGITAL mandate. A resident admitted before 2023-24 is not required by this answer to keep a digital logbook, though nothing stops them."
+    },
+    {
+      "id": "pgmer_faq_ethics_cls_applicability",
+      "kind": "certification",
+      "label": "Ethics and Cardiac Life Support courses — students admitted from 2021 onwards",
+      "target": 1,
+      "per": "course",
+      "source": "nmc_faq",
+      "informational": true,
+      "clause": "PGMEB FAQ 10.04.2024, Q8 and Q9",
+      "quote": "All the PG students admitted from 2021 and after will have to complete course before appearing in the examination. | The courses in Ethics and Cardiac Life Support Skills will be designed and conducted by the Academic Cell of the respective medical college/institution till further directions.",
+      "note": "Two things PGMER-2023 5.2(xi) does not say: WHO the requirement applies to (2021 admissions onward) and WHO issues the certificate (the college's own Academic Cell, not an external body)."
+    },
+    {
+      "id": "pgmer_faq_drp_sites",
+      "kind": "rotation",
+      "label": "District Residency — where a resident may and may not be posted",
+      "target": null,
+      "per": "course",
+      "source": "nmc_faq",
+      "informational": true,
+      "clause": "PGMEB FAQ 10.04.2024, Q3, Q4 and Q5",
+      "quote": "However, posting in any post-graduate medical institution or super specialty hospital is not permitted. Yes, PG students can be posted in those ESIC hospitals which are not running any post-graduate medical institutions or Super Speciality hospitals.",
+      "note": "The EXCLUSION is the operative part: a posting to a PG institution or a super-specialty hospital does not count as District Residency, and DRP completion is an examination pre-requisite under 5.2(xii)VIII(c). The permitted-sites list (District Hospital, CHC, PHC, Sub-Health Centre, Urban Health Centre, Community Outreach System) is in FAQ Q3 but is not quoted here because the OCR of that sentence is unreliable."
+    },
+    {
+      "id": "pgmer_faq_academic_leave_duty",
+      "kind": "attendance",
+      "label": "Academic leave is counted as duty",
+      "target": 5,
+      "unit": "days",
+      "per": "year",
+      "informational": true,
+      "source": "nmc_faq",
+      "clause": "PGMEB FAQ 10.04.2024, Q1",
+      "quote": "Five days Academic Leave per year, if availed by a student will be counted as duty.",
+      "note": "This is what PGMER-2023 5.6(e) does not say, and it is why academic leave counts toward attendance in this module."
+    },
+    {
+      "id": "pgmer_academic_cell",
+      "kind": "meta",
+      "label": "Academic Cell in every institution running PG training",
+      "target": 1,
+      "per": "course",
+      "informational": true,
+      "source": "nmc_regulation",
+      "clause": "5.2(iv)",
+      "quote": "Every institution undertaking post-graduate training programme shall set up an Academic Cell, under the Chairmanship of a senior faculty member, who shall monitor the implementation of training programmes in each speciality and ensure its quality as mandated by the PGMEB.",
+      "note": "The clause the academic_cell role exists for. The gazette says \"monitor ... and ensure its quality as mandated by the PGMEB\"; the draft said \"ensure and monitor\"."
+    },
+    {
+      "id": "pgmsr_operative_exposure",
+      "kind": "procedure",
+      "label": "Operation Theatre training — at least two full days a week (surgical departments)",
+      "target": 2,
+      "per": "week",
+      "appliesToDegrees": [
+        "MS",
+        "MCh"
+      ],
+      "match": {
+        "roles": [
+          "observed",
+          "assisted",
+          "performed_supervised",
+          "performed_independent"
+        ]
+      },
+      "source": "nmc_msr",
+      "clause": "PGMSR-2023, Annexure-I, item 3 (Operative Workload)",
+      "quote": "The Surgical post-graduate student should get Operation Theatre Training for at least two full days in a week. Second Year onwards, trainees will get training as First Assistant/Supervised performance two full days in a week.",
+      "note": "The ONLY per-resident figure in PGMSR-2023. Everything else in Annexure-I (OPD attendance 60/day, 75% bed occupancy, 25 deliveries/week, 60 X-rays/day) is an INSTITUTIONAL capacity requirement for running the course and is deliberately not turned into a resident target. QUOTE RECONSTRUCTED from a two-column table cell: the parameter column (\"Operative / Workload / (Guidelines for All / Surgical\") is interleaved between the sentence's lines in the extraction, so the sentence cannot appear contiguously. sourceFragments carries the literal lines, and the provenance test verifies each of them instead of the reconstruction.",
+      "reconstructedFrom": "table",
+      "sourceFragments": [
+        "The Surgical post-graduate student should",
+        "get Operation Theatre Training for at least",
+        "two full days in a week.",
+        "onwards, trainees will get training as First"
+      ]
+    },
+    {
+      "id": "faculty_pg_guide_eligibility",
+      "kind": "meta",
+      "label": "The postgraduate guide who authenticates the logbook must be a designated PG Guide",
+      "target": null,
+      "per": "course",
+      "informational": true,
+      "source": "nmc_regulation",
+      "clause": "Medical Institutions (Qualifications of Faculty) Regulations, 2025, s.16 and s.17",
+      "quote": "Eligibility for designation as Postgraduate Guide in broad specialties. - A faculty member in a medical institution shall be eligible to be designated as a Postgraduate Guide in a broad specialty if such member possesses at least five years of teaching experience in the respective specialty as an Assistant Professor or above. Eligibility for designation as Postgraduate Guide in super specialties. - A faculty member in a medical institution shall be eligible to be designated as a Postgraduate Guide in a super specialty if such member possesses at least three years of teaching experience in the respective super specialty as an Assistant Professor or above.",
+      "note": "PGMER-2023 5.2(vii) requires the monthly authentication to come from 'the Post-graduate guide'. This 2025 gazette (30.06.2025) defines who that is. The module records the designation on the resident's guide; it does not compute years of experience, which is the institution's record, not ours."
+    }
+  ]
+}

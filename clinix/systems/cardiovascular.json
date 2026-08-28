@@ -1,0 +1,136 @@
+{
+  "_comment": "System module: the whole workup for this system, disease-independent, shaped like a disease pathway on purpose.",
+  "id": "cvs-exam",
+  "name": "Examination of the Cardiovascular System",
+  "fullName": "Examination of the Cardiovascular System",
+  "system": "cardiovascular",
+  "kind": "system-module",
+  "oneLine": "The whole system workup, before any particular disease",
+  "estMinutes": 75,
+  "review": {
+    "status": "ai_drafted"
+  },
+  "version": 1,
+  "chapters": [
+    {
+      "id": "approach",
+      "title": "Approaching the patient",
+      "blurb": "Before a single question",
+      "skills": [
+        "skill.approach.history_framework",
+        "skill.approach.hygiene",
+        "skill.approach.introduce",
+        "skill.approach.consent",
+        "skill.approach.position"
+      ]
+    },
+    {
+      "id": "particulars",
+      "title": "Patient particulars",
+      "blurb": "Name, age, and why each one is clinical data",
+      "skills": [
+        "skill.particulars.demographics"
+      ]
+    },
+    {
+      "id": "history",
+      "title": "History",
+      "blurb": "Chest pain, breathlessness, and swelling",
+      "skills": [
+        "skill.hx.chief_complaints",
+        "skill.hx.cvs.chestpain",
+        "skill.hx.cvs.dyspnea_edema",
+        "skill.hx.cvs.palpitations",
+        "skill.hx.cvs.syncope",
+        "skill.hx.ihd.riskfactors",
+        "skill.hx.rhd.rheumatic_fever",
+        "skill.hx.cvs.treatment"
+      ]
+    },
+    {
+      "id": "general_exam",
+      "title": "General examination",
+      "blurb": "From the end of the bed inwards",
+      "skills": [
+        "skill.gen.appearance",
+        "skill.gen.vitals",
+        "skill.gen.cyanosis",
+        "skill.gen.clubbing",
+        "skill.gen.edema"
+      ]
+    },
+    {
+      "id": "systemic_exam",
+      "title": "Cardiovascular examination",
+      "blurb": "Inspection, pulse, BP, JVP, precordium, auscultation, and the signs of failure",
+      "skills": [
+        "skill.exam.cvs.inspection",
+        "skill.exam.cvs.pulse",
+        "skill.exam.cvs.bp",
+        "skill.exam.cvs.jvp",
+        "skill.exam.cvs.precordium_palpation",
+        "skill.exam.cvs.apex",
+        "skill.exam.cvs.heartsounds",
+        "skill.exam.cvs.murmurs",
+        "skill.exam.cvs.heart_failure_signs"
+      ]
+    },
+    {
+      "id": "case",
+      "title": "Presenting the case",
+      "blurb": "Two minutes, in a fixed order",
+      "skills": [
+        "skill.present.case"
+      ]
+    },
+    {
+      "id": "annexures",
+      "title": "Annexures",
+      "oneLine": "Reference material: definitions, units, indices and thresholds",
+      "skills": [
+        "skill.annex.defs.cvs",
+        "skill.annex.inheritance"
+      ]
+    }
+  ],
+  "osce": {
+    "stations": [
+      {
+        "id": "osce.cardiovascular.full",
+        "title": "Examination of the Cardiovascular System",
+        "task": "Examine this patient's cardiovascular system and present your findings.",
+        "seconds": 420,
+        "skills": [
+          "skill.approach.hygiene",
+          "skill.approach.introduce",
+          "skill.approach.consent",
+          "skill.exam.cvs.inspection",
+          "skill.exam.cvs.pulse",
+          "skill.exam.cvs.bp",
+          "skill.exam.cvs.jvp",
+          "skill.exam.cvs.precordium_palpation",
+          "skill.exam.cvs.apex",
+          "skill.exam.cvs.heartsounds",
+          "skill.exam.cvs.murmurs"
+        ],
+        "examinerQuestions": [
+          "Time the murmur you heard against the carotid pulse.",
+          "What does the character of the apex beat tell you?",
+          "Describe the JVP waveform you would expect in tricuspid regurgitation.",
+          "Grade the parasternal heave you felt and explain how you'd distinguish a right ventricular heave from a left atrial one.",
+          "What cuff size would you have chosen for this patient's arm, and why does it matter?"
+        ]
+      }
+    ]
+  },
+  "viva": {
+    "skills": [
+      "skill.exam.cvs.jvp",
+      "skill.exam.cvs.murmurs",
+      "skill.exam.cvs.heartsounds",
+      "skill.exam.cvs.precordium_palpation",
+      "skill.exam.cvs.heart_failure_signs",
+      "skill.hx.cvs.chestpain"
+    ]
+  }
+}

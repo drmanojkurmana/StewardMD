@@ -1198,7 +1198,7 @@
     // --- progressive consultant workflow ---
     var html = "";
     // reversibility toggle: flip the unified "v2" reasoning on/off instantly (no redeploy)
-    html += '<div style="display:flex;justify-content:flex-end;margin-bottom:6px"><button id="dxV2Tog" style="font:700 11px var(--sans,sans-serif);border:1px solid var(--line,#d7dee3);border-radius:999px;padding:4px 11px;cursor:pointer;background:' + (reasonV2() ? "var(--teal-soft,#e3f1ee);color:var(--teal,#0e6e63)" : "var(--panel,#fff);color:var(--slate-soft,#5a7184)") + '" title="Toggle the new unified reasoning experience on/off">⚙ Reasoning v2 · ' + (reasonV2() ? "ON" : "OFF") + '</button></div>';
+    html += '<div style="display:flex;justify-content:flex-end;margin-bottom:6px"><button id="dxV2Tog" style="font:700 11px var(--sans,sans-serif);border:1px solid var(--line,#d7dee3);border-radius:999px;padding:4px 11px;cursor:pointer;background:' + (reasonV2() ? "var(--teal-soft,#e3f1ee);color:var(--teal,#0e6e63)" : "var(--panel,#fff);color:var(--slate-soft,#5a7184)") + '" title="Toggle the new unified reasoning experience on/off">Reasoning v2 · ' + (reasonV2() ? "ON" : "OFF") + '</button></div>';
     // Step 1 · general findings
     var gen = GENERAL.filter(function (k) { return !S.f[k] && LABEL[k]; });
     html += '<div class="dx-step"><div class="dx-step-h"><span class="dx-step-n">1</span> General findings</div><div class="dx-chips">' +
@@ -2345,7 +2345,7 @@
     var comp = {}; list.forEach(function (x) { if (x.type === "region") comp[x.region] = x; });
     var icmr = list.filter(function (x) { return x.id === "ICMR"; })[0];
     var h = '<optgroup label="National">';
-    if (icmr) h += opt("ICMR", icmr.name, " ⭐");
+    if (icmr) h += opt("ICMR", icmr.name);
     studiesOf("national").forEach(function (s) { h += opt(s.id, "↳ " + s.name); });
     h += '</optgroup>';
     [["south", "South India"], ["north", "North India"], ["east", "East & NE India"], ["west", "West & Central India"]].forEach(function (rr) {
@@ -3793,6 +3793,26 @@
         .then(function (r) { return r.json(); }).then(function (j) { return (j && (j.topic || j.primaryConcept || j.ambiguous)) ? j : null; }).catch(function () { return null; });
     },
     route: function (q) { return window.SMD_AI.refine(q); },   // V3 alias — the universal semantic router (same endpoint, richer JSON)
+    // CliniX viva examiner — judges an already-given ANSWER against a pre-authored question and key
+    // points. Same shape as refine(): a tiny, cheap, non-streaming call, never a conversation. Returns
+    // {verdict, feedback} or null on any error/off-state so the caller can fall back cleanly.
+    vivaJudge: function (question, keyPoints, answer) {
+      var b = aiBase(); if (!b || !aiOn() || !question || !answer) return Promise.resolve(null);
+      var call = aiHeaders().then(function (h) {
+        return fetch(b + "/viva-judge", { method: "POST", headers: h, body: JSON.stringify({ question: String(question).slice(0, 400), keyPoints: String(keyPoints || "").slice(0, 600), answer: String(answer).slice(0, 800) }) });
+      }).then(function (r) { return r.json(); })
+        // A quota/rate response carries a real, already-written user-facing message (e.g. "MaiK
+        // usage limit reached for now...") - collapsing every non-verdict response to a bare null
+        // threw that away, so the student only ever saw a generic "could not review" toast with no
+        // way to tell a real cap from a transient network blip. Pass the whole body through when
+        // there's no verdict; judgeVivaAnswer() picks a message off it.
+        .then(function (j) { return (j && j.verdict) ? j : (j || { error: "server" }); })
+        .catch(function () { return { error: "server" }; });
+      // A tiny call should return fast; if the native CapacitorHttp path stalls (does not honour
+      // AbortController - see raceTimeout's own comment above), fall back to null rather than leave
+      // the student staring at "MaiK is examining your answer" forever.
+      return raceTimeout(call, 15000, null);
+    },
     // Grounded RAG explain: send the compact, de-identified, citable package
     // (deterministic reasoning + retrieved StewardMD knowledge + treatment) — the
     // KB is the primary source. Falls back to summary explain if RAG is unavailable.
@@ -3800,7 +3820,7 @@
       var b = aiBase(); if (!b || !aiOn()) return Promise.resolve({ error: "ai-off" });
       if (!pkg) return Promise.resolve({ error: "no-package" });
       try { if (window.SMD_MaiK && SMD_MaiK.sourceList && !pkg.sources) pkg.sources = SMD_MaiK.sourceList(pkg); } catch (e) {}
-      var body = JSON.stringify({ package: pkg, depth: (opts && opts.depth) || "concise", tier: (opts && opts.tier) || undefined, priorLead: (opts && opts.priorLead) || undefined });
+      var body = JSON.stringify({ package: pkg, depth: (opts && opts.depth) || "concise", tier: (opts && opts.tier) || undefined, priorLead: (opts && opts.priorLead) || undefined, mode: (opts && opts.mode) || undefined });
       // A 429 with reason "rate" is a transient 3s throttle, NOT a usage cap — retry ONCE
       // silently after the window so a fast follow-up never surfaces "usage limit reached".
       function attempt(retried) {
@@ -3831,15 +3851,25 @@
       // Reveal a finished answer progressively so it "flows" like a live stream. Native WebViews
       // buffer SSE (CapacitorHttp), so true token streaming isn't possible there — we fetch the whole
       // answer, then type it out via onDelta (reusing the exact streaming render). Web streams for real.
-      function replay(res) {
+      function replay(res, waitedMs) {
         var full = res && res.text;
         if (!full || typeof onDelta !== "function") return res;
+        try { if (res && typeof res === "object") res.replayed = true; } catch (e) {}   // it did NOT stream
         return new Promise(function (resolve) {
           // Word-paced reveal (ChatGPT feel): advance whole words at a steady rate, so a short
           // answer really types word-by-word and a long one reveals a few words per frame instead
-          // of one big burst. Capped at ~MAX_FRAMES so a very long answer still can't drag on.
+          // of one big burst.
+          //
+          // BUDGETED AGAINST THE WAIT (2026-08-24). The ceiling used to be a flat ~260 frames
+          // (~4.3s @60fps) no matter what. On native there is no real streaming - the whole answer is
+          // fetched, THEN typed out - so after a 10.5s round trip the clinician was made to watch
+          // another ~3.4s of animation over text the app already had in hand. That is not "streaming
+          // feel", it is just more waiting. The reveal is cosmetic, so spend the budget only where it
+          // buys something: a fast answer still types out, a slow one appears almost at once.
           var words = full.match(/\S+\s*/g) || [full];   // each token keeps its trailing space → join === full
-          var per = Math.max(1, Math.ceil(words.length / 260));   // words/frame; ~260 frames (~4.3s @60fps) ceiling
+          var w = Number(waitedMs) || 0;
+          var frames = w > 6000 ? 30 : (w > 3000 ? 60 : 150);   // ~0.5s / ~1s / ~2.5s @60fps
+          var per = Math.max(1, Math.ceil(words.length / frames));
           var raf = window.requestAnimationFrame || function (f) { return setTimeout(f, 16); };
           var n = 0, acc = "";
           (function tick() {
@@ -3850,20 +3880,54 @@
           })();
         });
       }
-      function fallback() { return Promise.resolve(self.explainGrounded(pkg, opts)).then(replay); }
+      // Time the round trip so replay() can budget its animation against how long the clinician has
+      // ALREADY waited, rather than adding a fixed few seconds on top of a slow answer.
+      function fallback() {
+        var t0 = Date.now();
+        return Promise.resolve(self.explainGrounded(pkg, opts))
+          .then(function (res) { return replay(res, Date.now() - t0); });
+      }
       // Transport. On NATIVE the app's window.fetch is the CapacitorHttp bridge, which BUFFERS SSE (can't
       // stream) — but window.CapacitorWebFetch is the PRISTINE WebView fetch that CAN stream a cross-origin
       // SSE (the /explain response echoes CORS, so capacitor:// is allowed). Web uses the normal fetch.
       // This lets native stream like the web (first token in seconds) instead of waiting for the whole
       // answer; if the pristine stream misbehaves we fall straight back to the proven whole-fetch path.
       var isNative = !!window.SMD_IS_NATIVE;
-      // NATIVE: WKWebView BUFFERS SSE (no progressive tokens arrive) AND CapacitorWebFetch's promise can
-      // ignore the AbortController, so a stalled live stream never settles → the 90s hang (#562). So we
-      // never open a live SSE on native. Instead take the bounded whole-answer fetch and TYPE IT OUT via
-      // replay() — the answer still reveals word-by-word like ChatGPT (just after the fetch, not during
-      // generation, which the WebView can't do). Web keeps true token streaming below.
-      if (isNative) return fallback();
-      var sfetch = (typeof fetch === "function") ? fetch : null;
+      /* REAL NATIVE STREAMING (2026-08-24).
+       *
+       * This whole path - the watchdog, the native first-token budget, the nsBad cooldown, the
+       * clean-completion requirement - was already written FOR native and then made unreachable by a
+       * blanket `if (isNative) return fallback();`. The result was a black wait: the app fetched the
+       * entire answer and only then typed it out, so nothing appeared on screen until generation had
+       * completely finished. The server has streamed all along (:streamGenerateContent?alt=sse ->
+       * text/event-stream with X-Accel-Buffering: no).
+       *
+       * Two things make opening it for real safe:
+       *
+       *  1. TRANSPORT. window.fetch on native is the CapacitorHttp bridge, which BUFFERS - streaming
+       *     through it delivers nothing, which is what "WKWebView buffers SSE" actually was.
+       *     window.CapacitorWebFetch is the PRISTINE WebView fetch and can stream a cross-origin SSE
+       *     (the /explain response echoes CORS, so capacitor:// is allowed). Use that on native. If it
+       *     is not present, keep the old behaviour rather than streaming through a buffering bridge.
+       *
+       *  2. THE 90s HANG (#562). CapacitorWebFetch's promise can ignore the AbortController, so
+       *     aborting a stalled stream may never settle it. We therefore no longer RELY on abort: a
+       *     hard deadline races the whole attempt and settles with the proven whole-answer fetch,
+       *     ABANDONING the stream instead of waiting for it to die. A leaked request is survivable;
+       *     a clinician staring at a spinner is not.
+       *
+       * Reversible: localStorage smd_maik_native_stream="0" restores the fetch-then-replay behaviour.
+       */
+      var nativeStreamOn = (function () { try { return localStorage.getItem("smd_maik_native_stream") !== "0"; } catch (e) { return true; } })();
+      // .bind(window): an unbound fetch throws "Illegal invocation" - native-bridge.js:631 binds it the same way.
+      var pristine = (typeof window !== "undefined" && typeof window.CapacitorWebFetch === "function") ? window.CapacitorWebFetch.bind(window) : null;
+      // `|| !pristine` restores what the block comment above still promises: with no pristine fetch
+      // on native we keep the old whole-answer behaviour instead of streaming through the buffering
+      // bridge. Behaviour-preserving - a null sfetch already fell back at the !sfetch check ~100
+      // lines below - but it says so HERE, next to the reasoning, and stops us doing a page of
+      // stream setup we are about to throw away. (test/maik-native-stream.test.mjs asserts it.)
+      if (isNative && (!nativeStreamOn || !pristine)) return fallback();
+      var sfetch = isNative ? pristine : ((typeof fetch === "function") ? fetch : null);
       // Remember a native stream failure for the session so we don't keep paying the probe timeout.
       // Time-boxed, NOT a session-long latch: one transient stream failure (a flaky first request,
       // a momentary CORS/WebKit hiccup) must not force EVERY later query onto the slower whole-answer
@@ -3877,6 +3941,93 @@
         } catch (e) {}
         return false;
       }
+      /* NATIVE TRANSPORT — XHR, not fetch (2026-08-24, second attempt).
+       *
+       * The pristine fetch stream does NOT stream in WKWebView: the body arrives buffered, no delta
+       * ever lands, and because CapacitorWebFetch ignores AbortController the first-token watchdog
+       * could not abort it either. So the request sat until the 25s hard deadline and only THEN
+       * refetched the whole answer. Measured on device: 26.6s to an answer that takes ~11s without
+       * streaming at all — enabling streaming made the app STRICTLY WORSE. That is why this is not
+       * a fetch stream any more.
+       *
+       * XHR is the transport that actually streams here: responseText grows progressively across
+       * onprogress events, and xhr.abort() genuinely aborts — so a stream that delivers nothing
+       * costs one short watchdog and nothing more, instead of 25 seconds. Use the PRISTINE XHR:
+       * CapacitorHttp patches the global one to buffer through the native bridge.
+       *
+       * Worst case is now ~4s + the normal whole-answer fetch, and it is remembered for 3 minutes
+       * (nsBad) so a device where this does not stream pays the probe once, not once per question.
+       */
+      if (isNative) {
+        if (nsBad()) return fallback();
+        var XHRc = (window.CapacitorWebXMLHttpRequest && window.CapacitorWebXMLHttpRequest.fullObject) || window.XMLHttpRequest;
+        if (typeof XHRc !== "function") return fallback();
+        /* HEDGE, don't kill (2026-08-24, measured). The first budget was 4000ms while the real first
+         * delta lands at 3.6-5.0s — so the watchdog was aborting streams that were about to work, and
+         * the app fell back every time (observed on device: "answer 9.2s", mode "grounded", never
+         * "grounded-stream"). Killing a slow-but-live stream is the wrong move.
+         *
+         * Instead: if no token has arrived by NX_FIRST, START THE FALLBACK IN PARALLEL and KEEP
+         * LISTENING. A stream that is merely slow still paints the moment its first token lands; a
+         * stream that is genuinely dead is covered by the fetch already in flight, so silence costs
+         * nothing. The duplicate request is only ever issued when the stream has produced nothing at
+         * all, and NX_HARD remains a floor so nothing can hang. */
+        /* SINGLE FLIGHT (2026-08-24). The earlier version HEDGED — on a slow first token it started a
+         * second, competing request. That made the fallback non-deterministic (two answers racing for
+         * the same bubble) and doubled the spend on exactly the slow calls. It existed only because
+         * the SERVER could stall forever; now the server bounds every stream (connect / idle / total)
+         * and always closes with a done event, so the client can be strictly one request at a time.
+         *
+         * Client budgets sit OUTSIDE the server's so the server's clean close always wins the race —
+         * a clean close carries the streamed text, a client abort throws it away. Measured device TTFV
+         * is p50 3.7s / p95 5.2s, so a 9s first-token backstop never fires on a healthy call. */
+        var NX_FIRST = 9000, NX_STALL = 14000, NX_TOTAL = 30000;   // server: connect 10s, idle 12s
+        return aiHeaders().then(function (h) {
+          return new Promise(function (resolve) {
+            var xhr = new XHRc(), idx = 0, acc = "", nbuf = "", sawDone = false, sawStalled = false, fin = false, nt = null;
+            function settle(v) { if (fin) return; fin = true; if (nt) { clearTimeout(nt); nt = null; } resolve(v); }
+            // One deterministic ending: abort this request, then take the proven whole-answer fetch.
+            // No second request is ever in flight at the same time.
+            function giveUp() { try { xhr.abort(); } catch (e) {} nsBad(true); settle(fallback()); }
+            function armx(ms) { if (nt) clearTimeout(nt); nt = setTimeout(giveUp, ms); }
+            function feed(chunk) {
+              nbuf += chunk;
+              var parts = nbuf.split(/\r?\n\r?\n/); nbuf = parts.pop();
+              for (var i = 0; i < parts.length; i++) {
+                var lines = parts[i].split(/\r?\n/), data = "";
+                for (var j = 0; j < lines.length; j++) if (lines[j].indexOf("data:") === 0) data += lines[j].slice(5).trim();
+                if (!data) continue;
+                var ev; try { ev = JSON.parse(data); } catch (e) { continue; }
+                if (ev && ev.delta) { acc += ev.delta; armx(NX_STALL); try { if (onDelta) onDelta(acc); } catch (e) {} }
+                // stalled:true means the SERVER hit its idle/total deadline and closed early, so the
+                // text is INCOMPLETE even though a done event arrived. Never surface it as an answer.
+                if (ev && ev.done) { sawDone = true; if (ev.stalled) sawStalled = true; }
+              }
+            }
+            function drain() { var txt = xhr.responseText || ""; if (txt.length > idx) { feed(txt.slice(idx)); idx = txt.length; } }
+            try { xhr.open("POST", b + "/explain?stream=1", true); } catch (e) { nsBad(true); settle(fallback()); return; }
+            try { xhr.setRequestHeader("Accept", "text/event-stream"); } catch (e) {}
+            for (var k in h) { if (Object.prototype.hasOwnProperty.call(h, k)) { try { xhr.setRequestHeader(k, h[k]); } catch (e) {} } }
+            xhr.onprogress = function () { drain(); };
+            xhr.onload = function () {
+              drain();
+              // Only a CLEANLY completed stream may surface as the answer — a truncated clinical
+              // answer must never look like a whole one. Anything else falls back to the proven fetch.
+              if (acc && sawDone && !sawStalled) { nsBad(false); settle({ text: acc, mode: "grounded-stream", sources: pkg.sources }); return; }
+              nsBad(true); settle(fallback());
+            };
+            xhr.onerror = function () { nsBad(true); settle(fallback()); };
+            xhr.ontimeout = function () { nsBad(true); settle(fallback()); };
+            // A real transport-level total bound. XHR honours this even when a socket goes quiet in a
+            // way no JS timer would catch — this is the backstop that makes a 196s hang impossible.
+            try { xhr.timeout = NX_TOTAL; } catch (e) {}
+            armx(NX_FIRST);
+            try {
+              xhr.send(JSON.stringify({ package: pkg, depth: (opts && opts.depth) || "concise", tier: (opts && opts.tier) || undefined, priorLead: (opts && opts.priorLead) || undefined, mode: (opts && opts.mode) || undefined }));
+            } catch (e) { nsBad(true); settle(fallback()); }
+          });
+        });
+      }
       if (!sfetch || typeof ReadableStream === "undefined" || !window.TextDecoder || typeof AbortController === "undefined") return fallback();
       if (isNative && nsBad()) return fallback();
       // Watchdog: a stream that OPENS but delivers nothing (seen on iOS WebKit / standalone PWAs and
@@ -3889,11 +4040,25 @@
       // (WKWebView quirk / CORS strip), abort fast and fall back rather than stalling the clinician.
       var FIRST_MS = isNative ? 6000 : 12000, STALL_MS = isNative ? 12000 : 15000;
       function arm(ms) { if (wd) clearTimeout(wd); wd = setTimeout(function () { if (!settled) { try { ctrl.abort(); } catch (e) {} } }, ms); }
-      function done() { settled = true; if (wd) { clearTimeout(wd); wd = null; } }
+      var hardTimer = null;
+      function done() { settled = true; if (wd) { clearTimeout(wd); wd = null; } if (hardTimer) { clearTimeout(hardTimer); hardTimer = null; } }
       arm(FIRST_MS);
-      return aiHeaders().then(function (h) {
+      // Settles even if the stream never does (#562: abort can be ignored). Whatever streamed so far
+      // is DISCARDED in favour of the proven fetch - a half-answer must never look like a whole one.
+      var HARD_MS = isNative ? 25000 : 45000;
+      var hardDeadline = new Promise(function (res) {
+        hardTimer = setTimeout(function () {
+          if (settled) return;
+          settled = true;
+          if (wd) { clearTimeout(wd); wd = null; }
+          try { ctrl.abort(); } catch (e) {}
+          if (isNative) nsBad(true);
+          res(fallback());
+        }, HARD_MS);
+      });
+      var attempt = aiHeaders().then(function (h) {
         var hh = Object.assign({}, h, { "Accept": "text/event-stream" });
-        return sfetch(b + "/explain?stream=1", { method: "POST", headers: hh, body: JSON.stringify({ package: pkg, depth: (opts && opts.depth) || "concise", tier: (opts && opts.tier) || undefined, priorLead: (opts && opts.priorLead) || undefined }), signal: ctrl.signal });
+        return sfetch(b + "/explain?stream=1", { method: "POST", headers: hh, body: JSON.stringify({ package: pkg, depth: (opts && opts.depth) || "concise", tier: (opts && opts.tier) || undefined, priorLead: (opts && opts.priorLead) || undefined, mode: (opts && opts.mode) || undefined }), signal: ctrl.signal });
       }).then(function (r) {
         var ct = (r.headers && r.headers.get("Content-Type")) || "";
         if (!r.ok || !r.body || ct.indexOf("text/event-stream") < 0) { done(); if (isNative) nsBad(true); return fallback(); }
@@ -3928,6 +4093,7 @@
           return fallback();
         });
       }).catch(function () { done(); if (isNative) nsBad(true); return fallback(); });
+      return Promise.race([attempt, hardDeadline]);
     },
     // Imaging Assist — clinician-invoked structured summary of ONE radiology report. Sends a
     // DE-IDENTIFIED packet (report text PHI-redacted client-side; NO name/MRN/bed/other-patient

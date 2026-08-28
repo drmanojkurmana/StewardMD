@@ -101,12 +101,14 @@
         <a data-p="verif">🩺 Verifications <span class="b" id="navVerif">0</span></a>
         <a data-p="pro">💳 Payments &amp; Billing</a>
         <div class="grp">System</div>
+        <a data-p="ota">🔄 App updates</a>
         <a data-p="push">📣 Push blast</a>
         <a data-p="watch">🧪 Lab-watch</a>
         <a data-p="ai">💸 AI usage</a>
         <a data-p="kardiox">🫀 KardiQ X</a>
         <div class="grp">Beta</div>
         <a data-p="xa">⚗️ Experimental</a>
+        <a data-p="tenants">🏫 Medical colleges</a>
       </nav>
     </aside>
 
@@ -305,6 +307,36 @@
       </div>
 
       <!-- PUSH -->
+      <!-- OTA APP UPDATES -->
+      <div class="pane" id="pane-ota" data-need-auth>
+        <div class="card" id="otaKillCard" style="border-color:var(--red)">
+          <div style="display:flex;align-items:center;gap:10px">
+            <b style="flex:1;color:var(--red)">⛔ Kill switch</b>
+            <button class="ghost" id="otaKillBtn" style="color:var(--red);border-color:var(--red)">…</button>
+          </div>
+          <div class="hint" style="margin-top:6px">When ON, every device falls back to its last App Store / Play Store build, checked on every launch. No redeploy needed to flip this — that is the whole point.</div>
+        </div>
+
+        <div class="card">
+          <div style="display:flex;align-items:center"><b style="flex:1">Latest build from GitHub</b><button class="ghost" id="otaReload" style="padding:7px 11px">Reload</button></div>
+          <div class="hint" style="margin:6px 0 12px">Every push to <code>main</code> stages a build automatically — it is NOT live until you push it below.</div>
+          <div id="otaCandidate" class="hint">Loading…</div>
+          <div style="margin-top:14px"><button class="primary" id="otaPublish">🚀 Push to devices</button></div>
+          <div class="msg" id="otaMsg"></div>
+        </div>
+
+        <div class="card">
+          <b>Currently live</b>
+          <div id="otaChannel" class="hint" style="margin-top:8px">Loading…</div>
+        </div>
+
+        <div class="card">
+          <b>History</b>
+          <div class="hint" style="margin:6px 0 10px">Every publish, rollback and kill-switch flip — who, when, from which commit.</div>
+          <div id="otaHistory"></div>
+        </div>
+      </div>
+
       <div class="pane" id="pane-push" data-need-auth>
         <div class="card">
           <b>Send a push blast</b>
@@ -336,6 +368,37 @@
         </div>
       </div>
       <!-- EXPERIMENTAL FEATURES -->
+      <div class="pane" id="pane-tenants" data-need-auth>
+        <div class="card">
+          <b>Create a medical college</b>
+          <div class="hint" style="margin:4px 0 8px">
+            The admin becomes the <b>owner</b> of their college and gets full control of it: programmes,
+            faculty, residents, reports. They must have signed in to StewardMD at least once, because
+            ownership is keyed on their account.
+            <br><br>
+            <b>Two logins, different reach.</b> The admin signs in with <b>Google</b> for everything,
+            including the eLOGBook console. The generated password is for the <b>OPD / queue</b> staff
+            surfaces only — the logbook API accepts Firebase sign-in alone.
+          </div>
+          <div class="row">
+            <div><label>College name</label><input id="tnName" placeholder="e.g. Test Medical College"></div>
+            <div><label>Admin email</label><input id="tnEmail" placeholder="admin@college.edu" autocapitalize="none" spellcheck="false"></div>
+          </div>
+          <label style="margin-top:8px"><input type="checkbox" id="tnPwd" checked> Also generate a staff password</label>
+          <div style="margin-top:12px"><button class="primary" id="tnCreateBtn">Create college</button></div>
+          <div class="msg" id="tnMsg"></div>
+          <div id="tnBox" style="display:none;margin-top:12px;border:1.5px dashed var(--tl);border-radius:12px;padding:14px;background:var(--tls)">
+            <div class="hint" style="color:var(--tl);font-weight:700">✅ Copy the password now — it is stored only as a hash and will not be shown again</div>
+            <div id="tnBoxBody" style="margin-top:8px"></div>
+          </div>
+        </div>
+        <div class="card">
+          <b>Institutions</b>
+          <div class="hint" style="margin:4px 0 8px">Every college on StewardMD, with whoever administers it.</div>
+          <div id="tnList" class="hint">Loading…</div>
+        </div>
+      </div>
+
       <div class="pane" id="pane-xa" data-need-auth>
         <div class="stats">
           <div class="sc"><div class="n" id="xaTotal">—</div><div class="l">Codes</div></div>
@@ -514,8 +577,8 @@
   var FB={apiKey:"AIzaSyCaqxRQfMtq95j0J_vLj7EF4sxrN0FhO0I",authDomain:"stewardmd-498ec.firebaseapp.com",projectId:"stewardmd-498ec",storageBucket:"stewardmd-498ec.firebasestorage.app",messagingSenderId:"911280405587",appId:"1:911280405587:web:d09038e15e98d69dc79aa6"};
   var auth=null; try{ firebase.initializeApp(FB); auth=firebase.auth(); }catch(e){}
   var vFilter="pending", activePane="overview", _aiStructured=null;
-  var PANES=["overview","support","userctl","aictl","config","crashes","analytics","notif","sources","logs","verif","pro","push","watch","ai","kardiox","xa"];
-  var TITLES={overview:"Overview",support:"Support tickets",userctl:"User control",aictl:"AI control",config:"Remote config",crashes:"Crashes",analytics:"Usage analytics",notif:"Publish & notify",sources:"Medical sources",logs:"Crawl logs",verif:"Doctor verifications",pro:"Payments & Billing",push:"Push blast",watch:"Lab-watch",ai:"AI usage",kardiox:"KardiQ X training",xa:"Experimental Features"};
+  var PANES=["overview","support","userctl","aictl","config","crashes","analytics","notif","sources","logs","verif","pro","ota","push","watch","ai","kardiox","xa","tenants"];
+  var TITLES={overview:"Overview",support:"Support tickets",userctl:"User control",aictl:"AI control",config:"Remote config",crashes:"Crashes",analytics:"Usage analytics",notif:"Publish & notify",sources:"Medical sources",logs:"Crawl logs",verif:"Doctor verifications",pro:"Payments & Billing",ota:"App updates (OTA)",push:"Push blast",watch:"Lab-watch",ai:"AI usage",kardiox:"KardiQ X training",xa:"Experimental Features",tenants:"Medical colleges"};
   var TYPE2CAT={guideline:"guideline",drug_approval:"approval",safety_alert:"safety",trial:"study",general:"general"};
   function esc(s){return String(s==null?"":s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");}
   function when(ts){ if(!ts)return""; if(typeof ts==="number"){var s=Math.floor((Date.now()-ts)/1000); if(s<3600)return Math.floor(s/60)+"m ago"; if(s<86400)return Math.floor(s/3600)+"h ago"; return new Date(ts).toLocaleDateString();} return String(ts).slice(0,16).replace("T"," "); }
@@ -806,6 +869,77 @@
   };
 
   // ---- Push ----
+  // ---- OTA app updates ----
+  // The kill switch is deliberately loaded FIRST and independently of everything else in this pane
+  // (see functions/_ota.js) — it must render correctly even if candidate/channel/history all 404.
+  var otaGitHub="https://github.com/drmanojkurmana/StewardMD";
+  function otaShort(sha){ return sha?String(sha).slice(0,7):"—"; }
+  function otaMB(n){ return n?((n/1e6).toFixed(1)+" MB"):"0 MB"; }
+  function otaCommitLink(sha,msg){ return sha?('<a href="'+otaGitHub+'/commit/'+esc(sha)+'" target="_blank" rel="noopener"><code>'+esc(otaShort(sha))+'</code></a> '+esc(msg||"")):"—"; }
+  function otaLoad(){
+    api("/api/ota/channel").then(function(r){
+      if(r.s!==200){ $("otaKillCard").style.opacity=".5"; $("otaKillBtn").textContent="Unavailable"; $("otaChannel").textContent="Not signed in as owner, or OTA isn't provisioned yet."; return; }
+      $("otaKillCard").style.opacity="1";
+      var kill=r.d.kill||{on:false};
+      $("otaKillBtn").textContent=kill.on?"Turn OFF (updates are currently BLOCKED)":"Turn ON (block all OTA updates)";
+      $("otaKillBtn").dataset.on=kill.on?"1":"0";
+      var ch=r.d.channel;
+      $("otaChannel").innerHTML=ch?(
+        "Version <b>"+esc(ch.version)+"</b> — "+otaCommitLink(ch.commit,ch.message)+"<br>"+
+        "Published "+esc(when(Date.parse(ch.publishedAt)))+" by "+esc(ch.publishedBy||"—")+
+        (ch.minNativeBuild?("<br>Requires native build ≥ "+esc(ch.minNativeBuild)):"")
+      ) : "Nothing published yet.";
+    }).catch(function(){});
+    api("/api/ota/candidate").then(function(r){
+      if(r.s!==200||!r.d.candidate){ $("otaCandidate").innerHTML="No build staged yet — push a commit to <code>main</code>."; $("otaPublish").disabled=true; return; }
+      var c=r.d.candidate;
+      $("otaCandidate").innerHTML=
+        otaCommitLink(c.commit,c.message)+"<br>Built "+esc(when(Date.parse(c.builtAt)))+
+        (c.totalFiles?(" · "+esc(c.totalFiles)+" files, "+esc(otaMB(c.totalBytes))):"");
+      $("otaPublish").disabled=false; $("otaPublish").dataset.commit=c.commit;
+    }).catch(function(){});
+    api("/api/ota/history").then(function(r){
+      if(r.s!==200){ $("otaHistory").innerHTML='<div class="hint">Not signed in as owner.</div>'; return; }
+      var rows=r.d.history||[];
+      $("otaHistory").innerHTML=rows.length?rows.map(function(h){
+        var tag=h.action==="kill"?'<span class="hi">KILL</span>':h.action==="unkill"?'<span class="cat">UNKILL</span>':h.action==="rollback"?'<span class="cat">ROLLBACK</span>':'<span class="cat">PUBLISH</span>';
+        var canRollback=h.manifestKey&&h.version;
+        return '<div class="list-item"><div class="li-top">'+tag+' <b>v'+esc(h.version||0)+'</b><span class="li-time">'+esc(when(Date.parse(h.at||h.publishedAt)))+'</span></div>'+
+          (h.commit?'<div class="li-body">'+otaCommitLink(h.commit,h.message)+'</div>':'')+
+          '<div class="li-foot"><span class="auto">by '+esc(h.by||h.publishedBy||"—")+'</span>'+
+          (canRollback?'<button class="del" data-ota-rollback="'+esc(h.version)+'" style="margin-left:auto">Roll back to this</button>':'')+
+          '</div></div>';
+      }).join(""):'<div class="hint">No history yet.</div>';
+    }).catch(function(){});
+  }
+  $("otaReload").onclick=otaLoad;
+  $("otaKillBtn").onclick=function(){
+    var turningOn=$("otaKillBtn").dataset.on!=="1";
+    var msg=turningOn?"Block ALL OTA updates immediately? Every device falls back to its last store build.":"Re-enable OTA updates?";
+    if(!confirm(msg))return;
+    api("/api/ota/kill",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({on:turningOn})}).then(function(x){
+      if(x.s===200){ otaLoad(); } else alert("Failed: "+(x.d.error||x.s));
+    }).catch(function(){alert("Sign in first.");});
+  };
+  $("otaPublish").onclick=function(){
+    var commit=$("otaPublish").dataset.commit||"";
+    if(!confirm("Push "+otaShort(commit)+" to every device? Clinicians will see an update banner next time they open the app."))return;
+    say("otaMsg","","Publishing…");
+    api("/api/ota/publish",{method:"POST",headers:{"Content-Type":"application/json"},body:"{}"}).then(function(x){
+      if(x.s===200){ say("otaMsg","ok","✅ Live as v"+x.d.channel.version); otaLoad(); }
+      else say("otaMsg","err",x.s===401||x.s===403?"Not an owner.":("Failed: "+(x.d.error||x.s)));
+    }).catch(function(){say("otaMsg","err","Sign in first.");});
+  };
+  $("otaHistory").addEventListener("click",function(e){
+    var b=e.target.closest&&e.target.closest("[data-ota-rollback]"); if(!b)return;
+    var v=parseInt(b.getAttribute("data-ota-rollback"),10);
+    if(!confirm("Roll back live devices to version "+v+"? This publishes that old build again as a NEW version, so it reaches every device on next check."))return;
+    b.disabled=true; b.textContent="…";
+    api("/api/ota/rollback",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({toVersion:v})}).then(function(x){
+      if(x.s===200){ otaLoad(); } else { alert("Failed: "+(x.d.error||x.s)); b.disabled=false; b.textContent="Roll back to this"; }
+    }).catch(function(){alert("Sign in first."); b.disabled=false; b.textContent="Roll back to this";});
+  });
+
   function pStatus(){ fetch("/api/push/status").then(function(r){return r.json();}).then(function(d){ $("pStatus").textContent="Web push: "+(d.enabled?"on":"off")+" · Native: "+(d.native?"on":"off"); }).catch(function(){}); }
   $("pSend").onclick=function(){ say("pMsg","","Sending…"); api("/api/push/send",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({title:$("pTitle").value||"StewardMD",body:$("pBody").value||""})}).then(function(x){ if(x.s===200){say("pMsg","ok","✅ Sent — web:"+JSON.stringify(x.d.web||{})+" native:"+JSON.stringify(x.d.native||{}));} else say("pMsg","err",x.s===401?"Not an owner.":("Failed: "+(x.d.error||x.s))); }).catch(function(){say("pMsg","err","Sign in first.");}); };
 
@@ -857,6 +991,7 @@
       el.querySelectorAll("[data-xsettier]").forEach(function(b){b.onclick=function(){ var id=b.getAttribute("data-xsettier"); var sel=el.querySelector('[data-xtier="'+id+'"]'); var val=sel?sel.value:"v1"; api(XA_BASE+"/set-tier",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({activationId:id,tier:val})}).then(function(r){ if(r.s===200&&r.d&&r.d.ok){say("xaDevMsg","ok","✅ Tier updated.");xaLoadDevices();} else say("xaDevMsg","err","Failed."); }); };});
     }).catch(function(){el.innerHTML='<div class="hint">Could not load.</div>';}); }
   function xaLoad(){ xaFillFeatures(); xaAnalytics(); xaLoadCodes(); xaLoadDevices(); }
+  try { $("tnCreateBtn").onclick=tnCreate; } catch(e){}
   try {
     $("xaGenBtn").onclick=xaGen;
     $("xaExp").onchange=function(){ $("xaExpDateWrap").style.display=($("xaExp").value==="custom")?"":"none"; };
@@ -1013,7 +1148,63 @@
   }).catch(function(){ say("anMsg","err","Failed."); }); }
   $("anReload").onclick=anLoad;
 
-  function refresh(pane){ if(!(auth&&auth.currentUser))return; if(pane==="overview")ovLoad(); else if(pane==="support")supLoad(); else if(pane==="userctl"){ try{ if(!$("ucEmail").value) $("ucEmail").focus(); }catch(e){} } else if(pane==="aictl")aicLoad(); else if(pane==="config")cfgLoad(); else if(pane==="crashes")crLoad(); else if(pane==="analytics")anLoad(); else if(pane==="notif")nLoad(); else if(pane==="sources")sLoad(); else if(pane==="logs")lLoad(); else if(pane==="verif")vLoad(); else if(pane==="watch"){} else if(pane==="push")pStatus(); else if(pane==="ai")aiLoad(); else if(pane==="kardiox")kxLoad(); else if(pane==="xa")xaLoad(); else if(pane==="pro"){ try{ if(!$("etEmail").value) $("etEmail").value=(auth.currentUser.email||""); }catch(e){} try{ pbLoad(); }catch(e){} try{ bcLoad(); }catch(e){} try{ cpnLoad(); }catch(e){} } }
+  function refresh(pane){ if(!(auth&&auth.currentUser))return; if(pane==="overview")ovLoad(); else if(pane==="support")supLoad(); else if(pane==="userctl"){ try{ if(!$("ucEmail").value) $("ucEmail").focus(); }catch(e){} } else if(pane==="aictl")aicLoad(); else if(pane==="config")cfgLoad(); else if(pane==="crashes")crLoad(); else if(pane==="analytics")anLoad(); else if(pane==="notif")nLoad(); else if(pane==="sources")sLoad(); else if(pane==="logs")lLoad(); else if(pane==="verif")vLoad(); else if(pane==="ota")otaLoad(); else if(pane==="watch"){} else if(pane==="push")pStatus(); else if(pane==="ai")aiLoad(); else if(pane==="kardiox")kxLoad(); else if(pane==="xa")xaLoad(); else if(pane==="tenants")tnLoad(); else if(pane==="pro"){ try{ if(!$("etEmail").value) $("etEmail").value=(auth.currentUser.email||""); }catch(e){} try{ pbLoad(); }catch(e){} try{ bcLoad(); }catch(e){} try{ cpnLoad(); }catch(e){} } }
+
+  // ---- Medical colleges (tenant provisioning; owner-gated /api/tenants) ----
+  function tnRow(t){
+    var admins=(t.admins||[]).map(function(a){
+      return '<div style="font:600 12px var(--f);color:var(--mut)">'+esc(a.email||a.identity)+' · '+esc(a.role)+(a.active===false?' · disabled':'')+
+        ' <button class="tnReset" data-org="'+esc(t.id)+'" data-id="'+esc(a.identity)+'" data-email="'+esc(a.email||"")+'" style="font-size:11px;padding:2px 7px;margin-left:6px">New password</button></div>';
+    }).join("")||'<div class="hint">No admin on record.</div>';
+    return '<div style="padding:10px 0;border-bottom:1px solid var(--line)">'+
+      '<div style="font:700 14px var(--f)">'+esc(t.name||t.id)+'</div>'+
+      '<div style="font:700 13px var(--f);letter-spacing:.05em;color:var(--tl);user-select:all">'+esc(t.code||"")+'</div>'+
+      admins+'</div>';
+  }
+  function tnLoad(){
+    say("tnMsg","","");
+    $("tnList").innerHTML="Loading…";
+    api("/api/tenants").then(function(r){
+      if(r.s!==200||!r.d||!r.d.ok){ $("tnList").innerHTML='<span class="hint">'+esc((r.d&&r.d.error)||"Unavailable (need owner login).")+'</span>'; return; }
+      var list=r.d.tenants||[];
+      $("tnList").innerHTML=list.length?list.map(tnRow).join(""):'<span class="hint">No colleges yet.</span>';
+      Array.prototype.forEach.call(document.querySelectorAll(".tnReset"),function(b){
+        b.onclick=function(){
+          if(!confirm("Issue a NEW password for "+(b.getAttribute("data-email")||b.getAttribute("data-id"))+"? The old one stops working."))return;
+          api("/api/tenants/password",{method:"POST",headers:{"Content-Type":"application/json"},
+            body:JSON.stringify({orgId:b.getAttribute("data-org"),identity:b.getAttribute("data-id"),email:b.getAttribute("data-email")})})
+            .then(function(x){
+              if(x.s!==200||!x.d||!x.d.ok){ say("tnMsg","err",(x.d&&x.d.error)||"Could not reset."); return; }
+              say("tnMsg","ok","New password issued.");
+              $("tnBox").style.display="";
+              $("tnBoxBody").innerHTML='<div class="hint">'+esc(x.d.email||"")+'</div><div style="font:800 22px var(--f);letter-spacing:.06em;user-select:all">'+esc(x.d.password)+'</div>';
+            });
+        };
+      });
+    }).catch(function(){ $("tnList").innerHTML='<span class="hint">Failed to load.</span>'; });
+  }
+  function tnCreate(){
+    var name=($("tnName").value||"").trim(), email=($("tnEmail").value||"").trim();
+    if(!name){ say("tnMsg","err","Enter the college name."); return; }
+    if(!email){ say("tnMsg","err","Enter the admin email."); return; }
+    say("tnMsg","","Creating…"); $("tnBox").style.display="none";
+    api("/api/tenants",{method:"POST",headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({name:name,adminEmail:email,withPassword:!!$("tnPwd").checked})})
+      .then(function(r){
+        if(r.s===404&&r.d&&r.d.error==="no_such_account"){ say("tnMsg","err",esc(r.d.email)+" has not signed in to StewardMD yet, so there is no account to make the owner. Ask them to sign in once, then try again."); return; }
+        if(r.s!==200||!r.d||!r.d.ok){ say("tnMsg","err",(r.d&&r.d.error)||"Could not create the college."); return; }
+        say("tnMsg","ok","Created.");
+        var t=r.d.tenant||{};
+        $("tnBox").style.display="";
+        $("tnBoxBody").innerHTML=
+          '<div class="hint">Institution code — share this with the college</div>'+
+          '<div style="font:800 24px var(--f);letter-spacing:.06em;user-select:all">'+esc(t.code||"")+'</div>'+
+          '<div class="hint" style="margin-top:8px">Admin</div><div style="font:600 14px var(--f)">'+esc((r.d.admin&&r.d.admin.email)||"")+'</div>'+
+          (r.d.password?'<div class="hint" style="margin-top:8px">Staff password (OPD / queue only)</div><div style="font:800 22px var(--f);letter-spacing:.06em;user-select:all">'+esc(r.d.password)+'</div>':"");
+        $("tnName").value=""; $("tnEmail").value="";
+        tnLoad();
+      }).catch(function(){ say("tnMsg","err","Failed."); });
+  }
 
   // ---- AI usage ----
   function aiRow(k,v){ return '<div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--line)"><span style="color:var(--mut)">'+esc(k)+'</span><b>'+esc(String(v))+'</b></div>'; }
