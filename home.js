@@ -3901,15 +3901,17 @@
       } else if (kind === "rx") {       // drug or dose: a hop and a prescription note
         setSt("jump", JUMP_MS);
         maikDocFx(box, '<span class="mkdoc-bub">Rx</span>', D.dir === -1 ? -30 : MAIK_DOC_W + 4, -14, 1300);
-      } else if (kind === "done") {     // the answer landed: wave it in, sometimes with hearts
-        setSt("wave", 1200);
-        if (Math.random() < 0.3) for (var i = 0; i < 3; i++) (function (i) {
-          setTimeout(function () {
-            if (_mkdState !== D) return;
-            maikDocFx(box, '<span class="mkdoc-heart"><svg width="10" height="10" viewBox="0 0 5 5" shape-rendering="crispEdges">' + maikPixG(MAIK_DOC_HEART, "h", MAIK_DOC_PAL) + "</svg></span>",
-              rnd(-4, MAIK_DOC_W - 6), rnd(-12, -2), 1500);
-          }, i * 120);
-        })(i);
+      } else if (kind === "done") {     // the answer landed: confetti and a wave
+        setSt("wave", 1300);
+        var confCols = ["#2DD4BF", "#E05252", "#F5C84C", "#F2F6F7", "#0E6E63"], ch = "", ci;
+        for (ci = 0; ci < 14; ci++) {
+          ch += '<span class="mkdoc-conf" style="left:' + rnd(-4, MAIK_DOC_W + 4).toFixed(0) +
+            'px;background:' + confCols[ci % confCols.length] +
+            ';width:' + (Math.random() < 0.5 ? 4 : 5) + 'px;height:' + (Math.random() < 0.5 ? 4 : 6) +
+            'px;--cx:' + rnd(-30, 30).toFixed(0) + 'px;--cy:' + (-rnd(16, 34)).toFixed(0) +
+            'px;animation-duration:' + rnd(750, 1150).toFixed(0) + 'ms;animation-delay:' + rnd(0, 140).toFixed(0) + 'ms"></span>';
+        }
+        maikDocFx(box, ch, 0, -8, 1500);
       } else {                          // anything else: a beat of thought
         setSt("idle", 1200);
         maikDocFx(box, '<span class="mkdoc-bub">?</span>', MAIK_DOC_W * 0.5 - 6, -20, 1100);
@@ -4387,6 +4389,8 @@ body.v3-dark #maikSheet .maik-cmp-in{background:var(--mk-field);box-shadow:0 6px
 .mkdoc-bub{font:700 9px/1 'Inter';color:var(--mk-teal,#0f766e);background:var(--mk-bg,#fff);border:1px solid var(--mk-bd,#d5dde6);border-radius:6px;padding:4px 6px;white-space:nowrap;animation:mkdocPop .24s ease-out forwards;display:inline-block}
 .mkdoc-heart{display:inline-block;animation:mkdocFloat 1.1s ease-out forwards}
 @keyframes mkdocPop{0%{transform:translateY(5px) scale(.6);opacity:0}60%{transform:translateY(-2px) scale(1.05);opacity:1}100%{transform:translateY(0) scale(1);opacity:1}}
+.mkdoc-conf{position:absolute;top:0;opacity:0;animation:mkdocConf 900ms cubic-bezier(.2,.6,.4,1) forwards}
+@keyframes mkdocConf{0%{transform:translate(0,0) rotate(0deg);opacity:1}35%{transform:translate(calc(var(--cx)*.55),var(--cy)) rotate(140deg);opacity:1}100%{transform:translate(var(--cx),48px) rotate(320deg);opacity:0}}
 @keyframes mkdocFloat{0%{transform:translateY(0) scale(.7);opacity:0}15%{opacity:1}100%{transform:translateY(-42px) scale(1.15);opacity:0}}
 @keyframes mkdocEcg{to{stroke-dashoffset:0}}
 @media (prefers-reduced-motion:reduce){

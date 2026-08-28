@@ -74,6 +74,7 @@ try {
   await sleep(700);
   ok(await ev(`var d=__MAIK_TEST.docState(); return d&&d.state;`) === "run", "then he sprints");
   ok(await ev(`__MAIK_TEST.docCue("done"); var d=__MAIK_TEST.docState(); return d&&d.state;`) === "wave", "the answer landing gets a wave");
+  ok(await ev(`return document.querySelectorAll(".mkdoc-conf").length;`) >= 10, "with a confetti burst");
 
   // ── tap the floor: he sprints there and skids in ──
   const tap = await ev(`
