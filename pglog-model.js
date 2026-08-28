@@ -604,6 +604,13 @@
     } else if (e.kind === "attendance") {
       if (e.endDate && daysBetween(e.occurredAt, e.endDate) < 0) bad("endDate", "End date is before the start date.");
       if (e.endDate && daysBetween(e.occurredAt, e.endDate) > 366) bad("endDate", "Range longer than a year.");
+      /* occurredAt is future-bounded above; endDate was not, and attendance is the one kind that
+       * EXPANDS into per-day rows. A single "present" range ending twelve months out therefore added
+       * up to 366 attended days to the count an examination-eligibility check reads. You cannot
+       * record attendance for days that have not happened yet. */
+      if (e.endDate && ctx.today && daysBetween(e.endDate, ctx.today) < 0) {
+        bad("endDate", "End date cannot be in the future.");
+      }
     } else if (e.kind === "reflection") {
       if (!trim(e.body)) bad("body", "Write the reflection.");
     }
@@ -1320,6 +1327,10 @@
     for (var i = ordered.length - 1; i >= 0; i--) { if (byWeek[ordered[i]]) streak++; else break; }
     return {
       weeks: ordered.length,
+      // The week keys IN ORDER. Without them a caller has only a count and a set of missed keys, so
+      // it cannot say WHICH weeks were missed - the strip in the app was marking the first N cells
+      // regardless, always drawing the gap at the start of training.
+      order: ordered,
       logged: ordered.length - missed.length,
       missed: missed,
       pct: ordered.length ? Math.round(((ordered.length - missed.length) / ordered.length) * 100) : null,
@@ -1377,11 +1388,14 @@
     var w = workingDays(durationMonths);
     return Math.round(w.workingDays * (num(pct, 80) / 100));
   }
-  function expandAttendance(entries) {
+  function expandAttendance(entries, today) {
     var out = [];
     arr(entries).forEach(function (e) {
       if (!e || e.deleted || e.kind !== "attendance") return;
       var from = e.occurredAt, to = e.endDate || e.occurredAt;
+      // Never count past today, even if a range already stored says otherwise. Validation now
+      // refuses a future end date, but records written before that rule existed are still out there.
+      if (today && daysBetween(to, today) < 0) to = today;
       var n = Math.max(0, daysBetween(from, to));
       if (n > 366) n = 366;
       for (var i = 0; i <= n; i++) out.push({ date: addDays(from, i), state: e.state, status: e.status, id: e.id });
@@ -1396,7 +1410,7 @@
   // attendance percentage — it moves the end of training.
   function termExtensionDays(entries, ctx) {
     ctx = ctx || {};
-    var rows = expandAttendance(entries);
+    var rows = expandAttendance(entries, ctx.today);
     var mat = 0, pat = 0, casual = 0;
     rows.forEach(function (r) {
       if (r.state === "leave_maternity") mat++;
@@ -1419,7 +1433,7 @@
 
   function attendanceSummary(entries, ctx) {
     ctx = ctx || {};
-    var rows = expandAttendance(entries);
+    var rows = expandAttendance(entries, ctx.today);
     var cmap = attendanceCounts(ctx.attendanceCounts);
     var counts = {}; ATTENDANCE_STATES.forEach(function (k) { counts[k] = 0; });
     var attended = 0, recorded = 0;

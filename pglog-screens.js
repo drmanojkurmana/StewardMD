@@ -125,7 +125,25 @@
   function ensureContext() {
     var st = ST();
     if (!st) return Promise.reject(new Error("store_missing"));
-    if (state.ctx) return Promise.resolve(state.ctx);
+    /* Cached, but keyed to nothing. If the device is now pointed at a DIFFERENT institution, the
+     * cached answer describes the old one - the console then renders the previous college's name
+     * and code, or falls back to the raw id. Invalidate when the org has moved under us. */
+    if (state.ctx) {
+      var want = ((st.context() || {}).orgId) || "";
+      var have = state.ctx.orgId || "";
+      /* Only a change BETWEEN two real orgs invalidates. Invalidating when the org is merely absent
+       * was tried and is wrong: ensureContext() runs on every screen, and a context legitimately
+       * fetched without an org (a viewer, or a resident not yet linked) would be thrown away and
+       * refetched on each render, turning an ordinary unlinked state into a request loop and an
+       * error screen. The explicit unlink paths (clear-inst, pick-inst) null state.ctx themselves. */
+      if (!want || !have || want === have) return Promise.resolve(state.ctx);
+      /* NARROW on purpose. This runs inside ensureContext, which every screen calls on every render
+       * pass, so the full org reset here wipes state that is mid-load and the module never settles
+       * (15 checks failed when it did). state.inst is included because screenInstitution prefers it
+       * over ctx and would otherwise paint the previous college; the wider reset belongs on the
+       * user-initiated switches, which is where resetOrgScopedState() is called. */
+      state.ctx = null; state.dash = null; state.inst = {};
+    }
     var demo = st.seedDemo(todayISO());
     if (demo) {   // smd_pglog_demo — LOCAL ONLY, never a server call. Every screen labels it.
       state.ctx = { role: "pg_resident", caps: [], resident: demo.resident, programme: demo.programme, rotations: [], demo: true };
@@ -142,12 +160,42 @@
       return loadPack().then(function () { return r; });
     });
   }
+  /* The institution's own targets. state.config was READ here and never written anywhere, and
+   * store.config() had no callers, so every requirement shown was the raw pack default even where
+   * the Academic Cell had configured otherwise - the configuration screen wrote to a server nobody
+   * asked. Failure is not fatal: fall back to pack defaults rather than blocking the logbook. */
+  /* Everything that describes ONE institution. Five call sites nulled ctx and dash and left the rest
+   * behind, so after switching college the faculty queue, the department view, the certificate, the
+   * progress bars and the requirement targets were still the PREVIOUS institution's until something
+   * happened to reload them. One place, so a sixth caller cannot get it half right. */
+  function resetOrgScopedState() {
+    state.ctx = null; state.dash = null; state.inst = {};
+    state.faculty = null; state.dept = null;
+    state.cert = null; state.certErr = null; state.certVerifyUrl = "";
+    state.checked = null; state.inbox = [];
+    state.pack = null; state.config = null; state.requirements = null;
+    state.progress = null; state.gaps = [];
+    state.assessment = null; state.review = null;
+  }
+
+  function loadConfig() {
+    var st = ST();
+    var prog = state.ctx && state.ctx.programme;
+    var pid = prog && prog.id;
+    if (!pid || !st || !st.config) { state.config = null; return Promise.resolve(null); }
+    if (state.config && state.config.programmeId === pid) return Promise.resolve(state.config);
+    return st.config(pid).then(function (c) {
+      state.config = c ? Object.assign({ programmeId: pid }, c) : null;
+      return state.config;
+    }, function () { state.config = null; return null; });
+  }
+
   function loadPack() {
     var c = C(), st = ST();
     if (!c) return Promise.resolve(null);
     var prog = state.ctx && state.ctx.programme;
     var id = (prog && prog.curriculumId) || (st && st.context().curriculumId) || "generic-pg";
-    return c.load(id).then(function (pack) {
+    return loadConfig().then(function () { return c.load(id); }).then(function (pack) {
       state.pack = pack;
       var overrides = (state.config && state.config.overrides) || {};
       state.requirements = c.resolve(pack, {
@@ -183,8 +231,11 @@
     if (state.dash && !force) return Promise.resolve(state.dash);
     return st.dashboard(res.id).then(function (d) { state.dash = d; recompute(); return d; },
       function (e) {
-        // Offline: fall back to the last mirror rather than an empty screen, and SAY it is a mirror.
-        var cached = st.cachedDashboard();
+        /* Offline: fall back to the last mirror rather than an empty screen, and SAY it is a mirror.
+         * Pass the resident, so a mirror belonging to a DIFFERENT resident or institution is refused
+         * rather than shown: this path catches every rejection, not just offline ones, so a 403 on a
+         * newly switched institution used to resurface the previous college's logbook here. */
+        var cached = st.cachedDashboard(res.id);
         if (cached) { state.dash = cached; state.dash.stale = true; recompute(); return cached; }
         throw e;
       });
@@ -199,6 +250,12 @@
   function screenHome() {
     var m = M(), st = ST();
     var res = state.dash && state.dash.resident;
+    /* A guide, HOD or Academic Cell has no resident record, so loadDashboard() returns null and
+     * state.dash stays null forever. The "Faculty review" and "Department oversight" rows are built
+     * BELOW this early return, which made every faculty screen unreachable: a professor holding
+     * pglog.verify opened the module and was shown the trainee setup prompt, with no route to the
+     * pending queue, assessments or certificate signing. Give them their own home instead. */
+    if (!res && (canFaculty() || canDept())) return wrap(facultyHome());
     if (!res) return wrap(setupPrompt());
     var prog = state.dash.programme || {};
     var sum = state.dash.summary || {};
@@ -316,11 +373,20 @@
   function stat(v, label) { return '<div class="pgl-stat"><b>' + esc(String(v)) + "</b><span>" + esc(label) + "</span></div>"; }
   function weekStrip(wk) {
     var missed = {}; arr(wk.missed).forEach(function (w) { missed[w] = 1; });
-    // Rebuild the ordered week list from the counts we have; the model already told us how many.
+    /* Place each gap on ITS OWN week. This used to build the map above and then never read it,
+     * marking the first N cells instead - so a resident who logged steadily for a year and then
+     * stopped saw the gap drawn at the START of their training, and vice versa. */
+    var order = arr(wk.order);
     var cells = [];
-    for (var i = 0; i < Math.min(wk.weeks, 80); i++) cells.push("<i data-l=\"1\"></i>");
-    var missCount = Math.min(arr(wk.missed).length, cells.length);
-    for (var j = 0; j < missCount; j++) cells[j] = '<i data-l="0"></i>';
+    if (order.length) {
+      // Show the most RECENT 80 weeks when there are more; the tail is what a resident acts on.
+      var shown = order.length > 80 ? order.slice(order.length - 80) : order;
+      shown.forEach(function (w) { cells.push(missed[w] ? '<i data-l="0"></i>' : '<i data-l="1"></i>'); });
+    } else {
+      // A payload cached before the model returned `order`: we know how many weeks, not which were
+      // missed. Draw them neutral rather than inventing positions; the label still carries the count.
+      for (var i = 0; i < Math.min(wk.weeks || 0, 80); i++) cells.push('<i data-l="1"></i>');
+    }
     return '<div class="pgl-weeks" aria-label="' + attr(wk.logged + " of " + wk.weeks + " weeks logged") + '">' + cells.join("") + "</div>";
   }
   function navRow(r, icon, title, sub) {
@@ -438,6 +504,28 @@
       '<button class="pgl-chip" data-pgl="go-verify" style="margin-top:8px">Verify my registration</button>');
   }
 
+  /* Home for someone whose role in this institution is to REVIEW rather than to log: a guide, a head
+   * of department, or the Academic Cell. Built from the same caps the nav rows use, so it can never
+   * offer a screen the server would refuse. */
+  function facultyHome() {
+    var cx = state.ctx || {};
+    var h = [];
+    h.push('<div class="pgl-card"><h3>' + esc(cx.orgName || "Your institution") + "</h3>" +
+      '<p style="font-size:13.5px;line-height:1.6;color:var(--pgl-muted)">' +
+      "You are signed in for review duties. Your own trainee logbook is not set up, and it does not " +
+      "need to be." + "</p></div>");
+    if (canFaculty()) h.push(navRow("faculty", "how_to_reg", "Faculty review", "Verify, assess, authenticate"));
+    if (canDept()) h.push(navRow("dept", "corporate_fare", "Department oversight", "Progress across residents"));
+    if (arr(cx.caps).indexOf("pglog.configure") > -1) {
+      h.push(navRow("institution", "apartment", "Institution", "Programmes, faculty and residents"));
+    }
+    h.push(navRow("check", "qr_code_scanner", "Verify a signed record", "Scan or type a verification code"));
+    h.push('<div class="pgl-banner" data-t="ai" style="margin-top:18px">' + ic("policy") +
+      "<div>Signing a trainee's record is a personal act tied to your council registration. " +
+      "PGMER-2023 9.2(c) puts a penalty on certifying work you did not supervise.</div></div>");
+    return h.join("");
+  }
+
   function setupPrompt() {
     var st = ST();
     if (!flag("smd_pglog_server")) {
@@ -524,6 +612,13 @@
     var orgId = c.orgId || "";
     if (!orgId) {
       var mine = I.mine || [];
+      // A failed lookup is not an empty list. Saying "institutions are set up by StewardMD" to an
+      // administrator whose own colleges just failed to load sends them to the wrong place entirely.
+      if (I.mineErr) {
+        return wrap(
+          banner("warn", "error", esc(instErr(I.mineErr, "Could not load your institutions."))) +
+          '<button class="pgl-btn wide" data-pgl="retry" data-r="institution">Try again</button>');
+      }
       var pick = mine.length
         ? '<div class="pgl-card"><h3>Your institutions</h3>' +
           '<p style="font-size:13px;color:var(--pgl-muted)">This device is not pointed at one yet. Pick it rather than creating a second.</p>' +
@@ -616,11 +711,21 @@
       '<div class="pgl-card"><h3>PG programmes</h3>' +
       (progs.length
         ? progs.map(function (pr) {
+            /* Remove is offered for every programme; the SERVER decides whether it is allowed, and
+             * refuses with 409 while anyone is enrolled. Hiding the control from a count this screen
+             * happens to hold would just be a second, staler copy of that rule. */
             return '<div class="pgl-row static"><span class="pgl-row-ic">' + ic("school") + "</span>" +
               '<span class="pgl-row-main"><span class="pgl-row-t">' + esc(pr.name || pr.specialtyId || pr.id) + "</span>" +
-              '<span class="pgl-row-s">' + esc((pr.degree || "") + " · " + (pr.durationMonths || 36) + " months") + "</span></span></div>";
+              '<span class="pgl-row-s">' + esc((pr.degree || "") + " · " + (pr.durationMonths || 36) + " months") + "</span></span>" +
+              '<button class="pgl-chip" data-pgl="del-prog" data-id="' + attr(pr.id) + '" data-n="' +
+              attr(pr.name || pr.specialtyId || pr.id) + '"' + (state.progBusy === pr.id ? " disabled" : "") + ">" +
+              (state.progBusy === pr.id ? "Removing…" : "Remove") + "</button></div>";
           }).join("")
-        : '<p style="font-size:13px;color:var(--pgl-muted)">None yet. A resident cannot be enrolled until one exists.</p>') +
+        : I.progErr
+          // "None yet" and "we could not ask" are different answers, and only one of them means
+          // it is safe to add a programme.
+          ? banner("warn", "error", esc(instErr(I.progErr, "Could not load the programmes for this institution.")))
+          : '<p style="font-size:13px;color:var(--pgl-muted)">None yet. A resident cannot be enrolled until one exists.</p>') +
       '<div class="pgl-field"><label for="pglSpec">Specialty</label>' +
       '<select id="pglSpec"><option value="" selected disabled>Choose a specialty…</option>' +
         (specOpts || '<option value="" disabled>Loading the NMC list…</option>') + "</select>" +
@@ -673,7 +778,8 @@
     var org = (st.context() || {}).orgId;
     if (!org) {
       return (st.myInstitutions ? st.myInstitutions() : Promise.resolve([]))
-        .then(function (list) { state.inst.mine = list || []; }, function () { state.inst.mine = []; });
+        .then(function (list) { state.inst.mine = list || []; state.inst.mineErr = null; },
+              function (e) { state.inst.mine = []; state.inst.mineErr = e || new Error("unknown"); });
     }
     var cur = C();
     /* ROOT CAUSE of the raw 32-char id showing as "Institution code": this screen reads the code from
@@ -690,7 +796,11 @@
         : null;
     }, function (e) { state.inst.ctxErr = e || new Error("unknown"); }).then(function () {
     return Promise.all([
-      st.programmes(org).then(function (r) { return (r && r.programmes) || []; }, function () { return []; }),
+      /* Record WHY this was empty. Swallowing the rejection made a 403 or a 500 render as "None yet.
+       * A resident cannot be enrolled until one exists" - so an Academic Cell whose request had
+       * failed would create a duplicate programme on top of the ones already there. */
+      st.programmes(org).then(function (r) { state.inst.progErr = null; return (r && r.programmes) || []; },
+                              function (e) { state.inst.progErr = e || new Error("unknown"); return []; }),
       (cur && cur.loadSpecialties)
         ? cur.loadSpecialties().then(function (b) { return [].concat((b && b.broad) || [], (b && b.super) || []); },
                                      function () { return []; })
@@ -1352,12 +1462,20 @@
   }
   function buildReport(id) {
     var r = REP(), m = M();
-    if (!r || !state.dash) return null;
+    if (!r) return null;
+    /* BEFORE the state.dash guard. The department summary is a REVIEWER's document, and a guide,
+     * HOD or Academic Cell has no resident record - so state.dash is null for exactly the people
+     * this report is for, and it returned "not available yet" every time. It needs state.dept, which
+     * the navigation path now loads. orgName, not orgId: this prints in the header. */
     if (id === "department_summary") {
       if (!state.dept) return null;
-      return r.departmentSummary({ residents: state.dept.residents, today: todayISO(),
-        departmentName: state.deptFilter.departmentId, orgName: (ST() ? ST().context().orgId : "") });
+      return r.departmentSummary({
+        residents: state.dept.residents, today: todayISO(),
+        departmentName: state.deptFilter.departmentId,
+        orgName: (state.ctx && state.ctx.orgName) || (ST() ? ST().context().orgId : ""),
+      });
     }
+    if (!state.dash) return null;
     var res = state.dash.resident;
     var ctx = {
       resident: res, programme: state.dash.programme, entries: state.dash.entries,
@@ -1366,7 +1484,10 @@
       attendance: state.dash.attendance, weekly: state.dash.weekly,
       requirementProgress: state.progress, gaps: state.gaps, eligibility: state.eligibility,
       procedureCatalog: state.pack ? state.pack.procedureCatalog : [],
-      today: todayISO(), orgName: res && res.orgId, departmentName: res && res.departmentId
+      today: todayISO(), // The NAME, not the database id. This printed "349cdc32210144cca031cccd1e0e20d4" in the header of
+      // a document a resident hands to their university. /me already returns orgName.
+      orgName: (state.ctx && state.ctx.orgName) || (res && res.orgId),
+      departmentName: (res && (res.departmentName || res.departmentId))
     };
     var opts = { includeCaseRef: !!state.includeCaseRef };
     var fn = {
@@ -1427,7 +1548,43 @@
         (arr(x.attestationOverdue).length ? " · " + arr(x.attestationOverdue).length + " month(s) to authenticate" : "") +
         "</span></span>" + ic("chevron_right") + "</button>");
     });
+
+    /* MONTHLY AUTHENTICATION - PGMER-2023 5.2(vii). store.attest() existed with no callers anywhere,
+     * so the app counted these months as overdue on four screens and gave nobody a way to sign one.
+     * The server decides whether this caller may: the guide or a co-guide, or the head of department
+     * when a guide has left, never the resident, and a month can be signed exactly once. */
+    var due = [];
+    arr(f.residents).forEach(function (x) {
+      arr(x.attestationOverdue).forEach(function (p) { due.push({ res: x.resident, period: p }); });
+    });
+    h.push('<div class="pgl-sec-title"><span>Months to authenticate</span><span>' + due.length + "</span></div>");
+    if (!due.length) {
+      h.push(emptyState("verified", "Nothing to authenticate",
+        "Every completed month for your residents carries your authentication."));
+    } else {
+      h.push('<p style="font-size:12.5px;line-height:1.55;color:var(--pgl-muted);margin:0 0 10px">' +
+        "PGMER-2023 5.2(vii): the guide authenticates the logbook every month. Signing records your " +
+        "council registration against that month's entries." + "</p>");
+      due.forEach(function (d) {
+        var busy = state.attesting === d.res.id + d.period;
+        h.push('<div class="pgl-row static"><span class="pgl-row-ic">' + ic("event_available") + "</span>" +
+          '<span class="pgl-row-main"><span class="pgl-row-t">' + esc(d.res.name || d.res.id) + "</span>" +
+          '<span class="pgl-row-s">' + esc(monthLabel(d.period)) + "</span></span>" +
+          '<button class="pgl-chip" data-pgl="attest-month" data-id="' + attr(d.res.id) +
+          '" data-p="' + attr(d.period) + '"' + (busy ? " disabled" : "") + ">" +
+          (busy ? "Signing…" : "Authenticate") + "</button></div>");
+      });
+    }
     return wrap(h.join(""));
+  }
+
+  /** "2026-08" -> "August 2026". The period itself is what the server keys the signature on. */
+  function monthLabel(p) {
+    var mm = /^(\d{4})-(\d{2})$/.exec(String(p || ""));
+    if (!mm) return String(p || "");
+    var names = ["January", "February", "March", "April", "May", "June",
+                 "July", "August", "September", "October", "November", "December"];
+    return (names[parseInt(mm[2], 10) - 1] || mm[2]) + " " + mm[1];
   }
 
   // The review sheet: Open -> Review -> Assess -> Feedback -> Verify / Return.
@@ -1636,6 +1793,25 @@
         (x.attendance.pctOfRecorded == null ? "not recorded" : x.attendance.pctOfRecorded + "% of recorded days") +
         " " + prov("nmc_regulation", "5.5") + "</div></div>");
     }
+    /* POSTINGS. store.createRotation() had no callers, and the resident's own Rotations screen tells
+     * them to ask their department - which had no control either, so a posting could never be
+     * recorded anywhere. The server requires PGLOG_CONFIGURE, so the form appears for the people who
+     * hold it and nobody else. */
+    if (arr(state.ctx && state.ctx.caps).indexOf("pglog.configure") > -1) {
+      h.push('<div class="pgl-card"><h3>Add a posting</h3>' +
+        '<p style="font-size:13px;line-height:1.55;color:var(--pgl-muted)">' +
+        "Rotations decide which department a resident's work counts toward, and the residential " +
+        "posting requirement is measured from them." + "</p></div>");
+      h.push('<div class="pgl-field"><label for="pglRotName">Posting</label>' +
+        '<input type="text" id="pglRotName" placeholder="e.g. Medical ICU"></div>');
+      h.push('<div class="pgl-field"><label for="pglRotFrom">From</label>' +
+        '<input type="date" id="pglRotFrom"></div>');
+      h.push('<div class="pgl-field"><label for="pglRotTo">To</label>' +
+        '<input type="date" id="pglRotTo"></div>');
+      h.push('<button class="pgl-btn wide" data-pgl="add-rotation" data-id="' + attr(res.id) + '"' +
+        (state.rotBusy ? " disabled" : "") + ">" + (state.rotBusy ? "Adding…" : "Add posting") + "</button>");
+    }
+
     h.push(banner("info", "shield_person",
       "This view shows training completeness. Opening an individual entry's clinical detail requires being " +
       "the resident's verifying faculty or the Head of Department."));
@@ -1695,6 +1871,14 @@
     if (state.certLoading) return loading();
     var h = [];
 
+    if (!c && state.certErr) {
+      // "We could not ask" is not "you have none" - and acting on the wrong one means requesting a
+      // second certification over an existing one.
+      h.push(banner("warn", "error",
+        esc(instErr(state.certErr, "Could not check your certification just now."))));
+      h.push('<button class="pgl-btn wide" data-pgl="retry" data-r="certify">Try again</button>');
+      return wrap(h.join(""));
+    }
     if (!c) {
       h.push(emptyState("verified_user", "Not certified yet",
         "A certification freezes your verified entries and collects the signatures your institution " +
@@ -1948,6 +2132,18 @@
           go(dest);
           return loadCert().then(render, render);
         }
+        /* screenFaculty()/screenDept() open on `if (!f) return loading()`, and loadFaculty/loadDept
+         * were called ONLY from enter() when the module was mounted directly on that route. Reaching
+         * them by tapping the nav row therefore issued no request at all and left a skeleton on
+         * screen forever - the state every faculty user would have arrived in. */
+        if (dest === "faculty") { go(dest); return loadFaculty().then(render, render); }
+        if (dest === "dept") { go(dest); return loadDept().then(render, render); }
+        // The department summary is built from state.dept, which only the dept screen used to load -
+        // so reaching this report from anywhere else produced "That report is not available yet".
+        if (dest === "report/department_summary") {
+          go(dest);
+          return (state.dept ? Promise.resolve(state.dept) : loadDept()).then(render, render);
+        }
         return go(dest);
       }
       case "retry": state.error = ""; return enter(t.getAttribute("data-r"));
@@ -1959,12 +2155,12 @@
         return loadDept();
       case "clear-inst": {
         st.setContext({ orgId: "" });
-        state.ctx = null; state.dash = null; state.inst = {};
+        resetOrgScopedState();
         return loadInstitution().then(render, render);
       }
       case "pick-inst": {
         st.setContext({ orgId: t.getAttribute("data-id") });
-        state.ctx = null; state.dash = null; state.inst = {};
+        resetOrgScopedState();
         return loadInstitution().then(render, render);
       }
       case "create-inst": {
@@ -1974,7 +2170,7 @@
         return st.createInstitution(nm).then(function (org) {
           // Point this device at the new org immediately, or the creator has to type their own code.
           st.setContext({ orgId: org.id });
-          state.ctx = null; state.dash = null;
+          resetOrgScopedState();
           // org.id is the internal handle the API keys on; org.code is the SMD-XXXXXX a human shares.
           // Storing the code as the id was the exact confusion that made setup unreachable.
           state.inst = { busy: false, orgName: org.name, orgCode: org.code,
@@ -2032,7 +2228,7 @@
         // setContext normalises: SMD codes upper, a 32-char org id lower. Upper-casing here broke
         // every pasted org id.
         st.setContext({ orgId: v.trim() });
-        state.ctx = null; state.dash = null;
+        resetOrgScopedState();
         toast("Checking…");
         return enter("home");
       }
@@ -2044,7 +2240,23 @@
         if (d) { state.draft = d; go("add/" + d.kind); }
         return;
       }
-      case "edit-server": return toast("Open the entry, correct the fields, then Resubmit.");
+      /* This used to be a toast telling the resident to do the thing they had just tried to do:
+       * screenEntry renders read-only rows, and store.editEntry() had NO callers anywhere. So a
+       * returned entry could never actually be corrected - the only live control was Resubmit,
+       * which sent the identical entry back to the guide who had just returned it. */
+      case "edit-server": {
+        var se = arr(state.dash && state.dash.entries).filter(function (x) { return x.id === id; })[0];
+        if (!se) return toast("That entry is not in this device's copy yet. Refresh and try again.");
+        if (se.status !== "returned" && se.status !== "draft") {
+          return toast("Only a returned or draft entry can be corrected.");
+        }
+        state.draft = Object.assign({}, se, { __serverId: se.id });
+        state.draftErrors = null;
+        return go("add/" + se.kind);
+      }
+      case "attest-month": return doAttestMonth(id, t.getAttribute("data-p"));
+      case "add-rotation": return doAddRotation(id);
+      case "del-prog": return doDeleteProgramme(id, t.getAttribute("data-n"));
       case "resubmit": return doResubmit(id);
       case "withdraw": return doWithdraw(id);
       case "amend": return doAmend(id);
@@ -2111,9 +2323,135 @@
     var prog = (state.dash && state.dash.programme) || (state.ctx && state.ctx.programme) || {};
     return { today: todayISO(), programmeStart: res.startDate, degree: prog.degree };
   }
+  /* Correcting an entry that already exists on the server is a PATCH, not a new draft. Saving it
+   * through the draft path would have created a SECOND entry beside the returned one. */
+  /* Sign one month of a resident's logbook. Deliberately thin: every rule about WHO may sign lives on
+   * the server (guide or co-guide, or the head of department when a guide has left; never the
+   * resident; exactly once per month, enforced by a create precondition on a deterministic id), and
+   * a client-side copy of those rules could only ever disagree with it. So this asks, and reports
+   * back whatever the server says. */
+  function doAttestMonth(residentId, period) {
+    var st = ST();
+    if (!residentId || !period) return;
+    var who = arr(state.faculty && state.faculty.residents)
+      .filter(function (x) { return x.resident && x.resident.id === residentId; })[0];
+    var name = (who && who.resident && who.resident.name) || "this resident";
+    var okToSign = (typeof window !== "undefined" && window.confirm)
+      ? window.confirm("Authenticate " + monthLabel(period) + " for " + name + "?\n\n" +
+          "This records your council registration against that month's entries. It cannot be undone.")
+      : true;
+    if (!okToSign) return;
+
+    state.attesting = residentId + period;
+    render();
+    return st.attest({ residentId: residentId, kind: "monthly", period: period }).then(function () {
+      state.attesting = null;
+      toast(monthLabel(period) + " authenticated.");
+      // Reload rather than patching locally: the server recomputes which months are still outstanding.
+      return loadFaculty().then(render, render);
+    }, function (e) {
+      state.attesting = null;
+      haptic("warning");
+      render();
+      toast((e && e.userMessage) || attestErr(e));
+    });
+  }
+  /* Remove a programme created by mistake. The server refuses with 409 while anyone is still
+   * enrolled - deleting one out from under a resident would leave their entries, rotations,
+   * assessments and attestations pointing at a programme that no longer exists - so this asks and
+   * reports the answer rather than deciding for itself. */
+  function doDeleteProgramme(id, name) {
+    var st = ST();
+    if (!id) return;
+    var ask = (typeof window !== "undefined" && window.confirm) ? window.confirm : null;
+    if (ask && !ask("Remove the programme \"" + (name || id) + "\"?\n\nThis cannot be undone. It is " +
+                    "refused if any resident is still enrolled on it.")) return;
+    state.progBusy = id; render();
+    return st.deleteProgramme(id).then(function () {
+      state.progBusy = null;
+      toast("Programme removed.");
+      return loadInstitution().then(render, render);
+    }, function (e) {
+      state.progBusy = null; haptic("warning"); render();
+      toast((e && e.userMessage) ||
+        (e && e.code === "programme_in_use"
+          ? "Residents are still enrolled on that programme."
+          : "Could not remove that programme."));
+    });
+  }
+
+  /* Record a posting. The dates decide which department the work counts toward and feed the
+   * residential-posting requirement, so both are required rather than defaulted. */
+  function doAddRotation(residentId) {
+    var st = ST(), host = state.host;
+    var val = function (sel) { var el = host && host.querySelector(sel); return el ? String(el.value || "").trim() : ""; };
+    var name = val("#pglRotName"), from = val("#pglRotFrom"), to = val("#pglRotTo");
+    if (!name) return toast("Name the posting.");
+    if (!from || !to) return toast("Enter both dates.");
+    if (to < from) return toast("The end date is before the start date.");
+
+    var d = state.dept || state.faculty;
+    var x = arr(d && d.residents).filter(function (y) { return (y.resident || {}).id === residentId; })[0];
+    var res = x && x.resident;
+    if (!res) return toast("That resident is not in the current list.");
+
+    state.rotBusy = true; render();
+    return st.createRotation({
+      residentId: residentId, programmeId: res.programmeId, name: name,
+      kind: "department", departmentId: res.departmentId, unit: res.unit || "",
+      startDate: from, endDate: to,
+    }).then(function () {
+      state.rotBusy = false;
+      toast("Posting added.");
+      // Reload so the department's own counts reflect it rather than trusting a local patch.
+      return (state.dept ? loadDept() : loadFaculty()).then(render, render);
+    }, function (e) {
+      state.rotBusy = false; haptic("warning"); render();
+      toast((e && e.userMessage) || "Could not add that posting.");
+    });
+  }
+
+  /** Name the reason. These are the server's own refusals, and each one has a different remedy. */
+  function attestErr(e) {
+    var c = e && e.code;
+    if (c === "not_the_guide") return "You are not this resident's guide, so only they or the head of department can authenticate this month.";
+    if (c === "hod_required") return "Only the head of department can sign that.";
+    if (c === "self_attest_forbidden") return "You cannot authenticate your own logbook.";
+    if (c === "conflict" || c === "precondition") return "That month has already been authenticated.";
+    if (c === "signer_unverified") return "Your council registration is not verified yet, so you cannot sign a training record.";
+    return "Could not authenticate that month.";
+  }
+
+  function doSaveServerEdit(thenSubmit) {
+    var st = ST(), m = M();
+    var d = state.draft, sid = d.__serverId;
+    var v = m.validateEntry(m.entry(d), Object.assign(validationContext(), { requireResident: true }));
+    state.draftErrors = v.errors;
+    if (!v.ok) { render(); haptic("warning"); return toast("Fix the highlighted fields."); }
+    var patch = Object.assign({}, d);
+    delete patch.__serverId;
+    state.loading = true; render();
+    return st.editEntry(sid, patch).then(function () {
+      if (!thenSubmit) {
+        state.draft = null; state.loading = false; state.dash = null;
+        toast("Correction saved.");
+        return enter("home");
+      }
+      return st.resubmit(sid).then(function () {
+        state.draft = null; state.loading = false; state.dash = null;
+        toast("Corrected and sent back for verification.");
+        return enter("home");
+      });
+    }, function (e) {
+      state.loading = false; render(); haptic("warning");
+      toast((e && e.userMessage) || "Could not save the correction.");
+    });
+  }
+
   function doSaveDraft(thenSubmit) {
     var st = ST(), m = M();
     if (!state.draft) return;
+    if (state.draft.__serverId) return doSaveServerEdit(thenSubmit);
     var linked = !!(state.dash && state.dash.resident);
     // Saving a draft does not need an enrolled resident; submitting one does. A resident whose
     // Academic Cell has not enrolled them yet can still record today's work, and that draft is what
@@ -2247,14 +2585,16 @@
       // record — it is history, not clutter to hide — but it is not what this screen acts on.
       var c = arr(list)[0] || null;
       state.cert = c;
-      state.certLoading = false;
+      state.certLoading = false; state.certErr = null;
       if (c && c.verifyCode) {
         return st.certificate(c.id).then(function (full) {
           state.cert = full.certificate || c;
           state.certVerifyUrl = full.verifyUrl || "";
         }, function () {});
       }
-    }, function () { state.certLoading = false; state.cert = null; });
+    /* Record the failure. Resolving to "no certificate" on a 403 or a 500 told a resident their
+     * certification did not exist, and the obvious response to that is to request a second one. */
+    }, function (e) { state.certLoading = false; state.cert = null; state.certErr = e || new Error("unknown"); });
   }
   function doCertRequest() {
     var st = ST(), res = state.dash && state.dash.resident;
@@ -2289,7 +2629,11 @@
     });
   }
   function doCertRevoke(id) {
-    var reason = G.prompt ? G.prompt("Why is this certificate being revoked? This is recorded and shown to anyone who checks it.") : "";
+    // `G` was never declared in this IIFE, so this threw ReferenceError on the handler's first line:
+    // an HOD tapping "Revoke this certificate" got no prompt, no error and no toast, and a wrongly
+    // issued certificate stayed live and verifiable by QR.
+    var ask = (typeof window !== "undefined" && window.prompt) ? window.prompt : null;
+    var reason = ask ? ask("Why is this certificate being revoked? This is recorded and shown to anyone who checks it.") : "";
     if (!reason || !String(reason).trim()) return toast("A reason is required.");
     var st = ST();
     state.loading = true; render();
@@ -2327,7 +2671,10 @@
       attendance: state.dash.attendance, weekly: state.dash.weekly,
       requirementProgress: state.progress, gaps: state.gaps, eligibility: state.eligibility,
       procedureCatalog: state.pack ? state.pack.procedureCatalog : [],
-      today: todayISO(), orgName: res && res.orgId, departmentName: res && res.departmentId,
+      today: todayISO(), // The NAME, not the database id. This printed "349cdc32210144cca031cccd1e0e20d4" in the header of
+      // a document a resident hands to their university. /me already returns orgName.
+      orgName: (state.ctx && state.ctx.orgName) || (res && res.orgId),
+      departmentName: (res && (res.departmentName || res.departmentId)),
       certificate: state.cert
     });
   }
@@ -2385,11 +2732,32 @@
         discussedWithTrainee: a.discussed,
         feedback: a.free.facultyOverall || "", strengths: a.free.strengths || "", improvements: a.free.improvements || ""
       });
-    }).then(function () {
+    }).then(function (completed) {
+      /* SIGN IT. store.signAssessment() had no callers anywhere, so every assessment stopped at
+       * "completed" and none ever carried a signature - the state the model, the verify page and the
+       * portfolio all treat as the finished artefact. Filling in the form IS the assessor asserting
+       * it, exactly as on paper, so the signature follows the save rather than needing a second
+       * screen nobody knew to visit. */
+      var id = completed && completed.id;
+      if (!id || !st.signAssessment) return null;
+      return st.signAssessment(id).then(function () { return "signed"; }, function (e) {
+        // Never lose the assessment because the signature was refused - say which happened.
+        return { unsigned: (e && e.userMessage) || signErr(e) };
+      });
+    }).then(function (r) {
       state.loading = false; state.assessment = null;
-      toast("Assessment saved.");
+      if (r && r.unsigned) toast("Assessment saved, but not signed: " + r.unsigned);
+      else toast("Assessment saved and signed.");
       back();
     }, function (e) { state.loading = false; toast(e.userMessage || "Could not save the assessment."); render(); });
+  }
+  /** The server's refusals on signing, each with a different remedy. */
+  function signErr(e) {
+    var c = e && e.code;
+    if (c === "signer_unverified") return "your council registration is not verified yet.";
+    if (c === "not_the_assessor") return "only the faculty member who made it can sign it.";
+    if (c === "assessment_signed") return "it was already signed.";
+    return "the server refused the signature.";
   }
   function doAiSummary() {
     var ai = AI(); if (!ai) return;
@@ -2431,8 +2799,12 @@
   }
   function loadInbox() {
     var st = ST();
-    return st.notifications().then(function (r) { state.inbox = arr(r.notifications).filter(function (n) { return !n.read; }); },
-      function () { state.inbox = []; });
+    return st.notifications().then(
+      function (r) { state.inbox = arr(r.notifications).filter(function (n) { return !n.read; }); },
+      /* KEEP what we already have. Emptying the inbox on any failure hid "your entry was returned"
+       * behind a transient error - the one notification a resident has to act on, silently replaced
+       * by nothing to see. A stale list is strictly better than a wrong empty one. */
+      function () { state.inbox = arr(state.inbox); });
   }
 
   function enter(r) {

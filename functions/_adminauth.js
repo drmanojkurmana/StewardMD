@@ -8,7 +8,12 @@
  */
 import { verifyFirebaseToken } from "./_fbauth.js";
 
-const OWNER_EMAILS_DEFAULT = ["drmanojkurmana@gmail.com", "mkkmanojkumar0@gmail.com", "kdiwakar45@gmail.com", "stewardmd.in@gmail.com"];
+/* stewardmd.in@gmail.com was REMOVED: the owner describes that account as "a medical college who is
+ * buying my product", i.e. a customer. Leaving it here made it a platform owner - able to read every
+ * tenant and mint institutions - and it also meant the tenant-isolation test proved nothing, because
+ * the "customer" it tested with could reach everything by another route. Add it back through the
+ * OWNER_EMAILS env var if that was deliberate; env can add owners, never remove them. */
+const OWNER_EMAILS_DEFAULT = ["drmanojkurmana@gmail.com", "mkkmanojkumar0@gmail.com", "kdiwakar45@gmail.com"];
 
 export function ownerEmails(env) {
   const fromEnv = (env && env.OWNER_EMAILS) ? String(env.OWNER_EMAILS).split(",") : [];

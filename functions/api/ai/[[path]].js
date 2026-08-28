@@ -1204,9 +1204,9 @@ export async function onRequest(context) {
     if (!(await aiAdminAuthed(request, env, url))) return json({ error: "forbidden" }, 403);
     const email = String(url.searchParams.get("email") || "").toLowerCase().trim();
     if (!email) return json({ error: "no-email" }, 400);
-    const uid = await lookupUidByEmail(env, email);
-    if (!uid) return json({ ok: true, found: false, email: email });
-    return json({ ok: true, found: true, user: (await getUserRecord(env, uid)) || { uid, email } });
+    const found = await lookupUidByEmail(env, email);   // { uid, email, name } | null
+    if (!found || !found.uid) return json({ ok: true, found: false, email: email });
+    return json({ ok: true, found: true, user: (await getUserRecord(env, found.uid)) || { uid: found.uid, email } });
   }
   // Per-user actions: grant/revoke Pro, approve/revoke NMC verification, enable/disable sign-in.
   if (seg === "admin/user-action" && request.method === "POST") {
@@ -1216,7 +1216,8 @@ export async function onRequest(context) {
     const email = String(b.email || "").toLowerCase().trim();
     const action = String(b.action || "");
     if (!email || !action) return json({ error: "bad-request" }, 400);
-    const uid = await lookupUidByEmail(env, email);
+    const foundUser = await lookupUidByEmail(env, email);   // { uid, email, name } | null
+    const uid = foundUser && foundUser.uid;
     if (!uid) return json({ ok: false, error: "not-found" }, 404);
     let ok = false;
     try {

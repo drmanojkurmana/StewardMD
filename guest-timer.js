@@ -99,6 +99,14 @@
   // Push the app down by exactly the bar's height so the bar never covers the header. Measured
   // rather than hard-coded: the safe-area inset differs per device and notch state.
   function setBodyPad(px) {
+    /* Padding the BODY does not move a position:fixed overlay, and the app's full-screen surfaces
+     * (the eLOGBook module, the FollowCare sheet) are exactly that - so the bar sat on top of their
+     * headers and covered the close button. Publish the measured height as a custom property too, so
+     * a fixed overlay can offset itself by the same value. */
+    try {
+      var root = document.documentElement;
+      if (root) root.style.setProperty("--smd-guestbar-h", (px ? px : 0) + "px");
+    } catch (e) {}
     try {
       var b = document.body; if (!b) return;
       if (!px) { if (b.hasAttribute("data-gb-pad")) { b.style.paddingTop = b.getAttribute("data-gb-pad") || ""; b.removeAttribute("data-gb-pad"); } return; }

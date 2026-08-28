@@ -46,6 +46,7 @@
     drafts: {},          // localId -> entry (kind draft/returned; the ONLY locally-writable records)
     queue: [],           // localIds waiting to reach the server
     cache: null,         // last server dashboard payload (read-only mirror)
+    cacheKey: "",        // residentId@orgId the mirror belongs to — load() drops keys absent here
     cacheAt: 0,
     prefs: { lastKind: "procedure", lastSetting: "opd", lastSupervisor: "", lastDepartmentId: "", lastRotationId: "" }
   };
@@ -77,11 +78,30 @@
   function online() { try { return G.navigator ? G.navigator.onLine !== false : true; } catch (e) { return true; } }
   function serverOn() { return flag("smd_pglog_server"); }
 
+  /* SMD_IDTOKEN() is a CACHE that id-token.js primes on idle, so for the first seconds after launch
+   * it is empty even though the user is signed in. Treating that as "signed out" is what made the
+   * module open on a stub context with no orgCode - and the institution screen then printed the raw
+   * 32-char org id instead of the SMD code, on every cold start. Ask Firebase directly when the
+   * cache is cold; a genuinely signed-out user still resolves to "" and is still refused. */
+  function tokenAsync() {
+    var t = token();
+    if (t) return Promise.resolve(t);
+    try {
+      var u = G && G.SMD_AUTH && G.SMD_AUTH.currentUser;
+      if (u && u.getIdToken) {
+        return u.getIdToken().then(function (x) { return String(x || ""); }, function () { return ""; });
+      }
+    } catch (e) {}
+    return Promise.resolve("");
+  }
+
   function req(path, opts) {
     opts = opts || {};
     if (!serverOn()) return Promise.reject(mkErr("server_disabled", "Server sync is turned off for this device."));
     if (!online()) return Promise.reject(mkErr("offline", "You are offline."));
-    var t = token();
+    return tokenAsync().then(function (t) { return reqWith(t, path, opts); });
+  }
+  function reqWith(t, path, opts) {
     if (!t) return Promise.reject(mkErr("signin_required", "Sign in to sync your logbook."));
     var h = { "Authorization": "Bearer " + t };
     if (opts.body) h["Content-Type"] = "application/json";
@@ -109,11 +129,26 @@
   }
   function dashboard(residentId) {
     return req("/dashboard/resident?residentId=" + encodeURIComponent(residentId)).then(function (d) {
-      patch(function (p) { p.cache = d; p.cacheAt = Date.now(); });
+      // Stamp WHOSE logbook this is. The mirror was stored unkeyed, and the screen falls back to it
+      // on ANY rejection - so after switching institution, a 403 on the new one resurfaced the
+      // previous college's logbook and labelled it merely "your last synced copy".
+      patch(function (p) { p.cache = d; p.cacheAt = Date.now(); p.cacheKey = cacheKeyFor(residentId); });
       return d;
     });
   }
-  function cachedDashboard() { var p = load(); return p.cache; }
+  function cacheKeyFor(residentId) {
+    var c = context();
+    return String(residentId || "") + "@" + String((c && c.orgId) || "");
+  }
+  /* Returns the mirror ONLY when it belongs to the resident and institution being asked about.
+   * `residentId` is optional so older callers still work, but they get nothing back unless the
+   * stored key matches - refusing to show a logbook is always safer than showing the wrong one. */
+  function cachedDashboard(residentId) {
+    var p = load();
+    if (!p.cache) return null;
+    if (residentId === undefined) return p.cacheKey ? null : p.cache;
+    return p.cacheKey === cacheKeyFor(residentId) ? p.cache : null;
+  }
   function facultyDashboard(orgId) { return req("/dashboard/faculty?orgId=" + encodeURIComponent(orgId)); }
   function deptDashboard(orgId, opts) {
     opts = opts || {};
@@ -136,7 +171,16 @@
   function verifyCode(code) {
     if (!G || !G.fetch) return Promise.reject(mkErr("no_fetch", ""));
     return G.fetch(API + "/v/" + encodeURIComponent(String(code || "").trim()), { cache: "no-store" })
-      .then(function (r) { return r.json().catch(function () { return { ok: false, status: "unavailable" }; }); });
+      .then(function (r) {
+        return r.json().catch(function () { return null; }).then(function (j) {
+          /* Check the STATUS. A 429 or a 500 returns a body with no `status` field, which the check
+           * screen rendered as "Unknown result" - to an examiner asking whether a signature on a
+           * training record is genuine. "We could not check right now" is a different answer from
+           * "we do not recognise this", and only one of them means try again. */
+          if (!r.ok) return { ok: false, status: "unavailable", message: (j && j.message) || "" };
+          return j || { ok: false, status: "unavailable" };
+        });
+      });
   }
   /* ── certification ─────────────────────────────────────────────────────────
    * The signed, frozen document. Never cached and never queued offline: a certificate is minted by
@@ -191,10 +235,24 @@
   // Institutions this account OWNS. A provisioned college admin owns theirs, so this is what stops
   // the console offering "create" to someone whose college already exists — which would quietly
   // produce a second, empty college and a second code.
+  /* Rejects rather than resolving to []. It used to swallow everything, including the response
+   * STATUS, so a 401 or a 500 was indistinguishable from "you belong to no institutions" - and the
+   * screen then told an administrator that their own colleges did not exist. */
   function myInstitutions() {
     return G.fetch("/api/queue/orgs", { headers: { "Authorization": "Bearer " + token() } })
-      .then(function (r) { return r.json().catch(function () { return {}; }); })
-      .then(function (j) { return (j && j.orgs) || []; }, function () { return []; });
+      .then(function (r) {
+        return r.json().catch(function () { return {}; }).then(function (j) {
+          if (!r.ok || (j && j.ok === false)) {
+            throw mkErr((j && j.error) || ("http_" + r.status), (j && j.message) || "");
+          }
+          return (j && j.orgs) || [];
+        });
+      });
+  }
+  /* Remove a programme created by mistake. The server refuses with 409 while anyone is enrolled, so
+   * this never has to decide that for itself - it reports what came back. */
+  function deleteProgramme(id) {
+    return req("/programmes/" + encodeURIComponent(id), { method: "DELETE" });
   }
   function createProgramme(orgId, body) {
     return req("/programmes", { method: "POST", body: Object.assign({ orgId: orgId }, body || {}) })
@@ -264,18 +322,37 @@
   function queued() { var p = load(); return (p.queue || []).map(function (id) { return p.drafts[id]; }).filter(Boolean); }
   // Drain the queue. Resolves with a per-item result rather than rejecting, so one bad entry does
   // not strand the rest.
+  /* Two callers can start a flush: the boot timer and the `online` listener, and a reconnect fires
+   * both. Without a guard they each snapshot the same queue and each POST every draft in it, so the
+   * guide receives two identical entries - and the server has no idempotency key to collapse them.
+   * A second caller now joins the pass already running instead of starting another. */
+  var _flushing = null;
   function flush() {
+    if (_flushing) return _flushing;
     var q = (load().queue || []).slice();
     if (!q.length) return Promise.resolve({ sent: 0, failed: [] });
     var sent = 0, failed = [];
-    return q.reduce(function (chain, id) {
+    var done = function () {
+      patch(function (p) {
+        var attempted = {};
+        q.forEach(function (id) { attempted[id] = 1; });
+        /* Keep anything that FAILED, and anything queued DURING this pass. The old filter kept only
+         * the failures, so a draft saved while the flush was in flight was dropped from the queue
+         * without ever being sent - after the app had told the resident "it will be submitted when
+         * you are back online". */
+        p.queue = (p.queue || []).filter(function (id) {
+          return !attempted[id] || failed.some(function (f) { return f.id === id; });
+        });
+      });
+      _flushing = null;
+      return { sent: sent, failed: failed };
+    };
+    _flushing = q.reduce(function (chain, id) {
       return chain.then(function () {
         return submitDraft(id).then(function () { sent++; }, function (e) { failed.push({ id: id, error: e.code, message: e.userMessage }); });
       });
-    }, Promise.resolve()).then(function () {
-      patch(function (p) { p.queue = (p.queue || []).filter(function (id) { return failed.some(function (f) { return f.id === id; }); }); });
-      return { sent: sent, failed: failed };
-    });
+    }, Promise.resolve()).then(done, function (e) { _flushing = null; throw e; });
+    return _flushing;
   }
   function stripLocal(e) {
     var o = JSON.parse(JSON.stringify(e));
@@ -371,7 +448,7 @@
     notifications: notifications, markRead: markRead, config: config, setConfig: setConfig,
     facultyRoster: facultyRoster, verifyCode: verifyCode,
     // academic-cell writes
-    createInstitution: createInstitution, createProgramme: createProgramme, enrolPerson: enrolPerson,
+    createInstitution: createInstitution, createProgramme: createProgramme, deleteProgramme: deleteProgramme, enrolPerson: enrolPerson,
     myInstitutions: myInstitutions,
     certificates: certificates, certificate: certificate, requestCertificate: requestCertificate,
     signCertificate: signCertificate, revokeCertificate: revokeCertificate,

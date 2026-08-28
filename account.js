@@ -237,6 +237,27 @@
 
   // Stay signed in across launches. Firebase web compat defaults to LOCAL persistence, but we
   // set it explicitly (before any signInWithCredential) so it's guaranteed in the native WebView.
+  /* ── why-am-I-signed-out breadcrumb ────────────────────────────────────────
+   * The session does not survive an app relaunch, and there are exactly two candidate causes:
+   * either the WebView's storage is not persisting across launches at all, or it persists and the
+   * Firebase auth record specifically is being lost. A counter tells them apart with no sign-in and
+   * no debugger attached: if it reads 1 on every launch, storage itself is being wiped; if it climbs
+   * while the user is gone, storage is fine and auth is the problem. Two localStorage writes. */
+  (function bootBreadcrumb() {
+    try {
+      var n = (parseInt(localStorage.getItem("smd_boot_seq"), 10) || 0) + 1;
+      localStorage.setItem("smd_boot_seq", String(n));
+      var lastAuth = localStorage.getItem("smd_last_auth_at") || "never";
+      try { console.log("[StewardMD] boot #" + n + " - last signed-in user seen: " + lastAuth); } catch (e) {}
+    } catch (e) {}
+  })();
+  function noteAuthSeen() {
+    try {
+      localStorage.setItem("smd_last_auth_at",
+        new Date().toISOString() + " boot#" + (localStorage.getItem("smd_boot_seq") || "?"));
+    } catch (e) {}
+  }
+
   var _persisted = false;
   function ensurePersistence() {
     if (_persisted) return;
@@ -297,5 +318,5 @@
   // ensurePersistence stays immediate (one-time offline-persistence enable); DEFER the saved-cases
   // migration read to idle so its Firestore .get()/deserialize doesn't starve the JS thread AI needs
   // right after sign-in (see ku.js). Migration is not time-critical.
-  onChange(function () { ensurePersistence(); (window.requestIdleCallback || function (f) { return setTimeout(f, 2500); })(function () { try { ensureCasesMigrated(); } catch (e) {} }, { timeout: 8000 }); });
+  onChange(function () { ensurePersistence(); if (fbUser()) noteAuthSeen(); (window.requestIdleCallback || function (f) { return setTimeout(f, 2500); })(function () { try { ensureCasesMigrated(); } catch (e) {} }, { timeout: 8000 }); });
 })();
