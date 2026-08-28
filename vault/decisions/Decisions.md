@@ -1630,3 +1630,44 @@ and that a guest never enters phase 2 at all.
 a deletion from the owner's side if it removes the moment he recognises the product by. Brand-recall
 surfaces are not styling surfaces. When there is something new to show, prefer adding a *phase*
 over overwriting the existing one.
+
+## 2026-08-28 — Phase 2 is a stop, not a second loading screen: the Open Workspace button gates boot
+Follow-up owner feedback on the two-phase boot splash: "WHY TWO LOADING SCREENS FOR WHO LOGGED IN."
+He is right, and the diagnosis is sharper than the complaint. Phase 1 and phase 2 were both passive
+waits, so the sequence read as the same dead time twice. A screen only earns its place if the user
+does something on it.
+
+**So phase 2's pill became the action.** The "Loading your workspace" pill is now a real
+`<button id="sbsGo">Open Workspace</button>`, carrying the same tinted-glass primary treatment as
+the landing CTA, and the splash **holds** on the welcome-back screen until the clinician taps. On
+tap: reveal at once if boot has finished, otherwise the button flips to "Opening..." (reusing the
+existing `sbsGlow`) and the reveal happens the moment boot is ready.
+
+**Fail-open is the whole design, because this is a clinical app.** A clinician stuck behind a splash
+is not a cosmetic bug. Four independent ways out:
+- The hold arms only after the button is **in the DOM, measured at a real 44px+ tap target, and its
+  listener attached**. Any throw or bad measurement and `.sbs-gate` never lands, so phase 2 keeps
+  today's passive pill and auto-hides. This is why the pill/button swap is keyed on `.sbs-gate`
+  rather than on phase 2 itself: the CSS cannot show a button the JS did not successfully wire.
+- A **20s safety valve** opens it for them if they set the phone down.
+- The hide loop **re-checks that deadline itself** (`gateHeld()` compares against `gate.armed`), so a
+  dropped or throttled timer cannot strand anyone. Anything unexpected reads as "not held".
+- `?splashv2=0` and guests never reach the arming code at all (the personalisation block already
+  returned early), so both keep the exact pre-existing auto-hide.
+
+**The gate deliberately suppresses `CAP` (15s) while held.** A visible button the user can press is a
+better failure mode than a screen that vanishes under them, and the gate's own 20s deadline bounds
+the wait regardless, so the true worst case is ~21s from boot rather than unbounded.
+
+**No `app.js` change and no fork of the hide logic.** The splash's `MIN`/`CAP` loop was extended in
+place with one `gateHeld()` check plus a `window.__smdBootGateOpened` hook for an immediate reveal on
+tap; the gate object is published by the splash-v2 script that already owns personalisation. The
+button is **static markup kept `hidden`**, the same pattern `.sbs-hello` uses, so the flag-off path
+stays byte-exact.
+
+`sw.js` CACHE `...-splashv2g` → `...-splashv2h`. Test: `test/run-splash-ui.mjs` asserts the button
+renders as a `<button>` with the right label at a 44px+ target in both themes, that the splash holds
+**under the exact `ready()` condition that would otherwise hide it** (the harness forces a visible
+`#accountGate`, which is the proof: staying up merely for a while would prove nothing), that the tap
+releases and reveals, that a mid-boot tap yields "Opening...", and that guests and `?splashv2=0` are
+neither gated nor shown the button and still auto-hide.
