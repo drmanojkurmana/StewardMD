@@ -14,9 +14,9 @@
  * eLOGBook work (proevt1-b12). The key is a single opaque string, so keeping ONE would leave the
  * other deploy's clients on a stale cache. Carry both markers. */
 /* Both sides bumped this. main carries the eLOGBook b25 work, this branch the two-phase boot splash
- * (splashv2f). The key is one opaque string, so keeping either alone leaves the other deploy's
+ * (splashv2g). The key is one opaque string, so keeping either alone leaves the other deploy's
  * clients on a stale cache. Carry both markers. */
-var CACHE = "stewardmd-nb-consult1-onco6-atlas2-maikllm1-wr1-clinix29-ccsguard-surgx12-maikart1-pglog5-ack1-pgl1-vclaim1-fcux1-proevt1-b25-splashv2f";
+var CACHE = "stewardmd-nb-consult1-onco6-atlas2-maikllm1-wr1-clinix29-ccsguard-surgx12-maikart1-pglog5-ack1-pgl1-vclaim1-fcux1-proevt1-b25-splashv2g";
 
 self.addEventListener("install", function () {
   self.skipWaiting();

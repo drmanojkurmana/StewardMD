@@ -311,8 +311,12 @@ try {
         if(Math.round(parseFloat(getComputedStyle(img).height))!==53) return "MaiK logo "+getComputedStyle(img).height;
         return "classic foot";`), "classic foot",
       label + ": the developed-by foot keeps its classic stacked composition");
-    /* the one thing that carries over: the owner asked for the glass material there */
-    await glass("#smdBootSplash .sbs-foot", label + ": the developed-by bar is still liquid glass");
+    /* phase 1 must be the classic splash exactly: NO glass material on the foot yet */
+    okv(await ev(`var f=document.querySelector("#smdBootSplash .sbs-foot");
+        var s=getComputedStyle(f);
+        var bf=(s.backdropFilter||s.webkitBackdropFilter||"none");
+        return bf==="none" || bf==="";`), true,
+      label + ": the developed-by foot has no glass material in phase 1");
   };
   await classic("classic light");
   await shot("splash-05a-boot-classic-light");
@@ -342,6 +346,7 @@ try {
     "translucent loading pill reads 'Loading your workspace...'");
   ok(await ev(`var e=document.querySelector("#smdBootSplash .sbs-foot"); return e ? getComputedStyle(e).flexDirection : "";`) === "row",
     "the 'developed by MaiK' credit is the Direction C glass bar");
+  await glass("#smdBootSplash .sbs-foot", "phase 2: the developed-by bar is the liquid-glass material");
   ok(await ev(`var l=document.querySelector("#smdBootSplash .sbs-maik-light"),d=document.querySelector("#smdBootSplash .sbs-maik-dark");
       return !!l && !!d && /maik-logo\\.png/.test(l.getAttribute("src")||"") && /maik-logo-white\\.png/.test(d.getAttribute("src")||"");`) === true,
     "the existing light/dark MaiK logo pairing in .sbs-foot is preserved");

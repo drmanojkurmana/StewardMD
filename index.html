@@ -386,10 +386,9 @@ body.smd-ddi-open #smdBackToTop{display:none!important}
   /* the hello block is built at boot but stays out of phase 1 entirely */
   html.smd-splash-v2 #smdBootSplash .sbs-hello{display:none}
 
-  /* ── phase 1 carry-over: liquid glass on the developed-by bar, classic layout kept ── */
-  html.smd-splash-v2 #smdBootSplash .sbs-foot{left:50%;right:auto;transform:translateX(-50%);bottom:max(30px,env(safe-area-inset-bottom,30px));padding:13px 26px;border-radius:20px}
-  html.smd-splash-v2 #smdBootSplash .sbs-by{color:#54707f}
-  html.smd-splash-v2 #smdBootSplash.sbs-dark .sbs-by{color:rgba(246,247,245,.62)}
+  /* phase 1 is the classic splash, pixel-identical: no overrides on the foot or its copy */
+  html.smd-splash-v2 #smdBootSplash.smd-boot-phase2 .sbs-by{color:#54707f}
+  html.smd-splash-v2 #smdBootSplash.smd-boot-phase2.sbs-dark .sbs-by{color:rgba(246,247,245,.62)}
 
   /* ══ phase 2 ══════════════════════════════════════════════════════════════════════════ */
   html.smd-splash-v2 #smdBootSplash.smd-boot-phase2 .sbs-center{gap:14px}
@@ -475,23 +474,22 @@ body.smd-ddi-open #smdBackToTop{display:none!important}
   }
 
   /* ── the two surfaces the owner circled ──
-     The developed-by foot carries the material in BOTH phases (the owner asked for the glass
-     there); the loading pill only exists in phase 2, so it is scoped to it. The thin classic
-     progress bar of phase 1 is left exactly as it was. */
-  html.smd-splash-v2 #smdBootSplash .sbs-foot,
+     Both are phase-2 only: the owner wants phase 1 to be the classic splash exactly as it
+     shipped, so the glass on the developed-by foot and the loading pill appear with phase 2. */
+  html.smd-splash-v2 #smdBootSplash.smd-boot-phase2 .sbs-foot,
   html.smd-splash-v2 #smdBootSplash.smd-boot-phase2 .sbs-bar{
     border:1px solid rgba(14,110,99,.16);
     background:var(--lg-solid);
     box-shadow:var(--lg-shadow);
   }
-  html.smd-splash-v2 #smdBootSplash.sbs-dark .sbs-foot,
+  html.smd-splash-v2 #smdBootSplash.smd-boot-phase2.sbs-dark .sbs-foot,
   html.smd-splash-v2 #smdBootSplash.smd-boot-phase2.sbs-dark .sbs-bar{
     border-color:rgba(255,255,255,.16);
     background:var(--lg-solid-d);
     box-shadow:var(--lg-shadow-d);
   }
   @supports ((-webkit-backdrop-filter:blur(1px)) or (backdrop-filter:blur(1px))){
-    html.smd-splash-v2 #smdBootSplash .sbs-foot,
+    html.smd-splash-v2 #smdBootSplash.smd-boot-phase2 .sbs-foot,
     html.smd-splash-v2 #smdBootSplash.smd-boot-phase2 .sbs-bar{
       border-color:transparent;
       background:var(--lg-fill) padding-box,var(--lg-rim) border-box;
@@ -499,7 +497,7 @@ body.smd-ddi-open #smdBackToTop{display:none!important}
       -webkit-backdrop-filter:var(--lg-blur);
       backdrop-filter:var(--lg-blur);
     }
-    html.smd-splash-v2 #smdBootSplash.sbs-dark .sbs-foot,
+    html.smd-splash-v2 #smdBootSplash.smd-boot-phase2.sbs-dark .sbs-foot,
     html.smd-splash-v2 #smdBootSplash.smd-boot-phase2.sbs-dark .sbs-bar{
       background:var(--lg-fill-d) padding-box,var(--lg-rim-d) border-box;
       box-shadow:var(--lg-inset-d),var(--lg-shadow-d);
