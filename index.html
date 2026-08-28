@@ -341,7 +341,7 @@ document.body.classList.toggle("dark",dark);}catch(e){}})();</script>
       </div>
     </div>
     <div class="ip-appname">Steward<span>MD</span><span class="ip-in">.in</span></div>
-    <div class="ip-tagline-sub">ANTIBIOTIC DECISION ENGINE</div>
+    <div class="ip-tagline-sub">CLINICAL DECISION SUPPORT PLATFORM</div>
   </div>
 
   <!-- Phase 2: AMR message -->
@@ -403,6 +403,7 @@ document.body.classList.toggle("dark",dark);}catch(e){}})();</script>
 #splash .splash-mark svg{width:30px;height:30px}
 #splash .splash-name{font-size:25px}
 #splash .splash-tagline{margin-top:3px;font-size:12.5px}
+#splash .splash-modules{margin-top:10px}
 #splash .demo-wrap{margin-top:12px}
 #splash .demo-label{margin-bottom:7px}
 #splash .demo-cta{padding:13px}
@@ -410,9 +411,13 @@ document.body.classList.toggle("dark",dark);}catch(e){}})();</script>
 #splash .splash-inner{padding-top:max(10px,env(safe-area-inset-top))}
 @media (max-height:740px){
   #splash .splash-mark-logo{width:76px;height:76px}
+  #splash .splash-modules{margin-top:7px}
   #splash .demo-wrap{margin-top:8px}
   #splash .splash-foot{margin-top:8px}
 }
+/* Module strip — quick visual proof the platform now spans more than antibiotics */
+.splash-modules{display:flex;flex-wrap:wrap;justify-content:center;gap:6px;margin-top:14px}
+.splash-module-pill{font-size:10px;font-weight:600;letter-spacing:.03em;color:#7fe0cf;background:rgba(63,199,179,.1);border:1px solid rgba(63,199,179,.25);border-radius:999px;padding:5px 10px;white-space:nowrap}
 </style>
 <div id="splash">
   <div class="splash-inner">
@@ -420,11 +425,18 @@ document.body.classList.toggle("dark",dark);}catch(e){}})();</script>
       <div class="splash-mark-logo" role="img" aria-label="StewardMD"></div>
     </div>
     <div class="splash-name">Steward<span class="accent">MD</span></div>
-    <div class="splash-tagline">Antibiotic Decision Engine</div>
+    <div class="splash-tagline">Clinical Decision Support Platform</div>
+    <div class="splash-modules" aria-hidden="true">
+      <span class="splash-module-pill">Antibiogram</span>
+      <span class="splash-module-pill">ICU</span>
+      <span class="splash-module-pill">FollowCare</span>
+      <span class="splash-module-pill">MaiK AI</span>
+      <span class="splash-module-pill">Scan-Meds</span>
+    </div>
 
     <!-- ===== CASE SLIDESHOW ===== -->
     <div class="demo-wrap">
-      <div class="demo-label">See what StewardMD recommends →</div>
+      <div class="demo-label">See StewardMD in action →</div>
 
       <div class="demo-card">
 
@@ -510,59 +522,59 @@ document.body.classList.toggle("dark",dark);}catch(e){}})();</script>
           </div>
         </div>
 
-        <!-- SLIDE 4: Pyelonephritis -->
+        <!-- SLIDE 4: ICU Workstation -->
         <div class="demo-slide" id="demo-3">
           <div class="demo-case-head">
-            <div class="demo-case-icon">🫘</div>
+            <div class="demo-case-icon">🩺</div>
             <div>
-              <div class="demo-case-title">Acute Pyelonephritis</div>
+              <div class="demo-case-title">ICU Workstation</div>
               <div class="demo-case-tags">
-                <span class="demo-case-tag">35F</span>
-                <span class="demo-case-tag">Uncomplicated</span>
-                <span class="demo-case-tag">No Prior UTI</span>
+                <span class="demo-case-tag">62M</span>
+                <span class="demo-case-tag">Septic Shock</span>
+                <span class="demo-case-tag">On Vasopressors</span>
               </div>
             </div>
           </div>
           <div class="demo-rx">
-            <div class="demo-rx-label">Recommended Regimen</div>
+            <div class="demo-rx-label">Guided Workflow</div>
             <div class="demo-rx-drugs">
-              <span class="demo-drug">Ceftriaxone IV</span>
+              <span class="demo-drug">Findings</span>
               <span class="demo-plus">→</span>
-              <span class="demo-drug">Oral Step-Down</span>
+              <span class="demo-drug">Working Dx</span>
+              <span class="demo-plus">→</span>
+              <span class="demo-drug">Deep Review</span>
             </div>
           </div>
           <div class="demo-notes">
-            <div class="demo-notes-row"><div class="demo-dot"></div>IV therapy until afebrile 24–48 h; then oral</div>
-            <div class="demo-notes-row"><div class="demo-dot"></div>Total 10–14 day course; urine culture to guide</div>
-            <div class="demo-notes-row"><div class="demo-dot"></div>IDSA UTI/Pyelonephritis Guidelines</div>
+            <div class="demo-notes-row"><div class="demo-dot"></div>Live vitals, trends and organ-support tracking in one view</div>
+            <div class="demo-notes-row"><div class="demo-dot"></div>Ask MaiK about this patient — inline AI second opinion</div>
+            <div class="demo-notes-row"><div class="demo-dot"></div>Vasopressor and infusion dose calculators built in</div>
           </div>
         </div>
 
-        <!-- SLIDE 5: Infective Endocarditis -->
+        <!-- SLIDE 5: MaiK AI Assistant -->
         <div class="demo-slide" id="demo-4">
           <div class="demo-case-head">
-            <div class="demo-case-icon">❤️</div>
+            <div class="demo-case-icon">✨</div>
             <div>
-              <div class="demo-case-title">Infective Endocarditis</div>
+              <div class="demo-case-title">MaiK AI Assistant</div>
               <div class="demo-case-tags">
-                <span class="demo-case-tag">58M</span>
-                <span class="demo-case-tag">Native Valve</span>
-                <span class="demo-case-tag">Strep Viridans</span>
+                <span class="demo-case-tag">Case-Aware</span>
+                <span class="demo-case-tag">Cites Sources</span>
+                <span class="demo-case-tag">Available 24/7</span>
               </div>
             </div>
           </div>
           <div class="demo-rx">
-            <div class="demo-rx-label">Recommended Regimen</div>
+            <div class="demo-rx-label">Clinician Asked</div>
             <div class="demo-rx-drugs">
-              <span class="demo-drug">Penicillin G</span>
-              <span class="demo-plus">±</span>
-              <span class="demo-drug">Gentamicin</span>
+              <span class="demo-drug">"Adjust dose for eGFR 28?"</span>
             </div>
           </div>
           <div class="demo-notes">
-            <div class="demo-notes-row"><div class="demo-dot"></div>4-week regimen for penicillin-sensitive strep</div>
-            <div class="demo-notes-row"><div class="demo-dot"></div>Echo and ID consult mandatory</div>
-            <div class="demo-notes-row"><div class="demo-dot"></div>AHA IE Guidelines · Modified Duke Criteria</div>
+            <div class="demo-notes-row"><div class="demo-dot"></div>MaiK: reduce to 1g q24h, avoid nephrotoxic combos</div>
+            <div class="demo-notes-row"><div class="demo-dot"></div>Cites Harrison's, IDSA and hospital protocol inline</div>
+            <div class="demo-notes-row"><div class="demo-dot"></div>Reads the open case — labs, allergies, current orders</div>
           </div>
         </div>
 
@@ -636,6 +648,43 @@ document.body.classList.toggle("dark",dark);}catch(e){}})();</script>
       }
       wire(); // wire splash/consent NOW during parse — elements are above this script. Do NOT wait for DOMContentLoaded: deferred scripts (~1.3MB JS) delay it ~5-6s and froze the splash.
       if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",wire); // safety net (idempotent via 'wired')
+    })();
+    </script>
+
+    <!-- Case-slide carousel: auto-advance + tap-a-dot. Was dead markup before (5 dots, no JS) —
+         now actually cycles, and respects prefers-reduced-motion. -->
+    <script>
+    (function(){
+      var slides,dots,idx=0,timer=null,wired=false;
+      var AUTO_MS=4200;
+      var reduceMotion=false;
+      try{reduceMotion=!!(window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches);}catch(e){}
+      function go(i){
+        if(!slides||!slides.length)return;
+        idx=(i+slides.length)%slides.length;
+        for(var k=0;k<slides.length;k++)slides[k].classList.toggle("active",k===idx);
+        if(dots)for(var j=0;j<dots.length;j++)dots[j].classList.toggle("active",j===idx);
+      }
+      function next(){go(idx+1);}
+      function stop(){if(timer){clearInterval(timer);timer=null;}}
+      function start(){if(reduceMotion)return;stop();timer=setInterval(next,AUTO_MS);}
+      function wireCarousel(){
+        if(wired)return;
+        var card=document.querySelector("#splash .demo-card");
+        if(!card)return;
+        slides=card.querySelectorAll(".demo-slide");
+        dots=document.querySelectorAll("#demoDots .demo-dot-btn");
+        if(!slides.length)return;
+        wired=true;
+        for(var i=0;i<dots.length;i++){(function(n){dots[n].addEventListener("click",function(){go(n);start();});})(i);}
+        card.addEventListener("mouseenter",stop);
+        card.addEventListener("mouseleave",start);
+        card.addEventListener("touchstart",stop,{passive:true});
+        document.addEventListener("visibilitychange",function(){if(document.hidden)stop();else start();});
+        start();
+      }
+      wireCarousel();
+      if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",wireCarousel);
     })();
     </script>
 
