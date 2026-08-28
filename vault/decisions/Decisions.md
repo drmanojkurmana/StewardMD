@@ -1589,3 +1589,44 @@ every report's "verified entries carrying the signer's registration" count was r
 123px. That was not the QR: the app carries a root `zoom` of 1.08 for the OS text-size setting. The
 assertion was wrong, not the code — so it now tests **module uniformity and squareness**, which is
 what actually decides whether a scanner can read it, and is zoom-independent.
+
+## 2026-08-28 — The boot splash is a SEQUENCE: the classic splash first, the personalised one second
+Owner feedback from a real device, in strong terms: the v2 layer had *replaced* the classic boot
+splash, and the classic one is not negotiable. The composition he wants on open is the original:
+light field, the interlocked mark, the two-tone "Steward**MD**" wordmark, "Built by clinicians, for
+clinicians", the thin progress bar, and the "DEVELOPED BY [MaiK]" foot, in **both** the light and the
+dark variant. What the v2 layer built is not rejected; it is **misplaced in time**. It should come
+*after*.
+
+**So `#smdBootSplash` now has two phases inside the same element.**
+- **Phase 1 (default, no class):** the classic CSS, untouched. Every v2 rule that changes composition
+  (126px mark, the display-face lock-up, the "Loading your workspace" glass pill in place of the
+  progress bar, the full-width row foot, the `.sbs-personal` hiding of the wordmark and tagline) is
+  now scoped to `#smdBootSplash.smd-boot-phase2`. The single carry-over is the **liquid-glass
+  material on the developed-by bar**, which the owner had explicitly asked for: material only, the
+  classic stacked composition and the 53px MaiK logo are kept.
+- **Phase 2 (`.smd-boot-phase2`):** the personalised "welcome back" screen, added by the existing
+  inline personalisation script after a **900ms beat** plus a **220ms crossfade** (opacity on
+  `.sbs-center` / `.sbs-foot`; instant swap under `prefers-reduced-motion`).
+
+**It cannot delay boot.** The beat is a bare `setTimeout` that no-ops if the splash is already fading
+(`.sbs-hide`) or detached, so a fast boot goes straight to the app exactly as before — the phase is
+skipped, never waited on. The splash's own `MIN`/`CAP` hold logic is untouched.
+
+**Only signed-in returning clinicians reach phase 2.** The beat is scheduled inside the
+personalisation block, which already returns early for guests and first-run users — so they keep the
+classic splash for the whole boot, and their "what you created" arrives as the intro poster and
+landing splash that follow. That is also why the phase-2 field is painted on a `#smdBootSplash::before`
+overlay rather than swapped into `background`: a background-image swap cannot crossfade, an overlay's
+opacity can, and phase 1 then keeps the genuinely original white / dark-teal field.
+
+Same flag, same default-ON resolution, `?splashv2=0` still drops the whole layer. `sw.js` CACHE
+`...-splashv2e` → `...-splashv2f`. Test: `test/run-splash-ui.mjs` now asserts the classic phase FIRST
+in both themes (107px mark, two-tone 30px/800 wordmark, the tagline, the 132x3 progress bar, the
+stacked foot, no loading-pill copy, the hello row not yet shown), then the transition into phase 2,
+and that a guest never enters phase 2 at all.
+
+**The general lesson, worth more than the fix.** A redesign layer that improves a screen can still be
+a deletion from the owner's side if it removes the moment he recognises the product by. Brand-recall
+surfaces are not styling surfaces. When there is something new to show, prefer adding a *phase*
+over overwriting the existing one.
