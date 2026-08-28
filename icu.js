@@ -1473,6 +1473,26 @@
       '#icuRoot.icu-v2 .icu-v2-skel-strip{height:30px;margin-top:12px;border-radius:10px}' +
       '#icuRoot.icu-v2 .icu-v2-loading{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:13px;padding:44px 20px;color:var(--muted);font:600 13px var(--font);text-align:center}' +
       '#icuRoot.icu-v2 .icu-v2-spin{width:30px;height:30px;border:3px solid var(--border);border-top-color:var(--primary);border-radius:50%;animation:icuspin .9s linear infinite}' +
+      /* ── "Thinking" progress (icuThinkHTML) ────────────────────────────────────────────────
+         A deep review or a discharge draft takes 10-20s. It used to say "Running deep clinical
+         review…" in flat text with no motion at all, so the wait was indistinguishable from a
+         hang - reported twice from internal testing. This shows what the step is actually DOING:
+         a shimmering rail, a breathing dot, and the stages lighting up in turn. Pure CSS, no
+         library and no image; the stagger is animation-delay, not a JS timer, so it cannot drift
+         or leak. Under prefers-reduced-motion it flattens to a plain, fully-legible list. */
+      '#icuRoot.icu-v2 .icu-think{border:1px solid var(--border);background:var(--panel);border-radius:14px;padding:13px 14px;margin-top:10px}' +
+      '#icuRoot.icu-v2 .icu-think-h{display:flex;align-items:center;gap:9px;font:700 13px var(--font);color:var(--ink)}' +
+      '#icuRoot.icu-v2 .icu-think-dot{width:9px;height:9px;border-radius:50%;background:var(--primary);flex:0 0 auto;animation:icuthinkpulse 1.5s ease-in-out infinite}' +
+      '#icuRoot.icu-v2 .icu-think-rail{position:relative;height:3px;border-radius:3px;background:var(--border);overflow:hidden;margin:11px 0 10px}' +
+      '#icuRoot.icu-v2 .icu-think-rail::after{content:"";position:absolute;top:0;left:-40%;width:40%;height:100%;border-radius:3px;background:var(--primary);animation:icuthinkrail 1.6s cubic-bezier(.4,0,.2,1) infinite}' +
+      '#icuRoot.icu-v2 .icu-think-step{display:flex;align-items:flex-start;gap:8px;font:500 12.5px/1.45 var(--font);color:var(--muted);margin-bottom:5px;opacity:.45;animation:icuthinkstep 4.8s ease-in-out infinite}' +
+      '#icuRoot.icu-v2 .icu-think-step:last-child{margin-bottom:0}' +
+      '#icuRoot.icu-v2 .icu-think-step i{width:5px;height:5px;border-radius:50%;background:currentColor;flex:0 0 auto;margin-top:6px}' +
+      '@keyframes icuthinkpulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(.72);opacity:.5}}' +
+      '@keyframes icuthinkrail{0%{left:-40%}60%,100%{left:100%}}' +
+      '@keyframes icuthinkstep{0%,12%{opacity:.35}22%,45%{opacity:1;color:var(--ink)}62%,100%{opacity:.35}}' +
+      '@media(prefers-reduced-motion:reduce){#icuRoot.icu-v2 .icu-think-dot,#icuRoot.icu-v2 .icu-think-rail::after,#icuRoot.icu-v2 .icu-think-step{animation:none}' +
+      '#icuRoot.icu-v2 .icu-think-step{opacity:1}#icuRoot.icu-v2 .icu-think-rail::after{left:0;width:100%;opacity:.5}}' +
       // Offline: unobtrusive amber full-width strip (reuses --warn/--warn-soft, AA-verified).
       '#icuRoot.icu-v2 .icu-v2-offline{display:flex;align-items:center;gap:8px;background:var(--warn-soft);color:var(--warn);border-bottom:1px solid var(--warn);padding:9px 15px;font:600 12px var(--font)}' +
       '#icuRoot.icu-v2 .icu-v2-offline .icu-ico{width:15px;height:15px;flex:0 0 auto}' +
@@ -3214,7 +3234,7 @@
 
         // 4) Deep clinical review (AI) — PROMINENT, ENABLED as soon as there is usable context.
         //    NOT gated on a working diagnosis: its output HELPS identify the diagnosis + correlate.
-        var dBlock = _corrBusy ? '<div class="icu-assist-msg" style="margin-top:10px">Running deep clinical review…</div>' : (dDeep ? '<div class="icu-corr-deep">' + corrDeepHTML(dDeep) + "</div>" : (_corrErr ? '<div class="icu-corr-deep">' + corrDeepHTML(_corrErr) + "</div>" : ""));
+        var dBlock = _corrBusy ? icuThinkHTML("Deep clinical review", ["Reading the recorded labs, vitals and imaging", "Correlating the findings against each other", "Checking StewardMD's trusted sources", "Drafting what fits, and what does not"]) : (dDeep ? '<div class="icu-corr-deep">' + corrDeepHTML(dDeep) + "</div>" : (_corrErr ? '<div class="icu-corr-deep">' + corrDeepHTML(_corrErr) + "</div>" : ""));
         out += '<div class="icu-card"><div class="icu-sec-lbl">' + ico("pulse", "✨") + ' Deep clinical review <span class="icu-phase">AI</span></div>' +
           '<p class="icu-doc-sub" style="margin:0 0 8px">Correlates your findings with available labs, imaging and vitals against StewardMD’s trusted sources — to help identify the diagnosis, flag what doesn’t fit and suggest next checks. Advisory only; you confirm the de-identified context that is sent.</p>' +
           '<button class="icu-btn" data-icu-act="corrdeep"' + ((_corrBusy || !usable) ? " disabled" : "") + (!usable ? ' title="Add findings, labs, imaging or vitals first"' : "") + '>' + ico("pulse", "✨") + " Deep clinical review</button>" +
@@ -4176,6 +4196,22 @@
   // Centered spinner + label — for a "connecting" phase where a card shape would be misleading.
   function v2Spinner(text) {
     return '<div class="icu-v2-loading" role="status"><div class="icu-v2-spin" aria-hidden="true"></div><div>' + esc(text || "Loading…") + '</div></div>';
+  }
+  /* A LONG step (deep review, discharge draft) - 10-20s - needs to show that something is
+   * happening AND what. A bare line of text made those waits look like a hang, which is how they
+   * were reported. Naming the stages is not decoration: it tells the doctor which of their data is
+   * being used, and it makes a genuine stall obvious because the rail keeps moving while the
+   * result never lands. role="status" so a screen reader announces it once, and the stage list is
+   * aria-hidden because it is a progress illustration, not content. */
+  function icuThinkHTML(title, stages) {
+    var steps = (stages || []).map(function (s, i) {
+      // Stagger via animation-delay: no timers to drift, leak, or need clearing on re-render.
+      return '<div class="icu-think-step" style="animation-delay:' + (i * 1.1).toFixed(1) + 's"><i></i><span>' + esc(s) + "</span></div>";
+    }).join("");
+    return '<div class="icu-think" role="status" aria-live="polite">' +
+      '<div class="icu-think-h"><span class="icu-think-dot" aria-hidden="true"></span>' + esc(title) + "</div>" +
+      '<div class="icu-think-rail" aria-hidden="true"></div>' +
+      '<div aria-hidden="true">' + steps + "</div></div>";
   }
   // Offline = navigator.onLine false OR the collab layer reports offline. Group mode only (the LOCAL
   // board is on-device and always "synced", so no offline strip there).
@@ -6272,7 +6308,7 @@
     var body;
     if (_disAi.busy) {
       body = '<p class="icu-doc-sub">MaiK is drafting the narrative sections from this patient\'s recorded data. This takes a few seconds.</p>' +
-        '<div class="icu-v2-loading"><div class="icu-v2-spin" aria-hidden="true"></div>Drafting the discharge narrative…</div>';
+        icuThinkHTML("Drafting the discharge narrative", ["Reading this patient's recorded course", "Assembling diagnosis, course and investigations", "Composing the narrative sections"]);
     } else if (_disAi.err) {
       body = '<div class="icu-assist-msg">' + ico("warn", "⚠️") + " " + esc(disAiErrText(_disAi.err)) + "</div>" +
         '<button class="icu-btn" data-icu-act="disai" style="margin-top:10px">' + ico("spark", "✦") + ' Try again</button>';
@@ -7463,7 +7499,7 @@
     var fLabels = (ev.findings || []).map(function (f) { return (f.polarity === "absent" ? "No " : f.polarity === "possible" ? "? " : f.temporality === "historical" ? "H/o " : "") + f.label; });
     var evAll = fLabels.concat(ev.img).concat(ev.labs).concat(ev.vitals || []);
     var evidence = evAll.length ? '<div class="icu-corr-sub">Evidence assembled</div>' + corrChips(evAll) : "";
-    var deepBlock = _corrBusy ? '<div class="icu-assist-msg">Running deep clinical review…</div>' : (deep ? '<div class="icu-corr-deep">' + corrDeepHTML(deep) + "</div>" : (_corrErr ? '<div class="icu-corr-deep">' + corrDeepHTML(_corrErr) + "</div>" : ""));
+    var deepBlock = _corrBusy ? icuThinkHTML("Deep clinical review", ["Reading the recorded labs, vitals and imaging", "Correlating the findings against each other", "Checking StewardMD's trusted sources", "Drafting what fits, and what does not"]) : (deep ? '<div class="icu-corr-deep">' + corrDeepHTML(deep) + "</div>" : (_corrErr ? '<div class="icu-corr-deep">' + corrDeepHTML(_corrErr) + "</div>" : ""));
     return header + '<div class="icu-card">' + badge + redflags + considBlock + supporting + missing + evidence +
       '<div class="icu-img-btns" style="margin-top:10px">' +
         '<button class="icu-btn" data-icu-act="corrdeep"' + (_corrBusy ? " disabled" : "") + '>' + ico("pulse", "✨") + ' Deep clinical review</button>' +
