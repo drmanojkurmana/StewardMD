@@ -116,6 +116,24 @@ body.dark {
   font-display: block;
   src: url(/assets/fonts/sacramento.woff2) format('woff2');
 }
+/* ---- Bricolage Grotesque (display face for the interstitials, html.smd-splash-v2) ----
+   The brand moments on the intro poster / landing splash / boot splash needed type with
+   real character instead of another weight of the UI sans. Bricolage Grotesque (SIL OFL
+   1.1, Mathieu Triay / ATF) is a grotesque with genuinely idiosyncratic details and a
+   200..800 weight axis, which is what carries the light/extrabold "Steward|MD" lock-up.
+   SELF-HOSTED for the SAME reason as every other face here, and doubly so because these
+   screens paint BEFORE any network is guaranteed inside the Capacitor shell: a runtime
+   Google Fonts <link> would silently fall back to the system sans offline. The bundled
+   woff2 is the Latin subset trimmed to the characters these screens use, with the opsz
+   and wght axes kept (48 KB). font-display:block so the word-mark never flashes in a
+   fallback face; index.html preloads it so that block period is effectively zero. */
+@font-face {
+  font-family: 'Bricolage Grotesque';
+  font-style: normal;
+  font-weight: 200 800;
+  font-display: block;
+  src: url(/assets/fonts/bricolage-grotesque.woff2) format('woff2');
+}
 /* ---- Primary UI type: Inter (Latin) + Noto Sans Telugu / Devanagari (Indic) ----------
    SELF-HOSTED for the SAME reason as above: the Google Fonts CDN <link> does not reliably
    apply inside the WKWebView, so the app fell back to the system font (Roboto). Bundling the
