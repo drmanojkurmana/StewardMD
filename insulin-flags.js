@@ -6,7 +6,11 @@
   var DEFS = {
     smd_insulin:      { type: "bool", def: true,  query: "insulin",     desc: "Insulin module master flag (home tile + module). DEFAULT ON (owner enabled). Hide with ?insulin=0." },
     smd_insulin_dka:  { type: "bool", def: true, query: "insulin_dka", desc: "Clinician DKA insulin workflow. Access-gated. PUBLIC-RELEASE-GATE: dev/testing default ON (owner 'flip all on' 2026-08-16). Hide with ?insulin_dka=0." },
-    smd_insulin_peds: { type: "bool", def: true, query: "insulin_peds", desc: "Pediatric insulin workflow. Access-gated. PUBLIC-RELEASE-GATE: dev/testing default ON (owner 'flip all on' 2026-08-16). Hide with ?insulin_peds=0." }
+    smd_insulin_peds: { type: "bool", def: true, query: "insulin_peds", desc: "Pediatric insulin workflow. Access-gated. PUBLIC-RELEASE-GATE: dev/testing default ON (owner 'flip all on' 2026-08-16). Hide with ?insulin_peds=0." },
+    // Ask MaiK: free text -> MaiK PRE-FILLS the calculator (mode + inputs) for the doctor to check and
+    // press Calculate. It never prints a dose; the units still come from INSULIN_ENGINE via compute().
+    // DEFAULT OFF - new clinical surface, extraction not yet proven in practice. Show with ?insulin_ask=1.
+    smd_insulin_ask:  { type: "bool", def: false, query: "insulin_ask", desc: "Ask MaiK inside the insulin calculator (free text pre-fills the form; never answers the dose). DEFAULT OFF. Show with ?insulin_ask=1." }
   };
   function store()  { try { return localStorage; } catch (e) { return null; } }
   function search() { try { return (location && location.search) || ""; } catch (e) { return ""; } }

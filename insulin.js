@@ -98,7 +98,10 @@
     libQ: "", libClass: "all", libOpen: null, compare: [],
     patientId: null, patientName: "", editP: null, patQ: "",
     convFrom: "glargine100", convTo: "degludec", convDose: 20, convReason: "", convFromFreq: "bd", convAck: false,
-    histFilter: "all" };
+    histFilter: "all",
+    // Ask MaiK. askPending holds the RESULT (not the form) until the doctor presses Calculate;
+    // askMissing lists the required inputs MaiK could not read, which are blanked, not defaulted.
+    ask: { text: "", busy: false, error: "" }, askPlan: null, askPending: false, askMissing: [] };
 
   function initState() {
     var m = mmolMode();
@@ -124,6 +127,9 @@
     st.acked = false; st.confirmed = false;
     st.patientId = null; st.patientName = ""; st.editP = null; st.patQ = "";
     st.convFrom = "glargine100"; st.convTo = "degludec"; st.convDose = 20; st.convReason = ""; st.convFromFreq = "bd"; st.convAck = false;
+    // A new session starts with no MaiK extraction pending: one patient's reading must never carry
+    // over to the next.
+    st.ask = { text: "", busy: false, error: "" }; st.askPlan = null; st.askPending = false; st.askMissing = [];
   }
 
   /* ---------- icons ---------- */
@@ -626,6 +632,7 @@
       '<div class="ins-modes ins-bf" role="tablist">' + visibleModes().map(function (m) {
         return '<button class="ins-modebtn' + (m.clin ? " clin" : "") + '" role="tab" data-ins="mode" data-mode="' + m.id + '" aria-pressed="' + (st.mode === m.id ? "true" : "false") + '">' + m.label + '</button>';
       }).join("") + '</div>' +
+      '<div id="insAsk">' + askHTML() + '</div>' +
       '<div class="ins-card ins-bf" id="insInputs"></div>' +
       '<div id="insOut"></div>';
   }
@@ -638,15 +645,20 @@
   function rule(g, v, label) {
     return '<button class="ins-round-b" data-ins="rule" data-g="' + g + '" data-v="' + v + '" aria-pressed="' + (st[g] === v ? "true" : "false") + '">' + label + '</button>';
   }
+  // A required input that Ask MaiK could NOT read is deliberately left BLANK rather than sitting on a
+  // default (see blankField). Render a non-finite value as an empty box, never "NaN" - an empty box is
+  // the honest prompt to type the value, and the engine's own ok() guard then returns "enter the
+  // required values" instead of a dose if it is left that way.
+  function inval(v) { return (v == null || v === "" || (typeof v === "number" && !isFinite(v))) ? "" : v; }
   function stepper(id, val, stepv) {
     return '<div class="ins-step">' +
       '<button data-ins="dec" data-f="' + id + '" data-s="' + stepv + '" aria-label="decrease">-</button>' +
-      '<input data-ins="num" data-f="' + id + '" type="number" inputmode="decimal" value="' + val + '">' +
+      '<input data-ins="num" data-f="' + id + '" type="number" inputmode="decimal" value="' + inval(val) + '">' +
       '<button data-ins="inc" data-f="' + id + '" data-s="' + stepv + '" aria-label="increase">+</button></div>';
   }
   function mini(id, label, val) {
     return '<div class="ins-mini"><label>' + label + '</label>' +
-      '<input data-ins="num" data-f="' + id + '" type="number" inputmode="decimal" value="' + val + '"></div>';
+      '<input data-ins="num" data-f="' + id + '" type="number" inputmode="decimal" value="' + inval(val) + '"></div>';
   }
   function ctxChip(key, label) { return '<button class="ins-chip" data-ins="ctx" data-k="' + key + '" aria-pressed="' + (st.ctx[key] ? "true" : "false") + '">' + label + '</button>'; }
   function tgtChip(v) { return '<button class="ins-chip" data-ins="target-chip" data-v="' + v + '" aria-pressed="' + (st.target === v ? "true" : "false") + '">' + v + '</button>'; }
@@ -713,8 +725,10 @@
     // estimate
     h += '<div class="ins-field"><div class="ins-lab">Patient weight <span class="u">kg</span></div>' + stepper("ctx.weightKg", st.ctx.weightKg, 1) + '</div>' +
       '<div class="ins-field"><div class="ins-lab">Insulin status</div><div class="ins-chips">' +
-        '<button class="ins-chip" data-ins="fd-naive" data-v="1" aria-pressed="' + (st.fdNaive ? "true" : "false") + '">Insulin-naive</button>' +
-        '<button class="ins-chip" data-ins="fd-naive" data-v="0" aria-pressed="' + (!st.fdNaive ? "true" : "false") + '">Already using insulin</button></div></div>';
+        // Compared with === so that a null (Ask MaiK could not read which it was) shows NEITHER chip
+        // pressed and the doctor must choose. Manual use is unaffected: initState() sets true.
+        '<button class="ins-chip" data-ins="fd-naive" data-v="1" aria-pressed="' + (st.fdNaive === true ? "true" : "false") + '">Insulin-naive</button>' +
+        '<button class="ins-chip" data-ins="fd-naive" data-v="0" aria-pressed="' + (st.fdNaive === false ? "true" : "false") + '">Already using insulin</button></div></div>';
     if (st.fdNaive) {
       h += '<div class="ins-field"><div class="ins-lab">Initial TDD assumption <span class="u">u/kg/day</span></div>' + mini("fdFactor", "u/kg/day", st.fdFactor) +
         '<div class="ins-tgt-note">An ASSUMPTION, not a known value. Estimated TDD + ISF and IOB 0 u are shown with their sources in the result.</div></div>' +
@@ -807,6 +821,194 @@
     document.getElementById("insInputs").innerHTML = h;
   }
 
+  /* ================= Ask MaiK (flag-gated: smd_insulin_ask, DEFAULT OFF) =====================
+   * The doctor types a free-text scenario; MaiK PRE-FILLS this form and nothing else. It never
+   * prints a dose: the units still come from compute() -> INSULIN_ENGINE, through safety(), exactly
+   * as in the manual flow, so every warning and every `interrupt` still fires.
+   * Decision: vault/decisions/Decisions.md 2026-08-28 ("MaiK fills the form, it does not answer the
+   * dose"). Do NOT turn this into an inline answer without asking the owner.
+   *
+   * Two rules carry the whole safety argument, and both live here rather than in the engine:
+   *   1. HOLD THE RESULT. This calculator recomputes live on every keystroke, so a plain pre-fill
+   *      would paint a dose in the same instant MaiK filled the fields - which is precisely the
+   *      "the AI said 6 units" failure the decision rejected. st.askPending makes render() paint the
+   *      review card INSTEAD of computing, until the doctor presses Calculate.
+   *   2. NEVER DEFAULT A MISSING INPUT. st has a value for everything (glucose 180, isf 50, iob 2,
+   *      weight 70), so an unread field would silently look like an extracted one. Every REQUIRED
+   *      field MaiK did not read is BLANKED and asked for, and Calculate stays disabled until it is
+   *      filled in by hand. The engine cannot enforce this - correctionDose() treats a missing IOB
+   *      as 0 and still returns a number.
+   * ========================================================================================= */
+  function askOn() { var f = flags(); return !!(f && f.bool("smd_insulin_ask")) && !!window.INSULIN_EXTRACT; }
+
+  // Modes an extraction may select. The detail LEVEL does not gate this (we follow the mode to its
+  // level), but an access-gated clinician workflow must never be opened by a sentence.
+  function askAllowedModes() {
+    var f = flags();
+    return MODES.filter(function (m) {
+      if (m.id === "dka") return !!(f && f.bool("smd_insulin_dka"));
+      if (m.id === "pediatric") return !!(f && f.bool("smd_insulin_peds"));
+      return true;
+    }).map(function (m) { return m.id; });
+  }
+
+  var ASK_UNIT = { glucose: "mg/dL", target: "mg/dL", isf: "mg/dL/u", isfOverride: "mg/dL/u", icr: "g/u",
+    carbs: "g", iob: "u", tdd: "u/day", fdTdd: "u/day", weightKg: "kg", age: "y", egfr: "mL/min",
+    fdPriorUnits: "u", fdPriorMins: "min", fdFactor: "u/kg/day", tddFactor: "u/kg/day", dkaRate: "u/kg/h" };
+
+  function rawGet(path) {
+    if (path.indexOf(".") > -1) { var p = path.split("."); return st[p[0]] ? st[p[0]][p[1]] : undefined; }
+    return st[path];
+  }
+  // Values a LOADED PATIENT PROFILE legitimately supplies (applyProfile). These are known clinical
+  // values the doctor themselves selected, not stale defaults, so they do not need re-asking.
+  var ASK_PROFILE = { isf: "isf", icr: "icr", target: "target", tdd: "tdd", weightKg: "weightKg", age: "age" };
+  function profileSupplies(key) {
+    if (!st.patientId || !ASK_PROFILE[key]) return false;
+    var p = getPatient(st.patientId);
+    return !!(p && num(p[ASK_PROFILE[key]]));
+  }
+  // Blank a required field MaiK did not read, so it cannot masquerade as an extracted value.
+  function blankField(key) {
+    var path = window.INSULIN_EXTRACT.PATH[key]; if (!path) return;
+    if (key === "egfr" || key === "trimester") { st.ctx[key] = null; return; }
+    if (key === "pedStage") { st.pedStage = ""; return; }       // pedChip compares ===, so none is pressed
+    if (key === "fdNaive") { st.fdNaive = null; return; }        // neither chip pressed; doctor must choose
+    stSet(path, NaN);                                            // renders as an empty box via inval()
+  }
+  function askFilled(key) {
+    var path = window.INSULIN_EXTRACT.PATH[key]; if (!path) return true;
+    var v = rawGet(path);
+    if (key === "pedStage") return !!v;
+    if (typeof v === "boolean") return true;
+    if (v == null || v === "") return false;
+    return isFinite(Number(v));
+  }
+  function askUnresolved() {
+    var out = [], i, list = st.askMissing || [];
+    for (i = 0; i < list.length; i++) if (!askFilled(list[i])) out.push(list[i]);
+    return out;
+  }
+
+  /* Write a validated PLAN into the calculator. Extracted values are set; required values MaiK did
+   * not read are blanked and recorded for the review card. The patient profile, the bolus insulin and
+   * the saved settings are left alone - they are the doctor's own choices, not MaiK's guesses. */
+  function applyPlan(plan) {
+    var i, m = plan.mode, extracted = {};
+    st.mode = m;
+    if (m === "correction") st.corrSource = plan.corrSource || "isf";
+    // The two detail levels show DISJOINT mode sets, so an Advanced-only mode would leave the doctor
+    // staring at a hidden tab. Follow the mode to its level.
+    if (isAdvMode(m) !== advOn()) { SET.advMode = isAdvMode(m); saveSettings(); }
+
+    for (i = 0; i < plan.set.length; i++) extracted[plan.set[i].key] = 1;
+    st.askMissing = [];
+    for (i = 0; i < plan.missing.length; i++) {
+      var key = plan.missing[i];
+      if (extracted[key] || profileSupplies(key)) continue;
+      if (st.askMissing.indexOf(key) > -1) continue;
+      st.askMissing.push(key);
+      blankField(key);
+    }
+    for (i = 0; i < plan.set.length; i++) stSet(plan.set[i].k, plan.set[i].v);
+
+    st.askPlan = plan;
+    st.askPending = true;
+    st.acked = false; st.confirmed = false;
+  }
+
+  function askRun() {
+    var E = window.INSULIN_EXTRACT; if (!E) return;
+    var text = String(st.ask.text || "").trim();
+    if (!text) { st.ask.error = "Describe the patient first."; renderAsk(); return; }
+    st.ask.busy = true; st.ask.error = ""; renderAsk();
+    E.plan(text, { allowedModes: askAllowedModes() }).then(function (plan) {
+      st.ask.busy = false;
+      if (!plan || !plan.ok) { st.ask.error = (plan && plan.error) || "MaiK could not read that."; renderAsk(); return; }
+      applyPlan(plan);
+      paint();                                  // level/mode may have changed; repaints inputs + the review card
+    }, function () {
+      st.ask.busy = false; st.ask.error = "MaiK could not be reached. Fill the calculator in yourself."; renderAsk();
+    });
+  }
+
+  function renderAsk() { var el = document.getElementById("insAsk"); if (el) el.innerHTML = askHTML(); }
+
+  function askHTML() {
+    if (!askOn()) return "";
+    var a = st.ask || { text: "", busy: false, error: "" };
+    return '<div class="ins-card ins-ask ins-bf">' +
+      '<div class="ins-ask-h">' + ICON_AI + '<b>Ask MaiK</b></div>' +
+      '<div class="ins-ask-sub">Describe the patient in your own words. MaiK fills this form in for you to check. ' +
+        'It does not work out the dose - you press Calculate and the calculator does, with all its usual safety checks.</div>' +
+      '<textarea class="ins-ask-in" data-ins="ask-text" rows="2" ' + (a.busy ? 'disabled ' : '') +
+        'placeholder="e.g. patient on 16 units regular, sugar 320 now, how much?" aria-label="Describe the patient">' + esc(a.text) + '</textarea>' +
+      '<div class="ins-ask-act">' +
+        '<button class="ins-ask-go" data-ins="ask-run"' + (a.busy ? ' disabled' : '') + '>' + (a.busy ? "Reading..." : "Fill the form") + '</button>' +
+        (a.error ? '<span class="ins-ask-err">' + esc(a.error) + '</span>' : '') +
+      '</div></div>';
+  }
+
+  // What a field currently holds, read LIVE from st so the doctor's own edits show in the summary.
+  function askCurrent(key) {
+    var path = window.INSULIN_EXTRACT.PATH[key]; if (!path) return "not set";
+    var v = rawGet(path);
+    if (key === "pedStage") return v ? ({ prepubertal: "Prepubertal", newlydx: "Newly diagnosed", pubertal: "Pubertal" }[v] || v) : "not set";
+    if (typeof v === "boolean") return v ? "yes" : "no";
+    if (v == null || v === "" || !isFinite(Number(v))) return "not set";
+    return String(v) + (ASK_UNIT[key] ? " " + ASK_UNIT[key] : "");
+  }
+
+  var CORR_SRC_LABEL = { isf: "correction factor stated", tdd: "correction factor from the usual total daily dose", estimate: "first dose, correction factor estimated" };
+
+  /* The review card. Replaces the result while st.askPending, so the doctor reads WHAT MAIK FILLED IN
+   * before any number exists on screen. */
+  function askReviewHTML() {
+    var E = window.INSULIN_EXTRACT, plan = st.askPlan || { set: [], questions: [], rationale: "", route: "" };
+    var unresolved = askUnresolved(), i;
+
+    var rows = plan.set.map(function (f) {
+      return '<div class="ins-ask-row"><span class="k">' + esc(E.labelFor(f.key)) + '</span>' +
+        '<span class="v">' + esc(askCurrent(f.key)) + '</span>' +
+        '<span class="s">' + (f.from ? 'you said "' + esc(f.from) + '"' : "read from your text") + '</span></div>';
+    }).join("");
+
+    // Everything MaiK could not read. Each one is blank in the form above and blocks Calculate.
+    var needRows = (st.askMissing || []).map(function (k) {
+      var done = askFilled(k);
+      return '<div class="ins-ask-row need' + (done ? " done" : "") + '"><span class="k">' + esc(E.labelFor(k)) + '</span>' +
+        '<span class="v">' + esc(askCurrent(k)) + '</span>' +
+        '<span class="s">' + (done ? "you filled this in" : esc(E.askFor(k))) + '</span></div>';
+    }).join("");
+
+    var qs = (plan.questions || []).filter(function (q) { return !!q; });
+    var qHTML = qs.length ? '<ul class="ins-ask-q">' + qs.map(function (q) { return '<li>' + esc(q) + '</li>'; }).join("") + '</ul>' : "";
+
+    var routeHTML = plan.route ? '<div class="ins-warn caution"><span class="ins-warn-band">' + SVG_EXC + '</span>' +
+      '<div class="ins-warn-body"><span class="ins-warn-sig">Caution</span><span class="wt">' +
+      (plan.route === "dka" ? "This reads like DKA or HHS" : "This reads like a paediatric patient") + '</span>' +
+      '<span class="bd">' + (plan.route === "dka"
+        ? "A routine subcutaneous correction is not appropriate in DKA or HHS. Use your institutional DKA protocol."
+        : "Use the weight-based paediatric pathway, specialist-guided.") + '</span></div></div>' : "";
+
+    var modeLine = modeLabel(st.mode) + (st.mode === "correction" && CORR_SRC_LABEL[st.corrSource] ? " (" + CORR_SRC_LABEL[st.corrSource] + ")" : "");
+
+    return '<div class="ins-card ins-ask-rev">' +
+      '<div class="ins-card-t">' + ICON_AI + ' MaiK filled in the form</div>' +
+      '<div class="ins-ask-mode">' + esc(modeLine) + '</div>' +
+      (plan.rationale ? '<p class="ins-ask-rat">' + esc(plan.rationale) + '</p>' : "") +
+      routeHTML +
+      (rows ? '<div class="ins-ask-sec"><h4>What MaiK read</h4>' + rows + '</div>' : "") +
+      (needRows ? '<div class="ins-ask-sec need"><h4>MaiK could not read these. Fill them in.</h4>' + needRows + '</div>' : "") +
+      qHTML +
+      '<div class="ins-ask-note">Check every value against the patient. MaiK read your text, it did not see the patient. ' +
+        'No dose has been worked out yet.</div>' +
+      '<button class="ins-cta" data-ins="ask-calc"' + (unresolved.length ? ' disabled' : '') + '>' +
+        (unresolved.length ? "Fill in " + unresolved.length + " more to calculate" : "Calculate") + '</button>' +
+      '<button class="ins-ask-cancel" data-ins="ask-cancel">Discard and fill in myself</button>' +
+      '</div>';
+  }
+
   function compute() {
     var E = window.INSULIN_ENGINE, m = st.mode, G = toMgdl(st.glucose), T = toMgdl(st.target), ISF = toMgdl(st.isf);
     if (m === "meal") return E.mealBolus({ carbs: st.carbs, icr: st.icr, increment: st.increment, ctx: st.ctx });
@@ -852,6 +1054,16 @@
   }
 
   function render() {
+    // Ask MaiK HOLDS THE RESULT. This calculator otherwise recomputes on every keystroke, so a
+    // pre-filled form would paint a dose the instant MaiK filled it - the "the AI said N units"
+    // failure the 2026-08-28 decision rejected. Nothing is computed at all until the doctor has read
+    // the review card and pressed Calculate. Their edits re-render the card (values shown live).
+    var pend = document.getElementById("insOut");
+    if (st.askPending && pend) {
+      st.acked = false; st.confirmed = false;
+      pend.innerHTML = askReviewHTML();
+      return;
+    }
     st.acked = false; st.confirmed = false;
     var res = compute(), warns = safety(res), hasCritical = false, i;
     var selIns = bolusInsulin();
@@ -1040,11 +1252,29 @@
       else if (panel) { panel.hidden = false; if (!reduced()) withMotion(function (M) { try { M.animate(panel, { opacity: [0, 1], y: [-6, 0] }, { duration: 0.28, easing: [0.2, 0.7, 0.2, 1] }); } catch (e) {} }); }
       return;
     }
+    if (a === "ask-run") return askRun();
+    if (a === "ask-calc") {
+      // The doctor has read what MaiK filled in and is asking for the number. From here the flow is
+      // byte-for-byte the manual one: compute() -> safety() -> the same confirm gate. Nothing is
+      // auto-confirmed and nothing is logged; confirmDose() still needs its own explicit press.
+      if (t.disabled) return;
+      st.askPending = false; render(); return;
+    }
+    if (a === "ask-cancel") {
+      // Drop the extraction, keep the form. Deliberately NOT initState(): that would also clear a
+      // loaded patient profile the doctor chose themselves. Fields MaiK could not read stay blank,
+      // which is the right prompt for someone who just said they will fill it in by hand.
+      st.askPending = false; st.askPlan = null; st.askMissing = []; st.ask.text = ""; st.ask.error = "";
+      renderAsk(); renderInputs(); render(); return;
+    }
     if (a === "confirm") return confirmDose(t);
   }
   function onInput(e) {
     var t = e.target.closest("[data-ins]"); if (!t) return;
     var a = t.getAttribute("data-ins");
+    // Typed free text for Ask MaiK. Deliberately does NOT re-render (that would replace the textarea
+    // and lose the caret); the card is repainted when the doctor presses the button.
+    if (a === "ask-text") { st.ask.text = t.value; return; }
     if (a === "num") { var f = t.getAttribute("data-f"); stSet(f, parseFloat(t.value)); if (f === "target") syncTargetChips(); if (f === "iob") { st.iobNote = ""; var nEl = document.querySelector(".ins-iob-note"); if (nEl) nEl.remove(); } if (st.screen === "convert") renderConvert(); else render(); return; }
     if (a === "bolus") { st.bolus = t.value; SET.bolusInsulin = st.bolus; saveSettings(); renderInputs(); render(); return; }
     if (a === "set-num") { var k = t.getAttribute("data-k"); var v = parseFloat(t.value); if (isFinite(v)) { SET[k] = v; saveSettings(); } return; }

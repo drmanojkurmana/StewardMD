@@ -72,7 +72,34 @@ decides: every recommendation is stamped AI-assisted and requires an explicit co
   (deliberately deferred - need cited protocol + R1 sign-off, high harm); tighten `refs` to pinned
   citations (R1 item); expand the insulin dataset; on-device verification of the native build.
 
+## Ask MaiK (2026-08-29, `smd_insulin_ask` DEFAULT OFF)
+Free text -> MaiK PRE-FILLS the calculator; it never prints a dose. Decision + rationale:
+`vault/decisions/Decisions.md` 2026-08-28. Files: `insulin-extract.js` (`window.INSULIN_EXTRACT` -
+validator + provider seam, node-testable), `functions/api/ai/_insulin-extract.js` + the
+`insulin-extract` kind in `functions/api/ai/[[path]].js`, the `ask*` block in `insulin.js`,
+`.ins-ask*` in `insulin.css`.
+Tests: `test/insulin-extract.test.mjs` (34, in `npm test`) + `test/run-insulin-ask-ui.mjs` (34, headless).
+
+- **The load-bearing line is the HOLD.** This calculator has NO Calculate button - `render()` recomputes
+  on every keystroke. `st.askPending` short-circuits `render()` to paint the review card instead of
+  computing. Remove it and the feature silently becomes the inline answer the owner rejected.
+- **Required-but-unread inputs are BLANKED, not defaulted**, because `st` has a value for everything
+  and the engine will not catch it (see the IOB gotcha below). `inval()` renders a non-finite value as
+  an empty box; Calculate stays disabled until `askUnresolved()` is empty.
+- `pedStage` is REQUIRED for pediatric: `pediatricInit()` does `stageFactor[stage] || 0.5`, so an
+  unstated stage silently becomes prepubertal.
+- A gated workflow (DKA, paediatric) is never opened by a sentence - `askAllowedModes()` filters, and
+  an out-of-list mode comes back as a steer message.
+- Extraction is CLOUD (`SMD_AI.maik`). On-device is a `setProvider()` swap, not yet wired - the local
+  engine takes a KB package, not a prompt, and is PRO + pack gated. **Owner decision pending.**
+
 ## Gotchas
+- **`firstDoseCorrection()` IGNORES a plain `iob` argument** (it resolves IOB only from
+  `priorDose {units, minutesAgo}`, else states "0 u assumed" in its provenance), and `compute()` never
+  passes `st.iob` into it. But `firstDoseInputs()` renders an `iob` box in the **Known TDD** branch.
+  That box is DEAD: typing an IOB there changes nothing while reading as "stacking was accounted for".
+  Found 2026-08-29 while building Ask MaiK; NOT fixed (pre-existing, needs an owner call - wire it
+  through to `priorDose`, or drop the box). Ask MaiK deliberately does not fill or demand it there.
 - motion.dev (this build) mis-interpolates a `transform` **string** with a `"none"` keyframe and can
   settle at `scale(0)` (invisible). Use typed props (`scale`, `y`), never a transform string. See the
   `springIn()` fix in `insulin.js`.

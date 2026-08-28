@@ -1618,4 +1618,23 @@ reliable in practice.
 - A safety `interrupt` blocks the answer exactly as it does in the manual flow.
 - Never auto-confirm or auto-log a dose on the doctor's behalf.
 
-Not yet implemented — recorded so it can be built from a clean context.
+**Implemented 2026-08-29** behind `smd_insulin_ask` (DEFAULT OFF). `insulin-extract.js`
+(`window.INSULIN_EXTRACT`) is the validated seam: free text → `{mode, corrSource, set[], missing[],
+questions[], rationale}`, whitelisted to known modes/field keys with plausibility ranges, mirroring
+`maik-reasoning.js`. Server kind `insulin-extract` (`functions/api/ai/_insulin-extract.js`).
+
+Two implementation facts worth keeping:
+- **The result had to be HELD.** The calculator recomputes live on every keystroke, so a plain
+  pre-fill paints a dose in the same instant MaiK fills the fields — the exact inline-answer failure
+  rejected above. `st.askPending` makes `render()` paint the review card *instead of computing*;
+  Calculate releases it. This is the load-bearing line, and `test/run-insulin-ask-ui.mjs` pins it.
+- **The engine cannot enforce the no-defaulting rule, so the UI does.** `st` holds a value for
+  everything (glucose 180, isf 50, iob 2, weight 70), and `correctionDose()` treats a missing IOB as 0
+  and still returns a number. Every REQUIRED field MaiK did not read is therefore *blanked* and
+  Calculate stays disabled until a human types it.
+
+Extraction runs on the CLOUD model (`SMD_AI.maik`), matching MaiK Ask/Scribe/SURGX posture. On-device
+was considered — it keeps the scenario off the network — but `SMD_MAIK_LOCAL.answer()` takes a KB
+package rather than a prompt, is PRO-gated and needs a downloaded pack, so it cannot be relied on for
+strict JSON. `INSULIN_EXTRACT.setProvider()` is the one-line swap if the owner wants it later.
+**Owner: confirm cloud-vs-on-device.**
