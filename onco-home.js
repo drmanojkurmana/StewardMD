@@ -509,11 +509,25 @@
     // drugonco / home-dash) repaint inside this overlay and never background it.
     var OPENS_OVERLAY = { calc: 1, "calc-cat": 1, kb: 1, "staging-open": 1, "ctcae-open": 1, "iotox-open": 1, "recist-open": 1, "drug-formulary": 1, "drug-interactions": 1 };
     if (OPENS_OVERLAY[verb]) background(); else foreground();
+
+    /* Every one of these verbs used to read `try { MOD && MOD.fn && MOD.fn(arg); } catch (e2) {}` -
+     * and each had ALREADY called background(), dropping this screen to z-index 865. So when the
+     * target module was not loaded yet, or threw, the tap did nothing visible: no overlay appeared,
+     * no message, and the screen the doctor was looking at had just been pushed behind. That is the
+     * reported "nothing open on click" on the disease list. The happy path here is identical; the
+     * failure path brings Onco Home back to the front and says what is still loading, so a tap can
+     * never again be silently swallowed. */
+    function openOverlay(label, available, run) {
+      if (available) { try { run(); return true; } catch (e2) {} }
+      foreground();
+      try { G.toast && G.toast(label + " is still loading - try again in a moment."); } catch (e3) {}
+      return false;
+    }
     if (verb === "close") { close(); return; }
-    if (verb === "calc-cat") { try { G.MEDCALC && G.MEDCALC.openList && G.MEDCALC.openList("Oncology"); } catch (e2) {} return; }
-    if (verb === "calc") { try { G.MEDCALC && G.MEDCALC.open && G.MEDCALC.open(arg); } catch (e2) {} return; }
+    if (verb === "calc-cat") { openOverlay("Calculators", G.MEDCALC && G.MEDCALC.openList, function () { G.MEDCALC.openList("Oncology"); }); return; }
+    if (verb === "calc") { openOverlay("Calculators", G.MEDCALC && G.MEDCALC.open, function () { G.MEDCALC.open(arg); }); return; }
     if (verb === "kb-browse") { st.mode = (st.mode === "kb") ? null : "kb"; renderResults(); return; }
-    if (verb === "kb") { try { G.DX && G.DX.openRef && G.DX.openRef(arg); } catch (e2) {} return; }
+    if (verb === "kb") { openOverlay("The knowledge base", G.DX && G.DX.openRef, function () { G.DX.openRef(arg); }); return; }
     if (verb === "home-dash") { st.mode = null; renderResults(); return; }
     // Drug tile -> the in-overlay onco drug view, which offers BOTH "Interaction check"
     // (-> MEDDRUGS.openInteractions) and "Full formulary" (-> MEDDRUGS.openList). Search-result drug
@@ -521,17 +535,17 @@
     if (verb === "drug-onco") { st.mode = "drugonco"; renderResults(); return; }
     // Drug SEARCH result / quick action: open the real MEDDRUGS browse overlay (flag routes to the split view).
     if (verb === "drug-browse") { if (flag("smd_onco_drugview")) { st.mode = "drugonco"; renderResults(); } else { try { G.MEDDRUGS && G.MEDDRUGS.openList && G.MEDDRUGS.openList(); } catch (e2) {} } return; }
-    if (verb === "drug-formulary") { try { G.MEDDRUGS && G.MEDDRUGS.openList && G.MEDDRUGS.openList(); } catch (e2) {} return; }
-    if (verb === "drug-interactions") { try { G.MEDDRUGS && G.MEDDRUGS.openInteractions && G.MEDDRUGS.openInteractions(); } catch (e2) {} return; }
+    if (verb === "drug-formulary") { openOverlay("The drug formulary", G.MEDDRUGS && G.MEDDRUGS.openList, function () { G.MEDDRUGS.openList(); }); return; }
+    if (verb === "drug-interactions") { openOverlay("The interaction checker", G.MEDDRUGS && G.MEDDRUGS.openInteractions, function () { G.MEDDRUGS.openInteractions(); }); return; }
     if (verb === "protoref-open") { st.mode = "protoref"; renderResults(); return; }
     if (verb === "protodetail") { openProtoDetail(arg); return; }
     if (verb === "proto-calc") { st.calc = calcFromForm(); renderResults(); return; }
     if (verb === "proto-pdf") { protoPdf(); return; }
     if (verb === "proto-chart") { openProtocolContext(); return; }
-    if (verb === "staging-open") { try { G.SMD_ONCOSTAGING && G.SMD_ONCOSTAGING.openList && G.SMD_ONCOSTAGING.openList(); } catch (e2) {} return; }
-    if (verb === "ctcae-open") { try { G.SMD_ONCOCTCAE && G.SMD_ONCOCTCAE.openList && G.SMD_ONCOCTCAE.openList(); } catch (e2) {} return; }
-    if (verb === "iotox-open") { try { G.SMD_ONCOIOTOX && G.SMD_ONCOIOTOX.openList && G.SMD_ONCOIOTOX.openList(); } catch (e2) {} return; }
-    if (verb === "recist-open") { try { G.SMD_ONCORECIST && G.SMD_ONCORECIST.open && G.SMD_ONCORECIST.open(); } catch (e2) {} return; }
+    if (verb === "staging-open") { openOverlay("Staging", G.SMD_ONCOSTAGING && G.SMD_ONCOSTAGING.openList, function () { G.SMD_ONCOSTAGING.openList(); }); return; }
+    if (verb === "ctcae-open") { openOverlay("CTCAE grading", G.SMD_ONCOCTCAE && G.SMD_ONCOCTCAE.openList, function () { G.SMD_ONCOCTCAE.openList(); }); return; }
+    if (verb === "iotox-open") { openOverlay("Immunotherapy toxicity", G.SMD_ONCOIOTOX && G.SMD_ONCOIOTOX.openList, function () { G.SMD_ONCOIOTOX.openList(); }); return; }
+    if (verb === "recist-open") { openOverlay("RECIST", G.SMD_ONCORECIST && G.SMD_ONCORECIST.open, function () { G.SMD_ONCORECIST.open(); }); return; }
     if (verb === "protocol-open") { st.mode = "protoref"; renderResults(); return; }   // browse the library -> tap a protocol for its regimen/calc/PDF (no hospital needed)
   }
 

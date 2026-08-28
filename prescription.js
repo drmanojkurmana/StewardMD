@@ -478,17 +478,10 @@
   // ---- Voice-to-Rx: parse a spoken line like "amox 500 TDS 5 days" into a drug row. Brand->generic via
   // the Drug Index; frequency abbreviations + duration recognized. Best-effort; the doctor edits after. ----
   var RX_FREQ = { od: "OD", "once daily": "OD", "once a day": "OD", bd: "BD", "twice daily": "BD", "twice a day": "BD", "two times": "BD", tds: "TDS", tid: "TDS", "thrice": "TDS", "three times": "TDS", qid: "QID", "four times": "QID", hs: "HS", "at night": "HS", "bed time": "HS", bedtime: "HS", sos: "SOS", "as needed": "SOS", prn: "SOS", stat: "STAT" };
-  // Dictation plumbing. voice.js reports WHY it stopped; a doctor who taps Dictate and gets silence
-  // cannot tell a denied microphone from a broken button, so every code gets a plain sentence.
-  var RX_MIC_TITLE = "Dictate a drug, e.g. amox 500 TDS 5 days";
-  var RX_VOICE_ERR = {
-    "mic-denied": "Microphone is blocked - allow mic access for StewardMD, then try again.",
-    "no-voice-engine": "This device has no dictation engine available.",
-    "stt-unavailable": "On-device dictation is not available on this build.",
-    "clinical-unavailable": "Clinical dictation is not ready on this device.",
-    "transcription-failed": "Could not transcribe that - try again.",
-    "speech-error": "Dictation stopped - try again.",
-  };
+  // Dictation error copy used to live here, for a bespoke SMD_VOICE.listen() path that reported
+  // itself through a `title` tooltip nothing on a phone could show. That path is gone: Dictate now
+  // opens the shared SMD_VOICE.openDialog sheet, which already carries the permission/model/engine
+  // messages (and keeps them in ONE place instead of two drifting copies). See the #rxMic handler.
   function rxSay(m) { try { if (window.toast) window.toast(m); } catch (e) {} }
 
   function parseVoiceRx(text) {
@@ -563,31 +556,31 @@
       var s = sheet.querySelector("#rxTpl"); if (s) s.innerHTML = tplOptions();
     };
     // Voice-to-Rx: dictate a drug line ("amox 500 TDS 5 days"), parse it, add the row.
+    /* Dictate opens the SHARED dictation sheet (SMD_VOICE.openDialog) - the same one ICU, MaiK and
+     * ThoreX already use. The old path called SMD_VOICE.listen() directly and reported progress by
+     * writing to the button's `title`: a hover tooltip, invisible on a phone. `.rx-btn.on` had no CSS
+     * rule at all, so the "on" class did nothing either. A doctor tapping Dictate therefore saw
+     * NOTHING - no listening state, no transcript, no error. It could not have worked as written:
+     * on native the clinical Whisper engine never fires onPartial (WhisperEngine.swift declares the
+     * callback and never calls it), so the "live feedback" line was dead code.
+     *
+     * The shared sheet brings the recording animation, the elapsed timer and the model/permission
+     * error copy, and - the part that matters most for a PRESCRIPTION - it shows the transcript and
+     * lets the doctor CORRECT it before it is parsed into a drug row. */
     var _mic = sheet.querySelector("#rxMic");
     if (_mic) _mic.onclick = function () {
-      if (!(window.SMD_VOICE && SMD_VOICE.listen)) { rxSay("Voice not available on this device"); return; }
-      // Idle the button. voice.js has NO onEnd callback — a session ends by delivering onFinal OR
-      // onError, so BOTH must reset here. Passing `onEnd` (which is never called) left the mic stuck
-      // "on" after every successful dictation: the next tap only cancelled it, so Dictate looked dead.
-      function idle() { _mic.classList.remove("on"); _mic._sess = null; try { _mic.title = RX_MIC_TITLE; } catch (e) {} }
-      if (_mic._sess) { try { _mic._sess.stop(); } catch (e) {} idle(); return; }
-      _mic.classList.add("on");
-      try {
-        _mic._sess = SMD_VOICE.listen({
-          // Live feedback while speaking — without it the button gave no sign it was listening.
-          onPartial: function (t) { try { _mic.title = t ? ("Heard: " + t) : RX_MIC_TITLE; } catch (e) {} },
-          onFinal: function (txt) {
-            idle();
-            var p = parseVoiceRx(txt);
-            if (p && p.drug) { applyTemplate([p]); rxSay("Added: " + p.drug); return; }
-            // Silence here was indistinguishable from a broken button. Say what was heard.
-            var heard = String(txt || "").trim();
-            rxSay(heard ? ('Could not read a drug from "' + heard.slice(0, 40) + '"') : "Nothing was heard - try again.");
-          },
-          onError: function (code) { idle(); rxSay(RX_VOICE_ERR[code] || "Dictation stopped."); }
-        });
-        if (!_mic._sess) idle();     // listen() already reported the reason through onError
-      } catch (e) { idle(); rxSay("Could not start dictation."); }
+      var V = window.SMD_VOICE;
+      if (!(V && V.openDialog)) { rxSay("Voice not available on this device"); return; }
+      V.openDialog({
+        target: "text",
+        onText: function (txt) {
+          var p = parseVoiceRx(txt);
+          if (p && p.drug) { applyTemplate([p]); rxSay("Added: " + p.drug); return; }
+          // Silence here was indistinguishable from a broken button. Say what was heard.
+          var heard = String(txt || "").trim();
+          rxSay(heard ? ('Could not read a drug from "' + heard.slice(0, 40) + '"') : "Nothing was heard - try again.");
+        }
+      });
     };
     function bindDel() { sheet.querySelectorAll(".rx-del").forEach(function (b) { b.onclick = function () { var ln = b.closest(".rx-line"); if (ln) { ln.remove(); refreshSafety(); } }; }); }
   }
