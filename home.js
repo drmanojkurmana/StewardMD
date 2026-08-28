@@ -3936,7 +3936,10 @@
     function show(fi) { if (fi === shown) return; if (shown >= 0) groups[shown].style.display = "none"; groups[fi].style.display = "block"; shown = fi; }
     var last = performance.now();
     sched();
-    /* The greeting: he pauses on his way in, waves, and speaks. */
+    /* The greeting: he pauses on his way in, waves, and speaks. The bubble is a
+     * FOLLOWER: tick() re-anchors it centred above his head every frame (clamped to
+     * the stage, riding his jumps), so it stays visually attached while he moves. */
+    var sayBub = null;
     setTimeout(function () {
       if (_mkdState !== D) return;
       var first = false;
@@ -3944,7 +3947,12 @@
       var msg = first ? "Hi, I am MaiK, your medical AI assistant. Tap me any time."
                       : MAIK_DOC_SAY[Math.floor(Math.random() * MAIK_DOC_SAY.length)];
       setSt("wave", 1600);
-      maikDocFx(box, '<span class="mkdoc-say">' + msg + "</span>", D.x > W / 2 ? -168 : MAIK_DOC_W + 6, -14, 3800);
+      var d2 = document.createElement("div");
+      d2.className = "mkdoc-fx";
+      d2.innerHTML = '<span class="mkdoc-say">' + msg + "</span>";
+      box.appendChild(d2);
+      sayBub = d2;
+      setTimeout(function () { try { d2.remove(); } catch (e) {} if (sayBub === d2) sayBub = null; }, 4200);
       sched();
     }, 1400);
     function tick(now) {
@@ -3993,6 +4001,12 @@
       } else if (D.x > W + MAIK_DOC_W + 30 && D.dir === 1) {
         D.dir = -1;
       } else D.gone = 0;
+      // Keep the speech bubble glued above his head while he moves (size cached once).
+      if (sayBub && sayBub.isConnected) {
+        if (!sayBub._w) { sayBub._w = sayBub.offsetWidth || 130; sayBub._h = sayBub.offsetHeight || 34; }
+        sayBub.style.left = Math.max(4, Math.min(W - sayBub._w - 4, D.x + MAIK_DOC_W / 2 - sayBub._w / 2)).toFixed(0) + "px";
+        sayBub.style.top = (36 - MAIK_DOC_H - sayBub._h - 5 + y).toFixed(0) + "px";
+      }
       var a = MAIK_DOC_ANIM[D.state];
       show(a.f[Math.floor(now / 1000 * a.fps) % a.f.length]);
       var flip = D.dir === 1 ? -1 : 1;
@@ -4415,7 +4429,8 @@ body.v3-dark #maikSheet .maik-cmp-in{background:var(--mk-field);box-shadow:0 6px
 .mkdoc-heart{display:inline-block;animation:mkdocFloat 1.1s ease-out forwards}
 @keyframes mkdocPop{0%{transform:translateY(5px) scale(.6);opacity:0}60%{transform:translateY(-2px) scale(1.05);opacity:1}100%{transform:translateY(0) scale(1);opacity:1}}
 .mkdoc-conf{position:absolute;top:0;opacity:0;animation:mkdocConf 900ms cubic-bezier(.2,.6,.4,1) forwards}
-.mkdoc-say{display:inline-block;font:600 10px/1.35 'Inter';color:var(--mk-ink,#0f172a);background:var(--mk-bg,#fff);border:1px solid var(--mk-bd,#d5dde6);border-radius:10px;padding:7px 9px;max-width:170px;width:max-content;white-space:normal;box-shadow:0 4px 14px rgba(15,23,42,.14);animation:mkdocPop .24s ease-out forwards}
+.mkdoc-say{position:relative;display:inline-block;font:600 10px/1.35 'Inter';color:var(--mk-ink,#0f172a);background:var(--mk-bg,#fff);border:1px solid var(--mk-bd,#d5dde6);border-radius:10px;padding:7px 9px;max-width:170px;width:max-content;white-space:normal;box-shadow:0 4px 14px rgba(15,23,42,.14);animation:mkdocPop .24s ease-out forwards}
+.mkdoc-say::after{content:"";position:absolute;left:50%;bottom:-5px;margin-left:-5px;border:5px solid transparent;border-bottom:0;border-top:5px solid var(--mk-bg,#fff);filter:drop-shadow(0 1px 0 var(--mk-bd,#d5dde6))}
 @keyframes mkdocConf{0%{transform:translate(0,0) rotate(0deg);opacity:1}35%{transform:translate(calc(var(--cx)*.55),var(--cy)) rotate(140deg);opacity:1}100%{transform:translate(var(--cx),48px) rotate(320deg);opacity:0}}
 @keyframes mkdocFloat{0%{transform:translateY(0) scale(.7);opacity:0}15%{opacity:1}100%{transform:translateY(-42px) scale(1.15);opacity:0}}
 @keyframes mkdocEcg{to{stroke-dashoffset:0}}
