@@ -49,6 +49,23 @@ try {
   const say = await ev(`var s=document.querySelector(".mkdoc-say"); return s?s.textContent:"";`);
   ok(say.indexOf("MaiK") >= 0, "first open: he introduces himself — \"" + say + "\"");
   ok(await ev(`return localStorage.getItem("smd_maik_doc_hi");`) === "1", "and remembers he has met you");
+  // the bubble FOLLOWS him: each frame its left equals clamp(doctorCentre - bubbleWidth/2),
+  // so verify against that formula twice (he may be edge-clamped or mid-scene at any moment)
+  await sleep(1800);   // wave over, bubble still up
+  const follow = async () => await ev(`
+    var f=document.querySelector(".mkdoc-say"); if(!f) return null;
+    f=f.closest(".mkdoc-fx");
+    var cmp=document.querySelector(".maik-cmp"), W=cmp.clientWidth;
+    var d=__MAIK_TEST.docState(); var bw=f.offsetWidth;
+    var want=Math.max(4,Math.min(W-bw-4,d.x+${'33/2'}-bw/2));
+    return Math.round(Math.abs(parseFloat(f.style.left)-want));`);
+  const f1 = await follow(); await sleep(400); const f2 = await follow();
+  ok(f1 !== null && f1 <= 2 && f2 !== null && f2 <= 2, "the speech bubble tracks him frame by frame (err " + f1 + "px, " + f2 + "px)");
+  const gap = await ev(`
+    var b=document.querySelector(".mkdoc-say").closest(".mkdoc-fx").getBoundingClientRect();
+    var a=document.querySelector(".mkdoc-a").getBoundingClientRect();
+    return Math.round(a.top-b.bottom);`);
+  ok(gap >= 0 && gap < 16, "and sits just above his head (gap " + gap + "px)");
 
   // ── he TRAVELS right to left ──
   const s1 = await ev(`return __MAIK_TEST.docState();`);
