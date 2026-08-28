@@ -46,6 +46,10 @@
 
   position: fixed;
   inset: 0;
+  /* The guest bar is fixed to the top of the viewport, so padding the BODY never moved this overlay
+   * and the bar covered the module header and its close button. guest-timer.js publishes its
+   * measured height here; it resolves to 0px whenever no guest session is running. */
+  padding-top: var(--smd-guestbar-h, 0px);
   z-index: 1258;
   display: none;
   flex-direction: column;

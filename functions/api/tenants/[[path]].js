@@ -87,9 +87,27 @@ export async function onRequest(context) {
 
     // The admin must already have a StewardMD account, because ownership is keyed on the Firebase
     // uid. Naming the email is the difference between a fixable message and a mystery.
-    let uid = null;
-    try { uid = await lookupUidByEmail(env, email); } catch (e) { uid = null; }
-    if (!uid) return json({ error: "no_such_account", email }, 404);
+    // lookupUidByEmail resolves to { uid, email, name } - NOT a bare uid. Taking the object here
+    // made identity "fb:[object Object]", which would have silently created a college owned by
+    // nobody, with an admin who could never sign in to it.
+    let found = null;
+    let lookupFailure = "";
+    try { found = await lookupUidByEmail(env, email); }
+    catch (e) { found = null; lookupFailure = String((e && e.message) || e).slice(0, 140); }
+    /* An escape hatch, and a reason. This route has been returning no_such_account for accounts that
+     * demonstrably exist and are signed in, and lookupUidByEmail swallows its own failure (it
+     * returns null on a non-OK response), so the caller could not tell "no such user" from "the
+     * lookup itself broke". Report which, and accept an explicit uid so provisioning a college is
+     * not held hostage by a directory lookup - the admin console already knows the uid. */
+    const uid = (found && found.uid) || String(body.adminUid || "").trim();
+    if (!uid) {
+      return json({
+        error: "no_such_account", email,
+        reason: lookupFailure ? "lookup_threw" : "lookup_returned_nothing",
+        detail: lookupFailure || undefined,
+        hint: "If this account definitely exists, pass adminUid instead of adminEmail.",
+      }, 404);
+    }
     const identity = "fb:" + uid;
 
     // kind:"institution" is what makes this a PG college rather than an OPD clinic, and this

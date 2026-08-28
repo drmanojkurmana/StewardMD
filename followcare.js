@@ -151,7 +151,9 @@
     return [
       ".fc-ov{position:fixed;inset:0;z-index:9600;background:rgba(8,18,24,.5);backdrop-filter:blur(3px);display:flex;justify-content:center;align-items:flex-start;overflow:auto;padding:0}",
       ".fc-sheet{background:var(--panel,#fff);color:var(--ink,#14202b);width:100%;max-width:620px;min-height:100%;box-shadow:0 20px 60px -20px rgba(0,0,0,.5);display:flex;flex-direction:column}",
-      ".fc-hd{position:sticky;top:0;background:#0e6e63;color:#fff;padding:calc(14px + env(safe-area-inset-top)) 16px 14px;display:flex;align-items:center;gap:10px;z-index:2}",
+      // The guest bar is fixed to the viewport top and the sheet is a fixed overlay, so the bar sat on
+      // this header. guest-timer.js publishes its measured height; 0px when no guest is running.
+      ".fc-hd{position:sticky;top:var(--smd-guestbar-h,0px);margin-top:var(--smd-guestbar-h,0px);background:#0e6e63;color:#fff;padding:calc(14px + env(safe-area-inset-top)) 16px 14px;display:flex;align-items:center;gap:10px;z-index:2}",
       // The close control is the most-tapped thing on this overlay and it was 34x34 - under the 44x44
       // minimum, on a surface used one-handed on a ward round. The box grows; the header padding
       // already had room for it.

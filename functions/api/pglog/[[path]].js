@@ -28,6 +28,7 @@
  *   GET    /v/:code                            -> PUBLIC, PHI-free signature verification
  *   GET    /me?orgId=                          -> { role, resident, programme, rotations, caps }
  *   GET    /programmes?orgId=                  POST /programmes            PATCH /programmes/:id
+ *                                              DELETE /programmes/:id  (refused while enrolled)
  *   GET    /residents?orgId=&departmentId=...  POST /residents             PATCH /residents/:id
  *   GET    /rotations?residentId=              POST /rotations             PATCH /rotations/:id
  *   GET    /entries?residentId=&kind=&status=  POST /entries
@@ -271,13 +272,28 @@ export async function onRequest(context_) {
 
       const email = String(body.email || "").trim().toLowerCase();
       if (!email) return json({ error: "email_required" }, 400);
-      let uid = null;
-      try { uid = await lookupUidByEmail(env, email); } catch (e) { uid = null; }
+      // lookupUidByEmail resolves to { uid, email, name } - NOT a bare uid. Taking the object made
+      // identity "fb:[object Object]", so the enrolment returned 200 while writing a membership
+      // nobody could ever match: the resident would sign in and still be told they are not enrolled.
+      let found = null;
+      try { found = await lookupUidByEmail(env, email); } catch (e) { found = null; }
+      const uid = found && found.uid;
       // Say WHICH email failed: an Academic Cell typing twenty of them needs to know which one, and
       // "they have not signed in to StewardMD yet" is the usual cause, not a typo.
       if (!uid) return json({ error: "no_such_account", email }, 404);
 
       const identity = "fb:" + uid;
+      /* NOBODY RE-ROLES THEMSELVES HERE. _queue_roles.js deliberately withholds VERIFY/ASSESS/ATTEST
+       * from `admin` and `academic_cell` - "monitoring implementation is not signing a trainee's
+       * clinical record" - but both hold PGLOG_CONFIGURE, and pg_faculty and pg_hod each carry all
+       * three sign-off caps. setMembership() is an upsert on orgId__identity, so an Academic Cell
+       * could POST their OWN email with role:"pg_hod", overwrite their membership row, and walk away
+       * holding the signature powers the separation exists to deny them. Appointing OTHER people is
+       * the whole purpose of this console and stays allowed. */
+      if (M.sameActor(identity, ctx.actorUid)) {
+        return json({ error: "cannot_assign_self", role,
+          message: "You cannot change your own role here. Ask the institution's administrator." }, 403);
+      }
       await ORG.setMembership(env, orgId, identity, { role: role }, ctx.actorUid);
 
       // A resident is only usable once they are in a programme, so do both in one call rather than
@@ -294,12 +310,24 @@ export async function onRequest(context_) {
       if (method === "GET") {
         const ctx = await context(request, env, q("orgId"));
         if (!can(ctx.role, CAPS.PGLOG_VIEW_DEPT) && !can(ctx.role, CAPS.PGLOG_VIEW_OWN)) return json({ error: "forbidden" }, 403);
-        return json({ ok: true, programmes: await S.listProgrammes(env, q("orgId")) });
+        // ctx.orgId, not the raw parameter: context() resolves an SMD-XXXXXX code to the internal id,
+        // so querying the raw value authorised correctly and then returned an empty list.
+        return json({ ok: true, programmes: await S.listProgrammes(env, ctx.orgId) });
       }
       if (method === "POST") {
         const ctx = await context(request, env, body.orgId);
         await S.gate(env, ctx.actorUid, body.orgId, CAPS.PGLOG_CONFIGURE);
         return json({ ok: true, programme: await S.createProgramme(env, body.orgId, body, ctx.actorUid) });
+      }
+      /* Remove a programme created by mistake. Gated on CONFIGURE like every other structural change
+       * here, and gated AGAIN by the store, which refuses while anyone is enrolled - deleting a
+       * programme out from under a signed training record is the failure this is guarding. */
+      if (method === "DELETE" && id) {
+        const prog = await S.getProgramme(env, id);
+        if (!prog) return json({ error: "not_found" }, 404);
+        const ctx = await context(request, env, prog.orgId);
+        await S.gate(env, ctx.actorUid, prog.orgId, CAPS.PGLOG_CONFIGURE);
+        return json({ ok: true, ...(await S.deleteProgramme(env, id, ctx.actorUid)) });
       }
       if (method === "PATCH" && id) {
         const cur = await S.getProgramme(env, id);
@@ -313,8 +341,10 @@ export async function onRequest(context_) {
     /* ── residents ──────────────────────────────────────────────────────── */
     if (seg === "residents") {
       if (method === "GET") {
-        const orgId = q("orgId");
-        const ctx = await context(request, env, orgId);
+        // Resolve first, then query on the resolved id: context() accepts an SMD-XXXXXX code, and
+        // querying the raw parameter authorised fine and then returned nothing.
+        const ctx = await context(request, env, q("orgId"));
+        const orgId = ctx.orgId;
         if (!can(ctx.role, CAPS.PGLOG_VIEW_ASSIGNED) && !can(ctx.role, CAPS.PGLOG_VIEW_DEPT) && !can(ctx.role, CAPS.PGLOG_VIEW_INSTITUTION)) {
           return json({ error: "forbidden" }, 403);
         }
@@ -346,8 +376,27 @@ export async function onRequest(context_) {
         const ctx = await context(request, env, cur.orgId);
         // A resident may correct their own unit/contact detail; anything structural needs CONFIGURE.
         const own = M.sameActor(ctx.actorUid, cur.uid);
-        const structural = ["programmeId", "startDate", "endDate", "trainingYear", "guide", "coGuides", "active", "departmentId"];
+        /* `name` and `smdId` are STRUCTURAL, not contact detail. Both are printed by the public
+         * verification page (_pglog_public.js), and M.certificateContent digests residentId /
+         * programmeId / orgId - never the name. A resident could therefore rename themselves after
+         * their entries were signed and the QR would still report "valid" beside the new name and
+         * the signer's registration number. */
+        const structural = ["programmeId", "startDate", "endDate", "trainingYear", "guide", "coGuides",
+                            "active", "departmentId", "name", "smdId", "batch"];
         if (!own || structural.some((k) => k in body)) await S.gate(env, ctx.actorUid, cur.orgId, CAPS.PGLOG_CONFIGURE);
+        /* YOU MAY NOT NAME YOURSELF THIS RESIDENT'S GUIDE. Assigning the guide is CONFIGURE-gated,
+         * and academic_cell and admin both hold CONFIGURE - while canReadResident() grants a guide
+         * the "verifier" audience, which releases caseRef, diagnosis, remarks and reflection bodies.
+         * So the role documented as seeing aggregate only could hand itself full clinical detail on
+         * any trainee with a single PATCH. Someone else appoints a guide; that is what makes it an
+         * appointment. A head of department already reads that detail through their own role, so
+         * this costs them nothing. */
+        const namesSelf = M.sameActor(ctx.actorUid, body.guide) ||
+          (Array.isArray(body.coGuides) && body.coGuides.some((x) => M.sameActor(ctx.actorUid, x)));
+        if (namesSelf) {
+          return json({ error: "cannot_assign_self_as_guide",
+            message: "You cannot make yourself this resident's guide. Ask the head of department." }, 403);
+        }
         return json({ ok: true, resident: await S.updateResident(env, id, body, ctx.actorUid) });
       }
     }
@@ -631,7 +680,20 @@ export async function onRequest(context_) {
         const dl = await P.rateLimit(env, request, "dept:" + ctx.uid, 6, 60);
         if (!dl.ok) return json({ error: "rate_limited", message: "That view is still loading. Try again in a moment." },
           429, { "Retry-After": String(dl.retryAfter) });
-        const residents = await S.listResidents(env, orgId, { departmentId, programmeId: q("programmeId"), trainingYear: q("trainingYear") });
+        /* Apply the caller's RECORDED department scope, exactly as /residents does. This route was
+         * the outlier: an HoD scoped to one department could ask for another (or omit departmentId
+         * entirely) and receive every resident in the institution - names, smdIds, guides, activity
+         * counts and overdue authentications. Same bypass the /residents comment says was fixed. */
+        const deptScope = (ctx.member && ctx.member.scope && ctx.member.scope.departments) || [];
+        let scopedDept = departmentId;
+        if (deptScope.length && !can(ctx.role, CAPS.PGLOG_VIEW_INSTITUTION)) {
+          if (departmentId && deptScope.indexOf(departmentId) < 0) return json({ error: "forbidden" }, 403);
+          if (!departmentId && deptScope.length === 1) scopedDept = deptScope[0];
+        }
+        let residents = await S.listResidents(env, orgId, { departmentId: scopedDept, programmeId: q("programmeId"), trainingYear: q("trainingYear") });
+        if (deptScope.length && !can(ctx.role, CAPS.PGLOG_VIEW_INSTITUTION) && !scopedDept) {
+          residents = residents.filter((r) => !r.departmentId || deptScope.indexOf(r.departmentId) > -1);
+        }
         const today = M.isoDate(Date.now());
         // The Academic Cell's audience is aggregate: counts and completeness, never clinical detail.
         // Only the DEPARTMENTAL role gets the department view — `academic_cell` and `admin` hold the

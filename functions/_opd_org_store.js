@@ -128,7 +128,20 @@ export async function updateRoom(env, roomId, patch, actorId) {
 function memberId(orgId, identity) { return sanitize(orgId) + "__" + sanitize(identity); }
 export async function setMembership(env, orgId, identity, body, actorId) {
   const id = memberId(orgId, identity);
-  const f = M.membership({ id, orgId, identity, role: (body || {}).role, scope: (body || {}).scope, active: (body || {}).active !== false, createdAt: now() });
+  /* MERGE, do not overwrite. M.membership() fills an omitted scope with {departments:[],opds:[],
+   * rooms:[]}, and an EMPTY scope means whole-org (see withinScope in _opd_org.js). wUpdate's mask
+   * covers every key present, so a caller that sends no scope - /api/pglog/enrol never does -
+   * silently promoted an HoD scoped to one department into institution-wide access, and flipped
+   * `active` back to true. Re-enrolling someone to fix a typo must not widen what they can see. */
+  const prev = (await getMembership(env, orgId, identity)) || null;
+  const b = body || {};
+  const f = M.membership({
+    id, orgId, identity,
+    role: b.role,
+    scope: b.scope !== undefined ? b.scope : (prev && prev.scope),
+    active: b.active !== undefined ? b.active !== false : (prev ? prev.active !== false : true),
+    createdAt: (prev && prev.createdAt) || now(),
+  });
   await fsCommit(env, [wUpdate(env, "q_members/" + id, f)]);
   await audit(env, orgId, actorId, "member:set", identity + ":" + f.role); return f;
 }

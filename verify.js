@@ -357,6 +357,11 @@
           var g = window.google;
           if (g && g.accounts && g.accounts.id && g.accounts.id.disableAutoSelect) g.accounts.id.disableAutoSelect();
         } catch (e) {}
+        /* Drop the cached logbook FIRST. pglog's storage key is derived from the signed-in uid, so
+         * once stewardmd_account is gone the store can no longer find the record to delete - and
+         * store.clearAccount() had no callers anywhere, leaving a full cached dashboard (case
+         * references, diagnoses, entry titles) in device storage after sign-out. */
+        try { if (window.SMD_PGLOG_STORE && SMD_PGLOG_STORE.clearAccount) SMD_PGLOG_STORE.clearAccount(); } catch (e) {}
         try { localStorage.removeItem("stewardmd_account"); } catch (e) {}
         var a = auth();
         var p = (a && a.signOut) ? a.signOut() : Promise.resolve();

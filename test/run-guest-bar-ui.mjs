@@ -135,6 +135,17 @@ try {
   ok(await ev(`return document.getElementById("smdGuestBar") === null`) === true,
      "bar is gone after the session ends");
 
+  /* The bar is fixed to the viewport, so padding the BODY never moved a fixed overlay - it sat on
+   * top of the eLOGBook and FollowCare headers, covering their close buttons. The height is now
+   * published as a custom property those overlays offset by, and it must return to 0px on teardown
+   * or every overlay keeps a dead gap at the top forever. */
+  const gbVar = String(await ev(`return getComputedStyle(document.documentElement)
+       .getPropertyValue("--smd-guestbar-h").trim()`));
+  // Ending the session reloads the page, so the property is simply absent rather than 0px. Both
+  // mean the same thing to the overlays: no offset. What must never survive is a non-zero height.
+  ok(gbVar === "0px" || gbVar === "",
+     `the guest-bar height leaves no offset behind (got: ${JSON.stringify(gbVar)})`);
+
   console.log(fails ? `\n${fails} check(s) FAILED` : "\nall checks passed");
 } finally {
   try { ws && ws.close(); } catch {}
