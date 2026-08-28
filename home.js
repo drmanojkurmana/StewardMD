@@ -2778,7 +2778,7 @@
       }
       btn.textContent = opts.editLabel || (empty ? "Add" : "Edit");
     }
-    function offline(msg) {
+    function offline(msg, why) {
       ["regno", "hospital", "city", "phone", "degree", "speciality"].forEach(function (k) { setRow(k, "", { placeholder: msg, edit: false }); });
       // ONE note, ever. This used to append unconditionally, so any second call (the auth watcher
       // re-renders, and the .catch() below can fire after the !fdb branch already ran) stacked a
@@ -2788,7 +2788,9 @@
       note = document.createElement("div");
       note.className = "hv-pf-row";
       note.setAttribute("data-offnote", "1");
-      note.innerHTML = '<span class="hv-pf-k">&nbsp;</span><span class="hv-pf-v unset">Couldn\'t load your details. <button class="hv-pf-retry" type="button" data-retry>Retry</button></span>';
+      note.innerHTML = '<span class="hv-pf-k">&nbsp;</span><span class="hv-pf-v unset">' +
+        smdEsc(why || "Couldn't load your details.") +
+        ' <button class="hv-pf-retry" type="button" data-retry>Retry</button></span>';
       card.appendChild(note);
       var rb = note.querySelector("[data-retry]");
       if (rb) rb.addEventListener("click", function () { acctFillProfessional._bootTried = false; openAccount(); });
@@ -2829,7 +2831,24 @@
      * no way out. Bound the wait, then read the on-device cache before declaring it unreadable. */
     var settled = false;
     function once(fn) { return function (v) { if (settled) return; settled = true; try { fn(v); } catch (e) {} }; }
-    var onFail = function () { try { if (document.body.contains(card)) offline("Offline"); } catch (e) {} };
+    /* Why the read failed used to be THROWN AWAY - onFail ignored its argument - so a denied read and
+     * a genuinely offline device both rendered the same "Offline", and a screenshot could not tell
+     * them apart. That is why this bug kept coming back. Keep the code for the console (never on
+     * screen: an internal error string on a clinical display is the lesson from the OTA endpoint
+     * leak) and say the one thing the doctor can act on. */
+    var onFail = function (err) {
+      var code = String((err && (err.code || err.message)) || "");
+      try { console.warn("[profile] details read failed:", code || err); } catch (e) {}
+      // permission-denied / unauthenticated here means the request reached Google and was REFUSED -
+      // an auth or App Check problem, not a network one. Calling that "Offline" sends the user to
+      // check their wifi for a problem that has nothing to do with it.
+      var denied = /permission[-_ ]?denied|unauthenticated|app-?check/i.test(code);
+      try {
+        if (!document.body.contains(card)) return;
+        if (denied) offline("Unverified", "Signed in, but this device could not be verified. Sign out and back in, then retry.");
+        else offline("Offline", "Couldn't load your details.");
+      } catch (e) {}
+    };
     pref.get().then(once(onData), once(onFail));
     setTimeout(function () {
       if (settled || !document.body.contains(card)) return;

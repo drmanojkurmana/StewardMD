@@ -511,3 +511,24 @@ html.sgx-lock .abg { z-index: 1300; }
 #surgxRoot .sgx-bk-warn { font: 400 11.5px/1.5 var(--sgx-font, system-ui); opacity: .85; }
 #surgxRoot .sgx-bk-actions { display: flex; gap: 8px; }
 #surgxRoot .sgx-bk-actions .sgx-btn { flex: 1 1 0; }
+
+/* ── MaiK Evidence Review body ────────────────────────────────────────────────
+   The model answers in markdown. It used to render inside .sgx-pre (monospace,
+   pre-wrap), so a clinical summary read like a code dump with literal asterisks.
+   This is the same card surface, set as prose. See mdLite() in surgx-screens.js. */
+#surgxRoot .sgx-md {
+  font: 500 13.5px/1.65 var(--sgx-sans); color: var(--sgx-ink);
+  background: var(--sgx-surface-2); border: 1px solid var(--sgx-line);
+  border-radius: var(--sgx-r-ctl); padding: 13px 15px; margin: 0;
+  overflow-wrap: break-word;
+}
+#surgxRoot .sgx-md > :first-child { margin-top: 0; }
+#surgxRoot .sgx-md > :last-child { margin-bottom: 0; }
+#surgxRoot .sgx-md p { margin: 0 0 9px; }
+#surgxRoot .sgx-md strong { font-weight: 700; color: var(--sgx-ink); }
+#surgxRoot .sgx-md-h {
+  font: 700 12px var(--sgx-sans); letter-spacing: .04em; text-transform: uppercase;
+  color: var(--sgx-steel); margin: 14px 0 6px;
+}
+#surgxRoot .sgx-md-ul { margin: 0 0 9px; padding-left: 18px; }
+#surgxRoot .sgx-md-ul li { margin-bottom: 5px; }
