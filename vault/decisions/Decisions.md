@@ -868,6 +868,175 @@ deliberately NOT inserted, so nothing unverified travels into the printed docume
 parts were AI-drafted. It is stamped DRAFT and clinician-review-required either way, but the
 medico-legal answer is a product call, not an engineering one. Deliberately not decided here.
 
+## 2026-08-28 — Interstitial revamp is a flagged override layer, and the returning-user splash is personalised
+The three interstitials (boot splash `#smdBootSplash`, first-run intro poster `#introPoster`, landing
+splash `#splash`) all live inline in `index.html` — the poster's phase logic sits in the minified
+`app.js`, and the poster/landing CSS is inside the ~100 KB single-line `<style>` blob on line 30.
+Editing that blob in place would have been an unreviewable diff with no way back, so the revamp is an
+**additive override `<style>` layer scoped to `html.smd-splash-v2`**, appended in readable form just
+above the poster markup. Flag resolution copies the `rds-on` pattern set before first paint: default
+**ON**, `?splashv2=0` or `localStorage smd_splash_v2="0"` reverts. No markup, IDs or phase logic
+changed, so `app.js` is untouched and the fallback is exact.
+
+Scope of the visual change is deliberately narrow: composition, spacing, type hierarchy, micro-motion.
+The palette is unchanged (same teal `#3fc7b3` / `#0e6e63`, paper `#f6f7f5` and navy-teal gradients the
+originals used). Reduced-motion was previously honoured only on the boot splash; the layer now covers
+the poster and landing splash too.
+
+**The returning-user splash is personalised with the clinician's own profile photo.** `#smdBootSplash`
+is the only interstitial a returning user actually sees (the gate at the top of `index.html` hides
+`#introPoster` and `#splash` for them), so that is where "welcome back" belongs. It reads the SAME
+record the sidebar and profile sheet read — `localStorage "stewardmd_account"` (`.name`/`.email`/
+`.picture`, mirrored from the Firebase user by `account.js`) — because Firebase has not booted that
+early; no new avatar field was invented. Signed-in users only; guests and first-time users keep the
+brand tagline, and the poster stays entirely logo/brand-led. The photo is accepted only over `https:`
+and falls back to a monogram if it fails to load; nothing is written or transmitted. Test:
+`test/run-splash-ui.mjs` (CDP, 390x844, covers both flag states and the guest path).
+
+The layer sits on top of the same day's "broaden the splash from antibiotic-only to full platform"
+change and styles its module-pill strip too, tightened so the five pills read as one balanced row at
+390px instead of breaking 4 + 1.
+
+Also fixed there: `.ip-dev-maik-logo` carried `filter:invert(1)` over a white-on-transparent asset, so
+the credit wordmark rendered black on the dark poster. It now uses `brightness(0) invert(1)`, matching
+`.dev-studio-logo`.
+
+## 2026-08-28 - Interstitials adopt Direction C (gradient depth, glass cards, real brand assets)
+The owner was shown three design directions for the five interstitial screens and picked **Direction C**
+(modern app-native: gradient depth, glass cards, bold type). It is built as a **restyle of the existing
+`html.smd-splash-v2` override layer**, not a new mechanism: same flag, same default-ON resolution, same
+`?splashv2=0` / `localStorage smd_splash_v2="0"` revert, still zero markup / ID / `app.js` changes.
+
+The visual language, from the approved mockups:
+- a deep teal-to-navy radial gradient mesh with two soft off-edge glows (teal, amber), expressed as
+  extra `radial-gradient` layers in one `background` rather than blurred blob elements, so there is no
+  `filter:blur` compositing cost on device;
+- glass cards (`rgba(255,255,255,.06-.07)` fill, hairline border, `backdrop-filter:blur(10px)`, 18-26px
+  radius, soft elevation) for the AMR stats, the credit card, the case preview and the boot-splash foot;
+- bold tight-tracked display type (700-800, -.01 to -.02em), tinted pill chips (teal `#6fe0cf`, amber
+  `#f0c060` for the risk/de-escalation note), progress dots as rounded-rect pills with an elongated
+  active pill, and a teal glow shadow on the primary CTA only.
+
+Two structural notes worth keeping. `.ip-bg` animates the `background` **shorthand** via `ipBgShift`,
+and a keyframe beats a normal declaration, so the previous layer's `.ip-bg{background:...}` never
+actually applied; the Direction C rule sets `animation:none` first. Phase 2 and phase 3 are recomposed
+without touching markup: the AMR block flips from a 3-up grid to stacked rows by setting
+`grid-template-columns:1fr`, and phase 3 becomes one glass card by styling `#ipPhase3` itself and
+re-ordering its children with flex `order` (quote, then credit, then copyright).
+
+**Brand marks are the real assets, not drawn shapes.** The mockups used a placeholder shield-and-pulse
+SVG and a typographic "MaiK" because the canvas tool could not reach app assets. The shipped layer uses
+`/mark-white.png` for the app mark (phase 1 and the landing splash, swapped in via CSS `background` so
+the markup is untouched) and `/maik-logo-white.png` for the "a product of" / "developed by" credit,
+preserving the existing `.sbs-maik-light` / `.sbs-maik-dark` theme pairing in `.sbs-foot`. Only genuinely
+decorative shapes stay generated: the phase-1 pulse line (an inline SVG data URI) and the avatar's
+online-status dot.
+
+The boot splash keeps both themes: Direction C's gradient mesh on `.sbs-dark`, a light equivalent
+otherwise. The C5 avatar treatment (84px gradient avatar, status dot, translucent "Loading your
+workspace" pill) applies **only** in the personalised state, off the same `stewardmd_account` record as
+before; the guest and first-run paths are structurally unchanged. Reduced-motion coverage from the
+previous layer is retained and now also stills the loading pill. `sw.js` `CACHE` bumped to
+`...-splashv2c`. Test: `test/run-splash-ui.mjs`, extended to assert the Direction C treatment, that the
+real brand assets resolve 200 (not 404 placeholders), the dark boot splash, and reduced-motion.
+
+## 2026-08-28 — The interstitials get a display face (Bricolage Grotesque) and a hero mark
+Review of the Direction C interstitials: *"looks like created by generic vibe coding"*, *"make font
+better"*, *"I want StewardMD logo to look big and better"*. Direction C's foundations (gradient mesh,
+depth, palette, real brand assets) were kept; what read as templated was the type and the composition.
+
+**One self-hosted display face, not another weight of the UI sans.** `Bricolage Grotesque` (SIL OFL
+1.1) now does every brand and headline moment on the five interstitials; supporting copy stays on
+`var(--sans)`, so the two roles read as two voices. It was picked for having actual idiosyncrasy in the
+letterforms while staying clinical, and for its 200..800 weight axis, which is what carries the
+recurring device: **weight contrast on one line** ("Steward" at 300 against "MD" at 800; the AMR
+headline at 800 against its kicker at 200). Display sizes are set tight (-.045em) and small labels
+loose (.24em) so the hierarchy is optical rather than numeric.
+
+`@font-face` lives in `redesign-system.css` with the other faces, `font-display:block` (as Sacramento
+does) so the word-mark never flashes in a fallback, plus a `<link rel=preload>` in `index.html` so that
+block period is effectively zero. **Self-hosting is not optional here**: the interstitials paint before
+any network is guaranteed inside the Capacitor shell, so a runtime Google Fonts `<link>` would silently
+fall back to the system sans offline — exactly the failure that would undo the change invisibly.
+`assets/fonts/bricolage-grotesque.woff2` is the Latin subset trimmed to the characters these screens
+use with both axes kept, 48 KB (the same size as the bundled Inter). `scripts/build-www.sh` already
+copies `assets/fonts/*`, so it ships in the native bundle with no build change.
+
+**The mark is a hero, not an icon in a tile.** 152px on poster phase 1, 118px on the landing splash,
+126px on the boot splash, standing free with its own glow and drop-shadow. The rounded glass tile that
+used to box it in is gone — it was the single most template-looking element in the set. Note the glow
+goes only on `.sbs-mark` (a CSS mask, genuinely transparent); `/logo.png` is opaque to its edges, so a
+drop-shadow on `.sbs-logo` renders as a square halo around the artwork.
+
+**Composition.** The poster is left-aligned and top-weighted so phases 1-3 share one axis instead of
+being three centred slides, and phase 1 is dropped 58px below the optical centre (via `position`, since
+`.ip-phase` runs the ipRise transform) so the empty upper half reads as sky. The AMR figures are an open
+list hung off a teal rule rather than a third identical glass card; cards are now the exception (the
+credit, the case preview), which is what makes them read. Landing module pills became squared hairline
+chips with only the first filled.
+
+Gotcha worth keeping: **phase 3's quote `<br>` must stay.** The markup is `...the only thing<br>standing
+between...` with no space either side, so `br{display:none}` sets "thingstanding".
+
+Still presentation-only and inside `html.smd-splash-v2`: no markup, ID or logic changes, flag and
+`?splashv2=0` revert unchanged, reduced-motion still covered. `sw.js` `CACHE` and the
+`redesign-system.css` token bumped to `splashv2d`. `test/run-splash-ui.mjs` extended to assert the face
+genuinely LOADS (`document.fonts.check` on both ends of the axis, the loaded-font set, canvas metrics
+differing from the fallback stack, and the woff2 returning 200) alongside the hero sizes, the absent
+tile chrome and the weight contrast.
+
+## Interstitials: Apple-style liquid glass for every splash surface (2026-08-28)
+
+Owner review of the LIGHT-theme personalised boot splash on device: he circled the "Loading your
+workspace" pill and the "developed by MaiK" footer bar with "can we make this marked boxes liquid
+glass for all - it should look like apple liquid glass". Direction C's surfaces were
+"translucent fill + flat 1px border + blur(10px)", which on a near-white field renders as a flat
+white shape with an outline. On the dark screens it passed; on light it was the flattest thing in
+the set.
+
+**One material, six tokens.** `--lg-blur / --lg-blur-sm`, `--lg-fill(-d)`, `--lg-rim(-d)`,
+`--lg-inset(-d)`, `--lg-shadow(-d)`, `--lg-solid(-d)` are declared once on `html.smd-splash-v2` in
+the boot-splash `<style>` and consumed by the poster/landing layer further down (custom properties
+cross `<style>` boundaries, so the two layers stay separate but share one surface language). Every
+pill and card on the five screens is rebuilt from them: the loading pill, the developed-by bar,
+poster phase 3's credit card, the skip pill, the landing case card, the module chips and the CTA.
+
+What actually makes it read as Apple glass, rather than generic glassmorphism:
+- **refraction**: `blur(22px) saturate(180%)` (16px on small controls, so a 30px pill does not smear
+  the whole background), always with the `-webkit-` twin, since iOS renders these in WKWebView.
+- **specular edge as a 1px GRADIENT border**, not a solid one: the sheen fill is painted to
+  `padding-box` and a rim gradient to `border-box` in one `background` shorthand, so no
+  pseudo-element is needed (several of these surfaces already spend `::after` on content).
+- **layered inset highlights** top and bottom plus a soft ambient drop shadow, which on the light
+  theme is most of what makes the glass visible at all.
+- **something worth refracting**: the light boot splash's radial blobs were so faint the backdrop
+  was effectively flat white, so they were strengthened and two were added under the pill and the
+  foot bar. Light-theme copy darkened (`#4a6577` / `#54707f`) to stay readable on the brighter fill.
+- **the CTA stays tinted glass**, not clear: a near-solid teal gradient keeps the dark label legible
+  and keeps it reading as the one tappable thing; the glass shows up as rim, sheen and refraction.
+
+**Fallback is mandatory.** Each surface has a more opaque plain fill + solid hairline outside the
+`@supports ((-webkit-backdrop-filter:blur(1px)) or (backdrop-filter:blur(1px)))` block, so a WebView
+without backdrop-filter still gets a legible panel.
+
+**Gotcha found here:** `home.js` injects `body.ui-v2 .demo-card{border-radius:16px!important;
+border:...!important;box-shadow:...!important}` for the advanced app theme, and that sheet lands
+after `index.html`. It had already been flattening the landing case card whenever that theme was on.
+The interstitial is a splash surface, not an app card, so `html.smd-splash-v2 #splash .demo-card`
+now re-asserts its radius/border/shadow with `!important`. Scoped to that one card. This also made
+the harness flaky: the assertion passed or failed depending on whether the injected sheet had landed.
+
+Same commit, owner's second ask: the interstitials display the brand as **StewardMD**, never
+"StewardMD.in". Two visible spots, both plain copy in the poster markup: the `.ip-in` superscript on
+the phase 1 word-mark and the phase 3 copyright line. Functional uses of the domain (api endpoints,
+`mailto:Support@StewardMD.in`) are untouched.
+
+Still presentation-only inside `html.smd-splash-v2`: no layout, size, ID, data or flag changes, and
+`?splashv2=0` reverts everything. `sw.js` `CACHE` and the `redesign-system.css` token bumped to
+`splashv2e`. `test/run-splash-ui.mjs` grew a `glass()` helper asserting blur+saturate, a rim/sheen
+gradient and layered inset speculars on all seven surfaces in both themes, a source check that every
+`backdrop-filter` in the material ships with its `-webkit-` twin (Chromium drops the prefixed alias
+at parse time, so the CSSOM cannot prove it), and the two brand-text assertions.
 ## 2026-08-22 — OTA updates, Phase 1: rebuilding what was torn down, this time against the failure
 This exact system existed once — self-hosted OTA on Cloudflare (Worker + R2 + admin console),
 built 1 Aug 2026, deliberately torn down the SAME DAY. The retire commit is explicit:
