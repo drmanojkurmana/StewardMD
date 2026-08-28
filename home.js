@@ -3791,6 +3791,20 @@
     return "think";
   }
   function maikDocCue(kind) { try { if (_mkdCueFn) _mkdCueFn(kind); } catch (e) {} }
+  /* What he says when the sheet opens: an introduction the very first time,
+   * then one random rounds-thought per open. Playful, never clinical advice. */
+  var MAIK_DOC_SAY = [
+    "Rounding here all night. Ask me anything.",
+    "Thought for today: the best test is the one that changes management.",
+    "Coffee is not a fluid bolus, doctor.",
+    "I read the guidelines twice so you can read the patient.",
+    "Auscultate twice, order once.",
+    "Stay hydrated. You, not just the patient.",
+    "A good history beats a hundred tests.",
+    "Night shift? I will keep the references warm.",
+    "Treat the patient, not the number.",
+    "If in doubt, examine again."
+  ];
   function maikDocFx(box, html, dx, dy, life) {
     try {
       var el = document.createElement("div");
@@ -3922,6 +3936,17 @@
     function show(fi) { if (fi === shown) return; if (shown >= 0) groups[shown].style.display = "none"; groups[fi].style.display = "block"; shown = fi; }
     var last = performance.now();
     sched();
+    /* The greeting: he pauses on his way in, waves, and speaks. */
+    setTimeout(function () {
+      if (_mkdState !== D) return;
+      var first = false;
+      try { first = !localStorage.getItem("smd_maik_doc_hi"); if (first) localStorage.setItem("smd_maik_doc_hi", "1"); } catch (e) {}
+      var msg = first ? "Hi, I am MaiK, your medical AI assistant. Tap me any time."
+                      : MAIK_DOC_SAY[Math.floor(Math.random() * MAIK_DOC_SAY.length)];
+      setSt("wave", 1600);
+      maikDocFx(box, '<span class="mkdoc-say">' + msg + "</span>", D.x > W / 2 ? -168 : MAIK_DOC_W + 6, -14, 3800);
+      sched();
+    }, 1400);
     function tick(now) {
       if (!box.isConnected) { maikDocStop(); return; }
       // Screen locked / app occluded: let WebKit's hidden-document throttle idle us (R6 #1).
@@ -4390,6 +4415,7 @@ body.v3-dark #maikSheet .maik-cmp-in{background:var(--mk-field);box-shadow:0 6px
 .mkdoc-heart{display:inline-block;animation:mkdocFloat 1.1s ease-out forwards}
 @keyframes mkdocPop{0%{transform:translateY(5px) scale(.6);opacity:0}60%{transform:translateY(-2px) scale(1.05);opacity:1}100%{transform:translateY(0) scale(1);opacity:1}}
 .mkdoc-conf{position:absolute;top:0;opacity:0;animation:mkdocConf 900ms cubic-bezier(.2,.6,.4,1) forwards}
+.mkdoc-say{display:inline-block;font:600 10px/1.35 'Inter';color:var(--mk-ink,#0f172a);background:var(--mk-bg,#fff);border:1px solid var(--mk-bd,#d5dde6);border-radius:10px;padding:7px 9px;max-width:170px;width:max-content;white-space:normal;box-shadow:0 4px 14px rgba(15,23,42,.14);animation:mkdocPop .24s ease-out forwards}
 @keyframes mkdocConf{0%{transform:translate(0,0) rotate(0deg);opacity:1}35%{transform:translate(calc(var(--cx)*.55),var(--cy)) rotate(140deg);opacity:1}100%{transform:translate(var(--cx),48px) rotate(320deg);opacity:0}}
 @keyframes mkdocFloat{0%{transform:translateY(0) scale(.7);opacity:0}15%{opacity:1}100%{transform:translateY(-42px) scale(1.15);opacity:0}}
 @keyframes mkdocEcg{to{stroke-dashoffset:0}}

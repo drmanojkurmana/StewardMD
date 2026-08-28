@@ -44,6 +44,12 @@ try {
     "he is a doctor: coat, skin and stethoscope teal in the palette — got " + fills);
   ok(await ev(`return document.querySelectorAll(".mkdoc-svg > g").length;`) === 12, "twelve frames mounted (incl. clipboard writing)");
 
+  // ── first open: he introduces himself ──
+  await sleep(900);   // greeting fires 1.4s after mount; we are already ~1.4s in
+  const say = await ev(`var s=document.querySelector(".mkdoc-say"); return s?s.textContent:"";`);
+  ok(say.indexOf("MaiK") >= 0, "first open: he introduces himself — \"" + say + "\"");
+  ok(await ev(`return localStorage.getItem("smd_maik_doc_hi");`) === "1", "and remembers he has met you");
+
   // ── he TRAVELS right to left ──
   const s1 = await ev(`return __MAIK_TEST.docState();`);
   await sleep(1500);
