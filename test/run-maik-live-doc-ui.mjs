@@ -66,6 +66,15 @@ try {
     var d=__MAIK_TEST.docState(); return d&&d.state;`);
   ok(["startle", "wave"].indexOf(reacted) >= 0, "a tap on him gets a reaction — " + reacted);
 
+  // ── he ACTS OUT the question ──
+  const cls = await ev(`return [__MAIK_TEST.docClassify("patient in cardiac arrest now"),__MAIK_TEST.docClassify("chest pain with palpitations and ecg changes"),__MAIK_TEST.docClassify("dose of amoxicillin in renal failure"),__MAIK_TEST.docClassify("how do we treat dka")].join(",");`);
+  ok(cls === "urgent,cardiac,rx,think", "questions classify urgent/cardiac/rx/think — got " + cls);
+  ok(await ev(`__MAIK_TEST.docCue("cardiac"); var d=__MAIK_TEST.docState(); return d&&d.state;`) === "listen", "a cardiac question gets the stethoscope");
+  ok(await ev(`__MAIK_TEST.docCue("urgent"); var d=__MAIK_TEST.docState(); return d&&d.state;`) === "startle", "an emergency startles him");
+  await sleep(700);
+  ok(await ev(`var d=__MAIK_TEST.docState(); return d&&d.state;`) === "run", "then he sprints");
+  ok(await ev(`__MAIK_TEST.docCue("done"); var d=__MAIK_TEST.docState(); return d&&d.state;`) === "wave", "the answer landing gets a wave");
+
   // ── busy: a question in flight quickens him ──
   await ev(`__MAIK_TEST.buddyBusy(true); return 1;`); await sleep(100);
   ok(await ev(`return document.querySelector(".mkdoc").classList.contains("busy");`) === true, "a question in flight perks him up");

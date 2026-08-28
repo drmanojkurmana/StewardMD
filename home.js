@@ -3761,12 +3761,25 @@
     flip:    { f: [3], fps: 1 }
   };
   var MAIK_DOC_SC = 2.75, MAIK_DOC_W = 12 * MAIK_DOC_SC, MAIK_DOC_H = 16 * MAIK_DOC_SC;
-  var _mkdRaf = 0, _mkdState = null, _mkdOnRz = null;
+  var _mkdRaf = 0, _mkdState = null, _mkdOnRz = null, _mkdCueFn = null;
   function maikDocStop() {
     if (_mkdRaf) { cancelAnimationFrame(_mkdRaf); _mkdRaf = 0; }
     if (_mkdOnRz) { try { window.removeEventListener("resize", _mkdOnRz); } catch (e) {} _mkdOnRz = null; }
-    _mkdState = null;
+    _mkdState = null; _mkdCueFn = null;
   }
+  /* He listens to the QUESTION. A sent question is classified and he acts it out:
+   * an emergency startles him into a sprint, a cardiac question gets the stethoscope,
+   * a drug question gets a hop and an Rx note, anything else gets a thinking pause.
+   * When the answer lands he waves it in. Pure keyword routing, decorative only -
+   * it never touches what MaiK actually does with the question. */
+  function maikDocClassify(q) {
+    var s = String(q || "").toLowerCase();
+    if (/\b(arrest|code blue|anaphyla|shock|seizur|stroke|stemi|unrespons|apnoea|apnea|collaps|emergen|resus)/.test(s)) return "urgent";
+    if (/\b(heart|cardiac|chest pain|palpitat|ecg|ekg|murmur|arrhythm|atrial|tachycard|bradycard|angina)/.test(s)) return "cardiac";
+    if (/\b(dose|dosing|dosage|mg\b|drug|tablet|antibiotic|infusion|prescri)/.test(s)) return "rx";
+    return "think";
+  }
+  function maikDocCue(kind) { try { if (_mkdCueFn) _mkdCueFn(kind); } catch (e) {} }
   function maikDocFx(box, html, dx, dy, life) {
     try {
       var el = document.createElement("div");
@@ -3837,6 +3850,32 @@
       sched();
     }
     actor.addEventListener("pointerdown", function (e) { e.preventDefault(); e.stopPropagation(); react(); });
+    /* Question-aware acting. Each cue is a short scene built from the states he already has. */
+    _mkdCueFn = function (kind) {
+      if (kind === "urgent") {          // emergency wording: startled, then sprints to help
+        setSt("startle", 450);
+        maikDocFx(box, '<span class="mkdoc-bub">!</span>', MAIK_DOC_W * 0.5 - 6, -20, 700);
+        setTimeout(function () { if (_mkdState === D) setSt("run", 1500); }, 470);
+      } else if (kind === "cardiac") {  // cardiac wording: out comes the stethoscope
+        setSt("listen", 2200);
+      } else if (kind === "rx") {       // drug or dose: a hop and a prescription note
+        setSt("jump", JUMP_MS);
+        maikDocFx(box, '<span class="mkdoc-bub">Rx</span>', D.dir === -1 ? -30 : MAIK_DOC_W + 4, -14, 1300);
+      } else if (kind === "done") {     // the answer landed: wave it in, sometimes with hearts
+        setSt("wave", 1200);
+        if (Math.random() < 0.3) for (var i = 0; i < 3; i++) (function (i) {
+          setTimeout(function () {
+            if (_mkdState !== D) return;
+            maikDocFx(box, '<span class="mkdoc-heart"><svg width="10" height="10" viewBox="0 0 5 5" shape-rendering="crispEdges">' + maikPixG(MAIK_DOC_HEART, "h", MAIK_DOC_PAL) + "</svg></span>",
+              rnd(-4, MAIK_DOC_W - 6), rnd(-12, -2), 1500);
+          }, i * 120);
+        })(i);
+      } else {                          // anything else: a beat of thought
+        setSt("idle", 1200);
+        maikDocFx(box, '<span class="mkdoc-bub">?</span>', MAIK_DOC_W * 0.5 - 6, -20, 1100);
+      }
+      sched();
+    };
     var shown = -1;
     function show(fi) { if (fi === shown) return; if (shown >= 0) groups[shown].style.display = "none"; groups[fi].style.display = "block"; shown = fi; }
     var last = performance.now();
@@ -4531,8 +4570,10 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       try { var b = sheet && sheet.querySelector(".mkw, .mkdoc"); if (b) b.classList.toggle("busy", !!on); } catch (e) {}
     }
     function maikSetSendMode(busy) {
+      var was = _maikBusy;
       _maikBusy = busy;
       maikBuddyBusy(!!busy);
+      if (was && !busy) { try { maikDocCue("done"); } catch (e) {} }   // wave the answer in
       if (!sendBtn) return;
       sendBtn.disabled = false;                 // never disabled: while busy it is the STOP control
       sendBtn.classList.toggle("stopping", !!busy);
@@ -5625,6 +5666,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       var _sentThumb = "";
       try { if (window.__MAIK_IMAGES && window.__MAIK_IMAGES.attached().length) _sentThumb = window.__MAIK_IMAGES.thumb() || ""; } catch (e) {}
       _maikHist.push({ q: q });
+      try { maikDocCue(maikDocClassify(q)); } catch (e) {}   // the doctor acts out the question
       bubble("you", (_sentThumb ? '<img class="maik-sent-img" alt="Attached image" src="' + _sentThumb + '">' : "") + maikEscH(q));
       try { if (qEl) qEl.placeholder = "Ask a follow-up…"; } catch (e) {}
       // Research Mode (Evidence Review): clinician literature review, not the KB/answer pipeline.
@@ -5654,7 +5696,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       runClinical(q, q, depth, active, topic);
     }
     // test hook (dev/regression harnesses only — closures are otherwise unreachable)
-    try { window.__MAIK_TEST = { resolveFollowup: maikResolveFollowup, getTopic: function () { return _maikTopic; }, setTopic: function (t) { _maikTopic = t; }, refineHTML: maikRefineHTML, refineCompose: maikRefineCompose, refineKnown: maikRefineKnown, refineRemember: maikRefineRemember, refineForget: function () { _maikRefined = {}; }, doseLookup: maikDoseLookup, buddyBusy: maikBuddyBusy, botSVG: maikBotSVG, docState: function () { return _mkdState ? { x: _mkdState.x, dir: _mkdState.dir, state: _mkdState.state } : null; } }; } catch (e) {}
+    try { window.__MAIK_TEST = { resolveFollowup: maikResolveFollowup, getTopic: function () { return _maikTopic; }, setTopic: function (t) { _maikTopic = t; }, refineHTML: maikRefineHTML, refineCompose: maikRefineCompose, refineKnown: maikRefineKnown, refineRemember: maikRefineRemember, refineForget: function () { _maikRefined = {}; }, doseLookup: maikDoseLookup, buddyBusy: maikBuddyBusy, botSVG: maikBotSVG, docState: function () { return _mkdState ? { x: _mkdState.x, dir: _mkdState.dir, state: _mkdState.state } : null; }, docCue: maikDocCue, docClassify: maikDocClassify }; } catch (e) {}
     // restore the prior conversation verbatim (questions AND answers) for this session; else empty state
     if (_maikBodyHTML && /maik-b you/.test(_maikBodyHTML)) { body.innerHTML = _maikBodyHTML; scroll(); } else { emptyState(); }
     function maikNewThread() { maikSetActive(maikNewConvId()); _maikBodyHTML = ""; _maikTurns = []; _maikRefined = {}; _maikTopic = null; _maikCache = {}; _maikHist = []; try { localStorage.setItem(maikThreadKey(), ""); } catch (e) {} if (body) body.innerHTML = ""; emptyState(); try { maikCloseSide(); } catch (e) {} if (qEl) { qEl.value = ""; qEl.placeholder = "Ask a clinical question…"; qEl.focus(); } }
