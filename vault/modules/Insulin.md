@@ -267,3 +267,31 @@ Correction (`firstDoseCorrection()`), target auto-tightened to 100 mg/dL for pre
 the safety contract: implausible values refused, missing values asked for, local parse wins,
 model junk dropped, and Ask == the manual screen for the same case.
 Loaded in `index.html` + `insulin-demo.html`. Cache-bust: `insulin.js`/`insulin.css` -> `?v=ins15`.
+
+## 2026-08-29 - Clinical acceptance review (diabetologist pass)
+
+`test/insulin-scenarios.test.mjs` (38): whole BEDSIDE CASES rather than unit tests - hypo,
+DKA/HHS, paediatric DKA, GDM by trimester, dialysis, cirrhosis, stacking, T1 invariants,
+titration through a nocturnal low, overbasalization, steroid cap, drip-to-subcut overlap,
+perioperative SGLT2, feed interruption, weight-typo caps, mmol misread, discharge, sick day,
+and "no calculator produces an uncited number".
+
+### TWO REAL FINDINGS, both fixed
+1. **The hypoglycaemia critical said what to withhold, not what to DO.** It read only
+   "treat the low first". It now carries the 15-15 rule (15 g fast-acting carbohydrate, recheck
+   at 15 min, repeat until above 70), adds 25% dextrose IV / glucagon BELOW 54 mg/dL where the
+   patient may not be able to swallow, and explicitly says NOT to omit the next basal dose
+   (omitting basal after a hypo is how a type 1 rebounds into ketoacidosis) plus the causes to
+   look for. This is the module's most severe warning and it was clinically empty.
+2. **The correction scale had no stop conditions.** Its top band handed out 8 units at
+   "400 and above" with no ketone prompt - exactly where DKA hides, on a chart a nurse runs
+   without the calculator in front of them. The scale now carries, in its own notes: check
+   ketones above 300, STOP and assess for ketoacidosis above 400 or if unwell/vomiting/
+   breathless, and do not repeat a correction inside 4 hours (stacking).
+
+### One TEST defect found (not a module defect)
+A scenario asserted a tighter pregnancy target yields a bigger dose using the ROUNDED value; at
+glucose 200 both 120 and 100 round to 2 u (1.6 vs 2.0), so rounding hid the effect. Rewritten
+to assert the computed value plus a case where the difference survives rounding.
+
+252 insulin tests pass. Cache-bust: engine/safety/ask -> `?v=ins15`.

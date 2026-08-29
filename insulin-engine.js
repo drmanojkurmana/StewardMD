@@ -653,6 +653,10 @@
             ? "In stress or illness hyperglycaemia without known diabetes, a correction-only regimen IS acceptable for mild hyperglycaemia - this is the recognised exception. Add basal insulin if corrections are needed repeatedly or glucose stays above 180 mg/dL."
             : "A correction scale is SUPPLEMENTAL. Prolonged sliding-scale insulin WITHOUT basal is explicitly discouraged: if corrections are needed repeatedly, the basal or prandial dose is wrong.",
         "Give with a rapid-acting analogue before meals, or every 6 hours if the patient is not eating (every 4 hours only with a rapid analogue).",
+        // A scale hands a number to whoever is holding the chart, so the stop conditions have
+        // to travel WITH the table. The top band is exactly where DKA hides.
+        "CHECK KETONES if the glucose is above 300 mg/dL, and STOP the scale and assess for ketoacidosis above 400 mg/dL or if the patient is unwell, vomiting or breathless - repeating correction doses into an evolving DKA delays the diagnosis.",
+        "Do not repeat a correction inside 4 hours: the previous dose is still working, and stacking is the commonest cause of iatrogenic hypoglycaemia.",
         "Recheck the scale daily and rebuild it if the total daily requirement moves."
       ].concat(dx.notes || []),
       refs: ["ADA Standards of Care in Diabetes 2026, ch.16 (Diabetes Care in the Hospital): correction insulin before meals or every 4-6 h if not eating; prolonged correction-only regimens without basal are discouraged."]

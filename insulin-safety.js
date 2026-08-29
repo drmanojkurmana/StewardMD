@@ -20,8 +20,14 @@
         "Enter a current blood glucose before accepting a dose."));
 
     if (num(input.glucose) && input.glucose < 70)
+      // The module's most severe warning has to say what to DO, not only what to withhold.
+      // "Treat the low first" without the treatment is not useful to a resident at 3am.
       out.push(W("hypoglycemia", "critical", "Hypoglycemia",
-        "Glucose " + input.glucose + " mg/dL is low. Do not give a correction dose; treat the low first."));
+        "Glucose " + input.glucose + " mg/dL is low. Do NOT give a correction dose. Treat the low first: " +
+        "15 g of fast-acting carbohydrate (3 to 4 teaspoons of glucose or sugar, or 150 mL of juice), " +
+        "recheck in 15 minutes, and repeat until above 70 mg/dL - the 15-15 rule. " +
+        (input.glucose < 54 ? "Below 54 mg/dL this is severe: give 25 mL of 25% dextrose intravenously (or glucagon) if the patient cannot swallow safely, and stay with them. " : "") +
+        "Then give a meal or snack. Do NOT omit the next basal dose - look for the cause instead (a missed meal, a dose given twice, worsening renal function, alcohol, or a steroid being tapered)."));
 
     if (num(input.glucose) && input.glucose > 400)
       out.push(W("critical_hyper", "critical", "Very high glucose - rule out DKA/HHS",
