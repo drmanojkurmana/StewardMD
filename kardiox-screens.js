@@ -18,6 +18,73 @@
     return u;
   }
 
+  /* ── Atlas images: retry through the authenticated route ──────────────────────────────────────
+   * Reported as "ecg learn cases not displaying ecgs". The direct load above CANNOT succeed:
+   * functions/_middleware.js hard-404s every static asset on stewardmd.in so the web bundle cannot
+   * be scraped, and the atlas is deliberately not bundled into the app (scripts/build-www.sh), so
+   * the ECGs asked the one origin that refuses to serve them. Verified in production - the atlas
+   * 404s while /logo.png, which that middleware explicitly allowlists, returns 200.
+   *
+   * /api/ecg-atlas/<name> serves the same image to a SIGNED-IN doctor only, so the atlas stays
+   * protected from anonymous scraping. An <img> cannot send an Authorization header, so the image
+   * is fetched in JS and handed back as an object URL.
+   *
+   * Done as an ERROR fallback rather than by rewriting kxImg(), for three reasons: the three call
+   * sites and their markup stay untouched; e.target IS the exact <img>, so no marker attributes and
+   * no re-render pass are needed; and if these are ever served directly again (an allowlist, a
+   * preview deploy, SITE_ALLOW_WEB=1) the normal path simply works and this never runs. The cost is
+   * one 404 per image, and images are loading="lazy", so that is one or two per screen.
+   *
+   * arrayBuffer() rather than blob(): on native, window.fetch is the CapacitorHttp bridge, and
+   * arrayBuffer() is the primitive already proven there by the model-pack downloader
+   * (maik-models.js). Blobs are cached per session, so revisiting a lesson costs nothing. */
+  var _kxAtlas = {};        // filename -> object URL
+  var _kxAtlasWait = {};    // filename -> in-flight promise (never fetch the same image twice)
+  function kxAtlasName(src) {
+    var m = String(src || "").match(/\/assets\/kardiox-learn\/([A-Za-z0-9._-]+)$/);
+    return m ? m[1] : "";
+  }
+  function kxIdToken() {
+    try {
+      var u = window.SMD_AUTH && window.SMD_AUTH.currentUser;
+      if (u && u.getIdToken) return u.getIdToken();
+    } catch (e) {}
+    return Promise.resolve("");
+  }
+  function kxFetchAtlas(name) {
+    if (_kxAtlas[name]) return Promise.resolve(_kxAtlas[name]);
+    if (_kxAtlasWait[name]) return _kxAtlasWait[name];
+    var p = kxIdToken().then(function (tok) {
+      if (!tok) return "";                       // signed out: nothing to show, and nothing to leak
+      return fetch("https://stewardmd.in/api/ecg-atlas/" + encodeURIComponent(name), {
+        headers: { "Authorization": "Bearer " + tok }
+      }).then(function (r) {
+        if (!r || !r.ok) return null;
+        var ct = (r.headers && r.headers.get && r.headers.get("content-type")) || "image/jpeg";
+        return r.arrayBuffer().then(function (ab) {
+          return (ab && ab.byteLength) ? new Blob([ab], { type: ct }) : null;
+        });
+      }).then(function (b) {
+        if (!b) return "";
+        var url = URL.createObjectURL(b);
+        _kxAtlas[name] = url;
+        return url;
+      });
+    }).catch(function () { return ""; })
+      .then(function (u) { delete _kxAtlasWait[name]; return u; });
+    _kxAtlasWait[name] = p;
+    return p;
+  }
+  // Capture phase: an <img> error event does not bubble, so a document listener only sees it here.
+  document.addEventListener("error", function (e) {
+    var el = e && e.target;
+    if (!el || el.tagName !== "IMG" || el.getAttribute("data-kx-retried")) return;
+    var name = kxAtlasName(el.getAttribute("src"));
+    if (!name) return;
+    el.setAttribute("data-kx-retried", "1");     // one retry per element, never a loop
+    kxFetchAtlas(name).then(function (url) { if (url) el.src = url; });
+  }, true);
+
   /* landing */
   /* Screen 02 · Module landing.
    * host = #kxScroll; ctx = { providers, analysis, nav(id), close() }.

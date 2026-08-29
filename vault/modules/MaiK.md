@@ -74,6 +74,17 @@ physical iPhone: 126/126 requests streamed with multiple deltas.
   No image files, no library, ~3 KB. The dark-teal fill is deliberately quiet, so the walker carries
   a teal `drop-shadow` to stay legible at night — brighten the glow, never the fill. Everything is
   CSS keyframes and stops under `prefers-reduced-motion`. Pinned by `test/run-maik-busy-art-ui.mjs`.
+- **The Live Doctor (2026-08-29, flag `smd_maik_live_doc` default ON).** Replaces the stationary
+  resident with a 12×16 pixel physician (`MAIK_DOC_F`, own palette `MAIK_DOC_PAL`: white coat, skin,
+  teal stethoscope, red pocket cross) who WALKS the composer's top edge right to left on a rAF state
+  machine (`maikDocMount`): stunts every 2.6-5.2s (hop / backflip / sprint / auscultate with an ECG
+  trace + "NN bpm" bubble), quickens while busy, respawns off-screen right after exiting left. Tap
+  reactions (startle "!" / wave / hearts) fire ONLY on the doctor himself (`.mkdoc-a`, hit inset
+  ~44px); the strip `.mkdoc` is `pointer-events:none` so the thread and composer never lose a tap.
+  `"0"` (or `prefers-reduced-motion`) restores Stetho Buddy untouched. The rAF loop self-tears-down
+  when his node leaves the DOM (`box.isConnected`). Pinned by `test/run-maik-live-doc-ui.mjs`;
+  `run-maik-busy-art-ui.mjs` now sets the flag to "0" to keep pinning the legacy path. Designed
+  live in the "MaiK Pixel Doctor" artifact (claude.ai/code/artifact/272e8c77-...).
 - **The MaiK stylesheet is ONE JS template literal** — a backtick in a CSS comment ends it and takes
   the rest of `home.js` with it. Cost an hour of "why is the card gone".
 - **The router (`/refine`) is the biggest non-model cost** — 6.0-7.7s, and it runs BEFORE the
