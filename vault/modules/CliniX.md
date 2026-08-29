@@ -1,7 +1,7 @@
 ---
 tags: [module, education, respiratory]
-status: phases 1,2,3,5,6,7,8 built (2 diseases) (flag OFF, content ai_drafted pending R1 clinical sign-off)
-flag: smd_clinix (client, def:false, ?clinix=1) + smd_clinix_draft (def:false, NEVER ship on) + smd_clinix_tutor (Phase 2, def:false) + smd_clinix_uncleared_media (def:false, NEVER ship on) + smd_clinix_haptics (def:true)
+status: phases 1,2,3,5,6,7,8 built (2 diseases) (flag ON for testers since 2026-08-23, content ai_drafted pending R1 clinical sign-off)
+flag: smd_clinix (client, def:TRUE since 2026-08-23 owner decision, ?clinix=1) + smd_clinix_draft (def:TRUE for testers, flip to false before any public release) + smd_clinix_tutor (Phase 2, def:TRUE since 2026-08-26) + smd_clinix_uncleared_media (def:false, NEVER ship on) + smd_clinix_haptics (def:true)
 ---
 # CliniX
 
