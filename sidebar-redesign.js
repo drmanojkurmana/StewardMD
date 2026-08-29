@@ -105,8 +105,10 @@
     { id: "kardiox", title: "KardiQ X AI · ECG (Beta)", sub: "On-device 12-lead ECG interpretation · reload to apply", def: false, key: "smd_kardiox" },
     { id: "thorex", title: "ThoreX AI · Chest X-ray (Beta)", sub: "On-device chest X-ray interpretation · reload to apply", def: false, key: "smd_thorex" },
     { id: "sknx", title: "SknX AI · Dermatology (Beta)", sub: "Skin lesion / rash analysis · reload to apply", def: false, key: "smd_sknx" },
-    { id: "clinix", title: "CliniX · Clinical learning (Beta)", sub: "Bedside skills for students · reload to apply", def: false, key: "smd_clinix" },
-    { id: "clinixtutor", title: "MaiK Examiner (Beta)", sub: "AI review inside CliniX Viva, only when the free keyword grade can't judge it", def: false, key: "smd_clinix_tutor" },
+    // def matches clinix-flags.js (both TRUE, owner decisions 2026-08-23/26); a false here only
+    // made this switch DISPLAY off while the module was actually on.
+    { id: "clinix", title: "CliniX · Clinical learning (Beta)", sub: "Bedside skills for students · reload to apply", def: true, key: "smd_clinix" },
+    { id: "clinixtutor", title: "MaiK Examiner (Beta)", sub: "AI review inside CliniX Viva, only when the free keyword grade can't judge it", def: true, key: "smd_clinix_tutor" },
     { id: "surgx", title: "SURGX · Surgical Intelligence (Beta)", sub: "Notes, protocols, procedures, evidence, cases · reload to apply", def: true, key: "smd_surgx" },
     { id: "surgxdraft", title: "SURGX draft content", sub: "Show surgical content that is not yet clinician-approved. Turn OFF before any non-tester release", def: true, key: "smd_surgx_draft" }
   ];

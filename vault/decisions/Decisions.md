@@ -1590,6 +1590,88 @@ every report's "verified entries carrying the signer's registration" count was r
 assertion was wrong, not the code — so it now tests **module uniformity and squareness**, which is
 what actually decides whether a scanner can read it, and is zoom-independent.
 
+## 2026-08-28 — The boot splash is a SEQUENCE: the classic splash first, the personalised one second
+Owner feedback from a real device, in strong terms: the v2 layer had *replaced* the classic boot
+splash, and the classic one is not negotiable. The composition he wants on open is the original:
+light field, the interlocked mark, the two-tone "Steward**MD**" wordmark, "Built by clinicians, for
+clinicians", the thin progress bar, and the "DEVELOPED BY [MaiK]" foot, in **both** the light and the
+dark variant. What the v2 layer built is not rejected; it is **misplaced in time**. It should come
+*after*.
+
+**So `#smdBootSplash` now has two phases inside the same element.**
+- **Phase 1 (default, no class):** the classic CSS, untouched. Every v2 rule that changes composition
+  (126px mark, the display-face lock-up, the "Loading your workspace" glass pill in place of the
+  progress bar, the full-width row foot, the `.sbs-personal` hiding of the wordmark and tagline) is
+  now scoped to `#smdBootSplash.smd-boot-phase2`. The single carry-over is the **liquid-glass
+  material on the developed-by bar**, which the owner had explicitly asked for: material only, the
+  classic stacked composition and the 53px MaiK logo are kept.
+- **Phase 2 (`.smd-boot-phase2`):** the personalised "welcome back" screen, added by the existing
+  inline personalisation script after a **900ms beat** plus a **220ms crossfade** (opacity on
+  `.sbs-center` / `.sbs-foot`; instant swap under `prefers-reduced-motion`).
+
+**It cannot delay boot.** The beat is a bare `setTimeout` that no-ops if the splash is already fading
+(`.sbs-hide`) or detached, so a fast boot goes straight to the app exactly as before — the phase is
+skipped, never waited on. The splash's own `MIN`/`CAP` hold logic is untouched.
+
+**Only signed-in returning clinicians reach phase 2.** The beat is scheduled inside the
+personalisation block, which already returns early for guests and first-run users — so they keep the
+classic splash for the whole boot, and their "what you created" arrives as the intro poster and
+landing splash that follow. That is also why the phase-2 field is painted on a `#smdBootSplash::before`
+overlay rather than swapped into `background`: a background-image swap cannot crossfade, an overlay's
+opacity can, and phase 1 then keeps the genuinely original white / dark-teal field.
+
+Same flag, same default-ON resolution, `?splashv2=0` still drops the whole layer. `sw.js` CACHE
+`...-splashv2e` → `...-splashv2f`. Test: `test/run-splash-ui.mjs` now asserts the classic phase FIRST
+in both themes (107px mark, two-tone 30px/800 wordmark, the tagline, the 132x3 progress bar, the
+stacked foot, no loading-pill copy, the hello row not yet shown), then the transition into phase 2,
+and that a guest never enters phase 2 at all.
+
+**The general lesson, worth more than the fix.** A redesign layer that improves a screen can still be
+a deletion from the owner's side if it removes the moment he recognises the product by. Brand-recall
+surfaces are not styling surfaces. When there is something new to show, prefer adding a *phase*
+over overwriting the existing one.
+
+## 2026-08-28 — Phase 2 is a stop, not a second loading screen: the Open Workspace button gates boot
+Follow-up owner feedback on the two-phase boot splash: "WHY TWO LOADING SCREENS FOR WHO LOGGED IN."
+He is right, and the diagnosis is sharper than the complaint. Phase 1 and phase 2 were both passive
+waits, so the sequence read as the same dead time twice. A screen only earns its place if the user
+does something on it.
+
+**So phase 2's pill became the action.** The "Loading your workspace" pill is now a real
+`<button id="sbsGo">Open Workspace</button>`, carrying the same tinted-glass primary treatment as
+the landing CTA, and the splash **holds** on the welcome-back screen until the clinician taps. On
+tap: reveal at once if boot has finished, otherwise the button flips to "Opening..." (reusing the
+existing `sbsGlow`) and the reveal happens the moment boot is ready.
+
+**Fail-open is the whole design, because this is a clinical app.** A clinician stuck behind a splash
+is not a cosmetic bug. Four independent ways out:
+- The hold arms only after the button is **in the DOM, measured at a real 44px+ tap target, and its
+  listener attached**. Any throw or bad measurement and `.sbs-gate` never lands, so phase 2 keeps
+  today's passive pill and auto-hides. This is why the pill/button swap is keyed on `.sbs-gate`
+  rather than on phase 2 itself: the CSS cannot show a button the JS did not successfully wire.
+- A **20s safety valve** opens it for them if they set the phone down.
+- The hide loop **re-checks that deadline itself** (`gateHeld()` compares against `gate.armed`), so a
+  dropped or throttled timer cannot strand anyone. Anything unexpected reads as "not held".
+- `?splashv2=0` and guests never reach the arming code at all (the personalisation block already
+  returned early), so both keep the exact pre-existing auto-hide.
+
+**The gate deliberately suppresses `CAP` (15s) while held.** A visible button the user can press is a
+better failure mode than a screen that vanishes under them, and the gate's own 20s deadline bounds
+the wait regardless, so the true worst case is ~21s from boot rather than unbounded.
+
+**No `app.js` change and no fork of the hide logic.** The splash's `MIN`/`CAP` loop was extended in
+place with one `gateHeld()` check plus a `window.__smdBootGateOpened` hook for an immediate reveal on
+tap; the gate object is published by the splash-v2 script that already owns personalisation. The
+button is **static markup kept `hidden`**, the same pattern `.sbs-hello` uses, so the flag-off path
+stays byte-exact.
+
+`sw.js` CACHE `...-splashv2g` → `...-splashv2h`. Test: `test/run-splash-ui.mjs` asserts the button
+renders as a `<button>` with the right label at a 44px+ target in both themes, that the splash holds
+**under the exact `ready()` condition that would otherwise hide it** (the harness forces a visible
+`#accountGate`, which is the proof: staying up merely for a while would prove nothing), that the tap
+releases and reveals, that a mid-boot tap yields "Opening...", and that guests and `?splashv2=0` are
+neither gated nor shown the button and still auto-hide.
+
 ## 2026-08-28 — Ask MaiK inside the insulin calculator: MaiK fills the form, it does not answer the dose
 
 **Decision (owner, "B").** A doctor describes the situation in free text ("patient on 16 units
