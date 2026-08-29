@@ -130,6 +130,15 @@ try {
   `);
   okv(pinOk, "pin", "PIN setup flow (enter 1234, confirm 1234) sets method to \"pin\"");
   okv(await ev(`return window.SMD_APPLOCK.required();`), true, "required() is true once a PIN is configured and the flag is on");
+  // REGRESSION: required() used to also check flagOn(), so a device app (no ?applock URL param
+  // ever reachable) that configured a PIN via Manage would never actually be gated — "set a PIN,
+  // restart, never asked for it". The flag must gate only the automatic first-run prompt.
+  await ev(`localStorage.removeItem("smd_applock"); return 1;`);
+  await call("Page.navigate", { url: BASE });   // no ?applock param this time — the real device shape
+  await sleep(1500);
+  okv(await ev(`return window.SMD_APPLOCK.isOn();`), false, "flag is off again (no URL param, localStorage cleared)");
+  okv(await ev(`return window.SMD_APPLOCK.method();`), "pin", "the PIN is still there (device-local, not flag-gated)");
+  okv(await ev(`return window.SMD_APPLOCK.required();`), true, "required() stays true with the flag OFF once a PIN is configured — this is the actual bug report");
 
   // reload (fresh page = fresh _unlockedThisBoot) then verify wrong vs right PIN via the unlock screen
   await call("Page.navigate", { url: BASE + "?applock=1" });

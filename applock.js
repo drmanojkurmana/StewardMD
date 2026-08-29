@@ -142,23 +142,32 @@
   function injectCSS() {
     if (_cssInjected) return; _cssInjected = true;
     var css = "" +
-      "#smdApplock{position:fixed;inset:0;z-index:2147483000;display:flex;align-items:center;justify-content:center;padding:24px;background:rgba(13,27,38,.55);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);font-family:var(--sans,-apple-system,system-ui,sans-serif)}" +
-      "#smdApplock .smdal-card{width:100%;max-width:360px;background:var(--panel,#fff);color:var(--ink,#14202b);border-radius:20px;padding:28px 24px 24px;box-shadow:0 20px 60px rgba(0,0,0,.35);text-align:center}" +
+      "#smdApplock{position:fixed;inset:0;z-index:2147483000;display:flex;align-items:center;justify-content:center;padding:24px;background:rgba(13,27,38,.55);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);font-family:var(--sans,-apple-system,system-ui,sans-serif);animation:smdalScrim .25s ease both}" +
+      "#smdApplock .smdal-card{width:100%;max-width:360px;background:var(--panel,#fff);color:var(--ink,#14202b);border-radius:20px;padding:28px 24px 24px;box-shadow:0 20px 60px rgba(0,0,0,.35);text-align:center;animation:smdalPop .32s cubic-bezier(.2,.8,.2,1) both}" +
       "#smdApplock .smdal-h{font-size:19px;font-weight:800;letter-spacing:-.01em;margin-bottom:6px}" +
       "#smdApplock .smdal-sub{font-size:13.5px;line-height:1.4;color:var(--slate,#5a7184);margin-bottom:18px}" +
       "#smdApplock .smdal-opts{display:flex;flex-direction:column;gap:10px}" +
-      "#smdApplock .smdal-opt{display:flex;align-items:center;gap:12px;text-align:left;width:100%;padding:13px 14px;border:1.5px solid var(--line,#d7dee3);border-radius:14px;background:var(--paper,#f6f7f5);cursor:pointer;font:inherit;color:inherit}" +
+      "#smdApplock .smdal-opt{display:flex;align-items:center;gap:12px;text-align:left;width:100%;padding:13px 14px;border:1.5px solid var(--line,#d7dee3);border-radius:14px;background:var(--paper,#f6f7f5);cursor:pointer;font:inherit;color:inherit;animation:smdalRise .3s cubic-bezier(.2,.8,.2,1) both;animation-delay:calc(var(--i,0) * 60ms);transition:transform .15s ease,border-color .15s ease}" +
       "#smdApplock .smdal-opt:active{transform:scale(.98)}" +
-      "#smdApplock .smdal-opt-ico{font-size:20px;line-height:1;flex:0 0 auto}" +
+      "#smdApplock .smdal-opt:hover{border-color:var(--teal,#0e6e63)}" +
+      "#smdApplock .smdal-opt-ico{width:22px;height:22px;flex:0 0 auto;stroke:var(--teal,#0e6e63);stroke-width:1.75;fill:none;stroke-linecap:round;stroke-linejoin:round}" +
+      "#smdApplock .smdal-opt[data-m=\"none\"] .smdal-opt-ico{stroke:var(--amber,#92620a)}" +
       "#smdApplock .smdal-opt-t{display:block;font-weight:700;font-size:14.5px}" +
       "#smdApplock .smdal-opt-d{display:block;font-size:12px;color:var(--slate,#5a7184);margin-top:2px}" +
       "#smdApplock .smdal-pin-in{width:100%;box-sizing:border-box;font-size:26px;letter-spacing:.5em;text-align:center;padding:14px 10px 14px 20px;border:1.5px solid var(--line,#d7dee3);border-radius:12px;margin:6px 0 14px;background:var(--panel,#fff);color:var(--ink,#14202b)}" +
-      "#smdApplock .smdal-go{width:100%;min-height:48px;border:none;border-radius:999px;font:700 15px var(--sans,inherit);color:#fff;background:var(--teal,#0e6e63);cursor:pointer;margin-top:4px}" +
+      "#smdApplock .smdal-go{width:100%;min-height:48px;border:none;border-radius:999px;font:700 15px var(--sans,inherit);color:#fff;background:var(--teal,#0e6e63);cursor:pointer;margin-top:4px;transition:transform .12s ease}" +
+      "#smdApplock .smdal-go:active{transform:scale(.97)}" +
       "#smdApplock .smdal-go:disabled{opacity:.55;cursor:default}" +
       "#smdApplock .smdal-ghost{display:block;width:100%;margin-top:12px;background:none;border:none;font:600 13px var(--sans,inherit);color:var(--slate,#5a7184);cursor:pointer;padding:6px}" +
       "#smdApplock .smdal-err{min-height:18px;font-size:12.5px;color:var(--red,#ab1c2c);margin-top:2px}" +
+      "#smdApplock .smdal-err:not(:empty){animation:smdalShake .32s ease}" +
       "#smdApplock .smdal-chk{display:flex;align-items:flex-start;gap:8px;text-align:left;font-size:12.5px;color:var(--slate,#5a7184);margin:14px 0 4px}" +
       "#smdApplock .smdal-chk input{margin-top:2px}" +
+      "@keyframes smdalScrim{from{opacity:0}to{opacity:1}}" +
+      "@keyframes smdalPop{from{opacity:0;transform:scale(.94) translateY(6px)}to{opacity:1;transform:none}}" +
+      "@keyframes smdalRise{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}" +
+      "@keyframes smdalShake{15%,45%{transform:translateX(-4px)}30%,60%{transform:translateX(4px)}100%{transform:none}}" +
+      "@media (prefers-reduced-motion:reduce){#smdApplock,#smdApplock .smdal-card,#smdApplock .smdal-opt,#smdApplock .smdal-err:not(:empty){animation:none}}" +
       "body.dark #smdApplock .smdal-card{background:var(--panel,#132030)}";
     var st = document.createElement("style"); st.textContent = css; document.head.appendChild(st);
   }
@@ -182,18 +191,25 @@
     } catch (e) {}
   }
 
+  // Same shared line-icon catalog every other sheet in the app draws from (window.ICONS,
+  // home.js) — no emoji in security UI. Falls back to nothing if home.js hasn't loaded yet
+  // (load-order safety, same guard the catalog's own doc comment asks callers to use); the
+  // option still reads fine from its label/description alone.
+  function ico(name) { try { return (window.ICONS && window.ICONS.get) ? window.ICONS.get(name, "smdal-opt-ico") : ""; } catch (e) { return ""; } }
+
   function renderChooser() {
     var isInstitutional = institutional();
     var el = overlay();
     el.innerHTML = '<div class="smdal-card"><div class="smdal-h">Lock StewardMD</div><div class="smdal-sub">Checking this device…</div></div>'; // brief — canBiometric() is one native round-trip
     canBiometric().then(function (bioAvailable) {
+      var i = 0;
       var rows =
-        '<button class="smdal-opt" data-m="pin"><span class="smdal-opt-ico">🔢</span><span><span class="smdal-opt-t">Set a PIN</span><span class="smdal-opt-d">A 4–6 digit code, works on any device</span></span></button>';
+        '<button class="smdal-opt" data-m="pin" style="--i:' + (i++) + '">' + ico("keypad") + '<span><span class="smdal-opt-t">Set a PIN</span><span class="smdal-opt-d">A 4–6 digit code, works on any device</span></span></button>';
       if (bioAvailable) {
-        rows += '<button class="smdal-opt" data-m="biometric"><span class="smdal-opt-ico">🔒</span><span><span class="smdal-opt-t">Face ID / Touch ID</span><span class="smdal-opt-d">Fastest — no code to remember</span></span></button>';
+        rows += '<button class="smdal-opt" data-m="biometric" style="--i:' + (i++) + '">' + ico("fingerprint") + '<span><span class="smdal-opt-t">Face ID / Touch ID</span><span class="smdal-opt-d">Fastest — no code to remember</span></span></button>';
       }
       if (!isInstitutional) {
-        rows += '<button class="smdal-opt" data-m="none"><span class="smdal-opt-ico">⚠️</span><span><span class="smdal-opt-t">No lock — open automatically</span><span class="smdal-opt-d">Anyone with this phone opens your patient data. Personal devices only.</span></span></button>';
+        rows += '<button class="smdal-opt" data-m="none" style="--i:' + (i++) + '">' + ico("warn") + '<span><span class="smdal-opt-t">No lock — open automatically</span><span class="smdal-opt-d">Anyone with this phone opens your patient data. Personal devices only.</span></span></button>';
       }
       el.innerHTML =
         '<div class="smdal-card">' +
@@ -237,12 +253,21 @@
 
   function renderBiometricSetup() {
     var el = overlay();
-    el.innerHTML = '<div class="smdal-card"><div class="smdal-h">Confirm Face ID / Touch ID</div><div class="smdal-sub">Use your device biometric to finish setup.</div><div class="smdal-err" id="salBiomErr"></div><button class="smdal-ghost" data-back="1">Back</button></div>';
+    el.innerHTML = '<div class="smdal-card"><div class="smdal-h">Confirm Face ID / Touch ID</div><div class="smdal-sub">Use your device biometric to finish setup.</div><div class="smdal-err" id="salBiomErr"></div><button class="smdal-go" id="salBiomRetry" hidden>Try again</button><button class="smdal-ghost" data-back="1">Back</button></div>';
     el.querySelector("[data-back]").onclick = function () { renderChooser(); };
-    verifyBiometric("Set up biometric unlock for StewardMD").then(function (ok) {
-      if (ok) { lset(K_METHOD, "biometric"); closeOverlay(); try { if (window.toast) window.toast("Face ID / Touch ID enabled"); } catch (e) {} }
-      else { var e2 = el.querySelector("#salBiomErr"); if (e2) e2.textContent = "Couldn’t confirm — try again, or pick a different option."; }
-    });
+    function attempt() {
+      var retryBtn = el.querySelector("#salBiomRetry"); if (retryBtn) retryBtn.hidden = true;
+      var e2 = el.querySelector("#salBiomErr"); if (e2) e2.textContent = "";
+      verifyBiometric("Set up biometric unlock for StewardMD").then(function (ok) {
+        if (ok) { lset(K_METHOD, "biometric"); closeOverlay(); try { if (window.toast) window.toast("Face ID / Touch ID enabled"); } catch (e) {} return; }
+        // a single failed scan (blink, angle, cancel) is normal — a dead end here reads as
+        // "broken" rather than "try again", so a single failure gets a real retry button.
+        if (e2) e2.textContent = "Couldn’t confirm — try again, or pick a different option.";
+        if (retryBtn) retryBtn.hidden = false;
+      });
+    }
+    el.querySelector("#salBiomRetry").onclick = attempt;
+    attempt();
   }
 
   function renderNoLockConfirm() {
@@ -267,8 +292,12 @@
   // offers "Sign out" as a way out, matching this codebase's own fail-open boot-splash rule).
   // ============================================================================================
   var _unlockedThisBoot = false;
+  // flagOn() gates the AUTOMATIC first-run prompt (promptSetup()) and the Settings row's default
+  // visibility — not enforcement. Once a method is actually configured (first-run or Manage),
+  // it is enforced regardless of the flag: a clinician who explicitly set a PIN would rightly
+  // consider it a bug if disabling the rollout flag silently stopped locking their own app.
   function required() {
-    try { return flagOn() && (method() === "pin" || method() === "biometric") && !_unlockedThisBoot; }
+    try { return (method() === "pin" || method() === "biometric") && !_unlockedThisBoot; }
     catch (e) { return false; }
   }
 
