@@ -458,7 +458,11 @@ function finish(){if(done)return;
   }catch(e){}
   reallyFinish();
 }
-function tick(){if(done)return;var el=Date.now()-t0;
+/* MIN is 3s of the frame actually being SEEN: native-bridge stamps __smdSplashShownAt when it lifts
+   the native splash (which covers this frame until the page has painted), so the hold counts from
+   that moment, not from script start. On the web (no native splash) it is script start. */
+function shownAt(){try{return window.__smdSplashShownAt||t0;}catch(e){return t0;}}
+function tick(){if(done)return;var el=Date.now()-shownAt();
   if((ready()&&el>=MIN)||el>=CAP){finish();return;}setTimeout(tick,120);}
 tick();})();</script>
 <script>/* anti-flash theme boot — mirrors theme-sync.js resolution so the initial paint matches the OS (no flash) */
@@ -1913,7 +1917,7 @@ window.openExternal = function (u) {
   </div>
 </div>
 
-<script src="/native-bridge.js?v=nb-netrecover" defer></script>
+<script src="/native-bridge.js?v=nb-splashat" defer></script>
 <!-- Server-driven fleet controls: force-upgrade floor, maintenance mode, remote banners, feature flags.
      Loads after native-bridge so /api/config routes correctly on native. Fail-open. -->
 <script src="/remote-config.js?v=rc1" defer></script>

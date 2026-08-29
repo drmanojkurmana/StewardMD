@@ -235,7 +235,7 @@ try {
   `);
   okv(setupForGate, "pin", "PIN configured ahead of the real boot-splash gate check");
   await call("Page.navigate", { url: BASE + "?applock=1" });
-  await sleep(3400); // > MIN(3000ms): the constant splash frame is up and finish() has run
+  await sleep(3900); // > MIN(3000ms) + t0 offset + tick: the frame has been up 3s and finish() has run
   ok(await ev(`var s=document.getElementById("smdBootSplash"); return !!s && !s.classList.contains("sbs-hide");`) === true,
     "the real boot splash HOLDS (not hidden) past MIN when a PIN is configured");
   ok(await ev(`return !!document.getElementById("smdApplock");`) === true,

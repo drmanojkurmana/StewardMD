@@ -322,15 +322,28 @@ try {
       if(g){g.classList.remove("hidden"); g.setAttribute("style","display:block;visibility:visible;opacity:1;min-height:200px");}
       return !!g;`;
   okv(await ev(makeReady), true, "the harness can force the hide loop's ready() condition");
+  // judged by the page's own clock: up, or hidden only once 3s of page time has genuinely passed
+  const holds = `var e=document.getElementById("smdBootSplash"); var up=!!e && !e.classList.contains("sbs-hide"); return up || performance.now() >= 3000;`;
   await sleep(1200);   // t ~1.6s
-  okv(await ev(`var e=document.getElementById("smdBootSplash"); return !!e && !e.classList.contains("sbs-hide");`), true,
-    "ready at 0.6s: the splash still holds at ~1.6s (constant 3s frame)");
+  okv(await ev(holds), true, "ready at 0.6s: the splash still holds at ~1.6s (constant 3s frame)");
   await sleep(900);    // t ~2.5s
-  okv(await ev(`var e=document.getElementById("smdBootSplash"); return !!e && !e.classList.contains("sbs-hide");`), true,
-    "...and at ~2.5s");
+  okv(await ev(holds), true, "...and at ~2.5s");
   await sleep(1100);   // t ~3.6s
   okv(await ev(`var e=document.getElementById("smdBootSplash"); return !e || e.classList.contains("sbs-hide");`), true,
     "at ~3.6s it has hidden BY ITSELF (no tap)");
+
+  /* ---- the 3s is 3s of being SEEN: when the native splash lifts late (native-bridge stamps
+     __smdSplashShownAt), the hold counts from that stamp, not from script start */
+  await call("Page.navigate", { url: BASE });
+  await sleep(1200);   // t ~1.2s: pretend the native splash only lifts now
+  await ev(`window.__smdSplashShownAt = Date.now(); return 1;`);
+  await ev(makeReady);
+  await sleep(2100);   // t ~3.3s: past 3s of script time, only ~2.1s of visible time
+  okv(await ev(`var e=document.getElementById("smdBootSplash"); var up=!!e && !e.classList.contains("sbs-hide"); return up || (Date.now() - window.__smdSplashShownAt) >= 3000;`), true,
+    "native splash lifted at 1.2s: the frame still holds at ~3.3s (3s counted from when it was seen)");
+  await sleep(1300);   // t ~4.6s: ~3.4s visible
+  okv(await ev(`var e=document.getElementById("smdBootSplash"); return !e || e.classList.contains("sbs-hide");`), true,
+    "...and hides by itself once it has been seen for 3s");
 
   // the same single frame in the dark theme
   await newTab();
