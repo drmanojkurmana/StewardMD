@@ -383,6 +383,29 @@ html.ins-lock, body.ins-lock { overflow: hidden !important; }
 .ins-given input:focus { outline: 2px solid var(--ins-primary); outline-offset: 1px; }
 .ins-given .u { font-size: 12px; color: var(--ins-muted); min-width: 34px; }
 
+/* ---- search across all calculators (18 modes needs findability, not memory) ---- */
+.ins-search { display: flex; align-items: center; gap: 8px; border: 1px solid var(--ins-line);
+  background: var(--ins-surface); border-radius: var(--ins-r-ctl); padding: 0 12px; margin-bottom: 10px; }
+.ins-search:focus-within { border-color: var(--ins-primary); }
+.ins-search-ic { color: var(--ins-muted); display: inline-flex; flex: 0 0 auto; }
+.ins-search-in { flex: 1 1 auto; min-width: 0; border: 0; background: transparent; color: var(--ins-ink);
+  font-family: inherit; font-size: 14px; padding: 11px 0; }
+.ins-search-in:focus { outline: none; }
+.ins-search-in::-webkit-search-cancel-button { -webkit-appearance: none; }
+
+/* ---- "everything else" disclosure: the long tail without the wall of buttons ---- */
+.ins-more { margin-top: 10px; }
+.ins-more > summary { cursor: pointer; list-style: none; font-size: 13px; font-weight: 700;
+  color: var(--ins-primary); padding: 8px 2px; }
+.ins-more > summary::-webkit-details-marker { display: none; }
+.ins-more > summary::after { content: " ›"; }
+.ins-more[open] > summary::after { content: " ⌄"; }
+.ins-more > .ins-ask { margin-top: 8px; }
+
+/* ---- name the missing inputs instead of a generic "enter all values" ---- */
+.ins-need { margin: 0 0 6px; font-size: 13px; color: var(--ins-ink); line-height: 1.5; }
+.ins-need b { color: var(--ins-primary); font-weight: 700; }
+
 /* ---- diabetes type gate + chip ---- */
 .ins-skip { display: block; width: 100%; margin: 10px 0 4px; border: 1px solid var(--ins-line);
   background: transparent; color: var(--ins-muted); border-radius: var(--ins-r-ctl);

@@ -26,10 +26,15 @@ const noopEl = () => ({
   setAttribute() {}, getAttribute: () => null, addEventListener() {}, appendChild() {},
   querySelector: () => null, querySelectorAll: () => [], innerHTML: "", textContent: "", hidden: false
 });
+/* Real elements for the two panels render() writes into. Returning null here (the easy stub)
+ * makes render() bail at its first guard, so the whole output path goes untested - which is
+ * how a var-hoisting bug in the empty-state branch (`missingFields(m)` where `m` is assigned
+ * further down) survived a green suite. These let the tests assert what the screen SAYS. */
+const panels = { insOut: noopEl(), insInputs: noopEl(), insDoseN: noopEl(), insHeader: noopEl(), insScreen: noopEl() };
 global.window = global;
 global.matchMedia = () => ({ matches: false });
 global.document = {
-  getElementById: () => null, createElement: noopEl, querySelector: () => null,
+  getElementById: id => panels[id] || null, createElement: noopEl, querySelector: () => null,
   querySelectorAll: () => [], body: noopEl(), documentElement: noopEl(),
   head: noopEl(), addEventListener() {}
 };
@@ -235,6 +240,129 @@ test("every mode has a label and a How-it-works explanation", () => {
       assert.ok(B.howItWorks(m.id).length > 40, m.id + " needs a real explanation");
     }
   }
+});
+
+/* ── Findability and empty states: the ease-of-use surface ── */
+
+test("the dashboard reorders the questions for the chosen diagnosis", () => {
+  reset();
+  st.dxType = "t2";
+  const t2 = B.dashboard();
+  st.dxType = "steroid";
+  const steroid = B.dashboard();
+  // steroid cover must lead for a steroid patient, and not for a type 2
+  assert.ok(steroid.indexOf('data-mode="steroid"') < steroid.indexOf('data-mode="basalT2"'),
+    "steroid cover must come first for a steroid patient");
+  assert.ok(t2.indexOf('data-mode="basalT2"') < t2.indexOf('data-mode="steroid"'),
+    "type 2 initiation must come first for a type 2 patient");
+});
+
+test("every calculator is reachable from the dashboard, suggested or not", () => {
+  reset();
+  st.dxType = "t1";
+  const html = B.dashboard();
+  for (const id of Object.keys(B.questions())) {
+    assert.ok(html.includes('data-mode="' + id + '"'), id + " must be reachable from the dashboard");
+  }
+});
+
+test("search finds a calculator by a word a clinician would actually type", () => {
+  reset();
+  const Q = B.questions();
+  const hit = q => Object.keys(Q).filter(id =>
+    Q[id].join(" ").toLowerCase().includes(q) || B.modeLabel(id).toLowerCase().includes(q));
+  assert.ok(hit("prednisolone").includes("steroid"));
+  assert.ok(hit("surgery").includes("periop"));
+  assert.ok(hit("mixtard").includes("premix"));
+  assert.ok(hit("nbm").includes("npo"));
+  assert.ok(hit("ryles").includes("nutrition"));
+  assert.ok(hit("sliding scale").includes("scale"));
+  assert.ok(hit("stacking").includes("iob"));
+});
+
+test("the empty state names the fields still needed, per mode", () => {
+  reset();
+  st.mode = "titrate";
+  assert.deepEqual(B.missingFields("titrate"), ["current basal dose", "fasting glucose"]);
+  st.curBasal = 20;
+  assert.deepEqual(B.missingFields("titrate"), ["fasting glucose"]);
+  st.fasting = 190;
+  assert.deepEqual(B.missingFields("titrate"), []);
+});
+
+/* REGRESSION: the branch really does render the names. The first version of this feature
+ * called missingFields(m) where `m` is a var assigned further down render(), so hoisting
+ * handed it `undefined` and the screen silently fell back to "Enter all required values"
+ * while missingFields() itself tested green. Assert the rendered output, not the helper. */
+test("render() actually prints the missing field names on screen", () => {
+  reset();
+  st.mode = "titrate";
+  B.render();
+  assert.match(panels.insOut.innerHTML, /Still needed/);
+  assert.match(panels.insOut.innerHTML, /current basal dose/);
+  assert.match(panels.insOut.innerHTML, /fasting glucose/);
+
+  st.curBasal = 20; B.render();
+  assert.ok(!/current basal dose/.test(panels.insOut.innerHTML), "a filled field drops off the list");
+  assert.match(panels.insOut.innerHTML, /fasting glucose/);
+
+  st.fasting = 190; B.render();
+  assert.ok(!/Still needed/.test(panels.insOut.innerHTML), "a complete form shows a result, not a prompt");
+  assert.match(panels.insOut.innerHTML, /22/, "20 u + 2 u = the titrated dose");
+});
+
+test("render() names the missing inputs for every mode that has them", () => {
+  reset();
+  for (const g of ["start", "adjust", "now", "special", "derive"]) {
+    st.group = g;
+    for (const m of B.modes()) {
+      if (m.id === "iob") continue;                  // reads the log, no typed input
+      reset(); st.mode = m.id; st.group = g;
+      B.render();
+      assert.match(panels.insOut.innerHTML, /Still needed/, m.id + " must name what it needs");
+    }
+  }
+});
+
+test("alternatives are offered as a choice, not demanded together", () => {
+  reset();
+  st.mode = "scale";
+  assert.deepEqual(B.missingFields("scale"), ["total daily dose or weight"]);
+  st.ctx.weightKg = 70;
+  assert.deepEqual(B.missingFields("scale"), [], "weight alone must satisfy the scale");
+});
+
+test("every mode with required inputs declares them", () => {
+  reset();
+  for (const g of ["start", "adjust", "now", "special", "derive"]) {
+    st.group = g;
+    for (const m of B.modes()) {
+      if (m.id === "iob") continue;                 // reads the log, has no typed input
+      assert.ok(B.missingFields(m.id).length, m.id + " must name what it needs when empty");
+    }
+  }
+});
+
+test("skipping the type is remembered as a preference", () => {
+  reset();
+  assert.equal(UI._set.dxSkipped, false);
+  UI._set.dxSkipped = true;                          // as the dx-skip handler sets it
+  st.dxSkipped = !!(st.dxSkipped || UI._set.dxSkipped);
+  assert.equal(st.dxSkipped, true, "a clinician who opted out must not be asked again");
+  UI._set.dxSkipped = false;
+});
+
+test("mode tabs carry correct tab semantics and a roving tabindex", () => {
+  reset();
+  st.group = "now"; st.mode = "correction";
+  const html = B.calc();
+  assert.ok(html.includes('role="tablist"'));
+  assert.ok(html.includes('id="insTab-correction"'));
+  assert.ok(html.includes('aria-controls="insInputs"'));
+  assert.ok(/id="insTab-correction"[^>]*aria-selected="true"[^>]*tabindex="0"/.test(html),
+    "the selected tab is focusable");
+  assert.ok(/id="insTab-scale"[^>]*tabindex="-1"/.test(html), "unselected tabs are skipped by Tab");
+  assert.ok(!html.includes('aria-pressed'), "role=tab must not use aria-pressed");
 });
 
 test("no builder emits undefined, NaN or [object Object]", () => {

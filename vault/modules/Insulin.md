@@ -200,3 +200,30 @@ HbA1c, education checklist + 15-15 rule + 1-2 week follow-up), `sickDayRules` (n
 Browser-verified again via Playwright on `insulin-demo.html`: type gate, T1 refusal banner,
 T1-vs-stress scale differentiation, zero console errors.
 Cache-bust: `insulin.css` / `insulin-engine.js` / `insulin-safety.js` / `insulin.js` -> `?v=ins13`.
+
+## 2026-08-29 (ease-of-use pass)
+
+- **`suggest[]` wired up** (it was dead data). The dashboard now reorders the task list for the
+  chosen diagnosis and collapses the rest behind "Everything else (n)". A steroid patient sees
+  4 relevant tasks with steroid cover first, not 22 flat buttons.
+- **`QUESTIONS` table** - one source for the dashboard, the search and the long tail, so they
+  cannot drift. Each entry is {question, detail, keywords}.
+- **Search across all calculators**, matched on question + detail + keywords. Deliberately
+  indexed with ward vocabulary: "ryles", "nbm", "mixtard", "preop", "sliding scale", "stacking".
+- **Named empty states.** `NEEDS` declares the required inputs per mode; the result card says
+  "Still needed: current basal dose, fasting glucose" and narrows as fields fill. `any` groups
+  alternatives ("total daily dose or weight").
+- **`dxSkipped` persists** in settings: a clinician who skips the type gate is never asked
+  again. The TYPE itself is deliberately NOT persisted globally (it belongs to a patient).
+- **a11y**: role="tab" now uses aria-selected + roving tabindex + aria-controls, and the input
+  card is a labelled tabpanel. aria-pressed removed from tab roles.
+
+### BUG found and fixed during this pass (and the testing lesson)
+`render()` called `missingFields(m)` where `m` is a `var` assigned FURTHER DOWN the function,
+so hoisting passed `undefined` and the screen silently fell back to "Enter all required values"
+while `missingFields()` itself tested green. Fixed to `st.mode`.
+The UI tests had called the helper directly, which is why they missed it. `test/insulin-ui.test.mjs`
+now stubs REAL elements for `insOut`/`insInputs` and drives `render()`, asserting what the screen
+says. Verified the new test has teeth by reintroducing the bug (2 tests fail) and restoring it.
+
+193 insulin tests pass (28 UI). Cache-bust: `insulin.css` / `insulin.js` -> `?v=ins14`.

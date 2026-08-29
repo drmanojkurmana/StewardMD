@@ -24,7 +24,11 @@
 
   // showRounding: rounding is a device/setup preference, set once in Settings. It is only
   // repeated per-calculation for users who ask for it (0.5 u pens, paediatric practice).
-  var DEFAULTS = { units: "mgdl", increment: 1, target: 120, maxBolus: 15, maxDaily: 100, institution: "", bolusInsulin: "aspart", homeGlass: "standard", showRounding: false };
+  // dxSkipped is a PREFERENCE and persists: a clinician who has said "don't ask me the type"
+  // should not be asked again on every launch. The type itself is deliberately NOT persisted
+  // globally - it belongs to a patient, and carrying one patient's type to the next is exactly
+  // the sort of silent staleness this module is trying to remove.
+  var DEFAULTS = { units: "mgdl", increment: 1, target: 120, maxBolus: 15, maxDaily: 100, institution: "", bolusInsulin: "aspart", homeGlass: "standard", showRounding: false, dxSkipped: false };
   var GLASS_MAP = { frosted: "ins-glass ins-glass-frost", liquid: "ins-glass ins-glass-frost ins-glass-sheen",
     tinted: "ins-glass ins-glass-tint", blend: "ins-glass ins-glass-tint ins-glass-sheen" };
   var SET = clone(DEFAULTS);
@@ -169,7 +173,8 @@
     // Diabetes type is asked once, up front, and drives the scale band, the suggested
     // workflows and the type-specific warnings. dxSkipped remembers "just take me to the
     // calculator" so the gate is never shown twice in a session.
-    st.dxType = st.dxType || ""; st.dxSkipped = !!st.dxSkipped;
+    st.dxType = st.dxType || ""; st.dxSkipped = !!(st.dxSkipped || SET.dxSkipped);
+    st.askQ = "";
     st.nutCarbs = ""; st.nutFeed = "continuous"; st.nutFeeds = 4; st.nutDextrose = "";
     st.hba1c = ""; st.inpBasal = "";
     // Ward workflow inputs - also empty; only method/rule choices carry a default.
@@ -418,22 +423,7 @@
       '</div>' : "";
 
     return patientBarHTML() + dxChipHTML() + summary +
-      /* Entry by the QUESTION the clinician arrived with, not by the name of the formula.
-       * "Combined dose / Meal bolus / Correction" told a resident nothing about which one
-       * answers "fasting is 190 on 20 units of glargine". These do. */
-      '<div class="ins-card ins-bf"><div class="ins-card-t">What do you need to do?</div>' +
-        '<div class="ins-ask">' +
-          ask("titrate", "Sugars are high on the current dose", "Titrate the basal against the fasting reading") +
-          ask("scale", "Write a correction scale", "A q6h supplemental scale built from this patient's own sensitivity") +
-          ask("basalT2", "Start insulin in type 2 diabetes", "Basal-only initiation, then titration") +
-          ask("inpatient", "Admit and start basal-bolus", "Weight-based inpatient regimen with a correction scale") +
-          ask("correction", "Bring down a single high reading", "One correction dose now") +
-          ask("npo", "Patient is nil by mouth", "What to hold, what to continue") +
-          ask("steroid", "Steroids have raised the sugars", "NPH cover matched to the steroid dose") +
-          ask("ivsc", "Come off the insulin drip", "Convert the infusion to a subcutaneous regimen") +
-        '</div>' +
-        '<div class="ins-hint">Also inside: premix start and titration, meal bolus and carbohydrate ratios, active insulin, and the clinician paediatric and DKA calculators.</div>' +
-      '</div>' +
+      askCardHTML() +
       libEntryHTML() + convEntryHTML() +
       '<div class="ins-card ins-bf"><div class="ins-card-t ins-card-t-row">Recent doses' +
         (log.length ? '<button class="ins-linkbtn" data-ins="go-history">View all and export</button>' : '') + '</div>' + recent + '</div>';
@@ -476,6 +466,72 @@
   function ask(mode, question, detail) {
     return '<button class="ins-askbtn" data-ins="qa" data-mode="' + mode + '">' +
       '<span class="ins-ask-q">' + question + '</span><span class="ins-ask-d">' + detail + '</span>' + ICON_CHEVR + '</button>';
+  }
+
+  /* Every calculator phrased as the question a clinician actually arrives with, plus the
+   * words they might search for. One table, so the dashboard, the search and the "other
+   * tasks" list can never drift apart. */
+  var QUESTIONS = {
+    titrate:    ["Sugars are high on the current dose", "Titrate the basal against the fasting reading", "titration adjust increase basal fasting 2 units"],
+    scale:      ["Write a correction scale", "A q6h supplemental scale from this patient's own sensitivity", "sliding scale supplemental correction chart"],
+    basalT2:    ["Start insulin in type 2 diabetes", "Basal-only initiation, then titration", "begin start new glargine 10 units type 2"],
+    inpatient:  ["Admit and start basal-bolus", "Weight-based inpatient regimen with a correction scale", "admission ward rabbit weight based"],
+    correction: ["Bring down a single high reading", "One correction dose now", "high sugar stat correction bolus"],
+    combined:   ["Cover a meal and a high reading", "Meal bolus plus correction in one dose", "carb counting combined bolus"],
+    meal:       ["Cover a meal", "Carbohydrate bolus only", "prandial mealtime carb"],
+    premix:     ["Start premixed insulin", "Twice-daily 30/70, two-thirds morning", "mixtard novomix premix 30/70 biphasic"],
+    premixTitr: ["Adjust premixed insulin", "Which of the two injections to move", "premix titration mixtard adjust"],
+    npo:        ["Patient is nil by mouth", "What to hold, what to continue", "npo fasting nbm not eating"],
+    steroid:    ["Steroids have raised the sugars", "NPH cover matched to the steroid dose", "prednisolone dexamethasone steroid glucocorticoid"],
+    ivsc:       ["Come off the insulin drip", "Convert the infusion to a subcutaneous regimen", "infusion iv to subcut transition drip"],
+    nutrition:  ["Patient is on a tube feed or TPN", "Insulin matched to the feed", "enteral ryles peg tpn parenteral feed"],
+    periop:     ["Patient is going for surgery", "What to hold and what to give on the morning", "surgery operation preop perioperative theatre"],
+    discharge:  ["Send the patient home", "Home regimen, education and follow-up", "discharge home going out"],
+    sick:       ["Patient is unwell at home", "Sick-day rules and extra insulin", "sick day illness fever vomiting ketones"],
+    dka:        ["Diabetic ketoacidosis", "Fixed-rate insulin infusion", "dka hhs ketoacidosis infusion"],
+    pediatric:  ["A child needs insulin started", "Weight-based paediatric initiation", "child paediatric pediatric kid"],
+    isf:        ["Work out the correction factor", "ISF from the total daily dose", "isf sensitivity 1800 rule"],
+    icr:        ["Work out the carbohydrate ratio", "ICR from the total daily dose", "icr carb ratio 500 rule"],
+    iob:        ["How much insulin is still acting", "Insulin on board from recorded doses", "iob active insulin stacking"],
+    basal:      ["Basal-bolus with my own factor", "Weight-based, you choose the u/kg/day", "custom factor basal bolus"]
+  };
+  function askOf(id) { var q = QUESTIONS[id]; return q ? ask(id, q[0], q[1]) : ""; }
+
+  /* The chosen diagnosis reorders this list. A type 1 should not have to read past
+   * "Start insulin in type 2 diabetes" to reach the thing they need, and stress
+   * hyperglycaemia genuinely does want the correction scale first. */
+  function askCardHTML() {
+    var E = window.INSULIN_ENGINE;
+    var dx = (E && st.dxType) ? E.dxGuidance(st.dxType) : null;
+    var suggested = (dx && dx.suggest && dx.suggest.length) ? dx.suggest : null;
+    var DEFAULT_ORDER = ["titrate", "scale", "basalT2", "inpatient", "correction", "npo", "steroid", "ivsc"];
+    var primary = suggested || DEFAULT_ORDER;
+    var seen = {}, primaryHTML = "";
+    primary.forEach(function (id) { if (QUESTIONS[id] && !seen[id]) { seen[id] = 1; primaryHTML += askOf(id); } });
+    var restHTML = Object.keys(QUESTIONS).filter(function (id) { return !seen[id]; }).map(askOf).join("");
+    var title = dx ? "For " + esc(dx.label.toLowerCase()) : "What do you need to do?";
+    return '<div class="ins-card ins-bf"><div class="ins-card-t">' + title + '</div>' +
+      (dx ? '<div class="ins-hint" style="margin-bottom:10px">Ordered for this diagnosis. Everything else is still below.</div>' : '') +
+      '<div class="ins-search"><span class="ins-search-ic">' + ICON_SEARCH + '</span>' +
+        '<input class="ins-search-in" data-ins="ask-q" type="search" placeholder="Search all calculators" ' +
+        'aria-label="Search all calculators" value="' + esc(st.askQ || "") + '"></div>' +
+      '<div class="ins-ask" id="insAskList">' + primaryHTML + '</div>' +
+      '<details class="ins-more"><summary>Everything else (' + Object.keys(QUESTIONS).filter(function (id) { return !seen[id]; }).length + ')</summary>' +
+        '<div class="ins-ask">' + restHTML + '</div></details>' +
+    '</div>';
+  }
+  // Search across ALL calculators, matched on the question, the detail and the keyword list.
+  function renderAskSearch() {
+    var list = document.getElementById("insAskList"); if (!list) return;
+    var q = (st.askQ || "").trim().toLowerCase();
+    var more = document.querySelector(".ins-more");
+    if (!q) { if (more) more.style.display = ""; paint(); return; }
+    if (more) more.style.display = "none";
+    var hits = Object.keys(QUESTIONS).filter(function (id) {
+      return QUESTIONS[id].join(" ").toLowerCase().indexOf(q) > -1 || modeLabel(id).toLowerCase().indexOf(q) > -1;
+    });
+    list.innerHTML = hits.length ? hits.map(askOf).join("")
+      : '<div class="ins-empty">Nothing matches "' + esc(st.askQ) + '". Try "steroid", "surgery", "premix" or "nil by mouth".</div>';
   }
   function timeStr(ts) { try { return new Date(ts).toLocaleString([], { month: "short", day: "numeric", hour: "2-digit", minute: "2-digit" }); } catch (e) { return ""; } }
 
@@ -810,13 +866,20 @@
         '<div><b>AI-assisted recommendation.</b> The treating physician makes the final decision. ' +
         'Every value below is shown with its formula and assumptions - nothing is hidden.</div></div>' +
       '<div class="ins-groups ins-bf" role="tablist" aria-label="Clinical task">' + GROUPS.map(function (g) {
-        return '<button class="ins-groupbtn" role="tab" data-ins="group" data-g="' + g.id + '" aria-selected="' + (activeGroup() === g.id ? "true" : "false") + '">' + g.label + '</button>';
+        var sel = activeGroup() === g.id;
+        return '<button class="ins-groupbtn" role="tab" data-ins="group" data-g="' + g.id + '"' +
+          ' aria-selected="' + (sel ? "true" : "false") + '" tabindex="' + (sel ? "0" : "-1") + '">' + g.label + '</button>';
       }).join("") + '</div>' +
       '<div class="ins-level-h ins-bf">' + (GROUPS.filter(function (g) { return g.id === activeGroup(); })[0] || GROUPS[0]).hint + '</div>' +
-      '<div class="ins-modes ins-bf" role="tablist">' + visibleModes().map(function (m) {
-        return '<button class="ins-modebtn' + (m.clin ? " clin" : "") + '" role="tab" data-ins="mode" data-mode="' + m.id + '" aria-selected="' + (st.mode === m.id ? "true" : "false") + '">' + m.label + '</button>';
+      // role="tab" needs aria-selected and roving tabindex, and must point at the panel it
+      // controls - otherwise a screen-reader user hears 18 unlabelled buttons.
+      '<div class="ins-modes ins-bf" role="tablist" aria-label="Calculation">' + visibleModes().map(function (m) {
+        var sel = st.mode === m.id;
+        return '<button class="ins-modebtn' + (m.clin ? " clin" : "") + '" role="tab" id="insTab-' + m.id + '"' +
+          ' aria-controls="insInputs" aria-selected="' + (sel ? "true" : "false") + '" tabindex="' + (sel ? "0" : "-1") + '"' +
+          ' data-ins="mode" data-mode="' + m.id + '">' + m.label + '</button>';
       }).join("") + '</div>' +
-      '<div class="ins-card ins-bf" id="insInputs"></div>' +
+      '<div class="ins-card ins-bf" id="insInputs" role="tabpanel" aria-labelledby="insTab-' + st.mode + '"></div>' +
       '<div id="insOut"></div>';
   }
   function clinBanner(m) {
@@ -1087,6 +1150,48 @@
     document.getElementById("insInputs").innerHTML = h;
   }
 
+  /* Which named inputs this mode still needs. Declared per mode so the empty-state can say
+   * "Still needed: current basal dose, fasting glucose" instead of making the user hunt for
+   * the blank box. `any` groups alternatives - only one of them has to be filled. */
+  var NEEDS = {
+    correction: [["glucose", "current glucose"], ["isf", "ISF"]],
+    combined:   [["glucose", "current glucose"], ["target", "target glucose"], ["isf", "ISF"], ["carbs", "carbohydrates"], ["icr", "carb ratio"]],
+    meal:       [["carbs", "carbohydrates"], ["icr", "carb ratio"]],
+    isf:        [["tdd", "total daily dose"]],
+    icr:        [["tdd", "total daily dose"]],
+    basal:      [["ctx.weightKg", "weight"]],
+    basalT2:    [["ctx.weightKg", "weight"]],
+    inpatient:  [["ctx.weightKg", "weight"]],
+    pediatric:  [["ctx.weightKg", "weight"]],
+    dka:        [["ctx.weightKg", "weight"]],
+    titrate:    [["curBasal", "current basal dose"], ["fasting", "fasting glucose"]],
+    scale:      [{ any: [["tdd", "total daily dose"], ["ctx.weightKg", "weight"]] }],
+    premix:     [{ any: [["tdd", "total daily dose"], ["ctx.weightKg", "weight"]] }],
+    premixTitr: [["pmMorning", "morning dose"], ["pmEvening", "evening dose"], { any: [["fasting", "fasting glucose"], ["preDinner", "pre-dinner glucose"]] }],
+    npo:        [{ any: [["curBasal", "current basal dose"], ["tdd", "total daily dose"]] }],
+    steroid:    [["ctx.weightKg", "weight"], ["steroidMg", "steroid dose in mg"]],
+    ivsc:       [["ivRate", "infusion rate"]],
+    nutrition:  [{ any: [["nutCarbs", "carbohydrate in the feed"], ["ctx.weightKg", "weight"]] }],
+    periop:     [{ any: [["curBasal", "usual basal dose"], ["tdd", "total daily dose"]] }],
+    discharge:  [{ any: [["inpBasal", "inpatient basal dose"], ["tdd", "total daily dose"]] }],
+    sick:       [{ any: [["tdd", "total daily dose"], ["ctx.weightKg", "weight"]] }]
+  };
+  function fieldFilled(path) {
+    var v = path.indexOf(".") > -1 ? st[path.split(".")[0]][path.split(".")[1]] : st[path];
+    return num(v) && Number(v) > 0;
+  }
+  function missingFields(m) {
+    var spec = NEEDS[m]; if (!spec) return [];
+    var out = [];
+    spec.forEach(function (item) {
+      if (item.any) {
+        if (!item.any.some(function (p) { return fieldFilled(p[0]); }))
+          out.push(item.any.map(function (p) { return p[1]; }).join(" or "));
+      } else if (!fieldFilled(item[0])) out.push(item[1]);
+    });
+    return out;
+  }
+
   function compute() {
     var E = window.INSULIN_ENGINE, m = st.mode, G = toMgdl(st.glucose), T = toMgdl(st.target), ISF = toMgdl(st.isf);
     if (m === "meal") return E.mealBolus({ carbs: st.carbs, icr: st.icr, increment: st.increment, ctx: st.ctx });
@@ -1192,10 +1297,13 @@
     if (!out) return;
 
     if (res.error || res.rounded == null) {
-      // First-dose pathway: show the routing message (DKA/HHS/pediatric) or the "provide ISF/TDD/weight" hint.
-      var msg = res.routing || res.error || (res.assumptions && res.assumptions[0]) || "Enter the required inputs to calculate.";
+      // "Enter all required values" leaves the user hunting for which box is empty. Name them.
+      // st.mode, NOT the `m` declared further down - var-hoisting makes it undefined up here.
+      var missing = missingFields(st.mode);
+      var msg = res.routing || (missing.length ? "" : (res.error || (res.assumptions && res.assumptions[0]) || "Enter the required inputs to calculate."));
       out.innerHTML = '<div class="ins-card ins-result"><div class="ins-card-t">' + (res.route ? "Use a different protocol" : "Recommendation") + '</div>' +
-        '<p style="color:var(--ins-muted);font-size:13px;margin:0">' + msg + '</p></div>';
+        (missing.length ? '<p class="ins-need">Still needed: <b>' + missing.join("</b>, <b>") + '</b></p>' : '') +
+        (msg ? '<p style="color:var(--ins-muted);font-size:13px;margin:0">' + msg + '</p>' : '') + '</div>';
       return;
     }
 
@@ -1325,7 +1433,7 @@
       if (st.dxType === "t1" || st.dxType === "secondary") st.npoType1 = true;
       return go("dashboard");
     }
-    if (a === "dx-skip") { st.dxSkipped = true; return go("dashboard"); }
+    if (a === "dx-skip") { st.dxSkipped = true; SET.dxSkipped = true; saveSettings(); return go("dashboard"); }
     if (a === "dx-open") return go("dxgate");
     if (a === "go-settings") return go("settings");
     if (a === "go-dash") return go("dashboard");
@@ -1485,6 +1593,7 @@
     if (a === "set-num") { var k = t.getAttribute("data-k"); var v = parseFloat(t.value); if (isFinite(v)) { SET[k] = v; saveSettings(); } return; }
     if (a === "set-text") { SET[t.getAttribute("data-k")] = t.value; saveSettings(); return; }
     if (a === "set-glass") { SET.homeGlass = t.value; saveSettings(); return; }
+    if (a === "ask-q") { st.askQ = t.value; renderAskSearch(); return; }
     if (a === "lib-q") { st.libQ = t.value; renderLibList(); return; }
     if (a === "pat-q") { st.patQ = t.value; renderPatientList(); return; }
     if (a === "p-field") { if (!st.editP) st.editP = newProfile(); st.editP[t.getAttribute("data-k")] = t.value; return; }
@@ -1578,5 +1687,7 @@
   window.INSULIN._build = { dashboard: dashboardHTML, dxGate: dxGateHTML, dxChip: dxChipHTML,
     calc: calcHTML, modes: visibleModes, groupOf: groupOf, wardProfile: wardProfile,
     compute: compute, safety: safety, modeLabel: modeLabel, howItWorks: howItWorks,
-    todayTotal: todayTotal, logForPatient: logForPatient };
+    todayTotal: todayTotal, logForPatient: logForPatient,
+    questions: function () { return QUESTIONS; }, missingFields: missingFields,
+    render: render, renderInputs: renderInputs };
 })();
