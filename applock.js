@@ -63,6 +63,16 @@
   var K_INSTITUTIONAL = "smd_applock_institutional"; // "1" if a hospital was on file at setup
   var K_FAILS = "smd_applock_fails";
   var K_BLOCK = "smd_applock_blockuntil";
+  var K_GRACE = "smd_applock_grace";             // "2h" = don't ask again within 2h of the last open
+  var K_LASTUNLOCK = "smd_applock_lastunlock";   // ms epoch of the last unlock / grace-skipped open
+  var GRACE_MS = 2 * 60 * 60 * 1000;
+  var _fromManage = false; // chooser opened from Account > Security (closable) vs first-run (forced)
+  function graceOn() { return lget(K_GRACE) === "2h"; }
+  function withinGrace() {
+    if (!graceOn()) return false;
+    var t = Number(lget(K_LASTUNLOCK) || 0);
+    return t > 0 && (Date.now() - t) < GRACE_MS;
+  }
 
   function method() { return lget(K_METHOD) || "none"; }
   function configured() { return !!lget(K_METHOD); }
@@ -153,6 +163,7 @@
   function blockedMs() { var t = parseInt(lget(K_BLOCK) || "0", 10) || 0; var left = t - Date.now(); return left > 0 ? left : 0; }
 
   function signOutInstead() {
+    try { localStorage.removeItem(K_LASTUNLOCK); } catch (e) {}
     try { var b = document.getElementById("sessionSignOut"); if (b) { b.click(); return; } } catch (e) {}
     try { localStorage.removeItem("stewardmd_account"); } catch (e) {}
     location.reload();
@@ -173,6 +184,8 @@
       "#smdApplock .smdal-opt:hover{border-color:var(--teal,#0e6e63)}" +
       "#smdApplock .smdal-opt-ico{width:22px;height:22px;flex:0 0 auto;stroke:var(--teal,#0e6e63);stroke-width:1.75;fill:none;stroke-linecap:round;stroke-linejoin:round}" +
       "#smdApplock .smdal-opt[data-m=\"none\"] .smdal-opt-ico{stroke:var(--amber,#92620a)}" +
+      "#smdApplock .smdal-opt.smdal-cur{border-color:var(--teal,#0e6e63);background:var(--panel,#fff)}" +
+      "#smdApplock .smdal-tag{margin-left:auto;flex:0 0 auto;font-size:10.5px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--teal,#0e6e63)}" +
       "#smdApplock .smdal-opt-t{display:block;font-weight:700;font-size:14.5px}" +
       "#smdApplock .smdal-opt-d{display:block;font-size:12px;color:var(--slate,#5a7184);margin-top:2px}" +
       "#smdApplock .smdal-pin-in{width:100%;box-sizing:border-box;font-size:26px;letter-spacing:.5em;text-align:center;padding:14px 10px 14px 20px;border:1.5px solid var(--line,#d7dee3);border-radius:12px;margin:6px 0 14px;background:var(--panel,#fff);color:var(--ink,#14202b)}" +
@@ -208,7 +221,7 @@
       if (!flagOn() || configured()) return;
       opts = opts || {};
       lset(K_INSTITUTIONAL, opts.hospital && String(opts.hospital).trim() ? "1" : "0");
-      renderChooser();
+      _fromManage = false; renderChooser();
     } catch (e) {}
   }
 
@@ -223,21 +236,28 @@
     var el = overlay();
     el.innerHTML = '<div class="smdal-card"><div class="smdal-h">Lock StewardMD</div><div class="smdal-sub">Checking this device…</div></div>'; // brief — canBiometric() is one native round-trip
     canBiometric().then(function (bioAvailable) {
-      var i = 0;
-      var rows =
-        '<button class="smdal-opt" data-m="pin" style="--i:' + (i++) + '">' + ico("keypad") + '<span><span class="smdal-opt-t">Set a PIN</span><span class="smdal-opt-d">A 4–6 digit code, works on any device</span></span></button>';
-      if (bioAvailable) {
-        rows += '<button class="smdal-opt" data-m="biometric" style="--i:' + (i++) + '">' + ico("fingerprint") + '<span><span class="smdal-opt-t">Face ID / Touch ID</span><span class="smdal-opt-d">Fastest, no code to remember</span></span></button>';
+      var i = 0, cur = method();
+      function opt(m, icon, t, d) {
+        return '<button class="smdal-opt' + (cur === m ? " smdal-cur" : "") + '" data-m="' + m + '" style="--i:' + (i++) + '">' + ico(icon) +
+          '<span><span class="smdal-opt-t">' + t + '</span><span class="smdal-opt-d">' + d + '</span></span>' +
+          (cur === m ? '<span class="smdal-tag">Current</span>' : "") + '</button>';
       }
-      if (!isInstitutional) {
-        rows += '<button class="smdal-opt" data-m="none" style="--i:' + (i++) + '">' + ico("warn") + '<span><span class="smdal-opt-t">No lock, open automatically</span><span class="smdal-opt-d">Anyone with this phone opens your patient data. Personal devices only.</span></span></button>';
-      }
+      var rows = opt("pin", "keypad", "Set a PIN", "A 4–6 digit code, works on any device");
+      if (bioAvailable) rows += opt("biometric", "fingerprint", "Face ID / Touch ID", "Fastest, no code to remember");
+      if (!isInstitutional) rows += opt("none", "warn", "No lock, open automatically", "Anyone with this phone opens your patient data. Personal devices only.");
       el.innerHTML =
         '<div class="smdal-card">' +
           '<div class="smdal-h">Lock StewardMD</div>' +
           '<div class="smdal-sub">Choose how to open the app on this device.' + (isInstitutional ? " Your profile has a hospital on file, so a PIN or Face ID/Touch ID is required." : " You can change this later from Account.") + '</div>' +
           '<div class="smdal-opts">' + rows + '</div>' +
+          // grace is the same own-risk class as "no lock": personal devices only, off by default
+          (isInstitutional ? "" : '<label class="smdal-chk"><input type="checkbox" id="salGrace"' + (graceOn() ? " checked" : "") + '><span>Don\'t ask again if I reopen the app within 2 hours</span></label>') +
+          (_fromManage ? '<button class="smdal-ghost" id="salKeep">' + (configured() ? "Keep current setting" : "Not now") + '</button>' : "") +
         '</div>';
+      var g = el.querySelector("#salGrace");
+      if (g) g.onchange = function () { lset(K_GRACE, g.checked ? "2h" : "0"); };
+      var keep = el.querySelector("#salKeep");
+      if (keep) keep.onclick = closeOverlay;
       el.onclick = function (e) {
         var b = e.target.closest && e.target.closest("[data-m]"); if (!b) return;
         var m = b.getAttribute("data-m");
@@ -267,7 +287,7 @@
       if (!/^\d{4,6}$/.test(v)) { errEl.textContent = "Enter 4–6 digits."; return; }
       if (stage === "enter") { renderPinSetup("confirm", v); return; }
       if (v !== firstPin) { errEl.textContent = "Didn't match. Try again."; renderPinSetup("enter"); return; }
-      setPin(v).then(function () { closeOverlay(); try { if (window.toast) window.toast("PIN set"); } catch (e) {} });
+      setPin(v).then(function () { markUnlocked(); closeOverlay(); try { if (window.toast) window.toast("PIN set"); } catch (e) {} });
     };
     el.querySelector("[data-back]").onclick = function () { renderChooser(); };
   }
@@ -280,7 +300,7 @@
       var retryBtn = el.querySelector("#salBiomRetry"); if (retryBtn) retryBtn.hidden = true;
       var e2 = el.querySelector("#salBiomErr"); if (e2) e2.textContent = "";
       verifyBiometric("Set up biometric unlock for StewardMD").then(function (r) {
-        if (r.ok) { lset(K_METHOD, "biometric"); closeOverlay(); try { if (window.toast) window.toast("Face ID / Touch ID enabled"); } catch (e) {} return; }
+        if (r.ok) { lset(K_METHOD, "biometric"); markUnlocked(); closeOverlay(); try { if (window.toast) window.toast("Face ID / Touch ID enabled"); } catch (e) {} return; }
         // a single failed scan (blink, angle, cancel) is normal — a dead end here reads as
         // "broken" rather than "try again", so a single failure gets a real retry button.
         if (e2) e2.textContent = r.text + " Try again, or pick a different option.";
@@ -318,18 +338,31 @@
   // it is enforced regardless of the flag: a clinician who explicitly set a PIN would rightly
   // consider it a bug if disabling the rollout flag silently stopped locking their own app.
   function required() {
-    try { return (method() === "pin" || method() === "biometric") && !_unlockedThisBoot; }
+    try { return (method() === "pin" || method() === "biometric") && !_unlockedThisBoot && !withinGrace(); }
     catch (e) { return false; }
   }
+  function markUnlocked() { _unlockedThisBoot = true; lset(K_LASTUNLOCK, String(Date.now())); }
 
+  // unlock() is shown the moment this script loads (see the boot block at the bottom) so the
+  // Face ID sheet / PIN pad is up while the app is still loading; the splash's finish() then
+  // calls unlock(reallyFinish) and simply joins the screen already on show. Every done() queued
+  // by any caller fires once, on the one real pass.
+  var _dones = [], _unlockShowing = false;
+  function finishUnlock() {
+    markUnlocked(); closeOverlay(); _unlockShowing = false;
+    var d = _dones.splice(0); for (var i = 0; i < d.length; i++) { try { d[i](); } catch (e) {} }
+  }
   function unlock(done) {
+    if (typeof done === "function") _dones.push(done);
+    if (_unlockShowing) return;
+    _unlockShowing = true;
     try {
-      if (method() === "biometric") return renderBiometricUnlock(done);
-      return renderPinUnlock(done);
-    } catch (e) { _unlockedThisBoot = true; done(); } // fail-open: never strand a clinician on a bug here
+      if (method() === "biometric") return renderBiometricUnlock();
+      return renderPinUnlock();
+    } catch (e) { finishUnlock(); } // fail-open: never strand a clinician on a bug here
   }
 
-  function renderPinUnlock(done) {
+  function renderPinUnlock() {
     var left = blockedMs();
     var el = overlay();
     el.innerHTML =
@@ -346,9 +379,9 @@
       var v = input.value.trim();
       if (!v) return;
       verifyPin(v).then(function (ok) {
-        if (ok) { clearFails(); _unlockedThisBoot = true; closeOverlay(); done(); return; }
+        if (ok) { clearFails(); finishUnlock(); return; }
         var n = recordFail();
-        if (blockedMs()) { renderPinUnlock(done); return; }
+        if (blockedMs()) { renderPinUnlock(); return; }
         errEl.textContent = "Incorrect PIN" + (n >= 3 ? " (" + n + " attempts)" : "") + ".";
         input.value = ""; input.focus();
       });
@@ -358,12 +391,12 @@
     el.querySelector("#salUnlockSignout").onclick = signOutInstead;
   }
 
-  function renderBiometricUnlock(done) {
+  function renderBiometricUnlock() {
     var el = overlay();
     el.innerHTML = '<div class="smdal-card"><div class="smdal-h">Unlock StewardMD</div><div class="smdal-sub">Confirm with Face ID / Touch ID.</div><div class="smdal-err" id="salBUErr"></div><button class="smdal-go" id="salBURetry">Try again</button><button class="smdal-ghost" id="salBUSignout">Sign out instead</button></div>';
     function attempt() {
       verifyBiometric("Unlock StewardMD").then(function (r) {
-        if (r.ok) { _unlockedThisBoot = true; closeOverlay(); done(); return; }
+        if (r.ok) { finishUnlock(); return; }
         var e2 = el.querySelector("#salBUErr"); if (e2) e2.textContent = r.text;
       });
     }
@@ -380,9 +413,18 @@
   function manage(hospital) {
     try {
       if (hospital !== undefined) lset(K_INSTITUTIONAL, hospital && String(hospital).trim() ? "1" : "0");
+      _fromManage = true;
       renderChooser();
     } catch (e) {}
   }
+
+  // ---- boot: opened within the grace window -> refresh it and stay quiet; otherwise put the
+  // unlock up NOW (over the boot splash) rather than at the splash's finish(), so Face ID fires
+  // on launch and a PIN can be typed while the app is still loading.
+  try {
+    if (withinGrace()) markUnlocked();
+    else if (required()) unlock();
+  } catch (e) {}
 
   window.SMD_APPLOCK = {
     isOn: flagOn,
@@ -393,5 +435,6 @@
     unlock: unlock,
     promptSetup: promptSetup,
     manage: manage,
+    grace: graceOn,
   };
 })();

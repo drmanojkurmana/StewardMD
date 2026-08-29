@@ -133,7 +133,7 @@ try {
     });
   `);
   okv(pinOk, "pin", "PIN setup flow (enter 1234, confirm 1234) sets method to \"pin\"");
-  okv(await ev(`return window.SMD_APPLOCK.required();`), true, "required() is true once a PIN is configured and the flag is on");
+  okv(await ev(`return window.SMD_APPLOCK.required();`), false, "required() is false right after setup: entering the PIN twice IS this boot's unlock");
   // REGRESSION: required() used to also check flagOn(), so a device app (no ?applock URL param
   // ever reachable) that configured a PIN via Manage would never actually be gated — "set a PIN,
   // restart, never asked for it". The flag must gate only the automatic first-run prompt.
@@ -276,7 +276,7 @@ try {
   okv(await ev(`return window.__bioCalls[0] && window.__bioCalls[0].reason;`), "Set up biometric unlock for StewardMD", "a non-empty reason is passed (evaluatePolicy crashes on an empty one)");
   okv(await ev(`return window.SMD_APPLOCK.method();`), "biometric", "a resolved internalAuthenticate() enables the biometric method");
   ok(await ev(`return !document.getElementById("smdApplock");`) === true, "setup overlay closes on success");
-  okv(await ev(`return window.SMD_APPLOCK.required();`), true, "required() is true with the biometric method set");
+  okv(await ev(`return window.SMD_APPLOCK.required();`), false, "required() is false right after biometric setup: the scan IS this boot's unlock");
 
   // unlock: a rejected scan shows the LAError-specific text and a retry, then a good scan unlocks
   await ev(`window.__bioNext = { code: "biometryLockout", message: "Biometry is locked out." }; window.__unl = false; window.SMD_APPLOCK.unlock(function(){ window.__unl = true; }); return 1;`);
@@ -290,6 +290,54 @@ try {
   okv(await ev(`return window.__unl;`), true, "Try again with a resolved scan unlocks");
   ok(await ev(`return !document.getElementById("smdApplock");`) === true, "unlock overlay is gone after success");
   await ev(`localStorage.clear(); return 1;`); // leave the persisted profile clean for the next run
+
+  /* ---------- 10. Manage is closable, the lock shows at load, and the 2h grace window ---------- */
+  await fresh(BASE);
+  await ev(`window.SMD_APPLOCK.manage(""); return 1;`);
+  await sleep(300);
+  ok(await ev(`return !!document.getElementById("salKeep");`) === true, "Manage chooser has a close button (first-run does not)");
+  ok(await ev(`return !!document.getElementById("salGrace");`) === true, "personal account sees the 2h grace toggle");
+  await ev(`document.getElementById("salKeep").click(); return 1;`);
+  ok(await ev(`return !document.getElementById("smdApplock");`) === true, "closing Manage keeps things as they were");
+  okv(await ev(`return window.SMD_APPLOCK.configured();`), false, "...and did not force a method");
+  await ev(`window.SMD_APPLOCK.manage("Apollo"); return 1;`);
+  await sleep(300);
+  ok(await ev(`return !document.getElementById("salGrace");`) === true, "institutional account gets NO grace toggle (same rule as no-lock)");
+  await ev(`window.SMD_APPLOCK.manage(""); return 1;`);
+  await sleep(300);
+  await ev(`document.getElementById("salGrace").click(); return 1;`);
+  okv(await ev(`return localStorage.getItem("smd_applock_grace");`), "2h", "toggle persists smd_applock_grace=2h");
+  const pinViaManage = await ev(`
+    return new Promise(function(res){
+      document.querySelector('[data-m="pin"]').click();
+      setTimeout(function(){
+        document.getElementById("salSetupPin").value="4321"; document.getElementById("salSetupGo").click();
+        setTimeout(function(){
+          document.getElementById("salSetupPin").value="4321"; document.getElementById("salSetupGo").click();
+          setTimeout(function(){ res(window.SMD_APPLOCK.method() + "|" + window.SMD_APPLOCK.required() + "|" + !!localStorage.getItem("smd_applock_lastunlock")); }, 300);
+        }, 150);
+      }, 150);
+    });
+  `);
+  okv(pinViaManage, "pin|false|true", "setting a PIN counts as this boot's unlock and stamps lastunlock");
+  await ev(`window.SMD_APPLOCK.manage(""); return 1;`);
+  await sleep(300);
+  ok(await ev(`var c=document.querySelector('[data-m="pin"]'); return !!c && c.classList.contains("smdal-cur");`) === true, "Manage marks the current method");
+  await ev(`document.getElementById("salKeep").click(); return 1;`);
+  // reopen within the window: no prompt at all, and the window slides
+  await call("Page.navigate", { url: BASE }); await sleep(1300);
+  okv(await ev(`return window.SMD_APPLOCK.required();`), false, "reopened within 2h: required() is false (grace)");
+  ok(await ev(`return !document.getElementById("smdApplock");`) === true, "...and no unlock screen was shown");
+  // 2h+1min ago: the lock is back, and it is up BEFORE the splash's finish() (right at load)
+  await ev(`localStorage.setItem("smd_applock_lastunlock", String(Date.now() - 2*3600*1000 - 60000)); return 1;`);
+  await call("Page.navigate", { url: BASE }); await sleep(400); // well under MIN=900ms
+  ok(await ev(`return !!document.getElementById("salUnlockPin");`) === true, "outside 2h: the PIN pad is up at load, before the splash's MIN");
+  await sleep(1000); // let finish() run and queue its own done()
+  await ev(`document.getElementById("salUnlockPin").value="4321"; document.getElementById("salUnlockGo").click(); return 1;`);
+  await sleep(700);
+  ok(await ev(`return !document.getElementById("smdApplock");`) === true, "unlock screen gone after the correct PIN");
+  ok(await ev(`var s=document.getElementById("smdBootSplash"); return !s || s.classList.contains("sbs-hide");`) === true, "the boot splash completed via the queued finish() callback");
+  await ev(`localStorage.clear(); return 1;`);
 
   ok(errors.length === 0, "no uncaught JS errors (" + (errors.length ? errors.join(" | ") : "none") + ")");
 } catch (e) {

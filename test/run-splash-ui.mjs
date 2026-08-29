@@ -97,6 +97,11 @@ try {
 
   /* ---------- 1. FIRST-RUN: intro poster + landing splash ---------- */
   await newTab();
+  // the profile dir persists between runs and a later section signs in: clear on OUR origin
+  // first (about:blank has no usable storage), so "first-run" is actually first-run
+  await call("Page.navigate", { url: BASE });
+  await sleep(600);
+  await ev(`localStorage.clear(); try { sessionStorage.clear(); } catch (e) {} return 1;`);
   await call("Page.navigate", { url: BASE });
   await sleep(3500);
 
