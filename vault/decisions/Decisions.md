@@ -1806,3 +1806,16 @@ all appear at once, then automatic Face ID / PIN, fast, into app."
 - Dead `.smd-boot-phase2` selectors remain inside the shared LIQUID GLASS lists; harmless.
 - `test/run-splash-ui.mjs` section 2 rewritten (static-at-first-paint, hold at 1.6s/2.5s with
   ready forced at 0.6s, self-hide by 3.6s, no button) 91/91; `run-applock-ui` 59/59.
+
+## 2026-08-30 — App Lock: forced for every signed-in user (not flag-gated, every provider)
+Owner: "no one is forcing me to set up id/pin once signed up/in i want you to force users."
+`promptSetup()` was gated on the `smd_applock` rollout flag (unreachable in the native app) and
+fired only from the email first-run profile step, so Google/Apple sign-ins and existing accounts
+were never asked. Now `applock.js` subscribes to `SMD_ACCOUNT.onChange` (runs at boot and on
+every sign-in): signed-in, non-guest, no method configured -> the first-run chooser (no close)
+as soon as nothing else owns the screen. "Busy" = `SMD_EMAIL_AUTH.gateUp()` (account / intro /
+verify gates, splashes), `SMD_EMAIL_AUTH.flowOpen()` (its own sheet, which hands over via
+`promptSetup()` itself), or `#smdBootSplash`. Polls 500ms up to 2 min per event. Hospital for
+the institutional rule comes from `SMD_EMAIL_AUTH.loadProfile(uid)` (Firestore profile doc;
+"" when unavailable, i.e. treated as personal, and Manage re-evaluates with the real value).
+`smd_applock` now gates nothing that matters; the Security row shows for everyone.
