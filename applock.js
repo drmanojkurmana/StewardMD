@@ -121,10 +121,12 @@
     try { return !!(window.Capacitor && window.Capacitor.isPluginAvailable && window.Capacitor.isPluginAvailable("BiometricAuthNative")); }
     catch (e) { return false; }
   }
+  var _bioType = 0; // checkBiometry().biometryType: 1 = Touch ID, 2 = Face ID (plugin enum)
+  function bioName() { return _bioType === 2 ? "Face ID" : _bioType === 1 ? "Touch ID" : "Face ID / Touch ID"; }
   function canBiometric() {
     var p = bioPlugin();
     if (!bioCompiled() || !p || !p.checkBiometry) return Promise.resolve(false);
-    return Promise.resolve(p.checkBiometry()).then(function (r) { return !!(r && r.isAvailable); }).catch(function () { return false; });
+    return Promise.resolve(p.checkBiometry()).then(function (r) { _bioType = (r && r.biometryType) || 0; return !!(r && r.isAvailable); }).catch(function () { return false; });
   }
   // The raw native proxy exposes exactly the plugin's pluginMethods: checkBiometry and
   // internalAuthenticate. The public authenticate() lives only in the plugin's ESM JS layer,
@@ -391,18 +393,20 @@
     el.querySelector("#salUnlockSignout").onclick = signOutInstead;
   }
 
+  // Biometric shows NO card of its own: the system Face ID / Touch ID sheet, over the boot
+  // splash, is the whole UI. A card appears only after a failed or cancelled scan.
   function renderBiometricUnlock() {
+    closeOverlay();
+    verifyBiometric("Unlock StewardMD").then(function (r) {
+      if (r.ok) { finishUnlock(); return; }
+      canBiometric().then(function () { renderBiometricRetry(r.text); });
+    });
+  }
+  function renderBiometricRetry(text) {
     var el = overlay();
-    el.innerHTML = '<div class="smdal-card"><div class="smdal-h">Unlock StewardMD</div><div class="smdal-sub">Confirm with Face ID / Touch ID.</div><div class="smdal-err" id="salBUErr"></div><button class="smdal-go" id="salBURetry">Try again</button><button class="smdal-ghost" id="salBUSignout">Sign out instead</button></div>';
-    function attempt() {
-      verifyBiometric("Unlock StewardMD").then(function (r) {
-        if (r.ok) { finishUnlock(); return; }
-        var e2 = el.querySelector("#salBUErr"); if (e2) e2.textContent = r.text;
-      });
-    }
-    el.querySelector("#salBURetry").onclick = attempt;
+    el.innerHTML = '<div class="smdal-card"><div class="smdal-h">Unlock StewardMD</div><div class="smdal-err" id="salBUErr">' + text + '</div><button class="smdal-go" id="salBURetry">Try ' + bioName() + ' again</button><button class="smdal-ghost" id="salBUSignout">Sign out instead</button></div>';
+    el.querySelector("#salBURetry").onclick = renderBiometricUnlock;
     el.querySelector("#salBUSignout").onclick = signOutInstead;
-    attempt();
   }
 
   // manage(hospital) — reachable from Account/More at any time (unlike promptSetup(), which only
@@ -418,12 +422,13 @@
     } catch (e) {}
   }
 
-  // ---- boot: opened within the grace window -> refresh it and stay quiet; otherwise put the
-  // unlock up NOW (over the boot splash) rather than at the splash's finish(), so Face ID fires
-  // on launch and a PIN can be typed while the app is still loading.
+  // ---- boot: opened within the grace window -> refresh it and stay quiet. A PIN pad goes up
+  // NOW (over the boot splash) so it can be typed while the app still loads. Biometric waits
+  // for the splash's finish() -> unlock(): splash first, then the Face ID / Touch ID sheet
+  // fires by itself, then the app. No card in between.
   try {
     if (withinGrace()) markUnlocked();
-    else if (required()) unlock();
+    else if (required() && method() === "pin") unlock();
   } catch (e) {}
 
   window.SMD_APPLOCK = {

@@ -258,7 +258,7 @@ try {
     window.__bioNext = null; // null = resolve; an object = reject with it
     var impl = {
       checkBiometry: function () { return Promise.resolve({ isAvailable: true, biometryType: 2 }); },
-      internalAuthenticate: function (o) { window.__bioCalls.push(o); return window.__bioNext ? Promise.reject(window.__bioNext) : Promise.resolve(); }
+      internalAuthenticate: function (o) { window.__bioCalls.push(o); if (window.__bioHold) return new Promise(function (r) { window.__bioRelease = r; }); return window.__bioNext ? Promise.reject(window.__bioNext) : Promise.resolve(); }
     };
     var proxy = new Proxy({}, { get: function (_, prop) {
       return impl[prop] || function () { return Promise.reject({ code: "UNIMPLEMENTED", message: '"BiometricAuthNative.' + String(prop) + '()" is not implemented on ios' }); };
@@ -278,10 +278,19 @@ try {
   ok(await ev(`return !document.getElementById("smdApplock");`) === true, "setup overlay closes on success");
   okv(await ev(`return window.SMD_APPLOCK.required();`), false, "required() is false right after biometric setup: the scan IS this boot's unlock");
 
-  // unlock: a rejected scan shows the LAError-specific text and a retry, then a good scan unlocks
-  await ev(`window.__bioNext = { code: "biometryLockout", message: "Biometry is locked out." }; window.__unl = false; window.SMD_APPLOCK.unlock(function(){ window.__unl = true; }); return 1;`);
-  await sleep(300);
+  // unlock: while the system sheet is up there is NO card of ours; a rejected scan then shows
+  // the LAError-specific text and a retry, and a good scan unlocks
+  await ev(`window.__bioHold = true; window.__unl = false; window.SMD_APPLOCK.unlock(function(){ window.__unl = true; }); return 1;`);
+  await sleep(200);
   okv(await ev(`return window.__bioCalls.length;`), 2, "unlock called internalAuthenticate() again");
+  ok(await ev(`return !document.getElementById("smdApplock");`) === true, "NO unlock card while the biometric scan is in flight (the system sheet is the UI)");
+  await ev(`window.__bioHold = false; window.__bioNext = { code: "biometryLockout", message: "Biometry is locked out." }; window.__bioRelease(); return 1;`);
+  await sleep(300);
+  okv(await ev(`return window.__unl;`), true, "a held-then-resolved scan unlocks");
+  await ev(`window.__unl = false; window.SMD_APPLOCK.unlock(function(){ window.__unl = true; }); return 1;`);
+  await sleep(300);
+  okv(await ev(`return window.__bioCalls.length;`), 3, "third call for the rejected scan");
+  ok(await ev(`var b=document.getElementById("salBURetry"); return !!b && /Face ID again/.test(b.textContent);`) === true, "the retry card names the actual biometry (Face ID) from checkBiometry");
   ok(await ev(`var e=document.getElementById("salBUErr"); return !!e && /locked/i.test(e.textContent);`) === true,
     "a biometryLockout reject shows the lockout-specific text, not a generic failure");
   okv(await ev(`return window.__unl;`), false, "a rejected scan does NOT unlock");
