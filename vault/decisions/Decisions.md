@@ -1823,3 +1823,9 @@ the institutional rule comes from `SMD_EMAIL_AUTH.loadProfile(uid)` (Firestore p
   splash? bring it back i want both". Screen 1 (classic, static) -> 1.5s beat -> crossfade ->
   screen 2 (avatar, name, glass foot, passive pill). Still no Open Workspace button/hold; the
   constant 3s + automatic Face ID / PIN stands. So only the GATE stays removed, not phase 2.
+- **Addendum (same day): the "second screen" was the merged frame, held for 3s of REAL visibility.**
+  Owner's screenshot circled the welcome row + bar on the single merged frame: "i want user to
+  see this screen for at least 3 secs". The two-screen crossfade restore (87fc0f7c) is reverted.
+  The real defect: MIN counted from script start while the native splash still covered the
+  WebView. `native-bridge.js` now stamps `window.__smdSplashShownAt` when it lifts the native
+  splash and the boot script measures MIN from that stamp (script start on the web).
