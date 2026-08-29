@@ -98,11 +98,26 @@
         return applied.then(function () {
           setMyVersion(pending.version);
           return { ok: true, immediate: immediate !== false };
-        }, function (e) { return { ok: false, error: (e && e.message) || "apply-failed" }; });
+        }, function (e) { return { ok: false, error: otaCode(e, "apply-failed") }; });
       }, function (e) {
         cleanup();
-        return { ok: false, error: (e && e.message) || "download-failed" };
+        return { ok: false, error: otaCode(e, "download-failed") };
       });
+  }
+
+  /* NEVER hand a native error message to the UI. @capgo/capacitor-updater is given the bundle's
+   * zipUrl, and its failures routinely quote that URL back - so "Install failed - <message>" printed
+   * our OTA endpoint on a screen any user, or anyone over their shoulder, can read. Map to a short
+   * stable CODE the UI phrases itself, and keep the detail in the console for debugging. */
+  function otaCode(e, fallback) {
+    var raw = String((e && (e.message || e.code)) || "");
+    try { if (raw) console.warn("[ota] " + fallback + ":", raw); } catch (x) {}
+    if (/checksum|hash|integrity/i.test(raw)) return "checksum";
+    if (/network|timeout|offline|connection|unreachable|dns/i.test(raw)) return "network";
+    if (/space|storage|disk|quota/i.test(raw)) return "storage";
+    if (/403|401|unauthor|forbidden/i.test(raw)) return "unauthorized";
+    if (/404|not ?found/i.test(raw)) return "missing";
+    return fallback;
   }
 
   window.SMD_OTA = {
