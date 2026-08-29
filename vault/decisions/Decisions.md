@@ -1748,3 +1748,20 @@ older, Capacitor-3-targeted `capacitor-native-biometric`).
   before); `test/run-splash-ui.mjs` still 25/25. The remaining step is the owner's own
   build→install→test pass per this file's native-build gotchas (Xcode SPM scheme, `devicectl`
   reinstall wipes app data, `ios_webkit_debug_proxy` for on-device debugging).
+
+## 2026-08-30 — App Lock biometric: call the NATIVE method name (internalAuthenticate)
+Correction to the entry above. On the iPhone 15 Pro, Face ID setup failed instantly with no
+Face ID sheet, no "StewardMD would like to use Face ID" permission dialog, and no Dynamic Island
+animation. Root cause was not the device or memory: `verifyBiometric()` called
+`Capacitor.Plugins.BiometricAuthNative.authenticate()`, but the Swift plugin's `pluginMethods`
+are exactly `checkBiometry` and `internalAuthenticate`. The public `authenticate()` exists only
+in the plugin's ESM JS layer (`dist/esm/base.js`), which a buildless ES5 app never loads.
+- Capacitor's native proxy returns a wrapper function for EVERY property, so `!p.authenticate`
+  guards can never detect a wrong name; the call rejects `UNIMPLEMENTED` before `LAContext` is
+  touched. `checkBiometry()` is a real native method, which is why the option still rendered.
+- Rule for this repo: when using a Capacitor plugin through `window.Capacitor.Plugins` (no
+  bundler), the callable names are the plugin's native `pluginMethods` / `@PluginMethod`s, not
+  its TypeScript public API. Read the Swift/Java, not `definitions.d.ts`.
+- Failure text now maps the LAError code (`userCancel`, `authenticationFailed`,
+  `biometryLockout`, `biometryNotEnrolled`, ...). `test/run-applock-ui.mjs` section 9 installs a
+  Capacitor-shaped fake proxy where only native names succeed (41/41).
