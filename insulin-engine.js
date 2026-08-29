@@ -608,14 +608,20 @@
     v = v || {};
     var formula = "units per band = (band midpoint - target) / ISF, rounded, capped";
     var rule = v.rule || 1800;
+    // The diagnosis sets the sensitivity band unless the caller overrides it: a type 1 is
+    // insulin-sensitive, an ill or steroid-treated patient is resistant, and giving both the
+    // same scale is how one gets a hypo and the other stays at 300 all week.
+    var dx = dxGuidance(v.dxType);
+    var band = v.resistance || dx.resistance || "usual";
     var isf = null, tdd = null, src;
     if (ok(v.isf) && v.isf > 0) { isf = v.isf; src = "entered ISF"; }
     else if (ok(v.tdd) && v.tdd > 0) { tdd = v.tdd; isf = rule / tdd; src = "ISF from TDD " + tdd + " u/day (" + rule + " rule)"; }
     else if (ok(v.weightKg) && v.weightKg > 0) {
-      var f = { sensitive: 0.3, usual: 0.4, resistant: 0.6 }[v.resistance || "usual"];
+      var f = { sensitive: 0.3, usual: 0.4, resistant: 0.6 }[band];
       tdd = Math.round(v.weightKg * f);
       isf = rule / tdd;
-      src = "ISF from an estimated TDD (" + v.weightKg + " kg x " + f + " u/kg/day = " + tdd + " u/day, " + (v.resistance || "usual") + " sensitivity)";
+      src = "ISF from an estimated TDD (" + v.weightKg + " kg x " + f + " u/kg/day = " + tdd + " u/day, " + band +
+        " sensitivity" + (dx.id && !v.resistance ? " for " + dx.label : "") + ")";
     } else return ERR(formula);
 
     var target = ok(v.target) ? v.target : 150;
@@ -629,7 +635,11 @@
     });
     return {
       result: rows[0].units, rounded: rows[0].units, unit: "units", rows: rows,
-      isf: r1(isf), tddUsed: tdd, target: target,
+      isf: r1(isf), tddUsed: tdd, target: target, resistance: band, dxType: dx.id || null,
+      // "Correction-only is fine here" is TRUE for stress hyperglycaemia and FALSE for type 1.
+      // Saying which one applies is the whole point of asking the diagnosis.
+      correctionOnly: dx.correctionOnly || "discouraged",
+      blocked: dx.discourage && dx.discourage.scale ? dx.discourage.scale : null,
       steps: rows.map(function (r) { return { label: r.label + " mg/dL", expr: "(" + (r.to === null ? r.from + 50 : (r.from + r.to) / 2) + " - " + target + ") / " + r1(isf), value: r.units }; }),
       formula: formula,
       assumptions: [
@@ -638,10 +648,13 @@
         "Capped at " + cap + " units per dose."
       ],
       clinicalNotes: [
+        dx.discourage && dx.discourage.scale ? dx.discourage.scale
+          : dx.correctionOnly === "acceptable"
+            ? "In stress or illness hyperglycaemia without known diabetes, a correction-only regimen IS acceptable for mild hyperglycaemia - this is the recognised exception. Add basal insulin if corrections are needed repeatedly or glucose stays above 180 mg/dL."
+            : "A correction scale is SUPPLEMENTAL. Prolonged sliding-scale insulin WITHOUT basal is explicitly discouraged: if corrections are needed repeatedly, the basal or prandial dose is wrong.",
         "Give with a rapid-acting analogue before meals, or every 6 hours if the patient is not eating (every 4 hours only with a rapid analogue).",
-        "A correction scale is SUPPLEMENTAL. Prolonged sliding-scale insulin WITHOUT basal is explicitly discouraged: if corrections are needed repeatedly, the basal or prandial dose is wrong.",
         "Recheck the scale daily and rebuild it if the total daily requirement moves."
-      ],
+      ].concat(dx.notes || []),
       refs: ["ADA Standards of Care in Diabetes 2026, ch.16 (Diabetes Care in the Hospital): correction insulin before meals or every 4-6 h if not eating; prolonged correction-only regimens without basal are discouraged."]
     };
   }
@@ -880,8 +893,254 @@
     };
   }
 
+  /* ==================================================================================
+   * DIABETES TYPE
+   * The type decides which regimens are even LEGAL, not just which numbers are typical.
+   * Correction-only insulin is malpractice in type 1 and standard care in mild stress
+   * hyperglycaemia - and the module previously offered both the identical screen. Asking
+   * once, up front, lets every downstream default and warning be right by construction.
+   * ================================================================================== */
+  var DX_TYPES = {
+    t1: {
+      id: "t1", label: "Type 1 diabetes", short: "T1DM",
+      detail: "Absolute insulin deficiency. Always needs basal plus prandial.",
+      resistance: "sensitive", tddFactor: 0.5, correctionOnly: "never", basalMayStop: false,
+      notes: [
+        "NEVER stop basal insulin, even when nil by mouth or when the glucose is normal - stopping it causes ketoacidosis within hours.",
+        "Correction-only (sliding scale alone) is never an acceptable regimen in type 1.",
+        "Check ketones at any glucose above 250 mg/dL, and during any illness whatever the glucose.",
+        "Usually insulin-sensitive: start correction scales at the lower end."
+      ],
+      suggest: ["inpatient", "correction", "combined", "titrate", "npo", "sick", "ivsc"],
+      discourage: { scale: "A correction scale ALONE is never appropriate in type 1. Build it only as a supplement on top of basal-bolus.",
+                    basalT2: "Basal-only initiation is a type 2 regimen. Type 1 needs basal AND prandial from the start." }
+    },
+    t2: {
+      id: "t2", label: "Type 2 diabetes", short: "T2DM",
+      detail: "Insulin resistance. Basal-only is a valid start; premix is common.",
+      resistance: "usual", tddFactor: 0.4, correctionOnly: "discouraged", basalMayStop: true,
+      notes: [
+        "Basal-only initiation is appropriate; prandial insulin is added later if post-meal readings stay high.",
+        "Review oral agents: hold metformin for AKI or contrast, reduce or stop sulfonylureas if eating poorly, hold SGLT2 inhibitors when acutely unwell or fasting.",
+        "Above about 0.5 u/kg/day of basal, add prandial cover rather than more basal."
+      ],
+      suggest: ["basalT2", "titrate", "premix", "premixTitr", "inpatient", "scale", "discharge"],
+      discourage: {}
+    },
+    stress: {
+      id: "stress", label: "Stress / illness hyperglycaemia", short: "Stress",
+      detail: "High glucose during acute illness, in someone with no known diabetes.",
+      resistance: "resistant", tddFactor: 0.4, correctionOnly: "acceptable", basalMayStop: true,
+      notes: [
+        "This is the ONE setting where correction-only insulin is acceptable: mild hyperglycaemia in non-critical care without known diabetes. Add basal if corrections are needed repeatedly or glucose stays above 180 mg/dL.",
+        "CHECK AN HbA1c. At or above 6.5% this is previously undiagnosed diabetes, not stress hyperglycaemia, and it needs a diabetes regimen and follow-up.",
+        "Requirements usually FALL as the illness resolves - reassess daily and stop the insulin when it is no longer needed.",
+        "Illness and its treatment raise insulin resistance, so start scales at the higher end."
+      ],
+      suggest: ["scale", "correction", "inpatient", "discharge"],
+      discourage: {}
+    },
+    steroid: {
+      id: "steroid", label: "Steroid-induced hyperglycaemia", short: "Steroid",
+      detail: "Driven by glucocorticoids. Mostly post-lunch and evening.",
+      resistance: "resistant", tddFactor: 0.4, correctionOnly: "discouraged", basalMayStop: true,
+      notes: [
+        "The pattern is post-lunch and evening hyperglycaemia with a NORMAL fasting glucose - a normal morning reading is falsely reassuring. Check pre-lunch, pre-dinner and bedtime.",
+        "Cover with NPH timed to the steroid rather than by raising the basal.",
+        "TAPER the insulin on the same day the steroid is tapered. Forgetting this is the commonest cause of steroid-related hypoglycaemia.",
+        "Insulin-resistant while the steroid is running: start scales at the higher end."
+      ],
+      suggest: ["steroid", "scale", "correction", "inpatient"],
+      discourage: {}
+    },
+    secondary: {
+      id: "secondary", label: "Secondary diabetes", short: "Secondary",
+      detail: "Pancreatic (type 3c), post-transplant, cystic-fibrosis-related.",
+      resistance: "sensitive", tddFactor: 0.3, correctionOnly: "never", basalMayStop: false,
+      notes: [
+        "Pancreatogenic (type 3c) diabetes loses GLUCAGON as well as insulin, so hypoglycaemia is more frequent, more severe and slower to self-correct. Dose conservatively and set a higher target.",
+        "Brittle control is expected: prefer small, frequent adjustments over large ones.",
+        "Consider exocrine insufficiency - untreated malabsorption makes intake, and therefore glucose, unpredictable. Check whether pancreatic enzyme replacement is prescribed.",
+        "Post-transplant diabetes tracks the immunosuppression (tacrolimus, steroids); requirements change when those doses change.",
+        "Specialist input is advised before initiating or intensifying."
+      ],
+      suggest: ["inpatient", "correction", "titrate", "npo", "sick"],
+      discourage: { scale: "Correction-only is not appropriate here: these patients are insulin-deficient and hypoglycaemia-prone." }
+    }
+  };
+  function dxGuidance(dxType) {
+    return DX_TYPES[dxType] || { id: null, label: "", notes: [], resistance: "usual", suggest: [], discourage: {} };
+  }
+
+  /* Enteral / parenteral nutrition. The feed IS the meal, so the insulin has to match the
+   * feed's shape - and the real danger is the feed stopping while the insulin keeps working. */
+  function nutritionInsulin(v) {
+    v = v || {};
+    var formula = "continuous feed: basal + correction every 4 to 6 h; nutritional insulin about 1 unit per 10 to 15 g carbohydrate";
+    var mode = v.feed || "continuous";                    // continuous | bolus | tpn
+    var carbs = ok(v.carbGramsPerDay) ? v.carbGramsPerDay : null;
+    var w = ok(v.weightKg) ? v.weightKg : null;
+    if (carbs === null && w === null) return ERR(formula);
+    var inc = v.increment || 1;
+    var perUnit = ok(v.gramsPerUnit) ? v.gramsPerUnit : 12;   // midpoint of the 10-15 g range
+    var steps = [], nutritional = null, basal = null, perFeed = null, inBag = null;
+
+    if (carbs !== null) {
+      nutritional = roundDose(carbs / perUnit, inc);
+      steps.push({ label: "Nutritional insulin", expr: carbs + " g carbohydrate / " + perUnit + " g per unit", value: nutritional });
+    }
+    if (w !== null) {
+      basal = roundDose(w * 0.2, inc);
+      steps.push({ label: "Basal insulin", expr: w + " kg x 0.2 u/kg/day", value: basal });
+    }
+    if (mode === "bolus" && nutritional !== null) {
+      var n = ok(v.feedsPerDay) ? v.feedsPerDay : 4;
+      perFeed = roundDose(nutritional / n, inc);
+      steps.push({ label: "Rapid-acting before each feed", expr: nutritional + " / " + n + " feeds", value: perFeed });
+    }
+    if (mode === "tpn") {
+      var dex = ok(v.dextroseGrams) ? v.dextroseGrams : carbs;
+      if (dex != null) { inBag = roundDose(dex * 0.1, inc);
+        steps.push({ label: "Insulin added to the TPN bag", expr: dex + " g dextrose x 0.1 u/g", value: inBag }); }
+    }
+    var total = (nutritional || 0) + (basal || 0);
+    return {
+      result: total, rounded: roundDose(total, inc), unit: "units/day",
+      nutritional: nutritional, basal: basal, perFeed: perFeed, inBag: inBag, feed: mode,
+      steps: steps, formula: formula,
+      assumptions: [
+        mode === "continuous" ? "Continuous feed: basal insulin plus correction every 6 hours with regular insulin, or every 4 hours with a rapid analogue."
+          : mode === "bolus" ? "Bolus feeds: a rapid-acting dose before each feed, matched to that feed's carbohydrate."
+          : "Parenteral nutrition: insulin is usually added to the bag, starting at about 0.1 units per gram of dextrose.",
+        "Nutritional insulin estimated at 1 unit per " + perUnit + " g carbohydrate (usual range 10 to 15 g).",
+        "Basal estimated at 0.2 u/kg/day; a patient already on insulin keeps their own basal instead."
+      ],
+      clinicalNotes: [
+        "THE FEED STOPPING IS THE DANGER. If the feed is interrupted, held for a procedure, or the tube blocks or is pulled, start 10% dextrose at the same rate and check glucose hourly - the insulin is still working when the calories stop.",
+        "Never give a whole day of nutritional insulin as one long-acting dose for a continuous feed: if the feed stops, that dose cannot be taken back.",
+        "Check capillary glucose every 4 to 6 hours, and recalculate whenever the feed rate or formula changes.",
+        "Overnight or cyclical feeds need the insulin timed to the feed, not to the clock."
+      ],
+      refs: ["ADA Standards of Care in Diabetes 2026, ch.16: correction insulin every 4-6 h during continuous enteral or parenteral nutrition, with basal plus nutritional insulin matched to the feed."]
+    };
+  }
+
+  /* Perioperative. Almost all of this is about what to HOLD, so it is a checklist with
+   * numbers attached rather than a single dose. */
+  function periopRegimen(v) {
+    v = v || {};
+    var formula = "morning of surgery: basal at 75-80% of the usual dose, all prandial insulin held";
+    var basal = ok(v.basalDose) ? v.basalDose : (ok(v.tdd) ? Math.round(v.tdd * 0.5) : null);
+    if (basal === null) return ERR(formula);
+    var t1 = v.dxType === "t1" || v.type1;
+    var pct = t1 ? 0.8 : 0.75;
+    var inc = v.increment || 1;
+    var dose = Math.max(t1 ? 1 : 0, roundDose(basal * pct, inc));
+    return {
+      result: dose, rounded: dose, unit: "units", basal: dose, previousBasal: basal, prandial: 0,
+      steps: [
+        { label: "Basal on the morning of surgery", expr: basal + " x " + pct + (t1 ? " (type 1: reduced, never omitted)" : ""), value: dose },
+        { label: "Prandial insulin", expr: "HELD - the patient is not eating", value: 0 },
+        { label: "Correction insulin", expr: "continue, every 4 to 6 h", value: null }
+      ],
+      formula: formula,
+      assumptions: [
+        "Give " + Math.round(pct * 100) + "% of the usual basal on the morning of surgery.",
+        t1 ? "TYPE 1: the basal is reduced, never omitted. An omitted basal plus surgical stress is how a patient reaches theatre in ketoacidosis."
+           : "Type 2: reduce further if the fast is long or the patient is hypoglycaemia-prone.",
+        "All short-acting and premixed insulin is held on the morning of surgery."
+      ],
+      clinicalNotes: [
+        "HOLD SGLT2 INHIBITORS 3 TO 4 DAYS BEFORE SURGERY. They cause euglycaemic ketoacidosis - the glucose looks normal while the patient is acidotic, so it gets missed.",
+        "Hold metformin on the day of surgery, and after contrast until renal function is confirmed.",
+        "Hold sulfonylureas on the morning of surgery: the patient is fasting.",
+        "Target 100 to 180 mg/dL perioperatively. Check on arrival, then every 1 to 2 hours during a long case and every 4 to 6 hours while nil by mouth.",
+        "Put people with diabetes first on the list where possible, to shorten the fast.",
+        "Restart prandial insulin with the first meal actually eaten, not when the diet is ordered."
+      ],
+      refs: ["ADA Standards of Care in Diabetes 2026, ch.16: perioperative target 100-180 mg/dL, hold oral agents on the day of surgery, hold SGLT2 inhibitors 3-4 days beforehand, continue a reduced basal."]
+    };
+  }
+
+  /* Discharge. The regimen that leaves the hospital is not the one that ran inside it,
+   * and an insulin discharge without education is a readmission. */
+  function dischargeRegimen(v) {
+    v = v || {};
+    var formula = "home basal = inpatient basal x 0.8 (well and eating); regimen chosen on HbA1c";
+    var basal = ok(v.inpatientBasal) ? v.inpatientBasal : (ok(v.tdd) ? Math.round(v.tdd * 0.5) : null);
+    if (basal === null) return ERR(formula);
+    var a1c = ok(v.hba1c) ? v.hba1c : null;
+    var t1 = v.dxType === "t1" || v.type1;
+    var inc = v.increment || 1;
+    // Inpatient requirements run high (illness, steroids, immobility); sending that dose home
+    // with a patient who is well and eating normally is a direct route to hypoglycaemia.
+    var home = Math.max(1, roundDose(basal * 0.8, inc));
+    var plan, why;
+    if (t1) { plan = "Basal-bolus (mandatory)"; why = "Type 1 always goes home on basal plus prandial insulin."; }
+    else if (a1c === null) { plan = "Basal insulin, then reassess"; why = "No HbA1c available: discharge on basal and set the long-term regimen at follow-up with an HbA1c."; }
+    else if (a1c < 7) { plan = "Resume pre-admission oral agents"; why = "HbA1c " + a1c + "% suggests control was adequate before admission: restart the home regimen and stop the inpatient insulin."; }
+    else if (a1c < 9) { plan = "Pre-admission agents plus basal insulin"; why = "HbA1c " + a1c + "%: add basal insulin to the previous oral regimen."; }
+    else { plan = "Basal-bolus, or basal plus a GLP-1 receptor agonist"; why = "HbA1c " + a1c + "% indicates sustained hyperglycaemia before admission: one agent will not be enough."; }
+    return {
+      result: home, rounded: home, unit: "units/day", homeBasal: home, inpatientBasal: basal, plan: plan,
+      steps: [
+        { label: "Inpatient basal", expr: basal + " units/day", value: basal },
+        { label: "Home basal", expr: basal + " x 0.8 - inpatient needs run higher than home needs", value: home },
+        { label: "Regimen", expr: plan, value: null }
+      ],
+      formula: formula,
+      assumptions: [why,
+        "Home basal set at 80% of the inpatient dose for a patient who is well and eating normally. Keep 100% only if they took this dose before admission and were well controlled.",
+        "Insulin started for a reversible cause (steroids, acute illness, a feed) should be reviewed for STOPPING, not simply continued."],
+      clinicalNotes: [
+        "DISCHARGE CHECKLIST: insulin name and strength in writing, doses and times, a glucometer with strips and lancets, injection technique confirmed by teach-back, sharps disposal, and hypoglycaemia recognition and treatment.",
+        "Hypoglycaemia education is the item that prevents readmission: the 15-15 rule (15 g fast-acting carbohydrate, recheck after 15 minutes), and never skipping a meal after taking insulin.",
+        "Give a written sick-day plan: never stop insulin, check more often, keep fluids up.",
+        "Arrange follow-up within 1 to 2 weeks with a fasting glucose log, and send the regimen to the family physician.",
+        "Confirm the patient can actually obtain, afford and refrigerate the insulin prescribed."
+      ],
+      refs: ["ADA Standards of Care in Diabetes 2026, ch.16: structured discharge planning, diabetes self-management education, medication reconciliation, follow-up within 1-2 weeks."]
+    };
+  }
+
+  /* Sick-day rules. The one everybody gets wrong: not eating is not a reason to stop insulin. */
+  function sickDayRules(v) {
+    v = v || {};
+    var formula = "extra correction during illness = 10-20% of the total daily dose every 2 to 4 hours if ketones are present";
+    var tdd = ok(v.tdd) ? v.tdd : (ok(v.weightKg) ? Math.round(v.weightKg * 0.5) : null);
+    if (tdd === null) return ERR(formula);
+    var t1 = v.dxType === "t1" || v.type1;
+    var inc = v.increment || 1;
+    var low = roundDose(tdd * 0.1, inc), high = roundDose(tdd * 0.2, inc);
+    return {
+      result: low, rounded: low, unit: "units", extraLow: low, extraHigh: high, tdd: tdd,
+      steps: [
+        { label: "Total daily dose", expr: ok(v.tdd) ? "entered " + tdd + " u/day" : v.weightKg + " kg x 0.5 u/kg/day", value: tdd },
+        { label: "Extra dose, ketones negative or trace", expr: tdd + " x 0.10", value: low },
+        { label: "Extra dose, ketones moderate or large", expr: tdd + " x 0.20", value: high }
+      ],
+      formula: formula,
+      assumptions: [
+        "Extra rapid-acting insulin of " + low + " to " + high + " units, repeated every 2 to 4 hours while glucose and ketones stay high.",
+        "This is IN ADDITION to the usual basal and prandial insulin, which continue."
+      ],
+      clinicalNotes: [
+        "NEVER STOP INSULIN DURING ILLNESS, even if the patient is not eating. Illness RAISES insulin requirements; stopping insulin because someone is not eating is the commonest cause of ketoacidosis.",
+        "Check glucose every 2 to 4 hours." + (t1 ? " Check ketones every 4 hours while unwell, whatever the glucose is." : " Check ketones if glucose goes above 250 mg/dL."),
+        "Keep fluids up: sugar-free if glucose is high, sugar-containing if the patient cannot eat and glucose is falling.",
+        "Basal insulin ALWAYS continues. Prandial is reduced only if the patient genuinely is not eating; correction continues either way.",
+        "GO TO HOSPITAL for persistent vomiting, moderate or large ketones that are not clearing, glucose above 300 mg/dL despite extra insulin, breathlessness, abdominal pain, drowsiness, or inability to keep fluids down.",
+        "Hold metformin and SGLT2 inhibitors while acutely unwell or dehydrated."
+      ],
+      refs: ["ADA Standards of Care in Diabetes 2026: sick-day management - continue insulin, increase monitoring, test ketones, supplemental rapid-acting insulin of 10-20% of the total daily dose."]
+    };
+  }
+
   var API = {
     roundDose: roundDose, mmol: mmol, firstDoseCorrection: firstDoseCorrection,
+    DX_TYPES: DX_TYPES, dxGuidance: dxGuidance,
+    nutritionInsulin: nutritionInsulin, periopRegimen: periopRegimen,
+    dischargeRegimen: dischargeRegimen, sickDayRules: sickDayRules,
     basalTitration: basalTitration, correctionScale: correctionScale, inpatientInit: inpatientInit,
     npoRegimen: npoRegimen, steroidCover: steroidCover, ivToSubcut: ivToSubcut,
     premixInit: premixInit, premixTitration: premixTitration, STEROID_EQUIV: STEROID_EQUIV,

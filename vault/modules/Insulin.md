@@ -153,3 +153,50 @@ cited institution-configurable protocol + R1 sign-off that was always the condit
 (Playwright against `insulin-demo.html`): blank inputs, titration 20->22 u, correction-scale
 table, and the Pediatric double-acknowledgement gate. Zero console errors.
 Cache-bust tokens: `insulin.css` / `insulin-engine.js` / `insulin-safety.js` / `insulin.js` -> `?v=ins12`.
+
+## 2026-08-29 (later) - Diabetes type gate, WardSync import, remaining ward gaps
+
+### Diabetes type asked FIRST (owner's design call)
+New `dxgate` screen shown on open unless a type is already known or the user skipped.
+Five types in `INSULIN_ENGINE.DX_TYPES`: `t1`, `t2`, `stress`, `steroid`, `secondary`.
+Each carries `resistance` (sensitive/usual/resistant), `tddFactor`, `correctionOnly`,
+`basalMayStop`, `notes[]`, `suggest[]` and `discourage{}`.
+- The type SETS THE SCALE: same 70 kg patient, T1 gets ISF 85.7 -> 1/1/2/2/3/4 u; stress
+  gets ISF 42.9 -> 1/2/4/5/6/8 u. Verified in the browser.
+- The type GATES REGIMENS: correction-only is `never` in t1/secondary (a refusal banner
+  renders on the scale screen) and `acceptable` in stress - the recognised ADA exception.
+- Stress carries a mandatory "check an HbA1c, at/above 6.5% this is undiagnosed diabetes".
+- `Skip - take me straight to the calculator` sets `st.dxSkipped`; everything still works,
+  you just get the `usual` band and no type-specific notes. Chip on the dashboard changes it.
+- A patient profile's `dxType` (if it matches a known id) restores the type automatically.
+
+### Add a patient from Ward Sync (GHIS / Connect EMR)
+"Add from Ward Sync" on the Patients screen, shown only when `GHIS.isConnected()`.
+Uses the EXISTING one-shot picker `GHIS.pickPatient(cb)` -> `{episodeId, patientId, name}`,
+enriched from `GHIS.getPatients()` (age lives in GHIS's `dob` field, plus gender/bed/dept).
+Same handoff SurgX uses. `ghis-ward.js` is generated ("do not edit by hand") and was NOT touched.
+**PRIVACY DECISION:** no DOB and no MRN-as-identity is copied. Hospital ids go in a separate
+`ward: {source, patientId, episodeId, bed, dept, linkedAt}` block used only for re-linking; they
+are never written to the dose log and never appear in the CSV audit export. Weight is deliberately
+NOT guessed - every weight-based calculation needs it, so the clinician enters it.
+
+### Remaining ward gaps closed
+`nutritionInsulin` (continuous / bolus / TPN; 1 u per 10-15 g carbohydrate, 0.1 u per g dextrose,
+plus the feed-interruption -> 10% dextrose warning), `periopRegimen` (75-80% basal, prandial held,
+SGLT2 hold 3-4 days, target 100-180), `dischargeRegimen` (home basal 80% of inpatient, regimen by
+HbA1c, education checklist + 15-15 rule + 1-2 week follow-up), `sickDayRules` (never stop insulin,
+10-20% of TDD extra, ketone testing, red-flag list). UI modes: Tube feed / TPN, Surgery, Sick day
+(Special situations) and Discharge (Adjusting).
+
+### Tests: 183 insulin tests pass
+- `test/insulin-ward.test.mjs` now 52 (adds dx-type behaviour + the 4 new workflows)
+- `test/insulin-ui.test.mjs` NEW, 18 tests - the UI layer driven in Node with a DOM stub
+  (same approach as `test/oncotree-ui.test.mjs`). Locks the UI-layer bugs: empty defaults,
+  per-patient IOB and daily totals, unit contamination, the paediatric critical gate, the
+  pediatric-flag-not-a-fake-age fix, dx routing, WardSync profile privacy, and a
+  no-undefined/NaN/[object Object] render check.
+- `insulin.js` exposes a test-only `window.INSULIN._st` / `._build` surface for this (mirrors
+  `oncotree.js` `_st`). Not used by the app.
+Browser-verified again via Playwright on `insulin-demo.html`: type gate, T1 refusal banner,
+T1-vs-stress scale differentiation, zero console errors.
+Cache-bust: `insulin.css` / `insulin-engine.js` / `insulin-safety.js` / `insulin.js` -> `?v=ins13`.

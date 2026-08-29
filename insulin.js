@@ -83,6 +83,27 @@
       pregnancy: false, renal: false, hepatic: false, steroids: false,
       icr: "", isf: "", target: "", tdd: "", dia: "", maxBolus: "", maxDaily: "", bolus: st.bolus };
   }
+  function wardAvailable() { try { return !!(window.GHIS && window.GHIS.pickPatient && window.GHIS.isConnected && window.GHIS.isConnected()); } catch (e) { return false; } }
+  /* Build an insulin profile from a Ward Sync record.
+   * DELIBERATELY NOT COPIED: date of birth and any MRN as an identity field. This module's
+   * store is MRN/DOB-free by design (see the vault gotcha) and the CSV audit export must stay
+   * that way. GHIS carries AGE in its `dob` field, so age is safe to take. The hospital ids
+   * live in a separate `ward` block used only to re-link to the roster; they are never written
+   * into the dose log and never leave in the CSV export. Weight is NOT guessed - it is the one
+   * number every weight-based calculation needs, so the clinician must enter it. */
+  function wardProfile(sel, full) {
+    var f = full || {}, age = "";
+    var a = parseInt(f.dob, 10); if (!isNaN(a) && a > 0 && a < 130) age = a;
+    var sex = (f.gender || "").toLowerCase();
+    sex = sex.indexOf("f") === 0 ? "F" : sex.indexOf("m") === 0 ? "M" : "";
+    var bed = (f.bedName || "").trim(), dept = (f.deptDescription || "").trim();
+    return { id: null, name: (sel.name || f.patientFirstName || "Ward patient").trim(),
+      sex: sex, age: age, heightCm: "", weightKg: "", dxType: "", regimen: "",
+      notes: [dept, bed ? "Bed " + bed : ""].filter(Boolean).join(" - "),
+      pregnancy: false, renal: false, hepatic: false, steroids: false,
+      icr: "", isf: "", target: "", tdd: "", dia: "", maxBolus: "", maxDaily: "", bolus: st.bolus,
+      ward: { source: "ghis", patientId: sel.patientId || "", episodeId: sel.episodeId || "", bed: bed, dept: dept, linkedAt: Date.now() } };
+  }
   function bmiOf(p) {
     if (!num(p.heightCm) || !num(p.weightKg) || Number(p.heightCm) <= 0) return null;
     var mtr = Number(p.heightCm) / 100;
@@ -98,6 +119,14 @@
     if (num(p.target)) st.target = Number(p.target);
     if (num(p.tdd)) st.tdd = Number(p.tdd);
     if (p.bolus) st.bolus = p.bolus;
+    // A saved diabetes type carries through, so the scale band and warnings are right without
+    // asking again. Only a recognised id counts - the field is free text on older profiles.
+    if (p.dxType && dxTypes()[p.dxType]) {
+      st.dxType = p.dxType;
+      var g = window.INSULIN_ENGINE.dxGuidance(p.dxType);
+      st.scaleResist = g.resistance || "usual";
+      if (p.dxType === "t1" || p.dxType === "secondary") st.npoType1 = true;
+    }
   }
   function num(x) { return x !== "" && x != null && isFinite(Number(x)); }
   // Blank stays blank. Passing 0 for an empty field would let the engine compute a dose
@@ -137,6 +166,12 @@
     st.increment = SET.increment;
     st.bolus = SET.bolusInsulin || "aspart"; st.iobNote = "";
     st.tdd = ""; st.isfRule = 1800; st.icrRule = 500; st.tddFactor = 0.4; st.basalFraction = 0.5;
+    // Diabetes type is asked once, up front, and drives the scale band, the suggested
+    // workflows and the type-specific warnings. dxSkipped remembers "just take me to the
+    // calculator" so the gate is never shown twice in a session.
+    st.dxType = st.dxType || ""; st.dxSkipped = !!st.dxSkipped;
+    st.nutCarbs = ""; st.nutFeed = "continuous"; st.nutFeeds = 4; st.nutDextrose = "";
+    st.hba1c = ""; st.inpBasal = "";
     // Ward workflow inputs - also empty; only method/rule choices carry a default.
     st.curBasal = ""; st.fasting = ""; st.preDinner = ""; st.titrMethod = "units";
     st.scaleResist = "usual"; st.scaleMax = 10;
@@ -183,7 +218,8 @@
       basalT2: "Basal initiation (type 2)", inpatient: "Inpatient basal-bolus initiation",
       premix: "Premix initiation", premixTitr: "Premix titration", titrate: "Basal titration",
       scale: "Correction scale", npo: "Nil by mouth regimen", steroid: "Glucocorticoid cover",
-      ivsc: "Intravenous to subcutaneous transition" };
+      ivsc: "Intravenous to subcutaneous transition", nutrition: "Enteral or parenteral nutrition",
+      periop: "Perioperative regimen", discharge: "Discharge regimen", sick: "Sick-day rules" };
     return L[m] || "Insulin dose";
   }
 
@@ -287,7 +323,8 @@
     }
     document.getElementById("insHeader").innerHTML = headerHTML();
     var s = document.getElementById("insScreen");
-    if (st.screen === "dashboard") { s.innerHTML = dashboardHTML(); }
+    if (st.screen === "dxgate") { s.innerHTML = dxGateHTML(); }
+    else if (st.screen === "dashboard") { s.innerHTML = dashboardHTML(); }
     else if (st.screen === "settings") { s.innerHTML = settingsHTML(); }
     else if (st.screen === "library") { s.innerHTML = libraryHTML(); renderLibList(); }
     else if (st.screen === "compare") { s.innerHTML = compareHTML(); }
@@ -307,7 +344,8 @@
         '<button class="ins-hbtn" data-ins="close" aria-label="Close">&times;</button></div>';
     }
     var title, sub, back = "go-dash";
-    if (st.screen === "settings") { title = "Settings"; sub = "Preferences and safety limits"; }
+    if (st.screen === "dxgate") { title = "Diabetes type"; sub = "Sets the scale, the doses and the safety checks"; }
+    else if (st.screen === "settings") { title = "Settings"; sub = "Preferences and safety limits"; }
     else if (st.screen === "library") { title = "Insulin library"; sub = "Reference and comparison"; }
     else if (st.screen === "compare") { title = "Compare insulins"; sub = st.compare.length + " selected"; back = "go-library"; }
     else if (st.screen === "patients") { title = "Patients"; sub = loadPatients().length + " saved profiles"; }
@@ -318,6 +356,44 @@
     return '<div class="ins-head ins-bf"><button class="ins-hbtn" data-ins="' + back + '" aria-label="Back">' + ICON_BACK + '</button>' +
       '<div><div class="ins-title">' + title + '</div><div class="ins-sub">' + sub + '</div></div>' +
       '<button class="ins-hbtn" data-ins="close" aria-label="Close">&times;</button></div>';
+  }
+
+  /* ---------- Diabetes type gate ----------
+   * Asked ONCE, before anything else. The type is not cosmetic: it decides the correction
+   * scale band, which workflows are offered, and whether a correction-only regimen is
+   * standard care (stress hyperglycaemia) or malpractice (type 1). Skippable in one tap,
+   * because a clinician who already knows what they want should not be interrogated. */
+  function dxTypes() { var E = window.INSULIN_ENGINE; return (E && E.DX_TYPES) || {}; }
+  function dxGateHTML() {
+    var T = dxTypes(), ids = ["t1", "t2", "stress", "steroid", "secondary"];
+    var cards = ids.filter(function (id) { return T[id]; }).map(function (id) {
+      var d = T[id];
+      return '<button class="ins-askbtn" data-ins="dx-pick" data-v="' + id + '">' +
+        '<span class="ins-ask-q">' + esc(d.label) + '</span>' +
+        '<span class="ins-ask-d">' + esc(d.detail) + '</span>' + ICON_CHEVR + '</button>';
+    }).join("");
+    return '<div class="ins-card ins-bf"><div class="ins-card-t">Which patient is this?</div>' +
+      '<div class="ins-hint" style="margin-bottom:10px">The type sets the correction scale, the starting doses and the safety checks. Type 1 and type 2 are not interchangeable here.</div>' +
+      '<div class="ins-ask">' + cards + '</div></div>' +
+      '<button class="ins-skip ins-bf" data-ins="dx-skip">Skip - take me straight to the calculator</button>' +
+      '<div class="ins-tgt-note ins-bf">Skipping is safe: every calculation still works, you just get the general scale instead of a type-specific one, and no type-specific warnings.</div>';
+  }
+  function dxChipHTML() {
+    var T = dxTypes(), d = T[st.dxType];
+    if (!d) return '<button class="ins-dxchip ins-dxchip-empty ins-bf" data-ins="dx-open">' +
+      '<span>No diabetes type set</span><span class="ins-dxchip-a">Choose</span></button>';
+    return '<button class="ins-dxchip ins-bf" data-ins="dx-open">' +
+      '<span class="ins-dxchip-t">' + esc(d.short) + '</span>' +
+      '<span class="ins-dxchip-s">' + esc(d.label) + '</span>' +
+      '<span class="ins-dxchip-a">Change</span></button>';
+  }
+  // Guidance for the chosen type, shown once on the result rather than repeated per field.
+  function dxNotesHTML() {
+    var E = window.INSULIN_ENGINE; if (!E || !st.dxType) return "";
+    var d = E.dxGuidance(st.dxType);
+    if (!d.notes || !d.notes.length) return "";
+    return '<div class="ins-conv-sec ins-dxnotes"><h4>' + esc(d.label) + '</h4><ul>' +
+      d.notes.map(function (n) { return '<li>' + esc(n) + '</li>'; }).join("") + '</ul></div>';
   }
 
   /* ---------- Dashboard ---------- */
@@ -341,7 +417,7 @@
         statTile("Target", fmt(st.target), gUnit()) + statTile("Carb ratio", fmt(st.icr), "g/u") + statTile("Sensitivity", fmt(st.isf), isfUnit()) +
       '</div>' : "";
 
-    return patientBarHTML() + summary +
+    return patientBarHTML() + dxChipHTML() + summary +
       /* Entry by the QUESTION the clinician arrived with, not by the name of the formula.
        * "Combined dose / Meal bolus / Correction" told a resident nothing about which one
        * answers "fasting is 190 on 20 units of glargine". These do. */
@@ -561,7 +637,8 @@
     return '<div class="ins-search ins-bf">' + ICON_SEARCH +
         '<input id="insPatQ" data-ins="pat-q" type="search" placeholder="Search patients" value="' + esc(st.patQ) + '" aria-label="Search patients"></div>' +
       '<div class="ins-patrow-actions ins-bf"><button class="ins-qa-btn" data-ins="p-new">New patient</button>' +
-        (hasCases ? '<button class="ins-qa-btn" data-ins="p-import">Import from saved cases</button>' : '') + '</div>' +
+        (hasCases ? '<button class="ins-qa-btn" data-ins="p-import">Import from saved cases</button>' : '') +
+        (wardAvailable() ? '<button class="ins-qa-btn" data-ins="p-ward">Add from Ward Sync</button>' : '') + '</div>' +
       '<div id="insPatList"></div>';
   }
   function renderPatientList() {
@@ -574,7 +651,10 @@
     if (!pts.length) { list.innerHTML = '<div class="ins-empty">' + (all.length ? "No patients match." : "No saved patients yet. Create a reusable profile to carry ICR, ISF, target and flags between calculations. No MRN or DOB is stored.") + '</div>'; return; }
     list.innerHTML = pts.map(function (p) {
       var meta = [];
-      if (p.age) meta.push(p.age + " y"); if (p.sex) meta.push(p.sex); if (p.dxType) meta.push(p.dxType);
+      if (p.age) meta.push(p.age + " y"); if (p.sex) meta.push(p.sex);
+      if (p.dxType) meta.push((dxTypes()[p.dxType] && dxTypes()[p.dxType].short) || p.dxType);
+      if (p.ward && p.ward.bed) meta.push("Bed " + p.ward.bed);
+      else if (p.ward) meta.push("Ward Sync");
       var params = [];
       if (num(p.icr)) params.push("ICR " + p.icr); if (num(p.isf)) params.push("ISF " + p.isf); if (num(p.target)) params.push("Tgt " + p.target);
       return '<div class="ins-pt-card"><button class="ins-pt-main" data-ins="p-open" data-id="' + p.id + '">' +
@@ -703,6 +783,10 @@
     { id: "npo",       label: "Nil by mouth",  group: "special" },
     { id: "steroid",   label: "Steroid cover", group: "special" },
     { id: "ivsc",      label: "Drip to subcut", group: "special" },
+    { id: "nutrition", label: "Tube feed / TPN", group: "special" },
+    { id: "periop",    label: "Surgery",       group: "special" },
+    { id: "sick",      label: "Sick day",      group: "special" },
+    { id: "discharge", label: "Discharge",     group: "adjust" },
     { id: "pediatric", label: "Pediatric",     group: "special", clin: true },
     { id: "dka",       label: "DKA infusion",  group: "special", clin: true },
     // Derivations
@@ -953,6 +1037,26 @@
           '<button class="ins-round-b" data-ins="ivpct" data-v="0.8" aria-pressed="' + (st.ivPercent === 0.8 ? "true" : "false") + '">80% (stable, eating)</button>' +
           '<button class="ins-round-b" data-ins="ivpct" data-v="0.6" aria-pressed="' + (st.ivPercent === 0.6 ? "true" : "false") + '">60% (frail, renal, poor intake)</button></div></div>';
 
+    if (m === "nutrition")
+      h += '<div class="ins-field"><div class="ins-lab">Feed type</div><div class="ins-chips">' +
+        [["continuous", "Continuous"], ["bolus", "Bolus feeds"], ["tpn", "Parenteral (TPN)"]].map(function (o) {
+          return '<button class="ins-chip" data-ins="nutfeed" data-v="' + o[0] + '" aria-pressed="' + (st.nutFeed === o[0] ? "true" : "false") + '">' + o[1] + '</button>';
+        }).join("") + '</div></div>' +
+        '<div class="ins-field"><div class="ins-lab">Carbohydrate in the feed <span class="u">g per day</span></div>' + stepper("nutCarbs", st.nutCarbs, 10) + '</div>' +
+        (st.nutFeed === "bolus" ? '<div class="ins-field"><div class="ins-grid2">' + mini("nutFeeds", "Feeds per day", st.nutFeeds) + '</div></div>' : '') +
+        (st.nutFeed === "tpn" ? '<div class="ins-field"><div class="ins-grid2">' + mini("nutDextrose", "Dextrose in the bag (g/day)", st.nutDextrose) + '</div></div>' : '') +
+        '<div class="ins-field"><div class="ins-lab">Weight <span class="u">kg</span></div>' + stepper("ctx.weightKg", st.ctx.weightKg, 1) + '</div>';
+    if (m === "periop")
+      h += '<div class="ins-field"><div class="ins-lab">Usual basal dose <span class="u">units/day</span></div>' + stepper("curBasal", st.curBasal, 2) + '</div>' +
+        '<div class="ins-field"><div class="ins-lab">Or a total daily dose <span class="u">units/day</span></div>' + stepper("tdd", st.tdd, 2) + '</div>';
+    if (m === "discharge")
+      h += '<div class="ins-field"><div class="ins-lab">Inpatient basal dose <span class="u">units/day</span></div>' + stepper("inpBasal", st.inpBasal, 2) + '</div>' +
+        '<div class="ins-field"><div class="ins-grid2">' + mini("hba1c", "HbA1c %", st.hba1c) + mini("tdd", "Inpatient TDD (optional)", st.tdd) + '</div>' +
+          '<div class="ins-tgt-note">The HbA1c decides the regimen that goes home: it reflects control BEFORE this admission, which the inpatient doses do not.</div></div>';
+    if (m === "sick")
+      h += '<div class="ins-field"><div class="ins-lab">Usual total daily dose <span class="u">units/day</span></div>' + stepper("tdd", st.tdd, 2) + '</div>' +
+        '<div class="ins-field"><div class="ins-lab">Or weight <span class="u">kg</span></div>' + stepper("ctx.weightKg", st.ctx.weightKg, 1) + '</div>';
+
     if (m === "iob") {
       var doses = recentBolusDoses();
       h += '<div class="ins-field"><div class="ins-lab">Active insulin from recent doses</div>' +
@@ -967,7 +1071,8 @@
 
     // Context chips only where the engine actually consumes them. Showing five chips that
     // change nothing on a titration or a correction table is noise that reads as a bug.
-    if (["isf", "icr", "iob", "scale", "titrate", "premixTitr", "npo", "steroid", "ivsc", "premix"].indexOf(m) < 0) {
+    if (["isf", "icr", "iob", "scale", "titrate", "premixTitr", "npo", "steroid", "ivsc", "premix",
+         "nutrition", "periop", "discharge", "sick"].indexOf(m) < 0) {
       h += '<div class="ins-field"><div class="ins-lab">Patient context</div><div class="ins-chips">' +
       ctxChip("pregnancy", "Pregnancy") + ctxChip("renal", "Renal") + ctxChip("hepatic", "Hepatic") + ctxChip("exercise", "Exercise") + ctxChip("steroids", "Steroids") +
       (m !== "pediatric" ? '<button class="ins-chip" data-ins="peds" aria-pressed="' + (st.ctx.pediatric ? "true" : "false") + '">Pediatric</button>' : '') + '</div></div>';
@@ -1006,7 +1111,16 @@
     if (m === "titrate") return E.basalTitration({ currentDose: N(st.curBasal), fastingGlucose: N(st.fasting),
       weightKg: N(st.ctx.weightKg), method: st.titrMethod });
     if (m === "scale") return E.correctionScale({ tdd: N(st.tdd), weightKg: N(st.ctx.weightKg),
-      resistance: st.scaleResist, target: toMgdl(st.target), maxPerDose: N(st.scaleMax), rule: st.isfRule });
+      dxType: st.dxType || null, resistance: st.scaleResist, target: toMgdl(st.target),
+      maxPerDose: N(st.scaleMax), rule: st.isfRule });
+    if (m === "nutrition") return E.nutritionInsulin({ carbGramsPerDay: N(st.nutCarbs), weightKg: N(st.ctx.weightKg),
+      feed: st.nutFeed, feedsPerDay: N(st.nutFeeds), dextroseGrams: N(st.nutDextrose), increment: st.increment });
+    if (m === "periop") return E.periopRegimen({ basalDose: N(st.curBasal), tdd: N(st.tdd),
+      dxType: st.dxType || null, increment: st.increment });
+    if (m === "discharge") return E.dischargeRegimen({ inpatientBasal: N(st.inpBasal), tdd: N(st.tdd),
+      hba1c: N(st.hba1c), dxType: st.dxType || null, increment: st.increment });
+    if (m === "sick") return E.sickDayRules({ tdd: N(st.tdd), weightKg: N(st.ctx.weightKg),
+      dxType: st.dxType || null, increment: st.increment });
     if (m === "basalT2") {
       // ADA type 2 initiation: 10 units/day OR 0.1-0.2 u/kg/day, whichever is the lower start.
       var w = N(st.ctx.weightKg);
@@ -1030,7 +1144,7 @@
     if (m === "premixTitr") return E.premixTitration({ morning: N(st.pmMorning), evening: N(st.pmEvening),
       fasting: N(st.fasting), preDinner: N(st.preDinner) });
     if (m === "npo") return E.npoRegimen({ basalDose: N(st.curBasal), tdd: N(st.tdd),
-      type1: st.npoType1, hypoRisk: st.npoHypoRisk, increment: st.increment });
+      dxType: st.dxType || null, type1: st.npoType1, hypoRisk: st.npoHypoRisk, increment: st.increment });
     if (m === "steroid") return E.steroidCover({ weightKg: N(st.ctx.weightKg), steroid: st.steroidKind,
       steroidMg: N(st.steroidMg), increment: st.increment });
     if (m === "ivsc") return E.ivToSubcut({ avgRatePerHour: N(st.ivRate), percent: st.ivPercent, increment: st.increment });
@@ -1098,7 +1212,13 @@
 
     var m = st.mode;
     var actionable = ["combined", "meal", "correction", "basal", "pediatric", "dka",
-      "basalT2", "inpatient", "premix", "premixTitr", "titrate", "npo", "steroid", "ivsc"].indexOf(m) > -1;
+      "basalT2", "inpatient", "premix", "premixTitr", "titrate", "npo", "steroid", "ivsc",
+      "nutrition", "periop", "discharge", "sick"].indexOf(m) > -1;
+    /* A regimen the diagnosis forbids is shown, not hidden - the resident needs to know the
+     * scale exists and why it is wrong here, or they will build one by hand instead. */
+    var blockedHTML = res.blocked ? '<div class="ins-warn warning"><span class="ins-warn-band">' + SVG_TRI + '</span>' +
+      '<div class="ins-warn-body"><span class="ins-warn-sig">Not appropriate for this diagnosis</span>' +
+      '<span class="bd">' + esc(res.blocked) + '</span></div></div>' : "";
     var cardTitle = (m === "isf" || m === "icr") ? "Result" : m === "iob" ? "Active insulin (IOB)" : m === "dka" ? "Infusion rate"
       : m === "scale" ? "Correction scale" : m === "titrate" ? "New basal dose"
       : ["basal", "pediatric", "inpatient", "premix", "premixTitr", "npo", "ivsc", "basalT2"].indexOf(m) > -1 ? "Suggested regimen"
@@ -1159,9 +1279,9 @@
     out.innerHTML =
       '<div class="ins-card ins-result ins-bf"><div class="ins-card-t">' + cardTitle + '</div>' +
         '<div class="ins-dose"><span class="n" id="insDoseN">0</span><span class="unit">' + res.unit + '</span></div>' +
-        '<div class="ins-fromraw">' + fromraw + '</div>' + provHTML + partsHTML + scaleHTML +
+        '<div class="ins-fromraw">' + fromraw + '</div>' + blockedHTML + provHTML + partsHTML + scaleHTML +
         '<div class="ins-formula">' + res.formula + '</div>' +
-        '<ul class="ins-steps">' + stepsHTML + '</ul>' + ctxAdvHTML + monitoringHTML +
+        '<ul class="ins-steps">' + stepsHTML + '</ul>' + ctxAdvHTML + monitoringHTML + dxNotesHTML() +
         '<button class="ins-how" data-ins="how" aria-expanded="false">' + ICON_BOOK + '<span>How it works</span>' + ICON_CHEV + '</button>' +
         '<div class="ins-howp" hidden>' +
           '<div class="ins-howp-sec"><h4>Method</h4><p>' + howItWorks(m) + '</p></div>' +
@@ -1197,6 +1317,16 @@
     var t = e.target.closest("[data-ins]"); if (!t) return;
     var a = t.getAttribute("data-ins");
     if (a === "close") return close();
+    if (a === "dx-pick") {
+      st.dxType = t.getAttribute("data-v");
+      // The diagnosis sets the scale band unless the user later overrides it by hand.
+      var dg = window.INSULIN_ENGINE.dxGuidance(st.dxType);
+      st.scaleResist = dg.resistance || "usual";
+      if (st.dxType === "t1" || st.dxType === "secondary") st.npoType1 = true;
+      return go("dashboard");
+    }
+    if (a === "dx-skip") { st.dxSkipped = true; return go("dashboard"); }
+    if (a === "dx-open") return go("dxgate");
     if (a === "go-settings") return go("settings");
     if (a === "go-dash") return go("dashboard");
     if (a === "go-library") return go("library");
@@ -1214,6 +1344,34 @@
     if (a === "p-use") {
       var pu = (st.screen === "patient" && st.editP) ? savePatient(st.editP) : getPatient(t.getAttribute("data-id"));
       if (pu) { applyProfile(pu); go("calc"); }
+      return;
+    }
+    /* Add a patient straight from Ward Sync (GHIS / Connect EMR).
+     * Ward Sync already owns the roster, its search and filters, the sign-in and the session,
+     * and a real ward is hundreds of patients - so a second list here would duplicate all of
+     * it and then drift. GHIS.pickPatient() opens that roster in one-shot pick mode and hands
+     * back the tapped patient; the full record (age, sex, bed, unit) comes from getPatients().
+     * Same handoff SurgX uses. */
+    if (a === "p-ward") {
+      if (!wardAvailable()) { if (window.toast) toast("Ward Sync is not loaded"); return; }
+      close();                                   // the picker is full-screen; give it the screen
+      window.GHIS.pickPatient(function (sel) {
+        var p = null;
+        try {
+          if (!sel) return;
+          var full = null, list = window.GHIS.getPatients ? window.GHIS.getPatients() : [];
+          for (var i = 0; i < list.length; i++) if (String(list[i].patientId) === String(sel.patientId)) { full = list[i]; break; }
+          p = savePatient(wardProfile(sel, full));
+        } catch (e) { p = null; }
+        // Reopen either way, so backing out of the picker never strands the user elsewhere.
+        open();
+        if (!p) { if (window.toast) toast("Could not read that patient"); return; }
+        applyProfile(p);
+        // A ward patient has a diagnosis to establish before any scale is built.
+        st.screen = st.dxType ? "calc" : "dxgate";
+        paint();
+        if (window.toast) toast("Added " + p.name + " from Ward Sync");
+      });
       return;
     }
     if (a === "p-import") {
@@ -1260,6 +1418,7 @@
     if (a === "corr-source") { st.corrSource = t.getAttribute("data-v"); renderInputs(); render(); return; }
     if (a === "fd-naive") { st.fdNaive = t.getAttribute("data-v") === "1"; renderInputs(); render(); return; }
     if (a === "fd-route") { st.fdRoute = t.getAttribute("data-v"); renderInputs(); render(); return; }
+    if (a === "nutfeed") { st.nutFeed = t.getAttribute("data-v"); renderInputs(); render(); return; }
     if (a === "titrmethod") { st.titrMethod = t.getAttribute("data-v"); renderInputs(); render(); return; }
     if (a === "resist") { st.scaleResist = t.getAttribute("data-v"); renderInputs(); render(); return; }
     if (a === "npoflag") { var nk = t.getAttribute("data-k"); st[nk] = !st[nk]; t.setAttribute("aria-pressed", st[nk]); render(); return; }
@@ -1399,7 +1558,8 @@
     el.classList.add("ins-open");
     document.documentElement.classList.add("ins-lock");
     document.body.classList.add("ins-lock");
-    st.screen = "dashboard";
+    // Ask the type first, unless it is already known (from a patient profile) or was skipped.
+    st.screen = (st.dxType || st.dxSkipped) ? "dashboard" : "dxgate";
     paint();
     springIn(el.querySelector(".ins-wrap"));
   }
@@ -1411,4 +1571,12 @@
   }
 
   window.INSULIN = { open: open, close: close, isOn: on };
+  /* Test-only surface (mirrors oncotree.js `_st`): lets test/insulin-ui.test.mjs drive the real
+   * state through the real HTML builders in Node, with no browser. Not used by the app. */
+  window.INSULIN._st = st;
+  window.INSULIN._set = SET;
+  window.INSULIN._build = { dashboard: dashboardHTML, dxGate: dxGateHTML, dxChip: dxChipHTML,
+    calc: calcHTML, modes: visibleModes, groupOf: groupOf, wardProfile: wardProfile,
+    compute: compute, safety: safety, modeLabel: modeLabel, howItWorks: howItWorks,
+    todayTotal: todayTotal, logForPatient: logForPatient };
 })();

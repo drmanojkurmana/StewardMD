@@ -244,3 +244,160 @@ test("ward functions fail closed on missing input, never with a guessed number",
   assert.equal(E.ivToSubcut({}).result, null);
   assert.equal(E.premixInit({}).result, null);
 });
+
+/* ── Diabetes type drives the scale and what is allowed ────────────────────── */
+
+test("dx type sets the sensitivity band: T1 sensitive, stress/steroid resistant", () => {
+  const t1 = E.correctionScale({ weightKg: 70, dxType: "t1" });
+  const t2 = E.correctionScale({ weightKg: 70, dxType: "t2" });
+  const stress = E.correctionScale({ weightKg: 70, dxType: "stress" });
+  assert.equal(t1.resistance, "sensitive");
+  assert.equal(t2.resistance, "usual");
+  assert.equal(stress.resistance, "resistant");
+  // a resistant patient must get MORE insulin per band than a sensitive one
+  assert.ok(stress.rows[3].units > t2.rows[3].units);
+  assert.ok(t2.rows[3].units > t1.rows[3].units);
+});
+
+test("correction-only is BLOCKED in type 1 and secondary, ACCEPTABLE in stress", () => {
+  const t1 = E.correctionScale({ weightKg: 70, dxType: "t1" });
+  assert.equal(t1.correctionOnly, "never");
+  assert.ok(t1.blocked, "type 1 must carry a block message for a scale-alone regimen");
+  assert.match(t1.clinicalNotes[0], /never appropriate in type 1/i);
+
+  const sec = E.correctionScale({ weightKg: 70, dxType: "secondary" });
+  assert.equal(sec.correctionOnly, "never");
+  assert.ok(sec.blocked);
+
+  const stress = E.correctionScale({ weightKg: 70, dxType: "stress" });
+  assert.equal(stress.correctionOnly, "acceptable");
+  assert.equal(stress.blocked, null);
+  assert.match(stress.clinicalNotes[0], /IS acceptable|recognised exception/i);
+});
+
+test("stress hyperglycaemia insists on an HbA1c to exclude undiagnosed diabetes", () => {
+  const s = E.correctionScale({ weightKg: 70, dxType: "stress" });
+  assert.match(s.clinicalNotes.join(" "), /HbA1c/);
+  assert.match(s.clinicalNotes.join(" "), /6\.5%/);
+});
+
+test("an explicit resistance overrides the diagnosis default", () => {
+  assert.equal(E.correctionScale({ weightKg: 70, dxType: "t1", resistance: "resistant" }).resistance, "resistant");
+});
+
+test("dxGuidance is safe for an unknown or skipped type", () => {
+  const g = E.dxGuidance(null);
+  assert.equal(g.resistance, "usual");
+  assert.deepEqual(g.notes, []);
+  assert.deepEqual(g.suggest, []);
+});
+
+test("every dx type carries notes, a band and suggested workflows", () => {
+  for (const id of Object.keys(E.DX_TYPES)) {
+    const d = E.DX_TYPES[id];
+    assert.ok(d.label && d.detail, id + " needs a label and detail");
+    assert.ok(["sensitive", "usual", "resistant"].includes(d.resistance), id + " needs a band");
+    assert.ok(d.notes.length >= 3, id + " needs real guidance");
+    assert.ok(d.suggest.length, id + " needs suggested workflows");
+  }
+  // the two insulin-deficient types must never permit correction-only or a stopped basal
+  assert.equal(E.DX_TYPES.t1.correctionOnly, "never");
+  assert.equal(E.DX_TYPES.secondary.correctionOnly, "never");
+  assert.equal(E.DX_TYPES.t1.basalMayStop, false);
+  assert.equal(E.DX_TYPES.secondary.basalMayStop, false);
+});
+
+/* ── Enteral / parenteral nutrition ────────────────────────────────────────── */
+
+test("continuous feed: nutritional insulin from carbohydrate plus weight-based basal", () => {
+  const r = E.nutritionInsulin({ carbGramsPerDay: 240, weightKg: 70 });
+  assert.equal(r.nutritional, 20);        // 240 / 12
+  assert.equal(r.basal, 14);              // 70 x 0.2
+  assert.equal(r.rounded, 34);
+});
+
+test("bolus feeds split the nutritional insulin across the feeds", () => {
+  assert.equal(E.nutritionInsulin({ carbGramsPerDay: 240, feed: "bolus", feedsPerDay: 4 }).perFeed, 5);
+});
+
+test("TPN adds insulin to the bag at 0.1 u per gram of dextrose", () => {
+  assert.equal(E.nutritionInsulin({ dextroseGrams: 200, feed: "tpn", weightKg: 70 }).inBag, 20);
+});
+
+test("nutrition carries the feed-interruption warning, which is the actual killer", () => {
+  const n = E.nutritionInsulin({ carbGramsPerDay: 240, weightKg: 70 }).clinicalNotes.join(" ");
+  assert.match(n, /FEED STOPPING IS THE DANGER/i);
+  assert.match(n, /10% dextrose/);
+});
+
+/* ── Perioperative ─────────────────────────────────────────────────────────── */
+
+test("perioperative: 80% basal in type 1, 75% otherwise, prandial always held", () => {
+  assert.equal(E.periopRegimen({ basalDose: 20, dxType: "t1" }).basal, 16);
+  assert.equal(E.periopRegimen({ basalDose: 20, dxType: "t2" }).basal, 15);
+  assert.equal(E.periopRegimen({ basalDose: 20 }).prandial, 0);
+});
+
+test("perioperative: the SGLT2 euglycaemic DKA warning is present and specific", () => {
+  const n = E.periopRegimen({ basalDose: 20 }).clinicalNotes.join(" ");
+  assert.match(n, /SGLT2 INHIBITORS 3 TO 4 DAYS/i);
+  assert.match(n, /euglycaemic ketoacidosis/i);
+  assert.match(n, /100 to 180/);
+});
+
+/* ── Discharge ─────────────────────────────────────────────────────────────── */
+
+test("discharge: home basal is 80% of the inpatient dose", () => {
+  assert.equal(E.dischargeRegimen({ inpatientBasal: 30 }).homeBasal, 24);
+});
+
+test("discharge: the regimen follows HbA1c, and type 1 is always basal-bolus", () => {
+  assert.match(E.dischargeRegimen({ inpatientBasal: 20, hba1c: 6.5 }).plan, /oral agents/i);
+  assert.match(E.dischargeRegimen({ inpatientBasal: 20, hba1c: 8 }).plan, /basal insulin/i);
+  assert.match(E.dischargeRegimen({ inpatientBasal: 20, hba1c: 11 }).plan, /Basal-bolus|GLP-1/i);
+  assert.match(E.dischargeRegimen({ inpatientBasal: 20, hba1c: 6.5, dxType: "t1" }).plan, /Basal-bolus \(mandatory\)/);
+});
+
+test("discharge: education checklist and the 15-15 rule are present", () => {
+  const n = E.dischargeRegimen({ inpatientBasal: 20 }).clinicalNotes.join(" ");
+  assert.match(n, /15-15/);
+  assert.match(n, /teach-back/i);
+  assert.match(n, /1 to 2 weeks/);
+});
+
+/* ── Sick day ──────────────────────────────────────────────────────────────── */
+
+test("sick day: extra insulin is 10-20% of the total daily dose", () => {
+  const r = E.sickDayRules({ tdd: 40 });
+  assert.equal(r.extraLow, 4);
+  assert.equal(r.extraHigh, 8);
+});
+
+test("sick day: never-stop-insulin is stated, and T1 gets routine ketone testing", () => {
+  assert.match(E.sickDayRules({ tdd: 40, dxType: "t1" }).clinicalNotes.join(" "), /NEVER STOP INSULIN/i);
+  assert.match(E.sickDayRules({ tdd: 40, dxType: "t1" }).clinicalNotes.join(" "), /ketones every 4 hours/i);
+  assert.match(E.sickDayRules({ tdd: 40, dxType: "t2" }).clinicalNotes.join(" "), /ketones if glucose goes above 250/i);
+});
+
+test("sick day: red-flag list tells the patient when to come in", () => {
+  const n = E.sickDayRules({ tdd: 40 }).clinicalNotes.join(" ");
+  assert.match(n, /GO TO HOSPITAL/i);
+  assert.match(n, /vomiting/i);
+});
+
+test("new workflows cite a guideline and fail closed on missing input", () => {
+  const rs = [
+    E.nutritionInsulin({ carbGramsPerDay: 240, weightKg: 70 }),
+    E.periopRegimen({ basalDose: 20 }),
+    E.dischargeRegimen({ inpatientBasal: 20 }),
+    E.sickDayRules({ tdd: 40 })
+  ];
+  for (const r of rs) {
+    assert.ok(r.refs && r.refs.length && /ADA/.test(r.refs.join(" ")));
+    assert.ok(r.formula);
+  }
+  assert.equal(E.nutritionInsulin({}).result, null);
+  assert.equal(E.periopRegimen({}).result, null);
+  assert.equal(E.dischargeRegimen({}).result, null);
+  assert.equal(E.sickDayRules({}).result, null);
+});
