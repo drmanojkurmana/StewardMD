@@ -1789,3 +1789,20 @@ felt slow; wanted auto Face ID on launch or "don't ask if opened within 2 hours"
   the splash's `finish()` -> app. `renderBiometricUnlock()` renders nothing; `renderBiometricRetry()`
   (Try <Face ID|Touch ID> again / Sign out) appears only after a failed or cancelled scan. The
   PIN pad still pre-shows at load. So the "lock at load" point above now applies to PIN only.
+
+## 2026-08-30 — Boot splash: one frame, constant 3s, then Face ID / PIN by itself (gate REMOVED)
+Reverses the "Open Workspace gate" and the phase-1 -> phase-2 crossfade decisions. Owner sent a
+screen recording: bare grey WebView, then a loading bar alone, then the foot, then the logo, then
+the logo faded out for a welcome card with a button. "Unprofessional. Constant 3 sec splash,
+all appear at once, then automatic Face ID / PIN, fast, into app."
+- **Grey frame root cause:** `capacitor.config.json` `SplashScreen.launchShowDuration: 0` +
+  `launchAutoHide: true` dropped the native splash at launch, exposing the unpainted WKWebView
+  (system-dark) even though `native-bridge.js` hides it on `load`. Now `launchShowDuration: 3000`
+  (auto-hide kept only as the cap); the native splash (white + mark) covers until paint.
+- **Web splash:** no entrance animation on any element (sbsPop/sbsFade removed); the signed-in
+  avatar + name row sits in the SAME frame as mark, wordmark, tagline, bar, foot; `MIN` 900 ->
+  3000; no phase 2, no `.sbs-go` button, no `__smdBootGate`. App Lock's early PIN pad is gone
+  too: `finish()` -> `unlock()` after the 3s frame, for both Face ID (no card) and PIN.
+- Dead `.smd-boot-phase2` selectors remain inside the shared LIQUID GLASS lists; harmless.
+- `test/run-splash-ui.mjs` section 2 rewritten (static-at-first-paint, hold at 1.6s/2.5s with
+  ready forced at 0.6s, self-hide by 3.6s, no button) 91/91; `run-applock-ui` 59/59.
