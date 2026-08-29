@@ -579,7 +579,23 @@ function ready(){try{
   if(!returning){ if(vis("introPoster")||vis("splash"))return true; }
   var a=document.querySelector(".app-head");if(a&&getComputedStyle(a).display!=="none"&&a.offsetHeight>0)return true;
 }catch(e){return true;}return false;}
-function finish(){if(done)return;done=true;s.classList.add("sbs-hide");setTimeout(function(){if(s.parentNode)s.parentNode.removeChild(s);},480);}
+var lockShowing=false;
+function reallyFinish(){done=true;s.classList.add("sbs-hide");setTimeout(function(){if(s.parentNode)s.parentNode.removeChild(s);},480);}
+/* App Lock (flag smd_applock, off by default): if a PIN/biometric is configured, the splash
+   holds one more beat and shows the unlock screen instead of revealing the app. Fails open —
+   if applock.js hasn't loaded yet (or throws), window.SMD_APPLOCK is undefined/required()
+   is false, and boot proceeds exactly as before this existed. */
+function finish(){if(done)return;
+  try{
+    if(window.SMD_APPLOCK&&window.SMD_APPLOCK.required()){
+      if(lockShowing)return;
+      lockShowing=true;
+      window.SMD_APPLOCK.unlock(reallyFinish);
+      return;
+    }
+  }catch(e){}
+  reallyFinish();
+}
 /* The Open Workspace gate (armed by the splash-v2 script above, signed-in users only). While it
    holds, this loop keeps polling but does not hide: the clinician opens their own workspace. The
    deadline is re-checked HERE as well as in the gate's own timer, so a dropped/throttled timer
@@ -2099,6 +2115,7 @@ window.openExternal = function (u) {
      Additive over Firebase Auth; smd-geo.js is the India states/cities + curated hospital list. -->
 <script src="/smd-geo.js?v=gold472" defer></script>
 <script src="/email-auth.js?v=gold473" defer></script>
+<script src="/applock.js?v=gold1" defer></script>
 <script src="/policy.js?v=gold363" defer></script>
 <script src="/features.js?v=gold997" defer></script>
 <script src="/calculators.js?v=gold1051-r1d" defer></script>

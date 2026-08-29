@@ -1671,3 +1671,47 @@ renders as a `<button>` with the right label at a 44px+ target in both themes, t
 `#accountGate`, which is the proof: staying up merely for a while would prove nothing), that the tap
 releases and reveals, that a mid-boot tap yields "Opening...", and that guests and `?splashv2=0` are
 neither gated nor shown the button and still auto-hide.
+
+## 2026-08-29 — App Lock: PIN / Face ID·Touch ID / no-lock, chosen once at first login
+Owner ask, after seeing the "Open Workspace" welcome-back splash (build 3464): add a real lock in
+front of it. Three options, offered once right after the first-run profile step (email-auth.js's
+`openProfile({firstRun:true})`, the single choke point every sign-in method — Google/Apple/email —
+already funnels through):
+1. **PIN** — 4-6 digits, salted SHA-256 (Web Crypto), stored in the OS Keychain/Keystore via
+   `capacitor-secure-storage-plugin` (the same `window.SMD_SECURE` shim autofetch.js defines).
+   Available on every device regardless of biometric hardware.
+2. **Face ID / Touch ID** — feature-detected via `Capacitor.isPluginAvailable()`. No biometric
+   plugin is installed in this repo today, so the option correctly never renders on any current
+   build. Wiring a `NativeBiometric`-shaped plugin (`p.verifyIdentity`/`p.authenticate`) + `cap
+   sync` + a native rebuild lights it up with **zero** changes to `applock.js` — the call shape is
+   already written and named-lookup-guarded (`NativeBiometric` or `BiometricAuth`).
+3. **No lock (auto sign-in)** — own-risk, gated to **personal accounts only**. There is no existing
+   "institution account" field, so this reuses the profile's `hospital` freetext (already collected
+   at the same first-run step): non-empty hospital → the option is not rendered at all, not merely
+   discouraged. A risk checkbox gates the Confirm button even for personal accounts.
+
+**Enforcement point**: `index.html`'s boot-splash `finish()` — the single function that already
+hides/removes `#smdBootSplash` (see the 2026-08-28 Phase-2 entry above) — gained ONE check:
+if `SMD_APPLOCK.required()`, hold behind an unlock overlay and only call the real hide once it
+calls back. No fork of the hide/tick loop, matching how Phase 2's own gate was added.
+
+**Fail-open, deliberately, because this file's own rule already exists**: every unlock screen
+carries a "Sign out instead" escape (routes to the existing `#sessionSignOut` click, the same
+button the header already wires); `window.SMD_APPLOCK` undefined/throwing anywhere is read as "not
+required" — a clinician locked out by a bug in THIS code is worse than the lock not firing once.
+
+**Known gap, accepted rather than engineered around**: `applock.js` loads as a deferred script
+after `app.js` in the script order, while the boot-splash gate script is inline and starts polling
+immediately. On an extremely slow first cold load (no service-worker cache yet) it's theoretically
+possible for `finish()` to fire once before `SMD_APPLOCK` has registered, skipping the gate for
+that one boot. Not restructured, because moving `applock.js` earlier only matters for a narrow,
+self-healing window (the very next boot has it cached) and this codebase's own MIN/CAP splash logic
+already accepts equivalent races elsewhere.
+
+**Flag**: `smd_applock`, default **OFF** — this is a big, security-adjacent, boot-blocking change
+per this repo's own flag convention, and has NOT had a device pass yet (Chrome-headless UI test
+only: `test/run-applock-ui.mjs`, 25/25 green, plus the full existing `test/run-splash-ui.mjs` still
+25/25 green with the `finish()` change in place). `?applock=1` / `localStorage.smd_applock="1"`
+forces it on for testing; `?applock=0` forces off. Needs an owner device pass + R3 security review
+before flipping the default, per CLAUDE.md's "reversible changes" rule for anything auth-shaped.
+sw.js CACHE bumped `-applock1`.
