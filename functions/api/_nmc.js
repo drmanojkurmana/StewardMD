@@ -14,8 +14,21 @@ export function looksLikeReg(q) {
   if (!/\d{3,}/.test(q)) return false;
   return (q.match(/[a-z]/gi) || []).length <= 4;
 }
-// The comparable digit core of a registration number (last digit group) — matches verify-doctor.js.
-export function regCore(s) { const m = String(s || "").match(/\d{2,}/g); return m ? m[m.length - 1] : ""; }
+/* The comparable digit core of a registration number — kept in step with verify-doctor.js.
+ * This used to take the LAST digit group, which picks the YEAR off a certificate number such as
+ * "APMC/FMR/112487/2015" and makes every register lookup miss. Prefer the longest group, and skip
+ * anything that is plainly a year while another candidate exists. */
+export function regCandidates(s) {
+  const groups = String(s || "").match(/\d{2,}/g) || [];
+  if (!groups.length) return [];
+  const looksLikeYear = (g) => /^(19|20)\d{2}$/.test(g);
+  const nonYear = groups.filter((g) => !looksLikeYear(g));
+  const pool = nonYear.length ? nonYear : groups;
+  const seen = new Set(), out = [];
+  for (const g of pool.slice().sort((a, b) => b.length - a.length)) if (!seen.has(g)) { seen.add(g); out.push(g); }
+  return out;
+}
+export function regCore(s) { const c = regCandidates(s); return c.length ? c[0] : ""; }
 
 // Fold NMC-API or D1 rows → clean, deduped, PUBLIC-only result cards.
 export function normalizeResults(rows) {
