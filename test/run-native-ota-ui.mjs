@@ -201,6 +201,26 @@ try {
   ok(autoResult.calls.some(c => c[0] === "next"), `with automatic updates on, the background check applies silently via next() (${JSON.stringify(autoResult.calls)})`);
   ok(!autoResult.calls.some(c => c[0] === "set"), `...never via the disruptive set()`);
 
+  /* ── an update failure must never carry our infrastructure back to the screen ──
+   * Reported from the field, 2026-08-28: a failed update printed the OTA endpoint. install() was
+   * returning @capgo/capacitor-updater's own message, and that plugin is handed the bundle's
+   * zipUrl - so its failures quote the URL back, and the settings screen interpolated it straight
+   * into the status line. Fail download() exactly the way the plugin does. */
+  await J(`window.__calls = [];
+    window.__downloadResult = Promise.reject(new Error(
+      "Failed to download https://stewardmd.in/api/ota/file/abc: HTTP 403 from r2.stewardmd.internal"));
+    return 1;`);
+  const leak = await J(`return window.SMD_OTA.install(
+      { version: "9.9.9", zipUrl: "https://stewardmd.in/api/ota/file/abc", zipHash: "h" }, null, true)
+    .then(function (r) { return JSON.stringify(r); });`);
+  const leakStr = typeof leak === "string" ? leak : JSON.stringify(leak);
+  ok(!/stewardmd\.in|r2\.stewardmd|https?:\/\//.test(leakStr),
+     `install() returns no URL or hostname on failure (got: ${leakStr})`);
+  ok(/"error":"(network|checksum|storage|unauthorized|missing|download-failed|apply-failed)"/.test(leakStr),
+     `...only a fixed code (got: ${leakStr})`);
+  ok(/unauthorized/.test(leakStr),
+     `...and a 403 is classified rather than passed through (got: ${leakStr})`);
+
   console.log(fails === 0 ? "\nALL GREEN — the OTA client honours its contract, and never applies anything the user or their own auto-update choice didn't ask for" : `\n${fails} FAILED`);
 } catch (e) { console.error("HARNESS ERROR:", e.message); fails++; }
 finally { try { ws && ws.close(); } catch {} chrome.kill(); if (serveProc) serveProc.kill(); process.exit(fails === 0 ? 0 : 1); }
