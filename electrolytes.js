@@ -403,6 +403,12 @@
       ".ece-f>span{font:600 12px var(--f);color:var(--mut)}.ece-f>span i{font-style:normal;opacity:.7;font-weight:500}",
       ".ece-f input,.ece-f select{border:none;background:none;font:700 17px var(--f);color:var(--ink);width:100%;outline:none;padding:2px 0}",
       ".ece-f input:focus{color:var(--tl)}",
+      /* The inputs are deliberately borderless inside their card, but focus only changed the TEXT
+         colour - so before you type there was no visible focus indicator at all (WCAG 2.4.7), and
+         the grid read as inert boxes. Put the ring on the CARD via :focus-within: the clean look is
+         kept and the active field becomes unmistakable. */
+      ".ece-f:focus-within{border-color:var(--tl);box-shadow:0 0 0 3px color-mix(in srgb, var(--tl) 18%, transparent)}",
+      "@media(prefers-reduced-motion:no-preference){.ece-f{transition:border-color .15s,box-shadow .15s}}",
       ".ece-toggles{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}",
       ".ece-tog{border:1px solid var(--line);background:var(--panel);color:var(--mut);font:600 12.5px var(--f);padding:8px 13px;border-radius:999px;cursor:pointer;transition:.15s}",
       ".ece-tog.on{background:var(--tl);color:#fff;border-color:var(--tl)}",

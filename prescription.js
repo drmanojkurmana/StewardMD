@@ -64,7 +64,10 @@
       ".rx-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:6px}.rx-title{font:800 18px var(--hfont,system-ui)}.rx-x{border:0;background:transparent;font-size:20px;cursor:pointer;color:var(--hmut,#64748b)}" +
       ".rx-clinic{font:700 15px var(--hfont);color:var(--hink)}.rx-disc{font:500 11px var(--hfont);color:var(--hmut,#64748b);background:rgba(245,158,11,.1);border-radius:8px;padding:6px 9px;margin:8px 0}" +
       ".rx-pt{display:flex;gap:8px;margin:8px 0}.rx-pt input{flex:1;min-width:0}" +
-      ".rx-in{border:1px solid var(--hbd,#e2e8f0);border-radius:8px;padding:7px 9px;font:400 13px var(--hfont);background:var(--hpanel,#fff);color:var(--hink)}" +
+      /* Fields were 7px-tall hairline boxes with no focus state - the sheet read as a grey stack and nothing told you where the caret was. Taller touch target, softer radius, and a real focus ring so the active field is unmistakable on a phone held one-handed at the bedside. */
+      ".rx-in{border:1px solid var(--hbd,#e2e8f0);border-radius:10px;padding:10px 12px;font:400 13.5px var(--hfont);background:var(--hpanel,#fff);color:var(--hink);transition:border-color .15s,box-shadow .15s}" +
+      ".rx-in::placeholder{color:var(--hmut,#94a3b8)}" +
+      ".rx-in:focus{outline:none;border-color:var(--teal,#0e6e63);box-shadow:0 0 0 3px color-mix(in srgb, var(--teal,#0e6e63) 18%, transparent)}" +
       ".rx-symbol{font:800 22px var(--hfont);margin:6px 0 2px}" +
       ".rx-line{border:1px solid var(--hbd,#e2e8f0);border-radius:10px;padding:9px;margin:8px 0}.rx-line.unv{border-color:#f59e0b;background:rgba(245,158,11,.06)}.rx-line.adv{background:rgba(100,116,139,.06)}" +
       ".rx-line .r1{display:flex;gap:6px;flex-wrap:wrap}.rx-line .r1 input{}.rx-drug{flex:2 1 160px}.rx-brand{flex:1 1 110px}.rx-line .r2{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px}.rx-dose{flex:2 1 160px}.rx-freq{flex:1 1 90px}.rx-dur{flex:1 1 90px}" +
@@ -72,7 +75,7 @@
       ".rx-ac{border:1px solid var(--hbd,#e2e8f0);border-radius:10px;margin-top:6px;background:var(--hpanel,#fff);max-height:240px;overflow:auto;box-shadow:0 8px 24px rgba(0,0,0,.12)}" +
       ".rx-ac-item{display:block;width:100%;text-align:left;border:0;border-bottom:1px solid var(--hbd,#eef1f4);background:none;padding:8px 10px;cursor:pointer;font:500 13px var(--hfont);color:var(--hink,#14202b)}.rx-ac-item:last-child{border-bottom:0}.rx-ac-item:hover,.rx-ac-item.on{background:var(--paper,#f6f7f5)}" +
       ".rx-ac-g{font-weight:800}.rx-ac-b{color:var(--teal,#0e6e63);font-weight:600}.rx-ac-d{display:block;color:var(--hmut,#64748b);font-size:11.5px;margin-top:2px}.rx-ac-empty{padding:8px 10px;color:var(--hmut,#64748b);font:500 12px var(--hfont)}" +
-      ".rx-btn{border:0;border-radius:999px;padding:9px 16px;font:800 13px var(--hfont);cursor:pointer}.rx-add{background:rgba(100,116,139,.12);color:var(--hink)}.rx-print{background:#2563eb;color:#fff}.rx-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px;align-items:center}.rx-ico{width:14px;height:14px;vertical-align:-2px;display:inline-block;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}.rx-x .rx-ico,.rx-del .rx-ico{width:16px;height:16px}.rx-print .rx-ico{margin-right:5px}" +
+      ".rx-btn{border:0;border-radius:999px;padding:9px 16px;font:800 13px var(--hfont);cursor:pointer}.rx-add{background:rgba(100,116,139,.12);color:var(--hink)}.rx-print{background:var(--teal,#0e6e63);color:#fff}.rx-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px;align-items:center}.rx-ico{width:14px;height:14px;vertical-align:-2px;display:inline-block;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}.rx-x .rx-ico,.rx-del .rx-ico{width:16px;height:16px}.rx-print .rx-ico{margin-right:5px}" +
       ".rx-sign{margin-top:14px;border-top:1px dashed var(--hbd,#e2e8f0);padding-top:10px;font:600 13px var(--hfont);color:var(--hink)}.rx-sign small{color:var(--hmut,#64748b);font-weight:500}" +
       ".rx-gate{font:500 13px var(--hfont);color:var(--hink)}.rx-gate input{margin-top:10px;width:100%}" +
       ".rx-clinic-card{display:flex;align-items:center;gap:10px;border:1px solid var(--hbd,#e2e8f0);border-radius:12px;padding:9px 11px;margin-bottom:6px;background:var(--paper,#f8faf9)}.rx-clinic-logo{width:42px;height:42px;object-fit:contain;border-radius:8px;background:#fff}.rx-clinic-meta{flex:1;min-width:0}.rx-clinic-nm{font:800 14px var(--hfont);color:var(--hink)}.rx-clinic-ad{font:500 11.5px var(--hfont);color:var(--hmut,#64748b)}.rx-clinic-edit{border:0;background:transparent;color:var(--teal,#0e6e63);font:700 12px var(--hfont);cursor:pointer}" +
@@ -93,7 +96,29 @@
     if (!scrim) { scrim = document.createElement("div"); scrim.className = "rx-scrim"; scrim.id = "rxScrim"; document.body.appendChild(scrim); scrim.addEventListener("click", close); }
     if (!sheet) { sheet = document.createElement("div"); sheet.className = "rx-sheet"; sheet.id = "rxSheet"; sheet.setAttribute("role", "dialog"); sheet.setAttribute("aria-modal", "true"); sheet.setAttribute("aria-label", "Prescription"); document.body.appendChild(sheet); }
   }
-  function show(html) { ensureEls(); sheet.innerHTML = '<div class="rx-wrap">' + html + '</div>'; scrim.classList.add("on"); sheet.classList.add("on"); }
+  /* Every field on this sheet is placeholder-only - no <label>, no aria-label. A placeholder
+   * disappears the moment you type, so once the pad is half filled the doctor is looking at
+   * unlabelled grey boxes, and a screen reader has nothing dependable to announce. Mirroring the
+   * placeholder into aria-label closes that hole without adding visible chrome nobody asked for.
+   * Done HERE because show() is the one funnel every screen of the pad renders through - drug rows,
+   * the clinic form, the registration gate - so no field can be missed or later forgotten. The
+   * trailing hint is trimmed: "Brand - tap for brands + prices" is a prompt; the label is "Brand". */
+  function rxLabelInputs() {
+    try {
+      var els = sheet.querySelectorAll("input[placeholder]:not([aria-label])");
+      for (var i = 0; i < els.length; i++) {
+        var p = String(els[i].getAttribute("placeholder") || "");
+        var lab = p.split(/\s+[—–-]\s+/)[0].split(" (")[0].trim();
+        if (lab) els[i].setAttribute("aria-label", lab);
+      }
+    } catch (e) {}
+  }
+  function show(html) {
+    ensureEls();
+    sheet.innerHTML = '<div class="rx-wrap">' + html + '</div>';
+    rxLabelInputs();
+    scrim.classList.add("on"); sheet.classList.add("on");
+  }
   function close() { if (sheet) sheet.classList.remove("on"); if (scrim) scrim.classList.remove("on"); }
 
   // ---- WebView-safe Print / PDF ----------------------------------------------------------------
@@ -469,6 +494,7 @@
     (lines || []).forEach(function (l) {
       var i = wrap.children.length;
       wrap.insertAdjacentHTML("beforeend", lineHTML({ drug: l.drug || "", brand: l.brand || "", dose: l.dose || "", freq: l.freq || "", duration: l.duration || "", unverified: false, isAdvice: false }, i));
+      rxLabelInputs();   // rows added after show() need labelling too
       var ln = wrap.lastElementChild; acAttach(ln); rxBrandAC(ln);
       var del = ln.querySelector(".rx-del"); if (del) del.onclick = function () { ln.remove(); refreshSafety(); };
     });
@@ -532,6 +558,7 @@
     sheet.querySelector("#rxAdd").addEventListener("click", function () {
       var wrap = sheet.querySelector("#rxLines"); var i = wrap.children.length;
       wrap.insertAdjacentHTML("beforeend", lineHTML({ drug: "", brand: "", dose: "", freq: "", duration: "", unverified: false, isAdvice: false }, i));
+      rxLabelInputs();   // rows added after show() need labelling too
       bindDel();
       acAttach(wrap.lastElementChild); rxBrandAC(wrap.lastElementChild);   // drug AC + live brand picker
       refreshSafety();
