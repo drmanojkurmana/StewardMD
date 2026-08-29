@@ -1784,3 +1784,8 @@ felt slow; wanted auto Face ID on launch or "don't ask if opened within 2 hours"
 - `test/run-applock-ui.mjs` 54/54; `test/run-splash-ui.mjs` now clears its own origin at start
   (the persisted Chrome profile used to fake a signed-in first run and fail 2 asserts on every
   second run).
+- **Addendum (same day): biometric unlock shows no card.** Owner: "never app should show face id
+  option on click of app". Boot is splash -> system Face ID / Touch ID sheet fires by itself at
+  the splash's `finish()` -> app. `renderBiometricUnlock()` renders nothing; `renderBiometricRetry()`
+  (Try <Face ID|Touch ID> again / Sign out) appears only after a failed or cancelled scan. The
+  PIN pad still pre-shows at load. So the "lock at load" point above now applies to PIN only.
