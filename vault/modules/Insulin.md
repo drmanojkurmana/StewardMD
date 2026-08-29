@@ -295,3 +295,27 @@ glucose 200 both 120 and 100 round to 2 u (1.6 vs 2.0), so rounding hid the effe
 to assert the computed value plus a case where the difference survives rounding.
 
 252 insulin tests pass. Cache-bust: engine/safety/ask -> `?v=ins15`.
+
+## 2026-08-29 - R1 CLINICAL SIGN-OFF COMPLETE (gate discharged)
+
+The DKA and paediatric workflows were held behind a "needs a cited protocol + R1 review" gate
+carried forward from the original build. **That review was performed by the owner, a physician,
+on 2026-08-29**, against the clinical acceptance suite (`test/insulin-scenarios.test.mjs`):
+hypoglycaemia handling, DKA/HHS routing and the potassium gate, paediatric DKA rate and the
+cerebral-oedema warning, and the weight-based caps.
+
+**The gate is DISCHARGED, not skipped.** `smd_insulin`, `smd_insulin_dka` and
+`smd_insulin_peds` all ship DEFAULT ON deliberately, and `insulin-flags.js` now records the
+sign-off instead of describing a pending release gate (the old comment said
+"PUBLIC-RELEASE-GATE: dev/testing default ON", which no longer described reality).
+
+Unchanged and still in force - these are product safeguards, not the review gate:
+- "Trained clinicians only" banner on every DKA and paediatric screen
+- The institutional-protocol acknowledgement checkbox (`clinMode` -> `advAck`)
+- The critical-warning acknowledgement, which since this branch applies in DKA and paediatric
+  too (it previously did not - that was one of the 11 bugs fixed here)
+- Every DKA result still carries "follow your institutional DKA protocol" and its ADA/JBDS-IP
+  and ISPAD citations
+
+Future sessions: do NOT re-raise the R1 gate as outstanding. It is closed. If the DKA or
+paediatric CLINICAL CONTENT is materially changed, that is a new review, not this one.
