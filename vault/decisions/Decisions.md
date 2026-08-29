@@ -1765,3 +1765,22 @@ in the plugin's ESM JS layer (`dist/esm/base.js`), which a buildless ES5 app nev
 - Failure text now maps the LAError code (`userCancel`, `authenticationFailed`,
   `biometryLockout`, `biometryNotEnrolled`, ...). `test/run-applock-ui.mjs` section 9 installs a
   Capacitor-shaped fake proxy where only native names succeed (41/41).
+
+## 2026-08-30 — App Lock: closable Manage, lock at load, optional 2h grace (personal only)
+Owner feedback after the Face ID fix: Manage had no way out and forced a re-pick; boot unlock
+felt slow; wanted auto Face ID on launch or "don't ask if opened within 2 hours".
+- **Manage is closable, first-run is not.** `manage()` sets `_fromManage`; the chooser then
+  shows "Keep current setting" (or "Not now" when nothing is set) and marks the current method.
+  `promptSetup()` (first-run) keeps the forced choice from the original 3-option spec.
+- **Lock is shown the moment `applock.js` loads**, over the boot splash, not at the splash's
+  `finish()`. Face ID fires on launch; the PIN pad is up while the app still loads. `unlock()` is
+  idempotent with a `done` queue, so `finish()`'s `unlock(reallyFinish)` joins the screen already
+  on show. Completing setup counts as that boot's unlock (`markUnlocked()`), no second prompt.
+- **2h grace** (`smd_applock_grace`="2h", `smd_applock_lastunlock` ms): skip the prompt when the
+  app is reopened within 2h of the last open (sliding: a grace-skipped open refreshes the stamp).
+  Classified with "no lock" as own-risk: opt-in, off by default, **hidden for institutional
+  profiles** (same PHI rule), cleared by sign-out. Not a security boundary; the PIN hash /
+  LAContext still is.
+- `test/run-applock-ui.mjs` 54/54; `test/run-splash-ui.mjs` now clears its own origin at start
+  (the persisted Chrome profile used to fake a signed-in first run and fail 2 asserts on every
+  second run).
