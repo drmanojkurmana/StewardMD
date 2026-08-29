@@ -93,18 +93,18 @@ try {
   await ev(`window.SMD_APPLOCK.promptSetup({hospital:""}); return 1;`);
   await sleep(150);
   okv(await ev(`return document.querySelectorAll("#smdApplock [data-m]").length;`), 2,
-    "personal account: 2 options render (PIN + no-lock; biometric absent, no plugin installed)");
+    "personal account: 2 options render (PIN + no-lock; biometric absent — no Capacitor bridge in plain Chrome)");
   ok(await ev(`return !!document.querySelector('#smdApplock [data-m="none"]');`) === true,
     "\"No lock\" option is offered for a personal account");
   ok(await ev(`return !document.querySelector('#smdApplock [data-m="biometric"]');`) === true,
-    "biometric is correctly absent — canBiometric() reports false with no plugin installed");
+    "biometric is correctly absent outside a native shell — canBiometric() resolves false with no window.Capacitor");
 
   /* ---------- 4. institutional account: "no lock" must not even render ---------- */
   await fresh(BASE + "?applock=1");
   await ev(`window.SMD_APPLOCK.promptSetup({hospital:"AIIMS Delhi"}); return 1;`);
   await sleep(150);
   okv(await ev(`return document.querySelectorAll("#smdApplock [data-m]").length;`), 1,
-    "institutional account: only PIN is offered (no biometric plugin, no lock hidden)");
+    "institutional account: only PIN is offered (no native bridge here, no lock hidden)");
   ok(await ev(`return !document.querySelector('#smdApplock [data-m="none"]');`) === true,
     "\"No lock\" is never offered once a hospital is on file — the whole point of the gate");
 

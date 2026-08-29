@@ -8,11 +8,14 @@
  *                    stored in the OS Keychain/Keystore via capacitor-secure-storage-plugin
  *                    (same window.SMD_SECURE shim autofetch.js defines); localStorage is a
  *                    dev/web fallback only.
- *   2. Biometric   — Face ID / Touch ID. Feature-detected via Capacitor.isPluginAvailable(),
- *                    the platform's own native-capability check (ponytail: no plugin is
- *                    installed yet, so this option is correctly absent on every build today;
- *                    add a NativeBiometric-shaped plugin + cap sync + native rebuild and it
- *                    lights up with zero changes here).
+ *   2. Biometric   — real Face ID / Touch ID (iOS) and fingerprint/face/iris (Android) via
+ *                    @aparajita/capacitor-biometric-auth (registered plugin name
+ *                    "BiometricAuthNative", capacitor.Plugins access — no bundler needed, same
+ *                    pattern as the SecureStoragePlugin calls elsewhere in this codebase).
+ *                    Offered only once checkBiometry() reports isAvailable — i.e. the device
+ *                    actually HAS enrolled biometry, not merely that the plugin is compiled in.
+ *                    iOS needs NSFaceIDUsageDescription in Info.plist (added); Android needs no
+ *                    manifest change (AndroidX BiometricPrompt handles the permission itself).
  *   3. No lock     — auto sign-in, own-risk. PERSONAL accounts only: hidden entirely when the
  *                    profile has a hospital/institution on file, so a shared or institutional
  *                    device can never end up unlocked-by-default.
@@ -92,27 +95,33 @@
     }).catch(function () { return false; });
   }
 
-  // ---- biometric — feature-detected, not assumed ----
-  function biometricPluginName() {
+  // ---- biometric — @aparajita/capacitor-biometric-auth, registered as "BiometricAuthNative"
+  // (its JS export name "BiometricAuth" is just a local alias for that proxy — the string
+  // Capacitor.Plugins is keyed on is the one passed to registerPlugin(), not the export name). ----
+  function bioPlugin() {
     try {
       var P = window.Capacitor && window.Capacitor.Plugins;
-      if (P && P.NativeBiometric) return "NativeBiometric";
-      if (P && P.BiometricAuth) return "BiometricAuth";
-    } catch (e) {}
-    return null;
+      return (P && P.BiometricAuthNative) || null;
+    } catch (e) { return null; }
   }
-  function canBiometric() {
-    var name = biometricPluginName();
-    try { return !!(name && window.Capacitor.isPluginAvailable && window.Capacitor.isPluginAvailable(name)); }
+  // isPluginAvailable() only proves the plugin is compiled into THIS build; it says nothing
+  // about whether the device actually has biometry enrolled, so it's a cheap pre-check only —
+  // canBiometric() below (checkBiometry().isAvailable) is the real, async, per-device answer.
+  function bioCompiled() {
+    try { return !!(window.Capacitor && window.Capacitor.isPluginAvailable && window.Capacitor.isPluginAvailable("BiometricAuthNative")); }
     catch (e) { return false; }
   }
+  function canBiometric() {
+    var p = bioPlugin();
+    if (!bioCompiled() || !p || !p.checkBiometry) return Promise.resolve(false);
+    return Promise.resolve(p.checkBiometry()).then(function (r) { return !!(r && r.isAvailable); }).catch(function () { return false; });
+  }
   function verifyBiometric(reason) {
-    var name = biometricPluginName();
-    if (!name) return Promise.resolve(false);
-    var p = window.Capacitor.Plugins[name];
-    var fn = p.verifyIdentity || p.authenticate;
-    if (!fn) return Promise.resolve(false);
-    try { return Promise.resolve(fn.call(p, { reason: reason || "Unlock StewardMD" })).then(function () { return true; }).catch(function () { return false; }); }
+    var p = bioPlugin();
+    if (!p || !p.authenticate) return Promise.resolve(false);
+    // authenticate() resolves (void) on success, REJECTS with a BiometryError on failure/cancel —
+    // never returns a boolean, so success/failure is read from settle, not from the value.
+    try { return Promise.resolve(p.authenticate({ reason: reason || "Unlock StewardMD", cancelTitle: "Cancel" })).then(function () { return true; }).catch(function () { return false; }); }
     catch (e) { return Promise.resolve(false); }
   }
 
@@ -176,27 +185,30 @@
   function renderChooser() {
     var isInstitutional = institutional();
     var el = overlay();
-    var rows =
-      '<button class="smdal-opt" data-m="pin"><span class="smdal-opt-ico">🔢</span><span><span class="smdal-opt-t">Set a PIN</span><span class="smdal-opt-d">A 4–6 digit code, works on any device</span></span></button>';
-    if (canBiometric()) {
-      rows += '<button class="smdal-opt" data-m="biometric"><span class="smdal-opt-ico">🔒</span><span><span class="smdal-opt-t">Face ID / Touch ID</span><span class="smdal-opt-d">Fastest — no code to remember</span></span></button>';
-    }
-    if (!isInstitutional) {
-      rows += '<button class="smdal-opt" data-m="none"><span class="smdal-opt-ico">⚠️</span><span><span class="smdal-opt-t">No lock — open automatically</span><span class="smdal-opt-d">Anyone with this phone opens your patient data. Personal devices only.</span></span></button>';
-    }
-    el.innerHTML =
-      '<div class="smdal-card">' +
-        '<div class="smdal-h">Lock StewardMD</div>' +
-        '<div class="smdal-sub">Choose how to open the app on this device.' + (isInstitutional ? " Your profile has a hospital on file, so a PIN or Face ID/Touch ID is required." : " You can change this later from Account.") + '</div>' +
-        '<div class="smdal-opts">' + rows + '</div>' +
-      '</div>';
-    el.onclick = function (e) {
-      var b = e.target.closest && e.target.closest("[data-m]"); if (!b) return;
-      var m = b.getAttribute("data-m");
-      if (m === "pin") return renderPinSetup();
-      if (m === "biometric") return renderBiometricSetup();
-      if (m === "none") return renderNoLockConfirm();
-    };
+    el.innerHTML = '<div class="smdal-card"><div class="smdal-h">Lock StewardMD</div><div class="smdal-sub">Checking this device…</div></div>'; // brief — canBiometric() is one native round-trip
+    canBiometric().then(function (bioAvailable) {
+      var rows =
+        '<button class="smdal-opt" data-m="pin"><span class="smdal-opt-ico">🔢</span><span><span class="smdal-opt-t">Set a PIN</span><span class="smdal-opt-d">A 4–6 digit code, works on any device</span></span></button>';
+      if (bioAvailable) {
+        rows += '<button class="smdal-opt" data-m="biometric"><span class="smdal-opt-ico">🔒</span><span><span class="smdal-opt-t">Face ID / Touch ID</span><span class="smdal-opt-d">Fastest — no code to remember</span></span></button>';
+      }
+      if (!isInstitutional) {
+        rows += '<button class="smdal-opt" data-m="none"><span class="smdal-opt-ico">⚠️</span><span><span class="smdal-opt-t">No lock — open automatically</span><span class="smdal-opt-d">Anyone with this phone opens your patient data. Personal devices only.</span></span></button>';
+      }
+      el.innerHTML =
+        '<div class="smdal-card">' +
+          '<div class="smdal-h">Lock StewardMD</div>' +
+          '<div class="smdal-sub">Choose how to open the app on this device.' + (isInstitutional ? " Your profile has a hospital on file, so a PIN or Face ID/Touch ID is required." : " You can change this later from Account.") + '</div>' +
+          '<div class="smdal-opts">' + rows + '</div>' +
+        '</div>';
+      el.onclick = function (e) {
+        var b = e.target.closest && e.target.closest("[data-m]"); if (!b) return;
+        var m = b.getAttribute("data-m");
+        if (m === "pin") return renderPinSetup();
+        if (m === "biometric") return renderBiometricSetup();
+        if (m === "none") return renderNoLockConfirm();
+      };
+    });
   }
 
   function renderPinSetup(stage, firstPin) {

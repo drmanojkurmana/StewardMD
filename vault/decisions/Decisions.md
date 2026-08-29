@@ -1715,3 +1715,36 @@ only: `test/run-applock-ui.mjs`, 25/25 green, plus the full existing `test/run-s
 forces it on for testing; `?applock=0` forces off. Needs an owner device pass + R3 security review
 before flipping the default, per CLAUDE.md's "reversible changes" rule for anything auth-shaped.
 sw.js CACHE bumped `-applock1`.
+
+## 2026-08-29 — App Lock biometric: wired to a real plugin, not just feature-detected
+Follow-up to the App Lock entry above: owner asked for iPhone Face ID/Touch ID and Android
+biometrics to actually work, not just be structurally ready for a plugin. Added
+`@aparajita/capacitor-biometric-auth@10.0.0` (verified against the npm registry + its
+TypeScript definitions before writing any call — declares `@capacitor/*: ^8.x`, matching this
+repo's Capacitor 8.4.1; 214k weekly downloads, updated 2026-02, actively maintained — over the
+older, Capacitor-3-targeted `capacitor-native-biometric`).
+
+- `npm install` + `npm run build:www` + `npx cap sync` run in this session: 28 iOS / 21 Android
+  plugins now include it, WatchBridge still present (no repeat of the incomplete-node_modules
+  drop — node_modules was already complete before this install).
+- `ios/App/App/Info.plist` gained `NSFaceIDUsageDescription` — mandatory or iOS silently refuses
+  Face ID. No Android manifest change needed (AndroidX BiometricPrompt handles its own
+  permission).
+- **Corrected two wrong assumptions from the first pass**: the plugin's registered name is
+  `BiometricAuthNative` (not `NativeBiometric`/`BiometricAuth` — those were guesses; the export
+  named `BiometricAuth` in the plugin's own JS is just a local alias for that proxy, and
+  `Capacitor.Plugins` is keyed on the string passed to `registerPlugin()`). And device capability
+  is NOT `Capacitor.isPluginAvailable()` (that only proves the plugin is compiled into the
+  build) — it's the async `checkBiometry().isAvailable` (whether the device actually has
+  biometry enrolled), so `canBiometric()` became async and `renderChooser()` now awaits it
+  before deciding whether to show the Face ID/Touch ID row.
+- `authenticate()` resolves (void) on success and REJECTS with a `BiometryError` on failure/
+  cancel — never returns a boolean — so `verifyBiometric()` reads success from settle, not from
+  the resolved value; this matches the resolve→true/catch→false wrapper already written, so no
+  caller (`renderBiometricSetup`/`renderBiometricUnlock`) needed to change.
+- Not yet run on a physical device — this session has no iPhone/Android attached. Web-side logic
+  is fully verified (`test/run-applock-ui.mjs`, 25/25 green, unaffected since Chrome-headless
+  has no `window.Capacitor` bridge — biometric correctly reports unavailable there, same as
+  before); `test/run-splash-ui.mjs` still 25/25. The remaining step is the owner's own
+  build→install→test pass per this file's native-build gotchas (Xcode SPM scheme, `devicectl`
+  reinstall wipes app data, `ios_webkit_debug_proxy` for on-device debugging).
