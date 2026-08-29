@@ -22,7 +22,9 @@
   }
   function keyFor(base) { return "smd_insulin_" + base + "_" + uid(); }
 
-  var DEFAULTS = { units: "mgdl", increment: 1, target: 120, maxBolus: 15, maxDaily: 100, institution: "", bolusInsulin: "aspart", homeGlass: "standard", advMode: false };
+  // showRounding: rounding is a device/setup preference, set once in Settings. It is only
+  // repeated per-calculation for users who ask for it (0.5 u pens, paediatric practice).
+  var DEFAULTS = { units: "mgdl", increment: 1, target: 120, maxBolus: 15, maxDaily: 100, institution: "", bolusInsulin: "aspart", homeGlass: "standard", showRounding: false };
   var GLASS_MAP = { frosted: "ins-glass ins-glass-frost", liquid: "ins-glass ins-glass-frost ins-glass-sheen",
     tinted: "ins-glass ins-glass-tint", blend: "ins-glass ins-glass-tint ins-glass-sheen" };
   var SET = clone(DEFAULTS);
@@ -34,12 +36,31 @@
   function saveSettings() { try { localStorage.setItem(keyFor("settings"), JSON.stringify(SET)); } catch (e) {} }
 
   function loadLog() { try { return JSON.parse(localStorage.getItem(keyFor("log")) || "[]"); } catch (e) { return []; } }
-  function saveLog(list) { try { localStorage.setItem(keyFor("log"), JSON.stringify(list.slice(0, 50))); } catch (e) {} }
+  function saveLog(list) { try { localStorage.setItem(keyFor("log"), JSON.stringify(list.slice(0, 200))); } catch (e) {} }
   function pushLog(entry) { var l = loadLog(); l.unshift(entry); saveLog(l); }
+
+  /* The log is per-DEVICE (one uid, one phone) but a ward round is many patients on that
+   * one phone. Every read of the log for a CLINICAL purpose - insulin on board, running
+   * daily total - must therefore be scoped to the selected patient, or bed 4's 8 units
+   * become bed 7's IOB and six patients share one "max daily dose exceeded" interrupt.
+   * A record with no patientId belongs to no patient and is never reused clinically. */
+  function logForPatient() {
+    var pid = st.patientId;
+    if (!pid) return [];                       // no patient selected -> nothing is attributable
+    return loadLog().filter(function (e) { return e.patientId === pid; });
+  }
+  // Only true single boluses count toward a daily UNIT total. Basal/paediatric results are
+  // whole-day totals and DKA is units/HOUR - summing those into a unit count is meaningless.
+  var BOLUS_LOG_MODES = ["combined", "meal", "correction"];
   function todayTotal() {
-    var l = loadLog(), n = new Date(), y = n.getFullYear(), m = n.getMonth(), d = n.getDate(), sum = 0;
-    for (var i = 0; i < l.length; i++) { var e = l[i]; if (!e.ts) continue; var t = new Date(e.ts);
-      if (t.getFullYear() === y && t.getMonth() === m && t.getDate() === d) sum += Number(e.confirmedDose) || 0; }
+    var l = logForPatient(), n = new Date(), y = n.getFullYear(), m = n.getMonth(), d = n.getDate(), sum = 0;
+    for (var i = 0; i < l.length; i++) {
+      var e = l[i]; if (!e.ts) continue;
+      if (BOLUS_LOG_MODES.indexOf(e.mode) < 0) continue;
+      if ((e.unit || "units") !== "units") continue;
+      var t = new Date(e.ts);
+      if (t.getFullYear() === y && t.getMonth() === m && t.getDate() === d) sum += Number(e.givenDose != null ? e.givenDose : e.confirmedDose) || 0;
+    }
     return sum;
   }
 
@@ -79,6 +100,9 @@
     if (p.bolus) st.bolus = p.bolus;
   }
   function num(x) { return x !== "" && x != null && isFinite(Number(x)); }
+  // Blank stays blank. Passing 0 for an empty field would let the engine compute a dose
+  // from a value the clinician never entered, which is exactly what the empty defaults fix.
+  function N(x) { return num(x) ? Number(x) : undefined; }
 
   /* ---------- units (display <-> canonical mg/dL) ---------- */
   function mmolMode() { return SET.units === "mmol"; }
@@ -89,9 +113,9 @@
   function targetPresets() { return mmolMode() ? [5, 6, 7, 8] : [100, 120, 140, 180]; }
 
   /* ---------- state ---------- */
-  var st = { screen: "dashboard", mode: "combined",
+  var st = { screen: "dashboard", mode: "correction", group: "now",
     glucose: 180, target: 120, carbs: 45, icr: 10, isf: 50, iob: 2, increment: 1,
-    ctx: { age: 40, weightKg: 70, pregnancy: false, renal: false, hepatic: false, exercise: false, steroids: false, egfr: null, dialysis: false, trimester: null },
+    ctx: { age: "", weightKg: "", pregnancy: false, renal: false, hepatic: false, exercise: false, steroids: false, pediatric: false, egfr: null, dialysis: false, trimester: null },
     acked: false, confirmed: false, bolus: "aspart", iobNote: "",
     tdd: 40, isfRule: 1800, icrRule: 500, tddFactor: 0.4, basalFraction: 0.5,
     dkaRate: 0.1, dkaMax: "", pedStage: "prepubertal", dkaPaeds: false, advAck: false,
@@ -101,15 +125,25 @@
     histFilter: "all" };
 
   function initState() {
-    var m = mmolMode();
-    st.mode = st.mode || "combined";
-    st.glucose = m ? 10 : 180;
-    st.target = SET.target;          // stored in SET.units
-    st.carbs = 45; st.icr = 10;
-    st.isf = m ? 3 : 50;
-    st.iob = 2; st.increment = SET.increment;
+    st.mode = st.mode || "correction"; st.group = groupOf(st.mode);
+    /* EVERY clinical input starts EMPTY. This screen previously opened pre-filled with
+     * glucose 180, carbs 45, ICR 10, ISF 50, IOB 2, weight 70 - a complete fictional
+     * patient - and therefore opened already displaying a "recommended dose" for nobody.
+     * The IOB default of 2 was the worst of them: it silently subtracted 2 units from
+     * every correction unless the user noticed and cleared it. A dose calculator must
+     * ask, never assume. `stGet` coerces "" to 0 so the steppers still work. */
+    st.glucose = ""; st.carbs = ""; st.icr = ""; st.isf = ""; st.iob = "";
+    st.target = SET.target;          // a real, configured default - not patient data
+    st.increment = SET.increment;
     st.bolus = SET.bolusInsulin || "aspart"; st.iobNote = "";
-    st.tdd = 40; st.isfRule = 1800; st.icrRule = 500; st.tddFactor = 0.4; st.basalFraction = 0.5;
+    st.tdd = ""; st.isfRule = 1800; st.icrRule = 500; st.tddFactor = 0.4; st.basalFraction = 0.5;
+    // Ward workflow inputs - also empty; only method/rule choices carry a default.
+    st.curBasal = ""; st.fasting = ""; st.preDinner = ""; st.titrMethod = "units";
+    st.scaleResist = "usual"; st.scaleMax = 10;
+    st.steroidKind = "prednisolone"; st.steroidMg = "";
+    st.ivRate = ""; st.ivPercent = 0.8;
+    st.pmMorning = ""; st.pmEvening = ""; st.npoType1 = false; st.npoHypoRisk = false;
+    st.creatinine = "";
     st.dkaRate = 0.1; st.dkaMax = ""; st.pedStage = "prepubertal"; st.dkaPaeds = false; st.advAck = false;
     // First-dose / no-prior-data correction pathway (correction mode only). Default "isf" keeps the
     // existing manual behaviour untouched.
@@ -120,7 +154,7 @@
     st.fdPriorUnits = 0; st.fdPriorMins = 0;   // a prior rapid-acting dose (for IOB when NOT naive)
     st.isfOverride = "";             // optional manual ISF override in tdd/estimate sub-modes
     st.fdRoute = "";                 // "" | dka | pediatric — routes away from a routine correction
-    st.ctx = { age: 40, weightKg: 70, pregnancy: false, renal: false, hepatic: false, exercise: false, steroids: false, egfr: null, dialysis: false, trimester: null };
+    st.ctx = { age: "", weightKg: "", pregnancy: false, renal: false, hepatic: false, exercise: false, steroids: false, pediatric: false, egfr: null, dialysis: false, trimester: null };
     st.acked = false; st.confirmed = false;
     st.patientId = null; st.patientName = ""; st.editP = null; st.patQ = "";
     st.convFrom = "glargine100"; st.convTo = "degludec"; st.convDose = 20; st.convReason = ""; st.convFromFreq = "bd"; st.convAck = false;
@@ -145,11 +179,33 @@
   function modeLabel(m) {
     var L = { combined: "Combined meal + correction", meal: "Meal bolus", correction: "Correction",
       basal: "Basal initiation", isf: "Insulin sensitivity factor", icr: "Insulin-to-carb ratio",
-      iob: "Active insulin (IOB)", pediatric: "Paediatric initiation", dka: "DKA insulin infusion" };
+      iob: "Active insulin (IOB)", pediatric: "Paediatric initiation", dka: "DKA insulin infusion",
+      basalT2: "Basal initiation (type 2)", inpatient: "Inpatient basal-bolus initiation",
+      premix: "Premix initiation", premixTitr: "Premix titration", titrate: "Basal titration",
+      scale: "Correction scale", npo: "Nil by mouth regimen", steroid: "Glucocorticoid cover",
+      ivsc: "Intravenous to subcutaneous transition" };
     return L[m] || "Insulin dose";
   }
 
   function howItWorks(mode) {
+    if (mode === "titrate")
+      return "Basal insulin is judged on the FASTING glucose alone. If fasting is above target the dose goes up by 2 units and is then held for 3 days, because a basal analogue takes 3 to 4 days to reach steady state. Any hypoglycaemic reading overrides a high average: the dose comes down 10% (20% below 54 mg/dL) and the cause is looked for first. Above about 0.5 units/kg/day more basal stops helping - that is overbasalization, and the missing piece is prandial insulin.";
+    if (mode === "scale")
+      return "A supplemental correction table built from this patient's own insulin sensitivity rather than a photocopied chart. Each glucose band is (band midpoint - target) divided by the ISF, rounded and capped. It is given before meals, or every 4 to 6 hours if the patient is not eating, ALONGSIDE basal insulin - a correction-only regimen is explicitly discouraged.";
+    if (mode === "basalT2")
+      return "Type 2 basal initiation. The starting dose is 10 units a day or 0.2 units/kg/day, whichever is lower, and nothing else changes on day one. Prandial insulin is not started at the same time. The dose is then titrated on fasting readings.";
+    if (mode === "inpatient")
+      return "Weight-based basal-bolus for an admitted patient. The starting factor comes from the admission glucose (0.4 units/kg/day up to 200 mg/dL, 0.5 above it) and drops to 0.3 for age 70 or over or creatinine 2.0 or above. Half is basal, half is split across three meals, and a correction scale sits on top.";
+    if (mode === "premix")
+      return "Premixed insulin twice daily: about 0.3 units/kg/day to start, two-thirds before breakfast and one-third before dinner. The ratio is fixed, so basal and prandial cannot be moved separately - the patient has to eat on time.";
+    if (mode === "premixTitr")
+      return "Each premix injection is judged by the reading before the NEXT injection: the morning dose against the pre-dinner value, the evening dose against the fasting value. Only the responsible injection is changed, by 2 units, or reduced 20% for a hypoglycaemic reading.";
+    if (mode === "npo")
+      return "Nil by mouth. Prandial insulin stops because there is no meal to cover; basal continues because it covers the body's background need, not food. In type 1 the basal is never stopped - doing so causes ketoacidosis even with a normal glucose. In type 2 it is usually reduced. Correction insulin continues every 4 to 6 hours.";
+    if (mode === "steroid")
+      return "Glucocorticoids raise glucose mainly after lunch and dinner, so cover is matched to the steroid's own curve: NPH given at the same time as the steroid, at 0.1 units/kg/day for every 10 mg of prednisolone equivalent, capped at 0.4 units/kg/day. It is additional to the usual insulin, and it must be tapered on the same day the steroid is.";
+    if (mode === "ivsc")
+      return "Coming off an insulin infusion. The last 6 hours of stable infusion rates are extrapolated to 24 hours, and 60 to 80% of that becomes the subcutaneous total daily dose. The critical step is timing: the subcutaneous basal must be given 2 to 4 hours BEFORE the drip stops, because it is not active for hours and the gap is what causes rebound hyperglycaemia and recurrent ketoacidosis.";
     if (mode === "meal")
       return "This covers the carbohydrates in the meal. It divides the grams of carbohydrate by the " +
         "insulin-to-carbohydrate ratio (ICR), so one unit of insulin is given for every ICR grams. The result is then rounded.";
@@ -270,8 +326,10 @@
     if (log.length) {
       recent = log.slice(0, 4).map(function (e) {
         var u = e.unit && e.unit.indexOf("hour") > -1 ? "u/h" : "u";
-        return '<div class="ins-rec-row"><div class="ins-rec-dose">' + e.confirmedDose + '<span>' + u + '</span></div>' +
-          '<div class="ins-rec-meta"><div class="ins-rec-mode">' + modeLabel(e.mode) + '</div>' +
+        var shown = e.givenDose != null ? e.givenDose : e.confirmedDose;
+        var who = e.patientName ? ' &middot; ' + esc(e.patientName) : '';
+        return '<div class="ins-rec-row"><div class="ins-rec-dose">' + shown + '<span>' + u + '</span></div>' +
+          '<div class="ins-rec-meta"><div class="ins-rec-mode">' + modeLabel(e.mode) + who + '</div>' +
           '<div class="ins-rec-time">' + timeStr(e.ts) + (e.warnings && e.warnings.length ? ' &middot; ' + e.warnings.length + ' flag' + (e.warnings.length > 1 ? 's' : '') : '') + '</div></div></div>';
       }).join("");
     } else {
@@ -284,9 +342,21 @@
       '</div>' : "";
 
     return patientBarHTML() + summary +
-      '<div class="ins-card ins-bf"><div class="ins-card-t">Start a calculation</div>' +
-        '<div class="ins-qa">' + qa("combined", "Combined dose") + qa("meal", "Meal bolus") + qa("correction", "Correction") + '</div>' +
-        '<div class="ins-hint">More inside each calculation: basal, sensitivity (ISF), carb ratio, active insulin, and the clinician DKA and paediatric calculators.</div>' +
+      /* Entry by the QUESTION the clinician arrived with, not by the name of the formula.
+       * "Combined dose / Meal bolus / Correction" told a resident nothing about which one
+       * answers "fasting is 190 on 20 units of glargine". These do. */
+      '<div class="ins-card ins-bf"><div class="ins-card-t">What do you need to do?</div>' +
+        '<div class="ins-ask">' +
+          ask("titrate", "Sugars are high on the current dose", "Titrate the basal against the fasting reading") +
+          ask("scale", "Write a correction scale", "A q6h supplemental scale built from this patient's own sensitivity") +
+          ask("basalT2", "Start insulin in type 2 diabetes", "Basal-only initiation, then titration") +
+          ask("inpatient", "Admit and start basal-bolus", "Weight-based inpatient regimen with a correction scale") +
+          ask("correction", "Bring down a single high reading", "One correction dose now") +
+          ask("npo", "Patient is nil by mouth", "What to hold, what to continue") +
+          ask("steroid", "Steroids have raised the sugars", "NPH cover matched to the steroid dose") +
+          ask("ivsc", "Come off the insulin drip", "Convert the infusion to a subcutaneous regimen") +
+        '</div>' +
+        '<div class="ins-hint">Also inside: premix start and titration, meal bolus and carbohydrate ratios, active insulin, and the clinician paediatric and DKA calculators.</div>' +
       '</div>' +
       libEntryHTML() + convEntryHTML() +
       '<div class="ins-card ins-bf"><div class="ins-card-t ins-card-t-row">Recent doses' +
@@ -328,6 +398,10 @@
       '<div class="ins-stat-v">' + val + '<span>' + unit + '</span></div></div>';
   }
   function qa(mode, label) { return '<button class="ins-qa-btn" data-ins="qa" data-mode="' + mode + '">' + label + '</button>'; }
+  function ask(mode, question, detail) {
+    return '<button class="ins-askbtn" data-ins="qa" data-mode="' + mode + '">' +
+      '<span class="ins-ask-q">' + question + '</span><span class="ins-ask-d">' + detail + '</span>' + ICON_CHEVR + '</button>';
+  }
   function timeStr(ts) { try { return new Date(ts).toLocaleString([], { month: "short", day: "numeric", hour: "2-digit", minute: "2-digit" }); } catch (e) { return ""; } }
 
   /* ---------- dose history (filter + export) ---------- */
@@ -351,17 +425,25 @@
     list.innerHTML = rows.map(function (e) {
       var w = (e.warnings && e.warnings.length) ? e.warnings.length + " flag" + (e.warnings.length > 1 ? "s" : "") : "no flags";
       var u = e.unit && e.unit.indexOf("hour") > -1 ? "u/h" : "u";
-      return '<div class="ins-rec-row"><div class="ins-rec-dose">' + e.confirmedDose + '<span>' + u + '</span></div>' +
-        '<div class="ins-rec-meta"><div class="ins-rec-mode">' + modeLabel(e.mode) + '</div>' +
-        '<div class="ins-rec-time">' + timeStr(e.ts) + ' &middot; ' + w + '</div></div></div>';
+      var shown = e.givenDose != null ? e.givenDose : e.confirmedDose;
+      // An audit trail has to name the patient and show where the given dose differed
+      // from the suggestion, or it is an audit of the calculator rather than of care.
+      var who = e.patientName ? esc(e.patientName) : (e.patientId ? "patient " + esc(e.patientId) : "no patient recorded");
+      var ovr = e.overridden ? ' &middot; <span class="ins-rec-ovr">overridden from ' + e.calculatedDose + u + '</span>' : '';
+      return '<div class="ins-rec-row"><div class="ins-rec-dose">' + shown + '<span>' + u + '</span></div>' +
+        '<div class="ins-rec-meta"><div class="ins-rec-mode">' + modeLabel(e.mode) + ' &middot; ' + who + '</div>' +
+        '<div class="ins-rec-time">' + timeStr(e.ts) + ' &middot; ' + w + ovr + '</div></div></div>';
     }).join("");
   }
   function histCSV() {
     var rows = histFiltered();
+    function q(s) { return '"' + String(s == null ? "" : s).replace(/"/g, '""') + '"'; }
     var lines = rows.map(function (e) {
-      return [new Date(e.ts).toISOString(), e.mode, e.calculatedDose, e.confirmedDose, (e.unit || "units"), '"' + (e.warnings || []).join("; ") + '"'].join(",");
+      return [new Date(e.ts).toISOString(), e.mode, q(e.patientName || ""), q(e.patientId || ""),
+        e.calculatedDose, (e.givenDose != null ? e.givenDose : e.confirmedDose), (e.overridden ? "yes" : "no"),
+        (e.unit || "units"), q((e.warnings || []).join("; "))].join(",");
     });
-    return ["timestamp,mode,calculated,confirmed,unit,warnings"].concat(lines).join("\n");
+    return ["timestamp,mode,patient,patient_id,calculated,given,overridden,unit,warnings"].concat(lines).join("\n");
   }
 
   /* ---------- Settings ---------- */
@@ -592,24 +674,52 @@
   function stGet(f) { if (f.indexOf(".") > -1) { var p = f.split("."); return Number(st[p[0]][p[1]]) || 0; } return Number(st[f]) || 0; }
   function stSet(f, v) { if (f.indexOf(".") > -1) { var p = f.split("."); st[p[0]][p[1]] = v; } else st[f] = v; }
 
-  // The two levels show DIFFERENT sets, not a superset:
-  //   Simple   (adv:false) - the bedside sequence: Basal -> Correction -> Meal -> Combined
-  //   Advanced (adv:true)  - only the remainder: derivation calculators + specialist protocols
-  var MODES = [
-    { id: "basal", label: "Basal init" }, { id: "correction", label: "Correction" },
-    { id: "meal", label: "Meal bolus" }, { id: "combined", label: "Combined" },
-    { id: "isf", label: "ISF", adv: true }, { id: "icr", label: "Carb ratio", adv: true },
-    { id: "iob", label: "Active insulin", adv: true },
-    { id: "pediatric", label: "Pediatric", clin: true, adv: true }, { id: "dka", label: "DKA infusion", clin: true, adv: true }
+  /* Modes are grouped by the CLINICAL QUESTION being asked, not by the formula used.
+   * The old split was Simple vs Advanced, which put ISF and carb ratio - the two numbers
+   * the "simple" calculators demand as input - behind a tab labelled for specialists.
+   * A resident was sent to the advanced screen to obtain a value the beginner screen
+   * required. Grouping by task removes that, and every group is reachable in one tap. */
+  var GROUPS = [
+    { id: "start",  label: "Starting insulin",  hint: "A patient who needs insulin begun." },
+    { id: "adjust", label: "Adjusting",         hint: "Already on insulin, the numbers are wrong." },
+    { id: "now",    label: "High sugar now",    hint: "A single reading to bring down." },
+    { id: "special", label: "Special situations", hint: "Fasting, steroids, drips, DKA, children." },
+    { id: "derive", label: "Work out a ratio",  hint: "Derive ISF, carb ratio or insulin on board." }
   ];
-  function advOn() { return !!SET.advMode; }
-  function isAdvMode(id) { return MODES.some(function (m) { return m.id === id && m.adv; }); }
-  function visibleModes() { return MODES.filter(function (m) { return advOn() ? !!m.adv : !m.adv; }); }
-  function firstModeFor(adv) { var l = MODES.filter(function (m) { return adv ? !!m.adv : !m.adv; }); return l.length ? l[0].id : "combined"; }
+  var MODES = [
+    // Starting insulin
+    { id: "basalT2",   label: "Start basal (T2DM)", group: "start" },
+    { id: "inpatient", label: "Start basal-bolus",  group: "start" },
+    { id: "premix",    label: "Start premix",       group: "start" },
+    { id: "basal",     label: "Basal-bolus (custom factor)", group: "start" },
+    // Adjusting
+    { id: "titrate",     label: "Titrate basal",  group: "adjust" },
+    { id: "premixTitr",  label: "Titrate premix", group: "adjust" },
+    // High sugar now
+    { id: "correction", label: "Correction",    group: "now" },
+    { id: "scale",      label: "Correction scale", group: "now" },
+    { id: "combined",   label: "Meal + correction", group: "now" },
+    { id: "meal",       label: "Meal bolus",    group: "now" },
+    // Special situations
+    { id: "npo",       label: "Nil by mouth",  group: "special" },
+    { id: "steroid",   label: "Steroid cover", group: "special" },
+    { id: "ivsc",      label: "Drip to subcut", group: "special" },
+    { id: "pediatric", label: "Pediatric",     group: "special", clin: true },
+    { id: "dka",       label: "DKA infusion",  group: "special", clin: true },
+    // Derivations
+    { id: "isf", label: "ISF",           group: "derive" },
+    { id: "icr", label: "Carb ratio",    group: "derive" },
+    { id: "iob", label: "Active insulin", group: "derive" }
+  ];
+  function groupOf(id) { var m = MODES.filter(function (x) { return x.id === id; })[0]; return m ? m.group : "now"; }
+  function activeGroup() { return st.group || groupOf(st.mode); }
+  function visibleModes() { var g = activeGroup(); return MODES.filter(function (m) { return m.group === g; }); }
+  function firstModeIn(g) { var l = MODES.filter(function (m) { return m.group === g; }); return l.length ? l[0].id : "correction"; }
   function glucoseMode(m) { return m === "combined" || m === "correction"; }
   function bolusMode(m) { return ["combined", "meal", "correction", "iob"].indexOf(m) > -1; }
   function clinMode(m) { return m === "pediatric" || m === "dka"; }
-  function doseUnitMode(m) { return ["combined", "meal", "correction", "basal", "pediatric"].indexOf(m) > -1; }
+  function doseUnitMode(m) { return ["combined", "meal", "correction", "basal", "pediatric", "inpatient", "premix", "npo", "steroid", "ivsc", "basalT2"].indexOf(m) > -1; }
+  function wardMode(m) { return ["titrate", "scale", "basalT2", "inpatient", "premix", "premixTitr", "npo", "steroid", "ivsc"].indexOf(m) > -1; }
 
   function calcHTML() {
     return (st.patientId ? '<div class="ins-patchip ins-bf">' + ICON_USER + '<span>' + esc(st.patientName) + '</span>' +
@@ -617,14 +727,12 @@
       '<div class="ins-ai ins-bf">' + ICON_AI +
         '<div><b>AI-assisted recommendation.</b> The treating physician makes the final decision. ' +
         'Every value below is shown with its formula and assumptions - nothing is hidden.</div></div>' +
-      '<div class="ins-levelrow ins-bf"><div class="ins-level" role="tablist" aria-label="Detail level">' +
-        '<button role="tab" data-ins="adv" data-v="0" aria-pressed="' + (!advOn() ? "true" : "false") + '">Simple</button>' +
-        '<button role="tab" data-ins="adv" data-v="1" aria-pressed="' + (advOn() ? "true" : "false") + '">Advanced</button>' +
-      '</div><span class="ins-level-h">' + (advOn()
-        ? 'Ratio derivation and specialist protocols. Switch to Simple for the everyday doses.'
-        : 'Basal, correction, meal and combined. Switch to Advanced for ISF/carb-ratio, active insulin, paediatric and DKA.') + '</span></div>' +
+      '<div class="ins-groups ins-bf" role="tablist" aria-label="Clinical task">' + GROUPS.map(function (g) {
+        return '<button class="ins-groupbtn" role="tab" data-ins="group" data-g="' + g.id + '" aria-selected="' + (activeGroup() === g.id ? "true" : "false") + '">' + g.label + '</button>';
+      }).join("") + '</div>' +
+      '<div class="ins-level-h ins-bf">' + (GROUPS.filter(function (g) { return g.id === activeGroup(); })[0] || GROUPS[0]).hint + '</div>' +
       '<div class="ins-modes ins-bf" role="tablist">' + visibleModes().map(function (m) {
-        return '<button class="ins-modebtn' + (m.clin ? " clin" : "") + '" role="tab" data-ins="mode" data-mode="' + m.id + '" aria-pressed="' + (st.mode === m.id ? "true" : "false") + '">' + m.label + '</button>';
+        return '<button class="ins-modebtn' + (m.clin ? " clin" : "") + '" role="tab" data-ins="mode" data-mode="' + m.id + '" aria-selected="' + (st.mode === m.id ? "true" : "false") + '">' + m.label + '</button>';
       }).join("") + '</div>' +
       '<div class="ins-card ins-bf" id="insInputs"></div>' +
       '<div id="insOut"></div>';
@@ -670,14 +778,17 @@
     return '<div class="ins-guide">Give ' + d.timing.charAt(0).toLowerCase() + d.timing.slice(1) +
       '. Onset ' + d.onset + ' &middot; peak ' + d.peak + ' &middot; lasts ' + d.duration + '.</div>';
   }
+  // Scoped to the SELECTED PATIENT (see logForPatient): insulin on board is the single
+  // most patient-specific number here, and borrowing another bed's doses would silently
+  // subtract insulin this patient never received.
   function recentBolusDoses() {
-    var dia = bolusDia(), log = loadLog(), now = Date.now(), doses = [], i;
+    var dia = bolusDia(), log = logForPatient(), now = Date.now(), doses = [], i;
     for (i = 0; i < log.length; i++) {
       var e = log[i]; if (!e.ts) continue;
-      if (["meal", "correction", "combined"].indexOf(e.mode) < 0) continue;
+      if (BOLUS_LOG_MODES.indexOf(e.mode) < 0) continue;
       var mins = (now - e.ts) / 60000;
       if (mins < 0 || mins > dia * 60) continue;
-      doses.push({ units: Number(e.confirmedDose) || 0, minutesAgo: mins });
+      doses.push({ units: Number(e.givenDose != null ? e.givenDose : e.confirmedDose) || 0, minutesAgo: mins });
     }
     return doses;
   }
@@ -691,9 +802,15 @@
 
   // ---- First-dose / no-prior-data correction inputs (correction mode only) ----
   function iobEstBtn() {
+    // IOB is now scoped to the selected patient, so with no patient there is nothing
+    // legitimate to estimate from. Say that, rather than showing a dead "no doses" button.
+    if (!st.patientId) {
+      return '<div class="ins-field"><button class="ins-iob-est" data-ins="go-patients">Select a patient to estimate insulin on board</button>' +
+        '<div class="ins-tgt-note">Active insulin is counted from that patient\'s own recorded doses only. Without a patient selected it cannot be estimated, and is left for you to enter.</div></div>';
+    }
     var nd = recentBolusDoses().length;
     return '<div class="ins-field"><button class="ins-iob-est" data-ins="iob-est"' + (nd ? "" : " disabled") + '>' +
-      (nd ? 'Estimate IOB from ' + nd + ' recent dose' + (nd > 1 ? 's' : '') : 'No recent doses to estimate IOB') + '</button>' +
+      (nd ? 'Estimate IOB from ' + nd + ' recorded dose' + (nd > 1 ? 's' : '') + ' for ' + esc(st.patientName) : 'No recorded doses for ' + esc(st.patientName) + ' in the last ' + bolusDia() + ' h') + '</button>' +
       (st.iobNote ? '<div class="ins-iob-note">' + st.iobNote + '</div>' : '') + '</div>';
   }
   function fdSrcBtn(v, label) { return '<button class="ins-chip" data-ins="corr-source" data-v="' + v + '" aria-pressed="' + (st.corrSource === v ? "true" : "false") + '">' + label + '</button>'; }
@@ -743,6 +860,7 @@
       h += '<div class="ins-field"><div class="ins-lab">Target glucose <span class="u">' + gUnit() + '</span></div>' +
         '<div class="ins-tgt"><input class="ins-tgt-in" data-ins="num" data-f="target" type="number" inputmode="decimal" min="1" value="' + st.target + '" aria-label="Target glucose">' +
         '<div class="ins-chips">' + chips + '</div></div>' +
+        (st.targetNote ? '<div class="ins-tgt-note ins-tgt-changed">' + st.targetNote + '</div>' : '') +
         '<div class="ins-tgt-note">Type any target - a higher interim target gives gradual correction of a very high glucose.</div></div>';
     }
     if (m === "combined" || m === "meal") h += '<div class="ins-field"><div class="ins-lab">Carbohydrates <span class="u">g</span></div>' + stepper("carbs", st.carbs, 5) + '</div>';
@@ -780,6 +898,63 @@
           '<button class="ins-round-b" data-ins="dkarate" data-v="0.05" aria-pressed="' + (st.dkaRate === 0.05 ? "true" : "false") + '">0.05 u/kg/h</button></div></div>' +
         '<div class="ins-field"><div class="ins-grid2">' + mini("dkaMax", "Max rate u/h (optional)", st.dkaMax) + '</div>' +
           '<button class="ins-chip" data-ins="dkapaeds" aria-pressed="' + (st.dkaPaeds ? "true" : "false") + '" style="margin-top:10px">Paediatric DKA</button></div>';
+    /* ---- ward workflows ---- */
+    if (m === "titrate") {
+      h += '<div class="ins-field"><div class="ins-lab">Current basal dose <span class="u">units/day</span></div>' + stepper("curBasal", st.curBasal, 2) + '</div>' +
+        '<div class="ins-field"><div class="ins-lab">Fasting glucose <span class="u">mg/dL</span></div>' + stepper("fasting", st.fasting, 10) +
+          '<div class="ins-tgt-note">Use the last 2 to 3 fasting values if you have them - enter the lowest one you are worried about and the calculator will not titrate up through a hypo.</div></div>' +
+        '<div class="ins-field"><div class="ins-lab">Weight <span class="u">kg</span> (for the overbasalization check)</div>' + stepper("ctx.weightKg", st.ctx.weightKg, 1) + '</div>' +
+        '<div class="ins-field"><div class="ins-lab">Step size</div><div class="ins-round">' +
+          '<button class="ins-round-b" data-ins="titrmethod" data-v="units" aria-pressed="' + (st.titrMethod === "units" ? "true" : "false") + '">2 units every 3 days</button>' +
+          '<button class="ins-round-b" data-ins="titrmethod" data-v="percent" aria-pressed="' + (st.titrMethod === "percent" ? "true" : "false") + '">10% steps</button></div></div>';
+    }
+    if (m === "scale") {
+      h += '<div class="ins-field"><div class="ins-lab">Total daily insulin dose <span class="u">units/day</span></div>' + stepper("tdd", st.tdd, 2) +
+        '<div class="ins-tgt-note">Leave blank to estimate from weight and the sensitivity band below.</div></div>' +
+        '<div class="ins-field"><div class="ins-lab">Weight <span class="u">kg</span> (used only if no TDD)</div>' + stepper("ctx.weightKg", st.ctx.weightKg, 1) + '</div>' +
+        '<div class="ins-field"><div class="ins-lab">Insulin sensitivity</div><div class="ins-chips">' +
+          ["sensitive", "usual", "resistant"].map(function (v) {
+            return '<button class="ins-chip" data-ins="resist" data-v="' + v + '" aria-pressed="' + (st.scaleResist === v ? "true" : "false") + '">' + v.charAt(0).toUpperCase() + v.slice(1) + '</button>';
+          }).join("") + '</div></div>' +
+        '<div class="ins-field"><div class="ins-grid2">' + mini("scaleMax", "Max units per dose", st.scaleMax) + mini("target", "Correction target mg/dL", st.target) + '</div></div>';
+    }
+    if (m === "basalT2")
+      h += '<div class="ins-field"><div class="ins-lab">Weight <span class="u">kg</span></div>' + stepper("ctx.weightKg", st.ctx.weightKg, 1) +
+        '<div class="ins-tgt-note">Type 2 basal is started at 10 units a day, or 0.1 to 0.2 units/kg/day - whichever is lower is the safer start.</div></div>';
+    if (m === "inpatient")
+      h += '<div class="ins-field"><div class="ins-lab">Weight <span class="u">kg</span></div>' + stepper("ctx.weightKg", st.ctx.weightKg, 1) + '</div>' +
+        '<div class="ins-field"><div class="ins-lab">Admission glucose <span class="u">mg/dL</span></div>' + stepper("glucose", st.glucose, 10) + '</div>' +
+        '<div class="ins-field"><div class="ins-grid2">' + mini("ctx.age", "Age (years)", st.ctx.age) + mini("creatinine", "Creatinine mg/dL", st.creatinine) + '</div>' +
+          '<div class="ins-tgt-note">Age 70 or over, or creatinine 2.0 or above, drops the starting dose to 0.3 u/kg/day.</div></div>';
+    if (m === "premix")
+      h += '<div class="ins-field"><div class="ins-lab">Weight <span class="u">kg</span></div>' + stepper("ctx.weightKg", st.ctx.weightKg, 1) + '</div>' +
+        '<div class="ins-field"><div class="ins-lab">Or a known total daily dose <span class="u">units/day</span></div>' + stepper("tdd", st.tdd, 2) +
+          '<div class="ins-tgt-note">A known total daily dose is used in preference to the weight estimate.</div></div>';
+    if (m === "premixTitr")
+      h += '<div class="ins-field"><div class="ins-grid2">' + mini("pmMorning", "Morning premix (u)", st.pmMorning) + mini("pmEvening", "Evening premix (u)", st.pmEvening) + '</div></div>' +
+        '<div class="ins-field"><div class="ins-grid2">' + mini("fasting", "Fasting glucose mg/dL", st.fasting) + mini("preDinner", "Pre-dinner glucose mg/dL", st.preDinner) + '</div>' +
+          '<div class="ins-tgt-note">The morning dose is judged on the pre-dinner reading and the evening dose on the fasting reading. Each injection is judged by the value before the next one.</div></div>';
+    if (m === "npo")
+      h += '<div class="ins-field"><div class="ins-lab">Current basal dose <span class="u">units/day</span></div>' + stepper("curBasal", st.curBasal, 2) + '</div>' +
+        '<div class="ins-field"><div class="ins-lab">Or a total daily dose <span class="u">units/day</span></div>' + stepper("tdd", st.tdd, 2) + '</div>' +
+        '<div class="ins-field"><div class="ins-lab">Patient</div><div class="ins-chips">' +
+          '<button class="ins-chip" data-ins="npoflag" data-k="npoType1" aria-pressed="' + (st.npoType1 ? "true" : "false") + '">Type 1 diabetes</button>' +
+          '<button class="ins-chip" data-ins="npoflag" data-k="npoHypoRisk" aria-pressed="' + (st.npoHypoRisk ? "true" : "false") + '">Hypoglycaemia risk</button></div>' +
+          '<div class="ins-tgt-note">In type 1 the basal is never stopped: stopping it causes ketoacidosis even when the glucose looks normal.</div></div>';
+    if (m === "steroid")
+      h += '<div class="ins-field"><div class="ins-lab">Weight <span class="u">kg</span></div>' + stepper("ctx.weightKg", st.ctx.weightKg, 1) + '</div>' +
+        '<div class="ins-field"><div class="ins-lab">Glucocorticoid</div>' +
+          '<select class="ins-select" data-ins="steroidkind">' + ["prednisolone", "prednisone", "methylprednisolone", "dexamethasone", "hydrocortisone"].map(function (k) {
+            return '<option value="' + k + '"' + (st.steroidKind === k ? " selected" : "") + '>' + k.charAt(0).toUpperCase() + k.slice(1) + '</option>';
+          }).join("") + '</select></div>' +
+        '<div class="ins-field"><div class="ins-lab">Daily steroid dose <span class="u">mg</span></div>' + stepper("steroidMg", st.steroidMg, 5) + '</div>';
+    if (m === "ivsc")
+      h += '<div class="ins-field"><div class="ins-lab">Mean insulin infusion rate <span class="u">units/hour</span></div>' + stepper("ivRate", st.ivRate, 0.5) +
+        '<div class="ins-tgt-note">Average the last 6 hours of STABLE rates, not the whole infusion - the early high rates belong to the resuscitation.</div></div>' +
+        '<div class="ins-field"><div class="ins-lab">Proportion carried over</div><div class="ins-round">' +
+          '<button class="ins-round-b" data-ins="ivpct" data-v="0.8" aria-pressed="' + (st.ivPercent === 0.8 ? "true" : "false") + '">80% (stable, eating)</button>' +
+          '<button class="ins-round-b" data-ins="ivpct" data-v="0.6" aria-pressed="' + (st.ivPercent === 0.6 ? "true" : "false") + '">60% (frail, renal, poor intake)</button></div></div>';
+
     if (m === "iob") {
       var doses = recentBolusDoses();
       h += '<div class="ins-field"><div class="ins-lab">Active insulin from recent doses</div>' +
@@ -788,14 +963,16 @@
 
     // Rounding is a device/setup preference, not a per-dose decision — Advanced only
     // (Simple uses the saved default, shown in the result line).
-    if (doseUnitMode(m) && advOn()) h += '<div class="ins-field"><div class="ins-lab">Rounding</div><div class="ins-round">' +
+    if (doseUnitMode(m) && SET.showRounding) h += '<div class="ins-field"><div class="ins-lab">Rounding</div><div class="ins-round">' +
       '<button data-ins="round" data-v="1" aria-pressed="' + (st.increment === 1 ? "true" : "false") + '">1 unit</button>' +
       '<button data-ins="round" data-v="0.5" aria-pressed="' + (st.increment === 0.5 ? "true" : "false") + '">0.5 unit</button></div></div>';
 
-    if (["isf", "icr", "iob"].indexOf(m) < 0) {
+    // Context chips only where the engine actually consumes them. Showing five chips that
+    // change nothing on a titration or a correction table is noise that reads as a bug.
+    if (["isf", "icr", "iob", "scale", "titrate", "premixTitr", "npo", "steroid", "ivsc", "premix"].indexOf(m) < 0) {
       h += '<div class="ins-field"><div class="ins-lab">Patient context</div><div class="ins-chips">' +
       ctxChip("pregnancy", "Pregnancy") + ctxChip("renal", "Renal") + ctxChip("hepatic", "Hepatic") + ctxChip("exercise", "Exercise") + ctxChip("steroids", "Steroids") +
-      (m !== "pediatric" ? '<button class="ins-chip" data-ins="peds" aria-pressed="' + (st.ctx.age < 18 ? "true" : "false") + '">Pediatric</button>' : '') + '</div></div>';
+      (m !== "pediatric" ? '<button class="ins-chip" data-ins="peds" aria-pressed="' + (st.ctx.pediatric ? "true" : "false") + '">Pediatric</button>' : '') + '</div></div>';
       // Renal and pregnancy carry QUANTIFIED guideline adjustments, so collect the one
       // value each needs (eGFR band / trimester) instead of applying a blanket factor.
       if (st.ctx.renal) h += '<div class="ins-field"><div class="ins-grid2">' + mini("ctx.egfr", "eGFR mL/min", st.ctx.egfr == null ? "" : st.ctx.egfr) +
@@ -827,6 +1004,38 @@
       return E.firstDoseCorrection(fd);
     }
     if (m === "basal") return E.basalInitiation({ weightKg: st.ctx.weightKg, tddFactor: st.tddFactor, basalFraction: st.basalFraction, increment: st.increment, ctx: st.ctx });
+    /* ---- ward workflows ---- */
+    if (m === "titrate") return E.basalTitration({ currentDose: N(st.curBasal), fastingGlucose: N(st.fasting),
+      weightKg: N(st.ctx.weightKg), method: st.titrMethod });
+    if (m === "scale") return E.correctionScale({ tdd: N(st.tdd), weightKg: N(st.ctx.weightKg),
+      resistance: st.scaleResist, target: toMgdl(st.target), maxPerDose: N(st.scaleMax), rule: st.isfRule });
+    if (m === "basalT2") {
+      // ADA type 2 initiation: 10 units/day OR 0.1-0.2 u/kg/day, whichever is the lower start.
+      var w = N(st.ctx.weightKg);
+      if (w == null) return E.basalInitiation({});                       // reuse the shared "enter values" guard
+      var byWeight = Math.round(w * 0.2), start = Math.min(10, byWeight);
+      return { result: start, rounded: start, unit: "units/day", tdd: start, basal: start,
+        steps: [{ label: "Weight-based option", expr: w + " kg x 0.2 u/kg/day", value: byWeight },
+                { label: "Fixed-dose option", expr: "ADA flat start", value: 10 },
+                { label: "Start at the lower of the two", expr: "min(" + byWeight + ", 10)", value: start }],
+        formula: "type 2 basal start = min(10 units/day, weight x 0.2 u/kg/day)",
+        assumptions: ["Basal insulin ONLY. Prandial insulin is not started at the same time in type 2.",
+          "Continue metformin unless contraindicated; review sulfonylurea (reduce or stop to avoid hypoglycaemia)."],
+        clinicalNotes: ["Titrate by 2 units every 3 days to a fasting glucose of 80 to 130 mg/dL - use the Titrate basal screen.",
+          "Do not exceed about 0.5 u/kg/day of basal. Above that the problem is missing prandial cover, not too little basal.",
+          "Review in 1 to 2 weeks with a fasting glucose log."],
+        refs: ["ADA Standards of Care in Diabetes 2026, ch.9: initiate basal insulin at 10 units/day or 0.1-0.2 units/kg/day."] };
+    }
+    if (m === "inpatient") return E.inpatientInit({ weightKg: N(st.ctx.weightKg), glucose: N(st.glucose),
+      age: N(st.ctx.age), creatinine: N(st.creatinine), increment: st.increment });
+    if (m === "premix") return E.premixInit({ weightKg: N(st.ctx.weightKg), tdd: N(st.tdd), increment: st.increment });
+    if (m === "premixTitr") return E.premixTitration({ morning: N(st.pmMorning), evening: N(st.pmEvening),
+      fasting: N(st.fasting), preDinner: N(st.preDinner) });
+    if (m === "npo") return E.npoRegimen({ basalDose: N(st.curBasal), tdd: N(st.tdd),
+      type1: st.npoType1, hypoRisk: st.npoHypoRisk, increment: st.increment });
+    if (m === "steroid") return E.steroidCover({ weightKg: N(st.ctx.weightKg), steroid: st.steroidKind,
+      steroidMg: N(st.steroidMg), increment: st.increment });
+    if (m === "ivsc") return E.ivToSubcut({ avgRatePerHour: N(st.ivRate), percent: st.ivPercent, increment: st.increment });
     if (m === "isf") return E.isfFromTdd({ tdd: st.tdd, rule: st.isfRule });
     if (m === "icr") return E.icrFromTdd({ tdd: st.tdd, rule: st.icrRule });
     if (m === "iob") return E.activeInsulin({ doses: recentBolusDoses(), dia: bolusDia() });
@@ -842,9 +1051,16 @@
     // insulin is the commonest stacking error, so the caution must fire there too.
     var input = glucoseMode(m) ? { glucose: toMgdl(st.glucose), target: toMgdl(st.target), iob: st.iob } : { noGlucose: true };
     var boluses = ["combined", "meal", "correction"].indexOf(m) > -1;
-    var ctx = { age: st.ctx.age, weightKg: st.ctx.weightKg, pregnancy: st.ctx.pregnancy, renal: st.ctx.renal, hepatic: st.ctx.hepatic,
-      exercise: st.ctx.exercise, steroids: st.ctx.steroids, egfr: st.ctx.egfr, dialysis: st.ctx.dialysis, trimester: st.ctx.trimester };
-    if (boluses) { ctx.maxBolus = SET.maxBolus; ctx.maxDaily = SET.maxDaily; if (res && res.rounded != null) res.dailyTotal = todayTotal() + res.rounded; }
+    var ctx = { age: num(st.ctx.age) ? Number(st.ctx.age) : null, weightKg: st.ctx.weightKg,
+      pregnancy: st.ctx.pregnancy, renal: st.ctx.renal, hepatic: st.ctx.hepatic, pediatric: st.ctx.pediatric,
+      exercise: st.ctx.exercise, steroids: st.ctx.steroids, egfr: st.ctx.egfr, dialysis: st.ctx.dialysis, trimester: st.ctx.trimester,
+      dailyTotalTracked: !!st.patientId };
+    if (boluses) {
+      ctx.maxBolus = SET.maxBolus;
+      // Only run the max-DAILY check when the running total is attributable to one patient.
+      // Aggregating six patients' doses on a shared device produced false critical interrupts.
+      if (st.patientId) { ctx.maxDaily = SET.maxDaily; if (res && res.rounded != null) res.dailyTotal = todayTotal() + res.rounded; }
+    }
     // Weight-based initiation computes a whole-day TDD — check it against the daily cap so a weight typo
     // (e.g. 700 kg -> 280 u/day) trips the critical interrupt instead of returning a dangerous number.
     if (m === "basal" || m === "pediatric") { ctx.maxDaily = SET.maxDaily; if (res && num(res.tdd)) res.dailyTotal = res.tdd; }
@@ -859,6 +1075,7 @@
       title: "Short-acting (regular) insulin selected",
       detail: "Onset about 30 min, peak 2 to 4 h. Give about 30 min before the meal and re-check glucose before stacking a correction.", interrupt: false });
     for (i = 0; i < warns.length; i++) if (warns[i].interrupt) hasCritical = true;
+    st._hasCritical = hasCritical;
     var out = document.getElementById("insOut");
     if (!out) return;
 
@@ -882,8 +1099,12 @@
     }).join("");
 
     var m = st.mode;
-    var actionable = ["combined", "meal", "correction", "basal", "pediatric", "dka"].indexOf(m) > -1;
-    var cardTitle = (m === "isf" || m === "icr") ? "Result" : m === "iob" ? "Active insulin (IOB)" : m === "dka" ? "Infusion rate" : (m === "basal" || m === "pediatric") ? "Suggested regimen" : "Recommended dose";
+    var actionable = ["combined", "meal", "correction", "basal", "pediatric", "dka",
+      "basalT2", "inpatient", "premix", "premixTitr", "titrate", "npo", "steroid", "ivsc"].indexOf(m) > -1;
+    var cardTitle = (m === "isf" || m === "icr") ? "Result" : m === "iob" ? "Active insulin (IOB)" : m === "dka" ? "Infusion rate"
+      : m === "scale" ? "Correction scale" : m === "titrate" ? "New basal dose"
+      : ["basal", "pediatric", "inpatient", "premix", "premixTitr", "npo", "ivsc", "basalT2"].indexOf(m) > -1 ? "Suggested regimen"
+      : m === "steroid" ? "Steroid cover (in addition to usual insulin)" : "Recommended dose";
     // Mirror the engine exactly: IOB nets off the CORRECTION, never the meal cover.
     var extraRaw = m === "combined"
       ? 'meal ' + res.mealComponent + 'u + correction ' + (res.iobSubtracted ? '(' + res.correctionComponent + ' - IOB ' + res.iobSubtracted + ' = ' + res.correctionAfterIob + ')u' : res.correctionComponent + 'u')
@@ -895,6 +1116,32 @@
       return '<div class="ins-prov-row"><span class="k">' + p.label + '</span><span class="v">' + p.value + '</span><span class="s">' + p.source + '</span></div>';
     }).join("") + '</div>' : "";
     var monitoringHTML = (res.monitoring && res.monitoring.length) ? '<div class="ins-conv-sec"><h4>Monitoring</h4><ul>' + res.monitoring.map(function (x) { return '<li>' + x + '</li>'; }).join("") + '</ul></div>' : "";
+
+    /* A correction scale is a TABLE, not a single number - a resident copies it onto the
+     * chart. Rendering it as one headline dose would make it useless for its actual job. */
+    var scaleHTML = (res.rows && res.rows.length) ? '<div class="ins-scale"><table><thead><tr>' +
+      '<th>Glucose (mg/dL)</th><th>Give</th></tr></thead><tbody>' +
+      res.rows.map(function (r) {
+        return '<tr><td>' + r.label + '</td><td><b>' + r.units + '</b> u' + (r.cappedAt ? ' <span class="cap">capped</span>' : '') + '</td></tr>';
+      }).join("") + '</tbody></table>' +
+      '<div class="ins-tgt-note">Below ' + res.rows[0].from + ' mg/dL give nothing. Built from ISF ' + res.isf + ' mg/dL per unit.</div></div>' : "";
+
+    /* Multi-part regimens (basal + prandial, morning + evening premix) must show every
+     * component. Collapsing them to one "dose" is how a resident gives the total at once. */
+    var parts = [];
+    if (res.basal != null && (m !== "npo" || true)) parts.push(["Basal", res.basal + " u" + (m === "npo" ? " daily" : " once daily")]);
+    if (res.mealBolusEach != null && res.mealBolusEach > 0) parts.push(["Each meal", res.mealBolusEach + " u before each of 3 meals"]);
+    if (m === "npo") parts.push(["Prandial", "HELD while nil by mouth"]), parts.push(["Correction", res.correctionFrequency]);
+    if (res.morning != null) parts.push(["Before breakfast", res.morning + " u"]);
+    if (res.evening != null) parts.push(["Before dinner", res.evening + " u"]);
+    if (m === "steroid" && res.nph != null) parts.push(["NPH with the steroid", res.nph + " u"]);
+    if (m === "titrate") {
+      parts.push(["Previous dose", res.previousDose + " u"]);
+      parts.push([res.action === "HOLD" ? "No change" : res.action === "INCREASE" ? "Increase to" : "Reduce to", res.rounded + " u/day"]);
+    }
+    var partsHTML = parts.length ? '<div class="ins-regimen">' + parts.map(function (p) {
+      return '<div class="ins-reg-row"><span class="k">' + p[0] + '</span><span class="v">' + p[1] + '</span></div>';
+    }).join("") + '</div>' : "";
     // Patient-context effect on a BOLUS: concrete adjusted figures, shown rather than
     // silently applied (ICR/ISF may already account for the context — see engine note).
     var ctxAdvHTML = "";
@@ -903,13 +1150,18 @@
       if (adv.length) ctxAdvHTML = '<div class="ins-conv-sec ins-ctxadj"><h4>Patient-context adjustment</h4>' +
         adv.map(function (a) { return '<div class="ins-ctxadj-row"><div class="ins-ctxadj-top"><span class="k">' + a.label + '</span><span class="v">' + a.value + '</span></div><div class="d">' + a.detail + '</div></div>'; }).join("") + '</div>';
     }
-    var showCritAck = hasCritical && !clinMode(m);
-    var ctaDisabled = showCritAck || (clinMode(m) && !st.advAck);
+    /* A critical interrupt must gate the Accept button in EVERY mode. Paediatric and DKA
+     * previously skipped the critical acknowledgement entirely (`&& !clinMode(m)`), so the
+     * two highest-harm workflows were the only ones where a critical warning did not have
+     * to be acknowledged - the generic "I am a trained clinician" tick alone released it.
+     * Both gates now apply, and both must be satisfied. */
+    var showCritAck = hasCritical;
+    var ctaDisabled = (hasCritical && !st.acked) || (clinMode(m) && !st.advAck);
 
     out.innerHTML =
       '<div class="ins-card ins-result ins-bf"><div class="ins-card-t">' + cardTitle + '</div>' +
         '<div class="ins-dose"><span class="n" id="insDoseN">0</span><span class="unit">' + res.unit + '</span></div>' +
-        '<div class="ins-fromraw">' + fromraw + '</div>' + provHTML +
+        '<div class="ins-fromraw">' + fromraw + '</div>' + provHTML + partsHTML + scaleHTML +
         '<div class="ins-formula">' + res.formula + '</div>' +
         '<ul class="ins-steps">' + stepsHTML + '</ul>' + ctxAdvHTML + monitoringHTML +
         '<button class="ins-how" data-ins="how" aria-expanded="false">' + ICON_BOOK + '<span>How it works</span>' + ICON_CHEV + '</button>' +
@@ -924,10 +1176,22 @@
         (showCritAck ? '<label class="ins-ack"><input type="checkbox" data-ins="ack"> I have reviewed the critical warning above and take clinical responsibility.</label>' : '') + '</div>' : '') +
       (actionable ?
         (clinMode(m) ? '<label class="ins-ack"><input type="checkbox" data-ins="adv-ack"' + (st.advAck ? " checked" : "") + '> I am a trained clinician, have verified this against my institutional protocol, and take clinical responsibility.</label>' : '') +
-        '<button class="ins-cta" data-ins="confirm"' + (ctaDisabled ? ' disabled' : '') + '>Accept ' + res.rounded + ' ' + res.unit + '</button>' +
+        // What was ACTUALLY prescribed, which is often not what the calculator said.
+        '<div class="ins-given"><label for="insGiven">Dose actually given</label>' +
+          '<input id="insGiven" data-ins="given" type="number" inputmode="decimal" placeholder="' + res.rounded + '" aria-label="Dose actually given">' +
+          '<span class="u">' + res.unit + '</span></div>' +
+        '<div class="ins-tgt-note">Leave blank to record the suggested ' + res.rounded + ' ' + res.unit + '. Enter a different number if you are giving something else - the audit trail, the daily total and the insulin-on-board estimate all follow what was given.</div>' +
+        '<button class="ins-cta" data-ins="confirm"' + (ctaDisabled ? ' disabled' : '') + '>Accept and record</button>' +
         '<div class="ins-done" id="insDone" style="display:none">Recorded to history. The order remains the physician\'s to place.</div>' : '');
 
-    var dn = document.getElementById("insDoseN"); if (dn) countUp(dn, res.rounded);
+    // Animate only when the dose genuinely changes to a new value, and never mid-typing:
+    // re-running the count-up on every keystroke made the number flicker from 0 constantly.
+    var dn = document.getElementById("insDoseN");
+    if (dn) {
+      if (st._lastMode === m) dn.textContent = fmt(res.rounded);   // typing: update in place
+      else countUp(dn, res.rounded);                               // arriving on a screen: animate once
+      st._lastMode = m;
+    }
   }
 
   /* ---------- events ---------- */
@@ -982,8 +1246,8 @@
       var cd = document.getElementById("insConvDone"); if (cd) { cd.style.display = "block"; springIn(cd); }
       return;
     }
-    if (a === "qa") { st.mode = t.getAttribute("data-mode"); go("calc"); return; }
-    if (a === "mode") { st.mode = t.getAttribute("data-mode"); syncSeg(); renderInputs(); render(); return; }
+    if (a === "qa") { st.mode = t.getAttribute("data-mode"); st.group = groupOf(st.mode); st.advAck = false; go("calc"); return; }
+    if (a === "mode") { st.mode = t.getAttribute("data-mode"); st.advAck = false; syncSeg(); renderInputs(); render(); return; }
     if (a === "inc" || a === "dec") {
       var f = t.getAttribute("data-f"), s = parseFloat(t.getAttribute("data-s"));
       var nv = Math.max(0, Math.round((stGet(f) + (a === "inc" ? s : -s)) * 100) / 100);
@@ -998,6 +1262,10 @@
     if (a === "corr-source") { st.corrSource = t.getAttribute("data-v"); renderInputs(); render(); return; }
     if (a === "fd-naive") { st.fdNaive = t.getAttribute("data-v") === "1"; renderInputs(); render(); return; }
     if (a === "fd-route") { st.fdRoute = t.getAttribute("data-v"); renderInputs(); render(); return; }
+    if (a === "titrmethod") { st.titrMethod = t.getAttribute("data-v"); renderInputs(); render(); return; }
+    if (a === "resist") { st.scaleResist = t.getAttribute("data-v"); renderInputs(); render(); return; }
+    if (a === "npoflag") { var nk = t.getAttribute("data-k"); st[nk] = !st[nk]; t.setAttribute("aria-pressed", st[nk]); render(); return; }
+    if (a === "ivpct") { st.ivPercent = parseFloat(t.getAttribute("data-v")); renderInputs(); render(); return; }
     if (a === "dkarate") { st.dkaRate = parseFloat(t.getAttribute("data-v")); renderInputs(); render(); return; }
     if (a === "dkapaeds") { st.dkaPaeds = !st.dkaPaeds; renderInputs(); render(); return; }
     if (a === "ctx") {
@@ -1006,9 +1274,15 @@
       // that can kill — so instead of a hidden multiplier we tighten the TARGET (which
       // is a visible field the clinician can see and override). A lower target legitimately
       // increases the correction. Restored when pregnancy is switched off.
+      // The change is announced rather than made behind the user's back, and a target the
+      // user typed themselves while pregnancy was on is not clobbered when it goes off.
       if (k === "pregnancy") {
-        if (st.ctx.pregnancy) { if (st.target > 110) { st._preTarget = st.target; st.target = 100; } }
-        else if (st._preTarget) { st.target = st._preTarget; st._preTarget = null; }
+        if (st.ctx.pregnancy) {
+          if (st.target > 110) { st._preTarget = st.target; st.target = 100; st.targetNote = "Target tightened from " + st._preTarget + " to 100 mg/dL for pregnancy. Type any value to override."; }
+        } else {
+          if (st._preTarget && st.target === 100) st.target = st._preTarget;
+          st._preTarget = null; st.targetNote = "";
+        }
       }
       // Rebuild the INPUT card, not just the result: some chips own a dependent field
       // (Renal -> eGFR + dialysis, Pregnancy -> trimester) which otherwise never
@@ -1016,14 +1290,17 @@
       renderInputs();
       render(); return;
     }
-    if (a === "peds") { st.ctx.age = st.ctx.age < 18 ? 40 : 8; t.setAttribute("aria-pressed", st.ctx.age < 18); render(); return; }
+    // A real flag, not a fabricated age. This chip used to write age 8 / age 40 into the
+    // patient context, so a 15-year-old's profile read as "pressed" and one tap made them 40.
+    if (a === "peds") { st.ctx.pediatric = !st.ctx.pediatric; t.setAttribute("aria-pressed", st.ctx.pediatric); render(); return; }
     if (a === "tri") { var tv = parseInt(t.getAttribute("data-v"), 10); st.ctx.trimester = (st.ctx.trimester === tv ? null : tv); render(); return; }
     if (a === "convfreq") { st.convFromFreq = t.getAttribute("data-v"); paint(); return; }
-    if (a === "adv") {
-      SET.advMode = t.getAttribute("data-v") === "1"; saveSettings();
-      // The levels show disjoint sets, so a mode that belongs to the other level
-      // would leave the user on a hidden tab — land on that level's first tab.
-      if (isAdvMode(st.mode) !== SET.advMode) st.mode = firstModeFor(SET.advMode);
+    if (a === "group") {
+      var g = t.getAttribute("data-g");
+      st.group = g;
+      // Landing on a tab that is not in the chosen group would leave the user staring at
+      // inputs for a calculation they did not pick - always land on the group's first mode.
+      if (groupOf(st.mode) !== g) { st.mode = firstModeIn(g); st.advAck = false; }
       paint(); return;
     }
     if (a === "iob-est") {
@@ -1047,6 +1324,7 @@
     var a = t.getAttribute("data-ins");
     if (a === "num") { var f = t.getAttribute("data-f"); stSet(f, parseFloat(t.value)); if (f === "target") syncTargetChips(); if (f === "iob") { st.iobNote = ""; var nEl = document.querySelector(".ins-iob-note"); if (nEl) nEl.remove(); } if (st.screen === "convert") renderConvert(); else render(); return; }
     if (a === "bolus") { st.bolus = t.value; SET.bolusInsulin = st.bolus; saveSettings(); renderInputs(); render(); return; }
+    if (a === "steroidkind") { st.steroidKind = t.value; render(); return; }
     if (a === "set-num") { var k = t.getAttribute("data-k"); var v = parseFloat(t.value); if (isFinite(v)) { SET[k] = v; saveSettings(); } return; }
     if (a === "set-text") { SET[t.getAttribute("data-k")] = t.value; saveSettings(); return; }
     if (a === "set-glass") { SET.homeGlass = t.value; saveSettings(); return; }
@@ -1061,12 +1339,19 @@
       else if (idx > -1) st.compare.splice(idx, 1);
       renderLibList(); return;
     }
-    if (a === "ack") { st.acked = t.checked; var cta = document.querySelector(".ins-cta"); if (cta) cta.disabled = !st.acked; return; }
-    if (a === "adv-ack") { st.advAck = t.checked; var cta2 = document.querySelector(".ins-cta"); if (cta2) cta2.disabled = !st.advAck; return; }
+    // Both gates are independent and BOTH must be satisfied - setting one must never
+    // release the button on its own (that was how a critical warning got past DKA mode).
+    if (a === "ack") { st.acked = t.checked; syncCta(); return; }
+    if (a === "adv-ack") { st.advAck = t.checked; syncCta(); return; }
+  }
+  // Single source of truth for whether Accept is releasable.
+  function syncCta() {
+    var cta = document.querySelector(".ins-cta");
+    if (cta) cta.disabled = (st._hasCritical && !st.acked) || (clinMode(st.mode) && !st.advAck);
   }
   function syncSeg() {
     var b = document.querySelectorAll('[data-ins="mode"]');
-    for (var i = 0; i < b.length; i++) b[i].setAttribute("aria-pressed", b[i].getAttribute("data-mode") === st.mode);
+    for (var i = 0; i < b.length; i++) b[i].setAttribute("aria-selected", b[i].getAttribute("data-mode") === st.mode);
   }
   function pressGroup(name) {
     var b = document.querySelectorAll('[data-ins="' + name + '"]');
@@ -1076,13 +1361,27 @@
     var b = document.querySelectorAll('[data-ins="target-chip"]');
     for (var i = 0; i < b.length; i++) b[i].setAttribute("aria-pressed", parseFloat(b[i].getAttribute("data-v")) === st.target);
   }
+  /* The physician routinely gives something other than the calculated number ("it says 9,
+   * I'm giving 6"). An audit trail that can only record the calculator's own output is an
+   * audit of the calculator, not of care - and the IOB and daily total that read back from
+   * it would then be wrong too. givenDose is what was actually prescribed. */
   function confirmDose(btn) {
     if (btn.disabled) return;
     var res = compute(), warns = safety(res);
-    pushLog({ mode: st.mode, inputs: snapshot(), calculatedDose: res.rounded, confirmedDose: res.rounded,
-      unit: res.unit, warnings: warns.map(function (w) { return w.id; }), engineVersion: 1, ts: Date.now() });
+    var gi = document.querySelector('[data-ins="given"]');
+    var given = gi && gi.value !== "" && isFinite(parseFloat(gi.value)) ? parseFloat(gi.value) : res.rounded;
+    pushLog({ mode: st.mode, patientId: st.patientId || null, patientName: st.patientId ? st.patientName : "",
+      inputs: snapshot(), calculatedDose: res.rounded, confirmedDose: res.rounded, givenDose: given,
+      overridden: given !== res.rounded,
+      unit: res.unit, warnings: warns.map(function (w) { return w.id; }), engineVersion: 2, ts: Date.now() });
     btn.style.display = "none";
-    var d = document.getElementById("insDone"); if (d) { d.style.display = "block"; springIn(d); }
+    var d = document.getElementById("insDone");
+    if (d) {
+      d.innerHTML = given !== res.rounded
+        ? "Recorded " + given + " " + res.unit + " as given (calculator suggested " + res.rounded + "). The order remains the physician's to place."
+        : "Recorded to history. The order remains the physician's to place.";
+      d.style.display = "block"; springIn(d);
+    }
   }
   function snapshot() {
     return { units: SET.units, bolus: st.bolus, glucose: st.glucose, target: st.target, carbs: st.carbs, icr: st.icr,

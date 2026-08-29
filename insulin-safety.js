@@ -42,9 +42,17 @@
       out.push(W("max_daily", "critical", "Maximum daily dose exceeded",
         "Projected daily total exceeds the configured maximum of " + context.maxDaily + " units."));
 
-    if (num(context.age) && context.age < 18)
+    // `pediatric` is an explicit flag; `age` is only consulted when one was actually entered.
+    // The UI used to fake an age of 8 to raise this warning, which corrupted the patient record.
+    if (context.pediatric || (num(context.age) && context.age < 18))
       out.push(W("pediatric", "caution", "Pediatric patient",
         "Pediatric dosing is weight-based and specialist-guided. Verify against the pediatric protocol."));
+
+    // The running daily total is only meaningful when it can be attributed to one patient.
+    // Saying so is safer than silently comparing against a total of zero.
+    if (context.dailyTotalTracked === false && num(result.rounded) && result.rounded > 0)
+      out.push(W("no_patient", "info", "Daily total not tracked",
+        "No patient is selected, so this dose is not added to a running daily total and insulin on board is not estimated. The maximum-single-dose check still applies. Select a patient to track both."));
 
     if (context.pregnancy)
       out.push(W("pregnancy", "caution", "Pregnancy",

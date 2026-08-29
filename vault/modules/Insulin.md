@@ -83,3 +83,73 @@ decides: every recommendation is stamped AI-assisted and requires an explicit co
   it's auth/owner-dependent + cloud-merged). Use `SMD_OWNER_KEY()` for ownerKey. Only used here for the
   read-only "import from saved cases" bridge; do not build profile persistence on it.
 - Native app only sees this after build-www -> cap sync -> native rebuild + reinstall.
+
+## 2026-08-29 - Clinical-safety fixes + ward workflows (branch `worktree-insulin-5of5`)
+
+### Bugs fixed (all had regression tests added)
+1. **Context multipliers compounded.** `bolusContextFactor` multiplied renal x hepatic x
+   exercise: 0.75^3 = 0.42, a 58% cut on an ordinary CKD + cirrhosis + ambulating patient
+   (9 u -> 4 u). Now takes the **most restrictive SINGLE factor**; the losers are returned in
+   `considered[]` and shown as an "Also considered" step. Two tests had CODIFIED the bug
+   (`0.42` "// 0.75^3", and `0.56` "contexts compound") - both rewritten with a documented
+   rationale per the golden-suite rule.
+2. **Exercise reduction applied twice.** The engine reduced 25%, then `bolusContextAdvice`
+   advised reducing the ALREADY-reduced dose by a further 25-50% (9 u -> 6 u shown -> "3 to
+   4.5 u" advised). Advice now EXPLAINS the applied reduction and forbids a second one.
+3. **Hepatic is advisory only.** It applied 0.75 while its own comment said no validated
+   multiplier exists. It no longer scales any dose; it returns guidance instead.
+4. **IOB and daily totals leaked across patients.** The log had no `patientId`, so on one
+   ward phone bed 4's bolus became bed 7's IOB and six patients shared one "max daily
+   exceeded" critical interrupt. Log entries now carry `patientId`; `recentBolusDoses()` and
+   `todayTotal()` are patient-scoped (`logForPatient()`); with no patient selected IOB is not
+   estimated and the daily cap is not applied (an `info` warning says so).
+5. **units/hour summed into a unit total.** `todayTotal()` now counts only bolus modes with
+   `unit === "units"` - DKA (u/h) and basal/paediatric (whole-day TDD) no longer contaminate it.
+6. **Calculator opened pre-filled with a fictional patient** (glucose 180, carbs 45, ICR 10,
+   ISF 50, IOB 2, weight 70, age 40) and therefore displayed a dose for nobody. The IOB
+   default of 2 silently subtracted 2 u from every correction. ALL clinical inputs now start
+   empty; `N()` keeps blank blank rather than passing 0 to the engine.
+7. **Critical warnings were bypassable in Pediatric and DKA** (`hasCritical && !clinMode(m)`),
+   the two highest-harm modes. Both gates now apply and BOTH must be ticked (`syncCta()`).
+8. **Renal chip with no eGFR** now states the band it is assuming instead of silently cutting 25%.
+9. **Pregnancy silently overrode an explicit basal factor and rewrote the target.** Both are
+   now announced (`factorOverridden`, `st.targetNote`) and a manually typed target survives.
+10. **The "Pediatric" chip faked an age** (wrote 8 / 40 into the patient context). Replaced
+    with a real `ctx.pediatric` flag; `insulin-safety.js` accepts it alongside a real age.
+11. **The audit trail could not record an override.** `confirmDose` now writes `givenDose` +
+    `overridden`; history and CSV show the patient and the override. IOB and the daily total
+    read `givenDose`, so they follow what was actually prescribed.
+
+### New ward workflows (`insulin-engine.js`, 33 tests in `test/insulin-ward.test.mjs`)
+The module was a type 1 outpatient carb-counting tool; residents could not answer the
+commonest ward questions with it. Added, each pinned to a named guideline in `refs`:
+- `basalTitration` - ADA 2-by-3 rule, hypo overrides a high mean, overbasalization ceiling 0.5 u/kg/day
+- `correctionScale` - q6h supplemental table built from the patient's own ISF, capped
+- `inpatientInit` - RABBIT-2 (0.4 / 0.5 u/kg by admission glucose; 0.3 if age >=70 or creatinine >=2.0)
+- `npoRegimen` - basal continues (never stopped in type 1), prandial held, correction q4-6h
+- `steroidCover` - NPH 0.1 u/kg/day per 10 mg prednisolone equivalent, cap 0.4, tapers with the steroid
+- `ivToSubcut` - 60-80% of the extrapolated 24 h infusion, basal 2-4 h BEFORE stopping the drip
+- `premixInit` / `premixTitration` - 2/3 morning : 1/3 evening; each injection judged on the
+  reading before the next one
+Plus a `basalT2` UI mode (min(10 u, 0.2 u/kg/day), ADA type 2 initiation).
+
+### UI restructure
+Simple/Advanced replaced by five **clinical task groups** (Starting insulin / Adjusting /
+High sugar now / Special situations / Work out a ratio). The old split hid ISF and carb ratio
+behind "Advanced" while the "Simple" calculators demanded them as input. The dashboard now
+opens with the QUESTION ("Sugars are high on the current dose", "Patient is nil by mouth")
+rather than formula names. Dose number no longer re-animates from 0 on every keystroke.
+Correction scales render as a table; multi-part regimens render every component.
+
+### Flag drift RESOLVED (documentation, not behaviour)
+This file said `smd_insulin_dka` / `smd_insulin_peds` were DEFAULT OFF pending R1 sign-off;
+`insulin-flags.js` has had them `def: true` since the owner's "flip all on" on 2026-08-16.
+The DRIFT was the bug. Flags left ON per the owner's decision; this note now matches the code.
+`smd_insulin` is also DEFAULT ON. **If these ship enabled, DKA and paediatric still need the
+cited institution-configurable protocol + R1 sign-off that was always the condition.**
+
+### Test counts
+146 insulin tests pass (113 existing + 33 new ward). Verified in a real headless browser
+(Playwright against `insulin-demo.html`): blank inputs, titration 20->22 u, correction-scale
+table, and the Pediatric double-acknowledgement gate. Zero console errors.
+Cache-bust tokens: `insulin.css` / `insulin-engine.js` / `insulin-safety.js` / `insulin.js` -> `?v=ins12`.

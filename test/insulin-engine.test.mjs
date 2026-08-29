@@ -270,11 +270,21 @@ test("bolusContextAdvice: no context -> nothing shown", () => {
   assert.equal(E.bolusContextAdvice(5, {}).length, 0);
 });
 
-test("bolusContextAdvice: exercise gives the 25-50% pre-exercise range", () => {
-  const a = E.bolusContextAdvice(8, { exercise: true });
-  const ex = a.find(x => x.id === "exercise");
+/* CHANGED 2026-08-29, documented rationale (golden-value change): this asserted
+ * "4 to 6 units" for a dose of 8 - a SECOND 25-50% reduction of a dose the engine had
+ * already reduced 25% for exercise, landing the patient near a third of the intended
+ * bolus. Advice now explains the applied reduction and forbids reducing again. */
+test("bolusContextAdvice: exercise explains the applied reduction, never re-applies it", () => {
+  const ex = E.bolusContextAdvice(8, { exercise: true }).find(x => x.id === "exercise");
   assert.ok(ex);
-  assert.equal(ex.value, "4 to 6 units");        // 50% .. 75% of 8
+  assert.equal(ex.value, "-25%, now 8 units");
+  assert.match(ex.detail, /do NOT reduce again/i);
+});
+
+test("bolusContextAdvice: hepatic is stated, never silently applied", () => {
+  const h = E.bolusContextAdvice(8, { hepatic: true }).find(x => x.id === "hepatic");
+  assert.ok(h);
+  assert.match(h.value, /not auto-reduced/i);
 });
 
 test("bolusContextAdvice: pregnancy surfaces the tighter targets", () => {
@@ -299,26 +309,33 @@ test("bolusContextFactor: lowering contexts scale, raising contexts never do", (
   assert.equal(E.bolusContextFactor({}).factor, 1);
   assert.equal(E.bolusContextFactor({ renal: true, egfr: 30 }).factor, 0.75);
   assert.equal(E.bolusContextFactor({ renal: true, dialysis: true }).factor, 0.5);
-  assert.equal(E.bolusContextFactor({ hepatic: true }).factor, 0.75);
   assert.equal(E.bolusContextFactor({ exercise: true }).factor, 0.75);
+  // hepatic has no validated multiplier -> advisory only, never a silent scale
+  assert.equal(E.bolusContextFactor({ hepatic: true }).factor, 1);
   // never auto-INCREASE insulin
   assert.equal(E.bolusContextFactor({ pregnancy: true }).factor, 1);
   assert.equal(E.bolusContextFactor({ steroids: true }).factor, 1);
 });
 
-test("mealBolus: each context changes the dose (45 g / ICR 10 = 5 u)", () => {
+test("mealBolus: an applied context changes the dose (45 g / ICR 10 = 5 u)", () => {
   const d = (ctx) => E.mealBolus({ carbs: 45, icr: 10, increment: 1, ctx }).rounded;
   assert.equal(d({}), 5);
   assert.equal(d({ renal: true, egfr: 30 }), 3);       // was 5
   assert.equal(d({ renal: true, dialysis: true }), 2);
-  assert.equal(d({ hepatic: true }), 3);               // was 5
   assert.equal(d({ exercise: true }), 3);
+  assert.equal(d({ hepatic: true }), 5);               // advisory only - dose unchanged
 });
 
-test("contexts compound and are shown as steps", () => {
-  const r = E.mealBolus({ carbs: 45, icr: 10, increment: 1, ctx: { renal: true, egfr: 30, hepatic: true } });
-  assert.equal(r.contextFactor, 0.56);                 // 0.75 x 0.75
-  assert.equal(r.contextApplied.length, 2);
+/* CHANGED 2026-08-29, documented rationale (golden-value change): this test asserted
+ * 0.56 (0.75 x 0.75) and was named "contexts compound". Compounding context reductions
+ * has no guideline basis and a CKD + cirrhotic patient lost 44% of their dose to it.
+ * The rule is now: most restrictive single factor, losers reported in `considered`. */
+test("contexts do NOT compound; the most restrictive wins and the rest are shown", () => {
+  const r = E.mealBolus({ carbs: 45, icr: 10, increment: 1, ctx: { renal: true, dialysis: true, exercise: true } });
+  assert.equal(r.contextFactor, 0.5);                  // not 0.5 x 0.75 = 0.375
+  assert.equal(r.contextApplied.length, 1);
+  assert.equal(r.contextApplied[0].id, "renal");
+  assert.ok(r.steps.some(s => /Also considered: exercise/.test(s.label)), "the discarded factor must still be visible");
   assert.ok(r.steps.some(s => /Context-adjusted dose/.test(s.label)));
 });
 
@@ -326,7 +343,7 @@ test("correction and combined also apply the context factor", () => {
   const c = E.correctionDose({ glucose: 250, target: 150, isf: 50, increment: 1, ctx: { renal: true, egfr: 30 } });
   assert.equal(c.rounded, 2);                          // 2 u gross -> x0.75 = 1.5 -> 2
   assert.equal(c.contextFactor, 0.75);
-  const k = E.combinedDose({ carbs: 60, icr: 10, glucose: 150, target: 150, isf: 50, iob: 0, increment: 1, ctx: { hepatic: true } });
+  const k = E.combinedDose({ carbs: 60, icr: 10, glucose: 150, target: 150, isf: 50, iob: 0, increment: 1, ctx: { exercise: true } });
   assert.equal(k.rounded, 5);                          // 6 u meal -> x0.75 = 4.5 -> 5
 });
 
