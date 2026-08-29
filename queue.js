@@ -530,7 +530,16 @@
       else { try { localStorage.setItem("smd_personal_clinic", "1"); } catch (e) {} if (G.SMD_CLINIC && G.SMD_CLINIC.open) G.SMD_CLINIC.open(); else { try { G.toast && G.toast("My Clinic loading…"); } catch (e) {} } }
       return;
     }
-    var sid = st.session && st.session.id; if (!sid && cmd !== "nav" && cmd !== "dismiss" && cmd !== "savecfg") return;
+    /* This used to `return` SILENTLY when there was no session, which is how Add patient became a
+     * dead button: no sheet, no toast, no reason given. A blocked command must never fail mute.
+     * "add" is now exempt from the session requirement outright - registering a patient is exactly
+     * what you do before the queue has anyone in it - and openAdd()/onAdded handle a missing session
+     * themselves, so the check-in sheet always opens. */
+    var sid = st.session && st.session.id;
+    if (!sid && cmd !== "nav" && cmd !== "dismiss" && cmd !== "savecfg" && cmd !== "add") {
+      try { G.toast && G.toast("Your queue session has not started yet. Reopen OPD Queue to begin."); } catch (e) {}
+      return;
+    }
     if (st.demo && cmd !== "nav" && cmd !== "dismiss") { try { G.toast && G.toast("Demo mode - sign in to GHIS to manage a real queue."); } catch (e) {} return; }
     if (cmd === "nav") { switchView(arg); return; }
     if (cmd === "savecfg") { saveCfg(); return; }
@@ -655,7 +664,15 @@
       },
       onAdded: function (r) {
         // Registered -> put them in THIS doctor's queue with the identity we just created.
-        act(st.session.id, "/ticket", {
+        // The session is re-read HERE, not captured above: the sheet can be open for a while, and
+        // reaching straight into st.session.id threw when there was no session, losing a patient who
+        // had just been registered on the server with no word to the doctor either way.
+        var sid2 = st.session && st.session.id;
+        if (!sid2) {
+          try { G.toast && G.toast("Patient registered. Reopen OPD Queue to add them to today's list."); } catch (e) {}
+          return;
+        }
+        act(sid2, "/ticket", {
           name: r.patient && r.patient.name, mrn: r.mrn, mobile: r.patient && r.patient.mobile,
           visitType: (r.patient && r.patient.visitType) === "followup" ? "followup" : "new", priority: 0
         });

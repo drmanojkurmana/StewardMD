@@ -422,6 +422,57 @@
       '<div class="ins-askbar-eg">Try "pt sugar 260, pregnant GDM 30 weeks, 68 kg" or "fasting 190 on glargine 20 units"</div>' +
     '</div>';
   }
+  /* ---- The two rules the 2026-08-28 decision names, applied to this Ask flow ----------------------
+   * 1. HOLD THE RESULT (see render()): fill the form, show what was read, and let the DOCTOR ask for
+   *    the number. Pre-fill, never an inline answer.
+   * 2. NEVER DEFAULT A MISSING INPUT. st carries a value for everything (glucose 180, isf 50, iob 2,
+   *    weight 70), so a required slot the question did not supply would keep its default and STILL
+   *    produce a dose - a number computed from something the doctor never said. Those inputs are
+   *    BLANKED instead, so the engine's own ok() guard returns "enter the required values" and
+   *    Calculate stays disabled until a human fills them in.
+   * Owner: "Missing required input -> ASK the doctor. Never assume a default. Silent defaulting is
+   * the real danger here, not the arithmetic." */
+  var ASK_REQ_CORR = { isf: ["isf", "glucose"], tdd: ["fdTdd", "glucose"], estimate: ["ctx.weightKg", "glucose"] };
+  function askPathFor(r) {
+    if (r.mode === "correction") return ASK_REQ_CORR[st.corrSource] || ASK_REQ_CORR.isf;
+    if (r.mode === "meal") return ["carbs", "icr"];
+    if (r.mode === "combined") return ["carbs", "icr", "glucose", "isf"];
+    return [];
+  }
+  function askStGet(k) { return k.indexOf(".") > -1 ? st[k.split(".")[0]][k.split(".")[1]] : st[k]; }
+  function askStSet(k, v) { if (k.indexOf(".") > -1) st[k.split(".")[0]][k.split(".")[1]] = v; else st[k] = v; }
+  function askSlotOf(k) { return k.replace("ctx.", "").replace("fdTdd", "tdd"); }
+  function askArmHold(r) {
+    if (!r || !r.mode) { st.askPending = false; return; }
+    var slots = r.slots || {};
+    st.askMissing = [];
+    askPathFor(r).forEach(function (k) {
+      if (slots[askSlotOf(k)] != null) return;   // the question supplied it
+      st.askMissing.push(k);
+      askStSet(k, NaN);                          // blank it: never leave a default masquerading as data
+    });
+    st.askPending = true;
+  }
+  function askUnfilled() {
+    return (st.askMissing || []).filter(function (k) {
+      var v = askStGet(k); return v == null || v === "" || !isFinite(Number(v));
+    });
+  }
+  var ASK_LBL = { isf: "ISF", glucose: "Current glucose", carbs: "Carbohydrates", icr: "Carb ratio (ICR)",
+    fdTdd: "Usual total daily dose", "ctx.weightKg": "Weight" };
+  function askHoldHTML() {
+    var un = askUnfilled();
+    var need = un.map(function (k) {
+      return '<div class="ins-ask-need-row"><b>' + esc(ASK_LBL[k] || k) + '</b> <span>not in your question - enter it above</span></div>';
+    }).join("");
+    return '<div class="ins-card ins-ask-hold">' +
+      '<div class="ins-card-t">' + ICON_AI + ' MaiK filled in the form</div>' +
+      '<p class="ins-ask-hold-p">Check every value against the patient, then calculate. MaiK read your question; it did not work out the dose.</p>' +
+      (need ? '<div class="ins-ask-need">' + need + '</div>' : "") +
+      '<button class="ins-cta" data-ins="ask-calc"' + (un.length ? " disabled" : "") + '>' +
+        (un.length ? "Fill in " + un.length + " more to calculate" : "Calculate") + '</button></div>';
+  }
+
   /* What MaiK read, shown BEFORE the dose, so the clinician checks the inputs rather than
    * trusting an output. Anything the model supplied is labelled as the model's. */
   function askReadoutHTML() {
@@ -497,7 +548,7 @@
     var needsHelp = !r.mode || r.unresolved.length;
     var aiOn = false;
     try { aiOn = !!(window.SMD_AI && window.SMD_AI.on && window.SMD_AI.on() && window.SMD_AI.refine); } catch (e) {}
-    st.askResult = r; applyAsk(r);
+    st.askResult = r; applyAsk(r); askArmHold(r);
     if (!needsHelp || !aiOn) return go("calc");
     go("calc");
     // Slots only: a small JSON round trip, not a conversation.
@@ -506,7 +557,7 @@
       st.askSource = merged.fromLlm.length
         ? "One small AI call filled: " + merged.fromLlm.join(", ") + ". The dose is still the calculator's."
         : "The AI added nothing; this was answered on the device.";
-      st.askResult = merged; applyAsk(merged);
+      st.askResult = merged; applyAsk(merged); askArmHold(merged);
       if (st.screen === "calc") paint();
     }).catch(function () {
       st.askSource = "The AI was unavailable, so this used only what could be read on the device.";
@@ -1399,6 +1450,12 @@
   }
 
   function render() {
+    /* HOLD THE RESULT after an Ask. This calculator recomputes on every keystroke, so filling the
+     * form from a question would otherwise paint a dose the instant MaiK read it - the "the AI said
+     * 6 units" failure the 2026-08-28 decision rejected in favour of pre-fill. One Calculate press
+     * releases it; the doctor's edits re-render the card so values stay live while they check. */
+    var pendEl = document.getElementById("insOut");
+    if (st.askPending && pendEl) { st.acked = false; st.confirmed = false; pendEl.innerHTML = askHoldHTML(); return; }
     st.acked = false; st.confirmed = false;
     var res = compute(), warns = safety(res), hasCritical = false, i;
     var selIns = bolusInsulin();
@@ -1702,6 +1759,9 @@
       else if (panel) { panel.hidden = false; if (!reduced()) withMotion(function (M) { try { M.animate(panel, { opacity: [0, 1], y: [-6, 0] }, { duration: 0.28, easing: [0.2, 0.7, 0.2, 1] }); } catch (e) {} }); }
       return;
     }
+    // Releases the Ask hold. From here the flow is byte-for-byte the manual one: compute() ->
+    // safety() -> the same confirm gate. Nothing is auto-confirmed and nothing is logged.
+    if (a === "ask-calc") { if (t.disabled) return; st.askPending = false; render(); return; }
     if (a === "confirm") return confirmDose(t);
   }
   function onInput(e) {

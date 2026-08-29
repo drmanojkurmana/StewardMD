@@ -234,8 +234,10 @@
     var b = document.createElement("button");
     b.id = "smdTopBack"; b.type = "button"; b.setAttribute("aria-label", "Back");
     b.innerHTML = '<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg>';
+    // display stays flex; visibility does the hiding. wouldOverlap() has to know where this button
+    // WOULD land before deciding whether to show it, and a display:none element measures 0x0.
     b.style.cssText = "position:fixed;left:9px;top:calc(env(safe-area-inset-top,0px) + 9px);z-index:99000;width:38px;height:38px;"
-      + "display:none;align-items:center;justify-content:center;border:none;border-radius:50%;cursor:pointer;"
+      + "display:flex;visibility:hidden;opacity:0;pointer-events:none;align-items:center;justify-content:center;border:none;border-radius:50%;cursor:pointer;"
       + "background:rgba(15,118,110,.92);color:#fff;box-shadow:0 2px 10px -2px rgba(0,0,0,.45);-webkit-tap-highlight-color:transparent";
     b.addEventListener("click", function (ev) { ev.stopPropagation(); goBack(); setTimeout(syncHandle, 80); });
     (document.body || document.documentElement).appendChild(b);
@@ -263,8 +265,40 @@
     var root = ctrl && overlayRootOf(ctrl);
     return !!(root && root.getBoundingClientRect().top > 8);
   }
+  /* GEOMETRY, NOT NAMING. hasTopLeftControl() only recognises a control that MATCHES BACK_SEL, so a
+   * header whose own control is simply named something else (the OPD queue's round add-patient /
+   * refresh cluster) or a screen whose TITLE starts at the left edge (the insulin module) was
+   * invisible to it, and this button was painted straight on top - the reported "bad overlapping.
+   * I never asked for overlapping button". Ask the much simpler question instead: is anything
+   * already drawn where this button would sit? elementsFromPoint gives the answer exactly, and only
+   * probes three points rather than walking the DOM. */
+  var OVERLAP_SEL = 'button,a[href],[role="button"],[data-act],[data-ins],[data-oh-act],[data-oe-act],'
+    + 'input,select,textarea,h1,h2,h3,[class*="title"],[class*="-tt"],[class*="head"]';
+  function wouldOverlap(b) {
+    if (!document.elementsFromPoint) return false;
+    var r = b.getBoundingClientRect();
+    if (!(r.width > 0 && r.height > 0)) return false;
+    var pts = [[r.left + r.width / 2, r.top + r.height / 2], [r.left + 4, r.top + 4], [r.right - 4, r.bottom - 4]];
+    for (var p = 0; p < pts.length; p++) {
+      var stack = document.elementsFromPoint(pts[p][0], pts[p][1]) || [];
+      for (var i = 0; i < stack.length; i++) {
+        var e = stack[i];
+        if (e === b || e === document.body || e === document.documentElement) continue;
+        try { if (e.matches && e.matches(OVERLAP_SEL)) return true; } catch (x) {}
+      }
+    }
+    return false;
+  }
   function syncHandle() {
-    try { ensureBackBtn().style.display = (canGoBack() && !hasTopLeftControl() && !topExposesHome()) ? "flex" : "none"; } catch (e) {}
+    try {
+      var b = ensureBackBtn();
+      // Measure BEFORE deciding: the button must be laid out for wouldOverlap() to read its rect,
+      // which is why hiding is visibility-based rather than display:none.
+      var show = canGoBack() && !hasTopLeftControl() && !topExposesHome() && !wouldOverlap(b);
+      b.style.visibility = show ? "visible" : "hidden";
+      b.style.opacity = show ? "1" : "0";
+      b.style.pointerEvents = show ? "auto" : "none";
+    } catch (e) {}
   }
 
   var enable = isNative || (window.matchMedia && window.matchMedia("(display-mode: standalone)").matches);

@@ -100,9 +100,14 @@
     // The eyebrow must not simply repeat the title. "Acute abdomen / Acute abdomen" is what
     // category-as-subtitle produces for a protocol whose name IS its category.
     if (sub && String(sub).toLowerCase() === String(title).toLowerCase()) sub = "";
-    return '<div class="sgx-head">' + lead +
+    // titleless: the screen below already carries the wordmark. On HOME the hero sits directly under
+    // this bar, so printing SURGX in both stacked the same title twice (reported from internal
+    // testing: "Remove this....keep it as clinix"). The bar is kept for its close button; the overlay
+    // and that button both still name SURGX for screen readers.
+    return '<div class="sgx-head' + (opts.titleless ? " sgx-head-bare" : "") + '">' + lead +
+      (opts.titleless ? '<div class="sgx-htitle"></div>' :
       '<div class="sgx-htitle">' + (sub ? '<span class="sgx-hsub">' + esc(sub) + "</span>" : "") +
-      (opts.rawTitle || esc(title)) + "</div>" +
+      (opts.rawTitle || esc(title)) + "</div>") +
       right +
       (isHome ? "" : '<button class="sgx-hbtn sgx-close" data-sgx="close" aria-label="Close SURGX">' + ic("close") + "</button>") +
       "</div>";
@@ -258,7 +263,7 @@
       }).join("");
     }
 
-    return head("SURGX", "", { rawTitle: 'SURG<sup style="font-size:.62em;font-weight:700;position:relative;top:-.5em">x</sup>' }) +
+    return head("SURGX", "", { titleless: true }) +
       '<div class="sgx-hero">' +
       // The owner-supplied monogram, forced white against the hero gradient (the PNG is
       // alpha-masked, so brightness(0) invert(1) yields clean white). The wordmark below stays LIVE
@@ -657,6 +662,32 @@
     return head(rec.title, "04 · Evidence") + wrap(body);
   }
 
+  /* The evidence review comes back as MARKDOWN from the model ("*   **A - Airway:** Ensure ...").
+   * It used to be dropped into .sgx-pre - a monospace, pre-wrap block - so every asterisk was shown
+   * literally and a clinical summary read like a code dump. Render the small subset the model
+   * actually emits: headings, bullets and bold.
+   * SAFETY: each fragment is esc()'d FIRST and the markdown pass only ever runs on already-inert
+   * text, so no HTML in a model response can survive into the DOM. */
+  function mdLite(src) {
+    var lines = String(src == null ? "" : src).replace(/\r/g, "").split("\n");
+    var out = [], inList = false, i, ln, h, b;
+    function closeList() { if (inList) { out.push("</ul>"); inList = false; } }
+    function inline(s) { return esc(s).replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>"); }
+    for (i = 0; i < lines.length; i++) {
+      ln = lines[i].trim();
+      if (!ln) { closeList(); continue; }
+      h = ln.match(/^#{1,6}\s*(.+)$/);
+      if (h) { closeList(); out.push('<h5 class="sgx-md-h">' + inline(h[1].replace(/:$/, "")) + "</h5>"); continue; }
+      // A bullet marker must be followed by whitespace, so a line that merely OPENS with bold
+      // ("**A - Airway:** ...") is a paragraph, not a list item.
+      b = ln.match(/^(?:[-*•]|\d+[.)])\s+(.+)$/);
+      if (b) { if (!inList) { out.push('<ul class="sgx-md-ul">'); inList = true; } out.push("<li>" + inline(b[1]) + "</li>"); continue; }
+      closeList(); out.push("<p>" + inline(ln) + "</p>");
+    }
+    closeList();
+    return out.join("");
+  }
+
   function runLitReview(q, hostEl) {
     var ev = EV(); if (!ev || !hostEl) return;
     hostEl.innerHTML = '<div class="sgx-skel"><i></i></div>';
@@ -675,7 +706,7 @@
       }).join("");
       hostEl.innerHTML = '<div class="sgx-banner info">' + ic("auto_awesome") +
         " MaiK Evidence Review · trusted literature, verify independently" + (r.cached ? " · cached" : "") + "</div>" +
-        '<div class="sgx-pre">' + esc(r.text) + "</div>" +
+        '<div class="sgx-md">' + mdLite(r.text) + "</div>" +
         (srcs ? '<div class="sgx-card" style="margin-top:10px"><h4>Sources</h4><ol style="margin:0;padding-left:18px;font:500 12.5px/1.6 var(--sgx-sans)">' + srcs + "</ol></div>" : "");
     });
   }
@@ -1963,6 +1994,8 @@
 
   function onClose() { /* state is intentionally retained so reopening returns you to context */ }
 
-  var API = { mount: mount, onClose: onClose, go: go, _state: function () { return state; } };
+  // _mdLite is exposed for the same reason _state is: the evidence-review renderer is a small parser
+  // and needs a runnable check (test/run-surgx-md-ui.mjs). It is pure and reads no state.
+  var API = { mount: mount, onClose: onClose, go: go, _state: function () { return state; }, _mdLite: mdLite };
   if (typeof window !== "undefined") window.SMD_SURGX_SCREENS = API;
 })();

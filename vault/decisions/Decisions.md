@@ -1671,3 +1671,52 @@ renders as a `<button>` with the right label at a 44px+ target in both themes, t
 `#accountGate`, which is the proof: staying up merely for a while would prove nothing), that the tap
 releases and reveals, that a mid-boot tap yields "Opening...", and that guests and `?splashv2=0` are
 neither gated nor shown the button and still auto-hide.
+
+## 2026-08-28 — Ask MaiK inside the insulin calculator: MaiK fills the form, it does not answer the dose
+
+**Decision (owner, "B").** A doctor describes the situation in free text ("patient on 16 units
+regular, sugar 320 now, how much?") and MaiK responds by **pre-filling the calculator** — mode plus
+every input — for the doctor to check and press Calculate. It does NOT print a dose inline.
+
+**Why the LLM never produces the number.** insulin.js already separates the maths (`INSULIN_ENGINE`:
+`correctionDose`, `mealBolus`, `firstDoseCorrection`, `combinedDose`, `basalInitiation`, `isfFromTdd`,
+`icrFromTdd`, `activeInsulin`, `pediatricInit`, `dkaInsulin`) from the presentation, and
+`INSULIN_SAFETY.evaluate(ctx, input, res)` from both. So the agent's whole job is EXTRACTION: choose
+the engine function and fill its arguments. The dose then comes from the same validated code path the
+calculator has always used, and every existing safety warning and `interrupt` still fires. An LLM that
+emitted units directly would bypass all of it.
+
+**Why pre-fill rather than an inline answer.** Both were considered. Inline is one tap faster, but the
+failure mode is "the AI said 6 units" — a number a busy doctor may accept without auditing inputs the
+AI inferred. Pre-fill makes the failure mode "the AI filled these five fields, check them", on the
+screen the clinician already reads, with the existing confirm/acknowledge flow intact. For insulin
+that trade is worth the tap. An inline answer can be layered on later once extraction is shown to be
+reliable in practice.
+
+**Rules the implementation must keep.**
+- Missing required input (no ISF, no weight, no time since last dose) -> ASK, never assume a default.
+  Silent defaulting is where the real danger is, not the arithmetic.
+- Show the extracted inputs as an editable summary with a one-line rationale, before any result.
+- A safety `interrupt` blocks the answer exactly as it does in the manual flow.
+- Never auto-confirm or auto-log a dose on the doctor's behalf.
+
+**Implemented 2026-08-29** behind `smd_insulin_ask` (DEFAULT OFF). `insulin-extract.js`
+(`window.INSULIN_EXTRACT`) is the validated seam: free text → `{mode, corrSource, set[], missing[],
+questions[], rationale}`, whitelisted to known modes/field keys with plausibility ranges, mirroring
+`maik-reasoning.js`. Server kind `insulin-extract` (`functions/api/ai/_insulin-extract.js`).
+
+Two implementation facts worth keeping:
+- **The result had to be HELD.** The calculator recomputes live on every keystroke, so a plain
+  pre-fill paints a dose in the same instant MaiK fills the fields — the exact inline-answer failure
+  rejected above. `st.askPending` makes `render()` paint the review card *instead of computing*;
+  Calculate releases it. This is the load-bearing line, and `test/run-insulin-ask-ui.mjs` pins it.
+- **The engine cannot enforce the no-defaulting rule, so the UI does.** `st` holds a value for
+  everything (glucose 180, isf 50, iob 2, weight 70), and `correctionDose()` treats a missing IOB as 0
+  and still returns a number. Every REQUIRED field MaiK did not read is therefore *blanked* and
+  Calculate stays disabled until a human types it.
+
+Extraction runs on the CLOUD model (`SMD_AI.maik`), matching MaiK Ask/Scribe/SURGX posture. On-device
+was considered — it keeps the scenario off the network — but `SMD_MAIK_LOCAL.answer()` takes a KB
+package rather than a prompt, is PRO-gated and needs a downloaded pack, so it cannot be relied on for
+strict JSON. `INSULIN_EXTRACT.setProvider()` is the one-line swap if the owner wants it later.
+**Owner: confirm cloud-vs-on-device.**

@@ -73,7 +73,13 @@
             });
           }
         });
-        window.firebase.appCheck().activate(provider, true);
+        // isTokenAutoRefreshEnabled = FALSE, matching the native initialize() above and the note at
+        // the top of this file. It used to be `true` here, which quietly re-enabled in the JS SDK the
+        // very background refresh loop the native side had just disabled - and a failing attestation
+        // on that loop is what retry-STORMED on 2026-07-30, saturating the WebView bridge. On-demand
+        // fetch + fail-open is storm-safe: a registered build still gets a fresh token whenever a
+        // Firestore or Auth call actually needs one.
+        window.firebase.appCheck().activate(provider, false);
         activated = true;
         try { window.SMD_APPCHECK = { active: true }; } catch (e) {}
         try { console.log("[app-check] active (native attestation bridged to JS SDK)"); } catch (e) {}

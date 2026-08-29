@@ -51,18 +51,29 @@ test("Dictate must not rely on the callback voice.js never fires", () => {
   assert.equal(/onEnd\s*:/.test(SRC), false, "prescription.js must not pass onEnd to SMD_VOICE.listen");
 });
 
-test("Dictate resets the button on BOTH outcomes voice.js actually delivers", () => {
-  assert.match(MIC, /onFinal:[\s\S]*?idle\(\)/, "onFinal resets the mic");
-  assert.match(MIC, /onError:[\s\S]*?idle\(\)/, "onError resets the mic");
-  assert.match(MIC, /onPartial:/, "and gives live feedback while listening");
+/* Reported from internal testing: "no animation of listening or recording no feedback of transcript
+ * nothing". The bespoke path reported itself by writing to the button's `title` - a hover tooltip a
+ * phone never shows - and `.rx-btn.on` had no CSS rule, so tapping Dictate looked like nothing at
+ * all. It could not have worked as written: on native the clinical engine never fires onPartial.
+ * Dictate now opens the SHARED dictation sheet, which owns the recording animation, the elapsed
+ * timer, the transcript (editable before it becomes a drug row) and the error copy. These tests pin
+ * that contract rather than the old per-button state machine. */
+test("Dictate opens the shared dictation sheet instead of driving the mic itself", () => {
+  assert.match(MIC, /openDialog\(/, "Dictate must use the shared sheet");
+  assert.match(MIC, /target:\s*["']text["']/, "...in text mode, so the doctor sees and can correct the transcript");
+  assert.equal(/SMD_VOICE\.listen\(/.test(MIC), false, "no bespoke listen() loop: that is what had no visible state");
+  // The stuck-mic and invisible-feedback bugs are structurally gone: there is no per-button state.
+  assert.equal(/_mic\.title/.test(MIC), false, "never report progress through a title tooltip");
+  assert.equal(/classList\.add\(["']on["']\)/.test(MIC), false, "no .on class: it had no CSS and showed nothing");
 });
 
-test("every failure a doctor can hit has a plain-language message", () => {
-  ["mic-denied", "no-voice-engine", "stt-unavailable", "clinical-unavailable", "transcription-failed"]
-    .forEach((code) => assert.ok(SRC.includes('"' + code + '"'), code + " is explained, not swallowed"));
-  // voice.js must not be able to emit a code the Rx pad has no sentence for.
-  [...VOICE_SRC.matchAll(/onError\(["']([a-z-]+)["']\)/g)].map((m) => m[1])
-    .forEach((c) => assert.ok(SRC.includes('"' + c + '"'), "unhandled voice error code: " + c));
+test("every failure a doctor can hit has a plain-language message, in ONE place", () => {
+  // The Rx pad used to keep its own copy of this mapping; two copies drift. The shared sheet owns it
+  // now, so assert there: every code voice.js can EMIT must be named by voice.js's own error copy.
+  const emitted = [...VOICE_SRC.matchAll(/onError\(["']([a-z-]+)["']\)/g)].map((m) => m[1]);
+  assert.ok(emitted.length >= 3, "expected voice.js to emit several error codes");
+  emitted.forEach((c) => assert.match(VOICE_SRC, new RegExp('err === "' + c + '"'), "unhandled voice error code: " + c));
+  assert.equal(/RX_VOICE_ERR/.test(SRC), false, "prescription.js must not re-declare a second, drifting copy");
 });
 
 test("a dictation that parses to no drug tells the doctor instead of doing nothing", () => {

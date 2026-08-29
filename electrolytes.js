@@ -301,8 +301,11 @@
   function view(){
     return ''
     + '<div class="ece-top">'
+    // The breadcrumb used to read "ICU Dashboard › Electrolyte Correction" beside a back button
+    // already labelled "‹ ICU Dashboard", above a hero already titled "Electrolyte Correction
+    // Engine". Every word of it was said twice on one screen, which is what was flagged in testing.
+    // The back button keeps the destination and the hero keeps the page name.
     +   '<button class="ece-back" data-act="close">‹ ICU Dashboard</button>'
-    +   '<div class="ece-bc">ICU Dashboard › <b>Electrolyte Correction</b></div>'
     + '</div>'
     + '<div class="ece-scroll" id="eceScroll">'
     +   '<header class="ece-hero"><div class="ece-h1">Electrolyte Correction Engine</div><div class="ece-sub">Evidence-based ICU electrolyte management</div></header>'
