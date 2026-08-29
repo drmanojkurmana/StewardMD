@@ -322,6 +322,18 @@
     attempt();
   }
 
+  // manage(hospital) — reachable from Account/More at any time (unlike promptSetup(), which only
+  // fires once from first-run and no-ops if a method is already configured). Same chooser, same 3
+  // options; re-openable to change or turn off an existing method. Pass the CURRENT profile
+  // hospital so the institutional gate reflects reality even if the account predates App Lock
+  // (K_INSTITUTIONAL was never set at signup) or the hospital changed since.
+  function manage(hospital) {
+    try {
+      if (hospital !== undefined) lset(K_INSTITUTIONAL, hospital && String(hospital).trim() ? "1" : "0");
+      renderChooser();
+    } catch (e) {}
+  }
+
   window.SMD_APPLOCK = {
     isOn: flagOn,
     configured: configured,
@@ -330,5 +342,6 @@
     required: required,
     unlock: unlock,
     promptSetup: promptSetup,
+    manage: manage,
   };
 })();

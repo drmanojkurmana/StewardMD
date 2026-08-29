@@ -17,7 +17,7 @@
  * (ecgatlas1-otaleak); this change adds the electrolyte/prescription focus states (rxfocus1).
  * The key is one opaque string, so keeping either alone leaves the other deploy's clients on a
  * stale cache. Carry every marker. */
-var CACHE = "stewardmd-nb-consult1-onco6-atlas2-maikllm1-wr1-clinix29-ccsguard-surgx12-maikart1-pglog5-ack1-pgl1-vclaim1-fcux1-proevt1-b25-splashv2h-ecgatlas1-otaleak-rxfocus1-applock2";
+var CACHE = "stewardmd-nb-consult1-onco6-atlas2-maikllm1-wr1-clinix29-ccsguard-surgx12-maikart1-pglog5-ack1-pgl1-vclaim1-fcux1-proevt1-b25-splashv2h-ecgatlas1-otaleak-rxfocus1-applock3";
 
 self.addEventListener("install", function () {
   self.skipWaiting();

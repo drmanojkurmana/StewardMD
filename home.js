@@ -2669,6 +2669,18 @@
         row("Phone", "phone", { value: "", placeholder: "Loading…", edit: false }) +
       '</div>' +
 
+      // App Lock (flag smd_applock, off by default) — shown to the owner regardless, so the
+      // feature is reachable for testing even while the flag stays off for everyone else, the
+      // same pattern the "AI Control Center (owner)" More-menu row already uses.
+      ((window.SMD_APPLOCK && (window.SMD_APPLOCK.isOn() || nIsOwner())) ?
+        '<div class="hv-pf-sec">Security</div>' +
+        '<div class="hv-pf-card">' +
+          row("App Lock", "applock", {
+            value: { pin: "PIN set", biometric: "Face ID / Touch ID" }[window.SMD_APPLOCK.method()] || "Not set",
+            editLabel: "Manage"
+          }) +
+        '</div>' : "") +
+
       '<div class="hv-pf-sec">Account</div>' +
       '<div class="hv-pf-card">' +
         row("Name", "name", { value: nm, edit: false }) +
@@ -2848,6 +2860,11 @@
       setRow("speciality", d.speciality, { editLabel: d.speciality ? "Change" : "Choose" });
       setRow("city", d.city);
       setRow("phone", d.phone);
+
+      // App Lock's "no lock" option must reflect the REAL current hospital, not a stale/absent
+      // value from signup time — this card is the one place that value is actually loaded.
+      var alBtn = s.querySelector('[data-edit="applock"]');
+      if (alBtn) alBtn.onclick = function () { if (window.SMD_APPLOCK) window.SMD_APPLOCK.manage(d.hospital); };
 
       function save(obj) { return pref.set(obj, { merge: true }); }
 
