@@ -227,3 +227,43 @@ now stubs REAL elements for `insOut`/`insInputs` and drives `render()`, assertin
 says. Verified the new test has teeth by reintroducing the bug (2 tests fail) and restoring it.
 
 193 insulin tests pass (28 UI). Cache-bust: `insulin.css` / `insulin.js` -> `?v=ins14`.
+
+## 2026-08-29 - Ask MaiK in the insulin module (`insulin-ask.js`)
+
+**It did not exist before this.** There were zero MaiK references in `insulin.js`; nothing had
+been wired in by an earlier session.
+
+### The design: the model fills SLOTS, the calculator does the dose
+`window.INSULIN_ASK` (pure, dual-export, 22 tests). A sentence becomes slots; those slots drive
+the SAME `INSULIN_ENGINE` function a human would reach, with `INSULIN_SAFETY` unchanged. The
+model never emits a dose. That is what makes it both cheap and safe:
+- **Cheap:** `parse()` is deterministic regex + keyword routing and costs NOTHING. It already
+  handles the ward vocabulary (cbg/rbs/grbs, lantus/basalog/mixtard, nbm, ryles, dexa, GDM
+  weeks -> trimester, mmol -> mg/dL). The model is called ONLY for the residue, with
+  `llmPrompt()` demanding flat JSON and explicitly forbidding a dose or any prose - a few dozen
+  output tokens, not a reasoning chain.
+- **Safe:** every slot is range-checked against `BOUNDS` before it can reach the engine, so a
+  misread or hallucinated number is DROPPED, not dosed. `applyLlm()` lets the model fill a
+  blank but never overrule the local parse, refuses unknown keys, refuses a `task` that is not
+  a real calculator, and cannot introduce a `dose` field at all. Anything the model supplied is
+  chipped as "AI" in the UI.
+- Provider-agnostic: it just exchanges JSON, so Vertex / Gemini / any future SMD_AI backend
+  works. Wired through the existing cheap `SMD_AI.refine()` path; no new server endpoint, and
+  `functions/api/ai/[[path]].js` was NOT touched.
+
+### Showing the calculator being used
+Ask prints no answer of its own. It writes the slots into the ordinary `st` and lands the user
+IN the calculator, above which `askReadoutHTML()` shows: the chips it read, "Using the
+<name> calculator `engineFn()`", anything still needed, and how it was answered ("Answered on
+this device. No AI call was made." / "One small AI call filled: weight."). So there is no
+parallel AI path to drift - it is the tested calculator, driven.
+
+Verified in the browser with the owner's own example, "pt sugar is 260, she is pregnant with
+GDM at 30 weeks, 68 kg": chips glucose 260 / weight 68 / pregnancy yes / trimester 3, routes to
+Correction (`firstDoseCorrection()`), target auto-tightened to 100 mg/dL for pregnancy, dose
+2 units from (260-100)/90, pregnancy safety warning raised, **no AI call**. Zero console errors.
+
+215 insulin tests pass. `test/insulin-ask.test.mjs` (22) runs with zero model calls and asserts
+the safety contract: implausible values refused, missing values asked for, local parse wins,
+model junk dropped, and Ask == the manual screen for the same case.
+Loaded in `index.html` + `insulin-demo.html`. Cache-bust: `insulin.js`/`insulin.css` -> `?v=ins15`.

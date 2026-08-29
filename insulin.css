@@ -383,6 +383,42 @@ html.ins-lock, body.ins-lock { overflow: hidden !important; }
 .ins-given input:focus { outline: 2px solid var(--ins-primary); outline-offset: 1px; }
 .ins-given .u { font-size: 12px; color: var(--ins-muted); min-width: 34px; }
 
+/* ---- Ask MaiK: a sentence in, a filled calculator out ---- */
+.ins-askbar { border: 1px solid color-mix(in srgb, var(--ins-primary) 30%, var(--ins-line));
+  background: color-mix(in srgb, var(--ins-primary) 4%, var(--ins-surface));
+  border-radius: var(--ins-r-ctl); padding: 10px 12px; margin-bottom: 10px; }
+.ins-askbar-row { display: flex; align-items: center; gap: 8px; }
+.ins-askbar-ic { color: var(--ins-primary); display: inline-flex; flex: 0 0 auto; }
+.ins-askbar-in { flex: 1 1 auto; min-width: 0; border: 0; background: transparent;
+  color: var(--ins-ink); font-family: inherit; font-size: 14px; padding: 6px 0; }
+.ins-askbar-in:focus { outline: none; }
+.ins-askbar-go { flex: 0 0 auto; border: 0; background: var(--ins-primary); color: #fff;
+  border-radius: 999px; padding: 8px 16px; font-family: inherit; font-size: 13px;
+  font-weight: 700; cursor: pointer; }
+.ins-askbar-go:hover { filter: brightness(1.06); }
+.ins-askbar-eg { font-size: 11.5px; color: var(--ins-muted); margin-top: 6px; line-height: 1.4; }
+
+/* The readout sits ABOVE the dose on purpose: check the inputs, then read the number. */
+.ins-readout { border: 1px solid color-mix(in srgb, var(--ins-primary) 26%, var(--ins-line));
+  background: color-mix(in srgb, var(--ins-primary) 4%, var(--ins-surface));
+  border-radius: var(--ins-r-ctl); padding: 12px; margin-bottom: 10px; }
+.ins-readout-t { display: flex; align-items: center; gap: 7px; font-size: 12px; font-weight: 700;
+  color: var(--ins-primary); margin-bottom: 8px; }
+.ins-readchips { display: flex; flex-wrap: wrap; gap: 6px; }
+.ins-readchip { display: inline-flex; align-items: center; gap: 5px; font-size: 12px;
+  color: var(--ins-muted); background: var(--ins-surface); border: 1px solid var(--ins-line);
+  border-radius: 999px; padding: 4px 10px; }
+.ins-readchip b { color: var(--ins-ink); font-family: var(--ins-mono); }
+.ins-readchip.llm { border-color: color-mix(in srgb, var(--sev-info-fg, #1D6FA3) 45%, var(--ins-line)); }
+.ins-readchip-src { font-size: 9.5px; font-weight: 800; letter-spacing: .04em;
+  color: var(--sev-info-fg, #1D6FA3); background: var(--sev-info-bg, #E8F2F9);
+  border-radius: 4px; padding: 1px 4px; }
+.ins-readout-using { margin-top: 9px; font-size: 13px; color: var(--ins-ink); }
+.ins-readout-using code { font-family: var(--ins-mono); font-size: 11.5px; color: var(--ins-muted); }
+.ins-readout-need { margin-top: 7px; font-size: 12.5px; color: var(--sev-warning-fg, #996007); }
+.ins-readout-how { margin-top: 9px; padding-top: 8px; border-top: 1px solid var(--ins-line);
+  font-size: 11.5px; color: var(--ins-muted); line-height: 1.45; }
+
 /* ---- search across all calculators (18 modes needs findability, not memory) ---- */
 .ins-search { display: flex; align-items: center; gap: 8px; border: 1px solid var(--ins-line);
   background: var(--ins-surface); border-radius: var(--ins-r-ctl); padding: 0 12px; margin-bottom: 10px; }

@@ -174,7 +174,7 @@
     // workflows and the type-specific warnings. dxSkipped remembers "just take me to the
     // calculator" so the gate is never shown twice in a session.
     st.dxType = st.dxType || ""; st.dxSkipped = !!(st.dxSkipped || SET.dxSkipped);
-    st.askQ = "";
+    st.askQ = ""; st.askText = ""; st.askResult = null; st.askSource = "";
     st.nutCarbs = ""; st.nutFeed = "continuous"; st.nutFeeds = 4; st.nutDextrose = "";
     st.hba1c = ""; st.inpBasal = "";
     // Ward workflow inputs - also empty; only method/rule choices carry a default.
@@ -401,6 +401,119 @@
       d.notes.map(function (n) { return '<li>' + esc(n) + '</li>'; }).join("") + '</ul></div>';
   }
 
+  /* ---------- Ask MaiK ----------
+   * A sentence in, a filled-in calculator out. The model (if it is used at all) only turns
+   * words into SLOTS - INSULIN_ENGINE does the arithmetic and INSULIN_SAFETY does the checks,
+   * exactly as when a human types the numbers. So the answer stays auditable, the citation
+   * survives, and a hallucinated number cannot become a dose.
+   * Ask deliberately prints no answer of its own: it DRIVES the real calculator and lands the
+   * user inside it, which is also what makes "show me what it did" possible. */
+  function askAvailable() { return !!window.INSULIN_ASK; }
+  function askBarHTML() {
+    if (!askAvailable()) return "";
+    return '<div class="ins-askbar ins-bf">' +
+      '<div class="ins-askbar-row">' +
+        '<span class="ins-askbar-ic">' + ICON_AI + '</span>' +
+        '<input class="ins-askbar-in" data-ins="ask-text" type="text" ' +
+          'placeholder="Describe the patient in your own words" aria-label="Ask MaiK about this patient" ' +
+          'value="' + esc(st.askText || "") + '">' +
+        '<button class="ins-askbar-go" data-ins="ask-run">Ask</button>' +
+      '</div>' +
+      '<div class="ins-askbar-eg">Try "pt sugar 260, pregnant GDM 30 weeks, 68 kg" or "fasting 190 on glargine 20 units"</div>' +
+    '</div>';
+  }
+  /* What MaiK read, shown BEFORE the dose, so the clinician checks the inputs rather than
+   * trusting an output. Anything the model supplied is labelled as the model's. */
+  function askReadoutHTML() {
+    var r = st.askResult; if (!r) return "";
+    var chips = r.matched.map(function (m) {
+      var v = m.value === true ? "yes" : m.value;
+      return '<span class="ins-readchip' + (m.llm ? " llm" : "") + '">' + esc(m.label) + ' <b>' + esc(String(v)) + '</b>' +
+        (m.llm ? '<span class="ins-readchip-src">AI</span>' : '') + '</span>';
+    }).join("");
+    var using = r.mode ? modeLabel(r.mode) : null;
+    var fn = (r.mode && window.INSULIN_ASK) ? window.INSULIN_ASK.ENGINE_FN[r.mode] : null;
+    return '<div class="ins-readout ins-bf">' +
+      '<div class="ins-readout-t">' + ICON_AI + '<span>MaiK read this from your question</span></div>' +
+      (chips ? '<div class="ins-readchips">' + chips + '</div>' : '<div class="ins-tgt-note">Nothing recognisable yet.</div>') +
+      (using ? '<div class="ins-readout-using">Using the <b>' + esc(using) + '</b> calculator' +
+        (fn ? ' <code>' + esc(fn) + '()</code>' : '') + '</div>' : '') +
+      (r.unresolved && r.unresolved.length
+        ? '<div class="ins-readout-need">Still needed: <b>' + r.unresolved.join('</b>, <b>') + '</b>. Fill it in below and the dose appears.</div>' : '') +
+      '<div class="ins-readout-how">' + esc(st.askSource || "Answered on this device. No AI call was made.") +
+        ' The dose itself is always computed by the calculator, never written by the AI.</div>' +
+    '</div>';
+  }
+  /* Write the parsed slots into the SAME state the manual screens use, then hand over. From
+   * here on there is no separate "AI path" to keep in step - it is the ordinary calculator. */
+  function applyAsk(r) {
+    var s = r.slots, c = r.ctx;
+    if (s.glucose != null) st.glucose = s.glucose;
+    if (s.fasting != null) st.fasting = s.fasting;
+    if (s.preDinner != null) st.preDinner = s.preDinner;
+    if (s.carbs != null) st.carbs = s.carbs;
+    if (s.icr != null) st.icr = s.icr;
+    if (s.isf != null) { st.isf = s.isf; st.corrSource = "isf"; }
+    else if (s.tdd != null) st.corrSource = "tdd";
+    else if (s.weightKg != null && r.mode === "correction") { st.corrSource = "estimate"; st.fdNaive = true; }
+    if (s.iob != null) st.iob = s.iob;
+    if (s.tdd != null) { st.tdd = s.tdd; st.fdTdd = s.tdd; }
+    if (s.curBasal != null) st.curBasal = s.curBasal;
+    if (s.inpBasal != null) st.inpBasal = s.inpBasal;
+    if (s.hba1c != null) st.hba1c = s.hba1c;
+    if (s.weightKg != null) st.ctx.weightKg = s.weightKg;
+    if (s.age != null) st.ctx.age = s.age;
+    if (s.creatinine != null) st.creatinine = s.creatinine;
+    if (s.steroidMg != null) st.steroidMg = s.steroidMg;
+    if (s.steroidKind) st.steroidKind = s.steroidKind;
+    if (s.ivRate != null) st.ivRate = s.ivRate;
+    if (s.pmMorning != null) st.pmMorning = s.pmMorning;
+    if (s.pmEvening != null) st.pmEvening = s.pmEvening;
+    if (s.nutCarbs != null) st.nutCarbs = s.nutCarbs;
+    ["pregnancy", "renal", "hepatic", "exercise", "steroids", "pediatric", "dialysis"].forEach(function (k) {
+      if (c[k]) st.ctx[k] = true;
+    });
+    if (c.egfr != null) st.ctx.egfr = c.egfr;
+    if (c.trimester != null) st.ctx.trimester = c.trimester;
+    // Pregnancy tightens the target here too, so Ask and the manual screen never disagree.
+    if (c.pregnancy && st.target > 110) { st._preTarget = st.target; st.target = 100;
+      st.targetNote = "Target tightened to 100 mg/dL for pregnancy. Type any value to override."; }
+    if (r.dxType && dxTypes()[r.dxType]) {
+      st.dxType = r.dxType;
+      var g = window.INSULIN_ENGINE.dxGuidance(r.dxType);
+      st.scaleResist = g.resistance || "usual";
+      if (r.dxType === "t1" || r.dxType === "secondary") st.npoType1 = true;
+    }
+    if (r.mode) { st.mode = r.mode; st.group = groupOf(r.mode); st.advAck = false; }
+  }
+  /* The model is consulted ONLY for what the free deterministic parse could not resolve, and
+   * only when the user has AI switched on. Everything else costs nothing. */
+  function askRun() {
+    var q = st.askText || "";
+    if (!q.trim() || !askAvailable()) return;
+    var ASK = window.INSULIN_ASK;
+    var r = ASK.parse(q);
+    st.askSource = "Answered on this device. No AI call was made.";
+    var needsHelp = !r.mode || r.unresolved.length;
+    var aiOn = false;
+    try { aiOn = !!(window.SMD_AI && window.SMD_AI.on && window.SMD_AI.on() && window.SMD_AI.refine); } catch (e) {}
+    st.askResult = r; applyAsk(r);
+    if (!needsHelp || !aiOn) return go("calc");
+    go("calc");
+    // Slots only: a small JSON round trip, not a conversation.
+    window.SMD_AI.refine(ASK.llmPrompt(q)).then(function (j) {
+      var merged = ASK.applyLlm(r, (j && (j.slots || j)) || null);
+      st.askSource = merged.fromLlm.length
+        ? "One small AI call filled: " + merged.fromLlm.join(", ") + ". The dose is still the calculator's."
+        : "The AI added nothing; this was answered on the device.";
+      st.askResult = merged; applyAsk(merged);
+      if (st.screen === "calc") paint();
+    }).catch(function () {
+      st.askSource = "The AI was unavailable, so this used only what could be read on the device.";
+      if (st.screen === "calc") paint();
+    });
+  }
+
   /* ---------- Dashboard ---------- */
   function dashboardHTML() {
     var log = loadLog(), recent = "";
@@ -422,7 +535,7 @@
         statTile("Target", fmt(st.target), gUnit()) + statTile("Carb ratio", fmt(st.icr), "g/u") + statTile("Sensitivity", fmt(st.isf), isfUnit()) +
       '</div>' : "";
 
-    return patientBarHTML() + dxChipHTML() + summary +
+    return patientBarHTML() + dxChipHTML() + askBarHTML() + summary +
       askCardHTML() +
       libEntryHTML() + convEntryHTML() +
       '<div class="ins-card ins-bf"><div class="ins-card-t ins-card-t-row">Recent doses' +
@@ -879,6 +992,7 @@
           ' aria-controls="insInputs" aria-selected="' + (sel ? "true" : "false") + '" tabindex="' + (sel ? "0" : "-1") + '"' +
           ' data-ins="mode" data-mode="' + m.id + '">' + m.label + '</button>';
       }).join("") + '</div>' +
+      askReadoutHTML() +
       '<div class="ins-card ins-bf" id="insInputs" role="tabpanel" aria-labelledby="insTab-' + st.mode + '"></div>' +
       '<div id="insOut"></div>';
   }
@@ -1425,6 +1539,12 @@
     var t = e.target.closest("[data-ins]"); if (!t) return;
     var a = t.getAttribute("data-ins");
     if (a === "close") return close();
+    if (a === "ask-run") {
+      var ai = t.parentNode && t.parentNode.querySelector('[data-ins="ask-text"]');
+      if (ai) st.askText = ai.value;
+      return askRun();
+    }
+    if (a === "ask-clear") { st.askResult = null; st.askText = ""; st.askSource = ""; paint(); return; }
     if (a === "dx-pick") {
       st.dxType = t.getAttribute("data-v");
       // The diagnosis sets the scale band unless the user later overrides it by hand.
@@ -1593,6 +1713,7 @@
     if (a === "set-num") { var k = t.getAttribute("data-k"); var v = parseFloat(t.value); if (isFinite(v)) { SET[k] = v; saveSettings(); } return; }
     if (a === "set-text") { SET[t.getAttribute("data-k")] = t.value; saveSettings(); return; }
     if (a === "set-glass") { SET.homeGlass = t.value; saveSettings(); return; }
+    if (a === "ask-text") { st.askText = t.value; return; }
     if (a === "ask-q") { st.askQ = t.value; renderAskSearch(); return; }
     if (a === "lib-q") { st.libQ = t.value; renderLibList(); return; }
     if (a === "pat-q") { st.patQ = t.value; renderPatientList(); return; }
@@ -1689,5 +1810,5 @@
     compute: compute, safety: safety, modeLabel: modeLabel, howItWorks: howItWorks,
     todayTotal: todayTotal, logForPatient: logForPatient,
     questions: function () { return QUESTIONS; }, missingFields: missingFields,
-    render: render, renderInputs: renderInputs };
+    render: render, renderInputs: renderInputs, applyAsk: applyAsk, askReadout: askReadoutHTML };
 })();
