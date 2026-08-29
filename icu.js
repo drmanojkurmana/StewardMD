@@ -269,6 +269,68 @@
     recompute(_raw);   // refresh alerts synchronously after writing vitals (BUG #1)
     return v;
   }
+
+  /* ---- Glasgow Coma Scale, scored at the bedside ------------------------------------------------
+   * The dashboard had no GCS at all, so qSOFA, NEWS2 and SOFA all sat unusable on "needs: GCS" with
+   * no way to supply it. A plain number box would be the wrong fix: at the bedside a clinician scores
+   * the three components and the total falls out, so this is the E/V/M checklist and it computes.
+   *
+   * Saving writes through ingestMonitor({gcs}), the SAME path monitor imports use - one timestamped
+   * vitals row, then recompute(). So the entry is charted on the patient record like any other vital
+   * and every score that needed it resolves at once. Nothing about it is score-local.
+   *
+   * "Not testable (intubated)" scores V as 1, the convention SOFA and qSOFA assume. The total stays
+   * numeric so the engines work, and the sheet says plainly it is a T score - a 3T on a sedated
+   * ventilated patient means something very different from a true 3. */
+  var _gcs = { e: null, v: null, m: null, vt: false };
+  var GCS_E = [[4, "Spontaneous"], [3, "To speech"], [2, "To pain"], [1, "None"]];
+  var GCS_V = [[5, "Oriented"], [4, "Confused"], [3, "Inappropriate words"], [2, "Incomprehensible sounds"], [1, "None"]];
+  var GCS_M = [[6, "Obeys commands"], [5, "Localises pain"], [4, "Withdraws from pain"], [3, "Abnormal flexion"], [2, "Extension"], [1, "None"]];
+  function gcsTotal() {
+    if (_gcs.e == null || _gcs.v == null || _gcs.m == null) return null;
+    return _gcs.e + _gcs.v + _gcs.m;
+  }
+  function gcsRow(key, defs, title) {
+    return '<div class="icu-fld" style="grid-column:1/-1"><label>' + esc(title) + '</label><div style="display:flex;flex-wrap:wrap;gap:6px">' +
+      defs.map(function (d) {
+        var on = _gcs[key] === d[0];
+        return '<button class="icu-btn ghost" data-icu-act="gcspick:' + key + ':' + d[0] + '" aria-pressed="' + (on ? "true" : "false") +
+          '" style="width:auto;margin:0;padding:8px 11px;font-size:12.5px' + (on ? ";background:var(--primary);color:#fff;border-color:var(--primary)" : "") + '">' +
+          d[0] + " &middot; " + esc(d[1]) + "</button>";
+      }).join("") + "</div></div>";
+  }
+  function gcsSheetHTML() {
+    var t = gcsTotal();
+    var band = t == null ? "" : t <= 8 ? "Severe - airway at risk, 8 or less" : t <= 12 ? "Moderate" : "Mild";
+    return '<div class="icu-sheet"><h3>' + ico("pulse", "\uD83E\uDDE0") + ' Glasgow Coma Scale</h3>' +
+      gcsRow("e", GCS_E, "Eye opening (E)") +
+      gcsRow("v", GCS_V, "Verbal response (V)") +
+      gcsRow("m", GCS_M, "Motor response (M)") +
+      '<div class="icu-fld" style="grid-column:1/-1"><button class="icu-btn ghost" data-icu-act="gcsvt" aria-pressed="' + (_gcs.vt ? "true" : "false") +
+        '" style="width:auto;margin:0;padding:8px 11px;font-size:12.5px' + (_gcs.vt ? ";background:var(--primary);color:#fff;border-color:var(--primary)" : "") +
+        '">Verbal not testable (intubated)</button></div>' +
+      '<div class="icu-fld" style="grid-column:1/-1"><div style="font:800 22px var(--font);color:var(--ink)">' +
+        (t == null ? "&mdash;" : t + (_gcs.vt ? "T" : "") + " / 15") + '</div>' +
+        '<div style="font:600 12.5px var(--font);color:var(--muted)">' +
+          (t == null ? "Choose one option in each of E, V and M." : esc(band) + (_gcs.vt ? " &middot; verbal not testable, recorded as 1" : "")) + '</div></div>' +
+      '<button class="icu-btn" data-icu-act="gcssave"' + (t == null ? " disabled" : "") + '>Record GCS on this patient</button>' +
+      '<button class="icu-btn ghost" data-icu-act="closeform">Cancel</button></div>';
+  }
+  function paintGcs() { if (modalEl && modalEl.classList.contains("on")) modalEl.innerHTML = gcsSheetHTML(); }
+  function openGcsCalc() {
+    _gcs = { e: null, v: null, m: null, vt: false };   // never carry one patient's score into the next
+    ensureModal();
+    modalEl.innerHTML = gcsSheetHTML();
+    modalEl.classList.add("on");
+  }
+  function gcsSave() {
+    var t = gcsTotal(); if (t == null) return;
+    ingestMonitor({ gcs: t });     // charted like any other vital, then every score recomputes
+    closeForm();
+    _active = "overview"; paint();
+    if (window.toast) toast("GCS " + t + (_gcs.vt ? "T" : "") + " recorded" + (t <= 8 ? " - 8 or less, check the airway" : ""));
+  }
+
   function ingestLabs(o) {
     o = o || {}; var keys = ["na", "k", "cl", "hco3", "ca", "ica", "mg", "po4", "glu", "creat", "egfr", "urea", "alb", "wbc", "hb", "plt", "inr", "ferritin", "trig", "fibrinogen", "crp", "bili", "ast", "alt", "alp", "bili_d", "amylase", "lipase", "pct", "neut", "hct", "lactate"];
     var rec = pick(o, keys); var ts = o.ts || nowTs();
@@ -1565,6 +1627,11 @@
       vitalCard("SpO₂", lv.spo2, "%", vstat(lv.spo2, 92, null, 88, null), vitalSeries("spo2", _trendWin), "monitor:spo2"),
       vitalCard("Resp Rate", lv.rr, "/min", vstat(lv.rr, 8, 24, null, 30), vitalSeries("rr", _trendWin), "monitor:rr"),
       vitalCard("Temp", lv.temp, "°C", vstat(lv.temp, 36, 38, 35, 39), vitalSeries("temp", _trendWin), "monitor:temp"),
+      // GCS was absent from the dashboard entirely, though `gcs` has always been an accepted vitals
+      // key and qSOFA, NEWS2 and SOFA all need it - which is why those scores sat on "needs: GCS".
+      // Tapping opens the E/V/M calculator rather than a bare number box: at the bedside you score
+      // the components, you do not arrive with a total. <9 is critical (airway), <13 abnormal.
+      vitalCard("GCS", lv.gcs, "/15", vstat(lv.gcs, 13, null, 9, null), vitalSeries("gcs", _trendWin), "gcsopen"),
       vitalCard("Urine", lv.uop, "mL/h", "", vitalSeries("uop", _trendWin), "monitor:uop"),
       vitalCard("Lactate", lv.lactate, "mmol/L", vstat(lv.lactate, null, 2, null, 4), vitalSeries("lactate", _trendWin), "monitor:lactate"),
       vitalCard("Pressors", pressors.length ? pressors.map(function (p) { return p.drug; }).join(", ") : "None", "", pressors.length ? "warn" : "ok"),
@@ -7982,6 +8049,10 @@
     var ix = act.indexOf(":"), cmd = ix < 0 ? act : act.slice(0, ix), arg = ix < 0 ? "" : act.slice(ix + 1);
     switch (cmd) {
       case "close": ICU.close(); break;
+      case "gcsopen": openGcsCalc(); break;
+      case "gcspick": { var _gp = arg.split(":"); _gcs[_gp[0]] = parseInt(_gp[1], 10); paintGcs(); break; }
+      case "gcsvt": _gcs.vt = !_gcs.vt; if (_gcs.vt) _gcs.v = 1; paintGcs(); break;
+      case "gcssave": gcsSave(); break;
       case "calc": { var _scp = (STATE.scores || []).filter(function (x) { return x.id === arg && x.inputs; })[0]; try { if (window.MEDCALC && MEDCALC.open) { MEDCALC.open(arg, _scp ? _scp.inputs : undefined, icuStoreCalcResult); var _mc = document.getElementById("mcOverlay"); if (_mc) _mc.style.zIndex = "10030"; /* lift the calculator ABOVE #icuRoot (z 10000), else it opens hidden behind the dashboard */ } } catch (e) {} break; }
       case "tab": if (icuV2On()) _screen = "patient"; _active = arg; _ws = wsOf(arg); _wsLast[_ws] = arg; paint(); var sc = rootEl && rootEl.querySelector(".icu-scroll"); if (sc) sc.scrollTop = 0; break;
       case "ws": { if (icuV2On()) _screen = "patient"; _ws = arg; var _m = wsMembers(wsById(arg)), _l = _wsLast[arg]; _active = (_l && _m.indexOf(_l) >= 0) ? _l : _m[0]; paint(); var sc2 = rootEl && rootEl.querySelector(".icu-scroll"); if (sc2) sc2.scrollTop = 0; break; }
