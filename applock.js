@@ -116,13 +116,34 @@
     if (!bioCompiled() || !p || !p.checkBiometry) return Promise.resolve(false);
     return Promise.resolve(p.checkBiometry()).then(function (r) { return !!(r && r.isAvailable); }).catch(function () { return false; });
   }
+  // The raw native proxy exposes exactly the plugin's pluginMethods: checkBiometry and
+  // internalAuthenticate. The public authenticate() lives only in the plugin's ESM JS layer,
+  // which this buildless app never loads - calling it on the proxy rejects "not implemented"
+  // before LAContext is ever touched (no Face ID prompt, no permission dialog).
+  // Resolves {ok:true} or {ok:false, code, text}; native rejects with a CapacitorException
+  // whose .code is an LAError name (userCancel, biometryLockout, authenticationFailed, ...).
+  var BIO_FAIL = {
+    userCancel: "Cancelled.",
+    appCancel: "Cancelled.",
+    systemCancel: "Interrupted. Try again.",
+    authenticationFailed: "Face ID / Touch ID did not match. Try again.",
+    biometryLockout: "Face ID / Touch ID is locked. Unlock your phone with its passcode, then try again.",
+    biometryNotEnrolled: "Face ID / Touch ID is not set up on this device.",
+    biometryNotAvailable: "Face ID / Touch ID is not available on this device.",
+    passcodeNotSet: "Set a device passcode first.",
+    UNIMPLEMENTED: "Biometric support is missing from this build."
+  };
   function verifyBiometric(reason) {
     var p = bioPlugin();
-    if (!p || !p.authenticate) return Promise.resolve(false);
-    // authenticate() resolves (void) on success, REJECTS with a BiometryError on failure/cancel —
-    // never returns a boolean, so success/failure is read from settle, not from the value.
-    try { return Promise.resolve(p.authenticate({ reason: reason || "Unlock StewardMD", cancelTitle: "Cancel" })).then(function () { return true; }).catch(function () { return false; }); }
-    catch (e) { return Promise.resolve(false); }
+    var fail = function (e) {
+      var code = (e && e.code) || "";
+      return { ok: false, code: code, text: BIO_FAIL[code] || (e && e.message) || "Could not confirm. Try again." };
+    };
+    if (!p) return Promise.resolve(fail({ code: "UNIMPLEMENTED" }));
+    try {
+      return Promise.resolve(p.internalAuthenticate({ reason: reason || "Unlock StewardMD", cancelTitle: "Cancel" }))
+        .then(function () { return { ok: true }; }, fail);
+    } catch (e) { return Promise.resolve(fail(e)); }
   }
 
   // ---- attempt lockout (throttling, not a security boundary — the PIN hash is the boundary) --
@@ -206,10 +227,10 @@
       var rows =
         '<button class="smdal-opt" data-m="pin" style="--i:' + (i++) + '">' + ico("keypad") + '<span><span class="smdal-opt-t">Set a PIN</span><span class="smdal-opt-d">A 4–6 digit code, works on any device</span></span></button>';
       if (bioAvailable) {
-        rows += '<button class="smdal-opt" data-m="biometric" style="--i:' + (i++) + '">' + ico("fingerprint") + '<span><span class="smdal-opt-t">Face ID / Touch ID</span><span class="smdal-opt-d">Fastest — no code to remember</span></span></button>';
+        rows += '<button class="smdal-opt" data-m="biometric" style="--i:' + (i++) + '">' + ico("fingerprint") + '<span><span class="smdal-opt-t">Face ID / Touch ID</span><span class="smdal-opt-d">Fastest, no code to remember</span></span></button>';
       }
       if (!isInstitutional) {
-        rows += '<button class="smdal-opt" data-m="none" style="--i:' + (i++) + '">' + ico("warn") + '<span><span class="smdal-opt-t">No lock — open automatically</span><span class="smdal-opt-d">Anyone with this phone opens your patient data. Personal devices only.</span></span></button>';
+        rows += '<button class="smdal-opt" data-m="none" style="--i:' + (i++) + '">' + ico("warn") + '<span><span class="smdal-opt-t">No lock, open automatically</span><span class="smdal-opt-d">Anyone with this phone opens your patient data. Personal devices only.</span></span></button>';
       }
       el.innerHTML =
         '<div class="smdal-card">' +
@@ -245,7 +266,7 @@
       var v = input.value.trim();
       if (!/^\d{4,6}$/.test(v)) { errEl.textContent = "Enter 4–6 digits."; return; }
       if (stage === "enter") { renderPinSetup("confirm", v); return; }
-      if (v !== firstPin) { errEl.textContent = "Didn’t match — try again."; renderPinSetup("enter"); return; }
+      if (v !== firstPin) { errEl.textContent = "Didn't match. Try again."; renderPinSetup("enter"); return; }
       setPin(v).then(function () { closeOverlay(); try { if (window.toast) window.toast("PIN set"); } catch (e) {} });
     };
     el.querySelector("[data-back]").onclick = function () { renderChooser(); };
@@ -258,11 +279,11 @@
     function attempt() {
       var retryBtn = el.querySelector("#salBiomRetry"); if (retryBtn) retryBtn.hidden = true;
       var e2 = el.querySelector("#salBiomErr"); if (e2) e2.textContent = "";
-      verifyBiometric("Set up biometric unlock for StewardMD").then(function (ok) {
-        if (ok) { lset(K_METHOD, "biometric"); closeOverlay(); try { if (window.toast) window.toast("Face ID / Touch ID enabled"); } catch (e) {} return; }
+      verifyBiometric("Set up biometric unlock for StewardMD").then(function (r) {
+        if (r.ok) { lset(K_METHOD, "biometric"); closeOverlay(); try { if (window.toast) window.toast("Face ID / Touch ID enabled"); } catch (e) {} return; }
         // a single failed scan (blink, angle, cancel) is normal — a dead end here reads as
         // "broken" rather than "try again", so a single failure gets a real retry button.
-        if (e2) e2.textContent = "Couldn’t confirm — try again, or pick a different option.";
+        if (e2) e2.textContent = r.text + " Try again, or pick a different option.";
         if (retryBtn) retryBtn.hidden = false;
       });
     }
@@ -341,9 +362,9 @@
     var el = overlay();
     el.innerHTML = '<div class="smdal-card"><div class="smdal-h">Unlock StewardMD</div><div class="smdal-sub">Confirm with Face ID / Touch ID.</div><div class="smdal-err" id="salBUErr"></div><button class="smdal-go" id="salBURetry">Try again</button><button class="smdal-ghost" id="salBUSignout">Sign out instead</button></div>';
     function attempt() {
-      verifyBiometric("Unlock StewardMD").then(function (ok) {
-        if (ok) { _unlockedThisBoot = true; closeOverlay(); done(); return; }
-        var e2 = el.querySelector("#salBUErr"); if (e2) e2.textContent = "Not confirmed — try again.";
+      verifyBiometric("Unlock StewardMD").then(function (r) {
+        if (r.ok) { _unlockedThisBoot = true; closeOverlay(); done(); return; }
+        var e2 = el.querySelector("#salBUErr"); if (e2) e2.textContent = r.text;
       });
     }
     el.querySelector("#salBURetry").onclick = attempt;

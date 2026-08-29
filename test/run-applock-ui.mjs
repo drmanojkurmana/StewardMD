@@ -57,6 +57,10 @@ async function newTab() {
   await call("Emulation.setDeviceMetricsOverride", { width: 390, height: 844, deviceScaleFactor: 2, mobile: true });
 }
 async function fresh(url) {
+  // clear on the TARGET origin, not whatever page is current (about:blank on the first call,
+  // so a previous run's leftovers in the persisted profile would survive into section 1)
+  await call("Page.navigate", { url });
+  await sleep(600);
   await ev(`localStorage.clear(); return 1;`);
   await call("Page.navigate", { url });
   await sleep(1500);
@@ -242,6 +246,50 @@ try {
     "the unlock screen is gone after the correct PIN");
   ok(await ev(`var s=document.getElementById("smdBootSplash"); return !s || s.classList.contains("sbs-hide");`) === true,
     "the boot splash actually completes (hidden/removed) once unlocked");
+
+  /* ---------- 9. biometric goes through the NATIVE method name (internalAuthenticate) ---------- */
+  // Mirrors Capacitor's real native proxy: EVERY property is a function (so a `!p.authenticate`
+  // guard can never catch a wrong name), and only the plugin's pluginMethods succeed. Calling
+  // authenticate() on the raw proxy is what the device shipped with: instant UNIMPLEMENTED reject,
+  // LAContext never touched, no permission dialog, no Dynamic Island animation.
+  await fresh(BASE); // a fresh boot: section 8 already unlocked this one (_unlockedThisBoot)
+  await ev(`
+    window.__bioCalls = [];
+    window.__bioNext = null; // null = resolve; an object = reject with it
+    var impl = {
+      checkBiometry: function () { return Promise.resolve({ isAvailable: true, biometryType: 2 }); },
+      internalAuthenticate: function (o) { window.__bioCalls.push(o); return window.__bioNext ? Promise.reject(window.__bioNext) : Promise.resolve(); }
+    };
+    var proxy = new Proxy({}, { get: function (_, prop) {
+      return impl[prop] || function () { return Promise.reject({ code: "UNIMPLEMENTED", message: '"BiometricAuthNative.' + String(prop) + '()" is not implemented on ios' }); };
+    } });
+    window.Capacitor = { isNativePlatform: function () { return true; }, isPluginAvailable: function (n) { return n === "BiometricAuthNative"; }, Plugins: { BiometricAuthNative: proxy } };
+    return 1;
+  `);
+  await ev(`window.SMD_APPLOCK.manage(""); return 1;`);
+  await sleep(300);
+  ok(await ev(`return !!document.querySelector('#smdApplock [data-m="biometric"]');`) === true,
+    "biometric row renders once checkBiometry() reports isAvailable");
+  await ev(`document.querySelector('#smdApplock [data-m="biometric"]').click(); return 1;`);
+  await sleep(300);
+  okv(await ev(`return window.__bioCalls.length;`), 1, "setup called the NATIVE internalAuthenticate() exactly once");
+  okv(await ev(`return window.__bioCalls[0] && window.__bioCalls[0].reason;`), "Set up biometric unlock for StewardMD", "a non-empty reason is passed (evaluatePolicy crashes on an empty one)");
+  okv(await ev(`return window.SMD_APPLOCK.method();`), "biometric", "a resolved internalAuthenticate() enables the biometric method");
+  ok(await ev(`return !document.getElementById("smdApplock");`) === true, "setup overlay closes on success");
+  okv(await ev(`return window.SMD_APPLOCK.required();`), true, "required() is true with the biometric method set");
+
+  // unlock: a rejected scan shows the LAError-specific text and a retry, then a good scan unlocks
+  await ev(`window.__bioNext = { code: "biometryLockout", message: "Biometry is locked out." }; window.__unl = false; window.SMD_APPLOCK.unlock(function(){ window.__unl = true; }); return 1;`);
+  await sleep(300);
+  okv(await ev(`return window.__bioCalls.length;`), 2, "unlock called internalAuthenticate() again");
+  ok(await ev(`var e=document.getElementById("salBUErr"); return !!e && /locked/i.test(e.textContent);`) === true,
+    "a biometryLockout reject shows the lockout-specific text, not a generic failure");
+  okv(await ev(`return window.__unl;`), false, "a rejected scan does NOT unlock");
+  await ev(`window.__bioNext = null; document.getElementById("salBURetry").click(); return 1;`);
+  await sleep(300);
+  okv(await ev(`return window.__unl;`), true, "Try again with a resolved scan unlocks");
+  ok(await ev(`return !document.getElementById("smdApplock");`) === true, "unlock overlay is gone after success");
+  await ev(`localStorage.clear(); return 1;`); // leave the persisted profile clean for the next run
 
   ok(errors.length === 0, "no uncaught JS errors (" + (errors.length ? errors.join(" | ") : "none") + ")");
 } catch (e) {
