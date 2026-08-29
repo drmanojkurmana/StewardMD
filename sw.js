@@ -16,7 +16,7 @@
 /* Both sides bumped this. main carries the liquid-glass interstitials (splashv2e), this branch the
  * eLOGBook work (b25, which supersedes the b12 main branched from). The key is one opaque string, so
  * keeping either alone leaves the other deploy's clients on a stale cache. Carry both markers. */
-var CACHE = "stewardmd-nb-consult1-onco6-atlas2-maikllm1-wr1-clinix29-ccsguard-surgx12-maikart1-pglog5-ack1-pgl1-vclaim1-fcux1-proevt1-b25-splashv2e-otaleak-insask1-oncqis-sync1-ux5";
+var CACHE = "stewardmd-nb-consult1-onco6-atlas2-maikllm1-wr1-clinix29-ccsguard-surgx12-maikart1-pglog5-ack1-pgl1-vclaim1-fcux1-proevt1-b25-splashv2e-otaleak-insask1-oncqis-sync1-ux6";
 
 self.addEventListener("install", function () {
   self.skipWaiting();

@@ -3147,6 +3147,7 @@
         });
       }
       out += '<button class="icu-btn" data-icu-act="txadd" style="margin-top:12px">＋ Add treatment</button>' +
+        txPresetBarHTML(tx) +
         '<p class="icu-doc-sub" style="margin:10px 2px 0;text-align:center">Any doctor — consultant or resident — can add or remove treatment. Every change is recorded on the patient timeline.</p>';
       return out;
     },
@@ -8197,6 +8198,7 @@
       case "txpick": { var _th = _txHits[+arg]; if (_th && _txDraft) { txSyncInputs(); _txDraft.name = _th.name; _txDraft.cat = _th.cat || _txDraft.cat; var _tp = txParseDose(_th.dose); if (!_txDraft.dose && _tp.dose) _txDraft.dose = _tp.dose; if (!_txDraft.route && _tp.route) _txDraft.route = _tp.route; if (!_txDraft.freq && _tp.freq) _txDraft.freq = _tp.freq; openTxForm(); } break; }
       case "txsave": txSave(); break;
       case "txdel": txDelete(decodeURIComponent(arg)); break;
+      case "txpresetsave": txPresetSave(); break;
       case "gensummary": openSummary(); break;
       case "copysummary": copySummary(); break;
       case "edit": openForm(arg); break;
@@ -8318,6 +8320,54 @@
    * (solo roster) and auto-mirrors to the shared patient doc (whole team). Group add/remove is also
    * written to the shared timeline. Drug names + doses come from the Drug Index (window.MEDDRUGS)
    * the prescription pad uses, or the clinician's own free text. */
+  /* ---- Treatment presets: the DOCTOR's own sets, never ours -------------------------------
+   * Asked for as "presets like malaria fixed drugs etc". StewardMD does not ship regimens it has
+   * not had reviewed - the same rule that keeps DKA and paediatric behind a cited protocol - so
+   * this ships the MECHANISM and the doctor authors the content: build the treatment for one
+   * patient, save it under a name, re-apply it in one tap for the next.
+   *
+   * Applying ADDS to the current list, never replaces it, and every added item still goes through
+   * the ordinary treatment path (author + timestamp recorded, removable, on the timeline). Device
+   * local, like the Rx sets in prescription.js which this deliberately mirrors. Stores drug/dose/
+   * route/freq/category ONLY - no patient name, MR number, bed or any identifier. */
+  var ICU_TX_PRESETS_KEY = "smd_icu_tx_presets";
+  function icuTxPresets() { try { return JSON.parse(localStorage.getItem(ICU_TX_PRESETS_KEY) || "[]") || []; } catch (e) { return []; } }
+  function saveIcuTxPresets(a) { try { localStorage.setItem(ICU_TX_PRESETS_KEY, JSON.stringify((a || []).slice(0, 40))); } catch (e) {} }
+  function txPresetBarHTML(tx) {
+    var ps = icuTxPresets();
+    var opts = '<option value="-1">＋ Apply a saved set…</option>' + ps.map(function (p, i) {
+      return '<option value="' + i + '">' + esc(p.name) + " (" + ((p.items || []).length) + ")</option>";
+    }).join("");
+    return '<div style="display:flex;gap:8px;margin-top:9px;align-items:center">' +
+      '<select data-icu-act="txpreset" aria-label="Apply a saved treatment set" ' +
+        'style="flex:1;min-width:0;padding:9px 10px;border:1px solid var(--border);border-radius:10px;' +
+        'font:600 12.5px var(--font);background:var(--panel);color:var(--ink)"' + (ps.length ? "" : " disabled") + '>' + opts + '</select>' +
+      '<button class="icu-btn ghost" data-icu-act="txpresetsave" style="width:auto;margin:0;white-space:nowrap;padding:9px 13px;font-size:12.5px"' +
+        (tx && tx.length ? "" : " disabled") + '>Save as set</button></div>' +
+      '<p class="icu-doc-sub" style="margin:6px 2px 0;text-align:center">Your own sets, saved on this device. Applying one adds its drugs to this patient for you to check.</p>';
+  }
+  function txPresetSave() {
+    var tx = (_raw.treatment || []);
+    if (!tx.length) { if (window.toast) toast("Add treatment first, then save it as a set"); return; }
+    var nm = ""; try { nm = (window.prompt("Name this treatment set (e.g. Malaria - fixed, Severe sepsis):") || "").trim(); } catch (e) {}
+    if (!nm) return;
+    var items = tx.map(function (x) { return { name: x.name, dose: x.dose || "", route: x.route || "", freq: x.freq || "", cat: x.cat || "other" }; });
+    var a = icuTxPresets(); a.push({ name: nm.slice(0, 60), items: items }); saveIcuTxPresets(a);
+    if (window.toast) toast("Saved set: " + nm);
+    paint();
+  }
+  function txPresetApply(idx) {
+    var p = icuTxPresets()[idx]; if (!p || !(p.items || []).length) return;
+    var add = p.items.map(function (x) {
+      return { id: "tx_" + nowTs() + "_" + Math.floor(Math.random() * 1e6), name: x.name,
+        dose: x.dose || "", route: x.route || "", freq: x.freq || "", cat: x.cat || "other",
+        by: txAuthorName(), ts: nowTs() };
+    });
+    STATE.treatment = (_raw.treatment || []).concat(add);   // reassign -> reactive persist + group mirror
+    if (window.toast) toast("Added " + add.length + " item" + (add.length === 1 ? "" : "s") + " from " + p.name + " - check each one");
+    _active = "treatment"; _ws = wsOf("treatment"); _wsLast[_ws] = "treatment"; paint();
+  }
+
   function txSearchDrugs(q) {
     q = String(q || "").trim().toLowerCase(); if (q.length < 2) return [];
     var list = (window.MEDDRUGS && MEDDRUGS._list) || [], out = [];
@@ -8495,6 +8545,16 @@
         rootEl = document.createElement("div"); rootEl.id = "icuRoot";
         document.body.appendChild(rootEl);
         rootEl.addEventListener("click", onClick);
+        // A <select> never fires the click delegation above with a chosen value, so the treatment
+        // preset picker needs its own delegated change listener. Reset to the placeholder after
+        // applying, so picking the same set twice in a row still works.
+        rootEl.addEventListener("change", function (e) {
+          var s = e.target;
+          if (!s || s.getAttribute("data-icu-act") !== "txpreset") return;
+          var i = parseInt(s.value, 10);
+          s.value = "-1";
+          if (i >= 0) txPresetApply(i);
+        });
         rootEl.addEventListener("touchstart", swStart, { passive: true });
         rootEl.addEventListener("touchmove", swMove, { passive: true });
         rootEl.addEventListener("touchend", swEnd);

@@ -3224,6 +3224,11 @@
         '<li><b>v9.7</b> · Apple Watch app: patient watchlist, tasks and criticals on the wrist, plus a Code Blue CPR assistant with an iPhone Command Center.</li>' +
         '<li><b>v9.8</b> · FundX AI: guided retinal image capture and analysis (experimental).</li>' +
         '<li><b>v10.0</b> · Reliability and polish: faster, flicker-free assessment; an editable profile with a searchable hospital directory; and a broad bug-fix sweep across the app and watch.</li>' +
+        // Only SHIPPED, flag-ON work belongs here. Anything still behind a default-OFF flag is not
+        // released and must not be announced as though it were.
+        '<li><b>v10.1</b> · NMC eLOGBook: the residency logbook and portfolio — postings, signed assessments, monthly authentication, configured targets, role-based access for faculty and residents, and an offline mirror so a ward with no signal still records the work.</li>' +
+        '<li><b>v10.2</b> · Insulin dosing support: basal initiation, correction, meal and combined boluses with the working shown step by step, an insulin library and guided conversion, active-insulin (IOB) accounting, and safety interrupts that stop an unsafe dose rather than footnoting it.</li>' +
+        '<li><b>v10.3</b> · Field-report sweep: buttons that used to fail silently now say what is wrong; long AI steps show what they are working on instead of a frozen line; the notification and update prompts wait until you are signed in and on the home screen; and the surgical evidence review reads as prose rather than raw markup.</li>' +
       '</ul></div>' +
     '</div>' +
     '<p style="font-size:11.5px;color:var(--slate-soft);margin-top:6px">The development journey of StewardMD, built and refined case by case at the bedside.</p>';
@@ -3244,6 +3249,13 @@
       '<li><span class="fn">2</span> imaging AIs at the point of care — KardioX 12-lead ECG interpretation and FundX retinal analysis (clinical preview).</li>' +
       '<li><span class="fn">~1.4&nbsp;MB</span> of hand-written clinical logic, with no frameworks and no build step.</li>' +
       '<li><span class="fn">8</span> stewardship questions answered for <i>every</i> recommendation.</li>' +
+      // Every figure below is COUNTED from the repository, not estimated. If one stops being true,
+      // change the code or change the number - a fact panel that drifts is worse than none.
+      '<li><span class="fn">124</span> cancer treatment protocols in the oncology library, each carrying its own lifecycle state instead of being presented as settled fact.</li>' +
+      '<li><span class="fn">15</span> insulins across <span class="fn">7</span> classes, with guided conversion, active-insulin accounting and the arithmetic shown line by line.</li>' +
+      '<li><span class="fn">4,804</span> conditions and <span class="fn">405</span> calculators, and not one of them answers without showing where the answer came from.</li>' +
+      '<li><span class="fn">3,884</span> automated checks run against every change — including <span class="fn">163</span> that drive a real browser, because a clinical tool that only passes in theory has not been tested.</li>' +
+      '<li><span class="fn">0</span> doses, stages or scores invented by AI. Every number is computed by validated code a clinician can read, or it is not shown at all — the AI fills the form, the engine does the maths.</li>' +
       '<li><span class="fn">1</span> clinician built the entire engine end to end.</li>' +
       '</ul>' +
       '<div class="smd-modal-section" style="margin-top:18px">What makes it unique</div>' +
