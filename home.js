@@ -2675,7 +2675,7 @@
       // App Lock (flag smd_applock, off by default) — shown to the owner regardless, so the
       // feature is reachable for testing even while the flag stays off for everyone else, the
       // same pattern the "AI Control Center (owner)" More-menu row already uses.
-      ((window.SMD_APPLOCK && (window.SMD_APPLOCK.isOn() || nIsOwner())) ?
+      (window.SMD_APPLOCK ?
         '<div class="hv-pf-sec">Security</div>' +
         '<div class="hv-pf-card">' +
           row("App Lock", "applock", {

@@ -446,7 +446,9 @@
   }
 
   // ---- public API + boot -------------------------------------------------------------------
-  window.SMD_EMAIL_AUTH = { openEmail: openEmail, openOtp: openOtp, sendOtp: sendOtp };
+  window.SMD_EMAIL_AUTH = { openEmail: openEmail, openOtp: openOtp, sendOtp: sendOtp,
+    // read-only, for applock.js: is a pre-home gate up / is one of our sheets open / the profile doc
+    gateUp: gateUp, flowOpen: function () { return !!(_el && _el.style.display === "flex"); }, loadProfile: loadProfile };
   window.SMD_openProfile = function () { try { openProfile({ firstRun: false }); } catch (e) {} };
 
   function boot() {

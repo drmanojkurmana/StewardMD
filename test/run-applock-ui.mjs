@@ -349,6 +349,37 @@ try {
   ok(await ev(`var s=document.getElementById("smdBootSplash"); return !s || s.classList.contains("sbs-hide");`) === true, "the boot splash completed via the queued finish() callback");
   await ev(`localStorage.clear(); return 1;`);
 
+  /* ---------- 11. FORCED: signed in + no method = the chooser, once the screen is free ---------- */
+  await fresh(BASE); // the boot splash is still up (constant 3s frame)
+  ok(await ev(`return !document.getElementById("smdApplock");`) === true, "signed out: no chooser");
+  await ev(`localStorage.setItem("stewardmd_account", JSON.stringify({type:"google",name:"Dr. Forced",email:"forced@example.com"}));
+    window.SMD_EMAIL_AUTH.gateUp = function () { return false; }; // the harness never gets past the account gate; the splash is the only thing left in the way
+    window.SMD_ACCOUNT._emit(); return 1;`);
+  await sleep(300);
+  ok(await ev(`return !document.getElementById("smdApplock");`) === true, "just signed in, boot splash still up: the chooser WAITS");
+  await ev(`var s=document.getElementById("smdBootSplash"); if (s) s.parentNode.removeChild(s); return 1;`);
+  await sleep(900);
+  ok(await ev(`return !!document.querySelector('#smdApplock [data-m="pin"]');`) === true, "screen free: the forced chooser is up");
+  ok(await ev(`return !document.getElementById("salKeep");`) === true, "...with NO close (first-run shape, not Manage)");
+  okv(await ev(`return window.SMD_APPLOCK.isOn();`), false, "...even though the rollout flag is off (forcing is not flag-gated)");
+  await ev(`window.SMD_ACCOUNT._emit(); window.SMD_ACCOUNT._emit(); return 1;`);
+  await sleep(300);
+  okv(await ev(`return document.querySelectorAll("#smdApplock").length;`), 1, "repeat sign-in events do not stack a second chooser");
+  const forcedPin = await ev(`
+    return new Promise(function(res){
+      document.querySelector('[data-m="pin"]').click();
+      setTimeout(function(){
+        document.getElementById("salSetupPin").value="2468"; document.getElementById("salSetupGo").click();
+        setTimeout(function(){
+          document.getElementById("salSetupPin").value="2468"; document.getElementById("salSetupGo").click();
+          setTimeout(function(){ window.SMD_ACCOUNT._emit(); setTimeout(function(){ res(window.SMD_APPLOCK.method() + "|" + !!document.getElementById("smdApplock")); }, 400); }, 300);
+        }, 150);
+      }, 150);
+    });
+  `);
+  okv(forcedPin, "pin|false", "once a method is chosen, later sign-in events leave the user alone");
+  await ev(`localStorage.clear(); return 1;`);
+
   ok(errors.length === 0, "no uncaught JS errors (" + (errors.length ? errors.join(" | ") : "none") + ")");
 } catch (e) {
   console.log("HARNESS ERROR: " + (e && e.stack || e));

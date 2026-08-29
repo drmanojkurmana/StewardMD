@@ -220,7 +220,7 @@
   // ============================================================================================
   function promptSetup(opts) {
     try {
-      if (!flagOn() || configured()) return;
+      if (configured()) return;
       opts = opts || {};
       lset(K_INSTITUTIONAL, opts.hospital && String(opts.hospital).trim() ? "1" : "0");
       _fromManage = false; renderChooser();
@@ -426,6 +426,42 @@
   // happens here: the splash holds its constant 3s frame, then its finish() -> unlock() fires
   // Face ID / Touch ID by itself (no card) or puts up the PIN pad. Splash, verify, app.
   try { if (withinGrace()) markUnlocked(); } catch (e) {}
+
+  // ---- FORCE: anyone signed in with no method chosen is put in front of the chooser, whatever
+  // provider signed them in, at boot and on every later sign-in (SMD_ACCOUNT.onChange). Waits
+  // until the app actually owns the screen (no sign-in / intro / verify gate, no boot splash, no
+  // first-run profile form, which hands over via promptSetup() itself), then insists: the
+  // first-run chooser has no close. Institutional rule uses the profile's hospital.
+  var _ensuring = false;
+  function screenBusy() {
+    try {
+      var EA = window.SMD_EMAIL_AUTH || {};
+      if (EA.gateUp && EA.gateUp()) return true;
+      if (EA.flowOpen && EA.flowOpen()) return true;
+      return !!document.getElementById("smdBootSplash");
+    } catch (e) { return false; }
+  }
+  function ensureSetup() {
+    if (_ensuring) return;
+    _ensuring = true;
+    var tries = 0;
+    (function tick() {
+      try {
+        if (configured() || document.getElementById("smdApplock")) { _ensuring = false; return; }
+        var p = window.SMD_ACCOUNT && window.SMD_ACCOUNT.profile && window.SMD_ACCOUNT.profile();
+        if (!p || !p.signedIn || p.isGuest) { _ensuring = false; return; }
+        if (screenBusy()) { if (++tries < 240) setTimeout(tick, 500); else _ensuring = false; return; }
+      } catch (e) { _ensuring = false; return; }
+      _ensuring = false;
+      var EA = window.SMD_EMAIL_AUTH, uid = null;
+      try { uid = window.SMD_ACCOUNT.uid && window.SMD_ACCOUNT.uid(); } catch (e) {}
+      var hosp = (EA && EA.loadProfile && uid)
+        ? EA.loadProfile(uid).then(function (d) { return (d && d.hospital) || ""; }).catch(function () { return ""; })
+        : Promise.resolve("");
+      hosp.then(function (h) { if (!configured() && !document.getElementById("smdApplock")) promptSetup({ hospital: h }); });
+    })();
+  }
+  try { if (window.SMD_ACCOUNT && window.SMD_ACCOUNT.onChange) window.SMD_ACCOUNT.onChange(function () { ensureSetup(); }); } catch (e) {}
 
   window.SMD_APPLOCK = {
     isOn: flagOn,
