@@ -422,14 +422,10 @@
     } catch (e) {}
   }
 
-  // ---- boot: opened within the grace window -> refresh it and stay quiet. A PIN pad goes up
-  // NOW (over the boot splash) so it can be typed while the app still loads. Biometric waits
-  // for the splash's finish() -> unlock(): splash first, then the Face ID / Touch ID sheet
-  // fires by itself, then the app. No card in between.
-  try {
-    if (withinGrace()) markUnlocked();
-    else if (required() && method() === "pin") unlock();
-  } catch (e) {}
+  // ---- boot: opened within the grace window -> refresh it and stay quiet. Otherwise nothing
+  // happens here: the splash holds its constant 3s frame, then its finish() -> unlock() fires
+  // Face ID / Touch ID by itself (no card) or puts up the PIN pad. Splash, verify, app.
+  try { if (withinGrace()) markUnlocked(); } catch (e) {}
 
   window.SMD_APPLOCK = {
     isOn: flagOn,

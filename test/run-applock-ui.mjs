@@ -235,7 +235,7 @@ try {
   `);
   okv(setupForGate, "pin", "PIN configured ahead of the real boot-splash gate check");
   await call("Page.navigate", { url: BASE + "?applock=1" });
-  await sleep(1300); // > MIN(900ms) so finish() has definitely been tried at least once
+  await sleep(3400); // > MIN(3000ms): the constant splash frame is up and finish() has run
   ok(await ev(`var s=document.getElementById("smdBootSplash"); return !!s && !s.classList.contains("sbs-hide");`) === true,
     "the real boot splash HOLDS (not hidden) past MIN when a PIN is configured");
   ok(await ev(`return !!document.getElementById("smdApplock");`) === true,
@@ -339,9 +339,10 @@ try {
   ok(await ev(`return !document.getElementById("smdApplock");`) === true, "...and no unlock screen was shown");
   // 2h+1min ago: the lock is back, and it is up BEFORE the splash's finish() (right at load)
   await ev(`localStorage.setItem("smd_applock_lastunlock", String(Date.now() - 2*3600*1000 - 60000)); return 1;`);
-  await call("Page.navigate", { url: BASE }); await sleep(400); // well under MIN=900ms
-  ok(await ev(`return !!document.getElementById("salUnlockPin");`) === true, "outside 2h: the PIN pad is up at load, before the splash's MIN");
-  await sleep(1000); // let finish() run and queue its own done()
+  await call("Page.navigate", { url: BASE }); await sleep(1500); // inside the constant 3s frame
+  ok(await ev(`return !document.getElementById("smdApplock");`) === true, "outside 2h: nothing but the splash during its 3s frame (no early PIN pad)");
+  await sleep(2000); // past MIN: finish() -> unlock()
+  ok(await ev(`return !!document.getElementById("salUnlockPin");`) === true, "...then the PIN pad is up by itself");
   await ev(`document.getElementById("salUnlockPin").value="4321"; document.getElementById("salUnlockGo").click(); return 1;`);
   await sleep(700);
   ok(await ev(`return !document.getElementById("smdApplock");`) === true, "unlock screen gone after the correct PIN");
