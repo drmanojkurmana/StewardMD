@@ -307,21 +307,7 @@ body.smd-ddi-open #smdBackToTop{display:none!important}
   }
   dp.textContent=(label.replace(/^dr\.?\s+/i,"").charAt(0)||"S").toUpperCase();
   host.hidden=false;s.classList.add("sbs-personal");
-  /* SEQUENCE: the classic frame holds a beat, then crossfades into the personalised phase 2
-     (avatar, name, glass foot), which holds until the boot script's constant 3s is up and
-     Face ID / PIN fires by itself. Both screens are passive: no button, no hold. */
-  var BEAT=1500,XF=220,rm=false;
-  try{rm=!!(window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches);}catch(e){}
-  function live(){return !!s.parentNode&&!s.classList.contains("sbs-hide");}
-  setTimeout(function(){
-    if(!live())return;
-    if(rm){s.classList.add("smd-boot-phase2");return;}
-    s.classList.add("sbs-xfade");
-    setTimeout(function(){
-      if(!live())return;
-      s.classList.add("smd-boot-phase2");s.classList.remove("sbs-xfade");
-    },XF);
-  },BEAT);
+  /* that is all: one frame, on screen at first paint, held by the boot script below */
 }catch(e){}})();</script>
 <style>
   #smdBootSplash{position:fixed;inset:0;z-index:2147483000;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;opacity:1;transition:opacity .45s ease;-webkit-font-smoothing:antialiased;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,system-ui,sans-serif}
@@ -354,87 +340,20 @@ body.smd-ddi-open #smdBackToTop{display:none!important}
   #smdBootSplash.sbs-dark .sbs-maik-dark{display:inline-block}
   @keyframes sbsBar{0%{transform:translateX(-130%)}100%{transform:translateX(340%)}}
   @media (prefers-reduced-motion:reduce){#smdBootSplash .sbs-bar>span{animation-duration:2.2s}}
-  /* ── v2 (html.smd-splash-v2) · Direction C: gradient depth, glass cards, bold type ──
-     THE BOOT SPLASH IS A SEQUENCE OF TWO PASSIVE SCREENS (no button, no hold; the boot script
-     holds a constant 3s and then Face ID / PIN fires by itself). Phase 1 (no .smd-boot-phase2) is the
-     CLASSIC splash, untouched: the interlocked mark, the Steward/MD two-tone wordmark, the
-     "Built by clinicians, for clinicians" tagline, the thin progress bar and the developed-by
-     foot, in both the light and the dark theme. Everything below that restyles composition is
-     scoped to .smd-boot-phase2, which the script above adds after a short beat for a signed-in
-     returning clinician only. The one thing that carries into phase 1 is the liquid-glass
-     material on the developed-by bar, which the owner asked for: material only, classic layout.
-     Guests and first-run users never enter phase 2 and see the classic splash for the whole
-     boot. Presentation only; ?splashv2=0 still drops the entire layer. */
-
-  /* the phase-2 field is an overlay layer rather than a background swap, so it can crossfade */
-  html.smd-splash-v2 #smdBootSplash::before{content:"";position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity .34s ease;background:radial-gradient(360px 360px at 4% 2%,rgba(14,110,99,.17) 0%,rgba(14,110,99,0) 70%),radial-gradient(380px 380px at 100% 98%,rgba(146,98,10,.11) 0%,rgba(146,98,10,0) 70%),radial-gradient(300px 260px at 84% 16%,rgba(63,199,179,.13) 0%,rgba(63,199,179,0) 72%),radial-gradient(420px 300px at 50% 68%,rgba(14,110,99,.1) 0%,rgba(14,110,99,0) 72%),radial-gradient(460px 260px at 50% 100%,rgba(63,199,179,.14) 0%,rgba(63,199,179,0) 74%),#f7fbfa}
-  html.smd-splash-v2 #smdBootSplash.sbs-dark::before{background:radial-gradient(280px 280px at 4% 2%,rgba(63,199,179,.3) 0%,rgba(63,199,179,0) 70%),radial-gradient(300px 300px at 100% 98%,rgba(240,192,96,.14) 0%,rgba(240,192,96,0) 70%),radial-gradient(120% 90% at 18% 8%,#1a4a42 0%,#0e2e2a 32%,#0d1b26 62%,#0a141c 100%)}
-  html.smd-splash-v2 #smdBootSplash.smd-boot-phase2::before{opacity:1}
-  html.smd-splash-v2 #smdBootSplash .sbs-center{position:relative;z-index:1}
-  html.smd-splash-v2 #smdBootSplash .sbs-foot{z-index:1}
-
-  /* the crossfade between the two phases (instant swap under reduced motion) */
-  html.smd-splash-v2 #smdBootSplash .sbs-center,
-  html.smd-splash-v2 #smdBootSplash .sbs-foot{transition:opacity .2s ease}
-  html.smd-splash-v2 #smdBootSplash.sbs-xfade .sbs-center,
-  html.smd-splash-v2 #smdBootSplash.sbs-xfade .sbs-foot{opacity:0}
-
-  /* the hello block is built at boot but stays out of phase 1 entirely */
-  html.smd-splash-v2 #smdBootSplash .sbs-hello{display:none}
-
-  /* phase 1 is the classic splash, pixel-identical: no overrides on the foot or its copy */
-  html.smd-splash-v2 #smdBootSplash.smd-boot-phase2 .sbs-by{color:#54707f}
-  html.smd-splash-v2 #smdBootSplash.smd-boot-phase2.sbs-dark .sbs-by{color:rgba(246,247,245,.62)}
-
-  /* ══ phase 2 ══════════════════════════════════════════════════════════════════════════ */
-  html.smd-splash-v2 #smdBootSplash.smd-boot-phase2 .sbs-center{gap:14px}
-  /* the mark is the hero here: bigger, with its own shadow, so the screen is a brand moment */
-  html.smd-splash-v2 #smdBootSplash.smd-boot-phase2 .sbs-logo,
-  html.smd-splash-v2 #smdBootSplash.smd-boot-phase2 .sbs-mark{width:126px;height:126px}
-  /* the glow goes ONLY on .sbs-mark, which is a CSS mask and therefore genuinely transparent.
-     .sbs-logo is /logo.png, whose bitmap is opaque to its edges, so a drop-shadow on it renders
-     as a square halo around the artwork instead of following the mark. */
-  html.smd-splash-v2 #smdBootSplash.smd-boot-phase2.sbs-dark .sbs-mark{filter:drop-shadow(0 0 38px rgba(63,199,179,.34))}
-  /* the same light/extrabold lock-up the poster and the landing splash use */
-  html.smd-splash-v2 #smdBootSplash.smd-boot-phase2 .sbs-word{font-family:var(--smd-dsp);font-size:40px;font-weight:300;letter-spacing:-.045em;line-height:1}
-  html.smd-splash-v2 #smdBootSplash.smd-boot-phase2 .sbs-word span{font-weight:800}
-  html.smd-splash-v2 #smdBootSplash.smd-boot-phase2 .sbs-tag{font-family:var(--smd-dsp);font-size:9.5px;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:#7d94a6}
-  html.smd-splash-v2 #smdBootSplash.smd-boot-phase2.sbs-dark .sbs-tag{color:rgba(246,247,245,.6)}
-  /* progress becomes a translucent glass pill (Direction C) */
-  html.smd-splash-v2 #smdBootSplash.smd-boot-phase2 .sbs-bar{width:auto;height:auto;margin-top:8px;padding:9px 18px;border-radius:999px;background:rgba(14,110,99,.05);border:1px solid rgba(14,110,99,.14);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);overflow:visible;position:relative}
-  html.smd-splash-v2 #smdBootSplash.smd-boot-phase2 .sbs-bar>span{display:none}
-  html.smd-splash-v2 #smdBootSplash.smd-boot-phase2 .sbs-bar::after{content:"Loading your workspace\2026";display:block;font-size:11.5px;font-weight:500;letter-spacing:.01em;color:#6b8398;animation:sbsGlow 1.8s ease-in-out infinite}
-  html.smd-splash-v2 #smdBootSplash.smd-boot-phase2.sbs-dark .sbs-bar{background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.12)}
-  html.smd-splash-v2 #smdBootSplash.smd-boot-phase2.sbs-dark .sbs-bar::after{color:rgba(246,247,245,.6)}
-  /* "developed by MaiK" foot: a glass bar carrying the REAL MaiK logo (light/dark swap kept) */
-  html.smd-splash-v2 #smdBootSplash.smd-boot-phase2 .sbs-foot{left:24px;right:24px;transform:none;flex-direction:row;align-items:center;justify-content:center;gap:11px;padding:11px 18px;border-radius:18px}
-  html.smd-splash-v2 #smdBootSplash.smd-boot-phase2 .sbs-by{font-family:var(--smd-dsp);font-size:9px;font-weight:600;letter-spacing:.2em}
-  html.smd-splash-v2 #smdBootSplash.smd-boot-phase2 .sbs-maik{height:30px}
-  /* ── personalised state (phase 2 only) ── */
-  html.smd-splash-v2 #smdBootSplash.smd-boot-phase2.sbs-personal .sbs-logo,
-  html.smd-splash-v2 #smdBootSplash.smd-boot-phase2.sbs-personal .sbs-mark{width:92px;height:92px}
-  html.smd-splash-v2 #smdBootSplash.smd-boot-phase2.sbs-personal .sbs-word{display:none}
-  html.smd-splash-v2 #smdBootSplash.smd-boot-phase2.sbs-personal .sbs-tag{display:none}
-  html.smd-splash-v2 #smdBootSplash.smd-boot-phase2 .sbs-hello[hidden]{display:none}
-  html.smd-splash-v2 #smdBootSplash.smd-boot-phase2 .sbs-hello{display:flex;flex-direction:column;align-items:center;gap:14px;margin-top:6px;max-width:min(88vw,320px)}
-  html.smd-splash-v2 #smdBootSplash .sbs-dp{position:relative;flex:0 0 auto;width:84px;height:84px;border-radius:50%;background:linear-gradient(135deg,#3fc7b3,#0e6e63) center/cover no-repeat;box-shadow:0 16px 40px rgba(14,110,99,.32);display:flex;align-items:center;justify-content:center;font-family:var(--smd-dsp);font-size:30px;font-weight:800;color:#0a141c;letter-spacing:-.03em}
-  html.smd-splash-v2 #smdBootSplash .sbs-dp.has-pic{background-color:#0e6e63;box-shadow:0 16px 40px rgba(14,110,99,.32),inset 0 0 0 2px rgba(255,255,255,.16)}
-  /* online-status accent (generated decoration, no brand asset involved) */
-  html.smd-splash-v2 #smdBootSplash .sbs-dp::after{content:"";position:absolute;right:5px;bottom:5px;width:16px;height:16px;border-radius:50%;background:#4dd68c;border:3px solid #fbfdfc}
+  /* ── v2 (html.smd-splash-v2): ONE frame, no phases. Everything is on screen at first paint
+     (no entrance animation anywhere on this splash) and the frame holds a constant 3s (MIN in
+     the boot script) before Face ID / PIN fires by itself. A signed-in clinician gets an
+     avatar + name row in the SAME frame; guests keep the tagline only. No button, no hold. */
+  html.smd-splash-v2 #smdBootSplash .sbs-hello[hidden]{display:none}
+  html.smd-splash-v2 #smdBootSplash .sbs-hello{display:flex;align-items:center;gap:12px;margin-top:2px;max-width:min(88vw,360px)}
+  html.smd-splash-v2 #smdBootSplash .sbs-dp{position:relative;flex:0 0 auto;width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,#3fc7b3,#0e6e63);background-size:cover;background-position:center;color:#fff;font-weight:800;font-size:20px;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 24px rgba(14,110,99,.22)}
+  html.smd-splash-v2 #smdBootSplash .sbs-dp::after{content:"";position:absolute;right:1px;bottom:1px;width:12px;height:12px;border-radius:50%;background:#4dd68c;border:2px solid #fff}
   html.smd-splash-v2 #smdBootSplash.sbs-dark .sbs-dp::after{border-color:#0d1922}
-  html.smd-splash-v2 #smdBootSplash .sbs-hello-txt{display:flex;flex-direction:column;align-items:center;gap:4px;min-width:0;text-align:center;max-width:100%}
-  html.smd-splash-v2 #smdBootSplash .sbs-hello-k{font-family:var(--smd-dsp);font-size:9.5px;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:#7d94a6;line-height:1.2}
-  html.smd-splash-v2 #smdBootSplash .sbs-hello-n{font-family:var(--smd-dsp);font-size:23px;font-weight:700;letter-spacing:-.032em;color:#0f172a;line-height:1.25;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
+  html.smd-splash-v2 #smdBootSplash .sbs-hello-txt{display:flex;flex-direction:column;gap:2px;min-width:0}
+  html.smd-splash-v2 #smdBootSplash .sbs-hello-k{font-size:9.5px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:#7d94a6}
+  html.smd-splash-v2 #smdBootSplash .sbs-hello-n{font-size:17px;font-weight:700;letter-spacing:-.02em;color:#0f172a;line-height:1.2;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
   html.smd-splash-v2 #smdBootSplash.sbs-dark .sbs-hello-k{color:rgba(246,247,245,.55)}
   html.smd-splash-v2 #smdBootSplash.sbs-dark .sbs-hello-n{color:#f6f7f5}
-  @keyframes sbsGlow{0%,100%{opacity:1}50%{opacity:.55}}
-  @media (prefers-reduced-motion:reduce){
-    html.smd-splash-v2 #smdBootSplash::before,
-    html.smd-splash-v2 #smdBootSplash .sbs-center,
-    html.smd-splash-v2 #smdBootSplash .sbs-foot{transition:none}
-    html.smd-splash-v2 #smdBootSplash.smd-boot-phase2 .sbs-hello{animation:none}
-    html.smd-splash-v2 #smdBootSplash.smd-boot-phase2 .sbs-bar::after{animation:none}
-  }
 
   /* ══ LIQUID GLASS material (shared tokens) ═════════════════════════════════════════════
      The Direction C surfaces were "translucent panel + flat 1px border", which on the light

@@ -264,11 +264,11 @@ try {
     "the 'Steward|MD' lock-up is large and set with light-against-extrabold weight contrast");
   await shot("splash-04-landing");
 
-  /* ---------- 2. RETURNING signed-in clinician: classic frame, THEN the welcome-back screen ----
-     Two passive screens (owner: "i want both"). Screen 1 is the classic frame, fully on screen
-     at first paint with no entrance animation. After a 1.5s beat it crossfades into screen 2:
-     avatar, name, glass foot. The boot script holds a constant 3s in total, then Face ID / PIN
-     fires by itself. No button, no hold, on either screen. */
+  /* ---------- 2. RETURNING signed-in clinician: ONE frame, all at once, constant 3s hold ----
+     Owner (2026-08-30, from a screen recording): the bar appeared alone, then the foot, then the
+     logo, then the logo faded for a welcome card with a button. Now the splash is a single frame:
+     mark, wordmark, tagline, avatar+name row, bar, foot, all on screen at first paint with no
+     entrance animation, held a constant 3s, then Face ID / PIN fires by itself. No button. */
   await newTab();
   await call("Page.navigate", { url: BASE });
   await sleep(1500);
@@ -276,10 +276,7 @@ try {
   await call("Page.navigate", { url: BASE });
   await sleep(380);
 
-  const waitSplash = async () => { for (let i = 0; i < 30; i++) { if (await ev(`return !!document.querySelector("#smdBootSplash .sbs-word");`)) return; await sleep(100); } };
-  const classic = async (label) => {
-    okv(await ev(`var e=document.getElementById("smdBootSplash"); return !!e && !e.classList.contains("smd-boot-phase2");`), true,
-      label + ": opens on screen 1 (no .smd-boot-phase2)");
+  const classic = async (label, personal) => {
     okv(await ev(`var w=document.querySelector("#smdBootSplash .sbs-word"); return w ? w.textContent.trim() : "missing";`), "StewardMD",
       label + ": the Steward/MD wordmark is on screen");
     okv(await ev(`var w=document.querySelector("#smdBootSplash .sbs-word"); if(!w)return "missing";
@@ -292,85 +289,59 @@ try {
       "Built by clinicians, for clinicians", label + ": the tagline is on screen");
     okv(await ev(`var b=document.querySelector("#smdBootSplash .sbs-bar"); if(!b)return "missing"; var s=getComputedStyle(b), i=b.firstElementChild;
         if(!i||getComputedStyle(i).display==="none") return "no progress indicator";
-        return Math.round(parseFloat(s.width))+"x"+Math.round(parseFloat(s.height));`), "132x3", label + ": the thin classic progress bar");
+        return Math.round(parseFloat(s.width))+"x"+Math.round(parseFloat(s.height));`), "132x3", label + ": the thin progress bar is in the frame");
     okv(await ev(`var m=document.querySelector("#smdBootSplash .sbs-logo"),k=document.querySelector("#smdBootSplash .sbs-mark");
         var e=[m,k].filter(function(x){return x&&getComputedStyle(x).display!=="none"})[0];
-        return e ? Math.round(parseFloat(getComputedStyle(e).width)) : 0;`), 107, label + ": the mark is at its classic 107px size");
-    okv(await ev(`var h=document.getElementById("sbsHello"); return !h || getComputedStyle(h).display==="none";`), true,
-      label + ": the personalised row is not part of screen 1");
+        return e ? Math.round(parseFloat(getComputedStyle(e).width)) : 0;`), 107, label + ": the mark is at its 107px size");
+    okv(await ev(`var h=document.getElementById("sbsHello"); return !!h && getComputedStyle(h).display!=="none" && h.offsetHeight>1;`), personal,
+      label + (personal ? ": the avatar+name row is in the SAME frame" : ": no personalised row"));
     okv(await ev(`var f=document.querySelector("#smdBootSplash .sbs-foot"); if(!f)return "missing";
         var img=[].slice.call(f.querySelectorAll(".sbs-maik")).filter(function(x){return getComputedStyle(x).display!=="none"})[0];
-        return getComputedStyle(f).flexDirection==="column" && img && Math.round(parseFloat(getComputedStyle(img).height))===53 ? "classic foot" : "foot changed";`), "classic foot",
-      label + ": the developed-by foot keeps its classic stacked composition");
-    /* ALL AT ONCE: nothing on screen 1 animates in */
-    okv(await ev(`var bad=[]; [".sbs-logo",".sbs-mark",".sbs-word",".sbs-tag",".sbs-foot",".sbs-center"].forEach(function(sel){
+        return img && Math.round(parseFloat(getComputedStyle(img).height))===53 ? "classic foot" : "foot changed";`), "classic foot",
+      label + ": the developed-by foot is in the frame");
+    /* ALL AT ONCE: nothing on this splash animates in */
+    okv(await ev(`var bad=[]; [".sbs-logo",".sbs-mark",".sbs-word",".sbs-tag",".sbs-hello",".sbs-foot",".sbs-center"].forEach(function(sel){
         var e=document.querySelector("#smdBootSplash "+sel); if(!e||getComputedStyle(e).display==="none") return;
         var s=getComputedStyle(e); if(s.animationName!=="none") bad.push(sel+":"+s.animationName); if(parseFloat(s.opacity)<1) bad.push(sel+":opacity "+s.opacity); });
         return bad.length ? bad.join(",") : "static";`), "static",
-      label + ": every element of screen 1 is fully on screen at first paint (no entrance animation)");
+      label + ": every element is fully on screen at first paint (no entrance animation, no fade)");
     okv(await ev(`var b=document.querySelector("#smdBootSplash .sbs-go"); return !b && !window.__smdBootGate;`), true,
       label + ": no Open Workspace button, no hold");
   };
-  await classic("screen 1 light");
+  await classic("signed-in light", true);
+  ok(await ev(`var e=document.getElementById("sbsHelloName"); return e ? e.textContent : "";`) === "Dr. Manoj Kumar Kurmana",
+    "greeting shows the account name from localStorage stewardmd_account");
+  ok(await ev(`var e=document.getElementById("smdBootSplash"); return !!e && e.classList.contains("sbs-personal");`) === true,
+    ".sbs-personal is set for a returning clinician");
+  ok(await ev(`var e=document.getElementById("sbsDp"); return e ? e.textContent : "";`) === "M",
+    "avatar falls back to the clinician's monogram when the photo cannot load");
+  await shot("splash-05-boot-personal");
+
+  /* ---- constant 3s: boot-ready is forced at ~0.6s, the frame still holds until 3s, then hides by itself */
   const makeReady = `var g=document.getElementById("accountGate");
       if(g){g.classList.remove("hidden"); g.setAttribute("style","display:block;visibility:visible;opacity:1;min-height:200px");}
       return !!g;`;
-  okv(await ev(makeReady), true, "the harness can force the hide loop's ready() condition (at ~0.8s, before screen 2)");
-  await shot("splash-05a-boot-classic-light");
-
-  /* ---- screen 2 after the beat ---- */
-  await sleep(1500);   // t ~1.9s: past BEAT (1.5s) + the 220ms crossfade
-  okv(await ev(`var e=document.getElementById("smdBootSplash"); return !!e && e.classList.contains("smd-boot-phase2");`), true,
-    "after the beat the splash crossfades into screen 2");
-  ok(await ev(`var e=document.getElementById("sbsHello"); return !!e && !e.hidden && e.offsetHeight>1;`) === true,
-    "screen 2: the personalised welcome row is up");
-  ok(await ev(`var e=document.getElementById("sbsHelloName"); return e ? e.textContent : "";`) === "Dr. Manoj Kumar Kurmana",
-    "screen 2: greeting shows the account name from localStorage stewardmd_account");
-  ok(await ev(`var e=document.getElementById("smdBootSplash"); return !!e && e.classList.contains("sbs-personal");`) === true,
-    "screen 2: .sbs-personal (generic tagline swapped for the greeting)");
-  ok(await ev(`var e=document.getElementById("sbsDp"); return e ? e.textContent : "";`) === "M",
-    "screen 2: avatar falls back to the clinician's monogram when the photo cannot load");
-  okv(await ev(`var e=document.getElementById("sbsDp"); return e ? Math.round(parseFloat(getComputedStyle(e).width)) : 0;`), 84,
-    "screen 2: Direction C avatar treatment (84px)");
-  okv(await ev(`var e=document.getElementById("sbsDp"); if(!e)return "no avatar"; var s=getComputedStyle(e,"::after");
-      return s.position + " " + Math.round(parseFloat(s.width)) + " " + s.backgroundColor;`), "absolute 16 rgb(77, 214, 140)",
-    "screen 2: avatar carries the online-status dot accent");
-  okv(await ev(`var h=document.getElementById("sbsHello"); return h ? getComputedStyle(h).animationName : "missing";`), "none",
-    "screen 2 arrives as ONE crossfade: the welcome row has no entrance animation of its own");
-  ok(await ev(`var e=document.querySelector("#smdBootSplash .sbs-foot"); return e ? getComputedStyle(e).flexDirection : "";`) === "row",
-    "screen 2: the 'developed by MaiK' credit is the Direction C glass bar");
-  await glass("#smdBootSplash .sbs-foot", "screen 2: the developed-by bar is the liquid-glass material");
-  okv(await ev(`var b=document.querySelector("#smdBootSplash .sbs-bar"); return b ? (getComputedStyle(b,"::after").content||"none") : "missing";`).then(v => /Loading your workspace/.test(v)), true,
-    "screen 2: the passive 'Loading your workspace' pill (no button)");
-  okv(await ev(`var b=document.querySelector("#smdBootSplash .sbs-go"); return !b && !window.__smdBootGate;`), true,
-    "screen 2: still no Open Workspace button, no hold");
-  await shot("splash-05-boot-personal-monogram");
-
-  /* ---- constant 3s total: boot was "ready" since ~0.8s, yet screen 2 was still up above; gone by itself by ~3.6s */
+  okv(await ev(makeReady), true, "the harness can force the hide loop's ready() condition");
+  await sleep(1200);   // t ~1.6s
   okv(await ev(`var e=document.getElementById("smdBootSplash"); return !!e && !e.classList.contains("sbs-hide");`), true,
-    "ready since ~0.8s: screen 2 still holds (constant 3s total, not ready-driven)");
-  await sleep(1800);   // t ~3.8s
+    "ready at 0.6s: the splash still holds at ~1.6s (constant 3s frame)");
+  await sleep(900);    // t ~2.5s
+  okv(await ev(`var e=document.getElementById("smdBootSplash"); return !!e && !e.classList.contains("sbs-hide");`), true,
+    "...and at ~2.5s");
+  await sleep(1100);   // t ~3.6s
   okv(await ev(`var e=document.getElementById("smdBootSplash"); return !e || e.classList.contains("sbs-hide");`), true,
     "at ~3.6s it has hidden BY ITSELF (no tap)");
 
-  // the same two screens in the dark theme (Direction C's gradient mesh on screen 2)
+  // the same single frame in the dark theme
   await newTab();
   await call("Emulation.setEmulatedMedia", { features: [{ name: "prefers-color-scheme", value: "dark" }] });
   await call("Page.navigate", { url: BASE });
   await sleep(1500);
   await ev(`localStorage.setItem("stewardmd_account", JSON.stringify({type:"google",name:"Dr. Manoj Kumar Kurmana",email:"doctor@example.com"})); return 1;`);
   await call("Page.navigate", { url: BASE });
-  await waitSplash();
+  await sleep(380);
   okv(await ev(`var e=document.getElementById("smdBootSplash"); return !!e && e.classList.contains("sbs-dark");`), true, "the dark theme variant resolves");
-  await classic("screen 1 dark");
-  await shot("splash-05b-boot-classic-dark");
-  await sleep(1500);
-  ok(await ev(`var e=document.getElementById("smdBootSplash");
-      return !!e && e.classList.contains("sbs-dark") && e.classList.contains("smd-boot-phase2") &&
-             /radial-gradient/.test(getComputedStyle(e,"::before").backgroundImage||"") &&
-             getComputedStyle(e,"::before").opacity === "1";`) === true,
-    "dark screen 2 fades up the Direction C gradient mesh");
-  await glass("#smdBootSplash .sbs-foot", "dark screen 2: the 'developed by' bar is liquid glass");
+  await classic("signed-in dark", true);
   await shot("splash-07-boot-personal-dark");
   await call("Emulation.setEmulatedMedia", { features: [] });
 
@@ -385,12 +356,9 @@ try {
     "guest sees no personalised row (brand tagline retained)");
   /* guests never enter phase 2: their "what you created" is the intro poster + landing that
      follow, so the boot splash stays classic for the whole boot */
-  await classic("guest");
-  await sleep(1600);
-  okv(await ev(`var e=document.getElementById("smdBootSplash"); return !!e && !e.classList.contains("smd-boot-phase2");`), true,
-    "a guest never enters screen 2 (classic frame for the whole boot)");
+  await classic("guest", false);
   await ev(makeReady);
-  await sleep(1700);
+  await sleep(3200);
   okv(await ev(`var e=document.getElementById("smdBootSplash"); return !e || e.classList.contains("sbs-hide");`), true,
     "the guest splash hides by itself once the 3s frame is up");
 
