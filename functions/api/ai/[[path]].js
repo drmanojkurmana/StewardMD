@@ -129,7 +129,6 @@ import { tinyfishSearch } from "../../_search.js";
 import { assessmentExtractPrompt, sanitizeAssessmentFields } from "./_assessment-extract.js";
 import { scribeExtractPrompt, sanitizeScribeOutput } from "./_opd-scribe.js";
 import { maikNextPrompt, maikExtractPrompt, sanitizeMaikNext, sanitizeMaikExtract } from "./_maik-ask.js";
-import { insulinExtractPrompt, sanitizeInsulinExtract } from "./_insulin-extract.js";
 import { opdSuggestPrompt, sanitizeOpdSuggest } from "./_opd-suggest.js";
 import { surgxNotePrompt, sanitizeSurgxNote } from "./_surgx-note.js";
 // The effective Gemini model. The admin "switch models" control (KV override, validated to a priced
@@ -2099,24 +2098,6 @@ export async function onRequest(context) {
         catch (e) { await recordUsage(gate, { inTok: estTokens(prompt.length), outTok: 0, status: "failed" }); throw e; }
         await recordUsage(gate, { inTok: estTokens(prompt.length), outTok: estTokens((text || "").length), status: "success" });
         return json({ kind: "maik-ask-extract", ...sanitizeMaikExtract(parseJsonLoose(text), ctx.allowedFields), mode: "maik-ask-extract" });
-      }
-      if (body.kind === "insulin-extract") {
-        // Insulin calculator "Ask MaiK": a doctor's free-text scenario -> WHICH calculator mode and
-        // WHICH inputs, so the app can PRE-FILL the form. The model never emits a dose; the units come
-        // from INSULIN_ENGINE on the client through the same validated compute() path the manual
-        // calculator uses, so every INSULIN_SAFETY warning and interrupt still fires. Output is
-        // whitelisted to known modes / field keys here, and the client validates AGAIN
-        // (insulin-extract.js), turning any REQUIRED-but-unstated input into a question for the
-        // doctor rather than a default. Decision: vault/decisions/Decisions.md 2026-08-28.
-        // NOTE: no `mode:` echo here (the sibling kinds add one) - `mode` is the CALCULATOR mode in
-        // this payload and the spread would clobber it.
-        const ctx = (body.ctx && typeof body.ctx === "object") ? body.ctx : {};
-        const prompt = insulinExtractPrompt(ctx, transcript);
-        let text;
-        try { text = await callGemini(env, [{ text: prompt }], 1024); }
-        catch (e) { await recordUsage(gate, { inTok: estTokens(prompt.length), outTok: 0, status: "failed" }); throw e; }
-        await recordUsage(gate, { inTok: estTokens(prompt.length), outTok: estTokens((text || "").length), status: "success" });
-        return json({ kind: "insulin-extract", ...sanitizeInsulinExtract(parseJsonLoose(text)) });
       }
       if (body.kind === "opd-suggest") {
         // OPD Ask MaiK — Pro tier: typed assessment → decision-support differential (dx / ddx / workup /

@@ -2,15 +2,19 @@
  * Resolution per flag: ?query param -> localStorage -> default. Mirrors thorex-flags.js. */
 (function () {
   "use strict";
-  // type: bool. def: default when unset. query: ?alias (or null). All default OFF.
+  /* type: bool. def: default when unset. query: ?alias (or null).
+   * CLINICAL SIGN-OFF: the DKA and paediatric workflows were held behind a "needs R1 review"
+   * gate. That review was completed by the owner, a physician, on 2026-08-29, against the
+   * clinical acceptance suite in test/insulin-scenarios.test.mjs (hypoglycaemia handling,
+   * DKA/HHS routing and the potassium gate, paediatric DKA rate and cerebral-oedema warning,
+   * weight-based caps). The gate is DISCHARGED, not skipped - all three flags ship ON
+   * deliberately. The in-app safeguards are unchanged and remain in force: every DKA and
+   * paediatric result still carries its "trained clinicians only" banner, its
+   * institutional-protocol acknowledgement, and the critical-warning acknowledgement. */
   var DEFS = {
-    smd_insulin:      { type: "bool", def: true,  query: "insulin",     desc: "Insulin module master flag (home tile + module). DEFAULT ON (owner enabled). Hide with ?insulin=0." },
-    smd_insulin_dka:  { type: "bool", def: true, query: "insulin_dka", desc: "Clinician DKA insulin workflow. Access-gated. PUBLIC-RELEASE-GATE: dev/testing default ON (owner 'flip all on' 2026-08-16). Hide with ?insulin_dka=0." },
-    smd_insulin_peds: { type: "bool", def: true, query: "insulin_peds", desc: "Pediatric insulin workflow. Access-gated. PUBLIC-RELEASE-GATE: dev/testing default ON (owner 'flip all on' 2026-08-16). Hide with ?insulin_peds=0." },
-    // Ask MaiK: free text -> MaiK PRE-FILLS the calculator (mode + inputs) for the doctor to check and
-    // press Calculate. It never prints a dose; the units still come from INSULIN_ENGINE via compute().
-    // DEFAULT OFF - new clinical surface, extraction not yet proven in practice. Show with ?insulin_ask=1.
-    smd_insulin_ask:  { type: "bool", def: false, query: "insulin_ask", desc: "Ask MaiK inside the insulin calculator (free text pre-fills the form; never answers the dose). DEFAULT OFF. Show with ?insulin_ask=1." }
+    smd_insulin:      { type: "bool", def: true, query: "insulin",      desc: "Insulin module master flag (home tile + module). DEFAULT ON (owner enabled). Hide with ?insulin=0." },
+    smd_insulin_dka:  { type: "bool", def: true, query: "insulin_dka",  desc: "Clinician DKA insulin workflow. DEFAULT ON. Clinical review signed off by the owner (physician) 2026-08-29. Still gated in-app by the trained-clinician acknowledgement. Hide with ?insulin_dka=0." },
+    smd_insulin_peds: { type: "bool", def: true, query: "insulin_peds", desc: "Pediatric insulin workflow. DEFAULT ON. Clinical review signed off by the owner (physician) 2026-08-29. Still gated in-app by the trained-clinician acknowledgement. Hide with ?insulin_peds=0." }
   };
   function store()  { try { return localStorage; } catch (e) { return null; } }
   function search() { try { return (location && location.search) || ""; } catch (e) { return ""; } }

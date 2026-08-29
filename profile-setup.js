@@ -122,11 +122,19 @@
   /* A searchable chooser rendered INSIDE our own overlay, so it never fights the app's sheet. */
   function chooser(title, items, current, onPick, onCancel) {
     var el = root(); el.classList.add("on");
+    /* An option is EITHER a plain string ("MBBS") or an object ({name, sub}). Reading it.sub off a
+     * string is the legacy String.prototype.sub trap: that native method is TRUTHY, so `it.sub || ""`
+     * never fell back and every row rendered the subtitle "function sub() { [native code] }" under
+     * its label - reported from a real device on both the degree and speciality pickers. `it.name`
+     * escaped only by luck, since strings have no .name. Read properties from OBJECTS only.
+     * (Same family as .big/.blink/.bold/.link/.sup - never probe them on an unknown value.) */
+    function optName(it) { return (it && typeof it === "object") ? (it.name || "") : String(it == null ? "" : it); }
+    function optSub(it) { return (it && typeof it === "object") ? (it.sub || "") : ""; }
     function rows(q) {
       q = String(q || "").toLowerCase().trim();
       var hits = [], i;
       for (i = 0; i < items.length; i++) {
-        var it = items[i], name = it.name || it, sub = it.sub || "";
+        var it = items[i], name = optName(it), sub = optSub(it);
         if (!q || (name + " " + sub).toLowerCase().indexOf(q) >= 0) hits.push(it);
         if (hits.length >= 80) break;
       }
@@ -135,7 +143,7 @@
           (q ? '<div style="margin-top:10px"><button class="pfs-btn pfs-save" data-custom="1">Use &ldquo;' + esc(q) + '&rdquo;</button></div>' : "") + "</div>";
       }
       return hits.map(function (it) {
-        var name = it.name || it, sub = it.sub || "";
+        var name = optName(it), sub = optSub(it);
         return '<button type="button" class="pfs-opt" data-v="' + esc(name) + '"><b>' + esc(name) + "</b>" +
           (sub ? "<span>" + esc(sub) + "</span>" : "") + "</button>";
       }).join("");
