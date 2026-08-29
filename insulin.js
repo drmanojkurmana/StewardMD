@@ -397,7 +397,6 @@
     return '<div class="ins-stat"><div class="ins-stat-l">' + label + '</div>' +
       '<div class="ins-stat-v">' + val + '<span>' + unit + '</span></div></div>';
   }
-  function qa(mode, label) { return '<button class="ins-qa-btn" data-ins="qa" data-mode="' + mode + '">' + label + '</button>'; }
   function ask(mode, question, detail) {
     return '<button class="ins-askbtn" data-ins="qa" data-mode="' + mode + '">' +
       '<span class="ins-ask-q">' + question + '</span><span class="ins-ask-d">' + detail + '</span>' + ICON_CHEVR + '</button>';
@@ -719,7 +718,6 @@
   function bolusMode(m) { return ["combined", "meal", "correction", "iob"].indexOf(m) > -1; }
   function clinMode(m) { return m === "pediatric" || m === "dka"; }
   function doseUnitMode(m) { return ["combined", "meal", "correction", "basal", "pediatric", "inpatient", "premix", "npo", "steroid", "ivsc", "basalT2"].indexOf(m) > -1; }
-  function wardMode(m) { return ["titrate", "scale", "basalT2", "inpatient", "premix", "premixTitr", "npo", "steroid", "ivsc"].indexOf(m) > -1; }
 
   function calcHTML() {
     return (st.patientId ? '<div class="ins-patchip ins-bf">' + ICON_USER + '<span>' + esc(st.patientName) + '</span>' +
