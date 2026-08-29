@@ -1819,3 +1819,7 @@ verify gates, splashes), `SMD_EMAIL_AUTH.flowOpen()` (its own sheet, which hands
 the institutional rule comes from `SMD_EMAIL_AUTH.loadProfile(uid)` (Firestore profile doc;
 "" when unavailable, i.e. treated as personal, and Manage re-evaluates with the real value).
 `smd_applock` now gates nothing that matters; the Security row shows for everyone.
+- **Addendum (same day): screen 2 is back.** Owner: "why did you remove second screen after
+  splash? bring it back i want both". Screen 1 (classic, static) -> 1.5s beat -> crossfade ->
+  screen 2 (avatar, name, glass foot, passive pill). Still no Open Workspace button/hold; the
+  constant 3s + automatic Face ID / PIN stands. So only the GATE stays removed, not phase 2.
