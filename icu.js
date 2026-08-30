@@ -3299,7 +3299,36 @@
         return out + '<div class="icu-card"><div class="icu-empty">No electrolyte values entered yet.</div>' +
           '<button class="icu-btn" data-icu-act="edit:labs">' + ico("edit","✎") + ' Enter electrolytes</button></div>';
       }
-      var grid = '<div class="icu-vitals">' + Object.keys(map).map(function (k) { return vitalCard(labels[k], map[k].v, "", map[k].s); }).join("") + "</div>";
+      /* UNITS ON EVERY TILE, AND EVERY TILE EDITABLE.
+       * The tiles used to render with unit "" - eight bare numbers, where telling a Ca in mg/dL from
+       * an ionised Ca in mmol/L was left to the reader on the one screen where that distinction
+       * decides a dose. They were also inert, so correcting a value meant leaving for the Labs form.
+       * Tapping one now opens the single-value editor (labs -> the confirm-against-current review
+       * sheet, so nothing is written unreviewed). */
+      var UNIT = { na: "mEq/L", k: "mEq/L", cl: "mEq/L", hco3: "mEq/L", ca: "mg/dL", ica: "mmol/L", mg: "mg/dL", po4: "mg/dL" };
+      var grid = '<div class="icu-vitals">' + keys.map(function (k) {
+        return vitalCard(labels[k], map[k].v, UNIT[k], map[k].s, null, "labs:" + k);
+      }).join("") + "</div>";
+      /* WHAT NEEDS ATTENTION, BEFORE THE GRID. Eight equally-weighted tiles make the reader scan all
+       * of them to find the one that matters; the abnormal ones are named here so the answer is the
+       * first thing on screen. Colour is never the only carrier - the names are written out. */
+      var crit = keys.filter(function (k) { return map[k].s === "crit"; });
+      var warn = keys.filter(function (k) { return map[k].s === "warn"; });
+      var measured = keys.filter(function (k) { return map[k].v != null && map[k].v !== ""; });
+      var chip = function (c, txt) {
+        return '<span style="display:inline-flex;align-items:center;gap:6px;padding:5px 10px;border-radius:999px;' +
+          'background:color-mix(in srgb,' + c + ' 14%,transparent);color:' + c + ';font:800 11.5px var(--font)">' +
+          '<span style="width:7px;height:7px;border-radius:50%;background:' + c + '"></span>' + esc(txt) + '</span>';
+      };
+      var nm = function (arr) { return arr.map(function (k) { return labels[k]; }).join(", "); };
+      var summary = '<div class="icu-card" style="display:flex;flex-wrap:wrap;gap:7px;align-items:center;padding:11px 13px">' +
+        (crit.length ? chip("var(--danger)", crit.length + " critical: " + nm(crit)) : "") +
+        (warn.length ? chip("var(--warn)", warn.length + " abnormal: " + nm(warn)) : "") +
+        (!crit.length && !warn.length ? chip("var(--ok)", "All " + measured.length + " recorded electrolytes within range") : "") +
+        (measured.length < keys.length
+          ? '<span style="color:var(--muted);font:600 11.5px var(--font)">' + (keys.length - measured.length) + ' not recorded</span>' : "") +
+        '</div>';
+      grid = summary + grid;
       // provenance line — where these electrolyte values came from + freshness
       var srcs = {}; keys.forEach(function (k) { var s = (_raw.src || {})[k]; if (s && L[k] != null) srcs[s.source] = Math.max(srcs[s.source] || 0, s.ts || 0); });
       var srcLine = Object.keys(srcs).length ? '<div class="icu-src">' + Object.keys(srcs).map(function (s) { return ico("link","📎") + " " + esc(s) + " · " + fmtAgo(srcs[s]); }).join("  ·  ") + "</div>" : "";
@@ -3312,6 +3341,14 @@
       var res = [];
       try { if (window.ELYTE && ELYTE.analyze) res = ELYTE.analyze(L, pt, "conventional"); } catch (e) { res = []; }
       var COLOR = { crit: "var(--danger)", red: "var(--danger)", amber: "var(--warn)", ok: "var(--ok)" };
+      // Most urgent first. ELYTE returns its analyzers in a fixed analyte order, so a critical
+      // potassium could sit below three normal results and be found only by scrolling. Stable within
+      // a level (sort is not guaranteed stable across engines for equal keys, so rank then index).
+      var RANK = { crit: 0, red: 1, amber: 2, ok: 3 };
+      res = res.map(function (r, i) { return { r: r, i: i }; }).sort(function (a, b) {
+        var ra = RANK[a.r.level] == null ? 4 : RANK[a.r.level], rb = RANK[b.r.level] == null ? 4 : RANK[b.r.level];
+        return ra !== rb ? ra - rb : a.i - b.i;
+      }).map(function (x) { return x.r; });
       var cards = res.map(function (r) {
         var c = COLOR[r.level] || "var(--muted)", open = !!_lytesExp[r.name];
         return '<div class="icu-card" style="padding:0;overflow:hidden;border-left:3px solid ' + c + '">' +
@@ -6104,7 +6141,15 @@
     "monitor:spo2": { l: "SpO₂", u: "%" }, "monitor:rr": { l: "Respiratory rate", u: "/min" },
     "monitor:temp": { l: "Temperature", u: "°C" }, "monitor:uop": { l: "Urine output", u: "mL/h" },
     "monitor:lactate": { l: "Lactate", u: "mmol/L" }, "monitor:bp": { l: "Blood pressure", bp: true },
-    "labs:k": { l: "Potassium (K⁺)", u: "mEq/L" }, "fluids:net24h": { l: "Net fluid balance (24h)", u: "mL" }
+    // Every electrolyte on the Lytes screen is tap-to-edit, not just potassium: a tile that shows a
+    // value the clinician cannot correct in place is the reason they went hunting for the Labs form.
+    // domain "labs" routes through the confirm-against-current review sheet, so this adds reach, not
+    // a new way to write an unreviewed value. Units are CONVENTIONAL (Indian), matching what is stored.
+    "labs:k": { l: "Potassium (K⁺)", u: "mEq/L" }, "labs:na": { l: "Sodium (Na⁺)", u: "mEq/L" },
+    "labs:cl": { l: "Chloride (Cl⁻)", u: "mEq/L" }, "labs:hco3": { l: "Bicarbonate (HCO₃⁻)", u: "mEq/L" },
+    "labs:ca": { l: "Calcium", u: "mg/dL" }, "labs:ica": { l: "Ionised calcium", u: "mmol/L" },
+    "labs:mg": { l: "Magnesium", u: "mg/dL" }, "labs:po4": { l: "Phosphate", u: "mg/dL" },
+    "fluids:net24h": { l: "Net fluid balance (24h)", u: "mL" }
   };
   function openQuickVital(key) {
     var spec = QV_SPEC[key]; if (!spec) return;
