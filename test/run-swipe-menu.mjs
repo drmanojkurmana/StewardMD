@@ -79,7 +79,7 @@ try {
   const hw = JSON.parse(await ev(`
     var r = window.SMD_SWIPE_BACK.goBack();
     return JSON.stringify({ ret: r, open: !!document.querySelector('#sbDrawer.open') });`));
-  ok(hw.ret === false && hw.open === false, "goBack() at root still returns false (Android hardware back exits; it does NOT open the menu)");
+  ok(hw.ret === false && hw.open === false, "goBack() at root still returns false (it does NOT open the menu - that is hardwareBack()'s job)");
 
   // 4) off home, the gesture is a BACK — never a menu-open
   const off = JSON.parse(await ev(`

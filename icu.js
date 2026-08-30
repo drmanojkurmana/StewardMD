@@ -326,6 +326,9 @@
   function gcsSave() {
     var t = gcsTotal(); if (t == null) return;
     ingestMonitor({ gcs: t });     // charted like any other vital, then every score recomputes
+    // Opened FROM a score's fill sheet (sfgcs): go back to it with the other answers still typed in,
+    // rather than dropping the clinician on the overview having lost them.
+    if (_sfId) { openScoreFill(_sfId, true); if (window.toast) toast("GCS " + t + (_gcs.vt ? "T" : "") + " recorded"); return; }
     closeForm();
     _active = "overview"; paint();
     if (window.toast) toast("GCS " + t + (_gcs.vt ? "T" : "") + " recorded" + (t <= 8 ? " - 8 or less, check the airway" : ""));
@@ -2997,7 +3000,10 @@
     };
     var body = rows.map(function (r) {
       var m = ms[r.id];
-      if (r.missing && !m) return '<div class="icu-score miss" data-icu-act="calc:' + esc(r.id) + '"><span class="icu-score-n">' + esc(r.label) + '</span><span class="icu-score-need">needs: ' + esc(r.missing.join(", ")) + '</span></div>';
+      // A missing score opens the INLINE fill sheet (scorefill:), not the calculator: it asks only for
+      // what is absent and writes it to the patient, so the score appears here instead of sending the
+      // clinician to a separate screen that computes nothing back onto the record.
+      if (r.missing && !m) return '<div class="icu-score miss" data-icu-act="scorefill:' + esc(r.id) + '"><span class="icu-score-n">' + esc(r.label) + '</span><span class="icu-score-need">tap to add: ' + esc(r.missing.join(", ")) + '</span></div>';
       if (m) return scoreRow(r.id, r.label, m.value, m.unit, m.info, true);
       var iv = r.interp ? String(r.interp).replace(/<[^>]*>/g, "") : "";
       return scoreRow(r.id, r.label, String(r.value), r.unit || "", iv, false);
@@ -3006,6 +3012,170 @@
     var sug = suggest.length ? '<div class="icu-score-sug">Suggested for “' + esc(dx) + '”: ' + suggest.map(function (id) { return '<button type="button" class="icu-score-chip" data-icu-act="calc:' + esc(id) + '">' + esc(scoreCalcTitle(id)) + '</button>'; }).join(" ") + '</div>' : "";
     return '<div class="icu-sec-lbl">' + ico("trend","📊") + ' Scores</div><div class="icu-card">' + body + sug +
       '<p class="icu-doc-sub" style="margin:8px 0 0">Auto-calculated from entered data — tap any score to open the full calculator; your calculated results are saved here. Decision-support only.</p></div>';
+  }
+
+  /* ---- Inline score fill: ask ONLY for what the score is missing ------------------------------
+   * A greyed-out score used to open the full calculator, a different screen with its own inputs that
+   * does not write back to the patient - "when scores are clicked it takes me or redirects me
+   * calculator section why not just ask user to fill what is missing to get the score and once he
+   * fills it give the score then and there".
+   *
+   * The labels come from icu-autoscores.js's __missing lists, which are DISPLAY strings (the same
+   * analyte appears as "bili" in one adapter and "bilirubin" in another). This table is the single
+   * place that turns them into real state fields, and test/run-icu-scorefill.mjs asserts that every
+   * label every adapter can emit is mapped - so a newly added score cannot silently fall back to the
+   * redirect without the test saying so.
+   *
+   * lo/hi are PLAUSIBILITY bounds, not reference ranges. Manual vitals/labs entry normally goes
+   * through the import review sheet (saveForm, BUG #13) because a mistyped K 68 for 6.8 fires real
+   * critical alerts. That sheet works by showing the value against the CURRENT reading - and here
+   * there is none by definition: the value being absent is why the score is greyed out. So the check
+   * moves inline instead of being dropped: a physiologically impossible value is refused with the
+   * reason and nothing is written until it is corrected. */
+  var SCORE_FIELD = {
+    "RR":            { d: "monitor", k: "rr",    l: "Respiratory rate", u: "/min",   lo: 4,   hi: 80 },
+    "SBP":           { d: "monitor", k: "sbp",   l: "Systolic BP",      u: "mmHg",   lo: 40,  hi: 300 },
+    "MAP":           { d: "monitor", k: "map",   l: "Mean arterial pressure", u: "mmHg", lo: 20, hi: 200 },
+    "HR":            { d: "monitor", k: "hr",    l: "Heart rate",       u: "/min",   lo: 20,  hi: 300 },
+    "SPO2":          { d: "monitor", k: "spo2",  l: "SpO₂",        u: "%",      lo: 30,  hi: 100 },
+    "TEMP":          { d: "monitor", k: "temp",  l: "Temperature",      u: "°C", lo: 25, hi: 45 },
+    "temp":          { d: "monitor", k: "temp",  l: "Temperature",      u: "°C", lo: 25, hi: 45 },
+    "Na":            { d: "labs", k: "na",    l: "Sodium",        u: "mEq/L", lo: 90,  hi: 200 },
+    "NA":            { d: "labs", k: "na",    l: "Sodium",        u: "mEq/L", lo: 90,  hi: 200 },
+    "K":             { d: "labs", k: "k",     l: "Potassium",     u: "mEq/L", lo: 1,   hi: 10 },
+    "CL":            { d: "labs", k: "cl",    l: "Chloride",      u: "mEq/L", lo: 60,  hi: 160 },
+    "HCO3":          { d: "labs", k: "hco3",  l: "Bicarbonate",   u: "mEq/L", lo: 2,   hi: 60 },
+    "glucose":       { d: "labs", k: "glu",   l: "Glucose",       u: "mg/dL", lo: 10,  hi: 1500 },
+    "calcium":       { d: "labs", k: "ca",    l: "Calcium",       u: "mg/dL", lo: 3,   hi: 20 },
+    "albumin":       { d: "labs", k: "alb",   l: "Albumin",       u: "g/dL",  lo: 0.5, hi: 7 },
+    "creatinine":    { d: "labs", k: "creat", l: "Creatinine",    u: "mg/dL", lo: 0.1, hi: 25 },
+    "creat":         { d: "labs", k: "creat", l: "Creatinine",    u: "mg/dL", lo: 0.1, hi: 25 },
+    "urea":          { d: "labs", k: "urea",  l: "Urea",          u: "mg/dL", lo: 2,   hi: 400 },
+    "bilirubin":     { d: "labs", k: "bili",  l: "Bilirubin",     u: "mg/dL", lo: 0.1, hi: 60 },
+    "bili":          { d: "labs", k: "bili",  l: "Bilirubin",     u: "mg/dL", lo: 0.1, hi: 60 },
+    "INR":           { d: "labs", k: "inr",   l: "INR",           u: "",      lo: 0.5, hi: 15 },
+    "inr":           { d: "labs", k: "inr",   l: "INR",           u: "",      lo: 0.5, hi: 15 },
+    "platelets":     { d: "labs", k: "plt",   l: "Platelets",     u: "x10⁹/L", lo: 1, hi: 2000 },
+    "WBC":           { d: "labs", k: "wbc",   l: "White cell count", u: "x10⁹/L", lo: 0.1, hi: 300 },
+    "haematocrit":   { d: "labs", k: "hct",   l: "Haematocrit",   u: "%",     lo: 5,   hi: 70 },
+    "AST":           { d: "labs", k: "ast",   l: "AST",           u: "U/L",   lo: 3,   hi: 20000 },
+    "ALT":           { d: "labs", k: "alt",   l: "ALT",           u: "U/L",   lo: 3,   hi: 20000 },
+    "PaO₂":     { d: "abg", k: "pao2",  l: "PaO₂",     u: "mmHg",  lo: 20,  hi: 700 },
+    "FiO₂":     { d: "abg", k: "fio2",  l: "FiO₂",     u: "%",     lo: 21,  hi: 100 },
+    "pH":            { d: "abg", k: "ph",    l: "pH",            u: "",      lo: 6.5, hi: 7.9 },
+    "PaCO₂":    { d: "abg", k: "paco2", l: "PaCO₂",    u: "mmHg",  lo: 10,  hi: 150 },
+    "age":           { d: "patient", k: "age", l: "Age",         u: "years", lo: 0,   hi: 120 }
+  };
+  // PaO2/FiO2 is DERIVED, so asking for it directly would be unanswerable - collect its two parts.
+  var SCORE_FIELD_SPLIT = { "PaO₂/FiO₂": ["PaO₂", "FiO₂"] };
+  function scoreNeeds(missing) {
+    var out = { fields: [], gcs: false, unmapped: [] }, seen = {};
+    (missing || []).forEach(function (lbl) {
+      if (lbl === "GCS") { out.gcs = true; return; }                 // has its own E/V/M sheet
+      (SCORE_FIELD_SPLIT[lbl] || [lbl]).forEach(function (one) {
+        var f = SCORE_FIELD[one];
+        if (!f) { if (out.unmapped.indexOf(one) < 0) out.unmapped.push(one); return; }
+        var key = f.d + ":" + f.k; if (seen[key]) return; seen[key] = 1;
+        out.fields.push(f);
+      });
+    });
+    return out;
+  }
+  // The full calculator - still the right answer for what cannot be filled from a number box
+  // (an ascites/encephalopathy grade, or APACHE's collapsed "full physiology panel").
+  function openScoreCalc(id) {
+    var scp = (STATE.scores || []).filter(function (x) { return x.id === id && x.inputs; })[0];
+    try {
+      if (window.MEDCALC && MEDCALC.open) {
+        MEDCALC.open(id, scp ? scp.inputs : undefined, icuStoreCalcResult);
+        var mc = document.getElementById("mcOverlay");
+        if (mc) mc.style.zIndex = "10030";   // lift above #icuRoot (z 10000), else it opens hidden behind
+      }
+    } catch (e) {}
+  }
+  var _sfId = null, _sfVals = {}, _sfErr = {};
+  function scoreRowById(id) { return (_raw.scores || []).filter(function (x) { return x.id === id; })[0] || null; }
+  function scoreFillHTML(row, need) {
+    var body = need.fields.map(function (f) {
+      var key = f.d + ":" + f.k, err = _sfErr[key];
+      return '<div class="icu-fld"><label for="sf-' + esc(f.d + "-" + f.k) + '">' + esc(f.l) + (f.u ? " (" + esc(f.u) + ")" : "") + '</label>' +
+        '<input id="sf-' + esc(f.d + "-" + f.k) + '" type="number" step="any" inputmode="decimal" autocomplete="off" data-sf="' + esc(key) + '"' +
+          ' value="' + esc(_sfVals[key] == null ? "" : _sfVals[key]) + '"' + (err ? ' style="border-color:var(--danger)"' : "") + '>' +
+        (err ? '<div style="font:600 11px var(--font);color:var(--danger);margin-top:4px">' + esc(err) + '</div>' : "") + '</div>';
+    }).join("");
+    var gcsBtn = need.gcs
+      ? '<div class="icu-fld" style="grid-column:1/-1"><label>Glasgow Coma Scale</label>' +
+        '<button class="icu-btn ghost" data-icu-act="sfgcs" style="width:auto;margin:0;padding:9px 13px;font-size:12.5px">' +
+        ico("pulse", "🧠") + ' Score GCS (E / V / M)</button>' +
+        '<div style="font:600 11px var(--font);color:var(--muted);margin-top:5px">Scored from eye, verbal and motor response - anything typed here is kept.</div></div>'
+      : "";
+    var rest = need.unmapped.length
+      ? '<p class="icu-doc-sub" style="margin:10px 2px 0">' + esc(row.label) + ' also needs ' + esc(need.unmapped.join(", ")) +
+        ', which is not a single number. <button type="button" class="icu-score-chip" data-icu-act="sfcalc">Open the full calculator</button></p>'
+      : "";
+    return '<div class="icu-sheet"><h3>' + ico("trend", "📊") + " " + esc(row.label) + '</h3>' +
+      '<p class="icu-doc-sub" style="grid-column:1/-1;margin:0 0 4px">Fill what is missing and the score is calculated here. Values are recorded on this patient.</p>' +
+      body + gcsBtn +
+      '<button class="icu-btn" data-icu-act="sfsave">Calculate ' + esc(row.label) + '</button>' +
+      '<button class="icu-btn ghost" data-icu-act="closeform">Cancel</button>' + rest + '</div>';
+  }
+  function sfCollect() {
+    if (!modalEl) return;
+    modalEl.querySelectorAll("[data-sf]").forEach(function (el) { _sfVals[el.getAttribute("data-sf")] = el.value; });
+  }
+  function openScoreFill(id, keepVals) {
+    var row = scoreRowById(id);
+    if (!row || !row.missing) { openScoreCalc(id); return; }
+    var need = scoreNeeds(row.missing);
+    if (!need.fields.length && !need.gcs) { openScoreCalc(id); return; }   // nothing a number box can answer
+    if (!keepVals) { _sfVals = {}; _sfErr = {}; }
+    _sfId = id;
+    ensureModal();
+    modalEl.innerHTML = scoreFillHTML(row, need);
+    modalEl.classList.add("on");
+    var first = modalEl.querySelector("[data-sf]");
+    if (first) setTimeout(function () { try { first.focus(); } catch (e) {} }, 40);
+  }
+  function scoreFillSave() {
+    var id = _sfId, row = scoreRowById(id); if (!row) { closeForm(); return; }
+    var need = scoreNeeds(row.missing || []);
+    sfCollect();
+    var byDomain = {}, bad = false; _sfErr = {};
+    need.fields.forEach(function (f) {
+      var key = f.d + ":" + f.k, raw = String(_sfVals[key] == null ? "" : _sfVals[key]).trim();
+      if (!raw) return;                                     // blank = not answered; handled below
+      var v = num(raw);
+      if (v == null || isNaN(v)) { _sfErr[key] = "Enter a number."; bad = true; return; }
+      if (v < f.lo || v > f.hi) {
+        _sfErr[key] = f.l + " " + v + (f.u ? " " + f.u : "") + " is outside the possible range (" + f.lo + "-" + f.hi + "). Check the value.";
+        bad = true; return;
+      }
+      (byDomain[f.d] = byDomain[f.d] || {})[f.k] = v;
+    });
+    if (bad) { modalEl.innerHTML = scoreFillHTML(row, need); return; }
+    if (!Object.keys(byDomain).length && !need.gcs) { if (window.toast) toast("Enter at least one value"); return; }
+
+    if (byDomain.monitor) ingestMonitor(byDomain.monitor);
+    if (byDomain.labs) ingestLabs(byDomain.labs);
+    if (byDomain.abg) { Object.keys(byDomain.abg).forEach(function (k) { STATE.abg[k] = byDomain.abg[k]; }); STATE.abg.ts = nowTs(); }
+    if (byDomain.patient) ingestPatient(byDomain.patient);
+    // Same provenance tag manual entry gets elsewhere, so Ward Sync records a conflict rather than
+    // silently overwriting what the clinician just typed.
+    var mts = nowTs();
+    ["monitor", "labs", "abg"].forEach(function (d) {
+      if (!byDomain[d]) return;
+      Object.keys(byDomain[d]).forEach(function (k) { STATE.src[k] = { source: "Manual", ts: mts }; });
+    });
+    try { recompute(_raw); } catch (e) {}
+
+    var after = scoreRowById(id);
+    closeForm(); _sfId = null; _sfVals = {}; _sfErr = {};
+    _active = "overview"; _ws = wsOf("overview"); paint();
+    if (after && after.missing) {
+      if (window.toast) toast(row.label + " still needs: " + after.missing.join(", "));
+    } else if (after && after.value != null && window.toast) {
+      toast(row.label + " = " + after.value + (after.unit ? " " + after.unit : ""));
+    }
   }
 
   var RENDER = {
@@ -3129,7 +3299,36 @@
         return out + '<div class="icu-card"><div class="icu-empty">No electrolyte values entered yet.</div>' +
           '<button class="icu-btn" data-icu-act="edit:labs">' + ico("edit","✎") + ' Enter electrolytes</button></div>';
       }
-      var grid = '<div class="icu-vitals">' + Object.keys(map).map(function (k) { return vitalCard(labels[k], map[k].v, "", map[k].s); }).join("") + "</div>";
+      /* UNITS ON EVERY TILE, AND EVERY TILE EDITABLE.
+       * The tiles used to render with unit "" - eight bare numbers, where telling a Ca in mg/dL from
+       * an ionised Ca in mmol/L was left to the reader on the one screen where that distinction
+       * decides a dose. They were also inert, so correcting a value meant leaving for the Labs form.
+       * Tapping one now opens the single-value editor (labs -> the confirm-against-current review
+       * sheet, so nothing is written unreviewed). */
+      var UNIT = { na: "mEq/L", k: "mEq/L", cl: "mEq/L", hco3: "mEq/L", ca: "mg/dL", ica: "mmol/L", mg: "mg/dL", po4: "mg/dL" };
+      var grid = '<div class="icu-vitals">' + keys.map(function (k) {
+        return vitalCard(labels[k], map[k].v, UNIT[k], map[k].s, null, "labs:" + k);
+      }).join("") + "</div>";
+      /* WHAT NEEDS ATTENTION, BEFORE THE GRID. Eight equally-weighted tiles make the reader scan all
+       * of them to find the one that matters; the abnormal ones are named here so the answer is the
+       * first thing on screen. Colour is never the only carrier - the names are written out. */
+      var crit = keys.filter(function (k) { return map[k].s === "crit"; });
+      var warn = keys.filter(function (k) { return map[k].s === "warn"; });
+      var measured = keys.filter(function (k) { return map[k].v != null && map[k].v !== ""; });
+      var chip = function (c, txt) {
+        return '<span style="display:inline-flex;align-items:center;gap:6px;padding:5px 10px;border-radius:999px;' +
+          'background:color-mix(in srgb,' + c + ' 14%,transparent);color:' + c + ';font:800 11.5px var(--font)">' +
+          '<span style="width:7px;height:7px;border-radius:50%;background:' + c + '"></span>' + esc(txt) + '</span>';
+      };
+      var nm = function (arr) { return arr.map(function (k) { return labels[k]; }).join(", "); };
+      var summary = '<div class="icu-card" style="display:flex;flex-wrap:wrap;gap:7px;align-items:center;padding:11px 13px">' +
+        (crit.length ? chip("var(--danger)", crit.length + " critical: " + nm(crit)) : "") +
+        (warn.length ? chip("var(--warn)", warn.length + " abnormal: " + nm(warn)) : "") +
+        (!crit.length && !warn.length ? chip("var(--ok)", "All " + measured.length + " recorded electrolytes within range") : "") +
+        (measured.length < keys.length
+          ? '<span style="color:var(--muted);font:600 11.5px var(--font)">' + (keys.length - measured.length) + ' not recorded</span>' : "") +
+        '</div>';
+      grid = summary + grid;
       // provenance line — where these electrolyte values came from + freshness
       var srcs = {}; keys.forEach(function (k) { var s = (_raw.src || {})[k]; if (s && L[k] != null) srcs[s.source] = Math.max(srcs[s.source] || 0, s.ts || 0); });
       var srcLine = Object.keys(srcs).length ? '<div class="icu-src">' + Object.keys(srcs).map(function (s) { return ico("link","📎") + " " + esc(s) + " · " + fmtAgo(srcs[s]); }).join("  ·  ") + "</div>" : "";
@@ -3142,6 +3341,14 @@
       var res = [];
       try { if (window.ELYTE && ELYTE.analyze) res = ELYTE.analyze(L, pt, "conventional"); } catch (e) { res = []; }
       var COLOR = { crit: "var(--danger)", red: "var(--danger)", amber: "var(--warn)", ok: "var(--ok)" };
+      // Most urgent first. ELYTE returns its analyzers in a fixed analyte order, so a critical
+      // potassium could sit below three normal results and be found only by scrolling. Stable within
+      // a level (sort is not guaranteed stable across engines for equal keys, so rank then index).
+      var RANK = { crit: 0, red: 1, amber: 2, ok: 3 };
+      res = res.map(function (r, i) { return { r: r, i: i }; }).sort(function (a, b) {
+        var ra = RANK[a.r.level] == null ? 4 : RANK[a.r.level], rb = RANK[b.r.level] == null ? 4 : RANK[b.r.level];
+        return ra !== rb ? ra - rb : a.i - b.i;
+      }).map(function (x) { return x.r; });
       var cards = res.map(function (r) {
         var c = COLOR[r.level] || "var(--muted)", open = !!_lytesExp[r.name];
         return '<div class="icu-card" style="padding:0;overflow:hidden;border-left:3px solid ' + c + '">' +
@@ -3191,11 +3398,18 @@
     // timeline (group). Stored in ICU_STATE.treatment so it auto-persists + mirrors to the whole team.
     treatment: function () {
       var tx = _raw.treatment || [];
+      /* CASESHEET ORDER: the add control comes FIRST and the running drugs are listed BELOW it, the
+       * way a ward casesheet reads. The list used to sit above the button, so after adding a drug the
+       * doctor looked under the button and saw only the preset bar - "added treatment is only added in
+       * timeline but not in treatment section below the add treatment button". */
       var out = '<div class="icu-sec-lbl">' + ico("syringe", "💊") + ' Current treatment' +
-        (tx.length ? ' <span style="color:var(--muted);font-weight:600">· ' + tx.length + ' item' + (tx.length === 1 ? "" : "s") + '</span>' : "") + '</div>';
+        (tx.length ? ' <span style="color:var(--muted);font-weight:600">· ' + tx.length + ' running</span>' : "") + '</div>' +
+        '<button class="icu-btn" data-icu-act="txadd">＋ Add treatment</button>' +
+        txPresetBarHTML(tx);
       if (!tx.length) {
-        out += '<div class="icu-card"><div class="icu-empty">No treatment recorded yet. Tap ＋ Add treatment to add antibiotics, fluids or supportive drugs — from the drug database or your own.</div></div>';
+        out += '<div class="icu-card" style="margin-top:12px"><div class="icu-empty">No treatment recorded yet. Tap ＋ Add treatment to add antibiotics, fluids or supportive drugs — from the drug database or your own.</div></div>';
       } else {
+        out += '<div class="icu-sec-lbl" style="margin:16px 0 2px;font-size:12px;color:var(--muted)">Drugs running now</div>';
         TX_CATS.forEach(function (c) {
           var items = tx.filter(function (x) { return (x.cat || "other") === c.k; });
           if (!items.length) return;
@@ -3207,15 +3421,14 @@
                 '<span style="flex:0 0 4px;align-self:stretch;border-radius:3px;background:' + c.color + '"></span>' +
                 '<div style="flex:1;min-width:0"><div style="font:800 14.5px var(--font);color:var(--ink)">' + esc(x.name) + '</div>' +
                 (dsg ? '<div style="font-family:var(--mono,monospace);font-size:12.5px;color:var(--primary);margin-top:2px">' + esc(dsg) + '</div>' : "") +
-                (x.by ? '<div style="font:600 10.5px var(--font);color:var(--muted);margin-top:3px">added by ' + esc(x.by) + '</div>' : "") + '</div>' +
+                '<div style="font:600 10.5px var(--font);color:var(--muted);margin-top:3px">' +
+                  [(x.by ? "added by " + esc(x.by) : ""), (x.ts ? "running since " + esc(fmtAgo(x.ts)) : "")].filter(Boolean).join(" · ") + '</div></div>' +
                 '<button class="icu-tip" data-icu-act="txdel:' + encodeURIComponent(x.id) + '" title="Remove treatment" aria-label="Remove ' + esc(x.name) + '" style="color:var(--danger);font-size:15px;flex:0 0 auto">' + ico("trash","🗑") + '</button>' +
               '</div>';
             }).join("") + '</div>';
         });
       }
-      out += '<button class="icu-btn" data-icu-act="txadd" style="margin-top:12px">＋ Add treatment</button>' +
-        txPresetBarHTML(tx) +
-        '<p class="icu-doc-sub" style="margin:10px 2px 0;text-align:center">Any doctor — consultant or resident — can add or remove treatment. Every change is recorded on the patient timeline.</p>';
+      out += '<p class="icu-doc-sub" style="margin:12px 2px 0;text-align:center">Any doctor — consultant or resident — can add or remove treatment. Every change is recorded on the patient timeline.</p>';
       return out;
     },
     protocols: function () {
@@ -4206,6 +4419,16 @@
   // echo-suppression hash so the resulting reactive notify() does NOT bounce back to Firestore.
   function grpApplyState(state, id) {
     try {
+      /* UNSYNCED LOCAL EDITS ALWAYS WIN. The mirror is debounced by 1500ms, so for that window a local
+       * change exists ONLY on this device while the shared doc still holds the previous state. Any
+       * snapshot arriving in that window has a different hash and used to overwrite the edit that had
+       * just been made. Reported as "added treatment is only added in timeline but not in the treatment
+       * section": txLogTimeline() writes its event IMMEDIATELY while the drug itself waits for the
+       * debounce, so the timeline entry survived and the drug vanished. This affects every field, not
+       * just treatment - treatment is simply where the asymmetry is visible.
+       * Skipping is safe: our write lands when the debounce fires and the next snapshot carries the
+       * merged result, so a genuine remote change is applied a moment later rather than lost. */
+      if (_grpMirrorT) return;
       // Defense-in-depth: never let a BLANK/stale remote snapshot wipe good local data for the SAME
       // patient (e.g. a Ward-Sync fill still queued to sync up). If the incoming remote state has no
       // clinical content but we currently hold some for this id, keep local and let the mirror push it.
@@ -5918,7 +6141,15 @@
     "monitor:spo2": { l: "SpO₂", u: "%" }, "monitor:rr": { l: "Respiratory rate", u: "/min" },
     "monitor:temp": { l: "Temperature", u: "°C" }, "monitor:uop": { l: "Urine output", u: "mL/h" },
     "monitor:lactate": { l: "Lactate", u: "mmol/L" }, "monitor:bp": { l: "Blood pressure", bp: true },
-    "labs:k": { l: "Potassium (K⁺)", u: "mEq/L" }, "fluids:net24h": { l: "Net fluid balance (24h)", u: "mL" }
+    // Every electrolyte on the Lytes screen is tap-to-edit, not just potassium: a tile that shows a
+    // value the clinician cannot correct in place is the reason they went hunting for the Labs form.
+    // domain "labs" routes through the confirm-against-current review sheet, so this adds reach, not
+    // a new way to write an unreviewed value. Units are CONVENTIONAL (Indian), matching what is stored.
+    "labs:k": { l: "Potassium (K⁺)", u: "mEq/L" }, "labs:na": { l: "Sodium (Na⁺)", u: "mEq/L" },
+    "labs:cl": { l: "Chloride (Cl⁻)", u: "mEq/L" }, "labs:hco3": { l: "Bicarbonate (HCO₃⁻)", u: "mEq/L" },
+    "labs:ca": { l: "Calcium", u: "mg/dL" }, "labs:ica": { l: "Ionised calcium", u: "mmol/L" },
+    "labs:mg": { l: "Magnesium", u: "mg/dL" }, "labs:po4": { l: "Phosphate", u: "mg/dL" },
+    "fluids:net24h": { l: "Net fluid balance (24h)", u: "mL" }
   };
   function openQuickVital(key) {
     var spec = QV_SPEC[key]; if (!spec) return;
@@ -8090,7 +8321,13 @@
       case "gcspick": { var _gp = arg.split(":"); _gcs[_gp[0]] = parseInt(_gp[1], 10); paintGcs(); break; }
       case "gcsvt": _gcs.vt = !_gcs.vt; if (_gcs.vt) _gcs.v = 1; paintGcs(); break;
       case "gcssave": gcsSave(); break;
-      case "calc": { var _scp = (STATE.scores || []).filter(function (x) { return x.id === arg && x.inputs; })[0]; try { if (window.MEDCALC && MEDCALC.open) { MEDCALC.open(arg, _scp ? _scp.inputs : undefined, icuStoreCalcResult); var _mc = document.getElementById("mcOverlay"); if (_mc) _mc.style.zIndex = "10030"; /* lift the calculator ABOVE #icuRoot (z 10000), else it opens hidden behind the dashboard */ } } catch (e) {} break; }
+      case "calc": openScoreCalc(arg); break;
+      // A score that cannot compute yet: ask for its missing inputs here (openScoreFill falls back to
+      // the full calculator when nothing missing is answerable with a number).
+      case "scorefill": openScoreFill(arg); break;
+      case "sfsave": scoreFillSave(); break;
+      case "sfcalc": { var _sfc = _sfId; closeForm(); _sfId = null; openScoreCalc(_sfc); break; }
+      case "sfgcs": sfCollect(); openGcsCalc(); break;   // keeps what is typed; gcsSave returns here
       case "tab": if (icuV2On()) _screen = "patient"; _active = arg; _ws = wsOf(arg); _wsLast[_ws] = arg; paint(); var sc = rootEl && rootEl.querySelector(".icu-scroll"); if (sc) sc.scrollTop = 0; break;
       case "ws": { if (icuV2On()) _screen = "patient"; _ws = arg; var _m = wsMembers(wsById(arg)), _l = _wsLast[arg]; _active = (_l && _m.indexOf(_l) >= 0) ? _l : _m[0]; paint(); var sc2 = rootEl && rootEl.querySelector(".icu-scroll"); if (sc2) sc2.scrollTop = 0; break; }
       // ---- ICU v2 (smd_icu_v2) — board / alerts / team / admit / filter, all flag-only ----
@@ -8450,6 +8687,33 @@
     }
     return out;
   }
+  /* THE REAL DRUG DATABASE. MEDDRUGS._list above is only the 72-drug on-device ward formulary, which
+   * is why most drugs "were not in the database" when searched here. The Drug Index the prescription
+   * pad and the Drugs Database browser use is SERVER-backed - MEDAPI.searchCompositions() - covering
+   * every molecule with its brands. Both are used: the local formulary answers instantly and is the
+   * only thing that works offline, and the server's hits are merged in when they arrive.
+   * Debounced, and a reply for a query the doctor has already typed past is discarded. */
+  var _txLocal = [], _txRemote = [], _txRemoteQ = "", _txRemoteT = null;
+  function txRemoteSearch(q) {
+    q = String(q || "").trim();
+    if (q.length < 2 || !window.MEDAPI || !MEDAPI.searchCompositions) return;
+    if (q === _txRemoteQ) return;                       // already fetched / in flight for this query
+    _txRemoteQ = q;
+    if (_txRemoteT) { try { clearTimeout(_txRemoteT); } catch (e) {} }
+    _txRemoteT = setTimeout(function () {
+      _txRemoteT = null;
+      try {
+        MEDAPI.searchCompositions(q, 8).then(function (d) {
+          if (q !== _txRemoteQ) return;                 // a newer query has been typed - drop this reply
+          _txRemote = ((d && d.results) || []).map(function (x) {
+            return { name: x.composition, dose: "", cls: x["class"] || "",
+              cat: txGuessCat({ generic: x.composition, cls: x["class"] }), remote: true };
+          });
+          txPaintSug();
+        }, function () {});
+      } catch (e) {}
+    }, 220);
+  }
   function txGuessCat(d) {
     var s = ((d.cat || "") + " " + (d.cls || "") + " " + (d.generic || "")).toLowerCase();
     if (/antibiot|antimicrob|penicillin|cephalosporin|carbapenem|glycopeptide|macrolide|quinolone|fluoroquinolone|aminoglycoside|antifungal|antiviral|nitroimidazole|metronidazole|linezolid|colistin/.test(s)) return "abx";
@@ -8507,15 +8771,29 @@
     if (q) { q.oninput = function () { if (_txDraft) _txDraft.name = this.value; txRenderSug(this.value); }; txRenderSug(d.name); setTimeout(function () { try { q.focus(); } catch (e) {} }, 40); }
   }
   function txRenderSug(q) {
+    _txLocal = txSearchDrugs(q);
+    if (String(q || "").trim().length < 2) { _txRemote = []; _txRemoteQ = ""; }   // cleared box: drop stale hits
+    txRemoteSearch(q);
+    txPaintSug();
+  }
+  // Local + server hits, de-duped by name (the formulary wins, it carries a dose string).
+  function txPaintSug() {
     var box = modalEl && modalEl.querySelector("#txsug"); if (!box) return;
-    _txHits = txSearchDrugs(q);
+    var seen = {}; _txHits = [];
+    _txLocal.concat(_txRemote).forEach(function (h) {
+      var k = String(h.name || "").trim().toLowerCase();
+      if (!k || seen[k] || _txHits.length >= 8) return;
+      seen[k] = 1; _txHits.push(h);
+    });
     if (!_txHits.length) { box.innerHTML = ""; return; }
     box.innerHTML = '<div class="icu-card" style="padding:2px 0;margin:0">' + _txHits.map(function (h, i) {
       var col = "var(--muted)"; for (var j = 0; j < TX_CATS.length; j++) if (TX_CATS[j].k === h.cat) col = TX_CATS[j].color;
       return '<button data-icu-act="txpick:' + i + '" style="width:100%;text-align:left;background:none;border:none;border-bottom:1px solid var(--border);padding:9px 12px;cursor:pointer;color:var(--ink)">' +
         '<span style="float:right;font:700 9.5px var(--font);color:#fff;background:' + col + ';border-radius:6px;padding:2px 6px">' + esc(txCatLabel(h.cat)) + '</span>' +
         '<div style="font:700 13.5px var(--font)">' + esc(h.name) + '</div>' +
-        (h.cls ? '<div style="font:600 11px var(--font);color:var(--muted)">' + esc(h.cls) + (h.dose ? " · " + esc(h.dose) : "") + '</div>' : "") + '</button>';
+        (h.cls || h.remote ? '<div style="font:600 11px var(--font);color:var(--muted)">' +
+          (h.cls ? esc(h.cls) + (h.dose ? " · " + esc(h.dose) : "") : "") +
+          (h.remote ? (h.cls ? " · " : "") + "Drug Index" : "") + '</div>' : "") + '</button>';
     }).join("") + '</div>';
   }
   function txSyncInputs() {

@@ -149,7 +149,244 @@
     });
     return { name: name, age: age, dx: dx, complaints: cc, vitals: vitals, lines: lines };
   }
-  function rxPrintHTML(topic, regNo) {
+  /* ---- Verifiable prescriptions (habit-forming drugs + antibiotics) --------------------------
+   * A printed prescription is trivially forged: a name, a registration number and a drug list on
+   * paper. For the two classes where that does the most harm, the sheet now carries an opaque code
+   * and a QR pointing at stewardmd.in/verify/<code>, and the server holds the authoritative record
+   * of WHO wrote WHICH drugs and until when.
+   *
+   * The record is minted server-side from the signed-in doctor's own verified token claims, never
+   * from anything this file sends (functions/_rx_store.js), and it holds no patient data at all -
+   * which is what lets the verify page be public. Note what is NOT posted below: no name, no age.
+   *
+   * FAIL-OPEN, DELIBERATELY. If the app is offline or the issue call fails, the prescription still
+   * prints, just without a QR. A doctor at a bedside must never be unable to print because a network
+   * is down, and an unverifiable prescription is exactly what exists today - so this can only ever
+   * add assurance, never withhold a prescription.
+   */
+  function rxvOn() { try { return !!(window.SMD_RX_VALIDITY && window.SMD_PGLOG_QR); } catch (e) { return false; } }
+  function rxIdToken() {
+    try {
+      var u = window.SMD_AUTH && window.SMD_AUTH.currentUser;
+      if (u && u.getIdToken) return u.getIdToken();
+    } catch (e) {}
+    return Promise.resolve("");
+  }
+  // Resolves to a record {code, validUntil, ...} when this prescription is in scope, else null.
+  // Never rejects: every failure path prints an ordinary prescription.
+  function rxIssueVerification(lines) {
+    if (!rxvOn()) return Promise.resolve(null);
+    var drugs = (lines || []).filter(function (L) { return !L.advice && L.drug; }).map(function (L) {
+      return { name: L.drug, dose: L.dose || "", freq: L.freq || "", duration: L.duration || "" };
+    });
+    if (!drugs.length) return Promise.resolve(null);
+    try { if (!SMD_RX_VALIDITY.requiresVerification(drugs)) return Promise.resolve(null); }
+    catch (e) { return Promise.resolve(null); }
+    return rxIdToken().then(function (tok) {
+      if (!tok) return null;                       // not signed in: print without a QR
+      return fetch("/api/rx/issue", {
+        method: "POST",
+        headers: { "content-type": "application/json", "Authorization": "Bearer " + tok },
+        body: JSON.stringify({ drugs: drugs, country: "IN" })
+      }).then(function (r) { return r.ok ? r.json() : null; });
+    }).then(function (d) { return (d && d.ok && d.issued) ? d : null; }).catch(function () { return null; });
+  }
+  // Why this sheet printed without a QR. rxIssueVerification collapses every failure to null, which
+  // is right for printing but leaves the prescriber holding a sheet with no code and no reason - the
+  // one case that reads as a bug when it is usually the scope rule working correctly. Names which it
+  // was, and never blocks the print.
+  function rxNoQrWhy(lines) {
+    if (!rxvOn()) return "";
+    var drugs = (lines || []).filter(function (L) { return !L.advice && L.drug; })
+      .map(function (L) { return { name: L.drug, dose: L.dose || "", freq: L.freq || "", duration: L.duration || "" }; });
+    if (!drugs.length) return "";
+    try { if (!SMD_RX_VALIDITY.requiresVerification(drugs)) return "Printed without a QR - verification covers antibiotics, habit-forming and scheduled drugs."; }
+    catch (e) { return ""; }
+    return "Printed without a QR - the verification service could not be reached. The prescription is still valid.";
+  }
+
+  // The block printed on the sheet. No network at print time: the SVG is generated on device by the
+  // same encoder the PG logbook prints with (pglog-qr.js), so this works on a ward with no signal.
+  function rxQrBlock(rec) {
+    if (!rec || !rec.code) return "";
+    var url = "https://stewardmd.in/verify/" + String(rec.code).replace(/[^0-9A-Za-z-]/g, "");
+    var svg = "";
+    try { svg = SMD_PGLOG_QR.toSvg(url, { scale: 3, label: "Verify prescription " + rec.code }); } catch (e) { svg = ""; }
+    var until = "";
+    try { until = rec.validUntil ? new Date(rec.validUntil).toISOString().slice(0, 10) : ""; } catch (e) {}
+    return '<div class="rxv">' + svg +
+      '<div class="rxv-m"><div class="rxv-c">' + esc(rec.code) + '</div>' +
+      '<div class="rxv-l">Scan to verify this prescription</div>' +
+      '<div class="rxv-u">stewardmd.in/verify</div>' +
+      (until ? '<div class="rxv-l">Valid until ' + esc(until) + '</div>' : '') + '</div></div>';
+  }
+
+  /* ---- Verify a prescription, inside the app ------------------------------------------------
+   * The QR on a printed sheet is scanned with an ordinary phone camera, which opens
+   * stewardmd.in/verify/<code> — that path needs nothing from us. This is the other half: a doctor
+   * or pharmacist ALREADY IN the app who has a code in front of them and wants to check it without
+   * leaving for a browser.
+   *
+   * Reads the same public endpoint the web page does (/api/rx/v/<code>), so the two can never give
+   * different answers. No sign-in: verification is public by design (functions/_rx_public.js), and
+   * requiring a login here would make the in-app check useless to the pharmacist it is for. */
+  function injectVerifyCSS() {
+    if (document.getElementById("rxvCss")) return;
+    var s = document.createElement("style"); s.id = "rxvCss";
+    s.textContent =
+      ".rxv-ov{position:fixed;inset:0;z-index:16200;background:rgba(15,23,42,.5);display:flex;align-items:flex-end;justify-content:center}" +
+      ".rxv-sh{background:var(--hpanel,#fff);color:var(--hink,#0f172a);width:100%;max-width:560px;max-height:88vh;overflow:auto;border-radius:18px 18px 0 0;padding:16px 16px 26px}" +
+      ".rxv-h{display:flex;align-items:center;justify-content:space-between;font:800 16px var(--hfont);margin-bottom:2px}" +
+      ".rxv-x{border:0;background:transparent;cursor:pointer;color:var(--hmut,#64748b);font-size:20px;line-height:1;padding:4px 6px}" +
+      ".rxv-sub{font:600 12.5px var(--hfont);color:var(--hmut,#64748b);margin:0 0 12px}" +
+      ".rxv-in{display:flex;gap:8px}" +
+      ".rxv-in input{flex:1;min-width:0;padding:13px 13px;font:700 15px ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.06em;border:1px solid var(--hline,#e2e8f0);border-radius:12px;background:var(--hbg,#fff);color:inherit}" +
+      ".rxv-go{padding:13px 18px;border:0;border-radius:12px;background:#0e6e63;color:#fff;font:800 14px var(--hfont);cursor:pointer}" +
+      // Scan is the primary way in on a phone, so it is full-width and above the typed field.
+      ".rxv-scan{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;min-height:48px;margin:0 0 10px;padding:13px;border:0;border-radius:12px;background:#0e6e63;color:#fff;font:800 14.5px var(--hfont);cursor:pointer;transition:transform .12s}" +
+      ".rxv-scan:active{transform:scale(.98)}.rxv-scan svg{width:19px;height:19px;stroke:currentColor;fill:none}" +
+      ".rxv-scan:disabled{opacity:.6}" +
+      ".rxv-go:disabled{opacity:.55}" +
+      ".rxv-badge{border-radius:13px;padding:14px 15px;color:#fff;margin:14px 0 4px}" +
+      ".rxv-badge b{display:block;font:800 17px var(--hfont)}.rxv-badge p{margin:6px 0 0;font:600 12.5px var(--hfont);opacity:.95}" +
+      ".rxv-card{border:1px solid var(--hline,#e2e8f0);border-radius:13px;padding:2px 14px;margin-top:10px}" +
+      ".rxv-r{display:flex;gap:12px;padding:10px 0;border-bottom:1px solid var(--hline,#eef2f1)}.rxv-r:last-child{border-bottom:0}" +
+      ".rxv-k{flex:0 0 42%;font:600 12.5px var(--hfont);color:var(--hmut,#64748b)}.rxv-v{flex:1;font:700 13.5px var(--hfont);word-break:break-word}" +
+      ".rxv-ok{color:#0f7a4a}.rxv-no{color:#9b1c1c}" +
+      ".rxv-d{padding:10px 0;border-bottom:1px solid var(--hline,#eef2f1)}.rxv-d:last-child{border-bottom:0}" +
+      ".rxv-d b{font:800 14px var(--hfont)}.rxv-d span{display:block;font:600 12px var(--hfont);color:var(--hmut,#64748b)}" +
+      ".rxv-note{font:600 11.5px var(--hfont);color:var(--hmut,#64748b);margin-top:12px;line-height:1.5}";
+    document.head.appendChild(s);
+  }
+  var RXV_TONE = {
+    ACTIVE:   { bg: "#0f7a4a", t: "Valid prescription", s: "Issued by the prescriber below and still within its validity period." },
+    EXPIRED:  { bg: "#8a5a00", t: "Expired", s: "Genuine, but past its validity date. Do not dispense against it." },
+    REVOKED:  { bg: "#9b1c1c", t: "Withdrawn by the prescriber", s: "The prescriber withdrew this prescription. Do not dispense against it." },
+    ARCHIVED: { bg: "#4a5568", t: "Archived", s: "Beyond its retention window and no longer active." },
+    not_found:{ bg: "#4a5568", t: "Not found", s: "No prescription carries that code. Check the code, or treat the document as unverified." },
+    malformed:{ bg: "#4a5568", t: "Not a valid code", s: "That is not a StewardMD prescription code." },
+    rate_limited: { bg: "#4a5568", t: "Too many lookups", s: "Try again in a minute." },
+    error:    { bg: "#4a5568", t: "Could not check", s: "No connection to the verification service. Try again when you are online." }
+  };
+  /* ---- Native QR scan (@capacitor/barcode-scanner) -------------------------------------------
+   * The phone's own scanner UI: Google Play Services' code scanner on Android, the native
+   * AVFoundation scanner on iOS. We deliberately do NOT ship a camera view of our own — the system
+   * one is faster, already localised, already accessible, and on Android it needs no camera
+   * permission at all because the scanning happens inside Play Services.
+   *
+   * Called through Capacitor.Plugins rather than an import: this app is buildless ES5, so the
+   * package's ESM wrapper is not reachable. That wrapper is also where the option defaults are
+   * applied, so every option it would have filled in is passed explicitly below — omitting them
+   * sends undefined straight to the native layer.
+   *
+   * NATIVE-ONLY on purpose. The package's web fallback is a lazily-imported ESM module (html5-qrcode)
+   * that cannot load in this context, so the button is hidden off-device and the typed code remains
+   * the way in. Better a missing button than one that does nothing.
+   */
+  var RXV_HINT_QR = 0;        // Html5QrcodeSupportedFormats.QR_CODE
+  var RXV_CAM_BACK = 1;       // CapacitorBarcodeScannerCameraDirection.BACK
+  var RXV_ORIENT_ADAPTIVE = 3; // CapacitorBarcodeScannerScanOrientation.ADAPTIVE
+  function rxvScanner() {
+    try {
+      var C = window.Capacitor;
+      if (!C || !C.isNativePlatform || !C.isNativePlatform()) return null;
+      return (C.Plugins && C.Plugins.CapacitorBarcodeScanner) || null;
+    } catch (e) { return null; }
+  }
+  function rxvScan() {
+    var P = rxvScanner();
+    if (!P || !P.scanBarcode) return Promise.reject(new Error("unavailable"));
+    return P.scanBarcode({
+      hint: RXV_HINT_QR,
+      scanInstructions: "Point the camera at the QR on the prescription",
+      scanButton: false,
+      scanText: " ",
+      cameraDirection: RXV_CAM_BACK,
+      scanOrientation: RXV_ORIENT_ADAPTIVE,
+      cancelButtonAccessibilityLabel: "Cancel scanning",
+      torchButtonOnAccessibilityLabel: "Turn the torch off",
+      torchButtonOffAccessibilityLabel: "Turn the torch on"
+    }).then(function (r) { return (r && r.ScanResult) || ""; });
+  }
+  // A scanned QR carries the full verify URL; a human might paste just the code. Accept both, and
+  // ignore anything after the code (a query string, a trailing slash) rather than failing the lookup.
+  function rxvCodeFrom(text) {
+    var t = String(text || "").trim();
+    var m = t.match(/\/verify\/([^/?#\s]+)/i);
+    return m ? m[1] : t;
+  }
+  function rxvDay(ms) { try { return ms ? new Date(ms).toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" }) : ""; } catch (e) { return ""; } }
+  function rxvRow(k, v) { return v || v === 0 ? '<div class="rxv-r"><div class="rxv-k">' + esc(k) + '</div><div class="rxv-v">' + esc(v) + "</div></div>" : ""; }
+  function rxvResultHTML(d) {
+    var tone = RXV_TONE[(d && d.status) || "error"] || RXV_TONE.error;
+    var out = '<div class="rxv-badge" style="background:' + tone.bg + '"><b>' + esc(tone.t) + "</b><p>" +
+      esc(d && d.revokedReason ? tone.s + " Reason: " + d.revokedReason : tone.s) + "</p></div>";
+    if (!d || !d.ok) return out;
+    var doc = d.doctor || {};
+    out += '<div class="rxv-card">' + rxvRow("Code", d.code) + rxvRow("Issued", rxvDay(d.issuedAt)) +
+      rxvRow("Valid until", rxvDay(d.validUntil)) + rxvRow("Schedule", d.schedule) +
+      (d.refillsAllowed != null ? rxvRow("Refills allowed", String(d.refillsAllowed)) : "") + "</div>";
+    out += '<div class="rxv-card">' + rxvRow("Prescriber", doc.name || "(not recorded)") +
+      rxvRow("Registration no.", doc.regNo || "(not recorded)") +
+      '<div class="rxv-r"><div class="rxv-k">Registration verified</div><div class="rxv-v ' +
+      (doc.verified ? "rxv-ok" : "rxv-no") + '">' + (doc.verified ? "Verified by StewardMD" : "NOT verified") + "</div></div></div>";
+    var drugs = [].concat(d.drugs || []);
+    out += '<div class="rxv-card">' + drugs.map(function (x) {
+      var sub = [x.dose, x.freq, x.duration].filter(Boolean).join(" · ");
+      return '<div class="rxv-d"><b>' + esc(x.name) + "</b>" + (sub ? "<span>" + esc(sub) + "</span>" : "") + "</div>";
+    }).join("") + "</div>";
+    out += '<p class="rxv-note">Compare this list against the paper in your hand. If they differ, the document has been altered. No patient information is stored on a verification record.</p>';
+    return out;
+  }
+  function openVerify(prefill) {
+    injectCSS(); injectVerifyCSS();
+    var ov = document.createElement("div"); ov.className = "rxv-ov";
+    ov.innerHTML = '<div class="rxv-sh" role="dialog" aria-modal="true" aria-label="Verify a prescription">' +
+      '<div class="rxv-h"><span>Verify a prescription</span><button class="rxv-x" aria-label="Close">&times;</button></div>' +
+      '<p class="rxv-sub">' + (rxvScanner() ? "Scan the QR on the prescription, or type the code printed beside it." : "Type the code printed on the prescription.") + "</p>" +
+      (rxvScanner() ? '<button class="rxv-scan" id="rxvScan">' + rxIco("camera") + " Scan QR code</button>" : "") +
+      '<div class="rxv-in"><input id="rxvCode" inputmode="latin" autocapitalize="characters" spellcheck="false" ' +
+        'placeholder="XXXX-XXXX-XXXX-XXXX" aria-label="Prescription code" value="' + esc(prefill || "") + '">' +
+      '<button class="rxv-go" id="rxvGo">Check</button></div>' +
+      '<div id="rxvOut"></div>' +
+      '<p class="rxv-note">Only prescriptions containing a habit-forming drug or an antibiotic carry a code.</p></div>';
+    document.body.appendChild(ov);
+    var close = function () { try { ov.remove(); } catch (e) {} };
+    ov.addEventListener("click", function (e) { if (e.target === ov) close(); });
+    ov.querySelector(".rxv-x").addEventListener("click", close);
+    var inp = ov.querySelector("#rxvCode"), go = ov.querySelector("#rxvGo"), out = ov.querySelector("#rxvOut");
+    function run() {
+      var raw = (inp.value || "").trim();
+      var code = window.SMD_RX_VALIDITY ? SMD_RX_VALIDITY.normalizeCode(raw) : raw.replace(/[^0-9A-Za-z]/g, "").toUpperCase();
+      if (!code || code.length < 12) { out.innerHTML = rxvResultHTML({ status: "malformed" }); return; }
+      go.disabled = true; out.innerHTML = '<p class="rxv-note">Checking…</p>';
+      fetch("/api/rx/v/" + encodeURIComponent(code))
+        .then(function (r) { return r.json().catch(function () { return null; }); })
+        .then(function (d) { out.innerHTML = rxvResultHTML(d); })
+        .catch(function () { out.innerHTML = rxvResultHTML({ status: "error" }); })
+        .then(function () { go.disabled = false; });
+    }
+    go.addEventListener("click", run);
+    inp.addEventListener("keydown", function (e) { if (e.key === "Enter") run(); });
+    var scanBtn = ov.querySelector("#rxvScan");
+    if (scanBtn) scanBtn.addEventListener("click", function () {
+      scanBtn.disabled = true;
+      rxvScan().then(function (text) {
+        var code = rxvCodeFrom(text);
+        if (!code) return;
+        inp.value = code;
+        run();                                   // scanned = checked; no second tap to confirm
+      }, function () {
+        /* Cancelling is the common case and must not look like a failure, but a denied camera would
+         * otherwise be silent - so one neutral line covers both and points at the way that works. */
+        out.innerHTML = '<p class="rxv-note">Scan cancelled, or the camera is unavailable. Type the code printed on the prescription instead.</p>';
+      }).then(function () { scanBtn.disabled = false; });
+    });
+    setTimeout(function () { try { inp.focus(); } catch (e) {} }, 60);
+    if (prefill) run();
+  }
+
+  function rxPrintHTML(topic, regNo, rxv) {
     var d = collectRx(), date = ""; try { date = new Date().toISOString().slice(0, 10); } catch (e) {}
     var n = 0;
     var rows = d.lines.map(function (L) {
@@ -172,6 +409,12 @@
       '.adv{padding:6px 0;color:#475569;font-size:13px}' +
       '.sign{margin-top:34px;text-align:right}.sign .nm{font-weight:700}.sign .mt{color:#64748b;font-size:12px}' +
       '.disc{margin-top:22px;padding-top:12px;border-top:1px solid #e2e8f0;font-size:11px;color:#64748b;line-height:1.5}' +
+      // The verification block sits with the signature: a reader checking authenticity is already
+      // looking at who signed it. Kept off the page break so the QR is never split in half.
+      '.rxv{display:flex;gap:12px;align-items:center;margin-top:18px;padding-top:14px;border-top:1px solid #e2e8f0;break-inside:avoid;page-break-inside:avoid}' +
+      '.rxv svg{width:96px;height:96px;flex:0 0 auto}' +
+      '.rxv-c{font:700 14px ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.06em;color:#0f172a}' +
+      '.rxv-l{font-size:11px;color:#64748b;margin-top:2px}.rxv-u{font-size:11px;color:#0e6e63;font-weight:700;margin-top:2px}' +
       '@media print{body{padding:0}@page{margin:16mm}}' +
       '</style></head><body>' +
       '<div class="hd"><span class="logo">Steward<b>MD</b></span><span class="tag">Prescription</span></div>' +
@@ -179,6 +422,7 @@
       ((d.name || d.age) ? '<div class="pt">' + esc(d.name) + (d.age ? '  &middot;  ' + esc(d.age) : '') + '</div>' : '') +
       '<div class="rxsym">&#8478;</div><main>' + (rows || '<div class="adv">No items.</div>') + '</main>' +
       '<div class="sign"><div class="nm">Dr. ' + esc(docName() || "—") + '</div><div class="mt">NMC Reg: ' + esc(regNo || "—") + '  &middot;  ' + esc(date) + '</div></div>' +
+      rxQrBlock(rxv) +
       '<div class="disc">Draft prescription generated with StewardMD. Verify every drug, dose, route and interaction against the patient and local protocol. The prescriber is responsible for what they sign.</div>' +
       '</body></html>';
   }
@@ -206,9 +450,17 @@
     return false;
   }
   function doRxPrint(topic, regNo) {
-    var html = rxPrintHTML(topic, regNo);
-    if (rxNative()) { if (!rxNativePrint(html)) rxWebPrint(html); return; }
-    if (!rxWebPrint(html)) rxNativePrint(html);
+    // Mint the verification record BEFORE rendering, so the code and its QR are on the sheet that
+    // gets printed. rxIssueVerification never rejects and resolves to null when the prescription is
+    // out of scope, when the doctor is not signed in, or when the network is down - in every one of
+    // those cases the prescription still prints, just without a QR (see rxIssueVerification).
+    var d = collectRx();
+    rxIssueVerification(d && d.lines).then(function (rxv) {
+      if (!rxv) { var why = rxNoQrWhy(d && d.lines); if (why) rxToast(why); }
+      var html = rxPrintHTML(topic, regNo, rxv);
+      if (rxNative()) { if (!rxNativePrint(html)) rxWebPrint(html); return; }
+      if (!rxWebPrint(html)) rxNativePrint(html);
+    });
   }
 
   // Drug dictionary for text extraction — the interaction engine (~3k generics, incl. specialty
@@ -775,7 +1027,9 @@
     var existing=getSign(); if(existing) chooser(existing); else openSignPad(function(sig){ chooser(sig); });
   }
 
-  window.SMD_RX = { open: open, canPrescribe: canPrescribe, verifiedInfo: verifiedInfo, _getNmc: getNmc, _setNmc: setNmc, getClinic: getClinic, _parseVoiceRx: parseVoiceRx };
+  // openVerify is deliberately NOT gated on canPrescribe(): checking someone else's prescription is
+  // not prescribing, and the pharmacist doing it may not be a prescriber at all.
+  window.SMD_RX = { open: open, openVerify: openVerify, canPrescribe: canPrescribe, verifiedInfo: verifiedInfo, _getNmc: getNmc, _setNmc: setNmc, getClinic: getClinic, _parseVoiceRx: parseVoiceRx };
 
   /* Prime the verification cache at boot.
    * canPrescribe() is a SYNCHRONOUS read of _vcache, but ONLY verifiedInfo() fills it — and that

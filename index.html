@@ -2044,7 +2044,7 @@ window.openExternal = function (u) {
 <script src="/vendor-html2canvas.js?v=1" defer></script>
 <script src="/vendor-jspdf.js?v=1" defer></script>
 <script src="/rx-brand-match.js?v=rxb1" defer></script>
-<script src="/prescription.js?v=gold982-brandsearch-dict1-ui1-a11y1" defer></script>
+<script src="/prescription.js?v=gold982-brandsearch-dict1-ui1-rxscan1-why1" defer></script>
 <script src="/ku.js?v=gold434-thread" defer></script>
 <!-- Learning-streak active-time engine, achievement share card, and the Clinical Progress
      dashboard (levels / quests / badges / stats / timeline). Load after ku.js + account.js. -->
@@ -2122,7 +2122,7 @@ window.openExternal = function (u) {
 <script src="/kb/ai/maik-copilot.js?v=gold1053-calcfix" defer></script>
 <script src="/electrolytes.js?v=bug808-nodupe-focus1" defer></script>
 <script src="/caseshare.js?v=gold363" defer></script>
-<script src="/hospitals-in.js?v=gold1018" defer></script><script src="/connect-source.js?v=cs3docs" defer></script><script src="/connect-patient.js?v=cp4" defer></script><script src="/queue-flags.js?v=q5-all-on" defer></script><script src="/home.js?v=nstream1-clinix5-surgx2-logo-aiu1-profile2-rxtile-glyphs-maikart2-pglog1-ack1-otasay-oncqis-sync1-prompt1-about1-applock3" defer></script><script src="/profile-setup.js?v=pfs1" defer></script><script src="/syndromes-motion.js?v=synmo5" defer></script><script src="/dialog-motion.js?v=dm2" defer></script>
+<script src="/hospitals-in.js?v=gold1018" defer></script><script src="/connect-source.js?v=cs3docs" defer></script><script src="/connect-patient.js?v=cp4" defer></script><script src="/queue-flags.js?v=q5-all-on" defer></script><script src="/home.js?v=nstream1-clinix5-surgx2-logo-aiu1-profile2-rxtile-glyphs-maikart2-pglog1-ack1-otasay-oncqis-sync1-prompt1-about1-icons1-rxv1-applock3" defer></script><script src="/profile-setup.js?v=pfs1" defer></script><script src="/syndromes-motion.js?v=synmo5" defer></script><script src="/dialog-motion.js?v=dm2" defer></script>
 <!-- Lean sidebar redesign (Tools / Reference & Help / Settings / Advanced). Additive; wraps
      SB.open and rebuilds #sbMenu, superseding home.js's legacy reorganizer (which stands down
      via window.SMD_SBR). Must load AFTER home.js. -->
@@ -2141,7 +2141,7 @@ window.openExternal = function (u) {
 <script src="/haptics.js?v=gold348" defer></script>
 <script src="/antibiogram.js?v=gold992" defer></script>
 <script src="/asp-region.js?v=gold363" defer></script>
-<script src="/swipe-back.js?v=gold482-edgeback-nolap1" defer></script>
+<script src="/swipe-back.js?v=gold482-edgeback-gestnav1" defer></script>
 <script src="/workspaces.js?v=gold1051-wsroute-surgx1" defer></script>
 <script src="/ws-surgery.js?v=gold363" defer></script>
 <script src="/ws-ent.js?v=gold363" defer></script>
@@ -2153,7 +2153,7 @@ window.openExternal = function (u) {
 <!-- Clinical vocabulary registry (SMD_VOCAB) - deterministic offline finding autocomplete for the
      ICU complaint/finding picker. Separate from disease scoring; maps to existing canonical finding IDs. -->
 <script src="/clinical-vocab.js?v=gold363" defer></script>
-<script src="/icu.js?v=gold999-askmaik-think1-preset1" defer></script>
+<script src="/icu.js?v=gold999-askmaik-think1-lytes1" defer></script>
 <script src="/discharge-ghis.js?v=dg1" defer></script>
 <!-- ICU v2 Phase 2: real-time collaboration backend (window.SMD_ICU_GROUPS). Pure data +
      Firestore subscription layer; NO DOM. Flag smd_icu_groups (default OFF). Loads AFTER icu.js
@@ -2333,19 +2333,22 @@ window.openExternal = function (u) {
 <script src="/pglog-curriculum.js?v=pgl4" defer></script>
 <script src="/pglog-store.js?v=pgl14-token" defer></script>
 <script src="/pglog-qr.js?v=pgl4" defer></script>
+<!-- Prescription validity + schedule rules (pure). Decides which prescriptions get a verification
+     QR and how long they stay valid; the QR itself is encoded by pglog-qr.js above. -->
+<script src="/rx-validity.js?v=rxv1" defer></script>
 <script src="/pglog-reports.js?v=pgl5-diag" defer></script>
 <script src="/pglog-ai.js?v=pgl4" defer></script>
 <script src="/pglog-screens.js?v=pgl26-del" defer></script>
 <script src="/pglog.js?v=pgl5" defer></script>
 <!-- Insulin dose CDSS · additive, flag-gated smd_insulin (DEFAULT OFF; reveal with ?insulin=1). Pure
      engine + safety load before the UI; when the flag is off, insulin.js is a complete no-op. -->
-<script src="/insulin-flags.js?v=ins16" defer></script>
-<script src="/insulin-engine.js?v=ins15" defer></script>
+<script src="/insulin-flags.js?v=ins17" defer></script>
+<script src="/insulin-engine.js?v=ins17" defer></script>
 <script src="/insulin-safety.js?v=ins15" defer></script>
 <script src="/insulin-db.js?v=ins11" defer></script>
 <script src="/insulin-convert.js?v=ins11" defer></script>
 <script src="/insulin-ask.js?v=ins15" defer></script>
-<script src="/insulin.js?v=ins15" defer></script>
+<script src="/insulin.js?v=ins17" defer></script>
 <!-- FollowCare AI · post-discharge recovery follow-up (additive, flag-gated smd_followcare, DEFAULT OFF;
      enable with ?fc=1 or Settings). Doctor module only — patients use the login-free web portal
      (/followcare?t=…), never the app. Engines (pathways/engine/assessment/schedule) also power the

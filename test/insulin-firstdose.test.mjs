@@ -15,6 +15,49 @@ test("Known TDD -> ISF via 1800 rule (spec example: 300/120, TDD 30 -> 3u)", () 
   assert.match(r.iobSource, /0 u - no previous/);
 });
 
+/* A DIRECTLY ENTERED IOB IS SUBTRACTED. The Known-TDD/estimate branch shows an "Active insulin (IOB)"
+ * box, but this function used to resolve IOB only from priorDose - the typed units were dropped AND
+ * the result still said "0 u assumed - no prior rapid-acting dose/timing entered". A dose that reads
+ * as having accounted for stacking when it has not is worse than no box at all, so these pin the
+ * arithmetic, the provenance, and the precedence when both are supplied. */
+test("an entered IOB is actually subtracted (TDD 30 -> ISF 60; (300-120)/60 = 3u, minus 2u IOB)", () => {
+  const r = E.firstDoseCorrection({ glucose: 300, target: 120, tdd: 30, iob: 2, increment: 1 });
+  assert.equal(r.isf, 60);
+  assert.equal(r.rounded, 1);              // 3 - 2, not 3
+  assert.match(r.iobSource, /2 u entered directly/);
+  assert.ok(!/0 u assumed/.test(r.iobSource), "must not still claim no IOB was entered");
+  assert.ok(r.assumptions.some((a) => /IOB 2 u/.test(a)), "provenance must show the IOB actually used");
+});
+
+test("IOB 0 is a real answer (none on board), not a missing value", () => {
+  const r = E.firstDoseCorrection({ glucose: 300, target: 120, tdd: 30, iob: 0, increment: 1 });
+  assert.equal(r.rounded, 3);
+  assert.match(r.iobSource, /0 u entered directly/);
+});
+
+test("an entered IOB beats the modelled prior-dose estimate, and says so", () => {
+  const r = E.firstDoseCorrection({
+    glucose: 300, target: 120, tdd: 30, increment: 1,
+    iob: 1, dia: 4, priorDose: { units: 6, minutesAgo: 60 },   // the model would give ~4.5u active
+  });
+  assert.equal(r.rounded, 2);              // 3 - 1 (the stated value), not 3 - 4.5 -> 0
+  assert.match(r.iobSource, /entered directly/);
+  assert.match(r.iobSource, /instead of the prior-dose estimate/);
+});
+
+test("with no IOB entered the prior-dose model is still used (unchanged behaviour)", () => {
+  const r = E.firstDoseCorrection({
+    glucose: 300, target: 120, tdd: 30, increment: 1, dia: 4, priorDose: { units: 6, minutesAgo: 60 },
+  });
+  assert.match(r.iobSource, /active from a prior 6 u rapid-acting dose 60 min ago/);
+  assert.ok(!/entered directly/.test(r.iobSource));
+});
+
+test("an entered IOB can never turn a correction negative", () => {
+  const r = E.firstDoseCorrection({ glucose: 300, target: 120, tdd: 30, iob: 99, increment: 1 });
+  assert.ok(r.rounded === 0 || r.rounded === null, `expected no dose, got ${r.rounded}`);
+});
+
 test("First-dose weight estimate (spec example: 70kg x0.3 -> TDD21 -> ISF~85.7 -> 300/100 -> 2u)", () => {
   const r = E.firstDoseCorrection({ glucose: 300, target: 100, weightKg: 70, insulinNaive: true, increment: 1 });
   assert.equal(r.tddEstimated, 21);   // 70 * 0.3
