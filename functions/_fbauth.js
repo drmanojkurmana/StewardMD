@@ -30,7 +30,15 @@ async function getJwks() {
   return map;
 }
 
-export async function verifyFirebaseToken(token, env) {
+/* The verified token payload — uid PLUS the custom claims (name, regNo, verified) that say who the
+ * prescriber is. Identical checks to verifyFirebaseToken, which is now a thin wrapper over this.
+ *
+ * Split out because returning only `sub` let a caller that wanted the claims fail SILENTLY instead
+ * of loudly: a bare uid string carries the legacy String.prototype.sub method, so a
+ * `if (!claims.sub) reject` guard sees a function, happily passes, and every claim then reads as
+ * undefined. functions/api/rx/issue.js recorded prescriptions with a blank prescriber that way.
+ */
+export async function verifyFirebaseClaims(token, env) {
   const project = env.FIREBASE_PROJECT_ID || FB_PROJECT_DEFAULT;
   const parts = String(token || "").split(".");
   if (parts.length !== 3) return null;
@@ -50,8 +58,15 @@ export async function verifyFirebaseToken(token, env) {
     const key = await crypto.subtle.importKey("jwk", jwk, { name: "RSASSA-PKCS1-v1_5", hash: "SHA-256" }, false, ["verify"]);
     const ok = await crypto.subtle.verify("RSASSA-PKCS1-v1_5", key, b64urlToBytes(parts[2]),
       new TextEncoder().encode(parts[0] + "." + parts[1]));
-    return ok ? payload.sub : null;
+    return ok ? payload : null;
   } catch (e) { return null; }
+}
+
+/* The uid alone — what _features.js, _adminauth.js and _entitlement.js have always wanted. Kept as
+ * a string return so those callers are untouched by the split above. */
+export async function verifyFirebaseToken(token, env) {
+  const claims = await verifyFirebaseClaims(token, env);
+  return claims ? claims.sub : null;
 }
 
 // Stable, namespaced per-user id — or null if the caller is not authenticated.
