@@ -96,8 +96,31 @@
       (typeof hfRaw === "string" && hfRaw.trim() !== "" && !/^(no|none|nil|false|n\/a)$/i.test(hfRaw.trim()));
     if (!hf) hf = HABIT_RE.test(name);
 
+    /* Resolve a BRAND to its molecules first, then classify those.
+     *
+     * Matching the text a prescriber typed is what let "Amoxiclav" print with no QR: the name lists
+     * hold generics, and nobody writes generics on a prescription. brand-generics.js is a curated
+     * map the app already maintained (it knew augmentin, piptaz, monocef), so this asks it before
+     * falling back to name matching. A combination is an antibiotic if ANY component is.
+     *
+     * Additive on purpose: an unknown brand resolves to nothing and the old name matching still
+     * runs, so this can only ever recognise MORE, never less.
+     */
+    var viaBrand = false;
+    try {
+      var B = (typeof window !== "undefined" && window.SMD_BRANDS) ||
+              (typeof require === "function" ? require("./brand-generics.js") : null);
+      if (B && B.generics) {
+        var mols = B.generics(name);
+        for (var mi = 0; mi < mols.length; mi++) {
+          if (ANTIBIOTIC_RE.test(mols[mi]) || ANTIBIOTIC_STEM_RE.test(mols[mi])) { viaBrand = true; break; }
+        }
+        if (!hf) for (var hi = 0; hi < mols.length; hi++) if (HABIT_RE.test(mols[hi])) { hf = true; break; }
+      }
+    } catch (e) {}
+
     var abx = drug.antibiotic === true || ANTIBIOTIC_CLASS_RE.test(cls) ||
-      ANTIBIOTIC_RE.test(name) || ANTIBIOTIC_STEM_RE.test(name);
+      ANTIBIOTIC_RE.test(name) || ANTIBIOTIC_STEM_RE.test(name) || viaBrand;
     return { schedule: sched, habitForming: !!hf, antibiotic: !!abx, name: name };
   }
 
