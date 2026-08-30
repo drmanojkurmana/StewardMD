@@ -408,7 +408,11 @@
    * survives, and a hallucinated number cannot become a dose.
    * Ask deliberately prints no answer of its own: it DRIVES the real calculator and lands the
    * user inside it, which is also what makes "show me what it did" possible. */
-  function askAvailable() { return !!window.INSULIN_ASK; }
+  // Flag-gated, not merely "is the script present". This is the only path that sends a clinician's
+  // free text to an LLM, and without the flag it could not be switched off without a new build.
+  // Off => the Ask entry point simply is not rendered and the manual form is used, which is the
+  // whole fallback: MaiK only ever fills that form, it never answers the dose.
+  function askAvailable() { var f = flags(); return !!window.INSULIN_ASK && !!(f && f.bool("smd_insulin_ask")); }
   function askBarHTML() {
     if (!askAvailable()) return "";
     return '<div class="ins-askbar ins-bf">' +
@@ -1365,6 +1369,10 @@
       // Known-TDD / first-dose-estimate pathway — resolve ISF+IOB with provenance in the engine.
       var fd = { glucose: G, target: T, increment: st.increment, ctx: st.ctx, rule: st.isfRule || 1800, dia: bolusDia(), route: st.fdRoute || null };
       if (num(st.isfOverride) && Number(st.isfOverride) > 0) fd.isf = toMgdl(Number(st.isfOverride));
+      // The IOB box is rendered in THIS branch too (the isfOverride/iob row), so it has to be passed,
+      // not dropped: without this the engine reported "0 u assumed - no prior rapid-acting dose"
+      // while the clinician was looking at the units they had just typed into it.
+      if (num(st.iob) && Number(st.iob) >= 0) fd.iob = Number(st.iob);
       if (st.corrSource === "tdd") { if (num(st.fdTdd)) fd.tdd = Number(st.fdTdd); }
       else {   // estimate
         if (st.fdNaive) { fd.insulinNaive = true; fd.weightKg = Number(st.ctx.weightKg); fd.tddFactor = Number(st.fdFactor); }

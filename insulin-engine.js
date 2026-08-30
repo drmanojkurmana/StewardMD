@@ -488,8 +488,20 @@
     }
 
     // 3) Resolve IOB with provenance — never fabricate.
+    /* A DIRECTLY ENTERED IOB IS HONOURED. This branch used to read only priorDose, so the "Active
+     * insulin (IOB)" box shown alongside it did nothing: the entered units were dropped and the
+     * result still reported "0 u assumed - no prior rapid-acting dose/timing entered". That is worse
+     * than ignoring the field - the dose reads as having accounted for stacking when it has not.
+     * A stated IOB (a pump's own reading) also beats the linear prior-dose model, so when both are
+     * given the entered value wins and the provenance says so. 0 is a real answer ("none on board"),
+     * so it is accepted rather than treated as absent. */
     var iob = 0, iobSource;
-    if (v.priorDose && ok(v.priorDose.units) && v.priorDose.units > 0 && ok(v.priorDose.minutesAgo) && ok(v.dia) && v.dia > 0) {
+    if (ok(v.iob) && v.iob >= 0) {
+      iob = v.iob;
+      iobSource = iob + " u entered directly"
+        + ((v.priorDose && ok(v.priorDose.units) && v.priorDose.units > 0)
+            ? " - used instead of the prior-dose estimate (a stated IOB beats a modelled one)" : "");
+    } else if (v.priorDose && ok(v.priorDose.units) && v.priorDose.units > 0 && ok(v.priorDose.minutesAgo) && ok(v.dia) && v.dia > 0) {
       iob = activeInsulin({ dia: v.dia, doses: [{ units: v.priorDose.units, minutesAgo: v.priorDose.minutesAgo }] }).result;
       iobSource = iob + " u active from a prior " + v.priorDose.units + " u rapid-acting dose " + v.priorDose.minutesAgo + " min ago (linear model, DIA " + v.dia + " h)";
     } else if (v.insulinNaive || v.firstDose) {

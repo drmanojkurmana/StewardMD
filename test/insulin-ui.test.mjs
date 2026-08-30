@@ -365,6 +365,42 @@ test("mode tabs carry correct tab semantics and a roving tabindex", () => {
   assert.ok(!html.includes('aria-pressed'), "role=tab must not use aria-pressed");
 });
 
+/* ASK MaiK HAS A KILL SWITCH. askAvailable() used to check only that window.INSULIN_ASK existed, so
+ * the one path that sends a clinician's free text to an LLM could not be turned off without shipping
+ * a new build - unlike every other risk-bearing workflow in this module, which is flag-gated.
+ * Turning it off must remove the entry point entirely, not merely refuse on submit. */
+test("Ask MaiK is flag-gated: off removes the Ask entry point, on restores it", () => {
+  reset();
+  st.dxType = "t2";
+  const FLAGS = global.window.SMD_INSULIN_FLAGS;
+  const prevAsk = global.window.INSULIN_ASK;
+  global.window.INSULIN_ASK = { extract() {} };   // present, so ONLY the flag decides
+  try {
+    // The Ask bar is on the DASHBOARD (dashboardHTML), not inside the calculator screen.
+    FLAGS.set("smd_insulin_ask", true);
+    assert.ok(B.dashboard().includes('data-ins="ask-run"'), "with the flag ON the Ask bar is rendered");
+
+    FLAGS.set("smd_insulin_ask", false);
+    const off = B.dashboard();
+    assert.ok(!off.includes('data-ins="ask-run"'), "with the flag OFF the Ask control is gone");
+    assert.ok(!off.includes('data-ins="ask-text"'), "and so is its free-text box");
+    assert.ok(off.length > 200, "the dashboard still renders - the fallback is the manual form itself");
+
+    FLAGS.set("smd_insulin_ask", true);
+    assert.ok(B.dashboard().includes('data-ins="ask-run"'), "it comes back when re-enabled");
+  } finally {
+    global.window.INSULIN_ASK = prevAsk;
+    FLAGS.set("smd_insulin_ask", true);
+  }
+});
+
+test("the Ask flag defaults ON, so adding this gate does not silently remove a shipped feature", () => {
+  const FLAGS = global.window.SMD_INSULIN_FLAGS;
+  assert.equal(FLAGS.DEFS.smd_insulin_ask.def, true);
+  store.delete("smd_insulin_ask");
+  assert.equal(FLAGS.bool("smd_insulin_ask"), true, "unset must resolve to ON");
+});
+
 test("no builder emits undefined, NaN or [object Object]", () => {
   reset();
   st.dxType = "t2";
