@@ -212,3 +212,40 @@ test("newCode uses the supplied randomness (so the server can use real CSPRNG by
   const fixed = () => new Uint8Array(16).fill(0);
   assert.equal(V.newCode(fixed), "0000-0000-0000-0000", "byte 0 maps to the first alphabet glyph");
 });
+
+/* ── Brand names classify by their molecules ────────────────────────────────
+ *
+ * Nobody writes generics on a prescription. Matching the typed text is what let "Amoxiclav" - which
+ * is simply how co-amoxiclav gets written - read as an unknown drug, so the sheet printed with no QR
+ * while the app's own brand map already knew augmentin, piptaz and monocef.
+ */
+test("a brand-name antibiotic classifies as an antibiotic", () => {
+  for (const brand of ["Augmentin", "Amoxiclav", "Piptaz", "Zosyn", "Magnex", "Monocef", "Augmentin 625"]) {
+    assert.equal(V.classify({ name: brand }).antibiotic, true, `${brand} is an antibiotic`);
+    assert.equal(V.requiresVerification([{ name: brand }]), true, `${brand} is worth verifying`);
+  }
+});
+
+test("resolving brands does not sweep in drugs that are not antibiotics", () => {
+  // Ecosprin is aspirin, Crocin is paracetamol: both must stay out, or "antibiotic" means nothing.
+  for (const brand of ["Ecosprin", "Crocin", "Paracetamol", "Amlodipine", "Metformin", "Pan"]) {
+    assert.equal(V.classify({ name: brand }).antibiotic, false, `${brand} is not an antibiotic`);
+  }
+});
+
+test("there is exactly ONE brand map, and the old copies are gone", async () => {
+  const { readFileSync } = await import("node:fs");
+  const at = (p) => readFileSync(new URL(p, import.meta.url), "utf8");
+
+  // Two maps drift, and the copy that drifts is the one that misclassifies a drug.
+  assert.ok(!/var BRAND_SEED = \{/.test(at("../medlist.js")), "medlist.js no longer keeps its own copy");
+  assert.ok(!/\{"augmentin":\s*\[/.test(at("../app.js")), "app.js no longer inlines a copy");
+  assert.match(at("../app.js"), /window\.SMD_BRANDS/, "app.js reads the shared map");
+  assert.match(at("../medlist.js"), /brand-generics\.js/, "and so does medlist.js");
+
+  // The map must load before every consumer - all three tags are defer, so document order is
+  // execution order, and a map that loads late is a map that is empty when search runs.
+  const html = at("../index.html");
+  assert.ok(html.indexOf("brand-generics.js") < html.indexOf("/app.js"), "loads before app.js");
+  assert.ok(html.indexOf("brand-generics.js") < html.indexOf("/medlist.js"), "and before medlist.js");
+});
