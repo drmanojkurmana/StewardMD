@@ -207,13 +207,39 @@
 
   // The block printed on the sheet. No network at print time: the SVG is generated on device by the
   // same encoder the PG logbook prints with (pglog-qr.js), so this works on a ward with no signal.
+  // The URL a phone camera opens. Absolute on purpose: a relative path resolves against nothing once
+  // the sheet is paper. Shared, so the printed sheet and the exported PDF can never encode
+  // different URLs for the same prescription.
+  function rxVerifyUrl(code) { return "https://stewardmd.in/verify/" + String(code || "").replace(/[^0-9A-Za-z-]/g, ""); }
+  function rxQrSvg(rec) {
+    try { return SMD_PGLOG_QR.toSvg(rxVerifyUrl(rec.code), { scale: 3, label: "Verify prescription " + rec.code }); }
+    catch (e) { return ""; }
+  }
+  function rxValidUntil(rec) {
+    try { return rec.validUntil ? new Date(rec.validUntil).toISOString().slice(0, 10) : ""; } catch (e) { return ""; }
+  }
+
+  /* The same block for the EXPORTED sheet (Save as PDF / JPEG), which is a DIFFERENT document from
+   * the printed one: rxDoc builds a DOM node that html2canvas rasterises, so it inherits none of
+   * rxPrintHTML's <style> and every rule must be inline or it renders unstyled. Without this the
+   * PDF carried no QR and no code at all, while its own footer still said "signed & verified".
+   */
+  function rxDocQrBlock(rec) {
+    if (!rec || !rec.code) return "";
+    var until = rxValidUntil(rec);
+    return '<div style="display:flex;gap:12px;align-items:center;margin-top:14px;padding-top:12px;border-top:1px solid #e2e8f0">' +
+      '<div style="width:96px;height:96px;flex:0 0 auto">' + rxQrSvg(rec) + '</div>' +
+      '<div><div style="font:700 13px ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.06em;color:#0f172a">' + esc(rec.code) + '</div>' +
+      '<div style="font-size:10.5px;color:#64748b;margin-top:2px">Scan to verify this prescription</div>' +
+      '<div style="font-size:10.5px;color:#0e6e63;font-weight:700;margin-top:2px">stewardmd.in/verify</div>' +
+      (until ? '<div style="font-size:10.5px;color:#64748b;margin-top:2px">Valid until ' + esc(until) + '</div>' : '') +
+      '</div></div>';
+  }
+
   function rxQrBlock(rec) {
     if (!rec || !rec.code) return "";
-    var url = "https://stewardmd.in/verify/" + String(rec.code).replace(/[^0-9A-Za-z-]/g, "");
-    var svg = "";
-    try { svg = SMD_PGLOG_QR.toSvg(url, { scale: 3, label: "Verify prescription " + rec.code }); } catch (e) { svg = ""; }
-    var until = "";
-    try { until = rec.validUntil ? new Date(rec.validUntil).toISOString().slice(0, 10) : ""; } catch (e) {}
+    var svg = rxQrSvg(rec);
+    var until = rxValidUntil(rec);
     return '<div class="rxv">' + svg +
       '<div class="rxv-m"><div class="rxv-c">' + esc(rec.code) + '</div>' +
       '<div class="rxv-l">Scan to verify this prescription</div>' +
@@ -987,7 +1013,7 @@
   var _smdLogoData = "";
   (function preloadSmdLogo(){ try{ var img=new Image(); img.onload=function(){ try{ var c=document.createElement("canvas"); c.width=img.naturalWidth||368; c.height=img.naturalHeight||368; c.getContext("2d").drawImage(img,0,0); _smdLogoData=c.toDataURL("image/png"); }catch(e){} }; img.src="/logo.png"; }catch(e){} })();
   // ---- Professional Rx document + PDF/JPEG export ----
-  function rxDoc(topic, regNo, signImg){
+  function rxDoc(topic, regNo, signImg, rxv){
     var d=collectRx(), c=getClinic(), date=""; try{ date=new Date().toLocaleDateString("en-GB",{day:"2-digit",month:"short",year:"numeric"}); }catch(e){}
     var n=0;
     var rows=d.lines.map(function(L){ if(L.advice) return '<tr class="advr"><td></td><td colspan="2">• '+esc(L.text)+'</td></tr>'; n++; var sub=[L.dose,L.freq,L.duration].filter(Boolean).join(" · "); return '<tr><td class="sn">'+n+'</td><td class="dg"><b>'+esc(L.drug)+'</b>'+(L.brand?' <span class="br">('+esc(L.brand)+')</span>':'')+'</td><td class="dz">'+esc(sub)+'</td></tr>'; }).join("");
@@ -1001,6 +1027,7 @@
       '<div class="rxdoc-rx">℞</div>'+
       '<table class="rxdoc-tbl">'+(rows||'<tr><td colspan="3">No items.</td></tr>')+'</table>'+
       '<div class="rxdoc-ft"><div class="rxdoc-sg">'+(signImg?'<img class="rxdoc-sgimg" src="'+esc(signImg)+'">':'')+'<div class="rxdoc-drn">Dr. '+esc(docName()||"—")+'</div><div class="rxdoc-reg">Reg. No: '+esc(regNo||"—")+'</div></div></div>'+
+      rxDocQrBlock(rxv) +
       '<div class="rxdoc-foot"><div class="rxdoc-brand">'+(_smdLogoData?'<img class="rxdoc-smdlogo" src="'+_smdLogoData+'">':'<span class="rxdoc-smdwm">Steward<b>MD</b></span>')+'<span>Prescription generated using <b>StewardMD</b></span></div>'+
       '<div class="rxdoc-resp">Digitally <b>signed &amp; verified</b> by the prescriber named above, who takes <b>complete responsibility</b> for this prescription. Verify every drug, dose, route and interaction against the patient and local protocol before dispensing.</div></div></div>';
     return node;
@@ -1009,9 +1036,20 @@
     if(rxNative()){ var P=rxPlugins(); var b64=(dataURL.split(",")[1]||""); if(P.Filesystem&&P.Filesystem.writeFile&&P.Share&&P.Share.share){ P.Filesystem.writeFile({ path:filename, data:b64, directory:"CACHE" }).then(function(res){ return P.Share.share({ title:"Prescription", url:res.uri, dialogTitle:"Save or share prescription" }); }).catch(function(){ rxToast("Export failed"); }); return; } }
     try{ var a=document.createElement("a"); a.href=dataURL; a.download=filename; document.body.appendChild(a); a.click(); a.remove(); }catch(e){ rxToast("Export failed"); }
   }
+  /* Mint BEFORE rendering, exactly as doRxPrint does - html2canvas rasterises whatever the node
+   * holds at that instant, so a record arriving later would be a PDF with an empty box where the QR
+   * should be. Same fail-open contract: rxIssueVerification never rejects, and an out-of-scope or
+   * offline prescription still exports, just without a QR (and rxNoQrWhy says which). */
   function exportRx(kind, topic, regNo, signImg){
     if(!window.html2canvas){ rxToast("Export engine still loading — try again"); return; }
-    var node=rxDoc(topic, regNo, signImg); node.style.cssText="position:fixed;left:-9999px;top:0;width:794px;background:#fff;z-index:-1"; document.body.appendChild(node);
+    var lines=(collectRx()||{}).lines;
+    rxIssueVerification(lines).then(function(rxv){
+      if(!rxv){ var why=rxNoQrWhy(lines); if(why) rxToast(why); }
+      exportRxNow(kind, topic, regNo, signImg, rxv);
+    });
+  }
+  function exportRxNow(kind, topic, regNo, signImg, rxv){
+    var node=rxDoc(topic, regNo, signImg, rxv); node.style.cssText="position:fixed;left:-9999px;top:0;width:794px;background:#fff;z-index:-1"; document.body.appendChild(node);
     window.html2canvas(node, { scale:2, backgroundColor:"#ffffff", useCORS:true }).then(function(canvas){
       node.remove();
       if(kind==="jpeg"){ rxSaveOrShare(canvas.toDataURL("image/jpeg",0.95), "prescription.jpg"); return; }

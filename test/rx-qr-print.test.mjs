@@ -84,6 +84,37 @@ test("an out-of-scope prescription is a deliberate no-QR, not a failure", () => 
   assert.equal(V.requiresVerification([{ name: "Amoxicillin" }]), true, "antibiotic: stewardship, so it gets one");
 });
 
+/* The EXPORTED sheet needs the QR too.
+ *
+ * Save as PDF / JPEG never goes through rxPrintHTML - it builds a separate DOM node in rxDoc and
+ * rasterises it with html2canvas. The QR was wired into the print path only, so every exported PDF
+ * came out with no QR and no code while its own footer still read "signed & verified". The PDF is
+ * the copy that actually reaches a pharmacy, so this is the path that matters most.
+ */
+test("Save as PDF mints a code and puts the QR on the exported sheet", () => {
+  assert.match(SRC, /function rxDocQrBlock/, "the exported sheet has its own QR block");
+  assert.match(SRC, /rxDocQrBlock\(rxv\) \+/, "and rxDoc actually renders it");
+  assert.match(SRC, /function rxDoc\(topic, regNo, signImg, rxv\)/, "rxDoc takes the record");
+
+  // Minted BEFORE rasterising: html2canvas captures whatever the node holds at that instant, so a
+  // record arriving afterwards is a PDF with an empty box where the QR should be.
+  const body = SRC.slice(SRC.indexOf("function exportRx("));
+  const issue = body.indexOf("rxIssueVerification"), draw = body.indexOf("exportRxNow(");
+  assert.ok(issue > -1 && draw > issue, "the record is minted before the sheet is drawn");
+
+  // Both formats route through it - a JPEG of a prescription is exactly as forgeable as a PDF.
+  assert.match(SRC, /exportRx\("pdf"/, "PDF goes through the minting path");
+  assert.match(SRC, /exportRx\("jpeg"/, "and so does JPEG");
+});
+
+test("the printed sheet and the exported PDF encode the SAME verify URL", () => {
+  // One helper used by both, so the two documents can never disagree about where a scan lands.
+  assert.match(SRC, /function rxVerifyUrl/, "the URL is built in one place");
+  const uses = SRC.match(/rxVerifyUrl\(/g) || [];
+  assert.ok(uses.length >= 2, "and both the encoder and the block go through it");
+  assert.match(SRC, /https:\/\/stewardmd\.in\/verify\//, "absolute - a relative path means nothing on paper");
+});
+
 test("the prescriber is told why a sheet printed without a QR", () => {
   assert.match(SRC, /function rxNoQrWhy/, "the reason helper exists");
   assert.match(SRC, /if \(!rxv\) \{ var why = rxNoQrWhy/, "and doRxPrint calls it when no record was minted");
