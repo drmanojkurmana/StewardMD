@@ -1956,7 +1956,10 @@
     // Notifications: probe once for unread medical updates, then hourly.
     try { setTimeout(refreshBadge, 1500); setInterval(function () { _notifItems = null; refreshBadge(); }, 3600000); } catch (e) {}
 
-    wireHomeDragReorder(root);
+    // Delegated on `document`, not `root`: the Customize-tools sheet (sheetEl()) is appended
+    // straight to document.body as a SIBLING of root, not a descendant, so a listener scoped to
+    // root alone never sees drags starting on its .hv-drag handles.
+    wireHomeDragReorder(document);
     root.addEventListener("click", function (e) {
       var b = e.target.closest("[data-act]"); if (!b) return;
       var a = b.getAttribute("data-act");
