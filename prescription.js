@@ -174,11 +174,32 @@
   }
   // Resolves to a record {code, validUntil, ...} when this prescription is in scope, else null.
   // Never rejects: every failure path prints an ordinary prescription.
-  function rxIssueVerification(lines) {
+  /* "Manoj Kumar" -> "M*** K***". Computed HERE, on the device, and only the mask is ever sent: the
+   * server never receives the patient's name, so there is no name in transit and none at rest to
+   * leak. A fixed three stars, never the real length - keeping the length (or alternate letters,
+   * M*N*JK*M*R) hands back a skeleton a human reconstructs on sight, which is not a mask at all.
+   *
+   * What it is FOR: the pharmacist compares the initials against the ID in front of them, so a
+   * stolen PDF presented by someone with different initials is refused. What it is NOT: proof of
+   * identity. Initials collide constantly, so this catches the opportunistic case, not a targeted
+   * one. It is also still personal data - pseudonymised, not anonymous - see the verify page.
+   */
+  function rxMaskName(name) {
+    var parts = String(name == null ? "" : name).trim().split(/\s+/).filter(Boolean).slice(0, 4);
+    var out = [];
+    for (var i = 0; i < parts.length; i++) {
+      var first = parts[i].charAt(0);
+      if (/[A-Za-z]/.test(first)) out.push(first.toUpperCase() + "***");
+    }
+    return out.join(" ");
+  }
+
+  function rxIssueVerification(lines, patientName) {
     if (!rxvOn()) return Promise.resolve(null);
     var drugs = (lines || []).filter(function (L) { return !L.advice && L.drug; }).map(function (L) {
       return { name: L.drug, dose: L.dose || "", freq: L.freq || "", duration: L.duration || "" };
     });
+    var mask = rxMaskName(patientName);
     // No scope gate and no minimum drug count: EVERY prescription this app prints carries an ID and
     // a QR, a blank sheet included. The rules module still decides how LONG a prescription is valid
     // and still explains why one is worth checking - it just no longer decides whether a sheet gets
@@ -188,7 +209,7 @@
       return fetch("/api/rx/issue", {
         method: "POST",
         headers: { "content-type": "application/json", "Authorization": "Bearer " + tok },
-        body: JSON.stringify({ drugs: drugs, country: "IN" })
+        body: JSON.stringify({ drugs: drugs, country: "IN", patientMask: mask })
       }).then(function (r) { return r.ok ? r.json() : null; });
     }).then(function (d) { return (d && d.ok && d.issued) ? d : null; }).catch(function () { return null; });
   }
@@ -502,7 +523,7 @@
     // out of scope, when the doctor is not signed in, or when the network is down - in every one of
     // those cases the prescription still prints, just without a QR (see rxIssueVerification).
     var d = collectRx();
-    rxIssueVerification(d && d.lines).then(function (rxv) {
+    rxIssueVerification(d && d.lines, d && d.name).then(function (rxv) {
       if (!rxv) { var why = rxNoQrWhy(d && d.lines); if (why) rxToast(why); }
       var html = rxPrintHTML(topic, regNo, rxv);
       if (rxNative()) { if (!rxNativePrint(html)) rxWebPrint(html); return; }
@@ -1063,8 +1084,8 @@
    * offline prescription still exports, just without a QR (and rxNoQrWhy says which). */
   function exportRx(kind, topic, regNo, signImg){
     if(!window.html2canvas){ rxToast("Export engine still loading — try again"); return; }
-    var lines=(collectRx()||{}).lines;
-    rxIssueVerification(lines).then(function(rxv){
+    var d=collectRx()||{}, lines=d.lines;
+    rxIssueVerification(lines, d.name).then(function(rxv){
       if(!rxv){ var why=rxNoQrWhy(lines); if(why) rxToast(why); }
       exportRxNow(kind, topic, regNo, signImg, rxv);
     });

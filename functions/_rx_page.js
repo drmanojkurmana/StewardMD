@@ -122,7 +122,9 @@ export function renderForm() {
       '<b style="font-size:19px">StewardMD prescription check</b>' +
       '<p style="color:var(--mut);margin:8px 0 0;font-size:14.5px">Scan the QR on the prescription, or type the code printed beside it.</p>' +
     "</div>" + FORM +
-    '<p class="note">This check confirms who wrote a prescription and whether it is still valid. It shows no patient information, and never has any: patient details are not part of the record.</p>',
+    '<p class="note">This check confirms who wrote a prescription, whether it is still valid, and the ' +
+      'patient\'s initials so you can compare them with the ID in front of you. It shows nothing else ' +
+      'about the patient - no name, age, contact or diagnosis, because none of that is in the record.</p>',
     "Verify a prescription"));
 }
 
@@ -144,6 +146,17 @@ export async function renderPage(env, request, rawCode) {
       (b.schedule ? row("Schedule", b.schedule) : "") +
       (b.refillsAllowed != null ? row("Refills allowed", String(b.refillsAllowed)) : "") +
       "</div>";
+
+    /* Masked initials, with the instruction that makes them useful. Without this the page verifies
+     * the DOCUMENT and says nothing about who is holding it, so a stolen PDF for a sleeping pill is
+     * dispensed to whoever presents it. Worded as a check to perform, not a fact to read: initials
+     * collide constantly, so this is a prompt to look at the ID, never proof of identity by itself. */
+    if (b.patientMask) {
+      body += '<h2>Patient</h2><div class="card">' +
+        row("Initials", b.patientMask) +
+        '</div><p class="note">Check these initials against the patient\'s ID. They are not proof of ' +
+        'identity - many people share initials - but they should not contradict the person in front of you.</p>';
+    }
 
     body += '<h2>Prescriber</h2><div class="card">' +
       row("Name", d.name || "(not recorded)") +
@@ -168,7 +181,9 @@ export async function renderPage(env, request, rawCode) {
     body += FORM;
   }
 
-  body += '<p class="note">StewardMD · this page shows no patient information.</p>';
+  // Was "shows no patient information", which stopped being true the moment initials were added.
+  body += '<p class="note">StewardMD · this page shows the patient\'s initials only - no name, age, ' +
+    'contact or diagnosis.</p>';
   const extra = out.retryAfter ? { "retry-after": String(out.retryAfter) } : null;
   return html(out.status, page(body, b.ok ? "Prescription " + (b.code || "") : tone.label), extra);
 }
