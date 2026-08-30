@@ -130,7 +130,13 @@ export async function lookup(env, code, deps) {
   const get = (deps && deps.fsGet) || fsGet;
   const c = RXV.normalizeCode(code);
   if (!c || c.length < 12) return null;
-  try { return await get(env, path(c)); } catch (e) { return null; }
+  // fsGet resolves to the Firestore envelope {id,name,fields,updateTime}; the record is under
+  // .fields, the same unwrap _pglog_store.js does at every read. Returning the envelope left every
+  // caller reading rec.drugs / rec.doctor / rec.code as undefined, and it failed in the worst way:
+  // the doc WAS found, so /verify said "Valid prescription" while showing "(not recorded)" for the
+  // prescriber and "0 drugs" - a check that confirms nothing. revoke() went the same way, since
+  // rec.doctor.uid never matched the caller and it always answered 403 not_the_prescriber.
+  try { const doc = await get(env, path(c)); return doc ? (doc.fields || null) : null; } catch (e) { return null; }
 }
 
 /* Revoke — the prescriber withdrawing their own prescription (a wrong drug, a lost sheet). Never a
