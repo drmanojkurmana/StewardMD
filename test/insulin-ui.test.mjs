@@ -117,16 +117,21 @@ test("with no patient selected nothing in the log is attributable", () => {
 
 test("the daily total is per patient, so six patients do not share one cap", () => {
   reset();
-  logDose("bed4", 10); logDose("bed5", 10); logDose("bed6", 10);
+  // Stamped NOW, not the helper's default 30 minutes ago. todayTotal() counts by CALENDAR DAY, so
+  // between 00:00 and 00:30 a "30 minutes ago" dose falls on YESTERDAY and this test failed nightly
+  // for half an hour. Nothing here tests elapsed time - only that a total is per patient.
+  logDose("bed4", 10, "correction", 0); logDose("bed5", 10, "correction", 0); logDose("bed6", 10, "correction", 0);
   st.patientId = "bed4";
   assert.equal(B.todayTotal(), 10, "must count only this patient's dose");
 });
 
 test("units/hour and whole-day totals never contaminate the daily unit total", () => {
   reset();
-  logDose("bed4", 6, "correction");
-  logDose("bed4", 7, "dka", 30, "units/hour");     // an infusion RATE
-  logDose("bed4", 40, "basal", 30, "units/day");   // a whole-day total
+  logDose("bed4", 6, "correction", 0);
+  logDose("bed4", 7, "dka", 0, "units/hour");      // an infusion RATE
+  logDose("bed4", 40, "basal", 0, "units/day");    // a whole-day total
+  // 0 minutes ago for the same midnight-boundary reason as the test above: these must all land on
+  // TODAY for the assertion to mean anything, and none of them is testing elapsed time.
   st.patientId = "bed4";
   assert.equal(B.todayTotal(), 6);
 });

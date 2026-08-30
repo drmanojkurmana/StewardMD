@@ -152,12 +152,15 @@ test("drug dose/frequency/duration ARE kept - a tampered quantity must be detect
 
 /* ---------------- scope ---------------- */
 
-test("a prescription with no habit-forming, antibiotic or scheduled drug is NOT issued a code", async () => {
+/* Every prescription is issued a code. This asserted the opposite until the scope rule was removed:
+ * an ordinary sheet printed with no QR and no ID, which reads as a broken feature, and a sheet
+ * carrying no code cannot be checked by whoever is holding it. */
+test("an ordinary prescription is issued a code like any other", async () => {
   const db = fakeDb();
   const out = await issue(ENV, CLAIMS, { drugs: [{ name: "Amlodipine" }, { name: "Metformin" }] }, db.deps);
-  assert.equal(out.body.issued, false);
-  assert.equal(out.body.reason, "not_in_scope");
-  assert.equal(db.docs.size, 0, "out-of-scope prescriptions create no record at all");
+  assert.equal(out.body.issued, true, "no scope rule stands between a prescription and its code");
+  assert.ok(out.body.code, "and it carries one");
+  assert.equal(db.docs.size, 1, "the record exists, so the code resolves when someone scans it");
 });
 
 test("an antibiotic alone brings a prescription into scope", async () => {
@@ -167,10 +170,15 @@ test("an antibiotic alone brings a prescription into scope", async () => {
   assert.ok(out.body.reasons.some((r) => /antibiotic/i.test(r)), "and the reason is reported back");
 });
 
-test("an empty drug list is refused", async () => {
+test("even a blank sheet gets a code", async () => {
+  // Asked for explicitly: a prescription with nothing on it still has to be verifiable, so an empty
+  // drug list is issued rather than refused.
   const db = fakeDb();
-  assert.equal((await issue(ENV, CLAIMS, { drugs: [] }, db.deps)).status, 400);
-  assert.equal(db.docs.size, 0);
+  const out = await issue(ENV, CLAIMS, { drugs: [] }, db.deps);
+  assert.equal(out.status, 200);
+  assert.equal(out.body.issued, true);
+  assert.ok(out.body.code, "a blank sheet carries a code too");
+  assert.equal(db.docs.size, 1);
 });
 
 /* ---------------- lookup + revoke ---------------- */

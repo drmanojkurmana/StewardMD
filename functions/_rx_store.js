@@ -64,13 +64,18 @@ export async function issue(env, claims, body, deps) {
   const uid = claims && (claims.sub || claims.user_id);
   if (!uid) return { status: 401, body: { ok: false, error: "sign_in_required" } };
 
+  /* EVERY prescription gets a code. No scope rule, no minimum drug count.
+   *
+   * This used to mint only for antibiotics, habit-forming and scheduled drugs, and to reject an
+   * empty list outright. In practice a doctor printed an ordinary prescription, saw no QR, and had
+   * no way to tell a deliberate omission from a broken feature - and a sheet carrying no code
+   * cannot be checked by anyone holding it. Every sheet this app produces now carries an ID and a
+   * QR, a blank one included.
+   *
+   * requiresVerification/verificationReasons stay in the rules module: they no longer gate issuing,
+   * they explain WHY a prescription is worth checking, which the verify page still shows.
+   */
   const drugs = cleanDrugs(body && body.drugs);
-  if (!drugs.length) return { status: 400, body: { ok: false, error: "no_drugs" } };
-
-  // Scope, decided by the rules module: habit-forming, antibiotic, or explicitly scheduled.
-  if (!RXV.requiresVerification(drugs)) {
-    return { status: 200, body: { ok: true, issued: false, reason: "not_in_scope" } };
-  }
 
   const issuedAt = now();
   const v = RXV.validity({

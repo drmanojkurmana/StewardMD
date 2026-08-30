@@ -61,6 +61,19 @@
    * word-boundary lists below, which exist because the commonest habit-forming molecules must never
    * depend on the server having returned a flag. */
   var HABIT_RE = /\b(alprazolam|lorazepam|clonazepam|diazepam|nitrazepam|midazolam|zolpidem|zopiclone|eszopiclone|phenobarb\w*|barbital|tramadol|codeine|morphine|fentanyl|buprenorphine|methadone|oxycodone|hydrocodone|pethidine|meperidine|pentazocine|ketamine|methylphenidate|amphetamine|dextroamphetamine|modafinil|armodafinil|gabapentin|pregabalin)\b/i;
+  /* Class STEMS, not just full generic names.
+   *
+   * The list below matches a whole word, so it saw "Amoxiclav" - how co-amoxiclav is actually
+   * written on a prescription - as an unknown drug and printed the sheet with no QR. The same hole
+   * swallowed every combination name, every contraction, and every member of a listed class that
+   * nobody had typed out: cefdinir, flucloxacillin, piptaz.
+   *
+   * Deliberately generous, because the two errors are not equal. A miss means an antibiotic
+   * prescription goes out with NO verification, which is the exact harm this feature exists to
+   * prevent. A false positive only mints a code nobody needed. So the stems catch the class
+   * suffixes that are, in practice, unique to antibiotics.
+   */
+  var ANTIBIOTIC_STEM_RE = /(amoxiclav|pip[\s-]?taz|cillin|floxacin|mycin|micin|cycline|penem|trimoxazole|sulfonamide|\bcef[a-z]{2,}|\bceph[a-z]{2,})/i;
   var ANTIBIOTIC_RE = /\b(penicillin|amoxicillin|ampicillin|cloxacillin|piperacillin|tazobactam|clavulanate|cephalexin|cefazolin|cefuroxime|cefixime|cefpodoxime|cefotaxime|ceftriaxone|ceftazidime|cefepime|cefoperazone|sulbactam|meropenem|imipenem|ertapenem|doripenem|aztreonam|vancomycin|teicoplanin|daptomycin|linezolid|clindamycin|azithromycin|clarithromycin|erythromycin|doxycycline|minocycline|tetracycline|tigecycline|gentamicin|amikacin|tobramycin|ciprofloxacin|levofloxacin|moxifloxacin|ofloxacin|norfloxacin|metronidazole|tinidazole|nitrofurantoin|fosfomycin|colistin|polymyxin|rifampicin|isoniazid|pyrazinamide|ethambutol|trimethoprim|sulfamethoxazole|cotrimoxazole|chloramphenicol|mupirocin|fidaxomicin)\b/i;
   var ANTIBIOTIC_CLASS_RE = /antibiot|antibacterial|antimicrobial|penicillin|cephalosporin|carbapenem|glycopeptide|macrolide|quinolone|fluoroquinolone|aminoglycoside|tetracycline|oxazolidinone|nitroimidazole|sulfonamide/i;
 
@@ -83,7 +96,8 @@
       (typeof hfRaw === "string" && hfRaw.trim() !== "" && !/^(no|none|nil|false|n\/a)$/i.test(hfRaw.trim()));
     if (!hf) hf = HABIT_RE.test(name);
 
-    var abx = drug.antibiotic === true || ANTIBIOTIC_CLASS_RE.test(cls) || ANTIBIOTIC_RE.test(name);
+    var abx = drug.antibiotic === true || ANTIBIOTIC_CLASS_RE.test(cls) ||
+      ANTIBIOTIC_RE.test(name) || ANTIBIOTIC_STEM_RE.test(name);
     return { schedule: sched, habitForming: !!hf, antibiotic: !!abx, name: name };
   }
 

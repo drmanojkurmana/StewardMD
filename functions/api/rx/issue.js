@@ -16,7 +16,11 @@
  * the verify page then says in plain words that the registration was not verified — far more useful
  * to a pharmacist than no QR at all, and the record stays honest either way.
  */
-import { verifyFirebaseToken } from "../../_fbauth.js";
+// verifyFirebaseClaims, NOT verifyFirebaseToken: this route needs the prescriber's name, regNo and
+// verified flag, and verifyFirebaseToken returns only the uid. Because a uid is a STRING, and every
+// string carries the legacy String.prototype.sub method, the `claims.sub` guard below passed on a
+// uid anyway and every prescription was recorded with a blank prescriber.
+import { verifyFirebaseClaims } from "../../_fbauth.js";
 import { issue, revoke } from "../../_rx_store.js";
 
 const json = (status, body, extra) => new Response(JSON.stringify(body), {
@@ -27,13 +31,18 @@ const json = (status, body, extra) => new Response(JSON.stringify(body), {
 async function claimsFrom(request, env) {
   const token = (request.headers.get("Authorization") || "").replace(/^Bearer\s+/i, "").trim();
   if (!token) return null;
-  try { return await verifyFirebaseToken(token, env); } catch (e) { return null; }
+  try { return await verifyFirebaseClaims(token, env); } catch (e) { return null; }
 }
 
 export async function onRequestPost(context) {
   const { request, env } = context;
   const claims = await claimsFrom(request, env);
-  if (!claims || !(claims.sub || claims.user_id)) return json(401, { ok: false, error: "sign_in_required" });
+  // typeof check first: `claims.sub` alone is not enough, because a bare uid STRING answers .sub
+  // with String.prototype.sub (a function, therefore truthy) and sails through into a record with
+  // no prescriber on it. Demand a real object so that mistake fails loudly instead of silently.
+  if (!claims || typeof claims !== "object" || !(claims.sub || claims.user_id)) {
+    return json(401, { ok: false, error: "sign_in_required" });
+  }
 
   let body = null;
   try { body = await request.json(); } catch (e) { return json(400, { ok: false, error: "bad_json" }); }
