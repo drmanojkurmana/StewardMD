@@ -57,12 +57,22 @@ test("the patient is never sent to the server when minting a code", () => {
   assert.match(posted, /drugs:/, "only the drugs (and country) are posted");
 });
 
-test("only in-scope prescriptions call the server at all", () => {
-  assert.match(SRC, /SMD_RX_VALIDITY\.requiresVerification\(drugs\)/,
-    "scope is decided by the shared rules module, not re-derived in the UI");
-  // A routine sheet must not mint a record, so no code is printed on it either.
-  assert.equal(V.requiresVerification([{ name: "Amlodipine" }, { name: "Metformin" }]), false);
+/* EVERY prescription asks for a code - there is no scope gate on the client any more.
+ *
+ * This test used to assert the opposite. The scope rule meant an ordinary prescription printed with
+ * no QR and no ID, which is indistinguishable from the feature being broken, and a sheet with no
+ * code cannot be checked by whoever is holding it. Every sheet now carries one.
+ */
+test("every prescription asks the server for a code, in scope or not", () => {
+  const body = SRC.slice(SRC.indexOf("function rxIssueVerification"), SRC.indexOf("function rxNoQrWhy"));
+  assert.ok(!/requiresVerification/.test(body), "no scope gate stands between a prescription and its code");
+  assert.ok(!/drugs\.length/.test(body), "and no minimum drug count - a blank sheet gets one too");
+  assert.match(body, /\/api\/rx\/issue/, "it still goes to the issue endpoint");
+
+  // The rules module keeps these - they no longer gate issuing, they explain why a prescription is
+  // worth checking, which the verify page still shows.
   assert.equal(V.requiresVerification([{ name: "Alprazolam" }]), true);
+  assert.equal(V.requiresVerification([{ name: "Amoxiclav" }]), true, "a contraction is still an antibiotic");
 });
 
 test("a scanned code round-trips: printed form -> normalised -> same record", () => {
@@ -118,7 +128,11 @@ test("the printed sheet and the exported PDF encode the SAME verify URL", () => 
 test("the prescriber is told why a sheet printed without a QR", () => {
   assert.match(SRC, /function rxNoQrWhy/, "the reason helper exists");
   assert.match(SRC, /if \(!rxv\) \{ var why = rxNoQrWhy/, "and doRxPrint calls it when no record was minted");
-  assert.match(SRC, /verification covers antibiotics, habit-forming and scheduled drugs/, "out-of-scope wording");
+  // Scope is no longer a reason a sheet can be bare, so it is no longer one of the messages. The
+  // only two ways left are being signed out or not reaching the server - both actionable, which is
+  // why the message names which one it was.
+  assert.ok(!/verification covers antibiotics/.test(SRC), "the out-of-scope excuse is gone with the scope rule");
+  assert.match(SRC, /sign in to give prescriptions a verification code/, "signed-out wording");
   assert.match(SRC, /verification service could not be reached/, "unreachable-service wording");
   // The guard that must never regress: telling the doctor why cannot stop the sheet printing.
   const body = SRC.slice(SRC.indexOf("function doRxPrint"));

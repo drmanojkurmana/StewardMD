@@ -179,9 +179,10 @@
     var drugs = (lines || []).filter(function (L) { return !L.advice && L.drug; }).map(function (L) {
       return { name: L.drug, dose: L.dose || "", freq: L.freq || "", duration: L.duration || "" };
     });
-    if (!drugs.length) return Promise.resolve(null);
-    try { if (!SMD_RX_VALIDITY.requiresVerification(drugs)) return Promise.resolve(null); }
-    catch (e) { return Promise.resolve(null); }
+    // No scope gate and no minimum drug count: EVERY prescription this app prints carries an ID and
+    // a QR, a blank sheet included. The rules module still decides how LONG a prescription is valid
+    // and still explains why one is worth checking - it just no longer decides whether a sheet gets
+    // a code at all. A sheet with no code cannot be checked by anyone holding it.
     return rxIdToken().then(function (tok) {
       if (!tok) return null;                       // not signed in: print without a QR
       return fetch("/api/rx/issue", {
@@ -195,13 +196,15 @@
   // is right for printing but leaves the prescriber holding a sheet with no code and no reason - the
   // one case that reads as a bug when it is usually the scope rule working correctly. Names which it
   // was, and never blocks the print.
-  function rxNoQrWhy(lines) {
+  function rxNoQrWhy() {
     if (!rxvOn()) return "";
-    var drugs = (lines || []).filter(function (L) { return !L.advice && L.drug; })
-      .map(function (L) { return { name: L.drug, dose: L.dose || "", freq: L.freq || "", duration: L.duration || "" }; });
-    if (!drugs.length) return "";
-    try { if (!SMD_RX_VALIDITY.requiresVerification(drugs)) return "Printed without a QR - verification covers antibiotics, habit-forming and scheduled drugs."; }
-    catch (e) { return ""; }
+    // Scope is no longer a reason - every prescription gets a code now - so the only two ways to
+    // reach a bare sheet are being signed out or being unable to reach the server. Both are
+    // actionable by the prescriber, which is the point of saying which one it was.
+    try {
+      var u = window.SMD_AUTH && window.SMD_AUTH.currentUser;
+      if (!u) return "Printed without a QR - sign in to give prescriptions a verification code.";
+    } catch (e) {}
     return "Printed without a QR - the verification service could not be reached. The prescription is still valid.";
   }
 
