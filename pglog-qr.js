@@ -204,9 +204,15 @@
       if (m[8][i] === null) m[8][i] = 2;           // 2 = reserved
       if (m[i][8] === null) m[i][8] = 2;
     }
+    // The two copies are NOT the same length, and the difference matters now that reserved modules
+    // keep their sentinel through data placement: the vertical strip is 8 modules (the last of them
+    // the always-dark module), the horizontal run is 7. Reserving m[8][n-8] as well would swallow a
+    // data module that the standard says carries a codeword bit.
     for (i = n - 8; i < n; i++) {
-      if (m[8][i] === null) m[8][i] = 2;
       if (m[i][8] === null) m[i][8] = 2;
+    }
+    for (i = n - 7; i < n; i++) {
+      if (m[8][i] === null) m[8][i] = 2;
     }
     m[n - 8][8] = 1;                                // the always-dark module
   }
@@ -335,7 +341,53 @@
   }
 
   /* ── the encoder ────────────────────────────────────────────────────────── */
+  /* Matrix generation is delegated to qrcode-generator (MIT, Kazuhiko Arase), vendored at
+   * vendor/qrcode-generator.js.
+   *
+   * The hand-rolled assembly below produced a matrix that DREW correctly - finder patterns, timing,
+   * alignment, a plausible speckle - and decoded on nothing. Apple's CIDetector could not read a
+   * clean 420px render of it; neither could the app's own scanner, nor any phone camera. It shipped
+   * that way on printed prescriptions and PG logbook certificates. The 22 reference tests passed
+   * throughout, because every one of them checks a PIECE (the GF tables, the RS remainder, the
+   * format bit string) and none of them ever asked whether the finished code could be read back.
+   *
+   * The primitives kept below are correct and stay exported for those tests. What is replaced is
+   * the placement/masking assembly, which is the part that was wrong and the part a QR library
+   * exists to get right.
+   */
+  function qrLib() {
+    if (typeof window !== "undefined" && window.qrcode) return window.qrcode;
+    if (typeof require === "function") { try { return require("./vendor/qrcode-generator.js"); } catch (e) {} }
+    return null;
+  }
+
   function encode(text, opts) {
+    opts = opts || {};
+    var lib = qrLib();
+    if (lib) {
+      var level = opts.ecc === "L" ? "L" : "M";
+      // Same ceiling as before - versions 1-10, and the same error - so callers that rely on the
+      // documented scope keep the behaviour they were written against. The library would happily
+      // go to version 40; a code that dense is unreadable off a printed sheet anyway.
+      var nbytes = utf8Bytes(String(text)).length;
+      if (!pickVersion(nbytes, level) && !(level === "M" && pickVersion(nbytes, "L"))) {
+        throw new Error("pglog_qr_too_long");
+      }
+      if (!pickVersion(nbytes, level)) level = "L";
+      var q = lib(0, level);                      // 0 = pick the smallest version that fits
+      q.addData(String(text));
+      q.make();
+      var count = q.getModuleCount(), mods = [], r, c;
+      for (r = 0; r < count; r++) {
+        mods[r] = [];
+        for (c = 0; c < count; c++) mods[r][c] = q.isDark(r, c) ? 1 : 0;
+      }
+      return { modules: mods, size: count, version: (count - 17) / 4, ecc: level, mask: -1 };
+    }
+    return encodeInHouse(text, opts);
+  }
+
+  function encodeInHouse(text, opts) {
     opts = opts || {};
     var bytes = utf8Bytes(text);
     var ecc = opts.ecc === "L" ? "L" : "M";
@@ -366,7 +418,15 @@
     var best = null, bestScore = Infinity;
     for (var mask = 0; mask < 8; mask++) {
       var m = skeleton();
-      for (var r = 0; r < n; r++) for (var c = 0; c < n; c++) if (m[r][c] === 2) m[r][c] = null;
+      /* The reserved format/version modules STAY reserved through placement.
+       *
+       * This line used to blank them (2 -> null) first, which handed them to placeData as if they
+       * were free. Data bits went into the format-information area, applyFormat then overwrote
+       * those bits with the real format string, and every codeword from there on sat a position out
+       * from where a decoder looks for it. The result draws as a perfectly plausible QR - finders,
+       * timing and alignment all correct - that no scanner can read. That is how it shipped, on
+       * printed prescriptions and on PG logbook certificates. placeData only fills nulls, so
+       * leaving the sentinel in place is the entire fix. */
       placeData(m, full);
       for (var y = 0; y < n; y++) for (var x = 0; x < n; x++) {
         if (!isFunction[y][x] && MASKS[mask](y, x)) m[y][x] ^= 1;
