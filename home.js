@@ -480,7 +480,10 @@
     stop: '<rect x="6" y="6" width="12" height="12" rx="2"/>',
     hourglass: '<path d="M6 3h12M6 21h12"/><path d="M7 3c0 4.5 4 5.5 5 9-1 3.5-5 4.5-5 9M17 3c0 4.5-4 5.5-5 9 1 3.5 5 4.5 5 9"/>',
     download: '<path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/>',
-    logout: '<path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="M16 17l5-5-5-5"/><path d="M21 12H9"/>'
+    logout: '<path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="M16 17l5-5-5-5"/><path d="M21 12H9"/>',
+    // App Lock — PIN keypad + biometric fingerprint (no emoji in security UI).
+    keypad: '<circle cx="7" cy="6" r="1.3" fill="currentColor" stroke="none"/><circle cx="12" cy="6" r="1.3" fill="currentColor" stroke="none"/><circle cx="17" cy="6" r="1.3" fill="currentColor" stroke="none"/><circle cx="7" cy="12" r="1.3" fill="currentColor" stroke="none"/><circle cx="12" cy="12" r="1.3" fill="currentColor" stroke="none"/><circle cx="17" cy="12" r="1.3" fill="currentColor" stroke="none"/><circle cx="7" cy="18" r="1.3" fill="currentColor" stroke="none"/><circle cx="12" cy="18" r="1.3" fill="currentColor" stroke="none"/><circle cx="17" cy="18" r="1.3" fill="currentColor" stroke="none"/>',
+    fingerprint: '<path d="M12 3a7 7 0 0 0-7 7c0 3 .5 5.5 1.5 8"/><path d="M12 3a7 7 0 0 1 7 7c0 1.5-.1 2.8-.3 4"/><path d="M8.5 18.5C7.4 16 7 13.5 7 11a5 5 0 0 1 10 0v2"/><path d="M15.5 20c.6-1.2 1-2.5 1.3-4"/><path d="M9.5 20.5C8.3 17.8 7.8 14.8 8 12a4 4 0 0 1 8 0v1.5"/><path d="M12 12v2.5"/>'
   };
   function svg(name, cls) { return '<svg viewBox="0 0 24 24" class="' + (cls || "") + '">' + (ICON[name] || "") + '</svg>'; }
   // Shared icon accessor so icu.js / antibiogram.js / sheets use ONE catalog (no emojis, no dup SVG).
@@ -2669,6 +2672,18 @@
         row("Phone", "phone", { value: "", placeholder: "Loading…", edit: false }) +
       '</div>' +
 
+      // App Lock (flag smd_applock, off by default) — shown to the owner regardless, so the
+      // feature is reachable for testing even while the flag stays off for everyone else, the
+      // same pattern the "AI Control Center (owner)" More-menu row already uses.
+      (window.SMD_APPLOCK ?
+        '<div class="hv-pf-sec">Security</div>' +
+        '<div class="hv-pf-card">' +
+          row("App Lock", "applock", {
+            value: { pin: "PIN set", biometric: "Face ID / Touch ID" }[window.SMD_APPLOCK.method()] || "Not set",
+            editLabel: "Manage"
+          }) +
+        '</div>' : "") +
+
       '<div class="hv-pf-sec">Account</div>' +
       '<div class="hv-pf-card">' +
         row("Name", "name", { value: nm, edit: false }) +
@@ -2690,6 +2705,18 @@
     if (so) so.addEventListener("click", function () { var b = document.getElementById("sessionSignOut"); if (b) b.click(); setTimeout(openAccount, 150); });
     var del = s.querySelector('[data-acct="delete"]');
     if (del) del.addEventListener("click", confirmDeleteAccount);
+    // Bind immediately, not inside acctFillProfessional's async Firestore fetch below — a tap
+    // before that resolves (slow network, or just a fast tap) found nothing wired and did
+    // nothing at all. Read whatever hospital value is on screen at CLICK time instead: by then
+    // it is almost always the real one, and worst case (mid-"Loading…") is a harmless fallback
+    // to the personal-account gate rather than a dead button.
+    var alBtn = s.querySelector('[data-edit="applock"]');
+    if (alBtn) alBtn.addEventListener("click", function () {
+      var hosp = "";
+      try { var hv = s.querySelector('[data-row="hospital"] [data-val]'); hosp = (hv && hv.textContent) || ""; } catch (e) {}
+      if (hosp === "Loading…" || hosp === "Not set") hosp = "";
+      if (window.SMD_APPLOCK) window.SMD_APPLOCK.manage(hosp);
+    });
     acctWatchAuth();
     acctFillId(s);
     acctFillVerified(s);

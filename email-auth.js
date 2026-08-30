@@ -299,6 +299,7 @@
 
   function openProfile(opts) {
     opts = opts || {};
+    _state.firstRunProfile = !!opts.firstRun;
     _state.profile = _state.profile || {};
     var g = geo();
     var uid = curUid();
@@ -325,7 +326,7 @@
         var b = e.target.closest && e.target.closest("[data-ea]"); if (!b) return;
         var a = b.getAttribute("data-ea");
         if (a === "cancel") return close();
-        if (a === "skipProfile") { markProfileSeen(); close(); toast("You can complete your profile later from Account"); return; }
+        if (a === "skipProfile") { markProfileSeen(); close(); toast("You can complete your profile later from Account"); try { window.SMD_APPLOCK && window.SMD_APPLOCK.promptSetup({ hospital: "" }); } catch (e) {} return; }
         if (a === "saveProfile") return submitProfile();
       };
     });
@@ -384,6 +385,7 @@
       busy(false); close();
       toast("Profile saved");
       try { window.dispatchEvent(new CustomEvent("smd:profile", { detail: data })); } catch (e) {}
+      if (_state.firstRunProfile) { try { window.SMD_APPLOCK && window.SMD_APPLOCK.promptSetup({ hospital: hospital }); } catch (e) {} }
     }).catch(function () { busy(false); err("Couldn’t save your profile. Please try again."); });
   }
 
@@ -444,7 +446,9 @@
   }
 
   // ---- public API + boot -------------------------------------------------------------------
-  window.SMD_EMAIL_AUTH = { openEmail: openEmail, openOtp: openOtp, sendOtp: sendOtp };
+  window.SMD_EMAIL_AUTH = { openEmail: openEmail, openOtp: openOtp, sendOtp: sendOtp,
+    // read-only, for applock.js: is a pre-home gate up / is one of our sheets open / the profile doc
+    gateUp: gateUp, flowOpen: function () { return !!(_el && _el.style.display === "flex"); }, loadProfile: loadProfile };
   window.SMD_openProfile = function () { try { openProfile({ firstRun: false }); } catch (e) {} };
 
   function boot() {

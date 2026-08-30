@@ -544,6 +544,8 @@
   function hideNativeSplash() {
     if (_splashHidden) return;
     _splashHidden = true;
+    // the branded web splash becomes visible NOW: its 3s hold (index.html boot script) counts from here
+    try { window.__smdSplashShownAt = Date.now(); } catch (e) { /* no-op */ }
     try {
       var P = window.Capacitor && window.Capacitor.Plugins;
       if (P && P.SplashScreen) P.SplashScreen.hide();

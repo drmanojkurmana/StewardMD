@@ -274,11 +274,6 @@ body.smd-ddi-open #smdBackToTop{display:none!important}
       </span>
     </div>
     <div class="sbs-bar"><span></span></div>
-    <!-- Phase 2 turns the passive "loading" pill into a deliberate stop: the signed-in clinician
-         opens their own workspace. Static markup so the flag-off path is exact (it stays hidden,
-         like .sbs-hello); the script below unhides it, attaches the tap handler and only THEN
-         arms the hold. Guests never reach it. -->
-    <button class="sbs-go" id="sbsGo" type="button" hidden>Open Workspace</button>
   </div>
   <div class="sbs-foot">
     <span class="sbs-by">developed by</span>
@@ -312,66 +307,33 @@ body.smd-ddi-open #smdBackToTop{display:none!important}
   }
   dp.textContent=(label.replace(/^dr\.?\s+/i,"").charAt(0)||"S").toUpperCase();
   host.hidden=false;s.classList.add("sbs-personal");
-  /* SEQUENCE, not replacement. The boot splash opens in its CLASSIC composition (mark, the
-     Steward/MD wordmark, the tagline, the thin progress bar, the developed-by foot) in BOTH
-     themes, exactly as before this layer existed. Only after a short beat does it crossfade
-     into the personalised phase 2. Nothing here delays boot: if the app is ready first, the
-     splash is already fading (.sbs-hide) or gone, and the beat is dropped. Guests and
-     first-run users never reach phase 2, so they see the classic splash for the whole boot. */
-  var BEAT=900,XF=220,rm=false;
+  /* SEQUENCE: the classic frame holds a beat, then crossfades into the personalised phase 2
+     (avatar, name, glass foot), which holds until the boot script's constant 3s is up and
+     Face ID / PIN fires by itself. Both screens are passive: no button, no hold. */
+  var BEAT=1200,XF=220,rm=false,t0=Date.now();
   try{rm=!!(window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches);}catch(e){}
   function live(){return !!s.parentNode&&!s.classList.contains("sbs-hide");}
-  /* ── the Open Workspace gate ────────────────────────────────────────────────────────────
-     Two loading screens in a row read as dead time, so phase 2 stops being passive: the pill
-     becomes a real button and the splash HOLDS on the welcome-back screen until the clinician
-     taps it. FAIL-OPEN is the whole design here, because a clinician stuck behind a splash is
-     a clinical problem, not a cosmetic one:
-       - the hold is armed ONLY after the button is in the DOM, measured at a real tap size and
-         its listener attached. Any throw, any bad measurement, and we arm nothing, .sbs-gate
-         never lands, phase 2 keeps today's "Loading your workspace" pill and auto-hides,
-       - a 20s safety valve opens it for them if they set the phone down, and the hide loop
-         re-checks that deadline itself so a lost timer cannot strand anyone,
-       - ?splashv2=0 and guests never get here at all (this whole block returned early). */
-  var GATE_CAP=20000;
-  function arm(){
-    var btn=null;
-    try{
-      btn=document.getElementById("sbsGo");
-      if(!btn||!live())return;
-      btn.hidden=false;s.classList.add("sbs-gate");
-      /* the button must genuinely be a tap target before we hand it the boot */
-      if(!(btn.offsetHeight>=44&&btn.offsetWidth>=44))throw new Error("sbsGo not tappable");
-      var gate={held:true,armed:Date.now(),cap:GATE_CAP};
-      gate.open=function(){
-        if(!gate.held)return;
-        gate.held=false;
-        /* if boot is still running, say so rather than looking unresponsive */
-        try{btn.disabled=true;btn.classList.add("is-opening");btn.textContent="Opening...";}catch(e){}
-        try{if(window.__smdBootGateOpened)window.__smdBootGateOpened();}catch(e){}
-      };
-      btn.addEventListener("click",gate.open);
-      window.__smdBootGate=gate;
-      setTimeout(function(){try{gate.open();}catch(e){}},GATE_CAP);
-    }catch(e){
-      try{window.__smdBootGate=null;s.classList.remove("sbs-gate");if(btn)btn.hidden=true;}catch(_){}
-    }
-  }
-  setTimeout(function(){
+  /* the beat counts from when the frame is actually SEEN (native-bridge stamps __smdSplashShownAt
+     when it lifts the native splash), the same clock the boot script's hold below uses. Screen 1
+     for BEAT, then screen 2 for the rest of that hold (3s: MIN is 4500 for a personalised boot). */
+  function seen(){try{return Date.now()-(window.__smdSplashShownAt||t0);}catch(e){return Date.now()-t0;}}
+  (function beat(){
     if(!live())return;
-    if(rm){s.classList.add("smd-boot-phase2");arm();return;}
+    if(seen()<BEAT){setTimeout(beat,100);return;}
+    if(rm){s.classList.add("smd-boot-phase2");return;}
     s.classList.add("sbs-xfade");
     setTimeout(function(){
       if(!live())return;
-      s.classList.add("smd-boot-phase2");s.classList.remove("sbs-xfade");arm();
+      s.classList.add("smd-boot-phase2");s.classList.remove("sbs-xfade");
     },XF);
-  },BEAT);
+  })();
 }catch(e){}})();</script>
 <style>
   #smdBootSplash{position:fixed;inset:0;z-index:2147483000;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;opacity:1;transition:opacity .45s ease;-webkit-font-smoothing:antialiased;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,system-ui,sans-serif}
   #smdBootSplash.sbs-hide{opacity:0;pointer-events:none}
   #smdBootSplash .sbs-center{display:flex;flex-direction:column;align-items:center;gap:16px;transform:translateY(-3%)}
-  #smdBootSplash .sbs-logo{width:107px;height:107px;object-fit:contain;animation:sbsPop .6s cubic-bezier(.2,.7,.2,1) both}
-  #smdBootSplash .sbs-word{font-size:30px;font-weight:800;letter-spacing:-.02em;color:#0f172a;animation:sbsFade .7s .12s ease both}
+  #smdBootSplash .sbs-logo{width:107px;height:107px;object-fit:contain}
+  #smdBootSplash .sbs-word{font-size:30px;font-weight:800;letter-spacing:-.02em;color:#0f172a}
   #smdBootSplash .sbs-word span{color:#0e6e63}
   #smdBootSplash .sbs-bar{width:132px;height:3px;border-radius:999px;background:#e6efee;overflow:hidden;margin-top:4px}
   #smdBootSplash .sbs-bar>span{display:block;width:42%;height:100%;border-radius:999px;background:#0e6e63;animation:sbsBar 1.15s ease-in-out infinite}
@@ -379,9 +341,9 @@ body.smd-ddi-open #smdBackToTop{display:none!important}
   #smdBootSplash .sbs-by{font-size:10.5px;letter-spacing:.09em;text-transform:uppercase;color:#94a3b8}
   #smdBootSplash .sbs-maik{height:53px;width:auto;object-fit:contain}
   /* tagline */
-  #smdBootSplash .sbs-tag{font-size:13.5px;font-weight:600;letter-spacing:.005em;color:#5a7184;margin-top:-4px;animation:sbsFade .7s .2s ease both}
+  #smdBootSplash .sbs-tag{font-size:13.5px;font-weight:600;letter-spacing:.005em;color:#5a7184;margin-top:-4px}
   /* white-masked mark (used in the dark Style-B splash) */
-  #smdBootSplash .sbs-mark{width:107px;height:107px;display:none;background:#fff;-webkit-mask:url(/logo.png) center/contain no-repeat;mask:url(/logo.png) center/contain no-repeat;animation:sbsPop .6s cubic-bezier(.2,.7,.2,1) both}
+  #smdBootSplash .sbs-mark{width:107px;height:107px;display:none;background:#fff;-webkit-mask:url(/logo.png) center/contain no-repeat;mask:url(/logo.png) center/contain no-repeat}
   #smdBootSplash .sbs-maik-dark{display:none}
   /* ── Style B: premium dark teal (iOS dark mode · Android night) ── */
   #smdBootSplash.sbs-dark{background:radial-gradient(125% 90% at 50% 18%,#0d5049 0%,#08302b 55%,#061f1c 100%)}
@@ -395,12 +357,11 @@ body.smd-ddi-open #smdBackToTop{display:none!important}
   #smdBootSplash.sbs-dark .sbs-by{color:rgba(255,255,255,.45)}
   #smdBootSplash.sbs-dark .sbs-maik-light{display:none}
   #smdBootSplash.sbs-dark .sbs-maik-dark{display:inline-block}
-  @keyframes sbsPop{from{opacity:0;transform:scale(.82)}to{opacity:1;transform:scale(1)}}
-  @keyframes sbsFade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
   @keyframes sbsBar{0%{transform:translateX(-130%)}100%{transform:translateX(340%)}}
-  @media (prefers-reduced-motion:reduce){#smdBootSplash .sbs-logo,#smdBootSplash .sbs-word{animation:none}#smdBootSplash .sbs-bar>span{animation-duration:2.2s}}
+  @media (prefers-reduced-motion:reduce){#smdBootSplash .sbs-bar>span{animation-duration:2.2s}}
   /* ── v2 (html.smd-splash-v2) · Direction C: gradient depth, glass cards, bold type ──
-     THE BOOT SPLASH IS A SEQUENCE, NOT A REPLACEMENT. Phase 1 (no .smd-boot-phase2) is the
+     THE BOOT SPLASH IS A SEQUENCE OF TWO PASSIVE SCREENS (no button, no hold; the boot script
+     holds a constant 3s and then Face ID / PIN fires by itself). Phase 1 (no .smd-boot-phase2) is the
      CLASSIC splash, untouched: the interlocked mark, the Steward/MD two-tone wordmark, the
      "Built by clinicians, for clinicians" tagline, the thin progress bar and the developed-by
      foot, in both the light and the dark theme. Everything below that restyles composition is
@@ -450,17 +411,6 @@ body.smd-ddi-open #smdBackToTop{display:none!important}
   html.smd-splash-v2 #smdBootSplash.smd-boot-phase2 .sbs-bar::after{content:"Loading your workspace\2026";display:block;font-size:11.5px;font-weight:500;letter-spacing:.01em;color:#6b8398;animation:sbsGlow 1.8s ease-in-out infinite}
   html.smd-splash-v2 #smdBootSplash.smd-boot-phase2.sbs-dark .sbs-bar{background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.12)}
   html.smd-splash-v2 #smdBootSplash.smd-boot-phase2.sbs-dark .sbs-bar::after{color:rgba(246,247,245,.6)}
-  /* ── Open Workspace: the pill becomes the button, once the gate is actually armed ──
-     .sbs-gate only lands after the script has the button in the DOM at a real tap size with its
-     listener attached, so if any of that fails the pill above stays and phase 2 auto-hides as
-     before. That is why the swap is keyed on .sbs-gate rather than on phase 2 itself. */
-  html.smd-splash-v2 #smdBootSplash .sbs-go[hidden]{display:none}
-  html.smd-splash-v2 #smdBootSplash .sbs-go{display:none}
-  html.smd-splash-v2 #smdBootSplash.smd-boot-phase2.sbs-gate .sbs-bar{display:none}
-  html.smd-splash-v2 #smdBootSplash.smd-boot-phase2.sbs-gate .sbs-go{display:inline-flex;align-items:center;justify-content:center;min-height:52px;min-width:200px;margin-top:10px;padding:15px 34px;border:1px solid transparent;border-radius:999px;font-family:var(--smd-dsp);font-size:15.5px;font-weight:700;letter-spacing:-.01em;line-height:1;color:#0a141c;cursor:pointer;-webkit-tap-highlight-color:transparent;-webkit-appearance:none;appearance:none;background:linear-gradient(160deg,rgba(104,231,212,.95) 0%,rgba(63,199,179,.92) 38%,rgba(14,110,99,.94) 100%) padding-box,linear-gradient(155deg,rgba(220,255,249,.95) 0%,rgba(255,255,255,.32) 32%,rgba(255,255,255,.06) 58%,rgba(180,245,233,.6) 100%) border-box;box-shadow:inset 0 1px 0 rgba(255,255,255,.6),inset 0 -1px 0 rgba(255,255,255,.18),0 14px 34px rgba(63,199,179,.34),0 2px 8px rgba(0,0,0,.22);-webkit-backdrop-filter:var(--lg-blur-sm);backdrop-filter:var(--lg-blur-sm);transition:transform .12s ease,box-shadow .2s ease,opacity .2s ease}
-  html.smd-splash-v2 #smdBootSplash.smd-boot-phase2.sbs-gate .sbs-go:active{transform:scale(.97);box-shadow:inset 0 1px 0 rgba(255,255,255,.6),inset 0 -1px 0 rgba(255,255,255,.18),0 6px 16px rgba(63,199,179,.3),0 1px 4px rgba(0,0,0,.2)}
-  /* the "Opening..." state reuses the pill's existing glow so nothing new animates */
-  html.smd-splash-v2 #smdBootSplash.smd-boot-phase2.sbs-gate .sbs-go.is-opening{cursor:default;animation:sbsGlow 1.8s ease-in-out infinite}
   /* "developed by MaiK" foot: a glass bar carrying the REAL MaiK logo (light/dark swap kept) */
   html.smd-splash-v2 #smdBootSplash.smd-boot-phase2 .sbs-foot{left:24px;right:24px;transform:none;flex-direction:row;align-items:center;justify-content:center;gap:11px;padding:11px 18px;border-radius:18px}
   html.smd-splash-v2 #smdBootSplash.smd-boot-phase2 .sbs-by{font-family:var(--smd-dsp);font-size:9px;font-weight:600;letter-spacing:.2em}
@@ -471,7 +421,7 @@ body.smd-ddi-open #smdBackToTop{display:none!important}
   html.smd-splash-v2 #smdBootSplash.smd-boot-phase2.sbs-personal .sbs-word{display:none}
   html.smd-splash-v2 #smdBootSplash.smd-boot-phase2.sbs-personal .sbs-tag{display:none}
   html.smd-splash-v2 #smdBootSplash.smd-boot-phase2 .sbs-hello[hidden]{display:none}
-  html.smd-splash-v2 #smdBootSplash.smd-boot-phase2 .sbs-hello{display:flex;flex-direction:column;align-items:center;gap:14px;margin-top:6px;max-width:min(88vw,320px);animation:sbsFade .55s .1s ease both}
+  html.smd-splash-v2 #smdBootSplash.smd-boot-phase2 .sbs-hello{display:flex;flex-direction:column;align-items:center;gap:14px;margin-top:6px;max-width:min(88vw,320px)}
   html.smd-splash-v2 #smdBootSplash .sbs-dp{position:relative;flex:0 0 auto;width:84px;height:84px;border-radius:50%;background:linear-gradient(135deg,#3fc7b3,#0e6e63) center/cover no-repeat;box-shadow:0 16px 40px rgba(14,110,99,.32);display:flex;align-items:center;justify-content:center;font-family:var(--smd-dsp);font-size:30px;font-weight:800;color:#0a141c;letter-spacing:-.03em}
   html.smd-splash-v2 #smdBootSplash .sbs-dp.has-pic{background-color:#0e6e63;box-shadow:0 16px 40px rgba(14,110,99,.32),inset 0 0 0 2px rgba(255,255,255,.16)}
   /* online-status accent (generated decoration, no brand asset involved) */
@@ -489,8 +439,6 @@ body.smd-ddi-open #smdBackToTop{display:none!important}
     html.smd-splash-v2 #smdBootSplash .sbs-foot{transition:none}
     html.smd-splash-v2 #smdBootSplash.smd-boot-phase2 .sbs-hello{animation:none}
     html.smd-splash-v2 #smdBootSplash.smd-boot-phase2 .sbs-bar::after{animation:none}
-    html.smd-splash-v2 #smdBootSplash.smd-boot-phase2.sbs-gate .sbs-go{transition:none}
-    html.smd-splash-v2 #smdBootSplash.smd-boot-phase2.sbs-gate .sbs-go.is-opening{animation:none}
   }
 
   /* ══ LIQUID GLASS material (shared tokens) ═════════════════════════════════════════════
@@ -561,7 +509,10 @@ body.smd-ddi-open #smdBackToTop{display:none!important}
   html.smd-splash-v2 #smdBootSplash.smd-boot-phase2 .sbs-bar::after{color:#4a6577}
   html.smd-splash-v2 #smdBootSplash.smd-boot-phase2.sbs-dark .sbs-bar::after{color:rgba(246,247,245,.72)}
 </style>
-<script>(function(){var s=document.getElementById("smdBootSplash");if(!s)return;var t0=Date.now(),done=false,MIN=900,CAP=15000;
+<script>(function(){var s=document.getElementById("smdBootSplash");if(!s)return;var t0=Date.now(),done=false,
+/* seen-time hold: guests see screen 1 for 3s; a signed-in clinician (.sbs-personal, set by the script above) sees
+   screen 1 for 1.2s, a 220ms crossfade, then screen 2 for a full 3s */
+MIN=s.classList.contains("sbs-personal")?4500:3000,CAP=15000;
 /* Native handoff: once this white splash has actually PAINTED (two rAFs after it is in the
    DOM), signal native-bridge to lift the native splash. Hiding only on this signal — never on
    a timer — guarantees the native splash covers the WebView-init gap, so there is no black
@@ -579,20 +530,28 @@ function ready(){try{
   if(!returning){ if(vis("introPoster")||vis("splash"))return true; }
   var a=document.querySelector(".app-head");if(a&&getComputedStyle(a).display!=="none"&&a.offsetHeight>0)return true;
 }catch(e){return true;}return false;}
-function finish(){if(done)return;done=true;s.classList.add("sbs-hide");setTimeout(function(){if(s.parentNode)s.parentNode.removeChild(s);},480);}
-/* The Open Workspace gate (armed by the splash-v2 script above, signed-in users only). While it
-   holds, this loop keeps polling but does not hide: the clinician opens their own workspace. The
-   deadline is re-checked HERE as well as in the gate's own timer, so a dropped/throttled timer
-   still cannot strand anyone; anything unexpected reads as "not held" and boot proceeds as before.
-   This also suppresses CAP while held, which is deliberate: a visible button the user can press is
-   a better failure mode than a screen that vanishes under them, and the gate's own 20s deadline
-   bounds the wait either way. */
-function gateHeld(){try{var g=window.__smdBootGate;
-  return !!(g&&g.held===true&&(Date.now()-g.armed)<(g.cap||20000)+2000);}catch(e){return false;}}
-/* tapped: reveal at once if boot has finished, otherwise the loop below takes it from here */
-window.__smdBootGateOpened=function(){try{if(!done&&ready())finish();}catch(e){}};
-function tick(){if(done)return;var el=Date.now()-t0;
-  if(gateHeld()){setTimeout(tick,120);return;}
+var lockShowing=false;
+function reallyFinish(){done=true;s.classList.add("sbs-hide");setTimeout(function(){if(s.parentNode)s.parentNode.removeChild(s);},480);}
+/* App Lock: if a PIN/biometric is configured, the splash holds after its constant 3s frame and
+   Face ID / PIN fires by itself instead of revealing the app. Fails open —
+   if applock.js hasn't loaded yet (or throws), window.SMD_APPLOCK is undefined/required()
+   is false, and boot proceeds exactly as before this existed. */
+function finish(){if(done)return;
+  try{
+    if(window.SMD_APPLOCK&&window.SMD_APPLOCK.required()){
+      if(lockShowing)return;
+      lockShowing=true;
+      window.SMD_APPLOCK.unlock(reallyFinish);
+      return;
+    }
+  }catch(e){}
+  reallyFinish();
+}
+/* MIN is 3s of the frame actually being SEEN: native-bridge stamps __smdSplashShownAt when it lifts
+   the native splash (which covers this frame until the page has painted), so the hold counts from
+   that moment, not from script start. On the web (no native splash) it is script start. */
+function shownAt(){try{return window.__smdSplashShownAt||t0;}catch(e){return t0;}}
+function tick(){if(done)return;var el=Date.now()-shownAt();
   if((ready()&&el>=MIN)||el>=CAP){finish();return;}setTimeout(tick,120);}
 tick();})();</script>
 <script>/* anti-flash theme boot — mirrors theme-sync.js resolution so the initial paint matches the OS (no flash) */
@@ -2053,7 +2012,7 @@ window.openExternal = function (u) {
   </div>
 </div>
 
-<script src="/native-bridge.js?v=nb-netrecover" defer></script>
+<script src="/native-bridge.js?v=nb-splashat" defer></script>
 <!-- Server-driven fleet controls: force-upgrade floor, maintenance mode, remote banners, feature flags.
      Loads after native-bridge so /api/config routes correctly on native. Fail-open. -->
 <script src="/remote-config.js?v=rc1" defer></script>
@@ -2104,7 +2063,8 @@ window.openExternal = function (u) {
 <!-- Email sign-up/sign-in + Resend OTP verification + doctor profile (hospital/state/city).
      Additive over Firebase Auth; smd-geo.js is the India states/cities + curated hospital list. -->
 <script src="/smd-geo.js?v=gold472" defer></script>
-<script src="/email-auth.js?v=gold473" defer></script>
+<script src="/email-auth.js?v=gold474" defer></script>
+<script src="/applock.js?v=gold8" defer></script>
 <script src="/policy.js?v=gold363" defer></script>
 <script src="/features.js?v=gold997" defer></script>
 <script src="/calculators.js?v=gold1051-r1d-rail1" defer></script>
@@ -2162,7 +2122,7 @@ window.openExternal = function (u) {
 <script src="/kb/ai/maik-copilot.js?v=gold1053-calcfix" defer></script>
 <script src="/electrolytes.js?v=bug808-nodupe-focus1" defer></script>
 <script src="/caseshare.js?v=gold363" defer></script>
-<script src="/hospitals-in.js?v=gold1018" defer></script><script src="/connect-source.js?v=cs3docs" defer></script><script src="/connect-patient.js?v=cp4" defer></script><script src="/queue-flags.js?v=q5-all-on" defer></script><script src="/home.js?v=nstream1-clinix5-surgx2-logo-aiu1-profile2-rxtile-glyphs-maikart2-pglog1-ack1-otasay-oncqis-sync1-prompt1-about1" defer></script><script src="/profile-setup.js?v=pfs1" defer></script><script src="/syndromes-motion.js?v=synmo5" defer></script><script src="/dialog-motion.js?v=dm2" defer></script>
+<script src="/hospitals-in.js?v=gold1018" defer></script><script src="/connect-source.js?v=cs3docs" defer></script><script src="/connect-patient.js?v=cp4" defer></script><script src="/queue-flags.js?v=q5-all-on" defer></script><script src="/home.js?v=nstream1-clinix5-surgx2-logo-aiu1-profile2-rxtile-glyphs-maikart2-pglog1-ack1-otasay-oncqis-sync1-prompt1-about1-applock3" defer></script><script src="/profile-setup.js?v=pfs1" defer></script><script src="/syndromes-motion.js?v=synmo5" defer></script><script src="/dialog-motion.js?v=dm2" defer></script>
 <!-- Lean sidebar redesign (Tools / Reference & Help / Settings / Advanced). Additive; wraps
      SB.open and rebuilds #sbMenu, superseding home.js's legacy reorganizer (which stands down
      via window.SMD_SBR). Must load AFTER home.js. -->
