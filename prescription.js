@@ -214,9 +214,21 @@
   // the sheet is paper. Shared, so the printed sheet and the exported PDF can never encode
   // different URLs for the same prescription.
   function rxVerifyUrl(code) { return "https://stewardmd.in/verify/" + String(code || "").replace(/[^0-9A-Za-z-]/g, ""); }
-  function rxQrSvg(rec) {
-    try { return SMD_PGLOG_QR.toSvg(rxVerifyUrl(rec.code), { scale: 3, label: "Verify prescription " + rec.code }); }
-    catch (e) { return ""; }
+  /* The encoder sizes the SVG from its module count - a longer URL means more modules means a wider
+   * drawing - and it ignores whatever box we put it in. At scale 3 it came out roughly twice the
+   * 96px slot, overflowed, and painted straight over the code, the verify URL and the validity line
+   * printed beside it. Pin the element to the box, stripping the encoder's own width/height so ours
+   * is the only one, and keep the viewBox so it scales instead of cropping. */
+  function rxQrSvg(rec, px) {
+    var size = px || 96;
+    try {
+      var s = SMD_PGLOG_QR.toSvg(rxVerifyUrl(rec.code), { scale: 3, label: "Verify prescription " + rec.code });
+      return s.replace(/^<svg([^>]*)>/, function (m, attrs) {
+        return '<svg' + String(attrs).replace(/\s(width|height)\s*=\s*"[^"]*"/g, "") +
+          ' width="' + size + '" height="' + size + '"' +
+          ' style="display:block;width:' + size + 'px;height:' + size + 'px">';
+      });
+    } catch (e) { return ""; }
   }
   function rxValidUntil(rec) {
     try { return rec.validUntil ? new Date(rec.validUntil).toISOString().slice(0, 10) : ""; } catch (e) { return ""; }
@@ -227,16 +239,22 @@
    * rxPrintHTML's <style> and every rule must be inline or it renders unstyled. Without this the
    * PDF carried no QR and no code at all, while its own footer still said "signed & verified".
    */
-  function rxDocQrBlock(rec) {
+  /* Laid out as a TABLE, not flex. html2canvas rasterises this, and a flex row let the QR spill out
+   * of its track and sit on top of the code and the URL. Two table cells cannot overlap: the text
+   * column starts where the QR column ends, whatever the QR's natural size turns out to be.
+   * `border-top:0` on the block is set by the caller when it is stamped on its own. */
+  function rxDocQrBlock(rec, bare) {
     if (!rec || !rec.code) return "";
     var until = rxValidUntil(rec);
-    return '<div style="display:flex;gap:12px;align-items:center;margin-top:14px;padding-top:12px;border-top:1px solid #e2e8f0">' +
-      '<div style="width:96px;height:96px;flex:0 0 auto">' + rxQrSvg(rec) + '</div>' +
-      '<div><div style="font:700 13px ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.06em;color:#0f172a">' + esc(rec.code) + '</div>' +
-      '<div style="font-size:10.5px;color:#64748b;margin-top:2px">Scan to verify this prescription</div>' +
-      '<div style="font-size:10.5px;color:#0e6e63;font-weight:700;margin-top:2px">stewardmd.in/verify</div>' +
-      (until ? '<div style="font-size:10.5px;color:#64748b;margin-top:2px">Valid until ' + esc(until) + '</div>' : '') +
-      '</div></div>';
+    return '<table style="width:100%;border-collapse:collapse;margin-top:' + (bare ? "0" : "14px") +
+        ';padding-top:12px;border-top:' + (bare ? "0" : "1px solid #e2e8f0") + '"><tr>' +
+      '<td style="width:104px;padding:8px 12px 0 0;vertical-align:top">' + rxQrSvg(rec, 96) + '</td>' +
+      '<td style="padding:8px 0 0 0;vertical-align:top">' +
+        '<div style="font:700 13px ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.06em;color:#0f172a;word-break:break-all">' + esc(rec.code) + '</div>' +
+        '<div style="font-size:10.5px;color:#64748b;margin-top:3px">Scan to verify this prescription</div>' +
+        '<div style="font-size:10.5px;color:#0e6e63;font-weight:700;margin-top:2px">stewardmd.in/verify</div>' +
+        (until ? '<div style="font-size:10.5px;color:#64748b;margin-top:2px">Valid until ' + esc(until) + '</div>' : '') +
+      '</td></tr></table>';
   }
 
   function rxQrBlock(rec) {
@@ -1051,16 +1069,51 @@
       exportRxNow(kind, topic, regNo, signImg, rxv);
     });
   }
+  /* The QR block rasterised on its own, so it can be stamped in PDF units instead of being baked
+   * into the page image. Two reasons, both of which bit a long prescription: a page break sliced
+   * straight through the QR and left half of one on each page, and only the LAST page carried it at
+   * all - so page 1 of a two-page prescription was unverifiable paper. */
+  function rxQrStamp(rec){
+    if(!rec || !rec.code || !window.html2canvas) return Promise.resolve(null);
+    var n=document.createElement("div");
+    n.style.cssText="position:fixed;left:-9999px;top:0;width:700px;background:#fff;z-index:-1";
+    n.innerHTML=rxDocQrBlock(rec, true);
+    document.body.appendChild(n);
+    return window.html2canvas(n, { scale:2, backgroundColor:"#ffffff", useCORS:true }).then(function(c){
+      n.remove();
+      return { data:c.toDataURL("image/jpeg",0.95), ratio:(c.height/c.width) };
+    }).catch(function(){ try{ n.remove(); }catch(e){} return null; });
+  }
+
   function exportRxNow(kind, topic, regNo, signImg, rxv){
-    var node=rxDoc(topic, regNo, signImg, rxv); node.style.cssText="position:fixed;left:-9999px;top:0;width:794px;background:#fff;z-index:-1"; document.body.appendChild(node);
+    // JPEG is a single image, so the block sits in the document. A PDF can run to several pages, so
+    // it is left OUT of the document and stamped onto every page below.
+    var node=rxDoc(topic, regNo, signImg, kind==="pdf" ? null : rxv);
+    node.style.cssText="position:fixed;left:-9999px;top:0;width:794px;background:#fff;z-index:-1"; document.body.appendChild(node);
     window.html2canvas(node, { scale:2, backgroundColor:"#ffffff", useCORS:true }).then(function(canvas){
       node.remove();
       if(kind==="jpeg"){ rxSaveOrShare(canvas.toDataURL("image/jpeg",0.95), "prescription.jpg"); return; }
       var JS=(window.jspdf&&window.jspdf.jsPDF)||window.jsPDF; if(!JS){ rxToast("PDF engine unavailable"); return; }
-      var pdf=new JS({ unit:"pt", format:"a4" }), pw=pdf.internal.pageSize.getWidth(), ph=pdf.internal.pageSize.getHeight();
-      var imgW=pw, imgH=canvas.height*(pw/canvas.width), img=canvas.toDataURL("image/jpeg",0.95);
-      if(imgH<=ph){ pdf.addImage(img,"JPEG",0,0,imgW,imgH); } else { var y=0; while(y<imgH-1){ pdf.addImage(img,"JPEG",0,-y,imgW,imgH); y+=ph; if(y<imgH-1) pdf.addPage(); } }
-      rxSaveOrShare(pdf.output("datauristring"), "prescription.pdf");
+      return rxQrStamp(rxv).then(function(stamp){
+        var pdf=new JS({ unit:"pt", format:"a4" }), pw=pdf.internal.pageSize.getWidth(), ph=pdf.internal.pageSize.getHeight();
+        var imgW=pw, imgH=canvas.height*(pw/canvas.width), img=canvas.toDataURL("image/jpeg",0.95);
+        var mg=24, stampW=stamp? (pw-mg*2) : 0, stampH=stamp? (stampW*stamp.ratio) : 0;
+        // Content is paged against the height LEFT OVER once the footer band is reserved, so the
+        // stamp never lands on top of a drug line.
+        var band=stamp? (stampH+mg) : 0, usable=Math.max(120, ph-band), y=0, guard=0;
+        while(guard++ < 60){
+          pdf.addImage(img,"JPEG",0,-y,imgW,imgH);
+          if(stamp){
+            pdf.setFillColor(255,255,255);
+            pdf.rect(0, ph-band, pw, band, "F");     // clear the band: the tall image paints through it
+            pdf.addImage(stamp.data,"JPEG", mg, ph-stampH-(mg/2), stampW, stampH);
+          }
+          y+=usable;
+          if(y >= imgH-1) break;
+          pdf.addPage();
+        }
+        rxSaveOrShare(pdf.output("datauristring"), "prescription.pdf");
+      });
     }).catch(function(){ try{ node.remove(); }catch(e){} rxToast("Couldn’t render the prescription"); });
   }
   function signAndExport(topic, regNo){

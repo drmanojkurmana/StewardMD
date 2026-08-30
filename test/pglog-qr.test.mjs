@@ -17,6 +17,47 @@ import assert from "node:assert/strict";
 import { createRequire } from "node:module";
 const require = createRequire(import.meta.url);
 const QR = require("../pglog-qr.js");
+const LIB = require("../vendor/qrcode-generator.js");
+
+/* ── The finished code must be READABLE ─────────────────────────────────────
+ *
+ * Everything below this block tests a piece: the GF tables, the RS remainder, the format bit
+ * string. All 22 of those passed while the encoder emitted matrices that decoded on NOTHING -
+ * Apple's CIDetector, the app's own scanner and every phone camera refused them - and they went out
+ * on printed prescriptions and PG logbook certificates that way. Testing the pieces never asks the
+ * only question that matters: can the finished code be read back?
+ *
+ * Node has no QR decoder, so the reference here is the vendored library the encoder now delegates
+ * to. That library's output is verified decodable end-to-end on macOS with CIDetector - see
+ * qrdecode.swift in the session scratch dir; run it after touching this encoder.
+ */
+test("the matrix matches the reference encoder, module for module", () => {
+  const samples = [
+    "https://stewardmd.in/verify/NWYMKZWB2R43TRMY",
+    "https://stewardmd.in/verify/FR4PRA2698PD3XVE",
+    "SHORT",
+  ];
+  for (const text of samples) {
+    const ours = QR.encode(text);
+    const ref = LIB(0, "M");
+    ref.addData(text);
+    ref.make();
+    assert.equal(ours.size, ref.getModuleCount(), `same version for "${text}"`);
+    for (let r = 0; r < ours.size; r++) {
+      for (let c = 0; c < ours.size; c++) {
+        assert.equal(!!ours.modules[r][c], ref.isDark(r, c), `module ${r},${c} differs for "${text}"`);
+      }
+    }
+  }
+});
+
+test("the printed SVG keeps the 4-module quiet zone a scanner needs", () => {
+  const url = "https://stewardmd.in/verify/NWYMKZWB2R43TRMY";
+  const svg = QR.toSvg(url, { scale: 3 });
+  const box = /viewBox="0 0 (\d+) (\d+)"/.exec(svg);
+  assert.ok(box, "the SVG declares a viewBox");
+  assert.equal(Number(box[1]), QR.encode(url).size + 8, "4 modules of quiet zone each side, or scanners fail");
+});
 
 /* ── GF(256) ───────────────────────────────────────────────────────────────── */
 
