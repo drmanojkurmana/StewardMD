@@ -97,6 +97,11 @@ try {
 
   /* ---------- 1. FIRST-RUN: intro poster + landing splash ---------- */
   await newTab();
+  // the profile dir persists between runs and a later section signs in: clear on OUR origin
+  // first (about:blank has no usable storage), so "first-run" is actually first-run
+  await call("Page.navigate", { url: BASE });
+  await sleep(600);
+  await ev(`localStorage.clear(); try { sessionStorage.clear(); } catch (e) {} return 1;`);
   await call("Page.navigate", { url: BASE });
   await sleep(3500);
 
@@ -259,11 +264,11 @@ try {
     "the 'Steward|MD' lock-up is large and set with light-against-extrabold weight contrast");
   await shot("splash-04-landing");
 
-  /* ---------- 2. RETURNING signed-in clinician: CLASSIC boot splash, THEN personalised ----
-     The owner's requirement is a sequence, not a replacement: the boot splash must open in its
-     original composition (mark, Steward/MD wordmark, tagline, thin progress bar, developed-by
-     foot) in both themes, and only then crossfade into the personalised phase 2. Phase 1 is
-     asserted first, before the ~900ms beat, then phase 2 after it. */
+  /* ---------- 2. RETURNING signed-in clinician: classic frame, THEN the welcome-back screen ----
+     Two passive screens (owner: "i want both"). Screen 1 is the classic frame, fully on screen
+     at first paint with no entrance animation. After a 1.5s beat it crossfades into screen 2:
+     avatar, name, glass foot. The boot script holds a constant 3s in total, then Face ID / PIN
+     fires by itself. No button, no hold, on either screen. */
   await newTab();
   await call("Page.navigate", { url: BASE });
   await sleep(1500);
@@ -271,170 +276,104 @@ try {
   await call("Page.navigate", { url: BASE });
   await sleep(380);
 
-  /* ---- phase 1: the classic splash, exactly as it was before the v2 layer ---- */
   const classic = async (label) => {
-    okv(await ev(`var e=document.getElementById("smdBootSplash");
-        return !!e && !e.classList.contains("smd-boot-phase2");`), true,
-      label + ": boot splash opens in the classic phase (no .smd-boot-phase2)");
-    okv(await ev(`var w=document.querySelector("#smdBootSplash .sbs-word");
-        return w ? w.textContent.trim() : "missing";`), "StewardMD",
+    okv(await ev(`var e=document.getElementById("smdBootSplash"); return !!e && !e.classList.contains("smd-boot-phase2");`), true,
+      label + ": opens on screen 1 (no .smd-boot-phase2)");
+    okv(await ev(`var w=document.querySelector("#smdBootSplash .sbs-word"); return w ? w.textContent.trim() : "missing";`), "StewardMD",
       label + ": the Steward/MD wordmark is on screen");
     okv(await ev(`var w=document.querySelector("#smdBootSplash .sbs-word"); if(!w)return "missing";
         var s=getComputedStyle(w), sp=getComputedStyle(w.querySelector("span"));
-        if(/Bricolage/.test(s.fontFamily||"")) return "display face (v2 styling leaked)";
         if(Math.round(parseFloat(s.fontSize))!==30) return "font-size "+s.fontSize;
         if(parseInt(s.fontWeight,10)!==800) return "weight "+s.fontWeight;
         if(s.color===sp.color) return "wordmark is not two-tone";
-        return "classic";`), "classic",
-      label + ": wordmark keeps its classic two-tone 30px/800 setting");
-    okv(await ev(`var t=document.querySelector("#smdBootSplash .sbs-tag"); if(!t)return "missing";
-        var s=getComputedStyle(t);
-        return s.display!=="none" && t.offsetHeight>1 ? t.textContent.trim() : "hidden";`),
+        return "classic";`), "classic", label + ": wordmark keeps its classic two-tone 30px/800 setting");
+    okv(await ev(`var t=document.querySelector("#smdBootSplash .sbs-tag"); if(!t)return "missing"; return t.offsetHeight>1 ? t.textContent.trim() : "hidden";`),
       "Built by clinicians, for clinicians", label + ": the tagline is on screen");
-    okv(await ev(`var b=document.querySelector("#smdBootSplash .sbs-bar"); if(!b)return "missing";
-        var s=getComputedStyle(b), i=b.firstElementChild;
+    okv(await ev(`var b=document.querySelector("#smdBootSplash .sbs-bar"); if(!b)return "missing"; var s=getComputedStyle(b), i=b.firstElementChild;
         if(!i||getComputedStyle(i).display==="none") return "no progress indicator";
-        return Math.round(parseFloat(s.width))+"x"+Math.round(parseFloat(s.height));`), "132x3",
-      label + ": the thin classic progress bar is back (132x3, not the loading pill)");
-    okv(await ev(`var b=document.querySelector("#smdBootSplash .sbs-bar");
-        return b ? (getComputedStyle(b,"::after").content||"none") : "missing";`), "none",
-      label + ": no 'Loading your workspace' pill copy in phase 1");
+        return Math.round(parseFloat(s.width))+"x"+Math.round(parseFloat(s.height));`), "132x3", label + ": the thin classic progress bar");
     okv(await ev(`var m=document.querySelector("#smdBootSplash .sbs-logo"),k=document.querySelector("#smdBootSplash .sbs-mark");
         var e=[m,k].filter(function(x){return x&&getComputedStyle(x).display!=="none"})[0];
-        return e ? Math.round(parseFloat(getComputedStyle(e).width)) : 0;`), 107,
-      label + ": the mark is at its classic 107px size");
-    okv(await ev(`var h=document.getElementById("sbsHello");
-        return !h || getComputedStyle(h).display==="none";`), true,
-      label + ": the personalised row is not shown yet");
+        return e ? Math.round(parseFloat(getComputedStyle(e).width)) : 0;`), 107, label + ": the mark is at its classic 107px size");
+    okv(await ev(`var h=document.getElementById("sbsHello"); return !h || getComputedStyle(h).display==="none";`), true,
+      label + ": the personalised row is not part of screen 1");
     okv(await ev(`var f=document.querySelector("#smdBootSplash .sbs-foot"); if(!f)return "missing";
-        var s=getComputedStyle(f);
-        if(s.flexDirection!=="column") return "foot layout is "+s.flexDirection;
         var img=[].slice.call(f.querySelectorAll(".sbs-maik")).filter(function(x){return getComputedStyle(x).display!=="none"})[0];
-        if(!img) return "no MaiK logo";
-        if(Math.round(parseFloat(getComputedStyle(img).height))!==53) return "MaiK logo "+getComputedStyle(img).height;
-        return "classic foot";`), "classic foot",
+        return getComputedStyle(f).flexDirection==="column" && img && Math.round(parseFloat(getComputedStyle(img).height))===53 ? "classic foot" : "foot changed";`), "classic foot",
       label + ": the developed-by foot keeps its classic stacked composition");
-    /* phase 1 must be the classic splash exactly: NO glass material on the foot yet */
-    okv(await ev(`var f=document.querySelector("#smdBootSplash .sbs-foot");
-        var s=getComputedStyle(f);
-        var bf=(s.backdropFilter||s.webkitBackdropFilter||"none");
-        return bf==="none" || bf==="";`), true,
-      label + ": the developed-by foot has no glass material in phase 1");
+    /* ALL AT ONCE: nothing on screen 1 animates in */
+    okv(await ev(`var bad=[]; [".sbs-logo",".sbs-mark",".sbs-word",".sbs-tag",".sbs-foot",".sbs-center"].forEach(function(sel){
+        var e=document.querySelector("#smdBootSplash "+sel); if(!e||getComputedStyle(e).display==="none") return;
+        var s=getComputedStyle(e); if(s.animationName!=="none") bad.push(sel+":"+s.animationName); if(parseFloat(s.opacity)<1) bad.push(sel+":opacity "+s.opacity); });
+        return bad.length ? bad.join(",") : "static";`), "static",
+      label + ": every element of screen 1 is fully on screen at first paint (no entrance animation)");
+    okv(await ev(`var b=document.querySelector("#smdBootSplash .sbs-go"); return !b && !window.__smdBootGate;`), true,
+      label + ": no Open Workspace button, no hold");
   };
-  await classic("classic light");
+  await classic("screen 1 light");
   await shot("splash-05a-boot-classic-light");
 
-  await sleep(900);
-  okv(await ev(`var e=document.getElementById("smdBootSplash");
-      return !!e && e.classList.contains("smd-boot-phase2");`), true,
-    "after the beat the splash transitions into phase 2");
-
+  /* ---- screen 2 after the beat ---- */
+  await sleep(1500);   // t ~1.9s: past BEAT (1.5s) + the 220ms crossfade
+  okv(await ev(`var e=document.getElementById("smdBootSplash"); return !!e && e.classList.contains("smd-boot-phase2");`), true,
+    "after the beat the splash crossfades into screen 2");
   ok(await ev(`var e=document.getElementById("sbsHello"); return !!e && !e.hidden && e.offsetHeight>1;`) === true,
-    "returning signed-in user gets the personalised welcome row");
+    "screen 2: the personalised welcome row is up");
   ok(await ev(`var e=document.getElementById("sbsHelloName"); return e ? e.textContent : "";`) === "Dr. Manoj Kumar Kurmana",
-    "greeting shows the account name from localStorage stewardmd_account");
+    "screen 2: greeting shows the account name from localStorage stewardmd_account");
   ok(await ev(`var e=document.getElementById("smdBootSplash"); return !!e && e.classList.contains("sbs-personal");`) === true,
-    "generic tagline is swapped for the personal greeting (.sbs-personal)");
+    "screen 2: .sbs-personal (generic tagline swapped for the greeting)");
   ok(await ev(`var e=document.getElementById("sbsDp"); return e ? e.textContent : "";`) === "M",
-    "avatar falls back to the clinician's monogram when the photo cannot load");
-  // layout widths come back sub-pixel under device-metrics emulation, so round before comparing
+    "screen 2: avatar falls back to the clinician's monogram when the photo cannot load");
   okv(await ev(`var e=document.getElementById("sbsDp"); return e ? Math.round(parseFloat(getComputedStyle(e).width)) : 0;`), 84,
-    "Direction C avatar treatment (84px) on the personalised boot splash");
-  okv(await ev(`var e=document.getElementById("sbsDp"); if(!e)return "no avatar";
-      var s=getComputedStyle(e,"::after");
+    "screen 2: Direction C avatar treatment (84px)");
+  okv(await ev(`var e=document.getElementById("sbsDp"); if(!e)return "no avatar"; var s=getComputedStyle(e,"::after");
       return s.position + " " + Math.round(parseFloat(s.width)) + " " + s.backgroundColor;`), "absolute 16 rgb(77, 214, 140)",
-    "avatar carries the online-status dot accent");
-  /* ---- the pill is now the Open Workspace BUTTON ----------------------------------------
-     The owner's read of two loading screens in a row was that the second one was dead time. So
-     phase 2 is a deliberate stop: a real button, and the splash holds on it. */
-  const btn = `#smdBootSplash .sbs-go`;
-  okv(await ev(`var e=document.querySelector(${JSON.stringify(btn)});
-      return e ? e.tagName + ":" + e.textContent.trim() : "missing";`), "BUTTON:Open Workspace",
-    "the loading pill is a real <button> reading 'Open Workspace'");
-  okv(await ev(`var e=document.querySelector(${JSON.stringify(btn)}); if(!e)return "missing";
-      if(e.hidden) return "still hidden";
-      var r=e.getBoundingClientRect();
-      return (r.height>=44 && r.width>=44) ? "tappable" : Math.round(r.width)+"x"+Math.round(r.height);`),
-    "tappable", "the button is a 44px+ tap target");
-  okv(await ev(`var e=document.querySelector(${JSON.stringify(btn)}); if(!e)return "missing";
-      var s=getComputedStyle(e);
-      return s.cursor==="pointer" && parseFloat(s.borderTopLeftRadius)>=20 ? "button-like" : s.cursor+" r"+s.borderTopLeftRadius;`),
-    "button-like", "it reads as a button (pointer cursor, pill radius)");
-  await glass(btn, "the button is the Direction C tinted-glass primary treatment");
-  okv(await ev(`var b=document.querySelector("#smdBootSplash .sbs-bar");
-      return b ? getComputedStyle(b).display : "missing";`), "none",
-    "the passive 'Loading your workspace' pill is gone once the gate is armed");
-  okv(await ev(`var e=document.getElementById("smdBootSplash");
-      return !!e && e.classList.contains("sbs-gate");`), true,
-    "the hold is armed (.sbs-gate) only after the button rendered and bound");
-  okv(await ev(`var g=window.__smdBootGate;
-      return g ? (g.held===true) + "/" + g.cap : "no gate";`), "true/20000",
-    "the gate holds and carries a 20s safety valve");
+    "screen 2: avatar carries the online-status dot accent");
+  okv(await ev(`var h=document.getElementById("sbsHello"); return h ? getComputedStyle(h).animationName : "missing";`), "none",
+    "screen 2 arrives as ONE crossfade: the welcome row has no entrance animation of its own");
   ok(await ev(`var e=document.querySelector("#smdBootSplash .sbs-foot"); return e ? getComputedStyle(e).flexDirection : "";`) === "row",
-    "the 'developed by MaiK' credit is the Direction C glass bar");
-  await glass("#smdBootSplash .sbs-foot", "phase 2: the developed-by bar is the liquid-glass material");
-  ok(await ev(`var l=document.querySelector("#smdBootSplash .sbs-maik-light"),d=document.querySelector("#smdBootSplash .sbs-maik-dark");
-      return !!l && !!d && /maik-logo\\.png/.test(l.getAttribute("src")||"") && /maik-logo-white\\.png/.test(d.getAttribute("src")||"");`) === true,
-    "the existing light/dark MaiK logo pairing in .sbs-foot is preserved");
+    "screen 2: the 'developed by MaiK' credit is the Direction C glass bar");
+  await glass("#smdBootSplash .sbs-foot", "screen 2: the developed-by bar is the liquid-glass material");
+  okv(await ev(`var b=document.querySelector("#smdBootSplash .sbs-bar"); return b ? (getComputedStyle(b,"::after").content||"none") : "missing";`).then(v => /Loading your workspace/.test(v)), true,
+    "screen 2: the passive 'Loading your workspace' pill (no button)");
+  okv(await ev(`var b=document.querySelector("#smdBootSplash .sbs-go"); return !b && !window.__smdBootGate;`), true,
+    "screen 2: still no Open Workspace button, no hold");
   await shot("splash-05-boot-personal-monogram");
 
-  // same layout with a real photo in the avatar (local asset stands in for the Google photoURL)
-  await ev(`var d=document.getElementById("sbsDp"); if(d){d.style.backgroundImage='url("/logo.png")';d.textContent="";d.className="sbs-dp has-pic";} return 1;`);
-  await sleep(300);
-  await shot("splash-06-boot-personal-photo");
-
-  /* ---- the hold: the splash waits for the tap, then reveals -----------------------------
-     The proof that the gate does something has to be that the splash stays up under the exact
-     condition that would otherwise take it down, not merely that it stays up for a while.
-     The app does not finish booting inside this headless harness, so force the exact condition
-     the hide loop polls for (a visible #accountGate is one of its "boot finished" states). With
-     that true and past MIN, the pre-gate splash would hide on the very next 120ms tick. */
+  /* ---- screen 2 gets 3s: boot-ready forced now (~2.2s), still up at ~3s, gone by itself once 4.5s of
+     seen time (1.2s screen 1 + crossfade + 3s screen 2) has passed */
   const makeReady = `var g=document.getElementById("accountGate");
-      if(g){g.classList.remove("hidden");
-        g.setAttribute("style","display:block;visibility:visible;opacity:1;min-height:200px");}
+      if(g){g.classList.remove("hidden"); g.setAttribute("style","display:block;visibility:visible;opacity:1;min-height:200px");}
       return !!g;`;
   okv(await ev(makeReady), true, "the harness can force the hide loop's ready() condition");
-  await sleep(600);   // several 120ms ticks: ample for the pre-gate auto-hide to have fired
-  okv(await ev(`var e=document.getElementById("smdBootSplash");
-      return !!e && !e.classList.contains("sbs-hide");`), true,
-    "the splash HOLDS on the welcome-back screen instead of auto-hiding");
-  okv(await ev(`var g=window.__smdBootGate; return g ? g.held : "no gate";`), true,
-    "the gate is still holding with boot reported finished");
-  await sleep(2500);
-  okv(await ev(`var e=document.getElementById("smdBootSplash");
-      return !!e && !e.classList.contains("sbs-hide");`), true,
-    "and it is still holding 3s later (this is a stop, not a slower timer)");
+  const holds = `var e=document.getElementById("smdBootSplash"); var up=!!e && !e.classList.contains("sbs-hide"); return up || performance.now() >= 4500;`;
+  await sleep(800);    // t ~3s
+  okv(await ev(holds), true, "ready at ~2.2s: screen 2 still holds at ~3s (screen 2 is held for 3s, not ready-driven)");
+  await sleep(2400);   // t ~5.4s
+  okv(await ev(`var e=document.getElementById("smdBootSplash"); return !e || e.classList.contains("sbs-hide");`), true,
+    "by ~5.4s it has hidden BY ITSELF (no tap)");
 
-  await ev(`var b=document.querySelector("#smdBootSplash .sbs-go"); if(b)b.click(); return 1;`);
-  okv(await ev(`var g=window.__smdBootGate; return g ? g.held : "no gate";`), false,
-    "the tap releases the gate");
-  await sleep(700);
-  okv(await ev(`var e=document.getElementById("smdBootSplash");
-      return !e || e.classList.contains("sbs-hide");`), true,
-    "the tap reveals the app (splash hidden/removed)");
-
-  /* ---- fail-open: a boot that is still running gets the 'Opening...' state, not a dead button */
-  await newTab();
+  /* ---- the clocks start when the frame is SEEN: with the native splash lifting late (native-bridge
+     stamps __smdSplashShownAt), both the beat and the hold count from that stamp */
   await call("Page.navigate", { url: BASE });
-  await sleep(1500);
-  await ev(`localStorage.setItem("stewardmd_account", JSON.stringify({type:"google",name:"Dr. Slow Boot",email:"slow@example.com"})); return 1;`);
-  await call("Page.navigate", { url: BASE });
-  await sleep(1400);
-  /* pin the app as "not ready" so the tap cannot reveal immediately, then tap */
-  await ev(`var h=document.getElementById("homeV2"); if(h)h.classList.remove("on");
-      ["verifyGate","accountGate"].forEach(function(id){var e=document.getElementById(id);if(e)e.style.display="none";});
-      var a=document.querySelector(".app-head"); if(a)a.style.display="none"; return 1;`);
-  await ev(`var b=document.querySelector("#smdBootSplash .sbs-go"); if(b)b.click(); return 1;`);
-  await sleep(200);
-  okv(await ev(`var b=document.querySelector("#smdBootSplash .sbs-go"); if(!b)return "missing";
-      return b.textContent.trim() + "/" + b.classList.contains("is-opening") + "/" + b.disabled;`),
-    "Opening.../true/true",
-    "tapping mid-boot flips the button into the 'Opening...' state rather than doing nothing");
-  okv(await ev(`var b=document.querySelector("#smdBootSplash .sbs-go");
-      return b ? getComputedStyle(b).animationName : "missing";`), "sbsGlow",
-    "the 'Opening...' state reuses the existing glow animation");
+  await sleep(1200);   // pretend the native splash only lifts now
+  await ev(`window.__smdSplashShownAt = Date.now(); return 1;`);
+  await ev(makeReady);
+  await sleep(700);    // seen ~0.7s: still screen 1
+  okv(await ev(`var e=document.getElementById("smdBootSplash"); return !!e && !e.classList.contains("smd-boot-phase2") && !e.classList.contains("sbs-hide");`), true,
+    "native splash lifted at 1.2s: 0.7s later it is still screen 1 (beat counts from the stamp)");
+  await sleep(1300);   // seen ~2s: screen 2
+  okv(await ev(`var e=document.getElementById("smdBootSplash"); return !!e && e.classList.contains("smd-boot-phase2") && !e.classList.contains("sbs-hide");`), true,
+    "...and 2s after the stamp it is screen 2, still up");
+  await sleep(1500);   // seen ~3.5s (page time ~4.7s: would have hidden under script-start counting)
+  okv(await ev(`var e=document.getElementById("smdBootSplash"); var up=!!e && !e.classList.contains("sbs-hide"); return up || (Date.now()-window.__smdSplashShownAt) >= 4500;`), true,
+    "...and still up 3.5s after the stamp (hold counts from the stamp)");
+  await sleep(1600);   // seen ~5.1s
+  okv(await ev(`var e=document.getElementById("smdBootSplash"); return !e || e.classList.contains("sbs-hide");`), true,
+    "...and hides by itself once screen 2 has had its 3s");
 
-  // the same personalised boot splash in the dark theme (Direction C's gradient mesh)
+  // the same two screens in the dark theme (Direction C's gradient mesh on screen 2)
   await newTab();
   await call("Emulation.setEmulatedMedia", { features: [{ name: "prefers-color-scheme", value: "dark" }] });
   await call("Page.navigate", { url: BASE });
@@ -442,23 +381,16 @@ try {
   await ev(`localStorage.setItem("stewardmd_account", JSON.stringify({type:"google",name:"Dr. Manoj Kumar Kurmana",email:"doctor@example.com"})); return 1;`);
   await call("Page.navigate", { url: BASE });
   await sleep(380);
-  okv(await ev(`var e=document.getElementById("smdBootSplash");
-      return !!e && e.classList.contains("sbs-dark");`), true, "the dark theme variant resolves");
-  await classic("classic dark");
+  okv(await ev(`var e=document.getElementById("smdBootSplash"); return !!e && e.classList.contains("sbs-dark");`), true, "the dark theme variant resolves");
+  await classic("screen 1 dark");
   await shot("splash-05b-boot-classic-dark");
-
-  await sleep(900);
+  await sleep(1500);
   ok(await ev(`var e=document.getElementById("smdBootSplash");
       return !!e && e.classList.contains("sbs-dark") && e.classList.contains("smd-boot-phase2") &&
              /radial-gradient/.test(getComputedStyle(e,"::before").backgroundImage||"") &&
              getComputedStyle(e,"::before").opacity === "1";`) === true,
-    "dark boot splash fades up the Direction C gradient mesh in phase 2");
-  okv(await ev(`var e=document.querySelector("#smdBootSplash .sbs-go"); if(!e||e.hidden)return "missing";
-      var r=e.getBoundingClientRect();
-      return e.textContent.trim() + "/" + (r.height>=44 && r.width>=44);`), "Open Workspace/true",
-    "dark boot splash: the Open Workspace button renders at a 44px+ tap target");
-  await glass("#smdBootSplash .sbs-go", "dark boot splash: the button is the tinted-glass primary");
-  await glass("#smdBootSplash .sbs-foot", "dark boot splash: the 'developed by' bar is liquid glass");
+    "dark screen 2 fades up the Direction C gradient mesh");
+  await glass("#smdBootSplash .sbs-foot", "dark screen 2: the 'developed by' bar is liquid glass");
   await shot("splash-07-boot-personal-dark");
   await call("Emulation.setEmulatedMedia", { features: [] });
 
@@ -474,25 +406,13 @@ try {
   /* guests never enter phase 2: their "what you created" is the intro poster + landing that
      follow, so the boot splash stays classic for the whole boot */
   await classic("guest");
-  await sleep(1400);
-  okv(await ev(`var e=document.getElementById("smdBootSplash");
-      return !e || !e.classList.contains("smd-boot-phase2");`), true,
-    "a guest never enters phase 2 (classic splash for the whole boot)");
-  /* a guest must never be gated: no button, no hold, boot auto-hides exactly as before */
-  okv(await ev(`var b=document.getElementById("sbsGo");
-      return !b || b.hidden===true || getComputedStyle(b).display==="none";`), true,
-    "a guest never sees the Open Workspace button");
-  okv(await ev(`return !window.__smdBootGate;`), true,
-    "a guest is never gated (no hold armed)");
-  /* ungated, the same forced ready() condition takes the splash down on the next tick */
-  await ev(`var g=document.getElementById("accountGate");
-      if(g){g.classList.remove("hidden");
-        g.setAttribute("style","display:block;visibility:visible;opacity:1;min-height:200px");}
-      return !!g;`);
-  await sleep(600);
-  okv(await ev(`var e=document.getElementById("smdBootSplash");
-      return !e || e.classList.contains("sbs-hide");`), true,
-    "the guest splash still auto-hides on its own (nothing holds it)");
+  await sleep(1600);
+  okv(await ev(`var e=document.getElementById("smdBootSplash"); return !!e && !e.classList.contains("smd-boot-phase2");`), true,
+    "a guest never enters screen 2 (classic frame for the whole boot)");
+  await ev(makeReady);
+  await sleep(1700);
+  okv(await ev(`var e=document.getElementById("smdBootSplash"); return !e || e.classList.contains("sbs-hide");`), true,
+    "the guest splash hides by itself once the 3s frame is up");
 
   /* ---------- 4. Flag OFF reverts cleanly ---------- */
   await newTab();
@@ -504,10 +424,6 @@ try {
     "?splashv2=0 restores the original dots (7px)");
   ok(await ev(`var e=document.getElementById("sbsHello"); return !e || e.hidden===true;`) === true,
     "?splashv2=0 leaves the boot splash unpersonalised");
-  okv(await ev(`var b=document.getElementById("sbsGo");
-      return (!b || b.hidden===true) && !window.__smdBootGate;`), true,
-    "?splashv2=0 drops the button and the hold entirely (auto-hide restored)");
-
   /* ---------- 5. prefers-reduced-motion still covers all three interstitials ---------- */
   await newTab();
   await call("Emulation.setEmulatedMedia", { features: [{ name: "prefers-reduced-motion", value: "reduce" }] });

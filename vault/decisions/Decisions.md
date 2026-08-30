@@ -1672,6 +1672,169 @@ renders as a `<button>` with the right label at a 44px+ target in both themes, t
 releases and reveals, that a mid-boot tap yields "Opening...", and that guests and `?splashv2=0` are
 neither gated nor shown the button and still auto-hide.
 
+## 2026-08-29 — App Lock: PIN / Face ID·Touch ID / no-lock, chosen once at first login
+Owner ask, after seeing the "Open Workspace" welcome-back splash (build 3464): add a real lock in
+front of it. Three options, offered once right after the first-run profile step (email-auth.js's
+`openProfile({firstRun:true})`, the single choke point every sign-in method — Google/Apple/email —
+already funnels through):
+1. **PIN** — 4-6 digits, salted SHA-256 (Web Crypto), stored in the OS Keychain/Keystore via
+   `capacitor-secure-storage-plugin` (the same `window.SMD_SECURE` shim autofetch.js defines).
+   Available on every device regardless of biometric hardware.
+2. **Face ID / Touch ID** — feature-detected via `Capacitor.isPluginAvailable()`. No biometric
+   plugin is installed in this repo today, so the option correctly never renders on any current
+   build. Wiring a `NativeBiometric`-shaped plugin (`p.verifyIdentity`/`p.authenticate`) + `cap
+   sync` + a native rebuild lights it up with **zero** changes to `applock.js` — the call shape is
+   already written and named-lookup-guarded (`NativeBiometric` or `BiometricAuth`).
+3. **No lock (auto sign-in)** — own-risk, gated to **personal accounts only**. There is no existing
+   "institution account" field, so this reuses the profile's `hospital` freetext (already collected
+   at the same first-run step): non-empty hospital → the option is not rendered at all, not merely
+   discouraged. A risk checkbox gates the Confirm button even for personal accounts.
+
+**Enforcement point**: `index.html`'s boot-splash `finish()` — the single function that already
+hides/removes `#smdBootSplash` (see the 2026-08-28 Phase-2 entry above) — gained ONE check:
+if `SMD_APPLOCK.required()`, hold behind an unlock overlay and only call the real hide once it
+calls back. No fork of the hide/tick loop, matching how Phase 2's own gate was added.
+
+**Fail-open, deliberately, because this file's own rule already exists**: every unlock screen
+carries a "Sign out instead" escape (routes to the existing `#sessionSignOut` click, the same
+button the header already wires); `window.SMD_APPLOCK` undefined/throwing anywhere is read as "not
+required" — a clinician locked out by a bug in THIS code is worse than the lock not firing once.
+
+**Known gap, accepted rather than engineered around**: `applock.js` loads as a deferred script
+after `app.js` in the script order, while the boot-splash gate script is inline and starts polling
+immediately. On an extremely slow first cold load (no service-worker cache yet) it's theoretically
+possible for `finish()` to fire once before `SMD_APPLOCK` has registered, skipping the gate for
+that one boot. Not restructured, because moving `applock.js` earlier only matters for a narrow,
+self-healing window (the very next boot has it cached) and this codebase's own MIN/CAP splash logic
+already accepts equivalent races elsewhere.
+
+**Flag**: `smd_applock`, default **OFF** — this is a big, security-adjacent, boot-blocking change
+per this repo's own flag convention, and has NOT had a device pass yet (Chrome-headless UI test
+only: `test/run-applock-ui.mjs`, 25/25 green, plus the full existing `test/run-splash-ui.mjs` still
+25/25 green with the `finish()` change in place). `?applock=1` / `localStorage.smd_applock="1"`
+forces it on for testing; `?applock=0` forces off. Needs an owner device pass + R3 security review
+before flipping the default, per CLAUDE.md's "reversible changes" rule for anything auth-shaped.
+sw.js CACHE bumped `-applock1`.
+
+## 2026-08-29 — App Lock biometric: wired to a real plugin, not just feature-detected
+Follow-up to the App Lock entry above: owner asked for iPhone Face ID/Touch ID and Android
+biometrics to actually work, not just be structurally ready for a plugin. Added
+`@aparajita/capacitor-biometric-auth@10.0.0` (verified against the npm registry + its
+TypeScript definitions before writing any call — declares `@capacitor/*: ^8.x`, matching this
+repo's Capacitor 8.4.1; 214k weekly downloads, updated 2026-02, actively maintained — over the
+older, Capacitor-3-targeted `capacitor-native-biometric`).
+
+- `npm install` + `npm run build:www` + `npx cap sync` run in this session: 28 iOS / 21 Android
+  plugins now include it, WatchBridge still present (no repeat of the incomplete-node_modules
+  drop — node_modules was already complete before this install).
+- `ios/App/App/Info.plist` gained `NSFaceIDUsageDescription` — mandatory or iOS silently refuses
+  Face ID. No Android manifest change needed (AndroidX BiometricPrompt handles its own
+  permission).
+- **Corrected two wrong assumptions from the first pass**: the plugin's registered name is
+  `BiometricAuthNative` (not `NativeBiometric`/`BiometricAuth` — those were guesses; the export
+  named `BiometricAuth` in the plugin's own JS is just a local alias for that proxy, and
+  `Capacitor.Plugins` is keyed on the string passed to `registerPlugin()`). And device capability
+  is NOT `Capacitor.isPluginAvailable()` (that only proves the plugin is compiled into the
+  build) — it's the async `checkBiometry().isAvailable` (whether the device actually has
+  biometry enrolled), so `canBiometric()` became async and `renderChooser()` now awaits it
+  before deciding whether to show the Face ID/Touch ID row.
+- `authenticate()` resolves (void) on success and REJECTS with a `BiometryError` on failure/
+  cancel — never returns a boolean — so `verifyBiometric()` reads success from settle, not from
+  the resolved value; this matches the resolve→true/catch→false wrapper already written, so no
+  caller (`renderBiometricSetup`/`renderBiometricUnlock`) needed to change.
+- Not yet run on a physical device — this session has no iPhone/Android attached. Web-side logic
+  is fully verified (`test/run-applock-ui.mjs`, 25/25 green, unaffected since Chrome-headless
+  has no `window.Capacitor` bridge — biometric correctly reports unavailable there, same as
+  before); `test/run-splash-ui.mjs` still 25/25. The remaining step is the owner's own
+  build→install→test pass per this file's native-build gotchas (Xcode SPM scheme, `devicectl`
+  reinstall wipes app data, `ios_webkit_debug_proxy` for on-device debugging).
+
+## 2026-08-30 — App Lock biometric: call the NATIVE method name (internalAuthenticate)
+Correction to the entry above. On the iPhone 15 Pro, Face ID setup failed instantly with no
+Face ID sheet, no "StewardMD would like to use Face ID" permission dialog, and no Dynamic Island
+animation. Root cause was not the device or memory: `verifyBiometric()` called
+`Capacitor.Plugins.BiometricAuthNative.authenticate()`, but the Swift plugin's `pluginMethods`
+are exactly `checkBiometry` and `internalAuthenticate`. The public `authenticate()` exists only
+in the plugin's ESM JS layer (`dist/esm/base.js`), which a buildless ES5 app never loads.
+- Capacitor's native proxy returns a wrapper function for EVERY property, so `!p.authenticate`
+  guards can never detect a wrong name; the call rejects `UNIMPLEMENTED` before `LAContext` is
+  touched. `checkBiometry()` is a real native method, which is why the option still rendered.
+- Rule for this repo: when using a Capacitor plugin through `window.Capacitor.Plugins` (no
+  bundler), the callable names are the plugin's native `pluginMethods` / `@PluginMethod`s, not
+  its TypeScript public API. Read the Swift/Java, not `definitions.d.ts`.
+- Failure text now maps the LAError code (`userCancel`, `authenticationFailed`,
+  `biometryLockout`, `biometryNotEnrolled`, ...). `test/run-applock-ui.mjs` section 9 installs a
+  Capacitor-shaped fake proxy where only native names succeed (41/41).
+
+## 2026-08-30 — App Lock: closable Manage, lock at load, optional 2h grace (personal only)
+Owner feedback after the Face ID fix: Manage had no way out and forced a re-pick; boot unlock
+felt slow; wanted auto Face ID on launch or "don't ask if opened within 2 hours".
+- **Manage is closable, first-run is not.** `manage()` sets `_fromManage`; the chooser then
+  shows "Keep current setting" (or "Not now" when nothing is set) and marks the current method.
+  `promptSetup()` (first-run) keeps the forced choice from the original 3-option spec.
+- **Lock is shown the moment `applock.js` loads**, over the boot splash, not at the splash's
+  `finish()`. Face ID fires on launch; the PIN pad is up while the app still loads. `unlock()` is
+  idempotent with a `done` queue, so `finish()`'s `unlock(reallyFinish)` joins the screen already
+  on show. Completing setup counts as that boot's unlock (`markUnlocked()`), no second prompt.
+- **2h grace** (`smd_applock_grace`="2h", `smd_applock_lastunlock` ms): skip the prompt when the
+  app is reopened within 2h of the last open (sliding: a grace-skipped open refreshes the stamp).
+  Classified with "no lock" as own-risk: opt-in, off by default, **hidden for institutional
+  profiles** (same PHI rule), cleared by sign-out. Not a security boundary; the PIN hash /
+  LAContext still is.
+- `test/run-applock-ui.mjs` 54/54; `test/run-splash-ui.mjs` now clears its own origin at start
+  (the persisted Chrome profile used to fake a signed-in first run and fail 2 asserts on every
+  second run).
+- **Addendum (same day): biometric unlock shows no card.** Owner: "never app should show face id
+  option on click of app". Boot is splash -> system Face ID / Touch ID sheet fires by itself at
+  the splash's `finish()` -> app. `renderBiometricUnlock()` renders nothing; `renderBiometricRetry()`
+  (Try <Face ID|Touch ID> again / Sign out) appears only after a failed or cancelled scan. The
+  PIN pad still pre-shows at load. So the "lock at load" point above now applies to PIN only.
+
+## 2026-08-30 — Boot splash: one frame, constant 3s, then Face ID / PIN by itself (gate REMOVED)
+Reverses the "Open Workspace gate" and the phase-1 -> phase-2 crossfade decisions. Owner sent a
+screen recording: bare grey WebView, then a loading bar alone, then the foot, then the logo, then
+the logo faded out for a welcome card with a button. "Unprofessional. Constant 3 sec splash,
+all appear at once, then automatic Face ID / PIN, fast, into app."
+- **Grey frame root cause:** `capacitor.config.json` `SplashScreen.launchShowDuration: 0` +
+  `launchAutoHide: true` dropped the native splash at launch, exposing the unpainted WKWebView
+  (system-dark) even though `native-bridge.js` hides it on `load`. Now `launchShowDuration: 3000`
+  (auto-hide kept only as the cap); the native splash (white + mark) covers until paint.
+- **Web splash:** no entrance animation on any element (sbsPop/sbsFade removed); the signed-in
+  avatar + name row sits in the SAME frame as mark, wordmark, tagline, bar, foot; `MIN` 900 ->
+  3000; no phase 2, no `.sbs-go` button, no `__smdBootGate`. App Lock's early PIN pad is gone
+  too: `finish()` -> `unlock()` after the 3s frame, for both Face ID (no card) and PIN.
+- Dead `.smd-boot-phase2` selectors remain inside the shared LIQUID GLASS lists; harmless.
+- `test/run-splash-ui.mjs` section 2 rewritten (static-at-first-paint, hold at 1.6s/2.5s with
+  ready forced at 0.6s, self-hide by 3.6s, no button) 91/91; `run-applock-ui` 59/59.
+
+## 2026-08-30 — App Lock: forced for every signed-in user (not flag-gated, every provider)
+Owner: "no one is forcing me to set up id/pin once signed up/in i want you to force users."
+`promptSetup()` was gated on the `smd_applock` rollout flag (unreachable in the native app) and
+fired only from the email first-run profile step, so Google/Apple sign-ins and existing accounts
+were never asked. Now `applock.js` subscribes to `SMD_ACCOUNT.onChange` (runs at boot and on
+every sign-in): signed-in, non-guest, no method configured -> the first-run chooser (no close)
+as soon as nothing else owns the screen. "Busy" = `SMD_EMAIL_AUTH.gateUp()` (account / intro /
+verify gates, splashes), `SMD_EMAIL_AUTH.flowOpen()` (its own sheet, which hands over via
+`promptSetup()` itself), or `#smdBootSplash`. Polls 500ms up to 2 min per event. Hospital for
+the institutional rule comes from `SMD_EMAIL_AUTH.loadProfile(uid)` (Firestore profile doc;
+"" when unavailable, i.e. treated as personal, and Manage re-evaluates with the real value).
+`smd_applock` now gates nothing that matters; the Security row shows for everyone.
+- **Addendum (same day): screen 2 is back.** Owner: "why did you remove second screen after
+  splash? bring it back i want both". Screen 1 (classic, static) -> 1.5s beat -> crossfade ->
+  screen 2 (avatar, name, glass foot, passive pill). Still no Open Workspace button/hold; the
+  constant 3s + automatic Face ID / PIN stands. So only the GATE stays removed, not phase 2.
+- **Addendum (same day): the "second screen" was the merged frame, held for 3s of REAL visibility.**
+  Owner's screenshot circled the welcome row + bar on the single merged frame: "i want user to
+  see this screen for at least 3 secs". The two-screen crossfade restore (87fc0f7c) is reverted.
+  The real defect: MIN counted from script start while the native splash still covered the
+  WebView. `native-bridge.js` now stamps `window.__smdSplashShownAt` when it lifts the native
+  splash and the boot script measures MIN from that stamp (script start on the web).
+- **Addendum (same day, final): BOTH screens, screen 2 seen for 3s.** "still same single splash
+  screen" after the revert: the ask was the two-screen sequence with the welcome screen on for at
+  least 3s. Screen 1 (classic, static) 1.2s -> 220ms crossfade -> screen 2 (avatar, name, glass
+  foot, passive pill) 3s. Beat AND hold count from `__smdSplashShownAt`; `MIN` = 4500 for
+  `.sbs-personal` boots, 3000 for guests (screen 1 only). Gate/button still gone.
+
 ## 2026-08-28 — Ask MaiK inside the insulin calculator: MaiK fills the form, it does not answer the dose
 
 **Decision (owner, "B").** A doctor describes the situation in free text ("patient on 16 units

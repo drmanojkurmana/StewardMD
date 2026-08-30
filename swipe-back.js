@@ -214,11 +214,17 @@
     return best;
   }
 
-  // Skip when the gesture starts inside a horizontally-scrollable area (let it scroll).
+  // Skip when the gesture starts inside a horizontally-scrollable area THAT CAN ACTUALLY SCROLL
+  // for this gesture (let it scroll instead of going back). The back-swipe always drags RIGHTWARD
+  // from the left edge, which only a scroller already moved off its leftmost position (scrollLeft
+  // > 0) can consume - one still at scrollLeft 0 has nothing further to reveal that way. Without
+  // this check, any wide table/row parked at its default (0) position within ~30px of the edge
+  // (e.g. the Drugs Database dosage table, db-body's 14px inset) silently ate every back-swipe
+  // that started over it, even though the table itself had nowhere to scroll.
   function inHScroll(el) {
     var n = el;
     while (n && n.nodeType === 1 && n !== document.body) {
-      if (n.scrollWidth > n.clientWidth + 4) {
+      if (n.scrollWidth > n.clientWidth + 4 && n.scrollLeft > 0) {
         var ox = window.getComputedStyle(n).overflowX;
         if (ox === "auto" || ox === "scroll") return true;
       }
