@@ -3191,11 +3191,18 @@
     // timeline (group). Stored in ICU_STATE.treatment so it auto-persists + mirrors to the whole team.
     treatment: function () {
       var tx = _raw.treatment || [];
+      /* CASESHEET ORDER: the add control comes FIRST and the running drugs are listed BELOW it, the
+       * way a ward casesheet reads. The list used to sit above the button, so after adding a drug the
+       * doctor looked under the button and saw only the preset bar - "added treatment is only added in
+       * timeline but not in treatment section below the add treatment button". */
       var out = '<div class="icu-sec-lbl">' + ico("syringe", "💊") + ' Current treatment' +
-        (tx.length ? ' <span style="color:var(--muted);font-weight:600">· ' + tx.length + ' item' + (tx.length === 1 ? "" : "s") + '</span>' : "") + '</div>';
+        (tx.length ? ' <span style="color:var(--muted);font-weight:600">· ' + tx.length + ' running</span>' : "") + '</div>' +
+        '<button class="icu-btn" data-icu-act="txadd">＋ Add treatment</button>' +
+        txPresetBarHTML(tx);
       if (!tx.length) {
-        out += '<div class="icu-card"><div class="icu-empty">No treatment recorded yet. Tap ＋ Add treatment to add antibiotics, fluids or supportive drugs — from the drug database or your own.</div></div>';
+        out += '<div class="icu-card" style="margin-top:12px"><div class="icu-empty">No treatment recorded yet. Tap ＋ Add treatment to add antibiotics, fluids or supportive drugs — from the drug database or your own.</div></div>';
       } else {
+        out += '<div class="icu-sec-lbl" style="margin:16px 0 2px;font-size:12px;color:var(--muted)">Drugs running now</div>';
         TX_CATS.forEach(function (c) {
           var items = tx.filter(function (x) { return (x.cat || "other") === c.k; });
           if (!items.length) return;
@@ -3207,15 +3214,14 @@
                 '<span style="flex:0 0 4px;align-self:stretch;border-radius:3px;background:' + c.color + '"></span>' +
                 '<div style="flex:1;min-width:0"><div style="font:800 14.5px var(--font);color:var(--ink)">' + esc(x.name) + '</div>' +
                 (dsg ? '<div style="font-family:var(--mono,monospace);font-size:12.5px;color:var(--primary);margin-top:2px">' + esc(dsg) + '</div>' : "") +
-                (x.by ? '<div style="font:600 10.5px var(--font);color:var(--muted);margin-top:3px">added by ' + esc(x.by) + '</div>' : "") + '</div>' +
+                '<div style="font:600 10.5px var(--font);color:var(--muted);margin-top:3px">' +
+                  [(x.by ? "added by " + esc(x.by) : ""), (x.ts ? "running since " + esc(fmtAgo(x.ts)) : "")].filter(Boolean).join(" · ") + '</div></div>' +
                 '<button class="icu-tip" data-icu-act="txdel:' + encodeURIComponent(x.id) + '" title="Remove treatment" aria-label="Remove ' + esc(x.name) + '" style="color:var(--danger);font-size:15px;flex:0 0 auto">' + ico("trash","🗑") + '</button>' +
               '</div>';
             }).join("") + '</div>';
         });
       }
-      out += '<button class="icu-btn" data-icu-act="txadd" style="margin-top:12px">＋ Add treatment</button>' +
-        txPresetBarHTML(tx) +
-        '<p class="icu-doc-sub" style="margin:10px 2px 0;text-align:center">Any doctor — consultant or resident — can add or remove treatment. Every change is recorded on the patient timeline.</p>';
+      out += '<p class="icu-doc-sub" style="margin:12px 2px 0;text-align:center">Any doctor — consultant or resident — can add or remove treatment. Every change is recorded on the patient timeline.</p>';
       return out;
     },
     protocols: function () {
@@ -4206,6 +4212,16 @@
   // echo-suppression hash so the resulting reactive notify() does NOT bounce back to Firestore.
   function grpApplyState(state, id) {
     try {
+      /* UNSYNCED LOCAL EDITS ALWAYS WIN. The mirror is debounced by 1500ms, so for that window a local
+       * change exists ONLY on this device while the shared doc still holds the previous state. Any
+       * snapshot arriving in that window has a different hash and used to overwrite the edit that had
+       * just been made. Reported as "added treatment is only added in timeline but not in the treatment
+       * section": txLogTimeline() writes its event IMMEDIATELY while the drug itself waits for the
+       * debounce, so the timeline entry survived and the drug vanished. This affects every field, not
+       * just treatment - treatment is simply where the asymmetry is visible.
+       * Skipping is safe: our write lands when the debounce fires and the next snapshot carries the
+       * merged result, so a genuine remote change is applied a moment later rather than lost. */
+      if (_grpMirrorT) return;
       // Defense-in-depth: never let a BLANK/stale remote snapshot wipe good local data for the SAME
       // patient (e.g. a Ward-Sync fill still queued to sync up). If the incoming remote state has no
       // clinical content but we currently hold some for this id, keep local and let the mirror push it.
@@ -8450,6 +8466,33 @@
     }
     return out;
   }
+  /* THE REAL DRUG DATABASE. MEDDRUGS._list above is only the 72-drug on-device ward formulary, which
+   * is why most drugs "were not in the database" when searched here. The Drug Index the prescription
+   * pad and the Drugs Database browser use is SERVER-backed - MEDAPI.searchCompositions() - covering
+   * every molecule with its brands. Both are used: the local formulary answers instantly and is the
+   * only thing that works offline, and the server's hits are merged in when they arrive.
+   * Debounced, and a reply for a query the doctor has already typed past is discarded. */
+  var _txLocal = [], _txRemote = [], _txRemoteQ = "", _txRemoteT = null;
+  function txRemoteSearch(q) {
+    q = String(q || "").trim();
+    if (q.length < 2 || !window.MEDAPI || !MEDAPI.searchCompositions) return;
+    if (q === _txRemoteQ) return;                       // already fetched / in flight for this query
+    _txRemoteQ = q;
+    if (_txRemoteT) { try { clearTimeout(_txRemoteT); } catch (e) {} }
+    _txRemoteT = setTimeout(function () {
+      _txRemoteT = null;
+      try {
+        MEDAPI.searchCompositions(q, 8).then(function (d) {
+          if (q !== _txRemoteQ) return;                 // a newer query has been typed - drop this reply
+          _txRemote = ((d && d.results) || []).map(function (x) {
+            return { name: x.composition, dose: "", cls: x["class"] || "",
+              cat: txGuessCat({ generic: x.composition, cls: x["class"] }), remote: true };
+          });
+          txPaintSug();
+        }, function () {});
+      } catch (e) {}
+    }, 220);
+  }
   function txGuessCat(d) {
     var s = ((d.cat || "") + " " + (d.cls || "") + " " + (d.generic || "")).toLowerCase();
     if (/antibiot|antimicrob|penicillin|cephalosporin|carbapenem|glycopeptide|macrolide|quinolone|fluoroquinolone|aminoglycoside|antifungal|antiviral|nitroimidazole|metronidazole|linezolid|colistin/.test(s)) return "abx";
@@ -8507,15 +8550,29 @@
     if (q) { q.oninput = function () { if (_txDraft) _txDraft.name = this.value; txRenderSug(this.value); }; txRenderSug(d.name); setTimeout(function () { try { q.focus(); } catch (e) {} }, 40); }
   }
   function txRenderSug(q) {
+    _txLocal = txSearchDrugs(q);
+    if (String(q || "").trim().length < 2) { _txRemote = []; _txRemoteQ = ""; }   // cleared box: drop stale hits
+    txRemoteSearch(q);
+    txPaintSug();
+  }
+  // Local + server hits, de-duped by name (the formulary wins, it carries a dose string).
+  function txPaintSug() {
     var box = modalEl && modalEl.querySelector("#txsug"); if (!box) return;
-    _txHits = txSearchDrugs(q);
+    var seen = {}; _txHits = [];
+    _txLocal.concat(_txRemote).forEach(function (h) {
+      var k = String(h.name || "").trim().toLowerCase();
+      if (!k || seen[k] || _txHits.length >= 8) return;
+      seen[k] = 1; _txHits.push(h);
+    });
     if (!_txHits.length) { box.innerHTML = ""; return; }
     box.innerHTML = '<div class="icu-card" style="padding:2px 0;margin:0">' + _txHits.map(function (h, i) {
       var col = "var(--muted)"; for (var j = 0; j < TX_CATS.length; j++) if (TX_CATS[j].k === h.cat) col = TX_CATS[j].color;
       return '<button data-icu-act="txpick:' + i + '" style="width:100%;text-align:left;background:none;border:none;border-bottom:1px solid var(--border);padding:9px 12px;cursor:pointer;color:var(--ink)">' +
         '<span style="float:right;font:700 9.5px var(--font);color:#fff;background:' + col + ';border-radius:6px;padding:2px 6px">' + esc(txCatLabel(h.cat)) + '</span>' +
         '<div style="font:700 13.5px var(--font)">' + esc(h.name) + '</div>' +
-        (h.cls ? '<div style="font:600 11px var(--font);color:var(--muted)">' + esc(h.cls) + (h.dose ? " · " + esc(h.dose) : "") + '</div>' : "") + '</button>';
+        (h.cls || h.remote ? '<div style="font:600 11px var(--font);color:var(--muted)">' +
+          (h.cls ? esc(h.cls) + (h.dose ? " · " + esc(h.dose) : "") : "") +
+          (h.remote ? (h.cls ? " · " : "") + "Drug Index" : "") + '</div>' : "") + '</button>';
     }).join("") + '</div>';
   }
   function txSyncInputs() {
