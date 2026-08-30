@@ -117,6 +117,26 @@ test("Save as PDF mints a code and puts the QR on the exported sheet", () => {
   assert.match(SRC, /exportRx\("jpeg"/, "and so does JPEG");
 });
 
+/* The patient's name never leaves the device.
+ *
+ * The verify page needs SOMETHING to check the bearer against, or a stolen PDF is dispensed to
+ * whoever presents it. Initials are that something - but the masking happens here, on the phone,
+ * and only the mask is sent. There is then no name in the request, none at rest, and none to leak.
+ */
+test("only the masked initials are sent - never the patient's name", () => {
+  assert.match(SRC, /function rxMaskName/, "the mask is computed on the device");
+
+  const body = SRC.slice(SRC.indexOf("function rxIssueVerification"), SRC.indexOf("function rxQrSvg"));
+  assert.match(body, /patientMask: mask/, "the request carries the mask");
+  assert.ok(!/patientName:|name: patientName|d\.name\s*\}/.test(body), "and never the name itself");
+
+  // Fixed stars, not the real length: keeping the length or alternate letters (M*N*JK*M*R) hands
+  // back a skeleton a reader reconstructs on sight, which is not a mask.
+  const mask = SRC.slice(SRC.indexOf("function rxMaskName"), SRC.indexOf("function rxIssueVerification"));
+  assert.match(mask, /\+ "\*\*\*"/, "three stars regardless of how long the name is");
+  assert.match(mask, /charAt\(0\)/, "keeps only the first letter of each part");
+});
+
 test("the printed sheet and the exported PDF encode the SAME verify URL", () => {
   // One helper used by both, so the two documents can never disagree about where a scan lands.
   assert.match(SRC, /function rxVerifyUrl/, "the URL is built in one place");
@@ -138,4 +158,45 @@ test("the prescriber is told why a sheet printed without a QR", () => {
   const body = SRC.slice(SRC.indexOf("function doRxPrint"));
   const why = body.indexOf("rxNoQrWhy"), html = body.indexOf("rxPrintHTML(topic, regNo, rxv)");
   assert.ok(why > -1 && html > why, "the reason is shown BEFORE rendering, and rendering still happens");
+});
+
+/* The QR must not sit on top of the text beside it.
+ *
+ * The encoder sizes the SVG from its module count and ignores its container, so at scale 3 it came
+ * out about twice the 96px slot and painted over the code, the verify URL and the validity line -
+ * the exported PDF read "n to verify" and "wardmd.in/verify".
+ */
+test("the QR is pinned to its box and cannot cover the code beside it", () => {
+  assert.match(SRC, /function rxQrSvg\(rec, px\)/, "the encoder output is given an explicit size");
+  assert.match(SRC, /replace\(\/\\s\(width\|height\)/, "the encoder's own width/height is stripped, so ours is the only one");
+  assert.match(SRC, /width:'\s*\+\s*size\s*\+\s*'px;height:'\s*\+\s*size\s*\+\s*'px/, "and pinned in CSS as well as attributes");
+
+  // A table, not flex: two cells cannot overlap, whatever size the QR turns out to be.
+  const block = SRC.slice(SRC.indexOf("function rxDocQrBlock"), SRC.indexOf("function rxQrBlock"));
+  assert.match(block, /<table/, "laid out as a table");
+  assert.ok(!/display:flex/.test(block), "not flex - that is what let the QR spill over the text");
+});
+
+/* A prescription longer than one page.
+ *
+ * Ten drugs run to two pages. The old code baked the QR into the page image and sliced blindly by
+ * page height, so the break could cut the QR in half and only the last page carried one at all -
+ * page 1 was unverifiable paper. Now it is stamped per page in PDF units.
+ */
+test("every page of a multi-page prescription carries an intact QR", () => {
+  assert.match(SRC, /function rxQrStamp/, "the QR is rasterised separately for stamping");
+  const ex = SRC.slice(SRC.indexOf("function exportRxNow"), SRC.indexOf("function signAndExport"));
+
+  assert.match(ex, /kind==="pdf" \? null : rxv/, "a PDF leaves the block out of the document...");
+  assert.match(ex, /rxQrStamp\(rxv\)/, "...and stamps it instead");
+
+  // Stamped inside the page loop, so page 2 gets one exactly like page 1.
+  const loop = ex.slice(ex.indexOf("while(guard"));
+  assert.match(loop, /addImage\(stamp\.data/, "the stamp is applied on every page, not once");
+  assert.match(loop, /pdf\.addPage\(\)/, "and the loop really does paginate");
+
+  // The band is reserved and cleared, so content never prints through or over the stamp.
+  assert.match(ex, /usable=Math\.max\(120, ph-band\)/, "content is paged against the height left after the band");
+  assert.match(loop, /pdf\.rect\(0, ph-band, pw, band, "F"\)/, "the band is cleared before stamping");
+  assert.match(ex, /guard\+\+ < 60/, "the pagination loop is bounded");
 });

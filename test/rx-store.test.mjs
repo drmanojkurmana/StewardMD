@@ -138,6 +138,33 @@ test("NOTHING about the patient is stored, however hard the caller pushes it", a
   assert.deepEqual(Object.keys(only(db).drugs[0]).sort(), ["name"], "only the fields the verifier needs");
 });
 
+/* The masked initials, and the guarantee that they can only ever BE initials.
+ *
+ * A QR that proves a prescription is genuine still says nothing about who is holding it, so a
+ * stolen PDF for a sleeping pill is dispensed to whoever presents it. The mask lets a pharmacist
+ * compare against the ID. It only works as a privacy trade if a real name cannot get in here, so
+ * the server re-validates rather than trusting the client that masked it.
+ */
+test("a masked initial is stored; anything that is not a mask is refused", async () => {
+  const db = fakeDb();
+  await issue(ENV, CLAIMS, { drugs: [{ name: "Zolpidem" }], patientMask: "M*** K***" }, db.deps);
+  assert.equal(only(db).patientMask, "M*** K***", "a real mask is kept");
+
+  // The whole point: a client bug, or a direct caller, must not be able to store a name.
+  for (const bad of ["Manoj Kumar", "M*N*JK*M*R", "Manoj K***", "M**", "M****", "M***x", "<script>"]) {
+    const d2 = fakeDb();
+    await issue(ENV, CLAIMS, { drugs: [{ name: "Zolpidem" }], patientMask: bad }, d2.deps);
+    assert.equal(only(d2).patientMask, "", `refused: ${bad}`);
+    assert.equal(JSON.stringify(only(d2)).includes("Manoj"), false, `no name reached the record: ${bad}`);
+  }
+});
+
+test("no mask given means no patient field at all", async () => {
+  const db = fakeDb();
+  await issue(ENV, CLAIMS, { drugs: [{ name: "Zolpidem" }] }, db.deps);
+  assert.equal(only(db).patientMask, "", "a prescription with no name recorded stays blank");
+});
+
 test("drug dose/frequency/duration ARE kept - a tampered quantity must be detectable", async () => {
   const db = fakeDb();
   await issue(ENV, CLAIMS, {
