@@ -73,6 +73,63 @@ test("a failed lookup says so rather than looking like a valid prescription", ()
   assert.match(RX, /Could not check/, "and says so in plain words");
 });
 
+/* ---------------- 2b. the native QR scanner ----------------
+ * The phone's own scanner (@capacitor/barcode-scanner: Google Play Services' code scanner on
+ * Android, AVFoundation on iOS). Two things are easy to get wrong and impossible to see in a diff:
+ * the plugin is reached through Capacitor.Plugins (this app is buildless ES5, so the package's ESM
+ * wrapper is unreachable) - and that wrapper is where the option defaults live, so calling the raw
+ * plugin without them sends undefined to the native layer. */
+
+test("the scanner is a declared dependency, not an assumed one", async () => {
+  const { createRequire } = await import("node:module");
+  const req = createRequire(import.meta.url);
+  const pkg = req("../package.json");
+  assert.ok(pkg.dependencies["@capacitor/barcode-scanner"],
+    "@capacitor/barcode-scanner must be in dependencies, or the native build has no scanner");
+});
+
+test("the plugin is reached through Capacitor.Plugins, not an ESM import", () => {
+  // The global may be aliased first (var C = window.Capacitor), so match the access, not one spelling.
+  assert.match(RX, /window\.Capacitor/, "it reads the Capacitor global");
+  assert.match(RX, /\.Plugins && \w+\.Plugins\.CapacitorBarcodeScanner/,
+    "buildless ES5 cannot import the package wrapper - it must go through Capacitor.Plugins");
+  assert.ok(!/^import .*barcode-scanner/m.test(RX), "no ESM import of the plugin in this file");
+});
+
+test("every option the ESM wrapper would default is passed explicitly", () => {
+  // The wrapper fills these in; calling the plugin directly does not, and undefined reaches native.
+  const call = /scanBarcode\(\{[\s\S]*?\}\)/.exec(RX);
+  assert.ok(call, "the scan call exists");
+  for (const opt of ["hint", "scanInstructions", "scanButton", "scanText", "cameraDirection", "scanOrientation"]) {
+    assert.ok(new RegExp("\\b" + opt + ":").test(call[0]), `${opt} must be passed explicitly`);
+  }
+  assert.match(RX, /RXV_HINT_QR = 0/, "QR_CODE is 0 (Html5QrcodeSupportedFormats.QR_CODE)");
+  assert.match(RX, /RXV_CAM_BACK = 1/, "BACK camera is 1");
+  assert.match(RX, /RXV_ORIENT_ADAPTIVE = 3/, "ADAPTIVE orientation is 3");
+});
+
+test("the scan button only appears where the plugin actually exists", () => {
+  // The package's web fallback is a lazily-imported ESM module that cannot load here, so a button
+  // shown off-device would simply do nothing. Native-only, with the typed code as the way in.
+  assert.match(RX, /isNativePlatform\(\)/, "gated on running natively");
+  assert.match(RX, /rxvScanner\(\) \? '<button class="rxv-scan"/, "the button is conditional on the plugin");
+});
+
+test("a scanned QR URL and a pasted bare code both resolve", () => {
+  const m = /function rxvCodeFrom\(text\) \{[\s\S]*?\n  \}/.exec(RX);
+  assert.ok(m, "rxvCodeFrom exists");
+  const fn = new Function("return " + m[0].replace(/^function/, "function"))();
+  assert.equal(fn("https://stewardmd.in/verify/1234-5678-90AB-CDEF"), "1234-5678-90AB-CDEF");
+  assert.equal(fn("1234-5678-90AB-CDEF"), "1234-5678-90AB-CDEF", "a pasted bare code still works");
+  assert.equal(fn("https://stewardmd.in/verify/ABCD-1234?src=qr"), "ABCD-1234", "a query string is ignored");
+});
+
+test("a cancelled or denied scan says so instead of failing silently", () => {
+  // Cancelling is the common case and must not look like an error; a denied camera would otherwise
+  // be completely silent. One neutral line covers both and names the way that still works.
+  assert.match(RX, /Scan cancelled, or the camera is unavailable/);
+});
+
 /* ---------------- 3. the website ---------------- */
 
 test("stewardmd.in links to the verifier from the nav and the mobile menu", () => {

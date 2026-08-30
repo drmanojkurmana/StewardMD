@@ -228,6 +228,10 @@
       ".rxv-in{display:flex;gap:8px}" +
       ".rxv-in input{flex:1;min-width:0;padding:13px 13px;font:700 15px ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.06em;border:1px solid var(--hline,#e2e8f0);border-radius:12px;background:var(--hbg,#fff);color:inherit}" +
       ".rxv-go{padding:13px 18px;border:0;border-radius:12px;background:#0e6e63;color:#fff;font:800 14px var(--hfont);cursor:pointer}" +
+      // Scan is the primary way in on a phone, so it is full-width and above the typed field.
+      ".rxv-scan{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;min-height:48px;margin:0 0 10px;padding:13px;border:0;border-radius:12px;background:#0e6e63;color:#fff;font:800 14.5px var(--hfont);cursor:pointer;transition:transform .12s}" +
+      ".rxv-scan:active{transform:scale(.98)}.rxv-scan svg{width:19px;height:19px;stroke:currentColor;fill:none}" +
+      ".rxv-scan:disabled{opacity:.6}" +
       ".rxv-go:disabled{opacity:.55}" +
       ".rxv-badge{border-radius:13px;padding:14px 15px;color:#fff;margin:14px 0 4px}" +
       ".rxv-badge b{display:block;font:800 17px var(--hfont)}.rxv-badge p{margin:6px 0 0;font:600 12.5px var(--hfont);opacity:.95}" +
@@ -250,6 +254,53 @@
     rate_limited: { bg: "#4a5568", t: "Too many lookups", s: "Try again in a minute." },
     error:    { bg: "#4a5568", t: "Could not check", s: "No connection to the verification service. Try again when you are online." }
   };
+  /* ---- Native QR scan (@capacitor/barcode-scanner) -------------------------------------------
+   * The phone's own scanner UI: Google Play Services' code scanner on Android, the native
+   * AVFoundation scanner on iOS. We deliberately do NOT ship a camera view of our own — the system
+   * one is faster, already localised, already accessible, and on Android it needs no camera
+   * permission at all because the scanning happens inside Play Services.
+   *
+   * Called through Capacitor.Plugins rather than an import: this app is buildless ES5, so the
+   * package's ESM wrapper is not reachable. That wrapper is also where the option defaults are
+   * applied, so every option it would have filled in is passed explicitly below — omitting them
+   * sends undefined straight to the native layer.
+   *
+   * NATIVE-ONLY on purpose. The package's web fallback is a lazily-imported ESM module (html5-qrcode)
+   * that cannot load in this context, so the button is hidden off-device and the typed code remains
+   * the way in. Better a missing button than one that does nothing.
+   */
+  var RXV_HINT_QR = 0;        // Html5QrcodeSupportedFormats.QR_CODE
+  var RXV_CAM_BACK = 1;       // CapacitorBarcodeScannerCameraDirection.BACK
+  var RXV_ORIENT_ADAPTIVE = 3; // CapacitorBarcodeScannerScanOrientation.ADAPTIVE
+  function rxvScanner() {
+    try {
+      var C = window.Capacitor;
+      if (!C || !C.isNativePlatform || !C.isNativePlatform()) return null;
+      return (C.Plugins && C.Plugins.CapacitorBarcodeScanner) || null;
+    } catch (e) { return null; }
+  }
+  function rxvScan() {
+    var P = rxvScanner();
+    if (!P || !P.scanBarcode) return Promise.reject(new Error("unavailable"));
+    return P.scanBarcode({
+      hint: RXV_HINT_QR,
+      scanInstructions: "Point the camera at the QR on the prescription",
+      scanButton: false,
+      scanText: " ",
+      cameraDirection: RXV_CAM_BACK,
+      scanOrientation: RXV_ORIENT_ADAPTIVE,
+      cancelButtonAccessibilityLabel: "Cancel scanning",
+      torchButtonOnAccessibilityLabel: "Turn the torch off",
+      torchButtonOffAccessibilityLabel: "Turn the torch on"
+    }).then(function (r) { return (r && r.ScanResult) || ""; });
+  }
+  // A scanned QR carries the full verify URL; a human might paste just the code. Accept both, and
+  // ignore anything after the code (a query string, a trailing slash) rather than failing the lookup.
+  function rxvCodeFrom(text) {
+    var t = String(text || "").trim();
+    var m = t.match(/\/verify\/([^/?#\s]+)/i);
+    return m ? m[1] : t;
+  }
   function rxvDay(ms) { try { return ms ? new Date(ms).toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" }) : ""; } catch (e) { return ""; } }
   function rxvRow(k, v) { return v || v === 0 ? '<div class="rxv-r"><div class="rxv-k">' + esc(k) + '</div><div class="rxv-v">' + esc(v) + "</div></div>" : ""; }
   function rxvResultHTML(d) {
@@ -278,7 +329,8 @@
     var ov = document.createElement("div"); ov.className = "rxv-ov";
     ov.innerHTML = '<div class="rxv-sh" role="dialog" aria-modal="true" aria-label="Verify a prescription">' +
       '<div class="rxv-h"><span>Verify a prescription</span><button class="rxv-x" aria-label="Close">&times;</button></div>' +
-      '<p class="rxv-sub">Type the code printed on the sheet, or scan its QR with your camera.</p>' +
+      '<p class="rxv-sub">' + (rxvScanner() ? "Scan the QR on the prescription, or type the code printed beside it." : "Type the code printed on the prescription.") + "</p>" +
+      (rxvScanner() ? '<button class="rxv-scan" id="rxvScan">' + rxIco("camera") + " Scan QR code</button>" : "") +
       '<div class="rxv-in"><input id="rxvCode" inputmode="latin" autocapitalize="characters" spellcheck="false" ' +
         'placeholder="XXXX-XXXX-XXXX-XXXX" aria-label="Prescription code" value="' + esc(prefill || "") + '">' +
       '<button class="rxv-go" id="rxvGo">Check</button></div>' +
@@ -302,6 +354,20 @@
     }
     go.addEventListener("click", run);
     inp.addEventListener("keydown", function (e) { if (e.key === "Enter") run(); });
+    var scanBtn = ov.querySelector("#rxvScan");
+    if (scanBtn) scanBtn.addEventListener("click", function () {
+      scanBtn.disabled = true;
+      rxvScan().then(function (text) {
+        var code = rxvCodeFrom(text);
+        if (!code) return;
+        inp.value = code;
+        run();                                   // scanned = checked; no second tap to confirm
+      }, function () {
+        /* Cancelling is the common case and must not look like a failure, but a denied camera would
+         * otherwise be silent - so one neutral line covers both and points at the way that works. */
+        out.innerHTML = '<p class="rxv-note">Scan cancelled, or the camera is unavailable. Type the code printed on the prescription instead.</p>';
+      }).then(function () { scanBtn.disabled = false; });
+    });
     setTimeout(function () { try { inp.focus(); } catch (e) {} }, 60);
     if (prefill) run();
   }
