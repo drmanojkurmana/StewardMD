@@ -1342,6 +1342,13 @@
       "body.ui-v2 .smd-caseshare{display:flex;gap:8px;margin:0 0 14px;flex-wrap:wrap}",
       "body.ui-v2 .smd-caseshare button{flex:1;min-width:130px;border:1px solid var(--line)!important;background:var(--panel);color:var(--teal);font:700 13px var(--sans);padding:11px 14px;border-radius:12px;cursor:pointer}",
       "body.ui-v2 .smd-caseshare button:active{transform:scale(.99)}",
+      ".hv-drag{flex:0 0 auto;color:var(--hmut);padding:6px;margin-left:2px;touch-action:none;cursor:grab}",
+      ".hv-tool-tog.dragging{opacity:.55;background:var(--hbg)}",
+      ".rnav-grid.reordering .rnav-tile{touch-action:none}",
+      ".rnav-grid.reordering .rnav-tile:not(.addtool):not(.dragging){animation:rnavJiggle .28s ease-in-out infinite alternate}",
+      ".rnav-grid.reordering .rnav-tile.addtool{opacity:.35;pointer-events:none}",
+      ".rnav-tile.dragging{opacity:.6;transform:scale(1.05);z-index:5}",
+      "@keyframes rnavJiggle{from{transform:rotate(-1deg)}to{transform:rotate(1deg)}}",
       "@media(prefers-reduced-motion:reduce){#homeV2 *{transition:none!important;animation:none!important}}"
     ].join("\n");
     document.head.appendChild(st);
@@ -1553,6 +1560,83 @@
     { act: "antibiogram", ic: "biotech", tt: "Antibiogram", sub: "Local resistance", defOn: false },
   ];
   function homeToolByAct(a) { for (var i = 0; i < HOME_TOOLS.length; i++) if (HOME_TOOLS[i].act === a) return HOME_TOOLS[i]; return null; }
+  var _reorderMode = false, _pressT = null;
+  var DRAG_DOTS = '<svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><circle cx="9" cy="6" r="1.5"/><circle cx="15" cy="6" r="1.5"/><circle cx="9" cy="12" r="1.5"/><circle cx="15" cy="12" r="1.5"/><circle cx="9" cy="18" r="1.5"/><circle cx="15" cy="18" r="1.5"/></svg>';
+  function toolOrderKey() { return "smd_home_tools_order"; }
+  function getToolOrder() { try { var o = JSON.parse(localStorage.getItem(toolOrderKey()) || "[]"); return Array.isArray(o) ? o : []; } catch (e) { return []; } }
+  function setToolOrder(order) { try { localStorage.setItem(toolOrderKey(), JSON.stringify(order)); } catch (e) {} }
+  // HOME_TOOLS in the user's saved drag order. A tool with no saved position (new install, or
+  // a tool added to the app after the user last reordered) falls back to its default place at
+  // the end - no migration needed when HOME_TOOLS itself changes.
+  function orderedHomeTools() {
+    var order = getToolOrder();
+    if (!order.length) return HOME_TOOLS.slice();
+    var byAct = {}; HOME_TOOLS.forEach(function (t) { byAct[t.act] = t; });
+    var out = [], seen = {};
+    order.forEach(function (act) { var t = byAct[act]; if (t && !seen[act]) { out.push(t); seen[act] = true; } });
+    HOME_TOOLS.forEach(function (t) { if (!seen[t.act]) out.push(t); });
+    return out;
+  }
+  // Drops `dragEl` into `container` (list or 2D grid) at whichever slot the pointer is over, on
+  // every move, and persists the resulting order on release. Shared by the Customize-tools sheet
+  // (vertical list) and the home tool grid (2D) - one implementation, no per-surface duplicate.
+  function beginDrag(dragEl, container, itemSelector, dataAttr) {
+    dragEl.classList.add("dragging");
+    var isGrid = container.id === "rnavToolsGrid";
+    function onMove(ev) {
+      var items = [].slice.call(container.querySelectorAll(itemSelector)).filter(function (n) { return n !== dragEl; });
+      if (isGrid) {
+        var best = null, bestD = Infinity;
+        items.forEach(function (n) {
+          var r = n.getBoundingClientRect(), cx = r.left + r.width / 2, cy = r.top + r.height / 2;
+          var d = Math.hypot(ev.clientX - cx, ev.clientY - cy);
+          if (d < bestD) { bestD = d; best = n; }
+        });
+        if (best) {
+          var br = best.getBoundingClientRect();
+          container.insertBefore(dragEl, (ev.clientY < br.top + br.height / 2) ? best : best.nextSibling);
+        }
+      } else {
+        for (var i = 0; i < items.length; i++) {
+          var r = items[i].getBoundingClientRect();
+          if (ev.clientY < r.top + r.height / 2) { container.insertBefore(dragEl, items[i]); return; }
+        }
+        container.appendChild(dragEl);
+      }
+    }
+    function onUp() {
+      document.removeEventListener("pointermove", onMove);
+      document.removeEventListener("pointerup", onUp);
+      dragEl.classList.remove("dragging");
+      var order = [].slice.call(container.querySelectorAll(itemSelector)).map(function (n) { return n.getAttribute(dataAttr); });
+      setToolOrder(order);
+    }
+    document.addEventListener("pointermove", onMove);
+    document.addEventListener("pointerup", onUp);
+  }
+  // Drag-to-reorder entry point: the Customize-tools sheet list is armed immediately (its handle
+  // signals intent); the home tool grid needs a 500ms long-press first, matching iOS's
+  // press-and-hold icon rearrange so a normal tap still opens the tool. Delegated on `root` so
+  // it keeps working across every re-render of either surface without re-wiring.
+  function wireHomeDragReorder(root) {
+    root.addEventListener("pointerdown", function (e) {
+      var handle = e.target.closest(".hv-drag");
+      if (handle) {
+        var row = handle.closest(".hv-tool-tog"); if (!row) return;
+        e.preventDefault();
+        return beginDrag(row, row.parentElement, ".hv-tool-tog", "data-tool");
+      }
+      var tile = e.target.closest(".rnav-tile:not(.addtool)");
+      var grid = tile && document.getElementById("rnavToolsGrid");
+      if (!grid) return;
+      clearTimeout(_pressT);
+      _pressT = setTimeout(function () {
+        _reorderMode = true; grid.classList.add("reordering");
+        beginDrag(tile, grid, ".rnav-tile:not(.addtool)", "data-act");
+      }, 500);
+      document.addEventListener("pointerup", function cancel() { clearTimeout(_pressT); document.removeEventListener("pointerup", cancel); }, { once: true });
+    });
+  }
   function homeToolPrefs() { try { return JSON.parse(localStorage.getItem("smd_home_tools") || "{}") || {}; } catch (e) { return {}; } }
   function homeToolVisible(t) { var p = homeToolPrefs(); return Object.prototype.hasOwnProperty.call(p, t.act) ? !!p[t.act] : (t.defOn !== false); }
   function homeToolEligible(t) { if (!t.eligible) return true; try { return !!t.eligible(); } catch (e) { return false; } }
@@ -1585,26 +1669,28 @@
       '<span class="rnav-tile-tt">' + t.tt + '</span><span class="rnav-tile-sub">' + t.sub + '</span></button>';
   }
   function renderHomeToolsGrid() {
-    var html = "";
-    for (var i = 0; i < HOME_TOOLS.length; i++) { var t = HOME_TOOLS[i]; if (homeToolEligible(t) && homeToolVisible(t)) html += homeToolTile(t); }
+    var html = "", TOOLS = orderedHomeTools();
+    for (var i = 0; i < TOOLS.length; i++) { var t = TOOLS[i]; if (homeToolEligible(t) && homeToolVisible(t)) html += homeToolTile(t); }
     html += '<button class="rnav-tile addtool" data-act="customizetools" aria-label="Add or customise tools">' +
       '<span class="rnav-badge">' + ric("add") + '</span><span class="rnav-tile-tt">Add Tool</span><span class="rnav-tile-sub">Customize</span></button>';
     return html;
   }
   function openToolsCustomize() {
-    var rows = "";
-    for (var i = 0; i < HOME_TOOLS.length; i++) {
-      var t = HOME_TOOLS[i]; if (!homeToolEligible(t)) continue;
+    var rows = "", TOOLS = orderedHomeTools();
+    for (var i = 0; i < TOOLS.length; i++) {
+      var t = TOOLS[i]; if (!homeToolEligible(t)) continue;
       rows += '<button class="hv-mi hv-tool-tog" data-tool="' + t.act + '">' + ric(t.ic) +
         '<div class="ml">' + t.tt + '<div class="mc">' + t.sub + '</div></div>' +
-        '<span class="hv-tog' + (homeToolVisible(t) ? ' on' : '') + '"></span></button>';
+        '<span class="hv-tog' + (homeToolVisible(t) ? ' on' : '') + '"></span>' +
+        '<span class="hv-drag" aria-label="Drag to reorder">' + DRAG_DOTS + '</span></button>';
     }
-    openSheet('<div class="hv-sh-t">Customize tools</div><div class="hv-sub2">Show or hide the tools on your home screen. Saved on this device.</div>' + rows);
+    openSheet('<div class="hv-sh-t">Customize tools</div><div class="hv-sub2">Show or hide the tools on your home screen. Drag ' + DRAG_DOTS + ' to reorder. Saved on this device.</div>' + rows);
     sheetEl().querySelectorAll(".hv-tool-tog").forEach(function (b) {
-      b.addEventListener("click", function () {
+      b.addEventListener("click", function (e) {
+        if (e.target.closest(".hv-drag")) return;   // reorder handle, not the visibility toggle
         var t = homeToolByAct(b.getAttribute("data-tool")); if (!t) return;
         var now = !homeToolVisible(t), p = homeToolPrefs(); p[t.act] = now;
-        try { localStorage.setItem("smd_home_tools", JSON.stringify(p)); } catch (e) {}
+        try { localStorage.setItem("smd_home_tools", JSON.stringify(p)); } catch (e2) {}
         var tg = b.querySelector(".hv-tog"); if (tg) tg.classList.toggle("on", now);
         var g = document.getElementById("rnavToolsGrid"); if (g) g.innerHTML = renderHomeToolsGrid();
       });
@@ -1870,9 +1956,16 @@
     // Notifications: probe once for unread medical updates, then hourly.
     try { setTimeout(refreshBadge, 1500); setInterval(function () { _notifItems = null; refreshBadge(); }, 3600000); } catch (e) {}
 
+    // Delegated on `document`, not `root`: the Customize-tools sheet (sheetEl()) is appended
+    // straight to document.body as a SIBLING of root, not a descendant, so a listener scoped to
+    // root alone never sees drags starting on its .hv-drag handles.
+    wireHomeDragReorder(document);
     root.addEventListener("click", function (e) {
       var b = e.target.closest("[data-act]"); if (!b) return;
       var a = b.getAttribute("data-act");
+      // Long-press grid reorder mode: any tap while active exits it instead of navigating -
+      // tap-anywhere-to-exit, matching iOS's "tap away to stop jiggling" without extra chrome.
+      if (_reorderMode) { _reorderMode = false; var g0 = document.getElementById("rnavToolsGrid"); if (g0) g0.classList.remove("reordering"); return; }
       if (a === "about") e.stopPropagation();   // hero banner → About & Acknowledgements; keep the StewardMD logo tap from also firing goHome
       if (a === "notifications") return openNotifications();
       if (a === "ku") return openKuPanel();
