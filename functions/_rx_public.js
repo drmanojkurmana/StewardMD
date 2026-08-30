@@ -65,6 +65,9 @@ export function describe(rec, now) {
       regNo: (rec.doctor && rec.doctor.regNo) || "",
       verified: !!(rec.doctor && rec.doctor.verified),
     },
+    // Masked initials, so whoever presents the paper can be checked against it. Never a name - the
+    // store validates that on the way in, and this only passes through what was stored.
+    patientMask: rec.patientMask || "",
     drugs: [].concat(rec.drugs || []),
     issuedAt: rec.issuedAt || null,
     validUntil: rec.validUntil || null,

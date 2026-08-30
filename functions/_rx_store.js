@@ -16,10 +16,19 @@
  *    else's registration number, which is precisely the forgery this exists to prevent.
  * 2. TIME. issuedAt is the server clock. A client-supplied issue date could be back-dated to
  *    resurrect an expired prescription, so it is never accepted.
- * 3. WHAT IS STORED. Drugs, prescriber, validity. NEVER the patient — no name, age, sex, MRN,
- *    diagnosis or contact. A pharmacist scanning the QR is answering "did this doctor really write
- *    these drugs, and is it still valid?", and nothing on this record can answer anything else. The
- *    record is PHI-free by construction, which is what makes a public verify page safe at all.
+ * 3. WHAT IS STORED. Drugs, prescriber, validity, and the patient's MASKED INITIALS ("M*** K***").
+ *    Never the patient's name, age, sex, MRN, diagnosis or contact. The mask is computed on the
+ *    device and validated again here (cleanPatientMask), so a real name cannot be stored even if a
+ *    client sends one.
+ *
+ *    Be honest about what that is: initials are pseudonymised personal data, not anonymous. The
+ *    record is no longer PHI-free by construction, and the claim that used to sit here said it was.
+ *    What justifies it is the alternative - a QR that proves a prescription is genuine but says
+ *    nothing about who is holding it, so a stolen PDF for zolpidem is dispensed to whoever presents
+ *    it. The mask lets a pharmacist compare against the ID in their hand. It catches the
+ *    opportunistic thief, not a targeted one; initials collide constantly. The printed sheet
+ *    already carries the full name, so a scanner holding the paper learns nothing new - the
+ *    exposure is a code that travels WITHOUT the paper, and a bulk leak of this store.
  *
  * Dose/frequency/duration ARE stored next to each drug name. They are not patient data, and without
  * them a tampered quantity ("10 tablets" overwritten as "100") is undetectable — which is the
@@ -40,6 +49,21 @@ function randomBytes(n) {
 }
 
 // Keep only the fields a verifier needs, and cap them, so a caller cannot use this as free storage.
+/* The patient's masked initials ("M*** K***"), and NOTHING that is not already a mask.
+ *
+ * The client masks on the device and sends only the result, so a name should never arrive here. This
+ * enforces that rather than trusting it: every token must be one letter followed by exactly three
+ * stars, or the whole field is dropped. A future client bug, or anyone calling this endpoint
+ * directly, therefore cannot put a real name into the record - which is the property that lets a
+ * login-free page show it at all.
+ */
+function cleanPatientMask(v) {
+  const parts = String(v == null ? "" : v).trim().split(/\s+/).filter(Boolean).slice(0, 4);
+  if (!parts.length) return "";
+  for (const p of parts) if (!/^[A-Za-z]\*{3}$/.test(p)) return "";
+  return parts.join(" ").toUpperCase();
+}
+
 function cleanDrugs(drugs) {
   const s = (v, max) => String(v == null ? "" : v).trim().slice(0, max);
   return [].concat(drugs || []).slice(0, 30).map((d) => {
@@ -115,6 +139,9 @@ export async function issue(env, claims, body, deps) {
     category: String((body && body.category) || "").slice(0, 40),
     country: String((body && body.country) || "IN").toUpperCase().slice(0, 4),
     cappedFromPhysician: !!v.cappedFromPhysician,
+    // Initials only, masked on the device. The one identity-adjacent field on the record, and the
+    // reason the header's "NEVER the patient" rule now reads "never the patient's NAME": see below.
+    patientMask: cleanPatientMask(body && body.patientMask),
     drugs,
     doctor,
     // NO patient fields. Deliberate, and asserted by test/rx-store.test.mjs.

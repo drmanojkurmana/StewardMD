@@ -117,6 +117,26 @@ test("Save as PDF mints a code and puts the QR on the exported sheet", () => {
   assert.match(SRC, /exportRx\("jpeg"/, "and so does JPEG");
 });
 
+/* The patient's name never leaves the device.
+ *
+ * The verify page needs SOMETHING to check the bearer against, or a stolen PDF is dispensed to
+ * whoever presents it. Initials are that something - but the masking happens here, on the phone,
+ * and only the mask is sent. There is then no name in the request, none at rest, and none to leak.
+ */
+test("only the masked initials are sent - never the patient's name", () => {
+  assert.match(SRC, /function rxMaskName/, "the mask is computed on the device");
+
+  const body = SRC.slice(SRC.indexOf("function rxIssueVerification"), SRC.indexOf("function rxQrSvg"));
+  assert.match(body, /patientMask: mask/, "the request carries the mask");
+  assert.ok(!/patientName:|name: patientName|d\.name\s*\}/.test(body), "and never the name itself");
+
+  // Fixed stars, not the real length: keeping the length or alternate letters (M*N*JK*M*R) hands
+  // back a skeleton a reader reconstructs on sight, which is not a mask.
+  const mask = SRC.slice(SRC.indexOf("function rxMaskName"), SRC.indexOf("function rxIssueVerification"));
+  assert.match(mask, /\+ "\*\*\*"/, "three stars regardless of how long the name is");
+  assert.match(mask, /charAt\(0\)/, "keeps only the first letter of each part");
+});
+
 test("the printed sheet and the exported PDF encode the SAME verify URL", () => {
   // One helper used by both, so the two documents can never disagree about where a scan lands.
   assert.match(SRC, /function rxVerifyUrl/, "the URL is built in one place");
