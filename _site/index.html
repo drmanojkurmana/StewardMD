@@ -76,6 +76,11 @@
     </div>
     <div style="flex:1"></div>
     <a id="navOpd" href="https://stewardmd.in/opd" style="display:inline-flex;align-items:center;gap:7px;color:#0F766E;font-size:13px;font-weight:500;padding:11px 14px;border-radius:11px;border:1px solid #A7DED6;background:#F4FBFA;white-space:nowrap;transition:background .3s ease,border-color .3s ease" data-hover="background:#E9F7F5;border-color:#0F766E">Open OPD</a>
+    <!-- Verify a prescription. Public and login-free on purpose: the person using it is usually a
+         pharmacist or drug inspector holding a printed sheet, who has no StewardMD account. Most
+         arrive by scanning the QR (which opens /verify/<code> directly); this is the way in for
+         someone who has the code in front of them but cannot scan it. -->
+    <a id="navVerify" href="https://stewardmd.in/verify" style="display:inline-flex;align-items:center;gap:7px;color:#0F766E;font-size:13px;font-weight:500;padding:11px 14px;border-radius:11px;border:1px solid #A7DED6;background:#F4FBFA;white-space:nowrap;transition:background .3s ease,border-color .3s ease" data-hover="background:#E9F7F5;border-color:#0F766E">Verify a prescription</a>
     <a data-navcta="1" href="#get" style="display:inline-flex;align-items:center;gap:7px;background:#0F172A;color:#fff;font-size:13px;font-weight:500;padding:10px 17px;border-radius:11px;white-space:nowrap">Get StewardMD</a>
     <button id="menuBtn" data-act="toggleMenu" aria-label="Menu" style="display:none;width:44px;height:44px;align-items:center;justify-content:center;border:1px solid #E2E8F0;background:#fff;border-radius:11px;cursor:pointer">
       <svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="#0F172A" stroke-width="1.6" stroke-linecap="round"><line x1="4" y1="8.5" x2="20" y2="8.5"></line><line x1="4" y1="15.5" x2="20" y2="15.5"></line></svg>
@@ -90,6 +95,7 @@
     <a href="#hospital" data-act="closeMenu" style="padding:14px 0;font-size:16px;color:#0F172A;border-bottom:1px solid #F1F5F9">Hospital layer</a>
     <a href="#pricing" data-act="closeMenu" style="padding:14px 0;font-size:16px;color:#0F172A;border-bottom:1px solid #F1F5F9">Pricing</a>
     <a href="https://stewardmd.in/opd" data-act="closeMenu" style="padding:14px 0;font-size:16px;color:#0F172A;border-bottom:1px solid #F1F5F9">Open OPD</a>
+    <a href="https://stewardmd.in/verify" data-act="closeMenu" style="padding:14px 0;font-size:16px;color:#0F172A;border-bottom:1px solid #F1F5F9">Verify a prescription</a>
     <a href="#get" data-act="closeMenu" style="padding:14px 0;font-size:16px;font-weight:500;color:#0F766E">Get StewardMD</a>
   </div>
 </header>

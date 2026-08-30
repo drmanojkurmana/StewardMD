@@ -207,6 +207,105 @@
       (until ? '<div class="rxv-l">Valid until ' + esc(until) + '</div>' : '') + '</div></div>';
   }
 
+  /* ---- Verify a prescription, inside the app ------------------------------------------------
+   * The QR on a printed sheet is scanned with an ordinary phone camera, which opens
+   * stewardmd.in/verify/<code> — that path needs nothing from us. This is the other half: a doctor
+   * or pharmacist ALREADY IN the app who has a code in front of them and wants to check it without
+   * leaving for a browser.
+   *
+   * Reads the same public endpoint the web page does (/api/rx/v/<code>), so the two can never give
+   * different answers. No sign-in: verification is public by design (functions/_rx_public.js), and
+   * requiring a login here would make the in-app check useless to the pharmacist it is for. */
+  function injectVerifyCSS() {
+    if (document.getElementById("rxvCss")) return;
+    var s = document.createElement("style"); s.id = "rxvCss";
+    s.textContent =
+      ".rxv-ov{position:fixed;inset:0;z-index:16200;background:rgba(15,23,42,.5);display:flex;align-items:flex-end;justify-content:center}" +
+      ".rxv-sh{background:var(--hpanel,#fff);color:var(--hink,#0f172a);width:100%;max-width:560px;max-height:88vh;overflow:auto;border-radius:18px 18px 0 0;padding:16px 16px 26px}" +
+      ".rxv-h{display:flex;align-items:center;justify-content:space-between;font:800 16px var(--hfont);margin-bottom:2px}" +
+      ".rxv-x{border:0;background:transparent;cursor:pointer;color:var(--hmut,#64748b);font-size:20px;line-height:1;padding:4px 6px}" +
+      ".rxv-sub{font:600 12.5px var(--hfont);color:var(--hmut,#64748b);margin:0 0 12px}" +
+      ".rxv-in{display:flex;gap:8px}" +
+      ".rxv-in input{flex:1;min-width:0;padding:13px 13px;font:700 15px ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.06em;border:1px solid var(--hline,#e2e8f0);border-radius:12px;background:var(--hbg,#fff);color:inherit}" +
+      ".rxv-go{padding:13px 18px;border:0;border-radius:12px;background:#0e6e63;color:#fff;font:800 14px var(--hfont);cursor:pointer}" +
+      ".rxv-go:disabled{opacity:.55}" +
+      ".rxv-badge{border-radius:13px;padding:14px 15px;color:#fff;margin:14px 0 4px}" +
+      ".rxv-badge b{display:block;font:800 17px var(--hfont)}.rxv-badge p{margin:6px 0 0;font:600 12.5px var(--hfont);opacity:.95}" +
+      ".rxv-card{border:1px solid var(--hline,#e2e8f0);border-radius:13px;padding:2px 14px;margin-top:10px}" +
+      ".rxv-r{display:flex;gap:12px;padding:10px 0;border-bottom:1px solid var(--hline,#eef2f1)}.rxv-r:last-child{border-bottom:0}" +
+      ".rxv-k{flex:0 0 42%;font:600 12.5px var(--hfont);color:var(--hmut,#64748b)}.rxv-v{flex:1;font:700 13.5px var(--hfont);word-break:break-word}" +
+      ".rxv-ok{color:#0f7a4a}.rxv-no{color:#9b1c1c}" +
+      ".rxv-d{padding:10px 0;border-bottom:1px solid var(--hline,#eef2f1)}.rxv-d:last-child{border-bottom:0}" +
+      ".rxv-d b{font:800 14px var(--hfont)}.rxv-d span{display:block;font:600 12px var(--hfont);color:var(--hmut,#64748b)}" +
+      ".rxv-note{font:600 11.5px var(--hfont);color:var(--hmut,#64748b);margin-top:12px;line-height:1.5}";
+    document.head.appendChild(s);
+  }
+  var RXV_TONE = {
+    ACTIVE:   { bg: "#0f7a4a", t: "Valid prescription", s: "Issued by the prescriber below and still within its validity period." },
+    EXPIRED:  { bg: "#8a5a00", t: "Expired", s: "Genuine, but past its validity date. Do not dispense against it." },
+    REVOKED:  { bg: "#9b1c1c", t: "Withdrawn by the prescriber", s: "The prescriber withdrew this prescription. Do not dispense against it." },
+    ARCHIVED: { bg: "#4a5568", t: "Archived", s: "Beyond its retention window and no longer active." },
+    not_found:{ bg: "#4a5568", t: "Not found", s: "No prescription carries that code. Check the code, or treat the document as unverified." },
+    malformed:{ bg: "#4a5568", t: "Not a valid code", s: "That is not a StewardMD prescription code." },
+    rate_limited: { bg: "#4a5568", t: "Too many lookups", s: "Try again in a minute." },
+    error:    { bg: "#4a5568", t: "Could not check", s: "No connection to the verification service. Try again when you are online." }
+  };
+  function rxvDay(ms) { try { return ms ? new Date(ms).toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" }) : ""; } catch (e) { return ""; } }
+  function rxvRow(k, v) { return v || v === 0 ? '<div class="rxv-r"><div class="rxv-k">' + esc(k) + '</div><div class="rxv-v">' + esc(v) + "</div></div>" : ""; }
+  function rxvResultHTML(d) {
+    var tone = RXV_TONE[(d && d.status) || "error"] || RXV_TONE.error;
+    var out = '<div class="rxv-badge" style="background:' + tone.bg + '"><b>' + esc(tone.t) + "</b><p>" +
+      esc(d && d.revokedReason ? tone.s + " Reason: " + d.revokedReason : tone.s) + "</p></div>";
+    if (!d || !d.ok) return out;
+    var doc = d.doctor || {};
+    out += '<div class="rxv-card">' + rxvRow("Code", d.code) + rxvRow("Issued", rxvDay(d.issuedAt)) +
+      rxvRow("Valid until", rxvDay(d.validUntil)) + rxvRow("Schedule", d.schedule) +
+      (d.refillsAllowed != null ? rxvRow("Refills allowed", String(d.refillsAllowed)) : "") + "</div>";
+    out += '<div class="rxv-card">' + rxvRow("Prescriber", doc.name || "(not recorded)") +
+      rxvRow("Registration no.", doc.regNo || "(not recorded)") +
+      '<div class="rxv-r"><div class="rxv-k">Registration verified</div><div class="rxv-v ' +
+      (doc.verified ? "rxv-ok" : "rxv-no") + '">' + (doc.verified ? "Verified by StewardMD" : "NOT verified") + "</div></div></div>";
+    var drugs = [].concat(d.drugs || []);
+    out += '<div class="rxv-card">' + drugs.map(function (x) {
+      var sub = [x.dose, x.freq, x.duration].filter(Boolean).join(" · ");
+      return '<div class="rxv-d"><b>' + esc(x.name) + "</b>" + (sub ? "<span>" + esc(sub) + "</span>" : "") + "</div>";
+    }).join("") + "</div>";
+    out += '<p class="rxv-note">Compare this list against the paper in your hand. If they differ, the document has been altered. No patient information is stored on a verification record.</p>';
+    return out;
+  }
+  function openVerify(prefill) {
+    injectCSS(); injectVerifyCSS();
+    var ov = document.createElement("div"); ov.className = "rxv-ov";
+    ov.innerHTML = '<div class="rxv-sh" role="dialog" aria-modal="true" aria-label="Verify a prescription">' +
+      '<div class="rxv-h"><span>Verify a prescription</span><button class="rxv-x" aria-label="Close">&times;</button></div>' +
+      '<p class="rxv-sub">Type the code printed on the sheet, or scan its QR with your camera.</p>' +
+      '<div class="rxv-in"><input id="rxvCode" inputmode="latin" autocapitalize="characters" spellcheck="false" ' +
+        'placeholder="XXXX-XXXX-XXXX-XXXX" aria-label="Prescription code" value="' + esc(prefill || "") + '">' +
+      '<button class="rxv-go" id="rxvGo">Check</button></div>' +
+      '<div id="rxvOut"></div>' +
+      '<p class="rxv-note">Only prescriptions containing a habit-forming drug or an antibiotic carry a code.</p></div>';
+    document.body.appendChild(ov);
+    var close = function () { try { ov.remove(); } catch (e) {} };
+    ov.addEventListener("click", function (e) { if (e.target === ov) close(); });
+    ov.querySelector(".rxv-x").addEventListener("click", close);
+    var inp = ov.querySelector("#rxvCode"), go = ov.querySelector("#rxvGo"), out = ov.querySelector("#rxvOut");
+    function run() {
+      var raw = (inp.value || "").trim();
+      var code = window.SMD_RX_VALIDITY ? SMD_RX_VALIDITY.normalizeCode(raw) : raw.replace(/[^0-9A-Za-z]/g, "").toUpperCase();
+      if (!code || code.length < 12) { out.innerHTML = rxvResultHTML({ status: "malformed" }); return; }
+      go.disabled = true; out.innerHTML = '<p class="rxv-note">Checking…</p>';
+      fetch("/api/rx/v/" + encodeURIComponent(code))
+        .then(function (r) { return r.json().catch(function () { return null; }); })
+        .then(function (d) { out.innerHTML = rxvResultHTML(d); })
+        .catch(function () { out.innerHTML = rxvResultHTML({ status: "error" }); })
+        .then(function () { go.disabled = false; });
+    }
+    go.addEventListener("click", run);
+    inp.addEventListener("keydown", function (e) { if (e.key === "Enter") run(); });
+    setTimeout(function () { try { inp.focus(); } catch (e) {} }, 60);
+    if (prefill) run();
+  }
+
   function rxPrintHTML(topic, regNo, rxv) {
     var d = collectRx(), date = ""; try { date = new Date().toISOString().slice(0, 10); } catch (e) {}
     var n = 0;
@@ -847,7 +946,9 @@
     var existing=getSign(); if(existing) chooser(existing); else openSignPad(function(sig){ chooser(sig); });
   }
 
-  window.SMD_RX = { open: open, canPrescribe: canPrescribe, verifiedInfo: verifiedInfo, _getNmc: getNmc, _setNmc: setNmc, getClinic: getClinic, _parseVoiceRx: parseVoiceRx };
+  // openVerify is deliberately NOT gated on canPrescribe(): checking someone else's prescription is
+  // not prescribing, and the pharmacist doing it may not be a prescriber at all.
+  window.SMD_RX = { open: open, openVerify: openVerify, canPrescribe: canPrescribe, verifiedInfo: verifiedInfo, _getNmc: getNmc, _setNmc: setNmc, getClinic: getClinic, _parseVoiceRx: parseVoiceRx };
 
   /* Prime the verification cache at boot.
    * canPrescribe() is a SYNCHRONOUS read of _vcache, but ONLY verifiedInfo() fills it — and that

@@ -768,6 +768,18 @@
         return '<button class="hv-tile' + (pri ? ' pri' : '') + '" data-mi="' + act + '">' + svg(icon) +
           '<div class="tl">' + title + '</div><div class="tc">' + cap + '</div></button>';
       }
+      /* A tile with TWO actions. Prescription needs it: writing an Rx and checking someone else's are
+       * different jobs done by different people, and burying "verify" inside the pad would hide it
+       * from the pharmacist it exists for. A <button> cannot nest buttons, so this is a plain div
+       * carrying its own two controls; .hv-tile styling is shared, the click handler keys off the
+       * same data-mi attribute, and each control keeps a real tap target. */
+      function tile2(icon, title, cap, actions) {
+        return '<div class="hv-tile hv-tile2" role="group" aria-label="' + title + '">' + svg(icon) +
+          '<div class="tl">' + title + '</div><div class="tc">' + cap + '</div>' +
+          '<div class="hv-t2">' + actions.map(function (a) {
+            return '<button class="hv-t2b' + (a.pri ? " pri" : "") + '" data-mi="' + a.act + '">' + a.label + "</button>";
+          }).join("") + "</div></div>";
+      }
       var oncoOn = true; try { var qot = (location.search.match(/[?&]qoncotree=([^&]+)/) || [])[1]; oncoOn = (qot != null) ? (qot === "1" || qot === "on" || qot === "true") : (localStorage.getItem("smd_onco_navigator") !== "0"); } catch (e) {}
       // OPD Queue is PUBLIC-RELEASE-GATE def:false; gate the hub tile too (fail-closed) so it is not a dead tile for reviewers.
       var queueOn = false; try { var qq = (location.search.match(/[?&]q=([^&]+)/) || [])[1]; if (qq != null) queueOn = (qq === "1" || qq === "on" || qq === "true"); else if (window.SMD_QUEUE_FLAGS && SMD_QUEUE_FLAGS.on) queueOn = SMD_QUEUE_FLAGS.on(); else queueOn = (localStorage.getItem("smd_opd_queue") === "1"); } catch (e) {}
@@ -780,7 +792,10 @@
         // The Rx pad was only reachable from inside a MaiK answer or a consult, so writing a
         // prescription for the patient in front of you meant going through something else first.
         // It belongs under the same roof as the other patient-facing tools.
-        tile("note", "Prescription", "Write and sign an Rx", "rx") +
+        tile2("note", "Prescription", "Write an Rx, or check one", [
+          { label: "Create", act: "rx", pri: true },
+          { label: "Verify", act: "rxverify" }
+        ]) +
         tile("heart", "FollowCare", "Post-discharge follow-up", "fc") +
         tile("share", "Connect", "Link your hospital EMR", "connect") +
         '</div>');
@@ -789,6 +804,7 @@
           var a = b.getAttribute("data-mi"); closeSheet();
           setTimeout(function () {
             if (a === "rx") { ACT.prescription(); return; }
+            if (a === "rxverify") { ACT.prescriptionVerify(); return; }
             ((a === "opd" || a === "protocol") ? ACT.queue : a === "icu" ? ACT.icu : a === "ward" ? ACT.ward : a === "oncotree" ? ACT.oncotree : a === "fc" ? ACT.followcare : ACT.connect)();
           }, 70);
         });
@@ -799,6 +815,13 @@
     // to duplicate here.
     prescription: function () {
       if (window.SMD_RX && SMD_RX.open) { try { SMD_RX.open({}); } catch (e) { toast("Prescription pad unavailable"); } }
+      else toast("Prescription pad loading…");
+    },
+    // Check a prescription someone else wrote: type the code, or scan its QR with the phone camera
+    // (which opens stewardmd.in/verify directly). NOT gated on being a verified prescriber - the
+    // person checking is often a pharmacist, and verification is public by design.
+    prescriptionVerify: function () {
+      if (window.SMD_RX && SMD_RX.openVerify) { try { SMD_RX.openVerify(); } catch (e) { toast("Verification unavailable"); } }
       else toast("Prescription pad loading…");
     },
     syndromes: function () { if (window.SB && SB.openRef) SB.openRef("syndromes"); else if (window.SB && SB.openSyn) SB.openSyn(); else if (window.ASP && ASP.open) ASP.open(); else toast("Syndromes loading…"); },
@@ -1054,6 +1077,15 @@
       ".hv-tile svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;color:var(--hp)}",
       ".hv-tile .tl{font:800 15px var(--hfont);margin-top:11px}.hv-tile .tc{font:500 12px var(--hfont);color:var(--hmut);margin-top:3px;line-height:1.35}",
       ".hv-tile.pri{background:var(--hp);border-color:var(--hp);color:#fff;box-shadow:0 6px 18px -8px var(--hp)}.hv-tile.pri svg{color:#fff}.hv-tile.pri .tc{color:rgba(255,255,255,.85)}",
+      // A two-action tile (Prescription: Create / Verify). The tile itself is no longer the tap
+      // target - its buttons are - so it drops the whole-tile press affordance and gives each
+      // control a full-height 40px target instead. The row is auto-pushed to the bottom so a
+      // two-action tile still lines up with its single-action neighbours in the grid.
+      ".hv-tile2{cursor:default}.hv-tile2:hover{border-color:var(--hbd)}.hv-tile2:active{transform:none}",
+      ".hv-t2{display:flex;gap:7px;width:100%;margin-top:auto;padding-top:11px}",
+      ".hv-t2b{flex:1;min-width:0;min-height:40px;padding:9px 6px;border-radius:11px;border:1.5px solid var(--hbd);background:var(--hpanel);color:var(--hink);font:800 12.5px var(--hfont);cursor:pointer;transition:transform .12s,border-color .12s}",
+      ".hv-t2b:active{transform:scale(.96)}.hv-t2b:hover{border-color:var(--hp)}.hv-t2b:focus-visible{outline:2px solid var(--hp);outline-offset:2px}",
+      ".hv-t2b.pri{background:var(--hp);border-color:var(--hp);color:#fff}",
       "@media (prefers-reduced-motion:no-preference){.hv-tile{animation:hvTileIn .3s cubic-bezier(.2,.7,.2,1) both}.hv-tile:nth-child(2){animation-delay:.05s}.hv-tile:nth-child(3){animation-delay:.1s}.hv-tile:nth-child(4){animation-delay:.15s}}",
       "@keyframes hvTileIn{from{opacity:0;transform:translateY(10px) scale(.98)}to{opacity:1;transform:none}}",
       // Customize-tools sheet (Add Tool): row toggles.
