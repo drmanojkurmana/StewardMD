@@ -149,7 +149,65 @@
     });
     return { name: name, age: age, dx: dx, complaints: cc, vitals: vitals, lines: lines };
   }
-  function rxPrintHTML(topic, regNo) {
+  /* ---- Verifiable prescriptions (habit-forming drugs + antibiotics) --------------------------
+   * A printed prescription is trivially forged: a name, a registration number and a drug list on
+   * paper. For the two classes where that does the most harm, the sheet now carries an opaque code
+   * and a QR pointing at stewardmd.in/verify/<code>, and the server holds the authoritative record
+   * of WHO wrote WHICH drugs and until when.
+   *
+   * The record is minted server-side from the signed-in doctor's own verified token claims, never
+   * from anything this file sends (functions/_rx_store.js), and it holds no patient data at all -
+   * which is what lets the verify page be public. Note what is NOT posted below: no name, no age.
+   *
+   * FAIL-OPEN, DELIBERATELY. If the app is offline or the issue call fails, the prescription still
+   * prints, just without a QR. A doctor at a bedside must never be unable to print because a network
+   * is down, and an unverifiable prescription is exactly what exists today - so this can only ever
+   * add assurance, never withhold a prescription.
+   */
+  function rxvOn() { try { return !!(window.SMD_RX_VALIDITY && window.SMD_PGLOG_QR); } catch (e) { return false; } }
+  function rxIdToken() {
+    try {
+      var u = window.SMD_AUTH && window.SMD_AUTH.currentUser;
+      if (u && u.getIdToken) return u.getIdToken();
+    } catch (e) {}
+    return Promise.resolve("");
+  }
+  // Resolves to a record {code, validUntil, ...} when this prescription is in scope, else null.
+  // Never rejects: every failure path prints an ordinary prescription.
+  function rxIssueVerification(lines) {
+    if (!rxvOn()) return Promise.resolve(null);
+    var drugs = (lines || []).filter(function (L) { return !L.advice && L.drug; }).map(function (L) {
+      return { name: L.drug, dose: L.dose || "", freq: L.freq || "", duration: L.duration || "" };
+    });
+    if (!drugs.length) return Promise.resolve(null);
+    try { if (!SMD_RX_VALIDITY.requiresVerification(drugs)) return Promise.resolve(null); }
+    catch (e) { return Promise.resolve(null); }
+    return rxIdToken().then(function (tok) {
+      if (!tok) return null;                       // not signed in: print without a QR
+      return fetch("/api/rx/issue", {
+        method: "POST",
+        headers: { "content-type": "application/json", "Authorization": "Bearer " + tok },
+        body: JSON.stringify({ drugs: drugs, country: "IN" })
+      }).then(function (r) { return r.ok ? r.json() : null; });
+    }).then(function (d) { return (d && d.ok && d.issued) ? d : null; }).catch(function () { return null; });
+  }
+  // The block printed on the sheet. No network at print time: the SVG is generated on device by the
+  // same encoder the PG logbook prints with (pglog-qr.js), so this works on a ward with no signal.
+  function rxQrBlock(rec) {
+    if (!rec || !rec.code) return "";
+    var url = "https://stewardmd.in/verify/" + String(rec.code).replace(/[^0-9A-Za-z-]/g, "");
+    var svg = "";
+    try { svg = SMD_PGLOG_QR.toSvg(url, { scale: 3, label: "Verify prescription " + rec.code }); } catch (e) { svg = ""; }
+    var until = "";
+    try { until = rec.validUntil ? new Date(rec.validUntil).toISOString().slice(0, 10) : ""; } catch (e) {}
+    return '<div class="rxv">' + svg +
+      '<div class="rxv-m"><div class="rxv-c">' + esc(rec.code) + '</div>' +
+      '<div class="rxv-l">Scan to verify this prescription</div>' +
+      '<div class="rxv-u">stewardmd.in/verify</div>' +
+      (until ? '<div class="rxv-l">Valid until ' + esc(until) + '</div>' : '') + '</div></div>';
+  }
+
+  function rxPrintHTML(topic, regNo, rxv) {
     var d = collectRx(), date = ""; try { date = new Date().toISOString().slice(0, 10); } catch (e) {}
     var n = 0;
     var rows = d.lines.map(function (L) {
@@ -172,6 +230,12 @@
       '.adv{padding:6px 0;color:#475569;font-size:13px}' +
       '.sign{margin-top:34px;text-align:right}.sign .nm{font-weight:700}.sign .mt{color:#64748b;font-size:12px}' +
       '.disc{margin-top:22px;padding-top:12px;border-top:1px solid #e2e8f0;font-size:11px;color:#64748b;line-height:1.5}' +
+      // The verification block sits with the signature: a reader checking authenticity is already
+      // looking at who signed it. Kept off the page break so the QR is never split in half.
+      '.rxv{display:flex;gap:12px;align-items:center;margin-top:18px;padding-top:14px;border-top:1px solid #e2e8f0;break-inside:avoid;page-break-inside:avoid}' +
+      '.rxv svg{width:96px;height:96px;flex:0 0 auto}' +
+      '.rxv-c{font:700 14px ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.06em;color:#0f172a}' +
+      '.rxv-l{font-size:11px;color:#64748b;margin-top:2px}.rxv-u{font-size:11px;color:#0e6e63;font-weight:700;margin-top:2px}' +
       '@media print{body{padding:0}@page{margin:16mm}}' +
       '</style></head><body>' +
       '<div class="hd"><span class="logo">Steward<b>MD</b></span><span class="tag">Prescription</span></div>' +
@@ -179,6 +243,7 @@
       ((d.name || d.age) ? '<div class="pt">' + esc(d.name) + (d.age ? '  &middot;  ' + esc(d.age) : '') + '</div>' : '') +
       '<div class="rxsym">&#8478;</div><main>' + (rows || '<div class="adv">No items.</div>') + '</main>' +
       '<div class="sign"><div class="nm">Dr. ' + esc(docName() || "—") + '</div><div class="mt">NMC Reg: ' + esc(regNo || "—") + '  &middot;  ' + esc(date) + '</div></div>' +
+      rxQrBlock(rxv) +
       '<div class="disc">Draft prescription generated with StewardMD. Verify every drug, dose, route and interaction against the patient and local protocol. The prescriber is responsible for what they sign.</div>' +
       '</body></html>';
   }
@@ -206,9 +271,16 @@
     return false;
   }
   function doRxPrint(topic, regNo) {
-    var html = rxPrintHTML(topic, regNo);
-    if (rxNative()) { if (!rxNativePrint(html)) rxWebPrint(html); return; }
-    if (!rxWebPrint(html)) rxNativePrint(html);
+    // Mint the verification record BEFORE rendering, so the code and its QR are on the sheet that
+    // gets printed. rxIssueVerification never rejects and resolves to null when the prescription is
+    // out of scope, when the doctor is not signed in, or when the network is down - in every one of
+    // those cases the prescription still prints, just without a QR (see rxIssueVerification).
+    var d = collectRx();
+    rxIssueVerification(d && d.lines).then(function (rxv) {
+      var html = rxPrintHTML(topic, regNo, rxv);
+      if (rxNative()) { if (!rxNativePrint(html)) rxWebPrint(html); return; }
+      if (!rxWebPrint(html)) rxNativePrint(html);
+    });
   }
 
   // Drug dictionary for text extraction — the interaction engine (~3k generics, incl. specialty

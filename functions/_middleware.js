@@ -199,9 +199,17 @@ export async function onRequest(context) {
   //     page is PHI-free by construction (functions/_pglog_public.js decides what it may say), it is
   //     rate-limited per IP, and it is served noindex. NOT /pglog/* — the curriculum packs under
   //     /pglog/ are app assets and stay 404'd by the asset rule below.
+  //   • /verify and /verify/* — the login-free PRESCRIPTION verification page. Identical reasoning
+  //     to /pglog/v/* above: a pharmacist or drug inspector holding a printed prescription scans the
+  //     QR on it, has no StewardMD account and no /realapp cookie, so it must resolve for an
+  //     anonymous visitor or every printed QR lands on the marketing page instead. Safe to expose:
+  //     the code is an opaque 80-bit handle, the record is PHI-FREE BY CONSTRUCTION (functions/
+  //     _rx_store.js never writes a patient field and functions/_rx_public.js decides what may be
+  //     said), it is rate-limited per IP, it runs no script at all, and it is served noindex.
   if (url.pathname.startsWith("/api/") || url.pathname.startsWith("/admin") ||
       url.pathname.startsWith("/vendor/") || url.pathname.startsWith("/followcare") ||
       url.pathname.startsWith("/pglog/v/") ||
+      url.pathname === "/verify" || url.pathname.startsWith("/verify/") ||
       url.pathname === "/atlas.js" || url.pathname === "/atlas.css" ||
       url.pathname.startsWith("/atlas/")) {
     return next();
