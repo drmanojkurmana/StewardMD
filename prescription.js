@@ -191,6 +191,20 @@
       }).then(function (r) { return r.ok ? r.json() : null; });
     }).then(function (d) { return (d && d.ok && d.issued) ? d : null; }).catch(function () { return null; });
   }
+  // Why this sheet printed without a QR. rxIssueVerification collapses every failure to null, which
+  // is right for printing but leaves the prescriber holding a sheet with no code and no reason - the
+  // one case that reads as a bug when it is usually the scope rule working correctly. Names which it
+  // was, and never blocks the print.
+  function rxNoQrWhy(lines) {
+    if (!rxvOn()) return "";
+    var drugs = (lines || []).filter(function (L) { return !L.advice && L.drug; })
+      .map(function (L) { return { name: L.drug, dose: L.dose || "", freq: L.freq || "", duration: L.duration || "" }; });
+    if (!drugs.length) return "";
+    try { if (!SMD_RX_VALIDITY.requiresVerification(drugs)) return "Printed without a QR - verification covers antibiotics, habit-forming and scheduled drugs."; }
+    catch (e) { return ""; }
+    return "Printed without a QR - the verification service could not be reached. The prescription is still valid.";
+  }
+
   // The block printed on the sheet. No network at print time: the SVG is generated on device by the
   // same encoder the PG logbook prints with (pglog-qr.js), so this works on a ward with no signal.
   function rxQrBlock(rec) {
@@ -442,6 +456,7 @@
     // those cases the prescription still prints, just without a QR (see rxIssueVerification).
     var d = collectRx();
     rxIssueVerification(d && d.lines).then(function (rxv) {
+      if (!rxv) { var why = rxNoQrWhy(d && d.lines); if (why) rxToast(why); }
       var html = rxPrintHTML(topic, regNo, rxv);
       if (rxNative()) { if (!rxNativePrint(html)) rxWebPrint(html); return; }
       if (!rxWebPrint(html)) rxNativePrint(html);

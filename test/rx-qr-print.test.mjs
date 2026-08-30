@@ -72,3 +72,25 @@ test("a scanned code round-trips: printed form -> normalised -> same record", ()
   assert.equal(V.normalizeCode(fromUrl), V.normalizeCode(code),
     "the code in the QR URL resolves to the same record as the code printed beside it");
 });
+
+/* A sheet that prints with no QR must say why.
+ *
+ * This is the case that gets reported as a bug and usually is not one: an ordinary prescription is
+ * out of scope, so no code is minted and the sheet is bare. rxIssueVerification collapses every
+ * failure to null, so without a reason the prescriber cannot tell "not applicable" from "broken".
+ */
+test("an out-of-scope prescription is a deliberate no-QR, not a failure", () => {
+  assert.equal(V.requiresVerification([{ name: "Paracetamol" }]), false, "plain analgesic: no QR by design");
+  assert.equal(V.requiresVerification([{ name: "Amoxicillin" }]), true, "antibiotic: stewardship, so it gets one");
+});
+
+test("the prescriber is told why a sheet printed without a QR", () => {
+  assert.match(SRC, /function rxNoQrWhy/, "the reason helper exists");
+  assert.match(SRC, /if \(!rxv\) \{ var why = rxNoQrWhy/, "and doRxPrint calls it when no record was minted");
+  assert.match(SRC, /verification covers antibiotics, habit-forming and scheduled drugs/, "out-of-scope wording");
+  assert.match(SRC, /verification service could not be reached/, "unreachable-service wording");
+  // The guard that must never regress: telling the doctor why cannot stop the sheet printing.
+  const body = SRC.slice(SRC.indexOf("function doRxPrint"));
+  const why = body.indexOf("rxNoQrWhy"), html = body.indexOf("rxPrintHTML(topic, regNo, rxv)");
+  assert.ok(why > -1 && html > why, "the reason is shown BEFORE rendering, and rendering still happens");
+});
