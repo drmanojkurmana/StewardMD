@@ -7604,6 +7604,25 @@
     el.querySelectorAll(".mc-cat[data-cat]").forEach(function(b){
       b.addEventListener("click", function(){ favOnly=false; activeCat=b.getAttribute("data-cat"); openId=null; renderCats(); renderList(); });
     });
+    /* The chips are one horizontal rail now, so re-rendering can leave the SELECTED category
+     * scrolled off to the right while the visible part of the row shows nothing active. Bring it
+     * back. Explicit scrollLeft rather than scrollIntoView(): this runs immediately after
+     * el.innerHTML is replaced, so layout has not been flushed and scrollIntoView measured stale
+     * boxes and did nothing (verified - the chip stayed offscreen). One rAF, then arithmetic that
+     * only moves the row when the chip is actually outside it. */
+    try {
+      var on = el.querySelector(".mc-cat.on");
+      if (on && window.requestAnimationFrame) requestAnimationFrame(function () {
+        try {
+          // ABSOLUTE target from offsetLeft, not a delta from the current scroll position. A delta
+          // computed from getBoundingClientRect goes stale the moment the icon font finishes
+          // loading and every chip gets wider - measured: it undershot by ~144px and left the chip
+          // off the right edge. offsetLeft is layout-relative and is the same coordinate space as
+          // scrollLeft, so this lands correctly whenever it runs. Centre it when there is room.
+          el.scrollLeft = Math.max(0, on.offsetLeft - Math.max(0, (el.clientWidth - on.offsetWidth) / 2));
+        } catch (e2) {}
+      });
+    } catch (e) {}
   }
 
   function matches(c){
@@ -7991,8 +8010,16 @@
       ".mc-body{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:14px;max-width:1100px;margin:0 auto;width:100%;box-sizing:border-box;padding-bottom:calc(48px + env(safe-area-inset-bottom))}",
       ".mc-search{width:100%;box-sizing:border-box;border:1.5px solid var(--line,#e5e5e0);border-radius:11px;padding:11px 14px;font:500 14px var(--sans,system-ui);background:var(--panel,#fff);color:var(--ink,#1a1a1a);margin-bottom:11px}",
       ".mc-search:focus{outline:none;border-color:var(--teal,#0a9396)}",
-      ".mc-cats{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:14px}",
-      ".mc-cat{background:var(--panel,#fff);border:1px solid var(--line,#e5e5e0);border-radius:16px;padding:6px 12px;font:600 12px var(--sans,system-ui);color:var(--slate,#555);cursor:pointer}",
+      /* ONE swipeable row, not eleven stacked ones. There are 22 categories; wrapping them filled
+         the entire phone screen and pushed the actual calculators below the fold - reported as
+         "occupying full screen". A horizontal rail costs one row of height, keeps every category
+         reachable, and is the pattern the rest of the OS uses. The scrollbar is hidden (chips cut
+         off at the edge are the affordance) and snapping stops a swipe leaving one half-shown.
+         The Check Drug Interactions button below is not in this row and is unaffected. */
+      ".mc-cats{display:flex;flex-wrap:nowrap;gap:7px;margin-bottom:14px;overflow-x:auto;overflow-y:hidden;" +
+        "-webkit-overflow-scrolling:touch;scrollbar-width:none;scroll-snap-type:x proximity;padding-bottom:2px}",
+      ".mc-cats::-webkit-scrollbar{display:none}",
+      ".mc-cat{flex:0 0 auto;scroll-snap-align:start;white-space:nowrap;background:var(--panel,#fff);border:1px solid var(--line,#e5e5e0);border-radius:16px;padding:6px 12px;font:600 12px var(--sans,system-ui);color:var(--slate,#555);cursor:pointer}",
       ".mc-cat.on{background:var(--teal,#0a9396);border-color:var(--teal,#0a9396);color:#fff}",
       ".mc-cat span{opacity:.7;font-weight:700;margin-left:2px}",
       ".mc-grp-h{font:800 12px var(--sans,system-ui);text-transform:uppercase;letter-spacing:.04em;color:var(--slate-soft,#888);margin:14px 0 8px}",

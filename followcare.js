@@ -262,7 +262,7 @@
       "body.dark .fc-sheet.fcai .mai-hero,body.v3-dark .fc-sheet.fcai .mai-hero{background:linear-gradient(130deg,#0a3b3a 0%,#0e6e63 42%,#0a8fb0 100%);box-shadow:0 24px 66px -22px rgba(20,184,166,.6),0 0 0 1px rgba(94,234,212,.28)}",
       ".mai-aura{position:absolute;inset:-45%;z-index:0;pointer-events:none;background:radial-gradient(circle at 28% 22%,rgba(94,234,212,.4),transparent 42%),radial-gradient(circle at 82% 78%,rgba(56,189,248,.34),transparent 46%);animation:maiAura 8s ease-in-out infinite}",
       ".mai-dot{animation:maiPulse 2.4s ease-out infinite}",
-      // StewardMD corner watermark — same masked-logo technique as ONCqis's .oh-hero-mark
+      // StewardMD corner watermark — same masked-logo technique as ONCQIS's .oh-hero-mark
       // (onco-home.css), so every module hero card carries the identical brand mark.
       ".mai-mark{position:absolute;right:-14px;bottom:-20px;width:128px;height:128px;opacity:.16;-webkit-mask:url(/logo.png) center/contain no-repeat;mask:url(/logo.png) center/contain no-repeat;background:#fff;pointer-events:none}",
 
@@ -731,15 +731,15 @@
       if (voiceEnabled() && res.body && res.body.voice) { body.appendChild(voiceCard(episodeId, res.body.voice)); }
       // Acknowledge clears the "needs review" flag (an escalated episode leaves the list only by clinician action).
       if (ep.escalation === "red" || ep.escalation === "orange") {
-        var ack = h("button", { "class": "fc-btn", style: "margin-top:14px", text: "Mark reviewed" });
+        var ack = h("button", { "class": "fc-btn", style: "margin-top:14px;width:100%", text: "Mark reviewed" });
         ack.addEventListener("click", function () { ack.disabled = true; API.ack(episodeId).then(function () { toast("Marked reviewed"); renderDetail(episodeId); }); });
         body.appendChild(ack);
       }
-      var rev = h("button", { "class": "fc-btn sec", style: "margin-top:10px", text: "Revoke patient link" });
+      var rev = h("button", { "class": "fc-btn sec", style: "margin-top:10px;width:100%", text: "Revoke patient link" });
       rev.addEventListener("click", function () { API.revoke(episodeId).then(function () { toast("Link revoked"); }); });
       body.appendChild(rev);
       // Right-to-erasure: permanently delete this patient's episode + all check-in data.
-      var er = h("button", { "class": "fc-btn sec", style: "margin-top:10px;color:#b3261e;border-color:#b3261e", text: "Delete patient data" });
+      var er = h("button", { "class": "fc-btn sec", style: "margin-top:10px;width:100%;color:#b3261e;border-color:#b3261e", text: "Delete patient data" });
       er.addEventListener("click", function () {
         if (!(G.confirm && confirm("Permanently delete this patient's recovery episode and all check-ins? This cannot be undone."))) return;
         er.disabled = true; API.erase(episodeId).then(function () { toast("Patient data deleted"); open(); });

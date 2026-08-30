@@ -3400,9 +3400,17 @@
     var st = document.createElement("style"); st.id = "smdKbCSS";
     st.textContent =
       ".kblib-search{width:100%;border:1.5px solid #e2e8f0;border-radius:10px;padding:11px 13px;font-size:14px;outline:none;margin-bottom:10px;box-sizing:border-box}" +
-      ".kblib-filters{display:flex;flex-wrap:wrap;gap:14px}.kblib-grp{display:flex;flex-wrap:wrap;gap:6px;align-items:center}" +
-      ".kblib-lbl{font-size:10.5px;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:.04em}" +
-      ".kblib-f{background:#fff;border:1px solid #e2e8f0;border-radius:20px;padding:5px 11px;font-size:12px;cursor:pointer}" +
+      /* Each filter GROUP is its own swipeable rail. SYSTEM alone carries 13 chips; wrapping all
+         three groups pushed 4,804 entries below the fold behind a block of filters - the screen
+         reported as "very old generic looking". One row per group reads as a labelled control
+         instead of a wall, and every option is still one swipe away. Scrollbars hidden; the chips
+         cut off at the edge are the affordance. */
+      ".kblib-filters{display:flex;flex-direction:column;gap:9px}" +
+      ".kblib-grp{display:flex;flex-wrap:nowrap;gap:6px;align-items:center;overflow-x:auto;overflow-y:hidden;" +
+        "-webkit-overflow-scrolling:touch;scrollbar-width:none;scroll-snap-type:x proximity;padding-bottom:1px}" +
+      ".kblib-grp::-webkit-scrollbar{display:none}" +
+      ".kblib-lbl{flex:0 0 auto;font-size:10.5px;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:.04em}" +
+      ".kblib-f{flex:0 0 auto;scroll-snap-align:start;white-space:nowrap;background:#fff;border:1px solid #e2e8f0;border-radius:20px;padding:5px 11px;font-size:12px;cursor:pointer}" +
       ".kblib-f.on{background:#0f766e;color:#fff;border-color:#0f766e}" +
       ".kblib-count{font-size:12px;color:#475569;margin:10px 2px}" +
       ".kblib-grid{display:block;border:1px solid #e8ecf1;border-radius:14px;overflow:hidden}" +

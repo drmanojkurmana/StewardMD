@@ -20,8 +20,14 @@
         "Enter a current blood glucose before accepting a dose."));
 
     if (num(input.glucose) && input.glucose < 70)
+      // The module's most severe warning has to say what to DO, not only what to withhold.
+      // "Treat the low first" without the treatment is not useful to a resident at 3am.
       out.push(W("hypoglycemia", "critical", "Hypoglycemia",
-        "Glucose " + input.glucose + " mg/dL is low. Do not give a correction dose; treat the low first."));
+        "Glucose " + input.glucose + " mg/dL is low. Do NOT give a correction dose. Treat the low first: " +
+        "15 g of fast-acting carbohydrate (3 to 4 teaspoons of glucose or sugar, or 150 mL of juice), " +
+        "recheck in 15 minutes, and repeat until above 70 mg/dL - the 15-15 rule. " +
+        (input.glucose < 54 ? "Below 54 mg/dL this is severe: give 25 mL of 25% dextrose intravenously (or glucagon) if the patient cannot swallow safely, and stay with them. " : "") +
+        "Then give a meal or snack. Do NOT omit the next basal dose - look for the cause instead (a missed meal, a dose given twice, worsening renal function, alcohol, or a steroid being tapered)."));
 
     if (num(input.glucose) && input.glucose > 400)
       out.push(W("critical_hyper", "critical", "Very high glucose - rule out DKA/HHS",
@@ -42,9 +48,17 @@
       out.push(W("max_daily", "critical", "Maximum daily dose exceeded",
         "Projected daily total exceeds the configured maximum of " + context.maxDaily + " units."));
 
-    if (num(context.age) && context.age < 18)
+    // `pediatric` is an explicit flag; `age` is only consulted when one was actually entered.
+    // The UI used to fake an age of 8 to raise this warning, which corrupted the patient record.
+    if (context.pediatric || (num(context.age) && context.age < 18))
       out.push(W("pediatric", "caution", "Pediatric patient",
         "Pediatric dosing is weight-based and specialist-guided. Verify against the pediatric protocol."));
+
+    // The running daily total is only meaningful when it can be attributed to one patient.
+    // Saying so is safer than silently comparing against a total of zero.
+    if (context.dailyTotalTracked === false && num(result.rounded) && result.rounded > 0)
+      out.push(W("no_patient", "info", "Daily total not tracked",
+        "No patient is selected, so this dose is not added to a running daily total and insulin on board is not estimated. The maximum-single-dose check still applies. Select a patient to track both."));
 
     if (context.pregnancy)
       out.push(W("pregnancy", "caution", "Pregnancy",

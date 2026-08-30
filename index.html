@@ -72,8 +72,8 @@ try{var _sq=location.search||"";var _sv=!/[?&]splashv2=0\b/.test(_sq)&&(/[?&]spl
 <link rel="stylesheet" href="/queue.css?v=q10-staffadmin">
 <link rel="stylesheet" href="/opd-emr.css?v=voicenote1-micbar1-auth2">
 <link rel="stylesheet" href="/atlas.css?v=atlas2">
-<link rel="stylesheet" href="/onco-home.css?v=op5">
-<link rel="stylesheet" href="/oncotree.css?v=op3-map">
+<link rel="stylesheet" href="/onco-home.css?v=op5-oncqis">
+<link rel="stylesheet" href="/oncotree.css?v=op3-map-fit1">
 <link rel="stylesheet" href="/protocol-sheet.css?v=ps1">
 <link rel="stylesheet" href="/protocol-maker.css?v=pm1">
 <link rel="stylesheet" href="/fundx.css?v=sar1">
@@ -82,9 +82,9 @@ try{var _sq=location.search||"";var _sv=!/[?&]splashv2=0\b/.test(_sq)&&(/[?&]spl
 <link rel="stylesheet" href="/thorex.css?v=tx2">
 <link rel="stylesheet" href="/thorex-screens.css?v=tx12">
 <link rel="stylesheet" href="/sknx-screens.css?v=sx13">
-<link rel="stylesheet" href="/insulin.css?v=ins11">
+<link rel="stylesheet" href="/insulin.css?v=ins15">
 <link rel="stylesheet" href="/clinix.css?v=cx17-annex">
-<link rel="stylesheet" href="/surgx.css?v=sg9-bkenc">
+<link rel="stylesheet" href="/surgx.css?v=sg9-bkenc-md1">
 <link rel="stylesheet" href="/pglog.css?v=pgl5-guestbar">
 <!-- App-wide Liquid Glass appearance (Display & Accessibility → App appearance). Sets
      html[data-appearance] before paint so glass surfaces don't flash. ICU/GHIS never touched. -->
@@ -685,10 +685,10 @@ html.smd-splash-v2 #splash .splash-mark-logo{position:relative;width:118px;heigh
 html.smd-splash-v2 #splash .splash-name{font-family:var(--smd-dsp);font-size:42px;font-weight:300;letter-spacing:-.045em;line-height:1;text-align:left}
 html.smd-splash-v2 #splash .splash-name .accent{font-weight:800;color:#3fc7b3}
 html.smd-splash-v2 #splash .splash-tagline{text-align:left;margin-top:11px;font-family:var(--smd-dsp);font-size:9.5px;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:rgba(246,247,245,.44)}
-html.smd-splash-v2 #splash .splash-modules{justify-content:flex-start;gap:6px;margin-top:18px}
+html.smd-splash-v2 #splash .splash-modules{justify-content:flex-start;gap:5px;margin-top:18px;flex-wrap:nowrap;white-space:nowrap}
 /* chips, not pills: squared-off hairline tags, with only the first one filled so the row has a
    start instead of five identical lozenges */
-html.smd-splash-v2 #splash .splash-module-pill{font-family:var(--smd-dsp);font-size:9.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:5px 9px;border-radius:6px;border:1px solid rgba(63,199,179,.24);background:none;color:rgba(246,247,245,.6)}
+html.smd-splash-v2 #splash .splash-module-pill{font-family:var(--smd-dsp);font-size:8.5px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;padding:5px 7px;border-radius:6px;border:1px solid rgba(63,199,179,.24);background:none;color:rgba(246,247,245,.6);flex:0 0 auto}
 html.smd-splash-v2 #splash .splash-module-pill:first-child{border-color:transparent;background:rgba(63,199,179,.18);color:#7fe6d6}
 html.smd-splash-v2 #splash .demo-wrap{margin-top:22px}
 html.smd-splash-v2 #splash .demo-label{text-align:left;margin-bottom:12px;font-family:var(--smd-dsp);font-size:9.5px;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:rgba(246,247,245,.42)}
@@ -911,7 +911,7 @@ html.smd-splash-v2 #splash .splash-module-pill{
         <!-- SLIDE 1: CAP -->
         <div class="demo-slide active" id="demo-0">
           <div class="demo-case-head">
-            <div class="demo-case-icon">🫁</div>
+            <div class="demo-case-icon"><span class="material-symbols-rounded" aria-hidden="true">pulmonology</span></div>
             <div>
               <div class="demo-case-title">Community-Acquired Pneumonia</div>
               <div class="demo-case-tags">
@@ -939,7 +939,7 @@ html.smd-splash-v2 #splash .splash-module-pill{
         <!-- SLIDE 2: Typhoid -->
         <div class="demo-slide" id="demo-1">
           <div class="demo-case-head">
-            <div class="demo-case-icon">🌡️</div>
+            <div class="demo-case-icon"><span class="material-symbols-rounded" aria-hidden="true">thermostat</span></div>
             <div>
               <div class="demo-case-title">Enteric Fever (Typhoid)</div>
               <div class="demo-case-tags">
@@ -967,7 +967,7 @@ html.smd-splash-v2 #splash .splash-module-pill{
         <!-- SLIDE 3: Malaria -->
         <div class="demo-slide" id="demo-2">
           <div class="demo-case-head">
-            <div class="demo-case-icon">🦟</div>
+            <div class="demo-case-icon"><span class="material-symbols-rounded" aria-hidden="true">coronavirus</span></div>
             <div>
               <div class="demo-case-title">Severe Falciparum Malaria</div>
               <div class="demo-case-tags">
@@ -993,7 +993,7 @@ html.smd-splash-v2 #splash .splash-module-pill{
         <!-- SLIDE 4: ICU Workstation -->
         <div class="demo-slide" id="demo-3">
           <div class="demo-case-head">
-            <div class="demo-case-icon">🩺</div>
+            <div class="demo-case-icon"><span class="material-symbols-rounded" aria-hidden="true">stethoscope</span></div>
             <div>
               <div class="demo-case-title">ICU Workstation</div>
               <div class="demo-case-tags">
@@ -1023,7 +1023,7 @@ html.smd-splash-v2 #splash .splash-module-pill{
         <!-- SLIDE 5: MaiK AI Assistant -->
         <div class="demo-slide" id="demo-4">
           <div class="demo-case-head">
-            <div class="demo-case-icon">✨</div>
+            <div class="demo-case-icon"><span class="material-symbols-rounded" aria-hidden="true">auto_awesome</span></div>
             <div>
               <div class="demo-case-title">MaiK AI Assistant</div>
               <div class="demo-case-tags">
@@ -1484,7 +1484,11 @@ html.smd-splash-v2 #splash .splash-module-pill{
               </span>
             </span>
             <span class="ctp-bio">
-              Clinician, researcher, and builder. Trained across two of India's finest government institutions, published in PubMed, presented at ACC, and building open tools that make antimicrobial stewardship accessible to every doctor, not just the ones with access to expensive systems. Aspiring oncologist, with a particular interest in cancer-related infections and supportive care. Believes good medicine starts with the right question, not the right drug.
+              MBBS from Andhra Medical College, Visakhapatnam — founded in 1923, among India's oldest and most respected government medical colleges, and the teaching hospital for the whole of north coastal Andhra. MD Internal Medicine from Jawaharlal Nehru Government Medical College, Ajmer — a Rajasthan institution known for the sheer breadth of undifferentiated medicine that passes through its wards.
+              <br><br>
+              A clinician first, and a builder because the wards kept asking for tools that did not exist. Now practising Internal Medicine at GIMSR, Visakhapatnam. Published in the peer-reviewed literature and indexed on PubMed, presented at the American College of Cardiology, and the author of a textbook chapter. Aspiring oncologist, with a particular interest in cancer-related infections and supportive care.
+              <br><br>
+              Builds open tools that make antimicrobial stewardship reachable for every doctor, not only the ones with access to expensive systems. Believes good medicine starts with the right question, not the right drug.
             </span>
             <a class="ctp-linkedin" href="https://www.linkedin.com/in/manoj-kumar-kurmana-5365882b7" target="_blank" rel="noopener">
               <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
@@ -1507,6 +1511,8 @@ html.smd-splash-v2 #splash .splash-module-pill{
               </span>
             </span>
             <span class="ctp-bio">
+              Graduated from the National Institute of Technology, Calicut — one of India's premier engineering institutes.
+              <br><br>
               The driving force behind StewardMD's technology and product execution. He built and shaped the platform's digital foundation, turning clinical ideas into a reliable, practical experience for doctors and healthcare teams.
             </span>
           </span>
@@ -1527,18 +1533,26 @@ html.smd-splash-v2 #splash .splash-module-pill{
         </span>
 
         <span class="ack-contrib-name" tabindex="0">
-          Dr. Sri Harsha Gora
-          <span class="ack-tip">
-            <strong>Field Testing &amp; Bug Reports</strong>
-            Dr. Sri Harsha Gora uses StewardMD on the wards every day and reports what he finds. Precise, reproducible bug reports and honest reviews that say when something is wrong rather than when it is merely imperfect. The kind of feedback that only comes from someone actually relying on the tool.
-          </span>
-        </span>
-
-        <span class="ack-contrib-name" tabindex="0">
           Dr. M. Suryanarayana Murthy
           <span class="ack-tip">
             <strong>The Idea Behind It All</strong>
             Dr. M. Suryanarayana Murthy sir provided the foundational idea and vision that gave birth to StewardMD. His insight into the need for a practical antibiotic decision tool shaped the app's core purpose.
+          </span>
+        </span>
+
+        <span class="ack-contrib-name" tabindex="0">
+          Mr. S. Sai Niranjan
+          <span class="ack-tip">
+            <strong>Testing &amp; Marketing</strong>
+            Contributed hands-on testing and helped bring StewardMD to the doctors who need it, outreach, adoption, and real-world feedback.
+          </span>
+        </span>
+
+        <span class="ack-contrib-name" tabindex="0">
+          Dr. Sri Harsha Gora
+          <span class="ack-tip">
+            <strong>Field Testing &amp; Bug Reports</strong>
+            Dr. Sri Harsha Gora uses StewardMD on the wards every day and reports what he finds. Precise, reproducible bug reports and honest reviews that say when something is wrong rather than when it is merely imperfect. The kind of feedback that only comes from someone actually relying on the tool.
           </span>
         </span>
 
@@ -1571,14 +1585,6 @@ html.smd-splash-v2 #splash .splash-module-pill{
           <span class="ack-tip">
             <strong>Review &amp; Feedback</strong>
             Contributed valuable review and feedback that helped refine the experience and polish StewardMD for the people who use it.
-          </span>
-        </span>
-
-        <span class="ack-contrib-name" tabindex="0">
-          Mr. S. Sai Niranjan
-          <span class="ack-tip">
-            <strong>Testing &amp; Marketing</strong>
-            Contributed hands-on testing and helped bring StewardMD to the doctors who need it, outreach, adoption, and real-world feedback.
           </span>
         </span>
 
@@ -2015,7 +2021,7 @@ window.openExternal = function (u) {
 <!-- Firebase App Check bridge: native App Attest/Play Integrity token -> compat JS SDK. Fail-open,
      native-only, no-op unless the plugin + app-check-compat are present. Loads after app.js (which
      calls firebase.initializeApp); it polls until firebase is booted, then activates. -->
-<script src="/app-check-init.js?v=appcheck3" defer></script>
+<script src="/app-check-init.js?v=appcheck4" defer></script>
 <script src="/antibiogram-data.js?v=gold363" defer></script>
 <script src="/theme-sync.js?v=gold363" defer></script>
 <script src="/theme-reveal.js?v=gold1721" defer></script>
@@ -2030,7 +2036,7 @@ window.openExternal = function (u) {
 <script src="/pro-notice.js?v=gold1200-why" defer></script>
 <script src="/signout-fix.js?v=gold342-bkstatus" defer></script>
 <script src="/welcome-email.js?v=gold342" defer></script>
-<script src="/verify.js?v=gold1026-roles" defer></script>
+<script src="/verify.js?v=gold1026-roles-auth1" defer></script>
 <!-- Search the Indian Medical Register (window.SMD_NMC), opened from More. Backend: /api/nmc-search. -->
 <script src="/nmc-register.js?v=gold1" defer></script>
 <!-- Prescription PDF/JPEG export libraries (html2canvas → canvas, jsPDF → PDF). Loaded before
@@ -2038,7 +2044,7 @@ window.openExternal = function (u) {
 <script src="/vendor-html2canvas.js?v=1" defer></script>
 <script src="/vendor-jspdf.js?v=1" defer></script>
 <script src="/rx-brand-match.js?v=rxb1" defer></script>
-<script src="/prescription.js?v=gold982-brandsearch-a11y1" defer></script>
+<script src="/prescription.js?v=gold982-brandsearch-dict1-ui1-a11y1" defer></script>
 <script src="/ku.js?v=gold434-thread" defer></script>
 <!-- Learning-streak active-time engine, achievement share card, and the Clinical Progress
      dashboard (levels / quests / badges / stats / timeline). Load after ku.js + account.js. -->
@@ -2053,7 +2059,7 @@ window.openExternal = function (u) {
      update" row in Settings (home.js) + a proactive banner. Inert (no-op) until the owner adds
      @capgo/capacitor-updater via `npm install && npx cap sync` and rebuilds natively — see
      vault/modules/OTA Updates.md. Must load AFTER native-bridge.js (needs window.SMD_IS_NATIVE). -->
-<script src="/native-ota.js?v=ota3-noleak" defer></script>
+<script src="/native-ota.js?v=ota3-noleak-gate1" defer></script>
 <!-- Email sign-up/sign-in + Resend OTP verification + doctor profile (hospital/state/city).
      Additive over Firebase Auth; smd-geo.js is the India states/cities + curated hospital list. -->
 <script src="/smd-geo.js?v=gold472" defer></script>
@@ -2061,7 +2067,7 @@ window.openExternal = function (u) {
 <script src="/applock.js?v=gold8" defer></script>
 <script src="/policy.js?v=gold363" defer></script>
 <script src="/features.js?v=gold997" defer></script>
-<script src="/calculators.js?v=gold1051-r1d" defer></script>
+<script src="/calculators.js?v=gold1051-r1d-rail1" defer></script>
 <script src="/calc-links.js?v=gold400" defer></script>
 <script src="/icu-autoscores.js?v=gold403" defer></script>
 <script src="/drugs.js?v=gold978" defer></script>
@@ -2084,7 +2090,7 @@ window.openExternal = function (u) {
 <script src="/dxmgmt.js?v=gold363" defer></script>
 <script src="/clinical-nlp.js?v=gold363" defer></script>
 <script src="/id-token.js?v=idtok2" defer></script>
-<script src="/reasoning.js?v=nstream1-clinix3" defer></script>
+<script src="/reasoning.js?v=nstream1-clinix3-rail1" defer></script>
 <script src="/renal-dose.js?v=rd1" defer></script>
 <!-- Privacy PR-A: SMD_PRIVACY config (version constants) + consent gate / versioned Privacy Notice
      (SMD_CONSENT). Loads after reasoning.js so it can guard SMD_AI. Reversible via localStorage
@@ -2114,9 +2120,9 @@ window.openExternal = function (u) {
 <script src="/kb/ai/ambig-abbrev.js?v=gold1057-lang" defer></script><script src="/kb/ai/maik-brain.js?v=brain-ambig1" defer></script>
 <script src="/kb/ai/maik-evidence.js?v=gold1052-brain" defer></script>
 <script src="/kb/ai/maik-copilot.js?v=gold1053-calcfix" defer></script>
-<script src="/electrolytes.js?v=bug808-focus1" defer></script>
+<script src="/electrolytes.js?v=bug808-nodupe-focus1" defer></script>
 <script src="/caseshare.js?v=gold363" defer></script>
-<script src="/hospitals-in.js?v=gold1018" defer></script><script src="/connect-source.js?v=cs3docs" defer></script><script src="/connect-patient.js?v=cp4" defer></script><script src="/queue-flags.js?v=q5-all-on" defer></script><script src="/home.js?v=nstream1-clinix5-surgx2-logo-aiu1-profile2-rxtile-glyphs-maikart2-pglog1-ack1-otasay-applock3" defer></script><script src="/profile-setup.js?v=pfs1" defer></script><script src="/syndromes-motion.js?v=synmo5" defer></script><script src="/dialog-motion.js?v=dm2" defer></script>
+<script src="/hospitals-in.js?v=gold1018" defer></script><script src="/connect-source.js?v=cs3docs" defer></script><script src="/connect-patient.js?v=cp4" defer></script><script src="/queue-flags.js?v=q5-all-on" defer></script><script src="/home.js?v=nstream1-clinix5-surgx2-logo-aiu1-profile2-rxtile-glyphs-maikart2-pglog1-ack1-otasay-oncqis-sync1-prompt1-about1-applock3" defer></script><script src="/profile-setup.js?v=pfs1" defer></script><script src="/syndromes-motion.js?v=synmo5" defer></script><script src="/dialog-motion.js?v=dm2" defer></script>
 <!-- Lean sidebar redesign (Tools / Reference & Help / Settings / Advanced). Additive; wraps
      SB.open and rebuilds #sbMenu, superseding home.js's legacy reorganizer (which stands down
      via window.SMD_SBR). Must load AFTER home.js. -->
@@ -2135,7 +2141,7 @@ window.openExternal = function (u) {
 <script src="/haptics.js?v=gold348" defer></script>
 <script src="/antibiogram.js?v=gold992" defer></script>
 <script src="/asp-region.js?v=gold363" defer></script>
-<script src="/swipe-back.js?v=gold482-edgeback" defer></script>
+<script src="/swipe-back.js?v=gold482-edgeback-nolap1" defer></script>
 <script src="/workspaces.js?v=gold1051-wsroute-surgx1" defer></script>
 <script src="/ws-surgery.js?v=gold363" defer></script>
 <script src="/ws-ent.js?v=gold363" defer></script>
@@ -2147,7 +2153,7 @@ window.openExternal = function (u) {
 <!-- Clinical vocabulary registry (SMD_VOCAB) - deterministic offline finding autocomplete for the
      ICU complaint/finding picker. Separate from disease scoring; maps to existing canonical finding IDs. -->
 <script src="/clinical-vocab.js?v=gold363" defer></script>
-<script src="/icu.js?v=gold999-askmaik" defer></script>
+<script src="/icu.js?v=gold999-askmaik-think1-preset1" defer></script>
 <script src="/discharge-ghis.js?v=dg1" defer></script>
 <!-- ICU v2 Phase 2: real-time collaboration backend (window.SMD_ICU_GROUPS). Pure data +
      Firestore subscription layer; NO DOM. Flag smd_icu_groups (default OFF). Loads AFTER icu.js
@@ -2165,7 +2171,7 @@ window.openExternal = function (u) {
 <script src="/infusion-actions.js?v=gold363" defer></script>
 <!-- MaiK Scribe voice intake (SMD_VOICE): capture → /api/ai/extract → review-first autofill.
      Loads after icu.js/reasoning.js/native-bridge/api.js - only invoked on user tap, so order is safe. -->
-<script src="/voice.js?v=mkfast1-vtiers2" defer></script>
+<script src="/voice.js?v=mkfast1-vtiers2-stt1" defer></script>
 <!-- Ambient voice extraction engine (window.SMD_VVITALS / SMD_EMRMAP / SMD_AMBIENT). Deterministic,
      zero-token, offline: spoken vitals/exam -> structured assessment fields, with a patient-speech +
      manual-override safety gate. A building block for autofilling the OPD assessment (opd-emr.js);
@@ -2307,7 +2313,7 @@ window.openExternal = function (u) {
 <script src="/surgx-backup.js?v=sgbk2-enc" defer></script>
 <script src="/surgx-evidence.js?v=sg1" defer></script>
 <script src="/surgx-diagrams.js?v=sg1" defer></script>
-<script src="/surgx-screens.js?v=sg25-signsend" defer></script>
+<script src="/surgx-screens.js?v=sg25-signsend-md2" defer></script>
 <script src="/surgx.js?v=sg1" defer></script>
 <!-- NMC Logbook (PG digital logbook) - additive, flag-gated smd_pglog, DEFAULT ON for testers, same
      owner decision as clinix/surgx (see pglog-flags.js, which is the authority); force either way
@@ -2333,12 +2339,13 @@ window.openExternal = function (u) {
 <script src="/pglog.js?v=pgl5" defer></script>
 <!-- Insulin dose CDSS · additive, flag-gated smd_insulin (DEFAULT OFF; reveal with ?insulin=1). Pure
      engine + safety load before the UI; when the flag is off, insulin.js is a complete no-op. -->
-<script src="/insulin-flags.js?v=ins12" defer></script>
-<script src="/insulin-engine.js?v=ins11" defer></script>
-<script src="/insulin-safety.js?v=ins11" defer></script>
+<script src="/insulin-flags.js?v=ins16" defer></script>
+<script src="/insulin-engine.js?v=ins15" defer></script>
+<script src="/insulin-safety.js?v=ins15" defer></script>
 <script src="/insulin-db.js?v=ins11" defer></script>
 <script src="/insulin-convert.js?v=ins11" defer></script>
-<script src="/insulin.js?v=ins11" defer></script>
+<script src="/insulin-ask.js?v=ins15" defer></script>
+<script src="/insulin.js?v=ins15" defer></script>
 <!-- FollowCare AI · post-discharge recovery follow-up (additive, flag-gated smd_followcare, DEFAULT OFF;
      enable with ?fc=1 or Settings). Doctor module only — patients use the login-free web portal
      (/followcare?t=…), never the app. Engines (pathways/engine/assessment/schedule) also power the
@@ -2352,7 +2359,7 @@ window.openExternal = function (u) {
 <script src="/followcare-analytics.js?v=fc3" defer></script>
 <script src="/followcare-integration.js?v=fc7" defer></script>
 <script src="/followcare-intel.js?v=fc7" defer></script>
-<script src="/followcare.js?v=fc16-guestbar" defer></script>
+<script src="/followcare.js?v=fc16-guestbar-oncqis-align1" defer></script>
 <!-- Smart OPD Queue (flag smd_opd_queue, default OFF). Inert unless the flag is on + QUEUE.open() is
      called (or ?queue=1). Doctor dashboard is a faithful port of the Google Stitch design. -->
 
@@ -2363,7 +2370,7 @@ window.openExternal = function (u) {
      (opd.html), so the two registration forms can never drift apart. -->
 <link rel="stylesheet" href="/patient-register.css?v=preg1">
 <script src="/patient-register.js?v=preg1" defer></script>
-<script src="/queue.js?v=fdesk1" defer></script>
+<script src="/queue.js?v=fdesk1-addpt1" defer></script>
 <!-- Oncology dose engine (pure, no DOM/fetch). Phase 4 needs it client-side: applying a protocol
      computes calculatedDoses via window.SMD_ONCODOSE.planDoses() before anything is staged/posted. -->
 <script src="/onco-dose.js?v=op1" defer></script>
@@ -2381,7 +2388,7 @@ window.openExternal = function (u) {
 <script src="/onco-protocol-report.js?v=onco1" defer></script>
 <!-- OPD patient profile + reports (flag smd_opd_emr, default OFF). Read-only view over the existing GHIS
      read proxy; inert unless the flag is on + OPDEMR.openProfile() is called from a queue ticket. -->
-<script src="/opd-emr.js?v=mkfast1-scribeloud2-ghisdoc3-mic1-auth3" defer></script>
+<script src="/opd-emr.js?v=mkfast1-scribeloud2-ghisdoc3-mic1-auth3-oncqis" defer></script>
 <!-- My Clinic — on-device EMR for personal clinics (reuses opd-emr's form; flag smd_personal_clinic). -->
 <script src="/personal-clinic.js?v=gold6" defer></script>
 <!-- Shared Clinic — multi-device encrypted EMR for clinics/small hospitals with no EMR (flag
@@ -2426,7 +2433,7 @@ window.openExternal = function (u) {
      every proposed dose comes from SMD_ONCODOSE with the full lineage visible. Reuses SMD_ONCORECOMMEND
      (Phase B), SMD_ONCOEV (Phase C), SMD_ONCOUI matrix/drawer + SMD_ONCODOSE. Loaded before onco-home.js. -->
 <script src="/onco-plan-flow.js?v=op1" defer></script>
-<script src="/onco-home.js?v=op6" defer></script>
+<script src="/onco-home.js?v=op6-oncqis-open1" defer></script>
 <!-- ONCOTREE navigator (flag smd_onco_navigator, DEFAULT OFF): deterministic disease pathway
      (phenotype -> APPLICABLE EXISTING Standard Protocols by reference). Decision-support only; never a
      second protocol DB, never auto-selects/doses. engine + recommend loaded before the UI. -->

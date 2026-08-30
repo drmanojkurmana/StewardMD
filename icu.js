@@ -269,6 +269,68 @@
     recompute(_raw);   // refresh alerts synchronously after writing vitals (BUG #1)
     return v;
   }
+
+  /* ---- Glasgow Coma Scale, scored at the bedside ------------------------------------------------
+   * The dashboard had no GCS at all, so qSOFA, NEWS2 and SOFA all sat unusable on "needs: GCS" with
+   * no way to supply it. A plain number box would be the wrong fix: at the bedside a clinician scores
+   * the three components and the total falls out, so this is the E/V/M checklist and it computes.
+   *
+   * Saving writes through ingestMonitor({gcs}), the SAME path monitor imports use - one timestamped
+   * vitals row, then recompute(). So the entry is charted on the patient record like any other vital
+   * and every score that needed it resolves at once. Nothing about it is score-local.
+   *
+   * "Not testable (intubated)" scores V as 1, the convention SOFA and qSOFA assume. The total stays
+   * numeric so the engines work, and the sheet says plainly it is a T score - a 3T on a sedated
+   * ventilated patient means something very different from a true 3. */
+  var _gcs = { e: null, v: null, m: null, vt: false };
+  var GCS_E = [[4, "Spontaneous"], [3, "To speech"], [2, "To pain"], [1, "None"]];
+  var GCS_V = [[5, "Oriented"], [4, "Confused"], [3, "Inappropriate words"], [2, "Incomprehensible sounds"], [1, "None"]];
+  var GCS_M = [[6, "Obeys commands"], [5, "Localises pain"], [4, "Withdraws from pain"], [3, "Abnormal flexion"], [2, "Extension"], [1, "None"]];
+  function gcsTotal() {
+    if (_gcs.e == null || _gcs.v == null || _gcs.m == null) return null;
+    return _gcs.e + _gcs.v + _gcs.m;
+  }
+  function gcsRow(key, defs, title) {
+    return '<div class="icu-fld" style="grid-column:1/-1"><label>' + esc(title) + '</label><div style="display:flex;flex-wrap:wrap;gap:6px">' +
+      defs.map(function (d) {
+        var on = _gcs[key] === d[0];
+        return '<button class="icu-btn ghost" data-icu-act="gcspick:' + key + ':' + d[0] + '" aria-pressed="' + (on ? "true" : "false") +
+          '" style="width:auto;margin:0;padding:8px 11px;font-size:12.5px' + (on ? ";background:var(--primary);color:#fff;border-color:var(--primary)" : "") + '">' +
+          d[0] + " &middot; " + esc(d[1]) + "</button>";
+      }).join("") + "</div></div>";
+  }
+  function gcsSheetHTML() {
+    var t = gcsTotal();
+    var band = t == null ? "" : t <= 8 ? "Severe - airway at risk, 8 or less" : t <= 12 ? "Moderate" : "Mild";
+    return '<div class="icu-sheet"><h3>' + ico("pulse", "\uD83E\uDDE0") + ' Glasgow Coma Scale</h3>' +
+      gcsRow("e", GCS_E, "Eye opening (E)") +
+      gcsRow("v", GCS_V, "Verbal response (V)") +
+      gcsRow("m", GCS_M, "Motor response (M)") +
+      '<div class="icu-fld" style="grid-column:1/-1"><button class="icu-btn ghost" data-icu-act="gcsvt" aria-pressed="' + (_gcs.vt ? "true" : "false") +
+        '" style="width:auto;margin:0;padding:8px 11px;font-size:12.5px' + (_gcs.vt ? ";background:var(--primary);color:#fff;border-color:var(--primary)" : "") +
+        '">Verbal not testable (intubated)</button></div>' +
+      '<div class="icu-fld" style="grid-column:1/-1"><div style="font:800 22px var(--font);color:var(--ink)">' +
+        (t == null ? "&mdash;" : t + (_gcs.vt ? "T" : "") + " / 15") + '</div>' +
+        '<div style="font:600 12.5px var(--font);color:var(--muted)">' +
+          (t == null ? "Choose one option in each of E, V and M." : esc(band) + (_gcs.vt ? " &middot; verbal not testable, recorded as 1" : "")) + '</div></div>' +
+      '<button class="icu-btn" data-icu-act="gcssave"' + (t == null ? " disabled" : "") + '>Record GCS on this patient</button>' +
+      '<button class="icu-btn ghost" data-icu-act="closeform">Cancel</button></div>';
+  }
+  function paintGcs() { if (modalEl && modalEl.classList.contains("on")) modalEl.innerHTML = gcsSheetHTML(); }
+  function openGcsCalc() {
+    _gcs = { e: null, v: null, m: null, vt: false };   // never carry one patient's score into the next
+    ensureModal();
+    modalEl.innerHTML = gcsSheetHTML();
+    modalEl.classList.add("on");
+  }
+  function gcsSave() {
+    var t = gcsTotal(); if (t == null) return;
+    ingestMonitor({ gcs: t });     // charted like any other vital, then every score recomputes
+    closeForm();
+    _active = "overview"; paint();
+    if (window.toast) toast("GCS " + t + (_gcs.vt ? "T" : "") + " recorded" + (t <= 8 ? " - 8 or less, check the airway" : ""));
+  }
+
   function ingestLabs(o) {
     o = o || {}; var keys = ["na", "k", "cl", "hco3", "ca", "ica", "mg", "po4", "glu", "creat", "egfr", "urea", "alb", "wbc", "hb", "plt", "inr", "ferritin", "trig", "fibrinogen", "crp", "bili", "ast", "alt", "alp", "bili_d", "amylase", "lipase", "pct", "neut", "hct", "lactate"];
     var rec = pick(o, keys); var ts = o.ts || nowTs();
@@ -1473,6 +1535,26 @@
       '#icuRoot.icu-v2 .icu-v2-skel-strip{height:30px;margin-top:12px;border-radius:10px}' +
       '#icuRoot.icu-v2 .icu-v2-loading{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:13px;padding:44px 20px;color:var(--muted);font:600 13px var(--font);text-align:center}' +
       '#icuRoot.icu-v2 .icu-v2-spin{width:30px;height:30px;border:3px solid var(--border);border-top-color:var(--primary);border-radius:50%;animation:icuspin .9s linear infinite}' +
+      /* ── "Thinking" progress (icuThinkHTML) ────────────────────────────────────────────────
+         A deep review or a discharge draft takes 10-20s. It used to say "Running deep clinical
+         review…" in flat text with no motion at all, so the wait was indistinguishable from a
+         hang - reported twice from internal testing. This shows what the step is actually DOING:
+         a shimmering rail, a breathing dot, and the stages lighting up in turn. Pure CSS, no
+         library and no image; the stagger is animation-delay, not a JS timer, so it cannot drift
+         or leak. Under prefers-reduced-motion it flattens to a plain, fully-legible list. */
+      '#icuRoot.icu-v2 .icu-think{border:1px solid var(--border);background:var(--panel);border-radius:14px;padding:13px 14px;margin-top:10px}' +
+      '#icuRoot.icu-v2 .icu-think-h{display:flex;align-items:center;gap:9px;font:700 13px var(--font);color:var(--ink)}' +
+      '#icuRoot.icu-v2 .icu-think-dot{width:9px;height:9px;border-radius:50%;background:var(--primary);flex:0 0 auto;animation:icuthinkpulse 1.5s ease-in-out infinite}' +
+      '#icuRoot.icu-v2 .icu-think-rail{position:relative;height:3px;border-radius:3px;background:var(--border);overflow:hidden;margin:11px 0 10px}' +
+      '#icuRoot.icu-v2 .icu-think-rail::after{content:"";position:absolute;top:0;left:-40%;width:40%;height:100%;border-radius:3px;background:var(--primary);animation:icuthinkrail 1.6s cubic-bezier(.4,0,.2,1) infinite}' +
+      '#icuRoot.icu-v2 .icu-think-step{display:flex;align-items:flex-start;gap:8px;font:500 12.5px/1.45 var(--font);color:var(--muted);margin-bottom:5px;opacity:.45;animation:icuthinkstep 4.8s ease-in-out infinite}' +
+      '#icuRoot.icu-v2 .icu-think-step:last-child{margin-bottom:0}' +
+      '#icuRoot.icu-v2 .icu-think-step i{width:5px;height:5px;border-radius:50%;background:currentColor;flex:0 0 auto;margin-top:6px}' +
+      '@keyframes icuthinkpulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(.72);opacity:.5}}' +
+      '@keyframes icuthinkrail{0%{left:-40%}60%,100%{left:100%}}' +
+      '@keyframes icuthinkstep{0%,12%{opacity:.35}22%,45%{opacity:1;color:var(--ink)}62%,100%{opacity:.35}}' +
+      '@media(prefers-reduced-motion:reduce){#icuRoot.icu-v2 .icu-think-dot,#icuRoot.icu-v2 .icu-think-rail::after,#icuRoot.icu-v2 .icu-think-step{animation:none}' +
+      '#icuRoot.icu-v2 .icu-think-step{opacity:1}#icuRoot.icu-v2 .icu-think-rail::after{left:0;width:100%;opacity:.5}}' +
       // Offline: unobtrusive amber full-width strip (reuses --warn/--warn-soft, AA-verified).
       '#icuRoot.icu-v2 .icu-v2-offline{display:flex;align-items:center;gap:8px;background:var(--warn-soft);color:var(--warn);border-bottom:1px solid var(--warn);padding:9px 15px;font:600 12px var(--font)}' +
       '#icuRoot.icu-v2 .icu-v2-offline .icu-ico{width:15px;height:15px;flex:0 0 auto}' +
@@ -1565,6 +1647,11 @@
       vitalCard("SpO₂", lv.spo2, "%", vstat(lv.spo2, 92, null, 88, null), vitalSeries("spo2", _trendWin), "monitor:spo2"),
       vitalCard("Resp Rate", lv.rr, "/min", vstat(lv.rr, 8, 24, null, 30), vitalSeries("rr", _trendWin), "monitor:rr"),
       vitalCard("Temp", lv.temp, "°C", vstat(lv.temp, 36, 38, 35, 39), vitalSeries("temp", _trendWin), "monitor:temp"),
+      // GCS was absent from the dashboard entirely, though `gcs` has always been an accepted vitals
+      // key and qSOFA, NEWS2 and SOFA all need it - which is why those scores sat on "needs: GCS".
+      // Tapping opens the E/V/M calculator rather than a bare number box: at the bedside you score
+      // the components, you do not arrive with a total. <9 is critical (airway), <13 abnormal.
+      vitalCard("GCS", lv.gcs, "/15", vstat(lv.gcs, 13, null, 9, null), vitalSeries("gcs", _trendWin), "gcsopen"),
       vitalCard("Urine", lv.uop, "mL/h", "", vitalSeries("uop", _trendWin), "monitor:uop"),
       vitalCard("Lactate", lv.lactate, "mmol/L", vstat(lv.lactate, null, 2, null, 4), vitalSeries("lactate", _trendWin), "monitor:lactate"),
       vitalCard("Pressors", pressors.length ? pressors.map(function (p) { return p.drug; }).join(", ") : "None", "", pressors.length ? "warn" : "ok"),
@@ -3127,6 +3214,7 @@
         });
       }
       out += '<button class="icu-btn" data-icu-act="txadd" style="margin-top:12px">＋ Add treatment</button>' +
+        txPresetBarHTML(tx) +
         '<p class="icu-doc-sub" style="margin:10px 2px 0;text-align:center">Any doctor — consultant or resident — can add or remove treatment. Every change is recorded on the patient timeline.</p>';
       return out;
     },
@@ -3214,7 +3302,7 @@
 
         // 4) Deep clinical review (AI) — PROMINENT, ENABLED as soon as there is usable context.
         //    NOT gated on a working diagnosis: its output HELPS identify the diagnosis + correlate.
-        var dBlock = _corrBusy ? '<div class="icu-assist-msg" style="margin-top:10px">Running deep clinical review…</div>' : (dDeep ? '<div class="icu-corr-deep">' + corrDeepHTML(dDeep) + "</div>" : (_corrErr ? '<div class="icu-corr-deep">' + corrDeepHTML(_corrErr) + "</div>" : ""));
+        var dBlock = _corrBusy ? icuThinkHTML("Deep clinical review", ["Reading the recorded labs, vitals and imaging", "Correlating the findings against each other", "Checking StewardMD's trusted sources", "Drafting what fits, and what does not"]) : (dDeep ? '<div class="icu-corr-deep">' + corrDeepHTML(dDeep) + "</div>" : (_corrErr ? '<div class="icu-corr-deep">' + corrDeepHTML(_corrErr) + "</div>" : ""));
         out += '<div class="icu-card"><div class="icu-sec-lbl">' + ico("pulse", "✨") + ' Deep clinical review <span class="icu-phase">AI</span></div>' +
           '<p class="icu-doc-sub" style="margin:0 0 8px">Correlates your findings with available labs, imaging and vitals against StewardMD’s trusted sources — to help identify the diagnosis, flag what doesn’t fit and suggest next checks. Advisory only; you confirm the de-identified context that is sent.</p>' +
           '<button class="icu-btn" data-icu-act="corrdeep"' + ((_corrBusy || !usable) ? " disabled" : "") + (!usable ? ' title="Add findings, labs, imaging or vitals first"' : "") + '>' + ico("pulse", "✨") + " Deep clinical review</button>" +
@@ -4176,6 +4264,22 @@
   // Centered spinner + label — for a "connecting" phase where a card shape would be misleading.
   function v2Spinner(text) {
     return '<div class="icu-v2-loading" role="status"><div class="icu-v2-spin" aria-hidden="true"></div><div>' + esc(text || "Loading…") + '</div></div>';
+  }
+  /* A LONG step (deep review, discharge draft) - 10-20s - needs to show that something is
+   * happening AND what. A bare line of text made those waits look like a hang, which is how they
+   * were reported. Naming the stages is not decoration: it tells the doctor which of their data is
+   * being used, and it makes a genuine stall obvious because the rail keeps moving while the
+   * result never lands. role="status" so a screen reader announces it once, and the stage list is
+   * aria-hidden because it is a progress illustration, not content. */
+  function icuThinkHTML(title, stages) {
+    var steps = (stages || []).map(function (s, i) {
+      // Stagger via animation-delay: no timers to drift, leak, or need clearing on re-render.
+      return '<div class="icu-think-step" style="animation-delay:' + (i * 1.1).toFixed(1) + 's"><i></i><span>' + esc(s) + "</span></div>";
+    }).join("");
+    return '<div class="icu-think" role="status" aria-live="polite">' +
+      '<div class="icu-think-h"><span class="icu-think-dot" aria-hidden="true"></span>' + esc(title) + "</div>" +
+      '<div class="icu-think-rail" aria-hidden="true"></div>' +
+      '<div aria-hidden="true">' + steps + "</div></div>";
   }
   // Offline = navigator.onLine false OR the collab layer reports offline. Group mode only (the LOCAL
   // board is on-device and always "synced", so no offline strip there).
@@ -6272,7 +6376,7 @@
     var body;
     if (_disAi.busy) {
       body = '<p class="icu-doc-sub">MaiK is drafting the narrative sections from this patient\'s recorded data. This takes a few seconds.</p>' +
-        '<div class="icu-v2-loading"><div class="icu-v2-spin" aria-hidden="true"></div>Drafting the discharge narrative…</div>';
+        icuThinkHTML("Drafting the discharge narrative", ["Reading this patient's recorded course", "Assembling diagnosis, course and investigations", "Composing the narrative sections"]);
     } else if (_disAi.err) {
       body = '<div class="icu-assist-msg">' + ico("warn", "⚠️") + " " + esc(disAiErrText(_disAi.err)) + "</div>" +
         '<button class="icu-btn" data-icu-act="disai" style="margin-top:10px">' + ico("spark", "✦") + ' Try again</button>';
@@ -7463,7 +7567,7 @@
     var fLabels = (ev.findings || []).map(function (f) { return (f.polarity === "absent" ? "No " : f.polarity === "possible" ? "? " : f.temporality === "historical" ? "H/o " : "") + f.label; });
     var evAll = fLabels.concat(ev.img).concat(ev.labs).concat(ev.vitals || []);
     var evidence = evAll.length ? '<div class="icu-corr-sub">Evidence assembled</div>' + corrChips(evAll) : "";
-    var deepBlock = _corrBusy ? '<div class="icu-assist-msg">Running deep clinical review…</div>' : (deep ? '<div class="icu-corr-deep">' + corrDeepHTML(deep) + "</div>" : (_corrErr ? '<div class="icu-corr-deep">' + corrDeepHTML(_corrErr) + "</div>" : ""));
+    var deepBlock = _corrBusy ? icuThinkHTML("Deep clinical review", ["Reading the recorded labs, vitals and imaging", "Correlating the findings against each other", "Checking StewardMD's trusted sources", "Drafting what fits, and what does not"]) : (deep ? '<div class="icu-corr-deep">' + corrDeepHTML(deep) + "</div>" : (_corrErr ? '<div class="icu-corr-deep">' + corrDeepHTML(_corrErr) + "</div>" : ""));
     return header + '<div class="icu-card">' + badge + redflags + considBlock + supporting + missing + evidence +
       '<div class="icu-img-btns" style="margin-top:10px">' +
         '<button class="icu-btn" data-icu-act="corrdeep"' + (_corrBusy ? " disabled" : "") + '>' + ico("pulse", "✨") + ' Deep clinical review</button>' +
@@ -7982,6 +8086,10 @@
     var ix = act.indexOf(":"), cmd = ix < 0 ? act : act.slice(0, ix), arg = ix < 0 ? "" : act.slice(ix + 1);
     switch (cmd) {
       case "close": ICU.close(); break;
+      case "gcsopen": openGcsCalc(); break;
+      case "gcspick": { var _gp = arg.split(":"); _gcs[_gp[0]] = parseInt(_gp[1], 10); paintGcs(); break; }
+      case "gcsvt": _gcs.vt = !_gcs.vt; if (_gcs.vt) _gcs.v = 1; paintGcs(); break;
+      case "gcssave": gcsSave(); break;
       case "calc": { var _scp = (STATE.scores || []).filter(function (x) { return x.id === arg && x.inputs; })[0]; try { if (window.MEDCALC && MEDCALC.open) { MEDCALC.open(arg, _scp ? _scp.inputs : undefined, icuStoreCalcResult); var _mc = document.getElementById("mcOverlay"); if (_mc) _mc.style.zIndex = "10030"; /* lift the calculator ABOVE #icuRoot (z 10000), else it opens hidden behind the dashboard */ } } catch (e) {} break; }
       case "tab": if (icuV2On()) _screen = "patient"; _active = arg; _ws = wsOf(arg); _wsLast[_ws] = arg; paint(); var sc = rootEl && rootEl.querySelector(".icu-scroll"); if (sc) sc.scrollTop = 0; break;
       case "ws": { if (icuV2On()) _screen = "patient"; _ws = arg; var _m = wsMembers(wsById(arg)), _l = _wsLast[arg]; _active = (_l && _m.indexOf(_l) >= 0) ? _l : _m[0]; paint(); var sc2 = rootEl && rootEl.querySelector(".icu-scroll"); if (sc2) sc2.scrollTop = 0; break; }
@@ -8161,6 +8269,7 @@
       case "txpick": { var _th = _txHits[+arg]; if (_th && _txDraft) { txSyncInputs(); _txDraft.name = _th.name; _txDraft.cat = _th.cat || _txDraft.cat; var _tp = txParseDose(_th.dose); if (!_txDraft.dose && _tp.dose) _txDraft.dose = _tp.dose; if (!_txDraft.route && _tp.route) _txDraft.route = _tp.route; if (!_txDraft.freq && _tp.freq) _txDraft.freq = _tp.freq; openTxForm(); } break; }
       case "txsave": txSave(); break;
       case "txdel": txDelete(decodeURIComponent(arg)); break;
+      case "txpresetsave": txPresetSave(); break;
       case "gensummary": openSummary(); break;
       case "copysummary": copySummary(); break;
       case "edit": openForm(arg); break;
@@ -8282,6 +8391,54 @@
    * (solo roster) and auto-mirrors to the shared patient doc (whole team). Group add/remove is also
    * written to the shared timeline. Drug names + doses come from the Drug Index (window.MEDDRUGS)
    * the prescription pad uses, or the clinician's own free text. */
+  /* ---- Treatment presets: the DOCTOR's own sets, never ours -------------------------------
+   * Asked for as "presets like malaria fixed drugs etc". StewardMD does not ship regimens it has
+   * not had reviewed - the same rule that keeps DKA and paediatric behind a cited protocol - so
+   * this ships the MECHANISM and the doctor authors the content: build the treatment for one
+   * patient, save it under a name, re-apply it in one tap for the next.
+   *
+   * Applying ADDS to the current list, never replaces it, and every added item still goes through
+   * the ordinary treatment path (author + timestamp recorded, removable, on the timeline). Device
+   * local, like the Rx sets in prescription.js which this deliberately mirrors. Stores drug/dose/
+   * route/freq/category ONLY - no patient name, MR number, bed or any identifier. */
+  var ICU_TX_PRESETS_KEY = "smd_icu_tx_presets";
+  function icuTxPresets() { try { return JSON.parse(localStorage.getItem(ICU_TX_PRESETS_KEY) || "[]") || []; } catch (e) { return []; } }
+  function saveIcuTxPresets(a) { try { localStorage.setItem(ICU_TX_PRESETS_KEY, JSON.stringify((a || []).slice(0, 40))); } catch (e) {} }
+  function txPresetBarHTML(tx) {
+    var ps = icuTxPresets();
+    var opts = '<option value="-1">＋ Apply a saved set…</option>' + ps.map(function (p, i) {
+      return '<option value="' + i + '">' + esc(p.name) + " (" + ((p.items || []).length) + ")</option>";
+    }).join("");
+    return '<div style="display:flex;gap:8px;margin-top:9px;align-items:center">' +
+      '<select data-icu-act="txpreset" aria-label="Apply a saved treatment set" ' +
+        'style="flex:1;min-width:0;padding:9px 10px;border:1px solid var(--border);border-radius:10px;' +
+        'font:600 12.5px var(--font);background:var(--panel);color:var(--ink)"' + (ps.length ? "" : " disabled") + '>' + opts + '</select>' +
+      '<button class="icu-btn ghost" data-icu-act="txpresetsave" style="width:auto;margin:0;white-space:nowrap;padding:9px 13px;font-size:12.5px"' +
+        (tx && tx.length ? "" : " disabled") + '>Save as set</button></div>' +
+      '<p class="icu-doc-sub" style="margin:6px 2px 0;text-align:center">Your own sets, saved on this device. Applying one adds its drugs to this patient for you to check.</p>';
+  }
+  function txPresetSave() {
+    var tx = (_raw.treatment || []);
+    if (!tx.length) { if (window.toast) toast("Add treatment first, then save it as a set"); return; }
+    var nm = ""; try { nm = (window.prompt("Name this treatment set (e.g. Malaria - fixed, Severe sepsis):") || "").trim(); } catch (e) {}
+    if (!nm) return;
+    var items = tx.map(function (x) { return { name: x.name, dose: x.dose || "", route: x.route || "", freq: x.freq || "", cat: x.cat || "other" }; });
+    var a = icuTxPresets(); a.push({ name: nm.slice(0, 60), items: items }); saveIcuTxPresets(a);
+    if (window.toast) toast("Saved set: " + nm);
+    paint();
+  }
+  function txPresetApply(idx) {
+    var p = icuTxPresets()[idx]; if (!p || !(p.items || []).length) return;
+    var add = p.items.map(function (x) {
+      return { id: "tx_" + nowTs() + "_" + Math.floor(Math.random() * 1e6), name: x.name,
+        dose: x.dose || "", route: x.route || "", freq: x.freq || "", cat: x.cat || "other",
+        by: txAuthorName(), ts: nowTs() };
+    });
+    STATE.treatment = (_raw.treatment || []).concat(add);   // reassign -> reactive persist + group mirror
+    if (window.toast) toast("Added " + add.length + " item" + (add.length === 1 ? "" : "s") + " from " + p.name + " - check each one");
+    _active = "treatment"; _ws = wsOf("treatment"); _wsLast[_ws] = "treatment"; paint();
+  }
+
   function txSearchDrugs(q) {
     q = String(q || "").trim().toLowerCase(); if (q.length < 2) return [];
     var list = (window.MEDDRUGS && MEDDRUGS._list) || [], out = [];
@@ -8459,6 +8616,16 @@
         rootEl = document.createElement("div"); rootEl.id = "icuRoot";
         document.body.appendChild(rootEl);
         rootEl.addEventListener("click", onClick);
+        // A <select> never fires the click delegation above with a chosen value, so the treatment
+        // preset picker needs its own delegated change listener. Reset to the placeholder after
+        // applying, so picking the same set twice in a row still works.
+        rootEl.addEventListener("change", function (e) {
+          var s = e.target;
+          if (!s || s.getAttribute("data-icu-act") !== "txpreset") return;
+          var i = parseInt(s.value, 10);
+          s.value = "-1";
+          if (i >= 0) txPresetApply(i);
+        });
         rootEl.addEventListener("touchstart", swStart, { passive: true });
         rootEl.addEventListener("touchmove", swMove, { passive: true });
         rootEl.addEventListener("touchend", swEnd);

@@ -148,7 +148,34 @@ function normName(s) {
     .replace(/\b(MR|MRS|MS|MISS|SHRI|SMT|PROF)\.?\b/g, " ")
     .replace(/[^A-Z\s]/g, " ").replace(/\s+/g, " ").trim();
 }
-function regCore(s) { const m = String(s || "").match(/\d{2,}/g); return m ? m[m.length - 1] : ""; }
+/* The "core" is the digit group the register is matched on. Taking the LAST group was wrong:
+ * SMC certificates routinely print the year after the number - "APMC/FMR/112487/2015",
+ * "TSMC/54321/2018" - so the core became 2015 and every lookup missed. The certificate then came
+ * back unrecognised even though the doctor WAS on the register, which is the reported bug.
+ * Prefer the LONGEST group, and never choose something that is plainly a year while another
+ * candidate exists. Candidates are returned in preference order so the caller can try more than
+ * one rather than betting everything on a single guess. */
+export function regCandidates(s) {
+  const groups = String(s || "").match(/\d{2,}/g) || [];
+  if (!groups.length) return [];
+  const looksLikeYear = (g) => /^(19|20)\d{2}$/.test(g);
+  const nonYear = groups.filter((g) => !looksLikeYear(g));
+  const pool = nonYear.length ? nonYear : groups;      // all-years: fall back rather than give up
+  const seen = new Set(), out = [];
+  // Longest first - a registration number is longer than an incidental 2-3 digit fragment.
+  for (const g of pool.slice().sort((a, b) => b.length - a.length)) if (!seen.has(g)) { seen.add(g); out.push(g); }
+  return out;
+}
+function regCore(s) { const c = regCandidates(s); return c.length ? c[0] : ""; }
+/* Register records are not shaped consistently: some carry the whole name in firstName, others
+ * split it across first/middle/last, and the offline mirror uses `name`. Reading firstName alone
+ * threw away half of a split name before comparing it. Use whatever the record actually has. */
+export function nmcNameOf(r) {
+  if (!r) return "";
+  return [r.firstName, r.middleName, r.lastName, r.doctorName, r.name]
+    .filter((x) => typeof x === "string" && x.trim())
+    .join(" ");
+}
 function nameAgrees(extracted, nmcName) {
   const a = new Set(normName(extracted).split(" ").filter(Boolean));
   const b = new Set(normName(nmcName).split(" ").filter(Boolean));
@@ -380,9 +407,13 @@ export async function onRequest(context) {
     source = "offline";
     if (records === null) return toManual("nmc_unreachable");  // NMC down AND no offline DB
   }
+  // Try EVERY plausible core, not just the first: a certificate number can carry a year, a
+  // council prefix and the registration number in one string, and guessing once is how a
+  // registered doctor got told their certificate was unrecognised.
+  const cores = regCandidates(effReg);
   const match = records.find(r =>
-    (regCore(r.registrationNo) === core || String(r.registrationNo).includes(effReg)) &&
-    nameAgrees(ex.name, r.firstName)
+    (cores.indexOf(regCore(r.registrationNo)) > -1 || String(r.registrationNo).includes(effReg)) &&
+    nameAgrees(ex.name, nmcNameOf(r))
   );
   console.log("[verify] uid", uid, "source:", source, "records:", records.length, "match:", match ? "yes" : "NONE");
   if (!match) return toManual(source === "offline" ? "no_offline_match" : "no_nmc_match");

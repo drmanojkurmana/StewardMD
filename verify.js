@@ -43,12 +43,59 @@
     return "—";
   }
 
-  // Resolve the verified custom claim → Promise<boolean>. Pass force=true to refresh the
-  // ID token first (needed right after an owner approval, whose claim the cached token lacks).
+  /* isVerified() is the ONE answer the whole app uses for "is this doctor verified?", so it must not
+   * hand back a stale one. A custom claim set by the owner's approval does NOT appear in the client's
+   * ID token until that token refreshes, which Firebase does about hourly. That lag was the reported
+   * bug: a genuinely verified doctor was told to verify by Ward Sync and the Rx pad, and then the
+   * verify panel - which does consult the server - showed "verified" and let them straight through.
+   * The panel already knew how to resolve the disagreement (see evaluate() below); the gates did not,
+   * because they read the cached claim and stopped there.
+   *
+   * The resolution now lives HERE, so every caller gets it:
+   *   cached claim true   -> true immediately, no network
+   *   cached claim false  -> refresh the token once; a fresh claim settles it
+   *   still false         -> ask the server, which is authoritative, then refresh so the claim agrees
+   *
+   * A TRUE answer is remembered for the session. A FALSE answer is remembered only briefly, so a
+   * doctor approved while the app is open is not locked out until they relaunch. force=true skips
+   * the cache entirely.
+   *
+   * NOTE: this deliberately does NOT call fetchStatus(). fetchStatus() falls back to isVerifiedClaim()
+   * when the network fails, so calling it from here would be mutual recursion. */
+  var _vCache = { val: null, at: 0 };
+  var VERIFY_FALSE_TTL = 60000;   // re-check a "no" at most once a minute, not on every gate render
+  function _rememberVerified(v) { _vCache = { val: v, at: Date.now() }; return v; }
+  function _claimOf(u, force) {
+    return u.getIdTokenResult(!!force)
+      .then(function (r) { return !!(r && r.claims && r.claims.verified === true); })
+      .catch(function () { return false; });
+  }
+  // Minimal, self-contained server check — no claim fallback, so it can never recurse into us.
+  function _serverSaysVerified(u) {
+    return u.getIdToken().then(function (tok) {
+      return fetch("/api/verify-doctor", { headers: { "Authorization": "Bearer " + tok } })
+        .then(function (r) { return r.ok ? r.json() : null; })
+        .then(function (d) { return !!(d && d.status === "verified"); });
+    }).catch(function () { return false; });
+  }
   function isVerifiedClaim(force) {
     if (allowlisted()) return Promise.resolve(true);
     var u = fbUser(); if (!u) return Promise.resolve(false);
-    return u.getIdTokenResult(!!force).then(function (r) { return !!(r && r.claims && r.claims.verified === true); }).catch(function () { return false; });
+    if (!force && _vCache.val === true) return Promise.resolve(true);
+    if (!force && _vCache.val === false && (Date.now() - _vCache.at) < VERIFY_FALSE_TTL) return Promise.resolve(false);
+    return _claimOf(u, !!force).then(function (ok) {
+      if (ok) return _rememberVerified(true);
+      return _claimOf(u, true).then(function (fresh) {          // the token may simply be stale
+        if (fresh) return _rememberVerified(true);
+        return _serverSaysVerified(u).then(function (sv) {       // the server is authoritative
+          if (!sv) return _rememberVerified(false);
+          // Approved, but the claim has not propagated. Refresh so everything else agrees, and let
+          // them in either way - the server already said yes.
+          return _claimOf(u, true).then(function () { return _rememberVerified(true); },
+                                        function () { return _rememberVerified(true); });
+        });
+      });
+    }).catch(function () { return false; });
   }
   // Full status (incl. pending) from the server; falls back to the claim.
   function fetchStatus() {
@@ -389,6 +436,9 @@
         // verified:true claim yet — force a token refresh so the claim catches up, then let
         // the doctor straight in. No re-upload, no re-login, no manual admin step.
         if (d && d.status === "verified") {
+          // Tell isVerified() too, or every feature gate keeps saying "not verified" from the cached
+          // negative until its TTL lapses - which is the bug this whole path exists to work around.
+          _rememberVerified(true);
           var u2 = fbUser();
           (u2 && u2.getIdToken ? u2.getIdToken(true) : Promise.resolve()).catch(function () {}).then(function () {
             if (gate() && gate().dataset.mode !== "panel") hideGate();

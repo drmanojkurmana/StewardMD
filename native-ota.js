@@ -130,7 +130,7 @@
   // ---- The banner (the part home.js's dormant Settings row never had) -----------------------
   // A single persistent, dismissible bar — not a toast (which auto-hides). Shown only when an
   // update is genuinely ready to apply; never for "checking" or "up to date" states.
-  var _bannerPending = null, _bannerEl = null;
+  var _bannerPending = null, _bannerEl = null, _bannerWait = null;   // _bannerWait: retry timer while home is not up yet
   function injectCSS() {
     if (document.getElementById("smdOtaCss")) return;
     var s = document.createElement("style"); s.id = "smdOtaCss";
@@ -152,6 +152,24 @@
   }
   function showBanner(pending) {
     _bannerPending = pending;
+    /* Not over the splash, the intro or the sign-in gate. Reported from internal testing with this
+     * banner and the notification ask stacked on the PRE-LOGIN screen, clipping each other's text.
+     * window.SMD_PROMPT_OK (home.js) is the single definition of "signed in and actually on home".
+     * If it is not available, fall through and behave exactly as before rather than suppressing an
+     * update notice forever. Re-checked on a timer, so the banner appears as soon as home is up. */
+    try {
+      if (typeof window.SMD_PROMPT_OK === "function" && !window.SMD_PROMPT_OK()) {
+        if (!_bannerWait) {
+          _bannerWait = setInterval(function () {
+            if (typeof window.SMD_PROMPT_OK === "function" && !window.SMD_PROMPT_OK()) return;
+            try { clearInterval(_bannerWait); } catch (e2) {}
+            _bannerWait = null;
+            showBanner(_bannerPending);
+          }, 1500);
+        }
+        return;
+      }
+    } catch (e) {}
     injectCSS();
     if (!_bannerEl) {
       _bannerEl = document.createElement("div"); _bannerEl.id = "smdOtaBanner";

@@ -760,7 +760,7 @@
     // Onco Home: clinician-facing oncology reference workbench (search + tool grid over the
     // existing MEDCALC/KB/drugs — not the patient treatment-plan engine). Flag-gated inside SMD_ONCOHOME.open().
     atlas: function () { if (window.ATLAS && ATLAS.open) ATLAS.open(); else toast("RadioAnatome loading…"); },
-    oncohome: function () { if (window.SMD_ONCOHOME && SMD_ONCOHOME.open) SMD_ONCOHOME.open(); else toast("ONCqis loading…"); },
+    oncohome: function () { if (window.SMD_ONCOHOME && SMD_ONCOHOME.open) SMD_ONCOHOME.open(); else toast("ONCQIS loading…"); },
     oncotree: function () { if (window.SMD_ONCOTREE && SMD_ONCOTREE.open) SMD_ONCOTREE.open(); else toast("OncoTree loading…"); },
     // "Hospital" hub — one roof over the patient-facing tools. Opens a sheet of tiles that each
     // launch the existing module (OPD queue, ICU, Ward Sync, FollowCare).
@@ -1527,7 +1527,7 @@
       eligible: function () { try { if (window.FollowCare && FollowCare.enabled) return FollowCare.enabled(); if (window.SMD_FOLLOWCARE_FLAGS && SMD_FOLLOWCARE_FLAGS.on) return SMD_FOLLOWCARE_FLAGS.on(); return localStorage.getItem("smd_followcare") !== "0"; } catch (e) { return true; } } },
     { act: "queue", ic: "groups", tt: "OPD Queue", sub: "Patient flow",
       eligible: function () { try { var q = (location.search.match(/[?&]q=([^&]+)/) || [])[1]; if (q != null) return (q === "1" || q === "on" || q === "true"); if (window.SMD_QUEUE_FLAGS && SMD_QUEUE_FLAGS.on) return SMD_QUEUE_FLAGS.on(); return localStorage.getItem("smd_opd_queue") === "1"; } catch (e) { return false; } } },
-    { act: "oncohome", ic: "oncology", tt: "ONCqis", sub: "The Cancer Library",
+    { act: "oncohome", ic: "oncology", tt: "ONCQIS", sub: "The Cancer Library",
       eligible: function () { try { if (window.SMD_QUEUE_FLAGS && SMD_QUEUE_FLAGS.bool) return SMD_QUEUE_FLAGS.bool("smd_onco_home"); return localStorage.getItem("smd_onco_home") !== "0"; } catch (e) { return true; } } },
     { act: "oncotree", ic: "account_tree", tt: "OncoTree", sub: "Cancer pathway navigator", feat: true, anim: "oncotree",
       eligible: function () { try { var q = (location.search.match(/[?&]qoncotree=([^&]+)/) || [])[1]; if (q != null) return (q === "1" || q === "on" || q === "true"); return localStorage.getItem("smd_onco_navigator") !== "0"; } catch (e) { return true; } } },
@@ -2805,7 +2805,7 @@
       }
       btn.textContent = opts.editLabel || (empty ? "Add" : "Edit");
     }
-    function offline(msg) {
+    function offline(msg, why) {
       ["regno", "hospital", "city", "phone", "degree", "speciality"].forEach(function (k) { setRow(k, "", { placeholder: msg, edit: false }); });
       // ONE note, ever. This used to append unconditionally, so any second call (the auth watcher
       // re-renders, and the .catch() below can fire after the !fdb branch already ran) stacked a
@@ -2815,7 +2815,9 @@
       note = document.createElement("div");
       note.className = "hv-pf-row";
       note.setAttribute("data-offnote", "1");
-      note.innerHTML = '<span class="hv-pf-k">&nbsp;</span><span class="hv-pf-v unset">Couldn\'t load your details. <button class="hv-pf-retry" type="button" data-retry>Retry</button></span>';
+      note.innerHTML = '<span class="hv-pf-k">&nbsp;</span><span class="hv-pf-v unset">' +
+        smdEsc(why || "Couldn't load your details.") +
+        ' <button class="hv-pf-retry" type="button" data-retry>Retry</button></span>';
       card.appendChild(note);
       var rb = note.querySelector("[data-retry]");
       if (rb) rb.addEventListener("click", function () { acctFillProfessional._bootTried = false; openAccount(); });
@@ -2856,7 +2858,24 @@
      * no way out. Bound the wait, then read the on-device cache before declaring it unreadable. */
     var settled = false;
     function once(fn) { return function (v) { if (settled) return; settled = true; try { fn(v); } catch (e) {} }; }
-    var onFail = function () { try { if (document.body.contains(card)) offline("Offline"); } catch (e) {} };
+    /* Why the read failed used to be THROWN AWAY - onFail ignored its argument - so a denied read and
+     * a genuinely offline device both rendered the same "Offline", and a screenshot could not tell
+     * them apart. That is why this bug kept coming back. Keep the code for the console (never on
+     * screen: an internal error string on a clinical display is the lesson from the OTA endpoint
+     * leak) and say the one thing the doctor can act on. */
+    var onFail = function (err) {
+      var code = String((err && (err.code || err.message)) || "");
+      try { console.warn("[profile] details read failed:", code || err); } catch (e) {}
+      // permission-denied / unauthenticated here means the request reached Google and was REFUSED -
+      // an auth or App Check problem, not a network one. Calling that "Offline" sends the user to
+      // check their wifi for a problem that has nothing to do with it.
+      var denied = /permission[-_ ]?denied|unauthenticated|app-?check/i.test(code);
+      try {
+        if (!document.body.contains(card)) return;
+        if (denied) offline("Unverified", "Signed in, but this device could not be verified. Sign out and back in, then retry.");
+        else offline("Offline", "Couldn't load your details.");
+      } catch (e) {}
+    };
     pref.get().then(once(onData), once(onFail));
     setTimeout(function () {
       if (settled || !document.body.contains(card)) return;
@@ -3232,6 +3251,11 @@
         '<li><b>v9.7</b> · Apple Watch app: patient watchlist, tasks and criticals on the wrist, plus a Code Blue CPR assistant with an iPhone Command Center.</li>' +
         '<li><b>v9.8</b> · FundX AI: guided retinal image capture and analysis (experimental).</li>' +
         '<li><b>v10.0</b> · Reliability and polish: faster, flicker-free assessment; an editable profile with a searchable hospital directory; and a broad bug-fix sweep across the app and watch.</li>' +
+        // Only SHIPPED, flag-ON work belongs here. Anything still behind a default-OFF flag is not
+        // released and must not be announced as though it were.
+        '<li><b>v10.1</b> · NMC eLOGBook: the residency logbook and portfolio — postings, signed assessments, monthly authentication, configured targets, role-based access for faculty and residents, and an offline mirror so a ward with no signal still records the work.</li>' +
+        '<li><b>v10.2</b> · Insulin dosing support: basal initiation, correction, meal and combined boluses with the working shown step by step, an insulin library and guided conversion, active-insulin (IOB) accounting, and safety interrupts that stop an unsafe dose rather than footnoting it.</li>' +
+        '<li><b>v10.3</b> · Field-report sweep: buttons that used to fail silently now say what is wrong; long AI steps show what they are working on instead of a frozen line; the notification and update prompts wait until you are signed in and on the home screen; and the surgical evidence review reads as prose rather than raw markup.</li>' +
       '</ul></div>' +
     '</div>' +
     '<p style="font-size:11.5px;color:var(--slate-soft);margin-top:6px">The development journey of StewardMD, built and refined case by case at the bedside.</p>';
@@ -3252,6 +3276,13 @@
       '<li><span class="fn">2</span> imaging AIs at the point of care — KardioX 12-lead ECG interpretation and FundX retinal analysis (clinical preview).</li>' +
       '<li><span class="fn">~1.4&nbsp;MB</span> of hand-written clinical logic, with no frameworks and no build step.</li>' +
       '<li><span class="fn">8</span> stewardship questions answered for <i>every</i> recommendation.</li>' +
+      // Every figure below is COUNTED from the repository, not estimated. If one stops being true,
+      // change the code or change the number - a fact panel that drifts is worse than none.
+      '<li><span class="fn">124</span> cancer treatment protocols in the oncology library, each carrying its own lifecycle state instead of being presented as settled fact.</li>' +
+      '<li><span class="fn">15</span> insulins across <span class="fn">7</span> classes, with guided conversion, active-insulin accounting and the arithmetic shown line by line.</li>' +
+      '<li><span class="fn">4,804</span> conditions and <span class="fn">405</span> calculators, and not one of them answers without showing where the answer came from.</li>' +
+      '<li><span class="fn">3,884</span> automated checks run against every change — including <span class="fn">163</span> that drive a real browser, because a clinical tool that only passes in theory has not been tested.</li>' +
+      '<li><span class="fn">0</span> doses, stages or scores invented by AI. Every number is computed by validated code a clinician can read, or it is not shown at all — the AI fills the form, the engine does the maths.</li>' +
       '<li><span class="fn">1</span> clinician built the entire engine end to end.</li>' +
       '</ul>' +
       '<div class="smd-modal-section" style="margin-top:18px">What makes it unique</div>' +
@@ -7498,8 +7529,34 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
   }
   // On native app open: if notifications aren't decided yet, offer a one-tap enable popup.
   // Already-granted → silently re-register; denied → respect it (no popup).
+  /* A prompt must never land on the splash, the intro poster or the sign-in gate. Reported from
+   * internal testing with a screenshot of the notification ask AND the OTA update banner stacked on
+   * the pre-login screen, clipping each other. Two conditions, both required: the doctor is SIGNED
+   * IN, and the home screen is what they are actually looking at. refreshFab() already computed the
+   * second half for the Home FAB - the id list is named ONCE here so the two cannot drift.
+   * Exposed as window.SMD_PROMPT_OK so native-ota.js gates its banner on the same rule. */
+  var SMD_GATE_IDS = ["introPoster", "splash", "accountGate", "disclaimerModal", "introOverlay", "smdBootSplash"];
+  function smdGateUp() {
+    return SMD_GATE_IDS.some(function (id) {
+      var el = document.getElementById(id); if (!el) return false;
+      // These gates fade out via opacity/visibility but stay display:flex, so offsetWidth alone
+      // would read them as "up" forever after dismissal.
+      var cs = window.getComputedStyle(el);
+      return cs.display !== "none" && cs.visibility !== "hidden" && parseFloat(cs.opacity || "1") > 0.01;
+    });
+  }
+  function smdSignedIn() {
+    try { return !!(window.SMD_AUTH && SMD_AUTH.currentUser && SMD_AUTH.currentUser.uid); } catch (e) { return false; }
+  }
+  function smdPromptOK() { return smdSignedIn() && !smdGateUp(); }
+  try { window.SMD_PROMPT_OK = smdPromptOK; } catch (e) {}
+
   function maybeOfferPushOnOpen() {
-    var P = nativePush(); if (!P || window.__smdPushOffered) return; window.__smdPushOffered = true;
+    var P = nativePush(); if (!P || window.__smdPushOffered) return;
+    // Not yet: still on the splash / intro / sign-in gate, or not signed in. Asking here is exactly
+    // what put this popup on the pre-login screen. The caller retries, so this is a "later", not a no.
+    if (!smdPromptOK()) return;
+    window.__smdPushOffered = true;
     initNativePushListeners();
     P.checkPermissions().then(function (res) {
       var st = res && res.receive;
@@ -7511,21 +7568,38 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
   function showPushPopup() {
     if (document.getElementById("smdPushPop")) return;
     var d = document.createElement("div"); d.id = "smdPushPop";
-    d.style.cssText = "position:fixed;inset:0;z-index:16050;background:rgba(8,18,26,.55);display:flex;align-items:flex-end;justify-content:center";
-    d.innerHTML = '<div style="background:var(--panel,#fff);color:var(--ink,#14202b);max-width:460px;width:100%;margin:0 12px 12px;border-radius:18px;padding:20px 18px calc(18px + env(safe-area-inset-bottom));box-shadow:0 -8px 40px rgba(0,0,0,.3)">' +
-      '<div style="font:800 17px var(--sans,system-ui);margin-bottom:6px">🔔 Turn on notifications?</div>' +
-      '<div style="font:500 14px var(--sans,system-ui);color:var(--slate,#5a7184);line-height:1.5;margin-bottom:16px">Get trusted medical updates — drug approvals, safety alerts and recalls — plus notices from StewardMD.</div>' +
-      '<div style="display:flex;gap:10px"><button id="smdPushLater" style="flex:1;padding:12px;border:1px solid var(--line,#d7dee3);border-radius:12px;background:transparent;color:var(--slate,#5a7184);font:700 14px var(--sans,system-ui);cursor:pointer">Not now</button>' +
-      '<button id="smdPushYes" style="flex:2;padding:12px;border:none;border-radius:12px;background:var(--teal,#0e6e63);color:#fff;font:700 14px var(--sans,system-ui);cursor:pointer">Turn on</button></div></div>';
+    // Liquid glass, matching the interstitial surfaces: a translucent, blurred card over a dimmed
+    // scrim, with a hairline top highlight. The 🔔 emoji is gone - real Material Symbol, like the
+    // rest of the app. -webkit-backdrop-filter is required for WKWebView.
+    d.style.cssText = "position:fixed;inset:0;z-index:16050;background:rgba(8,18,26,.45);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);display:flex;align-items:flex-end;justify-content:center";
+    d.innerHTML = '<div style="position:relative;overflow:hidden;background:color-mix(in srgb, var(--panel,#fff) 74%, transparent);-webkit-backdrop-filter:saturate(180%) blur(22px);backdrop-filter:saturate(180%) blur(22px);border:1px solid color-mix(in srgb, var(--line,#d7dee3) 70%, transparent);color:var(--ink,#14202b);max-width:460px;width:100%;margin:0 12px 12px;border-radius:22px;padding:20px 18px calc(18px + env(safe-area-inset-bottom));box-shadow:0 -10px 44px rgba(0,0,0,.32)">' +
+      '<span aria-hidden="true" style="position:absolute;top:0;left:12%;right:12%;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.75),transparent)"></span>' +
+      '<div style="display:flex;align-items:center;gap:9px;margin-bottom:6px"><span class="material-symbols-rounded" aria-hidden="true" style="font-size:22px;color:var(--teal,#0e6e63)">notifications_active</span>' +
+      '<span style="font:800 17px var(--sans,system-ui)">Turn on notifications?</span></div>' +
+      '<div style="font:500 14px var(--sans,system-ui);color:var(--slate,#5a7184);line-height:1.5;margin-bottom:16px">Get trusted medical updates - drug approvals, safety alerts and recalls - plus notices from StewardMD.</div>' +
+      '<div style="display:flex;gap:10px"><button id="smdPushLater" style="flex:1;padding:12px;border:1px solid color-mix(in srgb, var(--line,#d7dee3) 80%, transparent);border-radius:14px;background:color-mix(in srgb, var(--panel,#fff) 45%, transparent);color:var(--slate,#5a7184);font:700 14px var(--sans,system-ui);cursor:pointer">Not now</button>' +
+      '<button id="smdPushYes" style="flex:2;padding:12px;border:none;border-radius:14px;background:var(--teal,#0e6e63);color:#fff;font:700 14px var(--sans,system-ui);cursor:pointer;box-shadow:0 4px 14px -4px rgba(14,110,99,.65)">Turn on</button></div></div>';
     document.body.appendChild(d);
     function close() { if (d.parentNode) d.parentNode.removeChild(d); }
     d.querySelector("#smdPushLater").addEventListener("click", close);
     d.addEventListener("click", function (e) { if (e.target === d) close(); });
     d.querySelector("#smdPushYes").addEventListener("click", function () { close(); enablePushNative(); });
   }
-  // Offer the notification popup shortly after the app is up (native only).
+  // Offer the notification popup once the doctor is signed in AND on home (native only).
+  // POLL, don't fire once: sign-in and the splash dismissal both finish asynchronously, so the old
+  // single 1800ms shot landed on whatever happened to be on screen - which is how this ended up over
+  // the pre-login splash. Bounded (~2 min) so it can never spin; if home is never reached, the offer
+  // simply waits for the next launch.
   if (window.SMD_IS_NATIVE) {
-    try { window.addEventListener("load", function () { setTimeout(function () { try { maybeOfferPushOnOpen(); } catch (e) {} }, 1800); }); } catch (e) {}
+    try {
+      window.addEventListener("load", function () {
+        var tries = 0;
+        var iv = setInterval(function () {
+          try { maybeOfferPushOnOpen(); } catch (e) {}
+          if (window.__smdPushOffered || ++tries > 80) { try { clearInterval(iv); } catch (e2) {} }
+        }, 1500);
+      });
+    } catch (e) {}
   }
   function injectNotifCSS() {
     if (document.getElementById("ntf-css")) return;

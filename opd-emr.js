@@ -22,7 +22,7 @@
       '<button class="oe-close" data-oe-act="close" title="Close" aria-label="Close">' + ms("close") + "</button></header>";
   }
   function tabsNav(active) {
-    var defs = [["profile", "Profile", "person"], ["inv", "Investigations", "science"], ["meds", "Medications", "pill"], ["assess", "Assessment", "clinical_notes"], ["protocol", "Protocol", "account_tree"], ["onco", "ONCqis", "vaccines"]];
+    var defs = [["profile", "Profile", "person"], ["inv", "Investigations", "science"], ["meds", "Medications", "pill"], ["assess", "Assessment", "clinical_notes"], ["protocol", "Protocol", "account_tree"], ["onco", "ONCQIS", "vaccines"]];
     return '<nav class="oe-tabs">' + defs.map(function (t) {
       return '<button class="oe-tab' + (t[0] === active ? " on" : "") + '" data-oe-act="tab:' + t[0] + '">' + ms(t[2]) + "<span>" + t[1] + "</span></button>";
     }).join("") + "</nav>";
@@ -759,9 +759,9 @@
   // Delegates markup to onco-protocols.js / onco-nurse.js so opd-emr.js stays the shell; inert (not
   // enabled / no plan) never crashes.
   function oncoTab(st) {
-    if (!oncoFlagOn()) return section("vaccines", "ONCqis", "", "", "Oncology protocols are not enabled for this account.");
+    if (!oncoFlagOn()) return section("vaccines", "ONCQIS", "", "", "Oncology protocols are not enabled for this account.");
     var plan = st.oncoPlan;
-    if (!plan) return section("vaccines", "ONCqis", "", "", "No active treatment plan for this patient yet.");
+    if (!plan) return section("vaccines", "ONCQIS", "", "", "No active treatment plan for this patient yet.");
     var toggle = oncoViewToggle(st);
     var body;
     if (st.oncoView === "nurse") {
@@ -775,7 +775,7 @@
       body += oncoPrintButtonHtml();    // Phase 6: 2-page Protocol PDF, built from this same plan/cycle
       body += oncoEmrButtonHtml(st);    // Phase G: [Add to EMR], only after CONFIRM & ACTIVATE
     }
-    return section("vaccines", "ONCqis", (plan.protocolId || "").toUpperCase(), toggle + body, "");
+    return section("vaccines", "ONCQIS", (plan.protocolId || "").toUpperCase(), toggle + body, "");
   }
   // Doctor-only per-cycle control panel (create/clearance/confirm), gated the same way the rest of
   // the write UI is gated (flag + smd_opd_emr_write) - a read-only doctor session sees only the
@@ -807,7 +807,7 @@
   // ---- Protocol tab: search the reference protocol library + Assign to this patient --------------
   // Search is a LOCAL filter over st.oncoProtocols (the 124 /kb/protocols/*.json already loaded);
   // Assign creates a DRAFT plan (server accepts the client template) + a timeline entry, then returns
-  // to the OPD profile. No auto-activation — the ONCqis tab still owns dose-lock + administration.
+  // to the OPD profile. No auto-activation — the ONCQIS tab still owns dose-lock + administration.
   function protocolTab(st) {
     if (!oncoFlagOn()) return section("account_tree", "Protocol", "", "", "Oncology protocols are not enabled for this account.");
     if (!st.oncoProtocolsLoaded) { try { maybeLoadOncoProtocols(); } catch (e) {} return section("account_tree", "Protocol", "Loading the protocol library…", "", "Loading…"); }
