@@ -33,7 +33,16 @@ function fakeDb() {
     deps: {
       now: () => T0,
       randomBytes: (n) => new Uint8Array(n).fill(7),
-      fsGet: async (_env, path) => docs.get(path) || null,
+      // Shaped like the REAL fsGet, which resolves to the Firestore envelope and keeps the record
+      // under .fields. This fake used to hand back the bare record, so a lookup() that returned the
+      // envelope passed here and produced undefined fields in production: the verify page found the
+      // doc, said "Valid prescription", and showed no prescriber and no drugs. A fake more
+      // convenient than the thing it stands in for cannot catch that class of bug.
+      fsGet: async (_env, path) => {
+        const rec = docs.get(path);
+        if (!rec) return null;
+        return { id: String(path).split("/").pop(), name: "projects/p/databases/(default)/documents/" + path, fields: rec, updateTime: "1970-01-01T00:00:00Z" };
+      },
       fsCommit: async (_env, writes) => {
         for (const w of writes) {
           if (w.update) {
@@ -208,4 +217,25 @@ test("an expired prescription reads EXPIRED with no cron and no backfill", async
   const rec = await lookup(ENV, out.body.code, db.deps);
   assert.equal(describe(rec, T0 + 29 * 86400000).status, "ACTIVE");
   assert.equal(describe(rec, T0 + 31 * 86400000).status, "EXPIRED", "derived from the date on every read");
+});
+
+/* Regression: lookup must return the RECORD, never the Firestore envelope.
+ *
+ * Found in production, not here. fsGet resolves to {id,name,fields,updateTime} and lookup returned
+ * it whole, so rec.drugs and rec.doctor were undefined everywhere. Nothing threw: the doc was
+ * found, so the page said "Valid prescription" while listing no prescriber and no drugs, and
+ * revoke answered 403 to the very prescriber who issued it. A verification that confirms nothing
+ * is worse than none, because it is believed.
+ */
+test("lookup returns the record itself, not the Firestore envelope", async () => {
+  const db = fakeDb();
+  const out = await issue(ENV, CLAIMS, { drugs: [{ name: "Amoxicillin", dose: "500 mg" }] }, db.deps);
+  const rec = await lookup(ENV, out.body.code, db.deps);
+
+  assert.ok(rec, "the record is found");
+  assert.equal(rec.fields, undefined, "not the envelope - an envelope here is the production bug");
+  assert.equal(rec.code, out.body.code, "the code reads straight off the record");
+  assert.equal(rec.drugs.length, 1, "and the drugs a pharmacist compares against the paper are present");
+  assert.equal(rec.drugs[0].name, "Amoxicillin");
+  assert.ok(rec.doctor && rec.doctor.uid, "the prescriber is on the record, so revoke can match them");
 });
