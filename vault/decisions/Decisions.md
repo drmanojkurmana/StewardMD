@@ -1829,3 +1829,8 @@ the institutional rule comes from `SMD_EMAIL_AUTH.loadProfile(uid)` (Firestore p
   The real defect: MIN counted from script start while the native splash still covered the
   WebView. `native-bridge.js` now stamps `window.__smdSplashShownAt` when it lifts the native
   splash and the boot script measures MIN from that stamp (script start on the web).
+- **Addendum (same day, final): BOTH screens, screen 2 seen for 3s.** "still same single splash
+  screen" after the revert: the ask was the two-screen sequence with the welcome screen on for at
+  least 3s. Screen 1 (classic, static) 1.2s -> 220ms crossfade -> screen 2 (avatar, name, glass
+  foot, passive pill) 3s. Beat AND hold count from `__smdSplashShownAt`; `MIN` = 4500 for
+  `.sbs-personal` boots, 3000 for guests (screen 1 only). Gate/button still gone.
