@@ -7,8 +7,10 @@
  *      screen back to the previous page instead of dismissing all the way to home).
  *   2. Else the clinical engine (5-step form / Clinical Decision output) → window._SMD_goBack().
  *   3. Else (home/root) → nothing (iOS); Android exits the app.
- * At HOME the same edge-drag has nothing to go back to, so it SLIDES THE MENU OPEN instead
- * (gesture only — Android's hardware back still exits at root).
+ * At HOME the same edge-drag has nothing to go back to, so it OPENS THE MENU instead. On Android
+ * gesture navigation that drag IS the system back gesture and never reaches the WebView as touches,
+ * so the backButton handler at the bottom of this file implements the same rule; back still exits at
+ * root by pressing it once more after the menu closes (see EXIT_MS).
  * Reuses each screen's own back logic — no per-screen wiring. The edge-handle appears on
  * every screen that can go back, so no module is a dead-end even without its own button.
  *
@@ -337,6 +339,14 @@
       curDx = Math.max(0, dx);
       if (dragEl) { setX(dragEl, curDx, false); if (e.cancelable) e.preventDefault(); }   // own the horizontal drag
     }, { passive: false });
+    // The SYSTEM can claim a gesture mid-stream — Android's edge back-gesture does exactly this — and
+    // then touchend NEVER arrives. Without this the screen stayed frozen mid-slide under the finger
+    // and `tracking` stayed true until the next touchstart happened to reset it.
+    document.addEventListener("touchcancel", function () {
+      if (!tracking && !dragging) return;
+      tracking = false;
+      if (dragging) endDrag(false);          // slide back, take NO action: the system owns the gesture now
+    }, { passive: true });
     document.addEventListener("touchend", function (e) {
       if (!tracking) return; tracking = false;
       var t = e.changedTouches && e.changedTouches[0], dt = Date.now() - t0;
@@ -352,15 +362,40 @@
   if (document.readyState !== "loading") syncHandle();
   else document.addEventListener("DOMContentLoaded", syncHandle);
 
-  // Android system-gesture / hardware back → close the top menu / step back, else exit at root.
+  /* Android system-gesture / hardware back. THE EDGE DRAG ARRIVES HERE, NOT AS TOUCH EVENTS.
+   *
+   * With gesture navigation on (the Pixel default — `adb shell settings get secure navigation_mode`
+   * returned 2 on the reported device) the left-to-right edge drag IS the system back gesture. The
+   * framework claims the touch stream at the edge, so the WebView receives a touchcancel and the touch
+   * handler above can never complete: on such a phone it is effectively dead code. The gesture reaches
+   * the app ONLY as this backButton event, indistinguishable from a hardware back press.
+   *
+   * So the home→menu half of edgeSwipeAction() has to live here as well, or it can never fire on the
+   * phones most people actually use. Previously goBack() simply returned false at home and the app
+   * EXITED — the reported "sidebar swipe does nothing".
+   *
+   * Back must still be able to exit at root, so this is a toggle with an escape hatch rather than an
+   * unconditional menu: back opens the menu, back closes it, back once more within EXIT_MS exits.
+   * Without that timestamp the two halves toggle forever and the app can never be dismissed with back. */
+  var EXIT_MS = 2000, _menuClosedAt = 0;
+  function drawerIsOpen() {
+    try { var d = document.getElementById("sbDrawer"); return !!(d && d.classList.contains("open")); } catch (e) { return false; }
+  }
+  // false → nothing left to do at this level, so the caller exits the app.
+  function hardwareBack() {
+    var wasOpen = drawerIsOpen();
+    if (goBack()) { if (wasOpen) _menuClosedAt = Date.now(); return true; }   // incl. closing the menu via .sb-x
+    if (Date.now() - _menuClosedAt < EXIT_MS) return false;                   // menu was just closed by back → exit
+    return openMenuAtHome();                                                  // at home: the same action as the edge drag
+  }
   try {
     if (isNative && C.Plugins && C.Plugins.App && C.Plugins.App.addListener) {
       C.Plugins.App.addListener("backButton", function () {
-        if (!goBack()) { try { C.Plugins.App.exitApp(); } catch (e) {} }
+        if (!hardwareBack()) { try { C.Plugins.App.exitApp(); } catch (e) {} }
         setTimeout(syncHandle, 80);
       });
     }
   } catch (e) {}
 
-  window.SMD_SWIPE_BACK = { goBack: goBack, canGoBack: canGoBack, openMenuAtHome: openMenuAtHome, edgeSwipeAction: edgeSwipeAction, enabled: enable, engineActive: engineActive, syncHandle: syncHandle };
+  window.SMD_SWIPE_BACK = { goBack: goBack, hardwareBack: hardwareBack, drawerIsOpen: drawerIsOpen, canGoBack: canGoBack, openMenuAtHome: openMenuAtHome, edgeSwipeAction: edgeSwipeAction, enabled: enable, engineActive: engineActive, syncHandle: syncHandle };
 })();
