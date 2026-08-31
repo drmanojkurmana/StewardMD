@@ -2017,7 +2017,10 @@ window.openExternal = function (u) {
      Loads after native-bridge so /api/config routes correctly on native. Fail-open. -->
 <script src="/remote-config.js?v=rc1" defer></script>
 <script src="/wear-bridge.js?v=gold1" defer></script>
-<script src="/app.js?v=gold1034" defer></script>
+<!-- The ONE brand->generic map (app.js search, medlist.js, rx-validity.js all read it). Must load
+     before all three; every tag here is defer, so document order is execution order. -->
+<script src="/brand-generics.js?v=bg1" defer></script>
+<script src="/app.js?v=gold1034-brands1" defer></script>
 <!-- Firebase App Check bridge: native App Attest/Play Integrity token -> compat JS SDK. Fail-open,
      native-only, no-op unless the plugin + app-check-compat are present. Loads after app.js (which
      calls firebase.initializeApp); it polls until firebase is booted, then activates. -->
@@ -2073,7 +2076,7 @@ window.openExternal = function (u) {
 <script src="/drugs.js?v=gold978" defer></script>
 <script src="/interaction-rules.js?v=gold363" defer></script>
 <script defer src="/kb/ai/drug-fuzzy.js?v=gold1047"></script>
-<script defer src="/medlist.js?v=gold1049-scan-choose"></script>
+<script defer src="/medlist.js?v=gold1049-scan-choose-brands1"></script>
 <script defer src="/ghis-meds.js?v=gold363"></script>
 <script defer src="/interactions.js"></script>
 <script src="/api.js?v=gold465-azclass" defer></script>
@@ -2338,7 +2341,7 @@ window.openExternal = function (u) {
 <script src="/pglog-qr.js?v=pgl5-lib" defer></script>
 <!-- Prescription validity + schedule rules (pure). Decides which prescriptions get a verification
      QR and how long they stay valid; the QR itself is encoded by pglog-qr.js above. -->
-<script src="/rx-validity.js?v=rxv2-stems" defer></script>
+<script src="/rx-validity.js?v=rxv3-brands" defer></script>
 <script src="/pglog-reports.js?v=pgl5-diag" defer></script>
 <script src="/pglog-ai.js?v=pgl4" defer></script>
 <script src="/pglog-screens.js?v=pgl26-del" defer></script>

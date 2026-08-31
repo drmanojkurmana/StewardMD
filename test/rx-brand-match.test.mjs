@@ -59,3 +59,36 @@ test("a brand search is only issued once the query is selective", () => {
   assert.equal(B.shouldSearchBrands(""), false);
   assert.equal(B.shouldSearchBrands(null), false);
 });
+
+/* Both drug search bars must sit on the SAME database.
+ *
+ * The prescription pad searched MEDDRUGS.searchIndex alone - the on-device ward formulary, ~70
+ * drugs - so most molecules "were not in the database" when typed there, while ICU's Add Treatment
+ * search found them at once against the server composition index. One app, two search bars, two
+ * different datasets, and nothing on screen telling a doctor which one they were looking at.
+ */
+test("the prescription pad searches the server drug database, not just the local formulary", async () => {
+  const { readFileSync } = await import("node:fs");
+  const src = readFileSync(new URL("../prescription.js", import.meta.url), "utf8");
+
+  assert.match(src, /MEDAPI\.searchCompositions/, "the pad queries the server composition index");
+  assert.match(src, /function paintList/, "local and server hits are painted through one list");
+
+  // Local first: it is the only thing that answers with no signal, and it carries doses and real
+  // brand names. Server molecules fill in behind it, deduped so nothing appears twice.
+  const ac = src.slice(src.indexOf("function acAttach"), src.indexOf("function rxBrandAC"));
+  assert.match(ac, /MEDDRUGS\.searchIndex/, "the local formulary still answers instantly");
+  assert.match(ac, /seen\[k\]/, "results are deduped on the generic");
+
+  // A reply for a query already typed past must be dropped, or the list repaints under the doctor.
+  assert.match(ac, /if \(q !== remoteQ\) return;/, "stale replies are discarded");
+  assert.match(ac, /\}, 220\);/, "and the lookup is debounced");
+});
+
+test("both search bars use the same API call, so one cannot drift from the other", async () => {
+  const { readFileSync } = await import("node:fs");
+  const at = (p) => readFileSync(new URL(p, import.meta.url), "utf8");
+  for (const f of ["../prescription.js", "../icu.js"]) {
+    assert.match(at(f), /MEDAPI\.searchCompositions\(/, `${f} searches the shared composition index`);
+  }
+});
