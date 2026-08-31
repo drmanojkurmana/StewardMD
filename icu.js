@@ -2636,7 +2636,10 @@
     { ic: "⚡", title: "Hyperkalemia", checklist: ["IV calcium to stabilise myocardium if ECG changes", "Shift: insulin + dextrose, nebulised salbutamol (± bicarbonate)", "Remove: diuretic, binder, or dialysis", "Stop K-raising drugs; recheck K & glucose"], monitoring: ["Continuous ECG", "Serial K & glucose"], evidence: ["UK Renal", "KDIGO"] },
     { ic: "🌀", title: "Status epilepticus", checklist: ["ABC, oxygen, glucose & electrolytes", "Benzodiazepine first-line (repeat once)", "IV anti-seizure med (levetiracetam / valproate / phenytoin)", "Refractory → anaesthesia (propofol/midazolam) + EEG", "Identify & treat the cause"], monitoring: ["Airway, seizure activity", "EEG if refractory"], evidence: ["NCS", "ILAE"] },
     { ic: "🫀", title: "Pulmonary embolism", checklist: ["Risk-stratify (haemodynamics, sPESI, RV strain)", "Anticoagulate unless contraindicated", "High-risk/massive → systemic thrombolysis or embolectomy", "Supportive: oxygen, cautious fluids, vasopressors"], monitoring: ["Haemodynamics, oxygenation", "RV function"], evidence: ["ESC"] },
-    { ic: "💉", title: "Anaphylaxis", checklist: ["Remove trigger; call for help", "IM adrenaline 0.5 mg (0.5 mL 1:1000) anterolateral thigh — repeat at 5 min", "High-flow oxygen; lay flat, legs raised", "IV crystalloid bolus for hypotension", "Antihistamine / steroid are second-line; observe for biphasic reaction"], monitoring: ["Airway, BP, SpO₂", "Biphasic relapse"], evidence: ["Resus Council", "WAO"] }
+    { ic: "💉", title: "Anaphylaxis", checklist: ["Remove trigger; call for help", "IM adrenaline 0.5 mg (0.5 mL 1:1000) anterolateral thigh — repeat at 5 min", "High-flow oxygen; lay flat, legs raised", "IV crystalloid bolus for hypotension", "Antihistamine / steroid are second-line; observe for biphasic reaction"], monitoring: ["Airway, BP, SpO₂", "Biphasic relapse"], evidence: ["Resus Council", "WAO"] },
+    { ic: "🫁", title: "Pneumonia (CAP / HAP)", checklist: ["Confirm with CXR/CT + clinical signs; risk-stratify severity (CURB-65 / PSI, or HAP/VAP criteria)", "Blood ± sputum cultures before antibiotics, without delaying treatment", "Empirical antibiotics within 1 hour for severe/septic presentation, per local antibiogram", "Cover atypicals in severe CAP (β-lactam + macrolide, or a respiratory fluoroquinolone)", "Oxygen to target SpO₂; escalate to HFNC/NIV/invasive ventilation if worsening", "De-escalate once cultures return; reassess response at 48–72 h"], monitoring: ["Respiratory rate & SpO₂/O₂ requirement", "CRP/procalcitonin & lactate trend"], evidence: ["IDSA/ATS 2019", "BTS"] },
+    { ic: "❤️", title: "Acute heart failure (decompensated)", checklist: ["Confirm: history/exam (congestion vs perfusion profile), BNP/NT-proBNP, echo when feasible", "Oxygen only if hypoxic; NIV for pulmonary oedema with respiratory distress", "IV loop diuretic for congestion; reassess urine output/symptoms within hours", "Add a vasodilator (e.g. IV nitrate) if adequate BP and persistent congestion", "Inotrope/vasopressor only if hypoperfused (cardiogenic shock) despite the above", "Identify & treat the precipitant (ACS, arrhythmia, infection, non-adherence); start/optimise guideline-directed therapy before discharge"], monitoring: ["Daily weight & strict fluid balance", "Renal function & electrolytes"], evidence: ["ESC 2021", "AHA/ACC/HFSA 2022"] },
+    { ic: "🫁", title: "CO₂ narcosis (hypercapnic respiratory failure)", checklist: ["Confirm with ABG: raised PaCO₂ with acidaemia (type 2 respiratory failure)", "Controlled oxygen to a conservative SpO₂ target (88–92%) — avoid over-oxygenation", "Trial NIV (BiPAP) early for acidotic hypercapnic failure unless contraindicated", "Treat the underlying cause (bronchodilators, steroids, antibiotics if an infective exacerbation)", "Correct reversible causes of hypoventilation (sedatives, opioids)", "Recheck ABG at ~1 h on NIV; escalate to invasive ventilation if worsening or NIV not tolerated"], monitoring: ["Serial ABG (PaCO₂, pH)", "Conscious level & respiratory effort"], evidence: ["BTS/ICS NIV Guideline", "GOLD"] }
   ];
   var _openProto = {};
   var _lytesExp = {};   // which electrolyte cards are expanded in the Electrolytes tab
@@ -7390,7 +7393,10 @@
     /hyperkal/,
     /status epilepticus|epilepticus/,
     /pulmonary embol|\bpe\b/,
-    /anaphylax/
+    /anaphylax/,
+    /pneumonia|\bcap\b|\bhap\b|\bvap\b/,
+    /heart failure|\bchf\b|decompensated heart|pulmonary oedema|pulmonary edema/,
+    /co2 narcosis|carbon dioxide narcosis|hypercapni|type ?2 respiratory failure|type ?ii respiratory failure/
   ];
   function protocolIndexFor(name) {
     if (!name) return -1;
