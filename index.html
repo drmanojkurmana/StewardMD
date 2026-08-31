@@ -2161,8 +2161,8 @@ window.openExternal = function (u) {
 <script src="/icu-collab.js?v=gold455" defer></script><script src="/referrals.js?v=ref1" defer></script>
 <!-- Native push (APNs iOS + FCM Android) + closed-app watch-lab (SMD_WATCH). native-push.js
      exposes SMD_localNotify/SMD_enableNativePush; watch-lab.js exposes window.SMD_WATCH. -->
-<script src="/native-push.js?v=gold364-thread" defer></script>
-<script src="/watch-lab.js?v=gold363" defer></script>
+<script src="/native-push.js?v=gold364-thread-ref1" defer></script>
+<script src="/watch-lab.js?v=gold363-ref1" defer></script>
 <!-- Apple Watch bridge — publishes session + favorites/recents to the paired
      watch via the WatchBridge plugin (App Group + WatchConnectivity). No-op on
      web and until the native plugin is present; never affects existing flows. -->
@@ -2485,7 +2485,7 @@ window.openExternal = function (u) {
   // #sbMenu is rebuilt on each SB.open, so re-inject the item every open (mirrors home.js).
   function ghisWrapSB() { try { if (window.SB && typeof SB.open === "function" && !SB.__ghisWrapped) { var o = SB.open; SB.open = function () { var r = o.apply(this, arguments); setTimeout(ghisSidebarItem, 50); return r; }; SB.__ghisWrapped = true; } } catch (e) {} }
   function loadGhis() {
-    if (!document.getElementById("ghis-ward-script")) { var s = document.createElement("script"); s.id = "ghis-ward-script"; s.src = "/ghis-ward.js?v=gw-assess1"; document.body.appendChild(s); }
+    if (!document.getElementById("ghis-ward-script")) { var s = document.createElement("script"); s.id = "ghis-ward-script"; s.src = "/ghis-ward.js?v=gw-assess1-ref1"; document.body.appendChild(s); }
     // Auto-fetch (device-local, opt-in): keeps a linked Ward Sync patient's reports fresh on
     // launch/resume. Depends on window.GHIS above, so loaded right after it. Flag-gated with GHIS
     // itself — meaningless without Ward Sync. Consent + toggle live entirely in autofetch.js.

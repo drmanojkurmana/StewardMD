@@ -115,18 +115,24 @@ async function runForUid(env, origin, uid) {
       if (!baseline && newly > 0) {
         // Only fires when a watched order actually GAINED values — not on a freshly-placed order.
         // Show bed + ward + which report is ready — location + test name only, NEVER the patient
-        // name/MRN or any result value (those transit APNs/FCM relays + the lock screen). The name is
-        // still resolved in-app after auth via the deep link.
+        // name/MRN or any result value (those transit APNs/FCM relays + the lock screen).
+        //
+        // The deep link must not carry the real patientId either, for the same reason: it also
+        // transits those relays. It carries p.ref instead — a random per-patient token, meaningless
+        // outside an authenticated GET /api/watch/status for this uid. The client resolves
+        // ref -> patientId itself after the doctor is signed in (ghis-ward.js, native-push.js).
+        // setList() guarantees every entry has a ref, so this never falls back to the raw id.
         const loc = locMap[String(p.patientId)] || {};
         const locLabel = [loc.bed ? ("Bed " + loc.bed) : "", loc.ward || ""].filter(Boolean).join(" · ");
         const reports = newNames.slice(0, 3).join(", ") + (newNames.length > 3 ? (" +" + (newNames.length - 3) + " more") : "");
         const title = (locLabel ? ("New lab · " + locLabel) : "StewardMD · new lab result").slice(0, 90);
         const body = ((reports || "A new lab report") + " available — open StewardMD to review.").slice(0, 160);
+        const linkParam = p.ref ? ("?ghisRef=" + encodeURIComponent(p.ref)) : "";
         const d = (await sendNativeToAll(env, {
           title: title,
           body: body,
-          url: "/?ghisPatient=" + encodeURIComponent(p.patientId),
-          tag: "lab-" + p.patientId,
+          url: "/" + linkParam,
+          tag: "lab-" + (p.ref || "watch"),
         }, { uid })) || {};
         pushed++;
         delivered += (d.sent || 0);                       // pushes APNs/FCM accepted for this account

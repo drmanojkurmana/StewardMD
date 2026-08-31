@@ -20,13 +20,19 @@
   var C = window.Capacitor;
   var native = !!(C && (typeof C.isNativePlatform === "function" ? C.isNativePlatform() : (C.platform && C.platform !== "web")));
 
-  // Route a notification's url. A background lab-watch alert deep-links to /?ghisPatient=<id>;
+  // Route a notification's url. A background lab-watch alert deep-links to /?ghisRef=<ref>;
   // when Ward Sync is loaded, open that patient in-place (no reload). Otherwise navigate — the
   // ghis-ward deep-link handler opens it on load (covers cold-start taps).
+  // `ref` is opaque (see functions/api/watch/[[path]].js), never the real patientId, so it must be
+  // resolved through SMD_WATCH.resolveRef() (the doctor's own authenticated session) first.
   function routeUrl(url) {
     try {
-      var m = url && String(url).match(/[?&]ghisPatient=([^&]+)/);
-      if (m && m[1] && window.GHIS && window.GHIS.openPatientById) { window.GHIS.openPatientById(decodeURIComponent(m[1])); return; }
+      var m = url && String(url).match(/[?&]ghisRef=([^&]+)/);
+      if (m && m[1] && window.GHIS && window.GHIS.openPatientById && window.SMD_WATCH && window.SMD_WATCH.resolveRef) {
+        var ref = decodeURIComponent(m[1]);
+        window.SMD_WATCH.resolveRef(ref).then(function (pid) { if (pid) window.GHIS.openPatientById(pid); });
+        return;
+      }
     } catch (e) {}
     // Medical Update deep link (/?u=<id>): open that guideline's card IN-APP (warm tap);
     // if the app isn't ready yet, fall through to navigate — the on-load handler opens it.

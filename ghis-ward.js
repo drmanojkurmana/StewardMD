@@ -470,9 +470,10 @@
           GHIS._selectedPatient = null; GHIS._patientId = null;
           try { if (window.GHISMEDS && window.GHISMEDS.clearDraft) window.GHISMEDS.clearDraft(); } catch (e) {}
         },
-        // Deep-link target from a background lab-watch push (/?ghisPatient=<id>): open Ward Sync,
-        // wait for the ward list to load, then open that patient's lab drawer. If the patient
-        // isn't in the current ward list (e.g. discharged), prefill the search with the id.
+        // Deep-link target from a background lab-watch push (/?ghisRef=<ref>, resolved to a real
+        // patientId first — see SMD_WATCH.resolveRef): open Ward Sync, wait for the ward list to
+        // load, then open that patient's lab drawer. If the patient isn't in the current ward list
+        // (e.g. discharged), prefill the search with the id.
         openPatientById: function(patientId) {
           if (!patientId) return;
           var pid = String(patientId);
@@ -1220,11 +1221,24 @@
         var iv = setInterval(function () { if (attach() || ++tries > 60) clearInterval(iv); }, 500);
       })();
 
-      // Background lab-watch notification deep link: /?ghisPatient=<id> → open that patient.
+      // Background lab-watch notification deep link: /?ghisRef=<ref> → open that patient.
+      // `ref` is opaque (see functions/api/watch/[[path]].js) — never the real patientId — so it
+      // must be resolved through SMD_WATCH.resolveRef() (the doctor's own authenticated session)
+      // before GHIS.openPatientById can be called with a real id.
       (function () {
         try {
-          var m = (location.search || "").match(/[?&]ghisPatient=([^&]+)/);
-          if (m && m[1]) { var pid = decodeURIComponent(m[1]); setTimeout(function () { try { window.GHIS && GHIS.openPatientById(pid); } catch (e) {} }, 500); }
+          var m = (location.search || "").match(/[?&]ghisRef=([^&]+)/);
+          if (!m || !m[1]) return;
+          var ref = decodeURIComponent(m[1]);
+          (function waitForWatch(tries) {
+            if (window.SMD_WATCH && window.SMD_WATCH.resolveRef) {
+              window.SMD_WATCH.resolveRef(ref).then(function (pid) {
+                if (pid) { try { window.GHIS && GHIS.openPatientById(pid); } catch (e) {} }
+              });
+            } else if (tries < 40) {
+              setTimeout(function () { waitForWatch(tries + 1); }, 250);   // watch-lab.js not loaded yet
+            }
+          })(0);
         } catch (e) {}
       })();
 

@@ -254,19 +254,18 @@ has not enabled it has nothing stored on our servers at all.
 No patient identifiers are placed in SMS or WhatsApp messages, and none are written to logs. The
 service worker is configured never to cache `/api/*`, so no PHI is written to the device cache.
 
-**One exception we found while preparing this annex, and are treating as a defect.** A Lab Watch
-push notification deliberately carries no patient name and no result value, because those would
-appear on a lock screen and pass through Apple's and Google's push relays. But the notification's
-deep link and grouping tag currently carry the patient identifier, so that identifier does transit
-those relays. The alert a doctor sees reads "New lab · Bed 4 · Ward 3", which is correct, while the
-identifier travels invisibly alongside it.
+**One gap we found while preparing this annex, since corrected.** A Lab Watch push notification
+deliberately carries no patient name and no result value, because those would appear on a lock
+screen and pass through Apple's and Google's push relays. The notification's deep link and grouping
+tag, however, used to carry the raw GHIS patient id, so that identifier transited those relays even
+though the alert text withheld it.
 
-Nobody outside the relay operators sees it, and it carries no name or clinical value on its own. It
-is still a hospital identifier leaving hospital control by a route we did not intend, it contradicts
-the rule the code sets for itself, and we are replacing it with an opaque reference that the app
-resolves locally after the doctor authenticates. Stated here rather than quietly corrected, because
-a control that is *documented* as absolute and *implemented* with a gap is worse than one that is
-described accurately.
+It now carries a random, meaningless-on-its-own reference instead. That reference is generated when
+a patient is added to the watch list, stored alongside the entry, and resolved back to the real
+patient id only by the app itself, after the doctor is signed in, via the same authenticated
+GET /api/watch/status this annex describes elsewhere — never by decoding the reference on its own.
+The alert text is unchanged. Stated here rather than quietly corrected, because a control that is
+*documented* as absolute and *implemented* with a gap is worse than one described accurately.
 
 ---
 
@@ -305,6 +304,7 @@ A supervised review can confirm each statement directly in the source:
 | Device-only credential storage (A7.1) | `autofetch.js`, header comment, `storeCred` / `forgetCred`, and the consent sheet |
 | Server-side credential storage (A7.2) | `functions/_watch.js`, header comment and `saveCred` / `getCred` / `deleteCred` |
 | What the watch list holds, encrypted and not (A9) | same file, `addWatch` / `getList` / `setList` and the `SEEN` key |
+| Opaque push reference, not the real patientId | same file, `randRef()` and the `ref` field; `functions/api/watch/[[path]].js`, the push construction; `watch-lab.js`, `resolveRef` |
 
 ---
 
