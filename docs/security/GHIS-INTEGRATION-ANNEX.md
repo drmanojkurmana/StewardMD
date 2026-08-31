@@ -289,8 +289,8 @@ A supervised review can confirm each statement directly in the source:
 | Append-never-overlay for notes | same file, the `surgx-note` route |
 | Session lifetime | same file, `SESSION_TTL_MS` and `SESS_KV_TTL` |
 | Device-only credential storage (A7.1) | `autofetch.js`, header comment, `storeCred` / `forgetCred`, and the consent sheet |
-| Server-side credential storage (A7.2) | `functions/_watch.js`, header comment and `putCred` / `getCred` |
-| What the watch list holds, encrypted and not (A9) | same file, `addWatch` / `getList` and the `SEEN` key |
+| Server-side credential storage (A7.2) | `functions/_watch.js`, header comment and `saveCred` / `getCred` / `deleteCred` |
+| What the watch list holds, encrypted and not (A9) | same file, `addWatch` / `getList` / `setList` and the `SEEN` key |
 
 ---
 
