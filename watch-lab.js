@@ -32,8 +32,34 @@
     return j;
   }
 
+  /* Resolve a push-notification's opaque `ref` back to the real patientId, entirely client-side
+   * after the doctor is signed in. The server deliberately never puts patientId in a push (see
+   * functions/api/watch/[[path]].js) — it puts this `ref` instead, which means nothing outside an
+   * authenticated GET /api/watch/status for this doctor's own account. Retries because the tap can
+   * land before Firebase auth has hydrated (idToken() throws until then) or, just after `add`,
+   * before the write has settled. Resolves null, never throws, so a caller can always no-op safely. */
+  function resolveRef(ref, opts) {
+    opts = opts || {};
+    var maxTries = opts.maxTries || 20, delay = opts.delay || 500, tries = 0;
+    return new Promise(function (resolve) {
+      (function attempt() {
+        tries++;
+        call("status").then(function (j) {
+          var hit = (j.watching || []).filter(function (w) { return w && w.ref === ref; })[0];
+          if (hit) return resolve(hit.patientId);
+          if (tries >= maxTries) return resolve(null);
+          setTimeout(attempt, delay);
+        }).catch(function () {
+          if (tries >= maxTries) return resolve(null);
+          setTimeout(attempt, delay);
+        });
+      })();
+    });
+  }
+
   var SMD_WATCH = {
     status: function () { return call("status"); },
+    resolveRef: resolveRef,
     add: function (patient) { return call("add", "POST", { patient: patient }); },
     remove: function (patientId) { return call("remove", "POST", { patientId: patientId }); },
     forget: function () { return call("forget", "POST", {}); },

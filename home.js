@@ -198,7 +198,7 @@
             : "") +
           '<div class="smd-nav-note">AI advisory — clinician confirmation required.</div>';
         var wardBody = swRow("ghis", "GHIS Ward Sync", "Live inpatient labs & radiology", flag("smd_ghis_ward", true)) +
-          (window.SMD_IS_NATIVE ? swRow("autofetch", "Auto-fetch reports", "Keep a linked patient's labs/imaging fresh on launch & resume · GHIS login stored on THIS device only (Keychain/Keystore), per-patient consent · turn on/off per patient from the Ward Sync bar", flag("smd_autofetch", true)) : "") +
+          (window.SMD_IS_NATIVE ? swRow("autofetch", "Auto-fetch reports", "Keep a linked patient's labs/imaging fresh on launch & resume · GHIS login stored on THIS device only (Keychain/Keystore), per-patient consent · turn on/off per patient from the Ward Sync bar", flag("smd_autofetch", false)) : "") +
           '<button class="smd-nav-btn" data-open-ghis="1">' + svg("hospital", "smd-ico") + ' Open Ward Sync</button>';
         var toolsBody = swRow("whisper", "Clinical Dictation (Beta)", "On-device Whisper voice→text in MaiK Scribe · native app only (model downloads on first use)", flag("smd_whisper_clinical_dictation", false)) +
           ((window.SMD_IMAGE_ENGINE && SMD_IMAGE_ENGINE.settingsHTML)

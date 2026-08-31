@@ -858,6 +858,10 @@
       var rec = byTs[ts]; st.labs.trends.push(Object.assign({ ts: ts }, rec));
       Object.keys(rec).forEach(function (k) { st.labs.recent[k] = rec[k]; st.src[k] = { source: src, ts: ts }; });
     });
+    // Demo Test Hospital only: real Ward Sync bundles never carry `.vitals` (there is no such
+    // source), so this is inert for a real patient. Lets a saved roster entry (a solo unit's
+    // board, not just the one live-open patient) already carry a filled vitals timeline.
+    if (bundle.vitals && bundle.vitals.length) st.vitals = bundle.vitals.slice();
     st.wardSync = { connected: true, lastTs: nowTs(), newUpdate: false, patientId: bundle.patientId || null };
     st.meta = { updated: nowTs() };
     return st;
