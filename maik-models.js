@@ -98,7 +98,7 @@
    * wrong - because that is the part that matters at the bedside and it is easy to leave out. */
   var GUIDE_INTRO = [
     "Answers come from a model stored on your phone. No internet, no AI tokens.",
-    "It answers from its own training, not from StewardMD's knowledge base, so there are no sources or citations and it can be wrong. Verify against local protocol.",
+    "MaiK Lite is StewardMD's own model, trained on the StewardMD Knowledge Base - based on standard medical resources. The larger packs answer from their own general training. Either way answers carry no page citations and can be wrong. Verify against local protocol.",
     "You can keep more than one downloaded and switch between them. Only the selected one runs.",
     "Downloading needs the space shown plus room to run it. Wi-Fi is easier, mobile data works, and a download resumes if it is interrupted."
   ];
@@ -117,39 +117,54 @@
     " On any other phone this is at your own risk. It may hang or crash the phone.";
 
   var PACKS = {
-    /* ENTRY TIER (added 2026-08-27). The 4B packs work, but "works" is doing a lot of lifting: 27 s
-     * cold, 20-25 s warm, first token at 9-12 s on a Pixel 9, and iOS peak memory has never been
-     * measured on an 8 GB phone. This is a genuinely SMALLER model at a sane quant - NOT a 4B
-     * crushed to IQ2, which is the distinction that matters, because a gutted quant keeps sounding
-     * fluent while it corrupts exactly the digits a clinician reads off a screen. Half the
-     * parameters, roughly half the KV cache.
+    /* FLAGSHIP: StewardMD's OWN model (weights replaced 2026-08-31; the pack previously pointed at
+     * the upstream MedPsy 1.7B base). This is our LoRA fine-tune of that base, trained on the
+     * StewardMD Knowledge Base - built from standard medical resources - to answer the way a senior
+     * clinician teaches: direct answer first, reasoning bullets, then the bedside approach. Measured
+     * against the base pipeline on 67 held-out clinician questions: structured answers 0% -> 73%.
      *
-     * NO VISION: qvac/MedPsy-1.7B-GGUF ships no mmproj, so this pack is text-only. visionFile()
-     * returns null for it and listAll() simply never offers it a vision row - both already handle
-     * an absent `vision` key, so nothing else needs to know.
+     * PRESENTATION RULE (owner): never show page numbers or an upstream source name for this pack's
+     * answers. Any source attribution is "StewardMD Knowledge Base - based on standard medical
+     * resources". The engine already strips per-answer sources for on-device packs; the pack text
+     * below carries the attribution instead.
      *
-     * noThink is INHERITED from the 4B on the assumption the family behaves the same way (its
-     * reasoning traces eat the token budget and the doctor gets thinking with no answer). Confirm
-     * against the eval before trusting it. */
+     * Hosted on OUR R2 bucket, not HuggingFace: these weights are not public and never will be, so
+     * the download URL must be one we control. Same bucket the Whisper and KardiQ X models use.
+     *
+     * NO VISION: the base ships no mmproj, so this pack is text-only. visionFile() returns null for
+     * it and listAll() never offers it a vision row - both already handle an absent `vision` key.
+     *
+     * noThink CONFIRMED for this family: the Qwen3-based base emits <think> traces that eat the
+     * token budget; the fine-tune was trained with thinking off. */
     "maik-lite": {
       label: "MAiK Lite",
-      actual: "MedPsy 1.7B (Q4_K_M, imatrix)",
+      actual: "MaiK Lite 1.7B v2 (StewardMD fine-tune of MedPsy 1.7B, Q4_K_M)",
       tier: 0,
+      own: true,
       noThink: true,
-      note: "Smallest and fastest. Runs on phones the larger packs cannot, and answers in a fraction of the time.",
+      note: "StewardMD's own model, trained on the StewardMD Knowledge Base. Smallest download, fastest answers.",
       guide: {
         speed: 3, medical: 2, general: 1,
-        bestFor: "Older or mid-range phones, and any moment where an answer in seconds beats a better answer in half a minute.",
-        why: "A medical model at full Q4_K_M precision rather than a bigger one squeezed into the same space, so it stays quick and light without the silent number errors a crushed quant introduces.",
-        pick: "Start here if MxCore is too slow or will not load at all. Move up to MxCore when you want more depth."
+        bestFor: "Everyday clinical questions, answered the way they are asked at the bedside.",
+        why: "Our own fine-tune, trained on the StewardMD Knowledge Base - based on standard medical resources - so it leads with the answer, then the reasoning, then the bedside approach.",
+        pick: "Start here. StewardMD's own model, the smallest download, and the fastest of the four."
       },
       nCtx: 4096,
-      nPredict: 512,
+      nPredict: 768,   // headroom: the base family sometimes spends tokens reasoning before the answer
+      // The EXACT system prompt this model was fine-tuned with (60% of examples). The shared
+      // SYSTEM's dose example ("2 g IV over 20 min") was parroted as a real dose by this model,
+      // so its own prompt carries no example dose. Consumed by maik-local.js (pk.system).
+      system: "You are MaiK, StewardMD's clinical decision support for doctors, answering from the StewardMD Knowledge Base built on standard medical resources.\n" +
+        "Answer medical questions only. For anything else reply: \"I can only help with medical and clinical questions.\"\n" +
+        "Answer like a senior clinician teaching a junior: open with ONE plain sentence that answers the question, then short bullets with the reasoning or steps, professional terminology, one idea per bullet.\n" +
+        "Answer exactly what was asked and nothing more. Do not give doses unless the question asks for a dose. Never invent a figure: if you are unsure of a number, give the range and say it varies.\n" +
+        "Do not use section labels such as \"Bottom Line\", \"Answer\" or \"Summary\". Do not cite page numbers or book names.\n" +
+        "End with one line: \"Verify against local protocol.\"",
       files: [{
-        name: "medpsy-1.7b-q4_k_m-imat.gguf",
-        url: HF + "/qvac/MedPsy-1.7B-GGUF/resolve/main/medpsy-1.7b-q4_k_m-imat.gguf?download=true",
-        bytes: 1282439360,   // exact, HuggingFace API
-        sha256: "41ee947d9cce72ec657577219fd1798fabeabf0d832217fe23c9d6d3d18d5880"   // lfs.oid from the HF API
+        name: "maik-lite-q4_k_m.gguf",
+        url: R2 + "/maik-lite-q4_k_m.gguf",
+        bytes: 1107408704,   // exact
+        sha256: "695363b1121869e1b2bc8c9cc25fc412ff47e30d6d731e9b9b8c4e218d067bc3"   // v2 weights; VERIFIED against the complete file before upload
       }]
     },
     "maik-mxcore": {
@@ -160,8 +175,8 @@
       guide: {
         speed: 3, medical: 2, general: 1,
         bestFor: "Everyday clinical questions on any supported phone.",
-        why: "Medically tuned, and the lightest of the three on memory.",
-        pick: "Start here. If you install only one, install this one."
+        why: "Medically tuned, and the lightest of the 4B packs on memory.",
+        pick: "Move up here from MaiK Lite when you want more depth and your phone can carry a 2.5 GB model."
       },
       nCtx: 4096,
       nPredict: 512,

@@ -474,9 +474,9 @@
       '<div style="font:500 11.5px/1.45 var(--sans,system-ui);color:var(--slate-soft,#5a7184);margin-top:3px">Ratings compare these options with each other, nothing else.</div>' +
       rows +
       '<div style="font:500 12px/1.5 var(--sans,system-ui);color:var(--slate-soft,#5a7184);border-top:1px solid var(--line,#e2e8f0);padding-top:10px;margin-top:2px">' +
-        "Start with MAiK MxCore: fastest, lightest, and enough for most questions. Neural for stronger " +
-        "medical detail, Horizon for broader general knowledge, Apex on a flagship phone when you want " +
-        "the best answer and can wait a little longer." +
+        "Start with MAiK Lite: StewardMD's own model, the smallest download and the fastest answers. " +
+        "MxCore and Neural for deeper medical detail, Horizon for broader general knowledge, Apex on a " +
+        "flagship phone when you want the best answer and can wait a little longer." +
       "</div>" +
     "</div>";
   }
@@ -636,9 +636,9 @@
              : have ? "On this device, works offline"
              : st.frac > 0 ? "Paused at " + (st.frac * 100).toFixed(0) + "% - tap to resume"
              : "Tap to download " + M.sizeLabel(pid),
-          // FLAGSHIP badge instead of OFFLINE for the heaviest tier, so the hardware requirement is
-          // visible in the picker row itself and not only in the guide.
-          badge: M.PACKS[pid].flagship ? "FLAGSHIP" : "OFFLINE",
+          // STEWARDMD badge for our own model, FLAGSHIP instead of OFFLINE for the heaviest tier
+          // (so the hardware requirement is visible in the picker row itself, not only in the guide).
+          badge: M.PACKS[pid].own ? "STEWARDMD" : M.PACKS[pid].flagship ? "FLAGSHIP" : "OFFLINE",
           flagship: !!M.PACKS[pid].flagship,
           warn: M.DEVICE_WARNING || "",
           pack: pid, needsDownload: !have && !st.downloading,

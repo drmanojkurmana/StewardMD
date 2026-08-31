@@ -502,8 +502,8 @@ function load(env = {}) {
   // Ratings are comparative, not absolute - claiming otherwise would overstate a 4B.
   ok("guide scopes its ratings comparatively, not absolutely", /compare these options with each other, nothing else/i.test(h));
   ok("guide rates all three axes", /Speed/.test(h) && /Medical depth/.test(h) && /General knowledge/.test(h));
-  ok("guide tells a first-timer where to start and why", /Start with MAiK MxCore/.test(h) && /Apex on a flagship phone/.test(h));
-  ok("guide tells a first-timer where to start", /install only one/i.test(h));
+  ok("guide tells a first-timer where to start and why", /Start with MAiK Lite/.test(h) && /Apex on a flagship phone/.test(h));
+  ok("guide names our own model as the starting point", /StewardMD.s own model/i.test(h));
   ok("guide warns Horizon is not medically tuned", /Not medically tuned/i.test(h));
   ok("pips are labelled for assistive tech", /role="img" aria-label="Speed: \d of 3"/.test(h));
 }
