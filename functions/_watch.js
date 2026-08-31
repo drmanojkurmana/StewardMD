@@ -59,14 +59,37 @@ export async function deleteCred(env, uid) { const kv = watchKv(env); if (kv) aw
 export async function getList(env, uid) {
   const kv = watchKv(env); if (!kv) return [];
   let list; try { list = (await kv.get(LIST(uid), "json")) || []; } catch (e) { return []; }
-  // Decrypt the at-rest patient name so callers still get plaintext (behaviour unchanged); older
-  // entries stored `name` in plaintext — keep those as-is for backward compatibility.
-  for (const p of list) { if (p && p.name == null && p.nameEnc) { try { p.name = await dec(env, p.nameEnc); } catch (e) { p.name = ""; } } }
+  // Decrypt the at-rest patient name so callers still get plaintext (behaviour unchanged).
+  let legacy = false;
+  for (const p of list) {
+    if (!p) continue;
+    if (p.name == null && p.nameEnc) { try { p.name = await dec(env, p.nameEnc); } catch (e) { p.name = ""; } }
+    else if (p.name != null && !p.nameEnc) legacy = true;   // stored before at-rest encryption existed
+  }
+  // Migrate legacy plaintext rows on first read rather than leaving them readable until they expire.
+  // setList does the encrypting; this only has to notice and trigger it. Best-effort: a failed
+  // migration must not fail the read the doctor is waiting on.
+  if (legacy) { try { await setList(env, uid, list); } catch (e) { } }
   return list;
 }
+/* The ONE seam every writer routes through, so the plaintext name is stripped here rather than in
+ * each caller. getList decrypts `nameEnc` into `name` for its callers, and addWatch/removeWatch
+ * both read-then-write — so without this, every add or remove wrote the decrypted names of all the
+ * OTHER entries straight back to KV, undoing the at-rest encryption on each list change.
+ * A legacy row (plaintext `name`, no `nameEnc`) is encrypted here on its first write. */
 export async function setList(env, uid, list) {
   const kv = watchKv(env); if (!kv) return;
-  await kv.put(LIST(uid), JSON.stringify(list || []), { expirationTtl: TTL_S });
+  const safe = [];
+  for (const p of (list || [])) {
+    if (!p) { safe.push(p); continue; }
+    const { name, ...rest } = p;
+    if (!rest.nameEnc && name != null) {
+      // Fail closed: if encryption is unavailable, drop the name rather than persist it readable.
+      try { rest.nameEnc = await enc(env, name); } catch (e) { }
+    }
+    safe.push(rest);
+  }
+  await kv.put(LIST(uid), JSON.stringify(safe), { expirationTtl: TTL_S });
 }
 export async function addWatch(env, uid, patient) {
   const list = await getList(env, uid);

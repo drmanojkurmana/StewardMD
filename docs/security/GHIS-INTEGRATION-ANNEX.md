@@ -138,9 +138,15 @@ block is already present so a double tap cannot duplicate it, aborts on a patien
 refuses a zero document id. The principle throughout is **append, never overlay**: the app must not
 be capable of silently destroying a treating doctor's own plan.
 
-> **Item to confirm with GITAM IT during the review:** the current production value of
-> `QUEUE_EMR_WRITE`. Assessment notes and investigation orders write into the live record when it is
-> enabled. We will state the running configuration on the day and will disable it on request.
+> **Stated plainly, because it is the point of the review:** EMR write is **enabled** for the pilot.
+> Assessment notes and investigation orders written through StewardMD reach the live record, under
+> the treating doctor's own session, on that doctor's own patients, and only when the doctor
+> performs the action. It is enabled because a demonstration of an EMR companion that cannot write
+> would not show you the thing you are being asked to evaluate.
+>
+> Two commitments attached to that. It is a single server-side switch, so we can disable every write
+> in one action, immediately, on request. And prescribing stays off regardless, because that gate is
+> separate and remains closed.
 
 ---
 
@@ -234,9 +240,13 @@ Two things about the watch list we would rather state than have found:
   the background poll uses them as its lookup key. A name is meaningless without them, but they are
   hospital identifiers held outside the hospital, and they should be counted as such in any
   assessment.
-- **Some older entries hold the patient name in plaintext.** Name encryption was added after the
-  feature shipped, and existing records were left readable rather than migrated. We will purge or
-  migrate these on request, and would do so before any wider rollout.
+- **The patient name is encrypted, including in older records.** Name encryption was added after the
+  feature first shipped. Preparing this annex we found that it was being undone in practice: reading
+  a list decrypted the names, and adding or removing a patient wrote that list back, so each change
+  re-persisted the other patients' names readable. It is fixed at the single point every write
+  passes through, records written before the fix are re-encrypted the first time they are read, and
+  a name is now dropped rather than stored readable if encryption is ever unavailable. Regression
+  tests assert against the stored bytes, because this defect was invisible from the calling code.
 
 Everything in this table exists only for doctors who explicitly enabled Lab Watch 24/7. A doctor who
 has not enabled it has nothing stored on our servers at all.
