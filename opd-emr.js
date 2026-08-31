@@ -885,7 +885,22 @@
   function root() { var el = document.getElementById("smdOpdEmr"); if (!el) { el = document.createElement("div"); el.id = "smdOpdEmr"; document.body.appendChild(el); } return el; }
   var st = freshState();
   function freshState() { return { loading: true, error: "", tab: "profile", writeOn: false, patient: {}, hospitalId: "", labs: [], radiology: [], medications: [], phone: "", invQuery: "", invResults: [], invDraft: {}, medQuery: "", medResults: [], medDraft: {}, assessLoaded: false, assessLoading: false, assessErr: "", assessVals: {}, report: null, scribeSuggestions: null, scribeStats: null, fieldMic: null, savedConsult: false, dictatedInv: [], voiceTranscript: "", voiceTranscriptEn: "", notesView: "raw", _notesSavedText: "", oncoPlan: null, doseDrawer: null, oncoProtocols: [], oncoProtocolsLoaded: false, protoQuery: "", oncoDraft: null, oncoOverrideDraft: {}, oncoView: "doctor", oncoCycle: null, oncoAdminDraft: {}, oncoClearanceDraft: {} }; }
-  function paint() { root().innerHTML = _render(st); try { initCloseSwipe(); } catch (e) {} }
+  /* Keep the scroll position across a repaint.
+   *
+   * Every action in a consultation repaints the whole overlay with one innerHTML swap, and the new
+   * .oe-canvas starts at scrollTop 0 - so each tap threw the doctor back to the top of the note and
+   * they scrolled down again, mid-consultation, every time. queue.js paint() already does exactly
+   * this for .q-canvas; this is the same fix for the EMR's own scroller.
+   *
+   * Restored synchronously, before the browser paints, so there is no visible jump. Guarded on a
+   * non-zero top so genuinely re-opening a note still starts at the beginning. */
+  function paint() {
+    var r = root();
+    var prev = r.querySelector(".oe-canvas"), top = prev ? prev.scrollTop : 0;
+    r.innerHTML = _render(st);
+    if (top) { var next = r.querySelector(".oe-canvas"); if (next) next.scrollTop = top; }
+    try { initCloseSwipe(); } catch (e) {}
+  }
   function paintKeepFocus(kind) {
     paint();
     try { var el = document.querySelector('#smdOpdEmr [data-oe-inp="' + kind + '-q"]'); if (el) { el.focus(); var v = el.value; el.value = ""; el.value = v; } } catch (e) {}
