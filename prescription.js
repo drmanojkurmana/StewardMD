@@ -646,14 +646,66 @@
       try { showPriceHint(line, r.generic); } catch (e) {}   // lowest-cost brand awareness
     }
     function paint() { Array.prototype.forEach.call(ac.querySelectorAll(".rx-ac-item"), function (b, i) { b.classList.toggle("on", i === active); }); }
+    /* THE SAME DRUG DATABASE THE ICU TREATMENT SEARCH USES.
+     *
+     * This searched MEDDRUGS.searchIndex alone - the on-device ward formulary, ~70 drugs - so most
+     * molecules simply "were not in the database" when typed here, while ICU's Add Treatment search
+     * found them at once. Two search bars over two different datasets, inside one app.
+     *
+     * Same arrangement as icu.js txRemoteSearch, deliberately: the local formulary answers instantly
+     * and is the only thing that works with no signal, and the server's hits (MEDAPI, the full
+     * composition index) merge in when they arrive. Debounced, and a reply for a query the doctor
+     * has already typed past is dropped rather than painted over what they are reading.
+     */
+    var remoteRows = [], remoteQ = "", remoteT = null;
+    function remoteSearch(q, fromBrand) {
+      if (q.length < 2 || !window.MEDAPI || !MEDAPI.searchCompositions) return;
+      if (q === remoteQ) return;                        // already fetched or in flight for this query
+      remoteQ = q;
+      if (remoteT) { try { clearTimeout(remoteT); } catch (e) {} }
+      remoteT = setTimeout(function () {
+        remoteT = null;
+        try {
+          MEDAPI.searchCompositions(q, 8).then(function (d) {
+            if (q !== remoteQ) return;                  // newer query typed - discard this reply
+            remoteRows = ((d && d.results) || []).map(function (x) {
+              // `brands` from the API is a COUNT, not a list, so it is kept as one and never handed
+              // to fill() as though it were an array of brand names.
+              return { generic: x.composition, brands: [], dose: "", cls: x["class"] || "",
+                       brandCount: Number(x.brands) || 0, remote: true };
+            });
+            paintList(q, fromBrand);
+          }, function () {});
+        } catch (e) {}
+      }, 220);
+    }
+
     function search(q, fromBrand) {
       q = (q || "").trim();
-      if (!window.MEDDRUGS || !MEDDRUGS.searchIndex || q.length < 2) { closeAc(); return; }
-      rows = MEDDRUGS.searchIndex(q).slice(0, 8); active = -1;
+      if (q.length < 2) { remoteRows = []; remoteQ = ""; closeAc(); return; }
+      remoteSearch(q, fromBrand);
+      paintList(q, fromBrand);
+    }
+
+    function paintList(q, fromBrand) {
+      var local = (window.MEDDRUGS && MEDDRUGS.searchIndex) ? MEDDRUGS.searchIndex(q).slice(0, 8) : [];
+      // Local first - it carries doses and real brand names - then server molecules the formulary
+      // does not have. Deduped on the generic, so a drug never appears twice.
+      var seen = {}, merged = [];
+      local.forEach(function (r) { seen[String(r.generic || "").toLowerCase()] = 1; merged.push(r); });
+      remoteRows.forEach(function (r) {
+        var k = String(r.generic || "").toLowerCase();
+        if (!k || seen[k] || merged.length >= 10) return;
+        seen[k] = 1; merged.push(r);
+      });
+      rows = merged; active = -1;
       if (!rows.length) { closeAc(); return; }
       if (!ac) { ac = document.createElement("div"); ac.className = "rx-ac"; r1.insertAdjacentElement("afterend", ac); }
       ac.innerHTML = rows.map(function (r, i) {
+        // A local row lists real brand names; a server row has only a count, so it says how many
+        // rather than pretending to name them.
         var brands = (r.brands || []).slice(0, 3).join(", ");
+        if (!brands && r.remote && r.brandCount) brands = r.brandCount + (r.brandCount === 1 ? " brand" : " brands");
         return '<button type="button" class="rx-ac-item" data-i="' + i + '"><span class="rx-ac-g">' + esc(r.generic) + '</span>' + (brands ? ' <span class="rx-ac-b">' + esc(brands) + '</span>' : '') + '<span class="rx-ac-d">' + esc(r.dose || '') + '</span></button>';
       }).join("");
       Array.prototype.forEach.call(ac.querySelectorAll(".rx-ac-item"), function (b) {

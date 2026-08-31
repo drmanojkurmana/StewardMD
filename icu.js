@@ -8688,8 +8688,8 @@
     return out;
   }
   /* THE REAL DRUG DATABASE. MEDDRUGS._list above is only the 72-drug on-device ward formulary, which
-   * is why most drugs "were not in the database" when searched here. The Drug Index the prescription
-   * pad and the Drugs Database browser use is SERVER-backed - MEDAPI.searchCompositions() - covering
+   * is why most drugs "were not in the database" when searched here. The Drugs Database browser is
+   * SERVER-backed - MEDAPI.searchCompositions() - covering
    * every molecule with its brands. Both are used: the local formulary answers instantly and is the
    * only thing that works offline, and the server's hits are merged in when they arrive.
    * Debounced, and a reply for a query the doctor has already typed past is discarded. */
