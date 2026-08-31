@@ -71,6 +71,34 @@ function corsHeaders(request) {
 }
 function json(obj, status, request) { return new Response(JSON.stringify(obj), { status: status || 200, headers: Object.assign({ "Content-Type": "application/json", "Cache-Control": "no-store" }, corsHeaders(request)) }); }
 async function readBody(request) { try { return await request.json(); } catch (e) { return {}; } }
+
+/* An authorization refusal, in words the person at the front desk can act on.
+ *
+ * authorizeOrgAccess already knows which refusal this is; every caller used to flatten it to
+ * "forbidden", so the commonest failure by far - a member whose role defaulted to "viewer", which
+ * holds queue.view and nothing else - looked identical to being signed out or in the wrong clinic.
+ * The role is included because the owner's next question is always "what role does she have?".
+ * Carries no patient data: an org id and a role name only. */
+const AZ_SAY = {
+  org_not_found: "That clinic no longer exists, or the app is pointed at the wrong one.",
+  not_a_member: "You are not on this clinic's staff list. Ask the owner to add you.",
+  org_mismatch: "You are signed in to a different clinic. Sign out and sign in to this one.",
+  out_of_scope: "Your access is limited to certain departments or rooms, and this patient is outside it.",
+  forbidden: "Your role cannot check patients in. Ask the owner to grant a role that can.",
+};
+function azRefusal(az) {
+  const reason = (az && az.reason) || "forbidden";
+  const out = { ok: false, error: reason, message: AZ_SAY[reason] || AZ_SAY.forbidden };
+  if (az && az.role) {
+    out.role = az.role;
+    if (reason === "forbidden") {
+      out.message = 'Your role here is "' + az.role + '", which cannot check patients in' +
+        (az.role === "viewer" ? " - a member with no role granted is read-only." : ".") +
+        " Ask the owner to change it.";
+    }
+  }
+  return out;
+}
 function today() { try { return new Date().toISOString().slice(0, 10); } catch (e) { return ""; } }
 
 const staffEnabled = (env) => env && env.QUEUE_STAFF_ENABLED === "1";
@@ -277,7 +305,12 @@ export async function onRequest(context) {
       const pOrg = url.searchParams.get("orgId") || body.orgId || "";
       if (sub === "register" && method === "POST") {
         const az = await ORG.authorizeOrg(env, actor, pOrg, CAPS.QUEUE_ADD);
-        if (!az.ok) return json({ ok: false, error: "forbidden" }, 403, request);
+        /* Say WHICH refusal this is. authorizeOrgAccess already distinguishes org_not_found,
+         * not_a_member, forbidden (with the role) and out_of_scope - and this threw all of it away
+         * and answered a bare "forbidden". So a nurse whose membership had defaulted to "viewer"
+         * saw check-in fail with nothing to act on, and neither she nor the owner could tell that
+         * from being in the wrong clinic or not signed in. The reason names the fix. */
+        if (!az.ok) return json(azRefusal(az), az.reason === "org_not_found" ? 404 : 403, request);
         const org = await ORG.getOrg(env, pOrg);
         if (!org) return json({ ok: false, error: "org_not_found" }, 404, request);
         const r = await PAT.registerPatient(env, org, body, actor.id || "");
@@ -577,7 +610,10 @@ export async function onRequest(context) {
         if (sub === "restore") { await ORG.setMemberActive(env, body.orgId, body.identity, true, actor.id); return json({ ok: true }, 200, request); }
         if (sub === "reset") { await ORG.resetMemberAccess(env, body.orgId, body.identity, actor.id); return json({ ok: true }, 200, request); }
         if (body.remove) { await ORG.removeMembership(env, body.orgId, body.identity, actor.id); return json({ ok: true }, 200, request); }
-        return json({ ok: true, member: await ORG.setMembership(env, body.orgId, body.identity, body, actor.id) }, 200, request);
+        // setMembership refuses a create with no role rather than writing a silent read-only viewer.
+        const saved = await ORG.setMembership(env, body.orgId, body.identity, body, actor.id);
+        if (saved && saved.ok === false) return json(saved, 400, request);
+        return json({ ok: true, member: saved }, 200, request);
       }
       if (seg === "onboard" && sub === "clinic") {   // private-clinic quick setup: native org + one room
         if (needAccount()) return json({ ok: false, error: "account_required" }, 403, request);
