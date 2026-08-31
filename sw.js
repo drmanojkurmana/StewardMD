@@ -16,7 +16,7 @@
 /* Both sides bumped this. main is the base; this branch's App Lock / splash marker is appended. The key
  * is one opaque string, so keeping either alone leaves the other deploy's clients on a stale
  * cache. Carry every marker. */
-var CACHE = "stewardmd-nb-consult1-onco6-atlas2-maikllm1-wr1-clinix29-ccsguard-surgx12-maikart1-pglog5-ack1-pgl1-vclaim1-fcux1-proevt1-b25-splashv2h-ecgatlas1-otaleak-rxfocus1-optsub1-gcs1-insask1-oncqis-sync1-ux9-icons1-gestnav1-scorefill1-iob1-lytes1-rxscan1-applock11-afoptin1-watchref1-demohosp1";
+var CACHE = "stewardmd-nb-consult1-onco6-atlas2-maikllm1-wr1-clinix29-ccsguard-surgx12-maikart1-pglog5-ack1-pgl1-vclaim1-fcux1-proevt1-b25-splashv2h-ecgatlas1-otaleak-rxfocus1-optsub1-gcs1-insask1-oncqis-sync1-ux9-icons1-gestnav1-scorefill1-iob1-lytes1-rxscan1-applock11-afoptin1-watchref1-demohosp2";
 
 self.addEventListener("install", function () {
   self.skipWaiting();

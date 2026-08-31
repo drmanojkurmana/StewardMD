@@ -85,7 +85,7 @@ test("lab dates are dynamically 'today', not a stale hardcoded date", () => {
   assert.ok(anyDate.includes(year), `expected the current year (${year}) in "${anyDate}"`);
 });
 
-test("ghis-ward.js: demoFetch answers /patients, /lab and /lab-detail from local data only", () => {
+function loadDemoFetch() {
   const start = WARD_SRC.indexOf("function demoFetch(path) {");
   assert.ok(start > -1, "demoFetch must exist in ghis-ward.js");
   const end = WARD_SRC.indexOf("\n      }", start) + "\n      }".length;
@@ -94,12 +94,18 @@ test("ghis-ward.js: demoFetch answers /patients, /lab and /lab-detail from local
   const sandbox = { module: { exports: {} } };
   vm.createContext(sandbox);
   vm.runInContext(wrapped, sandbox);
-  const demoFetch = sandbox.module.exports({
+  return sandbox.module.exports;
+}
+
+test("ghis-ward.js: demoFetch answers /patients, /lab and /lab-detail from local data only", () => {
+  const load = loadDemoFetch();
+  const demoFetch = load({
     patients: [{ patientId: "TH1", patientFirstName: "Test Patient" }],
     labsByPatientId: { TH1: [
       { test: "Haemoglobin", result: "11", units: "g/dL", low: 12, high: 16, date: "01-JAN-2026 08:00" },
       { test: "Serum Creatinine", result: "2.0", units: "mg/dL", low: 0.6, high: 1.3, date: "01-JAN-2026 08:00" },
     ] },
+    imagingByPatientId: {}, imagingByResultId: {},
   });
   return Promise.resolve()
     .then(() => demoFetch("/patients"))
@@ -107,4 +113,66 @@ test("ghis-ward.js: demoFetch answers /patients, /lab and /lab-detail from local
     .then((r) => { assert.equal(r.orders.length, 2, "expected one CBC-style order and one chemistry-style order"); return demoFetch("/lab-detail?renderId=demo-cbc-TH1&patientId=TH1"); })
     .then((r) => { assert.equal(r.tests.length, 1); assert.equal(r.tests[0].test, "Haemoglobin"); return demoFetch("/lab-detail?renderId=demo-chem-TH1&patientId=TH1"); })
     .then((r) => { assert.equal(r.tests.length, 1); assert.equal(r.tests[0].test, "Serum Creatinine"); });
+});
+
+test("ghis-ward.js: demoFetch answers /radiology and /radiology-report", () => {
+  const load = loadDemoFetch();
+  const demoFetch = load({
+    patients: [], labsByPatientId: {},
+    imagingByPatientId: { TH1: [{ resultid: "R1", studyName: "USG Abdomen", date: "01-JAN-2026 08:00", report: "Normal study.", doctor: "Radiology" }] },
+    imagingByResultId: { R1: { resultid: "R1", studyName: "USG Abdomen", date: "01-JAN-2026 08:00", report: "Normal study.", doctor: "Radiology" } },
+  });
+  return Promise.resolve()
+    .then(() => demoFetch("/radiology?patientId=TH1"))
+    .then((r) => { assert.equal(r.orders.length, 1); assert.equal(r.orders[0].resultid, "R1"); assert.equal(r.orders[0].description, "USG Abdomen"); return demoFetch("/radiology-report?resultid=R1&type=manual"); })
+    .then((r) => { assert.equal(r.report, "Normal study."); assert.equal(r.testName, "USG Abdomen"); });
+});
+
+test("REGRESSION: every patient has exactly two imaging reports (USG + CECT Abdomen)", () => {
+  const t = loadDataset();
+  t.branches.forEach((b) => b.patients.forEach((p) => {
+    assert.equal(p.imaging.length, 2, p.name + " should have exactly 2 imaging reports");
+    const names = p.imaging.map((im) => im.studyName).sort().join(",");
+    assert.equal(names, "CECT Abdomen,USG Abdomen");
+    p.imaging.forEach((im) => {
+      assert.ok(im.resultid, "every imaging report needs a resultid");
+      assert.ok(im.report && im.report.length > 5, "every imaging report needs real report text");
+    });
+  }));
+});
+
+test("REGRESSION: every patient carries the full panel across all 6 days, not a partial vignette subset", () => {
+  const t = loadDataset();
+  let checked = 0;
+  t.branches.forEach((b) => b.patients.forEach((p) => {
+    checked++;
+    const byTest = {};
+    p.labs.forEach((l) => { byTest[l.test] = (byTest[l.test] || 0) + 1; });
+    const testNames = Object.keys(byTest);
+    assert.ok(testNames.length >= 20, p.name + " should carry the full ~23-test panel, got " + testNames.length);
+    testNames.forEach((name) => assert.equal(byTest[name], 6, p.name + "'s " + name + " should have exactly 6 dated days"));
+  }));
+  assert.equal(checked, 25);
+});
+
+test("REGRESSION: the StewardMD MICU branch has 5 named residents, each with vitals, and no one else does", () => {
+  const t = loadDataset();
+  const micu = t.branches.find((b) => b.dept === "StewardMD MICU");
+  assert.ok(micu, "the ICU branch must be renamed to StewardMD MICU");
+  const residents = new Set(micu.patients.map((p) => p.doctor));
+  assert.equal(residents.size, 5, "each StewardMD MICU patient should have a distinct named resident");
+  micu.patients.forEach((p) => {
+    assert.ok(p.vitals && p.vitals.length === 9, p.name + " should have a 3-day (9-reading) vitals timeline");
+    p.vitals.forEach((v) => assert.ok(typeof v.ts === "number" && v.ts > 0, "every vitals row needs a real timestamp"));
+  });
+  t.branches.filter((b) => b.dept !== "StewardMD MICU").forEach((b) => b.patients.forEach((p) => {
+    assert.equal(p.vitals, null, p.name + " (outside the ICU) should not have a vitals feed — Ward Sync never supplies one");
+  }));
+});
+
+test("REGRESSION: no doctor name is pre-fixed with 'Dr.' (the render layer adds its own, or it doubles up)", () => {
+  const t = loadDataset();
+  t.branches.forEach((b) => b.patients.forEach((p) => {
+    assert.ok(!/^dr\.?\s/i.test(p.doctor), p.name + "'s doctor field \"" + p.doctor + "\" already starts with Dr. — the UI would show \"Dr. Dr. \"");
+  }));
 });
