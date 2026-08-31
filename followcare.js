@@ -379,7 +379,16 @@
         h("button", { "class": "fc-btn", style: "background:linear-gradient(135deg,#0e7d70,#0b544c);display:flex;align-items:center;justify-content:center;gap:7px;padding:12px 10px;line-height:1.2", onclick: function () { renderMaitri(body); }, html: '<img src="/maitri-logo.png" alt="" aria-hidden="true" style="width:19px;height:19px;flex:0 0 auto;object-fit:contain;filter:brightness(0) invert(1)">' + '<span style="font-weight:800">MAiTRI</span>' }),
         h("button", { "class": "fc-btn", style: "padding:12px 10px;line-height:1.2", onclick: function () { renderEnroll(body); }, text: "+ Enroll a patient" })
       ]));
-      if (voiceEnabled()) body.appendChild(h("button", { "class": "fc-btn sec", style: "margin-top:8px", onclick: function () { renderVoiceSettings(body); }, text: "Voice & ambulance settings" }));
+      /* Always reachable, and deliberately NOT behind voiceEnabled().
+       *
+       * The gate was circular: this screen is where voice gets turned on, so hiding it until voice
+       * is already on left no way in. smd_followcare_voice defaults false and lives in
+       * localStorage, so a fresh install (or an iOS reinstall, which wipes the container) hid the
+       * settings - and with them the test call - with nothing on screen explaining why.
+       *
+       * Opening a settings screen grants nothing: the server still checks owner auth on every voice
+       * action and per-hospital enablement on every call. */
+      body.appendChild(h("button", { "class": "fc-btn sec", style: "margin-top:8px", onclick: function () { renderVoiceSettings(body); }, text: "Voice & ambulance settings" }));
       if (!list.length) { body.appendChild(h("div", { "class": "fc-empty", text: "No active recovery episodes yet. Enroll a discharged patient to begin." })); return; }
       body.appendChild(h("div", { "class": "fc-sect", text: "RECOVERY BOARD" }));
       var rows = list.map(function (ep) { var r = episodeRow(ep); body.appendChild(r); return r; });
@@ -666,7 +675,14 @@
         API.voiceTest(ph, tPath.value, "Test Patient").then(function (r) {
           tBtn.disabled = false; tBtn.textContent = "Place test call";
           var b = (r && r.body) || {};
-          if (b.ok) { toast("Test call queued — your phone should ring shortly"); return; }
+          /* Queued and DIALLED are different things, and saying "queued" for a call the dialer
+           * never took is how this looked fine while no phone rang. The server reports which. */
+          if (b.ok && b.dialed) { toast("Calling now — your phone should ring"); return; }
+          if (b.ok) {
+            tErr.appendChild(h("div", { "class": "fc-err",
+              text: "Queued, but the dialer did not pick it up" + (b.dialError ? " (" + b.dialError + ")" : "") + ". The call was not placed." }));
+            return;
+          }
           // Name the refusal instead of a generic failure: 403 here means the account is not an owner.
           tErr.appendChild(h("div", { "class": "fc-err",
             text: (r && r.status === 403) ? "Only an owner account can place a test call."
