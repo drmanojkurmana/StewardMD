@@ -459,6 +459,8 @@
     return ensureLoaded(packId).then(function () {
       var prompt = buildPrompt(pkg, packId);
       if (!prompt) return { error: "no-package" };
+      // Retry-after-blank: nudge the model out of the deliberation attractor it fell into.
+      if (opts && opts.nudge) prompt += "\nGive the final answer directly, no deliberation.";
 
       // Stream tokens into the caller's typewriter. Accumulate: onDelta wants the full text so far.
       var attach = (typeof onDelta === "function" && L.addListener)
@@ -527,7 +529,14 @@
         if (r && r.error) return r;
         var text = stripReasoning((r && r.text) || acc || "");
         // Everything the model produced was reasoning (unterminated think block ate the
-        // budget): say so instead of rendering an empty bubble.
+        // budget). Measured on-device 2026-08-31: a second pass with sampling jitter and a
+        // directness nudge recovers most of these, so retry ONCE before surfacing an error.
+        // Text path only: an image answer costs a full vision prefill and is not think-prone.
+        if (!text && !images.length && !(opts && opts._retried)) {
+          var ro = { _retried: true, temperature: 0.35, nudge: true, pack: packId };
+          if (opts) { for (var k in opts) { if (!(k in ro)) ro[k] = opts[k]; } }
+          return answer(pkg, ro, onDelta);
+        }
         if (!text) return { error: EMPTY_ANSWER };
         return {
           text: text,
