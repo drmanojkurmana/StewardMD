@@ -158,8 +158,11 @@ resume, so trends update without the doctor reopening Ward Sync.
   store: **iOS Keychain / Android Keystore**, via the platform secure-storage plugin.
 - **Native applications only.** The browser fallback is not a secure store, so it is never used to
   hold a real credential; the feature is inert outside the native app.
-- **Per-patient consent.** Enabling it presents an explicit tick-box, "I consent to storing my GHIS
-  login securely on this device to auto-fetch this patient's reports." It cannot be enabled without it.
+- **Off by default, and two separate opt-ins.** The feature itself is off until the doctor enables it
+  in Settings. Enabling it stores nothing. A credential is stored only when the doctor then ticks an
+  explicit per-patient consent box: "I consent to storing my GHIS login securely on this device to
+  auto-fetch this patient's reports."
+- **Fails closed.** If the setting cannot be read, the feature stays off rather than becoming available.
 - **Turning it off deletes the credential** immediately, and the app confirms that it has: "Auto-fetch
   off; saved login removed."
 
