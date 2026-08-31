@@ -135,7 +135,7 @@
     if (document.getElementById("xa-css")) return;
     var s = document.createElement("style"); s.id = "xa-css";
     s.textContent = [
-      "#xaGate{position:fixed;inset:0;z-index:10050;display:none;align-items:center;justify-content:center;padding:20px;background:rgba(6,12,18,.55);-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px)}",
+      "#xaGate{position:fixed;inset:0;z-index:100300;display:none;align-items:center;justify-content:center;padding:20px;background:rgba(6,12,18,.55);-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px)}",
       "#xaGate.on{display:flex}",
       "#xaGate .xa-card{width:100%;max-width:420px;background:var(--panel,#fff);color:var(--ink,#14202b);border:1px solid var(--line,#d7dee3);border-radius:18px;padding:22px 20px 18px;box-shadow:0 24px 60px -24px rgba(0,0,0,.5);font-family:var(--sans,system-ui)}",
       "#xaGate .xa-ic{width:56px;height:56px;border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:28px;margin:0 auto 12px;background:var(--teal-soft,#e4f4f1)}",

@@ -41,7 +41,8 @@
     steth: '<path d="M4.5 3v6a4.5 4.5 0 0 0 9 0V3"/><path d="M4.5 3H3M13.5 3H12"/><path d="M9 13.5V16a5 5 0 0 0 10 0v-1.2"/><circle cx="19" cy="12.5" r="2.2"/>',
     watch: '<rect x="6" y="6" width="12" height="12" rx="3"/><path d="M9 6l.7-3h4.6l.7 3M9 18l.7 3h4.6l.7-3"/><path d="M12 9v3l2 1"/>',
     refresh: '<path d="M21 12a9 9 0 1 1-3-6.7"/><path d="M21 4v5h-5"/>',
-    download: '<path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/>'
+    download: '<path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/>',
+    flask: '<path d="M10 2v5.5L4.4 18.5A2 2 0 0 0 6.1 21h11.8a2 2 0 0 0 1.7-2.5L14 7.5V2h-4Z"/><path d="M8.5 2h7M7 14h10"/>'
   };
   function svg(name) {
     return '<svg viewBox="0 0 24 24" class="sbr-ic"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">' + (ICON[name] || "") + "</g></svg>";
@@ -65,6 +66,7 @@
     },
     ack: function () { if (window.openAbout) openAbout(); else if (window.SB && SB.modal) SB.modal("aboutModal"); else if (window.openAck) openAck(); else toast("Acknowledgements loading…"); },
     offlinedb: function () { if (window.SMD_OFFLINEDB && SMD_OFFLINEDB.open) SMD_OFFLINEDB.open(); else toast("Offline drug database — available in the app"); },
+    experimental: function () { closeSB(); setTimeout(openExperimentalPage, 60); },
     notifications: function () {
       var b = document.getElementById("v3BellBtn"); if (b) return b.click();
       if (window.SMD_openNotifications) return SMD_openNotifications();
@@ -92,15 +94,15 @@
   // Advanced & Experimental — every working toggle from the old Settings group,
   // preserved so nothing is lost in the lean redesign. Each maps to the same
   // global / localStorage key home.js used.
-  var TOGGLES = [
+  var ADV_TOGGLES = [
     { id: "reason", title: "Reasoning v2", sub: "Live differential in the workflow", def: true, key: "smd_reason_v2" },
     { id: "safety", title: "Organ-safety overlay", sub: "Renal / hepatic / QT flags on advice", def: true, key: "smd_safety_overlay" },
-    { id: "ai", title: "Ask Maik — Medical AI", sub: "Grounded knowledge assistant", def: true, key: "smd_ai" },
+    { id: "ai", title: "Ask Maik - Medical AI", sub: "Grounded knowledge assistant", def: true, key: "smd_ai" },
     { id: "ghis", title: "GHIS Ward Sync", sub: "Live inpatient labs & radiology", def: true, key: "smd_ghis_ward" },
-    { id: "whisper", title: "Clinical Dictation (Beta)", sub: "On-device Whisper voice→text · native app only", def: false, key: "smd_whisper_clinical_dictation" },
-    { id: "clinic", title: "My Clinic (on-device EMR)", sub: "Personal clinic: local patients + consults, back up to Drive", def: false, key: "smd_personal_clinic" },
-    { id: "maikperf", title: "Show AI response time", sub: "Diagnostics under each MaiK answer", def: false, key: "smd_maik_perf" },
-    // AI imaging modules — all gated OFF by default; turned on ONLY here (Experimental section). Home tile appears on reload.
+    { id: "clinic", title: "My Clinic (on-device EMR)", sub: "Personal clinic: local patients + consults, back up to Drive", def: false, key: "smd_personal_clinic" }
+  ];
+
+  var EXP_TOGGLES = [
     { id: "fundx", title: "FundX AI · Retinal (Beta)", sub: "AI-guided fundus imaging · reload to apply", def: false, key: "smd_fundx" },
     { id: "kardiox", title: "KardiQ X AI · ECG (Beta)", sub: "On-device 12-lead ECG interpretation · reload to apply", def: false, key: "smd_kardiox" },
     { id: "thorex", title: "ThoreX AI · Chest X-ray (Beta)", sub: "On-device chest X-ray interpretation · reload to apply", def: false, key: "smd_thorex" },
@@ -110,8 +112,14 @@
     { id: "clinix", title: "CliniX · Clinical learning (Beta)", sub: "Bedside skills for students · reload to apply", def: true, key: "smd_clinix" },
     { id: "clinixtutor", title: "MaiK Examiner (Beta)", sub: "AI review inside CliniX Viva, only when the free keyword grade can't judge it", def: true, key: "smd_clinix_tutor" },
     { id: "surgx", title: "SURGX · Surgical Intelligence (Beta)", sub: "Notes, protocols, procedures, evidence, cases · reload to apply", def: true, key: "smd_surgx" },
-    { id: "surgxdraft", title: "SURGX draft content", sub: "Show surgical content that is not yet clinician-approved. Turn OFF before any non-tester release", def: true, key: "smd_surgx_draft" }
+    { id: "surgxdraft", title: "SURGX draft content", sub: "Show surgical content that is not yet clinician-approved. Turn OFF before any non-tester release", def: true, key: "smd_surgx_draft" },
+    { id: "whisper", title: "Clinical Dictation (Beta)", sub: "On-device Whisper voice→text · native app only", def: false, key: "smd_whisper_clinical_dictation" },
+    { id: "oncoprotolib", title: "Oncology Protocol Library (Beta)", sub: "Draft standard protocol library in oncology workbench", def: true, key: "smd_onco_protolib" },
+    { id: "maikperf", title: "Show AI response time", sub: "Diagnostics under each MaiK answer", def: false, key: "smd_maik_perf" }
   ];
+
+  var TOGGLES = ADV_TOGGLES.concat(EXP_TOGGLES);
+
   function setToggle(id, key, on) {
     try {
       if (id === "reason" && window.SMD_REASON) SMD_REASON.setFlag(on);
@@ -119,7 +127,8 @@
       else if (id === "ai" && window.SMD_AI) SMD_AI.setFlag(on);
       else if (id === "expanded" && window.SMD_setKbExpanded) SMD_setKbExpanded(on);
       else if (id === "ghis" && window.SMD_setGhis) SMD_setGhis(on);
-      else localStorage.setItem(key, on ? "1" : "0");   // whisper, maikperf — flag-only
+      else if (id === "oncoprotolib") localStorage.setItem("smd_onco_protolib", on ? "1" : "0");
+      else localStorage.setItem(key, on ? "1" : "0");   // whisper, maikperf, etc.
     } catch (e) {}
   }
 
@@ -211,7 +220,46 @@
       ".sbr-set-ov .sbr-sw.on{background:var(--teal,#0e6e63)}",
       ".sbr-set-ov .sbr-sw>span{position:absolute;top:3px;left:3px;width:18px;height:18px;border-radius:50%;background:#fff;transition:left .15s}",
       ".sbr-set-ov .sbr-sw.on>span{left:19px}",
-      ".sbr-set-ov .sbr-note{font:500 11.5px/1.4 var(--sans,system-ui);color:var(--slate-soft,#5a7184);padding:6px 4px}"
+      ".sbr-set-ov .sbr-note{font:500 11.5px/1.4 var(--sans,system-ui);color:var(--slate-soft,#5a7184);padding:6px 4px}",
+      /* ── Experimental section & subpage styling ── */
+      ".sbr-set-ov.sbr-exp-ov{z-index:100250}",
+      "#xaGate{z-index:100300!important}",
+      ".sbr-badge-beta{background:#fef3c7!important;color:#92400e!important;border:1px solid rgba(245,158,11,.3)!important}",
+      "body.dark .sbr-badge-beta{background:rgba(245,158,11,.18)!important;color:#fbbf24!important;border-color:rgba(245,158,11,.3)!important}",
+      ".sbr-badge-ok{background:#dcfce7!important;color:#166534!important;border:1px solid rgba(34,197,94,.3)!important}",
+      "body.dark .sbr-badge-ok{background:rgba(34,197,94,.18)!important;color:#4ade80!important;border-color:rgba(34,197,94,.3)!important}",
+      ".sbr-badge-lock{background:#f1f5f9!important;color:#64748b!important;border:1px solid rgba(100,116,139,.2)!important}",
+      "body.dark .sbr-badge-lock{background:rgba(100,116,139,.18)!important;color:#94a3b8!important;border-color:rgba(100,116,139,.3)!important}",
+      ".sbr-callout{display:flex;align-items:flex-start;gap:12px;padding:14px 16px;margin:6px 0 14px;background:rgba(14,110,99,.08);border:1px solid rgba(14,110,99,.22);border-radius:14px;color:var(--ink,#14202b)}",
+      "body.dark .sbr-callout{background:rgba(20,184,166,.1);border-color:rgba(20,184,166,.25);color:#e8edf2}",
+      ".sbr-callout-ic{font-size:22px;line-height:1;flex:0 0 auto;color:var(--teal,#0e6e63)}",
+      ".sbr-callout-text{flex:1;min-width:0;font:500 12.5px/1.45 var(--sans,system-ui)}",
+      ".sbr-callout-text b{font-weight:700;color:var(--teal,#0e6e63)}",
+      "body.dark .sbr-callout-text b{color:#2dd4bf}",
+      ".sbr-exp-desc{padding:0 4px 8px;font:500 12px/1.4 var(--sans,system-ui);color:var(--slate-soft,#5a7184)}",
+      ".sbr-xa-row{display:flex;align-items:center;gap:12px;padding:13px 14px;border-top:1px solid var(--line,#d7dee3)}",
+      ".sbr-card .sbr-xa-row:first-child{border-top:0}",
+      ".sbr-xa-ic{font-size:20px;line-height:1;flex:0 0 auto;width:28px;text-align:center}",
+      ".sbr-xa-info{flex:1;min-width:0}",
+      ".sbr-xa-title{display:flex;align-items:center;gap:8px;font:600 14px/1.3 var(--sans,system-ui);color:var(--ink,#14202b);flex-wrap:wrap}",
+      ".sbr-xa-desc{font:500 11.5px/1.35 var(--sans,system-ui);color:var(--slate-soft,#5a7184);margin-top:2px}",
+      ".sbr-xa-btn{flex:0 0 auto;padding:7px 13px;border-radius:8px;font:700 12px/1 var(--sans,system-ui);cursor:pointer;border:none;transition:opacity .15s}",
+      ".sbr-xa-btn:active{opacity:.7}",
+      ".sbr-xa-btn.pri{background:var(--teal,#0e6e63);color:#fff}",
+      ".sbr-xa-btn.sec{background:var(--teal-soft,#e3f1ee);color:var(--teal,#0e6e63);border:1px solid rgba(14,110,99,.25)}",
+      "body.dark .sbr-xa-btn.sec{background:rgba(20,184,166,.15);color:#2dd4bf;border-color:rgba(20,184,166,.3)}",
+      ".sbr-dev-badge{display:flex;align-items:center;gap:6px;margin:10px 4px 4px;padding:9px 12px;border-radius:10px;background:#fef3c7;border:1px solid rgba(245,158,11,.3);color:#92400e;font:600 12px/1.3 var(--sans,system-ui)}",
+      "body.dark .sbr-dev-badge{background:rgba(245,158,11,.15);border-color:rgba(245,158,11,.3);color:#fbbf24}",
+      /* Sub-component button styles inside settings overlay */
+      ".sbr-set-ov .smd-nav-btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;width:100%;margin-top:8px;padding:10px 14px;border:1px solid var(--line,#d7dee3);border-radius:10px;background:var(--panel,#fff);color:var(--ink,#14202b);font:600 13px/1.3 var(--sans,system-ui);cursor:pointer;transition:all .15s}",
+      ".sbr-set-ov .smd-nav-btn:hover{background:var(--paper,#eef2f0)}",
+      ".sbr-set-ov .smd-nav-btn.on{border-color:var(--teal,#0e6e63);color:var(--teal,#0e6e63);background:var(--teal-soft,#e3f1ee)}",
+      "body.dark .sbr-set-ov .smd-nav-btn{background:#182838;border-color:#2b3e52;color:#e8edf2}",
+      "body.dark .sbr-set-ov .smd-nav-btn:hover{background:#22364a}",
+      "body.dark .sbr-set-ov .smd-nav-btn.on{border-color:#14b8a6;color:#14b8a6;background:rgba(20,184,166,.15)}",
+      "body.dark .sbr-set-ov .ie-seg [role=radiogroup],body.dark .sbr-set-ov .me-seg [role=radiogroup]{background:#132030!important;border-color:#233242!important}",
+      "body.dark .sbr-set-ov [data-ie-opt],body.dark .sbr-set-ov [data-me-opt]{color:#e8edf2!important;border-top-color:#233242!important}",
+      "body.dark .sbr-set-ov [data-ie-opt][aria-checked=true],body.dark .sbr-set-ov [data-me-opt][aria-checked=true]{background:rgba(14,110,99,.25)!important}"
     ].join("");
     (document.head || document.documentElement).appendChild(st);
   }
@@ -237,7 +285,7 @@
   }
 
   function advBody() {
-    var html = '<div class="sbr-card">' + TOGGLES.map(toggle).join("") + '</div>';
+    var html = '<div class="sbr-card">' + ADV_TOGGLES.map(toggle).join("") + '</div>';
     // Image Engine keeps its own settings sub-UI (native inference model picker etc.).
     try {
       if (window.SMD_IMAGE_ENGINE && SMD_IMAGE_ENGINE.settingsHTML) {
@@ -274,7 +322,7 @@
           '<span style="flex:1">Hospital requests</span><span class="sbr-badge">OWNER</span></button>';
       }
     } catch (e) {}
-    html += '<div class="sbr-note">Experimental. Clinician review required.</div>';
+    html += '<div class="sbr-note">Clinical engine settings for this device.</div>';
     return html;
   }
 
@@ -402,11 +450,205 @@
     if (chev) chev.textContent = open ? "▾" : "▸";
   }
 
+  // ---- Experimental page (dedicated full-screen module) --------------------------------------------
+  function xaFeatureActive(feat) {
+    try {
+      if (window.SMD_XACCESS && SMD_XACCESS.isActiveCached) {
+        return !!SMD_XACCESS.isActiveCached(feat);
+      }
+    } catch (e) {}
+    return false;
+  }
+
+  function xaRowHTML(feat, icon, title, desc) {
+    var active = xaFeatureActive(feat);
+    var badge = active
+      ? '<span class="sbr-badge sbr-badge-ok">ACTIVE</span>'
+      : '<span class="sbr-badge sbr-badge-lock">CODE REQUIRED</span>';
+    var btnText = active ? "Manage Access" : "Enter Code";
+    var btnClass = active ? "sbr-xa-btn sec" : "sbr-xa-btn pri";
+    return '<div class="sbr-xa-row" data-xa-row="' + feat + '">' +
+      '<div class="sbr-xa-ic">' + icon + '</div>' +
+      '<div class="sbr-xa-info">' +
+        '<div class="sbr-xa-title">' + title + ' ' + badge + '</div>' +
+        '<div class="sbr-xa-desc">' + desc + '</div>' +
+      '</div>' +
+      '<button class="' + btnClass + '" data-xa-open="' + feat + '">' + btnText + '</button>' +
+    '</div>';
+  }
+
+  function refreshExperimentalUI() {
+    var roots = [document.getElementById("sbrExperimental"), document.getElementById("sbrSettings")];
+    roots.forEach(function (root) {
+      if (!root) return;
+      ["fundx", "kardiox", "thorex", "sknx"].forEach(function (f) {
+        var row = root.querySelector('[data-xa-row="' + f + '"]');
+        if (row) {
+          var act = xaFeatureActive(f);
+          var badge = row.querySelector(".sbr-badge");
+          if (badge) {
+            badge.className = "sbr-badge " + (act ? "sbr-badge-ok" : "sbr-badge-lock");
+            badge.textContent = act ? "ACTIVE" : "CODE REQUIRED";
+          }
+          var btn = row.querySelector("[data-xa-open]");
+          if (btn) {
+            btn.className = "sbr-xa-btn " + (act ? "sec" : "pri");
+            btn.textContent = act ? "Manage Access" : "Enter Code";
+          }
+        }
+      });
+    });
+  }
+
+  function expBodyHTML() {
+    var devActive = false;
+    try {
+      if (window.SMD_XACCESS && SMD_XACCESS.devBypass && SMD_XACCESS.devBypass()) {
+        devActive = true;
+      }
+    } catch (e) {}
+
+    return '<div class="sbr-callout">' +
+        '<div class="sbr-callout-ic">' + svg("flask") + '</div>' +
+        '<div class="sbr-callout-text"><b>Beta &amp; Research Features</b><br>' +
+        'These modules are experimental and under active clinical evaluation. All decisions require independent clinician verification.</div>' +
+      '</div>' +
+
+      '<div class="sbr-sec">Private Beta Access Codes</div>' +
+      '<div class="sbr-exp-desc">Enter access codes from the StewardMD team to unlock private beta modules on this device.</div>' +
+      '<div class="sbr-card sbr-xa-card">' +
+        xaRowHTML("fundx", "🔬", "FundX AI", "AI-guided retinal screening &amp; fundus imaging") +
+        xaRowHTML("kardiox", "🫀", "KardiQ X AI", "On-device 12-lead ECG rhythm &amp; ischemia interpretation") +
+        xaRowHTML("thorex", "🫁", "ThoreX AI", "On-device chest radiograph interpretation") +
+        xaRowHTML("sknx", "🧴", "SknX AI", "Skin lesion, rash &amp; dermatoscope analysis") +
+      '</div>' +
+
+      '<div class="sbr-sec">AI Diagnostic Modules</div>' +
+      '<div class="sbr-card">' +
+        toggle({ id: "fundx", title: "FundX AI · Retinal (Beta)", sub: "AI-guided fundus imaging · reload to apply", def: false, key: "smd_fundx" }) +
+        toggle({ id: "kardiox", title: "KardiQ X AI · ECG (Beta)", sub: "On-device 12-lead ECG interpretation · reload to apply", def: false, key: "smd_kardiox" }) +
+        toggle({ id: "thorex", title: "ThoreX AI · Chest X-ray (Beta)", sub: "On-device chest X-ray interpretation · reload to apply", def: false, key: "smd_thorex" }) +
+        toggle({ id: "sknx", title: "SknX AI · Dermatology (Beta)", sub: "Skin lesion / rash analysis · reload to apply", def: false, key: "smd_sknx" }) +
+      '</div>' +
+
+      '<div class="sbr-sec">Clinical Intelligence &amp; Skills</div>' +
+      '<div class="sbr-card">' +
+        toggle({ id: "clinix", title: "CliniX · Clinical learning (Beta)", sub: "Bedside skills for students · reload to apply", def: false, key: "smd_clinix" }) +
+        toggle({ id: "clinixtutor", title: "MaiK Examiner (Beta)", sub: "AI review inside CliniX Viva, only when free keyword grade cannot judge", def: false, key: "smd_clinix_tutor" }) +
+        toggle({ id: "surgx", title: "SURGX · Surgical Intelligence (Beta)", sub: "Notes, protocols, procedures, evidence, cases · reload to apply", def: true, key: "smd_surgx" }) +
+        toggle({ id: "surgxdraft", title: "SURGX draft content", sub: "Show surgical content that is not yet clinician-approved", def: true, key: "smd_surgx_draft" }) +
+      '</div>' +
+
+      '<div class="sbr-sec">Voice &amp; Protocols</div>' +
+      '<div class="sbr-card">' +
+        toggle({ id: "whisper", title: "Clinical Dictation (Beta)", sub: "On-device Whisper voice→text · native app only", def: false, key: "smd_whisper_clinical_dictation" }) +
+        toggle({ id: "oncoprotolib", title: "Oncology Protocol Library (Beta)", sub: "Draft standard protocol library in oncology workbench", def: true, key: "smd_onco_protolib" }) +
+      '</div>' +
+
+      '<div class="sbr-sec">Diagnostics</div>' +
+      '<div class="sbr-card">' +
+        toggle({ id: "maikperf", title: "Show AI response time", sub: "Diagnostics under each MaiK answer", def: false, key: "smd_maik_perf" }) +
+      '</div>' +
+      (devActive ? '<div class="sbr-dev-badge">⚡ Developer bypass active · access codes unlocked on debug build</div>' : '') +
+      '<div class="sbr-note">Reload the app after changing feature flags to update navigation and home tiles.</div>';
+  }
+
+  function closeExperimentalPage() {
+    var ov = document.getElementById("sbrExperimental");
+    if (ov && ov.parentNode) ov.parentNode.removeChild(ov);
+    if (!document.getElementById("sbrSettings")) {
+      document.body.classList.remove("sbr-set-open");
+    }
+  }
+
+  function openExperimentalPage() {
+    injectCSS();
+    closeExperimentalPage();
+    var ov = document.createElement("div");
+    ov.id = "sbrExperimental";
+    ov.className = "sbr-set-ov sbr-exp-ov";
+    document.body.appendChild(ov);
+    ov.innerHTML =
+      '<header class="sbr-set-head"><button class="sbr-set-back" data-sexp="close" aria-label="Back"><span class="sbr-set-chev">‹</span><span>Settings</span></button><h2>Experimental</h2></header>' +
+      '<div class="sbr-set-body">' +
+        expBodyHTML() +
+      '</div>';
+    document.body.classList.add("sbr-set-open");
+
+    try {
+      if (window.SMD_XACCESS && SMD_XACCESS.onChange) {
+        SMD_XACCESS.onChange(refreshExperimentalUI);
+      }
+    } catch (e) {}
+
+    ov.addEventListener("click", function (e) {
+      var t = e.target;
+      if (!t || !t.closest) return;
+      if (t.closest("[data-sexp=close]")) {
+        closeExperimentalPage();
+        return;
+      }
+      var xaBtn = t.closest("[data-xa-open]");
+      if (xaBtn) {
+        var feat = xaBtn.getAttribute("data-xa-open");
+        if (window.SMD_XACCESS && SMD_XACCESS.openGate) {
+          SMD_XACCESS.openGate(feat, function () {
+            refreshExperimentalUI();
+          });
+        } else {
+          toast("Access code gate loading…");
+        }
+        return;
+      }
+      var sw = t.closest("[data-sbr-tg]");
+      if (sw) {
+        var id = sw.getAttribute("data-sbr-tg"), key = sw.getAttribute("data-sbr-key"), on = !sw.classList.contains("on");
+        var isXa = (id === "fundx" || id === "kardiox" || id === "thorex" || id === "sknx");
+        if (on && isXa && window.SMD_XACCESS && SMD_XACCESS.isActiveCached && !SMD_XACCESS.isActiveCached(id)) {
+          if (window.SMD_XACCESS.openGate) {
+            SMD_XACCESS.openGate(id, function () {
+              setToggle(id, key, true);
+              sw.classList.add("on");
+              sw.setAttribute("aria-checked", "true");
+              refreshExperimentalUI();
+            });
+            return;
+          }
+        }
+        setToggle(id, key, on);
+        sw.classList.toggle("on", on);
+        sw.setAttribute("aria-checked", on);
+        refreshExperimentalUI();
+        return;
+      }
+    }, false);
+  }
+
+  function expSectionHTML() {
+    return '<button class="sbr-row" data-sbr-act="experimental">' + svg("flask") +
+      '<span class="sbr-lbl">Experimental Features</span>' +
+      '<span class="sbr-badge sbr-badge-beta">BETA</span>' +
+      '<span class="sbr-chev">▸</span></button>' +
+      '<div class="sbr-card">' +
+        toggle({ id: "clinix", title: "CliniX · Clinical learning (Beta)", sub: "Bedside skills for students · reload to apply", def: false, key: "smd_clinix" }) +
+        toggle({ id: "surgx", title: "SURGX · Surgical Intelligence (Beta)", sub: "Notes, protocols, procedures, evidence · reload to apply", def: true, key: "smd_surgx" }) +
+        toggle({ id: "fundx", title: "FundX AI · Retinal (Beta)", sub: "AI-guided fundus imaging · reload to apply", def: false, key: "smd_fundx" }) +
+        toggle({ id: "kardiox", title: "KardiQ X AI · ECG (Beta)", sub: "On-device 12-lead ECG interpretation · reload to apply", def: false, key: "smd_kardiox" }) +
+      '</div>' +
+      '<div class="sbr-note">Private beta access codes &amp; all research modules in Experimental Features above.</div>';
+  }
+
   // ---- Settings page (dedicated full-screen module) ------------------------------------------------
   // All app settings live here now (not inline toggles in the sidebar): account/verification,
   // notifications, appearance, wearable, and the advanced + experimental controls (engine, image
   // engine, voice models, offline DB, owner tools). Opened from the sidebar's single "Settings" row.
-  function closeSettingsPage() { var ov = document.getElementById("sbrSettings"); if (ov && ov.parentNode) ov.parentNode.removeChild(ov); document.body.classList.remove("sbr-set-open"); }
+  function closeSettingsPage() {
+    closeExperimentalPage();
+    var ov = document.getElementById("sbrSettings");
+    if (ov && ov.parentNode) ov.parentNode.removeChild(ov);
+    document.body.classList.remove("sbr-set-open");
+  }
+
   function openSettingsPage() {
     injectCSS();
     closeSettingsPage();
@@ -422,8 +664,10 @@
         row("appearance", "sun", "Appearance &amp; Theme") +
         watchRow() +
         otaSectionHTML() +
-        '<div class="sbr-sec">Advanced &amp; Experimental</div>' +
+        '<div class="sbr-sec">Advanced</div>' +
         advBody() +
+        '<div class="sbr-sec">Experimental</div>' +
+        expSectionHTML() +
       "</div>";
     document.body.classList.add("sbr-set-open");
     // let the Image Engine + Voice wire their controls inside the page (same seams as the old block)
@@ -435,12 +679,40 @@
       var t = e.target; if (!t || !t.closest) return;
       if (t.closest("[data-sset=close]")) { closeSettingsPage(); return; }
       var sw = t.closest("[data-sbr-tg]");
-      if (sw) { var id = sw.getAttribute("data-sbr-tg"), key = sw.getAttribute("data-sbr-key"), on = !sw.classList.contains("on"); setToggle(id, key, on); sw.classList.toggle("on", on); sw.setAttribute("aria-checked", on); return; }
+      if (sw) {
+        var id = sw.getAttribute("data-sbr-tg"), key = sw.getAttribute("data-sbr-key"), on = !sw.classList.contains("on");
+        var isXa = (id === "fundx" || id === "kardiox" || id === "thorex" || id === "sknx");
+        if (on && isXa && window.SMD_XACCESS && SMD_XACCESS.isActiveCached && !SMD_XACCESS.isActiveCached(id)) {
+          if (window.SMD_XACCESS.openGate) {
+            SMD_XACCESS.openGate(id, function () {
+              setToggle(id, key, true);
+              sw.classList.add("on");
+              sw.setAttribute("aria-checked", "true");
+            });
+            return;
+          }
+        }
+        setToggle(id, key, on);
+        sw.classList.toggle("on", on);
+        sw.setAttribute("aria-checked", on);
+        return;
+      }
       var r = t.closest("[data-sbr-act]");
-      if (r) { var a = r.getAttribute("data-sbr-act"); if (a === "settings") return; closeSettingsPage(); setTimeout(function () { try { ACT[a] && ACT[a](); } catch (x) {} }, 60); }
+      if (r) {
+        var a = r.getAttribute("data-sbr-act");
+        if (a === "settings") return;
+        if (a === "experimental") { openExperimentalPage(); return; }
+        closeSettingsPage();
+        setTimeout(function () { try { ACT[a] && ACT[a](); } catch (x) {} }, 60);
+      }
     }, false);
   }
-  try { if (typeof window !== "undefined") window.SMD_openSettings = openSettingsPage; } catch (e) {}
+  try {
+    if (typeof window !== "undefined") {
+      window.SMD_openSettings = openSettingsPage;
+      window.SMD_openExperimental = openExperimentalPage;
+    }
+  } catch (e) {}
 
   function reorganize() {
     try {
