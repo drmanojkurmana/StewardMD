@@ -211,6 +211,12 @@ export async function onRequest(context) {
       url.pathname.startsWith("/pglog/v/") ||
       url.pathname === "/verify" || url.pathname.startsWith("/verify/") ||
       url.pathname === "/atlas.js" || url.pathname === "/atlas.css" ||
+      // The check-in sheet the STAFF OPD CONSOLE loads. "opd" is already a PUBLIC_PAGE below, but
+      // the page alone is not enough: opd.html pulls /patient-register.js, and the blanket asset
+      // 404 further down was swallowing it. window.SMD_PATIENTREG then never defined, so every
+      // check-in on the console answered "Patient check-in is unavailable." - a page let in without
+      // the one script it cannot work without. Exactly this file, never a directory.
+      url.pathname === "/patient-register.js" ||
       url.pathname.startsWith("/atlas/")) {
     return next();
   }

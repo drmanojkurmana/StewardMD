@@ -6,7 +6,12 @@
 #smdPatReg.on { display: block; }
 
 #smdPatReg .pr-wrap {
-  position: fixed; inset: 0; z-index: 9000;
+  /* ABOVE the OPD console, which is #smdQueue at z-index 12000 (queue.css).
+   *
+   * At 9000 this sheet opened UNDERNEATH the console that launched it: the doctor tapped
+   * "+ Walk-in", nothing appeared to happen, and the New patient form was only found after closing
+   * the console. The sheet is opened BY the console, so it has to outrank it. */
+  position: fixed; inset: 0; z-index: 13000;
   background: rgba(8, 20, 18, .55);
   display: flex; align-items: flex-end; justify-content: center;
   padding: 0;

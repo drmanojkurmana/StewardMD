@@ -90,6 +90,33 @@
 
   // ── Ward Sync (GHIS) autofetch ───────────────────────────────────────────────────────────────
   function ghis() { try { return window.GHIS && window.GHIS.isConnected && window.GHIS.isConnected() ? window.GHIS : null; } catch (e) { return null; } }
+
+  /* Patient-picker filtering. Field mapping is copied from ghis-ward.js ghisApplyFilters on purpose
+   * (branch = deptDescription, doctor = employeeFirstName) so this list and the Ward panel can
+   * never disagree about which ward or consultant a patient belongs to. */
+  var _rdPats = [];
+  function rdDistinct(vals) {
+    var seen = {}, out = [];
+    (vals || []).forEach(function (v) {
+      var s = String(v == null ? "" : v).trim();
+      if (!s || seen[s]) return;
+      seen[s] = 1; out.push(s);
+    });
+    return out.sort(function (a, b) { return a.localeCompare(b); });
+  }
+  function rdPatientOptions(pats, branch, doctor) {
+    var list = (pats || []).filter(function (p) {
+      if (branch && String(p.deptDescription || "") !== branch) return false;
+      if (doctor && String(p.employeeFirstName || "") !== doctor) return false;
+      return true;
+    });
+    // Say so rather than showing an empty box the doctor cannot explain.
+    if (!list.length) return '<option value="">No patient matches these filters</option>';
+    return '<option value="">Select a patient…</option>' + list.map(function (p) {
+      var lbl = (p.patientFirstName || p.patientId || "Patient") + (p.bedName ? " · " + p.bedName : "");
+      return '<option value="' + escH(p.patientId) + '">' + escH(lbl) + '</option>';
+    }).join("");
+  }
   // Parse a GHIS lab date to a sortable timestamp: ISO first, then "04-JUN-2026" style. 0 if unknown.
   function labTs(s) {
     if (!s) return 0;
@@ -158,6 +185,9 @@
       ".rd-tab{flex:1;border:1px solid var(--line,#d7dee3);background:transparent;border-radius:10px;padding:9px 6px;font:700 12px var(--sans,system-ui);color:var(--slate,#2d4356);cursor:pointer}",
       ".rd-tab.on{background:var(--teal,#0e6e63);border-color:var(--teal,#0e6e63);color:#fff}",
       ".rd-body{display:flex;flex-direction:column;gap:10px}",
+      // Two filters side by side above the picker; they wrap on a narrow phone rather than squash.
+      ".rd-filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px}",
+      ".rd-filters select{flex:1 1 45%;min-width:0;border:1px solid var(--line,#d7dee3);border-radius:9px;padding:9px 10px;font:600 13px var(--sans,system-ui);background:var(--card,#fff);color:var(--slate,#2d4356)}",
       ".rd-field{display:flex;flex-direction:column;gap:4px}",
       ".rd-field label{font:600 12px var(--sans,system-ui);color:var(--slate,#2d4356)}",
       ".rd-field input,.rd-field select{border:1px solid var(--line,#d7dee3);border-radius:9px;padding:10px 11px;font:600 14px var(--sans,system-ui);background:var(--paper,#fff);color:var(--ink,#14202b);width:100%;box-sizing:border-box}",
@@ -249,11 +279,28 @@
       if (mode === "ward") {
         var pats = [];
         try { pats = (window.GHIS && GHIS.getPatients) ? GHIS.getPatients() : []; } catch (e) {}
-        var opts = '<option value="">Select a patient…</option>' + pats.map(function (p) {
-          var lbl = (p.patientFirstName || p.patientId || "Patient") + (p.bedName ? " · " + p.bedName : "");
-          return '<option value="' + escH(p.patientId) + '">' + escH(lbl) + '</option>';
-        }).join("");
+        /* Branch + doctor filters, because a whole ward list is unusable in a <select>: on a busy
+         * unit that is a hundred names in bed order, scrolled one-handed at the bedside.
+         *
+         * Same two fields, and the same mapping, that the Ward panel already filters by
+         * (ghis-ward.js ghisApplyFilters): branch is deptDescription, doctor is employeeFirstName.
+         * Reusing that mapping matters - if this invented its own, the two lists would disagree
+         * about which ward a patient is on. The filters only narrow what is listed; the selected
+         * patient and the lookup below are untouched. */
+        _rdPats = pats;
+        var branches = rdDistinct(pats.map(function (p) { return p.deptDescription; }));
+        var doctors = rdDistinct(pats.map(function (p) { return p.employeeFirstName; }));
+        var opts = rdPatientOptions(pats, "", "");
         return '<div class="rd-patients">' +
+          (pats.length > 6 ?
+            '<div class="rd-filters">' +
+              '<select id="rdFBranch" aria-label="Filter by branch"><option value="">All branches</option>' +
+                branches.map(function (b) { return '<option value="' + escH(b) + '">' + escH(b) + '</option>'; }).join("") +
+              '</select>' +
+              '<select id="rdFDoctor" aria-label="Filter by doctor"><option value="">All doctors</option>' +
+                doctors.map(function (d) { return '<option value="' + escH(d) + '">' + escH(d) + '</option>'; }).join("") +
+              '</select>' +
+            '</div>' : '') +
           '<div class="rd-field"><label for="rdPt">Ward Sync patient</label><select id="rdPt">' + opts + '</select></div>' +
           '<div class="rd-note" id="rdWardNote">Pulls the latest eGFR / creatinine from the patient’s report. Weight isn’t on the EMR — enter it below only if no eGFR is reported.</div>' +
           '<div class="rd-field"><label for="rdWt2">Weight (kg) — for CrCl if no eGFR</label><input id="rdWt2" type="number" inputmode="decimal" min="0" step="0.5" placeholder="optional"></div>' +
@@ -328,6 +375,22 @@
         el.addEventListener("input", recompute);
         el.addEventListener("change", recompute);
       });
+      /* Re-list on a filter change. Clears any selection, because leaving a patient chosen who is
+       * no longer in the visible list is how the wrong patient's eGFR ends up on screen. */
+      var fBr = inputs.querySelector("#rdFBranch"), fDr = inputs.querySelector("#rdFDoctor");
+      function rdRefilter() {
+        var sel = inputs.querySelector("#rdPt");
+        if (!sel) return;
+        sel.innerHTML = rdPatientOptions(_rdPats, fBr ? fBr.value : "", fDr ? fDr.value : "");
+        sel.value = "";
+        fetched = null;
+        var note = inputs.querySelector("#rdWardNote");
+        if (note) note.textContent = "Pulls the latest eGFR / creatinine from the patient’s report.";
+        recompute();
+      }
+      if (fBr) fBr.addEventListener("change", rdRefilter);
+      if (fDr) fDr.addEventListener("change", rdRefilter);
+
       var pt = inputs.querySelector("#rdPt");
       if (pt) pt.addEventListener("change", function () {
         var id = pt.value; fetched = null; recompute();
