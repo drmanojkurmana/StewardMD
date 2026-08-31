@@ -25,7 +25,7 @@ reviewer can verify every claim below against the source.
 | Whose credentials reach GHIS? | Each doctor's own GHIS id and password. There is no shared service account. |
 | Is a doctor's password stored? | **No, by default.** It authenticates one request and is discarded. |
 | Any exception? | Two, both opt-in and separately consented (section A7). One stores on the doctor's device only; one stores server-side, encrypted, for 30 days. |
-| Is patient data copied out of GHIS? | No. Clinical data is read, returned to that doctor's device, and not persisted server-side. |
+| Is patient data copied out of GHIS? | Clinical content, no: labs, reports and notes are read, returned to that doctor's device, and never stored by us. One exception, for Lab Watch users only: a short watch list of patient identifiers is held so the background poll knows whom to check (section A9). |
 | Can the app write into the EMR? | Only through explicitly gated routes (section A6). Prescribing is separately hard-blocked. |
 | Does the AI write to the EMR? | No. Every write requires a clinician action; the AI never writes autonomously. |
 | Is the current access route sanctioned? | **No, and that is why we raised it.** See section A10. |
@@ -103,8 +103,12 @@ A doctor sees what GHIS shows that doctor. StewardMD adds no privilege: the hosp
 authorization decides the scope, because the session is the doctor's own.
 
 **Clinical data read from GHIS is returned to the requesting device and is not persisted
-server-side.** It is not copied into a StewardMD database, not used to train any model, and not
-retained after the response.
+server-side.** No lab result, report, note or medication list is copied into a StewardMD database,
+none is used to train any model, and none is retained after the response.
+
+The one thing that is retained, and only for doctors who turned on Lab Watch 24/7, is the list of
+which patients to poll. That list holds identifiers, not clinical content. It is described in full
+in section A9, including the parts of it that are not encrypted.
 
 ---
 
@@ -220,8 +224,22 @@ revocation on demand, we should agree that mechanism during the review.
 | GHIS session cookie | Cloudflare KV | 30 minutes |
 | GHIS credentials (Auto-fetch opt-in only) | **The doctor's device only** — iOS Keychain / Android Keystore. Never on our servers. | Until the doctor turns Auto-fetch off |
 | GHIS credentials (Lab Watch opt-in only) | Cloudflare KV, AES-256-GCM encrypted | 30 days, revocable |
-| Watched-patient list | Cloudflare KV, patient name encrypted at rest | 30 days, refreshed while active |
-| Patient clinical data from GHIS | **Not stored** | Not applicable |
+| Watched-patient list (Lab Watch opt-in only) | Cloudflare KV. Patient **name** encrypted at rest; patient and episode **identifiers stored in plaintext**, because they are the lookup key the poll uses | 30 days, refreshed while active |
+| "Already seen" result markers (Lab Watch opt-in only) | Cloudflare KV, a hash per watched patient used to detect a genuinely new result | 30 days |
+| Patient clinical data from GHIS (labs, reports, notes, medications) | **Not stored** | Not applicable |
+
+Two things about the watch list we would rather state than have found:
+
+- **The identifiers are not encrypted.** The patient and episode ids are stored as written, because
+  the background poll uses them as its lookup key. A name is meaningless without them, but they are
+  hospital identifiers held outside the hospital, and they should be counted as such in any
+  assessment.
+- **Some older entries hold the patient name in plaintext.** Name encryption was added after the
+  feature shipped, and existing records were left readable rather than migrated. We will purge or
+  migrate these on request, and would do so before any wider rollout.
+
+Everything in this table exists only for doctors who explicitly enabled Lab Watch 24/7. A doctor who
+has not enabled it has nothing stored on our servers at all.
 
 No patient identifiers are placed in URLs, SMS, WhatsApp messages, or logs. The service worker is
 configured never to cache `/api/*`, so no PHI is written to the device cache.
@@ -262,6 +280,7 @@ A supervised review can confirm each statement directly in the source:
 | Session lifetime | same file, `SESSION_TTL_MS` and `SESS_KV_TTL` |
 | Device-only credential storage (A7.1) | `autofetch.js`, header comment, `storeCred` / `forgetCred`, and the consent sheet |
 | Server-side credential storage (A7.2) | `functions/_watch.js`, header comment and `putCred` / `getCred` |
+| What the watch list holds, encrypted and not (A9) | same file, `addWatch` / `getList` and the `SEEN` key |
 
 ---
 
