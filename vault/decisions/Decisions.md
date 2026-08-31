@@ -1883,3 +1883,30 @@ was considered — it keeps the scenario off the network — but `SMD_MAIK_LOCAL
 package rather than a prompt, is PRO-gated and needs a downloaded pack, so it cannot be relied on for
 strict JSON. `INSULIN_EXTRACT.setProvider()` is the one-line swap if the owner wants it later.
 **Owner: confirm cloud-vs-on-device.**
+
+## 2026-08-31 — MaiK Lite is now OUR trained model, and the flagship on-device tier
+
+The `maik-lite` pack no longer points at the upstream qvac/MedPsy-1.7B base on HuggingFace. It now
+ships StewardMD's own LoRA fine-tune (v2), trained on the StewardMD Knowledge Base, hosted on our
+R2 (`models.stewardmd.in/maik/maik-lite-q4_k_m.gguf`) because the weights are private. It is the
+DEFAULT_PACK, carries a STEWARDMD picker badge, and has its OWN system prompt in the registry
+(`pk.system`, consumed by maik-local.js) - the shared SYSTEM's example dose ("2 g IV over 20 min")
+was parroted by the 1.7B as a real furosemide dose, so its prompt carries no example dose.
+
+Presentation rule (owner): on-device answers never show page numbers or upstream source names; the
+only attribution anywhere is "StewardMD Knowledge Base - based on standard medical resources".
+stripReasoning() now also drops trained-in [n] citation markers.
+
+Two training passes: v1 (reasoning-style SFT, loss 0.62) answered well but inherited the base's
+thinking habit when served over plain ChatML (the native path) - it burned the whole nPredict on an
+unterminated <think> and the doctor got a blank. v2 (continued SFT, 1 epoch, lr 1e-5) moved the
+empty think block INTO the loss target and added the system turn to 60% of examples. Probes over
+the native-style path after v2: most questions answer immediately (empty think block); some still
+reason first, hence nPredict 768 and an explicit "did not produce an answer" error instead of an
+empty bubble when reasoning eats the budget. Server-path eval held: structured 52%, unsupported
+1.2%, cited 100% on the 100-question set.
+
+Known gaps for a v3 pass (do not re-discover): the think habit is reduced, not eliminated - the
+robust fix is a <think>-token ban at the native sampler (both platforms) or more discipline data;
+scope-refusal is enforced by the Intent Firewall (maik-scope.js) upstream, NOT by the model, which
+answered a football question in bare-model probes.

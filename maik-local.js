@@ -40,7 +40,7 @@
    * Conversation history IS kept: it is the clinician's own turns, not a StewardMD resource, and
    * without it a bare follow-up ("and the dose?") is meaningless. Two turns, tightly clipped.
    */
-  var DEFAULT_PACK = "maik-mxcore";
+  var DEFAULT_PACK = "maik-lite";   // our own model: flagship, and the safest default (smallest, fastest)
   var HISTORY_TURNS = 2;
   var HISTORY_CLIP = 180;
 
@@ -118,9 +118,17 @@
   var GEMMA_CTRL = /<\s*(start_of_turn|end_of_turn|unused\d+|eos|bos|pad)\s*>/gi;
   var LEAD_THOUGHT = /^\s*(thought|thinking|reasoning|analysis|plan)\b\s*[:\-]?\s*/i;
 
+  // Bracket citation markers like [1] or [2,3]. MaiK Lite was trained to cite numbered evidence
+  // passages; on-device there is no evidence list for the numbers to point at, and the owner's rule
+  // is that answers never show per-source references - so the markers are stripped, not rendered.
+  var CITE_MARK = /\s*\[\d+(?:\s*,\s*\d+)*\]/g;
+  // Shown when the model spent its whole token budget inside a reasoning block and produced no
+  // answer (measured on MaiK Lite v2: rare but real). An explicit message beats an empty bubble.
+  var EMPTY_ANSWER = "The on-device model did not produce an answer this time. Ask again, or switch to MaiK Cloud.";
+
   function stripReasoning(t) {
     var out = String(t == null ? "" : t);
-    out = out.replace(THINK_TAG, "").replace(GEMMA_CTRL, "");
+    out = out.replace(THINK_TAG, "").replace(GEMMA_CTRL, "").replace(CITE_MARK, "");
     // An unterminated <think> means the budget ran out mid-reasoning: there is no answer after it,
     // so keep whatever came BEFORE rather than shipping raw reasoning.
     out = out.replace(THINK_OPEN, "");
@@ -494,7 +502,10 @@
           system: (opts && opts.systemOverride) ? opts.systemOverride
                 // A greeting with no image: answer it as a greeting, not as a clinical question.
                 : (!images.length && isGreeting(pkg && pkg.question)) ? SYSTEM_GREET
-                : !images.length ? SYSTEM
+                // A pack can carry its own system prompt (registry-driven, like noThink).
+                // MaiK Lite was TRAINED with its prompt, so the shared one would be a
+                // distribution shift - and its dose example was parroted as a real dose.
+                : !images.length ? (pk.system || SYSTEM)
                 : (opts && opts.imageFollowUp) ? SYSTEM_IMAGE_FOLLOWUP
                 : SYSTEM_IMAGE,
           nPredict: pk.nPredict || 512,
@@ -515,6 +526,9 @@
       }).then(function (r) {
         if (r && r.error) return r;
         var text = stripReasoning((r && r.text) || acc || "");
+        // Everything the model produced was reasoning (unterminated think block ate the
+        // budget): say so instead of rendering an empty bubble.
+        if (!text) return { error: EMPTY_ANSWER };
         return {
           text: text,
           // ALWAYS empty: this answer used no StewardMD material, so attaching the package's

@@ -168,7 +168,7 @@ const { L } = load();
   ok("package retrieved cleared", pkg2.retrieved.length === 0);
   ok("package sources cleared", pkg2.sources.length === 0);
   ok("package treatment removed", pkg2.treatment === undefined);
-  ok("result names the MAiK tier, not the upstream model", r.model === "MAiK MxCore");
+  ok("result names the MAiK tier, not the upstream model", r.model === "MAiK Lite");
 }
 
 // ── streaming contract: onDelta gets ACCUMULATED text ──
@@ -178,7 +178,7 @@ const { L } = load();
   const r = await L2.answer({ question: "hi" }, null, (t) => seen.push(t));
   ok("answer resolves with the full text", r.text === "Hello world");
   ok("answer is tagged engine=local", r.engine === "local");
-  ok("answer reports the MAiK tier label", r.model === "MAiK MxCore");
+  ok("answer reports the MAiK tier label", r.model === "MAiK Lite");
   ok("answer reports timing", r.ms === 1234);
   ok("onDelta called once per token", seen.length === 3);
   // Right-trimmed, because every delta goes through stripReasoning() on the way to the typewriter -
@@ -406,7 +406,7 @@ if (fail) process.exit(1);
   ok("prompt asks for the final answer only", /never your reasoning/.test(L.SYSTEM));
   ok("prompt enforces medical-only scope", /Answer medical questions only/.test(L.SYSTEM));
   ok("no section labels are requested", /Bottom Line/.test(L.SYSTEM) && /no section labels/.test(L.SYSTEM));
-  ok("default pack matches the real registry after the MAiK rebrand", L.DEFAULT_PACK === "maik-mxcore");
+  ok("default pack matches the real registry after the MAiK rebrand", L.DEFAULT_PACK === "maik-lite");
 
   /* 4. MEMORY PRE-FLIGHT. A 2.5 GB model on a phone with nothing free does not fail cleanly: it
    *    load/evict cycles (Android) or gets jetsam-killed (iOS), both of which present to the
