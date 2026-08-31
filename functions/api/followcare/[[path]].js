@@ -92,6 +92,13 @@ async function rateLimit(env, request, key) {
 // Constant-time string compare (secret tokens are high-entropy; still avoid an early-return timing oracle).
 function ctEq(a, b) { a = String(a || ""); b = String(b || ""); if (a.length !== b.length) return false; let r = 0; for (let i = 0; i < a.length; i++) r |= a.charCodeAt(i) ^ b.charCodeAt(i); return r === 0; }
 // The RunPod voice service's credential for posting call results (Phase 2). Owner login also works (for testing).
+/* Where the dialer lives. Overridable per environment (FOLLOWCARE_VOICE_WORKER) so a preview
+ * deployment can point at a preview Worker; defaults to the deployed stewardmd-voice Worker, the
+ * same host voice-worker/call.sh dials. No trailing slash - callers append "/voice/...". */
+function voiceWorkerBase(env) {
+  return String((env && env.FOLLOWCARE_VOICE_WORKER) || "https://stewardmd-voice.drmanojkurmana.workers.dev").replace(/\/+$/, "");
+}
+
 async function voiceServiceOK(request, env) {
   const t = request.headers.get("X-Voice-Token") || "";
   if (env.FOLLOWCARE_VOICE_SERVICE_TOKEN && ctEq(t, env.FOLLOWCARE_VOICE_SERVICE_TOKEN)) return true;
@@ -295,7 +302,28 @@ export async function onRequest(context) {
       const ep = await FC.getEpisode(env, enr.episodeId);
       const settings = await FCV.getHospitalSettings(env, hospitalId);
       const q = await FCV.queueVoiceCall(env, ep, settings, Date.now(), { manual: true, actor: "voice-test" });
-      return json({ ok: !!q.ok, episodeId: enr.episodeId, callId: q.callId, scheduledMs: q.scheduledMs, error: q.error }, q.ok ? 200 : 400, request);
+      /* Poke the dialer. queueVoiceCall only writes an fc_voice_calls row with status "scheduled",
+       * and the voice Worker has NO cron - its /voice/originate dials only when something POSTs to
+       * it. So a call queued from the app sat in that table forever and no phone ever rang;
+       * voice-worker/call.sh worked purely because it pokes the Worker by hand.
+       *
+       * Best-effort and non-fatal: the row is already queued, so a Worker that is down or slow must
+       * not turn a successful queue into an error. `dialed` reports which actually happened, rather
+       * than claiming success for a call that was never placed. */
+      let dialed = false, dialError = "";
+      if (q.ok) {
+        try {
+          const wr = await fetch(voiceWorkerBase(env) + "/voice/originate", {
+            method: "POST",
+            headers: { "content-type": "application/json", "X-Voice-Token": env.FOLLOWCARE_VOICE_SERVICE_TOKEN || "" },
+            body: JSON.stringify({ callId: q.callId }),
+          });
+          dialed = wr.ok;
+          if (!wr.ok) dialError = "dialer_" + wr.status;
+        } catch (e) { dialError = "dialer_unreachable"; }
+      }
+      return json({ ok: !!q.ok, episodeId: enr.episodeId, callId: q.callId, scheduledMs: q.scheduledMs,
+                    dialed: dialed, dialError: dialError, error: q.error }, q.ok ? 200 : 400, request);
     }
     // Slot extraction for the voice service: reuse the shared Gemini transport (Vertex primary, AI Studio
     // GEMINI_API_KEY fallback). Speech-understanding only — NOT a clinical decision. Fails soft (the state
