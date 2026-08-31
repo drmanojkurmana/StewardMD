@@ -110,9 +110,30 @@ test("ghis-ward.js: demoFetch answers /patients, /lab and /lab-detail from local
   return Promise.resolve()
     .then(() => demoFetch("/patients"))
     .then((r) => { assert.equal(r.length, 1); assert.equal(r[0].patientId, "TH1"); return demoFetch("/lab?patientId=TH1"); })
-    .then((r) => { assert.equal(r.orders.length, 2, "expected one CBC-style order and one chemistry-style order"); return demoFetch("/lab-detail?renderId=demo-cbc-TH1&patientId=TH1"); })
-    .then((r) => { assert.equal(r.tests.length, 1); assert.equal(r.tests[0].test, "Haemoglobin"); return demoFetch("/lab-detail?renderId=demo-chem-TH1&patientId=TH1"); })
+    .then((r) => {
+      assert.equal(r.orders.length, 2, "one date, one CBC-style order and one chemistry-style order");
+      const cbcOrder = r.orders.find((o) => o.renderId.startsWith("demo-cbc|"));
+      const chemOrder = r.orders.find((o) => o.renderId.startsWith("demo-chem|"));
+      assert.ok(cbcOrder && chemOrder);
+      return demoFetch("/lab-detail?renderId=" + encodeURIComponent(cbcOrder.renderId) + "&patientId=TH1");
+    })
+    .then((r) => { assert.equal(r.tests.length, 1); assert.equal(r.tests[0].test, "Haemoglobin"); return demoFetch("/lab-detail?renderId=" + encodeURIComponent("demo-chem|TH1|01-JAN-2026 08:00") + "&patientId=TH1"); })
     .then((r) => { assert.equal(r.tests.length, 1); assert.equal(r.tests[0].test, "Serum Creatinine"); });
+});
+
+test("REGRESSION: a real 6-day patient gets 6 distinct dated orders, not 2 orders piled onto one date", () => {
+  const t = loadDataset();
+  const chandrasekhar = t.branches.find((b) => b.dept === "Nephrology").patients.find((p) => p.name === "Chandrasekhar Rao");
+  const load = loadDemoFetch();
+  const demoFetch = load({
+    patients: [], labsByPatientId: { [chandrasekhar.patientId]: chandrasekhar.labs },
+    imagingByPatientId: {}, imagingByResultId: {},
+  });
+  return demoFetch("/lab?patientId=" + chandrasekhar.patientId).then((r) => {
+    const dates = new Set(r.orders.map((o) => o.orderDate));
+    assert.equal(dates.size, 6, "expected 6 distinct dated orders (one draw per day), got " + dates.size + ": " + JSON.stringify([...dates]));
+    assert.ok(r.orders.length >= 6, "expected at least one order per day");
+  });
 });
 
 test("ghis-ward.js: demoFetch answers /radiology and /radiology-report", () => {

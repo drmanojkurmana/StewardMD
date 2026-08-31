@@ -116,18 +116,31 @@
         if (/^\/patients/.test(path)) return Promise.resolve(DEMO.patients);
         var CBC = { "Haemoglobin": 1, "Total WBC Count": 1, "Platelet Count": 1 };
         if (/^\/lab\?/.test(path)) {
+          // ONE order per day, correctly dated — NOT one giant order per category spanning
+          // every day. Rows sharing a date came from the same draw (mkTrend stamps a whole
+          // day's panel with one date string), so grouping by that date is exactly right.
           var labs = (pid && DEMO.labsByPatientId[pid]) || [];
+          var byDate = {}, dateOrder = [];
+          labs.forEach(function (t) { if (!byDate[t.date]) { byDate[t.date] = []; dateOrder.push(t.date); } byDate[t.date].push(t); });
           var orders = [];
-          if (labs.some(function (t) { return CBC[t.test]; })) orders.push({ renderId: "demo-cbc-" + pid, episodeId: "DEMOEP" + pid, orderDate: labs[0] && labs[0].date });
-          if (labs.some(function (t) { return !CBC[t.test]; })) orders.push({ renderId: "demo-chem-" + pid, episodeId: "DEMOEP" + pid, orderDate: labs[0] && labs[0].date });
+          dateOrder.forEach(function (dt) {
+            var rows = byDate[dt];
+            if (rows.some(function (t) { return CBC[t.test]; })) orders.push({ renderId: "demo-cbc|" + pid + "|" + dt, episodeId: "DEMOEP" + pid, orderDate: dt });
+            if (rows.some(function (t) { return !CBC[t.test]; })) orders.push({ renderId: "demo-chem|" + pid + "|" + dt, episodeId: "DEMOEP" + pid, orderDate: dt });
+          });
           return Promise.resolve({ orders: orders });
         }
         if (/^\/lab-detail\?/.test(path)) {
           var rm = path.match(/renderId=([^&]+)/);
           var rid = rm ? decodeURIComponent(rm[1]) : "";
+          var ridParts = rid.split("|");   // ["demo-cbc"|"demo-chem", pid, date]
+          var wantCbc = ridParts[0] === "demo-cbc";
+          var wantDate = ridParts[2];
           var all = (pid && DEMO.labsByPatientId[pid]) || [];
-          var wantCbc = /demo-cbc-/.test(rid);
-          return Promise.resolve({ tests: all.filter(function (t) { var inCbc = !!CBC[t.test]; return wantCbc ? inCbc : !inCbc; }) });
+          return Promise.resolve({ tests: all.filter(function (t) {
+            var inCbc = !!CBC[t.test];
+            return (wantCbc ? inCbc : !inCbc) && t.date === wantDate;
+          }) });
         }
         if (/^\/radiology\?/.test(path)) {
           var img = (pid && DEMO.imagingByPatientId[pid]) || [];
@@ -508,6 +521,24 @@
           _connected = true; try { dot(true); } catch (e) {}
           showScreen('ward');
           ghisLoadPatients();
+
+          // Pre-populate a real, named ICU unit board with its 5 patients, fully filled (labs
+          // trends + vitals baked into each saved snapshot) — so opening ICU shows an active,
+          // populated unit immediately, not one-at-a-time bridging from Ward Sync.
+          try {
+            if (window.ICU && ICU.selectUnitByKey && ICU.addWardPatientToRoster) {
+              var micuPatients = flat.filter(function (p) { return p.deptDescription === 'StewardMD MICU'; });
+              if (micuPatients.length) {
+                ICU.selectUnitByKey('s:icu:' + encodeURIComponent('StewardMD MICU'));
+                micuPatients.forEach(function (p) {
+                  ICU.addWardPatientToRoster({
+                    patient: demoFromPatient(p), patientId: p.patientId, episodeId: p.episodeId, source: 'Ward Sync',
+                    labs: labsById[p.patientId] || [], vitals: vitalsById[p.patientId] || []
+                  });
+                });
+              }
+            }
+          } catch (e) {}
         },
         // Persist a token another module obtained via the SAME /login proxy (e.g. the OPD
         // queue's sign-in) so the whole app shares ONE GHIS session — sign in once, everywhere.
