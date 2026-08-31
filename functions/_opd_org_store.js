@@ -135,9 +135,23 @@ export async function setMembership(env, orgId, identity, body, actorId) {
    * `active` back to true. Re-enrolling someone to fix a typo must not widen what they can see. */
   const prev = (await getMembership(env, orgId, identity)) || null;
   const b = body || {};
+
+  /* ROLE FALLS BACK TO THE EXISTING ROLE, exactly as scope and active do below.
+   *
+   * It did not, and M.membership defaults a missing role to "viewer" - which holds queue.view and
+   * nothing else. So re-saving a member to change their scope, or to flip them active again, wiped
+   * a nurse to read-only. The only symptom is that check-in starts answering 403 forbidden, with
+   * nothing on screen connecting that to an edit nobody thought was about roles.
+   *
+   * A member created with no role at all cannot do the one job the staff console exists for, so
+   * that is refused rather than quietly written as a viewer. Never defaulted UPWARDS - guessing
+   * "nurse" would hand out queue control nobody granted. */
+  const role = String(b.role || (prev && prev.role) || "").trim();
+  if (!role) return { ok: false, error: "role_required", message: "Choose a role for this person - a member with no role can only watch the queue." };
+
   const f = M.membership({
     id, orgId, identity,
-    role: b.role,
+    role: role,
     scope: b.scope !== undefined ? b.scope : (prev && prev.scope),
     active: b.active !== undefined ? b.active !== false : (prev ? prev.active !== false : true),
     createdAt: (prev && prev.createdAt) || now(),
