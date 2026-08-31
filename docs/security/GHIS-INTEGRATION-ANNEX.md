@@ -251,8 +251,22 @@ Two things about the watch list we would rather state than have found:
 Everything in this table exists only for doctors who explicitly enabled Lab Watch 24/7. A doctor who
 has not enabled it has nothing stored on our servers at all.
 
-No patient identifiers are placed in URLs, SMS, WhatsApp messages, or logs. The service worker is
-configured never to cache `/api/*`, so no PHI is written to the device cache.
+No patient identifiers are placed in SMS or WhatsApp messages, and none are written to logs. The
+service worker is configured never to cache `/api/*`, so no PHI is written to the device cache.
+
+**One exception we found while preparing this annex, and are treating as a defect.** A Lab Watch
+push notification deliberately carries no patient name and no result value, because those would
+appear on a lock screen and pass through Apple's and Google's push relays. But the notification's
+deep link and grouping tag currently carry the patient identifier, so that identifier does transit
+those relays. The alert a doctor sees reads "New lab · Bed 4 · Ward 3", which is correct, while the
+identifier travels invisibly alongside it.
+
+Nobody outside the relay operators sees it, and it carries no name or clinical value on its own. It
+is still a hospital identifier leaving hospital control by a route we did not intend, it contradicts
+the rule the code sets for itself, and we are replacing it with an opaque reference that the app
+resolves locally after the doctor authenticates. Stated here rather than quietly corrected, because
+a control that is *documented* as absolute and *implemented* with a gap is worse than one that is
+described accurately.
 
 ---
 
