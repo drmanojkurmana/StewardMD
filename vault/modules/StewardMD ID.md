@@ -48,6 +48,21 @@ must never be shown a price, because verification unlocks it free. `openPaywall(
 for the unverified/pending reasons, so no call site can open the wrong door.
 
 ## Gotchas
+- **Two client readers of "is this account Pro", and they can disagree.** `pro-badge.js` reads the
+  `pro` CLAIM; `SMD_PRO_NOTICE.reason()` / the paywall's verify-bounce read the `/billing/status`
+  payload `account.js` cached at sign-in. A verification landing mid-session must call
+  `SMD_PRO.sync()` (verify.js `resyncPro()`, AFTER the forced token refresh) or the Subscription row
+  tells a just-verified doctor to verify. `openPaywall()` also re-syncs once before bouncing, so a
+  stale cache can no longer produce that screen on its own. Decisions 2026-09-02.
+- **Owners are Pro, not verified.** `_entitlement.js` `isOwnerClaims()` grants Pro from the signed
+  token's email (`_adminauth.js` owner list). `verified` stays false unless they really verified,
+  because `verified` also unlocks the prescription pad. Do not "fix" an owner's `unverified` badge by
+  writing a `verified` claim.
+- **Auto-verification asks the register for the digit CORE first** (`_verify_match.js`
+  `nmcQueriesFor`), falls through to the D1 mirror on an EMPTY answer, and treats Gemini's confidence
+  as a 0.5 floor once number and name matched. The matching rules are pure and tested there; keep
+  I/O in verify-doctor.js and decisions in `_verify_match.js`. `VERIFY_NAME_ONLY_MATCH=1` (default
+  OFF) enables the name-only single-row fallback.
 - **A FAILED profile read is not "no ID" — never mint on it.** `ensure()` used to call `mint()` from
   the `.get()` rejection handler, so one unreachable-Firestore moment (native cold start, ward wifi)
   reissued the "permanent" ID and the new value overwrote `profile/self.smdId` and the `e_{hash}`

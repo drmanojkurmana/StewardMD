@@ -110,6 +110,14 @@
       return isVerifiedClaim().then(function (ok) { return { status: ok ? "verified" : "unverified" }; });
     });
   }
+  /* account.js caches the last /api/billing/status verdict, and every Pro gate - the Subscription
+   * row, SMD_PRO_NOTICE, the paywall's own verify-bounce - reads that cache. It is refreshed at
+   * sign-in and on app open, NOT at the moment a verification lands, so a doctor who had just been
+   * verified tapped Subscription and was told to verify again (reported 2026-09-02). Push a refresh
+   * at the moment the answer changes. Best-effort: sync() never rejects; a failure keeps the last
+   * verdict, which is what would have been shown anyway. Called AFTER the forced token refresh so
+   * the request carries the new claim. */
+  function resyncPro() { try { if (window.SMD_PRO && typeof window.SMD_PRO.sync === "function") window.SMD_PRO.sync(); } catch (e) {} }
   window.SMD_VERIFY = { isVerified: isVerifiedClaim, openPanel: openPanel, VERIFY_ALLOWLIST: VERIFY_ALLOWLIST };
 
   // ---- Overlay refs ----
@@ -277,6 +285,8 @@
       if (data.status === "verified") {
         setStatusMsg("success", vfIco("check") + " Verified — Dr. " + (data.name || "") + " (" + (data.regNo || "") + "). A confirmation email is on its way. Opening StewardMD…");
         try { await u.getIdToken(true); } catch (e) {}
+        _rememberVerified(true);
+        resyncPro();   // the cached entitlement verdict predates this verification
         setTimeout(hideGate, 1200);
         return;
       }
@@ -441,6 +451,7 @@
           _rememberVerified(true);
           var u2 = fbUser();
           (u2 && u2.getIdToken ? u2.getIdToken(true) : Promise.resolve()).catch(function () {}).then(function () {
+            resyncPro();   // owner approval landed while the app was open: refresh the cached verdict too
             if (gate() && gate().dataset.mode !== "panel") hideGate();
           });
           return;

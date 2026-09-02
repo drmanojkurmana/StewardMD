@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>paywall-resync fixture</title>
+<!-- Host page for test/run-paywall-resync-ui.mjs. Real pro-notice.js + real pro-paywall.js; only
+     account.js (the entitlement cache) and the network are stubbed. window.__server is what
+     /api/billing/status answers; window.__state / __pro are the CACHED verdict; sync() copies the
+     server answer into the cache exactly the way account.js does. -->
+<script>
+  window.__syncs = 0;
+  window.__pro = false;
+  window.__state = null;
+  window.__server = null;
+  window.SMD_PRO = {
+    isProSync: function () { return !!window.__pro; },
+    proState: function () { return window.__state || null; },
+    sync: function () {
+      window.__syncs++;
+      var d = window.__server || {};
+      return new Promise(function (res) { setTimeout(function () { window.__state = d; window.__pro = !!d.pro; res(d); }, 40); });
+    }
+  };
+  window.SMD_AUTH = { currentUser: { getIdToken: function () { return Promise.resolve("tok"); } } };
+  window.SMD_VERIFY = { openPanel: function () { window.__opened = "verify"; } };
+  window.toast = function () {};
+  var PLANS = { plans: { monthly: { months: 1, amount: 59900 }, annual: { months: 12, amount: 499900 },
+    tiers: { pro: { amount: 59900, annual: 499900, regular: 99900, label: "Pro", popular: true } }, addons: {}, tokens: {} } };
+  window.fetch = function (url) {
+    var body = String(url).indexOf("/plans") > -1 ? PLANS : (window.__server || {});
+    return Promise.resolve({ ok: true, status: 200, json: function () { return Promise.resolve(body); } });
+  };
+</script>
+</head>
+<body>
+<main style="height:300px">app</main>
+<script src="/pro-notice.js"></script>
+<script src="/pro-paywall.js"></script>
+</body>
+</html>
