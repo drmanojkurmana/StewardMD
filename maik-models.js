@@ -138,7 +138,7 @@
      * token budget; the fine-tune was trained with thinking off. */
     "maik-lite": {
       label: "MAiK Lite",
-      actual: "MaiK Lite 1.7B v2 (StewardMD fine-tune of MedPsy 1.7B, Q4_K_M)",
+      actual: "MaiK Lite 1.7B v4 (StewardMD fine-tune of MedPsy 1.7B, Q4_K_M)",
       tier: 0,
       own: true,
       noThink: true,
@@ -164,7 +164,7 @@
         name: "maik-lite-q4_k_m.gguf",
         url: R2 + "/maik-lite-q4_k_m.gguf",
         bytes: 1107408704,   // exact
-        sha256: "695363b1121869e1b2bc8c9cc25fc412ff47e30d6d731e9b9b8c4e218d067bc3"   // v2 weights; VERIFIED against the complete file before upload
+        sha256: "3d779b25e1812455e7d93ca6c3fce235459d08c34e574a3e182c9fb4eddd5276"   // v4 weights; VERIFIED against the complete file before upload
       }]
     },
     "maik-mxcore": {
