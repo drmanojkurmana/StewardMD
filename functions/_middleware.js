@@ -217,6 +217,16 @@ export async function onRequest(context) {
       // check-in on the console answered "Patient check-in is unavailable." - a page let in without
       // the one script it cannot work without. Exactly this file, never a directory.
       url.pathname === "/patient-register.js" ||
+      // SAME TRAP, missed the first time: the sheet's OWN STYLESHEET was never added alongside its
+      // script. A CSS 404 degrades silently (no console error, nothing "unavailable") - it just
+      // renders as unstyled HTML flowing off the bottom of the page, so it went unnoticed here.
+      url.pathname === "/patient-register.css" ||
+      // Self-hosted fonts (Inter Variable body text + Material Symbols Rounded icon font, both
+      // @font-face'd by every PUBLIC_PAGE: opd/opd-display/queue/subscribe). Public, non-sensitive
+      // font files - not app code - same reasoning as the brand-image allowlist below. Missing this
+      // is why icon buttons rendered their raw ligature name ("chevron_right", "play_arrow") as
+      // literal text instead of an icon on every one of those pages.
+      /^\/assets\/fonts\/[\w.-]+\.(woff2?|ttf|otf)$/i.test(url.pathname) ||
       url.pathname.startsWith("/atlas/")) {
     return next();
   }
