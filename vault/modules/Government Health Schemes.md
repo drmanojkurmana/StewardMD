@@ -70,22 +70,26 @@ HBP 2022 master), 0 NOT FOUND. Two structural findings worth knowing before Phas
 **URL liveness sweep (2026-09-02, `functions/db/govschemes_url_sweep_2026-09-02.txt`)** - all 79
 unique inventory URLs curl'd (HEAD, follow redirects, 20s, browser UA). Results and what they mean:
 - **55 reachable (200), 4 redirects to live sites, 20 unreachable (status 000).**
-- **The 20 are almost certainly geo-blocking, not dead links.** Every one is a `curl (28) TCP
-  connection timeout` while DNS resolves fine to NIC India address space (`pmjay.gov.in` ->
-  `14.143.233.34`, `cghs.gov.in` -> `164.100.166.183`). Indian govt portals routinely silent-drop
-  non-Indian IPs at the firewall, and the sweep ran from a non-India sandbox. `pmjay.gov.in` and
-  `cghs.gov.in` are unquestionably live. **Re-verify all 20 from an Indian IP** (owner's own device);
-  nothing can be concluded about them from here.
+- **The 20 unreachable are NOT geo-blocking and NOT dead links** (an earlier draft of this note
+  said geo-blocking - wrong, corrected the same day: the machine is IN India, Andhra Pradesh,
+  `125.62.195.178`). Real diagnosis: `pmjay.gov.in` (`14.143.233.34`) is filtered at the TCP level
+  on BOTH ports 80 and 443 - `nc` reports closed/filtered, curl connect time 0.000s (immediate
+  failure, not slow). DNS resolves fine. Chrome on this Mac (real network, not the sandbox) times
+  out on it and on `cghs.gov.in` too. ~20 NIC-hosted portals (`14.143.x`, `164.100.x` address space)
+  failing identically points at this ISP blackholing routes toward NIC, not 20 simultaneous
+  outages. **Confirm by retrying from a different network (mobile hotspot).** `pmjay.gov.in` and
+  `cghs.gov.in` are known-live sites.
 - **One genuine anomaly:** `mjpjay.gov.in` has NO DNS record at all - unlike the timeouts, that is a
   wrong/defunct hostname. `www.jeevandayee.gov.in` is the real Maharashtra MJPJAY portal.
-- **ZERO direct file downloads.** All 55 successes are `text/html`. agy located the *portals*
-  correctly, but not one inventory URL is a `.xlsx`/`.pdf`/`.csv` package master - "FOUND"
-  overstates it; read it as "portal located, download link not yet found." The real file links sit
-  behind portal navigation/JS and still need per-state discovery before ingestion.
-- **Silver lining - at least 5 are real package-master HTML TABLE pages**, ingestible via an HTML
-  adapter (the spec's ingestion engine covers HTML): Tamil Nadu `cmchistn.com/package_master`,
-  `/procedure_list`, `/highend_packages`; Gujarat `ma.gujarat.gov.in/PackageRates.html`; Assam
-  `atalamritabhiyan.assam.gov.in/.../pmjay-package-master`. These are the best next ingestion
-  targets after the central PM-JAY HBP master (which itself needs the Indian-IP recheck first).
+- **HTTP 200 proves nothing on these portals.** All 55 "successes" are `text/html`, and loading one
+  in a real browser (`cmchistn.com/package_master`) showed a React app rendering a soft "404 Page
+  Not Found" behind the 200. So agy's deep-links are unreliable in BOTH directions: a timeout is
+  not dead, and a 200 is not found. An earlier draft here listed "5 real package-master HTML
+  pages" off those 200s - also wrong, withdrawn. **Only a URL loaded in a real browser and SEEN to
+  contain codes + amounts counts as found.** That verification is the `govschemes_verified_sources_
+  batch{1,2,3}.md` files (Claude subagents driving Chrome via DevTools MCP, 2026-09-02).
+- **Central PM-JAY workaround:** `nha.gov.in/PM-JAY` (the same authority, National Health
+  Authority) IS reachable (200) while `pmjay.gov.in` is not - the HBP 2022 master should be
+  sourced from there.
 
 Deps: [[Decisions]]

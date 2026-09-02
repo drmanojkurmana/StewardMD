@@ -1,13 +1,20 @@
-# URL liveness sweep of govschemes_source_inventory.md - 2026-09-02, run from a NON-India IP (sandbox egress).
+# URL liveness sweep of govschemes_source_inventory.md - 2026-09-02, run from an INDIA IP
+#   (Andhra Pradesh, ISP Vizag Broadcasting, 125.62.195.178 - NOT a foreign sandbox; an earlier
+#   header here claimed geo-blocking, which was wrong and is corrected below).
 # Format: status|content-type|final-url|url
-# 000 = curl (28) TCP connection timeout while DNS resolves fine to NIC India address space
-#       (e.g. pmjay.gov.in -> 14.143.233.34, cghs.gov.in -> 164.100.166.183). That is the
-#       geo-block signature of Indian govt portals dropping non-Indian IPs - NOT a dead link.
-#       Re-verify every 000 from an Indian IP before drawing conclusions.
-# Exception: mjpjay.gov.in has NO DNS record at all - likely a wrong/defunct hostname
+# 000 = TCP-level unreachable. pmjay.gov.in (14.143.233.34) is closed/filtered on BOTH ports 80
+#       and 443 (nc), curl connect 0.000s = immediate failure. DNS resolves fine. Chrome on this
+#       Mac's real network times out on it and cghs.gov.in too. ~20 NIC-hosted portals
+#       (14.143.x / 164.100.x) failing identically => most likely this ISP blackholing routes to
+#       NIC, not 20 outages and not geo-blocking. NOT a dead link. Confirm from another network
+#       (mobile hotspot) before drawing conclusions.
+# Exception: mjpjay.gov.in has NO DNS record at all - a wrong/defunct hostname
 #       (www.jeevandayee.gov.in is the real Maharashtra MJPJAY portal).
-# All 55 successes returned text/html - ZERO direct .xlsx/.pdf/.csv package-master files.
-#       The inventory located portals, not download links. Per-state file discovery still needed.
+# 200 proves NOTHING here: all 55 are text/html and at least one (cmchistn.com/package_master)
+#       is a React soft-404 ("Page Not Found") behind a 200. Zero direct file downloads.
+#       Only a URL loaded in a real browser and SEEN to show codes+amounts counts as found -
+#       see govschemes_verified_sources_batch{1,2,3}.md.
+# Workaround for central PM-JAY: nha.gov.in/PM-JAY (same authority) returns 200.
 000||http://ayushmanbharat.mp.gov.in/|http://ayushmanbharat.mp.gov.in
 000||https://andaman.gov.in/|https://andaman.gov.in
 000||https://bis.jharkhand.gov.in/|https://bis.jharkhand.gov.in
