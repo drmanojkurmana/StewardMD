@@ -205,6 +205,7 @@ Set in Cloudflare (env or the billing-cfg KV, which wins). These are not `localS
 | Flag | Def | Why |
 |---|---|---|
 | `VERIFY_REQUIRED_FOR_PRO` | **ON** | Pro requires a verified NMC/SMC registration (`_entitlement.js` `isPro`). Set `0` to restore the pre-2026-08-27 launch-promo free-for-all with no deploy; `test/entitlement-trial.test.mjs` pins that path. |
+| `VERIFY_NAME_ONLY_MATCH` | **OFF** | Auto-verify a certificate whose registration NUMBER could not be read but whose NAME could, when the register returns exactly ONE agreeing row (council-narrowed). A loosening of the rule, so the owner turns it on; `_verify_match.js` `uniqueNameMatch`, added 2026-09-02. Everything else in that change (core-first queries, D1 on empty, initials, 0.5 confidence floor) is unconditional. |
 | `VERIFIED_PRO_DAYS` | `7` | Length of the free Pro window a doctor earns by verifying. |
 | `UNVERIFIED_PURGE_ON` | **ON** | **DESTRUCTIVE, ARMED 2026-08-27 (owner).** The 7-day unverified-account sweep acts. Set `0` for report-only. Warning emails send either way. |
 | `UNVERIFIED_PURGE_HARD_DELETE` | **ON** | **IRREVERSIBLE, ARMED 2026-08-27 (owner).** Deletes the Firebase user, after `purgeUserData()` removes their cases, verification record, budget cache and Firestore profile/directory entry. Set `0` to *disable* the account instead (reversible). |

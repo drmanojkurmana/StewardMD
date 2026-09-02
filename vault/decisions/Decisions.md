@@ -5,6 +5,62 @@ tags: [decisions, adr]
 
 Dated architectural calls + why. Newest first. Keep each short: **decision · why · trade-off · status**.
 
+## 2026-09-02 · Auto-verification at 1 in 10, and the Subscription tap that asked a verified doctor to verify
+
+**Reported with a screenshot:** the owner's own account wearing the Pro badge while the More → Subscription
+row said "This feature needs a verified registration"; and separately, "auto verification of doctors doesn't
+work as intended (1/10 of expected)".
+
+**Why auto-verification said no to doctors who are on the register.** Four decisions in
+`functions/api/verify-doctor.js`, each defensible alone, that together sent most genuine uploads to
+manual review:
+
+| Decision | Effect |
+|---|---|
+| Live register queried with the number AS PRINTED (`APMC/FMR/112487/2015`) | The app's own register search (`nmc-search.js`) queries the digit core and works. Same service, different question, empty answer. |
+| An EMPTY answer from the live register was final | The offline D1 mirror was consulted only when the register was DOWN, never when it was up and did not recognise the form of the number. |
+| Name agreement had no notion of initials | `K MANOJ KUMAR` vs `KURMANA MANOJ KUMAR` is one person; the rule needed equal tokens. |
+| Register match on number AND name still went to a human under Gemini confidence 0.85 | Self-reported OCR confidence is uncalibrated and sits at 0.6-0.8 for a phone photo. The register match is the evidence; the model's opinion of its own reading is not, once the register has agreed. |
+
+**Fix: `functions/_verify_match.js`**, the pure half of the decision, unit-tested (`test/verify-match.test.mjs`,
+27 cases). `nmcQueriesFor()` asks for the core first and the printed form last; `registerLookup()` falls
+through to D1 on an empty answer, not just on an outage; `nameAgrees()` honours initials in both
+directions and joined names, and still refuses bare initials; `AUTO_VERIFY_MIN_CONFIDENCE` is 0.5, a
+sanity floor. **Nothing here can auto-reject**: every "no" still lands in the owner's manual queue with
+provisional access. What changed is how many genuine doctors get a "yes" without waiting for a human.
+Each pending record now carries `lookup: {queries, source, records}` so "why was this one manual?" is
+answerable from the review queue. **Behind a flag, default OFF:** `VERIFY_NAME_ONLY_MATCH=1` lets a
+certificate whose number could not be read but whose name could verify against a register that returns
+EXACTLY ONE agreeing row (council-narrowed). It is a loosening of the rule, so the owner turns it on.
+
+**Why the Subscription tap asked a verified doctor to verify.** Two readers, two answers, both honest:
+the header badge reads the `pro` CLAIM (`pro-badge.js`); the paywall's verify-bounce reads the
+`/billing/status` payload `account.js` cached at sign-in (`SMD_PRO_NOTICE.reason()`). A verification
+that lands mid-session refreshed the token (so the claim was fresh) and never told `account.js`, so the
+cache said "unverified" until the next app open. And for the owner specifically, `accessState()` had no
+notion of an owner at all, so the server itself answered `unverified` for the person running the platform.
+
+**Fix, three places.** (1) `_entitlement.js` `isOwnerClaims()`: a platform owner (`_adminauth.js`
+`OWNER_EMAILS`, email read from the SIGNED token) holds Pro as a team entitlement, `source:"owner"`.
+Deliberately NOT `verified`: verification also unlocks the prescription pad, which stamps a real
+registration number, and an owner who is not a registered doctor must still not have that.
+(2) `pro-paywall.js` `openPaywall()` decides on a FRESH verdict: when the cache says unverified/pending it
+calls `SMD_PRO.sync()` once, then re-decides; the second pass never re-syncs, so a still-unverified
+account sees the explainer exactly once and nothing loops. (3) `verify.js` `resyncPro()`: a
+verification landing mid-session (upload success, or an owner approval discovered by `evaluate()`)
+pushes a cache refresh AFTER the forced token refresh, so the request carries the new claim.
+
+**Trade-off:** one extra `/billing/status` round trip on a Subscription tap by an unverified account,
+a rare user-initiated action. Owner Pro is a new server-side entitlement source; it is gated on the
+signed token's email against the same owner list every admin surface already trusts.
+
+**Status:** `test/verify-match.test.mjs` 27/27, `test/verify-gate.test.mjs` +5 owner cases,
+`test/paywall-resync.test.mjs` 6/6 (sandbox), `test/verify-resync.test.mjs` 3/3 (structural),
+`test/run-paywall-resync-ui.mjs` 10/10 in a real browser (`test/fixtures/paywall-resync.html`).
+Verification + entitlement suites 124/124. The live NMC endpoint could not be probed from the build
+environment (its certificate chain fails verification through the proxy), so the "core not printed
+form" claim rests on `nmc-search.js`, which ships to doctors and queries the core.
+
 ## 2026-08-27 · The verification split-brain: two stores, one question, no reconciler
 
 **Reported with a screen recording.** The verification panel showed "Your account is verified ✓"
