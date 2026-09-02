@@ -1966,3 +1966,34 @@ Known gaps for a v3 pass (do not re-discover): the think habit is reduced, not e
 robust fix is a <think>-token ban at the native sampler (both platforms) or more discipline data;
 scope-refusal is enforced by the Intent Firewall (maik-scope.js) upstream, NOT by the model, which
 answered a football question in bare-model probes.
+
+## 2026-09-02 — MaiK Lite v3/v4: found and fixed WHY the think habit persisted, caution policy removed
+
+v3 (bare-question data, no abstain examples, caution policy removed per owner order) trained
+cleanly but its own in-VM probes came back 0/8 passing - still opening `<think>` and never
+closing it, exactly like v1/v2 on the phone path. Root cause, found by inspecting the actual
+training prompt: `tokenizer.apply_chat_template()` silently prepends the BASE MODEL VENDOR'S
+default system line ("You are MedPsy, a medical and healthcare AI assistant developed by QVAC")
+ahead of whatever system text we pass it. So v1/v2/v3 were all trained with an extra hidden
+system turn the phone never sends - the empty-think suppression was conditioned on a prompt
+that does not exist at serve time. Confirmed by decoding the actual tokenized prompt, not by
+reading the template source.
+
+v4 (`train_vm3.py`) fixes this the only reliable way: it does not call `apply_chat_template` at
+all. It hand-builds the exact ChatML string llama.cpp's `llama_chat_apply_template` produces
+(`<|im_start|>system\n...<|im_end|>\n<|im_start|>user\n...`) so train and serve are byte-identical.
+Data recipe otherwise unchanged from v3: bare questions (no book-evidence wrapper - the phone
+never sends one), abstain/clarify examples fully removed (owner: "REMOVE CAUTION POLICY"), dose/
+numeric/criteria/contra examples kept for dosing quality.
+
+Result, in-VM probes over the exact phone path (llama-cli --chat-template chatml, no evidence,
+app system prompt), 8 owner-supplied questions including the two that had failed live
+("Treatment of Pneumonia", "Fever Treatment") plus 4 dose questions: **8/8 clean - zero
+unterminated thinking, zero blank answers.** Shipped as the maik-lite pack's weights (sha256
+3d779b25..., same R2 object key as v2/v3, no other code change needed).
+
+Not fixed by v4, still true: a 1.7B WILL make occasional dose errors (verified: one probe named
+azithromycin BID instead of the correct QD/weekly regimen for CAP - a plausible-sounding but wrong
+figure). No training pass removes this ceiling; the durable fix is routing dose-specific questions
+to the deterministic drug engine instead of the fine-tuned model. Scope-refusal (non-medical
+questions) is still enforced upstream by the Intent Firewall (`maik-scope.js`), not by the model.
