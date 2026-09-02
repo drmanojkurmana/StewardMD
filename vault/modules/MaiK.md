@@ -32,6 +32,18 @@ physical iPhone: 126/126 requests streamed with multiple deltas.
 [[MaiK Intent Firewall]] · [[AI Control Center]] (per-module caps, model) · [[Medical Knowledge Base]] · Vertex (prod only; preview lacks it) · [[Infra]] MAIK_KV.
 
 ## Gotchas
+- **A named score is answered by its calculator, for free** (2026-09-02). `maikRoute()` has a
+  `calculator` kind: `MEDCALC.find(q)` resolves the question to one calculator by title (conservative:
+  every question word must be in the title, a real word must match, ambiguous names return null), and
+  the answer is a local card with "Open <name>" + "Ask MaiK anyway" (`_maikSkipCalc`, one-shot). Zero
+  tokens. Checked BEFORE the patient-specific route. Decisions 2026-09-02.
+- **Every "Open in app" chip is delegated through ONE `closest()` selector** in `home.js`
+  (`[data-maik-q],[data-maik-web],[data-maik-tool],[data-maik-calc],[data-maik-calcask]`). A chip whose
+  attribute is not in that list is silently dead: the handler returns before any branch runs. That is
+  exactly how every `data-maik-tool` chip died for a while. Add the attribute to the selector when you
+  add a chip kind, and cover it in `test/run-maik-calc-route-ui.mjs`.
+- `maikRoute()` is evaluated OUTSIDE module scope by `test/maik-greeting-route.test.mjs` (regex-sliced,
+  `new Function`). Any module-level variable it touches must be `typeof`-guarded or the suite breaks.
 - **The on-device engine is gated on PRO, not on a flag** (2026-08-27). `gateActive()` reads
   `SMD_PRO.isProSync()` only; the old `SMD_XACCESS` `maik_local` access-code gate is gone from the
   client AND from `functions/_experimental.js`. Dev hatches kept: `smd_maik_local_bypass=1` and a

@@ -3697,6 +3697,7 @@
   // instead of being treated as new questions. Never persisted; not PHI; cleared on close.
   var _maikTopic = null;          // { topic, question, depth, lastDrug, ts }
   var _maikDisambigResolved = false;  // set true for ONE send when the user just tapped a "Which did you mean?" chip → skip the never-guess re-ask (else it loops on its own answer, e.g. "Pulmonary" → pulmonary-anatomy chips)
+  var _maikSkipCalc = false;          // set true for ONE send by "Ask MaiK anyway" on a calculator card → bypass the zero-token calculator route once
   var _maikTurns = [];            // recent {q, a-gist} turns sent to the provider for conversational continuity (not persisted; not PHI)
   // Factors the clinician has ALREADY answered in this conversation. The model re-emits its
   // @@REFINE@@ line on every answer, so after "renal function: creatinine 1.2" the next answer
@@ -5056,6 +5057,16 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       }
       // B product/help
       if (/what (can|do) you do|what is maik|who are you|how (do i|to) use|how (do i|to) start|how does this work|where('?s| is)? (the )?(drug|calculator|calc|ward|icu|dx)/.test(n)) return { kind: "help" };
+      /* A question that NAMES a clinical score / calculator the app already ships is answered by the
+       * calculator itself: zero tokens, and the arithmetic is the registry's, not the model's.
+       * Reported 2026-09-02: "HACOR score" cost a paid Gemini turn and came back with a fabricated
+       * formula while Calculators sat one tap away. Checked BEFORE the patient-specific route so
+       * "calculate CURB-65 for a 72-year-old with RR 32" still lands on the calculator. The
+       * one-shot _maikSkipCalc lets "Ask MaiK anyway" through to the model. */
+      // typeof-guarded: two structural tests evaluate maikRoute() on its own, outside module scope.
+      var _skipCalc = (typeof _maikSkipCalc !== "undefined") && _maikSkipCalc;
+      if (typeof _maikSkipCalc !== "undefined") _maikSkipCalc = false;
+      if (!_skipCalc && typeof maikCalcFor === "function") { var _calc = maikCalcFor(q); if (_calc) return { kind: "calculator", calc: _calc }; }
       // E patient-specific (existing detector) with no active case → guided assessment
       if (isPatientSpecific(q) && !active) return { kind: "patient" };
       // C/D anything else with clinical substance → one grounded provider call.
@@ -5348,6 +5359,31 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       if (/(resistance|antibiogram|susceptib|sensitiv|antibiogram|local .*(pattern|data|flora)|resistogram)/.test(s)) return "antibiogram";
       return null;
     }
+    /* Resolve a question to ONE shipped calculator by name (MEDCALC.find), but only when the question
+     * is actually asking about a score/calculator - a bare disease name that happens to share a word
+     * with a calculator title is not. `exact` (the question is essentially just the name) is enough
+     * on its own; otherwise a calculator cue word is required. */
+    function maikCalcFor(question) {
+      try {
+        if (!(window.MEDCALC && MEDCALC.find)) return null;
+        var n = maikNorm(question || "");
+        var hit = MEDCALC.find(n);
+        if (!hit) return null;
+        var cue = /\b(score|scores|scoring|scale|criteria|calculat(e|or|ion|ing)|formula|index|grade|grading|staging|classification|how (do|to) (i |we |you )?(calculate|compute|score))\b/.test(n);
+        return (hit.exact || cue) ? hit : null;
+      } catch (e) { return null; }
+    }
+    // The zero-token answer card for a named calculator: what it is, what it needs, one tap to open,
+    // and a way to ask the model anyway. Chips are delegated (data-maik-*), so they survive a thread
+    // restore from saved innerHTML exactly like the refine chips.
+    function maikCalcHTML(c, question) {
+      var inputs = (c.inputs || []).map(function (x) { return x && x.label ? String(x.label).replace(/\s*\(.*$/, "") : ""; }).filter(Boolean);
+      var need = inputs.length ? '<div class="maik-calc-in">Needs: ' + maikEscH(inputs.slice(0, 6).join(" · ")) + (inputs.length > 6 ? " · …" : "") + '</div>' : "";
+      return '<div class="maik-welcome maik-calc"><b>' + maikEscH(c.title) + '</b> is in your calculators.' + (c.desc ? " " + maikEscH(c.desc) : "") + need + '</div>' +
+        '<div class="maik-tools"><span class="maik-tools-lbl">Open in app</span>' +
+        '<button class="maik-fu maik-tool" data-maik-calc="' + maikEscH(c.id) + '">' + maikEscH("Open " + c.title) + '</button>' +
+        '<button class="maik-fu" data-maik-calcask="' + maikEscH(String(question || "")) + '">Ask MaiK anyway</button></div>';
+    }
     // Phase 4 — tool-calling: detect when a question is best answered by a structured in-app tool and
     // offer a one-tap "open in app" chip (drug interactions, calculators/scores, Drug Index dosing).
     // The chip routes through the delegated handler (data-maik-tool) → the ACT map, exactly like the
@@ -5356,7 +5392,12 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       var n = maikNorm(question || ""), chips = [], seen = {};
       function add(tool, label) { if (seen[tool]) return; seen[tool] = 1; chips.push('<button class="maik-fu maik-tool" data-maik-tool="' + tool + '">' + maikEscH(label) + '</button>'); }
       if (/\binteract(ion|ions)?\b|drug[- ]drug|concomitant|compatib|\b(give|use|combine|coadminister)\b.*\b(with|and)\b/.test(n)) add("interactions", "Check interactions");
-      if (/\b(score|scores|criteria|calculate|calculator|chads|cha2ds2|wells|curb|\bsofa\b|qsofa|meld|child[- ]?pugh|apache|glasgow coma|\bgcs\b|nihss|centor|padua|caprini|ranson|bisap|framingham|ascvd|grace|\btimi\b|has[- ]?bled)\b/.test(n)) add("calculators", "Open calculators");
+      if (/\b(score|scores|criteria|calculate|calculator|chads|cha2ds2|wells|curb|\bsofa\b|qsofa|meld|child[- ]?pugh|apache|glasgow coma|\bgcs\b|nihss|centor|padua|caprini|ranson|bisap|framingham|ascvd|grace|\btimi\b|has[- ]?bled)\b/.test(n)) {
+        // Name the calculator when the question names one ("Open CURB-65"), the list otherwise.
+        var _hit = null; try { _hit = (window.MEDCALC && MEDCALC.find) ? MEDCALC.find(n) : null; } catch (e) {}
+        if (_hit && !seen.calculators) { seen.calculators = 1; chips.push('<button class="maik-fu maik-tool" data-maik-calc="' + maikEscH(_hit.id) + '">' + maikEscH("Open " + _hit.title) + '</button>'); }
+        else add("calculators", "Open calculators");
+      }
       if (/\bdose|dosing|dosage|how much|mg\/kg|titrat/.test(n)) add("drugs", "Open Drug Index");
       if (!chips.length) return "";
       return '<div class="maik-tools"><span class="maik-tools-lbl">Open in app</span>' + chips.slice(0, 2).join("") + '</div>';
@@ -6005,6 +6046,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       }
       var route = maikRoute(q, active);
       if (route.kind === "casual") { bubble("ai", '<div class="maik-welcome">' + maikEscH(route.reply) + '</div>'); return; }
+      if (route.kind === "calculator") { bubble("ai", maikCalcHTML(route.calc, q)); try { scroll(); } catch (e) {} return; }
       if (route.kind === "help") {
         var h = bubble("ai", '<div class="maik-welcome"><b>Ask Maik</b> is StewardMD’s clinical knowledge assistant. I can:<br>• answer general clinical & drug questions (grounded in StewardMD’s knowledge base)<br>• point you to the calculators and drug reference<br>• add commentary once you’ve run a patient assessment.<br><br>To assess a patient, start <b>Dx My Patient</b> or <b>Clinical Reasoning</b> and enter the findings.</div>');
         [["Ask a clinical question", function () { qEl.value = "How do we treat DKA?"; try { qEl.focus(); } catch (e) {} }], ["Start Dx My Patient", function () { close(); try { openDxChooser(); } catch (e) {} }]].forEach(function (c) { var b = document.createElement("button"); b.className = "maik-chip"; b.style.margin = "8px 6px 0 0"; b.textContent = c[0]; b.addEventListener("click", c[1]); h.appendChild(b); }); scroll(); return;
@@ -6022,7 +6064,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       runClinical(q, q, depth, active, topic);
     }
     // test hook (dev/regression harnesses only — closures are otherwise unreachable)
-    try { window.__MAIK_TEST = { resolveFollowup: maikResolveFollowup, getTopic: function () { return _maikTopic; }, setTopic: function (t) { _maikTopic = t; }, refineHTML: maikRefineHTML, refineCompose: maikRefineCompose, refineKnown: maikRefineKnown, refineRemember: maikRefineRemember, refineForget: function () { _maikRefined = {}; }, doseLookup: maikDoseLookup, buddyBusy: maikBuddyBusy, botSVG: maikBotSVG, docState: function () { return _mkdState ? { x: _mkdState.x, dir: _mkdState.dir, state: _mkdState.state } : null; }, docCue: maikDocCue, docClassify: maikDocClassify }; } catch (e) {}
+    try { window.__MAIK_TEST = { resolveFollowup: maikResolveFollowup, getTopic: function () { return _maikTopic; }, setTopic: function (t) { _maikTopic = t; }, refineHTML: maikRefineHTML, refineCompose: maikRefineCompose, refineKnown: maikRefineKnown, refineRemember: maikRefineRemember, refineForget: function () { _maikRefined = {}; }, doseLookup: maikDoseLookup, buddyBusy: maikBuddyBusy, botSVG: maikBotSVG, docState: function () { return _mkdState ? { x: _mkdState.x, dir: _mkdState.dir, state: _mkdState.state } : null; }, docCue: maikDocCue, docClassify: maikDocClassify, route: maikRoute, calcFor: maikCalcFor, calcHTML: maikCalcHTML, toolChipsHTML: maikToolChipsHTML }; } catch (e) {}
     // restore the prior conversation verbatim (questions AND answers) for this session; else empty state
     if (_maikBodyHTML && /maik-b you/.test(_maikBodyHTML)) { body.innerHTML = _maikBodyHTML; scroll(); } else { emptyState(); }
     function maikNewThread() { maikSetActive(maikNewConvId()); _maikBodyHTML = ""; _maikTurns = []; _maikRefined = {}; _maikTopic = null; _maikCache = {}; _maikHist = []; try { localStorage.setItem(maikThreadKey(), ""); } catch (e) {} if (body) body.innerHTML = ""; emptyState(); try { maikCloseSide(); } catch (e) {} if (qEl) { qEl.value = ""; qEl.placeholder = "Ask a clinical question…"; qEl.focus(); } }
@@ -6365,9 +6407,19 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       if (rx) { ev.preventDefault(); var rrow = rx.closest("[data-maik-inline]"); if (rrow) maikRefineUnstage(rrow); return; }
       var askAll = ev.target && ev.target.closest ? ev.target.closest("[data-maik-askall]") : null;
       if (askAll) { ev.preventDefault(); maikRefineAsk(askAll.closest(".maik-refine")); return; }
-      var el = ev.target && ev.target.closest ? ev.target.closest("[data-maik-q],[data-maik-web]") : null;
+      var el = ev.target && ev.target.closest ? ev.target.closest("[data-maik-q],[data-maik-web],[data-maik-tool],[data-maik-calc],[data-maik-calcask]") : null;
       if (!el) return;
       ev.preventDefault();
+      /* "Open <calculator>" straight into that calculator (reported 2026-09-02: the generic chip below
+       * was dead - see the selector above, which used to stop at data-maik-q/data-maik-web so the
+       * data-maik-tool branch was never reached). Close MaiK FIRST: the sheet is z-index 999 and the
+       * calculator overlay 870, so opening it underneath is exactly what "the chip does nothing" looks like. */
+      var calcId = el.getAttribute("data-maik-calc");
+      if (calcId) { close(); setTimeout(function () { try { if (window.MEDCALC && MEDCALC.open) MEDCALC.open(calcId); else if (window.MEDCALC) MEDCALC.openList(); } catch (e) {} }, 180); return; }
+      // "Ask MaiK anyway" on a calculator card: re-send the SAME question with the local calculator
+      // route bypassed for exactly one send, so the clinician can still get the narrative answer.
+      var calcAsk = el.getAttribute("data-maik-calcask");
+      if (calcAsk) { if (_maikBusy) return; _maikSkipCalc = true; try { qEl.value = calcAsk; } catch (e) {} send(); return; }
       // Intent-aware refinement chips: route factors that a dedicated tool answers better than the LLM.
       var refine = el.getAttribute("data-maik-refine");
       if (refine) {

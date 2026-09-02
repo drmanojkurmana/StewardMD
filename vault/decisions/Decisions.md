@@ -5,6 +5,55 @@ tags: [decisions, adr]
 
 Dated architectural calls + why. Newest first. Keep each short: **decision · why · trade-off · status**.
 
+## 2026-09-02 · A named score is answered by its calculator, not by the model; the tool chips were dead
+
+**Reported with a screenshot:** "HACOR score" in MaiK (Cloud) spent a paid Gemini turn and answered
+with a fabricated formula (`FiO2 × 100 / (PaO2/FiO2)` - HACOR is Heart rate, Acidosis, Consciousness,
+Oxygenation, Respiratory rate), while the "Open calculators" chip under the answer did nothing when
+tapped. Owner: "why didn't it redirect to our calculator, and these chips don't work."
+
+**Why the chip was dead.** `home.js`'s delegated chip handler resolved the tapped element with
+`closest("[data-maik-q],[data-maik-web]")` and returned when nothing matched. The tool chips carry
+only `data-maik-tool`, so every one of them ("Open calculators", "Open Drug Index", "Check
+interactions") fell through that early return; the `data-maik-tool` branch further down was
+unreachable. A comment elsewhere in the file still claimed those chips "always worked", which is how
+a dead code path stays dead: it was believed to be the working one. The selector now includes
+`data-maik-tool`, `data-maik-calc`, `data-maik-calcask`.
+
+**Why the tokens were spent.** Nothing resolved a score NAME against the calculator registry before
+the model was called. `MaiKBrain.suggestCalcs` maps conditions to scores (pneumonia → CURB-65) but
+had no idea what "HACOR" was, and `plan()`'s "pure score → no Gemini" flag is not consulted by
+`runClinical` anyway. (HACOR also did not exist in the registry: 430 calculators, no HACOR.)
+
+**Fix, four places.** (1) `calculators.js` `MEDCALC.find(query)`: resolve free text to ONE calculator
+by name. Conservative by construction: every significant word of the question must appear in the
+title (so "treatment of pneumonia" does not hit "CURB-65 (pneumonia)"), a real word must match (so
+"65" alone never does), the calculator's own name must be at least half covered, and two calculators
+that fit equally is "not sure" ("wells score" → null; "wells score for PE" → wells_pe). Digits split
+from letters and subscripts normalised so `curb65`, `CURB-65`, `CHA2DS2-VASc` all resolve. A short
+alias map covers spoken forms (`gcs`, `crcl`, `chads vasc`). (2) `home.js` `maikRoute()`: a
+`calculator` kind, checked before the patient-specific route, that requires either an exact name or
+a score cue word. The answer is a local card (what it is, what it needs, "Open <name>", "Ask MaiK
+anyway") - zero tokens, and the arithmetic is the registry's. `_maikSkipCalc` is a one-shot bypass
+for "Ask MaiK anyway", same pattern as `_maikDisambigResolved`. (3) `maikToolChipsHTML` names the
+calculator ("Open CURB-65" via `data-maik-calc`) when the question names one, generic list chip
+otherwise. (4) `MaiKBrain.suggestCalcs` puts a named calculator first, so the copilot's "Open in
+StewardMD" chips say its name. Plus a HACOR entry (Duan 2017, five bands, >5 = high risk of NIV
+failure) so the reported question has somewhere to land.
+
+**Trade-off:** a question that is ONLY a score name no longer gets a narrative from the model by
+default; it gets the calculator and an explicit "Ask MaiK anyway". That is the owner's stated
+preference ("rather than wasting tokens"). A false positive in `find()` would send a doctor to the
+wrong calculator, which is why it is conservative and every miss falls back to the old behaviour.
+
+**Status:** `test/calc-find.test.mjs` 9/9 (resolver + HACOR bands + threshold); `test/run-maik-calc-route-ui.mjs`
+22/22 in a real browser: the reported question routes to HACOR through the real send path with ZERO
+`/api/ai` calls, the previously-dead generic chip opens the list, the specific chip opens that
+calculator, delegation survives a thread restore, and "Ask MaiK anyway" bypasses exactly once.
+`maikRoute()` gained `typeof` guards because two structural suites evaluate it outside module scope.
+**Note:** the HACOR entry is new clinical content and is marked for clinician sign-off like the rest
+of the registry.
+
 ## 2026-09-02 · Auto-verification at 1 in 10, and the Subscription tap that asked a verified doctor to verify
 
 **Reported with a screenshot:** the owner's own account wearing the Pro badge while the More → Subscription

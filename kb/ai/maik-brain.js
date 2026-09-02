@@ -251,6 +251,10 @@
   function suggestCalcs(q, primary) {
     var hay = (q + " " + (primary && primary.canonicalName ? norm(primary.canonicalName) : "")).trim();
     var out = [], seen = {};
+    // A calculator NAMED in the question comes first (MEDCALC.find resolves by title), ahead of the
+    // condition-mapped suggestions below. That is what makes "Open in StewardMD" say "Open HACOR
+    // score" rather than a generic chip, or nothing, when the doctor asked for a score by name.
+    try { var C = G("MEDCALC"); var hit = C && C.find ? C.find(q) : null; if (hit && hit.id) { seen[hit.id] = 1; out.push({ id: hit.id, why: "named in the question" }); } } catch (e) {}
     for (var i = 0; i < CALC_FOR.length; i++) {
       if (CALC_FOR[i].kw.test(hay)) {
         CALC_FOR[i].calcs.forEach(function (c) { if (!seen[c.id]) { seen[c.id] = 1; out.push(c); } });

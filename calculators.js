@@ -400,6 +400,21 @@
       return { v:s, u:"/3", i:(s>=2?"<b>≥2 — high risk</b>: assess for organ dysfunction, escalate, consider sepsis.":"Low risk by qSOFA — does not rule out sepsis; reassess.") };
     } },
 
+  { id:"hacor", cat:"Critical care", icon:"", title:"HACOR score (NIV failure)",
+    desc:"Predicts non-invasive ventilation failure in hypoxaemic respiratory failure, assessed 1 h after starting NIV.",
+    inputs:[
+      { id:"hr", label:"Heart rate (/min)", type:"select", opts:[{v:"0",t:"≤120 (0)"},{v:"1",t:">120 (1)"}] },
+      { id:"ph", label:"Arterial pH", type:"select", opts:[{v:"0",t:"≥7.35 (0)"},{v:"2",t:"7.30–7.34 (2)"},{v:"3",t:"7.25–7.29 (3)"},{v:"4",t:"<7.25 (4)"}] },
+      { id:"gcs", label:"Glasgow Coma Scale", type:"select", opts:[{v:"0",t:"15 (0)"},{v:"2",t:"13–14 (2)"},{v:"5",t:"11–12 (5)"},{v:"10",t:"≤10 (10)"}] },
+      { id:"pf", label:"PaO₂/FiO₂ (mmHg)", type:"select", opts:[{v:"0",t:">200 (0)"},{v:"2",t:"176–200 (2)"},{v:"3",t:"151–175 (3)"},{v:"4",t:"126–150 (4)"},{v:"5",t:"101–125 (5)"},{v:"6",t:"≤100 (6)"}] },
+      { id:"rr", label:"Respiratory rate (/min)", type:"select", opts:[{v:"0",t:"≤30 (0)"},{v:"1",t:"31–35 (1)"},{v:"2",t:"36–40 (2)"},{v:"3",t:"41–45 (3)"},{v:"4",t:">45 (4)"}] }
+    ],
+    compute:function(v){
+      var s=0;["hr","ph","gcs","pf","rr"].forEach(function(k){ s+=parseInt(v[k]||"0",10)||0; });
+      var d=s>5?"<b>Above 5: high risk of NIV failure</b>. Prepare for intubation; do not delay escalation on a falling trajectory.":"<b>5 or below: lower risk of NIV failure</b>. Continue NIV with close reassessment.";
+      return { v:s, u:"/25", i:d+" H = heart rate, A = acidosis (pH), C = consciousness (GCS), O = oxygenation (PaO₂/FiO₂), R = respiratory rate. Derivation and validation at 1 h: Duan J, et al. Intensive Care Med 2017;43:192–199 (HACOR >5 predicted NIV failure, AUC ~0.9)." };
+    } },
+
   { id:"sofa", cat:"Critical care", icon:"", title:"SOFA score",
     desc:"Sequential Organ Failure Assessment (0–4 per system).",
     inputs:[
@@ -8107,5 +8122,69 @@
     });
   }
 
-  window.MEDCALC = { openList: openList, open: open, close: close, openInteractions: openInteractions, _calcs: CALCS, get: calcById, run: calcRun, list: calcList };
+  /* ── find(query): resolve free text to ONE calculator by NAME, or null ──────────────────────────
+   * Used by MaiK to answer "what is / calculate the X score" with the calculator itself instead of a
+   * paid model turn (reported 2026-09-02: "HACOR score" burned tokens on a fabricated formula while
+   * this list sat one tap away). Conservative on purpose:
+   *   - every significant word of the QUESTION must appear in the calculator's title, so a question
+   *     about something else that happens to share a word ("pneumonia treatment" vs "CURB-65
+   *     (pneumonia)") does not match: the question must be ABOUT the calculator;
+   *   - at least one matched word must be a real word (3+ letters), so "65" alone matches nothing;
+   *   - the title's own NAME (before any parenthetical) must be at least half covered, and the best
+   *     hit must be strictly better than the runner-up, or the answer is "not sure" (null).
+   * Digits are split from letters on both sides ("curb65" == "CURB-65", "meld3" == "MELD 3.0") and
+   * subscripts normalised ("CHA₂DS₂" == "cha2ds2"). A few spoken abbreviations expand to the words
+   * the title uses. Pure, no DOM; unit-tested in test/calc-find.test.mjs. */
+  var FIND_STOP = /\b(what|whats|is|are|the|a|an|of|for|to|in|on|and|or|with|score|scores|scoring|scale|criteria|calculate|calculating|calculation|calculator|calc|formula|index|how|do|does|i|we|you|me|my|tell|about|explain|define|definition|use|used|interpret|interpretation|value|values|risk|assessment|tool|please|patient|patients|this|that|it|its|mean|means|meaning|compute|work|works)\b/g;
+  // Spoken/typed forms -> the words the title uses. Applied to the QUESTION only.
+  var FIND_ALIAS = { gcs: "glasgow coma", crcl: "cockcroft gault", map: "mean arterial pressure", "p f": "pao2 fio2", pf: "pao2 fio2", hasbled: "has bled", chadsvasc: "cha 2 ds 2 vasc", chads: "cha 2 ds 2", childpugh: "child pugh", qtc: "qtc" };
+  // Extra names a calculator answers to, by id. Kept here rather than on the entries so the
+  // registry's clinical content stays untouched by a search concern.
+  var FIND_EXTRA = { crcl: ["creatinine clearance"], gcs: ["gcs"], bmi: ["body mass index"], map: ["mean arterial pressure"], meld3: ["meld"], chadsvasc: ["cha 2 ds 2 vasc"] };
+  function findNorm(s) {
+    return String(s || "").toLowerCase()
+      .replace(/₀/g, "0").replace(/₁/g, "1").replace(/₂/g, "2").replace(/₃/g, "3")
+      .replace(/[^a-z0-9\s]/g, " ")
+      .replace(/([a-z])(\d)/g, "$1 $2").replace(/(\d)([a-z])/g, "$1 $2")
+      .replace(/\s+/g, " ").trim();
+  }
+  function findTokens(s, keepStop) {
+    var n = findNorm(s);
+    Object.keys(FIND_ALIAS).forEach(function (k) { n = n.replace(new RegExp("\\b" + k.replace(/ /g, "\\s") + "\\b", "g"), FIND_ALIAS[k]); });
+    if (!keepStop) n = n.replace(FIND_STOP, " ");
+    var seen = {}, out = [];
+    n.split(" ").forEach(function (t) { if (t && t.length >= 2 && !seen[t]) { seen[t] = 1; out.push(t); } });
+    return out;
+  }
+  function calcFind(query) {
+    var qt = findTokens(query);
+    if (!qt.length || !qt.some(function (t) { return /[a-z]{3,}/.test(t); })) return null;
+    var best = null, second = 0;
+    for (var i = 0; i < CALCS.length; i++) {
+      var c = CALCS[i];
+      var title = String(c.title || ""), extra = FIND_EXTRA[c.id] || [];
+      var name = title.replace(/\s*[(—:·\/].*$/, "");                   // "CURB-65 (pneumonia)" / "BMI · IBW" -> the name
+      // Names and titles are compared with the same stop words stripped as the question, so
+      // "HACOR score" is the name "hacor", and a question that is just "hacor" is exact.
+      var names = [name].concat(extra).map(function (s) { return findTokens(s) .length ? findTokens(s) : findTokens(s, true); }).filter(function (a) { return a.length; });
+      if (!names.length) continue;
+      var tt = findTokens(title + " " + extra.join(" "), true);
+      var inTitle = qt.filter(function (t) { return tt.indexOf(t) > -1; });
+      if (inTitle.length !== qt.length) continue;                     // every question word is in the title
+      if (!inTitle.some(function (t) { return /[a-z]{3,}/.test(t); })) continue;
+      var nameHit = 0, nt = names[0];
+      names.forEach(function (a) { var h = a.filter(function (t) { return qt.indexOf(t) > -1; }).length / a.length; if (h > nameHit) { nameHit = h; nt = a; } });
+      if (nameHit < 0.5) continue;                                      // the NAME is what was named
+      var score = nameHit * 10 + inTitle.length - (tt.length - inTitle.length) * 0.1;   // fewer unexplained title words = closer
+      if (!best || score > best.score) { second = best ? best.score : 0; best = { c: c, score: score, nameHit: nameHit, exact: nameHit === 1 && qt.length === nt.length }; }
+      else if (score > second) second = score;
+    }
+    if (!best) return null;
+    if (best.score - second < 0.05 && second > 0) return null;          // two calculators fit equally: not sure
+    var c = best.c;
+    return { id: c.id, title: c.title, cat: c.cat, desc: c.desc, exact: best.exact,
+             inputs: (c.inputs || []).map(function (x) { return { id: x.id, label: x.label, type: x.type, unit: x.unit }; }) };
+  }
+
+  window.MEDCALC = { openList: openList, open: open, close: close, openInteractions: openInteractions, _calcs: CALCS, get: calcById, run: calcRun, list: calcList, find: calcFind };
 })();

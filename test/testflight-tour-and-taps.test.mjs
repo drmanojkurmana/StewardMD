@@ -61,7 +61,9 @@ ok("home.js: 'Show more/less' handled via delegation (survives cache restore)",
 ok("home.js: the fragile live-only 'Show more' listener is gone",
   !/mb\.addEventListener\(["']click["']/.test(home));
 ok("home.js: follow-up chips still routed via delegated data-maik-q",
-  /closest\(["']\[data-maik-q\],\[data-maik-web\]["']\)/.test(home));
+  // The selector may grow (tool / calculator chips were added to it on 2026-09-02); what this pins
+  // is that data-maik-q and data-maik-web are still the delegated route, first in the list.
+  /closest\(["']\[data-maik-q\],\[data-maik-web\][^"']*["']\)/.test(home));
 
 console.log(fail === 0 ? ("ALL " + pass + " PASS") : (pass + " pass / " + fail + " FAIL"));
 process.exit(fail ? 1 : 0);
