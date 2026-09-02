@@ -67,10 +67,25 @@ HBP 2022 master), 0 NOT FOUND. Two structural findings worth knowing before Phas
 - Employee schemes (Delhi DGEHS, Rajasthan RGHS, Assam MMLSAY, Nagaland CMHIS-EP) benchmark
   against **CGHS** rate lists - a second shared baseline.
 
-**Caveat, deliberately not hidden:** agy's "Verified (Government Domain)" means the *domain* is a
-real `.gov.in`/state portal. The specific deep-link paths to package masters are NOT yet
-liveness-checked - a right-domain/wrong-path hallucination is the classic failure mode for this
-kind of research. Run a URL liveness sweep (curl each inventory URL, record HTTP status + content
-type) before treating any of these as an ingestion source.
+**URL liveness sweep (2026-09-02, `functions/db/govschemes_url_sweep_2026-09-02.txt`)** - all 79
+unique inventory URLs curl'd (HEAD, follow redirects, 20s, browser UA). Results and what they mean:
+- **55 reachable (200), 4 redirects to live sites, 20 unreachable (status 000).**
+- **The 20 are almost certainly geo-blocking, not dead links.** Every one is a `curl (28) TCP
+  connection timeout` while DNS resolves fine to NIC India address space (`pmjay.gov.in` ->
+  `14.143.233.34`, `cghs.gov.in` -> `164.100.166.183`). Indian govt portals routinely silent-drop
+  non-Indian IPs at the firewall, and the sweep ran from a non-India sandbox. `pmjay.gov.in` and
+  `cghs.gov.in` are unquestionably live. **Re-verify all 20 from an Indian IP** (owner's own device);
+  nothing can be concluded about them from here.
+- **One genuine anomaly:** `mjpjay.gov.in` has NO DNS record at all - unlike the timeouts, that is a
+  wrong/defunct hostname. `www.jeevandayee.gov.in` is the real Maharashtra MJPJAY portal.
+- **ZERO direct file downloads.** All 55 successes are `text/html`. agy located the *portals*
+  correctly, but not one inventory URL is a `.xlsx`/`.pdf`/`.csv` package master - "FOUND"
+  overstates it; read it as "portal located, download link not yet found." The real file links sit
+  behind portal navigation/JS and still need per-state discovery before ingestion.
+- **Silver lining - at least 5 are real package-master HTML TABLE pages**, ingestible via an HTML
+  adapter (the spec's ingestion engine covers HTML): Tamil Nadu `cmchistn.com/package_master`,
+  `/procedure_list`, `/highend_packages`; Gujarat `ma.gujarat.gov.in/PackageRates.html`; Assam
+  `atalamritabhiyan.assam.gov.in/.../pmjay-package-master`. These are the best next ingestion
+  targets after the central PM-JAY HBP master (which itself needs the Indian-IP recheck first).
 
 Deps: [[Decisions]]
