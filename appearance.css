@@ -1036,3 +1036,12 @@ html[data-appearance] #homeV2.rnav .rnav-qc {
 }
 html[data-appearance] #homeV2.rnav .rnav-tile::after,
 html[data-appearance] #homeV2.rnav .rnav-qa-btn::after { display: none !important; }
+
+
+/* iPad / Tablet layout expansions */
+@media (min-width: 768px) {
+  .ac-card { max-width: 680px; }
+}
+@media (min-width: 1024px) {
+  .ac-card { max-width: 820px; }
+}
