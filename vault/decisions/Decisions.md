@@ -5,6 +5,59 @@ tags: [decisions, adr]
 
 Dated architectural calls + why. Newest first. Keep each short: **decision · why · trade-off · status**.
 
+## 2026-09-02 · Government Health Schemes Phase 1 — schema mirrors Medical Updates, not a new pattern
+
+**Ask:** a national database of every state/UT/central government health-assurance scheme (packages,
+native codes, rates, eligibility), searchable by disease/procedure/code, versioned, with full
+source provenance. Explicitly told to build a NEW data domain from scratch, India-wide, no
+reduced scope.
+
+**Decision: reuse the Medical Updates module's shape rather than inventing one.** Before writing any
+schema, read `functions/db/updates_schema.sql`, `functions/_updates_repo.js`, `worker/schema.sql`
+(Drugs DB), `onco-protocol-review.js`, `functions/_adminauth.js`, and `*-flags.js` — this repo already
+solves "versioned external-document data with provenance" once (Medical Updates: `sources` →
+`updates` → `update_versions` → `crawl_logs`) and "structured dataset with fast search" once (Drugs
+DB: flat table + FTS5 + sync triggers). `functions/db/govschemes_schema.sql` mirrors both directly:
+`jurisdictions` / `sources` / `schemes` / `scheme_versions` / `packages` (+ `packages_fts`, same
+FTS5-with-triggers shape as `drugs_fts`) / `crawl_logs`, plus a `clinical_concepts` /
+`clinical_synonyms` / `concept_package_map` shape reserved now (empty in Phase 1) so Phase 2's
+clinical crosswalk needs no migration later.
+
+**Versioning granularity: per scheme_version, not per package row.** A government package master is
+published as a whole replacement document (one XLSX/PDF), never as an incremental diff — so the
+version boundary is the scheme_version (one row = one published document), and `packages` rows
+belong to exactly one `scheme_version_id`. Re-importing a scheme creates a NEW scheme_version;
+the old one's rows are never touched. This is simpler than per-row temporal versioning and matches
+how the source data actually arrives.
+
+**Native-key discovery from the real first dataset** (Dr. NTR Vaidya Seva Trust workbook, Andhra
+Pradesh — 3,713 rows, 32 speciality codes, confirmed by direct parse): a `treatment_code` alone is
+NOT unique — 332 codes are legitimately reused across different specialities (e.g. `S11.36.3` appears
+under Cardiothoracic Surgery, ENT, and General Surgery, each a distinct package with its own amount).
+The real natural key is `(scheme_version_id, speciality_code, treatment_code)` — confirmed zero
+collisions on that triple. Documented as a schema comment so a future importer doesn't "fix" the
+apparent duplicates by dropping rows.
+
+**Trade-off: admin review workflow deliberately NOT the two-gate ONCQIS pattern (yet).**
+`onco-protocol-review.js`'s DRAFT→R1_REVIEW→INSTITUTIONAL_APPROVAL→ACTIVE state machine with
+per-field accept/reject/edit/verify and a blocking "VERIFY" flag is the strongest precedent for
+"Upload source → Analyze → Review → Publish," and Phase 3 should adopt its `changeRecords`/audit/
+diff shape for scheme updates. Phase 1 instead follows Medical Updates' lighter flow (AI-assisted
+classify → human eyeballs an on-screen draft → single admin publish) — correct for getting the
+foundation running, not correct as the final production review gate for financial/eligibility data
+patients rely on. Revisit before Phase 3 production release.
+
+**Flag:** `smd_govt_schemes` (module master), default **OFF** — not a `PUBLIC-RELEASE-GATE`
+default-on candidate like most new StewardMD features, because the data itself is unverified until
+Phase 1's data-quality engine and at least one admin review pass exist. Turn on only after the first
+scheme_version is marked `verified` in `sources.verification_status`.
+
+**Status:** Phase 1 schema + jurisdiction registry seeded, NTR Vaidya Seva (Andhra Pradesh) workbook
+ingestion built. D1 database not yet provisioned to remote (`wrangler d1 create` needs an explicit
+go-ahead — real infra/cost, not a code change). API layer, admin UI, and the other 35
+jurisdictions' source discovery are follow-up work, delegated per the owner's explicit Claude
+Code + agy split. See [[Government Health Schemes]].
+
 ## 2026-09-02 · Auto-verification at 1 in 10, and the Subscription tap that asked a verified doctor to verify
 
 **Reported with a screenshot:** the owner's own account wearing the Pro badge while the More → Subscription
