@@ -34,31 +34,53 @@ def sql_str(s):
 def new_id(prefix):
     return f"{prefix}{int(time.time()*1000):x}{''.join(random.choices('abcdefghijklmnopqrstuvwxyz0123456789', k=6))}"
 
+def norm_str(s):
+    return re.sub(r"[\s\-_./]+", "", str(s or "").strip().lower())
+
 def find_col_idx(header, target):
-    """Exact match first. If docling merged row 1 into header with '.', handle prefix.
-    Also handles known docling merged rate header 'NABH Rate Non-NABH Rate' where first
-    column is NABH and second is Non-NABH.
-    """
+    """Exact match first, then normalized and multi-level (dot-separated) header support."""
     if not target:
-        return None, None
+        return None, False
+    t_norm = norm_str(target)
+    
+    # 1. Exact string match
     for i, h in enumerate(header):
         if h == target:
             return i, False
+            
+    # 2. Normalized full string match
     for i, h in enumerate(header):
-        if h.startswith(target + "."):
-            return i, True
-    # If target is NABH Rate or Non-NABH Rate and docling merged them as "NABH Rate Non-NABH Rate"
-    if target == "NABH Rate":
+        if norm_str(h) == t_norm:
+            return i, False
+
+    # 3. Docling merged row 1 prefix (e.g. "Package Code.222" where 222 is data row)
+    for i, h in enumerate(header):
+        if "." in h:
+            parts = h.split(".", 1)
+            if norm_str(parts[0]) == t_norm:
+                # If second part looks like data (e.g. numeric or short code), mark as merged row
+                is_data = bool(re.search(r"^\d+$|^[A-Z0-9]{2,10}$", parts[1].strip()))
+                return i, is_data
+
+    # 4. Multi-level sub-header (e.g. "Rates for Semi-Private Ward.Non- NABH" or "AB.CD")
+    for i, h in enumerate(header):
+        if "." in h:
+            parts = [norm_str(p) for p in h.split(".")]
+            if t_norm in parts:
+                return i, False
+
+    # 5. Known docling merged rate header 'NABH Rate Non-NABH Rate'
+    if t_norm in ["nabhrate", "nabh"]:
         for i, h in enumerate(header):
-            if h.startswith("NABH Rate Non-NABH Rate"):
-                return i, ("." in h)
-    elif target == "Non-NABH Rate":
-        matches = [i for i, h in enumerate(header) if h.startswith("NABH Rate Non-NABH Rate")]
-        if len(matches) >= 2:
-            return matches[1], ("." in header[matches[1]])
-        elif len(matches) == 1:
-            return matches[0], ("." in header[matches[0]])
-    return None, None
+            if "nabh" in norm_str(h):
+                return i, False
+    elif t_norm in ["nonnabhrate", "nonnabh"]:
+        matches = [i for i, h in enumerate(header) if "nonnabh" in norm_str(h)]
+        if matches:
+            # If two columns contain nonnabh (e.g. "NABH Rate Non-NABH Rate" duplicated), pick the second
+            return matches[-1], False
+            
+    return None, False
 
 def read_table_csv(csv_path, code_col, name_col, rate_col, opt_cols):
     with open(csv_path, newline='', encoding='utf-8', errors='replace') as f:
