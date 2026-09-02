@@ -148,8 +148,9 @@ def main():
         )
         batch.append(vals)
 
-    # D1 caps statement size; chunk INSERTs (500 rows/statement is safely under limits).
-    CHUNK = 500
+    # D1 rejects an over-long single statement (SQLITE_TOOBIG) - 500 rows/statement hit that
+    # limit in practice; 50 is comfortably under it.
+    CHUNK = 50
     for i in range(0, len(batch), CHUNK):
         chunk = batch[i:i + CHUNK]
         out.append(f"INSERT INTO packages ({cols}) VALUES\n" + ",\n".join(chunk) + ";")
