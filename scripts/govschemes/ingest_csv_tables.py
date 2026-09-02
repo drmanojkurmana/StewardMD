@@ -79,6 +79,13 @@ def find_col_idx(header, target):
         if matches:
             # If two columns contain nonnabh (e.g. "NABH Rate Non-NABH Rate" duplicated), pick the second
             return matches[-1], False
+
+    # 6. All significant tokens present (e.g. "Name 2022.Procedure" for "Procedure Name 2022")
+    target_tokens = set(re.findall(r"[a-z0-9]+", target.lower()))
+    if len(target_tokens) >= 2:
+        for i, h in enumerate(header):
+            if all(tok in norm_str(h) for tok in target_tokens):
+                return i, False
             
     return None, False
 
@@ -134,6 +141,10 @@ def read_table_csv(csv_path, code_col, name_col, rate_col, opt_cols):
 
         code = get_val(code_idx)
         name = get_val(name_idx)
+        if code_idx == name_idx and ":" in code:
+            parts = code.split(":", 1)
+            code = parts[0].strip()
+            name = parts[1].strip()
         if not code or not name:
             continue
         # Filter out repeated header rows embedded in table
