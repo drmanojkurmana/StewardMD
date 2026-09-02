@@ -1,4 +1,4 @@
-#!/usr/bin/env -S uv run --with docling --script
+#!/usr/bin/env -S uv run --with docling --with pypdf --script
 """StewardMD — Government Health Schemes: extract every table from a package-master PDF with
 docling and write them as CSV files, one per table, plus a small JSON manifest.
 
@@ -18,8 +18,10 @@ ap = argparse.ArgumentParser()
 ap.add_argument("pdf"); ap.add_argument("out_dir")
 ap.add_argument("--ocr", action="store_true", help="force OCR (image-only / outline-text PDFs)")
 ap.add_argument("--pages", default="", help="page range A-B (1-based, inclusive) to limit work")
+ap.add_argument("--batch-size", type=int, default=40, help="pages per batch to prevent OOM (default: 40)")
 a = ap.parse_args()
 
+import pypdf
 from docling.document_converter import DocumentConverter, PdfFormatOption
 from docling.datamodel.base_models import InputFormat
 from docling.datamodel.pipeline_options import PdfPipelineOptions
@@ -29,23 +31,33 @@ opts.do_table_structure = True
 opts.do_ocr = bool(a.ocr)
 conv = DocumentConverter(format_options={InputFormat.PDF: PdfFormatOption(pipeline_options=opts)})
 
-kw = {}
+reader = pypdf.PdfReader(a.pdf)
+total_pages = len(reader.pages)
 if a.pages:
-    lo, hi = a.pages.split("-"); kw["page_range"] = (int(lo), int(hi))
-doc = conv.convert(str(a.pdf), **kw).document
+    lo, hi = map(int, a.pages.split("-"))
+    lo = max(1, lo); hi = min(total_pages, hi)
+else:
+    lo, hi = 1, total_pages
 
 out = pathlib.Path(a.out_dir); out.mkdir(parents=True, exist_ok=True)
 manifest = []
-for i, t in enumerate(doc.tables):
-    df = t.export_to_dataframe(doc=doc)
-    pages = sorted({p.page_no for p in t.prov})
-    path = out / f"table_{i:03d}.csv"
-    df.to_csv(path, index=False)
-    manifest.append({"i": i, "csv": path.name, "rows": int(len(df)), "cols": int(len(df.columns)),
-                     "headers": [str(c) for c in df.columns], "pages": pages})
+table_idx = 0
+
+for b_lo in range(lo, hi + 1, a.batch_size):
+    b_hi = min(hi, b_lo + a.batch_size - 1)
+    doc = conv.convert(str(a.pdf), page_range=(b_lo, b_hi)).document
+    for t in doc.tables:
+        df = t.export_to_dataframe(doc=doc)
+        pages = sorted({p.page_no for p in t.prov})
+        path = out / f"table_{table_idx:03d}.csv"
+        df.to_csv(path, index=False)
+        manifest.append({"i": table_idx, "csv": path.name, "rows": int(len(df)), "cols": int(len(df.columns)),
+                         "headers": [str(c) for c in df.columns], "pages": pages})
+        table_idx += 1
+
 (out / "tables.json").write_text(json.dumps(manifest, indent=1))
 print(f"pdf      : {a.pdf}")
-print(f"pages    : {len(doc.pages)}")
+print(f"pages    : {hi - lo + 1} ({lo}-{hi})")
 print(f"tables   : {len(manifest)}")
 print(f"rows     : {sum(m['rows'] for m in manifest)}")
 for m in manifest[:6]:

@@ -106,7 +106,7 @@ def read_table_csv(csv_path, code_col, name_col, rate_col, opt_cols):
         # Non-procedure table (e.g. cover page, TOC, legend)
         return [], len(reader) - 1, "skipped_no_required_cols"
     if code_idx is None:
-        return [], len(reader) - 1, f"missing_code_column_{code_col}"
+        return [], len(reader) - 1, f"skipped_missing_code_column_{code_col}"
     if name_idx is None:
         return [], len(reader) - 1, f"missing_name_column_{name_col}"
     if rate_idx is None:
