@@ -4817,6 +4817,11 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
     sheet.innerHTML = maikShellHTML();
     document.body.appendChild(sheet);
     document.body.classList.add("maik-open");
+    // On-device model lifecycle: cancel any pending unload and warm the chosen local pack NOW, at the
+    // moment a question is likely, instead of at app start (owner, 2026-09-04: no resident model when
+    // MaiK is not in use). close() below schedules the matching release.
+    try { if (window.SMD_MAIK_LOCAL && SMD_MAIK_LOCAL.sheetOpened) SMD_MAIK_LOCAL.sheetOpened(); } catch (e) {}
+    try { if (window.SMD_MAIK_ENGINE && SMD_MAIK_ENGINE.warmIfLocal) SMD_MAIK_ENGINE.warmIfLocal(); } catch (e) {}
     maikBuddyMount();          // the resident: present from the moment MaiK opens
     requestAnimationFrame(function () {
       scrim.classList.add("on"); sheet.classList.add("on");
@@ -4950,6 +4955,9 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       // Unlock: if a request was still in flight (or never settled), the busy guard would otherwise stay
       // true and block send() on reopen — the conversation would appear "stuck" and un-continuable.
       _maikBusy = false;
+      // Release the on-device model shortly after close (after any in-flight answer finishes; the
+      // release never cuts a running generation), so it stops holding memory and heating the phone.
+      try { if (window.SMD_MAIK_LOCAL && SMD_MAIK_LOCAL.sheetClosed) SMD_MAIK_LOCAL.sheetClosed(); } catch (e) {}
       maikBuddyUnmount();      // stop his timer — the sheet is about to be removed
       sheet.classList.remove("on"); scrim.classList.remove("on"); document.body.classList.remove("maik-open"); setTimeout(function () { sheet.remove(); scrim.remove(); }, 260);
     }
@@ -6376,7 +6384,10 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       if (rx) { ev.preventDefault(); var rrow = rx.closest("[data-maik-inline]"); if (rrow) maikRefineUnstage(rrow); return; }
       var askAll = ev.target && ev.target.closest ? ev.target.closest("[data-maik-askall]") : null;
       if (askAll) { ev.preventDefault(); maikRefineAsk(askAll.closest(".maik-refine")); return; }
-      var el = ev.target && ev.target.closest ? ev.target.closest("[data-maik-q],[data-maik-web]") : null;
+      // [data-maik-tool] MUST be in this selector: the "Open Drug Index" chip carries only that
+      // attribute, so without it the tool branch below was unreachable and the chip did nothing
+      // (found live on the owner's phone, 2026-09-03).
+      var el = ev.target && ev.target.closest ? ev.target.closest("[data-maik-q],[data-maik-web],[data-maik-tool],[data-maik-refine]") : null;
       if (!el) return;
       ev.preventDefault();
       // Intent-aware refinement chips: route factors that a dedicated tool answers better than the LLM.

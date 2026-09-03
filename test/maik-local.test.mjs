@@ -244,26 +244,28 @@ const { L } = load();
 /* ── Thinking-mode suppression (MAiK Apex / Qwen3 base) ─────────────────────────────────────────
  * A reasoning-capable base emits <think> blocks by default. At nPredict 768 a long trace can consume
  * the whole budget, leaving a truncated thought and NO answer - and stripReasoning() then correctly
- * returns "", which on screen reads as the app being broken. "/no_think" is the family's own switch.
- * Driven off the pack registry, never hardcoded to a model name.
+ * returns "", which on screen reads as the app being broken. Driven off the pack registry, never
+ * hardcoded to a model name.
+ *
+ * REGRESSION (2026-09-03, found live): buildPrompt() used to ALSO push "<think>\n\n</think>" into
+ * the QUESTION text, on the theory that the engine sends a raw completion with no chat template. It
+ * does not - LlamaEngine.swift/.java apply the model's own template, which wraps this whole string
+ * inside the USER turn. The "closed" block landed as noise inside the doctor's question while the
+ * real assistant turn still opened blank, fixing nothing. buildPrompt now ONLY sends the cheap
+ * "/no_think" hint; the actual fix is prefillEmptyThink on the options object passed to
+ * L.generate(), which only the native side can apply at the true assistant-turn boundary.
  */
 {
   const { L } = load();
   const q = { question: "empiric antibiotic for pyogenic liver abscess" };
 
-  /* Both switches, because only one of them can work and buildPrompt cannot know which: /no_think is
-     read by the Qwen3 CHAT TEMPLATE, but this engine sends a RAW prompt, so it can be ignored as
-     plain text. The closed empty <think></think> needs no template and makes the model resume as if
-     reasoning already happened. Registry-driven, so it covers Apex AND Lite. */
   {
     const p = L.buildPrompt(q, "maik-apex");
-    ok("a pack with noThink still gets Qwen3's own switch", /\/no_think/.test(p));
-    ok("...and an empty thinking block, which works without a chat template", /<think>\s*<\/think>\s*$/.test(p));
-    ok("the block is CLOSED - an unterminated one would make stripReasoning() bin the answer",
-       (p.match(/<think>/g) || []).length === (p.match(/<\/think>/g) || []).length);
-    ok("the question still precedes both switches", p.indexOf("liver abscess") < p.indexOf("/no_think"));
+    ok("a pack with noThink gets Qwen3's own switch", /\/no_think/.test(p));
+    ok("buildPrompt does NOT inject a think tag into the question text", !/<think>/.test(p));
+    ok("the question still precedes the switch", p.indexOf("liver abscess") < p.indexOf("/no_think"));
     // Same treatment for the 1.7B entry tier - this is the pack the slowdown was reported on.
-    ok("MAiK Lite gets it too", /<think>\s*<\/think>\s*$/.test(L.buildPrompt(q, "maik-lite")));
+    ok("MAiK Lite gets the switch too", /\/no_think/.test(L.buildPrompt(q, "maik-lite")));
   }
   ok("a pack without noThink does NOT", !/no_think/.test(L.buildPrompt(q, "maik-mxcore")));
   ok("no pack id given behaves as before", !/no_think/.test(L.buildPrompt(q)));
@@ -281,6 +283,19 @@ const { L } = load();
   // stripReasoning is the backstop if the switch is ignored.
   ok("a leaked qwen-style think block is still stripped",
      L.stripReasoning("<think>weighing options</think>Pip-tazo 3.375 g IV q8h") === "Pip-tazo 3.375 g IV q8h");
+}
+
+// ── prefillEmptyThink: the ACTUAL fix reaches the native call, buildPrompt's tag injection does not ──
+{
+  const { L: L2, calls } = load();
+  await L2.answer({ question: "Treatment of Pneumonia" }, { pack: "maik-lite" }, null);
+  ok("noThink pack sets prefillEmptyThink on the native call", calls.generate[0].prefillEmptyThink === true);
+  ok("the prompt sent to native carries no think tag (that landed in the user turn, uselessly)",
+     !/<think>/.test(calls.generate[0].prompt));
+
+  calls.generate.length = 0;
+  await L2.answer({ question: "Treatment of Pneumonia" }, { pack: "maik-mxcore" }, null);
+  ok("a pack without noThink does not set prefillEmptyThink", !calls.generate[0].prefillEmptyThink);
 }
 
 
@@ -450,5 +465,113 @@ if (fail) process.exit(1);
                   !r.error && /Hello world/.test(r.text)));
 }
 
+
+// ── on-device RAG wiring: retrieval -> prompt -> evidence gate -> fallback or citation ──
+// The Book/BM25/evidenceGate LOGIC is verified against the real book in test/maik-lite-rag.test.mjs;
+// this tests only the WIRING in answer() - that a gate failure replaces the text with the real
+// passage rather than surfacing the model's unsupported claim, and a gate pass appends a source line.
+function loadWithRag({ tokens, kbLoadFails = false } = {}) {
+  const calls = { generate: [], searched: [] };
+  const Llama = {
+    available: async () => ({ available: true, loaded: true }),
+    load: async () => ({ loaded: true }),
+    generate: async (o) => { calls.generate.push(o); return { text: tokens.join(""), ms: 500 }; },
+    cancel: async () => ({}), release: async () => ({ released: true }),
+    addListener: () => ({ remove: () => {} })
+  };
+  const passage = { heading: "Pneumonia > Treatment", page: "p.1769", text: "For penicillin allergy, use doxycycline monotherapy or a respiratory fluoroquinolone.", chunk: 17689 };
+  const fakeBook = {
+    search: (q) => { calls.searched.push(q); return [[12.5, 0]]; },
+    cite: () => passage
+  };
+  const RAG = {
+    TOPK: 3, MIN_SCORE: 6.0,
+    evidenceGate: (answer, evidence) => {
+      const bad = /amoxicillin/i.test(answer) && !/amoxicillin/i.test(evidence);
+      return { ok: !bad, nums: [], drugs: bad ? ["amoxicillin"] : [] };
+    }
+  };
+  const KB = { loadBook: () => kbLoadFails ? Promise.reject(new Error("no kb")) : Promise.resolve(fakeBook) };
+  const win = {
+    Capacitor: { isNativePlatform: () => true, Plugins: { Llama } },
+    SMD_MAIK_RAG: RAG, SMD_MAIK_KB_STORE: KB,
+    SMD_MAIK_MODELS: { PACKS: {
+      "maik-lite": { label: "MAiK Lite", nCtx: 4096, nPredict: 512, noThink: true },
+      "maik-mxcore": { label: "MAiK MxCore", nCtx: 4096, nPredict: 512 }
+    }, pathFor: async () => "/var/mobile/Data/maik-models/maik-lite.gguf", totalBytes: () => 1.1e9 }
+  };
+  new Function("window", SRC)(win);
+  return { L: win.SMD_MAIK_LOCAL, calls };
+}
+
+{
+  const { L, calls } = loadWithRag({ tokens: ["For penicillin allergy, use doxycycline monotherapy."] });
+  const r = await L.answer({ question: "Treatment of Pneumonia?" }, { pack: "maik-lite" }, null);
+  ok("retrieval ran for maik-lite", calls.searched.length === 1);
+  ok("evidence was prepended to the prompt sent to the model", /Reference material/.test(calls.generate[0].prompt));
+  ok("gate-passing answer is marked grounded", r.grounded === true);
+  ok("gate-passing answer gets a plain source line", /Source: StewardMD Knowledge Base - based on standard medical resources/.test(r.text));
+  ok("the source line NEVER carries a page number, on owner order", !/p\.\d/.test(r.text));
+}
+
+{
+  const { L } = loadWithRag({ tokens: ["For penicillin allergy, use doxycycline plus amoxicillin-clavulanate."] });
+  const r = await L.answer({ question: "Treatment of Pneumonia?" }, { pack: "maik-lite" }, null);
+  ok("a gate FAILURE does not surface the model's unsupported claim",
+     !/amoxicillin/i.test(r.text));
+  ok("a gate failure shows the real retrieved passage instead",
+     /doxycycline monotherapy or a respiratory fluoroquinolone/.test(r.text));
+}
+
+{
+  const { L, calls } = loadWithRag({ tokens: ["General reasoning answer."] });
+  const r = await L.answer({ question: "Treatment of Pneumonia?" }, { pack: "maik-mxcore" }, null);
+  ok("a non-maik-lite pack never triggers retrieval", calls.searched.length === 0);
+  ok("its answer passes through unchanged", r.text === "General reasoning answer.");
+}
+
+{
+  // KB unavailable/failing must degrade to today's ungrounded behaviour, never break the answer.
+  const { L } = loadWithRag({ tokens: ["Answer without grounding."], kbLoadFails: true });
+  const r = await L.answer({ question: "Treatment of Pneumonia?" }, { pack: "maik-lite" }, null);
+  ok("a KB load failure degrades gracefully rather than erroring the answer", !r.error && r.text === "Answer without grounding.");
+  ok("and is correctly marked ungrounded", r.grounded === false);
+}
+
+// ── no-coverage fallback (owner, 2026-09-04, from a live screenshot): "not addressed in the
+// provided reference material" is a retrieval verdict, not an answer. Re-ask once ungrounded. ──
+{
+  const { L, calls } = loadWithRag({ tokens: ["Splenomegaly with fever is not addressed in the provided reference material. The evidence covers diverticular disease."] });
+  const r = await L.answer({ question: "Spleenomegaly with Fever DD and RX" }, { pack: "maik-lite" }, null);
+  ok("the model was asked twice", calls.generate.length === 2);
+  ok("the first pass carried the reference material", /Reference material/.test(calls.generate[0].prompt));
+  ok("the second pass carried NO reference material (own weights)", !/Reference material/.test(calls.generate[1].prompt));
+  ok("the result is marked ungrounded and carries no source line", r.grounded === false && !/Source: StewardMD/.test(r.text));
+  const ok1 = loadWithRag({ tokens: ["For penicillin allergy, use doxycycline monotherapy."] });
+  await ok1.L.answer({ question: "Treatment of Pneumonia?" }, { pack: "maik-lite" }, null);
+  ok("a covered answer is not re-asked", ok1.calls.generate.length === 1);
+}
+
+// ── idle unload (owner, 2026-09-04): the model must not stay resident once its work is done ──
+{
+  const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+  const { L, calls } = load();
+  L.setIdleMs(40, 40);
+  await L.answer({ question: "q1" }, { pack: "maik-apex" }, null);
+  const n1 = calls.load.length;
+  await sleep(120);
+  await L.answer({ question: "q2" }, { pack: "maik-apex" }, null);
+  ok("after the idle window the model was released, so the next question reloads it", calls.load.length === n1 + 1);
+  L.sheetOpened();
+  await L.answer({ question: "q3" }, { pack: "maik-apex" }, null);
+  L.sheetOpened();
+  await sleep(120);
+  await L.answer({ question: "q4" }, { pack: "maik-apex" }, null);
+  ok("an open sheet cancels the pending release: no reload", calls.load.length === n1 + 1);
+  L.sheetClosed();
+  await sleep(120);
+  await L.answer({ question: "q5" }, { pack: "maik-apex" }, null);
+  ok("closing the sheet releases after the grace, so the next question reloads", calls.load.length === n1 + 2);
+}
 
 console.log(`\nmaik-local: ${pass} passed, ${fail} failed`);
