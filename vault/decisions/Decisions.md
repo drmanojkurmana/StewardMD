@@ -2100,18 +2100,32 @@ Crashes found live on the owner's iPhone 15 Pro and fixed, in order:
 1. `String.fromCharCode.apply` on a 2 MiB download chunk blew the call stack. Sub-chunk at 0x8000.
 2. `Filesystem.readFile` without `encoding: "utf8"` returned base64, so the index built with zero
    rows while reporting installed. Encoding now explicit, with a full-size synthetic regression test.
-3. Jetsam kill after a handful of questions: the built Book (42,176 per-chunk term maps) was cached
-   for the app's life on top of the 1.1 GB model. Now only parsed rows are cached; the index is
-   rebuilt per question and released.
+3. Jetsam kill after a handful of questions: the built Book (42,176 per-chunk term Maps) was cached
+   for the app's life. First attempt: rebuild it per question and release. WRONG, see 5.
 4. Jetsam kill on a FRESH install (the path every earlier test had skipped because the KB was already
    on disk): the post-download whole-file SHA-256 read 38 MB back through the bridge as base64 and
    looped 38 million charCodeAt calls on the main thread. Removed. Integrity is now the exact byte
    count plus an exact 42,176-row parse in loadBook(); a short file is deleted and re-downloaded.
    The registry sha256 stays as the same-size staleness marker only, as in maik-models.js.
+5. Still crashing for the owner after 3 and 4. The pulled JetsamEvent report was decisive: it was
+   NOT the App process (0.6 GB, fine, it holds the model natively) but com.apple.WebKit.WebContent,
+   the WebView's content process, at 2.16 GB, reason "per-process-limit". Every earlier memory
+   probe had read the App process's headroom via the Llama plugin and so could never see this.
+   The 42,176 Maps were ~640 MB, and rebuilding per question left the previous build's garbage
+   overlapping the new one. Fix: a flat inverted index (one term->id Map, typed arrays for
+   per-term offset/idf and one global posting array), built once per session and cached: 121 MB,
+   2.9 s build, 18 ms search on the full book, scores bit-identical to the old code (checked on all
+   42,176 chunks, 17 queries). A per-term-object layout was tried first and measured at 955 MB,
+   WORSE than the Maps, because the book has 1.6 million distinct terms (bigrams): never allocate
+   per term. Lesson for any future WebView memory question: pull the JetsamEvent with
+   `idevicecrashreport -n -u <network udid> -e -k <dir>` and read which process died; the App
+   process and the WebContent process have separate limits.
 
-Verified live after fix 4 on a fresh install over the existing container: 6 paced questions, all
-grounded, none rejected by the gate, no page number, no crash. Free memory 6.4 GB before model
-load, 5.8 GB after every question with no growth across questions. First question, including the
-KB-load path, under 10 seconds. Native builds for this work must come from the live checkout, not
+Verified live after fix 5, installed over the existing container: 5 paced questions plus one more,
+all grounded, none rejected by the gate, no page number, App PID unchanged throughout, no new
+jetsam report. First question including the index build 13 to 14 s, later ones 9 to 27 s
+depending on answer length. Native builds for this work must come from the live checkout, not
 a worktree: the CapApp-SPM Package.swift relative paths resolve to the original checkout's
 `local-plugins` when synced from a worktree, so a worktree build silently compiles the OLD Swift.
+Also: `devicectl device info processes` pads lines with trailing spaces, so a `$`-anchored grep on
+the app path silently matches nothing and looks like "the app is gone" when it is not.
