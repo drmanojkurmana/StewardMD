@@ -2208,6 +2208,28 @@ The 151 s Bonsai OPD call is the honest cost of a 27B-class-quality differential
 the OPD screen shows its busy state throughout and the local path has no 45 s race timeout (that
 timeout wraps only the cloud fetch in reasoning.js).
 
+## 2026-09-04 — Bonsai image models, and the on-device model as the offline alternative to AI Vision
+
+Owner asked for "Bonsai Image model as extension to Bonsai, Swift, Max". Facts checked on the HF
+API: PrismML publishes an image-reading projector (mmproj) for the 27B only (Q8_0 629 MB, BF16
+931 MB); the 8B repos have none and sit on a text-only Qwen3-8B base, so MAiK Bonsai and Bonsai
+Swift cannot read images. PrismML's separate "Bonsai Image" family (bonsai-image-binary/ternary-4B)
+is a TEXT-TO-IMAGE diffusion model in MLX/gemlite/safetensors builds only: not a vision model, not
+loadable by llama.cpp. Registered: `bonsai-27b.vision` = the Q8_0 projector (exact HF size and
+lfs.oid). Unverified on a device (the 27B needs a 12 GB phone; mtmd + qwen35 not exercised).
+
+"Let it be the offline alternative to Google AI Vision": image-engine.js already had the on-device
+multimodal model as a third engine but only ever offered it in the chooser; its offline path and
+every fallback dialog knew only OCR. Now `recommendFor()` recommends "local" when AI Vision cannot
+run and a projector is installed; `routeAI()` goes straight to the on-device model when offline
+(preference untouched, cloud again with the network); every fallback dialog offers "Use On-device
+AI (offline)"; Settings lists On-device AI when a projector is installed; copy names it the
+offline alternative and says it is slower and can be wrong. If the on-device read fails too, the
+dialog drops to OCR/manual rather than looping to a cloud that is not there.
+
+Picker intro closes with the owner's reassurance to users that our models are still being trained
+and will keep improving, thanking them for trusting MaiKnowledge and StewardMD.
+
 **Idle unload** (owner: "make sure model is stopped once we close the tab or its work is done").
 `maik-local.js` wraps `answer` and `warm`: any pending release is cancelled while a call is in
 flight; when the last one settles a release is scheduled, 3 min with the MaiK sheet open, 20 s

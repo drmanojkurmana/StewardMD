@@ -110,7 +110,8 @@
     "MaiK Lite is StewardMD's own model, trained on the StewardMD Knowledge Base - based on standard medical resources. The Bonsai, MedGemma and MedPsy packs answer from their own training. Either way answers carry no page citations and can be wrong. Verify against local protocol.",
     "Every pack is a trade-off. Smaller means faster and thinner answers; larger means better reasoning, a longer wait, and on an 8 GB phone the large packs are unloaded whenever you switch apps and must reload. None of them matches MaiK Cloud. Only MaiK Lite checks its answers against the Knowledge Base; every other pack answers from its own training, unchecked.",
     "You can keep more than one downloaded and switch between them. Only the selected one runs.",
-    "Downloading needs the space shown plus room to run it. Wi-Fi is easier, mobile data works, and a download resumes if it is interrupted."
+    "Downloading needs the space shown plus room to run it. Wi-Fi is easier, mobile data works, and a download resumes if it is interrupted.",
+    "Our own models are still being trained and will keep getting better with every update. Thank you for trusting MaiKnowledge and StewardMD, and for believing in what we are building. With love, the StewardMD team."
   ];
 
   /* HARDWARE WARNING, shown before download AND at selection.
