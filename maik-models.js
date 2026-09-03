@@ -51,6 +51,15 @@
   var CHUNK_BYTES = 2 * 1024 * 1024;
   var CHUNK_TRIES = 5;                  // per-chunk retries; a 2.5 GB pull WILL see transient failures
   var MARK_PREFIX = "smd_maik_pack_";   // localStorage install marker (sync check for settingsHTML)
+  // Which registry sha256 was actually verified on disk, per pack. WHY THIS EXISTS: a retrain
+  // (v2 -> v3 -> v4) keeps the same filename, URL and byte count (a LoRA merge never changes
+  // model size), so size+magic alone cannot tell a stale file from a fresh one. Bug found live
+  // 2026-09-03: MaiK Lite v4 shipped in the registry but every phone that had already downloaded
+  // v2 kept silently serving v2 forever, because installed() saw the right size and stopped
+  // looking. This marker lets installed()/installedCached() notice the registry's sha256 moved
+  // and treat the pack as needing a re-download - without ever hashing the multi-GB file
+  // on-device (still the same size+magic check; just also a cheap string compare).
+  var SHA_PREFIX = "smd_maik_packsha_";
   // Set when the CLINICIAN taps Pause, so startup auto-resume does not override a deliberate stop.
   var KEY_USERPAUSE = "smd_maik_userpause_";
 
@@ -469,10 +478,18 @@
   // ── install state ──
   // installedCached() is SYNCHRONOUS because maik-engine.js settingsHTML() renders synchronously.
   // The marker is only written after a verified download, and cleared by remove().
-  function installedCached(id) { return lget(MARK_PREFIX + id) === "1"; }
+  // The registry's current sha256 for a pack's primary (model) file, or null when the pack
+  // declares none (e.g. still-unverified upstream files) - those never force a re-download.
+  function registrySha(id) { try { return pack(id).files[0].sha256 || null; } catch (e) { return null; } }
+  // A pack whose registry sha moved since it was verified on disk is treated as NOT installed,
+  // even though size+magic still pass - that mismatch IS the retrain-shipped-but-stale bug.
+  function shaStale(id) { var want = registrySha(id); return !!want && lget(SHA_PREFIX + id) !== want; }
+
+  function installedCached(id) { return lget(MARK_PREFIX + id) === "1" && !shaStale(id); }
 
   function installed(id) {
     if (!isNative() || !fs()) return Promise.resolve(false);
+    if (shaStale(id)) { lrem(MARK_PREFIX + id); return Promise.resolve(false); }
     var files = pack(id).files;
     return files.reduce(function (chain, f) {
       return chain.then(function (ok) {
@@ -480,7 +497,8 @@
         return sizeOf(f.name).then(function (n) { return f.bytes ? n === f.bytes : n > 0; });
       });
     }, Promise.resolve(true)).then(function (ok) {
-      if (ok) lset(MARK_PREFIX + id, "1"); else lrem(MARK_PREFIX + id);
+      if (ok) { lset(MARK_PREFIX + id, "1"); var s = registrySha(id); if (s) lset(SHA_PREFIX + id, s); }
+      else lrem(MARK_PREFIX + id);
       return ok;
     });
   }
@@ -637,7 +655,14 @@
     return L.modelPath({ name: f.name }).then(function (mp) {
       // `partial` is what distinguishes "2.49 GB of finished model" from "2.49 GB of preallocated
       // file with 14 parts still missing". Size alone cannot tell them apart.
-      if (mp && !mp.partial && mp.bytes && f.bytes && mp.bytes === f.bytes) return "already";
+      // A STALE full-size file (registry sha256 moved since this was verified, e.g. a retrain
+      // that kept the same filename/size) must not short-circuit here - it looks identical to a
+      // freshly finished download by size alone. Force a real re-fetch instead.
+      if (mp && !mp.partial && mp.bytes && f.bytes && mp.bytes === f.bytes) {
+        if (!shaStale(id)) return "already";
+        return (L.modelDelete ? L.modelDelete({ name: f.name }).catch(function () {}) : Promise.resolve())
+          .then(function () { lrem(KEY_DLID + id); return fresh().then(poll); });
+      }
       // The final file is created at full length up front and parts are written into it in place, so
       // the overhead is only the parts in flight (8 x 64 MB), not a second copy of the model.
       if (mp && mp.freeBytes > 0 && f.bytes && mp.freeBytes < f.bytes * 1.05 + 600e6) {
@@ -646,6 +671,7 @@
       return begin().then(poll);
     }).then(function () {
       lset(MARK_PREFIX + id, "1");
+      var s0 = registrySha(id); if (s0) lset(SHA_PREFIX + id, s0);
       lrem(KEY_DLID + id);
       _state[id] = { downloading: false, frac: 1, bytes: total, total: total, mbps: 0, etaS: 0,
                      note: "Ready", err: null, done: true, background: true };
@@ -764,6 +790,14 @@
 
     function oneFile(f) {
       return sizeOf(f.name).then(function (have) {
+        // A right-size file whose registry sha256 has since moved (a retrain that kept the same
+        // filename/size) is STALE, not done - treat it exactly like the too-long/corrupt case
+        // below: delete and pull from zero. Without this a retrain would silently never reach a
+        // phone that had already downloaded the previous weights.
+        if (f.bytes && have === f.bytes && shaStale(id)) {
+          return F.deleteFile({ path: relPath(f.name), directory: DIR }).catch(function () {})
+            .then(function () { return pull(f, 0); });
+        }
         if (f.bytes && have === f.bytes) { report(have, "Already downloaded"); return; }
         // A file LONGER than expected is corrupt (a previous bad append) - start it over.
         if (f.bytes && have > f.bytes) {
@@ -841,6 +875,7 @@
       return files.reduce(function (chain, f) { return chain.then(function () { return oneFile(f); }); }, Promise.resolve());
     }).then(function () {
       lset(MARK_PREFIX + id, "1");
+      var s1 = registrySha(id); if (s1) lset(SHA_PREFIX + id, s1);
       _state[id] = { downloading: false, frac: 1, bytes: grandTotal, total: grandTotal, mbps: 0, etaS: 0, note: "Ready", err: null, done: true };
       emit(id);
       if (onProgress) onProgress(1, "Ready");
@@ -879,6 +914,7 @@
     var F = fs(), L = llama();
     cancel(id);
     lrem(MARK_PREFIX + id);
+    lrem(SHA_PREFIX + id);
     lrem(KEY_DLID + id);
     delete _state[id];
     if (isNative() && L && L.modelDelete) {

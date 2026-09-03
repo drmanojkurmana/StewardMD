@@ -1997,3 +1997,31 @@ azithromycin BID instead of the correct QD/weekly regimen for CAP - a plausible-
 figure). No training pass removes this ceiling; the durable fix is routing dose-specific questions
 to the deterministic drug engine instead of the fine-tuned model. Scope-refusal (non-medical
 questions) is still enforced upstream by the Intent Firewall (`maik-scope.js`), not by the model.
+
+## 2026-09-03 — MaiK Lite v4 never reached phones: same-size retrain defeated the install check
+
+Live symptom: v4 was merged (#814), weights verified live on R2, but the owner's phone kept
+returning the exact v2 failure mode ("did not produce an answer"). Root cause: `installed()`/
+`installedCached()` in maik-models.js only ever compared on-disk byte count + GGUF magic against
+the registry - never content. A LoRA-merge retrain (v2 -> v3 -> v4) never changes file size, so a
+phone that had already downloaded v2 saw "right size, right magic, marker already set" and never
+re-fetched, forever - no matter how many times the registry's sha256 or code shipped a new PR.
+
+Fix: a new localStorage marker per pack (`smd_maik_packsha_<id>`) records the registry sha256 that
+was actually verified at download time. `installed()`/`installedCached()` now treat a pack as
+stale (not installed) the moment the registry's sha256 for that pack differs from the stamped
+value, even though size+magic still pass. Both download entry points (`nativeDownload`'s
+modelPath "already" shortcut, and `oneFile()`'s Range-resume shortcut) were ALSO patched - each
+had its own identical same-size short-circuit that would otherwise still skip the redownload even
+after installedCached() correctly started reporting "not installed". Deliberately still no full
+sha256 rehash on-device (would mean reading the whole multi-GB file back through the bridge); this
+is a cheap string compare against a value already known from download time.
+
+Consequence chain that WAS working correctly and needed no fix: `maik-engine.js`'s
+`packInstalled()` -> `localReady()` -> `effective()` already refuses to route to a local engine
+that `installedCached()` says isn't ready, falling back to KB-only - so once this fix ships, a
+stale phone will show "Tap to download" and auto-fallback to KB-only rather than silently running
+old weights, with no further app-side changes needed.
+
+Regression tests added in test/maik-models.test.mjs for both download paths: a same-size file with
+a stale registry sha256 must be deleted and genuinely re-fetched, not reported as already-installed.
