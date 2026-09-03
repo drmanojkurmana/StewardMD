@@ -612,5 +612,24 @@ ok("...and warms the model once the gate opens", /warmIfLocal\(\)/.test(SRC.slic
   ok("the Settings surface does not rely on the sheet-scoped --mk-* palette", !/var\(--mk-/.test(settingsFn));
 }
 
+// ── Offline stand-in for MaiK Cloud (owner decision, 2026-09-03) ──────────────────────────────────
+// A clinician on the cloud engine with no network gets the installed on-device model instead of a
+// failed call. The PREFERENCE stays "cloud"; only the effective engine changes, and only while offline.
+{
+  const on = load({ gate: true, runtime: true, pack: true });
+  on.win.navigator = { onLine: false };
+  ok("cloud pref + no network + local ready = the on-device model answers", on.E.effective() === "local");
+  on.ls.setItem("smd_maik_offline_local", "0");
+  ok("the flag turns the stand-in off", on.E.effective() === "cloud");
+  on.ls.setItem("smd_maik_offline_local", "1");
+  on.win.navigator = { onLine: true };
+  ok("network back = cloud again, nothing to undo", on.E.effective() === "cloud");
+  const noPack = load({ gate: true, runtime: true, pack: false });
+  noPack.win.navigator = { onLine: false };
+  ok("offline with no installed pack stays on cloud (fails honestly) rather than pretending", noPack.E.effective() === "cloud");
+  const noNav = load({ gate: true, runtime: true, pack: true });
+  ok("no navigator at all (web build, old WebView) never triggers the stand-in", noNav.E.effective() === "cloud");
+}
+
 console.log(`\nmaik-engine: ${pass} passed, ${fail} failed`);
 if (fail) process.exit(1);

@@ -104,9 +104,21 @@
   // Effective engine — never route to a local engine that cannot answer. A stale "local" pref
   // (model deleted, code expired, web build with no plugin) silently behaves as KB-only rather
   // than dead-ending, because KB-only is the honest subset of what the user asked for.
+  // Offline stand-in (owner decision, 2026-09-03): a clinician on MaiK Cloud with no network gets
+  // the installed on-device model instead of a failed cloud call. The cloud PREFERENCE is untouched,
+  // so the next question with the network back goes to the cloud again. Flag smd_maik_offline_local:
+  // "0" turns it off. Only fires when the local engine can actually answer (gate, runtime, pack).
+  function offlineStandIn() {
+    if (lget("smd_maik_offline_local") === "0") return false;
+    try {
+      var nav = (typeof window !== "undefined" && window.navigator) || (typeof navigator !== "undefined" ? navigator : null);
+      return !!nav && nav.onLine === false;
+    } catch (e) { return false; }
+  }
   function effective() {
     var p = getPref();
     if (p === "local" && !localReady()) return "rag";
+    if (p === "cloud" && offlineStandIn() && localReady()) return "local";
     return p;
   }
 

@@ -107,7 +107,7 @@
    * wrong - because that is the part that matters at the bedside and it is easy to leave out. */
   var GUIDE_INTRO = [
     "Answers come from a model stored on your phone. No internet, no AI tokens.",
-    "MaiK Lite is StewardMD's own model, trained on the StewardMD Knowledge Base - based on standard medical resources. The larger packs answer from their own general training. Either way answers carry no page citations and can be wrong. Verify against local protocol.",
+    "MaiK Lite is StewardMD's own model, trained on the StewardMD Knowledge Base - based on standard medical resources. The Bonsai packs are stronger general models that read the Knowledge Base before answering. The MedGemma and MedPsy packs answer from their own training. Either way answers carry no page citations and can be wrong. Verify against local protocol.",
     "You can keep more than one downloaded and switch between them. Only the selected one runs.",
     "Downloading needs the space shown plus room to run it. Wi-Fi is easier, mobile data works, and a download resumes if it is interrupted."
   ];
@@ -277,9 +277,8 @@
       label: "MAiK Apex",
       actual: "MedPsy 4B (Q5_K_M, imatrix)",
       tier: 4,
-      flagship: true,
       noThink: true,
-      note: "Strongest reasoning. Flagship phones only, and the largest download.",
+      note: "Strongest of the medical fine-tunes. Flagship phones only.",
       guide: {
         speed: 1, medical: 3, general: 3,
         bestFor: "Flagship phones, when you want the best on-device answer and can wait a little longer.",
@@ -293,6 +292,90 @@
         url: HF + "/qvac/MedPsy-4B-GGUF/resolve/main/medpsy-4b-q5_k_m-imat.gguf?download=true",
         bytes: 3156921120,   // exact: HuggingFace paths-info AND a live content-length check agree
         sha256: "68bd5e14cd87ff40bba5d08fbef2da9a6088b11aacab8466ef3f13a602e2d868"   // lfs.oid from the HF API
+      }]
+    },
+    /* BONSAI (PrismML, Apache-2.0): models TRAINED at 1 bit or ternary, not quantized afterwards.
+     * Added 2026-09-03 on the owner's decision: the ternary 8B is the on-device stand-in for MaiK
+     * Cloud when the phone is offline (maik-engine.js effective()), and all three are in the picker.
+     *
+     * FORMAT vs OUR RUNTIME. The plugin links mainline llama.cpp b10502, which carries
+     * GGML_TYPE_Q1_0 (128-weight groups) and GGML_TYPE_Q2_0 (64-weight groups) with Metal kernels
+     * (checked in that tag's ggml-common.h). PrismML's default ternary file is grouped by 128 for
+     * THEIR fork; the g64 file below is the one mainline reads (its byte count is exactly the
+     * 64-group layout). The 1-bit files are g128, mainline's Q1_0 layout. The 27B's GGUF declares
+     * architecture "qwen35" (Qwen3.6 hybrid-attention backbone), which b10502 has.
+     *
+     * Direct HuggingFace URLs like the MedGemma packs: public Apache-2.0 weights, Range-resumable.
+     * bytes and sha256 are the HF API's exact size and lfs.oid for each file.
+     *
+     * rag: these packs get the same on-device book retrieval and evidence gate as MaiK Lite. That is
+     * what makes a general model usable as a cloud stand-in: the book supplies the facts, the model
+     * composes. noThink: Qwen3 family, thinking traces eat the token budget on a phone. */
+    "bonsai-ternary-8b": {
+      label: "MAiK Bonsai",
+      actual: "Ternary Bonsai 8B (PrismML, GGUF Q2_0 g64, 1.58-bit)",
+      tier: 0.5,
+      flagship: true,
+      rag: true,
+      noThink: true,
+      note: "Best on-device quality per gigabyte. Reads the StewardMD Knowledge Base before answering. Stands in for MaiK Cloud when you are offline.",
+      guide: {
+        speed: 2, medical: 3, general: 3,
+        bestFor: "Offline use in place of MaiK Cloud: an 8B model that reads the Knowledge Base first.",
+        why: "Trained natively at 1.58 bits, so an 8-billion-parameter model fits in 2.3 GB and answers at a usable pace on a recent phone.",
+        pick: "Pick this for the strongest offline answer without a 3 GB download."
+      },
+      nCtx: 4096,
+      nPredict: 768,
+      files: [{
+        name: "ternary-bonsai-8b-q2_0_g64.gguf",
+        url: HF + "/prism-ml/Ternary-Bonsai-8B-gguf/resolve/main/Ternary-Bonsai-8B-Q2_0_g64.gguf?download=true",
+        bytes: 2310125920,   // exact: HF API size
+        sha256: "e17b298d84ee78797916ae5c2ecc8211469cc65cccfe3080cd9a9bb503fbc55e"   // lfs.oid from the HF API
+      }]
+    },
+    "bonsai-8b": {
+      label: "MAiK Bonsai Swift",
+      actual: "Bonsai 8B (PrismML, GGUF Q1_0 g128, 1-bit)",
+      tier: 0.7,
+      rag: true,
+      noThink: true,
+      note: "Fastest and smallest of the Bonsai packs, a few points below MAiK Bonsai on accuracy.",
+      guide: {
+        speed: 3, medical: 2, general: 3,
+        bestFor: "Speed on a phone with less memory: an 8B model in 1.2 GB.",
+        why: "Every weight is a single bit. The download size of MaiK Lite with far more parameters; a few points below the ternary pack on accuracy.",
+        pick: "Pick this on an older phone, or when speed matters more than the last few points of accuracy."
+      },
+      nCtx: 4096,
+      nPredict: 768,
+      files: [{
+        name: "bonsai-8b-q1_0.gguf",
+        url: HF + "/prism-ml/Bonsai-8B-gguf/resolve/main/Bonsai-8B-Q1_0.gguf?download=true",
+        bytes: 1158654496,   // exact: HF API size
+        sha256: "284a335aa3fb2ced3b1b01fcb40b08aa783e3b70832767f0dd2e3fdfa134bd54"   // lfs.oid from the HF API
+      }]
+    },
+    "bonsai-27b": {
+      label: "MAiK Bonsai Max",
+      actual: "Bonsai 27B (PrismML, GGUF Q1_0 g128, 1-bit, Qwen3.6 backbone)",
+      tier: 5,
+      rag: true,
+      noThink: true,
+      note: "27B-class reasoning in 3.8 GB. Needs a 12 GB phone: on 8 GB it has no headroom and is the slowest.",
+      guide: {
+        speed: 1, medical: 3, general: 3,
+        bestFor: "Flagship phones with 12 GB memory, for the deepest offline reasoning.",
+        why: "A 27-billion-parameter model at one bit per weight. Strong reasoning, but on an 8 GB phone it leaves no headroom and is evicted whenever you switch apps.",
+        pick: "Only on a 12 GB phone. On anything else MAiK Bonsai scores higher on most tasks anyway, and is the slowest of all the packs here."
+      },
+      nCtx: 4096,             // PrismML's 5.2 GB peak-memory figure for this file is at 4K context
+      nPredict: 768,
+      files: [{
+        name: "bonsai-27b-q1_0.gguf",
+        url: HF + "/prism-ml/Bonsai-27B-gguf/resolve/main/Bonsai-27B-Q1_0.gguf?download=true",
+        bytes: 3803452480,   // exact: HF API size
+        sha256: "17ef842e47450caeb8eaa3ebfbbab5d2f2278b62b79be107985fb69a2f819aa0"   // lfs.oid from the HF API
       }]
     }
   };

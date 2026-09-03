@@ -89,7 +89,7 @@ function fakeModel(n) {
   ok("primary pack sizeLabel", M.sizeLabel("maik-mxcore") === "2.49 GB");
   ok("third tier is MAiK Horizon", M.PACKS["maik-horizon"].label === "MAiK Horizon");
   // maik-lite (MedPsy 1.7B) is tier 0: the entry pack, smallest download, offered first.
-  ok("tiers come back in recommended order", M.packIds().join(",") === "maik-lite,maik-mxcore,maik-neural,maik-horizon,maik-apex");
+  ok("tiers come back in recommended order", M.packIds().join(",") === "maik-lite,bonsai-ternary-8b,bonsai-8b,maik-mxcore,maik-neural,maik-horizon,maik-apex,bonsai-27b");
   ok("MAiK Neural (Q5) present with the exact size", M.totalBytes("maik-neural") === 2829699136);
   ok("Neural still fits the 8 GB iPhone budget", M.totalBytes("maik-neural") < 3.0e9);
   ok("Neural sha256 is explicitly null (unverified), not a guess", M.PACKS["maik-neural"].files[0].sha256 === null);
@@ -521,13 +521,13 @@ function loadNative({ script = [], onDisk = 0, freeBytes = 50e9, existingId = nu
   const { M } = loadNative();
   const p = M.PACKS["maik-apex"];
   ok("Apex exists as a fourth tier", !!p && p.tier === 4);
-  ok("Apex is last in the recommended order",
-     M.packIds().join(",") === "maik-lite,maik-mxcore,maik-neural,maik-horizon,maik-apex");
+  ok("Apex sits after the MedGemma tiers, before only the 27B Bonsai",
+     M.packIds().join(",") === "maik-lite,bonsai-ternary-8b,bonsai-8b,maik-mxcore,maik-neural,maik-horizon,maik-apex,bonsai-27b");
   ok("Apex byte count is the exact verified value", M.totalBytes("maik-apex") === 3156921120);
   ok("Apex carries a real sha256, not null",
      /^[0-9a-f]{64}$/.test(p.files[0].sha256 || "") &&
      p.files[0].sha256 === "68bd5e14cd87ff40bba5d08fbef2da9a6088b11aacab8466ef3f13a602e2d868");
-  ok("Apex is flagged flagship", p.flagship === true);
+  ok("Apex no longer carries the flagship flag (moved to MAiK Bonsai, owner decision 2026-09-03)", p.flagship !== true);
   ok("Apex suppresses thinking mode", p.noThink === true);
   ok("Apex gets extra output headroom for a reasoning base", p.nPredict > 512);
   ok("Apex size label is honest", M.sizeLabel("maik-apex") === "3.16 GB");
@@ -535,8 +535,8 @@ function loadNative({ script = [], onDisk = 0, freeBytes = 50e9, existingId = nu
   // The q8_0 build exists at 4.69 GB and was deliberately NOT chosen: a mapping that large on an
   // 8 GB iPhone is past the memory limit and decodes slower, which loses the speed half of the brief.
   ok("Apex stays inside the footprint class already proven on device", M.totalBytes("maik-apex") < 3.3e9);
-  ok("Apex is the largest of the four",
-     M.packIds().every((id) => M.totalBytes(id) <= M.totalBytes("maik-apex")));
+  ok("Apex is the largest of the medical fine-tunes (only the 27B Bonsai is bigger)",
+     M.packIds().filter((id) => id !== "bonsai-27b").every((id) => M.totalBytes(id) <= M.totalBytes("maik-apex")));
 
   // No upstream model name may reach the UI - `actual` is for logs only.
   ok("Apex label is a MAiK tier name", p.label === "MAiK Apex");
@@ -698,4 +698,28 @@ console.log(`\nmaik-models: ${pass} passed, ${fail} failed`);
 // and nothing ever completes in the fake environment. Without this the process stayed alive after
 // every assertion had passed, which is what hung `node --test test/*.test.mjs` in CI until the
 // 15-minute timeout killed the job (ironically, only when the file was GREEN).
+/* ── Bonsai packs (PrismML, added 2026-09-03) ────────────────────────────────────────────────────
+ * Figures are the HF API's exact size and lfs.oid. The file CHOICE is the point of this block: the
+ * plugin links mainline llama.cpp b10502, whose Q2_0 is a 64-weight group, so the ternary pack must
+ * be PrismML's g64 file, not their default g128 (that one needs their fork). Q1_0 is g128 in both.
+ */
+{
+  const { M } = loadNative();
+  const t = M.PACKS["bonsai-ternary-8b"], s = M.PACKS["bonsai-8b"], x = M.PACKS["bonsai-27b"];
+  ok("all three Bonsai packs exist", !!t && !!s && !!x);
+  ok("ternary 8B is the one flagship", t.flagship === true && Object.keys(M.PACKS).filter((id) => M.PACKS[id].flagship).length === 1);
+  ok("ternary 8B uses the g64 file, the only Q2_0 layout mainline b10502 reads",
+     /Q2_0_g64\.gguf/.test(t.files[0].url) && M.totalBytes("bonsai-ternary-8b") === 2310125920);
+  ok("ternary 8B sha256 is the HF lfs.oid", t.files[0].sha256 === "e17b298d84ee78797916ae5c2ecc8211469cc65cccfe3080cd9a9bb503fbc55e");
+  ok("1-bit 8B exact size and sha", M.totalBytes("bonsai-8b") === 1158654496 &&
+     s.files[0].sha256 === "284a335aa3fb2ced3b1b01fcb40b08aa783e3b70832767f0dd2e3fdfa134bd54");
+  ok("27B exact size and sha", M.totalBytes("bonsai-27b") === 3803452480 &&
+     x.files[0].sha256 === "17ef842e47450caeb8eaa3ebfbbab5d2f2278b62b79be107985fb69a2f819aa0");
+  ok("every Bonsai pack reads the book (rag) and runs with thinking off", [t, s, x].every((p) => p.rag === true && p.noThink === true));
+  ok("size labels are honest", M.sizeLabel("bonsai-ternary-8b") === "2.31 GB" && M.sizeLabel("bonsai-8b") === "1.16 GB" && M.sizeLabel("bonsai-27b") === "3.80 GB");
+  ok("every Bonsai pack has guide copy", [t, s, x].every((p) => p.guide && p.guide.bestFor && p.guide.why && p.guide.pick));
+  ok("none is a vision pack", ["bonsai-ternary-8b", "bonsai-8b", "bonsai-27b"].every((id) => M.hasVision(id) === false));
+  ok("the medical packs stay ungrounded (no rag flag)", ["maik-mxcore", "maik-neural", "maik-horizon", "maik-apex"].every((id) => !M.PACKS[id].rag));
+}
+
 process.exit(fail ? 1 : 0);
