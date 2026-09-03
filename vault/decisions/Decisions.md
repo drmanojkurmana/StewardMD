@@ -2158,9 +2158,14 @@ unverified on device (same formats, same runtime path).
 
 Routing: `maik-engine.js` `effective()` now sends a `cloud`-preference user to the installed local
 pack when `navigator.onLine` is false and `localReady()`. The preference is untouched, so cloud
-resumes with the network. Flag `smd_maik_offline_local` ("0" disables). All Bonsai packs carry
-`rag: true`, so `maik-local.js` `ragEligible()` grounds them in the book exactly as MaiK Lite; the
-MedGemma/MedPsy packs stay ungrounded. Flagship flag moved from Apex to `bonsai-ternary-8b`.
+resumes with the network. Flag `smd_maik_offline_local` ("0" disables). Flagship flag moved from
+Apex to `bonsai-ternary-8b`.
+
+REVERSED THE SAME DAY (owner): the first cut grounded the Bonsai packs in the book (`rag: true`,
+half their answers were then rejected by the gate, see above). The owner's call is that the Bonsai
+models act individually on their own weights and knowledge, ungrounded, unlike MaiK Lite. The
+`rag` flag is gone; `ragEligible()` is back to `maik-lite` only. Consequence to keep in mind: a
+Bonsai answer carries no evidence gate and no source line, exactly like the MedGemma packs.
 
 Naming caveat for the owner: the labels "MAiK Bonsai / Bonsai Swift / Bonsai Max" carry the upstream
 brand, against the tier-name convention (MxCore, Neural, Horizon, Apex). Kept because the owner

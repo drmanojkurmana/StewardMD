@@ -450,12 +450,8 @@
    * Scoped to maik-lite only tonight, not every noThink pack - that is what was asked for
    * ("the model we trained"), and widening it needs its own verification pass.
    */
-  function ragEligible(packId) {
-    if (packId === "maik-lite") return true;
-    // Widened 2026-09-03 (owner): the Bonsai packs stand in for MaiK Cloud offline, so they read the
-    // book too. Registry-driven (`rag: true`), the MedGemma/MedPsy packs stay ungrounded as before.
-    try { var m = models(); return !!(m && m.PACKS[packId] && m.PACKS[packId].rag); } catch (e) { return false; }
-  }
+  // Owner decision 2026-09-03: MaiK Lite ONLY. The Bonsai packs answer from their own weights.
+  function ragEligible(packId) { return packId === "maik-lite"; }
 
   /** Resolves {evidenceText, passages, RAG} from the on-device book index, or null if ungrounded
    * (no KB yet, no hit, or anything failed) - grounding is a strict improvement when available,

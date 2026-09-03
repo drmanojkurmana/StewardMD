@@ -16,9 +16,10 @@ UpToDate-style answer. Aurora bottom-sheet UI. Account-scoped on-device conversa
   inference via `local-plugins/capacitor-llama` (mainline llama.cpp b10502 xcframework). See
   `docs/MAIK_OFFLINE_RUNBOOK.md`. Eight packs (2026-09-03): `maik-lite` (our fine-tune, default),
   `bonsai-ternary-8b` (flagship), `bonsai-8b`, the three MedGemma/Gemma tiers, `maik-apex`,
-  `bonsai-27b`. Packs with `rag: true` (MaiK Lite + the three Bonsai) read the on-device book
-  (`kb/ai/maik-lite-rag.js` BM25 + evidence gate, `kb/ai/maik-lite-kb-store.js` 38 MB asset);
-  answers cite only "StewardMD Knowledge Base - based on standard medical resources", never a page.
+  `bonsai-27b`. ONLY MaiK Lite reads the on-device book (`kb/ai/maik-lite-rag.js` BM25 + evidence
+  gate, `kb/ai/maik-lite-kb-store.js` 38 MB asset; `maik-local.js` `ragEligible`); every other pack,
+  Bonsai included, answers ungrounded from its own weights (owner, 2026-09-03). Grounded answers
+  cite only "StewardMD Knowledge Base - based on standard medical resources", never a page.
 - **Offline stand-in** (`maik-engine.js` `effective()`, 2026-09-03): pref `cloud` + `navigator.onLine`
   false + a ready local pack → the on-device model answers. Flag `smd_maik_offline_local` ("0" off).
 - `kb/ai/maik-kb.js` (`window.MaiKKB`) — deterministic KB answer engine (canonical+fuzzy+abbrev, 85% gate)

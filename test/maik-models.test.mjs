@@ -715,11 +715,11 @@ console.log(`\nmaik-models: ${pass} passed, ${fail} failed`);
      s.files[0].sha256 === "284a335aa3fb2ced3b1b01fcb40b08aa783e3b70832767f0dd2e3fdfa134bd54");
   ok("27B exact size and sha", M.totalBytes("bonsai-27b") === 3803452480 &&
      x.files[0].sha256 === "17ef842e47450caeb8eaa3ebfbbab5d2f2278b62b79be107985fb69a2f819aa0");
-  ok("every Bonsai pack reads the book (rag) and runs with thinking off", [t, s, x].every((p) => p.rag === true && p.noThink === true));
+  ok("every Bonsai pack is UNGROUNDED (owner: own weights, no book) and runs with thinking off", [t, s, x].every((p) => !p.rag && p.noThink === true));
   ok("size labels are honest", M.sizeLabel("bonsai-ternary-8b") === "2.31 GB" && M.sizeLabel("bonsai-8b") === "1.16 GB" && M.sizeLabel("bonsai-27b") === "3.80 GB");
   ok("every Bonsai pack has guide copy", [t, s, x].every((p) => p.guide && p.guide.bestFor && p.guide.why && p.guide.pick));
   ok("none is a vision pack", ["bonsai-ternary-8b", "bonsai-8b", "bonsai-27b"].every((id) => M.hasVision(id) === false));
-  ok("the medical packs stay ungrounded (no rag flag)", ["maik-mxcore", "maik-neural", "maik-horizon", "maik-apex"].every((id) => !M.PACKS[id].rag));
+  ok("no pack carries a rag flag: grounding is MaiK Lite only, decided in maik-local.js", Object.keys(M.PACKS).every((id) => !M.PACKS[id].rag));
 }
 
 process.exit(fail ? 1 : 0);

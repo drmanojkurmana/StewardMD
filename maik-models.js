@@ -107,7 +107,7 @@
    * wrong - because that is the part that matters at the bedside and it is easy to leave out. */
   var GUIDE_INTRO = [
     "Answers come from a model stored on your phone. No internet, no AI tokens.",
-    "MaiK Lite is StewardMD's own model, trained on the StewardMD Knowledge Base - based on standard medical resources. The Bonsai packs are stronger general models that read the Knowledge Base before answering. The MedGemma and MedPsy packs answer from their own training. Either way answers carry no page citations and can be wrong. Verify against local protocol.",
+    "MaiK Lite is StewardMD's own model, trained on the StewardMD Knowledge Base - based on standard medical resources. The Bonsai, MedGemma and MedPsy packs answer from their own training. Either way answers carry no page citations and can be wrong. Verify against local protocol.",
     "You can keep more than one downloaded and switch between them. Only the selected one runs.",
     "Downloading needs the space shown plus room to run it. Wi-Fi is easier, mobile data works, and a download resumes if it is interrupted."
   ];
@@ -308,20 +308,19 @@
      * Direct HuggingFace URLs like the MedGemma packs: public Apache-2.0 weights, Range-resumable.
      * bytes and sha256 are the HF API's exact size and lfs.oid for each file.
      *
-     * rag: these packs get the same on-device book retrieval and evidence gate as MaiK Lite. That is
-     * what makes a general model usable as a cloud stand-in: the book supplies the facts, the model
-     * composes. noThink: Qwen3 family, thinking traces eat the token budget on a phone. */
+     * UNGROUNDED, by owner decision (2026-09-03): these packs answer from their own weights, with no
+     * book retrieval and no evidence gate. Only MaiK Lite is grounded (maik-local.js ragEligible).
+     * noThink: Qwen3 family, thinking traces eat the token budget on a phone. */
     "bonsai-ternary-8b": {
       label: "MAiK Bonsai",
       actual: "Ternary Bonsai 8B (PrismML, GGUF Q2_0 g64, 1.58-bit)",
       tier: 0.5,
       flagship: true,
-      rag: true,
       noThink: true,
-      note: "Best on-device quality per gigabyte. Reads the StewardMD Knowledge Base before answering. Stands in for MaiK Cloud when you are offline.",
+      note: "Best on-device quality per gigabyte. Answers from its own training. Stands in for MaiK Cloud when you are offline.",
       guide: {
         speed: 2, medical: 3, general: 3,
-        bestFor: "Offline use in place of MaiK Cloud: an 8B model that reads the Knowledge Base first.",
+        bestFor: "Offline use in place of MaiK Cloud: an 8B general model answering from its own training.",
         why: "Trained natively at 1.58 bits, so an 8-billion-parameter model fits in 2.3 GB and answers at a usable pace on a recent phone.",
         pick: "Pick this for the strongest offline answer without a 3 GB download."
       },
@@ -338,7 +337,6 @@
       label: "MAiK Bonsai Swift",
       actual: "Bonsai 8B (PrismML, GGUF Q1_0 g128, 1-bit)",
       tier: 0.7,
-      rag: true,
       noThink: true,
       note: "Fastest and smallest of the Bonsai packs, a few points below MAiK Bonsai on accuracy.",
       guide: {
@@ -360,7 +358,6 @@
       label: "MAiK Bonsai Max",
       actual: "Bonsai 27B (PrismML, GGUF Q1_0 g128, 1-bit, Qwen3.6 backbone)",
       tier: 5,
-      rag: true,
       noThink: true,
       note: "27B-class reasoning in 3.8 GB. Needs a 12 GB phone: on 8 GB it has no headroom and is the slowest.",
       guide: {
