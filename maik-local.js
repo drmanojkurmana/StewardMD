@@ -312,29 +312,23 @@
      * A Qwen3-family pack emits <think> blocks by default. At nPredict 768 a long reasoning trace can
      * consume the entire budget, so the doctor gets a truncated thought and NO answer - and
      * stripReasoning() then correctly returns "", which reads as the app failing. "/no_think" is the
-     * family's own switch and costs three tokens, which is far cheaper than the reasoning it prevents.
+     * family's own switch, read by the CHAT TEMPLATE if one applies - cheap, so kept as a hint even
+     * though it is not what actually fixes this (see below).
+     *
+     * WRONG FIX, KEPT AS A RECORD: this used to also push "<think>\n\n</think>" into the QUESTION
+     * text here, on the theory that the engine sends a raw completion prompt with no chat template.
+     * It does not - LlamaEngine.swift/.java DOES apply the model's own chat template, which wraps
+     * this whole string (empty-think tag included) inside the USER turn. The "closed" block landed
+     * as noise inside the doctor's question while the real assistant turn still opened blank, fixing
+     * nothing - and arguably making the noise-in-the-question worse than sending nothing at all.
+     * That misdiagnosis is why MaiK Lite kept blanking/looping on freshly re-verified v4 weights
+     * after every other cause had been ruled out (2026-09-03).
+     *
+     * REAL FIX: prefillEmptyThink, passed to L.generate() in answer() below. Only the NATIVE side
+     * can close the think block from the ASSISTANT's turn, because only it knows where
+     * "<|im_start|>assistant\n" actually is after applying the template.
      */
-    if (packId && noThinkPack(packId)) {
-      /* TWO switches, because from here we cannot tell which one the runtime will honour.
-       *
-       * "/no_think" is Qwen3's own switch, but it is read by the CHAT TEMPLATE - and this engine
-       * sends a RAW completion prompt (generate({ prompt, system, ... }) below, no template). In a
-       * raw prompt those three tokens can be treated as ordinary text and ignored, which produces
-       * exactly the failure the switch exists to prevent: the model reasons anyway, stripReasoning()
-       * bins every one of those tokens, and the doctor waits through generation they never see.
-       * A 1.7B burning 400 tokens on reasoning loses to a 4B that answers in 120 - which is what
-       * "Lite is SLOWER than the 4B" turned out to look like on a real phone.
-       *
-       * So we also CLOSE AN EMPTY THINKING BLOCK. The model resumes from a point where its reasoning
-       * has already happened and yielded nothing, so it goes straight to the answer. That needs no
-       * template support at all, which is the whole point.
-       *
-       * Both are kept: /no_think costs three tokens and still helps if a template IS applied, and
-       * stripReasoning() removes a closed empty block either way, so neither can leak to the doctor.
-       */
-      L.push("/no_think");
-      L.push("<think>\n\n</think>");
-    }
+    if (packId && noThinkPack(packId)) L.push("/no_think");
     return L.join("\n");
   }
 
@@ -512,7 +506,11 @@
                 : SYSTEM_IMAGE,
           nPredict: pk.nPredict || 512,
           temperature: (opts && typeof opts.temperature === "number") ? opts.temperature : 0,
-          stream: typeof onDelta === "function"
+          stream: typeof onDelta === "function",
+          // The actual think-suppression fix (see buildPrompt's comment for why the old
+          // in-question-text approach never worked). Vision packs are never noThink today, so this
+          // only needs wiring on the text path.
+          prefillEmptyThink: !images.length && noThinkPack(packId)
         };
         if (!images.length) return L.generate(common);
         // IMAGE PATH. mtmd reads the file itself, so paths cross the bridge, never base64 - a phone

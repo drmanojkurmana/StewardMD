@@ -244,26 +244,28 @@ const { L } = load();
 /* ── Thinking-mode suppression (MAiK Apex / Qwen3 base) ─────────────────────────────────────────
  * A reasoning-capable base emits <think> blocks by default. At nPredict 768 a long trace can consume
  * the whole budget, leaving a truncated thought and NO answer - and stripReasoning() then correctly
- * returns "", which on screen reads as the app being broken. "/no_think" is the family's own switch.
- * Driven off the pack registry, never hardcoded to a model name.
+ * returns "", which on screen reads as the app being broken. Driven off the pack registry, never
+ * hardcoded to a model name.
+ *
+ * REGRESSION (2026-09-03, found live): buildPrompt() used to ALSO push "<think>\n\n</think>" into
+ * the QUESTION text, on the theory that the engine sends a raw completion with no chat template. It
+ * does not - LlamaEngine.swift/.java apply the model's own template, which wraps this whole string
+ * inside the USER turn. The "closed" block landed as noise inside the doctor's question while the
+ * real assistant turn still opened blank, fixing nothing. buildPrompt now ONLY sends the cheap
+ * "/no_think" hint; the actual fix is prefillEmptyThink on the options object passed to
+ * L.generate(), which only the native side can apply at the true assistant-turn boundary.
  */
 {
   const { L } = load();
   const q = { question: "empiric antibiotic for pyogenic liver abscess" };
 
-  /* Both switches, because only one of them can work and buildPrompt cannot know which: /no_think is
-     read by the Qwen3 CHAT TEMPLATE, but this engine sends a RAW prompt, so it can be ignored as
-     plain text. The closed empty <think></think> needs no template and makes the model resume as if
-     reasoning already happened. Registry-driven, so it covers Apex AND Lite. */
   {
     const p = L.buildPrompt(q, "maik-apex");
-    ok("a pack with noThink still gets Qwen3's own switch", /\/no_think/.test(p));
-    ok("...and an empty thinking block, which works without a chat template", /<think>\s*<\/think>\s*$/.test(p));
-    ok("the block is CLOSED - an unterminated one would make stripReasoning() bin the answer",
-       (p.match(/<think>/g) || []).length === (p.match(/<\/think>/g) || []).length);
-    ok("the question still precedes both switches", p.indexOf("liver abscess") < p.indexOf("/no_think"));
+    ok("a pack with noThink gets Qwen3's own switch", /\/no_think/.test(p));
+    ok("buildPrompt does NOT inject a think tag into the question text", !/<think>/.test(p));
+    ok("the question still precedes the switch", p.indexOf("liver abscess") < p.indexOf("/no_think"));
     // Same treatment for the 1.7B entry tier - this is the pack the slowdown was reported on.
-    ok("MAiK Lite gets it too", /<think>\s*<\/think>\s*$/.test(L.buildPrompt(q, "maik-lite")));
+    ok("MAiK Lite gets the switch too", /\/no_think/.test(L.buildPrompt(q, "maik-lite")));
   }
   ok("a pack without noThink does NOT", !/no_think/.test(L.buildPrompt(q, "maik-mxcore")));
   ok("no pack id given behaves as before", !/no_think/.test(L.buildPrompt(q)));
@@ -281,6 +283,19 @@ const { L } = load();
   // stripReasoning is the backstop if the switch is ignored.
   ok("a leaked qwen-style think block is still stripped",
      L.stripReasoning("<think>weighing options</think>Pip-tazo 3.375 g IV q8h") === "Pip-tazo 3.375 g IV q8h");
+}
+
+// ── prefillEmptyThink: the ACTUAL fix reaches the native call, buildPrompt's tag injection does not ──
+{
+  const { L: L2, calls } = load();
+  await L2.answer({ question: "Treatment of Pneumonia" }, { pack: "maik-lite" }, null);
+  ok("noThink pack sets prefillEmptyThink on the native call", calls.generate[0].prefillEmptyThink === true);
+  ok("the prompt sent to native carries no think tag (that landed in the user turn, uselessly)",
+     !/<think>/.test(calls.generate[0].prompt));
+
+  calls.generate.length = 0;
+  await L2.answer({ question: "Treatment of Pneumonia" }, { pack: "maik-mxcore" }, null);
+  ok("a pack without noThink does not set prefillEmptyThink", !calls.generate[0].prefillEmptyThink);
 }
 
 
