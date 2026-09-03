@@ -187,13 +187,26 @@ byte-histogram - no UTF-8 multi-byte sequences present), and decoding it as UTF-
 `errors="replace"` turned every en-dash into a "�" replacement glyph in clinical procedure names; fixed by
 decoding as cp1252 properly instead of papering over it.
 
+**Odisha's signed-URL problem WAS solved 2026-09-04** (Chrome DevTools MCP: navigated to the GO
+index, clicked "Download PDF", read the freshly-minted `secure-file/view?f=...&e=...&s=...` URL
+off the resulting network request, fetched it with plain `curl` before its ~10-minute expiry -
+120pp, matches the doc's recorded size/page-count exactly) - **but the data itself isn't safe to
+load**, for the SAME reason Punjab and Himachal were rejected, now confirmed a third time: LOS
+sometimes renders as a bare number (not consistently "NA" or "X days" text), so 2,121/2,604 code
+rows (81.5%) have more than one numeric token after the procedure code and the existing "Nth
+numeric token" rate-column heuristic can't tell "255500" (the real Package cost) from "5" (LOS)
+apart reliably. This is now the THIRD state confirming the same systemic weakness in
+`ingest_layout_pdf.py`'s rate-column selection - **the real fix is a header-position-aware
+columnar parser** (build column x-boundaries from the actual header row, bucket each data line's
+tokens by which boundary they fall in, rather than counting numeric tokens by ordinal position) -
+worth doing properly in a session with time to re-validate every already-loaded
+`ingest_layout_pdf.py` jurisdiction against it, not attempted tonight.
+
 **No usable source located yet (need a PDF from the owner):** Madhya Pradesh, Chandigarh, J&K,
 Jharkhand, Puducherry, Goa, Tripura, Maharashtra, Meghalaya (2 of 3 tables are small/client-side;
 the large IPD table needs a WordPress AJAX nonce this session couldn't mint from a plain fetch),
 Manipur, Sikkim, A&N Islands, Lakshadweep, DNH&DD, Arunachal Pradesh (table exists but has no
-prices), Odisha
-(signed download URL expired before fetch, not retried tonight - needs a live browser click to
-mint a fresh signed URL, not a plain curl).
+prices).
 
 **`scripts/govschemes/ingest_layout_pdf.py`** (2026-09-03) — adapter for HBP-family PDFs that
 docling can't parse (column headers print only on page 1, not on continuation pages). Runs
