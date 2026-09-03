@@ -584,6 +584,8 @@ function loadWithRag({ tokens, kbLoadFails = false } = {}) {
   const bad = load({ tokens: ["I think the student did well overall."] });
   const vb = await bad.L.vivaJudge("Q", "", "A", { pack: "maik-apex" });
   ok("an unparseable judgement is an honest parse error, never an invented verdict", vb.error === "parse");
+  ok("...after exactly one blunter retry", bad.calls.generate.length === 2 && /ONLY the JSON object now/.test(bad.calls.generate[1].prompt) && bad.calls.generate[1].temperature === 0.3);
+  ok("a parseable first reply is not retried", j.calls.generate.length === 1);
   ok("empty input is refused before any generation", (await bad.L.vivaJudge("", "", "A")).error === "no-input");
 
   const opdJson = JSON.stringify({ provisionalDx: "Acute  pyelonephritis", ddx: [{ dx: "Pyelonephritis", why: "fever, flank pain" }, "Renal colic", { name: "PID", reason: "lower abdominal pain" }, {}, { dx: "x1" }, { dx: "x2" }, { dx: "x3" }, { dx: "x4" }],

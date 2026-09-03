@@ -815,17 +815,25 @@
     // Small packs (MaiK Lite was fine-tuned for prose) drift into sections before the JSON; the
     // closing nudge in the user turn is what keeps a 1.7B on the object. Harmless for the larger ones.
     prompt += "\n\nReply with the JSON object only. Start your reply with {";
-    return ensureLoaded(packId).then(function () {
-      return L.generate({ prompt: prompt, system: system, nPredict: nPredict, temperature: 0, stream: false,
-                          prefillEmptyThink: noThinkPack(packId) });
-    }).then(function (r) {
-      if (r && r.error) throw new Error(String(r.error));
-      var text = stripReasoning((r && r.text) || "");
-      var parsed = parseJsonLoose(text);
-      // On a miss, carry a short sample of what the model said so a device probe can see WHY
-      // (callers only look at .error). Model output, never book text.
-      if (!parsed) { var e = new Error("parse"); e.sample = text.slice(0, 240); throw e; }
-      return parsed;
+    function once(p, temp) {
+      return L.generate({ prompt: p, system: system, nPredict: nPredict, temperature: temp, stream: false,
+                          prefillEmptyThink: noThinkPack(packId) }).then(function (r) {
+        if (r && r.error) throw new Error(String(r.error));
+        var text = stripReasoning((r && r.text) || "");
+        return { parsed: parseJsonLoose(text), text: text };
+      });
+    }
+    return ensureLoaded(packId).then(function () { return once(prompt, 0); }).then(function (a) {
+      if (a.parsed) return a.parsed;
+      // A 1.7B answers the same prompt as JSON one minute and as prose the next (seen live on MaiK
+      // Lite). One retry with a blunter instruction and a little sampling jitter recovers most of
+      // those; a second miss is reported honestly, never turned into an invented verdict.
+      return once(prompt + "\n\nYour previous reply was prose. Output ONLY the JSON object now, nothing before it and nothing after it.", 0.3).then(function (b) {
+        if (b.parsed) return b.parsed;
+        // Carry a short sample of what the model said so a device probe can see WHY (callers only
+        // look at .error). Model output, never book text.
+        var e = new Error("parse"); e.sample = b.text.slice(0, 240); throw e;
+      });
     });
   }
   function parseFailure(err) {
