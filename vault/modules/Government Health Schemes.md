@@ -64,19 +64,42 @@ fallback since government-authored XLSX files are not reliably well-formed.
 ## National scheme registry status
 28/28 states, 8/8 UTs, Central: registry (name/type/code) seeded and live in D1.
 
-**Ingested (live data, verified by remote query 2026-09-03):** 14/37 jurisdictions, 33,550
+**Ingested (live data, verified by remote query 2026-09-04):** 15/37 jurisdictions, 35,417
 packages — Tamil Nadu 4,298 · Andhra Pradesh 3,713 · Karnataka 3,155 · Bihar 2,675 · Rajasthan
-2,439 · Gujarat 2,315 · Kerala 2,286 · Nagaland 2,004 · Mizoram 2,003 · Uttar Pradesh 2,000 ·
-Delhi 1,991 · Chhattisgarh 1,735 · Central PM-JAY HBP 2022 1,646 · Haryana 1,290. Each row
-carries its source's `rate_tier` verbatim (Tier 2, Tier1(X), Non-NABH, A1, ...) - amounts are
-only comparable with the tier visible. All `scheme_versions.status = 'draft'` (Phase 1's admin
+2,439 · Gujarat 2,315 · Kerala 2,286 · Telangana 1,867 · Nagaland 2,004 · Mizoram 2,003 ·
+Uttar Pradesh 2,000 · Delhi 1,991 · Chhattisgarh 1,735 · Central PM-JAY HBP 2022 1,646 ·
+Haryana 1,290. Each row carries its source's `rate_tier` verbatim where the source publishes one
+(Tier 2, Tier1(X), Non-NABH, A1, ...) - amounts are only comparable with the tier visible.
+Telangana's source publishes a single price per procedure (no tier split) - `rate_tier` is
+intentionally blank there, not guessed. All `scheme_versions.status = 'draft'` (Phase 1's admin
 review pass hasn't run - see the module's own trade-off note above before flipping
 `smd_govt_schemes` on).
 
+**Telangana (2026-09-04)** — the portal has no reachable package master (confirmed in
+`govschemes_verified_sources_batch1.md`: the rate-revision GO PDFs 404 even from inside the
+portal). The owner supplied the full "Surgery/Therapy List (Consolidated)" as an `.rtf` export
+instead of the image-only 142pp PDF this session had been trying (and failing) to OCR. Converted
+via `textutil -convert txt`, parsed by `scripts/govschemes/parse_telangana_rtf.py` (one field per
+physical line; record shape - 6 vs 7 fields - detected structurally, not guessed; a data row's
+terminator MUST be exactly "Yes"/"No" or it's rejected, never absorbed). 1869/1876 rows parsed
+clean (7 rejected: 3 have a genuinely blank package amount in the source, 4 Rheumatology ICU rows
+carry an extra "Routine Ward-.../ICU..." stay-cost column this parser doesn't handle - left out
+rather than guessed at). 2 duplicate treatment codes in the source (S8.3.1, M19.1, each under a
+different name/amount) - first occurrence kept, both logged in `crawl_logs.detail`, never merged.
+Spot-checked 5 known-correct rows (S1.19A, S1.2.1, S1.21.1A, S5.16.1A, M15.1.1) against the source
+before loading - exact match on code/name/amount/ICD/reserved. `sources.verification_status =
+'unverified'` (no live URL to re-verify against) and `sources.document_type = 'rtf'` - this is
+recorded honestly as owner-supplied, not portal-verified.
+
 **Failed extraction, deliberately NOT loaded (bad data is worse than none):** Punjab and Himachal
 (borderless tables, docling merges rows), Assam CGHS (overlapping text boxes shift prices between
-columns), Ladakh (its PDF is a code crosswalk with no prices), Telangana (owner-supplied
-image-only PDF, needs ~25 min OCR - not yet run).
+columns), Ladakh (its PDF is a code crosswalk with no prices). A PaddleOCR-based fallback
+(`scripts/govschemes/paddle_tables.py`, plain OCR + geometric row-reconstruction, since
+PP-StructureV3's full pipeline OOMs on this machine) was trialed on 1 Telangana page before the
+RTF made that moot - it read codes/names/amounts correctly but doesn't merge wrapped-cell
+continuation lines into their parent row, so it's not yet trustworthy for a full run on
+Punjab/Himachal/Assam without a human spot-check pass. Left for the owner: OCR output is a digit
+transcription risk this project has been explicit about never guessing past.
 **No usable source located yet (need a PDF from the owner):** Madhya Pradesh, Chandigarh, J&K,
 Jharkhand, Puducherry, Goa, Tripura, Maharashtra, West Bengal, Meghalaya, Manipur, Sikkim,
 A&N Islands, Lakshadweep, DNH&DD, Arunachal Pradesh (table exists but has no prices), Odisha
