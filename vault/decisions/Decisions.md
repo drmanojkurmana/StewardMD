@@ -2253,3 +2253,45 @@ line. The gate is untouched: it still applies to every grounded answer.
 Naming caveat for the owner: the labels "MAiK Bonsai / Bonsai Swift / Bonsai Max" carry the upstream
 brand, against the tier-name convention (MxCore, Neural, Horizon, Apex). Kept because the owner
 asked for the models by that name; rename is a one-line registry edit each.
+
+## 2026-09-04 WardSynQ: one system with Ward Sync, and the P0 core
+
+**WardSynQ is a module inside StewardMD, not a separate repo or product codebase** (owner, 2026-09-04).
+`wardsynq.com` is its EMR web surface. A separate `~/Developer/WardSynQ` repo was started earlier in
+the same session and abandoned on that instruction; nothing depends on it.
+
+**Ward Sync and WardSynQ are the same system.** The existing GIMSR GHIS integration (`ghis-ward.js`,
+`wardSync` state in `icu.js` / `medlist.js` / `autofetch.js`) is not a parallel feature to be kept
+alongside a new EMR. It becomes the first hospital-data adapter under WardSynQ's future Integration
+Hub. The pipeline the owner specified:
+
+    GHIS / existing Ward Sync connector
+      -> WardSynQ canonical clinical model
+      -> Clinical Event Bus
+      -> Safety / Workflow / AI / Patient 360 / EMR
+
+with HL7 v2, FHIR R4, DICOM/DICOMweb, LIS, ABDM and IoMT following the same adapter shape. The
+binding constraint: **no adapter-specific logic in WardSynQ core.** GHIS lab-name mapping, unit
+conversion, token handling and the GIMSR picker stay in the adapter. Existing mobile behaviour keeps
+working while it migrates onto the shared layer.
+
+**Not started: the `ghis-ward.js` migration itself.** It touches live mobile code that the ICU
+flowsheet, medlist and autofetch all read through, so it is its own reviewed change, not a side
+effect of scaffolding.
+
+P0 shipped three files plus 44 tests (`wardsynq/wardsynq-model.js`, `-events.js`, `-meds.js`,
+`test/wardsynq-p0-core.test.mjs`). Nothing is wired to the app, nothing is flagged on, there is no UI
+and no persistence layer. See `vault/modules/WardSynQ.md` for the design rules; the ones most likely
+to be undone by accident are that the eMAR holds no clinical pharmacology (the safety engine is
+injected, and its default refuses everything), and that `ADMINISTERED` is structurally reachable only
+from `SCANNED`.
+
+Deliberately NOT written, despite the spec listing them: `wardsynq-safety.js`,
+`wardsynq-safety-case.js`, `wardsynq-temporal.js`, `wardsynq-mpi.js`, `wardsynq-store.js`,
+`wardsynq-interop.js`. The spec routes the clinical-safety files to Opus-level clinical reasoning and
+they were kept out of a scaffolding pass on purpose.
+
+Tooling note for future sessions: the owner approved using `agy` (Gemini Antigravity CLI) for small
+local tasks, but the Claude Code auto-mode permission classifier refused to spawn it from a
+background session, with both `--dangerously-skip-permissions` and `--mode accept-edits`. An owner
+saying "go ahead" does not lift that classifier; it needs a Bash permission rule in settings.
