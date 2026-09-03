@@ -212,6 +212,22 @@ are genuinely priced "Included in package" / by ventilator-day / per-unit in the
 a parser miss - spot-checked). Haryana: ~69% (same causes, plus more "No change" rows). Read the
 script's own docstring before reusing it on another HBP-style PDF.
 
+**`treatment_name` page-header leakage - found 2026-09-04, not yet fixed, likely also affects the
+already-loaded Haryana/Central/UP `treatment_name` gaps flagged in the QA section above.** Tried
+this script on Mizoram's Annexure B (Private EHCP, 154pp PDF, structurally the safest-looking
+candidate of the night - single unambiguous rate column per procedure, verified by a full
+numeric-token scan: 0 rows with more than one numeric token after the code). It parsed fine at
+first glance (BM001A -> ₹8,800, exact match to the source doc's sample) but 129/1683 rows (7.7%)
+carry a REPEATING PAGE HEADER phrase ("Reservation Private Hospitals (Y/N)", "Rates (₹)", "Sl.No")
+leaked into `treatment_name`, prefixed or appended - HEADER_NOISE doesn't include this state's
+exact header wording, so the leading/trailing-continuation state machine absorbs it as if it were
+wrapped procedure-name text on a fresh page. Not loaded - would need HEADER_NOISE (or a smarter
+"does this line look like the recurring header block" check) extended per-state, and every
+already-loaded ingest_layout_pdf.py jurisdiction re-checked for the same failure mode before
+trusting `treatment_name` there. Left as a real next step, not patched under time pressure
+tonight (touching the shared script risks a subtle regression on already-loaded data with no
+time left to re-validate all of it before the owner wakes).
+
 **Source inventory (research, not yet ingested):** `functions/db/govschemes_source_inventory.md`,
 compiled by agy 2026-09-02 — **29/35 FOUND** (a package master located on an official govt
 domain), **6/35 PARTIAL** (Manipur, Sikkim, Tripura, A&N Islands, DNH&DD, Lakshadweep: scheme
