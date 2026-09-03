@@ -2129,3 +2129,39 @@ a worktree: the CapApp-SPM Package.swift relative paths resolve to the original 
 `local-plugins` when synced from a worktree, so a worktree build silently compiles the OLD Swift.
 Also: `devicectl device info processes` pads lines with trailing spaces, so a `$`-anchored grep on
 the app path silently matches nothing and looks like "the app is gone" when it is not.
+
+## 2026-09-03 — Bonsai packs (PrismML 1-bit / ternary) in the picker; ternary 8B as the offline stand-in for MaiK Cloud
+
+Owner decision: add Ternary Bonsai 8B as an offline model and use it in place of Vertex/Gemini for
+offline users wherever possible; list all three Bonsai models (1-bit 8B, ternary 8B, 1-bit 27B) in
+the MaiK Assistant picker. Chosen over the 27B on the numbers: PrismML's own suite has ternary 8B at
+85.0% vs 1-bit 27B at 82.9% and 1-bit 8B at 78.9%, and the 27B at 5.2 GB RAM (4K context) would be
+the first thing iOS evicts on an 8 GB phone every time the app is backgrounded.
+
+No native change was needed, and this was verified rather than assumed. The plugin links the
+mainline llama.cpp b10502 xcframework; that tag's ggml.h already carries GGML_TYPE_Q1_0 (41) and
+GGML_TYPE_Q2_0 (42) with Metal kernels, because PrismML's formats were merged upstream after their
+March release. Group sizes differ from PrismML's fork defaults: mainline Q2_0 is a 64-weight group,
+so the ternary pack points at `Ternary-Bonsai-8B-Q2_0_g64.gguf` (2,310,125,920 bytes), NOT the
+default g128 file the model card recommends (that one needs their fork). Q1_0 is g128 in both, so
+the 1-bit files are used as published. The 27B's GGUF declares arch `qwen35` (Qwen3.6 backbone),
+present in b10502. Licence Apache-2.0 on all three, so direct HuggingFace URLs like the MedGemma
+packs. Sizes and sha256 are the HF API's exact size and lfs.oid.
+
+Live on the owner's iPhone 15 Pro: the g64 ternary file downloaded (2.31 GB), loaded and answered on
+the unchanged build. Cold first answer 79 s including the load; warm answers 47 to 57 s, about four
+times slower than MaiK Lite 1.7B on the same phone, with the retrieved passages in the prompt. Four
+questions: two passed the evidence gate, two were rejected and showed the reference passage. So it
+WORKS as an offline stand-in and is honest, but it is slow on an 8 GB phone; the flagship badge is a
+statement of quality per gigabyte, not speed. The 1-bit 8B and the 27B are in the registry and
+unverified on device (same formats, same runtime path).
+
+Routing: `maik-engine.js` `effective()` now sends a `cloud`-preference user to the installed local
+pack when `navigator.onLine` is false and `localReady()`. The preference is untouched, so cloud
+resumes with the network. Flag `smd_maik_offline_local` ("0" disables). All Bonsai packs carry
+`rag: true`, so `maik-local.js` `ragEligible()` grounds them in the book exactly as MaiK Lite; the
+MedGemma/MedPsy packs stay ungrounded. Flagship flag moved from Apex to `bonsai-ternary-8b`.
+
+Naming caveat for the owner: the labels "MAiK Bonsai / Bonsai Swift / Bonsai Max" carry the upstream
+brand, against the tier-name convention (MxCore, Neural, Horizon, Apex). Kept because the owner
+asked for the models by that name; rename is a one-line registry edit each.
