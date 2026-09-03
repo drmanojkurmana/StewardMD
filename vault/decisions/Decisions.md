@@ -2078,3 +2078,40 @@ old weights, with no further app-side changes needed.
 
 Regression tests added in test/maik-models.test.mjs for both download paths: a same-size file with
 a stale registry sha256 must be deleted and genuinely re-fetched, not reported as already-installed.
+
+## 2026-09-03 — MaiK Lite on-device RAG: BM25 book search wired to the trained model, and the fresh-install crash
+
+Owner's ask: doctors expect to-the-point answers with drug, dose and duration as per the textbook,
+so bring the BM25 + evidence-gate pipeline built for training (`~/MedPsy/run/book_search.py`,
+`pipeline.py`, `validator.py`) into the app and connect it to MaiK Lite on the phone. Shipped in
+PR #819: `kb/ai/maik-lite-rag.js` (BM25 port, verified byte-identical scores against the Python on
+the real 42,176-chunk book), `kb/ai/maik-lite-kb-store.js` (chunked download of the 38 MB JSONL
+asset from R2, cached in Documents), and wiring in `maik-local.js`: top-3 passages prefixed to the
+prompt, the model's answer run through the same evidence gate (any drug or figure not present in
+the retrieved passages fails), and on failure the passage itself is shown instead of the answer.
+The gate is never weakened to raise the answer rate. Only the `maik-lite` pack is RAG-eligible.
+
+Citation policy (owner, verbatim intent): NEVER a page number, on device or anywhere. Every
+grounded answer ends with "Source: StewardMD Knowledge Base - based on standard medical
+resources." and nothing else. A unit test pins that the source line can never carry a page number.
+Book text never leaves the device.
+
+Crashes found live on the owner's iPhone 15 Pro and fixed, in order:
+1. `String.fromCharCode.apply` on a 2 MiB download chunk blew the call stack. Sub-chunk at 0x8000.
+2. `Filesystem.readFile` without `encoding: "utf8"` returned base64, so the index built with zero
+   rows while reporting installed. Encoding now explicit, with a full-size synthetic regression test.
+3. Jetsam kill after a handful of questions: the built Book (42,176 per-chunk term maps) was cached
+   for the app's life on top of the 1.1 GB model. Now only parsed rows are cached; the index is
+   rebuilt per question and released.
+4. Jetsam kill on a FRESH install (the path every earlier test had skipped because the KB was already
+   on disk): the post-download whole-file SHA-256 read 38 MB back through the bridge as base64 and
+   looped 38 million charCodeAt calls on the main thread. Removed. Integrity is now the exact byte
+   count plus an exact 42,176-row parse in loadBook(); a short file is deleted and re-downloaded.
+   The registry sha256 stays as the same-size staleness marker only, as in maik-models.js.
+
+Verified live after fix 4 on a fresh install over the existing container: 6 paced questions, all
+grounded, none rejected by the gate, no page number, no crash. Free memory 6.4 GB before model
+load, 5.8 GB after every question with no growth across questions. First question, including the
+KB-load path, under 10 seconds. Native builds for this work must come from the live checkout, not
+a worktree: the CapApp-SPM Package.swift relative paths resolve to the original checkout's
+`local-plugins` when synced from a worktree, so a worktree build silently compiles the OLD Swift.
