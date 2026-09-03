@@ -64,11 +64,12 @@ fallback since government-authored XLSX files are not reliably well-formed.
 ## National scheme registry status
 28/28 states, 8/8 UTs, Central: registry (name/type/code) seeded and live in D1.
 
-**Ingested (live data, verified by remote query 2026-09-04):** 18/37 jurisdictions, 42,967
+**Ingested (live data, verified by remote query 2026-09-04):** 18/37 jurisdictions, 44,971
 packages — Tamil Nadu 4,298 · West Bengal 4,388 (5 scheme_versions: Grade A 1,921 · Grade B 1,563
-· Grade C 404 · Grade R 218 · Critical Illness Package 282) · Andhra Pradesh 3,713 · Karnataka 3,155 · Bihar 2,675 ·
-Rajasthan 2,439 · Gujarat 2,315 · Kerala 2,286 · Uttarakhand 1,585 · Assam 1,577 · Telangana 1,867
-· Nagaland 2,004 · Mizoram 2,003 · Uttar Pradesh 2,000 · Delhi 1,991 · Chhattisgarh 1,735 ·
+· Grade C 404 · Grade R 218 · Critical Illness Package 282) · Nagaland 4,008 (2 scheme_versions:
+CMHIS-EP semi-private 2,004 · CMHIS General/PM-JAY 2,004) · Andhra Pradesh 3,713 · Karnataka 3,155
+· Bihar 2,675 · Rajasthan 2,439 · Gujarat 2,315 · Kerala 2,286 · Uttarakhand 1,585 · Assam 1,577 ·
+Telangana 1,867 · Mizoram 2,003 · Uttar Pradesh 2,000 · Delhi 1,991 · Chhattisgarh 1,735 ·
 Central PM-JAY HBP 2022 1,646 · Haryana 1,290. Each row carries its source's `rate_tier` verbatim where the source publishes one
 (Tier 2, Tier1(X), Non-NABH, A1, ...) - amounts are only comparable with the tier visible.
 Telangana's source publishes a single price per procedure (no tier split) - `rate_tier` is
