@@ -849,7 +849,28 @@
       var v = (p && ["correct", "partial", "incorrect"].indexOf(p.verdict) >= 0) ? p.verdict : null;
       if (!v) return { error: "parse", sample: JSON.stringify(p).slice(0, 240) };
       return { verdict: v, feedback: String(p.feedback || "").slice(0, 300), mode: "viva-judge", engine: "local" };
-    }, parseFailure);
+    }, function (err) {
+      // MaiK Lite (prose fine-tune) judges in a sentence about half the time even after the retry:
+      // "The student's answer is incorrect because it omits adrenaline." That IS a verdict, stated by
+      // the model in its own words, so accept it - but only when the opening sentence names exactly
+      // one verdict. Anything vaguer stays an honest parse error; nothing is inferred.
+      var pf = parseFailure(err), v = verdictFromProse(pf.sample);
+      if (!v) return pf;
+      return { verdict: v.verdict, feedback: v.feedback, mode: "viva-judge", engine: "local" };
+    });
+  }
+  function verdictFromProse(text) {
+    var first = (String(text || "").trim().match(/^[^.!?]*[.!?]?/) || [""])[0];
+    if (first.length > 300) return null;
+    var found = {}, m, re = /\b(correct|partially correct|partial|incomplete|incorrect|wrong)\b/gi;
+    while ((m = re.exec(first)) !== null) {
+      var w = m[1].toLowerCase();
+      found[w === "wrong" ? "incorrect" : (w === "partially correct" || w === "incomplete") ? "partial" : w] = 1;
+    }
+    var keys = Object.keys(found);
+    if (keys.length !== 1) return null;
+    if (keys[0] === "correct" && /\b(not|n't)\s+(entirely\s+|fully\s+|completely\s+)?correct\b/i.test(first)) return null;
+    return { verdict: keys[0], feedback: first.slice(0, 300) };
   }
   /** OPD "Ask MaiK Pro" differential, same contract as /extract kind "opd-suggest". */
   function opdSuggest(assessment, opts) {

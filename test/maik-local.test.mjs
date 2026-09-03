@@ -586,6 +586,13 @@ function loadWithRag({ tokens, kbLoadFails = false } = {}) {
   ok("an unparseable judgement is an honest parse error, never an invented verdict", vb.error === "parse");
   ok("...after exactly one blunter retry", bad.calls.generate.length === 2 && /ONLY the JSON object now/.test(bad.calls.generate[1].prompt) && bad.calls.generate[1].temperature === 0.3);
   ok("a parseable first reply is not retried", j.calls.generate.length === 1);
+  const prose = load({ tokens: ["The student's answer is incorrect because it omits intramuscular adrenaline. The correct approach is IM adrenaline first."] });
+  const vp = await prose.L.vivaJudge("Q", "K", "A", { pack: "maik-apex" });
+  ok("a verdict the model states plainly in prose is accepted, with that sentence as feedback", vp.verdict === "incorrect" && /omits intramuscular adrenaline/.test(vp.feedback) && !/The correct approach/.test(vp.feedback));
+  const two = load({ tokens: ["The answer is partially correct but the dose is incorrect."] });
+  ok("two different verdict words in one sentence is ambiguous: parse error, nothing inferred", (await two.L.vivaJudge("Q", "K", "A", { pack: "maik-apex" })).error === "parse");
+  const neg = load({ tokens: ["This is not entirely correct, adrenaline is missing."] });
+  ok("a negated 'correct' is never read as correct", (await neg.L.vivaJudge("Q", "K", "A", { pack: "maik-apex" })).error === "parse");
   ok("empty input is refused before any generation", (await bad.L.vivaJudge("", "", "A")).error === "no-input");
 
   const opdJson = JSON.stringify({ provisionalDx: "Acute  pyelonephritis", ddx: [{ dx: "Pyelonephritis", why: "fever, flank pain" }, "Renal colic", { name: "PID", reason: "lower abdominal pain" }, {}, { dx: "x1" }, { dx: "x2" }, { dx: "x3" }, { dx: "x4" }],
