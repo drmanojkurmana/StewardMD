@@ -36,6 +36,13 @@ binding = "CONNECT_DB"
 database_name = "stewardmd-connect"
 database_id = "788b1c85-acb4-4242-882c-24b402298b2c"
 
+# D1 — Government Health Schemes (national scheme/package/code database, versioned + sourced).
+# See functions/db/govschemes_schema.sql and vault/modules/Government Health Schemes.md.
+[[d1_databases]]
+binding = "GOVSCHEMES_DB"
+database_name = "stewardmd-govschemes"
+database_id = "2ad07897-93b7-424c-b1fc-e3d9643937f5"
+
 # R2 — FollowCare patient photos (wound/rash/etc). PHI-minimising: private bucket, 7-day lifecycle expiry on
 # the followcare/ prefix + view-once (FOLLOWCARE_PHOTO_VIEW_ONCE=1) + purge-on-erase. Code binding = FOLLOWCARE_R2.
 [[r2_buckets]]

@@ -95,6 +95,12 @@ Both open **per device** today via the sidebar Experimental access code, so test
 | `smd_fundx_spatial_ar` | OFF | **INCOMPLETE.** True 3D AR corridor, iOS + ARKit only. |
 | `smd_fundx_telemetry` | OFF | **PRIVACY DEFAULT.** Acquisition telemetry. No PHI, but off unless wanted. |
 
+### Government Health Schemes  <sub>0 ON · 1 OFF</sub>
+
+| Flag | Def | Why |
+|---|---|---|
+| `smd_govt_schemes` | OFF | **OWNER DECISION.** Government Health Schemes module master flag. DEFAULT OFF on purpose: scheme rates/codes are unverified government reference data until an admin review pass exists (vault/decisions 2026-09-02). Turn on per device with `?gs=1`. |
+
 ### Insulin  <sub>3 ON · 0 OFF</sub>
 
 | Flag | Def | Why |

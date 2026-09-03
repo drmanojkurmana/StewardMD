@@ -1,0 +1,96 @@
+# URL liveness sweep of govschemes_source_inventory.md - 2026-09-02, run from an INDIA IP
+#   (Andhra Pradesh, ISP Vizag Broadcasting, 125.62.195.178 - NOT a foreign sandbox; an earlier
+#   header here claimed geo-blocking, which was wrong and is corrected below).
+# Format: status|content-type|final-url|url
+# 000 = TCP-level unreachable. pmjay.gov.in (14.143.233.34) is closed/filtered on BOTH ports 80
+#       and 443 (nc), curl connect 0.000s = immediate failure. DNS resolves fine. Chrome on this
+#       Mac's real network times out on it and cghs.gov.in too. ~20 NIC-hosted portals
+#       (14.143.x / 164.100.x) failing identically => most likely this ISP blackholing routes to
+#       NIC, not 20 outages and not geo-blocking. NOT a dead link. Confirm from another network
+#       (mobile hotspot) before drawing conclusions.
+# Exception: mjpjay.gov.in has NO DNS record at all - a wrong/defunct hostname
+#       (www.jeevandayee.gov.in is the real Maharashtra MJPJAY portal).
+# 200 proves NOTHING here: all 55 are text/html and at least one (cmchistn.com/package_master)
+#       is a React soft-404 ("Page Not Found") behind a 200. Zero direct file downloads.
+#       Only a URL loaded in a real browser and SEEN to show codes+amounts counts as found -
+#       see govschemes_verified_sources_batch{1,2,3}.md.
+# Workaround for central PM-JAY: nha.gov.in/PM-JAY (same authority) returns 200.
+000||http://ayushmanbharat.mp.gov.in/|http://ayushmanbharat.mp.gov.in
+000||https://andaman.gov.in/|https://andaman.gov.in
+000||https://bis.jharkhand.gov.in/|https://bis.jharkhand.gov.in
+000||https://cghs.gov.in/|https://cghs.gov.in
+000||https://chdhealth.gov.in/|https://chdhealth.gov.in
+000||https://chiranjeevi.rajasthan.gov.in/|https://chiranjeevi.rajasthan.gov.in
+000||https://cmaay.com/|https://cmaay.com
+000||https://dhsgoa.gov.in/|https://dhsgoa.gov.in
+000||https://dkbssy.cg.nic.in/|https://dkbssy.cg.nic.in
+000||https://dnhdd.gov.in/|https://dnhdd.gov.in
+000||https://health.bihar.gov.in/|https://health.bihar.gov.in
+000||https://health.delhigovt.nic.in/|https://health.delhigovt.nic.in
+000||https://health.sikkim.gov.in/|https://health.sikkim.gov.in
+000||https://mjpjay.gov.in/|https://mjpjay.gov.in
+000||https://pmjay.gov.in/|https://pmjay.gov.in
+000||https://pmjay.gov.in/resources/health-benefit-packages|https://pmjay.gov.in/resources/health-benefit-packages
+000||https://sehatbimayojana.punjab.gov.in/|https://sehatbimayojana.punjab.gov.in
+000||https://sikkimhealth.gov.in/|https://sikkimhealth.gov.in
+000||https://wbhealthscheme.gov.in/|https://wbhealthscheme.gov.in
+000||https://www.jeevandayee.gov.in/|https://www.jeevandayee.gov.in
+200|text/html; charset=utf-8|https://atalamritabhiyan.assam.gov.in/|https://atalamritabhiyan.assam.gov.in
+200|text/html; charset=utf-8|https://atalamritabhiyan.assam.gov.in/information-services/pmjay-package-master|https://atalamritabhiyan.assam.gov.in/information-services/pmjay-package-master
+200|text/html; charset=UTF-8|https://ayushmanbharat.haryana.gov.in/|https://ayushmanbharat.haryana.gov.in
+200|text/html; charset=utf-8|https://biswass.bihar.gov.in/|https://biswass.bihar.gov.in
+200|text/html; charset=UTF-8|https://chandigarh.gov.in/|https://chandigarh.gov.in
+200|text/html; charset=utf-8|https://chirayuayushmanharyana.in/|https://chirayuayushmanharyana.in
+200|text/html; charset=utf-8|https://cmaay.arunachal.gov.in/|https://cmaay.arunachal.gov.in
+200|text/html; charset=UTF-8|https://cmhis.nagaland.gov.in/|https://cmhis.nagaland.gov.in
+200|text/html; charset=UTF-8|https://ddd.gov.in/ayushman-bharat/|https://ddd.gov.in/ayushman-bharat/
+200|text/html; charset=UTF-8|https://dgehs.delhi.gov.in/|https://dgehs.delhi.gov.in
+200|text/html; charset=utf-8|https://dhs.andamannicobar.gov.in/|https://dhs.andamannicobar.gov.in
+200|text/html; charset=UTF-8|https://esic.gov.in/|https://www.esic.gov.in
+200|text/html; charset=UTF-8|https://gjay.odisha.gov.in/|https://gjay.odisha.gov.in
+200|text/html; charset=utf-8|https://goaonline.gov.in/|https://goaonline.gov.in
+200|text/html; charset=utf-8|https://govthealth.cg.gov.in/sna/|https://govthealth.cg.gov.in/sna/
+200|text/html; charset=utf-8|https://gujhealth.gujarat.gov.in/|https://gujhealth.gujarat.gov.in
+200|text/html; charset=UTF-8|https://health.mizoram.gov.in/|https://health.mizoram.gov.in
+200|text/html; charset=UTF-8|https://health.odisha.gov.in/|https://health.odisha.gov.in
+200|text/html; charset=utf-8|https://health.py.gov.in/|https://health.py.gov.in
+200|text/html; charset=UTF-8|https://health.tripura.gov.in/|https://health.tripura.gov.in
+200|text/html; charset=UTF-8|https://ladakh.gov.in/|https://ladakh.gov.in
+200|text/html; charset=UTF-8|https://lakshadweep.gov.in/|https://lakshadweep.gov.in
+200|text/html; charset=UTF-8|https://manipurhealthdirectorate.mn.gov.in/|https://manipurhealthdirectorate.mn.gov.in
+200|text/html; charset=UTF-8|https://mhis.org.in/|https://mhis.org.in
+200|text/html; charset=utf-8|https://mmlsay.assam.gov.in/|https://mmlsay.assam.gov.in
+200|text/html; charset=UTF-8|https://mshcs.mizoram.gov.in/|https://mshcs.mizoram.gov.in
+200|text/html; charset=utf-8|https://nhm.utl.gov.in/|https://nhm.utl.gov.in
+200|text/html; charset=UTF-8|https://rghs.rajasthan.gov.in/RGHS/home/|https://rghs.rajasthan.gov.in
+200|text/html; charset=utf-8|https://sachis.in/|https://sachis.in
+200|text/html; charset=UTF-8|https://sha.kerala.gov.in/|https://sha.kerala.gov.in
+200|text/html; charset=UTF-8|https://sha.punjab.gov.in/shapunjab/index.php|https://sha.punjab.gov.in
+200|text/html; charset=utf-8|https://sha.uk.gov.in/|https://sha.uk.gov.in
+200|text/html; charset=utf-8|https://swasthyasathi.gov.in/|https://swasthyasathi.gov.in
+200|text/html; charset=UTF-8|https://tripura.gov.in/|https://tripura.gov.in
+200|text/html; charset=UTF-8|https://www.echs.gov.in/|https://echs.gov.in
+200|text/html; charset=UTF-8|https://www.hpsbys.in/|https://www.hpsbys.in
+200|text/html; charset=UTF-8|https://www.hpsbys.in/|https://www.hpsbys.in/
+200|text/html; charset=utf-8|https://www.jharkhand.gov.in/health|https://www.jharkhand.gov.in/health
+200|text/html; charset=UTF-8|https://www.jkpmjaysehat.co.in/|https://www.jkpmjaysehat.co.in
+200|text/html;charset=UTF-8|https://medisep.kerala.gov.in/|https://medisep.kerala.gov.in
+200|text/html|https://aarogyasri.telangana.gov.in/|https://aarogyasri.telangana.gov.in
+200|text/html|https://ayushmanup.in/|https://ayushmanup.in
+200|text/html|https://ayushmanuttarakhand.org/|https://ayushmanuttarakhand.org
+200|text/html|https://health.rajasthan.gov.in/|https://health.rajasthan.gov.in
+200|text/html|https://hme.jk.gov.in/|https://hme.jk.gov.in
+200|text/html|https://ma.gujarat.gov.in/|https://ma.gujarat.gov.in
+200|text/html|https://ma.gujarat.gov.in/PackageRates.html|https://ma.gujarat.gov.in/PackageRates.html
+200|text/html|https://nha.gov.in/|https://nha.gov.in
+200|text/html|https://nhmladakh.in/|https://nhmladakh.in
+200|text/html|https://sast.karnataka.gov.in/|https://sast.karnataka.gov.in
+200|text/html|https://www.cmchistn.com/|https://www.cmchistn.com
+200|text/html|https://www.cmchistn.com/highend_packages|https://www.cmchistn.com/highend_packages
+200|text/html|https://www.cmchistn.com/package_master|https://www.cmchistn.com/package_master
+200|text/html|https://www.cmchistn.com/procedure_list|https://www.cmchistn.com/procedure_list
+200|text/html|https://www.rajivaarogyasri.telangana.gov.in/|https://www.rajivaarogyasri.telangana.gov.in
+301|text/html; charset=iso-8859-1|http://gjay.odisha.gov.in/|https://bsky.odisha.gov.in
+301|text/html; charset=iso-8859-1|http://www.health.mp.gov.in/|https://health.mp.gov.in
+302||https://cmhtmanipur.gov.in/|http://cmhtmanipur.gov.in
+302|text/html; charset=utf-8|https://arogya.karnataka.gov.in/index.aspx?AspxAutoDetectCookieSupport=1|https://arogya.karnataka.gov.in

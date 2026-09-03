@@ -724,6 +724,7 @@
     calculators: function () { if (window.MEDCALC && MEDCALC.openList) MEDCALC.openList(); else toast("Calculators loading…"); },
     guidelines: function () { if (window.SB && SB.openRef) SB.openRef("guidelines"); else toast("Guidelines loading…"); },
     drugs: function () { if (window.MEDDB && MEDDB.openList) MEDDB.openList(); else toast("Drugs database loading…"); },
+    govschemes: function () { if (window.SMD_GOVSCHEMES) SMD_GOVSCHEMES.open(); },
     drugmenu: function () {
       openSheet('<div class="hv-sh-t">Drugs &amp; Interactions</div>' +
         mi("pills", "Drug Database", "Brands · doses · spectrum · cautions", "db") +
@@ -800,6 +801,8 @@
           { label: "Verify", act: "rxverify" }
         ]) +
         tile("heart", "FollowCare", "Post-discharge follow-up", "fc") +
+        // Govt Schemes: same flag gate as the HOME_TOOLS tile (default OFF, ?gs=1 per device) - flag off = no tile.
+        (govschemesOn() ? tile("hospital", "Govt Schemes", "Package codes and rates", "govschemes") : "") +
         tile("share", "Connect", "Link your hospital EMR", "connect") +
         '</div>');
       sheetEl().querySelectorAll("[data-mi]").forEach(function (b) {
@@ -808,6 +811,7 @@
           setTimeout(function () {
             if (a === "rx") { ACT.prescription(); return; }
             if (a === "rxverify") { ACT.prescriptionVerify(); return; }
+            if (a === "govschemes") { ACT.govschemes(); return; }
             ((a === "opd" || a === "protocol") ? ACT.queue : a === "icu" ? ACT.icu : a === "ward" ? ACT.ward : a === "oncotree" ? ACT.oncotree : a === "fc" ? ACT.followcare : ACT.connect)();
           }, 70);
         });
@@ -1578,6 +1582,8 @@
     { act: "electrolytes", ic: "science", tt: "Electrolytes", sub: "ICU correction", defOn: false },
     // Everything else the app can open — available in "Add Tool" (off by default; the doctor pins what they want).
     { act: "hospital", ic: "local_hospital", tt: "Hospital", sub: "OPD · ICU · Ward", defOn: false },
+    { act: "govschemes", ic: "local_hospital", tt: "Govt Schemes", sub: "Package codes and rates", defOn: true,
+      eligible: function () { return govschemesOn(); } },
     { act: "icu", ic: "monitor_heart", tt: "ICU & Ward", sub: "Critical care", defOn: false },
     { act: "ward", ic: "bed", tt: "Ward Sync", sub: "Inpatient GHIS", defOn: false },
     { act: "connect", ic: "hub", tt: "Connect EMR", sub: "Link your hospital", defOn: false },
@@ -2110,6 +2116,8 @@
       return localStorage.getItem("smd_pglog") !== "0";
     } catch (e) { return true; }
   }
+  // One flag check for every Govt Schemes entry point (HOME_TOOLS tile, Hospital hub, More sheet).
+  function govschemesOn() { return !!(window.SMD_GOVSCHEMES_FLAGS && SMD_GOVSCHEMES_FLAGS.bool("smd_govt_schemes")); }
   function mi(icon, label, cap, act) { return '<button class="hv-mi" data-mi="' + act + '">' + svg(icon) + '<div class="ml">' + label + (cap ? '<div class="mc">' + cap + '</div>' : '') + '</div><span class="marr">' + svg("chev") + '</span></button>'; }
   function openMore() {
     openSheet(
@@ -2122,6 +2130,9 @@
       mi("help", "Help &amp; support", "Contact us &amp; track your requests", "help") +
       mi("search", "Open shared case", "Retrieve by case code", "opencase") +
       mi("steth", "Search Medical Register", "Find a doctor by name or NMC number", "nmcsearch") +
+      // Govt Schemes: same flag gate as the HOME_TOOLS tile (default OFF, ?gs=1 per device). Flag off = no row.
+      // data-mi="govschemes" falls through to the generic ACT[a] dispatch below (ACT.govschemes).
+      (govschemesOn() ? mi("hospital", "Govt Schemes", "Package codes and rates", "govschemes") : "") +
       // NMC eLOGBook. Flag-gated the same way the home tile is, and read from localStorage DIRECTLY
       // rather than through SMD_PGLOG_FLAGS: home.js loads BEFORE the pglog block in index.html, so
       // the flag object does not exist yet when this sheet is built. Flag off = the row is absent,
