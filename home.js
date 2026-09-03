@@ -6376,7 +6376,10 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       if (rx) { ev.preventDefault(); var rrow = rx.closest("[data-maik-inline]"); if (rrow) maikRefineUnstage(rrow); return; }
       var askAll = ev.target && ev.target.closest ? ev.target.closest("[data-maik-askall]") : null;
       if (askAll) { ev.preventDefault(); maikRefineAsk(askAll.closest(".maik-refine")); return; }
-      var el = ev.target && ev.target.closest ? ev.target.closest("[data-maik-q],[data-maik-web]") : null;
+      // [data-maik-tool] MUST be in this selector: the "Open Drug Index" chip carries only that
+      // attribute, so without it the tool branch below was unreachable and the chip did nothing
+      // (found live on the owner's phone, 2026-09-03).
+      var el = ev.target && ev.target.closest ? ev.target.closest("[data-maik-q],[data-maik-web],[data-maik-tool],[data-maik-refine]") : null;
       if (!el) return;
       ev.preventDefault();
       // Intent-aware refinement chips: route factors that a dedicated tool answers better than the LLM.
