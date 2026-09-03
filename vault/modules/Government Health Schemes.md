@@ -124,6 +124,12 @@ column-boundary-aware parser (track each numeric token's x-position against the 
 column positions, not just its ordinal position among numbers) before this is trustworthy -
 not attempted tonight, left as a real next step rather than guessed at.
 
+Himachal checked the same way, same conclusion: its `pdftotext -layout` output has ONE rate
+column (Tier3(Z)) but an adjacent LOS (length-of-stay, e.g. "3", "19") column right after it, plus
+free-text columns that themselves contain digits ("Extent of burns visible on photograph (with
+rule of 9 chart)" - the "9" is a stray numeric token). Same "Nth numeric token" fragility,
+same call: not loaded.
+
 A PaddleOCR-based fallback
 (`scripts/govschemes/paddle_tables.py`, plain OCR + geometric row-reconstruction, since
 PP-StructureV3's full pipeline OOMs on this machine) was trialed on 1 Telangana page before the
