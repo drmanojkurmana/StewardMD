@@ -590,8 +590,9 @@
               "(it stated a figure or drug not found there). Showing the relevant reference passage instead:\n\n" +
               pass.text.trim();
           } else {
-            var top = grounding.passages[0];
-            text = text + "\n\nSource: StewardMD Knowledge Base" + (top.page ? (", " + top.page) : "");
+            // NEVER a page number, on owner order - matches the standing attribution used
+            // everywhere else in the app (maik-models.js GUIDE_INTRO / guide.why).
+            text = text + "\n\nSource: StewardMD Knowledge Base - based on standard medical resources.";
           }
         }
         return {

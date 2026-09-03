@@ -153,32 +153,35 @@
     });
   }
 
-  var _book = null;
-  /** Load (downloading first if needed) and build the in-memory BM25 index. Cached for the
-   * session - a 42k-row index build is ~1-3s, not worth repeating per question. */
+  var _rows = null;   // parsed rows only - small plain objects, cheap to keep resident
+  /** Load (downloading first if needed) and build a FRESH BM25 index every call.
+   *
+   * A real crash, live, 2026-09-03: caching the built Book (42,176 Maps for term frequencies,
+   * one per chunk) for the life of the app session, ON TOP of the ~1.1 GB LLM model already
+   * resident, was enough on an 8 GB iPhone to get the app jetsam-killed after a handful of
+   * questions. The parsed ROWS (plain {text,headings,pages,i} objects) are cheap and stay
+   * cached; the expensive tf/idf structure is rebuilt (~1-3s) and released after every call, so
+   * peak memory is the model plus ONE question's worth of index, not an ever-growing pile.
+   */
   function loadBook(RAG, onProgress) {
-    if (_book) return Promise.resolve(_book);
     var F = fs();
-    return ensure(onProgress).then(function () {
+    var rowsP = _rows ? Promise.resolve(_rows) : ensure(onProgress).then(function () {
       // encoding REQUIRED: readFile defaults to base64 (as used deliberately in ensure()'s sha
       // check above), so without this every line failed JSON.parse silently and the book built
       // with zero rows - found live, 2026-09-03, the same night as the base64-chunking crash.
       return F.readFile({ path: relPath(), directory: DIR, encoding: "utf8" });
     }).then(function (r) {
-      var lines = r.data.split("\n");
-      var rows = [];
+      var lines = r.data.split("\n"), rows = [];
       for (var i = 0; i < lines.length; i++) {
         if (!lines[i]) continue;
         try { rows.push(JSON.parse(lines[i])); } catch (e) {}
       }
-      _book = new RAG.Book(rows);
-      return _book;
+      _rows = rows;
+      return _rows;
     });
+    return rowsP.then(function (rows) { return new RAG.Book(rows); });
   }
 
-  function bookIfLoaded() { return _book; }
-
   return { installedCached: installedCached, installed: installed, ensure: ensure, state: state,
-           subscribe: subscribe, loadBook: loadBook, bookIfLoaded: bookIfLoaded,
-           BYTES: BYTES, SHA256: SHA256 };
+           subscribe: subscribe, loadBook: loadBook, BYTES: BYTES, SHA256: SHA256 };
 });

@@ -150,15 +150,19 @@
     this.k1 = 1.5; this.b = 0.75;
     var rawHead = rows.map(function (r) { return (r.headings || []).join(" > "); });
     this.topic = inheritTopics(rawHead);
-    var self = this;
-    this.docs = this.topic.map(function (t, i) { return t + " " + t + " " + rawHead[i] + " " + rows[i].text; });
     this.head = this.topic.map(function (t, i) { return (t && t !== rawHead[i]) ? (t + " > " + rawHead[i]) : rawHead[i]; });
     this.noise = this.head.map(function (h) { return NOISE.test(h); });
-    this.tf = this.docs.map(function (d) {
+    /* NOT retained as this.docs: a real crash, live, 2026-09-03 - keeping a full second copy of
+     * the entire book's text in memory (topic+topic+heading+text per row, permanently) for the
+     * whole app session, on top of the ~1.1 GB model already resident, was enough on an 8 GB
+     * iPhone to get the app jetsam-killed after a handful of questions. Nothing after the
+     * constructor ever reads this.docs, so it is built and consumed per-row, never stored. */
+    this.tf = this.topic.map(function (t, i) {
+      var d = t + " " + t + " " + rawHead[i] + " " + rows[i].text;
       var w = toks(d), c = new Map();
-      for (var i = 0; i < w.length; i++) c.set(w[i], (c.get(w[i]) || 0) + 1);
+      for (var j = 0; j < w.length; j++) c.set(w[j], (c.get(w[j]) || 0) + 1);
       var bg = bigrams(w);
-      for (var i2 = 0; i2 < bg.length; i2++) c.set(bg[i2], (c.get(bg[i2]) || 0) + 1);
+      for (var k = 0; k < bg.length; k++) c.set(bg[k], (c.get(bg[k]) || 0) + 1);
       return c;
     });
     this.len = this.tf.map(function (c) {
@@ -168,9 +172,9 @@
     this.avg = totalLen / Math.max(1, this.len.length);
     var df = new Map();
     this.tf.forEach(function (c) { c.forEach(function (v, k) { df.set(k, (df.get(k) || 0) + 1); }); });
-    var n = rows.length;
-    this.idf = new Map();
-    df.forEach(function (v, w) { self.idf.set(w, Math.log(1 + (n - v + 0.5) / (v + 0.5))); });
+    var n = rows.length, idf = new Map();
+    df.forEach(function (v, w) { idf.set(w, Math.log(1 + (n - v + 0.5) / (v + 0.5))); });
+    this.idf = idf;
   }
 
   /** Query token -> the spelling the book actually uses, if that one is commoner. */

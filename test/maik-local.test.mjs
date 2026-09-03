@@ -510,7 +510,8 @@ function loadWithRag({ tokens, kbLoadFails = false } = {}) {
   ok("retrieval ran for maik-lite", calls.searched.length === 1);
   ok("evidence was prepended to the prompt sent to the model", /Reference material/.test(calls.generate[0].prompt));
   ok("gate-passing answer is marked grounded", r.grounded === true);
-  ok("gate-passing answer gets a plain source line", /Source: StewardMD Knowledge Base.*p\.1769/.test(r.text));
+  ok("gate-passing answer gets a plain source line", /Source: StewardMD Knowledge Base - based on standard medical resources/.test(r.text));
+  ok("the source line NEVER carries a page number, on owner order", !/p\.\d/.test(r.text));
 }
 
 {
