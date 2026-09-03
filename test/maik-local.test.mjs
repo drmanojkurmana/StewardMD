@@ -574,4 +574,36 @@ function loadWithRag({ tokens, kbLoadFails = false } = {}) {
   ok("closing the sheet releases after the grace, so the next question reloads", calls.load.length === n1 + 2);
 }
 
+// ── structured on-device calls (owner, 2026-09-04): viva judge and OPD differential ───────────────
+{
+  const j = load({ tokens: ['Sure! ```json\n{"verdict":"partial","feedback":"Right idea, but you missed the key point."}\n```'] });
+  const v = await j.L.vivaJudge("What is the first step?", "airway, breathing", "check breathing", { pack: "maik-apex" });
+  ok("viva judge parses JSON out of fences and prose", v.verdict === "partial" && /missed/.test(v.feedback) && v.engine === "local");
+  ok("viva judge ran with the examiner prompt as the system prompt, not the MaiK one", /viva examiner/.test(j.calls.generate[0].system));
+  ok("viva judge sends the question, key points and answer", /QUESTION: What is the first step\?[\s\S]*KEY POINTS: airway[\s\S]*STUDENT'S ANSWER: check breathing/.test(j.calls.generate[0].prompt));
+  const bad = load({ tokens: ["I think the student did well overall."] });
+  const vb = await bad.L.vivaJudge("Q", "", "A", { pack: "maik-apex" });
+  ok("an unparseable judgement is an honest parse error, never an invented verdict", vb.error === "parse");
+  ok("...after exactly one blunter retry", bad.calls.generate.length === 2 && /ONLY the JSON object now/.test(bad.calls.generate[1].prompt) && bad.calls.generate[1].temperature === 0.3);
+  ok("a parseable first reply is not retried", j.calls.generate.length === 1);
+  const prose = load({ tokens: ["The student's answer is incorrect because it omits intramuscular adrenaline. The correct approach is IM adrenaline first."] });
+  const vp = await prose.L.vivaJudge("Q", "K", "A", { pack: "maik-apex" });
+  ok("a verdict the model states plainly in prose is accepted, with that sentence as feedback", vp.verdict === "incorrect" && /omits intramuscular adrenaline/.test(vp.feedback) && !/The correct approach/.test(vp.feedback));
+  const two = load({ tokens: ["The answer is partially correct but the dose is incorrect."] });
+  ok("two different verdict words in one sentence is ambiguous: parse error, nothing inferred", (await two.L.vivaJudge("Q", "K", "A", { pack: "maik-apex" })).error === "parse");
+  const neg = load({ tokens: ["This is not entirely correct, adrenaline is missing."] });
+  ok("a negated 'correct' is never read as correct", (await neg.L.vivaJudge("Q", "K", "A", { pack: "maik-apex" })).error === "parse");
+  ok("empty input is refused before any generation", (await bad.L.vivaJudge("", "", "A")).error === "no-input");
+
+  const opdJson = JSON.stringify({ provisionalDx: "Acute  pyelonephritis", ddx: [{ dx: "Pyelonephritis", why: "fever, flank pain" }, "Renal colic", { name: "PID", reason: "lower abdominal pain" }, {}, { dx: "x1" }, { dx: "x2" }, { dx: "x3" }, { dx: "x4" }],
+    investigations: ["Urine R/M", "Urine culture", 42], treatment: ["Ceftriaxone 1 g IV once daily"], redFlags: ["Sepsis"], evil: { nested: true } });
+  const o = load({ tokens: [opdJson] });
+  const r = await o.L.opdSuggest("Fever 3 days, flank pain, dysuria", { pack: "maik-apex" });
+  ok("OPD differential keeps the server's shape", r.kind === "opd-suggest" && r.engine === "local" && r.provisionalDx === "Acute pyelonephritis");
+  ok("ddx is whitelisted: strings and name/reason accepted, empties dropped, capped at 6", r.ddx.length === 6 && r.ddx[1].dx === "Renal colic" && r.ddx[2].dx === "PID" && r.ddx[2].why === "lower abdominal pain");
+  ok("lists are plain bounded strings and unknown fields never pass through", r.investigations.length === 3 && typeof r.investigations[2] === "string" && !("evil" in r));
+  ok("the OPD prompt is the system prompt and the assessment is the user turn", /OPD decision support/.test(o.calls.generate[0].system) && /=== ASSESSMENT ===\nFever 3 days/.test(o.calls.generate[0].prompt));
+  ok("empty assessment is refused", (await o.L.opdSuggest("   ")).error === "no-text");
+}
+
 console.log(`\nmaik-local: ${pass} passed, ${fail} failed`);

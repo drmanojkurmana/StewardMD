@@ -22,6 +22,13 @@ UpToDate-style answer. Aurora bottom-sheet UI. Account-scoped on-device conversa
   cite only "StewardMD Knowledge Base - based on standard medical resources", never a page.
 - **Offline stand-in** (`maik-engine.js` `effective()`, 2026-09-03): pref `cloud` + `navigator.onLine`
   false + a ready local pack → the on-device model answers. Flag `smd_maik_offline_local` ("0" off).
+- **What the engine routes** (2026-09-04): explain, explainGrounded, explainGroundedStream, refine,
+  vivaJudge (CliniX viva examiner) and extract kind `opd-suggest` (OPD "Ask MaiK Pro" differential),
+  the last two via `maik-local.js` `vivaJudge()`/`opdSuggest()` (server prompts + whitelisting
+  ported). Still cloud-only: every other extract kind (voice, translate, MaiK Ask), research,
+  vision/OCR, transcribe, ICU correlate/evidence/imagingSummary.
+- **Model lifecycle** (2026-09-04): warmed when the MaiK sheet opens (`openAskAi`), released 20 s
+  after `close()` or 3 min idle with the sheet open, never mid-generation. No warm-up at app start.
 - `kb/ai/maik-kb.js` (`window.MaiKKB`) — deterministic KB answer engine (canonical+fuzzy+abbrev, 85% gate)
 - `functions/api/ai/[[path]].js` — server: `/refine` (router), `/explain` (Gemini), `/research` (web)
 - `kb/ai/steward-ai.browser.js` — client SDK helpers. NOTE: `window.SMD_AI` itself is defined in

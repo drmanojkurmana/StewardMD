@@ -2178,8 +2178,35 @@ reasoning module, ICU explain/explainGrounded, the med list explain, insulin ref
 streams through explainGroundedStream). NOT covered, cloud only, fail honestly offline: the CliniX
 viva judge (`SMD_AI.vivaJudge`, a dedicated server model), the OPD EMR "Ask MaiK Pro" differential
 (`SMD_AI.extract` "opd-suggest"), Let MaiK Ask's finding extraction (`SMD_AI.extract`), translate,
-research, vision/OCR, transcription, ICU correlate/evidence/imagingSummary. A local `extract`
-equivalent would be the next step if those are wanted offline; not built, not asked.
+research, vision/OCR, transcription, ICU correlate/evidence/imagingSummary.
+
+SAME DAY, owner: "cant we make them use on device model lite or bonsai". Yes for the two that are
+plain structured calls. `maik-local.js` gains `vivaJudge()` and `opdSuggest()`: the server's own
+prompts and output whitelisting (viva-judge in [[path]].js, _opd-suggest.js) ported verbatim, run
+with the task prompt as the SYSTEM prompt so the interpretive MaiK prompt cannot turn JSON into
+prose, temperature 0, tolerant JSON extraction, honest `{error:"parse"}` on garbage rather than an
+invented verdict. `maik-engine.js` now decorates `vivaJudge` and `extract`; they go local only when
+the effective engine is local, and only extract kind `opd-suggest` (voice, translate and MaiK Ask
+extraction keep today's cloud behaviour regardless of engine; KB-only mode has no model and also
+stays cloud there). Tracked by the idle unload like any other call.
+
+Measured live on the owner's iPhone 15 Pro (assessment: fever, flank pain, dysuria; viva:
+anaphylaxis first step):
+
+| call | MaiK Lite 1.7B | Ternary Bonsai 8B |
+|---|---|---|
+| OPD differential | 11 to 24 s, thin (1 ddx, 1 investigation, 1 treatment, 1 red flag) | 151 s incl. load, rich (6 ddx, ceftriaxone dosing, 3 red flags) |
+| viva judge | 5 to 11 s, verdict right, feedback often empty | 20 s, verdict + proper examiner feedback |
+
+Small-model realities handled in code: MaiK Lite (a prose fine-tune) answers the JSON prompt in
+prose about half the time. generateJSON() nudges ("Start your reply with {"), retries ONCE with a
+blunter instruction at temperature 0.3, and on a second miss returns {error:"parse", sample}. For
+the viva only, a verdict the model states plainly in its opening sentence ("The student's answer is
+incorrect because...") is accepted with that sentence as feedback, when exactly one verdict word
+appears and "correct" is not negated; anything vaguer stays a parse error. Nothing is inferred.
+The 151 s Bonsai OPD call is the honest cost of a 27B-class-quality differential on an 8 GB phone;
+the OPD screen shows its busy state throughout and the local path has no 45 s race timeout (that
+timeout wraps only the cloud fetch in reasoning.js).
 
 **Idle unload** (owner: "make sure model is stopped once we close the tab or its work is done").
 `maik-local.js` wraps `answer` and `warm`: any pending release is cancelled while a call is in
