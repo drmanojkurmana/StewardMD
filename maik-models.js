@@ -110,7 +110,8 @@
     "MaiK Lite is StewardMD's own model, trained on the StewardMD Knowledge Base - based on standard medical resources. The Bonsai, MedGemma and MedPsy packs answer from their own training. Either way answers carry no page citations and can be wrong. Verify against local protocol.",
     "Every pack is a trade-off. Smaller means faster and thinner answers; larger means better reasoning, a longer wait, and on an 8 GB phone the large packs are unloaded whenever you switch apps and must reload. None of them matches MaiK Cloud. Only MaiK Lite checks its answers against the Knowledge Base; every other pack answers from its own training, unchecked.",
     "You can keep more than one downloaded and switch between them. Only the selected one runs.",
-    "Downloading needs the space shown plus room to run it. Wi-Fi is easier, mobile data works, and a download resumes if it is interrupted."
+    "Downloading needs the space shown plus room to run it. Wi-Fi is easier, mobile data works, and a download resumes if it is interrupted.",
+    "Our own models are still being trained and will keep getting better with every update. Thank you for trusting MaiKnowledge and StewardMD, and for believing in what we are building. With love, the StewardMD team."
   ];
 
   /* HARDWARE WARNING, shown before download AND at selection.
@@ -374,7 +375,18 @@
         url: HF + "/prism-ml/Bonsai-27B-gguf/resolve/main/Bonsai-27B-Q1_0.gguf?download=true",
         bytes: 3803452480,   // exact: HF API size
         sha256: "17ef842e47450caeb8eaa3ebfbbab5d2f2278b62b79be107985fb69a2f819aa0"   // lfs.oid from the HF API
-      }]
+      }],
+      /* Vision extension (owner, 2026-09-04): PrismML publishes a projector for the 27B ONLY. The 8B
+       * packs (MAiK Bonsai, Bonsai Swift) sit on a text-only Qwen3-8B base and have no mmproj in any
+       * repo, so they cannot get one. Q8_0 projector, not BF16: 629 MB vs 931 MB, same sha family.
+       * UNVERIFIED on a device: the 27B itself needs a 12 GB phone, and the projector's mtmd
+       * compatibility with the qwen35 backbone in llama.cpp b10502 has not been exercised here. */
+      vision: {
+        name: "bonsai-27b-mmproj-q8_0.gguf",
+        url: HF + "/prism-ml/Bonsai-27B-gguf/resolve/main/Bonsai-27B-mmproj-Q8_0.gguf?download=true",
+        bytes: 629246880,    // exact: HF API size
+        sha256: "eb561d41a7bbeb0fcf04883c8af11078ef6cae0a66862a0b68443cfca495269d"   // lfs.oid from the HF API
+      }
     }
   };
 
