@@ -2112,6 +2112,12 @@ window.openExternal = function (u) {
      (SMD_MAIK_LOCAL). Native-only in effect; both are inert on the web PWA because the
      capacitor-llama plugin is absent, which is what keeps the picker's third option hidden there. -->
 <script src="/maik-models.js?v=ux1-polish-lite" defer></script>
+<!-- MaiK Lite on-device RAG (window.SMD_MAIK_RAG / SMD_MAIK_KB_STORE): BM25 over the book chunks +
+     evidence gate, ported from the server pipeline, so MaiK Lite's answers are checked against the
+     actual book text instead of trusting its own recollection. Loaded before maik-local.js, which
+     reads these globals lazily (only when a maik-lite question is actually asked). -->
+<script src="/kb/ai/maik-lite-rag.js?v=rag1" defer></script>
+<script src="/kb/ai/maik-lite-kb-store.js?v=rag1" defer></script>
 <script src="/maik-local.js?v=mxfix4-greet" defer></script>
 <script src="/kb/ai/steward-ai.browser.js?v=gold1034" defer></script>
 <!-- MaiK V2 — deterministic KB Answer Engine (window.MaiKKB). Retrieval-first: answers KB

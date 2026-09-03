@@ -466,4 +466,75 @@ if (fail) process.exit(1);
 }
 
 
+// ── on-device RAG wiring: retrieval -> prompt -> evidence gate -> fallback or citation ──
+// The Book/BM25/evidenceGate LOGIC is verified against the real book in test/maik-lite-rag.test.mjs;
+// this tests only the WIRING in answer() - that a gate failure replaces the text with the real
+// passage rather than surfacing the model's unsupported claim, and a gate pass appends a source line.
+function loadWithRag({ tokens, kbLoadFails = false } = {}) {
+  const calls = { generate: [], searched: [] };
+  const Llama = {
+    available: async () => ({ available: true, loaded: true }),
+    load: async () => ({ loaded: true }),
+    generate: async (o) => { calls.generate.push(o); return { text: tokens.join(""), ms: 500 }; },
+    cancel: async () => ({}), release: async () => ({ released: true }),
+    addListener: () => ({ remove: () => {} })
+  };
+  const passage = { heading: "Pneumonia > Treatment", page: "p.1769", text: "For penicillin allergy, use doxycycline monotherapy or a respiratory fluoroquinolone.", chunk: 17689 };
+  const fakeBook = {
+    search: (q) => { calls.searched.push(q); return [[12.5, 0]]; },
+    cite: () => passage
+  };
+  const RAG = {
+    TOPK: 3, MIN_SCORE: 6.0,
+    evidenceGate: (answer, evidence) => {
+      const bad = /amoxicillin/i.test(answer) && !/amoxicillin/i.test(evidence);
+      return { ok: !bad, nums: [], drugs: bad ? ["amoxicillin"] : [] };
+    }
+  };
+  const KB = { loadBook: () => kbLoadFails ? Promise.reject(new Error("no kb")) : Promise.resolve(fakeBook) };
+  const win = {
+    Capacitor: { isNativePlatform: () => true, Plugins: { Llama } },
+    SMD_MAIK_RAG: RAG, SMD_MAIK_KB_STORE: KB,
+    SMD_MAIK_MODELS: { PACKS: {
+      "maik-lite": { label: "MAiK Lite", nCtx: 4096, nPredict: 512, noThink: true },
+      "maik-mxcore": { label: "MAiK MxCore", nCtx: 4096, nPredict: 512 }
+    }, pathFor: async () => "/var/mobile/Data/maik-models/maik-lite.gguf", totalBytes: () => 1.1e9 }
+  };
+  new Function("window", SRC)(win);
+  return { L: win.SMD_MAIK_LOCAL, calls };
+}
+
+{
+  const { L, calls } = loadWithRag({ tokens: ["For penicillin allergy, use doxycycline monotherapy."] });
+  const r = await L.answer({ question: "Treatment of Pneumonia?" }, { pack: "maik-lite" }, null);
+  ok("retrieval ran for maik-lite", calls.searched.length === 1);
+  ok("evidence was prepended to the prompt sent to the model", /Reference material/.test(calls.generate[0].prompt));
+  ok("gate-passing answer is marked grounded", r.grounded === true);
+  ok("gate-passing answer gets a plain source line", /Source: StewardMD Knowledge Base.*p\.1769/.test(r.text));
+}
+
+{
+  const { L } = loadWithRag({ tokens: ["For penicillin allergy, use doxycycline plus amoxicillin-clavulanate."] });
+  const r = await L.answer({ question: "Treatment of Pneumonia?" }, { pack: "maik-lite" }, null);
+  ok("a gate FAILURE does not surface the model's unsupported claim",
+     !/amoxicillin/i.test(r.text));
+  ok("a gate failure shows the real retrieved passage instead",
+     /doxycycline monotherapy or a respiratory fluoroquinolone/.test(r.text));
+}
+
+{
+  const { L, calls } = loadWithRag({ tokens: ["General reasoning answer."] });
+  const r = await L.answer({ question: "Treatment of Pneumonia?" }, { pack: "maik-mxcore" }, null);
+  ok("a non-maik-lite pack never triggers retrieval", calls.searched.length === 0);
+  ok("its answer passes through unchanged", r.text === "General reasoning answer.");
+}
+
+{
+  // KB unavailable/failing must degrade to today's ungrounded behaviour, never break the answer.
+  const { L } = loadWithRag({ tokens: ["Answer without grounding."], kbLoadFails: true });
+  const r = await L.answer({ question: "Treatment of Pneumonia?" }, { pack: "maik-lite" }, null);
+  ok("a KB load failure degrades gracefully rather than erroring the answer", !r.error && r.text === "Answer without grounding.");
+  ok("and is correctly marked ungrounded", r.grounded === false);
+}
+
 console.log(`\nmaik-local: ${pass} passed, ${fail} failed`);
