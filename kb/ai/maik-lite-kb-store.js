@@ -115,7 +115,13 @@
             if (!r || (r.status !== 206 && r.status !== 200)) throw new Error("download failed (" + (r && r.status) + ")");
             return r.arrayBuffer();
           }).then(function (ab) {
-            var b64 = btoa(String.fromCharCode.apply(null, new Uint8Array(ab)));
+            // String.fromCharCode.apply(null, largeArray) blows the JS call-stack limit well
+            // before 2 MiB of arguments (verified live: "Maximum call stack size exceeded" at
+            // this exact chunk size) - sub-chunk in 0x8000-byte pieces, same fix already proven
+            // in maik-models.js's abToB64().
+            var bytes = new Uint8Array(ab), bin = "", CH = 0x8000;
+            for (var bi = 0; bi < bytes.length; bi += CH) bin += String.fromCharCode.apply(null, bytes.subarray(bi, bi + CH));
+            var b64 = btoa(bin);
             return F.appendFile({ path: relPath(), directory: DIR, data: b64 }).then(function () {
               report(offset + ab.byteLength);
               return step(offset + ab.byteLength);
