@@ -64,9 +64,9 @@ fallback since government-authored XLSX files are not reliably well-formed.
 ## National scheme registry status
 28/28 states, 8/8 UTs, Central: registry (name/type/code) seeded and live in D1.
 
-**Ingested (live data, verified by remote query 2026-09-04):** 18/37 jurisdictions, 42,685
-packages — Tamil Nadu 4,298 · West Bengal 4,106 (4 hospital-grade scheme_versions: Grade A 1,921 ·
-Grade B 1,563 · Grade C 404 · Grade R 218) · Andhra Pradesh 3,713 · Karnataka 3,155 · Bihar 2,675 ·
+**Ingested (live data, verified by remote query 2026-09-04):** 18/37 jurisdictions, 42,967
+packages — Tamil Nadu 4,298 · West Bengal 4,388 (5 scheme_versions: Grade A 1,921 · Grade B 1,563
+· Grade C 404 · Grade R 218 · Critical Illness Package 282) · Andhra Pradesh 3,713 · Karnataka 3,155 · Bihar 2,675 ·
 Rajasthan 2,439 · Gujarat 2,315 · Kerala 2,286 · Uttarakhand 1,585 · Assam 1,577 · Telangana 1,867
 · Nagaland 2,004 · Mizoram 2,003 · Uttar Pradesh 2,000 · Delhi 1,991 · Chhattisgarh 1,735 ·
 Central PM-JAY HBP 2022 1,646 · Haryana 1,290. Each row carries its source's `rate_tier` verbatim where the source publishes one
@@ -172,10 +172,15 @@ ASP, needs BOTH the querystring `dw` AND a form-encoded body `cbo_pckg=<grade>&c
 it either 411s or re-renders the empty search form). `scripts/govschemes/ingest_westbengal_html.py`
 - same `html.parser` approach as Assam. Ten hospital-grade/category values exist
 (`govschemes_verified_sources_batch3.md`); 4 fetched and loaded tonight as 4 SEPARATE
-scheme_versions (Grade A/B/C/R - never merged into one natural-key space, since the same
-procedure can recur across grades at a different price): 4,106 rows total. The remaining 6
-(Critical Illness Package, Implants x3, Investigation Package NABH/Non-NABH) are smaller
-supplementary lists, not fetched tonight - same method applies, just repeat with `dw=1/5/6/11/8/9`.
+scheme_versions (Grade A/B/C/R + Critical Illness Package - never merged into one natural-key
+space, since the same procedure can recur across grades at a different price): 4,388 rows total.
+The remaining 5 (Implants ORTHOPAEDICS/CARDIO/ONCOSURGERY, Investigation Package NABH/Non-NABH,
+`dw=5/6/11/8/9`) do NOT work the same way - the server correctly registers the selected category
+(confirmed: the returned page's `<option value="5" selected>` shows it) but renders the empty
+search form instead of a results table, unlike Grade A/B/C/R/Critical-Illness which all returned
+results from the identical request shape. Needs real investigation (probably a required
+`cbo_Procedure` value for these categories, or a session/cookie step) before it's worth
+attempting again - not guessed at or forced tonight.
 One real near-miss caught before loading: the page is served as cp1252 (single-byte, confirmed by
 byte-histogram - no UTF-8 multi-byte sequences present), and decoding it as UTF-8 with
 `errors="replace"` turned every en-dash into a "�" replacement glyph in clinical procedure names; fixed by
