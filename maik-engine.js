@@ -170,6 +170,18 @@
   // typewriter exactly as the cloud path does.
   function route(kind, orig, self, args) {
     var e = effective();
+    // Structured calls with an on-device version (owner, 2026-09-04): the CliniX viva judge and the
+    // OPD "Ask MaiK Pro" differential (extract kind "opd-suggest"). They go local ONLY when the
+    // effective engine is local; every other extract kind (voice, translate, MaiK Ask) has no local
+    // implementation and keeps today's cloud behaviour regardless of engine. KB-only mode has no
+    // model to judge or suggest with, so it also stays on the cloud path here rather than dead-ending.
+    if (kind === "vivaJudge" || kind === "extract") {
+      var Lc = window.SMD_MAIK_LOCAL;
+      var wantLocal = e === "local" && !!Lc && (kind === "vivaJudge" ? !!Lc.vivaJudge : (args[1] === "opd-suggest" && !!Lc.opdSuggest));
+      if (!wantLocal) return orig.apply(self, args);
+      var pl = kind === "vivaJudge" ? Lc.vivaJudge(args[0], args[1], args[2]) : Lc.opdSuggest(args[0]);
+      return Promise.resolve(pl).catch(function (err) { return { error: String((err && err.message) || err || "local-failed") }; });
+    }
     if (e === "cloud") return orig.apply(self, args);
     if (e === "rag") {
       // refine() is a paid Gemini round-trip whose callers all treat null as "no refinement".
@@ -217,7 +229,7 @@
     if (_installed) return false;
     var A = window.SMD_AI;
     if (!A || typeof A.explainGrounded !== "function") return false;
-    ["explain", "explainGrounded", "explainGroundedStream", "refine"].forEach(function (name) {
+    ["explain", "explainGrounded", "explainGroundedStream", "refine", "vivaJudge", "extract"].forEach(function (name) {
       var orig = A[name];
       if (typeof orig !== "function") return;
       A[name] = function () { return route(name, orig, A, arguments); };
