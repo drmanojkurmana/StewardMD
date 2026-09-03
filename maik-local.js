@@ -812,13 +812,25 @@
     var L = llama();
     if (!L) return Promise.reject(new Error("on-device inference needs the native app"));
     var packId = (opts && opts.pack) || currentPack();
+    // Small packs (MaiK Lite was fine-tuned for prose) drift into sections before the JSON; the
+    // closing nudge in the user turn is what keeps a 1.7B on the object. Harmless for the larger ones.
+    prompt += "\n\nReply with the JSON object only. Start your reply with {";
     return ensureLoaded(packId).then(function () {
       return L.generate({ prompt: prompt, system: system, nPredict: nPredict, temperature: 0, stream: false,
                           prefillEmptyThink: noThinkPack(packId) });
     }).then(function (r) {
       if (r && r.error) throw new Error(String(r.error));
-      return parseJsonLoose(stripReasoning((r && r.text) || ""));
+      var text = stripReasoning((r && r.text) || "");
+      var parsed = parseJsonLoose(text);
+      // On a miss, carry a short sample of what the model said so a device probe can see WHY
+      // (callers only look at .error). Model output, never book text.
+      if (!parsed) { var e = new Error("parse"); e.sample = text.slice(0, 240); throw e; }
+      return parsed;
     });
+  }
+  function parseFailure(err) {
+    if (err && err.message === "parse") return { error: "parse", sample: err.sample || "" };
+    throw err;
   }
   /** CliniX viva examiner, same contract as /viva-judge: {verdict, feedback} or {error}. */
   function vivaJudge(question, keyPoints, given, opts) {
@@ -827,20 +839,19 @@
     var prompt = "QUESTION: " + q + (key ? ("\nKEY POINTS: " + key) : "") + "\nSTUDENT'S ANSWER: " + g;
     return generateJSON(prompt, VIVA_SYS, 160, opts).then(function (p) {
       var v = (p && ["correct", "partial", "incorrect"].indexOf(p.verdict) >= 0) ? p.verdict : null;
-      if (!v) return { error: "parse" };
+      if (!v) return { error: "parse", sample: JSON.stringify(p).slice(0, 240) };
       return { verdict: v, feedback: String(p.feedback || "").slice(0, 300), mode: "viva-judge", engine: "local" };
-    });
+    }, parseFailure);
   }
   /** OPD "Ask MaiK Pro" differential, same contract as /extract kind "opd-suggest". */
   function opdSuggest(assessment, opts) {
     var a = String(assessment == null ? "" : assessment).slice(0, 8000).trim();
     if (!a) return Promise.resolve({ error: "no-text" });
-    return generateJSON("=== ASSESSMENT ===\n" + a, OPD_SYS, 700, opts).then(function (p) {
-      if (!p) return { error: "parse" };
+    return generateJSON("=== ASSESSMENT ===\n" + a, OPD_SYS, 900, opts).then(function (p) {
       var out = sanitizeOpd(p);
       out.kind = "opd-suggest"; out.mode = "opd-suggest"; out.engine = "local";
       return out;
-    });
+    }, parseFailure);
   }
 
   var API = {
@@ -851,7 +862,8 @@
     SYSTEM_IMAGE_FOLLOWUP: SYSTEM_IMAGE_FOLLOWUP,
     warm: tracked(warm), isDebugBuild: isDebugBuild, debugProbed: debugProbed, cancel: cancel, release: release,
     sheetOpened: sheetOpened, sheetClosed: sheetClosed, setIdleMs: setIdleMs,
-    vivaJudge: tracked(vivaJudge), opdSuggest: tracked(opdSuggest), parseJsonLoose: parseJsonLoose
+    vivaJudge: tracked(vivaJudge), opdSuggest: tracked(opdSuggest), parseJsonLoose: parseJsonLoose,
+    VIVA_SYS: VIVA_SYS, OPD_SYS: OPD_SYS
   };
   if (typeof module !== "undefined" && module.exports) module.exports = API;
   if (typeof window !== "undefined") window.SMD_MAIK_LOCAL = API;
