@@ -374,7 +374,18 @@
         url: HF + "/prism-ml/Bonsai-27B-gguf/resolve/main/Bonsai-27B-Q1_0.gguf?download=true",
         bytes: 3803452480,   // exact: HF API size
         sha256: "17ef842e47450caeb8eaa3ebfbbab5d2f2278b62b79be107985fb69a2f819aa0"   // lfs.oid from the HF API
-      }]
+      }],
+      /* Vision extension (owner, 2026-09-04): PrismML publishes a projector for the 27B ONLY. The 8B
+       * packs (MAiK Bonsai, Bonsai Swift) sit on a text-only Qwen3-8B base and have no mmproj in any
+       * repo, so they cannot get one. Q8_0 projector, not BF16: 629 MB vs 931 MB, same sha family.
+       * UNVERIFIED on a device: the 27B itself needs a 12 GB phone, and the projector's mtmd
+       * compatibility with the qwen35 backbone in llama.cpp b10502 has not been exercised here. */
+      vision: {
+        name: "bonsai-27b-mmproj-q8_0.gguf",
+        url: HF + "/prism-ml/Bonsai-27B-gguf/resolve/main/Bonsai-27B-mmproj-Q8_0.gguf?download=true",
+        bytes: 629246880,    // exact: HF API size
+        sha256: "eb561d41a7bbeb0fcf04883c8af11078ef6cae0a66862a0b68443cfca495269d"   // lfs.oid from the HF API
+      }
     }
   };
 

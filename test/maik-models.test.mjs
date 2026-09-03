@@ -718,7 +718,11 @@ console.log(`\nmaik-models: ${pass} passed, ${fail} failed`);
   ok("every Bonsai pack is UNGROUNDED (owner: own weights, no book) and runs with thinking off", [t, s, x].every((p) => !p.rag && p.noThink === true));
   ok("size labels are honest", M.sizeLabel("bonsai-ternary-8b") === "2.31 GB" && M.sizeLabel("bonsai-8b") === "1.16 GB" && M.sizeLabel("bonsai-27b") === "3.80 GB");
   ok("every Bonsai pack has guide copy", [t, s, x].every((p) => p.guide && p.guide.bestFor && p.guide.why && p.guide.pick));
-  ok("none is a vision pack", ["bonsai-ternary-8b", "bonsai-8b", "bonsai-27b"].every((id) => M.hasVision(id) === false));
+  ok("the 8B Bonsai packs are text-only (PrismML publishes no projector for them)", ["bonsai-ternary-8b", "bonsai-8b"].every((id) => M.hasVision(id) === false));
+  ok("Bonsai Max carries the 27B projector as its vision extension, exact size and sha",
+     M.hasVision("bonsai-27b") === true && x.vision.bytes === 629246880 && /mmproj-Q8_0\.gguf/.test(x.vision.url) &&
+     x.vision.sha256 === "eb561d41a7bbeb0fcf04883c8af11078ef6cae0a66862a0b68443cfca495269d");
+  ok("the vision sub-pack resolves with the projector's own byte count", M.totalBytes(M.visionIdOf("bonsai-27b")) === 629246880);
   ok("no pack carries a rag flag: grounding is MaiK Lite only, decided in maik-local.js", Object.keys(M.PACKS).every((id) => !M.PACKS[id].rag));
 }
 
