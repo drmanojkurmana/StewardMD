@@ -9,7 +9,7 @@ failures measured on the Mendeley MI/Normal sets:
     the base's MI classes when it says "not MI" (fused specificity ~0.99).
 Everything else (calibration, Normal/defer, SBRAD barred, findings, disclaimers) is unchanged.
 Screening decision-support, NOT a diagnosis. Still does NOT assess STEMI/occlusion definitively."""
-import io, os, json, time, numpy as np, torch, timm
+import io, os, json, time, numpy as np, torch, timm, secrets
 try:
     from layout_crop import crop_ecg, is_ecg   # crop_ecg: isolate/deskew ECG region; is_ecg: reject non-ECG photos
 except Exception:
@@ -142,7 +142,7 @@ def _mi_any(img: Image.Image):
 @app.post("/v1/ecg/analyze-image")
 async def analyze_image(image: UploadFile = File(...), x_pipeline_token: str = Header(default=""),
                         variant: str = Query("prod")):
-    if TOKEN and x_pipeline_token != TOKEN: raise HTTPException(401, "bad token")
+    if TOKEN and not secrets.compare_digest(x_pipeline_token, TOKEN): raise HTTPException(401, "bad token")
     data = await image.read()
     try: img = Image.open(io.BytesIO(data))
     except Exception: raise HTTPException(400, "invalid image")
@@ -273,7 +273,7 @@ async def feedback(aiVerdict: str = Form(""), label: str = Form(""), correct: st
 
 @app.get("/v1/admin/limits")
 def admin_get(x_admin_token: str = Header(default="")):
-    if not ADMIN_TOKEN or x_admin_token != ADMIN_TOKEN: raise HTTPException(401, "bad admin token")
+    if not ADMIN_TOKEN or not secrets.compare_digest(x_admin_token, ADMIN_TOKEN): raise HTTPException(401, "bad admin token")
     if _fb_bucket is None: return {"error": "no storage"}
     cfg = _limits_cfg(); month = _month(); usage = {}
     for b in _fb_bucket.list_blobs(prefix=f"counters/{month}/"):
@@ -288,7 +288,7 @@ def admin_get(x_admin_token: str = Header(default="")):
 @app.post("/v1/admin/limits")
 async def admin_set(monthlyLimit: int = Form(default=None), exempt: str = Form(default=None),
                     modelLab: str = Form(default=None), x_admin_token: str = Header(default="")):
-    if not ADMIN_TOKEN or x_admin_token != ADMIN_TOKEN: raise HTTPException(401, "bad admin token")
+    if not ADMIN_TOKEN or not secrets.compare_digest(x_admin_token, ADMIN_TOKEN): raise HTTPException(401, "bad admin token")
     if _fb_bucket is None: raise HTTPException(503, "no storage")
     cfg = _limits_cfg()
     if monthlyLimit is not None: cfg["monthlyLimit"] = int(monthlyLimit)
