@@ -107,7 +107,14 @@ function fakeModel(n) {
   const { M, ls } = load();
   ok("installedCached false before download", M.installedCached("maik-mxcore") === false);
   ls.setItem("smd_maik_pack_maik-mxcore", "1");
-  ok("installedCached true once marked", M.installedCached("maik-mxcore") === true);
+  ls.setItem("smd_maik_packsha_maik-mxcore", M.PACKS["maik-mxcore"].files[0].sha256);
+  ok("installedCached true once marked with the matching sha", M.installedCached("maik-mxcore") === true);
+  // REGRESSION (2026-09-03 live incident): a retrain (v2 -> v4) kept the same filename and byte
+  // count, so a phone that had already downloaded the old weights still passed the old
+  // size-only check and silently kept serving them forever. installedCached must go false the
+  // moment the registry's sha256 moves, even though the "1" marker is still set.
+  ls.setItem("smd_maik_packsha_maik-mxcore", "0000000000000000000000000000000000000000000000000000000000000000");
+  ok("installedCached false when the registry sha256 has moved (stale weights)", M.installedCached("maik-mxcore") === false);
 }
 
 // ── cold download of a small fake model ──
@@ -143,16 +150,39 @@ function fakeModel(n) {
   ok("resume is surfaced to the user", notes.some((n) => /Resuming/i.test(n)));
 }
 
-// ── already complete: no network at all ──
+// ── already complete AND sha matches: no network at all ──
 {
   const SIZE = 5_000_000;
   const server = fakeModel(SIZE);
-  const { M, calls } = load({ serverBytes: server, onDisk: server });
+  const { M, ls, calls } = load({ serverBytes: server, onDisk: server });
   M.PACKS["maik-mxcore"].files[0].bytes = SIZE;
+  ls.setItem("smd_maik_packsha_maik-mxcore", M.PACKS["maik-mxcore"].files[0].sha256);
   const notes = [];
   await M.ensure("maik-mxcore", (f, n) => { if (n) notes.push(n); });
   ok("complete file triggers zero range requests", calls.ranges.length === 0);
   ok("complete file says so", notes.some((n) => /Already downloaded/i.test(n)));
+}
+
+// ── REGRESSION: same size, but the registry sha256 moved (a retrain) - must re-fetch, not skip ──
+// This is the exact live bug (2026-09-03): MaiK Lite v4 shipped in the registry but every phone
+// that had already downloaded v2 kept silently serving it, because a same-size file passed the
+// old size-only "already downloaded" check.
+{
+  const SIZE = 5_000_000;
+  const staleFile = fakeModel(SIZE);          // right size, but NOT the current server content
+  const freshServer = fakeModel(SIZE);
+  freshServer[10] = 0xff;                     // distinguish "fresh" bytes from "stale" bytes
+  const { M, ls, files, calls } = load({ serverBytes: freshServer, onDisk: staleFile });
+  M.PACKS["maik-mxcore"].files[0].bytes = SIZE;
+  ls.setItem("smd_maik_pack_maik-mxcore", "1");
+  ls.setItem("smd_maik_packsha_maik-mxcore", "old-sha-from-a-previous-retrain");
+  const notes = [];
+  const r = await M.ensure("maik-mxcore", (f, n) => { if (n) notes.push(n); });
+  ok("stale-sha file is NOT reported as already downloaded", !notes.some((n) => /Already downloaded/i.test(n)));
+  ok("stale-sha file forces a real re-fetch", calls.ranges.length > 0);
+  ok("re-fetch actually replaces the on-disk bytes", Buffer.compare(files.get("maik-models/medgemma-1.5-4b-it-Q4_K_M.gguf"), freshServer) === 0);
+  ok("re-fetch resolves installed", r && r.installed === true);
+  ok("the new sha is stamped after the re-fetch", ls._s["smd_maik_packsha_maik-mxcore"] === M.PACKS["maik-mxcore"].files[0].sha256);
 }
 
 // ── a file LONGER than expected is corrupt: delete and restart ──
@@ -323,11 +353,27 @@ function loadNative({ script = [], onDisk = 0, freeBytes = 50e9, existingId = nu
   ok("did not start a doomed download", calls.start === 0);
 }
 
-// already on disk -> no download at all
+// already on disk, matching sha -> no download at all
 {
-  const { M, calls } = loadNative({ onDisk: 2489894976, script: [{ state: "none" }] });
+  const { M, calls, ls } = loadNative({ onDisk: 2489894976, script: [{ state: "none" }] });
+  ls.setItem("smd_maik_packsha_maik-mxcore", M.PACKS["maik-mxcore"].files[0].sha256);
   const r = await M.ensure("maik-mxcore", () => {});
   ok("already-complete file skips the OS download", r.installed === true && calls.start === 0);
+}
+
+// REGRESSION: same size on disk, but the registry sha256 moved (a retrain) -> must actually redownload
+{
+  const { M, calls, ls } = loadNative({ onDisk: 2489894976, script: [
+    { state: "running", bytes: 5e8, total: 2489894976, onDisk: 5e8 },
+    { state: "done", bytes: 2489894976, total: 2489894976, onDisk: 2489894976 }
+  ] });
+  ls.setItem("smd_maik_pack_maik-mxcore", "1");
+  ls.setItem("smd_maik_packsha_maik-mxcore", "old-sha-from-a-previous-retrain");
+  const r = await M.ensure("maik-mxcore", () => {});
+  ok("stale-sha native file is NOT skipped", calls.start === 1);
+  ok("stale-sha native file is deleted before the real redownload", calls.del === 1);
+  ok("redownload resolves installed", r && r.installed === true);
+  ok("the new sha is stamped after the redownload", ls._s["smd_maik_packsha_maik-mxcore"] === M.PACKS["maik-mxcore"].files[0].sha256);
 }
 
 // failure reason surfaced
@@ -589,6 +635,7 @@ function loadNative({ script = [], onDisk = 0, freeBytes = 50e9, existingId = nu
   const ls = fakeLS();
   new Function("window", "localStorage", "Buffer", SRC)(win, ls, Buffer);
   const M = win.SMD_MAIK_MODELS;
+  ls.setItem("smd_maik_packsha_maik-mxcore", M.PACKS["maik-mxcore"].files[0].sha256);
   ok("a complete model IS reported installed", (await M.installed("maik-mxcore")) === true);
   await M.ensure("maik-mxcore").catch(() => {});
   ok("a complete model does not re-download", calls.start === 0);
