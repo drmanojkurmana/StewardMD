@@ -64,10 +64,11 @@ fallback since government-authored XLSX files are not reliably well-formed.
 ## National scheme registry status
 28/28 states, 8/8 UTs, Central: registry (name/type/code) seeded and live in D1.
 
-**Ingested (live data, verified by remote query 2026-09-04):** 17/37 jurisdictions, 38,579
-packages — Tamil Nadu 4,298 · Andhra Pradesh 3,713 · Karnataka 3,155 · Bihar 2,675 · Rajasthan
-2,439 · Gujarat 2,315 · Kerala 2,286 · Uttarakhand 1,585 · Assam 1,577 · Telangana 1,867 ·
-Nagaland 2,004 · Mizoram 2,003 · Uttar Pradesh 2,000 · Delhi 1,991 · Chhattisgarh 1,735 ·
+**Ingested (live data, verified by remote query 2026-09-04):** 18/37 jurisdictions, 42,685
+packages — Tamil Nadu 4,298 · West Bengal 4,106 (4 hospital-grade scheme_versions: Grade A 1,921 ·
+Grade B 1,563 · Grade C 404 · Grade R 218) · Andhra Pradesh 3,713 · Karnataka 3,155 · Bihar 2,675 ·
+Rajasthan 2,439 · Gujarat 2,315 · Kerala 2,286 · Uttarakhand 1,585 · Assam 1,577 · Telangana 1,867
+· Nagaland 2,004 · Mizoram 2,003 · Uttar Pradesh 2,000 · Delhi 1,991 · Chhattisgarh 1,735 ·
 Central PM-JAY HBP 2022 1,646 · Haryana 1,290. Each row carries its source's `rate_tier` verbatim where the source publishes one
 (Tier 2, Tier1(X), Non-NABH, A1, ...) - amounts are only comparable with the tier visible.
 Telangana's source publishes a single price per procedure (no tier split) - `rate_tier` is
@@ -165,9 +166,26 @@ separate/inspectable, documented in the script's own docstring - not baked into 
 priced by ward-stay in the source, not a flat package - same pattern already seen in other states'
 "M2.x General Medicine" sections).
 
+**West Bengal solved 2026-09-04**, also via a live server-rendered HTML endpoint - Swasthya
+Sathi's package search (`POST tms.swasthyasathi.gov.in/portal/SSPPackage.asp?dw=<grade>`, classic
+ASP, needs BOTH the querystring `dw` AND a form-encoded body `cbo_pckg=<grade>&cbo_Procedure=` or
+it either 411s or re-renders the empty search form). `scripts/govschemes/ingest_westbengal_html.py`
+- same `html.parser` approach as Assam. Ten hospital-grade/category values exist
+(`govschemes_verified_sources_batch3.md`); 4 fetched and loaded tonight as 4 SEPARATE
+scheme_versions (Grade A/B/C/R - never merged into one natural-key space, since the same
+procedure can recur across grades at a different price): 4,106 rows total. The remaining 6
+(Critical Illness Package, Implants x3, Investigation Package NABH/Non-NABH) are smaller
+supplementary lists, not fetched tonight - same method applies, just repeat with `dw=1/5/6/11/8/9`.
+One real near-miss caught before loading: the page is served as cp1252 (single-byte, confirmed by
+byte-histogram - no UTF-8 multi-byte sequences present), and decoding it as UTF-8 with
+`errors="replace"` turned every en-dash into a "�" replacement glyph in clinical procedure names; fixed by
+decoding as cp1252 properly instead of papering over it.
+
 **No usable source located yet (need a PDF from the owner):** Madhya Pradesh, Chandigarh, J&K,
-Jharkhand, Puducherry, Goa, Tripura, Maharashtra, West Bengal, Meghalaya, Manipur, Sikkim,
-A&N Islands, Lakshadweep, DNH&DD, Arunachal Pradesh (table exists but has no prices), Odisha
+Jharkhand, Puducherry, Goa, Tripura, Maharashtra, Meghalaya (2 of 3 tables are small/client-side;
+the large IPD table needs a WordPress AJAX nonce this session couldn't mint from a plain fetch),
+Manipur, Sikkim, A&N Islands, Lakshadweep, DNH&DD, Arunachal Pradesh (table exists but has no
+prices), Odisha
 (signed download URL expired before fetch, not retried tonight - needs a live browser click to
 mint a fresh signed URL, not a plain curl).
 
