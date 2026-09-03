@@ -64,11 +64,11 @@ fallback since government-authored XLSX files are not reliably well-formed.
 ## National scheme registry status
 28/28 states, 8/8 UTs, Central: registry (name/type/code) seeded and live in D1.
 
-**Ingested (live data, verified by remote query 2026-09-04):** 16/37 jurisdictions, 36,994
+**Ingested (live data, verified by remote query 2026-09-04):** 17/37 jurisdictions, 38,579
 packages — Tamil Nadu 4,298 · Andhra Pradesh 3,713 · Karnataka 3,155 · Bihar 2,675 · Rajasthan
-2,439 · Gujarat 2,315 · Kerala 2,286 · Assam 1,577 · Telangana 1,867 · Nagaland 2,004 ·
-Mizoram 2,003 · Uttar Pradesh 2,000 · Delhi 1,991 · Chhattisgarh 1,735 · Central PM-JAY HBP 2022
-1,646 · Haryana 1,290. Each row carries its source's `rate_tier` verbatim where the source publishes one
+2,439 · Gujarat 2,315 · Kerala 2,286 · Uttarakhand 1,585 · Assam 1,577 · Telangana 1,867 ·
+Nagaland 2,004 · Mizoram 2,003 · Uttar Pradesh 2,000 · Delhi 1,991 · Chhattisgarh 1,735 ·
+Central PM-JAY HBP 2022 1,646 · Haryana 1,290. Each row carries its source's `rate_tier` verbatim where the source publishes one
 (Tier 2, Tier1(X), Non-NABH, A1, ...) - amounts are only comparable with the tier visible.
 Telangana's source publishes a single price per procedure (no tier split) - `rate_tier` is
 intentionally blank there, not guessed. All `scheme_versions.status = 'draft'` (Phase 1's admin
@@ -152,10 +152,24 @@ RTF made that moot - it read codes/names/amounts correctly but doesn't merge wra
 continuation lines into their parent row, so it's not yet trustworthy for a full run on
 Punjab/Himachal/Assam without a human spot-check pass. Left for the owner: OCR output is a digit
 transcription risk this project has been explicit about never guessing past.
+**Uttarakhand solved 2026-09-04 via the live JSON API** (`POST sha.uk.gov.in/CMS/GetSpecDetails`,
+body `SPEC_CODE=<code>`, one call per each of the 24 speciality codes the portal itself lists) -
+the safest source shape ingested so far: PROC_AMT is a plain numeric JSON string, no free-text or
+layout-position guessing at all. 1,622 rows fetched (exact match to the count recorded in
+`govschemes_verified_sources_batch2.md`, confirming the API is stable), 37 genuine duplicates in
+the source itself (same code/package/amount, differing only by typographic encoding - curly vs
+straight apostrophe, bullet vs "o") deduped to first-seen, 1,585 loaded.
+`scripts/govschemes/ingest_uttarakhand_json.py` reads the fetched JSON files (fetch step kept
+separate/inspectable, documented in the script's own docstring - not baked into the ingester).
+11.1% zero-rate, checked and genuine (General Medicine conditions like malaria/dengue/sepsis
+priced by ward-stay in the source, not a flat package - same pattern already seen in other states'
+"M2.x General Medicine" sections).
+
 **No usable source located yet (need a PDF from the owner):** Madhya Pradesh, Chandigarh, J&K,
 Jharkhand, Puducherry, Goa, Tripura, Maharashtra, West Bengal, Meghalaya, Manipur, Sikkim,
 A&N Islands, Lakshadweep, DNH&DD, Arunachal Pradesh (table exists but has no prices), Odisha
-(signed download URL expired before fetch), Uttarakhand (live table API, not yet adapted).
+(signed download URL expired before fetch, not retried tonight - needs a live browser click to
+mint a fresh signed URL, not a plain curl).
 
 **`scripts/govschemes/ingest_layout_pdf.py`** (2026-09-03) — adapter for HBP-family PDFs that
 docling can't parse (column headers print only on page 1, not on continuation pages). Runs
