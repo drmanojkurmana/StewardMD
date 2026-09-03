@@ -149,19 +149,20 @@
     });
   }
 
-  var _rows = null;   // parsed rows only - small plain objects, cheap to keep resident
-  /** Load (downloading first if needed) and build a FRESH BM25 index every call.
+  var _book = null;
+  /** Load (downloading first if needed) and build the BM25 index ONCE per app session.
    *
-   * A real crash, live, 2026-09-03: caching the built Book (42,176 Maps for term frequencies,
-   * one per chunk) for the life of the app session, ON TOP of the ~1.1 GB LLM model already
-   * resident, was enough on an 8 GB iPhone to get the app jetsam-killed after a handful of
-   * questions. The parsed ROWS (plain {text,headings,pages,i} objects) are cheap and stay
-   * cached; the expensive tf/idf structure is rebuilt (~1-3s) and released after every call, so
-   * peak memory is the model plus ONE question's worth of index, not an ever-growing pile.
+   * History, all live on the owner's iPhone, 2026-09-03: the first version cached the Book
+   * (42,176 per-chunk Maps) and got jetsam-killed after a few questions; the second rebuilt it
+   * per question and STILL died - the jetsam report showed the WebView content process at
+   * 2.16 GB, "per-process-limit", the Maps of the previous build not yet collected under the
+   * new one. The fix is in maik-lite-rag.js (a compact inverted index); with that, building once
+   * and keeping it is the smaller footprint, not the larger one, because nothing is churned.
    */
   function loadBook(RAG, onProgress) {
     var F = fs();
-    var rowsP = _rows ? Promise.resolve(_rows) : ensure(onProgress).then(function () {
+    if (_book) return Promise.resolve(_book);
+    return ensure(onProgress).then(function () {
       // encoding REQUIRED: readFile defaults to base64 (as used deliberately in ensure()'s sha
       // check above), so without this every line failed JSON.parse silently and the book built
       // with zero rows - found live, 2026-09-03, the same night as the base64-chunking crash.
@@ -176,15 +177,14 @@
       // count. Anything short means a truncated or corrupt file - wipe it and the markers so the
       // next ask re-downloads instead of searching a partial book forever.
       if (rows.length !== ROWS) {
-        _rows = null; lset(MARK, "0"); lset(MARK_SHA, "");
+        lset(MARK, "0"); lset(MARK_SHA, "");
         return F.deleteFile({ path: relPath(), directory: DIR }).catch(function () {}).then(function () {
           throw new Error("KB file corrupt (" + rows.length + " of " + ROWS + " rows), will re-download");
         });
       }
-      _rows = rows;
-      return _rows;
+      _book = new RAG.Book(rows);
+      return _book;
     });
-    return rowsP.then(function (rows) { return new RAG.Book(rows); });
   }
 
   return { installedCached: installedCached, installed: installed, ensure: ensure, state: state,

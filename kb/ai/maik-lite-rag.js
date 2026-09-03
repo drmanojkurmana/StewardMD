@@ -152,39 +152,67 @@
     this.topic = inheritTopics(rawHead);
     this.head = this.topic.map(function (t, i) { return (t && t !== rawHead[i]) ? (t + " > " + rawHead[i]) : rawHead[i]; });
     this.noise = this.head.map(function (h) { return NOISE.test(h); });
-    /* NOT retained as this.docs: a real crash, live, 2026-09-03 - keeping a full second copy of
-     * the entire book's text in memory (topic+topic+heading+text per row, permanently) for the
-     * whole app session, on top of the ~1.1 GB model already resident, was enough on an 8 GB
-     * iPhone to get the app jetsam-killed after a handful of questions. Nothing after the
-     * constructor ever reads this.docs, so it is built and consumed per-row, never stored. */
-    this.tf = this.topic.map(function (t, i) {
-      var d = t + " " + t + " " + rawHead[i] + " " + rows[i].text;
+    /* INVERTED index, built ONCE. The Python keeps one term->count dict per chunk and scans all
+     * of them per query; the first port did the same with 42,176 JS Maps. A real jetsam report
+     * (2026-09-03, owner's iPhone 15 Pro) showed the WebView's content process at 2.16 GB,
+     * "per-process-limit", while the App process holding the 1.1 GB model sat at 0.6 GB: those
+     * Maps are close to a gigabyte, and rebuilding them per question left the previous copy as
+     * garbage, so two copies overlapped and the WebView's own ~2 GB cap was breached.
+     *
+     * Layout: the book has ~1.6 million distinct terms (bigrams dominate), so anything allocated
+     * PER TERM (measured: one object + two typed arrays each = 955 MB, worse than the Maps) is out.
+     * Instead: ONE term -> id Map, and flat typed arrays for everything else - per-term offset and
+     * idf, and one global posting array of (chunk index, count) pairs. Built in a single
+     * tokenization pass with only one transient per-chunk Map alive at a time. Scoring adds each
+     * chunk's terms in query order, exactly as the per-chunk loop did, so scores are unchanged
+     * (checked bit-exact against the previous implementation on the full book). */
+    var topic = this.topic, n = rows.length;
+    var tid = new Map(), df = [], cap = 1 << 20, dT = new Int32Array(cap), dF = new Uint16Array(cap), P = 0;
+    var docStart = new Int32Array(n + 1), len = new Float64Array(n), totalLen = 0, i, e;
+    for (i = 0; i < n; i++) {
+      var d = topic[i] + " " + topic[i] + " " + rawHead[i] + " " + rows[i].text;
       var w = toks(d), c = new Map();
       for (var j = 0; j < w.length; j++) c.set(w[j], (c.get(w[j]) || 0) + 1);
       var bg = bigrams(w);
       for (var k = 0; k < bg.length; k++) c.set(bg[k], (c.get(bg[k]) || 0) + 1);
-      return c;
-    });
-    this.len = this.tf.map(function (c) {
-      var s = 0; c.forEach(function (v, k) { if (k.indexOf("_") === -1) s += v; }); return s;
-    });
-    var totalLen = this.len.reduce(function (a, b) { return a + b; }, 0);
-    this.avg = totalLen / Math.max(1, this.len.length);
-    var df = new Map();
-    this.tf.forEach(function (c) { c.forEach(function (v, k) { df.set(k, (df.get(k) || 0) + 1); }); });
-    var n = rows.length, idf = new Map();
-    df.forEach(function (v, w) { idf.set(w, Math.log(1 + (n - v + 0.5) / (v + 0.5))); });
-    this.idf = idf;
+      len[i] = w.length; totalLen += w.length;
+      docStart[i] = P;
+      c.forEach(function (v, term) {
+        var id = tid.get(term);
+        if (id === undefined) { id = df.length; tid.set(term, id); df.push(0); }
+        df[id]++;
+        if (P === cap) {
+          cap *= 2;
+          var a = new Int32Array(cap); a.set(dT); dT = a;
+          var b2 = new Uint16Array(cap); b2.set(dF); dF = b2;
+        }
+        dT[P] = id; dF[P] = v; P++;
+      });
+    }
+    docStart[n] = P;
+    var T = df.length, off = new Int32Array(T + 1), idf = new Float64Array(T), t2;
+    for (t2 = 0; t2 < T; t2++) {
+      off[t2 + 1] = off[t2] + df[t2];
+      idf[t2] = Math.log(1 + (n - df[t2] + 0.5) / (df[t2] + 0.5));
+    }
+    var pd = new Int32Array(P), pf = new Uint16Array(P), cur = off.slice(0, T);
+    for (i = 0; i < n; i++) {
+      for (e = docStart[i]; e < docStart[i + 1]; e++) { var at = cur[dT[e]]++; pd[at] = i; pf[at] = dF[e]; }
+    }
+    this.tid = tid; this.off = off; this.idf = idf; this.pd = pd; this.pf = pf;
+    this.len = len; this.n = n; this.avg = totalLen / Math.max(1, n);
   }
+
+  Book.prototype.idfOf = function (w) { var id = this.tid.get(w); return id === undefined ? undefined : this.idf[id]; };
 
   /** Query token -> the spelling the book actually uses, if that one is commoner. */
   Book.prototype.us = function (w) {
-    var best = w, bi = this.idf.has(w) ? this.idf.get(w) : 1e9;
+    var i0 = this.idfOf(w), best = w, bi = i0 === undefined ? 1e9 : i0;
     for (var i = 0; i < UK.length; i++) {
       var a = UK[i][0], b = UK[i][1];
       if (w.indexOf(a) !== -1) {
         var v = w.split(a).join(b);
-        var vi = this.idf.has(v) ? this.idf.get(v) : 1e9;
+        var iv = this.idfOf(v), vi = iv === undefined ? 1e9 : iv;
         if (vi < bi) { best = v; bi = vi; }
       }
     }
@@ -204,29 +232,38 @@
     var qbase = toks(qExp + " " + extra);
     var qtBigrams = bigrams(toks(qExp)).filter(function (g) {
       var parts = g.split("_");
-      return parts.every(function (w) { return (self.idf.get(w) || 0) > 3.0; });
+      return parts.every(function (w) { return (self.idfOf(w) || 0) > 3.0; });
     });
     var qt = qbase.concat(qtBigrams);
     var qw = new Map();
-    for (var j = 0; j < qt.length; j++) qw.set(qt[j], this.idf.get(qt[j]) || 0.0);
+    for (var j = 0; j < qt.length; j++) qw.set(qt[j], this.idfOf(qt[j]) || 0.0);
     var totalIdf = 0; qw.forEach(function (v) { totalIdf += v; }); if (!totalIdf) totalIdf = 1.0;
     var mustCandidates = Array.from(qw.entries()).sort(function (a, b) { return b[1] - a[1]; }).map(function (e) { return e[0]; });
     var must = qw.size ? mustCandidates.slice(0, 2) : null;
-    var out = [];
-    for (var idx = 0; idx < this.tf.length; idx++) {
-      var c = this.tf[idx], s = 0.0;
-      for (var t2 = 0; t2 < qt.length; t2++) {
-        var f = c.get(qt[t2]);
-        if (!f) continue;
-        var dl = this.len[idx] / this.avg;
-        s += (this.idf.get(qt[t2]) || 0) * f * (this.k1 + 1) / (f + this.k1 * (1 - this.b + this.b * dl));
+    // Posting-list scoring. Per chunk the additions happen in qt order (outer loop), which is the
+    // order the old per-chunk loop used, so the floating-point sums are identical.
+    var n = this.n, tid = this.tid, off = this.off, idfA = this.idf, pd = this.pd, pf = this.pf;
+    var k1 = this.k1, b = this.b, avg = this.avg, len = this.len;
+    var score = new Float64Array(n), coverArr = new Float64Array(n), mustHit = new Uint8Array(n), id, e, idx;
+    for (var t2 = 0; t2 < qt.length; t2++) {
+      id = tid.get(qt[t2]);
+      if (id === undefined) continue;
+      var w0 = idfA[id];
+      for (e = off[id]; e < off[id + 1]; e++) {
+        idx = pd[e];
+        var f = pf[e], dl = len[idx] / avg;
+        score[idx] += w0 * f * (k1 + 1) / (f + k1 * (1 - b + b * dl));
       }
+    }
+    qw.forEach(function (v, w2) { var i2 = tid.get(w2); if (i2 === undefined) return; for (var e2 = off[i2]; e2 < off[i2 + 1]; e2++) coverArr[pd[e2]] += v; });
+    if (must) must.forEach(function (m) { var i3 = tid.get(m); if (i3 === undefined) return; for (var e3 = off[i3]; e3 < off[i3 + 1]; e3++) mustHit[pd[e3]] = 1; });
+    var out = [];
+    for (idx = 0; idx < n; idx++) {
+      var s = score[idx];
       if (s <= 0 || this.rows[idx].text.length < MIN_CHUNK) continue;
-      var cover = 0;
-      qw.forEach(function (v, w2) { if (c.get(w2)) cover += v; });
-      cover /= totalIdf;
+      var cover = coverArr[idx] / totalIdf;
       s *= (0.4 + 0.6 * cover);
-      if (must && !must.some(function (m) { return c.get(m); }) && !topicHit[idx]) s *= 0.35;
+      if (must && !mustHit[idx] && !topicHit[idx]) s *= 0.35;
       if (this.noise[idx]) s *= 0.15;
       if (topicHit[idx]) s *= 1.3;
       for (var w3 = 0; w3 < want.length; w3++) { if (want[w3].test(this.head[idx])) { s *= 1.25; break; } }
