@@ -64,11 +64,23 @@ fallback since government-authored XLSX files are not reliably well-formed.
 ## National scheme registry status
 28/28 states, 8/8 UTs, Central: registry (name/type/code) seeded and live in D1.
 
-**Ingested (live data):** 4/37 — Andhra Pradesh (Dr. NTR Vaidya Seva, 3713 packages), Central
-PM-JAY HBP 2022 (1,646 packages), Haryana AB-PMJAY (1,290 packages), Uttar Pradesh SACHIS
-(2,000 packages), all @ rate_tier `Tier1(X)` / `Tier1 (X)` (verbatim per source header). All
-`scheme_versions.status = 'draft'` (Phase 1's admin review pass hasn't run - see the module's
-own trade-off note above before flipping `smd_govt_schemes` on).
+**Ingested (live data, verified by remote query 2026-09-03):** 14/37 jurisdictions, 33,550
+packages — Tamil Nadu 4,298 · Andhra Pradesh 3,713 · Karnataka 3,155 · Bihar 2,675 · Rajasthan
+2,439 · Gujarat 2,315 · Kerala 2,286 · Nagaland 2,004 · Mizoram 2,003 · Uttar Pradesh 2,000 ·
+Delhi 1,991 · Chhattisgarh 1,735 · Central PM-JAY HBP 2022 1,646 · Haryana 1,290. Each row
+carries its source's `rate_tier` verbatim (Tier 2, Tier1(X), Non-NABH, A1, ...) - amounts are
+only comparable with the tier visible. All `scheme_versions.status = 'draft'` (Phase 1's admin
+review pass hasn't run - see the module's own trade-off note above before flipping
+`smd_govt_schemes` on).
+
+**Failed extraction, deliberately NOT loaded (bad data is worse than none):** Punjab and Himachal
+(borderless tables, docling merges rows), Assam CGHS (overlapping text boxes shift prices between
+columns), Ladakh (its PDF is a code crosswalk with no prices), Telangana (owner-supplied
+image-only PDF, needs ~25 min OCR - not yet run).
+**No usable source located yet (need a PDF from the owner):** Madhya Pradesh, Chandigarh, J&K,
+Jharkhand, Puducherry, Goa, Tripura, Maharashtra, West Bengal, Meghalaya, Manipur, Sikkim,
+A&N Islands, Lakshadweep, DNH&DD, Arunachal Pradesh (table exists but has no prices), Odisha
+(signed download URL expired before fetch), Uttarakhand (live table API, not yet adapted).
 
 **`scripts/govschemes/ingest_layout_pdf.py`** (2026-09-03) — adapter for HBP-family PDFs that
 docling can't parse (column headers print only on page 1, not on continuation pages). Runs
