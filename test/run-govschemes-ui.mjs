@@ -5,9 +5,10 @@
  *   state's packages, e.g. bihar_hbp2022.sql).
  * Asserts:
  *   (a) window.SMD_GOVSCHEMES_FLAGS.bool("smd_govt_schemes") true with ?gs=1, false without
- *   (b) the "Govt Schemes" entry in the Add Tool sheet is present with ?gs=1, absent without
- *       (defOn:false like "hospital" - it never appears on the main grid until enabled, so
- *       presence is checked in the eligible-tools list, the actual gate homeToolEligible() reads)
+ *   (b) the "Govt Schemes" entry in the Add Tool sheet is present with ?gs=1, absent without,
+ *       and its toggle defaults ON (defOn:true - the tile is on the main grid whenever the flag is on)
+ *   (h) the three entry points (home grid tile, More sheet row, Hospital hub tile) are all absent
+ *       without ?gs=1 and present with it; the More row and the hub tile each open the overlay
  *   (c) fetch("/api/schemes/jurisdictions") returns Bihar with packages>0
  *   (d) fetch("/api/schemes/search?q=mastectomy") returns a row with treatment_code SG075B, rate_tier "Tier 2"
  *   (e) clicking the tile opens the overlay; typing "mastectomy" renders a row showing SG075B + Tier 2
@@ -58,6 +59,17 @@ try {
   ok(await ev(`return !document.querySelector('#hvSheet [data-tool="govschemes"]');`) === true, "(b) Govt Schemes entry ABSENT from Add Tool sheet without ?gs=1");
   await ev(`document.getElementById("hvScrim").click(); return 1;`);
   await sleep(150);
+  ok(await ev(`return !document.querySelector('.rnav-tile[data-act="govschemes"]');`) === true, "(h) Govt Schemes tile ABSENT from home grid without ?gs=1");
+  await ev(`document.querySelector('[data-act="more"]').click(); return 1;`);
+  await sleep(200);
+  ok(await ev(`return !document.querySelector('#hvSheet [data-mi="govschemes"]');`) === true, "(h) Govt Schemes row ABSENT from More sheet without ?gs=1");
+  await ev(`document.getElementById("hvScrim").click(); return 1;`);
+  await sleep(150);
+  await ev(`document.querySelector('[data-act="hospital"]').click(); return 1;`);
+  await sleep(200);
+  ok(await ev(`return !document.querySelector('#hvSheet [data-mi="govschemes"]');`) === true, "(h) Govt Schemes tile ABSENT from Hospital hub without ?gs=1");
+  await ev(`document.getElementById("hvScrim").click(); return 1;`);
+  await sleep(150);
 
   // ---- (a)/(b) flag ON, tile present: reload with ?gs=1 ----
   await navigate(BASE + "?gs=1");
@@ -66,11 +78,31 @@ try {
   await sleep(200);
   const gsRow = await ev(`var r=document.querySelector('#hvSheet [data-tool="govschemes"]'); return r ? r.textContent : null;`);
   ok(!!gsRow && /Govt Schemes/.test(gsRow), `(b) Govt Schemes entry PRESENT in Add Tool sheet with ?gs=1 (row: ${JSON.stringify(gsRow)})`);
-  // Enable it so it renders on the main grid, then close the sheet.
-  await ev(`document.querySelector('#hvSheet [data-tool="govschemes"]').click(); return 1;`);
-  await sleep(150);
+  // defOn:true - the toggle is already on and the tile is on the grid without any customisation.
+  ok(await ev(`var r=document.querySelector('#hvSheet [data-tool="govschemes"] .hv-tog'); return !!(r && r.classList.contains("on"));`) === true, "(b) Govt Schemes toggle defaults ON in Add Tool sheet");
   await ev(`document.getElementById("hvScrim").click(); return 1;`);
   await sleep(200);
+  ok(await ev(`return !!document.querySelector('.rnav-tile[data-act="govschemes"]');`) === true, "(h) Govt Schemes tile PRESENT on home grid by default with ?gs=1");
+  // More sheet row -> opens the overlay via the generic ACT dispatch.
+  await ev(`document.querySelector('[data-act="more"]').click(); return 1;`);
+  await sleep(200);
+  const moreRow = await ev(`var r=document.querySelector('#hvSheet [data-mi="govschemes"]'); return r ? r.textContent : null;`);
+  ok(!!moreRow && /Govt Schemes/.test(moreRow) && /Package codes and rates/.test(moreRow), `(h) Govt Schemes row PRESENT in More sheet with ?gs=1 (row: ${JSON.stringify(moreRow)})`);
+  await ev(`document.querySelector('#hvSheet [data-mi="govschemes"]').click(); return 1;`);
+  await sleep(300);
+  ok(await ev(`return document.getElementById("gsOverlay") && document.getElementById("gsOverlay").classList.contains("on");`) === true, "(h) More sheet row opened the overlay");
+  await ev(`document.getElementById("gsBack").click(); return 1;`);
+  await sleep(300);
+  // Hospital hub tile -> opens the overlay.
+  await ev(`document.querySelector('[data-act="hospital"]').click(); return 1;`);
+  await sleep(200);
+  const hubTile = await ev(`var r=document.querySelector('#hvSheet .hv-tile[data-mi="govschemes"]'); return r ? r.textContent : null;`);
+  ok(!!hubTile && /Govt Schemes/.test(hubTile), `(h) Govt Schemes tile PRESENT in Hospital hub with ?gs=1 (tile: ${JSON.stringify(hubTile)})`);
+  await ev(`document.querySelector('#hvSheet .hv-tile[data-mi="govschemes"]').click(); return 1;`);
+  await sleep(400);
+  ok(await ev(`return document.getElementById("gsOverlay") && document.getElementById("gsOverlay").classList.contains("on");`) === true, "(h) Hospital hub tile opened the overlay");
+  await ev(`document.getElementById("gsBack").click(); return 1;`);
+  await sleep(300);
 
   // ---- (c) jurisdictions API ----
   const jurJson = await evA(`var r=await fetch('/api/schemes/jurisdictions'); return JSON.stringify(await r.json());`);
