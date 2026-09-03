@@ -2078,3 +2078,178 @@ old weights, with no further app-side changes needed.
 
 Regression tests added in test/maik-models.test.mjs for both download paths: a same-size file with
 a stale registry sha256 must be deleted and genuinely re-fetched, not reported as already-installed.
+
+## 2026-09-03 — MaiK Lite on-device RAG: BM25 book search wired to the trained model, and the fresh-install crash
+
+Owner's ask: doctors expect to-the-point answers with drug, dose and duration as per the textbook,
+so bring the BM25 + evidence-gate pipeline built for training (`~/MedPsy/run/book_search.py`,
+`pipeline.py`, `validator.py`) into the app and connect it to MaiK Lite on the phone. Shipped in
+PR #819: `kb/ai/maik-lite-rag.js` (BM25 port, verified byte-identical scores against the Python on
+the real 42,176-chunk book), `kb/ai/maik-lite-kb-store.js` (chunked download of the 38 MB JSONL
+asset from R2, cached in Documents), and wiring in `maik-local.js`: top-3 passages prefixed to the
+prompt, the model's answer run through the same evidence gate (any drug or figure not present in
+the retrieved passages fails), and on failure the passage itself is shown instead of the answer.
+The gate is never weakened to raise the answer rate. Only the `maik-lite` pack is RAG-eligible.
+
+Citation policy (owner, verbatim intent): NEVER a page number, on device or anywhere. Every
+grounded answer ends with "Source: StewardMD Knowledge Base - based on standard medical
+resources." and nothing else. A unit test pins that the source line can never carry a page number.
+Book text never leaves the device.
+
+Crashes found live on the owner's iPhone 15 Pro and fixed, in order:
+1. `String.fromCharCode.apply` on a 2 MiB download chunk blew the call stack. Sub-chunk at 0x8000.
+2. `Filesystem.readFile` without `encoding: "utf8"` returned base64, so the index built with zero
+   rows while reporting installed. Encoding now explicit, with a full-size synthetic regression test.
+3. Jetsam kill after a handful of questions: the built Book (42,176 per-chunk term Maps) was cached
+   for the app's life. First attempt: rebuild it per question and release. WRONG, see 5.
+4. Jetsam kill on a FRESH install (the path every earlier test had skipped because the KB was already
+   on disk): the post-download whole-file SHA-256 read 38 MB back through the bridge as base64 and
+   looped 38 million charCodeAt calls on the main thread. Removed. Integrity is now the exact byte
+   count plus an exact 42,176-row parse in loadBook(); a short file is deleted and re-downloaded.
+   The registry sha256 stays as the same-size staleness marker only, as in maik-models.js.
+5. Still crashing for the owner after 3 and 4. The pulled JetsamEvent report was decisive: it was
+   NOT the App process (0.6 GB, fine, it holds the model natively) but com.apple.WebKit.WebContent,
+   the WebView's content process, at 2.16 GB, reason "per-process-limit". Every earlier memory
+   probe had read the App process's headroom via the Llama plugin and so could never see this.
+   The 42,176 Maps were ~640 MB, and rebuilding per question left the previous build's garbage
+   overlapping the new one. Fix: a flat inverted index (one term->id Map, typed arrays for
+   per-term offset/idf and one global posting array), built once per session and cached: 121 MB,
+   2.9 s build, 18 ms search on the full book, scores bit-identical to the old code (checked on all
+   42,176 chunks, 17 queries). A per-term-object layout was tried first and measured at 955 MB,
+   WORSE than the Maps, because the book has 1.6 million distinct terms (bigrams): never allocate
+   per term. Lesson for any future WebView memory question: pull the JetsamEvent with
+   `idevicecrashreport -n -u <network udid> -e -k <dir>` and read which process died; the App
+   process and the WebContent process have separate limits.
+
+Verified live after fix 5, installed over the existing container: 5 paced questions plus one more,
+all grounded, none rejected by the gate, no page number, App PID unchanged throughout, no new
+jetsam report. First question including the index build 13 to 14 s, later ones 9 to 27 s
+depending on answer length. Native builds for this work must come from the live checkout, not
+a worktree: the CapApp-SPM Package.swift relative paths resolve to the original checkout's
+`local-plugins` when synced from a worktree, so a worktree build silently compiles the OLD Swift.
+Also: `devicectl device info processes` pads lines with trailing spaces, so a `$`-anchored grep on
+the app path silently matches nothing and looks like "the app is gone" when it is not.
+
+## 2026-09-03 — Bonsai packs (PrismML 1-bit / ternary) in the picker; ternary 8B as the offline stand-in for MaiK Cloud
+
+Owner decision: add Ternary Bonsai 8B as an offline model and use it in place of Vertex/Gemini for
+offline users wherever possible; list all three Bonsai models (1-bit 8B, ternary 8B, 1-bit 27B) in
+the MaiK Assistant picker. Chosen over the 27B on the numbers: PrismML's own suite has ternary 8B at
+85.0% vs 1-bit 27B at 82.9% and 1-bit 8B at 78.9%, and the 27B at 5.2 GB RAM (4K context) would be
+the first thing iOS evicts on an 8 GB phone every time the app is backgrounded.
+
+No native change was needed, and this was verified rather than assumed. The plugin links the
+mainline llama.cpp b10502 xcframework; that tag's ggml.h already carries GGML_TYPE_Q1_0 (41) and
+GGML_TYPE_Q2_0 (42) with Metal kernels, because PrismML's formats were merged upstream after their
+March release. Group sizes differ from PrismML's fork defaults: mainline Q2_0 is a 64-weight group,
+so the ternary pack points at `Ternary-Bonsai-8B-Q2_0_g64.gguf` (2,310,125,920 bytes), NOT the
+default g128 file the model card recommends (that one needs their fork). Q1_0 is g128 in both, so
+the 1-bit files are used as published. The 27B's GGUF declares arch `qwen35` (Qwen3.6 backbone),
+present in b10502. Licence Apache-2.0 on all three, so direct HuggingFace URLs like the MedGemma
+packs. Sizes and sha256 are the HF API's exact size and lfs.oid.
+
+Live on the owner's iPhone 15 Pro: the g64 ternary file downloaded (2.31 GB), loaded and answered on
+the unchanged build. Cold first answer 79 s including the load; warm answers 47 to 57 s, about four
+times slower than MaiK Lite 1.7B on the same phone, with the retrieved passages in the prompt. Four
+questions: two passed the evidence gate, two were rejected and showed the reference passage. So it
+WORKS as an offline stand-in and is honest, but it is slow on an 8 GB phone; the flagship badge is a
+statement of quality per gigabyte, not speed. The 1-bit 8B and the 27B are in the registry and
+unverified on device (same formats, same runtime path).
+
+Routing: `maik-engine.js` `effective()` now sends a `cloud`-preference user to the installed local
+pack when `navigator.onLine` is false and `localReady()`. The preference is untouched, so cloud
+resumes with the network. Flag `smd_maik_offline_local` ("0" disables). Flagship flag moved from
+Apex to `bonsai-ternary-8b`.
+
+REVERSED THE SAME DAY (owner): the first cut grounded the Bonsai packs in the book (`rag: true`,
+half their answers were then rejected by the gate, see above). The owner's call is that the Bonsai
+models act individually on their own weights and knowledge, ungrounded, unlike MaiK Lite. The
+`rag` flag is gone; `ragEligible()` is back to `maik-lite` only. Consequence to keep in mind: a
+Bonsai answer carries no evidence gate and no source line, exactly like the MedGemma packs.
+
+## 2026-09-04 — On-device MaiK: where it is reached from, idle unload, and the "not in the reference material" miss
+
+**Coverage audit** (owner asked whether the on-device engine works from CliniX Ask MaiK, OPD Queue
+Ask MaiK and Let MaiK Ask). `maik-engine.js` decorates exactly four `SMD_AI` calls: explain,
+explainGrounded, explainGroundedStream, refine. Everything that goes through those reaches the
+on-device model when it is selected (or offline with the stand-in): the MaiK sheet (home.js), the
+reasoning module, ICU explain/explainGrounded, the med list explain, insulin refine, the SurgX
+"Ask MaiK" button (opens the sheet via `SMD_askMaik`), and the CliniX tutor (`clinix-tutor.js`
+streams through explainGroundedStream). NOT covered, cloud only, fail honestly offline: the CliniX
+viva judge (`SMD_AI.vivaJudge`, a dedicated server model), the OPD EMR "Ask MaiK Pro" differential
+(`SMD_AI.extract` "opd-suggest"), Let MaiK Ask's finding extraction (`SMD_AI.extract`), translate,
+research, vision/OCR, transcription, ICU correlate/evidence/imagingSummary.
+
+SAME DAY, owner: "cant we make them use on device model lite or bonsai". Yes for the two that are
+plain structured calls. `maik-local.js` gains `vivaJudge()` and `opdSuggest()`: the server's own
+prompts and output whitelisting (viva-judge in [[path]].js, _opd-suggest.js) ported verbatim, run
+with the task prompt as the SYSTEM prompt so the interpretive MaiK prompt cannot turn JSON into
+prose, temperature 0, tolerant JSON extraction, honest `{error:"parse"}` on garbage rather than an
+invented verdict. `maik-engine.js` now decorates `vivaJudge` and `extract`; they go local only when
+the effective engine is local, and only extract kind `opd-suggest` (voice, translate and MaiK Ask
+extraction keep today's cloud behaviour regardless of engine; KB-only mode has no model and also
+stays cloud there). Tracked by the idle unload like any other call.
+
+Measured live on the owner's iPhone 15 Pro (assessment: fever, flank pain, dysuria; viva:
+anaphylaxis first step):
+
+| call | MaiK Lite 1.7B | Ternary Bonsai 8B |
+|---|---|---|
+| OPD differential | 11 to 24 s, thin (1 ddx, 1 investigation, 1 treatment, 1 red flag) | 151 s incl. load, rich (6 ddx, ceftriaxone dosing, 3 red flags) |
+| viva judge | 5 to 11 s, verdict right, feedback often empty | 20 s, verdict + proper examiner feedback |
+
+Small-model realities handled in code: MaiK Lite (a prose fine-tune) answers the JSON prompt in
+prose about half the time. generateJSON() nudges ("Start your reply with {"), retries ONCE with a
+blunter instruction at temperature 0.3, and on a second miss returns {error:"parse", sample}. For
+the viva only, a verdict the model states plainly in its opening sentence ("The student's answer is
+incorrect because...") is accepted with that sentence as feedback, when exactly one verdict word
+appears and "correct" is not negated; anything vaguer stays a parse error. Nothing is inferred.
+The 151 s Bonsai OPD call is the honest cost of a 27B-class-quality differential on an 8 GB phone;
+the OPD screen shows its busy state throughout and the local path has no 45 s race timeout (that
+timeout wraps only the cloud fetch in reasoning.js).
+
+## 2026-09-04 — Bonsai image models, and the on-device model as the offline alternative to AI Vision
+
+Owner asked for "Bonsai Image model as extension to Bonsai, Swift, Max". Facts checked on the HF
+API: PrismML publishes an image-reading projector (mmproj) for the 27B only (Q8_0 629 MB, BF16
+931 MB); the 8B repos have none and sit on a text-only Qwen3-8B base, so MAiK Bonsai and Bonsai
+Swift cannot read images. PrismML's separate "Bonsai Image" family (bonsai-image-binary/ternary-4B)
+is a TEXT-TO-IMAGE diffusion model in MLX/gemlite/safetensors builds only: not a vision model, not
+loadable by llama.cpp. Registered: `bonsai-27b.vision` = the Q8_0 projector (exact HF size and
+lfs.oid). Unverified on a device (the 27B needs a 12 GB phone; mtmd + qwen35 not exercised).
+
+"Let it be the offline alternative to Google AI Vision": image-engine.js already had the on-device
+multimodal model as a third engine but only ever offered it in the chooser; its offline path and
+every fallback dialog knew only OCR. Now `recommendFor()` recommends "local" when AI Vision cannot
+run and a projector is installed; `routeAI()` goes straight to the on-device model when offline
+(preference untouched, cloud again with the network); every fallback dialog offers "Use On-device
+AI (offline)"; Settings lists On-device AI when a projector is installed; copy names it the
+offline alternative and says it is slower and can be wrong. If the on-device read fails too, the
+dialog drops to OCR/manual rather than looping to a cloud that is not there.
+
+Picker intro closes with the owner's reassurance to users that our models are still being trained
+and will keep improving, thanking them for trusting MaiKnowledge and StewardMD.
+
+**Idle unload** (owner: "make sure model is stopped once we close the tab or its work is done").
+`maik-local.js` wraps `answer` and `warm`: any pending release is cancelled while a call is in
+flight; when the last one settles a release is scheduled, 3 min with the MaiK sheet open, 20 s
+once it is closed. `home.js` `openAskAi()` calls `sheetOpened()` and warms the local pack there;
+`close()` calls `sheetClosed()`. A running generation is never cut (close() deliberately lets it
+finish and persist). The startup warm-up in `maik-engine.js install()` is gone: no resident 1 to
+4 GB model for a session that never opens MaiK. Cost: the first question after a release reloads
+the pack (seconds for MaiK Lite, longer for the Bonsai packs).
+
+**"Not addressed in the provided reference material"** (owner screenshot: "Spleenomegaly with
+Fever DD and RX" on MaiK Lite). Retrieval missed: the misspelling is in no chunk, "DD" matched the
+book's dd-cfDNA passage and "RX" expanded to treatment, junk cleared the score floor, and the model
+obediently reported no coverage. Two fixes, both deviations from the Python port and marked as such
+in the code: (1) `Book.us()` repairs an unknown 6+ letter word by trying single-letter deletions
+against the index vocabulary and taking the commonest hit ("Spleenomegaly" -> "splenomegaly"),
+and SYNONYMS gains "dd/ddx/d/d" -> differential diagnosis; (2) `maik-local.js` treats a
+no-coverage reply (NO_COVERAGE regex) as a retrieval verdict and re-asks ONCE with no reference
+material, returning an ungrounded answer from the model's own weights with no gate and no source
+line. The gate is untouched: it still applies to every grounded answer.
+
+Naming caveat for the owner: the labels "MAiK Bonsai / Bonsai Swift / Bonsai Max" carry the upstream
+brand, against the tier-name convention (MxCore, Neural, Horizon, Apex). Kept because the owner
+asked for the models by that name; rename is a one-line registry edit each.

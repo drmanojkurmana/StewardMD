@@ -107,9 +107,11 @@
    * wrong - because that is the part that matters at the bedside and it is easy to leave out. */
   var GUIDE_INTRO = [
     "Answers come from a model stored on your phone. No internet, no AI tokens.",
-    "MaiK Lite is StewardMD's own model, trained on the StewardMD Knowledge Base - based on standard medical resources. The larger packs answer from their own general training. Either way answers carry no page citations and can be wrong. Verify against local protocol.",
+    "MaiK Lite is StewardMD's own model, trained on the StewardMD Knowledge Base - based on standard medical resources. The Bonsai, MedGemma and MedPsy packs answer from their own training. Either way answers carry no page citations and can be wrong. Verify against local protocol.",
+    "Every pack is a trade-off. Smaller means faster and thinner answers; larger means better reasoning, a longer wait, and on an 8 GB phone the large packs are unloaded whenever you switch apps and must reload. None of them matches MaiK Cloud. Only MaiK Lite checks its answers against the Knowledge Base; every other pack answers from its own training, unchecked.",
     "You can keep more than one downloaded and switch between them. Only the selected one runs.",
-    "Downloading needs the space shown plus room to run it. Wi-Fi is easier, mobile data works, and a download resumes if it is interrupted."
+    "Downloading needs the space shown plus room to run it. Wi-Fi is easier, mobile data works, and a download resumes if it is interrupted.",
+    "Our own models are still being trained and will keep getting better with every update. Thank you for trusting MaiKnowledge and StewardMD, and for believing in what we are building. With love, the StewardMD team."
   ];
 
   /* HARDWARE WARNING, shown before download AND at selection.
@@ -151,12 +153,12 @@
       tier: 0,
       own: true,
       noThink: true,
-      note: "StewardMD's own model, trained on the StewardMD Knowledge Base. Smallest download, fastest answers.",
+      note: "StewardMD's own model, trained on the StewardMD Knowledge Base. Smallest download, fastest answers, and the only pack whose answers are checked against the Knowledge Base.",
       guide: {
         speed: 3, medical: 2, general: 1,
         bestFor: "Everyday clinical questions, answered the way they are asked at the bedside.",
-        why: "Our own fine-tune, trained on the StewardMD Knowledge Base - based on standard medical resources - so it leads with the answer, then the reasoning, then the bedside approach.",
-        pick: "Start here. StewardMD's own model, the smallest download, and the fastest of the four."
+        why: "Our own fine-tune, trained on the StewardMD Knowledge Base - based on standard medical resources - so it leads with the answer, then the reasoning, then the bedside approach. It reads the Knowledge Base before answering and, when it cannot verify a figure or drug, shows the reference passage instead of guessing.",
+        pick: "Start here. Expect 10 to 20 seconds per answer. Small model limits: the OPD differential comes back thin, and as a viva examiner it can pass an incomplete answer."
       },
       nCtx: 4096,
       nPredict: 768,   // headroom: the base family sometimes spends tokens reasoning before the answer
@@ -180,12 +182,12 @@
       label: "MAiK MxCore",
       actual: "MedGemma 1.5 4B (Q4_K_M)",
       tier: 1,
-      note: "Fastest and lightest. Lowest RAM use, best on any supported phone.",
+      note: "Lightest of the 4B medical packs. Answers from its own training, not checked against the Knowledge Base. Optional photo reading with the vision download.",
       guide: {
         speed: 3, medical: 2, general: 1,
-        bestFor: "Everyday clinical questions on any supported phone.",
+        bestFor: "Everyday clinical questions on any supported phone, plus reading a photo of a report or label.",
         why: "Medically tuned, and the lightest of the 4B packs on memory.",
-        pick: "Move up here from MaiK Lite when you want more depth and your phone can carry a 2.5 GB model."
+        pick: "Move up here from MaiK Lite when you want more depth and your phone can carry a 2.5 GB model. Expect 20 to 40 seconds per answer, no Knowledge Base check, and figures that can be wrong."
       },
       nCtx: 4096,
       nPredict: 512,
@@ -208,12 +210,12 @@
       label: "MAiK Neural",
       actual: "MedGemma 1.5 4B (Q5_K_M)",
       tier: 2,
-      note: "Strongest medical answers. Slightly higher quality, a little more RAM and storage.",
+      note: "MxCore at higher precision: fewer numeric slips, a little slower, more RAM and storage. Not checked against the Knowledge Base.",
       guide: {
         speed: 2, medical: 3, general: 1,
-        bestFor: "When you want the most dependable medical detail.",
+        bestFor: "When you want the most dependable medical detail from the MedGemma family.",
         why: "Same medical tuning held at higher precision, so figures and regimens drift less.",
-        pick: "Choose this if you have the storage to spare and answer quality matters more than speed."
+        pick: "Choose this if you have the storage to spare and answer quality matters more than speed. Expect 30 to 50 seconds per answer and no Knowledge Base check."
       },
       nCtx: 4096,
       nPredict: 512,
@@ -237,12 +239,12 @@
       label: "MAiK Horizon",
       actual: "Gemma 4 E2B (Q4_K_M)",
       tier: 3,
-      note: "Broadest general knowledge and reasoning. Not medically fine-tuned.",
+      note: "Broadest general knowledge. Not medically fine-tuned, not checked against the Knowledge Base, and the slowest of the 4B packs.",
       guide: {
         speed: 1, medical: 1, general: 3,
         bestFor: "Broader reasoning and topics at the edges of clinical work.",
         why: "A newer general-purpose base with wider world knowledge.",
-        pick: "Not medically tuned. Prefer MxCore or Neural for clinical answers."
+        pick: "Not medically tuned: it may answer a clinical question generally or miss a standard regimen. Prefer MxCore or Neural for clinical answers. Expect 40 to 60 seconds per answer."
       },
       nCtx: 4096,
       nPredict: 512,
@@ -277,14 +279,13 @@
       label: "MAiK Apex",
       actual: "MedPsy 4B (Q5_K_M, imatrix)",
       tier: 4,
-      flagship: true,
       noThink: true,
-      note: "Strongest reasoning. Flagship phones only, and the largest download.",
+      note: "Strongest of the medical fine-tunes and the slowest of them. Flagship phones only. Not checked against the Knowledge Base.",
       guide: {
         speed: 1, medical: 3, general: 3,
-        bestFor: "Flagship phones, when you want the best on-device answer and can wait a little longer.",
+        bestFor: "Flagship phones, when you want the best medical fine-tune on device and can wait a little longer.",
         why: "A medical fine-tune on a newer, stronger base than the other tiers, so it reasons better across both clinical and general questions.",
-        pick: "Best quality here, slowest of the four. On an older phone prefer MxCore."
+        pick: "Best quality among the medical fine-tunes, slowest of them. Expect about a minute per answer and no Knowledge Base check. On an older phone prefer MxCore."
       },
       nCtx: 4096,
       nPredict: 768,          // more headroom: a reasoning-capable base spends tokens before answering
@@ -294,6 +295,98 @@
         bytes: 3156921120,   // exact: HuggingFace paths-info AND a live content-length check agree
         sha256: "68bd5e14cd87ff40bba5d08fbef2da9a6088b11aacab8466ef3f13a602e2d868"   // lfs.oid from the HF API
       }]
+    },
+    /* BONSAI (PrismML, Apache-2.0): models TRAINED at 1 bit or ternary, not quantized afterwards.
+     * Added 2026-09-03 on the owner's decision: the ternary 8B is the on-device stand-in for MaiK
+     * Cloud when the phone is offline (maik-engine.js effective()), and all three are in the picker.
+     *
+     * FORMAT vs OUR RUNTIME. The plugin links mainline llama.cpp b10502, which carries
+     * GGML_TYPE_Q1_0 (128-weight groups) and GGML_TYPE_Q2_0 (64-weight groups) with Metal kernels
+     * (checked in that tag's ggml-common.h). PrismML's default ternary file is grouped by 128 for
+     * THEIR fork; the g64 file below is the one mainline reads (its byte count is exactly the
+     * 64-group layout). The 1-bit files are g128, mainline's Q1_0 layout. The 27B's GGUF declares
+     * architecture "qwen35" (Qwen3.6 hybrid-attention backbone), which b10502 has.
+     *
+     * Direct HuggingFace URLs like the MedGemma packs: public Apache-2.0 weights, Range-resumable.
+     * bytes and sha256 are the HF API's exact size and lfs.oid for each file.
+     *
+     * UNGROUNDED, by owner decision (2026-09-03): these packs answer from their own weights, with no
+     * book retrieval and no evidence gate. Only MaiK Lite is grounded (maik-local.js ragEligible).
+     * noThink: Qwen3 family, thinking traces eat the token budget on a phone. */
+    "bonsai-ternary-8b": {
+      label: "MAiK Bonsai",
+      actual: "Ternary Bonsai 8B (PrismML, GGUF Q2_0 g64, 1.58-bit)",
+      tier: 0.5,
+      flagship: true,
+      noThink: true,
+      note: "Best on-device quality per gigabyte. Answers from its own training, not checked against the Knowledge Base. Stands in for MaiK Cloud when you are offline, but it is not MaiK Cloud.",
+      guide: {
+        speed: 2, medical: 3, general: 3,
+        bestFor: "Offline use in place of MaiK Cloud: an 8B general model, the best differential and viva feedback of the on-device packs.",
+        why: "Trained natively at 1.58 bits, so an 8-billion-parameter model fits in 2.3 GB and answers at a usable pace on a recent phone.",
+        pick: "Pick this for the strongest offline answer without a 3 GB download. Expect 30 to 60 seconds per answer on an 8 GB phone, about 2 minutes for the OPD differential, and a minute to reload after the app has been in the background. Not medically fine-tuned and no Knowledge Base check."
+      },
+      nCtx: 4096,
+      nPredict: 768,
+      files: [{
+        name: "ternary-bonsai-8b-q2_0_g64.gguf",
+        url: HF + "/prism-ml/Ternary-Bonsai-8B-gguf/resolve/main/Ternary-Bonsai-8B-Q2_0_g64.gguf?download=true",
+        bytes: 2310125920,   // exact: HF API size
+        sha256: "e17b298d84ee78797916ae5c2ecc8211469cc65cccfe3080cd9a9bb503fbc55e"   // lfs.oid from the HF API
+      }]
+    },
+    "bonsai-8b": {
+      label: "MAiK Bonsai Swift",
+      actual: "Bonsai 8B (PrismML, GGUF Q1_0 g128, 1-bit)",
+      tier: 0.7,
+      noThink: true,
+      note: "Fastest and smallest of the Bonsai packs, noticeably less accurate than MAiK Bonsai. Not checked against the Knowledge Base.",
+      guide: {
+        speed: 3, medical: 2, general: 3,
+        bestFor: "Speed on a phone with less memory: an 8B model in 1.2 GB.",
+        why: "Every weight is a single bit. The download size of MaiK Lite with far more parameters; several points below the ternary pack on accuracy, and weaker at following strict formats.",
+        pick: "Pick this on an older phone, or when speed matters more than accuracy. Expect the occasional confidently wrong figure, no Knowledge Base check, and no medical fine-tuning."
+      },
+      nCtx: 4096,
+      nPredict: 768,
+      files: [{
+        name: "bonsai-8b-q1_0.gguf",
+        url: HF + "/prism-ml/Bonsai-8B-gguf/resolve/main/Bonsai-8B-Q1_0.gguf?download=true",
+        bytes: 1158654496,   // exact: HF API size
+        sha256: "284a335aa3fb2ced3b1b01fcb40b08aa783e3b70832767f0dd2e3fdfa134bd54"   // lfs.oid from the HF API
+      }]
+    },
+    "bonsai-27b": {
+      label: "MAiK Bonsai Max",
+      actual: "Bonsai 27B (PrismML, GGUF Q1_0 g128, 1-bit, Qwen3.6 backbone)",
+      tier: 5,
+      noThink: true,
+      note: "27B-class reasoning in 3.8 GB, the slowest pack here by far. Needs a 12 GB phone: on 8 GB it has no headroom. Not checked against the Knowledge Base.",
+      guide: {
+        speed: 1, medical: 3, general: 3,
+        bestFor: "Flagship phones with 12 GB memory, for the deepest offline reasoning when time does not matter.",
+        why: "A 27-billion-parameter model at one bit per weight. Strong reasoning, but on an 8 GB phone it leaves no headroom and is evicted whenever you switch apps.",
+        pick: "Only on a 12 GB phone. Expect several minutes per answer and a long reload every time the app comes back from the background. On anything else MAiK Bonsai scores higher on most tasks anyway. No medical fine-tuning, no Knowledge Base check."
+      },
+      nCtx: 4096,             // PrismML's 5.2 GB peak-memory figure for this file is at 4K context
+      nPredict: 768,
+      files: [{
+        name: "bonsai-27b-q1_0.gguf",
+        url: HF + "/prism-ml/Bonsai-27B-gguf/resolve/main/Bonsai-27B-Q1_0.gguf?download=true",
+        bytes: 3803452480,   // exact: HF API size
+        sha256: "17ef842e47450caeb8eaa3ebfbbab5d2f2278b62b79be107985fb69a2f819aa0"   // lfs.oid from the HF API
+      }],
+      /* Vision extension (owner, 2026-09-04): PrismML publishes a projector for the 27B ONLY. The 8B
+       * packs (MAiK Bonsai, Bonsai Swift) sit on a text-only Qwen3-8B base and have no mmproj in any
+       * repo, so they cannot get one. Q8_0 projector, not BF16: 629 MB vs 931 MB, same sha family.
+       * UNVERIFIED on a device: the 27B itself needs a 12 GB phone, and the projector's mtmd
+       * compatibility with the qwen35 backbone in llama.cpp b10502 has not been exercised here. */
+      vision: {
+        name: "bonsai-27b-mmproj-q8_0.gguf",
+        url: HF + "/prism-ml/Bonsai-27B-gguf/resolve/main/Bonsai-27B-mmproj-Q8_0.gguf?download=true",
+        bytes: 629246880,    // exact: HF API size
+        sha256: "eb561d41a7bbeb0fcf04883c8af11078ef6cae0a66862a0b68443cfca495269d"   // lfs.oid from the HF API
+      }
     }
   };
 

@@ -28,7 +28,9 @@ function load(env = {}) {
       explainGrounded: (...a) => { calls.push(["explainGrounded", a]); return Promise.resolve({ text: "CLOUD grounded" }); },
       explainGroundedStream: (...a) => { calls.push(["explainGroundedStream", a]); return Promise.resolve({ text: "CLOUD stream" }); },
       refine: (...a) => { calls.push(["refine", a]); return Promise.resolve({ topic: "CLOUD refine" }); },
-      route: function (q) { return this.refine(q); }
+      route: function (q) { return this.refine(q); },
+      vivaJudge: (...a) => { calls.push(["vivaJudge", a]); return Promise.resolve({ verdict: "correct", feedback: "CLOUD judge" }); },
+      extract: (...a) => { calls.push(["extract", a]); return Promise.resolve({ kind: a[1], engine: "cloud" }); }
     }
   };
   if (env.gate || env.pro !== undefined) win.SMD_PRO = {
@@ -37,7 +39,11 @@ function load(env = {}) {
   };
   if (env.xaccess) win.SMD_XACCESS = { isActiveCached: () => true, devBypass: () => true };
   if (env.runtime) {
-    win.SMD_MAIK_LOCAL = { answer: (...a) => { calls.push(["local", a]); return Promise.resolve({ text: "LOCAL answer" }); } };
+    win.SMD_MAIK_LOCAL = {
+      answer: (...a) => { calls.push(["local", a]); return Promise.resolve({ text: "LOCAL answer" }); },
+      vivaJudge: (...a) => { calls.push(["localViva", a]); return Promise.resolve({ verdict: "partial", feedback: "LOCAL judge", engine: "local" }); },
+      opdSuggest: (...a) => { calls.push(["localOpd", a]); return Promise.resolve({ kind: "opd-suggest", provisionalDx: "LOCAL dx", ddx: [], engine: "local" }); }
+    };
   }
   // Model module stub shaped like the real SMD_MAIK_MODELS so the settings section renders.
   if (env.pack !== undefined || env.models) {
@@ -610,6 +616,46 @@ ok("...and warms the model once the gate opens", /warmIfLocal\(\)/.test(SRC.slic
   // --mk-* only exists inside #maikSheet; using it in the Settings surface silently falls back.
   const settingsFn = SRC.slice(SRC.indexOf("function settingsHTML"), SRC.indexOf("function modelRowHTML"));
   ok("the Settings surface does not rely on the sheet-scoped --mk-* palette", !/var\(--mk-/.test(settingsFn));
+}
+
+// ── Offline stand-in for MaiK Cloud (owner decision, 2026-09-03) ──────────────────────────────────
+// A clinician on the cloud engine with no network gets the installed on-device model instead of a
+// failed call. The PREFERENCE stays "cloud"; only the effective engine changes, and only while offline.
+{
+  const on = load({ gate: true, runtime: true, pack: true });
+  on.win.navigator = { onLine: false };
+  ok("cloud pref + no network + local ready = the on-device model answers", on.E.effective() === "local");
+  on.ls.setItem("smd_maik_offline_local", "0");
+  ok("the flag turns the stand-in off", on.E.effective() === "cloud");
+  on.ls.setItem("smd_maik_offline_local", "1");
+  on.win.navigator = { onLine: true };
+  ok("network back = cloud again, nothing to undo", on.E.effective() === "cloud");
+  const noPack = load({ gate: true, runtime: true, pack: false });
+  noPack.win.navigator = { onLine: false };
+  ok("offline with no installed pack stays on cloud (fails honestly) rather than pretending", noPack.E.effective() === "cloud");
+  const noNav = load({ gate: true, runtime: true, pack: true });
+  ok("no navigator at all (web build, old WebView) never triggers the stand-in", noNav.E.effective() === "cloud");
+}
+
+// ── structured calls on device (owner, 2026-09-04): viva judge and OPD differential ─────────────────
+{
+  const loc = load({ gate: true, runtime: true, pack: true });
+  loc.ls.setItem("stewardmd.maikEngine", "local");
+  const v = await loc.win.SMD_AI.vivaJudge("Q", "K", "A");
+  ok("local engine: the viva judge runs on device", v.engine === "local" && v.verdict === "partial" && loc.calls.some((c) => c[0] === "localViva"));
+  const o = await loc.win.SMD_AI.extract("complaint text", "opd-suggest");
+  ok("local engine: the OPD differential runs on device", o.engine === "local" && loc.calls.some((c) => c[0] === "localOpd"));
+  const voice = await loc.win.SMD_AI.extract("dictation", "voice");
+  ok("every other extract kind stays on the cloud even with the local engine", voice.engine === "cloud" && voice.kind === "voice");
+  const cl = load({ gate: true, runtime: true, pack: true });
+  const v2 = await cl.win.SMD_AI.vivaJudge("Q", "K", "A");
+  ok("cloud pref: viva judge stays on the cloud", v2.feedback === "CLOUD judge");
+  const o2 = await cl.win.SMD_AI.extract("complaint text", "opd-suggest");
+  ok("cloud pref: OPD differential stays on the cloud", o2.engine === "cloud");
+  const rag = load({ gate: true, runtime: true, pack: true });
+  rag.ls.setItem("stewardmd.maikEngine", "rag");
+  const v3 = await rag.win.SMD_AI.vivaJudge("Q", "K", "A");
+  ok("KB-only pref: no model to judge with, so the cloud judge is used rather than dead-ending", v3.feedback === "CLOUD judge");
 }
 
 console.log(`\nmaik-engine: ${pass} passed, ${fail} failed`);

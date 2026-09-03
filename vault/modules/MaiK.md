@@ -12,8 +12,23 @@ UpToDate-style answer. Aurora bottom-sheet UI. Account-scoped on-device conversa
 - `home.js` — the MaiK sheet + `runClinical()` (the ask flow), Aurora UI, sidebar
 - `maik-engine.js` (`window.SMD_MAIK_ENGINE`) — answer-engine picker (KB only / Cloud / On-device);
   DECORATES `window.SMD_AI` rather than branching in home.js. Pref `stewardmd.maikEngine`, default `cloud`
-- `maik-models.js` / `maik-local.js` — on-device model pack (resumable Range download) + llama.cpp
-  inference via `local-plugins/capacitor-llama`. See `docs/MAIK_OFFLINE_RUNBOOK.md`
+- `maik-models.js` / `maik-local.js` — on-device model packs (resumable Range download) + llama.cpp
+  inference via `local-plugins/capacitor-llama` (mainline llama.cpp b10502 xcframework). See
+  `docs/MAIK_OFFLINE_RUNBOOK.md`. Eight packs (2026-09-03): `maik-lite` (our fine-tune, default),
+  `bonsai-ternary-8b` (flagship), `bonsai-8b`, the three MedGemma/Gemma tiers, `maik-apex`,
+  `bonsai-27b`. ONLY MaiK Lite reads the on-device book (`kb/ai/maik-lite-rag.js` BM25 + evidence
+  gate, `kb/ai/maik-lite-kb-store.js` 38 MB asset; `maik-local.js` `ragEligible`); every other pack,
+  Bonsai included, answers ungrounded from its own weights (owner, 2026-09-03). Grounded answers
+  cite only "StewardMD Knowledge Base - based on standard medical resources", never a page.
+- **Offline stand-in** (`maik-engine.js` `effective()`, 2026-09-03): pref `cloud` + `navigator.onLine`
+  false + a ready local pack → the on-device model answers. Flag `smd_maik_offline_local` ("0" off).
+- **What the engine routes** (2026-09-04): explain, explainGrounded, explainGroundedStream, refine,
+  vivaJudge (CliniX viva examiner) and extract kind `opd-suggest` (OPD "Ask MaiK Pro" differential),
+  the last two via `maik-local.js` `vivaJudge()`/`opdSuggest()` (server prompts + whitelisting
+  ported). Still cloud-only: every other extract kind (voice, translate, MaiK Ask), research,
+  vision/OCR, transcribe, ICU correlate/evidence/imagingSummary.
+- **Model lifecycle** (2026-09-04): warmed when the MaiK sheet opens (`openAskAi`), released 20 s
+  after `close()` or 3 min idle with the sheet open, never mid-generation. No warm-up at app start.
 - `kb/ai/maik-kb.js` (`window.MaiKKB`) — deterministic KB answer engine (canonical+fuzzy+abbrev, 85% gate)
 - `functions/api/ai/[[path]].js` — server: `/refine` (router), `/explain` (Gemini), `/research` (web)
 - `kb/ai/steward-ai.browser.js` — client SDK helpers. NOTE: `window.SMD_AI` itself is defined in

@@ -104,9 +104,21 @@
   // Effective engine — never route to a local engine that cannot answer. A stale "local" pref
   // (model deleted, code expired, web build with no plugin) silently behaves as KB-only rather
   // than dead-ending, because KB-only is the honest subset of what the user asked for.
+  // Offline stand-in (owner decision, 2026-09-03): a clinician on MaiK Cloud with no network gets
+  // the installed on-device model instead of a failed cloud call. The cloud PREFERENCE is untouched,
+  // so the next question with the network back goes to the cloud again. Flag smd_maik_offline_local:
+  // "0" turns it off. Only fires when the local engine can actually answer (gate, runtime, pack).
+  function offlineStandIn() {
+    if (lget("smd_maik_offline_local") === "0") return false;
+    try {
+      var nav = (typeof window !== "undefined" && window.navigator) || (typeof navigator !== "undefined" ? navigator : null);
+      return !!nav && nav.onLine === false;
+    } catch (e) { return false; }
+  }
   function effective() {
     var p = getPref();
     if (p === "local" && !localReady()) return "rag";
+    if (p === "cloud" && offlineStandIn() && localReady()) return "local";
     return p;
   }
 
@@ -158,6 +170,18 @@
   // typewriter exactly as the cloud path does.
   function route(kind, orig, self, args) {
     var e = effective();
+    // Structured calls with an on-device version (owner, 2026-09-04): the CliniX viva judge and the
+    // OPD "Ask MaiK Pro" differential (extract kind "opd-suggest"). They go local ONLY when the
+    // effective engine is local; every other extract kind (voice, translate, MaiK Ask) has no local
+    // implementation and keeps today's cloud behaviour regardless of engine. KB-only mode has no
+    // model to judge or suggest with, so it also stays on the cloud path here rather than dead-ending.
+    if (kind === "vivaJudge" || kind === "extract") {
+      var Lc = window.SMD_MAIK_LOCAL;
+      var wantLocal = e === "local" && !!Lc && (kind === "vivaJudge" ? !!Lc.vivaJudge : (args[1] === "opd-suggest" && !!Lc.opdSuggest));
+      if (!wantLocal) return orig.apply(self, args);
+      var pl = kind === "vivaJudge" ? Lc.vivaJudge(args[0], args[1], args[2]) : Lc.opdSuggest(args[0]);
+      return Promise.resolve(pl).catch(function (err) { return { error: String((err && err.message) || err || "local-failed") }; });
+    }
     if (e === "cloud") return orig.apply(self, args);
     if (e === "rag") {
       // refine() is a paid Gemini round-trip whose callers all treat null as "no refinement".
@@ -205,7 +229,7 @@
     if (_installed) return false;
     var A = window.SMD_AI;
     if (!A || typeof A.explainGrounded !== "function") return false;
-    ["explain", "explainGrounded", "explainGroundedStream", "refine"].forEach(function (name) {
+    ["explain", "explainGrounded", "explainGroundedStream", "refine", "vivaJudge", "extract"].forEach(function (name) {
       var orig = A[name];
       if (typeof orig !== "function") return;
       A[name] = function () { return route(name, orig, A, arguments); };
@@ -213,8 +237,9 @@
     // route() is an alias for refine() in reasoning.js; re-point it at the wrapped refine.
     if (typeof A.route === "function") A.route = function (q) { return A.refine(q); };
     _installed = true;
-    // Deferred so it never competes with first paint.
-    try { if (typeof setTimeout === "function") setTimeout(warmIfLocal, 2500); } catch (e) {}
+    // No warm-up at app start any more (owner, 2026-09-04): a resident 1 to 4 GB model the doctor may
+    // never use this session heats the phone and starves other modules. home.js openAskAi() warms
+    // when the MaiK sheet opens, and maik-local.js releases it after idle/close.
     return true;
   }
 
