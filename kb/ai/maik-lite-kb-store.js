@@ -160,7 +160,10 @@
     if (_book) return Promise.resolve(_book);
     var F = fs();
     return ensure(onProgress).then(function () {
-      return F.readFile({ path: relPath(), directory: DIR });
+      // encoding REQUIRED: readFile defaults to base64 (as used deliberately in ensure()'s sha
+      // check above), so without this every line failed JSON.parse silently and the book built
+      // with zero rows - found live, 2026-09-03, the same night as the base64-chunking crash.
+      return F.readFile({ path: relPath(), directory: DIR, encoding: "utf8" });
     }).then(function (r) {
       var lines = r.data.split("\n");
       var rows = [];
