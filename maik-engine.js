@@ -225,8 +225,9 @@
     // route() is an alias for refine() in reasoning.js; re-point it at the wrapped refine.
     if (typeof A.route === "function") A.route = function (q) { return A.refine(q); };
     _installed = true;
-    // Deferred so it never competes with first paint.
-    try { if (typeof setTimeout === "function") setTimeout(warmIfLocal, 2500); } catch (e) {}
+    // No warm-up at app start any more (owner, 2026-09-04): a resident 1 to 4 GB model the doctor may
+    // never use this session heats the phone and starves other modules. home.js openAskAi() warms
+    // when the MaiK sheet opens, and maik-local.js releases it after idle/close.
     return true;
   }
 

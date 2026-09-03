@@ -81,7 +81,10 @@
     "intravenous": ["iv"], "intramuscular": ["im"], "subcutaneous": ["sc", "subcut"],
     "lumbar puncture": ["lp"], "hemoglobin": ["hb", "hgb"], "blood pressure": ["bp"], "leukocyte count": ["tlc", "wbc"],
     "acute tubular necrosis": ["atn"], "electrocardiogram": ["ecg", "ekg"], "creatinine": ["cr"], "potassium": ["k+"],
-    "transfusion": ["transfuse"]
+    "transfusion": ["transfuse"],
+    // Added on device (2026-09-04), NOT in the Python: "DD" in a bedside question is differential
+    // diagnosis; unexpanded it matched the book's "dd-cfDNA" and dragged in a transplant passage.
+    "differential diagnosis": ["dd", "ddx", "d/d"]
   };
   var SYN = [];
   Object.keys(SYNONYMS).forEach(function (canon) {
@@ -214,6 +217,18 @@
         var v = w.split(a).join(b);
         var iv = this.idfOf(v), vi = iv === undefined ? 1e9 : iv;
         if (vi < bi) { best = v; bi = vi; }
+      }
+    }
+    // Spelling repair against the book's own vocabulary (2026-09-04, not in the Python). A live miss:
+    // "Spleenomegaly" is in no chunk, so the query degraded to "fever dd rx", junk passages cleared
+    // the score floor, and the model dutifully answered "not addressed in the reference material".
+    // If the word (lowercased) is unknown and 6+ letters, try every single-letter deletion and take
+    // the commonest one the index knows. ponytail: deletions only; add transpositions if misses show.
+    var lw = w.toLowerCase();
+    if (bi === 1e9 && this.idfOf(lw) === undefined && lw.length >= 6 && /^[a-z]+$/.test(lw)) {
+      for (var d = 0; d < lw.length; d++) {
+        var cand = lw.slice(0, d) + lw.slice(d + 1), ci = this.idfOf(cand);
+        if (ci !== undefined && ci < bi) { best = cand; bi = ci; }
       }
     }
     return best;

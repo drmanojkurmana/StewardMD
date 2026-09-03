@@ -2167,6 +2167,40 @@ models act individually on their own weights and knowledge, ungrounded, unlike M
 `rag` flag is gone; `ragEligible()` is back to `maik-lite` only. Consequence to keep in mind: a
 Bonsai answer carries no evidence gate and no source line, exactly like the MedGemma packs.
 
+## 2026-09-04 — On-device MaiK: where it is reached from, idle unload, and the "not in the reference material" miss
+
+**Coverage audit** (owner asked whether the on-device engine works from CliniX Ask MaiK, OPD Queue
+Ask MaiK and Let MaiK Ask). `maik-engine.js` decorates exactly four `SMD_AI` calls: explain,
+explainGrounded, explainGroundedStream, refine. Everything that goes through those reaches the
+on-device model when it is selected (or offline with the stand-in): the MaiK sheet (home.js), the
+reasoning module, ICU explain/explainGrounded, the med list explain, insulin refine, the SurgX
+"Ask MaiK" button (opens the sheet via `SMD_askMaik`), and the CliniX tutor (`clinix-tutor.js`
+streams through explainGroundedStream). NOT covered, cloud only, fail honestly offline: the CliniX
+viva judge (`SMD_AI.vivaJudge`, a dedicated server model), the OPD EMR "Ask MaiK Pro" differential
+(`SMD_AI.extract` "opd-suggest"), Let MaiK Ask's finding extraction (`SMD_AI.extract`), translate,
+research, vision/OCR, transcription, ICU correlate/evidence/imagingSummary. A local `extract`
+equivalent would be the next step if those are wanted offline; not built, not asked.
+
+**Idle unload** (owner: "make sure model is stopped once we close the tab or its work is done").
+`maik-local.js` wraps `answer` and `warm`: any pending release is cancelled while a call is in
+flight; when the last one settles a release is scheduled, 3 min with the MaiK sheet open, 20 s
+once it is closed. `home.js` `openAskAi()` calls `sheetOpened()` and warms the local pack there;
+`close()` calls `sheetClosed()`. A running generation is never cut (close() deliberately lets it
+finish and persist). The startup warm-up in `maik-engine.js install()` is gone: no resident 1 to
+4 GB model for a session that never opens MaiK. Cost: the first question after a release reloads
+the pack (seconds for MaiK Lite, longer for the Bonsai packs).
+
+**"Not addressed in the provided reference material"** (owner screenshot: "Spleenomegaly with
+Fever DD and RX" on MaiK Lite). Retrieval missed: the misspelling is in no chunk, "DD" matched the
+book's dd-cfDNA passage and "RX" expanded to treatment, junk cleared the score floor, and the model
+obediently reported no coverage. Two fixes, both deviations from the Python port and marked as such
+in the code: (1) `Book.us()` repairs an unknown 6+ letter word by trying single-letter deletions
+against the index vocabulary and taking the commonest hit ("Spleenomegaly" -> "splenomegaly"),
+and SYNONYMS gains "dd/ddx/d/d" -> differential diagnosis; (2) `maik-local.js` treats a
+no-coverage reply (NO_COVERAGE regex) as a retrieval verdict and re-asks ONCE with no reference
+material, returning an ungrounded answer from the model's own weights with no gate and no source
+line. The gate is untouched: it still applies to every grounded answer.
+
 Naming caveat for the owner: the labels "MAiK Bonsai / Bonsai Swift / Bonsai Max" carry the upstream
 brand, against the tier-name convention (MxCore, Neural, Horizon, Apex). Kept because the owner
 asked for the models by that name; rename is a one-line registry edit each.

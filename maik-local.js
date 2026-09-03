@@ -125,6 +125,9 @@
   // Shown when the model spent its whole token budget inside a reasoning block and produced no
   // answer (measured on MaiK Lite v2: rare but real). An explicit message beats an empty bubble.
   var EMPTY_ANSWER = "The on-device model did not produce an answer this time. Ask again, or switch to MaiK Cloud.";
+  // The model reporting that the retrieved passages do not cover the question. That is a retrieval
+  // verdict, not an answer; see the no-coverage fallback in answer().
+  var NO_COVERAGE = /\b(not|isn't|is not|aren't|are not|no)\b[^.]{0,60}\b(addressed|covered|found|included|mentioned|discussed|available|present|information|evidence|guidelines?)\b[^.]{0,50}\b(reference|retrieved|provided|source|sources|material|evidence|knowledge base)\b|\b(reference|retrieved) (material|passages?|sources?) (does not|do not|doesn't|don't|did not)\b/i;
 
   function stripReasoning(t) {
     var out = String(t == null ? "" : t);
@@ -483,7 +486,7 @@
     var acc = "";
     var sub = null;
 
-    var groundingP = (images.length || (opts && opts._retried)) ? Promise.resolve(null)
+    var groundingP = (images.length || (opts && (opts._retried || opts._ungrounded))) ? Promise.resolve(null)
       : retrieveGrounding(packId, pkg && pkg.question);
 
     return groundingP.then(function (grounding) {
@@ -577,6 +580,18 @@
           return answer(pkg, ro, onDelta);
         }
         if (!text) return { error: EMPTY_ANSWER };
+        // NO-COVERAGE FALLBACK (owner, 2026-09-04, from a live screenshot). Retrieval can miss: a
+        // misspelt "Spleenomegaly with fever DD and Rx" pulled diverticulitis and dd-cfDNA passages
+        // that still cleared the score floor, and the model obediently reported "not addressed in
+        // the provided reference material". The doctor got nothing. That reply is a verdict on the
+        // retrieval, not an answer, so re-ask ONCE with no reference material: the model answers
+        // from its own weights, marked ungrounded, no gate, no source line (the banner already says
+        // "AI-generated, no sources").
+        if (grounding && !images.length && !(opts && opts._ungrounded) && NO_COVERAGE.test(text)) {
+          var uo = { _ungrounded: true, pack: packId };
+          if (opts) { for (var k2 in opts) { if (!(k2 in uo)) uo[k2] = opts[k2]; } }
+          return answer(pkg, uo, onDelta);
+        }
         // RAG safety net: every number/drug the answer states must be backed by the retrieved
         // book text or the question itself. A doctor-supplied figure ("glucose 32 mg/dL") is not
         // a hallucination; anything else the model adds without support is exactly the failure
@@ -708,13 +723,45 @@
     if (L && L.release) { try { return L.release(); } catch (e) {} }
   }
 
+  /* IDLE UNLOAD (owner, 2026-09-04): a 1 to 4 GB model must not sit resident, warming the phone and
+   * starving every other module, once its work is done. Rules:
+   *   - every tracked call (answer, warm) cancels any pending release and counts itself in flight;
+   *   - when the last in-flight call settles, a release is scheduled: IDLE_MS while the MaiK sheet is
+   *     open (a doctor reading the answer before the follow-up), CLOSE_GRACE_MS once it is closed;
+   *   - sheetClosed() never cuts a running generation: home.js close() deliberately lets an in-flight
+   *     answer finish and persist, so the release waits for it and then applies the close grace;
+   *   - sheetOpened() cancels a pending release, and home.js re-warms there instead of at app start.
+   * The next question after a release simply reloads (ensureLoaded), a few seconds on the 1.1 GB
+   * MaiK Lite, longer on the Bonsai packs; that cost is the price of not holding the memory. */
+  var IDLE_MS = 3 * 60 * 1000, CLOSE_GRACE_MS = 20 * 1000;
+  var _idleT = null, _inflight = 0, _sheetOpen = null, _idleMs = IDLE_MS, _closeMs = CLOSE_GRACE_MS;
+  function clearIdle() { if (_idleT) { clearTimeout(_idleT); _idleT = null; } }
+  function scheduleRelease(ms) {
+    clearIdle();
+    _idleT = setTimeout(function () { _idleT = null; if (_inflight === 0) release(); }, ms);
+  }
+  function settle() { if (_inflight === 0) scheduleRelease(_sheetOpen === false ? _closeMs : _idleMs); }
+  function tracked(fn) {
+    return function () {
+      clearIdle(); _inflight++;
+      var p;
+      try { p = Promise.resolve(fn.apply(null, arguments)); } catch (e) { p = Promise.reject(e); }
+      return p.then(function (r) { _inflight--; settle(); return r; }, function (e) { _inflight--; settle(); throw e; });
+    };
+  }
+  function sheetOpened() { _sheetOpen = true; clearIdle(); }
+  function sheetClosed() { _sheetOpen = false; settle(); }
+  /** Test hook: shorten the timers. */
+  function setIdleMs(idle, close) { _idleMs = idle; _closeMs = (close == null) ? idle : close; }
+
   var API = {
     SYSTEM: SYSTEM, DEFAULT_PACK: DEFAULT_PACK,
-    HISTORY_TURNS: HISTORY_TURNS, buildPrompt: buildPrompt, answer: answer, available: available, currentPack: currentPack,
+    HISTORY_TURNS: HISTORY_TURNS, buildPrompt: buildPrompt, answer: tracked(answer), available: available, currentPack: currentPack,
     isFollowUp: isFollowUp, isGreeting: isGreeting, SYSTEM_GREET: SYSTEM_GREET, stripReasoning: stripReasoning,
     visionReady: visionReady, visionPathFor: visionPathFor, MAX_IMAGES: MAX_IMAGES, SYSTEM_IMAGE: SYSTEM_IMAGE,
     SYSTEM_IMAGE_FOLLOWUP: SYSTEM_IMAGE_FOLLOWUP,
-    warm: warm, isDebugBuild: isDebugBuild, debugProbed: debugProbed, cancel: cancel, release: release
+    warm: tracked(warm), isDebugBuild: isDebugBuild, debugProbed: debugProbed, cancel: cancel, release: release,
+    sheetOpened: sheetOpened, sheetClosed: sheetClosed, setIdleMs: setIdleMs
   };
   if (typeof module !== "undefined" && module.exports) module.exports = API;
   if (typeof window !== "undefined") window.SMD_MAIK_LOCAL = API;

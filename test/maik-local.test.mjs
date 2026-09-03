@@ -538,4 +538,40 @@ function loadWithRag({ tokens, kbLoadFails = false } = {}) {
   ok("and is correctly marked ungrounded", r.grounded === false);
 }
 
+// ── no-coverage fallback (owner, 2026-09-04, from a live screenshot): "not addressed in the
+// provided reference material" is a retrieval verdict, not an answer. Re-ask once ungrounded. ──
+{
+  const { L, calls } = loadWithRag({ tokens: ["Splenomegaly with fever is not addressed in the provided reference material. The evidence covers diverticular disease."] });
+  const r = await L.answer({ question: "Spleenomegaly with Fever DD and RX" }, { pack: "maik-lite" }, null);
+  ok("the model was asked twice", calls.generate.length === 2);
+  ok("the first pass carried the reference material", /Reference material/.test(calls.generate[0].prompt));
+  ok("the second pass carried NO reference material (own weights)", !/Reference material/.test(calls.generate[1].prompt));
+  ok("the result is marked ungrounded and carries no source line", r.grounded === false && !/Source: StewardMD/.test(r.text));
+  const ok1 = loadWithRag({ tokens: ["For penicillin allergy, use doxycycline monotherapy."] });
+  await ok1.L.answer({ question: "Treatment of Pneumonia?" }, { pack: "maik-lite" }, null);
+  ok("a covered answer is not re-asked", ok1.calls.generate.length === 1);
+}
+
+// ── idle unload (owner, 2026-09-04): the model must not stay resident once its work is done ──
+{
+  const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+  const { L, calls } = load();
+  L.setIdleMs(40, 40);
+  await L.answer({ question: "q1" }, { pack: "maik-apex" }, null);
+  const n1 = calls.load.length;
+  await sleep(120);
+  await L.answer({ question: "q2" }, { pack: "maik-apex" }, null);
+  ok("after the idle window the model was released, so the next question reloads it", calls.load.length === n1 + 1);
+  L.sheetOpened();
+  await L.answer({ question: "q3" }, { pack: "maik-apex" }, null);
+  L.sheetOpened();
+  await sleep(120);
+  await L.answer({ question: "q4" }, { pack: "maik-apex" }, null);
+  ok("an open sheet cancels the pending release: no reload", calls.load.length === n1 + 1);
+  L.sheetClosed();
+  await sleep(120);
+  await L.answer({ question: "q5" }, { pack: "maik-apex" }, null);
+  ok("closing the sheet releases after the grace, so the next question reloads", calls.load.length === n1 + 2);
+}
+
 console.log(`\nmaik-local: ${pass} passed, ${fail} failed`);

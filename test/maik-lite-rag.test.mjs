@@ -72,5 +72,24 @@ const ok = (n, c) => { if (c) pass++; else { fail++; console.log("  ✗ FAIL:", 
      g5.ok === false && g5.drugs.includes("amoxicillin"));
 }
 
+// ── query repair (2026-09-04, from a live miss): a misspelt disease and bedside shorthand ──
+{
+  const rows = [
+    { i: 0, text: "Splenomegaly with fever: the differential diagnosis includes malaria, typhoid, infective endocarditis and lymphoma. Treatment follows the cause. ".repeat(3),
+      headings: ["Splenomegaly", "Differential diagnosis"], pages: [120] },
+    { i: 1, text: "Diverticular disease management with fiber and elective surgery for recurrent attacks. ".repeat(4),
+      headings: ["Diverticulitis", "Treatment"], pages: [300] },
+    { i: 2, text: "Noninvasive detection of acute allograft rejection via dd-cfDNA testing in transplant recipients. ".repeat(4),
+      headings: ["Transplant", "Rejection"], pages: [410] }
+  ];
+  const bk = new R.Book(rows);
+  ok("an unknown word is repaired to the book's own spelling (Spleenomegaly -> splenomegaly)", bk.us("Spleenomegaly") === "splenomegaly");
+  ok("a known word is left alone", bk.us("fever") === "fever");
+  ok("short or non-alphabetic tokens are never 'repaired'", bk.us("dd") === "dd" && bk.us("500mg") === "500mg");
+  ok("DD expands to differential diagnosis", R.expand("fever DD and Rx")[0].toLowerCase().includes("differential diagnosis"));
+  const top = bk.search("Spleenomegaly with Fever DD and RX", 3);
+  ok("the live miss now lands on the splenomegaly chunk first, not diverticulitis or dd-cfDNA", top.length && top[0][1] === 0);
+}
+
 console.log(`maik-lite-rag: ${pass} passed, ${fail} failed`);
 if (fail) process.exit(1);
