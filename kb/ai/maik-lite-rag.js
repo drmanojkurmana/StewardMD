@@ -1,0 +1,291 @@
+/* kb/ai/maik-lite-rag.js — window.SMD_MAIK_RAG
+ *
+ * On-device port of ~/MedPsy/run/book_search.py's BM25 retrieval and
+ * ~/MedPsy/run/pipeline.py's evidence gate, so MaiK Lite (the on-device fine-tune)
+ * can ground its answers in the actual book text instead of its own possibly-wrong
+ * recollection, and a post-hoc validator catches any dose/drug it still invents.
+ *
+ * WHY THIS EXISTS: on-device probes (2026-09-03) showed MaiK Lite confidently stating
+ * a WRONG penicillin-allergy alternative (amoxicillin-clavulanate - itself a penicillin)
+ * for "Treatment of Pneumonia?". The blank-answer bug was real and is fixed
+ * (LlamaEngine prefillEmptyThink), but that fix does nothing for CONTENT accuracy - a
+ * 1.7B answering from its own weights, ungrounded, will state a wrong regimen with
+ * total confidence. Doctors expect textbook/guideline-accurate specifics, which only
+ * comes from an answer built from retrieved text and checked against it - the same
+ * architecture the server pipeline already uses. This is that architecture, on-device.
+ *
+ * PORTING DISCIPLINE: every constant and formula below is copied verbatim from the
+ * Python source (same weights, same regexes, same order of operations) rather than
+ * "reimplemented from memory" - the whole night was root causes hiding in exactly
+ * that kind of drift between two supposedly-equivalent implementations.
+ */
+(function (root, factory) {
+  var api = factory();
+  if (typeof module !== "undefined" && module.exports) module.exports = api;
+  else root.SMD_MAIK_RAG = api;
+})(typeof self !== "undefined" ? self : this, function () {
+  "use strict";
+
+  var MIN_SCORE = 6.0;
+  var PAGE_CAP = 2;
+  var MIN_CHUNK = 250;
+  var TOPK = 3;
+
+  var STOP = new Set(("a an the of for in on to and or is are was were be been being with without that this " +
+    "these those it its as at by from what which who whom how why when where do does did can could may " +
+    "might should would will shall have has had not no nor but if then than so such into onto about").split(" "));
+
+  // Conversational filler, query side only (the index is untouched).
+  var QSTOP = new Set(("tell me explain describe give please want know something regarding discuss " +
+    "summarize summarise overview info information brief briefly quick detail details " +
+    "name list some few mention examples example which used use").split(" "));
+
+  // British -> American spelling. The book is American.
+  var UK = [["ae", "e"], ["oe", "e"], ["our", "or"], ["isation", "ization"], ["ise", "ize"], ["yse", "yze"]];
+
+  // Clinical shorthand -> book vocabulary. Order matches SYNONYMS.items() in book_search.py
+  // (insertion order), preserved here in case any future overlap depends on it.
+  var SYNONYMS = {
+    "treatment": ["tx", "rx", "treat", "manage", "first line", "first-line", "give", "prescribe"],
+    "diagnosis diagnostic": ["dx", "workup", "work up", "investigate", "investigation"],
+    "pathogenesis mechanism": ["pathophys", "pathophysiology", "mechanism"],
+    "clinical manifestations symptoms signs": ["presentation", "presents", "features", "sx"],
+    "epidemiology incidence prevalence": ["how common", "frequency"],
+    "complications": ["complication", "sequelae"],
+    "prognosis": ["outcome", "survival"],
+    "contraindications": ["contraindicated", "avoid"],
+    "myocardial infarction": ["mi", "heart attack", "stemi", "nstemi"],
+    "pulmonary embolism": ["pe"],
+    "deep venous thrombosis": ["dvt"],
+    "chronic obstructive pulmonary disease": ["copd"],
+    "congestive heart failure": ["chf", "heart failure"],
+    "chronic kidney disease": ["ckd"],
+    "acute kidney injury": ["aki", "acute renal failure"],
+    "diabetes mellitus": ["dm", "diabetes", "t2dm", "t1dm"],
+    "hypertension": ["htn", "high blood pressure"],
+    "antihypertensive": ["hypertension"],
+    "tuberculosis": ["tb"],
+    "hepatitis b": ["hep b", "hbv"], "hepatitis c": ["hep c", "hcv"], "hepatitis a": ["hep a"],
+    "diabetic ketoacidosis": ["dka"], "end stage renal disease": ["esrd"], "pneumonia": ["pna"],
+    "human immunodeficiency virus": ["hiv"],
+    "rheumatoid arthritis": ["ra"],
+    "systemic lupus erythematosus": ["sle", "lupus"],
+    "inflammatory bowel disease": ["ibd"],
+    "gastroesophageal reflux": ["gerd"],
+    "atrial fibrillation": ["af", "afib"],
+    "cerebrovascular accident stroke": ["cva"],
+    "urinary tract infection": ["uti"],
+    "pelvic inflammatory disease": ["pid"],
+    "community acquired pneumonia": ["cap"],
+    "gastrointestinal": ["gi"],
+    "intravenous": ["iv"], "intramuscular": ["im"], "subcutaneous": ["sc", "subcut"],
+    "lumbar puncture": ["lp"], "hemoglobin": ["hb", "hgb"], "blood pressure": ["bp"], "leukocyte count": ["tlc", "wbc"],
+    "acute tubular necrosis": ["atn"], "electrocardiogram": ["ecg", "ekg"], "creatinine": ["cr"], "potassium": ["k+"],
+    "transfusion": ["transfuse"]
+  };
+  var SYN = [];
+  Object.keys(SYNONYMS).forEach(function (canon) {
+    var words = canon.split(" ");
+    SYNONYMS[canon].forEach(function (s) { SYN.push([s, words]); });
+  });
+
+  var INTENT = [
+    [/\b(treat|treatment|therapy|manage|management|tx|rx|drug|dose|dosing|regimen|first.?line|prescribe|give)\b/i,
+     /treatment|therapy|management|approach to/i],
+    [/\b(diagnos|dx|workup|work up|test|investigat|criteria)\w*\b/i,
+     /diagnosis|diagnostic|laboratory|evaluation|investigation/i],
+    [/\b(cause|causes|etiolog|pathogen|mechanism|pathophys)\w*\b/i,
+     /pathogenesis|etiology|cause|pathophysiology/i],
+    [/\b(symptom|sign|present|manifest|feature)\w*\b/i,
+     /clinical manifestation|symptom|sign|presentation/i],
+    [/\b(complication|prognos|outcome|survival)\w*\b/i,
+     /complication|prognosis|outcome|course/i]
+  ];
+  var NOISE = /further reading|references|bibliography|suggested reading/i;
+  var GENERIC = /^\W*(treatment|therapy|management|diagnosis|diagnostic|clinical\s+manifestation|manifestations|pathogenesis|pathophysiology|etiology|epidemiology|complications|prevention|prognosis|introduction|definition|classification|laboratory|differential\s+diagnosis|evaluation|approach|further\s+reading|references|summary|conclusion|outcome|course|incidence|prevalence|screening|clinical\s+features|signs\s+and\s+symptoms|investigations?)\W*$/i;
+
+  function escapeRegex(s) { return s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"); }
+
+  function inheritTopics(heads) {
+    var out = [], cur = "";
+    for (var i = 0; i < heads.length; i++) {
+      var clean = heads[i].replace(/[■•▪]+/g, " ").trim();
+      if (clean && !GENERIC.test(clean) && !NOISE.test(clean)) cur = clean;
+      out.push(cur);
+    }
+    return out;
+  }
+
+  function toks(s) {
+    var m = (s || "").toLowerCase().match(/[a-z0-9]+/g) || [];
+    var out = [];
+    for (var i = 0; i < m.length; i++) if (!STOP.has(m[i]) && m[i].length > 1) out.push(m[i]);
+    return out;
+  }
+
+  function bigrams(ws) {
+    var out = [];
+    for (var i = 0; i < ws.length - 1; i++) out.push(ws[i] + "_" + ws[i + 1]);
+    return out;
+  }
+
+  /** Substitute, do not append: an abbreviation left in place made a rare token the must-have term. */
+  function expand(q) {
+    var extra = [];
+    for (var i = 0; i < SYN.length; i++) {
+      var surface = SYN[i][0], canon = SYN[i][1];
+      var pat = new RegExp("\\b" + escapeRegex(surface) + "\\b", "i");
+      if (!pat.test(q)) continue;
+      if (surface.length <= 4 || /\b\w\b/.test(surface)) {
+        q = q.replace(new RegExp("\\b" + escapeRegex(surface) + "\\b", "gi"), canon.join(" "));
+      } else {
+        extra = extra.concat(canon);
+      }
+    }
+    return [q, extra.join(" ")];
+  }
+
+  function Book(rows) {
+    this.rows = rows;
+    this.k1 = 1.5; this.b = 0.75;
+    var rawHead = rows.map(function (r) { return (r.headings || []).join(" > "); });
+    this.topic = inheritTopics(rawHead);
+    var self = this;
+    this.docs = this.topic.map(function (t, i) { return t + " " + t + " " + rawHead[i] + " " + rows[i].text; });
+    this.head = this.topic.map(function (t, i) { return (t && t !== rawHead[i]) ? (t + " > " + rawHead[i]) : rawHead[i]; });
+    this.noise = this.head.map(function (h) { return NOISE.test(h); });
+    this.tf = this.docs.map(function (d) {
+      var w = toks(d), c = new Map();
+      for (var i = 0; i < w.length; i++) c.set(w[i], (c.get(w[i]) || 0) + 1);
+      var bg = bigrams(w);
+      for (var i2 = 0; i2 < bg.length; i2++) c.set(bg[i2], (c.get(bg[i2]) || 0) + 1);
+      return c;
+    });
+    this.len = this.tf.map(function (c) {
+      var s = 0; c.forEach(function (v, k) { if (k.indexOf("_") === -1) s += v; }); return s;
+    });
+    var totalLen = this.len.reduce(function (a, b) { return a + b; }, 0);
+    this.avg = totalLen / Math.max(1, this.len.length);
+    var df = new Map();
+    this.tf.forEach(function (c) { c.forEach(function (v, k) { df.set(k, (df.get(k) || 0) + 1); }); });
+    var n = rows.length;
+    this.idf = new Map();
+    df.forEach(function (v, w) { self.idf.set(w, Math.log(1 + (n - v + 0.5) / (v + 0.5))); });
+  }
+
+  /** Query token -> the spelling the book actually uses, if that one is commoner. */
+  Book.prototype.us = function (w) {
+    var best = w, bi = this.idf.has(w) ? this.idf.get(w) : 1e9;
+    for (var i = 0; i < UK.length; i++) {
+      var a = UK[i][0], b = UK[i][1];
+      if (w.indexOf(a) !== -1) {
+        var v = w.split(a).join(b);
+        var vi = this.idf.has(v) ? this.idf.get(v) : 1e9;
+        if (vi < bi) { best = v; bi = vi; }
+      }
+    }
+    return best;
+  };
+
+  Book.prototype.search = function (q, k) {
+    k = k || 5;
+    var self = this;
+    var want = [];
+    for (var i = 0; i < INTENT.length; i++) if (INTENT[i][0].test(q)) want.push(INTENT[i][1]);
+    var rawWords = q.split(/\s+/).filter(Boolean).filter(function (w) { return !QSTOP.has(w.toLowerCase()); });
+    var usq = rawWords.map(function (w) { return self.us(w); }).join(" ");
+    var pair = expand(usq), qExp = pair[0], extra = pair[1];
+    var ql = " " + qExp.toLowerCase() + " ";
+    var topicHit = this.topic.map(function (t) { return !!t && t.length > 4 && ql.indexOf(t.toLowerCase()) !== -1; });
+    var qbase = toks(qExp + " " + extra);
+    var qtBigrams = bigrams(toks(qExp)).filter(function (g) {
+      var parts = g.split("_");
+      return parts.every(function (w) { return (self.idf.get(w) || 0) > 3.0; });
+    });
+    var qt = qbase.concat(qtBigrams);
+    var qw = new Map();
+    for (var j = 0; j < qt.length; j++) qw.set(qt[j], this.idf.get(qt[j]) || 0.0);
+    var totalIdf = 0; qw.forEach(function (v) { totalIdf += v; }); if (!totalIdf) totalIdf = 1.0;
+    var mustCandidates = Array.from(qw.entries()).sort(function (a, b) { return b[1] - a[1]; }).map(function (e) { return e[0]; });
+    var must = qw.size ? mustCandidates.slice(0, 2) : null;
+    var out = [];
+    for (var idx = 0; idx < this.tf.length; idx++) {
+      var c = this.tf[idx], s = 0.0;
+      for (var t2 = 0; t2 < qt.length; t2++) {
+        var f = c.get(qt[t2]);
+        if (!f) continue;
+        var dl = this.len[idx] / this.avg;
+        s += (this.idf.get(qt[t2]) || 0) * f * (this.k1 + 1) / (f + this.k1 * (1 - this.b + this.b * dl));
+      }
+      if (s <= 0 || this.rows[idx].text.length < MIN_CHUNK) continue;
+      var cover = 0;
+      qw.forEach(function (v, w2) { if (c.get(w2)) cover += v; });
+      cover /= totalIdf;
+      s *= (0.4 + 0.6 * cover);
+      if (must && !must.some(function (m) { return c.get(m); }) && !topicHit[idx]) s *= 0.35;
+      if (this.noise[idx]) s *= 0.15;
+      if (topicHit[idx]) s *= 1.3;
+      for (var w3 = 0; w3 < want.length; w3++) { if (want[w3].test(this.head[idx])) { s *= 1.25; break; } }
+      out.push([s, idx]);
+    }
+    out.sort(function (a, b) { return b[0] - a[0]; });
+    var seen = new Map(), top = [];
+    for (var o = 0; o < out.length; o++) {
+      var s2 = out[o][0], i2 = out[o][1];
+      var pages = this.rows[i2].pages;
+      var pg = (pages && pages.length) ? Math.min.apply(null, pages) : (-1 - i2);
+      var cnt = seen.get(pg) || 0;
+      if (cnt >= PAGE_CAP) continue;
+      seen.set(pg, cnt + 1); top.push([s2, i2]);
+      if (top.length === k) break;
+    }
+    return top;
+  };
+
+  Book.prototype.cite = function (i) {
+    var r = this.rows[i];
+    var pages = r.pages || [];
+    var mn = pages.length ? Math.min.apply(null, pages) : null, mx = pages.length ? Math.max.apply(null, pages) : null;
+    var pg = mn == null ? "" : ("p." + mn + (pages.length > 1 && mx !== mn ? ("–" + mx) : ""));
+    return { heading: this.head[i] || "(untitled)", page: pg, text: r.text, chunk: r.i != null ? r.i : i };
+  };
+
+  // ── evidence gate (pipeline.py's evidence_gate/citations, verbatim logic) ──────────────────────
+  var CITE_MARKER = /\[\s*\d+(?:\s*[,;&]\s*\d+)*\s*\]/g;
+  var DRUG_SUFFIX = /\b[a-z]{4,}(?:cillin|mycin|micin|cycline|azole|oxacin|floxacin|pril|sartan|statin|olol|dipine|parin|prazole|triptan|mab|nib|tinib|ciclovir|vir|navir|cept|gliptin|glitazone|barbital|azepam|zolam|caine|tidine|semide|thiazide)\b/gi;
+
+  function drugsOf(t) {
+    var out = new Set(), m;
+    DRUG_SUFFIX.lastIndex = 0;
+    while ((m = DRUG_SUFFIX.exec(t || "")) !== null) out.add(m[0].toLowerCase());
+    return out;
+  }
+
+  /** Every number/drug the answer asserts must be in the evidence or the question - facts the
+   * clinician supplied are not hallucinations, but anything else the model states must be backed
+   * by the retrieved book text. Citation markers are stripped first: "[1,2]" is not the number 1,2. */
+  function evidenceGate(answer, evidence, question) {
+    question = (question || "").replace(/(\d+)k\b/gi, function (m, d) { return d + ",000 " + d + "000"; });
+    var ev = (evidence || "") + "\n" + question;
+    var ans = (answer || "").replace(CITE_MARKER, " ");
+    var an = new Set(ans.match(/\d+(?:[.,]\d+)?/g) || []);
+    var en = new Set(ev.match(/\d+(?:[.,]\d+)?/g) || []);
+    var badN = Array.from(an).filter(function (x) { return !en.has(x); }).sort();
+    var ad = drugsOf(ans), ed = drugsOf(ev);
+    var badD = Array.from(ad).filter(function (x) { return !ed.has(x); }).sort();
+    return { ok: badN.length === 0 && badD.length === 0, nums: badN, drugs: badD };
+  }
+
+  function citationsOf(answer, k) {
+    var cited = new Set(), re = /\[(\d+)\]/g, m;
+    while ((m = re.exec(answer || "")) !== null) cited.add(parseInt(m[1], 10));
+    var arr = Array.from(cited).sort(function (a, b) { return a - b; });
+    return { cited: arr, any: arr.length > 0, inRange: arr.length ? arr.every(function (c) { return c >= 1 && c <= k; }) : null };
+  }
+
+  return {
+    Book: Book, MIN_SCORE: MIN_SCORE, TOPK: TOPK,
+    toks: toks, expand: expand,
+    evidenceGate: evidenceGate, citationsOf: citationsOf, drugsOf: drugsOf
+  };
+});

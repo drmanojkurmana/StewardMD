@@ -443,6 +443,38 @@
     return DEFAULT_PACK;
   }
 
+  /* On-device RAG for MaiK Lite: grounds the answer in the actual book text instead of the
+   * model's own recollection, and a post-hoc gate catches any dose/drug it still invents.
+   *
+   * WHY THIS EXISTS: on-device probes (2026-09-03) showed MaiK Lite confidently stating a WRONG
+   * penicillin-allergy alternative (amoxicillin-clavulanate - itself a penicillin) for
+   * "Treatment of Pneumonia?". The blank-answer/thinking-loop bug was real and is fixed
+   * (prefillEmptyThink), but that does nothing for CONTENT accuracy - an ungrounded 1.7B states a
+   * wrong regimen with total confidence. Doctors expect textbook/guideline-accurate specifics,
+   * which only comes from retrieval + a check against it, same architecture as the server.
+   *
+   * Scoped to maik-lite only tonight, not every noThink pack - that is what was asked for
+   * ("the model we trained"), and widening it needs its own verification pass.
+   */
+  function ragEligible(packId) { return packId === "maik-lite"; }
+
+  /** Resolves {evidenceText, passages, RAG} from the on-device book index, or null if ungrounded
+   * (no KB yet, no hit, or anything failed) - grounding is a strict improvement when available,
+   * never a hard requirement that can break an answer that would otherwise have worked. */
+  function retrieveGrounding(packId, question) {
+    if (!ragEligible(packId) || !question) return Promise.resolve(null);
+    var RAG = (typeof window !== "undefined") && window.SMD_MAIK_RAG;
+    var KB = (typeof window !== "undefined") && window.SMD_MAIK_KB_STORE;
+    if (!RAG || !KB) return Promise.resolve(null);
+    return KB.loadBook(RAG).then(function (bk) {
+      var hits = bk.search(question, RAG.TOPK);
+      if (!hits.length || hits[0][0] < RAG.MIN_SCORE) return null;
+      var passages = hits.map(function (h) { return bk.cite(h[1]); });
+      var evidenceText = passages.map(function (p, n) { return "[" + (n + 1) + "] " + p.text.slice(0, 900); }).join("\n\n");
+      return { evidenceText: evidenceText, passages: passages, RAG: RAG };
+    }).catch(function () { return null; });
+  }
+
   function answer(pkg, opts, onDelta) {
     var L = llama();
     if (!L) return Promise.resolve({ error: "on-device inference needs the native app" });
@@ -456,9 +488,17 @@
     var acc = "";
     var sub = null;
 
+    var groundingP = (images.length || (opts && opts._retried)) ? Promise.resolve(null)
+      : retrieveGrounding(packId, pkg && pkg.question);
+
+    return groundingP.then(function (grounding) {
     return ensureLoaded(packId).then(function () {
       var prompt = buildPrompt(pkg, packId);
       if (!prompt) return { error: "no-package" };
+      if (grounding) {
+        prompt = "Reference material from the StewardMD Knowledge Base:\n" + grounding.evidenceText +
+          "\n\nUsing the reference material above where it applies, answer:\n" + prompt;
+      }
       // Retry-after-blank: nudge the model out of the deliberation attractor it fell into.
       if (opts && opts.nudge) prompt += "\nGive the final answer directly, no deliberation.";
 
@@ -538,12 +578,32 @@
           return answer(pkg, ro, onDelta);
         }
         if (!text) return { error: EMPTY_ANSWER };
+        // RAG safety net: every number/drug the answer states must be backed by the retrieved
+        // book text or the question itself. A doctor-supplied figure ("glucose 32 mg/dL") is not
+        // a hallucination; anything else the model adds without support is exactly the failure
+        // this was built to catch (the live penicillin-allergy contradiction). A gate failure does
+        // NOT surface as an error - it shows the real book passages instead of a wrong paraphrase,
+        // which is strictly more useful to a doctor than either a blank screen or a wrong answer.
+        if (grounding) {
+          var gate = grounding.RAG.evidenceGate(text, grounding.evidenceText, pkg && pkg.question);
+          if (!gate.ok) {
+            var pass = grounding.passages[0];
+            text = "The on-device model's answer could not be verified against the StewardMD Knowledge Base " +
+              "(it stated a figure or drug not found there). Showing the relevant reference passage instead:\n\n" +
+              pass.text.trim();
+          } else {
+            var top = grounding.passages[0];
+            text = text + "\n\nSource: StewardMD Knowledge Base" + (top.page ? (", " + top.page) : "");
+          }
+        }
         return {
           text: text,
-          // ALWAYS empty: this answer used no StewardMD material, so attaching the package's
-          // citations would credit sources the model never saw. That is a lie in a clinical UI.
+          // sources stays [] regardless: the citation UI's own contract (SMD_MaiK.sourceList)
+          // recomputes from pkg.grounding/retrieved/treatment, which this engine does not
+          // populate. A plain "Source: ..." line is appended to the text itself above instead,
+          // which needs no UI change and cannot be silently dropped by a different code path.
           sources: [],
-          grounded: false,
+          grounded: !!grounding,
           engine: "local",
           images: images.length,
           model: (models() && models().PACKS[packId] && models().PACKS[packId].label) || packId,
@@ -564,6 +624,7 @@
     }).then(function (out) {
       if (sub && sub.remove) { try { sub.remove(); } catch (e) {} }
       return out;
+    });
     });
   }
 
