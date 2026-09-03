@@ -75,6 +75,19 @@ intentionally blank there, not guessed. All `scheme_versions.status = 'draft'` (
 review pass hasn't run - see the module's own trade-off note above before flipping
 `smd_govt_schemes` on).
 
+**QA pass across all 15 jurisdictions, 2026-09-04 (remote query, read-only, no data changed):**
+zero-rate percentage is fine everywhere (0-23%, all attributable to genuinely-priced-differently
+rows like haemophilia factor concentrates or "Included in package") EXCEPT one real defect worth
+the owner's attention before the admin review pass: **`treatment_name` is blank on 86% of
+Haryana's 1,290 rows (1,110), 22% of Central PM-JAY's 1,646 (256), and 19% of UP's 2,000 (379)**
+- all three came from `ingest_layout_pdf.py`. Root cause confirmed by direct query: on the
+affected Haryana rows, `package_name` holds a fragment of wrapped criteria text ("dressings etc.
+as deemed necessary;") instead of either the real package name or the procedure name - the
+two-pass parser's leading/trailing text-buffer logic is picking up the wrong wrapped-cell text
+for these specific rows. Not re-parsed tonight (a live fix risks the exact kind of guessing this
+project won't do unsupervised) - flagging precisely so it's fixed with the source PDF in hand,
+not guessed from the DB.
+
 **Telangana (2026-09-04)** — the portal has no reachable package master (confirmed in
 `govschemes_verified_sources_batch1.md`: the rate-revision GO PDFs 404 even from inside the
 portal). The owner supplied the full "Surgery/Therapy List (Consolidated)" as an `.rtf` export
@@ -93,7 +106,25 @@ recorded honestly as owner-supplied, not portal-verified.
 
 **Failed extraction, deliberately NOT loaded (bad data is worse than none):** Punjab and Himachal
 (borderless tables, docling merges rows), Assam CGHS (overlapping text boxes shift prices between
-columns), Ladakh (its PDF is a code crosswalk with no prices). A PaddleOCR-based fallback
+columns), Ladakh (its PDF is a code crosswalk with no prices).
+
+**Punjab re-tried 2026-09-04 with `pdftotext -layout` (the method that already works for Central/
+UP/Haryana) instead of docling — still not safe to load, for a DIFFERENT reason than "borderless
+tables".** `pdftotext -layout` renders it fine; `ingest_layout_pdf.py`'s CODE_RE (`^[A-Z]{2}[0-9]
+{3}[A-Z]$`) matches Punjab's codes (`BM001A` etc.) cleanly. The blocker is its rate-column
+selection: it picks the Nth NUMERIC token found after the code on that line, but Punjab's
+Stratification/Implant free-text columns sometimes CONTAIN numbers too - a stratification band
+like "100000 - 500000" or an implant note like "ASD Device - 62000" adds 1-2 extra numeric tokens
+that aren't rupee columns, and how many appear varies row to row (some rows: 2 numeric tokens
+total; others: 4). A fixed `--rate-column-index` would silently read the wrong figure on some
+rows and the right one on others - exactly the failure mode this project has repeatedly refused
+to ship. Confirmed by inspecting real rows (IN004A: Procedure Price 30,000 / Total Package Price
+150,000, with a stray 120,000+100,000+500,000 from stratification text in between). Needs a
+column-boundary-aware parser (track each numeric token's x-position against the header's actual
+column positions, not just its ordinal position among numbers) before this is trustworthy -
+not attempted tonight, left as a real next step rather than guessed at.
+
+A PaddleOCR-based fallback
 (`scripts/govschemes/paddle_tables.py`, plain OCR + geometric row-reconstruction, since
 PP-StructureV3's full pipeline OOMs on this machine) was trialed on 1 Telangana page before the
 RTF made that moot - it read codes/names/amounts correctly but doesn't merge wrapped-cell
