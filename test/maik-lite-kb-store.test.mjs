@@ -57,18 +57,23 @@ for (let i = 0; i < buf.length; i++) buf[i] = i % 256;
   const require = createRequire(import.meta.url);
   const RAG = require("../kb/ai/maik-lite-rag.js");
 
-  const jsonl = [{ i: 0, text: "x".repeat(300), headings: ["A"], pages: [1] },
-                 { i: 1, text: "y".repeat(300), headings: ["B"], pages: [2] }].map((r) => JSON.stringify(r)).join("\n");
+  // The store requires the EXACT published row count (42,176) - that check is what replaced the
+  // on-device hash. Build a full-size synthetic file for the happy path.
+  const ROWS = 42176;
+  const fullRows = [];
+  for (let i = 0; i < ROWS; i++) fullRows.push({ i, text: "chunk " + i + " " + "x".repeat(260), headings: [i === 0 ? "A" : "B"], pages: [i] });
+  const jsonl = fullRows.map((r) => JSON.stringify(r)).join("\n");
+  const deleted = [];
 
-  function makeKbStore() {
+  function makeKbStore(fileText) {
     const Filesystem = {
       stat: async () => ({ size: 37976783 }),   // matches the module's BYTES constant exactly
       mkdir: async () => ({}),
       readFile: async (o) => {
         // The exact real-world behaviour: base64 by default, raw text only when asked.
-        return { data: o.encoding === "utf8" ? jsonl : Buffer.from(jsonl, "utf8").toString("base64") };
+        return { data: o.encoding === "utf8" ? fileText : Buffer.from(fileText, "utf8").toString("base64") };
       },
-      appendFile: async () => ({}), deleteFile: async () => ({})
+      appendFile: async () => ({}), deleteFile: async (o) => { deleted.push(o.path); return {}; }
     };
     const ls = { getItem: (k) => (k in store ? store[k] : null), setItem: (k, v) => { store[k] = String(v); }, removeItem: (k) => { delete store[k]; } };
     var store = {
@@ -90,12 +95,24 @@ for (let i = 0; i < buf.length; i++) buf[i] = i % 256;
     return mod.exports;
   }
 
-  const KB = makeKbStore();
+  const KB = makeKbStore(jsonl);
   ok("pre-seeded markers mean the mock IS already installed (no network path taken)", KB.installedCached() === true);
   const bk = await KB.loadBook(RAG).catch((e) => { throw new Error("loadBook rejected: " + e.message); });
   ok("loadBook() parses real rows from the file (not zero, the live symptom of the encoding bug)",
-     bk.rows.length === 2);
+     bk.rows.length === ROWS);
   ok("row content actually round-tripped correctly", bk.rows[0].headings[0] === "A" && bk.rows[1].headings[0] === "B");
+
+  // REGRESSION (2026-09-03): the on-device whole-file SHA-256 read the 38 MB file back as one base64
+  // string across the bridge and looped 38M charCodeAt() calls on the main thread - a pegged UI and a
+  // memory spike that got the app jetsam-killed on the fresh-install path. Replaced by the exact row
+  // count: a truncated file must be rejected, deleted, and its markers cleared so the next ask re-downloads.
+  const truncated = fullRows.slice(0, 2).map((r) => JSON.stringify(r)).join("\n");
+  const KB2 = makeKbStore(truncated);
+  let rejected = null;
+  await KB2.loadBook(RAG).catch((e) => { rejected = e; });
+  ok("a truncated file is rejected, not searched", rejected && /corrupt/i.test(rejected.message));
+  ok("the truncated file is deleted so the next ask re-downloads", deleted.some((p) => /maik-lite-kb\.jsonl$/.test(p)));
+  ok("its install markers are cleared", KB2.installedCached() === false);
 }
 
 console.log(`maik-lite-kb-store: ${pass} passed, ${fail} failed`);

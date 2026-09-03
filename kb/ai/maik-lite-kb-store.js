@@ -25,6 +25,9 @@
   var NAME = "maik-lite-kb.jsonl";
   var URL = "https://models.stewardmd.in/maik/maik-lite-kb.jsonl";
   var BYTES = 37976783;             // exact, from the upload
+  var ROWS = 42176;                 // exact line count of the upload; loadBook() requires it
+  // Identifies WHICH published asset was verified (the staleness marker), not a live digest -
+  // see the comment in ensure() for why the on-device hash was removed.
   var SHA256 = "96b4504ac62dfa50d672913aa7d52fbdb5f949de0b52dc9aed2fd73e74be480b";
   var CHUNK_BYTES = 2 * 1024 * 1024;
   var CHUNK_TRIES = 5;
@@ -68,15 +71,6 @@
   function emit() { _subs.slice().forEach(function (fn) { try { fn(_state); } catch (e) {} }); }
   function subscribe(fn) { _subs.push(fn); return function () { _subs = _subs.filter(function (f) { return f !== fn; }); }; }
   function state() { return _state; }
-
-  function sha256Hex(buf) {
-    if (typeof crypto === "undefined" || !crypto.subtle) return Promise.resolve(null);   // web-view without SubtleCrypto: skip, size check still ran
-    return crypto.subtle.digest("SHA-256", buf).then(function (h) {
-      var b = new Uint8Array(h), s = "";
-      for (var i = 0; i < b.length; i++) s += b[i].toString(16).padStart(2, "0");
-      return s;
-    });
-  }
 
   function ensure(onProgress) {
     var F = fs(), fx = fetchImpl();
@@ -130,16 +124,18 @@
         }
         return step(have);
       }).then(function () {
-        return F.readFile({ path: relPath(), directory: DIR });
-      }).then(function (r) {
-        // Real SHA-256 check - affordable at 38 MB, unlike the multi-GB model packs.
-        var bin = atob(r.data), bytes = new Uint8Array(bin.length);
-        for (var i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
-        return sha256Hex(bytes.buffer);
-      }).then(function (hash) {
-        if (hash && hash !== SHA256) {
+        return sizeOf();
+      }).then(function (n) {
+        /* NO whole-file hash on device. The first version read the finished 38 MB file back as
+         * ONE base64 string across the plugin bridge (~50 MB), then looped 38 million charCodeAt()
+         * calls on the main thread to feed SubtleCrypto - minutes of a pegged UI thread and a memory
+         * spike, which on the owner's iPhone was a jetsam kill (found live, 2026-09-03, on the
+         * fresh-install path every earlier test had skipped). Same reasoning as maik-models.js: exact
+         * byte count here, and loadBook() then proves the content by parsing every line and
+         * requiring the exact row count - a truncated or corrupt file cannot pass that. */
+        if (n !== BYTES) {
           return F.deleteFile({ path: relPath(), directory: DIR }).catch(function () {}).then(function () {
-            throw new Error("KB download corrupted (sha256 mismatch), please retry");
+            throw new Error("KB download incomplete (" + n + " of " + BYTES + " bytes), please retry");
           });
         }
         lset(MARK, "1"); lset(MARK_SHA, SHA256);
@@ -175,6 +171,15 @@
       for (var i = 0; i < lines.length; i++) {
         if (!lines[i]) continue;
         try { rows.push(JSON.parse(lines[i])); } catch (e) {}
+      }
+      // The content check that replaced the on-device hash: every line parsed AND the exact row
+      // count. Anything short means a truncated or corrupt file - wipe it and the markers so the
+      // next ask re-downloads instead of searching a partial book forever.
+      if (rows.length !== ROWS) {
+        _rows = null; lset(MARK, "0"); lset(MARK_SHA, "");
+        return F.deleteFile({ path: relPath(), directory: DIR }).catch(function () {}).then(function () {
+          throw new Error("KB file corrupt (" + rows.length + " of " + ROWS + " rows), will re-download");
+        });
       }
       _rows = rows;
       return _rows;
