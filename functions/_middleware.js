@@ -221,6 +221,13 @@ export async function onRequest(context) {
       // script. A CSS 404 degrades silently (no console error, nothing "unavailable") - it just
       // renders as unstyled HTML flowing off the bottom of the page, so it went unnoticed here.
       url.pathname === "/patient-register.css" ||
+      // SAME TRAP as patient-register.js/.css above (a pattern that has already bitten this repo
+      // twice) - the Government Health Schemes tool's own script, stylesheet and flags file must
+      // be allowlisted here too, or the tile opens to nothing with no console error once the
+      // blanket asset 404 below swallows them.
+      url.pathname === "/govschemes.js" ||
+      url.pathname === "/govschemes.css" ||
+      url.pathname === "/govschemes-flags.js" ||
       // Self-hosted fonts (Inter Variable body text + Material Symbols Rounded icon font, both
       // @font-face'd by every PUBLIC_PAGE: opd/opd-display/queue/subscribe). Public, non-sensitive
       // font files - not app code - same reasoning as the brand-image allowlist below. Missing this

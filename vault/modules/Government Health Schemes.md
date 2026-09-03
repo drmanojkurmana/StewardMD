@@ -1,6 +1,6 @@
 ---
 tags: [module, data, clinical]
-status: PHASE 1 in progress. **D1 provisioned 2026-09-02** (`stewardmd-govschemes`, id 2ad07897-93b7-424c-b1fc-e3d9643937f5, binding GOVSCHEMES_DB, region APAC) - schema + all 37 jurisdictions + the first real dataset (Dr. NTR Vaidya Seva Trust, Andhra Pradesh, 3713 packages) are LIVE and verified by remote query (exact-code lookup + FTS both working). API layer, flag file, admin UI not started; the other 35 jurisdictions' source discovery is running (agy). See [[Decisions]] (2026-09-02).
+status: PHASE 1 in progress. **D1 provisioned 2026-09-02** (`stewardmd-govschemes`, id 2ad07897-93b7-424c-b1fc-e3d9643937f5, binding GOVSCHEMES_DB, region APAC) - schema + all 37 jurisdictions + the first real dataset (Dr. NTR Vaidya Seva Trust, Andhra Pradesh, 3713 packages) are LIVE and verified by remote query (exact-code lookup + FTS both working). **2026-09-03: API + UI + flag built and CDP-tested end to end** (fail-safe GET routes at `functions/api/schemes/[[path]].js`, `SMD_GOVSCHEMES` full-screen overlay, `smd_govt_schemes` flag) - see Key files below. Still OFF by default; admin review pass for Phase 1 hasn't run. See [[Decisions]] (2026-09-02).
 flag: smd_govt_schemes - module master, default OFF (data unverified until Phase 1's review pass exists)
 ---
 # Government Health Schemes
@@ -25,6 +25,16 @@ ONCQIS review).
 - `scripts/govschemes/ingest_ntr_vaidya_seva.py` — the first real ingestion adapter: parses the
   Dr. NTR Vaidya Seva Trust XLSX (raw zipfile+XML, NOT openpyxl - see gotcha below) into
   normalized `INSERT` SQL matching the schema above.
+- `functions/_schemes_repo.js` + `functions/api/schemes/[[path]].js` — the read API (2026-09-03).
+  GET-only, fail-safe (DB/binding error -> 200 + `{error:"unavailable"}`, never 5xx): `/jurisdictions`,
+  `/search?q=&state=&limit=`, `/compare?q=`, `/package/<id>`. `rate_tier` is always carried alongside
+  `package_amount` (safety-critical - amounts are only comparable with the tier visible).
+- `govschemes.js` + `govschemes.css` + `govschemes-flags.js` — the UI: `window.SMD_GOVSCHEMES`
+  full-screen overlay (search / state filter / cross-state compare / package detail), same pattern
+  as the Drugs Database overlay in `api.js`. Every detail panel shows the source's
+  `verification_status` and flags anything not literally `"verified"` with a visible amber warning.
+- `test/govschemes-api.test.mjs` (unit, no D1) + `test/run-govschemes-ui.mjs` (real headless-Chrome
+  CDP test against `wrangler pages dev` + local D1) — both green as of 2026-09-03.
 
 ## Design decisions worth knowing
 - **Native codes are never altered.** `packages.treatment_code`/`speciality_code` store exactly
@@ -54,7 +64,28 @@ fallback since government-authored XLSX files are not reliably well-formed.
 ## National scheme registry status
 28/28 states, 8/8 UTs, Central: registry (name/type/code) seeded and live in D1.
 
-**Ingested (live data):** 1/37 — Andhra Pradesh (Dr. NTR Vaidya Seva, 3713 packages).
+**Ingested (live data):** 4/37 — Andhra Pradesh (Dr. NTR Vaidya Seva, 3713 packages), Central
+PM-JAY HBP 2022 (1,646 packages), Haryana AB-PMJAY (1,290 packages), Uttar Pradesh SACHIS
+(2,000 packages), all @ rate_tier `Tier1(X)` / `Tier1 (X)` (verbatim per source header). All
+`scheme_versions.status = 'draft'` (Phase 1's admin review pass hasn't run - see the module's
+own trade-off note above before flipping `smd_govt_schemes` on).
+
+**`scripts/govschemes/ingest_layout_pdf.py`** (2026-09-03) — adapter for HBP-family PDFs that
+docling can't parse (column headers print only on page 1, not on continuation pages). Runs
+`pdftotext -layout`, which keeps column x-position on every page without needing headers, then
+reconstructs rows with a two-pass line-position parser (not a simple line-regex - a table cell
+taller than one row, e.g. the wrapped "Procedure Name" criteria text or the speciality name,
+prints at its OWN vertical center on separate output lines, interleaved with the row it doesn't
+belong to). `treatment_code`/`package_amount`/`rate_tier` are exact (parsed from the same
+physical line, or rejected outright - a garbled/unpriced row is dropped, never guessed at 0).
+`package_name` is kept only when it's IDENTICAL across every procedure sharing a package prefix
+(majority vote) - Haryana's column order puts Procedure Name BEFORE the code, so a naive
+"last token before the code" grab pulls criteria text instead; the vote catches and blanks that.
+`speciality_name` isn't attempted at all (unreliable whether it's inline or wrapped, per state) -
+left blank on purpose. Central/UP: ~87%/85% of code rows carry a fixed rupee amount (the rest
+are genuinely priced "Included in package" / by ventilator-day / per-unit in the source PDF, not
+a parser miss - spot-checked). Haryana: ~69% (same causes, plus more "No change" rows). Read the
+script's own docstring before reusing it on another HBP-style PDF.
 
 **Source inventory (research, not yet ingested):** `functions/db/govschemes_source_inventory.md`,
 compiled by agy 2026-09-02 — **29/35 FOUND** (a package master located on an official govt
