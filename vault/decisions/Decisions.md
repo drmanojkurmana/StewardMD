@@ -2398,3 +2398,24 @@ each of the five CSS fixes, and the string cleanups. Branch stacks on PR #826 be
 Not changed, deliberately: the chip SET itself (which chips exist is product logic, not skin), lazy
 "Know more" (a token-cost decision), the mascot, the sidebar, the empty state. If the owner wants
 fewer chips per answer, that is a separate product call.
+
+Two things the first live check caught (fixed in the same PR): the on-device path renders BARE
+`<p>/<ul>/<li>` with no `.maik-p` class, so the 15px rule had missed it (measured 12.5px live); and
+the "Create prescription" chip is inline-styled as a filled teal button, which beat the skin. The
+skin now targets `.maik-b.ai p/li/strong/em/h1-h4` and overrides `.maik-chip.maik-rx` with
+`!important`, leaving the send button as the one filled accent on the screen.
+
+Owner, same session: "Answer can show Bold Italic etc formats to make it more appealing and
+reading". The renderer (reasoning.js `maikMarkdown`) already turns `**x**`/`*x*` into `<b>`/`<i>`,
+with headings, lists and tables; the gap was that MaiK Lite, a prose fine-tune, emits plain text,
+and its system prompt is the exact training prompt and stays untouched. `maik-local.js
+emphasize()` adds it deterministically instead: drug names (the evidence gate's own suffix regex
+via `SMD_MAIK_RAG.drugsOf`, with a fallback), doses and durations are bolded, only when the model
+produced no `**` of its own, after the gate (it changes no figure), never on the Source line, and
+never on a verbatim quoted book passage (the gate-fail path shows the book as written). Also
+applied to on-device web-research answers. 10 tests.
+
+Verified live on the owner's iPhone 15 Pro, fresh question, MaiK Lite: assistant prose unboxed
+(border none, transparent, no shadow, 100% width), MAIK label and per-answer disclaimer gone, prose
+measured 15px/24.75px, user bubble 14.5px, two `<b>` drug names in the answer, prescription chip
+transparent with muted text, no emoji in chips, app process unchanged through the test.
