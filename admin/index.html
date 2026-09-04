@@ -93,6 +93,7 @@
         <a data-p="config">🎛️ Remote config</a>
         <a data-p="crashes">🐞 Crashes <span class="b" id="navCrash">0</span></a>
         <a data-p="analytics">📈 Analytics</a>
+        <a data-p="feedback">👍 MaiK feedback <span class="b" id="navFb">0</span></a>
         <div class="grp">Content</div>
         <a data-p="notif">🔔 Publish &amp; notify</a>
         <a data-p="sources">📚 Medical sources</a>
@@ -566,6 +567,17 @@
           <div class="msg" id="anMsg"></div><div id="anBox" style="margin-top:12px"></div>
         </div>
       </div>
+
+      <!-- MAIK FEEDBACK -->
+      <div class="pane" id="pane-feedback" data-need-auth>
+        <div class="card">
+          <div style="display:flex;align-items:center"><b style="flex:1">"Was this helpful?" feedback</b><button class="ghost" id="fbReload" style="padding:7px 11px">Reload</button><button class="ghost" id="fbClear" style="padding:7px 11px;color:var(--red);border-color:var(--red)">Clear log</button></div>
+          <div class="hint" style="margin:4px 0 4px">Every Yes/No tap on a MaiK answer, and the doctor's own reason when they say No. Anonymous — no identity, no patient detail.</div>
+          <div class="msg" id="fbMsg"></div>
+          <div id="fbAgg" style="display:flex;gap:18px;margin:10px 0;font:600 13px var(--sans,system-ui)"></div>
+          <div id="fbBox"></div>
+        </div>
+      </div>
     </main>
   </div>
 
@@ -577,8 +589,8 @@
   var FB={apiKey:"AIzaSyCaqxRQfMtq95j0J_vLj7EF4sxrN0FhO0I",authDomain:"stewardmd-498ec.firebaseapp.com",projectId:"stewardmd-498ec",storageBucket:"stewardmd-498ec.firebasestorage.app",messagingSenderId:"911280405587",appId:"1:911280405587:web:d09038e15e98d69dc79aa6"};
   var auth=null; try{ firebase.initializeApp(FB); auth=firebase.auth(); }catch(e){}
   var vFilter="pending", activePane="overview", _aiStructured=null;
-  var PANES=["overview","support","userctl","aictl","config","crashes","analytics","notif","sources","logs","verif","pro","ota","push","watch","ai","kardiox","xa","tenants"];
-  var TITLES={overview:"Overview",support:"Support tickets",userctl:"User control",aictl:"AI control",config:"Remote config",crashes:"Crashes",analytics:"Usage analytics",notif:"Publish & notify",sources:"Medical sources",logs:"Crawl logs",verif:"Doctor verifications",pro:"Payments & Billing",ota:"App updates (OTA)",push:"Push blast",watch:"Lab-watch",ai:"AI usage",kardiox:"KardiQ X training",xa:"Experimental Features",tenants:"Medical colleges"};
+  var PANES=["overview","support","userctl","aictl","config","crashes","analytics","feedback","notif","sources","logs","verif","pro","ota","push","watch","ai","kardiox","xa","tenants"];
+  var TITLES={overview:"Overview",support:"Support tickets",userctl:"User control",aictl:"AI control",config:"Remote config",crashes:"Crashes",analytics:"Usage analytics",feedback:"MaiK feedback",notif:"Publish & notify",sources:"Medical sources",logs:"Crawl logs",verif:"Doctor verifications",pro:"Payments & Billing",ota:"App updates (OTA)",push:"Push blast",watch:"Lab-watch",ai:"AI usage",kardiox:"KardiQ X training",xa:"Experimental Features",tenants:"Medical colleges"};
   var TYPE2CAT={guideline:"guideline",drug_approval:"approval",safety_alert:"safety",trial:"study",general:"general"};
   function esc(s){return String(s==null?"":s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");}
   function when(ts){ if(!ts)return""; if(typeof ts==="number"){var s=Math.floor((Date.now()-ts)/1000); if(s<3600)return Math.floor(s/60)+"m ago"; if(s<86400)return Math.floor(s/3600)+"h ago"; return new Date(ts).toLocaleDateString();} return String(ts).slice(0,16).replace("T"," "); }
@@ -1148,7 +1160,25 @@
   }).catch(function(){ say("anMsg","err","Failed."); }); }
   $("anReload").onclick=anLoad;
 
-  function refresh(pane){ if(!(auth&&auth.currentUser))return; if(pane==="overview")ovLoad(); else if(pane==="support")supLoad(); else if(pane==="userctl"){ try{ if(!$("ucEmail").value) $("ucEmail").focus(); }catch(e){} } else if(pane==="aictl")aicLoad(); else if(pane==="config")cfgLoad(); else if(pane==="crashes")crLoad(); else if(pane==="analytics")anLoad(); else if(pane==="notif")nLoad(); else if(pane==="sources")sLoad(); else if(pane==="logs")lLoad(); else if(pane==="verif")vLoad(); else if(pane==="ota")otaLoad(); else if(pane==="watch"){} else if(pane==="push")pStatus(); else if(pane==="ai")aiLoad(); else if(pane==="kardiox")kxLoad(); else if(pane==="xa")xaLoad(); else if(pane==="tenants")tnLoad(); else if(pane==="pro"){ try{ if(!$("etEmail").value) $("etEmail").value=(auth.currentUser.email||""); }catch(e){} try{ pbLoad(); }catch(e){} try{ bcLoad(); }catch(e){} try{ cpnLoad(); }catch(e){} } }
+  // ---- MaiK feedback ("Was this helpful?") ----
+  function fbLoad(){ say("fbMsg","","Loading…"); api(AI+"/maik-feedback").then(function(x){ if(x.s!==200){ say("fbMsg","err",forbid(x)); return; } say("fbMsg","","");
+    var d=x.d||{}, agg=d.agg||{up:0,down:0,withReason:0,total:0}, entries=d.entries||[];
+    var nb=$("navFb"); if(nb){ nb.textContent=agg.total||0; nb.classList.toggle("on",(agg.down||0)>0); }
+    var pct=agg.total?Math.round(100*(agg.up||0)/agg.total):0;
+    $("fbAgg").innerHTML='<span>👍 '+esc(String(agg.up||0))+'</span><span>👎 '+esc(String(agg.down||0))+'</span><span style="color:var(--mut)">'+esc(String(pct))+'% helpful</span><span style="color:var(--mut)">'+esc(String(agg.withReason||0))+' with a reason</span>';
+    if(!entries.length){ $("fbBox").innerHTML='<div class="hint">No feedback yet.</div>'; return; }
+    $("fbBox").innerHTML=entries.map(function(e){
+      var when=e.ts?new Date(e.ts).toLocaleString():"";
+      var tag=e.helpful==="down"?'<span class="pill" style="color:var(--red);border-color:var(--red);pointer-events:none">No</span>':'<span class="pill on" style="pointer-events:none">Yes</span>';
+      return '<div style="padding:9px 0;border-bottom:1px solid var(--line)"><div style="display:flex;gap:8px;align-items:center">'+tag+'<b style="flex:1;word-break:break-word">'+esc(e.question||"(no question)")+'</b></div>'
+        +(e.reason?'<div style="margin-top:4px;word-break:break-word">"'+esc(e.reason)+'"</div>':'')
+        +'<div class="hint" style="word-break:break-word;margin-top:2px">'+esc([e.engine,e.pack,when].filter(Boolean).join(" · "))+'</div></div>';
+    }).join("");
+  }).catch(function(){ say("fbMsg","err","Failed."); }); }
+  $("fbReload").onclick=fbLoad;
+  $("fbClear").onclick=function(){ if(!confirm("Clear all MaiK feedback?"))return; api(AI+"/maik-feedback",{method:"POST",headers:{"Content-Type":"application/json"},body:"{}"}).then(function(){ fbLoad(); }); };
+
+  function refresh(pane){ if(!(auth&&auth.currentUser))return; if(pane==="overview")ovLoad(); else if(pane==="support")supLoad(); else if(pane==="userctl"){ try{ if(!$("ucEmail").value) $("ucEmail").focus(); }catch(e){} } else if(pane==="aictl")aicLoad(); else if(pane==="config")cfgLoad(); else if(pane==="crashes")crLoad(); else if(pane==="analytics")anLoad(); else if(pane==="feedback")fbLoad(); else if(pane==="notif")nLoad(); else if(pane==="sources")sLoad(); else if(pane==="logs")lLoad(); else if(pane==="verif")vLoad(); else if(pane==="ota")otaLoad(); else if(pane==="watch"){} else if(pane==="push")pStatus(); else if(pane==="ai")aiLoad(); else if(pane==="kardiox")kxLoad(); else if(pane==="xa")xaLoad(); else if(pane==="tenants")tnLoad(); else if(pane==="pro"){ try{ if(!$("etEmail").value) $("etEmail").value=(auth.currentUser.email||""); }catch(e){} try{ pbLoad(); }catch(e){} try{ bcLoad(); }catch(e){} try{ cpnLoad(); }catch(e){} } }
 
   // ---- Medical colleges (tenant provisioning; owner-gated /api/tenants) ----
   function tnRow(t){

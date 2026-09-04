@@ -25,14 +25,30 @@ UpToDate-style answer. Aurora bottom-sheet UI. Account-scoped on-device conversa
 - **What the engine routes** (2026-09-04): explain, explainGrounded, explainGroundedStream, refine,
   vivaJudge (CliniX viva examiner) and extract kind `opd-suggest` (OPD "Ask MaiK Pro" differential),
   the last two via `maik-local.js` `vivaJudge()`/`opdSuggest()` (server prompts + whitelisting
-  ported). Still cloud-only: every other extract kind (voice, translate, MaiK Ask), research,
-  vision/OCR, transcribe, ICU correlate/evidence/imagingSummary.
+  ported). Still cloud-only: every other extract kind (voice, translate, MaiK Ask), vision/OCR,
+  transcribe, ICU correlate/evidence/imagingSummary.
+- **"Research on the web" is cloud (Gemini) ONLY on MaiK Cloud** (2026-09-04, owner: "cant charge
+  them for snippet conversion"): on the local engine, `SMD_AI.researchSnippets()` fetches TinyFish's
+  raw sources for free (`/research` with `snippetsOnly:true`, no Gemini, no quota) and
+  `maik-local.js` `webAnswer()` writes the prose on device, gated by the same `evidenceGate` the
+  book RAG uses. Evidence Review (`mode:"evidence-review"`) is untouched, always cloud. The
+  server's own Gemini-grounded fallback for a TinyFish miss is gone; a miss is now an honest
+  "no results" (no more `RESEARCH_SYS`/`web-grounded`).
 - **Model lifecycle** (2026-09-04): warmed when the MaiK sheet opens (`openAskAi`), released 20 s
   after `close()` or 3 min idle with the sheet open, never mid-generation. No warm-up at app start.
 - `kb/ai/maik-kb.js` (`window.MaiKKB`) — deterministic KB answer engine (canonical+fuzzy+abbrev, 85% gate)
 - `functions/api/ai/[[path]].js` — server: `/refine` (router), `/explain` (Gemini), `/research` (web)
 - `kb/ai/steward-ai.browser.js` — client SDK helpers. NOTE: `window.SMD_AI` itself is defined in
   `reasoning.js:3771` and that is its ONLY assignment (verified 2026-08-20) — this file does not set it
+- **Chat skin** (2026-09-04): `body.mkchat`, default ON, `?mkchat=0` off / `?mkchat=1` on (key
+  `smd_mkchat`). Presentation-only CSS in home.js (block "MaiK CHAT skin"): unboxed assistant prose,
+  no per-answer MAIK label or disclaimer line (the banner is the one disclaimer), 15px text, quiet
+  outline chips, no skeleton bars. Independent of the older off-by-default `body.mk2` skin.
+- **"Was this helpful?" feedback** (2026-09-04): `home.js` `_answerFeedback` posts to
+  `/api/maik-feedback` (`functions/_maik_feedback.js`, anonymous, KV ring buffer + aggregate); a "No"
+  asks why and amends the same entry if the doctor types a reason. Admin: stewardmd.in/admin →
+  "MaiK feedback" pane, `admin/maik-feedback` in `functions/api/ai/[[path]].js` (owner-gated, the
+  only place the free-text reasons are readable).
 
 ## Flow detail
 `send()` → local `maikRoute` → `runClinical()`: [[MaiK Intent Firewall]] gate → clinical-dialogue → instant KB → `/refine` router → KB retry → `/explain` Gemini.

@@ -118,6 +118,7 @@ import { proFromRequest } from "../../_entitlement.js";
 import { normalizeResearchQuery, researchCacheKey, RESEARCH_PUBTYPE_FILTER, researchTermFor, researchKeywords, sourceOnTopic, researchTopic } from "../../_research.js";
 import { ownerOK } from "../../_adminauth.js";
 import { getClientErrors, clearClientErrors } from "../../_clientlog.js";
+import { getFeedback, getFeedbackAgg, clearFeedback } from "../../_maik_feedback.js";
 import { getRemoteConfig, setRemoteConfig } from "../../_remoteconfig.js";
 import { lookupUidByEmail, getUserRecord, setUserDisabled, mergeUserClaims } from "../../_fbadmin.js";
 import { getAnalytics } from "../../_analytics.js";
@@ -657,15 +658,13 @@ const TUTOR_SYS =
   "5. Do not mention the AI provider, model, retrieval or any internal detail." + MEDICAL_ONLY;
 
 // Web-research mode (opt-in, token-frugal): used ONLY when the topic is not in StewardMD's KB
-// and the clinician explicitly taps "Research on the web". Gemini does the Google search +
-// synthesis in one grounded call; we keep the answer short to conserve tokens.
+// and the clinician explicitly taps "Research on the web". TinyFish does the search; Gemini writes
+// the answer from the returned snippets (RESEARCH_SYS_SNIPPETS below) - this is the ONLY web-search
+// path now (owner, 2026-09-04: the Gemini-grounded fallback for a TinyFish miss was removed as the
+// slower, costlier of the two; a TinyFish miss is now an honest "no results").
 // Web-research answers must read like a knowledgeable medical AI (OpenEvidence/ChatGPT), NOT a
 // search-results digest: fluent, complete, confident prose that happens to cite sources — never a
 // terse bullet list of snippet fragments. The UI shows the advisory/verify note, so no disclaimer.
-const RESEARCH_SYS =
-  "You are MaiK, a knowledgeable clinical AI assistant for qualified doctors. The clinician has asked a question StewardMD's own knowledge base does not cover — answer it directly, thoroughly and naturally, the way a sharp senior colleague would and the way a modern medical AI does, using web search to ground current, authoritative specifics. " +
-  "Lead with the direct answer, then give enough well-organised detail to be genuinely useful at the bedside: flowing prose, with short bullets only for real lists (drugs, doses, steps, differentials) and a brief markdown heading only when it truly helps. Bold key terms sparingly. Give standard adult doses/routes/durations where relevant. " +
-  "Be honest in one line if evidence is weak or sources disagree. Never fabricate a specific figure or a citation. Do not describe your sources or process, and do NOT append any disclaimer — the interface already shows one." + MEDICAL_ONLY;
 // FAST PATH prompt: the search is done externally (TinyFish); the model writes the ANSWER from its
 // own medical knowledge and uses the provided results to ground specifics + cite [n] — it must NOT
 // merely summarise the snippets or limit itself to what they happen to mention.
@@ -1068,7 +1067,7 @@ export async function onRequest(context) {
 
   // AI Control Center admin console APIs (owner-gated): model switch, quota editor, global rollup,
   // emergency kill switch, runtime budget, audit log. Every mutation is written to the audit log.
-  if (seg === "admin/model" || seg === "admin/ai-usage" || seg === "admin/limits" || seg === "admin/emergency" || seg === "admin/budget" || seg === "admin/audit" || seg === "admin/abuse" || seg === "admin/clientlog" || seg === "admin/config" || seg === "admin/analytics" || seg === "admin/support" || seg === "admin/support-reply" || seg === "admin/maik-config") {
+  if (seg === "admin/model" || seg === "admin/ai-usage" || seg === "admin/limits" || seg === "admin/emergency" || seg === "admin/budget" || seg === "admin/audit" || seg === "admin/abuse" || seg === "admin/clientlog" || seg === "admin/config" || seg === "admin/analytics" || seg === "admin/support" || seg === "admin/support-reply" || seg === "admin/maik-config" || seg === "admin/maik-feedback") {
     const url = new URL(request.url);
     if (!(await aiAdminAuthed(request, env, url))) return json({ error: "forbidden" }, 403);
     const store = usageKv(env);
@@ -1080,6 +1079,14 @@ export async function onRequest(context) {
     if (seg === "admin/clientlog") {
       if (request.method === "POST") { await clearClientErrors(store); await auditRecord(store, "clientlog", "cleared", actorId, Date.now()); }
       return json({ errors: await getClientErrors(store) });
+    }
+
+    // "Was this helpful?" feedback (owner, 2026-09-04): entries include the doctor's own free-text
+    // reason for a "No" - the ONLY admin route that returns it (the public /api/maik-feedback GET is
+    // counts-only, same privacy split as ws-feedback.js).
+    if (seg === "admin/maik-feedback") {
+      if (request.method === "POST") { await clearFeedback(store); await auditRecord(store, "maik-feedback", "cleared", actorId, Date.now()); }
+      return json({ entries: await getFeedback(store), agg: await getFeedbackAgg(store) });
     }
 
     if (seg === "admin/analytics") return json(await getAnalytics(store, 14, Date.now()));
@@ -1942,6 +1949,17 @@ export async function onRequest(context) {
         return json({ text: text, mode: "evidence-review", sources: sources, cached: false, usage: { module: "research", used: usedNow, limit: capNow } });
       }
 
+      // SNIPPETS-ONLY (owner, 2026-09-04): the on-device model does the snippet-to-prose conversion
+      // for free on the offline/local engine - "we can't charge them for snippet conversion into
+      // clean language". TinyFish itself costs nothing (see functions/_search.js), so this path makes
+      // NO Gemini call and burns no AI-usage quota; it is a plain search proxy. Gemini stays the
+      // writer only when MaiK Cloud is the selected engine (the ordinary branch below).
+      if (body.snippetsOnly) {
+        let raw = [];
+        try { raw = await tinyfishSearch(env, q); } catch (e) { raw = []; }
+        return json({ sources: raw.map(function (r) { return { title: r.title, url: r.url, site: r.site, snippet: r.snippet }; }) });
+      }
+
       const gate = await checkQuota(env, request, "general");
       if (!gate.ok) return json({ error: "quota", reason: gate.reason, needsPro: !!gate.needsPro, message: gate.message }, gate.needsPro ? 402 : 429);
       const RES_MAX = Math.max(256, Math.min(1600, Number(env.MAIK_RESEARCH_MAX_OUTPUT) || 1200));
@@ -1949,26 +1967,29 @@ export async function onRequest(context) {
       let results = [];
       try { results = await tinyfishSearch(env, q); } catch (e) { results = []; }
 
-      let text = null, mode = "web", sources = [], inTok = estTokens(RESEARCH_SYS.length + q.length);
-      if (results.length) {
-        const ctx = results.map(function (r, i) {
-          return "[" + (i + 1) + "] " + r.title + (r.site ? " (" + r.site + ")" : "") + "\n" + (r.snippet || "") + "\n" + r.url;
-        }).join("\n\n");
-        const prompt = RESEARCH_SYS_SNIPPETS + "\n\nQuestion: " + q + "\n\nWeb results:\n" + ctx;
-        inTok = estTokens(prompt.length);
-        try {
-          text = await callGemini(env, [{ text: prompt }], RES_MAX, { temperature: 0.2 });
-          sources = results.map(function (r) { return { title: r.title, url: r.url, site: r.site }; });
-          mode = "web-tinyfish";
-        } catch (e) { text = null; }   // summarise failed → fall through to Gemini grounding
-      }
-      if (!text) {
-        inTok = estTokens(RESEARCH_SYS.length + q.length);
-        try { text = await callGemini(env, [{ text: RESEARCH_SYS + "\n\nQuestion: " + q }], RES_MAX, { webSearch: true, temperature: 0.3 }); mode = "web-grounded"; }
-        catch (e) { try { console.warn("[ai] research-failed", String(e && e.message || e).slice(0, 200)); } catch (_e) {} await recordUsage(gate, { inTok: inTok, outTok: 0, status: "failed" }); return json({ error: "research-failed" }, 502); }
+      // No Gemini-grounded fallback (owner, 2026-09-04, removed): it was the slow multi-hop path and
+      // TinyFish already covers the same ground faster and at $0 per search (see functions/_search.js
+      // and the tinyfishSearch comment). If TinyFish itself returns nothing, that is an honest
+      // "no web results" rather than a second, more expensive attempt - the client's existing
+      // no-text branch already shows a clear retry, exactly as a real network miss would.
+      if (!results.length) return json({ text: null, mode: "web", sources: [] });
+
+      const ctx = results.map(function (r, i) {
+        return "[" + (i + 1) + "] " + r.title + (r.site ? " (" + r.site + ")" : "") + "\n" + (r.snippet || "") + "\n" + r.url;
+      }).join("\n\n");
+      const prompt = RESEARCH_SYS_SNIPPETS + "\n\nQuestion: " + q + "\n\nWeb results:\n" + ctx;
+      const inTok = estTokens(prompt.length);
+      let text = null, sources = [];
+      try {
+        text = await callGemini(env, [{ text: prompt }], RES_MAX, { temperature: 0.2 });
+        sources = results.map(function (r) { return { title: r.title, url: r.url, site: r.site }; });
+      } catch (e) {
+        try { console.warn("[ai] research-failed", String(e && e.message || e).slice(0, 200)); } catch (_e) {}
+        await recordUsage(gate, { inTok: inTok, outTok: 0, status: "failed" });
+        return json({ error: "research-failed" }, 502);
       }
       await recordUsage(gate, { inTok: inTok, outTok: estTokens((text || "").length), status: "success" });
-      return json({ text: text, mode: mode, sources: sources });
+      return json({ text: text, mode: "web-tinyfish", sources: sources });
     }
     if (seg === "summary") {
       // Whole-patient timeline summary (Pro, module "summary" = 15/day). Factual overview ONLY from the

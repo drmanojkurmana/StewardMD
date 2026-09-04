@@ -6,7 +6,9 @@
  *      "aababcabcd..." on screen. reasoning.js replay() calls onDelta(full.slice(0, i)).
  */
 import { readFileSync } from "node:fs";
+import { createRequire } from "node:module";
 
+const require = createRequire(import.meta.url);
 let pass = 0, fail = 0;
 const ok = (n, c) => { if (c) pass++; else { fail++; console.log("  ✗ FAIL:", n); } };
 const src = (f) => readFileSync(new URL("../" + f, import.meta.url), "utf8");
@@ -617,6 +619,178 @@ function loadWithRag({ tokens, kbLoadFails = false } = {}) {
   ok("lists are plain bounded strings and unknown fields never pass through", r.investigations.length === 3 && typeof r.investigations[2] === "string" && !("evil" in r));
   ok("the OPD prompt is the system prompt and the assessment is the user turn", /OPD decision support/.test(o.calls.generate[0].system) && /=== ASSESSMENT ===\nFever 3 days/.test(o.calls.generate[0].prompt));
   ok("empty assessment is refused", (await o.L.opdSuggest("   ")).error === "no-text");
+}
+
+// ── web research on device (owner, 2026-09-04): "we can't charge them for snippet conversion into
+// clean language" for the local/offline engine, so the on-device model writes the answer from
+// TinyFish's raw sources instead of Gemini. Uses the REAL kb/ai/maik-lite-rag.js evidenceGate (not
+// loadWithRag's book-specific "amoxicillin only" stub), because a web answer's evidence is arbitrary
+// search-snippet text, not the book, and the gate must genuinely catch an unsupported drug in it. ──
+function loadForWeb({ tokens }) {
+  const calls = { generate: [] };
+  const Llama = {
+    available: async () => ({ available: true, loaded: true }),
+    load: async () => ({ loaded: true }),
+    generate: async (o) => { calls.generate.push(o); return { text: tokens.join(""), ms: 500 }; },
+    cancel: async () => ({}), release: async () => ({ released: true }),
+    addListener: () => ({ remove: () => {} })
+  };
+  const win = {
+    Capacitor: { isNativePlatform: () => true, Plugins: { Llama } },
+    SMD_MAIK_RAG: require("../kb/ai/maik-lite-rag.js"),
+    SMD_MAIK_MODELS: { PACKS: { "maik-lite": { label: "MAiK Lite", nCtx: 4096, nPredict: 512, noThink: true } },
+      pathFor: async () => "/var/mobile/Data/maik-models/maik-lite.gguf", totalBytes: () => 1.1e9 }
+  };
+  new Function("window", SRC)(win);
+  return { L: win.SMD_MAIK_LOCAL, calls };
+}
+{
+  const sources = [
+    { title: "CDC pneumonia treatment guidance", url: "https://cdc.gov/pna", site: "CDC", snippet: "Amoxicillin 500 mg three times daily for outpatient CAP." },
+    { title: "Up-to-date pneumonia review", url: "https://example.org/pna", site: "Example", snippet: "Doxycycline is an alternative for penicillin-allergic patients." }
+  ];
+  const w = loadForWeb({ tokens: ["For outpatient CAP, amoxicillin 500 mg three times daily is first-line [1]; doxycycline is the alternative for penicillin allergy [2]."] });
+  const r = await w.L.webAnswer("Treatment of community acquired pneumonia", sources, { pack: "maik-lite" });
+  ok("web research ran with the web-research prompt as the system prompt", /knowledgeable clinical AI/.test(w.calls.generate[0].system));
+  ok("the prompt carries the numbered web results, not the book-RAG wrapper", /\[1\] CDC pneumonia treatment guidance/.test(w.calls.generate[0].prompt) && !/Reference material from the StewardMD Knowledge Base/.test(w.calls.generate[0].prompt));
+  ok("a gate-passing answer is returned as-is, engine local, with the source list", r.engine === "local" && r.mode === "web-local" && r.sources.length === 2 && r.sources[0].url === sources[0].url);
+  ok("no book source line is ever appended to a web answer", !/Source: StewardMD Knowledge Base/.test(r.text));
+
+  const bad = loadForWeb({ tokens: ["Use azithromycin 250 mg once daily instead."] });
+  const rb = await bad.L.webAnswer("Treatment of community acquired pneumonia", sources, { pack: "maik-lite" });
+  ok("a drug not in the web results is caught by the SAME evidence gate the book RAG uses", /could not be verified against the web results/.test(rb.text) && /CDC pneumonia treatment guidance/.test(rb.text));
+
+  ok("no question is refused before any generation", (await w.L.webAnswer("", sources)).error === "no-question");
+  ok("no sources is an honest no-results, never a hallucinated web answer", (await w.L.webAnswer("Treatment of CAP", [])).error === "no-results");
+}
+
+// ── readable emphasis (owner, 2026-09-04): bold drug names, doses and durations when the model
+// emitted plain text; leave the model's own markdown, and the Source line, alone ──
+{
+  const { L: LE } = load();
+  const e1 = LE.emphasize("Give amoxicillin 500 mg three times daily for 7 days. Alternative: doxycycline 100 mg once daily for 7 to 14 days.\nSource: StewardMD Knowledge Base - based on standard medical resources.");
+  ok("drug names are bolded (drug-suffix regex)", /\*\*amoxicillin\*\*/.test(e1) && /\*\*doxycycline\*\*/.test(e1));
+  ok("doses are bolded", /\*\*500 mg\*\*/.test(e1) && /\*\*100 mg\*\*/.test(e1));
+  ok("durations and ranges are bolded", /\*\*7 days\*\*/.test(e1) && /\*\*7 to 14 days\*\*/.test(e1));
+  ok("the Source line is never touched", /\nSource: StewardMD Knowledge Base - based on standard medical resources\.$/.test(e1) && !/\*\*Source/.test(e1));
+  ok("nothing is double-wrapped", !/\*\*\*\*/.test(e1) && !/\*\*\*\*/.test(e1));
+  const already = "Use **amoxicillin 500 mg** for 7 days.";
+  ok("a model that already formatted is left exactly as it wrote", LE.emphasize(already) === already);
+  ok("empty and null are safe", LE.emphasize("") === "" && LE.emphasize(null) === "");
+  const gr = "Hi, I'm MaiK. How can I help with a clinical question today?";
+  ok("a greeting with no drug/dose/duration is unchanged", LE.emphasize(gr) === gr);
+  ok("the renderer contract holds: ** pairs are balanced", ((e1.match(/\*\*/g) || []).length % 2) === 0);
+  // Through answer(): a plain-text model reply comes back with emphasis markers the renderer turns into <b>.
+  const w = load({ tokens: ["For otitis media give amoxicillin 90 mg/kg per day for 10 days."] });
+  const r = await w.L.answer({ question: "Treatment of otitis media?" }, { pack: "maik-apex" }, null);
+  ok("answer() emphasizes an unformatted on-device reply", /\*\*amoxicillin\*\*/.test(r.text) && /\*\*90 mg\/kg\*\*/.test(r.text) && /\*\*10 days\*\*/.test(r.text));
+}
+
+// ── retrieval drift guard (owner battery, 2026-09-04) ──
+// Real BM25 (kb/ai/maik-lite-rag.js) over three synthetic chunks that reproduce the two live
+// failures: a DEFINITIONS chapter out-ranking treatment for a UTI ask, and a hepatitis-in-pregnancy
+// passage answering a UTI pregnancy follow-up (lamivudine). Anchors must exclude both.
+function loadRealRag({ tokens, rows }) {
+  const calls = { generate: [] };
+  const Llama = {
+    available: async () => ({ available: true, loaded: true }), load: async () => ({ loaded: true }),
+    generate: async (o) => { calls.generate.push(o); return { text: tokens.join(""), ms: 500 }; },
+    cancel: async () => ({}), release: async () => ({ released: true }), addListener: () => ({ remove: () => {} })
+  };
+  const RAGm = require("../kb/ai/maik-lite-rag.js");
+  // A three-chunk corpus cannot clear the production score floor (tuned for 42,176 chunks); the
+  // floor is not what these tests are about, so lower it and keep everything else real.
+  const RAG = Object.assign({}, RAGm, { MIN_SCORE: 0.5 });
+  const win = {
+    Capacitor: { isNativePlatform: () => true, Plugins: { Llama } },
+    SMD_MAIK_RAG: RAG, SMD_MAIK_KB_STORE: { loadBook: () => Promise.resolve(new RAGm.Book(rows)) },
+    SMD_MAIK_MODELS: { PACKS: { "maik-lite": { label: "MAiK Lite", nCtx: 4096, nPredict: 512, noThink: true } },
+      pathFor: async () => "/var/mobile/Data/maik-models/maik-lite.gguf", totalBytes: () => 1.1e9 }
+  };
+  new Function("window", SRC)(win);
+  return { L: win.SMD_MAIK_LOCAL, calls };
+}
+{
+  const UTI_TX = "Uncomplicated cystitis in women: nitrofurantoin 100 mg twice daily for 5 days or trimethoprim-sulfamethoxazole for 3 days is first-line treatment of uncomplicated urinary tract infection. ".repeat(3);
+  const UTI_DEF = "■■ DEFINITIONS In this chapter, the term uncomplicated urinary tract infection refers to cystitis in a non-pregnant woman without structural abnormality; complicated infection is defined otherwise. ".repeat(3);
+  const HEP_PREG = "Hepatitis B in pregnancy: lamivudine or tenofovir may be used in the third trimester to reduce transmission; interferons are avoided in pregnancy because of antiproliferative effects. Management in pregnancy is specialist-led. ".repeat(3);
+  const rows = [
+    { i: 0, text: UTI_TX, headings: ["Urinary tract infection", "Treatment"], pages: [10] },
+    { i: 1, text: UTI_DEF, headings: ["Urinary tract infection", "Definitions"], pages: [9] },
+    { i: 2, text: HEP_PREG, headings: ["Hepatitis B", "Pregnancy"], pages: [300] }
+  ];
+  const a = loadRealRag({ tokens: ["Nitrofurantoin 100 mg twice daily for 5 days."], rows });
+  const r1 = await a.L.answer({ question: "First-line treatment of uncomplicated UTI in a non-pregnant woman" }, { pack: "maik-lite" }, null);
+  const p1 = a.calls.generate[0].prompt;
+  ok("treatment ask: the treatment chunk is in the evidence", /nitrofurantoin 100 mg twice daily/i.test(p1));
+  ok("treatment ask: the DEFINITIONS chapter is dropped when a real answer chunk exists", !/DEFINITIONS/.test(p1));
+  ok("glyph noise (■■) never reaches the prompt", !/■/.test(p1));
+  ok("grounded, gate passed (nitrofurantoin and 100 mg are in the evidence)", r1.grounded === true && /Source: StewardMD Knowledge Base/.test(r1.text));
+
+  const b = loadRealRag({ tokens: ["In pregnancy, lamivudine is widely used."], rows });
+  await b.L.answer({ question: "uncomplicated uti non pregnant woman: management considerations in pregnancy" }, { pack: "maik-lite" }, null);
+  const p2 = b.calls.generate[0].prompt;
+  ok("pregnancy follow-up: the hepatitis passage is NOT evidence for a UTI question (no UTI anchor in it)", !/lamivudine/i.test(p2));
+  ok("pregnancy follow-up: still grounded in the UTI chunks (anchors: urinary / uncomplicated / cystitis)", /urinary tract infection/i.test(p2));
+
+  const c = loadRealRag({ tokens: ["x"], rows });
+  const r3 = await c.L.answer({ question: "management of hepatitis B in pregnancy" }, { pack: "maik-lite" }, null);
+  ok("a genuine hepatitis question still retrieves the hepatitis passage", /lamivudine/i.test(c.calls.generate[0].prompt) && r3.grounded === true);
+}
+{
+  // Second live battery (2026-09-04, after the first guard): the CAP comparison retrieved passages
+  // that named both drugs but not pneumonia (typhoid resistance), and "UTI in pregnancy" lost the
+  // abbreviation as an anchor because expand() rewrote it. A drug name is not the topic; the
+  // disease is. Among on-topic passages, the one that mentions the asked modifier wins.
+  const rows = [
+    { i: 0, text: "Community acquired pneumonia treatment: ceftriaxone 1 g IV daily plus azithromycin 500 mg daily is the usual inpatient regimen for pneumonia. ".repeat(3), headings: ["Pneumonia", "Treatment"], pages: [1] },
+    { i: 1, text: "Typhoid fever epidemiology: ceftriaxone and azithromycin resistance is rising in South Asia; some strains combine ceftriaxone and azithromycin resistance. ".repeat(3), headings: ["Typhoid", "Epidemiology"], pages: [2] },
+    { i: 2, text: "Acute cystitis (UTI) treatment: fosfomycin 3 g single dose or nitrofurantoin for five days. ".repeat(3), headings: ["Cystitis", "Treatment"], pages: [3] },
+    { i: 3, text: "UTI in pregnancy: cephalexin 500 mg four times daily for 7 days; treat asymptomatic bacteriuria in pregnancy. ".repeat(3), headings: ["Cystitis", "Pregnancy"], pages: [4] },
+    { i: 4, text: "Hepatitis B in pregnancy: lamivudine or tenofovir in the third trimester. ".repeat(3), headings: ["Hepatitis B", "Pregnancy"], pages: [5] }
+  ];
+  const a = loadRealRag({ tokens: ["x"], rows });
+  await a.L.answer({ question: "compare ceftriaxone and azithromycin for community acquired pneumonia" }, { pack: "maik-lite" }, null);
+  const p1 = a.calls.generate[0].prompt;
+  ok("drug comparison: the pneumonia passage is the evidence", /inpatient regimen for pneumonia/i.test(p1));
+  ok("drug comparison: a passage that only names both drugs (typhoid resistance) is not evidence", !/typhoid/i.test(p1));
+  const b = loadRealRag({ tokens: ["x"], rows });
+  await b.L.answer({ question: "UTI management in pregnancy" }, { pack: "maik-lite" }, null);
+  const p2 = b.calls.generate[0].prompt;
+  ok("UTI in pregnancy: the in-pregnancy UTI passage is chosen (abbreviation anchors; modifier preferred)", /cephalexin/i.test(p2));
+  ok("UTI in pregnancy: the general cystitis passage yields to the pregnancy one", !/fosfomycin/i.test(p2));
+  ok("UTI in pregnancy: hepatitis-in-pregnancy is never evidence for it", !/lamivudine/i.test(p2));
+}
+{
+  // Evidence size: 700-char passages and a weak third passage dropped (prefill is the latency).
+  const RAG = require("../kb/ai/maik-lite-rag.js");
+  const long = "Amoxicillin 500 mg three times daily for community acquired pneumonia. ".repeat(20);   // ~1400 chars
+  const passages = [
+    { heading: "Pneumonia > Treatment", text: long, chunk: 1 },
+    { heading: "Pneumonia > Treatment", text: "Doxycycline 100 mg twice daily is the alternative for pneumonia.", chunk: 2 },
+    { heading: "Pneumonia > Epidemiology", text: "Pneumonia is common in winter.", chunk: 3 }
+  ];
+  const fakeBook = { search: () => [[12, 0], [10, 1], [3, 2]], cite: (i) => Object.assign({}, passages[i]), idfOf: () => 5, us: (w) => w };
+  const calls = { generate: [] };
+  const Llama = { available: async () => ({ available: true, loaded: true }), load: async () => ({ loaded: true }),
+    generate: async (o) => { calls.generate.push(o); return { text: "Amoxicillin 500 mg three times daily.", ms: 1 }; },
+    cancel: async () => ({}), release: async () => ({ released: true }), addListener: () => ({ remove: () => {} }) };
+  const win = { Capacitor: { isNativePlatform: () => true, Plugins: { Llama } }, SMD_MAIK_RAG: RAG,
+    SMD_MAIK_KB_STORE: { loadBook: () => Promise.resolve(fakeBook) },
+    SMD_MAIK_MODELS: { PACKS: { "maik-lite": { label: "MAiK Lite", nCtx: 4096, nPredict: 512, noThink: true } }, pathFor: async () => "/x.gguf", totalBytes: () => 1.1e9 } };
+  new Function("window", SRC)(win);
+  await win.SMD_MAIK_LOCAL.answer({ question: "Treatment of pneumonia" }, { pack: "maik-lite" }, null);
+  const p = calls.generate[0].prompt;
+  ok("each passage is capped at 700 chars in the prompt", !/\[1\] [\s\S]{705,}?\n\n\[2\]/.test(p) && /\[1\] /.test(p));
+  ok("a third passage scoring under 60% of the top is dropped", /\[2\] /.test(p) && !/\[3\] /.test(p));
+}
+{
+  // Regenerate asks the local engine for sampling jitter; an ordinary answer stays deterministic.
+  const d = load({ tokens: ["A."] });
+  await d.L.answer({ question: "q" }, { pack: "maik-apex" }, null);
+  await d.L.answer({ question: "q" }, { pack: "maik-apex", regen: true }, null);
+  ok("ordinary answer: temperature 0", d.calls.generate[0].temperature === 0);
+  ok("regenerate: temperature 0.4", d.calls.generate[1].temperature === 0.4);
 }
 
 console.log(`\nmaik-local: ${pass} passed, ${fail} failed`);
