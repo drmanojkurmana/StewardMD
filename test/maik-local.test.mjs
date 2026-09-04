@@ -516,6 +516,19 @@ function loadWithRag({ tokens, kbLoadFails = false } = {}) {
   ok("the source line NEVER carries a page number, on owner order", !/p\.\d/.test(r.text));
 }
 
+// ── REGRESSION (owner screenshot, 2026-09-04): a greeting must never carry a KB source line ──
+// The fake book always returns a hit for any query, reproducing the live bug exactly: "Hi" scored
+// above MIN_SCORE, so grounding ran, the gate passed (nothing to contradict), and the greeting's
+// answer was stamped "Source: StewardMD Knowledge Base..." - a citation for a hello.
+{
+  const { L, calls } = loadWithRag({ tokens: ["Hi, I'm MaiK. How can I help with a clinical question today?"] });
+  const r = await L.answer({ question: "Hi" }, { pack: "maik-lite" }, null);
+  ok("a greeting never triggers retrieval", calls.searched.length === 0);
+  ok("a greeting is never marked grounded", r.grounded === false);
+  ok("a greeting NEVER carries the Knowledge Base source line", !/Source: StewardMD Knowledge Base/.test(r.text));
+  ok("a greeting still gets the greeting system prompt", /nothing clinical/i.test(calls.generate[0].system));
+}
+
 {
   const { L } = loadWithRag({ tokens: ["For penicillin allergy, use doxycycline plus amoxicillin-clavulanate."] });
   const r = await L.answer({ question: "Treatment of Pneumonia?" }, { pack: "maik-lite" }, null);

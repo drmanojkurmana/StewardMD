@@ -563,7 +563,9 @@
     var acc = "";
     var sub = null;
 
-    var groundingP = (images.length || (opts && (opts._retried || opts._ungrounded))) ? Promise.resolve(null)
+    // A greeting is not a question: no retrieval, so no "Source:" line on a hello (owner
+    // screenshot, 2026-09-04).
+    var groundingP = (images.length || (opts && (opts._retried || opts._ungrounded)) || isGreeting(pkg && pkg.question)) ? Promise.resolve(null)
       : retrieveGrounding(packId, pkg && pkg.question);
 
     return groundingP.then(function (grounding) {
