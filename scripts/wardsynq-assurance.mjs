@@ -46,6 +46,8 @@ const SUITES = [
   "test/wardsynq-incidents.test.mjs",
   "test/wardsynq-consent.test.mjs",
   "test/wardsynq-research.test.mjs",
+  "test/wardsynq-lineage.test.mjs",
+  "test/wardsynq-api-gov.test.mjs",
   "test/wardsynq-safety-case.test.mjs",
 ];
 
