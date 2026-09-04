@@ -76,7 +76,7 @@
     root.innerHTML =
       '<div class="gs-top">' +
         '<button class="gs-back" id="gsBack" aria-label="Back">‹ Back</button>' +
-        '<div class="gs-title" id="gsTitle">Government Health Schemes</div>' +
+        '<div class="gs-title" id="gsTitle">Scheme Search</div>' +
         '<span class="gs-top-sp"></span>' +
       '</div>' +
       '<div class="gs-body" id="gsBody"></div>';
@@ -105,7 +105,7 @@
 
   /* ---------------- list view: search + state filter + compare toggle ---------------- */
   function renderList() {
-    setTitle("Government Health Schemes");
+    setTitle("Scheme Search");
     var b = root.querySelector("#gsBody");
     b.innerHTML =
       '<div class="gs-searchbar">' + gsIco("search", "gs-ico gs-search-ic") +
