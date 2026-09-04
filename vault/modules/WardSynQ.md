@@ -3,7 +3,7 @@
 Hospital Clinical OS and EMR **inside StewardMD**, not a separate repo or product codebase.
 `wardsynq.com` is its web surface. Owner decision 2026-09-04. Spec: `~/Downloads/implementation_planfinal.md`.
 
-STATUS: **P0 complete, P1 in progress.** 525 tests across 20 suites. The clinical workstation UI
+STATUS: **P0 complete, P1 in progress.** 541 tests across 21 suites. The clinical workstation UI
 exists at `wardsynq/ui/` and is wired to a `GovernedStore`, but it is behind no route in the mobile
 app and is not reachable by any user. All clinical content (interaction, allergy, dose ceiling and
 critical threshold packs) is UNAPPROVED seed data and must not gate a real order until pharmacy and
@@ -192,6 +192,7 @@ cross-references them, so a renamed or deleted test shows as MISSING TEST rather
 | `wardsynq-emergency.js` | HAZ-TIME-01 (local, PARTIAL) | Sepsis/STEMI/arrest bundles. Time zero is immutable and pinned in both directions. |
 | `wardsynq-recognition.js` | (closes TIME-01's trigger) | Prompts a human; never opens a bundle itself. |
 | `wardsynq-obstetrics.js` | HAZ-MAT-01 (local) | MEOWS. Trigger-based with NO total; a visual blood-loss estimate is never a measurement. |
+| `wardsynq-bundle-binding.js` | (closes TIME-01's evidence) | Completes bundle elements from real eMAR administrations. DERIVED and ATTESTED are never conflated. |
 | `wardsynq-notify.js` | (infrastructure) | The single definition of delivery. Attempted is not delivered. |
 | `wardsynq-vitals.js` | (infrastructure) | The single definition of a current, non-artefactual observation, shared by both charts. |
 

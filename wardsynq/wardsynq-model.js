@@ -199,6 +199,12 @@ function MedicationAdministration(input) {
     id: input.id || localId("mar"),
     orderId: requireString(input.orderId, "MedicationAdministration.orderId"),
     patientId: requireString(input.patientId, "MedicationAdministration.patientId"),
+    // What was actually given, copied from the order when the record is opened. An administration
+    // record that can only say "order 47" is a poor clinical record: reading it back requires the
+    // order still to exist and to be fetchable, which is exactly what an audit or a downstream
+    // consumer cannot rely on. It also lets the administered EVENT be self-describing.
+    drug: input.drug || null,
+    drugCode: input.drugCode || null,
     status: input.status || "ordered", // see wardsynq-meds.js state machine
     scannedPatientBarcode: input.scannedPatientBarcode || null,
     scannedDrugBarcode: input.scannedDrugBarcode || null,

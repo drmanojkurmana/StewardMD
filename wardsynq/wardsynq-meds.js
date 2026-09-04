@@ -181,6 +181,10 @@ class MedicationAdministrationRecord {
     const record = MedicationAdministration({
       orderId: order.id,
       patientId: order.patientId,
+      // Carried on the record so it survives independently of the order, and so the emitted
+      // administration event says what was given rather than only which order it belonged to.
+      drug: order.drug || null,
+      drugCode: order.drugCode || null,
       status: STATES.ORDERED,
     });
     record.audit = [{ at: nowIso(), from: null, to: STATES.ORDERED, actorId: order.prescriberId || null, reason: null }];

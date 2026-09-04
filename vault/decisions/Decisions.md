@@ -3089,3 +3089,50 @@ them.
 12 of 14 hazards verified, 2 partial. Scoring methodology and criteria unchanged.
 
 STATUS: IMPLEMENTED and TESTED. NOT clinically validated, NOT clinically approved.
+
+## Bundle binding: knowing versus being told (2026-09-04)
+
+HAZ-TIME-01's last named reason was that "antibiotics administered" was asserted by whoever recorded
+it. A bundle element completed by a human typing into a form measures whether the form was filled in.
+Next door, `wardsynq-meds.js` already runs a state machine where ADMINISTERED is reachable only from
+SCANNED, which means a nurse scanned a wristband and a product. That is a fact about the world.
+`wardsynq/wardsynq-bundle-binding.js` (16 tests) connects the two.
+
+**The design decision worth arguing about, because the obvious one is wrong.** The obvious move is to
+make a derivable element UNCOMPLETABLE by hand: if the eMAR is the source of truth, refuse anything
+else. That is dangerous here. During a haemorrhage or an arrest the eMAR may be down, the drug may
+come from an emergency box, the scanner may be broken, and a system that refuses to let the team
+record what they did is a system the team abandons mid-resuscitation. It would also fail the patient
+in the only direction that matters: the drug was given and the record says it was not.
+
+So manual completion stays, and the two are kept APART instead:
+
+- **DERIVED**: the eMAR emitted an administration for this patient and this drug. We know.
+- **ATTESTED**: a named human recorded it. We were told, by someone accountable.
+
+Both complete the element; neither is called the other. `provenanceReport()` leads with the ratio,
+and the ratio is the finding: a unit whose sepsis bundles are 100 percent compliant and 3 percent
+derived is not measuring care, and nobody could see that before. A test constructs exactly that unit.
+
+**A derived completion cannot be back-dated.** It carries the eMAR's own `administeredAt`, never the
+time the event was processed and never a time a caller supplies, so the one route by which automation
+could have made a bundle look faster is closed. An administration timed BEFORE the bundle's time zero
+belongs to an earlier episode and is refused, because crediting a dose given before the patient was
+even recognised would be free compliance.
+
+**A defect in the canonical model, found by wiring this.** `MedicationAdministration` recorded only
+its `orderId`, so an administration record could not say what drug was given without the order still
+existing and being fetchable. That is a poor clinical record on its own terms, quite apart from
+making the emitted `meds.administered` event non-self-describing. `drug` and `drugCode` are now
+copied onto the record when it is opened.
+
+**HAZ-TIME-01 stays PARTIAL, and the caveat now names the right reasons.** Two of its original
+reasons are closed (nothing triggered a bundle; nothing derived an element). What remains: attestation
+is still permitted by design, so a bundle can be compliant on claims alone and only the provenance
+report will say so; ONLY medication elements can be derived, since lactate, ECG and cultures have no
+binding to a laboratory or imaging result, which means most of a sepsis bundle is still attested; and,
+unchanged and largest, no notification transport is shipped.
+
+12 of 14 verified, 2 partial. Scoring methodology and criteria unchanged.
+
+STATUS: IMPLEMENTED and TESTED. NOT clinically validated, NOT clinically approved.
