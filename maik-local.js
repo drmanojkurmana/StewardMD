@@ -522,8 +522,13 @@
       var need = A.topic.length ? A.topic : A.drugs;
       var anchors = A.topic.concat(A.drugs);
       var cited = hits.map(function (h) { var p = bk.cite(h[1]); return { score: h[0], p: p, hay: ((p.heading || "") + " " + (p.text || "")).toLowerCase() }; });
-      var kept = need.length ? cited.filter(function (c) { return need.some(function (a) { return c.hay.indexOf(a) !== -1; }); }) : cited;
+      // Count anchors per passage. With two or more topic anchors, a passage matching two beats one
+      // matching one ("community" alone let a typhoid epidemiology passage stand in for CAP); when
+      // nothing matches two, one is enough.
+      cited.forEach(function (c) { c.n = need.filter(function (a) { return c.hay.indexOf(a) !== -1; }).length; });
+      var kept = need.length ? cited.filter(function (c) { return c.n > 0; }) : cited;
       if (!kept.length) return null;
+      if (need.length > 1 && kept.some(function (c) { return c.n > 1; })) kept = kept.filter(function (c) { return c.n > 1; });
       // "…in pregnancy": among the on-topic passages, the ones that mention the modifier win when any
       // do; when none do, the topic passages stay and the model says so, instead of a passage about
       // a different disease in pregnancy.
@@ -676,6 +681,9 @@
         if (grounding) {
           var gate = grounding.RAG.evidenceGate(text, grounding.evidenceText, pkg && pkg.question);
           if (!gate.ok) {
+            // Diagnostics only (never shown): what the gate rejected, for the live battery and the
+            // feedback triage. Passage text is not stored.
+            try { window.__smdLastGate = { q: pkg && pkg.question, nums: gate.nums, drugs: gate.drugs, anchors: grounding.anchors, heads: grounding.passages.map(function (p) { return String(p.heading || "").slice(0, 60); }) }; } catch (e) {}
             var pass = grounding.passages[0]; quotedPassage = true;
             var shown = cleanPassage(pass.text);
             if (shown.length > 700) shown = shown.slice(0, 700).replace(/\s+\S*$/, "") + "…";

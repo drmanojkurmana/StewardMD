@@ -2455,3 +2455,17 @@ every answer ungrounded, which the older test stubs exposed).
 Not fixed, same-model constraint: first-token latency (3-7 s) is prefill-bound; the real lever is
 KV prefix caching of the fixed system prompt in `LlamaEngine.swift`, which is native work and a
 separate PR.
+
+Addendum, second live battery same day (after the guard above shipped to the phone): CAP comparison
+still grounded in typhoid-resistance passages because "community" alone was an anchor match, and
+"UTI" was lost as an anchor since expand() rewrites it to the long form. Anchors are now three
+kinds (topic / drug / population modifier); a passage must contain a topic anchor when the question
+has one (a drug name is not the topic), two anchors beat one when any passage has two, search runs
+3x TOPK and keeps TOPK after filtering, and among on-topic passages the ones mentioning the asked
+modifier win (negated "non-pregnant" excluded). Result on the phone, MaiK Lite, same model: UTI
+treatment grounded (TMP-SMX / nitrofurantoin / fosfomycin, 6.7 s first text); "and the dose?"
+grounded 3-day oral regimen, gate passed (4.1 s); "what if she is pregnant" UTI-in-pregnancy
+(2.0 s); CAP comparison pneumonia passages only, honest "not compared head to head" (6.4 s);
+pregnancy follow-up after CAP stays on CAP; poem refused (1.1 s). Copy / Regenerate / Edit on
+every answer. `window.__smdLastGate` holds the last gate rejection (numbers, drugs, anchors,
+headings; never passage text) for triage.
