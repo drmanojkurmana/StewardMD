@@ -3,15 +3,15 @@
 Hospital Clinical OS and EMR **inside StewardMD**, not a separate repo or product codebase.
 `wardsynq.com` is its web surface. Owner decision 2026-09-04. Spec: `~/Downloads/implementation_planfinal.md`.
 
-STATUS: **P0 to P3 built.** 921 tests across 41 suites. The clinical workstation UI
+STATUS: **P0 to P3 built.** 956 tests across 44 suites. The clinical workstation UI
 exists at `wardsynq/ui/` and is wired to a `GovernedStore`, but it is behind no route in the mobile
 app and is not reachable by any user. All clinical content (interaction, allergy, dose ceiling and
 critical threshold packs) is UNAPPROVED seed data and must not gate a real order until pharmacy and
 the relevant committee sign it off.
 
 The safety case is executable: `node scripts/wardsynq-assurance.mjs` runs the real suites and
-cross-references the hazard table against what actually passed. It currently reports **13 of 16
-verified, 3 partial**. Read the caveats; the summary line alone is not the state of the system.
+cross-references the hazard table against what actually passed. It currently reports **14 of 16
+verified, 2 partial**. Read the caveats; the summary line alone is not the state of the system.
 
 ## Ward Sync and WardSynQ are ONE system
 
@@ -34,7 +34,7 @@ DICOM/DICOMweb, LIS, ABDM, IoMT) plug in the same way.
 Existing StewardMD mobile behaviour must keep working while it migrates onto this layer.
 
 **The adapter now exists** (`wardsynq/adapters/wardsynq-ghis-adapter.js`, 23 tests) and is the
-reference implementation for every adapter that follows. **The cut-over has NOT happened**:
+reference implementation for every adapter that follows. **THE CUT-OVER IS BUILT** (owner-approved 2026-09-05, flag still default OFF):
 `ghis-ward.js` and `icu.js` are untouched and still own the live path. The adapter is pure mapping
 only. It does no fetching, holds no GHIS token, and touches no live state; `ghis-ward.js` keeps
 transport, the bearer token, the 401 silent refresh and the patient picker. That split is on

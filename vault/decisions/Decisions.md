@@ -3747,3 +3747,55 @@ partials now name SMALLER reasons than before:
 
 None of that is dishonest bookkeeping: each partial is a control that works and cannot yet reach far
 enough, which is a different thing from a control that does not exist.
+
+## The GHIS cut-over, and the last renderer (2026-09-05)
+
+### The cut-over, approved by the owner
+
+GHIS is now a real adapter on the live path, feeding the canonical model and the event bus. The
+design decision worth not re-litigating is what it does NOT do: it does not rewrite
+`ingestFromWard`. That function guards cross-patient contamination, preserves manual overrides
+against ward values, and writes a STATE object read at more than twenty sites in icu.js alone.
+Replacing it in one step would put a live mobile app behind a code path that has never rendered a
+ward round, in exchange for tidiness.
+
+So it is a strangler fig: the legacy path keeps owning STATE and every screen that reads it, and
+the adapter takes ownership of the canonical model alongside it. Two consumers of one bundle, the
+new one authoritative for everything built after it. The duplication is real and is the price of
+not breaking a working ward round.
+
+The properties, in the order they matter to a clinician holding the phone: the legacy result is
+computed FIRST and returned untouched, so enabling the flag cannot change what the app displays;
+the adapter path can never throw into the caller, and an exploding adapter, a full disk, a
+rejecting async write and a downed bus are each a number on a report rather than a broken round;
+there is a kill switch that works in-process with no reload; it is idempotent on the source's own
+event identity; and it writes as an ADAPTER actor, so it is capped at DRAFT by the existing actor
+model rather than by anything re-implemented here.
+
+**What "approved" means.** The owner approved an ARCHITECTURAL cut-over, which is theirs to give.
+It is not clinical approval. Every rule pack remains UNAPPROVED seed content awaiting pharmacy and
+the relevant committees, a test asserts the cut-over's own report says so, and the flag still
+defaults OFF.
+
+### The flowsheet renderer
+
+The last named reason HAZ-FLUID-01 was partial. The renderer holds no arithmetic and decides only
+how honesty is displayed, which turned out to be most of the work: an empty cell renders blank
+rather than as a zero or a dash, because at a glance those are the same mark; a half-charted row
+states "3 of 6" beside itself so it cannot look complete; a backfilled entry is marked rather than
+rendered identically, which would launder the difference; and the incompleteness of a total sits in
+the same sentence as the number, because a qualifier in a tooltip is one nobody reads at 08:00.
+
+Opening a balance records a read. HAZ-FLUID-01 moves to VERIFIED: every clause of its stated
+requirement is met and adversarially tested, so the adequacy cap comes off. The deliberate
+non-gating stays in the caveat.
+
+### A race, found and closed
+
+The full suite failed once and could not be reproduced in thirteen further runs. Rather than
+shrugging, the cause was located: the ghis-live tests used `setTimeout(0)` to let promise chains
+settle, which does not guarantee that a `.then()` on an already-rejected promise has run. Now
+`setImmediate`, which fires after the microtask queue drains. A racy assertion in a clinical safety
+suite is worse than a failing one, because it gets re-run until it passes.
+
+956 tests across 44 suites. Safety case 14 of 16 verified, 2 partial, both waiting on a real pager.
