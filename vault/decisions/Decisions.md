@@ -2420,3 +2420,41 @@ StewardMD's `?v=goldNNN` convention has the same blind spot for anything loaded 
 
 The screen states the rule pack version and its approval status permanently, because a clinician
 trusting seed data because the interface looked finished is a foreseeable route to harm.
+
+## 2026-09-04 WardSynQ workstation: redesign after the first pass read as AI-generated
+
+Owner feedback: the font and the safety boxes looked "vibe coded". Correct on both counts, and the
+first pass had more tells than those two.
+
+**What was wrong.** The font stack was `ui-sans-serif, Segoe UI, Roboto` — the most generic possible
+choice, in a file whose own comments said to avoid generic stacks. Findings rendered as rounded
+tinted cards with a thick coloured left border and an uppercase micro-label, which is the standard
+LLM alert-card shape. Containers nested three deep (panel inside card inside card) so there were
+three levels of box and no levels of hierarchy. Severity colours were washed-out pastels that read
+as decoration. The dose field was 800px wide for three digits. A "checked in 0.3 ms" floated in the
+top right corner attached to nothing.
+
+**Direction, from the ui-ux-pro-max database rather than taste.** Swiss / International grid style
+(its match for enterprise dashboards and professional tools), dials variance 3, motion 2, density 9.
+Typeface **Fira Sans with Fira Mono**, the database's dashboard and analytics pairing. Fira was drawn
+for legibility at small sizes on poor screens, and the matched monospace is the point: every clinical
+number here is tabular, so a decimal sits in the same column down a list and 1.42 cannot be misread
+as 142.
+
+**What changed structurally.** Ruled bands instead of nested rounded cards. A label column plus a
+control column, with controls sized to their content, because a field's width is a hint about what
+belongs in it. Findings are a severity rail plus a ground, where **fill intensity is the hierarchy**:
+a hard stop is filled and unmissable, an override is lightly filled, an advisory has no fill at all
+and recedes. Making advisories quiet is the alert-fatigue lesson expressed in the layout, and it is
+what keeps the filled one noticeable. The override handshake now sits inside the finding it belongs
+to, separated by a rule rather than by a second border and radius. The results table is deliberately
+NOT full width: five columns stretched across 950px puts a value half a screen from its reference
+range, and long scan distances are how a value gets read against the wrong row.
+
+**Unchanged on purpose.** Severity is a word before it is a colour, everywhere. Both colour schemes
+ship and both were checked visually, not assumed. 44px targets.
+
+**PRODUCTION GAP:** the webfont loads from a CDN in this build. A ward loses its network, so a real
+deployment must self-host the woff2 files. The fallback stack is ordered to degrade to another
+tabular-capable face rather than to something that reflows every number, but that is a mitigation,
+not the fix.

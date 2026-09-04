@@ -241,16 +241,20 @@ function renderLabs() {
     return;
   }
   host.innerHTML = `<table class="data"><thead><tr>`
-    + `<th>Test</th><th>Value</th><th>Reference</th><th>Flag</th></tr></thead><tbody>`
+    + `<th>Test</th><th class="right">Value</th><th>Unit</th><th class="right">Reference</th><th>Flag</th>`
+    + `</tr></thead><tbody>`
     + p.labs.map((l) => {
       const high = l.high != null && l.value > l.high;
       const low = l.low != null && l.value < l.low;
       const cls = high ? "high" : low ? "low" : "normal";
-      // The flag is a word as well as a colour, for the same reason as the allergy banner.
-      const label = high ? "HIGH" : low ? "LOW" : "NORMAL";
-      return `<tr><td>${escapeHtml(l.test)}</td>`
-        + `<td class="num">${escapeHtml(String(l.value))} ${escapeHtml(l.unit || "")}</td>`
-        + `<td class="num">${l.low != null ? escapeHtml(String(l.low)) : ""}-${l.high != null ? escapeHtml(String(l.high)) : ""}</td>`
+      // The flag is a word, not only a colour. Same reason as the allergy banner: colour alone
+      // says nothing to a colour-blind clinician or on a monochrome printout.
+      const label = high ? "HIGH" : low ? "LOW" : "normal";
+      return `<tr class="${high || low ? "result-abnormal" : ""}">`
+        + `<td>${escapeHtml(l.test)}</td>`
+        + `<td class="num">${escapeHtml(String(l.value))}</td>`
+        + `<td class="mono" style="font-size:12px;color:var(--ink-muted)">${escapeHtml(l.unit || "")}</td>`
+        + `<td class="num" style="color:var(--ink-muted)">${l.low != null ? escapeHtml(String(l.low)) : ""}-${l.high != null ? escapeHtml(String(l.high)) : ""}</td>`
         + `<td><span class="flag ${cls}">${label}</span></td></tr>`;
     }).join("")
     + `</tbody></table>`;
@@ -324,46 +328,59 @@ function renderVerdict(verdict) {
 
   if (!host.children.length) {
     const ok = document.createElement("div");
-    ok.className = "verdict-ok";
-    ok.textContent = "No blocking findings against the loaded rule pack.";
+    ok.className = "verdict-clear";
+    ok.innerHTML = '<div class="rail"></div><div class="body">No blocking findings against the loaded rule pack.</div>';
     host.appendChild(ok);
   }
 }
 
 function findingEl(f) {
-  const wrap = document.createElement("div");
   const kind = f.disposition === DISPOSITION.BLOCK ? "block"
     : f.disposition === DISPOSITION.OVERRIDABLE ? "overridable" : "warn";
-  wrap.className = `finding ${kind}`;
 
-  const head = document.createElement("div");
-  head.className = "finding-head";
-  head.innerHTML = `<span class="label">${escapeHtml(f.label)}</span>`
-    + `<span class="code">${escapeHtml(f.code || "")}</span>`;
-  wrap.appendChild(head);
+  const wrap = document.createElement("div");
+  wrap.className = "finding";
+  wrap.dataset.kind = kind;
+
+  const rail = document.createElement("div");
+  rail.className = "rail";
+  wrap.appendChild(rail);
+
+  const body = document.createElement("div");
+  body.className = "body";
+  wrap.appendChild(body);
+
+  // The severity is a WORD first. Colour is confirmation, never the carrier: a colour-blind
+  // clinician and a monochrome print of this screen both have to read the same thing.
+  const title = document.createElement("div");
+  title.className = "title";
+  title.innerHTML = `<span class="verdict-word">${escapeHtml(f.label)}</span>`
+    + `<span class="code">${escapeHtml(f.code || "")}</span>`
+    + (f.drugs && f.drugs.length > 1 ? `<span class="drugs">${escapeHtml(f.drugs.join(" + "))}</span>` : "");
+  body.appendChild(title);
 
   const msg = document.createElement("p");
   msg.textContent = f.message || "";
-  wrap.appendChild(msg);
+  body.appendChild(msg);
 
   if (f.mechanism) {
     const mech = document.createElement("p");
     mech.className = "mechanism";
     mech.textContent = f.mechanism;
-    wrap.appendChild(mech);
+    body.appendChild(mech);
   }
 
   if (f.disposition === DISPOSITION.BLOCK) {
-    // No control is rendered. The note explains the absence, so the clinician is not left hunting
-    // for a button that does not exist.
+    // No control is rendered, because no override path exists in the engine either. The note
+    // explains the absence so the clinician is not left hunting for a button that is not there.
     const note = document.createElement("p");
-    note.className = "no-override-note";
-    note.textContent = "This cannot be overridden. Change the order, or contact the on-call "
-      + "pharmacist to review the underlying record.";
-    wrap.appendChild(note);
+    note.className = "no-override";
+    note.textContent = "Cannot be overridden. Change the order, or contact the on-call pharmacist "
+      + "to review the underlying record.";
+    body.appendChild(note);
   }
 
-  if (f.disposition === DISPOSITION.OVERRIDABLE) wrap.appendChild(handshakeEl(f));
+  if (f.disposition === DISPOSITION.OVERRIDABLE) body.appendChild(handshakeEl(f));
   return wrap;
 }
 
@@ -373,27 +390,32 @@ function findingEl(f) {
  * stays disabled until the engine would accept the payload.
  */
 function handshakeEl(f) {
+  const id = cssId(f.code);
   const box = document.createElement("div");
   box.className = "handshake";
   box.innerHTML = `
-    <h3>Document an override</h3>
-    <div class="field">
-      <label for="reason-${cssId(f.code)}">Reason</label>
-      <select id="reason-${cssId(f.code)}">
-        <option value="">Select a reason</option>
-        <option value="BENEFIT_OUTWEIGHS_RISK">Benefit outweighs risk</option>
-        <option value="MONITORING_IN_PLACE">Monitoring protocol in place</option>
-        <option value="SPECIALIST_ADVICE">Specialist advice obtained</option>
-        <option value="NO_ALTERNATIVE">No suitable alternative available</option>
-      </select>
+    <span class="section-label">Document an override</span>
+    <div class="hs-grid">
+      <label for="reason-${id}">Reason</label>
+      <div>
+        <select id="reason-${id}">
+          <option value="">Select a reason</option>
+          <option value="BENEFIT_OUTWEIGHS_RISK">Benefit outweighs risk</option>
+          <option value="MONITORING_IN_PLACE">Monitoring protocol in place</option>
+          <option value="SPECIALIST_ADVICE">Specialist advice obtained</option>
+          <option value="NO_ALTERNATIVE">No suitable alternative available</option>
+        </select>
+      </div>
+      <label for="rationale-${id}">Rationale</label>
+      <div>
+        <textarea id="rationale-${id}"></textarea>
+        <div class="hint">Recorded in the audit trail and reviewed by the safety committee.</div>
+      </div>
     </div>
-    <div class="field">
-      <label for="rationale-${cssId(f.code)}">Clinical rationale</label>
-      <textarea id="rationale-${cssId(f.code)}" placeholder=""></textarea>
-      <span class="hint">Recorded in the audit trail and reviewed by the safety committee.</span>
+    <div class="actions">
+      <button type="button" class="btn-primary" id="apply-${id}" disabled>Apply override</button>
+      <span class="who">Signing as Dr on duty. Your identity is recorded with this override.</span>
     </div>
-    <button type="button" class="btn-primary" id="apply-${cssId(f.code)}" disabled>Apply override</button>
-    <div class="who">Signing as Dr on duty. Your identity is recorded with this override.</div>
   `;
 
   const reason = box.querySelector(`#reason-${cssId(f.code)}`);
