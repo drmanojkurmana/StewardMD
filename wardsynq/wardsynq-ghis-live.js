@@ -83,7 +83,7 @@ function installLiveGhis(deps) {
     installedAt: now(),
     bundlesSeen: 0, mapped: 0, written: 0, skippedDuplicate: 0,
     adapterErrors: 0, writeErrors: 0,
-    observationsMapped: 0, issues: [], divergences: [], lastAt: null,
+    observationsMapped: 0, issues: [], divergences: [], failures: [], lastAt: null,
   };
 
   // Source-event identity, so a reconnect replays without duplicating. Bounded, because an
@@ -96,10 +96,21 @@ function installLiveGhis(deps) {
 
   host.ingestFromWard = function wardSynQLive(bundle) {
     /* 1. The legacy path runs FIRST, and this is what the caller gets. Not "usually", not "unless
-          the adapter throws": always, and before anything below has run. */
+          the adapter throws": always, and before anything below has run.
+
+       The adapter work is now awaited internally so writes can be ordered and aborted, but the
+       CALLER still receives the legacy result synchronously and is never handed a promise. A ward
+       round must not start awaiting something it never awaited before. */
     const legacyResult = original.apply(this, arguments);
 
     if (halted) return legacyResult;
+
+    // Deliberately not awaited by the caller. Failures inside are caught and counted.
+    void runAdapter.call(this, bundle, legacyResult);
+    return legacyResult;
+  };
+
+  async function runAdapter(bundle, legacyResult) {
 
     /* 2. Everything from here is wrapped. A defect must be a number on a report, never a broken
           ward round. */
@@ -139,28 +150,44 @@ function installLiveGhis(deps) {
         return legacyResult;
       }
 
-      for (const entity of entities) {
-        if (!entity || !entity.id) continue;
-        if (seen.has(entity.id)) { stats.skippedDuplicate += 1; continue; }
+      /* 4. DEPENDENCY-ORDERED, ABORT ON FIRST FAILURE.
+       *
+       * `entities` is built patient, then encounter, then everything that references them. Writing
+       * in that order and STOPPING at the first failure is what guarantees referential integrity,
+       * and it is a stronger guarantee than it looks: a prefix of a dependency-ordered sequence is
+       * always referentially complete. A patient with no encounter yet is a valid intermediate
+       * state that the next bundle completes; an observation pointing at an encounter that was
+       * never written is a corrupt chart.
+       *
+       * This was NOT the behaviour. The loop used to continue past a failure, so a failed encounter
+       * write produced observations carrying an encounterId that resolved to nothing, silently, with
+       * only a counter to show for it. The pipeline validation caught it.
+       *
+       * WHAT THIS DOES NOT CLAIM. It is not a transaction and does not roll back what already
+       * landed, because the store is append-only and there is nothing to un-write. The guarantee is
+       * REFERENTIAL INTEGRITY, not all-or-nothing, and saying so precisely matters more than
+       * claiming the stronger property. Where the store offers a real transaction, it is used
+       * instead and the guarantee becomes atomic; see below. */
+      const pending = entities.filter((e) => e && e.id && !seen.has(e.id));
+      stats.skippedDuplicate += entities.filter((e) => e && e.id && seen.has(e.id)).length;
 
-        try {
-          // Through the governed store as an adapter actor. The actor model caps an adapter at
-          // DRAFT, so a feed cannot commit an active record however confidently GHIS asserts one.
-          // That cap is enforced there and is not re-implemented here.
-          const result = deps.store.put(entity);
-          if (result && typeof result.then === "function") {
-            result.then(
-              () => { stats.written += 1; },
-              (err) => { stats.writeErrors += 1; recordError(stats, deps, err, entity); },
-            );
-          } else {
+      if (typeof deps.store.transaction === "function") {
+        // A real transaction: all of it or none of it.
+        await runAtomic(deps, stats, pending, seen, SEEN_MAX);
+      } else {
+        for (const entity of pending) {
+          try {
+            // Through the governed store as an adapter actor. The actor model caps an adapter at
+            // DRAFT, so a feed cannot commit an active record however confidently GHIS asserts one.
+            // That cap is enforced there and is not re-implemented here.
+            await deps.store.put(entity);
             stats.written += 1;
+            if (seen.size >= SEEN_MAX) seen.clear();   // bounded: a long shift must not leak
+            seen.add(entity.id);
+          } catch (err) {
+            recordFailure(stats, deps, err, entity, pending.slice(pending.indexOf(entity) + 1));
+            break;   // ABORT. Everything after this depends on something that is not there.
           }
-          if (seen.size >= SEEN_MAX) seen.clear();   // bounded: a long shift must not leak
-          seen.add(entity.id);
-        } catch (err) {
-          stats.writeErrors += 1;
-          recordError(stats, deps, err, entity);
         }
       }
 
@@ -172,11 +199,9 @@ function installLiveGhis(deps) {
       }
     } catch (err) {
       stats.adapterErrors += 1;
-      recordError(stats, deps, err, null);
+      recordFailure(stats, deps, err, null, []);
     }
-
-    return legacyResult;
-  };
+  }
 
   return {
     installed: true,
@@ -207,15 +232,58 @@ function installLiveGhis(deps) {
   };
 }
 
-/** Errors are kept with their context, and never rethrown. */
-function recordError(stats, deps, err, entity) {
+/**
+ * Records a failed write in full, and keeps what is needed to try again.
+ *
+ * This used to keep only `lastError`, which meant that of four failures in one shift somebody could
+ * see one. "Visible" and "recoverable" are different requirements and only the first was met: a
+ * count tells you something went wrong and gives you nothing to do about it. Every failure is now
+ * retained with the entity itself, and with the entities that were ABANDONED behind it, because
+ * those were never attempted and are the rest of the work.
+ *
+ * Bounded, because an unbounded failure log on a device left open for a shift is a leak, and a
+ * device that runs out of memory recording failures has found a novel way to fail.
+ */
+const FAILURES_MAX = 200;
+
+function recordFailure(stats, deps, err, entity, abandoned = []) {
   const record = {
     at: new Date().toISOString(),
     message: String((err && err.message) || err),
     entity: entity ? `${entity.resourceType}/${entity.id}` : null,
+    // The record itself, so a retry does not have to re-derive it from a bundle that may be gone.
+    payload: entity || null,
+    abandoned: abandoned.map((e) => `${e.resourceType}/${e.id}`),
+    // A governance refusal will fail again identically; a full disk may not.
+    retryable: !/cannot commit|cannot produce|cannot write|not authorised|WRONG_CHART/i.test(String((err && err.message) || err)),
   };
-  stats.lastError = record;
+  stats.writeErrors += 1;
+  stats.failures.push(record);
+  if (stats.failures.length > FAILURES_MAX) stats.failures.shift();
+  stats.lastError = record;   // kept for compatibility with anything already reading it
   if (deps.onError) { try { deps.onError(record); } catch { /* an error handler that throws is not one */ } }
+}
+
+/**
+ * Writes a whole bundle inside the store's own transaction, where it offers one.
+ *
+ * Then the guarantee is genuinely all-or-nothing rather than merely referentially sound, which is
+ * worth having and is why this branch exists at all.
+ */
+async function runAtomic(deps, stats, pending, seen, seenMax) {
+  try {
+    await deps.store.transaction(async (tx) => {
+      for (const entity of pending) await tx.put(entity);
+    });
+    stats.written += pending.length;
+    for (const e of pending) {
+      if (seen.size >= seenMax) seen.clear();
+      seen.add(e.id);
+    }
+  } catch (err) {
+    // Nothing landed. That is the whole point of taking this branch.
+    recordFailure(stats, deps, err, pending[0] || null, pending.slice(1));
+  }
 }
 
 /** How many rows the legacy path reported applying, where it says. */
