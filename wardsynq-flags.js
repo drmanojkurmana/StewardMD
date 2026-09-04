@@ -6,8 +6,7 @@
    * integration is the SAME system: it becomes WardSynQ's first hospital-data adapter, feeding the
    * canonical model and the Clinical Event Bus. See vault/modules/WardSynQ.md.
    *
-   * NOTHING HERE SHIPS ON. Every flag defaults OFF, and the shadow flag below is the only one with
-   * any runtime effect today.
+   * NOTHING HERE SHIPS ON. Every flag still defaults OFF and must be turned on deliberately.
    *
    * WHY A SHADOW PATH RATHER THAN A CUT-OVER. `ingestFromWard` in icu.js is read through by the ICU
    * flowsheet, medlist and autofetch, and `STATE.wardSync` is read directly at 22 sites in icu.js
@@ -17,8 +16,14 @@
    * and the result logged. The legacy path is not modified, not wrapped and not reordered, and a
    * failure in the shadow path can never affect it.
    *
-   * The cut-over proper happens only after the shadow path has been observed against real ward data
-   * and the mapping has been checked against what the legacy path produced. */
+   * THE CUT-OVER IS NOW BUILT (wardsynq/wardsynq-ghis-live.js), approved by the owner on 2026-09-05
+   * after the shadow path was run. It is a strangler fig rather than a rewrite: the adapter takes
+   * ownership of the CANONICAL model while the legacy path keeps owning STATE and every screen that
+   * already reads it, so turning the flag on adds a consumer and changes nothing the app displays.
+   *
+   * That approval is ARCHITECTURAL and is the owner's to give. It is not clinical approval: the
+   * interaction, allergy, dose-ceiling and threshold packs remain UNAPPROVED seed content awaiting
+   * pharmacy and the relevant committees, and no flag in this file changes that. */
   var DEFS = {
     smd_wardsynq: {
       type: "bool", def: false, query: "wardsynq",
@@ -30,7 +35,7 @@
     },
     smd_wardsynq_cutover: {
       type: "bool", def: false, query: "wardsynq_cutover",
-      desc: "Route ward data through WardSynQ as the primary path instead of the legacy ingest. DEFAULT OFF and NOT IMPLEMENTED: the flag exists so the sequence is explicit. Do not enable until the shadow path has been compared against real ward data."
+      desc: "Feed ward data through the WardSynQ adapter into the canonical model, alongside the legacy ingest. DEFAULT OFF. IMPLEMENTED (wardsynq/wardsynq-ghis-live.js). The legacy path still owns STATE and the mobile UI and is not modified: it runs FIRST and its result is returned untouched, so enabling this cannot change what the app shows. The adapter path can never throw into the caller, is idempotent on the source event identity, writes as an ADAPTER actor and is therefore capped at DRAFT, and can be halted in-process without a reload via the object installLiveGhis() returns."
     }
   };
   function store()  { try { return localStorage; } catch (e) { return null; } }
