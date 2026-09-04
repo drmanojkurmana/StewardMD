@@ -42,6 +42,8 @@ const SUITES = [
   "test/wardsynq-recognition.test.mjs",
   "test/wardsynq-obstetrics.test.mjs",
   "test/wardsynq-bundle-binding.test.mjs",
+  "test/wardsynq-quality.test.mjs",
+  "test/wardsynq-incidents.test.mjs",
   "test/wardsynq-safety-case.test.mjs",
 ];
 

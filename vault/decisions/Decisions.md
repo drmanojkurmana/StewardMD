@@ -3136,3 +3136,61 @@ unchanged and largest, no notification transport is shipped.
 12 of 14 verified, 2 partial. Scoring methodology and criteria unchanged.
 
 STATUS: IMPLEMENTED and TESTED. NOT clinically validated, NOT clinically approved.
+
+## P2 begins: quality measures and incidents (2026-09-04)
+
+### wardsynq-quality.js: the denominator is the attack surface
+
+Quality measures are reported to regulators, published, and used to decide funding and careers, which
+makes them the most incentivised numbers in the building. Numerator over denominator is trivial
+arithmetic; everything that decides whether the number means anything is elsewhere.
+
+1. **Nobody improves a mortality rate by falsifying deaths.** Deaths are hard to hide. They improve it
+   by removing patients from the denominator. So every exclusion carries a reason, is counted BY
+   reason, and travels with the rate in the same sentence. A test shows the same hospital with the
+   same ten deaths going from 10 percent to 2.2 percent purely by calling eight of them palliative on
+   admission, and shows the exclusion rate making it visible.
+2. **"We cannot tell" is not "not eligible."** Missing data excluded as though it were a clinical
+   decision is how an unmeasured cohort disappears, so the two are separate exclusion kinds.
+3. **A small denominator is not a rate.** One death in three is not 33 percent mortality, it is three
+   patients. Below the minimum the counts are still reported and the percentage is refused, because a
+   percentage on a dashboard gets compared with one from a unit that had four hundred patients and
+   nothing on the screen says they are different kinds of number.
+4. **compare() exists in order to refuse.** A league table of unadjusted mortality is a picture of
+   case mix that will be read as a picture of quality by people who act on it. No risk model is
+   implemented, so no ranking is produced, and even a caller ASSERTING risk adjustment gets rows
+   without an ordering, because this module cannot verify the claim.
+5. **trend() refuses to draw a line across a definition change**, which would show a definition
+   changing rather than care changing.
+6. **Evidence quality travels with the number** via the bundle-binding provenance, and is deliberately
+   NOT folded into the rate: two numbers that mean different things should not be averaged into one
+   that means neither.
+
+### wardsynq-incidents.js: the reports you never receive
+
+An incident system's failure mode is silence, not a bad severity matrix. The reports that matter most
+go unfiled for reasons entirely rational from the reporter's side.
+
+1. **A near miss is the free lesson** and is reportable in a minimal form. Anonymity is a first-class
+   choice, not a degraded one: it costs follow-up with the author and buys the report existing.
+2. **Severity is the outcome, not the culpability.** The same syringe swap is a near miss or a death
+   depending on luck the clinician did not control. SAC decides how much INVESTIGATION an event
+   warrants; a test asserts no response string contains the language of blame.
+3. **A person is never a root cause.** "Human error", "the nurse forgot", "non-compliance by staff"
+   are refused, and the refusal says what to do instead, because a bare rejection just gets worked
+   around. The question those phrases leave unasked is why the system made the error easy, likely, or
+   invisible until it reached the patient.
+4. **An incident cannot be closed on retraining alone.** Education and reminders are the most-chosen
+   and least-effective response in patient safety: they ask the next tired person to be more careful
+   in the same place and change nothing about the place. They are detected, not banned, and closure
+   requires at least one action that changes the system.
+5. **A CAPA with no owner and no date is a wish**, and "done" with no evidence is not done.
+6. **The ledger leads with the near-miss ratio**, because that measures the health of the REPORTING
+   system rather than the hospital. A unit reporting only harm is reported as a failing reporting
+   system, not a safe one. A falling incident count is celebrated everywhere and is usually bad news.
+
+Neither module gets a hazard row: they are governance and measurement, not clinical controls, and
+inventing hazard rows for them would inflate the table with things that do not stop a patient being
+harmed. The safety case stays at 12 of 14 with 2 partial.
+
+595 tests across 23 suites. STATUS: IMPLEMENTED and TESTED. NOT clinically validated or approved.
