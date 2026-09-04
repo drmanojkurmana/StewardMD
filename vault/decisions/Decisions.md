@@ -3194,3 +3194,71 @@ inventing hazard rows for them would inflate the table with things that do not s
 harmed. The safety case stays at 12 of 14 with 2 partial.
 
 595 tests across 23 suites. STATUS: IMPLEMENTED and TESTED. NOT clinically validated or approved.
+
+## P2 continued: consent and research de-identification (2026-09-04)
+
+### wardsynq-consent.js: a signature is not consent
+
+Consent is a decision made by someone who understood the proposal, was told what could go wrong, knew
+the alternatives including doing nothing, and was free to refuse. The signature is evidence a
+conversation happened. This module makes it impossible to record the signature without the
+conversation: consent is refused outright if the risks, the alternatives or the option of NO
+treatment were not recorded. That last one is the most commonly omitted and is always available.
+
+The asymmetry running through the file is that capacity is presumed and incapacity must be
+demonstrated, because the failure modes are not symmetrical. Treating a capable adult as incapable
+strips a right they have, and it happens overwhelmingly to the old, the disabled, the mentally ill,
+and anyone who disagrees with their doctor.
+
+1. **A refusal is never evidence of incapacity.** Disagreeing with the recommended treatment is the
+   commonest trigger for a capacity assessment, and an unwise decision is a right capable people
+   have. The two are recorded separately and neither is inferred from the other.
+2. **A blanket "lacks capacity" flag is refused.** Capacity is decision-specific and time-specific: a
+   person may lack it for cardiac surgery and retain it for a blood test. An assessment names its
+   decision or it is not an assessment, it is a label that follows someone for years after the
+   delirium resolved.
+3. **A finding of incapacity cannot stand on a checkbox.** All four functional abilities must be
+   answered and a reason is mandatory. An assessment with no decision-making support recorded is
+   flagged as incomplete, since capacity is assessed AFTER support has been offered.
+4. **A proxy decides for the patient, not for themselves**, and a valid advance directive OUTRANKS a
+   relative who disagrees with it.
+5. **Emergency treatment is never recorded as consent.** Passing NECESSITY as a consent basis is
+   refused with a pointer to the right function, which records it as what it is and requires both why
+   they could not consent and why it could not wait.
+6. **Consent does not generalise, goes stale, and is withdrawable at any moment** including after the
+   patient is on the table. Withdrawal deliberately requires no reason: requiring one would make it
+   something to justify rather than a right exercised.
+
+This module does not assess capacity, and says so in its own output. Any function claiming to would
+be used to overrule people, which is why there is not one.
+
+### wardsynq-research.js: the record that looks anonymous
+
+The hazard is not failing, it is succeeding visibly and failing invisibly. The name is gone, the
+record looks anonymous, and the person is still findable from date of birth, district and a rare
+diagnosis. The output LOOKS safe, which is exactly why it gets shared.
+
+1. **Safe Harbor is a floor, not a proof**, and nothing this module returns uses the word anonymous.
+   The disclaimer travels with every release.
+2. **k-anonymity catches what Safe Harbor passes**, and rows that fail it are WITHHELD rather than
+   released with a warning, because a warning does not travel with the row once somebody opens the
+   file in a spreadsheet.
+3. **A rare diagnosis is an identifier.** There may be one patient in the state with it.
+4. **Date shifting is per-patient and consistent.** Intervals within a patient survive, which is the
+   research value; a single dataset-wide offset would let anyone who knows one real date recover
+   every other.
+5. **Free text is removed, never scrubbed.** A regex over a discharge summary produces text that
+   looks clean and still names the daughter and the referring doctor.
+6. **An unrecognised field is dropped, not assumed safe.** A failing test caught the corollary: a
+   timestamp nobody listed in dateFields is an unknown field, so forgetting to declare it drops the
+   date rather than releasing the real one.
+
+One deliberate cost is now pinned by a test: the direct-identifier match is over-broad, so drugName
+and testName are stripped as identifiers. Over-removal is recoverable because it is reported;
+under-removal is not, because nobody looks.
+
+Neither module gets a hazard row. They are governance, not clinical controls. Safety case holds at
+12 of 14 with 2 partial. 639 tests across 25 suites.
+
+STATUS: IMPLEMENTED and TESTED. NOT clinically validated, NOT legal advice, NOT certified against
+HIPAA, the DPDP Act or any other regime.

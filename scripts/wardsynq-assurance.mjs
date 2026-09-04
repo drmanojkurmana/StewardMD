@@ -44,6 +44,8 @@ const SUITES = [
   "test/wardsynq-bundle-binding.test.mjs",
   "test/wardsynq-quality.test.mjs",
   "test/wardsynq-incidents.test.mjs",
+  "test/wardsynq-consent.test.mjs",
+  "test/wardsynq-research.test.mjs",
   "test/wardsynq-safety-case.test.mjs",
 ];
 
