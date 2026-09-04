@@ -4,9 +4,17 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>WardSynQ</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="wardsynq.css?v=6">
+<!-- There were two preconnects to Google Fonts here and no stylesheet link, so Source Sans 3 was
+     never actually requested: the page opened a DNS lookup and a TLS handshake to a host it then
+     never used, and rendered in whatever the machine happened to have. It looked correct only on
+     developer machines with the face installed locally.
+
+     They are removed rather than completed. This is an offline-first clinical surface that has to
+     work in a hospital basement, and a webfont fetched from a CDN at first paint is a dependency on
+     the network being up at exactly the moment a ward has lost it. The stack in --sans is now the
+     design rather than a fallback from one. Production step, if the face is wanted: self-host a
+     subset alongside the CSS with font-display: swap, so it is cached with everything else. -->
+<link rel="stylesheet" href="wardsynq.css?v=8">
 <link rel="icon" type="image/png" sizes="32x32" href="brand/icon-32.png">
 <link rel="apple-touch-icon" sizes="180x180" href="brand/icon-180.png">
 <link rel="manifest" href="brand/wardsynq.webmanifest">

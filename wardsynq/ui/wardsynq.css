@@ -83,6 +83,11 @@
   --brand: #1c3048;
   --brand-on: #ffffff;
 
+  /* Source Sans 3 is named first and is NOT fetched. See the note in wardsynq.html: an offline-first
+   * clinical surface must not depend on a CDN at first paint, so the rest of this stack is the
+   * design and not a degraded version of it. Every face here is a humanist sans with open apertures
+   * and unambiguous digits, which is the property that actually matters for a drug name and a dose.
+   * If the face is wanted in production, self-host a subset next to this file. */
   --sans: "Source Sans 3", "Segoe UI", Roboto, system-ui, sans-serif;
   --mono: "Source Code Pro", ui-monospace, Menlo, Consolas, monospace;
 
@@ -126,11 +131,16 @@
 
     /* The brand navy is a LIGHT-MODE colour. On the dark raised surface it measures well under
      * 1.5:1 and the mark would all but disappear, which is why the light block's value is not
-     * simply inherited here. Dark mode gets a lifted navy that keeps the hue and clears AAA.
+     * simply inherited here.
+     *
+     * White, at the owner's direction. An earlier version used a lifted navy on the reasoning that
+     * it preserved the hue; the owner's call is white, which is the more common treatment for a
+     * dark-mode mark and is the brand owner's decision to make rather than this file's. It measures
+     * 16.4:1 on the darkest surface.
      *
      * The logo asset is a single flat colour with alpha as its mask precisely so it can be
      * recoloured to this rather than shipped as two files that can drift apart. */
-    --brand: #9db8d8;
+    --brand: #ffffff;
     --brand-on: #101922;
   }
 }
@@ -499,7 +509,7 @@ textarea { width: 100%; min-height: 74px; resize: vertical; line-height: 1.5; }
 }
 
 .brand-mark {
-  height: 22px;
+  height: 26px;   /* was 22px, up 20 percent at the owner's request */
   width: auto;
   /* The asset is a flat shape with alpha as its mask, so the palette recolours it rather than the
      build shipping a second file that can drift from the first. */
@@ -509,11 +519,17 @@ textarea { width: 100%; min-height: 74px; resize: vertical; line-height: 1.5; }
 /* The dark palette lifts the navy, and the mark follows it. */
 @media (prefers-color-scheme: dark) {
   .brand-mark {
-    /* Inverting a dark mark on a dark ground is the wrong instinct: it produces white, not the
-       brand. The asset is repainted to --brand instead, via a mask, so the hue survives. */
-    background: var(--brand);
-    -webkit-mask: url("brand/wardsynq-lockup.png") no-repeat center / contain;
-    mask: url("brand/wardsynq-lockup.png") no-repeat center / contain;
+    /* Repaints the mark white, which is --brand in the dark palette.
+     *
+     * This was a background plus a mask first, and it did not work: an <img> still paints its own
+     * pixels over its own background, so the navy artwork sat on top of the white fill and nothing
+     * appeared to change. A screenshot caught it. The mask approach is right for a <div>, and this
+     * element is an <img> because it carries intrinsic dimensions that reserve its box before it
+     * decodes, which is worth more here than the elegance.
+     *
+     * brightness(0) collapses every channel to black while leaving alpha alone; invert(1) then
+     * takes that to white. The result is exactly the silhouette, in exactly one colour. */
+    filter: brightness(0) invert(1);
   }
 }
 
