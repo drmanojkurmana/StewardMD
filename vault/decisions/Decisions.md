@@ -3033,3 +3033,59 @@ Also refreshed `vault/modules/WardSynQ.md`, which still said "P0 complete, unwir
 listed the safety case and interop hub as unbuilt.
 
 STATUS: IMPLEMENTED and TESTED. NOT clinically validated, NOT clinically approved.
+
+## Obstetrics: paying off the second refusal (2026-09-04)
+
+NEWS2 refused pregnant patients and pointed at a module that did not exist. Children got a module
+when the same debt came up; pregnant women got a dead end. Refusing to score a population and
+offering them nothing leaves that population LESS protected than before, not more, because the
+refusal also removes whatever crude signal they were getting.
+
+`wardsynq/wardsynq-obstetrics.js` (30 tests) is that module, and the design decisions are all
+consequences of one physiological fact: a healthy young pregnant woman COMPENSATES EXTRAORDINARILY
+WELL. Blood volume is up around 40 percent, resting pulse is up, blood pressure FALLS in the second
+trimester. She can lose 1.5 litres with a pulse of 100 and a normal blood pressure and then
+decompensate suddenly and late. A general early warning score here is not merely miscalibrated, it is
+looking for a gradual curve this patient does not draw.
+
+1. **MEOWS is trigger-based and returns NO TOTAL.** Not a re-skinned NEWS2. One red trigger, or two
+   concurrent yellows, is the alert. A sum would give a low total to a woman with one catastrophic
+   parameter and six normal ones, which is exactly the presentation that kills, so there is no
+   number anywhere in the result that can be read as reassuring. A missing parameter never suppresses
+   a red trigger either.
+2. **The compensation warning is attached to EVERY result, including the calm ones**, because the
+   reassuring result is the dangerous one.
+3. **Pregnancy is a state with a postpartum day, not a boolean.** Most maternal haemorrhage deaths
+   are postpartum, so a `pregnant: true` flag that flips to false at delivery would drop the guard at
+   the moment risk peaks. The NEWS2 refusal was widened to match, and the test for it is the one that
+   would have caught the original bug.
+4. **A visual blood-loss estimate is an observation and never a measurement.** Visual estimation
+   underestimates by roughly half, worst at the volumes where the decision changes, so a volume
+   threshold on an estimate returns UNKNOWN rather than false, and the plausible true figure is shown
+   alongside rather than silently substituted. An untrustworthy estimate PROMPTS: waiting for
+   certainty is the error.
+5. **No dosing at all, and magnesium sulphate deliberately.** The window between anticonvulsant
+   effect and respiratory arrest is narrow, and an unapproved regimen in this file would be a direct
+   route to a maternal death. A test asserts no bundle element label contains anything matching a
+   dose.
+6. **The obstetric bundles reuse the emergency module's clock** via its `definition` injection rather
+   than growing a second timing implementation, so they inherit the immutable time zero and the
+   ordered-is-not-given guard for free.
+
+**An asymmetry fixed rather than declared.** NEWS2 gathered from observations with a freshness window
+and the IoMT artefact filter; MEOWS took a plain values object, so a chart could be built over a
+six-hour-old blood pressure or a detached lead with nothing to stop it. Rather than write that into a
+caveat, the gatherer was extracted to `wardsynq-vitals.js` and both charts now use it. Two charts with
+two ideas of what counts as a current observation is the same class of defect as two notification
+paths with two definitions of delivery, which was last week's bug.
+
+**HAZ-MAT-01 is VERIFIED, not partial**, and the distinction is deliberate: it claims DETECTION and
+MEASUREMENT DISCIPLINE, and delivers both. It does not claim treatment. The trigger cut-offs are
+UNAPPROVED and that matters more here than elsewhere, because MEOWS charts differ substantially
+between units and a chart with the wrong cut-offs is worse than no chart, since it is trusted. Fetal
+monitoring and CTG interpretation are not touched at all and this row must not be read as covering
+them.
+
+12 of 14 hazards verified, 2 partial. Scoring methodology and criteria unchanged.
+
+STATUS: IMPLEMENTED and TESTED. NOT clinically validated, NOT clinically approved.

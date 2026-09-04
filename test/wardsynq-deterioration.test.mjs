@@ -170,8 +170,30 @@ test("ADVERSARIAL: a patient of unknown age is refused, not assumed adult", () =
 
 test("ADVERSARIAL: NEWS2 is refused in pregnancy, where the normal ranges move", () => {
   const r = news2({ values: WELL, patient: { ...ADULT, pregnant: true }, now: NOW });
-  assert.equal(r.code, "PREGNANT");
+  assert.equal(r.code, "OBSTETRIC");
   assert.match(r.reason, /MEOWS/);
+});
+
+test("ADVERSARIAL: the obstetric refusal covers the POSTPARTUM woman, not just the pregnant one", () => {
+  // Most maternal deaths from haemorrhage happen after delivery. A `pregnant` boolean that flips to
+  // false at delivery would drop the guard at the moment the risk peaks.
+  const r = news2({
+    values: WELL,
+    patient: { ...ADULT, pregnant: false, deliveredAt: "2026-09-02T04:00:00.000Z" },
+    now: NOW,
+  });
+  assert.equal(r.code, "OBSTETRIC");
+  assert.match(r.reason, /puerperium/);
+  assert.match(r.reason, /day 2 postpartum/);
+});
+
+test("a woman well beyond the puerperium is scored with NEWS2 again", () => {
+  const r = news2({
+    values: WELL,
+    patient: { ...ADULT, deliveredAt: "2026-01-01T00:00:00.000Z" },
+    now: NOW,
+  });
+  assert.equal(r.scorable, true, "the obstetric period ends, and the refusal has to end with it");
 });
 
 /* ------------------------------------------------------------------ ADVERSARIAL: the inputs */

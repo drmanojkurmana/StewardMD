@@ -23,10 +23,11 @@
  *   4. THE TOTAL HIDES THE SINGLE PARAMETER. A total of 3 from one parameter at its extreme is a
  *      different patient from a total of 3 spread across three parameters, and a system that shows
  *      only the total misses the first one. Both drive escalation here.
- *   5. NEWS2 IS ADULT AND NON-OBSTETRIC. It is not validated below 16, where PEWS applies, and not
- *      in pregnancy, where normal physiology moves the parameters and MEOWS applies. Neither is
- *      modelled, so both are REFUSED rather than approximated. This is the same rule as
- *      wardsynq-paediatrics.js: an unbanded tool means adult.
+ *   5. NEWS2 IS ADULT AND NON-OBSTETRIC. It is not validated below 16, where PEWS applies and is not
+ *      modelled, and not in pregnancy or the puerperium, where MEOWS applies and now is
+ *      (wardsynq-obstetrics.js). Both are REFUSED rather than approximated, and the obstetric
+ *      refusal covers the postpartum woman too, because most maternal haemorrhage deaths happen
+ *      after delivery and a `pregnant` boolean would drop the guard exactly when risk peaks.
  *   6. A SCORE NOBODY ANSWERS IS THE ACTUAL FAILURE. Escalation is closed-loop and re-escalates on
  *      its own when the response window passes unacknowledged.
  *
@@ -34,8 +35,9 @@
  * requires a clinician to be able to click a derived value and see the raw observations behind it. A
  * derived number with no traceable inputs is not evidence.
  *
- * NOT MODELLED: PEWS, MEOWS, qSOFA and the sepsis bundle, spinal-injury and post-ictal states, and
- * any local escalation policy beyond the RCP's default tiers.
+ * NOT MODELLED: PEWS, spinal-injury and post-ictal states, and any local escalation policy beyond
+ * the RCP's default tiers. MEOWS lives in wardsynq-obstetrics.js and sepsis screening in
+ * wardsynq-emergency.js.
  *
  * PROVENANCE OF THE SCORE ITSELF: the parameter bands are the Royal College of Physicians' published
  * NEWS2 (2017) chart. They are a national standard rather than seed content invented here, which is
@@ -47,9 +49,10 @@
  * node --test test/wardsynq-deterioration.test.mjs
  */
 
-import { scoreable } from "./wardsynq-iomt.js";
+import { gatherVitals, FRESHNESS_MS } from "./wardsynq-vitals.js";
 import { ageBandOf, BAND } from "./wardsynq-paediatrics.js";
 import { Dispatcher, NotifyError } from "./wardsynq-notify.js";
+import { obstetricState, isObstetric } from "./wardsynq-obstetrics.js";
 
 /** The seven NEWS2 parameters. A score is not a score until all seven have been answered. */
 const PARAM = Object.freeze({
@@ -78,9 +81,6 @@ const LOINC = Object.freeze({
 
 /** ACVPU. Anything other than Alert scores 3, including new confusion. */
 const ACVPU = Object.freeze(["A", "C", "V", "P", "U"]);
-
-/** How old a vital sign may be and still describe the patient now. A local policy, stated once. */
-const FRESHNESS_MS = 4 * 60 * 60 * 1000;
 
 const CLINICAL_RISK = Object.freeze({
   LOW: "low",
@@ -169,36 +169,13 @@ function scoreTemperature(v) {
 /* ------------------------------------------------------------------ gathering the inputs */
 
 /**
- * Reduces a list of observations to the latest value for each NEWS2 parameter.
+ * The NEWS2 parameters, gathered from observations.
  *
- * Runs `scoreable()` first, so device observations excluded as artifact never reach the score. That
- * is the whole point of the IoMT filter and it belongs here, at the consumer, where forgetting it
- * would be invisible.
- *
- * @returns {{values: object, sources: object, rejected: {id, reason}[]}}
+ * The freshness window and the artefact filter live in wardsynq-vitals.js so that this chart and the
+ * obstetric one cannot drift apart on what counts as a current, trustworthy observation.
  */
-function gather(observations, { now, freshnessMs = FRESHNESS_MS } = {}) {
-  const nowMs = Date.parse(now || new Date().toISOString());
-  const values = {};
-  const sources = {};
-  const rejected = [];
-
-  for (const o of scoreable(observations)) {
-    if (!o || !o.code) continue;
-    const param = LOINC[o.code] || (REQUIRED.includes(o.code) ? o.code : null);
-    if (!param) continue;
-
-    const at = Date.parse(o.effectiveAt || (o.meta && (o.meta.effectiveAt || o.meta.recordedAt)) || "");
-    if (!Number.isFinite(at)) { rejected.push({ id: o.id, param, reason: "no effective time, so its age cannot be established" }); continue; }
-    if (nowMs - at > freshnessMs) {
-      rejected.push({ id: o.id, param, reason: `recorded ${Math.round((nowMs - at) / 60000)} minutes ago, beyond the ${Math.round(freshnessMs / 60000)} minute freshness window` });
-      continue;
-    }
-    if (sources[param] && sources[param].at >= at) continue; // an older reading never replaces a newer one
-    values[param] = o.value;
-    sources[param] = { id: o.id, at, atIso: new Date(at).toISOString(), code: o.code };
-  }
-  return { values, sources, rejected };
+function gather(observations, opts = {}) {
+  return gatherVitals(observations, { codeMap: LOINC, ...opts });
 }
 
 /* ------------------------------------------------------------------ the score */
@@ -232,8 +209,14 @@ function news2(input) {
           : `NEWS2 is not validated below 16 years; this patient bands as ${banding.band} and needs PEWS, which is not modelled here`,
         "NOT_ADULT");
     }
-    if (patient.pregnant === true) {
-      return refuse("NEWS2 is not validated in pregnancy, where normal physiology moves several parameters; MEOWS applies and is not modelled here", "PREGNANT");
+    // Pregnancy is not a boolean, and the refusal has to cover the postpartum woman too. Most
+    // maternal deaths from haemorrhage happen AFTER delivery, so a check on `pregnant === true`
+    // would drop the protection at the moment the risk peaks.
+    const obs = obstetricState(patient, now);
+    if (isObstetric(obs.state)) {
+      return refuse(
+        `NEWS2 is not validated in pregnancy or the puerperium, where normal physiology moves several parameters and a compensating patient reads as well: use MEOWS (wardsynq-obstetrics.js). This patient is ${obs.reason}.`,
+        "OBSTETRIC");
     }
   }
 

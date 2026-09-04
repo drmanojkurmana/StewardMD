@@ -3,14 +3,14 @@
 Hospital Clinical OS and EMR **inside StewardMD**, not a separate repo or product codebase.
 `wardsynq.com` is its web surface. Owner decision 2026-09-04. Spec: `~/Downloads/implementation_planfinal.md`.
 
-STATUS: **P0 complete, P1 in progress.** 493 tests across 19 suites. The clinical workstation UI
+STATUS: **P0 complete, P1 in progress.** 525 tests across 20 suites. The clinical workstation UI
 exists at `wardsynq/ui/` and is wired to a `GovernedStore`, but it is behind no route in the mobile
 app and is not reachable by any user. All clinical content (interaction, allergy, dose ceiling and
 critical threshold packs) is UNAPPROVED seed data and must not gate a real order until pharmacy and
 the relevant committee sign it off.
 
 The safety case is executable: `node scripts/wardsynq-assurance.mjs` runs the real suites and
-cross-references the hazard table against what actually passed. It currently reports **11 of 13
+cross-references the hazard table against what actually passed. It currently reports **12 of 14
 verified, 2 partial**. Read the caveats; the summary line alone is not the state of the system.
 
 ## Ward Sync and WardSynQ are ONE system
@@ -94,16 +94,17 @@ network.
 - `wardsynq/adapters/wardsynq-rules-stewardmd.js` — maps StewardMD's existing
   `data/interaction-rules.json` into a WardSynQ rule pack. Adapter, not core.
 - `wardsynq/data/allergy-classes.seed.json` — UNAPPROVED allergy class and cross-reactivity seed.
-- Tests: `wardsynq-p0-core` 44, `wardsynq-store` 19 (+1 skipped in Node), `wardsynq-mpi` 27,
-  `wardsynq-safety` 37. Total 127. `node --test test/wardsynq-*.test.mjs`.
+- Tests: `node --test test/wardsynq-*.test.mjs` runs every suite. See the table below for the P1
+  modules; `node scripts/wardsynq-assurance.mjs` is the one that cross-references them against the
+  hazard table.
 
 ## Design rules worth not re-litigating
 
 **The eMAR contains no clinical pharmacology.** No interaction matrix, no dose ceilings, no allergy
 subsumption, no renal adjustment. `wardsynq-meds.js` decides "has this dose passed every workflow
 gate"; the injected `safetyCheck` hook decides "is this dose clinically safe". Mixing them is how a
-workflow refactor silently weakens a clinical control. The safety engine itself
-(`wardsynq-safety.js`) is NOT written yet.
+workflow refactor silently weakens a clinical control. The safety engine (`wardsynq-safety.js`) is
+built and is injected, never imported by the eMAR.
 
 **The default safety hook refuses everything** (`denyWithoutSafetyEngine`). With no engine wired in,
 the correct behaviour for a medication system is to refuse to administer, not to wave doses through.
@@ -190,10 +191,12 @@ cross-references them, so a renamed or deleted test shows as MISSING TEST rather
 | `wardsynq-deterioration.js` | HAZ-DET-01 (local, PARTIAL) | NEWS2. A missing parameter is INCOMPLETE, never zero. |
 | `wardsynq-emergency.js` | HAZ-TIME-01 (local, PARTIAL) | Sepsis/STEMI/arrest bundles. Time zero is immutable and pinned in both directions. |
 | `wardsynq-recognition.js` | (closes TIME-01's trigger) | Prompts a human; never opens a bundle itself. |
+| `wardsynq-obstetrics.js` | HAZ-MAT-01 (local) | MEOWS. Trigger-based with NO total; a visual blood-loss estimate is never a measurement. |
 | `wardsynq-notify.js` | (infrastructure) | The single definition of delivery. Attempted is not delivered. |
+| `wardsynq-vitals.js` | (infrastructure) | The single definition of a current, non-artefactual observation, shared by both charts. |
 
-Two hazards are LOCAL: they are not in the spec's assurance table and were added because the omission
-was real. Both are PARTIAL and both lower the verified fraction rather than raising it.
+Three hazards are LOCAL: they are not in the spec's assurance table and were added because the
+omission was real. Two are PARTIAL. Adding them lowered the verified fraction rather than raising it.
 
 ## The honest state of it
 
@@ -213,7 +216,7 @@ the live mobile path onto the adapter. `wardsynq-shadow.js` exists for it and `i
 it awaits a shadow run against real ward data (`?wardsynq_shadow=1`, then check
 `SMD_WARDSYNQ_SHADOW.report().clean`).
 
-Also unbuilt: obstetrics and the ICU flowsheet; all of P2 (enterprise/RCM, quality measures,
+Also unbuilt: the ICU flowsheet; all of P2 (enterprise/RCM, quality measures,
 incidents, research de-identification, API gateway) and P3 (MLOps, SecOps, digital twin); a second UI
 screen to prove the design system scales. Production gaps beyond the transport: no service worker for
 the workstation, a CDN webfont, and no barcode hardware, so every scan is a supplied value.

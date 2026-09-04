@@ -452,6 +452,44 @@ const HAZARDS = Object.freeze([
     approver: "Chief Medical Officer, Resuscitation Committee and Sepsis Lead",
     caveat: "PARTIAL. The original reason has been closed: wardsynq-recognition.js now prompts a named human on a positive screen or a high NEWS2, so the control no longer applies only to patients somebody had already recognised, and building it exposed a real hole in the timing guard. Time zero was protected against being moved EARLIER than its evidence and not against being moved LATER, which is the direction that is actually gamed, because moving it forward is what turns a two-hour wait into a compliant one-hour bundle. An accepted prompt now pins it in both directions. What keeps this PARTIAL is everything downstream: no notification transport (channels are functions a site supplies and none are shipped), the monitor sweep is caller-driven, and there is no link from a bundle to the medication or order modules, so 'antibiotics administered' is asserted by whoever records it rather than derived from an eMAR administration. Bundle elements and targets are the published Surviving Sepsis and ACLS intervals; the local policy attached to them is UNAPPROVED. NOT modelled: the ACLS algorithm, drug doses, STEMI ECG interpretation, paediatric arrest. Not clinically validated and not clinically approved.",
   },
+  {
+    id: "HAZ-MAT-01",
+    source: "LOCAL: not transcribed from the spec's assurance table, which has no obstetric row. Added because NEWS2 correctly REFUSES pregnant and postpartum patients, and a refusal with nothing behind it leaves the refused population less protected than before, not more.",
+    hazard: "Unrecognised maternal deterioration, and haemorrhage judged by eye",
+    initialRisk: "catastrophic x occasional",
+    requirement: "A pregnant or recently delivered woman must be assessed on an obstetric chart rather than a general one, the assessment must not be readable as a reassuring total, and blood loss must not be treated as measured when it was estimated.",
+    control: {
+      kind: "trigger-based obstetric chart with measurement discipline",
+      // FULL for what it claims. It claims detection and measurement discipline, not treatment: no
+      // dosing, no fetal monitoring, and the bundles it defines run on the emergency module's clock
+      // whose own limits are declared under HAZ-TIME-01 rather than re-declared here.
+      adequacy: "full",
+      module: "wardsynq/wardsynq-obstetrics.js",
+      summary: "MEOWS is TRIGGER-based and returns no total at all, because summing lets one catastrophic parameter hide behind several normal ones. One red trigger, or two concurrent yellows, alerts; a missing parameter never suppresses a red one. Pregnancy is a state with a postpartum day rather than a boolean, so the guard covers the puerperium, where most haemorrhage deaths happen. Every result, including the ones with no triggers, carries the compensation warning: she can lose 1.5 litres with a normal blood pressure, and absence of triggers is not evidence that she is well. A visual blood-loss estimate is kept as an observation and REFUSED as a measurement, so a volume threshold returns unknown rather than false. The chart is built through the same gatherer as NEWS2, so stale and artefactual observations cannot reach it. No bundle element carries a drug dose, asserted by a test.",
+    },
+    verification: {
+      file: "test/wardsynq-obstetrics.test.mjs",
+      tests: [
+        "ADVERSARIAL: there is no total anywhere in the result to be read as reassuring",
+        "ADVERSARIAL: ONE red trigger is an alert, however normal everything else is",
+        "ADVERSARIAL: a missing parameter does NOT suppress a red trigger",
+        "ADVERSARIAL: the compensation warning is attached to EVERY result, including the calm ones",
+        "ADVERSARIAL: risk does not end at delivery, it peaks there",
+        "ADVERSARIAL: a visual estimate is an observation and never a measurement",
+        "ADVERSARIAL: a threshold cannot be decided on a visual estimate",
+        "ADVERSARIAL: an untrustworthy visual estimate PROMPTS rather than waiting for certainty",
+        "ADVERSARIAL: no bundle element carries a magnesium dose",
+        "ADVERSARIAL: a stale blood pressure does not become a current MEOWS parameter",
+        "ADVERSARIAL: a detached lead never reaches the obstetric chart either",
+        "ADVERSARIAL: the obstetric refusal covers the POSTPARTUM woman, not just the pregnant one",
+        "a pregnant adolescent is flagged rather than silently scored or silently refused",
+        "the obstetric bundles inherit every timing guarantee rather than growing a second clock",
+      ],
+    },
+    residualRisk: "reduced for detection and measurement; unchanged for everything downstream of recognising her",
+    approver: "Clinical Director of Obstetrics and Head of Midwifery",
+    caveat: "IMPLEMENTED and TESTED, not clinically validated or approved. THE TRIGGER CUT-OFFS ARE UNAPPROVED and this matters more here than elsewhere: MEOWS charts differ substantially between units, and a chart with the wrong cut-offs is worse than no chart because it is trusted. The obstetric lead owns these values. NOT modelled: fetal monitoring and CTG interpretation of ANY kind, which is a large and separate hazard this file does not touch and must not be read as covering; labour progress, shoulder dystocia and other intrapartum emergencies; amniotic fluid embolism; pregnancy-specific sepsis scoring; gestational diabetes. NO DOSING of any kind, and magnesium sulphate deliberately so: the window between anticonvulsant effect and respiratory arrest is narrow and an unapproved regimen here would be a direct route to a maternal death. The bundles run on the emergency module's clock and inherit its limits, declared under HAZ-TIME-01: no notification transport is shipped and no element is derived from a real eMAR administration.",
+  },
 ]);
 
 /**
