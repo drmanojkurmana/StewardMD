@@ -2374,3 +2374,49 @@ Adapter contract for everything that follows: stable ids from source-stable part
 silently dropped (unmapped vocabulary keeps its name and raises an issue, one bad row never discards
 the import); the raw source preserved on every record; no invented clinical values; and a source
 system's own assertions (GHIS's `critical` flag) carried as data, never promoted to a control.
+
+## 2026-09-04 WardSynQ workstation, and two safety bugs only the UI exposed
+
+Built the EMR surface (`wardsynq/ui/`): patient banner, worklist, order entry with live safety
+checking, and the override handshake. Buildless native ES modules and hand-written CSS, importing
+the same source the tests import, so the screen cannot drift from tested behaviour. No clinical
+logic in the UI: every verdict comes from the real engine against the real pack.
+
+**taste-skill was the wrong tool and says so itself.** Its section 13 excludes dashboards, dense
+product UI and data tables, which is exactly what a clinical workstation is. Used
+`ecc-healthcare-emr-patterns` instead. Design dials set deliberately against web defaults: variance
+LOW (a clinician must find the same control in the same place at 3am), motion LOW (movement in a
+ward UI is distraction, and an animated critical alert is worse), density HIGH.
+
+**Two real bugs found by driving the interface, neither caught by 165 unit tests.**
+
+1. **Duplicate-therapy rules fired on a SINGLE drug.** All 270 `duplicate_class` rules in the pack
+   carry exactly one subject, meaning "two or more drugs in this class". Read literally by a
+   generic matcher they fire when only one is present, so ordering warfarin for a patient on
+   nothing else raised a MAJOR "two systemic anticoagulants" alert and demanded an override
+   handshake for a duplication that did not exist. That is a false gate on the majority of ordinary
+   orders, and the fastest possible way to teach clinicians to click through safety prompts. Fixed
+   with `satisfyDuplicationRule`, which requires at least two distinct matching drugs and names all
+   of them in the finding.
+2. **Alert fatigue by class multiplicity.** Amoxicillin plus clarithromycin produced SIX identical
+   duplicate-therapy advisories, one per shared class tag, including tags meaningless at the bedside
+   ("Chemical Structure", "Established Pharmacologic Classes"). Fixed with
+   `collapseDuplicateFindings`, grouping by rule type, severity and drug set; every contributing
+   rule id survives in `mergedRuleIds` so an audit loses nothing. Findings of different severity or
+   about different drugs are never collapsed. Together these took the amoxicillin case from seven
+   findings to three.
+
+**A UX bug that is really an audit-quality bug.** The verdict panel re-renders on every keystroke in
+the order form, which destroyed a half-typed override rationale. A clinician who loses a careful
+justification once starts writing "as discussed", and the audit trail quietly stops being worth
+reading. Drafts are now preserved across re-renders.
+
+**Buildless ESM caching gotcha.** A `?v=` token on the entry script does NOT invalidate the modules
+it imports: ES module imports are cached per URL. The workstation ran stale safety logic in the
+browser while the served file and the tests were both correct, which is a genuinely dangerous
+failure mode for a safety control. Development now uses a no-store dev server; a production
+deployment needs cache headers on the module files, not just a version token on the entry point.
+StewardMD's `?v=goldNNN` convention has the same blind spot for anything loaded as a module.
+
+The screen states the rule pack version and its approval status permanently, because a clinician
+trusting seed data because the interface looked finished is a foreseeable route to harm.

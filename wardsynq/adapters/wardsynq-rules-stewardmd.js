@@ -21,8 +21,12 @@
  * fix it here, not in the engine.
  */
 
-import { readFile } from "node:fs/promises";
 import { compileRulePack } from "../wardsynq-safety.js";
+
+/* No top-level node:fs import. The EMR loads this same module in a browser, where the pack arrives
+ * over fetch rather than off disk, and a top-level node: import would fail at parse time there.
+ * `buildRulePack` below is the isomorphic half; `loadStewardMDRulePack` is the Node-only wrapper
+ * and pulls fs in dynamically when it is actually called. */
 
 /** StewardMD severities map 1:1 onto WardSynQ's, but state it explicitly so a drift is visible. */
 const SEVERITY_MAP = Object.freeze({
@@ -91,8 +95,25 @@ async function loadStewardMDRulePack(opts) {
   const allergySeedPath = opts.allergySeedPath
     || new URL("../data/allergy-classes.seed.json", import.meta.url);
 
+  const { readFile } = await import("node:fs/promises");
   const raw = JSON.parse(await readFile(interactionRulesPath, "utf8"));
   const allergySeed = includeSeeds ? JSON.parse(await readFile(allergySeedPath, "utf8")) : { allergyClasses: {}, crossReactivity: [] };
+
+  return buildRulePack(raw, allergySeed, opts);
+}
+
+/**
+ * The isomorphic half: raw JSON in, compiled pack out. Works in Node and in the browser, so the
+ * EMR and the test suite compile the identical pack from the identical data rather than each
+ * having its own subtly different loader.
+ *
+ * @param {object} raw parsed data/interaction-rules.json
+ * @param {object} allergySeed parsed allergy-classes.seed.json, or empty sections to omit it
+ */
+function buildRulePack(raw, allergySeed, opts) {
+  opts = opts || {};
+  allergySeed = allergySeed || { allergyClasses: {}, crossReactivity: [] };
+  const includeSeeds = opts.includeUnapprovedSeeds !== false;
 
   return compileRulePack({
     version: `stewardmd-${raw.version || "unknown"}${includeSeeds ? "+seed" : ""}`,
@@ -162,4 +183,4 @@ function mapInteractionRule(rule) {
   };
 }
 
-export { loadStewardMDRulePack, mapInteractionRule, buildFirstWordAliases, DOSE_LIMITS_SEED, SEVERITY_MAP };
+export { loadStewardMDRulePack, buildRulePack, mapInteractionRule, buildFirstWordAliases, DOSE_LIMITS_SEED, SEVERITY_MAP };

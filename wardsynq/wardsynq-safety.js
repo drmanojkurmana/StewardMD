@@ -380,7 +380,9 @@ function checkInteractions(pack, order, activeMeds) {
   for (const t of present) for (const rule of pack.byToken.get(t) || []) candidates.add(rule);
 
   for (const rule of candidates) {
-    const assignment = satisfyRule(rule, enriched);
+    const assignment = isDuplicationRule(rule)
+      ? satisfyDuplicationRule(rule, enriched)
+      : satisfyRule(rule, enriched);
     if (!assignment) continue;
     if (!assignment.some((e) => e.isOrdered)) continue; // pre-existing, not caused by this order
     const disposition = rule.disposition || defaultDisposition(rule.severity);
@@ -398,7 +400,66 @@ function checkInteractions(pack, order, activeMeds) {
       },
     ));
   }
-  return out;
+  return collapseDuplicateFindings(out);
+}
+
+/**
+ * Collapses findings that say the same clinical thing about the same drugs.
+ *
+ * Real class data tags a drug many times over: amoxicillin and clarithromycin share
+ * "Anti-infective", "Antibacterial", "Antimicrobial", "Chemical Structure", "Established
+ * Pharmacologic Classes" and "Penicillin-class Antibacterial", so a naive one-finding-per-rule
+ * pass reports the SAME duplicate-therapy fact six times, several of them under class names that
+ * mean nothing at the bedside. Six alerts for one fact is how alert fatigue is manufactured, and a
+ * clinician who learns to dismiss this panel will dismiss the hard-stop sitting above it too.
+ *
+ * Findings are therefore grouped by what a clinician would consider one issue: the same rule type
+ * and severity about the same set of drugs. The surviving finding keeps every contributing rule id
+ * in `mergedRuleIds` so an audit can still see exactly which rules fired, and counts them in
+ * `mergedCount`. Nothing is discarded from the record, only from the reading.
+ *
+ * Deliberately NOT collapsed: findings of different severity, or about different drugs. Those are
+ * different clinical facts even when their wording is similar.
+ */
+function collapseDuplicateFindings(findings) {
+  const groups = new Map();
+  for (const f of findings) {
+    const key = `${f.ruleType}|${f.severity}|${(f.drugs || []).slice().sort().join("+")}`;
+    const existing = groups.get(key);
+    if (!existing) {
+      groups.set(key, { ...f, mergedRuleIds: [f.ruleId], mergedCount: 1 });
+      continue;
+    }
+    existing.mergedRuleIds.push(f.ruleId);
+    existing.mergedCount += 1;
+  }
+  return [...groups.values()];
+}
+
+/**
+ * A duplicate-therapy rule names ONE class and means "two or more drugs in this class is
+ * duplication". It does not mean "one drug in this class is a problem".
+ *
+ * This distinction is not cosmetic and it is easy to get wrong, because such a rule looks
+ * structurally identical to a single-subject pair rule. Read literally by a generic matcher, all
+ * 270 of these in the StewardMD pack fire on a SINGLE drug: ordering warfarin for a patient on no
+ * other anticoagulant raises a major "two systemic anticoagulants" alert, which this engine maps to
+ * an override requirement. A clinician would be asked to justify a duplication that does not exist,
+ * on the majority of ordinary orders. Found by driving the workstation, not by a unit test.
+ */
+function isDuplicationRule(rule) {
+  return rule.type === "duplicate_class" && rule.subjects.length === 1;
+}
+
+/**
+ * Satisfies a duplicate-therapy rule: collect EVERY distinct drug matching the class, and fire only
+ * when at least two do. Returns all of them, so the finding can name the drugs that actually
+ * overlap rather than just the one being ordered.
+ */
+function satisfyDuplicationRule(rule, entries) {
+  const subject = rule.subjects[0];
+  const matches = entries.filter((e) => (subject.kind === "generic" ? e.generic === subject.value : e.tokens.has(subject.value)));
+  return matches.length >= 2 ? matches : null;
 }
 
 /**
@@ -624,6 +685,6 @@ export {
   SEVERITY, SEVERITY_ORDER, DISPOSITION, NON_OVERRIDABLE_REACTIONS,
   SafetyEngine, SafetyEngineError,
   compileRulePack, emptyRulePack, defaultDisposition,
-  checkAllergies, checkInteractions, checkDose, checkRenal,
-  resolveGeneric, renalBand, isSevereReaction, satisfyRule,
+  checkAllergies, checkInteractions, checkDose, checkRenal, collapseDuplicateFindings,
+  resolveGeneric, renalBand, isSevereReaction, satisfyRule, satisfyDuplicationRule, isDuplicationRule,
 };

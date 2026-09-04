@@ -462,3 +462,144 @@ test("integration: a full evaluation against real data meets the 10 ms p95 budge
   const p95 = samples[Math.floor(samples.length * 0.95)];
   assert.ok(p95 < 10, `p95 was ${p95.toFixed(2)} ms against a 10 ms budget with 100 concurrent drugs`);
 });
+
+
+/* ------------------------------------------------------------------ alert fatigue
+ *
+ * Found by running the workstation against the real pack rather than by a unit test: ordering
+ * amoxicillin for a patient on clarithromycin produced SIX identical duplicate-therapy advisories,
+ * one per shared class tag, including tags that mean nothing at the bedside ("Chemical Structure",
+ * "Established Pharmacologic Classes"). Six alerts for one clinical fact is how alert fatigue is
+ * manufactured, and a clinician who learns to dismiss that panel dismisses the hard-stop above it
+ * too. That makes this a safety behaviour, not a tidiness one.
+ */
+
+test("alert fatigue: one clinical fact about the same drugs produces one finding", () => {
+  const pack = compileRulePack({
+    drugClasses: {
+      amoxicillin: ["anti_infective", "antibacterial", "antimicrobial", "penicillin_class"],
+      clarithromycin: ["anti_infective", "antibacterial", "antimicrobial", "macrolide"],
+    },
+    // Real data carries one duplicate-class rule per class tag, so several fire at once for the
+    // same pair of drugs.
+    interactions: ["anti_infective", "antibacterial", "antimicrobial"].map((cls) => ({
+      id: `dup-${cls}`,
+      type: "duplicate_class",
+      severity: "monitor",
+      subjects: [{ kind: "class", value: cls }, { kind: "class", value: cls }],
+      effect: "Possible therapeutic duplication.",
+      mechanism: `Two or more medicines from the same class (${cls}).`,
+    })),
+  });
+
+  const f = checkInteractions(pack, { drug: "amoxicillin" }, [{ drug: "clarithromycin" }]);
+  assert.equal(f.length, 1, "three rules about one duplication between two drugs is one finding to read");
+  assert.equal(f[0].mergedCount, 3, "the collapse is reported, not hidden");
+  assert.deepEqual(f[0].mergedRuleIds.sort(), ["dup-anti_infective", "dup-antibacterial", "dup-antimicrobial"],
+    "every contributing rule id survives for the audit, so nothing is lost from the record");
+});
+
+test("alert fatigue: findings of different severity are never collapsed together", () => {
+  const pack = compileRulePack({
+    drugClasses: { a: ["x"], b: ["x"] },
+    interactions: [
+      { id: "r-monitor", type: "pair", severity: "monitor", subjects: [{ kind: "generic", value: "a" }, { kind: "generic", value: "b" }], effect: "Minor." },
+      { id: "r-major", type: "pair", severity: "major", subjects: [{ kind: "generic", value: "a" }, { kind: "generic", value: "b" }], effect: "Serious bleeding risk." },
+    ],
+  });
+  const f = checkInteractions(pack, { drug: "a" }, [{ drug: "b" }]);
+  assert.equal(f.length, 2, "a major finding must never be absorbed into a monitor-level one");
+  assert.equal(f.some((x) => x.severity === SEVERITY.MAJOR && x.disposition === DISPOSITION.OVERRIDABLE), true);
+});
+
+test("alert fatigue: findings about different drugs stay separate", () => {
+  const pack = compileRulePack({
+    drugClasses: { a: ["x"], b: ["x"], c: ["x"] },
+    interactions: [{
+      id: "dup-x", type: "duplicate_class", severity: "monitor",
+      subjects: [{ kind: "class", value: "x" }, { kind: "class", value: "x" }],
+      effect: "Duplication.",
+    }],
+  });
+  const f = checkInteractions(pack, { drug: "a" }, [{ drug: "b" }, { drug: "c" }]);
+  assert.equal(f.length >= 1, true);
+  for (const finding of f) {
+    assert.equal(finding.drugs.includes("a"), true, "every reported duplication involves the drug being ordered");
+  }
+});
+
+
+/* ------------------------------------------------------------------ duplicate-therapy semantics
+ *
+ * A duplicate-therapy rule names ONE class and means "two or more drugs in this class". It looks
+ * structurally identical to a single-subject pair rule, and read literally by a generic matcher it
+ * fires on a SINGLE drug. All 270 such rules in the StewardMD pack are single-subject, so before
+ * this was fixed, ordering warfarin for a patient on nothing else raised a major "two systemic
+ * anticoagulants" alert and demanded an override handshake for a duplication that did not exist.
+ * Found by driving the workstation against real data, not by a unit test.
+ */
+
+const DUP_PACK = compileRulePack({
+  drugClasses: {
+    warfarin: ["anticoagulant"],
+    apixaban: ["anticoagulant"],
+    paracetamol: ["analgesic"],
+  },
+  interactions: [{
+    id: "dup-anticoagulant",
+    type: "duplicate_class",
+    subjects: [{ kind: "class", value: "anticoagulant" }], // ONE subject, meaning "two or more"
+    severity: "major",
+    effect: "Substantially increased bleeding risk.",
+    mechanism: "Two systemic anticoagulants produce additive impairment of coagulation.",
+  }],
+});
+
+test("duplication: a single drug in the class is NOT a duplication", () => {
+  const f = checkInteractions(DUP_PACK, { drug: "warfarin" }, []);
+  assert.deepEqual(f, [],
+    "one anticoagulant is not two; alerting here would demand an override on ordinary orders and teach clinicians to click through");
+
+  const withUnrelated = checkInteractions(DUP_PACK, { drug: "warfarin" }, [{ drug: "paracetamol" }]);
+  assert.deepEqual(withUnrelated, [], "an unrelated co-medication does not make a duplication either");
+});
+
+test("duplication: two drugs in the class DO fire, and the finding names both", () => {
+  const f = checkInteractions(DUP_PACK, { drug: "warfarin" }, [{ drug: "apixaban" }]);
+  assert.equal(f.length, 1);
+  assert.equal(f[0].severity, SEVERITY.MAJOR);
+  assert.equal(f[0].disposition, DISPOSITION.OVERRIDABLE);
+  assert.deepEqual(f[0].drugs.slice().sort(), ["apixaban", "warfarin"],
+    "the clinician needs to see WHICH drugs overlap, not just that something did");
+});
+
+test("duplication: three drugs in the class are reported as one finding naming all three", () => {
+  const pack = compileRulePack({
+    drugClasses: { a: ["x"], b: ["x"], c: ["x"] },
+    interactions: [{ id: "dup-x", type: "duplicate_class", subjects: [{ kind: "class", value: "x" }], severity: "moderate", effect: "Duplication." }],
+  });
+  const f = checkInteractions(pack, { drug: "a" }, [{ drug: "b" }, { drug: "c" }]);
+  assert.equal(f.length, 1, "one overlap is one finding, however many drugs are in it");
+  assert.deepEqual(f[0].drugs.slice().sort(), ["a", "b", "c"]);
+});
+
+test("duplication: a duplication among drugs the patient is already on does not gate a new order", () => {
+  const f = checkInteractions(DUP_PACK, { drug: "paracetamol" }, [{ drug: "warfarin" }, { drug: "apixaban" }]);
+  assert.deepEqual(f, [],
+    "the anticoagulant overlap is real but is not caused by ordering paracetamol; blocking here is alert fatigue");
+});
+
+test("duplication: the real StewardMD pack does not alert on a lone anticoagulant", async () => {
+  const pack = await loadStewardMDRulePack();
+  const real = new SafetyEngine({ rulePack: pack });
+  const alone = real.evaluate({ order: MedicationOrder({ patientId: "p1", drug: "Warfarin 3mg", prescriberId: "dr-1" }), activeMeds: [] });
+  assert.equal(alone.allowed, true, "an ordinary single-drug order must not require an override");
+  assert.equal(alone.blocks.length + alone.overridables.length, 0);
+
+  const both = real.evaluate({
+    order: MedicationOrder({ patientId: "p1", drug: "Warfarin 3mg", prescriberId: "dr-1" }),
+    activeMeds: [{ drug: "Apixaban 5mg" }],
+  });
+  assert.equal(both.allowed, false, "two anticoagulants together is a real finding and must still fire");
+  assert.equal(both.overridables.length, 1);
+});

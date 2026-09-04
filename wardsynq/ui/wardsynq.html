@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>WardSynQ Clinical Workstation</title>
+<link rel="stylesheet" href="wardsynq.css?v=2">
+</head>
+<body>
+
+<!-- The rule pack's approval status is stated on screen, permanently, not buried in a settings
+     page. A clinician trusting seed data because the interface looked finished is a foreseeable
+     way for this software to contribute to harm. -->
+<div class="provenance" id="provenance" role="status">
+  Loading clinical rule pack.
+</div>
+
+<!-- Positive patient identification. Sticky, because the hazard this guards against is acting on
+     the wrong chart, and a banner you have scrolled past guards nothing. -->
+<div class="patient-banner" id="patientBanner">
+  <div class="identity">
+    <span class="pname" id="pName">No patient selected</span>
+    <span class="pmeta" id="pMeta"></span>
+  </div>
+  <span class="banner-allergy none" id="pAllergies">Allergies not reviewed</span>
+  <span class="spacer"></span>
+  <span class="pmeta" id="pEncounter"></span>
+</div>
+
+<div class="shell">
+
+  <nav class="worklist" aria-label="Ward worklist">
+    <h2 id="worklistHeading">Ward worklist</h2>
+    <div id="patientList" aria-labelledby="worklistHeading">
+      <div class="skeleton-row"></div>
+      <div class="skeleton-row"></div>
+      <div class="skeleton-row"></div>
+    </div>
+  </nav>
+
+  <main class="workspace">
+
+    <section class="panel" aria-labelledby="ordersHeading">
+      <header>
+        <h2 id="ordersHeading">New medication order</h2>
+        <span class="spacer"></span>
+        <span class="pmeta" id="checkTiming"></span>
+      </header>
+
+      <div class="field">
+        <label for="drugInput">Medication</label>
+        <input type="text" id="drugInput" list="drugSuggestions" autocomplete="off"
+               aria-describedby="drugHint">
+        <datalist id="drugSuggestions"></datalist>
+        <span class="hint" id="drugHint">Safety checks run as you type, against the loaded rule pack.</span>
+      </div>
+
+      <div class="field">
+        <label for="doseInput">Dose</label>
+        <div style="display:grid; grid-template-columns: 1fr 110px; gap:8px;">
+          <input type="number" id="doseInput" min="0" step="any" inputmode="decimal">
+          <select id="doseUnit" aria-label="Dose unit">
+            <option value="mg">mg</option>
+            <option value="mcg">mcg</option>
+            <option value="g">g</option>
+            <option value="unit">unit</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="routeInput">Route</label>
+        <select id="routeInput">
+          <option value="oral">Oral</option>
+          <option value="IV">Intravenous</option>
+          <option value="IM">Intramuscular</option>
+          <option value="SC">Subcutaneous</option>
+        </select>
+      </div>
+
+      <h3 id="verdictHeading" style="margin:16px 0 8px;">Safety check</h3>
+      <!-- aria-live so a screen reader announces a new block without the clinician having to go
+           looking for it. Clinical alerts are never auto-dismissing toasts. -->
+      <div class="verdict" id="verdict" role="region" aria-live="polite" aria-labelledby="verdictHeading">
+        <div class="empty">Enter a medication to run the safety check.</div>
+      </div>
+
+      <div style="margin-top:14px; display:flex; gap:8px; flex-wrap:wrap;">
+        <button class="btn-primary" id="signOrder" disabled>Sign and submit order</button>
+        <button id="clearOrder">Clear</button>
+      </div>
+      <div id="orderResult" style="margin-top:10px;"></div>
+    </section>
+
+    <section class="panel" aria-labelledby="medsHeading">
+      <header><h2 id="medsHeading">Active medications</h2></header>
+      <div id="activeMeds"><div class="empty">No patient selected.</div></div>
+    </section>
+
+    <section class="panel" aria-labelledby="labsHeading">
+      <header><h2 id="labsHeading">Recent results</h2></header>
+      <div id="labs"><div class="empty">No patient selected.</div></div>
+    </section>
+
+  </main>
+</div>
+
+<footer class="app-footer">
+  WardSynQ clinical workstation. Demonstration build running the real deterministic safety engine
+  against the loaded rule pack. Not for clinical use.
+</footer>
+
+<script type="module" src="wardsynq-app.js?v=2"></script>
+</body>
+</html>
