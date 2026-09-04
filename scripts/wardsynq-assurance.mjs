@@ -34,6 +34,7 @@ const SUITES = [
   "test/wardsynq-actors.test.mjs",
   "test/wardsynq-iomt.test.mjs",
   "test/wardsynq-offline.test.mjs",
+  "test/wardsynq-interop.test.mjs",
   "test/wardsynq-safety-case.test.mjs",
 ];
 

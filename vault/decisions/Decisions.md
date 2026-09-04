@@ -2788,3 +2788,33 @@ data survival and is still not built.
 
 `window.WARDSYNQ` exposes a diagnostics handle carrying the GOVERNED store rather than the raw one,
 so a support console cannot become an ungoverned write path.
+
+## 2026-09-04 WardSynQ: the Integration Hub, so GHIS stops being a special case
+
+`wardsynq-interop.js`, 19 tests. GHIS was the only adapter and there was nothing for a second one to
+register with, so the pattern existed only in the comments. Now it is a registry, and GHIS is an
+instance of it rather than the exception.
+
+**Four rules, each a way interop layers normally go wrong.**
+
+1. **An adapter is never trusted to commit.** Every feed writes as an ADAPTER-kind actor, which the
+   existing actor model caps at DRAFT. The ceiling is enforced by the same control that stops an AI
+   committing an order rather than by a second, weaker rule written here. A test sends a feed that
+   insists on a signed active prescription from another hospital's system: it is refused and
+   quarantined, because "the other system said so" is not a clinician's signature.
+2. **Nothing is silently dropped.** Unclaimed, ambiguous, rejected, failed and governance-refused
+   payloads all land in quarantine with the reason and the original payload. A feed that discards
+   what it does not understand produces a chart that is wrong in a way nobody can see.
+3. **One broken feed does not stop the others.** A hospital runs many feeds and they fail
+   independently, so a throwing adapter is isolated and counted, and a `claims()` that throws is
+   treated as not claiming rather than as a crash.
+4. **Replay is expected.** Ingest is keyed on the source's own event identity, so a reconnect or a
+   catch-up window is a no-op rather than a second copy of a patient's potassium.
+
+Two adapters claiming one message is quarantined as AMBIGUOUS rather than resolved, because guessing
+would attach a patient's data to whichever adapter happened to register first. `health()` reports
+per-feed counters and a `stalled` flag for a feed that is arriving and never landing, which is what a
+hospital with eight feeds actually needs to see.
+
+The hub works with no store at all, so mapping stays exercisable in a harness, the same property the
+adapters themselves have.
