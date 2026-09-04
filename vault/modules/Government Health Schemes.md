@@ -64,13 +64,14 @@ fallback since government-authored XLSX files are not reliably well-formed.
 ## National scheme registry status
 28/28 states, 8/8 UTs, Central: registry (name/type/code) seeded and live in D1.
 
-**Ingested (live data, verified by remote query 2026-09-04):** 21/37 jurisdictions, 49,758
+**Ingested (live data, verified by remote query 2026-09-04):** 22/37 jurisdictions, 51,443
 packages — Tamil Nadu 4,298 · West Bengal 4,388 (5 scheme_versions: Grade A 1,921 · Grade B 1,563
 · Grade C 404 · Grade R 218 · Critical Illness Package 282) · Nagaland 4,008 (2 scheme_versions:
 CMHIS-EP semi-private 2,004 · CMHIS General/PM-JAY 2,004) · Andhra Pradesh 3,713 · Karnataka 3,155
-· Bihar 2,675 · Rajasthan 2,439 · Himachal Pradesh 1,896 · Gujarat 2,315 · Kerala 2,286 ·
-Uttarakhand 1,585 · Odisha 1,569 · Punjab 1,322 · Assam 1,577 · Telangana 1,867 · Mizoram 2,003 ·
-Uttar Pradesh 2,000 · Delhi 1,991 · Chhattisgarh 1,735 · Central PM-JAY HBP 2022 1,646 ·
+· Bihar 2,675 · Rajasthan 2,439 · Himachal Pradesh 1,896 · Arunachal Pradesh 1,685 · Gujarat 2,315
+· Kerala 2,286 · Uttarakhand 1,585 · Odisha 1,569 · Punjab 1,322 · Assam 1,577 · Telangana 1,867 ·
+Mizoram 2,003 · Uttar Pradesh 2,000 · Delhi 1,991 · Chhattisgarh 1,735 · Central PM-JAY HBP 2022
+1,646 ·
 Haryana 1,290. Each row carries its source's `rate_tier` verbatim where the source publishes one
 (Tier 2, Tier1(X), Non-NABH, A1, ...) - amounts are only comparable with the tier visible.
 Telangana's source publishes a single price per procedure (no tier split) - `rate_tier` is
@@ -224,11 +225,21 @@ apart reliably. This is now the THIRD state confirming the same systemic weaknes
 `ingest_layout_pdf.py`'s rate-column selection - solved the same day, see above (built on Punjab,
 then re-run on Odisha itself: 1,569 packages loaded).
 
+**Arunachal Pradesh loaded 2026-09-04, codes+names only, owner explicitly accepted no amounts** -
+the source genuinely publishes no rupee column (confirmed: `packageratelist.aspx`'s own page
+title says "Package Rate List" but the GridView has none, per `govschemes_verified_sources_
+batch3.md`). ASP.NET WebForms postback (33 speciality-dropdown categories × paginated GridView,
+each needing fresh `__VIEWSTATE`/`__EVENTVALIDATION` per page - `scripts/govschemes/
+ingest_arunachal_json.py` reads pre-fetched JSON, fetch logic kept separate). 1,685 procedures
+after dedup (2,165 raw rows fetched, including a retry of one category that failed with a
+connection reset on the first pass). `package_amount=0` on every row, `rate_tier='Amount not
+published by source'` - the public UI's amount formatter already renders nothing for amount≤0,
+so this doesn't display as a false "₹0/free", and the explicit tier label states why.
+
 **No usable source located yet (need a PDF from the owner):** Madhya Pradesh, Chandigarh, J&K,
 Jharkhand, Puducherry, Goa, Tripura, Maharashtra, Meghalaya (2 of 3 tables are small/client-side;
 the large IPD table needs a WordPress AJAX nonce this session couldn't mint from a plain fetch),
-Manipur, Sikkim, A&N Islands, Lakshadweep, DNH&DD, Arunachal Pradesh (table exists but has no
-prices).
+Manipur, Sikkim, A&N Islands, Lakshadweep, DNH&DD.
 
 **`scripts/govschemes/ingest_layout_pdf.py`** (2026-09-03) — adapter for HBP-family PDFs that
 docling can't parse (column headers print only on page 1, not on continuation pages). Runs
