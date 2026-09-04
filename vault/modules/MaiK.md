@@ -25,8 +25,15 @@ UpToDate-style answer. Aurora bottom-sheet UI. Account-scoped on-device conversa
 - **What the engine routes** (2026-09-04): explain, explainGrounded, explainGroundedStream, refine,
   vivaJudge (CliniX viva examiner) and extract kind `opd-suggest` (OPD "Ask MaiK Pro" differential),
   the last two via `maik-local.js` `vivaJudge()`/`opdSuggest()` (server prompts + whitelisting
-  ported). Still cloud-only: every other extract kind (voice, translate, MaiK Ask), research,
-  vision/OCR, transcribe, ICU correlate/evidence/imagingSummary.
+  ported). Still cloud-only: every other extract kind (voice, translate, MaiK Ask), vision/OCR,
+  transcribe, ICU correlate/evidence/imagingSummary.
+- **"Research on the web" is cloud (Gemini) ONLY on MaiK Cloud** (2026-09-04, owner: "cant charge
+  them for snippet conversion"): on the local engine, `SMD_AI.researchSnippets()` fetches TinyFish's
+  raw sources for free (`/research` with `snippetsOnly:true`, no Gemini, no quota) and
+  `maik-local.js` `webAnswer()` writes the prose on device, gated by the same `evidenceGate` the
+  book RAG uses. Evidence Review (`mode:"evidence-review"`) is untouched, always cloud. The
+  server's own Gemini-grounded fallback for a TinyFish miss is gone; a miss is now an honest
+  "no results" (no more `RESEARCH_SYS`/`web-grounded`).
 - **Model lifecycle** (2026-09-04): warmed when the MaiK sheet opens (`openAskAi`), released 20 s
   after `close()` or 3 min idle with the sheet open, never mid-generation. No warm-up at app start.
 - `kb/ai/maik-kb.js` (`window.MaiKKB`) — deterministic KB answer engine (canonical+fuzzy+abbrev, 85% gate)

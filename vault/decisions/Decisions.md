@@ -2253,3 +2253,44 @@ line. The gate is untouched: it still applies to every grounded answer.
 Naming caveat for the owner: the labels "MAiK Bonsai / Bonsai Swift / Bonsai Max" carry the upstream
 brand, against the tier-name convention (MxCore, Neural, Horizon, Apex). Kept because the owner
 asked for the models by that name; rename is a one-line registry edit each.
+
+## 2026-09-04 — Web research: Gemini fallback removed, on-device model writes the answer off-cloud
+
+Owner: "remove gemini fallback" and "let gemini do it during MaiK Cloud selected and for rest
+offline or free models we cant charge them for snippet conversion into clean language". Two
+separate changes to `functions/api/ai/[[path]].js`'s `seg === "research"` handler (plain web
+research, NOT Evidence Review, which is untouched and stays cloud-only):
+
+1. The Gemini-grounded fallback (`webSearch: true`) that ran when TinyFish returned nothing is
+   deleted outright, per the literal instruction. It was the slower, costlier of the two search
+   paths and duplicated ground TinyFish already covers at $0/search (see functions/_search.js). A
+   TinyFish miss is now an honest `{text: null, sources: []}`, which the client's existing no-text
+   branch already renders as a clear retry - no new failure mode introduced.
+2. A new `body.snippetsOnly` branch, checked BEFORE the quota gate, does the TinyFish search and
+   returns raw sources with NO Gemini call and no quota burn - it is a plain search proxy. This is
+   what lets an engine other than MaiK Cloud avoid paying for the snippet-to-prose step at all.
+
+Client side: `maik-engine.js` now decorates `research` (it previously reached SMD_AI.research
+undecorated, always cloud). Its route() intercepts kind "research" ONLY when `effective() ===
+"local"` and mode is not "evidence-review": it calls the new `SMD_AI.researchSnippets()`
+(reasoning.js - hits `/research` with `snippetsOnly:true`, the free path above) and hands the raw
+sources to the new `maik-local.js` `webAnswer(question, sources, opts)`, which writes the prose on
+device using WEB_SYS (RESEARCH_SYS_SNIPPETS ported verbatim, so a web-research answer reads the
+same regardless of which engine wrote it) and then runs the SAME `evidenceGate` the book RAG uses -
+generic against arbitrary evidence text, not book-specific - so an unsupported drug or figure in a
+locally-written web answer is caught exactly as it would be for a StewardMD Knowledge Base answer,
+and the gate-fail branch shows the top real source instead of a wrong paraphrase, matching the
+book-RAG UX. Cloud engine and KB-only both fall straight through to the unchanged cloud path
+(`orig.apply`); a local engine with no `webAnswer` (older bundle) also falls through cleanly rather
+than throwing. Web research still needs a live network for the TinyFish call itself regardless of
+engine - only the WRITING step moves on-device, not the search.
+
+Dead code removed: `RESEARCH_SYS` (only the deleted fallback used it); `test/maik-cloud-scope.test.mjs`
+updated to stop asserting a scope rule on a constant that no longer exists.
+
+Verified live on the owner's iPhone 15 Pro (same question, both engines): local engine ->
+{engine:"local", mode:"web-local", 8 free TinyFish sources, 989-char answer, 21 s}; MaiK Cloud ->
+{mode:"web-tinyfish", 8 sources, 7 s}, confirming the cloud path is unchanged. Unit coverage:
+maik-local.test.mjs webAnswer tests using the REAL kb/ai/maik-lite-rag.js evidenceGate, not a
+book-specific stub; maik-engine.test.mjs routing; test/research-web-fallback.test.mjs, a
+source-level regression for the two server changes.
