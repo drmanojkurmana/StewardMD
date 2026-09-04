@@ -5199,7 +5199,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
         // No drug named and none remembered: "and the dose?" right after a treatment answer means the
         // first-line drug for the topic we are on. Asking "which drug?" back was the single most
         // assistant-unlike thing in the owner's live battery (2026-09-04); ChatGPT resolves it in one hop.
-        return { question: _pop + " first-line drug and dose for " + t.topic + ": drug, dose, route, frequency and duration. Verify locally.", depth: "concise", topic: "dose for " + t.topic, retrieval: t.topic + " first line drug dose duration" };
+        return { question: _pop + " first-line drug and dose for " + t.topic + ": drug, dose, route, frequency and duration. Verify locally.", depth: "concise", topic: t.topic, retrieval: t.topic + " first line drug dose duration" };
       }
       if (/^(what next|whats next|next|next steps?|then( what)?|and then|what to do next)\b/.test(n) || (/\bnext\b/.test(n) && wc <= 4)) {
         return { question: "Next steps, ongoing management and monitoring for " + t.topic + ".", depth: "concise", topic: "next steps for " + t.topic, retrieval: t.topic + " monitoring ongoing management next steps escalation" };

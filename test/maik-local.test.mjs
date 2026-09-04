@@ -725,6 +725,30 @@ function loadRealRag({ tokens, rows }) {
   ok("a genuine hepatitis question still retrieves the hepatitis passage", /lamivudine/i.test(c.calls.generate[0].prompt) && r3.grounded === true);
 }
 {
+  // Second live battery (2026-09-04, after the first guard): the CAP comparison retrieved passages
+  // that named both drugs but not pneumonia (typhoid resistance), and "UTI in pregnancy" lost the
+  // abbreviation as an anchor because expand() rewrote it. A drug name is not the topic; the
+  // disease is. Among on-topic passages, the one that mentions the asked modifier wins.
+  const rows = [
+    { i: 0, text: "Community acquired pneumonia treatment: ceftriaxone 1 g IV daily plus azithromycin 500 mg daily is the usual inpatient regimen for pneumonia. ".repeat(3), headings: ["Pneumonia", "Treatment"], pages: [1] },
+    { i: 1, text: "Typhoid fever epidemiology: ceftriaxone and azithromycin resistance is rising in South Asia; some strains combine ceftriaxone and azithromycin resistance. ".repeat(3), headings: ["Typhoid", "Epidemiology"], pages: [2] },
+    { i: 2, text: "Acute cystitis (UTI) treatment: fosfomycin 3 g single dose or nitrofurantoin for five days. ".repeat(3), headings: ["Cystitis", "Treatment"], pages: [3] },
+    { i: 3, text: "UTI in pregnancy: cephalexin 500 mg four times daily for 7 days; treat asymptomatic bacteriuria in pregnancy. ".repeat(3), headings: ["Cystitis", "Pregnancy"], pages: [4] },
+    { i: 4, text: "Hepatitis B in pregnancy: lamivudine or tenofovir in the third trimester. ".repeat(3), headings: ["Hepatitis B", "Pregnancy"], pages: [5] }
+  ];
+  const a = loadRealRag({ tokens: ["x"], rows });
+  await a.L.answer({ question: "compare ceftriaxone and azithromycin for community acquired pneumonia" }, { pack: "maik-lite" }, null);
+  const p1 = a.calls.generate[0].prompt;
+  ok("drug comparison: the pneumonia passage is the evidence", /inpatient regimen for pneumonia/i.test(p1));
+  ok("drug comparison: a passage that only names both drugs (typhoid resistance) is not evidence", !/typhoid/i.test(p1));
+  const b = loadRealRag({ tokens: ["x"], rows });
+  await b.L.answer({ question: "UTI management in pregnancy" }, { pack: "maik-lite" }, null);
+  const p2 = b.calls.generate[0].prompt;
+  ok("UTI in pregnancy: the in-pregnancy UTI passage is chosen (abbreviation anchors; modifier preferred)", /cephalexin/i.test(p2));
+  ok("UTI in pregnancy: the general cystitis passage yields to the pregnancy one", !/fosfomycin/i.test(p2));
+  ok("UTI in pregnancy: hepatitis-in-pregnancy is never evidence for it", !/lamivudine/i.test(p2));
+}
+{
   // Evidence size: 700-char passages and a weak third passage dropped (prefill is the latency).
   const RAG = require("../kb/ai/maik-lite-rag.js");
   const long = "Amoxicillin 500 mg three times daily for community acquired pneumonia. ".repeat(20);   // ~1400 chars

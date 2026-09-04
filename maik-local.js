@@ -469,7 +469,7 @@
    * Zero anchored passages means "not grounded", never "grounded in the wrong chapter". Same model,
    * same speed: this is a filter after search, and it SHRINKS the prompt (700-char passages, a weak
    * third passage dropped), which is where on-device latency actually goes. */
-  var GENERIC_Q = /^(management|treatment|treat|therapy|regimen|regimens|dose|dosing|dosage|doses|route|duration|first|line|drug|drugs|agent|agents|class|choice|adult|patient|patients|clinical|answer|complete|detailed|provide|considerations|principles|verify|locally|empiric|severity|host|adjustment|culture|directed|escalation|steps|monitoring|ongoing|next|approach|options|guideline|guidelines|what|when|which|how|should|give|use|used|with|without|versus|compare|comparison|prefer|each|non|woman|women|man|men|case|cases|standard|usual|typical|common)$/;
+  var GENERIC_Q = /^(management|treatment|treat|therapy|regimen|regimens|dose|dosing|dosage|doses|route|duration|first|line|drug|drugs|agent|agents|class|choice|adult|patient|patients|clinical|answer|complete|detailed|provide|considerations|principles|verify|locally|empiric|severity|host|adjustment|culture|directed|escalation|steps|monitoring|ongoing|next|approach|options|guideline|guidelines|what|when|which|how|should|give|use|used|with|without|versus|compare|comparison|prefer|each|non|woman|women|man|men|male|female|young|old|older|year|years|uncomplicated|complicated|simple|case|cases|standard|usual|typical|common)$/;
   var MODIFIER_Q = /^(pregnancy|pregnant|lactation|lactating|breastfeeding|renal|hepatic|liver|kidney|paediatric|pediatric|child|children|neonate|neonatal|elderly|geriatric|dialysis|ckd|impairment|failure|obese|obesity)$/;
   var INTRO_HEAD = /definition|glossary|introduction|epidemiolog|etiolog|pathogenesis|classification|history|overview/i;
   var TREAT_Q = /\b(treat|treatment|therapy|manage|management|dose|dosing|regimen|first.?line|drug|antibiotic|prescri)/i;
@@ -478,20 +478,34 @@
     // No tokenizer available (an older RAG build or a test stub) means no anchoring, never a
     // thrown error that would silently turn every answer ungrounded.
     if (!RAG || typeof RAG.toks !== "function") return [];
+    // Asked form AND expanded form: "UTI" expands to "urinary tract infection", but the book's own
+    // chapters say "UTI" (IDF 5.0) more than the long form (3.8); losing the abbreviation lost the
+    // strongest anchor. Three kinds come back: TOPIC words (the disease), DRUG names, and population
+    // MODIFIER stems. The disease is what a passage must be about; a drug name alone is not (the
+    // live CAP comparison pulled typhoid-resistance passages that merely named both drugs).
     var q = question;
-    try { var ex = RAG.expand(question); q = ex[0] + " " + ex[1]; } catch (e) {}
-    var seen = {}, scored = [], tokens = [];
+    try { var ex = RAG.expand(question); q = question + " " + ex[0] + " " + ex[1]; } catch (e) {}
+    var seen = {}, topic = [], drugs = [], mods = [], tokens = [], drugSet = null;
     try { tokens = RAG.toks(q) || []; } catch (e) { tokens = []; }
+    try { drugSet = RAG.drugsOf ? RAG.drugsOf(q) : null; } catch (e) { drugSet = null; }
+    var prev = "";
     tokens.forEach(function (w) {
+      var before = prev; prev = w;
       try { if (bk.us) w = bk.us(w); } catch (e) {}
-      if (seen[w] || w.length < 3 || GENERIC_Q.test(w) || MODIFIER_Q.test(w)) return;
+      if (seen[w] || w.length < 3) return;
       seen[w] = 1;
+      // "non-pregnant" is not a request for pregnancy material.
+      if (MODIFIER_Q.test(w)) { if (before !== "non" && before !== "not") mods.push(w.slice(0, 5)); return; }
+      if (GENERIC_Q.test(w)) return;
       var idf = bk.idfOf ? bk.idfOf(w) : 1;
       if (idf === undefined) return;   // unknown to the book: cannot anchor on it
-      scored.push([idf, w]);
+      if (drugSet && drugSet.has(w)) drugs.push(w); else topic.push([idf, w]);
     });
-    scored.sort(function (a, b) { return b[0] - a[0]; });
-    return scored.slice(0, 3).map(function (e) { return e[1]; });
+    topic.sort(function (a, b) { return b[0] - a[0]; });
+    // Rarest topic words only, relative to the rarest one, so "infection" (IDF 2.0) does not let a
+    // urethritis passage stand in for a UTI one.
+    var floor = topic.length ? 0.6 * topic[0][0] : 0;
+    return { topic: topic.filter(function (e) { return e[0] >= floor; }).slice(0, 3).map(function (e) { return e[1]; }), drugs: drugs, mods: mods };
   }
   function retrieveGrounding(packId, question) {
     if (!ragEligible(packId) || !question) return Promise.resolve(null);
@@ -499,18 +513,31 @@
     var KB = (typeof window !== "undefined") && window.SMD_MAIK_KB_STORE;
     if (!RAG || !KB) return Promise.resolve(null);
     return KB.loadBook(RAG).then(function (bk) {
-      var hits = bk.search(question, RAG.TOPK);
+      // Search wider than we keep: the anchored passages are often ranks 2-6 behind a glossary
+      // chapter that matches every word. Same BM25 pass, only the sort tail is longer.
+      var hits = bk.search(question, RAG.TOPK * 3);
       if (!hits.length || hits[0][0] < RAG.MIN_SCORE) return null;
-      var anchors = anchorsFor(bk, RAG, question);
+      var A = anchorsFor(bk, RAG, question);
+      if (!A || !A.topic) A = { topic: A || [], drugs: [], mods: [] };
+      var need = A.topic.length ? A.topic : A.drugs;
+      var anchors = A.topic.concat(A.drugs);
       var cited = hits.map(function (h) { var p = bk.cite(h[1]); return { score: h[0], p: p, hay: ((p.heading || "") + " " + (p.text || "")).toLowerCase() }; });
-      var kept = anchors.length ? cited.filter(function (c) { return anchors.some(function (a) { return c.hay.indexOf(a) !== -1; }); }) : cited;
+      var kept = need.length ? cited.filter(function (c) { return need.some(function (a) { return c.hay.indexOf(a) !== -1; }); }) : cited;
       if (!kept.length) return null;
+      // "…in pregnancy": among the on-topic passages, the ones that mention the modifier win when any
+      // do; when none do, the topic passages stay and the model says so, instead of a passage about
+      // a different disease in pregnancy.
+      if (A.mods.length) {
+        var wm = kept.filter(function (c) { return A.mods.some(function (m) { return c.hay.indexOf(m) !== -1; }); });
+        if (wm.length) kept = wm;
+      }
       // A definitions / introduction chapter is not the answer to a treatment question when anything
       // else survived (the live "■■ DEFINITIONS" fallback for a UTI treatment ask).
       if (TREAT_Q.test(question) && kept.length > 1) {
         var nd = kept.filter(function (c) { return !INTRO_HEAD.test(c.p.heading || ""); });
         if (nd.length) kept = nd;
       }
+      kept = kept.filter(function (c) { return c.score >= 0.4 * kept[0].score; }).slice(0, RAG.TOPK);
       if (kept.length > 2 && kept[2].score < 0.6 * kept[0].score) kept = kept.slice(0, 2);
       var passages = kept.map(function (c) { c.p.text = cleanPassage(c.p.text); return c.p; });
       var evidenceText = passages.map(function (p, n) { return "[" + (n + 1) + "] " + p.text.slice(0, 700); }).join("\n\n");
