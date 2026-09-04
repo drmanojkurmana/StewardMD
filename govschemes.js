@@ -96,12 +96,15 @@
     compare: function (q) { return api("/api/schemes/compare?q=" + encodeURIComponent(q)); }
   };
 
-  var root = null, timer = null, seq = 0;
+  var root = null, timer = null, seq = 0, filterTimer = null;
   var st = {
     view: "list", mode: "browse", q: "", jurisdiction: "", compare: false, jur: null,
     // browse.level: "states" | "schemes" | "specialities" | "packages"
+    // browse.filter: the inline "search within this screen" text box, one per level - reset
+    // whenever the level itself changes (jumpToLevel/pickState/pickScheme/pickSpeciality) so a
+    // filter typed for one state's schemes doesn't silently linger when browsing another.
     browse: { level: "states", stateId: "", stateName: "", schemes: null, schemeId: "", schemeName: "",
-      specialities: null, speciality: null, specialityName: "", rows: [], total: 0, offset: 0 }
+      specialities: null, speciality: null, specialityName: "", rows: [], total: 0, offset: 0, filter: "" }
   };
 
   function ensureRoot() {
@@ -177,11 +180,32 @@
     });
   }
   function jumpToLevel(lvl) {
+    st.browse.filter = "";
     if (lvl === "states") { st.browse.level = "states"; st.browse.stateId = ""; }
     else if (lvl === "schemes") { st.browse.level = "schemes"; }
     else if (lvl === "specialities") { st.browse.level = "specialities"; }
     renderBrowseBody();
   }
+  // Shared "search within this screen" bar for every Browse level - a lightweight client-side
+  // filter over whatever's already on screen (states/schemes/specialities are never paginated;
+  // packages filters the loaded page and whatever "Show more" has pulled in since). Renders once;
+  // the input listener only replaces #gsBrowseList so typing never loses focus.
+  function filterBarHTML(placeholder) {
+    return '<div class="gs-searchbar gs-inline-search">' + gsIco("search", "gs-ico gs-search-ic") +
+      '<input id="gsBrowseFilter" class="gs-search" type="text" autocomplete="off" placeholder="' + esc(placeholder) + '" value="' + esc(st.browse.filter) + '"></div>' +
+      '<div id="gsBrowseList"></div>';
+  }
+  function wireFilterBar(m, renderListFn) {
+    var fi = m.querySelector("#gsBrowseFilter");
+    if (!fi) return;
+    fi.addEventListener("keydown", function (e) { e.stopPropagation(); });
+    fi.addEventListener("input", function () {
+      var v = fi.value;
+      if (filterTimer) clearTimeout(filterTimer);
+      filterTimer = setTimeout(function () { st.browse.filter = v.trim(); renderListFn(); }, 150);
+    });
+  }
+  function norm(s) { return String(s || "").toLowerCase(); }
   function browseUp() {
     var lvl = st.browse.level;
     if (lvl === "packages") jumpToLevel(st.browse.schemes && st.browse.schemes.length > 1 ? "schemes" : (st.browse.specialities ? "specialities" : "schemes"));
@@ -208,19 +232,28 @@
   function renderStatesGrid(m) {
     if (!st.jur) { m.innerHTML = '<div class="gs-hint">Loading states…</div>'; return; }
     if (!st.jur.length) { m.innerHTML = '<div class="gs-err">Could not reach the government schemes service. Check your connection and try again.</div>'; return; }
-    m.innerHTML = '<div class="gs-cat-grid">' + st.jur.map(function (j) {
+    m.innerHTML = filterBarHTML("Search states or UTs");
+    wireFilterBar(m, function () { renderStatesList(m); });
+    renderStatesList(m);
+  }
+  function renderStatesList(m) {
+    var list = m.querySelector("#gsBrowseList"); if (!list) return;
+    var q = norm(st.browse.filter);
+    var rows = q ? st.jur.filter(function (j) { return norm(j.name).indexOf(q) >= 0; }) : st.jur;
+    if (!rows.length) { list.innerHTML = '<div class="gs-empty">No state or UT matches “' + esc(st.browse.filter) + '”.</div>'; return; }
+    list.innerHTML = '<div class="gs-cat-grid">' + rows.map(function (j) {
       return '<button type="button" class="gs-cat" data-id="' + esc(j.id) + '" data-name="' + esc(j.name) + '">' +
         '<span class="gs-cat-name">' + esc(j.name) + '</span>' +
         '<span class="gs-cat-count">' + (j.packages || 0).toLocaleString("en-IN") + ' package' + (j.packages === 1 ? "" : "s") + '</span>' +
       '</button>';
     }).join("") + '</div>';
-    m.querySelectorAll(".gs-cat").forEach(function (c) {
+    list.querySelectorAll(".gs-cat").forEach(function (c) {
       c.addEventListener("click", function () { pickState(c.getAttribute("data-id"), c.getAttribute("data-name")); });
     });
   }
   function pickState(id, name) {
     st.browse.stateId = id; st.browse.stateName = name;
-    st.browse.level = "schemes"; st.browse.schemes = null;
+    st.browse.level = "schemes"; st.browse.schemes = null; st.browse.filter = "";
     renderBrowseBody();
     GSAPI.schemesFor(id).then(function (d) {
       if (st.browse.stateId !== id) return;
@@ -238,20 +271,29 @@
   function renderSchemesList(m) {
     if (st.browse.schemes == null) { m.innerHTML = '<div class="gs-hint">Loading schemes in ' + esc(st.browse.stateName) + '…</div>'; return; }
     if (!st.browse.schemes.length) { m.innerHTML = '<div class="gs-empty">No schemes on file yet for ' + esc(st.browse.stateName) + '. Try Search instead.</div>'; return; }
-    m.innerHTML = st.browse.schemes.map(function (s) {
+    m.innerHTML = filterBarHTML("Search schemes in " + st.browse.stateName);
+    wireFilterBar(m, function () { renderSchemesInner(m); });
+    renderSchemesInner(m);
+  }
+  function renderSchemesInner(m) {
+    var list = m.querySelector("#gsBrowseList"); if (!list) return;
+    var q = norm(st.browse.filter);
+    var rows = q ? st.browse.schemes.filter(function (s) { return norm(s.name).indexOf(q) >= 0 || norm(s.authority).indexOf(q) >= 0; }) : st.browse.schemes;
+    if (!rows.length) { list.innerHTML = '<div class="gs-empty">No scheme matches “' + esc(st.browse.filter) + '”.</div>'; return; }
+    list.innerHTML = rows.map(function (s) {
       return '<button type="button" class="gs-card gs-schemecard" data-id="' + esc(s.id) + '" data-name="' + esc(s.name) + '">' +
         '<div class="gs-card-name">' + esc(s.name) + '</div>' +
         (s.authority ? '<div class="gs-scheme-auth">' + esc(s.authority) + '</div>' : "") +
         '<div class="gs-cat-count">' + (s.packages || 0).toLocaleString("en-IN") + ' package' + (s.packages === 1 ? "" : "s") + '</div>' +
       '</button>';
     }).join("");
-    m.querySelectorAll(".gs-schemecard").forEach(function (c) {
+    list.querySelectorAll(".gs-schemecard").forEach(function (c) {
       c.addEventListener("click", function () { pickScheme(c.getAttribute("data-id"), c.getAttribute("data-name")); });
     });
   }
   function pickScheme(id, name, skipRender) {
     st.browse.schemeId = id; st.browse.schemeName = name;
-    st.browse.level = "specialities"; st.browse.specialities = null;
+    st.browse.level = "specialities"; st.browse.specialities = null; st.browse.filter = "";
     if (!skipRender) renderBrowseBody(); else renderCrumbs();
     GSAPI.specialities(st.browse.stateId, id).then(function (d) {
       if (st.browse.schemeId !== id) return;
@@ -270,16 +312,25 @@
   function renderSpecialitiesGrid(m) {
     if (st.browse.specialities == null) { m.innerHTML = '<div class="gs-hint">Loading categories…</div>'; return; }
     if (!st.browse.specialities.length) { pickSpeciality(null, "", true); return; }
-    var chips = '<button type="button" class="gs-cat gs-cat-all" data-spec="">' +
+    m.innerHTML = filterBarHTML("Search categories");
+    wireFilterBar(m, function () { renderSpecialitiesInner(m); });
+    renderSpecialitiesInner(m);
+  }
+  function renderSpecialitiesInner(m) {
+    var list = m.querySelector("#gsBrowseList"); if (!list) return;
+    var q = norm(st.browse.filter);
+    var sps = q ? st.browse.specialities.filter(function (sp) { return norm(sp.name).indexOf(q) >= 0; }) : st.browse.specialities;
+    var chips = q ? "" : '<button type="button" class="gs-cat gs-cat-all" data-spec="">' +
       '<span class="gs-cat-name">All categories</span>' +
       '<span class="gs-cat-count">Browse every package</span></button>';
-    chips += st.browse.specialities.map(function (sp) {
+    chips += sps.map(function (sp) {
       return '<button type="button" class="gs-cat" data-spec="' + esc(sp.name === "Other / uncategorised" ? "" : sp.name) + '" data-label="' + esc(sp.name) + '">' +
         '<span class="gs-cat-name">' + esc(sp.name) + '</span>' +
         '<span class="gs-cat-count">' + (sp.packages || 0).toLocaleString("en-IN") + '</span></button>';
     }).join("");
-    m.innerHTML = '<div class="gs-cat-grid">' + chips + '</div>';
-    m.querySelectorAll(".gs-cat").forEach(function (c) {
+    if (!chips) { list.innerHTML = '<div class="gs-empty">No category matches “' + esc(st.browse.filter) + '”.</div>'; return; }
+    list.innerHTML = '<div class="gs-cat-grid">' + chips + '</div>';
+    list.querySelectorAll(".gs-cat").forEach(function (c) {
       c.addEventListener("click", function () {
         var spec = c.hasAttribute("data-spec") && c.getAttribute("data-spec") !== "" ? c.getAttribute("data-spec") : (c.classList.contains("gs-cat-all") ? null : "");
         var label = c.classList.contains("gs-cat-all") ? "" : (c.getAttribute("data-label") || "");
@@ -290,7 +341,7 @@
   // spec: null = no filter (All categories), "" = the Other/uncategorised bucket, else exact speciality_name.
   function pickSpeciality(spec, label, skipRender) {
     st.browse.speciality = spec; st.browse.specialityName = label;
-    st.browse.level = "packages"; st.browse.rows = null; st.browse.total = 0; st.browse.offset = 0;
+    st.browse.level = "packages"; st.browse.rows = null; st.browse.total = 0; st.browse.offset = 0; st.browse.filter = "";
     if (!skipRender) renderBrowseBody(); else renderCrumbs();
     loadBrowsePage(true);
   }
@@ -316,13 +367,26 @@
       m.innerHTML = '<div class="gs-empty">No packages in this category yet. Try "All categories" or Search instead.</div>';
       return;
     }
-    var html = st.browse.rows.map(function (x) { return rowHTML(x, { showSpeciality: !st.browse.speciality && st.browse.speciality !== "" }); }).join("");
+    m.innerHTML = filterBarHTML("Search within " + (st.browse.specialityName || "this category"));
+    wireFilterBar(m, function () { renderPackagesInner(m); });
+    renderPackagesInner(m);
+  }
+  // Filters what's already loaded (this page + everything "Show more" has pulled in so far) by
+  // name/code - a scoped, instant search inside the current state/branch/category, distinct from
+  // the Search tab's server-side query across all of India. "Show more" stays available while
+  // filtering, so typing a rarer term is still a hint to load more rather than a dead end.
+  function renderPackagesInner(m) {
+    var list = m.querySelector("#gsBrowseList"); if (!list) return;
+    var q = norm(st.browse.filter);
+    var rows = q ? st.browse.rows.filter(function (x) { return norm(x.treatment_name).indexOf(q) >= 0 || norm(x.treatment_code).indexOf(q) >= 0; }) : st.browse.rows;
+    var html = rows.length ? rows.map(function (x) { return rowHTML(x, { showSpeciality: !st.browse.speciality && st.browse.speciality !== "" }); }).join("")
+      : '<div class="gs-empty">No loaded package matches “' + esc(st.browse.filter) + '”' + (st.browse.rows.length < st.browse.total ? " yet - try Show more, or use the Search tab." : ".") + '</div>';
     if (st.browse.rows.length < st.browse.total) {
       html += '<button type="button" class="gs-more" id="gsMore">Show more (' + (st.browse.total - st.browse.rows.length).toLocaleString("en-IN") + ' left)</button>';
     }
-    m.innerHTML = html;
-    m.querySelectorAll(".gs-card[data-id]").forEach(function (c) { c.addEventListener("click", function () { openDetail(c.getAttribute("data-id")); }); });
-    var more = m.querySelector("#gsMore");
+    list.innerHTML = html;
+    list.querySelectorAll(".gs-card[data-id]").forEach(function (c) { c.addEventListener("click", function () { openDetail(c.getAttribute("data-id")); }); });
+    var more = list.querySelector("#gsMore");
     if (more) more.addEventListener("click", function () { more.textContent = "Loading…"; more.disabled = true; loadBrowsePage(false); });
   }
 
