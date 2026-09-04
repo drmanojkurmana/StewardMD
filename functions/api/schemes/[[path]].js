@@ -16,6 +16,10 @@
  *   /api/schemes/search?q=&state=&limit=    -> { results:[...packages] }         (state = jurisdiction id)
  *   /api/schemes/compare?q=                 -> { groups:[{treatment_name_normalised, rows:[...]}] }
  *   /api/schemes/package/<id>               -> full package row + source + version_label
+ *   /api/schemes/schemes?state=             -> { schemes:[{id,name,authority,packages}] }        (branches within a state)
+ *   /api/schemes/specialities?state=&scheme= -> { specialities:[{code,name,packages}] }           (browse categories)
+ *   /api/schemes/browse?state=&scheme=&speciality=&limit=&offset=
+ *                                            -> { results:[...packages], total }                  (no free text, paginated)
  */
 import * as repo from "../../_schemes_repo.js";
 
@@ -97,6 +101,35 @@ export async function onRequest(context) {
     const q = validQuery(url.searchParams.get("q"));
     if (!q) return json({ error: "query_too_short" }, { status: 400 });
     const body = await safeRead(request, env, { groups: [] }, async () => ({ groups: await repo.comparePackages(env, q) }));
+    return json(body, { cache: body.error ? "no-store" : PUB_CACHE });
+  }
+
+  if (head === "schemes" && !parts[1]) {
+    const stateId = validState(url.searchParams.get("state"));
+    if (!stateId) return json({ error: "state_required" }, { status: 400 });
+    const body = await safeRead(request, env, { schemes: [] }, async () => ({ schemes: await repo.listSchemes(env, stateId) }));
+    return json(body, { cache: body.error ? "no-store" : PUB_CACHE });
+  }
+
+  if (head === "specialities" && !parts[1]) {
+    const stateId = validState(url.searchParams.get("state"));
+    const schemeId = validState(url.searchParams.get("scheme"));
+    const body = await safeRead(request, env, { specialities: [] }, async () =>
+      ({ specialities: await repo.listSpecialities(env, { jurisdictionId: stateId, schemeId }) }));
+    return json(body, { cache: body.error ? "no-store" : PUB_CACHE });
+  }
+
+  if (head === "browse" && !parts[1]) {
+    const stateId = validState(url.searchParams.get("state"));
+    const schemeId = validState(url.searchParams.get("scheme"));
+    const specRaw = url.searchParams.get("speciality");
+    const speciality = specRaw == null ? undefined : String(specRaw).trim();
+    const limit = repo.clampLimit(url.searchParams.get("limit"));
+    const offset = parseInt(url.searchParams.get("offset"), 10) || 0;
+    const body = await safeRead(request, env, { results: [], total: 0 }, async () => {
+      const r = await repo.browsePackages(env, { jurisdictionId: stateId, schemeId, speciality, limit, offset });
+      return { results: r.rows, total: r.total };
+    });
     return json(body, { cache: body.error ? "no-store" : PUB_CACHE });
   }
 
