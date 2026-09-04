@@ -64,16 +64,15 @@ fallback since government-authored XLSX files are not reliably well-formed.
 ## National scheme registry status
 28/28 states, 8/8 UTs, Central: registry (name/type/code) seeded and live in D1.
 
-**Ingested (live data, verified by remote query 2026-09-04):** 22/37 jurisdictions, 53,126
+**Ingested (live data, verified by remote query 2026-09-04):** 23/37 jurisdictions, 53,436
 packages — Tamil Nadu 4,298 · West Bengal 4,388 (5 scheme_versions: Grade A 1,921 · Grade B 1,563
 · Grade C 404 · Grade R 218 · Critical Illness Package 282) · Nagaland 4,008 (2 scheme_versions:
 CMHIS-EP semi-private 2,004 · CMHIS General/PM-JAY 2,004) · Andhra Pradesh 3,713 · Karnataka 3,155
 · Bihar 2,675 · Rajasthan 2,439 · Himachal Pradesh 1,896 · Arunachal Pradesh 1,685 · Gujarat 2,315
 · Kerala 2,286 · Uttarakhand 1,585 · Odisha 1,569 · Punjab 1,322 · Assam 1,577 · Telangana 1,867 ·
-Mizoram 3,686 (Annexure A Public 2,003 + Annexure B Private 1,683) · Uttar Pradesh 2,000 ·
-Delhi 1,991 · Chhattisgarh 1,735 · Central PM-JAY HBP 2022
-1,646 ·
-Haryana 1,290. Each row carries its source's `rate_tier` verbatim where the source publishes one
+Mizoram 3,686 (Annexure A Public 2,003 + Annexure B Private 1,683) · Uttar Pradesh 1,799 ·
+Delhi 1,991 · Chhattisgarh 1,735 · Central PM-JAY HBP 2022 1,651 · Haryana 1,587 ·
+Meghalaya 209 (OPD 130 complete + IPD 79, partial - see below). Each row carries its source's `rate_tier` verbatim where the source publishes one
 (Tier 2, Tier1(X), Non-NABH, A1, ...) - amounts are only comparable with the tier visible.
 Telangana's source publishes a single price per procedure (no tier split) - `rate_tier` is
 intentionally blank there, not guessed. All `scheme_versions.status = 'draft'` (Phase 1's admin
@@ -238,9 +237,8 @@ published by source'` - the public UI's amount formatter already renders nothing
 so this doesn't display as a false "₹0/free", and the explicit tier label states why.
 
 **No usable source located yet (need a PDF from the owner):** Madhya Pradesh, Chandigarh, J&K,
-Jharkhand, Puducherry, Goa, Tripura, Maharashtra, Meghalaya (2 of 3 tables are small/client-side;
-the large IPD table needs a WordPress AJAX nonce this session couldn't mint from a plain fetch),
-Manipur, Sikkim, A&N Islands, Lakshadweep, DNH&DD.
+Jharkhand, Puducherry, Goa, Tripura, Maharashtra, Manipur, Sikkim, A&N Islands, Lakshadweep,
+DNH&DD.
 
 **`scripts/govschemes/ingest_layout_pdf.py`** (2026-09-03) — adapter for HBP-family PDFs that
 docling can't parse (column headers print only on page 1, not on continuation pages). Runs
@@ -284,9 +282,37 @@ letter-spacing artifact, unlike Punjab/Odisha) so this was a straightforward run
 `--code-header`/`--rate-header` phrases were identified ("Procedure code HBP 2022" / "Rates
 (₹)").
 
-**Not yet re-run: the already-loaded Haryana/Central/UP `treatment_name` gaps.** Their source
-PDFs aren't on disk in this worktree (gitignored, would need re-fetching first, same as Punjab/
-Himachal/Odisha needed tonight) - real next step, same technique, just not done yet.
+**Fixed 2026-09-04: Central/Haryana/UP `treatment_name` gaps re-run with `ingest_pdf_columnar.py`,
+all three replaced (old scheme_version deleted, verified 0 rows remaining, before the reload -
+same care as every other replace tonight).** `blank_name` 22%/86%/19% -> **0%/0%/0%** on all three,
+confirmed by direct query. Central 1,646 -> 1,651 packages, Haryana 1,290 -> 1,587, UP 2,000 ->
+1,799 (fewer rows than before on UP specifically - the old script's looser matching had shipped
+more rows at the cost of the blank names being fixed; this is deliberately fewer-but-verified,
+same trade-off already made across every other jurisdiction tonight). Two more layout variants
+found and handled:
+  - Central & Haryana: `Tier1(X)` renders as ONE token (no space) - Himachal/UP render it
+    `Tier1 (X)`/`Tier3 (Z)` as two. `phrase_bounds`'s phrase-splitting already handles both since
+    the target phrase is given verbatim per state, not assumed.
+  - **Haryana's column order is reversed** - "Package Name | Procedure Name | Procedure code |
+    Tier3(Z)..." puts Procedure Name BEFORE its code, not after (the same fact the original
+    `ingest_layout_pdf.py` docstring already flagged as a `package_name` gotcha - now confirmed
+    structurally). Added `--name-left-header` to `ingest_pdf_columnar.py`: when given,
+    `name_region` is derived as (that phrase's right edge, code column's left edge) instead of
+    the default (code's right edge, name-right-header's left edge) - same "raw gap between two
+    cleanly-rendering neighbours" principle, just facing the other direction.
+  - Spot-checked BM001A/BM002A/BM001E across all three against each other AND the raw PDF text
+    (Central and Haryana's BM001E both = ₹120,000 independently - cross-validates both).
+
+**Meghalaya loaded 2026-09-04, owner exported the files directly from their own browser session**
+(the client-side wpDataTables export needs a nonce/session this project's own automated fetch
+couldn't obtain - see the still-open finding below). 209 packages: OPD table 130/130 rows -
+**complete**, matches the 130-entry count already recorded in `govschemes_verified_sources_
+batch3.md`; IPD table 100 rows fetched but **PARTIAL** - `Sl.No` starts at 372, not 1, meaning
+the owner's export captured one page of a server-side-paginated table, not the whole IPD master.
+Loaded as-is (partial real data beats none) but `scheme_versions.version_label` and every ingest
+comment say so plainly - this is not represented as the complete IPD table anywhere. Real next
+step if wanted: get the remaining IPD pages (paginate to "All" or export each page) from the
+owner's own browser session, same as this batch.
 
 **Source inventory (research, not yet ingested):** `functions/db/govschemes_source_inventory.md`,
 compiled by agy 2026-09-02 — **29/35 FOUND** (a package master located on an official govt

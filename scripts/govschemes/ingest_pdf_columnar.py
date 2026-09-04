@@ -187,7 +187,15 @@ def main():
                           "may not render as clean words - see script docstring)")
     ap.add_argument("--name-right-header", default="",
                      help="EXACT header phrase whose LEFT edge bounds the name gap on the right "
-                          "(usually the price column, e.g. 'Procedure Price'); default: rate-header")
+                          "(usually the price column, e.g. 'Procedure Price'); default: rate-header. "
+                          "Mutually exclusive with --name-left-header.")
+    ap.add_argument("--name-left-header", default="",
+                     help="EXACT header phrase whose RIGHT edge bounds the name gap on the LEFT, "
+                          "for sources where Procedure Name prints BEFORE the code column instead "
+                          "of after it (confirmed on Haryana's HBP 2.2: 'Package Name' then "
+                          "'Procedure Name' then 'Procedure code' then the rate tiers) - when set, "
+                          "name_region = (this phrase's x1, code_header's x0) instead of the "
+                          "default (code_header's x1, name_right_header's x0).")
     ap.add_argument("--source-url", default="")
     ap.add_argument("--pages", default="", help="1-based inclusive page range, e.g. 1-50")
     a = ap.parse_args()
@@ -202,9 +210,10 @@ def main():
         lo, hi = 1, total_pages
 
     recs, seen, skipped_no_amount, skipped_no_header = [], set(), 0, 0
-    last_rate_col, last_code_col, last_name_right_col, last_header_bottom = None, None, None, None
+    last_rate_col, last_code_col, last_name_right_col, last_name_left_col = None, None, None, None
+    last_header_bottom = None
     pages_with_header, pages_without = 0, 0
-    name_right_label = a.name_right_header or a.rate_header
+    name_right_label = a.name_right_header or (a.rate_header if not a.name_left_header else "")
 
     for pno in range(lo, hi + 1):
         page = pdf.pages[pno - 1]
@@ -212,7 +221,8 @@ def main():
         rate_col = phrase_bounds(words, a.rate_header)
         if rate_col:
             code_hdr_col = phrase_bounds(words, a.code_header)
-            name_right_col = phrase_bounds(words, name_right_label)
+            name_right_col = phrase_bounds(words, name_right_label) if name_right_label else None
+            name_left_col = phrase_bounds(words, a.name_left_header) if a.name_left_header else None
             # This table's header is rendered as 2-3 STACKED lines a few points apart (one
             # clean, the others letter-spaced/rotated - see script docstring). Everything
             # within that stack is header, never row content, however far its individual
@@ -224,13 +234,15 @@ def main():
             pages_with_header += 1
         elif last_rate_col is not None:
             rate_col, code_hdr_col = last_rate_col, last_code_col
-            name_right_col, header_bottom = last_name_right_col, last_header_bottom
+            name_right_col, name_left_col = last_name_right_col, last_name_left_col
+            header_bottom = last_header_bottom
             pages_without += 1
         else:
             skipped_no_header += 1
             continue
         last_rate_col, last_code_col = rate_col, code_hdr_col
-        last_name_right_col, last_header_bottom = name_right_col, header_bottom
+        last_name_right_col, last_name_left_col = name_right_col, name_left_col
+        last_header_bottom = header_bottom
 
         if rate_col is None:
             skipped_no_header += 1
@@ -238,12 +250,17 @@ def main():
 
         # The "Procedure Name" column has no clean header rendering in these PDFs (it only
         # appears on the letter-spaced/fragmented header line - see script docstring), so its
-        # boundary is derived as the RAW GAP between two columns that DO render cleanly: the
-        # code column's own right edge, and the rate-neighbouring column's own left edge. This
-        # is deliberately NOT the shared midpoint used elsewhere (that would only give the name
-        # column half of its actual width, splitting it with its neighbours).
+        # boundary is derived as the RAW GAP between two columns that DO render cleanly. Usually
+        # that's (code column's right edge, rate-neighbouring column's left edge) - Procedure
+        # Name prints AFTER the code. Haryana's HBP 2.2 prints it BEFORE the code instead
+        # ("Package Name | Procedure Name | Procedure code | Tier3(Z)..." - confirmed by
+        # inspection), so --name-left-header switches the gap to (that phrase's right edge,
+        # code column's left edge). Either way this is deliberately NOT the shared midpoint
+        # used elsewhere (that would only give the name column half its actual width).
         name_region = None
-        if code_hdr_col and name_right_col:
+        if a.name_left_header and name_left_col and code_hdr_col:
+            name_region = (name_left_col["x1"], code_hdr_col["x0"])
+        elif code_hdr_col and name_right_col:
             name_region = (code_hdr_col["x1"], name_right_col["x0"])
 
         def in_name_region(w):
