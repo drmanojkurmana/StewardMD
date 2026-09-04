@@ -48,6 +48,8 @@ const SUITES = [
   "test/wardsynq-research.test.mjs",
   "test/wardsynq-lineage.test.mjs",
   "test/wardsynq-api-gov.test.mjs",
+  "test/wardsynq-billing.test.mjs",
+  "test/wardsynq-population.test.mjs",
   "test/wardsynq-safety-case.test.mjs",
 ];
 

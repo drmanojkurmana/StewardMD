@@ -3262,3 +3262,73 @@ Neither module gets a hazard row. They are governance, not clinical controls. Sa
 
 STATUS: IMPLEMENTED and TESTED. NOT clinically validated, NOT legal advice, NOT certified against
 HIPAA, the DPDP Act or any other regime.
+
+## P2 complete: lineage, API governance, billing, population health (2026-09-04)
+
+### wardsynq-lineage.js
+
+The spec asks that a clinician can click any derived value and see the raw observations behind it.
+Two properties carry the file. **Staleness propagates**: a NEWS2 calculated one minute ago on a
+four-hour-old blood pressure is a four-hour-old assessment, and a display showing only the calculation
+time lies by omission. **A rejected input is part of the lineage**: a score built from five values
+after discarding a stale sixth is not the same fact as a score built from five, and the discarded one
+is the first thing an investigation asks about. A missing input makes provenance INCOMPLETE rather
+than partial-but-quiet. `impactOf()` answers the question asked after a mislabelled sample: not what
+fed this, but what did this feed, and who acted on it.
+
+### wardsynq-api-gov.js
+
+This is where data leaves the building, so every control upstream is undone by one endpoint that
+answers wrongly. **Scope is not access**: a valid, unexpired, correctly scoped token is still refused
+for a patient the requester has no relationship with, and a gateway constructed with no relationship
+check refuses every patient request rather than defaulting to allow. An unparseable scope invalidates
+the SET rather than being dropped, since dropping it means proceeding on the rest, which fails open on
+a malformed token. Expired means expired, with no grace window, because a grace window is a window.
+Bulk is separated from single-patient: one chart is a clinical act and ten thousand is an export.
+Webhooks carry an id and a type and never clinical content, because a webhook posts to a URL somebody
+typed and no transport security helps once the payload is at the wrong address. `suspiciousClients()`
+distinguishes a client walking a patient id space from one that is merely misconfigured.
+
+### wardsynq-billing.js
+
+A billing module inside an EMR is a safety module, and not for the obvious reason. The danger is not a
+wrong bill; it is money starting to decide what the chart says. A record bent for a claim lies to
+whoever reads it next, and that patient may be unconscious at the time. So:
+
+**The clinical record is the source. Billing reads it and never writes to it.**
+
+- a code with nothing behind it is REFUSED, not queried, because a queried code sits in a work list
+  until somebody makes it go away and the cheapest way is to add the diagnosis
+- an inferred code is surfaced as a question for a clinician, with the note "do NOT add it to support
+  the claim"
+- coding that CHANGES after a payer denial is flagged permanently and not blocked, because a genuine
+  correction happens too; what matters is that "we found more documentation" can never be invisible
+- `mayProceedClinically()` always returns true and takes no arguments. It exists so no caller invents
+  its own answer, and so that removing the boundary means deliberately deleting a function whose
+  comment says what it is for
+- a refused pre-authorisation is recorded as a FUNDING decision that does not mean the treatment is
+  not indicated
+
+### wardsynq-population.js
+
+Every other module reacts to a patient in front of somebody. This one is about the person whose HbA1c
+was last checked nineteen months ago and about whom no alert will ever fire, because nothing is
+happening to them. A care gap is an absence, so it is computed on a sweep rather than detected.
+
+The suppression rules are the point. An outreach list is a list of people and contacting them costs
+them something: a recall letter to a family who has just had a death is a cruelty the system caused.
+Suppression is applied BEFORE the list exists rather than as a filter over one somebody could export
+first, every applicable reason is returned rather than the first (one at a time invites clearing them
+and re-running), and a decline PERSISTS, because re-detecting it monthly teaches people to ignore the
+one letter that mattered. The list is ordered by clinical risk, never by how overdue anything is: the
+largest overdue number and the sickest patient are rarely the same person.
+
+None of these four gets a hazard row. They are governance, measurement and administration, not
+clinical controls, and inventing rows would inflate the table with things that do not stop a patient
+being harmed. Safety case holds at 12 of 14 with 2 partial.
+
+P2 is now complete: quality, incidents, consent, research, lineage, api-gov, billing, population.
+708 tests across 29 suites.
+
+STATUS: IMPLEMENTED and TESTED. NOT clinically validated, NOT approved, NOT certified for any payer
+or regulatory regime.
