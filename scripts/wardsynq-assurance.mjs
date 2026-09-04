@@ -36,6 +36,7 @@ const SUITES = [
   "test/wardsynq-offline.test.mjs",
   "test/wardsynq-interop.test.mjs",
   "test/wardsynq-paediatrics.test.mjs",
+  "test/wardsynq-deterioration.test.mjs",
   "test/wardsynq-safety-case.test.mjs",
 ];
 

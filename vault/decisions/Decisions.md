@@ -2852,3 +2852,54 @@ numbers stay in a pack a paediatrician signs. The HAZ-MED-03 and HAZ-DIAG-01 cav
 to record that the content is still absent; the scoring methodology and criteria were NOT changed.
 
 STATUS: IMPLEMENTED and TESTED (21 tests). NOT clinically validated, NOT clinically approved.
+
+## Deterioration: NEWS2, and the reasons a score must refuse (2026-09-04)
+
+Failure to rescue is the largest avoidable category of inpatient death, and nothing in the build
+watched a trend. The spec's own HAZ-DEV-01 verification already named this file's job -- the IoMT
+artifact filter exists to keep corrupted telemetry out of "automated NEWS2 calculations" -- but there
+was no such calculation, so that clause was asserted rather than exercised.
+
+The arithmetic of NEWS2 is public and easy. Everything that decides whether an early warning system
+saves anybody is in what it does when the inputs are not what the score assumes:
+
+1. **A missing parameter is not zero.** The single most dangerous way to implement NEWS2. An absent
+   respiratory rate scores 0, the total looks reassuring, and respiratory rate is the earliest sign
+   of deterioration there is. An incomplete score is INCOMPLETE and has no risk category, however
+   low the partial total. The partial total is still shown, so a human can see how sick this is.
+2. **A stale observation is not a current one.** A score built from a six-hour-old blood pressure is
+   a current-looking number about a patient who has since changed.
+3. **Scale 2 is a prescription, not a guess.** Using Scale 1 on a hypercapnic patient escalates
+   somebody who is at their own target; using Scale 2 on anyone else hides real hypoxia. It applies
+   only where recorded. The counterintuitive half is tested: 98 percent ON OXYGEN scores 3 on
+   Scale 2, and the same number on air scores 0.
+4. **The total hides the single parameter.** A total of 3 from one parameter at its extreme is a
+   different patient from a total of 3 spread across three. Both now drive escalation.
+5. **NEWS2 is adult and non-obstetric**, so children and pregnant patients are REFUSED rather than
+   approximated. Same rule as the paediatrics module: an unbanded tool means adult.
+6. **An unscorable patient is escalated too.** A patient nobody has fully observed is its own reason
+   to send somebody, so an incomplete score raises rather than falls silent.
+7. **Re-escalation goes strictly ABOVE whoever was already asked.** The first cut counted rungs on a
+   ladder, which sent an ignored medium-risk escalation back to the ward doctor who had just ignored
+   it. A test caught it.
+
+**A real defect this exposed.** `scoreEligible` was bolted onto the observation object AFTER
+construction and was therefore not part of the canonical model, so any device reading that
+round-tripped through the store, an adapter or the event bus lost the flag and was then excluded
+from every automated score forever, silently. It is now a modelled field with null meaning NOT
+ASSESSED, which for a device observation remains ineligible: a reading nothing has vetted has not
+passed.
+
+**A new hazard row, HAZ-DET-01, marked LOCAL.** It is not transcribed from the spec's assurance
+table, which has no row for failure to rescue. It is declared PARTIAL and stays partial: the score,
+the refusals and the escalation state machine work, but there is NO NOTIFICATION CHANNEL. A monitor
+that raises a correct escalation into an in-memory Map has not rescued anybody, and the sweep is
+caller-driven so nothing re-escalates unless something calls it on a timer. Adding this row LOWERS
+the fully-verified fraction from 11/11 to 11/12; it was added because the omission was real, not to
+improve a number. The scoring methodology and criteria are unchanged.
+
+The RCP's published 2017 parameter bands are a national standard, which is why this file carries
+numbers where the threshold and dose packs deliberately do not. The escalation policy attached to
+them is a local decision and is marked unapproved.
+
+STATUS: IMPLEMENTED and TESTED (32 tests). NOT clinically validated, NOT clinically approved.

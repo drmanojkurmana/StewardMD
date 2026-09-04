@@ -155,6 +155,12 @@ function Observation(input) {
     unit: input.unit || null, // UCUM code where applicable
     signalQualityIndex: typeof input.signalQualityIndex === "number" ? input.signalQualityIndex : null, // IoMT SQI 0-100
     artifact: !!input.artifact, // set by wardsynq-iomt.js when SQI < threshold; excluded from scores
+    // Set by the IoMT quality filter. null means NOT ASSESSED, which for a device observation is
+    // treated as ineligible: a reading nothing has vetted has not passed. It lives on the canonical
+    // model rather than being bolted on afterwards because a device reading that loses this field in
+    // transit through the store or the bus would be excluded from every automated score forever, and
+    // silently, which is exactly the failure the filter exists to prevent.
+    scoreEligible: typeof input.scoreEligible === "boolean" ? input.scoreEligible : null,
     meta: makeMeta(input),
   };
 }
