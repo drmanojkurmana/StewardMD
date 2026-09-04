@@ -67,6 +67,23 @@ if [ -d assets/vendor ]; then mkdir -p "$WWW/assets/vendor"; cp -R assets/vendor
 # offline-clinical.js). Built by scripts/build-offline-clinical.mjs. ────────────
 [ -f data/offline-clinical.json.gz ] && cp data/offline-clinical.json.gz "$WWW/"
 
+# ── 4c. WardSynQ clinical surface ─────────────────────────────────────────────
+# The EMR surface and the modules it imports. Copied WHOLE rather than cherry-picked:
+# these are native ES modules that import each other by relative path, so a partial
+# copy produces a surface that loads until it reaches the one module nobody listed.
+#
+# NOTE: shipping these files does NOT make WardSynQ reachable to a user. Nothing in
+# the StewardMD app links to wardsynq.html and no flag turns it on; it is present so
+# the offline shell and the assets are cached and testable, not so a clinician can
+# open it. Reachability is a separate, deliberate decision that has not been taken.
+if [ -d wardsynq ]; then
+  mkdir -p "$WWW/wardsynq"
+  cp -R wardsynq/. "$WWW/wardsynq/"
+  # Test fixtures and seed data used only by node --test are not runtime assets.
+  rm -rf "$WWW/wardsynq/data/"*.seed.json.bak 2>/dev/null || true
+  echo "  wardsynq: $(find "$WWW/wardsynq" -type f | wc -l | tr -d ' ') files"
+fi
+
 # ── 5. Knowledge base — RUNTIME pieces only ───────────────────────────────────
 # Loaded by index.html + steward-ai.browser.js; the 13 MB kb.index.json and all
 # source/dev dirs (diseases, reference, validation, tools, schema, manifest…) are

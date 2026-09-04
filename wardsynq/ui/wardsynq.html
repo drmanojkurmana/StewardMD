@@ -126,5 +126,12 @@
 <footer class="foot">WardSynQ demonstration build. Real deterministic safety engine, unapproved clinical content. Not for clinical use.</footer>
 
 <script type="module" src="wardsynq-app.js?v=5"></script>
+<script type="module">
+  // Offline shell. Registered separately from the app so a caching failure never stops the
+  // workstation loading: an app that says it is offline is more use than one that will not open.
+  if ("serviceWorker" in navigator) {
+    navigator.serviceWorker.register("./wardsynq-sw.js", { scope: "./" }).catch(() => {});
+  }
+</script>
 </body>
 </html>
