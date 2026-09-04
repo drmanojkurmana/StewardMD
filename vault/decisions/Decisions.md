@@ -3442,3 +3442,44 @@ field so the storm test was not testing dedupe at all.
 768 tests across 32 suites. Safety case at 12 of 14 with 2 partial.
 
 STATUS: IMPLEMENTED and TESTED.
+
+## End-to-end clinical scenarios, and the defect only they could find (2026-09-04)
+
+Thirty-two unit suites each proved one module correct in isolation, which is exactly the shape of
+testing that misses integration defects: every module is tested against the interface its own author
+imagined. `test/wardsynq-scenarios.test.mjs` runs one patient through the whole stack with the
+assertions placed at the SEAMS.
+
+Scenario 1 is the complete journey: observations at 02:10, NEWS2 scores HIGH, a recognition prompt is
+raised and nobody answers it, it escalates on its own, a clinician accepts at 03:45 with the delay
+recorded as 95 minutes, the bundle refuses to start at a flattering time in either direction, the
+antibiotic element is completed by an actual bedside scan through the real eMAR state machine, a
+NORMAL lactate still completes its element, and the provenance summary reports two derived elements
+and one attested. Every one of those handoffs is a place two modules could have disagreed.
+
+The other scenarios pin seams that would be invisible in isolation:
+
+- a postpartum woman is refused by NEWS2 AND accepted by MEOWS. Both refusing would leave her with
+  nothing watching her, and neither suite could see that on its own.
+- a child is refused by NEWS2 and by qSOFA, and neither refusal is allowed to read as reassurance
+- an unscorable patient escalates for being unobserved and is NOT also raised as suspected sepsis,
+  because double-counting one patient as two alerts trains people to ignore both
+- a forged AI actor can draft and cannot commit, on this patient's live chart
+- the number on the screen explains itself, including what it refused to use
+
+**The defect.** The lineage scenario asserted a stale blood pressure would be rejected and it was
+not, because `gatherVitals` guarded staleness and had no guard on FUTURE-dated observations. A
+future reading is worse than a stale one: it WINS. "Latest reading" logic ranks it above the correct
+current value, so the score is computed from a number describing a moment that has not happened. It
+arises from ordinary causes, a device with a skewed clock or a feed with a timezone bug.
+
+The sharpest part is that `wardsynq-simulation.js` already asserts `no-future-clinical-time` as an
+invariant, and the gatherer sitting under two clinical charts was not enforcing it. A property named
+in one module and unenforced in another is precisely what unit tests do not catch, because each file
+is consistent with itself.
+
+Fixed in `wardsynq-vitals.js`, which both NEWS2 and MEOWS go through, with three regression tests
+including the boundary case that an observation timestamped exactly now is current rather than
+future.
+
+778 tests across 33 suites. Safety case at 12 of 14 with 2 partial.

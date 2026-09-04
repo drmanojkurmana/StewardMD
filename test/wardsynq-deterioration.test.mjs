@@ -431,3 +431,36 @@ test("a re-escalation is dispatched again, and the attempts accumulate", async (
   assert.equal(esc.attempts.length, 2, "the record of every attempt is what an investigation needs");
   assert.deepEqual(sent.map((p) => p.why), ["raised", "re-escalated"]);
 });
+
+/* ------------------------------------------------------------------ ADVERSARIAL: the future
+ *
+ * Found by an end-to-end scenario, not by a unit test, which is the point of having both. The
+ * gatherer rejected stale observations and had no guard on future ones. A future-dated reading is
+ * worse than a stale one because it WINS: "latest reading" logic ranks it above the correct current
+ * value, so the score describes a moment that has not happened.
+ */
+
+test("ADVERSARIAL: a future-dated observation does not become the latest reading", () => {
+  const list = FULL_OBS();
+  // A monitor with a skewed clock, or a feed with a timezone bug, reporting a pulse an hour ahead.
+  list.push(obs("8867-4", 190, -60));   // negative minutesAgo, i.e. in the future
+  const r = news2({ observations: list, patient: ADULT, now: NOW });
+
+  assert.equal(r.parameters[PARAM.PULSE].value, 74, "the correct current reading still wins");
+  assert.ok(r.rejected.some((x) => /in the future/.test(x.reason)));
+});
+
+test("ADVERSARIAL: a future reading cannot be the ONLY reading for a parameter either", () => {
+  const list = FULL_OBS().filter((o) => o.code !== "8867-4");
+  list.push(obs("8867-4", 74, -120));
+  const r = news2({ observations: list, patient: ADULT, now: NOW });
+
+  assert.equal(r.scorable, false, "refused rather than scored from a time that has not happened");
+  assert.deepEqual(r.missing, [PARAM.PULSE]);
+});
+
+test("an observation timestamped exactly now is current, not future", () => {
+  const list = FULL_OBS();
+  const r = news2({ observations: list, patient: ADULT, now: NOW });
+  assert.equal(r.scorable, true, "the boundary is inclusive: now is not the future");
+});

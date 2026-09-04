@@ -50,6 +50,19 @@ function gatherVitals(observations, { codeMap, now, freshnessMs = FRESHNESS_MS }
       rejected.push({ id: o.id, param, reason: "no effective time, so its age cannot be established" });
       continue;
     }
+    // A future-dated observation is refused before staleness is even considered. It arises from
+    // device clock skew or a feed with a timezone bug, and it is more dangerous than a stale one
+    // because it wins: "latest reading" logic ranks it above the correct current value, so the
+    // score is computed from a number describing a moment that has not happened. Found by an
+    // end-to-end scenario, and it is the same property wardsynq-simulation.js asserts as an
+    // invariant while this gatherer was not enforcing it.
+    if (at > nowMs) {
+      rejected.push({
+        id: o.id, param,
+        reason: `effective time is ${Math.round((at - nowMs) / 60000)} minutes in the future, so it cannot describe the patient now and must not outrank a current reading`,
+      });
+      continue;
+    }
     if (nowMs - at > freshnessMs) {
       rejected.push({
         id: o.id, param,
