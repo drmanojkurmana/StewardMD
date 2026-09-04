@@ -1099,18 +1099,18 @@
       ".hv-mi{display:flex;align-items:center;gap:13px;width:100%;text-align:left;background:transparent;border:none;border-radius:12px;padding:13px 8px;cursor:pointer;color:var(--hink)}.hv-mi:hover{background:var(--hbg)}.hv-mi:active{transform:scale(.99)}.hv-mi svg{width:21px;height:21px;color:var(--hp)}.hv-mi .ml{flex:1;font:600 14.5px var(--hfont)}.hv-mi .mc{font:500 12px var(--hfont);color:var(--hmut);margin-top:1px}.hv-mi .marr svg{stroke:var(--hmut);width:18px;height:18px}",
       ".hv-mi+.hv-mi{border-top:1px solid var(--hbd)}",
       // Hospital hub — 2x2 tile grid (signature tile = teal). svg fill-fix so stroke icons don't render solid black.
-      ".hv-tiles{display:grid;grid-template-columns:1fr 1fr;gap:11px;margin:2px 0 6px}",
-      ".hv-tile{display:flex;flex-direction:column;align-items:flex-start;text-align:left;background:var(--hbg);border:1.5px solid var(--hbd);border-radius:16px;padding:15px 14px;min-height:114px;cursor:pointer;color:var(--hink);transition:transform .12s,border-color .12s,box-shadow .12s}",
+      ".hv-tiles{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin:2px 0 6px}",
+      ".hv-tile{display:flex;flex-direction:column;align-items:flex-start;text-align:left;background:var(--hbg);border:1.5px solid var(--hbd);border-radius:16px;padding:13px 13px;min-height:98px;cursor:pointer;color:var(--hink);transition:transform .12s,border-color .12s,box-shadow .12s}",
       ".hv-tile:hover{border-color:var(--hp)}.hv-tile:active{transform:scale(.975)}",
       ".hv-tile svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;color:var(--hp)}",
-      ".hv-tile .tl{font:800 15px var(--hfont);margin-top:11px}.hv-tile .tc{font:500 12px var(--hfont);color:var(--hmut);margin-top:3px;line-height:1.35}",
+      ".hv-tile .tl{font:800 15px var(--hfont);margin-top:9px}.hv-tile .tc{font:500 12px var(--hfont);color:var(--hmut);margin-top:3px;line-height:1.3}",
       ".hv-tile.pri{background:var(--hp);border-color:var(--hp);color:#fff;box-shadow:0 6px 18px -8px var(--hp)}.hv-tile.pri svg{color:#fff}.hv-tile.pri .tc{color:rgba(255,255,255,.85)}",
       // A two-action tile (Prescription: Create / Verify). The tile itself is no longer the tap
       // target - its buttons are - so it drops the whole-tile press affordance and gives each
       // control a full-height 40px target instead. The row is auto-pushed to the bottom so a
       // two-action tile still lines up with its single-action neighbours in the grid.
       ".hv-tile2{cursor:default}.hv-tile2:hover{border-color:var(--hbd)}.hv-tile2:active{transform:none}",
-      ".hv-t2{display:flex;gap:7px;width:100%;margin-top:auto;padding-top:11px}",
+      ".hv-t2{display:flex;gap:7px;width:100%;margin-top:auto;padding-top:8px}",
       ".hv-t2b{flex:1;min-width:0;min-height:40px;padding:9px 6px;border-radius:11px;border:1.5px solid var(--hbd);background:var(--hpanel);color:var(--hink);font:800 12.5px var(--hfont);cursor:pointer;transition:transform .12s,border-color .12s}",
       ".hv-t2b:active{transform:scale(.96)}.hv-t2b:hover{border-color:var(--hp)}.hv-t2b:focus-visible{outline:2px solid var(--hp);outline-offset:2px}",
       ".hv-t2b.pri{background:var(--hp);border-color:var(--hp);color:#fff}",

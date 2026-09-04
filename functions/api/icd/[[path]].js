@@ -61,8 +61,14 @@ export async function onRequest(context) {
 
   if (head === "code" && parts[1]) {
     let status = 200;
+    // icd_codes.id is "icd10:<code>" / "icd11:<code>" - it contains a colon, so the client always
+    // encodeURIComponent()s it before building the URL. Cloudflare's [[path]] catch-all does NOT
+    // decode individual path segments, so parts[1] arrives here still literally "icd10%3AE11.9" -
+    // decode it before querying D1, where the stored id has a real colon.
+    let id = parts[1];
+    try { id = decodeURIComponent(id); } catch (e) {}
     const body = await safeRead(request, env, {}, async () => {
-      const row = await repo.getCodeById(env, parts[1]);
+      const row = await repo.getCodeById(env, id);
       if (!row) { status = 404; return { error: "not_found" }; }
       return row;
     });
