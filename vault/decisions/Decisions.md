@@ -3533,3 +3533,57 @@ live medication path would be worse than leaving it unwired. That is stated in t
 left for somebody to discover.
 
 794 tests across 34 suites. Safety case at 12 of 14 with 2 partial.
+
+## The ICU flowsheet: the running total that is quietly wrong (2026-09-04)
+
+`wardsynq/wardsynq-flowsheet.js` (35 tests). The flowsheet is the densest document in a hospital, and
+the danger is not in its cells: ICU prescribing is done off its running TOTALS, and a total looks
+equally authoritative whether or not the hours underneath it are complete.
+
+1. **A missing hour is not zero.** The same defect as a missing NEWS2 parameter, and worse here
+   because it compounds. If nobody charted output between 03:00 and 06:00, a balance that sums what
+   it has is wrong by exactly the amount nobody knows, and that is the number a consultant reads at
+   08:00 before prescribing diuresis. Every balance names the missing hours and states that the true
+   figure differs by whatever was not charted. An hour with intake charted and output blank is NOT a
+   complete hour, which is the commonest shape of the gap.
+   The numbers are still returned, deliberately: suppressing them pushes a nurse to add it up on
+   paper, which is worse. What is refused is calling it a balance.
+2. **The hour is a bucket, not a timestamp.** `observedAt` and `chartedAt` are both mandatory, and
+   BACKFILLED is computed from the lag rather than declared by the caller, so it cannot be omitted
+   by someone in a hurry. An entry written six hours late that looks identical to one written on
+   time is a clinical and a medico-legal problem. The grid surfaces backfilling at the TOP, because
+   the pattern is the signal: one late row is a busy hour, a whole shift of them is a shift where
+   nobody was charting.
+3. **An infusion volume is an integral, not a multiplication.** Current rate times elapsed time is
+   the obvious implementation, is wrong for every patient whose rate was ever changed, and
+   under-reports a weaned vasopressor. A test pins the exact wrong answer it would have given.
+4. **The weight is the input everybody forgets is an input.** A weight-based rate refuses without
+   one, flags an implausible one through the paediatrics sanity check, and carries its workings, so
+   a cell can be traced to the three numbers behind it, one of which somebody typed.
+5. **SET and MEASURED are different kinds, not a flag.** A set PEEP of 8 against a measured 12 means
+   the patient is doing something, and a chart holding one number per row cannot show it.
+6. **An empty cell stays empty and is counted.** Rendering a blank as a zero is the display half of
+   the missing-hour problem: it looks complete.
+
+**A trap removed rather than documented.** `recomputeAfterCorrection()` first took the entry set
+before and after the correction, and a test caught that as a trap: `correct()` marks the original
+superseded IN PLACE, so a caller holding one array across the call holds the same mutated objects and
+both totals come out identical. It now takes the correction itself and derives the before-state, so
+it cannot be got wrong.
+
+**HAZ-FLUID-01, marked LOCAL and declared PARTIAL** for one specific reason. A correction now reports
+exactly which totals changed and flags the case that is not merely arithmetic: a balance crossing a
+line somebody prescribes against is stated as "read negative and now reads positive", not as "360 mL
+smaller". What stays open is the half that matters most. The consultant who prescribed at 06:00 off
+the wrong figure is still not notified when it is fixed at 08:00, because nothing in this build
+records that a total was READ. That needs a view log, which does not exist, and the function says so
+in its own output rather than letting its absence imply otherwise.
+
+Also unbuilt and stated: nothing gates prescribing on an incomplete balance, deliberately, since a
+system that blocked a consultant from reading a partial total would be worked around on paper. That
+means the honesty is advisory.
+
+Safety case now 12 of 15 verified, 3 partial. The row was added because the omission was real and it
+lowered the fraction, as the other two local rows did.
+
+829 tests across 35 suites. STATUS: IMPLEMENTED and TESTED. NOT clinically validated or approved.

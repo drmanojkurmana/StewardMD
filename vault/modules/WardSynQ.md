@@ -3,15 +3,15 @@
 Hospital Clinical OS and EMR **inside StewardMD**, not a separate repo or product codebase.
 `wardsynq.com` is its web surface. Owner decision 2026-09-04. Spec: `~/Downloads/implementation_planfinal.md`.
 
-STATUS: **P0 complete, P1 in progress.** 794 tests across 34 suites. The clinical workstation UI
+STATUS: **P0 to P3 built.** 829 tests across 35 suites. The clinical workstation UI
 exists at `wardsynq/ui/` and is wired to a `GovernedStore`, but it is behind no route in the mobile
 app and is not reachable by any user. All clinical content (interaction, allergy, dose ceiling and
 critical threshold packs) is UNAPPROVED seed data and must not gate a real order until pharmacy and
 the relevant committee sign it off.
 
 The safety case is executable: `node scripts/wardsynq-assurance.mjs` runs the real suites and
-cross-references the hazard table against what actually passed. It currently reports **12 of 14
-verified, 2 partial**. Read the caveats; the summary line alone is not the state of the system.
+cross-references the hazard table against what actually passed. It currently reports **12 of 15
+verified, 3 partial**. Read the caveats; the summary line alone is not the state of the system.
 
 ## Ward Sync and WardSynQ are ONE system
 
@@ -195,6 +195,7 @@ cross-references them, so a renamed or deleted test shows as MISSING TEST rather
 | `wardsynq-bundle-binding.js` | (closes TIME-01's evidence) | Completes bundle elements from real eMAR administrations. DERIVED and ATTESTED are never conflated. |
 | `wardsynq-notify.js` | (infrastructure) | The single definition of delivery. Attempted is not delivered. |
 | `wardsynq-vitals.js` | (infrastructure) | The single definition of a current, non-artefactual observation, shared by both charts. |
+| `wardsynq-flowsheet.js` | HAZ-FLUID-01 (local, PARTIAL) | The ICU hourly chart. A missing hour is never zero, and an infusion volume is an integral. |
 
 ## P2 and P3 (governance, measurement, AI)
 
@@ -236,8 +237,8 @@ re-reading the control:
 5. `gatherVitals` guarded staleness and not future-dating, so a clock-skewed reading became "the
    latest" and outranked the correct current value.
 
-Three hazards are LOCAL: they are not in the spec's assurance table and were added because the
-omission was real. Two are PARTIAL. Adding them lowered the verified fraction rather than raising it.
+Four hazards are LOCAL: they are not in the spec's assurance table and were added because the
+omission was real. Three are PARTIAL. Adding them lowered the verified fraction rather than raising it.
 
 ## The honest state of it
 
@@ -257,7 +258,7 @@ the live mobile path onto the adapter. `wardsynq-shadow.js` exists for it and `i
 it awaits a shadow run against real ward data (`?wardsynq_shadow=1`, then check
 `SMD_WARDSYNQ_SHADOW.report().clean`).
 
-P0, P1, P2 and the P3 core modules are built. What is genuinely unbuilt: the ICU flowsheet; the
+P0, P1, P2 and the P3 core modules are built. What is genuinely unbuilt: the
 renderer behind `wardsynq/ui/opd.html` (the bedside LOGIC is tested in `test/wardsynq-opd.test.mjs`,
 the view that calls it is not written, and wiring a half-built view to a live medication path would
 be worse than leaving it unwired).

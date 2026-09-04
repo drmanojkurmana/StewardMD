@@ -508,6 +508,44 @@ const HAZARDS = Object.freeze([
     approver: "Clinical Director of Obstetrics and Head of Midwifery",
     caveat: "IMPLEMENTED and TESTED, not clinically validated or approved. THE TRIGGER CUT-OFFS ARE UNAPPROVED and this matters more here than elsewhere: MEOWS charts differ substantially between units, and a chart with the wrong cut-offs is worse than no chart because it is trusted. The obstetric lead owns these values. NOT modelled: fetal monitoring and CTG interpretation of ANY kind, which is a large and separate hazard this file does not touch and must not be read as covering; labour progress, shoulder dystocia and other intrapartum emergencies; amniotic fluid embolism; pregnancy-specific sepsis scoring; gestational diabetes. NO DOSING of any kind, and magnesium sulphate deliberately so: the window between anticonvulsant effect and respiratory arrest is narrow and an unapproved regimen here would be a direct route to a maternal death. The bundles run on the emergency module's clock and inherit its limits, declared under HAZ-TIME-01: no notification transport is shipped and no element is derived from a real eMAR administration.",
   },
+  {
+    id: "HAZ-FLUID-01",
+    source: "LOCAL: not transcribed from the spec's assurance table, which has no row for the flowsheet. Added because ICU prescribing is done off running totals rather than individual cells, and a total looks equally authoritative whether or not the hours underneath it are complete.",
+    hazard: "Fluid or vasoactive therapy prescribed from an incomplete or miscomputed flowsheet total",
+    initialRisk: "major x probable",
+    requirement: "A running total must report its own completeness and name what is missing; an infusion volume must be integrated over its rate history; a weight-based rate must refuse to compute without a weight.",
+    control: {
+      kind: "arithmetic honesty on the hourly chart",
+      // PARTIAL for one specific reason, stated in the caveat: a correction tells the person making
+      // it that later totals are now wrong, and tells nobody who already acted on them.
+      adequacy: "partial",
+      module: "wardsynq/wardsynq-flowsheet.js",
+      summary: "A missing hour is never zero: every balance names the hours nobody charted and states that the true figure differs by exactly that amount. An hour with intake charted and output blank is not a complete hour. An infusion volume is the rate history integrated over time rather than the current rate multiplied by elapsed time, which under-reports a weaned vasopressor. A weight-based rate refuses without a weight and flags an implausible one, because every mcg/kg/min in the unit is multiplied by it. SET and MEASURED are different kinds rather than a flag, so a set PEEP of 8 against a measured 12 is visible. observedAt and chartedAt are both mandatory, and an entry charted late is marked BACKFILLED by computation rather than by declaration. A correction supersedes rather than overwrites, so the chart can still show what a clinician saw.",
+    },
+    verification: {
+      file: "test/wardsynq-flowsheet.test.mjs",
+      tests: [
+        "ADVERSARIAL: three unchared hours do NOT silently become zero",
+        "ADVERSARIAL: an hour with intake charted and output blank is NOT a complete hour",
+        "ADVERSARIAL: an infusion volume is an INTEGRAL, not the current rate times elapsed time",
+        "ADVERSARIAL: a weight-based rate cannot be calculated without a weight",
+        "ADVERSARIAL: an implausible weight is flagged, because every rate is multiplied by it",
+        "ADVERSARIAL: a set PEEP and a measured PEEP that disagree is the finding",
+        "ADVERSARIAL: observedAt and chartedAt are BOTH required",
+        "ADVERSARIAL: a late entry is marked BACKFILLED, and the mark is computed not declared",
+        "ADVERSARIAL: a correction supersedes rather than overwrites, and says what it invalidated",
+        "ADVERSARIAL: an empty cell stays empty and is counted, never rendered as a zero",
+        "a corrected entry is excluded from the total and its replacement included",
+        "a balance over an empty window reports every hour missing rather than a tidy zero",
+        "ADVERSARIAL: a correction reports exactly which cumulative totals changed",
+        "ADVERSARIAL: a total that CROSSES zero is flagged, because that is a different patient",
+        "ADVERSARIAL: the recomputation states the thing it CANNOT do",
+      ],
+    },
+    residualRisk: "reduced: the total is now honest about itself. Unchanged: nothing stops anyone prescribing from it, and nobody is told when a correction invalidates what they already read",
+    approver: "Clinical Director of Intensive Care and Lead ICU Pharmacist",
+    caveat: "PARTIAL, for one specific reason. When a charted value is corrected, the correction tells the person MAKING it that every cumulative total after that hour is now wrong and that somebody may have acted on it. It tells nobody who actually did. recomputeAfterCorrection() now closes half of this: it reports exactly which cumulative totals changed, by how much, and flags the case that is not merely arithmetic, where a balance crosses a line somebody prescribes against, so a patient who read negative and now reads positive is stated as that rather than as '360 mL smaller'. What remains open is the half that matters most: a consultant who prescribed diuresis at 06:00 off a balance containing a urine output of 400 mL that was really 40 mL is still not notified when it is fixed at 08:00, because NOTHING IN THIS BUILD RECORDS THAT A TOTAL WAS READ. Closing it needs a view log, which does not exist, and the function says so in its own output rather than letting its absence imply otherwise. Also unbuilt: nothing gates prescribing on an incomplete balance, deliberately, because a system that blocked a consultant from reading a partial total would be worked around by adding it up on paper, but that means the honesty is advisory. NOT modelled: ventilator waveforms, the pump and ventilator protocols themselves, nutrition and calorie balance, drains and stomas, pressure-area and turning charts, and any local flowsheet layout. No rendering: this is the arithmetic and the honesty about it. Not clinically validated and not clinically approved.",
+  },
 ]);
 
 /**
