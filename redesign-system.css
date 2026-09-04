@@ -832,3 +832,29 @@ html body.rds-on #sbMenu [data-smd-top] { margin: 2px 8px; }
 @media (min-width: 1024px) {
   #homeV2.rnav .rnav-stack { max-width: 960px; }
 }
+
+/* --- 2c · ICD & Scheme Overlays (icd.js .icd-*, govschemes.js .gs-*) --- */
+html body.rds-on #icdOverlay, html body.rds-on #gsOverlay { background: var(--rds-bg); }
+html body.rds-on .icd-top, html body.rds-on .gs-top { background: var(--rds-surface); border-bottom: 1px solid var(--rds-line); }
+html body.rds-on .icd-title, html body.rds-on .gs-title { font-family: var(--rds-font); color: var(--rds-ink); }
+html body.rds-on .icd-back, html body.rds-on .gs-back { border-radius: var(--rds-r-ctl); min-height: 44px; color: var(--rds-primary); font-family: var(--rds-font); }
+html body.rds-on .icd-search, html body.rds-on .gs-search {
+  border-radius: var(--rds-r-ctl);
+  border: 1.5px solid var(--rds-line);
+  background: var(--rds-surface);
+  color: var(--rds-ink);
+  min-height: 50px;
+  font: var(--rds-fw-reg) var(--rds-fs-body) var(--rds-font);
+  transition: border-color var(--rds-dur) var(--rds-ease), box-shadow var(--rds-dur) var(--rds-ease);
+}
+html body.rds-on .icd-search:focus, html body.rds-on .gs-search:focus { outline: none; border-color: var(--rds-primary); box-shadow: 0 0 0 3px rgba(15,118,110,.25); }
+html body.rds-on .icd-sys, html body.rds-on .gs-tab { border-radius: var(--rds-r-pill); border: 1.5px solid var(--rds-line); background: var(--rds-surface); color: var(--rds-ink); font-family: var(--rds-font); }
+html body.rds-on .icd-src, html body.rds-on .gs-src { font-family: var(--rds-font); color: var(--rds-muted); }
+html body.rds-on .gs-tabs { border: none; background: transparent; padding: 0; gap: 8px; }
+html body.rds-on .gs-state { border-radius: var(--rds-r-ctl); border: 1.5px solid var(--rds-line); background: var(--rds-surface); color: var(--rds-ink); min-height: 50px; font-family: var(--rds-font); }
+html body.rds-on .icd-sys.on, html body.rds-on .gs-tab.on { background: var(--rds-primary-soft); border-color: var(--rds-primary); color: var(--rds-primary-2); box-shadow: none; }
+html body.rds-on .icd-card, html body.rds-on .gs-card, html body.rds-on .gs-cat, html body.rds-on .gs-sec, html body.rds-on .gs-cmpcard { border: 1px solid var(--rds-line); border-radius: var(--rds-r); background: var(--rds-surface); box-shadow: var(--rds-el-card); }
+html body.rds-on .icd-card-name, html body.rds-on .gs-card-name, html body.rds-on .gs-dname, html body.rds-on .icd-dname { font-family: var(--rds-font); color: var(--rds-ink); }
+html body.rds-on .icd-card-code, html body.rds-on .icd-dcode, html body.rds-on .gs-card-code, html body.rds-on .gs-pill-code { font-family: var(--rds-mono); color: var(--rds-ink); }
+html body.rds-on .icd-card-sys, html body.rds-on .gs-pill { border-radius: var(--rds-r-pill); background: var(--rds-primary-soft); color: var(--rds-primary-2); font-family: var(--rds-font); }
+html body.rds-on .icd-card-ch, html body.rds-on .gs-amt.unset { color: var(--rds-muted); font-family: var(--rds-font); }
