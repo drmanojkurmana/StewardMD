@@ -2288,8 +2288,9 @@ engine - only the WRITING step moves on-device, not the search.
 Dead code removed: `RESEARCH_SYS` (only the deleted fallback used it); `test/maik-cloud-scope.test.mjs`
 updated to stop asserting a scope rule on a constant that no longer exists.
 
-Not yet verified live: this feature has unit coverage (maik-local.test.mjs webAnswer tests using the
-REAL kb/ai/maik-lite-rag.js evidenceGate, not a book-specific stub; maik-engine.test.mjs routing;
-a source-level regression test, test/research-web-fallback.test.mjs, for the two server changes)
-but has not yet been exercised on the owner's phone end to end (tap "Research on the web" with the
-local engine selected, confirm a real TinyFish+on-device answer with no AI-token cost).
+Verified live on the owner's iPhone 15 Pro (same question, both engines): local engine ->
+{engine:"local", mode:"web-local", 8 free TinyFish sources, 989-char answer, 21 s}; MaiK Cloud ->
+{mode:"web-tinyfish", 8 sources, 7 s}, confirming the cloud path is unchanged. Unit coverage:
+maik-local.test.mjs webAnswer tests using the REAL kb/ai/maik-lite-rag.js evidenceGate, not a
+book-specific stub; maik-engine.test.mjs routing; test/research-web-fallback.test.mjs, a
+source-level regression for the two server changes.
