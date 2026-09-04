@@ -62,6 +62,7 @@ const SUITES = [
   "test/wardsynq-readlog.test.mjs",
   "test/wardsynq-opd-render.test.mjs",
   "test/wardsynq-ghis-live.test.mjs",
+  "test/wardsynq-flowsheet-render.test.mjs",
   "test/wardsynq-safety-case.test.mjs",
 ];
 

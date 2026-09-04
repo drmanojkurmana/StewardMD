@@ -16,6 +16,18 @@ import { ClinicalStore, MemoryBackend } from "../wardsynq/wardsynq-store.js";
 import { ClinicalEventBus } from "../wardsynq/wardsynq-events.js";
 
 const NOW = "2026-09-05T09:00:00.000Z";
+
+/**
+ * Lets every pending promise callback run before asserting.
+ *
+ * These tests originally used setTimeout(r, 0), and the full suite failed once in a way that could
+ * not be reproduced in thirteen further runs. A zero-delay timer does NOT guarantee that a .then()
+ * attached to an already-rejected promise has run: under load the ordering is not the one the test
+ * assumed. setImmediate fires after the promise microtask queue has drained, which is the property
+ * actually wanted. A racy assertion in a clinical safety suite is worse than a failing one, because
+ * it gets re-run until it passes.
+ */
+const settle = () => new Promise((r) => setImmediate(r));
 const flagsOn = { get: (k) => k === "smd_wardsynq_cutover" };
 const flagsOff = { get: () => false };
 
@@ -89,7 +101,7 @@ test("ADVERSARIAL: a rejecting async store is counted, not thrown", async () => 
     store: { put: () => Promise.reject(new Error("quota exceeded")) },
   });
   host.ingestFromWard(bundle());
-  await new Promise((r) => setTimeout(r, 0));
+  await settle();
   assert.ok(live.report().writeErrors >= 1);
 });
 
@@ -156,7 +168,7 @@ test("ADVERSARIAL: ward data reaches the CANONICAL model, which is the whole poi
   const live = installLiveGhis({ host, flags: flagsOn, store, now: () => NOW });
 
   host.ingestFromWard(bundle());
-  await new Promise((r) => setTimeout(r, 0));
+  await settle();
 
   const report = live.report();
   assert.ok(report.observationsMapped >= 2, "the potassium and creatinine were mapped");
@@ -180,11 +192,11 @@ test("ADVERSARIAL: a redelivered bundle does not write a second copy", async () 
 
   const b = bundle();
   host.ingestFromWard(b);
-  await new Promise((r) => setTimeout(r, 0));
+  await settle();
   const afterFirst = live.report().written;
 
   host.ingestFromWard(b);   // reconnect, catch-up window, or a double tap
-  await new Promise((r) => setTimeout(r, 0));
+  await settle();
 
   assert.equal(live.report().written, afterFirst, "a reconnect must not duplicate a patient's potassium");
   assert.ok(live.report().skippedDuplicate >= 1);
@@ -248,7 +260,7 @@ test("the bundle is announced on the event bus, idempotently", async () => {
   const b = bundle();
   host.ingestFromWard(b);
   host.ingestFromWard(b);
-  await new Promise((r) => setTimeout(r, 0));
+  await settle();
 
   assert.equal(seen.length, 1, "one bundle, one event, however many times it is redelivered");
   assert.equal(seen[0].payload.system, "GHIS");
