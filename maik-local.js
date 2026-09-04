@@ -598,10 +598,11 @@
         // this was built to catch (the live penicillin-allergy contradiction). A gate failure does
         // NOT surface as an error - it shows the real book passages instead of a wrong paraphrase,
         // which is strictly more useful to a doctor than either a blank screen or a wrong answer.
+        var quotedPassage = false;   // a verbatim book passage is shown as written, never re-emphasized
         if (grounding) {
           var gate = grounding.RAG.evidenceGate(text, grounding.evidenceText, pkg && pkg.question);
           if (!gate.ok) {
-            var pass = grounding.passages[0];
+            var pass = grounding.passages[0]; quotedPassage = true;
             text = "The on-device model's answer could not be verified against the StewardMD Knowledge Base " +
               "(it stated a figure or drug not found there). Showing the relevant reference passage instead:\n\n" +
               pass.text.trim();
@@ -611,6 +612,7 @@
             text = text + "\n\nSource: StewardMD Knowledge Base - based on standard medical resources.";
           }
         }
+        if (!quotedPassage) text = emphasize(text);
         return {
           text: text,
           // sources stays [] regardless: the citation UI's own contract (SMD_MaiK.sourceList)
@@ -880,7 +882,7 @@
           }
         }
       } catch (e) {}
-      return { text: text, sources: srcOut, engine: "local", mode: "web-local" };
+      return { text: emphasize(text), sources: srcOut, engine: "local", mode: "web-local" };
     });
   }
   function generateJSON(prompt, system, nPredict, opts) {
@@ -958,8 +960,38 @@
     }, parseFailure);
   }
 
+  /* READABLE EMPHASIS for on-device answers (owner, 2026-09-04: "Answer can show Bold Italic etc
+   * formats to make it more appealing and reading"). The renderer (reasoning.js maikMarkdown) already
+   * turns **x** into <b> and *x* into <i>; the gap is that MaiK Lite, a prose fine-tune, emits plain
+   * text. Its system prompt is the exact one it was trained with and is deliberately not touched, so
+   * the emphasis is added deterministically here instead: drug names (the same suffix regex the
+   * evidence gate uses, via SMD_MAIK_RAG.drugsOf when loaded), doses and durations are bolded, the
+   * way a doctor's eye scans an answer. Applied ONLY when the model produced no ** of its own (the
+   * larger packs follow "Answer in markdown" already), AFTER the evidence gate (it changes no figure),
+   * and never to the Source line. Pure, exported for tests. */
+  var DOSE_RE = /\b(\d+(?:\.\d+)?(?:\s*(?:-|to)\s*\d+(?:\.\d+)?)?\s*(?:mg|g|mcg|µg|ml|mL|IU|units?|mmol|mEq)(?:\/(?:kg|day|d|dose|h|hr|m2))?)(?![\w*])/gi;
+  var DURATION_RE = /\b(\d+(?:\s*(?:-|to)\s*\d+)?\s*(?:days?|weeks?|months?|hours?|hrs?))\b(?!\*)/gi;
+  var DRUG_FALLBACK_RE = /\b[a-z]{4,}(?:cillin|mycin|micin|cycline|azole|oxacin|floxacin|pril|sartan|statin|olol|dipine|parin|prazole|triptan|mab|nib|tinib|ciclovir|vir|navir|cept|gliptin|glitazone|barbital|azepam|zolam|caine|tidine|semide|thiazide)\b/gi;
+  function emphasize(text) {
+    var t = String(text == null ? "" : text);
+    if (!t || t.indexOf("**") !== -1) return t;
+    var RAG = (typeof window !== "undefined") && window.SMD_MAIK_RAG;
+    var drugs = [];
+    try { if (RAG && RAG.drugsOf) drugs = Array.from(RAG.drugsOf(t)); } catch (e) { drugs = []; }
+    if (!drugs.length) { var seen = {}, m; DRUG_FALLBACK_RE.lastIndex = 0; while ((m = DRUG_FALLBACK_RE.exec(t)) !== null) { var w = m[0].toLowerCase(); if (!seen[w]) { seen[w] = 1; drugs.push(w); } } }
+    return t.split("\n").map(function (line) {
+      if (/^\s*Source:/i.test(line) || /^\s*Verify against/i.test(line)) return line;
+      var out = line.replace(DOSE_RE, "**$1**").replace(DURATION_RE, "**$1**");
+      drugs.forEach(function (d) {
+        var re = new RegExp("(^|[^\\w*])(" + d.replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + ")(?![\\w*])", "gi");
+        out = out.replace(re, "$1**$2**");
+      });
+      return out;
+    }).join("\n");
+  }
+
   var API = {
-    SYSTEM: SYSTEM, DEFAULT_PACK: DEFAULT_PACK,
+    SYSTEM: SYSTEM, DEFAULT_PACK: DEFAULT_PACK, emphasize: emphasize,
     HISTORY_TURNS: HISTORY_TURNS, buildPrompt: buildPrompt, answer: tracked(answer), available: available, currentPack: currentPack,
     isFollowUp: isFollowUp, isGreeting: isGreeting, SYSTEM_GREET: SYSTEM_GREET, stripReasoning: stripReasoning,
     visionReady: visionReady, visionPathFor: visionPathFor, MAX_IMAGES: MAX_IMAGES, SYSTEM_IMAGE: SYSTEM_IMAGE,

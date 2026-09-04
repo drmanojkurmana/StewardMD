@@ -4764,7 +4764,20 @@ body.mkchat #maikSheet .maik-edu{display:none}
 body.mkchat #maikSheet .maik-conf{display:none}
 body.mkchat #maikSheet .maik-conf-lower{display:inline-flex}
 body.mkchat #maikSheet .maik-p,body.mkchat #maikSheet .maik-li,body.mkchat #maikSheet .maik-streaming{font-size:15px;line-height:1.65}
+/* the on-device path renders BARE p / ul / li (no .maik-p class, measured live at 12.5px), so the
+   reading size has to reach those too, plus real emphasis so bold and italic actually read as such */
+body.mkchat #maikSheet .maik-b.ai p,body.mkchat #maikSheet .maik-b.ai li,body.mkchat #maikSheet .maik-streaming p,body.mkchat #maikSheet .maik-streaming li{font-size:15px;line-height:1.65;color:var(--mk-ink)}
+body.mkchat #maikSheet .maik-b.ai p{margin:0 0 10px}
+body.mkchat #maikSheet .maik-b.ai ul,body.mkchat #maikSheet .maik-b.ai ol{margin:4px 0 10px;padding-left:20px}
+body.mkchat #maikSheet .maik-b.ai li{margin:3px 0}
+body.mkchat #maikSheet .maik-b.ai strong,body.mkchat #maikSheet .maik-b.ai b{font-weight:700;color:var(--mk-ink)}
+body.mkchat #maikSheet .maik-b.ai em,body.mkchat #maikSheet .maik-b.ai i{font-style:italic;color:var(--mk-mut)}
+body.mkchat #maikSheet .maik-b.ai h1,body.mkchat #maikSheet .maik-b.ai h2,body.mkchat #maikSheet .maik-b.ai h3,body.mkchat #maikSheet .maik-b.ai h4{font:700 15.5px/1.35 'Inter';color:var(--mk-ink);margin:14px 0 6px}
 body.mkchat #maikSheet .maik-h{font-size:15.5px;margin:14px 0 6px}
+/* the prescription chip is inline-styled as a filled teal button on EVERY answer; one filled accent per
+   screen is the send button, so this becomes a quiet outline like every other chip (inline needs !important) */
+body.mkchat #maikSheet .maik-chip.maik-rx{background:transparent!important;color:var(--mk-mut)!important;border-color:var(--mk-bd)!important;font-weight:500!important}
+body.mkchat #maikSheet .maik-chip.maik-rx:hover{color:var(--mk-teal)!important;border-color:var(--mk-teal)!important}
 body.mkchat #maikSheet .maik-note{font-size:12.5px}
 body.mkchat #maikSheet .maik-fu,body.mkchat #maikSheet .maik-chip{background:transparent;border:1px solid var(--mk-bd);color:var(--mk-mut);font:500 12.5px/1 'Inter';padding:7px 11px;border-radius:999px;box-shadow:none}
 body.mkchat #maikSheet .maik-fu:hover,body.mkchat #maikSheet .maik-chip:hover{color:var(--mk-teal);border-color:var(--mk-teal);background:transparent;box-shadow:none;transform:none}

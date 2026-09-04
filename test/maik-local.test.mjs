@@ -651,4 +651,26 @@ function loadForWeb({ tokens }) {
   ok("no sources is an honest no-results, never a hallucinated web answer", (await w.L.webAnswer("Treatment of CAP", [])).error === "no-results");
 }
 
+// ── readable emphasis (owner, 2026-09-04): bold drug names, doses and durations when the model
+// emitted plain text; leave the model's own markdown, and the Source line, alone ──
+{
+  const { L: LE } = load();
+  const e1 = LE.emphasize("Give amoxicillin 500 mg three times daily for 7 days. Alternative: doxycycline 100 mg once daily for 7 to 14 days.\nSource: StewardMD Knowledge Base - based on standard medical resources.");
+  ok("drug names are bolded (drug-suffix regex)", /\*\*amoxicillin\*\*/.test(e1) && /\*\*doxycycline\*\*/.test(e1));
+  ok("doses are bolded", /\*\*500 mg\*\*/.test(e1) && /\*\*100 mg\*\*/.test(e1));
+  ok("durations and ranges are bolded", /\*\*7 days\*\*/.test(e1) && /\*\*7 to 14 days\*\*/.test(e1));
+  ok("the Source line is never touched", /\nSource: StewardMD Knowledge Base - based on standard medical resources\.$/.test(e1) && !/\*\*Source/.test(e1));
+  ok("nothing is double-wrapped", !/\*\*\*\*/.test(e1) && !/\*\*\*\*/.test(e1));
+  const already = "Use **amoxicillin 500 mg** for 7 days.";
+  ok("a model that already formatted is left exactly as it wrote", LE.emphasize(already) === already);
+  ok("empty and null are safe", LE.emphasize("") === "" && LE.emphasize(null) === "");
+  const gr = "Hi, I'm MaiK. How can I help with a clinical question today?";
+  ok("a greeting with no drug/dose/duration is unchanged", LE.emphasize(gr) === gr);
+  ok("the renderer contract holds: ** pairs are balanced", ((e1.match(/\*\*/g) || []).length % 2) === 0);
+  // Through answer(): a plain-text model reply comes back with emphasis markers the renderer turns into <b>.
+  const w = load({ tokens: ["For otitis media give amoxicillin 90 mg/kg per day for 10 days."] });
+  const r = await w.L.answer({ question: "Treatment of otitis media?" }, { pack: "maik-apex" }, null);
+  ok("answer() emphasizes an unformatted on-device reply", /\*\*amoxicillin\*\*/.test(r.text) && /\*\*90 mg\/kg\*\*/.test(r.text) && /\*\*10 days\*\*/.test(r.text));
+}
+
 console.log(`\nmaik-local: ${pass} passed, ${fail} failed`);
