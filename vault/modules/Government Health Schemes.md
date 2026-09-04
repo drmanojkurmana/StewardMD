@@ -25,13 +25,21 @@ ONCQIS review).
 - `scripts/govschemes/ingest_ntr_vaidya_seva.py` — the first real ingestion adapter: parses the
   Dr. NTR Vaidya Seva Trust XLSX (raw zipfile+XML, NOT openpyxl - see gotcha below) into
   normalized `INSERT` SQL matching the schema above.
-- `functions/_schemes_repo.js` + `functions/api/schemes/[[path]].js` — the read API (2026-09-03).
-  GET-only, fail-safe (DB/binding error -> 200 + `{error:"unavailable"}`, never 5xx): `/jurisdictions`,
-  `/search?q=&state=&limit=`, `/compare?q=`, `/package/<id>`. `rate_tier` is always carried alongside
-  `package_amount` (safety-critical - amounts are only comparable with the tier visible).
+- `functions/_schemes_repo.js` + `functions/api/schemes/[[path]].js` — the read API (2026-09-03,
+  extended 2026-09-04 for Browse). GET-only, fail-safe (DB/binding error -> 200 + `{error:"unavailable"}`,
+  never 5xx): `/jurisdictions`, `/schemes?state=`, `/specialities?state=&scheme=`,
+  `/browse?state=&scheme=&speciality=&limit=&offset=` (paginated, no free text), `/search?q=&state=&limit=`,
+  `/compare?q=`, `/package/<id>`. `rate_tier` is always carried alongside `package_amount`
+  (safety-critical - amounts are only comparable with the tier visible).
 - `govschemes.js` + `govschemes.css` + `govschemes-flags.js` — the UI: `window.SMD_GOVSCHEMES`
-  full-screen overlay (search / state filter / cross-state compare / package detail), same pattern
-  as the Drugs Database overlay in `api.js`. Every detail panel shows the source's
+  full-screen overlay, same pattern as the Drugs Database overlay in `api.js`. **2026-09-04
+  redesign** (owner rated the search-only v1 "1/10 UX"): a Browse/Search segmented tab replaces
+  the old single screen. Browse is tap-only, no typing — states (package counts) -> schemes/branches
+  (auto-skipped when a state has exactly one, true for 26/29) -> speciality categories (chip grid,
+  auto-skipped when a scheme carries no speciality tags at all - true for 8 PDF-parsed states:
+  UP/Rajasthan/Punjab/Odisha/Nagaland/Himachal/Haryana/Central) -> paginated package list with a
+  tappable breadcrumb once drilled in. Search keeps the original free-text/code search + state
+  filter + cross-state compare, unchanged in behaviour. Every detail panel shows the source's
   `verification_status` and flags anything not literally `"verified"` with a visible amber warning.
 - `test/govschemes-api.test.mjs` (unit, no D1) + `test/run-govschemes-ui.mjs` (real headless-Chrome
   CDP test against `wrangler pages dev` + local D1) — both green as of 2026-09-03.
