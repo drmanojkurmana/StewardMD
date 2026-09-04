@@ -2361,3 +2361,40 @@ NOT yet verified: the admin console pane's rendering itself needs the owner's ow
 stewardmd.in/admin to see - this session has no admin credentials. What WAS verified is the parts
 reachable without them: the client and storage logic pass their tests, and (pending a live device
 check after merge+deploy) the network flow from a real "No" tap through to the stored aggregate.
+
+## 2026-09-04 — MaiK CHAT skin: make MaiK feel like ChatGPT / Claude
+
+Owner: "not getting a feel of using an AI assistant like ChatGPT or Claude", asked via the
+taste-skill. That skill is scoped to landing pages and says so; what applies here is its discipline
+(audit before touching, preserve mode, copy self-audit, kill the decorative tells), measured against
+what actually makes those two apps feel like assistants. An audit of the sheet found five concrete
+differences, none of them streaming (both engines already stream tokens; native falls back to a
+word-paced reveal):
+1. every assistant answer was a bordered, shaded, shadowed 92%-wide card with an uppercase teal
+   "MAIK" label on top; ChatGPT/Claude render assistant prose unboxed and only the user's turn as a
+   bubble
+2. "Educational clinical reference. Verify with local protocol." was stamped INSIDE every answer, on
+   top of the sheet's permanent banner saying the same thing (no recorded decision required the
+   duplicate)
+3. 13px body / 12.5px user text: widget-sized, not reading-sized
+4. up to 17 tappable bordered chips under one answer (Know more, sources, 6 refine, follow-ups, tool
+   chips, Create prescription, Research on the web, Yes/No)
+5. thinking = mascot + three shimmering skeleton bars + stage captions, then a whole-bubble swap
+
+Decision: a presentation-only CSS skin on `body.mkchat`, DEFAULT ON, `?mkchat=0` kill switch
+(persists in `smd_mkchat`), `?mkchat=1` restores. No DOM or logic change, so flag-off is
+byte-for-byte the previous MaiK. It unboxes `.maik-b.ai`, hides `.maik-attr` (with !important: the
+web-research path inlines its own display) and `.maik-edu`, hides `.maik-conf` except the LOWER
+warning, sets 15px reading text, turns every chip into a quiet outline with muted sentence-case
+labels, and hides the skeleton bars. Tokens are untouched so dark mode follows. The existing
+off-by-default `body.mk2` "UI 2" skin is left as is; the two are independent selectors.
+
+Also fixed in app-facing strings (repo rule, not the skin): the emoji prefixes on the four follow-up
+chips, and the em-dashes in the chip/stage/feedback/error strings the audit listed. The model's own
+output remains exempt, as CLAUDE.md says. `test/maik-chat-skin.test.mjs` pins the flag semantics,
+each of the five CSS fixes, and the string cleanups. Branch stacks on PR #826 because both touch
+`_answerFeedback`.
+
+Not changed, deliberately: the chip SET itself (which chips exist is product logic, not skin), lazy
+"Know more" (a token-cost decision), the mascot, the sidebar, the empty state. If the owner wants
+fewer chips per answer, that is a separate product call.

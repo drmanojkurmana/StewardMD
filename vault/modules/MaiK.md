@@ -40,6 +40,10 @@ UpToDate-style answer. Aurora bottom-sheet UI. Account-scoped on-device conversa
 - `functions/api/ai/[[path]].js` — server: `/refine` (router), `/explain` (Gemini), `/research` (web)
 - `kb/ai/steward-ai.browser.js` — client SDK helpers. NOTE: `window.SMD_AI` itself is defined in
   `reasoning.js:3771` and that is its ONLY assignment (verified 2026-08-20) — this file does not set it
+- **Chat skin** (2026-09-04): `body.mkchat`, default ON, `?mkchat=0` off / `?mkchat=1` on (key
+  `smd_mkchat`). Presentation-only CSS in home.js (block "MaiK CHAT skin"): unboxed assistant prose,
+  no per-answer MAIK label or disclaimer line (the banner is the one disclaimer), 15px text, quiet
+  outline chips, no skeleton bars. Independent of the older off-by-default `body.mk2` skin.
 - **"Was this helpful?" feedback** (2026-09-04): `home.js` `_answerFeedback` posts to
   `/api/maik-feedback` (`functions/_maik_feedback.js`, anonymous, KV ring buffer + aggregate); a "No"
   asks why and amends the same entry if the doctor types a reason. Admin: stewardmd.in/admin →

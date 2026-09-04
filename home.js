@@ -52,6 +52,24 @@
     } catch (e) {}
   })();
 
+  // MaiK CHAT skin (owner, 2026-09-04: "not getting a feel of using an AI assistant like ChatGPT or
+  // Claude"). Presentation-only CSS on body.mkchat: assistant prose unboxed on the page, ONE
+  // disclaimer (the banner, not a line inside every answer), reading-size type, quiet chips, a pulse
+  // instead of skeleton bars. DEFAULT ON. ?mkchat=0 turns it off (persists), ?mkchat=1 turns it back
+  // on. No DOM or logic change: flag-off is byte-for-byte the previous MaiK.
+  (function () {
+    try {
+      var k = "smd_mkchat", q = location.search || "";
+      if (/[?&]mkchat=0\b/.test(q)) { try { localStorage.setItem(k, "0"); } catch (e) {} }
+      else if (/[?&]mkchat=1\b/.test(q)) { try { localStorage.removeItem(k); } catch (e) {} }
+      var off = false; try { off = localStorage.getItem(k) === "0"; } catch (e) {}
+      if (off) return;
+      var applyChat = function () { if (document.body) document.body.classList.add("mkchat"); };
+      if (document.body) applyChat();
+      else document.addEventListener("DOMContentLoaded", applyChat);
+    } catch (e) {}
+  })();
+
   // MaiK Scribe inline-mic kill-switch: default ON; ?scribeinline=0 restores the
   // old modal voice dialog (persists), ?scribeinline=1 re-enables inline.
   function scribeInlineOn() {
@@ -4319,7 +4337,7 @@
           '<div class="maik-side-srch">' + MK.search + '<input id="maikSideSearch" type="search" placeholder="Search conversations" autocomplete="off" spellcheck="false"></div>' +
           '<div class="maik-side-lbl">Your conversations</div>' +
           '<div class="maik-side-list" id="maikSideList"></div>' +
-          '<div class="maik-side-priv">' + MK.lock + '<span>Saved only on this device — your history never leaves your phone.</span></div>' +
+          '<div class="maik-side-priv">' + MK.lock + '<span>Saved only on this device. Your history never leaves your phone.</span></div>' +
           '<div class="maik-side-acct" id="maikSideAcct"></div>' +
         '</aside>' +
       '</div>' +
@@ -4727,6 +4745,39 @@ body.v3-dark #maikSheet .maik-cmp-in{background:var(--mk-field);box-shadow:0 6px
 .maik-body>*:not(.maik-wm){position:relative;z-index:1}
 /* keep launch FABs (they sit at a high z-index) from floating over the sheet */
 body.maik-open #hvFab,body.maik-open #infFab,body.maik-open #dxLaunch,body.maik-open .inf-fab,body.maik-open .ghis-ward-fab,body.maik-open .hv-fab{display:none!important}
+
+/* ══ MaiK CHAT skin (flag: body.mkchat, default ON, ?mkchat=0 disables) ═══════════
+   Owner, 2026-09-04: "not getting a feel of using an AI assistant like ChatGPT or Claude".
+   Audit found five differences from those apps and this block addresses each, presentation only:
+     1. assistant answers were bordered, shaded, shadowed cards with an uppercase MAIK label
+        -> unboxed prose on the page; only the user's message stays a bubble
+     2. a disclaimer line INSIDE every answer, duplicating the sheet's permanent banner -> banner only
+     3. 13px widget-sized text -> 15px reading-size text
+     4. up to 17 loud bordered chips under one answer -> quiet outline chips, muted labels
+     5. mascot + three shimmering skeleton bars while thinking -> just the stage line
+   Tokens untouched, so dark mode follows. No DOM/logic change. */
+body.mkchat #maikSheet .maik-b{max-width:100%}
+body.mkchat #maikSheet .maik-b.ai{background:transparent;border:none;border-radius:0;box-shadow:none;padding:6px 2px 4px;margin-top:2px}
+body.mkchat #maikSheet .maik-b.you{max-width:84%;font:500 14.5px/1.5 'Inter';padding:10px 14px;border-radius:18px 18px 6px 18px}
+body.mkchat #maikSheet .maik-attr{display:none!important}
+body.mkchat #maikSheet .maik-edu{display:none}
+body.mkchat #maikSheet .maik-conf{display:none}
+body.mkchat #maikSheet .maik-conf-lower{display:inline-flex}
+body.mkchat #maikSheet .maik-p,body.mkchat #maikSheet .maik-li,body.mkchat #maikSheet .maik-streaming{font-size:15px;line-height:1.65}
+body.mkchat #maikSheet .maik-h{font-size:15.5px;margin:14px 0 6px}
+body.mkchat #maikSheet .maik-note{font-size:12.5px}
+body.mkchat #maikSheet .maik-fu,body.mkchat #maikSheet .maik-chip{background:transparent;border:1px solid var(--mk-bd);color:var(--mk-mut);font:500 12.5px/1 'Inter';padding:7px 11px;border-radius:999px;box-shadow:none}
+body.mkchat #maikSheet .maik-fu:hover,body.mkchat #maikSheet .maik-chip:hover{color:var(--mk-teal);border-color:var(--mk-teal);background:transparent;box-shadow:none;transform:none}
+body.mkchat #maikSheet .maik-refine .maik-fu{background:transparent;border-color:var(--mk-bd);color:var(--mk-mut)}
+body.mkchat #maikSheet .maik-refine .maik-fu::before{display:none}
+body.mkchat #maikSheet .maik-refine{border-top:none;padding-top:4px;margin-top:8px}
+body.mkchat #maikSheet .maik-refine-lbl,body.mkchat #maikSheet .maik-tools-lbl{text-transform:none;letter-spacing:0;font:600 12px/1.3 'Inter';color:var(--mk-faint);margin-bottom:6px}
+body.mkchat #maikSheet .maik-know{background:transparent;border:none;padding:6px 0;margin:8px 0 0;color:var(--mk-teal);font-weight:600}
+body.mkchat #maikSheet .maik-src{border-top:none;padding-top:4px;font-size:12px;font-weight:500}
+body.mkchat #maikSheet .maik-fb{border-top:none;padding-top:2px;margin-top:8px;gap:6px}
+body.mkchat #maikSheet .maik-fb-q{font-size:12px;font-weight:500;color:var(--mk-faint)}
+body.mkchat #maikSheet .maik-fb-b{font:600 12px/1 'Inter';padding:5px 11px;color:var(--mk-mut)}
+body.mkchat #maikSheet .maik-sk{display:none}
 
 /* ══ MaiK UI 2 · instrument-grade skin (flag: body.mk2 · ?mkui=1) ══════════════
    Presentation-only. Re-points the --mk-* tokens to one restrained clinical
@@ -5197,7 +5248,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       try { scroll(); } catch (e) {}
       // Staged progress + the live green dot so a ~15s web round-trip (search + synthesis) is clearly
       // WORKING, never a frozen "Researching…" line. Cleared the instant the answer/timeout lands.
-      var _wt = [[5000, "Searching medical sources"], [12000, "Synthesizing the evidence"], [30000, "Almost there — finalizing"]].map(function (s) {
+      var _wt = [[5000, "Searching medical sources"], [12000, "Synthesizing the evidence"], [30000, "Almost there, finalizing"]].map(function (s) {
         return setTimeout(function () { try { busy.innerHTML = maikBufferHTML(s[1], "maik-webbusy"); } catch (e) {} }, s[0]);
       });
       function _clr() { _wt.forEach(function (t) { try { clearTimeout(t); } catch (e) {} }); }
@@ -5306,10 +5357,10 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
         var askedRf = /\b(red ?flag|danger|warning|escalate|admit|worry|miss)\b/.test(qn);
         var askedIx = /\b(investigat|work ?up|test|tests|labs?|imaging|bloods?)\b/.test(qn);
         var askedDx = /\b(differential|ddx|mimic|versus|\bvs\b|distinguish)\b/.test(qn);
-        if (/redflag/i.test(secs) && !askedRf) out.push({ label: "🚩 Red flags not to miss", q: name + " red flags" });
-        if ((/management|treatment/i.test(secs) || (pkg.treatment && pkg.treatment.default)) && !askedTx) out.push({ label: "💊 First-line treatment", q: "treatment of " + name });
-        if (/investigation/i.test(secs) && !askedIx) out.push({ label: "🔬 What to investigate", q: "investigations for " + name });
-        if (/differential|mimic/i.test(secs) && !askedDx) out.push({ label: "🔀 Differentials & mimics", q: name + " differential diagnosis" });
+        if (/redflag/i.test(secs) && !askedRf) out.push({ label: "Red flags not to miss", q: name + " red flags" });
+        if ((/management|treatment/i.test(secs) || (pkg.treatment && pkg.treatment.default)) && !askedTx) out.push({ label: "First-line treatment", q: "treatment of " + name });
+        if (/investigation/i.test(secs) && !askedIx) out.push({ label: "What to investigate", q: "investigations for " + name });
+        if (/differential|mimic/i.test(secs) && !askedDx) out.push({ label: "Differentials and mimics", q: name + " differential diagnosis" });
         return out.slice(0, 3);
       } catch (e) { return []; }
     }
@@ -5318,7 +5369,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
     function maikFollowupsHTML(pkg, question, assume) {
       var chips = maikFollowupChips(pkg, question), html = "";
       chips.forEach(function (c) { html += '<button class="maik-fu" data-maik-q="' + maikEscH(c.q) + '">' + maikEscH(c.label) + '</button>'; });
-      if (assume) html += '<button class="maik-fu" data-maik-web="' + maikEscH(question) + '">' + svg("search", "smd-ico") + ' Different topic — search the web</button>';
+      if (assume) html += '<button class="maik-fu" data-maik-web="' + maikEscH(question) + '">' + svg("search", "smd-ico") + ' Different topic: search the web</button>';
       return html ? '<div class="maik-followups">' + html + '</div>' : "";
     }
     // UpToDate-style refinement chips: the LLM ends a clinical answer with a machine-readable
@@ -5412,7 +5463,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
              "Tap the model name at the top to finish installing it, or choose <b>MaiK Cloud</b>.";
     }
     if (/cancel/i.test(e)) return "That answer was cancelled.";
-    return "MaiK is unavailable right now — the deterministic StewardMD engine, calculators and reference tools remain available." +
+    return "MaiK is unavailable right now.the deterministic StewardMD engine, calculators and reference tools remain available." +
            (e ? '<br><br><span style="opacity:.7;font-size:12.5px">Reason: ' + maikEscH(e) + "</span>" : "");
   }
 
@@ -5514,7 +5565,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
           SMD_AI.verifyGrounding(md, pkg).then(function (v) {
             if (!v || !v.checked || !v.flagged || !v.flagged.length || !think || !think.isConnected) return;
             var w = document.createElement("div"); w.className = "maik-verify";
-            w.textContent = "⚠ " + v.flagged.length + " statement" + (v.flagged.length > 1 ? "s" : "") + " not directly supported by the cited sources — verify before acting.";
+            w.textContent = "⚠ " + v.flagged.length + " statement" + (v.flagged.length > 1 ? "s" : "") + " not directly supported by the cited sources. Verify before acting.";
             think.appendChild(w); scroll();
           }).catch(function () {});
         }
@@ -5643,7 +5694,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
         if (_maikDone) return; _maikDone = true; _clearStages(); _fsResume();
         try {
           var _tw = _live();
-          _tw.innerHTML = '<div class="maik-welcome">MaiK took too long to respond — the knowledge search may be busy. <a href="#" class="maik-retry" style="color:var(--mk-teal,#0e6e63);font-weight:700;text-decoration:none">Tap to retry</a></div>';
+          _tw.innerHTML = '<div class="maik-welcome">MaiK took too long to respond. The knowledge search may be busy. <a href="#" class="maik-retry" style="color:var(--mk-teal,#0e6e63);font-weight:700;text-decoration:none">Tap to retry</a></div>';
           try { _tw.removeAttribute("data-mg"); } catch (e) {}
           _persist();
           var _rl = _tw.querySelector(".maik-retry");
@@ -5656,7 +5707,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       function _armTO() { clearTimeout(_maikTO); _maikTO = setTimeout(_maikTimedOut, MAIK_TO_MS); }
       // Reassurance while a (native) answer generates — otherwise the bubble sits on one "Searching…" line
       // for the whole wait and reads as frozen/broken. Neutered the instant tokens/answer land.
-      [[7000, "Reviewing the evidence"], [16000, "Composing your answer"], [30000, "Almost there — finalizing"]].forEach(function (s) {
+      [[7000, "Reviewing the evidence"], [16000, "Composing your answer"], [30000, "Almost there, finalizing"]].forEach(function (s) {
         _stageT.push(setTimeout(function () {
           if (_maikDone || _streamStarted) return;
           try { think.innerHTML = maikBufferHTML(s[1], "maik-thinking"); scroll(); } catch (e) {}
@@ -5793,12 +5844,12 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
               // proactive safety
               (MaiKCopilot.safetyScan(res, {}) || []).forEach(function (a) { var w = document.createElement("div"); w.className = "maik-verify"; w.textContent = (a.level === "warn" ? "⚠ " : "") + a.msg; host.appendChild(w); });
               // evidence contradiction (from the enriched package)
-              if (p && p._brainContradictions && p._brainContradictions.length) { var c = p._brainContradictions[0]; var wc = document.createElement("div"); wc.className = "maik-verify"; wc.textContent = "Sources differ — " + c.reason + "; confirm against your local protocol."; host.appendChild(wc); }
+              if (p && p._brainContradictions && p._brainContradictions.length) { var c = p._brainContradictions[0]; var wc = document.createElement("div"); wc.className = "maik-verify"; wc.textContent = "Sources differ: " + c.reason + "; confirm against your local protocol."; host.appendChild(wc); }
               // clinical workflow (ordered next steps)
               var wf = MaiKCopilot.workflow(res);
               if (wf && wf.steps.length) {
                 var box = document.createElement("div"); box.className = "maik-refine";
-                var lbl = document.createElement("div"); lbl.className = "maik-refine-lbl"; lbl.textContent = "Clinical workflow — next steps"; box.appendChild(lbl);
+                var lbl = document.createElement("div"); lbl.className = "maik-refine-lbl"; lbl.textContent = "Clinical workflow: next steps"; box.appendChild(lbl);
                 var row = document.createElement("div"); row.className = "maik-followups";
                 var base = (res.primary && res.primary.canonicalName) ? res.primary.canonicalName + " " : "";
                 wf.steps.slice(0, 6).forEach(function (s) { var b = document.createElement("button"); b.className = "maik-fu"; b.textContent = s; b.addEventListener("click", function () { try { qEl.value = base + s; } catch (e) {} send(); }); row.appendChild(b); });
@@ -5858,7 +5909,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
                   try { if (window.SMD_track) SMD_track(kind === "up" ? "maik_feedback_up" : "maik_feedback_down"); } catch (e) {}
                   try { if (up.parentNode) up.parentNode.removeChild(up); } catch (e) {}
                   try { if (dn.parentNode) dn.parentNode.removeChild(dn); } catch (e) {}
-                  if (kind === "up") { _postFeedback("up", meta); q.textContent = "Thanks — noted."; return; }
+                  if (kind === "up") { _postFeedback("up", meta); q.textContent = "Thanks, noted."; return; }
                   try { if (window.MaiKCopilot && MaiKCopilot.gapLog) MaiKCopilot.gapLog("thumbsdown", question); } catch (e) {}
                   // The down-vote is recorded NOW (so the admin aggregate matches every "No" tap, not
                   // only the ones a doctor stays to explain); its id lets a reason typed a moment later
@@ -5866,7 +5917,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
                   var fbIdP = _postFeedback("down", meta);
                   // "No": ask why and help us improve, per the owner's request — one tap must not be a
                   // dead end for a clinician who just found a real problem with the answer.
-                  q.textContent = "Sorry it missed. Please tell us why — help us improve.";
+                  q.textContent = "Sorry it missed. Please tell us why, so we can improve.";
                   var ta = document.createElement("textarea"); ta.className = "maik-fb-reason"; ta.rows = 2; ta.maxLength = 500;
                   ta.placeholder = "What was wrong or missing? (optional — no patient details, please)";
                   var row = document.createElement("div"); row.className = "maik-fb-reasonrow";
@@ -5880,9 +5931,9 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
                   sendBtn.addEventListener("click", function () {
                     var reason = ta.value.trim();
                     if (reason) { fbIdP.then(function (id) { _amendFeedbackReason(id, reason); }); }
-                    done(reason ? "Thanks for telling us — this helps." : "Thanks — noted.");
+                    done(reason ? "Thanks for telling us. This helps." : "Thanks, noted.");
                   });
-                  skipBtn.addEventListener("click", function () { done("Thanks — noted."); });
+                  skipBtn.addEventListener("click", function () { done("Thanks, noted."); });
                   row.appendChild(sendBtn); row.appendChild(skipBtn);
                   w.appendChild(ta); w.appendChild(row);
                   try { ta.focus(); } catch (e) {}
@@ -6022,7 +6073,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
             return _gemini();
           });
         })
-        .catch(function (e) { if (!_maikDone) { _clearStages(); think.innerHTML = '<div class="maik-welcome">MaiK is unavailable right now — clinical reasoning, calculators, and reference tools remain available.</div>'; } })
+        .catch(function (e) { if (!_maikDone) { _clearStages(); think.innerHTML = '<div class="maik-welcome">MaiK is unavailable right now. Clinical reasoning, calculators, and reference tools remain available.</div>'; } })
         .then(function () { _fsResume(); if (_maikDone) return; _maikDone = true; _clearStages(); clearTimeout(_maikTO); _maikBusy = false; maikSetSendMode(false); });
     }
     // The two doors, as one card in the thread. Both are data-attribute buttons so they survive a
@@ -6389,7 +6440,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
           SMD_AI.explainGrounded(_ctx.pkg, { tier: 2, depth: "detailed", priorLead: _ctx.lead }).then(function (r) {
             var _dt = (r && r.text) ? maikStripRefine(String(r.text)).replace(/@@\s*MORE\s*@@/gi, "").trim() : "";
             if (kdet && _dt) { kdet.innerHTML = (window.SMD_MaiK && SMD_MaiK.renderMarkdown) ? SMD_MaiK.renderMarkdown(_dt) : maikEscH(_dt); }
-            else if (kdet) { kdet.textContent = "Couldn't load the detail — re-ask for the full answer."; }
+            else if (kdet) { kdet.textContent = "Couldn't load the detail. Ask again for the full answer."; }
             if (kdet) { kdet.hidden = false; kdet.removeAttribute("hidden"); try { kdet.scrollIntoView({ block: "nearest" }); } catch (e) {} }
             try { delete _maikLazyCtx[_lgid]; } catch (e) {}
             know.remove();
