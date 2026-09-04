@@ -3,112 +3,127 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>WardSynQ Clinical Workstation</title>
+<title>StewardMD Clinical Workstation</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="wardsynq.css?v=3">
+<link rel="stylesheet" href="wardsynq.css?v=4">
 </head>
 <body>
 
-<!-- The rule pack's approval status is stated permanently, not buried in a settings page. A
-     clinician trusting seed data because the interface looked finished is a foreseeable route to
-     harm, so the interface refuses to look more finished than the data underneath it. -->
-<div class="provenance" id="provenance" role="status">Loading clinical rule pack.</div>
+<!-- The rule pack's approval status stays on screen. The interface must not look more finished
+     than the clinical content underneath it. -->
+<div class="provenance" id="provenance" role="status"><span>Loading clinical rule pack.</span></div>
 
-<!-- Positive patient identification. Sticky: the hazard is acting on the wrong chart, and a banner
-     you have scrolled past guards nothing. -->
-<div class="patient-banner" id="patientBanner">
-  <span class="pname" id="pName">No patient selected</span>
-  <span class="pmeta" id="pMeta"></span>
-  <span class="banner-allergy none" id="pAllergies">Allergies not reviewed</span>
-  <span class="spacer"></span>
-  <span class="pmeta" id="pEncounter"></span>
-</div>
+<!-- PatientHeader. The patient is the object; everything below is organised around this bar.
+     Sticky, because the hazard is acting on the wrong chart. -->
+<header class="ctx" id="patientHeader" aria-label="Patient context"></header>
 
 <div class="shell">
 
-  <nav class="worklist" aria-label="Ward worklist">
-    <span class="section-label" id="worklistHeading">Ward worklist</span>
-    <div id="patientList" aria-labelledby="worklistHeading">
-      <div class="skeleton-row"></div>
-      <div class="skeleton-row"></div>
-      <div class="skeleton-row"></div>
+  <!-- PatientSidebar -->
+  <nav class="nav" aria-label="Chart navigation">
+    <div class="group">
+      <span class="label">Chart</span>
+      <button class="item" type="button" data-nav="patients" aria-current="page">Patients <span class="kbd">P</span></button>
+      <button class="item" type="button" data-nav="order">Orders <span class="kbd">O</span></button>
+      <button class="item" type="button" data-nav="meds">Medications <span class="kbd">M</span></button>
+      <button class="item" type="button" data-nav="labs">Labs <span class="kbd">L</span></button>
+      <button class="item" type="button" data-nav="notes" aria-disabled="true" title="Not in this build">Notes</button>
+      <button class="item" type="button" data-nav="alerts" aria-disabled="true" title="Not in this build">Alerts</button>
+    </div>
+    <div class="group worklist" id="worklistGroup">
+      <span class="label" id="worklistHeading">Ward worklist</span>
+      <div id="patientList" aria-labelledby="worklistHeading">
+        <div class="skeleton"></div><div class="skeleton"></div><div class="skeleton"></div>
+      </div>
     </div>
   </nav>
 
-  <main class="workspace">
+  <div class="work">
+    <main class="main">
 
-    <section class="panel" aria-labelledby="ordersHeading">
-      <header><h2 id="ordersHeading">New medication order</h2></header>
+      <!-- MedicationOrder -->
+      <section class="block" id="orderBlock" aria-labelledby="orderHeading">
+        <header><h2 id="orderHeading">Medication order</h2><span class="spacer"></span><span class="status" id="orderStatus"></span></header>
+        <div class="order">
+          <label for="drugInput">Medication</label>
+          <div class="ctl">
+            <input type="text" id="drugInput" list="drugSuggestions" autocomplete="off" spellcheck="false" aria-describedby="drugHint">
+            <datalist id="drugSuggestions"></datalist>
+            <span class="hint" id="drugHint">Checked against the loaded rule pack on every keystroke.</span>
+          </div>
 
-      <div class="order-grid">
-        <label for="drugInput">Medication</label>
-        <div class="control">
-          <input type="text" id="drugInput" list="drugSuggestions" autocomplete="off" aria-describedby="drugHint">
-          <datalist id="drugSuggestions"></datalist>
-          <span class="hint" id="drugHint">Safety checks run against the loaded rule pack as you type.</span>
+          <label for="doseInput">Dose</label>
+          <div class="ctl">
+            <input type="number" id="doseInput" min="0" step="any" inputmode="decimal">
+            <select id="doseUnit" aria-label="Dose unit">
+              <option value="mg">mg</option><option value="mcg">mcg</option><option value="g">g</option><option value="unit">unit</option>
+            </select>
+          </div>
+
+          <label for="routeInput">Route</label>
+          <div class="ctl">
+            <select id="routeInput">
+              <option value="oral">Oral</option><option value="IV">Intravenous</option><option value="IM">Intramuscular</option><option value="SC">Subcutaneous</option>
+            </select>
+          </div>
+
+          <div class="keys">
+            <span><span class="kbd">Enter</span> next field</span>
+            <span><span class="kbd">Ctrl</span> <span class="kbd">Enter</span> sign</span>
+            <span><span class="kbd">Esc</span> clear</span>
+          </div>
         </div>
+      </section>
 
-        <label for="doseInput">Dose</label>
-        <div class="control">
-          <input type="number" id="doseInput" min="0" step="any" inputmode="decimal">
-          <select id="doseUnit" aria-label="Dose unit">
-            <option value="mg">mg</option>
-            <option value="mcg">mcg</option>
-            <option value="g">g</option>
-            <option value="unit">unit</option>
-          </select>
+      <!-- SafetyEngine -->
+      <section class="block safety" id="safetyBlock" aria-labelledby="safetyHeading">
+        <header>
+          <h2 id="safetyHeading">Safety engine</h2>
+          <span class="spacer"></span>
+          <span class="engine" id="engineStatus" data-state="idle"><span class="dot"></span><span class="txt">Ready</span></span>
+        </header>
+        <!-- aria-live: a new finding is announced without the clinician going looking for it.
+             Clinical alerts are never auto-dismissing toasts. -->
+        <div class="findings" id="findings" role="region" aria-live="polite" aria-labelledby="safetyHeading">
+          <div class="empty">Enter a medication to run the safety check.</div>
         </div>
-
-        <label for="routeInput">Route</label>
-        <div class="control">
-          <select id="routeInput">
-            <option value="oral">Oral</option>
-            <option value="IV">Intravenous</option>
-            <option value="IM">Intramuscular</option>
-            <option value="SC">Subcutaneous</option>
-          </select>
+        <div style="display:flex; gap:10px; align-items:center; margin-top:14px; flex-wrap:wrap;">
+          <button class="btn btn-primary" id="signOrder" type="button" disabled>Sign order <span class="kbd">Ctrl</span><span class="kbd">Enter</span></button>
+          <button class="btn" id="clearOrder" type="button">Clear</button>
+          <span class="status" id="signStatus" style="font-family:var(--mono);font-size:var(--fs-0);color:var(--ink-3)"></span>
         </div>
-      </div>
-    </section>
+        <div id="orderResult" style="margin-top:12px;"></div>
+      </section>
 
-    <section class="panel" aria-labelledby="verdictHeading">
-      <header>
-        <h2 id="verdictHeading">Safety check</h2>
-        <span class="spacer"></span>
-        <span class="pmeta" id="checkTiming"></span>
-      </header>
-      <!-- aria-live so a screen reader announces a new finding without the clinician having to go
-           looking for it. Clinical alerts are never auto-dismissing toasts. -->
-      <div class="verdict" id="verdict" role="region" aria-live="polite" aria-labelledby="verdictHeading">
-        <div class="empty">Enter a medication to run the safety check.</div>
-      </div>
+      <!-- AuditTrail -->
+      <section class="block" id="auditBlock" aria-labelledby="auditHeading">
+        <header><h2 id="auditHeading">Clinical audit trail</h2><span class="spacer"></span><span class="status">this session</span></header>
+        <div class="audit" id="audit"><div class="empty">No events recorded yet.</div></div>
+      </section>
 
-      <div style="margin-top:16px; display:flex; gap:10px; flex-wrap:wrap; align-items:center;">
-        <button class="btn-primary" id="signOrder" disabled>Sign and submit order</button>
-        <button id="clearOrder">Clear</button>
-      </div>
-      <div id="orderResult" style="margin-top:12px;"></div>
-    </section>
+    </main>
 
-    <section class="panel" aria-labelledby="medsHeading">
-      <header><h2 id="medsHeading">Active medications</h2></header>
-      <div id="activeMeds"><div class="empty">No patient selected.</div></div>
-    </section>
-
-    <section class="panel" aria-labelledby="labsHeading">
-      <header><h2 id="labsHeading">Recent results</h2></header>
-      <div id="labs"><div class="empty">No patient selected.</div></div>
-    </section>
-
-  </main>
+    <!-- ClinicalContext -->
+    <aside class="aside" aria-label="Clinical context">
+      <section class="block" id="labsBlock" aria-labelledby="labsHeading">
+        <header><h2 id="labsHeading">Relevant results</h2><span class="spacer"></span><span class="status" id="labsStatus"></span></header>
+        <div id="datums"><div class="empty">No patient selected.</div></div>
+      </section>
+      <section class="block" aria-labelledby="renalHeading">
+        <header><h2 id="renalHeading">Dosing context</h2></header>
+        <div class="kvlist" id="dosingContext"></div>
+      </section>
+      <section class="block" id="medsBlock" aria-labelledby="medsHeading">
+        <header><h2 id="medsHeading">Active medications</h2></header>
+        <div class="medlist" id="activeMeds"><div class="empty">No patient selected.</div></div>
+      </section>
+    </aside>
+  </div>
 </div>
 
-<footer class="app-footer">
-  WardSynQ clinical workstation. Demonstration build running the real deterministic safety engine
-  against the loaded rule pack. Not for clinical use.
-</footer>
+<footer class="foot">StewardMD clinical workstation. Demonstration build running the real deterministic safety engine against the loaded rule pack. Not for clinical use.</footer>
 
-<script type="module" src="wardsynq-app.js?v=3"></script>
+<script type="module" src="wardsynq-app.js?v=4"></script>
 </body>
 </html>

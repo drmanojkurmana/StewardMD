@@ -395,6 +395,10 @@ function checkInteractions(pack, order, activeMeds) {
         ruleId: rule.id,
         ruleType: rule.type,
         drugs: assignment.map((e) => e.label),
+        // Kept separately as well as combined in `message`, so an interface can present the risk
+        // and the recommended action as distinct facts rather than one paragraph.
+        effect: rule.effect || "",
+        action: rule.action || "",
         mechanism: rule.mechanism,
         monitoring: rule.monitoring,
       },

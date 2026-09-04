@@ -2458,3 +2458,49 @@ ship and both were checked visually, not assumed. 44px targets.
 deployment must self-host the woff2 files. The fallback stack is ordered to degrade to another
 tabular-capable face rather than to something that reflows every number, but that is a mitigation,
 not the fix.
+
+## 2026-09-04 WardSynQ workstation v4: designed as a clinical instrument, not a dashboard
+
+Owner brief: Bloomberg terminal meets Apple clinical software meets modern ICU workstation. Premium,
+dense but calm, no generic SaaS or shadcn look, safety engine as the hero, never weaken a warning
+for aesthetics. Built directly into the existing buildless app: vanilla ES modules and token-driven
+CSS, no framework added, engine untouched apart from one additive field (`effect` and `action` kept
+separately on interaction findings so Risk and Guidance can render as distinct facts).
+
+**Critique of the previous pass that drove this.** The patient was a header, not the object. The
+safety result was a paragraph in a tinted box; a clinician under pressure needs Risk, Mechanism
+and Guidance as separable facts. Labs sat in a table three scrolls from the decision they inform.
+The override was a form, not a decision. Typography was competent but anonymous.
+
+**Decisions.**
+- Type: IBM Plex Sans + IBM Plex Mono. Built for dense enterprise data, true tabular figures, and a
+  mono that carries the terminal register without cosplay. Every clinical number is mono/tabular.
+- Tokens in `:root` for colour, type scale, space, radius, hairline/rail widths, shadow, motion.
+  Components only use tokens. Severity scale: critical, major, moderate, monitor, info, ok. Fill
+  intensity is the hierarchy: critical and major filled, moderate lightly, monitor and info unfilled
+  so they recede and the loud finding stays loud.
+- Patient context bar: sticky, hairline-separated segments (identity, MRN, location and status,
+  allergy with rail, actions). 59px. The allergy is in the bar, not a panel, because the hazard is
+  acting on the wrong chart.
+- Sidebar: chart navigation with keyboard hints plus the ward worklist; Notes and Alerts present but
+  aria-disabled with a title, rather than faked.
+- Workspace: order and safety engine in the main column, clinical context (results as data points,
+  dosing context, active meds) in an aside beside the decision. Results are a figure, a name and a
+  WORD for the flag; abnormal cells are lightly filled.
+- InteractionCard: severity badge (word first), drug pair in mono, rule code, then Risk and
+  Mechanism as a labelled fact grid, with Guidance, Monitoring and rule id under a native
+  `details` disclosure. Merged rule count shown as "and N related".
+- OverridePanel: "Override required. Why are you proceeding?" with four reason buttons (Clinical
+  necessity, No suitable alternative, Benefit outweighs risk, Other), rationale, Cancel and "Apply
+  override and sign", and a line stating it is recorded to the clinical audit trail. Drafts survive
+  re-render. Apply records the override, re-evaluates, and signs only if the engine then allows.
+- AuditTrail: an in-session list of override and signing events, timestamped.
+- Keyboard: Enter advances fields, Ctrl+Enter signs when allowed, Esc clears, N/O/L/M/P jump.
+- Engine status line in the safety header: "310 rules in 0.3 ms" with a state dot.
+
+**Verified, not assumed.** Viewport screenshots read by eye in light mode; end-to-end override
+flow driven in the browser (gating, draft survival across a mid-entry re-render, apply and sign,
+audit entries, active medication list updated); zero console errors; 173 tests, 172 passing.
+
+**Production gaps recorded.** Webfont from CDN (must self-host; wards lose network). Dark scheme
+tokens exist but this pass was checked by eye in light only. Notes and Alerts are placeholders.

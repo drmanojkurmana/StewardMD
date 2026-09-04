@@ -1,99 +1,77 @@
-/* wardsynq/ui/wardsynq-app.js — WardSynQ clinical workstation, application wiring.
+/* wardsynq/ui/wardsynq-app.js — StewardMD / WardSynQ clinical workstation, application wiring.
  *
- * This file contains NO clinical logic. Every verdict on screen comes from the real
- * SafetyEngine running the real rule pack; the UI's only job is to render what the engine said
- * and to collect the override handshake. If you find yourself about to write a severity
- * comparison or a drug rule here, it belongs in wardsynq-safety.js instead.
+ * NO clinical logic lives here. Every verdict on screen comes from the real SafetyEngine running the
+ * real rule pack; this file renders what the engine said and collects the override handshake. A
+ * severity comparison or a drug rule written here is in the wrong file.
  *
- * The distinction the interface exists to make visible:
- *   BLOCK        Category 1. Renders with NO control that proceeds. There is deliberately no
- *                button to hunt for, because there is no override path in the engine either.
- *   OVERRIDABLE  Category 2. Renders the handshake form: structured reason, free-text rationale,
- *                and the clinician's identity. Submit stays disabled until all three exist.
- *   WARN         Informational. Gates nothing.
+ * Components (render functions, buildless):
+ *   PatientHeader, PatientSidebar, MedicationOrder (static markup + keyboard), SafetyEngine,
+ *   SafetySeverityBadge, InteractionCard, OverridePanel, ClinicalContext / LabValue, AuditTrail.
  *
- * Buildless native ES modules, loaded straight from the same source the tests import, so the
- * screen cannot drift from the tested behaviour.
+ * The distinction the whole interface exists to make visible:
+ *   CRITICAL  (engine BLOCK)        no control that proceeds is rendered, because none exists.
+ *   MAJOR     (engine OVERRIDABLE)  the override step: reason, rationale, signature, audit.
+ *   MODERATE / MONITOR / INFO       advisory. Gates nothing. Rendered quietly on purpose.
  */
 
 import { SafetyEngine, DISPOSITION } from "../wardsynq-safety.js";
 import { buildRulePack } from "../adapters/wardsynq-rules-stewardmd.js";
 import { ClinicalEventBus } from "../wardsynq-events.js";
 import { ClinicalStore, MemoryBackend } from "../wardsynq-store.js";
-import { Patient, MedicationOrder, AllergyIntolerance, Observation } from "../wardsynq-model.js";
+import { Patient, MedicationOrder, AllergyIntolerance } from "../wardsynq-model.js";
 
 const $ = (id) => document.getElementById(id);
+const ACTOR = "dr-on-duty";
 
 const state = {
   engine: null,
-  packVersion: null,
+  pack: null,
   patients: [],
   current: null,
   bus: new ClinicalEventBus({ nodeId: "workstation" }),
   store: new ClinicalStore({ backend: new MemoryBackend() }),
   lastVerdict: null,
   overrides: [],
-  // In-progress override text, keyed by finding code. The verdict panel re-renders on every
-  // keystroke in the order form, which would otherwise destroy a half-typed rationale. A clinician
-  // who loses a careful justification once starts writing "as discussed" instead, and the audit
-  // trail quietly stops being worth reading. Found by driving the workstation.
+  // In-progress override input, keyed by finding code, so a re-render never destroys a half-typed
+  // rationale. A clinician who loses one careful justification starts writing "as discussed".
   overrideDrafts: {},
+  audit: [],
 };
 
 /* ------------------------------------------------------------------ demo cohort
- *
- * Illustrative patients so the workstation has something to show. Names are ordinary Indian names
- * rather than placeholder stand-ins, and the values are clinically coherent rather than round.
- * Marked plainly as demonstration data: fabricated records that look real are their own hazard.
- */
+ * Illustrative patients. Marked as demonstration data: fabricated records that look real are their
+ * own hazard. Values are clinically coherent rather than round. */
 function demoCohort() {
-  const anjali = Patient({
-    mrn: "GH-40118", name: "Anjali Menon", dob: "1959-02-14", sex: "female",
-    wristbandBarcode: "GH-40118",
+  const anjali = Patient({ mrn: "GH-40118", name: "Anjali Menon", dob: "1959-02-14", sex: "female", wristbandBarcode: "GH-40118" });
+  Object.assign(anjali, {
+    ageYears: 67, weightKg: 62, egfr: 47, bed: "MICU 04", unit: "Medical ICU", status: "ICU, day 3",
+    allergies: [AllergyIntolerance({ patientId: anjali.id, substance: "Penicillins", reaction: "anaphylaxis", severity: "severe", criticality: "high", verifiedBy: "dr-menon-allergy" })],
+    activeMeds: [{ drug: "Clarithromycin 500mg", sig: "PO 12-hourly", since: "day 1" }, { drug: "Warfarin 3mg", sig: "PO nightly", since: "home" }],
+    labs: [
+      { test: "Haemoglobin", short: "Hb", value: 10.8, unit: "g/dL", low: 12.0, high: 15.0 },
+      { test: "Creatinine", short: "Creatinine", value: 1.42, unit: "mg/dL", low: 0.6, high: 1.1 },
+      { test: "Potassium", short: "K", value: 5.4, unit: "mmol/L", low: 3.5, high: 5.1 },
+      { test: "INR", short: "INR", value: 2.4, unit: "", low: 2.0, high: 3.0 },
+    ],
+    resultedAt: "07:40 today",
   });
-  anjali.ageYears = 67;
-  anjali.weightKg = 62;
-  anjali.egfr = 47;
-  anjali.bed = "MICU 04";
-  anjali.allergies = [
-    AllergyIntolerance({
-      patientId: anjali.id, substance: "Penicillins", reaction: "anaphylaxis",
-      severity: "severe", criticality: "high", verifiedBy: "dr-menon-allergy",
-    }),
-  ];
-  anjali.activeMeds = [{ drug: "Clarithromycin 500mg" }, { drug: "Warfarin 3mg" }];
-  anjali.labs = [
-    { test: "Potassium", value: 5.4, unit: "mmol/L", low: 3.5, high: 5.1 },
-    { test: "Creatinine", value: 1.42, unit: "mg/dL", low: 0.6, high: 1.1 },
-    { test: "Haemoglobin", value: 10.8, unit: "g/dL", low: 12.0, high: 15.0 },
-  ];
 
-  const ravi = Patient({
-    mrn: "GH-40233", name: "Ravi Deshpande", dob: "1988-11-02", sex: "male",
-    wristbandBarcode: "GH-40233",
+  const ravi = Patient({ mrn: "GH-40233", name: "Ravi Deshpande", dob: "1988-11-02", sex: "male", wristbandBarcode: "GH-40233" });
+  Object.assign(ravi, {
+    ageYears: 37, weightKg: 78, egfr: 96, bed: "3A 12", unit: "Ward 3A", status: "Stable",
+    allergies: [], activeMeds: [],
+    labs: [
+      { test: "Potassium", short: "K", value: 4.1, unit: "mmol/L", low: 3.5, high: 5.1 },
+      { test: "Haemoglobin", short: "Hb", value: 14.6, unit: "g/dL", low: 13.0, high: 17.0 },
+    ],
+    resultedAt: "yesterday 18:10",
   });
-  ravi.ageYears = 37;
-  ravi.weightKg = 78;
-  ravi.egfr = 96;
-  ravi.bed = "Ward 3A 12";
-  ravi.allergies = [];
-  ravi.activeMeds = [];
-  ravi.labs = [
-    { test: "Potassium", value: 4.1, unit: "mmol/L", low: 3.5, high: 5.1 },
-    { test: "Haemoglobin", value: 14.6, unit: "g/dL", low: 13.0, high: 17.0 },
-  ];
 
-  const meera = Patient({
-    mrn: "GH-40297", name: "Meera Iyer", dob: "2019-06-30", sex: "female",
-    wristbandBarcode: "GH-40297",
+  const meera = Patient({ mrn: "GH-40297", name: "Meera Iyer", dob: "2019-06-30", sex: "female", wristbandBarcode: "GH-40297" });
+  Object.assign(meera, {
+    ageYears: 7, weightKg: null, egfr: null, bed: "Paeds 02", unit: "Paediatrics", status: "Admitted 02:10",
+    allergies: [], activeMeds: [], labs: [], resultedAt: null,
   });
-  meera.ageYears = 7;
-  meera.weightKg = null; // deliberately unweighed: the mg/kg refusal is a real behaviour to show
-  meera.egfr = null;
-  meera.bed = "Paeds 02";
-  meera.allergies = [];
-  meera.activeMeds = [];
-  meera.labs = [];
 
   return [anjali, ravi, meera];
 }
@@ -101,7 +79,7 @@ function demoCohort() {
 /* ------------------------------------------------------------------ boot */
 
 async function boot() {
-  const provenance = $("provenance");
+  const prov = $("provenance");
   try {
     const [rulesRes, seedRes] = await Promise.all([
       fetch(new URL("../../data/interaction-rules.json", import.meta.url)),
@@ -109,158 +87,159 @@ async function boot() {
     ]);
     if (!rulesRes.ok) throw new Error(`interaction rules failed to load (${rulesRes.status})`);
     if (!seedRes.ok) throw new Error(`allergy seed failed to load (${seedRes.status})`);
-
     const raw = await rulesRes.json();
     const seed = await seedRes.json();
     const pack = buildRulePack(raw, seed);
-
+    state.pack = pack;
     state.engine = new SafetyEngine({ rulePack: pack });
-    state.packVersion = pack.version;
 
-    // The pack says of itself whether it is approved. The banner reports that rather than the UI
-    // deciding it looks trustworthy.
-    provenance.innerHTML = `Rule pack <span class="pack">${escapeHtml(pack.version)}</span>. `
-      + `${pack.interactions.length} interaction rules, ${pack.drugClasses.size} classified drugs. `
-      + `${seed.status ? "Allergy and dose content is UNAPPROVED SEED DATA and must not gate a real order." : ""}`;
+    prov.innerHTML = `<span>Rule pack <span class="pack">${esc(pack.version)}</span></span>`
+      + `<span>${pack.interactions.length} rules, ${pack.drugClasses.size} classified drugs</span>`
+      + (seed.status ? `<span><strong>Allergy and dose content is unapproved seed data</strong> and must not gate a real order.</span>` : "");
 
     populateDrugSuggestions(pack);
     state.patients = demoCohort();
     await state.store.open();
     for (const p of state.patients) await state.store.put(p);
-    renderPatientList();
+    renderPatientSidebar();
     selectPatient(state.patients[0]);
   } catch (err) {
-    provenance.classList.add("error-inline");
-    provenance.textContent = `Clinical rule pack failed to load: ${err.message}. `
-      + "Safety checking is unavailable, so ordering is disabled.";
+    prov.classList.add("is-error");
+    prov.textContent = `Clinical rule pack failed to load: ${err.message}. Safety checking is unavailable, so ordering is disabled.`;
     $("patientList").innerHTML = '<div class="error-inline">Could not start the workstation.</div>';
     $("drugInput").disabled = true;
   }
 }
 
 function populateDrugSuggestions(pack) {
-  // A short list of orderable products drawn from the pack itself, so every suggestion is a drug
-  // the engine can actually reason about rather than a name it will report as unresolved.
-  const wanted = ["simvastatin", "atorvastatin", "warfarin", "ibuprofen", "paracetamol",
-    "clarithromycin", "digoxin", "gentamicin", "methotrexate", "colchicine", "furosemide",
-    "metformin", "omeprazole", "amlodipine"];
+  const wanted = ["simvastatin", "atorvastatin", "warfarin", "ibuprofen", "paracetamol", "clarithromycin",
+    "digoxin", "gentamicin", "methotrexate", "colchicine", "furosemide", "metformin", "omeprazole", "amlodipine", "apixaban"];
   const list = $("drugSuggestions");
   const seen = new Set();
   for (const w of wanted) {
     const key = pack.genericIndex.has(w) ? w : pack.aliases.get(w);
     if (!key || seen.has(key)) continue;
     seen.add(key);
-    const opt = document.createElement("option");
-    opt.value = titleCase(key);
-    list.appendChild(opt);
+    list.appendChild(Object.assign(document.createElement("option"), { value: titleCase(key) }));
   }
-  // Amoxicillin is included on purpose: on the penicillin-allergic patient it demonstrates the
-  // hard-stop, which is the behaviour most worth being able to see.
-  const amox = pack.aliases.get("amoxicillin") || (pack.genericIndex.has("amoxicillin") ? "amoxicillin" : null);
-  if (amox) {
-    const opt = document.createElement("option");
-    opt.value = "Amoxicillin";
-    list.appendChild(opt);
+  // Included on purpose: on the penicillin-allergic patient it demonstrates the hard stop.
+  if (pack.aliases.get("amoxicillin") || pack.genericIndex.has("amoxicillin")) {
+    list.appendChild(Object.assign(document.createElement("option"), { value: "Amoxicillin" }));
   }
 }
 
-/* ------------------------------------------------------------------ patient */
+/* ------------------------------------------------------------------ PatientHeader */
 
-function renderPatientList() {
+function renderPatientHeader() {
+  const p = state.current;
+  const host = $("patientHeader");
+  if (!p) { host.innerHTML = '<div class="seg who"><span class="name">No patient selected</span></div>'; return; }
+
+  const age = p.ageYears != null ? `${p.ageYears} y` : "age unknown";
+  const sex = p.sex === "male" ? "M" : p.sex === "female" ? "F" : "sex unknown";
+  const weight = p.weightKg != null ? `${p.weightKg} kg` : "weight not recorded";
+  const severe = (p.allergies || []).filter((a) => a.criticality === "high" || a.severity === "severe");
+
+  const allergy = !p.allergies || !p.allergies.length
+    ? `<div class="seg allergy none"><span class="k">Allergies</span><span class="v">None recorded</span></div>`
+    : `<div class="seg allergy"><span class="k">Allergy</span><span class="v">${esc(p.allergies.map((a) => a.substance).join(", "))}</span>`
+      + `<span class="m">${esc(p.allergies[0].reaction || "")}${severe.length ? ", verified" : ""}</span></div>`;
+
+  host.innerHTML = `
+    <div class="seg who">
+      <span class="name">${esc(p.name)}</span>
+      <span class="demo">${esc(age)} ${esc(sex)} <span style="opacity:.55">|</span> ${esc(weight)}</span>
+    </div>
+    <div class="seg kv"><span class="k">MRN</span><span class="v">${esc(p.mrn)}</span></div>
+    <div class="seg kv"><span class="k">${esc(p.unit || "Location")}</span><span class="v">${esc(p.bed || "")}<span style="color:var(--ink-3)"> ${esc(p.status ? "  " + p.status : "")}</span></span></div>
+    ${allergy}
+    <div class="seg fill"></div>
+    <div class="seg actions">
+      <button class="btn" type="button" data-act="order">New order <span class="kbd">N</span></button>
+      <button class="btn" type="button" data-act="copy">Copy MRN</button>
+    </div>`;
+
+  host.querySelector('[data-act="order"]').addEventListener("click", () => $("drugInput").focus());
+  host.querySelector('[data-act="copy"]').addEventListener("click", async (e) => {
+    try { await navigator.clipboard.writeText(p.mrn); e.currentTarget.textContent = "Copied"; setTimeout(() => (e.currentTarget.textContent = "Copy MRN"), 1200); } catch {}
+  });
+}
+
+/* ------------------------------------------------------------------ PatientSidebar */
+
+function renderPatientSidebar() {
   const host = $("patientList");
   host.innerHTML = "";
-  if (!state.patients.length) {
-    host.innerHTML = '<div class="empty">No patients on this worklist.</div>';
-    return;
-  }
+  if (!state.patients.length) { host.innerHTML = '<div class="empty">No patients on this worklist.</div>'; return; }
   for (const p of state.patients) {
-    const btn = document.createElement("button");
-    btn.className = "patient-row";
-    btn.type = "button";
-    btn.setAttribute("aria-current", state.current && state.current.id === p.id ? "true" : "false");
-    btn.innerHTML = `<span class="row-name">${escapeHtml(p.name)}</span>`
-      + `<span class="row-meta">${escapeHtml(p.mrn)} &middot; ${escapeHtml(p.bed || "")}</span>`;
-    btn.addEventListener("click", () => selectPatient(p));
-    host.appendChild(btn);
+    const b = document.createElement("button");
+    b.type = "button";
+    b.className = "row";
+    b.setAttribute("aria-current", state.current && state.current.id === p.id ? "true" : "false");
+    const hasSevere = (p.allergies || []).some((a) => a.criticality === "high" || a.severity === "severe");
+    b.innerHTML = `<span class="n">${esc(p.name)}</span>${hasSevere ? '<span class="flag">ALLERGY</span>' : "<span></span>"}`
+      + `<span class="m">${esc(p.mrn)}  ${esc(p.bed || "")}</span>`;
+    b.addEventListener("click", () => selectPatient(p));
+    host.appendChild(b);
   }
 }
 
-function selectPatient(patient) {
-  state.current = patient;
+function selectPatient(p) {
+  state.current = p;
   state.overrides = [];
   state.overrideDrafts = {};
-  renderPatientList();
-  renderBanner();
+  renderPatientSidebar();
+  renderPatientHeader();
+  renderClinicalContext();
   renderActiveMeds();
-  renderLabs();
   runSafetyCheck();
 }
 
-function renderBanner() {
-  const p = state.current;
-  $("pName").textContent = p.name;
-  // Age is shown, and where it came from an age rather than a birth date the banner does not
-  // pretend to a precision it does not have.
-  const age = p.ageYears != null ? `${p.ageYears}y` : "age unknown";
-  const sex = p.sex === "unknown" ? "sex unknown" : p.sex;
-  const weight = p.weightKg != null ? `${p.weightKg} kg` : "weight NOT RECORDED";
-  $("pMeta").textContent = `${p.mrn} | ${age} ${sex} | ${weight}`;
-  $("pEncounter").textContent = p.bed ? `Bed ${p.bed}` : "";
+/* ------------------------------------------------------------------ ClinicalContext / LabValue
+ * Data points beside the decision they inform, not a table three scrolls away. Each is a figure,
+ * a name, and a WORD for the flag. */
 
-  const el = $("pAllergies");
-  const severe = (p.allergies || []).filter((a) => a.criticality === "high" || a.severity === "severe");
-  if (!p.allergies || !p.allergies.length) {
-    el.className = "banner-allergy none";
-    el.textContent = "No known allergies recorded";
-  } else {
-    el.className = "banner-allergy";
-    const names = p.allergies.map((a) => a.substance).join(", ");
-    // The word "ALLERGY" carries the meaning, not the red. A colour-blind clinician reads the
-    // same warning.
-    el.textContent = `ALLERGY: ${names}${severe.length ? " (severe, verified)" : ""}`;
-  }
+function renderClinicalContext() {
+  const p = state.current;
+  const host = $("datums");
+  $("labsStatus").textContent = p.resultedAt || "";
+  if (!p.labs || !p.labs.length) { host.innerHTML = '<div class="empty">No results available.</div>'; renderDosingContext(); return; }
+  host.innerHTML = `<div class="datums">${p.labs.map(labValue).join("")}</div>`;
+  renderDosingContext();
+}
+
+function labValue(l) {
+  const high = l.high != null && l.value > l.high;
+  const low = l.low != null && l.value < l.low;
+  const flag = high ? "high" : low ? "low" : "normal";
+  const word = high ? "HIGH" : low ? "LOW" : "in range";
+  const ref = l.low != null || l.high != null ? `${l.low ?? ""}-${l.high ?? ""}` : "";
+  return `<div class="datum" data-flag="${flag}">
+    <span class="val">${esc(String(l.value))}<small>${esc(l.unit || "")}</small></span>
+    <span class="name">${esc(l.short || l.test)}</span>
+    <span class="flag">${word}</span>
+    ${ref ? `<span class="ref">${esc(ref)}</span>` : ""}
+  </div>`;
+}
+
+function renderDosingContext() {
+  const p = state.current;
+  const band = p.egfr == null ? "not available" : p.egfr >= 90 ? "normal" : p.egfr >= 60 ? "mild impairment" : p.egfr >= 30 ? "moderate impairment" : p.egfr >= 15 ? "severe impairment" : "kidney failure";
+  $("dosingContext").innerHTML = `
+    <span class="k">Weight</span><span class="v">${p.weightKg != null ? esc(p.weightKg + " kg") : "<strong>not recorded</strong>"}</span>
+    <span class="k">eGFR</span><span class="v">${p.egfr != null ? esc(p.egfr + " mL/min") : "not available"}</span>
+    <span class="k">Renal band</span><span class="v">${esc(band)}</span>
+    <span class="k">Age</span><span class="v">${p.ageYears != null ? esc(p.ageYears + " years") : "unknown"}</span>`;
 }
 
 function renderActiveMeds() {
   const p = state.current;
   const host = $("activeMeds");
-  if (!p.activeMeds || !p.activeMeds.length) {
-    host.innerHTML = '<div class="empty">No active medications recorded for this patient.</div>';
-    return;
-  }
-  host.innerHTML = `<table class="data"><thead><tr><th>Medication</th></tr></thead><tbody>`
-    + p.activeMeds.map((m) => `<tr><td>${escapeHtml(m.drug)}</td></tr>`).join("")
-    + `</tbody></table>`;
+  if (!p.activeMeds || !p.activeMeds.length) { host.innerHTML = '<div class="empty">No active medications recorded.</div>'; return; }
+  host.innerHTML = p.activeMeds.map((m) => `<div class="row"><span class="d">${esc(m.drug)}${m.sig ? ` <span style="color:var(--ink-2);font-weight:400">${esc(m.sig)}</span>` : ""}</span><span class="src">${esc(m.since || "")}</span></div>`).join("");
 }
 
-function renderLabs() {
-  const p = state.current;
-  const host = $("labs");
-  if (!p.labs || !p.labs.length) {
-    host.innerHTML = '<div class="empty">No results available for this patient.</div>';
-    return;
-  }
-  host.innerHTML = `<table class="data"><thead><tr>`
-    + `<th>Test</th><th class="right">Value</th><th>Unit</th><th class="right">Reference</th><th>Flag</th>`
-    + `</tr></thead><tbody>`
-    + p.labs.map((l) => {
-      const high = l.high != null && l.value > l.high;
-      const low = l.low != null && l.value < l.low;
-      const cls = high ? "high" : low ? "low" : "normal";
-      // The flag is a word, not only a colour. Same reason as the allergy banner: colour alone
-      // says nothing to a colour-blind clinician or on a monochrome printout.
-      const label = high ? "HIGH" : low ? "LOW" : "normal";
-      return `<tr class="${high || low ? "result-abnormal" : ""}">`
-        + `<td>${escapeHtml(l.test)}</td>`
-        + `<td class="num">${escapeHtml(String(l.value))}</td>`
-        + `<td class="mono" style="font-size:12px;color:var(--ink-muted)">${escapeHtml(l.unit || "")}</td>`
-        + `<td class="num" style="color:var(--ink-muted)">${l.low != null ? escapeHtml(String(l.low)) : ""}-${l.high != null ? escapeHtml(String(l.high)) : ""}</td>`
-        + `<td><span class="flag ${cls}">${label}</span></td></tr>`;
-    }).join("")
-    + `</tbody></table>`;
-}
-
-/* ------------------------------------------------------------------ safety */
+/* ------------------------------------------------------------------ SafetyEngine */
 
 function currentOrder() {
   const drug = $("drugInput").value.trim();
@@ -271,187 +250,207 @@ function currentOrder() {
     drug,
     dose: Number.isFinite(doseValue) ? { value: doseValue, unit: $("doseUnit").value } : null,
     route: $("routeInput").value,
-    prescriberId: "dr-on-duty",
+    prescriberId: ACTOR,
   });
+}
+
+function setEngine(stateName, text) {
+  const el = $("engineStatus");
+  el.dataset.state = stateName;
+  el.querySelector(".txt").textContent = text;
+}
+
+/** Engine disposition + severity to the interface's five-step scale. */
+function severityOf(f) {
+  if (f.disposition === DISPOSITION.BLOCK) return "critical";
+  if (f.disposition === DISPOSITION.OVERRIDABLE) return "major";
+  if (f.severity === "moderate") return "moderate";
+  if (f.severity === "monitor") return "monitor";
+  return "info";
 }
 
 function runSafetyCheck() {
-  const host = $("verdict");
+  const host = $("findings");
   const signBtn = $("signOrder");
   $("orderResult").innerHTML = "";
-
   if (!state.engine || !state.current) return;
+
   const order = currentOrder();
+  $("orderStatus").textContent = order && order.dose ? `${order.dose.value} ${order.dose.unit} ${order.route}` : "";
   if (!order) {
     host.innerHTML = '<div class="empty">Enter a medication to run the safety check.</div>';
     signBtn.disabled = true;
+    $("signStatus").textContent = "";
     state.lastVerdict = null;
+    setEngine("idle", "Ready");
     return;
   }
 
+  setEngine("checking", "Checking");
   const p = state.current;
   const verdict = state.engine.evaluate({
-    order,
-    patient: p,
-    weightKg: p.weightKg,
-    egfr: p.egfr,
-    allergies: p.allergies || [],
-    activeMeds: p.activeMeds || [],
-    overrides: state.overrides,
+    order, patient: p, weightKg: p.weightKg, egfr: p.egfr,
+    allergies: p.allergies || [], activeMeds: p.activeMeds || [], overrides: state.overrides,
   });
   state.lastVerdict = verdict;
 
-  $("checkTiming").textContent = `checked in ${verdict.elapsedMs.toFixed(1)} ms`;
-  renderVerdict(verdict);
-  // Signing is permitted only when the engine says so. The button is not the control; the engine
-  // is. This line just reflects it.
+  const n = state.pack.interactions.length;
+  const stateName = verdict.blocks.length ? "blocked" : verdict.overridables.length ? "attention" : "ok";
+  setEngine(stateName, `${n} rules in ${verdict.elapsedMs.toFixed(1)} ms`);
+
+  renderSafetyEngine(verdict);
   signBtn.disabled = !verdict.allowed;
+  $("signStatus").textContent = verdict.allowed ? "" : verdict.blocks.length ? "blocked by a hard stop" : "override required before signing";
 }
 
-function renderVerdict(verdict) {
-  const host = $("verdict");
+function renderSafetyEngine(verdict) {
+  const host = $("findings");
   host.innerHTML = "";
 
   if (verdict.unresolvedDrug) {
-    host.appendChild(findingEl({
-      disposition: DISPOSITION.WARN,
-      label: "Not checked",
-      code: "UNRESOLVED_DRUG",
-      message: "This product is not in the loaded rule pack, so no interaction, allergy or dose "
-        + "check has run against it. Absence of a warning here does not mean it is safe.",
+    host.appendChild(interactionCard({
+      sev: "info", word: "Not checked", code: "UNRESOLVED_DRUG",
+      risk: "This product is not in the loaded rule pack, so no interaction, allergy or dose check has run. Absence of a warning here does not mean it is safe.",
     }));
   }
-
-  for (const f of verdict.blocks) host.appendChild(findingEl({ ...f, label: "Hard stop" }));
-  for (const f of verdict.overridables) host.appendChild(findingEl({ ...f, label: "Override required" }));
-  for (const f of verdict.warnings) host.appendChild(findingEl({ ...f, label: f.overridden ? "Overridden" : "Advisory" }));
+  for (const f of verdict.blocks) host.appendChild(interactionCard(fromFinding(f, "Critical")));
+  for (const f of verdict.overridables) host.appendChild(interactionCard(fromFinding(f, "Major")));
+  for (const f of verdict.warnings) host.appendChild(interactionCard(fromFinding(f, f.overridden ? "Overridden" : severityWord(f))));
 
   if (!host.children.length) {
-    const ok = document.createElement("div");
-    ok.className = "verdict-clear";
-    ok.innerHTML = '<div class="rail"></div><div class="body">No blocking findings against the loaded rule pack.</div>';
-    host.appendChild(ok);
+    host.innerHTML = '<div class="clear"><div class="rail"></div><div class="fb">No findings against the loaded rule pack.</div></div>';
   }
 }
 
-function findingEl(f) {
-  const kind = f.disposition === DISPOSITION.BLOCK ? "block"
-    : f.disposition === DISPOSITION.OVERRIDABLE ? "overridable" : "warn";
+function severityWord(f) {
+  const s = severityOf(f);
+  return s === "moderate" ? "Moderate" : s === "monitor" ? "Monitor" : "Informational";
+}
 
-  const wrap = document.createElement("div");
-  wrap.className = "finding";
-  wrap.dataset.kind = kind;
+/** Normalises an engine finding into what the card renders. */
+function fromFinding(f, word) {
+  const isInteraction = f.code && f.code.startsWith("INTERACTION_");
+  return {
+    sev: f.overridden ? "info" : severityOf(f),
+    word,
+    code: f.code,
+    pair: f.drugs && f.drugs.length > 1 ? f.drugs.join(" + ") : null,
+    risk: isInteraction ? (f.effect || f.message) : f.message,
+    mechanism: f.mechanism || null,
+    guidance: isInteraction ? f.action : null,
+    monitoring: f.monitoring || null,
+    ruleId: f.ruleId || null,
+    merged: f.mergedCount > 1 ? f.mergedCount : null,
+    finding: f,
+  };
+}
 
-  const rail = document.createElement("div");
-  rail.className = "rail";
-  wrap.appendChild(rail);
+/* ------------------------------------------------------------------ InteractionCard + SafetySeverityBadge */
 
-  const body = document.createElement("div");
-  body.className = "body";
-  wrap.appendChild(body);
+function interactionCard(c) {
+  const el = document.createElement("div");
+  el.className = "finding";
+  el.dataset.sev = c.sev;
 
-  // The severity is a WORD first. Colour is confirmation, never the carrier: a colour-blind
-  // clinician and a monochrome print of this screen both have to read the same thing.
-  const title = document.createElement("div");
-  title.className = "title";
-  title.innerHTML = `<span class="verdict-word">${escapeHtml(f.label)}</span>`
-    + `<span class="code">${escapeHtml(f.code || "")}</span>`
-    + (f.drugs && f.drugs.length > 1 ? `<span class="drugs">${escapeHtml(f.drugs.join(" + "))}</span>` : "");
-  body.appendChild(title);
+  const facts = [
+    c.risk ? `<span class="k">Risk</span><p class="v strong">${esc(c.risk)}</p>` : "",
+    c.mechanism ? `<span class="k">Mechanism</span><p class="v">${esc(c.mechanism)}</p>` : "",
+  ].join("");
+  const more = (c.guidance || c.monitoring) ? `
+    <details>
+      <summary>Guidance and monitoring</summary>
+      <div class="facts">
+        ${c.guidance ? `<span class="k">Guidance</span><p class="v">${esc(c.guidance)}</p>` : ""}
+        ${c.monitoring ? `<span class="k">Monitor</span><p class="v">${esc(c.monitoring)}</p>` : ""}
+        ${c.ruleId ? `<span class="k">Rule</span><p class="v mono" style="font-size:var(--fs-0)">${esc(c.ruleId)}${c.merged ? ` and ${c.merged - 1} related` : ""}</p>` : ""}
+      </div>
+    </details>` : "";
 
-  const msg = document.createElement("p");
-  msg.textContent = f.message || "";
-  body.appendChild(msg);
+  el.innerHTML = `<div class="rail"></div><div class="fb">
+    <div class="fh">
+      <span class="sev" data-sev="${c.sev}">${esc(c.word)}</span>
+      ${c.pair ? `<span class="pair">${esc(c.pair)}</span>` : ""}
+      <span class="rule">${esc(c.code || "")}</span>
+    </div>
+    <div class="facts">${facts}</div>
+    ${more}
+  </div>`;
 
-  if (f.mechanism) {
-    const mech = document.createElement("p");
-    mech.className = "mechanism";
-    mech.textContent = f.mechanism;
-    body.appendChild(mech);
-  }
-
-  if (f.disposition === DISPOSITION.BLOCK) {
-    // No control is rendered, because no override path exists in the engine either. The note
-    // explains the absence so the clinician is not left hunting for a button that is not there.
+  const body = el.querySelector(".fb");
+  if (c.finding && c.finding.disposition === DISPOSITION.BLOCK) {
+    // No proceeding control is rendered, because the engine has no override path for a block.
     const note = document.createElement("p");
-    note.className = "no-override";
-    note.textContent = "Cannot be overridden. Change the order, or contact the on-call pharmacist "
-      + "to review the underlying record.";
+    note.className = "stop-note";
+    note.textContent = "Cannot be overridden. Change the order, or ask pharmacy to review the underlying record.";
     body.appendChild(note);
   }
-
-  if (f.disposition === DISPOSITION.OVERRIDABLE) body.appendChild(handshakeEl(f));
-  return wrap;
+  if (c.finding && c.finding.disposition === DISPOSITION.OVERRIDABLE) body.appendChild(overridePanel(c.finding));
+  return el;
 }
 
-/**
- * The Category 2 handshake. Reason code, free-text rationale and clinician identity are each
- * required by the engine; the form mirrors that rather than enforcing its own rules, and submit
- * stays disabled until the engine would accept the payload.
- */
-function handshakeEl(f) {
+/* ------------------------------------------------------------------ OverridePanel
+ * A decision, not a form: choose why, say why, sign. Every element is required by the engine and
+ * the button mirrors that; an override cannot be produced by clicking through. */
+
+const REASONS = [
+  ["CLINICAL_NECESSITY", "Clinical necessity"],
+  ["NO_ALTERNATIVE", "No suitable alternative"],
+  ["BENEFIT_OUTWEIGHS_RISK", "Benefit outweighs risk"],
+  ["OTHER", "Other"],
+];
+
+function overridePanel(f) {
   const id = cssId(f.code);
   const box = document.createElement("div");
-  box.className = "handshake";
+  box.className = "override";
   box.innerHTML = `
-    <span class="section-label">Document an override</span>
-    <div class="hs-grid">
-      <label for="reason-${id}">Reason</label>
-      <div>
-        <select id="reason-${id}">
-          <option value="">Select a reason</option>
-          <option value="BENEFIT_OUTWEIGHS_RISK">Benefit outweighs risk</option>
-          <option value="MONITORING_IN_PLACE">Monitoring protocol in place</option>
-          <option value="SPECIALIST_ADVICE">Specialist advice obtained</option>
-          <option value="NO_ALTERNATIVE">No suitable alternative available</option>
-        </select>
-      </div>
-      <label for="rationale-${id}">Rationale</label>
-      <div>
-        <textarea id="rationale-${id}"></textarea>
-        <div class="hint">Recorded in the audit trail and reviewed by the safety committee.</div>
-      </div>
+    <div class="q">Override required. Why are you proceeding?</div>
+    <div class="reasons" role="group" aria-label="Reason for override">
+      ${REASONS.map(([code, label]) => `<button type="button" class="reason" data-reason="${code}" aria-pressed="false">${esc(label)}</button>`).join("")}
     </div>
-    <div class="actions">
-      <button type="button" class="btn-primary" id="apply-${id}" disabled>Apply override</button>
-      <span class="who">Signing as Dr on duty. Your identity is recorded with this override.</span>
-    </div>
-  `;
+    <label class="rl" for="rationale-${id}">Clinical rationale</label>
+    <textarea id="rationale-${id}" rows="3"></textarea>
+    <div class="foot">
+      <span class="rec"><span class="dot"></span>Recorded to the clinical audit trail as ${esc(ACTOR)}</span>
+      <span class="spacer"></span>
+      <button type="button" class="btn" data-cancel>Cancel</button>
+      <button type="button" class="btn btn-danger" data-apply disabled>Apply override and sign</button>
+    </div>`;
 
-  const reason = box.querySelector(`#reason-${cssId(f.code)}`);
-  const rationale = box.querySelector(`#rationale-${cssId(f.code)}`);
-  const apply = box.querySelector(`#apply-${cssId(f.code)}`);
-
-  // Restore anything already typed for this finding, so a re-render does not discard it.
   const draft = state.overrideDrafts[f.code] || {};
-  if (draft.reasonCode) reason.value = draft.reasonCode;
+  const rationale = box.querySelector("textarea");
+  const apply = box.querySelector("[data-apply]");
+  const reasons = [...box.querySelectorAll(".reason")];
+  let reasonCode = draft.reasonCode || "";
   if (draft.rationale) rationale.value = draft.rationale;
 
   const sync = () => {
-    state.overrideDrafts[f.code] = { reasonCode: reason.value, rationale: rationale.value };
-    apply.disabled = !(reason.value && rationale.value.trim().length >= 10);
+    for (const b of reasons) b.setAttribute("aria-pressed", b.dataset.reason === reasonCode ? "true" : "false");
+    state.overrideDrafts[f.code] = { reasonCode, rationale: rationale.value };
+    apply.disabled = !(reasonCode && rationale.value.trim().length >= 10);
   };
-  reason.addEventListener("change", sync);
+  for (const b of reasons) b.addEventListener("click", () => { reasonCode = b.dataset.reason; sync(); });
   rationale.addEventListener("input", sync);
-  sync(); // reflect a restored draft in the button state immediately
-
-  apply.addEventListener("click", () => {
-    state.overrides.push({
-      code: f.code,
-      targetId: f.ruleId || f.allergyId || null,
-      reasonCode: reason.value,
-      rationale: rationale.value.trim(),
-      actorId: "dr-on-duty",
-      at: new Date().toISOString(),
-    });
-    state.bus.emit("safety.override.recorded", {
-      code: f.code, reasonCode: reason.value, actorId: "dr-on-duty",
-    });
-    delete state.overrideDrafts[f.code]; // committed, so it is no longer a draft
+  box.querySelector("[data-cancel]").addEventListener("click", () => { delete state.overrideDrafts[f.code]; clearOrder(); });
+  apply.addEventListener("click", async () => {
+    state.overrides.push({ code: f.code, targetId: f.ruleId || f.allergyId || null, reasonCode, rationale: rationale.value.trim(), actorId: ACTOR, at: new Date().toISOString() });
+    delete state.overrideDrafts[f.code];
+    await state.bus.emit("safety.override.recorded", { code: f.code, reasonCode, actorId: ACTOR });
+    recordAudit(`Override recorded <strong>${esc(f.code)}</strong> ${esc(REASONS.find(([c]) => c === reasonCode)?.[1] || reasonCode)}`);
     runSafetyCheck();
+    if (state.lastVerdict && state.lastVerdict.allowed) await signOrder();
   });
-
+  sync();
   return box;
+}
+
+/* ------------------------------------------------------------------ AuditTrail */
+
+function recordAudit(html) {
+  const t = new Date();
+  state.audit.unshift({ t: `${String(t.getHours()).padStart(2, "0")}:${String(t.getMinutes()).padStart(2, "0")}`, html });
+  const host = $("audit");
+  host.innerHTML = state.audit.map((a) => `<div class="row"><span class="t">${a.t}</span><span class="e">${a.html}</span></div>`).join("");
 }
 
 /* ------------------------------------------------------------------ signing */
@@ -460,62 +459,81 @@ async function signOrder() {
   const verdict = state.lastVerdict;
   const result = $("orderResult");
   if (!verdict || !verdict.allowed) {
-    // Belt and braces: the button is already disabled, but a signed order is the point at which
-    // being wrong matters most, so the check is repeated rather than trusted.
-    result.innerHTML = '<div class="error-inline">This order cannot be signed while a blocking '
-      + "finding stands.</div>";
+    // The button is disabled already, but signing is where being wrong matters most, so the check
+    // is repeated rather than trusted.
+    result.innerHTML = '<div class="error-inline">This order cannot be signed while a blocking finding stands.</div>';
     return;
   }
   const order = currentOrder();
   order.status = "active";
-  order.signedBy = "dr-on-duty";
+  order.signedBy = ACTOR;
   await state.store.put(order);
   await state.bus.emit("order.signed", { order, overrides: state.overrides });
-
-  state.current.activeMeds = (state.current.activeMeds || []).concat([{ drug: order.drug }]);
+  state.current.activeMeds = (state.current.activeMeds || []).concat([{ drug: order.drug, sig: order.dose ? `${order.dose.value} ${order.dose.unit} ${order.route}` : order.route, since: "now" }]);
   renderActiveMeds();
-
-  const overrideNote = state.overrides.length
-    ? ` ${state.overrides.length} override(s) recorded in the audit trail.`
-    : "";
-  result.innerHTML = `<div class="verdict-ok">Order signed and recorded.${escapeHtml(overrideNote)}</div>`;
-  clearOrder();
+  recordAudit(`Order signed <strong>${esc(order.drug)}</strong> ${order.dose ? esc(order.dose.value + " " + order.dose.unit) : ""} ${esc(order.route)}${state.overrides.length ? ` with ${state.overrides.length} override(s)` : ""}`);
+  result.innerHTML = '<div class="clear"><div class="rail"></div><div class="fb">Order signed and recorded.</div></div>';
+  clearOrder(true);
 }
 
-function clearOrder() {
+function clearOrder(keepResult) {
   $("drugInput").value = "";
   $("doseInput").value = "";
   state.overrides = [];
   state.overrideDrafts = {};
   state.lastVerdict = null;
-  $("checkTiming").textContent = "";
+  const keep = keepResult ? $("orderResult").innerHTML : "";
   runSafetyCheck();
+  if (keepResult) $("orderResult").innerHTML = keep;
 }
 
-/* ------------------------------------------------------------------ helpers */
-
-function escapeHtml(s) {
-  return String(s == null ? "" : s)
-    .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;").replace(/'/g, "&#39;");
-}
-function cssId(s) { return String(s || "x").replace(/[^A-Za-z0-9_-]/g, "-"); }
-function titleCase(s) { return String(s).replace(/\b[a-z]/g, (c) => c.toUpperCase()); }
-
-/* ------------------------------------------------------------------ events */
+/* ------------------------------------------------------------------ keyboard, navigation */
 
 let debounce;
 for (const id of ["drugInput", "doseInput", "doseUnit", "routeInput"]) {
-  const el = $(id);
-  const handler = () => {
-    clearTimeout(debounce);
-    // Short debounce so typing stays responsive; the check itself is well inside its budget.
-    debounce = setTimeout(runSafetyCheck, 120);
-  };
-  el.addEventListener("input", handler);
-  el.addEventListener("change", handler);
+  const h = () => { clearTimeout(debounce); setEngine("checking", "Checking"); debounce = setTimeout(runSafetyCheck, 120); };
+  $(id).addEventListener("input", h);
+  $(id).addEventListener("change", h);
+}
+const orderFields = ["drugInput", "doseInput", "doseUnit", "routeInput"];
+for (const id of orderFields) {
+  $(id).addEventListener("keydown", (e) => {
+    if (e.key === "Enter" && !(e.ctrlKey || e.metaKey)) {
+      e.preventDefault();
+      const i = orderFields.indexOf(id);
+      if (i < orderFields.length - 1) $(orderFields[i + 1]).focus();
+    }
+  });
+}
+document.addEventListener("keydown", (e) => {
+  const typing = /^(INPUT|TEXTAREA|SELECT)$/.test(document.activeElement.tagName);
+  if ((e.ctrlKey || e.metaKey) && e.key === "Enter") { e.preventDefault(); if (!$("signOrder").disabled) signOrder(); return; }
+  if (e.key === "Escape") { clearOrder(); $("drugInput").blur(); return; }
+  if (typing) return;
+  const k = e.key.toLowerCase();
+  if (k === "n" || k === "o") { e.preventDefault(); $("drugInput").focus(); }
+  if (k === "l") { e.preventDefault(); $("labsBlock").scrollIntoView({ block: "start" }); }
+  if (k === "m") { e.preventDefault(); $("medsBlock").scrollIntoView({ block: "start" }); }
+  if (k === "p") { e.preventDefault(); $("patientList").querySelector(".row")?.focus(); }
+});
+for (const item of document.querySelectorAll(".nav .item")) {
+  item.addEventListener("click", () => {
+    if (item.getAttribute("aria-disabled") === "true") return;
+    for (const other of document.querySelectorAll(".nav .item")) other.removeAttribute("aria-current");
+    item.setAttribute("aria-current", "page");
+    const target = { patients: "patientList", order: "orderBlock", meds: "medsBlock", labs: "labsBlock" }[item.dataset.nav];
+    if (target === "patientList") $("patientList").querySelector(".row")?.focus();
+    else if (target === "orderBlock") $("drugInput").focus();
+    else if (target) $(target).scrollIntoView({ block: "start" });
+  });
 }
 $("signOrder").addEventListener("click", signOrder);
-$("clearOrder").addEventListener("click", clearOrder);
+$("clearOrder").addEventListener("click", () => clearOrder());
+
+/* ------------------------------------------------------------------ helpers */
+
+function esc(s) { return String(s == null ? "" : s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#39;"); }
+function cssId(s) { return String(s || "x").replace(/[^A-Za-z0-9_-]/g, "-"); }
+function titleCase(s) { return String(s).replace(/\b[a-z]/g, (c) => c.toUpperCase()); }
 
 boot();
