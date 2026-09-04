@@ -486,7 +486,12 @@
     var acc = "";
     var sub = null;
 
-    var groundingP = (images.length || (opts && (opts._retried || opts._ungrounded))) ? Promise.resolve(null)
+    // A greeting is not a clinical question - retrieveGrounding() has no idea what "Hi" means, but
+    // isGreeting() does, and a bare greeting must never carry a Knowledge Base citation (found live,
+    // 2026-09-04, on the owner's phone: MaiK Lite's opening "Hi" answer was stamped with the source
+    // line). Checked here, not just at prompt-build time, because THIS is what decides whether the
+    // source line gets appended after generation.
+    var groundingP = (images.length || (opts && (opts._retried || opts._ungrounded)) || isGreeting(pkg && pkg.question)) ? Promise.resolve(null)
       : retrieveGrounding(packId, pkg && pkg.question);
 
     return groundingP.then(function (grounding) {
@@ -739,6 +744,13 @@
   function scheduleRelease(ms) {
     clearIdle();
     _idleT = setTimeout(function () { _idleT = null; if (_inflight === 0) release(); }, ms);
+    // unref() only exists on Node's Timeout (this file also runs, unit-tested, under plain node); in
+    // the WebView setTimeout returns a number and this is a no-op. Without it, any Node script that
+    // calls answer()/vivaJudge()/opdSuggest() - test files included - hangs for up to IDLE_MS after
+    // its last assertion, because a real pending timer keeps the process alive even though nothing
+    // is left to do. Found live: CI's unit-tests job stalled ~3 minutes on maik-local.test.mjs alone
+    // (2026-09-04). A timer this file itself starts must never be the reason a caller can't exit.
+    try { if (_idleT && typeof _idleT.unref === "function") _idleT.unref(); } catch (e) {}
   }
   function settle() { if (_inflight === 0) scheduleRelease(_sheetOpen === false ? _closeMs : _idleMs); }
   function tracked(fn) {
