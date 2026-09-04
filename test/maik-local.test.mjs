@@ -673,4 +673,87 @@ function loadForWeb({ tokens }) {
   ok("answer() emphasizes an unformatted on-device reply", /\*\*amoxicillin\*\*/.test(r.text) && /\*\*90 mg\/kg\*\*/.test(r.text) && /\*\*10 days\*\*/.test(r.text));
 }
 
+// ── retrieval drift guard (owner battery, 2026-09-04) ──
+// Real BM25 (kb/ai/maik-lite-rag.js) over three synthetic chunks that reproduce the two live
+// failures: a DEFINITIONS chapter out-ranking treatment for a UTI ask, and a hepatitis-in-pregnancy
+// passage answering a UTI pregnancy follow-up (lamivudine). Anchors must exclude both.
+function loadRealRag({ tokens, rows }) {
+  const calls = { generate: [] };
+  const Llama = {
+    available: async () => ({ available: true, loaded: true }), load: async () => ({ loaded: true }),
+    generate: async (o) => { calls.generate.push(o); return { text: tokens.join(""), ms: 500 }; },
+    cancel: async () => ({}), release: async () => ({ released: true }), addListener: () => ({ remove: () => {} })
+  };
+  const RAGm = require("../kb/ai/maik-lite-rag.js");
+  // A three-chunk corpus cannot clear the production score floor (tuned for 42,176 chunks); the
+  // floor is not what these tests are about, so lower it and keep everything else real.
+  const RAG = Object.assign({}, RAGm, { MIN_SCORE: 0.5 });
+  const win = {
+    Capacitor: { isNativePlatform: () => true, Plugins: { Llama } },
+    SMD_MAIK_RAG: RAG, SMD_MAIK_KB_STORE: { loadBook: () => Promise.resolve(new RAGm.Book(rows)) },
+    SMD_MAIK_MODELS: { PACKS: { "maik-lite": { label: "MAiK Lite", nCtx: 4096, nPredict: 512, noThink: true } },
+      pathFor: async () => "/var/mobile/Data/maik-models/maik-lite.gguf", totalBytes: () => 1.1e9 }
+  };
+  new Function("window", SRC)(win);
+  return { L: win.SMD_MAIK_LOCAL, calls };
+}
+{
+  const UTI_TX = "Uncomplicated cystitis in women: nitrofurantoin 100 mg twice daily for 5 days or trimethoprim-sulfamethoxazole for 3 days is first-line treatment of uncomplicated urinary tract infection. ".repeat(3);
+  const UTI_DEF = "■■ DEFINITIONS In this chapter, the term uncomplicated urinary tract infection refers to cystitis in a non-pregnant woman without structural abnormality; complicated infection is defined otherwise. ".repeat(3);
+  const HEP_PREG = "Hepatitis B in pregnancy: lamivudine or tenofovir may be used in the third trimester to reduce transmission; interferons are avoided in pregnancy because of antiproliferative effects. Management in pregnancy is specialist-led. ".repeat(3);
+  const rows = [
+    { i: 0, text: UTI_TX, headings: ["Urinary tract infection", "Treatment"], pages: [10] },
+    { i: 1, text: UTI_DEF, headings: ["Urinary tract infection", "Definitions"], pages: [9] },
+    { i: 2, text: HEP_PREG, headings: ["Hepatitis B", "Pregnancy"], pages: [300] }
+  ];
+  const a = loadRealRag({ tokens: ["Nitrofurantoin 100 mg twice daily for 5 days."], rows });
+  const r1 = await a.L.answer({ question: "First-line treatment of uncomplicated UTI in a non-pregnant woman" }, { pack: "maik-lite" }, null);
+  const p1 = a.calls.generate[0].prompt;
+  ok("treatment ask: the treatment chunk is in the evidence", /nitrofurantoin 100 mg twice daily/i.test(p1));
+  ok("treatment ask: the DEFINITIONS chapter is dropped when a real answer chunk exists", !/DEFINITIONS/.test(p1));
+  ok("glyph noise (■■) never reaches the prompt", !/■/.test(p1));
+  ok("grounded, gate passed (nitrofurantoin and 100 mg are in the evidence)", r1.grounded === true && /Source: StewardMD Knowledge Base/.test(r1.text));
+
+  const b = loadRealRag({ tokens: ["In pregnancy, lamivudine is widely used."], rows });
+  await b.L.answer({ question: "uncomplicated uti non pregnant woman: management considerations in pregnancy" }, { pack: "maik-lite" }, null);
+  const p2 = b.calls.generate[0].prompt;
+  ok("pregnancy follow-up: the hepatitis passage is NOT evidence for a UTI question (no UTI anchor in it)", !/lamivudine/i.test(p2));
+  ok("pregnancy follow-up: still grounded in the UTI chunks (anchors: urinary / uncomplicated / cystitis)", /urinary tract infection/i.test(p2));
+
+  const c = loadRealRag({ tokens: ["x"], rows });
+  const r3 = await c.L.answer({ question: "management of hepatitis B in pregnancy" }, { pack: "maik-lite" }, null);
+  ok("a genuine hepatitis question still retrieves the hepatitis passage", /lamivudine/i.test(c.calls.generate[0].prompt) && r3.grounded === true);
+}
+{
+  // Evidence size: 700-char passages and a weak third passage dropped (prefill is the latency).
+  const RAG = require("../kb/ai/maik-lite-rag.js");
+  const long = "Amoxicillin 500 mg three times daily for community acquired pneumonia. ".repeat(20);   // ~1400 chars
+  const passages = [
+    { heading: "Pneumonia > Treatment", text: long, chunk: 1 },
+    { heading: "Pneumonia > Treatment", text: "Doxycycline 100 mg twice daily is the alternative for pneumonia.", chunk: 2 },
+    { heading: "Pneumonia > Epidemiology", text: "Pneumonia is common in winter.", chunk: 3 }
+  ];
+  const fakeBook = { search: () => [[12, 0], [10, 1], [3, 2]], cite: (i) => Object.assign({}, passages[i]), idfOf: () => 5, us: (w) => w };
+  const calls = { generate: [] };
+  const Llama = { available: async () => ({ available: true, loaded: true }), load: async () => ({ loaded: true }),
+    generate: async (o) => { calls.generate.push(o); return { text: "Amoxicillin 500 mg three times daily.", ms: 1 }; },
+    cancel: async () => ({}), release: async () => ({ released: true }), addListener: () => ({ remove: () => {} }) };
+  const win = { Capacitor: { isNativePlatform: () => true, Plugins: { Llama } }, SMD_MAIK_RAG: RAG,
+    SMD_MAIK_KB_STORE: { loadBook: () => Promise.resolve(fakeBook) },
+    SMD_MAIK_MODELS: { PACKS: { "maik-lite": { label: "MAiK Lite", nCtx: 4096, nPredict: 512, noThink: true } }, pathFor: async () => "/x.gguf", totalBytes: () => 1.1e9 } };
+  new Function("window", SRC)(win);
+  await win.SMD_MAIK_LOCAL.answer({ question: "Treatment of pneumonia" }, { pack: "maik-lite" }, null);
+  const p = calls.generate[0].prompt;
+  ok("each passage is capped at 700 chars in the prompt", !/\[1\] [\s\S]{705,}?\n\n\[2\]/.test(p) && /\[1\] /.test(p));
+  ok("a third passage scoring under 60% of the top is dropped", /\[2\] /.test(p) && !/\[3\] /.test(p));
+}
+{
+  // Regenerate asks the local engine for sampling jitter; an ordinary answer stays deterministic.
+  const d = load({ tokens: ["A."] });
+  await d.L.answer({ question: "q" }, { pack: "maik-apex" }, null);
+  await d.L.answer({ question: "q" }, { pack: "maik-apex", regen: true }, null);
+  ok("ordinary answer: temperature 0", d.calls.generate[0].temperature === 0);
+  ok("regenerate: temperature 0.4", d.calls.generate[1].temperature === 0.4);
+}
+
 console.log(`\nmaik-local: ${pass} passed, ${fail} failed`);

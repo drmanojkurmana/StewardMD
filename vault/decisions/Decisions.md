@@ -2419,3 +2419,39 @@ Verified live on the owner's iPhone 15 Pro, fresh question, MaiK Lite: assistant
 (border none, transparent, no shadow, 100% width), MAIK label and per-answer disclaimer gone, prose
 measured 15px/24.75px, user bubble 14.5px, two `<b>` drug names in the answer, prescription chip
 transparent with muted text, no emoji in chips, app process unchanged through the test.
+
+## 2026-09-04 MaiK Lite assistant gaps: retrieval drift guard, dose follow-up, answer actions (PR #827, same branch)
+
+Owner ran a 5-question live battery ("As an AI Engineer and CEO of ChatGPT, run MaiK Assistant and
+tell me what is left"), then: "Fix as many as possible but keeping speed & size of model same".
+Model, quant, context and system prompt are untouched. Every fix is in retrieval, the follow-up
+resolver and the UI.
+
+1. Retrieval drift guard (`maik-local.js retrieveGrounding`). Live, "UTI treatment" retrieved a
+   DEFINITIONS/glossary passage and "what if she is pregnant" retrieved hepatitis-in-pregnancy,
+   which the model then answered from (lamivudine/IFN) and the presence-only gate passed. Now:
+   the top-3 BM25 hits are anchored on the question's 2-3 highest-IDF non-generic tokens (the
+   pregnancy/renal/paediatric modifiers and words like management/dose/first-line are excluded from
+   the anchors), passages missing every anchor are dropped, introductory chapters are demoted for
+   treatment questions, glyph bullets are cleaned, evidence is capped at 700 chars per passage and
+   a weak third passage (<60 % of the top score) is dropped. Net effect is fewer, more relevant
+   prompt tokens, so prefill gets shorter, not longer. The gate itself is unchanged (repo rule:
+   never weaken it). If anchoring empties the set, the answer is "not covered", not a drift.
+2. Gate-fail fallback shows the cleaned, capped passage, and states plainly that the model's answer
+   could not be verified; the raw "■■ DEFINITIONS" dump is gone.
+3. Dose follow-up (`home.js maikResolveFollowup`). "and the dose?" with no drug named and none
+   remembered used to answer "Which drug's dose would you like?". It now resolves to the current
+   topic's first-line drug and dose, with retrieval steered at "<topic> first line drug dose
+   duration". Named or remembered drugs keep precedence.
+4. Answer actions: Copy (answer text only, chips/sources stripped), Regenerate (drops the cached
+   render, resends with `regen: true`, which the local engine maps to temperature 0.4 so the answer
+   actually changes; default remains temperature 0), Edit (question back in the composer).
+
+Tests: `test/maik-local.test.mjs` (real RAG index harness for the drift cases, cap/weak-third,
+regen temperature), `test/maik-followup-actions.test.mjs`. `anchorsFor` degrades to "no anchoring"
+when the RAG build lacks a tokenizer instead of throwing (an exception there would silently turn
+every answer ungrounded, which the older test stubs exposed).
+
+Not fixed, same-model constraint: first-token latency (3-7 s) is prefill-bound; the real lever is
+KV prefix caching of the fixed system prompt in `LlamaEngine.swift`, which is native work and a
+separate PR.

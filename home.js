@@ -3721,6 +3721,7 @@
    */
   var _maikStop = null;
   var _maikCache = {};            // session cache: normalized clinical query → rendered answer HTML
+  var _maikRegen = false;         // set by the Regenerate action for exactly the next send (asks the local engine for sampling jitter)
   // Session-only conversation topic memory (smd_maik_v2): current canonical clinical topic so
   // follow-ups ("give in detail", "what antibiotics?", "dose?", "what next?") resolve against it
   // instead of being treated as new questions. Never persisted; not PHI; cleared on close.
@@ -4791,6 +4792,11 @@ body.mkchat #maikSheet .maik-fb{border-top:none;padding-top:2px;margin-top:8px;g
 body.mkchat #maikSheet .maik-fb-q{font-size:12px;font-weight:500;color:var(--mk-faint)}
 body.mkchat #maikSheet .maik-fb-b{font:600 12px/1 'Inter';padding:5px 11px;color:var(--mk-mut)}
 body.mkchat #maikSheet .maik-sk{display:none}
+/* answer actions (Copy / Regenerate / Edit): text-only, sit before the rating on the same quiet row */
+.maik-acts{display:inline-flex;gap:2px;margin-right:6px}
+.maik-fb-b.maik-act{border-color:transparent;padding:5px 8px}
+body.mkchat #maikSheet .maik-fb-b.maik-act{color:var(--mk-faint)}
+body.mkchat #maikSheet .maik-fb-b.maik-act:hover{color:var(--mk-teal);background:transparent;border-color:transparent}
 
 /* ══ MaiK UI 2 · instrument-grade skin (flag: body.mk2 · ?mkui=1) ══════════════
    Presentation-only. Re-points the --mk-* tokens to one restrained clinical
@@ -5190,7 +5196,10 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
         var _drug = q.replace(/\?+/g, " ").replace(/\b(dose|dosage|doses|dosing|of|the|a|an|in|for|adult|paediatric|pediatric|child|neonatal|neonate|renal|dialysis|ckd|hepatic|liver|pregnancy|pregnant|how|much|what|whats|is|are|please|pls|give|me|and|standard|its|it|treatment|treatments|therapy|regimen|regimens|drug|drugs|medication|medications|agent|agents|antibiotic|antibiotics)\b/gi, " ").replace(/\s+/g, " ").trim();
         _drug = _drug || t.lastDrug;
         if (_drug) return { question: _pop + " dosing of " + _drug + " for " + t.topic + " \u2014 dose, route, titration and renal-adjustment principles. Verify locally.", depth: "concise", topic: "dose of " + _drug, retrieval: _drug + " " + t.topic + " dose dosing route renal adjustment" };
-        return { clarify: "Which drug’s dose would you like — e.g. “ceftriaxone dose” or “atropine dose in OP poisoning”?" };
+        // No drug named and none remembered: "and the dose?" right after a treatment answer means the
+        // first-line drug for the topic we are on. Asking "which drug?" back was the single most
+        // assistant-unlike thing in the owner's live battery (2026-09-04); ChatGPT resolves it in one hop.
+        return { question: _pop + " first-line drug and dose for " + t.topic + ": drug, dose, route, frequency and duration. Verify locally.", depth: "concise", topic: "dose for " + t.topic, retrieval: t.topic + " first line drug dose duration" };
       }
       if (/^(what next|whats next|next|next steps?|then( what)?|and then|what to do next)\b/.test(n) || (/\bnext\b/.test(n) && wc <= 4)) {
         return { question: "Next steps, ongoing management and monitoring for " + t.topic + ".", depth: "concise", topic: "next steps for " + t.topic, retrieval: t.topic + " monitoring ongoing management next steps escalation" };
@@ -5953,6 +5962,25 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
                 });
                 return b;
               }
+              // Assistant table stakes (owner battery, 2026-09-04): copy the answer, regenerate it, or
+              // edit the question and resend. Quiet text actions on the same row as the rating.
+              function act(label, fn) { var b = document.createElement("button"); b.type = "button"; b.className = "maik-fb-b maik-act"; b.textContent = label; b.addEventListener("click", fn); return b; }
+              var acts = document.createElement("span"); acts.className = "maik-acts";
+              acts.appendChild(act("Copy", function () {
+                var txt = "";
+                try { var cl = host.cloneNode(true); Array.prototype.forEach.call(cl.querySelectorAll(".maik-fb,.maik-followups,.maik-tools,.maik-refine,.maik-chip,.maik-src,.maik-attr,.maik-edu,.maik-know,.maik-perf,.maik-webbusy"), function (x) { x.remove(); }); txt = cl.innerText.trim(); } catch (e) { try { txt = host.innerText; } catch (e2) {} }
+                var okMsg = function () { try { toast("Copied"); } catch (e) {} };
+                try { if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(txt).then(okMsg, okMsg); else okMsg(); } catch (e) { okMsg(); }
+              }));
+              acts.appendChild(act("Regenerate", function () {
+                // Drop the cached render for this question, ask for sampling jitter, and resend.
+                try { delete _maikCache[maikNorm(question) + (maikActiveCase() ? "|case" : "")]; } catch (e) {}
+                _maikRegen = true;
+                try { qEl.value = question; } catch (e) {}
+                send();
+              }));
+              acts.appendChild(act("Edit", function () { try { qEl.value = question; qEl.focus(); qEl.setSelectionRange(qEl.value.length, qEl.value.length); } catch (e) {} }));
+              w.appendChild(acts);
               var up = mk("Yes", "up"), dn = mk("No", "down");
               w.appendChild(up); w.appendChild(dn); host.appendChild(w);
             } catch (e) {}
@@ -5960,9 +5988,10 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
           function _gemini() {
             try { _brainEnrichPkg(pkg); } catch (e) {}
             var _tier = maikLazyOn() ? 1 : undefined;   // lazy: first call fetches ONLY the bottom line
+            var _regen = _maikRegen; _maikRegen = false;
             var call = (window.SMD_AI.explainGroundedStream && maikStreamOn())
-              ? window.SMD_AI.explainGroundedStream(pkg, { depth: depth, tier: _tier }, onDelta)
-              : window.SMD_AI.explainGrounded(pkg, { depth: depth, tier: _tier });
+              ? window.SMD_AI.explainGroundedStream(pkg, { depth: depth, tier: _tier, regen: _regen }, onDelta)
+              : window.SMD_AI.explainGrounded(pkg, { depth: depth, tier: _tier, regen: _regen });
             return call.then(function (r) {
               var _h = _live();
               maikRenderAnswer(_h, r, pkg, active, cacheKey, topicLabel, question, depth, assume);

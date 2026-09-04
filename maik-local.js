@@ -459,6 +459,40 @@
   /** Resolves {evidenceText, passages, RAG} from the on-device book index, or null if ungrounded
    * (no KB yet, no hit, or anything failed) - grounding is a strict improvement when available,
    * never a hard requirement that can break an answer that would otherwise have worked. */
+  /* RETRIEVAL DRIFT GUARD (owner battery, 2026-09-04). Two live failures with the same root cause:
+   * "first-line treatment of uncomplicated UTI" retrieved a DEFINITIONS chapter, and the follow-up
+   * "what if she is pregnant" retrieved a hepatitis-in-pregnancy passage, so the model answered
+   * lamivudine for a UTI and the gate PASSED it (lamivudine was in the evidence). BM25 ranks by term
+   * overlap; a modifier like "pregnancy" or a generic like "management" can out-vote the actual topic.
+   * So a passage must now contain one of the question's ANCHORS - its rarest words that are neither
+   * generic clinical filler nor a population modifier - or it is not evidence for this question.
+   * Zero anchored passages means "not grounded", never "grounded in the wrong chapter". Same model,
+   * same speed: this is a filter after search, and it SHRINKS the prompt (700-char passages, a weak
+   * third passage dropped), which is where on-device latency actually goes. */
+  var GENERIC_Q = /^(management|treatment|treat|therapy|regimen|regimens|dose|dosing|dosage|doses|route|duration|first|line|drug|drugs|agent|agents|class|choice|adult|patient|patients|clinical|answer|complete|detailed|provide|considerations|principles|verify|locally|empiric|severity|host|adjustment|culture|directed|escalation|steps|monitoring|ongoing|next|approach|options|guideline|guidelines|what|when|which|how|should|give|use|used|with|without|versus|compare|comparison|prefer|each|non|woman|women|man|men|case|cases|standard|usual|typical|common)$/;
+  var MODIFIER_Q = /^(pregnancy|pregnant|lactation|lactating|breastfeeding|renal|hepatic|liver|kidney|paediatric|pediatric|child|children|neonate|neonatal|elderly|geriatric|dialysis|ckd|impairment|failure|obese|obesity)$/;
+  var INTRO_HEAD = /definition|glossary|introduction|epidemiolog|etiolog|pathogenesis|classification|history|overview/i;
+  var TREAT_Q = /\b(treat|treatment|therapy|manage|management|dose|dosing|regimen|first.?line|drug|antibiotic|prescri)/i;
+  function cleanPassage(s) { return String(s || "").replace(/[■□▪▫●○◆◇◼◻•·]+/g, " ").replace(/\s+/g, " ").trim(); }
+  function anchorsFor(bk, RAG, question) {
+    // No tokenizer available (an older RAG build or a test stub) means no anchoring, never a
+    // thrown error that would silently turn every answer ungrounded.
+    if (!RAG || typeof RAG.toks !== "function") return [];
+    var q = question;
+    try { var ex = RAG.expand(question); q = ex[0] + " " + ex[1]; } catch (e) {}
+    var seen = {}, scored = [], tokens = [];
+    try { tokens = RAG.toks(q) || []; } catch (e) { tokens = []; }
+    tokens.forEach(function (w) {
+      try { if (bk.us) w = bk.us(w); } catch (e) {}
+      if (seen[w] || w.length < 3 || GENERIC_Q.test(w) || MODIFIER_Q.test(w)) return;
+      seen[w] = 1;
+      var idf = bk.idfOf ? bk.idfOf(w) : 1;
+      if (idf === undefined) return;   // unknown to the book: cannot anchor on it
+      scored.push([idf, w]);
+    });
+    scored.sort(function (a, b) { return b[0] - a[0]; });
+    return scored.slice(0, 3).map(function (e) { return e[1]; });
+  }
   function retrieveGrounding(packId, question) {
     if (!ragEligible(packId) || !question) return Promise.resolve(null);
     var RAG = (typeof window !== "undefined") && window.SMD_MAIK_RAG;
@@ -467,9 +501,20 @@
     return KB.loadBook(RAG).then(function (bk) {
       var hits = bk.search(question, RAG.TOPK);
       if (!hits.length || hits[0][0] < RAG.MIN_SCORE) return null;
-      var passages = hits.map(function (h) { return bk.cite(h[1]); });
-      var evidenceText = passages.map(function (p, n) { return "[" + (n + 1) + "] " + p.text.slice(0, 900); }).join("\n\n");
-      return { evidenceText: evidenceText, passages: passages, RAG: RAG };
+      var anchors = anchorsFor(bk, RAG, question);
+      var cited = hits.map(function (h) { var p = bk.cite(h[1]); return { score: h[0], p: p, hay: ((p.heading || "") + " " + (p.text || "")).toLowerCase() }; });
+      var kept = anchors.length ? cited.filter(function (c) { return anchors.some(function (a) { return c.hay.indexOf(a) !== -1; }); }) : cited;
+      if (!kept.length) return null;
+      // A definitions / introduction chapter is not the answer to a treatment question when anything
+      // else survived (the live "■■ DEFINITIONS" fallback for a UTI treatment ask).
+      if (TREAT_Q.test(question) && kept.length > 1) {
+        var nd = kept.filter(function (c) { return !INTRO_HEAD.test(c.p.heading || ""); });
+        if (nd.length) kept = nd;
+      }
+      if (kept.length > 2 && kept[2].score < 0.6 * kept[0].score) kept = kept.slice(0, 2);
+      var passages = kept.map(function (c) { c.p.text = cleanPassage(c.p.text); return c.p; });
+      var evidenceText = passages.map(function (p, n) { return "[" + (n + 1) + "] " + p.text.slice(0, 700); }).join("\n\n");
+      return { evidenceText: evidenceText, passages: passages, RAG: RAG, anchors: anchors };
     }).catch(function () { return null; });
   }
 
@@ -549,7 +594,9 @@
                 : (opts && opts.imageFollowUp) ? SYSTEM_IMAGE_FOLLOWUP
                 : SYSTEM_IMAGE,
           nPredict: pk.nPredict || 512,
-          temperature: (opts && typeof opts.temperature === "number") ? opts.temperature : 0,
+          // Regenerate (owner, 2026-09-04): a second attempt at temperature 0 is the same answer
+          // byte for byte, so a regenerate request gets a little sampling jitter.
+          temperature: (opts && typeof opts.temperature === "number") ? opts.temperature : ((opts && opts.regen) ? 0.4 : 0),
           stream: typeof onDelta === "function",
           // The actual think-suppression fix (see buildPrompt's comment for why the old
           // in-question-text approach never worked). Vision packs are never noThink today, so this
@@ -603,9 +650,10 @@
           var gate = grounding.RAG.evidenceGate(text, grounding.evidenceText, pkg && pkg.question);
           if (!gate.ok) {
             var pass = grounding.passages[0]; quotedPassage = true;
+            var shown = cleanPassage(pass.text);
+            if (shown.length > 700) shown = shown.slice(0, 700).replace(/\s+\S*$/, "") + "…";
             text = "The on-device model's answer could not be verified against the StewardMD Knowledge Base " +
-              "(it stated a figure or drug not found there). Showing the relevant reference passage instead:\n\n" +
-              pass.text.trim();
+              "(it stated a figure or drug not found there). Here is the reference passage on this topic instead:\n\n" + shown;
           } else {
             // NEVER a page number, on owner order - matches the standing attribution used
             // everywhere else in the app (maik-models.js GUIDE_INTRO / guide.why).
