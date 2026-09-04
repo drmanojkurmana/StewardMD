@@ -175,6 +175,22 @@
     // effective engine is local; every other extract kind (voice, translate, MaiK Ask) has no local
     // implementation and keeps today's cloud behaviour regardless of engine. KB-only mode has no
     // model to judge or suggest with, so it also stays on the cloud path here rather than dead-ending.
+    // Web research (owner, 2026-09-04): "we can't charge them for snippet conversion into clean
+    // language" for anything but MaiK Cloud. The search itself (TinyFish) is free either way; on the
+    // local engine, fetch the raw sources via SMD_AI.researchSnippets (no Gemini call, no quota) and
+    // have the ON-DEVICE model write the answer instead. Evidence Review (mode "evidence-review") is
+    // a distinct paid PubMed-synthesis feature, untouched, always cloud.
+    if (kind === "research") {
+      var mode = args[1];
+      var Lw = window.SMD_MAIK_LOCAL, Aw = window.SMD_AI;
+      var wantLocalWeb = e === "local" && mode !== "evidence-review" && !!Lw && !!Lw.webAnswer &&
+        !!Aw && typeof Aw.researchSnippets === "function";
+      if (!wantLocalWeb) return orig.apply(self, args);
+      return Aw.researchSnippets(args[0], args[2]).then(function (snip) {
+        if (!snip || snip.error) return { error: (snip && snip.error) || "no-results" };
+        return Lw.webAnswer(args[0], snip.sources || []);
+      }).catch(function (err) { return { error: String((err && err.message) || err || "local-failed") }; });
+    }
     if (kind === "vivaJudge" || kind === "extract") {
       var Lc = window.SMD_MAIK_LOCAL;
       var wantLocal = e === "local" && !!Lc && (kind === "vivaJudge" ? !!Lc.vivaJudge : (args[1] === "opd-suggest" && !!Lc.opdSuggest));
@@ -229,7 +245,7 @@
     if (_installed) return false;
     var A = window.SMD_AI;
     if (!A || typeof A.explainGrounded !== "function") return false;
-    ["explain", "explainGrounded", "explainGroundedStream", "refine", "vivaJudge", "extract"].forEach(function (name) {
+    ["explain", "explainGrounded", "explainGroundedStream", "refine", "vivaJudge", "extract", "research"].forEach(function (name) {
       var orig = A[name];
       if (typeof orig !== "function") return;
       A[name] = function () { return route(name, orig, A, arguments); };

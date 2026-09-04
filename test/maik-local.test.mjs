@@ -6,7 +6,9 @@
  *      "aababcabcd..." on screen. reasoning.js replay() calls onDelta(full.slice(0, i)).
  */
 import { readFileSync } from "node:fs";
+import { createRequire } from "node:module";
 
+const require = createRequire(import.meta.url);
 let pass = 0, fail = 0;
 const ok = (n, c) => { if (c) pass++; else { fail++; console.log("  ✗ FAIL:", n); } };
 const src = (f) => readFileSync(new URL("../" + f, import.meta.url), "utf8");
@@ -604,6 +606,49 @@ function loadWithRag({ tokens, kbLoadFails = false } = {}) {
   ok("lists are plain bounded strings and unknown fields never pass through", r.investigations.length === 3 && typeof r.investigations[2] === "string" && !("evil" in r));
   ok("the OPD prompt is the system prompt and the assessment is the user turn", /OPD decision support/.test(o.calls.generate[0].system) && /=== ASSESSMENT ===\nFever 3 days/.test(o.calls.generate[0].prompt));
   ok("empty assessment is refused", (await o.L.opdSuggest("   ")).error === "no-text");
+}
+
+// ── web research on device (owner, 2026-09-04): "we can't charge them for snippet conversion into
+// clean language" for the local/offline engine, so the on-device model writes the answer from
+// TinyFish's raw sources instead of Gemini. Uses the REAL kb/ai/maik-lite-rag.js evidenceGate (not
+// loadWithRag's book-specific "amoxicillin only" stub), because a web answer's evidence is arbitrary
+// search-snippet text, not the book, and the gate must genuinely catch an unsupported drug in it. ──
+function loadForWeb({ tokens }) {
+  const calls = { generate: [] };
+  const Llama = {
+    available: async () => ({ available: true, loaded: true }),
+    load: async () => ({ loaded: true }),
+    generate: async (o) => { calls.generate.push(o); return { text: tokens.join(""), ms: 500 }; },
+    cancel: async () => ({}), release: async () => ({ released: true }),
+    addListener: () => ({ remove: () => {} })
+  };
+  const win = {
+    Capacitor: { isNativePlatform: () => true, Plugins: { Llama } },
+    SMD_MAIK_RAG: require("../kb/ai/maik-lite-rag.js"),
+    SMD_MAIK_MODELS: { PACKS: { "maik-lite": { label: "MAiK Lite", nCtx: 4096, nPredict: 512, noThink: true } },
+      pathFor: async () => "/var/mobile/Data/maik-models/maik-lite.gguf", totalBytes: () => 1.1e9 }
+  };
+  new Function("window", SRC)(win);
+  return { L: win.SMD_MAIK_LOCAL, calls };
+}
+{
+  const sources = [
+    { title: "CDC pneumonia treatment guidance", url: "https://cdc.gov/pna", site: "CDC", snippet: "Amoxicillin 500 mg three times daily for outpatient CAP." },
+    { title: "Up-to-date pneumonia review", url: "https://example.org/pna", site: "Example", snippet: "Doxycycline is an alternative for penicillin-allergic patients." }
+  ];
+  const w = loadForWeb({ tokens: ["For outpatient CAP, amoxicillin 500 mg three times daily is first-line [1]; doxycycline is the alternative for penicillin allergy [2]."] });
+  const r = await w.L.webAnswer("Treatment of community acquired pneumonia", sources, { pack: "maik-lite" });
+  ok("web research ran with the web-research prompt as the system prompt", /knowledgeable clinical AI/.test(w.calls.generate[0].system));
+  ok("the prompt carries the numbered web results, not the book-RAG wrapper", /\[1\] CDC pneumonia treatment guidance/.test(w.calls.generate[0].prompt) && !/Reference material from the StewardMD Knowledge Base/.test(w.calls.generate[0].prompt));
+  ok("a gate-passing answer is returned as-is, engine local, with the source list", r.engine === "local" && r.mode === "web-local" && r.sources.length === 2 && r.sources[0].url === sources[0].url);
+  ok("no book source line is ever appended to a web answer", !/Source: StewardMD Knowledge Base/.test(r.text));
+
+  const bad = loadForWeb({ tokens: ["Use azithromycin 250 mg once daily instead."] });
+  const rb = await bad.L.webAnswer("Treatment of community acquired pneumonia", sources, { pack: "maik-lite" });
+  ok("a drug not in the web results is caught by the SAME evidence gate the book RAG uses", /could not be verified against the web results/.test(rb.text) && /CDC pneumonia treatment guidance/.test(rb.text));
+
+  ok("no question is refused before any generation", (await w.L.webAnswer("", sources)).error === "no-question");
+  ok("no sources is an honest no-results, never a hallucinated web answer", (await w.L.webAnswer("Treatment of CAP", [])).error === "no-results");
 }
 
 console.log(`\nmaik-local: ${pass} passed, ${fail} failed`);

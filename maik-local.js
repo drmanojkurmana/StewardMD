@@ -739,6 +739,13 @@
   function scheduleRelease(ms) {
     clearIdle();
     _idleT = setTimeout(function () { _idleT = null; if (_inflight === 0) release(); }, ms);
+    // unref() only exists on Node's Timeout (this file also runs, unit-tested, under plain node); in
+    // the WebView setTimeout returns a number and this is a no-op. Without it, any Node script that
+    // calls answer()/vivaJudge()/opdSuggest()/webAnswer() - test files included - hangs for up to
+    // IDLE_MS after its last assertion, because a real pending timer keeps the process alive even
+    // though nothing is left to do (found live in CI: the unit-tests job stalled ~3 minutes on
+    // maik-local.test.mjs alone, 2026-09-04). A timer this file starts must never block a caller's exit.
+    try { if (_idleT && typeof _idleT.unref === "function") _idleT.unref(); } catch (e) {}
   }
   function settle() { if (_inflight === 0) scheduleRelease(_sheetOpen === false ? _closeMs : _idleMs); }
   function tracked(fn) {
@@ -807,6 +814,74 @@
     out.treatment = list(parsed.treatment, 10, function (x) { return str(x, 240); });
     out.redFlags = list(parsed.redFlags, 6, function (x) { return str(x, 220); });
     return out;
+  }
+  /* WEB RESEARCH (owner, 2026-09-04): "Research on the web" pays Gemini to turn TinyFish's search
+   * snippets into prose only when MaiK Cloud is the selected engine - "we can't charge them for
+   * snippet conversion into clean language" for the local/offline engine. The search itself
+   * (TinyFish, see functions/_search.js) already costs nothing; maik-engine.js's routing fetches the
+   * raw snippets via SMD_AI.researchSnippets and hands them here, so the on-device model does the
+   * writing for free. Prompt ported verbatim from RESEARCH_SYS_SNIPPETS / MEDICAL_ONLY in
+   * functions/api/ai/[[path]].js so a web-research answer reads the same regardless of which engine
+   * wrote it. */
+  var MEDICAL_ONLY_LOCAL =
+    "\nSCOPE - NON-NEGOTIABLE: answer MEDICAL and CLINICAL questions only. That includes everything a " +
+    "doctor legitimately asks: diseases, drugs and drug classes, doses, mechanisms of action, " +
+    "investigations, procedures, guidelines, physiology, pathology, public health and medical education. " +
+    "If the question is NOT medical, do not answer it. Reply with exactly this line and nothing else: " +
+    "\"I can only help with medical and clinical questions.\"";
+  var WEB_SYS =
+    "You are MaiK, a knowledgeable clinical AI assistant for qualified doctors. Answer the clinician's question directly, thoroughly and naturally - the way a sharp, warm senior colleague would explain it, and the way a modern medical AI answers. " +
+    "Draw on solid, widely-accepted medical knowledge for the substance of the answer; the numbered WEB RESULTS below are recent supporting sources - use them to ground specifics (agents, doses, current guidance) and cite the relevant ones inline as [n] matching the list, but do NOT merely summarise the snippets or limit yourself to what they happen to mention. " +
+    "Lead with the direct answer, then give enough well-organised detail to be genuinely useful at the bedside: flowing prose, with short bullets only for real lists (drugs, doses, steps, differentials) and a brief markdown heading only when it truly helps. Bold key terms sparingly. Give standard adult doses/routes/durations where relevant. " +
+    "Be honest in one line if evidence is weak or sources disagree. Never fabricate a specific figure or a citation. Do not describe your sources or process, and do NOT append any disclaimer." + MEDICAL_ONLY_LOCAL;
+  var WEB_MAX = 900;
+  function generateText(prompt, system, nPredict, opts) {
+    var L = llama();
+    if (!L) return Promise.reject(new Error("on-device inference needs the native app"));
+    var packId = (opts && opts.pack) || currentPack();
+    return ensureLoaded(packId).then(function () {
+      return L.generate({ prompt: prompt, system: system, nPredict: nPredict,
+                          temperature: (opts && typeof opts.temperature === "number") ? opts.temperature : 0.2,
+                          stream: false, prefillEmptyThink: noThinkPack(packId) });
+    }).then(function (r) {
+      if (r && r.error) throw new Error(String(r.error));
+      return stripReasoning((r && r.text) || "");
+    });
+  }
+  /** Turn TinyFish's raw sources into a web-research answer on device. sources:
+   * [{title,url,site,snippet}] (the exact shape SMD_AI.researchSnippets resolves). No sources -> the
+   * honest "no-results" the caller already renders as a retry, never a hallucinated web answer. */
+  function webAnswer(question, sources, opts) {
+    var q = String(question || "").slice(0, 500).trim();
+    if (!q) return Promise.resolve({ error: "no-question" });
+    var list = (Array.isArray(sources) ? sources : []).slice(0, 8).filter(function (s) { return s && (s.title || s.snippet); });
+    if (!list.length) return Promise.resolve({ error: "no-results" });
+    var ctx = list.map(function (s, i) {
+      return "[" + (i + 1) + "] " + String(s.title || "").slice(0, 200) + (s.site ? " (" + s.site + ")" : "") +
+        "\n" + String(s.snippet || "").slice(0, 400) + "\n" + String(s.url || "");
+    }).join("\n\n");
+    var evidenceText = list.map(function (s, i) { return "[" + (i + 1) + "] " + String(s.title || "") + ". " + String(s.snippet || ""); }).join("\n");
+    var prompt = "Question: " + q + "\n\nWeb results:\n" + ctx;
+    return generateText(prompt, WEB_SYS, WEB_MAX, opts).then(function (text) {
+      if (!text) return { error: "no-answer" };
+      var srcOut = list.map(function (s) { return { title: s.title, url: s.url, site: s.site }; });
+      try {
+        var RAG = (typeof window !== "undefined") && window.SMD_MAIK_RAG;
+        if (RAG && RAG.evidenceGate) {
+          var gate = RAG.evidenceGate(text, evidenceText, q);
+          if (!gate.ok) {
+            var top = list[0];
+            var shown = String(top.title || "") + (top.snippet ? "\n" + top.snippet : "") + (top.url ? "\n" + top.url : "");
+            return {
+              text: "The on-device model's answer could not be verified against the web results it found " +
+                "(it stated a figure or drug not in them). Showing the top result instead:\n\n" + shown,
+              sources: srcOut, engine: "local", mode: "web-local"
+            };
+          }
+        }
+      } catch (e) {}
+      return { text: text, sources: srcOut, engine: "local", mode: "web-local" };
+    });
   }
   function generateJSON(prompt, system, nPredict, opts) {
     var L = llama();
@@ -892,7 +967,7 @@
     warm: tracked(warm), isDebugBuild: isDebugBuild, debugProbed: debugProbed, cancel: cancel, release: release,
     sheetOpened: sheetOpened, sheetClosed: sheetClosed, setIdleMs: setIdleMs,
     vivaJudge: tracked(vivaJudge), opdSuggest: tracked(opdSuggest), parseJsonLoose: parseJsonLoose,
-    VIVA_SYS: VIVA_SYS, OPD_SYS: OPD_SYS
+    VIVA_SYS: VIVA_SYS, OPD_SYS: OPD_SYS, webAnswer: tracked(webAnswer), WEB_SYS: WEB_SYS
   };
   if (typeof module !== "undefined" && module.exports) module.exports = API;
   if (typeof window !== "undefined") window.SMD_MAIK_LOCAL = API;
