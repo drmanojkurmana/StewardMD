@@ -5,6 +5,23 @@ tags: [decisions, adr]
 
 Dated architectural calls + why. Newest first. Keep each short: **decision · why · trade-off · status**.
 
+## 2026-09-04 · Scheme Search (renamed from Government Health Schemes) — owner overrode the review gate, flag defaults ON for all devices
+
+**Owner's explicit order** (verbatim intent): stop flagging this module behind a per-device toggle;
+it should be open for everyone, on every device, by default, effective immediately.
+
+**Decision: reverses the 2026-09-02 "admin review pass before default ON" gate below.**
+`smd_govt_schemes` now defaults `true` in `govschemes-flags.js` (was `false`); all 29
+`scheme_versions` rows were bulk-promoted `draft` → `active` in the remote D1
+(`stewardmd-govschemes`) to match. A device can still force it off with `?gs=0` or
+`localStorage smd_govt_schemes=0`, but no further review pass gates default visibility.
+
+**Trade-off, stated plainly:** the per-jurisdiction data quality varies (see
+`vault/modules/Government Health Schemes.md` — some states have codes/names but no verified
+amounts, e.g. Arunachal Pradesh; some have partial coverage, e.g. Meghalaya IPD). This is now
+live to every clinician by default rather than opt-in. **Status: shipped per direct owner
+instruction, superseding the earlier default-off decision.**
+
 ## 2026-09-02 · Government Health Schemes Phase 1 — schema mirrors Medical Updates, not a new pattern
 
 **Ask:** a national database of every state/UT/central government health-assurance scheme (packages,
