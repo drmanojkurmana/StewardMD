@@ -1,8 +1,7 @@
-/* Government Health Schemes — feature flags (mirrors queue-flags.js). Resolution: ?query -> localStorage -> default.
- * DEFAULT OFF on purpose: scheme rates/codes are unverified government reference data until an
- * admin review pass exists (vault/decisions 2026-09-02). Turn on per device with ?gs=1 or
- * localStorage smd_govt_schemes=1. Exposes window.SMD_GOVSCHEMES_FLAGS. No PHI, no network beyond
- * the module's own read-only lookups. */
+/* Scheme Search — feature flags (mirrors queue-flags.js). Resolution: ?query -> localStorage -> default.
+ * DEFAULT ON as of 2026-09-04 (owner approved going live for all devices). Can still be forced off
+ * per device with ?gs=0 or localStorage smd_govt_schemes=0. Exposes window.SMD_GOVSCHEMES_FLAGS.
+ * No PHI, no network beyond the module's own read-only lookups. */
 (function () {
   "use strict";
   var G = (typeof window !== "undefined") ? window : globalThis;
@@ -10,7 +9,7 @@
   var Q = (function () { try { return new URLSearchParams(G.location && G.location.search || ""); } catch (e) { return { get: function () { return null; } }; } })();
 
   var DEFS = {
-    smd_govt_schemes: { type: "bool", def: false, query: "gs", desc: "Government Health Schemes module master flag. DEFAULT OFF on purpose: scheme rates/codes are unverified government reference data until an admin review pass exists (vault/decisions 2026-09-02). Turn on per device with ?gs=1." }
+    smd_govt_schemes: { type: "bool", def: true, query: "gs", desc: "Scheme Search module master flag. DEFAULT ON as of 2026-09-04 (owner approved). Force off per device with ?gs=0." }
   };
 
   function raw(key) {
