@@ -64,13 +64,13 @@ fallback since government-authored XLSX files are not reliably well-formed.
 ## National scheme registry status
 28/28 states, 8/8 UTs, Central: registry (name/type/code) seeded and live in D1.
 
-**Ingested (live data, verified by remote query 2026-09-04):** 18/37 jurisdictions, 44,971
+**Ingested (live data, verified by remote query 2026-09-04):** 19/37 jurisdictions, 46,200
 packages — Tamil Nadu 4,298 · West Bengal 4,388 (5 scheme_versions: Grade A 1,921 · Grade B 1,563
 · Grade C 404 · Grade R 218 · Critical Illness Package 282) · Nagaland 4,008 (2 scheme_versions:
 CMHIS-EP semi-private 2,004 · CMHIS General/PM-JAY 2,004) · Andhra Pradesh 3,713 · Karnataka 3,155
-· Bihar 2,675 · Rajasthan 2,439 · Gujarat 2,315 · Kerala 2,286 · Uttarakhand 1,585 · Assam 1,577 ·
-Telangana 1,867 · Mizoram 2,003 · Uttar Pradesh 2,000 · Delhi 1,991 · Chhattisgarh 1,735 ·
-Central PM-JAY HBP 2022 1,646 · Haryana 1,290. Each row carries its source's `rate_tier` verbatim where the source publishes one
+· Bihar 2,675 · Rajasthan 2,439 · Gujarat 2,315 · Kerala 2,286 · Uttarakhand 1,585 · Punjab 1,229
+· Assam 1,577 · Telangana 1,867 · Mizoram 2,003 · Uttar Pradesh 2,000 · Delhi 1,991 ·
+Chhattisgarh 1,735 · Central PM-JAY HBP 2022 1,646 · Haryana 1,290. Each row carries its source's `rate_tier` verbatim where the source publishes one
 (Tier 2, Tier1(X), Non-NABH, A1, ...) - amounts are only comparable with the tier visible.
 Telangana's source publishes a single price per procedure (no tier split) - `rate_tier` is
 intentionally blank there, not guessed. All `scheme_versions.status = 'draft'` (Phase 1's admin
@@ -120,32 +120,37 @@ match, not silently mis-parsed as ₹1 from the stray "1" in "1 lakh" — an ear
 script did exactly that before the check was added). Spot-checked BM001A (₹7,000) and the doc's
 own recorded first-row sample against the loaded data - exact match.
 
-**Still failed, deliberately NOT loaded (bad data is worse than none):** Punjab and Himachal
-(pdftotext -layout parses cleanly but the rate-column heuristic isn't safe on these - see below),
-Assam's OWN MMLSAY PDF (superseded by the AA-MMJAY HTML table above - MMLSAY not retried), Ladakh
-(its PDF is a code crosswalk with no prices).
+**Punjab solved 2026-09-04 with a NEW header-position-aware parser
+(`scripts/govschemes/ingest_pdf_columnar.py`) — 1,229 packages loaded.** The "Nth numeric token"
+heuristic in `ingest_layout_pdf.py` was correctly identified as unfixable-by-tuning (Punjab's
+Stratification/Implant free text sometimes contains numbers, inconsistently row to row - see the
+git history for the full original writeup). The real fix, built and validated this session: read
+real per-word bounding boxes via `pdfplumber` (not `pdftotext`'s space-approximated columns), and
+assign every data-row word to a column by comparing its X-POSITION against boundaries derived
+from the PDF's OWN header row - the same way a human reading the table would, and the only
+technique immune to a stray number matching by coincidence. Confirmed on real ambiguous rows:
+IN004A's two "look-alike" numbers (Procedure Price and Total Package Price can print the exact
+SAME value, e.g. both "7,000", when a row has no addon) are correctly told apart by which side of
+the page they're on - verified against the source doc's own recorded samples (IN004A=150,000,
+IN004B=75,000, MC005A=90,700, MC007A=98,900, all exact). 1,229/1,668 codes priced (73.7%, in line
+with Central's 87%/UP's 85%); every one of the 439 unpriced rows checked traces to a genuine
+non-flat-rate cell (ward-stay bands like "HDU-3300", age-stratified bands like "Adult-14000") or
+a rare boundary edge case - never a wrong number silently emitted. `treatment_name` is
+best-effort for multi-line-wrapped entries (documented limitation: this PDF's own layout
+genuinely splits one procedure's wrapped text both above AND below its code line, an ambiguity
+inherent to the source, not this parser) - `package_amount` is unaffected, since it's read only
+from the code's own physical line, never a continuation line. See the script's own docstring for
+the full technique (column-boundary derivation, the letter-spacing artifact this PDF applies to
+some wrapped text and how `smart_join` reconstructs real words from it, and what remains a
+documented heuristic vs. what's now geometrically exact).
 
-**Punjab re-tried 2026-09-04 with `pdftotext -layout` (the method that already works for Central/
-UP/Haryana) instead of docling — still not safe to load, for a DIFFERENT reason than "borderless
-tables".** `pdftotext -layout` renders it fine; `ingest_layout_pdf.py`'s CODE_RE (`^[A-Z]{2}[0-9]
-{3}[A-Z]$`) matches Punjab's codes (`BM001A` etc.) cleanly. The blocker is its rate-column
-selection: it picks the Nth NUMERIC token found after the code on that line, but Punjab's
-Stratification/Implant free-text columns sometimes CONTAIN numbers too - a stratification band
-like "100000 - 500000" or an implant note like "ASD Device - 62000" adds 1-2 extra numeric tokens
-that aren't rupee columns, and how many appear varies row to row (some rows: 2 numeric tokens
-total; others: 4). A fixed `--rate-column-index` would silently read the wrong figure on some
-rows and the right one on others - exactly the failure mode this project has repeatedly refused
-to ship. Confirmed by inspecting real rows (IN004A: Procedure Price 30,000 / Total Package Price
-150,000, with a stray 120,000+100,000+500,000 from stratification text in between). Needs a
-column-boundary-aware parser (track each numeric token's x-position against the header's actual
-column positions, not just its ordinal position among numbers) before this is trustworthy -
-not attempted tonight, left as a real next step rather than guessed at.
+**Himachal not yet re-tried with the new columnar parser** - its header layout differs
+structurally from Punjab's (repeating "Total" labels at per-row, not per-page, y-positions on a
+first look) and needs its own investigation before reusing the technique. Real next step, not
+attempted tonight.
 
-Himachal checked the same way, same conclusion: its `pdftotext -layout` output has ONE rate
-column (Tier3(Z)) but an adjacent LOS (length-of-stay, e.g. "3", "19") column right after it, plus
-free-text columns that themselves contain digits ("Extent of burns visible on photograph (with
-rule of 9 chart)" - the "9" is a stray numeric token). Same "Nth numeric token" fragility,
-same call: not loaded.
+**Still not loaded:** Assam's OWN MMLSAY PDF (superseded by the AA-MMJAY HTML table already
+loaded - MMLSAY not retried), Ladakh (its PDF is a code crosswalk with no prices).
 
 A PaddleOCR-based fallback
 (`scripts/govschemes/paddle_tables.py`, plain OCR + geometric row-reconstruction, since
@@ -200,7 +205,11 @@ apart reliably. This is now the THIRD state confirming the same systemic weaknes
 columnar parser** (build column x-boundaries from the actual header row, bucket each data line's
 tokens by which boundary they fall in, rather than counting numeric tokens by ordinal position) -
 worth doing properly in a session with time to re-validate every already-loaded
-`ingest_layout_pdf.py` jurisdiction against it, not attempted tonight.
+`ingest_layout_pdf.py` jurisdiction against it - **built and validated on Punjab the same day**
+(`scripts/govschemes/ingest_pdf_columnar.py`, see above). Odisha itself not yet re-run with it -
+its "Package cost" column and header layout haven't been checked against the new parser's
+assumptions (the `--code-header`/`--rate-header`/`--name-right-header` phrases are Punjab's own
+wording, need Odisha's equivalents located first). Real next step.
 
 **No usable source located yet (need a PDF from the owner):** Madhya Pradesh, Chandigarh, J&K,
 Jharkhand, Puducherry, Goa, Tripura, Maharashtra, Meghalaya (2 of 3 tables are small/client-side;
