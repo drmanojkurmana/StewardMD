@@ -3401,3 +3401,44 @@ hazard already lives. 754 tests across 31 suites, safety case at 12 of 14 with 2
 
 STATUS: IMPLEMENTED and TESTED. Not a security certification, and explicitly not a claim that prompt
 injection is prevented.
+
+## P3: simulation and chaos (2026-09-04)
+
+Every test written before this one asks a module a question it was designed to be asked, which
+catches the bugs somebody thought of. `wardsynq-simulation.js` (14 tests) generates load and disorder
+instead, and asserts INVARIANTS rather than outcomes.
+
+The distinction is the whole design. An expected-output assertion tells you the simulation ran as
+written; an invariant tells you the system did not hurt anybody. The six are: no dose administered
+without a scan, no record on the wrong chart, nothing silently dropped (every event applied or
+quarantined with a reason), no duplicate applied twice, no critical loop closed without
+acknowledgement, no clinical event applied with a future time.
+
+1. **Seeded and deterministic.** A chaos test that cannot be replayed is a bug report saying "it
+   failed once". Every report carries the exact call that reproduces it.
+2. **The faults are Tuesday, not exotica**: the same event from two feeds eleven seconds apart, an
+   arrival 15 minutes out of order, a day of clock skew, a truncated payload, a feed that stops
+   mid-stream, a patient merged mid-episode, and a record carrying one patient's id with another's
+   identifiers.
+3. **The invariants are proven able to FAIL.** One test constructs a world that harmed somebody and
+   asserts all six fire. An invariant that has never failed is decoration, not evidence.
+4. **A naive handler is actually caught.** A second scenario runs a handler that applies everything
+   and trusts the stated patient, and the run fails on cross-patient data. If chaos does not catch
+   the obvious wrong implementation, it would not have caught a subtle one.
+5. **A passing run says what it does not mean.** The report's own text states that it is evidence
+   about one class of failure under one seed, is NOT evidence of safety, does not generalise, and
+   must not be quoted without that sentence. That qualifier is attached to the PASS, which is where
+   it is needed.
+
+**The honest limitation, stated in the module header and asserted by a test.** This is
+single-threaded and interleaves deterministically. That finds ordering assumptions and it does not
+find data races. The spec's 10,000-patient figure is treated as a DATA VOLUME claim, not a
+concurrency claim, and pretending otherwise would have been the dishonest part of the file.
+
+Two test-side defects found and fixed while writing it, both mine rather than the system's: the event
+bus dedupe option is `id`, not `idempotencyKey`, and my test had been silently passing an unknown
+field so the storm test was not testing dedupe at all.
+
+768 tests across 32 suites. Safety case at 12 of 14 with 2 partial.
+
+STATUS: IMPLEMENTED and TESTED.

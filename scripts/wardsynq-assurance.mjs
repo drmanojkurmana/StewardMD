@@ -52,6 +52,7 @@ const SUITES = [
   "test/wardsynq-population.test.mjs",
   "test/wardsynq-secops.test.mjs",
   "test/wardsynq-mlops.test.mjs",
+  "test/wardsynq-simulation.test.mjs",
   "test/wardsynq-safety-case.test.mjs",
 ];
 
