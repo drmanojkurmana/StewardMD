@@ -4538,10 +4538,12 @@ body.dark .maik-fu{background:var(--mk-field)}
 body.dark .maik-conf-high{color:#4dd68c;background:rgba(77,214,140,.12)}
 body.dark .maik-conf-moderate{color:#f0c060;background:rgba(240,192,96,.12)}
 body.dark .maik-conf-lower{color:#f4bcbc;background:rgba(232,90,90,.14)}
-.maik-fb{display:flex;align-items:center;gap:8px;margin-top:12px;padding-top:10px;border-top:1px solid var(--mk-bd)}
+.maik-fb{display:flex;align-items:center;flex-wrap:wrap;gap:8px;margin-top:12px;padding-top:10px;border-top:1px solid var(--mk-bd)}
 .maik-fb-q{font:600 12px/1.3 'Inter';color:var(--mk-mut,#5a7184)}
 .maik-fb-b{font:700 12px/1 'Inter';color:var(--mk-teal,#0e6e63);background:none;border:1px solid var(--mk-bd);border-radius:999px;padding:6px 14px;cursor:pointer}
 .maik-fb-b:hover{background:var(--mk-teal,#0e6e63);color:#fff;border-color:var(--mk-teal,#0e6e63)}
+.maik-fb-reason{flex-basis:100%;width:100%;font:500 13px/1.4 'Inter';color:var(--mk-ink,#14202b);background:var(--mk-card,#fff);border:1px solid var(--mk-bd);border-radius:10px;padding:8px 10px;resize:vertical;box-sizing:border-box}
+.maik-fb-reasonrow{flex-basis:100%;display:flex;gap:8px}
 .maik-verify{margin-top:10px;font:600 11.5px/1.45 'Inter';color:#92400e;background:#fef3c7;border:1px solid #fde68a;border-radius:9px;padding:8px 11px}
 body.dark .maik-verify{color:#fcd34d;background:rgba(146,64,14,.18);border-color:rgba(252,211,77,.25)}
 
@@ -5752,7 +5754,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
               }
             } catch (e) {}
             try { _brainAugment(_h, pkgForKb); } catch (e) {}
-            try { _answerFeedback(_h); } catch (e) {}
+            try { _answerFeedback(_h, { engine: "kb" }); } catch (e) {}
             if (maikPerfOn()) { try { var _kt = (maikNow() - _perfT0).toFixed(0); var _pe = document.createElement("div"); _pe.className = "maik-perf"; _pe.style.cssText = "margin-top:8px;font:600 11px/1.4 var(--sans,system-ui);color:var(--slate-soft,#5a7184);opacity:.9"; _pe.textContent = "⚡ " + (label || "instant") + " · KB · " + _kt + "ms · " + kb.intent; _h.appendChild(_pe); } catch (e) {} }
             _maikDone = true; _clearStages(); clearTimeout(_maikTO); _maikBusy = false; maikSetSendMode(false);
             try { scroll(); } catch (e) {}
@@ -5826,9 +5828,26 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
             } catch (e) {}
           }
           // Answer feedback (👍/👎 without emoji per the icon convention) — one tap sends an anonymous
-          // allow-listed analytics event (maik_feedback_up/down); a "No" also files a gap signal so the
-          // owner sees which questions MaiK answers poorly. No PHI, no answer text leaves the device.
-          function _answerFeedback(host) {
+          // allow-listed analytics event (maik_feedback_up/down) and files it in the admin console's
+          // "MaiK feedback" pane (owner, 2026-09-04: the old up/down counter had nowhere to review WHY
+          // an answer failed). A "No" also files the local gap signal (unchanged) and asks the doctor
+          // why, so the owner can actually read it. No PHI, no answer text leaves the device — only the
+          // question the doctor typed and whatever they choose to type in the reason box.
+          // Records the rating immediately (so the admin aggregate reflects every tap, not just the
+          // ones a doctor stays to explain) and resolves the new entry's id, so a reason typed a
+          // moment later can amend THIS SAME row instead of creating a second one.
+          function _postFeedback(kind, meta) {
+            try {
+              return fetch("/api/maik-feedback", { method: "POST", headers: { "Content-Type": "application/json" }, keepalive: true,
+                body: JSON.stringify({ helpful: kind, question: question, engine: (meta && meta.engine) || "", pack: (meta && meta.pack) || "" }) })
+                .then(function (r) { return r.json(); }).then(function (j) { return j && j.id; }).catch(function () { return null; });
+            } catch (e) { return Promise.resolve(null); }
+          }
+          function _amendFeedbackReason(id, reason) {
+            if (!id) return;
+            try { fetch("/api/maik-feedback", { method: "POST", headers: { "Content-Type": "application/json" }, keepalive: true, body: JSON.stringify({ id: id, reason: reason }) }).catch(function () {}); } catch (e) {}
+          }
+          function _answerFeedback(host, meta) {
             try {
               if (!host || host.querySelector(".maik-fb")) return;
               var w = document.createElement("div"); w.className = "maik-fb";
@@ -5837,10 +5856,36 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
                 var b = document.createElement("button"); b.type = "button"; b.className = "maik-fb-b"; b.textContent = label; b.setAttribute("aria-label", label + " — was this answer helpful?");
                 b.addEventListener("click", function () {
                   try { if (window.SMD_track) SMD_track(kind === "up" ? "maik_feedback_up" : "maik_feedback_down"); } catch (e) {}
-                  if (kind === "down") { try { if (window.MaiKCopilot && MaiKCopilot.gapLog) MaiKCopilot.gapLog("thumbsdown", question); } catch (e) {} }
-                  q.textContent = "Thanks — noted.";
                   try { if (up.parentNode) up.parentNode.removeChild(up); } catch (e) {}
                   try { if (dn.parentNode) dn.parentNode.removeChild(dn); } catch (e) {}
+                  if (kind === "up") { _postFeedback("up", meta); q.textContent = "Thanks — noted."; return; }
+                  try { if (window.MaiKCopilot && MaiKCopilot.gapLog) MaiKCopilot.gapLog("thumbsdown", question); } catch (e) {}
+                  // The down-vote is recorded NOW (so the admin aggregate matches every "No" tap, not
+                  // only the ones a doctor stays to explain); its id lets a reason typed a moment later
+                  // amend this same row instead of a second, separate entry.
+                  var fbIdP = _postFeedback("down", meta);
+                  // "No": ask why and help us improve, per the owner's request — one tap must not be a
+                  // dead end for a clinician who just found a real problem with the answer.
+                  q.textContent = "Sorry it missed. Please tell us why — help us improve.";
+                  var ta = document.createElement("textarea"); ta.className = "maik-fb-reason"; ta.rows = 2; ta.maxLength = 500;
+                  ta.placeholder = "What was wrong or missing? (optional — no patient details, please)";
+                  var row = document.createElement("div"); row.className = "maik-fb-reasonrow";
+                  var sendBtn = document.createElement("button"); sendBtn.type = "button"; sendBtn.className = "maik-fb-b"; sendBtn.textContent = "Send";
+                  var skipBtn = document.createElement("button"); skipBtn.type = "button"; skipBtn.className = "maik-fb-b"; skipBtn.textContent = "Skip";
+                  function done(msg) {
+                    q.textContent = msg;
+                    try { if (ta.parentNode) ta.parentNode.removeChild(ta); } catch (e) {}
+                    try { if (row.parentNode) row.parentNode.removeChild(row); } catch (e) {}
+                  }
+                  sendBtn.addEventListener("click", function () {
+                    var reason = ta.value.trim();
+                    if (reason) { fbIdP.then(function (id) { _amendFeedbackReason(id, reason); }); }
+                    done(reason ? "Thanks for telling us — this helps." : "Thanks — noted.");
+                  });
+                  skipBtn.addEventListener("click", function () { done("Thanks — noted."); });
+                  row.appendChild(sendBtn); row.appendChild(skipBtn);
+                  w.appendChild(ta); w.appendChild(row);
+                  try { ta.focus(); } catch (e) {}
                 });
                 return b;
               }
@@ -5858,7 +5903,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
               var _h = _live();
               maikRenderAnswer(_h, r, pkg, active, cacheKey, topicLabel, question, depth, assume);
               try { _brainAugment(_h, pkg); } catch (e) {}
-              try { _answerFeedback(_h); } catch (e) {}
+              try { _answerFeedback(_h, { engine: (r && r.engine) || "cloud", pack: (r && r.model) || "" }); } catch (e) {}
               try {
                 if (maikPerfOn()) {
                   var total = ((maikNow() - _perfT0) / 1000).toFixed(1);

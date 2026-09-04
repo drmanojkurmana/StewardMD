@@ -118,6 +118,7 @@ import { proFromRequest } from "../../_entitlement.js";
 import { normalizeResearchQuery, researchCacheKey, RESEARCH_PUBTYPE_FILTER, researchTermFor, researchKeywords, sourceOnTopic, researchTopic } from "../../_research.js";
 import { ownerOK } from "../../_adminauth.js";
 import { getClientErrors, clearClientErrors } from "../../_clientlog.js";
+import { getFeedback, getFeedbackAgg, clearFeedback } from "../../_maik_feedback.js";
 import { getRemoteConfig, setRemoteConfig } from "../../_remoteconfig.js";
 import { lookupUidByEmail, getUserRecord, setUserDisabled, mergeUserClaims } from "../../_fbadmin.js";
 import { getAnalytics } from "../../_analytics.js";
@@ -1066,7 +1067,7 @@ export async function onRequest(context) {
 
   // AI Control Center admin console APIs (owner-gated): model switch, quota editor, global rollup,
   // emergency kill switch, runtime budget, audit log. Every mutation is written to the audit log.
-  if (seg === "admin/model" || seg === "admin/ai-usage" || seg === "admin/limits" || seg === "admin/emergency" || seg === "admin/budget" || seg === "admin/audit" || seg === "admin/abuse" || seg === "admin/clientlog" || seg === "admin/config" || seg === "admin/analytics" || seg === "admin/support" || seg === "admin/support-reply" || seg === "admin/maik-config") {
+  if (seg === "admin/model" || seg === "admin/ai-usage" || seg === "admin/limits" || seg === "admin/emergency" || seg === "admin/budget" || seg === "admin/audit" || seg === "admin/abuse" || seg === "admin/clientlog" || seg === "admin/config" || seg === "admin/analytics" || seg === "admin/support" || seg === "admin/support-reply" || seg === "admin/maik-config" || seg === "admin/maik-feedback") {
     const url = new URL(request.url);
     if (!(await aiAdminAuthed(request, env, url))) return json({ error: "forbidden" }, 403);
     const store = usageKv(env);
@@ -1078,6 +1079,14 @@ export async function onRequest(context) {
     if (seg === "admin/clientlog") {
       if (request.method === "POST") { await clearClientErrors(store); await auditRecord(store, "clientlog", "cleared", actorId, Date.now()); }
       return json({ errors: await getClientErrors(store) });
+    }
+
+    // "Was this helpful?" feedback (owner, 2026-09-04): entries include the doctor's own free-text
+    // reason for a "No" - the ONLY admin route that returns it (the public /api/maik-feedback GET is
+    // counts-only, same privacy split as ws-feedback.js).
+    if (seg === "admin/maik-feedback") {
+      if (request.method === "POST") { await clearFeedback(store); await auditRecord(store, "maik-feedback", "cleared", actorId, Date.now()); }
+      return json({ entries: await getFeedback(store), agg: await getFeedbackAgg(store) });
     }
 
     if (seg === "admin/analytics") return json(await getAnalytics(store, 14, Date.now()));

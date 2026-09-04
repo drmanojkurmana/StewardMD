@@ -2315,5 +2315,49 @@ drug/guideline/headline items, never general web content).
 New test/tinyfish-trusted-domains.test.mjs (4 tests, stubs global.fetch) asserts the outbound
 request actually carries `include_domains` with the exact list, so a future edit that silently
 drops the restriction fails a test rather than being noticed the first time a doctor sees a
-non-medical source cited. Not yet verified live (no TinyFish key in this dev environment to hit
-the real API against) - the shape of the request is proven, not TinyFish's own enforcement of it.
+non-medical source cited. Verified live on the owner's iPhone after merge+deploy: a real search for
+DKA management returned 7 sources, all resolving under the trusted list (bestpractice.bmj.com under
+bmj.com, pmc.ncbi.nlm.nih.gov under ncbi.nlm.nih.gov, etc.) - confirms TinyFish genuinely enforces
+`include_domains` (subdomain matching included) rather than ignoring an unrecognized parameter.
+
+## 2026-09-04 — "Was this helpful?" feedback: durable storage, an admin console pane, and a "why?" prompt
+
+Owner asked where the answer feedback button's data went (nowhere durable: an anonymous
+`maik_feedback_up`/`down` counter via `/api/analytics`, plus a "No" also wrote to a DEVICE-LOCAL-ONLY
+gap log in `localStorage` that never reached a server), then asked for an admin console section and
+for a "No" tap to ask why and store the reason.
+
+Modeled on the two existing patterns closest to this shape: `functions/_clientlog.js`'s KV ring
+buffer (get/record/clear, same shape) and `functions/api/ws-feedback.js`'s anonymous-signal stance
+(no identity, an aggregate for public GETs, entries only readable by admin). New:
+- `functions/_maik_feedback.js` - `sanitizeFeedback`/`recordFeedback`/`amendFeedbackReason`/
+  `getFeedback`/`getFeedbackAgg`/`clearFeedback`. Metadata + the doctor's own free text only: helpful
+  (up/down), the question typed (clipped 300), an optional reason (clipped 500), engine/pack, ts, a
+  generated id. No identity, no patient data.
+- `functions/api/maik-feedback.js` - public, unauthenticated (feedback must never be blocked by a
+  sign-in check, matches `/api/clientlog`'s own reasoning). Two request shapes on one POST: a new
+  rating `{helpful, question, engine, pack}` records immediately and returns `{id}`; `{id, reason}`
+  amends that SAME row. GET is counts-only (never the free text), same split as ws-feedback.js.
+- `functions/api/ai/[[path]].js` - `admin/maik-feedback` added to the existing owner-gated
+  (`aiAdminAuthed`) admin segment list; GET returns entries (with reasons) + the aggregate, POST
+  clears and audit-logs, identical pattern to `admin/clientlog`.
+- `admin/index.html` - new "MaiK feedback" pane (👍/👎 counts, % helpful, with-a-reason count, and the
+  scrollable list of Yes/No + question + reason), wired the same way as the Crashes pane (`fbLoad`,
+  nav badge, PANES/TITLES, `refresh()`).
+- `home.js` `_answerFeedback` - "No" now shows "Sorry it missed. Please tell us why - help us
+  improve." with an optional reason textarea (Send/Skip), a note against patient details. The
+  down-vote is recorded THE MOMENT "No" is tapped (so the admin aggregate reflects every tap, not
+  only the ones a doctor stays to explain) and its id is used to amend that SAME entry if a reason is
+  typed - never a duplicate row for one tap. Existing `SMD_track`/`MaiKCopilot.gapLog` calls are
+  untouched (kept for their existing purposes: the allow-listed analytics counter and the local
+  per-device gap report).
+
+14 new tests (`test/maik-feedback.test.mjs`: sanitize/record/amend/aggregate/clear, including that
+amending twice never double-counts `withReason` and an unknown id is a safe no-op;
+`test/maik-feedback-admin-route.test.mjs`: source-level, the route sits inside the same owner gate
+every other admin segment uses and returns the free text only there, never on the public GET).
+
+NOT yet verified: the admin console pane's rendering itself needs the owner's own Google login at
+stewardmd.in/admin to see - this session has no admin credentials. What WAS verified is the parts
+reachable without them: the client and storage logic pass their tests, and (pending a live device
+check after merge+deploy) the network flow from a real "No" tap through to the stored aggregate.
