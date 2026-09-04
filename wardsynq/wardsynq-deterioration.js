@@ -23,9 +23,10 @@
  *   4. THE TOTAL HIDES THE SINGLE PARAMETER. A total of 3 from one parameter at its extreme is a
  *      different patient from a total of 3 spread across three parameters, and a system that shows
  *      only the total misses the first one. Both drive escalation here.
- *   5. NEWS2 IS ADULT AND NON-OBSTETRIC. It is not validated below 16, where PEWS applies and is not
- *      modelled, and not in pregnancy or the puerperium, where MEOWS applies and now is
- *      (wardsynq-obstetrics.js). Both are REFUSED rather than approximated, and the obstetric
+ *   5. NEWS2 IS ADULT AND NON-OBSTETRIC. It is not validated below 16, where PEWS applies
+ *      (wardsynq-pews.js), and not in pregnancy or the puerperium, where MEOWS applies
+ *      (wardsynq-obstetrics.js). Both now exist: a refusal that points at nothing leaves the
+ *      refused population worse off than before, because it removes the crude signal too. Both are REFUSED rather than approximated, and the obstetric
  *      refusal covers the postpartum woman too, because most maternal haemorrhage deaths happen
  *      after delivery and a `pregnant` boolean would drop the guard exactly when risk peaks.
  *   6. A SCORE NOBODY ANSWERS IS THE ACTUAL FAILURE. Escalation is closed-loop and re-escalates on
@@ -35,7 +36,7 @@
  * requires a clinician to be able to click a derived value and see the raw observations behind it. A
  * derived number with no traceable inputs is not evidence.
  *
- * NOT MODELLED: PEWS, spinal-injury and post-ictal states, and any local escalation policy beyond
+ * NOT MODELLED: spinal-injury and post-ictal states, and any local escalation policy beyond
  * the RCP's default tiers. MEOWS lives in wardsynq-obstetrics.js and sepsis screening in
  * wardsynq-emergency.js.
  *
@@ -206,7 +207,7 @@ function news2(input) {
       return refuse(
         banding.band === BAND.UNKNOWN
           ? "NEWS2 is validated in adults and this patient's age is not established, so it cannot be applied"
-          : `NEWS2 is not validated below 16 years; this patient bands as ${banding.band} and needs PEWS, which is not modelled here`,
+          : `NEWS2 is not validated below 16 years; this patient bands as ${banding.band} and needs PEWS (wardsynq-pews.js)`,
         "NOT_ADULT");
     }
     // Pregnancy is not a boolean, and the refusal has to cover the postpartum woman too. Most

@@ -419,7 +419,7 @@ const HAZARDS = Object.freeze([
     },
     residualRisk: "high: the score is computed and the escalation is raised, but nothing yet delivers it",
     approver: "Resuscitation Committee and Director of Nursing",
-    caveat: "PARTIAL, and the reason has changed. wardsynq-transport.js now ships the transport seam: a durable outbox written BEFORE any channel is attempted, a failover ladder that stops at the first CONFIRMED delivery rather than the first non-throw, three working adapters that need no vendor (an in-app ward station queue, browser notifications, an HTTP webhook), and a SweepDriver, which closes the separate defect that every monitor's sweep() was correct and nothing called it on a timer. It also separates SENT from DELIVERED from SEEN, and only a named human acknowledging moves a notice to SEEN, so a notice that reached a device and no person stays OUTSTANDING however many transports reported success. WHAT KEEPS IT PARTIAL: no REAL transport is integrated. There is no pager, no SMS gateway and no phone system in this build, because those need a vendor, credentials and a contract. Every shipped adapter reaches only somebody already looking at a screen. A site must wire a real channel and PROVE it with verify(), and until a channel has carried a test message it is reported as UNVERIFIED rather than as available, because an integration that broke three weeks ago looks exactly like one that works. The NEWS2 parameter bands are the RCP's published 2017 chart rather than seed content, but the ESCALATION POLICY attached to them (response windows and responder tiers) is UNAPPROVED and belongs to the resuscitation committee. NOT modelled: PEWS, so children are refused rather than scored. MEOWS is now modelled (wardsynq-obstetrics.js) and the obstetric refusal points at it; qSOFA and the sepsis bundle are modelled in wardsynq-emergency.js and are argued under HAZ-TIME-01, not here. Not clinically validated and not clinically approved.",
+    caveat: "PARTIAL, and the reason has changed. wardsynq-transport.js now ships the transport seam: a durable outbox written BEFORE any channel is attempted, a failover ladder that stops at the first CONFIRMED delivery rather than the first non-throw, three working adapters that need no vendor (an in-app ward station queue, browser notifications, an HTTP webhook), and a SweepDriver, which closes the separate defect that every monitor's sweep() was correct and nothing called it on a timer. It also separates SENT from DELIVERED from SEEN, and only a named human acknowledging moves a notice to SEEN, so a notice that reached a device and no person stays OUTSTANDING however many transports reported success. WHAT KEEPS IT PARTIAL: no REAL transport is integrated. There is no pager, no SMS gateway and no phone system in this build, because those need a vendor, credentials and a contract. Every shipped adapter reaches only somebody already looking at a screen. A site must wire a real channel and PROVE it with verify(), and until a channel has carried a test message it is reported as UNVERIFIED rather than as available, because an integration that broke three weeks ago looks exactly like one that works. The NEWS2 parameter bands are the RCP's published 2017 chart rather than seed content, but the ESCALATION POLICY attached to them (response windows and responder tiers) is UNAPPROVED and belongs to the resuscitation committee. PEWS is now modelled (wardsynq-pews.js) and the paediatric refusal points at it rather than at nothing. MEOWS is now modelled (wardsynq-obstetrics.js) and the obstetric refusal points at it; qSOFA and the sepsis bundle are modelled in wardsynq-emergency.js and are argued under HAZ-TIME-01, not here. Not clinically validated and not clinically approved.",
   },
   {
     id: "HAZ-TIME-01",
@@ -552,6 +552,38 @@ const HAZARDS = Object.freeze([
     residualRisk: "reduced: the total is now honest about itself. Unchanged: nothing stops anyone prescribing from it, and nobody is told when a correction invalidates what they already read",
     approver: "Clinical Director of Intensive Care and Lead ICU Pharmacist",
     caveat: "PARTIAL, for one specific reason. When a charted value is corrected, the correction tells the person MAKING it that every cumulative total after that hour is now wrong and that somebody may have acted on it. It tells nobody who actually did. recomputeAfterCorrection() now closes half of this: it reports exactly which cumulative totals changed, by how much, and flags the case that is not merely arithmetic, where a balance crosses a line somebody prescribes against, so a patient who read negative and now reads positive is stated as that rather than as '360 mL smaller'. What remains open is the half that matters most: a consultant who prescribed diuresis at 06:00 off a balance containing a urine output of 400 mL that was really 40 mL is still not notified when it is fixed at 08:00, because NOTHING IN THIS BUILD RECORDS THAT A TOTAL WAS READ. Closing it needs a view log, which does not exist, and the function says so in its own output rather than letting its absence imply otherwise. Also unbuilt: nothing gates prescribing on an incomplete balance, deliberately, because a system that blocked a consultant from reading a partial total would be worked around by adding it up on paper, but that means the honesty is advisory. NOT modelled: ventilator waveforms, the pump and ventilator protocols themselves, nutrition and calorie balance, drains and stomas, pressure-area and turning charts, and any local flowsheet layout. No rendering: this is the arithmetic and the honesty about it. Not clinically validated and not clinically approved.",
+  },
+  {
+    id: "HAZ-PAED-01",
+    source: "LOCAL: not transcribed from the spec's assurance table. Added because NEWS2 refuses every patient under 16 and, until wardsynq-pews.js, offered them nothing, which leaves the refused population LESS protected than before rather than more.",
+    hazard: "Unrecognised deterioration in a child",
+    initialRisk: "catastrophic x occasional",
+    requirement: "A child must be assessed on age-banded paediatric criteria, never on adult ones, and a band that cannot be established must be refused rather than approximated.",
+    control: {
+      kind: "age-banded paediatric early warning score", adequacy: "full",
+      module: "wardsynq/wardsynq-pews.js",
+      summary: "Every parameter is banded by age, because a child's normal is a curve rather than a number: a pulse of 150 is unremarkable at four months and peri-arrest at fourteen. Neonates are REFUSED, since a neonatal chart is a different instrument and that population is where a wrong score does most harm. A falling respiratory rate scores harder than a rising one, because a tiring child's rate falls as they decompensate and rate alone inverts at exactly the wrong moment; a normal rate with severe effort scores severe. A low blood pressure is scored up as the late sign it is. Parental concern is a scored parameter that can escalate a child whose numbers are all normal. A missing parameter makes the score INCOMPLETE, and every refusal states that it is not a reassurance.",
+    },
+    verification: {
+      file: "test/wardsynq-pews.test.mjs",
+      tests: [
+        "ADVERSARIAL: the SAME heart rate is normal in an infant and peri-arrest in an adolescent",
+        "ADVERSARIAL: PEWS refuses NEONATES rather than approximating them",
+        "ADVERSARIAL: an unestablished age band is refused, because a child's normal is a curve",
+        "ADVERSARIAL: every refusal says it is not a reassurance",
+        "ADVERSARIAL: the NEWS2 refusal now points at something that EXISTS",
+        "ADVERSARIAL: a FALLING respiratory rate in a tiring child scores harder than a rising one",
+        "ADVERSARIAL: a NORMAL rate with severe effort is still scored severe",
+        "ADVERSARIAL: a worried parent escalates a child whose numbers are all normal",
+        "ADVERSARIAL: a missing parameter makes the score INCOMPLETE, not reassuring",
+        "ADVERSARIAL: a stale observation does not reach the paediatric chart either",
+        "an adult is sent to NEWS2, and the two charts do not both claim the same patient",
+        "a well child in every band scores zero and is low risk",
+      ],
+    },
+    residualRisk: "reduced for detection; the escalation that follows inherits HAZ-DET-01's transport limits",
+    approver: "Clinical Director of Paediatrics and Lead Paediatric Nurse",
+    caveat: "IMPLEMENTED and TESTED, not clinically validated or approved. THE BANDS ARE UNAPPROVED and this matters more here than for adults: a child's normal range is narrow, so a wrong band means a false alarm on every well child or silence on a sick one, and paediatric charts differ between every unit that uses one. The paediatric lead owns these values. NOT modelled: neonatal early warning of any kind, which is refused rather than attempted; PICU-specific scoring; gestational-age correction; growth centiles. Escalation delivery is the transport described under HAZ-DET-01 and carries the same limitation: no real pager, SMS or phone system is integrated in this build.",
   },
 ]);
 
