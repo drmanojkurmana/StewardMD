@@ -3332,3 +3332,72 @@ P2 is now complete: quality, incidents, consent, research, lineage, api-gov, bil
 
 STATUS: IMPLEMENTED and TESTED. NOT clinically validated, NOT approved, NOT certified for any payer
 or regulatory regime.
+
+## P3: AI security and MLOps, and a real hole in a VERIFIED hazard (2026-09-04)
+
+### The defect, first, because it matters most
+
+Building `wardsynq-secops.js` required a test that assumed prompt injection SUCCEEDS and checked that
+the model still could not commit an order. The test failed, and not for the reason expected.
+
+`can()` read `actor.tier` directly. The AI ceiling was applied in `makeActor()`, so any actor object
+that reached the authorisation check without passing through the factory held whatever tier it
+claimed. `{kind: "ai", tier: "execute"}` was EXECUTE. That is not an exotic path: an actor gets
+hand-built in a harness, deserialised from storage, or rebuilt across a process boundary as a matter
+of course. **A ceiling enforced only at construction assumes every path went through the door.**
+
+This sat inside HAZ-AI-01, a row already marked VERIFIED, whose entire argument is that an AI cannot
+commit. The ceiling is now re-applied inside `can()` itself, `effectiveTier()` is exported so a UI
+shows the truth rather than the claim, and five regression tests hold it, including a deserialised
+actor and every non-human kind.
+
+The row stays VERIFIED, and the caveat now records the defect. Finding a hole in a verified control
+is the safety case working; hiding it afterwards would be the failure.
+
+### wardsynq-secops.js
+
+An LLM reading a chart cannot distinguish "the patient reports chest pain" from the same sentence
+followed by an injected instruction, because both are text in the same field and the model was
+trained to be helpful about both. So the defence cannot be the model's judgement: asking a model to
+notice it is being manipulated is asking the compromised component to detect its own compromise.
+
+- retrieved content is fenced with a PER-REQUEST nonce and labelled untrusted, so a note written last
+  week cannot close this request's fence
+- an unsigned document does not enter the context, because the attack is not a clever prompt, it is
+  somebody writing a note into a chart and waiting for the summariser to read it
+- a document that TRIPS the injection tripwire is still included, deliberately. Dropping it would
+  make the tripwire the defence, and an attacker who reads the list simply would not trip it. The
+  signals are evidence, not a filter, and the module says so.
+- outputs naming another patient are withheld WHOLE, never redacted: a partially redacted leak is
+  still a leak and looks safe
+- the "signing" is a content DIGEST, named `digest` throughout and documented as not cryptographic,
+  so nobody imports it believing otherwise
+
+The module explicitly does not claim to prevent prompt injection. The design assumption is that
+injection succeeds and the blast radius is bounded by the actor ceiling, which the model does not
+control. That is why the ceiling defect above was the important find.
+
+### wardsynq-mlops.js
+
+Clinical AI does not fail loudly, it degrades, while the dashboard still shows the accuracy from the
+validation set that has not changed.
+
+- retrospective performance is accepted and immediately labelled as insufficient: it shows a model
+  can fit the data it was built from
+- shadow means the output reaches NOBODY. A visible shadow prediction is refused, because its
+  evaluation would measure the behaviour it caused rather than the model.
+- drift is checked on INPUTS, because outcome labels arrive weeks late and the input distribution
+  shifts the same day
+- a subgroup gap blocks deployment however good the aggregate: a 92 percent model with a 61 percent
+  minority subgroup is not a 92 percent model, it is one that fails the people already worst served
+- unlabelled predictions are not evidence, and are disproportionately the recent, sicker cases
+- a breach WITHDRAWS the model automatically rather than raising a ticket, because a ticket leaves it
+  running until somebody triages it and the meeting is next week
+- a withdrawn model goes back through shadow, never straight to deployment, because the evidence that
+  supported it was gathered on a population since shown to have changed
+
+Neither module gets its own hazard row; both are evidence under HAZ-AI-01, which is where the AI
+hazard already lives. 754 tests across 31 suites, safety case at 12 of 14 with 2 partial.
+
+STATUS: IMPLEMENTED and TESTED. Not a security certification, and explicitly not a claim that prompt
+injection is prevented.

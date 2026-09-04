@@ -11,7 +11,7 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 
 import {
-  TIER, KIND, GovernanceError, GovernedStore, makeActor, can, authoriseWrite,
+  TIER, KIND, GovernanceError, GovernedStore, makeActor, can, effectiveTier, authoriseWrite,
 } from "../wardsynq/wardsynq-actors.js";
 import { ClinicalStore, MemoryBackend } from "../wardsynq/wardsynq-store.js";
 import { ClinicalEventBus } from "../wardsynq/wardsynq-events.js";
@@ -273,4 +273,47 @@ test("asStoreFor: the handle is frozen and cannot be re-pointed at another actor
   const g = new GovernedStore({ store: { open: () => {}, put: async (e) => e } });
   const handle = g.asStoreFor(maik);
   assert.throws(() => { handle.put = async () => "bypassed"; });
+});
+
+/* ------------------------------------------------------------------ ADVERSARIAL: the ceiling at the check
+ *
+ * Found while building wardsynq-secops.js. The ceiling was applied in makeActor() and can() then
+ * trusted actor.tier, so an actor that never passed through the factory held whatever it claimed.
+ * That is not an exotic path: an actor object gets hand-built in a test harness, deserialised from
+ * storage, rebuilt across a process boundary, or supplied by a caller that constructed the shape
+ * itself. A ceiling enforced only at construction assumes every path went through the door.
+ */
+
+test("ADVERSARIAL: a hand-built AI actor claiming EXECUTE does not hold it", () => {
+  const forged = { id: "ai-1", kind: KIND.AI, tier: TIER.EXECUTE };
+  assert.equal(can(forged, TIER.EXECUTE), false, "the ceiling is re-applied at the check, not only at construction");
+  assert.equal(can(forged, TIER.DRAFT), true, "and it still holds everything up to its ceiling");
+  assert.equal(effectiveTier(forged), TIER.DRAFT);
+});
+
+test("ADVERSARIAL: a forged actor cannot commit an active record", () => {
+  const forged = { id: "ai-1", kind: KIND.AI, tier: TIER.EXECUTE };
+  const order = { resourceType: "MedicationOrder", patientId: "pat-1", status: "active" };
+  const v = authoriseWrite(forged, order, {});
+  assert.equal(v.allowed, false);
+  assert.ok(v.reasons.some((r) => r.code === "EXECUTE_DENIED"));
+});
+
+test("a deserialised actor behaves exactly like a constructed one", () => {
+  const real = makeActor({ id: "ai-2", kind: KIND.AI, tier: TIER.EXECUTE });
+  const roundTripped = JSON.parse(JSON.stringify(real));
+  assert.equal(can(real, TIER.EXECUTE), can(roundTripped, TIER.EXECUTE));
+  assert.equal(effectiveTier(roundTripped), TIER.DRAFT);
+});
+
+test("every non-human kind is capped at the check, not just AI", () => {
+  for (const kind of [KIND.AI, KIND.DEVICE, KIND.ADAPTER, KIND.SERVICE]) {
+    assert.equal(can({ id: "x", kind, tier: TIER.EXECUTE }, TIER.EXECUTE), false, `${kind} must not reach EXECUTE`);
+  }
+  assert.equal(can({ id: "dr", kind: KIND.HUMAN, tier: TIER.EXECUTE }, TIER.EXECUTE), true);
+});
+
+test("ADVERSARIAL: an unrecognised kind gets nothing, even claiming EXECUTE", () => {
+  assert.equal(can({ id: "x", kind: "superuser", tier: TIER.EXECUTE }, TIER.READ), false);
+  assert.equal(effectiveTier({ id: "x", kind: "superuser", tier: TIER.EXECUTE }), null);
 });

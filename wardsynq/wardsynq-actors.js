@@ -101,7 +101,24 @@ function makeActor(spec) {
 /** True when the actor holds at least `need`. */
 function can(actor, need) {
   if (!actor || !LADDER.includes(actor.tier)) return false;
-  return rank(actor.tier) >= rank(need);
+  // The ceiling is re-applied HERE, not only in makeActor. Clamping at construction is not enough:
+  // an actor object can reach this function without ever passing through the factory, by being
+  // hand-built, deserialised from storage, rebuilt across a process boundary, or supplied by a
+  // caller that constructed the shape itself. All of those are ordinary, and any of them claiming
+  // `{kind: "ai", tier: "execute"}` would otherwise hold EXECUTE. A ceiling enforced only at
+  // construction is a ceiling that assumes every path went through the door.
+  const ceiling = CEILING[actor.kind];
+  if (!ceiling) return false;   // an unrecognised kind gets nothing, as makeActor also says
+  const effective = rank(actor.tier) > rank(ceiling) ? ceiling : actor.tier;
+  return rank(effective) >= rank(need);
+}
+
+/** The tier an actor actually holds, after its kind's ceiling. Exported so a UI shows the truth. */
+function effectiveTier(actor) {
+  if (!actor || !LADDER.includes(actor.tier)) return null;
+  const ceiling = CEILING[actor.kind];
+  if (!ceiling) return null;
+  return rank(actor.tier) > rank(ceiling) ? ceiling : actor.tier;
 }
 
 /**
@@ -281,5 +298,5 @@ class GovernedStore {
 export {
   TIER, LADDER, KIND, CEILING, DEVICE_WRITABLE,
   GovernanceError, GovernedStore,
-  makeActor, can, authoriseWrite, rank,
+  makeActor, can, effectiveTier, authoriseWrite, rank,
 };
