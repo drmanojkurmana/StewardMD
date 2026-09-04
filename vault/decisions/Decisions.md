@@ -3587,3 +3587,71 @@ Safety case now 12 of 15 verified, 3 partial. The row was added because the omis
 lowered the fraction, as the other two local rows did.
 
 829 tests across 35 suites. STATUS: IMPLEMENTED and TESTED. NOT clinically validated or approved.
+
+## The WardSynQ mark, and three palette defects it found (2026-09-04)
+
+The owner supplied the logo. Wiring it in was meant to be chrome work and turned into a palette audit,
+because measuring the brand against the existing tokens required measuring the existing tokens.
+
+### The asset
+
+Sampled brand navy is **#1c3048**. The supplied master was 669x373 with the artwork occupying
+522x122, so 94 percent of what every viewer would download was transparent padding, and background
+removal had left a fringe of near-navies (1c3048, 1b2f47, 1c3049, 1d3149 all appear in it).
+
+Assets are trimmed, then repainted to one exact navy with alpha as the shape. That removes the
+fringe, makes the mark crisp at small sizes, lets the files compress as flat shapes rather than as
+photographs (57 to 62 percent smaller), and, most usefully, makes them RECOLOURABLE, which is what
+lets dark mode use the same file rather than a second one that can drift.
+
+`wardsynq-lockup.png`, `wardsynq-mark.png`, icons at 512/192/180/32, and a webmanifest. 108 KB total.
+An SVG master should still come from whoever drew it: these are raster derivatives of a raster file,
+and no attempt was made to trace the artwork, because a redrawn logo that is subtly wrong is worse
+than a PNG.
+
+### Three defects, all found by measuring rather than by looking
+
+1. **`--ink-3` was below AA in BOTH palettes.** 3.98:1 on white, 3.90:1 on the dark raised surface.
+   The metadata grey is still text somebody has to read. Darkened to #5f6965 and #828d89, hue kept.
+2. **`--brand` had no dark-mode value at all.** The dark block redefines every other token, so the
+   light navy would have inherited into it and sat on #1a211f at under 1.5:1. That is a mark nobody
+   can SEE rather than a mark that looks wrong, so nobody would have reported it. Dark mode now gets
+   a lifted navy, and the asset's flat-colour-plus-mask construction is what makes recolouring it
+   possible.
+3. **The dark stop and major signals were 32 degrees of hue and 1.21:1 of lightness apart**, which is
+   closer than the light pair. Nudged the dark amber to #dcb45a: 35 degrees and 1.41:1, still 8.37:1
+   on the darkest surface. The threshold was NOT loosened to make the test pass.
+
+### Two brand rules, derived from measurement and enforced by a test
+
+- **`--brand` is not a text colour on a light surface.** Against `--ink` it is 1.37:1, so navy words
+  beside near-black words do not read as a deliberate accent, they read as two inks that do not
+  match. The mark carries the brand; the words carry `--ink`.
+- **Nothing signalled ever sits on a `--brand` fill.** Every signal lands between 1.63:1 and 2.15:1
+  against navy, so a smart-looking navy header bar with a status chip in it would fail all four at
+  once, and would fail them while looking considered.
+
+### test/wardsynq-brand.test.mjs
+
+The palette is now parsed out of the real stylesheet and the ratios are COMPUTED, per palette. This
+project has already shipped two contrast defects, a drug name at 1.2:1 and a disabled button at
+1.85:1, and both were found by staring at a screenshot. A comment in CSS claiming a colour is AAA is
+a claim; this is a measurement that fails when somebody nudges a hex.
+
+Two of its own tests were wrong first and both are recorded in the file rather than quietly fixed:
+the parser took the last definition of each token and was therefore measuring the dark palette while
+believing it was measuring the light one (which is how defect 2 surfaced, underneath the nonsense),
+and the distinguishability test compared signals by contrast ratio, which is the wrong measure for
+telling two colours apart. It now requires hue OR lightness separation, because red and amber are
+adjacent hues in every clinical palette ever drawn and are told apart by lightness, while slate and
+green are the mirror case.
+
+### Placement
+
+The mark is chrome. It sits above the clinical content and never inside it, it is `aria-hidden`
+because a screen reader announcing "WardSynQ logo" before every ward round is noise, it is the first
+thing hidden on a short viewport, and on the bedside header it disappears entirely when identity is
+unconfirmed, because that warning needs the width. It is kept for print, where a chart that does not
+say which system produced it is a page somebody has to identify by hand.
+
+843 tests across 36 suites. Safety case unchanged at 12 of 15.

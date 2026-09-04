@@ -43,7 +43,7 @@
   --recess: #e4e8e7;
   --ink: #0f1613;
   --ink-2: #4a5551;
-  --ink-3: #77827e;
+  --ink-3: #5f6965; /* was #77827e, measured 3.98:1 on white and therefore below AA. Metadata is still text somebody has to read. Now 5.68 on raised and 4.60 on the darkest surface. */
   --hair: #dbe0de;
 
   /* Signal. Instrument colours, desaturated on purpose. These appear in the signal column, on an
@@ -64,6 +64,24 @@
    * has to invert too: white on the dark-scheme amber measures about 1.9:1, on the one button in
    * the product whose label a clinician most needs to read before pressing it. */
   --on-signal: #ffffff;
+
+  /* --- brand -------------------------------------------------------------------------------
+   * The WardSynQ navy, sampled from the supplied mark (#1c3048 after normalising the fringe the
+   * background removal left behind). It is measured AAA on every surface in this file: 13.41:1 on
+   * raised, 12.79 on surface, 11.80 on ground, 10.85 on recess, and white on it is 13.41.
+   *
+   * TWO RULES, both from measurement rather than taste, and both enforced by
+   * test/wardsynq-brand.test.mjs so they cannot quietly rot:
+   *
+   *   1. --brand IS NOT A TEXT COLOUR on a light surface. Against --ink it measures 1.37:1, so
+   *      navy body text beside near-black body text does not read as a deliberate accent, it reads
+   *      as two blacks that do not match. The mark is navy; the words are --ink.
+   *   2. NOTHING SIGNALLED IS EVER PUT ON A --brand FILL. Every signal colour lands between 1.63:1
+   *      and 2.15:1 against it, so a navy header bar with a status chip in it would fail all four
+   *      at once, and would fail them while looking smart. Brand fills carry --on-signal white and
+   *      nothing else. */
+  --brand: #1c3048;
+  --brand-on: #ffffff;
 
   --sans: "Source Sans 3", "Segoe UI", Roboto, system-ui, sans-serif;
   --mono: "Source Code Pro", ui-monospace, Menlo, Consolas, monospace;
@@ -94,10 +112,10 @@
     --recess: #0a0e0d;
     --ink: #e8edeb;
     --ink-2: #a3aeaa;
-    --ink-3: #737e7a;
+    --ink-3: #828d89; /* was #737e7a at 3.90:1 on raised, the same sub-AA defect as the light palette */
     --hair: #252d2b;
     --sig-stop: #e08277;
-    --sig-major: #d5a44e;
+    --sig-major: #dcb45a; /* was #d5a44e, only 32 deg of hue and 1.21:1 of lightness from the dark stop red. Nudged toward yellow: 35 deg and 1.41:1, still 8.37:1 on the darkest surface. */
     --sig-watch: #8fa3b5;
     --sig-clear: #6fbb94;
     --sig-stop-wash: #2b1512;
@@ -105,6 +123,15 @@
     --focus: #6fb6d1;
     --focus-wash: #10303b;
     --on-signal: #14100a;
+
+    /* The brand navy is a LIGHT-MODE colour. On the dark raised surface it measures well under
+     * 1.5:1 and the mark would all but disappear, which is why the light block's value is not
+     * simply inherited here. Dark mode gets a lifted navy that keeps the hue and clears AAA.
+     *
+     * The logo asset is a single flat colour with alpha as its mask precisely so it can be
+     * recoloured to this rather than shipped as two files that can drift apart. */
+    --brand: #9db8d8;
+    --brand-on: #101922;
   }
 }
 
@@ -458,3 +485,45 @@ textarea { width: 100%; min-height: 74px; resize: vertical; line-height: 1.5; }
 
 .foot { padding: var(--sp-5) var(--sp-6) var(--sp-6); color: var(--ink-3); font-size: var(--t-micro); }
 .vh { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+
+/* ================================================================ brand
+
+   The mark is chrome. It sits above the clinical content, never inside it, and it is the only
+   place --brand appears: the two rules in the token block say why. It is also the first thing to
+   go when the viewport is short, because a logo has never helped anybody read a potassium. */
+
+.brandbar {
+  display: flex;
+  align-items: center;
+  padding: var(--sp-3) var(--sp-5) 0;
+}
+
+.brand-mark {
+  height: 22px;
+  width: auto;
+  /* The asset is a flat shape with alpha as its mask, so the palette recolours it rather than the
+     build shipping a second file that can drift from the first. */
+  filter: none;
+}
+
+/* The dark palette lifts the navy, and the mark follows it. */
+@media (prefers-color-scheme: dark) {
+  .brand-mark {
+    /* Inverting a dark mark on a dark ground is the wrong instinct: it produces white, not the
+       brand. The asset is repainted to --brand instead, via a mask, so the hue survives. */
+    background: var(--brand);
+    -webkit-mask: url("brand/wardsynq-lockup.png") no-repeat center / contain;
+    mask: url("brand/wardsynq-lockup.png") no-repeat center / contain;
+  }
+}
+
+/* Short viewports lose the mark before they lose anything clinical. */
+@media (max-height: 700px) {
+  .brandbar { display: none; }
+}
+
+@media print {
+  /* On paper the mark IS wanted: a printed chart that does not say which system produced it is a
+     page somebody has to identify by hand. */
+  .brandbar { display: flex; }
+}

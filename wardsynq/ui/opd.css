@@ -284,3 +284,17 @@ body.opd {
 @media (prefers-reduced-motion: reduce) {
   * { transition: none !important; animation: none !important; }
 }
+
+/* The mark on a phone is the monogram alone, and it is the smallest thing in the header. The
+   patient's name is the largest. That ordering is the whole point of the header. */
+.opd-header .brand-mark {
+  height: 17px;
+  width: auto;
+  flex: none;
+  margin-left: var(--sp-2);
+  opacity: 0.75;
+}
+
+/* When identity is unconfirmed the warning needs the full width, so the mark yields entirely.
+   Branding is the first thing to go when something clinical needs the room. */
+.opd-header[data-identity="unconfirmed"] .brand-mark { display: none; }

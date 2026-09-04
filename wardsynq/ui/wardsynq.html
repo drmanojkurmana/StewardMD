@@ -6,12 +6,26 @@
 <title>WardSynQ</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="wardsynq.css?v=5">
+<link rel="stylesheet" href="wardsynq.css?v=6">
+<link rel="icon" type="image/png" sizes="32x32" href="brand/icon-32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="brand/icon-180.png">
+<link rel="manifest" href="brand/wardsynq.webmanifest">
+<meta name="theme-color" content="#1c3048">
 </head>
 <body>
 
 <!-- The rule pack states its own approval status, permanently. The interface must never look more
      finished than the clinical content underneath it. -->
+<!-- The mark sits above the clinical content and never inside it. It is decoration in the strict
+     sense: nothing on this screen means anything different because of it, and it must never sit
+     between a clinician and a number. Hidden from assistive technology because the page title
+     already says what this is, and a screen reader announcing "WardSynQ logo" before every ward
+     round is noise. -->
+<div class="brandbar">
+  <img class="brand-mark" src="brand/wardsynq-lockup.png" alt="" aria-hidden="true"
+       width="261" height="61" decoding="async">
+</div>
+
 <div class="pack" id="pack" role="status">Loading clinical rules.</div>
 
 <!-- Patient identity. Quiet and generously set: the name is the largest thing on screen, the facts
