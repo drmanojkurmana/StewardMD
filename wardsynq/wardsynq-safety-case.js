@@ -405,6 +405,46 @@ const HAZARDS = Object.freeze([
     approver: "Resuscitation Committee and Director of Nursing",
     caveat: "PARTIAL, deliberately. The scoring, the refusals and the escalation state machine are IMPLEMENTED and TESTED, but NO NOTIFICATION TRANSPORT IS SHIPPED: every channel is a function a site supplies, and this build supplies none, so delivery is only as real as an integration that does not yet exist and this control cannot yet rescue anybody. What it will no longer do is pretend: a monitor with no channel REFUSES to raise rather than raising into a void, and a channel that throws, returns nothing or reports failure is recorded as an undelivered attempt. The sweep is also caller-driven, so nothing re-escalates unless something calls it on a timer. The NEWS2 parameter bands are the RCP's published 2017 chart rather than seed content, but the ESCALATION POLICY attached to them (response windows and responder tiers) is UNAPPROVED and belongs to the resuscitation committee. NOT modelled: PEWS, MEOWS, qSOFA and the sepsis bundle. Not clinically validated and not clinically approved.",
   },
+  {
+    id: "HAZ-TIME-01",
+    source: "LOCAL: not transcribed from the spec's assurance table. The spec names wardsynq-emergency.js in its P1 file list but writes no hazard row for it. Declared here so the gap is visible rather than absent.",
+    hazard: "Delayed time-critical treatment, and falsified bundle timing",
+    initialRisk: "catastrophic x probable",
+    requirement: "For a time-critical bundle the origin must be immutable, an element must count only when it was actually done rather than ordered, and a passed target must remain passed.",
+    control: {
+      kind: "immutable-origin bundle clock",
+      // PARTIAL. The timing control is whole and adversarially tested. What is missing is the
+      // trigger: nothing yet turns a positive screen or a NEWS2 escalation into a started bundle,
+      // so a bundle exists only where a human already knew to open one -- which is exactly the
+      // population that was least likely to be missed.
+      adequacy: "partial",
+      module: "wardsynq/wardsynq-emergency.js",
+      summary: "Time zero is set once and is non-writable and non-configurable; it cannot be in the future and cannot precede the evidence that triggered it. A wrong origin is corrected only by voiding with a mandatory reason, leaving both bundles on the record. An element completes on its own named event, so an order is refused where an administration is required. Breach outranks completion, and status is recomputed from the immutable origin rather than stored. qSOFA reports NOT-POSITIVE rather than negative and states in words that it does not exclude sepsis; an incomplete screen that has not already reached two criteria cannot be reported as not-positive at all. The arrest clock gives intervals and deliberately carries no dose.",
+    },
+    verification: {
+      file: "test/wardsynq-emergency.test.mjs",
+      tests: [
+        "ADVERSARIAL: time zero cannot be reassigned, by anyone, ever",
+        "ADVERSARIAL: time zero cannot be in the future",
+        "ADVERSARIAL: time zero cannot precede the evidence that triggered it",
+        "ADVERSARIAL: an element cannot be recorded as happening before time zero",
+        "ADVERSARIAL: ordering an antibiotic is not administering it",
+        "ADVERSARIAL: there is no path that turns a breached bundle back into a compliant one",
+        "ADVERSARIAL: a qSOFA that is not met NEVER excludes sepsis",
+        "ADVERSARIAL: an incomplete screen cannot be reported as not-positive",
+        "ADVERSARIAL: qSOFA is refused for a child rather than approximated",
+        "ADVERSARIAL: a screen cannot open a bundle by itself",
+        "ADVERSARIAL: a monitor with no channel refuses to open a bundle",
+        "ADVERSARIAL: an undelivered breach notice says so on the bundle's own record",
+        "a wrong time zero is corrected by VOIDING and reopening, and both stay on the record",
+        "the clock reads the administration, so an antibiotic ordered early and hung late is late",
+        "the arrest clock says what is due and never what to give",
+      ],
+    },
+    residualRisk: "high: the timing of a bundle that was started is trustworthy; whether a bundle gets started at all is not yet controlled",
+    approver: "Chief Medical Officer, Resuscitation Committee and Sepsis Lead",
+    caveat: "PARTIAL, and partial for a specific reason: the timing control is whole and adversarially tested, but NOTHING TRIGGERS A BUNDLE. No positive screen and no NEWS2 escalation opens one, so a bundle exists only where a clinician already knew to start it, which is precisely the population that was never going to be missed. The patient this hazard is about is the one nobody recognised, and for them this control currently does nothing. Also unbuilt: no notification transport (channels are functions a site supplies and none are shipped), the monitor sweep is caller-driven, and there is no link from a bundle to the medication or order modules, so 'antibiotics administered' is asserted by whoever records it rather than derived from an eMAR administration. Bundle elements and targets are the published Surviving Sepsis and ACLS intervals; the local policy attached to them is UNAPPROVED. NOT modelled: the ACLS algorithm, drug doses, STEMI ECG interpretation, paediatric arrest. Not clinically validated and not clinically approved.",
+  },
 ]);
 
 /**

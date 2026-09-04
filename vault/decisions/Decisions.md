@@ -2936,3 +2936,53 @@ ignored emergency keeps asking the resuscitation team rather than falling off th
 What has NOT changed: no transport is shipped. Every channel is a function a site supplies and this
 build supplies none, so HAZ-DET-01 stays PARTIAL. The improvement is that the system no longer
 pretends otherwise.
+
+## Emergency bundles: the clock is the control (2026-09-04)
+
+`wardsynq/wardsynq-emergency.js` (29 tests) implements the spec's named Code Sepsis, Code STEMI and
+Code Blue state machines. What makes these different from every other workflow in the build is that
+the dangerous variable is TIME: a sepsis bundle completed perfectly at four hours is a bundle that
+did not work. So the object is a clock with a checklist attached, not a checklist with a timestamp.
+
+**The failure it is built against.** Bundle compliance is measured, reported and rewarded, so it is
+gamed, and it is gamed in one specific way: time zero is moved. A patient recognised at 02:10 who
+gets antibiotics at 04:30 becomes compliant the moment somebody records recognition at 03:45. The
+record then says the hospital did well and the patient still waited two and a half hours.
+
+1. **Time zero is set once**, non-writable and non-configurable. Under module strict mode both a
+   plain assignment and a redefinition throw. It cannot be in the future, and it cannot precede the
+   evidence that triggered it -- back-dating in either direction is refused.
+2. **A wrong origin is corrected by VOIDING with a mandatory reason**, leaving both bundles on the
+   record. Deliberately expensive, so a correction can be told apart from a cover-up.
+3. **An element completes on its own named event.** Antibiotics count on `administered`, and passing
+   `ordered` is refused with "ordering a thing is not doing it". Ordered at 40 minutes and hung at
+   three hours is a three-hour bundle.
+4. **A breach stays a breach.** Status is recomputed from the immutable origin every time rather
+   than stored, and breach outranks completion: every element eventually done with one done late is
+   BREACHED, because the patient waited.
+5. **Cultures-before-antibiotics is recorded as a deviation, not enforced.** Delaying an antibiotic
+   to draw cultures kills people, so the two facts are kept separable rather than one blocking the
+   other.
+
+**Screening is not diagnosis.** qSOFA has poor sensitivity and its documented harm is being read as
+a rule-out. There is no NEGATIVE result here: a screen that is not met returns NOT_POSITIVE and says
+in words that it does not exclude sepsis. An incomplete screen that has not already reached two
+criteria cannot be reported as not-positive at all, because the missing criterion might have been the
+deciding one. A screen can never open a bundle; that requires a named human.
+
+**The arrest clock carries no dose.** It gives intervals and says what is due. A system that told a
+resuscitation team what to give, from an unapproved table, during the two minutes where nobody has
+time to check it, would be the most dangerous thing in this repository. A test asserts that no label
+contains anything matching a dose.
+
+**HAZ-TIME-01, marked LOCAL and declared PARTIAL** for a specific reason: the timing control is whole
+and adversarially tested, but NOTHING TRIGGERS A BUNDLE. A bundle exists only where a clinician
+already knew to start one, which is precisely the population that was never going to be missed. The
+patient this hazard is about is the one nobody recognised, and for them this control currently does
+nothing. Also open: no notification transport, a caller-driven sweep, and no link to the eMAR, so
+"antibiotics administered" is asserted by whoever records it rather than derived from an
+administration event.
+
+11 of 13 hazards verified, 2 partial. Scoring methodology and criteria unchanged.
+
+STATUS: IMPLEMENTED and TESTED. NOT clinically validated, NOT clinically approved.
