@@ -2569,3 +2569,37 @@ Zero uppercase labels and one monospace use remain in the stylesheet.
 
 **Still open:** webfont from CDN must be self-hosted for wards without network; Notes and Handover
 are disabled placeholders; the clinical seed content remains unapproved.
+
+## 2026-09-04 WardSynQ: the safety case is executable, and it says 4 of 11
+
+Built `wardsynq/wardsynq-safety-case.js` and `scripts/wardsynq-assurance.mjs`. The spec's hazard
+table is now code whose verification column names real tests, and the script runs the suites, parses
+TAP, and cross-references what actually passed. A hazard whose named test is renamed or deleted
+reports MISSING TEST instead of quietly continuing to look verified, which is how a paper safety case
+decays the week after it is signed.
+
+**The honest number is 4 of 11 fully verified**, 4 partially controlled, 3 uncontrolled. Verified:
+HAZ-MED-01 interactions, HAZ-MED-02 allergy, HAZ-MED-03 dose ceilings, HAZ-MED-04 bedside five
+rights. Uncontrolled with nothing built: HAZ-DIAG-01 critical-result acknowledgement, HAZ-BLD-01
+transfusion compatibility, HAZ-SURG-01 the WHO surgical checklist.
+
+**The file caught itself lying on its first run.** HAZ-AI-01 and HAZ-DEV-01 came back VERIFIED
+because their declared tests passed, while their own caveats said no control had been built: the
+model carries `aiDrafted` and `artifact` FIELDS and nothing enforces or ever sets them. A green row
+for a control that does not exist is worse than no safety case at all. Controls now declare an
+`adequacy`, and a partial control is capped at PARTIAL however green its tests are, because tests can
+show that what was built works but never that what was NOT built was unnecessary. That single change
+took the headline from a flattering 8 of 11 to a truthful 4 of 11.
+
+Its own test suite is written as attempts to make it lie: an all-passing run must still report the
+uncontrolled hazards as uncontrolled, a partial control must not be promoted, a renamed test must
+surface as missing evidence rather than success, an empty run must leave nothing looking verified,
+and the report must open with what is not covered because an assurance report that leads with its
+successes is a marketing document.
+
+Exit code is 1 only on FAILING, deliberately 0 on UNCONTROLLED and NO_EVIDENCE: those are declared
+gaps in an early build, and a gate that fails from day one is a gate somebody switches off.
+
+Two caveats on the artefact itself. VERIFIED means the named tests pass, not that the control is
+clinically adequate; that judgement belongs to the named approver. And HAZ-MED-01 through 03 are
+verified as MECHANISMS while their clinical content is still unapproved seed data.
