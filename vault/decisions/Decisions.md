@@ -2294,3 +2294,26 @@ Verified live on the owner's iPhone 15 Pro (same question, both engines): local 
 maik-local.test.mjs webAnswer tests using the REAL kb/ai/maik-lite-rag.js evidenceGate, not a
 book-specific stub; maik-engine.test.mjs routing; test/research-web-fallback.test.mjs, a
 source-level regression for the two server changes.
+
+## 2026-09-04 — TinyFish restricted to trusted medical domains
+
+Owner: "mk sure tinyfish uses trusted medical resources". `functions/_search.js` `tinyfishSearch()`
+now passes TinyFish's `include_domains` param (a comma-separated allow-list the API enforces
+server-side, not a ranking hint - confirmed against TinyFish's own docs) with a fixed list of
+health authorities (WHO, CDC, FDA, EMA, NICE, ICMR, MoHFW), PubMed/PMC/NIH/Cochrane/ClinicalTrials.gov,
+major journals (NEJM, Lancet, JAMA, BMJ), and specialty/reference sites (Mayo Clinic, UpToDate,
+Medscape, Drugs.com, the AHA/ADA/NKF/ACS society sites). No general news, forums or unvetted blogs
+can ever be returned.
+
+Applied ONCE in the shared helper rather than per caller, because `tinyfishSearch()` is already
+shared by three medical-only call sites - "Research on the web" (`/research`), the Medical-Updates
+crawler (`functions/_updates_pipeline.js`), and the admin manual-publish enrichment
+(`functions/api/updates/[[path]].js`) - all three benefit and none had any reliance on
+unrestricted results (checked: both crawler call sites already exist to enrich medical
+drug/guideline/headline items, never general web content).
+
+New test/tinyfish-trusted-domains.test.mjs (4 tests, stubs global.fetch) asserts the outbound
+request actually carries `include_domains` with the exact list, so a future edit that silently
+drops the restriction fails a test rather than being noticed the first time a doctor sees a
+non-medical source cited. Not yet verified live (no TinyFish key in this dev environment to hit
+the real API against) - the shape of the request is proven, not TinyFish's own enforcement of it.
