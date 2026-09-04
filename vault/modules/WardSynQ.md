@@ -3,8 +3,10 @@
 Hospital Clinical OS and EMR **inside StewardMD**, not a separate repo or product codebase.
 `wardsynq.com` is its web surface. Owner decision 2026-09-04. Spec: `~/Downloads/implementation_planfinal.md`.
 
-STATUS: **P0 scaffolding only.** Domain model, event bus and eMAR state machine exist and are
-tested. Nothing is wired to the app, nothing is flagged on, no UI. Not reachable by any user.
+STATUS: **P0 complete, unwired.** Model, event bus, eMAR, persistence, MPI and the deterministic
+safety engine exist and are tested (127 tests). Nothing is wired to the app, nothing is flagged on,
+no UI, no route. Not reachable by any user. The clinical content in the safety engine is UNAPPROVED
+seed data (see below) and must not gate a real order until pharmacy signs it off.
 
 ## Ward Sync and WardSynQ are ONE system
 
@@ -40,7 +42,21 @@ migration of `ghis-ward.js` has **not** started; it is its own reviewed change a
 - `wardsynq/wardsynq-meds.js` — closed-loop eMAR: `ORDERED -> VERIFIED -> DISPENSED -> SCANNED ->
   ADMINISTERED`, with `HELD` / `REFUSED` / `CANCELLED` exits. Five-rights bedside check, append-only
   audit trail, high-alert second-nurse witness.
-- `test/wardsynq-p0-core.test.mjs` — 44 tests. `node --test test/wardsynq-p0-core.test.mjs`.
+- `wardsynq/wardsynq-store.js` — append-only persistence. `MemoryBackend` (Node, tests) and
+  `IndexedDBBackend` (browser) behind one interface. Every `put` writes a NEW version and keeps all
+  prior ones; `get` returns the latest, `history` returns all. Deep-copies on read and write so a
+  caller cannot mutate stored state through a shared reference. `transaction(fn)` is all-or-nothing.
+- `wardsynq/wardsynq-mpi.js` — Master Patient Index. `jaroWinkler`, `soundex`, `normalizeName`
+  (verified against published reference values), Fellegi-Sunter style `scoreMatch` with a readable
+  `breakdown`, `findCandidates` for live registration, `makeProvisionalIdentity` for unidentified
+  trauma arrivals, and a REVERSIBLE `merge` / `unmerge` pair that round-trips deep-equal.
+- `wardsynq/wardsynq-safety.js` — the deterministic safety engine. Allergy shield, interactions,
+  dose ceilings, renal adjustment. Pure, injected rule pack, no drug data of its own.
+- `wardsynq/adapters/wardsynq-rules-stewardmd.js` — maps StewardMD's existing
+  `data/interaction-rules.json` into a WardSynQ rule pack. Adapter, not core.
+- `wardsynq/data/allergy-classes.seed.json` — UNAPPROVED allergy class and cross-reactivity seed.
+- Tests: `wardsynq-p0-core` 44, `wardsynq-store` 19 (+1 skipped in Node), `wardsynq-mpi` 27,
+  `wardsynq-safety` 37. Total 127. `node --test test/wardsynq-*.test.mjs`.
 
 ## Design rules worth not re-litigating
 
@@ -68,11 +84,42 @@ refusal always arrives as a rejection and never as an uncaught synchronous throw
 **Duplicate events do not tick the vector clock.** A redelivered event (adapter reconnect, sync
 replay) is not a new causal step; ticking for it makes ordering comparisons lie.
 
+## The safety engine, and what is real in it
+
+**The mechanism is real. Most of the clinical content is not yet approved.** Keep these apart when
+judging what this can be trusted with.
+
+REUSED, not re-authored: `data/interaction-rules.json` already existed in StewardMD, 310 curated
+rules and 2620 generic-to-class mappings derived from ONC HPDDI, openFDA SPL, CredibleMeds and
+RxNorm, with its own tests (`test/interaction-*.test.mjs`, `interactions.js`). WardSynQ points at it
+through the adapter rather than growing a second, divergent copy. **Check the CredibleMeds licence
+before any commercial deployment.**
+
+AUTHORED AS UNAPPROVED SEED, because StewardMD had nothing:
+- `wardsynq/data/allergy-classes.seed.json` — allergy class membership and cross-reactivity. A
+  survey on 2026-09-04 found NO allergy cross-reactivity data anywhere in the repo, which meant the
+  Allergy Shield had nothing to run on. Beta-lactam figures follow the modern side-chain view, not
+  the discredited 10 percent penicillin-to-cephalosporin figure. Needs Allergy Committee sign-off.
+- `DOSE_LIMITS_SEED` in the adapter — eight drugs. StewardMD's max doses live only in free-text
+  monograph strings ("Max 4 g/day (3 g if hepatic risk)") which must NOT be regex-parsed into a
+  safety control. A short honest table is safe where a long guessed one is not. Needs pharmacy
+  sign-off.
+
+**GOTCHA that will bite again: two drug vocabularies.** StewardMD's RxNorm-derived data spells
+amoxicillin `"amoxicillin anhydrous"`; clinicians and allergy lists write `"amoxicillin"`. Found by
+an integration test that expected an amoxicillin order to trip a penicillin allergy and watched the
+shield fail open. Handled by `buildFirstWordAliases()` in the adapter, which aliases a multi-word
+generic's first word to it ONLY when exactly one generic in the pack starts with that word, and
+allergy class membership is indexed under BOTH spellings. Where a first word is ambiguous
+("penicillin" leads to both "penicillin g" and "penicillin v") no alias is made and the drug stays
+unresolved, which is reported rather than guessed. Any new data source needs the same treatment.
+
+**Performance is load-bearing, not incidental.** `resolveGeneric` tokenises and does Set lookups. An
+earlier scan-every-key-with-a-regex version measured a p95 of 115 ms against the 10 ms budget with
+100 concurrent drugs. The budget is pinned by a test.
+
 ## Not built yet
 
-Everything else in the spec. Named explicitly because the file list looks more complete than it is:
-`wardsynq-safety.js`, `wardsynq-safety-case.js`, `wardsynq-temporal.js` (the bi-temporal QUERY engine
-- P0 only carries the fields), `wardsynq-mpi.js`, `wardsynq-store.js` (no persistence at all yet),
-`wardsynq-interop.js` (the Integration Hub), and every specialty, enterprise, MLOps and UI file.
-The spec routes the clinical-safety files to Opus-level review; they must not be filled in as a side
-effect of scaffolding.
+`wardsynq-safety-case.js`, `wardsynq-temporal.js` (the bi-temporal QUERY engine; P0 only carries the
+fields), `wardsynq-interop.js` (the Integration Hub), and every specialty, enterprise, MLOps and UI
+file. Also unbuilt: the `ghis-ward.js` adapter migration described above.

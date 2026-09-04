@@ -1,0 +1,82 @@
+{
+  "version": "seed-0.1.0",
+  "status": "UNAPPROVED SEED. Not clinically validated. Requires review and sign-off by the Head of Clinical Pharmacy and the Allergy Committee before any deployment where it can gate a real order.",
+  "reviewBy": "2027-09-04",
+  "rationale": "StewardMD has no allergy cross-reactivity data anywhere (surveyed 2026-09-04). The deterministic Allergy Shield in wardsynq-safety.js is inert without class membership and cross-reactivity, so this file exists to make the mechanism testable and to give pharmacy something concrete to correct. Membership lists are deliberately short and common-drug-only rather than exhaustive: a short list that is right is safer than a long list that is half wrong, because a wrong class assignment silently blocks or silently permits.",
+  "sources": [
+    "Beta-lactam cross-reactivity figures reflect the modern side-chain-based understanding rather than the historical 10 percent penicillin-to-cephalosporin figure, which originated from studies using cephalosporins contaminated with penicillin and is now regarded as a substantial overestimate.",
+    "Cross-reactivity here is driven primarily by shared R1 side chains, not by the beta-lactam ring itself.",
+    "Every likelihood value below needs local verification against the site's own formulary and allergy service before sign-off."
+  ],
+
+  "allergyClasses": {
+    "penicillins": [
+      "penicillin", "benzylpenicillin", "phenoxymethylpenicillin", "amoxicillin", "ampicillin",
+      "flucloxacillin", "cloxacillin", "piperacillin", "ticarcillin", "co-amoxiclav",
+      "amoxicillin-clavulanate", "piperacillin-tazobactam"
+    ],
+    "aminopenicillins": ["amoxicillin", "ampicillin", "co-amoxiclav", "amoxicillin-clavulanate"],
+    "cephalosporins": [
+      "cefalexin", "cephalexin", "cefadroxil", "cefaclor", "cefuroxime", "cefixime",
+      "ceftriaxone", "cefotaxime", "ceftazidime", "cefepime", "cefazolin", "cefprozil", "cefpodoxime"
+    ],
+    "cephalosporins_r1_aminopenicillin_like": ["cefalexin", "cephalexin", "cefadroxil", "cefaclor", "cefprozil"],
+    "carbapenems": ["meropenem", "imipenem", "ertapenem", "doripenem", "imipenem-cilastatin"],
+    "monobactams": ["aztreonam"],
+    "sulfonamide_antibiotics": ["sulfamethoxazole", "co-trimoxazole", "trimethoprim-sulfamethoxazole", "sulfadiazine"],
+    "sulfonamide_nonantibiotics": ["furosemide", "hydrochlorothiazide", "acetazolamide", "celecoxib", "sulfasalazine", "glibenclamide", "glimepiride"],
+    "macrolides": ["erythromycin", "clarithromycin", "azithromycin"],
+    "quinolones": ["ciprofloxacin", "levofloxacin", "moxifloxacin", "ofloxacin", "norfloxacin"],
+    "aminoglycosides": ["gentamicin", "amikacin", "tobramycin", "streptomycin", "neomycin"],
+    "tetracyclines": ["doxycycline", "tetracycline", "minocycline", "tigecycline"],
+    "glycopeptides": ["vancomycin", "teicoplanin"],
+    "nsaids": ["ibuprofen", "diclofenac", "naproxen", "aspirin", "ketorolac", "indomethacin", "mefenamic acid", "celecoxib", "etoricoxib"],
+    "opioids": ["morphine", "codeine", "tramadol", "fentanyl", "oxycodone", "pethidine", "buprenorphine"],
+    "aromatic_anticonvulsants": ["phenytoin", "carbamazepine", "phenobarbital", "oxcarbazepine", "lamotrigine"]
+  },
+
+  "crossReactivity": [
+    {
+      "id": "xr-penicillin-cephalosporin-r1",
+      "groups": ["aminopenicillins", "cephalosporins_r1_aminopenicillin_like"],
+      "likelihood": "moderate",
+      "note": "Shared R1 side chain with aminopenicillins. This is the highest-risk beta-lactam crossing and the one worth acting on.",
+      "disposition": "overridable"
+    },
+    {
+      "id": "xr-penicillin-cephalosporin-general",
+      "groups": ["penicillins", "cephalosporins"],
+      "likelihood": "low",
+      "note": "Approximately 1 to 2 percent where side chains differ. The historical 10 percent figure is now considered a substantial overestimate. Do not reflexively withhold a cephalosporin on this basis alone.",
+      "disposition": "overridable"
+    },
+    {
+      "id": "xr-penicillin-carbapenem",
+      "groups": ["penicillins", "carbapenems"],
+      "likelihood": "very low",
+      "note": "Under 1 percent. A carbapenem is usually acceptable in penicillin allergy after assessment.",
+      "disposition": "overridable"
+    },
+    {
+      "id": "xr-penicillin-aztreonam",
+      "groups": ["penicillins", "monobactams"],
+      "likelihood": "negligible",
+      "note": "Aztreonam is generally safe in penicillin allergy. Note separately that aztreonam shares an R1 side chain with ceftazidime, so caution applies to that specific pair rather than to penicillins.",
+      "disposition": "warn"
+    },
+    {
+      "id": "xr-sulfonamide-antibiotic-nonantibiotic",
+      "groups": ["sulfonamide_antibiotics", "sulfonamide_nonantibiotics"],
+      "likelihood": "none",
+      "note": "Recorded deliberately as NONE. Cross-reactivity between sulfonamide antibiotics and non-antibiotic sulfonamides such as furosemide or hydrochlorothiazide is a persistent misconception; encoding it explicitly stops a well-meaning reviewer from adding it later.",
+      "disposition": "warn"
+    },
+    {
+      "id": "xr-aromatic-anticonvulsants",
+      "groups": ["aromatic_anticonvulsants", "aromatic_anticonvulsants"],
+      "likelihood": "high",
+      "note": "Cross-reactivity among aromatic anticonvulsants is high, particularly for severe cutaneous reactions. Treat a documented severe reaction to one as applying to the group.",
+      "disposition": "block"
+    }
+  ]
+}

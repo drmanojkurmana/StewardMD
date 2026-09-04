@@ -2295,3 +2295,44 @@ Tooling note for future sessions: the owner approved using `agy` (Gemini Antigra
 local tasks, but the Claude Code auto-mode permission classifier refused to spawn it from a
 background session, with both `--dangerously-skip-permissions` and `--mode accept-edits`. An owner
 saying "go ahead" does not lift that classifier; it needs a Bash permission rule in settings.
+
+## 2026-09-04 WardSynQ safety engine: reuse the interaction data, seed the allergy gap
+
+Built `wardsynq-safety.js` plus store, MPI and an adapter. 127 tests. Still unwired: no flag, no
+route, no UI. Three decisions worth not re-deriving.
+
+**Reuse, do not re-author, the interaction data.** A survey of the repo found
+`data/interaction-rules.json` already carrying 310 curated rules and 2620 generic-to-class mappings
+(ONC HPDDI, openFDA SPL, CredibleMeds, RxNorm) behind the existing `interactions.js` engine and its
+tests. WardSynQ reads it through `wardsynq/adapters/wardsynq-rules-stewardmd.js`. A second copy of
+drug-interaction content that can drift from the first is a patient-safety problem, not a
+duplication smell. CredibleMeds licensing needs checking before commercial use.
+
+**The allergy data did not exist, so it is a labelled seed.** The same survey found no allergy
+cross-reactivity data of any kind: no beta-lactam class map, no sulfonamide grouping, nothing. The
+Allergy Shield had nothing to run against. `wardsynq/data/allergy-classes.seed.json` fills it,
+marked UNAPPROVED with a review date, using the modern side-chain understanding of beta-lactam
+cross-reactivity rather than the discredited 10 percent figure, and deliberately recording
+sulfonamide-antibiotic to non-antibiotic cross-reactivity as NONE so a later reviewer does not
+"helpfully" add it. Dose ceilings are a similar eight-drug seed: StewardMD's max doses exist only as
+free-text monograph prose, and regex-parsing prose into a hard-stop is not acceptable.
+
+**Severity and disposition are separate axes.** Severity is the clinical judgement; disposition is
+the policy decision about who may proceed anyway. Verdicts carry `blocks` (Category 1, absolute) and
+`overridables` (Category 2, audited handshake) separately, and a test asserts that NO override
+payload, however well formed or witnessed, can clear a block. A finding may only move between the
+two by a reviewed change to a rule pack, never by a code change in the engine and never by a caller
+passing a flag. This is the invariant most likely to be quietly eroded later.
+
+**Two drug vocabularies, found the hard way.** The RxNorm-derived data spells amoxicillin
+"amoxicillin anhydrous"; every clinician and allergy list writes "amoxicillin". An integration test
+expecting an amoxicillin order to trip a penicillin allergy caught the shield failing open.
+Reconciled in the adapter by aliasing a multi-word generic's first word to it only when exactly one
+generic starts with that word, with allergy membership indexed under both spellings; ambiguous first
+words get no alias and the drug is reported unresolved instead of guessed. Every future adapter
+(HL7, FHIR, ABDM, LIS) will hit this and needs the same discipline.
+
+Two of these files were written by delegated agents (`agy` for the store, a Claude subagent for the
+MPI) against written briefs, then verified here: the MPI's Jaro-Winkler and Soundex were checked
+against published reference values including Tymczak and Pfister, and every suite was re-run
+independently rather than trusted from the agent's own report.
