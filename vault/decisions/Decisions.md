@@ -2818,3 +2818,37 @@ hospital with eight feeds actually needs to see.
 
 The hub works with no store at all, so mapping stays exercisable in a harness, the same property the
 adapters themselves have.
+
+## Paediatrics: refusing to treat a child as a small adult (2026-09-04)
+
+Two hazards were VERIFIED while carrying the same caveat: the critical-result thresholds and the dose
+ceilings are ADULT values, so a paediatric result classified against them would be wrong. That caveat
+was honest and unaddressed, and children are exactly where threshold and dosing errors kill.
+
+`wardsynq/wardsynq-paediatrics.js` closes it, and the way it closes it is by REFUSING rather than by
+inventing paediatric numbers.
+
+1. **An unbanded reference range means ADULT and must not be applied to a child.** Not applied with a
+   warning, not applied because it is probably close enough: refused, and reported as unclassified.
+   A potassium of 6.0 is critical in an adult and ordinary in a neonate.
+2. **A refused result RAISES a loop rather than falling through as "not critical."** This was the
+   dangerous half. The first cut of the refusal made a child's result vanish silently, which is at
+   least as dangerous as judging it wrongly. An unassessable result now opens a loop marked
+   `raisedBy: "unassessable-result"` so a human sees the number the machine would not judge.
+3. **An age in whole years is not a band below toddler.** `ageYears: 0` is true of a two-day-old and
+   an eleven-month-old, so it resolves to UNKNOWN rather than NEONATE. Unknown is refused, never
+   assumed adult, because assuming adult is the single most likely way this control gets defeated.
+4. **A neonate needs gestational age.** A 26-week preterm on day 2 and a term baby on day 27 are both
+   neonates and share almost no reference range.
+5. **The adult maximum caps weight-based dosing.** A 90 kg adolescent at 15 mg/kg is 1350 mg: the
+   arithmetic is right and the answer is dangerous. That is the classic paediatric overdose.
+6. **The weight itself is checked for plausibility.** A mistyped weight is invisible once it has
+   become arithmetic. Bounds are deliberately generous: this catches a decimal point or a
+   pounds/kilograms mix-up, not an unusual child.
+
+The file is mechanism and almost no content, on purpose. Real paediatric limits vary by band, assay,
+gestational age and local policy, and getting them wrong is worse than not having them, so the
+numbers stay in a pack a paediatrician signs. The HAZ-MED-03 and HAZ-DIAG-01 caveats were rewritten
+to record that the content is still absent; the scoring methodology and criteria were NOT changed.
+
+STATUS: IMPLEMENTED and TESTED (21 tests). NOT clinically validated, NOT clinically approved.

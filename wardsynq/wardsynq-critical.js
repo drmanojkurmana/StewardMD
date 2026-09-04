@@ -32,6 +32,8 @@
  * node --test test/wardsynq-critical.test.mjs
  */
 
+import { ageBandOf, isPaediatric, forBand, neonatalReady, BAND } from "./wardsynq-paediatrics.js";
+
 /** Loop states, in the only order they may occur. */
 const LOOP = Object.freeze({
   NOT_CRITICAL: "not-critical", // classified below the action limit; terminal, no loop is opened
@@ -68,10 +70,33 @@ const isNum = (v) => typeof v === "number" && Number.isFinite(v);
  * @returns {{critical: boolean, unclassified: boolean, reason: string, direction: string|null,
  *   analyte: string|null, limit: number|null}}
  */
-function classify(observation, pack) {
+function classify(observation, pack, patient) {
   if (!observation || !pack) throw new CriticalResultError("classify() needs an observation and a threshold pack", "BAD_INPUT");
   const code = String(observation.code || "");
   const t = (pack.thresholds || {})[code];
+
+  /* AGE BANDING. A threshold that does not state its band is an ADULT threshold, and applying one to
+   * a child is a decimal-point error with a smaller patient attached: a potassium of 6.0 is critical
+   * in an adult and ordinary in a neonate. So a paediatric patient is refused rather than
+   * approximated, and the refusal names the bands the pack actually has.
+   *
+   * Passing no patient keeps the previous behaviour, because a caller that does not know who the
+   * result belongs to has a different problem and this is not the place to fail it. */
+  if (patient) {
+    const banding = ageBandOf(patient, observation.effectiveAt || undefined);
+    if (isPaediatric(banding.band) || banding.band === BAND.UNKNOWN) {
+      const ready = neonatalReady(banding);
+      if (!ready.ready) {
+        return { critical: false, unclassified: true, direction: null, analyte: t ? t.analyte : null, limit: null,
+          band: banding.band, reason: ready.reason };
+      }
+      const sel = forBand(t, banding.band);
+      if (!sel.applies) {
+        return { critical: false, unclassified: true, direction: null, analyte: t ? t.analyte : null, limit: null,
+          band: banding.band, reason: `${t ? t.analyte : `code ${code}`}: ${sel.reason}` };
+      }
+    }
+  }
 
   // Qualitative criticals: a positive blood culture has no numeric limit.
   const q = (pack.qualitativeCritical || []).find((x) => x.code === code);
@@ -149,9 +174,18 @@ class CriticalResultLoop {
    */
   async onResultFinalized(observation, ctx) {
     ctx = ctx || {};
-    const verdict = classify(observation, this.pack);
+    // The patient is passed so age banding applies. Without it a child's result would be
+    // classified against adult limits, which is the gap this closes.
+    const verdict = classify(observation, this.pack, ctx.patient || null);
     const sourceSaysCritical = !!observation.sourceCritical;
-    const critical = verdict.critical || (sourceSaysCritical && !verdict.critical);
+
+    /* UNASSESSABLE IS NOT NORMAL. A result the classifier could not judge, because the pack has no
+     * band for this child, or the neonate has no gestational age, or the unit is unrecognised, must
+     * reach a human. Letting it fall through as "not critical" would mean the system quietly
+     * declined to look at a child's potassium and told nobody, which is at least as dangerous as
+     * judging it wrongly. So it opens a loop of its own, marked for what it is. */
+    const unassessable = verdict.unclassified === true;
+    const critical = verdict.critical || sourceSaysCritical || unassessable;
 
     if (!critical) {
       await this._emit("critical.classified", { observationId: observation.id, critical: false, verdict });
@@ -166,7 +200,10 @@ class CriticalResultLoop {
       state: LOOP.OPEN,
       openedAt: this.now(),
       verdict,
-      raisedBy: verdict.critical ? "wardsynq-classification" : "source-system-advisory",
+      raisedBy: verdict.critical ? "wardsynq-classification"
+        : unassessable ? "unassessable-result"
+          : "source-system-advisory",
+      unassessable,
       sourceCritical: sourceSaysCritical,
       responsible: null,
       dispatches: [],
