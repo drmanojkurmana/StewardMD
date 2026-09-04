@@ -49,6 +49,7 @@
 
 import { scoreable } from "./wardsynq-iomt.js";
 import { ageBandOf, BAND } from "./wardsynq-paediatrics.js";
+import { Dispatcher, NotifyError } from "./wardsynq-notify.js";
 
 /** The seven NEWS2 parameters. A score is not a score until all seven have been answered. */
 const PARAM = Object.freeze({
@@ -323,10 +324,19 @@ const RESPONSE = Object.freeze({ OPEN: "open", ACKNOWLEDGED: "acknowledged", REV
  * tier rather than sitting quietly at the tier that was already ignored.
  */
 class DeteriorationMonitor {
-  constructor({ now, notify, clock } = {}) {
+  /**
+   * @param {{now?: () => string, channels?: object, dispatcher?: Dispatcher,
+   *   requireDelivery?: boolean}} deps
+   *
+   * `requireDelivery` defaults to TRUE. A monitor with no channel refuses to raise rather than
+   * raising into a void, because an escalation system that appears to work while telling nobody is
+   * worse than one that is visibly switched off. A harness that only wants the state machine can
+   * pass false, and then gets an escalation explicitly marked undelivered.
+   */
+  constructor({ now, channels, dispatcher, requireDelivery } = {}) {
     this.now = now || (() => new Date().toISOString());
-    this.notify = notify || null;
-    this.clock = clock || null;
+    this.dispatcher = dispatcher || (channels ? new Dispatcher({ channels, now: this.now }) : null);
+    this.requireDelivery = requireDelivery !== false;
     this.escalations = new Map();
   }
 
@@ -361,10 +371,36 @@ class DeteriorationMonitor {
       dueAt: policy.respondWithinMinutes ? new Date(Date.parse(at) + policy.respondWithinMinutes * 60000).toISOString() : null,
       // Provenance: the raw observations behind the derived number, so a clinician can open it.
       sources: score.sources || {},
+      // Delivery is tracked, never assumed. An escalation that was raised but never reached anybody
+      // is the exact shape of a failure to rescue, so it says so about itself.
+      delivered: false,
+      attempts: [],
       history: [{ at, event: "raised", detail: policy.responder }],
     };
     this.escalations.set(esc.id, esc);
-    if (this.notify) await this.notify(esc);
+    await this._dispatch(esc, "raised");
+    return esc;
+  }
+
+  /** Attempts delivery and records what actually happened, including nothing happening. */
+  async _dispatch(esc, why) {
+    if (!this.dispatcher) {
+      if (this.requireDelivery) {
+        throw new NotifyError(
+          "this monitor has no notification channel, so an escalation would be raised and told to nobody; wire a channel or construct it with requireDelivery: false and accept that escalations are undelivered",
+          "NO_CHANNEL");
+      }
+      esc.history.push({ at: this.now(), event: "undelivered", detail: "no notification channel is configured" });
+      return esc;
+    }
+    const { delivered, attempts } = await this.dispatcher.send({ escalation: esc, to: esc.responder, reason: esc.reason, why });
+    esc.attempts.push(...attempts);
+    esc.delivered = esc.delivered || delivered;
+    esc.history.push({
+      at: this.now(),
+      event: delivered ? "delivered" : "delivery-failed",
+      detail: attempts.map((a) => `${a.channel}${a.detail ? `: ${a.detail}` : ""}`).join("; "),
+    });
     return esc;
   }
 
@@ -412,7 +448,7 @@ class DeteriorationMonitor {
       esc.respondWithinMinutes = step.respondWithinMinutes;
       esc.dueAt = new Date(nowMs + esc.respondWithinMinutes * 60000).toISOString();
       esc.history.push({ at: this.now(), event: "re-escalated", detail: `unanswered, now ${esc.responder}` });
-      if (this.notify) await this.notify(esc);
+      await this._dispatch(esc, "re-escalated");
       overdue.push(esc);
     }
     return overdue;

@@ -33,6 +33,7 @@
  */
 
 import { ageBandOf, isPaediatric, forBand, neonatalReady, BAND } from "./wardsynq-paediatrics.js";
+import { Dispatcher } from "./wardsynq-notify.js";
 
 /** Loop states, in the only order they may occur. */
 const LOOP = Object.freeze({
@@ -153,6 +154,9 @@ class CriticalResultLoop {
     this.store = deps.store || null;
     this.responsibleFor = deps.responsibleFor || null;
     this.channels = deps.channels || {};
+    // One definition of delivery, shared with the deterioration monitor. A channel that throws,
+    // returns nothing or reports failure has not delivered, and that judgement lives in one place.
+    this.dispatcher = new Dispatcher({ channels: this.channels, now: () => this.now() });
     this.escalationTiers = (deps.pack.escalation && deps.pack.escalation.tiers) || [];
   }
 
@@ -241,19 +245,12 @@ class CriticalResultLoop {
     const names = channelNames && channelNames.length ? channelNames : Object.keys(this.channels);
     if (!names.length) throw new CriticalResultError("no notification channel is configured", "NO_CHANNEL");
 
-    for (const name of names) {
-      const send = this.channels[name];
-      if (!send) { this._record(loop, "dispatch-failed", null, `channel ${name} is not configured`); continue; }
-      let result;
-      try {
-        result = await send({ loop: this._view(loop), to: loop.responsible, reason: loop.verdict.reason });
-      } catch (err) {
-        result = { delivered: false, detail: String(err && err.message || err) };
-      }
-      loop.dispatches.push({ channel: name, at: this.now(), delivered: !!result.delivered, receipt: result.receipt || null, detail: result.detail || null });
-      this._record(loop, result.delivered ? "delivered" : "dispatch-failed", null, `${name}${result.detail ? `: ${result.detail}` : ""}`);
-      if (result.delivered) this._advance(loop, LOOP.DELIVERED);
-      else this._advance(loop, LOOP.DISPATCHED);
+    const { attempts } = await this.dispatcher.send(
+      { loop: this._view(loop), to: loop.responsible, reason: loop.verdict.reason }, names);
+    for (const a of attempts) {
+      loop.dispatches.push({ channel: a.channel, at: a.at, delivered: a.delivered, receipt: a.receipt, detail: a.detail });
+      this._record(loop, a.delivered ? "delivered" : "dispatch-failed", null, `${a.channel}${a.detail ? `: ${a.detail}` : ""}`);
+      this._advance(loop, a.delivered ? LOOP.DELIVERED : LOOP.DISPATCHED);
     }
     if (this.store) await this.store.put({ resourceType: "CriticalResultLoop", ...loop });
     await this._emit("critical.dispatched", { loop: this._view(loop) });
@@ -338,10 +335,21 @@ class CriticalResultLoop {
       loop.escalations.push(esc);
       this._record(loop, "escalated", null, `${tier.to} after ${tier.afterMinutes} minutes: ${tier.reason}`);
       fired.push(esc);
-      const send = this.channels[tier.channel];
-      if (send) {
-        try { await send({ loop: this._view(loop), to: { role: tier.to }, reason: tier.reason, escalation: true }); }
-        catch (err) { this._record(loop, "escalation-dispatch-failed", null, String(err && err.message || err)); }
+      // An escalation that nobody received has not escalated. The earlier version awaited the
+      // channel and ignored what it said, so a channel reporting failure was recorded as sent and a
+      // missing channel was skipped in silence: the same defect the primary dispatch path avoids.
+      if (this.dispatcher.configured.length) {
+        const { delivered, attempts } = await this.dispatcher.send(
+          { loop: this._view(loop), to: { role: tier.to }, reason: tier.reason, escalation: true }, [tier.channel]);
+        esc.delivered = delivered;
+        esc.attempts = attempts;
+        if (!delivered) {
+          this._record(loop, "escalation-dispatch-failed", null,
+            attempts.map((a) => `${a.channel}${a.detail ? `: ${a.detail}` : ""}`).join("; "));
+        }
+      } else {
+        esc.delivered = false;
+        this._record(loop, "escalation-dispatch-failed", null, "no notification channel is configured");
       }
     }
     if (fired.length) {

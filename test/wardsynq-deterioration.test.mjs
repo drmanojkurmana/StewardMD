@@ -11,6 +11,7 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 
+import { NotifyError } from "../wardsynq/wardsynq-notify.js";
 import {
   news2, gather, trendOf, DeteriorationMonitor, DeteriorationError,
   PARAM, CLINICAL_RISK, TREND, RESPONSE, FRESHNESS_MS,
@@ -30,6 +31,9 @@ const WELL = Object.freeze({
   [PARAM.CONSCIOUSNESS]: "A",
   [PARAM.TEMPERATURE]: 36.8,
 });
+
+/** A channel that confirms delivery, for the tests that are about the state machine rather than it. */
+const okChannel = (sink) => ({ bleep: async (p) => { if (sink) sink.push(p); return { delivered: true, receipt: "r1" }; } });
 
 const score = (over, opts) => news2({ values: { ...WELL, ...over }, patient: ADULT, now: NOW, ...opts });
 
@@ -251,13 +255,13 @@ test("a rise of 2 or more is significant even while the total is still low", () 
 /* ------------------------------------------------------------------ ADVERSARIAL: the closed loop */
 
 test("a low-risk score raises nothing", async () => {
-  const m = new DeteriorationMonitor({ now: () => NOW });
+  const m = new DeteriorationMonitor({ now: () => NOW, channels: okChannel() });
   assert.equal(await m.assess(score({}), { patientId: "pat-1" }), null);
 });
 
 test("a high-risk score raises an escalation naming the responder and the window", async () => {
   const notified = [];
-  const m = new DeteriorationMonitor({ now: () => NOW, notify: async (e) => notified.push(e) });
+  const m = new DeteriorationMonitor({ now: () => NOW, channels: { bleep: async (p) => { notified.push(p.escalation); return { delivered: true }; } } });
   const esc = await m.assess(score({ [PARAM.RESP_RATE]: 26, [PARAM.OXYGEN]: true, [PARAM.SPO2]: 92, [PARAM.PULSE]: 115 }), { patientId: "pat-1" });
   assert.equal(esc.state, RESPONSE.OPEN);
   assert.match(esc.responder, /critical care outreach/);
@@ -267,7 +271,7 @@ test("a high-risk score raises an escalation naming the responder and the window
 });
 
 test("ADVERSARIAL: an UNSCORABLE patient is escalated too, not quietly skipped", async () => {
-  const m = new DeteriorationMonitor({ now: () => NOW });
+  const m = new DeteriorationMonitor({ now: () => NOW, channels: okChannel() });
   const incomplete = news2({ values: { ...WELL, [PARAM.RESP_RATE]: undefined }, patient: ADULT, now: NOW });
   const esc = await m.assess(incomplete, { patientId: "pat-1" });
   assert.ok(esc, "a patient nobody has fully observed is its own reason to send somebody");
@@ -278,7 +282,7 @@ test("ADVERSARIAL: an UNSCORABLE patient is escalated too, not quietly skipped",
 test("ADVERSARIAL: an escalation nobody answers re-escalates itself", async () => {
   let clock = Date.parse(NOW);
   const notified = [];
-  const m = new DeteriorationMonitor({ now: () => new Date(clock).toISOString(), notify: async (e) => notified.push(e.responder) });
+  const m = new DeteriorationMonitor({ now: () => new Date(clock).toISOString(), channels: { bleep: async (p) => { notified.push(p.escalation.responder); return { delivered: true }; } } });
 
   const esc = await m.assess(score({ [PARAM.OXYGEN]: true, [PARAM.SPO2]: 94, [PARAM.SYSTOLIC]: 105, [PARAM.PULSE]: 95 }), { patientId: "pat-1" });
   assert.equal(esc.risk, CLINICAL_RISK.MEDIUM);
@@ -298,7 +302,7 @@ test("ADVERSARIAL: an escalation nobody answers re-escalates itself", async () =
 
 test("ADVERSARIAL: acknowledgement is not review, and does not stop the clock", async () => {
   let clock = Date.parse(NOW);
-  const m = new DeteriorationMonitor({ now: () => new Date(clock).toISOString() });
+  const m = new DeteriorationMonitor({ now: () => new Date(clock).toISOString(), channels: okChannel() });
   const esc = await m.assess(score({ [PARAM.RESP_RATE]: 26, [PARAM.OXYGEN]: true, [PARAM.SPO2]: 92, [PARAM.PULSE]: 115 }), { patientId: "pat-1" });
 
   m.acknowledge(esc.id, "nurse-7");
@@ -310,7 +314,7 @@ test("ADVERSARIAL: acknowledgement is not review, and does not stop the clock", 
 });
 
 test("a review needs the clinician AND what they did", async () => {
-  const m = new DeteriorationMonitor({ now: () => NOW });
+  const m = new DeteriorationMonitor({ now: () => NOW, channels: okChannel() });
   const esc = await m.assess(score({ [PARAM.RESP_RATE]: 26, [PARAM.OXYGEN]: true, [PARAM.SPO2]: 92, [PARAM.PULSE]: 115 }), { patientId: "pat-1" });
 
   assert.throws(() => m.review(esc.id, { clinicianId: "dr-3" }), DeteriorationError,
@@ -322,7 +326,7 @@ test("a review needs the clinician AND what they did", async () => {
 
 test("a reviewed escalation is never re-escalated", async () => {
   let clock = Date.parse(NOW);
-  const m = new DeteriorationMonitor({ now: () => new Date(clock).toISOString() });
+  const m = new DeteriorationMonitor({ now: () => new Date(clock).toISOString(), channels: okChannel() });
   const esc = await m.assess(score({ [PARAM.RESP_RATE]: 26, [PARAM.OXYGEN]: true, [PARAM.SPO2]: 92, [PARAM.PULSE]: 115 }), { patientId: "pat-1" });
   m.review(esc.id, { clinicianId: "dr-3", outcome: "seen, plan documented" });
   clock += 60 * 60000;
@@ -331,17 +335,77 @@ test("a reviewed escalation is never re-escalated", async () => {
 
 test("the escalation history is a complete audit trail", async () => {
   let clock = Date.parse(NOW);
-  const m = new DeteriorationMonitor({ now: () => new Date(clock).toISOString() });
+  const m = new DeteriorationMonitor({ now: () => new Date(clock).toISOString(), channels: okChannel() });
   const esc = await m.assess(score({ [PARAM.RESP_RATE]: 26, [PARAM.OXYGEN]: true, [PARAM.SPO2]: 92, [PARAM.PULSE]: 115 }), { patientId: "pat-1" });
   m.acknowledge(esc.id, "nurse-7");
   clock += 30 * 60000;
   await m.sweep();
   m.review(esc.id, { clinicianId: "dr-3", outcome: "seen" });
-  assert.deepEqual(esc.history.map((h) => h.event), ["raised", "acknowledged", "re-escalated", "reviewed"]);
+  assert.deepEqual(esc.history.map((h) => h.event),
+    ["raised", "delivered", "acknowledged", "re-escalated", "delivered", "reviewed"],
+    "the trail records not only what was decided but whether anybody was actually told");
 });
 
 test("gather is usable on its own, and the freshness window is a parameter", () => {
   const g = gather(FULL_OBS(), { now: NOW, freshnessMs: 1000 });
   assert.equal(Object.keys(g.values).length, 7, "everything here is timestamped at exactly now");
   assert.equal(FRESHNESS_MS, 4 * 60 * 60 * 1000);
+});
+
+/* ------------------------------------------------------------------ ADVERSARIAL: delivery */
+
+test("ADVERSARIAL: a monitor with NO channel refuses to raise rather than raising into a void", async () => {
+  const m = new DeteriorationMonitor({ now: () => NOW });
+  await assert.rejects(
+    () => m.assess(score({ [PARAM.RESP_RATE]: 26, [PARAM.OXYGEN]: true, [PARAM.SPO2]: 92, [PARAM.PULSE]: 115 }), { patientId: "pat-1" }),
+    (err) => err instanceof NotifyError && err.code === "NO_CHANNEL",
+    "an escalation system that appears to work while telling nobody is worse than one visibly switched off");
+});
+
+test("a harness may opt out, and then the escalation says it was never delivered", async () => {
+  const m = new DeteriorationMonitor({ now: () => NOW, requireDelivery: false });
+  const esc = await m.assess(score({ [PARAM.RESP_RATE]: 26, [PARAM.OXYGEN]: true, [PARAM.SPO2]: 92, [PARAM.PULSE]: 115 }), { patientId: "pat-1" });
+  assert.equal(esc.delivered, false);
+  assert.ok(esc.history.some((h) => h.event === "undelivered"));
+});
+
+test("ADVERSARIAL: a channel that throws is a FAILED attempt, not a delivered one", async () => {
+  const m = new DeteriorationMonitor({ now: () => NOW, channels: { bleep: async () => { throw new Error("pager offline"); } } });
+  const esc = await m.assess(score({ [PARAM.RESP_RATE]: 26, [PARAM.OXYGEN]: true, [PARAM.SPO2]: 92, [PARAM.PULSE]: 115 }), { patientId: "pat-1" });
+  assert.equal(esc.delivered, false, "the escalation still exists; what failed is the telling");
+  assert.equal(esc.attempts[0].delivered, false);
+  assert.match(esc.attempts[0].detail, /pager offline/);
+  assert.ok(esc.history.some((h) => h.event === "delivery-failed"));
+});
+
+test("ADVERSARIAL: a channel that returns nothing has confirmed nothing", async () => {
+  const m = new DeteriorationMonitor({ now: () => NOW, channels: { bleep: async () => {} } });
+  const esc = await m.assess(score({ [PARAM.RESP_RATE]: 26, [PARAM.OXYGEN]: true, [PARAM.SPO2]: 92, [PARAM.PULSE]: 115 }), { patientId: "pat-1" });
+  assert.equal(esc.delivered, false, "a well-meaning async no-op stub must not read as a receipt");
+  assert.match(esc.attempts[0].detail, /delivery is unconfirmed/);
+});
+
+test("one broken channel does not stop the others", async () => {
+  const m = new DeteriorationMonitor({
+    now: () => NOW,
+    channels: {
+      bleep: async () => { throw new Error("pager offline"); },
+      phone: async () => ({ delivered: true, receipt: "call-9" }),
+    },
+  });
+  const esc = await m.assess(score({ [PARAM.RESP_RATE]: 26, [PARAM.OXYGEN]: true, [PARAM.SPO2]: 92, [PARAM.PULSE]: 115 }), { patientId: "pat-1" });
+  assert.equal(esc.delivered, true, "a broken pager is not a reason to skip the phone");
+  assert.equal(esc.attempts.length, 2);
+});
+
+test("a re-escalation is dispatched again, and the attempts accumulate", async () => {
+  let clock = Date.parse(NOW);
+  const sent = [];
+  const m = new DeteriorationMonitor({ now: () => new Date(clock).toISOString(), channels: okChannel(sent) });
+  const esc = await m.assess(score({ [PARAM.OXYGEN]: true, [PARAM.SPO2]: 94, [PARAM.SYSTOLIC]: 105, [PARAM.PULSE]: 95 }), { patientId: "pat-1" });
+  clock += 40 * 60000;
+  await m.sweep();
+  assert.equal(sent.length, 2);
+  assert.equal(esc.attempts.length, 2, "the record of every attempt is what an investigation needs");
+  assert.deepEqual(sent.map((p) => p.why), ["raised", "re-escalated"]);
 });

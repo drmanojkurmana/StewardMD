@@ -444,3 +444,49 @@ test("monitor: an acknowledged loop is left alone by the pump", async () => {
   c.advance(60);
   assert.deepEqual(await monitor.pump(), [], "someone has taken responsibility, so the clock stops");
 });
+
+/* ------------------------------------------------------------------ ADVERSARIAL: escalation delivery
+ *
+ * The primary dispatch path always checked what the channel said. The ESCALATION path did not: it
+ * awaited the channel and ignored the result, so a channel that reported failure was recorded as
+ * though the consultant had been told, and a missing channel was skipped in silence. Both now go
+ * through the same dispatcher as everything else.
+ */
+
+test("ADVERSARIAL: an escalation whose channel reports failure is NOT recorded as sent", async () => {
+  const c = clock("2026-09-04T08:00:00.000Z");
+  const { engine: e } = engine({
+    clock: c,
+    channels: { phone: async () => ({ delivered: false, detail: "switchboard rejected the call" }) },
+  });
+  const loop = await e.onResultFinalized(obs({ id: "o-esc" }));
+  c.advance(6);
+  await e.tick(loop);
+
+  const esc = loop.escalations[0];
+  assert.ok(esc, "the escalation still fires");
+  assert.equal(esc.delivered, false, "telling nobody is not escalating");
+  assert.ok(loop.ledger.some((l) => l.event === "escalation-dispatch-failed"),
+    "and the failure is on the record, because an investigation needs to see it");
+});
+
+test("ADVERSARIAL: an escalation with no channel at all is recorded as undelivered, not skipped", async () => {
+  const c = clock("2026-09-04T08:00:00.000Z");
+  const { engine: e } = engine({ clock: c, channels: {} });
+  const loop = await e.onResultFinalized(obs({ id: "o-esc-2" }));
+  c.advance(6);
+  await e.tick(loop);
+
+  assert.equal(loop.escalations[0].delivered, false);
+  assert.ok(loop.ledger.some((l) => l.event === "escalation-dispatch-failed" && /no notification channel/.test(l.detail || "")));
+});
+
+test("an escalation that IS delivered says so, and carries the attempt", async () => {
+  const c = clock("2026-09-04T08:00:00.000Z");
+  const { engine: e } = engine({ clock: c });
+  const loop = await e.onResultFinalized(obs({ id: "o-esc-3" }));
+  c.advance(6);
+  await e.tick(loop);
+  assert.equal(loop.escalations[0].delivered, true);
+  assert.equal(loop.escalations[0].attempts.length, 1);
+});

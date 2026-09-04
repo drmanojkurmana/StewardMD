@@ -2903,3 +2903,36 @@ numbers where the threshold and dose packs deliberately do not. The escalation p
 them is a local decision and is marked unapproved.
 
 STATUS: IMPLEMENTED and TESTED (32 tests). NOT clinically validated, NOT clinically approved.
+
+## Notification: attempted is not delivered (2026-09-04)
+
+Two closed loops depend on telling a human something: a critical result and a deteriorating patient.
+Each had its own idea of what "sent" meant, and a hospital does not need two notification systems
+with two different definitions of delivery. The weaker definition is the one that quietly loses a
+patient.
+
+`wardsynq/wardsynq-notify.js` is now the only place that decides. One rule: a channel that throws,
+returns nothing, returns anything other than `delivered: true`, or is not configured at all has NOT
+delivered, and the caller is told so. Silent success is the failure mode; every branch exists to make
+failure loud. A site that wires no channel gets NO_CHANNEL thrown at it, because an escalation system
+that appears to work while shouting into a void is worse than one that is visibly switched off.
+
+**Two real defects this surfaced.**
+
+1. The deterioration monitor awaited a `notify` callback and treated anything that did not throw as
+   success, so a well-meaning `async () => {}` stub read as a receipt. It now refuses to raise at all
+   without a channel, unless a harness explicitly opts out and accepts undelivered escalations.
+2. The critical-result ESCALATION path -- not its primary dispatch, which was always correct --
+   awaited its channel and ignored the return value entirely. A channel reporting failure was
+   recorded as though the on-call consultant had been told, and a missing channel was skipped in
+   silence. This was the more dangerous of the two, because it sat inside a hazard already marked
+   VERIFIED. Three tests now hold it.
+
+The escalation ladder also had a bug worth recording: re-escalation counted rungs on a fixed ladder,
+which sent an ignored medium-risk escalation back to the ward doctor who had just ignored it.
+Re-escalation now goes strictly ABOVE whoever was already asked, and the top rung is terminal so an
+ignored emergency keeps asking the resuscitation team rather than falling off the end into silence.
+
+What has NOT changed: no transport is shipped. Every channel is a function a site supplies and this
+build supplies none, so HAZ-DET-01 stays PARTIAL. The improvement is that the system no longer
+pretends otherwise.
