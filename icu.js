@@ -1175,6 +1175,14 @@
       '.icu-icd-sys{font:700 10px var(--font);color:var(--primary);background:var(--sc-high);border-radius:6px;padding:2px 6px}' +
       '.icu-icd-title{font:500 12.5px var(--font);color:var(--muted);flex:1;min-width:100px}' +
       '.icu-icd-x{border:none;background:transparent;color:var(--muted);cursor:pointer;min-width:28px;min-height:28px;font-size:12px}' +
+      // MaiK ICD-suggestion rows (in the icd-suggest modal sheet) - same card/row shape as the
+      // existing icu-dx-hit rows, one Accept button per suggestion, nothing pre-selected.
+      '.icu-icd-sugrow{background:var(--panel2);border:1px solid var(--border);border-radius:10px;padding:10px 12px;margin-bottom:8px}' +
+      '.icu-icd-sugtop{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:4px}' +
+      '.icu-icd-sugtitle{font:600 13.5px var(--font);color:var(--ink)}' +
+      '.icu-icd-sugwhy{font:400 12px/1.5 var(--font);color:var(--muted);margin-top:3px}' +
+      '.icu-icd-conf{font:700 10px var(--font);border-radius:6px;padding:2px 6px}' +
+      '.icu-icd-conf-high{background:#14532d;color:#fff}.icu-icd-conf-medium{background:#7c2d12;color:#fff}.icu-icd-conf-low{background:var(--panel2);color:var(--muted);border:1px solid var(--border)}' +
       '.icu-dx-results{margin-top:10px;display:flex;flex-direction:column;gap:6px;max-height:46vh;overflow:auto}' +
       '.icu-dx-hint{font:600 12.5px var(--font);color:var(--muted);padding:8px 2px}' +
       '.icu-dx-hit{display:flex;align-items:center;gap:8px;text-align:left;width:100%;border:1px solid var(--border);background:var(--panel2);color:var(--ink);border-radius:10px;padding:11px 13px;cursor:pointer;font:700 14px var(--font)}' +
@@ -3549,7 +3557,8 @@
       var dxIcd = p.diagnosisIcd;
       var icdBadge = dxIcd ? '<div class="icu-dx-icd"><span class="icu-icd-code">' + esc(dxIcd.code) + '</span><span class="icu-icd-sys">' + esc(dxIcd.system) + '</span><span class="icu-icd-title">' + esc(dxIcd.title) + '</span>' +
         '<button class="icu-icd-x" data-icu-act="icdclear" aria-label="Remove ICD code">' + ico("close", "✕") + "</button></div>" : "";
-      var icdBtnHTML = '<button class="icu-btn ghost" data-icu-act="icdsearch" style="margin-top:8px">' + ico("search", "🔎") + ' ' + (dxIcd ? "Change" : "Attach") + ' ICD-10 / ICD-11 code</button>';
+      var icdBtnHTML = '<button class="icu-btn ghost" data-icu-act="icdsearch" style="margin-top:8px">' + ico("search", "🔎") + ' ' + (dxIcd ? "Change" : "Attach") + ' ICD-10 / ICD-11 code</button>' +
+        (window.SMD_AI ? '<button class="icu-btn ghost" data-icu-act="icdsuggest" style="margin-top:8px">' + ico("pulse", "✨") + ' Suggest ICD code <span class="icu-phase">MaiK</span></button>' : "");
       var wdx = '<div class="icu-card"><div class="icu-sec-lbl">' + ico("check", "🩺") + ' Working diagnosis</div>' +
         '<p class="icu-dx-cur">' + dxTxt + "</p>" + icdBadge;
       if (!hasDx) {
@@ -7050,6 +7059,53 @@
       if (window.toast) toast("ICD code attached: " + row.code);
     });
   }
+  // MaiK-assisted ICD suggestion: sends the working diagnosis + present findings (no name/MR
+  // number - explicit consent tap first, same posture as opd-emr.js's Ask MaiK) to
+  // /api/ai/extract kind:"icd-suggest", which grounds the model against REAL candidate rows from
+  // the icd_codes table and re-validates every returned id server-side - the client never trusts
+  // a code string from the model directly, only the {id,system,code,title} the server already
+  // verified. Advisory only: each suggestion needs its own Accept tap, nothing auto-applied.
+  var _icuIcdSug = [];
+  function openIcuIcdSuggest() {
+    if (!window.SMD_AI || !SMD_AI.extract) { if (window.toast) toast("MaiK is not available on this build."); return; }
+    var p = _raw.patient;
+    var findings = (STATE.findings || []).filter(function (c) { return c.polarity !== "absent" && c.canonicalFindingId && c.canonicalFindingId.indexOf("note:") !== 0; })
+      .map(function (c) { return c.displayLabel; });
+    var text = (p.diagnosis ? "Working diagnosis: " + p.diagnosis + ". " : "") + (findings.length ? "Findings: " + findings.join(", ") + "." : "");
+    text = text.trim();
+    if (!text) { if (window.toast) toast("Add a working diagnosis or findings first, then suggest a code."); return; }
+    if (!window.confirm("Send this working diagnosis and findings (no name or MR number) to MaiK for ICD-10/11 code suggestions?")) return;
+    ensureModal();
+    modalEl.innerHTML = '<div class="icu-sheet"><h3>' + ico("search", "🔎") + ' Suggested ICD codes <span class="icu-phase">MaiK</span></h3>' +
+      '<p class="icu-doc-sub">Decision support only. Review each suggestion before accepting — nothing is attached until you tap Accept.</p>' +
+      '<div id="icuIcdSugBody" class="icu-dx-results"><div class="icu-dx-hint">Asking MaiK…</div></div>' +
+      '<button class="icu-btn ghost" data-icu-act="closeform" style="margin-top:10px">Close</button></div>';
+    modalEl.classList.add("on");
+    _icuIcdSug = [];
+    SMD_AI.extract(text, "icd-suggest").then(function (r) {
+      var body = modalEl.querySelector("#icuIcdSugBody"); if (!body) return;
+      if (!r || r.error) {
+        body.innerHTML = '<div class="icu-dx-hint">' + esc(r && r.error === "quota" ? (r.message || "MaiK is a StewardMD Pro feature.") : "Could not reach MaiK. Check your connection and try again.") + '</div>';
+        return;
+      }
+      _icuIcdSug = r.suggestions || [];
+      if (!_icuIcdSug.length) { body.innerHTML = '<div class="icu-dx-hint">No confident ICD match found for this text — try Search &amp; select instead.</div>'; return; }
+      body.innerHTML = _icuIcdSug.map(function (s, i) {
+        return '<div class="icu-icd-sugrow"><div class="icu-icd-sugtop"><span class="icu-icd-code">' + esc(s.code) + '</span><span class="icu-icd-sys">' + esc(s.system) + '</span>' +
+          '<span class="icu-icd-conf icu-icd-conf-' + esc(s.confidence) + '">' + esc(s.confidence) + ' confidence</span></div>' +
+          '<div class="icu-icd-sugtitle">' + esc(s.title) + '</div>' +
+          (s.why ? '<div class="icu-icd-sugwhy">' + esc(s.why) + '</div>' : "") +
+          '<button class="icu-btn" data-icu-act="icdaccept:' + i + '" style="margin-top:6px">' + ico("check", "✓") + ' Accept</button></div>';
+      }).join("");
+    });
+  }
+  function acceptIcuIcdSuggestion(i) {
+    var s = _icuIcdSug[i]; if (!s) return;
+    STATE.patient.diagnosisIcd = { system: s.system, code: s.code, title: s.title, id: s.id, at: nowTs(), source: "maik-suggest" };
+    closeForm();
+    paint();
+    if (window.toast) toast("ICD code attached: " + s.code);
+  }
   // Manual imaging note (idx null) or annotate/correct an existing record (idx set).
   function openImagingForm(id) {
     ensureModal();
@@ -8505,6 +8561,8 @@
       case "pickdx": pickDiagnosis(decodeURIComponent(arg)); break;
       case "icdsearch": openIcuIcdPick(); break;
       case "icdclear": _raw.patient.diagnosisIcd = null; paint(); break;
+      case "icdsuggest": openIcuIcdSuggest(); break;
+      case "icdaccept": acceptIcuIcdSuggestion(+arg); break;
       case "imgfetch": imagingFetch(); break;
       case "imgadd": openImagingForm(null); break;
       case "imgassist": openImagingAssist(decodeURIComponent(arg)); break;

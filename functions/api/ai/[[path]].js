@@ -131,6 +131,8 @@ import { assessmentExtractPrompt, sanitizeAssessmentFields } from "./_assessment
 import { scribeExtractPrompt, sanitizeScribeOutput } from "./_opd-scribe.js";
 import { maikNextPrompt, maikExtractPrompt, sanitizeMaikNext, sanitizeMaikExtract } from "./_maik-ask.js";
 import { opdSuggestPrompt, sanitizeOpdSuggest } from "./_opd-suggest.js";
+import { icdSuggestPrompt, sanitizeIcdSuggest } from "./_icd-suggest.js";
+import * as icdRepo from "../../_icd_repo.js";
 import { surgxNotePrompt, sanitizeSurgxNote } from "./_surgx-note.js";
 // The effective Gemini model. The admin "switch models" control (KV override, validated to a priced
 // model by setModelOverride) wins; otherwise the exact prior behaviour (env.GEMINI_MODEL || default).
@@ -2130,6 +2132,21 @@ export async function onRequest(context) {
         catch (e) { await recordUsage(gate, { inTok: estTokens(prompt.length), outTok: 0, status: "failed" }); throw e; }
         await recordUsage(gate, { inTok: estTokens(prompt.length), outTok: estTokens((text || "").length), status: "success" });
         return json({ kind: "opd-suggest", ...sanitizeOpdSuggest(parseJsonLoose(text)), mode: "opd-suggest" });
+      }
+      if (body.kind === "icd-suggest") {
+        // Diagnosis/symptom text -> ranked ICD-10/ICD-11 suggestions, GROUNDED against real D1
+        // rows (functions/_icd_repo.js searchCodes()) so the model picks from a real candidate
+        // list rather than free-generating a code - sanitizeIcdSuggest() re-validates every id
+        // against that same list before it ever reaches the client. Advisory only; nothing is
+        // attached to any chart until the clinician taps Accept on a specific suggestion (see
+        // icu.js openIcuIcdSuggest() / opd-emr.js openOpdIcdSuggest()).
+        const candidates = icdRepo.hasDb(env) ? await icdRepo.searchCodes(env, { q: transcript, limit: 30 }) : [];
+        const prompt = icdSuggestPrompt(transcript, candidates);
+        let text;
+        try { text = await callGemini(env, [{ text: prompt }], 1024); }
+        catch (e) { await recordUsage(gate, { inTok: estTokens(prompt.length), outTok: 0, status: "failed" }); throw e; }
+        await recordUsage(gate, { inTok: estTokens(prompt.length), outTok: estTokens((text || "").length), status: "success" });
+        return json({ kind: "icd-suggest", ...sanitizeIcdSuggest(parseJsonLoose(text), candidates), mode: "icd-suggest" });
       }
       if (body.kind === "translate") {
         // Field mic: translate a single dictated field to clinical English so GHIS + MaiK stay English.

@@ -363,9 +363,19 @@
     if (!G.SMD_ICD) return "";
     return '<button type="button" class="oe-fmic oe-icdbtn" data-oe-act="icdsearch:' + esc(name) + '" aria-label="Search ICD" title="Search ICD-10 / ICD-11 code">' + ms("search") + "</button>";
   }
+  // MaiK-assisted suggestion, same button-pair idea as icu.js: manual search stays a plain magnifier
+  // icon, MaiK suggestion gets its own icon so the two are never confused for the same action.
+  function icdSuggestBtn(name) {
+    if (!G.SMD_AI || !G.SMD_AI.extract) return "";
+    return '<button type="button" class="oe-fmic oe-icdbtn" data-oe-act="icdsuggest:' + esc(name) + '" aria-label="Suggest ICD code (MaiK)" title="Suggest ICD code (MaiK)">' + ms("auto_awesome") + "</button>";
+  }
   function assessField(f, vals) {
     var val = assessGet(vals, f), id = "assess:" + f.n, re = f.r && !val;
-    if (f.k === "textarea") return fieldRow(f.l, '<span class="oe-inp-wrap"><textarea class="oe-inp" data-oe-inp="' + esc(id) + '">' + esc(val) + "</textarea>" + fmicBtn(f.n) + (f.n === "provisional_diagnosis" ? icdBtn(f.n) : "") + "</span>", f.r, re);
+    if (f.k === "textarea") {
+      var extra = f.n === "provisional_diagnosis" ? (icdBtn(f.n) + icdSuggestBtn(f.n)) : "";
+      var panel = f.n === "provisional_diagnosis" ? '<div class="oe-icdsug" id="oeIcdSug"></div>' : "";
+      return fieldRow(f.l, '<span class="oe-inp-wrap"><textarea class="oe-inp" data-oe-inp="' + esc(id) + '">' + esc(val) + "</textarea>" + fmicBtn(f.n) + extra + "</span>" + panel, f.r, re);
+    }
     if (f.k === "yesno") return ynRow(f, val);
     var type = f.k === "number" ? "number" : "text";
     return fieldRow(f.l, '<span class="oe-inp-wrap"><input class="oe-inp" type="' + type + '" data-oe-inp="' + esc(id) + '" value="' + esc(val) + '" placeholder="' + esc(f.p) + '">' + fmicBtn(f.n) + "</span>", f.r, re);
@@ -1188,6 +1198,8 @@
     if (cmd === "scribe-acceptall") return scribeAcceptAll(arg);
     if (cmd === "fieldmic") return toggleFieldMic(arg);
     if (cmd === "icdsearch") return openIcdSearchForField(arg);
+    if (cmd === "icdsuggest") return openIcdSuggestForField(arg);
+    if (cmd === "icdaccept") return acceptIcdSuggestion(+arg);
     if (cmd === "consult-authorise") return authoriseConsult();
     if (cmd === "consult-er") return consultToER();
     if (cmd === "rx-share") return shareRx();
@@ -1984,6 +1996,48 @@
     });
   }
   function esc2Line(s) { return String(s == null ? "" : s).replace(/[\r\n]+/g, " "); }
+  // MaiK-assisted ICD suggestion: sends chief complaint + present history + whatever's already
+  // typed in provisional diagnosis (no name/MR number - explicit consent tap first, same posture
+  // as askMaikPro above) to /api/ai/extract kind:"icd-suggest". The server grounds the model
+  // against real icd_codes rows and re-validates every id before it comes back - this client
+  // never trusts a code string directly from the model. Advisory only: each row needs its own
+  // Accept tap; nothing is written to the field until then.
+  var _oeIcdSug = [], _oeIcdSeq = 0, _oeIcdField = "provisional_diagnosis";
+  function openIcdSuggestForField(name) {
+    if (!(G.SMD_AI && G.SMD_AI.extract)) { toast("MaiK is not available on this build."); return; }
+    _oeIcdField = name || "provisional_diagnosis";
+    var v = st.assessVals || {};
+    var text = [v.provisional_diagnosis, v.Chief_complaints_duration, v.History_present_illness].filter(Boolean).join(". ").trim();
+    if (!text) { toast("Type the complaint, history or diagnosis first."); return; }
+    if (!confirmed("Send this text (no name or MR number) to MaiK for ICD-10/11 code suggestions?")) return;
+    var panel = document.querySelector("#smdOpdEmr #oeIcdSug"); if (!panel) return;
+    panel.innerHTML = '<div class="oe-icdsug-hint">Asking MaiK…</div>';
+    var mySeq = ++_oeIcdSeq;
+    G.SMD_AI.extract(text, "icd-suggest").then(function (r) {
+      if (mySeq !== _oeIcdSeq) return;
+      var p = document.querySelector("#smdOpdEmr #oeIcdSug"); if (!p) return;
+      if (!r || r.error) { p.innerHTML = '<div class="oe-icdsug-hint">' + esc(r && r.error === "quota" ? (r.message || "MaiK is a StewardMD Pro feature.") : "Could not reach MaiK. Try again.") + '</div>'; return; }
+      _oeIcdSug = r.suggestions || [];
+      if (!_oeIcdSug.length) { p.innerHTML = '<div class="oe-icdsug-hint">No confident ICD match found - try the search icon instead.</div>'; return; }
+      p.innerHTML = _oeIcdSug.map(function (s, i) {
+        return '<div class="oe-icdsug-row"><span class="oe-icdsug-code">' + esc(s.code) + '</span><span class="oe-icdsug-sys">' + esc(s.system) + '</span>' +
+          '<span class="oe-icdsug-title">' + esc(s.title) + '</span>' +
+          '<button type="button" class="oe-icdsug-accept" data-oe-act="icdaccept:' + i + '">Accept</button></div>';
+      }).join("");
+    });
+  }
+  function acceptIcdSuggestion(i) {
+    var s = _oeIcdSug[i]; if (!s) return;
+    var name = _oeIcdField;
+    st.assessVals = st.assessVals || {}; st.assessTouched = st.assessTouched || {};
+    var cur = st.assessVals[name] || "";
+    var line = esc2Line(s.code) + " - " + esc2Line(s.title);
+    st.assessVals[name] = cur ? (cur + (/\n$/.test(cur) ? "" : "\n") + line) : line;
+    st.assessTouched[name] = true;
+    putVoiceDom(name);
+    var p = document.querySelector("#smdOpdEmr #oeIcdSug"); if (p) p.innerHTML = "";
+    toast("ICD code added: " + s.code);
+  }
   function putVoiceDom(name) {
     try {
       var esc2 = (G.CSS && CSS.escape) ? CSS.escape(name) : name;
