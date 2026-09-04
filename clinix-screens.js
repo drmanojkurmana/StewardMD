@@ -926,7 +926,8 @@
     for (var i = 0; i < state.caseLog.length; i++) {
       var t = state.caseLog[i];
       html += '<div class="cx-tq">' + esc(t.q) + "</div>";
-      html += '<div class="cx-pt' + (t.unmatched ? " cx-pt--unmatched" : "") + '">' +
+      html += '<div class="cx-pt' + (t.unmatched ? " cx-pt--unmatched" : "") +
+        (t.clarify ? " cx-pt--clarify" : "") + '">' +
         '<span class="cx-pt-who">' + esc((cd.patient && cd.patient.name) || "Patient") + "</span>" +
         esc(t.a) + "</div>";
     }
@@ -1070,10 +1071,20 @@
       if (state.caseTaken.asked.indexOf(hit.key) < 0) state.caseTaken.asked.push(hit.key);
       haptic("tap");
     } else {
-      // The patient does not improvise. An unscripted reply would be a clinical fact invented by a
-      // model, and a simulated patient that invents a symptom teaches a wrong pattern.
-      state.caseLog.push({ q: text, a: M().unmatchedReply(cd), unmatched: true });
-      haptic("warning");
+      var near = M().nearMiss(cd, text);
+      if (near) {
+        // The question reached for a scripted topic without landing on it. A real patient asks you
+        // to say it another way, so this is a CLARIFICATION, not a dead end - and deliberately NOT
+        // credited as having asked the topic, because a vague question must not score as a precise
+        // one or the thin-workup check becomes free to pass.
+        state.caseLog.push({ q: text, a: M().clarifyReply(near), clarify: true });
+        haptic("tap");
+      } else {
+        // The patient does not improvise. An unscripted reply would be a clinical fact invented by a
+        // model, and a simulated patient that invents a symptom teaches a wrong pattern.
+        state.caseLog.push({ q: text, a: M().unmatchedReply(cd), unmatched: true });
+        haptic("warning");
+      }
     }
     repaint();
   }

@@ -218,3 +218,104 @@ test("no em-dash in the case content", () => {
   const raw = readFileSync(join(ROOT, "clinix/diseases/copd.json"), "utf8");
   assert.equal(raw.indexOf("—"), -1);
 });
+
+/* The student's words, not the author's ------------------------------------- */
+
+test("SYNONYMS: one question asked three ways reaches the same topic", () => {
+  // The author wrote the cues in one register. A student types in another, and a patient who
+  // stonewalls two phrasings out of three is teaching the author's vocabulary, not history-taking.
+  for (const q of ["are you short of breath", "any dyspnoea", "do you get winded",
+                   "do you have shortness of breath"]) {
+    const hit = M.matchAsk(CASE, q);
+    assert.ok(hit, `'${q}' reached no topic at all`);
+    assert.ok(/breath|dyspnea|exert/.test(hit.key), `'${q}' reached '${hit.key}'`);
+  }
+});
+
+test("SYNONYMS: the everyday word and the clinical word are the same question", () => {
+  const pairs = [
+    ["do you smoke cigarettes", "do you use tobacco"],
+    ["do you use a puffer", "do you use an inhaler"],
+    ["any ankle swelling", "any ankle oedema"]
+  ];
+  for (const [a, b] of pairs) {
+    const ha = M.matchAsk(CASE, a), hb = M.matchAsk(CASE, b);
+    assert.ok(ha && hb, `'${a}' / '${b}' did not both match`);
+    assert.equal(ha.key, hb.key, `'${a}' -> ${ha.key} but '${b}' -> ${hb.key}`);
+  }
+});
+
+test("canon() is a vocabulary map only, and never invents clinical content", () => {
+  // It rewrites words into other words. It must not add, drop meaning, or grow the string
+  // into something the author never wrote.
+  assert.equal(M.canon("Any SOB on exertion?"), "any breathless on exertion");
+  assert.equal(M.canon("  MIXED Case, punctuation!!  "), "mixed case punctuation");
+  assert.equal(M.canon(""), "");
+  assert.equal(M.canon(null), "");
+});
+
+test("canon() does not fire inside a longer word", () => {
+  // "smoked" -> "smoke" is intended; "smokestack" must be left alone, or a cue could match a word
+  // that merely contains one.
+  assert.equal(M.canon("smokestack"), "smokestack");
+  assert.equal(M.canon("workshop"), "workshop");
+});
+
+/* Near misses --------------------------------------------------------------- */
+
+test("NEAR MISS: a question that reaches for a topic gets a rephrase, not a stonewall", () => {
+  const near = M.nearMiss(CASE, "and the stuff you bring up, is there ever blood in it");
+  assert.ok(near, "a question this close to a scripted topic must not be a dead end");
+  assert.ok(CASE.history[near.key], "the near miss names a real topic");
+});
+
+test("NEAR MISS: ONE shared word is never enough", () => {
+  // This is the whole threshold. A single loose token is exactly how 'what is your favourite
+  // colour' used to reach the sputum topic.
+  const offTopic = [
+    "what is your favourite colour",
+    "do you know how this works",
+    "what is the weather like",
+    "can you spell your name",
+    "how much does it cost"
+  ];
+  for (const q of offTopic) {
+    assert.equal(M.matchAsk(CASE, q), null, `'${q}' matched a topic outright`);
+    const n = M.nearMiss(CASE, q);
+    assert.equal(n, null, `'${q}' was offered a clarification about '${n && n.key}'`);
+  }
+});
+
+test("NEAR MISS: stopwords alone can never reach a topic", () => {
+  for (const q of ["what about it", "and you", "do you have any", "how long has it been"]) {
+    assert.equal(M.nearMiss(CASE, q), null, `'${q}' reached a topic on function words alone`);
+  }
+  assert.deepEqual(M.contentTokens("what do you have"), []);
+});
+
+test("NEAR MISS: a clarification is NOT credited as having asked the topic", () => {
+  // If a vague question scored as a precise one, the thin-workup check would be free to pass.
+  // caseAsk() in clinix-screens.js pushes a clarify turn without touching caseTaken.asked; this
+  // locks the model side of that contract: nearMiss reports a topic, it does not mark it.
+  const near = M.nearMiss(CASE, "and the stuff you bring up, is there ever blood in it");
+  assert.ok(near.key && near.topic, "nearMiss reports what it thinks was meant");
+  assert.equal(typeof near.hits, "number");
+  assert.ok(!("asked" in near) && !("credit" in near),
+    "nearMiss must not carry anything that reads as credit for the topic");
+});
+
+test("NEAR MISS: the reply degrades gracefully when the topic has no 'about' phrase", () => {
+  // Most authored topics do not carry one yet, and 'do you mean that?' would be worse than useless.
+  const plain = M.clarifyReply({ key: "cough", topic: { cues: [] } });
+  assert.ok(plain.indexOf("another way") > 0, plain);
+  assert.equal(plain.indexOf("mean that"), -1, "must not render the empty-phrase sentence");
+
+  const withAbout = M.clarifyReply({ key: "sputum", topic: { about: "the phlegm you bring up" } });
+  assert.ok(withAbout.indexOf("the phlegm you bring up") > 0, withAbout);
+});
+
+test("NEAR MISS: an empty or absent question is not a near miss", () => {
+  assert.equal(M.nearMiss(CASE, ""), null);
+  assert.equal(M.nearMiss(CASE, null), null);
+  assert.equal(M.nearMiss(null, "any cough"), null);
+});

@@ -629,8 +629,57 @@
    * costs nothing, and cannot invent a symptom the author did not write - which matters more in a
    * simulated patient than anywhere else in CliniX, because an invented finding teaches a wrong
    * pattern. The tutor is a layer for unmatched questions, never the source of clinical fact. */
+  /* The author writes cues in one register; the student types in another. "Are you short of breath"
+   * and "any dyspnoea" and "do you get winded" are one question, and a patient who stonewalls two
+   * of the three is not teaching history-taking, they are teaching the author's phrasing. So both
+   * sides of the match are canonicalised through a synonym table first.
+   *
+   * This is a vocabulary map, NOT clinical inference: every entry rewrites a word a patient or a
+   * student would use into the word the content already uses. Nothing here decides anything
+   * clinical, and the patient still only ever says what the author scripted. */
+  var CASE_SYNONYMS = [
+    [/\b(sob|short of breath|shortness of breath|dyspnoea|dyspnea|breathlessness|breathing difficulty|difficulty breathing|winded)\b/g, "breathless"],
+    [/\b(phlegm|mucus|expectoration|bring up anything|bringing up)\b/g, "sputum"],
+    [/\b(haemoptysis|hemoptysis|coughing up blood|blood in sputum|blood in the sputum)\b/g, "blood"],
+    [/\b(cigarettes?|cigs?|bidis?|beedis?|tobacco|hookah|smoked|smoker|smoking)\b/g, "smoke"],
+    [/\b(oedema|edema|swollen|swelling|puffiness|puffy)\b/g, "swelling"],
+    [/\b(puffer|pump|inhalers?|nebuliser|nebulizer)\b/g, "inhaler"],
+    [/\b(exertion|exercise|walking|walk|climb|climbing|stairs?)\b/g, "exertion"],
+    [/\b(pyrexia|temperature|fevers?)\b/g, "fever"],
+    [/\b(occupation|profession|job|employment|working|work)\b/g, "work"],
+    [/\b(orthopnoea|orthopnea|lie flat|lying flat|flat in bed)\b/g, "lying flat"],
+    [/\b(admitted|admission|hospitalised|hospitalized|in hospital)\b/g, "hospital"],
+    [/\b(allergies|allergic)\b/g, "allergy"],
+    [/\b(losing weight|weight loss|lost weight)\b/g, "weight"]
+  ];
+
+  function canon(sIn) {
+    var out = " " + normalizeAnswer(sIn) + " ";
+    for (var i = 0; i < CASE_SYNONYMS.length; i++) out = out.replace(CASE_SYNONYMS[i][0], CASE_SYNONYMS[i][1]);
+    return out.replace(/\s+/g, " ").replace(/^ | $/g, "");
+  }
+
+  // Words that carry no clinical signal. Without this list, "what" and "you" in a question are
+  // enough to reach a topic whose cues happen to contain them.
+  var STOPWORDS = { what: 1, is: 1, are: 1, was: 1, were: 1, the: 1, a: 1, an: 1, do: 1, does: 1,
+    did: 1, you: 1, your: 1, my: 1, me: 1, i: 1, it: 1, this: 1, that: 1, have: 1, has: 1, had: 1,
+    any: 1, and: 1, or: 1, of: 1, to: 1, in: 1, on: 1, at: 1, for: 1, with: 1, how: 1, when: 1,
+    where: 1, why: 1, can: 1, could: 1, would: 1, will: 1, tell: 1, about: 1, please: 1, doctor: 1,
+    sir: 1, get: 1, got: 1, been: 1, be: 1, there: 1, much: 1, many: 1, long: 1, ever: 1, also: 1,
+    some: 1, from: 1 };
+
+  function contentTokens(sIn) {
+    var parts = canon(sIn).split(" "), seen = {}, out = [];
+    for (var i = 0; i < parts.length; i++) {
+      var t = parts[i];
+      if (!t || t.length < 2 || STOPWORDS[t] || seen[t]) continue;
+      seen[t] = 1; out.push(t);
+    }
+    return out;
+  }
+
   function matchAsk(caseDef, text) {
-    var q = normalizeAnswer(text);
+    var q = canon(text);
     if (!q || !caseDef || !caseDef.history) return null;
     // Pad so a cue matches whole words only: " colour " will not match inside "colourful", and a
     // cue can never fire on a fragment of a longer word.
@@ -642,7 +691,8 @@
       var cues = topic.cues || [];
       var score = 0;
       for (var i = 0; i < cues.length; i++) {
-        var c = normalizeAnswer(cues[i]);
+        // The cue is canonicalised too, so the table never has to be applied by hand in content.
+        var c = canon(cues[i]);
         if (!c) continue;
         if (padded.indexOf(" " + c + " ") >= 0) {
           // Score by the LENGTH of the matched cue, not by how many matched. A long cue is a more
@@ -654,6 +704,46 @@
       if (score > bestScore) { bestScore = score; best = { key: key, topic: topic }; }
     }
     return bestScore > 0 ? best : null;
+  }
+
+  /* A near miss is a question that clearly reaches for a scripted topic but does not contain any
+   * whole cue - "and the stuff you cough up, what does it look like" against a sputum topic. The
+   * patient asks the student to rephrase instead of stonewalling.
+   *
+   * TWO distinct content tokens are required. One is not enough, and that threshold is the fix:
+   * with a single token, "what is your favourite colour" reached the sputum topic through a bare
+   * "colour" cue. A clarification is also NOT credited as having asked the topic - a vague question
+   * must never score as a precise one, or the workup check becomes free to pass. */
+  function nearMiss(caseDef, text) {
+    if (!caseDef || !caseDef.history) return null;
+    var qt = contentTokens(text);
+    if (qt.length < 2) return null;
+    var qset = {}, i;
+    for (i = 0; i < qt.length; i++) qset[qt[i]] = 1;
+
+    var best = null, bestHits = 0;
+    for (var key in caseDef.history) {
+      if (!Object.prototype.hasOwnProperty.call(caseDef.history, key)) continue;
+      var topic = caseDef.history[key], cues = topic.cues || [], hitSet = {}, hits = 0;
+      for (i = 0; i < cues.length; i++) {
+        var ct = contentTokens(cues[i]);
+        for (var j = 0; j < ct.length; j++) {
+          if (qset[ct[j]] && !hitSet[ct[j]]) { hitSet[ct[j]] = 1; hits++; }
+        }
+      }
+      if (hits > bestHits) { bestHits = hits; best = { key: key, topic: topic, hits: hits }; }
+    }
+    return bestHits >= 2 ? best : null;
+  }
+
+  /* What the patient says when they half-understood. `about` is an optional author-supplied noun
+   * phrase ("the phlegm you bring up"); most topics do not carry one yet, so the copy degrades to a
+   * plain request to rephrase rather than rendering "do you mean that?". */
+  function clarifyReply(hit) {
+    var about = hit && hit.topic && hit.topic.about;
+    return about
+      ? "Sorry doctor, do you mean " + about + "? Ask me again and I will tell you."
+      : "I did not quite follow, doctor. Could you ask me that another way?";
   }
 
   // What the patient says when the student asks something the author did not script.
@@ -847,6 +937,10 @@
 
     CASE_PHASES: CASE_PHASES,
     matchAsk: matchAsk,
+    nearMiss: nearMiss,
+    clarifyReply: clarifyReply,
+    canon: canon,
+    contentTokens: contentTokens,
     unmatchedReply: unmatchedReply,
     caseFinding: caseFinding,
     caseInvestigation: caseInvestigation,

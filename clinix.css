@@ -464,6 +464,9 @@ html.cx-lock .ghis-ward-fab { display: none !important; }
 #clinixRoot .cx-pt { align-self: flex-start; max-width: 92%; padding: 12px 14px; background: var(--cx-surface); border: 1px solid var(--cx-line); border-radius: 16px 16px 16px 4px; font-size: 15px; line-height: 1.5; }
 #clinixRoot .cx-pt-who { display: block; font-size: 10.5px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--cx-faint); margin-bottom: 4px; }
 #clinixRoot .cx-pt--unmatched { color: var(--cx-muted); font-style: italic; }
+/* A near miss is not a dead end: the patient half-understood and is asking for a rephrase. It reads
+   as a live turn, not as the greyed-out "I am not sure what you mean". */
+#clinixRoot .cx-pt--clarify { color: var(--cx-fg); font-style: italic; border-left: 2px solid var(--cx-accent); padding-left: 8px; }
 
 #clinixRoot .cx-row--done { background: var(--cx-surface-2); }
 #clinixRoot .cx-finding { display: block; margin-top: 6px; font-size: 14px; line-height: 1.5; color: var(--cx-ink); }
