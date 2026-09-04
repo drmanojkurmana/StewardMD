@@ -3,7 +3,7 @@
 Hospital Clinical OS and EMR **inside StewardMD**, not a separate repo or product codebase.
 `wardsynq.com` is its web surface. Owner decision 2026-09-04. Spec: `~/Downloads/implementation_planfinal.md`.
 
-STATUS: **P0 complete, P1 in progress.** 541 tests across 21 suites. The clinical workstation UI
+STATUS: **P0 complete, P1 in progress.** 794 tests across 34 suites. The clinical workstation UI
 exists at `wardsynq/ui/` and is wired to a `GovernedStore`, but it is behind no route in the mobile
 app and is not reachable by any user. All clinical content (interaction, allergy, dose ceiling and
 critical threshold packs) is UNAPPROVED seed data and must not gate a real order until pharmacy and
@@ -196,6 +196,46 @@ cross-references them, so a renamed or deleted test shows as MISSING TEST rather
 | `wardsynq-notify.js` | (infrastructure) | The single definition of delivery. Attempted is not delivered. |
 | `wardsynq-vitals.js` | (infrastructure) | The single definition of a current, non-artefactual observation, shared by both charts. |
 
+## P2 and P3 (governance, measurement, AI)
+
+None of these carries a hazard row. They are governance, measurement and administration rather than
+clinical controls, and inventing rows for them would inflate the assurance table with things that do
+not stop a patient being harmed.
+
+| Module | What it is really about |
+| --- | --- |
+| `wardsynq-quality.js` | The denominator is the attack surface. Every exclusion carries a reason and travels with the rate; `compare()` exists in order to refuse to rank unadjusted mortality. |
+| `wardsynq-incidents.js` | The failure mode is silence. A person is never a root cause, and an incident cannot be closed on retraining alone. |
+| `wardsynq-consent.js` | A signature is not consent. Capacity is presumed; a refusal is never evidence of incapacity. |
+| `wardsynq-research.js` | The record that looks anonymous. k-anonymity catches what Safe Harbor passes, and failing rows are withheld rather than warned about. |
+| `wardsynq-lineage.js` | Staleness propagates: a score is as old as its oldest input, not as its arithmetic. |
+| `wardsynq-api-gov.js` | Scope is not access. A valid token is still refused for a patient it has no relationship with. |
+| `wardsynq-billing.js` | Money must not decide what the chart says. Billing reads the record and never writes to it. |
+| `wardsynq-population.js` | The patients nobody is looking at, and the recall letter you must not send. |
+| `wardsynq-secops.js` | Assume the injection succeeds. The ceiling, not the prompt, is the control. |
+| `wardsynq-mlops.js` | Retrospective numbers deploy nothing; a breach withdraws the model automatically. |
+| `wardsynq-simulation.js` | Chaos that asserts invariants rather than outcomes, seeded so any failure replays. |
+
+`test/wardsynq-scenarios.test.mjs` runs one patient through the whole stack with assertions at the
+SEAMS between modules. It is the suite that found the future-dated observation defect, which every
+unit suite missed because each file was consistent with itself.
+
+## Defects found in already-VERIFIED controls
+
+Worth reading before trusting any green row. Each was found by building the NEXT thing, not by
+re-reading the control:
+
+1. `scoreEligible` was set after `Observation()` construction, so the canonical model dropped it and
+   every device reading would have been silently excluded from every automated score.
+2. The critical-result ESCALATION path awaited its channel and ignored the result, so a channel
+   reporting failure was recorded as though the consultant had been told.
+3. Time zero was guarded against moving EARLIER than its evidence and not LATER, which is the
+   direction that is actually gamed.
+4. `can()` read `actor.tier` directly, so the AI ceiling was enforced only in `makeActor()`. Any
+   hand-built or deserialised actor claiming EXECUTE held it. This sat inside HAZ-AI-01.
+5. `gatherVitals` guarded staleness and not future-dating, so a clock-skewed reading became "the
+   latest" and outranked the correct current value.
+
 Three hazards are LOCAL: they are not in the spec's assurance table and were added because the
 omission was real. Two are PARTIAL. Adding them lowered the verified fraction rather than raising it.
 
@@ -217,7 +257,12 @@ the live mobile path onto the adapter. `wardsynq-shadow.js` exists for it and `i
 it awaits a shadow run against real ward data (`?wardsynq_shadow=1`, then check
 `SMD_WARDSYNQ_SHADOW.report().clean`).
 
-Also unbuilt: the ICU flowsheet; all of P2 (enterprise/RCM, quality measures,
-incidents, research de-identification, API gateway) and P3 (MLOps, SecOps, digital twin); a second UI
-screen to prove the design system scales. Production gaps beyond the transport: no service worker for
-the workstation, a CDN webfont, and no barcode hardware, so every scan is a supplied value.
+P0, P1, P2 and the P3 core modules are built. What is genuinely unbuilt: the ICU flowsheet; the
+renderer behind `wardsynq/ui/opd.html` (the bedside LOGIC is tested in `test/wardsynq-opd.test.mjs`,
+the view that calls it is not written, and wiring a half-built view to a live medication path would
+be worse than leaving it unwired).
+
+Production gaps, unchanged and load-bearing: NO NOTIFICATION TRANSPORT of any kind, which is why both
+local hazards are PARTIAL; no service worker for either surface; a CDN webfont; no barcode hardware,
+so every scan is a supplied value; and the secops document "signing" is a content digest that must be
+replaced by real cryptography.

@@ -3483,3 +3483,53 @@ including the boundary case that an observation timestamped exactly now is curre
 future.
 
 778 tests across 33 suites. Safety case at 12 of 14 with 2 partial.
+
+## The bedside surface (2026-09-04)
+
+`wardsynq/ui/opd.html`, `opd.css` and `opd-emr.js` are the mobile and tablet surface the spec asks
+for. Three decisions worth not re-litigating:
+
+**It is the same design system, not a second one.** `opd.css` imports `wardsynq.css` for its tokens
+and adds only what a bedside needs that a desk does not. A separate visual language for mobile means
+a nurse learning two products, and the one they use at 3am under pressure would be the one they know
+less well.
+
+**What changes at a bedside is safety, not style.** Targets are 56px rather than the 44px guideline,
+because that guideline assumes a considered tap on a clean screen and this is a gloved thumb in a
+corridor while somebody is talking. Nothing moves on its own: no toasts that leave, no reflow as data
+arrives, and the scan-state line has its height reserved, because a screen that changes while a thumb
+is descending is how the wrong button gets pressed, and here the wrong button administers something.
+The workstation's signal column becomes a left edge mark with the same colours and the same rule that
+colour is never the only carrier. An irreversible action gets more SPACE around it rather than being
+made smaller or hidden behind a confirm.
+
+**The logic holds no clinical rules at all.** `opd-emr.js` sequences the eMAR, the safety engine and
+the governed store and renders what they return. There is no threshold, no dose limit and no
+interaction rule in it, and there must never be: a rule duplicated in a view drifts from the engine
+and the drift is invisible.
+
+The properties the tests hold:
+
+- opening a chart does NOT confirm identity, because opening a chart is something you can do from the
+  corridor. Identity is the band on the patient in front of you.
+- switching patient REVOKES the confirmation, since the commonest bedside error is the screen still
+  showing the last patient
+- the ACTION refuses without identity, not just the button. A caller bypassing the UI entirely still
+  cannot administer, and the governed store would refuse it again underneath.
+- a five-rights failure is rendered IN FULL. Truncating a refusal to fit a phone is how "blocked"
+  becomes "the app is broken" and then becomes a workaround.
+- a refusal must be acknowledged explicitly, because one that fades was never read
+- offline work is durable BEFORE the screen says it was recorded
+- a GOVERNANCE refusal is not journalled as though it were a connectivity problem, which would retry
+  a write the system has already decided is not allowed
+
+Two smaller things the tests pin: a signalled row cannot be constructed without a word, so no view
+can render colour alone; and a value of 0 renders as "0" rather than vanishing, because 0 mL/h urine
+output is the important one.
+
+**It is deliberately not reachable.** No route, not in the www/ build, and `opd.html` carries no
+script tag: the logic is tested and the renderer is not written, and wiring a half-built view to a
+live medication path would be worse than leaving it unwired. That is stated in the file rather than
+left for somebody to discover.
+
+794 tests across 34 suites. Safety case at 12 of 14 with 2 partial.
