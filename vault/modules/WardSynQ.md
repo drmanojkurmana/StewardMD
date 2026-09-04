@@ -3,14 +3,14 @@
 Hospital Clinical OS and EMR **inside StewardMD**, not a separate repo or product codebase.
 `wardsynq.com` is its web surface. Owner decision 2026-09-04. Spec: `~/Downloads/implementation_planfinal.md`.
 
-STATUS: **P0 to P3 built.** 829 tests across 35 suites. The clinical workstation UI
+STATUS: **P0 to P3 built.** 921 tests across 41 suites. The clinical workstation UI
 exists at `wardsynq/ui/` and is wired to a `GovernedStore`, but it is behind no route in the mobile
 app and is not reachable by any user. All clinical content (interaction, allergy, dose ceiling and
 critical threshold packs) is UNAPPROVED seed data and must not gate a real order until pharmacy and
 the relevant committee sign it off.
 
 The safety case is executable: `node scripts/wardsynq-assurance.mjs` runs the real suites and
-cross-references the hazard table against what actually passed. It currently reports **12 of 15
+cross-references the hazard table against what actually passed. It currently reports **13 of 16
 verified, 3 partial**. Read the caveats; the summary line alone is not the state of the system.
 
 ## Ward Sync and WardSynQ are ONE system
@@ -196,6 +196,9 @@ cross-references them, so a renamed or deleted test shows as MISSING TEST rather
 | `wardsynq-notify.js` | (infrastructure) | The single definition of delivery. Attempted is not delivered. |
 | `wardsynq-vitals.js` | (infrastructure) | The single definition of a current, non-artefactual observation, shared by both charts. |
 | `wardsynq-flowsheet.js` | HAZ-FLUID-01 (local, PARTIAL) | The ICU hourly chart. A missing hour is never zero, and an infusion volume is an integral. |
+| `wardsynq-pews.js` | HAZ-PAED-01 (local) | Paediatric early warning. A child's normal is a curve, so every band is per age. |
+| `wardsynq-transport.js` | (supports DET-01, TIME-01) | SENT is not DELIVERED is not SEEN. Durable outbox, failover ladder, channel health, sweep driver. |
+| `wardsynq-readlog.js` | (supports FLUID-01) | Who was shown the value, so a correction produces a list of people rather than a count of totals. |
 
 ## P2 and P3 (governance, measurement, AI)
 
@@ -237,7 +240,7 @@ re-reading the control:
 5. `gatherVitals` guarded staleness and not future-dating, so a clock-skewed reading became "the
    latest" and outranked the correct current value.
 
-Four hazards are LOCAL: they are not in the spec's assurance table and were added because the
+Five hazards are LOCAL: they are not in the spec's assurance table and were added because the
 omission was real. Three are PARTIAL. Adding them lowered the verified fraction rather than raising it.
 
 ## The honest state of it

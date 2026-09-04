@@ -3655,3 +3655,95 @@ unconfirmed, because that warning needs the width. It is kept for print, where a
 say which system produced it is a page somebody has to identify by hand.
 
 843 tests across 36 suites. Safety case unchanged at 12 of 15.
+
+## A to Z: the five things that were left (2026-09-04)
+
+Five items, each of which was a named gap in the safety case rather than a new feature.
+
+### 1. wardsynq-transport.js — actually telling somebody
+
+Three hazards had been PARTIAL for one reason: escalations computed correctly and delivered to
+nobody. The distinction this file exists for is that SENT, DELIVERED and SEEN are three different
+things and most systems have one. A webhook returning 200 means a server accepted bytes; calling
+that delivery is how a hospital comes to believe in an escalation path nobody has ever been paged
+by. Only a NAMED HUMAN acknowledging moves a notice to SEEN, and `outstanding()` deliberately
+includes the delivered ones, because a dashboard counting only failures shows zero while the pager
+lies face down on a desk.
+
+The outbox is written BEFORE any transport is attempted, so a crash mid-send leaves "we decided and
+do not know whether it went", which is recoverable; the reverse order leaves nothing. The ladder
+stops at the first CONFIRMED delivery, not the first non-throw, because paging four people for one
+patient is how a ward learns to ignore the fifth. A channel that has never carried a message is
+UNVERIFIED rather than assumed healthy, and `verify()` is how a site proves one works without
+waiting for a real patient: an integration that broke three weeks ago looks exactly like one that
+works.
+
+`SweepDriver` closes a separate defect nobody had named: every monitor in this build had a correct
+`sweep()` that nothing ever called on a timer, which is a re-escalation ladder that never
+re-escalates.
+
+### 2. wardsynq-pews.js — the third refusal, paid off
+
+NEWS2 refused every patient under 16 and named PEWS, which did not exist. A refusal pointing at
+nothing leaves that population LESS protected, because it removes the crude signal too. The first
+test is the whole argument: a pulse of 150 is unremarkable at four months and peri-arrest at
+fourteen, so one set of bands cannot serve both.
+
+Neonates are refused, because a neonatal chart is a different instrument and that population is
+where a wrong score does most harm. A FALLING respiratory rate scores harder than a rising one,
+since a tiring child's rate falls as they decompensate and rate alone inverts at the worst possible
+moment. Parental concern is a scored parameter that can escalate a child whose numbers are all
+normal, which is what happened in most of the cases that generated the literature.
+
+### 3. wardsynq-readlog.js — telling the person who prescribed on the wrong number
+
+Every correction path could say WHAT changed; none could say who acted on the old value, because
+nothing recorded that anybody read it. The output is a list of PEOPLE, not a count of totals:
+"three totals changed" is not actionable and "Dr Shah read the 06:00 balance at 06:12 and it was
+wrong by 360 mL" is. Only readers of the superseded version, only from before the correction, and
+the person who ACTED on it is named first.
+
+A value merely rendered on a page is not a read. The log is retention-bounded and states its purpose
+on every entry, because a record of who looked at what is also a surveillance tool, and used as one
+it will stop people opening things.
+
+### 4. HMAC-SHA256 in wardsynq-secops.js
+
+The old function was a 64-bit FNV-ish hash documented as NOT cryptographic. The note was honest and
+keeping the function was still wrong: a field called "integrity" gets relied on regardless of the
+comment beside it. With no implementation wired it now REFUSES to hash rather than falling back,
+because a silent downgrade is worse than a loud failure. A document carrying the previous build's
+digest is refused as LEGACY, since honouring it is how a deprecated primitive outlives the decision
+to deprecate it. It is a MAC and not a signature and the naming keeps that: it cannot say WHICH key
+holder, so it does not attribute authorship.
+
+### 5. Reachability: renderer, offline shell, build
+
+`opd-render.js` draws the surface `opd-emr.js` had been waiting for, holds no clinical rule, and is
+a pure function of `session.state()` so the screen cannot keep showing a confirmation the system
+revoked. It also populates the read log on OPEN, which is what made item 3 real rather than proven
+and unpopulated.
+
+`wardsynq-sw.js`'s one important rule: a stale APP is fine and stale CLINICAL DATA is not. The shell
+is cache-first; anything clinical is network-first and returns a 503 saying so rather than a cached
+body, because a cached potassium rendered without its age is the exact hazard every gatherer in this
+build refuses at the other end of the pipe.
+
+`build-www.sh` ships wardsynq/ whole, and both the script and the markup state that shipping the
+files does not make it reachable: nothing links to it, no flag turns it on, and the page does not
+boot itself, because a page that constructed its own actor would be a page deciding who may give a
+drug.
+
+### Where that leaves it
+
+921 tests across 41 suites, 39 modules. Safety case 13 of 16 verified, 3 partial, and all three
+partials now name SMALLER reasons than before:
+
+- HAZ-DET-01 and HAZ-TIME-01: the transport seam, outbox, ladder and driver exist; no real pager,
+  SMS or phone system is integrated, and every shipped adapter reaches only somebody already looking
+  at a screen.
+- HAZ-FLUID-01: the correction-to-reader chain is proven end to end and populated only where a
+  bedside row is opened, because the FLOWSHEET still has no renderer.
+
+None of that is dishonest bookkeeping: each partial is a control that works and cannot yet reach far
+enough, which is a different thing from a control that does not exist.
