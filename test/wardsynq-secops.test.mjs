@@ -10,11 +10,17 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 
+import { createHmac } from "node:crypto";
 import {
   TRUST, SecOpsError,
-  requestNonce, digest, signDocument, verifyDocument,
+  requestNonce, hmac, useHmac, legacyDigest, signDocument, verifyDocument,
   scanForInjection, buildPrompt, screenOutput, AiSecurityLog,
 } from "../wardsynq/wardsynq-secops.js";
+
+// The module refuses to hash at all until an implementation is wired, which is the point: a silent
+// fallback to a weak hash is worse than a loud failure. A server wires node:crypto here; a browser
+// would wire a WebCrypto wrapper at startup.
+useHmac((content, key) => createHmac("sha256", key).update(content).digest("hex"));
 import { CEILING, KIND, TIER, authoriseWrite } from "../wardsynq/wardsynq-actors.js";
 
 const KEY = "signing-key-held-outside-the-record";
@@ -38,6 +44,11 @@ test("a document that changed after signing is refused", () => {
   assert.match(v.reason, /changed after signing/);
 });
 
+test("a document verified with the wrong key is refused", () => {
+  const d = doc("Patient is comfortable.");
+  assert.equal(verifyDocument(d, "some-other-key").valid, false);
+});
+
 test("ADVERSARIAL: an UNSIGNED document does not enter the context at all", () => {
   const p = buildPrompt({
     instruction: "Summarise this patient's admission.",
@@ -50,12 +61,30 @@ test("ADVERSARIAL: an UNSIGNED document does not enter the context at all", () =
     "the attack is not a clever prompt, it is writing a note into a chart and waiting");
 });
 
-test("the digest is honestly named and says what it is not", () => {
+test("documents are authenticated with HMAC-SHA256, not a hand-rolled hash", () => {
   const d = doc("x");
-  assert.match(d.integrityNote, /NOT a cryptographic signature/);
-  assert.equal(typeof digest("a", KEY), "string");
-  assert.notEqual(digest("a", KEY), digest("a", "different-key"));
+  assert.equal(d.macAlgorithm, "HMAC-SHA256");
+  assert.equal(d.mac.length, 64, "a full SHA-256 digest, not a 64-bit toy");
+  assert.notEqual(hmac("a", KEY), hmac("a", "different-key"));
   assert.throws(() => signDocument({ content: "x" }), (e) => e instanceof SecOpsError && e.code === "NO_KEY");
+});
+
+test("the MAC is honest about what it does NOT prove", () => {
+  // A MAC proves a key holder produced this. It cannot say WHICH holder, so it is not a signature
+  // and does not attribute authorship, and the note on every document says so.
+  const d = doc("x");
+  assert.match(d.integrityNote, /does NOT attribute authorship/);
+  assert.match(d.integrityNote, /anyone who can verify it can forge it/);
+});
+
+test("ADVERSARIAL: a legacy document from an earlier build is REFUSED, not honoured", () => {
+  // Accepting the old weak digest would keep it alive indefinitely, which is how a deprecated
+  // primitive outlives the decision to deprecate it.
+  const old = { id: "n", trust: TRUST.RETRIEVED, content: "Patient is comfortable.", integrity: legacyDigest("Patient is comfortable.", KEY) };
+  const v = verifyDocument(old, KEY);
+  assert.equal(v.valid, false);
+  assert.equal(v.legacy, true);
+  assert.match(v.reason, /would keep the weak hash alive/);
 });
 
 /* ------------------------------------------------------------------ fencing */
