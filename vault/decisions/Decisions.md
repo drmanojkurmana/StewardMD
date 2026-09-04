@@ -5,6 +5,23 @@ tags: [decisions, adr]
 
 Dated architectural calls + why. Newest first. Keep each short: **decision · why · trade-off · status**.
 
+## 2026-09-04 · ICD Search — shipped default-on, no flag, from the first commit
+
+**Ask:** "now integrate ICD also and add a Search ICD button and add ICD integration into EMR/icu
+ward & OPD" — then, when asked which edition, "ICD 10 & 11" (both).
+
+**Decision:** built as a new module (`icd.js`/`icd.css`/`functions/_icd_repo.js`/`functions/api/icd/`,
+D1 `stewardmd-icd`) carrying no feature flag at all, applying the owner's earlier "no more
+flagging" instruction (see the Scheme Search entry below) from the start rather than shipping
+gated-then-flipping. 106,367 codes loaded (71,704 ICD-10-CM + 34,663 ICD-11 MMS), both from public
+WHO/CMS downloads, no API credentials needed — see `scripts/icd/README.md` for exact provenance.
+
+**Trade-off:** ICD-10 here is the US ICD-10-CM edition (most complete freely-downloadable
+machine-readable set), not the plainer WHO 4-character ICD-10 — documented explicitly so the
+extra granularity doesn't surprise anyone. ICD-11 is WHO's own public "Simple Tabulation" export,
+current as of WHO's 2024-01 release (not the live API, which needs registered credentials).
+**Status: shipped.** See `vault/modules/ICD Search.md`.
+
 ## 2026-09-04 · Scheme Search (renamed from Government Health Schemes) — owner overrode the review gate, flag defaults ON for all devices
 
 **Owner's explicit order** (verbatim intent): stop flagging this module behind a per-device toggle;

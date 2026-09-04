@@ -43,6 +43,13 @@ binding = "GOVSCHEMES_DB"
 database_name = "stewardmd-govschemes"
 database_id = "2ad07897-93b7-424c-b1fc-e3d9643937f5"
 
+# D1 — ICD Search (ICD-10 + ICD-11 code/title reference, public WHO/CMS data).
+# See functions/db/icd_schema.sql and vault/modules/ICD Search.md.
+[[d1_databases]]
+binding = "ICD_DB"
+database_name = "stewardmd-icd"
+database_id = "b38bab39-65aa-41d3-9200-033ab41da541"
+
 # R2 — FollowCare patient photos (wound/rash/etc). PHI-minimising: private bucket, 7-day lifecycle expiry on
 # the followcare/ prefix + view-once (FOLLOWCARE_PHOTO_VIEW_ONCE=1) + purge-on-erase. Code binding = FOLLOWCARE_R2.
 [[r2_buckets]]
@@ -247,6 +254,11 @@ database_id = "788b1c85-acb4-4242-882c-24b402298b2c"
 binding = "GOVSCHEMES_DB"
 database_name = "stewardmd-govschemes"
 database_id = "2ad07897-93b7-424c-b1fc-e3d9643937f5"
+
+[[env.production.d1_databases]]
+binding = "ICD_DB"
+database_name = "stewardmd-icd"
+database_id = "b38bab39-65aa-41d3-9200-033ab41da541"
 
 [[env.production.r2_buckets]]
 binding = "FOLLOWCARE_R2"
