@@ -820,7 +820,7 @@
         ]) +
         tile("heart", "FollowCare", "Post-discharge follow-up", "fc") +
         // Govt Schemes: same flag gate as the HOME_TOOLS tile (default OFF, ?gs=1 per device) - flag off = no tile.
-        (govschemesOn() ? tile("hospital", "Govt Schemes", "Package codes and rates", "govschemes") : "") +
+        (govschemesOn() ? tile("hospital", "Scheme Search", "Package codes and rates", "govschemes") : "") +
         tile("share", "Connect", "Link your hospital EMR", "connect") +
         '</div>');
       sheetEl().querySelectorAll("[data-mi]").forEach(function (b) {
@@ -1600,7 +1600,7 @@
     { act: "electrolytes", ic: "science", tt: "Electrolytes", sub: "ICU correction", defOn: false },
     // Everything else the app can open — available in "Add Tool" (off by default; the doctor pins what they want).
     { act: "hospital", ic: "local_hospital", tt: "Hospital", sub: "OPD · ICU · Ward", defOn: false },
-    { act: "govschemes", ic: "local_hospital", tt: "Govt Schemes", sub: "Package codes and rates", defOn: true,
+    { act: "govschemes", ic: "local_hospital", tt: "Scheme Search", sub: "Package codes and rates", defOn: true,
       eligible: function () { return govschemesOn(); } },
     { act: "icu", ic: "monitor_heart", tt: "ICU & Ward", sub: "Critical care", defOn: false },
     { act: "ward", ic: "bed", tt: "Ward Sync", sub: "Inpatient GHIS", defOn: false },
@@ -2150,7 +2150,7 @@
       mi("steth", "Search Medical Register", "Find a doctor by name or NMC number", "nmcsearch") +
       // Govt Schemes: same flag gate as the HOME_TOOLS tile (default OFF, ?gs=1 per device). Flag off = no row.
       // data-mi="govschemes" falls through to the generic ACT[a] dispatch below (ACT.govschemes).
-      (govschemesOn() ? mi("hospital", "Govt Schemes", "Package codes and rates", "govschemes") : "") +
+      (govschemesOn() ? mi("hospital", "Scheme Search", "Package codes and rates", "govschemes") : "") +
       // NMC eLOGBook. Flag-gated the same way the home tile is, and read from localStorage DIRECTLY
       // rather than through SMD_PGLOG_FLAGS: home.js loads BEFORE the pglog block in index.html, so
       // the flag object does not exist yet when this sheet is built. Flag off = the row is absent,
