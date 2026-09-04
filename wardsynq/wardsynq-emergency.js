@@ -192,10 +192,21 @@ class EmergencyBundle {
     if (Date.parse(timeZero) > Date.parse(now)) {
       throw new EmergencyError("time zero cannot be in the future", "FUTURE_TIME_ZERO");
     }
-    if (input.evidence && input.evidence.at && Date.parse(timeZero) < Date.parse(input.evidence.at)) {
-      throw new EmergencyError(
-        "time zero cannot be earlier than the evidence that triggered it; recognition did not happen before the observation that prompted it",
-        "TIME_ZERO_BEFORE_EVIDENCE");
+    if (input.evidence && input.evidence.at) {
+      if (Date.parse(timeZero) < Date.parse(input.evidence.at)) {
+        throw new EmergencyError(
+          "time zero cannot be earlier than the evidence that triggered it; recognition did not happen before the observation that prompted it",
+          "TIME_ZERO_BEFORE_EVIDENCE");
+      }
+      // The direction that actually gets gamed. Moving time zero EARLIER buys nothing; moving it
+      // FORWARD is what turns a two-hour wait into a compliant one-hour bundle. Where the evidence
+      // is a machine prompt a human accepted, the machine already knew at that instant, so the
+      // evidence time is not merely a floor: it IS time zero, and a later one is refused.
+      if (input.evidence.pinsTimeZero && Date.parse(timeZero) > Date.parse(input.evidence.at)) {
+        throw new EmergencyError(
+          `time zero cannot be later than the evidence that triggered it: the system recognised this patient at ${input.evidence.at} and the clock starts there, not when somebody got round to opening the bundle`,
+          "TIME_ZERO_AFTER_EVIDENCE");
+      }
     }
 
     this.code = input.code;

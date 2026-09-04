@@ -2986,3 +2986,50 @@ administration event.
 11 of 13 hazards verified, 2 partial. Scoring methodology and criteria unchanged.
 
 STATUS: IMPLEMENTED and TESTED. NOT clinically validated, NOT clinically approved.
+
+## Recognition: the interval between a machine noticing and a human deciding (2026-09-04)
+
+HAZ-TIME-01 was declared PARTIAL with a specific reason: the timing of a bundle was trustworthy, but
+nothing started one. A bundle existed only where a clinician already knew to open it, which is
+exactly the population that was never going to be missed. `wardsynq/wardsynq-recognition.js` (17
+tests) is that trigger, and the design decision worth not re-litigating is that **it does not start
+bundles.**
+
+A screen is not a diagnosis. qSOFA is specific and insensitive, NEWS2 is sensitive and non-specific,
+and a system that opened a Code Sepsis on either would be diagnosing. Instead a positive screen or a
+high NEWS2 raises a PROMPT that a named human must answer. Three properties a passive alert does not
+have:
+
+1. **The prompt is timestamped and immutable**, so the interval between the machine noticing and a
+   human deciding becomes a measurable number. That interval is invisible in most hospitals, which
+   is why nobody manages it. `recognitionStats()` deliberately reports the still-unanswered prompts
+   too, because a median over only the answered ones is the flattering number and the wrong one.
+2. **The prompt pins the bundle's time zero.**
+3. **Declining is an answer and is recorded with its reason and its author.** A clinician who looks
+   and decides this is not sepsis is doing their job, and that judgement is worth far more on the
+   record than a dismissed alert. An unanswered prompt is the dangerous state, and it is the one
+   that escalates.
+
+**A real hole this exposed, and it was in the direction that matters.** The emergency module guarded
+time zero against being moved EARLIER than its evidence. It did not guard the other direction, and
+moving time zero FORWARD is what gaming actually looks like: it turns a two-hour wait into a
+compliant one-hour bundle. An accepted prompt now sets `pinsTimeZero`, and time zero must equal the
+evidence time exactly. The end-to-end test is the one that found it: a prompt raised at 02:10,
+accepted at 03:45, and an attempt to open the bundle claiming recognition at 03:40. It is refused,
+and the honest bundle is BREACHED before the first antibiotic is drawn up.
+
+**Alert fatigue is real and is NOT solved here.** A prompt on every transient qSOFA of 2 would be
+ignored within a week, and an ignored prompt is worse than none because it launders inaction into a
+record of having been told. What this file does is deduplicate: one live prompt per patient per code,
+a stronger signal supersedes rather than stacks, and an answered prompt suppresses repeats for a
+refractory period. Whether the trigger threshold is clinically right is a decision this file cannot
+make and does not pretend to.
+
+HAZ-TIME-01 stays PARTIAL. The trigger reason is closed; what remains is that no notification
+transport is shipped, the sweeps are caller-driven, and no bundle element is derived from a real eMAR
+administration, so "antibiotics administered" is still asserted by whoever records it.
+
+Also refreshed `vault/modules/WardSynQ.md`, which still said "P0 complete, unwired, 127 tests" and
+listed the safety case and interop hub as unbuilt.
+
+STATUS: IMPLEMENTED and TESTED. NOT clinically validated, NOT clinically approved.

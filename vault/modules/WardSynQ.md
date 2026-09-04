@@ -3,10 +3,15 @@
 Hospital Clinical OS and EMR **inside StewardMD**, not a separate repo or product codebase.
 `wardsynq.com` is its web surface. Owner decision 2026-09-04. Spec: `~/Downloads/implementation_planfinal.md`.
 
-STATUS: **P0 complete, unwired.** Model, event bus, eMAR, persistence, MPI and the deterministic
-safety engine exist and are tested (127 tests). Nothing is wired to the app, nothing is flagged on,
-no UI, no route. Not reachable by any user. The clinical content in the safety engine is UNAPPROVED
-seed data (see below) and must not gate a real order until pharmacy signs it off.
+STATUS: **P0 complete, P1 in progress.** 493 tests across 19 suites. The clinical workstation UI
+exists at `wardsynq/ui/` and is wired to a `GovernedStore`, but it is behind no route in the mobile
+app and is not reachable by any user. All clinical content (interaction, allergy, dose ceiling and
+critical threshold packs) is UNAPPROVED seed data and must not gate a real order until pharmacy and
+the relevant committee sign it off.
+
+The safety case is executable: `node scripts/wardsynq-assurance.mjs` runs the real suites and
+cross-references the hazard table against what actually passed. It currently reports **11 of 13
+verified, 2 partial**. Read the caveats; the summary line alone is not the state of the system.
 
 ## Ward Sync and WardSynQ are ONE system
 
@@ -165,9 +170,50 @@ Pure functions over arrays of versions. It deliberately does NOT import the stor
 between them is covered by explicit integration tests that run the engine over real store output
 rather than fixtures.
 
+## Clinical safety controls (P0 and P1)
+
+Each is a module plus an adversarial suite, and each is argued against a row in the executable safety
+case. Run `node scripts/wardsynq-assurance.mjs` for the current table; it runs the real suites and
+cross-references them, so a renamed or deleted test shows as MISSING TEST rather than staying green.
+
+| Module | Hazard | Notes |
+| --- | --- | --- |
+| `wardsynq-safety.js` | HAZ-MED-01/02/03 | Interactions, allergy shield, dose ceilings. Rule pack is injected; the StewardMD adapter maps the existing 310-rule DDI data. |
+| `wardsynq-meds.js` | HAZ-MED-04 | eMAR state machine, five rights, fail-closed without a safety engine. |
+| `wardsynq-critical.js` | HAZ-DIAG-01 | Closed-loop critical results. An unassessable paediatric result raises rather than vanishes. |
+| `wardsynq-transfusion.js` | HAZ-BLD-01 | Red cell and plasma tables are inverse; bedside check re-derives from the physical bag. |
+| `wardsynq-surgical.js` | HAZ-SURG-01 | WHO checklist as a hard gate, three different role signatures, laterality re-asserted against the booking. |
+| `wardsynq-actors.js` | HAZ-AI-01, HAZ-ID-01 | Four-tier actor model with a ceiling by KIND. `GovernedStore` is what the UI holds. |
+| `wardsynq-iomt.js` | HAZ-DEV-01 | Positive association, derived artefact, `scoreable()` as the only entry for automated scores. |
+| `wardsynq-offline.js` | HAZ-DOWN-01 | Durable-before-resolve journal, three-way merge reconciliation. |
+| `wardsynq-paediatrics.js` | (supports MED-03, DIAG-01) | Age banding. An unbanded range means adult and is REFUSED for a child rather than approximated. |
+| `wardsynq-deterioration.js` | HAZ-DET-01 (local, PARTIAL) | NEWS2. A missing parameter is INCOMPLETE, never zero. |
+| `wardsynq-emergency.js` | HAZ-TIME-01 (local, PARTIAL) | Sepsis/STEMI/arrest bundles. Time zero is immutable and pinned in both directions. |
+| `wardsynq-recognition.js` | (closes TIME-01's trigger) | Prompts a human; never opens a bundle itself. |
+| `wardsynq-notify.js` | (infrastructure) | The single definition of delivery. Attempted is not delivered. |
+
+Two hazards are LOCAL: they are not in the spec's assurance table and were added because the omission
+was real. Both are PARTIAL and both lower the verified fraction rather than raising it.
+
+## The honest state of it
+
+VERIFIED in the safety case means the named tests pass. It does not mean the control is clinically
+adequate and it does not mean the clinical content is approved. Nothing in this build is CLINICALLY
+VALIDATED or CLINICALLY APPROVED, the threshold, allergy and dose packs are marked seed content, and
+`report()` prints that unconditionally so nobody can read the table without it.
+
+The largest single gap is that NO NOTIFICATION TRANSPORT IS SHIPPED. Every channel is a function a
+site supplies and this build supplies none, which is why both local hazards are PARTIAL. The modules
+refuse rather than pretend: a monitor with no channel will not raise.
+
 ## Not built yet
 
-`wardsynq-safety-case.js`, `wardsynq-interop.js` (the Integration Hub proper; the GHIS adapter
-exists but there is no hub registering adapters yet), and every specialty, enterprise, MLOps and UI
-file. Also unbuilt, and the biggest remaining piece of the owner's architecture: the `ghis-ward.js`
-cut-over, moving the live mobile path onto the adapter.
+The `ghis-ward.js` cut-over, still the biggest remaining piece of the owner's architecture: moving
+the live mobile path onto the adapter. `wardsynq-shadow.js` exists for it and `icu.js` is untouched;
+it awaits a shadow run against real ward data (`?wardsynq_shadow=1`, then check
+`SMD_WARDSYNQ_SHADOW.report().clean`).
+
+Also unbuilt: obstetrics and the ICU flowsheet; all of P2 (enterprise/RCM, quality measures,
+incidents, research de-identification, API gateway) and P3 (MLOps, SecOps, digital twin); a second UI
+screen to prove the design system scales. Production gaps beyond the transport: no service worker for
+the workstation, a CDN webfont, and no barcode hardware, so every scan is a supplied value.

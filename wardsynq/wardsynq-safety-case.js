@@ -419,7 +419,7 @@ const HAZARDS = Object.freeze([
       // population that was least likely to be missed.
       adequacy: "partial",
       module: "wardsynq/wardsynq-emergency.js",
-      summary: "Time zero is set once and is non-writable and non-configurable; it cannot be in the future and cannot precede the evidence that triggered it. A wrong origin is corrected only by voiding with a mandatory reason, leaving both bundles on the record. An element completes on its own named event, so an order is refused where an administration is required. Breach outranks completion, and status is recomputed from the immutable origin rather than stored. qSOFA reports NOT-POSITIVE rather than negative and states in words that it does not exclude sepsis; an incomplete screen that has not already reached two criteria cannot be reported as not-positive at all. The arrest clock gives intervals and deliberately carries no dose.",
+      summary: "Time zero is set once and is non-writable and non-configurable; it cannot be in the future and cannot precede the evidence that triggered it. A wrong origin is corrected only by voiding with a mandatory reason, leaving both bundles on the record. An element completes on its own named event, so an order is refused where an administration is required. Breach outranks completion, and status is recomputed from the immutable origin rather than stored. qSOFA reports NOT-POSITIVE rather than negative and states in words that it does not exclude sepsis; an incomplete screen that has not already reached two criteria cannot be reported as not-positive at all. The arrest clock gives intervals and deliberately carries no dose. wardsynq-recognition.js supplies the trigger: a positive qSOFA or a high NEWS2 raises a PROMPT to a named human rather than opening a bundle, since a screen is not a diagnosis. Accepting a prompt pins the bundle's time zero to the moment the machine knew, refused in BOTH directions, so the clock starts at recognition and not at whenever somebody got round to opening the bundle. Declining requires a clinical reason, an unanswered prompt escalates, and the delay between machine and human is reported as a number.",
     },
     verification: {
       file: "test/wardsynq-emergency.test.mjs",
@@ -439,11 +439,18 @@ const HAZARDS = Object.freeze([
         "a wrong time zero is corrected by VOIDING and reopening, and both stay on the record",
         "the clock reads the administration, so an antibiotic ordered early and hung late is late",
         "the arrest clock says what is due and never what to give",
+        "ADVERSARIAL: accepting a prompt makes it impossible to back-date the bundle past it",
+        "ADVERSARIAL: raisedAt and evidenceAt cannot be reassigned",
+        "ADVERSARIAL: declining requires a clinical reason",
+        "ADVERSARIAL: an UNSCORABLE patient is not turned into suspected sepsis",
+        "ADVERSARIAL: a queue with no channel refuses to raise",
+        "an unanswered prompt goes overdue and escalates, once",
+        "a bundle opened from an accepted prompt carries the prompt id, so the chain is traceable",
       ],
     },
-    residualRisk: "high: the timing of a bundle that was started is trustworthy; whether a bundle gets started at all is not yet controlled",
+    residualRisk: "high: recognition is now prompted and timed, but nothing delivers the prompt and no element is derived from a real administration",
     approver: "Chief Medical Officer, Resuscitation Committee and Sepsis Lead",
-    caveat: "PARTIAL, and partial for a specific reason: the timing control is whole and adversarially tested, but NOTHING TRIGGERS A BUNDLE. No positive screen and no NEWS2 escalation opens one, so a bundle exists only where a clinician already knew to start it, which is precisely the population that was never going to be missed. The patient this hazard is about is the one nobody recognised, and for them this control currently does nothing. Also unbuilt: no notification transport (channels are functions a site supplies and none are shipped), the monitor sweep is caller-driven, and there is no link from a bundle to the medication or order modules, so 'antibiotics administered' is asserted by whoever records it rather than derived from an eMAR administration. Bundle elements and targets are the published Surviving Sepsis and ACLS intervals; the local policy attached to them is UNAPPROVED. NOT modelled: the ACLS algorithm, drug doses, STEMI ECG interpretation, paediatric arrest. Not clinically validated and not clinically approved.",
+    caveat: "PARTIAL. The original reason has been closed: wardsynq-recognition.js now prompts a named human on a positive screen or a high NEWS2, so the control no longer applies only to patients somebody had already recognised, and building it exposed a real hole in the timing guard. Time zero was protected against being moved EARLIER than its evidence and not against being moved LATER, which is the direction that is actually gamed, because moving it forward is what turns a two-hour wait into a compliant one-hour bundle. An accepted prompt now pins it in both directions. What keeps this PARTIAL is everything downstream: no notification transport (channels are functions a site supplies and none are shipped), the monitor sweep is caller-driven, and there is no link from a bundle to the medication or order modules, so 'antibiotics administered' is asserted by whoever records it rather than derived from an eMAR administration. Bundle elements and targets are the published Surviving Sepsis and ACLS intervals; the local policy attached to them is UNAPPROVED. NOT modelled: the ACLS algorithm, drug doses, STEMI ECG interpretation, paediatric arrest. Not clinically validated and not clinically approved.",
   },
 ]);
 
