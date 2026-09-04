@@ -41,6 +41,39 @@ only, no patient data in this table.
 - **Home**: `HOME_TOOLS` tile (`defOn: true`, no `eligible` gate) + Hospital-hub "More" sheet row,
   same pattern as Scheme Search but with no flag — `ACT.icdsearch` → `SMD_ICD.open()`.
 
+## MaiK-assisted suggestion (2026-09-04)
+Diagnosis/symptom text → ranked ICD-10/ICD-11 suggestions, not just manual keyword search — a
+second entry point next to the manual "Search ICD" button in both ICU and OPD/EMR ("Suggest ICD
+code · MaiK" in ICU's Working diagnosis card; an ✨ icon next to the diagnosis field in OPD/EMR).
+
+**Grounding, not free generation** — this is the important part: the model never picks a code out
+of thin air.
+1. Client sends the doctor's diagnosis/symptom text to `/api/ai/extract` with `kind:"icd-suggest"`
+   (`www/icu.js openIcuIcdSuggest()` / `www/opd-emr.js openIcdSuggestForField()`), same one-shot
+   `SMD_AI.extract(text, kind)` contract every other structured AI feature here uses.
+2. Server (`functions/api/ai/[[path]].js`, the `icd-suggest` branch) first runs
+   `functions/_icd_repo.js searchCodes({q: transcript, limit: 30})` against the SAME `icd_codes`
+   D1 table the manual search uses, retrieving up to 30 REAL candidate rows.
+3. `functions/api/ai/_icd-suggest.js icdSuggestPrompt()` hands the model the doctor's text PLUS
+   that candidate list, instructing it to select `id`s **only** from the list, never invent one.
+4. `sanitizeIcdSuggest()` re-validates every returned `id` against the same candidate array
+   server-side — an id the model didn't copy exactly is silently dropped, not "corrected" or
+   fuzzy-matched. The client only ever sees `{id,system,code,title}` fields the server itself
+   already verified exist in the DB, never the model's own transcription of a code.
+5. Same `"ocr"` quota gate as every other `/extract` kind (`checkQuota`/`recordUsage`) — no
+   separate cost bucket for this feature.
+
+**Advisory-only UI, copied from the house `opd-suggest`/Ask MaiK convention exactly**: an explicit
+consent tap before anything is sent ("Send this working diagnosis and findings (no name or MR
+number) to MaiK...?"), a confidence badge (high/medium/low) per suggestion, a one-line "why", and
+a per-suggestion Accept button — nothing is attached to the chart until that specific row is
+tapped. ICU stores an accepted suggestion in the same `STATE.patient.diagnosisIcd` field the
+manual picker uses (tagged `source:"maik-suggest"`); OPD/EMR appends the same `"CODE - Title"`
+line the manual picker does.
+
+Unit-tested in `test/icd-suggest.test.mjs` (prompt shape + the sanitizer's candidate-validation,
+dedup, cap-at-6, and malformed-input handling) — no network/LLM/D1 involved in that test.
+
 ## Design decisions worth knowing
 - **No flag.** The owner's explicit instruction this session ("no more flagging") applies here
   too — this shipped default-on from the first commit, unlike Scheme Search's original
