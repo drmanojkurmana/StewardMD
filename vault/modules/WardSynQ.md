@@ -152,8 +152,22 @@ unresolved, which is reported rather than guessed. Any new data source needs the
 earlier scan-every-key-with-a-regex version measured a p95 of 115 ms against the 10 ms budget with
 100 concurrent drugs. The budget is pinned by a test.
 
+## Bi-temporal queries
+
+`wardsynq/wardsynq-temporal.js` (14 tests) answers the two questions a medico-legal record has to
+separate: **what did we believe at time T**, and **what was actually true at time T**. A potassium
+recorded as 4.0 at 10:00 and corrected to 6.5 at 14:00 must still be able to show that the chart
+said 4.0 at noon, because that is what the clinician acted on. `asOf({knownAt, effectiveAt})` takes
+both axes; `corrections()` is the chart-audit view; `timeline()` gives effective-time intervals with
+adjacent identical versions merged.
+
+Pure functions over arrays of versions. It deliberately does NOT import the store, so the seam
+between them is covered by explicit integration tests that run the engine over real store output
+rather than fixtures.
+
 ## Not built yet
 
-`wardsynq-safety-case.js`, `wardsynq-temporal.js` (the bi-temporal QUERY engine; P0 only carries the
-fields), `wardsynq-interop.js` (the Integration Hub), and every specialty, enterprise, MLOps and UI
-file. Also unbuilt: the `ghis-ward.js` adapter migration described above.
+`wardsynq-safety-case.js`, `wardsynq-interop.js` (the Integration Hub proper; the GHIS adapter
+exists but there is no hub registering adapters yet), and every specialty, enterprise, MLOps and UI
+file. Also unbuilt, and the biggest remaining piece of the owner's architecture: the `ghis-ward.js`
+cut-over, moving the live mobile path onto the adapter.
