@@ -57,6 +57,7 @@ const SUITES = [
   "test/wardsynq-opd.test.mjs",
   "test/wardsynq-flowsheet.test.mjs",
   "test/wardsynq-brand.test.mjs",
+  "test/wardsynq-transport.test.mjs",
   "test/wardsynq-safety-case.test.mjs",
 ];
 
