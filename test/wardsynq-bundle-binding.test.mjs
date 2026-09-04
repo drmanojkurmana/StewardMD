@@ -15,7 +15,7 @@ import {
 import { EmergencyBundle, CODE } from "../wardsynq/wardsynq-emergency.js";
 import { ClinicalEventBus } from "../wardsynq/wardsynq-events.js";
 import { MedicationAdministrationRecord } from "../wardsynq/wardsynq-meds.js";
-import { Patient, MedicationOrder } from "../wardsynq/wardsynq-model.js";
+import { Patient, MedicationOrder, Observation } from "../wardsynq/wardsynq-model.js";
 
 const T0 = "2026-09-04T02:10:00.000Z";
 const at = (m) => new Date(Date.parse(T0) + m * 60000).toISOString();
@@ -244,4 +244,134 @@ test("ADVERSARIAL: a bedside scan, and only a bedside scan, completes the antibi
   assert.equal(el.doneAt, record.administeredAt, "and to the eMAR's own time");
 
   binder.stop();
+});
+
+/* ------------------------------------------------------------------ ADVERSARIAL: results as evidence
+ *
+ * The lactate and cultures elements were the reason most of a sepsis bundle stayed attested. They
+ * bind to a finalised result, with the same guards the medication path already had, because the ways
+ * the two go wrong are identical.
+ */
+
+const RESULT_BINDINGS = [
+  ...BINDINGS,
+  { code: CODE.SEPSIS, element: "lactate", observationCodes: ["2524-7"] },
+];
+
+const lactate = (over) => Observation({
+  patientId: "pat-1", code: "2524-7", value: 3.8, unit: "mmol/L",
+  category: "laboratory", effectiveAt: at(25), ...over,
+});
+
+test("a finalised lactate completes the lactate element", () => {
+  const b = bundle();
+  const binder = binderFor(b, { bindings: RESULT_BINDINGS });
+  const r = binder.onResult({ payload: { observation: lactate() } });
+  assert.equal(r.completed.length, 1);
+  const el = b.element("lactate");
+  assert.equal(el.done, true);
+  assert.equal(el.provenance, PROVENANCE.DERIVED);
+  assert.equal(el.doneAt, at(25));
+});
+
+test("ADVERSARIAL: a NORMAL lactate counts, because the element is 'measure it'", () => {
+  const b = bundle();
+  const binder = binderFor(b, { bindings: RESULT_BINDINGS });
+  binder.onResult({ payload: { observation: lactate({ value: 0.9 }) } });
+  assert.equal(b.element("lactate").done, true,
+    "binding only on critical results would leave a reassuring lactate invisible and the element permanently attested");
+});
+
+test("ADVERSARIAL: the element anchors to when the sample was RESULTED, not when we saw it", () => {
+  const b = bundle();
+  const binder = binderFor(b, { bindings: RESULT_BINDINGS, now: () => at(400) });
+  binder.onResult({ payload: { observation: lactate({ effectiveAt: at(180) }) } });
+  const el = b.element("lactate");
+  assert.equal(el.doneAt, at(180));
+  assert.equal(el.withinTarget, false, "an order placed early whose result comes back at three hours has not met the hour");
+});
+
+test("ADVERSARIAL: another patient's lactate never completes this bundle", () => {
+  const b = bundle();
+  const binder = binderFor(b, { bindings: RESULT_BINDINGS });
+  const r = binder.onResult({ payload: { observation: lactate({ patientId: "pat-2" }) } });
+  assert.equal(r.completed.length, 0);
+  assert.equal(b.element("lactate").done, false);
+});
+
+test("ADVERSARIAL: a result from before time zero belongs to an earlier episode", () => {
+  const b = bundle();
+  const binder = binderFor(b, { bindings: RESULT_BINDINGS });
+  const r = binder.onResult({ payload: { observation: lactate({ effectiveAt: at(-90) }) } });
+  assert.equal(r.completed.length, 0);
+});
+
+test("a result with no effective time cannot anchor a timed element", () => {
+  const b = bundle();
+  const binder = binderFor(b, { bindings: RESULT_BINDINGS });
+  const obs = lactate();
+  obs.effectiveAt = null; obs.meta = {};
+  const r = binder.onResult({ payload: { observation: obs } });
+  assert.equal(r.completed.length, 0);
+  assert.match(r.unmatched.reason, /cannot anchor a timed element/);
+});
+
+test("an unbound result code is recorded as unmatched rather than dropped", () => {
+  const b = bundle();
+  const binder = binderFor(b, { bindings: RESULT_BINDINGS });
+  const r = binder.onResult({ payload: { observation: lactate({ code: "2823-3" }) } });
+  assert.equal(r.completed.length, 0);
+  assert.match(r.unmatched.reason, /no live bundle element matched result code 2823-3/);
+});
+
+test("junk result payloads do not throw", () => {
+  const binder = binderFor(bundle(), { bindings: RESULT_BINDINGS });
+  for (const junk of [undefined, {}, { payload: {} }, { payload: { observation: {} } }]) {
+    assert.deepEqual(binder.onResult(junk).completed, []);
+  }
+});
+
+test("ADVERSARIAL: a bundle can now be MOSTLY derived rather than mostly attested", async () => {
+  const bus = new ClinicalEventBus();
+  const b = bundle();
+  const binder = new BundleBinder({ bus, bindings: RESULT_BINDINGS, now: () => at(60) });
+  binder.watch(b);
+  binder.start();
+
+  b.notApplicable("fluids", { by: "dr-1", reason: "normotensive" });
+  b.notApplicable("vasopressors", { by: "dr-1", reason: "not hypotensive" });
+
+  // The lab resulting a lactate, through the real event the critical loop now emits.
+  await bus.emit("result.finalized", { observation: lactate({ effectiveAt: at(22) }) });
+  // The nurse administering the antibiotic, through the real eMAR event.
+  await bus.emit("meds.administered", {
+    record: admin({ administeredAt: at(38) }),
+    order: MedicationOrder({ patientId: "pat-1", drugCode: "PIPTAZ", drug: "piperacillin-tazobactam", prescriberId: "d" }),
+  });
+  // Cultures are still a human act with no system that observes it, so this one is attested.
+  b.complete("cultures", { event: "collected", at: at(18), by: "nurse-7" });
+
+  const s = provenanceSummary(b, at(60));
+  assert.equal(s.compliant, true);
+  assert.equal(s.derived, 2, "lactate and antibiotics are both evidenced now");
+  assert.equal(s.attested, 1);
+  assert.deepEqual(s.derivedKeys.sort(), ["antibiotics", "lactate"]);
+  binder.stop();
+});
+
+test("stop() unsubscribes from BOTH streams", async () => {
+  const bus = new ClinicalEventBus();
+  const b = bundle();
+  const binder = new BundleBinder({ bus, bindings: RESULT_BINDINGS, now: () => at(60) });
+  binder.watch(b);
+  binder.start();
+  binder.stop();
+
+  await bus.emit("result.finalized", { observation: lactate() });
+  await bus.emit("meds.administered", {
+    record: admin(),
+    order: MedicationOrder({ patientId: "pat-1", drugCode: "PIPTAZ", drug: "piperacillin-tazobactam", prescriberId: "d" }),
+  });
+  assert.equal(b.element("lactate").done, false);
+  assert.equal(b.element("antibiotics").done, false);
 });

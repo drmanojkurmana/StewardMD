@@ -178,6 +178,12 @@ class CriticalResultLoop {
    */
   async onResultFinalized(observation, ctx) {
     ctx = ctx || {};
+    // A finalised result is announced BEFORE it is classified, and regardless of what the
+    // classification turns out to be. Consumers other than this loop care that a result exists at
+    // all: a sepsis bundle's lactate element is satisfied by a lactate being resulted, whether the
+    // value was critical or reassuringly normal. Emitting only on the critical path would have made
+    // a normal lactate invisible to everything downstream.
+    await this._emit("result.finalized", { observation, patientId: observation.patientId });
     // The patient is passed so age banding applies. Without it a child's result would be
     // classified against adult limits, which is the gap this closes.
     const verdict = classify(observation, this.pack, ctx.patient || null);

@@ -32,9 +32,22 @@
  * time the event was processed and not a time anyone supplies, so the one route by which automation
  * could have made a bundle look faster is closed.
  *
- * NOT MODELLED: matching a drug to a bundle element by anything cleverer than a drug-code list, so a
- * site must state which codes satisfy which element; laboratory and imaging results, which would
- * need the same treatment for the lactate and ECG elements and do not have it yet.
+ * TWO KINDS OF EVIDENCE. A medication element is satisfied by an eMAR administration; a laboratory
+ * or imaging element by a finalised result. They are deliberately handled by the same code with the
+ * same guards, because the ways they can go wrong are identical: the wrong patient, a value from an
+ * earlier episode, and a timestamp taken from the processing rather than from the event.
+ *
+ * A RESULT COUNTS WHEN IT WAS RESULTED, NOT WHEN IT WAS ORDERED. The sepsis bundle asks for a
+ * lactate MEASURED inside the hour, and an order placed at 10 minutes whose sample is analysed at
+ * three hours has not met it. The element therefore anchors to the observation's effective time.
+ *
+ * A NORMAL RESULT STILL COUNTS. The bundle element is "measure lactate", not "measure a high
+ * lactate", so the binding fires on any finalised value. This is why result.finalized is emitted
+ * before classification rather than on the critical path: emitting only for critical results would
+ * have made a reassuring lactate invisible and left the element permanently attested.
+ *
+ * NOT MODELLED: matching by anything cleverer than a code list, so a site must state which drug or
+ * observation codes satisfy which element.
  *
  * STATUS: IMPLEMENTED and TESTED. NOT clinically validated and NOT clinically approved.
  *
@@ -75,9 +88,10 @@ class BundleBinder {
     this.bindings = (bindings || []).map((b) => ({
       ...b,
       drugCodes: (b.drugCodes || []).map(upper),
+      observationCodes: (b.observationCodes || []).map(upper),
     }));
     this.unmatched = [];
-    this._off = null;
+    this._off = [];
   }
 
   /** Live bundles this binder can complete against, newest time zero first. */
@@ -95,15 +109,79 @@ class BundleBinder {
     return bundle;
   }
 
-  /** Subscribes to the event bus. Returns an unsubscribe function. */
+  /** Subscribes to both evidence streams. Returns an unsubscribe function. */
   start() {
-    if (this._off) return this._off;
-    this._off = this.bus.on("meds.administered", (event) => this.onAdministered(event));
-    return this._off;
+    if (this._off.length) return () => this.stop();
+    this._off.push(this.bus.on("meds.administered", (event) => this.onAdministered(event)));
+    this._off.push(this.bus.on("result.finalized", (event) => this.onResult(event)));
+    return () => this.stop();
   }
 
   stop() {
-    if (this._off) { this._off(); this._off = null; }
+    for (const off of this._off) off();
+    this._off = [];
+  }
+
+  /**
+   * The shared half of both handlers: find the element this evidence satisfies, and complete it at
+   * the time the evidence says, not the time we happened to see it.
+   */
+  _apply({ patientId, code, element, at, by, detail, recordId }) {
+    for (const bundle of this._candidates(patientId, code)) {
+      let el;
+      try { el = bundle.element(element); } catch { continue; }
+      if (el.done || el.notApplicable) continue;
+
+      // Evidence predating this bundle's time zero belongs to an earlier episode. Crediting it
+      // would give the bundle a head start it did not have.
+      if (Date.parse(at) < Date.parse(bundle.timeZero)) continue;
+
+      bundle.complete(element, { event: el.doneOn, at, by, detail });
+      el.provenance = PROVENANCE.DERIVED;
+      el.sourceRecordId = recordId || null;
+      return { bundle, element, at };
+    }
+    return null;
+  }
+
+  /**
+   * Handles one finalised laboratory or imaging result.
+   *
+   * @returns {{completed: object[], unmatched: object|null}}
+   */
+  onResult(event) {
+    const payload = (event && event.payload) || event || {};
+    const obs = payload.observation;
+    if (!obs || !obs.patientId || !obs.code) return { completed: [], unmatched: null };
+
+    // When the sample was analysed, not when this event was handled. A bundle asking for a lactate
+    // inside the hour is asking about the measurement, and an order placed early whose result comes
+    // back at three hours has not met it.
+    const at = obs.effectiveAt || (obs.meta && (obs.meta.effectiveAt || obs.meta.recordedAt));
+    if (!at) {
+      return { completed: [], unmatched: this._note(obs, "the result carries no effective time, so it cannot anchor a timed element") };
+    }
+
+    const code = upper(obs.code);
+    const completed = [];
+    for (const binding of this.bindings) {
+      if (!binding.observationCodes.length) continue;
+      if (!binding.observationCodes.includes(code)) continue;
+      const hit = this._apply({
+        patientId: obs.patientId, code: binding.code, element: binding.element,
+        at, by: obs.performer || "laboratory",
+        detail: `derived from finalised result ${obs.id || ""}`.trim(), recordId: obs.id,
+      });
+      if (hit) {
+        completed.push(hit);
+        if (this.onDerived) this.onDerived({ bundle: hit.bundle, element: binding.element, observation: obs });
+      }
+    }
+
+    if (!completed.length) {
+      return { completed: [], unmatched: this._note(obs, `no live bundle element matched result code ${code || "(none)"}`) };
+    }
+    return { completed, unmatched: null };
   }
 
   /**
@@ -128,29 +206,17 @@ class BundleBinder {
     const completed = [];
 
     for (const binding of this.bindings) {
-      if (binding.drugCodes.length && !binding.drugCodes.some((c) => drug.includes(c))) continue;
+      if (!binding.drugCodes.length) continue;
+      if (!binding.drugCodes.some((c) => drug.includes(c))) continue;
 
-      for (const bundle of this._candidates(record.patientId, binding.code)) {
-        let el;
-        try { el = bundle.element(binding.element); } catch { continue; }
-        if (el.done || el.notApplicable) continue;
-
-        // An administration BEFORE this bundle's time zero belongs to an earlier episode, not this
-        // one. Letting it complete the element would credit the bundle with a dose given before the
-        // patient was even recognised.
-        if (Date.parse(administeredAt) < Date.parse(bundle.timeZero)) continue;
-
-        bundle.complete(binding.element, {
-          event: el.doneOn,
-          at: administeredAt,
-          by: record.administeredBy || "emar",
-          detail: `derived from eMAR administration ${record.id || ""}`.trim(),
-        });
-        el.provenance = PROVENANCE.DERIVED;
-        el.sourceRecordId = record.id || null;
-        completed.push({ bundle, element: binding.element, at: administeredAt });
-        if (this.onDerived) this.onDerived({ bundle, element: binding.element, record });
-        break; // one administration satisfies one element on the most recent applicable bundle
+      const hit = this._apply({
+        patientId: record.patientId, code: binding.code, element: binding.element,
+        at: administeredAt, by: record.administeredBy || "emar",
+        detail: `derived from eMAR administration ${record.id || ""}`.trim(), recordId: record.id,
+      });
+      if (hit) {
+        completed.push(hit);
+        if (this.onDerived) this.onDerived({ bundle: hit.bundle, element: binding.element, record });
       }
     }
 
@@ -161,8 +227,8 @@ class BundleBinder {
   }
 
   _note(record, reason) {
-    // Nothing is silently dropped, the same contract every adapter in this repo meets. An
-    // administration that matched nothing is usually correct and occasionally the interesting thing.
+    // Nothing is silently dropped, the same contract every adapter in this repo meets. Evidence that
+    // matched nothing is usually correct and occasionally the interesting thing.
     const note = { at: this.now(), patientId: record.patientId, recordId: record.id || null, reason };
     this.unmatched.push(note);
     return note;
