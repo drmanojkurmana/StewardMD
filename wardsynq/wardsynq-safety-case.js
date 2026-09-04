@@ -167,14 +167,12 @@ const HAZARDS = Object.freeze([
     initialRisk: "catastrophic x occasional",
     requirement: "Charting must survive interruption, and no write may silently overwrite another.",
     control: {
-      // Deliberately PARTIAL. The hazard has two halves and only one is closed. Silent overwrite is
-      // now fully controlled: three-way reconciliation never resolves a genuine clinical conflict,
-      // it surfaces it. Data LOSS is not: the offline journal is in memory, so a device that dies
-      // mid-outage takes the charting with it. Raising this to full would be exactly the kind of
-      // flattering arithmetic the adequacy cap exists to prevent.
-      kind: "append-only store with three-way reconciliation", adequacy: "partial",
+      // Both halves are now closed. This sat at PARTIAL while the journal was in memory, because a
+      // workstation losing power mid-outage took the charting with it; the durable journal is what
+      // moved it, not a change to the criteria.
+      kind: "append-only store, durable journal, three-way reconciliation", adequacy: "full",
       module: "wardsynq/wardsynq-store.js + wardsynq/wardsynq-offline.js",
-      summary: "Every write creates a new version and keeps all prior ones; transactions are all-or-nothing; reads and writes are deep-copied. On reconnection, offline edits are compared three-way against the ancestor they were derived from: only disjoint field changes are combined automatically, anything signed or administered is never folded into, and the same field changed on both sides becomes a CONFLICT carrying both versions and the ancestor. A conflict cannot be resolved without a named clinician and a rationale, and the discarded version is kept on the record.",
+      summary: "Every write creates a new version and keeps all prior ones; transactions are all-or-nothing; reads and writes are deep-copied. Offline edits go to a DURABLE append-only journal, and record() does not resolve until the entry has reached storage, so a UI can never report a note saved that was not. A failed write reports failure and is not held in memory. On reconnection, edits are compared three-way against the ancestor they were derived from: only disjoint field changes combine automatically, anything signed or administered is never folded into, and the same field changed on both sides becomes a CONFLICT carrying both versions and the ancestor. A conflict cannot be resolved without a named clinician and a rationale, the discarded version is kept, and unresolved conflicts stay in the journal across a restart.",
     },
     verification: {
       file: "test/wardsynq-store.test.mjs and test/wardsynq-offline.test.mjs",
@@ -186,14 +184,19 @@ const HAZARDS = Object.freeze([
         "ADVERSARIAL: a conflict cannot be resolved without a person and a reason",
         "resolution: the discarded version is kept on the record",
         "reconnect: a hundred offline edits all survive to a decision",
-        "three-way: disjoint edits on both sides are combined, and ONLY because the base says who changed what",
+        "durability: an edit is on disk BEFORE record() resolves",
+        "durability: a failed write does NOT report success, and is not held in memory",
+        "durability: charting survives the workstation dying mid-outage",
+        "durability: restored charting reconciles normally",
+        "durability: reconciled entries leave the journal, unresolved conflicts stay",
+        "durability: a corrupted row is skipped rather than poisoning the restore",
         "version", "history", "transaction", "deep",
       ],
       matchMode: "fragment",
     },
-    residualRisk: "the overwrite half is closed; the data-loss half is not",
+    residualRisk: "reduced: charting survives a power cut and no write silently overwrites another",
     approver: "Chief Information Officer and Disaster Committee",
-    caveat: "PARTIAL ON PURPOSE. Silent overwrite is IMPLEMENTED and TESTED. Data LOSS is not: the offline journal lives in memory, so a workstation that loses power mid-outage loses the charting it was holding. Durable local persistence, a service worker, and the client runtime that would actually let a ward keep charting through an outage are NOT built. Nothing here is clinically validated or approved.",
+    caveat: "IMPLEMENTED and TESTED, not clinically validated or approved. TWO GAPS, both real. The durability tests exercise the backend INTERFACE through an in-memory implementation; IndexedDBJournalBackend is a thin adapter to that same interface and is NOT itself exercised by a test, so its transaction handling is reasoned about rather than proven. And nothing yet WIRES the journal into the workstation: the control exists, an application that does not use it gets none of it. A service worker for loading the app itself offline is separate and is not built.",
   },
   {
     id: "HAZ-DIAG-01",
@@ -405,9 +408,19 @@ function report(assessment) {
   const s = summarise(assessment);
   const order = { uncontrolled: 0, "no-evidence": 1, failing: 2, partial: 3, verified: 4 };
   const rows = [...assessment].sort((a, b) => order[a.status] - order[b.status]);
+  // The qualifier is printed every time and is not optional. A report whose headline is "11 of 11"
+  // with nothing beside it will be read as "this software is safe to use on patients", which is not
+  // what any row here says. VERIFIED is a statement about tests, not about clinical adequacy, and
+  // the closer the count gets to complete the more that distinction has to be forced into view.
+  const unapproved = assessment.filter((a) => /UNAPPROVED|not clinically validated|seed/i.test(a.caveat || "")).length;
   const lines = [
     "WardSynQ clinical safety case",
     `${s.verifiedFraction} hazards fully verified. ${s.partial} partially controlled, ${s.uncontrolled} uncontrolled, ${s["no-evidence"]} without evidence, ${s.failing} failing.`,
+    "",
+    "VERIFIED means the named tests pass. It does NOT mean the control is clinically adequate,",
+    "and it does NOT mean the clinical content it runs on has been approved.",
+    `${unapproved} of ${s.total} hazards carry a caveat about unapproved or unvalidated clinical content.`,
+    "Nothing in this build is CLINICALLY VALIDATED or CLINICALLY APPROVED. Read the caveats.",
     "",
   ];
   for (const r of rows) {

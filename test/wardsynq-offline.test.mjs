@@ -9,7 +9,7 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 
-import { OUTCOME, OfflineError, OfflineJournal, Reconciler, reconcileOne, changedFields } from "../wardsynq/wardsynq-offline.js";
+import { OUTCOME, OfflineError, OfflineJournal, MemoryJournalBackend, Reconciler, reconcileOne, changedFields } from "../wardsynq/wardsynq-offline.js";
 import { ClinicalStore, MemoryBackend } from "../wardsynq/wardsynq-store.js";
 import { ClinicalEventBus } from "../wardsynq/wardsynq-events.js";
 
@@ -34,20 +34,20 @@ async function setup(over) {
 
 /* ------------------------------------------------------------------ the journal */
 
-test("journal: an edit must record the version it was derived from", () => {
+test("journal: an edit must record the version it was derived from", async () => {
   const j = new OfflineJournal({});
-  assert.throws(() => j.record(order(), undefined, "dr-1"), (e) => {
+  await assert.rejects(() => j.record(order(), undefined, "dr-1"), (e) => {
     assert.equal(e.code, "NO_BASE");
     return true;
   }, "an edit with no ancestor cannot be three-way merged later, only guessed at");
-  assert.throws(() => j.record(order(), null, null), (e) => { assert.equal(e.code, "NO_ACTOR"); return true; });
-  assert.throws(() => j.record({ id: "x" }, null, "dr-1"), (e) => { assert.equal(e.code, "NO_ENTITY"); return true; });
+  await assert.rejects(() => j.record(order(), null, null), (e) => { assert.equal(e.code, "NO_ACTOR"); return true; });
+  await assert.rejects(() => j.record({ id: "x" }, null, "dr-1"), (e) => { assert.equal(e.code, "NO_ENTITY"); return true; });
 });
 
-test("journal: entries are snapshots and are frozen against later mutation", () => {
+test("journal: entries are snapshots and are frozen against later mutation", async () => {
   const j = new OfflineJournal({});
   const live = order();
-  const entry = j.record(live, null, "dr-1");
+  const entry = await j.record(live, null, "dr-1");
   live.dose = { value: 999, unit: "mg" };
   assert.equal(entry.entity.dose.value, 40, "the journal holds what was charted, not a live reference");
   assert.throws(() => { entry.actorId = "someone-else"; });
@@ -143,9 +143,9 @@ test("reconnect: a full journal reconciles into applied, merged and conflicting 
   await store.put(order({ id: "rx-merge", frequency: "twice daily" }));
   await store.put(order({ id: "rx-clash", dose: { value: 20, unit: "mg" } }));
 
-  journal.record(order({ id: "rx-clean", route: "IV" }), order({ id: "rx-clean" }), "dr-1");
-  journal.record(order({ id: "rx-merge", route: "IV" }), order({ id: "rx-merge" }), "dr-1");
-  journal.record(order({ id: "rx-clash", dose: { value: 60, unit: "mg" } }), order({ id: "rx-clash" }), "dr-1");
+  await journal.record(order({ id: "rx-clean", route: "IV" }), order({ id: "rx-clean" }), "dr-1");
+  await journal.record(order({ id: "rx-merge", route: "IV" }), order({ id: "rx-merge" }), "dr-1");
+  await journal.record(order({ id: "rx-clash", dose: { value: 60, unit: "mg" } }), order({ id: "rx-clash" }), "dr-1");
 
   const out = await rec.reconcile(journal);
   assert.equal(out.applied.length, 1);
@@ -161,7 +161,7 @@ test("reconnect: a full journal reconciles into applied, merged and conflicting 
 test("ADVERSARIAL: a conflict is never written to the store by reconciliation", async () => {
   const { store, journal, rec } = await setup();
   await store.put(order({ dose: { value: 20, unit: "mg" } }));
-  journal.record(order({ dose: { value: 60, unit: "mg" } }), order(), "dr-1");
+  await journal.record(order({ dose: { value: 60, unit: "mg" } }), order(), "dr-1");
 
   const out = await rec.reconcile(journal);
   assert.equal(out.conflicts.length, 1);
@@ -174,7 +174,7 @@ test("ADVERSARIAL: a conflict is never written to the store by reconciliation", 
 test("reconnect: a conflict carries BOTH versions and the ancestor, so nothing is lost", async () => {
   const { store, journal, rec } = await setup();
   await store.put(order({ dose: { value: 20, unit: "mg" } }));
-  journal.record(order({ dose: { value: 60, unit: "mg" } }), order(), "dr-night");
+  await journal.record(order({ dose: { value: 60, unit: "mg" } }), order(), "dr-night");
   const [c] = (await rec.reconcile(journal)).conflicts;
 
   assert.equal(c.local.dose.value, 60);
@@ -191,7 +191,7 @@ test("reconnect: conflicts are announced so a ward can be told before somebody a
   bus.on("offline.conflict", (e) => raised.push(e.payload));
   const { store, journal, rec } = await setup({ bus });
   await store.put(order({ dose: { value: 20, unit: "mg" } }));
-  journal.record(order({ dose: { value: 60, unit: "mg" } }), order(), "dr-1");
+  await journal.record(order({ dose: { value: 60, unit: "mg" } }), order(), "dr-1");
   await rec.reconcile(journal);
   assert.equal(raised.length, 1);
   assert.equal(raised[0].patientId, "pat-1");
@@ -200,7 +200,7 @@ test("reconnect: conflicts are announced so a ward can be told before somebody a
 test("reconnect: a dry run changes nothing", async () => {
   const { store, journal, rec } = await setup();
   await store.put(order());
-  journal.record(order({ route: "IV" }), order(), "dr-1");
+  await journal.record(order({ route: "IV" }), order(), "dr-1");
   const out = await rec.reconcile(journal, { dryRun: true });
   assert.equal(out.applied.length, 1);
   assert.equal((await store.get("MedicationOrder", "rx-1")).route, "SC", "a preview must not write");
@@ -211,7 +211,7 @@ test("reconnect: a hundred offline edits all survive to a decision", async () =>
   for (let i = 0; i < 100; i++) {
     const id = `rx-${i}`;
     await store.put(order({ id, dose: { value: 20, unit: "mg" } }));
-    journal.record(order({ id, dose: { value: 60, unit: "mg" } }), order({ id }), "dr-1");
+    await journal.record(order({ id, dose: { value: 60, unit: "mg" } }), order({ id }), "dr-1");
   }
   const out = await rec.reconcile(journal);
   assert.equal(out.conflicts.length, 100, "every one is surfaced; none is dropped for volume");
@@ -223,7 +223,7 @@ test("reconnect: a hundred offline edits all survive to a decision", async () =>
 test("ADVERSARIAL: a conflict cannot be resolved without a person and a reason", async () => {
   const { store, journal, rec } = await setup();
   await store.put(order({ dose: { value: 20, unit: "mg" } }));
-  journal.record(order({ dose: { value: 60, unit: "mg" } }), order(), "dr-1");
+  await journal.record(order({ dose: { value: 60, unit: "mg" } }), order(), "dr-1");
   const [c] = (await rec.reconcile(journal)).conflicts;
 
   await assert.rejects(() => rec.resolve(c, { take: "local" }, null, "because"), (e) => { assert.equal(e.code, "NO_ACTOR"); return true; });
@@ -240,7 +240,7 @@ test("ADVERSARIAL: a conflict cannot be resolved without a person and a reason",
 test("resolution: the discarded version is kept on the record", async () => {
   const { store, journal, rec } = await setup();
   await store.put(order({ dose: { value: 20, unit: "mg" } }));
-  journal.record(order({ dose: { value: 60, unit: "mg" } }), order(), "dr-night");
+  await journal.record(order({ dose: { value: 60, unit: "mg" } }), order(), "dr-night");
   const [c] = (await rec.reconcile(journal)).conflicts;
 
   await rec.resolve(c, { take: "local" }, "dr-consultant", "Night team's 60 mg is correct; weight recorded after the day dose was written.");
@@ -257,7 +257,7 @@ test("resolution: the discarded version is kept on the record", async () => {
 test("resolution: a manual merge must supply the entity it merged to", async () => {
   const { store, journal, rec } = await setup();
   await store.put(order({ dose: { value: 20, unit: "mg" } }));
-  journal.record(order({ dose: { value: 60, unit: "mg" } }), order(), "dr-1");
+  await journal.record(order({ dose: { value: 60, unit: "mg" } }), order(), "dr-1");
   const [c] = (await rec.reconcile(journal)).conflicts;
   await assert.rejects(() => rec.resolve(c, { take: "manual" }, "dr-2", "combined both"), (e) => { assert.equal(e.code, "NO_ENTITY"); return true; });
 
@@ -270,9 +270,141 @@ test("resolution: a manual merge must supply the entity it merged to", async () 
 test("resolution: taking the server version still records that offline work was discarded", async () => {
   const { store, journal, rec } = await setup();
   await store.put(order({ dose: { value: 20, unit: "mg" } }));
-  journal.record(order({ dose: { value: 60, unit: "mg" } }), order(), "dr-night");
+  await journal.record(order({ dose: { value: 60, unit: "mg" } }), order(), "dr-night");
   const [c] = (await rec.reconcile(journal)).conflicts;
   const saved = await rec.resolve(c, { take: "remote" }, "dr-consultant", "Day team's dose confirmed with the patient's weight.");
   assert.equal(saved.dose.value, 20);
   assert.equal(saved.conflictResolution.discarded.dose.value, 60, "the offline clinician's work is visible, not vanished");
+});
+
+
+/* ------------------------------------------------------------------ durability
+ *
+ * This is the half of HAZ-DOWN-01 that was open. Reconciliation was already sound; the journal was
+ * in memory, so a workstation losing power mid-outage lost the charting it was holding. These tests
+ * simulate exactly that: the process dies and a fresh journal object is opened over the same
+ * storage, the way a workstation comes back after a power cut.
+ */
+
+/** Survives across "restarts" the way a disk does. */
+class FakeDisk extends MemoryJournalBackend {}
+
+test("durability: an edit is on disk BEFORE record() resolves", async () => {
+  const disk = new FakeDisk();
+  const j = new OfflineJournal({ backend: disk });
+  await j.open();
+
+  let onDiskAtResolve = null;
+  const realAppend = disk.append.bind(disk);
+  disk.append = async (entry) => {
+    await realAppend(entry);
+    onDiskAtResolve = (await disk.all()).length; // durable before the promise settles
+  };
+
+  await j.record(order(), null, "dr-1");
+  assert.equal(onDiskAtResolve, 1,
+    "a UI that reports a note saved before this resolves would be lying to a clinician");
+});
+
+test("durability: a failed write does NOT report success, and is not held in memory", async () => {
+  const disk = new FakeDisk();
+  disk.append = async () => { throw new Error("disk full"); };
+  const j = new OfflineJournal({ backend: disk });
+  await j.open();
+
+  await assert.rejects(() => j.record(order(), null, "dr-1"), /disk full/,
+    "the caller must learn the edit was not saved");
+  assert.equal(j.size, 0, "and it must not sit in memory pretending to be journalled");
+});
+
+test("durability: charting survives the workstation dying mid-outage", async () => {
+  const disk = new FakeDisk();
+  const c = clock("2026-09-04T12:00:00.000Z");
+
+  // A night of charting during an outage.
+  const before = new OfflineJournal({ backend: disk, now: c.now });
+  await before.open();
+  await before.record(order({ id: "rx-1", route: "IV" }), order({ id: "rx-1" }), "dr-night");
+  c.advance(5);
+  await before.record(order({ id: "rx-2", dose: { value: 60, unit: "mg" } }), order({ id: "rx-2" }), "dr-night");
+  assert.equal(before.size, 2);
+
+  // The workstation loses power. Nothing is flushed, closed or cleaned up.
+  const after = new OfflineJournal({ backend: disk, now: c.now });
+  const restored = await after.open();
+
+  assert.equal(restored, 2, "both edits come back");
+  assert.equal(after.pending()[0].entity.route, "IV", "with their content intact");
+  assert.equal(after.pending()[0].actorId, "dr-night", "and attributed to who charted them");
+  assert.deepEqual(after.pending().map((e) => e.id), ["rx-1", "rx-2"], "in the order they happened");
+});
+
+test("durability: restored charting reconciles normally", async () => {
+  const disk = new FakeDisk();
+  const { store, rec } = await setup();
+  await store.put(order({ dose: { value: 20, unit: "mg" } }));
+
+  const before = new OfflineJournal({ backend: disk });
+  await before.open();
+  await before.record(order({ dose: { value: 60, unit: "mg" } }), order(), "dr-night");
+
+  // Power cut, restart, reconnect.
+  const after = new OfflineJournal({ backend: disk });
+  await after.open();
+  const out = await rec.reconcile(after);
+
+  assert.equal(out.conflicts.length, 1, "work that survived a power cut still reaches a human decision");
+  assert.equal(out.conflicts[0].local.dose.value, 60);
+  assert.equal(out.conflicts[0].offlineBy, "dr-night");
+});
+
+test("durability: reconciled entries leave the journal, unresolved conflicts stay", async () => {
+  const disk = new FakeDisk();
+  const { store, rec } = await setup();
+  await store.put(order({ id: "rx-clean" }));
+  await store.put(order({ id: "rx-clash", dose: { value: 20, unit: "mg" } }));
+
+  const j = new OfflineJournal({ backend: disk });
+  await j.open();
+  await j.record(order({ id: "rx-clean", route: "IV" }), order({ id: "rx-clean" }), "dr-1");
+  await j.record(order({ id: "rx-clash", dose: { value: 60, unit: "mg" } }), order({ id: "rx-clash" }), "dr-1");
+
+  const out = await rec.reconcile(j);
+  assert.equal(out.applied.length, 1);
+  assert.equal(out.conflicts.length, 1);
+  assert.equal(j.size, 1, "the settled edit is gone from the journal");
+
+  // And it is gone from DISK too, so a restart does not replay it.
+  const after = new OfflineJournal({ backend: disk });
+  assert.equal(await after.open(), 1,
+    "a device that dies mid-reconciliation comes back holding only the unresolved work");
+  assert.equal(after.pending()[0].id, "rx-clash");
+});
+
+test("durability: a dry run leaves the journal completely intact", async () => {
+  const disk = new FakeDisk();
+  const { store, rec } = await setup();
+  await store.put(order());
+  const j = new OfflineJournal({ backend: disk });
+  await j.open();
+  await j.record(order({ route: "IV" }), order(), "dr-1");
+
+  await rec.reconcile(j, { dryRun: true });
+  assert.equal(j.size, 1, "a preview must not consume the journal");
+  const after = new OfflineJournal({ backend: disk });
+  assert.equal(await after.open(), 1);
+});
+
+test("durability: a corrupted row is skipped rather than poisoning the restore", async () => {
+  const disk = new FakeDisk();
+  const j = new OfflineJournal({ backend: disk });
+  await j.open();
+  await j.record(order(), null, "dr-1");
+  // Something half-written by a device that died mid-transaction.
+  disk.rows.push({ garbage: true });
+  disk.rows.push({ resourceType: "MedicationOrder" }); // no id, no timestamp
+
+  const after = new OfflineJournal({ backend: disk });
+  assert.equal(await after.open(), 1,
+    "one unreadable row must not cost a clinician the rest of the night's charting");
 });

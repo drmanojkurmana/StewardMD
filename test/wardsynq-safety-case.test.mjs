@@ -42,20 +42,29 @@ test("case: a PARTIAL control is capped and can never reach verified", () => {
         `${r.id} is a partial control; passing tests must not promote it to verified`);
     }
   }
-  // The cap must actually be doing work, not passing vacuously because nothing is partial any more.
-  // Pinned to whatever is currently declared partial rather than to an id, because the previous
-  // version named HAZ-AI-01 and went stale the moment that control was genuinely built.
+  // The cap is asserted against a SYNTHETIC hazard rather than against the live table, so the rule
+  // stays enforced no matter how the real table evolves. Two earlier versions of this test went
+  // stale in exactly that way: one named HAZ-AI-01, then the set of partials emptied entirely as the
+  // controls were built, and a rule that can pass vacuously is a rule that quietly stops working.
   //
-  // Historical note, kept because it is the reason the cap exists: on this file's first run
-  // HAZ-AI-01 and HAZ-DEV-01 both reported VERIFIED while carrying caveats saying no control had
-  // been built, because a passing field-shape test turned the row green.
-  const partials = HAZARDS.filter((h) => h.control.module && h.control.adequacy !== "full");
-  assert.ok(partials.length > 0,
-    "if nothing is partial, this test is vacuous; add a partial fixture rather than deleting the rule");
-  for (const h of partials) {
-    const r = a.find((x) => x.id === h.id);
-    assert.equal(r.status, STATUS.PARTIAL, `${h.id} is a partial control and a green test run must not promote it`);
-    assert.notEqual(r.status, STATUS.VERIFIED);
+  // Historical note, kept because it is why the cap exists: on this file's first run HAZ-AI-01 and
+  // HAZ-DEV-01 both reported VERIFIED while carrying caveats saying no control had been built,
+  // because a passing field-shape test turned the row green.
+  const fixture = [{
+    id: "HAZ-FIXTURE", hazard: "a partial control with perfect tests",
+    requirement: "x", residualRisk: "x", approver: "x",
+    control: { kind: "half a control", adequacy: "partial", module: "fixture.js", summary: "x" },
+    verification: { file: "fixture.test.mjs", tests: ["fixture passes"] },
+    caveat: "the other half is missing",
+  }];
+  const capped = assess([{ name: "fixture passes", passed: true }], fixture)[0];
+  assert.equal(capped.status, STATUS.PARTIAL,
+    "an all-green run must not promote a control that only does half the job");
+  assert.notEqual(capped.status, STATUS.VERIFIED);
+
+  // And whatever the live table currently says, no partial in it is ever reported as verified.
+  for (const h of HAZARDS.filter((x) => x.control.module && x.control.adequacy !== "full")) {
+    assert.equal(a.find((x) => x.id === h.id).status, STATUS.PARTIAL, `${h.id} must not be promoted`);
   }
 });
 
@@ -101,20 +110,40 @@ test("case: the report leads with the worst status present, never with successes
   // Asserted as the general invariant rather than as a literal first row. The literal version said
   // UNCONTROLLED and went stale the moment the last uncontrolled hazard was actually built, which
   // would have pressured a future reader to relax the rule instead of the assertion.
-  const assessment = assess(allPassing(), HAZARDS);
-  const text = report(assessment);
   const severity = ["uncontrolled", "no-evidence", "failing", "partial", "verified"];
-  const worstPresent = severity.find((s) => assessment.some((a) => a.status === s));
+  // Matches a status ROW specifically: a status word followed by a hazard id. The looser version
+  // also matched the report's own "VERIFIED means the named tests pass" qualifier line.
+  const statusesOf = (text) => text.split("\n")
+    .filter((l) => /^(UNCONTROLLED|NO-EVIDENCE|FAILING|PARTIAL|VERIFIED)\s+(HAZ|H)-/.test(l))
+    .map((l) => l.split(/\s+/)[0].toLowerCase());
 
-  const rows = text.split("\n").filter((l) => /^(UNCONTROLLED|NO-EVIDENCE|FAILING|PARTIAL|VERIFIED)/.test(l));
-  assert.equal(rows[0].split(/\s+/)[0].toLowerCase(), worstPresent,
+  // Asserted against a synthetic table containing one of everything, so the ordering rule is
+  // exercised even when the real hazard table happens to be entirely green. A version of this test
+  // pinned to the live table went stale the moment the last gap was closed.
+  const mixed = [
+    { id: "H-OK", hazard: "verified", requirement: "x", residualRisk: "x", approver: "x", caveat: "c",
+      control: { kind: "k", adequacy: "full", module: "m.js", summary: "s" },
+      verification: { file: "f", tests: ["green"] } },
+    { id: "H-NONE", hazard: "uncontrolled", requirement: "x", residualRisk: "x", approver: "x", caveat: "c",
+      control: { kind: null, adequacy: "none", module: null, summary: "s" }, verification: { file: null, tests: [] } },
+    { id: "H-HALF", hazard: "partial", requirement: "x", residualRisk: "x", approver: "x", caveat: "c",
+      control: { kind: "k", adequacy: "partial", module: "m.js", summary: "s" },
+      verification: { file: "f", tests: ["green"] } },
+    { id: "H-BAD", hazard: "failing", requirement: "x", residualRisk: "x", approver: "x", caveat: "c",
+      control: { kind: "k", adequacy: "full", module: "m.js", summary: "s" },
+      verification: { file: "f", tests: ["red"] } },
+  ];
+  const mixedStatuses = statusesOf(report(assess([{ name: "green", passed: true }, { name: "red", passed: false }], mixed)));
+  assert.equal(mixedStatuses[0], "uncontrolled",
     "an assurance report that opens with its successes is a marketing document");
-  assert.notEqual(rows[0].split(/\s+/)[0], "VERIFIED",
-    "while anything is unverified, a verified row must never be the first thing read");
+  assert.equal(mixedStatuses.at(-1), "verified", "and successes come last");
+  assert.deepEqual(mixedStatuses.map((s) => severity.indexOf(s)), [...mixedStatuses.map((s) => severity.indexOf(s))].sort((a, b) => a - b),
+    "rows stay ordered worst first all the way down, not just at the top");
 
-  // And the ordering holds all the way down, not just at the top.
-  const seen = rows.map((r) => severity.indexOf(r.split(/\s+/)[0].toLowerCase()));
-  assert.deepEqual(seen, [...seen].sort((a, b) => a - b), "rows stay ordered worst first");
+  // The live table must obey the same ordering, whatever it currently contains.
+  const text = report(assess(allPassing(), HAZARDS));
+  const live = statusesOf(text).map((s) => severity.indexOf(s));
+  assert.deepEqual(live, [...live].sort((a, b) => a - b), "the real report is ordered worst first");
   assert.match(text, /caveat:/, "every claim carries its caveat in the same view");
 });
 
@@ -124,4 +153,28 @@ test("case: the hazards named in the spec's table are all present", () => {
     "HAZ-SURG-01", "HAZ-DIAG-01", "HAZ-ID-01", "HAZ-AI-01", "HAZ-DEV-01", "HAZ-DOWN-01"]) {
     assert.ok(ids.includes(id), `${id} from the spec's assurance table is accounted for`);
   }
+});
+
+
+test("case: the report always qualifies what VERIFIED means, even when everything is green", () => {
+  // The count reaching 11 of 11 is exactly when this artefact is most likely to be misread as
+  // "safe to use on patients". The qualifier is unconditional for that reason.
+  const text = report(assess(allPassing(), HAZARDS));
+  assert.match(text, /VERIFIED means the named tests pass/,
+    "a headline count with nothing beside it will be read as a safety claim");
+  assert.match(text, /NOT mean the control is clinically adequate/);
+  assert.match(text, /CLINICALLY VALIDATED or CLINICALLY APPROVED/);
+
+  // And it is present on an all-green table too, not only when something is outstanding.
+  const allGreen = [{
+    id: "H-ONE", hazard: "everything is fine", requirement: "x", residualRisk: "x", approver: "x",
+    caveat: "UNAPPROVED seed content.",
+    control: { kind: "k", adequacy: "full", module: "m.js", summary: "s" },
+    verification: { file: "f", tests: ["green"] },
+  }];
+  const green = report(assess([{ name: "green", passed: true }], allGreen));
+  assert.match(green, /1 of 1 hazards fully verified/);
+  assert.match(green, /VERIFIED means the named tests pass/, "still qualified at 1 of 1");
+  assert.match(green, /1 of 1 hazards carry a caveat about unapproved/,
+    "and the count of unapproved clinical content is stated in the same breath as the success count");
 });

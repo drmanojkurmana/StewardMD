@@ -49,41 +49,150 @@ class OfflineError extends Error {
 }
 
 /**
+ * Durable backends for the journal. The in-memory one is for tests and for a caller that genuinely
+ * wants no persistence; IndexedDB is what a ward workstation uses.
+ *
+ * The interface is deliberately tiny, because the only thing that matters is that `append` has
+ * reached durable storage before it resolves.
+ */
+class MemoryJournalBackend {
+  constructor() { this.rows = []; }
+  async open() {}
+  async append(entry) { this.rows.push(JSON.parse(JSON.stringify(entry))); }
+  async all() { return this.rows.map((r) => JSON.parse(JSON.stringify(r))); }
+  async remove(keys) {
+    const drop = new Set(keys);
+    this.rows = this.rows.filter((r) => !drop.has(`${r.resourceType}/${r.id}/${r.at}`));
+  }
+}
+
+/**
+ * IndexedDB backend. Never touches `indexedDB` at import time, so this module loads in Node.
+ *
+ * A journal entry is written in its own transaction and the promise resolves on `transaction.
+ * oncomplete`, not on `request.onsuccess`: a request succeeding only means the write was accepted
+ * into the transaction, and a device that dies between those two moments would lose the edit while
+ * having told the clinician it was saved.
+ */
+class IndexedDBJournalBackend {
+  constructor(opts) {
+    opts = opts || {};
+    this.dbName = opts.dbName || "wardsynq-offline";
+    this.storeName = opts.storeName || "journal";
+    this.db = null;
+  }
+  async open() {
+    if (this.db) return;
+    const idb = (typeof globalThis !== "undefined" && globalThis.indexedDB) || null;
+    if (!idb) throw new OfflineError("IndexedDB is not available in this environment", "NO_INDEXEDDB");
+    this.db = await new Promise((resolve, reject) => {
+      const req = idb.open(this.dbName, 1);
+      req.onupgradeneeded = () => {
+        const db = req.result;
+        if (!db.objectStoreNames.contains(this.storeName)) db.createObjectStore(this.storeName, { keyPath: "key" });
+      };
+      req.onsuccess = () => resolve(req.result);
+      req.onerror = () => reject(req.error);
+    });
+  }
+  async append(entry) {
+    await this.open();
+    await new Promise((resolve, reject) => {
+      const tx = this.db.transaction(this.storeName, "readwrite");
+      tx.objectStore(this.storeName).put({ key: `${entry.resourceType}/${entry.id}/${entry.at}`, entry });
+      // Resolve on COMPLETE. See the note above: request success is not durability.
+      tx.oncomplete = () => resolve();
+      tx.onerror = () => reject(tx.error);
+      tx.onabort = () => reject(tx.error);
+    });
+  }
+  async all() {
+    await this.open();
+    return new Promise((resolve, reject) => {
+      const tx = this.db.transaction(this.storeName, "readonly");
+      const req = tx.objectStore(this.storeName).getAll();
+      req.onsuccess = () => resolve((req.result || []).map((r) => r.entry));
+      req.onerror = () => reject(req.error);
+    });
+  }
+  async remove(keys) {
+    await this.open();
+    await new Promise((resolve, reject) => {
+      const tx = this.db.transaction(this.storeName, "readwrite");
+      const os = tx.objectStore(this.storeName);
+      for (const k of keys) os.delete(k);
+      tx.oncomplete = () => resolve();
+      tx.onerror = () => reject(tx.error);
+    });
+  }
+}
+
+/**
  * The local journal. Append-only, exactly like the server store, because an outage is precisely when
  * a device is most likely to be closed, dropped or run out of battery mid-edit.
+ *
+ * DURABILITY IS THE POINT. `record()` is async and does not resolve until the entry has reached the
+ * backend. A UI that tells a clinician their note is saved before this resolves is lying, and the
+ * whole reason this hazard stayed PARTIAL until now is that an in-memory journal loses everything a
+ * workstation was holding the moment it loses power.
  */
 class OfflineJournal {
   constructor(deps) {
     deps = deps || {};
     this.now = deps.now || (() => new Date().toISOString());
+    this.backend = deps.backend || new MemoryJournalBackend();
     this.entries = [];
+    this.restored = false;
+  }
+
+  /** Loads anything a previous session left behind. Call once at startup, before charting. */
+  async open() {
+    await this.backend.open();
+    const rows = await this.backend.all();
+    // Restored in the order they were written, so reconciliation sees them as they happened.
+    this.entries = rows
+      .filter((e) => e && e.resourceType && e.id && e.at)
+      .sort((a, b) => String(a.at).localeCompare(String(b.at)))
+      .map((e) => Object.freeze(e));
+    this.restored = true;
+    return this.entries.length;
   }
 
   /**
    * Records one local edit against the version it was derived from. The BASE is the whole point: an
    * edit that does not say what it was derived from cannot be three-way merged later, only guessed
    * at, so it is required.
+   *
+   * Async, and durable before it resolves.
    */
-  record(entity, base, actorId) {
+  async record(entity, base, actorId) {
     if (!entity || !entity.resourceType || !entity.id) throw new OfflineError("an offline edit needs an identified entity", "NO_ENTITY");
     if (!actorId) throw new OfflineError("an offline edit must name who made it", "NO_ACTOR");
     if (base === undefined) throw new OfflineError("an offline edit must record the version it was derived from", "NO_BASE");
-    const entry = Object.freeze({
+    const entry = {
       at: this.now(), actorId,
       resourceType: entity.resourceType, id: entity.id,
       entity: JSON.parse(JSON.stringify(entity)),
       base: base === null ? null : JSON.parse(JSON.stringify(base)),
-    });
-    this.entries.push(entry);
-    return entry;
+    };
+    // Durable FIRST. If this throws, the caller learns the edit was not saved, which is the honest
+    // outcome; appending to memory first would let a UI report success for a lost note.
+    await this.backend.append(entry);
+    const frozen = Object.freeze(entry);
+    this.entries.push(frozen);
+    return frozen;
   }
 
   pending() { return [...this.entries]; }
-  clear(ids) {
-    const done = new Set(ids || []);
+
+  /** Drops entries that have been reconciled. Everything else stays for the next attempt. */
+  async clear(keys) {
+    const done = new Set(keys || []);
+    await this.backend.remove([...done]);
     this.entries = this.entries.filter((e) => !done.has(`${e.resourceType}/${e.id}/${e.at}`));
     return this.entries.length;
   }
+
   get size() { return this.entries.length; }
 }
 
@@ -203,7 +312,14 @@ class Reconciler {
       (r.outcome === OUTCOME.MERGED ? merged : applied).push({ key: key(entry), id: entry.id, reason: r.reason });
     }
 
-    const summary = { applied, merged, conflicts, unchanged, total: journal.size };
+    // Settled entries leave the journal; conflicts stay until a human resolves them, so a device
+    // that dies mid-reconciliation comes back still holding the unresolved work.
+    if (!opts.dryRun) {
+      const settled = [...applied.map((a) => a.key), ...merged.map((m) => m.key), ...unchanged];
+      if (settled.length) await journal.clear(settled);
+    }
+
+    const summary = { applied, merged, conflicts, unchanged, total: applied.length + merged.length + conflicts.length + unchanged.length, stillPending: journal.size };
     if (this.bus) await this.bus.emit("offline.reconciled", { ...summary, conflictCount: conflicts.length });
     return summary;
   }
@@ -240,4 +356,8 @@ class Reconciler {
   }
 }
 
-export { OUTCOME, SEALED_STATUSES, OfflineError, OfflineJournal, Reconciler, reconcileOne, changedFields };
+export {
+  OUTCOME, SEALED_STATUSES, OfflineError,
+  OfflineJournal, MemoryJournalBackend, IndexedDBJournalBackend,
+  Reconciler, reconcileOne, changedFields,
+};

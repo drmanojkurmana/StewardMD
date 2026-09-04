@@ -2712,3 +2712,39 @@ against real ward data and `report().clean` has stayed true.
 HAZ-AI-01 as the partial-control regression went stale when that control was genuinely built; it now
 pins to whatever is currently partial and asserts the set is non-empty so it cannot pass vacuously.
 The scoring, the adequacy cap and the criteria are unchanged.
+
+## 2026-09-04 WardSynQ: the last open hazard, and guarding the number against itself
+
+Closed HAZ-DOWN-01 by making the offline journal durable. 351 tests, 350 passing. Assurance reads
+11 of 11 verified, which is exactly the point at which this artefact becomes dangerous to read
+carelessly, so the report changed too.
+
+**Durability.** `OfflineJournal` now takes a backend and `record()` is async and does NOT resolve
+until the entry has reached storage. A UI that reports a note saved before that resolves is lying to
+a clinician, so the ordering is durable-first: a failed write reports failure and is not held in
+memory pretending to be journalled. `open()` restores a previous session's work, sorted by when it
+was written, skipping unreadable rows so one half-written entry cannot cost a clinician the rest of
+the night's charting. Reconciliation now clears settled entries from disk while leaving unresolved
+conflicts, so a device dying mid-reconciliation comes back holding only the work still owed a
+decision. `IndexedDBJournalBackend` resolves on transaction COMPLETE rather than request success,
+because a device dying between those two moments would lose an edit it had already acknowledged.
+
+**Two caveats kept on the record rather than buried.** The durability tests exercise the backend
+INTERFACE through an in-memory implementation; the IndexedDB adapter itself is reasoned about rather
+than proven. And nothing yet wires the journal into the workstation, so the control exists and an
+application that does not use it gets none of it.
+
+**The safety case tests fired their own guards, twice, and that was the design working.** With
+nothing left partial or unverified, the cap test correctly declared itself vacuous ("add a partial
+fixture rather than deleting the rule") and the ordering test found VERIFIED first. Both now assert
+against SYNTHETIC hazard fixtures containing one of every status, so the rules stay enforced no
+matter how the real table evolves, and additionally check the live table. That is strictly stronger
+than the versions that went stale: a rule that can pass vacuously is a rule that has quietly stopped
+working. Scoring and the adequacy cap are unchanged.
+
+**The report now qualifies itself unconditionally.** A headline of "11 of 11" with nothing beside it
+will be read as "safe to use on patients", which is not what any row says. Every run now prints, in
+the header: VERIFIED means the named tests pass, it does NOT mean the control is clinically adequate
+or that its clinical content is approved; how many hazards carry an unapproved-content caveat
+(currently 9 of 11); and that nothing in the build is clinically validated or approved. A test
+asserts the qualifier is present even on an all-green table, because that is when it matters most.
