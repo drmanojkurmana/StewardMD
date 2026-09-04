@@ -159,7 +159,7 @@ const HAZARDS = Object.freeze([
     },
     residualRisk: "reduced: cross-chart writes are refused structurally rather than by convention",
     approver: "Chief Medical Information Officer",
-    caveat: "IMPLEMENTED and TESTED, not clinically validated or approved. The session binding only protects writes made through a bound governed session; an application that constructs an unbound session, or passes no active chart, gets no cross-chart protection. Positive identification at the bedside still depends on scan hardware that is not integrated.",
+    caveat: "IMPLEMENTED and TESTED, not clinically validated or approved. The workstation rebinds its session on every patient switch, and a cross-chart write from the live session was refused with WRONG_CHART in a browser. The binding only protects writes made through a bound session, so an unbound session or a batch handle (asStoreFor) deliberately gets no cross-chart protection and must not be used for charting. Positive identification at the bedside still depends on scan hardware that is not integrated.",
   },
   {
     id: "HAZ-DOWN-01",
@@ -196,7 +196,7 @@ const HAZARDS = Object.freeze([
     },
     residualRisk: "reduced: charting survives a power cut and no write silently overwrites another",
     approver: "Chief Information Officer and Disaster Committee",
-    caveat: "IMPLEMENTED and TESTED, not clinically validated or approved. TWO GAPS, both real. The durability tests exercise the backend INTERFACE through an in-memory implementation; IndexedDBJournalBackend is a thin adapter to that same interface and is NOT itself exercised by a test, so its transaction handling is reasoned about rather than proven. And nothing yet WIRES the journal into the workstation: the control exists, an application that does not use it gets none of it. A service worker for loading the app itself offline is separate and is not built.",
+    caveat: "IMPLEMENTED and TESTED, not clinically validated or approved. The workstation now journals to IndexedDB while offline and reconciles on reconnect, driven end to end in a browser: an order signed during a simulated outage was held durably, was still there when a fresh journal was opened over the same store (which is the restart case), and reconciled cleanly when the network returned. REMAINING GAP: a service worker, so the app itself LOADS without a network, is separate from data survival and is not built. A ward that reboots a workstation mid-outage keeps its charting but cannot open the app until the network returns.",
   },
   {
     id: "HAZ-DIAG-01",
@@ -325,7 +325,7 @@ const HAZARDS = Object.freeze([
     },
     residualRisk: "reduced: the ceiling is structural and cannot be configured away",
     approver: "AI Clinical Governance Committee",
-    caveat: "IMPLEMENTED and TESTED, not clinically validated or approved. DEPLOYMENT REQUIREMENT, and it is a real one: this governs writes that pass through GovernedStore. An application that also hands out the underlying ClinicalStore has enforced nothing, in the same way that an API is not a control if the database is also exposed. The workstation and every service must hold only a governed session.",
+    caveat: "IMPLEMENTED and TESTED, not clinically validated or approved. The workstation now writes ONLY through a governed session, verified in a browser: a signed order carries a writtenBy stamp that only GovernedStore applies, and reconciliation was moved onto a governed handle after wiring exposed that it had been writing to the raw store with no actor. DEPLOYMENT REQUIREMENT that still stands for everything else: this governs writes that pass through GovernedStore, and any future surface or service that is handed the underlying ClinicalStore has enforced nothing, in the same way an API is not a control if the database is also exposed.",
   },
   {
     id: "HAZ-DEV-01",

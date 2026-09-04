@@ -20,15 +20,41 @@ import { SafetyEngine, DISPOSITION } from "../wardsynq-safety.js";
 import { buildRulePack } from "../adapters/wardsynq-rules-stewardmd.js";
 import { ClinicalEventBus } from "../wardsynq-events.js";
 import { ClinicalStore, MemoryBackend } from "../wardsynq-store.js";
+import { GovernedStore, makeActor, KIND, TIER, GovernanceError } from "../wardsynq-actors.js";
+import { OfflineJournal, MemoryJournalBackend, IndexedDBJournalBackend, Reconciler } from "../wardsynq-offline.js";
 import { Patient, MedicationOrder, AllergyIntolerance } from "../wardsynq-model.js";
 
 const $ = (id) => document.getElementById(id);
 const ME = "Dr Kurmana";
 
+/* ---------------------------------------------------------------- who is acting
+ *
+ * The workstation holds a credentialed human actor and writes ONLY through a governed session bound
+ * to the chart currently on screen. Until this existed the safety case carried a deployment
+ * requirement saying the controls were built and nothing used them, which is the same as not having
+ * them: an enforcement point off the path enforces nothing.
+ *
+ * A real deployment authenticates this actor and takes the credential from the practitioner's
+ * record. Here it is a constant, and it is a constant standing in for the one thing that must never
+ * be a constant, so it is marked plainly rather than dressed up.
+ */
+const CLINICIAN = makeActor({
+  id: ME, kind: KIND.HUMAN, tier: TIER.EXECUTE,
+  display: ME,
+  credential: "DEMO-NOT-A-REAL-REGISTRATION", // DEMO ONLY. A deployment reads this from the practitioner record.
+});
+
+/** Seeding and other machine writes act as a service, which is capped below EXECUTE by its kind. */
+const SEEDER = makeActor({ id: "wardsynq-seed", kind: KIND.SERVICE, tier: TIER.DRAFT });
+
 const S = {
   engine: null, pack: null, patients: [], current: null,
   bus: new ClinicalEventBus({ nodeId: "workstation" }),
   store: new ClinicalStore({ backend: new MemoryBackend() }),
+  governed: null,   // the only handle the rest of this file may write through
+  session: null,    // bound to CLINICIAN and to the chart currently open
+  journal: null,    // durable local journal, used when the network is gone
+  offline: false,
   verdict: null, overrides: [], drafts: {}, ledger: [],
 };
 
@@ -87,7 +113,49 @@ async function boot() {
     suggestions();
     S.patients = cohort();
     await S.store.open();
-    for (const p of S.patients) await S.store.put(p);
+
+    // From here the raw store handle is not used again. Every write goes through the governed
+    // store, which is what turns the actor model from a module into a control.
+    S.governed = new GovernedStore({ store: S.store, bus: S.bus, onDenied: showDenial });
+
+    // The durable journal. IndexedDB where it exists, memory where it does not: a demo in a private
+    // window losing its charting is annoying, a ward losing it is the hazard.
+    const journalBackend = (typeof indexedDB !== "undefined")
+      ? new IndexedDBJournalBackend({ dbName: "wardsynq-offline" })
+      : new MemoryJournalBackend();
+    S.journal = new OfflineJournal({ backend: journalBackend });
+    try {
+      const restored = await S.journal.open();
+      if (restored) note(`Restored <strong>${restored}</strong> unsent ${restored === 1 ? "edit" : "edits"} from a previous session`);
+    } catch (err) {
+      // A journal that will not open is a real problem, and it still must not stop a clinician
+      // working. Fall back to memory and say so, rather than failing silently either way.
+      note(`Local journal unavailable, this session is not crash-safe: ${esc(String(err.message || err))}`);
+      S.journal = new OfflineJournal({ backend: new MemoryJournalBackend() });
+      await S.journal.open();
+    }
+    // Reconciliation writes clinical records, so it goes through governance too. It spans charts by
+    // nature, so it gets an actor-bound handle rather than a chart-bound session.
+    S.reconciler = new Reconciler({ store: S.governed.asStoreFor(CLINICIAN), bus: S.bus });
+    watchConnectivity();
+
+    for (const p of S.patients) await S.governed.put(SEEDER, p);
+
+    /* Diagnostics handle. Read-mostly, and deliberately exposes the GOVERNED store rather than the
+     * raw one: a support console that hands out an ungoverned write path would undo the control
+     * this file exists to install. `setOffline` is here so an outage can be rehearsed on a ward
+     * without unplugging anything. */
+    if (typeof window !== "undefined") {
+      window.WARDSYNQ = {
+        actor: CLINICIAN,
+        governed: S.governed,
+        session: () => S.session,
+        journal: () => S.journal,
+        denials: () => S.governed.denials,
+        setOffline: (v) => S.setOffline(!!v),
+        reconcile: () => reconcileNow(),
+      };
+    }
     renderRoster();
     select(S.patients[0]);
   } catch (e) {
@@ -153,6 +221,10 @@ function renderRoster() {
 
 function select(p) {
   S.current = p; S.overrides = []; S.drafts = {};
+  // Rebind the session to the chart now on screen. This is what makes a write to another patient
+  // impossible rather than merely discouraged: a stale form or a second tab holds a session bound
+  // to a chart that is no longer open, and its writes are refused.
+  S.session = S.governed ? S.governed.session(CLINICIAN, p.id) : null;
   renderRoster(); renderIdentity(false); renderResults(); renderDosing(); renderMeds();
   check();
 }
@@ -394,7 +466,35 @@ async function sign() {
   if (!v || !v.allowed) { out.innerHTML = '<p class="fail">This order cannot be signed while a finding stands.</p>'; return; }
   const o = order();
   o.status = "active"; o.signedBy = ME;
-  await S.store.put(o);
+
+  // Offline: the order goes to the durable journal instead, and does not pretend to be filed.
+  if (S.offline) {
+    try {
+      const base = await S.session.get("MedicationOrder", o.id);
+      await S.journal.record(o, base, CLINICIAN.id);
+    } catch (err) {
+      // record() only resolves once the edit is durable, so a rejection means it is NOT saved.
+      out.innerHTML = `<p class="fail">Not saved. ${esc(String(err.message || err))}</p>`;
+      return;
+    }
+    await S.bus.emit("order.journalled", { order: o });
+    note(`Held offline <b>${esc(o.drug)}</b>, ${S.journal.size} unsent`);
+    out.innerHTML = '<p class="quiet">Held on this device. It will be reconciled when the network returns.</p>';
+    clear(true);
+    return;
+  }
+
+  // Online: through the bound session, so the actor, the credential and the open chart are all
+  // checked before anything is written.
+  try {
+    await S.session.put(o);
+  } catch (err) {
+    if (err instanceof GovernanceError) {
+      out.innerHTML = `<p class="fail">Refused: ${esc(err.message)}</p>`;
+      return;
+    }
+    throw err;
+  }
   await S.bus.emit("order.signed", { order: o, overrides: S.overrides });
   S.current.activeMeds = (S.current.activeMeds || []).concat([{ drug: o.drug, sig: o.dose ? `${o.dose.value} ${o.dose.unit}, ${o.route}` : o.route, since: "just now" }]);
   renderMeds([]);
@@ -403,11 +503,58 @@ async function sign() {
   clear(); out.innerHTML = kept;
 }
 
-function clear() {
+/**
+ * A refused write is shown, never swallowed. A governance denial means the system stopped something
+ * a clinician asked for, and an interface that hides that teaches people the software is flaky
+ * rather than that it is protecting them.
+ */
+function showDenial(denial) {
+  note(`<b>Write refused</b> ${esc(denial.reasons.map((r) => r.code).join(", "))}`);
+}
+
+/**
+ * Connectivity. Offline is a first-class state here rather than an error: the journal takes writes,
+ * and reconnection reconciles them three-way rather than replaying them blindly.
+ */
+function watchConnectivity() {
+  const set = async (offline) => {
+    if (S.offline === offline) return;
+    S.offline = offline;
+    document.body.dataset.offline = offline ? "true" : "false";
+    note(offline ? "Network lost, charting locally" : "Network back, reconciling");
+    if (!offline && S.journal && S.journal.size) await reconcileNow();
+  };
+  if (typeof window !== "undefined" && "onLine" in navigator) {
+    S.offline = !navigator.onLine;
+    window.addEventListener("online", () => set(false));
+    window.addEventListener("offline", () => set(true));
+  }
+  S.setOffline = set; // exposed so the state can be driven in a test or a demo
+}
+
+async function reconcileNow() {
+  const out = await S.reconciler.reconcile(S.journal);
+  const settled = out.applied.length + out.merged.length;
+  if (settled) note(`Reconciled <b>${settled}</b> offline ${settled === 1 ? "edit" : "edits"}`);
+  if (out.conflicts.length) {
+    note(`<b>${out.conflicts.length} conflict${out.conflicts.length === 1 ? "" : "s"}</b> need a clinical decision`);
+    $("signed").innerHTML = `<p class="fail">${out.conflicts.length} offline ${out.conflicts.length === 1 ? "edit" : "edits"} conflict with the server and are waiting for you to decide. Nothing has been overwritten.</p>`;
+  }
+  return out;
+}
+
+/**
+ * Resets the order form. `keepResult` preserves the confirmation panel, because clearing the form
+ * after filing an order must not also erase the sentence telling the clinician what happened to it.
+ * The offline path hit exactly that: it wrote "Held on this device" and then wiped it.
+ */
+function clear(keepResult) {
   $("drug").value = ""; $("dose").value = "";
   S.overrides = []; S.drafts = {}; S.verdict = null;
+  const kept = keepResult ? $("signed").innerHTML : "";
   $("signed").innerHTML = "";
   check();
+  if (keepResult) $("signed").innerHTML = kept;
 }
 
 /* ---------------------------------------------------------------- input */

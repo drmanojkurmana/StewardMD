@@ -408,3 +408,47 @@ test("durability: a corrupted row is skipped rather than poisoning the restore",
   assert.equal(await after.open(), 1,
     "one unreadable row must not cost a clinician the rest of the night's charting");
 });
+
+
+/* ------------------------------------------------------------------ reconciliation is governed
+ *
+ * Reconciliation writes clinical records. Handing it a raw store would let an outage's worth of
+ * charting be committed with no actor at all, which is exactly the hole the governed store exists
+ * to close. Found while wiring the workstation, not by a test, so it gets a test.
+ */
+
+test("ADVERSARIAL: reconciliation through a governed handle is still governed", async () => {
+  const { GovernedStore, makeActor, KIND, TIER } = await import("../wardsynq/wardsynq-actors.js");
+  const raw = new ClinicalStore({ backend: new MemoryBackend() });
+  await raw.open();
+  const g = new GovernedStore({ store: raw });
+  const ai = makeActor({ id: "maik", kind: KIND.AI, tier: TIER.DRAFT });
+
+  await raw.put(order({ status: "draft" }));
+  const j = new OfflineJournal({ backend: new MemoryJournalBackend() });
+  await j.open();
+  // An offline edit that would commit an ACTIVE order.
+  await j.record(order({ status: "active", signedBy: "dr-menon" }), order(), "maik");
+
+  const rec = new Reconciler({ store: g.asStoreFor(ai) });
+  await assert.rejects(() => rec.reconcile(j),
+    /cannot commit a record with status/,
+    "an AI's offline edit must not become an active order just because it arrived through reconciliation");
+});
+
+test("reconciliation through a credentialed clinician's handle works normally", async () => {
+  const { GovernedStore, makeActor, KIND, TIER } = await import("../wardsynq/wardsynq-actors.js");
+  const raw = new ClinicalStore({ backend: new MemoryBackend() });
+  await raw.open();
+  const g = new GovernedStore({ store: raw });
+  const doc = makeActor({ id: "dr-menon", kind: KIND.HUMAN, tier: TIER.EXECUTE, credential: "NMC-1" });
+
+  await raw.put(order());
+  const j = new OfflineJournal({ backend: new MemoryJournalBackend() });
+  await j.open();
+  await j.record(order({ route: "IV" }), order(), "dr-menon");
+
+  const out = await new Reconciler({ store: g.asStoreFor(doc) }).reconcile(j);
+  assert.equal(out.applied.length, 1);
+  assert.equal((await raw.get("MedicationOrder", "rx-1")).route, "IV");
+});

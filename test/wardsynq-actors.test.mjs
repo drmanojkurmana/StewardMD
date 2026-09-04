@@ -237,3 +237,40 @@ test("reads: even a read needs an authenticated actor", async () => {
   await assert.rejects(() => g.get(null, "MedicationOrder", "x"), (e) => { assert.equal(e.code, "READ_DENIED"); return true; });
   assert.deepEqual(await g.byPatient(maik, "MedicationOrder", "pat-1"), [], "an AI may read, which is tier one");
 });
+
+
+/* ------------------------------------------------------------------ machinery that spans charts */
+
+test("asStoreFor: batch machinery is bound to an actor but to no chart", async () => {
+  const g = await governed();
+  const handle = g.asStoreFor(doctor);
+  // It writes across patients, which a chart-bound session deliberately cannot.
+  await handle.put(order({ patientId: "pat-1", status: "active", signedBy: "dr-menon" }));
+  await handle.put(order({ id: "rx-2", patientId: "pat-2", status: "active", signedBy: "dr-menon" }));
+  assert.equal((await handle.byPatient("MedicationOrder", "pat-1")).length, 1);
+  assert.equal((await handle.byPatient("MedicationOrder", "pat-2")).length, 1);
+});
+
+test("ADVERSARIAL: asStoreFor is still governed; it is not a way around the ceiling", async () => {
+  const g = await governed();
+  const handle = g.asStoreFor(maik);
+  await assert.rejects(() => handle.put(order({ status: "active" })), (e) => {
+    assert.equal(e.code, "EXECUTE_DENIED");
+    return true;
+  }, "a batch handle must not become a hole in the actor model");
+  await assert.rejects(() => handle.put(order({ signedBy: "dr-menon" })),
+    (e) => { assert.equal(e.code, "NON_HUMAN_SIGNATURE"); return true; });
+});
+
+test("asStoreFor: provenance still records who really wrote it", async () => {
+  const g = await governed();
+  await g.asStoreFor(doctor).put(order({ status: "active", signedBy: "dr-menon" }));
+  const [saved] = await g.byPatient(doctor, "MedicationOrder", "pat-1");
+  assert.equal(saved.writtenBy.id, "dr-menon");
+});
+
+test("asStoreFor: the handle is frozen and cannot be re-pointed at another actor", () => {
+  const g = new GovernedStore({ store: { open: () => {}, put: async (e) => e } });
+  const handle = g.asStoreFor(maik);
+  assert.throws(() => { handle.put = async () => "bypassed"; });
+});

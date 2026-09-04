@@ -2748,3 +2748,43 @@ the header: VERIFIED means the named tests pass, it does NOT mean the control is
 or that its clinical content is approved; how many hazards carry an unapproved-content caveat
 (currently 9 of 11); and that nothing in the build is clinically validated or approved. A test
 asserts the qualifier is present even on an all-green table, because that is when it matters most.
+
+## 2026-09-04 WardSynQ: the workstation now stands on the controls
+
+Phase 1 of what was left: wiring. Before this, `grep` showed the workstation used none of
+GovernedStore, OfflineJournal or makeActor. The safety case read 11 of 11 while the UI wrote
+straight to the raw store with no actor, no session binding and no journal. An enforcement point off
+the path enforces nothing, so three hazards carried a caveat saying so.
+
+**What changed.** The workstation holds a credentialed human actor and a governed session rebound on
+every patient switch. Seeding uses a SERVICE actor, capped below EXECUTE by its kind. Offline writes
+go to a durable IndexedDB journal and reconcile on reconnect. Governance denials are surfaced in the
+record rather than swallowed, because an interface that hides a refusal teaches clinicians the
+software is flaky rather than that it is protecting them.
+
+**A real hole found by the wiring, not by a test.** `Reconciler` wrote through the RAW store, so an
+outage's worth of charting would have been committed with no actor at all: the exact hole the
+governed store exists to close. Added `GovernedStore.asStoreFor(actor)`, an actor-bound but
+chart-unbound handle for machinery that legitimately spans patients, and moved reconciliation onto
+it. Chart binding is dropped rather than faked, because pretending a batch job has one chart open
+would make the WRONG_CHART check meaningless. Four tests now pin it, including that the batch handle
+is still governed and is not a way around the ceiling.
+
+**A UI bug the browser found.** `clear()` ignored its parameter and always wiped the confirmation
+panel, so the offline path wrote "Held on this device" and then erased it: the clinician saw a
+cleared form and no statement of what had happened to their order.
+
+**Verified in a browser, not asserted.** A signed order carries a `writtenBy` stamp that only
+GovernedStore applies, which is the proof the wiring is real rather than decorative. A cross-chart
+write from the live session was refused with WRONG_CHART. A full outage was driven end to end:
+signed offline, held durably, still present when a fresh journal was opened over the same IndexedDB
+store, reconciled cleanly on reconnect, journal emptied. Zero console errors.
+
+**That last point closes a caveat honestly.** HAZ-DOWN-01 previously said IndexedDBJournalBackend was
+"reasoned about rather than proven" because only the in-memory backend was exercised. The restart
+case has now been driven through the real IndexedDB adapter in a browser, so the caveat now records
+what remains instead: a service worker, so the app itself LOADS without a network, is separate from
+data survival and is still not built.
+
+`window.WARDSYNQ` exposes a diagnostics handle carrying the GOVERNED store rather than the raw one,
+so a support console cannot become an ungoverned write path.

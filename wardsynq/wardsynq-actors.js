@@ -243,6 +243,27 @@ class GovernedStore {
     return saved;
   }
 
+  /**
+   * A store-shaped handle bound to one actor but to NO chart, for machinery that legitimately spans
+   * patients: reconciliation after an outage, a migration, a batch import.
+   *
+   * It exists because the alternative is worse. Reconciliation needs to write, and handing it the
+   * raw ungoverned store would let clinical records be committed with no actor at all, which is the
+   * exact hole the governed store was built to close. Chart binding is dropped rather than faked,
+   * because pretending a batch job has one chart open would make the WRONG_CHART check meaningless.
+   */
+  asStoreFor(actor) {
+    const self = this;
+    return Object.freeze({
+      open: () => self.open(),
+      close: () => self.close(),
+      get: (rt, id) => self.get(actor, rt, id),
+      history: (rt, id) => self.history(actor, rt, id),
+      byPatient: (rt, pid) => self.byPatient(actor, rt, pid),
+      put: (entity) => self.put(actor, entity),
+    });
+  }
+
   /** A handle bound to one actor and one chart, so a caller cannot drift off either. */
   session(actor, activePatientId) {
     const self = this;
