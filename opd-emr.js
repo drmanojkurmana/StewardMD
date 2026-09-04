@@ -355,9 +355,17 @@
     var on = st.fieldMic === name;
     return '<button type="button" class="oe-fmic' + (on ? " on" : "") + '" data-oe-act="fieldmic:' + esc(name) + '" aria-label="Dictate this field" title="Dictate this field">' + ms(on ? "stop" : "mic") + "</button>";
   }
+  // "Search ICD" button, shown only on the provisional diagnosis field - picking a code appends
+  // "CODE - Title" as a new line rather than replacing whatever the doctor already typed, same
+  // additive behaviour as the per-field mic. window.SMD_ICD comes from icd.js (loaded default-on,
+  // no flag - see vault/modules/ICD Search.md).
+  function icdBtn(name) {
+    if (!G.SMD_ICD) return "";
+    return '<button type="button" class="oe-fmic oe-icdbtn" data-oe-act="icdsearch:' + esc(name) + '" aria-label="Search ICD" title="Search ICD-10 / ICD-11 code">' + ms("search") + "</button>";
+  }
   function assessField(f, vals) {
     var val = assessGet(vals, f), id = "assess:" + f.n, re = f.r && !val;
-    if (f.k === "textarea") return fieldRow(f.l, '<span class="oe-inp-wrap"><textarea class="oe-inp" data-oe-inp="' + esc(id) + '">' + esc(val) + "</textarea>" + fmicBtn(f.n) + "</span>", f.r, re);
+    if (f.k === "textarea") return fieldRow(f.l, '<span class="oe-inp-wrap"><textarea class="oe-inp" data-oe-inp="' + esc(id) + '">' + esc(val) + "</textarea>" + fmicBtn(f.n) + (f.n === "provisional_diagnosis" ? icdBtn(f.n) : "") + "</span>", f.r, re);
     if (f.k === "yesno") return ynRow(f, val);
     var type = f.k === "number" ? "number" : "text";
     return fieldRow(f.l, '<span class="oe-inp-wrap"><input class="oe-inp" type="' + type + '" data-oe-inp="' + esc(id) + '" value="' + esc(val) + '" placeholder="' + esc(f.p) + '">' + fmicBtn(f.n) + "</span>", f.r, re);
@@ -1179,6 +1187,7 @@
     if (cmd === "scribe-accept") { var p = String(arg).split(":"); return scribeAccept(p[0], +p[1]); }
     if (cmd === "scribe-acceptall") return scribeAcceptAll(arg);
     if (cmd === "fieldmic") return toggleFieldMic(arg);
+    if (cmd === "icdsearch") return openIcdSearchForField(arg);
     if (cmd === "consult-authorise") return authoriseConsult();
     if (cmd === "consult-er") return consultToER();
     if (cmd === "rx-share") return shareRx();
@@ -1960,6 +1969,21 @@
   // Which on-device model is transcribing right now (updates live as Auto mode adapts per chunk).
   function setModelChip(code) { st.voiceModel = code || ""; try { var e = document.getElementById("oeVcModel"); if (e && code) e.textContent = code; } catch (x) {} }
   function tickElapsed() { try { var e = document.getElementById("oeElapsed"); if (e) e.textContent = fmtElapsed(now() - (st.voiceStartedAt || now())); } catch (x) {} }
+  // Opens the ICD Search overlay in picker mode; the chosen code+title is appended as a new line
+  // to the named field (same DOM-patch path as voice dictation - putVoiceDom - so it doesn't lose
+  // scroll position or trigger a full repaint()).
+  function openIcdSearchForField(name) {
+    if (!G.SMD_ICD || !G.SMD_ICD.pick) { toast("ICD search not available on this build."); return; }
+    G.SMD_ICD.pick(function (row) {
+      st.assessVals = st.assessVals || {}; st.assessTouched = st.assessTouched || {};
+      var cur = st.assessVals[name] || "";
+      var line = esc2Line(row.code) + " - " + esc2Line(row.title);
+      st.assessVals[name] = cur ? (cur + (/\n$/.test(cur) ? "" : "\n") + line) : line;
+      st.assessTouched[name] = true;
+      putVoiceDom(name);
+    });
+  }
+  function esc2Line(s) { return String(s == null ? "" : s).replace(/[\r\n]+/g, " "); }
   function putVoiceDom(name) {
     try {
       var esc2 = (G.CSS && CSS.escape) ? CSS.escape(name) : name;

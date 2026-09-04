@@ -1168,6 +1168,13 @@
       // Explanatory copy is body text, not a label: regular weight, generous leading, muted.
       '.icu-doc-sub{font:400 13px/1.6 var(--font);color:var(--muted);margin:2px 0 12px}' +
       '.icu-dx-cc{font:600 14px/1.55 var(--font);color:var(--ink);margin:2px 0 12px;white-space:pre-wrap}.icu-dx-cur{font:700 16px var(--font);color:var(--ink);margin:2px 0 12px}' +
+      // ICD code badge, separate from the free-text diagnosis above - a small mono chip + system
+      // tag + title, with a remove (x) button. Never styled as clickable text (it isn't).
+      '.icu-dx-icd{display:flex;align-items:center;gap:8px;flex-wrap:wrap;background:var(--panel2);border:1px solid var(--border);border-radius:10px;padding:8px 10px;margin:-4px 0 12px}' +
+      '.icu-icd-code{font:800 13px var(--mono,monospace);color:var(--ink)}' +
+      '.icu-icd-sys{font:700 10px var(--font);color:var(--primary);background:var(--sc-high);border-radius:6px;padding:2px 6px}' +
+      '.icu-icd-title{font:500 12.5px var(--font);color:var(--muted);flex:1;min-width:100px}' +
+      '.icu-icd-x{border:none;background:transparent;color:var(--muted);cursor:pointer;min-width:28px;min-height:28px;font-size:12px}' +
       '.icu-dx-results{margin-top:10px;display:flex;flex-direction:column;gap:6px;max-height:46vh;overflow:auto}' +
       '.icu-dx-hint{font:600 12.5px var(--font);color:var(--muted);padding:8px 2px}' +
       '.icu-dx-hit{display:flex;align-items:center;gap:8px;text-align:left;width:100%;border:1px solid var(--border);background:var(--panel2);color:var(--ink);border-radius:10px;padding:11px 13px;cursor:pointer;font:700 14px var(--font)}' +
@@ -3539,8 +3546,12 @@
 
       // 5) Working diagnosis — set from the review’s suggestion (deterministic differential) or KB
       //    search. Once set, surface the advisory management brief + an applicable StewardMD protocol.
+      var dxIcd = p.diagnosisIcd;
+      var icdBadge = dxIcd ? '<div class="icu-dx-icd"><span class="icu-icd-code">' + esc(dxIcd.code) + '</span><span class="icu-icd-sys">' + esc(dxIcd.system) + '</span><span class="icu-icd-title">' + esc(dxIcd.title) + '</span>' +
+        '<button class="icu-icd-x" data-icu-act="icdclear" aria-label="Remove ICD code">' + ico("close", "✕") + "</button></div>" : "";
+      var icdBtnHTML = '<button class="icu-btn ghost" data-icu-act="icdsearch" style="margin-top:8px">' + ico("search", "🔎") + ' ' + (dxIcd ? "Change" : "Attach") + ' ICD-10 / ICD-11 code</button>';
       var wdx = '<div class="icu-card"><div class="icu-sec-lbl">' + ico("check", "🩺") + ' Working diagnosis</div>' +
-        '<p class="icu-dx-cur">' + dxTxt + "</p>";
+        '<p class="icu-dx-cur">' + dxTxt + "</p>" + icdBadge;
       if (!hasDx) {
         wdx += '<p class="icu-doc-sub" style="margin:0 0 8px">Use your findings, labs and vitals to generate a working differential, or search the knowledge base.</p>' +
           (icuDxFlowOn() ? '<button class="icu-btn" data-icu-act="finddx">' + ico("pulse", "🩺") + ' Find working diagnosis</button>' +
@@ -3551,8 +3562,10 @@
         // Management / treatment considerations surface ONLY once a working diagnosis is selected, and stay advisory.
         wdx += (icuDxFlowOn() ? '<div class="icu-corr-note">' + ico("info", "ⓘ") + ' Management considerations for <b>' + esc(p.diagnosis) + '</b> are <b>advisory</b> — verify against local protocol, ICMR/guideline sources and your clinical judgement.</div>' : "") +
           dxManagementHTML(p.diagnosis) +
-          '<button class="icu-btn ghost" data-icu-act="dxsearch" style="margin-top:10px">' + ico("search", "🔎") + ' Change working diagnosis</button>';
+          '<button class="icu-btn ghost" data-icu-act="dxsearch" style="margin-top:10px">' + ico("search", "🔎") + ' Change working diagnosis</button>' +
+          icdBtnHTML;
       }
+      if (!hasDx) wdx += icdBtnHTML;
       wdx += "</div>";
       return out + wdx;
     },
@@ -7025,6 +7038,18 @@
     closeForm();
     if (window.toast) toast("Working diagnosis set: " + name);
   }
+  // ICD code attached to the working diagnosis - a SEPARATE structured field (STATE.patient.diagnosisIcd),
+  // never concatenated into STATE.patient.diagnosis: that free-text field drives KB-name matching
+  // (dxManagementHTML / SMD_REASON) and a code+title string would break that match. window.SMD_ICD
+  // comes from icd.js (loaded default-on, no flag - see vault/modules/ICD Search.md).
+  function openIcuIcdPick() {
+    if (!window.SMD_ICD || !SMD_ICD.pick) { if (window.toast) toast("ICD search not available on this build."); return; }
+    SMD_ICD.pick(function (row) {
+      STATE.patient.diagnosisIcd = { system: row.system, code: row.code, title: row.title, id: row.id, at: nowTs() };
+      paint();
+      if (window.toast) toast("ICD code attached: " + row.code);
+    });
+  }
   // Manual imaging note (idx null) or annotate/correct an existing record (idx set).
   function openImagingForm(id) {
     ensureModal();
@@ -8478,6 +8503,8 @@
       case "dxskip": _dxShow = false; paint(); break;
       case "dxadv": _dxAdvanced = true; paint(); break;
       case "pickdx": pickDiagnosis(decodeURIComponent(arg)); break;
+      case "icdsearch": openIcuIcdPick(); break;
+      case "icdclear": _raw.patient.diagnosisIcd = null; paint(); break;
       case "imgfetch": imagingFetch(); break;
       case "imgadd": openImagingForm(null); break;
       case "imgassist": openImagingAssist(decodeURIComponent(arg)); break;
