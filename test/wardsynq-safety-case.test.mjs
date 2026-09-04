@@ -42,10 +42,21 @@ test("case: a PARTIAL control is capped and can never reach verified", () => {
         `${r.id} is a partial control; passing tests must not promote it to verified`);
     }
   }
-  // The specific regression this rule exists for.
-  const ai = a.find((r) => r.id === "HAZ-AI-01");
-  assert.equal(ai.status, STATUS.PARTIAL,
-    "the AI boundary is model fields with nothing enforcing them, and reported VERIFIED before this rule existed");
+  // The cap must actually be doing work, not passing vacuously because nothing is partial any more.
+  // Pinned to whatever is currently declared partial rather than to an id, because the previous
+  // version named HAZ-AI-01 and went stale the moment that control was genuinely built.
+  //
+  // Historical note, kept because it is the reason the cap exists: on this file's first run
+  // HAZ-AI-01 and HAZ-DEV-01 both reported VERIFIED while carrying caveats saying no control had
+  // been built, because a passing field-shape test turned the row green.
+  const partials = HAZARDS.filter((h) => h.control.module && h.control.adequacy !== "full");
+  assert.ok(partials.length > 0,
+    "if nothing is partial, this test is vacuous; add a partial fixture rather than deleting the rule");
+  for (const h of partials) {
+    const r = a.find((x) => x.id === h.id);
+    assert.equal(r.status, STATUS.PARTIAL, `${h.id} is a partial control and a green test run must not promote it`);
+    assert.notEqual(r.status, STATUS.VERIFIED);
+  }
 });
 
 test("case: a renamed or deleted test surfaces as missing evidence, not as success", () => {

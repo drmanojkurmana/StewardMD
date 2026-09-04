@@ -2661,3 +2661,54 @@ boundary is currently a convention with nothing enforcing it and the store will 
 signed-looking record from any caller; it needs an actor model. Then HAZ-DEV-01 (fields exist,
 nothing sets them), HAZ-DOWN-01 (offline and three-way merge), and HAZ-ID-01 (cross-context chart
 contamination).
+
+## 2026-09-04 WardSynQ: actor model, device gateway, offline reconciliation, and the shadow tap
+
+Four pieces. 343 tests, 342 passing. Assurance moves 7 of 11 to 10 of 11, with one hazard held at
+PARTIAL deliberately.
+
+**HAZ-AI-01, `wardsynq-actors.js`.** The boundary was a convention: the model carried `aiDrafted` and
+`signedBy` and the store would accept a record claiming `status: "active"` and `signedBy: "dr-x"`
+from any caller including the model that wrote the draft. Now a four-tier ladder where the ceiling is
+a property of the actor's KIND rather than its configuration, clamped at construction on a frozen
+object, so no AI, device, adapter or service actor can hold EXECUTE by any route. A signature is an
+act: only a credentialed human writing as themselves may set `signedBy`.
+
+One rule was removed during the build for being both weaker and wrong. It refused a record claiming
+`aiDrafted: false`, which broke on ordinary writes because the model factory defaults that field to
+false, and which could only ever catch a claim it could see. Replaced by stamping provenance at the
+point of writing, which cannot be evaded by omitting, defaulting or misspelling the claim.
+
+**HAZ-DEV-01, `wardsynq-iomt.js`.** `signalQualityIndex` and `artifact` existed and NOTHING EVER SET
+THEM. Now a gateway sets them. The bigger half of the hazard is attribution rather than noise: a
+reading from an unassociated device is REFUSED rather than queued or guessed from the bed, and moving
+a monitor explicitly ends the previous claim so no chart has two live claims on one device. Artefact
+is derived from signal quality and plausibility and cannot be overridden by a payload asserting its
+own data is clean. An implausible value is marked but never discarded, because an SpO2 of 71 is a
+sick patient rather than a broken sensor. Clock skew is marked, never corrected.
+
+**HAZ-DOWN-01, `wardsynq-offline.js`. HELD AT PARTIAL ON PURPOSE.** Three-way reconciliation against
+the common ancestor: only disjoint field changes combine automatically, anything signed or
+administered is never folded into, and the same field changed on both sides becomes a conflict
+carrying both versions and the ancestor. A conflict cannot be resolved without a named clinician and
+a rationale, and the discarded version stays on the record. That closes the silent-overwrite half.
+The data-loss half is NOT closed: the journal is in memory, so a workstation losing power mid-outage
+loses the charting it held. Raising this to full would be exactly the flattering arithmetic the
+adequacy cap exists to prevent.
+
+**The Ward Sync cut-over: shadow first.** `wardsynq-flags.js` follows the insulin-flags pattern, all
+flags default OFF. `wardsynq-shadow.js` observes: with the flag on, a bundle already ingested by the
+legacy path is additionally passed through the adapter and the two compared. Three properties make
+it safe, in order of importance: icu.js is NOT MODIFIED, the wrapper is installed from outside so not
+loading the file removes the change entirely; the legacy result is computed first and returned
+untouched; and the shadow cannot throw into the caller, so an adapter defect is a number on a report
+rather than a broken ward round. A legacy throw still propagates, because swallowing it would turn a
+real ingest failure into a silent success.
+
+The cut-over proper is NOT built and its flag says so. It should happen only after the shadow has run
+against real ward data and `report().clean` has stayed true.
+
+**Two safety-case tests were rewritten and neither weakened anything.** The literal example naming
+HAZ-AI-01 as the partial-control regression went stale when that control was genuinely built; it now
+pins to whatever is currently partial and asserts the set is non-empty so it cannot pass vacuously.
+The scoring, the adequacy cap and the criteria are unchanged.
