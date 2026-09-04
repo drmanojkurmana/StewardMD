@@ -59,11 +59,48 @@ const CEILING = Object.freeze({
 /** Resource types a device may originate at all. A pump does not write prescriptions. */
 const DEVICE_WRITABLE = Object.freeze(["Observation"]);
 
+/**
+ * Resource types where a non-draft status is a CLINICAL INSTRUCTION rather than a record of fact.
+ *
+ * This distinction was missing and the omission was found by the cut-over pre-flight, which is the
+ * best possible place to find it. The rule had been "a non-human actor cannot write anything whose
+ * status is not draft", and the intent behind it was right: an AI or a feed must never issue an
+ * active medication order. But it was implemented against the STATUS STRING rather than against
+ * what the record means, and several canonical types have no draft state at all. An Encounter is
+ * born "planned" and a DiagnosticReport is born "preliminary".
+ *
+ * The consequence was that no adapter could ever write an encounter. Every ward encounter from the
+ * GHIS feed was refused, silently, while its observations wrote successfully and carried an
+ * encounterId pointing at a record that did not exist. A dangling reference that nothing reports is
+ * worse than a loud failure, and it would have shipped.
+ *
+ * So the requirement is narrowed to what it was always for. Committing one of THESE as active is an
+ * instruction to do something to a patient, and needs EXECUTE, which no non-human kind can hold.
+ * Recording that a patient is admitted, or that a laboratory reported a value, is a statement about
+ * what has already happened, and stating it is exactly what a hospital feed is for.
+ */
+const INSTRUCTION_TYPES = Object.freeze([
+  "MedicationOrder",
+  "MedicationAdministration",
+  "ServiceRequest",
+  "CarePlan",
+]);
+
 class GovernanceError extends Error {
-  constructor(message, code) {
+  /**
+   * Carries its reasons as DATA, not only flattened into the message.
+   *
+   * It did not, and a test that tried to assert on a reason code had to match a substring of English
+   * prose instead. That test then broke when the prose was made more specific, while the behaviour
+   * it guarded was unchanged, which is a test failing over wording. MedicationSafetyError already
+   * carried its reasons; this brings the two into line so a caller can branch on a code rather than
+   * parsing a sentence that is free to change.
+   */
+  constructor(message, code, reasons) {
     super(message);
     this.name = "GovernanceError";
     this.code = code || "GOVERNANCE_VIOLATION";
+    this.reasons = Array.isArray(reasons) ? reasons : (code ? [{ code: this.code, message }] : []);
   }
 }
 
@@ -153,15 +190,19 @@ function authoriseWrite(actor, entity, ctx) {
     }
   }
 
-  // 2. Committing anything beyond a draft needs EXECUTE, which no non-human kind can hold.
-  if (claimsActive && !can(actor, TIER.EXECUTE)) {
+  // 2. Committing an INSTRUCTION beyond a draft needs EXECUTE, which no non-human kind can hold.
+  //    Scoped to instruction types rather than to any non-draft status: see INSTRUCTION_TYPES for
+  //    why, and for the dangling-encounter defect that scoping it wrongly produced.
+  const isInstruction = INSTRUCTION_TYPES.includes(entity.resourceType);
+  if (claimsActive && isInstruction && !can(actor, TIER.EXECUTE)) {
     reasons.push({
       code: "EXECUTE_DENIED",
-      message: `${actor.kind} actor ${actor.id} holds ${actor.tier} and cannot commit a record with status "${entity.status}"`,
+      message: `${actor.kind} actor ${actor.id} holds ${actor.tier} and cannot commit a ${entity.resourceType} with status "${entity.status}"`,
     });
   }
-  if (!claimsActive && !can(actor, TIER.DRAFT)) {
-    reasons.push({ code: "DRAFT_DENIED", message: `${actor.id} holds ${actor.tier} and cannot stage a record` });
+  // Everything else, instruction or not, needs at least DRAFT. A READ actor writes nothing at all.
+  if (!can(actor, TIER.DRAFT)) {
+    reasons.push({ code: "DRAFT_DENIED", message: `${actor.id} holds ${actor.tier} and cannot write a record` });
   }
 
   // 3. AI provenance is NOT policed here, it is overwritten at the point of writing. An earlier
@@ -245,7 +286,7 @@ class GovernedStore {
       this.denials.push(denial);
       if (this.onDenied) this.onDenied(denial);
       if (this.bus) await this.bus.emit("governance.denied", denial);
-      throw new GovernanceError(verdict.reasons.map((r) => r.message).join("; "), verdict.reasons[0].code);
+      throw new GovernanceError(verdict.reasons.map((r) => r.message).join("; "), verdict.reasons[0].code, verdict.reasons);
     }
 
     // Provenance is stamped by the store, not supplied by the caller, so a record always says who
@@ -296,7 +337,7 @@ class GovernedStore {
 }
 
 export {
-  TIER, LADDER, KIND, CEILING, DEVICE_WRITABLE,
+  TIER, LADDER, KIND, CEILING, DEVICE_WRITABLE, INSTRUCTION_TYPES,
   GovernanceError, GovernedStore,
   makeActor, can, effectiveTier, authoriseWrite, rank,
 };

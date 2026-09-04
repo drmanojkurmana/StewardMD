@@ -431,8 +431,13 @@ test("ADVERSARIAL: reconciliation through a governed handle is still governed", 
   await j.record(order({ status: "active", signedBy: "dr-menon" }), order(), "maik");
 
   const rec = new Reconciler({ store: g.asStoreFor(ai) });
-  await assert.rejects(() => rec.reconcile(j),
-    /cannot commit a record with status/,
+  // Asserted on the REASON CODE rather than on the message text. This originally matched a
+  // substring and broke when the message was made more specific ("cannot commit a MedicationOrder
+  // with status" rather than "a record with status"), which is a test failing over prose while the
+  // behaviour it guards was unchanged.
+  await assert.rejects(
+    () => rec.reconcile(j),
+    (err) => Array.isArray(err.reasons) && err.reasons.some((r) => r.code === "EXECUTE_DENIED"),
     "an AI's offline edit must not become an active order just because it arrived through reconciliation");
 });
 

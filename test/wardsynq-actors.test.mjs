@@ -11,7 +11,7 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 
 import {
-  TIER, KIND, GovernanceError, GovernedStore, makeActor, can, effectiveTier, authoriseWrite,
+  TIER, KIND, INSTRUCTION_TYPES, GovernanceError, GovernedStore, makeActor, can, effectiveTier, authoriseWrite,
 } from "../wardsynq/wardsynq-actors.js";
 import { ClinicalStore, MemoryBackend } from "../wardsynq/wardsynq-store.js";
 import { ClinicalEventBus } from "../wardsynq/wardsynq-events.js";
@@ -316,4 +316,58 @@ test("every non-human kind is capped at the check, not just AI", () => {
 test("ADVERSARIAL: an unrecognised kind gets nothing, even claiming EXECUTE", () => {
   assert.equal(can({ id: "x", kind: "superuser", tier: TIER.EXECUTE }, TIER.READ), false);
   assert.equal(effectiveTier({ id: "x", kind: "superuser", tier: TIER.EXECUTE }), null);
+});
+
+/* ------------------------------------------------------------------ ADVERSARIAL: instruction vs fact
+ *
+ * Found by scripts/wardsynq-cutover-check.mjs on its first run, which is the best possible place to
+ * find it. The commit rule had been written against the STATUS STRING: any non-draft status needed
+ * EXECUTE. The intent was right and the implementation was not, because several canonical types
+ * have no draft state at all. An Encounter is born "planned"; a DiagnosticReport is born
+ * "preliminary".
+ *
+ * So no adapter could ever write an encounter. Every ward encounter was refused while its
+ * observations wrote successfully carrying an encounterId pointing at a record that did not exist.
+ * A dangling reference nothing reports is worse than a loud failure.
+ */
+
+test("ADVERSARIAL: an adapter CAN record a fact another system is authoritative for", () => {
+  const feed = makeActor({ id: "ghis", kind: KIND.ADAPTER, tier: TIER.DRAFT });
+
+  // An Encounter has no draft state. Refusing it means the feed cannot say a patient is admitted,
+  // which is the one thing an ADT feed exists to say.
+  assert.equal(authoriseWrite(feed, { resourceType: "Encounter", patientId: "p", status: "in-progress" }, {}).allowed, true);
+  assert.equal(authoriseWrite(feed, { resourceType: "DiagnosticReport", patientId: "p", status: "final" }, {}).allowed, true);
+  assert.equal(authoriseWrite(feed, { resourceType: "Observation", patientId: "p", status: "final" }, {}).allowed, true);
+});
+
+test("ADVERSARIAL: an adapter still cannot issue an INSTRUCTION, which is what the rule was for", () => {
+  const feed = makeActor({ id: "ghis", kind: KIND.ADAPTER, tier: TIER.DRAFT });
+  for (const resourceType of INSTRUCTION_TYPES) {
+    const v = authoriseWrite(feed, { resourceType, patientId: "p", status: "active" }, {});
+    assert.equal(v.allowed, false, `${resourceType} active must still need EXECUTE`);
+    assert.ok(v.reasons.some((r) => r.code === "EXECUTE_DENIED"));
+  }
+});
+
+test("ADVERSARIAL: an AI still cannot commit an active order, so HAZ-AI-01 is unchanged", () => {
+  const ai = makeActor({ id: "ai", kind: KIND.AI, tier: TIER.EXECUTE });
+  const v = authoriseWrite(ai, { resourceType: "MedicationOrder", patientId: "p", status: "active", signedBy: "dr-1" }, {});
+  assert.equal(v.allowed, false);
+  const codes = v.reasons.map((r) => r.code);
+  assert.ok(codes.includes("EXECUTE_DENIED"));
+  assert.ok(codes.includes("NON_HUMAN_SIGNATURE"));
+});
+
+test("a device is still confined to observations, whatever the status", () => {
+  const pump = makeActor({ id: "pump", kind: KIND.DEVICE, tier: TIER.DRAFT });
+  assert.equal(authoriseWrite(pump, { resourceType: "Observation", patientId: "p", status: "final" }, {}).allowed, true);
+  assert.equal(authoriseWrite(pump, { resourceType: "Encounter", patientId: "p", status: "in-progress" }, {}).allowed, false);
+});
+
+test("a READ actor writes nothing at all, draft or otherwise", () => {
+  const viewer = makeActor({ id: "student", kind: KIND.HUMAN, tier: TIER.READ });
+  const v = authoriseWrite(viewer, { resourceType: "ClinicalNote", patientId: "p", status: "draft" }, {});
+  assert.equal(v.allowed, false);
+  assert.ok(v.reasons.some((r) => r.code === "DRAFT_DENIED"));
 });
