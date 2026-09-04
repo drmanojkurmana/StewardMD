@@ -93,6 +93,10 @@ function Encounter(input) {
     patientId: requireString(input.patientId, "Encounter.patientId"),
     class: input.class,
     status: input.status || "planned", // planned | in-progress | finished | cancelled
+    // A visit carries its own identifiers (GHIS episode id, HL7 visit number, FHIR
+    // Encounter.identifier). Without this an adapter's only way to preserve the source visit id is
+    // to bake it into the generated `id` string, which no consumer can safely parse back out.
+    identifiers: assertArray(input.identifiers),
     location: input.location || null, // {facilityId, ward, bed}
     periodStart: input.periodStart || nowIso(),
     periodEnd: input.periodEnd || null,

@@ -26,8 +26,42 @@ conversion, GHIS session/token handling and the GIMSR patient picker belong in t
 must stay meaningful if every current adapter were replaced. Future adapters (HL7 v2, FHIR R4,
 DICOM/DICOMweb, LIS, ABDM, IoMT) plug in the same way.
 
-Existing StewardMD mobile behaviour must keep working while it migrates onto this layer. The
-migration of `ghis-ward.js` has **not** started; it is its own reviewed change against live code.
+Existing StewardMD mobile behaviour must keep working while it migrates onto this layer.
+
+**The adapter now exists** (`wardsynq/adapters/wardsynq-ghis-adapter.js`, 23 tests) and is the
+reference implementation for every adapter that follows. **The cut-over has NOT happened**:
+`ghis-ward.js` and `icu.js` are untouched and still own the live path. The adapter is pure mapping
+only. It does no fetching, holds no GHIS token, and touches no live state; `ghis-ward.js` keeps
+transport, the bearer token, the 401 silent refresh and the patient picker. That split is on
+purpose: transport and auth change per site, mapping has to be verifiable in a test without a
+network.
+
+### Three traps in the GHIS payload (surveyed 2026-09-04, all pinned by tests)
+
+1. **`dob` IS AN AGE.** GHIS sends age in years as a string (`"45"`). Parsed as a date it yields a
+   patient born in the year 45. Age drives weight-based paediatric dosing, so this is a dosing
+   hazard, not a display bug. The adapter records `ageYears` and leaves `dob` as the sentinel
+   `0000-00-00`, which deliberately does not parse as a date. Related: `vault/modules/Insulin.md`
+   records an earlier "pediatric-flag-not-a-fake-age" fix, so this family of bug has bitten before.
+2. **`wardToSI` does not convert to SI.** Despite the name, `icu.js` converts an SI-labelled result
+   *back* to conventional units. The adapter therefore does NOT normalise units at all: it stores
+   value and unit exactly as reported with `unitNormalised: false`, and keeps `sourceValue` and
+   `sourceUnit` verbatim. A silently mis-converted electrolyte is worse than an unconverted one.
+3. **`patientId` is the MRN.** There is no separate UHID anywhere in the payload. `episodeId` is a
+   visit, not a person.
+
+### Adapter contract every future adapter must meet
+
+- **Stable ids.** Built only from source-stable parts, never from ingestion time, so a reconnect or
+  offline replay versions a record instead of duplicating it.
+- **Nothing silently dropped.** An unmapped test keeps its original name and raises an `issue`; one
+  bad row never discards the rest of the import; junk input never throws.
+- **The raw survives.** `sourceTestName`, `sourceValue`, `sourceUnit` are always kept, so a mapping
+  error is recoverable from the record without the source system being reachable.
+- **No invented clinical values.** A non-numeric result stays a string, an unparseable date becomes
+  null plus an issue, an unreported scan is `preliminary` not `final`.
+- **Source assertions do not become controls.** GHIS's own `critical` flag is carried as
+  `sourceCritical` and gates nothing; critical-value escalation belongs to the safety engine.
 
 ## Files (P0)
 

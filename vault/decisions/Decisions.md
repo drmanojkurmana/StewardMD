@@ -2336,3 +2336,41 @@ Two of these files were written by delegated agents (`agy` for the store, a Clau
 MPI) against written briefs, then verified here: the MPI's Jaro-Winkler and Soundex were checked
 against published reference values including Tymczak and Pfister, and every suite was re-run
 independently rather than trusted from the agent's own report.
+
+## 2026-09-04 WardSynQ: the GHIS adapter exists, the cut-over does not
+
+Built `wardsynq/adapters/wardsynq-ghis-adapter.js` (23 tests): GHIS bundle to canonical model, onto
+the Clinical Event Bus. This is the owner's stated architecture (Ward Sync becomes WardSynQ's first
+interop adapter) implemented as the non-destructive half.
+
+**Deliberately NOT done: rewiring the live path.** `ghis-ward.js`, `icu.js`, `medlist.js` and
+`autofetch.js` are untouched. The adapter is pure mapping with no fetch, no token, no live state.
+`ghis-ward.js` keeps transport, the per-doctor bearer token (`ghis_token:<uid>`), the 401 silent
+refresh and the patient picker. Splitting it this way means the mapping is verifiable in a test with
+no network, and the risky part is a separate reviewed change against code real users depend on.
+
+**What a cut-over will have to preserve** (from the survey, all read directly rather than through an
+accessor): `STATE.wardSync` shape `{connected,lastTs,patientId,newUpdate}` is read at icu.js:556,
+2286, 2424, 2431, 2434, 3718, 6433, 8538, plus autofetch.js:57 and ghis-ward.js:1076. Roster ids are
+derived as `"pw_"+patientId` / `"w_"+patientId` (icu.js:873-918). `wardSwitchGuard` (icu.js:725-730)
+keys cross-patient contamination protection on `bundle.patientId`. `ingestFromWard`'s conflict logic
+treats `STATE.src[key].source === "Manual"` as clinician-entered and everything else as overwritable,
+so a new source name must never be "Manual". `GHIS.getSelectedPatient()` is the sole handle
+`ghis-meds.js` and the DDI patient context use.
+
+**Three traps in the payload, each pinned by a test.** `dob` is an AGE in years as a string, so
+parsing it as a date gives a patient born in year 45, and age drives paediatric dosing; the adapter
+records `ageYears` and leaves `dob` as a sentinel that does not parse as a date. `wardToSI` in
+icu.js does the opposite of its name (SI back to conventional), so the adapter does no unit
+normalisation at all and flags `unitNormalised: false` while keeping the raw value and unit.
+`patientId` is the MRN, with no separate UHID.
+
+**Model gap found by the adapter, now fixed:** `Encounter` had no `identifiers` field, so a source
+visit id could only survive by being baked into the generated `id` string, which no consumer can
+parse back out. Every adapter after this one (HL7 visit numbers, FHIR Encounter.identifier) would
+have hit it.
+
+Adapter contract for everything that follows: stable ids from source-stable parts only; nothing
+silently dropped (unmapped vocabulary keeps its name and raises an issue, one bad row never discards
+the import); the raw source preserved on every record; no invented clinical values; and a source
+system's own assertions (GHIS's `critical` flag) carried as data, never promoted to a control.
