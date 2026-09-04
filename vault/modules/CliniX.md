@@ -56,6 +56,10 @@ stony dullness". That indirection is what makes the fourth disease cheap.
 - **Mastery is not one correct answer.** Requires repeated success on SEPARATE days (contrast
   `kardiox-providers.js:112`, which credits mastery on the first correct answer, which is why no row
   in the ECG atlas ever shows mastered).
+- **Every body diagram is in the EXAMINER'S view.** The patient's right renders on the VIEWER'S
+  left, the radiograph convention. `test/clinix-diagrams.test.mjs` asserts it in both directions
+  from the `side` field now carried by `ZONES`, `AUSC` and `ABD_REGIONS`, and cross-checks `side`
+  against the word in the label so a typo in either is caught.
 - **The tutor never authors a dose.** `TUTOR_SYS` says so, but a prompt is a request, not a
   mechanism. `clinix-tutor.js` `sanitize()` is the mechanism: a reply matching a drug-dose pattern is
   replaced WHOLESALE with a teaching refusal, client side, before it can render. Tested against 10
@@ -97,6 +101,28 @@ catalog, lazily fetched per-unit JSON, and a licence gate that refuses uncleared
   `CHROME=/opt/pw-browsers/chromium-1194/chrome-linux/chrome`.
 - The CDP helper `ev()` wraps its argument in `return (...)`, so a multi-statement snippet must be
   written as an IIFE expression.
+- **A mirrored anatomical diagram reads as correct.** `percussionMap`, `liverPalp` and `spleenPalp`
+  were drawn in the PATIENT's frame while `auscultationMap` and `abdRegions` were in the examiner's,
+  so one file taught both conventions at once. Nothing failed: the diagram is internally consistent
+  and only wrong once you say the sides out loud, and a student would have reached for the wrong
+  side at the bedside. It was found by LOOKING at a rendered screenshot, not by any assertion, which
+  is why the `side` fields and the two-way test above now exist. If you add a body diagram, add its
+  side data and extend that test; if it has no side data, render it and look at it.
+- The comparative connector in `percussionMap`/`auscultationMap` offsets 17px from each circle. That
+  offset must follow the direction of the pair, or a right-to-left pair draws the line back out
+  across both circles instead of between them.
+- **The simulated patient canonicalises BOTH sides of the match.** `canon()` in `clinix-model.js`
+  rewrites a synonym table (`sob`/`dyspnoea`/`winded` -> `breathless`) over the student's question
+  AND over each authored cue, so content never has to spell out every register. It is a vocabulary
+  map only: it never infers anything clinical, and the patient still says only what the author
+  scripted. When no cue matches, `nearMiss()` offers a rephrase if the question shares **two**
+  distinct content tokens with a topic - one is not enough, and that threshold is the fix for
+  "what is your favourite colour" reaching the sputum topic through a bare `colour` cue.
+  A clarification is deliberately NOT credited as having asked the topic, or the thin-workup check
+  becomes free to pass.
+- History topics may carry an optional `about` noun phrase ("the phlegm you bring up") used by
+  `clarifyReply()`. Most do not, so the copy degrades to a plain request to rephrase rather than
+  rendering "do you mean that?".
 
 ## Phase 2: MaiK as tutor
 CliniX builds **no chatbot**; it calls `SMD_AI.explainGroundedStream` exactly as `icu.js:7231` does.

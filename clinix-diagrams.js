@@ -80,15 +80,21 @@
 
   /* ── 3. Percussion zones (interactive) ───────────────────────────────────── */
 
+  /* ORIENTATION. Every body diagram in this file is drawn in the EXAMINER'S view: you are standing
+   * at the foot of the bed looking at the patient, so the PATIENT'S RIGHT is on the VIEWER'S LEFT.
+   * That is the same convention as a chest radiograph, and it is the one a student has to hold in
+   * their head at the bedside. A mirrored diagram teaches them to reach for the wrong side, and it
+   * is the kind of error that reads as correct until you name the sides out loud - so `side` is
+   * stated on every zone and asserted by test/clinix-diagrams.test.mjs in both directions. */
   var ZONES = [
-    { id: "apexL", cx: 118, cy: 46, n: 1, label: "Left apex", finding: "Hyperresonant. Percuss the clavicle directly here." },
-    { id: "apexR", cx: 202, cy: 46, n: 2, label: "Right apex", finding: "Hyperresonant, and equal to the left. It is the COMPARISON that matters, not the note alone." },
-    { id: "upperL", cx: 112, cy: 88, n: 3, label: "Left upper zone", finding: "Hyperresonant." },
-    { id: "upperR", cx: 208, cy: 88, n: 4, label: "Right upper zone", finding: "Hyperresonant and symmetrical." },
-    { id: "midL", cx: 108, cy: 128, n: 5, label: "Left mid zone", finding: "In COPD the cardiac dullness that should be here is LOST, because hyperinflated lung has expanded over the heart." },
-    { id: "midR", cx: 212, cy: 128, n: 6, label: "Right mid zone", finding: "Hyperresonant." },
-    { id: "lowerL", cx: 112, cy: 170, n: 7, label: "Left base", finding: "Hyperresonant. STONY dullness here would mean an effusion, not COPD." },
-    { id: "lowerR", cx: 208, cy: 170, n: 8, label: "Right base", finding: "Hyperresonant, and the liver dullness is pushed DOWN to about the seventh space." }
+    { id: "apexL", side: "left", cx: 202, cy: 46, n: 1, label: "Left apex", finding: "Hyperresonant. Percuss the clavicle directly here." },
+    { id: "apexR", side: "right", cx: 118, cy: 46, n: 2, label: "Right apex", finding: "Hyperresonant, and equal to the left. It is the COMPARISON that matters, not the note alone." },
+    { id: "upperL", side: "left", cx: 208, cy: 88, n: 3, label: "Left upper zone", finding: "Hyperresonant." },
+    { id: "upperR", side: "right", cx: 112, cy: 88, n: 4, label: "Right upper zone", finding: "Hyperresonant and symmetrical." },
+    { id: "midL", side: "left", cx: 212, cy: 128, n: 5, label: "Left mid zone", finding: "In COPD the cardiac dullness that should be here is LOST, because hyperinflated lung has expanded over the heart." },
+    { id: "midR", side: "right", cx: 108, cy: 128, n: 6, label: "Right mid zone", finding: "Hyperresonant." },
+    { id: "lowerL", side: "left", cx: 208, cy: 170, n: 7, label: "Left base", finding: "Hyperresonant. STONY dullness here would mean an effusion, not COPD." },
+    { id: "lowerR", side: "right", cx: 112, cy: 170, n: 8, label: "Right base", finding: "Hyperresonant, and the liver dullness is pushed DOWN to about the seventh space." }
   ];
 
   function chestOutline() {
@@ -105,7 +111,10 @@
         '<circle cx="' + z.cx + '" cy="' + z.cy + '" r="15"/>' +
         '<text x="' + z.cx + '" y="' + (z.cy + 4) + '" text-anchor="middle">' + z.n + "</text></g>";
       if (z.n % 2 === 1 && ZONES[i + 1]) {
-        html += '<path class="cx-dia-cmp" d="M' + (z.cx + 17) + " " + z.cy + " L" + (ZONES[i + 1].cx - 17) + " " + ZONES[i + 1].cy + '"/>';
+        // The pair now runs right-to-left on screen, so the 17px stand-off has to follow the
+        // direction of travel or the line is drawn straight back over both circles.
+        var dp = ZONES[i + 1].cx > z.cx ? 17 : -17;
+        html += '<path class="cx-dia-cmp" d="M' + (z.cx + dp) + " " + z.cy + " L" + (ZONES[i + 1].cx - dp) + " " + ZONES[i + 1].cy + '"/>';
       }
     }
     html += "</svg>";
@@ -178,14 +187,14 @@
   /* ── 6. Auscultation sites (interactive, and it plays the sound) ─────────── */
 
   var AUSC = [
-    { id: "a1", cx: 120, cy: 44, n: 1, label: "Right apex", sound: "vesicular", note: "Vesicular. Compare immediately with the left apex." },
-    { id: "a2", cx: 200, cy: 44, n: 2, label: "Left apex", sound: "vesicular", note: "Vesicular, and equal to the right." },
-    { id: "a3", cx: 112, cy: 92, n: 3, label: "Right upper", sound: "reduced", note: "In COPD, symmetrically REDUCED with a prolonged expiratory phase." },
-    { id: "a4", cx: 208, cy: 92, n: 4, label: "Left upper", sound: "reduced", note: "Reduced, matching the right. Symmetry is the point." },
-    { id: "a5", cx: 108, cy: 136, n: 5, label: "Right mid", sound: "wheeze", note: "Polyphonic expiratory wheeze: many notes at once, diffuse airflow obstruction." },
-    { id: "a6", cx: 212, cy: 136, n: 6, label: "Left mid", sound: "wheeze", note: "Wheeze here too. Diffuse, not localised." },
-    { id: "a7", cx: 114, cy: 176, n: 7, label: "Right base", sound: "coarse", note: "Early COARSE crackles from secretions. Ask for a cough and listen again." },
-    { id: "a8", cx: 206, cy: 176, n: 8, label: "Left base", sound: "coarse", note: "Coarse crackles, shifting after a cough. That shift is what makes them secretions." }
+    { id: "a1", side: "right", cx: 120, cy: 44, n: 1, label: "Right apex", sound: "vesicular", note: "Vesicular. Compare immediately with the left apex." },
+    { id: "a2", side: "left", cx: 200, cy: 44, n: 2, label: "Left apex", sound: "vesicular", note: "Vesicular, and equal to the right." },
+    { id: "a3", side: "right", cx: 112, cy: 92, n: 3, label: "Right upper", sound: "reduced", note: "In COPD, symmetrically REDUCED with a prolonged expiratory phase." },
+    { id: "a4", side: "left", cx: 208, cy: 92, n: 4, label: "Left upper", sound: "reduced", note: "Reduced, matching the right. Symmetry is the point." },
+    { id: "a5", side: "right", cx: 108, cy: 136, n: 5, label: "Right mid", sound: "wheeze", note: "Polyphonic expiratory wheeze: many notes at once, diffuse airflow obstruction." },
+    { id: "a6", side: "left", cx: 212, cy: 136, n: 6, label: "Left mid", sound: "wheeze", note: "Wheeze here too. Diffuse, not localised." },
+    { id: "a7", side: "right", cx: 114, cy: 176, n: 7, label: "Right base", sound: "coarse", note: "Early COARSE crackles from secretions. Ask for a cough and listen again." },
+    { id: "a8", side: "left", cx: 206, cy: 176, n: 8, label: "Left base", sound: "coarse", note: "Coarse crackles, shifting after a cough. That shift is what makes them secretions." }
   ];
 
   function auscultationMap(o) {
@@ -197,7 +206,8 @@
         '<circle cx="' + z.cx + '" cy="' + z.cy + '" r="15"/>' +
         '<text x="' + z.cx + '" y="' + (z.cy + 4) + '" text-anchor="middle">' + z.n + "</text></g>";
       if (z.n % 2 === 1 && AUSC[i + 1]) {
-        html += '<path class="cx-dia-cmp" d="M' + (z.cx + 17) + " " + z.cy + " L" + (AUSC[i + 1].cx - 17) + " " + AUSC[i + 1].cy + '"/>';
+        var da = AUSC[i + 1].cx > z.cx ? 17 : -17;
+        html += '<path class="cx-dia-cmp" d="M' + (z.cx + da) + " " + z.cy + " L" + (AUSC[i + 1].cx - da) + " " + AUSC[i + 1].cy + '"/>';
       }
     }
     html += "</svg>";
@@ -384,15 +394,15 @@
   /* ── 13. Nine regions of the abdomen (interactive) ───────────────────────── */
 
   var ABD_REGIONS = [
-    { id: "rhyp", cx: 84, cy: 60, label: "Right hypochondrium", organs: "Liver, gallbladder, right kidney" },
-    { id: "epig", cx: 170, cy: 60, label: "Epigastrium", organs: "Stomach, pancreas, duodenum, aorta" },
-    { id: "lhyp", cx: 256, cy: 60, label: "Left hypochondrium", organs: "Spleen, splenic flexure, left kidney" },
-    { id: "rlum", cx: 84, cy: 140, label: "Right lumbar", organs: "Ascending colon, right kidney" },
-    { id: "umb", cx: 170, cy: 140, label: "Umbilical", organs: "Small bowel, aorta, para-aortic nodes" },
-    { id: "llum", cx: 256, cy: 140, label: "Left lumbar", organs: "Descending colon, left kidney" },
-    { id: "riif", cx: 84, cy: 220, label: "Right iliac fossa", organs: "Caecum, appendix" },
-    { id: "hyp", cx: 170, cy: 220, label: "Hypogastrium", organs: "Bladder, uterus (if enlarged)" },
-    { id: "liif", cx: 256, cy: 220, label: "Left iliac fossa", organs: "Sigmoid colon" }
+    { id: "rhyp", side: "right", cx: 84, cy: 60, label: "Right hypochondrium", organs: "Liver, gallbladder, right kidney" },
+    { id: "epig", side: "mid", cx: 170, cy: 60, label: "Epigastrium", organs: "Stomach, pancreas, duodenum, aorta" },
+    { id: "lhyp", side: "left", cx: 256, cy: 60, label: "Left hypochondrium", organs: "Spleen, splenic flexure, left kidney" },
+    { id: "rlum", side: "right", cx: 84, cy: 140, label: "Right lumbar", organs: "Ascending colon, right kidney" },
+    { id: "umb", side: "mid", cx: 170, cy: 140, label: "Umbilical", organs: "Small bowel, aorta, para-aortic nodes" },
+    { id: "llum", side: "left", cx: 256, cy: 140, label: "Left lumbar", organs: "Descending colon, left kidney" },
+    { id: "riif", side: "right", cx: 84, cy: 220, label: "Right iliac fossa", organs: "Caecum, appendix" },
+    { id: "hyp", side: "mid", cx: 170, cy: 220, label: "Hypogastrium", organs: "Bladder, uterus (if enlarged)" },
+    { id: "liif", side: "left", cx: 256, cy: 220, label: "Left iliac fossa", organs: "Sigmoid colon" }
   ];
 
   function abdRegions(o) {
@@ -423,15 +433,17 @@
   function liverPalp() {
     return '<svg class="cx-dia cx-dia--anim" viewBox="0 0 340 222" role="img" aria-label="Preferred method of liver palpation, hands rising to meet the descending edge on inspiration">' +
       '<rect class="cx-dia-skin" x="20" y="70" width="300" height="110" rx="14"/>' +
-      '<path class="cx-dia-liver" d="M180 76 C230 70 280 78 296 96 L296 130 C260 118 210 116 182 126 Z"/>' +
-      '<text class="cx-dia-lbl cx-dia-lbl--copd" x="216" y="100">liver</text>' +
+      // EXAMINER'S VIEW (see the ORIENTATION note above ZONES): the patient's right upper quadrant,
+      // and so the liver, sits on the VIEWER'S LEFT - the same side as it is in abdRegions().
+      '<path class="cx-dia-liver" d="M160 76 C110 70 60 78 44 96 L44 130 C80 118 130 116 158 126 Z"/>' +
+      '<text class="cx-dia-lbl cx-dia-lbl--copd" x="86" y="100">liver</text>' +
       '<g class="cx-dia-liverhands">' +
-        '<path class="cx-dia-hand" d="M160 150 L296 150 L302 162 L154 162 Z"/>' +
-        '<text class="cx-dia-lbl cx-dia-lbl--normal" x="160" y="178">both hands flat, fingers towards the ribs</text>' +
+        '<path class="cx-dia-hand" d="M180 150 L44 150 L38 162 L186 162 Z"/>' +
+        '<text class="cx-dia-lbl cx-dia-lbl--normal" x="20" y="192">both hands flat, fingers towards the ribs</text>' +
       "</g>" +
-      '<path class="cx-dia-press" d="M228 190 L228 168" marker-end="url(#cxArrow)"/>' +
-      '<text class="cx-dia-lbl cx-dia-lbl--mute" x="20" y="200">ask for a deep breath;</text>' +
-      '<text class="cx-dia-lbl cx-dia-lbl--mute" x="20" y="212">the edge meets the fingertips</text>' +
+      '<path class="cx-dia-press" d="M112 178 L112 168" marker-end="url(#cxArrow)"/>' +
+      '<text class="cx-dia-lbl cx-dia-lbl--mute" x="320" y="200" text-anchor="end">ask for a deep breath;</text>' +
+      '<text class="cx-dia-lbl cx-dia-lbl--mute" x="320" y="212" text-anchor="end">the edge meets the fingertips</text>' +
       '<defs><marker id="cxArrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto">' +
         '<path d="M0 0 L10 5 L0 10 z" class="cx-dia-arrowhead"/></marker></defs>' +
       "</svg>" +
@@ -445,15 +457,18 @@
       '<rect class="cx-dia-skin" x="20" y="16" width="300" height="178" rx="16"/>' +
       '<line class="cx-dia-mid" x1="170" y1="16" x2="170" y2="194"/>' +
       '<line class="cx-dia-mid" x1="20" y1="105" x2="320" y2="105"/>' +
-      '<circle class="cx-dia-alv" cx="120" cy="60" r="16"/>' +
-      '<text class="cx-dia-lbl cx-dia-lbl--mute" x="60" y="40">normal spleen,</text>' +
-      '<text class="cx-dia-lbl cx-dia-lbl--mute" x="60" y="54">tucked under the ribs</text>' +
-      '<path class="cx-dia-spleenpath" d="M120 60 C150 100 190 140 230 172"/>' +
-      '<circle class="cx-dia-air cx-dia-air--trapped" cx="230" cy="172" r="10"/>' +
-      '<text class="cx-dia-lbl cx-dia-lbl--copd" x="150" y="190">enlarges towards</text>' +
-      '<text class="cx-dia-lbl cx-dia-lbl--copd" x="150" y="202">the right iliac fossa</text>' +
-      '<text class="cx-dia-lbl cx-dia-lbl--normal" x="26" y="150">sweep the palpating hand</text>' +
-      '<text class="cx-dia-lbl cx-dia-lbl--normal" x="26" y="164">diagonally along this line</text>' +
+      // EXAMINER'S VIEW (see the ORIENTATION note above ZONES): the spleen lies in the patient's
+      // LEFT upper quadrant, which is the VIEWER'S RIGHT, and it enlarges across the midline towards
+      // the right iliac fossa on the VIEWER'S LEFT.
+      '<circle class="cx-dia-alv" cx="220" cy="60" r="16"/>' +
+      '<text class="cx-dia-lbl cx-dia-lbl--mute" x="196" y="40" text-anchor="end">normal spleen,</text>' +
+      '<text class="cx-dia-lbl cx-dia-lbl--mute" x="196" y="54" text-anchor="end">tucked under the ribs</text>' +
+      '<path class="cx-dia-spleenpath" d="M220 60 C190 100 150 140 110 172"/>' +
+      '<circle class="cx-dia-air cx-dia-air--trapped" cx="110" cy="172" r="10"/>' +
+      '<text class="cx-dia-lbl cx-dia-lbl--copd" x="26" y="190">enlarges towards</text>' +
+      '<text class="cx-dia-lbl cx-dia-lbl--copd" x="26" y="202">the right iliac fossa</text>' +
+      '<text class="cx-dia-lbl cx-dia-lbl--normal" x="180" y="146">sweep the palpating hand</text>' +
+      '<text class="cx-dia-lbl cx-dia-lbl--normal" x="180" y="160">diagonally along this line</text>' +
       "</svg>" +
       '<div class="cx-dia-note">A spleen you can feel has already doubled or tripled in size, and it enlarges along this one diagonal, from the left costal margin towards the umbilicus and the right iliac fossa, never in a random direction.</div>';
   }
@@ -492,7 +507,7 @@
     return null;
   }
 
-  var API = { DIAGRAMS: DIAGRAMS, ZONES: ZONES, AUSC: AUSC, has: has, render: render, titleOf: titleOf, soundFor: soundFor };
+  var API = { DIAGRAMS: DIAGRAMS, ZONES: ZONES, AUSC: AUSC, ABD_REGIONS: ABD_REGIONS, has: has, render: render, titleOf: titleOf, soundFor: soundFor };
   if (typeof module !== "undefined" && module.exports) module.exports = API;
   if (typeof window !== "undefined") window.SMD_CLINIX_DIAGRAMS = API;
 })();
