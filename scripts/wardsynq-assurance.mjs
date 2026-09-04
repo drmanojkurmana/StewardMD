@@ -28,6 +28,10 @@ const SUITES = [
   "test/wardsynq-safety.test.mjs",
   "test/wardsynq-ghis-adapter.test.mjs",
   "test/wardsynq-temporal.test.mjs",
+  "test/wardsynq-critical.test.mjs",
+  "test/wardsynq-transfusion.test.mjs",
+  "test/wardsynq-surgical.test.mjs",
+  "test/wardsynq-safety-case.test.mjs",
 ];
 
 /** Runs node --test with the TAP reporter and returns a flat list of {name, passed}. */

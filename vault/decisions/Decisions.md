@@ -2603,3 +2603,61 @@ gaps in an early build, and a gate that fails from day one is a gate somebody sw
 Two caveats on the artefact itself. VERIFIED means the named tests pass, not that the control is
 clinically adequate; that judgement belongs to the named approver. And HAZ-MED-01 through 03 are
 verified as MECHANISMS while their clinical content is still unapproved seed data.
+
+## 2026-09-04 WardSynQ: the three uncontrolled hazards are now built
+
+Built controls for the three hazards that had nothing at all, in the owner's priority order. 269
+tests, 268 passing, 1 skipped. Assurance moves from 4 of 11 verified to 7 of 11, with 0 uncontrolled.
+The scoring methodology was NOT touched; every point came from a control that now exists.
+
+**HAZ-DIAG-01, `wardsynq-critical.js`.** The whole loop: deterministic classification against an
+injected threshold pack, responsible clinician identified, dispatch, delivery, viewing,
+acknowledgement, documented action, time-driven escalation, append-only ledger. Design rules each
+exist because of a way the control could be defeated: a source system's own critical flag can RAISE
+a loop but never close or veto one; no state may be skipped; timestamps are server-assigned so an
+acknowledgement cannot be backdated; escalation has no suppression flag; viewing does NOT stop
+escalation because a result that was looked at and abandoned is the hazard; acknowledgement alone
+does not close the loop because seeing a potassium of 7.1 is not treating it.
+
+Caught during the build: `tick()` was a correct method that nothing called, which would have left
+the state machine right and the clinical control absent. Added `CriticalResultMonitor`, whose
+`pump()` drives every live loop and whose failures are isolated so one broken loop cannot silence
+every other patient's result.
+
+**HAZ-BLD-01, `wardsynq-transfusion.js`.** ABO and RhD compatibility live in code because they are
+immutable biology; anything genuinely local, such as D-positive to D-negative policy, is injected.
+Red cell and plasma tables are kept separate and both matrices are asserted by hand in the tests,
+because plasma is the INVERSE of red cells and one shared table would be lethal in one direction.
+Nearly all the effort is on identity: the crossmatch binds one unit to one patient, and the bedside
+check needs two different named people, a scanned wristband, a scanned unit, and RE-DERIVES
+compatibility from the physical bag rather than the crossmatch record, so a mislabelled bag is
+caught by the check that matters. Platelets are explicitly refused rather than guessed.
+
+**HAZ-SURG-01, `wardsynq-surgical.js`.** Incision is unreachable until Sign In and Time Out are
+complete, and complete means every item explicitly confirmed plus three DIFFERENT people signing as
+surgeon, anaesthetist and nurse. The laterality chain is the interesting part: the side is declared
+once at booking and re-asserted independently at marking, Sign In and Time Out, each compared to the
+BOOKING rather than to the previous step, so an early error cannot propagate by agreement. Consent
+must match procedure and side. An operative record is refused while any milestone is outstanding,
+because otherwise the gate would only delay the paperwork.
+
+**One test was rewritten and it is worth being explicit that this was not a weakening.** The safety
+case test "the report leads with what is not covered" asserted the literal string UNCONTROLLED as
+the first row. It went stale the moment the last uncontrolled hazard was genuinely built. It now
+asserts the general invariant instead, that the report leads with the worst status actually present
+and never with a verified row while anything is unverified, and additionally that the whole listing
+stays ordered worst first. The scoring, the adequacy cap and the criteria are unchanged.
+
+**Status vocabulary, kept distinct as the owner asked.** All three are IMPLEMENTED and TESTED. None
+is CLINICALLY VALIDATED or CLINICALLY APPROVED. The critical threshold pack is unapproved seed and
+models ADULT limits only, so a paediatric result classified against it would be wrong. Transfusion
+covers ABO and RhD only, with antibody screening, phenotype matching, special requirements, massive
+transfusion and neonatal rules all absent. The surgical item set is shorter than the full WHO
+checklist and than most local variants. No barcode hardware is integrated anywhere, so every bedside
+gate is verified against supplied scan values rather than a scanner.
+
+**Remaining, in priority order:** HAZ-AI-01 is the worst of the four PARTIALs, because the AI
+boundary is currently a convention with nothing enforcing it and the store will accept a
+signed-looking record from any caller; it needs an actor model. Then HAZ-DEV-01 (fields exist,
+nothing sets them), HAZ-DOWN-01 (offline and three-way merge), and HAZ-ID-01 (cross-context chart
+contamination).

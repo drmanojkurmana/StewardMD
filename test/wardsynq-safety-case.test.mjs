@@ -86,11 +86,24 @@ test("case: the summary counts every hazard exactly once", () => {
   assert.equal(s.total, HAZARDS.length);
 });
 
-test("case: the report leads with what is not covered", () => {
-  const text = report(assess(allPassing(), HAZARDS));
-  const firstStatus = text.split("\n").find((l) => /^(UNCONTROLLED|NO-EVIDENCE|FAILING|PARTIAL|VERIFIED)/.test(l));
-  assert.match(firstStatus, /^UNCONTROLLED/,
+test("case: the report leads with the worst status present, never with successes", () => {
+  // Asserted as the general invariant rather than as a literal first row. The literal version said
+  // UNCONTROLLED and went stale the moment the last uncontrolled hazard was actually built, which
+  // would have pressured a future reader to relax the rule instead of the assertion.
+  const assessment = assess(allPassing(), HAZARDS);
+  const text = report(assessment);
+  const severity = ["uncontrolled", "no-evidence", "failing", "partial", "verified"];
+  const worstPresent = severity.find((s) => assessment.some((a) => a.status === s));
+
+  const rows = text.split("\n").filter((l) => /^(UNCONTROLLED|NO-EVIDENCE|FAILING|PARTIAL|VERIFIED)/.test(l));
+  assert.equal(rows[0].split(/\s+/)[0].toLowerCase(), worstPresent,
     "an assurance report that opens with its successes is a marketing document");
+  assert.notEqual(rows[0].split(/\s+/)[0], "VERIFIED",
+    "while anything is unverified, a verified row must never be the first thing read");
+
+  // And the ordering holds all the way down, not just at the top.
+  const seen = rows.map((r) => severity.indexOf(r.split(/\s+/)[0].toLowerCase()));
+  assert.deepEqual(seen, [...seen].sort((a, b) => a - b), "rows stay ordered worst first");
   assert.match(text, /caveat:/, "every claim carries its caveat in the same view");
 });
 
