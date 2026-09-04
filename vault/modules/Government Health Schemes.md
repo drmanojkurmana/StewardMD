@@ -64,13 +64,14 @@ fallback since government-authored XLSX files are not reliably well-formed.
 ## National scheme registry status
 28/28 states, 8/8 UTs, Central: registry (name/type/code) seeded and live in D1.
 
-**Ingested (live data, verified by remote query 2026-09-04):** 22/37 jurisdictions, 51,443
+**Ingested (live data, verified by remote query 2026-09-04):** 22/37 jurisdictions, 53,126
 packages — Tamil Nadu 4,298 · West Bengal 4,388 (5 scheme_versions: Grade A 1,921 · Grade B 1,563
 · Grade C 404 · Grade R 218 · Critical Illness Package 282) · Nagaland 4,008 (2 scheme_versions:
 CMHIS-EP semi-private 2,004 · CMHIS General/PM-JAY 2,004) · Andhra Pradesh 3,713 · Karnataka 3,155
 · Bihar 2,675 · Rajasthan 2,439 · Himachal Pradesh 1,896 · Arunachal Pradesh 1,685 · Gujarat 2,315
 · Kerala 2,286 · Uttarakhand 1,585 · Odisha 1,569 · Punjab 1,322 · Assam 1,577 · Telangana 1,867 ·
-Mizoram 2,003 · Uttar Pradesh 2,000 · Delhi 1,991 · Chhattisgarh 1,735 · Central PM-JAY HBP 2022
+Mizoram 3,686 (Annexure A Public 2,003 + Annexure B Private 1,683) · Uttar Pradesh 2,000 ·
+Delhi 1,991 · Chhattisgarh 1,735 · Central PM-JAY HBP 2022
 1,646 ·
 Haryana 1,290. Each row carries its source's `rate_tier` verbatim where the source publishes one
 (Tier 2, Tier1(X), Non-NABH, A1, ...) - amounts are only comparable with the tier visible.
@@ -274,11 +275,18 @@ trusting `treatment_name` there. Left as a real next step, not patched under tim
 tonight (touching the shared script risks a subtle regression on already-loaded data with no
 time left to re-validate all of it before the owner wakes).
 
-**Update, later the same day:** `ingest_pdf_columnar.py` (see above) is a strong candidate to
-retry Mizoram Annexure B - its `header_bottom` cutoff exists specifically to stop continuation
-search from crossing into header text, which is exactly this bug. Not attempted yet; also worth
-re-checking whether the already-loaded Haryana/Central/UP `treatment_name` gaps could be re-run
-with it instead of patching `ingest_layout_pdf.py`'s `HEADER_NOISE` list.
+**Fixed, later the same day: Mizoram Annexure B loaded (1,683 packages).** `ingest_pdf_columnar.py`
+solved it exactly as predicted - `header_bottom` stops continuation search from crossing into
+header text, so the "Reservation Private Hospitals (Y/N)" leakage that hit 129/1,683 rows on the
+old script hits 0/1,683 here (checked directly: zero occurrences of that phrase in the loaded
+data). BM001A = ₹8,800, exact match to the source doc's sample. Its header renders cleanly (no
+letter-spacing artifact, unlike Punjab/Odisha) so this was a straightforward run once the
+`--code-header`/`--rate-header` phrases were identified ("Procedure code HBP 2022" / "Rates
+(₹)").
+
+**Not yet re-run: the already-loaded Haryana/Central/UP `treatment_name` gaps.** Their source
+PDFs aren't on disk in this worktree (gitignored, would need re-fetching first, same as Punjab/
+Himachal/Odisha needed tonight) - real next step, same technique, just not done yet.
 
 **Source inventory (research, not yet ingested):** `functions/db/govschemes_source_inventory.md`,
 compiled by agy 2026-09-02 — **29/35 FOUND** (a package master located on an official govt
