@@ -603,3 +603,51 @@ test("duplication: the real StewardMD pack does not alert on a lone anticoagulan
   assert.equal(both.allowed, false, "two anticoagulants together is a real finding and must still fire");
   assert.equal(both.overridables.length, 1);
 });
+
+
+/* ------------------------------------------------------------------ subset absorption
+ *
+ * Found by reading the finished screen: the workstation showed two Monitor findings with the
+ * identical sentence, one naming two of the patient's drugs and one naming three including both.
+ * Telling a clinician the same fact twice with a different drug list is how a safety panel becomes
+ * something to scroll past.
+ */
+
+test("noise: a finding whose drugs are a subset of an identical finding is absorbed", () => {
+  const pack = compileRulePack({
+    drugClasses: { ibuprofen: ["x", "y"], warfarin: ["x", "y"], clarithromycin: ["y"] },
+    interactions: [
+      { id: "dup-x", type: "duplicate_class", subjects: [{ kind: "class", value: "x" }], severity: "monitor", effect: "Possible therapeutic duplication." },
+      { id: "dup-y", type: "duplicate_class", subjects: [{ kind: "class", value: "y" }], severity: "monitor", effect: "Possible therapeutic duplication." },
+    ],
+  });
+  const f = checkInteractions(pack, { drug: "ibuprofen" }, [{ drug: "warfarin" }, { drug: "clarithromycin" }]);
+  assert.equal(f.length, 1, "the two-drug statement is contained in the three-drug one and must not be shown twice");
+  assert.deepEqual(f[0].drugs.slice().sort(), ["clarithromycin", "ibuprofen", "warfarin"],
+    "the surviving finding names every drug actually involved");
+  assert.deepEqual(f[0].mergedRuleIds.sort(), ["dup-x", "dup-y"], "both rule ids survive for the audit");
+});
+
+test("noise: a subset finding of DIFFERENT severity is never absorbed", () => {
+  const pack = compileRulePack({
+    drugClasses: { a: ["x", "y"], b: ["x", "y"], c: ["y"] },
+    interactions: [
+      { id: "minor-x", type: "duplicate_class", subjects: [{ kind: "class", value: "x" }], severity: "monitor", effect: "Same text." },
+      { id: "major-y", type: "duplicate_class", subjects: [{ kind: "class", value: "y" }], severity: "major", effect: "Same text." },
+    ],
+  });
+  const f = checkInteractions(pack, { drug: "a" }, [{ drug: "b" }, { drug: "c" }]);
+  assert.equal(f.length, 2, "a major finding must never be swallowed by a monitor-level one, however similar the wording");
+});
+
+test("noise: findings saying DIFFERENT things are never absorbed", () => {
+  const pack = compileRulePack({
+    drugClasses: { a: ["x", "y"], b: ["x", "y"], c: ["y"] },
+    interactions: [
+      { id: "r-x", type: "duplicate_class", subjects: [{ kind: "class", value: "x" }], severity: "monitor", effect: "Duplication of anticoagulant." },
+      { id: "r-y", type: "duplicate_class", subjects: [{ kind: "class", value: "y" }], severity: "monitor", effect: "Duplication of antibiotic." },
+    ],
+  });
+  const f = checkInteractions(pack, { drug: "a" }, [{ drug: "b" }, { drug: "c" }]);
+  assert.equal(f.length, 2, "two different clinical facts remain two findings");
+});

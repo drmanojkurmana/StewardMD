@@ -2504,3 +2504,68 @@ audit entries, active medication list updated); zero console errors; 173 tests, 
 
 **Production gaps recorded.** Webfont from CDN (must self-host; wards lose network). Dark scheme
 tokens exist but this pass was checked by eye in light only. Notes and Alerts are placeholders.
+
+## 2026-09-04 WardSynQ v5: an original visual language, and the defects redesigning it exposed
+
+Owner rejected v4 as still AI-coded and generic-enterprise. Correct. The `frontend-design` skill
+lists the current AI-design tells, and v4 hit three of five by name: broadsheet layout with hairline
+rules, tracked-out all-caps eyebrow labels above every heading, and a monospace face for small data
+labels. It was the generated default, not a designed thing.
+
+**Research actually read** (subagent, `gh`/WebFetch, cited in full in the session): NASA Open MCT
+(`_status.scss`, `_limits.scss`), NHS.UK design system colour + service manual, GOV.UK type scale,
+IBM Carbon `packages/type`, GitHub Primer `primitives`, Microsoft Fluent 2 `packages/tokens`,
+OpenMRS O3 esm-styleguide, Bahmni, Medplum.
+
+**Principles extracted, and what each changed here.**
+- Open MCT encodes a limit violation on four independent channels: glyph, colour, border and dash
+  spacing, with limit DIRECTION as a separate arrow. Severity survives with colour removed. Adopted
+  as the core idea: WardSynQ's marks differ in LENGTH, WEIGHT and TEXTURE (solid, broken, dot)
+  before they differ in hue, and result deviation is split from result direction.
+- NHS.UK: "make sure what the colour is saying is available in other ways", and a grey-tinted ground
+  to cut glare for sustained reading. Our ground is a low-chroma green-grey for that reason.
+- GOV.UK: tabular figures are opt-in per element, not global. v5 scopes `tabular-nums` to results,
+  dose and dosing facts; running clinical prose gets proportional figures.
+- Primer: monospace is policy-restricted to code. Fluent 2 goes further and gives numerals their own
+  family rather than reaching for mono. v5 has exactly ONE monospace use left, the MRN.
+- Carbon/Primer/Fluent all use ONE family for every text role. v5 uses Source Sans 3 throughout.
+- Anti-pattern found: Bahmni and Medplum document no typography, density or accessibility policy at
+  all, and O3's tokens are gated in Zeplin. Being used in real hospitals is not evidence of design
+  rigour, so none of them was treated as a model.
+
+**The original idea: the signal column.** A narrow channel down the left of the workspace is the only
+place colour appears. Every clinical statement registers a mark there; nothing else does. It is not
+any of the references: Open MCT marks rows in a table, this binds a whole workspace to one continuous
+significance channel, so peripheral vision answers "is anything wrong on this screen" before a word
+is read. Findings are written as clinical sentences (significance, then the patient's own data as
+context, then what to consider, then what an override actually does) rather than a labelled
+Risk/Mechanism grid, and mechanism moves under a disclosure because it is study material.
+
+**Colour earns its place.** The allergy on the identity bar is unfilled until the drug being ordered
+actually implicates it, verified: ordering amoxicillin lights it, ibuprofen does not. A chip that is
+red all day is wallpaper by the second shift.
+
+**THREE REAL DEFECTS the redesign exposed, none cosmetic.**
+1. **The medication input rendered at 1.2:1.** The signal mechanism set `color` on the line so the
+   mark could use `currentColor`, and it cascaded into descendants: with `data-sig="none"` the drug
+   field drew its text in the hairline grey. A clinician could not read the drug name they had just
+   typed. The mark now rides on its own `--mark` property and never touches text. Now 18.35:1.
+2. **Duplicate-therapy findings with subset drug lists.** The screen showed the same sentence twice,
+   once for two drugs and once for three including both. `collapseDuplicateFindings` now absorbs a
+   finding whose drugs are a strict subset of an identical one at the same severity, keeping the
+   superset because it names every drug involved. Three tests pin it, including that different
+   severities and different messages are never merged.
+3. **A disabled commit button at 1.85:1.** `.btn[disabled]` outranked `.btn-commit`, leaving muted
+   text on the signal fill, so the clinician could not read what the button would do before earning
+   the right to press it. Disabled now drops the fill instead of dimming text on top of it.
+Also: the signal column marked non-clinical rows with a vestigial dot. A channel that marks every
+row means nothing, so plain lines now render no mark at all.
+
+**Verified:** light and dark by eye at 1680x1000; contrast measured in both schemes (body 7.4 to
+17.5, severity words 5.95 and 7.84, inputs 13.9 to 18.4); tab order runs drug, dose, unit, route,
+the four reason chips, rationale; no horizontal overflow at 1180; full override-to-signature flow
+driven in the browser including draft survival across a mid-entry re-render; 176 tests, 175 passing.
+Zero uppercase labels and one monospace use remain in the stylesheet.
+
+**Still open:** webfont from CDN must be self-hosted for wards without network; Notes and Handover
+are disabled placeholders; the clinical seed content remains unapproved.

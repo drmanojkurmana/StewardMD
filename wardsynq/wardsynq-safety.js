@@ -437,7 +437,29 @@ function collapseDuplicateFindings(findings) {
     existing.mergedRuleIds.push(f.ruleId);
     existing.mergedCount += 1;
   }
-  return [...groups.values()];
+
+  // Second pass: absorb a finding whose drugs are a strict SUBSET of another finding that says the
+  // same thing at the same severity. Real class data produces exactly this: one duplicate-therapy
+  // rule fires on two of the patient's drugs and another on three including both, so the clinician
+  // is told the same fact twice with a different drug list. The superset is kept because it names
+  // every drug actually involved.
+  const kept = [...groups.values()];
+  const absorbed = new Set();
+  for (const a of kept) {
+    for (const b of kept) {
+      if (a === b || absorbed.has(a) || absorbed.has(b)) continue;
+      if (a.severity !== b.severity || a.ruleType !== b.ruleType) continue;
+      if ((a.message || "") !== (b.message || "")) continue;
+      const sa = new Set(a.drugs || []);
+      const sb = new Set(b.drugs || []);
+      if (sa.size >= sb.size) continue;
+      if (![...sa].every((d) => sb.has(d))) continue;
+      absorbed.add(a);
+      b.mergedRuleIds = [...new Set([...(b.mergedRuleIds || []), ...(a.mergedRuleIds || [])])];
+      b.mergedCount = (b.mergedCount || 1) + (a.mergedCount || 1);
+    }
+  }
+  return kept.filter((f) => !absorbed.has(f));
 }
 
 /**
