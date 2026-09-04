@@ -4152,6 +4152,19 @@
       var p = aiHeaders().then(function (h) { return fetch(b + "/research", { method: "POST", headers: h, body: JSON.stringify(payload) }); }).then(function (r) { return r.json(); }).catch(function (e) { return { error: String(e && e.message || e) }; });
       return raceTimeout(p, mode ? 60000 : 45000, { error: "timeout" });
     },
+    // Raw web-search results, NO Gemini call (owner, 2026-09-04): the search itself (TinyFish) costs
+    // nothing server-side, so maik-engine.js's local-engine routing uses this to fetch sources, then
+    // has the ON-DEVICE model write the answer for free instead of paying for a cloud summary.
+    // Resolves { sources:[{title,url,site,snippet}] } | { error }. Not decorated/rerouted itself -
+    // called directly by maik-engine.js's route(), which is what decides cloud vs on-device.
+    researchSnippets: function (question, history) {
+      var b = aiBase(); if (!b || !aiOn()) return Promise.resolve({ error: "ai-off" });
+      var q = String(question || "").slice(0, 500); if (!q) return Promise.resolve({ error: "no-question" });
+      var payload = { question: q, snippetsOnly: true };
+      if (Array.isArray(history) && history.length) payload.history = history.slice(-4).map(function (t) { return { q: String((t && t.q) || "").slice(0, 300), a: String((t && t.a) || "").slice(0, 300) }; });
+      var p = aiHeaders().then(function (h) { return fetch(b + "/research", { method: "POST", headers: h, body: JSON.stringify(payload) }); }).then(function (r) { return r.json(); }).catch(function (e) { return { error: String(e && e.message || e) }; });
+      return raceTimeout(p, 20000, { error: "timeout" });
+    },
     // Cloud extraction from OCR TEXT ONLY (never an image). POSTs the scrubbed text to
     // /api/ai/vision → { kind, fields }. 429/offline/off are surfaced as { error }.
     visionText: function (text, kind) {

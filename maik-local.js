@@ -459,17 +459,94 @@
   /** Resolves {evidenceText, passages, RAG} from the on-device book index, or null if ungrounded
    * (no KB yet, no hit, or anything failed) - grounding is a strict improvement when available,
    * never a hard requirement that can break an answer that would otherwise have worked. */
+  /* RETRIEVAL DRIFT GUARD (owner battery, 2026-09-04). Two live failures with the same root cause:
+   * "first-line treatment of uncomplicated UTI" retrieved a DEFINITIONS chapter, and the follow-up
+   * "what if she is pregnant" retrieved a hepatitis-in-pregnancy passage, so the model answered
+   * lamivudine for a UTI and the gate PASSED it (lamivudine was in the evidence). BM25 ranks by term
+   * overlap; a modifier like "pregnancy" or a generic like "management" can out-vote the actual topic.
+   * So a passage must now contain one of the question's ANCHORS - its rarest words that are neither
+   * generic clinical filler nor a population modifier - or it is not evidence for this question.
+   * Zero anchored passages means "not grounded", never "grounded in the wrong chapter". Same model,
+   * same speed: this is a filter after search, and it SHRINKS the prompt (700-char passages, a weak
+   * third passage dropped), which is where on-device latency actually goes. */
+  var GENERIC_Q = /^(management|treatment|treat|therapy|regimen|regimens|dose|dosing|dosage|doses|route|duration|first|line|drug|drugs|agent|agents|class|choice|adult|patient|patients|clinical|answer|complete|detailed|provide|considerations|principles|verify|locally|empiric|severity|host|adjustment|culture|directed|escalation|steps|monitoring|ongoing|next|approach|options|guideline|guidelines|what|when|which|how|should|give|use|used|with|without|versus|compare|comparison|prefer|each|non|woman|women|man|men|male|female|young|old|older|year|years|uncomplicated|complicated|simple|case|cases|standard|usual|typical|common)$/;
+  var MODIFIER_Q = /^(pregnancy|pregnant|lactation|lactating|breastfeeding|renal|hepatic|liver|kidney|paediatric|pediatric|child|children|neonate|neonatal|elderly|geriatric|dialysis|ckd|impairment|failure|obese|obesity)$/;
+  var INTRO_HEAD = /definition|glossary|introduction|epidemiolog|etiolog|pathogenesis|classification|history|overview/i;
+  var TREAT_Q = /\b(treat|treatment|therapy|manage|management|dose|dosing|regimen|first.?line|drug|antibiotic|prescri)/i;
+  function cleanPassage(s) { return String(s || "").replace(/[■□▪▫●○◆◇◼◻•·]+/g, " ").replace(/\s+/g, " ").trim(); }
+  function anchorsFor(bk, RAG, question) {
+    // No tokenizer available (an older RAG build or a test stub) means no anchoring, never a
+    // thrown error that would silently turn every answer ungrounded.
+    if (!RAG || typeof RAG.toks !== "function") return [];
+    // Asked form AND expanded form: "UTI" expands to "urinary tract infection", but the book's own
+    // chapters say "UTI" (IDF 5.0) more than the long form (3.8); losing the abbreviation lost the
+    // strongest anchor. Three kinds come back: TOPIC words (the disease), DRUG names, and population
+    // MODIFIER stems. The disease is what a passage must be about; a drug name alone is not (the
+    // live CAP comparison pulled typhoid-resistance passages that merely named both drugs).
+    var q = question;
+    try { var ex = RAG.expand(question); q = question + " " + ex[0] + " " + ex[1]; } catch (e) {}
+    var seen = {}, topic = [], drugs = [], mods = [], tokens = [], drugSet = null;
+    try { tokens = RAG.toks(q) || []; } catch (e) { tokens = []; }
+    try { drugSet = RAG.drugsOf ? RAG.drugsOf(q) : null; } catch (e) { drugSet = null; }
+    var prev = "";
+    tokens.forEach(function (w) {
+      var before = prev; prev = w;
+      try { if (bk.us) w = bk.us(w); } catch (e) {}
+      if (seen[w] || w.length < 3) return;
+      seen[w] = 1;
+      // "non-pregnant" is not a request for pregnancy material.
+      if (MODIFIER_Q.test(w)) { if (before !== "non" && before !== "not") mods.push(w.slice(0, 5)); return; }
+      if (GENERIC_Q.test(w)) return;
+      var idf = bk.idfOf ? bk.idfOf(w) : 1;
+      if (idf === undefined) return;   // unknown to the book: cannot anchor on it
+      if (drugSet && drugSet.has(w)) drugs.push(w); else topic.push([idf, w]);
+    });
+    topic.sort(function (a, b) { return b[0] - a[0]; });
+    // Rarest topic words only, relative to the rarest one, so "infection" (IDF 2.0) does not let a
+    // urethritis passage stand in for a UTI one.
+    var floor = topic.length ? 0.6 * topic[0][0] : 0;
+    return { topic: topic.filter(function (e) { return e[0] >= floor; }).slice(0, 3).map(function (e) { return e[1]; }), drugs: drugs, mods: mods };
+  }
   function retrieveGrounding(packId, question) {
     if (!ragEligible(packId) || !question) return Promise.resolve(null);
     var RAG = (typeof window !== "undefined") && window.SMD_MAIK_RAG;
     var KB = (typeof window !== "undefined") && window.SMD_MAIK_KB_STORE;
     if (!RAG || !KB) return Promise.resolve(null);
     return KB.loadBook(RAG).then(function (bk) {
-      var hits = bk.search(question, RAG.TOPK);
+      // Search wider than we keep: the anchored passages are often ranks 2-6 behind a glossary
+      // chapter that matches every word. Same BM25 pass, only the sort tail is longer.
+      var hits = bk.search(question, RAG.TOPK * 3);
       if (!hits.length || hits[0][0] < RAG.MIN_SCORE) return null;
-      var passages = hits.map(function (h) { return bk.cite(h[1]); });
-      var evidenceText = passages.map(function (p, n) { return "[" + (n + 1) + "] " + p.text.slice(0, 900); }).join("\n\n");
-      return { evidenceText: evidenceText, passages: passages, RAG: RAG };
+      var A = anchorsFor(bk, RAG, question);
+      if (!A || !A.topic) A = { topic: A || [], drugs: [], mods: [] };
+      var need = A.topic.length ? A.topic : A.drugs;
+      var anchors = A.topic.concat(A.drugs);
+      var cited = hits.map(function (h) { var p = bk.cite(h[1]); return { score: h[0], p: p, hay: ((p.heading || "") + " " + (p.text || "")).toLowerCase() }; });
+      // Count anchors per passage. With two or more topic anchors, a passage matching two beats one
+      // matching one ("community" alone let a typhoid epidemiology passage stand in for CAP); when
+      // nothing matches two, one is enough.
+      cited.forEach(function (c) { c.n = need.filter(function (a) { return c.hay.indexOf(a) !== -1; }).length; });
+      var kept = need.length ? cited.filter(function (c) { return c.n > 0; }) : cited;
+      if (!kept.length) return null;
+      if (need.length > 1 && kept.some(function (c) { return c.n > 1; })) kept = kept.filter(function (c) { return c.n > 1; });
+      // "…in pregnancy": among the on-topic passages, the ones that mention the modifier win when any
+      // do; when none do, the topic passages stay and the model says so, instead of a passage about
+      // a different disease in pregnancy.
+      if (A.mods.length) {
+        var wm = kept.filter(function (c) { return A.mods.some(function (m) { return c.hay.indexOf(m) !== -1; }); });
+        if (wm.length) kept = wm;
+      }
+      // A definitions / introduction chapter is not the answer to a treatment question when anything
+      // else survived (the live "■■ DEFINITIONS" fallback for a UTI treatment ask).
+      if (TREAT_Q.test(question) && kept.length > 1) {
+        var nd = kept.filter(function (c) { return !INTRO_HEAD.test(c.p.heading || ""); });
+        if (nd.length) kept = nd;
+      }
+      kept = kept.filter(function (c) { return c.score >= 0.4 * kept[0].score; }).slice(0, RAG.TOPK);
+      if (kept.length > 2 && kept[2].score < 0.6 * kept[0].score) kept = kept.slice(0, 2);
+      var passages = kept.map(function (c) { c.p.text = cleanPassage(c.p.text); return c.p; });
+      var evidenceText = passages.map(function (p, n) { return "[" + (n + 1) + "] " + p.text.slice(0, 700); }).join("\n\n");
+      return { evidenceText: evidenceText, passages: passages, RAG: RAG, anchors: anchors };
     }).catch(function () { return null; });
   }
 
@@ -486,7 +563,9 @@
     var acc = "";
     var sub = null;
 
-    var groundingP = (images.length || (opts && (opts._retried || opts._ungrounded))) ? Promise.resolve(null)
+    // A greeting is not a question: no retrieval, so no "Source:" line on a hello (owner
+    // screenshot, 2026-09-04).
+    var groundingP = (images.length || (opts && (opts._retried || opts._ungrounded)) || isGreeting(pkg && pkg.question)) ? Promise.resolve(null)
       : retrieveGrounding(packId, pkg && pkg.question);
 
     return groundingP.then(function (grounding) {
@@ -549,7 +628,9 @@
                 : (opts && opts.imageFollowUp) ? SYSTEM_IMAGE_FOLLOWUP
                 : SYSTEM_IMAGE,
           nPredict: pk.nPredict || 512,
-          temperature: (opts && typeof opts.temperature === "number") ? opts.temperature : 0,
+          // Regenerate (owner, 2026-09-04): a second attempt at temperature 0 is the same answer
+          // byte for byte, so a regenerate request gets a little sampling jitter.
+          temperature: (opts && typeof opts.temperature === "number") ? opts.temperature : ((opts && opts.regen) ? 0.4 : 0),
           stream: typeof onDelta === "function",
           // The actual think-suppression fix (see buildPrompt's comment for why the old
           // in-question-text approach never worked). Vision packs are never noThink today, so this
@@ -598,19 +679,25 @@
         // this was built to catch (the live penicillin-allergy contradiction). A gate failure does
         // NOT surface as an error - it shows the real book passages instead of a wrong paraphrase,
         // which is strictly more useful to a doctor than either a blank screen or a wrong answer.
+        var quotedPassage = false;   // a verbatim book passage is shown as written, never re-emphasized
         if (grounding) {
           var gate = grounding.RAG.evidenceGate(text, grounding.evidenceText, pkg && pkg.question);
           if (!gate.ok) {
-            var pass = grounding.passages[0];
+            // Diagnostics only (never shown): what the gate rejected, for the live battery and the
+            // feedback triage. Passage text is not stored.
+            try { window.__smdLastGate = { q: pkg && pkg.question, nums: gate.nums, drugs: gate.drugs, anchors: grounding.anchors, heads: grounding.passages.map(function (p) { return String(p.heading || "").slice(0, 60); }) }; } catch (e) {}
+            var pass = grounding.passages[0]; quotedPassage = true;
+            var shown = cleanPassage(pass.text);
+            if (shown.length > 700) shown = shown.slice(0, 700).replace(/\s+\S*$/, "") + "…";
             text = "The on-device model's answer could not be verified against the StewardMD Knowledge Base " +
-              "(it stated a figure or drug not found there). Showing the relevant reference passage instead:\n\n" +
-              pass.text.trim();
+              "(it stated a figure or drug not found there). Here is the reference passage on this topic instead:\n\n" + shown;
           } else {
             // NEVER a page number, on owner order - matches the standing attribution used
             // everywhere else in the app (maik-models.js GUIDE_INTRO / guide.why).
             text = text + "\n\nSource: StewardMD Knowledge Base - based on standard medical resources.";
           }
         }
+        if (!quotedPassage) text = emphasize(text);
         return {
           text: text,
           // sources stays [] regardless: the citation UI's own contract (SMD_MaiK.sourceList)
@@ -739,6 +826,13 @@
   function scheduleRelease(ms) {
     clearIdle();
     _idleT = setTimeout(function () { _idleT = null; if (_inflight === 0) release(); }, ms);
+    // unref() only exists on Node's Timeout (this file also runs, unit-tested, under plain node); in
+    // the WebView setTimeout returns a number and this is a no-op. Without it, any Node script that
+    // calls answer()/vivaJudge()/opdSuggest()/webAnswer() - test files included - hangs for up to
+    // IDLE_MS after its last assertion, because a real pending timer keeps the process alive even
+    // though nothing is left to do (found live in CI: the unit-tests job stalled ~3 minutes on
+    // maik-local.test.mjs alone, 2026-09-04). A timer this file starts must never block a caller's exit.
+    try { if (_idleT && typeof _idleT.unref === "function") _idleT.unref(); } catch (e) {}
   }
   function settle() { if (_inflight === 0) scheduleRelease(_sheetOpen === false ? _closeMs : _idleMs); }
   function tracked(fn) {
@@ -807,6 +901,74 @@
     out.treatment = list(parsed.treatment, 10, function (x) { return str(x, 240); });
     out.redFlags = list(parsed.redFlags, 6, function (x) { return str(x, 220); });
     return out;
+  }
+  /* WEB RESEARCH (owner, 2026-09-04): "Research on the web" pays Gemini to turn TinyFish's search
+   * snippets into prose only when MaiK Cloud is the selected engine - "we can't charge them for
+   * snippet conversion into clean language" for the local/offline engine. The search itself
+   * (TinyFish, see functions/_search.js) already costs nothing; maik-engine.js's routing fetches the
+   * raw snippets via SMD_AI.researchSnippets and hands them here, so the on-device model does the
+   * writing for free. Prompt ported verbatim from RESEARCH_SYS_SNIPPETS / MEDICAL_ONLY in
+   * functions/api/ai/[[path]].js so a web-research answer reads the same regardless of which engine
+   * wrote it. */
+  var MEDICAL_ONLY_LOCAL =
+    "\nSCOPE - NON-NEGOTIABLE: answer MEDICAL and CLINICAL questions only. That includes everything a " +
+    "doctor legitimately asks: diseases, drugs and drug classes, doses, mechanisms of action, " +
+    "investigations, procedures, guidelines, physiology, pathology, public health and medical education. " +
+    "If the question is NOT medical, do not answer it. Reply with exactly this line and nothing else: " +
+    "\"I can only help with medical and clinical questions.\"";
+  var WEB_SYS =
+    "You are MaiK, a knowledgeable clinical AI assistant for qualified doctors. Answer the clinician's question directly, thoroughly and naturally - the way a sharp, warm senior colleague would explain it, and the way a modern medical AI answers. " +
+    "Draw on solid, widely-accepted medical knowledge for the substance of the answer; the numbered WEB RESULTS below are recent supporting sources - use them to ground specifics (agents, doses, current guidance) and cite the relevant ones inline as [n] matching the list, but do NOT merely summarise the snippets or limit yourself to what they happen to mention. " +
+    "Lead with the direct answer, then give enough well-organised detail to be genuinely useful at the bedside: flowing prose, with short bullets only for real lists (drugs, doses, steps, differentials) and a brief markdown heading only when it truly helps. Bold key terms sparingly. Give standard adult doses/routes/durations where relevant. " +
+    "Be honest in one line if evidence is weak or sources disagree. Never fabricate a specific figure or a citation. Do not describe your sources or process, and do NOT append any disclaimer." + MEDICAL_ONLY_LOCAL;
+  var WEB_MAX = 900;
+  function generateText(prompt, system, nPredict, opts) {
+    var L = llama();
+    if (!L) return Promise.reject(new Error("on-device inference needs the native app"));
+    var packId = (opts && opts.pack) || currentPack();
+    return ensureLoaded(packId).then(function () {
+      return L.generate({ prompt: prompt, system: system, nPredict: nPredict,
+                          temperature: (opts && typeof opts.temperature === "number") ? opts.temperature : 0.2,
+                          stream: false, prefillEmptyThink: noThinkPack(packId) });
+    }).then(function (r) {
+      if (r && r.error) throw new Error(String(r.error));
+      return stripReasoning((r && r.text) || "");
+    });
+  }
+  /** Turn TinyFish's raw sources into a web-research answer on device. sources:
+   * [{title,url,site,snippet}] (the exact shape SMD_AI.researchSnippets resolves). No sources -> the
+   * honest "no-results" the caller already renders as a retry, never a hallucinated web answer. */
+  function webAnswer(question, sources, opts) {
+    var q = String(question || "").slice(0, 500).trim();
+    if (!q) return Promise.resolve({ error: "no-question" });
+    var list = (Array.isArray(sources) ? sources : []).slice(0, 8).filter(function (s) { return s && (s.title || s.snippet); });
+    if (!list.length) return Promise.resolve({ error: "no-results" });
+    var ctx = list.map(function (s, i) {
+      return "[" + (i + 1) + "] " + String(s.title || "").slice(0, 200) + (s.site ? " (" + s.site + ")" : "") +
+        "\n" + String(s.snippet || "").slice(0, 400) + "\n" + String(s.url || "");
+    }).join("\n\n");
+    var evidenceText = list.map(function (s, i) { return "[" + (i + 1) + "] " + String(s.title || "") + ". " + String(s.snippet || ""); }).join("\n");
+    var prompt = "Question: " + q + "\n\nWeb results:\n" + ctx;
+    return generateText(prompt, WEB_SYS, WEB_MAX, opts).then(function (text) {
+      if (!text) return { error: "no-answer" };
+      var srcOut = list.map(function (s) { return { title: s.title, url: s.url, site: s.site }; });
+      try {
+        var RAG = (typeof window !== "undefined") && window.SMD_MAIK_RAG;
+        if (RAG && RAG.evidenceGate) {
+          var gate = RAG.evidenceGate(text, evidenceText, q);
+          if (!gate.ok) {
+            var top = list[0];
+            var shown = String(top.title || "") + (top.snippet ? "\n" + top.snippet : "") + (top.url ? "\n" + top.url : "");
+            return {
+              text: "The on-device model's answer could not be verified against the web results it found " +
+                "(it stated a figure or drug not in them). Showing the top result instead:\n\n" + shown,
+              sources: srcOut, engine: "local", mode: "web-local"
+            };
+          }
+        }
+      } catch (e) {}
+      return { text: emphasize(text), sources: srcOut, engine: "local", mode: "web-local" };
+    });
   }
   function generateJSON(prompt, system, nPredict, opts) {
     var L = llama();
@@ -883,8 +1045,38 @@
     }, parseFailure);
   }
 
+  /* READABLE EMPHASIS for on-device answers (owner, 2026-09-04: "Answer can show Bold Italic etc
+   * formats to make it more appealing and reading"). The renderer (reasoning.js maikMarkdown) already
+   * turns **x** into <b> and *x* into <i>; the gap is that MaiK Lite, a prose fine-tune, emits plain
+   * text. Its system prompt is the exact one it was trained with and is deliberately not touched, so
+   * the emphasis is added deterministically here instead: drug names (the same suffix regex the
+   * evidence gate uses, via SMD_MAIK_RAG.drugsOf when loaded), doses and durations are bolded, the
+   * way a doctor's eye scans an answer. Applied ONLY when the model produced no ** of its own (the
+   * larger packs follow "Answer in markdown" already), AFTER the evidence gate (it changes no figure),
+   * and never to the Source line. Pure, exported for tests. */
+  var DOSE_RE = /\b(\d+(?:\.\d+)?(?:\s*(?:-|to)\s*\d+(?:\.\d+)?)?\s*(?:mg|g|mcg|µg|ml|mL|IU|units?|mmol|mEq)(?:\/(?:kg|day|d|dose|h|hr|m2))?)(?![\w*])/gi;
+  var DURATION_RE = /\b(\d+(?:\s*(?:-|to)\s*\d+)?\s*(?:days?|weeks?|months?|hours?|hrs?))\b(?!\*)/gi;
+  var DRUG_FALLBACK_RE = /\b[a-z]{4,}(?:cillin|mycin|micin|cycline|azole|oxacin|floxacin|pril|sartan|statin|olol|dipine|parin|prazole|triptan|mab|nib|tinib|ciclovir|vir|navir|cept|gliptin|glitazone|barbital|azepam|zolam|caine|tidine|semide|thiazide)\b/gi;
+  function emphasize(text) {
+    var t = String(text == null ? "" : text);
+    if (!t || t.indexOf("**") !== -1) return t;
+    var RAG = (typeof window !== "undefined") && window.SMD_MAIK_RAG;
+    var drugs = [];
+    try { if (RAG && RAG.drugsOf) drugs = Array.from(RAG.drugsOf(t)); } catch (e) { drugs = []; }
+    if (!drugs.length) { var seen = {}, m; DRUG_FALLBACK_RE.lastIndex = 0; while ((m = DRUG_FALLBACK_RE.exec(t)) !== null) { var w = m[0].toLowerCase(); if (!seen[w]) { seen[w] = 1; drugs.push(w); } } }
+    return t.split("\n").map(function (line) {
+      if (/^\s*Source:/i.test(line) || /^\s*Verify against/i.test(line)) return line;
+      var out = line.replace(DOSE_RE, "**$1**").replace(DURATION_RE, "**$1**");
+      drugs.forEach(function (d) {
+        var re = new RegExp("(^|[^\\w*])(" + d.replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + ")(?![\\w*])", "gi");
+        out = out.replace(re, "$1**$2**");
+      });
+      return out;
+    }).join("\n");
+  }
+
   var API = {
-    SYSTEM: SYSTEM, DEFAULT_PACK: DEFAULT_PACK,
+    SYSTEM: SYSTEM, DEFAULT_PACK: DEFAULT_PACK, emphasize: emphasize,
     HISTORY_TURNS: HISTORY_TURNS, buildPrompt: buildPrompt, answer: tracked(answer), available: available, currentPack: currentPack,
     isFollowUp: isFollowUp, isGreeting: isGreeting, SYSTEM_GREET: SYSTEM_GREET, stripReasoning: stripReasoning,
     visionReady: visionReady, visionPathFor: visionPathFor, MAX_IMAGES: MAX_IMAGES, SYSTEM_IMAGE: SYSTEM_IMAGE,
@@ -892,7 +1084,7 @@
     warm: tracked(warm), isDebugBuild: isDebugBuild, debugProbed: debugProbed, cancel: cancel, release: release,
     sheetOpened: sheetOpened, sheetClosed: sheetClosed, setIdleMs: setIdleMs,
     vivaJudge: tracked(vivaJudge), opdSuggest: tracked(opdSuggest), parseJsonLoose: parseJsonLoose,
-    VIVA_SYS: VIVA_SYS, OPD_SYS: OPD_SYS
+    VIVA_SYS: VIVA_SYS, OPD_SYS: OPD_SYS, webAnswer: tracked(webAnswer), WEB_SYS: WEB_SYS
   };
   if (typeof module !== "undefined" && module.exports) module.exports = API;
   if (typeof window !== "undefined") window.SMD_MAIK_LOCAL = API;

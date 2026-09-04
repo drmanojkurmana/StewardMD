@@ -30,7 +30,9 @@ function load(env = {}) {
       refine: (...a) => { calls.push(["refine", a]); return Promise.resolve({ topic: "CLOUD refine" }); },
       route: function (q) { return this.refine(q); },
       vivaJudge: (...a) => { calls.push(["vivaJudge", a]); return Promise.resolve({ verdict: "correct", feedback: "CLOUD judge" }); },
-      extract: (...a) => { calls.push(["extract", a]); return Promise.resolve({ kind: a[1], engine: "cloud" }); }
+      extract: (...a) => { calls.push(["extract", a]); return Promise.resolve({ kind: a[1], engine: "cloud" }); },
+      research: (...a) => { calls.push(["research", a]); return Promise.resolve({ text: "CLOUD web answer", mode: a[1] === "evidence-review" ? "evidence-review" : "web-tinyfish", sources: [] }); },
+      researchSnippets: (...a) => { calls.push(["researchSnippets", a]); return Promise.resolve({ sources: [{ title: "Snippet source", url: "https://x.test", site: "X", snippet: "..." }] }); }
     }
   };
   if (env.gate || env.pro !== undefined) win.SMD_PRO = {
@@ -42,7 +44,8 @@ function load(env = {}) {
     win.SMD_MAIK_LOCAL = {
       answer: (...a) => { calls.push(["local", a]); return Promise.resolve({ text: "LOCAL answer" }); },
       vivaJudge: (...a) => { calls.push(["localViva", a]); return Promise.resolve({ verdict: "partial", feedback: "LOCAL judge", engine: "local" }); },
-      opdSuggest: (...a) => { calls.push(["localOpd", a]); return Promise.resolve({ kind: "opd-suggest", provisionalDx: "LOCAL dx", ddx: [], engine: "local" }); }
+      opdSuggest: (...a) => { calls.push(["localOpd", a]); return Promise.resolve({ kind: "opd-suggest", provisionalDx: "LOCAL dx", ddx: [], engine: "local" }); },
+      webAnswer: (...a) => { calls.push(["localWebAnswer", a]); return Promise.resolve({ text: "LOCAL web answer", sources: a[1] || [], engine: "local", mode: "web-local" }); }
     };
   }
   // Model module stub shaped like the real SMD_MAIK_MODELS so the settings section renders.
@@ -656,6 +659,41 @@ ok("...and warms the model once the gate opens", /warmIfLocal\(\)/.test(SRC.slic
   rag.ls.setItem("stewardmd.maikEngine", "rag");
   const v3 = await rag.win.SMD_AI.vivaJudge("Q", "K", "A");
   ok("KB-only pref: no model to judge with, so the cloud judge is used rather than dead-ending", v3.feedback === "CLOUD judge");
+}
+
+// ── web research (owner, 2026-09-04): the local engine fetches snippets for free, then the
+// on-device model writes the answer - Gemini writes it only when MaiK Cloud is selected ─────────────
+{
+  const loc = load({ gate: true, runtime: true, pack: true });
+  loc.ls.setItem("stewardmd.maikEngine", "local");
+  const r = await loc.win.SMD_AI.research("Treatment of pneumonia");
+  ok("local engine: snippets were fetched with no Gemini call, and the on-device model wrote the answer",
+     r.engine === "local" && r.text === "LOCAL web answer" && loc.calls.some((c) => c[0] === "researchSnippets") && !loc.calls.some((c) => c[0] === "research"));
+  ok("the fetched sources were the ones handed to the local model", r.sources[0].title === "Snippet source");
+
+  const cl = load({ gate: true, runtime: true, pack: true });
+  const rc = await cl.win.SMD_AI.research("Treatment of pneumonia");
+  ok("cloud pref: research stays on the cloud path (Gemini pays for the conversion)", rc.text === "CLOUD web answer" && cl.calls.some((c) => c[0] === "research"));
+
+  const rag = load({ gate: true, runtime: true, pack: true });
+  rag.ls.setItem("stewardmd.maikEngine", "rag");
+  const rr = await rag.win.SMD_AI.research("Treatment of pneumonia");
+  ok("KB-only pref: research is not the local engine's job either, stays cloud", rr.text === "CLOUD web answer");
+
+  // Evidence Review is a distinct paid PubMed-synthesis feature and is never diverted to the on-device model.
+  const locER = load({ gate: true, runtime: true, pack: true });
+  locER.ls.setItem("stewardmd.maikEngine", "local");
+  const er = await locER.win.SMD_AI.research("Best evidence for X", "evidence-review");
+  ok("Evidence Review always stays on the cloud, even with the local engine selected",
+     er.mode === "evidence-review" && !locER.calls.some((c) => c[0] === "researchSnippets"));
+
+  // A local engine without a webAnswer implementation (older bundle, or research not yet supported)
+  // must fall through to cloud rather than throwing.
+  const locNoWeb = load({ gate: true, runtime: true, pack: true });
+  delete locNoWeb.win.SMD_MAIK_LOCAL.webAnswer;
+  locNoWeb.ls.setItem("stewardmd.maikEngine", "local");
+  const rnw = await locNoWeb.win.SMD_AI.research("Treatment of pneumonia");
+  ok("no local webAnswer -> falls through to cloud cleanly", rnw.text === "CLOUD web answer");
 }
 
 console.log(`\nmaik-engine: ${pass} passed, ${fail} failed`);

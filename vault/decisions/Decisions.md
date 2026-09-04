@@ -5,6 +5,40 @@ tags: [decisions, adr]
 
 Dated architectural calls + why. Newest first. Keep each short: **decision · why · trade-off · status**.
 
+## 2026-09-04 · ICD Search — shipped default-on, no flag, from the first commit
+
+**Ask:** "now integrate ICD also and add a Search ICD button and add ICD integration into EMR/icu
+ward & OPD" — then, when asked which edition, "ICD 10 & 11" (both).
+
+**Decision:** built as a new module (`icd.js`/`icd.css`/`functions/_icd_repo.js`/`functions/api/icd/`,
+D1 `stewardmd-icd`) carrying no feature flag at all, applying the owner's earlier "no more
+flagging" instruction (see the Scheme Search entry below) from the start rather than shipping
+gated-then-flipping. 106,367 codes loaded (71,704 ICD-10-CM + 34,663 ICD-11 MMS), both from public
+WHO/CMS downloads, no API credentials needed — see `scripts/icd/README.md` for exact provenance.
+
+**Trade-off:** ICD-10 here is the US ICD-10-CM edition (most complete freely-downloadable
+machine-readable set), not the plainer WHO 4-character ICD-10 — documented explicitly so the
+extra granularity doesn't surprise anyone. ICD-11 is WHO's own public "Simple Tabulation" export,
+current as of WHO's 2024-01 release (not the live API, which needs registered credentials).
+**Status: shipped.** See `vault/modules/ICD Search.md`.
+
+## 2026-09-04 · Scheme Search (renamed from Government Health Schemes) — owner overrode the review gate, flag defaults ON for all devices
+
+**Owner's explicit order** (verbatim intent): stop flagging this module behind a per-device toggle;
+it should be open for everyone, on every device, by default, effective immediately.
+
+**Decision: reverses the 2026-09-02 "admin review pass before default ON" gate below.**
+`smd_govt_schemes` now defaults `true` in `govschemes-flags.js` (was `false`); all 29
+`scheme_versions` rows were bulk-promoted `draft` → `active` in the remote D1
+(`stewardmd-govschemes`) to match. A device can still force it off with `?gs=0` or
+`localStorage smd_govt_schemes=0`, but no further review pass gates default visibility.
+
+**Trade-off, stated plainly:** the per-jurisdiction data quality varies (see
+`vault/modules/Government Health Schemes.md` — some states have codes/names but no verified
+amounts, e.g. Arunachal Pradesh; some have partial coverage, e.g. Meghalaya IPD). This is now
+live to every clinician by default rather than opt-in. **Status: shipped per direct owner
+instruction, superseding the earlier default-off decision.**
+
 ## 2026-09-02 · Government Health Schemes Phase 1 — schema mirrors Medical Updates, not a new pattern
 
 **Ask:** a national database of every state/UT/central government health-assurance scheme (packages,
@@ -2253,6 +2287,222 @@ line. The gate is untouched: it still applies to every grounded answer.
 Naming caveat for the owner: the labels "MAiK Bonsai / Bonsai Swift / Bonsai Max" carry the upstream
 brand, against the tier-name convention (MxCore, Neural, Horizon, Apex). Kept because the owner
 asked for the models by that name; rename is a one-line registry edit each.
+
+## 2026-09-04 — Web research: Gemini fallback removed, on-device model writes the answer off-cloud
+
+Owner: "remove gemini fallback" and "let gemini do it during MaiK Cloud selected and for rest
+offline or free models we cant charge them for snippet conversion into clean language". Two
+separate changes to `functions/api/ai/[[path]].js`'s `seg === "research"` handler (plain web
+research, NOT Evidence Review, which is untouched and stays cloud-only):
+
+1. The Gemini-grounded fallback (`webSearch: true`) that ran when TinyFish returned nothing is
+   deleted outright, per the literal instruction. It was the slower, costlier of the two search
+   paths and duplicated ground TinyFish already covers at $0/search (see functions/_search.js). A
+   TinyFish miss is now an honest `{text: null, sources: []}`, which the client's existing no-text
+   branch already renders as a clear retry - no new failure mode introduced.
+2. A new `body.snippetsOnly` branch, checked BEFORE the quota gate, does the TinyFish search and
+   returns raw sources with NO Gemini call and no quota burn - it is a plain search proxy. This is
+   what lets an engine other than MaiK Cloud avoid paying for the snippet-to-prose step at all.
+
+Client side: `maik-engine.js` now decorates `research` (it previously reached SMD_AI.research
+undecorated, always cloud). Its route() intercepts kind "research" ONLY when `effective() ===
+"local"` and mode is not "evidence-review": it calls the new `SMD_AI.researchSnippets()`
+(reasoning.js - hits `/research` with `snippetsOnly:true`, the free path above) and hands the raw
+sources to the new `maik-local.js` `webAnswer(question, sources, opts)`, which writes the prose on
+device using WEB_SYS (RESEARCH_SYS_SNIPPETS ported verbatim, so a web-research answer reads the
+same regardless of which engine wrote it) and then runs the SAME `evidenceGate` the book RAG uses -
+generic against arbitrary evidence text, not book-specific - so an unsupported drug or figure in a
+locally-written web answer is caught exactly as it would be for a StewardMD Knowledge Base answer,
+and the gate-fail branch shows the top real source instead of a wrong paraphrase, matching the
+book-RAG UX. Cloud engine and KB-only both fall straight through to the unchanged cloud path
+(`orig.apply`); a local engine with no `webAnswer` (older bundle) also falls through cleanly rather
+than throwing. Web research still needs a live network for the TinyFish call itself regardless of
+engine - only the WRITING step moves on-device, not the search.
+
+Dead code removed: `RESEARCH_SYS` (only the deleted fallback used it); `test/maik-cloud-scope.test.mjs`
+updated to stop asserting a scope rule on a constant that no longer exists.
+
+Verified live on the owner's iPhone 15 Pro (same question, both engines): local engine ->
+{engine:"local", mode:"web-local", 8 free TinyFish sources, 989-char answer, 21 s}; MaiK Cloud ->
+{mode:"web-tinyfish", 8 sources, 7 s}, confirming the cloud path is unchanged. Unit coverage:
+maik-local.test.mjs webAnswer tests using the REAL kb/ai/maik-lite-rag.js evidenceGate, not a
+book-specific stub; maik-engine.test.mjs routing; test/research-web-fallback.test.mjs, a
+source-level regression for the two server changes.
+
+## 2026-09-04 — TinyFish restricted to trusted medical domains
+
+Owner: "mk sure tinyfish uses trusted medical resources". `functions/_search.js` `tinyfishSearch()`
+now passes TinyFish's `include_domains` param (a comma-separated allow-list the API enforces
+server-side, not a ranking hint - confirmed against TinyFish's own docs) with a fixed list of
+health authorities (WHO, CDC, FDA, EMA, NICE, ICMR, MoHFW), PubMed/PMC/NIH/Cochrane/ClinicalTrials.gov,
+major journals (NEJM, Lancet, JAMA, BMJ), and specialty/reference sites (Mayo Clinic, UpToDate,
+Medscape, Drugs.com, the AHA/ADA/NKF/ACS society sites). No general news, forums or unvetted blogs
+can ever be returned.
+
+Applied ONCE in the shared helper rather than per caller, because `tinyfishSearch()` is already
+shared by three medical-only call sites - "Research on the web" (`/research`), the Medical-Updates
+crawler (`functions/_updates_pipeline.js`), and the admin manual-publish enrichment
+(`functions/api/updates/[[path]].js`) - all three benefit and none had any reliance on
+unrestricted results (checked: both crawler call sites already exist to enrich medical
+drug/guideline/headline items, never general web content).
+
+New test/tinyfish-trusted-domains.test.mjs (4 tests, stubs global.fetch) asserts the outbound
+request actually carries `include_domains` with the exact list, so a future edit that silently
+drops the restriction fails a test rather than being noticed the first time a doctor sees a
+non-medical source cited. Verified live on the owner's iPhone after merge+deploy: a real search for
+DKA management returned 7 sources, all resolving under the trusted list (bestpractice.bmj.com under
+bmj.com, pmc.ncbi.nlm.nih.gov under ncbi.nlm.nih.gov, etc.) - confirms TinyFish genuinely enforces
+`include_domains` (subdomain matching included) rather than ignoring an unrecognized parameter.
+
+## 2026-09-04 — "Was this helpful?" feedback: durable storage, an admin console pane, and a "why?" prompt
+
+Owner asked where the answer feedback button's data went (nowhere durable: an anonymous
+`maik_feedback_up`/`down` counter via `/api/analytics`, plus a "No" also wrote to a DEVICE-LOCAL-ONLY
+gap log in `localStorage` that never reached a server), then asked for an admin console section and
+for a "No" tap to ask why and store the reason.
+
+Modeled on the two existing patterns closest to this shape: `functions/_clientlog.js`'s KV ring
+buffer (get/record/clear, same shape) and `functions/api/ws-feedback.js`'s anonymous-signal stance
+(no identity, an aggregate for public GETs, entries only readable by admin). New:
+- `functions/_maik_feedback.js` - `sanitizeFeedback`/`recordFeedback`/`amendFeedbackReason`/
+  `getFeedback`/`getFeedbackAgg`/`clearFeedback`. Metadata + the doctor's own free text only: helpful
+  (up/down), the question typed (clipped 300), an optional reason (clipped 500), engine/pack, ts, a
+  generated id. No identity, no patient data.
+- `functions/api/maik-feedback.js` - public, unauthenticated (feedback must never be blocked by a
+  sign-in check, matches `/api/clientlog`'s own reasoning). Two request shapes on one POST: a new
+  rating `{helpful, question, engine, pack}` records immediately and returns `{id}`; `{id, reason}`
+  amends that SAME row. GET is counts-only (never the free text), same split as ws-feedback.js.
+- `functions/api/ai/[[path]].js` - `admin/maik-feedback` added to the existing owner-gated
+  (`aiAdminAuthed`) admin segment list; GET returns entries (with reasons) + the aggregate, POST
+  clears and audit-logs, identical pattern to `admin/clientlog`.
+- `admin/index.html` - new "MaiK feedback" pane (👍/👎 counts, % helpful, with-a-reason count, and the
+  scrollable list of Yes/No + question + reason), wired the same way as the Crashes pane (`fbLoad`,
+  nav badge, PANES/TITLES, `refresh()`).
+- `home.js` `_answerFeedback` - "No" now shows "Sorry it missed. Please tell us why - help us
+  improve." with an optional reason textarea (Send/Skip), a note against patient details. The
+  down-vote is recorded THE MOMENT "No" is tapped (so the admin aggregate reflects every tap, not
+  only the ones a doctor stays to explain) and its id is used to amend that SAME entry if a reason is
+  typed - never a duplicate row for one tap. Existing `SMD_track`/`MaiKCopilot.gapLog` calls are
+  untouched (kept for their existing purposes: the allow-listed analytics counter and the local
+  per-device gap report).
+
+14 new tests (`test/maik-feedback.test.mjs`: sanitize/record/amend/aggregate/clear, including that
+amending twice never double-counts `withReason` and an unknown id is a safe no-op;
+`test/maik-feedback-admin-route.test.mjs`: source-level, the route sits inside the same owner gate
+every other admin segment uses and returns the free text only there, never on the public GET).
+
+NOT yet verified: the admin console pane's rendering itself needs the owner's own Google login at
+stewardmd.in/admin to see - this session has no admin credentials. What WAS verified is the parts
+reachable without them: the client and storage logic pass their tests, and (pending a live device
+check after merge+deploy) the network flow from a real "No" tap through to the stored aggregate.
+
+## 2026-09-04 — MaiK CHAT skin: make MaiK feel like ChatGPT / Claude
+
+Owner: "not getting a feel of using an AI assistant like ChatGPT or Claude", asked via the
+taste-skill. That skill is scoped to landing pages and says so; what applies here is its discipline
+(audit before touching, preserve mode, copy self-audit, kill the decorative tells), measured against
+what actually makes those two apps feel like assistants. An audit of the sheet found five concrete
+differences, none of them streaming (both engines already stream tokens; native falls back to a
+word-paced reveal):
+1. every assistant answer was a bordered, shaded, shadowed 92%-wide card with an uppercase teal
+   "MAIK" label on top; ChatGPT/Claude render assistant prose unboxed and only the user's turn as a
+   bubble
+2. "Educational clinical reference. Verify with local protocol." was stamped INSIDE every answer, on
+   top of the sheet's permanent banner saying the same thing (no recorded decision required the
+   duplicate)
+3. 13px body / 12.5px user text: widget-sized, not reading-sized
+4. up to 17 tappable bordered chips under one answer (Know more, sources, 6 refine, follow-ups, tool
+   chips, Create prescription, Research on the web, Yes/No)
+5. thinking = mascot + three shimmering skeleton bars + stage captions, then a whole-bubble swap
+
+Decision: a presentation-only CSS skin on `body.mkchat`, DEFAULT ON, `?mkchat=0` kill switch
+(persists in `smd_mkchat`), `?mkchat=1` restores. No DOM or logic change, so flag-off is
+byte-for-byte the previous MaiK. It unboxes `.maik-b.ai`, hides `.maik-attr` (with !important: the
+web-research path inlines its own display) and `.maik-edu`, hides `.maik-conf` except the LOWER
+warning, sets 15px reading text, turns every chip into a quiet outline with muted sentence-case
+labels, and hides the skeleton bars. Tokens are untouched so dark mode follows. The existing
+off-by-default `body.mk2` "UI 2" skin is left as is; the two are independent selectors.
+
+Also fixed in app-facing strings (repo rule, not the skin): the emoji prefixes on the four follow-up
+chips, and the em-dashes in the chip/stage/feedback/error strings the audit listed. The model's own
+output remains exempt, as CLAUDE.md says. `test/maik-chat-skin.test.mjs` pins the flag semantics,
+each of the five CSS fixes, and the string cleanups. Branch stacks on PR #826 because both touch
+`_answerFeedback`.
+
+Not changed, deliberately: the chip SET itself (which chips exist is product logic, not skin), lazy
+"Know more" (a token-cost decision), the mascot, the sidebar, the empty state. If the owner wants
+fewer chips per answer, that is a separate product call.
+
+Two things the first live check caught (fixed in the same PR): the on-device path renders BARE
+`<p>/<ul>/<li>` with no `.maik-p` class, so the 15px rule had missed it (measured 12.5px live); and
+the "Create prescription" chip is inline-styled as a filled teal button, which beat the skin. The
+skin now targets `.maik-b.ai p/li/strong/em/h1-h4` and overrides `.maik-chip.maik-rx` with
+`!important`, leaving the send button as the one filled accent on the screen.
+
+Owner, same session: "Answer can show Bold Italic etc formats to make it more appealing and
+reading". The renderer (reasoning.js `maikMarkdown`) already turns `**x**`/`*x*` into `<b>`/`<i>`,
+with headings, lists and tables; the gap was that MaiK Lite, a prose fine-tune, emits plain text,
+and its system prompt is the exact training prompt and stays untouched. `maik-local.js
+emphasize()` adds it deterministically instead: drug names (the evidence gate's own suffix regex
+via `SMD_MAIK_RAG.drugsOf`, with a fallback), doses and durations are bolded, only when the model
+produced no `**` of its own, after the gate (it changes no figure), never on the Source line, and
+never on a verbatim quoted book passage (the gate-fail path shows the book as written). Also
+applied to on-device web-research answers. 10 tests.
+
+Verified live on the owner's iPhone 15 Pro, fresh question, MaiK Lite: assistant prose unboxed
+(border none, transparent, no shadow, 100% width), MAIK label and per-answer disclaimer gone, prose
+measured 15px/24.75px, user bubble 14.5px, two `<b>` drug names in the answer, prescription chip
+transparent with muted text, no emoji in chips, app process unchanged through the test.
+
+## 2026-09-04 MaiK Lite assistant gaps: retrieval drift guard, dose follow-up, answer actions (PR #827, same branch)
+
+Owner ran a 5-question live battery ("As an AI Engineer and CEO of ChatGPT, run MaiK Assistant and
+tell me what is left"), then: "Fix as many as possible but keeping speed & size of model same".
+Model, quant, context and system prompt are untouched. Every fix is in retrieval, the follow-up
+resolver and the UI.
+
+1. Retrieval drift guard (`maik-local.js retrieveGrounding`). Live, "UTI treatment" retrieved a
+   DEFINITIONS/glossary passage and "what if she is pregnant" retrieved hepatitis-in-pregnancy,
+   which the model then answered from (lamivudine/IFN) and the presence-only gate passed. Now:
+   the top-3 BM25 hits are anchored on the question's 2-3 highest-IDF non-generic tokens (the
+   pregnancy/renal/paediatric modifiers and words like management/dose/first-line are excluded from
+   the anchors), passages missing every anchor are dropped, introductory chapters are demoted for
+   treatment questions, glyph bullets are cleaned, evidence is capped at 700 chars per passage and
+   a weak third passage (<60 % of the top score) is dropped. Net effect is fewer, more relevant
+   prompt tokens, so prefill gets shorter, not longer. The gate itself is unchanged (repo rule:
+   never weaken it). If anchoring empties the set, the answer is "not covered", not a drift.
+2. Gate-fail fallback shows the cleaned, capped passage, and states plainly that the model's answer
+   could not be verified; the raw "■■ DEFINITIONS" dump is gone.
+3. Dose follow-up (`home.js maikResolveFollowup`). "and the dose?" with no drug named and none
+   remembered used to answer "Which drug's dose would you like?". It now resolves to the current
+   topic's first-line drug and dose, with retrieval steered at "<topic> first line drug dose
+   duration". Named or remembered drugs keep precedence.
+4. Answer actions: Copy (answer text only, chips/sources stripped), Regenerate (drops the cached
+   render, resends with `regen: true`, which the local engine maps to temperature 0.4 so the answer
+   actually changes; default remains temperature 0), Edit (question back in the composer).
+
+Tests: `test/maik-local.test.mjs` (real RAG index harness for the drift cases, cap/weak-third,
+regen temperature), `test/maik-followup-actions.test.mjs`. `anchorsFor` degrades to "no anchoring"
+when the RAG build lacks a tokenizer instead of throwing (an exception there would silently turn
+every answer ungrounded, which the older test stubs exposed).
+
+Not fixed, same-model constraint: first-token latency (3-7 s) is prefill-bound; the real lever is
+KV prefix caching of the fixed system prompt in `LlamaEngine.swift`, which is native work and a
+separate PR.
+
+Addendum, second live battery same day (after the guard above shipped to the phone): CAP comparison
+still grounded in typhoid-resistance passages because "community" alone was an anchor match, and
+"UTI" was lost as an anchor since expand() rewrites it to the long form. Anchors are now three
+kinds (topic / drug / population modifier); a passage must contain a topic anchor when the question
+has one (a drug name is not the topic), two anchors beat one when any passage has two, search runs
+3x TOPK and keeps TOPK after filtering, and among on-topic passages the ones mentioning the asked
+modifier win (negated "non-pregnant" excluded). Result on the phone, MaiK Lite, same model: UTI
+treatment grounded (TMP-SMX / nitrofurantoin / fosfomycin, 6.7 s first text); "and the dose?"
+grounded 3-day oral regimen, gate passed (4.1 s); "what if she is pregnant" UTI-in-pregnancy
+(2.0 s); CAP comparison pneumonia passages only, honest "not compared head to head" (6.4 s);
+pregnancy follow-up after CAP stays on CAP; poem refused (1.1 s). Copy / Regenerate / Edit on
+every answer. `window.__smdLastGate` holds the last gate rejection (numbers, drugs, anchors,
+headings; never passage text) for triage.
 
 ## 2026-09-04 WardSynQ: one system with Ward Sync, and the P0 core
 

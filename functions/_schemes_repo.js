@@ -126,6 +126,69 @@ export async function listJurisdictions(env) {
   });
 }
 
+/* ---------------- browse: schemes (branches) within a jurisdiction ---------------- */
+
+export async function listSchemes(env, jurisdictionId) {
+  if (!hasDb(env)) return [];
+  const sql =
+    "SELECT s.id, s.name, s.authority, " +
+    "(SELECT COUNT(*) FROM packages p JOIN scheme_versions sv ON sv.id = p.scheme_version_id " +
+    "WHERE sv.scheme_id = s.id) AS packages " +
+    "FROM schemes s WHERE s.jurisdiction_id = ? ORDER BY s.name ASC";
+  const rs = await db(env).prepare(sql).bind(jurisdictionId).all();
+  return (rs.results || []).map(function (r) {
+    return { id: r.id, name: r.name, authority: r.authority || "", packages: r.packages || 0 };
+  });
+}
+
+/* ---------------- browse: specialities (categories) within a jurisdiction/scheme ---------------- */
+
+// Buckets packages with no speciality_name under a single "Other" pseudo-category (id "") so
+// the category grid stays complete rather than silently dropping ~1/3 of packages that predate
+// speciality tagging in their source (see govschemes_verified_sources_* notes).
+export async function listSpecialities(env, opts) {
+  if (!hasDb(env)) return [];
+  opts = opts || {};
+  const binds = [];
+  let sql =
+    "SELECT p.speciality_code, p.speciality_name, COUNT(*) AS packages FROM packages p " +
+    "JOIN scheme_versions sv ON sv.id = p.scheme_version_id JOIN schemes s ON s.id = sv.scheme_id " +
+    "WHERE 1=1";
+  if (opts.jurisdictionId) { sql += " AND s.jurisdiction_id = ?"; binds.push(opts.jurisdictionId); }
+  if (opts.schemeId) { sql += " AND s.id = ?"; binds.push(opts.schemeId); }
+  sql += " GROUP BY p.speciality_name ORDER BY p.speciality_name = '' ASC, packages DESC";
+  const rs = await db(env).prepare(sql).bind(...binds).all();
+  return (rs.results || []).map(function (r) {
+    return { code: r.speciality_code || "", name: r.speciality_name || "Other / uncategorised", packages: r.packages || 0 };
+  });
+}
+
+/* ---------------- browse: paginated package list (no free text) ---------------- */
+
+// opts = { jurisdictionId, schemeId, speciality, limit, offset }. speciality is matched by name
+// (empty string means the "Other / uncategorised" bucket, matching listSpecialities' grouping),
+// omitted entirely means no speciality filter. Ordered by name so paging is stable.
+export async function browsePackages(env, opts) {
+  if (!hasDb(env)) return { rows: [], total: 0 };
+  opts = opts || {};
+  const binds = [];
+  let where = " WHERE 1=1";
+  if (opts.jurisdictionId) { where += " AND j.id = ?"; binds.push(opts.jurisdictionId); }
+  if (opts.schemeId) { where += " AND s.id = ?"; binds.push(opts.schemeId); }
+  if (opts.speciality != null) { where += " AND p.speciality_name = ?"; binds.push(opts.speciality); }
+
+  const countSql = "SELECT COUNT(*) AS total FROM " + EXACT_JOIN + where;
+  const totalRow = await db(env).prepare(countSql).bind(...binds).first();
+  const total = (totalRow && totalRow.total) || 0;
+
+  const limit = clampLimit(opts.limit);
+  const offset = Math.max(0, parseInt(opts.offset, 10) || 0);
+  const sql = "SELECT " + PKG_COLS + " FROM " + EXACT_JOIN + where +
+    " ORDER BY p.treatment_name ASC LIMIT ? OFFSET ?";
+  const rows = await runRows(env, sql, binds.concat([limit, offset]));
+  return { rows, total };
+}
+
 /* ---------------- package detail ---------------- */
 
 // Full package row + its scheme/state context + source provenance. Returns null when the id
