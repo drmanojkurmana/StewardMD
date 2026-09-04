@@ -70,8 +70,8 @@ def new_id(prefix):
 
 def find_header_line(words, phrase):
     """Locate `phrase` (e.g. "Total Package Price") as an exact sequence of adjacent words
-    sharing one `top` value. Returns (top, [word,...]) for every word sharing that top,
-    sorted by x0 - the full column layout for this page - or None if not found."""
+    sharing one `top` value. Returns (top, [word,...]) for JUST the matched phrase's own
+    words, sorted by x0 - or None if not found."""
     target = phrase.split()
     by_top = {}
     for w in words:
@@ -86,32 +86,49 @@ def find_header_line(words, phrase):
                 seq = ws[i:i + len(target)]
                 gaps_ok = all(seq[j + 1]['x0'] - seq[j]['x1'] < 15 for j in range(len(seq) - 1))
                 if gaps_ok:
-                    return top, ws
+                    return top, seq
     return None
 
 
-def build_columns(header_words):
-    """header_words: all words on the clean header line, sorted by x0. Returns a list of
-    (label_words_start_idx_is_unused, x0, x1, midpoint_left, midpoint_right) — actually
-    returns a list of dicts: {"x0","x1","left_bound","right_bound"} per DISTINCT column
-    (adjacent words with a small gap are merged into one column label, e.g. "Total"+"Package"+
-    "Price"). Multi-word labels are merged by small-gap adjacency, same rule as find_header_line."""
-    cols = []
-    cur = [header_words[0]]
-    for w in header_words[1:]:
-        if w['x0'] - cur[-1]['x1'] < 15:
-            cur.append(w)
-        else:
-            cols.append(cur)
-            cur = [w]
-    cols.append(cur)
-    out = []
-    for c in cols:
-        out.append({"label": " ".join(x['text'] for x in c), "x0": c[0]['x0'], "x1": c[-1]['x1']})
-    for i, c in enumerate(out):
-        c["left_bound"] = -1e9 if i == 0 else (out[i - 1]["x1"] + c["x0"]) / 2
-        c["right_bound"] = 1e9 if i == len(out) - 1 else (c["x1"] + out[i + 1]["x0"]) / 2
-    return out
+MAX_MARGIN = 12   # points; see phrase_bounds - caps how far a boundary can drift from the
+                   # phrase's own edge when its "nearest neighbour" is actually a distant,
+                   # unrelated header fragment, not a genuinely adjacent column
+
+
+def phrase_bounds(words, phrase):
+    """Locate `phrase` (e.g. "Total Package Price") via find_header_line, then derive its
+    column boundary from its IMMEDIATE SINGLE-WORD neighbours on that same line - not from a
+    generic "merge everything within N points" pass over the whole header. That generic
+    merge was tried first and is what broke on Himachal: its columns are packed tightly enough
+    (~6-12pt real gaps) that no single distance threshold both keeps genuine multi-word labels
+    together AND keeps adjacent columns apart - "Tier3 (Z)" through "Level of Care" merged into
+    one 250pt-wide blob, silently pulling six unrelated columns' text into what should have been
+    the rate. Finding bounds per-phrase, from just its own left/right neighbour word, needs no
+    such threshold and is what Punjab's coincidentally-workable threshold was really standing in
+    for.
+
+    The neighbour itself can still be wrong on a THIRD kind of layout (Odisha): a header column
+    can be genuinely far from the data it labels (e.g. "Reservation Public Hospitals (Y/N)"
+    prints starting ~100pt right of "Package cost", but the actual Y/N value for that row prints
+    only ~20pt right of the price) - using that distant header word as the neighbour would
+    swallow the Y/N flag into the price. MAX_MARGIN caps how far left_bound/right_bound can
+    extend past the phrase's own edge, so a genuinely-far neighbour can't stretch the boundary
+    further than a real adjacent column plausibly would.
+
+    Returns {"label","x0","x1","left_bound","right_bound"} or None if not found."""
+    found = find_header_line(words, phrase)
+    if not found:
+        return None
+    top, target_words = found
+    line = sorted((w for w in words if abs(w['top'] - top) <= TOP_TOL), key=lambda w: w['x0'])
+    start = line.index(target_words[0])
+    end = start + len(target_words) - 1
+    left_w = line[start - 1] if start > 0 else None
+    right_w = line[end + 1] if end + 1 < len(line) else None
+    x0, x1 = target_words[0]['x0'], target_words[-1]['x1']
+    left_bound = -1e9 if left_w is None else max((left_w['x1'] + x0) / 2, x0 - MAX_MARGIN)
+    right_bound = 1e9 if right_w is None else min((x1 + right_w['x0']) / 2, x1 + MAX_MARGIN)
+    return {"label": phrase, "x0": x0, "x1": x1, "left_bound": left_bound, "right_bound": right_bound}
 
 
 def smart_join(word_objs):
@@ -133,13 +150,6 @@ def smart_join(word_objs):
             out.append(w['text'])
         prev_x1 = w['x1']
     return " ".join(out)
-
-
-def col_for_x(cols, xc):
-    for c in cols:
-        if c["left_bound"] <= xc < c["right_bound"]:
-            return c
-    return None
 
 
 def cluster_lines(words):
@@ -192,37 +202,36 @@ def main():
         lo, hi = 1, total_pages
 
     recs, seen, skipped_no_amount, skipped_no_header = [], set(), 0, 0
-    last_cols, last_header_bottom = None, None
+    last_rate_col, last_code_col, last_name_right_col, last_header_bottom = None, None, None, None
     pages_with_header, pages_without = 0, 0
+    name_right_label = a.name_right_header or a.rate_header
 
     for pno in range(lo, hi + 1):
         page = pdf.pages[pno - 1]
         words = page.extract_words(use_text_flow=False, keep_blank_chars=False)
-        found = find_header_line(words, a.rate_header)
-        if found:
-            header_top, header_words = found
-            cols = build_columns(header_words)
+        rate_col = phrase_bounds(words, a.rate_header)
+        if rate_col:
+            code_hdr_col = phrase_bounds(words, a.code_header)
+            name_right_col = phrase_bounds(words, name_right_label)
             # This table's header is rendered as 2-3 STACKED lines a few points apart (one
             # clean, the others letter-spaced/rotated - see script docstring). Everything
             # within that stack is header, never row content, however far its individual
             # letter-fragments' x-position happens to land - so continuation search below must
             # never cross above this y-line, or the header text itself gets read as a name.
+            header_top = find_header_line(words, a.rate_header)[0]
             header_region = [w for w in words if abs(w['top'] - header_top) <= 8]
             header_bottom = max((w['bottom'] for w in header_region), default=header_top)
             pages_with_header += 1
-        elif last_cols is not None:
-            cols, header_bottom = last_cols, last_header_bottom
+        elif last_rate_col is not None:
+            rate_col, code_hdr_col = last_rate_col, last_code_col
+            name_right_col, header_bottom = last_name_right_col, last_header_bottom
             pages_without += 1
         else:
             skipped_no_header += 1
             continue
-        last_cols, last_header_bottom = cols, header_bottom
+        last_rate_col, last_code_col = rate_col, code_hdr_col
+        last_name_right_col, last_header_bottom = name_right_col, header_bottom
 
-        rate_col = None
-        for c in cols:
-            if c["label"] == a.rate_header:
-                rate_col = c
-                break
         if rate_col is None:
             skipped_no_header += 1
             continue
@@ -233,9 +242,6 @@ def main():
         # code column's own right edge, and the rate-neighbouring column's own left edge. This
         # is deliberately NOT the shared midpoint used elsewhere (that would only give the name
         # column half of its actual width, splitting it with its neighbours).
-        code_hdr_col = next((c for c in cols if c["label"] == a.code_header), None)
-        name_right_label = a.name_right_header or a.rate_header
-        name_right_col = next((c for c in cols if c["label"] == name_right_label), None)
         name_region = None
         if code_hdr_col and name_right_col:
             name_region = (code_hdr_col["x1"], name_right_col["x0"])

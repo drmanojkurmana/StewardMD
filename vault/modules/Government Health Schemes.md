@@ -64,13 +64,14 @@ fallback since government-authored XLSX files are not reliably well-formed.
 ## National scheme registry status
 28/28 states, 8/8 UTs, Central: registry (name/type/code) seeded and live in D1.
 
-**Ingested (live data, verified by remote query 2026-09-04):** 19/37 jurisdictions, 46,200
+**Ingested (live data, verified by remote query 2026-09-04):** 21/37 jurisdictions, 49,758
 packages — Tamil Nadu 4,298 · West Bengal 4,388 (5 scheme_versions: Grade A 1,921 · Grade B 1,563
 · Grade C 404 · Grade R 218 · Critical Illness Package 282) · Nagaland 4,008 (2 scheme_versions:
 CMHIS-EP semi-private 2,004 · CMHIS General/PM-JAY 2,004) · Andhra Pradesh 3,713 · Karnataka 3,155
-· Bihar 2,675 · Rajasthan 2,439 · Gujarat 2,315 · Kerala 2,286 · Uttarakhand 1,585 · Punjab 1,229
-· Assam 1,577 · Telangana 1,867 · Mizoram 2,003 · Uttar Pradesh 2,000 · Delhi 1,991 ·
-Chhattisgarh 1,735 · Central PM-JAY HBP 2022 1,646 · Haryana 1,290. Each row carries its source's `rate_tier` verbatim where the source publishes one
+· Bihar 2,675 · Rajasthan 2,439 · Himachal Pradesh 1,896 · Gujarat 2,315 · Kerala 2,286 ·
+Uttarakhand 1,585 · Odisha 1,569 · Punjab 1,322 · Assam 1,577 · Telangana 1,867 · Mizoram 2,003 ·
+Uttar Pradesh 2,000 · Delhi 1,991 · Chhattisgarh 1,735 · Central PM-JAY HBP 2022 1,646 ·
+Haryana 1,290. Each row carries its source's `rate_tier` verbatim where the source publishes one
 (Tier 2, Tier1(X), Non-NABH, A1, ...) - amounts are only comparable with the tier visible.
 Telangana's source publishes a single price per procedure (no tier split) - `rate_tier` is
 intentionally blank there, not guessed. All `scheme_versions.status = 'draft'` (Phase 1's admin
@@ -144,10 +145,29 @@ the full technique (column-boundary derivation, the letter-spacing artifact this
 some wrapped text and how `smart_join` reconstructs real words from it, and what remains a
 documented heuristic vs. what's now geometrically exact).
 
-**Himachal not yet re-tried with the new columnar parser** - its header layout differs
-structurally from Punjab's (repeating "Total" labels at per-row, not per-page, y-positions on a
-first look) and needs its own investigation before reusing the technique. Real next step, not
-attempted tonight.
+**Himachal and Odisha solved the same day, both with `ingest_pdf_columnar.py` - 1,896 and 1,569
+packages.** Himachal's header first LOOKED structurally different (a search for "Total" hit many
+different y-positions) - turned out to be a false alarm: those were all "% **Total** Body Surface
+Area Burns" inside ordinary procedure-name text, not a repeating header. Its real header renders
+cleanly on ONE line (not stacked/letter-spaced like Punjab's), but far more densely packed
+(genuine inter-column gaps as small as 6pt) - the original `build_columns` (merge any words
+gapped <15pt) catastrophically over-merged it, turning "Tier3 (Z)" through "Level of Care" into
+one 250pt-wide blob that silently swallowed six unrelated columns into what should have been the
+rate (near-total failure: 1/2506 rows priced on the first attempt). **Root cause and fix
+generalize past just Himachal**: replaced whole-header merging with `phrase_bounds()`, which
+finds ONE target phrase (rate, code, or name-boundary) and derives its column edges from just its
+own immediate single-word neighbours - no distance threshold to get wrong. Also found and fixed
+on Odisha: the "nearest header word" itself can be far from the actual data column it labels
+(header says "Reservation Public Hospitals (Y/N)" starting ~100pt right of the price, but the
+real Y/N value renders only ~20pt right) - added `MAX_MARGIN` (12pt) capping how far a boundary
+can drift from the phrase's own edge, which incidentally also improved Punjab's own yield
+(1,229 → 1,322 rows) by tightening an over-wide boundary there too. Both re-validated against
+documented source samples before loading: Himachal BM001A/B/C = ₹7,000/50,000/62,500 (exact);
+Odisha SV019K = ₹78,100 (exact match to `govschemes_verified_sources_batch3.md`'s own recorded
+sample). Odisha's remaining ~591 unpriced rows include some likely-real prices with a stray
+adjacent character (e.g. `')187500'`, `'t102400'`) rather than a clean number - left dropped
+rather than guessed at by stripping the contamination; a real next increment if this data is
+wanted.
 
 **Still not loaded:** Assam's OWN MMLSAY PDF (superseded by the AA-MMJAY HTML table already
 loaded - MMLSAY not retried), Ladakh (its PDF is a code crosswalk with no prices).
@@ -201,15 +221,8 @@ sometimes renders as a bare number (not consistently "NA" or "X days" text), so 
 rows (81.5%) have more than one numeric token after the procedure code and the existing "Nth
 numeric token" rate-column heuristic can't tell "255500" (the real Package cost) from "5" (LOS)
 apart reliably. This is now the THIRD state confirming the same systemic weakness in
-`ingest_layout_pdf.py`'s rate-column selection - **the real fix is a header-position-aware
-columnar parser** (build column x-boundaries from the actual header row, bucket each data line's
-tokens by which boundary they fall in, rather than counting numeric tokens by ordinal position) -
-worth doing properly in a session with time to re-validate every already-loaded
-`ingest_layout_pdf.py` jurisdiction against it - **built and validated on Punjab the same day**
-(`scripts/govschemes/ingest_pdf_columnar.py`, see above). Odisha itself not yet re-run with it -
-its "Package cost" column and header layout haven't been checked against the new parser's
-assumptions (the `--code-header`/`--rate-header`/`--name-right-header` phrases are Punjab's own
-wording, need Odisha's equivalents located first). Real next step.
+`ingest_layout_pdf.py`'s rate-column selection - solved the same day, see above (built on Punjab,
+then re-run on Odisha itself: 1,569 packages loaded).
 
 **No usable source located yet (need a PDF from the owner):** Madhya Pradesh, Chandigarh, J&K,
 Jharkhand, Puducherry, Goa, Tripura, Maharashtra, Meghalaya (2 of 3 tables are small/client-side;
@@ -249,6 +262,12 @@ already-loaded ingest_layout_pdf.py jurisdiction re-checked for the same failure
 trusting `treatment_name` there. Left as a real next step, not patched under time pressure
 tonight (touching the shared script risks a subtle regression on already-loaded data with no
 time left to re-validate all of it before the owner wakes).
+
+**Update, later the same day:** `ingest_pdf_columnar.py` (see above) is a strong candidate to
+retry Mizoram Annexure B - its `header_bottom` cutoff exists specifically to stop continuation
+search from crossing into header text, which is exactly this bug. Not attempted yet; also worth
+re-checking whether the already-loaded Haryana/Central/UP `treatment_name` gaps could be re-run
+with it instead of patching `ingest_layout_pdf.py`'s `HEADER_NOISE` list.
 
 **Source inventory (research, not yet ingested):** `functions/db/govschemes_source_inventory.md`,
 compiled by agy 2026-09-02 — **29/35 FOUND** (a package master located on an official govt
