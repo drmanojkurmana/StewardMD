@@ -275,10 +275,29 @@ while `ghis-ward.js:685` calls `ingestWardHistory` on every current build. Both 
 `clean` requires `observed`, but the habit of checking what was actually seen is the durable lesson.
 `report().byMethod` breaks the counts down per entry point.
 
-P0, P1, P2 and the P3 core modules are built. What is genuinely unbuilt: the
-renderer behind `wardsynq/ui/opd.html` (the bedside LOGIC is tested in `test/wardsynq-opd.test.mjs`,
-the view that calls it is not written, and wiring a half-built view to a live medication path would
-be worse than leaving it unwired).
+P0, P1, P2 and the P3 core modules are built.
+
+**The bedside renderer is now built and mounted, correcting a stale claim here.** This note said the
+view was not written; `wardsynq/ui/opd-render.js` had in fact been written and covered by
+`test/wardsynq-opd-render.test.mjs` (14 tests). What was actually missing was a BOOT: `opd.html`
+mounted nothing, and its own markup argued why - a page that constructed its own actor would be a
+page that decided who was allowed to give a drug.
+
+`opd-boot.js` resolves that without overturning it. It REQUIRES store, actor and eMAR from
+`window.WARDSYNQ_OPD_DEPLOYMENT`, so the site still holds the authority, and when they are absent it
+paints an explicit "not connected to a patient record" state with every action disabled. That empty
+state is the point: before it, an unconfigured page drew a plausible bedside screen with a wristband
+field and three live-looking buttons and no system behind it, which is the worst available failure
+because it looks like a working drug round.
+
+`?opd_demo=1` mounts an in-memory demonstration behind a permanent undismissable banner. Driven in a
+real browser: scanning `DEMO-0001` confirms identity and enables the three actions; scanning
+`WRONG-PATIENT-9999` revokes identity, re-disables all three, and shows the ENGINE's message ("either
+the wrong chart is open or you are at the wrong patient") rather than one the view invented.
+
+What is genuinely unbuilt: CTG and fetal monitoring (see HAZ-MAT-01), and the link from a real
+deterioration escalation into `wardsynq-orchestrator.js` - nothing calls the orchestrator yet, so the
+NEWS2 -> escalation -> mobile -> acknowledgement -> timeline chain is not connected end to end.
 
 Production gaps, unchanged and load-bearing: NO NOTIFICATION TRANSPORT of any kind, which is why both
 local hazards are PARTIAL; no service worker for either surface; a CDN webfont; no barcode hardware,
