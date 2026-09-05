@@ -689,7 +689,10 @@
       var note=g("vnote"); if(note) p.push(note);
       if(!p.length){toast("Enter at least one value");return;}
       close();
-      post("timeline",{sessionId:sid,ticketId:tid,kind:"vitals",text:p.join(" · ")});
+      // The structured values travel WITH the text. The timeline keeps the line; the WardSynQ record
+      // (where a tenant has opted in) gets coded observations, as reported, unit and all.
+      var vitals={sbp:bps,dbp:bpd,pulse:g("vpr"),temp:g("vtemp"),tempUnit:"F",spo2:g("vspo2"),rr:g("vrr"),weight:g("vwt"),note:note};
+      post("timeline",{sessionId:sid,ticketId:tid,kind:"vitals",text:p.join(" · "),vitals:vitals});
     };
   }
   function openAssignRoom(tid){

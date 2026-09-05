@@ -60,6 +60,7 @@ each OFF/absent by default:
 | `WARDSYNQ_RECORD=1` | Pages env var (server) | Serves `/api/wardsynq/*`. Unset, every route is 404. The schema must be applied first (see [[Infra]]). |
 | `?record=<tenantId>` (`&patient=<id>` on the bedside page) | `wardsynq.html`, `opd.html` | The surface charts into the hospital's shared record instead of this browser's memory. Without it the pages behave exactly as before, demo cohort and all. |
 | `?wardsynq_record=<tenantId>` / `localStorage smd_wardsynq_record_tenant` | StewardMD Mobile (`wardsynq-record-boot.js`) | The phone opens the same record and exposes it as `window.SMD_WARDSYNQ_RECORD`. Nothing in the shipped app reads it yet. `?wardsynq_record=off` forgets it. |
+| `settings.wardsynq.migrations.vitals` = `off` / `shadow` / `authoritative` | `connect_tenant` row, per hospital | The nurse-vitals dual-write (`functions/_wardsynq/migrate-vitals.js`). Default `off`. Needs `WARDSYNQ_RECORD=1` AND `q_orgs.connectTenantId` on the OPD org besides. `shadow` cannot fail a save; `authoritative` can. |
 
 On the NATIVE app there is no address bar, so the query param is unreachable — set the flag with
 `SMD_WARDSYNQ_FLAGS.set('smd_wardsynq_shadow', true)` in the WebView console, then reload. A

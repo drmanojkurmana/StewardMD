@@ -30,16 +30,11 @@
  * hospital-local deployment swaps those and keeps the rest.
  */
 import { jsonResponse } from "../../_connect/testkit.js";
-import { identify } from "../../_usage.js";
-import { verifyFirebaseClaims } from "../../_fbauth.js";
 import { AuthError, PermissionError } from "../../_connect/permission.js";
-import { hmacPseudonym } from "../../_connect/audit.js";
-import { verifyStaffSession } from "../../_opd_auth.js";
-import { D1Repository } from "../../_wardsynq/repository-d1.js";
 import { VersionConflictError } from "../../_wardsynq/repository.js";
 import { RecordService, AuthorityError, RecordRequestError } from "../../_wardsynq/service.js";
 import { resolveClinicalActor } from "../../_wardsynq/actor.js";
-import { orgForTenant, authorizeOrg } from "../../_wardsynq/org.js";
+import { actorDeps, recordDeps } from "../../_wardsynq/deps.js";
 import { GovernanceError } from "../../../wardsynq/wardsynq-actors.js";
 import { IntegrationHub } from "../../../wardsynq/wardsynq-interop.js";
 import { sccmAdapter } from "../../../wardsynq/adapters/wardsynq-sccm-adapter.js";
@@ -67,37 +62,19 @@ function errorBody(e) {
   return { error: "error" };
 }
 
-/** Best-effort prescriber claims (name, regNo) from the bearer token. Identity itself comes from identify(). */
-async function claimsOf(request, env) {
-  const tok = (request.headers.get("Authorization") || "").replace(/^Bearer\s+/i, "");
-  if (!tok) return {};
-  try { return (await verifyFirebaseClaims(tok, env)) || {}; } catch { return {}; }
-}
-
 /**
  * Builds the per-request service, or throws AuthError / PermissionError. The whole authorization
- * path is functions/_wardsynq/actor.js; this only supplies the I/O. `deps` is injectable so the
- * route is testable without Cloudflare or Firestore:
- *   { db, identifyFn, claimsFn, staffSession, orgForTenant, authorizeOrg, repository }
+ * path is functions/_wardsynq/actor.js; the production I/O seams are functions/_wardsynq/deps.js,
+ * and `deps` overrides any of them so the route is testable without Cloudflare or Firestore:
+ *   { db, identifyFn, claimsFn, staffSession, orgForTenant, authorizeOrg, repository, pseudonym }
  */
 export async function openService(request, env, tenantId, need, deps) {
   deps = deps || {};
-  const db = deps.db || env.CONNECT_DB;
-  if (!db) throw new PermissionError("record service is not provisioned");
-  const resolved = await resolveClinicalActor(request, env, tenantId, need, {
-    db,
-    identifyFn: deps.identifyFn || identify,
-    claimsFn: deps.claimsFn || claimsOf,
-    staffSession: deps.staffSession || verifyStaffSession,
-    orgForTenant: "orgForTenant" in deps ? deps.orgForTenant : orgForTenant,
-    authorizeOrg: deps.authorizeOrg || authorizeOrg,
-  });
-  const repository = deps.repository || new D1Repository(db);
-  const pseudonym = async (patientId) => {
-    if (!env || !env.CONNECT_HMAC_SALT) return null;
-    try { return await hmacPseudonym(env, resolved.tenant.id, patientId); } catch { return null; }
-  };
-  return new RecordService({ repository, tenant: resolved.tenant, actor: resolved.actor, role: resolved.role, roleSource: resolved.source, pseudonym });
+  const a = actorDeps(env, deps);
+  if (!a.db) throw new PermissionError("record service is not provisioned");
+  const resolved = await resolveClinicalActor(request, env, tenantId, need, a);
+  const r = recordDeps(env, resolved.tenant.id, deps);
+  return new RecordService({ repository: r.repository, pseudonym: r.pseudonym, tenant: resolved.tenant, actor: resolved.actor, role: resolved.role, roleSource: resolved.source });
 }
 
 export async function handle(request, env, deps) {
