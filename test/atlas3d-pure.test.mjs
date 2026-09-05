@@ -79,5 +79,14 @@ ok("lookAt moves the eye to the origin", near(view[14], -5) && near(view[12], 0)
 const eye = P.eyeFrom({ target: [0, 1, 0], yaw: 0, pitch: 0, dist: 2 });
 ok("eyeFrom: yaw 0 pitch 0 sits on +z at the target height", near(eye[0], 0) && near(eye[1], 1) && near(eye[2], 2));
 
+// --- chunk validation: an HTML fallback page must never reach DecompressionStream ---
+const gz = new Uint8Array([0x1f, 0x8b, 8, 0, 0, 0, 0, 0]).buffer;
+ok("gzip magic is accepted", P.looksLikeChunk(gz, 999));
+ok("already-decoded body of the exact raw size is accepted", P.looksLikeChunk(new ArrayBuffer(40), 40));
+ok("an HTML fallback page is rejected", P.looksLikeChunk(new TextEncoder().encode("<!doctype html><html>").buffer, 40) === false);
+ok("empty body is rejected", P.looksLikeChunk(new ArrayBuffer(0), 0) === false);
+const bases = P.dataBases();
+ok("web: same-origin first, preview host last", bases[0] === "" && /pages\.dev$/.test(bases[bases.length - 1]));
+
 console.log(`atlas3d-pure: ${pass} passed, ${fail} failed`);
 process.exit(fail ? 1 : 0);

@@ -183,9 +183,28 @@
       return G.ICONS.get(n, c);
     } catch (e) { return ""; }
   }
-  function dataUrl(u) {
-    try { if (G.SMD_IS_NATIVE && u.indexOf("/atlas/3d/") === 0 && /\.bin\.gz$/.test(u)) return "https://stewardmd.in" + u; } catch (e) {}
-    return u;
+  // Geometry hosts, tried in order per chunk. Natively the bundle has no .bin.gz, so the live
+  // origin comes first (mirrors atlas.js imgUrl()). The Pages PREVIEW host is a fallback so a
+  // device build can be tested BEFORE the branch is merged: an unmerged branch makes
+  // stewardmd.in answer /atlas/3d/* with its index.html (HTTP 200, text/html), which WebKit
+  // then reports as "Failed to Decode Data." - the check in loadChunk() catches that and moves
+  // on. localStorage smd_atlas3d_base (e.g. a models.stewardmd.in path) wins over both.
+  var PREVIEW_BASE = "https://worktree-atlas3d-bodyparts.stewardmd.pages.dev";
+  function dataBases() {
+    var out = [];
+    try { var o = G.localStorage && G.localStorage.getItem("smd_atlas3d_base"); if (o) out.push(String(o).replace(/\/$/, "")); } catch (e) {}
+    var native = false; try { native = !!G.SMD_IS_NATIVE; } catch (e2) {}
+    out.push(native ? "https://stewardmd.in" : "");
+    if (out.indexOf(PREVIEW_BASE) < 0) out.push(PREVIEW_BASE);
+    return out;
+  }
+  function dataUrl(u, base) { return (base || "") + u; }
+  // A real chunk is either gzip (1f 8b) or, if the host already decoded it, exactly rawBytes.
+  function looksLikeChunk(buf, rawBytes) {
+    if (!buf || buf.byteLength < 2) return false;
+    if (buf.byteLength === rawBytes) return true;
+    var h = new Uint8Array(buf, 0, 2);
+    return h[0] === 0x1f && h[1] === 0x8b;
   }
   function rootEl() {
     if (!G.document) return null;
@@ -234,13 +253,26 @@
       return out;
     });
   }
+  function fetchChunk(c) {
+    var bases = st.base != null ? [st.base] : dataBases(), i = 0;
+    function attempt() {
+      if (i >= bases.length) return Promise.reject(new Error("The 3D geometry is not published on this server yet."));
+      var base = bases[i++];
+      return G.fetch(dataUrl(c.url, base)).then(function (r) {
+        if (!r || !r.ok) throw new Error("http " + (r && r.status));
+        return r.arrayBuffer();
+      }).then(function (buf) {
+        if (!looksLikeChunk(buf, c.bytes)) throw new Error("not a chunk");
+        st.base = base;
+        return buf;
+      }).catch(function () { return attempt(); });
+    }
+    return attempt();
+  }
   function loadChunk(ci) {
     var d = st.data, c = d.chunks[ci];
     if (st.chunks[ci] || st.loading[ci]) return st.loading[ci] || Promise.resolve();
-    st.loading[ci] = G.fetch(dataUrl(c.url)).then(function (r) {
-      if (!r || !r.ok) throw new Error("chunk " + c.id + " " + (r && r.status));
-      return r.arrayBuffer();
-    }).then(function (buf) { return inflate(buf, c.bytes); }).then(function (raw) {
+    st.loading[ci] = fetchChunk(c).then(function (buf) { return inflate(buf, c.bytes); }).then(function (raw) {
       if (st.gl) uploadChunk(ci, raw);
       delete st.loading[ci];
       st.loaded++; st.dirty = true; paintProgress();
@@ -818,7 +850,7 @@
     el.removeEventListener("input", onInput); el.addEventListener("input", onInput);
     el.innerHTML = shellHtml();
     el.classList.add("on");
-    st.err = ""; st.sel = []; st.subject = null; st.isolate = false; st.hidden = {}; st.region = ""; st.explodeTarget = 0; st.explode = 0;
+    st.err = ""; st.base = null; st.sel = []; st.subject = null; st.isolate = false; st.hidden = {}; st.region = ""; st.explodeTarget = 0; st.explode = 0;
     st.cam = { target: [0, 0.92, 0], yaw: 0.45, pitch: 0.12, dist: 2.7 }; st.camTo = null;
     paintProgress();
     loadManifest().then(function (d) {
@@ -882,7 +914,8 @@
   G.ATLAS3D._pure = {
     canonicalOf: canonicalOf, parseManifest: parseManifest, search: search, unionBounds: unionBounds,
     fitDistance: fitDistance, encodePick: encodePick, decodePick: decodePick, canonOfPart: canonOfPart,
-    linksFor: linksFor, regionParts: regionParts, perspective: perspective, lookAt: lookAt, mul: mul, eyeFrom: eyeFrom
+    linksFor: linksFor, regionParts: regionParts, perspective: perspective, lookAt: lookAt, mul: mul, eyeFrom: eyeFrom,
+    looksLikeChunk: looksLikeChunk, dataBases: dataBases
   };
   G.ATLAS3D._version = "1.0";
 
