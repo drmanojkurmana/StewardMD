@@ -130,6 +130,52 @@
   // forced ON for JR/interns when saved. Missing = default all-on.
   function categories() { try { var a = JSON.parse(localStorage.getItem("smd_notif_prefs") || "null"); if (a && a.categories && typeof a.categories === "object") return a.categories; } catch (e) {} return { tasks: true, critical: true, labs: true, guidelines: true, general: true }; }
 
+  /* Device identity, sent at registration for IDENTIFICATION ONLY.
+   *
+   * It changes nothing about who receives a push: an account-scoped alert still goes to every
+   * active token. It exists because the token store had no way to tell one handset from another -
+   * six iOS registrations on one account looked identical to six different iPhones, so none could
+   * be safely pruned and none could be named in a UI.
+   *
+   * installId is generated once and kept in localStorage, so it survives app updates and does NOT
+   * survive a reinstall. That is the correct granularity: a reinstall mints a new APNs token, so a
+   * new identity for it is honest rather than lossy.
+   *
+   * No plugin is added for this. iOS does not expose the device name or the real model to a
+   * WebView, so `model` is a best-effort read of the user agent and is labelled as such rather than
+   * being presented as authoritative. */
+  function installId() {
+    try {
+      var v = localStorage.getItem("smd_install_id");
+      if (!v) {
+        v = (window.crypto && crypto.randomUUID) ? crypto.randomUUID()
+          : String(Date.now()) + "-" + Math.random().toString(36).slice(2, 10);
+        localStorage.setItem("smd_install_id", v);
+      }
+      return v;
+    } catch (e) { return null; }
+  }
+  function deviceIdentity() {
+    var ua = "";
+    try { ua = navigator.userAgent || ""; } catch (e) {}
+    var os = null;
+    try {
+      var m = ua.match(/OS (\d+[_.]\d+(?:[_.]\d+)?) like Mac OS X/) || ua.match(/Android (\d+(?:\.\d+)*)/);
+      if (m) os = m[1].replace(/_/g, ".");
+    } catch (e) {}
+    var model = /iPad/.test(ua) ? "iPad" : /iPhone/.test(ua) ? "iPhone" : /Android/.test(ua) ? "Android" : null;
+    var app = null;
+    try { app = (window.SMD_BUILD || (document.querySelector('script[src*="app.js"]') || {}).getAttribute
+      && (document.querySelector('script[src*="app.js"]').getAttribute("src") || "").split("?v=")[1]) || null; } catch (e) {}
+    var label = null;
+    try { label = localStorage.getItem("smd_device_label") || null; } catch (e) {}
+    return { installId: installId(), label: label, model: model, osVersion: os, appVersion: app };
+  }
+  // So the owner can name a handset ("ward round phone") and have it show in the device list.
+  window.SMD_setDeviceLabel = function (name) {
+    try { localStorage.setItem("smd_device_label", String(name || "").slice(0, 80)); return true; } catch (e) { return false; }
+  };
+
   var _token = null, _wired = false;
 
   function wireListeners() {
@@ -144,7 +190,7 @@
         if (jwt) headers["Authorization"] = "Bearer " + jwt;   // server derives the owning account from this
         return fetch(api("/api/push/register-native"), {
           method: "POST", headers: headers,
-          body: JSON.stringify({ token: _token, platform: platform(), workspaces: workspaces(), categories: categories() })
+          body: JSON.stringify({ token: _token, platform: platform(), workspaces: workspaces(), categories: categories(), device: deviceIdentity() })
         });
       }).then(function () { flag("1"); }).catch(function () {});
     });

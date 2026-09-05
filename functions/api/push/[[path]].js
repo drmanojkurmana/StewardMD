@@ -11,7 +11,7 @@
  * gated by the same UPDATES_ADMIN_TOKEN as the notifications API.
  */
 import { saveSubscription, deleteSubscription, sendPushToAll, pushEnabled } from "../../_webpush.js";
-import { saveNativeToken, deleteNativeToken, sendNativeToAll, nativePushEnabled } from "../../_nativepush.js";
+import { saveNativeToken, deleteNativeToken, sendNativeToAll, nativePushEnabled, listNativeTokens } from "../../_nativepush.js";
 import { identify } from "../../_fbauth.js";
 import { ownerOK } from "../../_adminauth.js";
 import { escalateOverdueTask, sweepOverdue, isGroupMember, notifyNewInstruction, notifyCriticalValue, remindTask } from "../../_taskpush.js";
@@ -59,7 +59,16 @@ export async function onRequest(context) {
     // else's account and receive their patients' lab alerts. Guests get uid=null
     // (broadcast updates only, never per-patient alerts).
     const uid = await identify(request, env);
-    const okSave = await saveNativeToken(env, { token: body.token, platform: body.platform, uid, workspaces: cleanWorkspaces(body.workspaces) });
+    // Device identity, captured for IDENTIFICATION ONLY. Nothing below changes who a push is sent
+    // to: fan-out is still every active token for the account. This exists so a human can later
+    // look at a list and say which handset a registration belongs to, which was impossible before -
+    // six iOS tokens on one account were indistinguishable from six different iPhones, so nothing
+    // could be safely pruned.
+    const okSave = await saveNativeToken(env, {
+      token: body.token, platform: body.platform, uid,
+      workspaces: cleanWorkspaces(body.workspaces),
+      device: body.device,
+    });
     return okSave ? json({ ok: true, scoped: !!uid }) : json({ error: "store-unavailable" }, 501);
   }
   if (method === "POST" && seg === "unregister-native") {
@@ -146,6 +155,30 @@ export async function onRequest(context) {
     // `sent` counts gateway acceptances. It is reported as such and the client turns it into SENT,
     // never DELIVERED.
     return json({ sent: res.sent || 0, total: res.total || 0 });
+  }
+  // The caller's OWN registered devices. Read-only, and deliberately so: this exists to make the
+  // registrations identifiable, not to remove them. The token itself is never returned - it is a
+  // device credential, and an 8-character fingerprint is enough to tell two rows apart.
+  if (method === "GET" && seg === "devices") {
+    const uid = await identify(request, env);
+    if (!uid) return json({ error: "auth-required" }, 401);
+    const all = await listNativeTokens(env);
+    const mine = all.filter((t) => t.uid === uid).map((t) => ({
+      fingerprint: String(t.token || "").slice(0, 8),
+      platform: t.platform,
+      apnsEnv: t.apnsEnv || null,
+      lastSeen: t.ts ? new Date(t.ts).toISOString() : null,
+      firstSeen: (t.device && t.device.firstSeen) || null,
+      label: (t.device && t.device.label) || null,
+      model: (t.device && t.device.model) || null,
+      osVersion: (t.device && t.device.osVersion) || null,
+      appVersion: (t.device && t.device.appVersion) || null,
+      installId: (t.device && t.device.installId) || null,
+      // Registrations made before identity was captured. Stated rather than left as blanks, so a
+      // reader does not mistake "we never recorded this" for "this device reported nothing".
+      identified: !!(t.device && t.device.installId),
+    })).sort((a, b) => String(b.lastSeen).localeCompare(String(a.lastSeen)));
+    return json({ devices: mine, total: mine.length });
   }
   // The handset confirming what actually happened to it: received, opened, acknowledged.
   if (method === "POST" && seg === "wardsynq-receipt") {

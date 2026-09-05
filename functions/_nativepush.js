@@ -22,13 +22,35 @@ export async function saveNativeToken(env, rec) {
   const store = pushKv(env);
   if (!store || !rec || !rec.token || !rec.platform) return false;
   const key = NAT_PREFIX + (await tokenId(rec.token));
+  // Device identity, for identification only - it is never consulted when deciding who to send to.
+  // Bounded and whitelisted rather than stored as given: this is client-supplied text landing in a
+  // store an operator will read, so it is capped and confined to fields with a stated purpose.
+  const str = (v, n) => (typeof v === "string" && v ? v.slice(0, n) : null);
+  const d = rec.device && typeof rec.device === "object" ? rec.device : {};
+  const device = {
+    installId: str(d.installId, 64),   // survives app updates, NOT a reinstall - so it names an install
+    label: str(d.label, 80),           // human-set name, if the owner ever gives one
+    model: str(d.model, 80),           // best-effort from the user agent; iOS does not expose the real model
+    osVersion: str(d.osVersion, 40),
+    appVersion: str(d.appVersion, 40),
+    firstSeen: null,                   // filled below, never overwritten
+  };
   // Keep any APNs environment already LEARNED for this token. Re-registering on app launch must not
   // throw away the knowledge that this handset is a sandbox build, or every launch would re-run the
   // discovery and send one doomed push first.
   let apnsEnv = (rec.apnsEnv === "sandbox" || rec.apnsEnv === "production") ? rec.apnsEnv : null;
-  if (!apnsEnv) { try { const prev = await store.get(key, "json"); if (prev && prev.apnsEnv) apnsEnv = prev.apnsEnv; } catch (e) {} }
+  let prev = null;
+  try { prev = await store.get(key, "json"); } catch (e) {}
+  if (!apnsEnv && prev && prev.apnsEnv) apnsEnv = prev.apnsEnv;
+  // firstSeen is the registration this token was FIRST stored at, and is never rewritten. `ts` moves
+  // on every launch, so on its own it says when the app last started rather than how old the
+  // registration is - which is the question anybody deciding what to prune is actually asking.
+  device.firstSeen = (prev && prev.device && prev.device.firstSeen) || new Date().toISOString();
+  // A label the owner set once must survive a re-registration that does not carry one.
+  if (!device.label && prev && prev.device && prev.device.label) device.label = prev.device.label;
+
   await store.put(key,
-    JSON.stringify({ token: rec.token, platform: rec.platform, uid: rec.uid || null, workspaces: Array.isArray(rec.workspaces) ? rec.workspaces : [], apnsEnv, ts: Date.now() }));
+    JSON.stringify({ token: rec.token, platform: rec.platform, uid: rec.uid || null, workspaces: Array.isArray(rec.workspaces) ? rec.workspaces : [], apnsEnv, device, ts: Date.now() }));
   return true;
 }
 export async function deleteNativeToken(env, token) {
