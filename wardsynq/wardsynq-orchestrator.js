@@ -84,7 +84,15 @@ class NotificationOrchestrator {
     this.transport = transport;
     this.bus = bus || null;
     this.now = now || (() => new Date().toISOString());
-    /** alertId -> noticeId. One notice per clinical alert, however many channels carry it. */
+    /**
+     * alertId -> Map(sequence -> noticeId).
+     *
+     * One notice per channel-fanout, and a SEQUENCE within an alert, because a re-escalation is not
+     * a repeat. When the deterioration monitor sends an unanswered escalation up to a tier above the
+     * one that ignored it, that is a new notice to a new responder about the same clinical alert.
+     * Collapsing them would mean the registrar's page silently returned the ward nurse's old notice.
+     * Answering ANY of them answers the alert, which is what shouldEscalate() reads.
+     */
     this._byAlert = new Map();
   }
 
@@ -95,11 +103,12 @@ class NotificationOrchestrator {
    * a second person about the same patient. Re-escalation is the monitor's job and has its own
    * alertId; it is not this being called again.
    */
-  async raise({ alertId, patientId, title, body, kind, urgency, ref } = {}) {
+  async raise({ alertId, patientId, title, body, kind, urgency, ref, sequence = 0 } = {}) {
     if (!alertId) throw new OrchestratorError("an alert needs an id so an acknowledgement can name what it answers", "NO_ALERT_ID");
     if (!patientId) throw new OrchestratorError("an alert needs a patient; an acknowledgement that cannot say who it is about is not one", "NO_PATIENT");
 
-    const existing = this._byAlert.get(alertId);
+    const bySeq = this._byAlert.get(alertId) || new Map();
+    const existing = bySeq.get(sequence);
     if (existing) {
       const prior = await this.transport.outbox.get(existing);
       if (prior) return prior;
@@ -108,9 +117,10 @@ class NotificationOrchestrator {
     const notice = await this.transport.send({
       title, body, patientId, kind: kind || "escalation", urgency,
       // The identity travels with the notice, so every channel and every receipt can carry it back.
-      ref: { ...(ref || {}), alertId, patientId },
+      ref: { ...(ref || {}), alertId, patientId, sequence },
     });
-    this._byAlert.set(alertId, notice.id);
+    bySeq.set(sequence, notice.id);
+    this._byAlert.set(alertId, bySeq);
     return notice;
   }
 
@@ -187,14 +197,65 @@ class NotificationOrchestrator {
    * channel, every other channel's escalation stops.
    */
   async shouldEscalate(alertId) {
-    const noticeId = this._byAlert.get(alertId);
-    if (!noticeId) return true;   // nothing raised yet, so nothing has been answered
-    const notice = await this.transport.outbox.get(noticeId);
-    return !notice || notice.state !== DELIVERY.SEEN;
+    const bySeq = this._byAlert.get(alertId);
+    if (!bySeq || !bySeq.size) return true;   // nothing raised yet, so nothing has been answered
+    for (const noticeId of bySeq.values()) {
+      const notice = await this.transport.outbox.get(noticeId);
+      // ANY answered notice answers the alert. The registrar taking it means the ward nurse's
+      // unanswered page is no longer a reason to wake the consultant.
+      if (notice && notice.state === DELIVERY.SEEN) return false;
+    }
+    return true;
   }
 
   /** Everything nobody has answered, straight from the transport. Includes the delivered ones. */
   async outstanding(opts) { return this.transport.outstanding(opts); }
+
+  /**
+   * Adapts this orchestrator to the plain channel shape wardsynq-notify.js's Dispatcher expects,
+   * so DeteriorationMonitor can be wired to it WITHOUT changing one line of that module.
+   *
+   *   const monitor = new DeteriorationMonitor({ channels: orchestrator.asDispatcherChannels() });
+   *
+   * That matters more than the convenience: wardsynq-deterioration.js holds the NEWS2 scoring and
+   * the responder ladder, and the way to connect a transport to clinical logic is to leave the
+   * clinical logic completely alone.
+   *
+   * The escalation's own `tier` becomes the notice SEQUENCE, which is what makes a re-escalation a
+   * new notice to a new responder rather than a silent return of the page the last tier ignored.
+   */
+  asDispatcherChannels() {
+    return {
+      wardsynq: async (payload) => {
+        const esc = (payload && payload.escalation) || {};
+        if (!esc.id || !esc.patientId) {
+          // Refused rather than guessed. An escalation that cannot name its patient cannot be
+          // acknowledged for one, and a notice nobody can answer is not a delivery.
+          return { delivered: false, detail: "the escalation carries no id or no patient, so no notice could be addressed" };
+        }
+        const notice = await this.raise({
+          alertId: esc.id,
+          sequence: esc.tier || 0,
+          patientId: esc.patientId,
+          title: esc.reason || "WardSynQ escalation",
+          body: `For: ${esc.responder || "the responsible clinician"}`
+            + (esc.respondWithinMinutes ? `. Respond within ${esc.respondWithinMinutes} minutes.` : ""),
+          kind: "deterioration",
+          urgency: esc.risk || (esc.unscorable ? "unscorable" : "routine"),
+          ref: { responder: esc.responder, tier: esc.tier, why: payload.why || null, encounterId: esc.encounterId || null },
+        });
+        return {
+          // Only a CONFIRMED delivery counts, exactly as everywhere else in this build. A notice
+          // that reached a device and no person leaves the monitor's escalation undelivered, which
+          // is what keeps the re-escalation timer running.
+          delivered: notice.state === DELIVERY.DELIVERED || notice.state === DELIVERY.SEEN,
+          receipt: notice.id,
+          detail: notice.attempts.map((a) => `${a.channel}: ${a.detail || (a.delivered ? "delivered" : "no")}`).join("; ")
+            || "no channel attempted",
+        };
+      },
+    };
+  }
 
   /** Moves a notice forward only. Never backwards, so a late receipt cannot reopen a closed loop. */
   async _advance(noticeId, state, fields) {
@@ -210,4 +271,35 @@ class NotificationOrchestrator {
   }
 }
 
-export { NotificationOrchestrator, OrchestratorError, WORKFLOW };
+/**
+ * Closes the loop back the other way: a clinician acknowledging on a phone tells the MONITOR.
+ *
+ * Without this the two halves drift. The orchestrator would know the alert was answered while
+ * wardsynq-deterioration.js kept sweeping and re-escalating it to the consultant, which is precisely
+ * the alarm-fatigue failure that makes a ward stop reading escalations. The acknowledgement travels
+ * on the event the orchestrator already emits, so there is still exactly one authoritative
+ * acknowledgement and this is a subscriber to it rather than a second source of truth.
+ *
+ * @returns {() => void} unsubscribe
+ */
+function connectDeterioration({ monitor, bus, logger } = {}) {
+  if (!monitor || typeof monitor.acknowledge !== "function") {
+    throw new OrchestratorError("connectDeterioration needs the DeteriorationMonitor to tell", "NO_MONITOR");
+  }
+  if (!bus || typeof bus.on !== "function") {
+    throw new OrchestratorError("connectDeterioration needs the event bus the orchestrator emits on", "NO_BUS");
+  }
+  return bus.on("notification.acknowledged", (event) => {
+    const p = (event && event.payload) || {};
+    if (!p.alertId || !p.clinicianId) return;
+    try {
+      monitor.acknowledge(p.alertId, p.clinicianId);
+    } catch (err) {
+      // An acknowledgement for an escalation this monitor does not hold is not an error worth
+      // throwing into a bus handler: another process raised it. Recorded, then ignored.
+      if (logger) logger.warn("[wardsynq] acknowledgement did not match a known escalation:", (err && err.message) || err);
+    }
+  });
+}
+
+export { NotificationOrchestrator, OrchestratorError, WORKFLOW, connectDeterioration };
