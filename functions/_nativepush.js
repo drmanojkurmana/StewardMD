@@ -6,7 +6,7 @@
  * Token record: { token, platform: "ios"|"android"|"watch", uid|null, ts }
  */
 import { pushKv } from "./_webpush.js";
-import { apnsConfigured, sendApns, apnsWatchBundleId } from "./_apns.js";
+import { apnsConfigured, sendApns, apnsWatchBundleId, apnsDefaultEnvName } from "./_apns.js";
 import { fcmConfigured, sendFcm } from "./_fcm.js";
 
 const NAT_PREFIX = "push:native:";
@@ -21,8 +21,14 @@ async function tokenId(token) {
 export async function saveNativeToken(env, rec) {
   const store = pushKv(env);
   if (!store || !rec || !rec.token || !rec.platform) return false;
-  await store.put(NAT_PREFIX + (await tokenId(rec.token)),
-    JSON.stringify({ token: rec.token, platform: rec.platform, uid: rec.uid || null, workspaces: Array.isArray(rec.workspaces) ? rec.workspaces : [], ts: Date.now() }));
+  const key = NAT_PREFIX + (await tokenId(rec.token));
+  // Keep any APNs environment already LEARNED for this token. Re-registering on app launch must not
+  // throw away the knowledge that this handset is a sandbox build, or every launch would re-run the
+  // discovery and send one doomed push first.
+  let apnsEnv = (rec.apnsEnv === "sandbox" || rec.apnsEnv === "production") ? rec.apnsEnv : null;
+  if (!apnsEnv) { try { const prev = await store.get(key, "json"); if (prev && prev.apnsEnv) apnsEnv = prev.apnsEnv; } catch (e) {} }
+  await store.put(key,
+    JSON.stringify({ token: rec.token, platform: rec.platform, uid: rec.uid || null, workspaces: Array.isArray(rec.workspaces) ? rec.workspaces : [], apnsEnv, ts: Date.now() }));
   return true;
 }
 export async function deleteNativeToken(env, token) {
@@ -42,6 +48,39 @@ export async function listNativeTokens(env) {
   return out;
 }
 
+/* Sends to one APNs token in the environment that token actually belongs to.
+ *
+ * WHY THIS EXISTS. A device token is only valid against the environment its BUILD was signed for.
+ * APNS_ENV picks one host for the whole deployment, which is correct for the shipped app and wrong
+ * for any development or TestFlight-debug handset registered against the same deployment. Those got
+ * BadDeviceToken and were PRUNED, so the device silently stopped receiving anything and the symptom
+ * looked like a broken push system rather than a build-environment mismatch.
+ *
+ * The deployment default is UNCHANGED and is tried first, so nothing about production sending moves:
+ * a normal App Store token succeeds on the first attempt exactly as before. Only a token Apple has
+ * explicitly rejected as not-valid-here triggers one retry against the other host, and a token that
+ * succeeds there has its environment REMEMBERED, so it costs one wasted push per device, once.
+ *
+ * A 410 Unregistered still prunes immediately: that means the app was uninstalled, which is true on
+ * both hosts and is not an environment question. */
+async function sendApnsResolvingEnv(env, store, t, msg, topic) {
+  const preferred = t.apnsEnv || apnsDefaultEnvName(env);
+  let r = await sendApns(env, t.token, msg, topic, preferred);
+  if (r && r.ok) return r;
+  if (!r || !r.wrongEnvironment) return r;   // a real failure, or already dead: leave it alone
+
+  const other = preferred === "sandbox" ? "production" : "sandbox";
+  const r2 = await sendApns(env, t.token, msg, topic, other);
+  if (r2 && r2.ok) {
+    // Learned. Persist it so this device never pays the wasted first attempt again.
+    try { await store.put(t.key, JSON.stringify({ ...t, key: undefined, apnsEnv: other, ts: t.ts || Date.now() })); } catch (e) {}
+    return r2;
+  }
+  // Rejected by BOTH hosts. Now, and only now, is the token genuinely dead.
+  if (r2 && (r2.wrongEnvironment || r2.prune)) return { ...r2, prune: true };
+  return r2 || r;
+}
+
 /* Fan a single alert out to every stored native token. Prunes dead tokens.
  * msg = { title, body, url, tag }. opts.uid targets one user's devices; opts.workspace
  * targets subscribers of that workspace (legacy tokens with no workspaces = all);
@@ -58,8 +97,11 @@ export async function sendNativeToAll(env, msg, opts) {
   await Promise.all(toks.map(async (t) => {
     try {
       let r;
-      if (t.platform === "ios") { if (!apnsConfigured(env)) return; r = await sendApns(env, t.token, msg); }
-      else if (t.platform === "watch") { if (!apnsConfigured(env)) return; r = await sendApns(env, t.token, msg, apnsWatchBundleId(env)); }
+      if (t.platform === "ios" || t.platform === "watch") {
+        if (!apnsConfigured(env)) return;
+        const topic = t.platform === "watch" ? apnsWatchBundleId(env) : undefined;
+        r = await sendApnsResolvingEnv(env, store, t, msg, topic);
+      }
       else if (t.platform === "android") { if (!fcmConfigured(env)) return; r = await sendFcm(env, t.token, msg); }
       else return;
       if (r && r.ok) sent++;
