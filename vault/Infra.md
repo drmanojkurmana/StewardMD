@@ -68,3 +68,36 @@ certificate.
 **Pages snapshots bindings at DEPLOY time.** Adding the secret does not affect deployments that
 already exist — `/api/pglog/ready` kept reporting `"signing":false` until the next build. Push a
 commit (or re-deploy) after adding any Pages secret, and confirm with the readiness probe.
+
+## Native push — APNs and FCM (updated 2026-09-05)
+
+APNs and FCM are LIVE in production and have been for some time: `/api/push/status` returns
+`native:true`, which is exactly `pushKv(env) && (apnsConfigured(env) || fcmConfigured(env))`. Recorded
+because a WardSynQ note previously claimed the blocker on escalation delivery was "a vendor,
+credentials and a contract", and that was wrong.
+
+Secrets (Cloudflare Pages, values encrypted and not readable via wrangler): `APNS_KEY_P8`,
+`APNS_KEY_ID`, `APNS_TEAM_ID`, `APNS_BUNDLE_ID`, `APNS_ENV`, plus `FCM_SERVICE_ACCOUNT` and
+`FIREBASE_SERVICE_ACCOUNT`. Token store is `pushKv` → the `stewardmd-updates` KV namespace
+(`48a600ae…`), prefix `push:native:`.
+
+**`wrangler kv key list` needs `--remote`.** Without it wrangler 4 reads LOCAL state and reports zero
+keys for a namespace that is not empty, which reads exactly like a wrong namespace.
+
+**APNs environment is resolved PER TOKEN, not per deployment.** A token is only valid against the
+environment its BUILD was signed for, so a Debug or TestFlight-debug handset registers a SANDBOX
+token. `APNS_ENV` still picks the deployment default and is still tried first — production sending is
+unchanged — but a token Apple rejects as not-valid-here now retries once against the other host and
+the answer is remembered on the token. Before this, such a token was PRUNED: the device silently
+stopped receiving anything and the symptom looked like a broken push system rather than a build
+mismatch. A `410 Unregistered` still prunes immediately, on both hosts, because that means uninstalled.
+
+**Custom data must be copied explicitly.** `sendApns()` built a fixed payload and dropped every
+caller key; `sendFcm()` did the same. Found only by sending a real push to a real handset and reading
+what arrived. APNs carries custom keys as TOP-LEVEL keys alongside `aps` (which is where Capacitor
+reads them back into `notification.data`); FCM requires every data value to be a STRING and rejects
+anything else with an opaque 400.
+
+Device identity is captured at registration (`installId`, optional `label`, best-effort model/OS/app
+version, `firstSeen` written once). `GET /api/push/devices` lists the caller's own registrations,
+read-only, returning an 8-character fingerprint and never the token itself.

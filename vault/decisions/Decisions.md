@@ -4079,3 +4079,60 @@ Worth recording about how it was found: this was invisible to the unit tests, wh
 `ingestFromWard` directly and so tested the observer against itself rather than against the caller.
 It took putting it on a ward with real traffic. It is the first thing shadow mode found, and what it
 found was shadow mode.
+
+## 2026-09-05 — One orchestrator over the existing transport, and what it deliberately did not do
+
+Nine PRs (#835, #836, #838-#843, #845). The through-line is that almost none of it was new
+machinery: the transport, the event bus, the push infrastructure and the three clinical monitors all
+existed, and what was missing was the connections between them and honesty about what a connection
+proves.
+
+**One state machine, not a second notification system.** `wardsynq-orchestrator.js` owns no outbox,
+no ladder, no channel and no delivery vocabulary. Duplicating those would have produced two systems
+with two ideas of what "delivered" means, which is the exact failure `wardsynq-notify.js` was written
+to end. What it adds is ONE identity for a clinical alert across every channel, and one place that
+decides the alert has been answered.
+
+**The transport bends to the clinical modules, not the other way round.**
+`wardsynq-deterioration.js`, `wardsynq-recognition.js` and `wardsynq-emergency.js` each had their own
+payload shape before the orchestrator existed. All three are byte-identical after this work, verified
+by `git diff`. The adapter reads three shapes explicitly, one branch each, because a generic
+extractor would silently mis-address the day a fourth appears. Reshaping three tested clinical
+modules to suit one transport would have been the wrong direction of dependency.
+
+**A re-escalation is not a repeat.** The escalation's tier became the notice sequence. Keying only on
+the alert would have made the registrar's page silently return the ward nurse's ignored notice, and
+answering any one notice answers the alert so the consultant is not woken for something already
+taken. The same reasoning gave a bundle element's warning and its later breach one identity derived
+from patient, code, TIME ZERO and element — the same element on a later episode is a different
+clinical fact.
+
+**Absence of findings is not a finding of absence.** Two separate controls were changed for this.
+Shadow mode's `report().clean` was true for an observer that had been handed nothing, which is how an
+observer wired to the wrong function passed for a working one; `clean` now requires `observed`. And a
+push accepted by APNs is SENT, never DELIVERED — only the handset's own receipt promotes it. In the
+live demonstration the escalation correctly read `delivered: false` after the gateway accepted it for
+4 of 11 devices.
+
+**A screen whose only exit is accepting responsibility gets answered by whoever is nearest.** The
+forced acknowledgement screen has two answers and only one closes the loop. "I cannot attend" posts
+no acknowledgement and leaves the escalation outstanding so the ladder finds somebody who can.
+
+**An unconfigured surface must not look like a working one.** The bedside page previously drew a
+wristband field and three live-looking buttons with no system behind them. `opd-boot.js` requires
+store, actor and eMAR from the deployment — the page still names nobody, per the earlier decision
+that a page constructing its own actor would be a page deciding who may give a drug — and paints an
+explicitly disabled "not connected to a patient record" state otherwise.
+
+**Three defects were found only by real hardware**, and each had passed its unit tests: the shadow
+observer watched `ingestFromWard` while `ghis-ward.js` calls `ingestWardHistory`; APNs and FCM
+dropped every custom key, so an escalation reached a phone that could not say which escalation it
+was; and a Debug build's sandbox token was pruned by a production-host rejection, which looked
+exactly like a broken push system. The lesson is not "write more tests" — the mocks were faithful to
+the contracts they modelled. It is that the contracts themselves were wrong, and only the real thing
+said so.
+
+**Nothing here moved a safety-case rating.** 14 of 16 verified, 2 partial, unchanged across all nine
+PRs. HAZ-DET-01's remaining blocker is the resuscitation committee approving the escalation policy;
+HAZ-TIME-01's is that attestation is permitted by design. Working transport is not an approved
+policy, and a demonstration on `DEMO-PAT-1` is not a patient.
