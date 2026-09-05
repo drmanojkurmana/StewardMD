@@ -4049,3 +4049,33 @@ settle, which does not guarantee that a `.then()` on an already-rejected promise
 suite is worse than a failing one, because it gets re-run until it passes.
 
 956 tests across 44 suites. Safety case 14 of 16 verified, 2 partial, both waiting on a real pager.
+
+## 2026-09-05 — Shadow mode watched a door no ward sync walks through
+
+The observer was wired to `ICU.ingestFromWard`, and `wardsynq-shadow-boot.js` claimed on that basis
+to observe the real GHIS sync. It did not. `ghis-ward.js:685` reads
+
+    var res = (ICU.ingestWardHistory ? ICU.ingestWardHistory(...) : ICU.ingestFromWard(...));
+
+`ingestWardHistory` exists on every current build and is a separate function that does not call
+`ingestFromWard`, so the fallback branch is dead on a current device. Shadow mode ran through a real
+ward sync on a real iPhone and reported `bundlesSeen: 0`.
+
+Two decisions follow.
+
+**The observer covers every door, not the one it was written against.** `installShadow` now takes a
+`method`, and the boot installs on both `ingestWardHistory` and `ingestFromWard`. The caller picks
+which entry point it uses; an observer that assumes one has assumed the caller's implementation.
+`SMD_WARDSYNQ_SHADOW` became a combined view with a `byMethod` breakdown, because `installShadow`
+assigns that global unconditionally and a second install would otherwise have hidden the first —
+the same class of silent-masking bug.
+
+**`clean` now requires `observed`.** The old report returned `clean: true` for an observer that had
+never been handed a bundle: no errors and no disagreements, because nothing had happened. That is
+how a mis-wired observer passes for a working one. Absence of findings is not a finding of absence,
+and a readiness signal that fires when nothing ran is worse than no signal.
+
+Worth recording about how it was found: this was invisible to the unit tests, which called
+`ingestFromWard` directly and so tested the observer against itself rather than against the caller.
+It took putting it on a ward with real traffic. It is the first thing shadow mode found, and what it
+found was shadow mode.

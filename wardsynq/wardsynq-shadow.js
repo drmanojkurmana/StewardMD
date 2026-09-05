@@ -32,8 +32,18 @@ import { mapGhisBundle } from "./adapters/wardsynq-ghis-adapter.js";
 /**
  * Installs the observer.
  *
- * @param {{host?: object, flags?: object, onObservation?: Function, logger?: object}} deps
- *   host  the object carrying ingestFromWard, normally window.ICU
+ * @param {{host?: object, flags?: object, method?: string, onObservation?: Function, logger?: object}} deps
+ *   host    the object carrying the ingest function, normally window.ICU
+ *   method  WHICH function on that host to observe. Defaults to "ingestFromWard".
+ *
+ * WHY `method` EXISTS, recorded because the omission cost a device round. This module was written
+ * against `ingestFromWard` and its documentation claimed it therefore observed the real GHIS ward
+ * sync. It did not. `ghis-ward.js` calls `ICU.ingestWardHistory` when that exists and only falls
+ * back to `ingestFromWard` on older builds, so on a current build the observer sat on a door no
+ * ward sync walks through, reported `bundlesSeen: 0`, and looked like a quiet success. One entry
+ * point is not the ingest surface; the caller decides which door it uses, so the observer has to
+ * cover every door the caller might pick.
+ *
  * @returns {{installed: boolean, uninstall: Function, report: Function, reason?: string}}
  */
 function installShadow(deps) {
@@ -41,11 +51,12 @@ function installShadow(deps) {
   const host = deps.host || (typeof window !== "undefined" ? window.ICU : null);
   const flags = deps.flags || (typeof window !== "undefined" ? window.SMD_WARDSYNQ_FLAGS : null);
   const logger = deps.logger || null;
+  const method = deps.method || "ingestFromWard";
 
   const on = flags && typeof flags.get === "function" ? flags.get("smd_wardsynq_shadow") : false;
   if (!on) return { installed: false, reason: "flag off", uninstall: () => {}, report: () => null };
-  if (!host || typeof host.ingestFromWard !== "function") {
-    return { installed: false, reason: "no ingestFromWard to observe", uninstall: () => {}, report: () => null };
+  if (!host || typeof host[method] !== "function") {
+    return { installed: false, reason: `no ${method} to observe`, uninstall: () => {}, report: () => null };
   }
 
   const stats = {
@@ -53,9 +64,9 @@ function installShadow(deps) {
     observationsMapped: 0, legacyLabRows: 0,
     issues: [], disagreements: [], lastAt: null,
   };
-  const original = host.ingestFromWard;
+  const original = host[method];
 
-  host.ingestFromWard = function wardSynQShadowed(bundle) {
+  host[method] = function wardSynQShadowed(bundle) {
     // 1. The legacy path runs first and its result is what the caller gets, whatever happens next.
     const legacyResult = original.apply(this, arguments);
 
@@ -98,15 +109,23 @@ function installShadow(deps) {
 
   const api = {
     installed: true,
-    uninstall() { host.ingestFromWard = original; return true; },
+    method,
+    uninstall() { host[method] = original; return true; },
     report() {
+      // `observed` before `clean`, deliberately. An observer that has never been handed a bundle
+      // has no errors and no disagreements, so a bare `clean: true` reads as a passing verdict when
+      // it is actually an empty one. That is exactly how a shadow wired to the wrong function
+      // looked like a success. `clean` now requires having seen something.
+      const observed = stats.bundlesSeen > 0;
       return {
+        method,
+        observed,
         ...stats,
         issues: stats.issues.slice(-50),
         disagreements: stats.disagreements.slice(-50),
-        // The number to look at first: a shadow that never errors and never disagrees is a shadow
-        // that is ready to become the real path.
-        clean: stats.shadowErrors === 0 && stats.disagreements.length === 0,
+        // A shadow that has seen real traffic and never errored or disagreed is a shadow that is
+        // ready to become the real path. One that has seen nothing is not evidence of anything.
+        clean: observed && stats.shadowErrors === 0 && stats.disagreements.length === 0,
       };
     },
   };
