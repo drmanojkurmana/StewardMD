@@ -34,6 +34,11 @@ import { proFromRequest, requirePro, needsProBody } from "../../_entitlement.js"
 import * as BILL from "../../_clinic_billing_store.js";
 import { orderQueue, orderRoomView, displayBoard } from "../../_queue_eta.js";
 import { verifyStaffSession, verifySecret, pinLocked, nextPinState, mintStaffSession } from "../../_opd_auth.js";
+// WardSynQ record: the nurse-vitals migration (functions/_wardsynq/migrate-vitals.js). Off unless
+// WARDSYNQ_RECORD=1 AND the org names a Connect tenant AND that tenant opts in; then the timeline
+// handler below dual-writes, timeline first in "shadow", record first in "authoritative".
+import { vitalsMigration, recordVitals } from "../../_wardsynq/migrate-vitals.js";
+import { actorDeps as wsqActorDeps, recordDeps as wsqRecordDeps } from "../../_wardsynq/deps.js";
 import "../../_opd_ghis_connector.js";   // side-effect: registers the "ghis" OPD connector
 import "../../_opd_connect_connector.js";   // side-effect: registers the "connect" OPD connector (any FHIR hospital via Connect EMR)
 import * as ONCO from "../../_onco_store.js";
@@ -790,9 +795,27 @@ export async function onRequest(context) {
         return json(Object.assign({ ok: true }, await QT.extendTimeline(env, t.id, body.days)), 200, request);
       }
       if (seg === "timeline") {
-        await requireSessionCap(env, actor, s, QT.tlKind(body.kind) === "vitals" ? CAPS.EMR_VITALS : CAPS.EMR_TREAT);
+        const isVitals = QT.tlKind(body.kind) === "vitals";
+        await requireSessionCap(env, actor, s, isVitals ? CAPS.EMR_VITALS : CAPS.EMR_TREAT);
         const t = await Q.getTicket(env, body.ticketId);
         if (!t || t.sessionId !== s.id) return json({ ok: false, error: "not_found" }, 404, request);
+        // The nurse-vitals migration. With the tenant "off" (the default, and every tenant today) this
+        // branch is not entered and the response is exactly what it was. See _wardsynq/migrate-vitals.js.
+        const mig = isVitals ? await vitalsMigration(env, s, { getOrg: ORG.getOrg, tenantRow: (e, id) => (e.CONNECT_DB ? e.CONNECT_DB.prepare("SELECT * FROM connect_tenant WHERE id=?").bind(String(id)).first() : null) }) : { mode: "off" };
+        if (mig.mode !== "off") {
+          const ctx = { migration: mig, session: s, ticket: t, vitals: body.vitals, note: body.vitals && body.vitals.note, recordedAt: new Date().toISOString(), actorDeps: wsqActorDeps(env), recordDeps: wsqRecordDeps(env, mig.tenantId) };
+          if (mig.mode === "authoritative") {
+            // The record is the record: it must accept the vitals before the timeline copy is made.
+            const rec = await recordVitals(request, env, ctx);
+            if (!rec.ok) return json({ ok: false, error: "record_refused", wardsynq: rec }, rec.status || 502, request);
+            const legacy = await QT.appendTimeline(env, s, t, body.kind, body.text, actor.id);
+            return json(Object.assign({ ok: true }, legacy, { wardsynq: rec }), 200, request);
+          }
+          // shadow: the timeline is still what the ward reads; the record write reports, never throws.
+          const legacy = await QT.appendTimeline(env, s, t, body.kind, body.text, actor.id);
+          const rec = await recordVitals(request, env, ctx);
+          return json(Object.assign({ ok: true }, legacy, { wardsynq: rec }), 200, request);
+        }
         return json(Object.assign({ ok: true }, await QT.appendTimeline(env, s, t, body.kind, body.text, actor.id)), 200, request);
       }
       // Slide-to-checkout: seal + share the timeline, close the patient, call the next.

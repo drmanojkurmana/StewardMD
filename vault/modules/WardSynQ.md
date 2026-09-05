@@ -447,7 +447,29 @@ wanted, not this mapping.
 that clinician holds. The doctor is the delegate, never the author; `aiDrafted` is forced true by the
 store whatever the entity claimed; an active order or a signature from an AI is refused.
 
-**Deliberately NOT done.** No GHIS write migrated (`opd-emr.js` still posts to `/api/ghis`); the
+**The first clinical write on the record: nurse vitals (2026-09-06, `functions/_wardsynq/migrate-vitals.js`).**
+The OPD console's "Record vitals" (`opd.html`) posted one text line to the encounter timeline
+(`POST /api/queue/<session>/timeline`, kind `vitals`), encrypted in a Firestore document that
+self-expires. It now ALSO sends the structured values, and the timeline handler dual-writes, per
+tenant, by `connect_tenant.settings.wardsynq.migrations.vitals`:
+
+| Mode | Order | On record failure |
+|---|---|---|
+| `off` (default, every tenant today) | timeline only; the handler is byte-for-byte what it was | n/a |
+| `shadow` | timeline first, its result returned; then the record | reported on the response as `wardsynq`, audited, never thrown |
+| `authoritative` | record FIRST, must succeed; then the timeline as the shadow | the request fails (`record_refused`, 403/422/502) and no timeline entry is made |
+
+Also gated on `WARDSYNQ_RECORD=1` and on the OPD org naming its Connect tenant
+(`q_orgs.connectTenantId`); any of those absent is `off`, and a broken lookup is `off`, so a hospital
+that has not opted in sees nothing. The write is the request's own governed actor through
+`resolveClinicalActor` (a nurse: EXECUTE on Observation only), one LOINC-coded Observation per value,
+UCUM units AS REPORTED (Fahrenheit stays Fahrenheit), the note as `sourceText`, stable ids in ticket
+and timestamp plus an idempotency key so a retry replays. Filed under `opd-pat-<mrn>`; NO Patient
+record is created (a nurse cannot, and the ticket has no demographics), so a ticket without an MRN
+is refused as `no_patient_identity`. Not a clinical rule: no threshold, no score, no alert reads
+these yet.
+
+**Deliberately NOT done.** No GHIS write migrated (`opd-emr.js` still posts to `/api/ghis`; the nurse-vitals timeline write is the one migrated, above, and only where a tenant opts in); the
 cut-over flag untouched; the 18 queue roles mapped onto actor tiers on 2026-09-06 (see "Who may do what" above); no on-prem repository; no connector
 write-back (an external record is read-only natively and the path back to Epic is not built); no
 AI actor at the door (an AI draft arriving via a doctor's token is stamped as that doctor, with

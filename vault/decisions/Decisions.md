@@ -4208,3 +4208,30 @@ actor model was written to end.
 `emr.treat`; a staff PIN session cannot sign because a PIN carries no registration number; the
 queue's room/department scope (`withinScope`) is not applied to the chart, since a chart is a patient
 and not a room.
+
+## 2026-09-06 — The first write moves: nurse vitals, per tenant, three modes
+
+The smallest real clinical write, chosen because it exercises the nurse grant end to end and needs
+nothing not already built.
+
+**Decision: dual-write with a per-tenant mode, not a cut-over.** `off` leaves the handler
+byte-identical. `shadow` writes the timeline first and reports the record's outcome. `authoritative`
+writes the record first and fails the save if the record refuses. The timeline is never removed:
+every OPD screen reads it, and a mode is a setting, not a deploy.
+
+**Decision: structured values from the form, not parsing the text.** The console already had the
+fields; sending them alongside the text costs nothing and avoids inventing a parser whose mistakes
+would become clinical values.
+
+**Decision: as reported, coded, no conversion.** LOINC codes, UCUM units, Fahrenheit stays
+Fahrenheit. A unit conversion is a place to be wrong silently; the GHIS adapter took the same
+position for the same reason.
+
+**Decision: no Patient record from a vitals write.** The nurse's grant is Observation only and the
+ticket has no demographics. Observations file under `opd-pat-<mrn>`, which the registration
+migration will also use, so they attach to the master the day it exists. A ticket with no MRN is
+refused rather than given an invented patient.
+
+**Not done:** the doctor's writes (investigations, prescriptions, assessment) still go to GHIS; the
+record is not read back into any OPD screen; the safety engine is not wired to these observations.
+`WARDSYNQ_RECORD` stays OFF and the production schema unapplied.

@@ -17,6 +17,8 @@ import { RecordService, actorForMembership, recordPolicy, AuthorityError, MODE }
 import { grantForRole, roleMapping, aiActorFor, actorFromOpdRole } from "../functions/_wardsynq/actor.js";
 import { ROLES, CAPS, can as roleCan } from "../functions/_queue_roles.js";
 import { mintStaffSession, verifyStaffSession } from "../functions/_opd_auth.js";
+import { vitalsMode, patientIdForTicket, vitalsToObservations, vitalsMigration, recordVitals, VITAL_CODES } from "../functions/_wardsynq/migrate-vitals.js";
+import { readFileSync } from "node:fs";
 import { makeMockDb } from "../functions/_connect/testkit.js";
 import { can } from "../functions/_connect/enterprise/rbac.js";
 
@@ -564,4 +566,91 @@ test("AI drafts: written by the AI actor on the clinician's behalf, never author
   const human = actorFromOpdRole({ identity: { id: "fb:n" }, role: "nurse" });
   const bot = aiActorFor(human, { id: "maik" });
   assert.equal(bot.tier, "draft"); assert.deepEqual([...bot.scope.write], ["Observation"]); assert.equal(bot.onBehalfOf, "fb:n");
+});
+
+/* ------------------------------------------------------------------ the nurse-vitals migration */
+
+test("vitals migration is OFF unless the flag, the org's tenant link and the tenant's opt-in all say otherwise", async () => {
+  const org = { id: "org-gimsr", connectTenantId: "gimsr" };
+  const tenants = { gimsr: { id: "gimsr", settings: JSON.stringify({ wardsynq: { migrations: { vitals: "shadow" } } }) } };
+  const deps = { getOrg: async (env, id) => (id === "org-gimsr" ? org : null), tenantRow: async (env, id) => tenants[id] || null };
+  const session = { orgId: "org-gimsr" };
+  assert.deepEqual(await vitalsMigration({}, session, deps), { mode: "off", why: "flag" });
+  assert.deepEqual(await vitalsMigration({ WARDSYNQ_RECORD: "1" }, { orgId: "org-other" }, deps), { mode: "off", why: "no_tenant" });
+  assert.deepEqual(await vitalsMigration({ WARDSYNQ_RECORD: "1" }, {}, deps), { mode: "off", why: "no_org" });
+  const on = await vitalsMigration({ WARDSYNQ_RECORD: "1" }, session, deps);
+  assert.equal(on.mode, "shadow"); assert.equal(on.tenantId, "gimsr");
+  assert.equal((await vitalsMigration({ WARDSYNQ_RECORD: "1" }, session, { ...deps, getOrg: async () => { throw new Error("firestore down"); } })).mode, "off", "a broken lookup is off, never a crash");
+  assert.equal(vitalsMode({ settings: "{}" }), "off");
+  assert.equal(vitalsMode({ settings: JSON.stringify({ wardsynq: { migrations: { vitals: "authoritative" } } }) }), "authoritative");
+  assert.equal(vitalsMode({ settings: JSON.stringify({ wardsynq: { migrations: { vitals: "bogus" } } }) }), "off");
+  assert.equal(patientIdForTicket({ ghisPatientId: "GH/40118" }), "opd-pat-gh-40118");
+  assert.equal(patientIdForTicket({ ghisPatientId: "" }), null);
+});
+
+test("vitals to observations: coded, as reported, nothing invented, stable ids", () => {
+  const obs = vitalsToObservations({ vitals: { sbp: "142", dbp: "91", pulse: "88", temp: "99.1", tempUnit: "F", spo2: "97", rr: "", weight: "abc", note: "post-op day 1" }, patientId: "opd-pat-gh-1", ticketId: "T1", recordedAt: "2026-09-06T10:00:00.000Z" });
+  assert.deepEqual(obs.map((o) => [o.code, o.value, o.unit]), [["8480-6", 142, "mm[Hg]"], ["8462-4", 91, "mm[Hg]"], ["8867-4", 88, "/min"], ["8310-5", 99.1, "[degF]"], ["59408-5", 97, "%"]]);
+  for (const o of obs) {
+    assert.equal(o.resourceType, "Observation"); assert.equal(o.category, "vital-signs"); assert.equal(o.patientId, "opd-pat-gh-1");
+    assert.equal(o.codeSystem, "http://loinc.org"); assert.equal(o.meta.effectiveAt, "2026-09-06T10:00:00.000Z"); assert.equal(o.sourceText, "post-op day 1");
+    assert.equal(o.meta.source.system, "wardsynq-native");
+  }
+  assert.equal(obs[0].id, `opd-vitals-t1-${Date.parse("2026-09-06T10:00:00.000Z")}-sbp`);
+  assert.deepEqual(vitalsToObservations({ vitals: { temp: "37.2", tempUnit: "C" }, patientId: "p", ticketId: "T" }).map((o) => o.unit), ["Cel"]);
+  assert.deepEqual(vitalsToObservations({ vitals: { pulse: "" }, patientId: "p", ticketId: "T" }), []);
+  assert.deepEqual(Object.keys(VITAL_CODES), ["sbp", "dbp", "pulse", "temp", "spo2", "rr", "weight"]);
+});
+
+test("recordVitals: a nurse's vitals land in the record as her own EXECUTE-on-Observation actor; a retry replays; reception is refused; no MRN cannot be filed", async () => {
+  const h = opdHospital({ "fb:sister-anu": { role: "nurse" }, "fb:desk-1": { role: "reception" } }, { settings: { wardsynq: { migrations: { vitals: "shadow" } } } });
+  const env = { ...ENV };
+  const mig = { mode: "shadow", tenantId: "gimsr" };
+  const ticket = { id: "TKT-1", ghisPatientId: "GH-40118", ghisEpisodeId: "EP-9" };
+  const asNurse = new Request("https://x/api/queue/s1/timeline", { method: "POST", headers: { "X-Test-User": "fb:sister-anu" } });
+  const ctx = (req, vitals) => ({ migration: mig, session: { orgId: "org-gimsr" }, ticket, vitals, note: vitals.note, recordedAt: "2026-09-06T10:00:00.000Z",
+    actorDeps: { db: h.db, identifyFn: h.deps.identifyFn, claimsFn: h.deps.claimsFn, staffSession: null, orgForTenant: h.deps.orgForTenant, authorizeOrg: h.deps.authorizeOrg },
+    recordDeps: { repository: h.repository, pseudonym: async () => null } });
+
+  const r1 = await recordVitals(asNurse, env, ctx(asNurse, { sbp: "142", dbp: "91", spo2: "97", note: "" }));
+  assert.equal(r1.ok, true); assert.equal(r1.mode, "shadow"); assert.equal(r1.written, 3); assert.equal(r1.actor, "fb:sister-anu"); assert.equal(r1.role, "nurse");
+  assert.equal(r1.patientId, "opd-pat-gh-40118");
+  const stored = await h.repository.byPatient("gimsr", "Observation", "opd-pat-gh-40118");
+  assert.equal(stored.length, 3);
+  assert.equal(stored[0].writtenBy.id, "fb:sister-anu"); assert.equal(stored[0].writtenBy.tier, "execute"); assert.equal(stored[0].encounterId, "opd-enc-ep-9");
+  // A retried save (same ticket, same timestamp) replays; nothing duplicates.
+  const r2 = await recordVitals(asNurse, env, ctx(asNurse, { sbp: "142", dbp: "91", spo2: "97" }));
+  assert.equal(r2.ok, true); assert.ok(r2.records.every((x) => x.replayed && x.version === 1));
+  assert.equal((await h.repository.byPatient("gimsr", "Observation", "opd-pat-gh-40118")).length, 3);
+  // Reception holds no write: refused at the door, nothing written, and the result says which.
+  const asDesk = new Request("https://x/api/queue/s1/timeline", { method: "POST", headers: { "X-Test-User": "fb:desk-1" } });
+  const r3 = await recordVitals(asDesk, env, ctx(asDesk, { pulse: "80" }));
+  assert.equal(r3.ok, false); assert.equal(r3.status, 403); assert.equal(r3.error, "permission");
+  // No MRN on the ticket: cannot be filed, and says so rather than inventing a patient.
+  const r4 = await recordVitals(asNurse, env, { ...ctx(asNurse, { pulse: "80" }), ticket: { id: "TKT-2", ghisPatientId: "" } });
+  assert.equal(r4.ok, false); assert.equal(r4.error, "no_patient_identity");
+  const r5 = await recordVitals(asNurse, env, ctx(asNurse, { pulse: "", note: "only a note" }));
+  assert.equal(r5.ok, false); assert.equal(r5.error, "no_structured_vitals");
+  // Off means untouched.
+  assert.deepEqual(await recordVitals(asNurse, env, { ...ctx(asNurse, { pulse: "80" }), migration: { mode: "off", why: "flag" } }), { mode: "off", tenantId: null, ok: true, skipped: "flag", written: 0 });
+  // Every record write was audited as the nurse.
+  assert.ok(h.repository.audit.filter((a) => a.action === "record.write" && a.actor === "fb:sister-anu").length >= 3);
+});
+
+test("the queue timeline handler orders the writes by mode and leaves the off path byte-identical", () => {
+  const src = readFileSync(new URL("../functions/api/queue/[[path]].js", import.meta.url), "utf8");
+  const h = src.slice(src.indexOf('if (seg === "timeline") {'), src.indexOf('// Slide-to-checkout'));
+  const i = (needle) => { const k = h.indexOf(needle); assert.ok(k >= 0, "missing: " + needle); return k; };
+  // authoritative: record first, refusal returns before any timeline write, then the timeline as shadow.
+  const auth = h.slice(i('mig.mode === "authoritative"'), i("// shadow:"));
+  assert.ok(auth.indexOf("recordVitals(") < auth.indexOf("QT.appendTimeline("));
+  assert.ok(auth.indexOf('error: "record_refused"') < auth.indexOf("QT.appendTimeline("));
+  // shadow: timeline first, record after.
+  const shadow = h.slice(i("// shadow:"), i("return json(Object.assign({ ok: true }, await QT.appendTimeline("));
+  assert.ok(shadow.indexOf("QT.appendTimeline(") < shadow.indexOf("recordVitals("));
+  // off: the original single line, unchanged.
+  assert.ok(h.includes('return json(Object.assign({ ok: true }, await QT.appendTimeline(env, s, t, body.kind, body.text, actor.id)), 200, request);'));
+  // the console sends the structured values with the text
+  const html = readFileSync(new URL("../opd.html", import.meta.url), "utf8");
+  assert.ok(html.includes('kind:"vitals",text:p.join(" · "),vitals:vitals'));
 });
