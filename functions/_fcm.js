@@ -61,7 +61,14 @@ export async function sendFcm(env, token, msg) {
     message: {
       token,
       notification: { title: msg.title || "StewardMD", body: msg.body || "" },
-      data: { url: msg.url || "/", tag: msg.tag || "smd" },
+      // Custom data carried through, same as the APNs path. FCM requires every data value to be a
+      // STRING - a number or an object is rejected by the API - so they are coerced here rather
+      // than failing the send at Google's end with an opaque 400.
+      data: Object.assign(
+        { url: msg.url || "/", tag: msg.tag || "smd" },
+        msg.data && typeof msg.data === "object"
+          ? Object.fromEntries(Object.entries(msg.data).map(([k, v]) => [k, typeof v === "string" ? v : JSON.stringify(v)]))
+          : {}),
       android: { priority: "high" },
     },
   });
