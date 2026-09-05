@@ -153,6 +153,12 @@
   .vs-v .x{font-size:16px;font-weight:700;color:var(--ink);letter-spacing:-.01em}
   .vs-v .x small{font-size:11px;font-weight:600;color:var(--mut);margin-left:3px}
   .vs .note{font-size:12.5px;color:var(--ink-sec);margin-top:6px;white-space:pre-wrap}
+  /* The doctor's assessment, read from the clinical record. Same card language as vital signs. */
+  .asn-set{padding:8px 0;border-top:1px solid var(--line)}
+  .asn-set:first-of-type{border-top:0}
+  .asn-sec{margin:6px 0}
+  .asn-sec .n{font-size:11px;color:var(--mut);text-transform:uppercase;letter-spacing:.03em;font-weight:700}
+  .asn-sec .x{font-size:13px;color:var(--ink);white-space:pre-wrap;margin-top:2px}
   /* skeleton shimmer */
   .skel{background:linear-gradient(90deg,var(--btn) 25%,var(--line) 37%,var(--btn) 63%);background-size:400% 100%;animation:sh 1.4s ease infinite;border-radius:10px}
   /* nurse station status pills */
@@ -614,6 +620,53 @@
     else { if(st.tok) h["X-Staff-Token"]=st.tok; go(); }
     return box;
   }
+  // ---- the doctor's assessment, from the WardSynQ clinical record --------------------------------
+  // Same idea as vital signs above, reading the SAME generic record endpoint for a different
+  // resource type. The note's four SOAP sections are what functions/_wardsynq/migrate-assessment.js
+  // groups a much larger GHIS intake form into; nothing here re-derives that grouping.
+  var SOAP_LABEL={subjective:"Subjective",objective:"Objective",assessment:"Assessment",plan:"Plan"};
+  // `records` is one row per DISTINCT note (one per encounter), each already at its current latest
+  // version — the record's own append-only history of EARLIER drafts of any one note lives behind
+  // it, not shown here; this card is "what does the record say now", not a version browser.
+  function renderNotes(records){
+    var when=function(iso){ var d=new Date(iso); return isNaN(d)?"":d.toLocaleString([],{day:"2-digit",month:"short",hour:"2-digit",minute:"2-digit"}); };
+    var sorted=records.slice().sort(function(a,b){ return String((b.meta&&b.meta.recordedAt)||"").localeCompare(String((a.meta&&a.meta.recordedAt)||"")); });
+    var body=sorted.slice(0,5).map(function(n){
+      var secs=["subjective","objective","assessment","plan"].map(function(k){
+        var v=(n.sections||{})[k]; if(!v) return "";
+        return '<div class="asn-sec"><span class="n">'+SOAP_LABEL[k]+'</span><div class="x">'+esc(v)+'</div></div>';
+      }).join("");
+      var when2=when(n.meta&&n.meta.recordedAt);
+      var by=n.writtenBy?esc(n.writtenBy.id):(n.authorId?esc(n.authorId):"");
+      return '<div class="asn-set"><div class="w" style="display:flex;align-items:center;gap:8px;font-size:12px;color:var(--mut);margin-bottom:6px"><b style="color:var(--ink)">'+when2+'</b>'+(by?' · '+by:'')+(n.version>1?' · v'+n.version:'')+'</div>'+(secs||'<p class="st">No sections recorded.</p>')+'</div>';
+    }).join("");
+    var more=sorted.length>5?'<p class="st" style="margin:8px 0 0">'+(sorted.length-5)+' earlier '+(sorted.length-5===1?"assessment":"assessments")+' in the record.</p>':'';
+    return '<h4>Assessment<span class="src">Clinical record</span></h4><p class="st">Read from the clinical record</p>'+body+more;
+  }
+  function recordAssessmentBlock(rec,onDone){
+    var box=document.createElement("div"); box.className="vs"; box.setAttribute("aria-live","polite");
+    box.innerHTML='<h4>Assessment<span class="src">Clinical record</span></h4><p class="st">Loading from the clinical record…</p>';
+    if(!rec.patientId){ box.innerHTML='<h4>Assessment<span class="src">Clinical record</span></h4><p class="st">This patient has no medical record number, so an assessment cannot be filed in the clinical record for this visit.</p>'; onDone&&onDone(); return box; }
+    var h={}; var url="/api/wardsynq/"+encodeURIComponent(rec.tenantId)+"/patient/"+encodeURIComponent(rec.patientId)+"/ClinicalNote";
+    var go=function(){
+      return fetch(url,{headers:h}).then(function(r){ return r.json().catch(function(){return null;}).then(function(j){ return {status:r.status,body:j}; }); })
+        .then(function(x){
+          if(x.status===200&&x.body&&x.body.ok){
+            var records=x.body.records||[];
+            box.innerHTML=records.length?renderNotes(records):'<h4>Assessment<span class="src">Clinical record</span></h4><p class="st">No assessment in the clinical record for this patient yet.</p>';
+          }
+          else if(x.status===403) box.innerHTML='<h4>Assessment<span class="src">Clinical record</span></h4><p class="st">Your role cannot view the clinical record. The visit timeline above is still available.</p>';
+          else if(x.status===401) box.innerHTML='<h4>Assessment<span class="src">Clinical record</span></h4><p class="st">Sign in again to read the clinical record.</p>';
+          else if(x.status===404) box.innerHTML='<h4>Assessment<span class="src">Clinical record</span></h4><p class="st">The clinical record is not available for this clinic right now. The visit timeline above is unaffected.</p>';
+          else box.innerHTML='<h4>Assessment<span class="src">Clinical record</span></h4><p class="st">Could not reach the clinical record. Showing the visit timeline only.</p>';
+        })
+        .catch(function(){ box.innerHTML='<h4>Assessment<span class="src">Clinical record</span></h4><p class="st">Could not reach the clinical record. Showing the visit timeline only.</p>'; })
+        .then(function(){ onDone&&onDone(); });
+    };
+    if(st.tokType==="firebase") fbToken().then(function(t){ if(t) h["Authorization"]="Bearer "+t; return go(); });
+    else { if(st.tok) h["X-Staff-Token"]=st.tok; go(); }
+    return box;
+  }
   function openNotes(sid,tid,name){
     open('<h3>Clinical notes'+(name?' - '+esc(name):'')+'</h3><p class="t" style="margin:-6px 0 10px">View only. Doctors record notes; you can read and download.</p><div class="drawer" id="nd">Loading…</div><div class="row2"><button class="cancel" id="cx">Close</button><button class="btn" id="dl" style="margin:0" disabled>Download</button></div>');
     sheet.querySelector("#cx").onclick=close;
@@ -628,7 +681,7 @@
       // The record's vital signs sit ABOVE the narrative, and only where the server says the clinic
       // has a record to read. With the tenant off (every clinic today) there is no `record` key and
       // this drawer is exactly what it was.
-      if(r.record&&r.record.tenantId) el.insertBefore(recordVitalsBlock(r.record),el.firstChild);
+      if(r.record&&r.record.tenantId){ el.insertBefore(recordAssessmentBlock(r.record),el.firstChild); el.insertBefore(recordVitalsBlock(r.record),el.firstChild); }
       var dl=sheet.querySelector("#dl"); if(dl){ dl.disabled=!entries.length; dl.onclick=function(){ downloadNotes(name,tl); }; }
     };
     if(st.orgId==="demo"){ var n=Date.now(); show({ok:true,timeline:{mrnLast4:"4821",entries:[

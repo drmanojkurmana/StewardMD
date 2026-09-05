@@ -39,6 +39,8 @@ import { verifyStaffSession, verifySecret, pinLocked, nextPinState, mintStaffSes
 // handler below dual-writes, timeline first in "shadow", record first in "authoritative".
 import { vitalsMigration, recordVitals, patientIdForTicket } from "../../_wardsynq/migrate-vitals.js";
 import { registrationMigration, registerPatientRecord } from "../../_wardsynq/migrate-registration.js";
+import { assessmentMigration, recordAssessment } from "../../_wardsynq/migrate-assessment.js";
+import { recordLinkForOrg } from "../../_wardsynq/migration-tenant.js";
 import { actorDeps as wsqActorDeps, recordDeps as wsqRecordDeps } from "../../_wardsynq/deps.js";
 const wsqTenantRow = (e, id) => (e.CONNECT_DB ? e.CONNECT_DB.prepare("SELECT * FROM connect_tenant WHERE id=?").bind(String(id)).first() : null);
 import "../../_opd_ghis_connector.js";   // side-effect: registers the "ghis" OPD connector
@@ -506,12 +508,14 @@ export async function onRequest(context) {
       const t = await Q.getTicket(env, url.searchParams.get("ticketId") || "");
       if (!t || t.sessionId !== s.id) return json({ ok: false, error: "not_found" }, 404, request);
       const out = { ok: true, timeline: await QT.getTimeline(env, t.id) };
-      // Where this patient's structured vitals live in the WardSynQ record, when this tenant has
-      // opted in (_wardsynq/migrate-vitals.js). Off, the default: no key, the response is what it was.
-      // The console then reads GET /api/wardsynq/:tenant/patient/:patientId/Observation with its own
+      // Where this patient's WardSynQ record lives, whenever this org's tenant is reachable at all —
+      // NOT gated to whichever specific write (vitals, registration, assessment...) happens to be
+      // migrated for this tenant, because a device reading back must not have to guess which one.
+      // Off, the default: no key, the response is what it was. The console reads
+      // GET /api/wardsynq/:tenant/patient/:patientId/<Observation|ClinicalNote> with its own
       // credentials; the record decides for itself whether this person may see them.
-      const mig = await vitalsMigration(env, s, { getOrg: ORG.getOrg, tenantRow: wsqTenantRow });
-      if (mig.mode !== "off") out.record = { tenantId: mig.tenantId, patientId: patientIdForTicket(t), mode: mig.mode, ticketId: t.id };
+      const link = await recordLinkForOrg(env, s.orgId || s.hospitalId, { getOrg: ORG.getOrg, tenantRow: wsqTenantRow });
+      if (link) out.record = { tenantId: link.tenantId, patientId: patientIdForTicket(t), ticketId: t.id };
       return json(out, 200, request);
     }
     // Doctor's treated-patient history (self-expiring at the link's 7-30d window).
@@ -820,24 +824,37 @@ export async function onRequest(context) {
       }
       if (seg === "timeline") {
         const isVitals = QT.tlKind(body.kind) === "vitals";
+        const isAssessment = QT.tlKind(body.kind) === "assessment";
         await requireSessionCap(env, actor, s, isVitals ? CAPS.EMR_VITALS : CAPS.EMR_TREAT);
         const t = await Q.getTicket(env, body.ticketId);
         if (!t || t.sessionId !== s.id) return json({ ok: false, error: "not_found" }, 404, request);
-        // The nurse-vitals migration. With the tenant "off" (the default, and every tenant today) this
-        // branch is not entered and the response is exactly what it was. See _wardsynq/migrate-vitals.js.
-        const mig = isVitals ? await vitalsMigration(env, s, { getOrg: ORG.getOrg, tenantRow: wsqTenantRow }) : { mode: "off" };
+        // Two independent migrations share this one endpoint, because that is where each write
+        // already lands: the nurse's vitals (_wardsynq/migrate-vitals.js) and, since 2026-09-06, the
+        // doctor's assessment (_wardsynq/migrate-assessment.js). Neither touches "note"/"medication"
+        // kinds — investigations and prescriptions are not migrated. With the tenant "off" (the
+        // default, and every tenant today) neither branch is entered and the response is unchanged.
+        const mig = isVitals ? await vitalsMigration(env, s, { getOrg: ORG.getOrg, tenantRow: wsqTenantRow })
+          : isAssessment ? await assessmentMigration(env, s, { getOrg: ORG.getOrg, tenantRow: wsqTenantRow })
+          : { mode: "off" };
+        const migrator = isVitals ? recordVitals : recordAssessment;
         if (mig.mode !== "off") {
-          const ctx = { migration: mig, session: s, ticket: t, vitals: body.vitals, note: body.vitals && body.vitals.note, recordedAt: new Date().toISOString(), actorDeps: wsqActorDeps(env), recordDeps: wsqRecordDeps(env, mig.tenantId) };
+          const ctx = isVitals
+            ? { migration: mig, session: s, ticket: t, vitals: body.vitals, note: body.vitals && body.vitals.note, recordedAt: new Date().toISOString(), actorDeps: wsqActorDeps(env), recordDeps: wsqRecordDeps(env, mig.tenantId) }
+            : { migration: mig, session: s, ticket: t, vals: body.vals, actorDeps: wsqActorDeps(env), recordDeps: wsqRecordDeps(env, mig.tenantId) };
           if (mig.mode === "authoritative") {
-            // The record is the record: it must accept the vitals before the timeline copy is made.
-            const rec = await recordVitals(request, env, ctx);
+            // The record must accept before the timeline copy is made — true for vitals, whose
+            // record write and timeline write are peers in this ONE request. For the assessment the
+            // GHIS save already happened via a wholly separate request before this endpoint was even
+            // reached (migrate-assessment.js explains why); "authoritative" there means the refusal
+            // is reported to the caller, not that anything upstream is undone.
+            const rec = await migrator(request, env, ctx);
             if (!rec.ok) return json({ ok: false, error: "record_refused", wardsynq: rec }, rec.status || 502, request);
             const legacy = await QT.appendTimeline(env, s, t, body.kind, body.text, actor.id);
             return json(Object.assign({ ok: true }, legacy, { wardsynq: rec }), 200, request);
           }
           // shadow: the timeline is still what the ward reads; the record write reports, never throws.
           const legacy = await QT.appendTimeline(env, s, t, body.kind, body.text, actor.id);
-          const rec = await recordVitals(request, env, ctx);
+          const rec = await migrator(request, env, ctx);
           return json(Object.assign({ ok: true }, legacy, { wardsynq: rec }), 200, request);
         }
         return json(Object.assign({ ok: true }, await QT.appendTimeline(env, s, t, body.kind, body.text, actor.id)), 200, request);

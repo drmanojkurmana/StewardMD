@@ -56,4 +56,20 @@ async function resolveMigration(env, orgId, key, deps) {
   }
 }
 
-export { MODES, migrationModeOf, resolveTenantForOrg, resolveMigration };
+/**
+ * Whether — and where — this org's tenant CAN be read from, independent of which specific write is
+ * migrated. A GET should never have to ask "is vitals on?" to decide whether it may name the record;
+ * a tenant with only registration or only notes migrated must still let a device read whichever of
+ * those exists. Returns `{tenantId}` or null (flag off, no linked tenant, or a broken lookup).
+ */
+async function recordLinkForOrg(env, orgId, deps) {
+  try {
+    if (!env || String(env.WARDSYNQ_RECORD) !== "1") return null;
+    const r = await resolveTenantForOrg(env, orgId, deps);
+    return r.tenant ? { tenantId: r.tenantId } : null;
+  } catch (e) {
+    return null;
+  }
+}
+
+export { MODES, migrationModeOf, resolveTenantForOrg, resolveMigration, recordLinkForOrg };

@@ -41,7 +41,7 @@ import { resolveClinicalActor } from "./actor.js";
 import { RecordService } from "./service.js";
 import { AuthError, PermissionError } from "../_connect/permission.js";
 import { MODES, migrationModeOf, resolveMigration } from "./migration-tenant.js";
-import { patientIdForMrn, patientIdForTicket } from "./opd-identity.js";
+import { patientIdForMrn, patientIdForTicket, encounterIdForTicket } from "./opd-identity.js";
 
 export { patientIdForTicket };
 
@@ -126,7 +126,7 @@ async function recordVitals(request, env, ctx) {
   if (!patientId) return { ...base, ok: false, status: 422, error: "no_patient_identity", written: 0 };
   const observations = vitalsToObservations({
     vitals: ctx.vitals, patientId, ticketId: ctx.ticket.id,
-    encounterId: ctx.ticket.ghisEpisodeId ? `opd-enc-${String(ctx.ticket.ghisEpisodeId).toLowerCase()}` : null,
+    encounterId: encounterIdForTicket(ctx.ticket),
     recordedAt: ctx.recordedAt, note: ctx.note,
   });
   if (!observations.length) return { ...base, ok: false, status: 422, error: "no_structured_vitals", written: 0, patientId };

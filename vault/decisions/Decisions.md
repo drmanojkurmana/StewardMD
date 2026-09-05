@@ -4284,3 +4284,37 @@ capability-derived rather than adding an if-role-is-reception special case.
 the MRN, so there is no code path that could combine two DIFFERENT mrns into one Patient. What DOES
 need an explicit governed step, and is explicitly NOT built here, is the provisional-to-real MRN
 promotion (`linkHospitalMrn`) — a genuine identity link, left for its own migration.
+
+## 2026-09-06 — The doctor's assessment: SOAP structure over a 90-field GHIS form, not a second model
+
+**Decision: group into the model's own SOAP hint, do not transcribe the GHIS schema.** The canonical
+`ClinicalNote.sections` docstring already says "e.g. {subjective, objective, assessment, plan}" — an
+open shape, not an enforced one. Reproducing GHIS's ~90 bespoke intake fields as WardSynQ fields
+would BE the second model the task forbids, since those names belong to one hospital's form, not to
+a clinical concept. Four SOAP keys for the universally meaningful subset, `sections.raw` carrying
+everything else verbatim, so the grouping is honest about what it groups and does not discard the
+rest under the excuse of "it's structured now."
+
+**Decision: reuse the vitals seam exactly, do not add a second hook point.** The doctor's real
+clinical write already lands in GHIS through a separate file this migration never touches; the ONLY
+integration point available, before or after this work, is the same `addToTimeline` → `POST
+/api/queue/timeline` call vitals uses. Extending that one branch (dispatch on `kind`) rather than
+adding a second endpoint keeps the whole "one clinical write, one place it enters WardSynQ" property
+vitals established.
+
+**Decision: one id per encounter, versioned — the SAME concurrency answer as registration.** A note
+is not a log of separate entries; it is the ONE evolving document for a visit, exactly as GHIS itself
+treats its Initial Assessment before "Authorise" locks it. `expectedVersion` is therefore the right
+concurrency control here too, not a fresh id per save (which would have made "amendment" and
+"overwrite" indistinguishable) and not a merge (which would have made concurrent edits invisible to
+each other).
+
+**Decision: generalise the GET's record-link, don't special-case a third resource type into it.**
+The alternative — asking "is vitals on, OR is registration on, OR is assessment on" — grows one
+clause per future migration. `recordLinkForOrg` answers the real question (can this tenant's record
+be read at all) once, and each migration decides for itself, independently, what to WRITE.
+
+**Decision: make `authoritative` honest on the client, minimally.** `addToTimeline`'s fetch had no
+`.then()` at all — even an HTTP error vanished silently. Claiming an authoritative mode exists while
+a refusal could never reach the doctor would be exactly the kind of claim this project does not make.
+One additive check, one toast, fires on nothing today.
