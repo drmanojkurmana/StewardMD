@@ -88,6 +88,21 @@ export async function sendApns(env, deviceToken, msg, topic, apnsEnv) {
     url: msg.url || "/",
   };
   if (msg.route) payload.route = msg.route;   // watch deep-link target (e.g. "tasks")
+  // Custom data, carried as top-level keys alongside `aps` - which is where APNs puts them and
+  // where Capacitor reads them back into notification.data on the device.
+  //
+  // This was silently dropped until a device test caught it: the endpoint sent a noticeId, the
+  // handset received a push containing only { aps, url }, and the WardSynQ receipt had nothing to
+  // identify itself with. An escalation whose identity does not survive the transport cannot be
+  // acknowledged, so the loop could never close. `aps` and `url` are protected from being
+  // overwritten by a caller's key of the same name.
+  if (msg.data && typeof msg.data === "object") {
+    for (const k of Object.keys(msg.data)) {
+      if (k === "aps" || k === "url") continue;
+      payload[k] = msg.data[k];
+    }
+    if (msg.data.url) payload.url = msg.data.url;
+  }
   const body = JSON.stringify(payload);
   const host = APNS_HOSTS[apnsEnv] || apnsHost(env);
   const res = await fetch(host + "/3/device/" + deviceToken, {
