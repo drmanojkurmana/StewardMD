@@ -211,6 +211,12 @@
         var title = (n && n.title) || d.title || "StewardMD";
         var body = (n && n.body) || d.body || "New update";
         var url = d.url || d.URL || "/";
+        // A deterioration escalation arriving while the app is OPEN goes straight to the
+        // acknowledgement screen rather than becoming a banner behind whatever is on screen. An
+        // escalation that waits politely for a tap is an escalation nobody has answered.
+        if (d.type === "wardsynq-alert" && window.SMD_showWardSynQAlert) {
+          if (window.SMD_showWardSynQAlert(d, title, body)) return;
+        }
         if (window.SMD_localNotify) window.SMD_localNotify(title, body, url);
         else if (window.SMD_toast) window.SMD_toast(title + " — " + body);
         if (window.SMD_refreshNotifBadge) window.SMD_refreshNotifBadge();
@@ -225,7 +231,12 @@
         // recorded; neither is an acknowledgement, which stays an explicit act in the alert UI.
         if (data && data.type === "wardsynq-alert") {
           wardsynqReceipt("delivered", data);
-          wardsynqReceipt("viewed", data);
+          // The acknowledgement screen posts `viewed` itself when it opens, so this path does not
+          // duplicate it. Opening the screen is the whole purpose of the tap: routing to "/" left a
+          // clinician with a banner and nowhere to answer it.
+          var n = (a && a.notification) || {};
+          if (window.SMD_showWardSynQAlert && window.SMD_showWardSynQAlert(data, n.title, n.body)) return;
+          wardsynqReceipt("viewed", data);   // the screen is unavailable; the view still happened
         }
         // FollowCare push → deep-link straight to that patient's recovery detail in-app (covers cold-launch).
         if (data && data.type === "followcare" && data.episodeId && window.FollowCare && window.FollowCare.openDetail) {
