@@ -41,6 +41,28 @@ Turning these on does not enable a feature; it breaks one.
 
 Both open **per device** today via the sidebar Experimental access code, so testers already reach them. Flipping the default makes them live for every user of the build.
 
+## WardSynQ — three flags, all OFF, added 2026-09-05
+
+Registry: `wardsynq-flags.js` (repo root), read as query param → localStorage → default. Not in the
+2026-08-26 generated count above, which predates them.
+
+| Flag | State | What turning it on does |
+|---|---|---|
+| `smd_wardsynq` | OFF | The WardSynQ surfaces. Nothing in WardSynQ is clinically approved. |
+| `smd_wardsynq_shadow` | OFF | Observation only. A GHIS bundle already ingested by the legacy path is additionally mapped through the WardSynQ adapter and the result COUNTED AND DISCARDED — no store, no event bus, no chart, no safety state. Not loading the file removes the change entirely. |
+| `smd_wardsynq_cutover` | OFF | **The one to be careful with.** Routes the live mobile path onto the adapter. Do not enable on a real clinical device: no clinical content in WardSynQ is approved, and the adapter has never seen a real GHIS bundle in anger. |
+
+On the NATIVE app there is no address bar, so the query param is unreachable — set the flag with
+`SMD_WARDSYNQ_FLAGS.set('smd_wardsynq_shadow', true)` in the WebView console, then reload. A
+reinstall clears `localStorage`, so a flag does NOT survive one.
+
+**Two things are deliberately NOT behind a flag**, and the reasoning is the same in both cases —
+gating them off produces a worse failure than leaving them present:
+- `wardsynq-alert-ui.js`, the forced acknowledgement screen. Inert until a `wardsynq-alert` push
+  arrives. Gated off, an escalation would reach a handset with no way to answer it.
+- `opd-boot.js`, the bedside mount. Unconfigured it paints an explicitly disabled "not connected to
+  a patient record" surface rather than a plausible-looking drug round.
+
 ## Everything, by module
 
 ### CliniX  <sub>5 ON · 2 OFF</sub>

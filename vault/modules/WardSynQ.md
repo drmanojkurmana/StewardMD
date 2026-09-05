@@ -3,11 +3,25 @@
 Hospital Clinical OS and EMR **inside StewardMD**, not a separate repo or product codebase.
 `wardsynq.com` is its web surface. Owner decision 2026-09-04. Spec: `~/Downloads/implementation_planfinal.md`.
 
-STATUS: **P0 to P3 built.** 956 tests across 44 suites. The clinical workstation UI
-exists at `wardsynq/ui/` and is wired to a `GovernedStore`, but it is behind no route in the mobile
-app and is not reachable by any user. All clinical content (interaction, allergy, dose ceiling and
-critical threshold packs) is UNAPPROVED seed data and must not gate a real order until pharmacy and
-the relevant committee sign it off.
+STATUS: **P0 to P3 built.** The clinical workstation UI exists at `wardsynq/ui/` and is wired to a
+`GovernedStore`, but it is behind no route in the mobile app and is not reachable by any user. All
+clinical content (interaction, allergy, dose ceiling and critical threshold packs) is UNAPPROVED seed
+data and must not gate a real order until pharmacy and the relevant committee sign it off.
+
+## Read the status words carefully — they are not synonyms
+
+This note uses four levels and they mean different things. Most of what follows is at level 2 or 3,
+and NOTHING in WardSynQ is at level 4.
+
+| Level | Means | Who can grant it |
+|---|---|---|
+| **IMPLEMENTED** | The code exists and its unit tests pass. | Anyone |
+| **VERIFIED (software)** | The behaviour was driven end to end in a harness or a real browser, not only asserted in a unit test. | Anyone |
+| **VERIFIED (device)** | The behaviour was driven on real hardware — a real push to a real handset, a real human answering. | Anyone with the device |
+| **CLINICALLY APPROVED** | A named clinician or committee has signed off the clinical content and the policy attached to it. | **Only them. Nothing here has this.** |
+
+A thing can be VERIFIED (device) and still be clinically worthless: the notification chain works and
+the escalation policy it carries is unapproved seed content. Do not read the first as the second.
 
 The safety case is executable: `node scripts/wardsynq-assurance.mjs` runs the real suites and
 cross-references the hazard table against what actually passed. It currently reports **14 of 16
@@ -250,9 +264,88 @@ adequate and it does not mean the clinical content is approved. Nothing in this 
 VALIDATED or CLINICALLY APPROVED, the threshold, allergy and dose packs are marked seed content, and
 `report()` prints that unconditionally so nobody can read the table without it.
 
-The largest single gap is that NO NOTIFICATION TRANSPORT IS SHIPPED. Every channel is a function a
-site supplies and this build supplies none, which is why both local hazards are PARTIAL. The modules
-refuse rather than pretend: a monitor with no channel will not raise.
+**That paragraph used to say the largest gap was that no notification transport was shipped. As of
+2026-09-05 that is no longer true**, and the correction matters because the sentence was quoted as a
+reason both local hazards were PARTIAL. A StewardMD Mobile channel is shipped and has carried a real
+escalation to a real handset. The gap that remains is not transport; it is approval.
+
+## The notification chain (2026-09-05, nine PRs)
+
+IMPLEMENTED and VERIFIED (device). The chain, end to end:
+
+    NEWS2 / sepsis prompt / bundle breach
+      -> wardsynq-orchestrator.js        one alert identity across every channel
+      -> wardsynq-transport.js           durable outbox, failover ladder, SENT/DELIVERED/VIEWED/SEEN
+      -> StewardMD Mobile (APNs/FCM)     the product's existing push, not a new backend
+      -> wardsynq-alert-ui.js            forced acknowledgement screen on the handset
+      -> receipt                         the handset says it arrived; a human says they took it
+      -> ONE patient-timeline event      and re-escalation stops
+
+What each piece is worth, stated separately:
+
+- **One orchestrator, one state machine** (`wardsynq-orchestrator.js`). One alertId, noticeId and
+  patientId travel across every channel. Acknowledgement delegates to `Transport.acknowledge`, still
+  the only writer of the authoritative record, and emits exactly ONE bus event with a derived id, so
+  a late acknowledgement from a second channel is a no-op rather than a second clinical fact.
+  `VIEWED` was added between DELIVERED and SEEN: a phone buzzing in a pocket is delivered; a
+  registrar opening the alert is not yet a registrar accepting it.
+- **All three raising modules feed it, and none of them changed.** `wardsynq-deterioration.js`,
+  `wardsynq-recognition.js` and `wardsynq-emergency.js` are byte-identical, verified by `git diff`.
+  The transport reads their three payload shapes explicitly rather than reshaping tested clinical
+  modules to suit a transport.
+- **Escalation behaviour.** A re-escalation is NOT a repeat: the escalation's tier becomes the notice
+  sequence, so an unanswered alert going to a tier above raises a NEW notice to a NEW responder.
+  Answering ANY notice answers the alert. A bundle element's warning and its later breach are one
+  alert escalating; the same warning swept twice raises nothing; the same element on a later episode
+  is a different alert, because time zero is part of the derived identity.
+- **The acknowledgement travels back to the monitor**, over that same single event
+  (`connectDeterioration`). Without it the halves drift: the orchestrator knows an alert is answered
+  while the monitor keeps re-escalating it, which is the alarm fatigue that makes a ward stop reading
+  escalations.
+- **Delivery is not assumed.** A push accepted by APNs is SENT. Only the handset's own receipt makes
+  it DELIVERED. In the live demonstration the escalation correctly read `delivered: false` after the
+  gateway accepted it for 4 of 11 devices — which is the system being right, and is what keeps the
+  re-escalation timer running.
+- **The forced acknowledgement screen** (`wardsynq-alert-ui.js`). No auto-dismiss, no timeout, and it
+  cannot be dismissed beside it, by Escape or by the back gesture. Two answers, and only one closes
+  the loop: ACKNOWLEDGE posts and stands every channel down; I CANNOT ATTEND deliberately posts no
+  acknowledgement and leaves the escalation outstanding so the ladder finds somebody who can. A
+  failed acknowledgement does not look like a successful one — the screen stays open and says the
+  escalation is still live.
+
+### The live demonstration, 2026-09-05
+
+VERIFIED (device), on an iPhone 15 Pro, one run:
+
+    NEWS2 total=16 risk=high, responder "critical care outreach, emergency", within 15min
+    push accepted for 4 of 11 devices -> reported SENT, delivered=false
+    [a named clinician tapped Acknowledge on the forced screen]
+    timelineEntries : 1
+    monitorState    : acknowledged
+    shouldEscalate  : false
+
+The patient was `DEMO-PAT-1`. No clinical threshold or response window was touched: the score came
+from the shipped `news2()` and the window and responder from the module's own escalation table.
+
+### Device identity and token hygiene
+
+IMPLEMENTED. Registration now captures `installId` (survives app updates, NOT a reinstall — the
+correct granularity, since a reinstall mints a new APNs token), an optional owner-set `label`,
+best-effort `model`/`osVersion`/`appVersion` from the user agent, and `firstSeen` written once and
+never rewritten. `GET /api/push/devices` lists the caller's own registrations, read-only, returning
+an 8-character fingerprint and never the token. Rows predating this return `identified: false`
+rather than blanks.
+
+APNs environment is now resolved PER TOKEN. `APNS_ENV` is unchanged and still tried first, so
+production sending is untouched; only a token Apple rejects as not-valid-here retries against the
+other host, and success is remembered. Previously such a token was PRUNED, so a development handset
+silently stopped receiving anything and it looked like a broken push system.
+
+Fan-out behaviour is deliberately unchanged: an account-scoped alert still goes to every active
+token. Pruning is evidence-based only — a token rejected by BOTH hosts is removed automatically, and
+on 2026-09-05 four fell out that way during the demonstration. One further token was removed by hand
+because identity demonstrated a superseded install; distinct active devices were kept regardless of
+age.
 
 ## Not built yet
 
@@ -295,11 +388,38 @@ real browser: scanning `DEMO-0001` confirms identity and enables the three actio
 `WRONG-PATIENT-9999` revokes identity, re-disables all three, and shows the ENGINE's message ("either
 the wrong chart is open or you are at the wrong patient") rather than one the view invented.
 
-What is genuinely unbuilt: CTG and fetal monitoring (see HAZ-MAT-01), and the link from a real
-deterioration escalation into `wardsynq-orchestrator.js` - nothing calls the orchestrator yet, so the
-NEWS2 -> escalation -> mobile -> acknowledgement -> timeline chain is not connected end to end.
+What is genuinely unbuilt: **CTG and fetal monitoring** (see HAZ-MAT-01) — a large, separate hazard
+that `wardsynq-obstetrics.js` explicitly does not cover and must not be read as covering. Not
+started, and it should not be started without clinical scoping first.
 
-Production gaps, unchanged and load-bearing: NO NOTIFICATION TRANSPORT of any kind, which is why both
-local hazards are PARTIAL; no service worker for either surface; a CDN webfont; no barcode hardware,
-so every scan is a supplied value; and the secops document "signing" is a content digest that must be
-replaced by real cryptography.
+Production gaps, load-bearing: no service worker for either surface; a CDN webfont; no barcode
+hardware, so every scan is a supplied value; and the secops document "signing" is a content digest
+that must be replaced by real cryptography. **The "no notification transport" gap that used to head
+this list is closed** — see the notification chain section above.
+
+## The two PARTIAL hazards: what is actually blocking each
+
+Both remain PARTIAL after 2026-09-05, and in both cases the remaining blocker is a CLINICAL SIGN-OFF
+rather than code. Recorded plainly so nobody re-does the engineering expecting the row to move.
+
+**HAZ-DET-01 — unrecognised or unanswered deterioration (failure to rescue).**
+- IMPLEMENTED and VERIFIED (device): the whole chain, demonstrated above.
+- AWAITING CLINICAL SIGN-OFF: the ESCALATION POLICY — response windows and responder tiers — is
+  UNAPPROVED and belongs to the **resuscitation committee**. The NEWS2 parameter bands themselves are
+  the RCP's published 2017 chart; the policy attached to them is not.
+- Also outstanding, and smaller: nothing has yet carried a REAL patient's escalation (the
+  demonstration used `DEMO-PAT-1`), and the ladder below mobile still reaches only somebody at a
+  screen — no pager, SMS or phone vendor is integrated.
+
+**HAZ-TIME-01 — delayed time-critical treatment, and falsified bundle timing.**
+- IMPLEMENTED: bundle warnings and breaches now address through the orchestrator to a handset.
+- AWAITING CLINICAL SIGN-OFF: the local policy attached to the published Surviving Sepsis and ACLS
+  intervals is UNAPPROVED.
+- Structural, and not a sign-off problem: ATTESTATION IS STILL PERMITTED, deliberately. A bundle can
+  be compliant on claims alone and only `provenanceReport()` will say so. Elements that are purely
+  human acts with no observing system — taking blood cultures — can never be more than attested.
+  Delivering a warning is not evidence that an antibiotic was given.
+
+**Applies to all 16 hazards, not just these two:** zero have clinical sign-off. Every threshold pack
+— MEOWS cut-offs, PEWS bands, critical-result limits, escalation policy — is UNAPPROVED seed content
+owned by the relevant lead. `scripts/wardsynq-assurance.mjs` prints that unconditionally.

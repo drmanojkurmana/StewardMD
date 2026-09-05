@@ -51,6 +51,27 @@ Pending / deferred, by area. `- [ ]` so Obsidian renders checkboxes (Tasks/Datav
 - [ ] [[Medical Knowledge Base]] — Obsidian → build pipeline for clinical content; dx-mgmt enrichment merge
 - [ ] [[FollowCare]] owner TODOs (clinician thresholds, translations, R2 bind, WhatsApp BSP)
 
+## [[WardSynQ]] — blocked on people, not on code
+
+Recorded 2026-09-05 after the notification chain was completed and demonstrated on a device. These
+are NOT engineering tasks and should not be picked up as if they were.
+
+- [ ] **Resuscitation committee: approve the escalation policy** — response windows and responder
+      tiers. This is the sole remaining blocker on HAZ-DET-01. The chain is built and demonstrated on
+      hardware; the policy it carries is unapproved seed content.
+- [ ] **Clinical sign-off on every threshold pack** — MEOWS cut-offs (obstetric lead), PEWS bands
+      (paediatric lead), critical-result limits including paediatric ranges, interaction/allergy/dose
+      packs (pharmacy). ZERO of 16 hazards have sign-off today.
+- [ ] Carry a REAL patient's escalation end to end. The 2026-09-05 demonstration used `DEMO-PAT-1`.
+- [ ] A pager/SMS/phone vendor, if the ward wants a channel that reaches somebody not already at a
+      screen. Mobile push is shipped and proven; the ladder below it is not.
+
+Engineering that is deliberately NOT started:
+- [ ] **CTG / fetal monitoring** — a large separate hazard under HAZ-MAT-01. Needs clinical scoping
+      before a line is written; an unapproved implementation here would be worse than none.
+- [ ] Service worker for the WardSynQ surfaces; barcode hardware; replace the secops content digest
+      with real asymmetric signing.
+
 ## Security / ops
 - [ ] Rotate: Mac pw, admin token (done?), 2Factor, Green-API, GHIS, Resend, keystore; move+rotate the Firebase-admin JSON out of ~/Downloads
 - [ ] Gemini model migration before 2027-01-28 (env-swappable)
