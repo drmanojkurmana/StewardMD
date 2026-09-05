@@ -18,6 +18,8 @@ import { grantForRole, roleMapping, aiActorFor, actorFromOpdRole } from "../func
 import { ROLES, CAPS, can as roleCan } from "../functions/_queue_roles.js";
 import { mintStaffSession, verifyStaffSession } from "../functions/_opd_auth.js";
 import { vitalsMode, patientIdForTicket, vitalsToObservations, vitalsMigration, recordVitals, VITAL_CODES } from "../functions/_wardsynq/migrate-vitals.js";
+import { registrationMigration, patientFromRegistration, sameDemographics, registerPatientRecord } from "../functions/_wardsynq/migrate-registration.js";
+import { patientIdForMrn } from "../functions/_wardsynq/opd-identity.js";
 import { readFileSync } from "node:fs";
 import { makeMockDb } from "../functions/_connect/testkit.js";
 import { can } from "../functions/_connect/enterprise/rbac.js";
@@ -427,8 +429,11 @@ test("role mapping: every one of the eighteen operational roles resolves to exac
   const write = (r) => (m[r] ? m[r].write : "none");
   const read = (r) => (m[r] ? m[r].read : "none");
   for (const r of ["doctor", "pg_faculty", "pg_hod", "admin"]) { assert.equal(tier(r), TIER.EXECUTE, r); assert.equal(write(r), null, r); assert.equal(read(r), null, r); }
-  for (const r of ["nurse", "intern", "resident", "pg_resident"]) { assert.equal(tier(r), TIER.EXECUTE, r); assert.deepEqual(write(r), ["Observation"], r); assert.equal(read(r), null, r); }
-  for (const r of ["supervisor", "reception"]) { assert.equal(tier(r), TIER.READ, r); assert.deepEqual(write(r), [], r); assert.equal(read(r), null, r); }
+  // 2026-09-06: QUEUE_ADD ("register / walk-in a patient") now adds Patient to the write scope and,
+  // for a role that held only READ before (supervisor, reception), raises the tier to EXECUTE — the
+  // same reasoning EMR_VITALS already established for a nurse's vitals. See actor.js's header.
+  for (const r of ["nurse", "intern", "resident", "pg_resident"]) { assert.equal(tier(r), TIER.EXECUTE, r); assert.deepEqual(write(r), ["Observation", "Patient"], r); assert.equal(read(r), null, r); }
+  for (const r of ["supervisor", "reception"]) { assert.equal(tier(r), TIER.EXECUTE, r); assert.deepEqual(write(r), ["Patient"], r); assert.equal(read(r), null, r); }
   for (const r of ["cashier", "pharmacy"]) { assert.equal(tier(r), TIER.READ, r); assert.deepEqual(write(r), [], r); assert.deepEqual(read(r), ["MedicationOrder", "ServiceRequest"], r); }
   for (const r of ["hr", "viewer", "oncqis_protocol_author", "oncqis_clinical_reviewer", "oncqis_institutional_approver", "academic_cell"]) assert.equal(m[r], null, r + " has no clinical actor");
   // The mapping is derived, so it cannot drift from the queue's own non-negotiable.
@@ -458,11 +463,12 @@ test("OPD roles at the door: doctor writes and signs, nurse records vitals and n
   const rx = await doctor.session("pat-20").put(MedicationOrder({ id: "rx-20", patientId: "pat-20", drug: "Amoxicillin", prescriberId: "fb:dr-menon", status: "active", signedBy: "fb:dr-menon" }));
   assert.equal(rx.status, "active");
 
-  // The nurse: EXECUTE on observations, a governance denial on an order, whatever the client says.
+  // The nurse: EXECUTE on observations (and, since 2026-09-06, on Patient — she also registers), a
+  // governance denial on an order, whatever the client says.
   const nurse = await client(h, "fb:sister-anu");
   assert.equal(nurse.descriptor.role, "nurse");
   assert.equal(nurse.descriptor.actor.tier, "execute");
-  assert.deepEqual(nurse.descriptor.actor.writable, ["Observation"]);
+  assert.deepEqual(nurse.descriptor.actor.writable, ["Observation", "Patient"]);
   assert.equal(nurse.descriptor.actor.canSign, false);
   const bp = await nurse.session("pat-20").put(Observation({ id: "obs-20", patientId: "pat-20", code: "85354-9", value: "142/91", category: "vital-signs" }));
   assert.equal(bp.writtenBy.id, "fb:sister-anu");
@@ -475,11 +481,15 @@ test("OPD roles at the door: doctor writes and signs, nurse records vitals and n
   const forged = await h.fetchAs("fb:sister-anu")("https://x/api/wardsynq/gimsr/record", { method: "POST", body: JSON.stringify({ entity: { ...bp, writtenBy: { id: "fb:dr-menon", kind: "human", tier: "execute" }, value: "120/80" }, expectedVersion: 1 }) });
   assert.equal((await forged.json()).record.writtenBy.id, "fb:sister-anu", "the server stamps the real author over the claimed one");
 
-  // Reception: reads the chart, writes nothing, is refused at the door for a write.
+  // Reception: reads the chart, writes ONLY Patient (registration — see actor.js QUEUE_ADD), and is
+  // refused for anything clinical.
   const desk = await client(h, "fb:desk-1");
-  assert.equal(desk.descriptor.actor.tier, "read");
+  assert.equal(desk.descriptor.actor.tier, "execute");
+  assert.deepEqual(desk.descriptor.actor.writable, ["Patient"]);
   assert.equal((await desk.governed.get(desk.actor, "MedicationOrder", "rx-20")).drug, "Amoxicillin");
   assert.equal((await h.fetchAs("fb:desk-1")("https://x/api/wardsynq/gimsr/record", { method: "POST", body: JSON.stringify({ entity: Observation({ id: "o", patientId: "pat-20", code: "x", value: 1 }) }) })).status, 403);
+  const deskPatient = await h.fetchAs("fb:desk-1")("https://x/api/wardsynq/gimsr/record", { method: "POST", body: JSON.stringify({ entity: Patient({ id: "pat-21", mrn: "GH-21", name: "Desk-registered", dob: "1970-01-01" }) }) });
+  assert.equal(deskPatient.status, 201, "reception can register a patient identity");
 
   // Pharmacy: the orders, and only the orders. The chart it sees has no other keys.
   const pharm = await client(h, "fb:pharm-1");
@@ -512,7 +522,7 @@ test("staff sessions: a nurse signed in with email+PIN on a hospital PC reaches 
   const nurse = await (async () => { const b = new RemoteBackend({ tenantId: "gimsr", baseUrl: "https://x", fetch: asStaff(nurseTok) }); await b.open(); return b; })();
   assert.equal(nurse.descriptor.actor.id, "nurse.anu");
   assert.equal(nurse.descriptor.role, "nurse");
-  assert.deepEqual(nurse.descriptor.actor.writable, ["Observation"]);
+  assert.deepEqual(nurse.descriptor.actor.writable, ["Observation", "Patient"]);
   // Staff sessions are off unless the deployment says so, and org-bound.
   assert.equal((await handle(new Request("https://x/api/wardsynq/gimsr", { headers: { "X-Staff-Token": nurseTok } }), ENV, h.deps)).status, 401);
   assert.equal((await asStaff(otherOrgTok)("https://x/api/wardsynq/gimsr")).status, 403);
@@ -565,7 +575,7 @@ test("AI drafts: written by the AI actor on the clinician's behalf, never author
   // Pure: the AI actor is DRAFT whatever it asks, and its scope is the human's.
   const human = actorFromOpdRole({ identity: { id: "fb:n" }, role: "nurse" });
   const bot = aiActorFor(human, { id: "maik" });
-  assert.equal(bot.tier, "draft"); assert.deepEqual([...bot.scope.write], ["Observation"]); assert.equal(bot.onBehalfOf, "fb:n");
+  assert.equal(bot.tier, "draft"); assert.deepEqual([...bot.scope.write], ["Observation", "Patient"]); assert.equal(bot.onBehalfOf, "fb:n");
 });
 
 /* ------------------------------------------------------------------ the nurse-vitals migration */
@@ -622,10 +632,11 @@ test("recordVitals: a nurse's vitals land in the record as her own EXECUTE-on-Ob
   const r2 = await recordVitals(asNurse, env, ctx(asNurse, { sbp: "142", dbp: "91", spo2: "97" }));
   assert.equal(r2.ok, true); assert.ok(r2.records.every((x) => x.replayed && x.version === 1));
   assert.equal((await h.repository.byPatient("gimsr", "Observation", "opd-pat-gh-40118")).length, 3);
-  // Reception holds no write: refused at the door, nothing written, and the result says which.
+  // Reception holds no write scope on Observation (only on Patient, since 2026-09-06 — she
+  // registers, she does not chart vitals): refused, nothing written, and the result says which.
   const asDesk = new Request("https://x/api/queue/s1/timeline", { method: "POST", headers: { "X-Test-User": "fb:desk-1" } });
   const r3 = await recordVitals(asDesk, env, ctx(asDesk, { pulse: "80" }));
-  assert.equal(r3.ok, false); assert.equal(r3.status, 403); assert.equal(r3.error, "permission");
+  assert.equal(r3.ok, false); assert.equal(r3.status, 403); assert.equal(r3.error, "governance");
   // No MRN on the ticket: cannot be filed, and says so rather than inventing a patient.
   const r4 = await recordVitals(asNurse, env, { ...ctx(asNurse, { pulse: "80" }), ticket: { id: "TKT-2", ghisPatientId: "" } });
   assert.equal(r4.ok, false); assert.equal(r4.error, "no_patient_identity");
@@ -736,4 +747,131 @@ test("THE PROOF: nurse enters vitals -> record stores Observations -> doctor ope
   const reads = h.repository.audit.filter((a) => a.action === "record.read" && a.actor === "fb:dr-menon");
   assert.ok(reads.length >= 1);
   assert.ok(!JSON.stringify(reads).includes("138"), "no values in the audit");
+});
+
+/* ------------------------------------------------------------------ the patient-registration migration */
+
+test("registration mapping: exact demographics, no invention; provisional flagged; ABHA only with consent; skip-if-unchanged is order-insensitive", () => {
+  const reg = (over) => ({ mrn: "SMD-GIMSR-00042", mrSource: "stewardmd", patient: { name: "Anjali Menon", birthDate: "1959-02-14", approxDob: false, gender: "female" }, ...over });
+  const p1 = patientFromRegistration(reg());
+  assert.equal(p1.id, "opd-pat-smd-gimsr-00042");
+  assert.equal(p1.mrn, "SMD-GIMSR-00042"); assert.equal(p1.name, "Anjali Menon"); assert.equal(p1.dob, "1959-02-14"); assert.equal(p1.sex, "female");
+  assert.equal(p1.provisional, false); assert.equal(p1.approxDob, false);
+  assert.deepEqual(p1.identifiers, [{ system: "opd-mrn", value: "SMD-GIMSR-00042" }]);
+  assert.equal(p1.meta.source.system, "wardsynq-native");
+
+  // Provisional MRN -> provisional Patient. Approximate DOB carried, not silently treated as exact.
+  const tmp = patientFromRegistration(reg({ mrn: "TMP-000007", mrSource: "provisional", patient: { name: "Unknown Male", birthDate: "1990-01-01", approxDob: true, gender: "male" } }));
+  assert.equal(tmp.id, "opd-pat-tmp-000007"); assert.equal(tmp.provisional, true); assert.equal(tmp.approxDob, true);
+
+  // ABHA WITHOUT recorded consent never travels; WITH consent, it does. Reuses the OPD's own rule.
+  const noConsent = patientFromRegistration(reg({ patient: { name: "A", birthDate: "1970-01-01", gender: "female", abhaNumber: "12345678901234", abhaConsent: false } }));
+  assert.deepEqual(noConsent.identifiers, [{ system: "opd-mrn", value: "SMD-GIMSR-00042" }]);
+  const consented = patientFromRegistration(reg({ patient: { name: "A", birthDate: "1970-01-01", gender: "female", abhaNumber: "12345678901234", abhaAddress: "a@abdm", abhaConsent: true } }));
+  assert.deepEqual(consented.identifiers, [{ system: "opd-mrn", value: "SMD-GIMSR-00042" }, { system: "abha-number", value: "12345678901234" }, { system: "abha-address", value: "a@abdm" }]);
+
+  assert.equal(patientFromRegistration({ mrn: "", patient: { name: "X", birthDate: "1970-01-01", gender: "male" } }), null, "no mrn, no identity");
+
+  assert.equal(sameDemographics(p1, patientFromRegistration(reg())), true);
+  assert.equal(sameDemographics(p1, patientFromRegistration(reg({ patient: { ...reg().patient, name: "Renamed" } }))), false);
+  assert.equal(sameDemographics(null, p1), false);
+});
+
+test("registration mode gating mirrors vitals exactly: off unless the flag, the org link and the tenant's opt-in all agree", async () => {
+  const org = { id: "org-gimsr", connectTenantId: "gimsr" };
+  const tenants = { gimsr: { id: "gimsr", settings: JSON.stringify({ wardsynq: { migrations: { registration: "shadow" } } }) } };
+  const deps = { getOrg: async (env, id) => (id === "org-gimsr" ? org : null), tenantRow: async (env, id) => tenants[id] || null };
+  assert.deepEqual(await registrationMigration({}, { orgId: "org-gimsr" }, deps), { mode: "off", why: "flag" });
+  assert.deepEqual(await registrationMigration({ WARDSYNQ_RECORD: "1" }, { orgId: "org-other" }, deps), { mode: "off", why: "no_tenant" });
+  assert.deepEqual(await registrationMigration({ WARDSYNQ_RECORD: "1" }, {}, deps), { mode: "off", why: "no_org" });
+  const on = await registrationMigration({ WARDSYNQ_RECORD: "1" }, { orgId: "org-gimsr" }, deps);
+  assert.equal(on.mode, "shadow"); assert.equal(on.tenantId, "gimsr");
+  // A DIFFERENT settings key from vitals: a tenant on for vitals is not thereby on for registration.
+  const bothOff = { gimsr: { id: "gimsr", settings: JSON.stringify({ wardsynq: { migrations: { vitals: "shadow" } } }) } };
+  assert.equal((await registrationMigration({ WARDSYNQ_RECORD: "1" }, { orgId: "org-gimsr" }, { ...deps, tenantRow: async (e, id) => bothOff[id] })).mode, "off");
+});
+
+test("THE PROOF: registration on device A creates the WardSynQ Patient master; device B opens the same MRN, sees the same demographics, and the vitals already in the record now hang off a real identity", async () => {
+  const h = opdHospital({ "fb:desk-1": { role: "reception" }, "fb:sister-anu": { role: "nurse" }, "fb:pharm-1": { role: "pharmacy" } }, { settings: { wardsynq: { migrations: { registration: "shadow", vitals: "shadow" } } } });
+  const reg = { mrn: "SMD-GIMSR-00099", mrSource: "stewardmd", pending: false, patient: { name: "Ravi Deshpande", birthDate: "1988-11-02", approxDob: false, gender: "male" } };
+  const actorDeps = { db: h.db, identifyFn: h.deps.identifyFn, claimsFn: h.deps.claimsFn, staffSession: null, orgForTenant: h.deps.orgForTenant, authorizeOrg: h.deps.authorizeOrg };
+  const recordDeps = { repository: h.repository, pseudonym: async () => null };
+
+  // Vitals for this patient were ALREADY charted before registration ever ran (the realistic order:
+  // a walk-in gets vitals at triage before the desk finishes paperwork) — proving req #14: they
+  // attach to the SAME id the registration will create, because both derive it from the one MRN.
+  const asNurse = new Request("https://x/api/queue/s1/timeline", { method: "POST", headers: { "X-Test-User": "fb:sister-anu" } });
+  const vitals = await recordVitals(asNurse, ENV, { migration: { mode: "shadow", tenantId: "gimsr" }, session: { orgId: "org-gimsr" }, ticket: { id: "TKT-99", ghisPatientId: reg.mrn }, vitals: { sbp: "118", dbp: "76", pulse: "72" }, recordedAt: "2026-09-06T08:00:00.000Z", actorDeps, recordDeps });
+  assert.equal(vitals.ok, true); assert.equal(vitals.written, 3);
+  assert.equal(await h.repository.latest("gimsr", "Patient", "opd-pat-smd-gimsr-00099"), null, "no Patient master exists yet — this is exactly the gap registration closes");
+
+  // Device A: the desk registers. This is exactly what the route calls.
+  const asDesk = new Request("https://x/api/queue/patient", { method: "POST", headers: { "X-Test-User": "fb:desk-1" } });
+  const out = await registerPatientRecord(asDesk, ENV, { migration: { mode: "shadow", tenantId: "gimsr" }, registration: reg, actorDeps, recordDeps });
+  assert.equal(out.ok, true); assert.equal(out.written, 1); assert.equal(out.updated, false);
+  assert.equal(out.patientId, "opd-pat-smd-gimsr-00099");
+  assert.equal(out.actor, "fb:desk-1"); assert.equal(out.role, "reception");
+
+  // Device B: a different clinician opens the SAME mrn-derived id and gets the same demographics —
+  // AND the vitals that were already there, because nothing about registration moved or copied them.
+  const doctorB = await client(h, "fb:dr-menon");
+  const patient = await doctorB.governed.get(doctorB.actor, "Patient", "opd-pat-smd-gimsr-00099");
+  assert.equal(patient.name, "Ravi Deshpande"); assert.equal(patient.mrn, "SMD-GIMSR-00099"); assert.equal(patient.dob, "1988-11-02");
+  assert.equal(patient.writtenBy.id, "fb:desk-1", "the audit trail names the actual human who registered, not the doctor now reading it");
+  const chart = await doctorB.backend.chart("opd-pat-smd-gimsr-00099");
+  assert.equal(chart.Patient.length, 1); assert.equal(chart.Observation.length, 3);
+
+  // Duplicate registration (a re-submitted form, or the desk registering the same returning patient
+  // again) cannot create a second Patient: same mrn -> same id, structurally. Unchanged demographics
+  // -> nothing is even written, so the append-only history is not padded with identical copies.
+  const again = await registerPatientRecord(asDesk, ENV, { migration: { mode: "shadow", tenantId: "gimsr" }, registration: reg, actorDeps, recordDeps });
+  assert.equal(again.ok, true); assert.equal(again.written, 0); assert.equal(again.skipped, "unchanged"); assert.equal(again.version, 1);
+  assert.equal((await h.repository.history("gimsr", "Patient", "opd-pat-smd-gimsr-00099")).length, 1, "still exactly one version");
+
+  // A genuine correction under the SAME mrn (a typo fixed) is a new version of the SAME identity —
+  // never a second patient, never a merge of two different mrns.
+  const corrected = await registerPatientRecord(asDesk, ENV, { migration: { mode: "shadow", tenantId: "gimsr" }, registration: { ...reg, patient: { ...reg.patient, name: "Ravi Deshpande Jr" } }, actorDeps, recordDeps });
+  assert.equal(corrected.ok, true); assert.equal(corrected.written, 1); assert.equal(corrected.updated, true); assert.equal(corrected.version, 2);
+  const hist = await h.repository.history("gimsr", "Patient", "opd-pat-smd-gimsr-00099");
+  assert.equal(hist.length, 2); assert.equal(hist[0].name, "Ravi Deshpande"); assert.equal(hist[1].name, "Ravi Deshpande Jr");
+
+  // Wrong tenant cannot reach it.
+  const other = await client(h, "fb:dr-elsewhere", { tenantId: "other-hospital" });
+  assert.equal(await other.governed.get(other.actor, "Patient", "opd-pat-smd-gimsr-00099"), null);
+  assert.equal((await h.fetchAs("fb:dr-elsewhere")("https://x/api/wardsynq/gimsr/record/Patient/opd-pat-smd-gimsr-00099")).status, 403);
+
+  // Unauthorized role: a pharmacist (no QUEUE_ADD) cannot perform the registration mutation, at
+  // BOTH the existing OPD door and, independently, the WardSynQ governance behind it.
+  const pharmAz = await h.deps.authorizeOrg({}, { kind: "firebase", id: "fb:pharm-1" }, "org-gimsr", CAPS.QUEUE_ADD);
+  assert.equal(pharmAz.ok, false); assert.equal(pharmAz.reason, "forbidden", "she IS a member, her ROLE lacks queue.add — the pre-existing OPD-level guard already refuses this");
+  const asPharm = new Request("https://x/api/queue/patient", { method: "POST", headers: { "X-Test-User": "fb:pharm-1" } });
+  const refused = await registerPatientRecord(asPharm, ENV, { migration: { mode: "shadow", tenantId: "gimsr" }, registration: { mrn: "SMD-GIMSR-00100", mrSource: "stewardmd", patient: { name: "X", birthDate: "1970-01-01", gender: "male" } }, actorDeps, recordDeps });
+  assert.equal(refused.ok, false); assert.equal(refused.status, 403); assert.equal(refused.error, "permission");
+  assert.equal(await h.repository.latest("gimsr", "Patient", "opd-pat-smd-gimsr-00100"), null);
+
+  // Every registration write is audited as the real human actor, PHI-free.
+  const writes = h.repository.audit.filter((a) => a.action === "record.write" && a.scope.resourceType === "Patient");
+  assert.ok(writes.length >= 2);
+  assert.ok(writes.every((a) => a.actor === "fb:desk-1"));
+  assert.ok(!JSON.stringify(writes).includes("Deshpande"), "no demographics in the audit");
+});
+
+test("registration authoritative mode: a governance refusal is surfaced, not swallowed, and the honest limitation is documented — the MRN is not un-allocated", () => {
+  const src = readFileSync(new URL("../functions/_wardsynq/migrate-registration.js", import.meta.url), "utf8");
+  assert.ok(/MR number.*cannot be undone|cannot be "un-handed-out"/.test(src), "the limitation must be stated in the file, not only in a PR description");
+  const routeSrc = readFileSync(new URL("../functions/api/queue/[[path]].js", import.meta.url), "utf8");
+  const h = routeSrc.slice(routeSrc.indexOf('if (sub === "register" && method === "POST") {'), routeSrc.indexOf('if (sub === "get" && method === "GET") {'));
+  assert.ok(h.indexOf("PAT.registerPatient(") < h.indexOf("registrationMigration("), "Firestore/MRN allocation ALWAYS runs first, in every mode — the allocator is never reordered");
+  assert.ok(h.includes('mig.mode === "authoritative" && !rec.ok'));
+  assert.ok(h.includes('"record_refused"'));
+  // off: the pre-existing single line is still reachable unchanged.
+  assert.ok(h.includes("return json(r, 200, request);"));
+});
+
+test("off mode is byte-identical: no WardSynQ call is even attempted", async () => {
+  const h = opdHospital({ "fb:desk-1": { role: "reception" } });   // no settings => registration migration is off
+  const mig = await registrationMigration(ENV, { orgId: "org-gimsr" }, { getOrg: h.deps.orgForTenant ? async () => null : async () => null, tenantRow: async () => null });
+  assert.equal(mig.mode, "off");
+  const out = await registerPatientRecord(new Request("https://x"), ENV, { migration: mig, registration: { mrn: "X", patient: { name: "Y", birthDate: "1970-01-01", gender: "male" } } });
+  assert.deepEqual(out, { mode: "off", tenantId: null, ok: true, skipped: mig.why, written: 0 });
 });

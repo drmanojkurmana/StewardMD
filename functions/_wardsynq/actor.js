@@ -18,11 +18,19 @@
  * clinical record cannot disagree with the queue about what a nurse is, and a new role gets the
  * right grant by holding the right capabilities rather than by being added to a table here.
  *
- *   EMR_TREAT             EXECUTE   write every type       read every type       doctor, pg_faculty, pg_hod, admin
- *   EMR_VITALS (no TREAT) EXECUTE   write Observation      read every type (has EMR_VIEW)   nurse, intern, resident, pg_resident
- *   EMR_VIEW only         READ      write nothing          read every type       supervisor, reception
- *   ORDER_READ only       READ      write nothing          read orders only      cashier, pharmacy
+ *   EMR_TREAT             EXECUTE   write every type          read every type       doctor, pg_faculty, pg_hod, admin
+ *   EMR_VITALS (no TREAT) EXECUTE   write Observation(+Patient*) read every type (has EMR_VIEW)   nurse, intern, resident, pg_resident
+ *   EMR_VIEW only         READ      write nothing (+Patient*)    read every type       supervisor, reception
+ *   ORDER_READ only       READ      write nothing             read orders only      cashier, pharmacy
  *   none of these         no clinical actor at all: 403    hr, viewer, oncqis_*, academic_cell
+ *
+ * *QUEUE_ADD, added 2026-09-06. Its own docstring in _queue_roles.js already says what it is:
+ * "register / walk-in a patient". A role that holds it may write a Patient EVEN IF it holds none of
+ * the EMR capabilities above — which is exactly reception's case: EMR_VIEW alone would leave her at
+ * READ, but registering a patient is a committed administrative fact, the same reasoning EMR_VITALS
+ * already established for a nurse's vitals, so QUEUE_ADD raises the tier to EXECUTE and adds
+ * "Patient" to the write scope, on top of whatever the EMR capabilities already granted. It changes
+ * nothing else: a receptionist still cannot write an Observation or a note.
  *
  * A nurse gets EXECUTE and not DRAFT because a recorded blood pressure is a committed clinical fact,
  * not a proposal awaiting a signature. What keeps her off a prescription is scope, which is a
@@ -54,6 +62,7 @@ const RESOURCE_TYPES = Object.freeze([
 ]);
 const ORDER_TYPES = Object.freeze(["MedicationOrder", "ServiceRequest"]);
 const VITALS_TYPES = Object.freeze(["Observation"]);
+const PATIENT_TYPE = "Patient";
 
 /**
  * PURE. From a capability list to a clinical grant, or null when the role has no business with the
@@ -62,11 +71,24 @@ const VITALS_TYPES = Object.freeze(["Observation"]);
  */
 function grantForCaps(caps) {
   const has = (c) => Array.isArray(caps) && caps.includes(c);
-  if (has(CAPS.EMR_TREAT)) return { tier: TIER.EXECUTE, read: null, write: null, basis: CAPS.EMR_TREAT };
-  if (has(CAPS.EMR_VITALS)) return { tier: TIER.EXECUTE, read: has(CAPS.EMR_VIEW) ? null : [...VITALS_TYPES], write: [...VITALS_TYPES], basis: CAPS.EMR_VITALS };
-  if (has(CAPS.EMR_VIEW)) return { tier: TIER.READ, read: null, write: [], basis: CAPS.EMR_VIEW };
-  if (has(CAPS.ORDER_READ)) return { tier: TIER.READ, read: [...ORDER_TYPES], write: [], basis: CAPS.ORDER_READ };
-  return null;
+  let grant = null;
+  if (has(CAPS.EMR_TREAT)) grant = { tier: TIER.EXECUTE, read: null, write: null, basis: CAPS.EMR_TREAT };
+  else if (has(CAPS.EMR_VITALS)) grant = { tier: TIER.EXECUTE, read: has(CAPS.EMR_VIEW) ? null : [...VITALS_TYPES], write: [...VITALS_TYPES], basis: CAPS.EMR_VITALS };
+  else if (has(CAPS.EMR_VIEW)) grant = { tier: TIER.READ, read: null, write: [], basis: CAPS.EMR_VIEW };
+  else if (has(CAPS.ORDER_READ)) grant = { tier: TIER.READ, read: [...ORDER_TYPES], write: [], basis: CAPS.ORDER_READ };
+
+  if (has(CAPS.QUEUE_ADD)) {
+    // Registering a patient is a committed identity fact, not a clinical draft — see the module
+    // header. Union, never narrow: this only ever ADDS Patient to whatever write scope the EMR
+    // capabilities already produced, and only ever RAISES the tier.
+    if (!grant) grant = { tier: TIER.EXECUTE, read: null, write: [PATIENT_TYPE], basis: CAPS.QUEUE_ADD };
+    else grant = {
+      tier: TIER.EXECUTE, read: grant.read,
+      write: grant.write === null ? null : (grant.write.includes(PATIENT_TYPE) ? grant.write : [...grant.write, PATIENT_TYPE]),
+      basis: grant.basis + "+" + CAPS.QUEUE_ADD,
+    };
+  }
+  return grant;
 }
 
 /** PURE. The grant for one of the eighteen operational roles. */

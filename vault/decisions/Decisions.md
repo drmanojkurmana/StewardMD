@@ -4256,3 +4256,31 @@ empty card that looks like "no vitals", would each be read as a clinical fact.
 
 **Not done:** the doctor's own writes still go to GHIS; the safety engine does not read these
 observations; no Patient master is created; `WARDSYNQ_RECORD` stays OFF and the schema unapplied.
+
+## 2026-09-06 — Patient registration: the master the vitals migration was missing
+
+**Decision: the MRN allocator is untouchable, so "authoritative" cannot mean what it meant for
+vitals.** A vitals save can be retried with no consequence; an MR number, once handed out by the
+atomic per-org counter, cannot be handed back. Vitals' authoritative mode puts the record first and
+only writes the timeline if it accepts; registration cannot, without redesigning the allocator into
+something reversible, which is out of scope and would itself need its own careful design. So
+Firestore/GHIS registration runs first in EVERY mode, and authoritative only changes whether a
+record refusal is reported to the desk or swallowed. Documented as a real limitation, not hidden
+inside "same pattern as vitals."
+
+**Decision: the id mapping moves to a shared module.** `opd-pat-<mrn>` was private to
+migrate-vitals.js. Extracted to `opd-identity.js` so registration and vitals are provably the SAME
+function, not two copies that happen to agree — the whole point of doing registration at all was so
+vitals would have a real Patient to attach to, which only means something if the id is guaranteed
+identical.
+
+**Decision: QUEUE_ADD earns Patient-write, not a special case.** Reception's own capability list
+already says what she does: "register / walk-in a patient." The actor grant was silent on it only
+because nothing had asked the record to create an identity yet. Extending `grantForCaps` by one
+capability, unioned onto whatever the EMR capabilities already granted, keeps the whole mapping
+capability-derived rather than adding an if-role-is-reception special case.
+
+**Decision: same-MRN re-registration is a version, never a merge.** The id is deterministic from
+the MRN, so there is no code path that could combine two DIFFERENT mrns into one Patient. What DOES
+need an explicit governed step, and is explicitly NOT built here, is the provisional-to-real MRN
+promotion (`linkHospitalMrn`) — a genuine identity link, left for its own migration.

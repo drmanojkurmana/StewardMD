@@ -26,8 +26,10 @@
  *
  * WHAT IS NOT. No Patient record is created here: a nurse's grant is Observation only, and the
  * ticket carries an MRN but no demographics. The observations are filed under a patient id derived
- * from the MRN (`opd-pat-<mrn>`), which is what the patient registration migration will also use, so
- * they attach to the master the moment it exists. A ticket with no MRN cannot be filed and says so.
+ * from the MRN (`opd-pat-<mrn>`, opd-identity.js), which the patient registration migration (once it
+ * exists) uses too, so they attach to the master the moment it exists. A ticket with no MRN cannot be
+ * filed and says so. As of 2026-09-06 the registration migration DOES exist
+ * (functions/_wardsynq/migrate-registration.js) and creates that master.
  *
  * Nothing here is a clinical rule. No threshold, no score, no alert. The safety engine will read
  * these observations when a site wires it; this file only makes them exist.
@@ -38,8 +40,10 @@ import { GovernanceError } from "../../wardsynq/wardsynq-actors.js";
 import { resolveClinicalActor } from "./actor.js";
 import { RecordService } from "./service.js";
 import { AuthError, PermissionError } from "../_connect/permission.js";
+import { MODES, migrationModeOf, resolveMigration } from "./migration-tenant.js";
+import { patientIdForMrn, patientIdForTicket } from "./opd-identity.js";
 
-const MODES = Object.freeze(["off", "shadow", "authoritative"]);
+export { patientIdForTicket };
 
 /** LOINC codes and UCUM units for the six values the OPD form takes. Recorded AS REPORTED. */
 const VITAL_CODES = Object.freeze({
@@ -59,18 +63,7 @@ function num(v) {
 }
 
 /** PURE. The tenant's mode for this migration. Unknown or absent is "off". */
-function vitalsMode(tenant) {
-  let settings = {};
-  try { settings = typeof tenant.settings === "string" ? JSON.parse(tenant.settings || "{}") : (tenant.settings || {}); } catch { settings = {}; }
-  const m = settings && settings.wardsynq && settings.wardsynq.migrations && settings.wardsynq.migrations.vitals;
-  return MODES.includes(m) ? m : "off";
-}
-
-/** PURE. The patient id the observations file under: the MRN the ticket carries, or nothing. */
-function patientIdForTicket(ticket) {
-  const mrn = ticket && String(ticket.ghisPatientId || "").trim();
-  return mrn ? `opd-pat-${mrn.toLowerCase().replace(/[^a-z0-9]+/g, "-")}` : null;
-}
+function vitalsMode(tenant) { return migrationModeOf(tenant, "vitals"); }
 
 /**
  * PURE. Structured vitals from the form to canonical Observations. Empty or non-numeric values are
@@ -114,20 +107,8 @@ function vitalsToObservations(input) {
  * deps: { getOrg(env, orgId), tenantRow(env, tenantId) }
  */
 async function vitalsMigration(env, session, deps) {
-  try {
-    if (!env || String(env.WARDSYNQ_RECORD) !== "1") return { mode: "off", why: "flag" };
-    const orgId = session && (session.orgId || session.hospitalId);
-    if (!orgId) return { mode: "off", why: "no_org" };
-    const org = await deps.getOrg(env, orgId);
-    const tenantId = org && org.connectTenantId;
-    if (!tenantId) return { mode: "off", why: "no_tenant" };
-    const tenant = await deps.tenantRow(env, tenantId);
-    if (!tenant) return { mode: "off", why: "tenant_missing" };
-    const mode = vitalsMode(tenant);
-    return { mode, tenantId: String(tenantId), tenant, orgId: String(orgId) };
-  } catch (e) {
-    return { mode: "off", why: "lookup_failed" };
-  }
+  const orgId = session && (session.orgId || session.hospitalId);
+  return resolveMigration(env, orgId, "vitals", deps);
 }
 
 /**
@@ -173,4 +154,4 @@ async function recordVitals(request, env, ctx) {
   return { ...base, ok, status: ok ? 200 : 403, error: ok ? undefined : "governance", written: written.length, records: written, denied, patientId, actor: resolved.actor.id, role: resolved.role, roleSource: resolved.source };
 }
 
-export { MODES, VITAL_CODES, vitalsMode, patientIdForTicket, vitalsToObservations, vitalsMigration, recordVitals };
+export { MODES, VITAL_CODES, vitalsMode, patientIdForMrn, vitalsToObservations, vitalsMigration, recordVitals };

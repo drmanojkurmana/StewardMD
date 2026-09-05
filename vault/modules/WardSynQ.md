@@ -481,6 +481,37 @@ the note shown. Every state has a sentence for the doctor: loading, empty, no MR
 role cannot view, record not available for this clinic, unreachable. The timeline is not duplicated;
 it keeps its text line. Off (every tenant today): no `record` key, the drawer is exactly what it was.
 
+**Patient registration creates the master (2026-09-06, third migration).** Vitals attached to
+`opd-pat-<mrn>` with no Patient behind it. `functions/_wardsynq/migrate-registration.js` closes that:
+after `_opd_patient_store.js registerPatient()` allocates the MRN (unchanged — the atomic counter is
+untouched), the same `opd-pat-<mrn>` id (now shared from `_wardsynq/opd-identity.js`, so vitals and
+registration provably agree) is written as a canonical `Patient` — name, dob, sex exactly as OPD's
+own `validateRegistration` resolved them, ABHA identifiers only where OPD's own `abhaLinkable`
+recorded consent, `provisional: true` for a TMP- id. Same three modes, same
+`connect_tenant.settings.wardsynq.migrations.<key>` shape
+(`migrate-vitals.js` and this file now share the tenant/mode lookup, `migration-tenant.js`), but
+**authoritative differs from vitals' mechanics, deliberately**: MR allocation is a one-shot,
+non-reversible counter, so Firestore registration always runs FIRST in every mode; authoritative
+means a record refusal is surfaced to the desk rather than logged, not that the MR is un-issued.
+Stated in the file, not only here.
+
+**Who may register, and why it changed the actor grant.** `QUEUE_ADD` ("register / walk-in a
+patient") now adds `Patient` to the write scope `functions/_wardsynq/actor.js` derives, and raises
+the tier to EXECUTE for a role that held only READ before — reception and supervisor gained this;
+nurse/intern/resident/pg_resident already held EXECUTE and gained Patient alongside Observation. HR,
+viewer and the ONCQIS/academic-cell roles hold no QUEUE_ADD and remain refused entirely. This is the
+SAME derive-from-capabilities rule PR #849 established, extended by one capability, not a new rule.
+
+**Identity, not merely a write.** The WardSynQ id is deterministic from the MRN, so two different
+Patient entities for one MRN is structurally impossible — a repeat registration is a new VERSION of
+the one entity, and is SKIPPED entirely (no version written) when demographics are unchanged, so a
+returning patient checking in again does not pad the append-only history with identical copies.
+**Left as an explicit, separate, KNOWN gap**: `linkHospitalMrn` (promoting a provisional TMP- id to
+a real hospital MR) is not touched. A patient registered while provisional keeps its WardSynQ Patient
+at the OLD id after Firestore re-keys it; re-keying/merging that into the new id would be exactly the
+identity merge this migration is told to keep an explicit, separate, governed operation — not
+attempted here, and not silently swept under "it still works most of the time."
+
 **Deliberately NOT done.** No GHIS write migrated (`opd-emr.js` still posts to `/api/ghis`; the nurse-vitals timeline write is the one migrated, above, and only where a tenant opts in); the
 cut-over flag untouched; the 18 queue roles mapped onto actor tiers on 2026-09-06 (see "Who may do what" above); no on-prem repository; no connector
 write-back (an external record is read-only natively and the path back to Epic is not built); no
