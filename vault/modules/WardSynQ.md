@@ -415,9 +415,40 @@ same script against a REAL local D1 (`wrangler pages dev`, miniflare, Cf-Access 
 record rows, 15 audit rows, 2 idempotency keys, zero PHI in the audit table. `wrangler pages
 functions build` compiles the bundle, which is what proves `functions/` may import `wardsynq/`.
 
+**Who may do what, settled 2026-09-06 (PR after #848).** The hospital's eighteen operational roles
+(`functions/_queue_roles.js`, granted per organisation in `q_members`, decided by the existing
+`authorizeOrg()`) now reach the record through ONE path, `functions/_wardsynq/actor.js`. The grant is
+derived from the CAPABILITIES a role already holds, not from its name, so the record cannot disagree
+with the queue about what a nurse is:
+
+| Capability the role holds | Tier | Writes | Reads | Roles |
+|---|---|---|---|---|
+| `emr.treat` | EXECUTE | every type | every type | doctor, pg_faculty, pg_hod, admin |
+| `emr.vitals` (no treat) | EXECUTE | Observation only | every type | nurse, intern, resident, pg_resident |
+| `emr.view` only | READ | nothing | every type | supervisor, reception |
+| `order.read` only | READ | nothing | MedicationOrder, ServiceRequest | cashier, pharmacy |
+| none of these | no clinical actor, 403 | | | hr, viewer, oncqis ×3, academic_cell |
+
+Scope is a new, backward-compatible field on the actor (`scope.read` / `scope.write`, null = every
+type, the pre-scope behaviour); a write outside it is `SCOPE_DENIED` and a read outside it is
+`READ_SCOPE_DENIED`, both governance denials from `wardsynq-actors.js`, both audited. A nurse holds
+EXECUTE because a recorded blood pressure is a committed fact, not a draft; scope keeps her off an
+order, and having no registration number keeps her from signing anything. Identity is a Firebase or
+Access session, or (with `QUEUE_STAFF_ENABLED=1`) the staff email+PIN session via `X-Staff-Token`,
+org-bound. Precedence: the OPD organisation linked to the tenant (`settings.wardsynq.orgId`, or
+`q_orgs.connectTenantId`, or a shared id) decides when the person is a member of it; Connect
+membership (`clinician`) otherwise; Connect owner/admin/auditor never. `admin` inherits `emr.treat`
+from the existing matrix and so writes as a doctor would; narrow `ROLE_CAPS.admin` if that is not
+wanted, not this mapping.
+
+**AI is a separate actor.** A write with `origin: {kind: "ai", id}` or an entity saying
+`aiDrafted: true` is written by `ai:<id>`, KIND.AI, capped at DRAFT by its kind, with
+`writtenBy.onBehalfOf` naming the clinician whose session it ran in, and no wider write scope than
+that clinician holds. The doctor is the delegate, never the author; `aiDrafted` is forced true by the
+store whatever the entity claimed; an active order or a signature from an AI is refused.
+
 **Deliberately NOT done.** No GHIS write migrated (`opd-emr.js` still posts to `/api/ghis`); the
-cut-over flag untouched; the 18 queue roles not yet mapped onto actor tiers (only Connect membership
-reaches the record today, so a nurse has no route in yet); no on-prem repository; no connector
+cut-over flag untouched; the 18 queue roles mapped onto actor tiers on 2026-09-06 (see "Who may do what" above); no on-prem repository; no connector
 write-back (an external record is read-only natively and the path back to Epic is not built); no
 AI actor at the door (an AI draft arriving via a doctor's token is stamped as that doctor, with
 `aiDrafted` preserved as a field only); no push fan-out from the server bus; polling, not push, for

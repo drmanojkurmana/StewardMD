@@ -57,8 +57,8 @@ function newKey() {
 
 class RemoteBackend {
   /**
-   * @param {{tenantId: string, token?: () => Promise<string|null>, baseUrl?: string, fetch?: Function,
-   *   headers?: () => object}} opts
+   * @param {{tenantId: string, token?: () => Promise<string|null>, staffToken?: () => Promise<string|null>,
+   *   baseUrl?: string, fetch?: Function, headers?: () => object}} opts
    *   token    returns the caller's bearer token (a Firebase ID token in StewardMD). Optional so a
    *            Cloudflare Access session, which carries identity in its own header, needs nothing.
    */
@@ -68,6 +68,8 @@ class RemoteBackend {
     this.tenantId = String(opts.tenantId);
     this.baseUrl = (opts.baseUrl || "").replace(/\/+$/, "");
     this.token = opts.token || (async () => null);
+    // A nurse's or receptionist's StewardMD staff session (email+PIN login on a hospital PC).
+    this.staffToken = opts.staffToken || (async () => null);
     this.extraHeaders = opts.headers || (() => ({}));
     this._fetch = opts.fetch || (typeof fetch === "function" ? fetch.bind(globalThis) : null);
     if (!this._fetch) throw new RemoteStoreError("no fetch available", "NO_FETCH");
@@ -82,6 +84,8 @@ class RemoteBackend {
     const h = { "Content-Type": "application/json", ...(this.extraHeaders() || {}), ...(extra || {}) };
     const t = await this.token();
     if (t) h.Authorization = `Bearer ${t}`;
+    const st = await this.staffToken();
+    if (st) h["X-Staff-Token"] = st;
     return h;
   }
 
@@ -108,22 +112,28 @@ class RemoteBackend {
 
   async close() { this._closed = true; this._opened = false; }
 
+  _refused(what, status, data) {
+    // A 403 carries the server's governance reason as a code, so a UI can say WHY rather than "failed".
+    if (status === 403) return new RemoteRefusedError(`the server refused ${what}: ${(data && (data.code || data.error)) || status}`, data);
+    return new RemoteStoreError(`${what} failed (${status})`, `${what.toUpperCase()}_FAILED`, status, data);
+  }
+
   async get(resourceType, id) {
     const { status, data } = await this._request("GET", `/record/${encodeURIComponent(resourceType)}/${encodeURIComponent(id)}`);
     if (status === 404) return null;
-    if (status !== 200) throw new RemoteStoreError(`get failed (${status})`, "GET_FAILED", status, data);
+    if (status !== 200) throw this._refused("get", status, data);
     return data.record;
   }
 
   async history(resourceType, id) {
     const { status, data } = await this._request("GET", `/record/${encodeURIComponent(resourceType)}/${encodeURIComponent(id)}/history`);
-    if (status !== 200) throw new RemoteStoreError(`history failed (${status})`, "HISTORY_FAILED", status, data);
+    if (status !== 200) throw this._refused("history", status, data);
     return data.versions || [];
   }
 
   async byPatient(resourceType, patientId) {
     const { status, data } = await this._request("GET", `/patient/${encodeURIComponent(patientId)}/${encodeURIComponent(resourceType)}`);
-    if (status !== 200) throw new RemoteStoreError(`byPatient failed (${status})`, "BYPATIENT_FAILED", status, data);
+    if (status !== 200) throw this._refused("byPatient", status, data);
     return data.records || [];
   }
 
@@ -131,14 +141,14 @@ class RemoteBackend {
   async list(resourceType, limit) {
     const q = limit ? `?limit=${encodeURIComponent(limit)}` : "";
     const { status, data } = await this._request("GET", `/list/${encodeURIComponent(resourceType)}${q}`);
-    if (status !== 200) throw new RemoteStoreError(`list failed (${status})`, "LIST_FAILED", status, data);
+    if (status !== 200) throw this._refused("list", status, data);
     return data.records || [];
   }
 
   /** The whole chart in one round trip. Not part of the store contract; for a UI opening a patient. */
   async chart(patientId) {
     const { status, data } = await this._request("GET", `/patient/${encodeURIComponent(patientId)}`);
-    if (status !== 200) throw new RemoteStoreError(`chart failed (${status})`, "CHART_FAILED", status, data);
+    if (status !== 200) throw this._refused("chart", status, data);
     return data.chart || {};
   }
 
@@ -146,7 +156,7 @@ class RemoteBackend {
   async changes(since, limit) {
     const q = `?since=${encodeURIComponent(since || 0)}${limit ? `&limit=${encodeURIComponent(limit)}` : ""}`;
     const { status, data } = await this._request("GET", `/changes${q}`);
-    if (status !== 200) throw new RemoteStoreError(`changes failed (${status})`, "CHANGES_FAILED", status, data);
+    if (status !== 200) throw this._refused("changes", status, data);
     return { records: data.records || [], cursor: data.cursor };
   }
 

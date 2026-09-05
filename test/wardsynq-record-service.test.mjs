@@ -14,6 +14,9 @@ import { handle } from "../functions/api/wardsynq/[[path]].js";
 import { MemoryRepository, VersionConflictError, assertRepository } from "../functions/_wardsynq/repository.js";
 import { D1Repository } from "../functions/_wardsynq/repository-d1.js";
 import { RecordService, actorForMembership, recordPolicy, AuthorityError, MODE } from "../functions/_wardsynq/service.js";
+import { grantForRole, roleMapping, aiActorFor, actorFromOpdRole } from "../functions/_wardsynq/actor.js";
+import { ROLES, CAPS, can as roleCan } from "../functions/_queue_roles.js";
+import { mintStaffSession, verifyStaffSession } from "../functions/_opd_auth.js";
 import { makeMockDb } from "../functions/_connect/testkit.js";
 import { can } from "../functions/_connect/enterprise/rbac.js";
 
@@ -53,7 +56,8 @@ function hospital(opts = {}) {
     const reg = request.headers.get("X-Test-RegNo");
     return reg ? { regNo: reg, name: request.headers.get("X-Test-User") } : {};
   };
-  const deps = { db, identifyFn, claimsFn, repository };
+  // No OPD organisation is linked to these tenants unless a test says so: Connect membership decides.
+  const deps = { db, identifyFn, claimsFn, repository, orgForTenant: opts.orgForTenant || null, authorizeOrg: opts.authorizeOrg || null, staffSession: opts.staffSession || null };
   // A fetch that IS the route. Each client passes its own identity header.
   const fetchAs = (user, regNo) => async (url, init) => {
     const headers = new Headers(init && init.headers || {});
@@ -386,4 +390,178 @@ test("D1 repository speaks the schema: append is one atomic batch, a UNIQUE viol
   await repo.changes("t1", 0, 10); await repo.recall("t1", "k"); await repo.latestByType("t1", "Patient", 5); await repo.auditOnly("t1", { action: "record.read" });
   assert.ok(!sql.some((q) => /\b(UPDATE|DELETE)\b/i.test(q)), "append-only by construction");
   assert.ok(sql.every((q) => /^INSERT/.test(q) || !/wardsynq_record/.test(q) || /tenant_id\s*=\s*\?/.test(q)), "every record query is tenant-scoped");
+});
+
+/* ------------------------------------------------------------------ the hospital's own roles */
+
+/**
+ * A hospital whose tenant is linked to an OPD organisation. Membership is the existing q_members
+ * shape decided by the existing pure gate (authorizeOrgAccess), faked at the I/O seam only.
+ */
+function opdHospital(members, extra = {}) {
+  const org = { id: "org-gimsr", name: "GIMSR OPD", ownerUid: "fb:owner-uid", connectTenantId: "gimsr" };
+  const h = hospital({
+    settings: extra.settings,
+    orgForTenant: async (env, tenant) => (tenant.id === "gimsr" ? org : null),
+    authorizeOrg: async (env, actor, orgId, cap) => {
+      if (String(orgId) !== org.id) return { ok: false, reason: "org_not_found" };
+      if (actor.kind === "staff" && actor.orgId !== org.id) return { ok: false, reason: "org_mismatch" };
+      if (actor.id === org.ownerUid) return { ok: true, role: "admin", owner: true };
+      const m = members[actor.id] || (actor.email && members[actor.email]);
+      if (!m || m.active === false) return { ok: false, reason: "not_a_member" };
+      if (cap && !roleCan(m.role, cap)) return { ok: false, reason: "forbidden", role: m.role };
+      return { ok: true, role: m.role };
+    },
+    staffSession: verifyStaffSession,
+  });
+  return h;
+}
+const STAFF_ENV = { ...ENV, QUEUE_STAFF_ENABLED: "1", QUEUE_TOKEN_SECRET: "test-secret-for-staff-sessions-at-least-32-chars" };
+
+test("role mapping: every one of the eighteen operational roles resolves to exactly the grant its capabilities imply", () => {
+  const m = roleMapping();
+  assert.deepEqual(Object.keys(m).sort(), [...ROLES].sort());
+  const tier = (r) => (m[r] ? m[r].tier : null);
+  const write = (r) => (m[r] ? m[r].write : "none");
+  const read = (r) => (m[r] ? m[r].read : "none");
+  for (const r of ["doctor", "pg_faculty", "pg_hod", "admin"]) { assert.equal(tier(r), TIER.EXECUTE, r); assert.equal(write(r), null, r); assert.equal(read(r), null, r); }
+  for (const r of ["nurse", "intern", "resident", "pg_resident"]) { assert.equal(tier(r), TIER.EXECUTE, r); assert.deepEqual(write(r), ["Observation"], r); assert.equal(read(r), null, r); }
+  for (const r of ["supervisor", "reception"]) { assert.equal(tier(r), TIER.READ, r); assert.deepEqual(write(r), [], r); assert.equal(read(r), null, r); }
+  for (const r of ["cashier", "pharmacy"]) { assert.equal(tier(r), TIER.READ, r); assert.deepEqual(write(r), [], r); assert.deepEqual(read(r), ["MedicationOrder", "ServiceRequest"], r); }
+  for (const r of ["hr", "viewer", "oncqis_protocol_author", "oncqis_clinical_reviewer", "oncqis_institutional_approver", "academic_cell"]) assert.equal(m[r], null, r + " has no clinical actor");
+  // The mapping is derived, so it cannot drift from the queue's own non-negotiable.
+  for (const r of ROLES) {
+    if (roleCan(r, CAPS.EMR_TREAT)) assert.equal(write(r), null, r + " treats, so writes every type");
+    else assert.ok(write(r) === "none" || !write(r).includes("MedicationOrder"), r + " cannot treat, so never writes an order");
+  }
+  assert.equal(grantForRole("no-such-role"), null);
+  assert.equal(actorFromOpdRole({ identity: { id: "x" }, role: "hr" }), null);
+});
+
+test("OPD roles at the door: doctor writes and signs, nurse records vitals and nothing else, reception reads only, pharmacy sees orders only, hr is refused", async () => {
+  const h = opdHospital({
+    "fb:dr-menon": { role: "doctor" },
+    "fb:sister-anu": { role: "nurse" },
+    "fb:desk-1": { role: "reception" },
+    "fb:pharm-1": { role: "pharmacy" },
+    "fb:hr-1": { role: "hr" },
+    "fb:dr-rao": { role: "doctor" },
+  });
+  const doctor = await client(h, "fb:dr-menon", { regNo: "AP-12345" });
+  assert.equal(doctor.descriptor.roleSource, "opd");
+  assert.equal(doctor.descriptor.role, "doctor");
+  assert.equal(doctor.descriptor.actor.tier, "execute");
+  assert.equal(doctor.descriptor.actor.writable, null);
+  await doctor.session("pat-20").put(Patient({ id: "pat-20", mrn: "GH-20", name: "Ward Patient", dob: "1970-01-01" }));
+  const rx = await doctor.session("pat-20").put(MedicationOrder({ id: "rx-20", patientId: "pat-20", drug: "Amoxicillin", prescriberId: "fb:dr-menon", status: "active", signedBy: "fb:dr-menon" }));
+  assert.equal(rx.status, "active");
+
+  // The nurse: EXECUTE on observations, a governance denial on an order, whatever the client says.
+  const nurse = await client(h, "fb:sister-anu");
+  assert.equal(nurse.descriptor.role, "nurse");
+  assert.equal(nurse.descriptor.actor.tier, "execute");
+  assert.deepEqual(nurse.descriptor.actor.writable, ["Observation"]);
+  assert.equal(nurse.descriptor.actor.canSign, false);
+  const bp = await nurse.session("pat-20").put(Observation({ id: "obs-20", patientId: "pat-20", code: "85354-9", value: "142/91", category: "vital-signs" }));
+  assert.equal(bp.writtenBy.id, "fb:sister-anu");
+  assert.equal(bp.writtenBy.tier, "execute");
+  const r = await h.fetchAs("fb:sister-anu")("https://x/api/wardsynq/gimsr/record", { method: "POST", body: JSON.stringify({ entity: MedicationOrder({ id: "rx-21", patientId: "pat-20", drug: "Warfarin", prescriberId: "fb:sister-anu", status: "draft" }) }) });
+  assert.equal(r.status, 403);
+  assert.deepEqual((await r.json()).reasons.map((x) => x.code), ["SCOPE_DENIED"]);
+  assert.equal(await h.repository.latest("gimsr", "MedicationOrder", "rx-21"), null);
+  // ...and she cannot be promoted by what her client claims to be.
+  const forged = await h.fetchAs("fb:sister-anu")("https://x/api/wardsynq/gimsr/record", { method: "POST", body: JSON.stringify({ entity: { ...bp, writtenBy: { id: "fb:dr-menon", kind: "human", tier: "execute" }, value: "120/80" }, expectedVersion: 1 }) });
+  assert.equal((await forged.json()).record.writtenBy.id, "fb:sister-anu", "the server stamps the real author over the claimed one");
+
+  // Reception: reads the chart, writes nothing, is refused at the door for a write.
+  const desk = await client(h, "fb:desk-1");
+  assert.equal(desk.descriptor.actor.tier, "read");
+  assert.equal((await desk.governed.get(desk.actor, "MedicationOrder", "rx-20")).drug, "Amoxicillin");
+  assert.equal((await h.fetchAs("fb:desk-1")("https://x/api/wardsynq/gimsr/record", { method: "POST", body: JSON.stringify({ entity: Observation({ id: "o", patientId: "pat-20", code: "x", value: 1 }) }) })).status, 403);
+
+  // Pharmacy: the orders, and only the orders. The chart it sees has no other keys.
+  const pharm = await client(h, "fb:pharm-1");
+  assert.deepEqual(pharm.descriptor.actor.readable, ["MedicationOrder", "ServiceRequest"]);
+  const chart = await pharm.backend.chart("pat-20");
+  assert.deepEqual(Object.keys(chart).sort(), ["MedicationOrder", "ServiceRequest"]);
+  assert.equal(chart.MedicationOrder.length, 1);
+  await assert.rejects(pharm.governed.get(pharm.actor, "Observation", "obs-20"), (e) => e.code === "READ_SCOPE_DENIED");
+  assert.equal((await h.fetchAs("fb:pharm-1")("https://x/api/wardsynq/gimsr/record/Patient/pat-20")).status, 403);
+  const feed = await pharm.backend.changes(0);
+  assert.deepEqual(feed.records.map((x) => x.resourceType), ["MedicationOrder"], "the feed withholds what the role may not read");
+
+  // HR: a hospital member with no business on the chart.
+  await assert.rejects(client(h, "fb:hr-1"), (e) => e.code === "FORBIDDEN");
+  // A member of the OPD org who is ALSO a Connect clinician is decided by the OPD role, not the wider one.
+  const rao = await client(h, "fb:dr-rao");
+  assert.equal(rao.descriptor.roleSource, "opd");
+});
+
+test("staff sessions: a nurse signed in with email+PIN on a hospital PC reaches the record with her OPD role and no signature", async () => {
+  const h = opdHospital({ "nurse.anu": { role: "nurse" }, "dr.pin": { role: "doctor" } });
+  const nurseTok = await mintStaffSession(STAFF_ENV, "org-gimsr", "nurse.anu", Date.now());
+  const otherOrgTok = await mintStaffSession(STAFF_ENV, "org-elsewhere", "nurse.anu", Date.now());
+  const drTok = await mintStaffSession(STAFF_ENV, "org-gimsr", "dr.pin", Date.now());
+  const asStaff = (tok) => async (url, init) => {
+    const headers = new Headers(init && init.headers || {});
+    headers.set("X-Staff-Token", tok);
+    return handle(new Request(String(url), { method: (init && init.method) || "GET", headers, body: init && init.body }), STAFF_ENV, h.deps);
+  };
+  const nurse = await (async () => { const b = new RemoteBackend({ tenantId: "gimsr", baseUrl: "https://x", fetch: asStaff(nurseTok) }); await b.open(); return b; })();
+  assert.equal(nurse.descriptor.actor.id, "nurse.anu");
+  assert.equal(nurse.descriptor.role, "nurse");
+  assert.deepEqual(nurse.descriptor.actor.writable, ["Observation"]);
+  // Staff sessions are off unless the deployment says so, and org-bound.
+  assert.equal((await handle(new Request("https://x/api/wardsynq/gimsr", { headers: { "X-Staff-Token": nurseTok } }), ENV, h.deps)).status, 401);
+  assert.equal((await asStaff(otherOrgTok)("https://x/api/wardsynq/gimsr")).status, 403);
+  // A doctor on a PIN session can write, and cannot sign: there is no registration number on a PIN.
+  const dr = new RemoteBackend({ tenantId: "gimsr", baseUrl: "https://x", fetch: asStaff(drTok) }); await dr.open();
+  assert.equal(dr.descriptor.actor.tier, "execute");
+  assert.equal(dr.descriptor.actor.canSign, false);
+  const signed = await asStaff(drTok)("https://x/api/wardsynq/gimsr/record", { method: "POST", body: JSON.stringify({ entity: MedicationOrder({ id: "rx-30", patientId: "pat-30", drug: "X", prescriberId: "dr.pin", status: "active", signedBy: "dr.pin" }) }) });
+  assert.deepEqual((await signed.json()).reasons.map((x) => x.code), ["NO_CREDENTIAL"]);
+});
+
+test("AI drafts: written by the AI actor on the clinician's behalf, never authored by the clinician; capped at DRAFT; no wider than the human", async () => {
+  const h = opdHospital({ "fb:dr-menon": { role: "doctor" }, "fb:sister-anu": { role: "nurse" }, "fb:desk-1": { role: "reception" } });
+  const f = h.fetchAs("fb:dr-menon", "AP-12345");
+  // 1. Declared origin.
+  const r1 = await f("https://x/api/wardsynq/gimsr/record", { method: "POST", body: JSON.stringify({
+    entity: ClinicalNote({ id: "note-ai-1", patientId: "pat-40", noteType: "progress", sections: { plan: "suggested plan" } }),
+    origin: { kind: "ai", id: "maik" },
+  }) });
+  assert.equal(r1.status, 201);
+  const b1 = await r1.json();
+  assert.equal(b1.record.writtenBy.id, "ai:maik");
+  assert.equal(b1.record.writtenBy.kind, "ai");
+  assert.equal(b1.record.writtenBy.tier, "draft");
+  assert.equal(b1.record.writtenBy.onBehalfOf, "fb:dr-menon");
+  assert.equal(b1.record.aiDrafted, true, "the store forces the flag, whatever the entity said");
+  assert.deepEqual(b1.actor, { id: "ai:maik", kind: "ai", tier: "draft", onBehalfOf: "fb:dr-menon" });
+  // 2. An entity that says it is AI-drafted is attributed to an AI even with no declared origin.
+  const r2 = await f("https://x/api/wardsynq/gimsr/record", { method: "POST", body: JSON.stringify({ entity: { ...ClinicalNote({ id: "note-ai-2", patientId: "pat-40", noteType: "progress", sections: {} }), aiDrafted: true } }) });
+  assert.equal((await r2.json()).record.writtenBy.kind, "ai");
+  // 3. An AI cannot commit an active order or sign, however the doctor's session could.
+  const r3 = await f("https://x/api/wardsynq/gimsr/record", { method: "POST", body: JSON.stringify({
+    entity: MedicationOrder({ id: "rx-ai", patientId: "pat-40", drug: "Warfarin", prescriberId: "fb:dr-menon", status: "active", signedBy: "fb:dr-menon" }), origin: { kind: "ai" },
+  }) });
+  assert.equal(r3.status, 403);
+  assert.deepEqual((await r3.json()).reasons.map((x) => x.code).sort(), ["EXECUTE_DENIED", "NON_HUMAN_SIGNATURE"]);
+  const r3b = await f("https://x/api/wardsynq/gimsr/record", { method: "POST", body: JSON.stringify({
+    entity: MedicationOrder({ id: "rx-ai", patientId: "pat-40", drug: "Warfarin", prescriberId: "fb:dr-menon" }), origin: { kind: "ai" },
+  }) });
+  assert.equal((await r3b.json()).record.status, "draft");
+  // 4. The AI inherits the human's scope: drafting for a nurse, it may draft an observation and not a note.
+  const rn = await h.fetchAs("fb:sister-anu")("https://x/api/wardsynq/gimsr/record", { method: "POST", body: JSON.stringify({ entity: ClinicalNote({ id: "note-ai-3", patientId: "pat-40", noteType: "progress", sections: {} }), origin: { kind: "ai" } }) });
+  assert.deepEqual((await rn.json()).reasons.map((x) => x.code), ["SCOPE_DENIED"]);
+  // 5. Drafting for a reader is drafting for nobody.
+  const rd = await h.fetchAs("fb:desk-1")("https://x/api/wardsynq/gimsr/record", { method: "POST", body: JSON.stringify({ entity: Observation({ id: "o", patientId: "pat-40", code: "x", value: 1 }), origin: { kind: "ai" } }) });
+  assert.equal(rd.status, 403);
+  // 6. The audit names the AI as writer and the human as delegate; the human's own write does not.
+  const ai = h.repository.audit.find((a) => a.action === "record.write" && a.scope.id === "note-ai-1");
+  assert.equal(ai.scope.writer, "ai:maik"); assert.equal(ai.scope.onBehalfOf, "fb:dr-menon");
+  // Pure: the AI actor is DRAFT whatever it asks, and its scope is the human's.
+  const human = actorFromOpdRole({ identity: { id: "fb:n" }, role: "nurse" });
+  const bot = aiActorFor(human, { id: "maik" });
+  assert.equal(bot.tier, "draft"); assert.deepEqual([...bot.scope.write], ["Observation"]); assert.equal(bot.onBehalfOf, "fb:n");
 });

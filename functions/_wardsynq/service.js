@@ -30,8 +30,9 @@
  */
 
 import { ClinicalStore } from "../../wardsynq/wardsynq-store.js";
-import { GovernedStore, GovernanceError, makeActor, KIND, TIER } from "../../wardsynq/wardsynq-actors.js";
+import { GovernedStore, GovernanceError, canRead } from "../../wardsynq/wardsynq-actors.js";
 import { VersionConflictError, assertRepository } from "./repository.js";
+import { actorFromConnectRole, aiActorFor, isAiOrigin } from "./actor.js";
 
 /** The canonical resource types. Mirrors wardsynq-model.js; a type not listed here is refused. */
 const RESOURCE_TYPES = Object.freeze([
@@ -109,29 +110,8 @@ function recordPolicy(tenant) {
   return Object.freeze({ mode, externallyOwned: Object.freeze(externallyOwned) });
 }
 
-/**
- * The membership role decides the WardSynQ actor. Only two roles reach the chart at all:
- *
- *   clinician    HUMAN at EXECUTE. Credential is the prescriber registration number carried in the
- *                verified Firebase custom claims (the same mechanism functions/api/rx/issue.js uses),
- *                or null, in which case the clinician can write but cannot sign.
- *   superadmin   HUMAN at READ. A platform operator can look, for support, and can write nothing.
- *
- * owner, admin and auditor are organisation roles and get no chart, which is the existing Connect
- * policy ("owner/admin are org-administration roles and get NO PHI by default") applied unchanged.
- */
-function actorForMembership({ identity, role, claims }) {
-  claims = claims || {};
-  if (!identity || !identity.id) return null;
-  const display = claims.name || identity.email || identity.id;
-  if (role === "clinician") {
-    return makeActor({ id: identity.id, kind: KIND.HUMAN, tier: TIER.EXECUTE, display, credential: claims.regNo ? String(claims.regNo) : null });
-  }
-  if (role === "superadmin") {
-    return makeActor({ id: identity.id, kind: KIND.HUMAN, tier: TIER.READ, display });
-  }
-  return null;
-}
+/** Kept under its first name. The mapping itself lives in actor.js, beside the OPD-role mapping. */
+const actorForMembership = actorFromConnectRole;
 
 function externallyOwned(record) {
   const sys = record && record.meta && record.meta.source && record.meta.source.system;
@@ -151,6 +131,7 @@ class RecordService {
     this.tenantId = String(deps.tenant.id);
     this.actor = deps.actor;
     this.role = deps.role || null;
+    this.roleSource = deps.roleSource || null;
     this.policy = recordPolicy(deps.tenant);
     this.now = deps.now || (() => new Date().toISOString());
     this.pseudonym = deps.pseudonym || (async () => null);
@@ -163,16 +144,26 @@ class RecordService {
 
   /** What a client needs to know before it writes: who the server thinks it is, and the mode. */
   descriptor() {
+    const a = this.actor;
     return {
       service: "wardsynq-record",
       tenantId: this.tenantId,
       mode: this.policy.mode,
       externallyOwned: [...this.policy.externallyOwned],
       role: this.role,
-      actor: { id: this.actor.id, kind: this.actor.kind, tier: this.actor.tier, display: this.actor.display, canSign: !!this.actor.credential },
+      roleSource: this.roleSource,
+      actor: {
+        id: a.id, kind: a.kind, tier: a.tier, display: a.display, canSign: !!a.credential,
+        // null = every type. A UI disables what the server will refuse rather than discovering it.
+        readable: a.scope.read === null ? null : [...a.scope.read],
+        writable: a.scope.write === null ? null : [...a.scope.write],
+      },
       resourceTypes: [...RESOURCE_TYPES],
     };
   }
+
+  /** The types this actor may read, for chart and feed filtering. */
+  _readableTypes() { return RESOURCE_TYPES.filter((t) => canRead(this.actor, t)); }
 
   async _audit(action, fields) {
     const patientId = fields && fields.patientId;
@@ -218,7 +209,7 @@ class RecordService {
    */
   async list(resourceType, limit) {
     this._assertType(resourceType);
-    this.governed._assertRead(this.actor);
+    this.governed._assertRead(this.actor, resourceType);
     const rows = await this.repository.latestByType(this.tenantId, resourceType, limit);
     await this.repository.auditOnly(this.tenantId, await this._audit("record.list", { scope: { resourceType, limit: Number(limit) || null }, resourceCounts: { [resourceType]: rows.length } }));
     return rows;
@@ -228,7 +219,9 @@ class RecordService {
   async chart(patientId) {
     const out = {};
     const counts = {};
-    for (const t of RESOURCE_TYPES) {
+    // Only the types this actor may read. A pharmacist's chart is the orders and nothing else, and
+    // the absence of a key says so rather than an empty list pretending the notes do not exist.
+    for (const t of this._readableTypes()) {
       const rows = await this.governed.byPatient(this.actor, t, patientId);
       out[t] = rows;
       counts[t] = rows.length;
@@ -242,8 +235,10 @@ class RecordService {
     if (!this.governed) throw new RecordRequestError("no store", "NO_STORE");
     // The governed store has no change feed of its own; this is a READ and is gated the same way.
     this.governed._assertRead(this.actor);
-    const page = await this.repository.changes(this.tenantId, since, limit);
-    await this.repository.auditOnly(this.tenantId, await this._audit("record.changes", { scope: { since: Number(since) || 0, cursor: page.cursor }, resourceCounts: { records: page.records.length } }));
+    const raw = await this.repository.changes(this.tenantId, since, limit);
+    // The cursor advances over everything; the records handed back are only what may be read.
+    const page = { records: raw.records.filter((r) => canRead(this.actor, r.resourceType)), cursor: raw.cursor };
+    await this.repository.auditOnly(this.tenantId, await this._audit("record.changes", { scope: { since: Number(since) || 0, cursor: page.cursor, withheld: raw.records.length - page.records.length }, resourceCounts: { records: page.records.length } }));
     return page;
   }
 
@@ -251,11 +246,15 @@ class RecordService {
    * The native write door.
    *
    * @param {object} entity  a canonical entity (resourceType + id required)
-   * @param {{expectedVersion?: number|null, idempotencyKey?: string|null, activePatientId?: string|null}} [opts]
-   * @returns {Promise<{record: object, replayed: boolean}>}
+   * @param {{expectedVersion?: number|null, idempotencyKey?: string|null, activePatientId?: string|null,
+   *   origin?: {kind: string, id?: string}|null}} [opts]
+   *   origin  who produced the content. `{kind: "ai", id: "maik"}` (or an entity with aiDrafted: true)
+   *           makes the write an AI-kind actor's, delegated by this session's human, never the human's.
+   * @returns {Promise<{record: object, replayed: boolean, actor: {id, kind, tier, onBehalfOf}}>}
    */
   async put(entity, opts) {
     opts = opts || {};
+    const writer = isAiOrigin(entity, opts.origin) ? aiActorFor(this.actor, opts.origin) : this.actor;
     if (!entity || typeof entity !== "object") throw new RecordRequestError("a write needs an entity", "NO_ENTITY");
     if (typeof entity.resourceType !== "string") throw new RecordRequestError("entity.resourceType is required", "NO_TYPE");
     this._assertType(entity.resourceType);
@@ -308,7 +307,8 @@ class RecordService {
     // The audit row lands in the SAME atomic append as the version it describes. The version it
     // names is the one the store is about to assign, which the concurrency check above just fixed.
     const auditEvent = await this._audit("record.write", {
-      scope: { resourceType: entity.resourceType, id: entity.id, version: currentVersion + 1, mode: this.policy.mode, idempotent: !!key },
+      scope: { resourceType: entity.resourceType, id: entity.id, version: currentVersion + 1, mode: this.policy.mode, idempotent: !!key,
+        ...(writer !== this.actor ? { writer: writer.id, writerKind: writer.kind, onBehalfOf: writer.onBehalfOf } : {}) },
       resourceCounts: { [entity.resourceType]: 1 },
       patientId,
     });
@@ -316,17 +316,19 @@ class RecordService {
 
     let saved;
     try {
-      saved = await this.governed.put(this.actor, entity, { activePatientId: opts.activePatientId || null });
+      saved = await this.governed.put(writer, entity, { activePatientId: opts.activePatientId || null });
     } catch (err) {
       this.backend.withWriteContext(null);
       if (err instanceof GovernanceError) {
         await this.repository.auditOnly(this.tenantId, await this._audit("record.denied", {
-          scope: { resourceType: entity.resourceType, id: entity.id, reasons: err.reasons.map((r) => r.code) }, patientId, outcome: "denied",
+          scope: { resourceType: entity.resourceType, id: entity.id, reasons: err.reasons.map((r) => r.code),
+            ...(writer !== this.actor ? { writer: writer.id, writerKind: writer.kind, onBehalfOf: writer.onBehalfOf } : {}) },
+          patientId, outcome: "denied",
         }));
       }
       throw err;
     }
-    return { record: saved, replayed: false };
+    return { record: saved, replayed: false, actor: { id: writer.id, kind: writer.kind, tier: writer.tier, onBehalfOf: writer.onBehalfOf } };
   }
 
   /**

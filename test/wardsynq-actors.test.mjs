@@ -371,3 +371,40 @@ test("a READ actor writes nothing at all, draft or otherwise", () => {
   assert.equal(v.allowed, false);
   assert.ok(v.reasons.some((r) => r.code === "DRAFT_DENIED"));
 });
+
+/* ------------------------------------------------------------------ scope and delegation (2026-09-06) */
+
+test("scope: an actor built without scope behaves exactly as before; a scoped one is refused outside it, as a governance denial", async () => {
+  const { GovernedStore, makeActor, KIND, TIER, authoriseWrite, canRead, GovernanceError } = await import("../wardsynq/wardsynq-actors.js");
+  const { ClinicalStore, MemoryBackend } = await import("../wardsynq/wardsynq-store.js");
+  const unscoped = makeActor({ id: "dr", kind: KIND.HUMAN, tier: TIER.EXECUTE, credential: "R1" });
+  assert.deepEqual(unscoped.scope, { read: null, write: null });
+  assert.equal(canRead(unscoped, "ClinicalNote"), true);
+  const nurse = makeActor({ id: "rn", kind: KIND.HUMAN, tier: TIER.EXECUTE, scope: { read: null, write: ["Observation"] } });
+  assert.equal(authoriseWrite(nurse, { resourceType: "Observation", id: "o" }).allowed, true);
+  const v = authoriseWrite(nurse, { resourceType: "MedicationOrder", id: "rx", status: "draft" });
+  assert.equal(v.allowed, false);
+  assert.deepEqual(v.reasons.map((r) => r.code), ["SCOPE_DENIED"]);
+  const pharm = makeActor({ id: "ph", kind: KIND.HUMAN, tier: TIER.READ, scope: { read: ["MedicationOrder"], write: [] } });
+  const g = new GovernedStore({ store: new ClinicalStore(new MemoryBackend()) });
+  await assert.rejects(g.get(pharm, "ClinicalNote", "n"), (e) => e instanceof GovernanceError && e.code === "READ_SCOPE_DENIED");
+  assert.equal(await g.get(pharm, "MedicationOrder", "rx"), null);
+  assert.equal(nurse.scope.write.includes("Observation"), true);
+  assert.throws(() => { nurse.scope.write.push("MedicationOrder"); }, /object is not extensible|read only/);
+});
+
+test("delegation: an AI acting for a human is stamped as the AI with onBehalfOf, never as the human", async () => {
+  const { GovernedStore, makeActor, KIND, TIER } = await import("../wardsynq/wardsynq-actors.js");
+  const { ClinicalStore, MemoryBackend } = await import("../wardsynq/wardsynq-store.js");
+  const g = new GovernedStore({ store: new ClinicalStore(new MemoryBackend()) });
+  const bot = makeActor({ id: "ai:maik", kind: KIND.AI, tier: TIER.EXECUTE, onBehalfOf: "dr-1" });
+  assert.equal(bot.tier, TIER.DRAFT);
+  const saved = await g.put(bot, { resourceType: "ClinicalNote", id: "n1", patientId: "p", sections: {} });
+  assert.equal(saved.writtenBy.id, "ai:maik");
+  assert.equal(saved.writtenBy.kind, "ai");
+  assert.equal(saved.writtenBy.onBehalfOf, "dr-1");
+  assert.equal(saved.aiDrafted, true);
+  const human = makeActor({ id: "dr-1", kind: KIND.HUMAN, tier: TIER.EXECUTE });
+  const own = await g.put(human, { resourceType: "ClinicalNote", id: "n2", patientId: "p", sections: {} });
+  assert.equal("onBehalfOf" in own.writtenBy, false, "a human acting for themselves carries no delegate");
+});

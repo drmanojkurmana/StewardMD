@@ -26,6 +26,18 @@
  * record whose patient does not match the actor's active chart is refused, which is what stops a
  * second tab, a stale form or a mid-write patient switch committing to the wrong aggregate.
  *
+ * SCOPE, added 2026-09-06 when the hospital's operational roles were mapped onto this ladder. A tier
+ * says how far an actor may go; scope says on WHAT. A nurse holds EXECUTE for the vital signs she
+ * records, because a recorded observation is a committed clinical fact and not a draft, and holds
+ * nothing at all on a prescription. Scope is a per-resource-type allow-list for reads and for
+ * writes; absent (null) means every type, which is what every actor built before scope existed gets,
+ * so nothing that worked changes. A denied scope is a governance denial like any other.
+ *
+ * DELEGATION, same date. An AI that drafts on a clinician's behalf acts as ITSELF, an AI-kind actor
+ * capped at DRAFT, and carries `onBehalfOf` naming the human whose session it ran in. The record
+ * then says an AI wrote it and for whom, rather than saying the doctor wrote it, which is the
+ * forgery the hazard describes with the roles reversed.
+ *
  * STATUS: IMPLEMENTED and TESTED. NOT clinically validated and NOT clinically approved.
  *
  * node --test test/wardsynq-actors.test.mjs
@@ -123,6 +135,7 @@ function makeActor(spec) {
   // Clamp rather than reject: a caller asking for more than its kind allows gets less, silently in
   // the object and loudly in the audit, which is safer than a throw a caller might catch and retry.
   const granted = rank(asked) > rank(ceiling) ? ceiling : asked;
+  const scopeList = (v) => (Array.isArray(v) ? Object.freeze(v.map(String)) : null);
   return Object.freeze({
     id: String(spec.id),
     kind: spec.kind,
@@ -132,7 +145,24 @@ function makeActor(spec) {
     clamped: granted !== asked,
     // A human's signature is only valid if they hold a credential. Absent for non-humans by design.
     credential: spec.kind === KIND.HUMAN ? (spec.credential || null) : null,
+    // Resource-type allow-lists. null = every type (the pre-scope behaviour); [] = none.
+    scope: Object.freeze({ read: scopeList(spec.scope && spec.scope.read), write: scopeList(spec.scope && spec.scope.write) }),
+    // The human this actor is acting for, when it is not acting for itself. Set for AI drafts.
+    onBehalfOf: spec.onBehalfOf ? String(spec.onBehalfOf) : null,
   });
+}
+
+/** True when the actor's scope admits this resource type for the given operation ("read" | "write"). */
+function inScope(actor, op, resourceType) {
+  const list = actor && actor.scope ? actor.scope[op] : null;
+  if (list === null || list === undefined) return true;      // no scope declared: every type
+  return Array.isArray(list) && list.includes(resourceType);
+}
+
+/** Reading one resource type: READ on the ladder and the type within the actor's read scope. */
+function canRead(actor, resourceType) {
+  if (!can(actor, TIER.READ)) return false;
+  return resourceType === undefined ? true : inScope(actor, "read", resourceType);
 }
 
 /** True when the actor holds at least `need`. */
@@ -216,6 +246,11 @@ function authoriseWrite(actor, entity, ctx) {
     reasons.push({ code: "DEVICE_SCOPE", message: `a device may not write a ${entity.resourceType}` });
   }
 
+  // 4b. Declared scope. A nurse's EXECUTE is for the observations she records, not for an order.
+  if (!inScope(actor, "write", entity.resourceType)) {
+    reasons.push({ code: "SCOPE_DENIED", message: `${actor.id} may not write a ${entity.resourceType}` });
+  }
+
   // 5. Session binding. HAZ-ID-01: a write must land on the chart the actor actually has open.
   if (ctx.activePatientId && entity.patientId && entity.patientId !== ctx.activePatientId) {
     reasons.push({
@@ -250,22 +285,25 @@ class GovernedStore {
   async open() { return this._store.open(); }
   async close() { return this._store.close(); }
 
-  /** Reads require READ and nothing more. */
+  /** Reads require READ, and the type within the actor's read scope. */
   async get(actor, resourceType, id) {
-    this._assertRead(actor);
+    this._assertRead(actor, resourceType);
     return this._store.get(resourceType, id);
   }
   async history(actor, resourceType, id) {
-    this._assertRead(actor);
+    this._assertRead(actor, resourceType);
     return this._store.history(resourceType, id);
   }
   async byPatient(actor, resourceType, patientId) {
-    this._assertRead(actor);
+    this._assertRead(actor, resourceType);
     return this._store.byPatient(resourceType, patientId);
   }
 
-  _assertRead(actor) {
+  _assertRead(actor, resourceType) {
     if (!can(actor, TIER.READ)) throw new GovernanceError("reading the chart requires an authenticated actor", "READ_DENIED");
+    if (resourceType !== undefined && !canRead(actor, resourceType)) {
+      throw new GovernanceError(`${actor.id} may not read ${resourceType}`, "READ_SCOPE_DENIED");
+    }
   }
 
   /**
@@ -293,7 +331,12 @@ class GovernedStore {
     // actually wrote it rather than who it claims to be from.
     const stamped = {
       ...entity,
-      writtenBy: { id: actor.id, kind: actor.kind, tier: actor.tier, at: new Date().toISOString() },
+      writtenBy: {
+        id: actor.id, kind: actor.kind, tier: actor.tier, at: new Date().toISOString(),
+        // Present only when the actor acted for somebody else. An AI draft names its clinician here
+        // and nowhere else; the human is NOT the author of a record the human did not write.
+        ...(actor.onBehalfOf ? { onBehalfOf: actor.onBehalfOf } : {}),
+      },
     };
     if (actor.kind === KIND.AI) stamped.aiDrafted = true;
     const saved = await this._store.put(stamped);
@@ -339,5 +382,5 @@ class GovernedStore {
 export {
   TIER, LADDER, KIND, CEILING, DEVICE_WRITABLE, INSTRUCTION_TYPES,
   GovernanceError, GovernedStore,
-  makeActor, can, effectiveTier, authoriseWrite, rank,
+  makeActor, can, canRead, inScope, effectiveTier, authoriseWrite, rank,
 };

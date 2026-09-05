@@ -1,0 +1,220 @@
+/* functions/_wardsynq/actor.js — ONE authorization path from a request to a governed clinical actor.
+ *
+ * The hospital already has a role system: functions/_queue_roles.js, eighteen roles, each a list of
+ * capabilities, granted per organisation in q_members and decided server-side by authorizeOrg().
+ * The interop platform has a second, smaller one: connect_membership (owner / admin / clinician /
+ * auditor). WardSynQ has a ladder (READ / SUGGEST / DRAFT / EXECUTE) that says how far an actor may
+ * go, and, since today, a scope that says on what. This file joins them without adding a fourth.
+ *
+ *   request ──identity──▶ who (Firebase / Access / staff session)
+ *           ──tenant────▶ the Connect tenant row (must exist; the record is keyed on it)
+ *           ──role──────▶ OPD org role via authorizeOrg()  |  else Connect membership role
+ *           ──grant─────▶ tier + read scope + write scope, DERIVED FROM THE ROLE'S CAPABILITIES
+ *           ──actor─────▶ makeActor(), which clamps to the kind's ceiling as it always has
+ *
+ * THE MAPPING IS FROM CAPABILITIES, NOT FROM ROLE NAMES. The owner's non-negotiable in
+ * _queue_roles.js is "a nurse may record VITALS but never treatment/prescriptions". That is already
+ * encoded as EMR_VITALS without EMR_TREAT. Deriving the grant from those two capabilities means the
+ * clinical record cannot disagree with the queue about what a nurse is, and a new role gets the
+ * right grant by holding the right capabilities rather than by being added to a table here.
+ *
+ *   EMR_TREAT             EXECUTE   write every type       read every type       doctor, pg_faculty, pg_hod, admin
+ *   EMR_VITALS (no TREAT) EXECUTE   write Observation      read every type (has EMR_VIEW)   nurse, intern, resident, pg_resident
+ *   EMR_VIEW only         READ      write nothing          read every type       supervisor, reception
+ *   ORDER_READ only       READ      write nothing          read orders only      cashier, pharmacy
+ *   none of these         no clinical actor at all: 403    hr, viewer, oncqis_*, academic_cell
+ *
+ * A nurse gets EXECUTE and not DRAFT because a recorded blood pressure is a committed clinical fact,
+ * not a proposal awaiting a signature. What keeps her off a prescription is scope, which is a
+ * governance denial (SCOPE_DENIED), and what keeps her from signing anything is that she holds no
+ * credential. Nothing here changes a clinical rule; the safety engine never sees this file.
+ *
+ * PRECEDENCE. When the tenant is linked to an OPD organisation and the person is a member of it,
+ * the OPD role decides. That is the hospital's staff registry and it is where a nurse or a
+ * receptionist exists at all; Connect membership has no such roles. Connect's `clinician` still
+ * carries a doctor who uses the app against an integration-mode hospital with no OPD org. Connect's
+ * owner / admin / auditor never reach the chart, as before.
+ *
+ * AI. A write that declares an AI origin, or whose entity says `aiDrafted: true`, is written by an
+ * AI-KIND actor `ai:<name>`, capped at DRAFT by its kind, carrying `onBehalfOf` = the human whose
+ * session it ran in, and holding no more write scope than that human holds. The doctor whose token
+ * made the request is named as the delegate, never as the author.
+ */
+
+import { makeActor, KIND, TIER, can as actorCan } from "../../wardsynq/wardsynq-actors.js";
+import { CAPS, ROLES, capsFor, isRole } from "../_queue_roles.js";
+import { resolveTenant } from "../_connect/identity.js";
+import { AuthError, PermissionError } from "../_connect/permission.js";
+import { can as connectCan } from "../_connect/enterprise/rbac.js";
+
+const RESOURCE_TYPES = Object.freeze([
+  "Patient", "Encounter", "Condition", "AllergyIntolerance", "Observation",
+  "MedicationOrder", "MedicationAdministration", "ServiceRequest", "DiagnosticReport",
+  "CarePlan", "ClinicalNote",
+]);
+const ORDER_TYPES = Object.freeze(["MedicationOrder", "ServiceRequest"]);
+const VITALS_TYPES = Object.freeze(["Observation"]);
+
+/**
+ * PURE. From a capability list to a clinical grant, or null when the role has no business with the
+ * chart. `null` scope means every type; `[]` means none.
+ * @returns {{tier: string, read: string[]|null, write: string[]|null, basis: string} | null}
+ */
+function grantForCaps(caps) {
+  const has = (c) => Array.isArray(caps) && caps.includes(c);
+  if (has(CAPS.EMR_TREAT)) return { tier: TIER.EXECUTE, read: null, write: null, basis: CAPS.EMR_TREAT };
+  if (has(CAPS.EMR_VITALS)) return { tier: TIER.EXECUTE, read: has(CAPS.EMR_VIEW) ? null : [...VITALS_TYPES], write: [...VITALS_TYPES], basis: CAPS.EMR_VITALS };
+  if (has(CAPS.EMR_VIEW)) return { tier: TIER.READ, read: null, write: [], basis: CAPS.EMR_VIEW };
+  if (has(CAPS.ORDER_READ)) return { tier: TIER.READ, read: [...ORDER_TYPES], write: [], basis: CAPS.ORDER_READ };
+  return null;
+}
+
+/** PURE. The grant for one of the eighteen operational roles. */
+function grantForRole(role) {
+  if (!isRole(role)) return null;
+  return grantForCaps(capsFor(role));
+}
+
+/** The whole mapping, for a console or a test to print. */
+function roleMapping() {
+  const out = {};
+  for (const role of ROLES) out[role] = grantForRole(role);
+  return out;
+}
+
+/**
+ * PURE. Builds the human actor for an OPD role. `claims` are the verified Firebase custom claims;
+ * `regNo` is the prescriber registration the prescription route already relies on, and it is the
+ * only source of a signing credential. A staff PIN session carries none, so a doctor who signed in
+ * with a PIN can write and cannot sign, and the record will say so.
+ */
+function actorFromOpdRole({ identity, role, claims }) {
+  claims = claims || {};
+  if (!identity || !identity.id) return null;
+  const grant = grantForRole(role);
+  if (!grant) return null;
+  return makeActor({
+    id: identity.id, kind: KIND.HUMAN, tier: grant.tier,
+    display: claims.name || identity.name || identity.email || identity.id,
+    credential: claims.regNo ? String(claims.regNo) : null,
+    scope: { read: grant.read, write: grant.write },
+  });
+}
+
+/**
+ * PURE. The Connect membership roles, unchanged from the first cut of the service: clinician is a
+ * doctor, super-admin may look and not write, everybody else gets no chart.
+ */
+function actorFromConnectRole({ identity, role, claims }) {
+  claims = claims || {};
+  if (!identity || !identity.id) return null;
+  const display = claims.name || identity.name || identity.email || identity.id;
+  if (role === "clinician") {
+    return makeActor({ id: identity.id, kind: KIND.HUMAN, tier: TIER.EXECUTE, display, credential: claims.regNo ? String(claims.regNo) : null });
+  }
+  if (role === "superadmin") {
+    return makeActor({ id: identity.id, kind: KIND.HUMAN, tier: TIER.READ, display, scope: { read: null, write: [] } });
+  }
+  return null;
+}
+
+/**
+ * PURE. The AI actor for a draft made in a human's session. Its kind caps it at DRAFT whatever is
+ * asked; its write scope is the human's, never wider; and it names the human as the delegate.
+ * A human who may write nothing delegates nothing: the AI gets an empty write scope and every
+ * write it attempts is SCOPE_DENIED, recorded as such.
+ */
+function aiActorFor(human, origin) {
+  origin = origin || {};
+  if (!human || human.kind !== KIND.HUMAN) throw new PermissionError("an AI draft needs a human session to act in");
+  const name = String(origin.id || origin.name || "maik").replace(/[^A-Za-z0-9._:-]/g, "").slice(0, 64) || "maik";
+  return makeActor({
+    id: `ai:${name}`, kind: KIND.AI, tier: TIER.DRAFT,
+    display: origin.display || `${name} (AI, drafting for ${human.display})`,
+    scope: { read: human.scope.read, write: actorCan(human, TIER.DRAFT) ? human.scope.write : [] },
+    onBehalfOf: human.id,
+  });
+}
+
+/** True when a write should be attributed to an AI rather than to the session's human. */
+function isAiOrigin(entity, origin) {
+  if (origin && typeof origin === "object" && origin.kind === "ai") return true;
+  return !!(entity && entity.aiDrafted === true);
+}
+
+/* ------------------------------------------------------------------ identity */
+
+const staffEnabled = (env) => !!(env && env.QUEUE_STAFF_ENABLED === "1");
+
+/**
+ * Who is calling. Firebase / Cloudflare Access first (the doctor app, a hospital PC behind Access),
+ * then a StewardMD-native staff session (the nurse's or receptionist's email+PIN login, minted
+ * org-bound by _opd_auth.js) when the deployment has staff sign-in on. A session proves identity
+ * only; authority is decided below, from membership, as everywhere else in the product.
+ */
+async function resolveIdentity(request, env, deps) {
+  const who = await deps.identifyFn(request, env);
+  if (who && !who.guest && who.id) {
+    return { kind: "firebase", id: who.id, email: who.email ? String(who.email).toLowerCase() : null, name: who.name || null, orgId: null };
+  }
+  if (staffEnabled(env) && deps.staffSession) {
+    const tok = request.headers.get("X-Staff-Token") || (request.headers.get("Authorization") || "").replace(/^Bearer\s+/i, "");
+    if (tok) {
+      const ss = await deps.staffSession(env, tok, Date.now());
+      if (ss && ss.identity && ss.orgId) return { kind: "staff", id: String(ss.identity), email: null, name: String(ss.identity), orgId: String(ss.orgId) };
+    }
+  }
+  throw new AuthError("authenticated actor required");
+}
+
+/**
+ * The path. Returns { identity, tenant, role, source, grant, actor } or throws AuthError /
+ * PermissionError. `need` is "record:read" | "record:write" and applies to the Connect branch, where
+ * the RBAC matrix is the capability list; on the OPD branch the capabilities are the role's own.
+ *
+ * deps: { db, identifyFn, claimsFn?, staffSession?, orgForTenant, authorizeOrg }
+ */
+async function resolveClinicalActor(request, env, tenantId, need, deps) {
+  deps = deps || {};
+  if (!deps.db) throw new PermissionError("record service is not provisioned");
+  const identity = await resolveIdentity(request, env, deps);
+  const claims = deps.claimsFn && identity.kind === "firebase" ? (await deps.claimsFn(request, env)) || {} : {};
+
+  // The tenant row is the record's key and must exist, whoever is asking.
+  const tenant = await deps.db.prepare("SELECT * FROM connect_tenant WHERE id=?").bind(String(tenantId)).first();
+  if (!tenant) throw new PermissionError("tenant not found");
+
+  // 1. The hospital's own staff registry, when this tenant has one.
+  const org = deps.orgForTenant ? await deps.orgForTenant(env, tenant) : null;
+  if (org) {
+    // A staff session is org-bound; authorizeOrg refuses a mismatch itself, but a session for
+    // another organisation must not even be looked up against this one.
+    if (identity.kind === "staff" && identity.orgId !== String(org.id)) throw new PermissionError("staff session is for another organisation");
+    const az = await deps.authorizeOrg(env, { kind: identity.kind, id: identity.id, email: identity.email, orgId: identity.orgId }, org.id, null);
+    if (az && az.ok) {
+      const grant = grantForRole(az.role);
+      if (!grant) throw new PermissionError(`role '${az.role}' has no clinical actor`);
+      const actor = actorFromOpdRole({ identity, role: az.role, claims });
+      if (need === "record:write" && !actorCan(actor, TIER.DRAFT)) throw new PermissionError(`role '${az.role}' may not write the clinical record`);
+      return { identity, tenant, role: az.role, source: "opd", org: { id: org.id, name: org.name || null }, grant, actor };
+    }
+    // Not a member of the linked organisation. Fall through: a Connect clinician may still be one.
+  }
+  if (identity.kind === "staff") throw new PermissionError("staff session is not a member of this organisation");
+
+  // 2. Connect membership (or the platform super-admin allow-list), as before.
+  let membership;
+  try { membership = await resolveTenant(deps.db, { id: identity.id, email: identity.email }, tenantId, env); }
+  catch (e) { if (e instanceof PermissionError) throw new PermissionError("not a member of this tenant"); throw e; }
+  if (!connectCan(membership.role, need)) throw new PermissionError(`role '${membership.role}' may not perform '${need}'`);
+  const actor = actorFromConnectRole({ identity, role: membership.role, claims });
+  if (!actor) throw new PermissionError(`role '${membership.role}' has no clinical actor`);
+  return { identity, tenant: membership.tenant, role: membership.role, source: "connect", org: null, grant: { tier: actor.tier, read: actor.scope.read, write: actor.scope.write, basis: "connect:" + membership.role }, actor };
+}
+
+export {
+  RESOURCE_TYPES, ORDER_TYPES, VITALS_TYPES,
+  grantForCaps, grantForRole, roleMapping,
+  actorFromOpdRole, actorFromConnectRole, aiActorFor, isAiOrigin,
+  resolveIdentity, resolveClinicalActor,
+};
