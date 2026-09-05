@@ -46,6 +46,10 @@ const DELIVERY = Object.freeze({
   QUEUED: "queued",         // written to the outbox, nothing attempted yet
   SENT: "sent",             // a transport accepted it; nobody has confirmed anything
   DELIVERED: "delivered",   // the transport confirmed it reached a device
+  // An identified user OPENED it. Between DELIVERED and SEEN because they are different facts: a
+  // phone buzzing in a pocket is delivered, and a registrar opening the alert is not yet a registrar
+  // accepting it. Set by wardsynq-orchestrator.js; nothing in this file moves a notice here.
+  VIEWED: "viewed",
   SEEN: "seen",             // a HUMAN acknowledged it. The only state that closes a loop.
   FAILED: "failed",         // every channel on the ladder was tried and none delivered
 });
@@ -345,9 +349,12 @@ class Transport {
       .map((n) => ({
         ...n,
         outstandingMinutes: Math.round((now - Date.parse(n.createdAt)) / 60000),
-        reading: n.state === DELIVERY.DELIVERED
-          ? "reached a device and no human has acknowledged it"
-          : n.state === DELIVERY.SENT
+        reading: n.state === DELIVERY.VIEWED
+          // Worse than DELIVERED, not better. Somebody opened this and walked away from it.
+          ? `opened by ${n.viewedBy || "an identified user"} and NOT acknowledged; a person has seen this and not taken it`
+          : n.state === DELIVERY.DELIVERED
+            ? "reached a device and no human has acknowledged it"
+            : n.state === DELIVERY.SENT
             ? "a transport accepted it and nothing has confirmed it reached anybody"
             : n.state === DELIVERY.FAILED
               ? "every channel was tried and none delivered"

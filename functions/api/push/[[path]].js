@@ -15,6 +15,7 @@ import { saveNativeToken, deleteNativeToken, sendNativeToAll, nativePushEnabled 
 import { identify } from "../../_fbauth.js";
 import { ownerOK } from "../../_adminauth.js";
 import { escalateOverdueTask, sweepOverdue, isGroupMember, notifyNewInstruction, notifyCriticalValue, remindTask } from "../../_taskpush.js";
+import { saveReceipt, listReceipts } from "../../_wardsynq_receipts.js";
 
 const json = (obj, status = 200) => new Response(JSON.stringify(obj), {
   status, headers: { "Content-Type": "application/json", "Cache-Control": "no-store" }
@@ -122,6 +123,44 @@ export async function onRequest(context) {
     if (!(await isGroupMember(env, gid, uid))) return json({ error: "not-a-member" }, 403);
     const res = await notifyCriticalValue(env, gid, pid, uid, { label: body.label, value: body.value, unit: body.unit, bed: body.bed, reason: body.reason });
     return json(res || { error: "failed" });
+  }
+  // ── WardSynQ escalation channel (HAZ-DET-01) ────────────────────────────────────────────────
+  // Additive: nothing above this block changes. A WardSynQ notice is pushed to the caller's OWN
+  // registered devices, and the handset posts back a receipt so "delivered" can mean a phone
+  // actually has it rather than a gateway having accepted bytes.
+  if (method === "POST" && seg === "wardsynq-alert") {
+    if (!nativePushEnabled(env)) return json({ error: "push-disabled" }, 501);
+    const uid = await identify(request, env);
+    if (!uid) return json({ error: "auth-required" }, 401);
+    let body = {}; try { body = (await request.json()) || {}; } catch (e) {}
+    if (!body.title) return json({ error: "bad-args" }, 400);
+    const data = body.data || {};
+    if (!data.noticeId) return json({ error: "no-notice-id" }, 400);
+    // Scoped to the caller's own devices. Fanning a clinical alert to a whole unit is a policy
+    // decision that belongs to the escalation ladder, not to a transport endpoint.
+    const res = await sendNativeToAll(env, {
+      title: String(body.title).slice(0, 200),
+      body: String(body.body || "").slice(0, 500),
+      data,
+    }, { uid });
+    // `sent` counts gateway acceptances. It is reported as such and the client turns it into SENT,
+    // never DELIVERED.
+    return json({ sent: res.sent || 0, total: res.total || 0 });
+  }
+  // The handset confirming what actually happened to it: received, opened, acknowledged.
+  if (method === "POST" && seg === "wardsynq-receipt") {
+    const uid = await identify(request, env);
+    if (!uid) return json({ error: "auth-required" }, 401);
+    let body = {}; try { body = (await request.json()) || {}; } catch (e) {}
+    const out = await saveReceipt(env, uid, body);
+    return json(out, out.ok ? 200 : 400);
+  }
+  // The workstation that raised the alert, polling those receipts back.
+  if (method === "GET" && seg === "wardsynq-receipts") {
+    const uid = await identify(request, env);
+    if (!uid) return json({ error: "auth-required" }, 401);
+    const since = new URL(request.url).searchParams.get("since") || null;
+    return json({ receipts: await listReceipts(env, uid, since) });
   }
   // On-demand "nudge": re-push a task's reminder to the unit's executor roles. Member-triggered;
   // remindTask enforces that the caller holds an instructing role.
