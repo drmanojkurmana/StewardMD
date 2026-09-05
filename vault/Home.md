@@ -18,6 +18,7 @@ local `www/` bundle, calling `stewardmd.in/api/*`). Buildless PWA (ES5 IIFEs, `?
 - [[ICU]] — the ICU flagship workstation
 - [[FollowCare]] — post-discharge recovery intelligence
 - [[KardiQ X]] — ECG interpretation + Learn atlas
+- [[RadioAnatome]] — cross-sectional CT/MRI atlas · [[RadioAnatome 3D]] — BodyParts3D 3D layer on the same ontology
 - [[ThoreX]] — chest X-ray support
 - [[FundX]] — smartphone fundus/retinal imaging
 - [[CliniX]] — clinical learning + bedside skills for medical students (flag OFF, content pending R1)

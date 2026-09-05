@@ -96,6 +96,11 @@ self.addEventListener("fetch", function (e) {
   // patient lists). Let them go straight to the network so nothing is persisted.
   if (url.pathname.indexOf("/api/") === 0) return;
 
+  // RadioAnatome 3D geometry (/atlas/3d/*.bin.gz, ~31 MB in total) is fetched on demand by
+  // atlas3d.js. Keep it out of the versioned SW cache: every CACHE bump would otherwise
+  // re-download it, and the HTTP cache already serves repeat opens.
+  if (url.pathname.indexOf("/atlas/3d/") === 0 && /\.bin\.gz$/.test(url.pathname)) return;
+
   var isHTML = req.mode === "navigate" || (req.headers.get("accept") || "").indexOf("text/html") !== -1;
 
   if (isHTML) {
