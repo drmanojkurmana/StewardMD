@@ -2183,6 +2183,13 @@ window.openExternal = function (u) {
      It does NOT read or enable smd_wardsynq_cutover. That is a separate flag and remains off. -->
 <script src="/wardsynq-flags.js?v=wsq1" defer></script>
 <script type="module" src="/wardsynq-shadow-boot.js?v=wsq1"></script>
+
+<!-- The acknowledgement screen for a deterioration escalation (HAZ-DET-01).
+
+     Deliberately NOT behind a flag. It is inert until a push of type "wardsynq-alert" arrives, and
+     gating it off would mean an escalation that reaches a handset and cannot be answered on it,
+     which is a worse failure than the screen existing unused. -->
+<script src="/wardsynq-alert-ui.js?v=wsq1" defer></script>
 <!-- ICU v2 Phase 2: real-time collaboration backend (window.SMD_ICU_GROUPS). Pure data +
      Firestore subscription layer; NO DOM. Flag smd_icu_groups (default OFF). Loads AFTER icu.js
      (icu.js reads window.SMD_ICU_GROUPS lazily at runtime, so this order is safe). -->
