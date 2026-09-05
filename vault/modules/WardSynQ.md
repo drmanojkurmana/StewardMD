@@ -258,8 +258,22 @@ refuse rather than pretend: a monitor with no channel will not raise.
 
 The `ghis-ward.js` cut-over, still the biggest remaining piece of the owner's architecture: moving
 the live mobile path onto the adapter. `wardsynq-shadow.js` exists for it and `icu.js` is untouched;
-it awaits a shadow run against real ward data (`?wardsynq_shadow=1`, then check
-`SMD_WARDSYNQ_SHADOW.report().clean`).
+it awaits a shadow run against real ward data.
+
+**How to run shadow mode, corrected 2026-09-05 after a device round.** On the web,
+`?wardsynq_shadow=1`. On the NATIVE app there is no address bar, so the query param is unreachable
+and the flag has to be set directly: `SMD_WARDSYNQ_FLAGS.set('smd_wardsynq_shadow', true)` in the
+WebView console, then reload. Reading the WebView needs `ios_webkit_debug_proxy`; contrary to the
+older note in CLAUDE.md it worked over a network pairing, though the page list empties whenever the
+screen locks and the page id increments on every relaunch. Note that a reinstall clears
+`localStorage`, so the flag does NOT survive one.
+
+**Read `report().observed` BEFORE `report().clean`.** An observer that has been handed nothing has no
+errors and no disagreements. `clean` used to be true in that state, which is how the first real
+device run passed for a success while seeing nothing: the observer was wrapping `ingestFromWard`
+while `ghis-ward.js:685` calls `ingestWardHistory` on every current build. Both are wrapped now and
+`clean` requires `observed`, but the habit of checking what was actually seen is the durable lesson.
+`report().byMethod` breaks the counts down per entry point.
 
 P0, P1, P2 and the P3 core modules are built. What is genuinely unbuilt: the
 renderer behind `wardsynq/ui/opd.html` (the bedside LOGIC is tested in `test/wardsynq-opd.test.mjs`,
