@@ -12,8 +12,14 @@
  *   GET  /api/wardsynq/:tenant/patient/:patientId/:type             latest of one type
  *   GET  /api/wardsynq/:tenant/record/:type/:id                     latest version (404 if none)
  *   GET  /api/wardsynq/:tenant/record/:type/:id/history             every version
- *   POST /api/wardsynq/:tenant/record                               {entity, expectedVersion?, activePatientId?}
+ *   POST /api/wardsynq/:tenant/record                               {entity, expectedVersion?, activePatientId?, origin?}
  *                                                                   header Idempotency-Key (or body.idempotencyKey)
+ *                                                                   origin {kind:"ai", id} => written by an AI actor on
+ *                                                                   the session's behalf, never as the human
+ *
+ * Identity: a Firebase / Cloudflare Access session, or (with QUEUE_STAFF_ENABLED=1) a StewardMD staff
+ * session via X-Staff-Token. Role: the OPD organisation's membership when the tenant has one, else
+ * Connect membership. Mapping to a governed actor: functions/_wardsynq/actor.js.
  *   POST /api/wardsynq/:tenant/ingest/sccm                          an SCCM bundle from any connector
  *
  * Errors are codes, never stacks: 401 unauthenticated, 403 not a member / role / governance /
@@ -26,13 +32,14 @@
 import { jsonResponse } from "../../_connect/testkit.js";
 import { identify } from "../../_usage.js";
 import { verifyFirebaseClaims } from "../../_fbauth.js";
-import { resolveActor, resolveTenant } from "../../_connect/identity.js";
 import { AuthError, PermissionError } from "../../_connect/permission.js";
-import { can } from "../../_connect/enterprise/rbac.js";
 import { hmacPseudonym } from "../../_connect/audit.js";
+import { verifyStaffSession } from "../../_opd_auth.js";
 import { D1Repository } from "../../_wardsynq/repository-d1.js";
 import { VersionConflictError } from "../../_wardsynq/repository.js";
-import { RecordService, actorForMembership, AuthorityError, RecordRequestError } from "../../_wardsynq/service.js";
+import { RecordService, AuthorityError, RecordRequestError } from "../../_wardsynq/service.js";
+import { resolveClinicalActor } from "../../_wardsynq/actor.js";
+import { orgForTenant, authorizeOrg } from "../../_wardsynq/org.js";
 import { GovernanceError } from "../../../wardsynq/wardsynq-actors.js";
 import { IntegrationHub } from "../../../wardsynq/wardsynq-interop.js";
 import { sccmAdapter } from "../../../wardsynq/adapters/wardsynq-sccm-adapter.js";
@@ -68,25 +75,29 @@ async function claimsOf(request, env) {
 }
 
 /**
- * Builds the per-request service, or throws AuthError / PermissionError. `deps` is injectable so
- * the route is testable without Cloudflare: { db, identifyFn, repository, claimsFn }.
+ * Builds the per-request service, or throws AuthError / PermissionError. The whole authorization
+ * path is functions/_wardsynq/actor.js; this only supplies the I/O. `deps` is injectable so the
+ * route is testable without Cloudflare or Firestore:
+ *   { db, identifyFn, claimsFn, staffSession, orgForTenant, authorizeOrg, repository }
  */
 export async function openService(request, env, tenantId, need, deps) {
   deps = deps || {};
   const db = deps.db || env.CONNECT_DB;
   if (!db) throw new PermissionError("record service is not provisioned");
-  const identity = await resolveActor(deps.identifyFn || identify, request, env);        // AuthError if guest
-  const { tenant, role } = await resolveTenant(db, identity, tenantId, env);             // PermissionError if not a member
-  if (!can(role, need)) throw new PermissionError(`role '${role}' may not perform '${need}'`);
-  const claims = deps.claimsFn ? await deps.claimsFn(request, env) : await claimsOf(request, env);
-  const actor = actorForMembership({ identity, role, claims });
-  if (!actor) throw new PermissionError(`role '${role}' has no clinical actor`);
+  const resolved = await resolveClinicalActor(request, env, tenantId, need, {
+    db,
+    identifyFn: deps.identifyFn || identify,
+    claimsFn: deps.claimsFn || claimsOf,
+    staffSession: deps.staffSession || verifyStaffSession,
+    orgForTenant: "orgForTenant" in deps ? deps.orgForTenant : orgForTenant,
+    authorizeOrg: deps.authorizeOrg || authorizeOrg,
+  });
   const repository = deps.repository || new D1Repository(db);
   const pseudonym = async (patientId) => {
     if (!env || !env.CONNECT_HMAC_SALT) return null;
-    try { return await hmacPseudonym(env, tenant.id, patientId); } catch { return null; }
+    try { return await hmacPseudonym(env, resolved.tenant.id, patientId); } catch { return null; }
   };
-  return new RecordService({ repository, tenant, actor, role, pseudonym });
+  return new RecordService({ repository, tenant: resolved.tenant, actor: resolved.actor, role: resolved.role, roleSource: resolved.source, pseudonym });
 }
 
 export async function handle(request, env, deps) {
@@ -138,8 +149,8 @@ export async function handle(request, env, deps) {
 
       if (rest[0] === "record" && rest.length === 1) {
         const idempotencyKey = request.headers.get("Idempotency-Key") || body.idempotencyKey || null;
-        const out = await svc.put(body.entity, { expectedVersion: body.expectedVersion, idempotencyKey, activePatientId: body.activePatientId || null });
-        return jsonResponse({ ok: true, replayed: out.replayed, record: out.record }, { status: out.replayed ? 200 : 201 });
+        const out = await svc.put(body.entity, { expectedVersion: body.expectedVersion, idempotencyKey, activePatientId: body.activePatientId || null, origin: body.origin || null });
+        return jsonResponse({ ok: true, replayed: out.replayed, record: out.record, actor: out.actor || null }, { status: out.replayed ? 200 : 201 });
       }
       if (rest[0] === "ingest" && rest[1] === "sccm" && rest.length === 2) {
         const adapter = sccmAdapter();

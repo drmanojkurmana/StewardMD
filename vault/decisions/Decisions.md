@@ -4174,3 +4174,37 @@ The pinned matrix test was updated deliberately, with the reason in the test.
 **Not decided, on purpose:** which of the 18 queue roles map to which actor tier; whether the
 workstation's demo cohort view model (labs with ranges, med sigs) should become a canonical
 projection; write-back to an external EMR. Each is the next build or a committee's, not this one.
+
+## 2026-09-06 — Eighteen roles, one ladder: the operational roles reach the clinical record
+
+The record service shipped with only Connect membership at its door, which has no nurse and no
+receptionist. The hospital's real staff registry is `_queue_roles.js` + `q_members`, decided by
+`authorizeOrg()`. Wiring it in was the prerequisite for any OPD write to move.
+
+**Decision: derive the grant from capabilities, not from role names.** `emr.treat` → EXECUTE on
+everything; `emr.vitals` without it → EXECUTE on Observation only; `emr.view` → READ; `order.read` →
+READ on orders; nothing → no actor. The owner's non-negotiable ("a nurse may record vitals but never
+treatment/prescriptions") was already a fact about capabilities, so the record inherits it instead of
+restating it. A nineteenth role gets the right grant by holding the right capabilities.
+
+**Decision: scope is a field on the actor, enforced in the same place as everything else.** Rather
+than a second check in the service, `authoriseWrite` gained `SCOPE_DENIED` and `GovernedStore` reads
+gained `READ_SCOPE_DENIED`. Actors built without scope are unchanged (null = every type), which is why
+36 existing actor tests and every hub adapter kept passing without edits.
+
+**Decision: a nurse is EXECUTE, not DRAFT.** Her observation is a committed clinical record. What she
+may not touch is decided by scope; what she may not sign is decided by the absence of a credential.
+Making her DRAFT would have labelled every vital sign a proposal.
+
+**Decision: the OPD role wins over Connect membership when both exist.** Least privilege, and the OPD
+org is where the hospital actually manages its people.
+
+**Decision: AI acts as itself.** `origin.kind === "ai"` or `aiDrafted: true` makes the writer an
+AI-kind actor with `onBehalfOf`. A doctor's token is a session, not an authorship claim. The
+alternative, stamping the doctor and keeping a flag, is exactly the field-is-not-a-control failure the
+actor model was written to end.
+
+**Left as is, and named:** `admin` writes as a doctor because the existing matrix grants it
+`emr.treat`; a staff PIN session cannot sign because a PIN carries no registration number; the
+queue's room/department scope (`withinScope`) is not applied to the chart, since a chart is a patient
+and not a room.
