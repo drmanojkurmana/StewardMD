@@ -4235,3 +4235,24 @@ refused rather than given an invented patient.
 **Not done:** the doctor's writes (investigations, prescriptions, assessment) still go to GHIS; the
 record is not read back into any OPD screen; the safety engine is not wired to these observations.
 `WARDSYNQ_RECORD` stays OFF and the production schema unapplied.
+
+## 2026-09-06 — The doctor reads the record: vitals on the ticket, through the record's own door
+
+**Decision: the console reads the record directly, not through the queue API.** The timeline GET
+only says WHERE the record is (`record: {tenantId, patientId}`), and only when the tenant is on.
+The console then calls the record's existing Observation endpoint with the credentials it already
+holds. Proxying through the queue route would have made the queue's EMR_VIEW the authority over the
+clinical record, which is a second door with a weaker lock; this way a pharmacist who can open the
+notes drawer still cannot see vitals, because the record refuses them, and a tenant elsewhere gets
+403, because the record scopes by membership.
+
+**Decision: alongside, not instead.** The timeline keeps its text line; the record card shows the
+values. Two facts from one save are two facts. When a tenant is in `shadow`, a doctor can see both
+and judge them against each other before the tenant flips to `authoritative`.
+
+**Decision: every failure state is a clinical sentence.** "Could not reach the clinical record.
+Showing the visit timeline only" is what a doctor at 3am needs; a spinner that never ends, or an
+empty card that looks like "no vitals", would each be read as a clinical fact.
+
+**Not done:** the doctor's own writes still go to GHIS; the safety engine does not read these
+observations; no Patient master is created; `WARDSYNQ_RECORD` stays OFF and the schema unapplied.

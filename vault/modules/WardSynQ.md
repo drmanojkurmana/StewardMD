@@ -469,6 +469,18 @@ record is created (a nurse cannot, and the ticket has no demographics), so a tic
 is refused as `no_patient_identity`. Not a clinical rule: no threshold, no score, no alert reads
 these yet.
 
+**The record is read back (2026-09-06, same day).** The doctor's "Clinical notes" drawer in
+`opd.html` now shows a "Vital signs · Clinical record" card above the timeline narrative. The server's
+`GET /api/queue/timeline` names the record (`record: {tenantId, patientId, mode, ticketId}`) ONLY
+when the tenant's vitals migration is on; the console then reads
+`GET /api/wardsynq/:tenant/patient/opd-pat-<mrn>/Observation` with the credentials it already holds,
+so the record's own door decides who may see them (a pharmacist is refused; another hospital's
+clinician is refused). Readings are grouped per recorded moment, newest first, systolic and
+diastolic paired, units as entered, "This visit" flagged from the observation's source ticket, and
+the note shown. Every state has a sentence for the doctor: loading, empty, no MRN, sign in again,
+role cannot view, record not available for this clinic, unreachable. The timeline is not duplicated;
+it keeps its text line. Off (every tenant today): no `record` key, the drawer is exactly what it was.
+
 **Deliberately NOT done.** No GHIS write migrated (`opd-emr.js` still posts to `/api/ghis`; the nurse-vitals timeline write is the one migrated, above, and only where a tenant opts in); the
 cut-over flag untouched; the 18 queue roles mapped onto actor tiers on 2026-09-06 (see "Who may do what" above); no on-prem repository; no connector
 write-back (an external record is read-only natively and the path back to Epic is not built); no

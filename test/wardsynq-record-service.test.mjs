@@ -654,3 +654,86 @@ test("the queue timeline handler orders the writes by mode and leaves the off pa
   const html = readFileSync(new URL("../opd.html", import.meta.url), "utf8");
   assert.ok(html.includes('kind:"vitals",text:p.join(" · "),vitals:vitals'));
 });
+
+/* ------------------------------------------------------------------ the doctor reads the vitals back */
+
+test("the timeline GET names the record only where the tenant is on; the console reads it through the record's own door with its own credentials", () => {
+  const src = readFileSync(new URL("../functions/api/queue/[[path]].js", import.meta.url), "utf8");
+  const h = src.slice(src.indexOf('if (method === "GET" && seg === "timeline") {'), src.indexOf("// Doctor's treated-patient history"));
+  assert.ok(h.includes('if (mig.mode !== "off") out.record = { tenantId: mig.tenantId, patientId: patientIdForTicket(t), mode: mig.mode, ticketId: t.id };'), "record key only when on");
+  assert.ok(h.includes("requireSessionCap(env, actor, s, CAPS.EMR_VIEW)"), "the timeline read is still EMR_VIEW-gated");
+  const html = readFileSync(new URL("../opd.html", import.meta.url), "utf8");
+  assert.ok(html.includes('"/api/wardsynq/"+encodeURIComponent(rec.tenantId)+"/patient/"+encodeURIComponent(rec.patientId)+"/Observation"'), "the existing Observation endpoint, nothing new");
+  assert.ok(html.includes('if(r.record&&r.record.tenantId) el.insertBefore(recordVitalsBlock(r.record),el.firstChild);'), "shown only when the server names a record");
+  // Every state has a sentence for the doctor: loading, empty, no MRN, 401, 403, 404, unreachable.
+  for (const needle of ["Loading from the clinical record", "No vital signs in the clinical record for this patient yet", "has no medical record number", "Sign in again", "Your role cannot view the clinical record", "not available for this clinic right now", "Could not reach the clinical record"]) {
+    assert.ok(html.includes(needle), "state text missing: " + needle);
+  }
+  // The same credentials the console already holds, never anything new.
+  const block = html.slice(html.indexOf("function recordVitalsBlock("), html.indexOf("function openNotes("));
+  assert.ok(block.includes('h["Authorization"]="Bearer "+t') && block.includes('h["X-Staff-Token"]=st.tok'));
+  assert.ok(!/localStorage|document\.cookie/.test(block), "no new credential storage");
+});
+
+test("vitalSets: the console pairs systolic/diastolic, orders newest first, flags this visit, and ignores what is not a vital sign", () => {
+  const html = readFileSync(new URL("../opd.html", import.meta.url), "utf8");
+  const fnSrc = html.slice(html.indexOf("function vitalSets("), html.indexOf("function renderVitalSets("));
+  const vitalSets = new Function(fnSrc + "; return vitalSets;")();
+  const mk = (code, value, unit, at, ticket, extra) => ({ resourceType: "Observation", category: "vital-signs", code, value, unit, meta: { effectiveAt: at, source: { sourceId: "opd-ticket:" + ticket } }, writtenBy: { id: "fb:sister-anu" }, ...(extra || {}) });
+  const obs = [
+    mk("8480-6", 142, "mm[Hg]", "2026-09-06T10:00:00Z", "T1", { sourceText: "post-op day 1" }),
+    mk("8462-4", 91, "mm[Hg]", "2026-09-06T10:00:00Z", "T1"),
+    mk("59408-5", 97, "%", "2026-09-06T10:00:00Z", "T1"),
+    mk("8867-4", 80, "/min", "2026-09-05T09:00:00Z", "T0"),
+    { resourceType: "Observation", category: "laboratory", code: "2823-3", value: 4.1, meta: { effectiveAt: "2026-09-06T11:00:00Z" } },
+    { resourceType: "Observation", category: "vital-signs", code: "8867-4", value: "not a number", meta: { effectiveAt: "2026-09-06T12:00:00Z" } },
+  ];
+  const sets = vitalSets(obs, "T1");
+  assert.equal(sets.length, 2);
+  assert.equal(sets[0].at, "2026-09-06T10:00:00Z"); assert.equal(sets[0].thisVisit, true);
+  assert.deepEqual(sets[0].values.bp, { unit: "mm[Hg]", s: 142, d: 91 });
+  assert.deepEqual(sets[0].values["59408-5"], { v: 97, unit: "%" });
+  assert.equal(sets[0].note, "post-op day 1");
+  assert.equal(sets[1].thisVisit, false); assert.deepEqual(sets[1].values["8867-4"], { v: 80, unit: "/min" });
+  assert.deepEqual(vitalSets([], "T1"), []);
+  assert.deepEqual(vitalSets(null), []);
+});
+
+test("THE PROOF: nurse enters vitals -> record stores Observations -> doctor opens the ticket -> console fetches -> same structured vitals", async () => {
+  const h = opdHospital({ "fb:sister-anu": { role: "nurse" }, "fb:dr-menon": { role: "doctor" }, "fb:pharm-1": { role: "pharmacy" } }, { settings: { wardsynq: { migrations: { vitals: "shadow" } } } });
+  const ticket = { id: "TKT-77", ghisPatientId: "GH-40233", ghisEpisodeId: "" };
+  // 1. The nurse saves vitals on device A (the queue timeline handler calls exactly this).
+  const asNurse = new Request("https://x/api/queue/s1/timeline", { method: "POST", headers: { "X-Test-User": "fb:sister-anu" } });
+  const saved = await recordVitals(asNurse, ENV, { migration: { mode: "shadow", tenantId: "gimsr" }, session: { orgId: "org-gimsr" }, ticket,
+    vitals: { sbp: "138", dbp: "86", pulse: "92", temp: "99.4", tempUnit: "F", spo2: "96", rr: "18", weight: "71.5", note: "on arrival" }, recordedAt: "2026-09-06T09:30:00.000Z",
+    actorDeps: { db: h.db, identifyFn: h.deps.identifyFn, claimsFn: h.deps.claimsFn, staffSession: null, orgForTenant: h.deps.orgForTenant, authorizeOrg: h.deps.authorizeOrg },
+    recordDeps: { repository: h.repository, pseudonym: async () => null } });
+  assert.equal(saved.ok, true); assert.equal(saved.written, 7);
+  // 2. The doctor opens the ticket on device B: the console calls the record's Observation endpoint.
+  const r = await h.fetchAs("fb:dr-menon")("https://x/api/wardsynq/gimsr/patient/opd-pat-gh-40233/Observation");
+  assert.equal(r.status, 200);
+  const body = await r.json();
+  assert.equal(body.records.length, 7);
+  // 3. The console groups them exactly as the nurse entered them.
+  const html = readFileSync(new URL("../opd.html", import.meta.url), "utf8");
+  const vitalSets = new Function(html.slice(html.indexOf("function vitalSets("), html.indexOf("function renderVitalSets(")) + "; return vitalSets;")();
+  const sets = vitalSets(body.records, "TKT-77");
+  assert.equal(sets.length, 1);
+  assert.equal(sets[0].thisVisit, true);
+  assert.equal(sets[0].note, "on arrival");
+  assert.equal(sets[0].by, "fb:sister-anu", "the doctor sees who recorded them, as the server stamped it");
+  assert.deepEqual(sets[0].values.bp, { unit: "mm[Hg]", s: 138, d: 86 });
+  assert.deepEqual(sets[0].values["8867-4"], { v: 92, unit: "/min" });
+  assert.deepEqual(sets[0].values["8310-5"], { v: 99.4, unit: "[degF]" });
+  assert.deepEqual(sets[0].values["59408-5"], { v: 96, unit: "%" });
+  assert.deepEqual(sets[0].values["9279-1"], { v: 18, unit: "/min" });
+  assert.deepEqual(sets[0].values["29463-7"], { v: 71.5, unit: "kg" });
+  // 4. Tenant isolation and role scope hold on the read: another hospital's clinician gets nothing,
+  //    a pharmacist may read orders but not vitals.
+  assert.equal((await h.fetchAs("fb:dr-elsewhere")("https://x/api/wardsynq/gimsr/patient/opd-pat-gh-40233/Observation")).status, 403);
+  assert.equal((await h.fetchAs("fb:pharm-1")("https://x/api/wardsynq/gimsr/patient/opd-pat-gh-40233/Observation")).status, 403);
+  // 5. The read was audited as the doctor, PHI-free.
+  const reads = h.repository.audit.filter((a) => a.action === "record.read" && a.actor === "fb:dr-menon");
+  assert.ok(reads.length >= 1);
+  assert.ok(!JSON.stringify(reads).includes("138"), "no values in the audit");
+});
