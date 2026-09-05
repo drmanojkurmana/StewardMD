@@ -38,6 +38,7 @@ import { verifyStaffSession, verifySecret, pinLocked, nextPinState, mintStaffSes
 // WARDSYNQ_RECORD=1 AND the org names a Connect tenant AND that tenant opts in; then the timeline
 // handler below dual-writes, timeline first in "shadow", record first in "authoritative".
 import { vitalsMigration, recordVitals, patientIdForTicket } from "../../_wardsynq/migrate-vitals.js";
+import { registrationMigration, registerPatientRecord } from "../../_wardsynq/migrate-registration.js";
 import { actorDeps as wsqActorDeps, recordDeps as wsqRecordDeps } from "../../_wardsynq/deps.js";
 const wsqTenantRow = (e, id) => (e.CONNECT_DB ? e.CONNECT_DB.prepare("SELECT * FROM connect_tenant WHERE id=?").bind(String(id)).first() : null);
 import "../../_opd_ghis_connector.js";   // side-effect: registers the "ghis" OPD connector
@@ -321,7 +322,22 @@ export async function onRequest(context) {
         if (!org) return json({ ok: false, error: "org_not_found" }, 404, request);
         const r = await PAT.registerPatient(env, org, body, actor.id || "");
         // invalid / duplicate are EXPECTED outcomes the form renders, not server errors.
-        return json(r, r.ok ? 200 : 200, request);
+        if (!r.ok) return json(r, 200, request);
+        // WardSynQ record: the patient-identity migration (functions/_wardsynq/migrate-registration.js).
+        // The MR number above is ALREADY allocated by this point in every mode — that allocation is
+        // the one thing this migration is told to never touch. Off (every tenant today): none of this
+        // runs and the response is exactly what it always was.
+        const mig = await registrationMigration(env, { orgId: pOrg }, { getOrg: ORG.getOrg, tenantRow: wsqTenantRow });
+        if (mig.mode !== "off") {
+          const rec = await registerPatientRecord(request, env, { migration: mig, registration: { mrn: r.mrn, mrSource: r.mrSource, pending: r.pending, patient: r.patient }, actorDeps: wsqActorDeps(env), recordDeps: wsqRecordDeps(env, mig.tenantId) });
+          if (mig.mode === "authoritative" && !rec.ok) {
+            // The MR number is already spent and is not un-spent here (see the file header for why).
+            // What "authoritative" changes is that this failure is reported, not swallowed.
+            return json({ ok: false, error: "record_refused", mrn: r.mrn, wardsynq: rec }, rec.status || 502, request);
+          }
+          return json(Object.assign({}, r, { wardsynq: rec }), 200, request);
+        }
+        return json(r, 200, request);
       }
       if (sub === "get" && method === "GET") {
         const az = await ORG.authorizeOrg(env, actor, pOrg, CAPS.QUEUE_VIEW);
