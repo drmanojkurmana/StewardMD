@@ -19,7 +19,8 @@ import { ROLES, CAPS, can as roleCan } from "../functions/_queue_roles.js";
 import { mintStaffSession, verifyStaffSession } from "../functions/_opd_auth.js";
 import { vitalsMode, patientIdForTicket, vitalsToObservations, vitalsMigration, recordVitals, VITAL_CODES } from "../functions/_wardsynq/migrate-vitals.js";
 import { registrationMigration, patientFromRegistration, sameDemographics, registerPatientRecord } from "../functions/_wardsynq/migrate-registration.js";
-import { patientIdForMrn } from "../functions/_wardsynq/opd-identity.js";
+import { patientIdForMrn, encounterIdForTicket, noteIdForTicket } from "../functions/_wardsynq/opd-identity.js";
+import { assessmentMigration, sectionsFromAssessment, noteFromAssessment, sameNoteContent, recordAssessment } from "../functions/_wardsynq/migrate-assessment.js";
 import { readFileSync } from "node:fs";
 import { makeMockDb } from "../functions/_connect/testkit.js";
 import { can } from "../functions/_connect/enterprise/rbac.js";
@@ -652,15 +653,22 @@ test("the queue timeline handler orders the writes by mode and leaves the off pa
   const src = readFileSync(new URL("../functions/api/queue/[[path]].js", import.meta.url), "utf8");
   const h = src.slice(src.indexOf('if (seg === "timeline") {'), src.indexOf('// Slide-to-checkout'));
   const i = (needle) => { const k = h.indexOf(needle); assert.ok(k >= 0, "missing: " + needle); return k; };
+  // 2026-09-06: vitals and the doctor's assessment now share this branch through one `migrator`
+  // (recordVitals or recordAssessment, chosen once, above the mode check) rather than each mode
+  // naming recordVitals directly — so both migrations get the SAME ordering guarantees for free.
+  assert.ok(h.includes("const migrator = isVitals ? recordVitals : recordAssessment;"));
   // authoritative: record first, refusal returns before any timeline write, then the timeline as shadow.
   const auth = h.slice(i('mig.mode === "authoritative"'), i("// shadow:"));
-  assert.ok(auth.indexOf("recordVitals(") < auth.indexOf("QT.appendTimeline("));
+  assert.ok(auth.indexOf("migrator(") < auth.indexOf("QT.appendTimeline("));
   assert.ok(auth.indexOf('error: "record_refused"') < auth.indexOf("QT.appendTimeline("));
   // shadow: timeline first, record after.
   const shadow = h.slice(i("// shadow:"), i("return json(Object.assign({ ok: true }, await QT.appendTimeline("));
-  assert.ok(shadow.indexOf("QT.appendTimeline(") < shadow.indexOf("recordVitals("));
+  assert.ok(shadow.indexOf("QT.appendTimeline(") < shadow.indexOf("migrator("));
   // off: the original single line, unchanged.
   assert.ok(h.includes('return json(Object.assign({ ok: true }, await QT.appendTimeline(env, s, t, body.kind, body.text, actor.id)), 200, request);'));
+  // "note" and "medication" (investigations, prescriptions) are still untouched — neither migration
+  // recognises them, so isVitals/isAssessment are both false and mig.mode is forced to "off".
+  assert.ok(h.includes('const isAssessment = QT.tlKind(body.kind) === "assessment";'));
   // the console sends the structured values with the text
   const html = readFileSync(new URL("../opd.html", import.meta.url), "utf8");
   assert.ok(html.includes('kind:"vitals",text:p.join(" · "),vitals:vitals'));
@@ -671,11 +679,16 @@ test("the queue timeline handler orders the writes by mode and leaves the off pa
 test("the timeline GET names the record only where the tenant is on; the console reads it through the record's own door with its own credentials", () => {
   const src = readFileSync(new URL("../functions/api/queue/[[path]].js", import.meta.url), "utf8");
   const h = src.slice(src.indexOf('if (method === "GET" && seg === "timeline") {'), src.indexOf("// Doctor's treated-patient history"));
-  assert.ok(h.includes('if (mig.mode !== "off") out.record = { tenantId: mig.tenantId, patientId: patientIdForTicket(t), mode: mig.mode, ticketId: t.id };'), "record key only when on");
+  // 2026-09-06: generalised from vitalsMigration to recordLinkForOrg, so a tenant migrated for
+  // registration or the assessment ALSO exposes the record key — a read must not depend on which
+  // specific WRITE happens to be turned on.
+  assert.ok(h.includes('if (link) out.record = { tenantId: link.tenantId, patientId: patientIdForTicket(t), ticketId: t.id };'), "record key only when the tenant is reachable at all");
+  assert.ok(!h.includes("vitalsMigration"), "the GET no longer asks a write-specific question");
   assert.ok(h.includes("requireSessionCap(env, actor, s, CAPS.EMR_VIEW)"), "the timeline read is still EMR_VIEW-gated");
   const html = readFileSync(new URL("../opd.html", import.meta.url), "utf8");
   assert.ok(html.includes('"/api/wardsynq/"+encodeURIComponent(rec.tenantId)+"/patient/"+encodeURIComponent(rec.patientId)+"/Observation"'), "the existing Observation endpoint, nothing new");
-  assert.ok(html.includes('if(r.record&&r.record.tenantId) el.insertBefore(recordVitalsBlock(r.record),el.firstChild);'), "shown only when the server names a record");
+  // 2026-09-06: the assessment card joined vital signs behind the SAME gate — both, or neither.
+  assert.ok(html.includes('if(r.record&&r.record.tenantId){ el.insertBefore(recordAssessmentBlock(r.record),el.firstChild); el.insertBefore(recordVitalsBlock(r.record),el.firstChild); }'), "shown only when the server names a record");
   // Every state has a sentence for the doctor: loading, empty, no MRN, 401, 403, 404, unreachable.
   for (const needle of ["Loading from the clinical record", "No vital signs in the clinical record for this patient yet", "has no medical record number", "Sign in again", "Your role cannot view the clinical record", "not available for this clinic right now", "Could not reach the clinical record"]) {
     assert.ok(html.includes(needle), "state text missing: " + needle);
@@ -874,4 +887,147 @@ test("off mode is byte-identical: no WardSynQ call is even attempted", async () 
   assert.equal(mig.mode, "off");
   const out = await registerPatientRecord(new Request("https://x"), ENV, { migration: mig, registration: { mrn: "X", patient: { name: "Y", birthDate: "1970-01-01", gender: "male" } } });
   assert.deepEqual(out, { mode: "off", tenantId: null, ok: true, skipped: mig.why, written: 0 });
+});
+
+/* ------------------------------------------------------------------ the doctor's assessment migration */
+
+test("identity: the assessment shares its encounter id with vitals, so both attach to the same encounter", () => {
+  const ticket = { id: "TKT-40", ghisEpisodeId: "EP-40", ghisPatientId: "GH-40" };
+  assert.equal(encounterIdForTicket(ticket), "opd-enc-ep-40");
+  assert.equal(noteIdForTicket(ticket, "assessment"), "opd-note-ep-40-assessment");
+  // No episode id: falls back to the ticket itself, still stable, still distinct from a vitals-only ticket.
+  assert.equal(noteIdForTicket({ id: "TKT-41" }, "assessment"), "opd-note-tkt-41-assessment");
+  assert.equal(noteIdForTicket({}, "assessment"), null);
+  assert.equal(encounterIdForTicket({}), null);
+});
+
+test("sectionsFromAssessment: SOAP grouping from GHIS's own field names, nothing invented, everything kept in raw", () => {
+  const vals = {
+    Chief_complaints_duration: "Epigastric pain, 3 days", History_present_illness: "Worse after meals",
+    History_past_illness: "Nil significant", Temp: "98.4", BP_SYS: "128", BP_dia: "82", Pulse: "78", respiratory: "16",
+    sys_examination: "Abdomen soft, mild epigastric tenderness", provisional_diagnosis: "GERD",
+    management_plan: "Pantoprazole 40mg OD x 2 weeks", refered_management_plan: "",
+    Diabetes_yesNo: "N", immunization_status: "UTD",
+  };
+  const sec = sectionsFromAssessment(vals);
+  assert.equal(sec.subjective, "Chief complaints: Epigastric pain, 3 days\nPresent history: Worse after meals\nPast history: Nil significant");
+  assert.equal(sec.objective, "Temperature (F): 98.4\nBP: 128/82\nPulse (/min): 78\nRespiratory rate (/min): 16\nSystemic examination: Abdomen soft, mild epigastric tenderness");
+  assert.equal(sec.assessment, "Provisional diagnosis: GERD");
+  assert.equal(sec.plan, "Management plan: Pantoprazole 40mg OD x 2 weeks");
+  assert.deepEqual(sec.raw, vals, "nothing is dropped — every GHIS field the doctor entered is still here");
+  assert.equal(sectionsFromAssessment({}).subjective, "");
+  assert.deepEqual(sectionsFromAssessment(null).raw, {});
+});
+
+test("noteFromAssessment: a canonical ClinicalNote, soap-typed, authored by the actor, no signature claimed", () => {
+  const note = noteFromAssessment({ ticket: { id: "TKT-42", ghisEpisodeId: "EP-42", ghisPatientId: "GH-42" }, vals: { provisional_diagnosis: "GERD" }, authorId: "fb:dr-menon" });
+  assert.equal(note.resourceType, "ClinicalNote");
+  assert.equal(note.id, "opd-note-ep-42-assessment");
+  assert.equal(note.patientId, "opd-pat-gh-42"); assert.equal(note.encounterId, "opd-enc-ep-42");
+  assert.equal(note.noteType, "soap"); assert.equal(note.authorId, "fb:dr-menon"); assert.equal(note.signedBy, null);
+  assert.equal(note.aiDrafted, false);
+  assert.equal(note.meta.source.system, "wardsynq-native");
+  assert.equal(noteFromAssessment({ ticket: {}, vals: {}, authorId: "x" }), null, "no MRN, no identity, nothing to file under");
+  assert.equal(sameNoteContent(note, noteFromAssessment({ ticket: { id: "TKT-42", ghisEpisodeId: "EP-42", ghisPatientId: "GH-42" }, vals: { provisional_diagnosis: "GERD" }, authorId: "fb:dr-menon" })), true);
+  assert.equal(sameNoteContent(note, noteFromAssessment({ ticket: { id: "TKT-42", ghisEpisodeId: "EP-42", ghisPatientId: "GH-42" }, vals: { provisional_diagnosis: "Peptic ulcer" }, authorId: "fb:dr-menon" })), false);
+});
+
+test("assessment mode gating: its own settings key, independent of vitals or registration", async () => {
+  const org = { id: "org-gimsr", connectTenantId: "gimsr" };
+  const tenants = { gimsr: { id: "gimsr", settings: JSON.stringify({ wardsynq: { migrations: { assessment: "shadow", vitals: "off" } } }) } };
+  const deps = { getOrg: async (env, id) => (id === "org-gimsr" ? org : null), tenantRow: async (env, id) => tenants[id] || null };
+  assert.deepEqual(await assessmentMigration({}, { orgId: "org-gimsr" }, deps), { mode: "off", why: "flag" });
+  const on = await assessmentMigration({ WARDSYNQ_RECORD: "1" }, { orgId: "org-gimsr" }, deps);
+  assert.equal(on.mode, "shadow"); assert.equal(on.tenantId, "gimsr");
+  const vitalsOnlyTenant = { gimsr: { id: "gimsr", settings: JSON.stringify({ wardsynq: { migrations: { vitals: "shadow" } } }) } };
+  assert.equal((await assessmentMigration({ WARDSYNQ_RECORD: "1" }, { orgId: "org-gimsr" }, { ...deps, tenantRow: async (e, id) => vitalsOnlyTenant[id] })).mode, "off", "a tenant on for vitals is not thereby on for the assessment");
+});
+
+test("THE PROOF: doctor device A writes the assessment; device B opens the same patient and reads the SAME sections, encounter and author; a nurse and reception cannot write it; another tenant cannot read it; a repeat save does not duplicate; a correction preserves the original in history", async () => {
+  const h = opdHospital({ "fb:dr-menon": { role: "doctor" }, "fb:sister-anu": { role: "nurse" }, "fb:desk-1": { role: "reception" } }, { settings: { wardsynq: { migrations: { assessment: "shadow" } } } });
+  const ticket = { id: "TKT-50", ghisEpisodeId: "EP-50", ghisPatientId: "GH-40233" };
+  const actorDeps = { db: h.db, identifyFn: h.deps.identifyFn, claimsFn: h.deps.claimsFn, staffSession: null, orgForTenant: h.deps.orgForTenant, authorizeOrg: h.deps.authorizeOrg };
+  const recordDeps = { repository: h.repository, pseudonym: async () => null };
+  const asDoctor = new Request("https://x/api/queue/timeline", { method: "POST", headers: { "X-Test-User": "fb:dr-menon" } });
+  const firstVals = { Chief_complaints_duration: "Epigastric pain 3 days", History_present_illness: "Worse after meals", provisional_diagnosis: "GERD", management_plan: "Pantoprazole 40mg OD" };
+
+  // Device A: the doctor saves.
+  const out = await recordAssessment(asDoctor, ENV, { migration: { mode: "shadow", tenantId: "gimsr" }, ticket, vals: firstVals, actorDeps, recordDeps });
+  assert.equal(out.ok, true); assert.equal(out.written, 1); assert.equal(out.updated, false);
+  assert.equal(out.noteId, "opd-note-ep-50-assessment"); assert.equal(out.actor, "fb:dr-menon"); assert.equal(out.role, "doctor");
+
+  // Device B: a different signed-in doctor opens the same patient and reads the SAME identity.
+  const doctorB = await client(h, "fb:dr-menon");
+  const note = await doctorB.governed.get(doctorB.actor, "ClinicalNote", "opd-note-ep-50-assessment");
+  assert.equal(note.patientId, "opd-pat-gh-40233"); assert.equal(note.encounterId, "opd-enc-ep-50");
+  assert.equal(note.sections.assessment, "Provisional diagnosis: GERD");
+  assert.equal(note.sections.plan, "Management plan: Pantoprazole 40mg OD");
+  assert.equal(note.writtenBy.id, "fb:dr-menon", "the record names the actual authoring doctor");
+  // The generic byPatient endpoint the console actually calls — GET .../patient/:id/ClinicalNote.
+  const r = await h.fetchAs("fb:dr-menon")("https://x/api/wardsynq/gimsr/patient/opd-pat-gh-40233/ClinicalNote");
+  assert.equal(r.status, 200);
+  const body = await r.json();
+  assert.equal(body.records.length, 1); assert.equal(body.records[0].sections.subjective.indexOf("Epigastric pain") > -1, true);
+
+  // A nurse cannot write it: refused independently at BOTH layers.
+  const nurseAz = await h.deps.authorizeOrg({}, { kind: "firebase", id: "fb:sister-anu" }, "org-gimsr", CAPS.EMR_TREAT);
+  assert.equal(nurseAz.ok, false, "the pre-existing OPD-level EMR_TREAT gate already refuses a nurse for kind:assessment");
+  const asNurse = new Request("https://x/api/queue/timeline", { method: "POST", headers: { "X-Test-User": "fb:sister-anu" } });
+  const nurseTry = await recordAssessment(asNurse, ENV, { migration: { mode: "shadow", tenantId: "gimsr" }, ticket: { id: "TKT-51", ghisEpisodeId: "EP-51", ghisPatientId: "GH-40233" }, vals: { provisional_diagnosis: "should not land" }, actorDeps, recordDeps });
+  assert.equal(nurseTry.ok, false); assert.equal(nurseTry.status, 403); assert.equal(nurseTry.error, "governance");
+  assert.deepEqual(nurseTry.reasons, ["SCOPE_DENIED"]);
+  assert.equal(await h.repository.latest("gimsr", "ClinicalNote", "opd-note-ep-51-assessment"), null);
+  // Reception, same story (READ tier plus Patient-only write scope — no ClinicalNote at all).
+  const asDesk = new Request("https://x/api/queue/timeline", { method: "POST", headers: { "X-Test-User": "fb:desk-1" } });
+  const deskTry = await recordAssessment(asDesk, ENV, { migration: { mode: "shadow", tenantId: "gimsr" }, ticket: { id: "TKT-52", ghisEpisodeId: "EP-52", ghisPatientId: "GH-40233" }, vals: { provisional_diagnosis: "should not land" }, actorDeps, recordDeps });
+  assert.equal(deskTry.ok, false); assert.equal(deskTry.status, 403);
+
+  // Another tenant cannot read it.
+  const other = await client(h, "fb:dr-elsewhere", { tenantId: "other-hospital" });
+  assert.equal(await other.governed.get(other.actor, "ClinicalNote", "opd-note-ep-50-assessment"), null);
+  assert.equal((await h.fetchAs("fb:dr-elsewhere")("https://x/api/wardsynq/gimsr/record/ClinicalNote/opd-note-ep-50-assessment")).status, 403);
+
+  // A repeat save (the doctor re-submits, or a retried request) with IDENTICAL content does not
+  // duplicate the note: same id, unchanged content, nothing written.
+  const again = await recordAssessment(asDoctor, ENV, { migration: { mode: "shadow", tenantId: "gimsr" }, ticket, vals: firstVals, actorDeps, recordDeps });
+  assert.equal(again.ok, true); assert.equal(again.written, 0); assert.equal(again.skipped, "unchanged"); assert.equal(again.version, 1);
+  assert.equal((await h.repository.history("gimsr", "ClinicalNote", "opd-note-ep-50-assessment")).length, 1);
+
+  // A genuine amendment (the doctor refines the diagnosis) is a NEW version — the original is kept,
+  // never destroyed, in the append-only history.
+  const amendedVals = { ...firstVals, provisional_diagnosis: "GERD; rule out peptic ulcer" };
+  const amended = await recordAssessment(asDoctor, ENV, { migration: { mode: "shadow", tenantId: "gimsr" }, ticket, vals: amendedVals, actorDeps, recordDeps });
+  assert.equal(amended.ok, true); assert.equal(amended.written, 1); assert.equal(amended.updated, true); assert.equal(amended.version, 2);
+  const hist = await h.repository.history("gimsr", "ClinicalNote", "opd-note-ep-50-assessment");
+  assert.equal(hist.length, 2);
+  assert.equal(hist[0].sections.assessment, "Provisional diagnosis: GERD", "the original is exactly as it was, not rewritten");
+  assert.equal(hist[1].sections.assessment, "Provisional diagnosis: GERD; rule out peptic ulcer");
+
+  // A CONCURRENT stale write is refused, not silently applied over the newer one: two doctors (or
+  // two tabs) editing from version 2 cannot both win.
+  const staleWrite = await h.fetchAs("fb:dr-menon")("https://x/api/wardsynq/gimsr/record", { method: "POST", body: JSON.stringify({ entity: { ...hist[0], sections: { ...hist[0].sections, plan: "conflicting plan" } }, expectedVersion: 1 }) });
+  assert.equal(staleWrite.status, 409);
+
+  // Every write is audited as the real human actor, PHI-free.
+  const writes = h.repository.audit.filter((a) => a.action === "record.write" && a.scope.resourceType === "ClinicalNote");
+  assert.ok(writes.length >= 2);
+  assert.ok(writes.every((a) => a.actor === "fb:dr-menon"));
+  assert.ok(!JSON.stringify(writes).includes("Epigastric") && !JSON.stringify(writes).includes("GERD"), "no clinical content in the audit");
+});
+
+test("off mode is byte-identical for the assessment write too: no WardSynQ call is even attempted", async () => {
+  const out = await recordAssessment(new Request("https://x"), ENV, { migration: { mode: "off", why: "flag" }, ticket: { id: "T", ghisEpisodeId: "E", ghisPatientId: "M" }, vals: { provisional_diagnosis: "x" } });
+  assert.deepEqual(out, { mode: "off", tenantId: null, ok: true, skipped: "flag", written: 0 });
+});
+
+test("investigations and prescriptions remain untouched: only kind===\"assessment\" is recognised, \"note\" and \"medication\" are not", () => {
+  const src = readFileSync(new URL("../functions/api/queue/[[path]].js", import.meta.url), "utf8");
+  const h = src.slice(src.indexOf('if (seg === "timeline") {'), src.indexOf('// Slide-to-checkout'));
+  assert.ok(h.includes('const isAssessment = QT.tlKind(body.kind) === "assessment";'));
+  assert.ok(!h.includes('=== "note"') && !h.includes('=== "medication"'), "the migration dispatcher never compares kind against note/medication");
+  // The client sends the structured payload only from the assessment save/clear/refer-to-ER actions.
+  const emr = readFileSync(new URL("../opd-emr.js", import.meta.url), "utf8");
+  assert.equal((emr.match(/vals: buildAssessPayload\(/g) || []).length, 3, "submitAssessment, clearAssessment and consultToER all forward the structured payload");
+  assert.ok(!/submitInvOrder[\s\S]{0,400}vals:/.test(emr), "an investigation order does not send structured vals");
+  assert.ok(!/submitPrescribe[\s\S]{0,400}vals:/.test(emr), "a prescription does not send structured vals");
 });

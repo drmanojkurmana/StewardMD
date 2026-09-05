@@ -512,6 +512,52 @@ at the OLD id after Firestore re-keys it; re-keying/merging that into the new id
 identity merge this migration is told to keep an explicit, separate, governed operation — not
 attempted here, and not silently swept under "it still works most of the time."
 
+**The doctor's assessment, migrated (2026-09-06, fourth migration).** `opd-emr.js`'s Assessment tab
+is a GHIS Initial Assessment form — 14 sections, ~90 fields, captured verbatim from a live GHIS
+capture. `functions/_wardsynq/migrate-assessment.js` does NOT reproduce that schema in WardSynQ
+(that would be the second model the task forbids); it groups the submission into the SOAP shape
+`wardsynq-model.js` already documents as an example of `ClinicalNote.sections` (subjective /
+objective / assessment / plan), from the small subset of fields universally meaningful across any
+clinical form, and keeps the ENTIRE submitted payload verbatim under `sections.raw` so grouping
+never discards anything nobody has decided a canonical shape for yet.
+
+**The seam is the one vitals already uses, not a new one.** `submitAssessment()` posts the real
+clinical content to GHIS's `/assessment-save` (a different backend file, untouched, never will be)
+and, only on success, calls `addToTimeline("assessment", summary)` — the SAME
+`POST /api/queue/timeline` endpoint vitals hooks. The queue route now dispatches on `kind` to either
+`recordVitals` or `recordAssessment` through one shared `migrator`, gated by the SAME `EMR_TREAT`
+capability the timeline handler already required for any non-vitals kind. `"note"`/`"medication"`
+(investigation orders, prescriptions) remain entirely unrecognised — untouched, on purpose.
+
+**One note per encounter, versioned, never a duplicate or a silent overwrite.** Every save of the
+same visit's assessment is a new VERSION of the ONE `ClinicalNote` at
+`noteIdForTicket(ticket, "assessment")` (`opd-identity.js`, sharing `encounterIdForTicket` with
+vitals so both attach to the same encounter). Unchanged content: nothing written. Changed content: a
+new version, with `expectedVersion` refusing a stale concurrent write exactly as registration does —
+so two doctors (or two tabs) editing from the same version cannot both silently land. The append-only
+store keeps every prior version; a correction is a new row, never a rewrite of the old one.
+
+**Read back through the generic endpoint, no new route.** `GET /api/wardsynq/:tenant/patient/:id/
+ClinicalNote` already existed (`ClinicalNote` was always in `RESOURCE_TYPES`) — the console's
+"Clinical notes" drawer now fetches it exactly as it fetches Observation, and renders an "Assessment
+· Clinical record" card above the timeline narrative. The GET timeline handler's `record` key is
+now generalised (`recordLinkForOrg`, `migration-tenant.js`) from "is vitals on" to "is this tenant's
+record reachable at all", so a tenant migrated for registration or the assessment alone still exposes
+it — a read must not have to guess which specific write is turned on.
+
+**`authoritative` carries the SAME honest limitation registration's does, for the SAME reason.** The
+real clinical write (GHIS's `/assessment-save`) already happened via a wholly separate HTTP request
+by the time this endpoint is even reached — there is no ordering trick available here the way there
+is for vitals (whose record write and timeline write are peers in one request). Authoritative means a
+WardSynQ refusal is reported to the caller, not swallowed; it cannot undo the GHIS save that already
+landed. The console's `addToTimeline` gained a minimal, additive check (a `record_refused` response
+now surfaces one toast) so that claim is not merely theoretical — every tenant today gets `{ok:true}`
+and the toast never fires.
+
+**Deliberately NOT done.** GHIS's "Authorise" (sign-off/lock) action is untouched — a WardSynQ note
+from this migration is never `signedBy`; that workflow step, if migrated, is its own future decision.
+`submitInvOrder`/`submitPrescribe` (kinds `"note"`/`"medication"`) are untouched.
+
 **Deliberately NOT done.** No GHIS write migrated (`opd-emr.js` still posts to `/api/ghis`; the nurse-vitals timeline write is the one migrated, above, and only where a tenant opts in); the
 cut-over flag untouched; the 18 queue roles mapped onto actor tiers on 2026-09-06 (see "Who may do what" above); no on-prem repository; no connector
 write-back (an external record is read-only natively and the path back to Epic is not built); no
