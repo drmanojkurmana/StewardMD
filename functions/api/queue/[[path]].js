@@ -37,8 +37,9 @@ import { verifyStaffSession, verifySecret, pinLocked, nextPinState, mintStaffSes
 // WardSynQ record: the nurse-vitals migration (functions/_wardsynq/migrate-vitals.js). Off unless
 // WARDSYNQ_RECORD=1 AND the org names a Connect tenant AND that tenant opts in; then the timeline
 // handler below dual-writes, timeline first in "shadow", record first in "authoritative".
-import { vitalsMigration, recordVitals } from "../../_wardsynq/migrate-vitals.js";
+import { vitalsMigration, recordVitals, patientIdForTicket } from "../../_wardsynq/migrate-vitals.js";
 import { actorDeps as wsqActorDeps, recordDeps as wsqRecordDeps } from "../../_wardsynq/deps.js";
+const wsqTenantRow = (e, id) => (e.CONNECT_DB ? e.CONNECT_DB.prepare("SELECT * FROM connect_tenant WHERE id=?").bind(String(id)).first() : null);
 import "../../_opd_ghis_connector.js";   // side-effect: registers the "ghis" OPD connector
 import "../../_opd_connect_connector.js";   // side-effect: registers the "connect" OPD connector (any FHIR hospital via Connect EMR)
 import * as ONCO from "../../_onco_store.js";
@@ -488,7 +489,14 @@ export async function onRequest(context) {
       await requireSessionCap(env, actor, s, CAPS.EMR_VIEW);
       const t = await Q.getTicket(env, url.searchParams.get("ticketId") || "");
       if (!t || t.sessionId !== s.id) return json({ ok: false, error: "not_found" }, 404, request);
-      return json({ ok: true, timeline: await QT.getTimeline(env, t.id) }, 200, request);
+      const out = { ok: true, timeline: await QT.getTimeline(env, t.id) };
+      // Where this patient's structured vitals live in the WardSynQ record, when this tenant has
+      // opted in (_wardsynq/migrate-vitals.js). Off, the default: no key, the response is what it was.
+      // The console then reads GET /api/wardsynq/:tenant/patient/:patientId/Observation with its own
+      // credentials; the record decides for itself whether this person may see them.
+      const mig = await vitalsMigration(env, s, { getOrg: ORG.getOrg, tenantRow: wsqTenantRow });
+      if (mig.mode !== "off") out.record = { tenantId: mig.tenantId, patientId: patientIdForTicket(t), mode: mig.mode, ticketId: t.id };
+      return json(out, 200, request);
     }
     // Doctor's treated-patient history (self-expiring at the link's 7-30d window).
     if (method === "GET" && seg === "treated") {
@@ -801,7 +809,7 @@ export async function onRequest(context) {
         if (!t || t.sessionId !== s.id) return json({ ok: false, error: "not_found" }, 404, request);
         // The nurse-vitals migration. With the tenant "off" (the default, and every tenant today) this
         // branch is not entered and the response is exactly what it was. See _wardsynq/migrate-vitals.js.
-        const mig = isVitals ? await vitalsMigration(env, s, { getOrg: ORG.getOrg, tenantRow: (e, id) => (e.CONNECT_DB ? e.CONNECT_DB.prepare("SELECT * FROM connect_tenant WHERE id=?").bind(String(id)).first() : null) }) : { mode: "off" };
+        const mig = isVitals ? await vitalsMigration(env, s, { getOrg: ORG.getOrg, tenantRow: wsqTenantRow }) : { mode: "off" };
         if (mig.mode !== "off") {
           const ctx = { migration: mig, session: s, ticket: t, vitals: body.vitals, note: body.vitals && body.vitals.note, recordedAt: new Date().toISOString(), actorDeps: wsqActorDeps(env), recordDeps: wsqRecordDeps(env, mig.tenantId) };
           if (mig.mode === "authoritative") {
