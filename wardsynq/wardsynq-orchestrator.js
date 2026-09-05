@@ -61,6 +61,79 @@ const WORKFLOW = Object.freeze({
   ACKNOWLEDGED: DELIVERY.SEEN,
 });
 
+/**
+ * Turns whatever a monitor hands its Dispatcher into an addressed notice, or null if it cannot be
+ * addressed at all.
+ *
+ * Three modules in this build raise things a human has to answer, and each already had its own
+ * payload shape before this file existed. Rather than change three tested clinical modules to suit
+ * one transport, the transport reads all three. The shapes are handled EXPLICITLY, one branch each,
+ * because a clever generic extractor would silently mis-address the day a fourth appears.
+ *
+ *   deterioration  { escalation }  a NEWS2 escalation, with its own id and a responder tier
+ *   recognition    { prompt }      a sepsis screening prompt, with its own id
+ *   emergency      { notice }      a bundle element warning or breach. It has NO id: it is
+ *                                  identified by patient, bundle code, time zero and element, so
+ *                                  that is what the alert id is built from. Deriving it here rather
+ *                                  than inventing one keeps a warning and its later breach on the
+ *                                  same alert, which is what stops them reading as two problems.
+ */
+function addressOf(payload) {
+  payload = payload || {};
+
+  const esc = payload.escalation;
+  if (esc && esc.id && esc.patientId) {
+    return {
+      alertId: esc.id,
+      sequence: esc.tier || 0,
+      patientId: esc.patientId,
+      title: esc.reason || "WardSynQ escalation",
+      body: `For: ${esc.responder || "the responsible clinician"}`
+        + (esc.respondWithinMinutes ? `. Respond within ${esc.respondWithinMinutes} minutes.` : ""),
+      kind: "deterioration",
+      urgency: esc.risk || (esc.unscorable ? "unscorable" : "routine"),
+      ref: { responder: esc.responder, tier: esc.tier, why: payload.why || null, encounterId: esc.encounterId || null },
+    };
+  }
+
+  const prompt = payload.prompt;
+  if (prompt && prompt.id && prompt.patientId) {
+    return {
+      alertId: prompt.id,
+      sequence: 0,
+      patientId: prompt.patientId,
+      title: (prompt.reasons && prompt.reasons[0]) || "Possible sepsis: please review",
+      body: "A screening prompt needs a clinical answer. It is a question, not a diagnosis.",
+      kind: "recognition",
+      urgency: prompt.strength || "routine",
+      ref: { code: prompt.code, why: payload.why || null, evidenceAt: prompt.evidenceAt || null,
+        encounterId: prompt.encounterId || null },
+    };
+  }
+
+  const notice = payload.notice;
+  if (notice && notice.patientId && notice.element) {
+    return {
+      // No id of its own, so one is derived from what actually identifies it. Time zero is included
+      // because the same element of the same bundle for the same patient on a LATER episode is a
+      // different clinical fact.
+      alertId: `bundle:${notice.patientId}:${notice.code}:${notice.timeZero}:${notice.element}`,
+      // A warning and its breach are the same alert escalating, not two alerts.
+      sequence: notice.kind === "breach" ? 1 : 0,
+      patientId: notice.patientId,
+      title: `${notice.label || notice.code || "Bundle"}: ${notice.elementLabel || notice.element} ${notice.kind === "breach" ? "OVERDUE" : "due soon"}`,
+      body: notice.kind === "breach"
+        ? `Target was ${notice.targetMinutes} minutes; ${notice.elapsedMinutes} have elapsed.`
+        : `${notice.minutesRemaining} minutes remaining of a ${notice.targetMinutes} minute target.`,
+      kind: "bundle",
+      urgency: notice.kind === "breach" ? "breach" : "warning",
+      ref: { code: notice.code, element: notice.element, timeZero: notice.timeZero, noticeKind: notice.kind },
+    };
+  }
+
+  return null;
+}
+
 class OrchestratorError extends Error {
   constructor(message, code) {
     super(message);
@@ -227,23 +300,13 @@ class NotificationOrchestrator {
   asDispatcherChannels() {
     return {
       wardsynq: async (payload) => {
-        const esc = (payload && payload.escalation) || {};
-        if (!esc.id || !esc.patientId) {
-          // Refused rather than guessed. An escalation that cannot name its patient cannot be
+        const addressed = addressOf(payload);
+        if (!addressed) {
+          // Refused rather than guessed. Something that cannot name its patient cannot be
           // acknowledged for one, and a notice nobody can answer is not a delivery.
-          return { delivered: false, detail: "the escalation carries no id or no patient, so no notice could be addressed" };
+          return { delivered: false, detail: "this payload carries no id or no patient, so no notice could be addressed" };
         }
-        const notice = await this.raise({
-          alertId: esc.id,
-          sequence: esc.tier || 0,
-          patientId: esc.patientId,
-          title: esc.reason || "WardSynQ escalation",
-          body: `For: ${esc.responder || "the responsible clinician"}`
-            + (esc.respondWithinMinutes ? `. Respond within ${esc.respondWithinMinutes} minutes.` : ""),
-          kind: "deterioration",
-          urgency: esc.risk || (esc.unscorable ? "unscorable" : "routine"),
-          ref: { responder: esc.responder, tier: esc.tier, why: payload.why || null, encounterId: esc.encounterId || null },
-        });
+        const notice = await this.raise(addressed);
         return {
           // Only a CONFIRMED delivery counts, exactly as everywhere else in this build. A notice
           // that reached a device and no person leaves the monitor's escalation undelivered, which
