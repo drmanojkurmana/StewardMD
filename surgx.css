@@ -532,3 +532,10 @@ html.sgx-lock .abg { z-index: 1300; }
 }
 #surgxRoot .sgx-md-ul { margin: 0 0 9px; padding-left: 18px; }
 #surgxRoot .sgx-md-ul li { margin-bottom: 5px; }
+
+#surgxRoot .sgx-fld input, #surgxRoot .sgx-fld textarea {
+  transition: border-color var(--sgx-dur, .2s) var(--sgx-ease, ease), box-shadow var(--sgx-dur, .2s) var(--sgx-ease, ease);
+}
+#surgxRoot .sgx-fld input:focus, #surgxRoot .sgx-fld textarea:focus {
+  outline: none; border-color: var(--sgx-steel); box-shadow: 0 0 0 3px rgba(31,78,95,.25);
+}
