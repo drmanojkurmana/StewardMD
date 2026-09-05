@@ -25,6 +25,41 @@
   // ghis-ward deep-link handler opens it on load (covers cold-start taps).
   // `ref` is opaque (see functions/api/watch/[[path]].js), never the real patientId, so it must be
   // resolved through SMD_WATCH.resolveRef() (the doctor's own authenticated session) first.
+  /* ── WardSynQ escalation receipts (HAZ-DET-01) ─────────────────────────────
+   * The one thing a push gateway cannot tell you is whether the handset got it. This posts that
+   * fact back from the handset itself, which is what lets a WardSynQ notice move to DELIVERED
+   * honestly instead of on the strength of APNs returning 200.
+   *
+   * Three receipts, three different facts, never collapsed:
+   *   delivered     the alert arrived on this device
+   *   viewed        the clinician opened it. NOT an answer.
+   *   acknowledged  the clinician took it. This is the only one that closes the loop, and the
+   *                 server stamps it with the verified uid so a device cannot answer for somebody.
+   *
+   * Best-effort and silent on failure by design: a receipt that does not post leaves the alert
+   * OUTSTANDING and the escalation timer running, which is the safe direction to fail in. */
+  function wardsynqReceipt(kind, data, extra) {
+    try {
+      if (!data || !data.noticeId) return Promise.resolve(false);
+      return idToken().then(function (jwt) {
+        var headers = { "Content-Type": "application/json" };
+        if (jwt) headers["Authorization"] = "Bearer " + jwt;
+        return fetch(api("/api/push/wardsynq-receipt"), {
+          method: "POST", headers: headers,
+          body: JSON.stringify({
+            noticeId: data.noticeId, kind: kind,
+            patientId: data.patientId || null, alertId: data.alertId || null,
+            device: (window.SMD_DEVICE_ID || platform() || "device"),
+            action: (extra && extra.action) || null
+          })
+        });
+      }).then(function () { return true; }).catch(function () { return false; });
+    } catch (e) { return Promise.resolve(false); }
+  }
+  // Exposed so the alert UI can report the two states only a human can produce.
+  window.SMD_wardsynqViewed = function (data) { return wardsynqReceipt("viewed", data); };
+  window.SMD_wardsynqAcknowledge = function (data, action) { return wardsynqReceipt("acknowledged", data, { action: action }); };
+
   function routeUrl(url) {
     try {
       var m = url && String(url).match(/[?&]ghisRef=([^&]+)/);
@@ -124,6 +159,9 @@
         // this handler ONLY fires in the foreground. So re-raise it as a LOCAL notification, which
         // manages its own channel — the doctor gets a real banner on Android even with the app open.
         var d = (n && n.data) || {};
+        // The handset has it. Receipt it BEFORE anything that could throw (rendering, routing),
+        // because the delivery fact is what an escalation timer depends on.
+        if (d.type === "wardsynq-alert") wardsynqReceipt("delivered", d);
         var title = (n && n.title) || d.title || "StewardMD";
         var body = (n && n.body) || d.body || "New update";
         var url = d.url || d.URL || "/";
@@ -137,6 +175,12 @@
       try {
         var data = a && a.notification && a.notification.data;
         var url = (data && (data.url || data.URL)) || "/";
+        // A tap is evidence the alert reached this handset AND that a person opened it. Both are
+        // recorded; neither is an acknowledgement, which stays an explicit act in the alert UI.
+        if (data && data.type === "wardsynq-alert") {
+          wardsynqReceipt("delivered", data);
+          wardsynqReceipt("viewed", data);
+        }
         // FollowCare push → deep-link straight to that patient's recovery detail in-app (covers cold-launch).
         if (data && data.type === "followcare" && data.episodeId && window.FollowCare && window.FollowCare.openDetail) {
           try { window.FollowCare.openDetail(data.episodeId); return; } catch (e) {}
