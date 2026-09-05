@@ -35,6 +35,7 @@ import { attach } from "./opd-render.js";
 import { ReadLog } from "../wardsynq-readlog.js";
 import { ClinicalStore, MemoryBackend } from "../wardsynq-store.js";
 import { GovernedStore, makeActor, KIND, TIER } from "../wardsynq-actors.js";
+import { openRecordDeployment, recordParams, shellToken } from "./record-deployment.js";
 import { ClinicalEventBus } from "../wardsynq-events.js";
 import { Patient } from "../wardsynq-model.js";
 
@@ -143,9 +144,32 @@ function demoDeployment(doc) {
  * surface rather than a plausible one. */
 if (typeof window !== "undefined" && typeof document !== "undefined") {
   const demo = new URLSearchParams(window.location.search).has("opd_demo");
-  const result = bootOpd({ doc: document, deployment: window.WARDSYNQ_OPD_DEPLOYMENT, demo });
-  window.WARDSYNQ_OPD = result;
-  if (!result.mounted) console.info("[wardsynq opd]", result.reason);
+  const record = recordParams(window.location.search);
+  if (record && !window.WARDSYNQ_OPD_DEPLOYMENT) {
+    // ?record=<tenantId>&patient=<id>: the deployment is the hospital's shared record, opened the
+    // same way the workstation and the mobile app open it. The patient is READ from the record;
+    // a patient the record does not hold is an unconfigured surface, not an invented one.
+    openRecordDeployment({ tenantId: record.tenantId, token: shellToken, nodeId: "bedside" })
+      .then(async (dep) => {
+        const patient = record.patientId ? await dep.governed.get(dep.actor, "Patient", record.patientId) : null;
+        if (record.patientId && !patient) {
+          renderUnconfigured(document, `patient ${record.patientId} is not in this record`);
+          window.WARDSYNQ_OPD = { mounted: false, reason: "patient not found in the record" };
+          return;
+        }
+        const result = bootOpd({ doc: document, deployment: { store: dep.store, actor: dep.actor, patient, rows: [] } });
+        window.WARDSYNQ_OPD = Object.assign(result, { record: dep });
+        if (!result.mounted) console.info("[wardsynq opd]", result.reason);
+      })
+      .catch((err) => {
+        renderUnconfigured(document, `record service: ${String((err && err.message) || err)}`);
+        window.WARDSYNQ_OPD = { mounted: false, reason: String((err && err.message) || err) };
+      });
+  } else {
+    const result = bootOpd({ doc: document, deployment: window.WARDSYNQ_OPD_DEPLOYMENT, demo });
+    window.WARDSYNQ_OPD = result;
+    if (!result.mounted) console.info("[wardsynq opd]", result.reason);
+  }
 }
 
 export { bootOpd, renderUnconfigured };

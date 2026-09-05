@@ -101,3 +101,23 @@ anything else with an opaque 400.
 Device identity is captured at registration (`installId`, optional `label`, best-effort model/OS/app
 version, `firstSeen` written once). `GET /api/push/devices` lists the caller's own registrations,
 read-only, returning an 8-character fingerprint and never the token itself.
+
+## WardSynQ Clinical Record Service — D1 (added 2026-09-06, NOT yet applied to production)
+
+Lives in the existing `stewardmd-connect` D1 (binding `CONNECT_DB`) because tenancy and the PHI-free
+audit already live there. Two additive tables, `wardsynq_record` and `wardsynq_idempotency`; no
+UPDATE or DELETE anywhere in `functions/_wardsynq/repository-d1.js`.
+
+Apply (additive, `CREATE TABLE IF NOT EXISTS`):
+```
+wrangler d1 execute stewardmd-connect --remote --file functions/db/wardsynq_schema.sql
+```
+Enable: Pages env var `WARDSYNQ_RECORD=1` (default unset → every `/api/wardsynq/*` is 404). A tenant
+needs `connect_membership` rows with role `clinician` for each doctor, and optionally
+`settings.wardsynq.recordMode = "integration"` on `connect_tenant`. `CONNECT_HMAC_SALT`, if set, gives
+the audit rows a per-patient pseudonym; absent, the hash column is null and nothing fails.
+
+Verified locally on 2026-09-06 with `wrangler pages dev . --binding WARDSYNQ_RECORD=1` against the
+miniflare D1 (schemas + a seed applied with `--local`): the full route surface, atomic batch writes,
+409 on a lost race, idempotent replay, PHI-free audit. Remember `--remote` for the real database; the
+same wrangler-4 trap as the KV list.

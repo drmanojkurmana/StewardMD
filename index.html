@@ -2183,6 +2183,10 @@ window.openExternal = function (u) {
      It does NOT read or enable smd_wardsynq_cutover. That is a separate flag and remains off. -->
 <script src="/wardsynq-flags.js?v=wsq1" defer></script>
 <script type="module" src="/wardsynq-shadow-boot.js?v=wsq1"></script>
+<!-- WardSynQ Clinical Record: the doctor's phone opening the SAME record the hospital PC charts
+     into. Inert unless a tenant is named (?wardsynq_record=<tenantId>, remembered in localStorage;
+     ?wardsynq_record=off forgets it). Nothing in the app reads window.SMD_WARDSYNQ_RECORD yet. -->
+<script type="module" src="/wardsynq-record-boot.js?v=wsq1"></script>
 
 <!-- The acknowledgement screen for a deterioration escalation (HAZ-DET-01).
 

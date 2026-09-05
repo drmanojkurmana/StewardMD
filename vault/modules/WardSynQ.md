@@ -347,6 +347,82 @@ on 2026-09-05 four fell out that way during the demonstration. One further token
 because identity demonstrated a superseded install; distinct active devices were kept regardless of
 age.
 
+## The Clinical Record Service (2026-09-06)
+
+**STATUS: IMPLEMENTED, verified by software (in-process suite) and by a real local D1 run. NOT
+clinically validated, NOT clinically approved, NOT deployed (flag OFF, schema not yet applied to the
+production D1).** The deployment modes other than Cloudflare D1 are a port contract, not code.
+
+Until this, WardSynQ's record lived in the browser: `MemoryBackend` on the workstation,
+`IndexedDBBackend` offline. A refresh erased it and a second device never saw it, so "hospital PC and
+StewardMD Mobile against the same record" was impossible for want of a record, not of sync code. This
+is the server-side record, and it is deliberately the SAME code, not a second implementation:
+
+```
+hospital PC  (wardsynq-app.js / opd-boot.js)        doctor's phone  (wardsynq-record-boot.js)
+   ClinicalStore + GovernedStore                        ClinicalStore + GovernedStore
+   over RemoteBackend  (wardsynq-store-remote.js)       over RemoteBackend
+                 \                                        /
+                  POST/GET /api/wardsynq/:tenant/...  (functions/api/wardsynq/[[path]].js)
+                          identity: verified token -> connect_membership role -> WardSynQ actor
+                          RecordService (functions/_wardsynq/service.js)
+                            = ClinicalStore + GovernedStore, per request, over a TenantBackend
+                          persistence PORT (functions/_wardsynq/repository.js, 8 methods)
+                            D1Repository (repository-d1.js)   MemoryRepository (tests)   [on-prem: not built]
+                          wardsynq_record  wardsynq_idempotency  connect_audit_event
+```
+
+**What the door enforces, and where each thing was reused rather than built:**
+- Tenancy: `resolveActor` + `resolveTenant` from Connect. Membership decides the tenant; the request
+  body never does. Every repository method takes `tenantId` first; there is no cross-tenant method.
+- Roles: two actions added to the existing RBAC matrix, `record:read` and `record:write`. Clinician
+  only, like `context:load`. Owner, admin and auditor get no chart. A platform super-admin is built
+  as a READ-tier actor: can look for support, cannot write.
+- Actor: `clinician` → HUMAN at EXECUTE, credential = the `regNo` custom claim the prescription
+  route already uses. No claim, no signature. The server stamps `writtenBy`; the client's claim
+  about itself does not survive the door, and the whole `authoriseWrite` ladder runs again server-side.
+- Append-only and bi-temporal: unchanged. The UNIQUE key on (tenant, type, id, version) is the
+  physical guarantee; the API's `expectedVersion` is the visible one. A stale write gets a 409
+  WITH the current record, so the existing `Reconciler` can resolve it with a person.
+- Idempotency: `Idempotency-Key` per write; a retry replays the original outcome (200, `replayed:
+  true`) and never mints version N+2. Ingest uses the same table keyed on the source event id, so a
+  re-sent connector bundle is a no-op on the next request too, not only within one.
+- Audit: reused `connect_audit_event`, PHI-free, in the same atomic D1 batch as the version it
+  describes. Reads, lists, change-feed polls, denials and ingests all leave rows.
+- Change feed: `GET /:tenant/changes?since=<seq>`; how the other client learns what happened.
+
+**Two modes, one contract.** `connect_tenant.settings.wardsynq.recordMode` is `system-of-record`
+(default) or `integration`. In BOTH modes a record whose latest version came from another system
+(`meta.source.system` ≠ `wardsynq-native`) is refused at the native door with `EXTERNAL_AUTHORITY`:
+a LIS result is corrected by the LIS, an Epic patient is renamed in Epic. In integration mode the
+external EMR additionally creates the masters (`externallyOwned`, default Patient and Encounter,
+per tenant, configurable). This is ownership policy, not a clinical rule.
+
+**The two canonical models, settled.** SCCM (`functions/_connect/canonical/model.js`) is the
+ingest/read wire format the nine connectors normalise into. The WardSynQ model is THE RECORD. They
+meet in exactly one file, `wardsynq/adapters/wardsynq-sccm-adapter.js`, registered on the
+Integration Hub like the GHIS adapter: stable ids, provenance stamped with the connector name,
+nothing invented (unknown dob → the `0000-00-00` sentinel and a flag, no name → the source id and a
+flag), an external "active" order lands as a DRAFT with `externalStatus` beside it because the actor
+model caps an adapter below EXECUTE. Imaging studies are reported as unmapped, not dropped.
+`POST /:tenant/ingest/sccm` is the door.
+
+**Proven, and how.** `test/wardsynq-record-service.test.mjs` (13 tests, the route handler is the
+fetch): PC and phone read one record; a fresh client instance sees it; the loser of a race gets 409
+with the winner's version; idempotent replay; cross-tenant 403; admin 403; forged signature and
+wrong-chart refused server-side; PHI-free audit; integration-mode authority; SCCM replay. Then the
+same script against a REAL local D1 (`wrangler pages dev`, miniflare, Cf-Access identities): 7
+record rows, 15 audit rows, 2 idempotency keys, zero PHI in the audit table. `wrangler pages
+functions build` compiles the bundle, which is what proves `functions/` may import `wardsynq/`.
+
+**Deliberately NOT done.** No GHIS write migrated (`opd-emr.js` still posts to `/api/ghis`); the
+cut-over flag untouched; the 18 queue roles not yet mapped onto actor tiers (only Connect membership
+reaches the record today, so a nurse has no route in yet); no on-prem repository; no connector
+write-back (an external record is read-only natively and the path back to Epic is not built); no
+AI actor at the door (an AI draft arriving via a doctor's token is stamped as that doctor, with
+`aiDrafted` preserved as a field only); no push fan-out from the server bus; polling, not push, for
+the change feed. The safety case did not move: 14 of 16, 2 partial.
+
 ## Not built yet
 
 The `ghis-ward.js` cut-over, still the biggest remaining piece of the owner's architecture: moving
@@ -392,7 +468,8 @@ What is genuinely unbuilt: **CTG and fetal monitoring** (see HAZ-MAT-01) — a l
 that `wardsynq-obstetrics.js` explicitly does not cover and must not be read as covering. Not
 started, and it should not be started without clinical scoping first.
 
-Production gaps, load-bearing: no service worker for either surface; a CDN webfont; no barcode
+Production gaps, load-bearing: **the record service is built but not deployed** (flag OFF, schema
+not applied to production D1, no production tenant has `recordMode` set); no service worker for either surface; a CDN webfont; no barcode
 hardware, so every scan is a supplied value; and the secops document "signing" is a content digest
 that must be replaced by real cryptography. **The "no notification transport" gap that used to head
 this list is closed** — see the notification chain section above.

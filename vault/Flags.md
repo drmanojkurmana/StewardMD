@@ -52,6 +52,15 @@ Registry: `wardsynq-flags.js` (repo root), read as query param → localStorage 
 | `smd_wardsynq_shadow` | OFF | Observation only. A GHIS bundle already ingested by the legacy path is additionally mapped through the WardSynQ adapter and the result COUNTED AND DISCARDED — no store, no event bus, no chart, no safety state. Not loading the file removes the change entirely. |
 | `smd_wardsynq_cutover` | OFF | **The one to be careful with.** Routes the live mobile path onto the adapter. Do not enable on a real clinical device: no clinical content in WardSynQ is approved, and the adapter has never seen a real GHIS bundle in anger. |
 
+**Added 2026-09-06, the Clinical Record Service.** Not in the registry above; three separate switches,
+each OFF/absent by default:
+
+| Switch | Where | What it does |
+|---|---|---|
+| `WARDSYNQ_RECORD=1` | Pages env var (server) | Serves `/api/wardsynq/*`. Unset, every route is 404. The schema must be applied first (see [[Infra]]). |
+| `?record=<tenantId>` (`&patient=<id>` on the bedside page) | `wardsynq.html`, `opd.html` | The surface charts into the hospital's shared record instead of this browser's memory. Without it the pages behave exactly as before, demo cohort and all. |
+| `?wardsynq_record=<tenantId>` / `localStorage smd_wardsynq_record_tenant` | StewardMD Mobile (`wardsynq-record-boot.js`) | The phone opens the same record and exposes it as `window.SMD_WARDSYNQ_RECORD`. Nothing in the shipped app reads it yet. `?wardsynq_record=off` forgets it. |
+
 On the NATIVE app there is no address bar, so the query param is unreachable — set the flag with
 `SMD_WARDSYNQ_FLAGS.set('smd_wardsynq_shadow', true)` in the WebView console, then reload. A
 reinstall clears `localStorage`, so a flag does NOT survive one.

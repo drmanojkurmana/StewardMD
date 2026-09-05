@@ -20,6 +20,7 @@ import { SafetyEngine, DISPOSITION } from "../wardsynq-safety.js";
 import { buildRulePack } from "../adapters/wardsynq-rules-stewardmd.js";
 import { ClinicalEventBus } from "../wardsynq-events.js";
 import { ClinicalStore, MemoryBackend } from "../wardsynq-store.js";
+import { openRecordDeployment, recordParams, shellToken } from "./record-deployment.js";
 import { GovernedStore, makeActor, KIND, TIER, GovernanceError } from "../wardsynq-actors.js";
 import { OfflineJournal, MemoryJournalBackend, IndexedDBJournalBackend, Reconciler } from "../wardsynq-offline.js";
 import { Patient, MedicationOrder, AllergyIntolerance } from "../wardsynq-model.js";
@@ -38,11 +39,13 @@ const ME = "Dr Kurmana";
  * record. Here it is a constant, and it is a constant standing in for the one thing that must never
  * be a constant, so it is marked plainly rather than dressed up.
  */
-const CLINICIAN = makeActor({
+let CLINICIAN = makeActor({
   id: ME, kind: KIND.HUMAN, tier: TIER.EXECUTE,
   display: ME,
   credential: "DEMO-NOT-A-REAL-REGISTRATION", // DEMO ONLY. A deployment reads this from the practitioner record.
 });
+// With ?record=<tenantId> the constant above is REPLACED by the actor the record service derives
+// from the signed-in user, and the store below by the hospital's shared record. See connectRecord().
 
 /** Seeding and other machine writes act as a service, which is capped below EXECUTE by its kind. */
 const SEEDER = makeActor({ id: "wardsynq-seed", kind: KIND.SERVICE, tier: TIER.DRAFT });
@@ -93,6 +96,60 @@ function cohort() {
   return [a, b, c];
 }
 
+/* ---------------------------------------------------------------- the shared record
+ *
+ * With ?record=<tenantId> this workstation charts into the hospital's record service instead of
+ * into this browser's memory. That is the difference between a demonstration and an EMR: a refresh
+ * keeps the chart, a second PC sees it, and the doctor's phone (wardsynq-record-boot.js) opens the
+ * same record. Without the parameter the file behaves exactly as before, cohort and all.
+ */
+async function connectRecord() {
+  const params = recordParams();
+  if (!params) return null;
+  const record = await openRecordDeployment({ tenantId: params.tenantId, token: shellToken, nodeId: "workstation", onDenied: showDenial });
+  CLINICIAN = record.actor;
+  S.bus = record.bus;
+  S.store = record.store;      // governed; the raw store is not reachable from here
+  S.record = record;
+  note(`Connected to record <b>${esc(record.tenantId)}</b> as <b>${esc(record.actor.display)}</b>, ${esc(record.mode)}${record.actor.tier !== TIER.EXECUTE ? ", read only" : ""}`);
+  return record;
+}
+
+/** The roster from the record: every patient, with the context the safety engine reads. */
+async function roster(record) {
+  const patients = await record.backend.list("Patient", 200);
+  for (const p of patients) await hydrate(record, p);
+  return patients;
+}
+
+/**
+ * The canonical record holds AllergyIntolerance, MedicationOrder and Observation entities. This
+ * screen's context panel and the safety engine read a flatter shape (allergies, activeMeds, labs),
+ * which the demonstration cohort carried inline. Deriving it here from the record is the honest
+ * version of the same thing; nothing is invented, and a field the record does not hold stays empty.
+ */
+async function hydrate(record, p) {
+  const [allergies, orders, obs] = await Promise.all([
+    record.backend.byPatient("AllergyIntolerance", p.id),
+    record.backend.byPatient("MedicationOrder", p.id),
+    record.backend.byPatient("Observation", p.id),
+  ]);
+  p.allergies = allergies;
+  p.activeMeds = orders.filter((o) => o.status === "active").map((o) => ({
+    drug: o.drug, sig: o.dose ? `${o.dose.value} ${o.dose.unit}, ${o.route || ""}` : (o.route || ""), since: o.meta && o.meta.effectiveAt ? o.meta.effectiveAt.slice(0, 10) : "",
+  }));
+  p.labs = obs.filter((o) => o.category === "laboratory" && typeof o.value === "number").map((o) => ({ name: o.code, value: o.value, unit: o.unit || "", low: null, high: null }));
+  p.resultsWhen = p.labs.length ? "from the record" : null;
+  if (p.dob && /^\d{4}-\d{2}-\d{2}$/.test(p.dob) && p.dob !== "0000-00-00") {
+    const d = new Date(p.dob), now = new Date();
+    let a = now.getFullYear() - d.getFullYear();
+    if (now < new Date(now.getFullYear(), d.getMonth(), d.getDate())) a -= 1;
+    p.ageYears = a;
+  }
+  p.bed = p.bed || null; p.stay = p.stay || null;
+  return p;
+}
+
 /* ---------------------------------------------------------------- boot */
 
 async function boot() {
@@ -111,8 +168,11 @@ async function boot() {
       : `${S.pack.interactions.length} interaction rules loaded.`;
 
     suggestions();
-    S.patients = cohort();
-    await S.store.open();
+    const record = await connectRecord();
+    if (!record) {
+      S.patients = cohort();
+      await S.store.open();
+    }
 
     // From here the raw store handle is not used again. Every write goes through the governed
     // store, which is what turns the actor model from a module into a control.
@@ -139,7 +199,10 @@ async function boot() {
     S.reconciler = new Reconciler({ store: S.governed.asStoreFor(CLINICIAN), bus: S.bus });
     watchConnectivity();
 
-    for (const p of S.patients) await S.governed.put(SEEDER, p);
+    // The demonstration cohort is seeded into the demonstration store only. A hospital's record is
+    // never seeded with invented patients; in record mode the roster is read from the server.
+    if (!record) for (const p of S.patients) await S.governed.put(SEEDER, p);
+    else S.patients = await roster(record);
 
     /* Diagnostics handle. Read-mostly, and deliberately exposes the GOVERNED store rather than the
      * raw one: a support console that hands out an ungoverned write path would undo the control
@@ -157,7 +220,8 @@ async function boot() {
       };
     }
     renderRoster();
-    select(S.patients[0]);
+    if (S.patients[0]) select(S.patients[0]);
+    else $("roster").innerHTML = '<p class="quiet">No patients in this record yet.</p>';
   } catch (e) {
     const pack = $("pack");
     pack.className = "pack bad";
@@ -277,7 +341,7 @@ function order() {
   return MedicationOrder({
     patientId: S.current.id, drug,
     dose: Number.isFinite(v) ? { value: v, unit: $("unit").value } : null,
-    route: $("route").value, prescriberId: ME,
+    route: $("route").value, prescriberId: CLINICIAN.id,
   });
 }
 
@@ -465,7 +529,7 @@ async function sign() {
   const v = S.verdict, out = $("signed");
   if (!v || !v.allowed) { out.innerHTML = '<p class="fail">This order cannot be signed while a finding stands.</p>'; return; }
   const o = order();
-  o.status = "active"; o.signedBy = ME;
+  o.status = "active"; o.signedBy = CLINICIAN.id;
 
   // Offline: the order goes to the durable journal instead, and does not pretend to be filed.
   if (S.offline) {
