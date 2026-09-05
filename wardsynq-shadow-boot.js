@@ -17,11 +17,19 @@
  *     caller. Not loading this file removes the change completely; there is no edit to revert.
  *   - It does not enable the cut-over. That is a different flag and this file never reads it.
  *
- * WHAT IT SEES, STATED PRECISELY. It wraps `window.ICU.ingestFromWard`, so it observes every caller
- * that dispatches through the ICU object. That includes the real GHIS sync (ghis-ward.js) and the
- * import and voice paths inside icu.js. It does NOT observe the ICU Snapshot photo-import path,
- * which calls the closure-local function directly and never touches the object. That path is not
- * GHIS traffic, so it is not what this is for, but it is stated rather than left to be discovered.
+ * WHAT IT SEES, STATED PRECISELY, AND CORRECTED. An earlier version of this file wrapped only
+ * `window.ICU.ingestFromWard` and claimed on that basis to observe the real GHIS sync. THAT WAS
+ * WRONG, and it was wrong in the quietest possible way: `ghis-ward.js` calls `ICU.ingestWardHistory`
+ * whenever it exists and only falls back to `ingestFromWard` "on older builds", so on a current
+ * build every ward sync went through a function nothing was watching. The observer reported
+ * `bundlesSeen: 0` on a device that had just synced a ward, which reads as "nothing went wrong"
+ * rather than "nothing was looked at". Found on a real device, 2026-09-05.
+ *
+ * It now wraps BOTH `ingestWardHistory` and `ingestFromWard`, so it observes the real GHIS ward
+ * sync on current and older builds alike, plus the import and voice paths inside icu.js. It still
+ * does NOT observe the ICU Snapshot photo-import path, which calls the closure-local function
+ * directly and never touches the object. That path is not GHIS traffic, so it is not what this is
+ * for, but it is stated rather than left to be discovered.
  *
  * WHY IT POLLS FOR window.ICU. icu.js is a deferred classic script and this is a module; both run
  * after parsing and their relative order is not something to bet a ward round on. Polling briefly
@@ -32,6 +40,15 @@
 const FLAG = "smd_wardsynq_shadow";
 const POLL_MS = 250;
 const GIVE_UP_AFTER_MS = 15000;
+
+/* Every door a GHIS ward sync can come through, most-used first. ghis-ward.js prefers
+ * ingestWardHistory and falls back to ingestFromWard; both are wrapped so neither build shape can
+ * ingest unobserved. */
+const METHODS = ["ingestWardHistory", "ingestFromWard"];
+
+function hasAnyMethod(icu) {
+  return !!icu && METHODS.some((m) => typeof icu[m] === "function");
+}
 
 function flagIsOn() {
   try {
@@ -46,7 +63,7 @@ async function boot() {
   if (!flagIsOn()) return;   // OFF by default, and the default is the shipped state
 
   const started = Date.now();
-  while (!(window.ICU && typeof window.ICU.ingestFromWard === "function")) {
+  while (!hasAnyMethod(window.ICU)) {
     if (Date.now() - started > GIVE_UP_AFTER_MS) {
       console.warn("[wardsynq shadow] ICU never appeared; observer not installed. Nothing else is affected.");
       return;
@@ -56,18 +73,59 @@ async function boot() {
 
   try {
     const { installShadow } = await import("./wardsynq/wardsynq-shadow.js");
+
     // No store and no bus are passed, deliberately and visibly: there is nothing here for the
     // observer to write to or emit on even if it tried.
-    const api = installShadow({ host: window.ICU, flags: window.SMD_WARDSYNQ_FLAGS, logger: console });
-
-    if (api && api.installed) {
-      console.info(
-        "[wardsynq shadow] observing GHIS ingest. Nothing is written and no production behaviour is changed.\n" +
-        "Run SMD_WARDSYNQ_SHADOW.report() to see what it observed.",
-      );
-    } else {
-      console.warn("[wardsynq shadow] not installed:", (api && api.reason) || "unknown reason");
+    const observers = [];
+    for (const method of METHODS) {
+      if (typeof window.ICU[method] !== "function") continue;   // absent on older builds
+      const api = installShadow({ host: window.ICU, flags: window.SMD_WARDSYNQ_FLAGS, logger: console, method });
+      if (api && api.installed) observers.push(api);
+      else console.warn("[wardsynq shadow]", method, "not observed:", (api && api.reason) || "unknown reason");
     }
+
+    if (!observers.length) {
+      console.warn("[wardsynq shadow] no ingest function could be observed; nothing else is affected.");
+      return;
+    }
+
+    // installShadow sets window.SMD_WARDSYNQ_SHADOW to whichever observer installed last. With more
+    // than one that would silently hide the others, and hiding a door is the whole defect this
+    // change exists to fix, so the global becomes a view over ALL of them.
+    const combined = {
+      installed: true,
+      methods: observers.map((o) => o.method),
+      uninstall() { observers.forEach((o) => o.uninstall()); return true; },
+      report() {
+        const parts = observers.map((o) => o.report());
+        const sum = (k) => parts.reduce((n, p) => n + p[k], 0);
+        const byMethod = {};
+        for (const p of parts) byMethod[p.method] = p;
+        return {
+          methods: parts.map((p) => p.method),
+          observed: parts.some((p) => p.observed),
+          bundlesSeen: sum("bundlesSeen"),
+          mapped: sum("mapped"),
+          shadowErrors: sum("shadowErrors"),
+          observationsMapped: sum("observationsMapped"),
+          legacyLabRows: sum("legacyLabRows"),
+          issues: parts.flatMap((p) => p.issues).slice(-50),
+          disagreements: parts.flatMap((p) => p.disagreements).slice(-50),
+          lastAt: parts.map((p) => p.lastAt).filter(Boolean).sort().pop() || null,
+          clean: parts.some((p) => p.observed)
+            && parts.every((p) => p.shadowErrors === 0 && p.disagreements.length === 0),
+          byMethod,
+        };
+      },
+    };
+    window.SMD_WARDSYNQ_SHADOW = combined;
+
+    console.info(
+      "[wardsynq shadow] observing GHIS ingest via " + combined.methods.join(" + ") + ".\n" +
+      "Nothing is written and no production behaviour is changed.\n" +
+      "Run SMD_WARDSYNQ_SHADOW.report() to see what it observed. `observed: false` means it has\n" +
+      "been handed nothing yet, which is NOT the same as a clean run.",
+    );
   } catch (err) {
     // A failure to install an observer must never be a failure of the app.
     console.warn("[wardsynq shadow] could not install; the ward round is unaffected:", err && err.message);

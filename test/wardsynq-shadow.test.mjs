@@ -156,3 +156,43 @@ test("uninstall: the original function is restored exactly", () => {
   s.uninstall();
   assert.equal(host.ingestFromWard, original, "the change is fully reversible at runtime as well as by not loading the file");
 });
+
+/* ------------------------------------------------------------------ the door nobody was watching */
+
+test("REGRESSION: the observer can be pointed at ingestWardHistory, which is what a real ward sync calls", () => {
+  /* ghis-ward.js:685 reads `ICU.ingestWardHistory ? ICU.ingestWardHistory(...) : ICU.ingestFromWard(...)`.
+   * ingestWardHistory exists on every current build and does NOT call ingestFromWard internally, so
+   * an observer wrapping only ingestFromWard sees nothing on a real device and reports it as zero
+   * bundles rather than as an error. This test is that device round, written down. */
+  const host = {
+    ingestWardHistory: (b) => ({ trends: ((b && b.labs) || []).length }),
+    ingestFromWard: () => ({ applied: true }),
+  };
+  const untouched = host.ingestFromWard;
+
+  const s = installShadow({ host, flags: flagsOn, method: "ingestWardHistory" });
+  assert.equal(s.installed, true);
+  assert.equal(s.method, "ingestWardHistory");
+  assert.equal(host.ingestFromWard, untouched, "wrapping one door does not disturb the other");
+
+  const b = bundle();
+  const result = host.ingestWardHistory(b);
+  assert.deepEqual(result, { trends: b.labs.length }, "the caller still gets exactly what the legacy path returned");
+  assert.equal(s.report().bundlesSeen, 1, "and the sync was actually seen");
+});
+
+test("ADVERSARIAL: a shadow that has been handed nothing is NOT reported as clean", () => {
+  /* `clean: true` on an observer that never ran is how a shadow wired to the wrong function passes
+   * for a successful one. Absence of findings is not a finding of absence. */
+  const host = hostWith();
+  const s = installShadow({ host, flags: flagsOn });
+  const before = s.report();
+  assert.equal(before.observed, false);
+  assert.equal(before.bundlesSeen, 0);
+  assert.equal(before.clean, false, "having seen nothing is not evidence that the mapping is sound");
+
+  host.ingestFromWard(bundle());
+  const after = s.report();
+  assert.equal(after.observed, true);
+  assert.equal(after.clean, true, "only real traffic with no errors and no disagreements earns clean");
+});
