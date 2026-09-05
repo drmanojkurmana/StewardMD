@@ -362,6 +362,15 @@
     return chips("region", regions, st.region) + chips("modality", modalities, st.modality);
   }
 
+  // The 3D layer (atlas3d.js, flag smd_atlas3d) is a peer of the slice modules, not a
+  // module: one card above the catalog, hidden entirely when the flag is off.
+  function threeD() { return !!(G.ATLAS3D && G.ATLAS3D.enabled && G.ATLAS3D.enabled()); }
+  function threeDCard() {
+    if (!threeD()) return "";
+    return '<button class="atlas-3d-card" data-atlas-act="3d"><i>3D</i>' +
+      '<span><b>3D Anatomy</b><span>Reference body · 2,200+ structures · linked to CT and MRI</span></span></button>';
+  }
+
   function moduleRow(m) {
     return '<button class="atlas-row" data-atlas-act="mod" data-atlas-mod="' + esc(m.id) + '">' +
       '<span class="atlas-row-th"' + (m.thumb ? ' style="background-image:url(' + cssUrl(imgUrl(m.thumb)) + ')"' : "") + "></span>" +
@@ -385,7 +394,7 @@
         '<button class="atlas-back" data-atlas-act="close" aria-label="Close">‹</button>' +
         '<span class="atlas-hd"><span class="atlas-ttl">RadioAnatome</span></span>' +
         '<button class="atlas-info" data-atlas-act="info" aria-label="About this atlas">' + (ico("info") || "i") + "</button></div>" +
-      '<div class="atlas-scroll">' + chipRow() + body + "</div>" +
+      '<div class="atlas-scroll">' + threeDCard() + chipRow() + body + "</div>" +
       '<div class="atlas-foot">Educational reference only — not for diagnosis.</div>';
   }
 
@@ -536,6 +545,10 @@
       }).join("") + "</div></div></div>";
   }
 
+  // Same rule as atlas-pipeline/ontology.py canonical(): the slice-module structure id
+  // "kidney" and the 3D layer's KIDNEY are one structure.
+  function canonicalId(sid) { return String(sid == null ? "" : sid).replace(/-/g, "_").toUpperCase(); }
+
   function selectStructure(id) {
     var strs = (st.atlas && st.atlas.structures) || {};
     if (id && !strs[id]) return;      // unknown id: ignore rather than render a blank sheet
@@ -607,6 +620,8 @@
         '<button class="atlas-pill' + (st.locked === id ? " on" : "") + '" data-atlas-act="lock" aria-pressed="' +
           (st.locked === id ? "true" : "false") + '">' + (ico("lock") || "") + " Lock</button>" +
         '<button class="atlas-pill" data-atlas-act="hide">' + (ico("eye_off") || ico("visibility") || "") + " Hide</button>" +
+        (threeD() && G.ATLAS3D.hasCanon(canonicalId(id))
+          ? '<button class="atlas-pill" data-atlas-act="3d" data-canon="' + esc(canonicalId(id)) + '">3D</button>' : "") +
         '<span class="atlas-pill cat"><i style="background:' + esc(cat.color || "#fff") + '"></i>' +
           esc(cat.label || "") + "</span>" +
       "</div>" +
@@ -772,6 +787,11 @@
     if (a === "lock") return toggleLock();
     if (a === "hide") return hideSelected();
     if (a === "sheetclose") return selectStructure(null);
+    if (a === "3d") {
+      if (!threeD()) return;
+      var canon = b.getAttribute("data-canon");
+      return void G.ATLAS3D.open(canon ? { canon: canon } : {});
+    }
     if (a === "tab") { _tab = b.getAttribute("data-tab"); return st.sel ? openSheet(st.sel) : void 0; }
     if (a === "filter") {
       var kind = b.getAttribute("data-kind");
@@ -792,6 +812,7 @@
     el.addEventListener("click", onClick);
     el.classList.add("on");
     G.document.body.classList.add("atlas-lock");
+    try { if (threeD() && G.ATLAS3D.prime) G.ATLAS3D.prime(); } catch (e) {}
     if (moduleId) {
       st.view = "viewer"; st.moduleId = moduleId; st.slice = 1; st.atlas = null;
       paint();
@@ -803,6 +824,27 @@
       paint();
       loadCatalog().then(paint);
     }
+  }
+
+  // Deep-link a structure: used by the 3D layer's "CT / MRI" rows. Opens the module (and the
+  // atlas itself if needed), jumps to the first slice that pins the structure, and LOCKS it so
+  // it stays highlighted while the user scrolls.
+  function openAt(moduleId, structureId, slice) {
+    if (!isOpen()) open(moduleId);
+    else {
+      st.view = "viewer"; st.moduleId = moduleId; st.slice = 1; st.atlas = null;
+      st.sel = null; st.locked = null; st.hidden = {};
+      paint();
+    }
+    return loadCatalog().then(function () { return loadModule(moduleId); }).then(function (a) {
+      if (!a || st.moduleId !== moduleId) return;
+      st.slice = Math.min(Math.max(+slice || 1, 1), total() || 1);
+      paint();
+      if (structureId && a.structures && a.structures[structureId]) {
+        st.locked = structureId;
+        selectStructure(structureId);
+      }
+    });
   }
 
   function close() {
@@ -830,6 +872,9 @@
   // this, so each swipe steps one level in instead of dumping the user to Home.
   function back() {
     if (!isOpen()) return false;
+    // The 3D layer stacks above the atlas; unwind it first so swipe-back and Escape step
+    // through its panels before touching the slice viewer underneath.
+    try { if (G.ATLAS3D && G.ATLAS3D.isOpen && G.ATLAS3D.isOpen()) return G.ATLAS3D.back(); } catch (e) {}
     if (G.document.getElementById("atlasInfo")) { dropOverlay("atlasInfo"); return true; }
     if (G.document.getElementById("atlasGrid")) { dropOverlay("atlasGrid"); return true; }
     var sh = G.document.getElementById("atlasSheet");
@@ -864,6 +909,7 @@
   G.ATLAS.close = close;
   G.ATLAS.isOpen = isOpen;
   G.ATLAS.back = back;
+  G.ATLAS.openAt = openAt;
   G.ATLAS._state = st;
   G.ATLAS._catalogHtml = catalogHtml;
   G.ATLAS._infoHtml = infoHtml;

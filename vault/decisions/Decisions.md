@@ -5,6 +5,35 @@ tags: [decisions, adr]
 
 Dated architectural calls + why. Newest first. Keep each short: **decision · why · trade-off · status**.
 
+## 2026-09-06 · RadioAnatome 3D — Human Atlas/BodyParts3D as a DATA SOURCE for one atlas, not a second viewer
+
+**Ask:** evaluate github.com/ashemag/human-atlas (2,234 BodyParts3D meshes, MIT code / CC BY 4.0 data)
+as a 3D layer that complements the CT/MRI atlas; do not copy it wholesale; link it to the same
+canonical ontology; audit licence + geometry first; report counts.
+
+**Decision:** import the DATA through our own pipeline (`atlas-pipeline/bp3d_import.py`) and render
+it with our own ~900-line WebGL1 viewer (`atlas3d.js`) inside RadioAnatome, rather than vendoring
+the React/three.js app. Why: the app is buildless ES5 and three.js is ESM-only since r160 (~650 KB);
+one anatomy system means one ontology, one catalog, one back-stack. The mapping between
+RadioAnatome canonical ids and FMA concepts is HAND-CURATED (`bp3d-map.json`), row by row from the
+concept element lists, because names do not match (TotalSegmentator `autochthon` vs four FMA
+muscles; SynthSeg `ventral DC` vs nothing). Laterality stays on the 3D side as `left`/`right`
+children of the unsided canonical id, honouring the Visible Human no-side rule.
+
+**Audit findings that shaped it:** upstream licence page (2025-02-27) confirms CC BY 4.0 with a
+mandated verbatim attribution string, so it renders only on the 3D About screen; 7 meshes are exact
+duplicates (rejected); Human Atlas files brain ventricles under "cardiac" (corrected, recorded);
+the BodyParts3D "isa" set has NO liver/lung/lobe surfaces, so those canonical structures are
+`related`-only and the UI says so instead of pretending a bronchial tree is a lung.
+
+**Trade-off:** 31.8 MB of geometry is committed to the repo under `atlas/3d/` (same precedent as the
+52 MB of slices) and streamed per system from Pages, never bundled natively and never SW-cached.
+Not yet run on a device; SwiftShader proves correctness, not frame rate.
+
+**Flag:** `smd_atlas3d` defaults ON, applying the 2026-09-04 no-per-device-gating order below;
+`?atlas3d=0` still closes it on one device. **Status: built, 111 tests green, PR open;
+device run pending** ([[RadioAnatome 3D]], `HUMAN_ATLAS_PROVENANCE.md`).
+
 ## 2026-09-04 · ICD Search — shipped default-on, no flag, from the first commit
 
 **Ask:** "now integrate ICD also and add a Search ICD button and add ICD integration into EMR/icu

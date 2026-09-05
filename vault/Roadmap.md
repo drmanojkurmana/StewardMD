@@ -24,6 +24,13 @@ Pending / deferred, by area. `- [ ]` so Obsidian renders checkboxes (Tasks/Datav
 - [ ] Per-endpoint precise per-module token cost (currently counts requests, rough cost)
 
 ## Modules
+- [ ] **[[RadioAnatome 3D]] device run** — browser-verified only (SwiftShader). Run on the iPhone + Pixel:
+      load time over cellular for the default ~20 MB of chunks, frame rate with muscles ON, pinch/pan feel.
+      Then decide whether a mobile LOD (meshoptimizer at ~40% of the upstream triangle budget) is needed.
+- [ ] **[[RadioAnatome 3D]] sheet drag** — reuse/extract atlas.js `bindSheetDrag` so the 3D sheet resizes by swipe (today: tap the handle).
+- [ ] **[[RadioAnatome 3D]] coverage** — 7 canonical structures have no BodyParts3D counterpart
+      (cerebellar cortex/WM, corona radiata, nucleus accumbens, paranasal sinus, subarachnoid space,
+      vertebral canal) and LIVER/LUNG/lobes are related-only. A second source (e.g. HuBMAP organ set) could fill organs.
 - [ ] **[[SURGX]] clinical sign-off** — 8 authored protocols, 13 engine overlays, 5 procedures,
       3 cases and 15 evidence records are all `ai_drafted`. Flip `review.status` per item after
       review, then set `smd_surgx_draft` to 0. This is the ONLY thing between the module and use.

@@ -210,6 +210,27 @@ def build():
             reg[cid]["source_model"].add(model)
             reg[cid]["source_dataset"].add(dataset)
 
+    # BodyParts3D (3D layer) mapping - hand-curated in bp3d-map.json, consumed by
+    # bp3d_import.py. Merged here so ontology.json is the ONE registry that says, per
+    # canonical id, which modalities exist: CT / MRI from the modules, 3D from the map.
+    bp3d_path = os.path.join(_HERE, "bp3d-map.json")
+    if os.path.exists(bp3d_path):
+        bp3d = json.load(open(bp3d_path, encoding="utf-8"))["structures"]
+        for cid, row in bp3d.items():
+            if cid not in reg:
+                continue
+            kind = row["kind"]
+            reg[cid]["bp3d"] = {
+                "kind": kind,
+                "fma": row.get("fma") or (row.get("fmas") or [None])[0],
+                "fmas": row.get("fmas"),
+                "coverage": row.get("coverage", "none"),
+                "left": row.get("left"), "right": row.get("right"),
+                "note": row.get("note") or row.get("reason"),
+            }
+            if kind in ("concept", "composite"):
+                reg[cid]["modality"].add("3D")
+
     for cid, row in reg.items():
         sid = cid.lower().replace("_", "-")
         if sid in CAVEAT:
@@ -250,6 +271,8 @@ def main():
     missing = [k for k, v in reg.items() if v["confidence"] == "NOT_AVAILABLE"]
     print(f"canonical structures: {len(reg)}   with geometry: {len(avail)}   "
           f"declared but empty: {len(missing)}")
+    n3d = sum(1 for v in reg.values() if "3D" in v["modality"])
+    print(f"with a BodyParts3D mesh (3D layer): {n3d}")
     by_region = {}
     for v in reg.values():
         by_region.setdefault(v["region"], []).append(v["canonical_id"])
