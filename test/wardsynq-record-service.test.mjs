@@ -1,0 +1,389 @@
+/* test/wardsynq-record-service.test.mjs — the WardSynQ Clinical Record Service, end to end in process.
+ *
+ * One file, and it proves the success criterion rather than the modules: two clients, a hospital
+ * PC and a phone, each running the UNCHANGED ClinicalStore + GovernedStore over a RemoteBackend,
+ * reach the same record through the real route handler with tenancy, identity and RBAC resolved
+ * from a mock membership table. No Cloudflare, no network: fetch is the route function.
+ *
+ * node --test test/wardsynq-record-service.test.mjs
+ */
+import { test } from "node:test";
+import assert from "node:assert/strict";
+
+import { handle } from "../functions/api/wardsynq/[[path]].js";
+import { MemoryRepository, VersionConflictError, assertRepository } from "../functions/_wardsynq/repository.js";
+import { D1Repository } from "../functions/_wardsynq/repository-d1.js";
+import { RecordService, actorForMembership, recordPolicy, AuthorityError, MODE } from "../functions/_wardsynq/service.js";
+import { makeMockDb } from "../functions/_connect/testkit.js";
+import { can } from "../functions/_connect/enterprise/rbac.js";
+
+import { ClinicalStore } from "../wardsynq/wardsynq-store.js";
+import { RemoteBackend, RemoteConflictError, RemoteRefusedError } from "../wardsynq/wardsynq-store-remote.js";
+import { GovernedStore, makeActor, KIND, TIER, GovernanceError } from "../wardsynq/wardsynq-actors.js";
+import { Patient, Observation, MedicationOrder, ClinicalNote } from "../wardsynq/wardsynq-model.js";
+import { mapSccmBundle, sccmAdapter } from "../wardsynq/adapters/wardsynq-sccm-adapter.js";
+import { IntegrationHub } from "../wardsynq/wardsynq-interop.js";
+import { bundle as sccmBundle, patient as sccmPatient, observation as sccmObservation, medicationStatement, encounter as sccmEncounter } from "../functions/_connect/canonical/model.js";
+
+/* ------------------------------------------------------------------ a hospital, in memory */
+
+const ENV = { WARDSYNQ_RECORD: "1", OWNER_EMAILS: "operator@example.test" };
+
+function hospital(opts = {}) {
+  const repository = new MemoryRepository();
+  const db = makeMockDb({
+    connect_tenant: [
+      { id: "gimsr", name: "GIMSR", status: "active", mode: "sandbox", settings: JSON.stringify(opts.settings || {}) },
+      { id: "other-hospital", name: "Other", status: "active", mode: "sandbox", settings: "{}" },
+    ],
+    connect_membership: [
+      { user_id: "fb:dr-menon", tenant_id: "gimsr", role: "clinician" },
+      { user_id: "fb:dr-rao", tenant_id: "gimsr", role: "clinician" },
+      { user_id: "fb:admin-one", tenant_id: "gimsr", role: "admin" },
+      { user_id: "fb:dr-elsewhere", tenant_id: "other-hospital", role: "clinician" },
+    ],
+  });
+  // Identity is decided by a header here, standing in for the verified Firebase token.
+  const identifyFn = async (request) => {
+    const who = request.headers.get("X-Test-User");
+    if (!who) return { guest: true };
+    return { id: who, guest: false, email: who === "fb:operator" ? "operator@example.test" : `${who.replace("fb:", "")}@example.test` };
+  };
+  const claimsFn = async (request) => {
+    const reg = request.headers.get("X-Test-RegNo");
+    return reg ? { regNo: reg, name: request.headers.get("X-Test-User") } : {};
+  };
+  const deps = { db, identifyFn, claimsFn, repository };
+  // A fetch that IS the route. Each client passes its own identity header.
+  const fetchAs = (user, regNo) => async (url, init) => {
+    const headers = new Headers(init && init.headers || {});
+    if (user) headers.set("X-Test-User", user);
+    if (regNo) headers.set("X-Test-RegNo", regNo);
+    return handle(new Request(String(url), { method: (init && init.method) || "GET", headers, body: init && init.body }), ENV, deps);
+  };
+  return { repository, db, deps, fetchAs };
+}
+
+/** A client exactly as a workstation or the phone builds one: store + governed, over the remote backend. */
+async function client(h, user, opts = {}) {
+  const backend = new RemoteBackend({ tenantId: opts.tenantId || "gimsr", baseUrl: "https://x", fetch: h.fetchAs(user, opts.regNo) });
+  const store = new ClinicalStore({ backend });
+  await store.open();
+  const d = backend.descriptor;
+  const actor = makeActor({ id: d.actor.id, kind: KIND.HUMAN, tier: d.actor.tier, display: d.actor.display, credential: d.actor.canSign ? "held-by-server" : null });
+  const governed = new GovernedStore({ store });
+  return { backend, store, governed, actor, descriptor: d, session: (pid) => governed.session(actor, pid) };
+}
+
+/* ------------------------------------------------------------------ the success criterion */
+
+test("a hospital PC and a phone read and write ONE record; a refresh keeps it; a change on one is visible on the other", async () => {
+  const h = hospital();
+  const pc = await client(h, "fb:dr-menon", { regNo: "AP-12345" });
+  const phone = await client(h, "fb:dr-rao");
+
+  assert.equal(pc.descriptor.mode, "system-of-record");
+  assert.equal(pc.descriptor.actor.id, "fb:dr-menon");
+  assert.equal(pc.descriptor.actor.canSign, true, "a clinician with a registration number can sign");
+  assert.equal(phone.descriptor.actor.canSign, false, "one without cannot");
+
+  // The PC admits a patient and records an observation, through its governed session.
+  const p = Patient({ id: "pat-1", mrn: "GH-1", name: "Anjali Menon", dob: "1959-02-14", sex: "female" });
+  const pcSession = pc.session("pat-1");
+  await pcSession.put(p);
+  await pcSession.put(Observation({ id: "obs-1", patientId: "pat-1", code: "2823-3", value: 5.4, unit: "mmol/L", category: "laboratory" }));
+
+  // The phone, a different client with a different identity, sees both.
+  const seen = await phone.governed.get(phone.actor, "Patient", "pat-1");
+  assert.equal(seen.name, "Anjali Menon");
+  assert.equal(seen.version, 1);
+  assert.equal(seen.writtenBy.id, "fb:dr-menon", "the server stamped the real author, not the client");
+  const obs = await phone.governed.byPatient(phone.actor, "Observation", "pat-1");
+  assert.equal(obs.length, 1);
+  assert.equal(obs[0].value, 5.4);
+
+  // The phone writes; the PC sees it after a "refresh" (a brand new client instance).
+  await phone.session("pat-1").put(ClinicalNote({ id: "note-1", patientId: "pat-1", noteType: "progress", sections: { plan: "repeat potassium at 18:00" }, authorId: "fb:dr-rao" }));
+  const pcAgain = await client(h, "fb:dr-menon");
+  const note = await pcAgain.governed.get(pcAgain.actor, "ClinicalNote", "note-1");
+  assert.equal(note.sections.plan, "repeat potassium at 18:00");
+  assert.equal(note.writtenBy.id, "fb:dr-rao");
+
+  // The change feed tells the PC what happened since it last looked.
+  const feed = await pcAgain.backend.changes(0);
+  assert.deepEqual(feed.records.map((r) => `${r.resourceType}/${r.id}@${r.version}`), ["Patient/pat-1@1", "Observation/obs-1@1", "ClinicalNote/note-1@1"]);
+  const later = await pcAgain.backend.changes(feed.cursor);
+  assert.equal(later.records.length, 0);
+
+  // The whole chart in one call, for the phone opening a patient.
+  const chart = await phone.backend.chart("pat-1");
+  assert.equal(chart.Patient.length, 1);
+  assert.equal(chart.Observation.length, 1);
+  assert.equal(chart.ClinicalNote.length, 1);
+  assert.equal(chart.MedicationOrder.length, 0);
+
+  // A roster for the workstation.
+  const roster = await pc.backend.list("Patient");
+  assert.deepEqual(roster.map((r) => r.id), ["pat-1"]);
+});
+
+test("append-only: an edit is a new version, history keeps every version, nothing is overwritten", async () => {
+  const h = hospital();
+  const pc = await client(h, "fb:dr-menon");
+  const s = pc.session("pat-2");
+  await s.put(Patient({ id: "pat-2", mrn: "GH-2", name: "R Deshpande", dob: "1988-11-02" }));
+  const v1 = await s.get("Patient", "pat-2");
+  await s.put({ ...v1, name: "Ravi Deshpande" });
+  const hist = await s.history("Patient", "pat-2");
+  assert.deepEqual(hist.map((v) => [v.version, v.name]), [[1, "R Deshpande"], [2, "Ravi Deshpande"]]);
+  assert.equal((await s.get("Patient", "pat-2")).version, 2);
+  assert.equal(h.repository._rows.filter((r) => r.id === "pat-2").length, 2, "two rows, no update in place");
+});
+
+test("concurrency: two clients editing from the same version cannot both land; the loser gets the current record", async () => {
+  const h = hospital();
+  const pc = await client(h, "fb:dr-menon");
+  const phone = await client(h, "fb:dr-rao");
+  await pc.session("pat-3").put(Patient({ id: "pat-3", mrn: "GH-3", name: "Meera Iyer", dob: "2019-06-30" }));
+
+  // Both read version 1.
+  const pcCopy = await pc.session("pat-3").get("Patient", "pat-3");
+  const phoneCopy = await phone.session("pat-3").get("Patient", "pat-3");
+  assert.equal(pcCopy.version, 1); assert.equal(phoneCopy.version, 1);
+
+  // Direct through the route with an explicit expectedVersion, which is what the backend sends.
+  const r1 = await h.fetchAs("fb:dr-menon")("https://x/api/wardsynq/gimsr/record", { method: "POST", body: JSON.stringify({ entity: { ...pcCopy, name: "Meera I" }, expectedVersion: 1 }) });
+  assert.equal(r1.status, 201);
+  const r2 = await h.fetchAs("fb:dr-rao")("https://x/api/wardsynq/gimsr/record", { method: "POST", body: JSON.stringify({ entity: { ...phoneCopy, name: "Meera Iyer-K" }, expectedVersion: 1 }) });
+  assert.equal(r2.status, 409);
+  const body = await r2.json();
+  assert.equal(body.error, "version_conflict");
+  assert.equal(body.detail.currentVersion, 2);
+  assert.equal(body.detail.current.name, "Meera I", "the loser is handed what actually won");
+
+  // Through the store: the ClinicalStore derives version 2 from a stale read and the backend refuses.
+  const stale = new ClinicalStore({ backend: new RemoteBackend({ tenantId: "gimsr", baseUrl: "https://x", fetch: h.fetchAs("fb:dr-rao") }) });
+  await stale.open();
+  // The race: the store derives version 3 from a read of version 2, and BEFORE it commits another
+  // client lands version 3. The commit is refused and the current record comes back with it.
+  await assert.rejects(
+    stale.transaction(async (tx) => {
+      const cur = await tx.get("Patient", "pat-3");
+      await tx.put({ ...cur, name: "conflict" });                                                   // staged as version 3
+      await pc.session("pat-3").put({ ...(await pc.session("pat-3").get("Patient", "pat-3")), name: "Meera I." });   // lands version 3 first
+    }),
+    (e) => e instanceof RemoteConflictError && e.current.version === 3 && e.current.name === "Meera I."
+  );
+
+  // The repository's own guard, for the race the check cannot see: the same version twice is refused.
+  await assert.rejects(h.repository.append("gimsr", [{ resourceType: "Patient", id: "pat-3", version: 3, meta: {} }]), VersionConflictError);
+  assert.equal((await h.repository.history("gimsr", "Patient", "pat-3")).length, 3);
+});
+
+test("idempotency: a retried write replays the original outcome, it does not make version N+2", async () => {
+  const h = hospital();
+  const f = h.fetchAs("fb:dr-menon");
+  const entity = Patient({ id: "pat-4", mrn: "GH-4", name: "A", dob: "1970-01-01" });
+  const send = () => f("https://x/api/wardsynq/gimsr/record", { method: "POST", headers: { "Idempotency-Key": "k-1" }, body: JSON.stringify({ entity }) });
+  const a = await send(); assert.equal(a.status, 201);
+  const b = await send(); assert.equal(b.status, 200);
+  const bb = await b.json();
+  assert.equal(bb.replayed, true);
+  assert.equal(bb.record.version, 1);
+  assert.equal((await h.repository.history("gimsr", "Patient", "pat-4")).length, 1);
+});
+
+/* ------------------------------------------------------------------ tenancy, identity, RBAC */
+
+test("tenancy: a clinician of one hospital cannot open, read or write another hospital's record", async () => {
+  const h = hospital();
+  await (await client(h, "fb:dr-menon")).session("pat-5").put(Patient({ id: "pat-5", mrn: "GH-5", name: "X", dob: "1970-01-01" }));
+  // Member of other-hospital asking for gimsr: 403 at open.
+  await assert.rejects(client(h, "fb:dr-elsewhere"), (e) => e.code === "FORBIDDEN");
+  const r = await h.fetchAs("fb:dr-elsewhere")("https://x/api/wardsynq/gimsr/record/Patient/pat-5");
+  assert.equal(r.status, 403);
+  // Same id in the other tenant is a different record: nothing leaks by id.
+  const other = await client(h, "fb:dr-elsewhere", { tenantId: "other-hospital" });
+  assert.equal(await other.governed.get(other.actor, "Patient", "pat-5"), null);
+  assert.equal((await other.backend.changes(0)).records.length, 0);
+  // Guests are 401, unknown tenants 403, the flag off is 404.
+  assert.equal((await h.fetchAs(null)("https://x/api/wardsynq/gimsr")).status, 401);
+  assert.equal((await h.fetchAs("fb:dr-menon")("https://x/api/wardsynq/no-such-tenant")).status, 403);
+  assert.equal((await handle(new Request("https://x/api/wardsynq/gimsr"), { WARDSYNQ_RECORD: "0" }, h.deps)).status, 404);
+});
+
+test("roles: admin gets no chart (PHI is clinician-only); superadmin can read and cannot write", async () => {
+  const h = hospital();
+  assert.equal(can("clinician", "record:write"), true);
+  assert.equal(can("admin", "record:read"), false);
+  assert.equal(can("auditor", "record:read"), false);
+  assert.equal((await h.fetchAs("fb:admin-one")("https://x/api/wardsynq/gimsr")).status, 403);
+
+  await (await client(h, "fb:dr-menon")).session("pat-6").put(Patient({ id: "pat-6", mrn: "GH-6", name: "Y", dob: "1970-01-01" }));
+  const op = await client(h, "fb:operator");            // OWNER_EMAILS -> superadmin, no membership row
+  assert.equal(op.descriptor.role, "superadmin");
+  assert.equal(op.descriptor.actor.tier, "read");
+  assert.equal((await op.governed.get(op.actor, "Patient", "pat-6")).name, "Y");
+  await assert.rejects(op.session("pat-6").put(Patient({ id: "pat-7", mrn: "GH-7", name: "Z", dob: "1970-01-01" })), GovernanceError);
+  // And even a client that lies about its tier is refused at the door.
+  const r = await h.fetchAs("fb:operator")("https://x/api/wardsynq/gimsr/record", { method: "POST", body: JSON.stringify({ entity: Patient({ id: "pat-7", mrn: "GH-7", name: "Z", dob: "1970-01-01" }) }) });
+  assert.equal(r.status, 403);
+  assert.equal((await r.json()).error, "governance");
+  assert.equal(await h.repository.latest("gimsr", "Patient", "pat-7"), null);
+});
+
+test("governance runs on the SERVER: a forged signature and a wrong-chart write are refused whatever the client claimed", async () => {
+  const h = hospital();
+  const f = h.fetchAs("fb:dr-rao");     // no registration number -> cannot sign
+  const forged = MedicationOrder({ id: "rx-1", patientId: "pat-8", drug: "Warfarin", prescriberId: "fb:dr-rao", status: "active", signedBy: "fb:dr-menon" });
+  const r = await f("https://x/api/wardsynq/gimsr/record", { method: "POST", body: JSON.stringify({ entity: forged }) });
+  assert.equal(r.status, 403);
+  assert.deepEqual((await r.json()).reasons.map((x) => x.code), ["SIGNATURE_NOT_OWN"]);
+  const own = { ...forged, signedBy: "fb:dr-rao" };
+  const r2 = await f("https://x/api/wardsynq/gimsr/record", { method: "POST", body: JSON.stringify({ entity: own }) });
+  assert.deepEqual((await r2.json()).reasons.map((x) => x.code), ["NO_CREDENTIAL"]);
+  const r3 = await f("https://x/api/wardsynq/gimsr/record", { method: "POST", body: JSON.stringify({ entity: Observation({ id: "o", patientId: "pat-8", code: "x", value: 1 }), activePatientId: "pat-9" }) });
+  assert.deepEqual((await r3.json()).reasons.map((x) => x.code), ["WRONG_CHART"]);
+  // Denials are audited, and the record is untouched.
+  assert.ok(h.repository.audit.some((a) => a.action === "record.denied"));
+  assert.equal(await h.repository.latest("gimsr", "MedicationOrder", "rx-1"), null);
+  // The credentialed clinician signing as themselves succeeds, through the store and its session.
+  const pc = await client(h, "fb:dr-menon", { regNo: "AP-12345" });
+  const signed = await pc.session("pat-8").put(MedicationOrder({ id: "rx-2", patientId: "pat-8", drug: "Warfarin", prescriberId: "fb:dr-menon", status: "active", signedBy: "fb:dr-menon" }));
+  assert.equal(signed.status, "active");
+  assert.equal((await h.repository.latest("gimsr", "MedicationOrder", "rx-2")).writtenBy.id, "fb:dr-menon");
+});
+
+/* ------------------------------------------------------------------ audit */
+
+test("every read and write leaves a PHI-free audit row; the write's row lands atomically with the version", async () => {
+  const h = hospital();
+  const pc = await client(h, "fb:dr-menon");
+  await pc.session("pat-10").put(Patient({ id: "pat-10", mrn: "GH-10", name: "Secret Name", dob: "1970-01-01" }));
+  await pc.governed.get(pc.actor, "Patient", "pat-10");
+  await pc.backend.chart("pat-10");
+  const actions = h.repository.audit.map((a) => a.action);
+  assert.ok(actions.includes("record.write"));
+  assert.ok(actions.filter((a) => a === "record.read").length >= 2);
+  for (const a of h.repository.audit) {
+    assert.ok(!JSON.stringify(a).includes("Secret Name"), "audit must never carry the record's content");
+    assert.equal(a.actor, "fb:dr-menon");
+  }
+  const w = h.repository.audit.find((a) => a.action === "record.write");
+  assert.deepEqual(w.scope, { resourceType: "Patient", id: "pat-10", version: 1, mode: "system-of-record", idempotent: true });
+});
+
+/* ------------------------------------------------------------------ the two modes and the connector boundary */
+
+test("integration mode: an external EMR's records cannot be overwritten natively, and it creates the masters", async () => {
+  const h = hospital({ settings: { wardsynq: { recordMode: "integration" } } });
+  const pc = await client(h, "fb:dr-menon");
+  assert.equal(pc.descriptor.mode, "integration");
+  assert.deepEqual(pc.descriptor.externallyOwned, ["Patient", "Encounter"]);
+
+  // WardSynQ does not mint a patient the hospital's EMR does not know about.
+  await assert.rejects(pc.session("pat-11").put(Patient({ id: "pat-11", mrn: "GH-11", name: "N", dob: "1970-01-01" })), (e) => e instanceof RemoteRefusedError && e.code === "EXTERNAL_CREATE");
+
+  // The external EMR's bundle arrives through the connector boundary and lands as adapter writes.
+  const b = sccmBundle({
+    tenantId: "gimsr", sourceConnector: "fhir-r4", generatedAt: "2026-09-06T10:00:00Z",
+    patient: sccmPatient({ id: "EPIC-77", name: "Epic Patient", gender: "male", birthDate: "1960-05-05", identifiers: [{ system: "urn:mrn", type: "MRN", value: "E-77" }] }),
+    encounters: [sccmEncounter({ id: "V-1", status: "in-progress", class: "IMP" })],
+    observations: [sccmObservation({ id: "L-1", category: "laboratory", code: { coding: [{ system: "http://loinc.org", code: "2823-3", display: "Potassium" }], text: "Potassium" }, value: { value: 6.1, unit: "mmol/L" }, effectiveDateTime: "2026-09-06T09:00:00Z", status: "final" })],
+    medications: [medicationStatement({ id: "M-1", medication: { coding: [{ system: "rxnorm", code: "11289", display: "Warfarin" }], text: "Warfarin" }, origin: "order", status: "active" })],
+  });
+  const r = await h.fetchAs("fb:dr-menon")("https://x/api/wardsynq/gimsr/ingest/sccm", { method: "POST", body: JSON.stringify(b) });
+  assert.equal(r.status, 200);
+  const out = await r.json();
+  assert.equal(out.ok, true);
+  assert.equal(out.system, "sccm");
+  assert.equal(out.written, 4);
+  assert.equal(out.refused, 0);
+
+  const pat = await pc.governed.get(pc.actor, "Patient", "fhir-r4-pat-epic-77");
+  assert.equal(pat.mrn, "E-77");
+  assert.equal(pat.meta.source.system, "fhir-r4");
+  assert.equal(pat.writtenBy.kind, "adapter");
+  const rx = await pc.governed.get(pc.actor, "MedicationOrder", "fhir-r4-rx-m-1");
+  assert.equal(rx.status, "draft", "an external active order lands as a draft; the ceiling is the actor model's");
+  assert.equal(rx.externalStatus, "active");
+  assert.equal(rx.prescriberId, "external:fhir-r4");
+
+  // A replay of the same bundle is a no-op, not a second copy.
+  const again = await (await h.fetchAs("fb:dr-menon")("https://x/api/wardsynq/gimsr/ingest/sccm", { method: "POST", body: JSON.stringify(b) })).json();
+  assert.equal(again.duplicate, true);
+  assert.equal((await h.repository.history("gimsr", "Patient", "fhir-r4-pat-epic-77")).length, 1);
+
+  // The doctor can chart against the external patient (a note is WardSynQ's own)...
+  await pc.session("fhir-r4-pat-epic-77").put(ClinicalNote({ id: "note-x", patientId: "fhir-r4-pat-epic-77", noteType: "progress", sections: { a: "seen" }, authorId: "fb:dr-menon" }));
+  // ...but cannot overwrite what Epic owns; that change goes back through the connector.
+  await assert.rejects(pc.session("fhir-r4-pat-epic-77").put({ ...pat, name: "Renamed locally" }), (e) => e instanceof RemoteRefusedError && e.code === "EXTERNAL_AUTHORITY");
+  assert.equal((await pc.governed.get(pc.actor, "Patient", "fhir-r4-pat-epic-77")).name, "Epic Patient");
+});
+
+test("system-of-record mode still protects feed-owned records (a LIS result is corrected by the LIS)", async () => {
+  const h = hospital();
+  const pc = await client(h, "fb:dr-menon");
+  assert.doesNotThrow(() => new IntegrationHub({}).register(sccmAdapter()), "the adapter registers on the hub like the GHIS one");
+  await pc.session("pat-12").put(Patient({ id: "pat-12", mrn: "GH-12", name: "Native", dob: "1970-01-01" }));
+  const b = sccmBundle({ sourceConnector: "hl7v2", generatedAt: "2026-09-06T11:00:00Z", patient: sccmPatient({ id: "H-1", name: "Lab Feed" }),
+    observations: [sccmObservation({ id: "K-1", category: "laboratory", code: { coding: [{ code: "2823-3" }], text: "Potassium" }, value: { value: 4.0, unit: "mmol/L" } })] });
+  assert.equal((await h.fetchAs("fb:dr-menon")("https://x/api/wardsynq/gimsr/ingest/sccm", { method: "POST", body: JSON.stringify(b) })).status, 200);
+  const obs = await pc.governed.get(pc.actor, "Observation", "hl7v2-obs-k-1");
+  await assert.rejects(pc.session("hl7v2-pat-h-1").put({ ...obs, value: 9.9 }), (e) => e.code === "EXTERNAL_AUTHORITY");
+  // A native record in the same tenant is editable as ever.
+  const p = await pc.session("pat-12").get("Patient", "pat-12");
+  assert.equal((await pc.session("pat-12").put({ ...p, name: "Native 2" })).version, 2);
+});
+
+test("SCCM adapter: stable ids, provenance stamped, nothing invented, imaging reported not dropped silently", () => {
+  const b = sccmBundle({ sourceConnector: "dicomweb", patient: sccmPatient({ id: "P/1" }), imagingStudies: [{ id: "S1", modality: "CT" }] });
+  const m = mapSccmBundle(b);
+  assert.equal(m.patient.id, "dicomweb-pat-p-1");
+  assert.equal(m.patient.dob, "0000-00-00");
+  assert.equal(m.patient.dobIsUnknown, true);
+  assert.equal(m.patient.nameIsUnknown, true);
+  assert.equal(m.patient.meta.source.system, "dicomweb");
+  assert.deepEqual(m.issues.map((i) => i.code), ["SCCM_PATIENT_NO_MRN", "SCCM_PATIENT_NO_NAME", "SCCM_PATIENT_NO_DOB", "SCCM_IMAGING_NOT_MAPPED"]);
+  assert.equal(mapSccmBundle(b).patient.id, m.patient.id, "same source, same id");
+  assert.equal(sccmAdapter().claims({ sccmVersion: "1.0", patient: { id: "x" } }), true);
+  assert.equal(sccmAdapter().claims({ patientId: 1, labs: [] }), false, "a GHIS bundle is not claimed");
+});
+
+/* ------------------------------------------------------------------ the port and the service alone */
+
+test("service: policy defaults, actor mapping, port validation", () => {
+  assert.deepEqual(recordPolicy({ settings: "{}" }), { mode: MODE.SYSTEM_OF_RECORD, externallyOwned: [] });
+  assert.deepEqual(recordPolicy({ settings: JSON.stringify({ wardsynq: { recordMode: "integration", externallyOwned: ["Patient", "Bogus"] } }) }), { mode: MODE.INTEGRATION, externallyOwned: ["Patient"] });
+  assert.equal(actorForMembership({ identity: { id: "fb:a" }, role: "clinician", claims: { regNo: "R1" } }).credential, "R1");
+  assert.equal(actorForMembership({ identity: { id: "fb:a" }, role: "clinician" }).credential, null);
+  assert.equal(actorForMembership({ identity: { id: "fb:a" }, role: "superadmin" }).tier, TIER.READ);
+  assert.equal(actorForMembership({ identity: { id: "fb:a" }, role: "admin" }), null);
+  assert.equal(actorForMembership({ identity: { id: "fb:a" }, role: "auditor" }), null);
+  assert.throws(() => assertRepository({ latest() {} }), /missing/);
+  assert.doesNotThrow(() => assertRepository(new MemoryRepository()));
+  assert.throws(() => new RecordService({ repository: new MemoryRepository(), tenant: { id: "t" }, actor: null }), /actor/);
+});
+
+test("D1 repository speaks the schema: append is one atomic batch, a UNIQUE violation is a VersionConflictError, no UPDATE or DELETE exists", async () => {
+  const sql = [];
+  let failBatch = null;
+  const db = {
+    prepare(q) { sql.push(q); const stmt = { bind: () => stmt, first: async () => null, all: async () => ({ results: [] }), run: async () => ({ success: true }) }; return stmt; },
+    batch: async (stmts) => { if (failBatch) throw failBatch; return stmts.map(() => ({ meta: { last_row_id: 7 } })); },
+  };
+  const repo = new D1Repository(db);
+  assertRepository(repo);
+  const rec = { resourceType: "Patient", id: "p", version: 1, meta: { recordedAt: "t" }, writtenBy: { id: "a", kind: "human" } };
+  const out = await repo.append("t1", [rec], { idempotencyKey: "k", audit: { action: "record.write", actor: "a" } });
+  assert.equal(out.seq, 7);
+  assert.ok(sql.some((q) => /INSERT INTO wardsynq_record/.test(q)));
+  assert.ok(sql.some((q) => /INSERT INTO wardsynq_idempotency/.test(q)));
+  assert.ok(sql.some((q) => /INSERT INTO connect_audit_event/.test(q)));
+  failBatch = new Error("D1_ERROR: UNIQUE constraint failed: wardsynq_record.tenant_id, wardsynq_record.resource_type, wardsynq_record.id, wardsynq_record.version");
+  await assert.rejects(repo.append("t1", [rec]), VersionConflictError);
+  await repo.latest("t1", "Patient", "p"); await repo.history("t1", "Patient", "p"); await repo.byPatient("t1", "Observation", "p");
+  await repo.changes("t1", 0, 10); await repo.recall("t1", "k"); await repo.latestByType("t1", "Patient", 5); await repo.auditOnly("t1", { action: "record.read" });
+  assert.ok(!sql.some((q) => /\b(UPDATE|DELETE)\b/i.test(q)), "append-only by construction");
+  assert.ok(sql.every((q) => /^INSERT/.test(q) || !/wardsynq_record/.test(q) || /tenant_id\s*=\s*\?/.test(q)), "every record query is tenant-scoped");
+});

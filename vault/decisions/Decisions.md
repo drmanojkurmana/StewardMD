@@ -4136,3 +4136,41 @@ said so.
 PRs. HAZ-DET-01's remaining blocker is the resuscitation committee approving the escalation policy;
 HAZ-TIME-01's is that attestation is permitted by design. Working transport is not an approved
 policy, and a demonstration on `DEMO-PAT-1` is not a patient.
+
+## 2026-09-06 — The record leaves the browser: a server-side WardSynQ Clinical Record Service
+
+The audit of 2026-09-05 found the decisive gap: WardSynQ had every part of a clinical core and no
+record. `wardsynq-store.js` offered memory and IndexedDB only, so the product model (hospital PC and
+StewardMD Mobile as two interfaces to one record) was impossible, and SCCM and the WardSynQ model
+overlapped with nothing saying which was the record.
+
+**Decision: the WardSynQ canonical model is the clinical record; SCCM is the ingest wire format.**
+They meet in one adapter (`wardsynq-sccm-adapter.js`) and nowhere else. Neither was rewritten.
+
+**Decision: reuse the store and the governance, do not port them.** The server runs the SAME
+`ClinicalStore` and `GovernedStore` per request over a `TenantBackend`. There is no second
+implementation of versioning, append-only history or the actor ceilings to drift from the first.
+This is also why `functions/` now imports from `wardsynq/`, which had no precedent; `wrangler pages
+functions build` proves it bundles.
+
+**Decision: a persistence PORT, not a database.** Eight methods (`functions/_wardsynq/repository.js`),
+D1 behind it today, a reference in-memory one for tests, on-prem a sibling file nobody has written.
+Managed India-hosted, hospital-controlled and hybrid are then deployment choices, not rewrites. Stated
+plainly: only D1 exists.
+
+**Decision: concurrency is two layers, and the loser is told.** `expectedVersion` on the API refuses
+a stale write with the current record; the UNIQUE (tenant, type, id, version) key catches the race
+the check cannot see. Nothing merges silently; the existing Reconciler resolves with a person.
+
+**Decision: authority follows provenance, in both modes.** A record whose latest version came from
+another system cannot be overwritten natively, whether the hospital is on Epic or on WardSynQ. This
+is what "the existing EMR remains authoritative for the data it owns" means as code. Integration
+mode adds only that the external EMR creates the masters. Neither is a clinical rule.
+
+**Decision: PHI stays clinician-only.** `record:read`/`record:write` were added to the Connect RBAC
+matrix for clinician (and super-admin, who is then built READ-tier). Owner, admin, auditor: no chart.
+The pinned matrix test was updated deliberately, with the reason in the test.
+
+**Not decided, on purpose:** which of the 18 queue roles map to which actor tier; whether the
+workstation's demo cohort view model (labs with ranges, med sigs) should become a canonical
+projection; write-back to an external EMR. Each is the next build or a committee's, not this one.
