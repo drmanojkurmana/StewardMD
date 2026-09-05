@@ -2168,6 +2168,21 @@ window.openExternal = function (u) {
 <script src="/clinical-vocab.js?v=gold363" defer></script>
 <script src="/icu.js?v=gold999-askmaik-think1-lytes1-micuvit1-proto3-icdsug1" defer></script>
 <script src="/discharge-ghis.js?v=dg1" defer></script>
+
+<!-- WardSynQ shadow observation of GHIS ingest. BOTH DEFAULT OFF and neither ships enabled.
+
+     wardsynq-flags.js is the flag registry (query param -> localStorage -> default). It was not
+     loaded here before, which meant the flags existed in the codebase and not at runtime.
+
+     wardsynq-shadow-boot.js does nothing at all unless ?wardsynq_shadow=1 is set. When it is, a
+     GHIS bundle already ingested by the legacy path is additionally mapped through the WardSynQ
+     adapter and the result COUNTED AND DISCARDED: no store, no event bus, no chart, no safety
+     state, no change to production behaviour. The legacy ingest runs first and its result is
+     returned untouched.
+
+     It does NOT read or enable smd_wardsynq_cutover. That is a separate flag and remains off. -->
+<script src="/wardsynq-flags.js?v=wsq1" defer></script>
+<script type="module" src="/wardsynq-shadow-boot.js?v=wsq1"></script>
 <!-- ICU v2 Phase 2: real-time collaboration backend (window.SMD_ICU_GROUPS). Pure data +
      Firestore subscription layer; NO DOM. Flag smd_icu_groups (default OFF). Loads AFTER icu.js
      (icu.js reads window.SMD_ICU_GROUPS lazily at runtime, so this order is safe). -->

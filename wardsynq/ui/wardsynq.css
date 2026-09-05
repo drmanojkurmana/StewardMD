@@ -1,0 +1,545 @@
+/* wardsynq/ui/wardsynq.css — WardSynQ clinical operating system: visual language.
+ *
+ * THE IDEA: THE SIGNAL COLUMN.
+ * A narrow channel runs down the left edge of the clinical workspace. It is the only place colour
+ * appears, and every clinical statement registers in it with a mark whose WEIGHT and LENGTH encode
+ * significance. Two consequences, both clinical rather than decorative:
+ *   1. the hierarchy survives in greyscale, on a bad monitor, and for a colour-blind clinician,
+ *      because colour confirms the mark and never carries it alone;
+ *   2. a clinician can tell from peripheral vision whether anything on this screen is wrong,
+ *      without reading a word.
+ * Everything outside the channel is neutral. Colour that is spent on decoration is colour that no
+ * longer means anything when a patient is about to be harmed.
+ *
+ * WHAT THIS REPLACES. The previous pass was a grid of hairlines with tracked-out uppercase labels
+ * and a monospace face on every small value: a broadsheet, not an instrument. Borders are now
+ * nearly absent. Structure comes from alignment, space and weight. Uppercase is used for column
+ * headers in real tables and nowhere else.
+ *
+ * TYPE. One family. Source Sans 3, drawn by Adobe specifically for user interface legibility, with
+ * real tabular figures. Numerals are aligned with font-variant-numeric rather than by switching to
+ * a monospace face, so columns line up without the interface cosplaying a terminal. Monospace is
+ * reserved for identifiers a human has to read back character by character, which in practice means
+ * the MRN and nothing else.
+ *
+ * PRODUCTION: self-host the woff2. A ward loses its network and a CDN font is a demo convenience.
+ *
+ * SCALE. Tokens and components here are named for clinical roles, not for this screen, so the same
+ * language covers OPD, IPD, ED, ICU, OR, pharmacy, laboratory and the specialty modules.
+ */
+
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Source+Code+Pro:wght@400;500&display=swap');
+
+/* ================================================================ tokens */
+
+:root {
+  color-scheme: light dark;
+
+  /* Ground. A low-chroma neutral with a faint green-grey cast: instrument, not paper, and not the
+   * warm cream that every generated interface currently defaults to. */
+  --ground: #eef1f0;
+  --surface: #f8faf9;
+  --raised: #ffffff;
+  --recess: #e4e8e7;
+  --ink: #0f1613;
+  --ink-2: #4a5551;
+  --ink-3: #5f6965; /* was #77827e, measured 3.98:1 on white and therefore below AA. Metadata is still text somebody has to read. Now 5.68 on raised and 4.60 on the darkest surface. */
+  --hair: #dbe0de;
+
+  /* Signal. Instrument colours, desaturated on purpose. These appear in the signal column, on an
+   * out-of-range figure, and nowhere else in the interface. */
+  --sig-stop: #8c2f22;
+  --sig-major: #85570c; /* measured at 4.47:1 as #9a6b12, just under the 4.5:1 floor for 12.5px text */
+  --sig-watch: #4a5a6a;
+  --sig-clear: #2c6146;
+  --sig-stop-wash: #f7e9e6;
+  --sig-major-wash: #f8f0df;
+
+  /* Interaction. Deliberately near-ink: an interface where the primary action is a bright brand
+   * colour teaches the eye that colour means "clickable", which is exactly the association that
+   * must stay free for "clinically abnormal". */
+  --focus: #1c5f7a;
+  --focus-wash: #dfeef3;
+  /* Ink laid on the commit button. The signal colours invert between schemes, so the text on them
+   * has to invert too: white on the dark-scheme amber measures about 1.9:1, on the one button in
+   * the product whose label a clinician most needs to read before pressing it. */
+  --on-signal: #ffffff;
+
+  /* --- brand -------------------------------------------------------------------------------
+   * The WardSynQ navy, sampled from the supplied mark (#1c3048 after normalising the fringe the
+   * background removal left behind). It is measured AAA on every surface in this file: 13.41:1 on
+   * raised, 12.79 on surface, 11.80 on ground, 10.85 on recess, and white on it is 13.41.
+   *
+   * TWO RULES, both from measurement rather than taste, and both enforced by
+   * test/wardsynq-brand.test.mjs so they cannot quietly rot:
+   *
+   *   1. --brand IS NOT A TEXT COLOUR on a light surface. Against --ink it measures 1.37:1, so
+   *      navy body text beside near-black body text does not read as a deliberate accent, it reads
+   *      as two blacks that do not match. The mark is navy; the words are --ink.
+   *   2. NOTHING SIGNALLED IS EVER PUT ON A --brand FILL. Every signal colour lands between 1.63:1
+   *      and 2.15:1 against it, so a navy header bar with a status chip in it would fail all four
+   *      at once, and would fail them while looking smart. Brand fills carry --on-signal white and
+   *      nothing else. */
+  --brand: #1c3048;
+  --brand-on: #ffffff;
+
+  /* Source Sans 3 is named first and is NOT fetched. See the note in wardsynq.html: an offline-first
+   * clinical surface must not depend on a CDN at first paint, so the rest of this stack is the
+   * design and not a degraded version of it. Every face here is a humanist sans with open apertures
+   * and unambiguous digits, which is the property that actually matters for a drug name and a dose.
+   * If the face is wanted in production, self-host a subset next to this file. */
+  --sans: "Source Sans 3", "Segoe UI", Roboto, system-ui, sans-serif;
+  --mono: "Source Code Pro", ui-monospace, Menlo, Consolas, monospace;
+
+  /* Type scale. Workstation viewing distance, so the floor is 12.5px and body is 14.5px. */
+  --t-micro: 12.5px;
+  --t-small: 13.5px;
+  --t-body: 14.5px;
+  --t-lead: 16.5px;
+  --t-name: 23px;
+  --t-figure: 26px;
+
+  --sp-1: 4px; --sp-2: 8px; --sp-3: 12px; --sp-4: 16px; --sp-5: 22px; --sp-6: 30px; --sp-7: 44px;
+
+  --signal-w: 30px;   /* width of the signal column */
+  --mark-w: 5px;      /* weight of a significance mark */
+  --r: 3px;
+
+  --dur: 120ms;
+  --ease: cubic-bezier(0.2, 0, 0, 1);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --ground: #0d1211;
+    --surface: #131917;
+    --raised: #1a211f;
+    --recess: #0a0e0d;
+    --ink: #e8edeb;
+    --ink-2: #a3aeaa;
+    --ink-3: #828d89; /* was #737e7a at 3.90:1 on raised, the same sub-AA defect as the light palette */
+    --hair: #252d2b;
+    --sig-stop: #e08277;
+    --sig-major: #dcb45a; /* was #d5a44e, only 32 deg of hue and 1.21:1 of lightness from the dark stop red. Nudged toward yellow: 35 deg and 1.41:1, still 8.37:1 on the darkest surface. */
+    --sig-watch: #8fa3b5;
+    --sig-clear: #6fbb94;
+    --sig-stop-wash: #2b1512;
+    --sig-major-wash: #2a2110;
+    --focus: #6fb6d1;
+    --focus-wash: #10303b;
+    --on-signal: #14100a;
+
+    /* The brand navy is a LIGHT-MODE colour. On the dark raised surface it measures well under
+     * 1.5:1 and the mark would all but disappear, which is why the light block's value is not
+     * simply inherited here.
+     *
+     * White, at the owner's direction. An earlier version used a lifted navy on the reasoning that
+     * it preserved the hue; the owner's call is white, which is the more common treatment for a
+     * dark-mode mark and is the brand owner's decision to make rather than this file's. It measures
+     * 16.4:1 on the darkest surface.
+     *
+     * The logo asset is a single flat colour with alpha as its mask precisely so it can be
+     * recoloured to this rather than shipped as two files that can drift apart. */
+    --brand: #ffffff;
+    --brand-on: #101922;
+  }
+}
+
+/* ================================================================ base */
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--ground);
+  color: var(--ink);
+  font: 400 var(--t-body)/1.5 var(--sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Tabular figures are opt-in per context, not a global default. GOV.UK treats them as a deliberate
+ * exception for number-heavy elements, and they are the wrong default for running clinical prose:
+ * a drug name and a sentence do not want the wider, mechanical digit spacing. Applied where digits
+ * stack in a column or must be compared at a glance. */
+.fig, .result .v, #dose, .facts dd { font-variant-numeric: tabular-nums lining-nums; }
+
+h1, h2, h3 { margin: 0; font-weight: 600; letter-spacing: -0.011em; }
+
+/* The only monospace in the interface: an identifier a human reads back character by character. */
+.ident { font-family: var(--mono); font-size: var(--t-small); letter-spacing: 0.01em; }
+
+button, input, select, textarea { font: inherit; color: inherit; font-variant-numeric: inherit; }
+
+:where(input, select, textarea) {
+  min-height: 38px;
+  padding: 5px 9px;
+  background: var(--raised);
+  color: var(--ink);
+  border: 1px solid var(--hair);
+  border-radius: var(--r);
+  transition: border-color var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
+}
+:where(input, select, textarea):hover { border-color: var(--ink-3); }
+:where(input, select, textarea):focus-visible,
+button:focus-visible {
+  outline: none;
+  border-color: var(--focus);
+  box-shadow: 0 0 0 3px var(--focus-wash);
+}
+textarea { width: 100%; min-height: 74px; resize: vertical; line-height: 1.5; }
+
+.btn {
+  min-height: 38px; padding: 0 14px;
+  border: 1px solid var(--hair); border-radius: var(--r);
+  background: var(--raised); color: var(--ink);
+  font-size: var(--t-small); font-weight: 500; cursor: pointer;
+  transition: background var(--dur) var(--ease), border-color var(--dur) var(--ease);
+}
+.btn:hover:not([disabled]) { background: var(--recess); border-color: var(--ink-3); }
+.btn[disabled] { color: var(--ink-3); cursor: not-allowed; }
+.btn-go { background: var(--ink); border-color: var(--ink); color: var(--surface); font-weight: 600; }
+.btn-go:hover:not([disabled]) { background: var(--ink); filter: brightness(1.3); }
+.btn-go[disabled] { background: var(--recess); border-color: var(--hair); color: var(--ink-3); filter: none; }
+.btn-commit { background: var(--sig-major); border-color: var(--sig-major); color: var(--on-signal); font-weight: 600; }
+.btn-commit:hover:not([disabled]) { filter: brightness(1.08); }
+/* A disabled commit must still be READABLE. Leaving the signal fill under muted text measured
+ * 1.85:1, so the clinician could not read what the button was going to do before earning the right
+ * to press it. Disabled drops the fill entirely rather than dimming the text on top of it. */
+.btn-commit[disabled] { background: var(--recess); border-color: var(--hair); color: var(--ink-3); }
+
+/* ================================================================ pack banner */
+
+.pack {
+  padding: 6px 26px;
+  background: var(--recess);
+  color: var(--ink-2);
+  font-size: var(--t-micro);
+  border-bottom: 1px solid var(--hair);
+}
+.pack b { color: var(--ink); font-weight: 600; }
+.pack.bad { background: var(--sig-stop-wash); color: var(--sig-stop); }
+
+/* ================================================================ patient identity
+ * Not a table row. A quiet, generously set identity surface: the name is the largest thing on the
+ * screen, the facts read as one line of prose, and nothing is boxed. */
+
+.ident-bar {
+  position: sticky; top: 0; z-index: 30;
+  display: flex; align-items: flex-end; gap: var(--sp-6);
+  padding: var(--sp-4) var(--sp-6) var(--sp-3);
+  background: var(--surface);
+  border-bottom: 1px solid var(--hair);
+}
+/* The identity block takes the space it needs and is never squeezed below its content, or the
+ * facts line stacks into a column and the patient's identity reads as a list of fragments. */
+.ident-bar .who { flex: 1 1 auto; min-width: 0; }
+.ident-bar .name { font-size: var(--t-name); font-weight: 600; letter-spacing: -0.02em; line-height: 1.1; }
+.ident-bar .facts {
+  display: flex; flex-wrap: wrap; align-items: baseline;
+  margin-top: 3px; color: var(--ink-2); font-size: var(--t-small);
+}
+.ident-bar .facts .sep { color: var(--ink-3); margin: 0 8px; }
+.ident-bar .spring { display: none; }
+.ident-bar .tools { display: flex; gap: var(--sp-2); align-items: center; flex: 0 0 auto; }
+.ident-bar .allergy { flex: 0 0 auto; }
+
+/* Allergy: quiet until the drug on the order actually implicates it, at which point it fills. That
+ * is the whole colour policy in one component. A permanently red chip is wallpaper by day two. */
+.allergy {
+  display: flex; align-items: baseline; gap: 8px;
+  padding: 5px 11px 6px;
+  border-radius: var(--r);
+  background: transparent;
+  border: 1px solid var(--hair);
+  font-size: var(--t-small);
+  transition: background var(--dur) var(--ease), border-color var(--dur) var(--ease), color var(--dur) var(--ease);
+}
+.allergy .t { color: var(--ink-3); }
+.allergy .v { font-weight: 600; }
+.allergy[data-live="true"] {
+  background: var(--sig-stop-wash);
+  border-color: var(--sig-stop);
+  color: var(--sig-stop);
+}
+.allergy[data-live="true"] .t { color: inherit; }
+
+/* ================================================================ frame */
+
+.frame { display: grid; grid-template-columns: 178px minmax(0, 1fr) 268px; align-items: start; }
+@media (max-width: 1240px) { .frame { grid-template-columns: 160px minmax(0, 1fr); } .context { grid-column: 1 / -1; border-left: none; border-top: 1px solid var(--hair); } }
+@media (max-width: 860px) { .frame { grid-template-columns: 1fr; } .rail { display: none; } }
+
+/* nav: text, not boxes */
+.rail { padding: var(--sp-5) 0 var(--sp-5) var(--sp-6); }
+.rail nav { display: flex; flex-direction: column; gap: 1px; }
+.rail a, .rail button.link {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 5px 0; border: 0; background: none; text-align: left;
+  color: var(--ink-2); font-size: var(--t-small); font-weight: 500; cursor: pointer;
+  transition: color var(--dur) var(--ease);
+}
+.rail button.link:hover:not([disabled]) { color: var(--ink); }
+.rail button.link[aria-current="page"] { color: var(--ink); font-weight: 600; }
+.rail button.link[disabled] { color: var(--ink-3); cursor: default; }
+.rail .k { color: var(--ink-3); font-size: var(--t-micro); font-weight: 400; }
+
+.rail .roster { margin-top: var(--sp-5); display: flex; flex-direction: column; }
+.rail .roster .heading { color: var(--ink-3); font-size: var(--t-micro); margin-bottom: var(--sp-2); }
+.rail .pt {
+  display: grid; grid-template-columns: 3px 1fr; gap: 0 10px; align-items: center;
+  padding: 7px 0; border: 0; background: none; text-align: left; cursor: pointer;
+}
+.rail .pt .mark { align-self: stretch; background: transparent; border-radius: 2px; }
+.rail .pt[aria-current="true"] .mark { background: var(--ink); }
+.rail .pt[data-alert="true"] .mark { background: var(--sig-stop); }
+.rail .pt .n { font-size: var(--t-small); color: var(--ink-2); }
+.rail .pt[aria-current="true"] .n { color: var(--ink); font-weight: 600; }
+.rail .pt .m { grid-column: 2; font-size: var(--t-micro); color: var(--ink-3); }
+
+/* ================================================================ workspace + SIGNAL COLUMN */
+
+.work { padding: var(--sp-5) 0 var(--sp-7); min-width: 0; }
+
+/* Every clinical statement is laid on this grid, so its mark lands in one continuous channel. */
+.line { display: grid; grid-template-columns: var(--signal-w) minmax(0, 1fr); align-items: start; }
+.line > .signal { position: relative; align-self: stretch; }
+
+/* The mark. Weight and length carry significance before colour does.
+ *
+ * The mark's colour rides on its own custom property and NEVER on `color`. An earlier version set
+ * `color` on the line so the mark could use currentColor, and it cascaded into every descendant:
+ * with data-sig="none" the medication input rendered its text in the hairline grey, about 1.2:1
+ * against the field, so a clinician could not read the drug name they had just typed. A styling
+ * mechanism that can silently bleach clinical text is not one to keep. */
+.line > .signal::before {
+  content: "";
+  position: absolute; left: 0; top: 4px;
+  width: var(--mark-w); border-radius: 1px;
+  background: var(--mark);
+}
+.line[data-sig="stop"]    { --mark: var(--sig-stop); }
+.line[data-sig="major"]   { --mark: var(--sig-major); }
+.line[data-sig="watch"]   { --mark: var(--sig-watch); }
+.line[data-sig="clear"]   { --mark: var(--sig-clear); }
+.line[data-sig="none"]    { --mark: var(--hair); }
+
+/* The class word is the one place a finding's own severity colour appears in text. */
+.line[data-sig="stop"]  .cls { color: var(--sig-stop); }
+.line[data-sig="major"] .cls { color: var(--sig-major); }
+.line[data-sig="watch"] .cls { color: var(--sig-watch); }
+.line[data-sig="clear"] .cls { color: var(--sig-clear); }
+.line[data-sig="none"]  .cls { color: var(--ink-3); }
+
+/* Three independent channels carry severity, so removing any one of them still leaves it legible:
+ * LENGTH (how far the mark runs), WEIGHT (how thick), and TEXTURE (solid or broken). Colour is the
+ * fourth and least load-bearing. Open MCT encodes limit violations the same way, with glyph plus
+ * colour plus dash spacing, and that redundancy is why its operators can read severity on a failing
+ * monitor. Print this screen in greyscale and the hierarchy survives intact.
+ *
+ *   stop   an unbroken bar the full height of the statement
+ *   major  an unbroken bar, two thirds height, same weight
+ *   watch  a narrow broken bar, short
+ *   clear  a narrow solid tick, short
+ *   none   a single dot
+ */
+.line[data-sig="stop"]  > .signal::before { top: 0; bottom: 0; }
+.line[data-sig="major"] > .signal::before { top: 4px; height: 62%; }
+.line[data-sig="watch"] > .signal::before {
+  top: 6px; height: 22px; width: 3px;
+  background: repeating-linear-gradient(var(--mark) 0 3px, transparent 3px 6px);
+}
+.line[data-sig="clear"] > .signal::before { top: 7px; height: 15px; width: 3px; }
+
+/* Nothing at all for a line that carries no clinical significance: the order form, the signing row,
+ * the record. A channel that marks every row means nothing, and the whole value of this column is
+ * that a mark in it is worth looking at. The lines still sit on the grid so the text stays aligned
+ * with the findings above them. */
+.line[data-sig="none"] > .signal::before { content: none; }
+
+.line > .said { min-width: 0; padding-bottom: var(--sp-5); }
+
+/* section headings: sentence case, no eyebrow, no rule */
+.head { display: flex; align-items: baseline; gap: var(--sp-3); margin-bottom: var(--sp-3); }
+.head h2 { font-size: var(--t-small); font-weight: 600; color: var(--ink-2); }
+.head .spring { flex: 1 1 auto; }
+.head .note { font-size: var(--t-micro); color: var(--ink-3); }
+
+/* ================================================================ order */
+
+.order { display: flex; align-items: flex-end; gap: var(--sp-4); flex-wrap: wrap; }
+.order .f { display: flex; flex-direction: column; gap: 5px; }
+.order .f > span { font-size: var(--t-micro); color: var(--ink-3); }
+#drug { width: 300px; font-size: var(--t-lead); font-weight: 500; }
+#dose { width: 86px; text-align: right; font-size: var(--t-lead); }
+#unit { width: 78px; }
+#route { width: 152px; }
+.order .keys { width: 100%; margin-top: 2px; color: var(--ink-3); font-size: var(--t-micro); }
+.order .keys kbd { font: inherit; color: var(--ink-2); }
+
+/* ================================================================ finding
+ * A clinical sentence, not a card: significance, then the patient's own data as context, then what
+ * to consider, then what an override actually does. */
+
+.finding { padding-bottom: var(--sp-5); }
+.finding + .finding { padding-top: var(--sp-4); border-top: 1px solid var(--hair); }
+.finding .cls { font-size: var(--t-micro); font-weight: 600; letter-spacing: 0.01em; }
+.finding .sig-line {
+  margin: 3px 0 0;
+  font-size: var(--t-lead); font-weight: 500; line-height: 1.35; letter-spacing: -0.011em;
+  color: var(--ink);
+  max-width: 62ch;
+}
+.finding .because { margin: var(--sp-2) 0 0; color: var(--ink-2); font-size: var(--t-small); max-width: 68ch; }
+.finding .because b { color: var(--ink); font-weight: 600; }
+.finding .consider { margin: var(--sp-3) 0 0; max-width: 68ch; font-size: var(--t-small); color: var(--ink-2); }
+.finding .consider b { color: var(--ink); font-weight: 600; font-size: var(--t-small); }
+.finding .consequence {
+  margin: var(--sp-3) 0 0; padding-left: 11px;
+  border-left: 2px solid var(--hair);
+  font-size: var(--t-small); color: var(--ink-2); max-width: 68ch;
+}
+.finding details { margin-top: var(--sp-3); }
+.finding summary {
+  cursor: pointer; list-style: none; display: inline-flex; align-items: center; gap: 7px;
+  font-size: var(--t-micro); color: var(--ink-3);
+}
+.finding summary::-webkit-details-marker { display: none; }
+.finding summary::after { content: "+"; font-size: 13px; line-height: 1; }
+.finding details[open] summary::after { content: "\2013"; }
+.finding summary:hover { color: var(--ink-2); }
+.finding .mech { margin: var(--sp-2) 0 0; font-size: var(--t-small); color: var(--ink-2); max-width: 68ch; }
+
+/* the ordered drug and the drug it collides with, set as the subject of the sentence */
+.pairing { display: flex; align-items: baseline; gap: 9px; margin-top: 2px; font-size: var(--t-small); color: var(--ink-2); }
+.pairing .d { font-weight: 600; color: var(--ink); }
+.pairing .op { color: var(--ink-3); }
+
+/* ================================================================ override */
+
+/* Held to the same measure as the sentence it answers. A rationale field running the full width of
+ * a workstation invites a paragraph nobody reads, and visually detaches the decision from the
+ * finding that prompted it. */
+.override { margin-top: var(--sp-4); max-width: 68ch; }
+.override .ask { font-size: var(--t-body); font-weight: 600; margin-bottom: var(--sp-3); color: var(--ink); }
+.override .picks { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: var(--sp-3); }
+.override .pick {
+  min-height: 34px; padding: 0 12px;
+  border: 1px solid var(--hair); border-radius: 17px;
+  background: var(--raised); color: var(--ink-2);
+  font-size: var(--t-small); cursor: pointer;
+  transition: all var(--dur) var(--ease);
+}
+.override .pick:hover { border-color: var(--ink-3); color: var(--ink); }
+.override .pick[aria-pressed="true"] { background: var(--ink); border-color: var(--ink); color: var(--surface); font-weight: 500; }
+.override label.rl { display: block; font-size: var(--t-micro); color: var(--ink-3); margin-bottom: 5px; }
+.override .row { display: flex; align-items: center; gap: var(--sp-3); flex-wrap: wrap; margin-top: var(--sp-3); }
+.override .row .spring { flex: 1 1 auto; }
+.override .sworn { font-size: var(--t-micro); color: var(--ink-3); max-width: 40ch; }
+
+/* ================================================================ clinical context
+ * Results are clinical data, not tiles: a value, its name, and a deviation mark in the same signal
+ * language as everything else. No boxes, no borders between them. */
+
+.context { padding: var(--sp-5) var(--sp-6) var(--sp-6) var(--sp-5); border-left: 1px solid var(--hair); min-height: 100%; }
+.context .grp + .grp { margin-top: var(--sp-6); }
+
+.results { display: flex; flex-direction: column; gap: var(--sp-3); }
+.result { display: grid; grid-template-columns: 3px 1fr auto; gap: 0 11px; align-items: baseline; }
+/* Deviation and direction are kept as two separate signals rather than folded into one colour,
+ * following Open MCT's split of severity from limit direction: the mark says a result is outside
+ * its range, the arrow says which way. Either one alone still reads. */
+.result .mark { align-self: stretch; border-radius: 2px; background: transparent; }
+.result[data-dev="out"] .mark { background: var(--sig-stop); }
+.result .d::before { content: ""; display: inline-block; width: 0; height: 0; margin-right: 4px; }
+.result[data-dir="high"] .d::before { border-left: 3.5px solid transparent; border-right: 3.5px solid transparent; border-bottom: 5px solid currentColor; }
+.result[data-dir="low"] .d::before { border-left: 3.5px solid transparent; border-right: 3.5px solid transparent; border-top: 5px solid currentColor; }
+.result .v { font-size: var(--t-figure); font-weight: 400; line-height: 1.05; letter-spacing: -0.02em; }
+.result .v u { text-decoration: none; font-size: var(--t-micro); color: var(--ink-3); margin-left: 4px; }
+.result[data-dev="out"] .v { color: var(--sig-stop); font-weight: 500; }
+.result .meta { grid-column: 2 / -1; display: flex; gap: 8px; align-items: baseline; margin-top: 1px; }
+.result .n { font-size: var(--t-small); color: var(--ink-2); }
+.result .r { font-size: var(--t-micro); color: var(--ink-3); }
+.result .d { font-size: var(--t-micro); color: var(--sig-stop); font-weight: 600; }
+
+.facts { display: grid; grid-template-columns: auto 1fr; gap: 5px var(--sp-4); font-size: var(--t-small); }
+.facts dt { color: var(--ink-3); }
+.facts dd { margin: 0; color: var(--ink); }
+.facts dd.missing { color: var(--sig-stop); font-weight: 600; }
+
+.meds { display: flex; flex-direction: column; gap: var(--sp-3); }
+.med .d { font-size: var(--t-small); font-weight: 600; }
+.med .s { font-size: var(--t-micro); color: var(--ink-2); }
+.med[data-implicated="true"] .d { color: var(--sig-major); }
+
+/* ================================================================ ledger */
+
+.ledger { display: flex; flex-direction: column; }
+.ledger .e { display: grid; grid-template-columns: 46px 1fr; gap: var(--sp-3); padding: 6px 0; font-size: var(--t-small); }
+.ledger .e + .e { border-top: 1px solid var(--hair); }
+.ledger .t { color: var(--ink-3); font-size: var(--t-micro); }
+.ledger .x { color: var(--ink-2); }
+.ledger .x b { color: var(--ink); font-weight: 600; }
+
+/* ================================================================ states */
+
+.quiet { color: var(--ink-3); font-size: var(--t-small); }
+.wait { height: 34px; border-radius: var(--r); background: linear-gradient(90deg, transparent, var(--recess), transparent); background-size: 300% 100%; animation: sweep 1.1s ease infinite; }
+.wait + .wait { margin-top: 6px; }
+@keyframes sweep { from { background-position: 100% 0; } to { background-position: -100% 0; } }
+.fail { padding: 10px 12px; background: var(--sig-stop-wash); color: var(--sig-stop); border-radius: var(--r); font-size: var(--t-small); }
+
+@media (prefers-reduced-motion: reduce) {
+  .wait { animation: none; background: var(--recess); }
+  * { transition-duration: 1ms !important; }
+}
+
+.foot { padding: var(--sp-5) var(--sp-6) var(--sp-6); color: var(--ink-3); font-size: var(--t-micro); }
+.vh { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+
+/* ================================================================ brand
+
+   The mark is chrome. It sits above the clinical content, never inside it, and it is the only
+   place --brand appears: the two rules in the token block say why. It is also the first thing to
+   go when the viewport is short, because a logo has never helped anybody read a potassium. */
+
+.brandbar {
+  display: flex;
+  align-items: center;
+  padding: var(--sp-3) var(--sp-5) 0;
+}
+
+.brand-mark {
+  height: 26px;   /* was 22px, up 20 percent at the owner's request */
+  width: auto;
+  /* The asset is a flat shape with alpha as its mask, so the palette recolours it rather than the
+     build shipping a second file that can drift from the first. */
+  filter: none;
+}
+
+/* The dark palette lifts the navy, and the mark follows it. */
+@media (prefers-color-scheme: dark) {
+  .brand-mark {
+    /* Repaints the mark white, which is --brand in the dark palette.
+     *
+     * This was a background plus a mask first, and it did not work: an <img> still paints its own
+     * pixels over its own background, so the navy artwork sat on top of the white fill and nothing
+     * appeared to change. A screenshot caught it. The mask approach is right for a <div>, and this
+     * element is an <img> because it carries intrinsic dimensions that reserve its box before it
+     * decodes, which is worth more here than the elegance.
+     *
+     * brightness(0) collapses every channel to black while leaving alpha alone; invert(1) then
+     * takes that to white. The result is exactly the silhouette, in exactly one colour. */
+    filter: brightness(0) invert(1);
+  }
+}
+
+/* Short viewports lose the mark before they lose anything clinical. */
+@media (max-height: 700px) {
+  .brandbar { display: none; }
+}
+
+@media print {
+  /* On paper the mark IS wanted: a printed chart that does not say which system produced it is a
+     page somebody has to identify by hand. */
+  .brandbar { display: flex; }
+}

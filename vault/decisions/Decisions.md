@@ -2503,3 +2503,1549 @@ grounded 3-day oral regimen, gate passed (4.1 s); "what if she is pregnant" UTI-
 pregnancy follow-up after CAP stays on CAP; poem refused (1.1 s). Copy / Regenerate / Edit on
 every answer. `window.__smdLastGate` holds the last gate rejection (numbers, drugs, anchors,
 headings; never passage text) for triage.
+
+## 2026-09-04 WardSynQ: one system with Ward Sync, and the P0 core
+
+**WardSynQ is a module inside StewardMD, not a separate repo or product codebase** (owner, 2026-09-04).
+`wardsynq.com` is its EMR web surface. A separate `~/Developer/WardSynQ` repo was started earlier in
+the same session and abandoned on that instruction; nothing depends on it.
+
+**Ward Sync and WardSynQ are the same system.** The existing GIMSR GHIS integration (`ghis-ward.js`,
+`wardSync` state in `icu.js` / `medlist.js` / `autofetch.js`) is not a parallel feature to be kept
+alongside a new EMR. It becomes the first hospital-data adapter under WardSynQ's future Integration
+Hub. The pipeline the owner specified:
+
+    GHIS / existing Ward Sync connector
+      -> WardSynQ canonical clinical model
+      -> Clinical Event Bus
+      -> Safety / Workflow / AI / Patient 360 / EMR
+
+with HL7 v2, FHIR R4, DICOM/DICOMweb, LIS, ABDM and IoMT following the same adapter shape. The
+binding constraint: **no adapter-specific logic in WardSynQ core.** GHIS lab-name mapping, unit
+conversion, token handling and the GIMSR picker stay in the adapter. Existing mobile behaviour keeps
+working while it migrates onto the shared layer.
+
+**Not started: the `ghis-ward.js` migration itself.** It touches live mobile code that the ICU
+flowsheet, medlist and autofetch all read through, so it is its own reviewed change, not a side
+effect of scaffolding.
+
+P0 shipped three files plus 44 tests (`wardsynq/wardsynq-model.js`, `-events.js`, `-meds.js`,
+`test/wardsynq-p0-core.test.mjs`). Nothing is wired to the app, nothing is flagged on, there is no UI
+and no persistence layer. See `vault/modules/WardSynQ.md` for the design rules; the ones most likely
+to be undone by accident are that the eMAR holds no clinical pharmacology (the safety engine is
+injected, and its default refuses everything), and that `ADMINISTERED` is structurally reachable only
+from `SCANNED`.
+
+Deliberately NOT written, despite the spec listing them: `wardsynq-safety.js`,
+`wardsynq-safety-case.js`, `wardsynq-temporal.js`, `wardsynq-mpi.js`, `wardsynq-store.js`,
+`wardsynq-interop.js`. The spec routes the clinical-safety files to Opus-level clinical reasoning and
+they were kept out of a scaffolding pass on purpose.
+
+Tooling note for future sessions: the owner approved using `agy` (Gemini Antigravity CLI) for small
+local tasks, but the Claude Code auto-mode permission classifier refused to spawn it from a
+background session, with both `--dangerously-skip-permissions` and `--mode accept-edits`. An owner
+saying "go ahead" does not lift that classifier; it needs a Bash permission rule in settings.
+
+## 2026-09-04 WardSynQ safety engine: reuse the interaction data, seed the allergy gap
+
+Built `wardsynq-safety.js` plus store, MPI and an adapter. 127 tests. Still unwired: no flag, no
+route, no UI. Three decisions worth not re-deriving.
+
+**Reuse, do not re-author, the interaction data.** A survey of the repo found
+`data/interaction-rules.json` already carrying 310 curated rules and 2620 generic-to-class mappings
+(ONC HPDDI, openFDA SPL, CredibleMeds, RxNorm) behind the existing `interactions.js` engine and its
+tests. WardSynQ reads it through `wardsynq/adapters/wardsynq-rules-stewardmd.js`. A second copy of
+drug-interaction content that can drift from the first is a patient-safety problem, not a
+duplication smell. CredibleMeds licensing needs checking before commercial use.
+
+**The allergy data did not exist, so it is a labelled seed.** The same survey found no allergy
+cross-reactivity data of any kind: no beta-lactam class map, no sulfonamide grouping, nothing. The
+Allergy Shield had nothing to run against. `wardsynq/data/allergy-classes.seed.json` fills it,
+marked UNAPPROVED with a review date, using the modern side-chain understanding of beta-lactam
+cross-reactivity rather than the discredited 10 percent figure, and deliberately recording
+sulfonamide-antibiotic to non-antibiotic cross-reactivity as NONE so a later reviewer does not
+"helpfully" add it. Dose ceilings are a similar eight-drug seed: StewardMD's max doses exist only as
+free-text monograph prose, and regex-parsing prose into a hard-stop is not acceptable.
+
+**Severity and disposition are separate axes.** Severity is the clinical judgement; disposition is
+the policy decision about who may proceed anyway. Verdicts carry `blocks` (Category 1, absolute) and
+`overridables` (Category 2, audited handshake) separately, and a test asserts that NO override
+payload, however well formed or witnessed, can clear a block. A finding may only move between the
+two by a reviewed change to a rule pack, never by a code change in the engine and never by a caller
+passing a flag. This is the invariant most likely to be quietly eroded later.
+
+**Two drug vocabularies, found the hard way.** The RxNorm-derived data spells amoxicillin
+"amoxicillin anhydrous"; every clinician and allergy list writes "amoxicillin". An integration test
+expecting an amoxicillin order to trip a penicillin allergy caught the shield failing open.
+Reconciled in the adapter by aliasing a multi-word generic's first word to it only when exactly one
+generic starts with that word, with allergy membership indexed under both spellings; ambiguous first
+words get no alias and the drug is reported unresolved instead of guessed. Every future adapter
+(HL7, FHIR, ABDM, LIS) will hit this and needs the same discipline.
+
+Two of these files were written by delegated agents (`agy` for the store, a Claude subagent for the
+MPI) against written briefs, then verified here: the MPI's Jaro-Winkler and Soundex were checked
+against published reference values including Tymczak and Pfister, and every suite was re-run
+independently rather than trusted from the agent's own report.
+
+## 2026-09-04 WardSynQ: the GHIS adapter exists, the cut-over does not
+
+Built `wardsynq/adapters/wardsynq-ghis-adapter.js` (23 tests): GHIS bundle to canonical model, onto
+the Clinical Event Bus. This is the owner's stated architecture (Ward Sync becomes WardSynQ's first
+interop adapter) implemented as the non-destructive half.
+
+**Deliberately NOT done: rewiring the live path.** `ghis-ward.js`, `icu.js`, `medlist.js` and
+`autofetch.js` are untouched. The adapter is pure mapping with no fetch, no token, no live state.
+`ghis-ward.js` keeps transport, the per-doctor bearer token (`ghis_token:<uid>`), the 401 silent
+refresh and the patient picker. Splitting it this way means the mapping is verifiable in a test with
+no network, and the risky part is a separate reviewed change against code real users depend on.
+
+**What a cut-over will have to preserve** (from the survey, all read directly rather than through an
+accessor): `STATE.wardSync` shape `{connected,lastTs,patientId,newUpdate}` is read at icu.js:556,
+2286, 2424, 2431, 2434, 3718, 6433, 8538, plus autofetch.js:57 and ghis-ward.js:1076. Roster ids are
+derived as `"pw_"+patientId` / `"w_"+patientId` (icu.js:873-918). `wardSwitchGuard` (icu.js:725-730)
+keys cross-patient contamination protection on `bundle.patientId`. `ingestFromWard`'s conflict logic
+treats `STATE.src[key].source === "Manual"` as clinician-entered and everything else as overwritable,
+so a new source name must never be "Manual". `GHIS.getSelectedPatient()` is the sole handle
+`ghis-meds.js` and the DDI patient context use.
+
+**Three traps in the payload, each pinned by a test.** `dob` is an AGE in years as a string, so
+parsing it as a date gives a patient born in year 45, and age drives paediatric dosing; the adapter
+records `ageYears` and leaves `dob` as a sentinel that does not parse as a date. `wardToSI` in
+icu.js does the opposite of its name (SI back to conventional), so the adapter does no unit
+normalisation at all and flags `unitNormalised: false` while keeping the raw value and unit.
+`patientId` is the MRN, with no separate UHID.
+
+**Model gap found by the adapter, now fixed:** `Encounter` had no `identifiers` field, so a source
+visit id could only survive by being baked into the generated `id` string, which no consumer can
+parse back out. Every adapter after this one (HL7 visit numbers, FHIR Encounter.identifier) would
+have hit it.
+
+Adapter contract for everything that follows: stable ids from source-stable parts only; nothing
+silently dropped (unmapped vocabulary keeps its name and raises an issue, one bad row never discards
+the import); the raw source preserved on every record; no invented clinical values; and a source
+system's own assertions (GHIS's `critical` flag) carried as data, never promoted to a control.
+
+## 2026-09-04 WardSynQ workstation, and two safety bugs only the UI exposed
+
+Built the EMR surface (`wardsynq/ui/`): patient banner, worklist, order entry with live safety
+checking, and the override handshake. Buildless native ES modules and hand-written CSS, importing
+the same source the tests import, so the screen cannot drift from tested behaviour. No clinical
+logic in the UI: every verdict comes from the real engine against the real pack.
+
+**taste-skill was the wrong tool and says so itself.** Its section 13 excludes dashboards, dense
+product UI and data tables, which is exactly what a clinical workstation is. Used
+`ecc-healthcare-emr-patterns` instead. Design dials set deliberately against web defaults: variance
+LOW (a clinician must find the same control in the same place at 3am), motion LOW (movement in a
+ward UI is distraction, and an animated critical alert is worse), density HIGH.
+
+**Two real bugs found by driving the interface, neither caught by 165 unit tests.**
+
+1. **Duplicate-therapy rules fired on a SINGLE drug.** All 270 `duplicate_class` rules in the pack
+   carry exactly one subject, meaning "two or more drugs in this class". Read literally by a
+   generic matcher they fire when only one is present, so ordering warfarin for a patient on
+   nothing else raised a MAJOR "two systemic anticoagulants" alert and demanded an override
+   handshake for a duplication that did not exist. That is a false gate on the majority of ordinary
+   orders, and the fastest possible way to teach clinicians to click through safety prompts. Fixed
+   with `satisfyDuplicationRule`, which requires at least two distinct matching drugs and names all
+   of them in the finding.
+2. **Alert fatigue by class multiplicity.** Amoxicillin plus clarithromycin produced SIX identical
+   duplicate-therapy advisories, one per shared class tag, including tags meaningless at the bedside
+   ("Chemical Structure", "Established Pharmacologic Classes"). Fixed with
+   `collapseDuplicateFindings`, grouping by rule type, severity and drug set; every contributing
+   rule id survives in `mergedRuleIds` so an audit loses nothing. Findings of different severity or
+   about different drugs are never collapsed. Together these took the amoxicillin case from seven
+   findings to three.
+
+**A UX bug that is really an audit-quality bug.** The verdict panel re-renders on every keystroke in
+the order form, which destroyed a half-typed override rationale. A clinician who loses a careful
+justification once starts writing "as discussed", and the audit trail quietly stops being worth
+reading. Drafts are now preserved across re-renders.
+
+**Buildless ESM caching gotcha.** A `?v=` token on the entry script does NOT invalidate the modules
+it imports: ES module imports are cached per URL. The workstation ran stale safety logic in the
+browser while the served file and the tests were both correct, which is a genuinely dangerous
+failure mode for a safety control. Development now uses a no-store dev server; a production
+deployment needs cache headers on the module files, not just a version token on the entry point.
+StewardMD's `?v=goldNNN` convention has the same blind spot for anything loaded as a module.
+
+The screen states the rule pack version and its approval status permanently, because a clinician
+trusting seed data because the interface looked finished is a foreseeable route to harm.
+
+## 2026-09-04 WardSynQ workstation: redesign after the first pass read as AI-generated
+
+Owner feedback: the font and the safety boxes looked "vibe coded". Correct on both counts, and the
+first pass had more tells than those two.
+
+**What was wrong.** The font stack was `ui-sans-serif, Segoe UI, Roboto` — the most generic possible
+choice, in a file whose own comments said to avoid generic stacks. Findings rendered as rounded
+tinted cards with a thick coloured left border and an uppercase micro-label, which is the standard
+LLM alert-card shape. Containers nested three deep (panel inside card inside card) so there were
+three levels of box and no levels of hierarchy. Severity colours were washed-out pastels that read
+as decoration. The dose field was 800px wide for three digits. A "checked in 0.3 ms" floated in the
+top right corner attached to nothing.
+
+**Direction, from the ui-ux-pro-max database rather than taste.** Swiss / International grid style
+(its match for enterprise dashboards and professional tools), dials variance 3, motion 2, density 9.
+Typeface **Fira Sans with Fira Mono**, the database's dashboard and analytics pairing. Fira was drawn
+for legibility at small sizes on poor screens, and the matched monospace is the point: every clinical
+number here is tabular, so a decimal sits in the same column down a list and 1.42 cannot be misread
+as 142.
+
+**What changed structurally.** Ruled bands instead of nested rounded cards. A label column plus a
+control column, with controls sized to their content, because a field's width is a hint about what
+belongs in it. Findings are a severity rail plus a ground, where **fill intensity is the hierarchy**:
+a hard stop is filled and unmissable, an override is lightly filled, an advisory has no fill at all
+and recedes. Making advisories quiet is the alert-fatigue lesson expressed in the layout, and it is
+what keeps the filled one noticeable. The override handshake now sits inside the finding it belongs
+to, separated by a rule rather than by a second border and radius. The results table is deliberately
+NOT full width: five columns stretched across 950px puts a value half a screen from its reference
+range, and long scan distances are how a value gets read against the wrong row.
+
+**Unchanged on purpose.** Severity is a word before it is a colour, everywhere. Both colour schemes
+ship and both were checked visually, not assumed. 44px targets.
+
+**PRODUCTION GAP:** the webfont loads from a CDN in this build. A ward loses its network, so a real
+deployment must self-host the woff2 files. The fallback stack is ordered to degrade to another
+tabular-capable face rather than to something that reflows every number, but that is a mitigation,
+not the fix.
+
+## 2026-09-04 WardSynQ workstation v4: designed as a clinical instrument, not a dashboard
+
+Owner brief: Bloomberg terminal meets Apple clinical software meets modern ICU workstation. Premium,
+dense but calm, no generic SaaS or shadcn look, safety engine as the hero, never weaken a warning
+for aesthetics. Built directly into the existing buildless app: vanilla ES modules and token-driven
+CSS, no framework added, engine untouched apart from one additive field (`effect` and `action` kept
+separately on interaction findings so Risk and Guidance can render as distinct facts).
+
+**Critique of the previous pass that drove this.** The patient was a header, not the object. The
+safety result was a paragraph in a tinted box; a clinician under pressure needs Risk, Mechanism
+and Guidance as separable facts. Labs sat in a table three scrolls from the decision they inform.
+The override was a form, not a decision. Typography was competent but anonymous.
+
+**Decisions.**
+- Type: IBM Plex Sans + IBM Plex Mono. Built for dense enterprise data, true tabular figures, and a
+  mono that carries the terminal register without cosplay. Every clinical number is mono/tabular.
+- Tokens in `:root` for colour, type scale, space, radius, hairline/rail widths, shadow, motion.
+  Components only use tokens. Severity scale: critical, major, moderate, monitor, info, ok. Fill
+  intensity is the hierarchy: critical and major filled, moderate lightly, monitor and info unfilled
+  so they recede and the loud finding stays loud.
+- Patient context bar: sticky, hairline-separated segments (identity, MRN, location and status,
+  allergy with rail, actions). 59px. The allergy is in the bar, not a panel, because the hazard is
+  acting on the wrong chart.
+- Sidebar: chart navigation with keyboard hints plus the ward worklist; Notes and Alerts present but
+  aria-disabled with a title, rather than faked.
+- Workspace: order and safety engine in the main column, clinical context (results as data points,
+  dosing context, active meds) in an aside beside the decision. Results are a figure, a name and a
+  WORD for the flag; abnormal cells are lightly filled.
+- InteractionCard: severity badge (word first), drug pair in mono, rule code, then Risk and
+  Mechanism as a labelled fact grid, with Guidance, Monitoring and rule id under a native
+  `details` disclosure. Merged rule count shown as "and N related".
+- OverridePanel: "Override required. Why are you proceeding?" with four reason buttons (Clinical
+  necessity, No suitable alternative, Benefit outweighs risk, Other), rationale, Cancel and "Apply
+  override and sign", and a line stating it is recorded to the clinical audit trail. Drafts survive
+  re-render. Apply records the override, re-evaluates, and signs only if the engine then allows.
+- AuditTrail: an in-session list of override and signing events, timestamped.
+- Keyboard: Enter advances fields, Ctrl+Enter signs when allowed, Esc clears, N/O/L/M/P jump.
+- Engine status line in the safety header: "310 rules in 0.3 ms" with a state dot.
+
+**Verified, not assumed.** Viewport screenshots read by eye in light mode; end-to-end override
+flow driven in the browser (gating, draft survival across a mid-entry re-render, apply and sign,
+audit entries, active medication list updated); zero console errors; 173 tests, 172 passing.
+
+**Production gaps recorded.** Webfont from CDN (must self-host; wards lose network). Dark scheme
+tokens exist but this pass was checked by eye in light only. Notes and Alerts are placeholders.
+
+## 2026-09-04 WardSynQ v5: an original visual language, and the defects redesigning it exposed
+
+Owner rejected v4 as still AI-coded and generic-enterprise. Correct. The `frontend-design` skill
+lists the current AI-design tells, and v4 hit three of five by name: broadsheet layout with hairline
+rules, tracked-out all-caps eyebrow labels above every heading, and a monospace face for small data
+labels. It was the generated default, not a designed thing.
+
+**Research actually read** (subagent, `gh`/WebFetch, cited in full in the session): NASA Open MCT
+(`_status.scss`, `_limits.scss`), NHS.UK design system colour + service manual, GOV.UK type scale,
+IBM Carbon `packages/type`, GitHub Primer `primitives`, Microsoft Fluent 2 `packages/tokens`,
+OpenMRS O3 esm-styleguide, Bahmni, Medplum.
+
+**Principles extracted, and what each changed here.**
+- Open MCT encodes a limit violation on four independent channels: glyph, colour, border and dash
+  spacing, with limit DIRECTION as a separate arrow. Severity survives with colour removed. Adopted
+  as the core idea: WardSynQ's marks differ in LENGTH, WEIGHT and TEXTURE (solid, broken, dot)
+  before they differ in hue, and result deviation is split from result direction.
+- NHS.UK: "make sure what the colour is saying is available in other ways", and a grey-tinted ground
+  to cut glare for sustained reading. Our ground is a low-chroma green-grey for that reason.
+- GOV.UK: tabular figures are opt-in per element, not global. v5 scopes `tabular-nums` to results,
+  dose and dosing facts; running clinical prose gets proportional figures.
+- Primer: monospace is policy-restricted to code. Fluent 2 goes further and gives numerals their own
+  family rather than reaching for mono. v5 has exactly ONE monospace use left, the MRN.
+- Carbon/Primer/Fluent all use ONE family for every text role. v5 uses Source Sans 3 throughout.
+- Anti-pattern found: Bahmni and Medplum document no typography, density or accessibility policy at
+  all, and O3's tokens are gated in Zeplin. Being used in real hospitals is not evidence of design
+  rigour, so none of them was treated as a model.
+
+**The original idea: the signal column.** A narrow channel down the left of the workspace is the only
+place colour appears. Every clinical statement registers a mark there; nothing else does. It is not
+any of the references: Open MCT marks rows in a table, this binds a whole workspace to one continuous
+significance channel, so peripheral vision answers "is anything wrong on this screen" before a word
+is read. Findings are written as clinical sentences (significance, then the patient's own data as
+context, then what to consider, then what an override actually does) rather than a labelled
+Risk/Mechanism grid, and mechanism moves under a disclosure because it is study material.
+
+**Colour earns its place.** The allergy on the identity bar is unfilled until the drug being ordered
+actually implicates it, verified: ordering amoxicillin lights it, ibuprofen does not. A chip that is
+red all day is wallpaper by the second shift.
+
+**THREE REAL DEFECTS the redesign exposed, none cosmetic.**
+1. **The medication input rendered at 1.2:1.** The signal mechanism set `color` on the line so the
+   mark could use `currentColor`, and it cascaded into descendants: with `data-sig="none"` the drug
+   field drew its text in the hairline grey. A clinician could not read the drug name they had just
+   typed. The mark now rides on its own `--mark` property and never touches text. Now 18.35:1.
+2. **Duplicate-therapy findings with subset drug lists.** The screen showed the same sentence twice,
+   once for two drugs and once for three including both. `collapseDuplicateFindings` now absorbs a
+   finding whose drugs are a strict subset of an identical one at the same severity, keeping the
+   superset because it names every drug involved. Three tests pin it, including that different
+   severities and different messages are never merged.
+3. **A disabled commit button at 1.85:1.** `.btn[disabled]` outranked `.btn-commit`, leaving muted
+   text on the signal fill, so the clinician could not read what the button would do before earning
+   the right to press it. Disabled now drops the fill instead of dimming text on top of it.
+Also: the signal column marked non-clinical rows with a vestigial dot. A channel that marks every
+row means nothing, so plain lines now render no mark at all.
+
+**Verified:** light and dark by eye at 1680x1000; contrast measured in both schemes (body 7.4 to
+17.5, severity words 5.95 and 7.84, inputs 13.9 to 18.4); tab order runs drug, dose, unit, route,
+the four reason chips, rationale; no horizontal overflow at 1180; full override-to-signature flow
+driven in the browser including draft survival across a mid-entry re-render; 176 tests, 175 passing.
+Zero uppercase labels and one monospace use remain in the stylesheet.
+
+**Still open:** webfont from CDN must be self-hosted for wards without network; Notes and Handover
+are disabled placeholders; the clinical seed content remains unapproved.
+
+## 2026-09-04 WardSynQ: the safety case is executable, and it says 4 of 11
+
+Built `wardsynq/wardsynq-safety-case.js` and `scripts/wardsynq-assurance.mjs`. The spec's hazard
+table is now code whose verification column names real tests, and the script runs the suites, parses
+TAP, and cross-references what actually passed. A hazard whose named test is renamed or deleted
+reports MISSING TEST instead of quietly continuing to look verified, which is how a paper safety case
+decays the week after it is signed.
+
+**The honest number is 4 of 11 fully verified**, 4 partially controlled, 3 uncontrolled. Verified:
+HAZ-MED-01 interactions, HAZ-MED-02 allergy, HAZ-MED-03 dose ceilings, HAZ-MED-04 bedside five
+rights. Uncontrolled with nothing built: HAZ-DIAG-01 critical-result acknowledgement, HAZ-BLD-01
+transfusion compatibility, HAZ-SURG-01 the WHO surgical checklist.
+
+**The file caught itself lying on its first run.** HAZ-AI-01 and HAZ-DEV-01 came back VERIFIED
+because their declared tests passed, while their own caveats said no control had been built: the
+model carries `aiDrafted` and `artifact` FIELDS and nothing enforces or ever sets them. A green row
+for a control that does not exist is worse than no safety case at all. Controls now declare an
+`adequacy`, and a partial control is capped at PARTIAL however green its tests are, because tests can
+show that what was built works but never that what was NOT built was unnecessary. That single change
+took the headline from a flattering 8 of 11 to a truthful 4 of 11.
+
+Its own test suite is written as attempts to make it lie: an all-passing run must still report the
+uncontrolled hazards as uncontrolled, a partial control must not be promoted, a renamed test must
+surface as missing evidence rather than success, an empty run must leave nothing looking verified,
+and the report must open with what is not covered because an assurance report that leads with its
+successes is a marketing document.
+
+Exit code is 1 only on FAILING, deliberately 0 on UNCONTROLLED and NO_EVIDENCE: those are declared
+gaps in an early build, and a gate that fails from day one is a gate somebody switches off.
+
+Two caveats on the artefact itself. VERIFIED means the named tests pass, not that the control is
+clinically adequate; that judgement belongs to the named approver. And HAZ-MED-01 through 03 are
+verified as MECHANISMS while their clinical content is still unapproved seed data.
+
+## 2026-09-04 WardSynQ: the three uncontrolled hazards are now built
+
+Built controls for the three hazards that had nothing at all, in the owner's priority order. 269
+tests, 268 passing, 1 skipped. Assurance moves from 4 of 11 verified to 7 of 11, with 0 uncontrolled.
+The scoring methodology was NOT touched; every point came from a control that now exists.
+
+**HAZ-DIAG-01, `wardsynq-critical.js`.** The whole loop: deterministic classification against an
+injected threshold pack, responsible clinician identified, dispatch, delivery, viewing,
+acknowledgement, documented action, time-driven escalation, append-only ledger. Design rules each
+exist because of a way the control could be defeated: a source system's own critical flag can RAISE
+a loop but never close or veto one; no state may be skipped; timestamps are server-assigned so an
+acknowledgement cannot be backdated; escalation has no suppression flag; viewing does NOT stop
+escalation because a result that was looked at and abandoned is the hazard; acknowledgement alone
+does not close the loop because seeing a potassium of 7.1 is not treating it.
+
+Caught during the build: `tick()` was a correct method that nothing called, which would have left
+the state machine right and the clinical control absent. Added `CriticalResultMonitor`, whose
+`pump()` drives every live loop and whose failures are isolated so one broken loop cannot silence
+every other patient's result.
+
+**HAZ-BLD-01, `wardsynq-transfusion.js`.** ABO and RhD compatibility live in code because they are
+immutable biology; anything genuinely local, such as D-positive to D-negative policy, is injected.
+Red cell and plasma tables are kept separate and both matrices are asserted by hand in the tests,
+because plasma is the INVERSE of red cells and one shared table would be lethal in one direction.
+Nearly all the effort is on identity: the crossmatch binds one unit to one patient, and the bedside
+check needs two different named people, a scanned wristband, a scanned unit, and RE-DERIVES
+compatibility from the physical bag rather than the crossmatch record, so a mislabelled bag is
+caught by the check that matters. Platelets are explicitly refused rather than guessed.
+
+**HAZ-SURG-01, `wardsynq-surgical.js`.** Incision is unreachable until Sign In and Time Out are
+complete, and complete means every item explicitly confirmed plus three DIFFERENT people signing as
+surgeon, anaesthetist and nurse. The laterality chain is the interesting part: the side is declared
+once at booking and re-asserted independently at marking, Sign In and Time Out, each compared to the
+BOOKING rather than to the previous step, so an early error cannot propagate by agreement. Consent
+must match procedure and side. An operative record is refused while any milestone is outstanding,
+because otherwise the gate would only delay the paperwork.
+
+**One test was rewritten and it is worth being explicit that this was not a weakening.** The safety
+case test "the report leads with what is not covered" asserted the literal string UNCONTROLLED as
+the first row. It went stale the moment the last uncontrolled hazard was genuinely built. It now
+asserts the general invariant instead, that the report leads with the worst status actually present
+and never with a verified row while anything is unverified, and additionally that the whole listing
+stays ordered worst first. The scoring, the adequacy cap and the criteria are unchanged.
+
+**Status vocabulary, kept distinct as the owner asked.** All three are IMPLEMENTED and TESTED. None
+is CLINICALLY VALIDATED or CLINICALLY APPROVED. The critical threshold pack is unapproved seed and
+models ADULT limits only, so a paediatric result classified against it would be wrong. Transfusion
+covers ABO and RhD only, with antibody screening, phenotype matching, special requirements, massive
+transfusion and neonatal rules all absent. The surgical item set is shorter than the full WHO
+checklist and than most local variants. No barcode hardware is integrated anywhere, so every bedside
+gate is verified against supplied scan values rather than a scanner.
+
+**Remaining, in priority order:** HAZ-AI-01 is the worst of the four PARTIALs, because the AI
+boundary is currently a convention with nothing enforcing it and the store will accept a
+signed-looking record from any caller; it needs an actor model. Then HAZ-DEV-01 (fields exist,
+nothing sets them), HAZ-DOWN-01 (offline and three-way merge), and HAZ-ID-01 (cross-context chart
+contamination).
+
+## 2026-09-04 WardSynQ: actor model, device gateway, offline reconciliation, and the shadow tap
+
+Four pieces. 343 tests, 342 passing. Assurance moves 7 of 11 to 10 of 11, with one hazard held at
+PARTIAL deliberately.
+
+**HAZ-AI-01, `wardsynq-actors.js`.** The boundary was a convention: the model carried `aiDrafted` and
+`signedBy` and the store would accept a record claiming `status: "active"` and `signedBy: "dr-x"`
+from any caller including the model that wrote the draft. Now a four-tier ladder where the ceiling is
+a property of the actor's KIND rather than its configuration, clamped at construction on a frozen
+object, so no AI, device, adapter or service actor can hold EXECUTE by any route. A signature is an
+act: only a credentialed human writing as themselves may set `signedBy`.
+
+One rule was removed during the build for being both weaker and wrong. It refused a record claiming
+`aiDrafted: false`, which broke on ordinary writes because the model factory defaults that field to
+false, and which could only ever catch a claim it could see. Replaced by stamping provenance at the
+point of writing, which cannot be evaded by omitting, defaulting or misspelling the claim.
+
+**HAZ-DEV-01, `wardsynq-iomt.js`.** `signalQualityIndex` and `artifact` existed and NOTHING EVER SET
+THEM. Now a gateway sets them. The bigger half of the hazard is attribution rather than noise: a
+reading from an unassociated device is REFUSED rather than queued or guessed from the bed, and moving
+a monitor explicitly ends the previous claim so no chart has two live claims on one device. Artefact
+is derived from signal quality and plausibility and cannot be overridden by a payload asserting its
+own data is clean. An implausible value is marked but never discarded, because an SpO2 of 71 is a
+sick patient rather than a broken sensor. Clock skew is marked, never corrected.
+
+**HAZ-DOWN-01, `wardsynq-offline.js`. HELD AT PARTIAL ON PURPOSE.** Three-way reconciliation against
+the common ancestor: only disjoint field changes combine automatically, anything signed or
+administered is never folded into, and the same field changed on both sides becomes a conflict
+carrying both versions and the ancestor. A conflict cannot be resolved without a named clinician and
+a rationale, and the discarded version stays on the record. That closes the silent-overwrite half.
+The data-loss half is NOT closed: the journal is in memory, so a workstation losing power mid-outage
+loses the charting it held. Raising this to full would be exactly the flattering arithmetic the
+adequacy cap exists to prevent.
+
+**The Ward Sync cut-over: shadow first.** `wardsynq-flags.js` follows the insulin-flags pattern, all
+flags default OFF. `wardsynq-shadow.js` observes: with the flag on, a bundle already ingested by the
+legacy path is additionally passed through the adapter and the two compared. Three properties make
+it safe, in order of importance: icu.js is NOT MODIFIED, the wrapper is installed from outside so not
+loading the file removes the change entirely; the legacy result is computed first and returned
+untouched; and the shadow cannot throw into the caller, so an adapter defect is a number on a report
+rather than a broken ward round. A legacy throw still propagates, because swallowing it would turn a
+real ingest failure into a silent success.
+
+The cut-over proper is NOT built and its flag says so. It should happen only after the shadow has run
+against real ward data and `report().clean` has stayed true.
+
+**Two safety-case tests were rewritten and neither weakened anything.** The literal example naming
+HAZ-AI-01 as the partial-control regression went stale when that control was genuinely built; it now
+pins to whatever is currently partial and asserts the set is non-empty so it cannot pass vacuously.
+The scoring, the adequacy cap and the criteria are unchanged.
+
+## 2026-09-04 WardSynQ: the last open hazard, and guarding the number against itself
+
+Closed HAZ-DOWN-01 by making the offline journal durable. 351 tests, 350 passing. Assurance reads
+11 of 11 verified, which is exactly the point at which this artefact becomes dangerous to read
+carelessly, so the report changed too.
+
+**Durability.** `OfflineJournal` now takes a backend and `record()` is async and does NOT resolve
+until the entry has reached storage. A UI that reports a note saved before that resolves is lying to
+a clinician, so the ordering is durable-first: a failed write reports failure and is not held in
+memory pretending to be journalled. `open()` restores a previous session's work, sorted by when it
+was written, skipping unreadable rows so one half-written entry cannot cost a clinician the rest of
+the night's charting. Reconciliation now clears settled entries from disk while leaving unresolved
+conflicts, so a device dying mid-reconciliation comes back holding only the work still owed a
+decision. `IndexedDBJournalBackend` resolves on transaction COMPLETE rather than request success,
+because a device dying between those two moments would lose an edit it had already acknowledged.
+
+**Two caveats kept on the record rather than buried.** The durability tests exercise the backend
+INTERFACE through an in-memory implementation; the IndexedDB adapter itself is reasoned about rather
+than proven. And nothing yet wires the journal into the workstation, so the control exists and an
+application that does not use it gets none of it.
+
+**The safety case tests fired their own guards, twice, and that was the design working.** With
+nothing left partial or unverified, the cap test correctly declared itself vacuous ("add a partial
+fixture rather than deleting the rule") and the ordering test found VERIFIED first. Both now assert
+against SYNTHETIC hazard fixtures containing one of every status, so the rules stay enforced no
+matter how the real table evolves, and additionally check the live table. That is strictly stronger
+than the versions that went stale: a rule that can pass vacuously is a rule that has quietly stopped
+working. Scoring and the adequacy cap are unchanged.
+
+**The report now qualifies itself unconditionally.** A headline of "11 of 11" with nothing beside it
+will be read as "safe to use on patients", which is not what any row says. Every run now prints, in
+the header: VERIFIED means the named tests pass, it does NOT mean the control is clinically adequate
+or that its clinical content is approved; how many hazards carry an unapproved-content caveat
+(currently 9 of 11); and that nothing in the build is clinically validated or approved. A test
+asserts the qualifier is present even on an all-green table, because that is when it matters most.
+
+## 2026-09-04 WardSynQ: the workstation now stands on the controls
+
+Phase 1 of what was left: wiring. Before this, `grep` showed the workstation used none of
+GovernedStore, OfflineJournal or makeActor. The safety case read 11 of 11 while the UI wrote
+straight to the raw store with no actor, no session binding and no journal. An enforcement point off
+the path enforces nothing, so three hazards carried a caveat saying so.
+
+**What changed.** The workstation holds a credentialed human actor and a governed session rebound on
+every patient switch. Seeding uses a SERVICE actor, capped below EXECUTE by its kind. Offline writes
+go to a durable IndexedDB journal and reconcile on reconnect. Governance denials are surfaced in the
+record rather than swallowed, because an interface that hides a refusal teaches clinicians the
+software is flaky rather than that it is protecting them.
+
+**A real hole found by the wiring, not by a test.** `Reconciler` wrote through the RAW store, so an
+outage's worth of charting would have been committed with no actor at all: the exact hole the
+governed store exists to close. Added `GovernedStore.asStoreFor(actor)`, an actor-bound but
+chart-unbound handle for machinery that legitimately spans patients, and moved reconciliation onto
+it. Chart binding is dropped rather than faked, because pretending a batch job has one chart open
+would make the WRONG_CHART check meaningless. Four tests now pin it, including that the batch handle
+is still governed and is not a way around the ceiling.
+
+**A UI bug the browser found.** `clear()` ignored its parameter and always wiped the confirmation
+panel, so the offline path wrote "Held on this device" and then erased it: the clinician saw a
+cleared form and no statement of what had happened to their order.
+
+**Verified in a browser, not asserted.** A signed order carries a `writtenBy` stamp that only
+GovernedStore applies, which is the proof the wiring is real rather than decorative. A cross-chart
+write from the live session was refused with WRONG_CHART. A full outage was driven end to end:
+signed offline, held durably, still present when a fresh journal was opened over the same IndexedDB
+store, reconciled cleanly on reconnect, journal emptied. Zero console errors.
+
+**That last point closes a caveat honestly.** HAZ-DOWN-01 previously said IndexedDBJournalBackend was
+"reasoned about rather than proven" because only the in-memory backend was exercised. The restart
+case has now been driven through the real IndexedDB adapter in a browser, so the caveat now records
+what remains instead: a service worker, so the app itself LOADS without a network, is separate from
+data survival and is still not built.
+
+`window.WARDSYNQ` exposes a diagnostics handle carrying the GOVERNED store rather than the raw one,
+so a support console cannot become an ungoverned write path.
+
+## 2026-09-04 WardSynQ: the Integration Hub, so GHIS stops being a special case
+
+`wardsynq-interop.js`, 19 tests. GHIS was the only adapter and there was nothing for a second one to
+register with, so the pattern existed only in the comments. Now it is a registry, and GHIS is an
+instance of it rather than the exception.
+
+**Four rules, each a way interop layers normally go wrong.**
+
+1. **An adapter is never trusted to commit.** Every feed writes as an ADAPTER-kind actor, which the
+   existing actor model caps at DRAFT. The ceiling is enforced by the same control that stops an AI
+   committing an order rather than by a second, weaker rule written here. A test sends a feed that
+   insists on a signed active prescription from another hospital's system: it is refused and
+   quarantined, because "the other system said so" is not a clinician's signature.
+2. **Nothing is silently dropped.** Unclaimed, ambiguous, rejected, failed and governance-refused
+   payloads all land in quarantine with the reason and the original payload. A feed that discards
+   what it does not understand produces a chart that is wrong in a way nobody can see.
+3. **One broken feed does not stop the others.** A hospital runs many feeds and they fail
+   independently, so a throwing adapter is isolated and counted, and a `claims()` that throws is
+   treated as not claiming rather than as a crash.
+4. **Replay is expected.** Ingest is keyed on the source's own event identity, so a reconnect or a
+   catch-up window is a no-op rather than a second copy of a patient's potassium.
+
+Two adapters claiming one message is quarantined as AMBIGUOUS rather than resolved, because guessing
+would attach a patient's data to whichever adapter happened to register first. `health()` reports
+per-feed counters and a `stalled` flag for a feed that is arriving and never landing, which is what a
+hospital with eight feeds actually needs to see.
+
+The hub works with no store at all, so mapping stays exercisable in a harness, the same property the
+adapters themselves have.
+
+## Paediatrics: refusing to treat a child as a small adult (2026-09-04)
+
+Two hazards were VERIFIED while carrying the same caveat: the critical-result thresholds and the dose
+ceilings are ADULT values, so a paediatric result classified against them would be wrong. That caveat
+was honest and unaddressed, and children are exactly where threshold and dosing errors kill.
+
+`wardsynq/wardsynq-paediatrics.js` closes it, and the way it closes it is by REFUSING rather than by
+inventing paediatric numbers.
+
+1. **An unbanded reference range means ADULT and must not be applied to a child.** Not applied with a
+   warning, not applied because it is probably close enough: refused, and reported as unclassified.
+   A potassium of 6.0 is critical in an adult and ordinary in a neonate.
+2. **A refused result RAISES a loop rather than falling through as "not critical."** This was the
+   dangerous half. The first cut of the refusal made a child's result vanish silently, which is at
+   least as dangerous as judging it wrongly. An unassessable result now opens a loop marked
+   `raisedBy: "unassessable-result"` so a human sees the number the machine would not judge.
+3. **An age in whole years is not a band below toddler.** `ageYears: 0` is true of a two-day-old and
+   an eleven-month-old, so it resolves to UNKNOWN rather than NEONATE. Unknown is refused, never
+   assumed adult, because assuming adult is the single most likely way this control gets defeated.
+4. **A neonate needs gestational age.** A 26-week preterm on day 2 and a term baby on day 27 are both
+   neonates and share almost no reference range.
+5. **The adult maximum caps weight-based dosing.** A 90 kg adolescent at 15 mg/kg is 1350 mg: the
+   arithmetic is right and the answer is dangerous. That is the classic paediatric overdose.
+6. **The weight itself is checked for plausibility.** A mistyped weight is invisible once it has
+   become arithmetic. Bounds are deliberately generous: this catches a decimal point or a
+   pounds/kilograms mix-up, not an unusual child.
+
+The file is mechanism and almost no content, on purpose. Real paediatric limits vary by band, assay,
+gestational age and local policy, and getting them wrong is worse than not having them, so the
+numbers stay in a pack a paediatrician signs. The HAZ-MED-03 and HAZ-DIAG-01 caveats were rewritten
+to record that the content is still absent; the scoring methodology and criteria were NOT changed.
+
+STATUS: IMPLEMENTED and TESTED (21 tests). NOT clinically validated, NOT clinically approved.
+
+## Deterioration: NEWS2, and the reasons a score must refuse (2026-09-04)
+
+Failure to rescue is the largest avoidable category of inpatient death, and nothing in the build
+watched a trend. The spec's own HAZ-DEV-01 verification already named this file's job -- the IoMT
+artifact filter exists to keep corrupted telemetry out of "automated NEWS2 calculations" -- but there
+was no such calculation, so that clause was asserted rather than exercised.
+
+The arithmetic of NEWS2 is public and easy. Everything that decides whether an early warning system
+saves anybody is in what it does when the inputs are not what the score assumes:
+
+1. **A missing parameter is not zero.** The single most dangerous way to implement NEWS2. An absent
+   respiratory rate scores 0, the total looks reassuring, and respiratory rate is the earliest sign
+   of deterioration there is. An incomplete score is INCOMPLETE and has no risk category, however
+   low the partial total. The partial total is still shown, so a human can see how sick this is.
+2. **A stale observation is not a current one.** A score built from a six-hour-old blood pressure is
+   a current-looking number about a patient who has since changed.
+3. **Scale 2 is a prescription, not a guess.** Using Scale 1 on a hypercapnic patient escalates
+   somebody who is at their own target; using Scale 2 on anyone else hides real hypoxia. It applies
+   only where recorded. The counterintuitive half is tested: 98 percent ON OXYGEN scores 3 on
+   Scale 2, and the same number on air scores 0.
+4. **The total hides the single parameter.** A total of 3 from one parameter at its extreme is a
+   different patient from a total of 3 spread across three. Both now drive escalation.
+5. **NEWS2 is adult and non-obstetric**, so children and pregnant patients are REFUSED rather than
+   approximated. Same rule as the paediatrics module: an unbanded tool means adult.
+6. **An unscorable patient is escalated too.** A patient nobody has fully observed is its own reason
+   to send somebody, so an incomplete score raises rather than falls silent.
+7. **Re-escalation goes strictly ABOVE whoever was already asked.** The first cut counted rungs on a
+   ladder, which sent an ignored medium-risk escalation back to the ward doctor who had just ignored
+   it. A test caught it.
+
+**A real defect this exposed.** `scoreEligible` was bolted onto the observation object AFTER
+construction and was therefore not part of the canonical model, so any device reading that
+round-tripped through the store, an adapter or the event bus lost the flag and was then excluded
+from every automated score forever, silently. It is now a modelled field with null meaning NOT
+ASSESSED, which for a device observation remains ineligible: a reading nothing has vetted has not
+passed.
+
+**A new hazard row, HAZ-DET-01, marked LOCAL.** It is not transcribed from the spec's assurance
+table, which has no row for failure to rescue. It is declared PARTIAL and stays partial: the score,
+the refusals and the escalation state machine work, but there is NO NOTIFICATION CHANNEL. A monitor
+that raises a correct escalation into an in-memory Map has not rescued anybody, and the sweep is
+caller-driven so nothing re-escalates unless something calls it on a timer. Adding this row LOWERS
+the fully-verified fraction from 11/11 to 11/12; it was added because the omission was real, not to
+improve a number. The scoring methodology and criteria are unchanged.
+
+The RCP's published 2017 parameter bands are a national standard, which is why this file carries
+numbers where the threshold and dose packs deliberately do not. The escalation policy attached to
+them is a local decision and is marked unapproved.
+
+STATUS: IMPLEMENTED and TESTED (32 tests). NOT clinically validated, NOT clinically approved.
+
+## Notification: attempted is not delivered (2026-09-04)
+
+Two closed loops depend on telling a human something: a critical result and a deteriorating patient.
+Each had its own idea of what "sent" meant, and a hospital does not need two notification systems
+with two different definitions of delivery. The weaker definition is the one that quietly loses a
+patient.
+
+`wardsynq/wardsynq-notify.js` is now the only place that decides. One rule: a channel that throws,
+returns nothing, returns anything other than `delivered: true`, or is not configured at all has NOT
+delivered, and the caller is told so. Silent success is the failure mode; every branch exists to make
+failure loud. A site that wires no channel gets NO_CHANNEL thrown at it, because an escalation system
+that appears to work while shouting into a void is worse than one that is visibly switched off.
+
+**Two real defects this surfaced.**
+
+1. The deterioration monitor awaited a `notify` callback and treated anything that did not throw as
+   success, so a well-meaning `async () => {}` stub read as a receipt. It now refuses to raise at all
+   without a channel, unless a harness explicitly opts out and accepts undelivered escalations.
+2. The critical-result ESCALATION path -- not its primary dispatch, which was always correct --
+   awaited its channel and ignored the return value entirely. A channel reporting failure was
+   recorded as though the on-call consultant had been told, and a missing channel was skipped in
+   silence. This was the more dangerous of the two, because it sat inside a hazard already marked
+   VERIFIED. Three tests now hold it.
+
+The escalation ladder also had a bug worth recording: re-escalation counted rungs on a fixed ladder,
+which sent an ignored medium-risk escalation back to the ward doctor who had just ignored it.
+Re-escalation now goes strictly ABOVE whoever was already asked, and the top rung is terminal so an
+ignored emergency keeps asking the resuscitation team rather than falling off the end into silence.
+
+What has NOT changed: no transport is shipped. Every channel is a function a site supplies and this
+build supplies none, so HAZ-DET-01 stays PARTIAL. The improvement is that the system no longer
+pretends otherwise.
+
+## Emergency bundles: the clock is the control (2026-09-04)
+
+`wardsynq/wardsynq-emergency.js` (29 tests) implements the spec's named Code Sepsis, Code STEMI and
+Code Blue state machines. What makes these different from every other workflow in the build is that
+the dangerous variable is TIME: a sepsis bundle completed perfectly at four hours is a bundle that
+did not work. So the object is a clock with a checklist attached, not a checklist with a timestamp.
+
+**The failure it is built against.** Bundle compliance is measured, reported and rewarded, so it is
+gamed, and it is gamed in one specific way: time zero is moved. A patient recognised at 02:10 who
+gets antibiotics at 04:30 becomes compliant the moment somebody records recognition at 03:45. The
+record then says the hospital did well and the patient still waited two and a half hours.
+
+1. **Time zero is set once**, non-writable and non-configurable. Under module strict mode both a
+   plain assignment and a redefinition throw. It cannot be in the future, and it cannot precede the
+   evidence that triggered it -- back-dating in either direction is refused.
+2. **A wrong origin is corrected by VOIDING with a mandatory reason**, leaving both bundles on the
+   record. Deliberately expensive, so a correction can be told apart from a cover-up.
+3. **An element completes on its own named event.** Antibiotics count on `administered`, and passing
+   `ordered` is refused with "ordering a thing is not doing it". Ordered at 40 minutes and hung at
+   three hours is a three-hour bundle.
+4. **A breach stays a breach.** Status is recomputed from the immutable origin every time rather
+   than stored, and breach outranks completion: every element eventually done with one done late is
+   BREACHED, because the patient waited.
+5. **Cultures-before-antibiotics is recorded as a deviation, not enforced.** Delaying an antibiotic
+   to draw cultures kills people, so the two facts are kept separable rather than one blocking the
+   other.
+
+**Screening is not diagnosis.** qSOFA has poor sensitivity and its documented harm is being read as
+a rule-out. There is no NEGATIVE result here: a screen that is not met returns NOT_POSITIVE and says
+in words that it does not exclude sepsis. An incomplete screen that has not already reached two
+criteria cannot be reported as not-positive at all, because the missing criterion might have been the
+deciding one. A screen can never open a bundle; that requires a named human.
+
+**The arrest clock carries no dose.** It gives intervals and says what is due. A system that told a
+resuscitation team what to give, from an unapproved table, during the two minutes where nobody has
+time to check it, would be the most dangerous thing in this repository. A test asserts that no label
+contains anything matching a dose.
+
+**HAZ-TIME-01, marked LOCAL and declared PARTIAL** for a specific reason: the timing control is whole
+and adversarially tested, but NOTHING TRIGGERS A BUNDLE. A bundle exists only where a clinician
+already knew to start one, which is precisely the population that was never going to be missed. The
+patient this hazard is about is the one nobody recognised, and for them this control currently does
+nothing. Also open: no notification transport, a caller-driven sweep, and no link to the eMAR, so
+"antibiotics administered" is asserted by whoever records it rather than derived from an
+administration event.
+
+11 of 13 hazards verified, 2 partial. Scoring methodology and criteria unchanged.
+
+STATUS: IMPLEMENTED and TESTED. NOT clinically validated, NOT clinically approved.
+
+## Recognition: the interval between a machine noticing and a human deciding (2026-09-04)
+
+HAZ-TIME-01 was declared PARTIAL with a specific reason: the timing of a bundle was trustworthy, but
+nothing started one. A bundle existed only where a clinician already knew to open it, which is
+exactly the population that was never going to be missed. `wardsynq/wardsynq-recognition.js` (17
+tests) is that trigger, and the design decision worth not re-litigating is that **it does not start
+bundles.**
+
+A screen is not a diagnosis. qSOFA is specific and insensitive, NEWS2 is sensitive and non-specific,
+and a system that opened a Code Sepsis on either would be diagnosing. Instead a positive screen or a
+high NEWS2 raises a PROMPT that a named human must answer. Three properties a passive alert does not
+have:
+
+1. **The prompt is timestamped and immutable**, so the interval between the machine noticing and a
+   human deciding becomes a measurable number. That interval is invisible in most hospitals, which
+   is why nobody manages it. `recognitionStats()` deliberately reports the still-unanswered prompts
+   too, because a median over only the answered ones is the flattering number and the wrong one.
+2. **The prompt pins the bundle's time zero.**
+3. **Declining is an answer and is recorded with its reason and its author.** A clinician who looks
+   and decides this is not sepsis is doing their job, and that judgement is worth far more on the
+   record than a dismissed alert. An unanswered prompt is the dangerous state, and it is the one
+   that escalates.
+
+**A real hole this exposed, and it was in the direction that matters.** The emergency module guarded
+time zero against being moved EARLIER than its evidence. It did not guard the other direction, and
+moving time zero FORWARD is what gaming actually looks like: it turns a two-hour wait into a
+compliant one-hour bundle. An accepted prompt now sets `pinsTimeZero`, and time zero must equal the
+evidence time exactly. The end-to-end test is the one that found it: a prompt raised at 02:10,
+accepted at 03:45, and an attempt to open the bundle claiming recognition at 03:40. It is refused,
+and the honest bundle is BREACHED before the first antibiotic is drawn up.
+
+**Alert fatigue is real and is NOT solved here.** A prompt on every transient qSOFA of 2 would be
+ignored within a week, and an ignored prompt is worse than none because it launders inaction into a
+record of having been told. What this file does is deduplicate: one live prompt per patient per code,
+a stronger signal supersedes rather than stacks, and an answered prompt suppresses repeats for a
+refractory period. Whether the trigger threshold is clinically right is a decision this file cannot
+make and does not pretend to.
+
+HAZ-TIME-01 stays PARTIAL. The trigger reason is closed; what remains is that no notification
+transport is shipped, the sweeps are caller-driven, and no bundle element is derived from a real eMAR
+administration, so "antibiotics administered" is still asserted by whoever records it.
+
+Also refreshed `vault/modules/WardSynQ.md`, which still said "P0 complete, unwired, 127 tests" and
+listed the safety case and interop hub as unbuilt.
+
+STATUS: IMPLEMENTED and TESTED. NOT clinically validated, NOT clinically approved.
+
+## Obstetrics: paying off the second refusal (2026-09-04)
+
+NEWS2 refused pregnant patients and pointed at a module that did not exist. Children got a module
+when the same debt came up; pregnant women got a dead end. Refusing to score a population and
+offering them nothing leaves that population LESS protected than before, not more, because the
+refusal also removes whatever crude signal they were getting.
+
+`wardsynq/wardsynq-obstetrics.js` (30 tests) is that module, and the design decisions are all
+consequences of one physiological fact: a healthy young pregnant woman COMPENSATES EXTRAORDINARILY
+WELL. Blood volume is up around 40 percent, resting pulse is up, blood pressure FALLS in the second
+trimester. She can lose 1.5 litres with a pulse of 100 and a normal blood pressure and then
+decompensate suddenly and late. A general early warning score here is not merely miscalibrated, it is
+looking for a gradual curve this patient does not draw.
+
+1. **MEOWS is trigger-based and returns NO TOTAL.** Not a re-skinned NEWS2. One red trigger, or two
+   concurrent yellows, is the alert. A sum would give a low total to a woman with one catastrophic
+   parameter and six normal ones, which is exactly the presentation that kills, so there is no
+   number anywhere in the result that can be read as reassuring. A missing parameter never suppresses
+   a red trigger either.
+2. **The compensation warning is attached to EVERY result, including the calm ones**, because the
+   reassuring result is the dangerous one.
+3. **Pregnancy is a state with a postpartum day, not a boolean.** Most maternal haemorrhage deaths
+   are postpartum, so a `pregnant: true` flag that flips to false at delivery would drop the guard at
+   the moment risk peaks. The NEWS2 refusal was widened to match, and the test for it is the one that
+   would have caught the original bug.
+4. **A visual blood-loss estimate is an observation and never a measurement.** Visual estimation
+   underestimates by roughly half, worst at the volumes where the decision changes, so a volume
+   threshold on an estimate returns UNKNOWN rather than false, and the plausible true figure is shown
+   alongside rather than silently substituted. An untrustworthy estimate PROMPTS: waiting for
+   certainty is the error.
+5. **No dosing at all, and magnesium sulphate deliberately.** The window between anticonvulsant
+   effect and respiratory arrest is narrow, and an unapproved regimen in this file would be a direct
+   route to a maternal death. A test asserts no bundle element label contains anything matching a
+   dose.
+6. **The obstetric bundles reuse the emergency module's clock** via its `definition` injection rather
+   than growing a second timing implementation, so they inherit the immutable time zero and the
+   ordered-is-not-given guard for free.
+
+**An asymmetry fixed rather than declared.** NEWS2 gathered from observations with a freshness window
+and the IoMT artefact filter; MEOWS took a plain values object, so a chart could be built over a
+six-hour-old blood pressure or a detached lead with nothing to stop it. Rather than write that into a
+caveat, the gatherer was extracted to `wardsynq-vitals.js` and both charts now use it. Two charts with
+two ideas of what counts as a current observation is the same class of defect as two notification
+paths with two definitions of delivery, which was last week's bug.
+
+**HAZ-MAT-01 is VERIFIED, not partial**, and the distinction is deliberate: it claims DETECTION and
+MEASUREMENT DISCIPLINE, and delivers both. It does not claim treatment. The trigger cut-offs are
+UNAPPROVED and that matters more here than elsewhere, because MEOWS charts differ substantially
+between units and a chart with the wrong cut-offs is worse than no chart, since it is trusted. Fetal
+monitoring and CTG interpretation are not touched at all and this row must not be read as covering
+them.
+
+12 of 14 hazards verified, 2 partial. Scoring methodology and criteria unchanged.
+
+STATUS: IMPLEMENTED and TESTED. NOT clinically validated, NOT clinically approved.
+
+## Bundle binding: knowing versus being told (2026-09-04)
+
+HAZ-TIME-01's last named reason was that "antibiotics administered" was asserted by whoever recorded
+it. A bundle element completed by a human typing into a form measures whether the form was filled in.
+Next door, `wardsynq-meds.js` already runs a state machine where ADMINISTERED is reachable only from
+SCANNED, which means a nurse scanned a wristband and a product. That is a fact about the world.
+`wardsynq/wardsynq-bundle-binding.js` (16 tests) connects the two.
+
+**The design decision worth arguing about, because the obvious one is wrong.** The obvious move is to
+make a derivable element UNCOMPLETABLE by hand: if the eMAR is the source of truth, refuse anything
+else. That is dangerous here. During a haemorrhage or an arrest the eMAR may be down, the drug may
+come from an emergency box, the scanner may be broken, and a system that refuses to let the team
+record what they did is a system the team abandons mid-resuscitation. It would also fail the patient
+in the only direction that matters: the drug was given and the record says it was not.
+
+So manual completion stays, and the two are kept APART instead:
+
+- **DERIVED**: the eMAR emitted an administration for this patient and this drug. We know.
+- **ATTESTED**: a named human recorded it. We were told, by someone accountable.
+
+Both complete the element; neither is called the other. `provenanceReport()` leads with the ratio,
+and the ratio is the finding: a unit whose sepsis bundles are 100 percent compliant and 3 percent
+derived is not measuring care, and nobody could see that before. A test constructs exactly that unit.
+
+**A derived completion cannot be back-dated.** It carries the eMAR's own `administeredAt`, never the
+time the event was processed and never a time a caller supplies, so the one route by which automation
+could have made a bundle look faster is closed. An administration timed BEFORE the bundle's time zero
+belongs to an earlier episode and is refused, because crediting a dose given before the patient was
+even recognised would be free compliance.
+
+**A defect in the canonical model, found by wiring this.** `MedicationAdministration` recorded only
+its `orderId`, so an administration record could not say what drug was given without the order still
+existing and being fetchable. That is a poor clinical record on its own terms, quite apart from
+making the emitted `meds.administered` event non-self-describing. `drug` and `drugCode` are now
+copied onto the record when it is opened.
+
+**HAZ-TIME-01 stays PARTIAL, and the caveat now names the right reasons.** Two of its original
+reasons are closed (nothing triggered a bundle; nothing derived an element). What remains: attestation
+is still permitted by design, so a bundle can be compliant on claims alone and only the provenance
+report will say so; ONLY medication elements can be derived, since lactate, ECG and cultures have no
+binding to a laboratory or imaging result, which means most of a sepsis bundle is still attested; and,
+unchanged and largest, no notification transport is shipped.
+
+12 of 14 verified, 2 partial. Scoring methodology and criteria unchanged.
+
+STATUS: IMPLEMENTED and TESTED. NOT clinically validated, NOT clinically approved.
+
+## P2 begins: quality measures and incidents (2026-09-04)
+
+### wardsynq-quality.js: the denominator is the attack surface
+
+Quality measures are reported to regulators, published, and used to decide funding and careers, which
+makes them the most incentivised numbers in the building. Numerator over denominator is trivial
+arithmetic; everything that decides whether the number means anything is elsewhere.
+
+1. **Nobody improves a mortality rate by falsifying deaths.** Deaths are hard to hide. They improve it
+   by removing patients from the denominator. So every exclusion carries a reason, is counted BY
+   reason, and travels with the rate in the same sentence. A test shows the same hospital with the
+   same ten deaths going from 10 percent to 2.2 percent purely by calling eight of them palliative on
+   admission, and shows the exclusion rate making it visible.
+2. **"We cannot tell" is not "not eligible."** Missing data excluded as though it were a clinical
+   decision is how an unmeasured cohort disappears, so the two are separate exclusion kinds.
+3. **A small denominator is not a rate.** One death in three is not 33 percent mortality, it is three
+   patients. Below the minimum the counts are still reported and the percentage is refused, because a
+   percentage on a dashboard gets compared with one from a unit that had four hundred patients and
+   nothing on the screen says they are different kinds of number.
+4. **compare() exists in order to refuse.** A league table of unadjusted mortality is a picture of
+   case mix that will be read as a picture of quality by people who act on it. No risk model is
+   implemented, so no ranking is produced, and even a caller ASSERTING risk adjustment gets rows
+   without an ordering, because this module cannot verify the claim.
+5. **trend() refuses to draw a line across a definition change**, which would show a definition
+   changing rather than care changing.
+6. **Evidence quality travels with the number** via the bundle-binding provenance, and is deliberately
+   NOT folded into the rate: two numbers that mean different things should not be averaged into one
+   that means neither.
+
+### wardsynq-incidents.js: the reports you never receive
+
+An incident system's failure mode is silence, not a bad severity matrix. The reports that matter most
+go unfiled for reasons entirely rational from the reporter's side.
+
+1. **A near miss is the free lesson** and is reportable in a minimal form. Anonymity is a first-class
+   choice, not a degraded one: it costs follow-up with the author and buys the report existing.
+2. **Severity is the outcome, not the culpability.** The same syringe swap is a near miss or a death
+   depending on luck the clinician did not control. SAC decides how much INVESTIGATION an event
+   warrants; a test asserts no response string contains the language of blame.
+3. **A person is never a root cause.** "Human error", "the nurse forgot", "non-compliance by staff"
+   are refused, and the refusal says what to do instead, because a bare rejection just gets worked
+   around. The question those phrases leave unasked is why the system made the error easy, likely, or
+   invisible until it reached the patient.
+4. **An incident cannot be closed on retraining alone.** Education and reminders are the most-chosen
+   and least-effective response in patient safety: they ask the next tired person to be more careful
+   in the same place and change nothing about the place. They are detected, not banned, and closure
+   requires at least one action that changes the system.
+5. **A CAPA with no owner and no date is a wish**, and "done" with no evidence is not done.
+6. **The ledger leads with the near-miss ratio**, because that measures the health of the REPORTING
+   system rather than the hospital. A unit reporting only harm is reported as a failing reporting
+   system, not a safe one. A falling incident count is celebrated everywhere and is usually bad news.
+
+Neither module gets a hazard row: they are governance and measurement, not clinical controls, and
+inventing hazard rows for them would inflate the table with things that do not stop a patient being
+harmed. The safety case stays at 12 of 14 with 2 partial.
+
+595 tests across 23 suites. STATUS: IMPLEMENTED and TESTED. NOT clinically validated or approved.
+
+## P2 continued: consent and research de-identification (2026-09-04)
+
+### wardsynq-consent.js: a signature is not consent
+
+Consent is a decision made by someone who understood the proposal, was told what could go wrong, knew
+the alternatives including doing nothing, and was free to refuse. The signature is evidence a
+conversation happened. This module makes it impossible to record the signature without the
+conversation: consent is refused outright if the risks, the alternatives or the option of NO
+treatment were not recorded. That last one is the most commonly omitted and is always available.
+
+The asymmetry running through the file is that capacity is presumed and incapacity must be
+demonstrated, because the failure modes are not symmetrical. Treating a capable adult as incapable
+strips a right they have, and it happens overwhelmingly to the old, the disabled, the mentally ill,
+and anyone who disagrees with their doctor.
+
+1. **A refusal is never evidence of incapacity.** Disagreeing with the recommended treatment is the
+   commonest trigger for a capacity assessment, and an unwise decision is a right capable people
+   have. The two are recorded separately and neither is inferred from the other.
+2. **A blanket "lacks capacity" flag is refused.** Capacity is decision-specific and time-specific: a
+   person may lack it for cardiac surgery and retain it for a blood test. An assessment names its
+   decision or it is not an assessment, it is a label that follows someone for years after the
+   delirium resolved.
+3. **A finding of incapacity cannot stand on a checkbox.** All four functional abilities must be
+   answered and a reason is mandatory. An assessment with no decision-making support recorded is
+   flagged as incomplete, since capacity is assessed AFTER support has been offered.
+4. **A proxy decides for the patient, not for themselves**, and a valid advance directive OUTRANKS a
+   relative who disagrees with it.
+5. **Emergency treatment is never recorded as consent.** Passing NECESSITY as a consent basis is
+   refused with a pointer to the right function, which records it as what it is and requires both why
+   they could not consent and why it could not wait.
+6. **Consent does not generalise, goes stale, and is withdrawable at any moment** including after the
+   patient is on the table. Withdrawal deliberately requires no reason: requiring one would make it
+   something to justify rather than a right exercised.
+
+This module does not assess capacity, and says so in its own output. Any function claiming to would
+be used to overrule people, which is why there is not one.
+
+### wardsynq-research.js: the record that looks anonymous
+
+The hazard is not failing, it is succeeding visibly and failing invisibly. The name is gone, the
+record looks anonymous, and the person is still findable from date of birth, district and a rare
+diagnosis. The output LOOKS safe, which is exactly why it gets shared.
+
+1. **Safe Harbor is a floor, not a proof**, and nothing this module returns uses the word anonymous.
+   The disclaimer travels with every release.
+2. **k-anonymity catches what Safe Harbor passes**, and rows that fail it are WITHHELD rather than
+   released with a warning, because a warning does not travel with the row once somebody opens the
+   file in a spreadsheet.
+3. **A rare diagnosis is an identifier.** There may be one patient in the state with it.
+4. **Date shifting is per-patient and consistent.** Intervals within a patient survive, which is the
+   research value; a single dataset-wide offset would let anyone who knows one real date recover
+   every other.
+5. **Free text is removed, never scrubbed.** A regex over a discharge summary produces text that
+   looks clean and still names the daughter and the referring doctor.
+6. **An unrecognised field is dropped, not assumed safe.** A failing test caught the corollary: a
+   timestamp nobody listed in dateFields is an unknown field, so forgetting to declare it drops the
+   date rather than releasing the real one.
+
+One deliberate cost is now pinned by a test: the direct-identifier match is over-broad, so drugName
+and testName are stripped as identifiers. Over-removal is recoverable because it is reported;
+under-removal is not, because nobody looks.
+
+Neither module gets a hazard row. They are governance, not clinical controls. Safety case holds at
+12 of 14 with 2 partial. 639 tests across 25 suites.
+
+STATUS: IMPLEMENTED and TESTED. NOT clinically validated, NOT legal advice, NOT certified against
+HIPAA, the DPDP Act or any other regime.
+
+## P2 complete: lineage, API governance, billing, population health (2026-09-04)
+
+### wardsynq-lineage.js
+
+The spec asks that a clinician can click any derived value and see the raw observations behind it.
+Two properties carry the file. **Staleness propagates**: a NEWS2 calculated one minute ago on a
+four-hour-old blood pressure is a four-hour-old assessment, and a display showing only the calculation
+time lies by omission. **A rejected input is part of the lineage**: a score built from five values
+after discarding a stale sixth is not the same fact as a score built from five, and the discarded one
+is the first thing an investigation asks about. A missing input makes provenance INCOMPLETE rather
+than partial-but-quiet. `impactOf()` answers the question asked after a mislabelled sample: not what
+fed this, but what did this feed, and who acted on it.
+
+### wardsynq-api-gov.js
+
+This is where data leaves the building, so every control upstream is undone by one endpoint that
+answers wrongly. **Scope is not access**: a valid, unexpired, correctly scoped token is still refused
+for a patient the requester has no relationship with, and a gateway constructed with no relationship
+check refuses every patient request rather than defaulting to allow. An unparseable scope invalidates
+the SET rather than being dropped, since dropping it means proceeding on the rest, which fails open on
+a malformed token. Expired means expired, with no grace window, because a grace window is a window.
+Bulk is separated from single-patient: one chart is a clinical act and ten thousand is an export.
+Webhooks carry an id and a type and never clinical content, because a webhook posts to a URL somebody
+typed and no transport security helps once the payload is at the wrong address. `suspiciousClients()`
+distinguishes a client walking a patient id space from one that is merely misconfigured.
+
+### wardsynq-billing.js
+
+A billing module inside an EMR is a safety module, and not for the obvious reason. The danger is not a
+wrong bill; it is money starting to decide what the chart says. A record bent for a claim lies to
+whoever reads it next, and that patient may be unconscious at the time. So:
+
+**The clinical record is the source. Billing reads it and never writes to it.**
+
+- a code with nothing behind it is REFUSED, not queried, because a queried code sits in a work list
+  until somebody makes it go away and the cheapest way is to add the diagnosis
+- an inferred code is surfaced as a question for a clinician, with the note "do NOT add it to support
+  the claim"
+- coding that CHANGES after a payer denial is flagged permanently and not blocked, because a genuine
+  correction happens too; what matters is that "we found more documentation" can never be invisible
+- `mayProceedClinically()` always returns true and takes no arguments. It exists so no caller invents
+  its own answer, and so that removing the boundary means deliberately deleting a function whose
+  comment says what it is for
+- a refused pre-authorisation is recorded as a FUNDING decision that does not mean the treatment is
+  not indicated
+
+### wardsynq-population.js
+
+Every other module reacts to a patient in front of somebody. This one is about the person whose HbA1c
+was last checked nineteen months ago and about whom no alert will ever fire, because nothing is
+happening to them. A care gap is an absence, so it is computed on a sweep rather than detected.
+
+The suppression rules are the point. An outreach list is a list of people and contacting them costs
+them something: a recall letter to a family who has just had a death is a cruelty the system caused.
+Suppression is applied BEFORE the list exists rather than as a filter over one somebody could export
+first, every applicable reason is returned rather than the first (one at a time invites clearing them
+and re-running), and a decline PERSISTS, because re-detecting it monthly teaches people to ignore the
+one letter that mattered. The list is ordered by clinical risk, never by how overdue anything is: the
+largest overdue number and the sickest patient are rarely the same person.
+
+None of these four gets a hazard row. They are governance, measurement and administration, not
+clinical controls, and inventing rows would inflate the table with things that do not stop a patient
+being harmed. Safety case holds at 12 of 14 with 2 partial.
+
+P2 is now complete: quality, incidents, consent, research, lineage, api-gov, billing, population.
+708 tests across 29 suites.
+
+STATUS: IMPLEMENTED and TESTED. NOT clinically validated, NOT approved, NOT certified for any payer
+or regulatory regime.
+
+## P3: AI security and MLOps, and a real hole in a VERIFIED hazard (2026-09-04)
+
+### The defect, first, because it matters most
+
+Building `wardsynq-secops.js` required a test that assumed prompt injection SUCCEEDS and checked that
+the model still could not commit an order. The test failed, and not for the reason expected.
+
+`can()` read `actor.tier` directly. The AI ceiling was applied in `makeActor()`, so any actor object
+that reached the authorisation check without passing through the factory held whatever tier it
+claimed. `{kind: "ai", tier: "execute"}` was EXECUTE. That is not an exotic path: an actor gets
+hand-built in a harness, deserialised from storage, or rebuilt across a process boundary as a matter
+of course. **A ceiling enforced only at construction assumes every path went through the door.**
+
+This sat inside HAZ-AI-01, a row already marked VERIFIED, whose entire argument is that an AI cannot
+commit. The ceiling is now re-applied inside `can()` itself, `effectiveTier()` is exported so a UI
+shows the truth rather than the claim, and five regression tests hold it, including a deserialised
+actor and every non-human kind.
+
+The row stays VERIFIED, and the caveat now records the defect. Finding a hole in a verified control
+is the safety case working; hiding it afterwards would be the failure.
+
+### wardsynq-secops.js
+
+An LLM reading a chart cannot distinguish "the patient reports chest pain" from the same sentence
+followed by an injected instruction, because both are text in the same field and the model was
+trained to be helpful about both. So the defence cannot be the model's judgement: asking a model to
+notice it is being manipulated is asking the compromised component to detect its own compromise.
+
+- retrieved content is fenced with a PER-REQUEST nonce and labelled untrusted, so a note written last
+  week cannot close this request's fence
+- an unsigned document does not enter the context, because the attack is not a clever prompt, it is
+  somebody writing a note into a chart and waiting for the summariser to read it
+- a document that TRIPS the injection tripwire is still included, deliberately. Dropping it would
+  make the tripwire the defence, and an attacker who reads the list simply would not trip it. The
+  signals are evidence, not a filter, and the module says so.
+- outputs naming another patient are withheld WHOLE, never redacted: a partially redacted leak is
+  still a leak and looks safe
+- the "signing" is a content DIGEST, named `digest` throughout and documented as not cryptographic,
+  so nobody imports it believing otherwise
+
+The module explicitly does not claim to prevent prompt injection. The design assumption is that
+injection succeeds and the blast radius is bounded by the actor ceiling, which the model does not
+control. That is why the ceiling defect above was the important find.
+
+### wardsynq-mlops.js
+
+Clinical AI does not fail loudly, it degrades, while the dashboard still shows the accuracy from the
+validation set that has not changed.
+
+- retrospective performance is accepted and immediately labelled as insufficient: it shows a model
+  can fit the data it was built from
+- shadow means the output reaches NOBODY. A visible shadow prediction is refused, because its
+  evaluation would measure the behaviour it caused rather than the model.
+- drift is checked on INPUTS, because outcome labels arrive weeks late and the input distribution
+  shifts the same day
+- a subgroup gap blocks deployment however good the aggregate: a 92 percent model with a 61 percent
+  minority subgroup is not a 92 percent model, it is one that fails the people already worst served
+- unlabelled predictions are not evidence, and are disproportionately the recent, sicker cases
+- a breach WITHDRAWS the model automatically rather than raising a ticket, because a ticket leaves it
+  running until somebody triages it and the meeting is next week
+- a withdrawn model goes back through shadow, never straight to deployment, because the evidence that
+  supported it was gathered on a population since shown to have changed
+
+Neither module gets its own hazard row; both are evidence under HAZ-AI-01, which is where the AI
+hazard already lives. 754 tests across 31 suites, safety case at 12 of 14 with 2 partial.
+
+STATUS: IMPLEMENTED and TESTED. Not a security certification, and explicitly not a claim that prompt
+injection is prevented.
+
+## P3: simulation and chaos (2026-09-04)
+
+Every test written before this one asks a module a question it was designed to be asked, which
+catches the bugs somebody thought of. `wardsynq-simulation.js` (14 tests) generates load and disorder
+instead, and asserts INVARIANTS rather than outcomes.
+
+The distinction is the whole design. An expected-output assertion tells you the simulation ran as
+written; an invariant tells you the system did not hurt anybody. The six are: no dose administered
+without a scan, no record on the wrong chart, nothing silently dropped (every event applied or
+quarantined with a reason), no duplicate applied twice, no critical loop closed without
+acknowledgement, no clinical event applied with a future time.
+
+1. **Seeded and deterministic.** A chaos test that cannot be replayed is a bug report saying "it
+   failed once". Every report carries the exact call that reproduces it.
+2. **The faults are Tuesday, not exotica**: the same event from two feeds eleven seconds apart, an
+   arrival 15 minutes out of order, a day of clock skew, a truncated payload, a feed that stops
+   mid-stream, a patient merged mid-episode, and a record carrying one patient's id with another's
+   identifiers.
+3. **The invariants are proven able to FAIL.** One test constructs a world that harmed somebody and
+   asserts all six fire. An invariant that has never failed is decoration, not evidence.
+4. **A naive handler is actually caught.** A second scenario runs a handler that applies everything
+   and trusts the stated patient, and the run fails on cross-patient data. If chaos does not catch
+   the obvious wrong implementation, it would not have caught a subtle one.
+5. **A passing run says what it does not mean.** The report's own text states that it is evidence
+   about one class of failure under one seed, is NOT evidence of safety, does not generalise, and
+   must not be quoted without that sentence. That qualifier is attached to the PASS, which is where
+   it is needed.
+
+**The honest limitation, stated in the module header and asserted by a test.** This is
+single-threaded and interleaves deterministically. That finds ordering assumptions and it does not
+find data races. The spec's 10,000-patient figure is treated as a DATA VOLUME claim, not a
+concurrency claim, and pretending otherwise would have been the dishonest part of the file.
+
+Two test-side defects found and fixed while writing it, both mine rather than the system's: the event
+bus dedupe option is `id`, not `idempotencyKey`, and my test had been silently passing an unknown
+field so the storm test was not testing dedupe at all.
+
+768 tests across 32 suites. Safety case at 12 of 14 with 2 partial.
+
+STATUS: IMPLEMENTED and TESTED.
+
+## End-to-end clinical scenarios, and the defect only they could find (2026-09-04)
+
+Thirty-two unit suites each proved one module correct in isolation, which is exactly the shape of
+testing that misses integration defects: every module is tested against the interface its own author
+imagined. `test/wardsynq-scenarios.test.mjs` runs one patient through the whole stack with the
+assertions placed at the SEAMS.
+
+Scenario 1 is the complete journey: observations at 02:10, NEWS2 scores HIGH, a recognition prompt is
+raised and nobody answers it, it escalates on its own, a clinician accepts at 03:45 with the delay
+recorded as 95 minutes, the bundle refuses to start at a flattering time in either direction, the
+antibiotic element is completed by an actual bedside scan through the real eMAR state machine, a
+NORMAL lactate still completes its element, and the provenance summary reports two derived elements
+and one attested. Every one of those handoffs is a place two modules could have disagreed.
+
+The other scenarios pin seams that would be invisible in isolation:
+
+- a postpartum woman is refused by NEWS2 AND accepted by MEOWS. Both refusing would leave her with
+  nothing watching her, and neither suite could see that on its own.
+- a child is refused by NEWS2 and by qSOFA, and neither refusal is allowed to read as reassurance
+- an unscorable patient escalates for being unobserved and is NOT also raised as suspected sepsis,
+  because double-counting one patient as two alerts trains people to ignore both
+- a forged AI actor can draft and cannot commit, on this patient's live chart
+- the number on the screen explains itself, including what it refused to use
+
+**The defect.** The lineage scenario asserted a stale blood pressure would be rejected and it was
+not, because `gatherVitals` guarded staleness and had no guard on FUTURE-dated observations. A
+future reading is worse than a stale one: it WINS. "Latest reading" logic ranks it above the correct
+current value, so the score is computed from a number describing a moment that has not happened. It
+arises from ordinary causes, a device with a skewed clock or a feed with a timezone bug.
+
+The sharpest part is that `wardsynq-simulation.js` already asserts `no-future-clinical-time` as an
+invariant, and the gatherer sitting under two clinical charts was not enforcing it. A property named
+in one module and unenforced in another is precisely what unit tests do not catch, because each file
+is consistent with itself.
+
+Fixed in `wardsynq-vitals.js`, which both NEWS2 and MEOWS go through, with three regression tests
+including the boundary case that an observation timestamped exactly now is current rather than
+future.
+
+778 tests across 33 suites. Safety case at 12 of 14 with 2 partial.
+
+## The bedside surface (2026-09-04)
+
+`wardsynq/ui/opd.html`, `opd.css` and `opd-emr.js` are the mobile and tablet surface the spec asks
+for. Three decisions worth not re-litigating:
+
+**It is the same design system, not a second one.** `opd.css` imports `wardsynq.css` for its tokens
+and adds only what a bedside needs that a desk does not. A separate visual language for mobile means
+a nurse learning two products, and the one they use at 3am under pressure would be the one they know
+less well.
+
+**What changes at a bedside is safety, not style.** Targets are 56px rather than the 44px guideline,
+because that guideline assumes a considered tap on a clean screen and this is a gloved thumb in a
+corridor while somebody is talking. Nothing moves on its own: no toasts that leave, no reflow as data
+arrives, and the scan-state line has its height reserved, because a screen that changes while a thumb
+is descending is how the wrong button gets pressed, and here the wrong button administers something.
+The workstation's signal column becomes a left edge mark with the same colours and the same rule that
+colour is never the only carrier. An irreversible action gets more SPACE around it rather than being
+made smaller or hidden behind a confirm.
+
+**The logic holds no clinical rules at all.** `opd-emr.js` sequences the eMAR, the safety engine and
+the governed store and renders what they return. There is no threshold, no dose limit and no
+interaction rule in it, and there must never be: a rule duplicated in a view drifts from the engine
+and the drift is invisible.
+
+The properties the tests hold:
+
+- opening a chart does NOT confirm identity, because opening a chart is something you can do from the
+  corridor. Identity is the band on the patient in front of you.
+- switching patient REVOKES the confirmation, since the commonest bedside error is the screen still
+  showing the last patient
+- the ACTION refuses without identity, not just the button. A caller bypassing the UI entirely still
+  cannot administer, and the governed store would refuse it again underneath.
+- a five-rights failure is rendered IN FULL. Truncating a refusal to fit a phone is how "blocked"
+  becomes "the app is broken" and then becomes a workaround.
+- a refusal must be acknowledged explicitly, because one that fades was never read
+- offline work is durable BEFORE the screen says it was recorded
+- a GOVERNANCE refusal is not journalled as though it were a connectivity problem, which would retry
+  a write the system has already decided is not allowed
+
+Two smaller things the tests pin: a signalled row cannot be constructed without a word, so no view
+can render colour alone; and a value of 0 renders as "0" rather than vanishing, because 0 mL/h urine
+output is the important one.
+
+**It is deliberately not reachable.** No route, not in the www/ build, and `opd.html` carries no
+script tag: the logic is tested and the renderer is not written, and wiring a half-built view to a
+live medication path would be worse than leaving it unwired. That is stated in the file rather than
+left for somebody to discover.
+
+794 tests across 34 suites. Safety case at 12 of 14 with 2 partial.
+
+## The ICU flowsheet: the running total that is quietly wrong (2026-09-04)
+
+`wardsynq/wardsynq-flowsheet.js` (35 tests). The flowsheet is the densest document in a hospital, and
+the danger is not in its cells: ICU prescribing is done off its running TOTALS, and a total looks
+equally authoritative whether or not the hours underneath it are complete.
+
+1. **A missing hour is not zero.** The same defect as a missing NEWS2 parameter, and worse here
+   because it compounds. If nobody charted output between 03:00 and 06:00, a balance that sums what
+   it has is wrong by exactly the amount nobody knows, and that is the number a consultant reads at
+   08:00 before prescribing diuresis. Every balance names the missing hours and states that the true
+   figure differs by whatever was not charted. An hour with intake charted and output blank is NOT a
+   complete hour, which is the commonest shape of the gap.
+   The numbers are still returned, deliberately: suppressing them pushes a nurse to add it up on
+   paper, which is worse. What is refused is calling it a balance.
+2. **The hour is a bucket, not a timestamp.** `observedAt` and `chartedAt` are both mandatory, and
+   BACKFILLED is computed from the lag rather than declared by the caller, so it cannot be omitted
+   by someone in a hurry. An entry written six hours late that looks identical to one written on
+   time is a clinical and a medico-legal problem. The grid surfaces backfilling at the TOP, because
+   the pattern is the signal: one late row is a busy hour, a whole shift of them is a shift where
+   nobody was charting.
+3. **An infusion volume is an integral, not a multiplication.** Current rate times elapsed time is
+   the obvious implementation, is wrong for every patient whose rate was ever changed, and
+   under-reports a weaned vasopressor. A test pins the exact wrong answer it would have given.
+4. **The weight is the input everybody forgets is an input.** A weight-based rate refuses without
+   one, flags an implausible one through the paediatrics sanity check, and carries its workings, so
+   a cell can be traced to the three numbers behind it, one of which somebody typed.
+5. **SET and MEASURED are different kinds, not a flag.** A set PEEP of 8 against a measured 12 means
+   the patient is doing something, and a chart holding one number per row cannot show it.
+6. **An empty cell stays empty and is counted.** Rendering a blank as a zero is the display half of
+   the missing-hour problem: it looks complete.
+
+**A trap removed rather than documented.** `recomputeAfterCorrection()` first took the entry set
+before and after the correction, and a test caught that as a trap: `correct()` marks the original
+superseded IN PLACE, so a caller holding one array across the call holds the same mutated objects and
+both totals come out identical. It now takes the correction itself and derives the before-state, so
+it cannot be got wrong.
+
+**HAZ-FLUID-01, marked LOCAL and declared PARTIAL** for one specific reason. A correction now reports
+exactly which totals changed and flags the case that is not merely arithmetic: a balance crossing a
+line somebody prescribes against is stated as "read negative and now reads positive", not as "360 mL
+smaller". What stays open is the half that matters most. The consultant who prescribed at 06:00 off
+the wrong figure is still not notified when it is fixed at 08:00, because nothing in this build
+records that a total was READ. That needs a view log, which does not exist, and the function says so
+in its own output rather than letting its absence imply otherwise.
+
+Also unbuilt and stated: nothing gates prescribing on an incomplete balance, deliberately, since a
+system that blocked a consultant from reading a partial total would be worked around on paper. That
+means the honesty is advisory.
+
+Safety case now 12 of 15 verified, 3 partial. The row was added because the omission was real and it
+lowered the fraction, as the other two local rows did.
+
+829 tests across 35 suites. STATUS: IMPLEMENTED and TESTED. NOT clinically validated or approved.
+
+## The WardSynQ mark, and three palette defects it found (2026-09-04)
+
+The owner supplied the logo. Wiring it in was meant to be chrome work and turned into a palette audit,
+because measuring the brand against the existing tokens required measuring the existing tokens.
+
+### The asset
+
+Sampled brand navy is **#1c3048**. The supplied master was 669x373 with the artwork occupying
+522x122, so 94 percent of what every viewer would download was transparent padding, and background
+removal had left a fringe of near-navies (1c3048, 1b2f47, 1c3049, 1d3149 all appear in it).
+
+Assets are trimmed, then repainted to one exact navy with alpha as the shape. That removes the
+fringe, makes the mark crisp at small sizes, lets the files compress as flat shapes rather than as
+photographs (57 to 62 percent smaller), and, most usefully, makes them RECOLOURABLE, which is what
+lets dark mode use the same file rather than a second one that can drift.
+
+`wardsynq-lockup.png`, `wardsynq-mark.png`, icons at 512/192/180/32, and a webmanifest. 108 KB total.
+An SVG master should still come from whoever drew it: these are raster derivatives of a raster file,
+and no attempt was made to trace the artwork, because a redrawn logo that is subtly wrong is worse
+than a PNG.
+
+### Three defects, all found by measuring rather than by looking
+
+1. **`--ink-3` was below AA in BOTH palettes.** 3.98:1 on white, 3.90:1 on the dark raised surface.
+   The metadata grey is still text somebody has to read. Darkened to #5f6965 and #828d89, hue kept.
+2. **`--brand` had no dark-mode value at all.** The dark block redefines every other token, so the
+   light navy would have inherited into it and sat on #1a211f at under 1.5:1. That is a mark nobody
+   can SEE rather than a mark that looks wrong, so nobody would have reported it. Dark mode now gets
+   a lifted navy, and the asset's flat-colour-plus-mask construction is what makes recolouring it
+   possible.
+3. **The dark stop and major signals were 32 degrees of hue and 1.21:1 of lightness apart**, which is
+   closer than the light pair. Nudged the dark amber to #dcb45a: 35 degrees and 1.41:1, still 8.37:1
+   on the darkest surface. The threshold was NOT loosened to make the test pass.
+
+### Two brand rules, derived from measurement and enforced by a test
+
+- **`--brand` is not a text colour on a light surface.** Against `--ink` it is 1.37:1, so navy words
+  beside near-black words do not read as a deliberate accent, they read as two inks that do not
+  match. The mark carries the brand; the words carry `--ink`.
+- **Nothing signalled ever sits on a `--brand` fill.** Every signal lands between 1.63:1 and 2.15:1
+  against navy, so a smart-looking navy header bar with a status chip in it would fail all four at
+  once, and would fail them while looking considered.
+
+### test/wardsynq-brand.test.mjs
+
+The palette is now parsed out of the real stylesheet and the ratios are COMPUTED, per palette. This
+project has already shipped two contrast defects, a drug name at 1.2:1 and a disabled button at
+1.85:1, and both were found by staring at a screenshot. A comment in CSS claiming a colour is AAA is
+a claim; this is a measurement that fails when somebody nudges a hex.
+
+Two of its own tests were wrong first and both are recorded in the file rather than quietly fixed:
+the parser took the last definition of each token and was therefore measuring the dark palette while
+believing it was measuring the light one (which is how defect 2 surfaced, underneath the nonsense),
+and the distinguishability test compared signals by contrast ratio, which is the wrong measure for
+telling two colours apart. It now requires hue OR lightness separation, because red and amber are
+adjacent hues in every clinical palette ever drawn and are told apart by lightness, while slate and
+green are the mirror case.
+
+### Placement
+
+The mark is chrome. It sits above the clinical content and never inside it, it is `aria-hidden`
+because a screen reader announcing "WardSynQ logo" before every ward round is noise, it is the first
+thing hidden on a short viewport, and on the bedside header it disappears entirely when identity is
+unconfirmed, because that warning needs the width. It is kept for print, where a chart that does not
+say which system produced it is a page somebody has to identify by hand.
+
+843 tests across 36 suites. Safety case unchanged at 12 of 15.
+
+## A to Z: the five things that were left (2026-09-04)
+
+Five items, each of which was a named gap in the safety case rather than a new feature.
+
+### 1. wardsynq-transport.js — actually telling somebody
+
+Three hazards had been PARTIAL for one reason: escalations computed correctly and delivered to
+nobody. The distinction this file exists for is that SENT, DELIVERED and SEEN are three different
+things and most systems have one. A webhook returning 200 means a server accepted bytes; calling
+that delivery is how a hospital comes to believe in an escalation path nobody has ever been paged
+by. Only a NAMED HUMAN acknowledging moves a notice to SEEN, and `outstanding()` deliberately
+includes the delivered ones, because a dashboard counting only failures shows zero while the pager
+lies face down on a desk.
+
+The outbox is written BEFORE any transport is attempted, so a crash mid-send leaves "we decided and
+do not know whether it went", which is recoverable; the reverse order leaves nothing. The ladder
+stops at the first CONFIRMED delivery, not the first non-throw, because paging four people for one
+patient is how a ward learns to ignore the fifth. A channel that has never carried a message is
+UNVERIFIED rather than assumed healthy, and `verify()` is how a site proves one works without
+waiting for a real patient: an integration that broke three weeks ago looks exactly like one that
+works.
+
+`SweepDriver` closes a separate defect nobody had named: every monitor in this build had a correct
+`sweep()` that nothing ever called on a timer, which is a re-escalation ladder that never
+re-escalates.
+
+### 2. wardsynq-pews.js — the third refusal, paid off
+
+NEWS2 refused every patient under 16 and named PEWS, which did not exist. A refusal pointing at
+nothing leaves that population LESS protected, because it removes the crude signal too. The first
+test is the whole argument: a pulse of 150 is unremarkable at four months and peri-arrest at
+fourteen, so one set of bands cannot serve both.
+
+Neonates are refused, because a neonatal chart is a different instrument and that population is
+where a wrong score does most harm. A FALLING respiratory rate scores harder than a rising one,
+since a tiring child's rate falls as they decompensate and rate alone inverts at the worst possible
+moment. Parental concern is a scored parameter that can escalate a child whose numbers are all
+normal, which is what happened in most of the cases that generated the literature.
+
+### 3. wardsynq-readlog.js — telling the person who prescribed on the wrong number
+
+Every correction path could say WHAT changed; none could say who acted on the old value, because
+nothing recorded that anybody read it. The output is a list of PEOPLE, not a count of totals:
+"three totals changed" is not actionable and "Dr Shah read the 06:00 balance at 06:12 and it was
+wrong by 360 mL" is. Only readers of the superseded version, only from before the correction, and
+the person who ACTED on it is named first.
+
+A value merely rendered on a page is not a read. The log is retention-bounded and states its purpose
+on every entry, because a record of who looked at what is also a surveillance tool, and used as one
+it will stop people opening things.
+
+### 4. HMAC-SHA256 in wardsynq-secops.js
+
+The old function was a 64-bit FNV-ish hash documented as NOT cryptographic. The note was honest and
+keeping the function was still wrong: a field called "integrity" gets relied on regardless of the
+comment beside it. With no implementation wired it now REFUSES to hash rather than falling back,
+because a silent downgrade is worse than a loud failure. A document carrying the previous build's
+digest is refused as LEGACY, since honouring it is how a deprecated primitive outlives the decision
+to deprecate it. It is a MAC and not a signature and the naming keeps that: it cannot say WHICH key
+holder, so it does not attribute authorship.
+
+### 5. Reachability: renderer, offline shell, build
+
+`opd-render.js` draws the surface `opd-emr.js` had been waiting for, holds no clinical rule, and is
+a pure function of `session.state()` so the screen cannot keep showing a confirmation the system
+revoked. It also populates the read log on OPEN, which is what made item 3 real rather than proven
+and unpopulated.
+
+`wardsynq-sw.js`'s one important rule: a stale APP is fine and stale CLINICAL DATA is not. The shell
+is cache-first; anything clinical is network-first and returns a 503 saying so rather than a cached
+body, because a cached potassium rendered without its age is the exact hazard every gatherer in this
+build refuses at the other end of the pipe.
+
+`build-www.sh` ships wardsynq/ whole, and both the script and the markup state that shipping the
+files does not make it reachable: nothing links to it, no flag turns it on, and the page does not
+boot itself, because a page that constructed its own actor would be a page deciding who may give a
+drug.
+
+### Where that leaves it
+
+921 tests across 41 suites, 39 modules. Safety case 13 of 16 verified, 3 partial, and all three
+partials now name SMALLER reasons than before:
+
+- HAZ-DET-01 and HAZ-TIME-01: the transport seam, outbox, ladder and driver exist; no real pager,
+  SMS or phone system is integrated, and every shipped adapter reaches only somebody already looking
+  at a screen.
+- HAZ-FLUID-01: the correction-to-reader chain is proven end to end and populated only where a
+  bedside row is opened, because the FLOWSHEET still has no renderer.
+
+None of that is dishonest bookkeeping: each partial is a control that works and cannot yet reach far
+enough, which is a different thing from a control that does not exist.
+
+## The GHIS cut-over, and the last renderer (2026-09-05)
+
+### The cut-over, approved by the owner
+
+GHIS is now a real adapter on the live path, feeding the canonical model and the event bus. The
+design decision worth not re-litigating is what it does NOT do: it does not rewrite
+`ingestFromWard`. That function guards cross-patient contamination, preserves manual overrides
+against ward values, and writes a STATE object read at more than twenty sites in icu.js alone.
+Replacing it in one step would put a live mobile app behind a code path that has never rendered a
+ward round, in exchange for tidiness.
+
+So it is a strangler fig: the legacy path keeps owning STATE and every screen that reads it, and
+the adapter takes ownership of the canonical model alongside it. Two consumers of one bundle, the
+new one authoritative for everything built after it. The duplication is real and is the price of
+not breaking a working ward round.
+
+The properties, in the order they matter to a clinician holding the phone: the legacy result is
+computed FIRST and returned untouched, so enabling the flag cannot change what the app displays;
+the adapter path can never throw into the caller, and an exploding adapter, a full disk, a
+rejecting async write and a downed bus are each a number on a report rather than a broken round;
+there is a kill switch that works in-process with no reload; it is idempotent on the source's own
+event identity; and it writes as an ADAPTER actor, so it is capped at DRAFT by the existing actor
+model rather than by anything re-implemented here.
+
+**What "approved" means.** The owner approved an ARCHITECTURAL cut-over, which is theirs to give.
+It is not clinical approval. Every rule pack remains UNAPPROVED seed content awaiting pharmacy and
+the relevant committees, a test asserts the cut-over's own report says so, and the flag still
+defaults OFF.
+
+### The flowsheet renderer
+
+The last named reason HAZ-FLUID-01 was partial. The renderer holds no arithmetic and decides only
+how honesty is displayed, which turned out to be most of the work: an empty cell renders blank
+rather than as a zero or a dash, because at a glance those are the same mark; a half-charted row
+states "3 of 6" beside itself so it cannot look complete; a backfilled entry is marked rather than
+rendered identically, which would launder the difference; and the incompleteness of a total sits in
+the same sentence as the number, because a qualifier in a tooltip is one nobody reads at 08:00.
+
+Opening a balance records a read. HAZ-FLUID-01 moves to VERIFIED: every clause of its stated
+requirement is met and adversarially tested, so the adequacy cap comes off. The deliberate
+non-gating stays in the caveat.
+
+### A race, found and closed
+
+The full suite failed once and could not be reproduced in thirteen further runs. Rather than
+shrugging, the cause was located: the ghis-live tests used `setTimeout(0)` to let promise chains
+settle, which does not guarantee that a `.then()` on an already-rejected promise has run. Now
+`setImmediate`, which fires after the microtask queue drains. A racy assertion in a clinical safety
+suite is worse than a failing one, because it gets re-run until it passes.
+
+956 tests across 44 suites. Safety case 14 of 16 verified, 2 partial, both waiting on a real pager.

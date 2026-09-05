@@ -1,0 +1,306 @@
+/* wardsynq/ui/opd.css — the bedside surface.
+ *
+ * This is the same design system as the workstation, not a second one. It imports wardsynq.css for
+ * its tokens and adds only what a phone at a bedside needs that a desk does not. A separate visual
+ * language for the mobile surface would mean a nurse learning two products, and the one they use at
+ * 3am under pressure would be the one they know less well.
+ *
+ * WHAT CHANGES AT A BEDSIDE, and why each is a safety decision rather than a style one:
+ *
+ *   1. TARGETS ARE LARGER THAN THE GUIDELINE, not equal to it. 44px is the minimum for a considered
+ *      tap on a clean screen. This is a gloved thumb, on a device with a splash of something on it,
+ *      in a corridor, while somebody is talking. 56px, and destructive or irreversible actions get
+ *      more space AROUND them rather than being made smaller.
+ *   2. NOTHING MOVES ON ITS OWN. No auto-advancing carousels, no toasts that leave, no content that
+ *      reflows as data arrives. A screen that changes while a thumb is descending is how the wrong
+ *      button gets pressed, and at a bedside the wrong button administers something.
+ *   3. THE SIGNAL COLUMN SURVIVES. The workstation's left rail carries significance; on a phone it
+ *      becomes a left edge mark on each row. Same meaning, same colours, same rule that colour is
+ *      never the only carrier.
+ *   4. ONE PATIENT, NAMED, ALWAYS VISIBLE. The header is sticky and cannot scroll away, because
+ *      every wrong-patient error starts with somebody being sure which chart they are on.
+ *
+ * Landscape and tablet get more room and are given more information, never a different layout with
+ * different affordances in different places.
+ */
+
+@import url("./wardsynq.css");
+
+:root {
+  /* Bedside-specific. Deliberately larger than the desktop equivalents rather than scaled from them. */
+  --tap: 56px;              /* minimum interactive height */
+  --tap-gap: 12px;          /* space BETWEEN targets: the cheapest mis-tap prevention there is */
+  --bed-pad: 16px;
+  --header-h: 76px;
+}
+
+/* The device this runs on has a notch, a home indicator, or both. */
+body.opd {
+  margin: 0;
+  background: var(--ground);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: var(--t-body);
+  -webkit-text-size-adjust: 100%;
+  padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+}
+
+/* ------------------------------------------------------------------ the patient, always */
+
+.opd-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: var(--raised);
+  border-bottom: 1px solid var(--hair);
+  padding: var(--sp-3) var(--bed-pad);
+  min-height: var(--header-h);
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+}
+
+.opd-header .who {
+  min-width: 0;   /* so a long name truncates rather than pushing the identifiers off screen */
+}
+
+.opd-header .name {
+  font-size: var(--t-lead);
+  font-weight: 600;
+  line-height: 1.2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* The identifiers never truncate. A truncated name is inconvenient; a truncated MRN is a
+   wrong-patient error, so it gets its own line and wraps rather than being cut. */
+.opd-header .ids {
+  font-family: var(--mono);
+  font-size: var(--t-micro);
+  color: var(--ink-2);
+  overflow-wrap: anywhere;
+}
+
+.opd-header .band {
+  margin-left: auto;
+  flex: none;
+  font-size: var(--t-micro);
+  text-align: right;
+  color: var(--ink-2);
+}
+
+/* An unconfirmed identity is stated on the header itself rather than in a banner somebody scrolls
+   past. It is the one condition that changes what every other control on the screen means. */
+.opd-header[data-identity="unconfirmed"] {
+  background: var(--sig-major-wash);
+  border-bottom: 2px solid var(--sig-major);
+}
+
+.opd-header[data-identity="unconfirmed"]::after {
+  content: "Identity not confirmed at the bedside";
+  position: absolute;
+  left: var(--bed-pad);
+  bottom: 2px;
+  font-size: var(--t-micro);
+  font-weight: 600;
+  color: var(--sig-major);
+}
+
+/* ------------------------------------------------------------------ rows */
+
+.opd-list { list-style: none; margin: 0; padding: 0; }
+
+.opd-row {
+  position: relative;
+  display: block;
+  width: 100%;
+  min-height: var(--tap);
+  box-sizing: border-box;
+  padding: var(--sp-3) var(--bed-pad) var(--sp-3) calc(var(--bed-pad) + var(--mark-w) + 8px);
+  margin-bottom: var(--tap-gap);
+  background: var(--raised);
+  border: 1px solid var(--hair);
+  border-radius: var(--r);
+  text-align: left;
+  font: inherit;
+  color: inherit;
+}
+
+/* The signal column, become an edge. Same meaning as the workstation's left rail. */
+.opd-row::before {
+  content: "";
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: var(--mark-w);
+  background: var(--mark, transparent);
+  border-radius: var(--r) 0 0 var(--r);
+}
+
+.opd-row[data-signal="stop"]   { --mark: var(--sig-stop); }
+.opd-row[data-signal="major"]  { --mark: var(--sig-major); }
+.opd-row[data-signal="watch"]  { --mark: var(--sig-watch); }
+.opd-row[data-signal="clear"]  { --mark: var(--sig-clear); }
+
+/* Colour is never the only carrier. Every signalled row states its significance in words. */
+.opd-row .signal-word {
+  display: inline-block;
+  font-size: var(--t-micro);
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  color: var(--mark, var(--ink-2));
+}
+
+.opd-row .detail { color: var(--ink-2); font-size: var(--t-small); }
+
+/* Numbers align, so a column of them can be read down rather than parsed one at a time. */
+.opd-row .value {
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+}
+
+/* ------------------------------------------------------------------ actions */
+
+.opd-actions {
+  display: grid;
+  gap: var(--tap-gap);
+  padding: var(--bed-pad);
+}
+
+.opd-btn {
+  min-height: var(--tap);
+  padding: 0 var(--sp-4);
+  font: inherit;
+  font-weight: 600;
+  border-radius: var(--r);
+  border: 1px solid var(--hair);
+  background: var(--raised);
+  color: var(--ink);
+}
+
+.opd-btn:active { transform: translateY(1px); }
+
+.opd-btn:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
+}
+
+.opd-btn[data-kind="commit"] {
+  background: var(--sig-clear);
+  border-color: var(--sig-clear);
+  color: var(--on-signal);
+}
+
+/* Disabled drops the fill rather than dimming the text, so contrast survives. A dimmed label on a
+   coloured fill was measured at 1.85:1 on the workstation and is the reason this rule exists. */
+.opd-btn[disabled] {
+  background: var(--recess);
+  border-color: var(--hair);
+  color: var(--ink-3);
+  box-shadow: none;
+}
+
+/* An irreversible action is given SPACE rather than made smaller or hidden behind a confirm. */
+.opd-btn[data-kind="irreversible"] {
+  margin-top: var(--sp-5);
+  border-color: var(--sig-stop);
+  color: var(--sig-stop);
+}
+
+/* ------------------------------------------------------------------ the scan */
+
+.opd-scan {
+  padding: var(--bed-pad);
+  background: var(--surface);
+  border-top: 1px solid var(--hair);
+}
+
+.opd-scan input {
+  width: 100%;
+  min-height: var(--tap);
+  box-sizing: border-box;
+  padding: 0 var(--sp-3);
+  font-family: var(--mono);
+  font-size: var(--t-lead);
+  /* Explicit, because the workstation shipped a bug where the signal colour cascaded into inputs
+     and rendered a drug name at 1.2:1. An input states its own colours. */
+  color: var(--ink);
+  background: var(--raised);
+  border: 1px solid var(--hair);
+  border-radius: var(--r);
+}
+
+.opd-scan input:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 1px;
+  border-color: var(--focus);
+}
+
+.opd-scan .state {
+  margin-top: var(--sp-2);
+  font-size: var(--t-small);
+  min-height: 1.4em;   /* reserved, so confirming a scan does not reflow the buttons under a thumb */
+}
+
+.opd-scan .state[data-ok="true"]  { color: var(--sig-clear); font-weight: 600; }
+.opd-scan .state[data-ok="false"] { color: var(--sig-stop); font-weight: 600; }
+
+/* ------------------------------------------------------------------ refusals */
+
+/* A refusal is not a toast. It stays until it is dealt with, and it says what to do. */
+.opd-refusal {
+  margin: var(--bed-pad);
+  padding: var(--sp-3);
+  background: var(--sig-stop-wash);
+  border-left: var(--mark-w) solid var(--sig-stop);
+  border-radius: 0 var(--r) var(--r) 0;
+}
+
+.opd-refusal h2 { margin: 0 0 var(--sp-1); font-size: var(--t-body); color: var(--sig-stop); }
+.opd-refusal p  { margin: 0; font-size: var(--t-small); color: var(--ink); }
+
+/* ------------------------------------------------------------------ offline */
+
+.opd-offline {
+  padding: var(--sp-2) var(--bed-pad);
+  background: var(--sig-major-wash);
+  border-bottom: 1px solid var(--sig-major);
+  font-size: var(--t-small);
+  font-weight: 600;
+  color: var(--sig-major);
+}
+
+.opd-offline[hidden] { display: none; }
+
+/* ------------------------------------------------------------------ larger screens */
+
+@media (min-width: 700px) {
+  .opd-actions { grid-template-columns: 1fr 1fr; }
+  .opd-list { display: grid; grid-template-columns: 1fr 1fr; gap: 0 var(--tap-gap); }
+  /* A tablet gets more information in the same layout. It does not get different controls in
+     different places, because the person holding it also uses the phone. */
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; animation: none !important; }
+}
+
+/* The mark on a phone is the monogram alone, and it is the smallest thing in the header. The
+   patient's name is the largest. That ordering is the whole point of the header. */
+.opd-header .brand-mark {
+  height: 20px;   /* was 17px, up 20 percent to stay in step with the workstation */
+  width: auto;
+  flex: none;
+  margin-left: var(--sp-2);
+  opacity: 0.75;
+}
+
+/* When identity is unconfirmed the warning needs the full width, so the mark yields entirely.
+   Branding is the first thing to go when something clinical needs the room. */
+.opd-header[data-identity="unconfirmed"] .brand-mark { display: none; }
+
+/* The bedside mark follows the same rule as the workstation: white in dark mode. See the note on
+   .brand-mark in wardsynq.css for why this is a filter rather than a mask. */
+@media (prefers-color-scheme: dark) {
+  .opd-header .brand-mark { filter: brightness(0) invert(1); }
+}
