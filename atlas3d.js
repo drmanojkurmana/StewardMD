@@ -218,7 +218,11 @@
   }
   // Chunk URLs are "/atlas/3d/<file>"; R2 keys are "atlas3d/<file>", so a non-empty base
   // replaces the path prefix rather than prepending to it.
-  function dataUrl(u, base) { return base ? base + u.replace(/^\/atlas\/3d/, "") : u; }
+  // A per-chunk version tag (its content sha, short) so a re-meshed chunk lands under a fresh
+  // URL: the models.stewardmd.in edge caches each geometry URL, and same filename + new bytes
+  // otherwise serves the stale chunk until its TTL, which the length check then rejects.
+  function dataUrl(u, base, ver) { var p = base ? base + u.replace(/^\/atlas\/3d/, "") : u; return ver ? p + (p.indexOf("?") < 0 ? "?" : "&") + "v=" + ver : p; }
+  function chunkVer(c) { return c && c.sha256 ? c.sha256.slice(0, 8) : ""; }
   function imgUrl(u) {
     try { if (G.SMD_IS_NATIVE && u.indexOf("/atlas/") === 0) return "https://stewardmd.in" + u; } catch (e) {}
     return u;
@@ -283,7 +287,7 @@
     function attempt() {
       if (i >= bases.length) return Promise.reject(new Error("The 3D geometry is not published on this server yet."));
       var base = bases[i++];
-      return G.fetch(dataUrl(c.url, base)).then(function (r) {
+      return G.fetch(dataUrl(c.url, base, chunkVer(c))).then(function (r) {
         if (!r || !r.ok) throw new Error("http " + (r && r.status));
         return r.arrayBuffer();
       }).then(function (buf) {
@@ -318,7 +322,7 @@
     var bases = st.base != null ? [st.base] : dataBases(), i = 0;
     function attempt() {
       if (i >= bases.length) return Promise.reject(new Error("The 3D geometry is not published on this server yet."));
-      var base = bases[i++], url = dataUrl(c.url, base), cacheable = base === R2_BASE;
+      var base = bases[i++], url = dataUrl(c.url, base, chunkVer(c)), cacheable = base === R2_BASE;
       return fetchBytes(url, cacheable).then(function (buf) {
         if (!looksLikeChunk(buf, c.bytes)) {
           if (cacheable && G.SMD_THOREX_MODEL_CACHE && G.SMD_THOREX_MODEL_CACHE.clearModels) { try { G.SMD_THOREX_MODEL_CACHE.clearModels({ cacheName: CACHE_NAME }); } catch (e) {} }
@@ -404,11 +408,20 @@
     " vec3 H = normalize(L + V); float spec = pow(max(dot(n, H), 0.0), 40.0) * 0.22;",
     " vec3 c = uColor * (0.32 + 0.22 * hemi + 0.58 * diff) + spec;",
     " c = mix(c, uSel * (0.55 + 0.6 * diff) + spec, vState.g * 0.72);",
-    " c = mix(c, uBg, vState.b * 0.35);",
-    // The living body's outline fades out over the last ~4 cm at the scan's top and bottom
-    // (y 0.62 .. 1.058 m in live.json's frame), so the shell reads as a body, not a cut tube.
+    " float dim = shell > 0.5 ? 0.0 : vState.b;",                   // the membrane is never the dim-unselected grey
+    " c = mix(c, uBg, dim * 0.35);",
     " float a = uPass > 1.5 ? uGhost : 1.0;",
-    " if (shell > 0.5) a *= smoothstep(0.62, 0.665, vP.y) * (1.0 - smoothstep(1.01, 1.058, vP.y));",
+    // The skin is a translucent envelope, not a solid coat: a fresnel term makes it clear where
+    // you look straight through (so the organs read) and bright at the silhouette (so the body
+    // reads). Warm skin tone, independent of the dim logic.
+    " if (shell > 0.5) {",
+    "   float fres = pow(1.0 - max(dot(n, V), 0.0), 2.2);",
+    "   c = mix(vec3(0.86, 0.66, 0.55), vec3(1.0, 0.92, 0.85), fres) * (0.5 + 0.7 * hemi);",
+    "   a = uGhost * (0.30 + 1.7 * fres);",
+    // the outline fades out over the last ~4 cm at the scan's cut top/bottom (y 0.62 .. 1.058 m
+    // in live.json's frame), so the shell reads as a body and not a sawn-off tube.
+    "   a *= smoothstep(0.62, 0.665, vP.y) * (1.0 - smoothstep(1.01, 1.058, vP.y));",
+    " }",
     " gl_FragColor = vec4(c, a);",
     "}"].join("\n");
   var FS_PICK = [

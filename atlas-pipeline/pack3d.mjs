@@ -104,7 +104,7 @@ if (mode === "live") {
     const pos0 = new Float32Array(bin.buffer.slice(bin.byteOffset + p.pos, bin.byteOffset + p.pos + p.nv * 12));
     const idx0 = new Uint32Array(bin.buffer.slice(bin.byteOffset + p.idx, bin.byteOffset + p.idx + p.ni * 4));
     srcTris += idx0.length / 3;
-    const s = simplify(pos0, idx0, 0.3, 0.005);
+    const s = simplify(pos0, idx0, +opt("ratio", 0.28), +opt("error", 0.008));
     maxErr = Math.max(maxErr, s.err); tris += s.idx.length / 3;
     const nrm = smoothNormals(s.pos, s.idx);
     const gi = base + parts.length;
