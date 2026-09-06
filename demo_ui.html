@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Premium Healthcare UI Options</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  body { margin: 0; padding: 40px; background: #eef2f5; font-family: -apple-system, system-ui, sans-serif; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(380px, 1fr)); gap: 40px; max-width: 1400px; margin: 0 auto; }
+  .section-title { font-family: 'Inter', sans-serif; font-weight: 700; color: #111827; margin-bottom: 8px; }
+  .section-desc { font-family: 'Inter', sans-serif; color: #6b7280; font-size: 14px; margin-bottom: 24px; line-height: 1.5; }
+
+  /* Concept A: The Neo-Clinical (StewardMD Brand Evolved) */
+  /* Focus: Extremely high trust, authoritative but modern. Deep teals, crisp white, sharp typography. */
+  .concept-a { background: #f8fafc; padding: 32px; border-radius: 24px; }
+  .a-card {
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 24px;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 4px 6px -1px rgba(15, 118, 110, 0.05), 0 2px 4px -1px rgba(15, 118, 110, 0.03);
+    font-family: 'IBM Plex Sans', sans-serif;
+    position: relative;
+    overflow: hidden;
+  }
+  .a-card::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 4px; background: #0f766e; }
+  .a-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px; }
+  .a-title { font-size: 18px; font-weight: 600; color: #0f172a; margin: 0; letter-spacing: -0.01em; }
+  .a-meta { font-size: 13px; color: #64748b; margin-top: 4px; font-weight: 500; }
+  .a-status {
+    background: #f0fdf4; color: #15803d; border: 1px solid #bbf7d0;
+    padding: 4px 10px; border-radius: 6px; font-size: 12px; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 0.04em;
+  }
+  .a-timeline { margin-top: 16px; padding-top: 16px; border-top: 1px solid #f1f5f9; display: flex; align-items: center; gap: 12px; }
+  .a-time-data { font-size: 14px; color: #334155; font-weight: 500; }
+  .a-time-data span { color: #0f766e; font-weight: 600; }
+
+  /* Concept B: The Modern Glass (Spacious & Calm) */
+  /* Focus: Reducing cognitive load for clinicians. Soft, airy, floating elements. */
+  .concept-b { background: #f3f4f6; padding: 32px; border-radius: 24px; }
+  .b-card {
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(12px);
+    border-radius: 20px;
+    padding: 24px;
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
+    font-family: 'Inter', sans-serif;
+  }
+  .b-badge-row { display: flex; gap: 8px; margin-bottom: 12px; }
+  .b-badge {
+    background: #ffffff; color: #059669; box-shadow: 0 2px 4px rgba(0,0,0,0.04);
+    padding: 6px 12px; border-radius: 999px; font-size: 12px; font-weight: 600;
+    display: flex; align-items: center; gap: 6px;
+  }
+  .b-badge::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: #10b981; box-shadow: 0 0 0 2px #d1fae5; }
+  .b-title { font-size: 19px; font-weight: 700; color: #111827; margin: 0 0 4px; letter-spacing: -0.02em; }
+  .b-meta { font-size: 14px; color: #6b7280; }
+  .b-action { margin-top: 20px; background: #f9fafb; border-radius: 12px; padding: 12px 16px; display: flex; justify-content: space-between; align-items: center; }
+  .b-action-text { font-size: 13px; font-weight: 500; color: #4b5563; }
+  .b-action-btn { font-size: 13px; font-weight: 600; color: #0f766e; text-decoration: none; }
+
+  /* Concept C: Editorial / Tactile (Card-catalog style) */
+  /* Focus: Incredible scannability, distinct sections, high contrast. */
+  .concept-c { background: #e2e8f0; padding: 32px; border-radius: 24px; }
+  .c-card {
+    background: #ffffff;
+    border-radius: 12px;
+    border: 1px solid #cbd5e1;
+    box-shadow: 4px 4px 0px #94a3b8;
+    font-family: 'IBM Plex Sans', sans-serif;
+    display: flex;
+    transition: transform 0.1s, box-shadow 0.1s;
+  }
+  .c-card:hover { transform: translate(1px, 1px); box-shadow: 3px 3px 0px #94a3b8; }
+  .c-status-col { width: 48px; background: #f8fafc; border-right: 1px solid #cbd5e1; border-radius: 12px 0 0 12px; display: flex; flex-direction: column; align-items: center; padding: 16px 0; }
+  .c-status-icon { width: 24px; height: 24px; background: #22c55e; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 14px; }
+  .c-content { padding: 20px 24px; flex: 1; }
+  .c-header { display: flex; justify-content: space-between; align-items: baseline; }
+  .c-title { font-size: 17px; font-weight: 700; color: #0f172a; margin: 0; }
+  .c-tag { font-size: 12px; font-weight: 600; color: #475569; background: #f1f5f9; padding: 4px 8px; border-radius: 4px; }
+  .c-details { margin-top: 12px; display: flex; gap: 16px; }
+  .c-detail-item { font-size: 13px; color: #64748b; display: flex; flex-direction: column; gap: 2px; }
+  .c-detail-val { color: #0f172a; font-weight: 600; }
+
+</style>
+</head>
+<body>
+  <div class="grid">
+    <!-- Concept A -->
+    <div class="concept-a">
+      <h2 class="section-title">Concept A: Neo-Clinical</h2>
+      <p class="section-desc">Authoritative and highly structured. Deep teal left-borders anchor the eye. Excellent for dense clinical lists where row-by-row scanning is critical.</p>
+
+      <div class="a-card">
+        <div class="a-header">
+          <div>
+            <h3 class="a-title">Coronary Artery Bypass</h3>
+            <div class="a-meta">ID: 84920 · Discharged Today</div>
+          </div>
+          <div class="a-status">Stable</div>
+        </div>
+        <div class="a-timeline">
+          <div class="a-time-data">Next check-in <span>in 2h</span></div>
+          <div style="width: 4px; height: 4px; border-radius: 50%; background: #cbd5e1;"></div>
+          <div class="a-time-data">Risk <span>12%</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Concept B -->
+    <div class="concept-b">
+      <h2 class="section-title">Concept B: Modern Glass</h2>
+      <p class="section-desc">Airy, modern, and reduces cognitive load. Focuses on typographic hierarchy rather than heavy borders. Great for "Assistant" or "Companion" UI like Maitri.</p>
+
+      <div class="b-card">
+        <div class="b-badge-row">
+          <div class="b-badge">On Track</div>
+        </div>
+        <h3 class="b-title">Coronary Artery Bypass</h3>
+        <div class="b-meta">Discharged today · 12% readmit risk</div>
+        <div class="b-action">
+          <span class="b-action-text">Next patient check-in</span>
+          <a href="#" class="b-action-btn">in 2h</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Concept C -->
+    <div class="concept-c">
+      <h2 class="section-title">Concept C: Tactile / Editorial</h2>
+      <p class="section-desc">A tactile, "card-catalog" approach. Hard shadows and split layouts create incredibly distinct interactive rows. Impossible to lose your place.</p>
+
+      <div class="c-card">
+        <div class="c-status-col">
+          <div class="c-status-icon">✓</div>
+        </div>
+        <div class="c-content">
+          <div class="c-header">
+            <h3 class="c-title">Coronary Artery Bypass</h3>
+            <span class="c-tag">Stable</span>
+          </div>
+          <div class="c-details">
+            <div class="c-detail-item">
+              <span>Discharged</span>
+              <span class="c-detail-val">Today</span>
+            </div>
+            <div class="c-detail-item">
+              <span>Next Check-in</span>
+              <span class="c-detail-val">in 2h</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
