@@ -4318,3 +4318,26 @@ be read at all) once, and each migration decides for itself, independently, what
 `.then()` at all — even an HTTP error vanished silently. Claiming an authoritative mode exists while
 a refusal could never reach the doctor would be exactly the kind of claim this project does not make.
 One additive check, one toast, fires on nothing today.
+
+## 2026-09-06 — Sign-off: a signature is the signer's own id, and tracing it found a defect
+
+**Decision: model the lock with the field the model already has, and the rule the actor model
+already enforces.** `ClinicalNote.signedBy` existed; `authoriseWrite`'s three signature refusals
+existed. Sign-off is a new version of the same note with `signedBy` = the authenticated actor's id,
+and nothing else — no "locked" flag, no GHIS display name copied in as if it were an identity. The
+PIN-session doctor who cannot sign is refused by `NO_CREDENTIAL`, exactly as she is for a
+prescription; nothing new was written to make that true.
+
+**Decision: a save and a sign-off are distinguished by an explicit flag, never by kind alone.** Both
+arrive as `kind:"assessment"` on the same endpoint. Without `signOff: true` the previous migration
+would have treated the Authorise as a content save with no content and wiped the note's sections.
+Found by tracing the call site, not by a bug report — which is the argument for tracing every call
+site of a hooked endpoint before declaring a migration done. The content path now also refuses to
+write with no fields at all, so the class of defect is closed, not just this instance.
+
+**Decision: signed means closed.** GHIS locks its form on authorise; a WardSynQ note that could be
+re-saved after signing would make `signedBy` decorative. `note_signed` refuses the edit. A correction
+after sign-off is an addendum, which is a separate design nobody has done yet, and is named as such
+rather than approximated by letting the edit through.
+
+**Not done, named:** addenda; copying GHIS's `authorized.on`; investigations and prescriptions.

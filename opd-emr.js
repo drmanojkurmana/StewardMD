@@ -945,11 +945,14 @@
   // the stewardmd.in base in-app (relative /api hits the Capacitor local origin). Best-effort; silent on failure.
   function qBase() { try { var h = (G.location && G.location.hostname) || ""; return /(^|\.)stewardmd\.in$/i.test(h) ? "" : "https://stewardmd.in"; } catch (e) { return "https://stewardmd.in"; } }
   function fbTok() { try { var u = (G.SMD_AUTH && G.SMD_AUTH.currentUser) || (G.firebase && G.firebase.auth && G.firebase.auth().currentUser); return (u && u.getIdToken) ? u.getIdToken() : Promise.resolve(null); } catch (e) { return Promise.resolve(null); } }
-  function addToTimeline(kind, text, vals) {
+  function addToTimeline(kind, text, vals, signOff) {
     if (!st.ticketId || !st.sessionId || !text) return;   // only when opened from a queue ticket
     fbTok().then(function (t) {
       if (!t) return;
       var body = { sessionId: st.sessionId, ticketId: st.ticketId, kind: kind, text: String(text).slice(0, 1000) };
+      // The doctor's Authorise, only after GHIS confirmed it. Distinct from a content save on purpose:
+      // it carries no fields, and it must never be mistaken for one.
+      if (signOff) body.signOff = true;
       // The structured fields travel WITH the summary text. The timeline keeps its text line; where
       // a tenant has opted a clinical write into the WardSynQ record (currently: vitals, kind
       // "assessment"), the server maps the structured payload into the canonical record and the
@@ -1929,7 +1932,7 @@
         if (res.status === 401 || d.error === "login_required") { toast("Connect Ward Sync (GHIS) first."); return; }
         if (!res.ok || d.ok === false) { toast(ghisSay(d.resp)); return; }
         toast(okMsg);
-        if (tl && tl.text) { addToTimeline(tl.kind, tl.text, tl.vals); setTimeout(loadTimeline, 600); }   // mirror this action into the visit summary + refresh the Profile timeline
+        if (tl && tl.text) { addToTimeline(tl.kind, tl.text, tl.vals, tl.signOff); setTimeout(loadTimeline, 600); }   // mirror this action into the visit summary + refresh the Profile timeline
         st.invDraft = {}; st.medDraft = {};
         if (onOk) try { onOk(); } catch (e) {}
         loadProfile({ patientId: st.patient.mrn || "", recordNo: st.recordNo || "" });
@@ -2856,10 +2859,12 @@
     postWrite("/assessment-authorize",
       { patientId: (st.patient && st.patient.mrn) || "", episodeId: st.episodeId || "", docId: oeDocId() },
       "Authorised in " + emrLabel() + ". It is now in Clinical notes.",
-      { kind: "assessment", text: "Authorised (signed off)" },
+      { kind: "assessment", text: "Authorised (signed off)", signOff: true },
       function () {
         // Reflect the lock immediately: GHIS will no longer accept a write for this record.
         st.assessAuthorized = { by: st.author || "", on: "" };
+        // The "Authorised by" line is a second timeline entry for the reader; it is NOT a second
+        // sign-off, so it carries neither fields nor the signOff flag and the record ignores it.
         try { addToTimeline("assessment", "Authorised by " + (st.author || "the doctor")); } catch (e) {}
         endConsult();
       });

@@ -33,15 +33,27 @@
  * exactly as it is for registration, and a stale write is refused with a conflict, never absorbed
  * silently into the wrong version. The append-only store keeps every prior version regardless.
  *
- * WHAT THIS DELIBERATELY DOES NOT DO. It does not touch the "Authorise" (sign-off/lock) action in
- * GHIS, which is a separate workflow step this migration does not model — a note here is never
- * marked `signedBy`. It does not migrate `submitInvOrder` or `submitPrescribe`, which use the SAME
- * `addToTimeline` mechanism with kinds "note" and "medication" — this file only recognises
- * `kind === "assessment"`, on purpose, so those are entirely untouched. Same three modes as vitals
- * and registration; `authoritative` carries the SAME honest limitation registration's does: the
- * GHIS save already happened, via a wholly separate HTTP request, by the time this endpoint is even
- * reached, so "authoritative" means a WardSynQ refusal is reported rather than swallowed — it does
- * not, and cannot, undo or block the GHIS write that already landed.
+ * SIGN-OFF (added the same day, the fifth migration). GHIS's "Authorise" is real: `opd-emr.js
+ * authoriseConsult()` posts `/assessment-authorize` (functions/api/ghis, `authorizeAssessment`), GHIS
+ * locks the form and stamps "Authorized on <date> by <Dr name>", which `loadAssessment()` reads back
+ * as `authorized: {on, by}`. On success the client calls the SAME `addToTimeline("assessment", ...)`,
+ * now with `signOff: true`, and the route dispatches to `recordAssessmentSignOff` instead of the
+ * content save. What it writes is a NEW VERSION of the same note with the content copied VERBATIM
+ * from the current version and `signedBy` set to the AUTHENTICATED DOCTOR'S OWN ID — never GHIS's
+ * display-name string, never anyone else's id. That is the actor model's own rule ("a signature is an
+ * act, not a string", wardsynq-actors.js) applied unchanged: `authoriseWrite` refuses a signature
+ * from a non-human, from anyone but the signer, and from a signer with no credential. A doctor on a
+ * staff PIN session has no registration number and therefore cannot sign here, and the record says so.
+ * Once signed, the note is CLOSED to further content saves (`note_signed`), which is exactly what GHIS
+ * does to its own form; a second authorise is a no-op (`already_signed`), not a second version.
+ *
+ * WHAT THIS DELIBERATELY DOES NOT DO. It does not migrate `submitInvOrder` or `submitPrescribe`,
+ * which use the SAME `addToTimeline` mechanism with kinds "note" and "medication" — this file only
+ * recognises `kind === "assessment"`, on purpose, so those are entirely untouched. Same three modes
+ * as vitals and registration; `authoritative` carries the SAME honest limitation registration's
+ * does: the GHIS save (or GHIS's lock) already happened, via a wholly separate HTTP request, by the
+ * time this endpoint is even reached, so "authoritative" means a WardSynQ refusal is reported rather
+ * than swallowed — it does not, and cannot, undo or block the GHIS write that already landed.
  */
 
 import { ClinicalNote } from "../../wardsynq/wardsynq-model.js";
@@ -112,6 +124,23 @@ function noteFromAssessment(input) {
   return note;
 }
 
+/**
+ * PURE. The signed version of an existing note: identical content, `signedBy` set. Built through the
+ * factory so this version gets its own `meta.recordedAt` (the moment of signing is a new fact), the
+ * same way a registration correction does. `signedBy` is the caller's responsibility to make the
+ * actor's own id; the store refuses anything else.
+ */
+function signedNoteFrom(current, signedBy) {
+  if (!current || !signedBy) return null;
+  return ClinicalNote({
+    id: current.id, patientId: current.patientId, encounterId: current.encounterId,
+    noteType: current.noteType, sections: current.sections, authorId: current.authorId,
+    aiDrafted: !!current.aiDrafted,
+    signedBy,
+    source: { system: "wardsynq-native", sourceId: `opd-assessment:${current.id}` },
+  });
+}
+
 /** PURE. Same encounter, same content: nothing new to say, so nothing is written. */
 function sameNoteContent(a, b) {
   if (!a || !b) return false;
@@ -136,6 +165,10 @@ async function recordAssessment(request, env, ctx) {
     return { ...base, ok: false, status, error: e instanceof AuthError ? "auth" : e instanceof PermissionError ? "permission" : "error", detail: String((e && e.message) || e), written: 0 };
   }
 
+  // A content save with no content is not a save. This is what an Authorise used to look like
+  // before it carried its own flag, and it must never wipe a note's sections with an empty version.
+  if (!ctx.vals || typeof ctx.vals !== "object") return { ...base, ok: true, skipped: "no_content", written: 0, actor: resolved.actor.id };
+
   const candidate = noteFromAssessment({ ticket: ctx.ticket, vals: ctx.vals, authorId: resolved.actor.id });
   if (!candidate) return { ...base, ok: false, status: 422, error: "no_encounter", written: 0, actor: resolved.actor.id };
   const noteId = candidate.id;
@@ -152,6 +185,12 @@ async function recordAssessment(request, env, ctx) {
   if (current && sameNoteContent(current, candidate)) {
     return { ...base, ok: true, written: 0, skipped: "unchanged", noteId, version: current.version, actor: resolved.actor.id, role: resolved.role, roleSource: resolved.source };
   }
+  // A signed note is closed. GHIS locks its form on authorise; the record refuses the edit rather
+  // than letting "signed" mean "signed until somebody saves again". A correction after sign-off is
+  // an addendum on a new note, which nothing here models yet — stated, not hidden.
+  if (current && current.signedBy) {
+    return { ...base, ok: false, status: 409, error: "note_signed", noteId, version: current.version, signedBy: current.signedBy, actor: resolved.actor.id };
+  }
 
   try {
     const out = await svc.put(candidate, { expectedVersion: current ? current.version : undefined, idempotencyKey: ctx.idempotencyKey || null });
@@ -163,4 +202,51 @@ async function recordAssessment(request, env, ctx) {
   }
 }
 
-export { assessmentMigration, sectionsFromAssessment, noteFromAssessment, sameNoteContent, recordAssessment };
+/**
+ * The sign-off. Never throws. ctx: { migration, ticket, actorDeps, recordDeps } (vals ignored).
+ * The signature is `resolved.actor.id` and nothing else; a session that cannot sign is refused by
+ * the store's own NO_CREDENTIAL, and the caller sees that reason.
+ */
+async function recordAssessmentSignOff(request, env, ctx) {
+  const mig = ctx.migration;
+  const base = { mode: mig.mode, tenantId: mig.tenantId || null, signOff: true };
+  if (!mig || mig.mode === "off") return { ...base, ok: true, skipped: mig && mig.why ? mig.why : "off", written: 0 };
+
+  const noteId = noteIdForTicket(ctx.ticket, "assessment");
+  if (!noteId) return { ...base, ok: false, status: 422, error: "no_encounter", written: 0 };
+
+  let resolved;
+  try {
+    resolved = await resolveClinicalActor(request, env, mig.tenantId, "record:write", ctx.actorDeps);
+  } catch (e) {
+    const status = e instanceof AuthError ? 401 : e instanceof PermissionError ? 403 : 502;
+    return { ...base, ok: false, status, error: e instanceof AuthError ? "auth" : e instanceof PermissionError ? "permission" : "error", detail: String((e && e.message) || e), written: 0, noteId };
+  }
+  const svc = new RecordService({ repository: ctx.recordDeps.repository, pseudonym: ctx.recordDeps.pseudonym, tenant: resolved.tenant, actor: resolved.actor, role: resolved.role, roleSource: resolved.source });
+
+  let current;
+  try {
+    current = await svc.get("ClinicalNote", noteId);
+  } catch (e) {
+    if (e instanceof GovernanceError) return { ...base, ok: false, status: 403, error: "governance", reasons: e.reasons.map((r) => r.code), noteId, actor: resolved.actor.id };
+    return { ...base, ok: false, status: 502, error: "record_read_failed", detail: String((e && e.message) || e), written: 0, noteId };
+  }
+  // Nothing to sign: the note was never written here (the tenant turned this on after the save, or
+  // the save was refused). Say so; do not mint an empty signed note.
+  if (!current) return { ...base, ok: false, status: 422, error: "no_note_to_sign", noteId, actor: resolved.actor.id };
+  if (current.signedBy) {
+    return { ...base, ok: true, written: 0, skipped: "already_signed", noteId, version: current.version, signedBy: current.signedBy, actor: resolved.actor.id, role: resolved.role, roleSource: resolved.source };
+  }
+
+  const signed = signedNoteFrom(current, resolved.actor.id);
+  try {
+    const out = await svc.put(signed, { expectedVersion: current.version, idempotencyKey: ctx.idempotencyKey || null });
+    return { ...base, ok: true, written: 1, noteId, version: out.record.version, signedBy: out.record.signedBy, replayed: out.replayed, actor: resolved.actor.id, role: resolved.role, roleSource: resolved.source };
+  } catch (e) {
+    if (e instanceof GovernanceError) return { ...base, ok: false, status: 403, error: "governance", reasons: e.reasons.map((r) => r.code), noteId, actor: resolved.actor.id };
+    if (e instanceof VersionConflictError) return { ...base, ok: false, status: 409, error: "version_conflict", noteId, detail: e.detail };
+    return { ...base, ok: false, status: 502, error: "record_write_failed", detail: String((e && e.message) || e), written: 0, noteId, actor: resolved.actor.id };
+  }
+}
+
+export { assessmentMigration, sectionsFromAssessment, noteFromAssessment, signedNoteFrom, sameNoteContent, recordAssessment, recordAssessmentSignOff };

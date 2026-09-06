@@ -554,6 +554,34 @@ landed. The console's `addToTimeline` gained a minimal, additive check (a `recor
 now surfaces one toast) so that claim is not merely theoretical — every tenant today gets `{ok:true}`
 and the toast never fires.
 
+**The sign-off, migrated (2026-09-06, fifth migration), and a defect it found.** GHIS's Authorise is
+real: `opd-emr.js authoriseConsult()` posts `/assessment-authorize` (`functions/api/ghis`,
+`authorizeAssessment`, behind the same `QUEUE_EMR_WRITE` gate as every GHIS write); GHIS locks the
+form and stamps "Authorized on <date> by <Dr name>", which `loadAssessment()` reads back as
+`authorized: {on, by}`. On success the client posts the SAME `kind:"assessment"` timeline entry a
+save does — which is the defect: with a tenant on for assessment, PR #854's content path would have
+received that entry with no fields and written an empty-sections version over the note. Closed two
+ways: the Authorise call now carries `signOff: true` and the route dispatches it to
+`recordAssessmentSignOff`; and the content path refuses to write when it has no fields at all
+(`skipped: "no_content"`), so no future caller can wipe a note by accident either.
+
+**What a signature is here is what the actor model already said it is.** The signed version is the
+SAME note, content copied verbatim, with `signedBy` set to the authenticated doctor's OWN id — never
+GHIS's display-name string (`authorized.by` is prose, not an identity), never anyone else's. The
+store's `authoriseWrite` then does what it has done since HAZ-AI-01: refuses a signature from a
+non-human, from anyone but the signer (`SIGNATURE_NOT_OWN`), and from a signer holding no credential
+(`NO_CREDENTIAL`). So a doctor on a staff PIN session, who has no registration number, can save the
+assessment and cannot sign it, and the record says exactly that. Once signed the note is closed: a
+further content save from any doctor is `note_signed` (409), mirroring GHIS locking its own form; a
+second Authorise is `already_signed`, a no-op, not a fourth version. The append-only history keeps
+draft, refinement and signed version in order. The console's Assessment card shows "Signed by <id>"
+from the record, or "Unsigned". No new settings key: sign-off rides the tenant's `assessment` mode.
+
+**Deliberately NOT done.** A correction after sign-off (an addendum on a new note) is not modelled;
+`note_signed` refuses the edit and says so. GHIS's `authorized.on` timestamp is not copied in — the
+signed version's own `meta.recordedAt` is the moment WardSynQ recorded the signature. Investigation
+orders and prescriptions untouched.
+
 **Deliberately NOT done.** GHIS's "Authorise" (sign-off/lock) action is untouched — a WardSynQ note
 from this migration is never `signedBy`; that workflow step, if migrated, is its own future decision.
 `submitInvOrder`/`submitPrescribe` (kinds `"note"`/`"medication"`) are untouched.
