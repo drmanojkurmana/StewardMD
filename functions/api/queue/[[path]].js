@@ -48,6 +48,7 @@ import { recordLinkForOrg, resolveTenantForOrg } from "../../_wardsynq/migration
 import { actorDeps as wsqActorDeps, recordDeps as wsqRecordDeps } from "../../_wardsynq/deps.js";
 import { checkPrescriptionSafety } from "../../_wardsynq/rx-safety.js";
 import { getRulePack } from "../../_wardsynq/rulepack.js";
+import { recordAllergiesFromAssessment } from "../../_wardsynq/migrate-allergy.js";
 
 // The Encounter migration's one shared call site. Every hook below (ticket add, import, a terminal
 // status change, checkout) passes the ticket in whatever state it is NOW; recordEncounterSync reads
@@ -1002,6 +1003,15 @@ export async function onRequest(context) {
             // anything upstream is undone.
             const rec = await migrator(request, env, ctx);
             if (!rec.ok) return json({ ok: false, error: "record_refused", wardsynq: rec }, rec.status || 502, request);
+            // Best-effort allergy capture, wardsynq-native content saves ONLY (never sign-off, which
+            // carries no vals; never a GHIS-shadow tenant that happens to also be authoritative -
+            // wsqMig, not mig.mode alone, is what distinguishes them). Reuses the SAME
+            // Known_allergies_details field the assessment form already asks every doctor - no new
+            // UI. A failure here must never affect the assessment's own success: it is exactly the
+            // syncEncounter() contract (await, but the result changes nothing about this response).
+            if (isAssessment && !isSignOff && wsqMig) {
+              try { await recordAllergiesFromAssessment(request, env, { migration: mig, ticket: t, vals: body.vals, actorDeps: wsqActorDeps(env), recordDeps: wsqRecordDeps(env, mig.tenantId), rulePack: getRulePack() }); } catch (e) {}
+            }
             const legacy = await QT.appendTimeline(env, s, t, body.kind, body.text, actor.id);
             return json(Object.assign({ ok: true }, legacy, { wardsynq: rec }), 200, request);
           }
