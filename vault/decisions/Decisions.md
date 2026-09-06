@@ -4341,3 +4341,37 @@ after sign-off is an addendum, which is a separate design nobody has done yet, a
 rather than approximated by letting the edit through.
 
 **Not done, named:** addenda; copying GHIS's `authorized.on`; investigations and prescriptions.
+
+## 2026-09-06 — Investigation orders: a structured payload decides, and the record keeps what GHIS drops
+
+**Decision: an order is recognised by its payload, never by its timeline kind.** The order mirrors as
+`kind:"note"`, and `"note"` is the catch-all the console uses for free text too. Dispatching on the
+kind would have swept genuine notes into the migration the moment a clinic turned it on. The client
+sends an explicit `order:{...}` beside the sentence and the route requires it (`isInvOrder`), so the
+default for everything else stays "migrate nothing". This is the same lesson the sign-off trace taught
+one migration earlier, applied before it could become a defect rather than after.
+
+**Decision: write the canonical `ServiceRequest`, not the sentence.** The model already represents a
+non-medication order. Storing the mirrored line "Investigation ordered: CBC (for fever)" would have
+put a second, prose model of an order into a system whose whole point is one canonical record, and
+would have made the ward re-parse English to answer "what was ordered". The sentence stays on the
+timeline for humans; the record holds the structure.
+
+**Decision: record `priority` and `reason` even though GHIS discards them.** `orderInvestigation` maps
+neither the Emergency toggle nor the typed diagnosis. The temptation is to mirror GHIS exactly, on the
+grounds that anything else is a divergence. Rejected: the doctor entered both, the canonical model has
+a field for both, and dropping them to match a downstream limitation would lose clinical intent the
+user actually expressed. The GHIS behaviour is documented as pre-existing and left alone.
+
+**Decision: do not infer `category`.** Service ids are prefixed ("LAB1118", "P0110") and it is tempting
+to read lab vs procedure off the prefix. That is a naming convention, not a terminology. `category`
+stays `"other"` rather than encoding a guess that would look like a fact.
+
+**Decision: one order per test per encounter, and say what that costs.** A deterministic id makes a
+retry or a double-tap idempotent, which is the failure mode that actually happens on a phone in a
+clinic. It also means a doctor deliberately re-ordering the SAME test within ONE visit is recorded
+once in the record while GHIS and the timeline keep both. Named in the module header and the vault
+note rather than left for someone to discover.
+
+**Not done, named:** results (`DiagnosticReport`) — nothing writes one, so the console card says so
+outright rather than leaving a doctor to wonder; cancelling an order; prescriptions.

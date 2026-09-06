@@ -19,8 +19,9 @@ import { ROLES, CAPS, can as roleCan } from "../functions/_queue_roles.js";
 import { mintStaffSession, verifyStaffSession } from "../functions/_opd_auth.js";
 import { vitalsMode, patientIdForTicket, vitalsToObservations, vitalsMigration, recordVitals, VITAL_CODES } from "../functions/_wardsynq/migrate-vitals.js";
 import { registrationMigration, patientFromRegistration, sameDemographics, registerPatientRecord } from "../functions/_wardsynq/migrate-registration.js";
-import { patientIdForMrn, encounterIdForTicket, noteIdForTicket } from "../functions/_wardsynq/opd-identity.js";
+import { patientIdForMrn, encounterIdForTicket, noteIdForTicket, serviceRequestIdForTicket } from "../functions/_wardsynq/opd-identity.js";
 import { assessmentMigration, sectionsFromAssessment, noteFromAssessment, signedNoteFrom, sameNoteContent, recordAssessment, recordAssessmentSignOff } from "../functions/_wardsynq/migrate-assessment.js";
+import { invOrderMigration, orderFromInvestigation, sameOrder, recordInvestigationOrder } from "../functions/_wardsynq/migrate-inv-order.js";
 import { readFileSync } from "node:fs";
 import { makeMockDb } from "../functions/_connect/testkit.js";
 import { can } from "../functions/_connect/enterprise/rbac.js";
@@ -28,7 +29,7 @@ import { can } from "../functions/_connect/enterprise/rbac.js";
 import { ClinicalStore } from "../wardsynq/wardsynq-store.js";
 import { RemoteBackend, RemoteConflictError, RemoteRefusedError } from "../wardsynq/wardsynq-store-remote.js";
 import { GovernedStore, makeActor, KIND, TIER, GovernanceError } from "../wardsynq/wardsynq-actors.js";
-import { Patient, Observation, MedicationOrder, ClinicalNote } from "../wardsynq/wardsynq-model.js";
+import { Patient, Observation, MedicationOrder, ClinicalNote, ServiceRequest } from "../wardsynq/wardsynq-model.js";
 import { mapSccmBundle, sccmAdapter } from "../wardsynq/adapters/wardsynq-sccm-adapter.js";
 import { IntegrationHub } from "../wardsynq/wardsynq-interop.js";
 import { bundle as sccmBundle, patient as sccmPatient, observation as sccmObservation, medicationStatement, encounter as sccmEncounter } from "../functions/_connect/canonical/model.js";
@@ -658,7 +659,9 @@ test("the queue timeline handler orders the writes by mode and leaves the off pa
   // naming recordVitals directly — so both migrations get the SAME ordering guarantees for free.
   // ...and, since the sign-off migration, the doctor's Authorise is a third migrator on the same
   // branch, selected by body.signOff — never by kind alone, so a save and a sign-off stay distinct.
-  assert.ok(h.includes("const migrator = isVitals ? recordVitals : isSignOff ? recordAssessmentSignOff : recordAssessment;"));
+  // ...and, since the investigation order migration, a fourth, selected by the structured `order`
+  // payload — again never by kind alone, so a plain note and an order stay distinct.
+  assert.ok(h.includes("const migrator = isVitals ? recordVitals : isSignOff ? recordAssessmentSignOff : isInvOrder ? recordInvestigationOrder : recordAssessment;"));
   assert.ok(h.includes('const isSignOff = isAssessment && body.signOff === true;'));
   // authoritative: record first, refusal returns before any timeline write, then the timeline as shadow.
   const auth = h.slice(i('mig.mode === "authoritative"'), i("// shadow:"));
@@ -669,8 +672,8 @@ test("the queue timeline handler orders the writes by mode and leaves the off pa
   assert.ok(shadow.indexOf("QT.appendTimeline(") < shadow.indexOf("migrator("));
   // off: the original single line, unchanged.
   assert.ok(h.includes('return json(Object.assign({ ok: true }, await QT.appendTimeline(env, s, t, body.kind, body.text, actor.id)), 200, request);'));
-  // "note" and "medication" (investigations, prescriptions) are still untouched — neither migration
-  // recognises them, so isVitals/isAssessment are both false and mig.mode is forced to "off".
+  // "medication" (prescriptions) is still untouched, and so is a "note" that carries no structured
+  // order — in both cases every is* flag is false and mig.mode is forced to "off".
   assert.ok(h.includes('const isAssessment = QT.tlKind(body.kind) === "assessment";'));
   // the console sends the structured values with the text
   const html = readFileSync(new URL("../opd.html", import.meta.url), "utf8");
@@ -690,8 +693,9 @@ test("the timeline GET names the record only where the tenant is on; the console
   assert.ok(h.includes("requireSessionCap(env, actor, s, CAPS.EMR_VIEW)"), "the timeline read is still EMR_VIEW-gated");
   const html = readFileSync(new URL("../opd.html", import.meta.url), "utf8");
   assert.ok(html.includes('"/api/wardsynq/"+encodeURIComponent(rec.tenantId)+"/patient/"+encodeURIComponent(rec.patientId)+"/Observation"'), "the existing Observation endpoint, nothing new");
-  // 2026-09-06: the assessment card joined vital signs behind the SAME gate — both, or neither.
-  assert.ok(html.includes('if(r.record&&r.record.tenantId){ el.insertBefore(recordAssessmentBlock(r.record),el.firstChild); el.insertBefore(recordVitalsBlock(r.record),el.firstChild); }'), "shown only when the server names a record");
+  // 2026-09-06: the assessment card, then the investigations card, joined vital signs behind the
+  // SAME gate — all three, or none. Each prepends, so they read vitals, assessment, investigations.
+  assert.ok(html.includes('if(r.record&&r.record.tenantId){ el.insertBefore(recordOrdersBlock(r.record),el.firstChild); el.insertBefore(recordAssessmentBlock(r.record),el.firstChild); el.insertBefore(recordVitalsBlock(r.record),el.firstChild); }'), "shown only when the server names a record");
   // Every state has a sentence for the doctor: loading, empty, no MRN, 401, 403, 404, unreachable.
   for (const needle of ["Loading from the clinical record", "No vital signs in the clinical record for this patient yet", "has no medical record number", "Sign in again", "Your role cannot view the clinical record", "not available for this clinic right now", "Could not reach the clinical record"]) {
     assert.ok(html.includes(needle), "state text missing: " + needle);
@@ -1023,16 +1027,30 @@ test("off mode is byte-identical for the assessment write too: no WardSynQ call 
   assert.deepEqual(out, { mode: "off", tenantId: null, ok: true, skipped: "flag", written: 0 });
 });
 
-test("investigations and prescriptions remain untouched: only kind===\"assessment\" is recognised, \"note\" and \"medication\" are not", () => {
+test("prescriptions remain untouched, and a plain note still is: an investigation is recognised ONLY by its structured order payload, never by the kind alone", () => {
   const src = readFileSync(new URL("../functions/api/queue/[[path]].js", import.meta.url), "utf8");
   const h = src.slice(src.indexOf('if (seg === "timeline") {'), src.indexOf('// Slide-to-checkout'));
   assert.ok(h.includes('const isAssessment = QT.tlKind(body.kind) === "assessment";'));
-  assert.ok(!h.includes('=== "note"') && !h.includes('=== "medication"'), "the migration dispatcher never compares kind against note/medication");
-  // The client sends the structured payload only from the assessment save/clear/refer-to-ER actions.
+  // 2026-09-06: the investigation order migration widened this boundary by exactly one case. The
+  // dispatcher now names "note", but ONLY together with an `order` payload — so the many other
+  // things kind:"note" carries (a free-text clinical note, a referral line) still migrate nothing.
+  assert.ok(h.includes('const isInvOrder = QT.tlKind(body.kind) === "note" && !!body.order && typeof body.order === "object";'),
+    "a note is an investigation order only when it carries a structured order");
+  assert.ok(!/isInvOrder = [^;]*"note";/.test(h), "the kind alone never makes it an order");
+  assert.ok(!h.includes('=== "medication"'), "the migration dispatcher never compares kind against medication: prescriptions are not migrated");
+  // The client sends the assessment payload only from the assessment save/clear/refer-to-ER actions.
   const emr = readFileSync(new URL("../opd-emr.js", import.meta.url), "utf8");
   assert.equal((emr.match(/vals: buildAssessPayload\(/g) || []).length, 3, "submitAssessment, clearAssessment and consultToER all forward the structured payload");
-  assert.ok(!/submitInvOrder[\s\S]{0,400}vals:/.test(emr), "an investigation order does not send structured vals");
-  assert.ok(!/submitPrescribe[\s\S]{0,400}vals:/.test(emr), "a prescription does not send structured vals");
+  // Sliced to each function's OWN body — "submitInvOrder" also appears earlier as a command
+  // dispatch, and a fixed character window would run past the end of the function into the next one.
+  const fn = (name, end) => emr.slice(emr.indexOf("function " + name + "("), emr.indexOf("function " + end + "("));
+  const invOrder = fn("submitInvOrder", "submitPrescribe");
+  const prescribe = fn("submitPrescribe", "submitAssessment");
+  assert.ok(invOrder.length > 0 && prescribe.length > 0, "both write actions still exist");
+  assert.ok(!invOrder.includes("vals:"), "an investigation order does not send structured assessment vals");
+  assert.ok(invOrder.includes("order: { serviceId:"), "an investigation order does send its own structured order");
+  assert.ok(!prescribe.includes("vals:"), "a prescription does not send structured vals");
+  assert.ok(!prescribe.includes("order:"), "a prescription does not send a structured order either");
 });
 
 /* ------------------------------------------------------------------ the sign-off (GHIS Authorise) migration */
@@ -1158,4 +1176,158 @@ test("the defect the sign-off trace found is closed: a kind:assessment write wit
   // The console shows the signature as a fact from the record, and says Unsigned otherwise.
   const html = readFileSync(new URL("../opd.html", import.meta.url), "utf8");
   assert.ok(html.includes("Signed by ") && html.includes(">Unsigned<"));
+});
+
+/* ------------------------------------------------- the investigation order (GHIS CreateServices) migration */
+
+test("identity: one order id per test per encounter — deterministic, distinct per service, never invented", () => {
+  const ticket = { id: "TKT-80", ghisEpisodeId: "EP-80", ghisPatientId: "GH-40233" };
+  const a = serviceRequestIdForTicket(ticket, "LAB1118");
+  assert.equal(a, "opd-order-ep-80-lab1118");
+  assert.equal(serviceRequestIdForTicket(ticket, "LAB1118"), a, "the same test on the same visit is the same order");
+  assert.notEqual(serviceRequestIdForTicket(ticket, "P0110"), a, "a different test is a different order");
+  // A native (non-GHIS) visit still gets a stable id, anchored on the ticket — the same rule as a note.
+  assert.equal(serviceRequestIdForTicket({ id: "TKT-81" }, "LAB1118"), "opd-order-tkt-81-lab1118");
+  // Nothing is minted out of nothing.
+  assert.equal(serviceRequestIdForTicket(ticket, ""), null);
+  assert.equal(serviceRequestIdForTicket(ticket, null), null);
+  assert.equal(serviceRequestIdForTicket({}, "LAB1118"), null);
+  assert.equal(serviceRequestIdForTicket(null, "LAB1118"), null);
+  // It shares its encounter with vitals and the assessment, so all three hang off ONE visit.
+  assert.equal(encounterIdForTicket(ticket), "opd-enc-ep-80");
+});
+
+test("orderFromInvestigation: a canonical ServiceRequest — GHIS's own service id as the code, the Emergency toggle as priority, the authenticated doctor as requester, nothing guessed", () => {
+  const ticket = { id: "TKT-80", ghisEpisodeId: "EP-80", ghisPatientId: "GH-40233" };
+  const sr = orderFromInvestigation({ ticket, order: { serviceId: "LAB1118", name: "Complete Blood Count", diagnosis: "Fever, 5 days", emergency: true }, requesterId: "fb:dr-menon" });
+  assert.equal(sr.resourceType, "ServiceRequest");
+  assert.equal(sr.id, "opd-order-ep-80-lab1118");
+  assert.equal(sr.patientId, "opd-pat-gh-40233");
+  assert.equal(sr.encounterId, "opd-enc-ep-80");
+  assert.equal(sr.code, "LAB1118", "the id the order is actually placed against, not a re-typed name");
+  assert.equal(sr.codeSystem, "ghis-service-id", "whose code that is, so nobody reads it as a LOINC");
+  assert.equal(sr.display, "Complete Blood Count");
+  assert.equal(sr.priority, "stat", "the Emergency toggle");
+  assert.equal(sr.reason, "Fever, 5 days");
+  assert.equal(sr.requesterId, "fb:dr-menon", "the authenticated clinician, never a typed name");
+  assert.equal(sr.status, "active", "GHIS accepted it before this ran, so it is placed, not a draft");
+  assert.equal(sr.category, "other", "GHIS does not say lab vs procedure, so this does not pretend to know");
+  // Not emergency is the model's own routine; an absent indication or name is simply absent.
+  const plain = orderFromInvestigation({ ticket, order: { serviceId: "P0110" }, requesterId: "fb:dr-menon" });
+  assert.equal(plain.priority, "routine");
+  assert.equal(plain.reason, undefined);
+  assert.equal(plain.display, undefined);
+  // An order that cannot name what was ordered, who ordered it, or for whom is not an order.
+  assert.equal(orderFromInvestigation({ ticket, order: {}, requesterId: "fb:dr-menon" }), null);
+  assert.equal(orderFromInvestigation({ ticket, order: { serviceId: "LAB1118" }, requesterId: "" }), null);
+  assert.equal(orderFromInvestigation({ ticket: {}, order: { serviceId: "LAB1118" }, requesterId: "fb:dr-menon" }), null);
+  assert.equal(orderFromInvestigation({ ticket: { id: "T", ghisEpisodeId: "E" }, order: { serviceId: "LAB1118" }, requesterId: "fb:dr-menon" }), null, "no MRN, so no patient to file under");
+});
+
+test("sameOrder: the same test on the same encounter in the same terms; a changed priority or indication is not the same order", () => {
+  const base = { code: "LAB1118", patientId: "p", encounterId: "e", priority: "routine", reason: "Fever", status: "active" };
+  assert.equal(sameOrder(base, { ...base }), true);
+  assert.equal(sameOrder(base, { ...base, priority: "stat" }), false);
+  assert.equal(sameOrder(base, { ...base, reason: "Cough" }), false);
+  assert.equal(sameOrder(base, { ...base, code: "P0110" }), false);
+  assert.equal(sameOrder(base, { ...base, status: "revoked" }), false);
+  assert.equal(sameOrder({ ...base, reason: undefined }, { ...base, reason: "" }), true, "absent and empty are the same absence");
+  assert.equal(sameOrder(null, base), false);
+  assert.equal(sameOrder(base, null), false);
+});
+
+test("investigation mode gating: its own settings key, independent of vitals, registration and the assessment", async () => {
+  const org = { id: "org-gimsr", connectTenantId: "gimsr" };
+  const tenants = { gimsr: { id: "gimsr", settings: JSON.stringify({ wardsynq: { migrations: { investigations: "shadow", assessment: "off" } } }) } };
+  const deps = { getOrg: async (env, id) => (id === "org-gimsr" ? org : null), tenantRow: async (env, id) => tenants[id] || null };
+  assert.deepEqual(await invOrderMigration({}, { orgId: "org-gimsr" }, deps), { mode: "off", why: "flag" });
+  const on = await invOrderMigration({ WARDSYNQ_RECORD: "1" }, { orgId: "org-gimsr" }, deps);
+  assert.equal(on.mode, "shadow"); assert.equal(on.tenantId, "gimsr");
+  const assessOnly = { gimsr: { id: "gimsr", settings: JSON.stringify({ wardsynq: { migrations: { assessment: "shadow" } } }) } };
+  assert.equal((await invOrderMigration({ WARDSYNQ_RECORD: "1" }, { orgId: "org-gimsr" }, { ...deps, tenantRow: async (e, id) => assessOnly[id] })).mode, "off",
+    "a tenant on for the assessment is not thereby on for investigations");
+});
+
+test("off mode is byte-identical for the investigation order too: no WardSynQ call is even attempted", async () => {
+  const out = await recordInvestigationOrder(new Request("https://x"), ENV, { migration: { mode: "off", why: "flag" }, ticket: { id: "T", ghisEpisodeId: "E", ghisPatientId: "M" }, order: { serviceId: "LAB1118" } });
+  assert.deepEqual(out, { mode: "off", tenantId: null, ok: true, skipped: "flag", written: 0 });
+});
+
+test("a plain note migrates nothing: with the tenant fully on, a kind:note line carrying no order writes no ServiceRequest", async () => {
+  const h = opdHospital({ "fb:dr-menon": { role: "doctor" } }, { settings: { wardsynq: { migrations: { investigations: "shadow" } } } });
+  const ticket = { id: "TKT-82", ghisEpisodeId: "EP-82", ghisPatientId: "GH-40233" };
+  const actorDeps = { db: h.db, identifyFn: h.deps.identifyFn, claimsFn: h.deps.claimsFn, staffSession: null, orgForTenant: h.deps.orgForTenant, authorizeOrg: h.deps.authorizeOrg };
+  const recordDeps = { repository: h.repository, pseudonym: async () => null };
+  const req = new Request("https://x/api/queue/timeline", { method: "POST", headers: { "X-Test-User": "fb:dr-menon", "X-Test-RegNo": "AP-12345" } });
+  const out = await recordInvestigationOrder(req, ENV, { migration: { mode: "shadow", tenantId: "gimsr" }, ticket, order: null, actorDeps, recordDeps });
+  assert.equal(out.ok, true); assert.equal(out.written, 0); assert.equal(out.skipped, "no_order");
+  assert.equal(await h.repository.latest("gimsr", "ServiceRequest", "opd-order-ep-82-lab1118"), null);
+});
+
+test("THE PROOF, investigation order: the doctor orders on device A; device B reads the SAME ServiceRequest; pharmacy may read it and a nurse may not write one; another tenant cannot read it; a double-tap does not order twice; the Emergency toggle and the indication GHIS drops both survive in the record", async () => {
+  const h = opdHospital({
+    "fb:dr-menon": { role: "doctor" }, "fb:dr-rao": { role: "doctor" },
+    "fb:sister-anu": { role: "nurse" }, "fb:pharm-1": { role: "pharmacy" }, "fb:desk-1": { role: "reception" },
+  }, { settings: { wardsynq: { migrations: { investigations: "shadow" } } } });
+  const ticket = { id: "TKT-80", ghisEpisodeId: "EP-80", ghisPatientId: "GH-40233" };
+  const actorDeps = { db: h.db, identifyFn: h.deps.identifyFn, claimsFn: h.deps.claimsFn, staffSession: null, orgForTenant: h.deps.orgForTenant, authorizeOrg: h.deps.authorizeOrg };
+  const recordDeps = { repository: h.repository, pseudonym: async () => null };
+  const mig = { mode: "shadow", tenantId: "gimsr" };
+  const asMenon = new Request("https://x/api/queue/timeline", { method: "POST", headers: { "X-Test-User": "fb:dr-menon", "X-Test-RegNo": "AP-12345" } });
+
+  // Device A: the doctor orders an urgent CBC for a stated indication.
+  const first = await recordInvestigationOrder(asMenon, ENV, { migration: mig, ticket, order: { serviceId: "LAB1118", name: "Complete Blood Count", diagnosis: "Fever, 5 days", emergency: true }, actorDeps, recordDeps });
+  assert.equal(first.ok, true); assert.equal(first.written, 1); assert.equal(first.updated, false);
+  assert.equal(first.orderId, "opd-order-ep-80-lab1118"); assert.equal(first.priority, "stat"); assert.equal(first.actor, "fb:dr-menon");
+
+  // Device B: another doctor reads the same order back, in full, off the same patient.
+  const rao = await client(h, "fb:dr-rao");
+  const sr = await rao.governed.get(rao.actor, "ServiceRequest", "opd-order-ep-80-lab1118");
+  assert.equal(sr.code, "LAB1118"); assert.equal(sr.display, "Complete Blood Count");
+  assert.equal(sr.priority, "stat", "the Emergency toggle GHIS itself has no parameter for");
+  assert.equal(sr.reason, "Fever, 5 days", "the indication GHIS's orderInvestigation drops");
+  assert.equal(sr.status, "active"); assert.equal(sr.requesterId, "fb:dr-menon"); assert.equal(sr.writtenBy.id, "fb:dr-menon");
+  const viaApi = await h.fetchAs("fb:dr-rao")("https://x/api/wardsynq/gimsr/patient/opd-pat-gh-40233/ServiceRequest");
+  assert.equal(viaApi.status, 200);
+  assert.deepEqual((await viaApi.json()).records.map((r) => r.id), ["opd-order-ep-80-lab1118"]);
+
+  // A double-tap, or a retried request, is the SAME order — not a second one.
+  const again = await recordInvestigationOrder(asMenon, ENV, { migration: mig, ticket, order: { serviceId: "LAB1118", name: "Complete Blood Count", diagnosis: "Fever, 5 days", emergency: true }, actorDeps, recordDeps });
+  assert.equal(again.ok, true); assert.equal(again.written, 0); assert.equal(again.skipped, "already_ordered");
+  assert.equal((await h.repository.history("gimsr", "ServiceRequest", "opd-order-ep-80-lab1118")).length, 1);
+
+  // A DIFFERENT test on the same visit is its own order; the first is untouched.
+  const second = await recordInvestigationOrder(asMenon, ENV, { migration: mig, ticket, order: { serviceId: "P0110", name: "Chest X-ray" }, actorDeps, recordDeps });
+  assert.equal(second.written, 1); assert.equal(second.orderId, "opd-order-ep-80-p0110"); assert.equal(second.priority, "routine");
+  const both = await h.fetchAs("fb:dr-rao")("https://x/api/wardsynq/gimsr/patient/opd-pat-gh-40233/ServiceRequest").then((r) => r.json());
+  assert.equal(both.records.length, 2);
+
+  // Pharmacy reads orders (that is its whole clinical read scope) and cannot write one.
+  const pharm = await client(h, "fb:pharm-1");
+  assert.equal((await pharm.governed.get(pharm.actor, "ServiceRequest", "opd-order-ep-80-lab1118")).code, "LAB1118");
+  await assert.rejects(() => pharm.session("opd-pat-gh-40233").put(ServiceRequest({ id: "opd-order-ep-80-x", patientId: "opd-pat-gh-40233", code: "X", requesterId: "fb:pharm-1", status: "active" })), GovernanceError);
+
+  // A nurse orders nothing: ServiceRequest is an instruction type and is not in her write scope.
+  const asNurse = new Request("https://x/api/queue/timeline", { method: "POST", headers: { "X-Test-User": "fb:sister-anu" } });
+  const nurseTry = await recordInvestigationOrder(asNurse, ENV, { migration: mig, ticket, order: { serviceId: "LAB2000", name: "LFT" }, actorDeps, recordDeps });
+  assert.equal(nurseTry.ok, false); assert.equal(nurseTry.status, 403); assert.equal(nurseTry.error, "governance");
+  assert.equal(await h.repository.latest("gimsr", "ServiceRequest", "opd-order-ep-80-lab2000"), null, "the refused order was never written");
+
+  // Another tenant cannot read this clinic's orders at all.
+  const other = await h.fetchAs("fb:dr-rao")("https://x/api/wardsynq/other-hospital/patient/opd-pat-gh-40233/ServiceRequest");
+  assert.ok(other.status === 403 || other.status === 404, "cross-tenant read is refused, got " + other.status);
+
+  // The order is audited as the real human, and the audit row carries no indication text.
+  const row = h.repository.audit.find((a) => a.action === "record.write" && a.scope.resourceType === "ServiceRequest");
+  assert.ok(row); assert.equal(row.actor, "fb:dr-menon");
+  assert.ok(!JSON.stringify(row).includes("Fever"), "the audit trail stays PHI-free");
+});
+
+test("the console reads orders back from the record: the generic endpoint, the name over the raw id, and no claim that a result exists", () => {
+  const page = readFileSync(new URL("../opd.html", import.meta.url), "utf8");
+  assert.ok(page.includes("/ServiceRequest\""), "reads the EXISTING generic record endpoint, no new route");
+  assert.ok(page.includes("function recordOrdersBlock("));
+  assert.ok(page.includes("o.display||o.code"), "the service name leads, the GHIS id is the fallback");
+  assert.ok(page.includes("Results are not recorded here."), "the card must not imply a result exists");
+  assert.ok(page.includes("asn-pill stat\">Emergency"), "an emergency order reads at a glance");
 });
