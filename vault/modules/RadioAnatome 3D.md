@@ -16,6 +16,7 @@ CT/MRI slice modules, so a structure links both ways between a 3D mesh and the s
 - **Provenance / licence:** `HUMAN_ATLAS_PROVENANCE.md` (repo root) — upstream commit, checksums, rejects, modifications, the verbatim CC BY attribution
 - **Tests:** `test/atlas3d-data.test.mjs` (55) · `test/atlas3d-pure.test.mjs` (33) · `test/run-atlas3d-ui.mjs` (60, real headless WebGL via SwiftShader; port 8995)
 - **Status (2026-09-06):** built + RUN ON THE iPhone 15 Pro (build a3d8, iOS 27). Living body (66 parts: organs + skeleton + skin shell) streams in ~2 s from R2, 60 fps, cut planes register on the meshes, no JS errors. Reinstall after each web change: `build:www` → `cap copy ios` → rebuild `App` scheme → `devicectl uninstall` + `install` (wipes device-local data).
+- **Update (2026-09-06, build a3d9, commit 221ad957):** living surfaces Taubin-smoothed (organic, no marching-cubes staircase); skin is a fresnel envelope (transparent face-on, bright at the silhouette); geometry URLs content-versioned (`?v=<sha8>`) so re-meshed chunks bust the R2 edge cache. New living chunks uploaded to R2. Verified in tests + headless render; **native install of a3d9 on the iPhone still pending (device was not connected over USB).** Note: because the R2 living chunks were replaced, an installed build older than a3d9 fails Living CT (its bundled manifest predates the new geometry) until a3d9 is installed.
 
 ## Numbers
 
