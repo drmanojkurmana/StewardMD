@@ -691,30 +691,50 @@ test("the queue timeline handler orders the writes by mode and leaves the off pa
 // personal-clinic path) has its assessment save/sign-off go straight to the WardSynQ record,
 // bypassing the shadow/authoritative machinery above entirely — that machinery stays gated on the
 // GLOBAL WARDSYNQ_RECORD flag, which must stay OFF and untouched by this feature.
-test("native WardSynQ hospital: org.mode 'wardsynq' bypasses the global flag, forces authoritative, and every other mode is untouched", () => {
+// 2026-09-06 (part 2): generalized from an assessment-only early-return into the shared `mig`
+// computation — vitals, assessment and investigation orders ALL force authoritative for a wardsynq
+// org via the SAME wsqForcedMigration() helper, reusing the existing migrator/ctx dispatch verbatim.
+// Prescriptions are DELIBERATELY excluded: no CDSS (drug interaction/allergy/dose ceiling) is wired
+// into OPD prescribing anywhere, GHIS itself hard-blocks /prescribe for the same reason, and a
+// wardsynq hospital has no external safety net to substitute for that caution.
+test("native WardSynQ hospital: org.mode 'wardsynq' bypasses the global flag, forces authoritative for vitals/assessment/orders, and every other mode is untouched", () => {
   const src = readFileSync(new URL("../functions/api/queue/[[path]].js", import.meta.url), "utf8");
+  assert.ok(src.includes("async function wsqForcedMigration(env, org) {"), "one shared helper, not one per migration");
+  const helper = src.slice(src.indexOf("async function wsqForcedMigration"), src.indexOf("async function wsqForcedMigration") + 700);
+  assert.ok(helper.includes('org.mode !== "wardsynq"'), "gated on the explicit org.mode value, never inferred");
+  assert.ok(!helper.includes("WARDSYNQ_RECORD"), "must never read the global shadow-migration flag");
+  assert.ok(helper.includes("resolveTenantForOrg("), "reuses the existing org/tenant link — no new configuration system");
+  assert.ok(helper.includes('mode: "authoritative"'), "a WardSynQ write for this org is always authoritative — there is no GHIS to shadow");
+  assert.ok(helper.includes("wardsynq_tenant_not_configured"), "an unlinked wardsynq org fails honestly instead of a silent no-op");
+
   const h = src.slice(src.indexOf('if (seg === "timeline") {'), src.indexOf('// Slide-to-checkout'));
   const i = (needle) => { const k = h.indexOf(needle); assert.ok(k >= 0, "missing: " + needle); return k; };
-  // The org.mode check happens for isAssessment ONLY (not vitals/invOrder/prescription — out of
-  // scope for this task) and BEFORE the flag-gated assessmentMigration() call below it.
-  const wardsynqBranch = i('if (isAssessment) {');
-  const flagGatedCall = i('isAssessment ? await assessmentMigration(');
-  assert.ok(wardsynqBranch < flagGatedCall, "the wardsynq org.mode check must run before the flag-gated shadow/authoritative path");
+  const wardsynqBranch = i("let wsqMig = null;");
+  const flagGatedCall = i('const mig = wsqMig || (isVitals ? await vitalsMigration(');
+  assert.ok(wardsynqBranch < flagGatedCall, "the wardsynq check must run before the flag-gated shadow/authoritative path");
   const branch = h.slice(wardsynqBranch, flagGatedCall);
-  assert.ok(branch.includes('wOrg.mode === "wardsynq"'), "gated on the explicit org.mode value, never inferred");
-  assert.ok(!branch.includes("WARDSYNQ_RECORD"), "must never read the global shadow-migration flag");
-  assert.ok(branch.includes('resolveTenantForOrg('), "reuses the existing org/tenant link — no new configuration system");
-  assert.ok(branch.includes('mode: "authoritative"'), "a WardSynQ write for this org is always authoritative — there is no GHIS to shadow");
-  assert.ok(branch.includes('isSignOff ? recordAssessmentSignOff : recordAssessment'), "reuses the SAME save/sign-off functions verbatim");
+  assert.ok(branch.includes("isVitals || isAssessment || isInvOrder"), "vitals, assessment and orders are forced");
+  assert.ok(!branch.includes("isPrescription"), "prescriptions are NOT forced authoritative — no CDSS, same caution as GHIS's own hard block");
+  assert.ok(branch.includes("wsqForcedMigration("), "uses the shared helper, not a duplicated inline check");
   // Success is the WardSynQ write's own success — a refusal short-circuits before the legacy
   // timeline line is ever appended, and is never silently swallowed (shadow's "report, never block").
-  assert.ok(branch.indexOf("!rec.ok") < branch.indexOf("QT.appendTimeline("), "a record refusal must return before the timeline write");
-  assert.ok(branch.includes('error: "record_refused"'));
-  assert.ok(branch.includes('wardsynq_tenant_not_configured'), "an unlinked wardsynq org fails honestly instead of a silent no-op");
+  const authBlock = h.slice(h.indexOf('mig.mode === "authoritative"'), h.indexOf("// shadow:"));
+  assert.ok(authBlock.indexOf("!rec.ok") < authBlock.indexOf("QT.appendTimeline("), "a record refusal must return before the timeline write");
+  assert.ok(authBlock.includes('error: "record_refused"'));
   // Every other mode (native personal clinic, connect FHIR EMR, GHIS) never enters this branch —
   // it is gated purely on org.mode, and the existing shadow/off/authoritative dispatch immediately
-  // below is completely unchanged (already asserted above: the migrator line, the off-path line).
-  assert.ok(wardsynqBranch < i('const mig = isVitals ? await vitalsMigration('));
+  // below is completely unchanged for them.
+  assert.ok(wardsynqBranch < i("const migrator = isVitals ? recordVitals"));
+});
+
+test("native WardSynQ hospital: registration and encounter sync are ALSO forced authoritative via the same shared helper", () => {
+  const src = readFileSync(new URL("../functions/api/queue/[[path]].js", import.meta.url), "utf8");
+  const reg = src.slice(src.indexOf('if (sub === "register" && method === "POST") {'), src.indexOf('if (sub === "get" && method === "GET") {'));
+  assert.ok(reg.includes("wsqForcedMigration(env, org)"), "registration reuses the org already fetched — no second lookup");
+  assert.ok(reg.indexOf("wsqForcedMigration") < reg.indexOf("registrationMigration("), "checked before the flag-gated path");
+  const enc = src.slice(src.indexOf("async function syncEncounter"), src.indexOf("const wsqTenantRow ="));
+  assert.ok(enc.includes("wsqForcedMigration("), "the ONE shared encounter call site is fixed once, not per hook site");
+  assert.ok(enc.indexOf("wsqForcedMigration") < enc.indexOf("encounterMigration("), "checked before the flag-gated path");
 });
 
 /* ------------------------------------------------------------------ the doctor reads the vitals back */
@@ -1096,11 +1116,21 @@ test("each clinical write is recognised ONLY by its own structured payload, neve
   const prescribe = fn("submitPrescribe", "submitAssessment");
   assert.ok(invOrder.length > 0 && prescribe.length > 0, "both write actions still exist");
   assert.ok(!invOrder.includes("vals:"), "an investigation order does not send structured assessment vals");
-  assert.ok(invOrder.includes("order: { serviceId:"), "an investigation order does send its own structured order");
+  // 2026-09-06: refactored to a `var order = { serviceId: ... }` shared by both the GHIS and the
+  // wardsynq-native branch (submitted as `{ order: order }`), rather than an inline literal repeated
+  // twice — same structured shape, built once.
+  assert.ok(invOrder.includes("var order = { serviceId:"), "an investigation order does send its own structured order");
+  assert.ok(invOrder.includes("{ order: order }"), "…and forwards it under the `order` key");
   assert.ok(!invOrder.includes("rx: {"), "an investigation order does not send a prescription payload");
   assert.ok(!prescribe.includes("vals:"), "a prescription does not send structured vals");
   assert.ok(!prescribe.includes("order: {"), "a prescription does not send an investigation order payload");
   assert.ok(prescribe.includes("rx: { drugId:"), "a prescription does send its own structured rx");
+  // WardSynQ-native investigation ordering (safe: no drug-dosing risk, unlike prescribing) posts
+  // straight to postWardsynqTimeline; prescribing has NO such branch — it stays GHIS-only until CDSS
+  // is wired in, deliberately, the same caution GHIS's own /prescribe hard block already enforces.
+  assert.ok(invOrder.includes('st.source === "wardsynq"'), "investigation orders get a native WardSynQ branch");
+  assert.ok(invOrder.includes("postWardsynqTimeline("), "…using the shared native-write helper");
+  assert.ok(!prescribe.includes('st.source === "wardsynq"'), "prescribing has NO wardsynq branch yet — deliberate, pending CDSS");
 });
 
 /* ------------------------------------------------------------------ the sign-off (GHIS Authorise) migration */
