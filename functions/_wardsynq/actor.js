@@ -206,27 +206,21 @@ async function resolveIdentity(request, env, deps) {
  */
 async function resolveClinicalActor(request, env, tenantId, need, deps) {
   deps = deps || {};
-  const __t0 = Date.now();
   if (!deps.db) throw new PermissionError("record service is not provisioned");
   const identity = await resolveIdentity(request, env, deps);
-  console.log("REGDIAG   resolveIdentity +" + (Date.now() - __t0) + "ms, kind=" + identity.kind);
   const claims = deps.claimsFn && identity.kind === "firebase" ? (await deps.claimsFn(request, env)) || {} : {};
-  console.log("REGDIAG   claimsFn +" + (Date.now() - __t0) + "ms");
 
   // The tenant row is the record's key and must exist, whoever is asking.
   const tenant = await deps.db.prepare("SELECT * FROM connect_tenant WHERE id=?").bind(String(tenantId)).first();
-  console.log("REGDIAG   D1 tenant row +" + (Date.now() - __t0) + "ms");
   if (!tenant) throw new PermissionError("tenant not found");
 
   // 1. The hospital's own staff registry, when this tenant has one.
   const org = deps.orgForTenant ? await deps.orgForTenant(env, tenant) : null;
-  console.log("REGDIAG   orgForTenant +" + (Date.now() - __t0) + "ms, found=" + !!org);
   if (org) {
     // A staff session is org-bound; authorizeOrg refuses a mismatch itself, but a session for
     // another organisation must not even be looked up against this one.
     if (identity.kind === "staff" && identity.orgId !== String(org.id)) throw new PermissionError("staff session is for another organisation");
     const az = await deps.authorizeOrg(env, { kind: identity.kind, id: identity.id, email: identity.email, orgId: identity.orgId }, org.id, null);
-    console.log("REGDIAG   authorizeOrg +" + (Date.now() - __t0) + "ms, ok=" + (az && az.ok));
     if (az && az.ok) {
       const grant = grantForRole(az.role);
       if (!grant) throw new PermissionError(`role '${az.role}' has no clinical actor`);
