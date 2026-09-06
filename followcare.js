@@ -157,27 +157,28 @@
   function css() {
     return [
       ".fc-ov{position:fixed;inset:0;z-index:9600;background:rgba(8,18,24,.5);backdrop-filter:blur(3px);display:flex;justify-content:center;align-items:flex-start;overflow:auto;padding:0}",
-      ".fc-sheet{background:var(--panel,#fff);color:var(--ink,#14202b);width:100%;max-width:620px;min-height:100%;box-shadow:0 20px 60px -20px rgba(0,0,0,.5);display:flex;flex-direction:column}",
+      ".fc-sheet{background:var(--rds-surface);color:var(--rds-ink);font-family:var(--rds-font);width:100%;max-width:620px;min-height:100%;box-shadow:0 24px 60px -20px rgba(0,0,0,.15);display:flex;flex-direction:column;border-radius:20px;overflow:hidden;margin:40px auto}",
       // The guest bar is fixed to the viewport top and the sheet is a fixed overlay, so the bar sat on
       // this header. guest-timer.js publishes its measured height; 0px when no guest is running.
-      ".fc-hd{position:sticky;top:var(--smd-guestbar-h,0px);margin-top:var(--smd-guestbar-h,0px);background:#0e6e63;color:#fff;padding:calc(14px + env(safe-area-inset-top)) 16px 14px;display:flex;align-items:center;gap:10px;z-index:2}",
+      ".fc-hd{position:sticky;top:var(--smd-guestbar-h,0px);margin-top:var(--smd-guestbar-h,0px);background:var(--rds-surface);color:var(--rds-ink);padding:calc(20px + env(safe-area-inset-top)) 24px 20px;display:flex;align-items:center;gap:12px;z-index:2;border-bottom:1px solid var(--rds-line)}",
       // The close control is the most-tapped thing on this overlay and it was 34x34 - under the 44x44
       // minimum, on a surface used one-handed on a ward round. The box grows; the header padding
       // already had room for it.
-      ".fc-hd b{font-size:16px;font-weight:800}.fc-hd .fc-x{margin-left:auto;background:rgba(255,255,255,.16);border:none;color:#fff;width:44px;height:44px;border-radius:11px;font-size:20px;line-height:1;cursor:pointer;display:inline-flex;align-items:center;justify-content:center}",
-      ".fc-bd{padding:16px 16px calc(16px + env(safe-area-inset-bottom));flex:1}",
+      ".fc-hd b{font-size:18px;font-weight:700}.fc-hd .fc-x{margin-left:auto;background:var(--rds-surface-2);border:none;color:var(--rds-ink);width:44px;height:44px;border-radius:12px;font-size:24px;line-height:1;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;transition:background 0.2s}",
+      ".fc-hd .fc-x:hover{background:var(--rds-line)}",
+      ".fc-bd{padding:24px 24px calc(24px + env(safe-area-inset-bottom));flex:1;background:var(--rds-bg)}",
       ".fc-sum{display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap}",
-      ".fc-sect{font:800 11px var(--sans,system-ui);letter-spacing:.08em;color:var(--slate,#5a7184);margin:18px 0 8px;padding:0 2px}",
+      ".fc-sect{font:700 12px var(--rds-font);letter-spacing:.06em;color:var(--rds-muted);margin:24px 0 12px;padding:0 2px;text-transform:uppercase}",
       ".fc-pill{border-radius:999px;padding:6px 12px;font-size:12.5px;font-weight:700}",
-      ".fc-btn{background:#0e6e63;color:#fff;border:none;border-radius:12px;padding:12px 16px;font-weight:750;font-size:14px;cursor:pointer;min-height:46px}",
-      ".fc-btn.sec{background:transparent;color:#0e6e63;border:1.5px solid #0e6e63}",
-      ".fc-row{border:1px solid var(--line,#dbe4e2);border-radius:14px;padding:13px 14px;margin-bottom:10px;display:flex;align-items:center;gap:12px;cursor:pointer;background:var(--panel,#fff)}",
-      // min-width + centered text: a fixed badge column so every row's title starts at the SAME x,
-      // regardless of whether the label is "Watch" or "On track" (was drifting per row before).
-      ".fc-row .fc-badge{flex:0 0 auto;min-width:74px;text-align:center;border-radius:10px;padding:5px 9px;font-size:12px;font-weight:800}",
-      ".fc-row .fc-meta{flex:1;min-width:0}.fc-row .fc-meta .fc-t{font-weight:700;font-size:14.5px}.fc-row .fc-meta .fc-s{color:var(--slate,#5a7184);font-size:12.5px}",
-      // Each segment is its own nowrap span (see episodeRow) — wraps land BETWEEN segments, not mid-word.
-      ".fc-row .fc-meta .fc-s-seg{white-space:nowrap}",
+      ".fc-btn{background:var(--rds-primary);color:#fff;border:none;border-radius:12px;padding:12px 16px;font-weight:700;font-size:15px;cursor:pointer;min-height:48px;transition:filter 0.2s}",
+      ".fc-btn:hover{filter:brightness(1.1)}",
+      ".fc-btn.sec{background:transparent;color:var(--rds-primary);border:1.5px solid var(--rds-primary)}",
+      ".fc-row{border:1px solid #cbd5e1;border-radius:12px;margin-bottom:12px;display:flex;align-items:stretch;gap:0;cursor:pointer;background:#ffffff;box-shadow:4px 4px 0px #94a3b8;padding:0;overflow:hidden;transition:transform 0.1s, box-shadow 0.1s;font-family:'IBM Plex Sans', sans-serif}",
+      ".fc-row:hover{transform:translate(1px, 1px);box-shadow:3px 3px 0px #94a3b8}",
+      ".fc-row .fc-badge{display:flex;flex-direction:column;align-items:center;justify-content:center;width:48px;border-radius:0;padding:16px 0;background:#f8fafc;border-right:1px solid #cbd5e1;font-size:14px;font-weight:700}",
+      ".fc-row .fc-meta{padding:20px 24px;flex:1}",
+      ".fc-row .fc-meta .fc-t{font-size:17px;font-weight:700;color:#0f172a;margin:0 0 12px 0}",
+      ".fc-row .fc-meta .fc-s{display:flex;gap:16px;color:#64748b;font-size:13px;font-weight:500}",
       ".fc-row .fc-flag{flex:0 0 auto;color:#b3261e;font-size:14px;line-height:1;margin-left:2px}",
       ".fc-field{margin-bottom:14px}.fc-field label{display:block;font-weight:650;font-size:13.5px;margin-bottom:6px}",
       ".fc-field input,.fc-field select{width:100%;padding:11px 12px;border:1.5px solid var(--line,#dbe4e2);border-radius:11px;font-size:15px;background:var(--panel,#fff);color:var(--ink,#14202b);min-height:46px}",
@@ -217,11 +218,6 @@
       ".fc-hd .fc-hd-logo{display:none}.fc-sheet.fcui2 .fc-hd .fc-hd-logo{display:inline-flex;font-size:18px;margin-right:2px}",
       ".fc-sheet.fcui2 .fc-hd b{letter-spacing:-.01em}",
       ".fc-sheet.fcui2 .fc-bd{padding:18px 16px 30px}",
-      ".fc-sheet.fcui2 .fc-btn{border-radius:12px;font-weight:750;transition:filter .15s,transform .1s}",
-      ".fc-sheet.fcui2 .fc-btn:active{transform:scale(.99)}.fc-sheet.fcui2 .fc-btn:hover{filter:brightness(1.06)}",
-      ".fc-sheet.fcui2 .fc-btn.sec{background:transparent;border:1.5px solid #0e6e63}",
-      ".fc-sheet.fcui2 .fc-row{border-radius:14px;border:1px solid var(--line,#dbe4e2);transition:border-color .15s,transform .1s}",
-      ".fc-sheet.fcui2 .fc-row:hover{border-color:#0e6e63}",
       ".fc-sheet.fcui2 .fc-row:active{transform:scale(.99)}",
       ".fc-sheet.fcui2 .fc-pill{border-radius:999px;font-weight:700}",
       ".fc-sheet.fcui2 .fc-field input,.fc-sheet.fcui2 .fc-field select,.fc-sheet.fcui2 .fc-ta,.fc-sheet.fcui2 input,.fc-sheet.fcui2 select,.fc-sheet.fcui2 textarea{border-radius:13px}",
@@ -375,8 +371,8 @@
       // them pushed the recovery board (the actual content of this screen) below the fold.
       // Equal columns so neither reads as the more important one. min-height:46px on .fc-btn keeps
       // both above the touch minimum even at half width.
-      body.appendChild(h("div", { style: "display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px" }, [
-        h("button", { "class": "fc-btn", style: "background:linear-gradient(135deg,#0e7d70,#0b544c);display:flex;align-items:center;justify-content:center;gap:7px;padding:12px 10px;line-height:1.2", onclick: function () { renderMaitri(body); }, html: '<img src="/maitri-logo.png" alt="" aria-hidden="true" style="width:19px;height:19px;flex:0 0 auto;object-fit:contain;filter:brightness(0) invert(1)">' + '<span style="font-weight:800">MAiTRI</span>' }),
+      body.appendChild(h("div", { style: "display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px" }, [
+        h("button", { "class": "fc-btn", style: "background:var(--rds-primary);display:flex;align-items:center;justify-content:center;gap:8px;padding:12px 10px;line-height:1.2", onclick: function () { renderMaitri(body); }, html: '<img src="/maitri-logo.png" alt="" aria-hidden="true" style="width:20px;height:20px;flex:0 0 auto;object-fit:contain;filter:brightness(0) invert(1)">' + '<span style="font-weight:800">MAiTRI</span>' }),
         h("button", { "class": "fc-btn", style: "padding:12px 10px;line-height:1.2", onclick: function () { renderEnroll(body); }, text: "+ Enroll a patient" })
       ]));
       /* Always reachable, and deliberately NOT behind voiceEnabled().
@@ -404,12 +400,15 @@
     var segs = [statusMeta(ep.status), "next " + fmtWhen(ep.nextDueMs)];
     if (ep.riskPercent) segs.push(ep.riskPercent + "% readmit risk");
     return h("div", { "class": "fc-row", onclick: function () { renderDetail(ep.episodeId); } }, [
-      h("span", { "class": "fc-badge", style: "background:" + m.bg + ";color:" + m.color, text: m.icon + " " + m.label }),
+      h("span", { "class": "fc-badge", style: "background:#f8fafc;color:" + m.color, text: m.icon }),
       h("div", { "class": "fc-meta" }, [
-        h("div", { "class": "fc-t", text: (ep.disease || "Recovery") + (ep.score != null && ep.score >= 0 ? "  ·  " + ep.score + "/100" : "") }),
+        h("div", { "class": "fc-t" }, [
+          document.createTextNode((ep.disease || "Recovery") + (ep.score != null && ep.score >= 0 ? "  ·  " + ep.score + "/100" : "")),
+          h("span", { style: "font-size:12px;font-weight:600;color:#475569;background:#f1f5f9;padding:4px 8px;border-radius:4px;margin-left:8px;", text: m.label })
+        ]),
         h("div", { "class": "fc-s" }, segs.map(function (s, i) { return h("span", { "class": "fc-s-seg", text: (i ? " · " : "") + s }); }))
       ]),
-      ep.needsReview ? h("span", { "class": "fc-flag", title: "Needs review", "aria-label": "Needs review" }, ["⚑"]) : null
+      ep.needsReview ? h("span", { "class": "fc-flag", title: "Needs review", "aria-label": "Needs review", style: "padding: 20px 16px 20px 0" }, ["⚑"]) : null
     ]);
   }
 
@@ -744,9 +743,9 @@
       var rec = "";
       try { if (G.FollowCareAI) rec = FollowCareAI.recommendation({ escalation: ep.currentEscalation || ep.escalation, trend: ep.trend, needsReview: ep.needsReview, recoveryScore: ep.score }); } catch (e) {}
       var heroKids = [
-        h("div", { style: "font-size:18px;font-weight:800", text: ep.disease || "Recovery" }),
+        h("div", { style: "font-size:24px;font-weight:700;color:#0f172a;margin-bottom:8px;font-family:'IBM Plex Sans', sans-serif", text: ep.disease || "Recovery" }),
         h("div", { "class": "fc-pill", style: "display:inline-block;margin-top:6px;background:" + m.bg + ";color:" + m.color, text: m.icon + " " + m.label + (ui2() ? "" : (ep.score != null && ep.score >= 0 ? "  ·  " + ep.score + "/100" : "")) + (ep.riskPercent ? "  ·  " + ep.riskPercent + "% risk" : "") }),
-        h("div", { style: "color:var(--slate,#5a7184);font-size:13px;margin-top:6px", text: statusMeta(ep.status) + "  ·  next check-in " + fmtWhen(ep.nextDueMs) + (ep.trend ? "  ·  trend " + ep.trend : "") }),
+        h("div", { style: "color:#475569;font-size:14px;font-weight:600;margin-top:8px", text: statusMeta(ep.status) + "  ·  next check-in " + fmtWhen(ep.nextDueMs) + (ep.trend ? "  ·  trend " + ep.trend : "") }),
         rec ? h("div", { style: "margin-top:8px;padding:10px 12px;background:color-mix(in srgb,var(--teal,#0e6e63) 10%,transparent);border-radius:10px;font-size:13.5px;font-weight:600;color:var(--ink,#14202b)", text: "AI recommendation: " + rec }) : null
       ];
       if (ui2()) {

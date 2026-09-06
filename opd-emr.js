@@ -945,7 +945,7 @@
   // the stewardmd.in base in-app (relative /api hits the Capacitor local origin). Best-effort; silent on failure.
   function qBase() { try { var h = (G.location && G.location.hostname) || ""; return /(^|\.)stewardmd\.in$/i.test(h) ? "" : "https://stewardmd.in"; } catch (e) { return "https://stewardmd.in"; } }
   function fbTok() { try { var u = (G.SMD_AUTH && G.SMD_AUTH.currentUser) || (G.firebase && G.firebase.auth && G.firebase.auth().currentUser); return (u && u.getIdToken) ? u.getIdToken() : Promise.resolve(null); } catch (e) { return Promise.resolve(null); } }
-  function addToTimeline(kind, text, vals, signOff, order) {
+  function addToTimeline(kind, text, vals, signOff, order, rx) {
     if (!st.ticketId || !st.sessionId || !text) return;   // only when opened from a queue ticket
     fbTok().then(function (t) {
       if (!t) return;
@@ -955,12 +955,15 @@
       if (signOff) body.signOff = true;
       // The structured fields travel WITH the summary text. The timeline keeps its text line; where
       // a tenant has opted a clinical write into the WardSynQ record (currently: vitals, kind
-      // "assessment", and an investigation order on a kind "note"), the server maps the structured
-      // payload into the canonical record and the text line is untouched either way.
+      // "assessment", an investigation order on a kind "note", and a prescription on a kind
+      // "medication"), the server maps the structured payload into the canonical record and the
+      // text line is untouched either way.
       if (vals) body.vals = vals;
       // What distinguishes an investigation order from every other kind:"note" line. Without it the
       // server treats this as a plain note and files nothing, which is exactly the old behaviour.
       if (order) body.order = order;
+      // Likewise for a prescription against every other kind:"medication" line.
+      if (rx) body.rx = rx;
       fetch(qBase() + "/api/queue/timeline", { method: "POST", headers: { "Content-Type": "application/json", Authorization: "Bearer " + t }, body: JSON.stringify(body) })
         .then(function (r) { return r.json().catch(function () { return null; }); })
         .then(function (d) {
@@ -1140,9 +1143,29 @@
     ekg: "electrocardiogram", cxr: "chest x ray", usg: "ultrasound", lipid: "lipid profile", "pt inr": "prothrombin",
     inr: "prothrombin", bun: "blood urea", "urine r/e": "urine routine", "2d echo": "echocardiogram" };
   function expandQuery(kind, q) { if (kind !== "inv") return q; var k = String(q || "").toLowerCase().trim(); return INV_ABBREV[k] || q; }
+  // WardSynQ-native hospital: the org's own billing-tariff catalog (kind:"investigation" or
+  // "medication" rows), Firebase-authed, via GET /api/queue/inv-catalog?kind=. Same catalog
+  // mechanism for both - investigation ordering and prescribing both need SOMETHING to search that
+  // isn't GHIS's, which is meaningless for a hospital with no GHIS.
+  function runWardsynqCatalogSearch(kind, q) {
+    var key = kind === "inv" ? "invResults" : "medResults", mkey = kind + "SearchMsg", tariffKind = kind === "inv" ? "investigation" : "medication";
+    st[key] = []; st[mkey] = "searching"; renderSearchOut(kind);
+    fbTok().then(function (t) {
+      if (!t) { st[key] = []; st[mkey] = "login"; renderSearchOut(kind); return; }
+      fetch(qBase() + "/api/queue/inv-catalog?kind=" + tariffKind + "&sessionId=" + encodeURIComponent(st.sessionId || "") + "&q=" + encodeURIComponent(q), { headers: { Authorization: "Bearer " + t } })
+        .then(function (r) { return r.json().then(function (d) { return { ok: r.ok, d: d || {} }; }, function () { return { ok: r.ok, d: {} }; }); })
+        .then(function (res) {
+          if (!res.ok || (res.d && res.d.error)) { st[key] = []; st[mkey] = "error"; }
+          else { st[key] = (res.d && res.d.rows) || []; st[mkey] = st[key].length ? "" : "none"; }
+          renderSearchOut(kind);
+        })
+        .catch(function () { st[key] = []; st[mkey] = "error"; renderSearchOut(kind); });
+    }).catch(function () { st[key] = []; st[mkey] = "error"; renderSearchOut(kind); });
+  }
   function runSearch(kind) {
     var q = kind === "inv" ? st.invQuery : st.medQuery, key = kind === "inv" ? "invResults" : "medResults", mkey = kind + "SearchMsg";
     if (!q || q.length < 2) { st[key] = []; st[mkey] = ""; renderSearchOut(kind); return; }
+    if (st.source === "wardsynq") { runWardsynqCatalogSearch(kind, q); return; }
     // Search is a GHIS (hospital) lookup — needs a live Ward Sync session + is meaningless off-hospital.
     if (st.source && st.source !== "ghis") { st[key] = []; st[mkey] = "offghis"; renderSearchOut(kind); return; }
     st[key] = []; st[mkey] = "searching"; renderSearchOut(kind);
@@ -1771,14 +1794,36 @@
     var a = ghisAuth(), url = kind === "lab"
       ? "/lab-detail?renderId=" + encodeURIComponent(parts[0] || "") + "&episodeId=" + encodeURIComponent(parts[1] || "")
       : "/radiology-report?resultid=" + encodeURIComponent(parts[0] || "") + "&type=" + encodeURIComponent(parts[1] || "manual");
+    // The order row this tap came from, so the mirror below (if this fetch succeeds) can send the
+    // SAME metadata the console already scraped, rather than re-deriving it from the URL parts.
+    var orderRow = kind === "lab"
+      ? (st.labs || []).filter(function (l) { return String(l.renderId || "") === parts[0] && String(l.episodeId || "") === parts[1]; })[0]
+      : (st.radiology || []).filter(function (o) { return String(o.resultid || "") === parts[0]; })[0];
     fetch(a.base + url, { headers: authHeaders(), credentials: "include" })
       .then(function (r) { return r.json().then(function (d) { return { ok: r.ok, d: d || {} }; }, function () { return { ok: r.ok, d: {} }; }); })
       .then(function (res) {
         if (!st.report) return;
         if (!res.ok || res.d.error) { st.report.loading = false; st.report.err = res.d.error === "login_required" ? "Connect Ward Sync (GHIS) first." : "Could not load this report."; paint(); return; }
         st.report.loading = false; st.report.data = res.d; paint();
+        // Mirror what GHIS just answered into the clinical record, best-effort, after the fact.
+        // GHIS's read already happened and is unaffected by anything that follows; see
+        // functions/_wardsynq/migrate-results.js for why this is a READ mirror, not a write.
+        mirrorResult(kind === "lab" ? "lab" : "radiology", orderRow, res.d);
       })
       .catch(function () { if (st.report) { st.report.loading = false; st.report.err = "Could not load this report."; paint(); } });
+  }
+  // Fire-and-forget: post what GHIS just returned to the queue-session-authenticated mirror, so a
+  // tenant with the "results" migration on can file it as a WardSynQ DiagnosticReport. Off (every
+  // tenant today), the server does nothing with this and nothing here is visible to the doctor
+  // either way — no toast, no error surfaced, because a missed mirror changes no clinical behaviour:
+  // GHIS remains the source the doctor just read from.
+  function mirrorResult(source, orderRow, detail) {
+    if (!st.ticketId || !st.sessionId || !orderRow || !detail) return;
+    fbTok().then(function (t) {
+      if (!t) return;
+      var body = { sessionId: st.sessionId, ticketId: st.ticketId, source: source, order: orderRow, detail: detail };
+      fetch(qBase() + "/api/queue/result", { method: "POST", headers: { "Content-Type": "application/json", Authorization: "Bearer " + t }, body: JSON.stringify(body) }).catch(function () {});
+    }).catch(function () {});
   }
   // #156 — fetch every lab report for a repeated test name so labTrendPanel can trend its numeric analytes.
   // Reuses the /lab-detail endpoint per order. Patient-switch guarded. Flag-gated OFF (validate on device).
@@ -1852,7 +1897,10 @@
   // behind saveConsult in the injected store, so the EMR overlay stays storage-agnostic.
   function usesLocal(s) { return s === "local" || s === "shared"; }
   function loadProfile(opts) {
-    if (usesLocal(st.source)) { st.loading = false; paint(); return; }   // personal/shared clinic: no hospital profile/labs to fetch
+    // Personal/shared clinic: no hospital profile/labs to fetch. WardSynQ-native hospital: same - labs/
+    // radiology/medications are not migrated in this task, and there is no GHIS to fetch them from; the
+    // Profile tab must not show "Connect Ward Sync (GHIS) first" for a hospital that has no GHIS.
+    if (usesLocal(st.source) || st.source === "wardsynq") { st.loading = false; paint(); return; }
     var a = ghisAuth();
     var q = "?patientId=" + encodeURIComponent(opts.patientId || "") + "&recordNo=" + encodeURIComponent(opts.recordNo || "");
     var forPatient = st;   // guard: if the doctor opens another patient before this resolves, don't write A's labs onto B's chart
@@ -1868,7 +1916,10 @@
       .catch(function () { if (st !== forPatient) return; st.loading = false; st.error = "Could not load the patient profile."; paint(); });
   }
   function loadAssessment() {
-    if (usesLocal(st.source)) {   // personal/shared clinic: prefill from the on-device store (no GHIS fetch)
+    // Personal/shared clinic: prefill from the on-device store (no GHIS fetch). WardSynQ-native
+    // hospital: no on-device store either, and no GHIS draft to prefill from - a blank form for this
+    // encounter (the doctor's saved note is still readable afterward, via the visit timeline below).
+    if (usesLocal(st.source) || st.source === "wardsynq") {
       st.assessLoaded = true; st.assessLoading = false; st.assessErr = "";
       st.assessVals = (_localStore && _localStore.getConsult) ? (_localStore.getConsult(st.patient.mrn) || {}) : {};
       paint(); return;
@@ -1935,16 +1986,86 @@
         if (res.status === 401 || d.error === "login_required") { toast("Connect Ward Sync (GHIS) first."); return; }
         if (!res.ok || d.ok === false) { toast(ghisSay(d.resp)); return; }
         toast(okMsg);
-        if (tl && tl.text) { addToTimeline(tl.kind, tl.text, tl.vals, tl.signOff, tl.order); setTimeout(loadTimeline, 600); }   // mirror this action into the visit summary + refresh the Profile timeline
+        if (tl && tl.text) { addToTimeline(tl.kind, tl.text, tl.vals, tl.signOff, tl.order, tl.rx); setTimeout(loadTimeline, 600); }   // mirror this action into the visit summary + refresh the Profile timeline
         st.invDraft = {}; st.medDraft = {};
         if (onOk) try { onOk(); } catch (e) {}
         loadProfile({ patientId: st.patient.mrn || "", recordNo: st.recordNo || "" });
       })
       .catch(function () { toast("Could not complete the request. Please try again."); });
   }
+  // WardSynQ-native hospital (source "wardsynq"): the assessment write goes DIRECTLY to the WardSynQ
+  // record over the SAME /api/queue/timeline endpoint addToTimeline() already posts to for the GHIS
+  // shadow mirror - but here it IS the save, not a best-effort mirror: a refusal is reported to the
+  // doctor, never swallowed, and success means the WardSynQ record accepted it - no GHIS involved at
+  // all. Firebase-authed (qBase/fbTok, same as addToTimeline), never _localStore.
+  function wardsynqSay(d) {
+    var err = d && d.error;
+    if (err === "wardsynq_tenant_not_configured") return "WardSynQ is not fully set up for this hospital yet. Contact support.";
+    if (err === "record_refused") return "Could not save to the clinical record - " + ((d.wardsynq && d.wardsynq.error) || "try again") + ".";
+    if (err === "not_found") return "This visit could not be found. Reopen the patient from the queue and try again.";
+    return "Could not complete the request. Please try again.";
+  }
+  // General native-WardSynQ write: posts straight to the SAME /api/queue/timeline endpoint
+  // addToTimeline() uses for the GHIS shadow mirror, Firebase-authed - but here it IS the save, not a
+  // best-effort mirror. `extra` carries whatever structured payload this kind needs (vals/order/rx/
+  // signOff); success/failure is the WardSynQ record's own, never a GHIS response.
+  function postWardsynqTimeline(kind, text, extra, okMsg, onOk) {
+    if (!st.ticketId || !st.sessionId) { toast("Open this patient from the queue to save."); return; }
+    fbTok().then(function (t) {
+      if (!t) { toast("Sign in to WardSynQ first."); return; }
+      var body = Object.assign({ sessionId: st.sessionId, ticketId: st.ticketId, kind: kind, text: text }, extra || {});
+      fetch(qBase() + "/api/queue/timeline", { method: "POST", headers: { "Content-Type": "application/json", Authorization: "Bearer " + t }, body: JSON.stringify(body) })
+        .then(function (r) { return r.json().then(function (d) { return { status: r.status, ok: r.ok, d: d || {} }; }); })
+        .then(function (res) {
+          var d = res.d;
+          if (!res.ok || d.ok === false) { toast(wardsynqSay(d)); return; }
+          toast(okMsg);
+          setTimeout(loadTimeline, 600);
+          if (onOk) try { onOk(); } catch (e) {}
+        })
+        .catch(function () { toast("Could not complete the request. Please try again."); });
+    }).catch(function () { toast("Could not complete the request. Please try again."); });
+  }
+  function postWardsynqAssessment(vals, okMsg, signOff, onOk) {
+    var extra = {}; if (vals) extra.vals = vals; if (signOff) extra.signOff = true;
+    postWardsynqTimeline("assessment", assessSummary(st.assessVals), extra, okMsg, onOk);
+  }
+  // Advisory-only CDSS pre-check (functions/_wardsynq/rx-safety.js) - shown to the doctor BEFORE
+  // they confirm a native prescription. NEVER blocks: the promise always resolves to a safety
+  // object (possibly with findings, possibly degraded), never rejects, so a check that fails never
+  // stops the doctor from prescribing - it only stops them from prescribing UNINFORMED.
+  function checkWardsynqRxSafety(drug, generic) {
+    if (!st.ticketId || !st.sessionId) return Promise.resolve({ unapproved: true, findings: [], degraded: true });
+    return fbTok().then(function (t) {
+      if (!t) return { unapproved: true, findings: [], degraded: true };
+      var q = "sessionId=" + encodeURIComponent(st.sessionId) + "&ticketId=" + encodeURIComponent(st.ticketId) + "&drug=" + encodeURIComponent(drug || "") + "&generic=" + encodeURIComponent(generic || "");
+      return fetch(qBase() + "/api/queue/rx-safety?" + q, { headers: { Authorization: "Bearer " + t } })
+        .then(function (r) { return r.json().catch(function () { return null; }); })
+        .then(function (d) { return (d && d.ok && d.safety) || { unapproved: true, findings: [], degraded: true }; })
+        .catch(function () { return { unapproved: true, findings: [], degraded: true }; });
+    }).catch(function () { return { unapproved: true, findings: [], degraded: true }; });
+  }
+  // Plain-text summary appended to the prescribe confirm() dialog. Labeled UNAPPROVED per this
+  // content's own governance status (vault/modules/WardSynQ.md) - never phrased as a cleared check.
+  function wardsynqSafetyNote(safety) {
+    if (!safety) return "";
+    if (safety.degraded) return "\n\n(Decision support unavailable right now - proceeding without it.)";
+    if (!safety.findings || !safety.findings.length) return "\n\n(No interaction found against this patient's current medications. Unapproved content, not a substitute for clinical judgment - allergy data is not yet captured in WardSynQ.)";
+    var lines = safety.findings.slice(0, 5).map(function (f) { return "- " + f.message; });
+    return "\n\nUNAPPROVED decision support flags:\n" + lines.join("\n") + "\n\nUse clinical judgment. This does not block the prescription.";
+  }
   function confirmed(msg) { try { return !!(G.confirm && G.confirm(msg)); } catch (e) { return false; } }
   function submitInvOrder() {
     var d = st.invDraft || {}; if (!d.service) return;
+    var order = { serviceId: d.service.id, name: d.service.name || "", diagnosis: d.diagnosis || "", emergency: !!d.emergency };
+    var text = "Investigation ordered: " + d.service.name + (d.diagnosis ? " (for " + d.diagnosis + ")" : "") + (d.emergency ? " [emergency]" : "");
+    // WardSynQ-native hospital: straight to the WardSynQ record, no GHIS. Investigation orders carry
+    // no drug-dosing risk (unlike prescriptions), so unlike submitPrescribe this is safe to enable now.
+    if (st.source === "wardsynq") {
+      if (!confirmed('Order "' + d.service.name + '" for this patient?')) return;
+      postWardsynqTimeline("note", text, { order: order }, "Investigation ordered.", function () { st.invDraft = {}; paint(); });
+      return;
+    }
     if (!confirmed('Order "' + d.service.name + '" for this patient in GHIS?')) return;
     // The timeline sentence is unchanged. `order` rides beside it so the server can file the SAME
     // order structurally in the clinical record (functions/_wardsynq/migrate-inv-order.js) instead of
@@ -1952,14 +2073,34 @@
     // them today. Note `emergency` and `diagnosis` are carried here even though GHIS itself drops
     // them - that is what makes the record keep what the doctor actually entered.
     postWrite("/inv-order", { serviceId: d.service.id, diagnosis: d.diagnosis || "", emergency: !!d.emergency }, "Investigation ordered.",
-      { kind: "note", text: "Investigation ordered: " + d.service.name + (d.diagnosis ? " (for " + d.diagnosis + ")" : "") + (d.emergency ? " [emergency]" : ""),
-        order: { serviceId: d.service.id, name: d.service.name || "", diagnosis: d.diagnosis || "", emergency: !!d.emergency } });
+      { kind: "note", text: text, order: order });
   }
   function submitPrescribe() {
     var d = st.medDraft || {}; if (!d.drug) return;
+    var rxText = [d.drug.name, d.route, d.form, d.qty, d.frequency, d.duration].filter(Boolean).join(" ") + (d.remarks ? " - " + d.remarks : "");
+    // WardSynQ-native hospital: straight to the WardSynQ record, with an advisory-only CDSS
+    // pre-check (functions/_wardsynq/rx-safety.js) shown BEFORE the doctor confirms. That check
+    // never blocks - see its header (unapproved clinical content) - it only informs.
+    if (st.source === "wardsynq") {
+      checkWardsynqRxSafety(d.drug.name, d.drug.name).then(function (safety) {
+        if (!confirmed('Prescribe "' + d.drug.name + '" for this patient?' + wardsynqSafetyNote(safety))) return;
+        postWardsynqTimeline("medication", rxText,
+          { rx: { drugId: d.drug.id, name: d.drug.name || "", generic: d.drug.name || "", drugCodeSystem: "wardsynq-tariff", route: d.route || "", form: d.form || "", qty: d.qty || "", frequency: d.frequency || "", duration: d.duration || "", remarks: d.remarks || "" } },
+          "Prescribed.", function () { st.medDraft = {}; paint(); });
+      });
+      return;
+    }
     if (!confirmed('Prescribe "' + d.drug.name + '" for this patient in GHIS?')) return;
+    // The timeline sentence is unchanged. `rx` rides beside it so the server can file the SAME
+    // prescription structurally in the clinical record (functions/_wardsynq/migrate-prescription.js)
+    // instead of re-parsing this sentence. `generic` is the composition GHIS's own drug search
+    // returned; the safety engine indexes allergy classes and dose limits by generic, so it is
+    // carried rather than dropped. NOTE this whole call is inert today: /prescribe answers 501
+    // until QUEUE_EMR_PRESCRIBE_OK=1, and postWrite returns above without mirroring anything - so a
+    // prescription GHIS refused never reaches the record. That is deliberate, not a gap.
     postWrite("/prescribe", { drugId: d.drug.id, route: d.route || "", form: d.form || "", qty: d.qty || "", frequency: d.frequency || "", duration: d.duration || "", remarks: d.remarks || "" }, "Prescription saved.",
-      { kind: "medication", text: [d.drug.name, d.route, d.form, d.qty, d.frequency, d.duration].filter(Boolean).join(" ") + (d.remarks ? " - " + d.remarks : "") });
+      { kind: "medication", text: rxText,
+        rx: { drugId: d.drug.id, name: d.drug.name || "", generic: d.drug.sub || "", route: d.route || "", form: d.form || "", qty: d.qty || "", frequency: d.frequency || "", duration: d.duration || "", remarks: d.remarks || "" } });
   }
   function submitAssessment() {
     // An authorised record is locked in GHIS — a write would be rejected. Say so instead of failing.
@@ -1970,6 +2111,12 @@
       st.savedConsult = true; loadTimeline(); toast("Saved to " + emrLabel() + " on this device."); paint(); return;
     }
     if (!confirmed("Save this assessment to " + emrLabel() + "?")) return;
+    // WardSynQ-native hospital: straight to the WardSynQ record. No GHIS call - a WardSynQ write is
+    // the whole save, not a mirror of one, so its own success/failure is what the doctor sees.
+    if (st.source === "wardsynq") {
+      postWardsynqAssessment(buildAssessPayload(st.assessVals || {}), "Saved to " + emrLabel() + ".", false, function () { st.savedConsult = true; paint(); });
+      return;
+    }
     postWrite("/assessment-save", { patientId: st.patient.mrn || "", episodeId: st.episodeId || "", docId: oeDocId(), fields: buildAssessPayload(st.assessVals || {}) }, "Saved to " + emrLabel() + ". It appears under the patient's Initial Assessment (not Clinical notes).",
       { kind: "assessment", text: assessSummary(st.assessVals), vals: buildAssessPayload(st.assessVals || {}) }, function () { st.savedConsult = true; paint(); });
   }
@@ -1984,6 +2131,7 @@
       toast("Assessment cleared in " + emrLabel() + "."); paint(); return;
     }
     paint();
+    if (st.source === "wardsynq") { postWardsynqAssessment(buildAssessPayload({}), "Assessment cleared in " + emrLabel() + ".", false); return; }
     postWrite("/assessment-save", { patientId: st.patient.mrn || "", episodeId: st.episodeId || "", docId: oeDocId(), fields: buildAssessPayload({}) }, "Assessment cleared in " + emrLabel() + ".",
       { kind: "assessment", text: "Assessment cleared", vals: buildAssessPayload({}) });
   }
@@ -2715,13 +2863,16 @@
     st.episodeId = opts.episodeId || "";                      // GHIS visit/episode id — an Initial Assessment attaches to a visit
     st.visitId = opts.visitId || opts.episodeId || "";        // GHIS OPMR visit number — the Getopcard id for the history timeline
     st.ticketId = opts.ticketId || ""; st.sessionId = opts.sessionId || "";   // queue context -> mirror actions into the visit summary
-    st.source = opts.source || "ghis";                       // "ghis" (hospital) | "local" (personal clinic) | "shared" (shared clinic), on-device
+    st.source = opts.source || "ghis";                       // "ghis" (hospital) | "local" (personal clinic) | "shared" (shared clinic), on-device | "wardsynq" (WardSynQ-native hospital)
     st.noStore = !!opts.noStore && !usesLocal(st.source);    // no hospital MRN + no local store: Ask MaiK decision-support only, nothing is saved
-    _localStore = usesLocal(st.source) ? (opts.localStore || null) : null;
+    _localStore = usesLocal(st.source) ? (opts.localStore || null) : null;   // "wardsynq" never gets a localStore - it writes to the WardSynQ record, not this device
     st.author = opts.author || "";                                          // who is documenting this consult (for the timeline footprint)
     if (_localStore && _localStore.startConsult) { try { _localStore.startConsult(st.patient.mrn); } catch (e) {} }   // each open = a new dated entry
-    st.emrLabel = opts.emrLabel || (st.source === "shared" ? "Shared Clinic" : (st.source === "local" ? "My Clinic" : (opts.source && opts.source !== "ghis" ? "EMR" : "GHIS")));
-    st.writeOn = (usesLocal(st.source) || st.noStore) ? true : writeFlagOn();   // local/shared save is always allowed (on-device, no server gate)
+    st.emrLabel = opts.emrLabel || (st.source === "shared" ? "Shared Clinic" : (st.source === "local" ? "My Clinic" : (st.source === "wardsynq" ? "WardSynQ" : (opts.source && opts.source !== "ghis" ? "EMR" : "GHIS"))));
+    // local/shared save is always allowed (on-device, no server gate); "wardsynq" likewise - its Save
+    // button must not depend on smd_opd_emr_write/QUEUE_EMR_WRITE, which gate GHIS write-back only and
+    // are meaningless for a hospital with no GHIS relationship at all.
+    st.writeOn = (usesLocal(st.source) || st.source === "wardsynq" || st.noStore) ? true : writeFlagOn();
     st.hospitalId = opts.hospitalId || opts.orgId || "";
     if (opts.oncoPlan) st.oncoPlan = opts.oncoPlan;            // test/Phase-4 seam: inject a treatment plan already in state
     if (opts.oncoCycle) st.oncoCycle = opts.oncoCycle;         // test/Phase-5 seam: inject a cycle already in state (nurse view)
@@ -2860,6 +3011,17 @@
    * this button can call it too. */
   function authoriseConsult() {
     if (st.assessAuthorized) { toast("This assessment is already authorised."); return; }
+    // WardSynQ-native hospital: there is no GHIS doc id (oeDocId()) to gate on - the WardSynQ save
+    // itself (st.savedConsult) is what "there is something to sign" means here.
+    if (st.source === "wardsynq") {
+      if (!st.savedConsult) { toast("Save the assessment first, then authorise it."); return; }
+      if (!confirmed("Authorise this assessment?\n\nIt is signed off in " + emrLabel() + ". The record is then LOCKED - you cannot edit or save it again.")) return;
+      postWardsynqAssessment(null, "Authorised in " + emrLabel() + ".", true, function () {
+        st.assessAuthorized = { by: st.author || "", on: "" };
+        endConsult();
+      });
+      return;
+    }
     if (!oeDocId()) { toast("Save the assessment first, then authorise it."); return; }
     // Spelled out because it is irreversible: GHIS locks the record on sign-off.
     if (!confirmed("Authorise this assessment?\n\nIt is signed off in " + emrLabel() + " and moves into Clinical notes. The record is then LOCKED - you cannot edit or save it again.")) return;

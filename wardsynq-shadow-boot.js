@@ -59,6 +59,32 @@ function flagIsOn() {
   }
 }
 
+/**
+ * PURE. Combines one report() per wrapped method into the single view SMD_WARDSYNQ_SHADOW.report()
+ * returns. Extracted (2026-09-06) so this — the exact layer whose ordering mistake once made a real
+ * ward sync report `bundlesSeen: 0` — has a test that does not require a browser to run.
+ */
+function mergeReports(parts) {
+  const sum = (k) => parts.reduce((n, p) => n + p[k], 0);
+  const byMethod = {};
+  for (const p of parts) byMethod[p.method] = p;
+  return {
+    methods: parts.map((p) => p.method),
+    observed: parts.some((p) => p.observed),
+    bundlesSeen: sum("bundlesSeen"),
+    mapped: sum("mapped"),
+    shadowErrors: sum("shadowErrors"),
+    observationsMapped: sum("observationsMapped"),
+    legacyLabRows: sum("legacyLabRows"),
+    issues: parts.flatMap((p) => p.issues).slice(-50),
+    disagreements: parts.flatMap((p) => p.disagreements).slice(-50),
+    lastAt: parts.map((p) => p.lastAt).filter(Boolean).sort().pop() || null,
+    clean: parts.some((p) => p.observed)
+      && parts.every((p) => p.shadowErrors === 0 && p.disagreements.length === 0),
+    byMethod,
+  };
+}
+
 async function boot() {
   if (!flagIsOn()) return;   // OFF by default, and the default is the shipped state
 
@@ -96,27 +122,7 @@ async function boot() {
       installed: true,
       methods: observers.map((o) => o.method),
       uninstall() { observers.forEach((o) => o.uninstall()); return true; },
-      report() {
-        const parts = observers.map((o) => o.report());
-        const sum = (k) => parts.reduce((n, p) => n + p[k], 0);
-        const byMethod = {};
-        for (const p of parts) byMethod[p.method] = p;
-        return {
-          methods: parts.map((p) => p.method),
-          observed: parts.some((p) => p.observed),
-          bundlesSeen: sum("bundlesSeen"),
-          mapped: sum("mapped"),
-          shadowErrors: sum("shadowErrors"),
-          observationsMapped: sum("observationsMapped"),
-          legacyLabRows: sum("legacyLabRows"),
-          issues: parts.flatMap((p) => p.issues).slice(-50),
-          disagreements: parts.flatMap((p) => p.disagreements).slice(-50),
-          lastAt: parts.map((p) => p.lastAt).filter(Boolean).sort().pop() || null,
-          clean: parts.some((p) => p.observed)
-            && parts.every((p) => p.shadowErrors === 0 && p.disagreements.length === 0),
-          byMethod,
-        };
-      },
+      report() { return mergeReports(observers.map((o) => o.report())); },
     };
     window.SMD_WARDSYNQ_SHADOW = combined;
 
@@ -133,3 +139,5 @@ async function boot() {
 }
 
 boot();
+
+export { hasAnyMethod, flagIsOn, mergeReports, METHODS };

@@ -20,12 +20,24 @@ function patientIdForTicket(ticket) {
 }
 
 /**
- * The encounter reference vitals already carry on their Observations (migrate-vitals.js). Kept
- * exactly as it was before this file existed — no extra sanitisation — so this extraction changes
- * no id any shadow-mode tenant might already have written.
+ * The encounter reference vitals already carry on their Observations (migrate-vitals.js).
+ *
+ * WIDENED 2026-09-06 (the Encounter migration), two ways:
+ *  1. A ticket with no GHIS episode — a native, non-GHIS visit — now falls back to the TICKET's own
+ *     id, the same fallback `anchoredOrderId` below already uses for every order, prescription and
+ *     result id. Before this, a native visit's encounterId was always null on every one of the five
+ *     resource types that reference it, and an Encounter cannot be created for a null anchor — this
+ *     is what lets a native visit get a real one too.
+ *  2. The episode-id branch now runs through the SAME slug (`[^a-z0-9]+` -> "-") every sibling
+ *     helper in this file already uses (`noteIdForTicket`, `anchoredOrderId`), rather than a plain
+ *     lowercase with no character replacement. The two produce identical output for every episode id
+ *     these functions have ever actually been called with in a test (letters, digits and hyphens
+ *     only) and no tenant has ever run this in production to have written under the old spelling —
+ *     unifying it removes a needless third convention rather than changing any real id.
  */
 function encounterIdForTicket(ticket) {
-  return ticket && ticket.ghisEpisodeId ? `opd-enc-${String(ticket.ghisEpisodeId).toLowerCase()}` : null;
+  const anchor = ticket && (ticket.ghisEpisodeId || ticket.id);
+  return anchor ? `opd-enc-${String(anchor).toLowerCase().replace(/[^a-z0-9]+/g, "-")}` : null;
 }
 
 /**
@@ -52,11 +64,41 @@ function noteIdForTicket(ticket, kind) {
  * an order, and is never given a generated id to make it look like one.
  */
 function serviceRequestIdForTicket(ticket, serviceId) {
-  const anchor = ticket && (ticket.ghisEpisodeId || ticket.id);
-  const svc = String(serviceId == null ? "" : serviceId).trim();
-  if (!anchor || !svc) return null;
-  const slug = (v) => String(v).toLowerCase().replace(/[^a-z0-9]+/g, "-");
-  return `opd-order-${slug(anchor)}-${slug(svc)}`;
+  return anchoredOrderId(ticket, "order", serviceId);
 }
 
-export { patientIdForMrn, patientIdForTicket, encounterIdForTicket, noteIdForTicket, serviceRequestIdForTicket };
+/**
+ * The id ONE prescribed drug, on ONE encounter, is filed under — the same rule as an investigation
+ * order, with its own prefix so a drug id and a service id can never collide on one visit. A retried
+ * or double-tapped Prescribe resolves to the SAME MedicationOrder; two DIFFERENT drugs on one visit
+ * stay two separate orders.
+ *
+ * `null` when there is no anchor or no drug id, for the same reason: a prescription that cannot name
+ * what was prescribed is not a prescription, and is never given a generated id to look like one.
+ */
+function medicationOrderIdForTicket(ticket, drugId) {
+  return anchoredOrderId(ticket, "rx", drugId);
+}
+
+/**
+ * The id ONE result — one lab render, one radiology study — on ONE encounter, is filed under.
+ * `sourceKind` ("lab" | "rad") keeps the two apart the way "order"/"rx" already are; `sourceKey` is
+ * GHIS's OWN stable key for that one result (a lab render id, a radiology resultid) — never a
+ * timestamp, so a re-fetch of the SAME result resolves to the SAME DiagnosticReport and a change is
+ * a new VERSION, not a new entity. `null` when there is no anchor or no source key: a result that
+ * cannot name what it is a result OF is not a result.
+ */
+function diagnosticReportIdForTicket(ticket, sourceKind, sourceKey) {
+  return anchoredOrderId(ticket, `dr-${sourceKind}`, sourceKey);
+}
+
+/** The shared rule every order/result id uses: anchor on the encounter, qualify by what it is. */
+function anchoredOrderId(ticket, prefix, code) {
+  const anchor = ticket && (ticket.ghisEpisodeId || ticket.id);
+  const c = String(code == null ? "" : code).trim();
+  if (!anchor || !c) return null;
+  const slug = (v) => String(v).toLowerCase().replace(/[^a-z0-9]+/g, "-");
+  return `opd-${prefix}-${slug(anchor)}-${slug(c)}`;
+}
+
+export { patientIdForMrn, patientIdForTicket, encounterIdForTicket, noteIdForTicket, serviceRequestIdForTicket, medicationOrderIdForTicket, diagnosticReportIdForTicket };

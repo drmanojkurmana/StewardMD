@@ -622,17 +622,206 @@ record" card, name over raw id, Emergency shown as a pill. It says plainly that 
 recorded here.
 
 **Deliberately NOT done.** Results (`DiagnosticReport`) are not migrated — nothing writes one yet, so
-the card must not imply a result exists. Prescriptions are not migrated: they mirror as
-`kind:"medication"` and carry no `order` payload, so nothing here sees them. Cancelling an order is
-not modelled. `authoritative` carries the SAME honest limitation the assessment's does: GHIS accepted
-the order in a separate request before this endpoint was reached, so a WardSynQ refusal is reported,
-never a rollback.
+the card must not imply a result exists. Cancelling an order is not modelled. `authoritative` carries
+the SAME honest limitation the assessment's does: GHIS accepted the order in a separate request
+before this endpoint was reached, so a WardSynQ refusal is reported, never a rollback. (Prescriptions
+were untouched at the time; they were migrated next — below.)
+
+**The prescription, migrated (2026-09-06, seventh migration).** `opd-emr.js`'s `submitPrescribe()`
+posts `{drugId, route, form, qty, frequency, duration, remarks}` to GHIS's `/prescribe` and, only on
+success, mirrors it as a `kind:"medication"` timeline line.
+`functions/_wardsynq/migrate-prescription.js` files that same prescription structurally as the
+canonical `MedicationOrder`. Recognised by an explicit `rx` payload, never by the kind — a
+`kind:"medication"` line without one (the local clinic store's "Medication added to the record") is
+untouched. Own settings key, `prescriptions`.
+
+**READ THIS FIRST: GHIS prescribing is inert, and this migration inherits that.** `functions/api/
+ghis/[[path]].js` hard-blocks `/prescribe` unless `QUEUE_EMR_PRESCRIBE_OK=1`, because GHIS's real
+CreateDrugs payload was never captured — every field name in `prescribe()` except `frequency` is an
+UNVERIFIED guess, and a wrong field could mis-prescribe a drug. The endpoint answers 501
+`prescribe_not_verified`, and `postWrite` returns BEFORE `addToTimeline`. So **a prescription GHIS
+refused produces no record write at all**, which is the single most important safety property here:
+an active medication order for a prescription that was never placed would be the worst thing this
+code could produce. This migration therefore sits behind TWO gates, not one — the tenant's settings
+key, and GHIS prescribing becoming real. The mapping is in place for the day the second opens.
+
+**Status and signature: the existing lifecycle, preserved.** `MedicationOrder` is an
+`INSTRUCTION_TYPE`, so beyond a draft it needs EXECUTE; a signature is an act, so only the writing
+actor may sign and only a credentialed human may sign at all (`NON_HUMAN_SIGNATURE`,
+`SIGNATURE_NOT_OWN`, `NO_CREDENTIAL`). The prescriber's credential therefore decides, and nothing is
+fabricated either way: a credentialed doctor gets `status:"active"` with `signedBy` = their OWN id; a
+doctor on a PIN session gets an **unsigned draft** rather than either vanishing (NO_CREDENTIAL would
+refuse the whole write) or becoming an active order nobody signed. An AI never reaches active — it is
+capped below EXECUTE, and `GovernedStore.put` stamps `aiDrafted` itself, so the guarantee cannot be
+evaded by omitting or misspelling a claim.
+
+**Quantity is not a dose, and is never mapped as one.** The OPD prescribe form has no dose field. It
+has Quantity ("10"), which is how many units to dispense. `MedicationOrder.dose` is `{value, unit}`
+and `wardsynq-safety.js checkDose()` does ceiling arithmetic on it, so mapping Quantity there would
+silently check the wrong number against a real ceiling. `dose` is left null, `checkDose` reports
+`DOSE_UNPARSEABLE` ("ceiling checks could not run"), and Quantity is bolted on as `quantity`. An
+honest gap beats a plausible wrong number. `genericName` (`basic_material_desc` from GHIS's own drug
+search) IS carried, because the safety engine indexes allergy classes and dose limits by generic.
+
+**Deliberately NOT done.** Dispensing, administration/eMAR (`MedicationAdministration`) and
+reconciliation are not migrated, and the console card says so rather than implying a dose was given.
+PRN, timing, start/end, priority, indication and strength are not captured by the OPD form and are
+not invented. The safety engine and its thresholds are untouched.
+
+**Results, migrated (2026-09-06, eighth migration) — READ-SIDE.** Every migration before this one
+hooked a doctor's WRITE. A result is not a write the doctor makes; it is GHIS data becoming
+available, and `opd-emr.js openReport()` merely taps GHIS's `/lab-detail` or `/radiology-report`
+(untouched, response unchanged). So the seam is a mirror of a READ: after GHIS answers, the client
+separately posts what it saw to `POST /api/queue/result` (its own route segment, not "timeline" —
+a result is not a new sentence in the visit summary), which
+`functions/_wardsynq/migrate-results.js` maps into a canonical `DiagnosticReport` (+ `Observation`
+per lab test) and writes it — GHIS's own read is never slowed, blocked, or altered.
+
+**"authoritative" means something different here than in every migration before it.** Elsewhere,
+authoritative meant WardSynQ was the write target and a refusal blocked the caller. There is no such
+write for results — GHIS was never asked to write anything by this flow. Here it means only: the
+console MAY ALSO read the DiagnosticReport back from WardSynQ (`record.results = true` on the GET
+timeline handler, gated on the `results` key being `"authoritative"` SPECIFICALLY — narrower than
+the other four cards, which appear whenever the tenant's record is reachable at ALL). "shadow"
+ingests identically but exposes no such key: the console renders exactly as it does today.
+
+**Two source shapes, one canonical model — no second result model.** Lab (`getLabOrders` +
+`getLabDetail`) and radiology (`getRadiologyOrders` + `getRadiologyReport`) both map into the SAME
+`DiagnosticReport`. Lab additionally produces one `Observation` per test row (structured values
+belong there, as vitals already establishes); radiology has no discrete rows, so `conclusion`
+carries the whole narrative and `resultObservationIds` stays empty.
+
+**Terminology reused, not reinvented.** `LAB_CODE_SEED` already existed in
+`wardsynq/adapters/wardsynq-ghis-adapter.js` (the ICU/ward feed's GHIS adapter, an UNRELATED
+subsystem that already maps GHIS labs → Observation and GHIS imaging → DiagnosticReport) and is
+IMPORTED here rather than re-seeded. An unmapped test keeps its own name with
+`codeSystem: "ghis-local"` and is recorded in `issues`, never guessed at.
+
+**`DiagnosticReport.critical` is left FALSE, always — the single most safety-relevant call in this
+migration.** GHIS's own `critical` flag on a lab row is carried as `Observation.sourceCritical`
+(informational), but is NEVER used to set the canonical `DiagnosticReport.critical` field.
+`wardsynq-critical.js`'s own design rule #1 is explicit: "a source system's own critical flag is
+advisory... it is never a substitute for classifying the value against the site's own [approved]
+thresholds. An interface that trusted the sender's flag would inherit every one of the sender's
+bugs." Setting the canonical field from GHIS's claim would be exactly that mistake. Nothing here
+reads or writes `wardsynq-critical.js` at all — wiring results into closed-loop escalation is a
+separate, later decision needing the site's own approved thresholds.
+
+**LINKAGE is by name match, scoped and honest about its limit.** The lab/radiology order rows carry
+NO ServiceRequest id or GHIS service id, only a display name. `matchServiceRequest` looks up the
+patient's ServiceRequests on the SAME encounter and links to one whose `display` matches
+case-insensitively — but ONLY when exactly one candidate matches. Zero or several both leave
+`serviceRequestId: null` with `serviceRequestLinkage` recording `"unmatched"` or `"ambiguous"`,
+because guessing among several same-named orders risks the WRONG linkage. Nothing here ever creates
+a ServiceRequest to make a result look ordered.
+
+**AMENDMENTS, without a source signal for them.** Neither GHIS read path exposes a
+"preliminary → corrected" transition. A re-fetch of the SAME renderId/resultid that returns
+DIFFERENT content is represented as this model already represents any change: a new VERSION of the
+SAME `DiagnosticReport`, guarded by `expectedVersion`, prior version intact in history — `status` is
+computed fresh each time from what is actually present, never advanced to `"corrected"`, because
+claiming that source signal would be inventing one GHIS does not provide. A changed OBSERVATION
+value (a corrected lab number under an unchanged test list) still versions the REPORT, not just the
+observation, so the report's own history reflects the correction.
+
+**A real, avoidable idempotency bug, found and fixed before this shipped.** The first draft gave
+every observation and the report a STATIC `idempotencyKey` tied to the entity's own stable id
+(`result-obs:${obs.id}`). `RecordService`'s `recall()` caches an idempotency key's outcome FOREVER —
+so that key would have permanently frozen the FIRST value ever written: every later mirror sharing
+the key would replay the original result and a genuine correction would silently never land. Every
+sibling migration (`migrate-inv-order.js`, `migrate-prescription.js`, `migrate-assessment.js`) had
+already established the right pattern — accept an OPTIONAL `ctx.idempotencyKey` from the caller,
+rely on an explicit same-content check (`sameOrder`/`samePrescription`/here, `sameReport` +
+`sameObservationValue`) plus `expectedVersion` for the actual dedup and concurrency guarantee. Fixed
+to match before merge, caught by the amendment test (`written` came back `0` when it should have
+been `1`) rather than by a hospital watching a corrected result never take effect.
+
+**`DiagnosticReport` gained `encounterId`.** Missing from the model entirely — every other clinical
+resource here (Observation, ServiceRequest, MedicationOrder, ClinicalNote) already carries the visit
+it belongs to. Not a second model; the same field the rest of the model already has. The ICU/ward
+adapter's own `toDiagnosticReports` was updated to set it too, since it already had `encounter` in
+scope and had simply never had anywhere to put it.
+
+**Deliberately NOT done.** GHIS remains the source of truth in every mode: nothing here caches a
+copy the console serves INSTEAD of GHIS, and making WardSynQ the actual source of record for results
+is a separate, later, deliberate decision this migration does not make. No abnormal-vs-reference-
+range judgement is computed (GHIS's own `critical` flag is the only signal carried). Cancelling a
+result, and correcting a ServiceRequest's linkage after the fact, are not modelled.
+
+**Encounter, migrated (2026-09-06, ninth migration) — THE FOUNDATION.** Every migration before this
+one writes `encounterId` (`opd-identity.js encounterIdForTicket`) but nothing ever wrote an
+`Encounter` entity at that id — six resource types were all pointing at a record that did not exist.
+This is the ONE place that creates and closes it, so vitals, the assessment, an investigation order,
+a prescription and a result all resolve to the SAME real entity rather than a dangling reference
+each happens to agree on the spelling of.
+
+**One function serves open, continuation AND close**, because they are the same question asked at
+different moments: "what does the canonical Encounter look like right now, given this ticket's
+CURRENT state?" `recordEncounterSync` reads the ticket's own, already-governed lifecycle
+(`_queue_eta.js STATUS`/`isTerminal`, mirrored rather than re-decided) and maps it:
+
+```
+registered / waiting / called                -> "planned"
+in_consultation / investigation / followup    -> "in-progress"   (may return to the queue mid-visit)
+completed                                     -> "finished"
+cancelled / no_show                           -> "cancelled"
+```
+
+No discharge workflow is invented — these are the ticket's own three terminal states, unchanged.
+Called at ticket creation (manual add and, diffed against the roster so a poll does not re-sync
+every ticket every time, GHIS import), at every status change, and at checkout.
+
+**A closed encounter is never reopened or overwritten** — not to a different status, terminal or
+not, and not merely to refresh a field. `_queue_eta.js`'s own transition table already makes this
+UNREACHABLE via the ticket engine (a terminal ticket status has no outgoing transitions at all), but
+the record layer does not trust the caller's correctness for a fact this consequential, matching
+`wardsynq-actors.js`'s own "a signature is an act, not a string" instinct applied to a different
+guarantee. An identical repeat of the same close is still a harmless no-op.
+
+**Governance is the existing rule, extended by exactly ONE entity, not a new mechanism.** Checking a
+patient in for today's visit is the SAME administrative act registration was already judged to be
+(`actor.js`'s 2026-09-06 QUEUE_ADD note). `actor.js` was extended so QUEUE_ADD's union also adds
+`"Encounter"` to write scope, alongside `"Patient"`, for the identical reason already written there —
+reception and the desk check patients in every day and must be able to open the visit record that
+represents that, without a doctor's EMR_TREAT scope. Every role holding QUEUE_STATUS (closing a
+visit) already holds QUEUE_ADD too, so no separate grant was needed for close. `Encounter` was
+already NOT an `INSTRUCTION_TYPE` (`wardsynq-actors.js`'s own header names it as the worked example:
+"an Encounter is born 'planned'"), so no EXECUTE requirement applies — SCOPE is the real gate here,
+which is exactly what this change extends.
+
+**Identity: two widenings to `opd-identity.js`, both because no tenant has ever run this in
+production to have written under the old spelling.** (1) A native (non-GHIS) ticket's
+`encounterIdForTicket` now falls back to the ticket's own id — the SAME fallback `anchoredOrderId`
+already uses for every order/rx/result id. Before this, a native visit's `encounterId` was always
+`null` on all five prior resource types; an Encounter cannot be created for a null anchor, so this is
+what lets a native visit get a real one too, and every prior migration inherits it with zero code
+change of its own. (2) The GHIS-episode branch now runs through the SAME slug every sibling id
+helper already uses, rather than a plain lowercase with no character replacement — a needless third
+convention removed, not a real id changed (identical output for every episode id ever actually used).
+
+**Timestamps and attending clinician are what the ticket actually recorded, never a guess.**
+`periodStart` is `ticket.registeredAt` (set once, unconditionally, at check-in — the model's own
+field, not a bolt-on). `periodEnd` is `ticket.consultEndAt` when the ticket passed through a
+consultation, or the moment of closing when there is no such timestamp (a cancellation from the
+waiting room has no more precise "when did this end"). `attendingId` (bolted on — the model has no
+participant field) is the SYNCING SESSION's own doctor at that moment, not whichever actor happens to
+trigger a later resource write — a nurse recording vitals mid-visit is not the attending physician.
+
+**A known, named gap.** The stale-import reconciliation in `_queue_ghis.js importRoster` (a ticket
+that dropped off the GHIS worklist gets cancelled) calls the queue ENGINE's `setStatus` directly, a
+different path from every route segment this migration hooks. An encounter for such a ticket is not
+closed by that path today — every DELIBERATE front-desk action (manual status change, checkout) is
+covered; this one background cleanup edge is named rather than silently missed.
+
+**Deliberately NOT done.** Admissions, bed management and IPD/ICU/ED encounters — `class` is always
+`"OPD"`, and this file has no input to represent anything else. No discharge workflow beyond the
+ticket's own three terminal states. GHIS cut-over and eMAR remain untouched and unstarted.
 
 **Deliberately NOT done _by the assessment migration_** (all three were later revisited; kept here as
 the scope that migration shipped with). GHIS's "Authorise" (sign-off/lock) was untouched and a note
 from it was never `signedBy` — migrated next, as the fifth migration above. `submitInvOrder` (kind
-`"note"`) was untouched — migrated as the sixth, above. `submitPrescribe` (kind `"medication"`)
-remains untouched today.
+`"note"`) was untouched — migrated as the sixth, above. `submitPrescribe` (kind `"medication"`) was
+untouched — migrated as the seventh, above.
 
 **Deliberately NOT done.** No GHIS write migrated (`opd-emr.js` still posts to `/api/ghis`; the nurse-vitals timeline write is the one migrated, above, and only where a tenant opts in); the
 cut-over flag untouched; the 18 queue roles mapped onto actor tiers on 2026-09-06 (see "Who may do what" above); no on-prem repository; no connector
@@ -641,11 +830,215 @@ AI actor at the door (an AI draft arriving via a doctor's token is stamped as th
 `aiDrafted` preserved as a field only); no push fan-out from the server bus; polling, not push, for
 the change feed. The safety case did not move: 14 of 16, 2 partial.
 
+## The FIRST native, GHIS-independent clinical writes: registration, vitals, assessment, orders (2026-09-06)
+
+Everything above this section is GHIS-shadow tooling: it makes WardSynQ a faithful mirror of GHIS,
+never the primary record. This is the first write that goes to WardSynQ WITHOUT GHIS in the loop at
+all — the pivot from "migrate GHIS into WardSynQ" to "WardSynQ operates as its own EMR."
+
+**UPDATED same day, second pass — the native path now covers a full OPD visit, minus prescribing.**
+One shared helper, `wsqForcedMigration(env, org)` in `functions/api/queue/[[path]].js`, forces
+`{mode:"authoritative"}` (via the org's existing `connectTenantId` link, bypassing the global
+`WARDSYNQ_RECORD` flag) for any `org.mode==="wardsynq"`. It is now used at every write site:
+- **Registration** (`/patient/register`) — the org is already fetched there; one line.
+- **Encounter** (`syncEncounter()`, the ONE shared call site for ticket-add/import/status/checkout).
+- **Vitals, assessment, investigation orders** — the timeline handler's existing four-way
+  `migrator`/`ctx` dispatch (unchanged) now runs against `wsqMig || <flag-gated call>`.
+- **Vitals needed no client change at all**: the nurse-station console (`opd.html`'s `openVitals()`)
+  already posts to the generic timeline endpoint with no GHIS-specific branching.
+- **Investigation orders**: `submitInvOrder()` in `opd-emr.js` gets a `st.source==="wardsynq"` branch
+  via a new shared `postWardsynqTimeline()` helper (refactored out of the assessment path's
+  `postWardsynqAssessment`). **Known gap**: `runSearch()` still no-ops the investigation SEARCH for
+  non-GHIS sources — there is no native test/service catalog yet, so the write path is wired but a
+  doctor cannot yet pick a service to order for a wardsynq hospital without one.
+- **Prescriptions are deliberately EXCLUDED**, on purpose, not an oversight: GHIS itself hard-blocks
+  `/prescribe` because no drug-interaction/allergy/dose-ceiling CDSS is wired into OPD prescribing
+  anywhere (`wardsynq-safety.js` exists, tested, unconnected). A wardsynq hospital has no external
+  safety net to substitute — enabling native prescribing now would be LESS safe than GHIS's current
+  posture. `submitPrescribe()` has no wardsynq branch; the server's forced-mode check never includes
+  `isPrescription`. CDSS wiring is the prerequisite for this, not a follow-up nicety.
+
+**Creating a test wardsynq hospital today needs no new endpoint**: `POST /api/connect/onboard/tenants
+{name}` (creates the `connect_tenant` D1 row, self-service) → `POST /api/queue/org {name,
+mode:"wardsynq"}` → `POST /api/queue/org/update {orgId, connectTenantId}`. All three already exist.
+
+**The org's existing `mode` field gets a third, explicit value: `"wardsynq"`** (alongside `"native"` =
+personal/shared clinic, on-device `_localStore`, and `"connect"` = external FHIR EMR hospital).
+`functions/_opd_org.js`'s `org()` normalizer — the ONE choke point every org read/write passes
+through (`_opd_org_store.js`'s `createOrg`/`getOrg`/`updateOrg`/`listOrgsForOwner` all call it) — was
+widened from a two-way ternary (`o.mode === "connect" ? "connect" : "native"`) to a three-way check.
+This was the exact trap the task's stop-condition anticipated: the ternary would have silently
+collapsed any `mode:"wardsynq"` document down to `"native"`, and `queue.js`'s `_listClinics()`
+filter (`o.mode !== "connect"`) would have listed a wardsynq hospital as a personal clinic. Both are
+fixed at the root, not patched per caller. Never inferred from any other field — only an explicit
+`mode:"wardsynq"` document gets it; every pre-existing org (no mode, or an unrecognised one) still
+defaults to `"native"`, unchanged.
+
+**Why not reuse `"native"` for this.** `org.mode === "native"` is ALREADY claimed, end-to-end, by the
+personal/shared solo clinic feature: `_chooseType()`'s picker labels every non-connect org "Personal
+clinic", `openTicketEmr()`'s `inClinicWorkplace()` branch ALWAYS routes to the on-device `opdClinic()`
+store for it, and `openAdd()`'s `workplaceMode` computation feeds the same assumption into MR
+allocation. Routing `"native"` to the WardSynQ record instead would have silently moved every
+existing solo/shared clinic doctor's notes off-device into a multi-tenant server store they never
+opted into — a real regression, not the smallest change. `"wardsynq"` is additive: `"native"` and
+`"connect"` are byte-for-byte unchanged in meaning and behaviour.
+
+**Routing, all three modes:**
+- `native` → `queue.js` `_listClinics()` picker → `loadRoom()`/`startClinic()` (org+room session) →
+  `openTicketEmr()`'s `inClinicWorkplace()` branch → on-device `opdClinic()`/`_localStore`. Unchanged.
+- `connect` → `queue.js` `_listHospitals()` picker → `pickhosp` → `loadSession()` with
+  `openOpts.source:"connect"` → `openTicketEmr()`'s hospital branch, `o.source` left unset →
+  `opd-emr.js` defaults `st.source` to `"ghis"` → GHIS write-back endpoints. Unchanged.
+- `wardsynq` → `queue.js` `_listHospitals()` picker (new `pickwsq` action, alongside GHIS/connect) →
+  `loadSession()` with `openOpts.source:"wardsynq"` → `openTicketEmr()`'s hospital branch now passes
+  `o.source = "wardsynq"` explicitly → `opd-emr.js`'s `st.source = "wardsynq"` → `submitAssessment()`
+  posts straight to `POST /api/queue/timeline` (Firebase-authed, no GHIS token, no `ghisAuth()`).
+
+**The server side reuses `recordAssessment`/`recordAssessmentSignOff` verbatim** — same
+`ClinicalNote` versioning, `expectedVersion` concurrency and idempotency as the GHIS-shadow path —
+via a NEW early-return branch in the `seg === "timeline"` handler, gated purely on
+`org.mode === "wardsynq"`, checked BEFORE the flag-gated `assessmentMigration()` call. It builds
+`mig = { mode: "authoritative", tenantId }` directly from `resolveTenantForOrg` (the SAME
+`org.connectTenantId` → `connect_tenant` D1 row linkage every shadow migration already uses — no new
+linkage mechanism), bypassing `resolveMigration`'s global `WARDSYNQ_RECORD` flag entirely. That flag
+stays OFF and untouched: it governs the separate GHIS-shadow feature, meaningless for a hospital with
+no GHIS relationship at all. A wardsynq org with no `connectTenantId` linked fails honestly
+(`wardsynq_tenant_not_configured`) rather than silently no-opping. The WardSynQ write's own
+acceptance is the success condition; a refusal (`record_refused`) returns before the legacy timeline
+line is appended, never swallowed the way shadow mode's "report, never block" is.
+
+**Client-side surface area actually needed for the assessment path to work at all, beyond the write
+itself:** `st.emrLabel` gets an explicit "WardSynQ" label; `st.writeOn` no longer depends on
+`smd_opd_emr_write`/`QUEUE_EMR_WRITE` (those gate GHIS write-back rollout specifically, and would
+have hidden the Save button forever for a hospital with no GHIS); `loadProfile()` and
+`loadAssessment()` skip their GHIS fetches for `st.source === "wardsynq"` (same as they already do
+for `usesLocal`) instead of surfacing "Connect Ward Sync (GHIS) first" on every profile open. The
+existing generic timeline read (`loadTimeline()`'s non-local, non-ghis fallback — already there,
+unchanged) is the cross-device read-back: it hits the same `GET /api/queue/timeline` the new write
+populates via `QT.appendTimeline`, so a second authorised device sees the saved assessment with zero
+additional code.
+
+**Explicitly not done in this task, and why it's fine to leave for now:** investigation orders and
+prescriptions are untouched — a wardsynq hospital's Investigation/Medication tabs still target GHIS's
+search endpoints (`runSearch()`'s existing `st.source !== "ghis"` guard already no-ops them cleanly
+rather than erroring); patient registration, vitals and the Encounter migration for a wardsynq org
+still route through the flag-gated shadow machinery (off, since `WARDSYNQ_RECORD` stays 0) — the
+`ClinicalNote` write does not require a pre-existing `Patient`/`Encounter` resource (the record
+service has no referential-integrity check; it is a document store keyed by id, governed by actor
+tier/scope, not foreign keys), so the assessment note writes and reads back correctly on its own, but
+a fuller native patient chart needs the same per-org "authoritative, no global flag" treatment
+applied to those three migrations next. No admin UI creates a `mode:"wardsynq"` org yet — same as
+`"connect"` today, it is a direct data write.
+
+**Dormant duplicate, deliberately left alone:** `functions/_opd_model.js`'s `organization()` has the
+identical two-way `mode` ternary `_opd_org.js`'s did. It is unimported anywhere ("Nothing imports
+this yet — it is a contract, wired in Phase 2 onward", per its own header) and untouched by this
+change — no runtime risk, but note it before wiring it in.
+
 ## Not built yet
 
-The `ghis-ward.js` cut-over, still the biggest remaining piece of the owner's architecture: moving
-the live mobile path onto the adapter. `wardsynq-shadow.js` exists for it and `icu.js` is untouched;
-it awaits a shadow run against real ward data.
+**UPDATED 2026-09-06 — the cut-over is now wired, still off.** `wardsynq-ghis-live-boot.js` connects
+`wardsynq/wardsynq-ghis-live.js` to the real page, mirroring `wardsynq-shadow-boot.js`'s own
+architecture: polls for `window.ICU`, reads the EXISTING `smd_wardsynq_cutover` flag (no new one),
+and — only when it is on — wraps BOTH `ingestWardHistory` and `ingestFromWard` (a `method` parameter
+was added to `installLiveGhis` for this, mirroring `installShadow`'s own; without it, wiring only
+`ingestFromWard` would have wired the cut-over to a door a current build's real ward sync never
+walks through, the identical failure the shadow observer already found once). Exposed as
+`window.SMD_WARDSYNQ_LIVE`. `SMD_WARDSYNQ_LIVE.halt('<reason>')` stops every wrapped door
+in-process, no reload — the kill switch `installLiveGhis` already had, now reachable.
+
+**Writes only through the connection that already exists, never a new one.** `recordDeps()` in the
+boot script reads `window.SMD_WARDSYNQ_RECORD` — the SAME governed, tenant-bound session
+`wardsynq-record-boot.js` opens, gated by its OWN separate `?wardsynq_record=<tenantId>`. If that
+connection is live, a FRESH `KIND.ADAPTER` actor (never the signed-in doctor's own — capped at DRAFT
+by the existing actor model regardless of what tier the doctor holds) writes through it. If it is
+not — no tenant configured, which is the realistic state on any device today — `installLiveGhis` runs
+in its own already-documented DRY RUN: mapped and counted, nothing written. Turning
+`smd_wardsynq_cutover` on, alone, on a device with no `wardsynq_record` tenant, writes NOTHING. Real
+writes need both flags, deliberately — a genuine two-key control, not an accident of one script
+loading.
+
+**This PR did not perform real-device verification, on purpose** — the owner's own instruction was
+to wire the boot layer only and run that verification separately, next.
+
+### Real-device verification of the live cut-over path, 2026-09-06
+
+**STATUS: REAL-DEVICE SHADOW VERIFICATION PASSED.**
+
+Following PR #861 (the boot wiring above), the live cut-over was run once, interactively, against
+real GHIS ward-sync traffic on one controlled iPhone — the owner physically present and operating
+the device throughout, with every step confirmed over a live WebView console before proceeding to
+the next. No patient-identifying information was read or displayed at any point; only counts, status
+strings, and coded fields ever left the device.
+
+**Setup.** The device's installed build predated PR #861 (fetching `wardsynq-ghis-live-boot.js`
+from it returned `Load failed`), confirming code merged to `main` does not reach a native install
+until `build-www.sh` → `cap sync` → an Xcode rebuild → a reinstall — exactly as this vault's Deploy
+section already says. The owner explicitly accepted the session reset a reinstall causes (GHIS
+login, Firebase sign-in) and the app was rebuilt and reinstalled fresh before verification began.
+
+**What was run:**
+
+| | Before | During | After |
+|---|---|---|---|
+| `smd_wardsynq_cutover` | OFF | ON | **OFF**, confirmed on a fresh relaunch |
+| `smd_wardsynq_record` | OFF | OFF | OFF |
+| WardSynQ record connection | absent | absent | absent |
+| Live adapter (`window.SMD_WARDSYNQ_LIVE`) | absent | loaded, both methods | absent |
+
+One real ward-sync bundle came through — via `ingestWardHistory` specifically, the actual door
+`ghis-ward.js` calls on a current build, not the fallback. Sanitised report:
+
+```
+bundlesSeen: 1        mapped: 1             written: 0
+observationsMapped: 37
+adapterErrors: 0       writeErrors: 0        skippedDuplicate: 0
+divergences: 0 (no legacy/canonical row-count mismatch)
+issues: 30, ALL coded GHIS_LAB_UNMAPPED
+```
+
+**Zero WardSynQ clinical writes occurred**, and not merely as an observed outcome: with no
+`wardsynq_record` tenant connection on the device, `installLiveGhis` had no store to write through
+at all — the two-key design (cut-over flag + a separately, deliberately configured record
+connection) held exactly as designed. **GHIS behaviour was unchanged** by construction: the legacy
+`ingestWardHistory` ran first and returned its result untouched before the canonical mapping ran, on
+every one of the 693 real ward patients loaded in the roster at the time, not only the one bundle
+mapped. The kill switch was proven working: the flag was set false, the app relaunched fresh (a new
+process, not a stale in-memory instance), and after waiting past the boot script's own poll window,
+`SMD_WARDSYNQ_LIVE` was confirmed absent alongside the flag, the record flag and the record
+connection.
+
+**The one thing worth a second look, not a defect.** The first ward-list card's `onPatient(...)`
+argument for patient id came back empty for that particular entry — a real, if minor, GHIS data
+quality fact (a blank field on one roster row), not a bug in this migration; verification simply
+moved to a different patient rather than treat it as a blocker.
+
+**NOT YET APPROVED by this verification, and not attempted:** WardSynQ authoritative clinical
+writes; production cut-over; enabling either flag globally or for any tenant beyond this one
+controlled device, which was returned to OFF before the session ended.
+
+**OPEN QUALITY ITEM, named rather than hidden:** LOINC coverage for this ward's actual test menu.
+30 of 37 real lab observations in the one bundle mapped fell outside `LAB_CODE_SEED`'s seed
+vocabulary and were kept under their own GHIS name with `codeSystem: "ghis-local"` rather than a
+guessed code — correct, honest behaviour, but it means most of this ward's real lab menu is not yet
+LOINC-coded. Not a blocker to the shadow path itself; it must be addressed, by extending the seed
+map against real terminology review, before canonical lab Observations from this ward are treated as
+clinically complete. No code was changed to address it in this verification.
+
+No defects were found. No code changes were made during this verification.
+
+**Shadow mode itself, traced and hardened 2026-09-06 against the real `ghis-ward.js loadIntoICU`
+bundle shape** (`{patient, patientId, source:'Ward Sync', labs}` — no `episodeId`, so
+`toEncounter()` returns `null` for every real ward-sync bundle through this path; a stated, verified
+divergence, not a bug). Field-by-field: `demoFromPatient()`'s `dem.age/sex/bed/dept/doctor` line up
+exactly with what `toPatient`/`toEncounter` read, including the `age`-not-`dob` convention the
+adapter's own header documents as trap 1. Lab rows carry `test/result/units/low/high/date`, matching
+`toObservations` field-for-field with the optional ones simply absent. 38 existing tests already
+covered the shadow module and the adapter; `wardsynq-shadow-boot.js` — the exact layer whose ordering
+mistake (below) once made a real device look clean while seeing nothing — had ZERO test coverage
+despite that history, so `mergeReports`/`hasAnyMethod`/`flagIsOn` were extracted and exported (pure
+refactor, no behaviour change) and now have 7 tests of their own
+(`test/wardsynq-shadow-boot.test.mjs`).
 
 **How to run shadow mode, corrected 2026-09-05 after a device round.** On the web,
 `?wardsynq_shadow=1`. On the NATIVE app there is no address bar, so the query param is unreachable
@@ -661,6 +1054,16 @@ device run passed for a success while seeing nothing: the observer was wrapping 
 while `ghis-ward.js:685` calls `ingestWardHistory` on every current build. Both are wrapped now and
 `clean` requires `observed`, but the habit of checking what was actually seen is the durable lesson.
 `report().byMethod` breaks the counts down per entry point.
+
+**No tenant, actor or audit dimension exists in this mechanism, and none was added.** Unlike the
+server-side OPD migrations (`functions/_wardsynq/migrate-*.js`, gated by `WARDSYNQ_RECORD` and a
+per-tenant settings key), the shadow observer is pure client-side JS in the WebView: no server round
+trip, no `RecordService`, no store, no bus, no authenticated-actor resolution — `installShadow`'s
+deps are `{host, flags, method, logger}` and nothing else, and the boot script passes no store or
+bus "deliberately and visibly: there is nothing here for the observer to write to or emit on even if
+it tried." Tenant isolation, actor governance and audit rows are properties of the SERVER-SIDE record
+service (unchanged, untouched, `WARDSYNQ_RECORD` still off) — they do not apply to, and were not
+retrofitted onto, a mechanism whose entire safety property is that it writes nowhere at all.
 
 P0, P1, P2 and the P3 core modules are built.
 

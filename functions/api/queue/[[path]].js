@@ -41,9 +41,60 @@ import { vitalsMigration, recordVitals, patientIdForTicket } from "../../_wardsy
 import { registrationMigration, registerPatientRecord } from "../../_wardsynq/migrate-registration.js";
 import { assessmentMigration, recordAssessment, recordAssessmentSignOff } from "../../_wardsynq/migrate-assessment.js";
 import { invOrderMigration, recordInvestigationOrder } from "../../_wardsynq/migrate-inv-order.js";
+import { prescriptionMigration, recordPrescription } from "../../_wardsynq/migrate-prescription.js";
+import { resultsMigration, recordResult } from "../../_wardsynq/migrate-results.js";
+import { encounterMigration, recordEncounterSync, ENCOUNTER_TERMINAL_STATUSES } from "../../_wardsynq/migrate-encounter.js";
 import { recordLinkForOrg } from "../../_wardsynq/migration-tenant.js";
 import { actorDeps as wsqActorDeps, recordDeps as wsqRecordDeps } from "../../_wardsynq/deps.js";
+import { checkPrescriptionSafety } from "../../_wardsynq/rx-safety.js";
+import { getRulePack } from "../../_wardsynq/rulepack.js";
+import { recordAllergiesFromAssessment } from "../../_wardsynq/migrate-allergy.js";
+
+// The Encounter migration's one shared call site. Every hook below (ticket add, import, a terminal
+// status change, checkout) passes the ticket in whatever state it is NOW; recordEncounterSync reads
+// that state and decides open/continuation/close itself — see migrate-encounter.js's header for why
+// this is one function, not several. Best-effort and silent on failure at every call site: a missed
+// WardSynQ sync must never block or alter the underlying queue action that triggered it, the same
+// contract every other shadow-mode write already keeps.
+async function syncEncounter(request, env, s, ticket) {
+  try {
+    const mig = (await wsqForcedMigration(env, await ORG.getOrg(env, s.orgId || s.hospitalId))) || await encounterMigration(env, s, { getOrg: ORG.getOrg, tenantRow: wsqTenantRow });
+    if (!mig || mig.mode === "off") return null;
+    if (mig.error) return null;   // wardsynq org with no tenant linked yet — best-effort, silent, like every other syncEncounter failure
+    return await recordEncounterSync(request, env, { migration: mig, ticket, session: s, actorDeps: wsqActorDeps(env), recordDeps: wsqRecordDeps(env, mig.tenantId) });
+  } catch (e) {
+    return null;
+  }
+}
 const wsqTenantRow = (e, id) => (e.CONNECT_DB ? e.CONNECT_DB.prepare("SELECT * FROM connect_tenant WHERE id=?").bind(String(id)).first() : null);
+// NATIVE WARDSYNQ HOSPITAL (org.mode "wardsynq"): every migrated OPD write for such an org goes
+// DIRECTLY to the WardSynQ record - no GHIS, no global WARDSYNQ_RECORD shadow flag (that flag stays
+// off/untouched; it governs the separate GHIS-shadow feature entirely). Builds the SAME {mode,tenantId}
+// shape resolveMigration() would, via the org's EXISTING connectTenantId link (no new linkage
+// mechanism) — never inferred; only an explicit org.mode==="wardsynq" takes this path. Returns null
+// when the org isn't wardsynq-mode, so every caller falls through to its normal flag-gated resolution,
+// completely unchanged. An unlinked wardsynq org gets {error} rather than a silent no-op.
+//
+// 2026-09-07, real-device end-to-end verification: reads org.connectTenantId DIRECTLY rather than
+// going through resolveTenantForOrg(env, org.id, {getOrg,...}), which re-fetches the SAME org from
+// Firestore by id — every caller here already HAS a freshly-fetched org in hand (that is how it knew
+// mode==="wardsynq" in the first place). One D1 read to confirm the tenant row actually exists;
+// zero redundant Firestore round-trips. Found live: the extra fetch was one of several redundant
+// org lookups stacking up on this request (this one, then orgForTenant's own Firestore query, then
+// authorizeOrg's own getOrg, inside resolveClinicalActor) that pushed a single register/save/order
+// past a 2+ second wall time and back as a 502 - the WardSynQ record actor-resolution chain had
+// never run against real production Firestore before (WARDSYNQ_RECORD has always been 0, so no
+// shadow-mode write ever reached it either). This removes the one redundant hop under this
+// function's own control without touching the shared, already-tested resolveClinicalActor/
+// orgForTenant/authorizeOrg chain every other migration also relies on.
+async function wsqForcedMigration(env, org) {
+  if (!org || org.mode !== "wardsynq") return null;
+  const tenantId = org.connectTenantId;
+  if (!tenantId) return { mode: "authoritative", tenantId: null, error: "wardsynq_tenant_not_configured" };
+  const tenant = await wsqTenantRow(env, tenantId);
+  if (!tenant) return { mode: "authoritative", tenantId: null, error: "wardsynq_tenant_not_configured" };
+  return { mode: "authoritative", tenantId: String(tenantId) };
+}
 import "../../_opd_ghis_connector.js";   // side-effect: registers the "ghis" OPD connector
 import "../../_opd_connect_connector.js";   // side-effect: registers the "connect" OPD connector (any FHIR hospital via Connect EMR)
 import * as ONCO from "../../_onco_store.js";
@@ -329,8 +380,12 @@ export async function onRequest(context) {
         // WardSynQ record: the patient-identity migration (functions/_wardsynq/migrate-registration.js).
         // The MR number above is ALREADY allocated by this point in every mode — that allocation is
         // the one thing this migration is told to never touch. Off (every tenant today): none of this
-        // runs and the response is exactly what it always was.
-        const mig = await registrationMigration(env, { orgId: pOrg }, { getOrg: ORG.getOrg, tenantRow: wsqTenantRow });
+        // runs and the response is exactly what it always was. A wardsynq-mode org forces this
+        // authoritative directly (org already fetched above) — no global flag, same reasoning as the
+        // timeline handler's four migrations.
+        const wsqReg = await wsqForcedMigration(env, org);
+        if (wsqReg && wsqReg.error) return json({ ok: false, error: wsqReg.error, mrn: r.mrn }, 409, request);
+        const mig = wsqReg || await registrationMigration(env, { orgId: pOrg }, { getOrg: ORG.getOrg, tenantRow: wsqTenantRow });
         if (mig.mode !== "off") {
           const rec = await registerPatientRecord(request, env, { migration: mig, registration: { mrn: r.mrn, mrSource: r.mrSource, pending: r.pending, patient: r.patient }, actorDeps: wsqActorDeps(env), recordDeps: wsqRecordDeps(env, mig.tenantId) });
           if (mig.mode === "authoritative" && !rec.ok) {
@@ -411,6 +466,44 @@ export async function onRequest(context) {
       if (seg === "org") return json({ ok: true, org: await ORG.getOrg(env, orgId), departments: await ORG.listDepartments(env, orgId), rooms: await ORG.listRooms(env, orgId) }, 200, request);
       if (seg === "rooms") return json({ ok: true, rooms: await ORG.listRooms(env, orgId) }, 200, request);
       return json({ ok: true, members: await ORG.listMembers(env, orgId) }, 200, request);
+    }
+    // Native investigation/medication catalog (WardSynQ-native hospitals only, initially): a doctor
+    // searching to order a test or prescribe a drug needs SOME catalog to search, and GHIS's own
+    // /inv-search and /drug-search are meaningless for a hospital with no GHIS. Reuses the org's
+    // EXISTING billing tariff store (kind:"investigation"|"medication" rows) as the catalog — no new
+    // configuration system, and deliberately NOT gated behind CLINIC_BILLING_ENABLED: whether an
+    // org has turned invoicing on is unrelated to whether a doctor may order a test or a drug. An
+    // org with no tariff rows yet returns an empty list — honest, not fabricated — and rows are
+    // added the same way any tariff item is (bill/tariff POST). ?kind=medication added 2026-09-06
+    // for native prescribing; investigation stays the default (unchanged for every existing caller).
+    if (method === "GET" && seg === "inv-catalog") {
+      const { s, err } = await loadSessionFor(env, url.searchParams.get("sessionId"), actor); if (err) return err;
+      await requireSessionCap(env, actor, s, CAPS.EMR_TREAT);
+      const orgId = s.orgId || s.hospitalId;
+      const q = String(url.searchParams.get("q") || "").trim().toLowerCase();
+      const wantKind = url.searchParams.get("kind") === "medication" ? "medication" : "investigation";
+      let rows = (await BILL.listTariff(env, orgId)).filter((t) => t.kind === wantKind);
+      if (q) rows = rows.filter((t) => (t.name || "").toLowerCase().indexOf(q) > -1 || (t.code || "").toLowerCase().indexOf(q) > -1);
+      return json({ ok: true, rows: rows.slice(0, 50).map((t) => ({ id: t.id, name: t.name, code: t.code || "" })) }, 200, request);
+    }
+    // Native prescribing's advisory-only CDSS pre-check (WardSynQ-native hospitals). NEVER gates -
+    // see functions/_wardsynq/rx-safety.js's header (unapproved clinical content, per
+    // vault/modules/WardSynQ.md's STATUS line). The doctor sees this BEFORE confirming the
+    // prescription; the write always proceeds regardless of what it finds.
+    if (method === "GET" && seg === "rx-safety") {
+      const { s, err } = await loadSessionFor(env, url.searchParams.get("sessionId"), actor); if (err) return err;
+      await requireSessionCap(env, actor, s, CAPS.EMR_TREAT);
+      const t = await Q.getTicket(env, url.searchParams.get("ticketId") || "");
+      if (!t || t.sessionId !== s.id) return json({ ok: false, error: "not_found" }, 404, request);
+      const wOrg = await ORG.getOrg(env, s.orgId || s.hospitalId);
+      const wsq = await wsqForcedMigration(env, wOrg);
+      if (!wsq || wsq.error) return json({ ok: true, safety: { unapproved: true, rulePackVersion: null, unresolvedDrug: true, findings: [], degraded: true } }, 200, request);
+      const safety = await checkPrescriptionSafety(request, env, {
+        candidate: { drug: url.searchParams.get("drug") || "", generic: url.searchParams.get("generic") || "" },
+        patientId: patientIdForTicket(t), tenantId: wsq.tenantId,
+        actorDeps: wsqActorDeps(env), recordDeps: wsqRecordDeps(env, wsq.tenantId), rulePack: getRulePack(),
+      });
+      return json({ ok: true, safety }, 200, request);
     }
     // Nurse-station board: rooms (status/counts) + unassigned pool for an org+day.
     if (method === "GET" && seg === "opd-board") {
@@ -516,7 +609,16 @@ export async function onRequest(context) {
       // GET /api/wardsynq/:tenant/patient/:patientId/<Observation|ClinicalNote> with its own
       // credentials; the record decides for itself whether this person may see them.
       const link = await recordLinkForOrg(env, s.orgId || s.hospitalId, { getOrg: ORG.getOrg, tenantRow: wsqTenantRow });
-      if (link) out.record = { tenantId: link.tenantId, patientId: patientIdForTicket(t), ticketId: t.id };
+      if (link) {
+        out.record = { tenantId: link.tenantId, patientId: patientIdForTicket(t), ticketId: t.id };
+        // Results is the one migration where "authoritative" does not mean "WardSynQ is the write
+        // target" (see migrate-results.js's header) — GHIS is never asked to write anything here.
+        // It means only this: the console MAY ALSO read DiagnosticReport back from WardSynQ. Every
+        // other card above appears whenever the tenant's record is reachable AT ALL; this key is
+        // deliberately narrower, exactly as asked — explicit opt-in, not "any migration is on".
+        const rm = await resultsMigration(env, s, { getOrg: ORG.getOrg, tenantRow: wsqTenantRow });
+        if (rm.mode === "authoritative") out.record.results = true;
+      }
       return json(out, 200, request);
     }
     // Doctor's treated-patient history (self-expiring at the link's 7-30d window).
@@ -793,8 +895,22 @@ export async function onRequest(context) {
         return json({ ok: false, error: "not_found" }, 404, request);
       }
       const { s, err } = await loadSessionFor(env, body.sessionId, actor); if (err) return err;
-      if (seg === "ticket") { await requireSessionCap(env, actor, s, CAPS.QUEUE_ADD); const t = await Q.addTicket(env, s, body, actor.id); return json({ ok: true, ticket: (await ticketView(env, [t]))[0] }, 200, request); }
-      if (seg === "import") { await requireSessionCap(env, actor, s, CAPS.QUEUE_ADD); const r = await importRoster(env, s, body.rows || [], actor.id); return json({ ok: true, imported: r.imported, skipped: r.skipped, removed: r.removed, tickets: await ticketView(env, await Q.listTickets(env, s.id)) }, 200, request); }
+      if (seg === "ticket") {
+        await requireSessionCap(env, actor, s, CAPS.QUEUE_ADD);
+        const t = await Q.addTicket(env, s, body, actor.id);
+        await syncEncounter(request, env, s, t);   // open: today's visit begins at check-in
+        return json({ ok: true, ticket: (await ticketView(env, [t]))[0] }, 200, request);
+      }
+      if (seg === "import") {
+        await requireSessionCap(env, actor, s, CAPS.QUEUE_ADD);
+        const before = new Set((await Q.listTickets(env, s.id)).map((x) => x.id));
+        const r = await importRoster(env, s, body.rows || [], actor.id);
+        const tickets = await Q.listTickets(env, s.id);
+        // Only the tickets THIS import actually created — not the whole roster on every poll (see
+        // migrate-encounter.js's header on the reconciliation cancel this diff does not catch either).
+        for (const t of tickets) { if (!before.has(t.id)) await syncEncounter(request, env, s, t); }
+        return json({ ok: true, imported: r.imported, skipped: r.skipped, removed: r.removed, tickets: await ticketView(env, tickets) }, 200, request);
+      }
       // OPD engine → resolveOpdSource(org) → connector → existing EMR. Server pulls the worklist via the
       // org's connector (GHIS or other) instead of the client hitting /api/ghis; degrades to native.
       if (seg === "import-from-source") {
@@ -804,11 +920,22 @@ export async function onRequest(context) {
         const stored = await ORG.getOrg(env, s.hospitalId);
         const org = (stored && stored.mode === "connect") ? stored : opdOrgFor(env, s.hospitalId);
         const ghisToken = request.headers.get("X-Ghis-Token") || "";
+        const before = new Set((await Q.listTickets(env, s.id)).map((x) => x.id));
         const r = await importFromSource(env, s, org, { ghisToken: ghisToken, date: body.date || "", cb: body.cb || "", actor: actor.id });
-        return json({ ok: true, source: r.source, connector: org.connectorId || null, imported: r.imported || 0, skipped: r.skipped || 0, removed: r.removed || 0, degraded: !!r.degraded, native: !!r.native, tickets: await ticketView(env, await Q.listTickets(env, s.id)) }, 200, request);
+        const tickets = await Q.listTickets(env, s.id);
+        for (const t of tickets) { if (!before.has(t.id)) await syncEncounter(request, env, s, t); }
+        return json({ ok: true, source: r.source, connector: org.connectorId || null, imported: r.imported || 0, skipped: r.skipped || 0, removed: r.removed || 0, degraded: !!r.degraded, native: !!r.native, tickets: await ticketView(env, tickets) }, 200, request);
       }
       if (seg === "advance") { await requireSessionCap(env, actor, s, CAPS.QUEUE_STATUS); return json({ ok: true, tickets: await ticketView(env, await Q.advance(env, s, actor.id)) }, 200, request); }
-      if (seg === "status") { await requireSessionCap(env, actor, s, CAPS.QUEUE_STATUS); return json({ ok: true, tickets: await ticketView(env, await Q.setStatus(env, s, body.ticketId, body.status, actor.id)) }, 200, request); }
+      if (seg === "status") {
+        await requireSessionCap(env, actor, s, CAPS.QUEUE_STATUS);
+        const tickets = await Q.setStatus(env, s, body.ticketId, body.status, actor.id);
+        // Continuation and close both land here: recordEncounterSync reads the ticket's CURRENT
+        // status (whatever it just became) and maps it itself — see migrate-encounter.js's header.
+        const changed = tickets.find((x) => x.id === body.ticketId);
+        if (changed) await syncEncounter(request, env, s, changed);
+        return json({ ok: true, tickets: await ticketView(env, tickets) }, 200, request);
+      }
       if (seg === "priority") { await requireSessionCap(env, actor, s, CAPS.QUEUE_PRIORITY); return json({ ok: true, tickets: await ticketView(env, await Q.setPriority(env, s, body.ticketId, body.priority, actor.id)) }, 200, request); }
       if (seg === "move") { await requireSessionCap(env, actor, s, CAPS.QUEUE_REORDER); return json({ ok: true, tickets: await ticketView(env, await Q.moveTicket(env, s, body.ticketId, body, actor.id)) }, 200, request); }
       if (seg === "assign") { await requireSessionCap(env, actor, s, CAPS.QUEUE_ASSIGN); return json({ ok: true, tickets: await ticketView(env, await Q.assignTicket(env, s, body.ticketId, body.toDoctorUid, body, actor.id)) }, 200, request); }
@@ -831,35 +958,75 @@ export async function onRequest(context) {
         // apart by the structured `order` payload opd-emr.js now sends beside the sentence. A plain
         // note (the many other things that kind carries) has no `order` and is untouched.
         const isInvOrder = QT.tlKind(body.kind) === "note" && !!body.order && typeof body.order === "object";
+        // The prescription rides its own kind:"medication" line the same way, told apart by the
+        // structured `rx` payload. A "medication" line with no `rx` (the local clinic store's
+        // "Medication added to the record") is not a prescription and is untouched.
+        const isPrescription = QT.tlKind(body.kind) === "medication" && !!body.rx && typeof body.rx === "object";
         await requireSessionCap(env, actor, s, isVitals ? CAPS.EMR_VITALS : CAPS.EMR_TREAT);
         const t = await Q.getTicket(env, body.ticketId);
         if (!t || t.sessionId !== s.id) return json({ ok: false, error: "not_found" }, 404, request);
-        // Three independent migrations share this one endpoint, because that is where each write
+        // NATIVE WARDSYNQ HOSPITAL (org.mode "wardsynq"): vitals, assessment and investigation orders
+        // go DIRECTLY to the WardSynQ record for such an org - no GHIS to shadow, so this bypasses the
+        // global WARDSYNQ_RECORD flag entirely (stays OFF/untouched - it governs the separate
+        // GHIS-shadow feature). org.mode is the ONLY signal, never inferred; every other mode (native
+        // personal clinic, connect FHIR EMR, GHIS) takes the unchanged flag-gated path below. Reuses
+        // the SAME migrator/ctx dispatch and recordX functions verbatim - only how `mig` is computed
+        // differs. PRESCRIPTIONS, since 2026-09-06 (second pass): forced authoritative like the other
+        // three, now that rx-safety.js's advisory-only CDSS pre-check exists (GET /rx-safety, called
+        // by opd-emr.js BEFORE the doctor confirms). That check NEVER gates this write - it cannot,
+        // per its own header (unapproved clinical content) - so a prescription with no known
+        // interaction data behaves exactly as one with a clean check: the record write proceeds
+        // either way, informed rather than blind.
+        let wsqMig = null;
+        if (isVitals || isAssessment || isInvOrder || isPrescription) {
+          const wOrg = await ORG.getOrg(env, s.orgId || s.hospitalId);
+          wsqMig = await wsqForcedMigration(env, wOrg);
+          if (wsqMig && wsqMig.error) return json({ ok: false, error: wsqMig.error }, 409, request);
+        }
+        // Four independent migrations share this one endpoint, because that is where each write
         // already lands: the nurse's vitals (_wardsynq/migrate-vitals.js), the doctor's assessment
-        // (_wardsynq/migrate-assessment.js), and, since 2026-09-06, the doctor's investigation order
-        // (_wardsynq/migrate-inv-order.js). Each reads its OWN tenant settings key, so a clinic can
-        // run vitals on and investigations off. Prescriptions ("medication") are still not migrated,
-        // and a "note" with no `order` payload is still untouched. With the tenant "off" (the
-        // default, and every tenant today) no branch is entered and the response is unchanged.
-        const mig = isVitals ? await vitalsMigration(env, s, { getOrg: ORG.getOrg, tenantRow: wsqTenantRow })
+        // (_wardsynq/migrate-assessment.js), the investigation order (_wardsynq/migrate-inv-order.js)
+        // and, since 2026-09-06, the prescription (_wardsynq/migrate-prescription.js). Each reads its
+        // OWN tenant settings key, so a clinic can run vitals on and prescriptions off. A "note" with
+        // no `order`, and a "medication" with no `rx`, are both still untouched. With the tenant "off"
+        // (the default, and every tenant today) no branch is entered and the response is unchanged.
+        //
+        // The prescription additionally cannot fire at all for a GHIS/Connect hospital until GHIS
+        // prescribing is verified and enabled (QUEUE_EMR_PRESCRIBE_OK): /prescribe answers 501 today
+        // and opd-emr.js's postWrite returns before the timeline mirror, so a prescription GHIS
+        // refused reaches nothing here. A wardsynq org has no GHIS gate to wait on - see wsqMig above.
+        const mig = wsqMig || (isVitals ? await vitalsMigration(env, s, { getOrg: ORG.getOrg, tenantRow: wsqTenantRow })
           : isAssessment ? await assessmentMigration(env, s, { getOrg: ORG.getOrg, tenantRow: wsqTenantRow })
           : isInvOrder ? await invOrderMigration(env, s, { getOrg: ORG.getOrg, tenantRow: wsqTenantRow })
-          : { mode: "off" };
-        const migrator = isVitals ? recordVitals : isSignOff ? recordAssessmentSignOff : isInvOrder ? recordInvestigationOrder : recordAssessment;
+          : isPrescription ? await prescriptionMigration(env, s, { getOrg: ORG.getOrg, tenantRow: wsqTenantRow })
+          : { mode: "off" });
+        const migrator = isVitals ? recordVitals : isSignOff ? recordAssessmentSignOff : isInvOrder ? recordInvestigationOrder : isPrescription ? recordPrescription : recordAssessment;
         if (mig.mode !== "off") {
           const ctx = isVitals
             ? { migration: mig, session: s, ticket: t, vitals: body.vitals, note: body.vitals && body.vitals.note, recordedAt: new Date().toISOString(), actorDeps: wsqActorDeps(env), recordDeps: wsqRecordDeps(env, mig.tenantId) }
             : isInvOrder
             ? { migration: mig, session: s, ticket: t, order: body.order, actorDeps: wsqActorDeps(env), recordDeps: wsqRecordDeps(env, mig.tenantId) }
+            : isPrescription
+            ? { migration: mig, session: s, ticket: t, rx: body.rx, actorDeps: wsqActorDeps(env), recordDeps: wsqRecordDeps(env, mig.tenantId) }
             : { migration: mig, session: s, ticket: t, vals: body.vals, actorDeps: wsqActorDeps(env), recordDeps: wsqRecordDeps(env, mig.tenantId) };
           if (mig.mode === "authoritative") {
             // The record must accept before the timeline copy is made — true for vitals, whose
-            // record write and timeline write are peers in this ONE request. For the assessment and
-            // the investigation order the GHIS write already happened via a wholly separate request
-            // before this endpoint was even reached (each migrate-*.js explains why); "authoritative"
-            // there means the refusal is reported to the caller, not that anything upstream is undone.
+            // record write and timeline write are peers in this ONE request. For the assessment, the
+            // investigation order and the prescription the GHIS write already happened via a wholly
+            // separate request before this endpoint was even reached (each migrate-*.js explains
+            // why); "authoritative" there means the refusal is reported to the caller, not that
+            // anything upstream is undone.
             const rec = await migrator(request, env, ctx);
             if (!rec.ok) return json({ ok: false, error: "record_refused", wardsynq: rec }, rec.status || 502, request);
+            // Best-effort allergy capture, wardsynq-native content saves ONLY (never sign-off, which
+            // carries no vals; never a GHIS-shadow tenant that happens to also be authoritative -
+            // wsqMig, not mig.mode alone, is what distinguishes them). Reuses the SAME
+            // Known_allergies_details field the assessment form already asks every doctor - no new
+            // UI. A failure here must never affect the assessment's own success: it is exactly the
+            // syncEncounter() contract (await, but the result changes nothing about this response).
+            if (isAssessment && !isSignOff && wsqMig) {
+              try { await recordAllergiesFromAssessment(request, env, { migration: mig, ticket: t, vals: body.vals, actorDeps: wsqActorDeps(env), recordDeps: wsqRecordDeps(env, mig.tenantId), rulePack: getRulePack() }); } catch (e) {}
+            }
             const legacy = await QT.appendTimeline(env, s, t, body.kind, body.text, actor.id);
             return json(Object.assign({ ok: true }, legacy, { wardsynq: rec }), 200, request);
           }
@@ -870,6 +1037,22 @@ export async function onRequest(context) {
         }
         return json(Object.assign({ ok: true }, await QT.appendTimeline(env, s, t, body.kind, body.text, actor.id)), 200, request);
       }
+      // A mirror of a READ, not of a write (migrate-results.js's header explains why this is its own
+      // segment rather than riding "timeline"): after the client fetches a lab/radiology result from
+      // GHIS via /api/ghis (unchanged, untouched by this route), it separately reports what it saw
+      // here so a tenant with the migration on can also file it as a DiagnosticReport. There is no
+      // legacy timeline entry to append — a result is not a new sentence in the visit summary, it is
+      // GHIS data becoming available. Requires EMR_TREAT: see migrate-results.js for why a nurse's
+      // Observation-only write scope makes this a doctor-only mirror, unlike the vitals write above.
+      if (seg === "result") {
+        await requireSessionCap(env, actor, s, CAPS.EMR_TREAT);
+        const t = await Q.getTicket(env, body.ticketId);
+        if (!t || t.sessionId !== s.id) return json({ ok: false, error: "not_found" }, 404, request);
+        const mig = await resultsMigration(env, s, { getOrg: ORG.getOrg, tenantRow: wsqTenantRow });
+        const rec = await recordResult(request, env, { migration: mig, ticket: t, source: body.source, order: body.order, detail: body.detail, actorDeps: wsqActorDeps(env), recordDeps: wsqRecordDeps(env, mig.tenantId) });
+        // Best-effort either way: GHIS's read already happened and is not reopened by this outcome.
+        return json({ ok: true, wardsynq: rec }, 200, request);
+      }
       // Slide-to-checkout: seal + share the timeline, close the patient, call the next.
       if (seg === "checkout") {
         await requireSessionCap(env, actor, s, CAPS.QUEUE_STATUS);
@@ -878,6 +1061,10 @@ export async function onRequest(context) {
         const fin = await QT.finalizeCheckout(env, s, t, actor.id);
         if (t.status !== "in_consultation" && t.status !== "completed") await Q.setStatus(env, s, t.id, "in_consultation", actor.id).catch(() => {});
         await Q.setStatus(env, s, t.id, "completed", actor.id).catch(() => {});
+        // Close: the visit just ended. Read the ticket back rather than trust `t`, which is still the
+        // PRE-checkout snapshot taken above.
+        const closed = await Q.getTicket(env, t.id);
+        if (closed) await syncEncounter(request, env, s, closed);
         let sent = null; try { sent = await notifyTimeline(env, s, t, fin.url); } catch (e) {}   // WhatsApp/SMS the link
         const tickets = await Q.callNext(env, s, actor.id);
         return json({ ok: true, timelineUrl: fin.url, linkExpiresAt: fin.linkExpiresAt, sent: !!(sent && sent.ok), tickets: await ticketView(env, tickets) }, 200, request);

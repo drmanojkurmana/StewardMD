@@ -5,6 +5,62 @@ tags: [decisions, adr]
 
 Dated architectural calls + why. Newest first. Keep each short: **decision · why · trade-off · status**.
 
+## 2026-09-06 · RadioAnatome 3D — a second, LIVING body from the CT masks; geometry on R2; mobile LOD
+
+**Decision:** add the living-torso CT subject (TotalSegmentator s0108, CC BY 4.0, the same scan
+the `ct-live-torso-*` modules show) as a second 3D source next to the BodyParts3D reference body,
+meshed from the dataset's expert masks by our own `live3d.py` (marching cubes) + `pack3d.mjs`
+(meshoptimizer). Every shipped slice of the three living-torso modules is registered as a plane in
+the mesh frame, so CT → 3D lands on the living body with the slice drawn as a textured cut. Host
+all geometry on the `stewardmd-models` R2 bucket (`models.stewardmd.in/atlas3d/`) with same-origin
+as the first choice, and ship a 60%-triangle LOD of the reference body as the phone default.
+
+**Why:** BodyParts3D has no liver, lung, lobe or closed heart; the reference body is a different
+person from every slice we show, so "the same structure in 3D and on CT" was only ever a
+vocabulary link. Meshing the masks the slices came from makes it the same voxels. R2 because a
+Pages deploy caps files at 25 MiB and the branch preview host was the only working origin;
+LOD because 31.8 MB of full-detail chunks over cellular is the open device-run question.
+
+**Audit findings that shaped it:** the volume's z axis runs SUPERIOR→inferior despite the RAS
+header (measured on the masks); the reformatted coronal/sagittal volumes are flipped crops; and
+the living-torso 2D images display the patient's right on the image right (non-radiological),
+which is now a [[Roadmap]] item, not silently changed.
+
+**Trade-off:** +4.5 MB living chunks, +19.6 MB LOD chunks committed under `atlas/3d/` and mirrored
+to R2 by hand after each pipeline run (no CI step). Registration of the axial module is 19/22
+confident slices on a linear fit (the other 3 are interpolated); coronal/sagittal are 24/24.
+**Status: built, 143 tests green (52 data + 33 pure + 58 browser), screenshots verified; device
+run pending** ([[RadioAnatome 3D]]).
+
+## 2026-09-06 · RadioAnatome 3D — Human Atlas/BodyParts3D as a DATA SOURCE for one atlas, not a second viewer
+
+**Ask:** evaluate github.com/ashemag/human-atlas (2,234 BodyParts3D meshes, MIT code / CC BY 4.0 data)
+as a 3D layer that complements the CT/MRI atlas; do not copy it wholesale; link it to the same
+canonical ontology; audit licence + geometry first; report counts.
+
+**Decision:** import the DATA through our own pipeline (`atlas-pipeline/bp3d_import.py`) and render
+it with our own ~900-line WebGL1 viewer (`atlas3d.js`) inside RadioAnatome, rather than vendoring
+the React/three.js app. Why: the app is buildless ES5 and three.js is ESM-only since r160 (~650 KB);
+one anatomy system means one ontology, one catalog, one back-stack. The mapping between
+RadioAnatome canonical ids and FMA concepts is HAND-CURATED (`bp3d-map.json`), row by row from the
+concept element lists, because names do not match (TotalSegmentator `autochthon` vs four FMA
+muscles; SynthSeg `ventral DC` vs nothing). Laterality stays on the 3D side as `left`/`right`
+children of the unsided canonical id, honouring the Visible Human no-side rule.
+
+**Audit findings that shaped it:** upstream licence page (2025-02-27) confirms CC BY 4.0 with a
+mandated verbatim attribution string, so it renders only on the 3D About screen; 7 meshes are exact
+duplicates (rejected); Human Atlas files brain ventricles under "cardiac" (corrected, recorded);
+the BodyParts3D "isa" set has NO liver/lung/lobe surfaces, so those canonical structures are
+`related`-only and the UI says so instead of pretending a bronchial tree is a lung.
+
+**Trade-off:** 31.8 MB of geometry is committed to the repo under `atlas/3d/` (same precedent as the
+52 MB of slices) and streamed per system from Pages, never bundled natively and never SW-cached.
+Not yet run on a device; SwiftShader proves correctness, not frame rate.
+
+**Flag:** `smd_atlas3d` defaults ON, applying the 2026-09-04 no-per-device-gating order below;
+`?atlas3d=0` still closes it on one device. **Status: built, 111 tests green, PR open;
+device run pending** ([[RadioAnatome 3D]], `HUMAN_ATLAS_PROVENANCE.md`).
+
 ## 2026-09-04 · ICD Search — shipped default-on, no flag, from the first commit
 
 **Ask:** "now integrate ICD also and add a Search ICD button and add ICD integration into EMR/icu
@@ -4375,3 +4431,460 @@ note rather than left for someone to discover.
 
 **Not done, named:** results (`DiagnosticReport`) — nothing writes one, so the console card says so
 outright rather than leaving a doctor to wonder; cancelling an order; prescriptions.
+
+## 2026-09-06 — Prescriptions: the upstream block is the safety property, and Quantity is not a dose
+
+**Decision: do not "fix" the fact that this migration cannot fire yet.** Tracing the flow first (as
+the sign-off lesson requires) turned up that GHIS prescribing is hard-blocked: `/prescribe` answers
+501 `prescribe_not_verified` because the CreateDrugs payload was never captured, and `postWrite`
+returns before the timeline mirror. The tempting reading is "the seam is broken, hook somewhere that
+actually fires". Rejected, emphatically. That early return is what guarantees a prescription GHIS
+REFUSED can never become an active medication order in the record, which is the worst thing this
+code could produce. The migration is wired at the same seam as its four siblings and is inert behind
+two gates instead of one. Pinned by a test that asserts the 501 return still precedes the mirror.
+
+**Decision: Quantity is not a dose.** The OPD form has no dose field; it has Quantity ("10" tablets
+to dispense). `MedicationOrder.dose` is `{value, unit}` and feeds `checkDose()`'s ceiling arithmetic.
+Mapping Quantity into `dose` would have populated a field the safety engine trusts with a number that
+means something else — a silent wrong answer from a check that appears to have run. Left null, the
+engine reports DOSE_UNPARSEABLE and says the ceiling check could not run. An honest gap beats a
+plausible wrong number, and this is the clearest case of it in the migration so far.
+
+**Decision: the prescriber's credential decides draft vs active, and nothing is fabricated either
+way.** Signing requires a credential (`NO_CREDENTIAL`), so always setting `signedBy` would make a
+PIN-session doctor's prescription fail entirely, and never setting it would leave an ACTIVE
+medication order that nobody signed. Neither is acceptable for a medication. A credentialed
+prescriber signs an active order with their own id; an uncredentialed one gets an unsigned draft that
+says exactly what it is. This preserves the draft → signed → active lifecycle the model already
+documents rather than inventing a new one.
+
+**Decision: carry the generic, drop nothing the form captured.** `basic_material_desc` from GHIS's
+own drug search is the composition, and `wardsynq-safety.js` indexes allergy classes and dose limits
+BY GENERIC. Dropping it would have blinded checks that already exist. Form, quantity, duration and
+instructions have no canonical field and are bolted on, the same convention the adapters use — they
+are fields the doctor actually filled in, not inventions. PRN, timing, start/end, priority,
+indication and strength are NOT captured by the form and are not invented to look complete.
+
+**Not done, named:** dispensing; administration/eMAR (`MedicationAdministration`); reconciliation;
+cancelling a prescription; any change to the safety engine or its thresholds.
+
+## 2026-09-06 — Results: a READ-side migration, and an idempotency bug this file's own logic caught
+
+**Decision: mirror the READ, don't hook a write.** Every migration before this one intercepted a
+doctor's WRITE action. A lab/radiology result has none — the doctor merely taps to view what GHIS
+already has. Rejected: waiting for some future GHIS write-migration to hang this off of. Instead the
+client mirrors GHIS's ANSWER, after the fact, to a route of its own (`POST /api/queue/result`, not
+"timeline" — a result is not a new sentence in the visit summary). GHIS's read is never slowed,
+blocked, or altered by the mirror; a failed mirror is invisible to the doctor, because GHIS remains
+what they just read from either way.
+
+**Decision: "authoritative" changes meaning for this one migration, and that is stated explicitly
+rather than left to be discovered.** Everywhere else, authoritative means WardSynQ is the write
+target and a refusal blocks the caller. There is no write target here — GHIS was never asked to
+write anything by this flow. So authoritative is redefined, in writing, to mean only "the console
+may also read the result back from WardSynQ" — narrower than the other four cards' gate (any
+migration reachable at all), because reading a second source for the SAME fact needs its own
+explicit opt-in, not to ride in on whatever else happened to be turned on.
+
+**Decision: `DiagnosticReport.critical` is never set from GHIS's own flag.** This is the single
+safety-relevant call in the migration. `wardsynq-critical.js`'s own rule #1 says a source's critical
+flag is advisory and must never substitute for classifying against the site's OWN approved
+thresholds. Trusting GHIS's flag as if it were WardSynQ's classification would be exactly the
+mistake that rule exists to prevent — an interface that inherits every one of the sender's bugs. The
+flag is carried, informationally, as `Observation.sourceCritical`; the canonical field stays false,
+and nothing here touches the closed-loop escalation engine at all. That wiring needs the site's own
+approved thresholds and is a separate, later decision.
+
+**Decision: link a result to a ServiceRequest by name, on the SAME encounter, ONLY when exactly one
+candidate matches.** The lab/radiology order rows carry no ServiceRequest id, only a display name.
+Zero matches or several both leave the link null with the outcome recorded (`"unmatched"` /
+`"ambiguous"`) rather than guessing among several same-named orders — a wrong linkage would be worse
+than none, and the task was explicit that no ServiceRequest may ever be manufactured to make a
+result look ordered.
+
+**Decision, found and fixed before merge: a static idempotencyKey would have permanently frozen every
+result at its first-ever value.** The first draft gave the report and each observation an
+idempotencyKey built from the entity's own STABLE id. `RecordService.recall()` caches an
+idempotencyKey's outcome forever — every future `put()` sharing that key replays the ORIGINAL result,
+whatever content is passed. A genuine correction (see AMENDMENTS below) would have silently never
+taken effect; the API would report success on every call while nothing ever changed. Every sibling
+migration had already established the right pattern for exactly this reason: idempotencyKey is an
+OPTIONAL, caller-supplied value for an exact-retry, not a permanent per-entity key; the real dedup is
+an explicit same-content check (`sameOrder`/`samePrescription`, here `sameReport` +
+`sameObservationValue`) plus `expectedVersion`. The amendment test caught this directly — `written`
+came back `0` on a genuinely changed value — before it could reach a hospital.
+
+**Decision: a changed observation value versions the REPORT, not just the observation.** GHIS
+exposes no "corrected" signal on either read path, so a repeat mirror with different content is
+represented the way this model already represents any change: a new version. The report's own
+`resultObservationIds` (the SET of ids) does not change when only a VALUE inside one of them does,
+but the report is still given a new version in that case, so a doctor reading the report's own
+history sees that something in it was corrected, not just the individual test.
+
+**Decision: add `encounterId` to `DiagnosticReport`, in the model itself, not as a bolt-on.** Every
+other clinical resource here already carries it; its absence looked like an oversight, not a design
+choice, and results without an encounter link could not be shown alongside the visit that produced
+them. This is extending the ONE existing model with a field its siblings already have, not building
+a second model — the ICU/ward adapter's own report-mapping function gained the same one-line fix,
+since it already had the encounter in scope and had nowhere to put it.
+
+**Not done, named:** making WardSynQ the actual source of record for results (GHIS stays the
+external source in every mode); an abnormal-vs-reference-range judgement (GHIS's own flag is the
+only signal carried); cancelling a result; correcting a linkage after the fact; DICOM/PACS
+integration (none exists in this codebase to preserve, and none is built here).
+
+## 2026-09-06 — Encounter: closing the gap every prior migration assumed, and extending governance by exactly one entity
+
+**Decision: one function serves open, continuation and close.** Every prior migration's write had an
+obvious single trigger. A visit does not — it has a ticket lifecycle with several states that all
+mean the same underlying question. Building three separate functions (`recordEncounterOpen`,
+`recordEncounterContinue`, `recordEncounterClose`) would have meant three places to keep a
+"same-content, don't write" check and a "don't reopen a closed one" check consistent. One
+`recordEncounterSync`, called from every hook point with the ticket's CURRENT state, computes the
+right answer itself and is idempotent by the same mechanism every sibling migration already uses.
+
+**Decision: mirror `_queue_eta.js`'s own terminality, never re-decide it.** The temptation with
+`investigation`/`followup` — states that are NOT in `isTerminal()` but also are not
+`in_consultation` — was to treat them as some third, encounter-specific category. Rejected: the
+queue engine's own transition table already answers this (`investigation` can return to
+`waiting`/`called`/`in_consultation`, so it is not an end state), and re-deriving that answer here
+risks disagreeing with the engine that actually enforces it. Both map to "in-progress": still
+today's visit, not yet finished.
+
+**Decision: a closed encounter refuses ANY further change, not just a reopen.** The task's wording
+was "do not silently reopen or overwrite." The narrow reading (block only a return to a non-terminal
+status) would still have allowed a stale sync to flip `"cancelled"` to `"finished"` or vice versa.
+Rejected as too permissive for a fact this consequential to get quietly wrong. The rule is: once
+terminal, only a byte-identical repeat of the same close is accepted; anything else is refused
+outright, `encounter_closed`, matching `wardsynq-actors.js`'s own reasoning that a closed clinical
+fact needs a deliberate, governed correction, not a side effect of a routine re-sync.
+
+**Decision: extend `actor.js`'s QUEUE_ADD scope by one entity, on the SAME reasoning already
+written there, rather than invent a new capability.** Checking a patient in for today's visit is not
+a clinical judgement; it is the identical kind of administrative fact registration already was
+before this migration. Without this, reception — who does the check-in in real OPD workflows — would
+be refused SCOPE_DENIED on every single encounter this migration tries to open, making the whole
+foundation nonfunctional for its primary real-world trigger. The fix is one line (`ENCOUNTER_TYPE`
+added to the same union `PATIENT_TYPE` already goes through) rather than a parallel capability.
+
+**Decision: widen `encounterIdForTicket` to fall back to the ticket's own id, for a native visit.**
+Every other order/rx/result id already had this fallback (`anchoredOrderId`); the encounter helper,
+extracted earlier and never revisited, was the one exception. Left alone, a private clinic with no
+GHIS connection would have gotten `encounterId: null` on every one of its vitals, notes, orders,
+prescriptions and results forever — a real gap this migration exists to close, not one it can leave
+standing for exactly the visits that most need a foundation. No tenant has ever run any of this in
+production, so nothing existing needed reconciling.
+
+**Decision: timestamps and the attending clinician come from the ticket's own recorded fields, never
+a generated "now" or a resolved-actor assumption.** `periodStart`/`periodEnd` use
+`registeredAt`/`consultEndAt` when they exist; `attendingId` is the SESSION doing the sync, not the
+actor writing the record — a nurse recording vitals is not the attending doctor, and conflating the
+two would misattribute the encounter to whoever happened to touch it last for an unrelated reason.
+
+**Not done, named:** admissions, bed management, and any encounter class beyond `"OPD"`; a discharge
+workflow beyond the ticket's own three terminal states; closing an encounter for a ticket cancelled
+by the stale-import reconciliation path (engine-layer, not route-layer — see the module note); the
+GHIS cut-over and eMAR, neither started nor approved to start.
+
+## 2026-09-06 — Real shadow: verify the mechanism, fix the one gap it has, correct a stale note
+
+**Decision: do not build a second harness to prove this against "real" traffic — trace and hardened
+the ONE that exists.** The task asked to run the real GHIS shadow path against real traffic. Nothing
+here has a real GHIS credential or a physical device; fabricating pretend "real" numbers would be
+worse than saying so. What IS this agent's job, and was done: verify field-by-field that the existing
+adapter correctly maps the EXACT bundle shape `ghis-ward.js loadIntoICU` actually constructs (traced,
+confirmed correct), and hardened the one real gap tracing found — not invent a parallel proof.
+
+**Decision: `wardsynq-shadow-boot.js` needed a test, and needed it BECAUSE of its own documented
+history, not on principle.** This file's header names a real defect: an earlier version watched
+`ingestFromWard` only, while a current build calls `ingestWardHistory`, so a real device reported
+`bundlesSeen: 0` — a silent, confident-looking non-observation. That defect lived in exactly the
+kind of code (poll loop, dynamic import, multi-method merge) that is easy to leave untested because
+it "is just wiring." It had zero tests despite that history. `mergeReports`/`hasAnyMethod`/
+`flagIsOn` were extracted into named, exported, pure functions — no behaviour change, `boot()` calls
+the same logic it always did — specifically so THIS layer cannot repeat that exact failure mode
+unnoticed a second time.
+
+**Decision: correct the vault rather than let a stale "not built yet" stand next to a module that
+already is.** Tracing turned up `wardsynq/wardsynq-ghis-live.js` — 305 lines, `test/wardsynq-ghis-
+live.test.mjs` at 20/20, `wardsynq-flags.js`'s own header stating the owner approved the
+architectural cut-over on 2026-09-05 — while `vault/modules/WardSynQ.md`'s "Not built yet" section
+still said the cut-over "awaits a shadow run." Leaving that stand would have cost whoever reads it
+next a full re-discovery of work already done. The one thing that note said which remains TRUE: no
+boot script calls `installLiveGhis()`, so the built, tested, approved module is currently unwired —
+named precisely, not conflated with "not built."
+
+**Decision: state plainly that tenant/actor/audit do not apply here, rather than force-fit them.**
+The task's safety checklist named tenant isolation, authenticated-actor handling and audit behaviour.
+The shadow mechanism is pure client-side JS with no server round trip, no store, no bus — retrofitting
+a tenant or actor concept onto it would be exactly the "invent another ingestion system" the task
+forbade. Those properties belong to, and are already enforced by, the SEPARATE server-side record
+service (`functions/_wardsynq/*`, `WARDSYNQ_RECORD`) that this mechanism does not touch at all.
+
+**Not done, named:** enabling `smd_wardsynq_cutover` or wiring its boot script (explicitly out of
+scope: "do not enable authoritative cutover"); running this against an actual real device (no
+credential or hardware available here — the owner must do that step); any change to
+`wardsynq/wardsynq-ghis-live.js` itself, which this task found but was not asked to touch.
+
+## 2026-09-06 — Wiring the cut-over boot layer: one required change to the engine, and a two-key write control
+
+**Decision: add `installLiveGhis`'s `method` parameter — this WAS "absolutely required for boot
+integration," not scope creep.** The instruction was explicit: don't change `wardsynq-ghis-live.js`
+unless boot integration genuinely needs it. It does: the function only ever wrapped
+`ingestFromWard`, hardcoded, with no way to point it at `ingestWardHistory` — the door
+`ghis-ward.js` actually calls on every current build. Wiring it as-is would have shipped a boot
+script that reports `installed: true` while observing nothing, on real traffic, silently — the
+EXACT defect the shadow observer already found on a real device once, now reintroduced into its
+sibling by omission. The fix mirrors `installShadow`'s already-proven `method` parameter exactly: a
+single optional argument, default unchanged, every one of the 20 existing tests untouched and
+passing. Verified by running them before writing a single new test.
+
+**Decision: the store comes from `window.SMD_WARDSYNQ_RECORD`, and ONLY if it is already, actually
+connected — never a second connection, and never a fallback that pretends to be one.** The
+temptation was to have the boot script open its own record connection so the cut-over would "just
+work" the moment the flag is set. Rejected: that would mean flipping ONE flag starts real writes,
+which contradicts "preserve tenant/actor/governance behaviour" (a tenant is a deliberate, separate
+configuration, not something a boot script should pick on its own) and contradicts the instruction
+that real-device verification happens SEPARATELY, after this PR. Reading the EXISTING connection
+instead means turning the cut-over flag on, alone, with no tenant configured — the state every
+device will actually be in when this first ships — runs `installLiveGhis`'s own documented DRY RUN.
+Real writes require BOTH flags, deliberately: a genuine two-key control, not an accident of load
+order.
+
+**Decision: a FRESH `KIND.ADAPTER` actor, never the connected session's own human actor.** The
+record connection's `actor` is the SIGNED-IN DOCTOR, at whatever tier the server granted them
+(often EXECUTE). Passing that actor straight to `installLiveGhis` would let a feed commit through a
+human's own write tier — precisely what `wardsynq-ghis-live.js`'s own header says the adapter-actor
+convention exists to prevent. The boot layer constructs a separate, static adapter identity
+(`kind: ADAPTER, tier: DRAFT`), exactly as the module's own test harness already does, so a feed can
+never commit an active clinical record however confidently GHIS asserts one, however privileged the
+doctor whose device happens to be running it.
+
+**Not done, named:** enabling `smd_wardsynq_cutover` anywhere, by this PR or any default (ships OFF,
+stays OFF); real-device verification (the owner's own next, separate step); a tenant-selection or
+auto-connect mechanism for the record session (reuses `wardsynq-record-boot.js`'s existing one,
+unmodified); any redesign of `wardsynq-ghis-live.js`'s mapping, transaction or failure-recording
+logic, none of which this PR touches beyond the one parameter above.
+
+## 2026-09-06 — The FIRST native, GHIS-independent write: OPD assessment, `org.mode:"wardsynq"`
+
+**Decision: `mode:"wardsynq"` is a third, EXPLICIT value on the org's existing `mode` field — never
+inferred, never a new configuration system.** Traced the request to distinguish a native-WardSynQ
+hospital from an external-EMR hospital and found no existing signal did it cleanly: `org.mode` had
+exactly two values, and `"native"` was already fully claimed by the personal/shared solo clinic
+feature (on-device `_localStore`, picker-labelled "Personal clinic", `openTicketEmr()`'s
+`inClinicWorkplace()` branch) — not a placeholder for a native hospital. Reusing it would have
+silently moved every existing solo/shared clinic doctor's notes into a multi-tenant server store they
+never opted into. Per the owner's explicit instruction after that report, added `"wardsynq"` as a
+sibling value on the SAME field, reusing the SAME org row, the SAME `connectTenantId` tenant-link
+mechanism `"connect"` already uses — no new store, no new schema.
+
+**Decision: widen the org normalizer's ternary at its ONE choke point, not per-caller.** Grepped
+every `org.mode` consumer before writing code, per the task's explicit instruction. Found the real
+hazard was structural, not behavioural: `functions/_opd_org.js`'s `org()` — the single function
+`_opd_org_store.js`'s `createOrg`/`getOrg`/`updateOrg`/`listOrgsForOwner` ALL route every read and
+write through — had `mode: o.mode === "connect" ? "connect" : "native"`. Any `mode:"wardsynq"`
+document would have been silently coerced to `"native"` on its very first read, and `queue.js`'s
+`_listClinics()` filter (`o.mode !== "connect"`) would have listed it as a personal clinic. Fixed
+both at the root: one three-way check in `org()`, plus the two picker filters in `queue.js`
+(`_listHospitals()` now includes `wardsynq`, `_listClinics()` now excludes it). A dormant, unimported
+duplicate ternary in `_opd_model.js` (a Phase-2 contract nothing imports yet) was found and left
+alone, named in the vault so it doesn't surprise whoever wires it in later.
+
+**Decision: the server route forces `mode:"authoritative"` for a wardsynq org's assessment write,
+bypassing `resolveMigration`'s global `WARDSYNQ_RECORD` flag entirely — never flipping that flag.**
+The existing shadow/authoritative machinery in the `seg==="timeline"` handler is gated FIRST on
+`env.WARDSYNQ_RECORD==="1"`, a global switch the task explicitly forbade touching. But a wardsynq
+hospital has no GHIS write to shadow — there is nothing to observe, only a record to write — so
+"authoritative" isn't a rollout stage to opt into, it's the only meaningful mode. The new branch
+checks `org.mode==="wardsynq"` BEFORE that flag-gated call, resolves the tenant link directly via the
+already-exported `resolveTenantForOrg`, and constructs `{mode:"authoritative", tenantId}` itself —
+reusing `recordAssessment`/`recordAssessmentSignOff` completely unchanged (same versioning, same
+idempotency, same concurrency). A wardsynq org with no tenant linked fails honestly
+(`wardsynq_tenant_not_configured`) instead of a silent no-op that would look like a successful save.
+
+**Decision: fix `loadProfile()`/`loadAssessment()`/`st.writeOn` for the wardsynq source too, even
+though the task scoped ONLY the assessment write.** Necessary infrastructure, not scope creep: without
+these, opening ANY wardsynq patient would surface "Connect Ward Sync (GHIS) first" on the Profile tab
+(a hardcoded GHIS fetch with no source guard) and the Save button would stay permanently hidden
+(`st.writeOn` depended on `smd_opd_emr_write`, a GHIS write-back ROLLOUT flag meaningless for a
+hospital with no GHIS relationship at all) — both would have broken the one path this task exists to
+prove, before the doctor could even reach it. Investigation/Medication tabs were deliberately left
+untouched: `runSearch()`'s existing `st.source !== "ghis"` guard already no-ops them cleanly (no
+error, no crash), which is an acceptable — and explicitly out-of-scope — gap for the next task.
+
+**Not done, named:** investigation orders and prescriptions for wardsynq hospitals (explicitly
+excluded); native registration/vitals/encounter for wardsynq orgs (still behind the flag-gated
+shadow path, off) — the `ClinicalNote` write does not require a pre-existing `Patient`/`Encounter`
+resource (no referential-integrity check in the record service), so the assessment note itself works
+standalone, but a fuller chart needs the same treatment applied to those three migrations; any admin
+UI to actually create a `mode:"wardsynq"` org (a direct data write today, same as `"connect"`); CDSS
+and allergy/problem-list migration (unrelated to this task).
+
+## 2026-09-06 — Extending the native path fast: registration, vitals, encounter, investigation orders
+
+**Decision: one shared helper (`wsqForcedMigration(env, org)`) instead of repeating the tenant-
+resolve-and-force logic at each of the five write sites.** The assessment PR inlined this once,
+bespoke, inside the timeline handler. Generalizing it into a single function — `org.mode !==
+"wardsynq" → null` (caller falls through unchanged), else resolve the tenant and return
+`{mode:"authoritative", tenantId}` or `{error:"wardsynq_tenant_not_configured"}` — let every other
+site (registration, the ONE shared `syncEncounter()` call site, and vitals/investigation-orders in
+the timeline handler) reuse it in one line each, instead of five copies of the same tenant-lookup.
+Root-caused once, not patched per caller.
+
+**Decision: the timeline handler's four-way dispatch (vitals/assessment/order/prescription) is now
+computed as `wsqMig || <existing flag-gated call>`, not a bespoke early-return per write type.**
+Simpler than the assessment PR's original shape and it generalizes for free: adding vitals and
+investigation orders to the wardsynq-forced path took one line each, because the EXISTING
+migrator/ctx/authoritative-dispatch code (unchanged, already handling all four types) just runs
+against whichever `mig` it's handed.
+
+**Decision: prescriptions are explicitly, deliberately EXCLUDED from the wardsynq-forced path.** GHIS
+itself hard-blocks `/prescribe` until reviewed, specifically because no drug-interaction/allergy/dose-
+ceiling CDSS is wired into OPD prescribing anywhere (`wardsynq-safety.js` exists, built, tested, and
+is NOT connected to OPD prescribing). A wardsynq hospital has no external safety net to substitute
+for that missing check — enabling native prescribing now would be LESS safe than GHIS's own current
+posture, not equally safe. `submitPrescribe()` in `opd-emr.js` gets no wardsynq branch; the server's
+`wsqMig` computation explicitly checks `isVitals || isAssessment || isInvOrder`, never
+`isPrescription`. This is a genuine, named gap, not an oversight — CDSS wiring is the prerequisite,
+not a follow-up nicety.
+
+**Decision: investigation ordering IS enabled natively, unlike prescribing** — carries no drug-dosing
+risk, so `submitInvOrder()` gets a `st.source === "wardsynq"` branch posting through the same
+`postWardsynqTimeline()` helper the assessment path already established (refactored out of
+`postWardsynqAssessment` for reuse). **Named limitation:** `runSearch()`'s existing `st.source !==
+"ghis"` guard still no-ops the investigation SEARCH for a wardsynq hospital (same as it always has for
+local/shared clinics) — there is no native test/service catalog to search yet. The write path is
+fully wired end to end; a doctor cannot yet pick a service to order without one. Building that catalog
+is a separate, sized piece of work, not done here.
+
+**Decision: vitals needed ZERO client changes.** The nurse-station vitals entry (`opd.html`'s
+`openVitals()`, the staff web console) already posts unconditionally to the generic
+`POST /api/queue/timeline` with `kind:"vitals"` — it has no GHIS-specific branching at all. The
+server-side `wsqMig` force applies automatically based on the session's own org.mode, invisible to
+that client. This is exactly the "smallest clean change" posture: nothing to touch where nothing was
+GHIS-coupled to begin with.
+
+**Not done, named:** prescriptions (CDSS prerequisite, above); a native investigation/service catalog
+to search from; CDSS/allergy/problem-list generally; any admin UI to create a `wardsynq` org — the
+existing `POST /api/queue/org` (mode:"wardsynq") + `POST /api/queue/org/update`
+(connectTenantId) + `POST /api/connect/onboard/tenants` (creates the `connect_tenant` row) already
+suffice for a test hospital, using only existing endpoints, no new one added.
+
+## 2026-09-06 (part 4) — Wiring wardsynq-safety.js into native prescribing, best-effort, on explicit instruction
+
+The owner explicitly authorized this after being told the real gap: no allergy data exists anywhere
+in WardSynQ, so wiring the engine in tonight means best-effort. "Yes, wire it in with best-effort
+allergy list." Recorded here so the exact scope of that authorization, and its limits, are traceable.
+
+**Decision: this can never GATE a prescription — that boundary is not mine or the owner's to waive.**
+`wardsynq-safety.js`'s own rule pack and `vault/modules/WardSynQ.md`'s STATUS line both say, in
+writing, that the interaction/allergy/dose content is UNAPPROVED and "must not gate a real order
+until pharmacy and the relevant committee sign it off." That is a clinical-governance requirement
+baked into the codebase, not a caution I invented. The owner's instruction authorized WIRING the
+engine in with best-effort data — it did not, and could not, waive a documented sign-off requirement.
+So `rx-safety.js` has no `allowed`/`blocked` concept anywhere in its code (asserted directly by a
+test that strips comments and greps for the word `allowed`): it evaluates, shapes findings, and
+returns. The write always proceeds. Every response is labeled `unapproved: true`.
+
+**Decision: split the JSON-loading half from the pure-logic half, into two files.**
+`functions/_wardsynq/rulepack.js` is the ONLY file that imports the real (883 KB)
+`data/interaction-rules.json` + `wardsynq/data/allergy-classes.seed.json`, matching the existing bare-
+JSON-import precedent (`kb/protocols/rchop.json` in the route file) that Cloudflare's bundler accepts
+without an import attribute. `functions/_wardsynq/rx-safety.js` takes a compiled rule pack as a
+dependency and never touches the JSON at all — Node's own ESM loader (unlike Cloudflare's bundler)
+requires `with {type:"json"}` on a bare JSON import, and nothing in this test suite has ever executed
+`functions/api/queue/[[path]].js` as a live module (every existing test on it is a `readFileSync`
+string check) — so this split is what keeps `rx-safety.js`'s actual logic unit-testable in Node with
+small fixture packs, the same pattern `wardsynq-safety.test.mjs` already uses for the engine itself.
+
+**Decision: interaction checking is real today; allergy checking is honest about being inert today.**
+`checkPrescriptionSafety` reads the patient's ACTUAL active `MedicationOrder` history from the record
+for interactions — genuine value, no new data collection needed. It also reads
+`AllergyIntolerance` — which returns `[]` for every patient today, since no capture UI exists — so
+allergy checking contributes nothing yet. This is stated in the file's own header and re-asserted by
+a test (`allergy checking is BEST-EFFORT, honestly: empty allergy list finds nothing`), specifically
+so nobody discovers this gap by surprise later. The wiring is real and activates automatically the
+day allergy capture ships, proven by a companion test that feeds it real allergy data and confirms
+the match fires.
+
+**Decision: the doctor sees findings BEFORE confirming, not after saving.** `submitPrescribe()`'s
+wardsynq branch calls `GET /api/queue/rx-safety` first, folds any findings into the `confirm()`
+dialog text (labeled UNAPPROVED, explicitly "does not block the prescription"), and only then writes.
+A failed or degraded check (`degraded: true`) never blocks either — it just says decision support was
+unavailable, and the doctor proceeds on their own judgment, same as they would have with no check at
+all.
+
+**Decision: fixed a real, pre-existing correctness bug found while wiring this in.**
+`orderFromPrescription` hardcoded `drugCodeSystem: "ghis-drug-id"` for every prescription,
+unconditionally. A wardsynq-native prescription (drug picked from the tariff catalog, not GHIS) would
+have had its `MedicationOrder.drugCode` mislabeled as a GHIS id it is not — exactly the kind of
+mislabeling `migrate-prescription.js`'s own header calls out as dangerous elsewhere ("a wrong field
+could mis-prescribe a drug"). Fixed with a caller-supplied override (`rx.drugCodeSystem`), defaulting
+to `"ghis-drug-id"` unchanged for every existing (GHIS) caller.
+
+**Decision: native prescriptions ARE now forced authoritative, alongside vitals/assessment/orders.**
+Re-added `isPrescription` to `wsqMig`'s forced set once the advisory check existed — safe now, because
+the check can never gate the write either way. The native drug catalog reuses the SAME
+`inv-catalog`/tariff mechanism from part 3, generalized with `?kind=medication`.
+
+**Not done, named:** allergy CAPTURE (a real UI feature — check-in questionnaire, structured
+`AllergyIntolerance` writes — remains entirely unbuilt); dose-ceiling and renal-adjustment checks are
+wired into the same engine call but rest on the same UNAPPROVED seed content and the same
+never-gates posture; pharmacy/committee sign-off, which is what would ever let any of this actually
+gate an order, has not happened and is not this session's call to grant.
+
+## 2026-09-06 (part 5) — Allergy capture, from the EXISTING assessment field, not a new UI
+
+The owner said "Complete it" against the named gap ("allergy capture UI — doesn't exist"). Built the
+data-capture half of that gap without building a new UI at all, and explicitly did NOT build the
+part that would need one.
+
+**Decision: reuse `Known_allergies_details` — the field already on GHIS's own Initial Assessment
+form every doctor fills in on every patient — instead of building a check-in questionnaire.** Grepped
+for "allerg" in `opd-emr.js` before writing anything and found this field already exists, already
+captured, already free text. A new capture UI was the one thing explicitly flagged as real, unbuilt
+work; reusing existing data collection is a genuinely smaller, safer change than adding a second
+place a doctor is asked about allergies (which would also raise "which one is authoritative when
+they disagree" — a question this decision avoids by having exactly one source).
+
+**Decision: the parser is biased toward MISSING an allergy over FABRICATING one, and every design
+choice traces to that.** Stated as the file's own header, because it is the one property review
+would need to re-verify by inspection, not just by reading a summary: a missed allergy degrades to
+today's baseline (nothing) — no regression. A fabricated one (wrong substance, invented severity)
+actively corrupts the chart — strictly worse than today. Concretely: substance resolution reuses
+`wardsynq-safety.js`'s OWN `resolveGeneric()` verbatim (already "deliberately conservative: exact
+token matching only, no fuzzy matching, no stemming" — nothing added on top); an unresolved fragment
+is still stored (visible to a human as `reportedText`) but with `substance:"unspecified"`, which
+matches nothing in `checkAllergies()` by construction — never presented as machine-checked when it
+was not; severity/reaction/criticality are NEVER inferred from text, every entry is
+`severity:"unknown"`, `verifiedBy:null`; an explicit denial ("NKDA", "denies allergies") writes
+NOTHING — an entry claiming the patient was checked and clear would itself be invented. Verified by
+running the parser against the REAL 3307-generic StewardMD pack (not just a test fixture) on
+realistic clinical phrasing before writing a single test, specifically to catch a rule that looked
+correct against a small fixture but behaved differently at real vocabulary scale.
+
+**Decision: one AllergyIntolerance entry per resolved substance (or per unresolved fragment), ID'd
+by (patient, substance-or-text) — not one blob per patient.** Lets `checkAllergies()` actually match
+each one independently (a patient can be allergic to more than one thing), and makes a re-save of
+the unchanged text a true no-op (idempotent) via the same `sameAllergy()` + `expectedVersion` pattern
+every sibling migration already uses. Named trade-off, not hidden: editing the text to REMOVE a
+previously-reported entry does not retract its prior version — this store is append-only everywhere,
+and a superseded-but-still-versioned allergy is the same posture already accepted for every other
+resource here, not a new gap this feature introduces.
+
+**Decision: wired into the assessment-save path itself, gated on `isAssessment && !isSignOff &&
+wsqMig` specifically — not `mig.mode === "authoritative"` generally.** A GHIS-shadow tenant the owner
+happens to have configured as authoritative for ITS OWN reasons must not pick up allergy capture as
+a side effect of that unrelated setting; only an actual wardsynq-native org (the thing `wsqMig`
+alone signals) gets it. Best-effort or the assessment write's own success: awaited (so a Worker
+does not need `waitUntil` to guarantee it runs) but wrapped so a failure here can never turn a
+successful assessment save into a failed response — the exact `syncEncounter()` contract already
+established for the analogous case.
+
+**Not done, named:** a doctor explicitly CONFIRMING or entering a STRUCTURED allergy (picking a drug
+from a list, marking a reaction as severe/verified) remains unbuilt — that is the actual "allergy
+capture UI" gap, still open; what changed is that the free text already being collected now feeds
+the safety check instead of going nowhere. Also unchanged: this only runs for wardsynq-native
+assessments, never GHIS/shadow tenants, and the check itself still never gates a prescription
+(unrelated to what changed here — that boundary was set in part 4 and nothing here touches it).

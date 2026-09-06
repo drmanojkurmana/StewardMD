@@ -110,6 +110,12 @@ if [ -d atlas ]; then
   mkdir -p "$WWW/atlas"
   cp atlas/modules.json "$WWW/atlas/" 2>/dev/null || true
   for d in atlas/*/; do [ -f "$d/atlas.json" ] && mkdir -p "$WWW/$d" && cp "$d/atlas.json" "$WWW/$d"; done
+  # 3D layer (atlas3d.js): ship the manifest + canonical index, NOT the 31 MB of .bin.gz
+  # geometry -- atlas3d.js dataUrl() fetches those from the live origin natively.
+  if [ -d atlas/3d ]; then
+    mkdir -p "$WWW/atlas/3d"
+    cp atlas/3d/manifest.json atlas/3d/index.json "$WWW/atlas/3d/" 2>/dev/null || true
+  fi
 fi
 [ -d clinical-pathways ] && mkdir -p "$WWW/clinical-pathways" && cp -R clinical-pathways/. "$WWW/clinical-pathways/"
 # CliniX clinical-learning content (catalog + skill packs + disease pathways + the media licence
