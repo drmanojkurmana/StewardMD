@@ -44,7 +44,7 @@ import { invOrderMigration, recordInvestigationOrder } from "../../_wardsynq/mig
 import { prescriptionMigration, recordPrescription } from "../../_wardsynq/migrate-prescription.js";
 import { resultsMigration, recordResult } from "../../_wardsynq/migrate-results.js";
 import { encounterMigration, recordEncounterSync, ENCOUNTER_TERMINAL_STATUSES } from "../../_wardsynq/migrate-encounter.js";
-import { recordLinkForOrg, resolveTenantForOrg } from "../../_wardsynq/migration-tenant.js";
+import { recordLinkForOrg } from "../../_wardsynq/migration-tenant.js";
 import { actorDeps as wsqActorDeps, recordDeps as wsqRecordDeps } from "../../_wardsynq/deps.js";
 import { checkPrescriptionSafety } from "../../_wardsynq/rx-safety.js";
 import { getRulePack } from "../../_wardsynq/rulepack.js";
@@ -74,11 +74,26 @@ const wsqTenantRow = (e, id) => (e.CONNECT_DB ? e.CONNECT_DB.prepare("SELECT * F
 // mechanism) — never inferred; only an explicit org.mode==="wardsynq" takes this path. Returns null
 // when the org isn't wardsynq-mode, so every caller falls through to its normal flag-gated resolution,
 // completely unchanged. An unlinked wardsynq org gets {error} rather than a silent no-op.
+//
+// 2026-09-07, real-device end-to-end verification: reads org.connectTenantId DIRECTLY rather than
+// going through resolveTenantForOrg(env, org.id, {getOrg,...}), which re-fetches the SAME org from
+// Firestore by id — every caller here already HAS a freshly-fetched org in hand (that is how it knew
+// mode==="wardsynq" in the first place). One D1 read to confirm the tenant row actually exists;
+// zero redundant Firestore round-trips. Found live: the extra fetch was one of several redundant
+// org lookups stacking up on this request (this one, then orgForTenant's own Firestore query, then
+// authorizeOrg's own getOrg, inside resolveClinicalActor) that pushed a single register/save/order
+// past a 2+ second wall time and back as a 502 - the WardSynQ record actor-resolution chain had
+// never run against real production Firestore before (WARDSYNQ_RECORD has always been 0, so no
+// shadow-mode write ever reached it either). This removes the one redundant hop under this
+// function's own control without touching the shared, already-tested resolveClinicalActor/
+// orgForTenant/authorizeOrg chain every other migration also relies on.
 async function wsqForcedMigration(env, org) {
   if (!org || org.mode !== "wardsynq") return null;
-  const tf = await resolveTenantForOrg(env, org.id, { getOrg: ORG.getOrg, tenantRow: wsqTenantRow });
-  if (!tf.tenant) return { mode: "authoritative", tenantId: null, error: "wardsynq_tenant_not_configured" };
-  return { mode: "authoritative", tenantId: tf.tenantId };
+  const tenantId = org.connectTenantId;
+  if (!tenantId) return { mode: "authoritative", tenantId: null, error: "wardsynq_tenant_not_configured" };
+  const tenant = await wsqTenantRow(env, tenantId);
+  if (!tenant) return { mode: "authoritative", tenantId: null, error: "wardsynq_tenant_not_configured" };
+  return { mode: "authoritative", tenantId: String(tenantId) };
 }
 import "../../_opd_ghis_connector.js";   // side-effect: registers the "ghis" OPD connector
 import "../../_opd_connect_connector.js";   // side-effect: registers the "connect" OPD connector (any FHIR hospital via Connect EMR)

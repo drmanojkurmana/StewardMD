@@ -705,7 +705,13 @@ test("native WardSynQ hospital: org.mode 'wardsynq' bypasses the global flag, fo
   const helper = src.slice(src.indexOf("async function wsqForcedMigration"), src.indexOf("async function wsqForcedMigration") + 700);
   assert.ok(helper.includes('org.mode !== "wardsynq"'), "gated on the explicit org.mode value, never inferred");
   assert.ok(!helper.includes("WARDSYNQ_RECORD"), "must never read the global shadow-migration flag");
-  assert.ok(helper.includes("resolveTenantForOrg("), "reuses the existing org/tenant link — no new configuration system");
+  // 2026-09-07, real-device verification: reads org.connectTenantId directly (the caller already
+  // has a freshly-fetched org) instead of re-fetching the same org by id via resolveTenantForOrg -
+  // one redundant Firestore round-trip removed, found live (it was one of several stacking up on a
+  // single request and pushing register/save/order past 2s wall time and back as a 502).
+  assert.ok(helper.includes("org.connectTenantId"), "reuses the existing org/tenant link — no new configuration system");
+  assert.ok(!helper.includes("resolveTenantForOrg("), "no longer re-fetches the org Firestore already gave the caller");
+  assert.ok(helper.includes("wsqTenantRow("), "still confirms the tenant row actually exists (one D1 read, not zero)");
   assert.ok(helper.includes('mode: "authoritative"'), "a WardSynQ write for this org is always authoritative — there is no GHIS to shadow");
   assert.ok(helper.includes("wardsynq_tenant_not_configured"), "an unlinked wardsynq org fails honestly instead of a silent no-op");
 
