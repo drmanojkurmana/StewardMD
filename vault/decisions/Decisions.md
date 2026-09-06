@@ -4665,3 +4665,58 @@ stays OFF); real-device verification (the owner's own next, separate step); a te
 auto-connect mechanism for the record session (reuses `wardsynq-record-boot.js`'s existing one,
 unmodified); any redesign of `wardsynq-ghis-live.js`'s mapping, transaction or failure-recording
 logic, none of which this PR touches beyond the one parameter above.
+
+## 2026-09-06 — The FIRST native, GHIS-independent write: OPD assessment, `org.mode:"wardsynq"`
+
+**Decision: `mode:"wardsynq"` is a third, EXPLICIT value on the org's existing `mode` field — never
+inferred, never a new configuration system.** Traced the request to distinguish a native-WardSynQ
+hospital from an external-EMR hospital and found no existing signal did it cleanly: `org.mode` had
+exactly two values, and `"native"` was already fully claimed by the personal/shared solo clinic
+feature (on-device `_localStore`, picker-labelled "Personal clinic", `openTicketEmr()`'s
+`inClinicWorkplace()` branch) — not a placeholder for a native hospital. Reusing it would have
+silently moved every existing solo/shared clinic doctor's notes into a multi-tenant server store they
+never opted into. Per the owner's explicit instruction after that report, added `"wardsynq"` as a
+sibling value on the SAME field, reusing the SAME org row, the SAME `connectTenantId` tenant-link
+mechanism `"connect"` already uses — no new store, no new schema.
+
+**Decision: widen the org normalizer's ternary at its ONE choke point, not per-caller.** Grepped
+every `org.mode` consumer before writing code, per the task's explicit instruction. Found the real
+hazard was structural, not behavioural: `functions/_opd_org.js`'s `org()` — the single function
+`_opd_org_store.js`'s `createOrg`/`getOrg`/`updateOrg`/`listOrgsForOwner` ALL route every read and
+write through — had `mode: o.mode === "connect" ? "connect" : "native"`. Any `mode:"wardsynq"`
+document would have been silently coerced to `"native"` on its very first read, and `queue.js`'s
+`_listClinics()` filter (`o.mode !== "connect"`) would have listed it as a personal clinic. Fixed
+both at the root: one three-way check in `org()`, plus the two picker filters in `queue.js`
+(`_listHospitals()` now includes `wardsynq`, `_listClinics()` now excludes it). A dormant, unimported
+duplicate ternary in `_opd_model.js` (a Phase-2 contract nothing imports yet) was found and left
+alone, named in the vault so it doesn't surprise whoever wires it in later.
+
+**Decision: the server route forces `mode:"authoritative"` for a wardsynq org's assessment write,
+bypassing `resolveMigration`'s global `WARDSYNQ_RECORD` flag entirely — never flipping that flag.**
+The existing shadow/authoritative machinery in the `seg==="timeline"` handler is gated FIRST on
+`env.WARDSYNQ_RECORD==="1"`, a global switch the task explicitly forbade touching. But a wardsynq
+hospital has no GHIS write to shadow — there is nothing to observe, only a record to write — so
+"authoritative" isn't a rollout stage to opt into, it's the only meaningful mode. The new branch
+checks `org.mode==="wardsynq"` BEFORE that flag-gated call, resolves the tenant link directly via the
+already-exported `resolveTenantForOrg`, and constructs `{mode:"authoritative", tenantId}` itself —
+reusing `recordAssessment`/`recordAssessmentSignOff` completely unchanged (same versioning, same
+idempotency, same concurrency). A wardsynq org with no tenant linked fails honestly
+(`wardsynq_tenant_not_configured`) instead of a silent no-op that would look like a successful save.
+
+**Decision: fix `loadProfile()`/`loadAssessment()`/`st.writeOn` for the wardsynq source too, even
+though the task scoped ONLY the assessment write.** Necessary infrastructure, not scope creep: without
+these, opening ANY wardsynq patient would surface "Connect Ward Sync (GHIS) first" on the Profile tab
+(a hardcoded GHIS fetch with no source guard) and the Save button would stay permanently hidden
+(`st.writeOn` depended on `smd_opd_emr_write`, a GHIS write-back ROLLOUT flag meaningless for a
+hospital with no GHIS relationship at all) — both would have broken the one path this task exists to
+prove, before the doctor could even reach it. Investigation/Medication tabs were deliberately left
+untouched: `runSearch()`'s existing `st.source !== "ghis"` guard already no-ops them cleanly (no
+error, no crash), which is an acceptable — and explicitly out-of-scope — gap for the next task.
+
+**Not done, named:** investigation orders and prescriptions for wardsynq hospitals (explicitly
+excluded); native registration/vitals/encounter for wardsynq orgs (still behind the flag-gated
+shadow path, off) — the `ClinicalNote` write does not require a pre-existing `Patient`/`Encounter`
+resource (no referential-integrity check in the record service), so the assessment note itself works
+standalone, but a fuller chart needs the same treatment applied to those three migrations; any admin
+UI to actually create a `mode:"wardsynq"` org (a direct data write today, same as `"connect"`); CDSS
+and allergy/problem-list migration (unrelated to this task).

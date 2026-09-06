@@ -1877,7 +1877,10 @@
   // behind saveConsult in the injected store, so the EMR overlay stays storage-agnostic.
   function usesLocal(s) { return s === "local" || s === "shared"; }
   function loadProfile(opts) {
-    if (usesLocal(st.source)) { st.loading = false; paint(); return; }   // personal/shared clinic: no hospital profile/labs to fetch
+    // Personal/shared clinic: no hospital profile/labs to fetch. WardSynQ-native hospital: same - labs/
+    // radiology/medications are not migrated in this task, and there is no GHIS to fetch them from; the
+    // Profile tab must not show "Connect Ward Sync (GHIS) first" for a hospital that has no GHIS.
+    if (usesLocal(st.source) || st.source === "wardsynq") { st.loading = false; paint(); return; }
     var a = ghisAuth();
     var q = "?patientId=" + encodeURIComponent(opts.patientId || "") + "&recordNo=" + encodeURIComponent(opts.recordNo || "");
     var forPatient = st;   // guard: if the doctor opens another patient before this resolves, don't write A's labs onto B's chart
@@ -1893,7 +1896,10 @@
       .catch(function () { if (st !== forPatient) return; st.loading = false; st.error = "Could not load the patient profile."; paint(); });
   }
   function loadAssessment() {
-    if (usesLocal(st.source)) {   // personal/shared clinic: prefill from the on-device store (no GHIS fetch)
+    // Personal/shared clinic: prefill from the on-device store (no GHIS fetch). WardSynQ-native
+    // hospital: no on-device store either, and no GHIS draft to prefill from - a blank form for this
+    // encounter (the doctor's saved note is still readable afterward, via the visit timeline below).
+    if (usesLocal(st.source) || st.source === "wardsynq") {
       st.assessLoaded = true; st.assessLoading = false; st.assessErr = "";
       st.assessVals = (_localStore && _localStore.getConsult) ? (_localStore.getConsult(st.patient.mrn) || {}) : {};
       paint(); return;
@@ -1967,6 +1973,37 @@
       })
       .catch(function () { toast("Could not complete the request. Please try again."); });
   }
+  // WardSynQ-native hospital (source "wardsynq"): the assessment write goes DIRECTLY to the WardSynQ
+  // record over the SAME /api/queue/timeline endpoint addToTimeline() already posts to for the GHIS
+  // shadow mirror - but here it IS the save, not a best-effort mirror: a refusal is reported to the
+  // doctor, never swallowed, and success means the WardSynQ record accepted it - no GHIS involved at
+  // all. Firebase-authed (qBase/fbTok, same as addToTimeline), never _localStore.
+  function wardsynqSay(d) {
+    var err = d && d.error;
+    if (err === "wardsynq_tenant_not_configured") return "WardSynQ is not fully set up for this hospital yet. Contact support.";
+    if (err === "record_refused") return "Could not save to the clinical record - " + ((d.wardsynq && d.wardsynq.error) || "try again") + ".";
+    if (err === "not_found") return "This visit could not be found. Reopen the patient from the queue and try again.";
+    return "Could not complete the request. Please try again.";
+  }
+  function postWardsynqAssessment(vals, okMsg, signOff, onOk) {
+    if (!st.ticketId || !st.sessionId) { toast("Open this patient from the queue to save."); return; }
+    fbTok().then(function (t) {
+      if (!t) { toast("Sign in to WardSynQ first."); return; }
+      var body = { sessionId: st.sessionId, ticketId: st.ticketId, kind: "assessment", text: assessSummary(st.assessVals) };
+      if (vals) body.vals = vals;
+      if (signOff) body.signOff = true;
+      fetch(qBase() + "/api/queue/timeline", { method: "POST", headers: { "Content-Type": "application/json", Authorization: "Bearer " + t }, body: JSON.stringify(body) })
+        .then(function (r) { return r.json().then(function (d) { return { status: r.status, ok: r.ok, d: d || {} }; }); })
+        .then(function (res) {
+          var d = res.d;
+          if (!res.ok || d.ok === false) { toast(wardsynqSay(d)); return; }
+          toast(okMsg);
+          setTimeout(loadTimeline, 600);
+          if (onOk) try { onOk(); } catch (e) {}
+        })
+        .catch(function () { toast("Could not complete the request. Please try again."); });
+    }).catch(function () { toast("Could not complete the request. Please try again."); });
+  }
   function confirmed(msg) { try { return !!(G.confirm && G.confirm(msg)); } catch (e) { return false; } }
   function submitInvOrder() {
     var d = st.invDraft || {}; if (!d.service) return;
@@ -2003,6 +2040,12 @@
       st.savedConsult = true; loadTimeline(); toast("Saved to " + emrLabel() + " on this device."); paint(); return;
     }
     if (!confirmed("Save this assessment to " + emrLabel() + "?")) return;
+    // WardSynQ-native hospital: straight to the WardSynQ record. No GHIS call - a WardSynQ write is
+    // the whole save, not a mirror of one, so its own success/failure is what the doctor sees.
+    if (st.source === "wardsynq") {
+      postWardsynqAssessment(buildAssessPayload(st.assessVals || {}), "Saved to " + emrLabel() + ".", false, function () { st.savedConsult = true; paint(); });
+      return;
+    }
     postWrite("/assessment-save", { patientId: st.patient.mrn || "", episodeId: st.episodeId || "", docId: oeDocId(), fields: buildAssessPayload(st.assessVals || {}) }, "Saved to " + emrLabel() + ". It appears under the patient's Initial Assessment (not Clinical notes).",
       { kind: "assessment", text: assessSummary(st.assessVals), vals: buildAssessPayload(st.assessVals || {}) }, function () { st.savedConsult = true; paint(); });
   }
@@ -2017,6 +2060,7 @@
       toast("Assessment cleared in " + emrLabel() + "."); paint(); return;
     }
     paint();
+    if (st.source === "wardsynq") { postWardsynqAssessment(buildAssessPayload({}), "Assessment cleared in " + emrLabel() + ".", false); return; }
     postWrite("/assessment-save", { patientId: st.patient.mrn || "", episodeId: st.episodeId || "", docId: oeDocId(), fields: buildAssessPayload({}) }, "Assessment cleared in " + emrLabel() + ".",
       { kind: "assessment", text: "Assessment cleared", vals: buildAssessPayload({}) });
   }
@@ -2748,13 +2792,16 @@
     st.episodeId = opts.episodeId || "";                      // GHIS visit/episode id — an Initial Assessment attaches to a visit
     st.visitId = opts.visitId || opts.episodeId || "";        // GHIS OPMR visit number — the Getopcard id for the history timeline
     st.ticketId = opts.ticketId || ""; st.sessionId = opts.sessionId || "";   // queue context -> mirror actions into the visit summary
-    st.source = opts.source || "ghis";                       // "ghis" (hospital) | "local" (personal clinic) | "shared" (shared clinic), on-device
+    st.source = opts.source || "ghis";                       // "ghis" (hospital) | "local" (personal clinic) | "shared" (shared clinic), on-device | "wardsynq" (WardSynQ-native hospital)
     st.noStore = !!opts.noStore && !usesLocal(st.source);    // no hospital MRN + no local store: Ask MaiK decision-support only, nothing is saved
-    _localStore = usesLocal(st.source) ? (opts.localStore || null) : null;
+    _localStore = usesLocal(st.source) ? (opts.localStore || null) : null;   // "wardsynq" never gets a localStore - it writes to the WardSynQ record, not this device
     st.author = opts.author || "";                                          // who is documenting this consult (for the timeline footprint)
     if (_localStore && _localStore.startConsult) { try { _localStore.startConsult(st.patient.mrn); } catch (e) {} }   // each open = a new dated entry
-    st.emrLabel = opts.emrLabel || (st.source === "shared" ? "Shared Clinic" : (st.source === "local" ? "My Clinic" : (opts.source && opts.source !== "ghis" ? "EMR" : "GHIS")));
-    st.writeOn = (usesLocal(st.source) || st.noStore) ? true : writeFlagOn();   // local/shared save is always allowed (on-device, no server gate)
+    st.emrLabel = opts.emrLabel || (st.source === "shared" ? "Shared Clinic" : (st.source === "local" ? "My Clinic" : (st.source === "wardsynq" ? "WardSynQ" : (opts.source && opts.source !== "ghis" ? "EMR" : "GHIS"))));
+    // local/shared save is always allowed (on-device, no server gate); "wardsynq" likewise - its Save
+    // button must not depend on smd_opd_emr_write/QUEUE_EMR_WRITE, which gate GHIS write-back only and
+    // are meaningless for a hospital with no GHIS relationship at all.
+    st.writeOn = (usesLocal(st.source) || st.source === "wardsynq" || st.noStore) ? true : writeFlagOn();
     st.hospitalId = opts.hospitalId || opts.orgId || "";
     if (opts.oncoPlan) st.oncoPlan = opts.oncoPlan;            // test/Phase-4 seam: inject a treatment plan already in state
     if (opts.oncoCycle) st.oncoCycle = opts.oncoCycle;         // test/Phase-5 seam: inject a cycle already in state (nurse view)
@@ -2893,6 +2940,17 @@
    * this button can call it too. */
   function authoriseConsult() {
     if (st.assessAuthorized) { toast("This assessment is already authorised."); return; }
+    // WardSynQ-native hospital: there is no GHIS doc id (oeDocId()) to gate on - the WardSynQ save
+    // itself (st.savedConsult) is what "there is something to sign" means here.
+    if (st.source === "wardsynq") {
+      if (!st.savedConsult) { toast("Save the assessment first, then authorise it."); return; }
+      if (!confirmed("Authorise this assessment?\n\nIt is signed off in " + emrLabel() + ". The record is then LOCKED - you cannot edit or save it again.")) return;
+      postWardsynqAssessment(null, "Authorised in " + emrLabel() + ".", true, function () {
+        st.assessAuthorized = { by: st.author || "", on: "" };
+        endConsult();
+      });
+      return;
+    }
     if (!oeDocId()) { toast("Save the assessment first, then authorise it."); return; }
     // Spelled out because it is irreversible: GHIS locks the record on sign-off.
     if (!confirmed("Authorise this assessment?\n\nIt is signed off in " + emrLabel() + " and moves into Clinical notes. The record is then LOCKED - you cannot edit or save it again.")) return;

@@ -686,6 +686,37 @@ test("the queue timeline handler orders the writes by mode and leaves the off pa
   assert.ok(html.includes('kind:"vitals",text:p.join(" · "),vitals:vitals'));
 });
 
+// 2026-09-06: the FIRST native, GHIS-independent clinical write. A hospital whose org.mode is
+// "wardsynq" (WardSynQ itself is the EMR/HIS — never inferred, never GHIS, never the on-device
+// personal-clinic path) has its assessment save/sign-off go straight to the WardSynQ record,
+// bypassing the shadow/authoritative machinery above entirely — that machinery stays gated on the
+// GLOBAL WARDSYNQ_RECORD flag, which must stay OFF and untouched by this feature.
+test("native WardSynQ hospital: org.mode 'wardsynq' bypasses the global flag, forces authoritative, and every other mode is untouched", () => {
+  const src = readFileSync(new URL("../functions/api/queue/[[path]].js", import.meta.url), "utf8");
+  const h = src.slice(src.indexOf('if (seg === "timeline") {'), src.indexOf('// Slide-to-checkout'));
+  const i = (needle) => { const k = h.indexOf(needle); assert.ok(k >= 0, "missing: " + needle); return k; };
+  // The org.mode check happens for isAssessment ONLY (not vitals/invOrder/prescription — out of
+  // scope for this task) and BEFORE the flag-gated assessmentMigration() call below it.
+  const wardsynqBranch = i('if (isAssessment) {');
+  const flagGatedCall = i('isAssessment ? await assessmentMigration(');
+  assert.ok(wardsynqBranch < flagGatedCall, "the wardsynq org.mode check must run before the flag-gated shadow/authoritative path");
+  const branch = h.slice(wardsynqBranch, flagGatedCall);
+  assert.ok(branch.includes('wOrg.mode === "wardsynq"'), "gated on the explicit org.mode value, never inferred");
+  assert.ok(!branch.includes("WARDSYNQ_RECORD"), "must never read the global shadow-migration flag");
+  assert.ok(branch.includes('resolveTenantForOrg('), "reuses the existing org/tenant link — no new configuration system");
+  assert.ok(branch.includes('mode: "authoritative"'), "a WardSynQ write for this org is always authoritative — there is no GHIS to shadow");
+  assert.ok(branch.includes('isSignOff ? recordAssessmentSignOff : recordAssessment'), "reuses the SAME save/sign-off functions verbatim");
+  // Success is the WardSynQ write's own success — a refusal short-circuits before the legacy
+  // timeline line is ever appended, and is never silently swallowed (shadow's "report, never block").
+  assert.ok(branch.indexOf("!rec.ok") < branch.indexOf("QT.appendTimeline("), "a record refusal must return before the timeline write");
+  assert.ok(branch.includes('error: "record_refused"'));
+  assert.ok(branch.includes('wardsynq_tenant_not_configured'), "an unlinked wardsynq org fails honestly instead of a silent no-op");
+  // Every other mode (native personal clinic, connect FHIR EMR, GHIS) never enters this branch —
+  // it is gated purely on org.mode, and the existing shadow/off/authoritative dispatch immediately
+  // below is completely unchanged (already asserted above: the migrator line, the off-path line).
+  assert.ok(wardsynqBranch < i('const mig = isVitals ? await vitalsMigration('));
+});
+
 /* ------------------------------------------------------------------ the doctor reads the vitals back */
 
 test("the timeline GET names the record only where the tenant is on; the console reads it through the record's own door with its own credentials", () => {
