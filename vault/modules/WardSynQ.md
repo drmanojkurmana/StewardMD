@@ -622,17 +622,57 @@ record" card, name over raw id, Emergency shown as a pill. It says plainly that 
 recorded here.
 
 **Deliberately NOT done.** Results (`DiagnosticReport`) are not migrated — nothing writes one yet, so
-the card must not imply a result exists. Prescriptions are not migrated: they mirror as
-`kind:"medication"` and carry no `order` payload, so nothing here sees them. Cancelling an order is
-not modelled. `authoritative` carries the SAME honest limitation the assessment's does: GHIS accepted
-the order in a separate request before this endpoint was reached, so a WardSynQ refusal is reported,
-never a rollback.
+the card must not imply a result exists. Cancelling an order is not modelled. `authoritative` carries
+the SAME honest limitation the assessment's does: GHIS accepted the order in a separate request
+before this endpoint was reached, so a WardSynQ refusal is reported, never a rollback. (Prescriptions
+were untouched at the time; they were migrated next — below.)
+
+**The prescription, migrated (2026-09-06, seventh migration).** `opd-emr.js`'s `submitPrescribe()`
+posts `{drugId, route, form, qty, frequency, duration, remarks}` to GHIS's `/prescribe` and, only on
+success, mirrors it as a `kind:"medication"` timeline line.
+`functions/_wardsynq/migrate-prescription.js` files that same prescription structurally as the
+canonical `MedicationOrder`. Recognised by an explicit `rx` payload, never by the kind — a
+`kind:"medication"` line without one (the local clinic store's "Medication added to the record") is
+untouched. Own settings key, `prescriptions`.
+
+**READ THIS FIRST: GHIS prescribing is inert, and this migration inherits that.** `functions/api/
+ghis/[[path]].js` hard-blocks `/prescribe` unless `QUEUE_EMR_PRESCRIBE_OK=1`, because GHIS's real
+CreateDrugs payload was never captured — every field name in `prescribe()` except `frequency` is an
+UNVERIFIED guess, and a wrong field could mis-prescribe a drug. The endpoint answers 501
+`prescribe_not_verified`, and `postWrite` returns BEFORE `addToTimeline`. So **a prescription GHIS
+refused produces no record write at all**, which is the single most important safety property here:
+an active medication order for a prescription that was never placed would be the worst thing this
+code could produce. This migration therefore sits behind TWO gates, not one — the tenant's settings
+key, and GHIS prescribing becoming real. The mapping is in place for the day the second opens.
+
+**Status and signature: the existing lifecycle, preserved.** `MedicationOrder` is an
+`INSTRUCTION_TYPE`, so beyond a draft it needs EXECUTE; a signature is an act, so only the writing
+actor may sign and only a credentialed human may sign at all (`NON_HUMAN_SIGNATURE`,
+`SIGNATURE_NOT_OWN`, `NO_CREDENTIAL`). The prescriber's credential therefore decides, and nothing is
+fabricated either way: a credentialed doctor gets `status:"active"` with `signedBy` = their OWN id; a
+doctor on a PIN session gets an **unsigned draft** rather than either vanishing (NO_CREDENTIAL would
+refuse the whole write) or becoming an active order nobody signed. An AI never reaches active — it is
+capped below EXECUTE, and `GovernedStore.put` stamps `aiDrafted` itself, so the guarantee cannot be
+evaded by omitting or misspelling a claim.
+
+**Quantity is not a dose, and is never mapped as one.** The OPD prescribe form has no dose field. It
+has Quantity ("10"), which is how many units to dispense. `MedicationOrder.dose` is `{value, unit}`
+and `wardsynq-safety.js checkDose()` does ceiling arithmetic on it, so mapping Quantity there would
+silently check the wrong number against a real ceiling. `dose` is left null, `checkDose` reports
+`DOSE_UNPARSEABLE` ("ceiling checks could not run"), and Quantity is bolted on as `quantity`. An
+honest gap beats a plausible wrong number. `genericName` (`basic_material_desc` from GHIS's own drug
+search) IS carried, because the safety engine indexes allergy classes and dose limits by generic.
+
+**Deliberately NOT done.** Dispensing, administration/eMAR (`MedicationAdministration`) and
+reconciliation are not migrated, and the console card says so rather than implying a dose was given.
+PRN, timing, start/end, priority, indication and strength are not captured by the OPD form and are
+not invented. The safety engine and its thresholds are untouched.
 
 **Deliberately NOT done _by the assessment migration_** (all three were later revisited; kept here as
 the scope that migration shipped with). GHIS's "Authorise" (sign-off/lock) was untouched and a note
 from it was never `signedBy` — migrated next, as the fifth migration above. `submitInvOrder` (kind
-`"note"`) was untouched — migrated as the sixth, above. `submitPrescribe` (kind `"medication"`)
-remains untouched today.
+`"note"`) was untouched — migrated as the sixth, above. `submitPrescribe` (kind `"medication"`) was
+untouched — migrated as the seventh, above.
 
 **Deliberately NOT done.** No GHIS write migrated (`opd-emr.js` still posts to `/api/ghis`; the nurse-vitals timeline write is the one migrated, above, and only where a tenant opts in); the
 cut-over flag untouched; the 18 queue roles mapped onto actor tiers on 2026-09-06 (see "Who may do what" above); no on-prem repository; no connector

@@ -19,9 +19,10 @@ import { ROLES, CAPS, can as roleCan } from "../functions/_queue_roles.js";
 import { mintStaffSession, verifyStaffSession } from "../functions/_opd_auth.js";
 import { vitalsMode, patientIdForTicket, vitalsToObservations, vitalsMigration, recordVitals, VITAL_CODES } from "../functions/_wardsynq/migrate-vitals.js";
 import { registrationMigration, patientFromRegistration, sameDemographics, registerPatientRecord } from "../functions/_wardsynq/migrate-registration.js";
-import { patientIdForMrn, encounterIdForTicket, noteIdForTicket, serviceRequestIdForTicket } from "../functions/_wardsynq/opd-identity.js";
+import { patientIdForMrn, encounterIdForTicket, noteIdForTicket, serviceRequestIdForTicket, medicationOrderIdForTicket } from "../functions/_wardsynq/opd-identity.js";
 import { assessmentMigration, sectionsFromAssessment, noteFromAssessment, signedNoteFrom, sameNoteContent, recordAssessment, recordAssessmentSignOff } from "../functions/_wardsynq/migrate-assessment.js";
 import { invOrderMigration, orderFromInvestigation, sameOrder, recordInvestigationOrder } from "../functions/_wardsynq/migrate-inv-order.js";
+import { prescriptionMigration, orderFromPrescription, samePrescription, recordPrescription } from "../functions/_wardsynq/migrate-prescription.js";
 import { readFileSync } from "node:fs";
 import { makeMockDb } from "../functions/_connect/testkit.js";
 import { can } from "../functions/_connect/enterprise/rbac.js";
@@ -661,7 +662,8 @@ test("the queue timeline handler orders the writes by mode and leaves the off pa
   // branch, selected by body.signOff — never by kind alone, so a save and a sign-off stay distinct.
   // ...and, since the investigation order migration, a fourth, selected by the structured `order`
   // payload — again never by kind alone, so a plain note and an order stay distinct.
-  assert.ok(h.includes("const migrator = isVitals ? recordVitals : isSignOff ? recordAssessmentSignOff : isInvOrder ? recordInvestigationOrder : recordAssessment;"));
+  // ...and a fifth, the prescription, selected by its own `rx` payload on the same rule.
+  assert.ok(h.includes("const migrator = isVitals ? recordVitals : isSignOff ? recordAssessmentSignOff : isInvOrder ? recordInvestigationOrder : isPrescription ? recordPrescription : recordAssessment;"));
   assert.ok(h.includes('const isSignOff = isAssessment && body.signOff === true;'));
   // authoritative: record first, refusal returns before any timeline write, then the timeline as shadow.
   const auth = h.slice(i('mig.mode === "authoritative"'), i("// shadow:"));
@@ -695,7 +697,7 @@ test("the timeline GET names the record only where the tenant is on; the console
   assert.ok(html.includes('"/api/wardsynq/"+encodeURIComponent(rec.tenantId)+"/patient/"+encodeURIComponent(rec.patientId)+"/Observation"'), "the existing Observation endpoint, nothing new");
   // 2026-09-06: the assessment card, then the investigations card, joined vital signs behind the
   // SAME gate — all three, or none. Each prepends, so they read vitals, assessment, investigations.
-  assert.ok(html.includes('if(r.record&&r.record.tenantId){ el.insertBefore(recordOrdersBlock(r.record),el.firstChild); el.insertBefore(recordAssessmentBlock(r.record),el.firstChild); el.insertBefore(recordVitalsBlock(r.record),el.firstChild); }'), "shown only when the server names a record");
+  assert.ok(html.includes('if(r.record&&r.record.tenantId){ el.insertBefore(recordRxBlock(r.record),el.firstChild); el.insertBefore(recordOrdersBlock(r.record),el.firstChild); el.insertBefore(recordAssessmentBlock(r.record),el.firstChild); el.insertBefore(recordVitalsBlock(r.record),el.firstChild); }'), "shown only when the server names a record");
   // Every state has a sentence for the doctor: loading, empty, no MRN, 401, 403, 404, unreachable.
   for (const needle of ["Loading from the clinical record", "No vital signs in the clinical record for this patient yet", "has no medical record number", "Sign in again", "Your role cannot view the clinical record", "not available for this clinic right now", "Could not reach the clinical record"]) {
     assert.ok(html.includes(needle), "state text missing: " + needle);
@@ -1027,7 +1029,7 @@ test("off mode is byte-identical for the assessment write too: no WardSynQ call 
   assert.deepEqual(out, { mode: "off", tenantId: null, ok: true, skipped: "flag", written: 0 });
 });
 
-test("prescriptions remain untouched, and a plain note still is: an investigation is recognised ONLY by its structured order payload, never by the kind alone", () => {
+test("each clinical write is recognised ONLY by its own structured payload, never by the timeline kind alone", () => {
   const src = readFileSync(new URL("../functions/api/queue/[[path]].js", import.meta.url), "utf8");
   const h = src.slice(src.indexOf('if (seg === "timeline") {'), src.indexOf('// Slide-to-checkout'));
   assert.ok(h.includes('const isAssessment = QT.tlKind(body.kind) === "assessment";'));
@@ -1037,7 +1039,10 @@ test("prescriptions remain untouched, and a plain note still is: an investigatio
   assert.ok(h.includes('const isInvOrder = QT.tlKind(body.kind) === "note" && !!body.order && typeof body.order === "object";'),
     "a note is an investigation order only when it carries a structured order");
   assert.ok(!/isInvOrder = [^;]*"note";/.test(h), "the kind alone never makes it an order");
-  assert.ok(!h.includes('=== "medication"'), "the migration dispatcher never compares kind against medication: prescriptions are not migrated");
+  // ...and the prescription migration widened it by exactly one more, on the same rule.
+  assert.ok(h.includes('const isPrescription = QT.tlKind(body.kind) === "medication" && !!body.rx && typeof body.rx === "object";'),
+    "a medication line is a prescription only when it carries a structured rx");
+  assert.ok(!/isPrescription = [^;]*"medication";/.test(h), "the kind alone never makes it a prescription");
   // The client sends the assessment payload only from the assessment save/clear/refer-to-ER actions.
   const emr = readFileSync(new URL("../opd-emr.js", import.meta.url), "utf8");
   assert.equal((emr.match(/vals: buildAssessPayload\(/g) || []).length, 3, "submitAssessment, clearAssessment and consultToER all forward the structured payload");
@@ -1049,8 +1054,10 @@ test("prescriptions remain untouched, and a plain note still is: an investigatio
   assert.ok(invOrder.length > 0 && prescribe.length > 0, "both write actions still exist");
   assert.ok(!invOrder.includes("vals:"), "an investigation order does not send structured assessment vals");
   assert.ok(invOrder.includes("order: { serviceId:"), "an investigation order does send its own structured order");
+  assert.ok(!invOrder.includes("rx: {"), "an investigation order does not send a prescription payload");
   assert.ok(!prescribe.includes("vals:"), "a prescription does not send structured vals");
-  assert.ok(!prescribe.includes("order:"), "a prescription does not send a structured order either");
+  assert.ok(!prescribe.includes("order: {"), "a prescription does not send an investigation order payload");
+  assert.ok(prescribe.includes("rx: { drugId:"), "a prescription does send its own structured rx");
 });
 
 /* ------------------------------------------------------------------ the sign-off (GHIS Authorise) migration */
@@ -1330,4 +1337,283 @@ test("the console reads orders back from the record: the generic endpoint, the n
   assert.ok(page.includes("o.display||o.code"), "the service name leads, the GHIS id is the fallback");
   assert.ok(page.includes("Results are not recorded here."), "the card must not imply a result exists");
   assert.ok(page.includes("asn-pill stat\">Emergency"), "an emergency order reads at a glance");
+});
+
+/* ------------------------------------------------------- the prescription (GHIS CreateDrugs) migration */
+
+test("identity: one prescription id per drug per encounter, and it can never collide with an investigation order", () => {
+  const ticket = { id: "TKT-90", ghisEpisodeId: "EP-90", ghisPatientId: "GH-40233" };
+  const a = medicationOrderIdForTicket(ticket, "DRG5521");
+  assert.equal(a, "opd-rx-ep-90-drg5521");
+  assert.equal(medicationOrderIdForTicket(ticket, "DRG5521"), a, "the same drug on the same visit is the same order");
+  assert.notEqual(medicationOrderIdForTicket(ticket, "DRG9000"), a, "a different drug is a different order");
+  // Separate prefixes, so a drug id and a service id that happen to be spelled alike stay apart.
+  assert.notEqual(medicationOrderIdForTicket(ticket, "X1"), serviceRequestIdForTicket(ticket, "X1"));
+  assert.equal(medicationOrderIdForTicket({ id: "TKT-91" }, "DRG5521"), "opd-rx-tkt-91-drg5521", "a native visit still gets a stable id");
+  assert.equal(medicationOrderIdForTicket(ticket, ""), null);
+  assert.equal(medicationOrderIdForTicket(ticket, null), null);
+  assert.equal(medicationOrderIdForTicket({}, "DRG5521"), null);
+  // It shares its encounter with vitals, the assessment and the investigation order.
+  assert.equal(encounterIdForTicket(ticket), "opd-enc-ep-90");
+});
+
+test("orderFromPrescription: a canonical MedicationOrder — every field the OPD form captures, the generic kept for the safety engine, and Quantity NEVER mapped into dose", () => {
+  const ticket = { id: "TKT-90", ghisEpisodeId: "EP-90", ghisPatientId: "GH-40233" };
+  const rx = { drugId: "DRG5521", name: "Tab Paracetamol 650", generic: "paracetamol", route: "Oral", form: "Tablet", qty: "10", frequency: "TDS", duration: "5 days", remarks: "After food" };
+  const m = orderFromPrescription({ ticket, rx, prescriberId: "fb:dr-menon", canSign: true });
+  assert.equal(m.resourceType, "MedicationOrder");
+  assert.equal(m.id, "opd-rx-ep-90-drg5521");
+  assert.equal(m.patientId, "opd-pat-gh-40233");
+  assert.equal(m.encounterId, "opd-enc-ep-90");
+  assert.equal(m.drug, "Tab Paracetamol 650");
+  assert.equal(m.drugCode, "DRG5521");
+  assert.equal(m.drugCodeSystem, "ghis-drug-id", "whose code that is, so nobody reads it as an RxNorm cui");
+  assert.equal(m.genericName, "paracetamol", "wardsynq-safety.js indexes allergy classes and dose limits BY GENERIC");
+  assert.equal(m.route, "Oral");
+  assert.equal(m.frequency, "TDS");
+  assert.equal(m.form, "Tablet");
+  assert.equal(m.quantity, "10");
+  assert.equal(m.duration, "5 days");
+  assert.equal(m.instructions, "After food");
+  assert.equal(m.prescriberId, "fb:dr-menon");
+  // THE SAFETY POINT: the form has Quantity, not a dose. checkDose() does ceiling arithmetic on
+  // dose.value, so mapping "10" there would check the wrong number against a real ceiling.
+  assert.equal(m.dose, null, "Quantity is how many to dispense, not how much to give");
+  // Nothing the form does not capture is invented.
+  for (const absent of ["prn", "prnReason", "timing", "startDate", "endDate", "priority", "indication", "strength"]) {
+    assert.equal(m[absent], undefined, "invented field: " + absent);
+  }
+  // A prescription that cannot name the drug, the patient or the prescriber is not a prescription.
+  assert.equal(orderFromPrescription({ ticket, rx: { name: "Tab X" }, prescriberId: "fb:dr-menon", canSign: true }), null, "no drug id");
+  assert.equal(orderFromPrescription({ ticket, rx: { drugId: "DRG5521" }, prescriberId: "fb:dr-menon", canSign: true }), null, "no product description");
+  assert.equal(orderFromPrescription({ ticket, rx, prescriberId: "", canSign: true }), null, "no prescriber");
+  assert.equal(orderFromPrescription({ ticket: { id: "T", ghisEpisodeId: "E" }, rx, prescriberId: "fb:dr-menon", canSign: true }), null, "no MRN");
+});
+
+test("the signature decides the lifecycle: a credentialed prescriber signs an active order, an uncredentialed one gets an unsigned DRAFT, and neither ever signs as anyone else", () => {
+  const ticket = { id: "TKT-90", ghisEpisodeId: "EP-90", ghisPatientId: "GH-40233" };
+  const rx = { drugId: "DRG5521", name: "Tab Paracetamol 650" };
+  const signed = orderFromPrescription({ ticket, rx, prescriberId: "fb:dr-menon", canSign: true });
+  assert.equal(signed.status, "active", "GHIS accepted it before this ran, so it is placed");
+  assert.equal(signed.signedBy, "fb:dr-menon", "the signature is the prescriber's OWN id");
+  const unsigned = orderFromPrescription({ ticket, rx, prescriberId: "fb:dr-pin", canSign: false });
+  assert.equal(unsigned.status, "draft", "no credential means no signature, so it cannot be active");
+  assert.equal(unsigned.signedBy, null, "nothing is fabricated to make it look signed");
+  assert.equal(unsigned.prescriberId, "fb:dr-pin", "who entered it is still recorded");
+  // The model's own default for AI provenance is false; the STORE overwrites it for an AI actor,
+  // which is what makes the guarantee unevadable. Nothing here claims otherwise.
+  assert.equal(signed.aiDrafted, false);
+});
+
+test("samePrescription: the same drug on the same encounter in the same terms; any changed instruction is a new version", () => {
+  const base = { drugCode: "DRG5521", patientId: "p", encounterId: "e", status: "active", route: "Oral", frequency: "TDS", form: "Tablet", quantity: "10", duration: "5 days", instructions: "After food", signedBy: "fb:dr-menon" };
+  assert.equal(samePrescription(base, { ...base }), true);
+  for (const k of ["route", "frequency", "form", "quantity", "duration", "instructions"]) {
+    assert.equal(samePrescription(base, { ...base, [k]: "CHANGED" }), false, k + " changed");
+  }
+  assert.equal(samePrescription(base, { ...base, drugCode: "DRG9000" }), false);
+  assert.equal(samePrescription(base, { ...base, status: "draft" }), false, "a draft is not the same as an active order");
+  assert.equal(samePrescription(base, { ...base, signedBy: null }), false, "an unsigned order is not the same as a signed one");
+  assert.equal(samePrescription({ ...base, instructions: undefined }, { ...base, instructions: "" }), true, "absent and empty are the same absence");
+  assert.equal(samePrescription(null, base), false);
+});
+
+test("prescription mode gating: its own settings key, independent of every other migration", async () => {
+  const org = { id: "org-gimsr", connectTenantId: "gimsr" };
+  const tenants = { gimsr: { id: "gimsr", settings: JSON.stringify({ wardsynq: { migrations: { prescriptions: "shadow", investigations: "off" } } }) } };
+  const deps = { getOrg: async (env, id) => (id === "org-gimsr" ? org : null), tenantRow: async (env, id) => tenants[id] || null };
+  assert.deepEqual(await prescriptionMigration({}, { orgId: "org-gimsr" }, deps), { mode: "off", why: "flag" });
+  const on = await prescriptionMigration({ WARDSYNQ_RECORD: "1" }, { orgId: "org-gimsr" }, deps);
+  assert.equal(on.mode, "shadow"); assert.equal(on.tenantId, "gimsr");
+  const invOnly = { gimsr: { id: "gimsr", settings: JSON.stringify({ wardsynq: { migrations: { investigations: "shadow" } } }) } };
+  assert.equal((await prescriptionMigration({ WARDSYNQ_RECORD: "1" }, { orgId: "org-gimsr" }, { ...deps, tenantRow: async (e, id) => invOnly[id] })).mode, "off",
+    "a tenant on for investigations is not thereby on for prescriptions");
+});
+
+test("OFF mode is byte-identical for the prescription too, and a medication line with no rx payload writes nothing", async () => {
+  const off = await recordPrescription(new Request("https://x"), ENV, { migration: { mode: "off", why: "flag" }, ticket: { id: "T", ghisEpisodeId: "E", ghisPatientId: "M" }, rx: { drugId: "DRG5521", name: "Tab X" } });
+  assert.deepEqual(off, { mode: "off", tenantId: null, ok: true, skipped: "flag", written: 0 });
+
+  const h = opdHospital({ "fb:dr-menon": { role: "doctor" } }, { settings: { wardsynq: { migrations: { prescriptions: "shadow" } } } });
+  const ticket = { id: "TKT-92", ghisEpisodeId: "EP-92", ghisPatientId: "GH-40233" };
+  const actorDeps = { db: h.db, identifyFn: h.deps.identifyFn, claimsFn: h.deps.claimsFn, staffSession: null, orgForTenant: h.deps.orgForTenant, authorizeOrg: h.deps.authorizeOrg };
+  const recordDeps = { repository: h.repository, pseudonym: async () => null };
+  const req = new Request("https://x/api/queue/timeline", { method: "POST", headers: { "X-Test-User": "fb:dr-menon", "X-Test-RegNo": "AP-12345" } });
+  const bare = await recordPrescription(req, ENV, { migration: { mode: "shadow", tenantId: "gimsr" }, ticket, rx: null, actorDeps, recordDeps });
+  assert.equal(bare.ok, true); assert.equal(bare.written, 0); assert.equal(bare.skipped, "no_prescription");
+  assert.equal(await h.repository.latest("gimsr", "MedicationOrder", "opd-rx-ep-92-drg5521"), null);
+});
+
+test("SHADOW does not alter GHIS: prescribing is hard-blocked upstream, and a refused prescription can never reach the record", () => {
+  // The GHIS route refuses to prescribe at all until the real CreateDrugs payload is captured.
+  const ghis = readFileSync(new URL("../functions/api/ghis/[[path]].js", import.meta.url), "utf8");
+  assert.ok(ghis.includes("env.QUEUE_EMR_PRESCRIBE_OK !== '1'"), "the safety hard-block still guards prescribing");
+  assert.ok(ghis.includes("prescribe_not_verified"));
+  // ...and the client returns on that 501 BEFORE mirroring anything to the timeline, so the
+  // migration cannot file a medication order for a prescription that was never actually placed.
+  const emr = readFileSync(new URL("../opd-emr.js", import.meta.url), "utf8");
+  const body = emr.slice(emr.indexOf("function postWrite("), emr.indexOf("function confirmed("));
+  const gate = body.indexOf("res.status === 501");
+  const mirror = body.indexOf("addToTimeline(");
+  assert.ok(gate >= 0 && mirror >= 0 && gate < mirror, "the 501 early return precedes the timeline mirror");
+  assert.ok(/if \(res\.status === 501[^)]*\)[^\n]*return;/.test(body), "a 501 returns, it does not fall through to the mirror");
+  // This migration adds no GHIS call and changes no GHIS behaviour. (Its header DISCUSSES GHIS at
+  // length, which is the point of the header; what matters is that it never calls anything.)
+  const mig = readFileSync(new URL("../functions/_wardsynq/migrate-prescription.js", import.meta.url), "utf8");
+  const code = mig.slice(mig.indexOf("import {"));
+  assert.ok(!/\bfetch\s*\(/.test(code), "the migration issues no HTTP request of its own");
+  assert.ok(!/from\s+["'][^"']*ghis/i.test(code), "the migration imports nothing from the GHIS connector");
+  // The one place GHIS is named in the code is the code SYSTEM label, which is a string, not a call.
+  assert.ok(code.includes('drugCodeSystem: "ghis-drug-id"'));
+});
+
+test("THE PROOF, prescription: the doctor prescribes on device A; device B reads the SAME structured MedicationOrder; pharmacy may read it and a nurse may not write one; another tenant is denied; a double-tap does not prescribe twice; a changed prescription is version 2 with the original intact", async () => {
+  const h = opdHospital({
+    "fb:dr-menon": { role: "doctor" }, "fb:dr-rao": { role: "doctor" }, "fb:dr-pin": { role: "doctor" },
+    "fb:sister-anu": { role: "nurse" }, "fb:pharm-1": { role: "pharmacy" }, "fb:desk-1": { role: "reception" },
+  }, { settings: { wardsynq: { migrations: { prescriptions: "shadow" } } } });
+  const ticket = { id: "TKT-90", ghisEpisodeId: "EP-90", ghisPatientId: "GH-40233" };
+  const actorDeps = { db: h.db, identifyFn: h.deps.identifyFn, claimsFn: h.deps.claimsFn, staffSession: null, orgForTenant: h.deps.orgForTenant, authorizeOrg: h.deps.authorizeOrg };
+  const recordDeps = { repository: h.repository, pseudonym: async () => null };
+  const mig = { mode: "shadow", tenantId: "gimsr" };
+  const asMenon = new Request("https://x/api/queue/timeline", { method: "POST", headers: { "X-Test-User": "fb:dr-menon", "X-Test-RegNo": "AP-12345" } });
+  const rx = { drugId: "DRG5521", name: "Tab Paracetamol 650", generic: "paracetamol", route: "Oral", form: "Tablet", qty: "10", frequency: "TDS", duration: "5 days", remarks: "After food" };
+
+  // Device A: the credentialed doctor prescribes. Patient -> encounter -> prescriber -> order.
+  const first = await recordPrescription(asMenon, ENV, { migration: mig, ticket, rx, actorDeps, recordDeps });
+  assert.equal(first.ok, true); assert.equal(first.written, 1); assert.equal(first.updated, false);
+  assert.equal(first.orderId, "opd-rx-ep-90-drg5521"); assert.equal(first.status, "active"); assert.equal(first.signed, true);
+  assert.equal(first.actor, "fb:dr-menon");
+
+  // Device B: another doctor reads the SAME structured order back, in full.
+  const rao = await client(h, "fb:dr-rao");
+  const m = await rao.governed.get(rao.actor, "MedicationOrder", "opd-rx-ep-90-drg5521");
+  assert.equal(m.patientId, "opd-pat-gh-40233"); assert.equal(m.encounterId, "opd-enc-ep-90");
+  assert.equal(m.drug, "Tab Paracetamol 650"); assert.equal(m.drugCode, "DRG5521"); assert.equal(m.genericName, "paracetamol");
+  assert.equal(m.route, "Oral"); assert.equal(m.frequency, "TDS"); assert.equal(m.form, "Tablet");
+  assert.equal(m.quantity, "10"); assert.equal(m.duration, "5 days"); assert.equal(m.instructions, "After food");
+  assert.equal(m.dose, null, "no dose was captured, and none was invented");
+  assert.equal(m.status, "active"); assert.equal(m.signedBy, "fb:dr-menon");
+  assert.equal(m.prescriberId, "fb:dr-menon", "the AUTHENTICATED prescriber, preserved");
+  assert.equal(m.writtenBy.id, "fb:dr-menon");
+  assert.equal(m.aiDrafted, false, "a human's prescription is never flagged as AI-drafted");
+  const viaApi = await h.fetchAs("fb:dr-rao")("https://x/api/wardsynq/gimsr/patient/opd-pat-gh-40233/MedicationOrder");
+  assert.equal(viaApi.status, 200);
+  assert.deepEqual((await viaApi.json()).records.map((r) => r.id), ["opd-rx-ep-90-drg5521"]);
+
+  // A double-tap, or a retried request, is the SAME prescription — not a second medication order.
+  const again = await recordPrescription(asMenon, ENV, { migration: mig, ticket, rx, actorDeps, recordDeps });
+  assert.equal(again.ok, true); assert.equal(again.written, 0); assert.equal(again.skipped, "already_prescribed");
+  assert.equal((await h.repository.history("gimsr", "MedicationOrder", "opd-rx-ep-90-drg5521")).length, 1);
+
+  // A CHANGED prescription is a new version; the original survives in the append-only history.
+  const changed = await recordPrescription(asMenon, ENV, { migration: mig, ticket, rx: { ...rx, frequency: "BD", duration: "3 days" }, actorDeps, recordDeps });
+  assert.equal(changed.written, 1); assert.equal(changed.updated, true); assert.equal(changed.version, 2);
+  const hist = await h.repository.history("gimsr", "MedicationOrder", "opd-rx-ep-90-drg5521");
+  assert.deepEqual(hist.map((v) => [v.version, v.frequency, v.duration]), [[1, "TDS", "5 days"], [2, "BD", "3 days"]]);
+
+  // A DIFFERENT drug on the same visit is its own order.
+  const second = await recordPrescription(asMenon, ENV, { migration: mig, ticket, rx: { drugId: "DRG9000", name: "Cap Amoxicillin 500" }, actorDeps, recordDeps });
+  assert.equal(second.written, 1); assert.equal(second.orderId, "opd-rx-ep-90-drg9000");
+
+  // Pharmacy reads medication orders (its whole clinical read scope) and can write none.
+  const pharm = await client(h, "fb:pharm-1");
+  assert.equal((await pharm.governed.get(pharm.actor, "MedicationOrder", "opd-rx-ep-90-drg5521")).drug, "Tab Paracetamol 650");
+  await assert.rejects(() => pharm.session("opd-pat-gh-40233").put(MedicationOrder({ id: "opd-rx-ep-90-x", patientId: "opd-pat-gh-40233", drug: "X", prescriberId: "fb:pharm-1", status: "active" })), GovernanceError);
+
+  // A nurse prescribes nothing: MedicationOrder is an instruction type outside her write scope.
+  const asNurse = new Request("https://x/api/queue/timeline", { method: "POST", headers: { "X-Test-User": "fb:sister-anu" } });
+  const nurseTry = await recordPrescription(asNurse, ENV, { migration: mig, ticket, rx: { drugId: "DRG7777", name: "Inj Morphine 10mg" }, actorDeps, recordDeps });
+  assert.equal(nurseTry.ok, false); assert.equal(nurseTry.status, 403); assert.equal(nurseTry.error, "governance");
+  assert.equal(await h.repository.latest("gimsr", "MedicationOrder", "opd-rx-ep-90-drg7777"), null, "the refused prescription was never written");
+
+  // A doctor with no registration number records an unsigned DRAFT, never an unsigned ACTIVE order.
+  const asPin = new Request("https://x/api/queue/timeline", { method: "POST", headers: { "X-Test-User": "fb:dr-pin" } });
+  const pin = await recordPrescription(asPin, ENV, { migration: mig, ticket, rx: { drugId: "DRG8888", name: "Tab Ibuprofen 400" }, actorDeps, recordDeps });
+  assert.equal(pin.ok, true); assert.equal(pin.status, "draft"); assert.equal(pin.signed, false); assert.equal(pin.unsigned, "no_credential");
+  const draft = await h.repository.latest("gimsr", "MedicationOrder", "opd-rx-ep-90-drg8888");
+  assert.equal(draft.status, "draft"); assert.equal(draft.signedBy, null); assert.equal(draft.prescriberId, "fb:dr-pin");
+
+  // Another tenant cannot read this clinic's medications at all.
+  const other = await h.fetchAs("fb:dr-rao")("https://x/api/wardsynq/other-hospital/patient/opd-pat-gh-40233/MedicationOrder");
+  assert.ok(other.status === 403 || other.status === 404, "cross-tenant read is refused, got " + other.status);
+
+  // The mutation is audited as the real human, PHI-free.
+  const row = h.repository.audit.find((a) => a.action === "record.write" && a.scope.resourceType === "MedicationOrder");
+  assert.ok(row); assert.equal(row.actor, "fb:dr-menon");
+  assert.ok(!JSON.stringify(row).includes("Paracetamol"), "the audit trail stays PHI-free");
+});
+
+test("an AI cannot pass a suggestion off as a clinician's prescription: capped below EXECUTE, and the store stamps the provenance itself", async () => {
+  const h = opdHospital({ "fb:dr-menon": { role: "doctor" } }, { settings: { wardsynq: { migrations: { prescriptions: "shadow" } } } });
+  const doctor = await client(h, "fb:dr-menon", { regNo: "AP-12345" });
+  await doctor.session("opd-pat-ai").put(Patient({ id: "opd-pat-ai", mrn: "GH-AI", name: "AI Test", dob: "1980-01-01" }));
+  // The AI acts on behalf of the doctor, and is capped at DRAFT whatever it asks for.
+  const ai = aiActorFor(doctor.actor, { id: "maik" });
+  assert.equal(ai.kind, "ai");
+  assert.equal(ai.tier, "draft", "an AI is capped at DRAFT and can never commit an instruction");
+  const rx = (id, over) => MedicationOrder({ id, patientId: "opd-pat-ai", drug: "Tab X", prescriberId: ai.id, ...over });
+
+  // An AI claiming an ACTIVE medication order is refused outright.
+  await assert.rejects(
+    () => doctor.governed.put(ai, rx("opd-rx-ai-1", { status: "active" })),
+    (e) => e instanceof GovernanceError && e.reasons.some((r) => r.code === "EXECUTE_DENIED"),
+  );
+  // An AI claiming a clinician's SIGNATURE is refused, whatever name it puts in the field.
+  await assert.rejects(
+    () => doctor.governed.put(ai, rx("opd-rx-ai-2", { signedBy: "fb:dr-menon" })),
+    (e) => e instanceof GovernanceError && e.reasons.some((r) => r.code === "NON_HUMAN_SIGNATURE"),
+  );
+  // An ordinary AI draft is allowed, and comes back stamped aiDrafted whatever it claimed.
+  const drafted = await doctor.governed.put(ai, rx("opd-rx-ai-3", { aiDrafted: false }));
+  assert.equal(drafted.aiDrafted, true, "provenance is overwritten at the point of writing, not merely policed");
+  assert.equal(drafted.status, "draft");
+  assert.equal(drafted.signedBy, null);
+  // ...and the console renders that distinction rather than hiding it.
+  const page = readFileSync(new URL("../opd.html", import.meta.url), "utf8");
+  assert.ok(page.includes("m.aiDrafted") && page.includes("AI draft"), "an AI draft is labelled in the UI");
+});
+
+test("a malformed medication payload cannot bypass governance or invent a prescription", async () => {
+  const h = opdHospital({ "fb:dr-menon": { role: "doctor" } }, { settings: { wardsynq: { migrations: { prescriptions: "shadow" } } } });
+  const ticket = { id: "TKT-93", ghisEpisodeId: "EP-93", ghisPatientId: "GH-40233" };
+  const actorDeps = { db: h.db, identifyFn: h.deps.identifyFn, claimsFn: h.deps.claimsFn, staffSession: null, orgForTenant: h.deps.orgForTenant, authorizeOrg: h.deps.authorizeOrg };
+  const recordDeps = { repository: h.repository, pseudonym: async () => null };
+  const mig = { mode: "shadow", tenantId: "gimsr" };
+  const asMenon = new Request("https://x/api/queue/timeline", { method: "POST", headers: { "X-Test-User": "fb:dr-menon", "X-Test-RegNo": "AP-12345" } });
+
+  // Junk, and half-formed orders, are refused as unusable — never written as a partial prescription.
+  for (const bad of [{}, { drugId: "" }, { name: "Tab X" }, { drugId: "  ", name: "Tab X" }, { drugId: "DRG1", name: "   " }]) {
+    const out = await recordPrescription(asMenon, ENV, { migration: mig, ticket, rx: bad, actorDeps, recordDeps });
+    assert.equal(out.ok, false, JSON.stringify(bad));
+    assert.equal(out.status, 422); assert.equal(out.error, "unusable_prescription"); assert.equal(out.written, 0);
+  }
+  // A client claiming someone else's signature, an active status or AI provenance changes nothing:
+  // the mapper reads none of those from the payload, it derives them from the resolved actor.
+  const forged = await recordPrescription(asMenon, ENV, {
+    migration: mig, ticket,
+    rx: { drugId: "DRG5521", name: "Tab Paracetamol 650", signedBy: "fb:dr-rao", status: "cancelled", prescriberId: "fb:dr-rao", aiDrafted: true, dose: { value: 9999, unit: "mg" } },
+    actorDeps, recordDeps,
+  });
+  assert.equal(forged.ok, true);
+  const written = await h.repository.latest("gimsr", "MedicationOrder", "opd-rx-ep-93-drg5521");
+  assert.equal(written.signedBy, "fb:dr-menon", "signed by the authenticated actor, never the claimed one");
+  assert.equal(written.prescriberId, "fb:dr-menon", "the prescriber is the authenticated actor");
+  assert.equal(written.status, "active", "the claimed status is ignored");
+  assert.equal(written.aiDrafted, false, "a human write is not marked AI because the payload said so");
+  assert.equal(written.dose, null, "a claimed dose is not smuggled past the no-dose-captured rule");
+});
+
+test("the console reads prescriptions back from the record: the generic endpoint, clinically ordered, and no claim that a dose was given", () => {
+  const page = readFileSync(new URL("../opd.html", import.meta.url), "utf8");
+  assert.ok(page.includes("/MedicationOrder\""), "reads the EXISTING generic record endpoint, no new route");
+  assert.ok(page.includes("function recordRxBlock("));
+  // Drug -> dose/strength -> route -> frequency -> duration -> instructions.
+  assert.ok(page.includes("[m.route,m.form,m.quantity,m.frequency,m.duration]"), "the clinically important line, in reading order");
+  assert.ok(page.includes("m.instructions"), "instructions are shown");
+  assert.ok(page.includes("Dispensing and administration are not recorded here."), "the card must not imply a dose was given");
+  // The three lifecycle states that exist today are visually distinct.
+  assert.ok(page.includes("RX_STATUS={active:\"Active\",draft:\"Draft, unsigned\",cancelled:\"Discontinued\""));
+  assert.ok(page.includes(".asn-pill.rx-on") && page.includes(".asn-pill.rx-off") && page.includes(".asn-pill.rx-ai"));
+  assert.ok(page.includes("Signed by ") && page.includes("unsigned"), "signed and unsigned read differently");
 });

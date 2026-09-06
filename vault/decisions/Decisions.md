@@ -4375,3 +4375,39 @@ note rather than left for someone to discover.
 
 **Not done, named:** results (`DiagnosticReport`) — nothing writes one, so the console card says so
 outright rather than leaving a doctor to wonder; cancelling an order; prescriptions.
+
+## 2026-09-06 — Prescriptions: the upstream block is the safety property, and Quantity is not a dose
+
+**Decision: do not "fix" the fact that this migration cannot fire yet.** Tracing the flow first (as
+the sign-off lesson requires) turned up that GHIS prescribing is hard-blocked: `/prescribe` answers
+501 `prescribe_not_verified` because the CreateDrugs payload was never captured, and `postWrite`
+returns before the timeline mirror. The tempting reading is "the seam is broken, hook somewhere that
+actually fires". Rejected, emphatically. That early return is what guarantees a prescription GHIS
+REFUSED can never become an active medication order in the record, which is the worst thing this
+code could produce. The migration is wired at the same seam as its four siblings and is inert behind
+two gates instead of one. Pinned by a test that asserts the 501 return still precedes the mirror.
+
+**Decision: Quantity is not a dose.** The OPD form has no dose field; it has Quantity ("10" tablets
+to dispense). `MedicationOrder.dose` is `{value, unit}` and feeds `checkDose()`'s ceiling arithmetic.
+Mapping Quantity into `dose` would have populated a field the safety engine trusts with a number that
+means something else — a silent wrong answer from a check that appears to have run. Left null, the
+engine reports DOSE_UNPARSEABLE and says the ceiling check could not run. An honest gap beats a
+plausible wrong number, and this is the clearest case of it in the migration so far.
+
+**Decision: the prescriber's credential decides draft vs active, and nothing is fabricated either
+way.** Signing requires a credential (`NO_CREDENTIAL`), so always setting `signedBy` would make a
+PIN-session doctor's prescription fail entirely, and never setting it would leave an ACTIVE
+medication order that nobody signed. Neither is acceptable for a medication. A credentialed
+prescriber signs an active order with their own id; an uncredentialed one gets an unsigned draft that
+says exactly what it is. This preserves the draft → signed → active lifecycle the model already
+documents rather than inventing a new one.
+
+**Decision: carry the generic, drop nothing the form captured.** `basic_material_desc` from GHIS's
+own drug search is the composition, and `wardsynq-safety.js` indexes allergy classes and dose limits
+BY GENERIC. Dropping it would have blinded checks that already exist. Form, quantity, duration and
+instructions have no canonical field and are bolted on, the same convention the adapters use — they
+are fields the doctor actually filled in, not inventions. PRN, timing, start/end, priority,
+indication and strength are NOT captured by the form and are not invented to look complete.
+
+**Not done, named:** dispensing; administration/eMAR (`MedicationAdministration`); reconciliation;
+cancelling a prescription; any change to the safety engine or its thresholds.

@@ -945,7 +945,7 @@
   // the stewardmd.in base in-app (relative /api hits the Capacitor local origin). Best-effort; silent on failure.
   function qBase() { try { var h = (G.location && G.location.hostname) || ""; return /(^|\.)stewardmd\.in$/i.test(h) ? "" : "https://stewardmd.in"; } catch (e) { return "https://stewardmd.in"; } }
   function fbTok() { try { var u = (G.SMD_AUTH && G.SMD_AUTH.currentUser) || (G.firebase && G.firebase.auth && G.firebase.auth().currentUser); return (u && u.getIdToken) ? u.getIdToken() : Promise.resolve(null); } catch (e) { return Promise.resolve(null); } }
-  function addToTimeline(kind, text, vals, signOff, order) {
+  function addToTimeline(kind, text, vals, signOff, order, rx) {
     if (!st.ticketId || !st.sessionId || !text) return;   // only when opened from a queue ticket
     fbTok().then(function (t) {
       if (!t) return;
@@ -955,12 +955,15 @@
       if (signOff) body.signOff = true;
       // The structured fields travel WITH the summary text. The timeline keeps its text line; where
       // a tenant has opted a clinical write into the WardSynQ record (currently: vitals, kind
-      // "assessment", and an investigation order on a kind "note"), the server maps the structured
-      // payload into the canonical record and the text line is untouched either way.
+      // "assessment", an investigation order on a kind "note", and a prescription on a kind
+      // "medication"), the server maps the structured payload into the canonical record and the
+      // text line is untouched either way.
       if (vals) body.vals = vals;
       // What distinguishes an investigation order from every other kind:"note" line. Without it the
       // server treats this as a plain note and files nothing, which is exactly the old behaviour.
       if (order) body.order = order;
+      // Likewise for a prescription against every other kind:"medication" line.
+      if (rx) body.rx = rx;
       fetch(qBase() + "/api/queue/timeline", { method: "POST", headers: { "Content-Type": "application/json", Authorization: "Bearer " + t }, body: JSON.stringify(body) })
         .then(function (r) { return r.json().catch(function () { return null; }); })
         .then(function (d) {
@@ -1935,7 +1938,7 @@
         if (res.status === 401 || d.error === "login_required") { toast("Connect Ward Sync (GHIS) first."); return; }
         if (!res.ok || d.ok === false) { toast(ghisSay(d.resp)); return; }
         toast(okMsg);
-        if (tl && tl.text) { addToTimeline(tl.kind, tl.text, tl.vals, tl.signOff, tl.order); setTimeout(loadTimeline, 600); }   // mirror this action into the visit summary + refresh the Profile timeline
+        if (tl && tl.text) { addToTimeline(tl.kind, tl.text, tl.vals, tl.signOff, tl.order, tl.rx); setTimeout(loadTimeline, 600); }   // mirror this action into the visit summary + refresh the Profile timeline
         st.invDraft = {}; st.medDraft = {};
         if (onOk) try { onOk(); } catch (e) {}
         loadProfile({ patientId: st.patient.mrn || "", recordNo: st.recordNo || "" });
@@ -1958,8 +1961,16 @@
   function submitPrescribe() {
     var d = st.medDraft || {}; if (!d.drug) return;
     if (!confirmed('Prescribe "' + d.drug.name + '" for this patient in GHIS?')) return;
+    // The timeline sentence is unchanged. `rx` rides beside it so the server can file the SAME
+    // prescription structurally in the clinical record (functions/_wardsynq/migrate-prescription.js)
+    // instead of re-parsing this sentence. `generic` is the composition GHIS's own drug search
+    // returned; the safety engine indexes allergy classes and dose limits by generic, so it is
+    // carried rather than dropped. NOTE this whole call is inert today: /prescribe answers 501
+    // until QUEUE_EMR_PRESCRIBE_OK=1, and postWrite returns above without mirroring anything - so a
+    // prescription GHIS refused never reaches the record. That is deliberate, not a gap.
     postWrite("/prescribe", { drugId: d.drug.id, route: d.route || "", form: d.form || "", qty: d.qty || "", frequency: d.frequency || "", duration: d.duration || "", remarks: d.remarks || "" }, "Prescription saved.",
-      { kind: "medication", text: [d.drug.name, d.route, d.form, d.qty, d.frequency, d.duration].filter(Boolean).join(" ") + (d.remarks ? " - " + d.remarks : "") });
+      { kind: "medication", text: [d.drug.name, d.route, d.form, d.qty, d.frequency, d.duration].filter(Boolean).join(" ") + (d.remarks ? " - " + d.remarks : ""),
+        rx: { drugId: d.drug.id, name: d.drug.name || "", generic: d.drug.sub || "", route: d.route || "", form: d.form || "", qty: d.qty || "", frequency: d.frequency || "", duration: d.duration || "", remarks: d.remarks || "" } });
   }
   function submitAssessment() {
     // An authorised record is locked in GHIS — a write would be rejected. Say so instead of failing.

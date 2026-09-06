@@ -52,11 +52,29 @@ function noteIdForTicket(ticket, kind) {
  * an order, and is never given a generated id to make it look like one.
  */
 function serviceRequestIdForTicket(ticket, serviceId) {
-  const anchor = ticket && (ticket.ghisEpisodeId || ticket.id);
-  const svc = String(serviceId == null ? "" : serviceId).trim();
-  if (!anchor || !svc) return null;
-  const slug = (v) => String(v).toLowerCase().replace(/[^a-z0-9]+/g, "-");
-  return `opd-order-${slug(anchor)}-${slug(svc)}`;
+  return anchoredOrderId(ticket, "order", serviceId);
 }
 
-export { patientIdForMrn, patientIdForTicket, encounterIdForTicket, noteIdForTicket, serviceRequestIdForTicket };
+/**
+ * The id ONE prescribed drug, on ONE encounter, is filed under — the same rule as an investigation
+ * order, with its own prefix so a drug id and a service id can never collide on one visit. A retried
+ * or double-tapped Prescribe resolves to the SAME MedicationOrder; two DIFFERENT drugs on one visit
+ * stay two separate orders.
+ *
+ * `null` when there is no anchor or no drug id, for the same reason: a prescription that cannot name
+ * what was prescribed is not a prescription, and is never given a generated id to look like one.
+ */
+function medicationOrderIdForTicket(ticket, drugId) {
+  return anchoredOrderId(ticket, "rx", drugId);
+}
+
+/** The shared rule both order ids use: anchor on the encounter, qualify by what was ordered. */
+function anchoredOrderId(ticket, prefix, code) {
+  const anchor = ticket && (ticket.ghisEpisodeId || ticket.id);
+  const c = String(code == null ? "" : code).trim();
+  if (!anchor || !c) return null;
+  const slug = (v) => String(v).toLowerCase().replace(/[^a-z0-9]+/g, "-");
+  return `opd-${prefix}-${slug(anchor)}-${slug(c)}`;
+}
+
+export { patientIdForMrn, patientIdForTicket, encounterIdForTicket, noteIdForTicket, serviceRequestIdForTicket, medicationOrderIdForTicket };

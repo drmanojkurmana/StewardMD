@@ -162,6 +162,10 @@
   /* An ordered investigation. Emergency is the ONE thing that must read at a glance. */
   .asn-pill{display:inline-block;padding:1px 7px;border-radius:999px;font-size:10.5px;font-weight:700;letter-spacing:.02em;text-transform:uppercase;border:1px solid var(--line);color:var(--mut);background:var(--btn)}
   .asn-pill.stat{color:var(--red);background:var(--red-soft);border-color:var(--red-line)}
+  /* A prescription's lifecycle: active, discontinued, and an AI draft that is none of a clinician's. */
+  .asn-pill.rx-on{color:var(--ok);background:var(--ok-soft);border-color:var(--ok-line)}
+  .asn-pill.rx-off{color:var(--red);background:var(--red-soft);border-color:var(--red-line);text-decoration:line-through}
+  .asn-pill.rx-ai{color:var(--amber);background:var(--amber-soft);border-color:var(--amber-line)}
   /* skeleton shimmer */
   .skel{background:linear-gradient(90deg,var(--btn) 25%,var(--line) 37%,var(--btn) 63%);background-size:400% 100%;animation:sh 1.4s ease infinite;border-radius:10px}
   /* nurse station status pills */
@@ -721,6 +725,62 @@
     else { if(st.tok) h["X-Staff-Token"]=st.tok; go(); }
     return box;
   }
+  // ---- the doctor's prescriptions, from the WardSynQ clinical record ---------------------------
+  // The same generic record endpoint a fourth time. These are ORDERS - what was prescribed. Nothing
+  // here is dispensing or administration: functions/_wardsynq/migrate-prescription.js writes the
+  // MedicationOrder only, nothing writes MedicationAdministration, so this card must never read as
+  // "the patient received this dose".
+  var RX_STATUS={active:"Active",draft:"Draft, unsigned",cancelled:"Discontinued","on-hold":"On hold",completed:"Completed"};
+  function rxHead(){ return '<h4>Medications<span class="src">Clinical record</span></h4>'; }
+  function renderRx(records){
+    var when=function(iso){ var d=new Date(iso); return isNaN(d)?"":d.toLocaleString([],{day:"2-digit",month:"short",hour:"2-digit",minute:"2-digit"}); };
+    var sorted=records.slice().sort(function(a,b){ return String((b.meta&&b.meta.recordedAt)||"").localeCompare(String((a.meta&&a.meta.recordedAt)||"")); });
+    var body=sorted.slice(0,8).map(function(m){
+      // Clinically important first, in the order a prescription is read aloud:
+      // drug -> dose/strength -> route -> frequency -> duration -> instructions.
+      var line=[m.route,m.form,m.quantity,m.frequency,m.duration].filter(Boolean).map(esc).join(" · ");
+      var st2=String(m.status||"");
+      var cls=st2==="active"?"rx-on":st2==="cancelled"?"rx-off":"";
+      var pills='<span class="asn-pill '+cls+'">'+esc(RX_STATUS[st2]||st2)+'</span>';
+      // An AI-suggested draft must never be mistaken for a clinician's prescription.
+      if(m.aiDrafted) pills+=' <span class="asn-pill rx-ai">AI draft</span>';
+      var by=m.signedBy?("Signed by "+esc(m.signedBy)):(m.prescriberId?("Entered by "+esc(m.prescriberId)+", unsigned"):"");
+      return '<div class="asn-set"><div style="display:flex;align-items:center;gap:8px;font-size:12px;color:var(--mut);margin-bottom:4px"><b style="color:var(--ink)">'+when(m.meta&&m.meta.recordedAt)+'</b>'+(m.version>1?' · v'+m.version:'')+'</div>'
+        +'<div class="asn-sec"><div class="x" style="font-weight:600">'+esc(m.drug||m.drugCode||"Medication")+'</div>'
+        +(m.genericName?'<div class="n" style="text-transform:none;margin-top:1px">'+esc(m.genericName)+'</div>':'')
+        +(line?'<div class="x" style="margin-top:3px">'+line+'</div>':'')
+        +'<div style="margin-top:4px">'+pills+'</div>'
+        +(m.instructions?'<div class="x" style="margin-top:4px">'+esc(m.instructions)+'</div>':'')
+        +(by?'<div class="n" style="text-transform:none;margin-top:3px">'+by+'</div>':'')
+        +'</div></div>';
+    }).join("");
+    var more=sorted.length>8?'<p class="st" style="margin:8px 0 0">'+(sorted.length-8)+' earlier '+(sorted.length-8===1?"medication":"medications")+' in the record.</p>':'';
+    return rxHead()+'<p class="st">Prescribed for this patient. Dispensing and administration are not recorded here.</p>'+body+more;
+  }
+  function recordRxBlock(rec,onDone){
+    var box=document.createElement("div"); box.className="vs"; box.setAttribute("aria-live","polite");
+    box.innerHTML=rxHead()+'<p class="st">Loading from the clinical record…</p>';
+    if(!rec.patientId){ box.innerHTML=rxHead()+'<p class="st">This patient has no medical record number, so medications cannot be filed in the clinical record for this visit.</p>'; onDone&&onDone(); return box; }
+    var h={}; var url="/api/wardsynq/"+encodeURIComponent(rec.tenantId)+"/patient/"+encodeURIComponent(rec.patientId)+"/MedicationOrder";
+    var go=function(){
+      return fetch(url,{headers:h}).then(function(r){ return r.json().catch(function(){return null;}).then(function(j){ return {status:r.status,body:j}; }); })
+        .then(function(x){
+          if(x.status===200&&x.body&&x.body.ok){
+            var records=x.body.records||[];
+            box.innerHTML=records.length?renderRx(records):rxHead()+'<p class="st">No medications in the clinical record for this patient yet.</p>';
+          }
+          else if(x.status===403) box.innerHTML=rxHead()+'<p class="st">Your role cannot view the clinical record. The visit timeline above is still available.</p>';
+          else if(x.status===401) box.innerHTML=rxHead()+'<p class="st">Sign in again to read the clinical record.</p>';
+          else if(x.status===404) box.innerHTML=rxHead()+'<p class="st">The clinical record is not available for this clinic right now. The visit timeline above is unaffected.</p>';
+          else box.innerHTML=rxHead()+'<p class="st">Could not reach the clinical record. Showing the visit timeline only.</p>';
+        })
+        .catch(function(){ box.innerHTML=rxHead()+'<p class="st">Could not reach the clinical record. Showing the visit timeline only.</p>'; })
+        .then(function(){ onDone&&onDone(); });
+    };
+    if(st.tokType==="firebase") fbToken().then(function(t){ if(t) h["Authorization"]="Bearer "+t; return go(); });
+    else { if(st.tok) h["X-Staff-Token"]=st.tok; go(); }
+    return box;
+  }
   function openNotes(sid,tid,name){
     open('<h3>Clinical notes'+(name?' - '+esc(name):'')+'</h3><p class="t" style="margin:-6px 0 10px">View only. Doctors record notes; you can read and download.</p><div class="drawer" id="nd">Loading…</div><div class="row2"><button class="cancel" id="cx">Close</button><button class="btn" id="dl" style="margin:0" disabled>Download</button></div>');
     sheet.querySelector("#cx").onclick=close;
@@ -736,8 +796,9 @@
       // has a record to read. With the tenant off (every clinic today) there is no `record` key and
       // this drawer is exactly what it was.
       // Each prepends, so these run in REVERSE of the order they end up reading in: vital signs,
-      // then the assessment, then what was ordered off the back of it, then the narrative timeline.
-      if(r.record&&r.record.tenantId){ el.insertBefore(recordOrdersBlock(r.record),el.firstChild); el.insertBefore(recordAssessmentBlock(r.record),el.firstChild); el.insertBefore(recordVitalsBlock(r.record),el.firstChild); }
+      // then the assessment, then what was ordered off the back of it, then what was prescribed,
+      // then the narrative timeline.
+      if(r.record&&r.record.tenantId){ el.insertBefore(recordRxBlock(r.record),el.firstChild); el.insertBefore(recordOrdersBlock(r.record),el.firstChild); el.insertBefore(recordAssessmentBlock(r.record),el.firstChild); el.insertBefore(recordVitalsBlock(r.record),el.firstChild); }
       var dl=sheet.querySelector("#dl"); if(dl){ dl.disabled=!entries.length; dl.onclick=function(){ downloadNotes(name,tl); }; }
     };
     if(st.orgId==="demo"){ var n=Date.now(); show({ok:true,timeline:{mrnLast4:"4821",entries:[
