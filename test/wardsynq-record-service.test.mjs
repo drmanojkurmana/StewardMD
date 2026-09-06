@@ -402,6 +402,19 @@ test("service: policy defaults, actor mapping, port validation", () => {
   assert.throws(() => new RecordService({ repository: new MemoryRepository(), tenant: { id: "t" }, actor: null }), /actor/);
 });
 
+/* The invariant this layer exists for: the ungoverned store must not be reachable from the object
+ * every route handler holds. It used to be `svc.store`, under a comment saying it was not exported. */
+test("the ungoverned ClinicalStore is not reachable from a RecordService", () => {
+  const svc = new RecordService({
+    repository: new MemoryRepository(), tenant: { id: "t1", mode: "live" },
+    actor: makeActor({ id: "fb:dr-a", kind: KIND.HUMAN, tier: TIER.EXECUTE, display: "Dr A", credential: "held-by-server" }),
+    role: "doctor", roleSource: "opd",
+  });
+  assert.equal(svc.store, undefined, "no raw store property");
+  assert.ok(!Object.values(svc).some((v) => v instanceof ClinicalStore), "and no ClinicalStore under any other property name");
+  assert.equal(typeof svc.governed.put, "function", "writes still go through the governed store");
+});
+
 test("D1 repository speaks the schema: append is one atomic batch, a UNIQUE violation is a VersionConflictError, no UPDATE or DELETE exists", async () => {
   const sql = [];
   let failBatch = null;
