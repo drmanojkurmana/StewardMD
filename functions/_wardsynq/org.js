@@ -21,18 +21,22 @@ function settingsOf(tenant) {
 }
 
 async function orgForTenant(env, tenant) {
+  const __t0 = Date.now();
   if (!tenant || !tenant.id) return null;
   const explicit = settingsOf(tenant).wardsynq && settingsOf(tenant).wardsynq.orgId;
+  console.log("REGDIAG     orgForTenant: explicit pointer=" + explicit + " +" + (Date.now() - __t0) + "ms");
   if (explicit) {
     const o = await getOrg(env, String(explicit));
+    console.log("REGDIAG     orgForTenant: getOrg(explicit) +" + (Date.now() - __t0) + "ms, found=" + !!o);
     if (o) return o;
   }
   try {
     const r = await fsQuery(env, "q_orgs", { where: { field: "connectTenantId", value: String(tenant.id) }, limit: 1 });
+    console.log("REGDIAG     orgForTenant: fsQuery fallback +" + (Date.now() - __t0) + "ms");
     const d = r && r[0];
     if (d && d.fields) return Object.assign({ id: d.id }, d.fields);
-  } catch { /* no Firestore in this deployment: fall through */ }
-  try { return await getOrg(env, String(tenant.id)); } catch { return null; }
+  } catch (e) { console.log("REGDIAG     orgForTenant: fsQuery THREW +" + (Date.now() - __t0) + "ms: " + (e && e.message)); }
+  try { const o2 = await getOrg(env, String(tenant.id)); console.log("REGDIAG     orgForTenant: getOrg(tenant.id) fallback2 +" + (Date.now() - __t0) + "ms"); return o2; } catch { return null; }
 }
 
 export { orgForTenant, authorizeOrg };
