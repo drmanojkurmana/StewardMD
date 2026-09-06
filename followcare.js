@@ -173,14 +173,12 @@
       ".fc-btn{background:var(--rds-primary);color:#fff;border:none;border-radius:12px;padding:12px 16px;font-weight:700;font-size:15px;cursor:pointer;min-height:48px;transition:filter 0.2s}",
       ".fc-btn:hover{filter:brightness(1.1)}",
       ".fc-btn.sec{background:transparent;color:var(--rds-primary);border:1.5px solid var(--rds-primary)}",
-      ".fc-row{border:1px solid var(--rds-line);border-radius:12px;padding:16px 18px;margin-bottom:12px;display:flex;align-items:center;gap:16px;cursor:pointer;background:var(--rds-surface);transition:border-color 0.2s}",
-      ".fc-row:hover{border-color:var(--rds-primary-soft)}",
-      // min-width + centered text: a fixed badge column so every row's title starts at the SAME x,
-      // regardless of whether the label is "Watch" or "On track" (was drifting per row before).
-      ".fc-row .fc-badge{flex:0 0 auto;min-width:74px;text-align:center;border-radius:10px;padding:6px 10px;font-size:12px;font-weight:800}",
-      ".fc-row .fc-meta{flex:1;min-width:0}.fc-row .fc-meta .fc-t{font-weight:600;font-size:var(--rds-fs-title, 20px);color:var(--rds-ink);margin-bottom:2px}.fc-row .fc-meta .fc-s{color:var(--rds-muted);font-size:var(--rds-fs-sec, 13px)}",
-      // Each segment is its own nowrap span (see episodeRow) — wraps land BETWEEN segments, not mid-word.
-      ".fc-row .fc-meta .fc-s-seg{white-space:nowrap}",
+      ".fc-row{border:1px solid #cbd5e1;border-radius:12px;margin-bottom:12px;display:flex;align-items:stretch;gap:0;cursor:pointer;background:#ffffff;box-shadow:4px 4px 0px #94a3b8;padding:0;overflow:hidden;transition:transform 0.1s, box-shadow 0.1s;font-family:'IBM Plex Sans', sans-serif}",
+      ".fc-row:hover{transform:translate(1px, 1px);box-shadow:3px 3px 0px #94a3b8}",
+      ".fc-row .fc-badge{display:flex;flex-direction:column;align-items:center;justify-content:center;width:48px;border-radius:0;padding:16px 0;background:#f8fafc;border-right:1px solid #cbd5e1;font-size:14px;font-weight:700}",
+      ".fc-row .fc-meta{padding:20px 24px;flex:1}",
+      ".fc-row .fc-meta .fc-t{font-size:17px;font-weight:700;color:#0f172a;margin:0 0 12px 0}",
+      ".fc-row .fc-meta .fc-s{display:flex;gap:16px;color:#64748b;font-size:13px;font-weight:500}",
       ".fc-row .fc-flag{flex:0 0 auto;color:#b3261e;font-size:14px;line-height:1;margin-left:2px}",
       ".fc-field{margin-bottom:14px}.fc-field label{display:block;font-weight:650;font-size:13.5px;margin-bottom:6px}",
       ".fc-field input,.fc-field select{width:100%;padding:11px 12px;border:1.5px solid var(--line,#dbe4e2);border-radius:11px;font-size:15px;background:var(--panel,#fff);color:var(--ink,#14202b);min-height:46px}",
@@ -402,12 +400,15 @@
     var segs = [statusMeta(ep.status), "next " + fmtWhen(ep.nextDueMs)];
     if (ep.riskPercent) segs.push(ep.riskPercent + "% readmit risk");
     return h("div", { "class": "fc-row", onclick: function () { renderDetail(ep.episodeId); } }, [
-      h("span", { "class": "fc-badge", style: "background:" + m.bg + ";color:" + m.color, text: m.icon + " " + m.label }),
+      h("span", { "class": "fc-badge", style: "background:#f8fafc;color:" + m.color, text: m.icon }),
       h("div", { "class": "fc-meta" }, [
-        h("div", { "class": "fc-t", text: (ep.disease || "Recovery") + (ep.score != null && ep.score >= 0 ? "  ·  " + ep.score + "/100" : "") }),
+        h("div", { "class": "fc-t" }, [
+          document.createTextNode((ep.disease || "Recovery") + (ep.score != null && ep.score >= 0 ? "  ·  " + ep.score + "/100" : "")),
+          h("span", { style: "font-size:12px;font-weight:600;color:#475569;background:#f1f5f9;padding:4px 8px;border-radius:4px;margin-left:8px;", text: m.label })
+        ]),
         h("div", { "class": "fc-s" }, segs.map(function (s, i) { return h("span", { "class": "fc-s-seg", text: (i ? " · " : "") + s }); }))
       ]),
-      ep.needsReview ? h("span", { "class": "fc-flag", title: "Needs review", "aria-label": "Needs review" }, ["⚑"]) : null
+      ep.needsReview ? h("span", { "class": "fc-flag", title: "Needs review", "aria-label": "Needs review", style: "padding: 20px 16px 20px 0" }, ["⚑"]) : null
     ]);
   }
 
@@ -742,9 +743,9 @@
       var rec = "";
       try { if (G.FollowCareAI) rec = FollowCareAI.recommendation({ escalation: ep.currentEscalation || ep.escalation, trend: ep.trend, needsReview: ep.needsReview, recoveryScore: ep.score }); } catch (e) {}
       var heroKids = [
-        h("div", { style: "font-size:18px;font-weight:800", text: ep.disease || "Recovery" }),
+        h("div", { style: "font-size:24px;font-weight:700;color:#0f172a;margin-bottom:8px;font-family:'IBM Plex Sans', sans-serif", text: ep.disease || "Recovery" }),
         h("div", { "class": "fc-pill", style: "display:inline-block;margin-top:6px;background:" + m.bg + ";color:" + m.color, text: m.icon + " " + m.label + (ui2() ? "" : (ep.score != null && ep.score >= 0 ? "  ·  " + ep.score + "/100" : "")) + (ep.riskPercent ? "  ·  " + ep.riskPercent + "% risk" : "") }),
-        h("div", { style: "color:var(--slate,#5a7184);font-size:13px;margin-top:6px", text: statusMeta(ep.status) + "  ·  next check-in " + fmtWhen(ep.nextDueMs) + (ep.trend ? "  ·  trend " + ep.trend : "") }),
+        h("div", { style: "color:#475569;font-size:14px;font-weight:600;margin-top:8px", text: statusMeta(ep.status) + "  ·  next check-in " + fmtWhen(ep.nextDueMs) + (ep.trend ? "  ·  trend " + ep.trend : "") }),
         rec ? h("div", { style: "margin-top:8px;padding:10px 12px;background:color-mix(in srgb,var(--teal,#0e6e63) 10%,transparent);border-radius:10px;font-size:13.5px;font-weight:600;color:var(--ink,#14202b)", text: "AI recommendation: " + rec }) : null
       ];
       if (ui2()) {
