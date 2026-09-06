@@ -44,7 +44,7 @@ import { invOrderMigration, recordInvestigationOrder } from "../../_wardsynq/mig
 import { prescriptionMigration, recordPrescription } from "../../_wardsynq/migrate-prescription.js";
 import { resultsMigration, recordResult } from "../../_wardsynq/migrate-results.js";
 import { encounterMigration, recordEncounterSync, ENCOUNTER_TERMINAL_STATUSES } from "../../_wardsynq/migrate-encounter.js";
-import { recordLinkForOrg } from "../../_wardsynq/migration-tenant.js";
+import { recordLinkForOrg, resolveTenantForOrg } from "../../_wardsynq/migration-tenant.js";
 import { actorDeps as wsqActorDeps, recordDeps as wsqRecordDeps } from "../../_wardsynq/deps.js";
 
 // The Encounter migration's one shared call site. Every hook below (ticket add, import, a terminal
@@ -891,6 +891,30 @@ export async function onRequest(context) {
         await requireSessionCap(env, actor, s, isVitals ? CAPS.EMR_VITALS : CAPS.EMR_TREAT);
         const t = await Q.getTicket(env, body.ticketId);
         if (!t || t.sessionId !== s.id) return json({ ok: false, error: "not_found" }, 404, request);
+        // NATIVE WARDSYNQ HOSPITAL (org.mode "wardsynq"): the doctor's assessment write goes DIRECTLY
+        // to the WardSynQ record - there is no GHIS write to shadow, so this bypasses the shadow/
+        // authoritative machinery below entirely (which stays OFF globally via WARDSYNQ_RECORD, and
+        // MUST stay off - that flag governs the separate GHIS-shadow migration, unrelated to this).
+        // org.mode is the ONLY signal: every other mode (native personal clinic, connect FHIR EMR,
+        // GHIS) is completely untouched by this branch. Reuses recordAssessment/recordAssessmentSignOff
+        // verbatim - same ClinicalNote versioning, idempotency and expectedVersion behaviour as the
+        // shadow path - only how `mig` is computed differs (no global-flag gate, "authoritative" always).
+        if (isAssessment) {
+          const wOrg = await ORG.getOrg(env, s.orgId || s.hospitalId);
+          if (wOrg && wOrg.mode === "wardsynq") {
+            const tf = await resolveTenantForOrg(env, wOrg.id, { getOrg: ORG.getOrg, tenantRow: wsqTenantRow });
+            if (!tf.tenant) return json({ ok: false, error: "wardsynq_tenant_not_configured" }, 409, request);
+            const wMig = { mode: "authoritative", tenantId: tf.tenantId };
+            const wMigrator = isSignOff ? recordAssessmentSignOff : recordAssessment;
+            const wCtx = { migration: wMig, session: s, ticket: t, vals: body.vals, idempotencyKey: body.idempotencyKey || null, actorDeps: wsqActorDeps(env), recordDeps: wsqRecordDeps(env, wMig.tenantId) };
+            const rec = await wMigrator(request, env, wCtx);
+            // The WardSynQ write's own success is the success condition - not a GHIS response, which
+            // never happens for this org. A refusal here is the whole operation's refusal.
+            if (!rec.ok) return json({ ok: false, error: "record_refused", wardsynq: rec }, rec.status || 502, request);
+            const legacy = await QT.appendTimeline(env, s, t, body.kind, body.text, actor.id);
+            return json(Object.assign({ ok: true }, legacy, { wardsynq: rec }), 200, request);
+          }
+        }
         // Four independent migrations share this one endpoint, because that is where each write
         // already lands: the nurse's vitals (_wardsynq/migrate-vitals.js), the doctor's assessment
         // (_wardsynq/migrate-assessment.js), the investigation order (_wardsynq/migrate-inv-order.js)
