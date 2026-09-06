@@ -579,12 +579,60 @@ from the record, or "Unsigned". No new settings key: sign-off rides the tenant's
 
 **Deliberately NOT done.** A correction after sign-off (an addendum on a new note) is not modelled;
 `note_signed` refuses the edit and says so. GHIS's `authorized.on` timestamp is not copied in — the
-signed version's own `meta.recordedAt` is the moment WardSynQ recorded the signature. Investigation
-orders and prescriptions untouched.
+signed version's own `meta.recordedAt` is the moment WardSynQ recorded the signature. Prescriptions
+untouched. (Investigation orders were untouched at the time; they were migrated next — below.)
 
-**Deliberately NOT done.** GHIS's "Authorise" (sign-off/lock) action is untouched — a WardSynQ note
-from this migration is never `signedBy`; that workflow step, if migrated, is its own future decision.
-`submitInvOrder`/`submitPrescribe` (kinds `"note"`/`"medication"`) are untouched.
+**The investigation order, migrated (2026-09-06, sixth migration).** `opd-emr.js`'s `submitInvOrder()`
+posts `{serviceId, diagnosis, emergency}` to GHIS's `/inv-order` (→ `orderInvestigation` →
+`/Doctor/Home/CreateServices`, untouched) and, only on success, mirrors it as a `kind:"note"` timeline
+line. `functions/_wardsynq/migrate-inv-order.js` files that same order STRUCTURALLY as a
+`ServiceRequest` — the canonical model already had one — rather than re-parsing the sentence the
+timeline shows. The timeline keeps its sentence; nothing is duplicated into it, nothing removed.
+
+**Recognised by a payload, never by the kind.** `"note"` carries many things (a free-text note, a
+referral line). So the client now sends a structured `order:{serviceId,name,diagnosis,emergency}`
+BESIDE the sentence, and the route treats a note as an order only when that payload is present
+(`isInvOrder`). A plain note still migrates nothing, and `"medication"` (prescriptions) is still
+entirely unrecognised. Its own settings key, `investigations` — a clinic can run vitals on and
+investigations off.
+
+**What maps, and what deliberately does not.** `code` is the GHIS service id the order is actually
+placed against ("LAB1118"), with `codeSystem:"ghis-service-id"` bolted on so nobody later reads it as
+a LOINC, and `display` the service name. `priority` is the Emergency toggle (stat / routine),
+`reason` the typed provisional diagnosis, `requesterId` the AUTHENTICATED clinician from the session,
+`status:"active"` because GHIS accepted the order before this code ran. `category` stays at the
+model's default `"other"`: the service id prefix hints at lab vs procedure, and inferring a clinical
+category from a naming convention would be inventing one. **Priority and reason are recorded here
+even though GHIS drops them** — `orderInvestigation` maps neither (it reads `indication`/`antibiotics`
+and has no emergency parameter at all). That is pre-existing GHIS behaviour, not touched; the record
+simply keeps what the doctor actually entered.
+
+**One order per test per encounter.** The id is deterministic from the encounter and the service id
+(`serviceRequestIdForTicket`, `opd-identity.js`, anchored the same way a note is), so a retry or a
+double-tap cannot mint a second `ServiceRequest`, and an identical re-order on one visit reports
+`already_ordered`. The trade-off, stated rather than hidden: a doctor genuinely re-ordering the SAME
+test within ONE visit is recorded once here, while GHIS and the visit timeline each keep both.
+Governance is the existing rule, not a new one — `ServiceRequest` is an `INSTRUCTION_TYPE`, so
+committing it active needs EXECUTE: a nurse is refused on scope, an AI is capped at DRAFT. Pharmacy,
+whose read scope is exactly `MedicationOrder`/`ServiceRequest`, can read orders and write none.
+
+**Read back through the generic endpoint, again no new route.** `GET /api/wardsynq/:tenant/patient/
+:id/ServiceRequest` already worked; the console's notes drawer renders an "Investigations · Clinical
+record" card, name over raw id, Emergency shown as a pill. It says plainly that results are not
+recorded here.
+
+**Deliberately NOT done.** Results (`DiagnosticReport`) are not migrated — nothing writes one yet, so
+the card must not imply a result exists. Prescriptions are not migrated: they mirror as
+`kind:"medication"` and carry no `order` payload, so nothing here sees them. Cancelling an order is
+not modelled. `authoritative` carries the SAME honest limitation the assessment's does: GHIS accepted
+the order in a separate request before this endpoint was reached, so a WardSynQ refusal is reported,
+never a rollback.
+
+**Deliberately NOT done _by the assessment migration_** (all three were later revisited; kept here as
+the scope that migration shipped with). GHIS's "Authorise" (sign-off/lock) was untouched and a note
+from it was never `signedBy` — migrated next, as the fifth migration above. `submitInvOrder` (kind
+`"note"`) was untouched — migrated as the sixth, above. `submitPrescribe` (kind `"medication"`)
+remains untouched today.
 
 **Deliberately NOT done.** No GHIS write migrated (`opd-emr.js` still posts to `/api/ghis`; the nurse-vitals timeline write is the one migrated, above, and only where a tenant opts in); the
 cut-over flag untouched; the 18 queue roles mapped onto actor tiers on 2026-09-06 (see "Who may do what" above); no on-prem repository; no connector

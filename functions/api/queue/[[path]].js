@@ -40,6 +40,7 @@ import { verifyStaffSession, verifySecret, pinLocked, nextPinState, mintStaffSes
 import { vitalsMigration, recordVitals, patientIdForTicket } from "../../_wardsynq/migrate-vitals.js";
 import { registrationMigration, registerPatientRecord } from "../../_wardsynq/migrate-registration.js";
 import { assessmentMigration, recordAssessment, recordAssessmentSignOff } from "../../_wardsynq/migrate-assessment.js";
+import { invOrderMigration, recordInvestigationOrder } from "../../_wardsynq/migrate-inv-order.js";
 import { recordLinkForOrg } from "../../_wardsynq/migration-tenant.js";
 import { actorDeps as wsqActorDeps, recordDeps as wsqRecordDeps } from "../../_wardsynq/deps.js";
 const wsqTenantRow = (e, id) => (e.CONNECT_DB ? e.CONNECT_DB.prepare("SELECT * FROM connect_tenant WHERE id=?").bind(String(id)).first() : null);
@@ -826,28 +827,37 @@ export async function onRequest(context) {
         const isVitals = QT.tlKind(body.kind) === "vitals";
         const isAssessment = QT.tlKind(body.kind) === "assessment";
         const isSignOff = isAssessment && body.signOff === true;   // the doctor's Authorise, after GHIS confirmed it
+        // The doctor's investigation order rides the kind:"note" line it ALREADY mirrors as, told
+        // apart by the structured `order` payload opd-emr.js now sends beside the sentence. A plain
+        // note (the many other things that kind carries) has no `order` and is untouched.
+        const isInvOrder = QT.tlKind(body.kind) === "note" && !!body.order && typeof body.order === "object";
         await requireSessionCap(env, actor, s, isVitals ? CAPS.EMR_VITALS : CAPS.EMR_TREAT);
         const t = await Q.getTicket(env, body.ticketId);
         if (!t || t.sessionId !== s.id) return json({ ok: false, error: "not_found" }, 404, request);
-        // Two independent migrations share this one endpoint, because that is where each write
-        // already lands: the nurse's vitals (_wardsynq/migrate-vitals.js) and, since 2026-09-06, the
-        // doctor's assessment (_wardsynq/migrate-assessment.js). Neither touches "note"/"medication"
-        // kinds — investigations and prescriptions are not migrated. With the tenant "off" (the
-        // default, and every tenant today) neither branch is entered and the response is unchanged.
+        // Three independent migrations share this one endpoint, because that is where each write
+        // already lands: the nurse's vitals (_wardsynq/migrate-vitals.js), the doctor's assessment
+        // (_wardsynq/migrate-assessment.js), and, since 2026-09-06, the doctor's investigation order
+        // (_wardsynq/migrate-inv-order.js). Each reads its OWN tenant settings key, so a clinic can
+        // run vitals on and investigations off. Prescriptions ("medication") are still not migrated,
+        // and a "note" with no `order` payload is still untouched. With the tenant "off" (the
+        // default, and every tenant today) no branch is entered and the response is unchanged.
         const mig = isVitals ? await vitalsMigration(env, s, { getOrg: ORG.getOrg, tenantRow: wsqTenantRow })
           : isAssessment ? await assessmentMigration(env, s, { getOrg: ORG.getOrg, tenantRow: wsqTenantRow })
+          : isInvOrder ? await invOrderMigration(env, s, { getOrg: ORG.getOrg, tenantRow: wsqTenantRow })
           : { mode: "off" };
-        const migrator = isVitals ? recordVitals : isSignOff ? recordAssessmentSignOff : recordAssessment;
+        const migrator = isVitals ? recordVitals : isSignOff ? recordAssessmentSignOff : isInvOrder ? recordInvestigationOrder : recordAssessment;
         if (mig.mode !== "off") {
           const ctx = isVitals
             ? { migration: mig, session: s, ticket: t, vitals: body.vitals, note: body.vitals && body.vitals.note, recordedAt: new Date().toISOString(), actorDeps: wsqActorDeps(env), recordDeps: wsqRecordDeps(env, mig.tenantId) }
+            : isInvOrder
+            ? { migration: mig, session: s, ticket: t, order: body.order, actorDeps: wsqActorDeps(env), recordDeps: wsqRecordDeps(env, mig.tenantId) }
             : { migration: mig, session: s, ticket: t, vals: body.vals, actorDeps: wsqActorDeps(env), recordDeps: wsqRecordDeps(env, mig.tenantId) };
           if (mig.mode === "authoritative") {
             // The record must accept before the timeline copy is made — true for vitals, whose
-            // record write and timeline write are peers in this ONE request. For the assessment the
-            // GHIS save already happened via a wholly separate request before this endpoint was even
-            // reached (migrate-assessment.js explains why); "authoritative" there means the refusal
-            // is reported to the caller, not that anything upstream is undone.
+            // record write and timeline write are peers in this ONE request. For the assessment and
+            // the investigation order the GHIS write already happened via a wholly separate request
+            // before this endpoint was even reached (each migrate-*.js explains why); "authoritative"
+            // there means the refusal is reported to the caller, not that anything upstream is undone.
             const rec = await migrator(request, env, ctx);
             if (!rec.ok) return json({ ok: false, error: "record_refused", wardsynq: rec }, rec.status || 502, request);
             const legacy = await QT.appendTimeline(env, s, t, body.kind, body.text, actor.id);

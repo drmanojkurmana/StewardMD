@@ -945,7 +945,7 @@
   // the stewardmd.in base in-app (relative /api hits the Capacitor local origin). Best-effort; silent on failure.
   function qBase() { try { var h = (G.location && G.location.hostname) || ""; return /(^|\.)stewardmd\.in$/i.test(h) ? "" : "https://stewardmd.in"; } catch (e) { return "https://stewardmd.in"; } }
   function fbTok() { try { var u = (G.SMD_AUTH && G.SMD_AUTH.currentUser) || (G.firebase && G.firebase.auth && G.firebase.auth().currentUser); return (u && u.getIdToken) ? u.getIdToken() : Promise.resolve(null); } catch (e) { return Promise.resolve(null); } }
-  function addToTimeline(kind, text, vals, signOff) {
+  function addToTimeline(kind, text, vals, signOff, order) {
     if (!st.ticketId || !st.sessionId || !text) return;   // only when opened from a queue ticket
     fbTok().then(function (t) {
       if (!t) return;
@@ -955,9 +955,12 @@
       if (signOff) body.signOff = true;
       // The structured fields travel WITH the summary text. The timeline keeps its text line; where
       // a tenant has opted a clinical write into the WardSynQ record (currently: vitals, kind
-      // "assessment"), the server maps the structured payload into the canonical record and the
-      // text line is untouched either way.
+      // "assessment", and an investigation order on a kind "note"), the server maps the structured
+      // payload into the canonical record and the text line is untouched either way.
       if (vals) body.vals = vals;
+      // What distinguishes an investigation order from every other kind:"note" line. Without it the
+      // server treats this as a plain note and files nothing, which is exactly the old behaviour.
+      if (order) body.order = order;
       fetch(qBase() + "/api/queue/timeline", { method: "POST", headers: { "Content-Type": "application/json", Authorization: "Bearer " + t }, body: JSON.stringify(body) })
         .then(function (r) { return r.json().catch(function () { return null; }); })
         .then(function (d) {
@@ -1932,7 +1935,7 @@
         if (res.status === 401 || d.error === "login_required") { toast("Connect Ward Sync (GHIS) first."); return; }
         if (!res.ok || d.ok === false) { toast(ghisSay(d.resp)); return; }
         toast(okMsg);
-        if (tl && tl.text) { addToTimeline(tl.kind, tl.text, tl.vals, tl.signOff); setTimeout(loadTimeline, 600); }   // mirror this action into the visit summary + refresh the Profile timeline
+        if (tl && tl.text) { addToTimeline(tl.kind, tl.text, tl.vals, tl.signOff, tl.order); setTimeout(loadTimeline, 600); }   // mirror this action into the visit summary + refresh the Profile timeline
         st.invDraft = {}; st.medDraft = {};
         if (onOk) try { onOk(); } catch (e) {}
         loadProfile({ patientId: st.patient.mrn || "", recordNo: st.recordNo || "" });
@@ -1943,8 +1946,14 @@
   function submitInvOrder() {
     var d = st.invDraft || {}; if (!d.service) return;
     if (!confirmed('Order "' + d.service.name + '" for this patient in GHIS?')) return;
+    // The timeline sentence is unchanged. `order` rides beside it so the server can file the SAME
+    // order structurally in the clinical record (functions/_wardsynq/migrate-inv-order.js) instead of
+    // re-parsing this sentence. Ignored entirely by clinics with the migration off, which is all of
+    // them today. Note `emergency` and `diagnosis` are carried here even though GHIS itself drops
+    // them - that is what makes the record keep what the doctor actually entered.
     postWrite("/inv-order", { serviceId: d.service.id, diagnosis: d.diagnosis || "", emergency: !!d.emergency }, "Investigation ordered.",
-      { kind: "note", text: "Investigation ordered: " + d.service.name + (d.diagnosis ? " (for " + d.diagnosis + ")" : "") + (d.emergency ? " [emergency]" : "") });
+      { kind: "note", text: "Investigation ordered: " + d.service.name + (d.diagnosis ? " (for " + d.diagnosis + ")" : "") + (d.emergency ? " [emergency]" : ""),
+        order: { serviceId: d.service.id, name: d.service.name || "", diagnosis: d.diagnosis || "", emergency: !!d.emergency } });
   }
   function submitPrescribe() {
     var d = st.medDraft || {}; if (!d.drug) return;

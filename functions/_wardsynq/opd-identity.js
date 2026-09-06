@@ -42,4 +42,21 @@ function noteIdForTicket(ticket, kind) {
   return `opd-note-${slug}-${kind || "note"}`;
 }
 
-export { patientIdForMrn, patientIdForTicket, encounterIdForTicket, noteIdForTicket };
+/**
+ * The id ONE ordered test, on ONE encounter, is filed under. Anchored the same way a note is (the
+ * GHIS episode when there is one, else the ticket), plus the service actually ordered — so a retried
+ * or double-tapped request resolves to the SAME ServiceRequest instead of a second one, and two
+ * DIFFERENT tests on one visit stay two separate orders.
+ *
+ * `null` when there is no anchor or no service id: an order that cannot name what was ordered is not
+ * an order, and is never given a generated id to make it look like one.
+ */
+function serviceRequestIdForTicket(ticket, serviceId) {
+  const anchor = ticket && (ticket.ghisEpisodeId || ticket.id);
+  const svc = String(serviceId == null ? "" : serviceId).trim();
+  if (!anchor || !svc) return null;
+  const slug = (v) => String(v).toLowerCase().replace(/[^a-z0-9]+/g, "-");
+  return `opd-order-${slug(anchor)}-${slug(svc)}`;
+}
+
+export { patientIdForMrn, patientIdForTicket, encounterIdForTicket, noteIdForTicket, serviceRequestIdForTicket };
