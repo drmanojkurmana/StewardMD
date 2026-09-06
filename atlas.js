@@ -509,7 +509,7 @@
     st.sel = null;                      // selection is per-slice; Lock survives instead
     var s = curSlice();
     var img = G.document.getElementById("atlasImg");
-    if (img && s) img.src = imgUrl(s.img);
+    if (img && s) gateImg(img, imgUrl(s.img));
     var c = G.document.getElementById("atlasCount");
     if (c) c.textContent = i + "/" + n;
     var r = G.document.getElementById("atlasRange");
@@ -721,6 +721,7 @@
   function afterViewerPaint() {
     var stage = G.document.getElementById("atlasStage");
     if (!stage) return;
+    gateImg(G.document.getElementById("atlasImg"));
     drawOverlay();
 
     var r = G.document.getElementById("atlasRange");
@@ -751,6 +752,23 @@
       _ro = new G.ResizeObserver(function () { drawOverlay(); });
       _ro.observe(stage);
     }
+  }
+
+  // The pin overlay is built from local slice metadata, so it paints instantly; the slice
+  // image is a network load from the live origin. Without gating, the pins render "ahead"
+  // of the image and point at black until it arrives (or forever, if it 404s). Tie the pins
+  // to the image: hide them (is-loading) until the image's load event, reveal on load, and
+  // show an error state on failure. Cached/preloaded frames (img.complete) reveal at once.
+  function gateImg(img, url) {
+    if (!img) return;
+    var stage = G.document.getElementById("atlasStage");
+    function cls(add, name) { if (stage) stage.classList[add ? "add" : "remove"](name); }
+    function show() { cls(false, "is-loading"); cls(false, "is-error"); drawOverlay(); }
+    function fail() { cls(false, "is-loading"); cls(true, "is-error"); }
+    img.onload = show; img.onerror = fail;
+    if (url != null) { cls(false, "is-error"); cls(true, "is-loading"); img.src = url; }
+    if (img.complete && img.naturalWidth > 0) show();
+    else cls(true, "is-loading");
   }
 
   function drawOverlay() {

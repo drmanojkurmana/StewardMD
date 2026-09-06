@@ -70,8 +70,24 @@ body.atlas-lock { overflow: hidden; }
 /* Explicit width/height come from imageBox(), so fill is correct here — the box
    already has the file's aspect ratio and will not distort. */
 .atlas-img { position: absolute; object-fit: fill; }
-.atlas-ov { position: absolute; inset: 0; pointer-events: none; }
+.atlas-ov { position: absolute; inset: 0; pointer-events: none; transition: opacity .18s ease; }
 .atlas-ov svg { position: absolute; inset: 0; overflow: visible; }
+/* Keep the pins tied to the image: hide them (and the image's blank frame) until the
+   slice loads, so the labels never point at black. */
+.atlas-stage.is-loading .atlas-ov,
+.atlas-stage.is-error .atlas-ov { opacity: 0; }
+.atlas-stage.is-loading .atlas-img { opacity: 0; }
+.atlas-stage.is-loading::after {
+  content: ""; position: absolute; left: 50%; top: 50%; width: 28px; height: 28px; margin: -14px 0 0 -14px;
+  border: 2px solid rgba(255,255,255,.25); border-top-color: rgba(255,255,255,.9); border-radius: 50%;
+  animation: atlasSpin .8s linear infinite;
+}
+.atlas-stage.is-error::after {
+  content: "Image unavailable — check your connection"; position: absolute; left: 50%; top: 50%;
+  transform: translate(-50%,-50%); max-width: 78%; text-align: center; color: #9aa; font-size: 13px;
+}
+@keyframes atlasSpin { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) { .atlas-stage.is-loading::after { animation: none; } }
 
 .atlas-lead { stroke-width: 1; opacity: .85; }
 .atlas-tick { stroke-width: 1.5; opacity: .85; }
