@@ -4833,3 +4833,58 @@ the check can never gate the write either way. The native drug catalog reuses th
 wired into the same engine call but rest on the same UNAPPROVED seed content and the same
 never-gates posture; pharmacy/committee sign-off, which is what would ever let any of this actually
 gate an order, has not happened and is not this session's call to grant.
+
+## 2026-09-06 (part 5) — Allergy capture, from the EXISTING assessment field, not a new UI
+
+The owner said "Complete it" against the named gap ("allergy capture UI — doesn't exist"). Built the
+data-capture half of that gap without building a new UI at all, and explicitly did NOT build the
+part that would need one.
+
+**Decision: reuse `Known_allergies_details` — the field already on GHIS's own Initial Assessment
+form every doctor fills in on every patient — instead of building a check-in questionnaire.** Grepped
+for "allerg" in `opd-emr.js` before writing anything and found this field already exists, already
+captured, already free text. A new capture UI was the one thing explicitly flagged as real, unbuilt
+work; reusing existing data collection is a genuinely smaller, safer change than adding a second
+place a doctor is asked about allergies (which would also raise "which one is authoritative when
+they disagree" — a question this decision avoids by having exactly one source).
+
+**Decision: the parser is biased toward MISSING an allergy over FABRICATING one, and every design
+choice traces to that.** Stated as the file's own header, because it is the one property review
+would need to re-verify by inspection, not just by reading a summary: a missed allergy degrades to
+today's baseline (nothing) — no regression. A fabricated one (wrong substance, invented severity)
+actively corrupts the chart — strictly worse than today. Concretely: substance resolution reuses
+`wardsynq-safety.js`'s OWN `resolveGeneric()` verbatim (already "deliberately conservative: exact
+token matching only, no fuzzy matching, no stemming" — nothing added on top); an unresolved fragment
+is still stored (visible to a human as `reportedText`) but with `substance:"unspecified"`, which
+matches nothing in `checkAllergies()` by construction — never presented as machine-checked when it
+was not; severity/reaction/criticality are NEVER inferred from text, every entry is
+`severity:"unknown"`, `verifiedBy:null`; an explicit denial ("NKDA", "denies allergies") writes
+NOTHING — an entry claiming the patient was checked and clear would itself be invented. Verified by
+running the parser against the REAL 3307-generic StewardMD pack (not just a test fixture) on
+realistic clinical phrasing before writing a single test, specifically to catch a rule that looked
+correct against a small fixture but behaved differently at real vocabulary scale.
+
+**Decision: one AllergyIntolerance entry per resolved substance (or per unresolved fragment), ID'd
+by (patient, substance-or-text) — not one blob per patient.** Lets `checkAllergies()` actually match
+each one independently (a patient can be allergic to more than one thing), and makes a re-save of
+the unchanged text a true no-op (idempotent) via the same `sameAllergy()` + `expectedVersion` pattern
+every sibling migration already uses. Named trade-off, not hidden: editing the text to REMOVE a
+previously-reported entry does not retract its prior version — this store is append-only everywhere,
+and a superseded-but-still-versioned allergy is the same posture already accepted for every other
+resource here, not a new gap this feature introduces.
+
+**Decision: wired into the assessment-save path itself, gated on `isAssessment && !isSignOff &&
+wsqMig` specifically — not `mig.mode === "authoritative"` generally.** A GHIS-shadow tenant the owner
+happens to have configured as authoritative for ITS OWN reasons must not pick up allergy capture as
+a side effect of that unrelated setting; only an actual wardsynq-native org (the thing `wsqMig`
+alone signals) gets it. Best-effort or the assessment write's own success: awaited (so a Worker
+does not need `waitUntil` to guarantee it runs) but wrapped so a failure here can never turn a
+successful assessment save into a failed response — the exact `syncEncounter()` contract already
+established for the analogous case.
+
+**Not done, named:** a doctor explicitly CONFIRMING or entering a STRUCTURED allergy (picking a drug
+from a list, marking a reaction as severe/verified) remains unbuilt — that is the actual "allergy
+capture UI" gap, still open; what changed is that the free text already being collected now feeds
+the safety check instead of going nowhere. Also unchanged: this only runs for wardsynq-native
+assessments, never GHIS/shadow tenants, and the check itself still never gates a prescription
+(unrelated to what changed here — that boundary was set in part 4 and nothing here touches it).

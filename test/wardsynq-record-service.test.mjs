@@ -25,6 +25,8 @@ import { invOrderMigration, orderFromInvestigation, sameOrder, recordInvestigati
 import { prescriptionMigration, orderFromPrescription, samePrescription, recordPrescription } from "../functions/_wardsynq/migrate-prescription.js";
 import { resultsMigration, reportFromResult, labReportFromResult, radiologyReportFromResult, sameReport, matchServiceRequest, recordResult } from "../functions/_wardsynq/migrate-results.js";
 import { encounterMigration, encounterStatusFor, encounterFromTicket, sameEncounter, recordEncounterSync } from "../functions/_wardsynq/migrate-encounter.js";
+import { parseAllergyFreeText, resolveAllergySubstance, sameAllergy, allergyId, recordAllergiesFromAssessment } from "../functions/_wardsynq/migrate-allergy.js";
+import { compileRulePack as compileTestRulePack } from "../wardsynq/wardsynq-safety.js";
 import { readFileSync } from "node:fs";
 import { makeMockDb } from "../functions/_connect/testkit.js";
 import { can } from "../functions/_connect/enterprise/rbac.js";
@@ -2208,4 +2210,123 @@ test("native prescribing: the GET /rx-safety pre-check NEVER gates, reuses wsqFo
   assert.ok(!/\ballowed\b/.test(rx.replace(/\/\*[\s\S]*?\*\//g, "").replace(/\/\/.*$/gm, "")), "no 'allowed' concept anywhere in the actual code — this file cannot gate by construction");
   assert.ok(rx.includes("unapproved: true"), "every shaped response is labeled unapproved");
   assert.ok(rx.includes("catch (e)"), "a read/actor-resolution failure degrades rather than throwing into the prescription write");
+});
+
+/* ------------------------------------------------------------------ allergy capture, best-effort, from the existing assessment form */
+
+// 2026-09-06 (part 5): "Complete it" - the allergy capture the CDSS wiring was missing. Reuses the
+// assessment form's EXISTING Known_allergies_details field (no new UI). Every test here is written
+// against the file's own stated bias: a MISSED allergy degrades to today's baseline (nothing), a
+// FABRICATED one would be worse than nothing - so nothing here may ever invent a substance,
+// severity or reaction the text did not support.
+const ALLERGY_TEST_PACK = compileTestRulePack({
+  version: "test-allergy-1",
+  generics: ["amoxicillin", "ibuprofen", "aspirin", "paracetamol"],
+  allergyClasses: { penicillins: ["amoxicillin"] },
+});
+
+test("parseAllergyFreeText: denies explicitly writes nothing; empty writes nothing; a real substance resolves; nonsense stays honestly unresolved", () => {
+  assert.deepEqual(parseAllergyFreeText("", ALLERGY_TEST_PACK), { raw: "", denies: false, entries: [] });
+  assert.deepEqual(parseAllergyFreeText("NKDA", ALLERGY_TEST_PACK), { raw: "NKDA", denies: true, entries: [] });
+  assert.deepEqual(parseAllergyFreeText("No known drug allergies", ALLERGY_TEST_PACK).denies, true);
+  assert.deepEqual(parseAllergyFreeText("Denies any allergies", ALLERGY_TEST_PACK).denies, true);
+  const resolved = parseAllergyFreeText("Amoxicillin - rash", ALLERGY_TEST_PACK);
+  assert.equal(resolved.denies, false);
+  assert.equal(resolved.entries.length, 1);
+  assert.equal(resolved.entries[0].substance, "amoxicillin");
+  assert.equal(resolved.entries[0].resolved, true);
+  assert.equal(resolved.entries[0].reportedText, "Amoxicillin - rash");
+  const unresolved = parseAllergyFreeText("some vague thing nobody knows", ALLERGY_TEST_PACK);
+  assert.equal(unresolved.entries[0].substance, "unspecified", "unresolved text is recorded as unspecified, never guessed");
+  assert.equal(unresolved.entries[0].resolved, false);
+});
+
+test("parseAllergyFreeText: splits multiple substances, dedupes, and a class-name match works (penicillins)", () => {
+  const p = parseAllergyFreeText("Penicillin, Ibuprofen and Aspirin", ALLERGY_TEST_PACK);
+  const substances = p.entries.map((e) => e.substance);
+  assert.deepEqual(substances, ["penicillins", "ibuprofen", "aspirin"]);
+  const dup = parseAllergyFreeText("Aspirin, aspirin", ALLERGY_TEST_PACK);
+  assert.equal(dup.entries.length, 1, "the same resolved substance twice is one entry, not two");
+});
+
+test("resolveAllergySubstance never fuzzy-matches: an unrelated word never resolves to a real drug", () => {
+  assert.equal(resolveAllergySubstance("xyzzyabc", ALLERGY_TEST_PACK), null);
+  assert.equal(resolveAllergySubstance("paracetamoll", ALLERGY_TEST_PACK), null, "a misspelling must not silently resolve to the wrong drug");
+});
+
+test("THE PROOF, allergy capture: a native assessment save records the allergy; a second save with the same text is idempotent; a denial writes nothing; another tenant cannot write; a nurse cannot either (not an EMR_TREAT capability)", async () => {
+  const h = opdHospital({ "fb:dr-menon": { role: "doctor" }, "fb:sister-anu": { role: "nurse" } }, { settings: {} });
+  const ticket = { id: "TKT-60", ghisEpisodeId: "EP-60", ghisPatientId: "GH-60001" };
+  const actorDeps = { db: h.db, identifyFn: h.deps.identifyFn, claimsFn: h.deps.claimsFn, staffSession: null, orgForTenant: h.deps.orgForTenant, authorizeOrg: h.deps.authorizeOrg };
+  const recordDeps = { repository: h.repository, pseudonym: async () => null };
+  const asDoctor = new Request("https://x/api/queue/timeline", { method: "POST", headers: { "X-Test-User": "fb:dr-menon" } });
+  const asNurse = new Request("https://x/api/queue/timeline", { method: "POST", headers: { "X-Test-User": "fb:sister-anu" } });
+  const migration = { mode: "authoritative", tenantId: "gimsr" };
+
+  const out = await recordAllergiesFromAssessment(asDoctor, ENV, { migration, ticket, vals: { Known_allergies_details: "Amoxicillin - rash, Ibuprofen" }, actorDeps, recordDeps, rulePack: ALLERGY_TEST_PACK });
+  assert.equal(out.ok, true); assert.equal(out.written, 2);
+  assert.equal(out.entries[0].id, "opd-alg-opd-pat-gh-60001-amoxicillin");
+  assert.equal(out.entries[1].id, "opd-alg-opd-pat-gh-60001-ibuprofen");
+
+  // A second device reads the SAME entry back, unsigned/unverified as it must be from free text.
+  const doctorB = await client(h, "fb:dr-menon");
+  const entry = await doctorB.governed.get(doctorB.actor, "AllergyIntolerance", "opd-alg-opd-pat-gh-60001-amoxicillin");
+  assert.equal(entry.substance, "amoxicillin"); assert.equal(entry.reportedText, "Amoxicillin - rash");
+  assert.equal(entry.verifiedBy, null, "never auto-verified from free text");
+  assert.equal(entry.severity, "unknown", "never inferred from free text");
+
+  // Re-saving the SAME assessment text is idempotent - no duplicate versions.
+  const again = await recordAllergiesFromAssessment(asDoctor, ENV, { migration, ticket, vals: { Known_allergies_details: "Amoxicillin - rash, Ibuprofen" }, actorDeps, recordDeps, rulePack: ALLERGY_TEST_PACK });
+  assert.equal(again.written, 0);
+  assert.ok(again.entries.every((e) => e.skipped === "unchanged"));
+
+  // A denial writes NOTHING - not an entry saying "denies", not anything.
+  const denial = await recordAllergiesFromAssessment(asDoctor, ENV, { migration, ticket: { id: "TKT-61", ghisEpisodeId: "EP-61", ghisPatientId: "GH-60002" }, vals: { Known_allergies_details: "NKDA" }, actorDeps, recordDeps, rulePack: ALLERGY_TEST_PACK });
+  assert.equal(denial.ok, true); assert.equal(denial.written, 0); assert.equal(denial.skipped, "denies");
+
+  // Off mode: nothing runs, byte-identical to every other migration's off contract.
+  assert.deepEqual(await recordAllergiesFromAssessment(asDoctor, ENV, { migration: { mode: "off" }, ticket, vals: { Known_allergies_details: "Amoxicillin" }, actorDeps, recordDeps, rulePack: ALLERGY_TEST_PACK }), { mode: "off", tenantId: null, ok: true, skipped: "off", written: 0 });
+
+  // A nurse holds EMR_VITALS, not EMR_TREAT: her actor resolves fine (the outer call still
+  // succeeds, ok:true), but the PER-ENTRY write is refused with governance - caught by the same
+  // "one bad entry never sinks the rest" loop that protects a good entry from a bad one, so the
+  // failure surfaces per-entry, not as a top-level refusal.
+  const nurseTry = await recordAllergiesFromAssessment(asNurse, ENV, { migration, ticket: { id: "TKT-62", ghisEpisodeId: "EP-62", ghisPatientId: "GH-60003" }, vals: { Known_allergies_details: "Amoxicillin" }, actorDeps, recordDeps, rulePack: ALLERGY_TEST_PACK });
+  assert.equal(nurseTry.ok, true); assert.equal(nurseTry.written, 0);
+  assert.equal(nurseTry.entries[0].error, "governance");
+});
+
+test("recordAllergiesFromAssessment never throws on a malformed vals/ticket, and unresolved text is still recorded for a human to read", async () => {
+  const h = opdHospital({ "fb:dr-menon": { role: "doctor" } }, { settings: {} });
+  const actorDeps = { db: h.db, identifyFn: h.deps.identifyFn, claimsFn: h.deps.claimsFn, staffSession: null, orgForTenant: h.deps.orgForTenant, authorizeOrg: h.deps.authorizeOrg };
+  const recordDeps = { repository: h.repository, pseudonym: async () => null };
+  const asDoctor = new Request("https://x/api/queue/timeline", { method: "POST", headers: { "X-Test-User": "fb:dr-menon" } });
+  const migration = { mode: "authoritative", tenantId: "gimsr" };
+  // No vals at all.
+  assert.equal((await recordAllergiesFromAssessment(asDoctor, ENV, { migration, ticket: { id: "T", ghisEpisodeId: "E", ghisPatientId: "M" }, vals: null, actorDeps, recordDeps, rulePack: ALLERGY_TEST_PACK })).skipped, "no_text");
+  // No patient identity on the ticket at all -> refused, not a fabricated patient.
+  const noPatient = await recordAllergiesFromAssessment(asDoctor, ENV, { migration, ticket: { id: "T2" }, vals: { Known_allergies_details: "Amoxicillin" }, actorDeps, recordDeps, rulePack: ALLERGY_TEST_PACK });
+  assert.equal(noPatient.ok, false); assert.equal(noPatient.error, "no_patient_identity");
+  // Unresolved text is still written, visibly, as "unspecified" - readable, never silently dropped.
+  const out = await recordAllergiesFromAssessment(asDoctor, ENV, { migration, ticket: { id: "T3", ghisEpisodeId: "E3", ghisPatientId: "M3" }, vals: { Known_allergies_details: "some strange reaction to something unclear" }, actorDeps, recordDeps, rulePack: ALLERGY_TEST_PACK });
+  assert.equal(out.written, 1);
+  const doctorB = await client(h, "fb:dr-menon");
+  const rec = await doctorB.governed.get(doctorB.actor, "AllergyIntolerance", allergyId("opd-pat-m3", { resolved: false, reportedText: "some strange reaction to something unclear" }));
+  assert.equal(rec.substance, "unspecified");
+  assert.equal(rec.reportedText, "some strange reaction to something unclear");
+  assert.equal(rec.substanceCodeSystem, "unresolved-free-text");
+});
+
+test("sameAllergy: idempotent on unchanged content; any changed field is treated as a new version", () => {
+  const a = { patientId: "p1", substance: "amoxicillin", reportedText: "Amoxicillin - rash" };
+  assert.equal(sameAllergy(a, { ...a }), true);
+  assert.equal(sameAllergy(a, { ...a, substance: "aspirin" }), false);
+  assert.equal(sameAllergy(a, { ...a, reportedText: "different text" }), false);
+});
+
+test("wiring: the native assessment-save route calls this ONLY for wardsynq-native content saves, never sign-off, never a GHIS-shadow tenant that happens to be authoritative for its own reasons", () => {
+  const src = readFileSync(new URL("../functions/api/queue/[[path]].js", import.meta.url), "utf8");
+  const h = src.slice(src.indexOf('if (seg === "timeline") {'), src.indexOf('// Slide-to-checkout'));
+  assert.ok(h.includes("recordAllergiesFromAssessment("));
+  assert.ok(h.includes("isAssessment && !isSignOff && wsqMig"), "gated on isAssessment, not sign-off, and wsqMig specifically - not mig.mode alone");
 });
