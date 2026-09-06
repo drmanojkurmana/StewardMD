@@ -362,6 +362,46 @@ with `record_read_failed` (a D1 "no such table" surfacing as a 502 from the edge
 correct. Applied with the command in the file's own header; it is additive and idempotent. Two
 latency fixes (#868, #869) were made while chasing it; they are real but were not the cause.
 
+### Safety defects found and fixed overnight 2026-09-07
+
+One defect class, five instances: **code asserting something clinically stronger than its input
+supported, or reporting a check that never ran as a check that came back clean.** All merged, all
+with regression tests; each was measured against the real rule pack or the real helper before fixing.
+
+| # | PR | What it did |
+|---|----|-------------|
+| 1 | #874 | `migrate-allergy.js`'s denial regex only matched ADJACENT words, so `"no known amoxicillin allergy"` recorded a RESOLVED penicillin allergy for a patient documented as NOT allergic - which then makes the Allergy Shield report a first-line antibiotic contraindicated. Five plausible phrasings did it. The mirror bug too: `"Amoxicillin - rash, no known food allergies"` previously recorded NOTHING. |
+| 2 | #875 | `opd-emr.js`'s prescribing note discarded `unresolvedDrug`, so `"Augmentin 625"` (a brand name the pack does not resolve) printed *"No interaction found"* to the prescriber. Nothing had been checked; Augmentin is a penicillin. |
+| 3 | #876 | `parseFloat` / strip-then-parse coercion: `"120/80"` typed in the systolic box became a systolic of **12080**, `"98,6"` became 986, a `"1:320"` Widal titer became 1. Fixed with one guard, `numericValue()` in `wardsynq-model.js` - the whole string must be one number, optionally with a digit-free unit. A value that is not becomes *nothing recorded*, never a guess. |
+| 4 | #878 | `checkInteractions()` silently dropped any active medication it could not resolve: a patient on warfarin prescribed ibuprofen got `INTERACTION_MAJOR` when the warfarin order carried a generic and **nothing at all** when it carried a GHIS material id. `evaluate()` now reports `unresolvedActiveMeds`. Same PR: `SafetyEngine.hook()` (the eMAR's wiring point) dropped `unresolvedDrug` entirely, so an unrecognised drug reached the bedside as `{allowed:true, warnings:[]}`. Both now travel as WARNINGS - never blocks, because this content is unapproved and must not invent a refusal at the moment of administration. |
+| 5 | #879 | `RecordService` held the raw ungoverned `ClinicalStore` as a public property, under a comment claiming it did not. Latent (no caller reached it), now a constructor local. |
+
+**Drug CONTENT was deliberately not touched.** Brand names common in India (Augmentin, Co-amoxiclav)
+do not resolve, so no allergy or interaction check runs for them. That is a pharmacy sign-off
+question per this file's STATUS line, not a code fix. What changed is that the gap is now reported
+instead of being shown to the prescriber as reassurance.
+
+### Testing the record without a phone (2026-09-07)
+
+Until this night the only thing that had ever driven the real OPD request path end to end was a
+human with an unlocked iPhone on a USB cable, and it was unavailable for hours when the phone
+auto-locked. Two files fix that:
+
+- **`test/wardsynq-opd-route-flow.test.mjs`** drives `onRequest()` itself - register, check in,
+  vitals, assessment, sign-off, order, CDSS, prescribe, and the record write each triggers. One
+  module is faked (`_fbfirestore.js`, in memory, real compare-and-set), the persistence seam points
+  at `MemoryRepository`. Runs in CI today. **Import order matters and cost an hour: a static
+  `import` is hoisted, so anything reaching `_fbfirestore.js` must be loaded with dynamic `import()`
+  AFTER `mock.module()`, or the real Firestore is linked and the fake silently ignored.**
+- **`test/wardsynq-d1-sql.test.mjs`** executes the shipped schema against real SQLite (`node:sqlite`,
+  no dependency) - the first time any query had met the tables it declares. It pins the shape of the
+  outage above: an unapplied schema throws `no such table: wardsynq_record`.
+
+**One manual step outstanding:** the SQL file needs `--experimental-sqlite` on Node 22, and
+`.github/workflows/ci.yml` does not pass it, so those tests SKIP in CI. Changing that file needs a
+token with `workflow` scope. Make the `Run unit tests` step:
+`node --test --experimental-test-module-mocks --experimental-sqlite test/*.test.mjs`
+
 Until this, WardSynQ's record lived in the browser: `MemoryBackend` on the workstation,
 `IndexedDBBackend` offline. A refresh erased it and a second device never saw it, so "hospital PC and
 StewardMD Mobile against the same record" was impossible for want of a record, not of sync code. This
