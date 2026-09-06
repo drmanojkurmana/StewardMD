@@ -166,6 +166,10 @@
   .asn-pill.rx-on{color:var(--ok);background:var(--ok-soft);border-color:var(--ok-line)}
   .asn-pill.rx-off{color:var(--red);background:var(--red-soft);border-color:var(--red-line);text-decoration:line-through}
   .asn-pill.rx-ai{color:var(--amber);background:var(--amber-soft);border-color:var(--amber-line)}
+  /* A result's own status - distinct from the pills above so a doctor never confuses "final result"
+     with "active prescription" at a glance, even though both borrow the same green. */
+  .asn-pill.dr-final{color:var(--ok);background:var(--ok-soft);border-color:var(--ok-line)}
+  .asn-pill.dr-prelim{color:var(--amber);background:var(--amber-soft);border-color:var(--amber-line)}
   /* skeleton shimmer */
   .skel{background:linear-gradient(90deg,var(--btn) 25%,var(--line) 37%,var(--btn) 63%);background-size:400% 100%;animation:sh 1.4s ease infinite;border-radius:10px}
   /* nurse station status pills */
@@ -781,6 +785,71 @@
     else { if(st.tok) h["X-Staff-Token"]=st.tok; go(); }
     return box;
   }
+  // ---- lab + radiology RESULTS, from the WardSynQ clinical record ------------------------------
+  // Shown ONLY when the server says results are explicitly enabled for this tenant (r.record.results
+  // - the one card gated narrower than the rest, on purpose: see the GET timeline handler). GHIS
+  // stays what the doctor tapped to view the result; this card is a second, read-only confirmation
+  // of the SAME result now filed on the canonical record, never a competing or duplicate source.
+  function drHead(){ return '<h4>Results<span class="src">Clinical record</span></h4>'; }
+  function renderResults(reports,obsById){
+    var when=function(iso){ var d=new Date(iso); return isNaN(d)?"":d.toLocaleString([],{day:"2-digit",month:"short",hour:"2-digit",minute:"2-digit"}); };
+    var sorted=reports.slice().sort(function(a,b){ return String((b.meta&&b.meta.effectiveAt)||"").localeCompare(String((a.meta&&a.meta.effectiveAt)||"")); });
+    var body=sorted.slice(0,8).map(function(r){
+      var isFinal=r.status==="final";
+      var pill='<span class="asn-pill '+(isFinal?"dr-final":"dr-prelim")+'">'+esc(isFinal?"Final":(r.status==="cancelled"?"Cancelled":"Preliminary"))+'</span>';
+      var srcLabel=r.sourceKind==="radiology"?"Radiology":"Laboratory";
+      var by=r.sourceKind==="radiology"&&r.sourceReportedBy?(" · Reported by "+esc(r.sourceReportedBy)):"";
+      var head='<div style="display:flex;align-items:center;gap:8px;font-size:12px;color:var(--mut);margin-bottom:4px"><b style="color:var(--ink)">'+when(r.meta&&r.meta.effectiveAt)+'</b> · '+esc(srcLabel)+by+'</div>';
+      var body2;
+      if(r.sourceKind==="radiology"){
+        body2=r.conclusion?'<div class="x">'+esc(r.conclusion)+'</div>':'<p class="st" style="margin:2px 0 0">No report text yet.</p>';
+      }else{
+        var tests=(r.resultObservationIds||[]).map(function(id){ return obsById[id]; }).filter(Boolean);
+        body2=tests.length?tests.map(function(o){
+          var val=(o.sourceValue!=null?o.sourceValue:o.value)+(o.unit?(" "+esc(o.unit)):"");
+          var rng=o.referenceRange&&(o.referenceRange.text||o.referenceRange.low!=null||o.referenceRange.high!=null)
+            ?(' <span class="n" style="text-transform:none">('+(o.referenceRange.text||[o.referenceRange.low,o.referenceRange.high].filter(function(v){return v!=null;}).join(" - "))+')</span>'):"";
+          var crit=o.sourceCritical?' <span class="asn-pill stat">Critical</span>':"";
+          return '<div style="display:flex;justify-content:space-between;gap:8px;margin-top:2px"><span class="x">'+esc(o.sourceTestName||o.code)+'</span><span class="x">'+esc(val)+rng+crit+'</span></div>';
+        }).join(""):'<p class="st" style="margin:2px 0 0">No structured values recorded.</p>';
+      }
+      return '<div class="asn-set">'+head+'<div class="asn-sec"><div class="x" style="font-weight:600">'+esc(r.code)+'</div>'+pill+'<div style="margin-top:4px">'+body2+'</div></div></div>';
+    }).join("");
+    var more=sorted.length>8?'<p class="st" style="margin:8px 0 0">'+(sorted.length-8)+' earlier '+(sorted.length-8===1?"result":"results")+' in the record.</p>':'';
+    return drHead()+body+more;
+  }
+  function recordResultsBlock(rec,onDone){
+    var box=document.createElement("div"); box.className="vs"; box.setAttribute("aria-live","polite");
+    box.innerHTML=drHead()+'<p class="st">Loading from the clinical record…</p>';
+    if(!rec.patientId){ box.innerHTML=drHead()+'<p class="st">This patient has no medical record number, so results cannot be filed in the clinical record for this visit.</p>'; onDone&&onDone(); return box; }
+    var h={};
+    var drUrl="/api/wardsynq/"+encodeURIComponent(rec.tenantId)+"/patient/"+encodeURIComponent(rec.patientId)+"/DiagnosticReport";
+    var obsUrl="/api/wardsynq/"+encodeURIComponent(rec.tenantId)+"/patient/"+encodeURIComponent(rec.patientId)+"/Observation";
+    var getJson=function(url){ return fetch(url,{headers:h}).then(function(r){ return r.json().catch(function(){return null;}).then(function(j){ return {status:r.status,body:j}; }); }); };
+    var go=function(){
+      return getJson(drUrl).then(function(x){
+          if(x.status===200&&x.body&&x.body.ok){
+            var records=x.body.records||[];
+            var needsObs=records.some(function(r){ return (r.resultObservationIds||[]).length; });
+            var withObs=needsObs?getJson(obsUrl):Promise.resolve({status:200,body:{records:[]}});
+            return withObs.then(function(ox){
+              var obsById={};
+              ((ox.body&&ox.body.records)||[]).forEach(function(o){ if(o.category==="laboratory") obsById[o.id]=o; });
+              box.innerHTML=records.length?renderResults(records,obsById):drHead()+'<p class="st">No results in the clinical record for this patient yet.</p>';
+            });
+          }
+          else if(x.status===403) box.innerHTML=drHead()+'<p class="st">Your role cannot view the clinical record. The visit timeline above is still available.</p>';
+          else if(x.status===401) box.innerHTML=drHead()+'<p class="st">Sign in again to read the clinical record.</p>';
+          else if(x.status===404) box.innerHTML=drHead()+'<p class="st">The clinical record is not available for this clinic right now. The visit timeline above is unaffected.</p>';
+          else box.innerHTML=drHead()+'<p class="st">Could not reach the clinical record. Showing GHIS results only.</p>';
+        })
+        .catch(function(){ box.innerHTML=drHead()+'<p class="st">Could not reach the clinical record. Showing GHIS results only.</p>'; })
+        .then(function(){ onDone&&onDone(); });
+    };
+    if(st.tokType==="firebase") fbToken().then(function(t){ if(t) h["Authorization"]="Bearer "+t; return go(); });
+    else { if(st.tok) h["X-Staff-Token"]=st.tok; go(); }
+    return box;
+  }
   function openNotes(sid,tid,name){
     open('<h3>Clinical notes'+(name?' - '+esc(name):'')+'</h3><p class="t" style="margin:-6px 0 10px">View only. Doctors record notes; you can read and download.</p><div class="drawer" id="nd">Loading…</div><div class="row2"><button class="cancel" id="cx">Close</button><button class="btn" id="dl" style="margin:0" disabled>Download</button></div>');
     sheet.querySelector("#cx").onclick=close;
@@ -796,9 +865,18 @@
       // has a record to read. With the tenant off (every clinic today) there is no `record` key and
       // this drawer is exactly what it was.
       // Each prepends, so these run in REVERSE of the order they end up reading in: vital signs,
-      // then the assessment, then what was ordered off the back of it, then what was prescribed,
-      // then the narrative timeline.
-      if(r.record&&r.record.tenantId){ el.insertBefore(recordRxBlock(r.record),el.firstChild); el.insertBefore(recordOrdersBlock(r.record),el.firstChild); el.insertBefore(recordAssessmentBlock(r.record),el.firstChild); el.insertBefore(recordVitalsBlock(r.record),el.firstChild); }
+      // then the assessment, then what was ordered off the back of it, then what came back for
+      // those orders, then what was prescribed, then the narrative timeline. The results card is
+      // its own key (r.record.results) — see the GET timeline handler — appearing only when the
+      // tenant has explicitly enabled reading results back, unlike the other four which appear
+      // whenever the tenant's record is reachable at all.
+      if(r.record&&r.record.tenantId){
+        el.insertBefore(recordRxBlock(r.record),el.firstChild);
+        if(r.record.results) el.insertBefore(recordResultsBlock(r.record),el.firstChild);
+        el.insertBefore(recordOrdersBlock(r.record),el.firstChild);
+        el.insertBefore(recordAssessmentBlock(r.record),el.firstChild);
+        el.insertBefore(recordVitalsBlock(r.record),el.firstChild);
+      }
       var dl=sheet.querySelector("#dl"); if(dl){ dl.disabled=!entries.length; dl.onclick=function(){ downloadNotes(name,tl); }; }
     };
     if(st.orgId==="demo"){ var n=Date.now(); show({ok:true,timeline:{mrnLast4:"4821",entries:[

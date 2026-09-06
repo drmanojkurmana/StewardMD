@@ -1774,14 +1774,36 @@
     var a = ghisAuth(), url = kind === "lab"
       ? "/lab-detail?renderId=" + encodeURIComponent(parts[0] || "") + "&episodeId=" + encodeURIComponent(parts[1] || "")
       : "/radiology-report?resultid=" + encodeURIComponent(parts[0] || "") + "&type=" + encodeURIComponent(parts[1] || "manual");
+    // The order row this tap came from, so the mirror below (if this fetch succeeds) can send the
+    // SAME metadata the console already scraped, rather than re-deriving it from the URL parts.
+    var orderRow = kind === "lab"
+      ? (st.labs || []).filter(function (l) { return String(l.renderId || "") === parts[0] && String(l.episodeId || "") === parts[1]; })[0]
+      : (st.radiology || []).filter(function (o) { return String(o.resultid || "") === parts[0]; })[0];
     fetch(a.base + url, { headers: authHeaders(), credentials: "include" })
       .then(function (r) { return r.json().then(function (d) { return { ok: r.ok, d: d || {} }; }, function () { return { ok: r.ok, d: {} }; }); })
       .then(function (res) {
         if (!st.report) return;
         if (!res.ok || res.d.error) { st.report.loading = false; st.report.err = res.d.error === "login_required" ? "Connect Ward Sync (GHIS) first." : "Could not load this report."; paint(); return; }
         st.report.loading = false; st.report.data = res.d; paint();
+        // Mirror what GHIS just answered into the clinical record, best-effort, after the fact.
+        // GHIS's read already happened and is unaffected by anything that follows; see
+        // functions/_wardsynq/migrate-results.js for why this is a READ mirror, not a write.
+        mirrorResult(kind === "lab" ? "lab" : "radiology", orderRow, res.d);
       })
       .catch(function () { if (st.report) { st.report.loading = false; st.report.err = "Could not load this report."; paint(); } });
+  }
+  // Fire-and-forget: post what GHIS just returned to the queue-session-authenticated mirror, so a
+  // tenant with the "results" migration on can file it as a WardSynQ DiagnosticReport. Off (every
+  // tenant today), the server does nothing with this and nothing here is visible to the doctor
+  // either way — no toast, no error surfaced, because a missed mirror changes no clinical behaviour:
+  // GHIS remains the source the doctor just read from.
+  function mirrorResult(source, orderRow, detail) {
+    if (!st.ticketId || !st.sessionId || !orderRow || !detail) return;
+    fbTok().then(function (t) {
+      if (!t) return;
+      var body = { sessionId: st.sessionId, ticketId: st.ticketId, source: source, order: orderRow, detail: detail };
+      fetch(qBase() + "/api/queue/result", { method: "POST", headers: { "Content-Type": "application/json", Authorization: "Bearer " + t }, body: JSON.stringify(body) }).catch(function () {});
+    }).catch(function () {});
   }
   // #156 — fetch every lab report for a repeated test name so labTrendPanel can trend its numeric analytes.
   // Reuses the /lab-detail endpoint per order. Patient-switch guarded. Flag-gated OFF (validate on device).

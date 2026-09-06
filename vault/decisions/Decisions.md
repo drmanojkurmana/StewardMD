@@ -4467,3 +4467,68 @@ indication and strength are NOT captured by the form and are not invented to loo
 
 **Not done, named:** dispensing; administration/eMAR (`MedicationAdministration`); reconciliation;
 cancelling a prescription; any change to the safety engine or its thresholds.
+
+## 2026-09-06 — Results: a READ-side migration, and an idempotency bug this file's own logic caught
+
+**Decision: mirror the READ, don't hook a write.** Every migration before this one intercepted a
+doctor's WRITE action. A lab/radiology result has none — the doctor merely taps to view what GHIS
+already has. Rejected: waiting for some future GHIS write-migration to hang this off of. Instead the
+client mirrors GHIS's ANSWER, after the fact, to a route of its own (`POST /api/queue/result`, not
+"timeline" — a result is not a new sentence in the visit summary). GHIS's read is never slowed,
+blocked, or altered by the mirror; a failed mirror is invisible to the doctor, because GHIS remains
+what they just read from either way.
+
+**Decision: "authoritative" changes meaning for this one migration, and that is stated explicitly
+rather than left to be discovered.** Everywhere else, authoritative means WardSynQ is the write
+target and a refusal blocks the caller. There is no write target here — GHIS was never asked to
+write anything by this flow. So authoritative is redefined, in writing, to mean only "the console
+may also read the result back from WardSynQ" — narrower than the other four cards' gate (any
+migration reachable at all), because reading a second source for the SAME fact needs its own
+explicit opt-in, not to ride in on whatever else happened to be turned on.
+
+**Decision: `DiagnosticReport.critical` is never set from GHIS's own flag.** This is the single
+safety-relevant call in the migration. `wardsynq-critical.js`'s own rule #1 says a source's critical
+flag is advisory and must never substitute for classifying against the site's OWN approved
+thresholds. Trusting GHIS's flag as if it were WardSynQ's classification would be exactly the
+mistake that rule exists to prevent — an interface that inherits every one of the sender's bugs. The
+flag is carried, informationally, as `Observation.sourceCritical`; the canonical field stays false,
+and nothing here touches the closed-loop escalation engine at all. That wiring needs the site's own
+approved thresholds and is a separate, later decision.
+
+**Decision: link a result to a ServiceRequest by name, on the SAME encounter, ONLY when exactly one
+candidate matches.** The lab/radiology order rows carry no ServiceRequest id, only a display name.
+Zero matches or several both leave the link null with the outcome recorded (`"unmatched"` /
+`"ambiguous"`) rather than guessing among several same-named orders — a wrong linkage would be worse
+than none, and the task was explicit that no ServiceRequest may ever be manufactured to make a
+result look ordered.
+
+**Decision, found and fixed before merge: a static idempotencyKey would have permanently frozen every
+result at its first-ever value.** The first draft gave the report and each observation an
+idempotencyKey built from the entity's own STABLE id. `RecordService.recall()` caches an
+idempotencyKey's outcome forever — every future `put()` sharing that key replays the ORIGINAL result,
+whatever content is passed. A genuine correction (see AMENDMENTS below) would have silently never
+taken effect; the API would report success on every call while nothing ever changed. Every sibling
+migration had already established the right pattern for exactly this reason: idempotencyKey is an
+OPTIONAL, caller-supplied value for an exact-retry, not a permanent per-entity key; the real dedup is
+an explicit same-content check (`sameOrder`/`samePrescription`, here `sameReport` +
+`sameObservationValue`) plus `expectedVersion`. The amendment test caught this directly — `written`
+came back `0` on a genuinely changed value — before it could reach a hospital.
+
+**Decision: a changed observation value versions the REPORT, not just the observation.** GHIS
+exposes no "corrected" signal on either read path, so a repeat mirror with different content is
+represented the way this model already represents any change: a new version. The report's own
+`resultObservationIds` (the SET of ids) does not change when only a VALUE inside one of them does,
+but the report is still given a new version in that case, so a doctor reading the report's own
+history sees that something in it was corrected, not just the individual test.
+
+**Decision: add `encounterId` to `DiagnosticReport`, in the model itself, not as a bolt-on.** Every
+other clinical resource here already carries it; its absence looked like an oversight, not a design
+choice, and results without an encounter link could not be shown alongside the visit that produced
+them. This is extending the ONE existing model with a field its siblings already have, not building
+a second model — the ICU/ward adapter's own report-mapping function gained the same one-line fix,
+since it already had the encounter in scope and had nowhere to put it.
+
+**Not done, named:** making WardSynQ the actual source of record for results (GHIS stays the
+external source in every mode); an abnormal-vs-reference-range judgement (GHIS's own flag is the
+only signal carried); cancelling a result; correcting a linkage after the fact; DICOM/PACS
+integration (none exists in this codebase to preserve, and none is built here).

@@ -68,7 +68,19 @@ function medicationOrderIdForTicket(ticket, drugId) {
   return anchoredOrderId(ticket, "rx", drugId);
 }
 
-/** The shared rule both order ids use: anchor on the encounter, qualify by what was ordered. */
+/**
+ * The id ONE result — one lab render, one radiology study — on ONE encounter, is filed under.
+ * `sourceKind` ("lab" | "rad") keeps the two apart the way "order"/"rx" already are; `sourceKey` is
+ * GHIS's OWN stable key for that one result (a lab render id, a radiology resultid) — never a
+ * timestamp, so a re-fetch of the SAME result resolves to the SAME DiagnosticReport and a change is
+ * a new VERSION, not a new entity. `null` when there is no anchor or no source key: a result that
+ * cannot name what it is a result OF is not a result.
+ */
+function diagnosticReportIdForTicket(ticket, sourceKind, sourceKey) {
+  return anchoredOrderId(ticket, `dr-${sourceKind}`, sourceKey);
+}
+
+/** The shared rule every order/result id uses: anchor on the encounter, qualify by what it is. */
 function anchoredOrderId(ticket, prefix, code) {
   const anchor = ticket && (ticket.ghisEpisodeId || ticket.id);
   const c = String(code == null ? "" : code).trim();
@@ -77,4 +89,4 @@ function anchoredOrderId(ticket, prefix, code) {
   return `opd-${prefix}-${slug(anchor)}-${slug(c)}`;
 }
 
-export { patientIdForMrn, patientIdForTicket, encounterIdForTicket, noteIdForTicket, serviceRequestIdForTicket, medicationOrderIdForTicket };
+export { patientIdForMrn, patientIdForTicket, encounterIdForTicket, noteIdForTicket, serviceRequestIdForTicket, medicationOrderIdForTicket, diagnosticReportIdForTicket };

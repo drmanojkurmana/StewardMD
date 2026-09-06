@@ -19,10 +19,11 @@ import { ROLES, CAPS, can as roleCan } from "../functions/_queue_roles.js";
 import { mintStaffSession, verifyStaffSession } from "../functions/_opd_auth.js";
 import { vitalsMode, patientIdForTicket, vitalsToObservations, vitalsMigration, recordVitals, VITAL_CODES } from "../functions/_wardsynq/migrate-vitals.js";
 import { registrationMigration, patientFromRegistration, sameDemographics, registerPatientRecord } from "../functions/_wardsynq/migrate-registration.js";
-import { patientIdForMrn, encounterIdForTicket, noteIdForTicket, serviceRequestIdForTicket, medicationOrderIdForTicket } from "../functions/_wardsynq/opd-identity.js";
+import { patientIdForMrn, encounterIdForTicket, noteIdForTicket, serviceRequestIdForTicket, medicationOrderIdForTicket, diagnosticReportIdForTicket } from "../functions/_wardsynq/opd-identity.js";
 import { assessmentMigration, sectionsFromAssessment, noteFromAssessment, signedNoteFrom, sameNoteContent, recordAssessment, recordAssessmentSignOff } from "../functions/_wardsynq/migrate-assessment.js";
 import { invOrderMigration, orderFromInvestigation, sameOrder, recordInvestigationOrder } from "../functions/_wardsynq/migrate-inv-order.js";
 import { prescriptionMigration, orderFromPrescription, samePrescription, recordPrescription } from "../functions/_wardsynq/migrate-prescription.js";
+import { resultsMigration, reportFromResult, labReportFromResult, radiologyReportFromResult, sameReport, matchServiceRequest, recordResult } from "../functions/_wardsynq/migrate-results.js";
 import { readFileSync } from "node:fs";
 import { makeMockDb } from "../functions/_connect/testkit.js";
 import { can } from "../functions/_connect/enterprise/rbac.js";
@@ -30,7 +31,7 @@ import { can } from "../functions/_connect/enterprise/rbac.js";
 import { ClinicalStore } from "../wardsynq/wardsynq-store.js";
 import { RemoteBackend, RemoteConflictError, RemoteRefusedError } from "../wardsynq/wardsynq-store-remote.js";
 import { GovernedStore, makeActor, KIND, TIER, GovernanceError } from "../wardsynq/wardsynq-actors.js";
-import { Patient, Observation, MedicationOrder, ClinicalNote, ServiceRequest } from "../wardsynq/wardsynq-model.js";
+import { Patient, Observation, MedicationOrder, ClinicalNote, ServiceRequest, DiagnosticReport } from "../wardsynq/wardsynq-model.js";
 import { mapSccmBundle, sccmAdapter } from "../wardsynq/adapters/wardsynq-sccm-adapter.js";
 import { IntegrationHub } from "../wardsynq/wardsynq-interop.js";
 import { bundle as sccmBundle, patient as sccmPatient, observation as sccmObservation, medicationStatement, encounter as sccmEncounter } from "../functions/_connect/canonical/model.js";
@@ -690,14 +691,22 @@ test("the timeline GET names the record only where the tenant is on; the console
   // 2026-09-06: generalised from vitalsMigration to recordLinkForOrg, so a tenant migrated for
   // registration or the assessment ALSO exposes the record key — a read must not depend on which
   // specific WRITE happens to be turned on.
-  assert.ok(h.includes('if (link) out.record = { tenantId: link.tenantId, patientId: patientIdForTicket(t), ticketId: t.id };'), "record key only when the tenant is reachable at all");
+  assert.ok(h.includes('out.record = { tenantId: link.tenantId, patientId: patientIdForTicket(t), ticketId: t.id };'), "record key only when the tenant is reachable at all");
   assert.ok(!h.includes("vitalsMigration"), "the GET no longer asks a write-specific question");
   assert.ok(h.includes("requireSessionCap(env, actor, s, CAPS.EMR_VIEW)"), "the timeline read is still EMR_VIEW-gated");
+  // 2026-09-06: results is the one card gated narrower than the rest — explicit opt-in
+  // (mode === "authoritative"), not "any migration is reachable at all" like the other four.
+  assert.ok(h.includes('if (rm.mode === "authoritative") out.record.results = true;'), "results needs its own explicit enable, not just a reachable tenant");
   const html = readFileSync(new URL("../opd.html", import.meta.url), "utf8");
   assert.ok(html.includes('"/api/wardsynq/"+encodeURIComponent(rec.tenantId)+"/patient/"+encodeURIComponent(rec.patientId)+"/Observation"'), "the existing Observation endpoint, nothing new");
   // 2026-09-06: the assessment card, then the investigations card, joined vital signs behind the
   // SAME gate — all three, or none. Each prepends, so they read vitals, assessment, investigations.
-  assert.ok(html.includes('if(r.record&&r.record.tenantId){ el.insertBefore(recordRxBlock(r.record),el.firstChild); el.insertBefore(recordOrdersBlock(r.record),el.firstChild); el.insertBefore(recordAssessmentBlock(r.record),el.firstChild); el.insertBefore(recordVitalsBlock(r.record),el.firstChild); }'), "shown only when the server names a record");
+  // Results, gated on its OWN narrower key, sits between orders and prescriptions when it appears.
+  assert.ok(html.includes('el.insertBefore(recordRxBlock(r.record),el.firstChild);'));
+  assert.ok(html.includes('if(r.record.results) el.insertBefore(recordResultsBlock(r.record),el.firstChild);'), "the results card checks its own narrower key, not just r.record.tenantId");
+  assert.ok(html.includes('el.insertBefore(recordOrdersBlock(r.record),el.firstChild);'));
+  assert.ok(html.includes('el.insertBefore(recordAssessmentBlock(r.record),el.firstChild);'));
+  assert.ok(html.includes('el.insertBefore(recordVitalsBlock(r.record),el.firstChild);'));
   // Every state has a sentence for the doctor: loading, empty, no MRN, 401, 403, 404, unreachable.
   for (const needle of ["Loading from the clinical record", "No vital signs in the clinical record for this patient yet", "has no medical record number", "Sign in again", "Your role cannot view the clinical record", "not available for this clinic right now", "Could not reach the clinical record"]) {
     assert.ok(html.includes(needle), "state text missing: " + needle);
@@ -1616,4 +1625,247 @@ test("the console reads prescriptions back from the record: the generic endpoint
   assert.ok(page.includes("RX_STATUS={active:\"Active\",draft:\"Draft, unsigned\",cancelled:\"Discontinued\""));
   assert.ok(page.includes(".asn-pill.rx-on") && page.includes(".asn-pill.rx-off") && page.includes(".asn-pill.rx-ai"));
   assert.ok(page.includes("Signed by ") && page.includes("unsigned"), "signed and unsigned read differently");
+});
+
+/* ------------------------------------------------------------- results (GHIS lab + radiology reads) */
+
+function labTicket() { return { id: "TKT-100", ghisEpisodeId: "EP-100", ghisPatientId: "GH-40233" }; }
+const LAB_ORDER = { serviceName: "CBC", orderDate: "05-Sep-2026", department: "Haematology", status: "Reported", renderId: "RID-1", episodeId: "EP-100", orderId: "ORD-1" };
+const LAB_DETAIL = { group: "CBC", department: "Haematology", sampleType: "Whole blood", collected: "05-Sep-2026 08:10", reported: "05-Sep-2026 11:40", tests: [{ test: "Haemoglobin", result: "10.2", units: "g/dL", low: "13", high: "17", range: "13 - 17", critical: false }, { test: "ESR", result: "40", units: "mm/hr", low: null, high: null, range: "" }] };
+const RAD_ORDER = { resultid: "RES-9", visitId: "V1", date: "05-Sep-2026", description: "Chest X-ray", printType: "manual" };
+const RAD_DETAIL = { testName: "Chest X-ray PA view", report: "No active parenchymal lesion. Cardiac silhouette normal.", orderDate: "05-Sep-2026", reported: "05-Sep-2026 12:00", doctor: "Dr. Rao", enteredBy: "tech1" };
+
+test("identity: one result id per lab render / radiology resultid per encounter, its own prefix per source, never invented", () => {
+  const t = labTicket();
+  assert.equal(diagnosticReportIdForTicket(t, "lab", "RID-1"), "opd-dr-lab-ep-100-rid-1");
+  assert.equal(diagnosticReportIdForTicket(t, "rad", "RES-9"), "opd-dr-rad-ep-100-res-9");
+  assert.equal(diagnosticReportIdForTicket(t, "lab", "RID-1"), diagnosticReportIdForTicket(t, "lab", "RID-1"), "the same render is the same report");
+  assert.notEqual(diagnosticReportIdForTicket(t, "lab", "RID-1"), diagnosticReportIdForTicket(t, "rad", "RID-1"), "a lab id and a radiology id never collide even on the same source key");
+  assert.equal(diagnosticReportIdForTicket(t, "lab", ""), null);
+  assert.equal(diagnosticReportIdForTicket({}, "lab", "RID-1"), null);
+});
+
+test("labReportFromResult: a canonical DiagnosticReport plus one Observation per test — LOINC where mapped, GHIS's own name and flag otherwise, nothing invented", () => {
+  const issues = [];
+  const mapped = labReportFromResult({ ticket: labTicket(), order: LAB_ORDER, detail: LAB_DETAIL }, issues);
+  assert.equal(mapped.report.resourceType, "DiagnosticReport");
+  assert.equal(mapped.report.id, "opd-dr-lab-ep-100-rid-1");
+  assert.equal(mapped.report.patientId, "opd-pat-gh-40233");
+  assert.equal(mapped.report.encounterId, "opd-enc-ep-100");
+  assert.equal(mapped.report.code, "CBC");
+  assert.equal(mapped.report.status, "final", "detail.reported is non-empty");
+  assert.equal(mapped.report.conclusion, null, "a panel of discrete values has no narrative");
+  assert.equal(mapped.report.critical, false, "GHIS's own flag never sets the canonical field — see the file header");
+  assert.equal(mapped.report.sourceKind, "lab");
+  assert.equal(mapped.report.sourceSpecimenType, "Whole blood");
+  assert.deepEqual(mapped.report.resultObservationIds, mapped.observations.map((o) => o.id));
+  assert.equal(mapped.observations.length, 2);
+  const hb = mapped.observations.find((o) => o.sourceTestName === "Haemoglobin");
+  assert.equal(hb.category, "laboratory");
+  assert.equal(hb.code, "718-7", "LAB_CODE_SEED, reused from the ICU adapter, not re-seeded here");
+  assert.equal(hb.codeSystem, "LOINC");
+  assert.equal(hb.value, 10.2);
+  assert.equal(hb.unit, "g/dL");
+  assert.deepEqual(hb.referenceRange, { low: 13, high: 17, text: "13 - 17" });
+  assert.equal(hb.sourceCritical, false);
+  const esr = mapped.observations.find((o) => o.sourceTestName === "ESR");
+  assert.equal(esr.codeSystem, "ghis-local", "no seed entry for ESR — kept as its own name, never guessed");
+  assert.equal(esr.code, "ESR");
+  assert.ok(issues.some((i) => i.code === "RESULT_TEST_UNMAPPED" && i.testName === "ESR"), "the mapping limitation is recorded, not hidden");
+  // A result with no anchor, no name, or no test rows is never invented into existence.
+  assert.equal(labReportFromResult({ ticket: labTicket(), order: {}, detail: LAB_DETAIL }, []), null, "no service name and no group name");
+  assert.equal(labReportFromResult({ ticket: {}, order: LAB_ORDER, detail: LAB_DETAIL }, []), null, "no encounter anchor");
+  const noTests = labReportFromResult({ ticket: labTicket(), order: LAB_ORDER, detail: { reported: "x", tests: [{ result: "5" }] } }, []);
+  assert.equal(noTests.observations.length, 0, "a test row with no name is skipped, not guessed");
+});
+
+test("radiologyReportFromResult: the impression carried verbatim, no discrete observations, and preliminary when there is no report text yet", () => {
+  const mapped = radiologyReportFromResult({ ticket: labTicket(), order: RAD_ORDER, detail: RAD_DETAIL }, []);
+  assert.equal(mapped.report.id, "opd-dr-rad-ep-100-res-9");
+  assert.equal(mapped.report.code, "Chest X-ray PA view", "the detail's own testName is preferred over the order's description");
+  assert.equal(mapped.report.status, "final");
+  assert.equal(mapped.report.conclusion, "No active parenchymal lesion. Cardiac silhouette normal.");
+  assert.deepEqual(mapped.report.resultObservationIds, []);
+  assert.equal(mapped.report.sourceKind, "radiology");
+  assert.equal(mapped.report.sourceReportedBy, "Dr. Rao");
+  assert.equal(mapped.report.sourceEnteredBy, "tech1");
+  assert.equal(mapped.observations.length, 0);
+  const radIssues = [];
+  const unread = radiologyReportFromResult({ ticket: labTicket(), order: RAD_ORDER, detail: { testName: "Chest X-ray", report: "" } }, radIssues);
+  assert.equal(unread.report.status, "preliminary", "no report text yet — an unread study is not claimed final");
+  assert.equal(unread.report.conclusion, null);
+  assert.ok(radIssues.some((i) => i.code === "RESULT_RAD_NO_REPORT"));
+});
+
+test("sameReport: idempotent on unchanged content; any changed field is a new version", () => {
+  const a = { code: "CBC", patientId: "p", encounterId: "e", status: "final", conclusion: null, resultObservationIds: ["o1"], serviceRequestId: null };
+  assert.equal(sameReport(a, { ...a }), true);
+  assert.equal(sameReport(a, { ...a, status: "preliminary" }), false);
+  assert.equal(sameReport(a, { ...a, resultObservationIds: ["o1", "o2"] }), false, "a changed test list is a new version");
+  assert.equal(sameReport(a, { ...a, conclusion: "text" }), false);
+  assert.equal(sameReport(a, { ...a, serviceRequestId: "sr1" }), false, "a resolved linkage is itself a change worth a version");
+  assert.equal(sameReport(null, a), false);
+});
+
+test("results mode gating: its own settings key, independent of every other migration", async () => {
+  const org = { id: "org-gimsr", connectTenantId: "gimsr" };
+  const tenants = { gimsr: { id: "gimsr", settings: JSON.stringify({ wardsynq: { migrations: { results: "shadow", prescriptions: "off" } } }) } };
+  const deps = { getOrg: async (env, id) => (id === "org-gimsr" ? org : null), tenantRow: async (env, id) => tenants[id] || null };
+  assert.deepEqual(await resultsMigration({}, { orgId: "org-gimsr" }, deps), { mode: "off", why: "flag" });
+  const on = await resultsMigration({ WARDSYNQ_RECORD: "1" }, { orgId: "org-gimsr" }, deps);
+  assert.equal(on.mode, "shadow"); assert.equal(on.tenantId, "gimsr");
+});
+
+test("OFF mode is byte-identical, and a mirror missing its order or detail writes nothing: GHIS's read is never itself touched by this file", async () => {
+  const off = await recordResult(new Request("https://x"), ENV, { migration: { mode: "off", why: "flag" }, ticket: labTicket(), source: "lab", order: LAB_ORDER, detail: LAB_DETAIL });
+  assert.deepEqual(off, { mode: "off", tenantId: null, ok: true, skipped: "flag", written: 0 });
+
+  const h = opdHospital({ "fb:dr-menon": { role: "doctor" } }, { settings: { wardsynq: { migrations: { results: "shadow" } } } });
+  const actorDeps = { db: h.db, identifyFn: h.deps.identifyFn, claimsFn: h.deps.claimsFn, staffSession: null, orgForTenant: h.deps.orgForTenant, authorizeOrg: h.deps.authorizeOrg };
+  const recordDeps = { repository: h.repository, pseudonym: async () => null };
+  const req = new Request("https://x/api/queue/result", { method: "POST", headers: { "X-Test-User": "fb:dr-menon", "X-Test-RegNo": "AP-12345" } });
+  const bare = await recordResult(req, ENV, { migration: { mode: "shadow", tenantId: "gimsr" }, ticket: labTicket(), source: "lab", order: null, detail: null, actorDeps, recordDeps });
+  assert.equal(bare.ok, true); assert.equal(bare.written, 0); assert.equal(bare.skipped, "no_result");
+
+  // This migration issues no HTTP request of its own — the mirror only maps what the client already
+  // fetched. GHIS's /lab-detail and /radiology-report routes are untouched by this diff entirely.
+  const mig = readFileSync(new URL("../functions/_wardsynq/migrate-results.js", import.meta.url), "utf8");
+  const code = mig.slice(mig.indexOf("import {"));
+  assert.ok(!/\bfetch\s*\(/.test(code), "the migration issues no HTTP request of its own");
+  assert.ok(!/from\s+["'][^"']*_ghis/i.test(code) && !/from\s+["'][^"']*ghis-ward/i.test(code), "no GHIS transport is imported");
+
+  // The client mirrors AFTER GHIS's response is already rendered — the mirror is a pure addition,
+  // never a precondition or a replacement for the existing read/render path.
+  const emr = readFileSync(new URL("../opd-emr.js", import.meta.url), "utf8");
+  const openReportBody = emr.slice(emr.indexOf("function openReport("), emr.indexOf("function mirrorResult("));
+  assert.ok(openReportBody.indexOf("st.report.data = res.d; paint();") < openReportBody.indexOf("mirrorResult("), "GHIS's own render happens before the mirror is even called");
+});
+
+test("SHADOW does not alter GHIS, and no ingest is patient-facing: the result segment appends nothing to the visit timeline, in either mode", () => {
+  const src = readFileSync(new URL("../functions/api/queue/[[path]].js", import.meta.url), "utf8");
+  const block = src.slice(src.indexOf('if (seg === "result") {'), src.indexOf('// Slide-to-checkout'));
+  assert.ok(block.includes("requireSessionCap(env, actor, s, CAPS.EMR_TREAT)"), "doctor-scoped: see migrate-results.js for why (nurse write scope excludes DiagnosticReport)");
+  assert.ok(!block.includes("QT.appendTimeline"), "a result ingest is never mirrored into the visit timeline — no new patient-facing entry, shadow or authoritative");
+  assert.ok(block.includes("return json({ ok: true, wardsynq: rec }, 200, request);"), "best-effort either way — GHIS's read already happened and stands regardless of this outcome");
+});
+
+test("THE PROOF, lab result: device A's tap mirrors the SAME structured DiagnosticReport device B reads back; reception cannot write one; another tenant is denied; a repeat mirror is idempotent; a changed re-fetch is a new version with the original intact; an existing ServiceRequest is linked by name, never fabricated", async () => {
+  const h = opdHospital({
+    "fb:dr-menon": { role: "doctor" }, "fb:dr-rao": { role: "doctor" }, "fb:desk-1": { role: "reception" },
+  }, { settings: { wardsynq: { migrations: { results: "shadow", investigations: "shadow" } } } });
+  const ticket = labTicket();
+  const actorDeps = { db: h.db, identifyFn: h.deps.identifyFn, claimsFn: h.deps.claimsFn, staffSession: null, orgForTenant: h.deps.orgForTenant, authorizeOrg: h.deps.authorizeOrg };
+  const recordDeps = { repository: h.repository, pseudonym: async () => null };
+  const mig = { mode: "shadow", tenantId: "gimsr" };
+  const asMenon = new Request("https://x/api/queue/result", { method: "POST", headers: { "X-Test-User": "fb:dr-menon", "X-Test-RegNo": "AP-12345" } });
+
+  // A real investigation order for the SAME service already exists on this encounter (migrated
+  // separately, per the investigation-order PR) — the result should link to it by name.
+  await recordInvestigationOrder(asMenon, ENV, { migration: { mode: "shadow", tenantId: "gimsr" }, ticket, order: { serviceId: "LAB1118", name: "CBC" }, actorDeps, recordDeps });
+
+  // Device A: the doctor taps the lab row; GHIS answers; the mirror fires.
+  const first = await recordResult(asMenon, ENV, { migration: mig, ticket, source: "lab", order: LAB_ORDER, detail: LAB_DETAIL, actorDeps, recordDeps });
+  assert.equal(first.ok, true); assert.equal(first.written, 1); assert.equal(first.updated, false);
+  assert.equal(first.reportId, "opd-dr-lab-ep-100-rid-1"); assert.equal(first.status, "final");
+  assert.equal(first.serviceRequestLinkage, "matched", "exactly one ServiceRequest named \"CBC\" on this encounter");
+  assert.equal(first.observationsWritten, 2);
+
+  // Device B: another doctor reads the SAME structured report back, patient -> encounter -> report.
+  const rao = await client(h, "fb:dr-rao");
+  const dr = await rao.governed.get(rao.actor, "DiagnosticReport", "opd-dr-lab-ep-100-rid-1");
+  assert.equal(dr.patientId, "opd-pat-gh-40233"); assert.equal(dr.encounterId, "opd-enc-ep-100");
+  assert.equal(dr.code, "CBC"); assert.equal(dr.status, "final");
+  assert.ok(dr.serviceRequestId, "linked to the real order, never a manufactured one");
+  assert.equal(dr.writtenBy.id, "fb:dr-menon");
+  const viaApi = await h.fetchAs("fb:dr-rao")("https://x/api/wardsynq/gimsr/patient/opd-pat-gh-40233/DiagnosticReport");
+  assert.equal(viaApi.status, 200);
+  assert.deepEqual((await viaApi.json()).records.map((r) => r.id), ["opd-dr-lab-ep-100-rid-1"]);
+  const obsResp = await h.fetchAs("fb:dr-rao")("https://x/api/wardsynq/gimsr/patient/opd-pat-gh-40233/Observation");
+  const labObs = (await obsResp.json()).records.filter((o) => o.category === "laboratory");
+  assert.equal(labObs.length, 2, "the structured values are readable through the SAME existing Observation endpoint vitals already uses");
+
+  // A double-tap / retried mirror of the SAME result is idempotent — not a second report.
+  const again = await recordResult(asMenon, ENV, { migration: mig, ticket, source: "lab", order: LAB_ORDER, detail: LAB_DETAIL, actorDeps, recordDeps });
+  assert.equal(again.ok, true); assert.equal(again.written, 0); assert.equal(again.skipped, "already_recorded");
+  assert.equal((await h.repository.history("gimsr", "DiagnosticReport", "opd-dr-lab-ep-100-rid-1")).length, 1);
+
+  // GHIS later shows a changed value for the SAME render — represented as a new VERSION, original intact.
+  const corrected = { ...LAB_DETAIL, tests: [{ ...LAB_DETAIL.tests[0], result: "9.8" }, LAB_DETAIL.tests[1]] };
+  const amended = await recordResult(asMenon, ENV, { migration: mig, ticket, source: "lab", order: LAB_ORDER, detail: corrected, actorDeps, recordDeps });
+  assert.equal(amended.written, 1); assert.equal(amended.updated, true); assert.equal(amended.version, 2);
+  const hist = await h.repository.history("gimsr", "DiagnosticReport", "opd-dr-lab-ep-100-rid-1");
+  assert.equal(hist.length, 2);
+  assert.equal(hist[0].status, "final", "the original version is untouched, still readable");
+
+  // Reception (no clinical write scope) cannot create a result — nothing lands.
+  const asDesk = new Request("https://x/api/queue/result", { method: "POST", headers: { "X-Test-User": "fb:desk-1" } });
+  const deskTry = await recordResult(asDesk, ENV, { migration: mig, ticket: { id: "TKT-101", ghisEpisodeId: "EP-101", ghisPatientId: "GH-40233" }, source: "lab", order: { ...LAB_ORDER, renderId: "RID-2", episodeId: "EP-101" }, detail: LAB_DETAIL, actorDeps, recordDeps });
+  assert.equal(deskTry.ok, false); assert.equal(deskTry.status, 403); assert.equal(deskTry.error, "governance");
+  assert.equal(await h.repository.latest("gimsr", "DiagnosticReport", "opd-dr-lab-ep-101-rid-2"), null);
+
+  // Another tenant cannot read this clinic's results at all.
+  const other = await h.fetchAs("fb:dr-rao")("https://x/api/wardsynq/other-hospital/patient/opd-pat-gh-40233/DiagnosticReport");
+  assert.ok(other.status === 403 || other.status === 404, "cross-tenant read is refused, got " + other.status);
+
+  // Audited as the real human, PHI-free.
+  const row = h.repository.audit.find((a) => a.action === "record.write" && a.scope.resourceType === "DiagnosticReport");
+  assert.ok(row); assert.equal(row.actor, "fb:dr-menon");
+});
+
+test("THE PROOF, radiology result: the impression is filed verbatim and read back on another device; a result with no matching order is preserved with the limitation recorded, never a fabricated ServiceRequest", async () => {
+  const h = opdHospital({ "fb:dr-menon": { role: "doctor" }, "fb:dr-rao": { role: "doctor" } }, { settings: { wardsynq: { migrations: { results: "shadow" } } } });
+  const ticket = labTicket();
+  const actorDeps = { db: h.db, identifyFn: h.deps.identifyFn, claimsFn: h.deps.claimsFn, staffSession: null, orgForTenant: h.deps.orgForTenant, authorizeOrg: h.deps.authorizeOrg };
+  const recordDeps = { repository: h.repository, pseudonym: async () => null };
+  const mig = { mode: "shadow", tenantId: "gimsr" };
+  const asMenon = new Request("https://x/api/queue/result", { method: "POST", headers: { "X-Test-User": "fb:dr-menon", "X-Test-RegNo": "AP-12345" } });
+
+  // No ServiceRequest named "Chest X-ray PA view" exists on this encounter — nothing here invents one.
+  const out = await recordResult(asMenon, ENV, { migration: mig, ticket, source: "radiology", order: RAD_ORDER, detail: RAD_DETAIL, actorDeps, recordDeps });
+  assert.equal(out.ok, true); assert.equal(out.written, 1);
+  assert.equal(out.serviceRequestLinkage, "unmatched", "the limitation is recorded, not hidden");
+
+  const rao = await client(h, "fb:dr-rao");
+  const dr = await rao.governed.get(rao.actor, "DiagnosticReport", "opd-dr-rad-ep-100-res-9");
+  assert.equal(dr.conclusion, "No active parenchymal lesion. Cardiac silhouette normal.");
+  assert.equal(dr.serviceRequestId, null, "unmatched is left null, never a manufactured order");
+  assert.deepEqual(dr.resultObservationIds, [], "radiology has no discrete observations");
+  assert.equal(dr.sourceReportedBy, "Dr. Rao");
+});
+
+test("matchServiceRequest: exactly one same-named order on the SAME encounter links; zero or several never guess", async () => {
+  const h = opdHospital({ "fb:dr-menon": { role: "doctor" } }, { settings: { wardsynq: { migrations: { investigations: "shadow", results: "shadow" } } } });
+  const ticket = { id: "TKT-102", ghisEpisodeId: "EP-102", ghisPatientId: "GH-9001" };
+  const actorDeps = { db: h.db, identifyFn: h.deps.identifyFn, claimsFn: h.deps.claimsFn, staffSession: null, orgForTenant: h.deps.orgForTenant, authorizeOrg: h.deps.authorizeOrg };
+  const recordDeps = { repository: h.repository, pseudonym: async () => null };
+  const asMenon = new Request("https://x/api/queue/result", { method: "POST", headers: { "X-Test-User": "fb:dr-menon", "X-Test-RegNo": "AP-12345" } });
+  const doctor = await client(h, "fb:dr-menon", { regNo: "AP-12345" });
+  const svc = { byPatient: async () => doctor.governed.byPatient(doctor.actor, "ServiceRequest", "opd-pat-gh-9001") };
+  // Zero candidates.
+  assert.deepEqual(await matchServiceRequest(svc, "opd-pat-gh-9001", "opd-enc-ep-102", "CBC"), { id: null, linkage: "unmatched" });
+  await recordInvestigationOrder(asMenon, ENV, { migration: { mode: "shadow", tenantId: "gimsr" }, ticket, order: { serviceId: "LAB1", name: "CBC" }, actorDeps, recordDeps });
+  assert.deepEqual((await matchServiceRequest(svc, "opd-pat-gh-9001", "opd-enc-ep-102", "cbc")).linkage, "matched", "case-insensitive");
+  // A second, differently-coded order with the SAME name makes the match ambiguous, not a guess.
+  await recordInvestigationOrder(asMenon, ENV, { migration: { mode: "shadow", tenantId: "gimsr" }, ticket, order: { serviceId: "LAB2", name: "CBC" }, actorDeps, recordDeps });
+  assert.deepEqual(await matchServiceRequest(svc, "opd-pat-gh-9001", "opd-enc-ep-102", "CBC"), { id: null, linkage: "ambiguous" });
+  // No encounter to scope the search to: never attempted.
+  assert.deepEqual(await matchServiceRequest(svc, "opd-pat-gh-9001", null, "CBC"), { id: null, linkage: "unmatched" });
+});
+
+test("the model itself: DiagnosticReport now carries encounterId like every other clinical resource, and the ICU/ward adapter sets it too", () => {
+  const dr = DiagnosticReport({ patientId: "p1", encounterId: "e1", code: "CBC" });
+  assert.equal(dr.encounterId, "e1");
+  assert.equal(DiagnosticReport({ patientId: "p1", code: "CBC" }).encounterId, null, "absent, never invented");
+  const adapter = readFileSync(new URL("../wardsynq/adapters/wardsynq-ghis-adapter.js", import.meta.url), "utf8");
+  assert.ok(adapter.includes("encounterId: encounter ? encounter.id : null,"), "the existing ICU/ward adapter also links its reports to the encounter now");
+});
+
+test("the console reads results back from the record: the existing generic endpoints, no second timeline, no claim beyond what GHIS said", () => {
+  const page = readFileSync(new URL("../opd.html", import.meta.url), "utf8");
+  assert.ok(page.includes("/DiagnosticReport\""), "reads the EXISTING generic record endpoint, no new route");
+  assert.ok(page.includes("function recordResultsBlock("));
+  assert.ok(page.includes("if(r.record.results)"), "rendered only on the narrower, explicit key");
+  assert.ok(page.includes("Laboratory") && page.includes("Radiology"), "lab and radiology read distinctly");
+  assert.ok(page.includes("o.sourceCritical") && page.includes("Critical"), "GHIS's own critical flag is shown, never computed from the range");
+  assert.ok(!page.includes("Abnormal"), "no abnormal-vs-range judgement is computed or displayed");
 });

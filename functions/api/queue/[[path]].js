@@ -42,6 +42,7 @@ import { registrationMigration, registerPatientRecord } from "../../_wardsynq/mi
 import { assessmentMigration, recordAssessment, recordAssessmentSignOff } from "../../_wardsynq/migrate-assessment.js";
 import { invOrderMigration, recordInvestigationOrder } from "../../_wardsynq/migrate-inv-order.js";
 import { prescriptionMigration, recordPrescription } from "../../_wardsynq/migrate-prescription.js";
+import { resultsMigration, recordResult } from "../../_wardsynq/migrate-results.js";
 import { recordLinkForOrg } from "../../_wardsynq/migration-tenant.js";
 import { actorDeps as wsqActorDeps, recordDeps as wsqRecordDeps } from "../../_wardsynq/deps.js";
 const wsqTenantRow = (e, id) => (e.CONNECT_DB ? e.CONNECT_DB.prepare("SELECT * FROM connect_tenant WHERE id=?").bind(String(id)).first() : null);
@@ -517,7 +518,16 @@ export async function onRequest(context) {
       // GET /api/wardsynq/:tenant/patient/:patientId/<Observation|ClinicalNote> with its own
       // credentials; the record decides for itself whether this person may see them.
       const link = await recordLinkForOrg(env, s.orgId || s.hospitalId, { getOrg: ORG.getOrg, tenantRow: wsqTenantRow });
-      if (link) out.record = { tenantId: link.tenantId, patientId: patientIdForTicket(t), ticketId: t.id };
+      if (link) {
+        out.record = { tenantId: link.tenantId, patientId: patientIdForTicket(t), ticketId: t.id };
+        // Results is the one migration where "authoritative" does not mean "WardSynQ is the write
+        // target" (see migrate-results.js's header) — GHIS is never asked to write anything here.
+        // It means only this: the console MAY ALSO read DiagnosticReport back from WardSynQ. Every
+        // other card above appears whenever the tenant's record is reachable AT ALL; this key is
+        // deliberately narrower, exactly as asked — explicit opt-in, not "any migration is on".
+        const rm = await resultsMigration(env, s, { getOrg: ORG.getOrg, tenantRow: wsqTenantRow });
+        if (rm.mode === "authoritative") out.record.results = true;
+      }
       return json(out, 200, request);
     }
     // Doctor's treated-patient history (self-expiring at the link's 7-30d window).
@@ -882,6 +892,22 @@ export async function onRequest(context) {
           return json(Object.assign({ ok: true }, legacy, { wardsynq: rec }), 200, request);
         }
         return json(Object.assign({ ok: true }, await QT.appendTimeline(env, s, t, body.kind, body.text, actor.id)), 200, request);
+      }
+      // A mirror of a READ, not of a write (migrate-results.js's header explains why this is its own
+      // segment rather than riding "timeline"): after the client fetches a lab/radiology result from
+      // GHIS via /api/ghis (unchanged, untouched by this route), it separately reports what it saw
+      // here so a tenant with the migration on can also file it as a DiagnosticReport. There is no
+      // legacy timeline entry to append — a result is not a new sentence in the visit summary, it is
+      // GHIS data becoming available. Requires EMR_TREAT: see migrate-results.js for why a nurse's
+      // Observation-only write scope makes this a doctor-only mirror, unlike the vitals write above.
+      if (seg === "result") {
+        await requireSessionCap(env, actor, s, CAPS.EMR_TREAT);
+        const t = await Q.getTicket(env, body.ticketId);
+        if (!t || t.sessionId !== s.id) return json({ ok: false, error: "not_found" }, 404, request);
+        const mig = await resultsMigration(env, s, { getOrg: ORG.getOrg, tenantRow: wsqTenantRow });
+        const rec = await recordResult(request, env, { migration: mig, ticket: t, source: body.source, order: body.order, detail: body.detail, actorDeps: wsqActorDeps(env), recordDeps: wsqRecordDeps(env, mig.tenantId) });
+        // Best-effort either way: GHIS's read already happened and is not reopened by this outcome.
+        return json({ ok: true, wardsynq: rec }, 200, request);
       }
       // Slide-to-checkout: seal + share the timeline, close the patient, call the next.
       if (seg === "checkout") {

@@ -668,6 +668,86 @@ reconciliation are not migrated, and the console card says so rather than implyi
 PRN, timing, start/end, priority, indication and strength are not captured by the OPD form and are
 not invented. The safety engine and its thresholds are untouched.
 
+**Results, migrated (2026-09-06, eighth migration) — READ-SIDE.** Every migration before this one
+hooked a doctor's WRITE. A result is not a write the doctor makes; it is GHIS data becoming
+available, and `opd-emr.js openReport()` merely taps GHIS's `/lab-detail` or `/radiology-report`
+(untouched, response unchanged). So the seam is a mirror of a READ: after GHIS answers, the client
+separately posts what it saw to `POST /api/queue/result` (its own route segment, not "timeline" —
+a result is not a new sentence in the visit summary), which
+`functions/_wardsynq/migrate-results.js` maps into a canonical `DiagnosticReport` (+ `Observation`
+per lab test) and writes it — GHIS's own read is never slowed, blocked, or altered.
+
+**"authoritative" means something different here than in every migration before it.** Elsewhere,
+authoritative meant WardSynQ was the write target and a refusal blocked the caller. There is no such
+write for results — GHIS was never asked to write anything by this flow. Here it means only: the
+console MAY ALSO read the DiagnosticReport back from WardSynQ (`record.results = true` on the GET
+timeline handler, gated on the `results` key being `"authoritative"` SPECIFICALLY — narrower than
+the other four cards, which appear whenever the tenant's record is reachable at ALL). "shadow"
+ingests identically but exposes no such key: the console renders exactly as it does today.
+
+**Two source shapes, one canonical model — no second result model.** Lab (`getLabOrders` +
+`getLabDetail`) and radiology (`getRadiologyOrders` + `getRadiologyReport`) both map into the SAME
+`DiagnosticReport`. Lab additionally produces one `Observation` per test row (structured values
+belong there, as vitals already establishes); radiology has no discrete rows, so `conclusion`
+carries the whole narrative and `resultObservationIds` stays empty.
+
+**Terminology reused, not reinvented.** `LAB_CODE_SEED` already existed in
+`wardsynq/adapters/wardsynq-ghis-adapter.js` (the ICU/ward feed's GHIS adapter, an UNRELATED
+subsystem that already maps GHIS labs → Observation and GHIS imaging → DiagnosticReport) and is
+IMPORTED here rather than re-seeded. An unmapped test keeps its own name with
+`codeSystem: "ghis-local"` and is recorded in `issues`, never guessed at.
+
+**`DiagnosticReport.critical` is left FALSE, always — the single most safety-relevant call in this
+migration.** GHIS's own `critical` flag on a lab row is carried as `Observation.sourceCritical`
+(informational), but is NEVER used to set the canonical `DiagnosticReport.critical` field.
+`wardsynq-critical.js`'s own design rule #1 is explicit: "a source system's own critical flag is
+advisory... it is never a substitute for classifying the value against the site's own [approved]
+thresholds. An interface that trusted the sender's flag would inherit every one of the sender's
+bugs." Setting the canonical field from GHIS's claim would be exactly that mistake. Nothing here
+reads or writes `wardsynq-critical.js` at all — wiring results into closed-loop escalation is a
+separate, later decision needing the site's own approved thresholds.
+
+**LINKAGE is by name match, scoped and honest about its limit.** The lab/radiology order rows carry
+NO ServiceRequest id or GHIS service id, only a display name. `matchServiceRequest` looks up the
+patient's ServiceRequests on the SAME encounter and links to one whose `display` matches
+case-insensitively — but ONLY when exactly one candidate matches. Zero or several both leave
+`serviceRequestId: null` with `serviceRequestLinkage` recording `"unmatched"` or `"ambiguous"`,
+because guessing among several same-named orders risks the WRONG linkage. Nothing here ever creates
+a ServiceRequest to make a result look ordered.
+
+**AMENDMENTS, without a source signal for them.** Neither GHIS read path exposes a
+"preliminary → corrected" transition. A re-fetch of the SAME renderId/resultid that returns
+DIFFERENT content is represented as this model already represents any change: a new VERSION of the
+SAME `DiagnosticReport`, guarded by `expectedVersion`, prior version intact in history — `status` is
+computed fresh each time from what is actually present, never advanced to `"corrected"`, because
+claiming that source signal would be inventing one GHIS does not provide. A changed OBSERVATION
+value (a corrected lab number under an unchanged test list) still versions the REPORT, not just the
+observation, so the report's own history reflects the correction.
+
+**A real, avoidable idempotency bug, found and fixed before this shipped.** The first draft gave
+every observation and the report a STATIC `idempotencyKey` tied to the entity's own stable id
+(`result-obs:${obs.id}`). `RecordService`'s `recall()` caches an idempotency key's outcome FOREVER —
+so that key would have permanently frozen the FIRST value ever written: every later mirror sharing
+the key would replay the original result and a genuine correction would silently never land. Every
+sibling migration (`migrate-inv-order.js`, `migrate-prescription.js`, `migrate-assessment.js`) had
+already established the right pattern — accept an OPTIONAL `ctx.idempotencyKey` from the caller,
+rely on an explicit same-content check (`sameOrder`/`samePrescription`/here, `sameReport` +
+`sameObservationValue`) plus `expectedVersion` for the actual dedup and concurrency guarantee. Fixed
+to match before merge, caught by the amendment test (`written` came back `0` when it should have
+been `1`) rather than by a hospital watching a corrected result never take effect.
+
+**`DiagnosticReport` gained `encounterId`.** Missing from the model entirely — every other clinical
+resource here (Observation, ServiceRequest, MedicationOrder, ClinicalNote) already carries the visit
+it belongs to. Not a second model; the same field the rest of the model already has. The ICU/ward
+adapter's own `toDiagnosticReports` was updated to set it too, since it already had `encounter` in
+scope and had simply never had anywhere to put it.
+
+**Deliberately NOT done.** GHIS remains the source of truth in every mode: nothing here caches a
+copy the console serves INSTEAD of GHIS, and making WardSynQ the actual source of record for results
+is a separate, later, deliberate decision this migration does not make. No abnormal-vs-reference-
+range judgement is computed (GHIS's own `critical` flag is the only signal carried). Cancelling a
+result, and correcting a ServiceRequest's linkage after the fact, are not modelled.
+
 **Deliberately NOT done _by the assessment migration_** (all three were later revisited; kept here as
 the scope that migration shipped with). GHIS's "Authorise" (sign-off/lock) was untouched and a note
 from it was never `signedBy` — migrated next, as the fifth migration above. `submitInvOrder` (kind
