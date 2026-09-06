@@ -832,9 +832,30 @@ the change feed. The safety case did not move: 14 of 16, 2 partial.
 
 ## Not built yet
 
-The `ghis-ward.js` cut-over, still the biggest remaining piece of the owner's architecture: moving
-the live mobile path onto the adapter. `wardsynq-shadow.js` exists for it and `icu.js` is untouched;
-it awaits a shadow run against real ward data.
+**CORRECTED 2026-09-06 — this section was stale.** It previously said the cut-over "awaits a shadow
+run against real ward data." `wardsynq-flags.js`'s own header says a device round already happened
+and the owner approved the architectural cut-over on 2026-09-05, and `wardsynq/wardsynq-ghis-live.js`
+(305 lines, `smd_wardsynq_cutover`, `test/wardsynq-ghis-live.test.mjs`, 20/20 passing) is fully
+IMPLEMENTED and TESTED against that approval — this note simply never said so. What is genuinely
+still true: **nothing calls `installLiveGhis()`.** Unlike shadow mode, which has
+`wardsynq-shadow-boot.js` wiring the observer to the real `ghis-ward.js` path on load, there is no
+equivalent boot script for the cut-over. The module is a tested, approved, currently-DEAD import —
+setting `smd_wardsynq_cutover=1` today does nothing, because nothing on the page ever imports the
+file or calls the function. Wiring that boot script, on one controlled device, is the actual next
+step — not building a cut-over, which already exists.
+
+**Shadow mode itself, traced and hardened 2026-09-06 against the real `ghis-ward.js loadIntoICU`
+bundle shape** (`{patient, patientId, source:'Ward Sync', labs}` — no `episodeId`, so
+`toEncounter()` returns `null` for every real ward-sync bundle through this path; a stated, verified
+divergence, not a bug). Field-by-field: `demoFromPatient()`'s `dem.age/sex/bed/dept/doctor` line up
+exactly with what `toPatient`/`toEncounter` read, including the `age`-not-`dob` convention the
+adapter's own header documents as trap 1. Lab rows carry `test/result/units/low/high/date`, matching
+`toObservations` field-for-field with the optional ones simply absent. 38 existing tests already
+covered the shadow module and the adapter; `wardsynq-shadow-boot.js` — the exact layer whose ordering
+mistake (below) once made a real device look clean while seeing nothing — had ZERO test coverage
+despite that history, so `mergeReports`/`hasAnyMethod`/`flagIsOn` were extracted and exported (pure
+refactor, no behaviour change) and now have 7 tests of their own
+(`test/wardsynq-shadow-boot.test.mjs`).
 
 **How to run shadow mode, corrected 2026-09-05 after a device round.** On the web,
 `?wardsynq_shadow=1`. On the NATIVE app there is no address bar, so the query param is unreachable
@@ -850,6 +871,16 @@ device run passed for a success while seeing nothing: the observer was wrapping 
 while `ghis-ward.js:685` calls `ingestWardHistory` on every current build. Both are wrapped now and
 `clean` requires `observed`, but the habit of checking what was actually seen is the durable lesson.
 `report().byMethod` breaks the counts down per entry point.
+
+**No tenant, actor or audit dimension exists in this mechanism, and none was added.** Unlike the
+server-side OPD migrations (`functions/_wardsynq/migrate-*.js`, gated by `WARDSYNQ_RECORD` and a
+per-tenant settings key), the shadow observer is pure client-side JS in the WebView: no server round
+trip, no `RecordService`, no store, no bus, no authenticated-actor resolution — `installShadow`'s
+deps are `{host, flags, method, logger}` and nothing else, and the boot script passes no store or
+bus "deliberately and visibly: there is nothing here for the observer to write to or emit on even if
+it tried." Tenant isolation, actor governance and audit rows are properties of the SERVER-SIDE record
+service (unchanged, untouched, `WARDSYNQ_RECORD` still off) — they do not apply to, and were not
+retrofitted onto, a mechanism whose entire safety property is that it writes nowhere at all.
 
 P0, P1, P2 and the P3 core modules are built.
 

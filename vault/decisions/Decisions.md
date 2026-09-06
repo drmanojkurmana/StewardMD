@@ -4585,3 +4585,43 @@ two would misattribute the encounter to whoever happened to touch it last for an
 workflow beyond the ticket's own three terminal states; closing an encounter for a ticket cancelled
 by the stale-import reconciliation path (engine-layer, not route-layer — see the module note); the
 GHIS cut-over and eMAR, neither started nor approved to start.
+
+## 2026-09-06 — Real shadow: verify the mechanism, fix the one gap it has, correct a stale note
+
+**Decision: do not build a second harness to prove this against "real" traffic — trace and hardened
+the ONE that exists.** The task asked to run the real GHIS shadow path against real traffic. Nothing
+here has a real GHIS credential or a physical device; fabricating pretend "real" numbers would be
+worse than saying so. What IS this agent's job, and was done: verify field-by-field that the existing
+adapter correctly maps the EXACT bundle shape `ghis-ward.js loadIntoICU` actually constructs (traced,
+confirmed correct), and hardened the one real gap tracing found — not invent a parallel proof.
+
+**Decision: `wardsynq-shadow-boot.js` needed a test, and needed it BECAUSE of its own documented
+history, not on principle.** This file's header names a real defect: an earlier version watched
+`ingestFromWard` only, while a current build calls `ingestWardHistory`, so a real device reported
+`bundlesSeen: 0` — a silent, confident-looking non-observation. That defect lived in exactly the
+kind of code (poll loop, dynamic import, multi-method merge) that is easy to leave untested because
+it "is just wiring." It had zero tests despite that history. `mergeReports`/`hasAnyMethod`/
+`flagIsOn` were extracted into named, exported, pure functions — no behaviour change, `boot()` calls
+the same logic it always did — specifically so THIS layer cannot repeat that exact failure mode
+unnoticed a second time.
+
+**Decision: correct the vault rather than let a stale "not built yet" stand next to a module that
+already is.** Tracing turned up `wardsynq/wardsynq-ghis-live.js` — 305 lines, `test/wardsynq-ghis-
+live.test.mjs` at 20/20, `wardsynq-flags.js`'s own header stating the owner approved the
+architectural cut-over on 2026-09-05 — while `vault/modules/WardSynQ.md`'s "Not built yet" section
+still said the cut-over "awaits a shadow run." Leaving that stand would have cost whoever reads it
+next a full re-discovery of work already done. The one thing that note said which remains TRUE: no
+boot script calls `installLiveGhis()`, so the built, tested, approved module is currently unwired —
+named precisely, not conflated with "not built."
+
+**Decision: state plainly that tenant/actor/audit do not apply here, rather than force-fit them.**
+The task's safety checklist named tenant isolation, authenticated-actor handling and audit behaviour.
+The shadow mechanism is pure client-side JS with no server round trip, no store, no bus — retrofitting
+a tenant or actor concept onto it would be exactly the "invent another ingestion system" the task
+forbade. Those properties belong to, and are already enforced by, the SEPARATE server-side record
+service (`functions/_wardsynq/*`, `WARDSYNQ_RECORD`) that this mechanism does not touch at all.
+
+**Not done, named:** enabling `smd_wardsynq_cutover` or wiring its boot script (explicitly out of
+scope: "do not enable authoritative cutover"); running this against an actual real device (no
+credential or hardware available here — the owner must do that step); any change to
+`wardsynq/wardsynq-ghis-live.js` itself, which this task found but was not asked to touch.
