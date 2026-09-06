@@ -123,6 +123,41 @@ test("resolve: an unrecognised drug is reported rather than treated as safe", ()
   assert.equal(v.allowed, true, "whether an unknown drug should stop an order is site policy, not an engine decision");
 });
 
+/* 2026-09-07. The same honesty was owed for the OTHER half of an interaction pair.
+ * checkInteractions() must drop an active medication it cannot resolve (an unknown token matches no
+ * rule) - but it dropped it silently, so the verdict came back with no findings and
+ * unresolvedDrug:false, which reads as "checked, clean". Measured against the real pack: a patient
+ * on warfarin prescribed ibuprofen gets INTERACTION_MAJOR when the warfarin order carries a generic,
+ * and NOTHING when it carries a GHIS material id instead. Same patient, same order, one silently
+ * missing major bleeding-risk interaction. */
+test("resolve: an active medication that cannot be resolved is REPORTED, not silently dropped from the interaction check", () => {
+  const ordered = order({ drug: "Ibuprofen 400mg", drugCode: "ibuprofen" });
+
+  const checked = engine.evaluate({ order: ordered, activeMeds: [{ drug: "Warfarin 5mg", drugCode: "warfarin" }] });
+  assert.ok(checked.findings.some((f) => f.code === "INTERACTION_MAJOR"), "the interaction is found when the active med resolves");
+  assert.deepEqual(checked.unresolvedActiveMeds, [], "and nothing is reported as unchecked");
+
+  // The same patient, where the active med carries an opaque source id instead of a generic.
+  const opaque = engine.evaluate({ order: ordered, activeMeds: [{ drug: "Warfarin 5mg", drugCode: "P0110" }] });
+  assert.ok(!opaque.findings.some((f) => f.code === "INTERACTION_MAJOR"), "it genuinely cannot be checked");
+  assert.deepEqual(opaque.unresolvedActiveMeds, ["Warfarin 5mg"],
+    "so the caller must be told WHICH medicine this verdict never covered");
+  assert.equal(opaque.unresolvedDrug, false, "the ordered drug itself resolved fine - the gap is on the other side");
+});
+
+test("the eMAR hook carries 'not checked' to the bedside instead of an empty, clean-looking verdict", async () => {
+  const hook = engine.hook();
+  const unknown = await hook({ order: order({ drug: "Notarealdrug 10mg", drugCode: "Notarealdrug" }), allergies: [], activeMeds: [] });
+  assert.equal(unknown.allowed, true, "unapproved content must never invent a hard stop at the moment of administration");
+  assert.ok(unknown.warnings.some((w) => w.code === "NOT_CHECKED_DRUG"), "but the nurse must be told nothing was checked");
+
+  const gapped = await hook({ order: order({ drug: "Ibuprofen 400mg", drugCode: "ibuprofen" }), allergies: [], activeMeds: [{ drug: "Warfarin 5mg", drugCode: "P0110" }] });
+  assert.ok(gapped.warnings.some((w) => w.code === "NOT_CHECKED_ACTIVE_MED"), "and told which current medicine was not compared");
+
+  const clean = await hook({ order: order({ drug: "Paracetamol 500mg", drugCode: "paracetamol" }), allergies: [], activeMeds: [] });
+  assert.ok(!clean.warnings.some((w) => String(w.code).startsWith("NOT_CHECKED")), "a genuinely complete check says nothing of the sort");
+});
+
 /* ------------------------------------------------------------------ allergy shield (HAZ-MED-02) */
 
 test("allergy: a verified severe direct match is an absolute block", () => {

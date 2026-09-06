@@ -75,6 +75,13 @@ test("wardsynqSafetyNote: an unresolved drug is reported as NOT CHECKED, never a
   assert.match(flagged, /UNAPPROVED decision support flags/);
   assert.match(flagged, /does not block the prescription/);
 
+  // A verdict that could not cover some of the patient's CURRENT medicines says which.
+  const gapped = OE._wardsynqSafetyNote({ unapproved: true, unresolvedDrug: false, findings: [], unresolvedActiveMeds: ["Warfarin 5mg"] });
+  assert.match(gapped, /NOT compared against: Warfarin 5mg/, "the prescriber is told which medicine was never compared");
+  const gappedWithFindings = OE._wardsynqSafetyNote({ unapproved: true, unresolvedDrug: false, unresolvedActiveMeds: ["Warfarin 5mg"],
+    findings: [{ code: "DOSE_UNPARSEABLE", severity: "major", message: "no numeric dose" }] });
+  assert.match(gappedWithFindings, /NOT compared against: Warfarin 5mg/, "and told even when there ARE other findings");
+
   // Unavailable decision support stays distinct from both.
   assert.match(OE._wardsynqSafetyNote({ degraded: true }), /unavailable/i);
   assert.equal(OE._wardsynqSafetyNote(null), "");

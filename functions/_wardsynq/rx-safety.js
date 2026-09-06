@@ -35,6 +35,9 @@ function evaluateRx(candidate, activeMeds, allergies, rulePack) {
     unapproved: true,   // see file header — this NEVER gates the order, whatever it finds
     rulePackVersion: verdict.rulePackVersion,
     unresolvedDrug: verdict.unresolvedDrug,
+    // Which of the patient's OWN medicines could not be interaction-checked. Empty is the normal
+    // case; non-empty means this verdict is narrower than it looks. See wardsynq-safety.js.
+    unresolvedActiveMeds: verdict.unresolvedActiveMeds || [],
     findings: verdict.findings.map((f) => ({ code: f.code, severity: f.severity, disposition: f.disposition, message: f.message })),
   };
 }
