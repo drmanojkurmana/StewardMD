@@ -35,7 +35,7 @@
     },
     smd_wardsynq_cutover: {
       type: "bool", def: false, query: "wardsynq_cutover",
-      desc: "Feed ward data through the WardSynQ adapter into the canonical model, alongside the legacy ingest. DEFAULT OFF. IMPLEMENTED (wardsynq/wardsynq-ghis-live.js). The legacy path still owns STATE and the mobile UI and is not modified: it runs FIRST and its result is returned untouched, so enabling this cannot change what the app shows. The adapter path can never throw into the caller, is idempotent on the source event identity, writes as an ADAPTER actor and is therefore capped at DRAFT, and can be halted in-process without a reload via the object installLiveGhis() returns."
+      desc: "Feed ward data through the WardSynQ adapter into the canonical model, alongside the legacy ingest. DEFAULT OFF. IMPLEMENTED (wardsynq/wardsynq-ghis-live.js) and WIRED (wardsynq-ghis-live-boot.js, 2026-09-06) — window.SMD_WARDSYNQ_LIVE once installed. The legacy path still owns STATE and the mobile UI and is not modified: it runs FIRST and its result is returned untouched, so enabling this cannot change what the app shows. The adapter path can never throw into the caller, is idempotent on the source event identity, writes as an ADAPTER actor and is therefore capped at DRAFT, and can be halted in-process without a reload via window.SMD_WARDSYNQ_LIVE.halt(). Writes only through the tenant already opened by ?wardsynq_record=<tenantId>; with none configured this runs as a dry run (mapped and counted, nothing written)."
     }
   };
   function store()  { try { return localStorage; } catch (e) { return null; } }

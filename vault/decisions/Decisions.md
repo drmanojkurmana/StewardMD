@@ -4625,3 +4625,43 @@ service (`functions/_wardsynq/*`, `WARDSYNQ_RECORD`) that this mechanism does no
 scope: "do not enable authoritative cutover"); running this against an actual real device (no
 credential or hardware available here — the owner must do that step); any change to
 `wardsynq/wardsynq-ghis-live.js` itself, which this task found but was not asked to touch.
+
+## 2026-09-06 — Wiring the cut-over boot layer: one required change to the engine, and a two-key write control
+
+**Decision: add `installLiveGhis`'s `method` parameter — this WAS "absolutely required for boot
+integration," not scope creep.** The instruction was explicit: don't change `wardsynq-ghis-live.js`
+unless boot integration genuinely needs it. It does: the function only ever wrapped
+`ingestFromWard`, hardcoded, with no way to point it at `ingestWardHistory` — the door
+`ghis-ward.js` actually calls on every current build. Wiring it as-is would have shipped a boot
+script that reports `installed: true` while observing nothing, on real traffic, silently — the
+EXACT defect the shadow observer already found on a real device once, now reintroduced into its
+sibling by omission. The fix mirrors `installShadow`'s already-proven `method` parameter exactly: a
+single optional argument, default unchanged, every one of the 20 existing tests untouched and
+passing. Verified by running them before writing a single new test.
+
+**Decision: the store comes from `window.SMD_WARDSYNQ_RECORD`, and ONLY if it is already, actually
+connected — never a second connection, and never a fallback that pretends to be one.** The
+temptation was to have the boot script open its own record connection so the cut-over would "just
+work" the moment the flag is set. Rejected: that would mean flipping ONE flag starts real writes,
+which contradicts "preserve tenant/actor/governance behaviour" (a tenant is a deliberate, separate
+configuration, not something a boot script should pick on its own) and contradicts the instruction
+that real-device verification happens SEPARATELY, after this PR. Reading the EXISTING connection
+instead means turning the cut-over flag on, alone, with no tenant configured — the state every
+device will actually be in when this first ships — runs `installLiveGhis`'s own documented DRY RUN.
+Real writes require BOTH flags, deliberately: a genuine two-key control, not an accident of load
+order.
+
+**Decision: a FRESH `KIND.ADAPTER` actor, never the connected session's own human actor.** The
+record connection's `actor` is the SIGNED-IN DOCTOR, at whatever tier the server granted them
+(often EXECUTE). Passing that actor straight to `installLiveGhis` would let a feed commit through a
+human's own write tier — precisely what `wardsynq-ghis-live.js`'s own header says the adapter-actor
+convention exists to prevent. The boot layer constructs a separate, static adapter identity
+(`kind: ADAPTER, tier: DRAFT`), exactly as the module's own test harness already does, so a feed can
+never commit an active clinical record however confidently GHIS asserts one, however privileged the
+doctor whose device happens to be running it.
+
+**Not done, named:** enabling `smd_wardsynq_cutover` anywhere, by this PR or any default (ships OFF,
+stays OFF); real-device verification (the owner's own next, separate step); a tenant-selection or
+auto-connect mechanism for the record session (reuses `wardsynq-record-boot.js`'s existing one,
+unmodified); any redesign of `wardsynq-ghis-live.js`'s mapping, transaction or failure-recording
+logic, none of which this PR touches beyond the one parameter above.

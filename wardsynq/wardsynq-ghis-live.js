@@ -63,20 +63,28 @@ class CutoverError extends Error {
  * Installs the live adapter path onto the host's ingest function.
  *
  * @param {{host?: object, flags?: object, store?: object, bus?: object, actor?: object,
- *   now?: () => string, onError?: Function}} deps
+ *   now?: () => string, onError?: Function, method?: string}} deps
  *   `store` should be a GovernedStore session or anything with put(). If absent, mapping still runs
  *   and is counted, which is useful for a dry run and is NOT silently treated as success.
+ *   `method` — WHICH function on the host to wrap. Defaults to "ingestFromWard", unchanged from
+ *   before this parameter existed. Added 2026-09-06 for the SAME reason `wardsynq-shadow.js`'s
+ *   `installShadow` already takes one: `ghis-ward.js` calls `ICU.ingestWardHistory` when it exists
+ *   and falls back to `ingestFromWard` only on older builds, so wrapping `ingestFromWard` alone
+ *   would silently wire this to a door a current build's real ward sync never walks through — the
+ *   exact defect the shadow observer found on a real device before this file existed. The boot
+ *   layer wraps both; this parameter is what lets it.
  */
 function installLiveGhis(deps) {
   deps = deps || {};
   const host = deps.host || (typeof window !== "undefined" ? window.ICU : null);
   const flags = deps.flags || (typeof window !== "undefined" ? window.SMD_WARDSYNQ_FLAGS : null);
   const now = deps.now || (() => new Date().toISOString());
+  const method = deps.method || "ingestFromWard";
 
   const on = flags && typeof flags.get === "function" ? flags.get("smd_wardsynq_cutover") : false;
   if (!on) return { installed: false, mode: MODE.OFF, reason: "flag off", uninstall: () => {}, halt: () => {}, report: () => null };
-  if (!host || typeof host.ingestFromWard !== "function") {
-    return { installed: false, mode: MODE.OFF, reason: "no ingestFromWard to wrap", uninstall: () => {}, halt: () => {}, report: () => null };
+  if (!host || typeof host[method] !== "function") {
+    return { installed: false, mode: MODE.OFF, reason: `no ${method} to wrap`, uninstall: () => {}, halt: () => {}, report: () => null };
   }
 
   const stats = {
@@ -92,9 +100,9 @@ function installLiveGhis(deps) {
   const SEEN_MAX = 5000;
 
   let halted = false;
-  const original = host.ingestFromWard;
+  const original = host[method];
 
-  host.ingestFromWard = function wardSynQLive(bundle) {
+  host[method] = function wardSynQLive(bundle) {
     /* 1. The legacy path runs FIRST, and this is what the caller gets. Not "usually", not "unless
           the adapter throws": always, and before anything below has run.
 
@@ -206,6 +214,7 @@ function installLiveGhis(deps) {
   return {
     installed: true,
     mode: MODE.LIVE,
+    method,
     /** Stops the adapter path immediately, in-process, with no reload. Legacy continues untouched. */
     halt(reason) {
       halted = true;
@@ -215,10 +224,11 @@ function installLiveGhis(deps) {
     },
     resume() { halted = false; stats.haltedAt = null; stats.haltReason = null; return { mode: MODE.LIVE }; },
     /** Removes the wrapper entirely, restoring the original function. */
-    uninstall() { host.ingestFromWard = original; return { mode: MODE.OFF }; },
+    uninstall() { host[method] = original; return { mode: MODE.OFF }; },
     report() {
       return {
         ...stats,
+        method,
         mode: halted ? MODE.HALTED : MODE.LIVE,
         // The single sentence somebody should read first.
         reading: halted

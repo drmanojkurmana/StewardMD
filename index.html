@@ -2188,6 +2188,22 @@ window.openExternal = function (u) {
      into. Inert unless a tenant is named (?wardsynq_record=<tenantId>, remembered in localStorage;
      ?wardsynq_record=off forgets it). Nothing in the app reads window.SMD_WARDSYNQ_RECORD yet. -->
 <script type="module" src="/wardsynq-record-boot.js?v=wsq1"></script>
+<!-- WardSynQ GHIS cut-over. DEFAULT OFF and does not ship enabled.
+
+     wardsynq-ghis-live-boot.js does nothing at all unless ?wardsynq_cutover=1 (or the flag is set
+     directly, on native) is set — the SAME smd_wardsynq_cutover flag wardsynq-flags.js already
+     defines; nothing new is added here. When it is, wardsynq/wardsynq-ghis-live.js (implemented,
+     tested, owner-approved 2026-09-05) wraps the real GHIS ward-sync ingest exactly as
+     wardsynq-shadow-boot.js already wraps it for observation: legacy runs first and is returned
+     untouched, the adapter path can never throw into the caller, and it is idempotent on the
+     source's own event identity.
+
+     It writes ONLY through the connection wardsynq-record-boot.js already opened above
+     (window.SMD_WARDSYNQ_RECORD) — never a new store, never a new tenant. With no tenant configured
+     there, it runs as installLiveGhis's own documented DRY RUN: mapped and counted, nothing written.
+     Real writes need BOTH flags deliberately set. window.SMD_WARDSYNQ_LIVE.halt() stops it
+     in-process without a reload. -->
+<script type="module" src="/wardsynq-ghis-live-boot.js?v=wsq1"></script>
 
 <!-- The acknowledgement screen for a deterioration escalation (HAZ-DET-01).
 

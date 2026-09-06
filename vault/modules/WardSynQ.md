@@ -832,17 +832,29 @@ the change feed. The safety case did not move: 14 of 16, 2 partial.
 
 ## Not built yet
 
-**CORRECTED 2026-09-06 — this section was stale.** It previously said the cut-over "awaits a shadow
-run against real ward data." `wardsynq-flags.js`'s own header says a device round already happened
-and the owner approved the architectural cut-over on 2026-09-05, and `wardsynq/wardsynq-ghis-live.js`
-(305 lines, `smd_wardsynq_cutover`, `test/wardsynq-ghis-live.test.mjs`, 20/20 passing) is fully
-IMPLEMENTED and TESTED against that approval — this note simply never said so. What is genuinely
-still true: **nothing calls `installLiveGhis()`.** Unlike shadow mode, which has
-`wardsynq-shadow-boot.js` wiring the observer to the real `ghis-ward.js` path on load, there is no
-equivalent boot script for the cut-over. The module is a tested, approved, currently-DEAD import —
-setting `smd_wardsynq_cutover=1` today does nothing, because nothing on the page ever imports the
-file or calls the function. Wiring that boot script, on one controlled device, is the actual next
-step — not building a cut-over, which already exists.
+**UPDATED 2026-09-06 — the cut-over is now wired, still off.** `wardsynq-ghis-live-boot.js` connects
+`wardsynq/wardsynq-ghis-live.js` to the real page, mirroring `wardsynq-shadow-boot.js`'s own
+architecture: polls for `window.ICU`, reads the EXISTING `smd_wardsynq_cutover` flag (no new one),
+and — only when it is on — wraps BOTH `ingestWardHistory` and `ingestFromWard` (a `method` parameter
+was added to `installLiveGhis` for this, mirroring `installShadow`'s own; without it, wiring only
+`ingestFromWard` would have wired the cut-over to a door a current build's real ward sync never
+walks through, the identical failure the shadow observer already found once). Exposed as
+`window.SMD_WARDSYNQ_LIVE`. `SMD_WARDSYNQ_LIVE.halt('<reason>')` stops every wrapped door
+in-process, no reload — the kill switch `installLiveGhis` already had, now reachable.
+
+**Writes only through the connection that already exists, never a new one.** `recordDeps()` in the
+boot script reads `window.SMD_WARDSYNQ_RECORD` — the SAME governed, tenant-bound session
+`wardsynq-record-boot.js` opens, gated by its OWN separate `?wardsynq_record=<tenantId>`. If that
+connection is live, a FRESH `KIND.ADAPTER` actor (never the signed-in doctor's own — capped at DRAFT
+by the existing actor model regardless of what tier the doctor holds) writes through it. If it is
+not — no tenant configured, which is the realistic state on any device today — `installLiveGhis` runs
+in its own already-documented DRY RUN: mapped and counted, nothing written. Turning
+`smd_wardsynq_cutover` on, alone, on a device with no `wardsynq_record` tenant, writes NOTHING. Real
+writes need both flags, deliberately — a genuine two-key control, not an accident of one script
+loading.
+
+**This PR did not perform real-device verification, on purpose** — the owner's own instruction was
+to wire the boot layer only and run that verification separately, next.
 
 **Shadow mode itself, traced and hardened 2026-09-06 against the real `ghis-ward.js loadIntoICU`
 bundle shape** (`{patient, patientId, source:'Ward Sync', labs}` — no `episodeId`, so
