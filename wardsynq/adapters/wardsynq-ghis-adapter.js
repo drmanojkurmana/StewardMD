@@ -47,6 +47,25 @@ const UNKNOWN_DOB = "0000-00-00";
  *
  * LOINC codes are the common ones and are UNVERIFIED. They need a terminology review before this
  * pack is trusted for interoperability; they are not used for any safety decision today.
+ *
+ * WIDENED 2026-09-06, closing the coverage gap PR #862's real-device shadow run surfaced (30 of 37
+ * observed lab observations came back GHIS_LAB_UNMAPPED). The real test NAMES from that run were
+ * never captured — deliberately, to keep anything from a live session out of a transcript — so this
+ * is not a replay of that exact bundle. Instead: every analyte `icu.js WARD_LAB_MAP` already
+ * recognises (the SAME vocabulary this seed pack was originally drawn from, already trusted in
+ * production by the ICU flowsheet) was checked against what this pack was still missing, and only
+ * the ones with a single, unambiguous serum/plasma LOINC code were added. Same UNVERIFIED status as
+ * every entry above: standard, well-established assignments, not cross-checked against a live
+ * terminology service.
+ *
+ * TWO WARD_LAB_MAP KEYS DELIBERATELY LEFT OUT, both genuinely ambiguous rather than merely obscure:
+ *   hco3   "Bicarbonate" and "TCO2" carry DIFFERENT LOINC codes depending on whether the report
+ *          means measured venous bicarbonate or calculated total CO2, and a bare test name does not
+ *          say which. Guessing either would be exactly the fabricated-code risk this file exists to
+ *          avoid. Stays ghis-local.
+ *   neut   "Neutrophils" alone does not say percent (770-8) or absolute count (751-8) — different
+ *          codes, and GHIS's own report format for this was never seen to disambiguate. Stays
+ *          ghis-local.
  */
 const LAB_CODE_SEED = Object.freeze({
   sodium: { code: "2951-2", display: "Sodium" },
@@ -71,6 +90,32 @@ const LAB_CODE_SEED = Object.freeze({
   crp: { code: "1988-5", display: "C-reactive protein" },
   lactate: { code: "2524-7", display: "Lactate" },
   inr: { code: "6301-6", display: "INR" },
+  // Total (serum/plasma) calcium — bare "Calcium" with no urine/24-hour/ionised qualifier, the
+  // SAME assumption WARD_LAB_MAP's own "ca" key already makes (its exclusion guard only fires on
+  // an explicit "urin"/"ionis"/"ioniz"/"free" qualifier in the name).
+  calcium: { code: "17861-6", display: "Calcium" },
+  // Ionised/free calcium is its OWN analyte (~1.1 mmol/L), a different LOINC from total calcium
+  // above — matches WARD_LAB_MAP's separate "ica" key, checked before "ca" there for the same reason.
+  "ionised calcium": { code: "1994-3", display: "Calcium.ionized" },
+  "ionized calcium": { code: "1994-3", display: "Calcium.ionized" },
+  magnesium: { code: "19123-9", display: "Magnesium" },
+  // "Phosphate" and "Phosphorus" name the SAME serum analyte in Indian lab reports; both point at
+  // the one LOINC code WARD_LAB_MAP's "po4" key already covers.
+  phosphate: { code: "2777-1", display: "Phosphate" },
+  phosphorus: { code: "2777-1", display: "Phosphate" },
+  // Direct (conjugated) bilirubin — a DIFFERENT LOINC from the total-bilirubin entry above, matching
+  // WARD_LAB_MAP's separate "bili_d" key (checked before its own "bili" for the same reason).
+  "direct bilirubin": { code: "1968-7", display: "Bilirubin direct" },
+  "conjugated bilirubin": { code: "1968-7", display: "Bilirubin direct" },
+  "alkaline phosphatase": { code: "6768-6", display: "Alkaline phosphatase" },
+  alp: { code: "6768-6", display: "Alkaline phosphatase" },
+  amylase: { code: "1798-8", display: "Amylase" },
+  lipase: { code: "3040-3", display: "Lipase" },
+  procalcitonin: { code: "33959-8", display: "Procalcitonin" },
+  pct: { code: "33959-8", display: "Procalcitonin" },
+  haematocrit: { code: "4544-3", display: "Haematocrit" },
+  hematocrit: { code: "4544-3", display: "Haematocrit" },
+  pcv: { code: "4544-3", display: "Haematocrit" },
 });
 
 const norm = (v) => (typeof v === "string" ? v.trim().toLowerCase().replace(/\s+/g, " ") : "");
