@@ -233,13 +233,21 @@ function ServiceRequest(input) {
   };
 }
 
-/** DiagnosticReport: finalized result of a ServiceRequest (lab panel, imaging report). */
+/**
+ * DiagnosticReport: finalized result of a ServiceRequest (lab panel, imaging report).
+ *
+ * `encounterId` added 2026-09-06 (the results migration): every other clinical resource here
+ * (Observation, ServiceRequest, MedicationOrder, ClinicalNote) already carries the visit it belongs
+ * to, and a result with no encounter link cannot be shown alongside the visit that produced it. Not
+ * a second model, not a new resource type — the same field the rest of this file already has.
+ */
 function DiagnosticReport(input) {
   input = input || {};
   return {
     resourceType: "DiagnosticReport",
     id: input.id || localId("dr"),
     patientId: requireString(input.patientId, "DiagnosticReport.patientId"),
+    encounterId: input.encounterId || null,
     serviceRequestId: input.serviceRequestId || null,
     code: requireString(input.code, "DiagnosticReport.code"),
     status: input.status || "preliminary", // preliminary | final | corrected | cancelled

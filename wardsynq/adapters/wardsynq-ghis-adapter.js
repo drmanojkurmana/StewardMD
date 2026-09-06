@@ -251,6 +251,7 @@ function toDiagnosticReports(bundle, patient, encounter, issues) {
     const report = DiagnosticReport({
       id: sourceId("dr", patient.mrn, row.reportId || row.resultid || name, row.date || ""),
       patientId: patient.id,
+      encounterId: encounter ? encounter.id : null,
       code: name,
       // GHIS marks whether a study has been reported; an unreported study is preliminary, and
       // treating it as final would let an unread scan look like a signed-off result.
