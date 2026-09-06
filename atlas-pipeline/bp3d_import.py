@@ -386,10 +386,10 @@ def build(src, write=False):
         base = len(out_parts)
         chunk_base = len(chunks)
         for lp in live["parts"]:
-            if lp["canon"] not in canon:
+            if lp["canon"] and lp["canon"] not in canon:
                 sys.exit(f"live part {lp['id']} maps to unknown canonical {lp['canon']}")
             live_parts.append({
-                "id": lp["id"], "name": lp["name"], "fma": canon[lp["canon"]].get("fma") or "",
+                "id": lp["id"], "name": lp["name"], "fma": (canon[lp["canon"]].get("fma") or "") if lp["canon"] else "",
                 "sys": SYS_INDEX[lp["system"]], "reg": REGIONS.index(lp["region"]) if lp["region"] in REGIONS else REGIONS.index("BODY"),
                 "chunk": chunk_base + lp["chunk"], "iStart": lp["iStart"], "iCount": lp["iCount"],
                 "bounds": lp["bounds"], "canon": lp["canon"], "side": lp.get("side"),

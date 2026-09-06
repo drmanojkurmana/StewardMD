@@ -45,7 +45,7 @@ try {
   await ev(`document.querySelector('#smdAtlas .atlas-3d-card').click(); return 1;`);
   ok(await until(`return ATLAS3D.isOpen() && !!document.getElementById('a3dCanvas')`), "3D layer opens with a canvas");
   ok(await until(`var s=ATLAS3D._state; return !!s.data && !!s.gl;`, 30000), "manifest loaded and WebGL context created");
-  ok(await ev(`return ATLAS3D._state.data.parts.length;`) === 2265, "2,265 meshes in the manifest (2,227 reference + 38 living CT)");
+  ok(await ev(`return ATLAS3D._state.data.parts.length;`) === 2293, "2,293 meshes in the manifest (2,227 reference + 66 living CT)");
   ok(await until(`var s=ATLAS3D._state; return !s.err && s.loaded>0 && Object.keys(s.loading).length===0 && Object.keys(s.chunks).length>=10;`, 120000), "default systems streamed and uploaded (no error)");
   const err = await ev(`return ATLAS3D._state.err;`);
   ok(!err, "no renderer error: " + (err || "none"));
@@ -81,6 +81,9 @@ try {
   ok(await ev(`var p=ATLAS3D._state.plane; return !!p && p.m==='ct-live-torso-axial' && p.i===` + slice + ` && p.n===24;`) === true, "the cut plane is that very slice (" + slice + "/24)");
   ok(await until(`var s=ATLAS3D._state; return !s.err && Object.keys(s.loading).length===0 && Object.keys(s.chunks).filter(function(k){return s.chunks[k].src===1}).length>=1;`, 120000), "living-CT geometry streamed");
   ok(await until(`return !!ATLAS3D._state.plane && ATLAS3D._state.plane.ready === true`, 30000), "the CT slice texture loaded onto the plane");
+  // SwiftShader renders a frame in ~0.6 s, so the camera glide alone takes ~25 s here (under 1 s on a phone).
+  var drawn = await until(`var s=ATLAS3D._state; return s.dirty===false && !s.camTo`, 90000);
+  ok(drawn, "the frame after the last chunk is actually drawn (dirty cleared with no animation running)" + (drawn ? "" : " state=" + await ev(`var s=ATLAS3D._state; return JSON.stringify({dirty:s.dirty, raf:s.raf, camTo:s.camTo, explode:[s.explode, s.explodeTarget], loading:Object.keys(s.loading).length});`)));
   ok(await ev(`return !!document.querySelector('#a3dBar [data-a3d-act=slice]') && !!document.querySelector('#a3dSrc .a3d-srcbtn.on[data-id=live]');`) === true, "slice slider is shown and the Living CT tab is active");
   await ev(`var r=document.querySelector('#a3dBar [data-a3d-act=slice]'); r.value=12; r.dispatchEvent(new Event('change',{bubbles:true})); return 1;`);
   ok(await until(`return ATLAS3D._state.plane && ATLAS3D._state.plane.i===12`), "slider moves the cut to slice 12");
@@ -89,6 +92,13 @@ try {
   ok(await until(`return document.querySelectorAll('#a3dSheet .a3d-link.a3d-plane').length >= 3`), "CT rows into living-torso modules offer Show in 3D");
   await ev(`document.querySelector('#a3dSrc .a3d-srcbtn[data-id=bp3d]').click(); return 1;`);
   ok(await until(`return ATLAS3D._state.src==='bp3d' && ATLAS3D._state.plane===null`), "Reference tab switches body and drops the plane");
+  ok(await ev(`var s=ATLAS3D._state; var skin=s.data.parts.filter(function(p){return p.src===1 && s.data.systems[p.sys].id==='integumentary'})[0]; return !!skin && s.shell===true && !!s.chunks[s.data.chunks.filter(function(c){return c.src===1 && c.system==='integumentary'})[0].id];`) === true, "the living body's skin chunk streamed for the body outline");
+  ok(await ev(`return ATLAS3D._state.data.parts.filter(function(p){return p.src===1 && ATLAS3D._state.data.systems[p.sys].id==='skeletal'}).length;`) === 27, "27 living bones (spine, lower ribs, pelvis, femurs) are in the manifest");
+  await ev(`ATLAS3D.setSource('live'); return 1;`);
+  ok(await until(`var s=ATLAS3D._state; return s.src==='live' && !!s.hidden[s.data.byId['LIVE_colon']] && !!s.hidden[s.data.byId['LIVE_small_bowel']]`), "living body hides the bowel by default (Layers > Bowel shows it)");
+  await ev(`ATLAS3D.selectCanon('COLON'); return 1;`);
+  ok(await until(`var s=ATLAS3D._state; return s.sel.length===1 && s.data.parts[s.sel[0]].id==='LIVE_colon'`), "selecting COLON still shows the living colon (selection wins over the default)");
+  await ev(`ATLAS3D.setSource('bp3d'); return 1;`);
   ok(await until(`var s=ATLAS3D._state; return !s.err && Object.keys(s.loading).length===0 && Object.keys(s.chunks).length>=10;`, 120000), "reference geometry streamed after switching back");
   await ev(`ATLAS3D.selectCanon('LIVER'); return 1;`);
   ok(await until(`return ATLAS3D._state.src==='live' && ATLAS3D._state.sel.length===1 && ATLAS3D._state.data.parts[ATLAS3D._state.sel[0]].id==='LIVE_liver'`), "LIVER (no reference surface) auto-switches to the living-CT liver");
