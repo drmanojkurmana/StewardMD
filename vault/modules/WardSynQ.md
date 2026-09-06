@@ -349,9 +349,18 @@ age.
 
 ## The Clinical Record Service (2026-09-06)
 
-**STATUS: IMPLEMENTED, verified by software (in-process suite) and by a real local D1 run. NOT
-clinically validated, NOT clinically approved, NOT deployed (flag OFF, schema not yet applied to the
-production D1).** The deployment modes other than Cloudflare D1 are a port contract, not code.
+**STATUS: IMPLEMENTED, verified by software (in-process suite), by a real local D1 run, and
+(2026-09-07) by one controlled OPD flow on a real iPhone against production for an `org.mode:
+"wardsynq"` test org. NOT clinically validated, NOT clinically approved. Global flag `WARDSYNQ_RECORD`
+stays OFF; a wardsynq-mode org bypasses it on both the write side (`wsqForcedMigration`) and, since
+PR #871, the read side (`/api/wardsynq` door + the timeline `record` link).** The deployment modes
+other than Cloudflare D1 are a port contract, not code.
+
+**Production D1 schema (gotcha, 2026-09-07):** `functions/db/wardsynq_schema.sql` was NOT applied
+to the production `stewardmd-connect` database until 2026-09-07, so every real wardsynq write failed
+with `record_read_failed` (a D1 "no such table" surfacing as a 502 from the edge) while the code was
+correct. Applied with the command in the file's own header; it is additive and idempotent. Two
+latency fixes (#868, #869) were made while chasing it; they are real but were not the cause.
 
 Until this, WardSynQ's record lived in the browser: `MemoryBackend` on the workstation,
 `IndexedDBBackend` offline. A refresh erased it and a second device never saw it, so "hospital PC and
