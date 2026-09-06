@@ -121,7 +121,7 @@
  * be a worse failure mode than not offering her the action at all.
  */
 
-import { DiagnosticReport, Observation } from "../../wardsynq/wardsynq-model.js";
+import { DiagnosticReport, Observation, numericValue } from "../../wardsynq/wardsynq-model.js";
 import { GovernanceError } from "../../wardsynq/wardsynq-actors.js";
 import { VersionConflictError } from "./repository.js";
 import { resolveClinicalActor } from "./actor.js";
@@ -171,7 +171,8 @@ function observationFromLabTest(row, ctx, issues) {
   if (!testName) { issues.push({ code: "RESULT_TEST_NO_NAME", message: "a lab test row had no name and was skipped" }); return null; }
   const mapped = LAB_CODE_SEED[norm(testName)] || null;
   if (!mapped) issues.push({ code: "RESULT_TEST_UNMAPPED", message: `no canonical code for "${testName}"`, testName });
-  const numeric = Number.parseFloat(row.result);
+  // Strict: "1:320" (a Widal titer) must not become the number 1. See numericValue().
+  const numeric = numericValue(row.result);
   const obs = Observation({
     id: `${ctx.reportId}-obs-${slug(testName)}`,
     patientId: ctx.patientId,
@@ -188,7 +189,7 @@ function observationFromLabTest(row, ctx, issues) {
   obs.sourceValue = row.result != null ? String(row.result) : null;
   obs.sourceUnit = row.units || null;
   obs.referenceRange = (row.low != null || row.high != null)
-    ? { low: row.low != null ? Number.parseFloat(row.low) : null, high: row.high != null ? Number.parseFloat(row.high) : null, text: row.range || null }
+    ? { low: row.low != null ? numericValue(row.low) : null, high: row.high != null ? numericValue(row.high) : null, text: row.range || null }
     : (row.range ? { low: null, high: null, text: row.range } : null);
   obs.sourceCritical = !!row.critical; // advisory only — see the header. Never gates anything here.
   if (!Number.isFinite(numeric)) obs.nonNumeric = true; // e.g. "NOT DETECTED" — kept, never coerced.

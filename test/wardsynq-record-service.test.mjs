@@ -34,7 +34,7 @@ import { can } from "../functions/_connect/enterprise/rbac.js";
 import { ClinicalStore } from "../wardsynq/wardsynq-store.js";
 import { RemoteBackend, RemoteConflictError, RemoteRefusedError } from "../wardsynq/wardsynq-store-remote.js";
 import { GovernedStore, makeActor, KIND, TIER, GovernanceError } from "../wardsynq/wardsynq-actors.js";
-import { Patient, Observation, MedicationOrder, ClinicalNote, ServiceRequest, DiagnosticReport, Encounter } from "../wardsynq/wardsynq-model.js";
+import { Patient, Observation, MedicationOrder, ClinicalNote, ServiceRequest, DiagnosticReport, Encounter, numericValue } from "../wardsynq/wardsynq-model.js";
 import { mapSccmBundle, sccmAdapter } from "../wardsynq/adapters/wardsynq-sccm-adapter.js";
 import { IntegrationHub } from "../wardsynq/wardsynq-interop.js";
 import { bundle as sccmBundle, patient as sccmPatient, observation as sccmObservation, medicationStatement, encounter as sccmEncounter } from "../functions/_connect/canonical/model.js";
@@ -641,6 +641,43 @@ test("vitals to observations: coded, as reported, nothing invented, stable ids",
   assert.deepEqual(vitalsToObservations({ vitals: { temp: "37.2", tempUnit: "C" }, patientId: "p", ticketId: "T" }).map((o) => o.unit), ["Cel"]);
   assert.deepEqual(vitalsToObservations({ vitals: { pulse: "" }, patientId: "p", ticketId: "T" }), []);
   assert.deepEqual(Object.keys(VITAL_CODES), ["sbp", "dbp", "pulse", "temp", "spo2", "rr", "weight"]);
+});
+
+/* 2026-09-07. num() was `parseFloat(String(v).replace(/[^0-9.\-]/g, ""))`, which deletes the
+ * separators and GLUES the remaining digits together. A nurse typing a blood-pressure pair into one
+ * box, or a comma decimal, produced a real-looking vital that was nothing the source said:
+ *
+ *     "120/80" -> 12080      charted as a systolic pressure
+ *     "98,6"   -> 986
+ *     "1:320"  -> 1320
+ *
+ * Hospital PCs (wardsynq.com) have full keyboards, so inputmode="numeric" prevents none of it. The
+ * fix is numericValue() in wardsynq-model.js: a value that is not plainly one number is SKIPPED,
+ * which is this file's documented posture for vitals anyway ("never defaulted"). */
+test("vitals: a value that is not plainly one number is skipped, never glued into a fabricated reading", () => {
+  const v = (vitals) => vitalsToObservations({ vitals, patientId: "p", ticketId: "T" });
+  for (const bad of ["120/80", "98,6", "1:320", "12-15", "1+", "<5", "abc", "-", "/"]) {
+    assert.deepEqual(v({ sbp: bad }), [], `sbp ${JSON.stringify(bad)} must record nothing, not a number`);
+  }
+  // A BP pair in the systolic box must not silently become a systolic of 12080.
+  assert.deepEqual(v({ sbp: "120/80", dbp: "80" }).map((o) => [o.code, o.value]), [["8462-4", 80]],
+    "the unparseable systolic is dropped; the valid diastolic beside it still records");
+  // Genuine values, including a unit suffix, still record exactly as reported.
+  assert.deepEqual(v({ temp: "98.6 F" }).map((o) => o.value), [98.6]);
+  assert.deepEqual(v({ pulse: 72 }).map((o) => o.value), [72]);
+  assert.deepEqual(v({ weight: "58.5" }).map((o) => o.value), [58.5]);
+});
+
+test("numericValue: the whole string must be one number, optionally with a digit-free unit", () => {
+  for (const [input, expected] of [
+    ["12.5", 12.5], ["0.9", 0.9], [-3, -3], ["-3", -3], ["6.2 mg/dL", 6.2], ["98.6 F", 98.6],
+    ["12.5 %", 12.5], ["2.0E3", 2000], [72, 72],
+  ]) assert.equal(numericValue(input), expected, `${JSON.stringify(input)} is a real measurement`);
+
+  for (const input of [
+    "1:320", "120/80", "5-10", "3.4/5.6", "1+", "<5", "NOT DETECTED", "98,6", "", null, undefined,
+    "abc", "12 15", NaN, Infinity,
+  ]) assert.equal(numericValue(input), null, `${JSON.stringify(input)} must not become a number`);
 });
 
 test("recordVitals: a nurse's vitals land in the record as her own EXECUTE-on-Observation actor; a retry replays; reception is refused; no MRN cannot be filed", async () => {
