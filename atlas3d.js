@@ -187,7 +187,7 @@
   var st = {
     data: null, index: null, gl: null, canvas: null, chunks: {}, loading: {}, loaded: 0,
     visible: {}, hidden: {}, sel: [], isolate: false, region: "", explode: 0, explodeTarget: 0,
-    src: "bp3d", lod: false, plane: null, view: 0, _lastTap: 0, _lastTapIdx: -1,
+    src: "bp3d", lod: false, plane: null, view: 0, shell: true, bowel: false, _lastTap: 0, _lastTapIdx: -1,
     cam: { target: [0, 0.92, 0], yaw: 0.45, pitch: 0.12, dist: 2.7 },
     subject: null, dirty: true, raf: 0, err: "", progress: 0, _tab: "about", _prevFocus: null, from: null
   };
@@ -336,7 +336,10 @@
     st.loading[key] = fetchChunk(c).then(function (buf) { return inflate(buf, c.bytes); }).then(function (raw) {
       if (st.gl) uploadChunk(c, raw);
       delete st.loading[key];
-      st.loaded++; st.dirty = true; paintProgress();
+      // invalidate(), not a bare dirty flag: a chunk that lands after the camera has settled
+      // must schedule its own frame, or the organs never appear (seen on the iPhone, where
+      // the network is slower than the camera animation).
+      st.loaded++; settleFrames(); paintProgress();
     }).catch(function (e) {
       delete st.loading[key];
       st.err = e && e.message || "Could not load the 3D anatomy.";
@@ -351,6 +354,7 @@
     d.systems.forEach(function (s) { if (st.visible[s.id]) sysNeeded[s.id] = 1; });
     st.sel.forEach(function (i) { sysNeeded[d.systems[d.parts[i].sys].id] = 1; });
     var want = srcIndex();
+    if (want === 1 && st.shell) sysNeeded.integumentary = 1;
     chunkSet().forEach(function (c) { if ((c.src || 0) === want && sysNeeded[c.system] && !st.chunks[c.id]) need.push(c); });
     return need;
   }
@@ -388,22 +392,29 @@
     "void main(){",
     " if (vState.r < 0.5) discard;",
     " if (uClipOn > 0.5 && dot(vP, uClip.xyz) > uClip.w) discard;",
+    " float shell = (vState.b > 0.4 && vState.b < 0.75) ? 1.0 : 0.0;", // body outline (living CT skin)
+    " if (uPass < 3.5 && shell > 0.5) discard;",                     // shell renders only in pass 4
+    " if (uPass > 3.5 && shell < 0.5) discard;",
     " if (uPass > 0.5 && uPass < 1.5 && vState.g < 0.5) discard;",   // pass 1: selection only
     " if (uPass > 1.5 && uPass < 2.5 && vState.g > 0.5) discard;", // pass 2: ghosts only
-    " if (uPass > 2.5 && vState.g < 0.5) discard;",                  // pass 3: selection as a see-through ghost (over the slice)
+    " if (uPass > 2.5 && uPass < 3.5 && vState.g < 0.5) discard;",   // pass 3: selection as a see-through ghost (over the slice)
     " vec3 n = normalize(vN); if (!gl_FrontFacing) n = -n;",
     " vec3 L = normalize(vec3(-0.45, 0.8, 0.55)); vec3 V = normalize(uEye - vP);",
     " float diff = max(dot(n, L), 0.0); float hemi = 0.5 + 0.5 * n.y;",
     " vec3 H = normalize(L + V); float spec = pow(max(dot(n, H), 0.0), 40.0) * 0.22;",
     " vec3 c = uColor * (0.32 + 0.22 * hemi + 0.58 * diff) + spec;",
-    " c = mix(c, uSel * (0.55 + 0.6 * diff) + spec, vState.g * 0.85);",
+    " c = mix(c, uSel * (0.55 + 0.6 * diff) + spec, vState.g * 0.72);",
     " c = mix(c, uBg, vState.b * 0.35);",
-    " gl_FragColor = vec4(c, uPass > 1.5 ? uGhost : 1.0);",
+    // The living body's outline fades out over the last ~4 cm at the scan's top and bottom
+    // (y 0.62 .. 1.058 m in live.json's frame), so the shell reads as a body, not a cut tube.
+    " float a = uPass > 1.5 ? uGhost : 1.0;",
+    " if (shell > 0.5) a *= smoothstep(0.62, 0.665, vP.y) * (1.0 - smoothstep(1.01, 1.058, vP.y));",
+    " gl_FragColor = vec4(c, a);",
     "}"].join("\n");
   var FS_PICK = [
     "precision mediump float;",
     "varying vec3 vState; varying vec3 vPick; varying vec3 vP; uniform vec4 uClip; uniform float uClipOn;",
-    "void main(){ if (vState.r < 0.5) discard; if (uClipOn > 0.5 && dot(vP, uClip.xyz) > uClip.w) discard; gl_FragColor = vec4(vPick, 1.0); }"].join("\n");
+    "void main(){ if (vState.r < 0.5) discard; if (vState.b > 0.4 && vState.b < 0.75) discard; if (uClipOn > 0.5 && dot(vP, uClip.xyz) > uClip.w) discard; gl_FragColor = vec4(vPick, 1.0); }"].join("\n");
   // The CT slice itself, drawn as a textured quad on the cut plane.
   var QVS = "attribute vec3 aPos; attribute vec2 aUv; uniform mat4 uVP; varying vec2 vUv; void main(){ vUv = aUv; gl_Position = uVP * vec4(aPos, 1.0); }";
   var QFS = "precision mediump float; varying vec2 vUv; uniform sampler2D uTex; uniform float uAlpha; void main(){ vec4 t = texture2D(uTex, vUv); gl_FragColor = vec4(t.rgb, uAlpha); }";
@@ -486,19 +497,24 @@
     var ri = st.region ? d.regions.indexOf(st.region) : -1, want = srcIndex();
     for (var i = 0; i < d.parts.length; i++) {
       var p = d.parts[i], o = i * 4;
-      var vis = st.visible[d.systems[p.sys].id] && !st.hidden[i] && p.src === want;
+      var sysId = d.systems[p.sys].id, shell = p.src === 1 && sysId === "integumentary";
+      var vis = st.visible[sysId] && !st.hidden[i] && p.src === want;
       if (ri >= 0 && p.reg !== ri) vis = false;
       if (selSet[i] && p.src === want) vis = true;
       if (st.isolate) vis = !!selSet[i] && p.src === want;
+      // The living body's skin is a faint outline drawn in its own pass, never a solid layer:
+      // it is what makes the organs read as a patient. Shown whenever the source is live
+      // and the outline switch is on, regardless of region or isolate.
+      if (shell) vis = want === 1 && st.shell && !st.hidden[i];
       buf[o] = vis ? 255 : 0;
-      buf[o + 1] = selSet[i] ? 255 : 0;
-      buf[o + 2] = hasSel && !selSet[i] && !st.isolate ? 255 : 0;
+      buf[o + 1] = selSet[i] && !shell ? 255 : 0;
+      buf[o + 2] = shell ? 128 : (hasSel && !selSet[i] && !st.isolate ? 255 : 0);
       buf[o + 3] = 255;
     }
     var gl = R.gl;
     gl.bindTexture(gl.TEXTURE_2D, R.stateTex);
     gl.texSubImage2D(gl.TEXTURE_2D, 0, 0, 0, STATE_W, STATE_W, gl.RGBA, gl.UNSIGNED_BYTE, buf);
-    st.dirty = true;
+    invalidate();
   }
 
   function sysOffset(sysIdx, t) {
@@ -519,13 +535,16 @@
     gl.activeTexture(gl.TEXTURE0); gl.bindTexture(gl.TEXTURE_2D, R.stateTex); gl.uniform1i(prog.u.uState, 0);
     var clip = clipPlane(eye);
     gl.uniform4fv(prog.u.uClip, new Float32Array(clip ? clip : [0, 1, 0, 0]));
-    gl.uniform1f(prog.u.uClipOn, clip ? 1 : 0);
+    // The cut removes the near half of the BODY, never of the structure the user asked about:
+    // passes 1 and 3 (the selection) ignore the clip, so moving the slice away from a kidney
+    // leaves the kidney standing above the cut instead of a label over an empty slice.
+    gl.uniform1f(prog.u.uClipOn, clip && pass !== 1 && pass !== 3 ? 1 : 0);
     if (!pick) {
       gl.uniform3fv(prog.u.uEye, new Float32Array(eye));
       gl.uniform3f(prog.u.uBg, 0.07, 0.08, 0.09);
       gl.uniform3fv(prog.u.uSel, new Float32Array(SEL_TINT));
       gl.uniform1f(prog.u.uPass, pass || 0);
-      gl.uniform1f(prog.u.uGhost, pass === 3 ? 0.42 : 0.16);
+      gl.uniform1f(prog.u.uGhost, pass === 3 ? 0.42 : pass === 4 ? 0.22 : 0.16);
     }
     var sysIdx = {}; d.systems.forEach(function (s, i) { sysIdx[s.id] = i; });
     var want = srcIndex();
@@ -564,6 +583,12 @@
       drawScene(R.main, false, 3);
       gl.enable(gl.DEPTH_TEST); gl.depthMask(true); gl.disable(gl.BLEND);
     }
+    if (st.src === "live" && st.shell) {
+      // pass 4: the body outline, translucent, depth-tested (the far skin stays behind organs)
+      gl.enable(gl.BLEND); gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA); gl.depthMask(false);
+      drawScene(R.main, false, 4);
+      gl.depthMask(true); gl.disable(gl.BLEND);
+    }
     positionLabel();
     st.dirty = false;
   }
@@ -587,7 +612,7 @@
     var px = new Uint8Array(4);
     gl.readPixels(Math.round(x), Math.round(h - y), 1, 1, gl.RGBA, gl.UNSIGNED_BYTE, px);
     gl.bindFramebuffer(gl.FRAMEBUFFER, null);
-    st.dirty = true;
+    invalidate();
     return decodePick(px[0], px[1], px[2]);
   }
 
@@ -617,12 +642,19 @@
       if (st.plane !== pl || !st.gl) return;
       var gl = st.gl.gl;
       if (!st.gl.quadTex) st.gl.quadTex = gl.createTexture();
+      // Upload on unit 1 (the quad's unit) and hand unit 0 back to the state texture. Binding
+      // on whichever unit happened to be active left the slice image on unit 0, and on iOS
+      // the next frame's vertex texture fetch then read it as the part state: every mesh was
+      // discarded and the user saw a bare slice until something else redrew.
+      gl.activeTexture(gl.TEXTURE1);
       gl.bindTexture(gl.TEXTURE_2D, st.gl.quadTex);
       gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, 0);
       gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGB, gl.RGB, gl.UNSIGNED_BYTE, img);
       gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
       gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
-      pl.ready = true; invalidate();
+      gl.activeTexture(gl.TEXTURE0);
+      gl.bindTexture(gl.TEXTURE_2D, st.gl.stateTex);
+      pl.ready = true; settleFrames();
     };
     img.onerror = function () { pl.ready = false; invalidate(); };
     img.src = imgUrl(url);
@@ -689,16 +721,30 @@
     if (!(opts && opts.keepSel)) { st.sel = []; st.subject = null; closeSheet(); }
     if (id !== "live") st.plane = null;
     st.region = "";
+    liveDefaults();
     applyState(); paintChips(); paintBar(); ensureChunks();
     if (!(opts && opts.keepCam)) focusSource();
     invalidate();
+  }
+  // On the living body the small bowel and colon wrap every other organ from any anterior
+  // angle (they are real, and huge); hide them until asked, the way the reference body hides
+  // muscles and skin. Selecting COLON or SMALL_BOWEL still shows them (selection wins).
+  var LIVE_BOWEL = ["LIVE_small_bowel", "LIVE_colon", "LIVE_duodenum"];
+  function liveDefaults() {
+    var d = st.data; if (!d) return;
+    LIVE_BOWEL.forEach(function (id) {
+      var i = d.byId[id]; if (i == null) return;
+      if (st.bowel) delete st.hidden[i]; else st.hidden[i] = 1;
+    });
   }
   function focusSource() {
     var want = srcIndex(), idxs = st.data.parts.filter(function (p) { return p.src === want; }).map(function (p) { return p.i; });
     var b = unionBounds(st.data, idxs); if (!b) return;
     var aspect = st.canvas ? st.canvas.width / Math.max(1, st.canvas.height) : 1;
     var v = VIEWS[st.view] || VIEWS[0];
-    st.camTo = { target: center(b), yaw: v.yaw, pitch: v.pitch, dist: fitDistance(b, 34, aspect) * (want ? 1.0 : 1.02) };
+    // The living torso is nearly square; on a tall phone canvas the width-fit leaves it small,
+    // so it may fill the width (the bottom bar never covers the body's centre).
+    st.camTo = { target: center(b), yaw: v.yaw, pitch: v.pitch, dist: fitDistance(b, 34, aspect) * (want ? 0.86 : 1.02) };
     schedule();
   }
   function setLod(on) {
@@ -748,6 +794,20 @@
     if (moving) schedule();
   }
   function schedule() { if (!st.raf && G.requestAnimationFrame) st.raf = G.requestAnimationFrame(tick); }
+  // Draw now AND once more on the following frame. Resources that land asynchronously
+  // (a chunk, the slice image) have shown a wrong first frame on iOS; the second is right.
+  var settleTimers = [];
+  function settleFrames() {
+    invalidate();
+    // iOS WebKit: the first frame after an asynchronous upload (chunk buffers, the slice
+    // image) has rendered with every mesh missing, and a frame a moment later was right.
+    // Redraw at a few staggered delays; the cost is four cheap frames.
+    // Measured on an iPhone 15 Pro (iOS 27): a frame drawn from a timer callback presented
+    // correctly, the same frame drawn from requestAnimationFrame kept presenting the stale
+    // slice-only image. So these follow-ups render directly, not through schedule().
+    settleTimers.forEach(clearTimeout); settleTimers = [];
+    [60, 250, 700, 1500].forEach(function (ms) { settleTimers.push(setTimeout(function () { if (st.gl) { st.dirty = true; tick(); } }, ms)); });
+  }
   function invalidate() { st.dirty = true; schedule(); }
 
   function resizeCanvas() {
@@ -872,7 +932,14 @@
   }
   function toggleIsolate() { if (!st.sel.length) return; st.isolate = !st.isolate; applyState(); paintBar(); if (st.isolate) focusOn(st.sel, { pad: 1.2 }); invalidate(); }
   function hideSelected() { st.sel.forEach(function (i) { st.hidden[i] = true; }); select([], null); }
-  function unhideAll() { st.hidden = {}; st.isolate = false; applyState(); paintBar(); invalidate(); }
+  function unhideAll() { st.hidden = {}; st.isolate = false; st.bowel = true; applyState(); paintBar(); invalidate(); }
+  // parts hidden by the user (the living body's default-hidden bowel is a Layers switch, not a hide)
+  function userHiddenCount() {
+    var d = st.data, n = 0, dflt = {};
+    if (d && st.src === "live" && !st.bowel) LIVE_BOWEL.forEach(function (id) { if (d.byId[id] != null) dflt[d.byId[id]] = 1; });
+    Object.keys(st.hidden).forEach(function (k) { if (!dflt[k]) n++; });
+    return n;
+  }
   function setSystem(id, on) { st.visible[id] = !!on; applyState(); ensureChunks(); paintBar(); invalidate(); }
 
   /* ---------- UI ---------- */
@@ -915,7 +982,7 @@
   }
   function paintBar() {
     var el = G.document.getElementById("a3dBar"); if (!el || !st.data) return;
-    var hidden = Object.keys(st.hidden).length;
+    var hidden = userHiddenCount();
     var pl = st.plane;
     var sliceRow = pl ? '<div class="a3d-slice"><span>Slice ' + pl.i + "/" + pl.n + '</span><input type="range" min="1" max="' + pl.n + '" value="' + pl.i + '" data-a3d-act="slice" aria-label="CT slice level">' +
       '<button class="a3d-btn sm" data-a3d-act="ct" data-m="' + esc(pl.m) + '" data-s="" data-i="' + pl.i + '">Open CT</button>' +
@@ -946,7 +1013,11 @@
     d.parts.forEach(function (p) { if (p.src !== want) return; var id = d.systems[p.sys].id; counts[id] = (counts[id] || 0) + 1; });
     var lodRow = (d.lod && want === 0)
       ? '<li><label><input type="checkbox" data-a3d-act="lod" ' + (st.lod ? "" : "checked") + '><i style="background:#43d9c6"></i><span>Full detail</span><small>' + (st.lod ? "mobile LOD" : "2.3M triangles") + "</small></label></li>"
-      : "";
+      : (want === 1
+        ? '<li><label><input type="checkbox" data-a3d-act="shell" ' + (st.shell ? "checked" : "") + '><i style="background:#c9a58a"></i><span>Body outline</span><small>skin from the CT</small></label></li>' +
+          '<li><label><input type="checkbox" data-a3d-act="bowel" ' + (st.bowel ? "checked" : "") + '><i style="background:#d9a066"></i><span>Bowel</span><small>small bowel, colon, duodenum</small></label></li>'
+        : "");
+    if (want === 1) delete counts.integumentary;   // the skin is the outline row, not a layer
     return '<div class="a3d-panel" id="a3dSystems"><div class="atlas-top">' +
       '<button class="atlas-back" data-a3d-act="panelclose" aria-label="Close">‹</button>' +
       '<span class="atlas-hd"><span class="atlas-ttl">Layers</span><span class="atlas-sub">' + d.systems.length + " systems</span></span></div>" +
@@ -968,7 +1039,7 @@
         "Licence: " + esc(s.licenceUrl || "https://dbarchive.biosciencedbc.jp/en/bodyparts3d/lic.html") + "<br>" +
         "Dataset: " + esc(s.dataset || "BodyParts3D 4.0") + " · " + esc(s.datasetUrl || "") + "<br>" +
         "Changes: geometry simplified and repacked for mobile; duplicate meshes removed; display-system labels corrected. Packaging derived from Human Atlas (" + esc((s.via && s.via.repo) || "github.com/ashemag/human-atlas") + ", MIT).</p>" +
-      (st.data && st.data.live ? '<p class="atlas-prose atlas-credit">Living CT: CT images and expert segmentations from the TotalSegmentator dataset (Wasserthal et al.), CC BY 4.0 - doi:10.5281/zenodo.10047292. Surfaces are meshed from the dataset\'s masks of one subject; one living patient, not a certified normal.</p>' : "") +
+      (st.data && st.data.live ? '<p class="atlas-prose atlas-credit">Living CT: CT images and expert segmentations from the TotalSegmentator dataset (Wasserthal et al.), CC BY 4.0 - doi:10.5281/zenodo.10047292. Surfaces are meshed from the dataset\'s masks of one subject; one living patient, not a certified normal. The scan spans the lower chest to the upper thighs, so structures at its top and bottom edges (lungs, liver dome, femurs) are cut flat where the scan ends. The body outline is the patient\'s own skin, thresholded from the CT.</p>' : "") +
       "</div></div>";
   }
 
@@ -1101,7 +1172,7 @@
     if (act === "isolate") { toggleIsolate(); if (st.subject) openSheet(); return; }
     if (act === "hide") { hideSelected(); return; }
     if (act === "unhide") { unhideAll(); return; }
-    if (act === "reset") { st.region = ""; st.isolate = false; st.hidden = {}; st.explodeTarget = 0; select([], null); applyState(); paintChips(); resetCamera(); return; }
+    if (act === "reset") { st.region = ""; st.isolate = false; st.hidden = {}; st.explodeTarget = 0; liveDefaults(); select([], null); applyState(); paintChips(); if (st.src === "live") focusSource(); else resetCamera(); return; }
     if (act === "tab") { st._tab = t.getAttribute("data-tab"); openSheet(); return; }
     if (act === "view") { cycleView(); return; }
     if (act === "planeoff") { clearPlane(); return; }
@@ -1129,6 +1200,8 @@
     var t = e.target; if (!t || !t.getAttribute) return;
     var act = t.getAttribute("data-a3d-act");
     if (act === "sys") setSystem(t.getAttribute("data-id"), t.checked);
+    if (act === "shell") { st.shell = !!t.checked; applyState(); ensureChunks(); invalidate(); }
+    if (act === "bowel") { st.bowel = !!t.checked; liveDefaults(); applyState(); invalidate(); }
     if (act === "lod") { setLod(!t.checked); var sm = t.parentNode && t.parentNode.querySelector("small"); if (sm) sm.textContent = st.lod ? "mobile LOD" : "2.3M triangles"; }
     if (act === "explode") { st.explodeTarget = (+t.value || 0) / 100; schedule(); }
     if (act === "slice" && st.plane) { setPlane(st.plane.m, +t.value, { noFocus: true }); if (st.subject) openSheet(); }
@@ -1179,7 +1252,7 @@
       if (fromLive) setPlane(opts.from.m, opts.from.i);
       else if (!opts.canon && st.src === "live") focusSource();
       if (opts.partId != null && d.byId[opts.partId] != null) select([d.byId[opts.partId]], { kind: "part", i: d.byId[opts.partId] });
-      ensureChunks().then(function () { paintProgress(); if (st.sel.length) focusOn(st.sel, { pad: 1.25 }); invalidate(); });
+      ensureChunks().then(function () { paintProgress(); if (st.sel.length && !st.plane) focusOn(st.sel, { pad: 1.25 }); invalidate(); });
       invalidate();
     }).catch(function (e) { st.err = "Could not load the 3D anatomy manifest."; paintProgress(); });
   }
@@ -1228,6 +1301,7 @@
   G.ATLAS3D._select = select;
   G.ATLAS3D._sheetHtml = sheetHtml;
   G.ATLAS3D._pickAt = pickAt;
+  G.ATLAS3D._tick = tick;
   G.ATLAS3D._pure = {
     canonicalOf: canonicalOf, parseManifest: parseManifest, search: search, unionBounds: unionBounds,
     fitDistance: fitDistance, encodePick: encodePick, decodePick: decodePick, canonOfPart: canonOfPart,

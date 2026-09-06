@@ -92,10 +92,14 @@ def world_from_voxel(x, y, z):
 
 
 def mesh_label(seg, value):
-    m = (seg == value).astype(np.float32)
-    if SMOOTH_SIGMA:
-        m = ndimage.gaussian_filter(m, SMOOTH_SIGMA)
-    v, f, _, _ = measure.marching_cubes(m, level=0.5, spacing=(1.0, 1.0, 1.0), step_size=1)
+    return mesh_mask(seg == value)
+
+
+def mesh_mask(mask, sigma=SMOOTH_SIGMA, step=1):
+    m = mask.astype(np.float32)
+    if sigma:
+        m = ndimage.gaussian_filter(m, sigma)
+    v, f, _, _ = measure.marching_cubes(m, level=0.5, spacing=(1.0, 1.0, 1.0), step_size=step)
     w = world_from_voxel(v[:, 0], v[:, 1], v[:, 2]).astype(np.float32)
     # (x, y, z) -> (-x, -z, y): a swap plus two sign flips = three reflections = a reflection,
     # so marching_cubes' outward winding must be flipped to keep faces outward.
@@ -235,6 +239,66 @@ def main():
             "bounds": [float(v) for v in np.concatenate([w.min(0), w.max(0)])],
         })
         print(f"  {stem:32} {len(f):7d} tris -> {cid}")
+    # ---- the skeleton and the body surface: what makes it read as a patient, not floating organs ----
+    # The slice modules deliberately dropped bone (see the label file's _why_bone_dropped); the 3D
+    # body needs it as a frame. Masks come from the dataset's per-structure files (same subject,
+    # same grid: the merged live_seg only carries the mapped organs). Bones below ~400 voxels are
+    # fragments clipped by the scan edge (T9, right 6th rib) and are skipped.
+    segdir = os.path.join(a.work, "s0108", "segmentations")
+    extra = []
+    for lv in ("T10", "T11", "T12"):
+        extra.append((f"vertebrae_{lv}", "THORACIC_VERTEBRA", "SPINE", f"{lv} vertebra"))
+    for lv in ("L1", "L2", "L3", "L4", "L5"):
+        extra.append((f"vertebrae_{lv}", "LUMBAR_VERTEBRA", "SPINE", f"{lv} vertebra"))
+    extra.append(("vertebrae_S1", "SACRUM", "SPINE", "S1 vertebra"))
+    extra.append(("sacrum", "SACRUM", "PELVIS", "Sacrum"))
+    ORD = {6: "6th", 7: "7th", 8: "8th", 9: "9th", 10: "10th", 11: "11th", 12: "12th"}
+    for side in ("left", "right"):
+        for n in range(6, 13):
+            extra.append((f"rib_{side}_{n}", "RIB", "CHEST", f"{side.capitalize()} {ORD[n]} rib"))
+        extra.append((f"hip_{side}", "HIP_BONE", "PELVIS", f"{side.capitalize()} hip bone"))
+        extra.append((f"femur_{side}", "FEMUR", "PELVIS", f"{side.capitalize()} femur"))
+    extra.append(("costal_cartilages", None, "CHEST", "Costal cartilages"))
+    for stem, cid, region, name in extra:
+        fp = os.path.join(segdir, stem + ".nii.gz")
+        if not os.path.exists(fp):
+            continue
+        mask = np.asanyarray(nib.load(fp).dataobj) > 0
+        if mask.sum() < 400:
+            continue
+        if cid and cid not in onto:
+            raise SystemExit(f"{stem}: canonical {cid} missing from the ontology")
+        w, f = mesh_mask(mask)
+        off_p = len(blob); blob.extend(w.tobytes())
+        off_i = len(blob); blob.extend(f.tobytes())
+        parts.append({
+            "id": "LIVE_" + stem, "stem": stem, "sid": None, "canon": cid, "side": side_of(stem),
+            "name": name, "system": "skeletal", "region": region,
+            "pos": off_p, "nv": int(len(w)), "idx": off_i, "ni": int(len(f) * 3),
+            "bounds": [float(v) for v in np.concatenate([w.min(0), w.max(0)])],
+        })
+        print(f"  {stem:32} {len(f):7d} tris -> {cid}")
+
+    # Body surface from the CT itself (HU > -350, holes filled per slice, largest component).
+    hu = np.asanyarray(nib.load(os.path.join(a.work, "live_vol.nii.gz")).dataobj)
+    body = hu > -350
+    body = ndimage.binary_opening(body, iterations=2)
+    for k in range(body.shape[2]):
+        body[:, :, k] = ndimage.binary_fill_holes(body[:, :, k])
+    lab_, n_ = ndimage.label(body)
+    if n_ > 1:
+        sizes = ndimage.sum(body, lab_, range(1, n_ + 1))
+        body = lab_ == (int(np.argmax(sizes)) + 1)
+    w, f = mesh_mask(body, sigma=1.2, step=2)
+    off_p = len(blob); blob.extend(w.tobytes())
+    off_i = len(blob); blob.extend(f.tobytes())
+    parts.append({
+        "id": "LIVE_body_surface", "stem": "body_surface", "sid": None, "canon": None, "side": None,
+        "name": "Body surface (skin)", "system": "integumentary", "region": "BODY",
+        "pos": off_p, "nv": int(len(w)), "idx": off_i, "ni": int(len(f) * 3),
+        "bounds": [float(v) for v in np.concatenate([w.min(0), w.max(0)])],
+    })
+    print(f"  {'body_surface':32} {len(f):7d} tris -> skin (HU threshold)")
     open(os.path.join(a.out, "parts.bin"), "wb").write(bytes(blob))
 
     # ---- slice planes ----
