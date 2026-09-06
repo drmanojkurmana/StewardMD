@@ -20,12 +20,24 @@ function patientIdForTicket(ticket) {
 }
 
 /**
- * The encounter reference vitals already carry on their Observations (migrate-vitals.js). Kept
- * exactly as it was before this file existed — no extra sanitisation — so this extraction changes
- * no id any shadow-mode tenant might already have written.
+ * The encounter reference vitals already carry on their Observations (migrate-vitals.js).
+ *
+ * WIDENED 2026-09-06 (the Encounter migration), two ways:
+ *  1. A ticket with no GHIS episode — a native, non-GHIS visit — now falls back to the TICKET's own
+ *     id, the same fallback `anchoredOrderId` below already uses for every order, prescription and
+ *     result id. Before this, a native visit's encounterId was always null on every one of the five
+ *     resource types that reference it, and an Encounter cannot be created for a null anchor — this
+ *     is what lets a native visit get a real one too.
+ *  2. The episode-id branch now runs through the SAME slug (`[^a-z0-9]+` -> "-") every sibling
+ *     helper in this file already uses (`noteIdForTicket`, `anchoredOrderId`), rather than a plain
+ *     lowercase with no character replacement. The two produce identical output for every episode id
+ *     these functions have ever actually been called with in a test (letters, digits and hyphens
+ *     only) and no tenant has ever run this in production to have written under the old spelling —
+ *     unifying it removes a needless third convention rather than changing any real id.
  */
 function encounterIdForTicket(ticket) {
-  return ticket && ticket.ghisEpisodeId ? `opd-enc-${String(ticket.ghisEpisodeId).toLowerCase()}` : null;
+  const anchor = ticket && (ticket.ghisEpisodeId || ticket.id);
+  return anchor ? `opd-enc-${String(anchor).toLowerCase().replace(/[^a-z0-9]+/g, "-")}` : null;
 }
 
 /**

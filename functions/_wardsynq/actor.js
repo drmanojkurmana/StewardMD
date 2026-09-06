@@ -63,6 +63,10 @@ const RESOURCE_TYPES = Object.freeze([
 const ORDER_TYPES = Object.freeze(["MedicationOrder", "ServiceRequest"]);
 const VITALS_TYPES = Object.freeze(["Observation"]);
 const PATIENT_TYPE = "Patient";
+// Added 2026-09-06 (the Encounter migration), alongside PATIENT_TYPE and for the identical reason:
+// checking a patient in for today's visit is the SAME administrative act QUEUE_ADD already covers
+// for registering them at all. See below.
+const ENCOUNTER_TYPE = "Encounter";
 
 /**
  * PURE. From a capability list to a clinical grant, or null when the role has no business with the
@@ -79,12 +83,16 @@ function grantForCaps(caps) {
 
   if (has(CAPS.QUEUE_ADD)) {
     // Registering a patient is a committed identity fact, not a clinical draft — see the module
-    // header. Union, never narrow: this only ever ADDS Patient to whatever write scope the EMR
-    // capabilities already produced, and only ever RAISES the tier.
-    if (!grant) grant = { tier: TIER.EXECUTE, read: null, write: [PATIENT_TYPE], basis: CAPS.QUEUE_ADD };
+    // header. Opening the visit record for today's check-in (functions/_wardsynq/migrate-encounter.js)
+    // is the SAME kind of fact, added here 2026-09-06 rather than a second reason invented for it.
+    // Union, never narrow: this only ever ADDS these two types to whatever write scope the EMR
+    // capabilities already produced, and only ever RAISES the tier. Every role holding QUEUE_STATUS
+    // (closing a visit) already holds QUEUE_ADD too, so no separate grant is needed for close.
+    const added = [PATIENT_TYPE, ENCOUNTER_TYPE];
+    if (!grant) grant = { tier: TIER.EXECUTE, read: null, write: added, basis: CAPS.QUEUE_ADD };
     else grant = {
       tier: TIER.EXECUTE, read: grant.read,
-      write: grant.write === null ? null : (grant.write.includes(PATIENT_TYPE) ? grant.write : [...grant.write, PATIENT_TYPE]),
+      write: grant.write === null ? null : [...new Set([...grant.write, ...added])],
       basis: grant.basis + "+" + CAPS.QUEUE_ADD,
     };
   }

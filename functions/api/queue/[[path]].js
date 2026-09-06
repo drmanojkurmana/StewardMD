@@ -43,8 +43,25 @@ import { assessmentMigration, recordAssessment, recordAssessmentSignOff } from "
 import { invOrderMigration, recordInvestigationOrder } from "../../_wardsynq/migrate-inv-order.js";
 import { prescriptionMigration, recordPrescription } from "../../_wardsynq/migrate-prescription.js";
 import { resultsMigration, recordResult } from "../../_wardsynq/migrate-results.js";
+import { encounterMigration, recordEncounterSync, ENCOUNTER_TERMINAL_STATUSES } from "../../_wardsynq/migrate-encounter.js";
 import { recordLinkForOrg } from "../../_wardsynq/migration-tenant.js";
 import { actorDeps as wsqActorDeps, recordDeps as wsqRecordDeps } from "../../_wardsynq/deps.js";
+
+// The Encounter migration's one shared call site. Every hook below (ticket add, import, a terminal
+// status change, checkout) passes the ticket in whatever state it is NOW; recordEncounterSync reads
+// that state and decides open/continuation/close itself — see migrate-encounter.js's header for why
+// this is one function, not several. Best-effort and silent on failure at every call site: a missed
+// WardSynQ sync must never block or alter the underlying queue action that triggered it, the same
+// contract every other shadow-mode write already keeps.
+async function syncEncounter(request, env, s, ticket) {
+  try {
+    const mig = await encounterMigration(env, s, { getOrg: ORG.getOrg, tenantRow: wsqTenantRow });
+    if (mig.mode === "off") return null;
+    return await recordEncounterSync(request, env, { migration: mig, ticket, session: s, actorDeps: wsqActorDeps(env), recordDeps: wsqRecordDeps(env, mig.tenantId) });
+  } catch (e) {
+    return null;
+  }
+}
 const wsqTenantRow = (e, id) => (e.CONNECT_DB ? e.CONNECT_DB.prepare("SELECT * FROM connect_tenant WHERE id=?").bind(String(id)).first() : null);
 import "../../_opd_ghis_connector.js";   // side-effect: registers the "ghis" OPD connector
 import "../../_opd_connect_connector.js";   // side-effect: registers the "connect" OPD connector (any FHIR hospital via Connect EMR)
@@ -804,8 +821,22 @@ export async function onRequest(context) {
         return json({ ok: false, error: "not_found" }, 404, request);
       }
       const { s, err } = await loadSessionFor(env, body.sessionId, actor); if (err) return err;
-      if (seg === "ticket") { await requireSessionCap(env, actor, s, CAPS.QUEUE_ADD); const t = await Q.addTicket(env, s, body, actor.id); return json({ ok: true, ticket: (await ticketView(env, [t]))[0] }, 200, request); }
-      if (seg === "import") { await requireSessionCap(env, actor, s, CAPS.QUEUE_ADD); const r = await importRoster(env, s, body.rows || [], actor.id); return json({ ok: true, imported: r.imported, skipped: r.skipped, removed: r.removed, tickets: await ticketView(env, await Q.listTickets(env, s.id)) }, 200, request); }
+      if (seg === "ticket") {
+        await requireSessionCap(env, actor, s, CAPS.QUEUE_ADD);
+        const t = await Q.addTicket(env, s, body, actor.id);
+        await syncEncounter(request, env, s, t);   // open: today's visit begins at check-in
+        return json({ ok: true, ticket: (await ticketView(env, [t]))[0] }, 200, request);
+      }
+      if (seg === "import") {
+        await requireSessionCap(env, actor, s, CAPS.QUEUE_ADD);
+        const before = new Set((await Q.listTickets(env, s.id)).map((x) => x.id));
+        const r = await importRoster(env, s, body.rows || [], actor.id);
+        const tickets = await Q.listTickets(env, s.id);
+        // Only the tickets THIS import actually created — not the whole roster on every poll (see
+        // migrate-encounter.js's header on the reconciliation cancel this diff does not catch either).
+        for (const t of tickets) { if (!before.has(t.id)) await syncEncounter(request, env, s, t); }
+        return json({ ok: true, imported: r.imported, skipped: r.skipped, removed: r.removed, tickets: await ticketView(env, tickets) }, 200, request);
+      }
       // OPD engine → resolveOpdSource(org) → connector → existing EMR. Server pulls the worklist via the
       // org's connector (GHIS or other) instead of the client hitting /api/ghis; degrades to native.
       if (seg === "import-from-source") {
@@ -815,11 +846,22 @@ export async function onRequest(context) {
         const stored = await ORG.getOrg(env, s.hospitalId);
         const org = (stored && stored.mode === "connect") ? stored : opdOrgFor(env, s.hospitalId);
         const ghisToken = request.headers.get("X-Ghis-Token") || "";
+        const before = new Set((await Q.listTickets(env, s.id)).map((x) => x.id));
         const r = await importFromSource(env, s, org, { ghisToken: ghisToken, date: body.date || "", cb: body.cb || "", actor: actor.id });
-        return json({ ok: true, source: r.source, connector: org.connectorId || null, imported: r.imported || 0, skipped: r.skipped || 0, removed: r.removed || 0, degraded: !!r.degraded, native: !!r.native, tickets: await ticketView(env, await Q.listTickets(env, s.id)) }, 200, request);
+        const tickets = await Q.listTickets(env, s.id);
+        for (const t of tickets) { if (!before.has(t.id)) await syncEncounter(request, env, s, t); }
+        return json({ ok: true, source: r.source, connector: org.connectorId || null, imported: r.imported || 0, skipped: r.skipped || 0, removed: r.removed || 0, degraded: !!r.degraded, native: !!r.native, tickets: await ticketView(env, tickets) }, 200, request);
       }
       if (seg === "advance") { await requireSessionCap(env, actor, s, CAPS.QUEUE_STATUS); return json({ ok: true, tickets: await ticketView(env, await Q.advance(env, s, actor.id)) }, 200, request); }
-      if (seg === "status") { await requireSessionCap(env, actor, s, CAPS.QUEUE_STATUS); return json({ ok: true, tickets: await ticketView(env, await Q.setStatus(env, s, body.ticketId, body.status, actor.id)) }, 200, request); }
+      if (seg === "status") {
+        await requireSessionCap(env, actor, s, CAPS.QUEUE_STATUS);
+        const tickets = await Q.setStatus(env, s, body.ticketId, body.status, actor.id);
+        // Continuation and close both land here: recordEncounterSync reads the ticket's CURRENT
+        // status (whatever it just became) and maps it itself — see migrate-encounter.js's header.
+        const changed = tickets.find((x) => x.id === body.ticketId);
+        if (changed) await syncEncounter(request, env, s, changed);
+        return json({ ok: true, tickets: await ticketView(env, tickets) }, 200, request);
+      }
       if (seg === "priority") { await requireSessionCap(env, actor, s, CAPS.QUEUE_PRIORITY); return json({ ok: true, tickets: await ticketView(env, await Q.setPriority(env, s, body.ticketId, body.priority, actor.id)) }, 200, request); }
       if (seg === "move") { await requireSessionCap(env, actor, s, CAPS.QUEUE_REORDER); return json({ ok: true, tickets: await ticketView(env, await Q.moveTicket(env, s, body.ticketId, body, actor.id)) }, 200, request); }
       if (seg === "assign") { await requireSessionCap(env, actor, s, CAPS.QUEUE_ASSIGN); return json({ ok: true, tickets: await ticketView(env, await Q.assignTicket(env, s, body.ticketId, body.toDoctorUid, body, actor.id)) }, 200, request); }
@@ -917,6 +959,10 @@ export async function onRequest(context) {
         const fin = await QT.finalizeCheckout(env, s, t, actor.id);
         if (t.status !== "in_consultation" && t.status !== "completed") await Q.setStatus(env, s, t.id, "in_consultation", actor.id).catch(() => {});
         await Q.setStatus(env, s, t.id, "completed", actor.id).catch(() => {});
+        // Close: the visit just ended. Read the ticket back rather than trust `t`, which is still the
+        // PRE-checkout snapshot taken above.
+        const closed = await Q.getTicket(env, t.id);
+        if (closed) await syncEncounter(request, env, s, closed);
         let sent = null; try { sent = await notifyTimeline(env, s, t, fin.url); } catch (e) {}   // WhatsApp/SMS the link
         const tickets = await Q.callNext(env, s, actor.id);
         return json({ ok: true, timelineUrl: fin.url, linkExpiresAt: fin.linkExpiresAt, sent: !!(sent && sent.ok), tickets: await ticketView(env, tickets) }, 200, request);
