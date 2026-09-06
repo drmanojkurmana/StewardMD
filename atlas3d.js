@@ -785,9 +785,12 @@
     var cw = st.canvas.clientWidth, ch = st.canvas.clientHeight;
     var sx = (x / wv + 1) / 2 * cw, sy = (1 - y / wv) / 2 * ch;
     el.hidden = false;
-    el.textContent = subjectTitle(d, st.subject);
-    el.style.left = Math.max(8, Math.min(cw - 8, sx)) + "px";
-    el.style.top = Math.max(8, Math.min(ch - 8, sy)) + "px";
+    if (el._t !== st.subject) { el.textContent = subjectTitle(d, st.subject); el._t = st.subject; }
+    // Position with a compositor transform, not left/top: the canvas is GPU-composited, so a
+    // main-thread layout property lands a frame behind it under motion and the label visibly
+    // trails the mesh. translate3d promotes the label to its own layer, locked to the canvas.
+    var lx = Math.round(Math.max(8, Math.min(cw - 8, sx))), ly = Math.round(Math.max(8, Math.min(ch - 8, sy)));
+    el.style.transform = "translate3d(" + lx + "px," + ly + "px,0) translate(-50%,-140%)";
   }
 
   function tick() {
