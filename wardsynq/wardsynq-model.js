@@ -140,6 +140,39 @@ function AllergyIntolerance(input) {
   };
 }
 
+/* A measured value, or null — never a number the source text did not actually state.
+ *
+ * WHY THIS IS NOT Number.parseFloat. parseFloat reads a leading number and silently DISCARDS the
+ * rest, and the strip-then-parse variant that grew alongside it
+ * (`parseFloat(String(v).replace(/[^0-9.\-]/g, ""))`) is worse still: it deletes the separators and
+ * GLUES the remaining digits together. Measured on the real helpers, 2026-09-07:
+ *
+ *     "120/80"  -> 12080     a blood pressure pair typed into one box, as a systolic reading
+ *     "98,6"    -> 986       a comma decimal separator
+ *     "1:320"   -> 1320      (strip variant) / 1 (plain parseFloat) — a Widal titer, either way
+ *     "5-10"    -> 5         a range reported as its lower bound
+ *
+ * Every one of those is a confidently wrong clinical number that reads as a real measurement, which
+ * is the same fabrication the allergy capture is careful to avoid: a missed value degrades to
+ * nothing recorded, a wrong one is charted, trended and acted on.
+ *
+ * So: a value is numeric only if the WHOLE string is one number, optionally followed by a unit that
+ * itself contains no digits ("6.2 mg/dL", "98.6 F", "12.5 %"). Scientific notation is kept ("2.0E3").
+ * Anything with a second number in it — a ratio, a range, a BP pair — is not a measurement this
+ * function will invent, and anything with a qualifier that changes the meaning ("1+", "<5") is left
+ * to the caller as text. Callers decide what null means: vitals skip the reading, lab results keep
+ * the original string and mark it nonNumeric.
+ */
+function numericValue(v) {
+  if (typeof v === "number") return Number.isFinite(v) ? v : null;
+  const s = String(v == null ? "" : v).trim();
+  if (!s) return null;
+  const m = /^(-?\d+(?:\.\d+)?(?:[eE][+-]?\d+)?)\s*([a-zA-Z%/·^°µμ\s]*)$/.exec(s);
+  if (!m) return null;
+  const n = Number.parseFloat(m[1]);
+  return Number.isFinite(n) ? n : null;
+}
+
 /** Observation: vitals, labs, device telemetry readings. */
 function Observation(input) {
   input = input || {};
@@ -293,6 +326,7 @@ function ClinicalNote(input) {
 export {
   makeMeta,
   localId,
+  numericValue,
   Patient,
   Encounter,
   Condition,

@@ -35,7 +35,7 @@
  * these observations when a site wires it; this file only makes them exist.
  */
 
-import { Observation } from "../../wardsynq/wardsynq-model.js";
+import { Observation, numericValue } from "../../wardsynq/wardsynq-model.js";
 import { GovernanceError } from "../../wardsynq/wardsynq-actors.js";
 import { resolveClinicalActor } from "./actor.js";
 import { RecordService } from "./service.js";
@@ -56,10 +56,12 @@ const VITAL_CODES = Object.freeze({
   weight: Object.freeze({ code: "29463-7", display: "Body weight",              unit: "kg" }),
 });
 
+// Strict, because the strip-and-parse this used to do turned "120/80" typed into one box into a
+// systolic of 12080 and "98,6" into 986. See numericValue() in wardsynq-model.js. A value that is
+// not plainly one number is SKIPPED here (this file never defaults a vital), not guessed at.
 function num(v) {
   if (v === null || v === undefined || v === "") return null;
-  const n = typeof v === "number" ? v : Number.parseFloat(String(v).replace(/[^0-9.\-]/g, ""));
-  return Number.isFinite(n) ? n : null;
+  return numericValue(v);
 }
 
 /** PURE. The tenant's mode for this migration. Unknown or absent is "off". */

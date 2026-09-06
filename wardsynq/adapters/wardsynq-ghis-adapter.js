@@ -31,7 +31,7 @@
  * mistake is always recoverable from the record itself rather than needing a re-fetch.
  */
 
-import { Patient, Encounter, Observation, DiagnosticReport } from "../wardsynq-model.js";
+import { Patient, Encounter, Observation, DiagnosticReport, numericValue } from "../wardsynq-model.js";
 
 const SYSTEM = "ghis";
 
@@ -195,7 +195,8 @@ function toObservations(bundle, patient, encounter, issues) {
       issues.push({ code: "GHIS_LAB_NO_NAME", message: "a lab row had no test name and was skipped" });
       continue;
     }
-    const numeric = Number.parseFloat(row.result);
+    // Strict: see numericValue() - a titer or a range must not be charted as its leading number.
+    const numeric = numericValue(row.result);
     const mapped = LAB_CODE_SEED[norm(testName)] || null;
     if (!mapped) {
       issues.push({ code: "GHIS_LAB_UNMAPPED", message: `no canonical code for "${testName}"`, testName });
@@ -225,7 +226,7 @@ function toObservations(bundle, patient, encounter, issues) {
     obs.sourceUnit = row.units || null;
     obs.unitNormalised = false; // see trap 2
     obs.referenceRange = (row.low != null || row.high != null)
-      ? { low: row.low != null ? Number.parseFloat(row.low) : null, high: row.high != null ? Number.parseFloat(row.high) : null, text: row.range || null }
+      ? { low: row.low != null ? numericValue(row.low) : null, high: row.high != null ? numericValue(row.high) : null, text: row.range || null }
       : (row.range ? { low: null, high: null, text: row.range } : null);
     // GHIS flags criticality itself. Trusted as a flag, but it does NOT drive any hard-stop here:
     // critical-value escalation is a clinical control that belongs to the safety engine.
