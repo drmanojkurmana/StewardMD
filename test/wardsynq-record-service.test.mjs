@@ -227,6 +227,28 @@ test("tenancy: a clinician of one hospital cannot open, read or write another ho
   assert.equal((await handle(new Request("https://x/api/wardsynq/gimsr"), { WARDSYNQ_RECORD: "0" }, h.deps)).status, 404);
 });
 
+// 2026-09-07, real-device verification: every write for an org.mode "wardsynq" hospital already
+// bypasses the global flag (queue router wsqForcedMigration), so its chart existed in D1 but this
+// door answered 404 for it. The read side now mirrors the write side, on the SAME explicit signal.
+test("native WardSynQ hospital: org.mode 'wardsynq' opens the read door with the global flag OFF; any other mode stays 404", async () => {
+  const OFF = { WARDSYNQ_RECORD: "0" };
+  const asDoctor = (h, url) => handle(new Request(url, { headers: { "X-Test-User": "fb:dr-menon" } }), OFF, h.deps);
+  const authorizeOrg = async () => ({ ok: true, role: "doctor" });
+  const native = hospital({ orgForTenant: async (env, t) => (t.id === "gimsr" ? { id: "org-wsq", name: "WSQ", mode: "wardsynq" } : null), authorizeOrg });
+  const r = await asDoctor(native, "https://x/api/wardsynq/gimsr");
+  assert.equal(r.status, 200);
+  assert.equal((await r.json()).role, "doctor");
+  assert.equal((await asDoctor(native, "https://x/api/wardsynq/other-hospital")).status, 404, "a tenant with no wardsynq org is still hidden");
+  assert.equal((await asDoctor(native, "https://x/api/wardsynq/health")).status, 404, "existence is still not leaked");
+  const connect = hospital({ orgForTenant: async () => ({ id: "org-c", mode: "connect" }), authorizeOrg });
+  assert.equal((await asDoctor(connect, "https://x/api/wardsynq/gimsr")).status, 404, "org.mode is the only signal, never inferred");
+  const broken = hospital({ orgForTenant: async () => { throw new Error("firestore down"); }, authorizeOrg });
+  assert.equal((await asDoctor(broken, "https://x/api/wardsynq/gimsr")).status, 404, "a broken lookup is not native, never a crash");
+  // The console's record link on GET /timeline takes the same shortcut for the same org.
+  const src = readFileSync(new URL("../functions/api/queue/[[path]].js", import.meta.url), "utf8");
+  assert.ok(src.includes('const link = forced && !forced.error ? { tenantId: forced.tenantId } : await recordLinkForOrg('), "timeline GET links a wardsynq org's record without the global flag");
+});
+
 test("roles: admin gets no chart (PHI is clinician-only); superadmin can read and cannot write", async () => {
   const h = hospital();
   assert.equal(can("clinician", "record:write"), true);

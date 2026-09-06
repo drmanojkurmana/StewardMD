@@ -77,10 +77,25 @@ export async function openService(request, env, tenantId, need, deps) {
   return new RecordService({ repository: r.repository, pseudonym: r.pseudonym, tenant: resolved.tenant, actor: resolved.actor, role: resolved.role, roleSource: resolved.source });
 }
 
+/* The read-side twin of the queue router's wsqForcedMigration(): a tenant whose OPD organisation is
+ * explicitly org.mode "wardsynq" is a native WardSynQ hospital, and its record is reachable here
+ * regardless of the global WARDSYNQ_RECORD flag (which stays OFF - it governs the separate GHIS-
+ * shadow feature). Found on the real device 2026-09-07: every write for such an org already bypassed
+ * the flag, so the chart existed but this door 404'd it. org.mode is the ONLY signal, never inferred;
+ * every other tenant is exactly as gated as before. Any failure is "not native", never a crash. */
+async function wardsynqNativeTenant(env, tenantId, a) {
+  try {
+    if (!a.db || !a.orgForTenant || !tenantId) return false;
+    const tenant = await a.db.prepare("SELECT * FROM connect_tenant WHERE id=?").bind(String(tenantId)).first();
+    const org = tenant ? await a.orgForTenant(env, tenant) : null;
+    return !!(org && org.mode === "wardsynq");
+  } catch { return false; }
+}
+
 export async function handle(request, env, deps) {
-  if (!recordFlagOn(env)) return jsonResponse({ error: "not_found" }, { status: 404 });
   const url = new URL(request.url);
   const parts = url.pathname.replace(/^\/api\/wardsynq\/?/, "").replace(/\/+$/, "").split("/").filter(Boolean).map(decodeURIComponent);
+  if (!recordFlagOn(env) && !(await wardsynqNativeTenant(env, parts[0], actorDeps(env, deps || {})))) return jsonResponse({ error: "not_found" }, { status: 404 });
   const method = request.method;
 
   if (parts[0] === "health") return jsonResponse({ ok: true, service: "wardsynq-record", repository: "d1" });
