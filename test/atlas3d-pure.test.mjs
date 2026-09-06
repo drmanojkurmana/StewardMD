@@ -42,7 +42,7 @@ ok("parseManifest tolerates a missing canon/links block", P.parseManifest({ part
 
 // --- search ---
 const hits = P.search("kidney", d, 10);
-ok("search: concept ranks above its meshes", hits[0].type === "concept" && hits[0].id === "FMA7203");
+ok("search: the RadioAnatome structure (CT/MRI) ranks first, then the FMA concept, then meshes", hits[0].type === "canon" && hits[0].cid === "KIDNEY" && hits[1].type === "concept" && hits[1].id === "FMA7203");
 ok("search: both kidney meshes returned", hits.filter((h) => h.type === "part").length === 2);
 ok("search: word-start beats substring", P.search("renal", d, 10)[0].name === "left renal artery" || P.search("renal", d, 10)[0].name === "Left renal artery");
 ok("search: one character returns nothing", P.search("k", d, 10).length === 0);
@@ -86,7 +86,10 @@ ok("already-decoded body of the exact raw size is accepted", P.looksLikeChunk(ne
 ok("an HTML fallback page is rejected", P.looksLikeChunk(new TextEncoder().encode("<!doctype html><html>").buffer, 40) === false);
 ok("empty body is rejected", P.looksLikeChunk(new ArrayBuffer(0), 0) === false);
 const bases = P.dataBases();
-ok("web: same-origin first, preview host last", bases[0] === "" && /pages\.dev$/.test(bases[bases.length - 1]));
+ok("web: same-origin first, R2 models host last", bases[0] === "" && bases[bases.length - 1] === "https://models.stewardmd.in/atlas3d");
+ok("dataUrl maps the /atlas/3d path onto the R2 key prefix", P.dataUrl("/atlas/3d/skeletal-0.bin.gz", "https://models.stewardmd.in/atlas3d") === "https://models.stewardmd.in/atlas3d/skeletal-0.bin.gz" && P.dataUrl("/atlas/3d/x.bin.gz", "") === "/atlas/3d/x.bin.gz");
+const m2 = P.parseManifest({ parts: [["LIVE_liver", "Liver", "FMA7197", 0, 1, 0, 0, 3, [0, 0, 0, 1, 1, 1], "LIVER", 1, null]], concepts: [], sources: [{ id: "bp3d" }, { id: "live" }], planes: { "ct-live-torso-axial": { "5": { axis: "y", pos: 0.9 } } } });
+ok("parseManifest reads the source flag, sources and planes", m2.parts[0].src === 1 && m2.sources.length === 2 && m2.planes["ct-live-torso-axial"]["5"].axis === "y");
 
 console.log(`atlas3d-pure: ${pass} passed, ${fail} failed`);
 process.exit(fail ? 1 : 0);

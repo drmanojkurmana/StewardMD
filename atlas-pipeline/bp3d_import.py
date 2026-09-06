@@ -10,7 +10,10 @@ system mis-filings, repacks the geometry for a mobile WebGL viewer, and computes
 CT/MRI <-> 3D links from the modules that actually ship.
 
 INPUT  <human-atlas checkout>/public/models/atlas.json + body-N.bin (upstream, unmodified)
-OUTPUT atlas/3d/manifest.json      viewer manifest (parts, concepts, systems, canon, links)
+OUTPUT atlas/3d/manifest.json      viewer manifest (parts, concepts, systems, canon, links,
+                                   plus the living-CT source, slice planes and the LOD set
+                                   when atlas/3d/live.json / lod.json exist - see live3d.py,
+                                   pack3d.mjs)
        atlas/3d/index.json         tiny canonical -> kind map for atlas.js (CT -> 3D pill)
        atlas/3d/<system>-N.bin.gz  merged geometry chunks (positions f32, normals i16,
                                    part index u16, indices u32; 4-byte aligned)
@@ -372,6 +375,59 @@ def build(src, write=False):
     concepts = [[c["id"], c["name"], idxs(concept_members[c["id"]])]
                 for c in up["concepts"] if concept_members[c["id"]]]
 
+    # ---- living-CT source (live3d.py -> pack3d.mjs live) ----
+    live_path = os.path.join(OUT_DIR, "live.json")
+    live = json.load(open(live_path)) if os.path.exists(live_path) else None
+    sources = [{"id": "bp3d", "name": "Reference body", "short": "Reference",
+                "desc": "BodyParts3D adult male reference anatomy", "frame": "bp3d"}]
+    planes = {}
+    live_parts = []
+    if live:
+        base = len(out_parts)
+        chunk_base = len(chunks)
+        for lp in live["parts"]:
+            if lp["canon"] not in canon:
+                sys.exit(f"live part {lp['id']} maps to unknown canonical {lp['canon']}")
+            live_parts.append({
+                "id": lp["id"], "name": lp["name"], "fma": canon[lp["canon"]].get("fma") or "",
+                "sys": SYS_INDEX[lp["system"]], "reg": REGIONS.index(lp["region"]) if lp["region"] in REGIONS else REGIONS.index("BODY"),
+                "chunk": chunk_base + lp["chunk"], "iStart": lp["iStart"], "iCount": lp["iCount"],
+                "bounds": lp["bounds"], "canon": lp["canon"], "side": lp.get("side"),
+            })
+        if any(p["id"] in part_index for p in live_parts):
+            sys.exit("live part id collides with a BodyParts3D id")
+        for j, lp in enumerate(live_parts):
+            part_index[lp["id"]] = base + j
+        # the packer baked global part indices into the vertex stream: they must match
+        if live.get("parts") and live["parts"][0].get("chunk") is not None:
+            pass
+        for c in live["chunks"]:
+            chunks.append(dict(c, src=1))
+        for cid, e in canon.items():
+            mine = [base + j for j, lp in enumerate(live_parts) if lp["canon"] == cid]
+            if mine:
+                e["live"] = mine
+                for side in ("left", "right"):
+                    sided = [base + j for j, lp in enumerate(live_parts) if lp["canon"] == cid and lp.get("side") == side]
+                    if sided:
+                        e.setdefault(side, {"fma": None, "parts": []})
+                        e[side]["live"] = sided
+        planes = live.get("planes") or {}
+        sources.append({"id": "live", "name": "Living CT", "short": "Living CT",
+                        "desc": "Organ surfaces from the SAME living-patient CT as the torso slice modules "
+                                "(TotalSegmentator dataset subject s0108, expert masks, CC BY 4.0)",
+                        "frame": "live", "modules": sorted(planes.keys())})
+        for cid, rows in links.items():
+            for l in rows:
+                pl = planes.get(l["m"], {}).get(str(l["i"]))
+                if pl:
+                    l["plane"] = 1
+        total_tris += live["stats"]["triangles"]
+
+    # ---- mobile LOD set (pack3d.mjs lod) ----
+    lod_path = os.path.join(OUT_DIR, "lod.json")
+    lod = json.load(open(lod_path)) if os.path.exists(lod_path) else None
+
     manifest = {
         "version": 1,
         "source": {
@@ -386,13 +442,19 @@ def build(src, write=False):
         "systems": [{"id": s[0], "name": s[1], "color": s[2], "desc": s[3]} for s in SYSTEMS],
         "regions": REGIONS,
         "explain": EXPLAIN,
+        "sources": sources,
         "chunks": chunks,
-        "parts": [[p["id"], p["name"], p["fma"], p["sys"], p["reg"], p["chunk"], p["iStart"], p["iCount"], p["bounds"], p["canon"]]
-                  for p in out_parts],
+        "parts": [[p["id"], p["name"], p["fma"], p["sys"], p["reg"], p["chunk"], p["iStart"], p["iCount"], p["bounds"], p["canon"], 0]
+                  for p in out_parts] +
+                 [[p["id"], p["name"], p["fma"], p["sys"], p["reg"], p["chunk"], p["iStart"], p["iCount"], p["bounds"], p["canon"], 1, p.get("side")]
+                  for p in live_parts],
+        "planes": planes,
+        "live": ({"frame": live["frame"], "source": live["source"], "stats": live["stats"]} if live else None),
+        "lod": ({"ratio": lod["ratio"], "error": lod["error"], "chunks": lod["chunks"], "stats": lod["stats"]} if lod else None),
         "concepts": concepts,
         "canon": canon,
         "links": links,
-        "stats": {"parts": len(out_parts), "rejected": len(rejected), "triangles": total_tris,
+        "stats": {"parts": len(out_parts), "live_parts": len(live_parts), "rejected": len(rejected), "triangles": total_tris,
                   "vertices": total_verts, "concepts": len(concepts),
                   "canonical": len(canon), "mapped_full": mapped_full, "mapped_partial": mapped_partial,
                   "related_only": related, "container": container, "unmapped": none,
@@ -410,8 +472,9 @@ def build(src, write=False):
         os.makedirs(OUT_DIR, exist_ok=True)
         for name, data in files.items():
             open(os.path.join(OUT_DIR, name), "wb").write(data)
+        keep = set(files) | {os.path.basename(c["url"]) for c in chunks} | ({os.path.basename(c["url"]) for c in lod["chunks"]} if lod else set())
         for old in os.listdir(OUT_DIR):
-            if old.endswith(".bin.gz") and old not in files:
+            if old.endswith(".bin.gz") and old not in keep:
                 os.remove(os.path.join(OUT_DIR, old))
         mtext = json.dumps(manifest, separators=(",", ":"), ensure_ascii=False)
         open(os.path.join(OUT_DIR, "manifest.json"), "w", encoding="utf-8").write(mtext)

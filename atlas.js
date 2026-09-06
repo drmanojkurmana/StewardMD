@@ -660,7 +660,9 @@
   // Peek <-> full snapping plus swipe-to-dismiss. No multi-height sheet exists
   // anywhere in the repo, so this is net-new; the drag maths follows the pattern at
   // home.js:1704 (readable there, not exported).
-  function bindSheetDrag(el) {
+  function bindSheetDrag(el) { bindSheetDragGeneric(el, SHEET_PEEK, function () { closeSheet(); selectStructure(null); }); }
+  // Generic form, shared with the 3D layer (atlas3d.js) so both sheets swipe the same way.
+  function bindSheetDragGeneric(el, peek, onDismiss) {
     var y0 = 0, dy = 0, drag = false, wasFull = false;
     el.addEventListener("touchstart", function (e) {
       if (!e.touches || !e.touches.length) { drag = false; return; }
@@ -673,7 +675,7 @@
     el.addEventListener("touchmove", function (e) {
       if (!drag || !e.touches || !e.touches.length) return;
       dy = e.touches[0].clientY - y0;
-      var lim = -(G.innerHeight - SHEET_PEEK);
+      var lim = -(G.innerHeight - peek);
       if (!wasFull && dy < 0) el.style.transform = "translateY(" + Math.max(dy, lim) + "px)";
       else if (dy > 0) el.style.transform = "translateY(" + dy + "px)";
     }, { passive: true });
@@ -683,7 +685,7 @@
       el.style.transition = ""; el.style.transform = "";
       if (!wasFull && dy < -60) el.classList.add("full");
       else if (wasFull && dy > 60) el.classList.remove("full");
-      else if (dy > 90) { closeSheet(); selectStructure(null); }
+      else if (dy > 90) { if (onDismiss) onDismiss(); }
     }
     el.addEventListener("touchend", end);
     el.addEventListener("touchcancel", end);
@@ -790,7 +792,7 @@
     if (a === "3d") {
       if (!threeD()) return;
       var canon = b.getAttribute("data-canon");
-      return void G.ATLAS3D.open(canon ? { canon: canon } : {});
+      return void G.ATLAS3D.open(canon ? { canon: canon, from: { m: st.moduleId, i: st.slice } } : {});
     }
     if (a === "tab") { _tab = b.getAttribute("data-tab"); return st.sel ? openSheet(st.sel) : void 0; }
     if (a === "filter") {
@@ -910,6 +912,7 @@
   G.ATLAS.isOpen = isOpen;
   G.ATLAS.back = back;
   G.ATLAS.openAt = openAt;
+  G.ATLAS._bindSheetDrag = bindSheetDragGeneric;
   G.ATLAS._state = st;
   G.ATLAS._catalogHtml = catalogHtml;
   G.ATLAS._infoHtml = infoHtml;

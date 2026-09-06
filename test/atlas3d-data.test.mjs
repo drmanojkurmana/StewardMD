@@ -35,7 +35,11 @@ ok("provenance doc lists every rejected mesh", provenance.rejected.every((r) => 
 
 // --- parts ---
 const parts = manifest.parts;
-ok("2,227 meshes shipped (2,234 upstream minus 7 exact duplicates)", parts.length === 2227 && provenance.rejected.length === 7);
+const ref = parts.filter((p) => !p[10]), live = parts.filter((p) => p[10] === 1);
+ok("2,227 BodyParts3D meshes shipped (2,234 upstream minus 7 exact duplicates)", ref.length === 2227 && provenance.rejected.length === 7);
+ok("38 living-CT surfaces appended after them (source flag 1)", live.length === 38 && parts.length === 2265 && live.every((p, k) => parts[2227 + k] === p));
+ok("every living-CT part names its canonical structure, side where sided, and a torso region", live.every((p) => onto[p[9]] && ["CHEST", "ABDOMEN", "PELVIS", "SPINE"].includes(manifest.regions[p[4]]) && (p[11] === null || p[11] === "left" || p[11] === "right")));
+ok("sources: reference body + living CT", manifest.sources.length === 2 && manifest.sources[1].id === "live" && manifest.sources[1].modules.length === 3);
 ok("every rejection is an exact duplicate", provenance.rejected.every((r) => /exact duplicate/.test(r.reason)));
 const ids = new Set(parts.map((p) => p[0]));
 ok("part ids are unique", ids.size === parts.length);
@@ -44,7 +48,7 @@ const seenKey = new Set();
 let dup = 0;
 for (const p of parts) { const k = p[1].toLowerCase() + "|" + p[8].map((v) => v.toFixed(4)).join(","); if (seenKey.has(k)) dup++; seenKey.add(k); }
 ok("no exact (name, bounds) duplicate remains", dup === 0);
-ok("every part has a name, an FMA id, a system and a region", parts.every((p) => p[1].trim() && /^FMA\d+$/.test(p[2]) && manifest.systems[p[3]] && manifest.regions[p[4]]));
+ok("every part has a name, a system and a region; every BodyParts3D part an FMA id", parts.every((p) => p[1].trim() && manifest.systems[p[3]] && manifest.regions[p[4]]) && ref.every((p) => /^FMA\d+$/.test(p[2])));
 ok("every part's canonical id exists in the ontology", parts.every((p) => !p[9] || onto[p[9]]));
 const BRAIN_VENTRICLES = ["Third ventricle", "Fourth ventricle", "Left lateral ventricle", "Right lateral ventricle", "Interventricular foramen"];
 ok("brain ventricles are filed under the nervous system (upstream had them under 'cardiac')",
@@ -53,7 +57,10 @@ ok("systems: 15, with colours and descriptions", manifest.systems.length === 15 
 
 // --- chunks: files, checksums, index ranges ---
 const files = readdirSync(D3).filter((f) => f.endsWith(".bin.gz"));
-ok("every chunk file is referenced and vice versa", files.length === manifest.chunks.length && manifest.chunks.every((c) => files.includes(c.url.split("/").pop())));
+const allChunks = manifest.chunks.concat(manifest.lod ? manifest.lod.chunks : []);
+ok("every chunk file (full + LOD) is referenced and vice versa", files.length === allChunks.length && allChunks.every((c) => files.includes(c.url.split("/").pop())));
+ok("LOD set: 20 reference-body chunks at ~60% of the triangles", manifest.lod && manifest.lod.chunks.length === 20 && manifest.lod.stats.triangles < manifest.stats.triangles * 0.7);
+ok("living-CT chunks carry the source flag and never mix systems", manifest.chunks.filter((c) => c.src === 1).length === 11 && manifest.chunks.every((c) => c.system));
 let maxIdxOk = true, sizeOk = true, shaOk = true, triangles = 0;
 const partsByChunk = new Map();
 parts.forEach((p, i) => { (partsByChunk.get(p[5]) ?? partsByChunk.set(p[5], []).get(p[5])).push(i); });
@@ -78,7 +85,13 @@ ok("chunk sha256 checksums match the manifest", shaOk);
 ok("chunk raw/gz sizes match the manifest", sizeOk);
 ok("every index is inside its chunk and every part's vertices carry its own part index", maxIdxOk);
 ok("triangle total matches stats", Math.round(triangles) === manifest.stats.triangles);
-ok("bundle is under 35 MB gzipped (not shipped natively; streamed per system)", manifest.stats.gz_bytes < 35e6);
+ok("full set under 40 MB and LOD set under 25 MB gzipped (streamed from R2 per system, never bundled)", manifest.stats.gz_bytes < 40e6 && manifest.lod.stats.gz < 25e6);
+// --- slice planes (living CT): every torso slice registered, on a monotonic line ---
+const planes = manifest.planes;
+ok("72 slice planes: 24 per living-torso module", Object.keys(planes).length === 3 && Object.values(planes).every((m) => Object.keys(m).length === 24));
+ok("planes are monotonic along their axis and carry a textured quad frame", Object.values(planes).every((m) => { const ks = Object.keys(m).map(Number).sort((a, b) => a - b); const pos = ks.map((k) => m[k].pos); const inc = pos.every((v, i) => !i || v > pos[i - 1]), dec = pos.every((v, i) => !i || v < pos[i - 1]); return (inc || dec) && ks.every((k) => m[k].tl && m[k].u && m[k].v && ["x", "y", "z"].includes(m[k].axis)); }));
+ok("living-CT parts sit inside the registered slab (axial plane range)", (() => { const ax = planes["ct-live-torso-axial"]; const ys = Object.values(ax).map((p) => p.pos); const lo = Math.min(...ys) - 0.05, hi = Math.max(...ys) + 0.05; return live.every((p) => p[8][1] >= lo && p[8][4] <= hi); })());
+ok("every CT link into a living-torso module carries a plane flag", Object.values(manifest.links).flat().filter((l) => planes[l.m]).every((l) => l.plane === 1));
 ok("no single chunk exceeds 4 MB raw (Pages 25 MiB file cap, mobile memory)", manifest.chunks.every((c) => c.bytes <= 4.2e6));
 
 // --- concepts ---
@@ -118,12 +131,14 @@ for (const [cid, rows] of Object.entries(manifest.links)) {
     if (!slice || !slice.pins.some((p) => p.s === l.s)) linkOk = false;
     if (m.modality === "CT") hasCT = true; if (m.modality === "MRI") hasMRI = true;
   }
-  const has3d = canon[cid] && (canon[cid].kind === "concept" || canon[cid].kind === "composite");
+  const has3d = canon[cid] && (canon[cid].kind === "concept" || canon[cid].kind === "composite" || (canon[cid].live && canon[cid].live.length));
   if (has3d && hasCT) ctLinked++;
   if (has3d && hasMRI) mriLinked++;
 }
 ok("every CT/MRI link targets a shipped module, a declared structure and a slice that pins it", linkOk);
-ok("at least 38 mesh-mapped structures are CT-linked", ctLinked >= 38);
+ok("at least 43 mesh-mapped structures are CT-linked (living CT fills liver, lungs, heart)", ctLinked >= 43);
+ok("LIVER, LUNG lobes and HEART now have living-CT surfaces", ["LIVER", "LOWER_LOBE_LEFT", "LOWER_LOBE_RIGHT", "UPPER_LOBE_LEFT", "MIDDLE_LOBE_RIGHT", "HEART"].every((k) => canon[k].live && canon[k].live.length));
+ok("KIDNEY has sided living-CT parts", canon.KIDNEY.left.live.length === 1 && canon.KIDNEY.right.live.length === 1 && canon.KIDNEY.live.length === 2);
 ok("at least 13 mesh-mapped structures are MRI-linked", mriLinked >= 13);
 console.log(`   CT<->3D linked: ${ctLinked}   MRI<->3D linked: ${mriLinked}`);
 

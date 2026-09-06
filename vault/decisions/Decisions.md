@@ -5,6 +5,33 @@ tags: [decisions, adr]
 
 Dated architectural calls + why. Newest first. Keep each short: **decision · why · trade-off · status**.
 
+## 2026-09-06 · RadioAnatome 3D — a second, LIVING body from the CT masks; geometry on R2; mobile LOD
+
+**Decision:** add the living-torso CT subject (TotalSegmentator s0108, CC BY 4.0, the same scan
+the `ct-live-torso-*` modules show) as a second 3D source next to the BodyParts3D reference body,
+meshed from the dataset's expert masks by our own `live3d.py` (marching cubes) + `pack3d.mjs`
+(meshoptimizer). Every shipped slice of the three living-torso modules is registered as a plane in
+the mesh frame, so CT → 3D lands on the living body with the slice drawn as a textured cut. Host
+all geometry on the `stewardmd-models` R2 bucket (`models.stewardmd.in/atlas3d/`) with same-origin
+as the first choice, and ship a 60%-triangle LOD of the reference body as the phone default.
+
+**Why:** BodyParts3D has no liver, lung, lobe or closed heart; the reference body is a different
+person from every slice we show, so "the same structure in 3D and on CT" was only ever a
+vocabulary link. Meshing the masks the slices came from makes it the same voxels. R2 because a
+Pages deploy caps files at 25 MiB and the branch preview host was the only working origin;
+LOD because 31.8 MB of full-detail chunks over cellular is the open device-run question.
+
+**Audit findings that shaped it:** the volume's z axis runs SUPERIOR→inferior despite the RAS
+header (measured on the masks); the reformatted coronal/sagittal volumes are flipped crops; and
+the living-torso 2D images display the patient's right on the image right (non-radiological),
+which is now a [[Roadmap]] item, not silently changed.
+
+**Trade-off:** +4.5 MB living chunks, +19.6 MB LOD chunks committed under `atlas/3d/` and mirrored
+to R2 by hand after each pipeline run (no CI step). Registration of the axial module is 19/22
+confident slices on a linear fit (the other 3 are interpolated); coronal/sagittal are 24/24.
+**Status: built, 143 tests green (52 data + 33 pure + 58 browser), screenshots verified; device
+run pending** ([[RadioAnatome 3D]]).
+
 ## 2026-09-06 · RadioAnatome 3D — Human Atlas/BodyParts3D as a DATA SOURCE for one atlas, not a second viewer
 
 **Ask:** evaluate github.com/ashemag/human-atlas (2,234 BodyParts3D meshes, MIT code / CC BY 4.0 data)

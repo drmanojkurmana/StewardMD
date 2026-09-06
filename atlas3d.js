@@ -12,9 +12,15 @@
  * per-part state — so a ~600-line WebGL1 renderer with GPU colour picking covers it and
  * adds no dependency, no licence, no version churn.
  *
- * DATA: geometry is NOT bundled into the native app (31 MB); dataUrl() rewrites
- * /atlas/3d/*.bin.gz to the live origin exactly like atlas.js imgUrl() does for slices.
+ * DATA: geometry is NOT bundled into the native app and NOT in git: the chunks live on R2 at
+ * https://models.stewardmd.in/atlas3d/ (dataBases()), cached on-device through the Cache API
+ * / IndexedDB helper in thorex-model-cache.js so the second open is instant and offline.
  * manifest.json + index.json ARE bundled (build-www.sh allowlist).
+ *
+ * SOURCES: two bodies share one ontology. "bp3d" is the BodyParts3D reference body; "live"
+ * is the SAME living-patient CT the torso slice modules are cut from (TotalSegmentator
+ * s0108, meshed by atlas-pipeline/live3d.py). Live parts carry registered slice planes, so a
+ * CT slice can be drawn as a textured cut through the meshes at exactly its level.
  *
  * FLAG: smd_atlas3d (default ON; ?atlas3d=0 or localStorage smd_atlas3d=0 closes it on one
  * device). When off, atlas.js renders no 3D entry point and this file is inert.
@@ -29,6 +35,9 @@
   var FLAG_KEY = "smd_atlas3d", QUERY = "atlas3d";
   var MANIFEST_URL = "/atlas/3d/manifest.json", INDEX_URL = "/atlas/3d/index.json";
   var STATE_W = 64;                       // 64x64 state texture = 4096 part slots
+  var R2_BASE = "https://models.stewardmd.in/atlas3d";
+  var CACHE_NAME = "atlas3d-v1";
+  var VIEWS = [{ id: "3q", yaw: 0.45, pitch: 0.12 }, { id: "front", yaw: 0, pitch: 0.02 }, { id: "side", yaw: Math.PI / 2, pitch: 0.02 }, { id: "back", yaw: Math.PI, pitch: 0.02 }, { id: "top", yaw: 0, pitch: 1.35 }];
   var DEFAULT_OFF = { muscular: 1, integumentary: 1 };   // heavy / occluding: opt-in layers
   var SEL_TINT = [0.26, 0.85, 0.78];
 
@@ -52,7 +61,7 @@
 
   function parseManifest(m) {
     var parts = (m.parts || []).map(function (a, i) {
-      return { i: i, id: a[0], name: a[1], fma: a[2], sys: a[3], reg: a[4], chunk: a[5], iStart: a[6], iCount: a[7], b: a[8], canon: a[9] || null };
+      return { i: i, id: a[0], name: a[1], fma: a[2], sys: a[3], reg: a[4], chunk: a[5], iStart: a[6], iCount: a[7], b: a[8], canon: a[9] || null, src: a[10] || 0, side: a[11] || null };
     });
     var concepts = (m.concepts || []).map(function (c) { return { id: c[0], name: c[1], parts: c[2] }; });
     var ofPart = {}, byId = {}, fmaToCanon = {}, conceptById = {};
@@ -72,7 +81,8 @@
       raw: m, parts: parts, concepts: concepts, conceptsOfPart: ofPart, conceptById: conceptById,
       systems: m.systems || [], regions: m.regions || [], canon: canon, fmaToCanon: fmaToCanon,
       links: m.links || {}, explain: m.explain || {}, chunks: m.chunks || [], byId: byId,
-      source: m.source || {}
+      source: m.source || {}, sources: m.sources || [{ id: "bp3d", name: "Reference body", short: "Reference" }],
+      planes: m.planes || {}, lod: m.lod || null, live: m.live || null
     };
   }
 
@@ -96,7 +106,15 @@
     });
     d.parts.forEach(function (p) {
       var s = score(q, p.name);
-      if (s) out.push({ type: "part", i: p.i, name: p.name, sys: p.sys, s: s });
+      if (s) out.push({ type: "part", i: p.i, name: p.name, sys: p.sys, src: p.src, s: s });
+    });
+    // Unified search: a RadioAnatome structure with CT/MRI slices is a hit too, ranked above
+    // the meshes so "liver" leads with the atlas entry and its modules.
+    Object.keys(d.canon).forEach(function (cid) {
+      var e = d.canon[cid], n = (d.links[cid] || []).length;
+      if (!n) return;
+      var s = score(q, e.name || cid);
+      if (s) out.push({ type: "canon", cid: cid, name: e.name || cid, n: n, s: s + 1 });
     });
     out.sort(function (a, b) { return b.s - a.s || a.name.length - b.name.length || a.name.localeCompare(b.name); });
     return out.slice(0, limit || 30);
@@ -169,6 +187,7 @@
   var st = {
     data: null, index: null, gl: null, canvas: null, chunks: {}, loading: {}, loaded: 0,
     visible: {}, hidden: {}, sel: [], isolate: false, region: "", explode: 0, explodeTarget: 0,
+    src: "bp3d", lod: false, plane: null, view: 0, _lastTap: 0, _lastTapIdx: -1,
     cam: { target: [0, 0.92, 0], yaw: 0.45, pitch: 0.12, dist: 2.7 },
     subject: null, dirty: true, raf: 0, err: "", progress: 0, _tab: "about", _prevFocus: null, from: null
   };
@@ -189,16 +208,22 @@
   // stewardmd.in answer /atlas/3d/* with its index.html (HTTP 200, text/html), which WebKit
   // then reports as "Failed to Decode Data." - the check in loadChunk() catches that and moves
   // on. localStorage smd_atlas3d_base (e.g. a models.stewardmd.in path) wins over both.
-  var PREVIEW_BASE = "https://worktree-atlas3d-bodyparts.stewardmd.pages.dev";
   function dataBases() {
     var out = [];
     try { var o = G.localStorage && G.localStorage.getItem("smd_atlas3d_base"); if (o) out.push(String(o).replace(/\/$/, "")); } catch (e) {}
     var native = false; try { native = !!G.SMD_IS_NATIVE; } catch (e2) {}
-    out.push(native ? "https://stewardmd.in" : "");
-    if (out.indexOf(PREVIEW_BASE) < 0) out.push(PREVIEW_BASE);
+    if (!native) out.push("");          // a dev checkout that ran the pipeline serves its own chunks
+    out.push(R2_BASE);
     return out;
   }
-  function dataUrl(u, base) { return (base || "") + u; }
+  // Chunk URLs are "/atlas/3d/<file>"; R2 keys are "atlas3d/<file>", so a non-empty base
+  // replaces the path prefix rather than prepending to it.
+  function dataUrl(u, base) { return base ? base + u.replace(/^\/atlas\/3d/, "") : u; }
+  function imgUrl(u) {
+    try { if (G.SMD_IS_NATIVE && u.indexOf("/atlas/") === 0) return "https://stewardmd.in" + u; } catch (e) {}
+    return u;
+  }
+  function isTouch() { try { return !!G.SMD_IS_NATIVE || (G.navigator && G.navigator.maxTouchPoints > 0); } catch (e) { return false; } }
   // A real chunk is either gzip (1f 8b) or, if the host already decoded it, exactly rawBytes.
   function looksLikeChunk(buf, rawBytes) {
     if (!buf || buf.byteLength < 2) return false;
@@ -269,26 +294,64 @@
     }
     return attempt();
   }
-  function loadChunk(ci) {
-    var d = st.data, c = d.chunks[ci];
-    if (st.chunks[ci] || st.loading[ci]) return st.loading[ci] || Promise.resolve();
-    st.loading[ci] = fetchChunk(c).then(function (buf) { return inflate(buf, c.bytes); }).then(function (raw) {
-      if (st.gl) uploadChunk(ci, raw);
-      delete st.loading[ci];
+  // The active chunk set: LOD chunks stand in for the reference body's full chunks on phones;
+  // living-CT chunks (src 1) have one level only. Chunks are keyed by id so sets can coexist.
+  function chunkSet() {
+    var d = st.data;
+    var full = d.chunks.filter(function (c) { return !c.src; }), live = d.chunks.filter(function (c) { return c.src === 1; });
+    var ref = (st.lod && d.lod && d.lod.chunks && d.lod.chunks.length) ? d.lod.chunks.map(function (c) { return Object.assign({}, c, { lod: true }); }) : full;
+    return ref.concat(live.map(function (c) { return Object.assign({}, c, { src: 1 }); }));
+  }
+  // Fetch through the shared on-device model cache when it is present (Cache API, else
+  // IndexedDB): the second open of the 3D layer costs no network and works offline. Bytes are
+  // validated BEFORE they are trusted; a bad cached entry is purged rather than retried forever.
+  function fetchBytes(url, useCache) {
+    var mc = G.SMD_THOREX_MODEL_CACHE;
+    if (useCache && mc && mc.loadModelBytes) {
+      return mc.loadModelBytes(url, { cacheName: CACHE_NAME }).then(function (b) {
+        return b instanceof ArrayBuffer ? b : b.buffer.slice(b.byteOffset, b.byteOffset + b.byteLength);
+      });
+    }
+    return G.fetch(url).then(function (r) { if (!r || !r.ok) throw new Error("http " + (r && r.status)); return r.arrayBuffer(); });
+  }
+  function fetchChunk(c) {
+    var bases = st.base != null ? [st.base] : dataBases(), i = 0;
+    function attempt() {
+      if (i >= bases.length) return Promise.reject(new Error("The 3D geometry is not published on this server yet."));
+      var base = bases[i++], url = dataUrl(c.url, base), cacheable = base === R2_BASE;
+      return fetchBytes(url, cacheable).then(function (buf) {
+        if (!looksLikeChunk(buf, c.bytes)) {
+          if (cacheable && G.SMD_THOREX_MODEL_CACHE && G.SMD_THOREX_MODEL_CACHE.clearModels) { try { G.SMD_THOREX_MODEL_CACHE.clearModels({ cacheName: CACHE_NAME }); } catch (e) {} }
+          throw new Error("not a chunk");
+        }
+        st.base = base;
+        return buf;
+      }).catch(function () { return attempt(); });
+    }
+    return attempt();
+  }
+  function loadChunk(c) {
+    var key = c.id;
+    if (st.chunks[key] || st.loading[key]) return st.loading[key] || Promise.resolve();
+    st.loading[key] = fetchChunk(c).then(function (buf) { return inflate(buf, c.bytes); }).then(function (raw) {
+      if (st.gl) uploadChunk(c, raw);
+      delete st.loading[key];
       st.loaded++; st.dirty = true; paintProgress();
     }).catch(function (e) {
-      delete st.loading[ci];
+      delete st.loading[key];
       st.err = e && e.message || "Could not load the 3D anatomy.";
       paintProgress();
     });
-    return st.loading[ci];
+    return st.loading[key];
   }
+  function srcIndex() { return st.src === "live" ? 1 : 0; }
   function neededChunks() {
     var d = st.data, need = [];
     var sysNeeded = {};
     d.systems.forEach(function (s) { if (st.visible[s.id]) sysNeeded[s.id] = 1; });
     st.sel.forEach(function (i) { sysNeeded[d.systems[d.parts[i].sys].id] = 1; });
-    d.chunks.forEach(function (c, ci) { if (sysNeeded[c.system] && !st.chunks[ci]) need.push(ci); });
+    var want = srcIndex();
+    chunkSet().forEach(function (c) { if ((c.src || 0) === want && sysNeeded[c.system] && !st.chunks[c.id]) need.push(c); });
     return need;
   }
   function ensureChunks() {
@@ -298,8 +361,8 @@
     var cursor = 0;
     function worker() {
       if (cursor >= need.length) return Promise.resolve();
-      var ci = need[cursor++];
-      return loadChunk(ci).then(worker);
+      var c = need[cursor++];
+      return loadChunk(c).then(worker);
     }
     paintProgress();
     return Promise.all([worker(), worker(), worker()]);
@@ -321,11 +384,13 @@
   var FS = [
     "precision mediump float;",
     "varying vec3 vN; varying vec3 vP; varying vec3 vState;",
-    "uniform vec3 uColor; uniform vec3 uEye; uniform vec3 uBg; uniform vec3 uSel; uniform float uPass; uniform float uGhost;",
+    "uniform vec3 uColor; uniform vec3 uEye; uniform vec3 uBg; uniform vec3 uSel; uniform float uPass; uniform float uGhost; uniform vec4 uClip; uniform float uClipOn;",
     "void main(){",
     " if (vState.r < 0.5) discard;",
+    " if (uClipOn > 0.5 && dot(vP, uClip.xyz) > uClip.w) discard;",
     " if (uPass > 0.5 && uPass < 1.5 && vState.g < 0.5) discard;",   // pass 1: selection only
-    " if (uPass > 1.5 && vState.g > 0.5) discard;",                  // pass 2: ghosts only
+    " if (uPass > 1.5 && uPass < 2.5 && vState.g > 0.5) discard;", // pass 2: ghosts only
+    " if (uPass > 2.5 && vState.g < 0.5) discard;",                  // pass 3: selection as a see-through ghost (over the slice)
     " vec3 n = normalize(vN); if (!gl_FrontFacing) n = -n;",
     " vec3 L = normalize(vec3(-0.45, 0.8, 0.55)); vec3 V = normalize(uEye - vP);",
     " float diff = max(dot(n, L), 0.0); float hemi = 0.5 + 0.5 * n.y;",
@@ -337,8 +402,11 @@
     "}"].join("\n");
   var FS_PICK = [
     "precision mediump float;",
-    "varying vec3 vState; varying vec3 vPick;",
-    "void main(){ if (vState.r < 0.5) discard; gl_FragColor = vec4(vPick, 1.0); }"].join("\n");
+    "varying vec3 vState; varying vec3 vPick; varying vec3 vP; uniform vec4 uClip; uniform float uClipOn;",
+    "void main(){ if (vState.r < 0.5) discard; if (uClipOn > 0.5 && dot(vP, uClip.xyz) > uClip.w) discard; gl_FragColor = vec4(vPick, 1.0); }"].join("\n");
+  // The CT slice itself, drawn as a textured quad on the cut plane.
+  var QVS = "attribute vec3 aPos; attribute vec2 aUv; uniform mat4 uVP; varying vec2 vUv; void main(){ vUv = aUv; gl_Position = uVP * vec4(aPos, 1.0); }";
+  var QFS = "precision mediump float; varying vec2 vUv; uniform sampler2D uTex; uniform float uAlpha; void main(){ vec4 t = texture2D(uTex, vUv); gl_FragColor = vec4(t.rgb, uAlpha); }";
 
   function compile(gl, type, src) {
     var s = gl.createShader(type); gl.shaderSource(s, src); gl.compileShader(s);
@@ -352,7 +420,7 @@
     gl.linkProgram(p);
     if (!gl.getProgramParameter(p, gl.LINK_STATUS)) throw new Error("link: " + gl.getProgramInfoLog(p));
     var u = {};
-    ["uVP", "uOffset", "uState", "uColor", "uEye", "uBg", "uSel", "uPass", "uGhost"].forEach(function (n) { u[n] = gl.getUniformLocation(p, n); });
+    ["uVP", "uOffset", "uState", "uColor", "uEye", "uBg", "uSel", "uPass", "uGhost", "uClip", "uClipOn", "uTex", "uAlpha"].forEach(function (n) { u[n] = gl.getUniformLocation(p, n); });
     return { p: p, u: u };
   }
 
@@ -362,6 +430,13 @@
     if (!gl.getExtension("OES_element_index_uint")) throw new Error("32-bit mesh indices are not supported here.");
     if (gl.getParameter(gl.MAX_VERTEX_TEXTURE_IMAGE_UNITS) < 1) throw new Error("This GPU cannot read part state in the vertex stage.");
     var R = { gl: gl, main: program(gl, VS, FS), pick: program(gl, VS, FS_PICK) };
+    // slice quad program: its own attribute layout (0 = aPos, 1 = aUv)
+    var qp = gl.createProgram();
+    gl.attachShader(qp, compile(gl, gl.VERTEX_SHADER, QVS)); gl.attachShader(qp, compile(gl, gl.FRAGMENT_SHADER, QFS));
+    gl.bindAttribLocation(qp, 0, "aPos"); gl.bindAttribLocation(qp, 1, "aUv"); gl.linkProgram(qp);
+    if (!gl.getProgramParameter(qp, gl.LINK_STATUS)) throw new Error("link: " + gl.getProgramInfoLog(qp));
+    R.quad = { p: qp, u: { uVP: gl.getUniformLocation(qp, "uVP"), uTex: gl.getUniformLocation(qp, "uTex"), uAlpha: gl.getUniformLocation(qp, "uAlpha") } };
+    R.quadVb = gl.createBuffer(); R.quadTex = null;
     R.stateData = new Uint8Array(STATE_W * STATE_W * 4);
     R.stateTex = gl.createTexture();
     gl.bindTexture(gl.TEXTURE_2D, R.stateTex);
@@ -374,22 +449,33 @@
     canvas.addEventListener("webglcontextlost", function (e) { e.preventDefault(); st.err = "The 3D view was paused by the device. Close and reopen it."; paintProgress(); });
     return R;
   }
-  function uploadChunk(ci, raw) {
-    var gl = st.gl.gl, c = st.data.chunks[ci];
+  function uploadChunk(c, raw) {
+    var gl = st.gl.gl;
     var vb = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, vb); gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(raw, c.pos, c.v * 3), gl.STATIC_DRAW);
     var nb = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, nb); gl.bufferData(gl.ARRAY_BUFFER, new Int16Array(raw, c.nrm, c.v * 3), gl.STATIC_DRAW);
     var pb = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, pb); gl.bufferData(gl.ARRAY_BUFFER, new Uint16Array(raw, c.pid, c.v), gl.STATIC_DRAW);
     var ib = gl.createBuffer(); gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, ib); gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, new Uint32Array(raw, c.idx, c.i), gl.STATIC_DRAW);
-    st.chunks[ci] = { vb: vb, nb: nb, pb: pb, ib: ib, n: c.i, system: c.system };
+    st.chunks[c.id] = { vb: vb, nb: nb, pb: pb, ib: ib, n: c.i, system: c.system, src: c.src || 0, lod: !!c.lod };
   }
   function disposeGL() {
     var R = st.gl; if (!R) return;
     var gl = R.gl;
     Object.keys(st.chunks).forEach(function (k) { var c = st.chunks[k]; gl.deleteBuffer(c.vb); gl.deleteBuffer(c.nb); gl.deleteBuffer(c.pb); gl.deleteBuffer(c.ib); });
     st.chunks = {}; st.loaded = 0; st.loading = {};
+    try { if (R.quadTex) gl.deleteTexture(R.quadTex); gl.deleteBuffer(R.quadVb); gl.deleteProgram(R.quad.p); } catch (e0) {}
     try { gl.deleteTexture(R.stateTex); gl.deleteTexture(R.fboTex); gl.deleteRenderbuffer(R.fboDepth); gl.deleteFramebuffer(R.fbo); gl.deleteProgram(R.main.p); gl.deleteProgram(R.pick.p); } catch (e) {}
     try { var lose = gl.getExtension("WEBGL_lose_context"); if (lose) lose.loseContext(); } catch (e2) {}
     st.gl = null; st.canvas = null;
+  }
+
+  function dropChunks(pred) {
+    var R = st.gl; if (!R) return;
+    var gl = R.gl;
+    Object.keys(st.chunks).forEach(function (k) {
+      var c = st.chunks[k]; if (!pred(c)) return;
+      gl.deleteBuffer(c.vb); gl.deleteBuffer(c.nb); gl.deleteBuffer(c.pb); gl.deleteBuffer(c.ib);
+      delete st.chunks[k]; st.loaded = Math.max(0, st.loaded - 1);
+    });
   }
 
   // Part state -> texture. r=visible, g=selected, b=dimmed.
@@ -397,13 +483,13 @@
     var d = st.data, R = st.gl; if (!d || !R) return;
     var buf = R.stateData, selSet = {}, hasSel = st.sel.length > 0;
     st.sel.forEach(function (i) { selSet[i] = 1; });
-    var ri = st.region ? d.regions.indexOf(st.region) : -1;
+    var ri = st.region ? d.regions.indexOf(st.region) : -1, want = srcIndex();
     for (var i = 0; i < d.parts.length; i++) {
       var p = d.parts[i], o = i * 4;
-      var vis = st.visible[d.systems[p.sys].id] && !st.hidden[i];
+      var vis = st.visible[d.systems[p.sys].id] && !st.hidden[i] && p.src === want;
       if (ri >= 0 && p.reg !== ri) vis = false;
-      if (selSet[i]) vis = true;
-      if (st.isolate) vis = !!selSet[i];
+      if (selSet[i] && p.src === want) vis = true;
+      if (st.isolate) vis = !!selSet[i] && p.src === want;
       buf[o] = vis ? 255 : 0;
       buf[o + 1] = selSet[i] ? 255 : 0;
       buf[o + 2] = hasSel && !selSet[i] && !st.isolate ? 255 : 0;
@@ -431,16 +517,21 @@
     gl.useProgram(prog.p);
     gl.uniformMatrix4fv(prog.u.uVP, false, new Float32Array(vp));
     gl.activeTexture(gl.TEXTURE0); gl.bindTexture(gl.TEXTURE_2D, R.stateTex); gl.uniform1i(prog.u.uState, 0);
+    var clip = clipPlane(eye);
+    gl.uniform4fv(prog.u.uClip, new Float32Array(clip ? clip : [0, 1, 0, 0]));
+    gl.uniform1f(prog.u.uClipOn, clip ? 1 : 0);
     if (!pick) {
       gl.uniform3fv(prog.u.uEye, new Float32Array(eye));
       gl.uniform3f(prog.u.uBg, 0.07, 0.08, 0.09);
       gl.uniform3fv(prog.u.uSel, new Float32Array(SEL_TINT));
       gl.uniform1f(prog.u.uPass, pass || 0);
-      gl.uniform1f(prog.u.uGhost, 0.16);
+      gl.uniform1f(prog.u.uGhost, pass === 3 ? 0.42 : 0.16);
     }
     var sysIdx = {}; d.systems.forEach(function (s, i) { sysIdx[s.id] = i; });
+    var want = srcIndex();
     Object.keys(st.chunks).forEach(function (k) {
       var c = st.chunks[k], si = sysIdx[c.system];
+      if (c.src !== want) return;
       var off = sysOffset(si, st.explode);
       gl.uniform3f(prog.u.uOffset, off[0], off[1], off[2]);
       if (!pick) gl.uniform3fv(prog.u.uColor, new Float32Array(hexRgb(d.systems[si].color)));
@@ -465,6 +556,15 @@
       drawScene(R.main, false, 2);
       gl.disable(gl.BLEND); gl.depthMask(true);
     } else drawScene(R.main, false, 0);
+    drawSliceQuad();
+    if (st.plane && st.sel.length) {
+      // The selected structure must stay readable THROUGH the slice: the cut removes the near
+      // half and the slice hides the far half, so redraw the selection as a ghost, no depth test.
+      gl.enable(gl.BLEND); gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA); gl.depthMask(false); gl.disable(gl.DEPTH_TEST);
+      drawScene(R.main, false, 3);
+      gl.enable(gl.DEPTH_TEST); gl.depthMask(true); gl.disable(gl.BLEND);
+    }
+    positionLabel();
     st.dirty = false;
   }
   function pickAt(x, y) {
@@ -489,6 +589,146 @@
     gl.bindFramebuffer(gl.FRAMEBUFFER, null);
     st.dirty = true;
     return decodePick(px[0], px[1], px[2]);
+  }
+
+  /* ---------- cut plane (registered CT slice) ---------- */
+  function planeInfo() {
+    var pl = st.plane; if (!pl || !st.data) return null;
+    var byMod = st.data.planes[pl.m]; if (!byMod) return null;
+    return byMod[String(pl.i)] || null;
+  }
+  // Keep the half of the body on the far side of the plane from the camera, so the cut face
+  // (and the slice drawn on it) faces the viewer whichever way the body is turned.
+  function clipPlane(eye) {
+    var p = planeInfo(); if (!p) return null;
+    var n = p.axis === "x" ? [1, 0, 0] : p.axis === "z" ? [0, 0, 1] : [0, 1, 0];
+    var side = dot(eye, n) - p.pos;
+    if (side < 0) { n = [-n[0], -n[1], -n[2]]; }
+    return [n[0], n[1], n[2], dot(n, p.axis === "x" ? [p.pos, 0, 0] : p.axis === "z" ? [0, 0, p.pos] : [0, p.pos, 0])];
+  }
+  function loadSliceTexture() {
+    var R = st.gl, pl = st.plane; if (!R || !pl) return;
+    var d = st.data, mod = (G.ATLAS && G.ATLAS._state && G.ATLAS._state.catalog) || null;
+    var url = "/atlas/" + pl.m + "/" + ("00" + pl.i).slice(-3) + ".webp";
+    var img = new G.Image();
+    img.crossOrigin = "anonymous";
+    pl.ready = false;
+    img.onload = function () {
+      if (st.plane !== pl || !st.gl) return;
+      var gl = st.gl.gl;
+      if (!st.gl.quadTex) st.gl.quadTex = gl.createTexture();
+      gl.bindTexture(gl.TEXTURE_2D, st.gl.quadTex);
+      gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, 0);
+      gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGB, gl.RGB, gl.UNSIGNED_BYTE, img);
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+      pl.ready = true; invalidate();
+    };
+    img.onerror = function () { pl.ready = false; invalidate(); };
+    img.src = imgUrl(url);
+  }
+  function drawSliceQuad() {
+    var R = st.gl, p = planeInfo(); if (!R || !p) return;
+    var gl = R.gl, pl = st.plane;
+    var tl = p.tl, u = p.u, v = p.v;
+    var c = [tl, [tl[0] + u[0], tl[1] + u[1], tl[2] + u[2]], [tl[0] + u[0] + v[0], tl[1] + u[1] + v[1], tl[2] + u[2] + v[2]], [tl[0] + v[0], tl[1] + v[1], tl[2] + v[2]]];
+    var data = new Float32Array([
+      c[0][0], c[0][1], c[0][2], 0, 0,  c[1][0], c[1][1], c[1][2], 1, 0,  c[2][0], c[2][1], c[2][2], 1, 1,
+      c[0][0], c[0][1], c[0][2], 0, 0,  c[2][0], c[2][1], c[2][2], 1, 1,  c[3][0], c[3][1], c[3][2], 0, 1]);
+    var cam = st.cam, w = st.canvas.width, h = st.canvas.height, aspect = w / Math.max(1, h), eye = eyeFrom(cam);
+    var near = Math.max(0.005, cam.dist * 0.02), far = cam.dist * 20 + 10;
+    var vp = mul(perspective(34, aspect, near, far), lookAt(eye, cam.target, [0, 1, 0]));
+    gl.useProgram(R.quad.p);
+    gl.uniformMatrix4fv(R.quad.u.uVP, false, new Float32Array(vp));
+    gl.bindBuffer(gl.ARRAY_BUFFER, R.quadVb); gl.bufferData(gl.ARRAY_BUFFER, data, gl.DYNAMIC_DRAW);
+    gl.enableVertexAttribArray(0); gl.vertexAttribPointer(0, 3, gl.FLOAT, false, 20, 0);
+    gl.enableVertexAttribArray(1); gl.vertexAttribPointer(1, 2, gl.FLOAT, false, 20, 12);
+    gl.disableVertexAttribArray(2);
+    gl.enable(gl.BLEND); gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
+    if (pl.ready && R.quadTex) {
+      gl.activeTexture(gl.TEXTURE1); gl.bindTexture(gl.TEXTURE_2D, R.quadTex); gl.uniform1i(R.quad.u.uTex, 1);
+      gl.uniform1f(R.quad.u.uAlpha, 0.88);
+    } else {
+      gl.activeTexture(gl.TEXTURE1); gl.bindTexture(gl.TEXTURE_2D, R.stateTex); gl.uniform1i(R.quad.u.uTex, 1);
+      gl.uniform1f(R.quad.u.uAlpha, 0.15);
+    }
+    gl.drawArrays(gl.TRIANGLES, 0, 6);
+    gl.disable(gl.BLEND);
+    gl.activeTexture(gl.TEXTURE0);
+  }
+  function setPlane(m, i, opts) {
+    var d = st.data;
+    if (!m || !d.planes[m] || !d.planes[m][String(i)]) { st.plane = null; paintBar(); invalidate(); return false; }
+    st.plane = { m: m, i: +i, n: Object.keys(d.planes[m]).length, ready: false };
+    if (st.src !== "live") setSource("live", { keepSel: true });
+    loadSliceTexture();
+    paintBar();
+    if (!(opts && opts.noFocus)) {
+      var p = d.planes[m][String(i)], tl = p.tl, u = p.u, v = p.v;
+      var b = [Math.min(tl[0], tl[0] + u[0] + v[0]), Math.min(tl[1], tl[1] + u[1] + v[1]), Math.min(tl[2], tl[2] + u[2] + v[2]),
+               Math.max(tl[0], tl[0] + u[0] + v[0]), Math.max(tl[1], tl[1] + u[1] + v[1]), Math.max(tl[2], tl[2] + u[2] + v[2])];
+      var c = center(b), aspect = st.canvas ? st.canvas.width / Math.max(1, st.canvas.height) : 1;
+      var dist = fitDistance(b, 34, aspect) * 0.9;
+      // look at the cut from the side the viewer expects: above for axial, in front for
+      // coronal, from the patient's left for sagittal
+      var yaw = p.axis === "x" ? Math.PI / 2 : 0.35, pitch = p.axis === "y" ? 0.95 : 0.15;
+      if (st.subject) c[1] -= 0.22 * 2 * dist * Math.tan(17 * Math.PI / 180);
+      st.camTo = { target: c, yaw: yaw, pitch: pitch, dist: dist };
+    }
+    invalidate();
+    return true;
+  }
+  function clearPlane() { st.plane = null; paintBar(); invalidate(); }
+
+  /* ---------- sources ---------- */
+  function setSource(id, opts) {
+    var d = st.data; if (!d) return;
+    if (!d.sources.some(function (s) { return s.id === id; })) return;
+    if (st.src === id) return;
+    st.src = id;
+    if (!(opts && opts.keepSel)) { st.sel = []; st.subject = null; closeSheet(); }
+    if (id !== "live") st.plane = null;
+    st.region = "";
+    applyState(); paintChips(); paintBar(); ensureChunks();
+    if (!(opts && opts.keepCam)) focusSource();
+    invalidate();
+  }
+  function focusSource() {
+    var want = srcIndex(), idxs = st.data.parts.filter(function (p) { return p.src === want; }).map(function (p) { return p.i; });
+    var b = unionBounds(st.data, idxs); if (!b) return;
+    var aspect = st.canvas ? st.canvas.width / Math.max(1, st.canvas.height) : 1;
+    var v = VIEWS[st.view] || VIEWS[0];
+    st.camTo = { target: center(b), yaw: v.yaw, pitch: v.pitch, dist: fitDistance(b, 34, aspect) * (want ? 1.0 : 1.02) };
+    schedule();
+  }
+  function setLod(on) {
+    if (!!on === st.lod) return;
+    st.lod = !!on;
+    dropChunks(function (c) { return !c.src; });
+    ensureChunks(); invalidate();
+  }
+  function cycleView() {
+    st.view = (st.view + 1) % VIEWS.length;
+    var v = VIEWS[st.view];
+    st.camTo = { target: st.cam.target.slice(), yaw: v.yaw, pitch: v.pitch, dist: st.cam.dist };
+    paintBar(); schedule();
+  }
+
+  /* ---------- callout label ---------- */
+  function positionLabel() {
+    var el = G.document.getElementById("a3dLabel"); if (!el) return;
+    if (!st.subject || !st.sel.length || !st.canvas) { el.hidden = true; return; }
+    var d = st.data, b = unionBounds(d, st.sel); if (!b) { el.hidden = true; return; }
+    var c = center(b), cam = st.cam, w = st.canvas.width, h = st.canvas.height, aspect = w / Math.max(1, h), eye = eyeFrom(cam);
+    var vp = mul(perspective(34, aspect, Math.max(0.005, cam.dist * 0.02), cam.dist * 20 + 10), lookAt(eye, cam.target, [0, 1, 0]));
+    var x = vp[0] * c[0] + vp[4] * c[1] + vp[8] * c[2] + vp[12], y = vp[1] * c[0] + vp[5] * c[1] + vp[9] * c[2] + vp[13], wv = vp[3] * c[0] + vp[7] * c[1] + vp[11] * c[2] + vp[15];
+    if (wv <= 0) { el.hidden = true; return; }
+    var cw = st.canvas.clientWidth, ch = st.canvas.clientHeight;
+    var sx = (x / wv + 1) / 2 * cw, sy = (1 - y / wv) / 2 * ch;
+    el.hidden = false;
+    el.textContent = subjectTitle(d, st.subject);
+    el.style.left = Math.max(8, Math.min(cw - 8, sx)) + "px";
+    el.style.top = Math.max(8, Math.min(ch - 8, sy)) + "px";
   }
 
   function tick() {
@@ -562,7 +802,10 @@
       if (was === 1 && moved < 10 && Date.now() - t0 < 500 && e.type === "pointerup") {
         var dpr = cv.width / Math.max(1, cv.clientWidth);
         var hit = pickAt(p[0] * dpr, p[1] * dpr);
-        onTap(hit);
+        var now = Date.now(), dbl = hit >= 0 && hit === st._lastTapIdx && now - st._lastTap < 350;
+        st._lastTap = now; st._lastTapIdx = hit;
+        if (dbl) { select([hit], { kind: "part", i: hit }); focusOn([hit], { pad: 1.1 }); }
+        else onTap(hit);
       }
       if (n === 1) { var k = Object.keys(ptrs); last = ptrs[k[0]]; moved = 10; }
     }
@@ -591,13 +834,29 @@
     paintBar();
     invalidate();
   }
+  function partsForCanon(e, prefer) {
+    // "live" wins when it exists and the caller (a living-torso module) asked for it, or when
+    // the viewer is already on the living body; otherwise the reference meshes.
+    var live = e.live || [], ref = e.parts || e.related || [];
+    if (prefer === "live" && live.length) return { src: "live", idxs: live };
+    // A structure the reference body only has "related" pieces for (liver, lungs, lobes) IS
+    // a real surface on the living body: that is the whole reason the second source exists.
+    if (e.kind === "related" && live.length && prefer !== "bp3d") return { src: "live", idxs: live };
+    if (prefer === "bp3d" && ref.length) return { src: "bp3d", idxs: ref };
+    if (st.src === "live" && live.length) return { src: "live", idxs: live };
+    if (ref.length) return { src: "bp3d", idxs: ref };
+    if (live.length) return { src: "live", idxs: live };
+    return { src: st.src, idxs: [] };
+  }
   function selectCanon(cid, opts) {
     var d = st.data, e = d.canon[cid]; if (!e) return false;
+    opts = opts || {};
     if (e.kind === "region") { setRegion(e.region3d); st.subject = { kind: "canon", cid: cid }; openSheet(); return true; }
     if (e.kind === "system") { var only = {}; d.systems.forEach(function (s) { only[s.id] = s.id === e.system3d; }); st.visible = only; st.subject = { kind: "canon", cid: cid }; applyState(); ensureChunks(); openSheet(); paintBar(); return true; }
-    var idxs = e.parts || e.related || [];
-    if (!idxs.length) { st.subject = { kind: "canon", cid: cid }; openSheet(); return true; }
-    select(idxs, { kind: "canon", cid: cid }, opts);
+    var pick = partsForCanon(e, opts.prefer);
+    if (pick.src !== st.src) setSource(pick.src, { keepSel: true, keepCam: true });
+    if (!pick.idxs.length) { st.subject = { kind: "canon", cid: cid }; openSheet(); return true; }
+    select(pick.idxs, { kind: "canon", cid: cid }, opts);
     return true;
   }
   function selectConcept(id) {
@@ -624,27 +883,46 @@
         '<button class="atlas-info" data-a3d-act="info" aria-label="About the 3D anatomy">' + (ico("info") || "i") + "</button></div>" +
       '<div class="a3d-search"><input id="a3dQ" type="search" placeholder="Search 3,432 structures" autocomplete="off" autocorrect="off" spellcheck="false" aria-label="Search structures">' +
         '<div class="a3d-results" id="a3dResults" hidden></div></div>' +
+      '<div class="a3d-src" id="a3dSrc" role="tablist"></div>' +
       '<div class="a3d-chips" id="a3dChips"></div>' +
-      '<div class="a3d-stage" id="a3dStage"><canvas id="a3dCanvas" aria-label="3D anatomy. Drag to orbit, pinch to zoom, tap a structure."></canvas>' +
+      '<div class="a3d-stage" id="a3dStage"><canvas id="a3dCanvas" aria-label="3D anatomy. Drag to orbit, pinch to zoom, tap a structure, double-tap to focus."></canvas>' +
+        '<div class="a3d-label" id="a3dLabel" hidden></div>' +
         '<div class="a3d-progress" id="a3dProgress"></div></div>' +
       '<div class="a3d-bar" id="a3dBar"></div>' +
       '<div class="atlas-foot">Educational reference only — not for diagnosis.</div>';
   }
   function regionLabel(r) { return { HEAD: "Head", BRAIN: "Brain", NECK: "Neck", CHEST: "Chest", ABDOMEN: "Abdomen", PELVIS: "Pelvis", SPINE: "Spine", UPPER_LIMB: "Upper limb", LOWER_LIMB: "Lower limb", BODY: "Body" }[r] || r; }
+  function paintSources() {
+    var el = G.document.getElementById("a3dSrc"); if (!el || !st.data) return;
+    if (st.data.sources.length < 2) { el.hidden = true; return; }
+    el.hidden = false;
+    el.innerHTML = st.data.sources.map(function (s) {
+      return '<button class="a3d-srcbtn' + (st.src === s.id ? " on" : "") + '" role="tab" aria-selected="' + (st.src === s.id ? "true" : "false") + '" data-a3d-act="src" data-id="' + esc(s.id) + '">' + esc(s.short || s.name) + "</button>";
+    }).join("");
+  }
   function paintChips() {
+    paintSources();
     var el = G.document.getElementById("a3dChips"); if (!el || !st.data) return;
-    var rs = [""].concat(st.data.regions.filter(function (r) { return r !== "BODY"; }));
+    var want = srcIndex(), present = {};
+    st.data.parts.forEach(function (p) { if (p.src === want) present[st.data.regions[p.reg]] = 1; });
+    var rs = [""].concat(st.data.regions.filter(function (r) { return r !== "BODY" && present[r]; }));
     el.innerHTML = rs.map(function (r) {
       return '<button class="atlas-chip' + (st.region === r ? " on" : "") + '" data-a3d-act="region" data-r="' + esc(r) + '">' + esc(r ? regionLabel(r) : "Whole body") + "</button>";
     }).join("");
     var sub = G.document.getElementById("a3dSub");
-    if (sub) sub.textContent = st.region ? regionLabel(st.region) : "BodyParts3D reference body";
+    var srcName = (st.data.sources.filter(function (s) { return s.id === st.src; })[0] || {}).name || "";
+    if (sub) sub.textContent = (st.region ? regionLabel(st.region) + " · " : "") + (st.src === "live" ? "Living-patient CT" : "BodyParts3D reference body");
   }
   function paintBar() {
     var el = G.document.getElementById("a3dBar"); if (!el || !st.data) return;
     var hidden = Object.keys(st.hidden).length;
-    el.innerHTML =
+    var pl = st.plane;
+    var sliceRow = pl ? '<div class="a3d-slice"><span>Slice ' + pl.i + "/" + pl.n + '</span><input type="range" min="1" max="' + pl.n + '" value="' + pl.i + '" data-a3d-act="slice" aria-label="CT slice level">' +
+      '<button class="a3d-btn sm" data-a3d-act="ct" data-m="' + esc(pl.m) + '" data-s="" data-i="' + pl.i + '">Open CT</button>' +
+      '<button class="a3d-btn sm" data-a3d-act="planeoff" aria-label="Hide slice">×</button></div>' : "";
+    el.innerHTML = sliceRow +
       '<button class="a3d-btn" data-a3d-act="systems">' + (ico("layers") || "") + "Layers</button>" +
+      '<button class="a3d-btn" data-a3d-act="view" aria-label="Cycle view">' + esc({ "3q": "3/4", front: "Front", side: "Side", back: "Back", top: "Top" }[(VIEWS[st.view] || VIEWS[0]).id]) + "</button>" +
       '<label class="a3d-explode"><span>Explode</span><input type="range" min="0" max="100" value="' + Math.round(st.explodeTarget * 100) + '" data-a3d-act="explode" aria-label="Explode systems"></label>' +
       '<button class="a3d-btn' + (st.isolate ? " on" : "") + '" data-a3d-act="isolate"' + (st.sel.length ? "" : " disabled") + ' aria-pressed="' + (st.isolate ? "true" : "false") + '">Isolate</button>' +
       '<button class="a3d-btn" data-a3d-act="reset">Reset</button>' +
@@ -663,10 +941,16 @@
   function systemsHtml() {
     var d = st.data, counts = {};
     d.parts.forEach(function (p) { var id = d.systems[p.sys].id; counts[id] = (counts[id] || 0) + 1; });
+    var want = srcIndex();
+    counts = {};
+    d.parts.forEach(function (p) { if (p.src !== want) return; var id = d.systems[p.sys].id; counts[id] = (counts[id] || 0) + 1; });
+    var lodRow = (d.lod && want === 0)
+      ? '<li><label><input type="checkbox" data-a3d-act="lod" ' + (st.lod ? "" : "checked") + '><i style="background:#43d9c6"></i><span>Full detail</span><small>' + (st.lod ? "mobile LOD" : "2.3M triangles") + "</small></label></li>"
+      : "";
     return '<div class="a3d-panel" id="a3dSystems"><div class="atlas-top">' +
       '<button class="atlas-back" data-a3d-act="panelclose" aria-label="Close">‹</button>' +
       '<span class="atlas-hd"><span class="atlas-ttl">Layers</span><span class="atlas-sub">' + d.systems.length + " systems</span></span></div>" +
-      '<div class="atlas-scroll"><ul class="a3d-sys">' + d.systems.map(function (s) {
+      '<div class="atlas-scroll"><ul class="a3d-sys">' + lodRow + d.systems.filter(function (s) { return counts[s.id]; }).map(function (s) {
         return '<li><label><input type="checkbox" data-a3d-act="sys" data-id="' + esc(s.id) + '"' + (st.visible[s.id] ? " checked" : "") + ">" +
           '<i style="background:' + esc(s.color) + '"></i><span>' + esc(s.name) + "</span><small>" + (counts[s.id] || 0) + "</small></label></li>";
       }).join("") + "</ul></div></div>";
@@ -684,6 +968,7 @@
         "Licence: " + esc(s.licenceUrl || "https://dbarchive.biosciencedbc.jp/en/bodyparts3d/lic.html") + "<br>" +
         "Dataset: " + esc(s.dataset || "BodyParts3D 4.0") + " · " + esc(s.datasetUrl || "") + "<br>" +
         "Changes: geometry simplified and repacked for mobile; duplicate meshes removed; display-system labels corrected. Packaging derived from Human Atlas (" + esc((s.via && s.via.repo) || "github.com/ashemag/human-atlas") + ", MIT).</p>" +
+      (st.data && st.data.live ? '<p class="atlas-prose atlas-credit">Living CT: CT images and expert segmentations from the TotalSegmentator dataset (Wasserthal et al.), CC BY 4.0 - doi:10.5281/zenodo.10047292. Surfaces are meshed from the dataset\'s masks of one subject; one living patient, not a certified normal.</p>' : "") +
       "</div></div>";
   }
 
@@ -725,14 +1010,20 @@
     if (tab === "correlate") {
       var links = linksFor(d, cid);
       var rows = links.map(function (l) {
-        return '<button class="a3d-link" data-a3d-act="ct" data-m="' + esc(l.m) + '" data-s="' + esc(l.s) + '" data-i="' + l.i + '">' +
-          '<b>' + esc(l.mod) + "</b><span>" + esc(l.t) + "</span><small>slice " + l.i + "</small></button>";
+        return '<div class="a3d-linkrow"><button class="a3d-link" data-a3d-act="ct" data-m="' + esc(l.m) + '" data-s="' + esc(l.s) + '" data-i="' + l.i + '">' +
+          '<b>' + esc(l.mod) + "</b><span>" + esc(l.t) + "</span><small>slice " + l.i + "</small></button>" +
+          (l.plane ? '<button class="a3d-link a3d-plane" data-a3d-act="plane" data-m="' + esc(l.m) + '" data-i="' + l.i + '" aria-label="Show this slice in 3D">Show in 3D</button>' : "") + "</div>";
       }).join("");
       var note = "";
       if (ce && ce.kind === "related") note = '<p class="atlas-prose atlas-notice">' + esc(ce.note || "") + "</p>";
       else if (ce && ce.coverage === "partial" && ce.note) note = '<p class="atlas-prose atlas-notice">' + esc(ce.note) + "</p>";
+      var srcNote = "";
+      if (ce && ce.live && ce.live.length)
+        srcNote = '<p class="atlas-prose a3d-srcnote">' + (st.src === "live"
+          ? "Living-patient surface: meshed from the same CT the torso slices are cut from."
+          : "Also available as a living-patient surface: switch to Living CT or tap Show in 3D on a torso row.") + "</p>";
       var rel = "";
-      if (ce && ce.related && ce.related.length && !(s.kind === "part"))
+      if (ce && ce.related && ce.related.length && !(s.kind === "part") && st.src !== "live")
         rel = '<button class="a3d-link" data-a3d-act="related" data-c="' + esc(cid) + '"><b>3D</b><span>Show related structures</span><small>' + ce.related.length + " meshes</small></button>";
       var lat = "";
       if (ce && (ce.left || ce.right))
@@ -741,7 +1032,7 @@
           '<button class="atlas-pill" data-a3d-act="side" data-c="' + esc(cid) + '" data-side="both">Both</button></div>';
       body = (cid ? '<div class="a3d-canon">RadioAnatome structure: <b>' + esc((ce && ce.name) || cid) + "</b></div>" : "") +
         (rows ? '<div class="a3d-links">' + rows + "</div>" : '<div class="atlas-empty">' + (cid ? "Not labelled in any CT or MRI module yet." : "No matching RadioAnatome structure. Search the CT and MRI modules by name instead.") + "</div>") +
-        note + rel + lat;
+        srcNote + (st.src === "live" && ce && ce.kind === "related" ? "" : note) + rel + lat;
     } else if (tab === "hierarchy") {
       var cs = s.kind === "part" ? (d.conceptsOfPart[s.i] || []) : s.kind === "concept" ? [d.conceptById[s.id]] : [];
       cs = cs.slice().sort(function (a, b) { return a.parts.length - b.parts.length; });
@@ -758,6 +1049,7 @@
       '<h2 class="atlas-sheet-ttl">' + esc(title) + "</h2>" +
       '<div class="atlas-pills">' +
         (sysId ? '<span class="atlas-pill cat"><i style="background:' + esc(sysId.color) + '"></i>' + esc(sysId.name) + "</span>" : "") +
+        (st.src === "live" ? '<span class="atlas-pill live">Living CT</span>' : "") +
         (region ? '<span class="atlas-pill">' + esc(regionLabel(region)) + "</span>" : "") +
         (fma ? '<span class="atlas-pill mono">' + esc(fma) + "</span>" : "") +
         '<button class="atlas-pill' + (st.isolate ? " on" : "") + '" data-a3d-act="isolate" aria-pressed="' + (st.isolate ? "true" : "false") + '">Isolate</button>' +
@@ -773,6 +1065,7 @@
     el.id = "a3dSheet"; el.className = "atlas-sheet sheet a3d-sheet";
     el.setAttribute("role", "dialog"); el.setAttribute("aria-modal", "false");
     rootEl().appendChild(el);
+    try { if (G.ATLAS && G.ATLAS._bindSheetDrag) G.ATLAS._bindSheetDrag(el, 330, function () { select([], null); }); } catch (e) {}
     return el;
   }
   function openSheet() { var el = sheetEl(); el.innerHTML = sheetHtml(st._tab); el.classList.remove("full"); el.classList.add("on"); }
@@ -786,6 +1079,7 @@
     if (!hits.length) { box.hidden = true; box.innerHTML = ""; return; }
     box.hidden = false;
     box.innerHTML = hits.map(function (h) {
+      if (h.type === "canon") return '<button class="a3d-hit canon" data-a3d-act="canon" data-c="' + esc(h.cid) + '"><span>' + esc(h.name) + "</span><small>CT / MRI · " + h.n + " modules</small></button>";
       return h.type === "concept"
         ? '<button class="a3d-hit" data-a3d-act="concept" data-id="' + esc(h.id) + '"><span>' + esc(h.name) + "</span><small>" + h.n + " meshes</small></button>"
         : '<button class="a3d-hit" data-a3d-act="part" data-i="' + h.i + '"><span>' + esc(h.name) + "</span><small>" + esc(st.data.systems[h.sys].name) + "</small></button>";
@@ -809,13 +1103,19 @@
     if (act === "unhide") { unhideAll(); return; }
     if (act === "reset") { st.region = ""; st.isolate = false; st.hidden = {}; st.explodeTarget = 0; select([], null); applyState(); paintChips(); resetCamera(); return; }
     if (act === "tab") { st._tab = t.getAttribute("data-tab"); openSheet(); return; }
+    if (act === "view") { cycleView(); return; }
+    if (act === "planeoff") { clearPlane(); return; }
     if (!d) return;
+    if (act === "src") { hideResults(); setSource(t.getAttribute("data-id")); return; }
+    if (act === "canon") { hideResults(); st._tab = "correlate"; selectCanon(t.getAttribute("data-c")); return; }
+    if (act === "plane") { setPlane(t.getAttribute("data-m"), +t.getAttribute("data-i")); if (st.subject) openSheet(); return; }
     if (act === "part") { hideResults(); select([+t.getAttribute("data-i")], { kind: "part", i: +t.getAttribute("data-i") }); return; }
     if (act === "concept") { hideResults(); dropPanel("a3dSystems"); selectConcept(t.getAttribute("data-id")); return; }
     if (act === "related") { var ce = d.canon[t.getAttribute("data-c")]; if (ce && ce.related) select(ce.related, { kind: "canon", cid: t.getAttribute("data-c") }); return; }
     if (act === "side") {
       var cid = t.getAttribute("data-c"), side = t.getAttribute("data-side"), en = d.canon[cid]; if (!en) return;
-      var idxs = side === "both" ? (en.parts || en.related || []) : ((en[side] && en[side].parts) || []);
+      var live = st.src === "live";
+      var idxs = side === "both" ? (live ? (en.live || []) : (en.parts || en.related || [])) : ((en[side] && (live ? en[side].live : en[side].parts)) || []);
       if (idxs.length) select(idxs, { kind: "canon", cid: cid });
       return;
     }
@@ -829,11 +1129,17 @@
     var t = e.target; if (!t || !t.getAttribute) return;
     var act = t.getAttribute("data-a3d-act");
     if (act === "sys") setSystem(t.getAttribute("data-id"), t.checked);
+    if (act === "lod") { setLod(!t.checked); var sm = t.parentNode && t.parentNode.querySelector("small"); if (sm) sm.textContent = st.lod ? "mobile LOD" : "2.3M triangles"; }
     if (act === "explode") { st.explodeTarget = (+t.value || 0) / 100; schedule(); }
+    if (act === "slice" && st.plane) { setPlane(st.plane.m, +t.value, { noFocus: true }); if (st.subject) openSheet(); }
   }
   function onInput(e) {
     var t = e.target; if (!t || t.id !== "a3dQ") return;
     paintResults(t.value);
+  }
+  function onSliceInput(e) {
+    var t = e.target; if (!t || t.getAttribute("data-a3d-act") !== "slice" || !st.plane) return;
+    var lbl = t.parentNode && t.parentNode.querySelector("span"); if (lbl) lbl.textContent = "Slice " + t.value + "/" + st.plane.n;
   }
   function hideResults() { var q = G.document.getElementById("a3dQ"); if (q) q.value = ""; var box = G.document.getElementById("a3dResults"); if (box) { box.hidden = true; box.innerHTML = ""; } }
 
@@ -848,9 +1154,12 @@
     el.removeEventListener("click", onClick); el.addEventListener("click", onClick);
     el.removeEventListener("change", onChange); el.addEventListener("change", onChange);
     el.removeEventListener("input", onInput); el.addEventListener("input", onInput);
+    el.removeEventListener("input", onSliceInput); el.addEventListener("input", onSliceInput);
     el.innerHTML = shellHtml();
     el.classList.add("on");
     st.err = ""; st.base = null; st.sel = []; st.subject = null; st.isolate = false; st.hidden = {}; st.region = ""; st.explodeTarget = 0; st.explode = 0;
+    st.plane = null; st.src = "bp3d"; st.view = 0;
+    try { var lodPref = G.localStorage && G.localStorage.getItem("smd_atlas3d_lod"); st.lod = lodPref == null ? isTouch() : lodPref === "1"; } catch (e3) { st.lod = isTouch(); }
     st.cam = { target: [0, 0.92, 0], yaw: 0.45, pitch: 0.12, dist: 2.7 }; st.camTo = null;
     paintProgress();
     loadManifest().then(function (d) {
@@ -862,8 +1171,13 @@
       resizeCanvas();
       paintChips(); paintBar();
       applyState();
-      if (opts.canon && d.canon[opts.canon]) selectCanon(opts.canon, { noFocus: false });
+      // Opened from a living-torso slice: land on the living body with THAT slice as the cut.
+      var fromLive = opts.from && d.planes[opts.from.m] && d.planes[opts.from.m][String(opts.from.i)];
+      if (opts.src === "live" || fromLive) setSource("live", { keepCam: true });
+      if (opts.canon && d.canon[opts.canon]) selectCanon(opts.canon, { noFocus: !!fromLive, prefer: fromLive ? "live" : opts.src });
       else if (opts.region) setRegion(opts.region);
+      if (fromLive) setPlane(opts.from.m, opts.from.i);
+      else if (!opts.canon && st.src === "live") focusSource();
       if (opts.partId != null && d.byId[opts.partId] != null) select([d.byId[opts.partId]], { kind: "part", i: d.byId[opts.partId] });
       ensureChunks().then(function () { paintProgress(); if (st.sel.length) focusOn(st.sel, { pad: 1.25 }); invalidate(); });
       invalidate();
@@ -907,6 +1221,9 @@
   G.ATLAS3D.hasCanon = hasCanon;
   G.ATLAS3D.kindOf = function (cid) { return (st.index && st.index[cid]) || null; };
   G.ATLAS3D.selectCanon = selectCanon;
+  G.ATLAS3D.setSource = setSource;
+  G.ATLAS3D.setPlane = setPlane;
+  G.ATLAS3D.setLod = setLod;
   G.ATLAS3D._state = st;
   G.ATLAS3D._select = select;
   G.ATLAS3D._sheetHtml = sheetHtml;
@@ -915,7 +1232,7 @@
     canonicalOf: canonicalOf, parseManifest: parseManifest, search: search, unionBounds: unionBounds,
     fitDistance: fitDistance, encodePick: encodePick, decodePick: decodePick, canonOfPart: canonOfPart,
     linksFor: linksFor, regionParts: regionParts, perspective: perspective, lookAt: lookAt, mul: mul, eyeFrom: eyeFrom,
-    looksLikeChunk: looksLikeChunk, dataBases: dataBases
+    looksLikeChunk: looksLikeChunk, dataBases: dataBases, dataUrl: dataUrl
   };
   G.ATLAS3D._version = "1.0";
 
