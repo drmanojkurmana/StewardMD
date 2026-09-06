@@ -638,7 +638,10 @@ export async function onRequest(context) {
       // Off, the default: no key, the response is what it was. The console reads
       // GET /api/wardsynq/:tenant/patient/:patientId/<Observation|ClinicalNote> with its own
       // credentials; the record decides for itself whether this person may see them.
-      const link = await recordLinkForOrg(env, s.orgId || s.hospitalId, { getOrg: ORG.getOrg, tenantRow: wsqTenantRow });
+      // A native wardsynq org links to its record regardless of the global flag (the same
+      // wsqForcedMigration() every write for it already uses); every other mode is unchanged.
+      const forced = await wsqForcedMigration(env, await ORG.getOrg(env, s.orgId || s.hospitalId));
+      const link = forced && !forced.error ? { tenantId: forced.tenantId } : await recordLinkForOrg(env, s.orgId || s.hospitalId, { getOrg: ORG.getOrg, tenantRow: wsqTenantRow });
       if (link) {
         out.record = { tenantId: link.tenantId, patientId: patientIdForTicket(t), ticketId: t.id };
         // Results is the one migration where "authoritative" does not mean "WardSynQ is the write
