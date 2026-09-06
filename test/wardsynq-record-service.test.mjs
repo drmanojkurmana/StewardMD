@@ -2336,3 +2336,20 @@ test("wiring: the native assessment-save route calls this ONLY for wardsynq-nati
   assert.ok(h.includes("recordAllergiesFromAssessment("));
   assert.ok(h.includes("isAssessment && !isSignOff && wsqMig"), "gated on isAssessment, not sign-off, and wsqMig specifically - not mig.mode alone");
 });
+
+// 2026-09-07, real-device end-to-end verification (part 2): the remaining redundant hop.
+// orgForTenant() (functions/_wardsynq/org.js) finds an org from a tenant by a Firestore FIELD QUERY
+// unless the tenant's own settings.wardsynq.orgId already names it explicitly - its fastest path,
+// a single doc get. Nothing wrote that explicit pointer before, so every wardsynq/Connect-tenant
+// actor resolution paid for the slow query PLUS authorizeOrg's own getOrg, every single time.
+test("wsqLinkTenantOrg: writes the reciprocal tenant->org pointer once, at link time, so orgForTenant's fast path is used from then on", () => {
+  const src = readFileSync(new URL("../functions/api/queue/[[path]].js", import.meta.url), "utf8");
+  const fn = src.slice(src.indexOf("async function wsqLinkTenantOrg"), src.indexOf("import \"../../_opd_ghis_connector.js\""));
+  assert.ok(fn.includes("settings.wardsynq"), "writes to the SAME settings.wardsynq.orgId shape orgForTenant's fast path already reads");
+  assert.ok(fn.includes("already linked, no write needed"), "idempotent - a repeat link does not re-write on every call");
+  assert.ok(fn.includes("catch (e)"), "best-effort - a failed write never blocks the org update itself");
+  // Wired into org/update, ONLY when connectTenantId is actually part of this update - not on every
+  // unrelated org edit (name change, threshold tweak, ...).
+  const route = src.slice(src.indexOf('seg === "org" && sub === "update"'), src.indexOf('seg === "org" && sub === "delete"'));
+  assert.ok(route.includes("if (body.connectTenantId) await wsqLinkTenantOrg("), "only runs when this update actually sets/changes the tenant link");
+});

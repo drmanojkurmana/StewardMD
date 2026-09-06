@@ -95,6 +95,29 @@ async function wsqForcedMigration(env, org) {
   if (!tenant) return { mode: "authoritative", tenantId: null, error: "wardsynq_tenant_not_configured" };
   return { mode: "authoritative", tenantId: String(tenantId) };
 }
+// The REMAINING redundant hop from the comment above: functions/_wardsynq/org.js's orgForTenant()
+// finds an org from a tenant by a Firestore FIELD QUERY (q_orgs where connectTenantId==tenant.id) -
+// its slowest path - unless the tenant's own settings already name the org explicitly
+// (settings.wardsynq.orgId), which is its FASTEST path, a single doc get inside authorizeOrg's own
+// getOrg immediately after. Nothing writes that explicit pointer today, so every wardsynq/Connect-
+// tenant record actor resolution pays for the slow query, every time, on top of authorizeOrg's own
+// getOrg. Writing it ONCE, here, at the moment an org is linked to a tenant (POST /api/queue/org/
+// update with connectTenantId) makes every subsequent resolveClinicalActor call for that tenant take
+// the fast path instead. Best-effort and silent on failure: a missed reciprocal pointer degrades to
+// the pre-existing (slow but working) query path, never to a broken link.
+async function wsqLinkTenantOrg(env, org) {
+  try {
+    if (!env.CONNECT_DB || !org || !org.connectTenantId) return;
+    const tenant = await wsqTenantRow(env, org.connectTenantId);
+    if (!tenant) return;
+    let settings = {};
+    try { settings = typeof tenant.settings === "string" ? JSON.parse(tenant.settings || "{}") : (tenant.settings || {}); } catch { settings = {}; }
+    if (settings.wardsynq && settings.wardsynq.orgId === org.id) return;   // already linked, no write needed
+    settings.wardsynq = Object.assign({}, settings.wardsynq, { orgId: org.id });
+    await env.CONNECT_DB.prepare("UPDATE connect_tenant SET settings=?, updated_at=? WHERE id=?")
+      .bind(JSON.stringify(settings), new Date().toISOString(), String(org.connectTenantId)).run();
+  } catch (e) { /* best-effort: a missed reciprocal link never blocks the org update itself */ }
+}
 import "../../_opd_ghis_connector.js";   // side-effect: registers the "ghis" OPD connector
 import "../../_opd_connect_connector.js";   // side-effect: registers the "connect" OPD connector (any FHIR hospital via Connect EMR)
 import * as ONCO from "../../_onco_store.js";
@@ -723,7 +746,14 @@ export async function onRequest(context) {
           return json({ ok: false, error: "institution_provisioning_required" }, 403, request);
         return json({ ok: true, org: await ORG.createOrg(env, body, actor.id) }, 200, request);
       }
-      if (seg === "org" && sub === "update") { const az = await azOrg(CAPS.STAFF_ADMIN); if (!az.ok) return deny(az); return json({ ok: true, org: await ORG.updateOrg(env, body.orgId, body, actor.id) }, 200, request); }
+      if (seg === "org" && sub === "update") {
+        const az = await azOrg(CAPS.STAFF_ADMIN); if (!az.ok) return deny(az);
+        const updated = await ORG.updateOrg(env, body.orgId, body, actor.id);
+        // Best-effort, only when this update actually set/changed the tenant link - see
+        // wsqLinkTenantOrg's own header for why this is a real fix, not a nice-to-have.
+        if (body.connectTenantId) await wsqLinkTenantOrg(env, updated);
+        return json({ ok: true, org: updated }, 200, request);
+      }
       if (seg === "org" && sub === "delete") { const az = await azOrg(CAPS.STAFF_ADMIN); if (!az.ok) return deny(az); return json({ ok: true, deleted: await ORG.deleteOrg(env, body.orgId, actor.id) }, 200, request); }
       // One-tap: turn a Connect EMR connection into an OPD hospital (so it appears in the app's Hospital list
       // and its FHIR worklist auto-imports). Called from the Connect wizard's "Use in OPD" button.
