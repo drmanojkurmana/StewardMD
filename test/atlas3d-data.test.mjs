@@ -35,13 +35,14 @@ ok("provenance doc lists every rejected mesh", provenance.rejected.every((r) => 
 
 // --- parts ---
 const parts = manifest.parts;
-const ref = parts.filter((p) => !p[10]), live = parts.filter((p) => p[10] === 1);
+const ref = parts.filter((p) => !p[10]), live = parts.filter((p) => p[10] === 1), wb = parts.filter((p) => p[10] === 2);
 ok("2,227 BodyParts3D meshes shipped (2,234 upstream minus 7 exact duplicates)", ref.length === 2227 && provenance.rejected.length === 7);
-ok("66 living-CT surfaces appended after them (source flag 1): 38 organs/vessels/muscles, 27 bones, 1 body surface", live.length === 66 && parts.length === 2293 && live.every((p, k) => parts[2227 + k] === p));
+ok("66 living-CT surfaces appended after them (source flag 1): 38 organs/vessels/muscles, 27 bones, 1 body surface", live.length === 66 && parts.length === 2360 && live.every((p, k) => parts[2227 + k] === p));
 ok("every living-CT part has a torso region and a side only where sided; all but the body surface and costal cartilages name a canonical structure", live.every((p) => ["CHEST", "ABDOMEN", "PELVIS", "SPINE", "BODY"].includes(manifest.regions[p[4]]) && (p[11] === null || p[11] === "left" || p[11] === "right")) && live.filter((p) => !p[9]).map((p) => p[1]).sort().join("|") === "Body surface (skin)|Costal cartilages" && live.filter((p) => p[9]).every((p) => onto[p[9]]));
 ok("living skeleton: T10-L5 + S1 vertebrae, sacrum, lower ribs, hip bones, femurs on the bone canonicals", (() => { const sk = live.filter((p) => manifest.systems[p[3]].id === "skeletal"); const c = {}; sk.forEach((p) => { c[p[9] || "none"] = (c[p[9] || "none"] || 0) + 1; }); return sk.length === 27 && c.THORACIC_VERTEBRA === 3 && c.LUMBAR_VERTEBRA === 5 && c.SACRUM === 2 && c.RIB === 12 && c.HIP_BONE === 2 && c.FEMUR === 2 && c.none === 1; })());
 ok("the body surface is one integumentary part spanning the whole scan", (() => { const s = live.filter((p) => manifest.systems[p[3]].id === "integumentary"); return s.length === 1 && manifest.regions[s[0][4]] === "BODY" && (s[0][8][4] - s[0][8][1]) > 0.4; })());
-ok("sources: reference body + living CT", manifest.sources.length === 2 && manifest.sources[1].id === "live" && manifest.sources[1].modules.length === 3);
+ok("sources: reference body + living CT + whole body", manifest.sources.length === 3 && manifest.sources[1].id === "live" && manifest.sources[1].modules.length === 3 && manifest.sources[2].id === "wb");
+ok("whole-body Visible Human source (flag 2): 67 parts appended after the living CT, a full-body skin and a head-to-toe skeleton (skull + cervical spine + femurs)", (() => { if (wb.length !== 67 || parts[2293] !== wb[0]) return false; const skin = wb.filter((p) => manifest.systems[p[3]].id === "integumentary"); const sk = wb.filter((p) => manifest.systems[p[3]].id === "skeletal"); const c = {}; sk.forEach((p) => { c[p[9] || "none"] = (c[p[9] || "none"] || 0) + 1; }); return skin.length === 1 && (skin[0][8][4] - skin[0][8][1]) > 1.5 && sk.length >= 40 && c.SKULL === 1 && c.CERVICAL_VERTEBRA === 5 && c.FEMUR === 2; })());
 ok("every rejection is an exact duplicate", provenance.rejected.every((r) => /exact duplicate/.test(r.reason)));
 const ids = new Set(parts.map((p) => p[0]));
 ok("part ids are unique", ids.size === parts.length);
@@ -87,7 +88,7 @@ ok("chunk sha256 checksums match the manifest", shaOk);
 ok("chunk raw/gz sizes match the manifest", sizeOk);
 ok("every index is inside its chunk and every part's vertices carry its own part index", maxIdxOk);
 ok("triangle total matches stats", Math.round(triangles) === manifest.stats.triangles);
-ok("full set under 40 MB and LOD set under 25 MB gzipped (streamed from R2 per system, never bundled)", manifest.stats.gz_bytes < 40e6 && manifest.lod.stats.gz < 25e6);
+ok("each body streams within budget (living CT + whole body under 20 MB each, LOD under 25 MB, three bodies under 60 MB total) — streamed from R2 per source, never bundled", manifest.stats.gz_bytes < 60e6 && manifest.lod.stats.gz < 25e6 && manifest.live.stats.gz < 20e6 && manifest.wb.stats.gz < 20e6);
 // --- slice planes (living CT): every torso slice registered, on a monotonic line ---
 const planes = manifest.planes;
 ok("72 slice planes: 24 per living-torso module", Object.keys(planes).length === 3 && Object.values(planes).every((m) => Object.keys(m).length === 24));

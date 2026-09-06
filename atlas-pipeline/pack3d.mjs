@@ -115,6 +115,36 @@ if (mode === "live") {
   packer.flush(); packer.write();
   fs.writeFileSync(path.join(OUT, "live.json"), JSON.stringify({ frame: meta.frame, source: meta.source, planes: meta.planes, parts, chunks: packer.chunks, stats: { parts: parts.length, sourceTriangles: srcTris, triangles: tris, maxError: maxErr, gz: packer.chunks.reduce((s, c) => s + c.gz, 0) } }));
   console.log(JSON.stringify({ parts: parts.length, sourceTriangles: srcTris, triangles: tris, maxError: +maxErr.toFixed(4), chunks: packer.chunks.length, gzMB: +(packer.chunks.reduce((s, c) => s + c.gz, 0) / 1e6).toFixed(1) }));
+} else if (mode === "wb") {
+  // Whole-body Visible Human living body (live3d_wb.py -> parts.bin + wb3d.json), same binary
+  // layout as the living-CT body; packed to wb-*.bin.gz and merged as a third source (src 2).
+  const IN = path.resolve(opt("in", path.join(HERE, "work", "wb3d")));
+  const base = +opt("base", 0);
+  const meta = JSON.parse(fs.readFileSync(path.join(IN, "wb3d.json"), "utf8"));
+  const bin = fs.readFileSync(path.join(IN, "parts.bin"));
+  const packer = new Packer("wb-");
+  const parts = [];
+  let srcTris = 0, tris = 0, maxErr = 0;
+  const order = [...meta.parts].sort((a, b) => a.system.localeCompare(b.system) || a.id.localeCompare(b.id));
+  for (const p of order) {
+    const pos0 = new Float32Array(bin.buffer.slice(bin.byteOffset + p.pos, bin.byteOffset + p.pos + p.nv * 12));
+    const idx0 = new Uint32Array(bin.buffer.slice(bin.byteOffset + p.idx, bin.byteOffset + p.idx + p.ni * 4));
+    srcTris += idx0.length / 3;
+    // The full-body skin is one giant part (~1.8M tris) that cannot be split across chunks, so
+    // simplify it much harder than the skeleton/organs to keep every chunk under the raw cap;
+    // it is only a translucent envelope, so it loses no readability.
+    const r = p.id === "WB_body_surface" ? +opt("skinRatio", 0.05) : +opt("ratio", 0.28);
+    const s = simplify(pos0, idx0, r, +opt("error", 0.008));
+    maxErr = Math.max(maxErr, s.err); tris += s.idx.length / 3;
+    const nrm = smoothNormals(s.pos, s.idx);
+    const gi = base + parts.length;
+    if (gi > 65535) throw new Error("part index overflow");
+    const loc = packer.add(p.system, gi, s.pos, nrm, s.idx);
+    parts.push({ id: p.id, name: p.name, stem: p.stem, sid: p.sid, canon: p.canon, side: p.side, system: p.system, region: p.region, bounds: p.bounds.map((v) => +v.toFixed(5)), ...loc, tris: s.idx.length / 3 });
+  }
+  packer.flush(); packer.write();
+  fs.writeFileSync(path.join(OUT, "wb.json"), JSON.stringify({ frame: meta.frame, source: meta.source, planes: meta.planes, parts, chunks: packer.chunks, stats: { parts: parts.length, sourceTriangles: srcTris, triangles: tris, maxError: maxErr, gz: packer.chunks.reduce((s, c) => s + c.gz, 0) } }));
+  console.log(JSON.stringify({ parts: parts.length, sourceTriangles: srcTris, triangles: tris, maxError: +maxErr.toFixed(4), chunks: packer.chunks.length, gzMB: +(packer.chunks.reduce((s, c) => s + c.gz, 0) / 1e6).toFixed(1) }));
 } else if (mode === "lod") {
   const manifest = JSON.parse(fs.readFileSync(path.join(OUT, "manifest.json"), "utf8"));
   const ratio = +opt("ratio", 0.4), error = +opt("error", 0.004);

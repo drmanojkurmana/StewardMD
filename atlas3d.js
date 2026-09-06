@@ -301,10 +301,14 @@
   // The active chunk set: LOD chunks stand in for the reference body's full chunks on phones;
   // living-CT chunks (src 1) have one level only. Chunks are keyed by id so sets can coexist.
   function chunkSet() {
-    var d = st.data;
-    var full = d.chunks.filter(function (c) { return !c.src; }), live = d.chunks.filter(function (c) { return c.src === 1; });
+    var d = st.data, want = srcIndex();
+    var full = d.chunks.filter(function (c) { return !c.src; });
     var ref = (st.lod && d.lod && d.lod.chunks && d.lod.chunks.length) ? d.lod.chunks.map(function (c) { return Object.assign({}, c, { lod: true }); }) : full;
-    return ref.concat(live.map(function (c) { return Object.assign({}, c, { src: 1 }); }));
+    // Load the reference body plus the CURRENT living source's chunks (live OR whole body).
+    // A third whole-body source would double the memory if all three loaded at once, so the
+    // living chunks stream in when their tab is selected.
+    var living = want >= 1 ? d.chunks.filter(function (c) { return c.src === want; }) : [];
+    return ref.concat(living);
   }
   // Fetch through the shared on-device model cache when it is present (Cache API, else
   // IndexedDB): the second open of the 3D layer costs no network and works offline. Bytes are
@@ -351,14 +355,16 @@
     });
     return st.loading[key];
   }
-  function srcIndex() { return st.src === "live" ? 1 : 0; }
+  // 0 = reference body, 1 = living-CT torso, 2 = whole-body Visible Human. Any index >= 1 is a
+  // living body (skin outline, bowel hidden by default, no muscle layers).
+  function srcIndex() { var d = st.data; if (!d || !d.sources) return 0; for (var i = 0; i < d.sources.length; i++) if (d.sources[i].id === st.src) return i; return 0; }
   function neededChunks() {
     var d = st.data, need = [];
     var sysNeeded = {};
     d.systems.forEach(function (s) { if (st.visible[s.id]) sysNeeded[s.id] = 1; });
     st.sel.forEach(function (i) { sysNeeded[d.systems[d.parts[i].sys].id] = 1; });
     var want = srcIndex();
-    if (want === 1 && st.shell) sysNeeded.integumentary = 1;
+    if (want >= 1 && st.shell) sysNeeded.integumentary = 1;
     chunkSet().forEach(function (c) { if ((c.src || 0) === want && sysNeeded[c.system] && !st.chunks[c.id]) need.push(c); });
     return need;
   }
@@ -392,7 +398,7 @@
   var FS = [
     "precision mediump float;",
     "varying vec3 vN; varying vec3 vP; varying vec3 vState;",
-    "uniform vec3 uColor; uniform vec3 uEye; uniform vec3 uBg; uniform vec3 uSel; uniform float uPass; uniform float uGhost; uniform vec4 uClip; uniform float uClipOn;",
+    "uniform vec3 uColor; uniform vec3 uEye; uniform vec3 uBg; uniform vec3 uSel; uniform float uPass; uniform float uGhost; uniform vec4 uClip; uniform float uClipOn; uniform vec4 uShellCut;",
     "void main(){",
     " if (vState.r < 0.5) discard;",
     " if (uClipOn > 0.5 && dot(vP, uClip.xyz) > uClip.w) discard;",
@@ -420,7 +426,7 @@
     "   a = uGhost * (0.42 + 1.7 * fres);",
     // the outline fades out over the last ~4 cm at the scan's cut top/bottom (y 0.62 .. 1.058 m
     // in live.json's frame), so the shell reads as a body and not a sawn-off tube.
-    "   a *= smoothstep(0.62, 0.665, vP.y) * (1.0 - smoothstep(1.01, 1.058, vP.y));",
+    "   a *= smoothstep(uShellCut.x, uShellCut.y, vP.y) * (1.0 - smoothstep(uShellCut.z, uShellCut.w, vP.y));",
     " }",
     " gl_FragColor = vec4(c, a);",
     "}"].join("\n");
@@ -444,7 +450,7 @@
     gl.linkProgram(p);
     if (!gl.getProgramParameter(p, gl.LINK_STATUS)) throw new Error("link: " + gl.getProgramInfoLog(p));
     var u = {};
-    ["uVP", "uOffset", "uState", "uColor", "uEye", "uBg", "uSel", "uPass", "uGhost", "uClip", "uClipOn", "uTex", "uAlpha"].forEach(function (n) { u[n] = gl.getUniformLocation(p, n); });
+    ["uVP", "uOffset", "uState", "uColor", "uEye", "uBg", "uSel", "uPass", "uGhost", "uClip", "uClipOn", "uShellCut", "uTex", "uAlpha"].forEach(function (n) { u[n] = gl.getUniformLocation(p, n); });
     return { p: p, u: u };
   }
 
@@ -510,7 +516,7 @@
     var ri = st.region ? d.regions.indexOf(st.region) : -1, want = srcIndex();
     for (var i = 0; i < d.parts.length; i++) {
       var p = d.parts[i], o = i * 4;
-      var sysId = d.systems[p.sys].id, shell = p.src === 1 && sysId === "integumentary";
+      var sysId = d.systems[p.sys].id, shell = p.src >= 1 && sysId === "integumentary";
       var vis = st.visible[sysId] && !st.hidden[i] && p.src === want;
       if (ri >= 0 && p.reg !== ri) vis = false;
       if (selSet[i] && p.src === want) vis = true;
@@ -518,7 +524,7 @@
       // The living body's skin is a faint outline drawn in its own pass, never a solid layer:
       // it is what makes the organs read as a patient. Shown whenever the source is live
       // and the outline switch is on, regardless of region or isolate.
-      if (shell) vis = want === 1 && st.shell && !st.hidden[i];
+      if (shell) vis = want >= 1 && st.shell && !st.hidden[i];
       buf[o] = vis ? 255 : 0;
       buf[o + 1] = selSet[i] && !shell ? 255 : 0;
       buf[o + 2] = shell ? 128 : (hasSel && !selSet[i] && !st.isolate ? 255 : 0);
@@ -558,6 +564,9 @@
       gl.uniform3fv(prog.u.uSel, new Float32Array(SEL_TINT));
       gl.uniform1f(prog.u.uPass, pass || 0);
       gl.uniform1f(prog.u.uGhost, pass === 3 ? 0.42 : pass === 4 ? 0.26 : 0.16);
+      // The living-CT torso is a cut scan, so its skin fades out over the cut top/bottom;
+      // the whole body is a complete scan, so it uses no fade (cut window pushed off the body).
+      gl.uniform4fv(prog.u.uShellCut, new Float32Array(st.src === "wb" ? [-9, -9, 99, 99] : [0.62, 0.665, 1.01, 1.058]));
     }
     var sysIdx = {}; d.systems.forEach(function (s, i) { sysIdx[s.id] = i; });
     var want = srcIndex();
@@ -596,7 +605,7 @@
       drawScene(R.main, false, 3);
       gl.enable(gl.DEPTH_TEST); gl.depthMask(true); gl.disable(gl.BLEND);
     }
-    if (st.src === "live" && st.shell) {
+    if (srcIndex() >= 1 && st.shell) {
       // pass 4: the body outline, translucent, depth-tested (the far skin stays behind organs)
       gl.enable(gl.BLEND); gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA); gl.depthMask(false);
       drawScene(R.main, false, 4);
@@ -742,7 +751,7 @@
   // On the living body the small bowel and colon wrap every other organ from any anterior
   // angle (they are real, and huge); hide them until asked, the way the reference body hides
   // muscles and skin. Selecting COLON or SMALL_BOWEL still shows them (selection wins).
-  var LIVE_BOWEL = ["LIVE_small_bowel", "LIVE_colon", "LIVE_duodenum"];
+  var LIVE_BOWEL = ["LIVE_small_bowel", "LIVE_colon", "LIVE_duodenum", "WB_small_bowel", "WB_colon", "WB_duodenum"];
   function liveDefaults() {
     var d = st.data; if (!d) return;
     LIVE_BOWEL.forEach(function (id) {
@@ -757,7 +766,7 @@
     var v = VIEWS[st.view] || VIEWS[0];
     // The living torso is nearly square; on a tall phone canvas the width-fit leaves it small,
     // so it may fill the width (the bottom bar never covers the body's centre).
-    st.camTo = { target: center(b), yaw: v.yaw, pitch: v.pitch, dist: fitDistance(b, 34, aspect) * (want ? 0.86 : 1.02) };
+    st.camTo = { target: center(b), yaw: v.yaw, pitch: v.pitch, dist: fitDistance(b, 34, aspect) * (want === 1 ? 0.86 : want >= 2 ? 1.05 : 1.02) };
     schedule();
   }
   function setLod(on) {
@@ -913,15 +922,21 @@
   function partsForCanon(e, prefer) {
     // "live" wins when it exists and the caller (a living-torso module) asked for it, or when
     // the viewer is already on the living body; otherwise the reference meshes.
-    var live = e.live || [], ref = e.parts || e.related || [];
+    var live = e.live || [], wb = e.wb || [], ref = e.parts || e.related || [];
     if (prefer === "live" && live.length) return { src: "live", idxs: live };
-    // A structure the reference body only has "related" pieces for (liver, lungs, lobes) IS
-    // a real surface on the living body: that is the whole reason the second source exists.
-    if (e.kind === "related" && live.length && prefer !== "bp3d") return { src: "live", idxs: live };
+    if (prefer === "wb" && wb.length) return { src: "wb", idxs: wb };
     if (prefer === "bp3d" && ref.length) return { src: "bp3d", idxs: ref };
+    // Stay on the body the viewer is already showing before any fallback, so selecting the
+    // liver on the whole body keeps you on the whole body (not the living torso).
+    if (st.src === "wb" && wb.length) return { src: "wb", idxs: wb };
     if (st.src === "live" && live.length) return { src: "live", idxs: live };
+    // A structure the reference body only has "related" pieces for (liver, lungs, lobes) IS
+    // a real surface on a living body: that is the whole reason the other sources exist.
+    if (e.kind === "related" && live.length && prefer !== "bp3d") return { src: "live", idxs: live };
+    if (e.kind === "related" && wb.length && prefer !== "bp3d") return { src: "wb", idxs: wb };
     if (ref.length) return { src: "bp3d", idxs: ref };
     if (live.length) return { src: "live", idxs: live };
+    if (wb.length) return { src: "wb", idxs: wb };
     return { src: st.src, idxs: [] };
   }
   function selectCanon(cid, opts) {
@@ -952,7 +967,7 @@
   // parts hidden by the user (the living body's default-hidden bowel is a Layers switch, not a hide)
   function userHiddenCount() {
     var d = st.data, n = 0, dflt = {};
-    if (d && st.src === "live" && !st.bowel) LIVE_BOWEL.forEach(function (id) { if (d.byId[id] != null) dflt[d.byId[id]] = 1; });
+    if (d && srcIndex() >= 1 && !st.bowel) LIVE_BOWEL.forEach(function (id) { if (d.byId[id] != null) dflt[d.byId[id]] = 1; });
     Object.keys(st.hidden).forEach(function (k) { if (!dflt[k]) n++; });
     return n;
   }
@@ -994,7 +1009,7 @@
     }).join("");
     var sub = G.document.getElementById("a3dSub");
     var srcName = (st.data.sources.filter(function (s) { return s.id === st.src; })[0] || {}).name || "";
-    if (sub) sub.textContent = (st.region ? regionLabel(st.region) + " · " : "") + (st.src === "live" ? "Living-patient CT" : "BodyParts3D reference body");
+    if (sub) sub.textContent = (st.region ? regionLabel(st.region) + " · " : "") + (st.src === "live" ? "Living-patient CT" : st.src === "wb" ? "Visible Human whole body" : "BodyParts3D reference body");
   }
   function paintBar() {
     var el = G.document.getElementById("a3dBar"); if (!el || !st.data) return;
@@ -1033,7 +1048,7 @@
         ? '<li><label><input type="checkbox" data-a3d-act="shell" ' + (st.shell ? "checked" : "") + '><i style="background:#c9a58a"></i><span>Body outline</span><small>skin from the CT</small></label></li>' +
           '<li><label><input type="checkbox" data-a3d-act="bowel" ' + (st.bowel ? "checked" : "") + '><i style="background:#d9a066"></i><span>Bowel</span><small>small bowel, colon, duodenum</small></label></li>'
         : "");
-    if (want === 1) delete counts.integumentary;   // the skin is the outline row, not a layer
+    if (want >= 1) delete counts.integumentary;   // the skin is the outline row, not a layer
     return '<div class="a3d-panel" id="a3dSystems"><div class="atlas-top">' +
       '<button class="atlas-back" data-a3d-act="panelclose" aria-label="Close">‹</button>' +
       '<span class="atlas-hd"><span class="atlas-ttl">Layers</span><span class="atlas-sub">' + d.systems.length + " systems</span></span></div>" +
@@ -1188,7 +1203,7 @@
     if (act === "isolate") { toggleIsolate(); if (st.subject) openSheet(); return; }
     if (act === "hide") { hideSelected(); return; }
     if (act === "unhide") { unhideAll(); return; }
-    if (act === "reset") { st.region = ""; st.isolate = false; st.hidden = {}; st.explodeTarget = 0; liveDefaults(); select([], null); applyState(); paintChips(); if (st.src === "live") focusSource(); else resetCamera(); return; }
+    if (act === "reset") { st.region = ""; st.isolate = false; st.hidden = {}; st.explodeTarget = 0; liveDefaults(); select([], null); applyState(); paintChips(); if (srcIndex() >= 1) focusSource(); else resetCamera(); return; }
     if (act === "tab") { st._tab = t.getAttribute("data-tab"); openSheet(); return; }
     if (act === "view") { cycleView(); return; }
     if (act === "planeoff") { clearPlane(); return; }
@@ -1201,8 +1216,8 @@
     if (act === "related") { var ce = d.canon[t.getAttribute("data-c")]; if (ce && ce.related) select(ce.related, { kind: "canon", cid: t.getAttribute("data-c") }); return; }
     if (act === "side") {
       var cid = t.getAttribute("data-c"), side = t.getAttribute("data-side"), en = d.canon[cid]; if (!en) return;
-      var live = st.src === "live";
-      var idxs = side === "both" ? (live ? (en.live || []) : (en.parts || en.related || [])) : ((en[side] && (live ? en[side].live : en[side].parts)) || []);
+      var living = st.src !== "bp3d", key = st.src === "wb" ? "wb" : "live";
+      var idxs = side === "both" ? (living ? (en[key] || []) : (en.parts || en.related || [])) : ((en[side] && (living ? en[side][key] : en[side].parts)) || []);
       if (idxs.length) select(idxs, { kind: "canon", cid: cid });
       return;
     }
@@ -1266,7 +1281,7 @@
       if (opts.canon && d.canon[opts.canon]) selectCanon(opts.canon, { noFocus: !!fromLive, prefer: fromLive ? "live" : opts.src });
       else if (opts.region) setRegion(opts.region);
       if (fromLive) setPlane(opts.from.m, opts.from.i);
-      else if (!opts.canon && st.src === "live") focusSource();
+      else if (!opts.canon && srcIndex() >= 1) focusSource();
       if (opts.partId != null && d.byId[opts.partId] != null) select([d.byId[opts.partId]], { kind: "part", i: d.byId[opts.partId] });
       ensureChunks().then(function () { paintProgress(); if (st.sel.length && !st.plane) focusOn(st.sel, { pad: 1.25 }); invalidate(); });
       invalidate();

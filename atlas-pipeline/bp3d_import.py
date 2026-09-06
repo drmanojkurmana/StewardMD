@@ -424,6 +424,43 @@ def build(src, write=False):
                     l["plane"] = 1
         total_tris += live["stats"]["triangles"]
 
+    # ---- whole-body Visible Human source (live3d_wb.py -> pack3d.mjs wb), merged as src 2 ----
+    wb_path = os.path.join(OUT_DIR, "wb.json")
+    wb = json.load(open(wb_path)) if os.path.exists(wb_path) else None
+    wb_parts = []
+    if wb:
+        base = len(out_parts) + len(live_parts)
+        chunk_base = len(chunks)
+        for wp in wb["parts"]:
+            if wp["canon"] and wp["canon"] not in canon:
+                sys.exit(f"wb part {wp['id']} maps to unknown canonical {wp['canon']}")
+            wb_parts.append({
+                "id": wp["id"], "name": wp["name"], "fma": (canon[wp["canon"]].get("fma") or "") if wp["canon"] else "",
+                "sys": SYS_INDEX[wp["system"]], "reg": REGIONS.index(wp["region"]) if wp["region"] in REGIONS else REGIONS.index("BODY"),
+                "chunk": chunk_base + wp["chunk"], "iStart": wp["iStart"], "iCount": wp["iCount"],
+                "bounds": wp["bounds"], "canon": wp["canon"], "side": wp.get("side"),
+            })
+        if any(p["id"] in part_index for p in wb_parts):
+            sys.exit("wb part id collides with an existing id")
+        for j, wp in enumerate(wb_parts):
+            part_index[wp["id"]] = base + j
+        for c in wb["chunks"]:
+            chunks.append(dict(c, src=2))
+        for cid, e in canon.items():
+            mine = [base + j for j, wp in enumerate(wb_parts) if wp["canon"] == cid]
+            if mine:
+                e["wb"] = mine
+                for side in ("left", "right"):
+                    sided = [base + j for j, wp in enumerate(wb_parts) if wp["canon"] == cid and wp.get("side") == side]
+                    if sided:
+                        e.setdefault(side, {"fma": None, "parts": []})
+                        e[side]["wb"] = sided
+        sources.append({"id": "wb", "name": "Whole body", "short": "Whole body",
+                        "desc": "Head-to-toe living body from the Visible Human Project frozen CT "
+                                "(U.S. National Library of Medicine), organs and skeleton via TotalSegmentator.",
+                        "frame": "wb"})
+        total_tris += wb["stats"]["triangles"]
+
     # ---- mobile LOD set (pack3d.mjs lod) ----
     lod_path = os.path.join(OUT_DIR, "lod.json")
     lod = json.load(open(lod_path)) if os.path.exists(lod_path) else None
@@ -447,14 +484,17 @@ def build(src, write=False):
         "parts": [[p["id"], p["name"], p["fma"], p["sys"], p["reg"], p["chunk"], p["iStart"], p["iCount"], p["bounds"], p["canon"], 0]
                   for p in out_parts] +
                  [[p["id"], p["name"], p["fma"], p["sys"], p["reg"], p["chunk"], p["iStart"], p["iCount"], p["bounds"], p["canon"], 1, p.get("side")]
-                  for p in live_parts],
+                  for p in live_parts] +
+                 [[p["id"], p["name"], p["fma"], p["sys"], p["reg"], p["chunk"], p["iStart"], p["iCount"], p["bounds"], p["canon"], 2, p.get("side")]
+                  for p in wb_parts],
         "planes": planes,
         "live": ({"frame": live["frame"], "source": live["source"], "stats": live["stats"]} if live else None),
+        "wb": ({"frame": wb["frame"], "source": wb["source"], "stats": wb["stats"]} if wb else None),
         "lod": ({"ratio": lod["ratio"], "error": lod["error"], "chunks": lod["chunks"], "stats": lod["stats"]} if lod else None),
         "concepts": concepts,
         "canon": canon,
         "links": links,
-        "stats": {"parts": len(out_parts), "live_parts": len(live_parts), "rejected": len(rejected), "triangles": total_tris,
+        "stats": {"parts": len(out_parts), "live_parts": len(live_parts), "wb_parts": len(wb_parts), "rejected": len(rejected), "triangles": total_tris,
                   "vertices": total_verts, "concepts": len(concepts),
                   "canonical": len(canon), "mapped_full": mapped_full, "mapped_partial": mapped_partial,
                   "related_only": related, "container": container, "unmapped": none,
