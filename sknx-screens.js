@@ -19,6 +19,7 @@
 (function () {
   "use strict";
   function ic(name) { return '<span class="material-symbols-rounded" aria-hidden="true">' + name + '</span>'; }
+  function mark() { return '<img class="sknx-mark" src="/sknx-mark.svg?v=sx16-ux" alt="" width="38" height="38">'; }
   function esc(s) { return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); }
   function haptic(k) { try { if (window.SMD_SKNX_FLAGS && window.SMD_SKNX_FLAGS.bool("smd_sknx_haptics") && window.SMD_HAPTICS && window.SMD_HAPTICS[k]) window.SMD_HAPTICS[k](); } catch (e) {} }
   function toast(m) { try { if (window.toast) window.toast(m); else if (window.SMD_toast) window.SMD_toast(m); } catch (e) {} }
@@ -61,21 +62,32 @@
       '<section class="sknx-capture" aria-labelledby="sknxCapTitle">' +
         '<header class="sknx-cap-head">' +
           '<button type="button" class="sknx-cap-close" data-act="sknx-close" aria-label="Close SknX">' + ic("close") + "</button>" +
-          '<h2 class="sknx-cap-title" id="sknxCapTitle">Analyze a skin photo</h2>' +
+          mark() + '<h2 class="sknx-cap-title" id="sknxCapTitle">SknX <span class="sknx-brand-sub">Dermatology</span></h2>' +
         "</header>" +
         '<div class="sknx-cap-body">' +
+          '<div class="sknx-intro"><span class="sknx-eyebrow">SKIN INSIGHTS, IN CONTEXT</span><h3>A clearer picture.<br>A more informed review.</h3><p>Start with a skin photo. Add what you see clinically, then explore the differential and supporting evidence.</p></div>' +
+          '<ol class="sknx-journey" aria-label="Analysis steps"><li aria-current="step"><b>1</b> Add photo</li><li><b>2</b> Review</li><li><b>3</b> Explore findings</li></ol>' +
+          '<div class="sknx-section-heading"><h3>Add a skin photo</h3><span>Choose a source</span></div>' +
           '<div class="sknx-src-grid">' +
-            srcCard("camera", "photo_camera", "Camera", "Guided capture") +
+            srcCard("camera", "photo_camera", "Take a photo", "Use your camera") +
             srcCard("library", "photo_library", "Photo Library", "PNG, JPEG, HEIC") +
-            srcCard("files", "folder", "Files", "Browse iCloud") +
+            srcCard("files", "folder", "Choose a file", "Browse your device") +
           "</div>" +
-          hxFormHtml("capture") +
-          '<div class="sknx-tip" role="note">' + ic("tips_and_updates") +
-            '<span class="sknx-tip-txt">Good lighting, fill the frame with the lesion or rash, avoid glare - SknX auto-enhances the image before analysis.</span>' +
-          "</div>" +
-          '<div class="sknx-cap-foot">' + ic("lock") + "<span>Image not stored after analysis</span></div>" +
+          '<div class="sknx-photo-guide"><h3>A useful photo starts here</h3><div><span>' + ic("light_mode") + '<b>Even lighting</b>Use diffuse light and avoid flash glare.</span><span>' + ic("center_focus_strong") + '<b>Clear detail</b>Keep the area in focus and fill the frame.</span><span>' + ic("crop_free") + '<b>Clinical context</b>Include a little surrounding skin.</span></div></div>' +
+          '<p class="sknx-cap-foot">' + ic("visibility") + '<span>You can review your photo before analysis.</span></p>' +
         "</div>" +
       "</section>";
+  }
+
+  function renderReview(host) {
+    host.innerHTML = '<header class="sknx-cap-head"><button type="button" class="sknx-cap-close" data-act="sknx-new" aria-label="Back to photo sources">' + ic("arrow_back") + '</button><h2 class="sknx-cap-title">Review your photo</h2><button type="button" class="sknx-cap-close" data-act="sknx-close" aria-label="Close SknX">' + ic("close") + '</button></header>' +
+      '<div class="sknx-cap-body sknx-review"><ol class="sknx-journey" aria-label="Analysis steps"><li><b>✓</b> Add photo</li><li aria-current="step"><b>2</b> Review</li><li><b>3</b> Explore findings</li></ol>' +
+      '<figure class="sknx-preview"><img src="' + esc(state.previewUrl || "") + '" alt="Selected skin photo for review"><figcaption>Check focus, lighting, and the area of interest.</figcaption></figure>' +
+      '<button type="button" class="sknx-btn sknx-btn-secondary" data-act="sknx-source" data-source="library">' + ic("photo_library") + 'Replace photo</button>' + hxFormHtml("capture") +
+      (state.error ? '<div class="sknx-error" role="alert">' + ic("error") + '<span>' + esc(state.error) + '</span></div>' : '') +
+      '<div class="sknx-review-footer"><button type="button" class="sknx-btn sknx-btn-primary" data-act="sknx-analyze">' + ic("auto_awesome") + 'Analyze photo' + ic("arrow_forward") + '</button><p>Educational decision support for clinician review.</p></div></div>';
+    var preview = host.querySelector(".sknx-preview img");
+    if (preview) preview.onerror = function () { preview.hidden = true; host.querySelector(".sknx-preview figcaption").textContent = "Preview unavailable for this format. Choose a JPEG or PNG if you need to inspect the photo here."; };
   }
 
   /* processing — live pipeline (confidence ring + staged progress). runPipeline() drives the real
@@ -101,7 +113,7 @@
             "</svg>" +
             '<div class="sknx-proc-center">' +
               '<span class="sknx-proc-pct" data-pct>0%</span>' +
-              '<span class="sknx-proc-cap">ANALYZING</span>' +
+              '<span class="sknx-proc-cap">SKNX</span>' +
             "</div>" +
           "</div>" +
           '<h2 class="sknx-proc-title">Analyzing your photo&hellip;</h2>' +
@@ -109,6 +121,7 @@
           '<div class="sknx-stages">' + STAGE_DEFS.map(function (s, i) { return stageRow(i); }).join("") + "</div>" +
           '<div class="sknx-proc-note">' + ic("schedule") + "<span>The first scan after opening can take up to a minute while the analyzer starts up. Later scans are quick.</span></div>" +
           '<div class="sknx-proc-foot">' + ic("lock") + "<span>Image not stored after analysis</span></div>" +
+          '<button type="button" class="sknx-btn sknx-btn-secondary" data-act="sknx-cancel">Back to review</button>' +
         "</div>" +
       "</section>";
 
@@ -146,12 +159,13 @@
      is true, a heatmap <img> slot, and the fixed educational disclaimer. NEVER a prescription/Rx
      affordance in this phase (rxEligible is read by nobody here — Rx ships in Phase 3, gated on its
      own consent + review, via a dedicated sknx-rx.js). */
-  function dxRow(d) {
+  function dxRow(d, index) {
     d = d || {};
     var pct = (d.prob != null && isFinite(+d.prob)) ? Math.round(+d.prob * 100) : null;
     return '<div class="sknx-dx-row">' +
+      '<span class="sknx-dx-rank">' + (index + 1) + '</span>' +
       '<span class="sknx-dx-label">' + esc(d.label) + "</span>" +
-      '<span class="sknx-dx-band sknx-dx-band--' + esc(d.band || "low") + '">' + bandLabel(d.band) + (pct != null ? " &middot; " + pct + "%" : "") + "</span>" +
+      '<span class="sknx-dx-band sknx-dx-band--' + esc(d.band || "low") + '">' + bandLabel(d.band) + ' confidence' + (pct != null ? " &middot; " + pct + "%" : "") + "</span>" +
     "</div>";
   }
 
@@ -214,7 +228,7 @@
     var head =
       '<div class="sknx-result-head">' +
         '<button class="sknx-result-back" type="button" data-act="sknx-back" aria-label="Back">' + ic("arrow_back") + "</button>" +
-        '<div class="sknx-result-title">Skin analysis result</div>' +
+        mark() + '<div class="sknx-result-title">Skin analysis<span class="sknx-brand-sub">SknX findings &amp; evidence</span></div>' +
         '<button class="sknx-result-close" type="button" data-act="sknx-close" aria-label="Close SknX">' + ic("close") + "</button>" +
       "</div>";
 
@@ -222,15 +236,16 @@
     // caveats live in the small footer at the very bottom.
     var body =
       '<div class="sknx-result-body">' +
-        '<div class="sknx-sec-title">Differential</div>' +
+        '<div class="sknx-section-heading"><h2>Differential</h2><span>Image findings</span></div>' +
         dxHtml +
         '<div class="sknx-rerank-host" id="sknxRerankHost" aria-live="polite"></div>' +
         findingHtml +
         lesionHtml +
         heatmapHtml +
+        '<nav class="sknx-result-nav" aria-label="Result sections"><button type="button" class="sknx-btn sknx-btn-secondary" data-act="sknx-jump" data-target="sknxReportHost">' + ic("article") + 'Read report</button><button type="button" class="sknx-btn sknx-btn-secondary" data-act="sknx-jump" data-target="sknxRefine">' + ic("clinical_notes") + 'Refine history</button></nav>' +
         '<div class="sknx-report-host" id="sknxReportHost" aria-live="polite"><div class="sknx-report-loading">' + ic("hourglass_empty") + "<span>Preparing educational report&hellip;</span></div></div>" +
         '<div class="sknx-actions">' +
-          '<button class="sknx-btn sknx-btn-primary" type="button" data-act="sknx-save">' + ic("bookmark") + "Save case</button>" +
+          '<button class="sknx-btn sknx-btn-primary" type="button" data-act="sknx-save">' + ic(state.saved ? "bookmark_added" : "bookmark") + (state.saved ? "Case saved" : "Save case") + '</button><span class="sknx-save-status" role="status"></span>' +
           '<button class="sknx-btn sknx-btn-secondary" type="button" data-act="sknx-new">' + ic("add_a_photo") + "New photo</button>" +
         "</div>" +
         rxAffordance(a) +
@@ -294,6 +309,7 @@
     try { var h = document.getElementById("sknxReportHost"); if (h && h.parentNode) h.parentNode.removeChild(h); } catch (e) {}
   }
   function mountReport(a) {
+    var revision = state.revision;
     try {
       if (!window.SMD_SKNX_LLM || !window.SMD_SKNX_REPORT || !window.SMD_SKNX_EVIDENCE) { removeReportHost(); return; }
       var labels = (a.differential || []).map(function (d) { return d.label; });
@@ -307,11 +323,12 @@
       var evidence = window.SMD_SKNX_EVIDENCE.retrieve(evLabels) || [];
       window.SMD_SKNX_LLM.buildReport({ analysis: a, features: (a.features || {}), evidence: evidence, context: {} })
         .then(function (payload) {
+          if (revision !== state.revision || state.analysis !== a) return;
           state.reportPayload = payload;
           state.reportAudience = state.reportAudience || "resident";
           renderReportInto(payload);
         })
-        .catch(function () { removeReportHost(); });
+        .catch(function () { if (revision === state.revision) { var h = document.getElementById("sknxReportHost"); if (h) h.innerHTML = '<div class="sknx-error" role="status">Report unavailable. Your image findings are still available above.</div>'; } });
     } catch (e) { removeReportHost(); }
   }
 
@@ -337,8 +354,14 @@
   }
 
   /* ══════════════════════════════ Router (SMD_SKNX_SCREENS) ══════════════════════════════════════ */
-  var SCREENS = { capture: renderCapture, processing: renderProcessing, result: renderResult };
-  var state = { analysis: null, running: false, stack: [], reportPayload: null, reportAudience: "resident", reportLabels: [] };
+  var SCREENS = { capture: renderCapture, review: renderReview, processing: renderProcessing, result: renderResult };
+  var state = { analysis: null, running: false, stack: [], reportPayload: null, reportAudience: "resident", reportLabels: [], revision: 0, saved: false };
+  function resetCase() {
+    state.revision++; state.running = false;
+    if (state.previewUrl) URL.revokeObjectURL(state.previewUrl);
+    state.previewUrl = null; state.lastImage = null; state.lastHistory = null; state.error = null;
+    state.analysis = null; state.reportPayload = null; state.reportLabels = []; state.saved = false;
+  }
 
   function providers() { try { return (typeof window !== "undefined" && window.SMD_SKNX_PROVIDERS) || null; } catch (e) { return null; } }
   function host() { return document.getElementById("sknxScroll"); }
@@ -354,7 +377,7 @@
     var H = hx(); if (!H) return "";
     var label = kind === "refine" ? "Refine with clinical history" : "Add clinical history (optional)";
     var apply = kind === "refine" ? '<button class="sknx-btn sknx-btn-secondary sknx-hx-apply" type="button" data-act="sknx-refine-apply">' + ic("check") + "Apply history</button>" : "";
-    return '<details class="sknx-hx-wrap"><summary>' + ic("clinical_notes") + esc(label) + "</summary>" + H.formHtml() + apply + "</details>";
+    return '<details class="sknx-hx-wrap"' + (kind === "refine" ? ' id="sknxRefine"' : ' open') + '><summary>' + ic("clinical_notes") + esc(label) + '</summary><p class="sknx-hx-help">Add symptoms and changes to put the image in context. Leave unknown fields unselected.</p>' + H.formHtml() + apply + "</details>";
   }
   function readHx() { try { var H = hx(); var r = host() && host().querySelector(".sknx-hx"); return (H && r) ? H.readForm(r) : null; } catch (e) { return null; } }
   function bindHx(h) { try { var H = hx(); var r = h && h.querySelector && h.querySelector(".sknx-hx"); if (H && r) H.bindForm(r); } catch (e) {} }
@@ -364,6 +387,9 @@
     if (!h || !fn) return;
     try { fn(h, ctx()); } catch (e) { try { console.warn("[SknX] screen " + key, e); } catch (_) {} }
     try { bindHx(h); } catch (e) {}
+    try { var H = hx(); if (H && H.fillForm) H.fillForm(h.querySelector(".sknx-hx"), state.lastHistory); } catch (e) {}
+    h._sknxScreen = key;
+    try { var heading = h.querySelector("h2, .sknx-result-title"); if (heading) { heading.setAttribute("tabindex", "-1"); heading.focus({ preventScroll: true }); } } catch (e) {}
     try { h.scrollTop = 0; } catch (_) {}
   }
   function go(key) {
@@ -383,6 +409,7 @@
   function scrollHostOf(root) { return root && (root.querySelector("#sknxScroll") || root.querySelector(".sknx-scroll")); }
   function mount(root) {
     if (!root) return;
+    resetCase();
     if (!scrollHostOf(root)) root.innerHTML = '<div class="sknx-scroll" id="sknxScroll"></div>';
     init(root);
     state.stack = ["capture"];
@@ -436,6 +463,8 @@
         var inp = document.createElement("input");
         inp.type = "file";
         inp.accept = "image/png,image/jpeg,image/heic,image/heif";
+        if (source === "camera") inp.setAttribute("capture", "environment");
+        inp.oncancel = function () { reject({ cancelled: true }); };
         inp.onchange = function () { var f = inp.files && inp.files[0]; f ? resolve(f) : reject({ cancelled: true }); };
         inp.click();
       } catch (e) { reject(new Error("image capture unavailable")); }
@@ -443,9 +472,15 @@
   }
 
   function startCapture(src) {
+    var revision = state.revision;
     var history = readHx();   // read the capture-screen history form (if any) before the picker opens
     captureImage(src).then(function (blob) {
-      runPipeline({ id: "sknx-" + Date.now(), source: src, data: blob }, history);
+      if (revision !== state.revision) return;
+      if (state.previewUrl) URL.revokeObjectURL(state.previewUrl);
+      state.previewUrl = URL.createObjectURL(blob);
+      state.lastImage = { id: "sknx-" + Date.now(), source: src, data: blob };
+      state.lastHistory = history; state.error = null;
+      go("review");
     }).catch(function (err) {
       if (err && err.cancelled) return;
       toast("Couldn't open the " + (src === "camera" ? "camera" : "picker") + ". " + ((err && err.message) || ""));
@@ -458,30 +493,35 @@
   function runPipeline(image, history) {
     if (state.running) return;
     state.running = true;
+    var revision = ++state.revision;
+    state.error = null; state.saved = false; state.reportPayload = null;
     state.lastImage = image;                          // persist so "Refine with history" can re-run
-    if (typeof history !== "undefined") state.lastHistory = history;
+    state.lastHistory = typeof history !== "undefined" ? history : null;
     show("processing");
     var P = providers();
-    if (!P || !P.analyze) { state.running = false; toast("SknX analyzer unavailable."); show("capture"); return; }
+    if (!P || !P.analyze) { state.running = false; state.error = "The analyzer is unavailable. Please reopen SknX and try again."; if (state.previewUrl) show("review"); else { toast(state.error); show("capture"); } return; }
     var entitlement = resolveEntitlement();
-    P.analyze(image, entitlement, function (stage, pct) {
+    Promise.resolve().then(function () { return P.analyze(image, entitlement, function (stage, pct) {
+      if (revision !== state.revision) return;
       try { var h = host(); if (h && h._sknxApplyStage) h._sknxApplyStage(stage, pct); } catch (e) {}
-    }, undefined, state.lastHistory).then(function (a) {
+    }, undefined, state.lastHistory); }).then(function (a) {
+      if (revision !== state.revision) return;
       state.running = false;
       state.analysis = a || null;
       try { if (state.analysis) state.analysis.history = state.lastHistory || null; } catch (e) {}
       try {
         if (state.analysis && window.SMD_SKNX_STORE && window.SMD_SKNX_STORE.save) {
           state.analysis.at = state.analysis.at || Date.now();
-          window.SMD_SKNX_STORE.save(state.analysis);
+          state.saved = !!window.SMD_SKNX_STORE.save(state.analysis);
         }
       } catch (e) {}
       go("result");
       haptic(state.analysis && state.analysis.referral ? "warning" : "success");
     }).catch(function () {
+      if (revision !== state.revision) return;
       state.running = false;
-      toast("Couldn't analyze this photo. Try again with a clear, well-lit image.");
-      show("capture");
+      state.error = "Couldn't analyze this photo. Try again, or replace it with a clear, well-lit image.";
+      if (state.previewUrl) show("review"); else { toast(state.error); show("capture"); }
     });
   }
 
@@ -492,8 +532,15 @@
       case "sknx-close": haptic("light"); closeMod(); return;
       case "sknx-back": haptic("light"); back(); return;
       case "sknx-source": haptic("light"); startCapture(t.getAttribute("data-source") || "library"); return;
-      case "sknx-save": toast("Case saved."); return;
-      case "sknx-new": state.analysis = null; state.reportPayload = null; state.reportAudience = "resident"; state.reportLabels = []; state.stack = ["capture"]; show("capture"); return;
+      case "sknx-analyze": if (state.lastImage) runPipeline(state.lastImage, readHx() || {}); return;
+      case "sknx-cancel": state.revision++; state.running = false; show(state.previewUrl ? "review" : "capture"); return;
+      case "sknx-save":
+        try { if (!state.saved && state.analysis && window.SMD_SKNX_STORE) state.saved = !!window.SMD_SKNX_STORE.save(state.analysis); } catch (_) {}
+        t.innerHTML = ic(state.saved ? "bookmark_added" : "bookmark") + (state.saved ? "Case saved" : "Retry save");
+        var status = host().querySelector(".sknx-save-status"); if (status) status.textContent = state.saved ? "Saved on this device." : "Could not save on this device. Try again.";
+        return;
+      case "sknx-new": resetCase(); state.stack = ["capture"]; show("capture"); return;
+      case "sknx-jump": var target = document.getElementById(t.getAttribute("data-target")); if (target) { if (target.tagName === "DETAILS") target.open = true; target.setAttribute("tabindex", "-1"); target.focus({ preventScroll: true }); target.scrollIntoView({ block: "start" }); } return;
       case "sknx-compare": var L = state.reportLabels || []; if (L.length >= 2 && window.SMD_SKNX_COMPARE) { var cmp = window.SMD_SKNX_COMPARE.compare(L[0], L[1]); var ch = document.getElementById("sknxCompareHost"); if (ch) ch.innerHTML = window.SMD_SKNX_COMPARE.html(cmp); } haptic("light"); return;
       case "sknx-report-pdf": try { if (window.SMD_SKNX_REPORT && state.reportPayload) window.SMD_SKNX_REPORT.pdf(state.reportPayload); } catch (e) {} haptic("light"); return;
       case "sknx-rx-draft": haptic("light"); try { if (window.SMD_SKNX_RX) window.SMD_SKNX_RX.openDraft(state.analysis); } catch (e) {} return;
@@ -514,7 +561,7 @@
   }
 
   // Sign-out wipe hook (privacy contract): wipe the encrypted store on StewardMD sign-out.
-  function wipe() { try { if (window.SMD_SKNX_STORE && window.SMD_SKNX_STORE.deleteAll) window.SMD_SKNX_STORE.deleteAll(); } catch (e) {} }
+  function wipe() { resetCase(); closeMod(); try { if (window.SMD_SKNX_STORE && window.SMD_SKNX_STORE.deleteAll) window.SMD_SKNX_STORE.deleteAll(); } catch (e) {} }
   var _signoutWired = false;
   function wireSignout() {
     if (_signoutWired || typeof window === "undefined") return; _signoutWired = true;
@@ -531,6 +578,7 @@
     back: back,
     runPipeline: runPipeline,
     startCapture: startCapture,
+    resetCase: resetCase,
     // pure helpers (node-testable, no DOM):
     bandLabel: bandLabel,
     disclaimerText: disclaimerText,
