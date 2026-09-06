@@ -45,7 +45,7 @@ try {
   await ev(`document.querySelector('#smdAtlas .atlas-3d-card').click(); return 1;`);
   ok(await until(`return ATLAS3D.isOpen() && !!document.getElementById('a3dCanvas')`), "3D layer opens with a canvas");
   ok(await until(`var s=ATLAS3D._state; return !!s.data && !!s.gl;`, 30000), "manifest loaded and WebGL context created");
-  ok(await ev(`return ATLAS3D._state.data.parts.length;`) === 2378, "2,378 meshes in the manifest (2,227 reference + 66 living CT + 85 whole body)");
+  ok(await ev(`return ATLAS3D._state.data.parts.length;`) === 2293, "2,293 meshes in the manifest (2,227 reference + 66 living CT)");
   ok(await until(`var s=ATLAS3D._state; return !s.err && s.loaded>0 && Object.keys(s.loading).length===0 && Object.keys(s.chunks).length>=10;`, 120000), "default systems streamed and uploaded (no error)");
   const err = await ev(`return ATLAS3D._state.err;`);
   ok(!err, "no renderer error: " + (err || "none"));
