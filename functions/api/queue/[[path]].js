@@ -388,7 +388,9 @@ export async function onRequest(context) {
       const body = method === "POST" ? await readBody(request) : {};
       const pOrg = url.searchParams.get("orgId") || body.orgId || "";
       if (sub === "register" && method === "POST") {
+        const __t0 = Date.now(); const __tl = (label) => console.log("REGDIAG " + label + " +" + (Date.now() - __t0) + "ms");
         const az = await ORG.authorizeOrg(env, actor, pOrg, CAPS.QUEUE_ADD);
+        __tl("authorizeOrg");
         /* Say WHICH refusal this is. authorizeOrgAccess already distinguishes org_not_found,
          * not_a_member, forbidden (with the role) and out_of_scope - and this threw all of it away
          * and answered a bare "forbidden". So a nurse whose membership had defaulted to "viewer"
@@ -396,8 +398,10 @@ export async function onRequest(context) {
          * from being in the wrong clinic or not signed in. The reason names the fix. */
         if (!az.ok) return json(azRefusal(az), az.reason === "org_not_found" ? 404 : 403, request);
         const org = await ORG.getOrg(env, pOrg);
+        __tl("getOrg");
         if (!org) return json({ ok: false, error: "org_not_found" }, 404, request);
         const r = await PAT.registerPatient(env, org, body, actor.id || "");
+        __tl("registerPatient(Firestore write)");
         // invalid / duplicate are EXPECTED outcomes the form renders, not server errors.
         if (!r.ok) return json(r, 200, request);
         // WardSynQ record: the patient-identity migration (functions/_wardsynq/migrate-registration.js).
@@ -407,10 +411,13 @@ export async function onRequest(context) {
         // authoritative directly (org already fetched above) — no global flag, same reasoning as the
         // timeline handler's four migrations.
         const wsqReg = await wsqForcedMigration(env, org);
+        __tl("wsqForcedMigration");
         if (wsqReg && wsqReg.error) return json({ ok: false, error: wsqReg.error, mrn: r.mrn }, 409, request);
         const mig = wsqReg || await registrationMigration(env, { orgId: pOrg }, { getOrg: ORG.getOrg, tenantRow: wsqTenantRow });
+        __tl("registrationMigration/mig resolved, mode=" + mig.mode);
         if (mig.mode !== "off") {
           const rec = await registerPatientRecord(request, env, { migration: mig, registration: { mrn: r.mrn, mrSource: r.mrSource, pending: r.pending, patient: r.patient }, actorDeps: wsqActorDeps(env), recordDeps: wsqRecordDeps(env, mig.tenantId) });
+          __tl("registerPatientRecord DONE ok=" + rec.ok + (rec.ok ? "" : " error=" + rec.error));
           if (mig.mode === "authoritative" && !rec.ok) {
             // The MR number is already spent and is not un-spent here (see the file header for why).
             // What "authoritative" changes is that this failure is reported, not swallowed.

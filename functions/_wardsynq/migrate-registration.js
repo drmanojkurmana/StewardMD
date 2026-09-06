@@ -118,10 +118,13 @@ async function registerPatientRecord(request, env, ctx) {
   if (!candidate) return { ...base, ok: false, status: 422, error: "no_mrn", written: 0 };
   const patientId = candidate.id;
 
+  const __t0 = Date.now();
   let resolved;
   try {
     resolved = await resolveClinicalActor(request, env, mig.tenantId, "record:write", ctx.actorDeps);
+    console.log("REGDIAG resolveClinicalActor +" + (Date.now() - __t0) + "ms, source=" + resolved.source);
   } catch (e) {
+    console.log("REGDIAG resolveClinicalActor THREW +" + (Date.now() - __t0) + "ms: " + (e && e.message));
     const status = e instanceof AuthError ? 401 : e instanceof PermissionError ? 403 : 502;
     return { ...base, ok: false, status, error: e instanceof AuthError ? "auth" : e instanceof PermissionError ? "permission" : "error", detail: String((e && e.message) || e), written: 0, patientId };
   }
@@ -130,6 +133,7 @@ async function registerPatientRecord(request, env, ctx) {
   let current;
   try {
     current = await svc.get("Patient", patientId);
+    console.log("REGDIAG svc.get Patient +" + (Date.now() - __t0) + "ms");
   } catch (e) {
     if (e instanceof GovernanceError) return { ...base, ok: false, status: 403, error: "governance", reasons: e.reasons.map((r) => r.code), patientId, actor: resolved.actor.id };
     return { ...base, ok: false, status: 502, error: "record_read_failed", detail: String((e && e.message) || e), written: 0, patientId };
@@ -142,6 +146,7 @@ async function registerPatientRecord(request, env, ctx) {
 
   try {
     const out = await svc.put(candidate, { expectedVersion: current ? current.version : undefined, idempotencyKey: ctx.idempotencyKey || null });
+    console.log("REGDIAG svc.put Patient +" + (Date.now() - __t0) + "ms");
     return { ...base, ok: true, written: 1, updated: !!current, patientId, version: out.record.version, replayed: out.replayed, actor: resolved.actor.id, role: resolved.role, roleSource: resolved.source };
   } catch (e) {
     if (e instanceof GovernanceError) return { ...base, ok: false, status: 403, error: "governance", reasons: e.reasons.map((r) => r.code), patientId, actor: resolved.actor.id };
