@@ -14,8 +14,8 @@ CT/MRI slice modules, so a structure links both ways between a 3D mesh and the s
 - **Hosting:** geometry is served from the R2 bucket `stewardmd-models` under `atlas3d/` at `https://models.stewardmd.in/atlas3d/<file>` (`R2_BASE` in `atlas3d.js`; `dataBases()` tries same-origin first, then R2). Upload with `npx wrangler r2 object put stewardmd-models/atlas3d/<file> --file atlas/3d/<file> --content-type application/gzip --remote` for every `*.bin.gz` after a pipeline run. The files are ALSO committed (repo = source of truth; Pages serves them same-origin on the web).
 - **Pipeline:** `atlas-pipeline/bp3d-map.json` (HAND-CURATED canonical ↔ FMA mapping) → `atlas-pipeline/bp3d_import.py --src <human-atlas checkout> --write` → `atlas-pipeline/ontology.py --write` (merges `bp3d` + the `3D` modality into `ontology.json`). Living body: `atlas-pipeline/live3d.py --work atlas-pipeline/work/tsd --out <dir>` (marching cubes on the masks + slice-plane registration; needs the `.venv` with nibabel/scipy/skimage and the downloaded s0108 volumes) → `node atlas-pipeline/pack3d.mjs live --in <dir> --out atlas/3d --base 2227` (meshoptimizer simplify + pack) → `bp3d_import.py --write` picks up `live.json`. LOD: `node atlas-pipeline/pack3d.mjs lod --out atlas/3d` (writes `lod.json` + `*.lo.bin.gz`), then `bp3d_import.py --write`.
 - **Provenance / licence:** `HUMAN_ATLAS_PROVENANCE.md` (repo root) — upstream commit, checksums, rejects, modifications, the verbatim CC BY attribution
-- **Tests:** `test/atlas3d-data.test.mjs` (52) · `test/atlas3d-pure.test.mjs` (33) · `test/run-atlas3d-ui.mjs` (58, real headless WebGL via SwiftShader; port 8995)
-- **Status (2026-09-06):** built + browser-verified (incl. screenshots of the axial/coronal/sagittal cut planes registering on the meshes); NOT yet run on a phone. Native needs `build-www` → `cap sync` → rebuild.
+- **Tests:** `test/atlas3d-data.test.mjs` (55) · `test/atlas3d-pure.test.mjs` (33) · `test/run-atlas3d-ui.mjs` (60, real headless WebGL via SwiftShader; port 8995)
+- **Status (2026-09-06):** built + RUN ON THE iPhone 15 Pro (build a3d8, iOS 27). Living body (66 parts: organs + skeleton + skin shell) streams in ~2 s from R2, 60 fps, cut planes register on the meshes, no JS errors. Reinstall after each web change: `build:www` → `cap copy ios` → rebuild `App` scheme → `devicectl uninstall` + `install` (wipes device-local data).
 
 ## Numbers
 
@@ -24,7 +24,7 @@ CT/MRI slice modules, so a structure links both ways between a 3D mesh and the s
 | Meshes imported | 2,227 of 2,234 (7 exact duplicates rejected) |
 | FMA concepts | 3,432, all preserved |
 | Canonical structures | 86 = 58 full mesh + 9 partial + 6 related-only + 6 container (region/system) + 7 unmapped |
-| Living-CT surfaces | 38 (1.56M source triangles simplified to 467k, max error 0.0046 of the bbox, about 2 mm) |
+| Living-CT surfaces | 66 = 38 organs/vessels/muscles + 27 skeleton (T10-L5+S1, sacrum, lower ribs, hip bones, femurs) + 1 body-surface shell; 6.7 MB gz |
 | Registered slice planes | 72 = 24 × 3 living-torso modules (axial: 19/22 confident slices on a linear fit, rest interpolated; coronal/sagittal 24/24) |
 | CT ↔ 3D linked | 43 canonical structures (38 before the living body) |
 | MRI ↔ 3D linked | 13 |
@@ -37,7 +37,26 @@ CT/MRI slice modules, so a structure links both ways between a 3D mesh and the s
   bronchial tree and caudate lobe. LIVER / LUNG / the four lobes are `kind: related` in the
   map: the sheet says so and never claims the mesh IS the organ. HEART is `partial` (chambers,
   atrial walls, one ventricular wall, valve leaflets; no closed surface). Do not "fix" these by
-  mapping the vessel tree as the organ. **The living-CT body fills exactly this gap**: a
+  mapping the vessel tree as the organ.
+- **The living body needs a frame to read as a patient.** As shipped first it was ~38 organs
+  floating in black (rated 0.5/10). `live3d.py` now also meshes the skeleton from the s0108
+  masks (bones under 400 voxels are scan-edge fragments, skipped) and a body-surface shell by
+  thresholding the CT (HU > -350). The skin is drawn as a translucent OUTLINE in its own render
+  pass (a Layers > Body outline switch, `st.shell`), faded out over the scan's cut top/bottom
+  edges so it reads as a body, not a tube. Small bowel / colon / duodenum are hidden by default
+  (`LIVE_BOWEL` in `atlas3d.js`, a Layers > Bowel switch), the way the reference body hides
+  muscles + skin, because they wrap every organ from the front.
+- **iOS WebKit redraw gotchas (all fixed, worth knowing).** (1) A chunk or the slice image that
+  finishes loading AFTER the open camera glide settled must schedule its own frame — the code
+  calls `invalidate()`/`settleFrames()`, never a bare `st.dirty = true`. (2) The slice texture
+  must upload on texture unit 1 and rebind the state texture on unit 0; leaving the slice image
+  on unit 0 made the vertex shader read it as part state and discard every mesh (the user saw a
+  bare CT slice with no organs). (3) `requestAnimationFrame`-driven redraws still presented the
+  stale frame on iOS 27, so `settleFrames()` redraws from `setTimeout` callbacks at 60/250/700/
+  1500 ms via a direct `tick()`. Debug these with `test/ios-webkit-cdp.mjs` + `Page.snapshotRect`
+  over USB; a frame read back by `readPixels` can be correct while the presented frame is stale,
+  so screenshot, don't just sample pixels.
+- **The living-CT body fills the BodyParts3D organ gap**: a
   `related`-only structure with a living surface auto-switches to the Living CT source
   (`partsForCanon` in `atlas3d.js`), so selecting LIVER shows a real liver.
 - **Living-volume axes were MEASURED, not read from the header.** The s0108 NIfTI affine says
