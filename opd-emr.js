@@ -1143,28 +1143,29 @@
     ekg: "electrocardiogram", cxr: "chest x ray", usg: "ultrasound", lipid: "lipid profile", "pt inr": "prothrombin",
     inr: "prothrombin", bun: "blood urea", "urine r/e": "urine routine", "2d echo": "echocardiogram" };
   function expandQuery(kind, q) { if (kind !== "inv") return q; var k = String(q || "").toLowerCase().trim(); return INV_ABBREV[k] || q; }
-  // WardSynQ-native hospital, investigation search ONLY: the org's own billing-tariff catalog
-  // (kind:"investigation" rows), Firebase-authed, via GET /api/queue/inv-catalog. Medication search
-  // stays "offghis" for wardsynq deliberately — no native prescribing until CDSS is wired in (see
-  // submitPrescribe's header), so there is nothing safe to search a drug catalog FOR yet.
-  function runWardsynqInvSearch(q) {
-    st.invResults = []; st.invSearchMsg = "searching"; renderSearchOut("inv");
+  // WardSynQ-native hospital: the org's own billing-tariff catalog (kind:"investigation" or
+  // "medication" rows), Firebase-authed, via GET /api/queue/inv-catalog?kind=. Same catalog
+  // mechanism for both - investigation ordering and prescribing both need SOMETHING to search that
+  // isn't GHIS's, which is meaningless for a hospital with no GHIS.
+  function runWardsynqCatalogSearch(kind, q) {
+    var key = kind === "inv" ? "invResults" : "medResults", mkey = kind + "SearchMsg", tariffKind = kind === "inv" ? "investigation" : "medication";
+    st[key] = []; st[mkey] = "searching"; renderSearchOut(kind);
     fbTok().then(function (t) {
-      if (!t) { st.invResults = []; st.invSearchMsg = "login"; renderSearchOut("inv"); return; }
-      fetch(qBase() + "/api/queue/inv-catalog?sessionId=" + encodeURIComponent(st.sessionId || "") + "&q=" + encodeURIComponent(q), { headers: { Authorization: "Bearer " + t } })
+      if (!t) { st[key] = []; st[mkey] = "login"; renderSearchOut(kind); return; }
+      fetch(qBase() + "/api/queue/inv-catalog?kind=" + tariffKind + "&sessionId=" + encodeURIComponent(st.sessionId || "") + "&q=" + encodeURIComponent(q), { headers: { Authorization: "Bearer " + t } })
         .then(function (r) { return r.json().then(function (d) { return { ok: r.ok, d: d || {} }; }, function () { return { ok: r.ok, d: {} }; }); })
         .then(function (res) {
-          if (!res.ok || (res.d && res.d.error)) { st.invResults = []; st.invSearchMsg = "error"; }
-          else { st.invResults = (res.d && res.d.rows) || []; st.invSearchMsg = st.invResults.length ? "" : "none"; }
-          renderSearchOut("inv");
+          if (!res.ok || (res.d && res.d.error)) { st[key] = []; st[mkey] = "error"; }
+          else { st[key] = (res.d && res.d.rows) || []; st[mkey] = st[key].length ? "" : "none"; }
+          renderSearchOut(kind);
         })
-        .catch(function () { st.invResults = []; st.invSearchMsg = "error"; renderSearchOut("inv"); });
-    }).catch(function () { st.invResults = []; st.invSearchMsg = "error"; renderSearchOut("inv"); });
+        .catch(function () { st[key] = []; st[mkey] = "error"; renderSearchOut(kind); });
+    }).catch(function () { st[key] = []; st[mkey] = "error"; renderSearchOut(kind); });
   }
   function runSearch(kind) {
     var q = kind === "inv" ? st.invQuery : st.medQuery, key = kind === "inv" ? "invResults" : "medResults", mkey = kind + "SearchMsg";
     if (!q || q.length < 2) { st[key] = []; st[mkey] = ""; renderSearchOut(kind); return; }
-    if (kind === "inv" && st.source === "wardsynq") { runWardsynqInvSearch(q); return; }
+    if (st.source === "wardsynq") { runWardsynqCatalogSearch(kind, q); return; }
     // Search is a GHIS (hospital) lookup — needs a live Ward Sync session + is meaningless off-hospital.
     if (st.source && st.source !== "ghis") { st[key] = []; st[mkey] = "offghis"; renderSearchOut(kind); return; }
     st[key] = []; st[mkey] = "searching"; renderSearchOut(kind);
@@ -2029,6 +2030,30 @@
     var extra = {}; if (vals) extra.vals = vals; if (signOff) extra.signOff = true;
     postWardsynqTimeline("assessment", assessSummary(st.assessVals), extra, okMsg, onOk);
   }
+  // Advisory-only CDSS pre-check (functions/_wardsynq/rx-safety.js) - shown to the doctor BEFORE
+  // they confirm a native prescription. NEVER blocks: the promise always resolves to a safety
+  // object (possibly with findings, possibly degraded), never rejects, so a check that fails never
+  // stops the doctor from prescribing - it only stops them from prescribing UNINFORMED.
+  function checkWardsynqRxSafety(drug, generic) {
+    if (!st.ticketId || !st.sessionId) return Promise.resolve({ unapproved: true, findings: [], degraded: true });
+    return fbTok().then(function (t) {
+      if (!t) return { unapproved: true, findings: [], degraded: true };
+      var q = "sessionId=" + encodeURIComponent(st.sessionId) + "&ticketId=" + encodeURIComponent(st.ticketId) + "&drug=" + encodeURIComponent(drug || "") + "&generic=" + encodeURIComponent(generic || "");
+      return fetch(qBase() + "/api/queue/rx-safety?" + q, { headers: { Authorization: "Bearer " + t } })
+        .then(function (r) { return r.json().catch(function () { return null; }); })
+        .then(function (d) { return (d && d.ok && d.safety) || { unapproved: true, findings: [], degraded: true }; })
+        .catch(function () { return { unapproved: true, findings: [], degraded: true }; });
+    }).catch(function () { return { unapproved: true, findings: [], degraded: true }; });
+  }
+  // Plain-text summary appended to the prescribe confirm() dialog. Labeled UNAPPROVED per this
+  // content's own governance status (vault/modules/WardSynQ.md) - never phrased as a cleared check.
+  function wardsynqSafetyNote(safety) {
+    if (!safety) return "";
+    if (safety.degraded) return "\n\n(Decision support unavailable right now - proceeding without it.)";
+    if (!safety.findings || !safety.findings.length) return "\n\n(No interaction found against this patient's current medications. Unapproved content, not a substitute for clinical judgment - allergy data is not yet captured in WardSynQ.)";
+    var lines = safety.findings.slice(0, 5).map(function (f) { return "- " + f.message; });
+    return "\n\nUNAPPROVED decision support flags:\n" + lines.join("\n") + "\n\nUse clinical judgment. This does not block the prescription.";
+  }
   function confirmed(msg) { try { return !!(G.confirm && G.confirm(msg)); } catch (e) { return false; } }
   function submitInvOrder() {
     var d = st.invDraft || {}; if (!d.service) return;
@@ -2052,6 +2077,19 @@
   }
   function submitPrescribe() {
     var d = st.medDraft || {}; if (!d.drug) return;
+    var rxText = [d.drug.name, d.route, d.form, d.qty, d.frequency, d.duration].filter(Boolean).join(" ") + (d.remarks ? " - " + d.remarks : "");
+    // WardSynQ-native hospital: straight to the WardSynQ record, with an advisory-only CDSS
+    // pre-check (functions/_wardsynq/rx-safety.js) shown BEFORE the doctor confirms. That check
+    // never blocks - see its header (unapproved clinical content) - it only informs.
+    if (st.source === "wardsynq") {
+      checkWardsynqRxSafety(d.drug.name, d.drug.name).then(function (safety) {
+        if (!confirmed('Prescribe "' + d.drug.name + '" for this patient?' + wardsynqSafetyNote(safety))) return;
+        postWardsynqTimeline("medication", rxText,
+          { rx: { drugId: d.drug.id, name: d.drug.name || "", generic: d.drug.name || "", drugCodeSystem: "wardsynq-tariff", route: d.route || "", form: d.form || "", qty: d.qty || "", frequency: d.frequency || "", duration: d.duration || "", remarks: d.remarks || "" } },
+          "Prescribed.", function () { st.medDraft = {}; paint(); });
+      });
+      return;
+    }
     if (!confirmed('Prescribe "' + d.drug.name + '" for this patient in GHIS?')) return;
     // The timeline sentence is unchanged. `rx` rides beside it so the server can file the SAME
     // prescription structurally in the clinical record (functions/_wardsynq/migrate-prescription.js)
@@ -2061,7 +2099,7 @@
     // until QUEUE_EMR_PRESCRIBE_OK=1, and postWrite returns above without mirroring anything - so a
     // prescription GHIS refused never reaches the record. That is deliberate, not a gap.
     postWrite("/prescribe", { drugId: d.drug.id, route: d.route || "", form: d.form || "", qty: d.qty || "", frequency: d.frequency || "", duration: d.duration || "", remarks: d.remarks || "" }, "Prescription saved.",
-      { kind: "medication", text: [d.drug.name, d.route, d.form, d.qty, d.frequency, d.duration].filter(Boolean).join(" ") + (d.remarks ? " - " + d.remarks : ""),
+      { kind: "medication", text: rxText,
         rx: { drugId: d.drug.id, name: d.drug.name || "", generic: d.drug.sub || "", route: d.route || "", form: d.form || "", qty: d.qty || "", frequency: d.frequency || "", duration: d.duration || "", remarks: d.remarks || "" } });
   }
   function submitAssessment() {

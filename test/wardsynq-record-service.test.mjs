@@ -694,10 +694,10 @@ test("the queue timeline handler orders the writes by mode and leaves the off pa
 // 2026-09-06 (part 2): generalized from an assessment-only early-return into the shared `mig`
 // computation — vitals, assessment and investigation orders ALL force authoritative for a wardsynq
 // org via the SAME wsqForcedMigration() helper, reusing the existing migrator/ctx dispatch verbatim.
-// Prescriptions are DELIBERATELY excluded: no CDSS (drug interaction/allergy/dose ceiling) is wired
-// into OPD prescribing anywhere, GHIS itself hard-blocks /prescribe for the same reason, and a
-// wardsynq hospital has no external safety net to substitute for that caution.
-test("native WardSynQ hospital: org.mode 'wardsynq' bypasses the global flag, forces authoritative for vitals/assessment/orders, and every other mode is untouched", () => {
+// 2026-09-06 (part 4): prescriptions joined them once rx-safety.js's advisory-only CDSS pre-check
+// existed (GET /rx-safety) — that check can never gate the write (unapproved clinical content, per
+// its own header), so forcing it authoritative is safe: informed either way, blocked never.
+test("native WardSynQ hospital: org.mode 'wardsynq' bypasses the global flag, forces authoritative for vitals/assessment/orders/prescriptions, and every other mode is untouched", () => {
   const src = readFileSync(new URL("../functions/api/queue/[[path]].js", import.meta.url), "utf8");
   assert.ok(src.includes("async function wsqForcedMigration(env, org) {"), "one shared helper, not one per migration");
   const helper = src.slice(src.indexOf("async function wsqForcedMigration"), src.indexOf("async function wsqForcedMigration") + 700);
@@ -713,8 +713,7 @@ test("native WardSynQ hospital: org.mode 'wardsynq' bypasses the global flag, fo
   const flagGatedCall = i('const mig = wsqMig || (isVitals ? await vitalsMigration(');
   assert.ok(wardsynqBranch < flagGatedCall, "the wardsynq check must run before the flag-gated shadow/authoritative path");
   const branch = h.slice(wardsynqBranch, flagGatedCall);
-  assert.ok(branch.includes("isVitals || isAssessment || isInvOrder"), "vitals, assessment and orders are forced");
-  assert.ok(!branch.includes("isPrescription"), "prescriptions are NOT forced authoritative — no CDSS, same caution as GHIS's own hard block");
+  assert.ok(branch.includes("isVitals || isAssessment || isInvOrder || isPrescription"), "vitals, assessment, orders AND prescriptions are all forced");
   assert.ok(branch.includes("wsqForcedMigration("), "uses the shared helper, not a duplicated inline check");
   // Success is the WardSynQ write's own success — a refusal short-circuits before the legacy
   // timeline line is ever appended, and is never silently swallowed (shadow's "report, never block").
@@ -1125,12 +1124,15 @@ test("each clinical write is recognised ONLY by its own structured payload, neve
   assert.ok(!prescribe.includes("vals:"), "a prescription does not send structured vals");
   assert.ok(!prescribe.includes("order: {"), "a prescription does not send an investigation order payload");
   assert.ok(prescribe.includes("rx: { drugId:"), "a prescription does send its own structured rx");
-  // WardSynQ-native investigation ordering (safe: no drug-dosing risk, unlike prescribing) posts
-  // straight to postWardsynqTimeline; prescribing has NO such branch — it stays GHIS-only until CDSS
-  // is wired in, deliberately, the same caution GHIS's own /prescribe hard block already enforces.
+  // WardSynQ-native investigation ordering and prescribing both post straight to
+  // postWardsynqTimeline; prescribing (2026-09-06, second pass) additionally runs the advisory-only
+  // CDSS pre-check first (checkWardsynqRxSafety) and folds its findings into the confirm() text —
+  // it still never blocks, per rx-safety.js's own header.
   assert.ok(invOrder.includes('st.source === "wardsynq"'), "investigation orders get a native WardSynQ branch");
   assert.ok(invOrder.includes("postWardsynqTimeline("), "…using the shared native-write helper");
-  assert.ok(!prescribe.includes('st.source === "wardsynq"'), "prescribing has NO wardsynq branch yet — deliberate, pending CDSS");
+  assert.ok(prescribe.includes('st.source === "wardsynq"'), "prescribing gets a native WardSynQ branch too, now that CDSS is wired in");
+  assert.ok(prescribe.includes("checkWardsynqRxSafety("), "…and runs the advisory safety check before the confirm dialog");
+  assert.ok(prescribe.includes("postWardsynqTimeline("), "…using the same shared native-write helper");
 });
 
 /* ------------------------------------------------------------------ the sign-off (GHIS Authorise) migration */
@@ -1536,8 +1538,11 @@ test("SHADOW does not alter GHIS: prescribing is hard-blocked upstream, and a re
   const code = mig.slice(mig.indexOf("import {"));
   assert.ok(!/\bfetch\s*\(/.test(code), "the migration issues no HTTP request of its own");
   assert.ok(!/from\s+["'][^"']*ghis/i.test(code), "the migration imports nothing from the GHIS connector");
-  // The one place GHIS is named in the code is the code SYSTEM label, which is a string, not a call.
-  assert.ok(code.includes('drugCodeSystem: "ghis-drug-id"'));
+  // The one place GHIS is named in the code is the code SYSTEM label default, which is a string,
+  // not a call. 2026-09-06: overridable by rx.drugCodeSystem, so a wardsynq-native prescription
+  // (no GHIS id at all) is never mislabeled — but "ghis-drug-id" stays the default for every
+  // existing caller that never sets it.
+  assert.ok(code.includes('str(rx.drugCodeSystem) || "ghis-drug-id"'));
 });
 
 test("THE PROOF, prescription: the doctor prescribes on device A; device B reads the SAME structured MedicationOrder; pharmacy may read it and a nurse may not write one; another tenant is denied; a double-tap does not prescribe twice; a changed prescription is version 2 with the original intact", async () => {
@@ -2164,23 +2169,43 @@ test("SHADOW does not alter GHIS or the queue engine: the migration issues no HT
 
 // 2026-09-06 (part 3): investigation ORDER search for a wardsynq-native hospital. There is no GHIS
 // catalog to search, so the write path from part 2 was wired to nothing a doctor could actually pick.
-// Reuses the org's EXISTING billing-tariff store (kind:"investigation" rows) as the catalog -
-// deliberately NOT gated behind CLINIC_BILLING_ENABLED, since whether invoicing is on is unrelated to
-// whether a doctor may order a test. Medication search stays untouched (no native prescribing yet).
+// Reuses the org's EXISTING billing-tariff store (kind:"investigation"|"medication" rows) as the
+// catalog - deliberately NOT gated behind CLINIC_BILLING_ENABLED, since whether invoicing is on is
+// unrelated to whether a doctor may order a test or a drug. Medication reuses the SAME route
+// (?kind=medication), added in part 4 alongside native prescribing.
 test("native investigation-order search: reuses the existing tariff catalog, session-scoped, not billing-gated", () => {
   const src = readFileSync(new URL("../functions/api/queue/[[path]].js", import.meta.url), "utf8");
   const route = src.slice(src.indexOf('seg === "inv-catalog"'), src.indexOf('seg === "opd-board"'));
   assert.ok(route.includes("BILL.listTariff("), "reuses the existing tariff store — no new catalog system");
-  assert.ok(route.includes('kind === "investigation"'), "filters to investigation-kind rows only");
+  assert.ok(route.includes('t.kind === wantKind'), "filters to the requested kind only (investigation default, medication opt-in)");
+  assert.ok(route.includes('"medication" ? "medication" : "investigation"'), "medication catalog reuses the SAME route via ?kind=");
   assert.ok(!route.includes("billingEnabled"), "must not be gated behind the global billing flag");
   assert.ok(route.includes("loadSessionFor("), "session-scoped like every other client-facing route, not a raw orgId param");
   assert.ok(route.includes("CAPS.EMR_TREAT"), "same capability the doctor's other clinical writes require");
 
   const emr = readFileSync(new URL("../opd-emr.js", import.meta.url), "utf8");
   const runSearch = emr.slice(emr.indexOf("function runSearch("), emr.indexOf("function runSearch(") + 800);
-  assert.ok(runSearch.includes('kind === "inv" && st.source === "wardsynq"'), "investigation search only, wardsynq only");
-  const wsqSearch = emr.slice(emr.indexOf("function runWardsynqInvSearch("), emr.indexOf("function runSearch("));
+  // 2026-09-06 (part 4): generalized to both kinds (investigation AND medication) once native
+  // prescribing needed its own drug catalog too — same mechanism, one shared function.
+  assert.ok(runSearch.includes('if (st.source === "wardsynq")'), "wardsynq routes to the native catalog for BOTH kinds");
+  const wsqSearch = emr.slice(emr.indexOf("function runWardsynqCatalogSearch("), emr.indexOf("function runSearch("));
   assert.ok(wsqSearch.includes("/api/queue/inv-catalog"), "hits the new native catalog endpoint");
   assert.ok(wsqSearch.includes("fbTok()"), "Firebase-authed like every other native write/read, never ghisAuth()");
   assert.ok(!wsqSearch.includes("ghisAuth"), "never touches the GHIS proxy");
+});
+
+// 2026-09-06 (part 4): native prescribing, gated on the advisory-only CDSS pre-check existing.
+test("native prescribing: the GET /rx-safety pre-check NEVER gates, reuses wsqForcedMigration, and degrades safely for a non-wardsynq/unlinked org", () => {
+  const src = readFileSync(new URL("../functions/api/queue/[[path]].js", import.meta.url), "utf8");
+  const route = src.slice(src.indexOf('seg === "rx-safety"'), src.indexOf('method === "GET" && seg === "opd-board"'));
+  assert.ok(route.includes("wsqForcedMigration(env, wOrg)"), "reuses the SAME shared helper — no separate org.mode check invented");
+  assert.ok(route.includes("checkPrescriptionSafety("), "delegates the actual evaluation to rx-safety.js");
+  assert.ok(route.includes("degraded: true"), "a non-wardsynq or unlinked org gets a safe degraded advisory, not an error that could be mistaken for a block");
+  assert.ok(route.includes("loadSessionFor("), "session-scoped like every other clinical route");
+  assert.ok(route.includes("CAPS.EMR_TREAT"));
+  // rx-safety.js itself: the file this route delegates to.
+  const rx = readFileSync(new URL("../functions/_wardsynq/rx-safety.js", import.meta.url), "utf8");
+  assert.ok(!/\ballowed\b/.test(rx.replace(/\/\*[\s\S]*?\*\//g, "").replace(/\/\/.*$/gm, "")), "no 'allowed' concept anywhere in the actual code — this file cannot gate by construction");
+  assert.ok(rx.includes("unapproved: true"), "every shaped response is labeled unapproved");
+  assert.ok(rx.includes("catch (e)"), "a read/actor-resolution failure degrades rather than throwing into the prescription write");
 });

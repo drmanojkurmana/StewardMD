@@ -46,6 +46,8 @@ import { resultsMigration, recordResult } from "../../_wardsynq/migrate-results.
 import { encounterMigration, recordEncounterSync, ENCOUNTER_TERMINAL_STATUSES } from "../../_wardsynq/migrate-encounter.js";
 import { recordLinkForOrg, resolveTenantForOrg } from "../../_wardsynq/migration-tenant.js";
 import { actorDeps as wsqActorDeps, recordDeps as wsqRecordDeps } from "../../_wardsynq/deps.js";
+import { checkPrescriptionSafety } from "../../_wardsynq/rx-safety.js";
+import { getRulePack } from "../../_wardsynq/rulepack.js";
 
 // The Encounter migration's one shared call site. Every hook below (ticket add, import, a terminal
 // status change, checkout) passes the ticket in whatever state it is NOW; recordEncounterSync reads
@@ -449,21 +451,43 @@ export async function onRequest(context) {
       if (seg === "rooms") return json({ ok: true, rooms: await ORG.listRooms(env, orgId) }, 200, request);
       return json({ ok: true, members: await ORG.listMembers(env, orgId) }, 200, request);
     }
-    // Native investigation catalog (WardSynQ-native hospitals only, initially): a doctor searching
-    // to order a test needs SOME catalog to search, and GHIS's own /inv-search is meaningless for a
-    // hospital with no GHIS. Reuses the org's EXISTING billing tariff store (kind:"investigation"
-    // items) as the catalog — no new configuration system, and deliberately NOT gated behind
-    // CLINIC_BILLING_ENABLED: whether an org has turned invoicing on is unrelated to whether a
-    // doctor may order a test. An org with no tariff rows yet returns an empty list — honest, not
-    // fabricated — and rows are added the same way any tariff item is (bill/tariff POST).
+    // Native investigation/medication catalog (WardSynQ-native hospitals only, initially): a doctor
+    // searching to order a test or prescribe a drug needs SOME catalog to search, and GHIS's own
+    // /inv-search and /drug-search are meaningless for a hospital with no GHIS. Reuses the org's
+    // EXISTING billing tariff store (kind:"investigation"|"medication" rows) as the catalog — no new
+    // configuration system, and deliberately NOT gated behind CLINIC_BILLING_ENABLED: whether an
+    // org has turned invoicing on is unrelated to whether a doctor may order a test or a drug. An
+    // org with no tariff rows yet returns an empty list — honest, not fabricated — and rows are
+    // added the same way any tariff item is (bill/tariff POST). ?kind=medication added 2026-09-06
+    // for native prescribing; investigation stays the default (unchanged for every existing caller).
     if (method === "GET" && seg === "inv-catalog") {
       const { s, err } = await loadSessionFor(env, url.searchParams.get("sessionId"), actor); if (err) return err;
       await requireSessionCap(env, actor, s, CAPS.EMR_TREAT);
       const orgId = s.orgId || s.hospitalId;
       const q = String(url.searchParams.get("q") || "").trim().toLowerCase();
-      let rows = (await BILL.listTariff(env, orgId)).filter((t) => t.kind === "investigation");
+      const wantKind = url.searchParams.get("kind") === "medication" ? "medication" : "investigation";
+      let rows = (await BILL.listTariff(env, orgId)).filter((t) => t.kind === wantKind);
       if (q) rows = rows.filter((t) => (t.name || "").toLowerCase().indexOf(q) > -1 || (t.code || "").toLowerCase().indexOf(q) > -1);
       return json({ ok: true, rows: rows.slice(0, 50).map((t) => ({ id: t.id, name: t.name, code: t.code || "" })) }, 200, request);
+    }
+    // Native prescribing's advisory-only CDSS pre-check (WardSynQ-native hospitals). NEVER gates -
+    // see functions/_wardsynq/rx-safety.js's header (unapproved clinical content, per
+    // vault/modules/WardSynQ.md's STATUS line). The doctor sees this BEFORE confirming the
+    // prescription; the write always proceeds regardless of what it finds.
+    if (method === "GET" && seg === "rx-safety") {
+      const { s, err } = await loadSessionFor(env, url.searchParams.get("sessionId"), actor); if (err) return err;
+      await requireSessionCap(env, actor, s, CAPS.EMR_TREAT);
+      const t = await Q.getTicket(env, url.searchParams.get("ticketId") || "");
+      if (!t || t.sessionId !== s.id) return json({ ok: false, error: "not_found" }, 404, request);
+      const wOrg = await ORG.getOrg(env, s.orgId || s.hospitalId);
+      const wsq = await wsqForcedMigration(env, wOrg);
+      if (!wsq || wsq.error) return json({ ok: true, safety: { unapproved: true, rulePackVersion: null, unresolvedDrug: true, findings: [], degraded: true } }, 200, request);
+      const safety = await checkPrescriptionSafety(request, env, {
+        candidate: { drug: url.searchParams.get("drug") || "", generic: url.searchParams.get("generic") || "" },
+        patientId: patientIdForTicket(t), tenantId: wsq.tenantId,
+        actorDeps: wsqActorDeps(env), recordDeps: wsqRecordDeps(env, wsq.tenantId), rulePack: getRulePack(),
+      });
+      return json({ ok: true, safety }, 200, request);
     }
     // Nurse-station board: rooms (status/counts) + unassigned pool for an org+day.
     if (method === "GET" && seg === "opd-board") {
@@ -931,13 +955,14 @@ export async function onRequest(context) {
         // GHIS-shadow feature). org.mode is the ONLY signal, never inferred; every other mode (native
         // personal clinic, connect FHIR EMR, GHIS) takes the unchanged flag-gated path below. Reuses
         // the SAME migrator/ctx dispatch and recordX functions verbatim - only how `mig` is computed
-        // differs. PRESCRIPTIONS ARE DELIBERATELY EXCLUDED HERE: GHIS hard-blocks /prescribe until
-        // reviewed (no drug-interaction/allergy/dose-ceiling CDSS wired into OPD prescribing anywhere
-        // yet - wardsynq-safety.js exists but is not connected here), and a wardsynq hospital has no
-        // equivalent external safety net to lean on either. Native prescribing needs that CDSS wiring
-        // FIRST, not a bypass of the same caution GHIS itself is held to.
+        // differs. PRESCRIPTIONS, since 2026-09-06 (second pass): forced authoritative like the other
+        // three, now that rx-safety.js's advisory-only CDSS pre-check exists (GET /rx-safety, called
+        // by opd-emr.js BEFORE the doctor confirms). That check NEVER gates this write - it cannot,
+        // per its own header (unapproved clinical content) - so a prescription with no known
+        // interaction data behaves exactly as one with a clean check: the record write proceeds
+        // either way, informed rather than blind.
         let wsqMig = null;
-        if (isVitals || isAssessment || isInvOrder) {
+        if (isVitals || isAssessment || isInvOrder || isPrescription) {
           const wOrg = await ORG.getOrg(env, s.orgId || s.hospitalId);
           wsqMig = await wsqForcedMigration(env, wOrg);
           if (wsqMig && wsqMig.error) return json({ ok: false, error: wsqMig.error }, 409, request);
@@ -950,11 +975,10 @@ export async function onRequest(context) {
         // no `order`, and a "medication" with no `rx`, are both still untouched. With the tenant "off"
         // (the default, and every tenant today) no branch is entered and the response is unchanged.
         //
-        // The prescription additionally cannot fire at all until GHIS prescribing is verified and
-        // enabled (QUEUE_EMR_PRESCRIBE_OK): /prescribe answers 501 today and opd-emr.js's postWrite
-        // returns before the timeline mirror, so a prescription GHIS refused reaches nothing here.
-        // wardsynq orgs get the SAME caution (see above) — prescriptions still route through the
-        // flag-gated shadow path only, deliberately not forced authoritative like the other three.
+        // The prescription additionally cannot fire at all for a GHIS/Connect hospital until GHIS
+        // prescribing is verified and enabled (QUEUE_EMR_PRESCRIBE_OK): /prescribe answers 501 today
+        // and opd-emr.js's postWrite returns before the timeline mirror, so a prescription GHIS
+        // refused reaches nothing here. A wardsynq org has no GHIS gate to wait on - see wsqMig above.
         const mig = wsqMig || (isVitals ? await vitalsMigration(env, s, { getOrg: ORG.getOrg, tenantRow: wsqTenantRow })
           : isAssessment ? await assessmentMigration(env, s, { getOrg: ORG.getOrg, tenantRow: wsqTenantRow })
           : isInvOrder ? await invOrderMigration(env, s, { getOrg: ORG.getOrg, tenantRow: wsqTenantRow })

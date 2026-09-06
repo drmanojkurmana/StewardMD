@@ -126,7 +126,10 @@ function orderFromPrescription(input) {
     encounterId: encounterIdForTicket(input.ticket),
     drug,
     drugCode: drugId,
-    drugCodeSystem: "ghis-drug-id",
+    // GHIS's own drug id by default (every caller until 2026-09-06); a wardsynq-native prescription
+    // carries no GHIS id at all — opd-emr.js's wardsynq drug search sets rx.drugCodeSystem so this
+    // is never mislabeled as a GHIS id it is not.
+    drugCodeSystem: str(rx.drugCodeSystem) || "ghis-drug-id",
     dose: null,                                   // see the header: Quantity is not a dose
     route: str(rx.route) || null,
     frequency: str(rx.frequency) || null,

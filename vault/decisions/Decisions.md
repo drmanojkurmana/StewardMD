@@ -4770,3 +4770,66 @@ to search from; CDSS/allergy/problem-list generally; any admin UI to create a `w
 existing `POST /api/queue/org` (mode:"wardsynq") + `POST /api/queue/org/update`
 (connectTenantId) + `POST /api/connect/onboard/tenants` (creates the `connect_tenant` row) already
 suffice for a test hospital, using only existing endpoints, no new one added.
+
+## 2026-09-06 (part 4) — Wiring wardsynq-safety.js into native prescribing, best-effort, on explicit instruction
+
+The owner explicitly authorized this after being told the real gap: no allergy data exists anywhere
+in WardSynQ, so wiring the engine in tonight means best-effort. "Yes, wire it in with best-effort
+allergy list." Recorded here so the exact scope of that authorization, and its limits, are traceable.
+
+**Decision: this can never GATE a prescription — that boundary is not mine or the owner's to waive.**
+`wardsynq-safety.js`'s own rule pack and `vault/modules/WardSynQ.md`'s STATUS line both say, in
+writing, that the interaction/allergy/dose content is UNAPPROVED and "must not gate a real order
+until pharmacy and the relevant committee sign it off." That is a clinical-governance requirement
+baked into the codebase, not a caution I invented. The owner's instruction authorized WIRING the
+engine in with best-effort data — it did not, and could not, waive a documented sign-off requirement.
+So `rx-safety.js` has no `allowed`/`blocked` concept anywhere in its code (asserted directly by a
+test that strips comments and greps for the word `allowed`): it evaluates, shapes findings, and
+returns. The write always proceeds. Every response is labeled `unapproved: true`.
+
+**Decision: split the JSON-loading half from the pure-logic half, into two files.**
+`functions/_wardsynq/rulepack.js` is the ONLY file that imports the real (883 KB)
+`data/interaction-rules.json` + `wardsynq/data/allergy-classes.seed.json`, matching the existing bare-
+JSON-import precedent (`kb/protocols/rchop.json` in the route file) that Cloudflare's bundler accepts
+without an import attribute. `functions/_wardsynq/rx-safety.js` takes a compiled rule pack as a
+dependency and never touches the JSON at all — Node's own ESM loader (unlike Cloudflare's bundler)
+requires `with {type:"json"}` on a bare JSON import, and nothing in this test suite has ever executed
+`functions/api/queue/[[path]].js` as a live module (every existing test on it is a `readFileSync`
+string check) — so this split is what keeps `rx-safety.js`'s actual logic unit-testable in Node with
+small fixture packs, the same pattern `wardsynq-safety.test.mjs` already uses for the engine itself.
+
+**Decision: interaction checking is real today; allergy checking is honest about being inert today.**
+`checkPrescriptionSafety` reads the patient's ACTUAL active `MedicationOrder` history from the record
+for interactions — genuine value, no new data collection needed. It also reads
+`AllergyIntolerance` — which returns `[]` for every patient today, since no capture UI exists — so
+allergy checking contributes nothing yet. This is stated in the file's own header and re-asserted by
+a test (`allergy checking is BEST-EFFORT, honestly: empty allergy list finds nothing`), specifically
+so nobody discovers this gap by surprise later. The wiring is real and activates automatically the
+day allergy capture ships, proven by a companion test that feeds it real allergy data and confirms
+the match fires.
+
+**Decision: the doctor sees findings BEFORE confirming, not after saving.** `submitPrescribe()`'s
+wardsynq branch calls `GET /api/queue/rx-safety` first, folds any findings into the `confirm()`
+dialog text (labeled UNAPPROVED, explicitly "does not block the prescription"), and only then writes.
+A failed or degraded check (`degraded: true`) never blocks either — it just says decision support was
+unavailable, and the doctor proceeds on their own judgment, same as they would have with no check at
+all.
+
+**Decision: fixed a real, pre-existing correctness bug found while wiring this in.**
+`orderFromPrescription` hardcoded `drugCodeSystem: "ghis-drug-id"` for every prescription,
+unconditionally. A wardsynq-native prescription (drug picked from the tariff catalog, not GHIS) would
+have had its `MedicationOrder.drugCode` mislabeled as a GHIS id it is not — exactly the kind of
+mislabeling `migrate-prescription.js`'s own header calls out as dangerous elsewhere ("a wrong field
+could mis-prescribe a drug"). Fixed with a caller-supplied override (`rx.drugCodeSystem`), defaulting
+to `"ghis-drug-id"` unchanged for every existing (GHIS) caller.
+
+**Decision: native prescriptions ARE now forced authoritative, alongside vitals/assessment/orders.**
+Re-added `isPrescription` to `wsqMig`'s forced set once the advisory check existed — safe now, because
+the check can never gate the write either way. The native drug catalog reuses the SAME
+`inv-catalog`/tariff mechanism from part 3, generalized with `?kind=medication`.
+
+**Not done, named:** allergy CAPTURE (a real UI feature — check-in questionnaire, structured
+`AllergyIntolerance` writes — remains entirely unbuilt); dose-ceiling and renal-adjustment checks are
+wired into the same engine call but rest on the same UNAPPROVED seed content and the same
+never-gates posture; pharmacy/committee sign-off, which is what would ever let any of this actually
+gate an order, has not happened and is not this session's call to grant.
