@@ -137,9 +137,16 @@ class RecordService {
     this.pseudonym = deps.pseudonym || (async () => null);
     this.repository = assertRepository(deps.repository);
     this.backend = new TenantBackend(this.repository, this.tenantId);
-    this.store = new ClinicalStore({ backend: this.backend, bus: deps.bus || null });
-    // The only write path. The raw store is not exported from this object.
-    this.governed = new GovernedStore({ store: this.store, bus: deps.bus || null });
+    /* The raw store is a CONSTRUCTOR LOCAL, never a property. It used to be `this.store`, directly
+     * under a comment claiming it "is not exported from this object" - which it plainly was: every
+     * route handler holds a RecordService (openService() returns one), and ClinicalStore.put() takes
+     * no actor and performs none of authoriseWrite's checks - no EXECUTE ceiling, no
+     * signedBy-must-be-the-actor check, no credential check, no audit row. Nothing in the repository
+     * reached for it, so this closes a latent hole rather than fixing a live bypass, but it is the
+     * single invariant this layer exists to hold and a comment is not an access control. */
+    const store = new ClinicalStore({ backend: this.backend, bus: deps.bus || null });
+    // The only write path.
+    this.governed = new GovernedStore({ store, bus: deps.bus || null });
   }
 
   /** What a client needs to know before it writes: who the server thinks it is, and the mode. */
