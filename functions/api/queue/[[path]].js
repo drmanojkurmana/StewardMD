@@ -449,6 +449,22 @@ export async function onRequest(context) {
       if (seg === "rooms") return json({ ok: true, rooms: await ORG.listRooms(env, orgId) }, 200, request);
       return json({ ok: true, members: await ORG.listMembers(env, orgId) }, 200, request);
     }
+    // Native investigation catalog (WardSynQ-native hospitals only, initially): a doctor searching
+    // to order a test needs SOME catalog to search, and GHIS's own /inv-search is meaningless for a
+    // hospital with no GHIS. Reuses the org's EXISTING billing tariff store (kind:"investigation"
+    // items) as the catalog — no new configuration system, and deliberately NOT gated behind
+    // CLINIC_BILLING_ENABLED: whether an org has turned invoicing on is unrelated to whether a
+    // doctor may order a test. An org with no tariff rows yet returns an empty list — honest, not
+    // fabricated — and rows are added the same way any tariff item is (bill/tariff POST).
+    if (method === "GET" && seg === "inv-catalog") {
+      const { s, err } = await loadSessionFor(env, url.searchParams.get("sessionId"), actor); if (err) return err;
+      await requireSessionCap(env, actor, s, CAPS.EMR_TREAT);
+      const orgId = s.orgId || s.hospitalId;
+      const q = String(url.searchParams.get("q") || "").trim().toLowerCase();
+      let rows = (await BILL.listTariff(env, orgId)).filter((t) => t.kind === "investigation");
+      if (q) rows = rows.filter((t) => (t.name || "").toLowerCase().indexOf(q) > -1 || (t.code || "").toLowerCase().indexOf(q) > -1);
+      return json({ ok: true, rows: rows.slice(0, 50).map((t) => ({ id: t.id, name: t.name, code: t.code || "" })) }, 200, request);
+    }
     // Nurse-station board: rooms (status/counts) + unassigned pool for an org+day.
     if (method === "GET" && seg === "opd-board") {
       const orgId = url.searchParams.get("orgId") || "";

@@ -2161,3 +2161,26 @@ test("SHADOW does not alter GHIS or the queue engine: the migration issues no HT
   assert.ok(!/from\s+["'][^"']*_queue_/i.test(code), "never imports the queue engine — a pure mapper over the ticket it is handed, like every sibling migrate-*.js");
   assert.ok(!/from\s+["'][^"']*ghis/i.test(code), "never touches GHIS");
 });
+
+// 2026-09-06 (part 3): investigation ORDER search for a wardsynq-native hospital. There is no GHIS
+// catalog to search, so the write path from part 2 was wired to nothing a doctor could actually pick.
+// Reuses the org's EXISTING billing-tariff store (kind:"investigation" rows) as the catalog -
+// deliberately NOT gated behind CLINIC_BILLING_ENABLED, since whether invoicing is on is unrelated to
+// whether a doctor may order a test. Medication search stays untouched (no native prescribing yet).
+test("native investigation-order search: reuses the existing tariff catalog, session-scoped, not billing-gated", () => {
+  const src = readFileSync(new URL("../functions/api/queue/[[path]].js", import.meta.url), "utf8");
+  const route = src.slice(src.indexOf('seg === "inv-catalog"'), src.indexOf('seg === "opd-board"'));
+  assert.ok(route.includes("BILL.listTariff("), "reuses the existing tariff store — no new catalog system");
+  assert.ok(route.includes('kind === "investigation"'), "filters to investigation-kind rows only");
+  assert.ok(!route.includes("billingEnabled"), "must not be gated behind the global billing flag");
+  assert.ok(route.includes("loadSessionFor("), "session-scoped like every other client-facing route, not a raw orgId param");
+  assert.ok(route.includes("CAPS.EMR_TREAT"), "same capability the doctor's other clinical writes require");
+
+  const emr = readFileSync(new URL("../opd-emr.js", import.meta.url), "utf8");
+  const runSearch = emr.slice(emr.indexOf("function runSearch("), emr.indexOf("function runSearch(") + 800);
+  assert.ok(runSearch.includes('kind === "inv" && st.source === "wardsynq"'), "investigation search only, wardsynq only");
+  const wsqSearch = emr.slice(emr.indexOf("function runWardsynqInvSearch("), emr.indexOf("function runSearch("));
+  assert.ok(wsqSearch.includes("/api/queue/inv-catalog"), "hits the new native catalog endpoint");
+  assert.ok(wsqSearch.includes("fbTok()"), "Firebase-authed like every other native write/read, never ghisAuth()");
+  assert.ok(!wsqSearch.includes("ghisAuth"), "never touches the GHIS proxy");
+});

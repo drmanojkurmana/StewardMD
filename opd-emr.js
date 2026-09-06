@@ -1143,9 +1143,28 @@
     ekg: "electrocardiogram", cxr: "chest x ray", usg: "ultrasound", lipid: "lipid profile", "pt inr": "prothrombin",
     inr: "prothrombin", bun: "blood urea", "urine r/e": "urine routine", "2d echo": "echocardiogram" };
   function expandQuery(kind, q) { if (kind !== "inv") return q; var k = String(q || "").toLowerCase().trim(); return INV_ABBREV[k] || q; }
+  // WardSynQ-native hospital, investigation search ONLY: the org's own billing-tariff catalog
+  // (kind:"investigation" rows), Firebase-authed, via GET /api/queue/inv-catalog. Medication search
+  // stays "offghis" for wardsynq deliberately — no native prescribing until CDSS is wired in (see
+  // submitPrescribe's header), so there is nothing safe to search a drug catalog FOR yet.
+  function runWardsynqInvSearch(q) {
+    st.invResults = []; st.invSearchMsg = "searching"; renderSearchOut("inv");
+    fbTok().then(function (t) {
+      if (!t) { st.invResults = []; st.invSearchMsg = "login"; renderSearchOut("inv"); return; }
+      fetch(qBase() + "/api/queue/inv-catalog?sessionId=" + encodeURIComponent(st.sessionId || "") + "&q=" + encodeURIComponent(q), { headers: { Authorization: "Bearer " + t } })
+        .then(function (r) { return r.json().then(function (d) { return { ok: r.ok, d: d || {} }; }, function () { return { ok: r.ok, d: {} }; }); })
+        .then(function (res) {
+          if (!res.ok || (res.d && res.d.error)) { st.invResults = []; st.invSearchMsg = "error"; }
+          else { st.invResults = (res.d && res.d.rows) || []; st.invSearchMsg = st.invResults.length ? "" : "none"; }
+          renderSearchOut("inv");
+        })
+        .catch(function () { st.invResults = []; st.invSearchMsg = "error"; renderSearchOut("inv"); });
+    }).catch(function () { st.invResults = []; st.invSearchMsg = "error"; renderSearchOut("inv"); });
+  }
   function runSearch(kind) {
     var q = kind === "inv" ? st.invQuery : st.medQuery, key = kind === "inv" ? "invResults" : "medResults", mkey = kind + "SearchMsg";
     if (!q || q.length < 2) { st[key] = []; st[mkey] = ""; renderSearchOut(kind); return; }
+    if (kind === "inv" && st.source === "wardsynq") { runWardsynqInvSearch(q); return; }
     // Search is a GHIS (hospital) lookup — needs a live Ward Sync session + is meaningless off-hospital.
     if (st.source && st.source !== "ghis") { st[key] = []; st[mkey] = "offghis"; renderSearchOut(kind); return; }
     st[key] = []; st[mkey] = "searching"; renderSearchOut(kind);
