@@ -2056,9 +2056,13 @@
     // to discard. Brand names are the common case ("Augmentin 625" does not resolve), and the
     // patient may well be allergic to what is inside them - a penicillin, here.
     if (safety.unresolvedDrug) return "\n\nNOT CHECKED: this drug was not recognised by the decision-support content, so NO interaction or allergy check ran for it. Check allergies and interactions yourself before prescribing.";
-    if (!safety.findings || !safety.findings.length) return "\n\n(No interaction or allergy match found against this patient's record. Unapproved content, not a substitute for clinical judgment.)";
+    // Some of the patient's CURRENT medicines could not be resolved, so this order was never
+    // compared against them. Saying only "no interaction found" would overstate what ran.
+    var un = (safety.unresolvedActiveMeds || []);
+    var gap = un.length ? "\n\nNOT compared against: " + un.slice(0, 5).join(", ") + " (not recognised by the decision-support content). Check those yourself." : "";
+    if (!safety.findings || !safety.findings.length) return "\n\n(No interaction or allergy match found against this patient's record. Unapproved content, not a substitute for clinical judgment.)" + gap;
     var lines = safety.findings.slice(0, 5).map(function (f) { return "- " + f.message; });
-    return "\n\nUNAPPROVED decision support flags:\n" + lines.join("\n") + "\n\nUse clinical judgment. This does not block the prescription.";
+    return "\n\nUNAPPROVED decision support flags:\n" + lines.join("\n") + gap + "\n\nUse clinical judgment. This does not block the prescription.";
   }
   function confirmed(msg) { try { return !!(G.confirm && G.confirm(msg)); } catch (e) { return false; } }
   function submitInvOrder() {

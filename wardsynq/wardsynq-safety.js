@@ -673,10 +673,23 @@ class SafetyEngine {
     // should stop an order is a site policy decision, so it is a flag rather than a block here.
     const unresolvedDrug = !resolveGeneric(order.drugCode || order.drug, this.rulePack);
 
+    /* The SAME honesty, owed for the other half of the pair. checkInteractions() drops any active
+     * medication it cannot resolve (it has to - an unknown token matches no rule), and until now it
+     * dropped it SILENTLY: the verdict came back with no interaction findings and unresolvedDrug
+     * false, which reads as "checked, clean". Measured 2026-09-07 against the real pack: a patient
+     * on warfarin prescribed ibuprofen gets INTERACTION_MAJOR when the warfarin order carries a
+     * generic, and NOTHING AT ALL when it carries a GHIS material id instead - the same patient, the
+     * same order, one silently missing major bleeding-risk interaction. Which of the patient's own
+     * medicines could not be checked is therefore reported alongside. */
+    const unresolvedActiveMeds = (activeMeds || [])
+      .filter((m) => m && !resolveGeneric(m.drugCode || m.drug, this.rulePack))
+      .map((m) => String(m.drug || m.drugCode || "unknown"));
+
     return {
       allowed: blocks.length === 0 && overridables.length === 0,
       blocks, overridables, warnings, findings,
       unresolvedDrug,
+      unresolvedActiveMeds,
       rulePackVersion: this.rulePack.version,
       elapsedMs: performance.now() - started,
     };
@@ -698,10 +711,33 @@ class SafetyEngine {
         activeMeds: ctx.activeMeds || [],
         overrides: ctx.overrides || [],
       });
+      /* "Not checked" must not reach the bedside looking like "checked, clean". For a drug the pack
+       * cannot resolve, every check returns [] - so allowed is true, warnings is empty, and
+       * MedicationAdministrationRecord.scan() records the dose as given against a clean verdict.
+       * Measured 2026-09-07: hook() for "Augmentin 625" on a penicillin-allergic patient returned
+       * {allowed:true, blocks:[], warnings:[]}. It carries the flags out as warnings instead.
+       *
+       * These are WARNINGS, not blocks, deliberately. This content is unapproved seed data that must
+       * never hard-stop a real dose (the file header, and vault/modules/WardSynQ.md's STATUS line);
+       * inventing a new refusal at the moment of administration is a bigger clinical risk than the
+       * gap it would cover. The nurse is told, and decides. */
+      const notChecked = [];
+      if (verdict.unresolvedDrug) {
+        notChecked.push({
+          code: "NOT_CHECKED_DRUG", severity: SEVERITY.MAJOR, disposition: DISPOSITION.WARN,
+          message: `"${ctx.order && ctx.order.drug}" is not recognised by the decision-support content, so no allergy, interaction or dose check ran for it.`,
+        });
+      }
+      if (verdict.unresolvedActiveMeds && verdict.unresolvedActiveMeds.length) {
+        notChecked.push({
+          code: "NOT_CHECKED_ACTIVE_MED", severity: SEVERITY.MAJOR, disposition: DISPOSITION.WARN,
+          message: `Not interaction-checked against: ${verdict.unresolvedActiveMeds.join(", ")} (not recognised by the decision-support content).`,
+        });
+      }
       return {
         allowed: verdict.allowed,
         blocks: verdict.blocks.concat(verdict.overridables.map((f) => ({ ...f, requiresOverride: true }))),
-        warnings: verdict.warnings,
+        warnings: verdict.warnings.concat(notChecked),
       };
     };
   }
