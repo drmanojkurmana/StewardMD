@@ -4720,3 +4720,53 @@ resource (no referential-integrity check in the record service), so the assessme
 standalone, but a fuller chart needs the same treatment applied to those three migrations; any admin
 UI to actually create a `mode:"wardsynq"` org (a direct data write today, same as `"connect"`); CDSS
 and allergy/problem-list migration (unrelated to this task).
+
+## 2026-09-06 — Extending the native path fast: registration, vitals, encounter, investigation orders
+
+**Decision: one shared helper (`wsqForcedMigration(env, org)`) instead of repeating the tenant-
+resolve-and-force logic at each of the five write sites.** The assessment PR inlined this once,
+bespoke, inside the timeline handler. Generalizing it into a single function — `org.mode !==
+"wardsynq" → null` (caller falls through unchanged), else resolve the tenant and return
+`{mode:"authoritative", tenantId}` or `{error:"wardsynq_tenant_not_configured"}` — let every other
+site (registration, the ONE shared `syncEncounter()` call site, and vitals/investigation-orders in
+the timeline handler) reuse it in one line each, instead of five copies of the same tenant-lookup.
+Root-caused once, not patched per caller.
+
+**Decision: the timeline handler's four-way dispatch (vitals/assessment/order/prescription) is now
+computed as `wsqMig || <existing flag-gated call>`, not a bespoke early-return per write type.**
+Simpler than the assessment PR's original shape and it generalizes for free: adding vitals and
+investigation orders to the wardsynq-forced path took one line each, because the EXISTING
+migrator/ctx/authoritative-dispatch code (unchanged, already handling all four types) just runs
+against whichever `mig` it's handed.
+
+**Decision: prescriptions are explicitly, deliberately EXCLUDED from the wardsynq-forced path.** GHIS
+itself hard-blocks `/prescribe` until reviewed, specifically because no drug-interaction/allergy/dose-
+ceiling CDSS is wired into OPD prescribing anywhere (`wardsynq-safety.js` exists, built, tested, and
+is NOT connected to OPD prescribing). A wardsynq hospital has no external safety net to substitute
+for that missing check — enabling native prescribing now would be LESS safe than GHIS's own current
+posture, not equally safe. `submitPrescribe()` in `opd-emr.js` gets no wardsynq branch; the server's
+`wsqMig` computation explicitly checks `isVitals || isAssessment || isInvOrder`, never
+`isPrescription`. This is a genuine, named gap, not an oversight — CDSS wiring is the prerequisite,
+not a follow-up nicety.
+
+**Decision: investigation ordering IS enabled natively, unlike prescribing** — carries no drug-dosing
+risk, so `submitInvOrder()` gets a `st.source === "wardsynq"` branch posting through the same
+`postWardsynqTimeline()` helper the assessment path already established (refactored out of
+`postWardsynqAssessment` for reuse). **Named limitation:** `runSearch()`'s existing `st.source !==
+"ghis"` guard still no-ops the investigation SEARCH for a wardsynq hospital (same as it always has for
+local/shared clinics) — there is no native test/service catalog to search yet. The write path is
+fully wired end to end; a doctor cannot yet pick a service to order without one. Building that catalog
+is a separate, sized piece of work, not done here.
+
+**Decision: vitals needed ZERO client changes.** The nurse-station vitals entry (`opd.html`'s
+`openVitals()`, the staff web console) already posts unconditionally to the generic
+`POST /api/queue/timeline` with `kind:"vitals"` — it has no GHIS-specific branching at all. The
+server-side `wsqMig` force applies automatically based on the session's own org.mode, invisible to
+that client. This is exactly the "smallest clean change" posture: nothing to touch where nothing was
+GHIS-coupled to begin with.
+
+**Not done, named:** prescriptions (CDSS prerequisite, above); a native investigation/service catalog
+to search from; CDSS/allergy/problem-list generally; any admin UI to create a `wardsynq` org — the
+existing `POST /api/queue/org` (mode:"wardsynq") + `POST /api/queue/org/update`
+(connectTenantId) + `POST /api/connect/onboard/tenants` (creates the `connect_tenant` row) already
+suffice for a test hospital, using only existing endpoints, no new one added.

@@ -1985,13 +1985,15 @@
     if (err === "not_found") return "This visit could not be found. Reopen the patient from the queue and try again.";
     return "Could not complete the request. Please try again.";
   }
-  function postWardsynqAssessment(vals, okMsg, signOff, onOk) {
+  // General native-WardSynQ write: posts straight to the SAME /api/queue/timeline endpoint
+  // addToTimeline() uses for the GHIS shadow mirror, Firebase-authed - but here it IS the save, not a
+  // best-effort mirror. `extra` carries whatever structured payload this kind needs (vals/order/rx/
+  // signOff); success/failure is the WardSynQ record's own, never a GHIS response.
+  function postWardsynqTimeline(kind, text, extra, okMsg, onOk) {
     if (!st.ticketId || !st.sessionId) { toast("Open this patient from the queue to save."); return; }
     fbTok().then(function (t) {
       if (!t) { toast("Sign in to WardSynQ first."); return; }
-      var body = { sessionId: st.sessionId, ticketId: st.ticketId, kind: "assessment", text: assessSummary(st.assessVals) };
-      if (vals) body.vals = vals;
-      if (signOff) body.signOff = true;
+      var body = Object.assign({ sessionId: st.sessionId, ticketId: st.ticketId, kind: kind, text: text }, extra || {});
       fetch(qBase() + "/api/queue/timeline", { method: "POST", headers: { "Content-Type": "application/json", Authorization: "Bearer " + t }, body: JSON.stringify(body) })
         .then(function (r) { return r.json().then(function (d) { return { status: r.status, ok: r.ok, d: d || {} }; }); })
         .then(function (res) {
@@ -2004,9 +2006,22 @@
         .catch(function () { toast("Could not complete the request. Please try again."); });
     }).catch(function () { toast("Could not complete the request. Please try again."); });
   }
+  function postWardsynqAssessment(vals, okMsg, signOff, onOk) {
+    var extra = {}; if (vals) extra.vals = vals; if (signOff) extra.signOff = true;
+    postWardsynqTimeline("assessment", assessSummary(st.assessVals), extra, okMsg, onOk);
+  }
   function confirmed(msg) { try { return !!(G.confirm && G.confirm(msg)); } catch (e) { return false; } }
   function submitInvOrder() {
     var d = st.invDraft || {}; if (!d.service) return;
+    var order = { serviceId: d.service.id, name: d.service.name || "", diagnosis: d.diagnosis || "", emergency: !!d.emergency };
+    var text = "Investigation ordered: " + d.service.name + (d.diagnosis ? " (for " + d.diagnosis + ")" : "") + (d.emergency ? " [emergency]" : "");
+    // WardSynQ-native hospital: straight to the WardSynQ record, no GHIS. Investigation orders carry
+    // no drug-dosing risk (unlike prescriptions), so unlike submitPrescribe this is safe to enable now.
+    if (st.source === "wardsynq") {
+      if (!confirmed('Order "' + d.service.name + '" for this patient?')) return;
+      postWardsynqTimeline("note", text, { order: order }, "Investigation ordered.", function () { st.invDraft = {}; paint(); });
+      return;
+    }
     if (!confirmed('Order "' + d.service.name + '" for this patient in GHIS?')) return;
     // The timeline sentence is unchanged. `order` rides beside it so the server can file the SAME
     // order structurally in the clinical record (functions/_wardsynq/migrate-inv-order.js) instead of
@@ -2014,8 +2029,7 @@
     // them today. Note `emergency` and `diagnosis` are carried here even though GHIS itself drops
     // them - that is what makes the record keep what the doctor actually entered.
     postWrite("/inv-order", { serviceId: d.service.id, diagnosis: d.diagnosis || "", emergency: !!d.emergency }, "Investigation ordered.",
-      { kind: "note", text: "Investigation ordered: " + d.service.name + (d.diagnosis ? " (for " + d.diagnosis + ")" : "") + (d.emergency ? " [emergency]" : ""),
-        order: { serviceId: d.service.id, name: d.service.name || "", diagnosis: d.diagnosis || "", emergency: !!d.emergency } });
+      { kind: "note", text: text, order: order });
   }
   function submitPrescribe() {
     var d = st.medDraft || {}; if (!d.drug) return;

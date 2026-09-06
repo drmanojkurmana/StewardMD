@@ -830,11 +830,37 @@ AI actor at the door (an AI draft arriving via a doctor's token is stamped as th
 `aiDrafted` preserved as a field only); no push fan-out from the server bus; polling, not push, for
 the change feed. The safety case did not move: 14 of 16, 2 partial.
 
-## The FIRST native, GHIS-independent clinical write: OPD assessment (2026-09-06)
+## The FIRST native, GHIS-independent clinical writes: registration, vitals, assessment, orders (2026-09-06)
 
 Everything above this section is GHIS-shadow tooling: it makes WardSynQ a faithful mirror of GHIS,
 never the primary record. This is the first write that goes to WardSynQ WITHOUT GHIS in the loop at
 all — the pivot from "migrate GHIS into WardSynQ" to "WardSynQ operates as its own EMR."
+
+**UPDATED same day, second pass — the native path now covers a full OPD visit, minus prescribing.**
+One shared helper, `wsqForcedMigration(env, org)` in `functions/api/queue/[[path]].js`, forces
+`{mode:"authoritative"}` (via the org's existing `connectTenantId` link, bypassing the global
+`WARDSYNQ_RECORD` flag) for any `org.mode==="wardsynq"`. It is now used at every write site:
+- **Registration** (`/patient/register`) — the org is already fetched there; one line.
+- **Encounter** (`syncEncounter()`, the ONE shared call site for ticket-add/import/status/checkout).
+- **Vitals, assessment, investigation orders** — the timeline handler's existing four-way
+  `migrator`/`ctx` dispatch (unchanged) now runs against `wsqMig || <flag-gated call>`.
+- **Vitals needed no client change at all**: the nurse-station console (`opd.html`'s `openVitals()`)
+  already posts to the generic timeline endpoint with no GHIS-specific branching.
+- **Investigation orders**: `submitInvOrder()` in `opd-emr.js` gets a `st.source==="wardsynq"` branch
+  via a new shared `postWardsynqTimeline()` helper (refactored out of the assessment path's
+  `postWardsynqAssessment`). **Known gap**: `runSearch()` still no-ops the investigation SEARCH for
+  non-GHIS sources — there is no native test/service catalog yet, so the write path is wired but a
+  doctor cannot yet pick a service to order for a wardsynq hospital without one.
+- **Prescriptions are deliberately EXCLUDED**, on purpose, not an oversight: GHIS itself hard-blocks
+  `/prescribe` because no drug-interaction/allergy/dose-ceiling CDSS is wired into OPD prescribing
+  anywhere (`wardsynq-safety.js` exists, tested, unconnected). A wardsynq hospital has no external
+  safety net to substitute — enabling native prescribing now would be LESS safe than GHIS's current
+  posture. `submitPrescribe()` has no wardsynq branch; the server's forced-mode check never includes
+  `isPrescription`. CDSS wiring is the prerequisite for this, not a follow-up nicety.
+
+**Creating a test wardsynq hospital today needs no new endpoint**: `POST /api/connect/onboard/tenants
+{name}` (creates the `connect_tenant` D1 row, self-service) → `POST /api/queue/org {name,
+mode:"wardsynq"}` → `POST /api/queue/org/update {orgId, connectTenantId}`. All three already exist.
 
 **The org's existing `mode` field gets a third, explicit value: `"wardsynq"`** (alongside `"native"` =
 personal/shared clinic, on-device `_localStore`, and `"connect"` = external FHIR EMR hospital).
