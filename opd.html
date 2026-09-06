@@ -638,7 +638,9 @@
       }).join("");
       var when2=when(n.meta&&n.meta.recordedAt);
       var by=n.writtenBy?esc(n.writtenBy.id):(n.authorId?esc(n.authorId):"");
-      return '<div class="asn-set"><div class="w" style="display:flex;align-items:center;gap:8px;font-size:12px;color:var(--mut);margin-bottom:6px"><b style="color:var(--ink)">'+when2+'</b>'+(by?' · '+by:'')+(n.version>1?' · v'+n.version:'')+'</div>'+(secs||'<p class="st">No sections recorded.</p>')+'</div>';
+      // Signed is a fact the record holds, not a badge the console decides. Shown only when present.
+      var signed=n.signedBy?'<span class="now">Signed by '+esc(n.signedBy)+'</span>':'<span style="color:var(--mut)">Unsigned</span>';
+      return '<div class="asn-set"><div class="w" style="display:flex;align-items:center;gap:8px;font-size:12px;color:var(--mut);margin-bottom:6px;flex-wrap:wrap"><b style="color:var(--ink)">'+when2+'</b>'+(by?' · '+by:'')+(n.version>1?' · v'+n.version:'')+signed+'</div>'+(secs||'<p class="st">No sections recorded.</p>')+'</div>';
     }).join("");
     var more=sorted.length>5?'<p class="st" style="margin:8px 0 0">'+(sorted.length-5)+' earlier '+(sorted.length-5===1?"assessment":"assessments")+' in the record.</p>':'';
     return '<h4>Assessment<span class="src">Clinical record</span></h4><p class="st">Read from the clinical record</p>'+body+more;

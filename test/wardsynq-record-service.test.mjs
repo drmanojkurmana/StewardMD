@@ -20,7 +20,7 @@ import { mintStaffSession, verifyStaffSession } from "../functions/_opd_auth.js"
 import { vitalsMode, patientIdForTicket, vitalsToObservations, vitalsMigration, recordVitals, VITAL_CODES } from "../functions/_wardsynq/migrate-vitals.js";
 import { registrationMigration, patientFromRegistration, sameDemographics, registerPatientRecord } from "../functions/_wardsynq/migrate-registration.js";
 import { patientIdForMrn, encounterIdForTicket, noteIdForTicket } from "../functions/_wardsynq/opd-identity.js";
-import { assessmentMigration, sectionsFromAssessment, noteFromAssessment, sameNoteContent, recordAssessment } from "../functions/_wardsynq/migrate-assessment.js";
+import { assessmentMigration, sectionsFromAssessment, noteFromAssessment, signedNoteFrom, sameNoteContent, recordAssessment, recordAssessmentSignOff } from "../functions/_wardsynq/migrate-assessment.js";
 import { readFileSync } from "node:fs";
 import { makeMockDb } from "../functions/_connect/testkit.js";
 import { can } from "../functions/_connect/enterprise/rbac.js";
@@ -656,7 +656,10 @@ test("the queue timeline handler orders the writes by mode and leaves the off pa
   // 2026-09-06: vitals and the doctor's assessment now share this branch through one `migrator`
   // (recordVitals or recordAssessment, chosen once, above the mode check) rather than each mode
   // naming recordVitals directly — so both migrations get the SAME ordering guarantees for free.
-  assert.ok(h.includes("const migrator = isVitals ? recordVitals : recordAssessment;"));
+  // ...and, since the sign-off migration, the doctor's Authorise is a third migrator on the same
+  // branch, selected by body.signOff — never by kind alone, so a save and a sign-off stay distinct.
+  assert.ok(h.includes("const migrator = isVitals ? recordVitals : isSignOff ? recordAssessmentSignOff : recordAssessment;"));
+  assert.ok(h.includes('const isSignOff = isAssessment && body.signOff === true;'));
   // authoritative: record first, refusal returns before any timeline write, then the timeline as shadow.
   const auth = h.slice(i('mig.mode === "authoritative"'), i("// shadow:"));
   assert.ok(auth.indexOf("migrator(") < auth.indexOf("QT.appendTimeline("));
@@ -1030,4 +1033,129 @@ test("investigations and prescriptions remain untouched: only kind===\"assessmen
   assert.equal((emr.match(/vals: buildAssessPayload\(/g) || []).length, 3, "submitAssessment, clearAssessment and consultToER all forward the structured payload");
   assert.ok(!/submitInvOrder[\s\S]{0,400}vals:/.test(emr), "an investigation order does not send structured vals");
   assert.ok(!/submitPrescribe[\s\S]{0,400}vals:/.test(emr), "a prescription does not send structured vals");
+});
+
+/* ------------------------------------------------------------------ the sign-off (GHIS Authorise) migration */
+
+test("signedNoteFrom: identical content, signedBy set, a fresh recordedAt; nothing else invented", () => {
+  const current = noteFromAssessment({ ticket: { id: "T", ghisEpisodeId: "EP-60", ghisPatientId: "GH-60" }, vals: { provisional_diagnosis: "GERD", Chief_complaints_duration: "pain" }, authorId: "fb:dr-menon" });
+  current.version = 3; current.writtenBy = { id: "fb:dr-menon", kind: "human", tier: "execute", at: "2026-09-06T09:00:00.000Z" };
+  const signed = signedNoteFrom(current, "fb:dr-menon");
+  assert.equal(signed.id, current.id); assert.equal(signed.patientId, current.patientId); assert.equal(signed.encounterId, current.encounterId);
+  assert.deepEqual(signed.sections, current.sections, "signing changes nothing that was said");
+  assert.equal(signed.authorId, "fb:dr-menon"); assert.equal(signed.signedBy, "fb:dr-menon"); assert.equal(signed.noteType, "soap");
+  assert.equal(signed.aiDrafted, false);
+  assert.ok(signed.meta && signed.meta.recordedAt, "the moment of signing is its own fact");
+  assert.equal(signedNoteFrom(null, "x"), null); assert.equal(signedNoteFrom(current, ""), null);
+});
+
+test("THE PROOF, sign-off: the doctor authorises on device A; device B reads the same note now signed by the actual doctor; the content is closed to further saves; a second authorise is a no-op; the pre-sign versions survive", async () => {
+  const h = opdHospital({ "fb:dr-menon": { role: "doctor" }, "fb:dr-rao": { role: "doctor" }, "fb:sister-anu": { role: "nurse" } }, { settings: { wardsynq: { migrations: { assessment: "shadow" } } } });
+  const ticket = { id: "TKT-70", ghisEpisodeId: "EP-70", ghisPatientId: "GH-40233" };
+  const actorDeps = { db: h.db, identifyFn: h.deps.identifyFn, claimsFn: h.deps.claimsFn, staffSession: null, orgForTenant: h.deps.orgForTenant, authorizeOrg: h.deps.authorizeOrg };
+  const recordDeps = { repository: h.repository, pseudonym: async () => null };
+  const mig = { mode: "shadow", tenantId: "gimsr" };
+  const asMenon = new Request("https://x/api/queue/timeline", { method: "POST", headers: { "X-Test-User": "fb:dr-menon", "X-Test-RegNo": "AP-12345" } });
+
+  // Nothing to sign yet: an authorise before any save is refused, and no empty note is minted.
+  const early = await recordAssessmentSignOff(asMenon, ENV, { migration: mig, ticket, actorDeps, recordDeps });
+  assert.equal(early.ok, false); assert.equal(early.status, 422); assert.equal(early.error, "no_note_to_sign");
+  assert.equal(await h.repository.latest("gimsr", "ClinicalNote", "opd-note-ep-70-assessment"), null);
+
+  // Two content saves (a draft, then a refinement), then the authorise.
+  await recordAssessment(asMenon, ENV, { migration: mig, ticket, vals: { provisional_diagnosis: "GERD" }, actorDeps, recordDeps });
+  await recordAssessment(asMenon, ENV, { migration: mig, ticket, vals: { provisional_diagnosis: "GERD; r/o PUD", management_plan: "PPI" }, actorDeps, recordDeps });
+  const signed = await recordAssessmentSignOff(asMenon, ENV, { migration: mig, ticket, actorDeps, recordDeps });
+  assert.equal(signed.ok, true); assert.equal(signed.written, 1); assert.equal(signed.version, 3); assert.equal(signed.signedBy, "fb:dr-menon"); assert.equal(signed.signOff, true);
+
+  // Device B: another doctor reads it back — signed, by the doctor who actually signed, content intact.
+  const rao = await client(h, "fb:dr-rao");
+  const note = await rao.governed.get(rao.actor, "ClinicalNote", "opd-note-ep-70-assessment");
+  assert.equal(note.version, 3); assert.equal(note.signedBy, "fb:dr-menon"); assert.equal(note.writtenBy.id, "fb:dr-menon");
+  assert.equal(note.sections.assessment, "Provisional diagnosis: GERD; r/o PUD"); assert.equal(note.sections.plan, "Management plan: PPI");
+  const r = await h.fetchAs("fb:dr-rao")("https://x/api/wardsynq/gimsr/patient/opd-pat-gh-40233/ClinicalNote");
+  assert.equal((await r.json()).records[0].signedBy, "fb:dr-menon");
+
+  // Closed: a further content save from ANY doctor is refused, not silently applied over a signature.
+  const late = await recordAssessment(asMenon, ENV, { migration: mig, ticket, vals: { provisional_diagnosis: "changed after signing" }, actorDeps, recordDeps });
+  assert.equal(late.ok, false); assert.equal(late.status, 409); assert.equal(late.error, "note_signed"); assert.equal(late.signedBy, "fb:dr-menon");
+  const asRao = new Request("https://x/api/queue/timeline", { method: "POST", headers: { "X-Test-User": "fb:dr-rao", "X-Test-RegNo": "AP-67890" } });
+  const lateRao = await recordAssessment(asRao, ENV, { migration: mig, ticket, vals: { provisional_diagnosis: "another doctor's edit" }, actorDeps, recordDeps });
+  assert.equal(lateRao.error, "note_signed");
+  // A second authorise is a no-op, not a fourth version.
+  const again = await recordAssessmentSignOff(asMenon, ENV, { migration: mig, ticket, actorDeps, recordDeps });
+  assert.equal(again.ok, true); assert.equal(again.written, 0); assert.equal(again.skipped, "already_signed"); assert.equal(again.version, 3);
+  // The append-only history: draft, refinement, signed — nothing rewritten, nothing lost.
+  const hist = await h.repository.history("gimsr", "ClinicalNote", "opd-note-ep-70-assessment");
+  assert.deepEqual(hist.map((v) => [v.version, v.signedBy || null, v.sections.assessment]), [
+    [1, null, "Provisional diagnosis: GERD"], [2, null, "Provisional diagnosis: GERD; r/o PUD"], [3, "fb:dr-menon", "Provisional diagnosis: GERD; r/o PUD"],
+  ]);
+  assert.equal(hist.length, 3);
+
+  // The signature is audited as the real human, PHI-free.
+  const signWrite = h.repository.audit.find((a) => a.action === "record.write" && a.scope.resourceType === "ClinicalNote" && a.scope.version === 3);
+  assert.ok(signWrite); assert.equal(signWrite.actor, "fb:dr-menon");
+  assert.ok(!JSON.stringify(signWrite).includes("GERD"));
+});
+
+test("who may sign: a doctor with no registration number cannot (NO_CREDENTIAL), a nurse cannot (scope), another tenant cannot read it, and the signature can only ever be the signer's own id", async () => {
+  const h = opdHospital({ "fb:dr-menon": { role: "doctor" }, "fb:dr-pin": { role: "doctor" }, "fb:sister-anu": { role: "nurse" } }, { settings: { wardsynq: { migrations: { assessment: "shadow" } } } });
+  const ticket = { id: "TKT-71", ghisEpisodeId: "EP-71", ghisPatientId: "GH-40233" };
+  const actorDeps = { db: h.db, identifyFn: h.deps.identifyFn, claimsFn: h.deps.claimsFn, staffSession: null, orgForTenant: h.deps.orgForTenant, authorizeOrg: h.deps.authorizeOrg };
+  const recordDeps = { repository: h.repository, pseudonym: async () => null };
+  const mig = { mode: "shadow", tenantId: "gimsr" };
+  // A doctor WITHOUT a registration number (a PIN session, say) saves the content...
+  const asPin = new Request("https://x/api/queue/timeline", { method: "POST", headers: { "X-Test-User": "fb:dr-pin" } });
+  const saved = await recordAssessment(asPin, ENV, { migration: mig, ticket, vals: { provisional_diagnosis: "GERD" }, actorDeps, recordDeps });
+  assert.equal(saved.ok, true);
+  // ...and cannot sign it: the store's own NO_CREDENTIAL, surfaced as the reason. The note stays unsigned.
+  const noCred = await recordAssessmentSignOff(asPin, ENV, { migration: mig, ticket, actorDeps, recordDeps });
+  assert.equal(noCred.ok, false); assert.equal(noCred.status, 403); assert.equal(noCred.error, "governance"); assert.deepEqual(noCred.reasons, ["NO_CREDENTIAL"]);
+  assert.equal((await h.repository.latest("gimsr", "ClinicalNote", "opd-note-ep-71-assessment")).signedBy, null);
+  assert.equal((await h.repository.history("gimsr", "ClinicalNote", "opd-note-ep-71-assessment")).length, 1);
+  // A nurse: no ClinicalNote in her write scope at all.
+  const asNurse = new Request("https://x/api/queue/timeline", { method: "POST", headers: { "X-Test-User": "fb:sister-anu" } });
+  const nurse = await recordAssessmentSignOff(asNurse, ENV, { migration: mig, ticket, actorDeps, recordDeps });
+  assert.equal(nurse.ok, false); assert.equal(nurse.status, 403); assert.ok(nurse.reasons.includes("SCOPE_DENIED"), "no ClinicalNote in her scope; governance also reports NO_CREDENTIAL, every reason at once");
+  // The OPD-level gate refuses her before WardSynQ is even consulted: Authorise posts kind:assessment,
+  // which the route gates on EMR_TREAT exactly as it always did.
+  assert.equal((await h.deps.authorizeOrg({}, { kind: "firebase", id: "fb:sister-anu" }, "org-gimsr", CAPS.EMR_TREAT)).ok, false);
+  // A credentialed doctor signs; the signature is HER id, derived from the session, not from the body.
+  const asMenon = new Request("https://x/api/queue/timeline", { method: "POST", headers: { "X-Test-User": "fb:dr-menon", "X-Test-RegNo": "AP-12345" } });
+  const ok = await recordAssessmentSignOff(asMenon, ENV, { migration: mig, ticket, actorDeps, recordDeps });
+  assert.equal(ok.ok, true); assert.equal(ok.signedBy, "fb:dr-menon");
+  // Forging through the generic door: a record claiming signedBy someone else is refused by the store.
+  const forged = await h.fetchAs("fb:dr-menon", "AP-12345")("https://x/api/wardsynq/gimsr/record", { method: "POST", body: JSON.stringify({ entity: { ...(await h.repository.latest("gimsr", "ClinicalNote", "opd-note-ep-71-assessment")), signedBy: "fb:dr-pin" }, expectedVersion: 2 }) });
+  assert.equal(forged.status, 403); assert.deepEqual((await forged.json()).reasons.map((x) => x.code), ["SIGNATURE_NOT_OWN"]);
+  // Another tenant cannot read the signed note.
+  const other = await client(h, "fb:dr-elsewhere", { tenantId: "other-hospital" });
+  assert.equal(await other.governed.get(other.actor, "ClinicalNote", "opd-note-ep-71-assessment"), null);
+  assert.equal((await h.fetchAs("fb:dr-elsewhere")("https://x/api/wardsynq/gimsr/record/ClinicalNote/opd-note-ep-71-assessment")).status, 403);
+});
+
+test("the defect the sign-off trace found is closed: a kind:assessment write with no fields never wipes a note, and off mode is untouched", async () => {
+  const h = opdHospital({ "fb:dr-menon": { role: "doctor" } }, { settings: { wardsynq: { migrations: { assessment: "shadow" } } } });
+  const ticket = { id: "TKT-72", ghisEpisodeId: "EP-72", ghisPatientId: "GH-40233" };
+  const actorDeps = { db: h.db, identifyFn: h.deps.identifyFn, claimsFn: h.deps.claimsFn, staffSession: null, orgForTenant: h.deps.orgForTenant, authorizeOrg: h.deps.authorizeOrg };
+  const recordDeps = { repository: h.repository, pseudonym: async () => null };
+  const mig = { mode: "shadow", tenantId: "gimsr" };
+  const asMenon = new Request("https://x/api/queue/timeline", { method: "POST", headers: { "X-Test-User": "fb:dr-menon" } });
+  await recordAssessment(asMenon, ENV, { migration: mig, ticket, vals: { provisional_diagnosis: "GERD" }, actorDeps, recordDeps });
+  // What the old "Authorised (signed off)" and the "Authorised by ..." timeline lines look like to the
+  // content path: kind:assessment, text only, no vals. They must be a no-op here, not an empty version.
+  const noVals = await recordAssessment(asMenon, ENV, { migration: mig, ticket, vals: undefined, actorDeps, recordDeps });
+  assert.equal(noVals.ok, true); assert.equal(noVals.written, 0); assert.equal(noVals.skipped, "no_content");
+  const cur = await h.repository.latest("gimsr", "ClinicalNote", "opd-note-ep-72-assessment");
+  assert.equal(cur.version, 1); assert.equal(cur.sections.assessment, "Provisional diagnosis: GERD");
+  // Off: neither path is entered.
+  assert.deepEqual(await recordAssessmentSignOff(new Request("https://x"), ENV, { migration: { mode: "off", why: "flag" }, ticket }), { mode: "off", tenantId: null, signOff: true, ok: true, skipped: "flag", written: 0 });
+  // The client marks ONLY the Authorise call as a sign-off; the "Authorised by" follow-up line and every
+  // content save do not carry the flag.
+  const emr = readFileSync(new URL("../opd-emr.js", import.meta.url), "utf8");
+  assert.equal((emr.match(/signOff: true/g) || []).length, 1, "exactly one call site is a sign-off");
+  assert.ok(emr.includes('{ kind: "assessment", text: "Authorised (signed off)", signOff: true }'));
+  assert.ok(emr.includes("if (signOff) body.signOff = true;"));
+  // The console shows the signature as a fact from the record, and says Unsigned otherwise.
+  const html = readFileSync(new URL("../opd.html", import.meta.url), "utf8");
+  assert.ok(html.includes("Signed by ") && html.includes(">Unsigned<"));
 });

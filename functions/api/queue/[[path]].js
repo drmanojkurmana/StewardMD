@@ -39,7 +39,7 @@ import { verifyStaffSession, verifySecret, pinLocked, nextPinState, mintStaffSes
 // handler below dual-writes, timeline first in "shadow", record first in "authoritative".
 import { vitalsMigration, recordVitals, patientIdForTicket } from "../../_wardsynq/migrate-vitals.js";
 import { registrationMigration, registerPatientRecord } from "../../_wardsynq/migrate-registration.js";
-import { assessmentMigration, recordAssessment } from "../../_wardsynq/migrate-assessment.js";
+import { assessmentMigration, recordAssessment, recordAssessmentSignOff } from "../../_wardsynq/migrate-assessment.js";
 import { recordLinkForOrg } from "../../_wardsynq/migration-tenant.js";
 import { actorDeps as wsqActorDeps, recordDeps as wsqRecordDeps } from "../../_wardsynq/deps.js";
 const wsqTenantRow = (e, id) => (e.CONNECT_DB ? e.CONNECT_DB.prepare("SELECT * FROM connect_tenant WHERE id=?").bind(String(id)).first() : null);
@@ -825,6 +825,7 @@ export async function onRequest(context) {
       if (seg === "timeline") {
         const isVitals = QT.tlKind(body.kind) === "vitals";
         const isAssessment = QT.tlKind(body.kind) === "assessment";
+        const isSignOff = isAssessment && body.signOff === true;   // the doctor's Authorise, after GHIS confirmed it
         await requireSessionCap(env, actor, s, isVitals ? CAPS.EMR_VITALS : CAPS.EMR_TREAT);
         const t = await Q.getTicket(env, body.ticketId);
         if (!t || t.sessionId !== s.id) return json({ ok: false, error: "not_found" }, 404, request);
@@ -836,7 +837,7 @@ export async function onRequest(context) {
         const mig = isVitals ? await vitalsMigration(env, s, { getOrg: ORG.getOrg, tenantRow: wsqTenantRow })
           : isAssessment ? await assessmentMigration(env, s, { getOrg: ORG.getOrg, tenantRow: wsqTenantRow })
           : { mode: "off" };
-        const migrator = isVitals ? recordVitals : recordAssessment;
+        const migrator = isVitals ? recordVitals : isSignOff ? recordAssessmentSignOff : recordAssessment;
         if (mig.mode !== "off") {
           const ctx = isVitals
             ? { migration: mig, session: s, ticket: t, vitals: body.vitals, note: body.vitals && body.vitals.note, recordedAt: new Date().toISOString(), actorDeps: wsqActorDeps(env), recordDeps: wsqRecordDeps(env, mig.tenantId) }
