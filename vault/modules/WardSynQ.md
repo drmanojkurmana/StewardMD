@@ -856,6 +856,72 @@ loading.
 **This PR did not perform real-device verification, on purpose** — the owner's own instruction was
 to wire the boot layer only and run that verification separately, next.
 
+### Real-device verification of the live cut-over path, 2026-09-06
+
+**STATUS: REAL-DEVICE SHADOW VERIFICATION PASSED.**
+
+Following PR #861 (the boot wiring above), the live cut-over was run once, interactively, against
+real GHIS ward-sync traffic on one controlled iPhone — the owner physically present and operating
+the device throughout, with every step confirmed over a live WebView console before proceeding to
+the next. No patient-identifying information was read or displayed at any point; only counts, status
+strings, and coded fields ever left the device.
+
+**Setup.** The device's installed build predated PR #861 (fetching `wardsynq-ghis-live-boot.js`
+from it returned `Load failed`), confirming code merged to `main` does not reach a native install
+until `build-www.sh` → `cap sync` → an Xcode rebuild → a reinstall — exactly as this vault's Deploy
+section already says. The owner explicitly accepted the session reset a reinstall causes (GHIS
+login, Firebase sign-in) and the app was rebuilt and reinstalled fresh before verification began.
+
+**What was run:**
+
+| | Before | During | After |
+|---|---|---|---|
+| `smd_wardsynq_cutover` | OFF | ON | **OFF**, confirmed on a fresh relaunch |
+| `smd_wardsynq_record` | OFF | OFF | OFF |
+| WardSynQ record connection | absent | absent | absent |
+| Live adapter (`window.SMD_WARDSYNQ_LIVE`) | absent | loaded, both methods | absent |
+
+One real ward-sync bundle came through — via `ingestWardHistory` specifically, the actual door
+`ghis-ward.js` calls on a current build, not the fallback. Sanitised report:
+
+```
+bundlesSeen: 1        mapped: 1             written: 0
+observationsMapped: 37
+adapterErrors: 0       writeErrors: 0        skippedDuplicate: 0
+divergences: 0 (no legacy/canonical row-count mismatch)
+issues: 30, ALL coded GHIS_LAB_UNMAPPED
+```
+
+**Zero WardSynQ clinical writes occurred**, and not merely as an observed outcome: with no
+`wardsynq_record` tenant connection on the device, `installLiveGhis` had no store to write through
+at all — the two-key design (cut-over flag + a separately, deliberately configured record
+connection) held exactly as designed. **GHIS behaviour was unchanged** by construction: the legacy
+`ingestWardHistory` ran first and returned its result untouched before the canonical mapping ran, on
+every one of the 693 real ward patients loaded in the roster at the time, not only the one bundle
+mapped. The kill switch was proven working: the flag was set false, the app relaunched fresh (a new
+process, not a stale in-memory instance), and after waiting past the boot script's own poll window,
+`SMD_WARDSYNQ_LIVE` was confirmed absent alongside the flag, the record flag and the record
+connection.
+
+**The one thing worth a second look, not a defect.** The first ward-list card's `onPatient(...)`
+argument for patient id came back empty for that particular entry — a real, if minor, GHIS data
+quality fact (a blank field on one roster row), not a bug in this migration; verification simply
+moved to a different patient rather than treat it as a blocker.
+
+**NOT YET APPROVED by this verification, and not attempted:** WardSynQ authoritative clinical
+writes; production cut-over; enabling either flag globally or for any tenant beyond this one
+controlled device, which was returned to OFF before the session ended.
+
+**OPEN QUALITY ITEM, named rather than hidden:** LOINC coverage for this ward's actual test menu.
+30 of 37 real lab observations in the one bundle mapped fell outside `LAB_CODE_SEED`'s seed
+vocabulary and were kept under their own GHIS name with `codeSystem: "ghis-local"` rather than a
+guessed code — correct, honest behaviour, but it means most of this ward's real lab menu is not yet
+LOINC-coded. Not a blocker to the shadow path itself; it must be addressed, by extending the seed
+map against real terminology review, before canonical lab Observations from this ward are treated as
+clinically complete. No code was changed to address it in this verification.
+
+No defects were found. No code changes were made during this verification.
+
 **Shadow mode itself, traced and hardened 2026-09-06 against the real `ghis-ward.js loadIntoICU`
 bundle shape** (`{patient, patientId, source:'Ward Sync', labs}` — no `episodeId`, so
 `toEncounter()` returns `null` for every real ward-sync bundle through this path; a stated, verified
