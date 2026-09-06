@@ -295,3 +295,35 @@ test("ADVERSARIAL: the report does NOT claim clinical approval", async () => {
   assert.match(r.clinicalNote, /UNAPPROVED seed content/,
     "the owner approved an architectural cut-over, which is not pharmacy approving a rule pack");
 });
+
+/* ------------------------------------------------------------------ which door it wraps */
+
+test("REGRESSION: installLiveGhis can be pointed at ingestWardHistory, which is what a real ward sync calls on a current build", async () => {
+  const original = (b) => ({ applied: { k: {} }, marker: "legacy-value" });
+  const host = { ingestWardHistory: original };
+  const { store } = await governed();
+  const live = installLiveGhis({ host, flags: flagsOn, store, now: () => NOW, method: "ingestWardHistory" });
+  assert.equal(live.installed, true);
+  assert.equal(live.method, "ingestWardHistory");
+  assert.notEqual(host.ingestWardHistory, original, "the method really is wrapped, not left alone");
+
+  const result = host.ingestWardHistory(bundle());
+  assert.equal(result.marker, "legacy-value", "the legacy result is still returned untouched, on the SAME method the boot layer wraps");
+  await settle();
+  assert.equal(live.report().bundlesSeen, 1);
+  assert.equal(live.report().method, "ingestWardHistory");
+  live.uninstall();
+  assert.equal(host.ingestWardHistory, original, "restored to the ORIGINAL function reference, not merely a function");
+});
+
+test("without method, the default is unchanged: ingestFromWard, exactly as before this parameter existed", () => {
+  const host = makeHost();
+  const live = installLiveGhis({ host, flags: flagsOn, now: () => NOW });
+  assert.equal(live.method, "ingestFromWard");
+});
+
+test("a host missing the requested method is declined by name, not a generic failure", () => {
+  const live = installLiveGhis({ host: { ingestFromWard: () => {} }, flags: flagsOn, method: "ingestWardHistory", now: () => NOW });
+  assert.equal(live.installed, false);
+  assert.equal(live.reason, "no ingestWardHistory to wrap");
+});
