@@ -24,6 +24,7 @@ import { assessmentMigration, sectionsFromAssessment, noteFromAssessment, signed
 import { invOrderMigration, orderFromInvestigation, sameOrder, recordInvestigationOrder } from "../functions/_wardsynq/migrate-inv-order.js";
 import { prescriptionMigration, orderFromPrescription, samePrescription, recordPrescription } from "../functions/_wardsynq/migrate-prescription.js";
 import { resultsMigration, reportFromResult, labReportFromResult, radiologyReportFromResult, sameReport, matchServiceRequest, recordResult } from "../functions/_wardsynq/migrate-results.js";
+import { encounterMigration, encounterStatusFor, encounterFromTicket, sameEncounter, recordEncounterSync } from "../functions/_wardsynq/migrate-encounter.js";
 import { readFileSync } from "node:fs";
 import { makeMockDb } from "../functions/_connect/testkit.js";
 import { can } from "../functions/_connect/enterprise/rbac.js";
@@ -31,7 +32,7 @@ import { can } from "../functions/_connect/enterprise/rbac.js";
 import { ClinicalStore } from "../wardsynq/wardsynq-store.js";
 import { RemoteBackend, RemoteConflictError, RemoteRefusedError } from "../wardsynq/wardsynq-store-remote.js";
 import { GovernedStore, makeActor, KIND, TIER, GovernanceError } from "../wardsynq/wardsynq-actors.js";
-import { Patient, Observation, MedicationOrder, ClinicalNote, ServiceRequest, DiagnosticReport } from "../wardsynq/wardsynq-model.js";
+import { Patient, Observation, MedicationOrder, ClinicalNote, ServiceRequest, DiagnosticReport, Encounter } from "../wardsynq/wardsynq-model.js";
 import { mapSccmBundle, sccmAdapter } from "../wardsynq/adapters/wardsynq-sccm-adapter.js";
 import { IntegrationHub } from "../wardsynq/wardsynq-interop.js";
 import { bundle as sccmBundle, patient as sccmPatient, observation as sccmObservation, medicationStatement, encounter as sccmEncounter } from "../functions/_connect/canonical/model.js";
@@ -436,8 +437,10 @@ test("role mapping: every one of the eighteen operational roles resolves to exac
   // 2026-09-06: QUEUE_ADD ("register / walk-in a patient") now adds Patient to the write scope and,
   // for a role that held only READ before (supervisor, reception), raises the tier to EXECUTE — the
   // same reasoning EMR_VITALS already established for a nurse's vitals. See actor.js's header.
-  for (const r of ["nurse", "intern", "resident", "pg_resident"]) { assert.equal(tier(r), TIER.EXECUTE, r); assert.deepEqual(write(r), ["Observation", "Patient"], r); assert.equal(read(r), null, r); }
-  for (const r of ["supervisor", "reception"]) { assert.equal(tier(r), TIER.EXECUTE, r); assert.deepEqual(write(r), ["Patient"], r); assert.equal(read(r), null, r); }
+  // 2026-09-06: QUEUE_ADD's union also adds Encounter, on the SAME reasoning as Patient — see
+  // functions/_wardsynq/actor.js.
+  for (const r of ["nurse", "intern", "resident", "pg_resident"]) { assert.equal(tier(r), TIER.EXECUTE, r); assert.deepEqual(write(r), ["Observation", "Patient", "Encounter"], r); assert.equal(read(r), null, r); }
+  for (const r of ["supervisor", "reception"]) { assert.equal(tier(r), TIER.EXECUTE, r); assert.deepEqual(write(r), ["Patient", "Encounter"], r); assert.equal(read(r), null, r); }
   for (const r of ["cashier", "pharmacy"]) { assert.equal(tier(r), TIER.READ, r); assert.deepEqual(write(r), [], r); assert.deepEqual(read(r), ["MedicationOrder", "ServiceRequest"], r); }
   for (const r of ["hr", "viewer", "oncqis_protocol_author", "oncqis_clinical_reviewer", "oncqis_institutional_approver", "academic_cell"]) assert.equal(m[r], null, r + " has no clinical actor");
   // The mapping is derived, so it cannot drift from the queue's own non-negotiable.
@@ -472,7 +475,7 @@ test("OPD roles at the door: doctor writes and signs, nurse records vitals and n
   const nurse = await client(h, "fb:sister-anu");
   assert.equal(nurse.descriptor.role, "nurse");
   assert.equal(nurse.descriptor.actor.tier, "execute");
-  assert.deepEqual(nurse.descriptor.actor.writable, ["Observation", "Patient"]);
+  assert.deepEqual(nurse.descriptor.actor.writable, ["Observation", "Patient", "Encounter"]);
   assert.equal(nurse.descriptor.actor.canSign, false);
   const bp = await nurse.session("pat-20").put(Observation({ id: "obs-20", patientId: "pat-20", code: "85354-9", value: "142/91", category: "vital-signs" }));
   assert.equal(bp.writtenBy.id, "fb:sister-anu");
@@ -489,7 +492,7 @@ test("OPD roles at the door: doctor writes and signs, nurse records vitals and n
   // refused for anything clinical.
   const desk = await client(h, "fb:desk-1");
   assert.equal(desk.descriptor.actor.tier, "execute");
-  assert.deepEqual(desk.descriptor.actor.writable, ["Patient"]);
+  assert.deepEqual(desk.descriptor.actor.writable, ["Patient", "Encounter"]);
   assert.equal((await desk.governed.get(desk.actor, "MedicationOrder", "rx-20")).drug, "Amoxicillin");
   assert.equal((await h.fetchAs("fb:desk-1")("https://x/api/wardsynq/gimsr/record", { method: "POST", body: JSON.stringify({ entity: Observation({ id: "o", patientId: "pat-20", code: "x", value: 1 }) }) })).status, 403);
   const deskPatient = await h.fetchAs("fb:desk-1")("https://x/api/wardsynq/gimsr/record", { method: "POST", body: JSON.stringify({ entity: Patient({ id: "pat-21", mrn: "GH-21", name: "Desk-registered", dob: "1970-01-01" }) }) });
@@ -526,7 +529,7 @@ test("staff sessions: a nurse signed in with email+PIN on a hospital PC reaches 
   const nurse = await (async () => { const b = new RemoteBackend({ tenantId: "gimsr", baseUrl: "https://x", fetch: asStaff(nurseTok) }); await b.open(); return b; })();
   assert.equal(nurse.descriptor.actor.id, "nurse.anu");
   assert.equal(nurse.descriptor.role, "nurse");
-  assert.deepEqual(nurse.descriptor.actor.writable, ["Observation", "Patient"]);
+  assert.deepEqual(nurse.descriptor.actor.writable, ["Observation", "Patient", "Encounter"]);
   // Staff sessions are off unless the deployment says so, and org-bound.
   assert.equal((await handle(new Request("https://x/api/wardsynq/gimsr", { headers: { "X-Staff-Token": nurseTok } }), ENV, h.deps)).status, 401);
   assert.equal((await asStaff(otherOrgTok)("https://x/api/wardsynq/gimsr")).status, 403);
@@ -579,7 +582,7 @@ test("AI drafts: written by the AI actor on the clinician's behalf, never author
   // Pure: the AI actor is DRAFT whatever it asks, and its scope is the human's.
   const human = actorFromOpdRole({ identity: { id: "fb:n" }, role: "nurse" });
   const bot = aiActorFor(human, { id: "maik" });
-  assert.equal(bot.tier, "draft"); assert.deepEqual([...bot.scope.write], ["Observation", "Patient"]); assert.equal(bot.onBehalfOf, "fb:n");
+  assert.equal(bot.tier, "draft"); assert.deepEqual([...bot.scope.write], ["Observation", "Patient", "Encounter"]); assert.equal(bot.onBehalfOf, "fb:n");
 });
 
 /* ------------------------------------------------------------------ the nurse-vitals migration */
@@ -1868,4 +1871,232 @@ test("the console reads results back from the record: the existing generic endpo
   assert.ok(page.includes("Laboratory") && page.includes("Radiology"), "lab and radiology read distinctly");
   assert.ok(page.includes("o.sourceCritical") && page.includes("Critical"), "GHIS's own critical flag is shown, never computed from the range");
   assert.ok(!page.includes("Abnormal"), "no abnormal-vs-range judgement is computed or displayed");
+});
+
+/* -------------------------------------------------------------------- the Encounter foundation */
+
+function encTicket(over) {
+  return { id: "TKT-200", ghisEpisodeId: "EP-200", ghisPatientId: "GH-90210", status: "registered", registeredAt: 1_800_000_000_000, department: "Medicine OPD", roomId: "R3", ...over };
+}
+
+test("identity: a native ticket (no GHIS episode) now anchors on its own id, so it gets an encounter too — every prior migration inherits this for free", () => {
+  assert.equal(encounterIdForTicket(encTicket()), "opd-enc-ep-200");
+  assert.equal(encounterIdForTicket({ id: "TKT-201" }), "opd-enc-tkt-201", "no episode: falls back to the ticket, same rule anchoredOrderId already uses");
+  assert.equal(encounterIdForTicket({}), null, "no episode and no ticket id: still nothing to anchor on");
+  assert.equal(encounterIdForTicket(null), null);
+});
+
+test("encounterStatusFor: mirrors _queue_eta.js's own terminal/non-terminal split, nothing re-decided", () => {
+  assert.equal(encounterStatusFor("registered"), "planned");
+  assert.equal(encounterStatusFor("waiting"), "planned");
+  assert.equal(encounterStatusFor("called"), "planned");
+  assert.equal(encounterStatusFor("in_consultation"), "in-progress");
+  assert.equal(encounterStatusFor("investigation"), "in-progress", "sent for a test mid-visit — NEXT allows returning to the queue, so this is not an end state");
+  assert.equal(encounterStatusFor("followup"), "in-progress");
+  assert.equal(encounterStatusFor("completed"), "finished");
+  assert.equal(encounterStatusFor("cancelled"), "cancelled");
+  assert.equal(encounterStatusFor("no_show"), "cancelled");
+  assert.equal(encounterStatusFor("something_unrecognised"), "planned", "an unrecognised status is never assumed active or closed");
+});
+
+test("encounterFromTicket: a canonical Encounter — GHIS's own episode preserved as an identifier, real timestamps, nothing invented beyond what the ticket actually carries", () => {
+  const enc = encounterFromTicket({ ticket: encTicket(), attendingId: "fb:dr-menon", tenantId: "gimsr" });
+  assert.equal(enc.resourceType, "Encounter");
+  assert.equal(enc.id, "opd-enc-ep-200");
+  assert.equal(enc.patientId, "opd-pat-gh-90210");
+  assert.equal(enc.class, "OPD");
+  assert.equal(enc.status, "planned");
+  assert.deepEqual(enc.identifiers, [{ system: "opd-ticket-id", value: "TKT-200" }, { system: "ghis-episode-id", value: "EP-200" }]);
+  assert.equal(enc.periodStart, new Date(1_800_000_000_000).toISOString(), "the model's own field, from the ticket's real registeredAt — never a generated 'now'");
+  assert.equal(enc.periodEnd, null, "not yet closed");
+  assert.deepEqual(enc.location, { facilityId: "gimsr", ward: "Medicine OPD", bed: "R3" });
+  assert.equal(enc.attendingId, "fb:dr-menon");
+  // Closed: periodEnd is set, from consultEndAt when the ticket actually has one.
+  const closed = encounterFromTicket({ ticket: encTicket({ status: "completed", consultEndAt: 1_800_003_600_000 }), attendingId: "fb:dr-menon", tenantId: "gimsr" });
+  assert.equal(closed.status, "finished");
+  assert.equal(closed.periodEnd, new Date(1_800_003_600_000).toISOString());
+  // A no-show never entered consultation — no consultEndAt exists, so "now" is the honest answer.
+  const noShow = encounterFromTicket({ ticket: encTicket({ status: "no_show" }), tenantId: "gimsr" });
+  assert.equal(noShow.status, "cancelled");
+  assert.ok(noShow.periodEnd, "still closed, from the moment of closing rather than a timestamp that was never captured");
+  // A native ticket with no attending session still gets an encounter, just no bolted-on doctor.
+  const native = encounterFromTicket({ ticket: { id: "TKT-9", ghisPatientId: "GH-1", status: "registered", registeredAt: 1_800_000_000_000 } });
+  assert.equal(native.id, "opd-enc-tkt-9");
+  assert.equal(native.attendingId, null);
+  assert.deepEqual(native.identifiers, [{ system: "opd-ticket-id", value: "TKT-9" }], "no GHIS episode identifier invented");
+  // No patient, or no anchor at all: not an encounter.
+  assert.equal(encounterFromTicket({ ticket: { status: "registered" } }), null);
+  assert.equal(encounterFromTicket({ ticket: {} }), null);
+});
+
+test("sameEncounter: idempotent on unchanged content; status, location, attending or a closing timestamp changing is a new version", () => {
+  const a = encounterFromTicket({ ticket: encTicket(), attendingId: "fb:dr-menon", tenantId: "gimsr" });
+  assert.equal(sameEncounter(a, encounterFromTicket({ ticket: encTicket(), attendingId: "fb:dr-menon", tenantId: "gimsr" })), true);
+  assert.equal(sameEncounter(a, encounterFromTicket({ ticket: encTicket({ status: "in_consultation" }), attendingId: "fb:dr-menon", tenantId: "gimsr" })), false);
+  assert.equal(sameEncounter(a, encounterFromTicket({ ticket: encTicket(), attendingId: "fb:dr-rao", tenantId: "gimsr" })), false, "reassignment is a real change");
+  assert.equal(sameEncounter(a, encounterFromTicket({ ticket: encTicket({ roomId: "R7" }), attendingId: "fb:dr-menon", tenantId: "gimsr" })), false);
+  assert.equal(sameEncounter(null, a), false);
+});
+
+test("encounter mode gating: its own settings key, independent of every other migration", async () => {
+  const org = { id: "org-gimsr", connectTenantId: "gimsr" };
+  const tenants = { gimsr: { id: "gimsr", settings: JSON.stringify({ wardsynq: { migrations: { encounter: "shadow", vitals: "off" } } }) } };
+  const deps = { getOrg: async (env, id) => (id === "org-gimsr" ? org : null), tenantRow: async (env, id) => tenants[id] || null };
+  assert.deepEqual(await encounterMigration({}, { orgId: "org-gimsr" }, deps), { mode: "off", why: "flag" });
+  const on = await encounterMigration({ WARDSYNQ_RECORD: "1" }, { orgId: "org-gimsr" }, deps);
+  assert.equal(on.mode, "shadow"); assert.equal(on.tenantId, "gimsr");
+});
+
+test("OFF mode is byte-identical, and a sync with no ticket writes nothing", async () => {
+  const off = await recordEncounterSync(new Request("https://x"), ENV, { migration: { mode: "off", why: "flag" }, ticket: encTicket() });
+  assert.deepEqual(off, { mode: "off", tenantId: null, ok: true, skipped: "flag", written: 0 });
+
+  const h = opdHospital({ "fb:dr-menon": { role: "doctor" } }, { settings: { wardsynq: { migrations: { encounter: "shadow" } } } });
+  const actorDeps = { db: h.db, identifyFn: h.deps.identifyFn, claimsFn: h.deps.claimsFn, staffSession: null, orgForTenant: h.deps.orgForTenant, authorizeOrg: h.deps.authorizeOrg };
+  const recordDeps = { repository: h.repository, pseudonym: async () => null };
+  const req = new Request("https://x/api/queue/ticket", { method: "POST", headers: { "X-Test-User": "fb:dr-menon", "X-Test-RegNo": "AP-12345" } });
+  const bare = await recordEncounterSync(req, ENV, { migration: { mode: "shadow", tenantId: "gimsr" }, ticket: null, actorDeps, recordDeps });
+  assert.equal(bare.ok, true); assert.equal(bare.written, 0); assert.equal(bare.skipped, "no_ticket");
+});
+
+test("a closed encounter is never reopened or overwritten — not even to the OTHER terminal status — while an identical repeat of the same close is a harmless no-op", async () => {
+  const h = opdHospital({ "fb:dr-menon": { role: "doctor" } }, { settings: { wardsynq: { migrations: { encounter: "shadow" } } } });
+  const actorDeps = { db: h.db, identifyFn: h.deps.identifyFn, claimsFn: h.deps.claimsFn, staffSession: null, orgForTenant: h.deps.orgForTenant, authorizeOrg: h.deps.authorizeOrg };
+  const recordDeps = { repository: h.repository, pseudonym: async () => null };
+  const mig = { mode: "shadow", tenantId: "gimsr" };
+  const req = new Request("https://x/api/queue/ticket", { method: "POST", headers: { "X-Test-User": "fb:dr-menon", "X-Test-RegNo": "AP-12345" } });
+  const session = { doctorUid: "fb:dr-menon" };
+
+  const opened = await recordEncounterSync(req, ENV, { migration: mig, ticket: encTicket(), session, actorDeps, recordDeps });
+  assert.equal(opened.written, 1); assert.equal(opened.status, "planned");
+  const closed = await recordEncounterSync(req, ENV, { migration: mig, ticket: encTicket({ status: "completed", consultEndAt: 1_800_003_600_000 }), session, actorDeps, recordDeps });
+  assert.equal(closed.written, 1); assert.equal(closed.status, "finished");
+
+  // An attempted reopen (a stale "registered" sync arriving after the close) is refused outright.
+  const reopen = await recordEncounterSync(req, ENV, { migration: mig, ticket: encTicket({ status: "waiting" }), session, actorDeps, recordDeps });
+  assert.equal(reopen.ok, false); assert.equal(reopen.status, 409); assert.equal(reopen.error, "encounter_closed"); assert.equal(reopen.currentStatus, "finished");
+
+  // An attempted CHANGE between the two terminal states is refused too — not just a reopen.
+  const flip = await recordEncounterSync(req, ENV, { migration: mig, ticket: encTicket({ status: "cancelled" }), session, actorDeps, recordDeps });
+  assert.equal(flip.ok, false); assert.equal(flip.error, "encounter_closed");
+
+  // The SAME close, repeated (a retried checkout), is idempotent — not an error, not a new version.
+  const again = await recordEncounterSync(req, ENV, { migration: mig, ticket: encTicket({ status: "completed", consultEndAt: 1_800_003_600_000 }), session, actorDeps, recordDeps });
+  assert.equal(again.ok, true); assert.equal(again.written, 0); assert.equal(again.skipped, "unchanged");
+  assert.equal((await h.repository.history("gimsr", "Encounter", "opd-enc-ep-200")).length, 2, "open, then close — the refused attempts wrote nothing");
+});
+
+test("an unauthorized role cannot open or close an encounter: pharmacy holds READ tier only (no EMR capability, no QUEUE_ADD), refused before it ever reaches the record, nothing written", async () => {
+  const h = opdHospital({ "fb:pharm-1": { role: "pharmacy" } }, { settings: { wardsynq: { migrations: { encounter: "shadow" } } } });
+  const actorDeps = { db: h.db, identifyFn: h.deps.identifyFn, claimsFn: h.deps.claimsFn, staffSession: null, orgForTenant: h.deps.orgForTenant, authorizeOrg: h.deps.authorizeOrg };
+  const recordDeps = { repository: h.repository, pseudonym: async () => null };
+  const req = new Request("https://x/api/queue/ticket", { method: "POST", headers: { "X-Test-User": "fb:pharm-1" } });
+  const out = await recordEncounterSync(req, ENV, { migration: { mode: "shadow", tenantId: "gimsr" }, ticket: encTicket(), session: { doctorUid: "" }, actorDeps, recordDeps });
+  // Pharmacy's grant is READ tier (ORDER_READ only) with no QUEUE_ADD to raise it, so
+  // resolveClinicalActor refuses the "record:write" purpose itself ("a READ actor writes nothing at
+  // all", wardsynq-actors.js) — before this file's own Encounter-scope check ever runs. A role that
+  // holds SOME write capability but the wrong SCOPE (reception, tested above and in every sibling
+  // migration) is refused one layer deeper, as "governance"; pharmacy never gets that far.
+  assert.equal(out.ok, false); assert.equal(out.status, 403); assert.equal(out.error, "permission");
+  assert.equal(await h.repository.latest("gimsr", "Encounter", "opd-enc-ep-200"), null);
+});
+
+test("THE PROOF: OPD registration -> WardSynQ Patient -> WardSynQ Encounter -> vitals -> assessment -> investigation order -> prescription -> investigation result, ALL resolving to the SAME encounter; a second device reads every one of them back; a retry does not duplicate the encounter; a status change is a continuation, not a new entity; checkout closes it", async () => {
+  const h = opdHospital({
+    "fb:dr-menon": { role: "doctor" }, "fb:dr-rao": { role: "doctor" }, "fb:desk-1": { role: "reception" },
+  }, { settings: { wardsynq: { migrations: {
+    registration: "shadow", vitals: "shadow", assessment: "shadow", investigations: "shadow",
+    prescriptions: "shadow", results: "shadow", encounter: "shadow",
+  } } } });
+  const ticket = encTicket();
+  const actorDeps = { db: h.db, identifyFn: h.deps.identifyFn, claimsFn: h.deps.claimsFn, staffSession: null, orgForTenant: h.deps.orgForTenant, authorizeOrg: h.deps.authorizeOrg };
+  const recordDeps = { repository: h.repository, pseudonym: async () => null };
+  const encounterId = "opd-enc-ep-200";
+  const asDesk = new Request("https://x/api/queue/ticket", { method: "POST", headers: { "X-Test-User": "fb:desk-1" } });
+  const asMenon = new Request("https://x/api/queue/timeline", { method: "POST", headers: { "X-Test-User": "fb:dr-menon", "X-Test-RegNo": "AP-12345" } });
+
+  // 1. OPD registration -> WardSynQ Patient (the sixth migration, unaffected by this one).
+  const reg = await registerPatientRecord(asDesk, ENV, {
+    migration: { mode: "shadow", tenantId: "gimsr" },
+    registration: { mrn: "GH-90210", mrSource: "hospital", patient: { name: "Ward Test Patient", birthDate: "1985-01-01", gender: "female" } },
+    actorDeps, recordDeps,
+  });
+  assert.equal(reg.ok, true); assert.equal(reg.patientId, "opd-pat-gh-90210");
+
+  // 2. Reception checks the patient in for today's visit -> WardSynQ Encounter (THIS migration).
+  //    Reception holds QUEUE_ADD, and QUEUE_ADD now grants Encounter write scope alongside Patient.
+  const opened = await recordEncounterSync(asDesk, ENV, { migration: { mode: "shadow", tenantId: "gimsr" }, ticket, session: { doctorUid: "" }, actorDeps, recordDeps });
+  assert.equal(opened.ok, true); assert.equal(opened.written, 1); assert.equal(opened.encounterId, encounterId); assert.equal(opened.status, "planned");
+
+  // A retried "add ticket" (a network blip on the desk's tablet) resolves to the SAME encounter.
+  const retried = await recordEncounterSync(asDesk, ENV, { migration: { mode: "shadow", tenantId: "gimsr" }, ticket, session: { doctorUid: "" }, actorDeps, recordDeps });
+  assert.equal(retried.written, 0); assert.equal(retried.skipped, "unchanged");
+  assert.equal((await h.repository.history("gimsr", "Encounter", encounterId)).length, 1, "no duplicate Encounter from the retry");
+
+  // 3. The doctor is seen — a status change to in_consultation is a CONTINUATION, not a new entity.
+  const inConsult = await recordEncounterSync(asMenon, ENV, { migration: { mode: "shadow", tenantId: "gimsr" }, ticket: encTicket({ status: "in_consultation", consultStartAt: 1_800_001_000_000 }), session: { doctorUid: "fb:dr-menon" }, actorDeps, recordDeps });
+  assert.equal(inConsult.written, 1); assert.equal(inConsult.status, "in-progress");
+  assert.equal((await h.repository.history("gimsr", "Encounter", encounterId)).length, 2, "one more VERSION of the same entity, not a second one");
+
+  // 4. Nurse vitals, 5. doctor assessment, 6. investigation order, 7. prescription, 8. investigation
+  //    result — every one of the five prior migrations, unmodified, all sharing this encounter.
+  const vitalsOut = await recordVitals(asMenon, ENV, { migration: { mode: "shadow", tenantId: "gimsr" }, ticket, vitals: { hr: 88, spo2: 98 }, recordedAt: new Date().toISOString(), actorDeps, recordDeps });
+  assert.equal(vitalsOut.ok, true);
+  const assessOut = await recordAssessment(asMenon, ENV, { migration: { mode: "shadow", tenantId: "gimsr" }, ticket, vals: { provisional_diagnosis: "Viral fever" }, actorDeps, recordDeps });
+  assert.equal(assessOut.ok, true);
+  const orderOut = await recordInvestigationOrder(asMenon, ENV, { migration: { mode: "shadow", tenantId: "gimsr" }, ticket, order: { serviceId: "LAB1118", name: "CBC" }, actorDeps, recordDeps });
+  assert.equal(orderOut.ok, true);
+  const rxOut = await recordPrescription(asMenon, ENV, { migration: { mode: "shadow", tenantId: "gimsr" }, ticket, rx: { drugId: "DRG1", name: "Tab Paracetamol 650" }, actorDeps, recordDeps });
+  assert.equal(rxOut.ok, true);
+  const resultOut = await recordResult(asMenon, ENV, {
+    migration: { mode: "shadow", tenantId: "gimsr" }, ticket, source: "lab",
+    order: { serviceName: "CBC", renderId: "RID-200", episodeId: "EP-200" },
+    detail: { group: "CBC", reported: "05-Sep-2026 12:00", tests: [{ test: "Haemoglobin", result: "12.5", units: "g/dL" }] },
+    actorDeps, recordDeps,
+  });
+  assert.equal(resultOut.ok, true);
+
+  // 9. checkout: the visit ends -> the Encounter closes.
+  const closedSync = await recordEncounterSync(asMenon, ENV, { migration: { mode: "shadow", tenantId: "gimsr" }, ticket: encTicket({ status: "completed", consultStartAt: 1_800_001_000_000, consultEndAt: 1_800_004_000_000 }), session: { doctorUid: "fb:dr-menon" }, actorDeps, recordDeps });
+  assert.equal(closedSync.written, 1); assert.equal(closedSync.status, "finished");
+
+  // Device B: a DIFFERENT doctor opens the same patient and reads EVERY resource off the SAME
+  // Encounter — Patient -> Encounter -> {Observation, ClinicalNote, ServiceRequest, MedicationOrder,
+  // DiagnosticReport}, none of them a dangling reference, all six resolving to one real entity.
+  const rao = await client(h, "fb:dr-rao");
+  const patient = await rao.governed.get(rao.actor, "Patient", "opd-pat-gh-90210");
+  assert.equal(patient.name, "Ward Test Patient");
+  const encounter = await rao.governed.get(rao.actor, "Encounter", encounterId);
+  assert.equal(encounter.patientId, "opd-pat-gh-90210");
+  assert.equal(encounter.status, "finished");
+  assert.equal(encounter.class, "OPD");
+  assert.equal(encounter.version, 3, "open, in-progress, finished — three real versions of ONE entity");
+
+  const vitalsRow = (await rao.governed.byPatient(rao.actor, "Observation", "opd-pat-gh-90210")).find((o) => o.category === "vital-signs");
+  assert.equal(vitalsRow.encounterId, encounterId);
+  const note = await rao.governed.get(rao.actor, "ClinicalNote", "opd-note-ep-200-assessment");
+  assert.equal(note.encounterId, encounterId);
+  const order = await rao.governed.get(rao.actor, "ServiceRequest", "opd-order-ep-200-lab1118");
+  assert.equal(order.encounterId, encounterId);
+  const rx = await rao.governed.get(rao.actor, "MedicationOrder", "opd-rx-ep-200-drg1");
+  assert.equal(rx.encounterId, encounterId);
+  const report = await rao.governed.get(rao.actor, "DiagnosticReport", "opd-dr-lab-ep-200-rid-200");
+  assert.equal(report.encounterId, encounterId);
+
+  // Wrong tenant is denied for the Encounter exactly as for every other resource type.
+  const cross = await h.fetchAs("fb:dr-rao")("https://x/api/wardsynq/other-hospital/patient/opd-pat-gh-90210/Encounter");
+  assert.ok(cross.status === 403 || cross.status === 404, "cross-tenant read is refused, got " + cross.status);
+
+  // Nothing here was ever an instruction to a patient — recording that a visit happened is a
+  // statement of fact, so a doctor/receptionist opening/closing it is audited, not "signed".
+  const row = h.repository.audit.find((a) => a.action === "record.write" && a.scope.resourceType === "Encounter" && a.scope.version === 1);
+  assert.ok(row); assert.equal(row.actor, "fb:desk-1");
+});
+
+test("SHADOW does not alter GHIS or the queue engine: the migration issues no HTTP request of its own and never imports the queue engine", () => {
+  const mig = readFileSync(new URL("../functions/_wardsynq/migrate-encounter.js", import.meta.url), "utf8");
+  const code = mig.slice(mig.indexOf("import {"));
+  assert.ok(!/\bfetch\s*\(/.test(code), "no HTTP request of its own");
+  assert.ok(!/from\s+["'][^"']*_queue_/i.test(code), "never imports the queue engine — a pure mapper over the ticket it is handed, like every sibling migrate-*.js");
+  assert.ok(!/from\s+["'][^"']*ghis/i.test(code), "never touches GHIS");
 });

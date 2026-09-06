@@ -748,6 +748,75 @@ is a separate, later, deliberate decision this migration does not make. No abnor
 range judgement is computed (GHIS's own `critical` flag is the only signal carried). Cancelling a
 result, and correcting a ServiceRequest's linkage after the fact, are not modelled.
 
+**Encounter, migrated (2026-09-06, ninth migration) — THE FOUNDATION.** Every migration before this
+one writes `encounterId` (`opd-identity.js encounterIdForTicket`) but nothing ever wrote an
+`Encounter` entity at that id — six resource types were all pointing at a record that did not exist.
+This is the ONE place that creates and closes it, so vitals, the assessment, an investigation order,
+a prescription and a result all resolve to the SAME real entity rather than a dangling reference
+each happens to agree on the spelling of.
+
+**One function serves open, continuation AND close**, because they are the same question asked at
+different moments: "what does the canonical Encounter look like right now, given this ticket's
+CURRENT state?" `recordEncounterSync` reads the ticket's own, already-governed lifecycle
+(`_queue_eta.js STATUS`/`isTerminal`, mirrored rather than re-decided) and maps it:
+
+```
+registered / waiting / called                -> "planned"
+in_consultation / investigation / followup    -> "in-progress"   (may return to the queue mid-visit)
+completed                                     -> "finished"
+cancelled / no_show                           -> "cancelled"
+```
+
+No discharge workflow is invented — these are the ticket's own three terminal states, unchanged.
+Called at ticket creation (manual add and, diffed against the roster so a poll does not re-sync
+every ticket every time, GHIS import), at every status change, and at checkout.
+
+**A closed encounter is never reopened or overwritten** — not to a different status, terminal or
+not, and not merely to refresh a field. `_queue_eta.js`'s own transition table already makes this
+UNREACHABLE via the ticket engine (a terminal ticket status has no outgoing transitions at all), but
+the record layer does not trust the caller's correctness for a fact this consequential, matching
+`wardsynq-actors.js`'s own "a signature is an act, not a string" instinct applied to a different
+guarantee. An identical repeat of the same close is still a harmless no-op.
+
+**Governance is the existing rule, extended by exactly ONE entity, not a new mechanism.** Checking a
+patient in for today's visit is the SAME administrative act registration was already judged to be
+(`actor.js`'s 2026-09-06 QUEUE_ADD note). `actor.js` was extended so QUEUE_ADD's union also adds
+`"Encounter"` to write scope, alongside `"Patient"`, for the identical reason already written there —
+reception and the desk check patients in every day and must be able to open the visit record that
+represents that, without a doctor's EMR_TREAT scope. Every role holding QUEUE_STATUS (closing a
+visit) already holds QUEUE_ADD too, so no separate grant was needed for close. `Encounter` was
+already NOT an `INSTRUCTION_TYPE` (`wardsynq-actors.js`'s own header names it as the worked example:
+"an Encounter is born 'planned'"), so no EXECUTE requirement applies — SCOPE is the real gate here,
+which is exactly what this change extends.
+
+**Identity: two widenings to `opd-identity.js`, both because no tenant has ever run this in
+production to have written under the old spelling.** (1) A native (non-GHIS) ticket's
+`encounterIdForTicket` now falls back to the ticket's own id — the SAME fallback `anchoredOrderId`
+already uses for every order/rx/result id. Before this, a native visit's `encounterId` was always
+`null` on all five prior resource types; an Encounter cannot be created for a null anchor, so this is
+what lets a native visit get a real one too, and every prior migration inherits it with zero code
+change of its own. (2) The GHIS-episode branch now runs through the SAME slug every sibling id
+helper already uses, rather than a plain lowercase with no character replacement — a needless third
+convention removed, not a real id changed (identical output for every episode id ever actually used).
+
+**Timestamps and attending clinician are what the ticket actually recorded, never a guess.**
+`periodStart` is `ticket.registeredAt` (set once, unconditionally, at check-in — the model's own
+field, not a bolt-on). `periodEnd` is `ticket.consultEndAt` when the ticket passed through a
+consultation, or the moment of closing when there is no such timestamp (a cancellation from the
+waiting room has no more precise "when did this end"). `attendingId` (bolted on — the model has no
+participant field) is the SYNCING SESSION's own doctor at that moment, not whichever actor happens to
+trigger a later resource write — a nurse recording vitals mid-visit is not the attending physician.
+
+**A known, named gap.** The stale-import reconciliation in `_queue_ghis.js importRoster` (a ticket
+that dropped off the GHIS worklist gets cancelled) calls the queue ENGINE's `setStatus` directly, a
+different path from every route segment this migration hooks. An encounter for such a ticket is not
+closed by that path today — every DELIBERATE front-desk action (manual status change, checkout) is
+covered; this one background cleanup edge is named rather than silently missed.
+
+**Deliberately NOT done.** Admissions, bed management and IPD/ICU/ED encounters — `class` is always
+`"OPD"`, and this file has no input to represent anything else. No discharge workflow beyond the
+ticket's own three terminal states. GHIS cut-over and eMAR remain untouched and unstarted.
+
 **Deliberately NOT done _by the assessment migration_** (all three were later revisited; kept here as
 the scope that migration shipped with). GHIS's "Authorise" (sign-off/lock) was untouched and a note
 from it was never `signedBy` — migrated next, as the fifth migration above. `submitInvOrder` (kind

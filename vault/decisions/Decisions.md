@@ -4532,3 +4532,56 @@ since it already had the encounter in scope and had nowhere to put it.
 external source in every mode); an abnormal-vs-reference-range judgement (GHIS's own flag is the
 only signal carried); cancelling a result; correcting a linkage after the fact; DICOM/PACS
 integration (none exists in this codebase to preserve, and none is built here).
+
+## 2026-09-06 — Encounter: closing the gap every prior migration assumed, and extending governance by exactly one entity
+
+**Decision: one function serves open, continuation and close.** Every prior migration's write had an
+obvious single trigger. A visit does not — it has a ticket lifecycle with several states that all
+mean the same underlying question. Building three separate functions (`recordEncounterOpen`,
+`recordEncounterContinue`, `recordEncounterClose`) would have meant three places to keep a
+"same-content, don't write" check and a "don't reopen a closed one" check consistent. One
+`recordEncounterSync`, called from every hook point with the ticket's CURRENT state, computes the
+right answer itself and is idempotent by the same mechanism every sibling migration already uses.
+
+**Decision: mirror `_queue_eta.js`'s own terminality, never re-decide it.** The temptation with
+`investigation`/`followup` — states that are NOT in `isTerminal()` but also are not
+`in_consultation` — was to treat them as some third, encounter-specific category. Rejected: the
+queue engine's own transition table already answers this (`investigation` can return to
+`waiting`/`called`/`in_consultation`, so it is not an end state), and re-deriving that answer here
+risks disagreeing with the engine that actually enforces it. Both map to "in-progress": still
+today's visit, not yet finished.
+
+**Decision: a closed encounter refuses ANY further change, not just a reopen.** The task's wording
+was "do not silently reopen or overwrite." The narrow reading (block only a return to a non-terminal
+status) would still have allowed a stale sync to flip `"cancelled"` to `"finished"` or vice versa.
+Rejected as too permissive for a fact this consequential to get quietly wrong. The rule is: once
+terminal, only a byte-identical repeat of the same close is accepted; anything else is refused
+outright, `encounter_closed`, matching `wardsynq-actors.js`'s own reasoning that a closed clinical
+fact needs a deliberate, governed correction, not a side effect of a routine re-sync.
+
+**Decision: extend `actor.js`'s QUEUE_ADD scope by one entity, on the SAME reasoning already
+written there, rather than invent a new capability.** Checking a patient in for today's visit is not
+a clinical judgement; it is the identical kind of administrative fact registration already was
+before this migration. Without this, reception — who does the check-in in real OPD workflows — would
+be refused SCOPE_DENIED on every single encounter this migration tries to open, making the whole
+foundation nonfunctional for its primary real-world trigger. The fix is one line (`ENCOUNTER_TYPE`
+added to the same union `PATIENT_TYPE` already goes through) rather than a parallel capability.
+
+**Decision: widen `encounterIdForTicket` to fall back to the ticket's own id, for a native visit.**
+Every other order/rx/result id already had this fallback (`anchoredOrderId`); the encounter helper,
+extracted earlier and never revisited, was the one exception. Left alone, a private clinic with no
+GHIS connection would have gotten `encounterId: null` on every one of its vitals, notes, orders,
+prescriptions and results forever — a real gap this migration exists to close, not one it can leave
+standing for exactly the visits that most need a foundation. No tenant has ever run any of this in
+production, so nothing existing needed reconciling.
+
+**Decision: timestamps and the attending clinician come from the ticket's own recorded fields, never
+a generated "now" or a resolved-actor assumption.** `periodStart`/`periodEnd` use
+`registeredAt`/`consultEndAt` when they exist; `attendingId` is the SESSION doing the sync, not the
+actor writing the record — a nurse recording vitals is not the attending doctor, and conflating the
+two would misattribute the encounter to whoever happened to touch it last for an unrelated reason.
+
+**Not done, named:** admissions, bed management, and any encounter class beyond `"OPD"`; a discharge
+workflow beyond the ticket's own three terminal states; closing an encounter for a ticket cancelled
+by the stale-import reconciliation path (engine-layer, not route-layer — see the module note); the
+GHIS cut-over and eMAR, neither started nor approved to start.
