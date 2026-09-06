@@ -455,10 +455,18 @@ def build(src, write=False):
                     if sided:
                         e.setdefault(side, {"fma": None, "parts": []})
                         e[side]["wb"] = sided
+        wb_planes = wb.get("planes") or {}
+        if set(wb_planes) & set(planes):
+            sys.exit("wb planes collide with living-torso planes: " + str(set(wb_planes) & set(planes)))
+        planes.update(wb_planes)
         sources.append({"id": "wb", "name": "Whole body", "short": "Whole body",
                         "desc": "Head-to-toe living body from the Visible Human Project frozen CT "
                                 "(U.S. National Library of Medicine), organs and skeleton via TotalSegmentator.",
-                        "frame": "wb"})
+                        "frame": "wb", "modules": sorted(wb_planes.keys())})
+        for cid, rows in links.items():
+            for l in rows:
+                if wb_planes.get(l["m"], {}).get(str(l["i"])):
+                    l["plane"] = 1
         total_tris += wb["stats"]["triangles"]
 
     # ---- mobile LOD set (pack3d.mjs lod) ----

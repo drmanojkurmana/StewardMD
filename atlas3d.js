@@ -644,6 +644,30 @@
     var byMod = st.data.planes[pl.m]; if (!byMod) return null;
     return byMod[String(pl.i)] || null;
   }
+  // Which body a slice module's planes are registered to: each living source lists the
+  // modules cut from its own scan. The torso is the default for older manifests.
+  function planeSrc(m) {
+    var d = st.data; if (!d) return "live";
+    for (var i = 0; i < d.sources.length; i++) {
+      var mods = d.sources[i].modules || [];
+      if (mods.indexOf(m) >= 0) return d.sources[i].id;
+    }
+    return "live";
+  }
+  function srcModules(id) {
+    var s = (st.data && st.data.sources.filter(function (x) { return x.id === id; })[0]) || null;
+    return (s && s.modules) || [];
+  }
+  // The module to open a cut on when the user taps "CT slice" with nothing selected: the
+  // axial stack of the current body, else its first registered module.
+  function defaultPlaneModule() {
+    var d = st.data, mods = srcModules(st.src);
+    for (var i = 0; i < mods.length; i++) {
+      var pl = d.planes[mods[i]], first = pl && pl[Object.keys(pl)[0]];
+      if (first && first.axis === "y") return mods[i];
+    }
+    return mods[0] || null;
+  }
   // Keep the half of the body on the far side of the plane from the camera, so the cut face
   // (and the slice drawn on it) faces the viewer whichever way the body is turned.
   function clipPlane(eye) {
@@ -714,7 +738,8 @@
     var d = st.data;
     if (!m || !d.planes[m] || !d.planes[m][String(i)]) { st.plane = null; paintBar(); invalidate(); return false; }
     st.plane = { m: m, i: +i, n: Object.keys(d.planes[m]).length, ready: false };
-    if (st.src !== "live") setSource("live", { keepSel: true });
+    var ps = planeSrc(m);
+    if (st.src !== ps) setSource(ps, { keepSel: true });
     loadSliceTexture();
     paintBar();
     if (!(opts && opts.noFocus)) {
@@ -741,7 +766,7 @@
     if (st.src === id) return;
     st.src = id;
     if (!(opts && opts.keepSel)) { st.sel = []; st.subject = null; closeSheet(); }
-    if (id !== "live") st.plane = null;
+    if (st.plane && planeSrc(st.plane.m) !== id) st.plane = null;
     st.region = "";
     liveDefaults();
     applyState(); paintChips(); paintBar(); ensureChunks();
@@ -1018,7 +1043,9 @@
     var sliceRow = pl ? '<div class="a3d-slice"><span>Slice ' + pl.i + "/" + pl.n + '</span><input type="range" min="1" max="' + pl.n + '" value="' + pl.i + '" data-a3d-act="slice" aria-label="CT slice level">' +
       '<button class="a3d-btn sm" data-a3d-act="ct" data-m="' + esc(pl.m) + '" data-s="" data-i="' + pl.i + '">Open CT</button>' +
       '<button class="a3d-btn sm" data-a3d-act="planeoff" aria-label="Hide slice">×</button></div>' : "";
+    var canCut = !pl && srcIndex() >= 1 && !!defaultPlaneModule();
     el.innerHTML = sliceRow +
+      (canCut ? '<button class="a3d-btn" data-a3d-act="slicein" aria-label="Cut the body with a CT slice">CT slice</button>' : "") +
       '<button class="a3d-btn" data-a3d-act="systems">' + (ico("layers") || "") + "Layers</button>" +
       '<button class="a3d-btn" data-a3d-act="view" aria-label="Cycle view">' + esc({ "3q": "3/4", front: "Front", side: "Side", back: "Back", top: "Top" }[(VIEWS[st.view] || VIEWS[0]).id]) + "</button>" +
       '<label class="a3d-explode"><span>Explode</span><input type="range" min="0" max="100" value="' + Math.round(st.explodeTarget * 100) + '" data-a3d-act="explode" aria-label="Explode systems"></label>' +
@@ -1120,12 +1147,14 @@
       if (ce && ce.kind === "related") note = '<p class="atlas-prose atlas-notice">' + esc(ce.note || "") + "</p>";
       else if (ce && ce.coverage === "partial" && ce.note) note = '<p class="atlas-prose atlas-notice">' + esc(ce.note) + "</p>";
       var srcNote = "";
-      if (ce && ce.live && ce.live.length)
-        srcNote = '<p class="atlas-prose a3d-srcnote">' + (st.src === "live"
-          ? "Living-patient surface: meshed from the same CT the torso slices are cut from."
-          : "Also available as a living-patient surface: switch to Living CT or tap Show in 3D on a torso row.") + "</p>";
+      if (st.src === "live" && ce && ce.live && ce.live.length)
+        srcNote = '<p class="atlas-prose a3d-srcnote">Living-patient surface: meshed from the same CT the torso slices are cut from.</p>';
+      else if (st.src === "wb" && ce && ce.wb && ce.wb.length)
+        srcNote = '<p class="atlas-prose a3d-srcnote">Whole-body surface: meshed from the same Visible Human CT the whole-body, head, thorax, abdomen and pelvis slices are cut from.</p>';
+      else if (ce && ((ce.live && ce.live.length) || (ce.wb && ce.wb.length)))
+        srcNote = '<p class="atlas-prose a3d-srcnote">Also available as a scanned surface: switch to ' + (ce.live && ce.live.length ? "Living CT" : "Whole body") + ' or tap Show in 3D on a CT row.</p>';
       var rel = "";
-      if (ce && ce.related && ce.related.length && !(s.kind === "part") && st.src !== "live")
+      if (ce && ce.related && ce.related.length && !(s.kind === "part") && srcIndex() === 0)
         rel = '<button class="a3d-link" data-a3d-act="related" data-c="' + esc(cid) + '"><b>3D</b><span>Show related structures</span><small>' + ce.related.length + " meshes</small></button>";
       var lat = "";
       if (ce && (ce.left || ce.right))
@@ -1134,7 +1163,7 @@
           '<button class="atlas-pill" data-a3d-act="side" data-c="' + esc(cid) + '" data-side="both">Both</button></div>';
       body = (cid ? '<div class="a3d-canon">RadioAnatome structure: <b>' + esc((ce && ce.name) || cid) + "</b></div>" : "") +
         (rows ? '<div class="a3d-links">' + rows + "</div>" : '<div class="atlas-empty">' + (cid ? "Not labelled in any CT or MRI module yet." : "No matching RadioAnatome structure. Search the CT and MRI modules by name instead.") + "</div>") +
-        srcNote + (st.src === "live" && ce && ce.kind === "related" ? "" : note) + rel + lat;
+        srcNote + (srcIndex() >= 1 && ce && ce.kind === "related" ? "" : note) + rel + lat;
     } else if (tab === "hierarchy") {
       var cs = s.kind === "part" ? (d.conceptsOfPart[s.i] || []) : s.kind === "concept" ? [d.conceptById[s.id]] : [];
       cs = cs.slice().sort(function (a, b) { return a.parts.length - b.parts.length; });
@@ -1151,7 +1180,7 @@
       '<h2 class="atlas-sheet-ttl">' + esc(title) + "</h2>" +
       '<div class="atlas-pills">' +
         (sysId ? '<span class="atlas-pill cat"><i style="background:' + esc(sysId.color) + '"></i>' + esc(sysId.name) + "</span>" : "") +
-        (st.src === "live" ? '<span class="atlas-pill live">Living CT</span>' : "") +
+        (st.src === "live" ? '<span class="atlas-pill live">Living CT</span>' : st.src === "wb" ? '<span class="atlas-pill live">Whole-body CT</span>' : "") +
         (region ? '<span class="atlas-pill">' + esc(regionLabel(region)) + "</span>" : "") +
         (fma ? '<span class="atlas-pill mono">' + esc(fma) + "</span>" : "") +
         '<button class="atlas-pill' + (st.isolate ? " on" : "") + '" data-a3d-act="isolate" aria-pressed="' + (st.isolate ? "true" : "false") + '">Isolate</button>' +
@@ -1208,6 +1237,12 @@
     if (act === "view") { cycleView(); return; }
     if (act === "planeoff") { clearPlane(); return; }
     if (!d) return;
+    if (act === "slicein") {
+      var pm = defaultPlaneModule(); if (!pm) return;
+      var keys = Object.keys(d.planes[pm]).map(Number).sort(function (a, b) { return a - b; });
+      setPlane(pm, keys[Math.floor(keys.length / 2)]);
+      return;
+    }
     if (act === "src") { hideResults(); setSource(t.getAttribute("data-id")); return; }
     if (act === "canon") { hideResults(); st._tab = "correlate"; selectCanon(t.getAttribute("data-c")); return; }
     if (act === "plane") { setPlane(t.getAttribute("data-m"), +t.getAttribute("data-i")); if (st.subject) openSheet(); return; }
@@ -1275,10 +1310,12 @@
       resizeCanvas();
       paintChips(); paintBar();
       applyState();
-      // Opened from a living-torso slice: land on the living body with THAT slice as the cut.
+      // Opened from a registered slice: land on the body that slice was cut from, with THAT
+      // slice as the cut (the living torso for its modules, the whole body for the VHP ones).
       var fromLive = opts.from && d.planes[opts.from.m] && d.planes[opts.from.m][String(opts.from.i)];
-      if (opts.src === "live" || fromLive) setSource("live", { keepCam: true });
-      if (opts.canon && d.canon[opts.canon]) selectCanon(opts.canon, { noFocus: !!fromLive, prefer: fromLive ? "live" : opts.src });
+      var landSrc = fromLive ? planeSrc(opts.from.m) : (opts.src && opts.src !== "bp3d" ? opts.src : null);
+      if (landSrc) setSource(landSrc, { keepCam: true });
+      if (opts.canon && d.canon[opts.canon]) selectCanon(opts.canon, { noFocus: !!fromLive, prefer: landSrc || opts.src });
       else if (opts.region) setRegion(opts.region);
       if (fromLive) setPlane(opts.from.m, opts.from.i);
       else if (!opts.canon && srcIndex() >= 1) focusSource();
