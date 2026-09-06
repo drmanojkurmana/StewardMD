@@ -23,3 +23,13 @@
 /_site/yt
   X-Frame-Options: ALLOWALL
   Content-Security-Policy: frame-ancestors 'self' capacitor: https://localhost http://localhost https://stewardmd.in
+
+# RadioAnatome slice images are immutable reference imagery (a slice file's bytes never change;
+# an edit ships under a new module or filename). The default was max-age=14400, must-revalidate,
+# so the edge round-tripped to the origin on every hit past 4 h — that is the ~5 s cold open the
+# viewer showed. Cache them for a year and serve stale-while-revalidate so first paint is fast.
+# The 3D layer's manifest/index (rebuilt per release) get a short TTL override below.
+/atlas/*
+  Cache-Control: public, max-age=31536000, stale-while-revalidate=86400
+/atlas/3d/*
+  Cache-Control: public, max-age=300, stale-while-revalidate=86400

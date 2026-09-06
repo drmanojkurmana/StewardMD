@@ -521,6 +521,23 @@
     preloadAround(i);
   }
 
+  // After the visible slice is up, warm the rest of the module in the background (once), one
+  // every 120 ms so the frame the user is looking at always wins the connection. Scrubbing
+  // through a warmed module is then instant regardless of the origin's cold latency.
+  var _warmed = {};
+  function warmModule() {
+    var a = st.atlas, id = st.moduleId;
+    if (!a || !id || _warmed[id]) return;
+    _warmed[id] = 1;
+    var sl = a.slices || [], k = 0;
+    (function next() {
+      if (k >= sl.length) return;
+      var s = sl[k++];
+      if (s && !_pre[s.img]) { _pre[s.img] = 1; try { var im = new G.Image(); im.src = imgUrl(s.img); } catch (e) {} }
+      G.setTimeout(next, 120);
+    })();
+  }
+
   // Keep i±1 and i±2 warm so dragging never shows a white frame.
   var _pre = {};
   function preloadAround(i) {
@@ -763,7 +780,7 @@
     if (!img) return;
     var stage = G.document.getElementById("atlasStage");
     function cls(add, name) { if (stage) stage.classList[add ? "add" : "remove"](name); }
-    function show() { cls(false, "is-loading"); cls(false, "is-error"); drawOverlay(); }
+    function show() { cls(false, "is-loading"); cls(false, "is-error"); drawOverlay(); warmModule(); }
     function fail() { cls(false, "is-loading"); cls(true, "is-error"); }
     img.onload = show; img.onerror = fail;
     if (url != null) { cls(false, "is-error"); cls(true, "is-loading"); img.src = url; }

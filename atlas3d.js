@@ -415,9 +415,9 @@
     // you look straight through (so the organs read) and bright at the silhouette (so the body
     // reads). Warm skin tone, independent of the dim logic.
     " if (shell > 0.5) {",
-    "   float fres = pow(1.0 - max(dot(n, V), 0.0), 2.2);",
-    "   c = mix(vec3(0.86, 0.66, 0.55), vec3(1.0, 0.92, 0.85), fres) * (0.5 + 0.7 * hemi);",
-    "   a = uGhost * (0.30 + 1.7 * fres);",
+    "   float fres = pow(1.0 - max(dot(n, V), 0.0), 1.8);",
+    "   c = mix(vec3(0.93, 0.76, 0.66), vec3(1.0, 0.95, 0.90), fres) * (0.72 + 0.5 * hemi);",
+    "   a = uGhost * (0.42 + 1.7 * fres);",
     // the outline fades out over the last ~4 cm at the scan's cut top/bottom (y 0.62 .. 1.058 m
     // in live.json's frame), so the shell reads as a body and not a sawn-off tube.
     "   a *= smoothstep(0.62, 0.665, vP.y) * (1.0 - smoothstep(1.01, 1.058, vP.y));",
@@ -557,7 +557,7 @@
       gl.uniform3f(prog.u.uBg, 0.07, 0.08, 0.09);
       gl.uniform3fv(prog.u.uSel, new Float32Array(SEL_TINT));
       gl.uniform1f(prog.u.uPass, pass || 0);
-      gl.uniform1f(prog.u.uGhost, pass === 3 ? 0.42 : pass === 4 ? 0.22 : 0.16);
+      gl.uniform1f(prog.u.uGhost, pass === 3 ? 0.42 : pass === 4 ? 0.26 : 0.16);
     }
     var sysIdx = {}; d.systems.forEach(function (s, i) { sysIdx[s.id] = i; });
     var want = srcIndex();
