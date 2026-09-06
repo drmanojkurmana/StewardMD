@@ -45,7 +45,7 @@ try {
   await ev(`document.querySelector('#smdAtlas .atlas-3d-card').click(); return 1;`);
   ok(await until(`return ATLAS3D.isOpen() && !!document.getElementById('a3dCanvas')`), "3D layer opens with a canvas");
   ok(await until(`var s=ATLAS3D._state; return !!s.data && !!s.gl;`, 30000), "manifest loaded and WebGL context created");
-  ok(await ev(`return ATLAS3D._state.data.parts.length;`) === 2227, "2,227 meshes in the manifest");
+  ok(await ev(`return ATLAS3D._state.data.parts.length;`) === 2265, "2,265 meshes in the manifest (2,227 reference + 38 living CT)");
   ok(await until(`var s=ATLAS3D._state; return !s.err && s.loaded>0 && Object.keys(s.loading).length===0 && Object.keys(s.chunks).length>=10;`, 120000), "default systems streamed and uploaded (no error)");
   const err = await ev(`return ATLAS3D._state.err;`);
   ok(!err, "no renderer error: " + (err || "none"));
@@ -73,12 +73,32 @@ try {
   ok(await ev(`var s=ATLAS._state.atlas.slices[ATLAS._state.slice-1]; return s.pins.some(function(p){return p.s==='kidney'});`) === true, "landed on a slice that pins the kidney (slice " + slice + ")");
   ok(await until(`var sh=document.getElementById('atlasSheet'); return !!sh && sh.classList.contains('on') && !!sh.querySelector('[data-atlas-act="3d"][data-canon="KIDNEY"]')`), "slice sheet shows the 3D pill for KIDNEY");
 
-  // ---- CT -> 3D ----
+  // ---- CT -> 3D (from a LIVING-torso slice: lands on the living body with the cut plane) ----
   await ev(`document.querySelector('#atlasSheet [data-atlas-act="3d"]').click(); return 1;`);
   ok(await until(`return ATLAS3D.isOpen() && ATLAS3D._state.subject && ATLAS3D._state.subject.cid==='KIDNEY' && ATLAS3D._state.sel.length===2`, 30000), "3D pill reopens the 3D layer with KIDNEY highlighted");
-  ok(await until(`var s=ATLAS3D._state; return !s.err && Object.keys(s.loading).length===0 && Object.keys(s.chunks).length>=10;`, 120000), "geometry re-streamed after reopen");
+  ok(await ev(`return ATLAS3D._state.src;`) === "live", "opened from a living-torso slice: source is Living CT");
+  ok(await ev(`var s=ATLAS3D._state; return s.sel.every(function(i){return s.data.parts[i].src===1}) && s.data.parts[s.sel[0]].name.indexOf('kidney')>=0;`) === true, "the selected meshes are the living-CT kidneys");
+  ok(await ev(`var p=ATLAS3D._state.plane; return !!p && p.m==='ct-live-torso-axial' && p.i===` + slice + ` && p.n===24;`) === true, "the cut plane is that very slice (" + slice + "/24)");
+  ok(await until(`var s=ATLAS3D._state; return !s.err && Object.keys(s.loading).length===0 && Object.keys(s.chunks).filter(function(k){return s.chunks[k].src===1}).length>=1;`, 120000), "living-CT geometry streamed");
+  ok(await until(`return !!ATLAS3D._state.plane && ATLAS3D._state.plane.ready === true`, 30000), "the CT slice texture loaded onto the plane");
+  ok(await ev(`return !!document.querySelector('#a3dBar [data-a3d-act=slice]') && !!document.querySelector('#a3dSrc .a3d-srcbtn.on[data-id=live]');`) === true, "slice slider is shown and the Living CT tab is active");
+  await ev(`var r=document.querySelector('#a3dBar [data-a3d-act=slice]'); r.value=12; r.dispatchEvent(new Event('change',{bubbles:true})); return 1;`);
+  ok(await until(`return ATLAS3D._state.plane && ATLAS3D._state.plane.i===12`), "slider moves the cut to slice 12");
+  ok(await ev(`var l=document.getElementById('a3dLabel'); return !!l && !l.hidden && /Kidney/.test(l.textContent);`) === true, "callout label names the selection on the canvas");
+  await ev(`document.querySelector('#a3dSheet [data-tab=correlate]').click(); return 1;`);
+  ok(await until(`return document.querySelectorAll('#a3dSheet .a3d-link.a3d-plane').length >= 3`), "CT rows into living-torso modules offer Show in 3D");
+  await ev(`document.querySelector('#a3dSrc .a3d-srcbtn[data-id=bp3d]').click(); return 1;`);
+  ok(await until(`return ATLAS3D._state.src==='bp3d' && ATLAS3D._state.plane===null`), "Reference tab switches body and drops the plane");
+  ok(await until(`var s=ATLAS3D._state; return !s.err && Object.keys(s.loading).length===0 && Object.keys(s.chunks).length>=10;`, 120000), "reference geometry streamed after switching back");
+  await ev(`ATLAS3D.selectCanon('LIVER'); return 1;`);
+  ok(await until(`return ATLAS3D._state.src==='live' && ATLAS3D._state.sel.length===1 && ATLAS3D._state.data.parts[ATLAS3D._state.sel[0]].id==='LIVE_liver'`), "LIVER (no reference surface) auto-switches to the living-CT liver");
+  await ev(`document.querySelector('[data-a3d-act=view]').click(); return 1;`);
+  ok(await ev(`return ATLAS3D._state.view===1 && document.querySelector('[data-a3d-act=view]').textContent==='Front';`) === true, "view button cycles to Front");
+  await ev(`ATLAS3D.setSource('bp3d'); return 1;`);
 
   // ---- search / regions / isolate / hierarchy ----
+  await ev(`var q=document.getElementById('a3dQ'); q.value='liver'; q.dispatchEvent(new Event('input',{bubbles:true})); return 1;`);
+  ok(await until(`var r=document.getElementById('a3dResults'); return !!r && !r.hidden && r.firstChild && r.firstChild.classList.contains('canon')`), "unified search: 'liver' leads with the RadioAnatome CT/MRI entry");
   await ev(`var q=document.getElementById('a3dQ'); q.value='femur'; q.dispatchEvent(new Event('input',{bubbles:true})); return 1;`);
   ok(await until(`var r=document.getElementById('a3dResults'); return !!r && !r.hidden && /femur/i.test(r.textContent)`), "search 'femur' shows results");
   await ev(`document.querySelector('#a3dResults .a3d-hit[data-a3d-act=part]').click(); return 1;`);
@@ -94,6 +114,7 @@ try {
   ok(await until(`return ATLAS3D._state.region==='BRAIN' && document.querySelector('#a3dChips .atlas-chip.on').textContent==='Brain'`), "region chip switches to Brain");
   await ev(`document.querySelector('[data-a3d-act=systems]').click(); return 1;`);
   ok(await until(`return document.querySelectorAll('#a3dSystems input[data-a3d-act=sys]').length === 15`), "Layers panel lists 15 systems");
+  ok(await ev(`return !!document.querySelector('#a3dSystems input[data-a3d-act=lod]');`) === true, "Layers panel offers the Full detail / LOD switch");
   ok(await ev(`return document.querySelector('#a3dSystems input[data-id=muscular]').checked;`) === false, "muscles are off by default (mobile budget)");
   await ev(`document.querySelector('[data-a3d-act=info]').click(); return 1;`);
   ok(await until(`var i=document.getElementById('a3dInfo'); return !!i && i.textContent.indexOf('BodyParts3D, © The Database Center for Life Science licensed under CC Attribution 4.0 International')>=0`), "About screen renders the mandated CC BY attribution verbatim");

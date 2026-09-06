@@ -49,6 +49,27 @@
 .a3d-explode { flex: 1 1 120px; display: flex; align-items: center; gap: 8px; color: #bbb; font-size: 13px; min-width: 120px; }
 .a3d-explode input { flex: 1 1 auto; min-width: 60px; accent-color: #43d9c6; }
 
+.a3d-src { display: flex; gap: 6px; padding: 6px 12px 0; flex: 0 0 auto; }
+.a3d-srcbtn { flex: 1 1 0; min-height: 36px; border-radius: 10px; border: 1px solid #333; background: #1c1e21; color: #ddd; font-size: 14px; cursor: pointer; }
+.a3d-srcbtn.on { background: #43d9c6; color: #062; border-color: #43d9c6; font-weight: 700; }
+.a3d-label {
+  position: absolute; z-index: 3; transform: translate(-50%, -140%); pointer-events: none;
+  padding: 4px 10px; border-radius: 999px; background: rgba(6,102,90,.85); color: #fff; font-size: 13px; font-weight: 600; white-space: nowrap;
+  box-shadow: 0 2px 8px rgba(0,0,0,.4);
+}
+.a3d-label::after { content: ""; position: absolute; left: 50%; top: 100%; width: 2px; height: 10px; background: rgba(67,217,198,.9); transform: translateX(-50%); }
+.a3d-slice { flex: 1 0 100%; display: flex; align-items: center; gap: 8px; padding-bottom: 6px; color: #ddd; font-size: 13px; }
+.a3d-slice span { flex: 0 0 auto; min-width: 74px; }
+.a3d-slice input { flex: 1 1 auto; min-width: 60px; accent-color: #43d9c6; }
+.a3d-btn.sm { min-height: 32px; padding: 0 10px; font-size: 13px; }
+.a3d-bar { flex-wrap: wrap; }
+.a3d-linkrow { display: flex; gap: 6px; }
+.a3d-linkrow .a3d-link:first-child { flex: 1 1 auto; }
+.a3d-link.a3d-plane { flex: 0 0 auto; display: inline-flex; align-items: center; background: #1f3d3a; border-color: #2c4b48; color: #9fe; font-size: 13px; padding: 8px 10px; }
+.a3d-srcnote { color: #9fe; font-size: 13px; }
+.atlas-pill.live { background: #1f3d3a; color: #9fe; }
+.a3d-hit.canon span::before { content: "CT"; display: inline-block; margin-right: 8px; padding: 1px 6px; border-radius: 6px; background: #43d9c6; color: #062; font-size: 11px; font-weight: 700; }
+
 /* Sheet: peek tall enough to show the CT / MRI rows; tap the handle or title for full height */
 .a3d-sheet.on { height: min(330px, 46%); }
 .a3d-sheet.full { height: 92%; }

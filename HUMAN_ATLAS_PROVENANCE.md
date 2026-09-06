@@ -173,8 +173,13 @@ Generated chunk checksums (27 files) are listed per chunk in `atlas/3d/manifest.
 | CT (head, thorax, abdomen, pelvis, knee, foot, hand, whole body) | Visible Human Project, U.S. National Library of Medicine | US Government work, NLM terms | `atlas-pipeline/sources.json`, each module's `atlas.json.provenance` |
 | CT (living torso) | TotalSegmentator dataset (Wasserthal et al.) | CC BY 4.0 | same |
 | MRI (brain) | OpenNeuro ds003563 | CC0 | same |
-| 3D | BodyParts3D 4.0 via Human Atlas | CC BY 4.0 (data), MIT (packaging code) | this file, `atlas/3d/provenance.json` |
+| 3D, reference body | BodyParts3D 4.0 via Human Atlas | CC BY 4.0 (data), MIT (packaging code) | this file, `atlas/3d/provenance.json` |
+| 3D, living-patient body | TotalSegmentator dataset v2.0.1, subject s0108 (Zenodo 10047292): surfaces meshed by `atlas-pipeline/live3d.py` from the dataset's expert masks; no segmentation model was run | CC BY 4.0 | `atlas/3d/live.json` (`source`), `manifest.json.sources[1]` |
 
-No BodyParts3D geometry is mixed into any CT/MRI module file, and no CT/MRI image is used by
-the 3D layer. The only shared artefact is the canonical id vocabulary in
+No BodyParts3D geometry is mixed into any CT/MRI module file, and no BodyParts3D mesh uses any
+CT/MRI image. The living-patient 3D body is the one deliberate crossover: its 38 surfaces come from
+the same s0108 masks that pin the `ct-live-torso-*` modules, and the 3D layer draws those modules'
+own slice images as textured cut planes (`manifest.json.planes`). It is shipped as a separate
+source (`src` flag 1 on each part, its own `live-*.bin.gz` chunks) and never mixed into the
+BodyParts3D chunks. The shared artefact across all sources remains the canonical id vocabulary in
 `atlas-pipeline/ontology.json`.
