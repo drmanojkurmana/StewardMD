@@ -2269,6 +2269,47 @@ test("parseAllergyFreeText: denies explicitly writes nothing; empty writes nothi
   assert.equal(unresolved.entries[0].resolved, false);
 });
 
+/* 2026-09-07. The denial detector only matched ADJACENT words ("no known allergies", "denies any
+ * allergies"). Put a drug name between them - which is how doctors actually write it - and none of
+ * those alternatives matched: the fragment fell through to resolveAllergySubstance(), the drug name
+ * resolved, and the chart gained a RESOLVED allergy for a patient the note documents as NOT
+ * allergic. That is the fabrication migrate-allergy.js's header calls worse than nothing, and it is
+ * not cosmetic: the Allergy Shield then reports the class contraindicated and a first-line
+ * antibiotic is withheld from someone who can safely take it. Five plausible phrasings did it. */
+test("parseAllergyFreeText: a DENIED substance is never recorded as an allergy (no fabrication from negated text)", () => {
+  for (const denial of [
+    "no known amoxicillin allergy",
+    "denies amoxicillin allergy",
+    "not allergic to amoxicillin",
+    "amoxicillin allergy ruled out",
+    "no amoxicillin allergy",
+    "patient denies penicillin allergy",
+  ]) {
+    const p = parseAllergyFreeText(denial, ALLERGY_TEST_PACK);
+    assert.deepEqual(p.entries, [], `"${denial}" must record nothing at all`);
+    assert.equal(p.denies, true, `"${denial}" is a denial`);
+  }
+});
+
+test("parseAllergyFreeText: a real allergy beside a denial keeps the allergy and drops only the denied half", () => {
+  // Before the fix this returned NOTHING: the whole-text denial check saw "no known ... allerg" and
+  // discarded the genuine penicillin allergy sitting in front of it.
+  const p = parseAllergyFreeText("Amoxicillin - rash, no known food allergies", ALLERGY_TEST_PACK);
+  assert.deepEqual(p.entries.map((e) => e.substance), ["amoxicillin"], "the real allergy survives");
+  assert.equal(p.denies, false);
+  // And the denied half must not be filed as an "unspecified" line that reads like a reported allergy.
+  assert.ok(!p.entries.some((e) => e.substance === "unspecified"));
+});
+
+test("parseAllergyFreeText: the negation filter does not eat drug-class names containing 'non'", () => {
+  // "non" is deliberately NOT a negation token - it is ordinary vocabulary in class names, and
+  // treating it as one would silently discard real NSAID allergies.
+  const pack = compileTestRulePack({ version: "t2", generics: ["ibuprofen"], allergyClasses: { nsaids: ["ibuprofen"] } });
+  const p = parseAllergyFreeText("NSAIDs - non-steroidal, causes wheeze", pack);
+  assert.equal(p.denies, false);
+  assert.ok(p.entries.some((e) => e.substance === "nsaids" && e.resolved), "a real NSAID class allergy still resolves");
+});
+
 test("parseAllergyFreeText: splits multiple substances, dedupes, and a class-name match works (penicillins)", () => {
   const p = parseAllergyFreeText("Penicillin, Ibuprofen and Aspirin", ALLERGY_TEST_PACK);
   const substances = p.entries.map((e) => e.substance);

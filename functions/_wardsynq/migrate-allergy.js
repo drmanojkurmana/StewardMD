@@ -26,7 +26,10 @@
  *     "unable-to-assess" posture a human would take reading an unconfirmed line item. A DOCTOR
  *     explicitly confirming a structured allergy remains a separate, not-yet-built feature.
  *   - An explicit denial ("NKDA", "no known allergies", ...) writes NOTHING — recording an allergy
- *     entry for a patient who was asked and denied would itself be a fabrication.
+ *     entry for a patient who was asked and denied would itself be a fabrication. This includes a
+ *     denial NAMING the drug ("no known penicillin allergy", "denies amoxicillin allergy"), which
+ *     until 2026-09-07 slipped past the denial check and was recorded as a real allergy — see
+ *     NEGATION_RE below.
  *
  * ONE ENTRY PER (patient, substance-or-fragment), STABLE ID. Re-saving the same assessment text is
  * idempotent (sameAllergy() + expectedVersion, the same pattern every sibling migrate-*.js uses);
@@ -48,6 +51,22 @@ import { AuthError, PermissionError } from "../_connect/permission.js";
 import { patientIdForTicket } from "./opd-identity.js";
 
 const DENIAL_RE = /\b(nkda|no\s+known\s+(drug\s+)?allerg|none\s+known|denies?\s+(any\s+)?allerg|nil\s+known|no\s+allerg)/i;
+
+/* NEGATION, per fragment. DENIAL_RE above only matches a denial whose words are ADJACENT ("no known
+ * allergies", "denies any allergies"). The moment a drug name sits between them - "no known
+ * amoxicillin allergy", "denies penicillin allergy", "not allergic to amoxicillin", "amoxicillin
+ * allergy ruled out" - none of those alternatives match, the fragment falls through to
+ * resolveAllergySubstance(), the drug name resolves, and the chart gains a RESOLVED allergy for a
+ * patient the note explicitly documents as NOT allergic. That is the fabrication this file's header
+ * calls worse than nothing, and it is not hypothetical: the Allergy Shield then reports the class
+ * contraindicated and a first-line antibiotic is withheld from someone who can take it.
+ *
+ * So: a fragment containing ANY negation token yields nothing at all. This deliberately over-skips -
+ * "Amoxicillin - not tolerated" is dropped too - because the trade is the one already stated at the
+ * top of this file: a miss degrades to today's baseline, a fabrication corrupts the chart. "non" is
+ * NOT in this list on purpose; it is a normal part of drug-class names ("non-steroidal"), so
+ * including it would silently discard real NSAID allergies. */
+const NEGATION_RE = /\b(nkda|no|not|none|nil|never|denies?|denied|deny|negative|without|ruled?\s+out)\b/i;
 
 function slug(v) { return String(v == null ? "" : v).toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, ""); }
 
@@ -91,17 +110,26 @@ function resolveAllergySubstance(fragment, pack) {
 function parseAllergyFreeText(text, pack) {
   const raw = String(text == null ? "" : text).trim();
   if (!raw) return { raw: "", denies: false, entries: [] };
-  if (DENIAL_RE.test(raw)) return { raw, denies: true, entries: [] };
+  const fragments = splitCandidates(raw);
+  // Anywhere in the note. "Amoxicillin - rash, no known food allergies" keeps the first fragment
+  // (a real allergy) but must not turn the second into an "unspecified" chart line that reads as a
+  // reported allergy when the text denied one.
+  const negatedAnywhere = NEGATION_RE.test(raw);
   const seen = new Set();
   const entries = [];
-  for (const fragment of splitCandidates(raw)) {
+  for (const fragment of fragments) {
+    if (NEGATION_RE.test(fragment)) continue;                 // a denied substance is never recorded
     const substance = resolveAllergySubstance(fragment, pack);
+    if (!substance && negatedAnywhere) continue;              // don't file the un-negated half of a denial
     const key = substance || ("unresolved:" + fragment.toLowerCase());
     if (seen.has(key)) continue;
     seen.add(key);
     entries.push({ reportedText: fragment, substance: substance || "unspecified", resolved: !!substance });
   }
-  return { raw, denies: false, entries };
+  // "Denies" is now anything that left nothing to record because it was negated, not only the
+  // adjacent-words phrasings DENIAL_RE knows.
+  const denies = entries.length === 0 && (DENIAL_RE.test(raw) || fragments.some((f) => NEGATION_RE.test(f)));
+  return { raw, denies, entries };
 }
 
 /** Stable per (patient, substance-or-text) id — re-saving the same fragment is idempotent. */
