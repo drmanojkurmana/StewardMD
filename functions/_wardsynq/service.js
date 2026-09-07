@@ -145,6 +145,11 @@ const RESOURCE_TYPES = Object.freeze([
    * not a record. Append-only, because "you were given this" is exactly the claim that has to
    * survive somebody wishing it had not been. */
   "PatientRecordRelease",
+  /* That a backup run finished, and what sequence it covered. A RECEIPT written by the caller, never
+   * inferred from the export pages: a caller that stopped halfway holds a file that verifies and is
+   * short, and only the caller knows whether it actually stored the last page. Kept in the record
+   * itself so the recovery point is answerable from the same store a restore would rebuild. */
+  "BackupRun",
 ]);
 
 const MODE = Object.freeze({ SYSTEM_OF_RECORD: "system-of-record", INTEGRATION: "integration" });
