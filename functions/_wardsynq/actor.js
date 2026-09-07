@@ -114,6 +114,29 @@ function grantForCaps(caps) {
     };
   }
 
+  if (has(CAPS.LAB_RESULT)) {
+    /* The laboratory, 2026-09-07. It reads the requests it is working from and writes the results:
+     * the Observations that carry the values and the DiagnosticReport that releases them.
+     *
+     * ONE RESIDUAL, STATED RATHER THAN HIDDEN: write scope in this system is by resource TYPE, and
+     * a laboratory result and a nurse's blood pressure are both Observations. So this grant does
+     * technically let a lab actor write an Observation of any category through the raw record API.
+     * The resulting ROUTE always stamps category "laboratory" (asserted by a test), and a lab actor
+     * has no EMR capability so no clinical screen is open to them - but that is a narrower control
+     * than the scope itself, and it is worth saying so plainly. Closing it properly needs a
+     * category-scoped grant, which is a change to the store's authorisation model rather than to
+     * this table, and it is recorded in the vault as such rather than fudged here. */
+    const canRead = ["ServiceRequest", "Observation", "DiagnosticReport"];
+    const canWrite = ["Observation", "DiagnosticReport"];
+    if (!grant) grant = { tier: TIER.EXECUTE, read: canRead, write: canWrite, basis: CAPS.LAB_RESULT };
+    else grant = {
+      tier: TIER.EXECUTE,
+      read: grant.read === null ? null : [...new Set([...grant.read, ...canRead])],
+      write: grant.write === null ? null : [...new Set([...grant.write, ...canWrite])],
+      basis: grant.basis + "+" + CAPS.LAB_RESULT,
+    };
+  }
+
   if (has(CAPS.ORDER_VERIFY)) {
     /* Pharmacy verification, 2026-09-07. The narrow grant this file's own comment (and the note in
      * api/queue/[[path]].js) said the problem wanted, rather than the two wrong answers available

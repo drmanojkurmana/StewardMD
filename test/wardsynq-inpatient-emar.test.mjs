@@ -101,7 +101,7 @@ const { onRequest } = await import("../functions/api/queue/[[path]].js");
 const ORG = "org-wsq";
 const sanitize = (x) => String(x == null ? "" : x).replace(/[^A-Za-z0-9_-]/g, "-").slice(0, 80);
 const idFor = (email) => "cfa:" + createHash("sha256").update(email.toLowerCase()).digest("hex").slice(0, 24);
-const DOCTOR = "doctor@example.test", NURSE = "nurse@example.test", PHARM = "pharmacy@example.test";
+const DOCTOR = "doctor@example.test", NURSE = "nurse@example.test", PHARM = "pharmacy@example.test", LABTECH = "lab@example.test";
 const ENV = {
   QUEUE_ENABLED: "1",
   QUEUE_TOKEN_SECRET: "test-secret-that-is-long-enough-for-hmac",
@@ -115,7 +115,7 @@ function seedHospital(mode = "wardsynq") {
   // ownerUid is nobody on this ward: an owner resolves to `admin` and holds every capability, which
   // would make every separation assertion below vacuous.
   docs.set(`q_orgs/${ORG}`, { fields: { id: ORG, code: "SMD-WARD01", name: "WSQ Ward Hospital", kind: "clinic", mode, connectTenantId: TENANT_ROW.id, ownerUid: "cfa:nobody", createdAt: 1 }, updateTime: "t1" });
-  for (const [email, role] of [[DOCTOR, "doctor"], [NURSE, "nurse"], [PHARM, "pharmacy"]]) {
+  for (const [email, role] of [[DOCTOR, "doctor"], [NURSE, "nurse"], [PHARM, "pharmacy"], [LABTECH, "lab"]]) {
     docs.set(`q_members/${sanitize(ORG)}__${sanitize(idFor(email))}`, { fields: { orgId: ORG, identity: idFor(email), role, active: true }, updateTime: "t1" });
   }
 }
@@ -1186,6 +1186,145 @@ test("the bed board says who is where, and never confuses 'no free beds' with 'w
   assert.equal(third.__status, 200, JSON.stringify(third));
   const withUnplaced = await as(NURSE, `/ward/beds?orgId=${ORG}&ward=Medical A`);
   assert.equal(withUnplaced.wards[0].unplaced.length, 1);
+});
+
+/* ---- the laboratory -------------------------------------------------------------------------------
+ *
+ * WardSynQ could ORDER a test and could INGEST a result from GHIS, and could not produce one itself.
+ * This is the piece that makes the critical-value loop reachable natively.
+ */
+
+/** An investigation ordered on this admission, straight onto the record. */
+async function orderTest(adm, code = "Renal profile", id = "wsq-sr-1") {
+  await RECORD.append(TENANT_ROW.id, [{
+    resourceType: "ServiceRequest", id, version: 1, patientId: adm.patientId, encounterId: adm.encounterId,
+    code, display: code, status: "active", requesterId: "cfa:dr",
+    meta: { recordedAt: "2026-09-07T08:30:00.000Z", effectiveAt: "2026-09-07T08:30:00.000Z" },
+  }], { actor: "test" });
+  return id;
+}
+
+test("ORDER -> RESULT -> CRITICAL LOOP, natively, end to end", async () => {
+  seedHospital();
+  const { adm } = await admittedPatientOnDrug();
+  const sr = await orderTest(adm);
+
+  // The laboratory sees what was asked for.
+  const pending = await as(LABTECH, `/ward/pending-tests?orgId=${ORG}&patientId=${adm.patientId}`);
+  assert.equal(pending.__status, 200, JSON.stringify(pending));
+  assert.deepEqual(pending.pending.map((p) => p.serviceRequestId), [sr]);
+
+  const rel = await as(LABTECH, "/ward/release-result", "POST", {
+    orgId: ORG, serviceRequestId: sr, status: "final", reportedAt: "2026-09-07T10:00:00.000Z",
+    tests: [
+      { test: "Potassium", value: 7.4, unit: "mmol/L", range: "3.5-5.1" },
+      { test: "Sodium", value: 138, unit: "mmol/L" },
+      { test: "Blood culture", value: "No growth at 48h" },
+    ],
+  });
+  assert.equal(rel.__status, 200, JSON.stringify(rel));
+  assert.equal(rel.status, "final");
+  assert.equal(rel.unsolicited, false, "it answers the request it was asked against");
+  assert.ok(rel.releasedBy, "and it names who released it");
+  // The known analytes are LOINC; the free-text one is honestly local.
+  const k = rel.observations.find((o) => o.display === "Potassium");
+  assert.equal(k.codeSystem, "http://loinc.org");
+  assert.equal(rel.observations.find((o) => o.display === "Blood culture").codeSystem, "wardsynq-lab-local");
+
+  // It is now on the chart, and the critical loop opens off it - natively, with no GHIS anywhere.
+  const opened = await as(DOCTOR, "/ward/flag-critical", "POST", { orgId: ORG, reportId: rel.reportId });
+  assert.equal(opened.opened, 1);
+  assert.equal(opened.loops[0].display, "Potassium");
+  assert.equal(opened.loops[0].basis, "limit", "flagged by the site's limits, not by the lab");
+  assert.equal(opened.loops[0].value, 7.4);
+
+  // And the request drops off the pending list, because it has been answered.
+  assert.deepEqual((await as(LABTECH, `/ward/pending-tests?orgId=${ORG}&patientId=${adm.patientId}`)).pending, []);
+});
+
+test("A FINAL RESULT IS CORRECTED, NEVER OVERWRITTEN", async () => {
+  seedHospital();
+  const { adm } = await admittedPatientOnDrug();
+  const sr = await orderTest(adm);
+  const first = await as(LABTECH, "/ward/release-result", "POST", {
+    orgId: ORG, serviceRequestId: sr, status: "final", tests: [{ test: "Potassium", value: 7.4, unit: "mmol/L" }],
+  });
+  assert.equal(first.__status, 200);
+
+  // Re-releasing over a final result must SAY it is a correction. Amending a result somebody has
+  // already acted on is the most dangerous thing a laboratory system does.
+  const quiet = await as(LABTECH, "/ward/release-result", "POST", {
+    orgId: ORG, serviceRequestId: sr, status: "final", tests: [{ test: "Potassium", value: 4.1, unit: "mmol/L" }],
+  });
+  assert.equal(quiet.__status, 409);
+  assert.equal(quiet.error, "already_final");
+
+  const fixed = await as(LABTECH, "/ward/release-result", "POST", {
+    orgId: ORG, serviceRequestId: sr, status: "corrected", tests: [{ test: "Potassium", value: 4.1, unit: "mmol/L" }],
+  });
+  assert.equal(fixed.__status, 200, JSON.stringify(fixed));
+  assert.equal(fixed.corrected, true);
+
+  // THE OLD VALUE SURVIVES. It is the one case where a reader must be able to see what was acted on.
+  const hist = await RECORD.history(TENANT_ROW.id, "Observation", first.observations[0].id);
+  assert.deepEqual(hist.map((h) => h.value), [7.4, 4.1]);
+  assert.deepEqual((await RECORD.history(TENANT_ROW.id, "DiagnosticReport", first.reportId)).map((h) => h.status), ["final", "corrected"]);
+
+  // A preliminary result, by contrast, may simply be superseded.
+  const sr2 = await orderTest(adm, "Troponin", "wsq-sr-2");
+  await as(LABTECH, "/ward/release-result", "POST", { orgId: ORG, serviceRequestId: sr2, status: "preliminary", tests: [{ test: "Troponin", value: "<0.01" }] });
+  assert.equal((await as(LABTECH, "/ward/release-result", "POST", { orgId: ORG, serviceRequestId: sr2, status: "final", tests: [{ test: "Troponin", value: 0.9, unit: "ng/mL" }] })).__status, 200);
+});
+
+test("an add-on with no request is recorded as UNSOLICITED, not attached to the nearest one", async () => {
+  seedHospital();
+  const { adm } = await admittedPatientOnDrug();
+  await orderTest(adm);
+  const addon = await as(LABTECH, "/ward/release-result", "POST", {
+    orgId: ORG, patientId: adm.patientId, panel: "Add-on magnesium", reportedAt: "2026-09-07T11:00:00.000Z",
+    tests: [{ test: "Magnesium", value: 0.4, unit: "mmol/L" }],
+  });
+  assert.equal(addon.__status, 200, JSON.stringify(addon));
+  assert.equal(addon.unsolicited, true, "attaching it to whatever request looked closest is how a result lands on the wrong test");
+  assert.equal(addon.serviceRequestId, null);
+  // The real request is still pending: an add-on did not answer it.
+  assert.equal((await as(LABTECH, `/ward/pending-tests?orgId=${ORG}&patientId=${adm.patientId}`)).pending.length, 1);
+
+  // A result naming neither a patient nor a request is refused.
+  assert.equal((await as(LABTECH, "/ward/release-result", "POST", { orgId: ORG, tests: [{ test: "K", value: 1 }] })).error, "patient_required");
+  // And one with no usable values is not a result.
+  const empty = await as(LABTECH, "/ward/release-result", "POST", { orgId: ORG, patientId: adm.patientId, tests: [{ test: "K" }] });
+  assert.equal(empty.__status, 422);
+  assert.equal(empty.error, "nothing_to_release");
+});
+
+test("THE LAB'S AUTHORITY IS ITS OWN: it results, and it does nothing else", async () => {
+  seedHospital();
+  const { adm, ord } = await admittedPatientOnDrug();
+  const sr = await orderTest(adm);
+  const result = { orgId: ORG, serviceRequestId: sr, tests: [{ test: "Potassium", value: 4.1, unit: "mmol/L" }] };
+
+  // Only the laboratory results. A clinician orders; a nurse gives; neither releases a result.
+  assert.equal((await as(LABTECH, "/ward/release-result", "POST", result)).__status, 200);
+  assert.equal((await as(DOCTOR, "/ward/release-result", "POST", result)).__status, 403);
+  assert.equal((await as(NURSE, "/ward/release-result", "POST", result)).__status, 403);
+  assert.equal((await as(PHARM, "/ward/release-result", "POST", result)).__status, 403);
+
+  // And the laboratory does nothing else: no chart, no orders, no doses, no diagnoses.
+  assert.equal((await as(LABTECH, `/ward/discharge-summary?orgId=${ORG}&encounterId=${adm.encounterId}`)).__status, 403);
+  assert.equal((await as(LABTECH, "/ward/problem", "POST", { orgId: ORG, problem: { patientId: adm.patientId, display: "Sepsis" } })).__status, 403);
+  assert.equal((await as(LABTECH, "/ward/medication-order", "POST", { orgId: ORG, order: { patientId: adm.patientId, encounterId: adm.encounterId, drug: "X", dose: { value: 1, unit: "mg" } } })).__status, 403);
+  assert.equal((await as(LABTECH, "/ward/mar", "POST", { orgId: ORG, action: "administer", orderId: ord.orderId, dueAt: DUE, patient: { id: adm.patientId } })).__status, 403);
+  assert.equal((await as(LABTECH, `/ward/criticals?orgId=${ORG}`)).__status, 403, "and not the ward's critical list");
+
+  /* THE ROUTE ALWAYS STAMPS "laboratory". The write scope in this system is by resource TYPE, and a
+   * lab result and a nurse's blood pressure are both Observations - so the grant does technically
+   * permit an Observation of any category through the raw record API. This pins the door that
+   * exists; the residual is stated in actor.js and recorded in the vault rather than hidden. */
+  const obs = await RECORD.byPatient(TENANT_ROW.id, "Observation", adm.patientId);
+  const fromLab = obs.filter((o) => o.codeSystem === "http://loinc.org" && o.code === "2823-3");
+  assert.ok(fromLab.length >= 1);
+  assert.ok(fromLab.every((o) => o.category === "laboratory"));
 });
 
 test("the ward metrics count what every other mechanism left open, from the real record", async () => {

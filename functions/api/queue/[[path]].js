@@ -63,6 +63,7 @@ import { declareBreakGlass, openEmergencyChart, listBreakGlass } from "../../_wa
 import { patientEverything, readResource, capabilityStatement } from "../../_wardsynq/fhir.js";
 import { startReconciliation, decideMedicine, readReconciliation } from "../../_wardsynq/med-reconciliation.js";
 import { wardMetrics } from "../../_wardsynq/ward-metrics.js";
+import { releaseResult, pendingRequests } from "../../_wardsynq/lab-result.js";
 import { recordAllergiesFromAssessment } from "../../_wardsynq/migrate-allergy.js";
 
 // The Encounter migration's one shared call site. Every hook below (ticket add, import, a terminal
@@ -455,6 +456,8 @@ export async function onRequest(context) {
         // What is outstanding on the ward. A count of open items, naming no patient except on the
         // oldest unacknowledged critical result - so it is readable by the ward, at emr.view.
         metrics: CAPS.EMR_VIEW,
+        // The laboratory. Its own authority: releasing a result is not treating a patient.
+        "release-result": CAPS.LAB_RESULT, "pending-tests": CAPS.LAB_RESULT,
         // Closing a stay is the administrative act QUEUE_ADD already covers for opening one.
         // The summary is a clinical document: drafting and signing it are EMR_TREAT.
         discharge: CAPS.QUEUE_ADD, "discharge-summary": CAPS.EMR_TREAT, "sign-discharge-summary": CAPS.EMR_TREAT,
@@ -531,6 +534,14 @@ export async function onRequest(context) {
               types: (url.searchParams.get("_type") || "").split(",").map((t) => t.trim()).filter(Boolean),
             });
         return json(r.ok ? (r.bundle || r.resource) : r.outcome, r.status, request);
+      }
+      if (sub === "release-result" && method === "POST") {
+        const r = await releaseResult(request, env, { ...deps, serviceRequestId: body.serviceRequestId, patientId: body.patientId, encounterId: body.encounterId, panel: body.panel, tests: body.tests, status: body.status, reportedAt: body.reportedAt, conclusion: body.conclusion, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "pending-tests" && method === "GET") {
+        const r = await pendingRequests(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "" });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "metrics" && method === "GET") {
         const r = await wardMetrics(request, env, { ...deps, ward: url.searchParams.get("ward") || "", escalationPolicy: (wOrg && wOrg.criticalEscalation) || null });

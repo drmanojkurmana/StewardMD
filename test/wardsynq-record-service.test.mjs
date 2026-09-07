@@ -464,9 +464,12 @@ function opdHospital(members, extra = {}) {
 }
 const STAFF_ENV = { ...ENV, QUEUE_STAFF_ENABLED: "1", QUEUE_TOKEN_SECRET: "test-secret-for-staff-sessions-at-least-32-chars" };
 
-test("role mapping: every one of the eighteen operational roles resolves to exactly the grant its capabilities imply", () => {
+test("role mapping: every operational role resolves to exactly the grant its capabilities imply", () => {
   const m = roleMapping();
   assert.deepEqual(Object.keys(m).sort(), [...ROLES].sort());
+  /* The title used to say "eighteen". It is derived from ROLES, so adding `lab` passed silently -
+   * a count in a name goes stale the first time somebody adds a role, and a stale name is worse
+   * than none because it reads as a checked fact. The grants below are what actually pin this. */
   const tier = (r) => (m[r] ? m[r].tier : null);
   const write = (r) => (m[r] ? m[r].write : "none");
   const read = (r) => (m[r] ? m[r].read : "none");
@@ -509,6 +512,19 @@ test("role mapping: every one of the eighteen operational roles resolves to exac
   assert.ok(!write("pharmacy").includes("MedicationAdministration"), "a pharmacist can never claim a dose was given");
   assert.ok(!write("pharmacy").includes("MedicationOrder"), "nor change the order they are checking");
   assert.ok(!read("pharmacy").includes("ClinicalNote"), "and not the notes or the discharge summary");
+  /* The laboratory, 2026-09-07. It reads the requests it works from and writes the results. It has
+   * NO EMR capability, so it never sees a chart, an order it did not need, or a note.
+   *
+   * The one residual is stated rather than hidden: write scope here is by resource TYPE, and a lab
+   * result and a nurse's blood pressure are both Observations - so this does technically permit an
+   * Observation of any category through the raw record API. The resulting route always stamps
+   * "laboratory" (pinned in the inpatient suite), and closing it properly needs a category-scoped
+   * grant, which is a change to the store's authorisation model rather than to this table. */
+  assert.equal(tier("lab"), TIER.EXECUTE);
+  assert.deepEqual(write("lab"), ["Observation", "DiagnosticReport"]);
+  assert.deepEqual(read("lab"), ["ServiceRequest", "Observation", "DiagnosticReport"]);
+  assert.ok(!write("lab").includes("MedicationOrder") && !write("lab").includes("Condition"), "a laboratory does not prescribe or diagnose");
+  assert.ok(!read("lab").includes("Patient") && !read("lab").includes("ClinicalNote"), "and never reads the chart");
   for (const r of ["hr", "viewer", "oncqis_protocol_author", "oncqis_clinical_reviewer", "oncqis_institutional_approver", "academic_cell"]) assert.equal(m[r], null, r + " has no clinical actor");
   // The mapping is derived, so it cannot drift from the queue's own non-negotiable.
   for (const r of ROLES) {

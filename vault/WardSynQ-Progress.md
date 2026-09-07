@@ -23,7 +23,7 @@ Updated: 2026-09-07 (PRs #887, #889, #890, #892, #894, #895, #897 pharmacy verif
 | 9 | eMAR / medication administration (Willow Inpatient) | 8 | 90 | #889 + #890. State machine, five rights, barcode scan, weight-based refusal, AI blocked, **UI**, **and a real schedule**. Plus medicines reconciliation on admission. No high-alert witness config. |
 | 10 | Nursing documentation (Flowsheets) | 5 | 75 | #895. Vitals, fluid balance with charted-hour gaps, SBAR shift handover with a read-back loop. No structured assessments, no care plans. |
 | 11 | Discharge + summary (Discharge Navigator) | 4 | 90 | #892. Assembler, per-section clinician correction with recorded provenance, immutable signed version, outstanding-items review, A4 print, and the home-medicine reconciliation. Not device-proven. |
-| 12 | Results — lab / rad (Beaker, Radiant) | 6 | 55 | #894. DiagnosticReport ingest plus a closed critical-value loop with acknowledgement and escalation. No native resulting, no autoverification. |
+| 12 | Results — lab / rad (Beaker, Radiant) | 6 | 85 | #894 + #900. Native resulting by a `lab` role with its own authority, corrections that keep the prior value, and a closed critical-value loop. No radiology reporting, no autoverification, no delta checks. |
 | 13 | Pharmacy verification + inventory (Willow) | 5 | 55 | #897. Verification as its OWN authority with a narrow grant: reads what a check needs, writes only the verification. No inventory, no dispensing. |
 | 14 | Notes / documentation (SmartText, NoteWriter) | 4 | 60 | Signed clinical notes, versioned, and a document surface with per-section provenance. No templates, no macros, no co-sign routing. |
 | 15 | Billing / revenue (Resolute) | 5 | 15 | Clinic billing config only. No charge capture from orders, no claims, no payer. |
@@ -33,7 +33,7 @@ Updated: 2026-09-07 (PRs #887, #889, #890, #892, #894, #895, #897 pharmacy verif
 | 19 | Patient portal (MyChart) | 3 | 0 | Not built. |
 | 20 | Deployment / uptime / DR (on-prem, HA) | 3 | 25 | Cloudflare edge + D1, live domain. No on-prem, no DR drill, no downtime procedures. |
 
-**Weighted total: 64.1%.**
+**Weighted total: 65.9%.**
 
 The total is the weight-times-percent sum of the table above, divided by 100. It is COMPUTED from
 these rows, not asserted: earlier revisions of this file carried an eyeballed number that had drifted
@@ -54,12 +54,14 @@ about two points high (the 44% baseline was 41.5, and 53% was 50.8). If a row ch
 0. **Device proof of the whole inpatient vertical** — none of the ward, eMAR, discharge or nursing
    screens have been run on a phone. Everything above is proven by test, not by a clinician's hands.
    This is the largest honest caveat on this entire table.
-2. **Native resulting** — results still arrive from GHIS; WardSynQ cannot resource a lab itself.
-3. **Pharmacy verification as its own authority**, and with it a narrow grant so a pharmacist can
-   see a critical potassium. Today the pharmacy role holds no EMR capability at all and the only
-   lever is emr.view, which would hand it the whole chart.
-4. **Break-glass and a consent model** — the security domain's remaining gap.
-5. **Interoperability**: a FHIR endpoint. The canonical model is FHIR-shaped and nothing exposes it.
+2. **A consent model** — break-glass exists; consent does not.
+3. **A category-scoped write grant.** Write scope is by resource TYPE, so the `lab` role's
+   Observation write technically permits a vital sign as well as a result. The resulting route
+   stamps `laboratory` and a lab actor has no clinical screen, but that is a narrower control than
+   the scope itself. Closing it properly is a change to the store's authorisation model.
+4. **Identity merge/unmerge** — duplicate patient records have no resolution path.
+5. **Order sets, e-prescribing transmission, appointment scheduling, care plans** — each a
+   self-contained gap in an otherwise wired domain.
 
 ## Deliberately not built
 Patient portal, full billing and claims, on-premise deployment, DICOM/PACS and regulatory
