@@ -51,4 +51,14 @@ figures; selection is colour + weight, press is brightness. See [[Decisions]] (2
 ## Gotchas
 - Chips feed the engine with NO rebaseline (icu.js only).
 - SW-warmup flakiness in headless tests (warmup protocol).
+- **Always read current vitals via `mergedVitals(_raw.vitals)`, never `latestVitals()`.**
+  `ingestMonitor()` pushes a NEW ROW per save containing only the fields just entered/imported, so
+  `latestVitals()` (newest-TIMESTAMP row only) drops any field not in that latest row — e.g. save
+  Heart Rate, then separately save BP, and the HR tile goes blank even though the HR row is still
+  in `_raw.vitals`. `mergedVitals()` forward-fills the newest non-null value per field across the
+  whole series and was built for exactly this (see its header, "R1 C1") but was only wired into
+  `recompute()`/`curMap()`/`shockIndex()`, not the display code. Fixed 2026-09-07 in
+  `renderLiveStatus`, the Hemo tab, the Fluids tab, `liveSummaryLine`, `patientBanner`, and the
+  import-review "current value" comparison (`openImportReview`/`openImportReviewAll`) — all six now
+  use `mergedVitals`. Regression test: `test/run-icu-livestatus-merge.mjs`.
 Deps: [[Scan-Meds and Drug Index]] · [[Medical Knowledge Base]] · [[FollowCare]] (discharge). See [[Roadmap]].

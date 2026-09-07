@@ -1555,7 +1555,10 @@
     return "ok";
   }
   function renderLiveStatus() {
-    var lv = latestVitals(), L = _raw.labs.recent || {}, f = _raw.fluids || {};
+    // Forward-filled across the whole series (mergedVitals), NOT the single newest-timestamp row
+    // (latestVitals) — a sparse update (e.g. entering only BP) must not blank HR/SpO2/etc. tiles
+    // that were charted in an earlier, separate entry.
+    var lv = mergedVitals(_raw.vitals), L = _raw.labs.recent || {}, f = _raw.fluids || {};
     var mp = curMap();
     var pressors = (_raw.infusions || []).filter(function (i) { return isPressor(i.drug); });
     var cards = [
@@ -1855,7 +1858,7 @@
     var showKeys = aiMode ? extracted : (IMPORT_FIELDS[kind] || IMPORT_FIELDS.labs);
     if (!showKeys.length && !lines.length) { importProgress("No values could be read — please enter values manually.", true); return; }
     var el = document.getElementById("icuImpOv"); if (!el) { el = document.createElement("div"); el.id = "icuImpOv"; el.className = "icu-imp-ov icu-modal"; document.body.appendChild(el); }
-    var L = _raw.labs.recent || {}, lastV = latestVitals();
+    var L = _raw.labs.recent || {}, lastV = mergedVitals(_raw.vitals);
     var rows = showKeys.map(function (k) {
       var val = fields[k] != null ? fields[k] : "";
       var cur = (kind === "labs") ? L[k] : (kind === "monitor") ? lastV[k] : (kind === "abg") ? (_raw.abg || {})[k] : (_raw.ventilator || {})[k];
@@ -1930,7 +1933,7 @@
     if (!hasVals && !lines.length) { importProgress("No values could be read — try a clearer photo, or enter values manually.", true); return; }
     var aiMode = hasVals;
     var el = document.getElementById("icuImpOv"); if (!el) { el = document.createElement("div"); el.id = "icuImpOv"; el.className = "icu-imp-ov icu-modal"; document.body.appendChild(el); }
-    var L = _raw.labs.recent || {}, lastV = latestVitals(), curAbg = _raw.abg || {}, curVent = _raw.ventilator || {};
+    var L = _raw.labs.recent || {}, lastV = mergedVitals(_raw.vitals), curAbg = _raw.abg || {}, curVent = _raw.ventilator || {};
     function curOf(sec, k) { return sec === "labs" ? L[k] : sec === "vitals" ? lastV[k] : sec === "abg" ? curAbg[k] : curVent[k]; }
     var groupsHTML = SEC_META.map(function (m) {
       var sec = m[0], vals = sections[sec] || {}, keys = Object.keys(vals);
@@ -3006,7 +3009,7 @@
       return out;
     },
     hemo: function () {
-      var lv = latestVitals(), h = interpretHemo(lv, _raw.infusions);
+      var lv = mergedVitals(_raw.vitals), h = interpretHemo(lv, _raw.infusions);
       return '<div class="icu-card"><h3>Hemodynamics</h3>' +
         row("MAP", h.map, "mmHg") + row("Shock index", h.si != null ? h.si.toFixed(2) : null) + row("Heart rate", lv.hr, "bpm") +
         row("BP", (lv.sbp != null ? lv.sbp + "/" + lv.dbp : null)) + row("Lactate", lv.lactate, "mmol/L") +
@@ -3019,7 +3022,7 @@
         '<button class="icu-btn" data-icu-act="calc:map">Open hemodynamic calculators</button>';
     },
     fluids: function () {
-      var f = _raw.fluids || {}, r = analyzeFluids(f, _raw.patient, latestVitals());
+      var f = _raw.fluids || {}, r = analyzeFluids(f, _raw.patient, mergedVitals(_raw.vitals));
       return '<div class="icu-card"><h3>Fluid Management</h3>' +
         row("Phase", r.phase) + row("Intake (24h)", f.intake24h, "mL") + row("Output (24h)", f.output24h, "mL") +
         row("Urine (24h)", f.urine24h, "mL") + r.rows.map(function (x) { return row(x[0], x[1]); }).join("") +
@@ -3386,7 +3389,7 @@
   }
   // one-line vitals summary for the collapsed status on non-overview tabs
   function liveSummaryLine() {
-    var lv = latestVitals(), L = _raw.labs.recent || {}, mp = curMap();
+    var lv = mergedVitals(_raw.vitals), L = _raw.labs.recent || {}, mp = curMap();
     function v(x, u) { return (x == null || x === "") ? "—" : x + (u || ""); }
     return ico("pulse", "❤️") + ' Vitals &amp; status' +
       '<span class="vs-k">HR</span> ' + v(lv.hr) + '<span class="vs-k">MAP</span> ' + v(mp) +
@@ -3511,7 +3514,7 @@
   // Persistent one-line patient banner (A6): name · ICU day · MAP · lactate · pressors.
   function patientBanner() {
     if (!hasData()) return "";
-    var p = _raw.patient || {}, lv = latestVitals(), mp = curMap();
+    var p = _raw.patient || {}, lv = mergedVitals(_raw.vitals), mp = curMap();
     var press = (_raw.infusions || []).filter(function (i) { return /nor|adrenaline|epinephrine|vasopressin|dopamine|dobutamine|phenylephrine/i.test(i.drug || ""); });
     var parts = ['<b>' + esc(p.name || "ICU patient") + "</b>"];
     if (p.icuDay != null) parts.push("ICU day " + esc(p.icuDay));
