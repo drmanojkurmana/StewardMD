@@ -181,6 +181,20 @@ test("critical results sit ABOVE everything else on the chart, and say whose cal
   assert.match(html, /It is not a way to clear the list\./);
 });
 
+test("a transfer is reachable from the chart, and a busy bed is explained rather than just refused", () => {
+  const W = load();
+  assert.match(W._render(chart), /data-w-act="move"/);
+  const code = SRC.replace(/\/\*[\s\S]*?\*\//g, " ").replace(/^\s*\/\/.*$/gm, " ");
+  // "bed 12 already has someone in it" is what a ward acts on; "could not transfer" is not.
+  assert.match(code, /bed_occupied/);
+  assert.match(code, /Choose another bed/);
+  assert.match(code, /occupiedBy/);
+  // The UI never decides a bed is free: it asks, and reports what the server says. Occupancy is
+  // checked against every open admission, which the screen does not have and must not guess at.
+  assert.ok(!/\.bed\s*===|occupied\s*=|isFree|bedFree/.test(code), "no client-side occupancy logic");
+  assert.match(code, /apiPost\("\/ward\/transfer"/, "it asks the server");
+});
+
 test("A FAILED READ NEVER LOOKS LIKE A CLEAR CHART", () => {
   const W = load();
   // No card at all when nothing is open, so it cannot become wallpaper a ward stops seeing.

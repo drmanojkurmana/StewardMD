@@ -280,8 +280,165 @@ async function createWardMedicationOrder(request, env, ctx) {
   }
 }
 
+/* ---- transfer and the bed board -----------------------------------------------------------------
+ *
+ * A ward you can admit to and discharge from but not move within is not a ward. Every real stay
+ * involves at least one move: bay to side room, ward to HDU, and back.
+ *
+ * A TRANSFER IS A NEW VERSION OF THE SAME ENCOUNTER, never a new one. The stay is one stay, and the
+ * version history of `location` IS the movement history - which is why nothing here writes a
+ * separate "transfer" record that could disagree with where the chart says the patient is.
+ */
+
+/** PURE. Ward and bed, compared the way a ward means them: case and spacing are not identity. */
+function sameBed(a, b) {
+  const k = (x) => `${str(x && x.ward).toLowerCase()} ${str(x && x.bed).toLowerCase()}`;
+  return !!str(a && a.bed) && !!str(b && b.bed) && k(a) === k(b);
+}
+
+/**
+ * Moves an admitted patient to another ward or bed.
+ * ctx: { migration, encounterId, ward, bed, reason?, movedAt?, actorDeps, recordDeps }
+ */
+async function transferPatient(request, env, ctx) {
+  const mig = ctx.migration;
+  const base = { mode: mig && mig.mode, tenantId: (mig && mig.tenantId) || null };
+  if (!mig || mig.mode === "off") return { ...base, ok: true, skipped: "off", written: 0 };
+
+  const encounterId = str(ctx.encounterId);
+  const ward = str(ctx.ward), bed = str(ctx.bed);
+  if (!encounterId) return { ...base, ok: false, status: 422, error: "encounter_required", written: 0 };
+  // A move to nowhere is not a transfer. A patient off the ward for a scan is still admitted to
+  // their bed, and blanking the location to represent that would lose the bed.
+  if (!ward) return { ...base, ok: false, status: 422, error: "ward_required", detail: "a transfer needs a destination ward", written: 0 };
+
+  const { svc, resolved, error } = await openService(request, env, ctx, "record:write");
+  if (error) return { ...base, ...error, written: 0 };
+
+  let current, all;
+  try {
+    current = await svc.get("Encounter", encounterId);
+    all = await svc.list("Encounter", 200);
+  } catch (e) { return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), written: 0 }; }
+
+  if (!current) return { ...base, ok: false, status: 404, error: "encounter_not_found", encounterId, written: 0 };
+  if (current.class !== IPD) return { ...base, ok: false, status: 409, error: "not_an_admission", detail: "only an inpatient stay can be transferred", encounterId, written: 0 };
+  // A discharged patient has no bed to move between. Silently re-opening the stay to accommodate the
+  // request would be far worse than refusing it.
+  if (current.status !== OPEN) return { ...base, ok: false, status: 409, error: "not_admitted", detail: "this stay is closed; re-admit rather than transfer", encounterId, status_: current.status, written: 0 };
+
+  const to = { ward, bed: bed || null };
+  if (sameBed(current.location, to) && str(current.location && current.location.ward).toLowerCase() === ward.toLowerCase()) {
+    return { ...base, ok: true, written: 0, skipped: "unchanged", encounterId, ward, bed: bed || null, version: current.version };
+  }
+
+  /* TWO PATIENTS CANNOT OCCUPY ONE BED. This is the invariant the whole feature turns on: a chart
+   * that puts two people in bed 12 is a chart that will hand one of them the other's medication.
+   * Checked against every OPEN inpatient encounter, and refused with the occupant named so the ward
+   * can see what the conflict actually is rather than being told "no". A move to a ward with no bed
+   * named is allowed - a patient can be on a ward awaiting a bed - and cannot collide. */
+  if (bed) {
+    const clash = (all || []).find((e) => e && e.id !== encounterId && e.class === IPD && e.status === OPEN && sameBed(e.location, to));
+    if (clash) {
+      return {
+        ...base, ok: false, status: 409, error: "bed_occupied",
+        detail: `${ward} bed ${bed} is occupied`,
+        occupiedBy: { encounterId: clash.id, patientId: clash.patientId },
+        encounterId, written: 0,
+      };
+    }
+  }
+
+  const from = { ward: (current.location && current.location.ward) || null, bed: (current.location && current.location.bed) || null };
+  const movedAt = str(ctx.movedAt) || new Date().toISOString();
+  const next = Encounter({
+    id: current.id, patientId: current.patientId, class: current.class, status: current.status,
+    identifiers: current.identifiers,
+    location: { facilityId: (current.location && current.location.facilityId) || null, ward, bed: bed || null },
+    periodStart: current.periodStart, periodEnd: current.periodEnd || null,
+    source: { system: "wardsynq-native", sourceId: `inpatient-transfer:${current.id}` },
+  });
+  if (current.attendingId) next.attendingId = current.attendingId;
+  if (current.reason) next.reason = current.reason;
+  // Bolted on, the file's own convention. Where they came from and why, so the version history reads
+  // as a movement history rather than as a location that silently changed.
+  next.movedAt = movedAt;
+  next.movedBy = resolved.actor.id;
+  next.movedFrom = from;
+  const why = str(ctx.reason);
+  if (why) next.moveReason = why;
+
+  try {
+    const out = await svc.put(next, { expectedVersion: current.version, idempotencyKey: ctx.idempotencyKey || null });
+    return { ...base, ok: true, written: 1, encounterId, patientId: current.patientId, from, to, movedAt, version: out.record.version, actor: resolved.actor.id, role: resolved.role };
+  } catch (e) {
+    return { ...base, ...writeFailure(e, { encounterId, written: 0, actor: resolved.actor.id }) };
+  }
+}
+
+/**
+ * The bed board: who is where, and which of the ward's configured beds are free.
+ *
+ * `beds` comes from ORG configuration. With none configured the board still reports every OCCUPIED
+ * bed - it simply cannot say what is empty, and it SAYS that rather than reporting zero free beds,
+ * which a ward would read as full.
+ *
+ * ctx: { migration, ward?, beds?, actorDeps, recordDeps }
+ */
+async function bedBoard(request, env, ctx) {
+  const mig = ctx.migration;
+  const base = { mode: mig && mig.mode, tenantId: (mig && mig.tenantId) || null };
+  if (!mig || mig.mode === "off") return { ...base, ok: true, skipped: "off", wards: [] };
+
+  const { svc, error } = await openService(request, env, ctx, "record:read");
+  if (error) return { ...base, ...error, wards: [] };
+
+  let encounters;
+  try { encounters = await svc.list("Encounter", 200); }
+  catch (e) { return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), wards: [] }; }
+
+  const want = str(ctx.ward).toLowerCase();
+  const open = (encounters || []).filter((e) => e && e.class === IPD && e.status === OPEN)
+    .filter((e) => !want || str(e.location && e.location.ward).toLowerCase() === want);
+
+  const cfg = ctx.beds && typeof ctx.beds === "object" ? ctx.beds : null;
+  const byWard = new Map();
+  const wardOf = (name) => {
+    const key = str(name) || "(no ward recorded)";
+    if (!byWard.has(key)) byWard.set(key, { ward: key, occupied: [], free: [], unplaced: [], configured: false });
+    return byWard.get(key);
+  };
+  // Every configured ward appears even when empty: a ward missing from the board reads as a ward
+  // that does not exist, and a night manager looking for a bed would skip it.
+  if (cfg) for (const name of Object.keys(cfg)) { const w = wardOf(name); w.configured = Array.isArray(cfg[name]); }
+
+  for (const e of open) {
+    const w = wardOf(e.location && e.location.ward);
+    const row = { encounterId: e.id, patientId: e.patientId, bed: (e.location && e.location.bed) || null, admittedAt: e.periodStart || null, attendingId: e.attendingId || null };
+    if (row.bed) w.occupied.push(row); else w.unplaced.push(row);   // admitted to the ward, no bed yet
+  }
+  for (const w of byWard.values()) {
+    const list = cfg && Array.isArray(cfg[w.ward]) ? cfg[w.ward].map(String) : null;
+    if (!list) { w.free = []; w.bedsKnown = false; continue; }
+    w.bedsKnown = true;
+    const taken = new Set(w.occupied.map((o) => String(o.bed).toLowerCase()));
+    w.free = list.filter((b) => !taken.has(String(b).toLowerCase()));
+    // A patient in a bed the configuration does not list is REPORTED, not hidden: it is either a
+    // stale bed list or somebody in a bed that should not exist, and both need a human.
+    w.unlisted = w.occupied.filter((o) => !list.some((b) => String(b).toLowerCase() === String(o.bed).toLowerCase())).map((o) => o.bed);
+    w.occupied.sort((a, b) => list.indexOf(String(a.bed)) - list.indexOf(String(b.bed)));
+  }
+  const wards = [...byWard.values()].sort((a, b) => a.ward.localeCompare(b.ward));
+  return {
+    ...base, ok: true, wards,
+    // Stated, so "0 free" is never confused with "we do not know what beds exist".
+    bedsConfigured: !!cfg,
+  };
+}
+
 export {
   IPD, OPEN,
   encounterFromAdmission, sameAdmission, admitPatient, listWard,
   recordWardVitals, orderFromWardRequest, createWardMedicationOrder,
+  sameBed, transferPatient, bedBoard,
 };

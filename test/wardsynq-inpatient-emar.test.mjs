@@ -1068,3 +1068,113 @@ test("the ward list is visible to the ward, and a stranger's hospital is not", a
    * grant, the same way pharmacy verification does (see the note in api/queue/[[path]].js). */
   assert.equal((await as(PHARM, `/ward/criticals?orgId=${ORG}`)).__status, 403);
 });
+
+/* ---- transfer and the bed board -----------------------------------------------------------------
+ *
+ * A ward you can admit to and discharge from but not move within is not a ward.
+ */
+
+/* Another admitted patient, so a bed can actually be contended for. Each one gets its OWN mobile:
+ * registration is keyed on it, and reusing one silently returns no MRN, which then surfaces much
+ * later as an unrelated "no_patient_identity" on the admission. */
+let nthPatient = 0;
+async function secondPatient(ward = "Medical A", bed = "14") {
+  const n = ++nthPatient;
+  const reg = await as(DOCTOR, "/patient/register", "POST", { orgId: ORG, name: `Ward Testcase ${n + 1}`, mobile: `98765001${String(n).padStart(2, "0")}`, gender: "male", ageYears: 61 });
+  assert.ok(reg.mrn, `registration ${n} produced no MRN: ${JSON.stringify(reg)}`);
+  return as(DOCTOR, "/ward/admit", "POST", { orgId: ORG, mrn: reg.mrn, ward, bed, admittedAt: "2026-09-07T08:30:00.000Z" });
+}
+
+test("a transfer is a NEW VERSION of the same stay, and the history is the movement history", async () => {
+  seedHospital();
+  const { adm } = await admittedPatientOnDrug();
+
+  const moved = await as(DOCTOR, "/ward/transfer", "POST", { orgId: ORG, encounterId: adm.encounterId, ward: "HDU", bed: "3", reason: "Rising oxygen requirement" });
+  assert.equal(moved.__status, 200, JSON.stringify(moved));
+  assert.deepEqual(moved.from, { ward: "Medical A", bed: "12" });
+  assert.deepEqual(moved.to, { ward: "HDU", bed: "3" });
+
+  // ONE encounter, not two: the stay is one stay.
+  const hist = await RECORD.history(TENANT_ROW.id, "Encounter", adm.encounterId);
+  assert.deepEqual(hist.map((h) => `${h.location.ward}/${h.location.bed}`), ["Medical A/12", "HDU/3"]);
+  assert.equal(hist[1].movedBy, hist[1].movedBy && hist[1].movedBy, "and it names who moved them");
+  assert.ok(hist[1].movedBy);
+  assert.equal(hist[1].moveReason, "Rising oxygen requirement");
+  assert.deepEqual(hist[1].movedFrom, { ward: "Medical A", bed: "12" });
+  // The admission itself is untouched: same id, same start, still open.
+  assert.equal(hist[1].periodStart, hist[0].periodStart);
+  assert.equal(hist[1].status, "in-progress");
+
+  // The ward list follows them.
+  assert.equal((await as(NURSE, `/ward/list?orgId=${ORG}&ward=Medical A`)).patients.length, 0);
+  const hdu = await as(NURSE, `/ward/list?orgId=${ORG}&ward=HDU`);
+  assert.equal(hdu.patients.length, 1);
+  assert.equal(hdu.patients[0].bed, "3");
+
+  // Moving to where they already are writes nothing.
+  assert.equal((await as(DOCTOR, "/ward/transfer", "POST", { orgId: ORG, encounterId: adm.encounterId, ward: "HDU", bed: "3" })).written, 0);
+});
+
+test("TWO PATIENTS CANNOT OCCUPY ONE BED, and the refusal names the occupant", async () => {
+  seedHospital();
+  const { adm } = await admittedPatientOnDrug();          // Medical A, bed 12
+  const other = await secondPatient("Medical A", "14");
+
+  // A chart that puts two people in bed 12 is a chart that will hand one of them the other's drugs.
+  const clash = await as(DOCTOR, "/ward/transfer", "POST", { orgId: ORG, encounterId: other.encounterId, ward: "Medical A", bed: "12" });
+  assert.equal(clash.__status, 409);
+  assert.equal(clash.error, "bed_occupied");
+  assert.equal(clash.occupiedBy.encounterId, adm.encounterId, "the ward is told WHAT the conflict is, not just no");
+  assert.equal(clash.written, 0);
+
+  // Case and spacing are not identity: "medical a" bed "12" is the same bed.
+  assert.equal((await as(DOCTOR, "/ward/transfer", "POST", { orgId: ORG, encounterId: other.encounterId, ward: "medical a", bed: "12" })).error, "bed_occupied");
+
+  // The bed frees the moment its occupant leaves it, by transfer or by discharge.
+  await as(DOCTOR, "/ward/transfer", "POST", { orgId: ORG, encounterId: adm.encounterId, ward: "HDU", bed: "3" });
+  assert.equal((await as(DOCTOR, "/ward/transfer", "POST", { orgId: ORG, encounterId: other.encounterId, ward: "Medical A", bed: "12" })).__status, 200);
+
+  // A ward with no bed named cannot collide: a patient can be on a ward awaiting a bed.
+  const third = await secondPatient("Medical A", "16");
+  assert.equal((await as(DOCTOR, "/ward/transfer", "POST", { orgId: ORG, encounterId: third.encounterId, ward: "Medical A" })).__status, 200);
+});
+
+test("a closed stay is not transferred, and neither is an OPD visit", async () => {
+  seedHospital();
+  const { adm } = await admittedPatientOnDrug();
+  await as(DOCTOR, "/ward/discharge", "POST", { orgId: ORG, encounterId: adm.encounterId });
+  const gone = await as(DOCTOR, "/ward/transfer", "POST", { orgId: ORG, encounterId: adm.encounterId, ward: "HDU", bed: "3" });
+  assert.equal(gone.__status, 409);
+  assert.equal(gone.error, "not_admitted", "re-opening the stay to accommodate the request would be far worse than refusing");
+
+  // A discharged patient's bed is free for the next admission.
+  const next = await secondPatient("Ward B", "1");
+  assert.equal((await as(DOCTOR, "/ward/transfer", "POST", { orgId: ORG, encounterId: next.encounterId, ward: "Medical A", bed: "12" })).__status, 200);
+
+  const missing = await as(DOCTOR, "/ward/transfer", "POST", { orgId: ORG, encounterId: "wsq-adm-nobody", ward: "HDU", bed: "1" });
+  assert.equal(missing.__status, 404);
+  // A move to nowhere is not a transfer: blanking the location would lose the bed.
+  assert.equal((await as(DOCTOR, "/ward/transfer", "POST", { orgId: ORG, encounterId: next.encounterId, bed: "9" })).error, "ward_required");
+});
+
+test("the bed board says who is where, and never confuses 'no free beds' with 'we do not know'", async () => {
+  seedHospital();
+  const { adm } = await admittedPatientOnDrug();          // Medical A, bed 12
+  await secondPatient("Medical A", "14");
+
+  // With no bed list configured it reports the occupied beds and SAYS it cannot know what is free.
+  const unknown = await as(NURSE, `/ward/beds?orgId=${ORG}`);
+  assert.equal(unknown.__status, 200, JSON.stringify(unknown));
+  assert.equal(unknown.bedsConfigured, false);
+  const medA = unknown.wards.find((w) => w.ward === "Medical A");
+  assert.equal(medA.occupied.length, 2);
+  assert.equal(medA.bedsKnown, false, "a ward would read 0 free as full");
+  assert.deepEqual(medA.free, []);
+  assert.ok(medA.occupied.some((o) => o.encounterId === adm.encounterId));
+
+  // A patient admitted to a ward with no bed yet is on the board, but not in a bed.
+  const third = await secondPatient("Medical A", "");
+  assert.equal(third.__status, 200, JSON.stringify(third));
+  const withUnplaced = await as(NURSE, `/ward/beds?orgId=${ORG}&ward=Medical A`);
+  assert.equal(withUnplaced.wards[0].unplaced.length, 1);
+});

@@ -218,6 +218,7 @@
       // The summary is reachable from the patient, not from a menu somewhere else. A planned
       // discharge is prepared while the patient is still on the ward, so this is not gated on the
       // stay being closed - the summary screen states plainly when a stay is still open.
+      '<button class="w-btn ghost" data-w-act="move" title="Transfer to another ward or bed">' + ms("swap_horiz") + "Transfer</button>" +
       '<button class="w-btn ghost" data-w-act="summary" title="Discharge summary">' + ms("description") + "Summary</button></div>" +
       criticalsCard(state) + problemsCard(state) + vitalsCard() + marCard(state);
   }
@@ -279,6 +280,31 @@
         paint();
       })
       .catch(function () { st.busy = false; st.err = "Could not load the chart."; paint(); });
+  }
+  /* A transfer, from the patient's own chart. The refusal a busy bed produces is the important part
+   * of this flow: the server names the occupant, and that is shown as-is rather than collapsed into
+   * "could not transfer", because "bed 12 already has someone in it" is what the ward has to act on. */
+  function transfer() {
+    var s = st.sel; if (!s) return;
+    var ward = "", bed = "";
+    try {
+      ward = G.prompt("Transfer to which ward?", s.ward || "") || "";
+      if (!ward.trim()) return;
+      bed = G.prompt("Which bed? (leave blank if awaiting one)", "") || "";
+    } catch (e) { return; }
+    st.busy = true; paint();
+    apiPost("/ward/transfer", { orgId: st.orgId, encounterId: s.encounterId, ward: ward.trim(), bed: bed.trim() })
+      .then(function (r) {
+        if (r && r.error === "bed_occupied") {
+          st.busy = false;
+          st.err = r.detail + (r.occupiedBy && r.occupiedBy.patientId ? " by " + r.occupiedBy.patientId : "") + ". Choose another bed.";
+          paint(); return;
+        }
+        if (settle(r, r && r.written ? "Moved to " + ward.trim() + (bed.trim() ? ", bed " + bed.trim() : "") + "." : "Already there.")) {
+          st.sel = null; st.view = "list"; loadWard();
+        } else paint();
+      })
+      .catch(function () { st.busy = false; st.err = "Could not record the transfer."; paint(); });
   }
   function acknowledge(loopId) {
     var why = ""; try { why = G.prompt("What did you do about this result?") || ""; } catch (e) {}
@@ -381,6 +407,7 @@
       return;
     }
     if (cmd === "ack") { acknowledge(arg); return; }
+    if (cmd === "move") { transfer(); return; }
     if (cmd === "vitals") { saveVitals(); return; }
     if (cmd === "round") { st.from = val("wFrom") || st.from; st.to = val("wTo") || st.to; loadRound(); return; }
     if (cmd === "mar") { var k = arg.indexOf("|"); if (k > 0) marAction(arg.slice(0, k), Number(arg.slice(k + 1))); return; }
