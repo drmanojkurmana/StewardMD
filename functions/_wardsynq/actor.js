@@ -67,6 +67,8 @@ const PATIENT_TYPE = "Patient";
 // checking a patient in for today's visit is the SAME administrative act QUEUE_ADD already covers
 // for registering them at all. See below.
 const ENCOUNTER_TYPE = "Encounter";
+// The bedside record, granted only by CAPS.MED_ADMINISTER (see grantForCaps).
+const ADMINISTRATION_TYPE = "MedicationAdministration";
 
 /**
  * PURE. From a capability list to a clinical grant, or null when the role has no business with the
@@ -94,6 +96,26 @@ function grantForCaps(caps) {
       tier: TIER.EXECUTE, read: grant.read,
       write: grant.write === null ? null : [...new Set([...grant.write, ...added])],
       basis: grant.basis + "+" + CAPS.QUEUE_ADD,
+    };
+  }
+
+  if (has(CAPS.MED_ADMINISTER)) {
+    /* The bedside authority, added 2026-09-07 with the inpatient eMAR, in the same union shape as
+     * QUEUE_ADD above and for the same reason: it only ever ADDS one type and only ever RAISES the
+     * tier, so it cannot quietly widen or narrow what a role could already do.
+     *
+     * It grants MedicationAdministration and nothing else. That is the whole separation: a nurse
+     * holding this can record that a dose was given, and still cannot write the MedicationOrder it
+     * was given against - that needs EMR_TREAT. Order and administration stay two resources written
+     * by two authorities, which is what makes "someone ordered it" and "someone gave it" different
+     * claims in the record. */
+    const added = [ADMINISTRATION_TYPE];
+    if (!grant) grant = { tier: TIER.EXECUTE, read: [...ORDER_TYPES, ADMINISTRATION_TYPE], write: added, basis: CAPS.MED_ADMINISTER };
+    else grant = {
+      tier: TIER.EXECUTE,
+      read: grant.read === null ? null : [...new Set([...grant.read, ...ORDER_TYPES, ADMINISTRATION_TYPE])],
+      write: grant.write === null ? null : [...new Set([...grant.write, ...added])],
+      basis: grant.basis + "+" + CAPS.MED_ADMINISTER,
     };
   }
   return grant;

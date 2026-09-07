@@ -72,7 +72,7 @@ function vitalsMode(tenant) { return migrationModeOf(tenant, "vitals"); }
  * skipped, never defaulted. Returns [] when nothing is numeric, which the caller reports.
  *
  * @param {{vitals: object, patientId: string, ticketId: string, encounterId?: string|null,
- *   recordedAt?: string, note?: string|null}} input
+ *   recordedAt?: string, note?: string|null, idPrefix?: string}} input
  */
 function vitalsToObservations(input) {
   const v = (input && input.vitals) || {};
@@ -86,7 +86,10 @@ function vitalsToObservations(input) {
     if (value === null) continue;
     const spec = VITAL_CODES[key];
     const obs = Observation({
-      id: `opd-vitals-${String(input.ticketId).toLowerCase().replace(/[^a-z0-9]+/g, "-")}-${stamp}-${key}`,
+      // idPrefix lets the ward reuse this mapper verbatim: an inpatient reading is the same coded
+      // Observation, and a second copy of the LOINC table is how two vitals paths start disagreeing.
+      // Defaults to the OPD prefix, so nothing about the OPD path changes.
+      id: `${input.idPrefix || "opd-vitals"}-${String(input.ticketId).toLowerCase().replace(/[^a-z0-9]+/g, "-")}-${stamp}-${key}`,
       patientId: input.patientId,
       encounterId: input.encounterId || null,
       category: "vital-signs",

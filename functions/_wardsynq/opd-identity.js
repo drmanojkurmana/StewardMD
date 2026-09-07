@@ -101,4 +101,37 @@ function anchoredOrderId(ticket, prefix, code) {
   return `opd-${prefix}-${slug(anchor)}-${slug(c)}`;
 }
 
-export { patientIdForMrn, patientIdForTicket, encounterIdForTicket, noteIdForTicket, serviceRequestIdForTicket, medicationOrderIdForTicket, diagnosticReportIdForTicket };
+/* ---- inpatient ---------------------------------------------------------------------------------
+ *
+ * An ADMISSION is a different visit from an OPD ticket, so it gets its own encounter id rather than
+ * reusing `opd-enc-`: reading `opd-enc-...` on a ward chart would be a lie about where the record
+ * came from, and the two must never collide for the same patient.
+ *
+ * The id is derived from the MRN and the admission instant, so re-POSTing the same admission is
+ * idempotent (the record service sees the same id and, with unchanged content, writes no new
+ * version), while a genuine re-admission of the same patient is a DIFFERENT visit with its own id
+ * and its own history. That is the same reasoning patientIdForMrn uses for identity.
+ */
+function admissionIdFor(mrn, admittedAt) {
+  const m = slug(mrn);
+  const at = slug(admittedAt);
+  return m && at ? `wsq-adm-${m}-${at}` : null;
+}
+
+/**
+ * One administration record per (order, scheduled dose time). Deterministic on purpose: it is what
+ * makes a retried "administer" land on the SAME MedicationAdministration - which the state machine
+ * then refuses, because ADMINISTERED has no legal transition out. A duplicate dose is prevented by
+ * identity plus the state machine, not by a separate guard that could drift from either.
+ */
+function medicationAdministrationIdFor(orderId, dueAt) {
+  const o = slug(orderId);
+  const d = slug(dueAt);
+  return o && d ? `wsq-mar-${o}-${d}` : null;
+}
+
+function slug(v) {
+  return String(v == null ? "" : v).trim().toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
+}
+
+export { patientIdForMrn, patientIdForTicket, encounterIdForTicket, noteIdForTicket, serviceRequestIdForTicket, medicationOrderIdForTicket, diagnosticReportIdForTicket, admissionIdFor, medicationAdministrationIdFor };

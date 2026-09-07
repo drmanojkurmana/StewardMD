@@ -48,6 +48,10 @@ import { recordLinkForOrg } from "../../_wardsynq/migration-tenant.js";
 import { actorDeps as wsqActorDeps, recordDeps as wsqRecordDeps } from "../../_wardsynq/deps.js";
 import { checkPrescriptionSafety } from "../../_wardsynq/rx-safety.js";
 import { getRulePack } from "../../_wardsynq/rulepack.js";
+// Inpatient ward + eMAR (2026-09-07). Same shape as every OPD migration above: the route resolves
+// the org and the forced wardsynq migration, these do the governed record write.
+import { admitPatient, listWard, recordWardVitals, createWardMedicationOrder } from "../../_wardsynq/migrate-inpatient.js";
+import { medicationRound, administerStep } from "../../_wardsynq/migrate-emar.js";
 import { recordAllergiesFromAssessment } from "../../_wardsynq/migrate-allergy.js";
 
 // The Encounter migration's one shared call site. Every hook below (ticket add, import, a terminal
@@ -384,6 +388,79 @@ export async function onRequest(context) {
     // ---- Patient registration (ABDM-ready identity + MR allocation) -----------------------------
     // ONE place decides who issues the MR: the WORKPLACE, never whether a number was typed in.
     // The client does not re-implement validation - it renders the field-keyed errors returned here.
+    /* ---- INPATIENT WARD + eMAR (wardsynq-native hospitals only) --------------------------------
+     *
+     * Admission -> ward list -> ward vitals -> inpatient medication order -> the medication round ->
+     * the governed administration. Every one of these is refused for any org that is not
+     * org.mode "wardsynq": this vertical writes to the WardSynQ record and has NO GHIS path, by
+     * design. The OPD routes above are untouched.
+     *
+     * Capabilities, deliberately split so the record can tell who did what:
+     *   admit / vitals      QUEUE_ADD / EMR_VITALS   the ward clerk and the nurse
+     *   medication order    EMR_TREAT                the doctor, and only the doctor
+     *   verify / dispense   ORDER_DISPENSE           pharmacy releasing the dose
+     *   scan / administer   MED_ADMINISTER           the nurse at the bedside
+     */
+    if (seg === "ward") {
+      const body = method === "POST" ? await readBody(request) : {};
+      const wOrgId = url.searchParams.get("orgId") || body.orgId || "";
+      const capFor = {
+        admit: CAPS.QUEUE_ADD, list: CAPS.QUEUE_VIEW, vitals: CAPS.EMR_VITALS,
+        "medication-order": CAPS.EMR_TREAT, round: CAPS.QUEUE_VIEW, mar: CAPS.MED_ADMINISTER,
+      };
+      /* Every eMAR transition needs MED_ADMINISTER, including verify and dispense.
+       *
+       * Those two are a pharmacist's act in a hospital with a unit-dose pharmacy, and ORDER_DISPENSE
+       * exists for exactly that person. It is NOT used here, and the reason is worth stating: verify
+       * and dispense WRITE the MedicationAdministration record, so granting them to ORDER_DISPENSE
+       * would mean granting the pharmacy role write access to that resource - and a role that can
+       * write it through the raw record API could post a fabricated "administered" row without ever
+       * going near a bedside. The ward-stock model, where the nurse holding the dose walks it
+       * through its own states, needs no such grant. Pharmacy verification as a distinct authority
+       * is a real feature and is deliberately left to a later pass with its own narrower grant. */
+      const need = sub === "mar" ? CAPS.MED_ADMINISTER : capFor[sub];
+      if (!need) return json({ ok: false, error: "not_found" }, 404, request);
+      const wAz = await ORG.authorizeOrg(env, actor, wOrgId, need);
+      if (!wAz.ok) return json(azRefusal(wAz), wAz.reason === "org_not_found" ? 404 : 403, request);
+
+      const wOrg = await ORG.getOrg(env, wOrgId);
+      const mig = await wsqForcedMigration(env, wOrg);
+      if (!mig) return json({ ok: false, error: "not_a_wardsynq_hospital", message: "The inpatient ward is only available for a WardSynQ-native hospital." }, 409, request);
+      if (mig.error) return json({ ok: false, error: mig.error }, 409, request);
+      const deps = { migration: mig, actorDeps: wsqActorDeps(env), recordDeps: wsqRecordDeps(env, mig.tenantId) };
+
+      if (sub === "admit" && method === "POST") {
+        const r = await admitPatient(request, env, { ...deps, admission: body.admission || body, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "list" && method === "GET") {
+        const r = await listWard(request, env, { ...deps, ward: url.searchParams.get("ward") || "" });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "vitals" && method === "POST") {
+        const r = await recordWardVitals(request, env, { ...deps, encounterId: body.encounterId, patientId: body.patientId, vitals: body.vitals, recordedAt: body.recordedAt, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "medication-order" && method === "POST") {
+        const r = await createWardMedicationOrder(request, env, { ...deps, order: body.order || body, safety: body.safety || null, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "round" && method === "GET") {
+        const r = await medicationRound(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "", dueAt: url.searchParams.get("dueAt") || "" });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "mar" && method === "POST") {
+        const r = await administerStep(request, env, {
+          ...deps, action: body.action, orderId: body.orderId, dueAt: body.dueAt,
+          patient: body.patient, scan: body.scan, reason: body.reason, witnessId: body.witnessId,
+          rulePack: getRulePack(), highAlertDrugs: (wOrg && wOrg.highAlertDrugs) || [],
+          idempotencyKey: body.idempotencyKey || null,
+        });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      return json({ ok: false, error: "not_found" }, 404, request);
+    }
+
     if (seg === "patient") {
       const body = method === "POST" ? await readBody(request) : {};
       const pOrg = url.searchParams.get("orgId") || body.orgId || "";
