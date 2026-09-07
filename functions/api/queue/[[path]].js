@@ -64,6 +64,7 @@ import { patientEverything, readResource, capabilityStatement } from "../../_war
 import { startReconciliation, decideMedicine, readReconciliation } from "../../_wardsynq/med-reconciliation.js";
 import { wardMetrics } from "../../_wardsynq/ward-metrics.js";
 import { releaseResult, pendingRequests } from "../../_wardsynq/lab-result.js";
+import { mergePatients, unmergePatients, identityOf } from "../../_wardsynq/identity-merge.js";
 import { recordAllergiesFromAssessment } from "../../_wardsynq/migrate-allergy.js";
 
 // The Encounter migration's one shared call site. Every hook below (ticket add, import, a terminal
@@ -458,6 +459,10 @@ export async function onRequest(context) {
         metrics: CAPS.EMR_VIEW,
         // The laboratory. Its own authority: releasing a result is not treating a patient.
         "release-result": CAPS.LAB_RESULT, "pending-tests": CAPS.LAB_RESULT,
+        /* Resolving identity is the registration authority, not a clinical one: it is the same act
+         * as creating the record in the first place. Reading who a patient is needs only emr.view -
+         * a clinician who followed a link to a merged record must be told where the chart went. */
+        merge: CAPS.QUEUE_ADD, unmerge: CAPS.QUEUE_ADD, identity: CAPS.EMR_VIEW,
         // Closing a stay is the administrative act QUEUE_ADD already covers for opening one.
         // The summary is a clinical document: drafting and signing it are EMR_TREAT.
         discharge: CAPS.QUEUE_ADD, "discharge-summary": CAPS.EMR_TREAT, "sign-discharge-summary": CAPS.EMR_TREAT,
@@ -534,6 +539,18 @@ export async function onRequest(context) {
               types: (url.searchParams.get("_type") || "").split(",").map((t) => t.trim()).filter(Boolean),
             });
         return json(r.ok ? (r.bundle || r.resource) : r.outcome, r.status, request);
+      }
+      if (sub === "merge" && method === "POST") {
+        const r = await mergePatients(request, env, { ...deps, survivorId: body.survivorId, mergedId: body.mergedId, reason: body.reason, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "unmerge" && method === "POST") {
+        const r = await unmergePatients(request, env, { ...deps, survivorId: body.survivorId, mergedId: body.mergedId, reason: body.reason, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "identity" && method === "GET") {
+        const r = await identityOf(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "" });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "release-result" && method === "POST") {
         const r = await releaseResult(request, env, { ...deps, serviceRequestId: body.serviceRequestId, patientId: body.patientId, encounterId: body.encounterId, panel: body.panel, tests: body.tests, status: body.status, reportedAt: body.reportedAt, conclusion: body.conclusion, idempotencyKey: body.idempotencyKey || null });

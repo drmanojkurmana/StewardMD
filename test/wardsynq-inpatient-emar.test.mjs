@@ -1188,6 +1188,106 @@ test("the bed board says who is where, and never confuses 'no free beds' with 'w
   assert.equal(withUnplaced.wards[0].unplaced.length, 1);
 });
 
+/* ---- identity: two records, one person -------------------------------------------------------------
+ *
+ * The harm of a duplicate is not the duplication. It is that half the clinical picture is invisible
+ * from whichever record you happen to open.
+ */
+
+test("A MERGE MOVES NOTHING AND DESTROYS NOTHING, and it can be taken back", async () => {
+  seedHospital();
+  const { reg, adm } = await admittedPatientOnDrug();
+  const dupe = await secondPatient("Medical A", "30");
+  const before = {
+    survivor: (await RECORD.byPatient(TENANT_ROW.id, "Observation", adm.patientId)).length,
+    dupe: (await RECORD.byPatient(TENANT_ROW.id, "Encounter", dupe.patientId)).length,
+  };
+  assert.ok(before.survivor > 0 && before.dupe > 0);
+
+  // A merge is a claim, and it needs a reason that says what establishes it.
+  const bare = await as(DOCTOR, "/ward/merge", "POST", { orgId: ORG, survivorId: adm.patientId, mergedId: dupe.patientId, reason: "same" });
+  assert.equal(bare.__status, 422);
+  assert.equal(bare.error, "reason_required");
+  // And a record cannot absorb itself.
+  assert.equal((await as(DOCTOR, "/ward/merge", "POST", { orgId: ORG, survivorId: adm.patientId, mergedId: adm.patientId, reason: "Same date of birth and phone number." })).error, "same_patient");
+
+  const merged = await as(DOCTOR, "/ward/merge", "POST", {
+    orgId: ORG, survivorId: adm.patientId, mergedId: dupe.patientId,
+    reason: "Same date of birth and mobile; confirmed with the patient at the desk.",
+  });
+  assert.equal(merged.__status, 200, JSON.stringify(merged));
+  assert.equal(merged.state, "merged");
+  assert.equal(merged.clinicalRecordsMoved, 0);
+
+  /* NOTHING MOVED. Both Patient records and every clinical row under them are exactly as they were,
+   * which is what makes the claim retractable at all. */
+  assert.equal((await RECORD.byPatient(TENANT_ROW.id, "Observation", adm.patientId)).length, before.survivor);
+  assert.equal((await RECORD.byPatient(TENANT_ROW.id, "Encounter", dupe.patientId)).length, before.dupe);
+  assert.ok(await RECORD.latest(TENANT_ROW.id, "Patient", dupe.patientId), "the duplicate record still exists");
+
+  // Resolving now returns every id whose records belong to this person.
+  const id = await as(NURSE, `/ward/identity?orgId=${ORG}&patientId=${adm.patientId}`);
+  assert.equal(id.__status, 200, JSON.stringify(id));
+  assert.deepEqual(id.identity.absorbed, [dupe.patientId]);
+  assert.deepEqual(id.identity.allIds.sort(), [adm.patientId, dupe.patientId].sort());
+
+  /* A READ OF THE MERGED RECORD STILL WORKS AND SAYS SO. A clinician who followed a link here needs
+   * to be told where the rest of the picture is, not handed an empty chart or a 404. */
+  const other = await as(NURSE, `/ward/identity?orgId=${ORG}&patientId=${dupe.patientId}`);
+  assert.equal(other.__status, 200);
+  assert.equal(other.identity.isMerged, true);
+  assert.equal(other.identity.mergedInto, adm.patientId);
+  assert.match(other.notice, /merged into/);
+
+  // AND IT IS REVERSIBLE. An irreversible merge is worse than a duplicate.
+  const undone = await as(DOCTOR, "/ward/unmerge", "POST", {
+    orgId: ORG, survivorId: adm.patientId, mergedId: dupe.patientId, reason: "Different people with the same name; the phone number was mistyped.",
+  });
+  assert.equal(undone.__status, 200, JSON.stringify(undone));
+  assert.equal(undone.state, "unmerged");
+  assert.equal(undone.mergedBy, merged.mergedBy, "who made the original claim is not erased by undoing it");
+  assert.deepEqual((await as(NURSE, `/ward/identity?orgId=${ORG}&patientId=${adm.patientId}`)).identity.absorbed, []);
+  // The whole life of the claim is on the record.
+  assert.deepEqual((await RECORD.history(TENANT_ROW.id, "PatientLink", merged.linkId)).map((h) => h.state), ["merged", "unmerged"]);
+  assert.ok(reg.mrn);
+});
+
+test("a merge is refused where it would create an identity by side effect or a chain", async () => {
+  seedHospital();
+  const { adm } = await admittedPatientOnDrug();
+  const b = await secondPatient("Medical A", "31");
+  const c = await secondPatient("Medical A", "32");
+  const reason = "Same date of birth and mobile; confirmed at the desk.";
+
+  // Merging into a record nobody has ever seen would create an identity by side effect.
+  assert.equal((await as(DOCTOR, "/ward/merge", "POST", { orgId: ORG, survivorId: "opd-pat-nobody", mergedId: b.patientId, reason })).error, "survivor_not_found");
+  assert.equal((await as(DOCTOR, "/ward/merge", "POST", { orgId: ORG, survivorId: adm.patientId, mergedId: "opd-pat-nobody", reason })).error, "merged_not_found");
+
+  await as(DOCTOR, "/ward/merge", "POST", { orgId: ORG, survivorId: adm.patientId, mergedId: b.patientId, reason });
+  // Chaining identities silently is how a merge becomes impossible to unpick.
+  const chained = await as(DOCTOR, "/ward/merge", "POST", { orgId: ORG, survivorId: c.patientId, mergedId: b.patientId, reason });
+  assert.equal(chained.__status, 409);
+  assert.equal(chained.error, "already_merged");
+  assert.equal(chained.into, adm.patientId, "and it names the link that is in the way");
+  // Repeating the SAME merge is idempotent, not an error.
+  assert.equal((await as(DOCTOR, "/ward/merge", "POST", { orgId: ORG, survivorId: adm.patientId, mergedId: b.patientId, reason })).written, 0);
+});
+
+test("resolving identity is the registration authority, and nothing automatic does it", async () => {
+  seedHospital();
+  const { adm } = await admittedPatientOnDrug();
+  const b = await secondPatient("Medical A", "33");
+  const body = { orgId: ORG, survivorId: adm.patientId, mergedId: b.patientId, reason: "Same date of birth and mobile; confirmed at the desk." };
+  // Reception registers patients, so reception resolves duplicates: it is the same act.
+  assert.equal((await as(DOCTOR, "/ward/merge", "POST", body)).__status, 200);
+  // A laboratory and a pharmacist have no business deciding who a patient is.
+  assert.equal((await as(LABTECH, "/ward/merge", "POST", body)).__status, 403);
+  assert.equal((await as(PHARM, "/ward/merge", "POST", body)).__status, 403);
+  // But any clinician can SEE the resolution, because a merged record must never look like an
+  // empty one to whoever opens it.
+  assert.equal((await as(NURSE, `/ward/identity?orgId=${ORG}&patientId=${b.patientId}`)).__status, 200);
+});
+
 /* ---- the laboratory -------------------------------------------------------------------------------
  *
  * WardSynQ could ORDER a test and could INGEST a result from GHIS, and could not produce one itself.

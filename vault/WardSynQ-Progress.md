@@ -12,7 +12,7 @@ Updated: 2026-09-07 (PRs #887, #889, #890, #892, #894, #895, #897 pharmacy verif
 
 | # | Domain (Epic module) | Weight | % | Status |
 |---|---|---|---|---|
-| 1 | Patient identity / MPI (Identity) | 5 | 70 | Deterministic MRN→id, dedup, no cross-tenant. No merge/unmerge, no probabilistic match. |
+| 1 | Patient identity / MPI (Identity) | 5 | 90 | Deterministic MRN→id, dedup, no cross-tenant, and a reversible merge that moves nothing. No probabilistic matching, and none wanted without a human deciding. |
 | 2 | Registration / scheduling (Cadence, Prelude) | 5 | 55 | OPD register + queue live on device. No appointments, no recall, no bed-linked scheduling. |
 | 3 | Outpatient encounter (Ambulatory) | 6 | 75 | Encounter lifecycle, vitals, assessment, sign — proven on real device. No templates, no flowsheet designer. |
 | 4 | Orders — investigations (Beaker/Radiant order entry) | 5 | 60 | ServiceRequest write path + UI. No order sets, no priority/collection workflow. |
@@ -33,7 +33,7 @@ Updated: 2026-09-07 (PRs #887, #889, #890, #892, #894, #895, #897 pharmacy verif
 | 19 | Patient portal (MyChart) | 3 | 0 | Not built. |
 | 20 | Deployment / uptime / DR (on-prem, HA) | 3 | 25 | Cloudflare edge + D1, live domain. No on-prem, no DR drill, no downtime procedures. |
 
-**Weighted total: 65.9%.**
+**Weighted total: 66.9%.**
 
 The total is the weight-times-percent sum of the table above, divided by 100. It is COMPUTED from
 these rows, not asserted: earlier revisions of this file carried an eyeballed number that had drifted
@@ -59,9 +59,10 @@ about two points high (the 44% baseline was 41.5, and 53% was 50.8). If a row ch
    Observation write technically permits a vital sign as well as a result. The resulting route
    stamps `laboratory` and a lab actor has no clinical screen, but that is a narrower control than
    the scope itself. Closing it properly is a change to the store's authorisation model.
-4. **Identity merge/unmerge** — duplicate patient records have no resolution path.
-5. **Order sets, e-prescribing transmission, appointment scheduling, care plans** — each a
-   self-contained gap in an otherwise wired domain.
+4. **Order sets, e-prescribing transmission, appointment scheduling, care plans, note templates** -
+   each a self-contained gap in an otherwise wired domain.
+5. **CDSS override analytics** - the engine refuses and warns; nothing records what clinicians
+   override and why, which is where a rule pack learns it is wrong.
 
 ## Deliberately not built
 Patient portal, full billing and claims, on-premise deployment, DICOM/PACS and regulatory

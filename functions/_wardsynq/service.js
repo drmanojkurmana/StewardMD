@@ -67,6 +67,10 @@ const RESOURCE_TYPES = Object.freeze([
    * the decision, and the inpatient order is still written through the ordering path with its own
    * authority and its own safety checks. */
   "MedicationReconciliation",
+  /* A patient identity link. A merge is a CLAIM that two records are one person, and it is stored
+   * as its own record precisely so it moves nothing: the two Patient records and every clinical row
+   * under them stay exactly as they are, which is what makes the claim retractable. */
+  "PatientLink",
 ]);
 
 const MODE = Object.freeze({ SYSTEM_OF_RECORD: "system-of-record", INTEGRATION: "integration" });
