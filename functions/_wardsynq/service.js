@@ -89,6 +89,10 @@ const RESOURCE_TYPES = Object.freeze([
    * collected looks exactly like one awaiting a result - both are "requested, no result yet" - and
    * only one of them has a nurse who still has to go and do something. */
   "SpecimenCollection",
+  /* A patient promised a bed. A waiting-list entry and NEVER a bed reservation: reserving a bed for
+   * somebody who is not in it makes the board show full while beds stand empty, and a ward that
+   * cannot trust the board stops reading it. */
+  "AdmissionRequest",
   /* A record that an order set was applied, and exactly what landed and what did not. NOT the orders
    * themselves - those go through the ordinary path and are ordinary orders. This is what makes a
    * partial application visible, and what finds the patients a bad set touched. */

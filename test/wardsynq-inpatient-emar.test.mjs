@@ -2725,6 +2725,88 @@ test("sending is prescribing's business, and nothing unsendable is sent", async 
   assert.equal(bogus.error, "unknown_channel");
 });
 
+/* ---- the patient promised a bed ----------------------------------------------------------------- */
+
+test("A WAITING LIST THAT RESERVES NOTHING AND ADMITS NOBODY", async () => {
+  seedHospital();
+  const reg = await as(DOCTOR, "/patient/register", "POST", { orgId: ORG, name: "Waiting Testcase", mobile: "9876500033", gender: "male", ageYears: 61 });
+
+  // A reason is required: an entry nobody can prioritise, review or explain to the patient is not a
+  // waiting list, it is a queue.
+  const bare = await as(NURSE, "/ward/request-admission", "POST", { orgId: ORG, mrn: reg.mrn, specialty: "Medicine" });
+  assert.equal(bare.__status, 422);
+  assert.equal(bare.error, "reason_required");
+
+  const req = await as(NURSE, "/ward/request-admission", "POST", {
+    orgId: ORG, mrn: reg.mrn, specialty: "Medicine", ward: "Medical A", reason: "Elective cardioversion",
+    urgency: "soon", requestedAt: "2026-09-01T09:00:00.000Z",
+  });
+  assert.equal(req.__status, 200, JSON.stringify(req));
+  assert.equal(req.state, "waiting");
+  assert.match(req.note, /NO bed is reserved/);
+
+  /* IT RESERVES NOTHING. The bed board is unchanged - a board that showed full while beds stood
+   * empty is a board the ward stops reading. */
+  const beds = await as(NURSE, `/ward/beds?orgId=${ORG}`);
+  assert.equal(beds.__status, 200, JSON.stringify(beds));
+  const medical = (beds.wards || []).find((w) => w.ward === "Medical A");
+  assert.equal(medical, undefined, "nobody is in Medical A, so it is not on the board at all");
+
+  const list = await as(NURSE, `/ward/waiting-list?orgId=${ORG}`);
+  assert.equal(list.waiting, 1);
+  assert.ok(list.requests[0].waitingHours >= 24, "how long they have waited is computed");
+  assert.match(list.note, /not a bed allocation/);
+
+  // ADMITTING IS A SEPARATE HUMAN ACT. Nothing on the list admits itself.
+  const adm = await as(DOCTOR, "/ward/admit", "POST", { orgId: ORG, mrn: reg.mrn, ward: "Medical A", bed: "04", admittedAt: "2026-09-07T08:00:00.000Z" });
+  assert.equal(adm.__status, 200, JSON.stringify(adm));
+
+  /* AND IT DOES NOT CLOSE THE REQUEST BY GUESSING. A patient may hold two - a medical bed now and a
+   * surgical slot next month - so the list REPORTS that they are an inpatient and a human closes the
+   * right one. */
+  const after = await as(NURSE, `/ward/waiting-list?orgId=${ORG}`);
+  assert.equal(after.waiting, 1, "still open");
+  assert.equal(after.requests[0].patientAlreadyAdmitted, true);
+  assert.match(after.requests[0].detail, /Close this request against their admission/);
+
+  const closed = await as(NURSE, "/ward/close-admission-request", "POST", { orgId: ORG, requestId: req.requestId, state: "admitted", encounterId: adm.encounterId });
+  assert.equal(closed.__status, 200, JSON.stringify(closed));
+  assert.equal(closed.state, "admitted");
+  assert.equal(closed.encounterId, adm.encounterId);
+  assert.equal(closed.waitingHours, null, "a closed request has no growing wait");
+  assert.equal((await as(NURSE, `/ward/waiting-list?orgId=${ORG}`)).waiting, 0);
+});
+
+test("a request is closed AGAINST a real admission, of the RIGHT patient, or with a reason", async () => {
+  seedHospital();
+  const reg = await as(DOCTOR, "/patient/register", "POST", { orgId: ORG, name: "Waiting Two", mobile: "9876500044", gender: "female", ageYears: 44 });
+  const req = await as(NURSE, "/ward/request-admission", "POST", { orgId: ORG, mrn: reg.mrn, specialty: "Surgery", reason: "Hernia repair", urgency: "elective" });
+
+  // "Admitted" with no encounter is a waiting list that empties itself and a patient nobody can find.
+  const hollow = await as(NURSE, "/ward/close-admission-request", "POST", { orgId: ORG, requestId: req.requestId, state: "admitted" });
+  assert.equal(hollow.__status, 422);
+  assert.equal(hollow.error, "encounter_required");
+
+  // Closing one patient's request with another's admission would put two people in one record.
+  const { adm: other } = await admittedPatientOnDrug();
+  const wrong = await as(NURSE, "/ward/close-admission-request", "POST", { orgId: ORG, requestId: req.requestId, state: "admitted", encounterId: other.encounterId });
+  assert.equal(wrong.__status, 409);
+  assert.equal(wrong.error, "wrong_patient");
+
+  /* Cancelling without a reason loses why a patient who was promised a bed did not get one - the
+   * single question a complaint about a waiting list asks. */
+  const silent = await as(NURSE, "/ward/close-admission-request", "POST", { orgId: ORG, requestId: req.requestId, state: "cancelled" });
+  assert.equal(silent.__status, 422);
+  assert.equal(silent.error, "reason_required");
+
+  const off = await as(NURSE, "/ward/close-admission-request", "POST", { orgId: ORG, requestId: req.requestId, state: "cancelled", reason: "Patient declined surgery." });
+  assert.equal(off.state, "cancelled");
+  assert.equal(off.closeReason, "Patient declined surgery.");
+  // The history survives: a cancelled promise is still a promise that was made.
+  assert.deepEqual((await RECORD.history(TENANT_ROW.id, "AdmissionRequest", req.requestId)).map((h) => h.state), ["waiting", "cancelled"]);
+  assert.equal((await as(NURSE, "/ward/close-admission-request", "POST", { orgId: ORG, requestId: req.requestId, state: "cancelled", reason: "again" })).skipped, "already_closed");
+});
+
 /* ---- the hospital's own advice ------------------------------------------------------------------ */
 
 test("A HOSPITAL'S OWN ADVISORY APPEARS AND CANNOT BLOCK", async () => {
