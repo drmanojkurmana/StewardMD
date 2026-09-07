@@ -98,6 +98,22 @@ const INSTRUCTION_TYPES = Object.freeze([
   "CarePlan",
 ]);
 
+/**
+ * Types only a HUMAN may originate, whatever tier or scope the actor otherwise holds.
+ *
+ * The instruction rule above keys on `status`, and a resource that does not carry one slips past it.
+ * A PrescriptionTransmission is exactly that: its lifecycle is `state`, and its content is a claim
+ * about the physical world - this left, the pharmacy has it, it was printed and handed over. A model
+ * cannot observe any of those, so it must not be able to assert them. It matters because an AI actor
+ * inherits the scope of the human it runs on behalf of, and a nurse legitimately writes these; the
+ * cap to DRAFT would not have stopped a draft that read "acknowledged".
+ *
+ * Devices and adapters are refused here too, and that is not an oversight: a real transport reporting
+ * a delivery is a feature that does not exist yet (see prescription-transmit.js), and when it does it
+ * will need its own actor kind and its own narrow grant rather than this one silently widened.
+ */
+const HUMAN_ORIGINATED = Object.freeze(["PrescriptionTransmission"]);
+
 class GovernanceError extends Error {
   /**
    * Carries its reasons as DATA, not only flattened into the message.
@@ -246,6 +262,11 @@ function authoriseWrite(actor, entity, ctx) {
     reasons.push({ code: "DEVICE_SCOPE", message: `a device may not write a ${entity.resourceType}` });
   }
 
+  // 4a. Some records are a claim about the physical world, and only a human can make one.
+  if (actor.kind !== KIND.HUMAN && HUMAN_ORIGINATED.includes(entity.resourceType)) {
+    reasons.push({ code: "HUMAN_ONLY", message: `a ${actor.kind} actor may not write a ${entity.resourceType}` });
+  }
+
   // 4b. Declared scope. A nurse's EXECUTE is for the observations she records, not for an order.
   if (!inScope(actor, "write", entity.resourceType)) {
     reasons.push({ code: "SCOPE_DENIED", message: `${actor.id} may not write a ${entity.resourceType}` });
@@ -380,7 +401,7 @@ class GovernedStore {
 }
 
 export {
-  TIER, LADDER, KIND, CEILING, DEVICE_WRITABLE, INSTRUCTION_TYPES,
+  TIER, LADDER, KIND, CEILING, DEVICE_WRITABLE, INSTRUCTION_TYPES, HUMAN_ORIGINATED,
   GovernanceError, GovernedStore,
   makeActor, can, canRead, inScope, effectiveTier, authoriseWrite, rank,
 };

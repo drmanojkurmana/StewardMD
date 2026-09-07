@@ -33,7 +33,7 @@
   var st = {
     orgId: "", ward: "", patients: [], view: "list",
     sel: null,                 // the selected {encounterId, patientId, ward, bed, admittedAt}
-    problems: [], criticals: [], balance: null,
+    problems: [], criticals: [], balance: null, outbox: [],
     due: [], prn: [], unscheduled: [], truncated: false,
     from: "", to: "",          // the window being viewed, NOT a claim about when a dose is due
     busy: false, err: "", note: "", refusal: null, loaded: false
@@ -220,7 +220,7 @@
       // stay being closed - the summary screen states plainly when a stay is still open.
       '<button class="w-btn ghost" data-w-act="move" title="Transfer to another ward or bed">' + ms("swap_horiz") + "Transfer</button>" +
       '<button class="w-btn ghost" data-w-act="summary" title="Discharge summary">' + ms("description") + "Summary</button></div>" +
-      criticalsCard(state) + problemsCard(state) + vitalsCard() + fluidCard(state) + marCard(state);
+      criticalsCard(state) + problemsCard(state) + vitalsCard() + fluidCard(state) + marCard(state) + outboxCard(state);
   }
 
   var FLUID_IN = [["oral", "Oral"], ["iv", "IV"], ["ng", "NG / enteral"], ["blood", "Blood"], ["other", "Other"]];
@@ -277,6 +277,58 @@
     return '<div class="w-card crit"><div class="w-card-h">' + ms("priority_high") + "<h3>Critical results &middot; " + state.criticals.length + "</h3></div>" +
       '<p class="w-hint">Acknowledging records that you have seen this and what you did. It is not a way to clear the list.</p>' +
       '<ul class="w-crits">' + rows + "</ul></div>";
+  }
+
+  /* The prescription outbox. The point of this card is the gap between "we sent it" and "they have
+   * it": a prescription that silently failed to transmit is a patient who goes to the pharmacy and
+   * is told there is nothing for them. So QUEUED and SENT are shown as plainly unfinished, and only
+   * ACKNOWLEDGED reads as done. Nothing here is styled as an alarm - it is a worklist, and a wall of
+   * red on a ward screen stops being read within a shift. */
+  var TX_WORD = { queued: "not sent yet", sent: "sent, not confirmed", acknowledged: "confirmed received", failed: "not delivered" };
+  function outboxCard(state) {
+    // The active orders, as the round already knows them. Deriving them here rather than fetching a
+    // second list keeps the screen's idea of "this patient's medicines" a single one.
+    var orders = [], seen = {};
+    [].concat(state.due || [], state.prn || [], state.unscheduled || []).forEach(function (d) {
+      if (d && d.orderId && !seen[d.orderId]) { seen[d.orderId] = 1; orders.push({ orderId: d.orderId, drug: d.drug, dose: d.dose, route: d.route }); }
+    });
+    var byOrder = {};
+    (state.outbox || []).forEach(function (t) { (byOrder[t.orderId] = byOrder[t.orderId] || []).push(t); });
+
+    var rows = (state.outbox || []).map(function (t) {
+      return '<li class="tx-' + esc(t.state) + (t.outstanding ? " open" : "") + '">' +
+        '<div class="w-dose-h"><b>' + esc(drugFor(orders, t.orderId)) + "</b>" +
+        '<span>' + esc(t.channel) + (t.destination ? " &middot; " + esc(t.destination) : "") + "</span></div>" +
+        '<div class="w-dose-s"><span class="w-st ' + esc(t.state) + '">' + esc(TX_WORD[t.state] || t.state) + "</span>" +
+        // Which version of the order left the building. If the prescriber has changed the dose since,
+        // what was sent is still what was sent, and this is how the ward can tell.
+        (t.orderVersion == null ? "" : "<small>order v" + esc(t.orderVersion) + "</small>") +
+        (t.acknowledgedAt ? "<small>confirmed " + when(t.acknowledgedAt) + "</small>" : t.queuedAt ? "<small>queued " + when(t.queuedAt) + "</small>" : "") + "</div>" +
+        (t.failureReason ? '<p class="w-hint warn">' + ms("error") + esc(t.failureReason) + "</p>" : "") +
+        (t.resolvedAt ? '<p class="w-hint">' + ms("task_alt") + "Dealt with: " + esc(t.resolution) + "</p>" : "") +
+        (t.outstanding ? '<div class="w-dose-a"><button class="w-btn tiny" data-w-act="txr:' + esc(t.transmissionId) + '">' + ms("edit_note") + "Record what was done</button></div>" : "") +
+        "</li>";
+    }).join("");
+
+    // Medicines with nothing in the outbox at all. Named rather than left off: an order nobody sent
+    // looks exactly like an order that arrived, unless the screen says otherwise.
+    var unsent = orders.filter(function (o) { return !byOrder[o.orderId]; }).map(function (o) {
+      return "<li><b>" + esc(o.drug) + "</b> <span>" + dose(o.dose) + (o.route ? " &middot; " + esc(o.route) : "") + "</span>" +
+        '<button class="w-btn tiny" data-w-act="tx:' + esc(o.orderId) + '">' + ms("send") + "Send</button></li>";
+    }).join("");
+    if (!rows && !unsent) return "";
+
+    return '<div class="w-card"><div class="w-card-h">' + ms("outbox") + "<h3>Prescriptions sent</h3>" +
+      '<button class="w-ic" data-w-act="outbox" title="Refresh">' + ms("refresh") + "</button></div>" +
+      (rows ? '<ul class="w-doses w-tx">' + rows + "</ul>" : '<p class="w-empty">Nothing has been sent for this patient.</p>') +
+      (unsent ? '<div class="w-sub"><h4>' + ms("pending") + "Not sent anywhere</h4>" +
+        '<p class="w-hint">These are prescribed and on the record. Sending is a separate act, and it has not happened.</p>' +
+        '<ul class="w-mini w-unsent">' + unsent + "</ul></div>" : "") +
+      '<p class="w-hint">' + ms("info") + "Confirmed means the far end said it has the prescription. Anything else still needs somebody.</p></div>";
+  }
+  function drugFor(orders, orderId) {
+    for (var i = 0; i < orders.length; i++) { if (orders[i].orderId === orderId) return orders[i].drug; }
+    return orderId;   // the order is no longer active; its id is the honest label, not a guessed name
   }
 
   function _render(state) {
@@ -398,6 +450,34 @@
       })
       .catch(function () { st.busy = false; st.err = "Could not load the round."; paint(); });
   }
+  function loadOutbox() {
+    var s = st.sel; if (!s) return Promise.resolve();
+    return apiGet("/ward/outbox?orgId=" + encodeURIComponent(st.orgId) + "&patientId=" + encodeURIComponent(s.patientId))
+      .then(function (r) { if (r && r.ok) st.outbox = r.transmissions || []; paint(); })
+      // A failed READ of the outbox is not "nothing outstanding". Empty and unreachable look the same
+      // on screen, and one of them means a prescription may be sitting undelivered.
+      .catch(function () { st.err = st.err || "Could not load the prescription outbox."; paint(); });
+  }
+  function transmit(orderId) {
+    if (!orderId) return;
+    var where = ""; try { where = G.prompt("Send to which pharmacy? (leave blank to send unaddressed)", "") || ""; } catch (e) { return; }
+    st.busy = true; paint();
+    apiPost("/ward/transmit", { orgId: st.orgId, orderId: orderId, channel: "pharmacy", destination: where.trim() })
+      // The server's own wording is shown: it says queued, not sent, and that distinction is the
+      // entire point of the card.
+      .then(function (r) { if (settle(r, r && r.note)) loadOutbox(); else paint(); })
+      .catch(function () { st.busy = false; st.err = "Could not queue the prescription."; paint(); });
+  }
+  function resolveTx(id) {
+    if (!id) return;
+    var what = ""; try { what = G.prompt("What was done instead? (printed and handed over, re-sent, cancelled)", "") || ""; } catch (e) { return; }
+    if (!what.trim()) { st.err = "Say what was done. Clearing it off the list without a reason leaves a patient with no prescription and no trace of why."; paint(); return; }
+    st.busy = true; paint();
+    apiPost("/ward/transmit-resolve", { orgId: st.orgId, transmissionId: id, resolution: what.trim() })
+      .then(function (r) { if (settle(r, "Recorded. The transmission still reads as undelivered, because it was.")) loadOutbox(); else paint(); })
+      .catch(function () { st.busy = false; st.err = "Could not record that."; paint(); });
+  }
+
   function saveVitals() {
     var s = st.sel; if (!s) return;
     var v = {}, any = false;
@@ -446,15 +526,15 @@
     if (cmd === "dismiss") { st.err = ""; st.note = ""; st.refusal = null; paint(); return; }
     if (cmd === "reload") { loadWard(); return; }
     if (cmd === "setward") { st.ward = val("wWard"); loadWard(); return; }
-    if (cmd === "back") { st.view = "list"; st.sel = null; st.due = []; st.problems = []; paint(); return; }
+    if (cmd === "back") { st.view = "list"; st.sel = null; st.due = []; st.problems = []; st.outbox = []; paint(); return; }
     if (cmd === "open") {
       var p = null;
       for (var j = 0; j < st.patients.length; j++) { if (st.patients[j].encounterId === arg) { p = st.patients[j]; break; } }
       if (!p) return;
-      st.sel = p; st.view = "chart"; st.due = []; st.prn = []; st.unscheduled = []; st.problems = []; st.criticals = []; st.balance = null;
+      st.sel = p; st.view = "chart"; st.due = []; st.prn = []; st.unscheduled = []; st.problems = []; st.criticals = []; st.balance = null; st.outbox = [];
       st.err = ""; st.note = ""; st.refusal = null;
       defaultWindow();
-      paint(); loadChart(); loadRound(); loadBalance(); return;
+      paint(); loadChart(); loadRound(); loadBalance(); loadOutbox(); return;
     }
     if (cmd === "summary") {
       var sel = st.sel; if (!sel) return;
@@ -469,6 +549,9 @@
     if (cmd === "vitals") { saveVitals(); return; }
     if (cmd === "round") { st.from = val("wFrom") || st.from; st.to = val("wTo") || st.to; loadRound(); return; }
     if (cmd === "mar") { var k = arg.indexOf("|"); if (k > 0) marAction(arg.slice(0, k), Number(arg.slice(k + 1))); return; }
+    if (cmd === "outbox") { loadOutbox(); return; }
+    if (cmd === "tx") { transmit(arg); return; }
+    if (cmd === "txr") { resolveTx(arg); return; }
   }
 
   function open(opts) {

@@ -91,6 +91,10 @@ const RESOURCE_TYPES = Object.freeze([
    * changes anything for the patient - so the actions and what was done about them live on the
    * record beside the number. */
   "RiskAssessment",
+  /* Sending a prescription somewhere, and knowing whether it arrived. A DELIVERY fact, never a
+   * clinical one: nothing here touches the MedicationOrder, because "we sent this" is a statement
+   * about a message, not about the treatment. */
+  "PrescriptionTransmission",
 ]);
 
 const MODE = Object.freeze({ SYSTEM_OF_RECORD: "system-of-record", INTEGRATION: "integration" });

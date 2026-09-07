@@ -74,6 +74,7 @@ import { listTemplates, writeTemplatedNote } from "../../_wardsynq/note-template
 /* Aliased: `recordAssessment` is already the OPD assessment writer in this file, and a risk
  * assessment is a different thing entirely. Two names that read the same for two different
  * clinical acts is how the wrong one gets called. */
+import { queueTransmission, recordOutcome, resolveTransmission, listTransmissions } from "../../_wardsynq/prescription-transmit.js";
 import { listTools as listRiskTools, recordAssessment as recordRiskAssessment, completeAction as completeRiskAction, listAssessments as listRiskAssessments } from "../../_wardsynq/risk-assessment.js";
 import { recordAllergiesFromAssessment } from "../../_wardsynq/migrate-allergy.js";
 
@@ -497,6 +498,9 @@ export async function onRequest(context) {
         templates: CAPS.EMR_VIEW, "note": CAPS.EMR_TREAT,
         // Risk assessment is nursing work, like the rest of the flowsheet.
         "risk-tools": CAPS.EMR_VIEW, assess: CAPS.EMR_VITALS, "risk-action": CAPS.EMR_VITALS, risks: CAPS.EMR_VIEW,
+        /* Sending a prescription is part of prescribing, so queueing is emr.treat. Recording what
+         * the transport said, and resolving a failure by printing it instead, is desk work. */
+        transmit: CAPS.EMR_TREAT, "transmit-outcome": CAPS.QUEUE_ADD, "transmit-resolve": CAPS.QUEUE_ADD, outbox: CAPS.QUEUE_VIEW,
         // Closing a stay is the administrative act QUEUE_ADD already covers for opening one.
         // The summary is a clinical document: drafting and signing it are EMR_TREAT.
         discharge: CAPS.QUEUE_ADD, "discharge-summary": CAPS.EMR_TREAT, "sign-discharge-summary": CAPS.EMR_TREAT,
@@ -579,6 +583,22 @@ export async function onRequest(context) {
               types: (url.searchParams.get("_type") || "").split(",").map((t) => t.trim()).filter(Boolean),
             });
         return json(r.ok ? (r.bundle || r.resource) : r.outcome, r.status, request);
+      }
+      if (sub === "transmit" && method === "POST") {
+        const r = await queueTransmission(request, env, { ...deps, orderId: body.orderId, channel: body.channel, destination: body.destination, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "transmit-outcome" && method === "POST") {
+        const r = await recordOutcome(request, env, { ...deps, transmissionId: body.transmissionId, state: body.state, reference: body.reference, failureReason: body.failureReason, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "transmit-resolve" && method === "POST") {
+        const r = await resolveTransmission(request, env, { ...deps, transmissionId: body.transmissionId, resolution: body.resolution, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "outbox" && method === "GET") {
+        const r = await listTransmissions(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "", outstandingOnly: url.searchParams.get("outstanding") === "1" });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "risk-tools" && method === "GET") {
         const r = await listRiskTools(request, env, { ...deps, tools: (wsqCfg && wsqCfg.riskTools) || [] });

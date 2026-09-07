@@ -147,3 +147,16 @@ body.dark #smdWard { --bg: #191c1e; --on-surface: #eff1f3; --on-surface-variant:
 #smdWard .w-mini { list-style: none; margin: 8px 0 0; padding: 0; display: flex; flex-direction: column; gap: 6px; font-size: 14px; }
 #smdWard .w-mini span { color: var(--on-surface-variant); font-size: 13px; }
 #smdWard .w-sub.warn .w-mini span, #smdWard .w-sub.warn .w-hint { color: inherit; opacity: .85; }
+
+/* Prescription outbox. Only "confirmed received" is styled as finished; queued, sent and failed all
+   read as unfinished work, because they are. Restrained on purpose: this is a worklist, not an
+   alarm, and the one that failed is distinguished by a left edge and a reason, not by a red card. */
+#smdWard .w-tx li { border-left-width: 3px; border-left-color: var(--outline-variant); }
+#smdWard .w-tx li.open { border-left-color: var(--outline); }
+#smdWard .w-tx li.tx-failed { border-left-color: var(--on-warn-container); }
+#smdWard .w-st.acknowledged { background: var(--ok-container); color: var(--on-ok-container); }
+#smdWard .w-st.failed { background: var(--warn-container); color: var(--on-warn-container); }
+#smdWard .w-tx .w-dose-h span { text-transform: capitalize; }
+#smdWard .w-unsent li { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+#smdWard .w-unsent li b { flex: 0 0 auto; }
+#smdWard .w-unsent li .w-btn { margin-left: auto; }
