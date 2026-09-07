@@ -23,17 +23,17 @@ Updated: 2026-09-07 (PRs #887, #889, #890, #892, #894, #895, #897 pharmacy verif
 | 9 | eMAR / medication administration (Willow Inpatient) | 8 | 90 | #889 + #890. State machine, five rights, barcode scan, weight-based refusal, AI blocked, **UI**, **and a real schedule**. Plus medicines reconciliation on admission. No high-alert witness config. |
 | 10 | Nursing documentation (Flowsheets) | 5 | 95 | #895. Vitals, fluid balance with charted-hour gaps, SBAR shift handover with a read-back loop, care plans with measurable goals, and scored risk assessments whose bands carry actions. No wound charting, no observation charts beyond vitals. |
 | 11 | Discharge + summary (Discharge Navigator) | 4 | 90 | #892. Assembler, per-section clinician correction with recorded provenance, immutable signed version, outstanding-items review, A4 print, and the home-medicine reconciliation. Not device-proven. |
-| 12 | Results — lab / rad (Beaker, Radiant) | 6 | 85 | #894 + #900. Native resulting by a `lab` role with its own authority, corrections that keep the prior value, and a closed critical-value loop. No radiology reporting, no autoverification, no delta checks. |
+| 12 | Results — lab / rad (Beaker, Radiant) | 6 | 88 | #894 + #900 + #911. Native resulting by a `lab` role whose authority is now scoped to laboratory Observations rather than to the type, corrections that keep the prior value, and a closed critical-value loop. No radiology reporting, no autoverification, no delta checks. |
 | 13 | Pharmacy verification + inventory (Willow) | 5 | 55 | #897. Verification as its OWN authority with a narrow grant: reads what a check needs, writes only the verification. No inventory, no dispensing. |
 | 14 | Notes / documentation (SmartText, NoteWriter) | 4 | 90 | #909. Signed clinical notes, versioned, per-section provenance, org note templates that supply headings and never content, and co-sign routing: a note by a clinician with no verified registration is submitted, listed and countersigned, with both names kept on the record. No macros, no dictation. |
 | 15 | Billing / revenue (Resolute) | 5 | 15 | Clinic billing config only. No charge capture from orders, no claims, no payer. |
-| 16 | Security / audit / break-glass | 5 | 95 | #898 + #903. Capability RBAC, append-only audit, tiered AI, break-glass with a mandatory reason, and a consent model where a refusal is a first-class fact. No per-field redaction. |
+| 16 | Security / audit / break-glass | 5 | 98 | #898 + #903 + #911. Capability RBAC scoped by resource type AND by category within a type, append-only audit, tiered AI, break-glass with a mandatory reason, and a consent model where a refusal is a first-class fact. No per-field redaction. |
 | 17 | Interoperability (Care Everywhere, HL7/FHIR) | 4 | 70 | #899. Read-only FHIR R4 export with an honest CapabilityStatement; GHIS adapter works. No FHIR write, no HL7v2, no CDA. |
 | 18 | Reporting / analytics (Reporting Workbench, Caboodle) | 3 | 40 | Live ward open-item metrics: unacknowledged criticals, doses in flight, handovers waiting, medicines undecided, orders unverified. No registries, no quality measures, no warehouse. |
 | 19 | Patient portal (MyChart) | 3 | 0 | Not built. |
 | 20 | Deployment / uptime / DR (on-prem, HA) | 3 | 25 | Cloudflare edge + D1, live domain. No on-prem, no DR drill, no downtime procedures. |
 
-**Weighted total: 74.9%.**
+**Weighted total: 75.2%.**
 
 The total is the weight-times-percent sum of the table above, divided by 100. It is COMPUTED from
 these rows, not asserted: earlier revisions of this file carried an eyeballed number that had drifted
@@ -54,10 +54,11 @@ about two points high (the 44% baseline was 41.5, and 53% was 50.8). If a row ch
 0. **Device proof of the whole inpatient vertical** — none of the ward, eMAR, discharge or nursing
    screens have been run on a phone. Everything above is proven by test, not by a clinician's hands.
    This is the largest honest caveat on this entire table.
-2. **A category-scoped write grant.** Write scope is by resource TYPE, so the `lab` role's
-   Observation write technically permits a vital sign as well as a result. The resulting route
-   stamps `laboratory` and a lab actor has no clinical screen, but that is a narrower control than
-   the scope itself. Closing it properly is a change to the store's authorisation model.
+2. ~~A category-scoped write grant~~ - closed in #911. `Observation` is one resource type carrying
+   four unrelated clinical meanings, so a type-level scope let the `lab` role write a vital sign and
+   the `nurse` role write a laboratory result. The store now takes a per-type category allow-list;
+   an entity with no category is refused rather than waved through, and an AI inherits the
+   constraint with the rest of the human's scope.
 3. ~~E-prescribing transmission (#908) and co-sign routing (#909)~~ - both closed. No prescription
    transport is implemented, and that is stated rather than faked.
 4. ~~Firing counts for the CDSS~~ - closed in #910. A `SafetyFiring` is recorded per order and rule
