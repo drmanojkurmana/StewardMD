@@ -23,7 +23,7 @@ Updated: 2026-09-07 (PRs #887, #889, #890, #892, #894, #895, #897 pharmacy verif
 | 9 | eMAR / medication administration (Willow Inpatient) | 8 | 99 | #889 + #890 + #917 + #929. State machine, five rights, barcode scan, weight-based refusal, AI blocked, **UI**, **a real schedule**, medicines reconciliation, and the second-nurse witness end to end: the high-alert list is the hospital's own config, the refusal is proven through the real route, and the bedside can now name the witness. Infusions chart rate changes and integrate the volume, saying on every total how much of it assumes the pump kept running. No device integration - nothing here sets a rate. |
 | 10 | Nursing documentation (Flowsheets) | 5 | 98 | #895 + #907 + #925. Vitals, fluid balance with charted-hour gaps, SBAR shift handover with a read-back loop, care plans with measurable goals, and scored risk assessments whose bands carry actions, and wound charting where a pressure ulcer is never reverse-staged and its origin is set once. No observation charts beyond vitals, no wound images. |
 | 11 | Discharge + summary (Discharge Navigator) | 4 | 90 | #892. Assembler, per-section clinician correction with recorded provenance, immutable signed version, outstanding-items review, A4 print, and the home-medicine reconciliation. Not device-proven. |
-| 12 | Results — lab / rad (Beaker, Radiant) | 6 | 95 | #894 + #900 + #911 + #919. Native resulting by a `lab` role scoped to laboratory Observations, corrections that keep the prior value, a closed critical-value loop, delta checks against the hospital's own limits (advisory, never withholding), and autoverification that fails closed. No radiology reporting. |
+| 12 | Results — lab / rad (Beaker, Radiant) | 6 | 99 | #894 + #900 + #911 + #919 + #933. Native resulting by a `lab` role scoped to laboratory Observations, corrections that keep the prior value, a closed critical-value loop, delta checks against the hospital's own limits (advisory, never withholding), autoverification that fails closed, and radiology reporting where a preliminary reading survives the final one and a changed impression is flagged as a discrepancy. No images (DICOM/PACS excluded). |
 | 13 | Pharmacy verification + inventory (Willow) | 5 | 88 | #897 + #914 + #931. Verification and dispensing, both as the pharmacy's OWN authority with a narrow grant: reads what a check needs, writes only its verification and its supply record. A dispense is issued against an order version, refused when the verified version has been superseded, and never touches a MedicationAdministration. Batch and expiry are recorded from the box and expired stock is refused - the only non-prescription block in the file. No inventory (excluded by instruction): no stock levels, no reorder, no locations. |
 | 14 | Notes / documentation (SmartText, NoteWriter) | 4 | 96 | #909 + #932. Signed clinical notes, versioned, per-section provenance, org note templates that supply headings and never content, and co-sign routing: a note by a clinician with no verified registration is submitted, listed and countersigned, with both names kept on the record - and a ward round composer that supplies the hospital's headings, writes no text of its own, and never signs. No macros, no dictation. |
 | 15 | Billing / revenue (Resolute) | 5 | 15 | Clinic billing config only. No charge capture from orders, no claims, no payer. |
@@ -33,11 +33,23 @@ Updated: 2026-09-07 (PRs #887, #889, #890, #892, #894, #895, #897 pharmacy verif
 | 19 | Patient portal (MyChart) | 3 | 0 | Not built. |
 | 20 | Deployment / uptime / DR (on-prem, HA) | 3 | 55 | #912. Cloudflare edge + D1, live domain, a printable downtime pack the ward can hold during an outage, a restore rehearsal that performs a real export-destroy-restore against the shipped schema, and a DR runbook. The rehearsal passes under `npm test` and currently SKIPS in CI, which lacks `--experimental-sqlite` - see "Needs the owner". No scheduled backup, so RPO/RTO are undefined; no on-prem, no hot standby. |
 
-**Weighted total: 86.1%.**
+**Weighted total: 86.3%.**
 
 The total is the weight-times-percent sum of the table above, divided by 100. It is COMPUTED from
 these rows, not asserted: earlier revisions of this file carried an eyeballed number that had drifted
 about two points high (the 44% baseline was 41.5, and 53% was 50.8). If a row changes, recompute.
+
+## The 2026-09-07/08 session: 73.0% -> 86.3%, twenty-seven PRs
+
+Every gap this file named at the start of that session is closed. The pattern that produced most of
+the value, worth repeating: **look for finished library code nothing calls.** Three separate
+subsystems were complete, tested and unreachable - `buildGrid` and `infusionVolume` in
+wardsynq-flowsheet.js (#927, #929), and the note templates and co-sign routing that had no screen
+(#932). Reaching them was cheaper than building anything and worth more.
+
+The recurring bug, three times in one session: **`Number("")` is 0 and 0 is finite.** It turned a
+missing order version into "v0" (#908), a configured-but-empty delta rule into a threshold of zero
+(#919), and would have done it again. Check for the absent value, never for finiteness.
 
 ## Done since the baseline (41.5% -> 52.4%)
 - **Problem list** (#887) — `Condition` had zero write paths; diagnoses lived only as prose.
@@ -83,6 +95,22 @@ about two points high (the 44% baseline was 41.5, and 53% was 50.8). If a row ch
 4. ~~Firing counts for the CDSS~~ - closed in #910. A `SafetyFiring` is recorded per order and rule
    pack version, so the override rate has a denominator that comes from the record. A verdict that
    carries no `findings` still yields no rate, and the report says so rather than inventing one.
+
+## What is left, honestly (13.7 points)
+
+- **7.25 excluded by instruction**: billing/claims (4.25) and the patient portal (3.00).
+- **1.35 deployment**, of which the scheduled backup needs an owner decision (where dumps live, who
+  holds them) and on-premise/HA is excluded.
+- **0.98 stated non-goals**: probabilistic identity matching (d1) and an e-prescribing transport (d5)
+  are deliberate absences with their reasoning recorded, not unfinished work.
+- **0.40 device proof** (d11): the discharge screen, like every other screen built this session, has
+  never run on a phone.
+- **0.40 patient self-booking** (d2), which is the portal again.
+- **~3.3 genuinely buildable**: an OPD-specific note composer, a rule-pack authoring screen, CDA
+  export, a data warehouse, and a scattering of half-points.
+
+So the reachable ceiling is about 92.75, and the honest remainder is roughly three points of real
+work plus four things only the owner can do.
 
 ## Deliberately not built
 Patient portal, full billing and claims, on-premise deployment, DICOM/PACS and regulatory
