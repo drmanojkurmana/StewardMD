@@ -592,6 +592,9 @@ export async function onRequest(context) {
           /* The formulary is ORG content, exactly as the order sets and the critical limits are: a
            * caller who could pass one could lift any restriction the hospital had set. */
           formulary: (wsqCfg && wsqCfg.formulary) || null,
+          // The hospital's own advisories, ORG content like everything else here. They can never
+          // block: see the header of _wardsynq/advisories.js.
+          advisories: (wsqCfg && wsqCfg.advisories) || null, ageYears: body.ageYears,
           requireReasonOffFormulary: !!(wsqCfg && wsqCfg.requireReasonOffFormulary),
           specialty: body.specialty, approvalRef: body.approvalRef, formularyReason: body.formularyReason,
           idempotencyKey: body.idempotencyKey || null,

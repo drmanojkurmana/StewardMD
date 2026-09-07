@@ -2725,6 +2725,53 @@ test("sending is prescribing's business, and nothing unsendable is sent", async 
   assert.equal(bogus.error, "unknown_channel");
 });
 
+/* ---- the hospital's own advice ------------------------------------------------------------------ */
+
+test("A HOSPITAL'S OWN ADVISORY APPEARS AND CANNOT BLOCK", async () => {
+  seedHospital();
+  const org = docs.get(`q_orgs/${ORG}`);
+  org.fields.wardsynq = {
+    ...org.fields.wardsynq,
+    advisories: [{
+      id: "nephrotoxic-in-aki", level: "warn",
+      message: "Creatinine is above 200. Review the dose of this nephrotoxic drug.",
+      action: "Discuss with the renal team before the next dose.",
+      reference: "Local renal prescribing guideline, 2026",
+      when: [{ kind: "drug", value: "Gentamicin" }, { kind: "observation-above", code: "2160-0", value: 200, withinHours: 72 }],
+    }],
+  };
+  const { adm } = await admittedPatientOnDrug();
+  const order = (drug) => as(DOCTOR, "/ward/medication-order", "POST", {
+    orgId: ORG, order: { patientId: adm.patientId, encounterId: adm.encounterId, drug, dose: { value: 240, unit: "mg" }, route: "iv", frequency: "OD" },
+  });
+
+  /* NOT MEASURED IS NOT "BELOW". With no creatinine on file the rule does not fire - advising about
+   * a patient nobody has measured is worse than saying nothing. */
+  const quiet = await order("Gentamicin");
+  assert.equal(quiet.__status, 200, JSON.stringify(quiet));
+  assert.equal(quiet.advisories, undefined);
+
+  const sr = await orderTest(adm, "Creatinine", "wsq-sr-adv");
+  await as(LABTECH, "/ward/release-result", "POST", { orgId: ORG, serviceRequestId: sr, tests: [{ test: "Creatinine", value: 240, unit: "umol/L" }] });
+
+  const loud = await order("Gentamicin");
+  /* IT CANNOT BLOCK. A hospital-authored rule is written by somebody who is not a software engineer,
+   * in a hospital with no staging environment; a typo that could stop prescribing takes the ward
+   * offline at 3am with nobody to roll it back. */
+  assert.equal(loud.__status, 200, "the order is written regardless");
+  assert.equal(loud.written, 1);
+  assert.equal(loud.advisories.length, 1);
+  assert.equal(loud.advisories[0].blocking, false);
+  assert.equal(loud.advisories[0].message, "Creatinine is above 200. Review the dose of this nephrotoxic drug.");
+  assert.equal(loud.advisories[0].reference, "Local renal prescribing guideline, 2026");
+  /* Marked as the HOSPITAL's, so a prescriber can tell "your hospital asked me to tell you this"
+   * from "this drug will harm this patient". */
+  assert.equal(loud.advisories[0].source, "hospital-advisory");
+
+  // A different drug on the same patient does not fire it: every condition must hold.
+  assert.equal((await order("Paracetamol")).advisories, undefined);
+});
+
 /* ---- what this hospital stocks, and what it guards ---------------------------------------------- */
 
 test("OFF-FORMULARY NEVER BLOCKS, and a RESTRICTED drug does - because the hospital said so", async () => {
