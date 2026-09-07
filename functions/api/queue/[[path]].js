@@ -54,6 +54,7 @@ import { admitPatient, listWard, recordWardVitals, createWardMedicationOrder } f
 import { medicationRound, administerStep } from "../../_wardsynq/migrate-emar.js";
 import { draftDischargeSummary, signDischargeSummary, dischargePatient } from "../../_wardsynq/migrate-discharge.js";
 import { recordProblem, listProblems } from "../../_wardsynq/migrate-problem.js";
+import { marSchedule } from "../../_wardsynq/mar-schedule.js";
 import { recordAllergiesFromAssessment } from "../../_wardsynq/migrate-allergy.js";
 
 // The Encounter migration's one shared call site. Every hook below (ticket add, import, a terminal
@@ -409,6 +410,9 @@ export async function onRequest(context) {
       const capFor = {
         admit: CAPS.QUEUE_ADD, list: CAPS.QUEUE_VIEW, vitals: CAPS.EMR_VITALS,
         "medication-order": CAPS.EMR_TREAT, round: CAPS.QUEUE_VIEW, mar: CAPS.MED_ADMINISTER,
+        // Reading what is due is reading the ward, not acting on it: the same view capability the
+        // ward list uses. Nothing here writes, so this grants no ability to move a dose.
+        schedule: CAPS.QUEUE_VIEW,
         // Closing a stay is the administrative act QUEUE_ADD already covers for opening one.
         // The summary is a clinical document: drafting and signing it are EMR_TREAT.
         discharge: CAPS.QUEUE_ADD, "discharge-summary": CAPS.EMR_TREAT, "sign-discharge-summary": CAPS.EMR_TREAT,
@@ -454,6 +458,19 @@ export async function onRequest(context) {
       }
       if (sub === "round" && method === "GET") {
         const r = await medicationRound(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "", dueAt: url.searchParams.get("dueAt") || "" });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "schedule" && method === "GET") {
+        const r = await marSchedule(request, env, {
+          ...deps,
+          patientId: url.searchParams.get("patientId") || "",
+          from: url.searchParams.get("from") || "", to: url.searchParams.get("to") || "",
+          // The ward's own round times and clock. Org configuration, never a request parameter: a
+          // caller who could pass these could move every dose on the chart by asking differently.
+          marTimes: (wOrg && wOrg.marTimes) || null,
+          offsetMinutes: Number.isFinite(wOrg && wOrg.utcOffsetMinutes) ? wOrg.utcOffsetMinutes : undefined,
+          graceMinutes: Number.isFinite(wOrg && wOrg.marGraceMinutes) ? wOrg.marGraceMinutes : undefined,
+        });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "problem" && method === "POST") {

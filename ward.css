@@ -105,3 +105,17 @@ body.dark #smdWard { --bg: #191c1e; --on-surface: #eff1f3; --on-surface-variant:
 #smdWard .w-st.administered { background: var(--ok-container); color: var(--on-ok-container); }
 #smdWard .w-st.held, #smdWard .w-st.refused, #smdWard .w-st.cancelled { background: var(--error-container); color: var(--on-error-container); }
 #smdWard .w-dose-a { display: flex; flex-wrap: wrap; gap: 8px; }
+#smdWard .w-doses li.overdue { border-color: var(--on-warn-container); background: var(--warn-container); color: var(--on-warn-container); }
+#smdWard .w-due { display: inline-flex; align-items: center; gap: 5px; font-size: 13px; font-weight: 600; }
+#smdWard .w-due .material-symbols-outlined { font-size: 16px; }
+#smdWard .w-st.overdue { background: var(--error-container); color: var(--on-error-container); }
+
+/* PRN and unreadable-frequency orders: visible, and visibly NOT part of the round */
+#smdWard .w-sub { margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--outline-variant); }
+#smdWard .w-sub h4 { margin: 0; font-size: 13px; display: flex; align-items: center; gap: 6px; color: var(--on-surface-variant); }
+#smdWard .w-sub h4 .material-symbols-outlined { font-size: 18px; }
+#smdWard .w-sub.warn h4 { color: var(--on-warn-container); }
+#smdWard .w-sub.warn { background: var(--warn-container); color: var(--on-warn-container); margin: 14px -14px -14px; padding: 12px 14px; border-radius: 0 0 15px 15px; border-top: 0; }
+#smdWard .w-mini { list-style: none; margin: 8px 0 0; padding: 0; display: flex; flex-direction: column; gap: 6px; font-size: 14px; }
+#smdWard .w-mini span { color: var(--on-surface-variant); font-size: 13px; }
+#smdWard .w-sub.warn .w-mini span, #smdWard .w-sub.warn .w-hint { color: inherit; opacity: .85; }

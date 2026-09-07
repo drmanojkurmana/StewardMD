@@ -239,6 +239,16 @@ function orderFromWardRequest(input) {
     signedBy: input.prescriberId,
     source: { system: "wardsynq-native", sourceId: `inpatient-order:${id}` },
   });
+  /* When the course ends. Bolted on, the convention every sibling migration uses for a field the
+   * canonical model has no slot for (see migrate-problem.js).
+   *
+   * It exists because scheduling exists. Once mar-schedule.js turns a frequency into due times, an
+   * order with no end runs forever: a five-day antibiotic keeps appearing on the round on day nine,
+   * and a ward that trusts the round gives it. An open-ended order is still allowed - many are, and
+   * refusing them would push prescribers off the ward path entirely - but the ability to say when a
+   * course stops has to be there before a schedule is allowed to assert anything is due. */
+  const stopAt = str(input.stopAt);
+  if (stopAt && Number.isFinite(Date.parse(stopAt))) order.stopAt = new Date(Date.parse(stopAt)).toISOString();
   return order;
 }
 
