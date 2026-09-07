@@ -205,6 +205,28 @@ function grantForCaps(caps) {
     };
   }
 
+  if (has(CAPS.ORDER_DISPENSE)) {
+    /* Stock control, 2026-09-08. Its own capability - "hand medicines to the patient + mark the
+     * order dispensed" - rather than folded into ORDER_VERIFY, because counting the shelf is the
+     * dispensing side of pharmacy and not the checking side, and a site that separates the two
+     * should be able to.
+     *
+     * ONE TYPE, AND IT IS NOT CLINICAL. A StockMovement says a box arrived, was destroyed or was
+     * recounted. It names no patient and this grant confers nothing towards one: MedicationDispense
+     * is granted by ORDER_VERIFY above and is a supply fact against an ORDER, which is a different
+     * thing that a different check governs. Reading MedicationDispense is how the level subtracts
+     * what was issued, and pharmacy already holds that read. */
+    const added = ["StockMovement"];
+    if (!grant) grant = { tier: TIER.EXECUTE, read: added, write: added, basis: CAPS.ORDER_DISPENSE };
+    else grant = {
+      tier: TIER.EXECUTE,
+      read: grant.read === null ? null : [...new Set([...grant.read, ...added])],
+      write: grant.write === null ? null : [...new Set([...grant.write, ...added])],
+      writeCategories: grant.writeCategories,
+      basis: grant.basis + "+" + CAPS.ORDER_DISPENSE,
+    };
+  }
+
   if (has(CAPS.MED_ADMINISTER)) {
     /* The bedside authority, added 2026-09-07 with the inpatient eMAR, in the same union shape as
      * QUEUE_ADD above and for the same reason: it only ever ADDS one type and only ever RAISES the
