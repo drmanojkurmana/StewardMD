@@ -22,7 +22,7 @@
       '<button class="oe-close" data-oe-act="close" title="Close" aria-label="Close">' + ms("close") + "</button></header>";
   }
   function tabsNav(active) {
-    var defs = [["profile", "Profile", "person"], ["inv", "Investigations", "science"], ["meds", "Medications", "pill"], ["assess", "Assessment", "clinical_notes"], ["protocol", "Protocol", "account_tree"], ["onco", "ONCQIS", "vaccines"]];
+    var defs = [["profile", "Profile", "person"], ["inv", "Investigations", "science"], ["meds", "Medications", "pill"], ["assess", "Assessment", "clinical_notes"], ["note", "Note", "edit_note"], ["protocol", "Protocol", "account_tree"], ["onco", "ONCQIS", "vaccines"]];
     return '<nav class="oe-tabs">' + defs.map(function (t) {
       return '<button class="oe-tab' + (t[0] === active ? " on" : "") + '" data-oe-act="tab:' + t[0] + '">' + ms(t[2]) + "<span>" + t[1] + "</span></button>";
     }).join("") + "</nav>";
@@ -880,6 +880,7 @@
       if (active === "inv") body = head + invTab(st);
       else if (active === "meds") body = head + medsTab(st);
       else if (active === "assess") body = head + assessTab(st);
+      else if (active === "note") body = head + noteTab(st);
       else if (active === "protocol") body = head + protocolTab(st);
       else if (active === "onco") body = head + oncoTab(st);
       else body = head + profileTab(st);
@@ -1265,6 +1266,12 @@
     if (cmd === "onco-print") return oncoPrintProtocol();
     if (cmd === "ivx") { var xi = +arg, xn = (st.dictatedInv || [])[xi]; if (xn != null) { st.dictatedInv.splice(xi, 1); stripPlanLine(xn); paint(); } return; }
     if (cmd === "ivorder") { var on = (st.dictatedInv || [])[+arg]; if (on != null) { st.tab = "inv"; st.invQuery = on; paint(); runSearch("inv"); } return; }
+    /* Picking a template re-renders the headings and nothing else. Any text already typed under the
+     * previous template's headings is NOT carried across: the sections mean different things, and
+     * silently moving a paragraph from "Examination" to "Plan" would put words in a clinician's note
+     * that they did not write there. */
+    if (cmd === "ntpick") { st.noteTplId = (document.getElementById("oe-nt-pick") || {}).value || ""; st.noteMsg = ""; paint(); return; }
+    if (cmd === "ntsave") { saveNote(); return; }
     if (cmd === "notes-copy") return copyNotes();
     if (cmd === "notes-save") return saveNotesToHistory();
     if (cmd === "notes-clear") return clearNotes();
@@ -1333,7 +1340,7 @@
     switchTab("assess");
   }
 
-  function switchTab(t) { st.tab = t; paint(); if (t === "assess") { if (!st.assessLoaded) loadAssessment(); maybeLoadOncoProtocols(); } }
+  function switchTab(t) { st.tab = t; paint(); if (t === "assess") { if (!st.assessLoaded) loadAssessment(); maybeLoadOncoProtocols(); } if (t === "note") loadNoteTemplates(); }
 
   // Tap a dose-matrix cell: build the drawer PURELY from the plan already in state - no fetch, no
   // write. drugId may itself contain ":" so re-join everything after the cycle number.
@@ -1444,6 +1451,102 @@
   }
   // Firebase-authed GET to the onco routes (mirrors oncoPost's auth, no body). Read-side counterpart
   // that lets a NURSE session (no EMR_TREAT) actually fetch a cycle - the gap this phase closes.
+  /* The OPD note composer, 2026-09-08. The server half has existed since #906/#932 - org templates
+   * that supply HEADINGS and never content, a composer that writes no text of its own, and a note
+   * that is never auto-signed - and it was reachable from the ward chart and from nowhere in OPD.
+   * This is the OPD screen for it, and it computes nothing: every rule belongs to note-templates.js.
+   *
+   * THE TEMPLATE SUPPLIES HEADINGS, NOT WORDS. Nothing here prefills a section, offers a default
+   * phrase or suggests text. A note whose sentences a system wrote is a note nobody actually
+   * examined the patient to produce, and the clinician's name goes on it regardless.
+   *
+   * A SECTION LEFT EMPTY IS RECORDED AS NOT RECORDED, by the server, in its own words - never as an
+   * empty string, which reads as "examined and normal" to the next person to open the chart. */
+  function wardGet(path) {
+    return fbTok().then(function (t) {
+      var h = {}; if (t) h.Authorization = "Bearer " + t;
+      return fetch(qBase() + "/api/queue/ward/" + path, { headers: h, credentials: "include" });
+    }).then(function (r) { return r.json().catch(function () { return {}; }); });
+  }
+  function wardPost(path, body) {
+    return fbTok().then(function (t) {
+      var h = { "Content-Type": "application/json" }; if (t) h.Authorization = "Bearer " + t;
+      return fetch(qBase() + "/api/queue/ward/" + path, { method: "POST", headers: h, credentials: "include", body: JSON.stringify(body) });
+    }).then(function (r) { return r.json().catch(function () { return {}; }); });
+  }
+
+  function loadNoteTemplates() {
+    if (st.tplLoaded || st.tplLoading) return;
+    st.tplLoading = true;
+    wardGet("templates?orgId=" + encodeURIComponent(st.hospitalId || "")).then(function (d) {
+      st.tplLoading = false; st.tplLoaded = true;
+      st.templates = (d && d.ok && d.templates) || [];
+      /* An empty list is STATED rather than shown as an empty dropdown: "this hospital has not
+       * configured any" and "they failed to load" look identical otherwise, and only one of them is
+       * something a clinician should wait for. */
+      st.tplErr = (d && d.ok) ? "" : ((d && d.detail) || "Templates could not be loaded.");
+      if (st.tab === "note") paint();
+    }).catch(function () {
+      st.tplLoading = false; st.tplLoaded = true; st.templates = [];
+      st.tplErr = "Templates could not be loaded.";
+      if (st.tab === "note") paint();
+    });
+  }
+
+  function saveNote() {
+    var tplId = st.noteTplId || "";
+    if (!tplId) { st.noteMsg = "Choose a template first."; paint(); return; }
+    /* A note belongs to a VISIT. Opened from a search rather than from the queue there is no ticket,
+     * so there is no encounter to file it against - and the server derives the encounter from the
+     * ticket precisely so this client never computes one. Refused with the reason rather than posted
+     * against a guessed id, which would file the note under an encounter that does not exist. */
+    if (!st.ticketId) { st.noteMsg = "This patient was not opened from today's queue, so there is no visit to file a note against. Open them from the queue."; paint(); return; }
+    var tpl = (st.templates || []).filter(function (t) { return t.id === tplId; })[0];
+    var sections = {};
+    ((tpl && tpl.sections) || []).forEach(function (s) {
+      var el = document.getElementById("oe-nt-" + s.key);
+      if (el && el.value.trim()) sections[s.key] = el.value.trim();
+    });
+    st.noteSaving = true; st.noteMsg = ""; paint();
+    wardPost("note", { orgId: st.hospitalId || "", templateId: tplId, ticketId: st.ticketId || "", sections: sections })
+      .then(function (d) {
+        st.noteSaving = false;
+        /* Never "signed". writeTemplatedNote does not sign, and a screen that said so would be
+         * claiming an authorisation the record does not carry. */
+        st.noteMsg = (d && d.ok) ? "Note saved to the record. It is not signed." : ((d && d.detail) || "The note was not saved.");
+        if (d && d.ok) st.noteSavedId = d.noteId || null;
+        paint();
+      })
+      .catch(function () { st.noteSaving = false; st.noteMsg = "The note was not saved."; paint(); });
+  }
+
+  function noteTab(st) {
+    if (st.tplLoading) return loadingBox("Loading templates…");
+    var tpl = (st.templates || []).filter(function (t) { return t.id === st.noteTplId; })[0];
+    var opts = '<option value="">Choose a template…</option>' +
+      (st.templates || []).map(function (t) {
+        return '<option value="' + esc(t.id) + '"' + (t.id === st.noteTplId ? " selected" : "") + ">" + esc(t.title || t.id) + "</option>";
+      }).join("");
+
+    var body = !st.templates || !st.templates.length
+      ? '<p class="oe-empty">' + esc(st.tplErr || "This hospital has not configured any note templates. Nothing here writes headings of its own.") + "</p>"
+      : '<label class="oe-field">Template<select id="oe-nt-pick" class="oe-inp" data-e-act="ntpick">' + opts + "</select></label>" +
+        (tpl
+          ? ((tpl.sections || []).map(function (s) {
+              return '<label class="oe-field">' + esc(s.title || s.key) + (s.required ? " *" : "") +
+                '<textarea id="oe-nt-' + esc(s.key) + '" class="oe-inp" rows="3"></textarea></label>';
+            }).join("") +
+            '<div class="oe-actions"><button class="oe-btn primary" data-e-act="ntsave"' + (st.noteSaving ? " disabled" : "") + ">" +
+            (st.noteSaving ? "Saving…" : "Save note") + "</button></div>" +
+            /* Said on the screen, every time, because it is the difference between a note and a
+             * signed note and nothing else on this page says which this is. */
+            '<p class="oe-note">' + ms("info") + "The headings come from your hospital. Nothing is written for you, a section you leave empty is recorded as not recorded, and saving does not sign the note.</p>")
+          : '<p class="oe-empty">Choose a template to see its headings.</p>') +
+        (st.noteMsg ? '<p class="oe-note">' + ms("info") + esc(st.noteMsg) + "</p>" : "");
+
+    return '<section class="oe-sec"><h3>Consultation note</h3>' + body + "</section>";
+  }
+
   function oncoGet(path) {
     return fbTok().then(function (t) {
       var h = {}; if (t) h.Authorization = "Bearer " + t;
