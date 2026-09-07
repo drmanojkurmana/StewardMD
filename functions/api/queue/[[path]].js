@@ -93,6 +93,7 @@ import { cdaForEncounter } from "../../_wardsynq/cda.js";
 import { news2ForPatient } from "../../_wardsynq/news2-view.js";
 import { recordRead, readersToNotify } from "../../_wardsynq/read-log.js";
 import { codeClaimForEncounter, claimAction, recordPreAuth, claimsForPatient, watchlist as upcodingList } from "../../_wardsynq/billing.js";
+import { patientCopy, releaseToPatient } from "../../_wardsynq/patient-record.js";
 import { listTools as listRiskTools, recordAssessment as recordRiskAssessment, completeAction as completeRiskAction, listAssessments as listRiskAssessments } from "../../_wardsynq/risk-assessment.js";
 import { recordAllergiesFromAssessment } from "../../_wardsynq/migrate-allergy.js";
 
@@ -564,6 +565,11 @@ export async function onRequest(context) {
          * collections" - and billing.view is precisely the person who is. */
         claim: CAPS.BILLING_CHARGE, "claim-state": CAPS.BILLING_CHARGE, preauth: CAPS.BILLING_CHARGE,
         claims: CAPS.BILLING_VIEW, upcoding: CAPS.STAFF_ADMIN,
+        /* The patient's own copy. Seeing what the patient WOULD be given is reading the chart, so
+         * emr.view. HANDING IT OVER IS EMR_TREAT: deciding a patient is ready to be told what is in
+         * their record is a clinical act, not a clerical one, and the person who does it has to be
+         * the person who can answer the questions it produces. */
+        "patient-copy": CAPS.EMR_VIEW, "patient-release": CAPS.EMR_TREAT,
         // ADT out. Reading a stay in another wire format is still reading a chart, so it needs the
         // authority to read one. It writes nothing and there is no inbound listener.
         adt: CAPS.EMR_VIEW, oru: CAPS.EMR_VIEW, cda: CAPS.EMR_VIEW,
@@ -798,6 +804,14 @@ export async function onRequest(context) {
       }
       if (sub === "upcoding" && method === "GET") {
         const r = await upcodingList(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "" });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "patient-copy" && method === "GET") {
+        const r = await patientCopy(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "", neverRelease: (wsqCfg && wsqCfg.neverRelease) || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "patient-release" && method === "POST") {
+        const r = await releaseToPatient(request, env, { ...deps, patientId: body.patientId, givenTo: body.givenTo, at: body.at, neverRelease: (wsqCfg && wsqCfg.neverRelease) || null, idempotencyKey: body.idempotencyKey || null });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "news2" && method === "GET") {

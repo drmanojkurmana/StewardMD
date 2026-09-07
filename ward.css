@@ -230,6 +230,11 @@ body.dark #smdWard { --bg: #191c1e; --on-surface: #eff1f3; --on-surface-variant:
 #smdWard .w-dt-blank { margin-top: 12px; border: 1px dashed var(--outline-variant); border-radius: 10px; height: 84px; position: relative; }
 #smdWard .w-dt-blank span { position: absolute; top: 6px; left: 10px; font: 600 10.5px var(--w-sans); text-transform: uppercase; letter-spacing: .06em; color: var(--on-surface-variant); }
 
+/* The patient's own copy reuses the pack's styling: both are documents that leave the building and
+   both must be legible in black and white. Only the section headings are new. */
+#smdWard .w-dt-p h3 { margin: 0 0 8px; font-size: 14px; letter-spacing: .01em; }
+#smdWard .w-dt-p h3 + .w-dt-alg { margin-top: 0; }
+
 @media print {
   /* The pack is the page. Everything else in the app is hidden, and the shell's fixed positioning is
      undone so more than the first screenful reaches the paper. */
