@@ -99,7 +99,15 @@ async function loadStewardMDRulePack(opts) {
   const raw = JSON.parse(await readFile(interactionRulesPath, "utf8"));
   const allergySeed = includeSeeds ? JSON.parse(await readFile(allergySeedPath, "utf8")) : { allergyClasses: {}, crossReactivity: [] };
 
-  return buildRulePack(raw, allergySeed, opts);
+  // Same curated brand map the Worker uses (functions/_wardsynq/rulepack.js), so the test suite and
+  // the EMR compile the identical pack rather than each having a subtly different one. Dynamic, for
+  // the same reason node:fs is: this module is also parsed in a browser.
+  let brands = opts.brands;
+  if (!brands) {
+    try { brands = (await import("../../brand-generics.js")).default.BRANDS; } catch { brands = null; }
+  }
+
+  return buildRulePack(raw, allergySeed, { ...opts, brands });
 }
 
 /**
@@ -115,11 +123,20 @@ function buildRulePack(raw, allergySeed, opts) {
   allergySeed = allergySeed || { allergyClasses: {}, crossReactivity: [] };
   const includeSeeds = opts.includeUnapprovedSeeds !== false;
 
+  const firstWord = buildFirstWordAliases(raw);
+  // raw.brands travels with the interaction data and is always used. The curated antibiotic map
+  // (brand-generics.js) is passed in by the caller so this file stays isomorphic; the browser build
+  // falls back to the global that file's IIFE already publishes.
+  const brandMap = opts.brands || (typeof globalThis !== "undefined" && globalThis.SMD_BRANDS && globalThis.SMD_BRANDS.BRANDS) || null;
+  const brandAliases = buildBrandAliases(raw, brandMap, firstWord);
+
   return compileRulePack({
-    version: `stewardmd-${raw.version || "unknown"}${includeSeeds ? "+seed" : ""}`,
+    version: `stewardmd-${raw.version || "unknown"}${includeSeeds ? "+seed" : ""}${Object.keys(brandAliases).length ? "+brands" : ""}`,
     generatedAt: raw.generated || null,
     generics: raw.generics || [],
-    aliases: buildFirstWordAliases(raw),
+    // First-word aliases first, so a curated brand key can never quietly displace the RxNorm
+    // reconciliation the engine already depends on.
+    aliases: { ...brandAliases, ...firstWord },
     drugClasses: raw.drugClasses || {},
     interactions: (raw.rules || []).map(mapInteractionRule),
     allergyClasses: allergySeed.allergyClasses || {},
@@ -169,6 +186,87 @@ function buildFirstWordAliases(raw) {
   return aliases;
 }
 
+/**
+ * Brand name -> pack generic, from the app's OWN curated map (brand-generics.js).
+ *
+ * WHY. The interaction pack is RxNorm-derived and contains molecules, not brands. Indian OPD
+ * prescribing is overwhelmingly by brand: "Augmentin 625", "Monocef 1g", "Amoxiclav". None of those
+ * resolved, so NO allergy and NO interaction check ran for them - a penicillin-allergic patient
+ * could be prescribed Augmentin with the engine reporting nothing at all. This is not new clinical
+ * content: brand-generics.js is the single curated map the app already trusts for rx-validity's
+ * antibiotic / habit-forming / scheduled classification.
+ *
+ * THE SAME REFUSAL TO GUESS as buildFirstWordAliases above, applied to combinations. A brand is
+ * aliased ONLY when exactly ONE of its molecules is known to this pack:
+ *
+ *   - one known    "augmentin" -> [amoxicillin, clavulanate], and only amoxicillin is in the pack.
+ *                  Aliasing to it loses nothing: clavulanate has no rules to check against here.
+ *                  This is the common case - 170 of 206 brands, including every amoxicillin brand.
+ *   - two+ known   "bactrim" -> [trimethoprim, sulfamethoxazole], BOTH in the pack. Aliasing to
+ *                  either one would silently drop a real, checkable component, so no alias is made
+ *                  and the drug stays unresolved - which the engine now REPORTS as unchecked rather
+ *                  than passing off as clean. 24 of 206 brands. Checking every component of a
+ *                  combination needs the engine to resolve a drug to a LIST, which it does not yet
+ *                  do; that is the honest gap this leaves, visible instead of silent.
+ *   - none known   nothing to check either way.
+ *
+ * @returns {Record<string,string>} brand -> canonical pack generic
+ */
+function buildBrandAliases(raw, brandMap, firstWordAliases) {
+  const generics = new Set((raw.generics || []).map((g) => String(g).toLowerCase()));
+  for (const g of Object.keys(raw.drugClasses || {})) generics.add(g.toLowerCase());
+
+  /* A CLASS IS NOT A BRAND. Both maps were built for SEARCH, where typing "nsaid" and being shown
+   * diclofenac is a feature. As a safety alias it is a fabrication: "the patient is on an NSAID" is
+   * not "the patient is on diclofenac", and resolving it that way would check the wrong drug's
+   * interactions and miss the right one's. The pack already knows which tokens name classes, so the
+   * refusal is mechanical rather than a judgement call - it removes exactly arb, doac, insulin,
+   * lmwh, nsaid, ppi and statin, and keeps all 285 real brands.
+   *
+   * Sub-4-character keys go too ("asa", "bb", "h2", "ntg"): resolveGeneric only considers tokens of
+   * 4+ characters anyway, so they could only ever match a drug field that is EXACTLY the
+   * abbreviation, and buildFirstWordAliases above already uses the same threshold. */
+  const classTokens = new Set();
+  for (const g of Object.keys(raw.drugClasses || {})) {
+    for (const c of raw.drugClasses[g] || []) classTokens.add(String(c).toLowerCase());
+  }
+  const rejected = (key) => key.length < 4 || classTokens.has(key) || generics.has(key);
+
+  const resolve = (m) => {
+    const k = String(m || "").toLowerCase().trim();
+    if (!k) return null;
+    if (generics.has(k)) return k;
+    return (firstWordAliases && firstWordAliases[k]) || null;
+  };
+
+  const out = {};
+
+  /* Source 1: `raw.brands` - 292 pairs that have been sitting inside data/interaction-rules.json all
+   * along. This adapter already received them (they are on the same object as `generics` and
+   * `drugClasses`) and simply never read them. Flat alias -> one generic, so no combination question
+   * arises. Covers the everyday non-antibiotic brands: Crocin, Dolo, Calpol, Brufen, Combiflam,
+   * Voveran, Atorva, Amlokind. */
+  for (const brand of Object.keys(raw.brands || {})) {
+    const key = String(brand).toLowerCase().trim();
+    if (!key || rejected(key)) continue;
+    const target = resolve(raw.brands[brand]);
+    if (target) out[key] = target;
+  }
+
+  /* Source 2: brand-generics.js - the curated antibiotic map, whose values are ARRAYS because a
+   * combination is an antibiotic if any component is. Same refusal to guess as above. */
+  for (const brand of Object.keys(brandMap || {})) {
+    const key = String(brand).toLowerCase().trim();
+    if (!key || rejected(key)) continue;
+    const molecules = brandMap[brand];
+    if (!Array.isArray(molecules)) continue;
+    const known = [...new Set(molecules.map(resolve).filter(Boolean))];
+    if (known.length !== 1) continue;                 // 0: nothing checkable. 2+: refuse to drop one.
+    out[key] = known[0];
+  }
+  return out;
+}
+
 /** Maps one StewardMD rule record into the engine's interaction shape. */
 function mapInteractionRule(rule) {
   return {
@@ -183,4 +281,4 @@ function mapInteractionRule(rule) {
   };
 }
 
-export { loadStewardMDRulePack, buildRulePack, mapInteractionRule, buildFirstWordAliases, DOSE_LIMITS_SEED, SEVERITY_MAP };
+export { loadStewardMDRulePack, buildRulePack, mapInteractionRule, buildFirstWordAliases, buildBrandAliases, DOSE_LIMITS_SEED, SEVERITY_MAP };
