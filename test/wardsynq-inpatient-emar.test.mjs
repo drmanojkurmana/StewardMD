@@ -1199,6 +1199,97 @@ test("the bed board says who is where, and never confuses 'no free beds' with 'w
   assert.equal(withUnplaced.wards[0].unplaced.length, 1);
 });
 
+/* ---- the care plan -------------------------------------------------------------------------------------
+ *
+ * `CarePlan` has been in the model and the record service's allowed types since P0 and NOTHING HAS
+ * EVER WRITTEN ONE - the same pattern `Condition` had before the problem list.
+ */
+
+test("a plan needs measurable goals, and progress is recorded rather than computed", async () => {
+  seedHospital();
+  const { adm } = await admittedPatientOnDrug();
+
+  // An absent plan is STATED, not returned as an empty one: "no plan has been written" and "a plan
+  // with no goals" are different, and the first is what a ward acts on.
+  const none = await as(NURSE, `/ward/plan?orgId=${ORG}&encounterId=${adm.encounterId}`);
+  assert.equal(none.__status, 200, JSON.stringify(none));
+  assert.equal(none.exists, false);
+  assert.equal(none.plan, null);
+
+  // A plan of wishes is refused.
+  const wishes = await as(NURSE, "/ward/care-plan", "POST", { orgId: ORG, encounterId: adm.encounterId, goals: [{ title: "Improve mobility" }] });
+  assert.equal(wishes.__status, 422);
+  assert.equal(wishes.error, "no_goals");
+
+  const plan = await as(NURSE, "/ward/care-plan", "POST", {
+    orgId: ORG, encounterId: adm.encounterId, title: "Recovery from pneumonia",
+    reviewBy: "2026-09-09T00:00:00.000Z",
+    goals: [
+      { title: "Mobilise", measure: "Walk to the bathroom with one assistant, by Friday" },
+      { title: "Oxygen", measure: "Saturations above 94% on air for 24 hours" },
+    ],
+  });
+  assert.equal(plan.__status, 200, JSON.stringify(plan));
+  assert.equal(plan.activeGoals, 2);
+  assert.ok(plan.goals.every((g) => g.setBy), "each goal names who set it");
+
+  // Progress is somebody's decision, with their name and the date on it.
+  const met = await as(NURSE, "/ward/progress", "POST", { orgId: ORG, encounterId: adm.encounterId, key: "mobilise", state: "met" });
+  assert.equal(met.__status, 200, JSON.stringify(met));
+  assert.equal(met.counts.met, 1);
+  assert.ok(met.goals.find((g) => g.key === "mobilise").decidedBy);
+
+  // "Not met" is a real outcome and needs a reason - it is the one somebody asks about later.
+  assert.equal((await as(NURSE, "/ward/progress", "POST", { orgId: ORG, encounterId: adm.encounterId, key: "oxygen", state: "not-met" })).error, "note_required");
+  const notMet = await as(NURSE, "/ward/progress", "POST", { orgId: ORG, encounterId: adm.encounterId, key: "oxygen", state: "not-met", note: "Still needs 2L via nasal cannulae." });
+  assert.equal(notMet.counts["not-met"], 1);
+
+  // A decision about a goal that is not on the plan is refused, never appended.
+  assert.equal((await as(NURSE, "/ward/progress", "POST", { orgId: ORG, encounterId: adm.encounterId, key: "nutrition", state: "met" })).error, "goal_not_on_plan");
+});
+
+test("a second pass keeps the progress already recorded, and a stale plan says so", async () => {
+  seedHospital();
+  const { adm } = await admittedPatientOnDrug();
+  const goals = [{ title: "Mobilise", measure: "Walk to the bathroom by Friday" }];
+  await as(NURSE, "/ward/care-plan", "POST", { orgId: ORG, encounterId: adm.encounterId, goals, reviewBy: "2020-01-01T00:00:00.000Z" });
+  await as(NURSE, "/ward/progress", "POST", { orgId: ORG, encounterId: adm.encounterId, key: "mobilise", state: "met" });
+
+  /* The night shift adds a goal. What the day shift decided must not reset - and a goal that has
+   * DISAPPEARED from the list is dropped, because somebody removed it deliberately. */
+  const second = await as(NURSE, "/ward/care-plan", "POST", {
+    orgId: ORG, encounterId: adm.encounterId,
+    goals: [...goals, { title: "Nutrition", measure: "Eating half of each meal by Monday" }],
+  });
+  assert.equal(second.counts.met, 1, "the decision survived the second pass");
+  assert.equal(second.counts.active, 1);
+
+  // A plan nobody has reviewed says it is stale rather than looking current.
+  const read = await as(DOCTOR, `/ward/plan?orgId=${ORG}&encounterId=${adm.encounterId}`);
+  assert.equal(read.plan.review.state, "stale");
+  assert.ok(read.plan.review.overdueDays > 0);
+
+  // Reviewing it is its own act, with a name and a date, and that is what makes "stale" mean anything.
+  const reviewed = await as(NURSE, "/ward/progress", "POST", { orgId: ORG, encounterId: adm.encounterId, review: true, reviewBy: "2030-01-01T00:00:00.000Z" });
+  assert.equal(reviewed.reviewed, true);
+  assert.ok(reviewed.lastReviewedBy);
+  assert.equal((await as(DOCTOR, `/ward/plan?orgId=${ORG}&encounterId=${adm.encounterId}`)).plan.review.state, "current");
+});
+
+test("care planning is nursing work, and the plan orders nothing", async () => {
+  seedHospital();
+  const { adm } = await admittedPatientOnDrug();
+  const body = { orgId: ORG, encounterId: adm.encounterId, goals: [{ title: "Mobilise", measure: "Walk by Friday" }] };
+  assert.equal((await as(NURSE, "/ward/care-plan", "POST", body)).__status, 200);
+  assert.equal((await as(DOCTOR, "/ward/care-plan", "POST", body)).__status, 200);
+  assert.equal((await as(PHARM, "/ward/care-plan", "POST", body)).__status, 403);
+  assert.equal((await as(LABTECH, `/ward/plan?orgId=${ORG}&encounterId=${adm.encounterId}`)).__status, 403);
+  // A plan says what is being aimed at; it writes no order of any kind.
+  const orders = await RECORD.byPatient(TENANT_ROW.id, "ServiceRequest", adm.patientId);
+  assert.equal(orders.length, 0);
+  assert.equal((await as(NURSE, "/ward/progress", "POST", { orgId: ORG, encounterId: adm.encounterId })).error, "nothing_to_record");
+});
+
 /* ---- scheduling --------------------------------------------------------------------------------------
  *
  * Every discharge summary this system writes can say "review in clinic in one week", and until now

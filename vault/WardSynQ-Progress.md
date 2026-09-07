@@ -21,7 +21,7 @@ Updated: 2026-09-07 (PRs #887, #889, #890, #892, #894, #895, #897 pharmacy verif
 | 7 | Problem list (Problem List) | 4 | 70 | #887. Coded/text, provisional default, versioned resolve, feeds the summary. Read-only on the ward screen; no entry UI. |
 | 8 | Inpatient admission / ward (ADT) | 7 | 90 | #889. Admit, ward list, ward vitals, discharge, **with a UI**. Transfer with a bed-collision refusal, and a bed board. No admission scheduling. |
 | 9 | eMAR / medication administration (Willow Inpatient) | 8 | 90 | #889 + #890. State machine, five rights, barcode scan, weight-based refusal, AI blocked, **UI**, **and a real schedule**. Plus medicines reconciliation on admission. No high-alert witness config. |
-| 10 | Nursing documentation (Flowsheets) | 5 | 75 | #895. Vitals, fluid balance with charted-hour gaps, SBAR shift handover with a read-back loop. No structured assessments, no care plans. |
+| 10 | Nursing documentation (Flowsheets) | 5 | 90 | #895. Vitals, fluid balance with charted-hour gaps, SBAR shift handover with a read-back loop, and care plans with measurable goals and a staleness check. No structured risk assessments (falls, pressure, MUST). |
 | 11 | Discharge + summary (Discharge Navigator) | 4 | 90 | #892. Assembler, per-section clinician correction with recorded provenance, immutable signed version, outstanding-items review, A4 print, and the home-medicine reconciliation. Not device-proven. |
 | 12 | Results — lab / rad (Beaker, Radiant) | 6 | 85 | #894 + #900. Native resulting by a `lab` role with its own authority, corrections that keep the prior value, and a closed critical-value loop. No radiology reporting, no autoverification, no delta checks. |
 | 13 | Pharmacy verification + inventory (Willow) | 5 | 55 | #897. Verification as its OWN authority with a narrow grant: reads what a check needs, writes only the verification. No inventory, no dispensing. |
@@ -33,7 +33,7 @@ Updated: 2026-09-07 (PRs #887, #889, #890, #892, #894, #895, #897 pharmacy verif
 | 19 | Patient portal (MyChart) | 3 | 0 | Not built. |
 | 20 | Deployment / uptime / DR (on-prem, HA) | 3 | 25 | Cloudflare edge + D1, live domain. No on-prem, no DR drill, no downtime procedures. |
 
-**Weighted total: 71.2%.**
+**Weighted total: 72.0%.**
 
 The total is the weight-times-percent sum of the table above, divided by 100. It is COMPUTED from
 these rows, not asserted: earlier revisions of this file carried an eyeballed number that had drifted
@@ -58,8 +58,8 @@ about two points high (the 44% baseline was 41.5, and 53% was 50.8). If a row ch
    Observation write technically permits a vital sign as well as a result. The resulting route
    stamps `laboratory` and a lab actor has no clinical screen, but that is a narrower control than
    the scope itself. Closing it properly is a change to the store's authorisation model.
-3. **E-prescribing transmission, care plans, note templates** - each a self-contained gap in an
-   otherwise wired domain.
+3. **E-prescribing transmission, note templates, structured risk assessments** - each a
+   self-contained gap in an otherwise wired domain.
 4. **Firing counts for the CDSS.** Overrides are now recorded per rule, but nothing counts how
    often a rule FIRES - so the override RATE, which is the number that actually identifies a rule
    training people to click through, still has no denominator. The report says `null` rather than

@@ -69,6 +69,7 @@ import { overrideReport } from "../../_wardsynq/override-analytics.js";
 import { listOrderSets, prepareOrderSet, recordApplication } from "../../_wardsynq/order-sets.js";
 import { recordConsent, withdrawConsent, consentStatus } from "../../_wardsynq/consent.js";
 import { bookAppointment, setAppointmentState, requestFollowUp, listSchedule } from "../../_wardsynq/scheduling.js";
+import { setCarePlan, recordProgress, readCarePlan } from "../../_wardsynq/care-plan.js";
 import { recordAllergiesFromAssessment } from "../../_wardsynq/migrate-allergy.js";
 
 // The Encounter migration's one shared call site. Every hook below (ticket add, import, a terminal
@@ -484,6 +485,9 @@ export async function onRequest(context) {
          * decision that the patient needs to be seen again - so that one is emr.treat. */
         book: CAPS.QUEUE_ADD, appointment: CAPS.QUEUE_ADD, schedule_: CAPS.QUEUE_VIEW,
         "follow-up": CAPS.EMR_TREAT, diary: CAPS.QUEUE_VIEW,
+        /* The care plan is nursing work: setting goals and recording whether they were met is what
+         * a nurse does all shift, so emr.vitals. Reading it is emr.view. */
+        "care-plan": CAPS.EMR_VITALS, progress: CAPS.EMR_VITALS, plan: CAPS.EMR_VIEW,
         // Closing a stay is the administrative act QUEUE_ADD already covers for opening one.
         // The summary is a clinical document: drafting and signing it are EMR_TREAT.
         discharge: CAPS.QUEUE_ADD, "discharge-summary": CAPS.EMR_TREAT, "sign-discharge-summary": CAPS.EMR_TREAT,
@@ -566,6 +570,18 @@ export async function onRequest(context) {
               types: (url.searchParams.get("_type") || "").split(",").map((t) => t.trim()).filter(Boolean),
             });
         return json(r.ok ? (r.bundle || r.resource) : r.outcome, r.status, request);
+      }
+      if (sub === "care-plan" && method === "POST") {
+        const r = await setCarePlan(request, env, { ...deps, encounterId: body.encounterId, title: body.title, goals: body.goals, reviewBy: body.reviewBy, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "progress" && method === "POST") {
+        const r = await recordProgress(request, env, { ...deps, encounterId: body.encounterId, key: body.key, title: body.title, state: body.state, note: body.note, review: !!body.review, reviewBy: body.reviewBy, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "plan" && method === "GET") {
+        const r = await readCarePlan(request, env, { ...deps, encounterId: url.searchParams.get("encounterId") || "" });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "book" && method === "POST") {
         const r = await bookAppointment(request, env, { ...deps, patientId: body.patientId, clinicianId: body.clinicianId, startAt: body.startAt, minutes: body.minutes, reason: body.reason, requestId: body.requestId, overbook: !!body.overbook, overbookReason: body.overbookReason, idempotencyKey: body.idempotencyKey || null });
