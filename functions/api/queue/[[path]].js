@@ -98,6 +98,7 @@ import { exportPage, recordBackupRun, backupStatus } from "../../_wardsynq/backu
 import { chargesForPatient } from "../../_wardsynq/charge-capture.js";
 import { recordMovement, stockLevels } from "../../_wardsynq/stock.js";
 import { possibleDuplicates } from "../../_wardsynq/mpi-view.js";
+import { enrolPatient, redeemCode, portalRead, revokeAccess } from "../../_wardsynq/patient-access.js";
 import { listTools as listRiskTools, recordAssessment as recordRiskAssessment, completeAction as completeRiskAction, listAssessments as listRiskAssessments } from "../../_wardsynq/risk-assessment.js";
 import { recordAllergiesFromAssessment } from "../../_wardsynq/migrate-allergy.js";
 
@@ -584,6 +585,12 @@ export async function onRequest(context) {
          * their record is a clinical act, not a clerical one, and the person who does it has to be
          * the person who can answer the questions it produces. */
         "patient-copy": CAPS.EMR_VIEW, "patient-release": CAPS.EMR_TREAT,
+        /* Enrolling a patient for their own access, and ending it. EMR_TREAT: enrolment is where the
+         * whole chain of trust is established and it happens with the patient in front of you, which
+         * is the same bar as deciding they are ready to be told what is in their record. The
+         * patient's own two routes are NOT here - they live under /api/portal, outside the block
+         * that assumes an employee. */
+        "patient-enrol": CAPS.EMR_TREAT, "patient-revoke": CAPS.EMR_TREAT,
         /* THE BACKUP EXPORT HANDS OVER AN ENTIRE HOSPITAL. It deliberately bypasses the per-actor
          * read scoping every other route obeys, because a backup filtered by somebody's permissions
          * restores into a chart with holes in it. So no clinical capability reaches it at any dose:
@@ -866,6 +873,14 @@ export async function onRequest(context) {
       }
       if (sub === "backup-status" && method === "GET") {
         const r = await backupStatus(request, env, { ...deps, rpoMinutes: (wsqCfg && wsqCfg.rpoMinutes) || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "patient-enrol" && method === "POST") {
+        const r = await enrolPatient(request, env, { ...deps, patientId: body.patientId, issuedTo: body.issuedTo, identifiedBy: body.identifiedBy, config: (wsqCfg && wsqCfg.patientAccess) || null, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "patient-revoke" && method === "POST") {
+        const r = await revokeAccess(request, env, { ...deps, grantId: body.grantId, reason: body.reason, config: (wsqCfg && wsqCfg.patientAccess) || null });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "patient-copy" && method === "GET") {
