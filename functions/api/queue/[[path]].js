@@ -85,6 +85,7 @@ import { requestAdmission, closeAdmissionRequest, admissionWaitingList } from ".
 import { registryReport } from "../../_wardsynq/registry.js";
 import { chartWound, listWounds } from "../../_wardsynq/wound.js";
 import { bookResource, setBookingState, resourceSchedule } from "../../_wardsynq/resource-booking.js";
+import { flowsheet } from "../../_wardsynq/flowsheet-view.js";
 import { listTools as listRiskTools, recordAssessment as recordRiskAssessment, completeAction as completeRiskAction, listAssessments as listRiskAssessments } from "../../_wardsynq/risk-assessment.js";
 import { recordAllergiesFromAssessment } from "../../_wardsynq/migrate-allergy.js";
 
@@ -528,6 +529,8 @@ export async function onRequest(context) {
         collect: CAPS.EMR_VITALS, "specimen-outcome": CAPS.EMR_VITALS, collections: CAPS.EMR_VIEW,
         // Charting a wound is nursing work, the same authority as a vital or a fluid entry.
         wound: CAPS.EMR_VITALS, wounds: CAPS.EMR_VIEW,
+        // Reading the flowsheet is reading the chart. It writes nothing.
+        flowsheet: CAPS.EMR_VIEW,
         // ADT out. Reading a stay in another wire format is still reading a chart, so it needs the
         // authority to read one. It writes nothing and there is no inbound listener.
         adt: CAPS.EMR_VIEW, oru: CAPS.EMR_VIEW,
@@ -721,6 +724,14 @@ export async function onRequest(context) {
         const r = await adtForEncounter(request, env, {
           ...deps, encounterId: url.searchParams.get("encounterId") || "",
           event: url.searchParams.get("event") || "", sendingFacility: (wOrg && wOrg.code) || "",
+        });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "flowsheet" && method === "GET") {
+        const r = await flowsheet(request, env, {
+          ...deps, patientId: url.searchParams.get("patientId") || "",
+          from: url.searchParams.get("from") || "", to: url.searchParams.get("to") || "", hours: url.searchParams.get("hours") || "",
+          rows: (wsqCfg && wsqCfg.flowsheetRows) || null,
         });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
