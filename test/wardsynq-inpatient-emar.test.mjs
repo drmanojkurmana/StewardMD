@@ -16,6 +16,7 @@ registerHooks({ resolve(spec, ctx, next) { const r = next(spec, ctx); if (r.url.
 import { test, mock } from "node:test";
 import assert from "node:assert/strict";
 import { webcrypto, createHash } from "node:crypto";
+import { readFileSync } from "node:fs";
 if (!globalThis.crypto) globalThis.crypto = webcrypto;
 
 /* Import order matters: a static import is hoisted, so anything reaching _fbfirestore.js must be
@@ -509,6 +510,19 @@ test("a clinician's corrections survive, and only an inpatient stay can be disch
   assert.equal(edited.sections.assessment, "Community-acquired pneumonia, resolved.", "the clinician's words are kept verbatim");
   assert.match(edited.sections.admission, /Ward: Medical A/, "and the assembled sections they did not touch survive");
 
+  /* AND THEY SURVIVE A RE-DRAFT. This is the one that matters: the assembler re-reads the record on
+   * every draft, so without this a clinician's correction is silently reverted to the assembled text
+   * the next time anybody opens the summary - including by the screen simply loading it. A
+   * correction that a refresh can undo is not a correction. */
+  const again = await as(DOCTOR, "/ward/discharge-summary", "POST", { orgId: ORG, encounterId: adm.encounterId });
+  assert.equal(again.sections.assessment, "Community-acquired pneumonia, resolved.", "a re-draft does not revert the clinician");
+  assert.equal(again.sections.plan, "Oral amoxicillin 5 days, review in clinic.");
+  assert.match(again.sections.admission, /Ward: Medical A/, "and the untouched sections still refresh from the record");
+
+  // The record says WHICH sections a clinician wrote, so a reader can tell those apart from the
+  // assembled ones. Nothing else can distinguish them: the stored note is just text.
+  assert.deepEqual([...(again.editedSections || [])].sort(), ["assessment", "plan"]);
+
   // An OPD ticket encounter is not an admission.
   const S = await as(DOCTOR, `/session?hospitalId=${ORG}`);
   const T = await as(DOCTOR, "/ticket", "POST", { sessionId: S.session.id, name: "OPD Testcase", mobile: "9876500099", mrn: "SMD-WARD01-00099", visitType: "new" });
@@ -516,6 +530,90 @@ test("a clinician's corrections survive, and only an inpatient stay can be disch
   const bad = await as(DOCTOR, "/ward/discharge", "POST", { orgId: ORG, encounterId: opdEnc });
   assert.equal(bad.__status, 409);
   assert.equal(bad.error, "not_an_admission");
+});
+
+test("the summary can be READ without writing one, and it reports what is still outstanding", async () => {
+  seedHospital();
+  const { adm, ord } = await admittedPatientOnDrug();
+  await as(DOCTOR, "/ward/problem", "POST", { orgId: ORG, problem: { patientId: adm.patientId, encounterId: adm.encounterId, display: "Query sepsis" } });
+
+  const read = await as(NURSE, `/ward/discharge-summary?orgId=${ORG}&encounterId=${adm.encounterId}`);
+  assert.equal(read.__status, 200, JSON.stringify(read));
+  assert.equal(read.stored, null, "no draft exists yet, and reading did not create one");
+  assert.equal((await RECORD.byPatient(TENANT_ROW.id, "ClinicalNote", adm.patientId)).length, 0, "reading WRITES NOTHING");
+  assert.match(read.assembled.admission, /Ward: Medical A/, "but the record's own account is available to show");
+  assert.equal(read.encounter.status, "in-progress");
+
+  // Outstanding items are surfaced BEFORE anyone signs, not discovered afterwards.
+  const kinds = read.pending.map((p) => p.kind);
+  assert.ok(kinds.includes("medication"), "an active order is a decision somebody has to have made");
+  assert.ok(read.pending.some((p) => p.kind === "problem" && p.display === "Query sepsis"), "an unconfirmed diagnosis is unfinished business");
+  assert.ok(read.pending.some((p) => p.kind === "medication" && p.id === ord.orderId));
+
+  // A dose left mid-flight is outstanding too.
+  await as(NURSE, "/ward/mar", "POST", { orgId: ORG, action: "verify", orderId: ord.orderId, dueAt: DUE, patient: { id: adm.patientId } });
+  const again = await as(NURSE, `/ward/discharge-summary?orgId=${ORG}&encounterId=${adm.encounterId}`);
+  assert.ok(again.pending.some((p) => p.kind === "dose" && p.status === "verified"), "a started, unfinished dose");
+});
+
+test("the read shows a clinician's words BESIDE the record's, so the two can never be confused", async () => {
+  seedHospital();
+  const { adm } = await admittedPatientOnDrug();
+  await as(DOCTOR, "/ward/discharge", "POST", { orgId: ORG, encounterId: adm.encounterId });
+  await as(DOCTOR, "/ward/discharge-summary", "POST", {
+    orgId: ORG, encounterId: adm.encounterId, sections: { plan: "Review in clinic in one week." },
+  });
+
+  const read = await as(DOCTOR, `/ward/discharge-summary?orgId=${ORG}&encounterId=${adm.encounterId}`);
+  assert.equal(read.stored.sections.plan, "Review in clinic in one week.", "what will be signed");
+  assert.equal(read.assembled.plan, "Not recorded.", "and what the record itself says, unchanged");
+  assert.deepEqual(read.stored.editedSections, ["plan"], "named, so a reader is never left to guess which is which");
+  assert.equal(read.stored.signed, false);
+  assert.equal(read.stored.signedBy, null);
+
+  // A correction can be TAKEN BACK: matching the assembled text again returns the section to
+  // tracking the record, rather than freezing it at a value that only happens to agree today.
+  const reverted = await as(DOCTOR, "/ward/discharge-summary", "POST", {
+    orgId: ORG, encounterId: adm.encounterId, sections: { plan: "Not recorded." },
+  });
+  assert.deepEqual(reverted.editedSections, [], "agreement is not an override");
+});
+
+test("a signed summary is immutable, keeps its provenance, and cannot be redrafted", async () => {
+  seedHospital();
+  const { adm } = await admittedPatientOnDrug();
+  await as(DOCTOR, "/ward/discharge", "POST", { orgId: ORG, encounterId: adm.encounterId });
+  await as(DOCTOR, "/ward/discharge-summary", "POST", { orgId: ORG, encounterId: adm.encounterId, sections: { plan: "Discharge on oral antibiotics." } });
+  const signed = await as(DOCTOR, "/ward/sign-discharge-summary", "POST", { orgId: ORG, encounterId: adm.encounterId });
+  assert.equal(signed.__status, 200, JSON.stringify(signed));
+  assert.deepEqual(signed.editedSections, ["plan"], "signing does not erase whose words these were");
+
+  const read = await as(NURSE, `/ward/discharge-summary?orgId=${ORG}&encounterId=${adm.encounterId}`);
+  assert.equal(read.stored.signed, true);
+  assert.ok(read.stored.signedBy, "and it names who signed it");
+  assert.deepEqual(read.stored.editedSections, ["plan"]);
+
+  // A correction to a signed document is a new signed version, never a quiet redraft of this one.
+  const redraft = await as(DOCTOR, "/ward/discharge-summary", "POST", { orgId: ORG, encounterId: adm.encounterId, sections: { plan: "Something else." } });
+  assert.equal(redraft.__status, 409);
+  assert.equal(redraft.error, "already_signed");
+  assert.equal((await RECORD.latest(TENANT_ROW.id, "ClinicalNote", read.stored.noteId)).sections.plan, "Discharge on oral antibiotics.", "the signed text did not move");
+});
+
+test("a nurse may read the summary and may NOT author or sign one", async () => {
+  seedHospital();
+  const { adm } = await admittedPatientOnDrug();
+  const read = await as(NURSE, `/ward/discharge-summary?orgId=${ORG}&encounterId=${adm.encounterId}`);
+  assert.equal(read.__status, 200);
+  assert.equal(read.canAuthor, false, "and the screen is told, so it never offers her a Sign button that must fail");
+  assert.equal((await as(NURSE, "/ward/discharge-summary", "POST", { orgId: ORG, encounterId: adm.encounterId })).__status, 403);
+  assert.equal((await as(NURSE, "/ward/sign-discharge-summary", "POST", { orgId: ORG, encounterId: adm.encounterId })).__status, 403);
+  assert.equal((await as(DOCTOR, `/ward/discharge-summary?orgId=${ORG}&encounterId=${adm.encounterId}`)).canAuthor, true);
+
+  // Identity is on the document, and an unmerged trauma record is never silently confirmed.
+  assert.equal(read.patient.name, "Ward Testcase");
+  assert.ok(read.patient.mrn);
+  assert.equal(read.patient.provisional, false);
 });
 
 /* ---- problem list -------------------------------------------------------------------------------
@@ -672,4 +770,120 @@ test("reading the round is a view, and it grants nothing: it cannot move a dose"
   const s = await as(NURSE, "/ward/schedule" + q);
   const bad = await as(PHARM, "/ward/mar", "POST", { orgId: ORG, action: "verify", orderId: s.due[0].orderId, dueAt: s.due[0].dueAt, patient: { id: adm.patientId } });
   assert.equal(bad.__status, 403);
+});
+
+/* ---- the discharge screen, end to end -----------------------------------------------------------
+ *
+ * The real discharge.js rendered against the REAL server payload, on a patient who was actually
+ * admitted, treated and discharged through these routes. A screen tested only against a fixture is
+ * tested against my idea of the contract rather than the contract.
+ */
+
+test("the discharge screen renders the real record, start to finish", async () => {
+  seedHospital();
+  const { reg, adm, ord, patient, scan } = await admittedPatientOnDrug();
+
+  // A real stay: a diagnosis, an allergy, doses given, then discharge.
+  await as(DOCTOR, "/ward/problem", "POST", { orgId: ORG, problem: { patientId: adm.patientId, encounterId: adm.encounterId, code: "J18.9", codeSystem: "ICD-10", display: "Pneumonia, unspecified organism", verificationStatus: "confirmed" } });
+  const step = (a, x) => as(NURSE, "/ward/mar", "POST", { orgId: ORG, action: a, orderId: ord.orderId, dueAt: DUE, patient, ...(x || {}) });
+  await step("verify"); await step("dispense"); await step("scan", { scan }); await step("administer");
+  await as(DOCTOR, "/ward/discharge", "POST", { orgId: ORG, encounterId: adm.encounterId, disposition: "home" });
+
+  // 1. The screen opens by READING. Nothing is written by looking at a patient.
+  const read = await as(DOCTOR, `/ward/discharge-summary?orgId=${ORG}&encounterId=${adm.encounterId}`);
+  assert.equal(read.__status, 200, JSON.stringify(read));
+  assert.equal(read.stored, null);
+  assert.equal(read.canAuthor, true);
+
+  // Render the REAL ui against the REAL payload, exactly as the screen's load() does.
+  const SRC = readFileSync(new URL("../discharge.js", import.meta.url), "utf8");
+  const win = {};
+  const doc = { getElementById: () => null, createElement: () => ({ classList: { add() {}, remove() {} } }), body: { appendChild() {} } };
+  new Function("window", "document", "location", "localStorage", SRC)(win, doc, { search: "" }, { getItem: () => null, setItem: () => {} });
+  const D = win.DISCHARGE;
+  const stateFor = (r, over) => ({
+    orgId: ORG, encounterId: adm.encounterId, patientId: r.patientId,
+    patient: r.patient, encounter: r.encounter, assembled: r.assembled,
+    sections: r.stored ? r.stored.sections : r.assembled,
+    edited: r.stored ? r.stored.editedSections : [],
+    signed: !!(r.stored && r.stored.signed), signedBy: r.stored && r.stored.signedBy,
+    version: r.stored && r.stored.version, recordedAt: r.stored && r.stored.recordedAt,
+    hasDraft: !!r.stored, pending: r.pending, canAuthor: r.canAuthor,
+    editing: "", compare: {}, busy: false, loaded: true, err: "", note: "", refusal: null, ...(over || {}),
+  });
+  const view = (r, over) => D._render(stateFor(r, over));
+
+  const html = view(read);
+  assert.match(html, /Ward Testcase/, "the patient is named on the document");
+  assert.match(html, new RegExp(reg.mrn), "with their MRN");
+  assert.match(html, /Discharged/);
+  assert.match(html, /Medical A, bed 12/);
+  assert.match(html, /Pneumonia, unspecified organism/, "the diagnosis reached the summary from the problem list");
+  assert.match(html, /Paracetamol 500mg/, "and the medication from the orders");
+  assert.match(html, /doses administered on this admission: 1/, "with what was actually GIVEN, not just ordered");
+  assert.match(html, /Nothing here is generated or inferred/);
+  assert.match(html, /From record/);
+  assert.ok(!/Clinician edited/.test(html), "nothing has been edited yet");
+
+  // 2. The clinician corrects one section. The others keep tracking the record.
+  const edited = await as(DOCTOR, "/ward/discharge-summary", "POST", {
+    orgId: ORG, encounterId: adm.encounterId,
+    sections: { plan: "Oral amoxicillin for five days. Review in clinic in one week." },
+  });
+  assert.equal(edited.__status, 200, JSON.stringify(edited));
+  const read2 = await as(DOCTOR, `/ward/discharge-summary?orgId=${ORG}&encounterId=${adm.encounterId}`);
+  const html2 = view(read2);
+  assert.match(html2, /Clinician edited/);
+  assert.match(html2, /Review in clinic in one week\./);
+  assert.match(html2, /Corrected by a clinician: plan and follow-up/);
+  assert.match(html2, /Pneumonia, unspecified organism/, "and the untouched sections still carry the record");
+  assert.match(html2, /data-d-act="compare:plan"/, "with the record's own version one tap away");
+  // Expanded, both texts are on screen and attributed.
+  assert.match(view(read2, { compare: { plan: true } }), /Assembled from the record/);
+
+  // 3. Sign. The document becomes immutable and every edit affordance disappears.
+  const signed = await as(DOCTOR, "/ward/sign-discharge-summary", "POST", { orgId: ORG, encounterId: adm.encounterId });
+  assert.equal(signed.__status, 200, JSON.stringify(signed));
+  const read3 = await as(DOCTOR, `/ward/discharge-summary?orgId=${ORG}&encounterId=${adm.encounterId}`);
+  const state3 = stateFor(read3); const html3 = D._render(state3);
+  assert.match(html3, /Signed off/);
+  assert.ok(!/data-d-act="edit:/.test(html3), "no edit controls on a signed summary");
+  assert.ok(!/data-d-act="sign"/.test(html3), "and it cannot be signed again");
+  assert.match(html3, /Clinician edited/, "signing kept the provenance");
+  assert.match(html3, /Review in clinic in one week\./, "and the clinician's words");
+
+  // 4. The printed artifact carries the whole document and is marked as signed.
+  const paper = D._printable(state3);
+  assert.match(paper, /Discharge summary/);
+  assert.match(paper, /Ward Testcase/);
+  assert.match(paper, /Review in clinic in one week\./);
+  assert.match(paper, /clinician edited/, "the paper says which words were the clinician's too");
+  assert.match(paper, /Signed by/);
+  assert.ok(!/UNSIGNED DRAFT/.test(paper));
+
+  // 5. A nurse opening the same signed summary reads it and is offered nothing to change.
+  const nurseView = view(await as(NURSE, `/ward/discharge-summary?orgId=${ORG}&encounterId=${adm.encounterId}`));
+  assert.match(nurseView, /Signed off/);
+  assert.ok(!/data-d-act="edit:/.test(nurseView));
+  assert.match(nurseView, /data-d-act="print"/, "but can still print it");
+});
+
+test("an unsigned summary is marked as a draft ON PAPER, so it cannot be mistaken for the real thing", async () => {
+  seedHospital();
+  const { adm } = await admittedPatientOnDrug();
+  await as(DOCTOR, "/ward/discharge", "POST", { orgId: ORG, encounterId: adm.encounterId });
+  const read = await as(DOCTOR, `/ward/discharge-summary?orgId=${ORG}&encounterId=${adm.encounterId}`);
+
+  const SRC = readFileSync(new URL("../discharge.js", import.meta.url), "utf8");
+  const win = {};
+  const doc = { getElementById: () => null, createElement: () => ({ classList: { add() {}, remove() {} } }), body: { appendChild() {} } };
+  new Function("window", "document", "location", "localStorage", SRC)(win, doc, { search: "" }, { getItem: () => null, setItem: () => {} });
+  const draftState = {
+    patient: read.patient, encounter: read.encounter, assembled: read.assembled, sections: read.assembled,
+    edited: [], pending: read.pending, canAuthor: true, signed: false, compare: {}, loaded: true,
+  };
+  win.DISCHARGE._render(draftState);
+  const paper = win.DISCHARGE._printable(draftState);
+  assert.match(paper, /UNSIGNED DRAFT - not a final discharge summary\./);
+  assert.ok(!/Signed by/.test(paper));
 });

@@ -214,7 +214,11 @@
   function chartView(state) {
     var s = state.sel || {};
     return '<div class="w-chart-h"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button>" +
-      "<div><b>" + esc(s.patientId || "") + "</b><small>" + esc(s.ward || "") + (s.bed ? " &middot; bed " + esc(s.bed) : "") + " &middot; admitted " + when(s.admittedAt) + "</small></div></div>" +
+      "<div><b>" + esc(s.patientId || "") + "</b><small>" + esc(s.ward || "") + (s.bed ? " &middot; bed " + esc(s.bed) : "") + " &middot; admitted " + when(s.admittedAt) + "</small></div>" +
+      // The summary is reachable from the patient, not from a menu somewhere else. A planned
+      // discharge is prepared while the patient is still on the ward, so this is not gated on the
+      // stay being closed - the summary screen states plainly when a stay is still open.
+      '<button class="w-btn ghost" data-w-act="summary" title="Discharge summary">' + ms("description") + "Summary</button></div>" +
       problemsCard(state) + vitalsCard() + marCard(state);
   }
 
@@ -328,6 +332,12 @@
       st.err = ""; st.note = ""; st.refusal = null;
       defaultWindow();
       paint(); loadChart(); loadRound(); return;
+    }
+    if (cmd === "summary") {
+      var sel = st.sel; if (!sel) return;
+      if (!(G.DISCHARGE && G.DISCHARGE.open)) { st.err = "The discharge summary is unavailable on this build."; paint(); return; }
+      G.DISCHARGE.open({ orgId: st.orgId, encounterId: sel.encounterId, patientId: sel.patientId });
+      return;
     }
     if (cmd === "vitals") { saveVitals(); return; }
     if (cmd === "round") { st.from = val("wFrom") || st.from; st.to = val("wTo") || st.to; loadRound(); return; }

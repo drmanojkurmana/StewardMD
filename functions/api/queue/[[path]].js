@@ -52,7 +52,7 @@ import { getRulePack } from "../../_wardsynq/rulepack.js";
 // the org and the forced wardsynq migration, these do the governed record write.
 import { admitPatient, listWard, recordWardVitals, createWardMedicationOrder } from "../../_wardsynq/migrate-inpatient.js";
 import { medicationRound, administerStep } from "../../_wardsynq/migrate-emar.js";
-import { draftDischargeSummary, signDischargeSummary, dischargePatient } from "../../_wardsynq/migrate-discharge.js";
+import { draftDischargeSummary, signDischargeSummary, dischargePatient, readDischargeSummary } from "../../_wardsynq/migrate-discharge.js";
 import { recordProblem, listProblems } from "../../_wardsynq/migrate-problem.js";
 import { marSchedule } from "../../_wardsynq/mar-schedule.js";
 import { recordAllergiesFromAssessment } from "../../_wardsynq/migrate-allergy.js";
@@ -429,7 +429,12 @@ export async function onRequest(context) {
        * going near a bedside. The ward-stock model, where the nurse holding the dose walks it
        * through its own states, needs no such grant. Pharmacy verification as a distinct authority
        * is a real feature and is deliberately left to a later pass with its own narrower grant. */
-      const need = sub === "mar" ? CAPS.MED_ADMINISTER : capFor[sub];
+      /* READING the discharge summary is reading the chart; DRAFTING one authors a clinical
+       * document. The same path is both, so the capability follows the method: a ward nurse can
+       * open the summary and see what is still outstanding without being able to write it. */
+      const need = sub === "mar" ? CAPS.MED_ADMINISTER
+        : (sub === "discharge-summary" && method === "GET") ? CAPS.EMR_VIEW
+        : capFor[sub];
       if (!need) return json({ ok: false, error: "not_found" }, 404, request);
       const wAz = await ORG.authorizeOrg(env, actor, wOrgId, need);
       if (!wAz.ok) return json(azRefusal(wAz), wAz.reason === "org_not_found" ? 404 : 403, request);
@@ -483,6 +488,17 @@ export async function onRequest(context) {
       }
       if (sub === "discharge" && method === "POST") {
         const r = await dischargePatient(request, env, { ...deps, encounterId: body.encounterId, dischargedAt: body.dischargedAt, disposition: body.disposition, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "discharge-summary" && method === "GET") {
+        // Reading the summary is reading the chart. Drafting one WRITES, so it stays emr.treat;
+        // opening the screen must not require the authority to author a clinical document.
+        const r = await readDischargeSummary(request, env, { ...deps, encounterId: url.searchParams.get("encounterId") || "", patientId: url.searchParams.get("patientId") || "" });
+        /* Whether THIS viewer may author and sign. Told to the screen so it can offer only what the
+         * person can actually do, instead of showing a Sign button that is certain to be refused.
+         * It is a display fact, not a grant: drafting and signing re-check the capability and the
+         * signing credential on their own routes regardless of what the screen chose to render. */
+        if (r.ok) r.canAuthor = (await ORG.authorizeOrg(env, actor, wOrgId, CAPS.EMR_TREAT)).ok === true;
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "discharge-summary" && method === "POST") {
