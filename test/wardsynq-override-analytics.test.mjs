@@ -4,7 +4,7 @@
  */
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { overrideIdFor, overridesFrom, summariseOverrides, SafetyOverride } from "../functions/_wardsynq/override-analytics.js";
+import { overrideIdFor, overridesFrom, summariseOverrides, SafetyOverride, firingFrom, firingIdFor, firedCountsFrom, ruleKey } from "../functions/_wardsynq/override-analytics.js";
 
 /** A verdict shaped as the safety engine returns one, with a cleared (overridden) finding. */
 const verdict = (over) => ({
@@ -98,6 +98,78 @@ test("AN OVERRIDE RATE NEEDS A DENOMINATOR, and says null rather than inventing 
   assert.equal(summariseOverrides({ overrides: rows, firedCounts: { "interaction:ddi-a": 1 } }).rules[0].overrideRate, 1);
   // A nonsensical denominator yields no rate rather than a divide-by-zero or a lie.
   assert.equal(summariseOverrides({ overrides: rows, firedCounts: { "interaction:ddi-a": 0 } }).rules[0].overrideRate, null);
+});
+
+/* ---- the denominator --------------------------------------------------------------------------- */
+
+/** A verdict as the engine returns one: `findings` keeps every finding at its ORIGINAL disposition,
+ *  including the ones a clinician went on to clear. */
+const evaluated = (findings) => ({
+  rulePackVersion: "rx-2026.09",
+  findings: findings || [
+    { code: "interaction", ruleId: "ddi-warfarin-nsaid", disposition: "overridable", severity: "major" },
+    { code: "dose", disposition: "warn" },
+    { code: "allergy", allergyId: "alg-1", disposition: "block" },
+  ],
+});
+const fire = (v, over) => firingFrom({ safety: v, orderId: "rx-1", patientId: "pat", ...(over || {}) });
+
+test("A FIRING IS COUNTED WHETHER OR NOT ANYBODY OVERRODE IT", () => {
+  /* The good case - a rule fires and the prescriber respects it - is exactly the case that has to
+   * reach the denominator. Counting only the orders where somebody overrode something would make
+   * every rule in the pack look like it is overridden 100% of the time. */
+  const f = fire(evaluated());
+  assert.deepEqual(f.keys, ["interaction:ddi-warfarin-nsaid"]);
+  assert.equal(f.rulePackVersion, "rx-2026.09");
+  assert.equal(f.resourceType, "SafetyFiring");
+
+  // A cleared finding keeps its overridable disposition in `findings`, so it still counts. Reading
+  // `overridables` instead would shrink the denominator exactly when the numerator grew.
+  const cleared = fire(evaluated([{ code: "interaction", ruleId: "ddi-warfarin-nsaid", disposition: "overridable", overridden: true }]));
+  assert.deepEqual(cleared.keys, ["interaction:ddi-warfarin-nsaid"]);
+});
+
+test("ONLY OVERRIDABLE FINDINGS COUNT: a hard block is not part of an override rate", () => {
+  // Nobody can override a block, so a rate over those is zero by construction and would drag every
+  // real number down with it.
+  const f = fire(evaluated());
+  assert.ok(!f.keys.some((k) => k.startsWith("allergy")), "a block is not a firing");
+  assert.ok(!f.keys.some((k) => k.startsWith("dose")), "and neither is a plain warning");
+  // An order that raised nothing overridable stores no row at all, rather than an empty one against
+  // every prescription in the hospital.
+  assert.equal(fire(evaluated([{ code: "dose", disposition: "warn" }])), null);
+  assert.equal(fire({ rulePackVersion: "v" }), null);
+});
+
+test("ONE FIRING PER ORDER AND PACK VERSION: a retried order is not a second alert", () => {
+  assert.equal(firingIdFor("rx-1", "rx-2026.09"), firingIdFor("RX/1", "rx-2026.09"));
+  // A different pack is a genuinely different set of rules, so it counts again.
+  assert.notEqual(firingIdFor("rx-1", "rx-2026.09"), firingIdFor("rx-1", "rx-2026.10"));
+  assert.equal(firingIdFor("", "v"), null);
+  // The same rule twice in one evaluation is one firing: the clinician saw one alert.
+  const dup = fire(evaluated([
+    { code: "interaction", ruleId: "ddi-a", disposition: "overridable" },
+    { code: "interaction", ruleId: "ddi-a", disposition: "overridable" },
+  ]));
+  assert.deepEqual(dup.keys, ["interaction:ddi-a"]);
+});
+
+test("THE NUMERATOR AND THE DENOMINATOR ARE KEYED THE SAME WAY", () => {
+  /* Two spellings of "this rule" is how a numerator and a denominator end up describing different
+   * things, and the rate that results is worse than no rate at all. */
+  const o = SafetyOverride({ id: "o1", code: "interaction", targetId: "ddi-a", reasonCode: "r" });
+  const f = fire(evaluated([{ code: "interaction", ruleId: "ddi-a", disposition: "overridable" }]));
+  assert.equal(ruleKey(o.code, o.targetId), f.keys[0]);
+
+  const counts = firedCountsFrom([f, f, { keys: ["interaction:ddi-a", "dose:max"] }]);
+  assert.deepEqual(counts, { "interaction:ddi-a": 3, "dose:max": 1 });
+  const report = summariseOverrides({ overrides: [o], firedCounts: counts });
+  assert.equal(report.rules[0].fired, 3);
+  assert.equal(report.rules[0].overrideRate, 0.33);
+
+  // A malformed stored row contributes nothing rather than throwing the whole report away.
+  assert.deepEqual(firedCountsFrom([null, {}, { keys: null }]), {});
+  assert.deepEqual(firedCountsFrom(null), {});
 });
 
 test("an empty report is empty, not an error", () => {

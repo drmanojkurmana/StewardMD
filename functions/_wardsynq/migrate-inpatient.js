@@ -306,7 +306,9 @@ async function createWardMedicationOrder(request, env, ctx) {
     ...base, ok: true, written: 1, orderId: candidate.id, patientId: candidate.patientId,
     encounterId: candidate.encounterId, version: out.record.version, status: candidate.status,
     safety: ctx.safety || null,
-    ...(overrides && (overrides.written || overrides.error || overrides.rejected) ? { overridesRecorded: overrides } : {}),
+    // `fired` is included: an evaluation where the rule was RESPECTED writes a firing and no
+    // override, and leaving that off the response made the denominator invisible to the caller.
+    ...(overrides && (overrides.written || overrides.error || overrides.rejected || overrides.fired) ? { overridesRecorded: overrides } : {}),
     actor: resolved.actor.id, role: resolved.role,
   };
 }
@@ -323,7 +325,7 @@ async function createWardMedicationOrder(request, env, ctx) {
 
 /** PURE. Ward and bed, compared the way a ward means them: case and spacing are not identity. */
 function sameBed(a, b) {
-  const k = (x) => `${str(x && x.ward).toLowerCase()} ${str(x && x.bed).toLowerCase()}`;
+  const k = (x) => `${str(x && x.ward).toLowerCase()}\u0000${str(x && x.bed).toLowerCase()}`;
   return !!str(a && a.bed) && !!str(b && b.bed) && k(a) === k(b);
 }
 

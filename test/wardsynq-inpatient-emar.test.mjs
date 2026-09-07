@@ -1627,8 +1627,12 @@ test("an override is recorded against the RULE, and the report names no clinicia
   assert.equal(rep.report.totalOverrides, 1);
   assert.equal(rep.report.rules[0].targetId, "ddi-warfarin-nsaid");
   assert.equal(rep.report.rules[0].topReason, "benefit-outweighs-risk");
-  // A rate needs a denominator nobody has counted yet, and it says so rather than inventing one.
+  /* This verdict carries no `findings`, so nothing counted what fired and there is no denominator.
+   * The report says so rather than inventing one. The test below sends a full verdict and gets a
+   * real rate. */
   assert.equal(rep.report.rules[0].overrideRate, null);
+  assert.equal(rep.report.evaluationsRecorded, 0);
+  assert.match(rep.report.note2, /numerators without a denominator/);
   // NO CLINICIAN IS NAMED. The report is evidence about rules; naming people would stop them
   // writing honest rationales, which is the only data that makes a rule fixable.
   assert.ok(!JSON.stringify(rep.report).includes("cfa:dr"));
@@ -1637,6 +1641,56 @@ test("an override is recorded against the RULE, and the report names no clinicia
   assert.equal(stored.length, 1);
   assert.equal(stored[0].actorId, "cfa:dr");
   assert.equal(stored[0].rulePackVersion, "rx-2026.09");
+});
+
+test("THE OVERRIDE RATE GETS ITS DENOMINATOR: a rule respected twice and overridden once reads 0.33", async () => {
+  seedHospital();
+  const { adm } = await admittedPatientOnDrug();
+  const RULE = { code: "interaction", ruleId: "ddi-warfarin-nsaid", disposition: "overridable", severity: "major" };
+  const order = (drug, safety) => as(DOCTOR, "/ward/medication-order", "POST", {
+    orgId: ORG, safety,
+    order: { patientId: adm.patientId, encounterId: adm.encounterId, drug, dose: { value: 400, unit: "mg" }, route: "oral", frequency: "TDS" },
+  });
+
+  /* Twice the rule fires and the prescriber respects it. THIS is the case that has to reach the
+   * denominator: counting only the orders where somebody overrode something would make every rule in
+   * the pack read as overridden 100% of the time. */
+  const respected = { rulePackVersion: "rx-2026.09", findings: [RULE], warnings: [], overrides: [] };
+  const a = await order("Ibuprofen", respected);
+  assert.equal(a.__status, 200, JSON.stringify(a));
+  assert.deepEqual(a.overridesRecorded.fired.keys, ["interaction:ddi-warfarin-nsaid"]);
+  assert.equal(a.overridesRecorded.written, 0, "nothing was overridden, and nothing pretends it was");
+  await order("Naproxen", respected);
+
+  // The third time, the prescriber overrides it.
+  const overridden = {
+    ...respected,
+    warnings: [{ ...RULE, overridden: true }],
+    overrides: [{ code: "interaction", targetId: "ddi-warfarin-nsaid", reasonCode: "benefit-outweighs-risk", rationale: "Single dose, INR checked today.", actorId: "cfa:dr" }],
+  };
+  const c = await order("Diclofenac", overridden);
+  assert.equal(c.overridesRecorded.written, 1);
+
+  const rep = await as(NURSE, `/ward/overrides?orgId=${ORG}`);
+  assert.equal(rep.__status, 200, JSON.stringify(rep));
+  assert.equal(rep.report.evaluationsRecorded, 3);
+  const rule = rep.report.rules.find((r) => r.targetId === "ddi-warfarin-nsaid");
+  assert.equal(rule.fired, 3, "three orders, three alerts");
+  assert.equal(rule.overridden, 1);
+  assert.equal(rule.overrideRate, 0.33, "the number that says whether this rule is worth keeping");
+  assert.equal(rep.report.note2, undefined, "and no caveat, because the denominator is real");
+
+  // A retried identical order is the same evaluation, not a second alert. Inflating the denominator
+  // would quietly lower the rate, which is the direction that hides a bad rule.
+  await order("Diclofenac", overridden);
+  const again = await as(NURSE, `/ward/overrides?orgId=${ORG}`);
+  assert.equal(again.report.evaluationsRecorded, 3);
+  assert.equal(again.report.rules.find((r) => r.targetId === "ddi-warfarin-nsaid").fired, 3);
+
+  // The denominator comes from the RECORD, not from whoever reads the report.
+  const firings = await RECORD.byPatient(TENANT_ROW.id, "SafetyFiring", adm.patientId);
+  assert.equal(firings.length, 3);
+  assert.ok(firings.every((f) => f.rulePackVersion === "rx-2026.09"));
 });
 
 test("AN ANALYTICS FAILURE NEVER COSTS A PATIENT THEIR MEDICINE", async () => {
