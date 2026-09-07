@@ -70,6 +70,7 @@ try{var _sq=location.search||"";var _sv=!/[?&]splashv2=0\b/.test(_sq)&&(/[?&]spl
 <link rel="stylesheet" href="/abx-redesign.css?v=gold432">
 <link rel="stylesheet" href="/abx-wizard.css?v=bug809-build7">
 <link rel="stylesheet" href="/queue.css?v=q10-staffadmin">
+<link rel="stylesheet" href="/ward.css?v=ward1">
 <link rel="stylesheet" href="/opd-emr.css?v=voicenote1-micbar1-auth2-icdsug1">
 <link rel="stylesheet" href="/atlas.css?v=atlas2">
 <link rel="stylesheet" href="/atlas3d.css?v=a3d2">
@@ -2434,6 +2435,10 @@ window.openExternal = function (u) {
 <link rel="stylesheet" href="/patient-register.css?v=preg1">
 <script src="/patient-register.js?v=preg1" defer></script>
 <script src="/queue.js?v=fdesk1-addpt1" defer></script>
+<!-- WardSynQ inpatient ward (window.WARD). The admission/ward/eMAR/discharge routes have been
+     server-authoritative and tested for a while with nothing in the app calling them; this is the
+     screen. Self-mounting overlay, no nav coupling yet - opened via WARD.open({orgId}). -->
+<script src="/ward.js?v=ward1" defer></script>
 <!-- Oncology dose engine (pure, no DOM/fetch). Phase 4 needs it client-side: applying a protocol
      computes calculatedDoses via window.SMD_ONCODOSE.planDoses() before anything is staged/posted. -->
 <script src="/onco-dose.js?v=op1" defer></script>

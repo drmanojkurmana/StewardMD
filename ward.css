@@ -1,0 +1,107 @@
+/* ward.css — WardSynQ inpatient ward (#smdWard). Same Clinical Precision palette as queue.css so the
+ * ward is visibly the same product as the OPD queue, scoped to its own root id. No emoji: icons are
+ * the app's bundled Material Symbols font. Exists only when opened. */
+#smdWard {
+  --primary: #0e6e63; --on-primary: #fff; --primary-container: #008378; --on-primary-container: #f4fffc;
+  --error: #ba1a1a; --on-error: #fff; --error-container: #ffdad6; --on-error-container: #93000a;
+  --warn-container: #ffe9c7; --on-warn-container: #6b4400;
+  --ok-container: #cdefdf; --on-ok-container: #05513a;
+  --bg: #f7f9fb; --on-surface: #191c1e; --on-surface-variant: #3d4947;
+  --sc-lowest: #fff; --sc-low: #f2f4f6; --sc: #eceef0; --sc-high: #e6e8ea;
+  --outline: #6d7a77; --outline-variant: #bcc9c6;
+  --w-sans: 'Inter Variable', 'Noto Sans Telugu', 'Noto Sans Devanagari', var(--sans, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif);
+  position: fixed; inset: 0; z-index: 12000; display: none; background: var(--bg); color: var(--on-surface); font-family: var(--w-sans);
+}
+#smdWard.on { display: block; }
+body.dark #smdWard { --bg: #191c1e; --on-surface: #eff1f3; --on-surface-variant: #bcc9c6;
+  --sc-lowest: #1f2325; --sc-low: #23272a; --sc: #272b2e; --sc-high: #2d3133; --outline-variant: #3d4947;
+  --primary: #3fc7b3; --on-primary: #04322c; --primary-container: #0d5b52; --on-primary-container: #c9fff5;
+  --error-container: #93000a; --on-error-container: #ffdad6;
+  --warn-container: #5a3a00; --on-warn-container: #ffdfa8;
+  --ok-container: #05513a; --on-ok-container: #cdefdf; }
+#smdWard .material-symbols-outlined { font-family: "Material Symbols Outlined", "Material Symbols Rounded"; font-weight: normal; font-style: normal; line-height: 1; letter-spacing: normal; text-transform: none; display: inline-block; white-space: nowrap; direction: ltr; -webkit-font-feature-settings: "liga"; -webkit-font-smoothing: antialiased; font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24; vertical-align: middle; user-select: none; }
+
+#smdWard .w-shell { display: flex; flex-direction: column; height: 100%; }
+#smdWard .w-top { flex: 0 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  padding: calc(10px + env(safe-area-inset-top)) 12px 10px; background: var(--sc-lowest); border-bottom: 1px solid var(--outline-variant); }
+#smdWard .w-title { font-weight: 700; font-size: 15px; letter-spacing: .2px; }
+#smdWard .w-busy { color: var(--primary); animation: w-spin 1s linear infinite; display: inline-flex; }
+@keyframes w-spin { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) { #smdWard .w-busy { animation: none; } }
+#smdWard .w-canvas { flex: 1 1 auto; overflow-y: auto; -webkit-overflow-scrolling: touch;
+  padding: 12px 12px calc(24px + env(safe-area-inset-bottom)); display: flex; flex-direction: column; gap: 12px; }
+
+#smdWard .w-ic { background: none; border: 0; color: var(--on-surface-variant); padding: 8px; border-radius: 999px; cursor: pointer; display: inline-flex; }
+#smdWard .w-ic:active { background: var(--sc); }
+#smdWard .w-x { background: none; border: 0; color: inherit; opacity: .7; padding: 4px; cursor: pointer; margin-left: auto; align-self: flex-start; display: inline-flex; }
+
+#smdWard .w-btn { appearance: none; border: 0; border-radius: 999px; background: var(--primary); color: var(--on-primary);
+  font: 600 14px var(--w-sans); padding: 11px 18px; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; min-height: 44px; }
+#smdWard .w-btn:active { filter: brightness(.92); }
+#smdWard .w-btn.ghost { background: var(--sc); color: var(--on-surface); }
+#smdWard .w-btn.tiny { font-size: 13px; padding: 8px 14px; min-height: 40px; background: var(--sc-high); color: var(--on-surface); text-transform: capitalize; }
+#smdWard .w-btn.tiny.go { background: var(--primary); color: var(--on-primary); }
+#smdWard .w-btn.tiny.warn { background: var(--error-container); color: var(--on-error-container); }
+
+/* cards */
+#smdWard .w-card { background: var(--sc-lowest); border: 1px solid var(--outline-variant); border-radius: 16px; padding: 14px; }
+#smdWard .w-card-h { display: flex; align-items: center; gap: 8px; margin-bottom: 12px; color: var(--primary); }
+#smdWard .w-card-h h3 { margin: 0; font-size: 15px; font-weight: 700; color: var(--on-surface); flex: 1; }
+#smdWard .w-empty { margin: 0; color: var(--on-surface-variant); font-size: 13px; }
+#smdWard .w-hint { margin: 10px 0; color: var(--on-surface-variant); font-size: 12px; line-height: 1.5; display: flex; gap: 6px; align-items: flex-start; }
+#smdWard .w-hint .material-symbols-outlined { font-size: 16px; flex: 0 0 auto; margin-top: 1px; }
+
+/* banners: a refusal is the loudest thing on the screen, by design */
+#smdWard .w-refusal, #smdWard .w-err, #smdWard .w-ok { display: flex; gap: 10px; align-items: flex-start; border-radius: 14px; padding: 12px 14px; font-size: 13px; line-height: 1.5; }
+#smdWard .w-refusal { background: var(--warn-container); color: var(--on-warn-container); border: 1px solid currentColor; }
+#smdWard .w-refusal h4 { margin: 0 0 6px; font-size: 14px; text-transform: capitalize; }
+#smdWard .w-refusal ul { margin: 0; padding-left: 18px; font-family: var(--mono, ui-monospace, Menlo, monospace); font-size: 12px; }
+#smdWard .w-refusal p { margin: 6px 0 0; }
+#smdWard .w-err { background: var(--error-container); color: var(--on-error-container); }
+#smdWard .w-ok { background: var(--ok-container); color: var(--on-ok-container); }
+#smdWard .w-err p, #smdWard .w-ok p { margin: 0; }
+
+/* ward list */
+#smdWard .w-filter { display: flex; gap: 8px; margin-bottom: 12px; }
+#smdWard .w-filter input { flex: 1; min-width: 0; border: 1px solid var(--outline-variant); border-radius: 12px; background: var(--sc-low); color: var(--on-surface); font: 400 14px var(--w-sans); padding: 11px 12px; min-height: 44px; }
+#smdWard .w-bed { display: flex; align-items: center; gap: 12px; width: 100%; text-align: left; background: none; border: 0; border-top: 1px solid var(--outline-variant); padding: 12px 2px; cursor: pointer; color: inherit; font: inherit; }
+#smdWard .w-bed:first-of-type { border-top: 0; }
+#smdWard .w-bed:active { background: var(--sc-low); }
+#smdWard .w-bed-no { flex: 0 0 46px; height: 46px; border-radius: 12px; background: var(--primary-container); color: var(--on-primary-container); display: grid; place-items: center; font-weight: 700; font-size: 14px; }
+#smdWard .w-bed-b { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+#smdWard .w-bed-b b { font-size: 14px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+#smdWard .w-bed-b small { color: var(--on-surface-variant); font-size: 12px; }
+
+/* chart header */
+#smdWard .w-chart-h { display: flex; align-items: center; gap: 10px; }
+#smdWard .w-chart-h b { display: block; font-size: 15px; }
+#smdWard .w-chart-h small { color: var(--on-surface-variant); font-size: 12px; }
+
+/* problem list */
+#smdWard .w-problems { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+#smdWard .w-problems li { font-size: 14px; display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+#smdWard .w-code { font-family: var(--mono, ui-monospace, Menlo, monospace); font-size: 11px; color: var(--on-surface-variant); }
+#smdWard .w-vs { font-size: 11px; text-transform: uppercase; letter-spacing: .4px; padding: 2px 8px; border-radius: 999px; background: var(--sc); color: var(--on-surface-variant); }
+#smdWard .w-vs.confirmed { background: var(--ok-container); color: var(--on-ok-container); }
+#smdWard .w-vs.refuted { background: var(--error-container); color: var(--on-error-container); }
+
+/* vitals */
+#smdWard .w-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 10px; }
+#smdWard .w-f { display: flex; flex-direction: column; gap: 4px; }
+#smdWard .w-f span { font-size: 12px; color: var(--on-surface-variant); font-weight: 600; }
+#smdWard .w-f span i { font-style: normal; font-weight: 400; opacity: .8; }
+#smdWard .w-f input { border: 1px solid var(--outline-variant); border-radius: 12px; background: var(--sc-low); color: var(--on-surface); font: 400 15px var(--w-sans); padding: 11px 12px; min-height: 44px; }
+#smdWard .w-f input:focus { outline: 2px solid var(--primary); outline-offset: -2px; }
+
+/* MAR */
+#smdWard .w-scan { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin-bottom: 12px; }
+#smdWard .w-doses { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 12px; }
+#smdWard .w-doses li { border: 1px solid var(--outline-variant); border-radius: 14px; padding: 12px; background: var(--sc-low); }
+#smdWard .w-dose-h b { font-size: 15px; }
+#smdWard .w-dose-h span { color: var(--on-surface-variant); font-size: 13px; }
+#smdWard .w-dose-s { display: flex; align-items: center; gap: 8px; margin: 8px 0; }
+#smdWard .w-dose-s small { color: var(--on-surface-variant); font-size: 12px; }
+#smdWard .w-st { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .5px; padding: 3px 9px; border-radius: 999px; background: var(--sc-high); color: var(--on-surface-variant); }
+#smdWard .w-st.administered { background: var(--ok-container); color: var(--on-ok-container); }
+#smdWard .w-st.held, #smdWard .w-st.refused, #smdWard .w-st.cancelled { background: var(--error-container); color: var(--on-error-container); }
+#smdWard .w-dose-a { display: flex; flex-wrap: wrap; gap: 8px; }

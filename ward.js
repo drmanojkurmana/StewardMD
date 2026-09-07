@@ -1,0 +1,298 @@
+/* ward.js - WardSynQ inpatient ward controller (window.WARD).
+ *
+ * Buildless ES5 IIFE, same shape as queue.js: a self-mounting fixed overlay (#smdWard), a PURE
+ * _render(state) -> HTML, one delegated click handler on data-w-act, and the SAME authHeaders /
+ * fetchRetry / apiGet / apiPost transport against /api/queue. It talks only to the ward routes,
+ * which are already server-authoritative and capability-gated.
+ *
+ * WHY THIS FILE EXISTS: the whole inpatient vertical - admission, ward list, ward vitals, the eMAR
+ * state machine, discharge, the problem list - has been finished and tested on the server for a
+ * while, and NOTHING in the app called any of it. It was usable by curl and by nobody else.
+ *
+ * THREE RULES THIS UI DOES NOT BEND
+ *
+ * 1. IT NEVER DECIDES A DOSE IS SAFE. There is no client-side safety check here, not even a
+ *    convenience one, because a second copy of the rules is how the screen and the server start
+ *    disagreeing about whether a drug is contraindicated. The server refuses or it does not.
+ *
+ * 2. A REFUSAL IS RENDERED VERBATIM. When the eMAR refuses, its `reasons` are the answer - they are
+ *    the thing the nurse has to act on. They are shown in full, never collapsed into "failed",
+ *    never retried automatically, and the dose does not move.
+ *
+ * 3. IT NEVER INVENTS A DUE TIME. MAR scheduling does not exist yet: nothing on the server computes
+ *    what dose is due when. So the round time is CHOSEN BY THE NURSE and labelled as chosen, rather
+ *    than being quietly defaulted to "now" - which would let the chart imply a schedule that no one
+ *    ever wrote down.
+ */
+(function () {
+  "use strict";
+  var G = (typeof window !== "undefined") ? window : globalThis;
+  var API = "/api/queue";
+  var LS_STAFF = "smd_opd_staff_tok";
+
+  var st = {
+    orgId: "", ward: "", patients: [], view: "list",
+    sel: null,                 // the selected {encounterId, patientId, ward, bed, admittedAt}
+    problems: [], due: [], dueAt: "",
+    scan: { patient: "", drug: "" },
+    busy: false, err: "", note: "", refusal: null, loaded: false
+  };
+
+  function esc(s) { return String(s == null ? "" : s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#39;"); }
+  function ms(name, fill) { return '<span class="material-symbols-outlined' + (fill ? " fill" : "") + '">' + name + "</span>"; }
+  function val(id) { var el = document.getElementById(id); return el ? String(el.value || "").trim() : ""; }
+
+  // ---- transport (identical to queue.js; a staff token wins when present) -------------------
+  function staffTok() { try { return localStorage.getItem(LS_STAFF) || ""; } catch (e) { return ""; } }
+  function fbToken() {
+    try { if (G.SMD_AUTH && G.SMD_AUTH.token) return Promise.resolve(G.SMD_AUTH.token()); } catch (e) {}
+    try { if (G.firebase && firebase.auth && firebase.auth().currentUser) return firebase.auth().currentUser.getIdToken(); } catch (e) {}
+    return Promise.resolve(null);
+  }
+  function authHeaders() {
+    var t = staffTok();
+    if (t) return Promise.resolve({ "Content-Type": "application/json", "X-Staff-Token": t });
+    return fbToken().then(function (t2) { var h = { "Content-Type": "application/json" }; if (t2) h.Authorization = "Bearer " + t2; return h; });
+  }
+  function fetchRetry(url, opts, tries) {
+    tries = tries || 3;
+    return fetch(url, opts).catch(function (e) {
+      if (tries <= 1) throw e;
+      return new Promise(function (res) { setTimeout(res, 700); }).then(function () { return fetchRetry(url, opts, tries - 1); });
+    });
+  }
+  function apiGet(path) { return authHeaders().then(function (h) { return fetchRetry(API + path, { headers: h, credentials: "include" }); }).then(function (r) { return r.json(); }); }
+  function apiPost(path, body) { return authHeaders().then(function (h) { return fetchRetry(API + path, { method: "POST", headers: h, credentials: "include", body: JSON.stringify(body || {}) }); }).then(function (r) { return r.json(); }); }
+
+  /* One place that turns any ward response into what the screen shows. A refusal keeps its reasons;
+   * everything else gets the server's own message rather than a rewritten one, because "the ward is
+   * only available for a WardSynQ-native hospital" is actionable and "something went wrong" is not. */
+  function problem(r) {
+    if (!r) return { err: "No response from the server." };
+    if (r.ok) return null;
+    if (r.error === "refused") return { refusal: { reasons: r.reasons || [], detail: r.detail || "", action: r.action || "" } };
+    if (r.error === "governance") return { refusal: { reasons: r.reasons || [], detail: "The record service refused this write.", action: "" } };
+    return { err: r.message || r.detail || r.error || "Request failed." };
+  }
+  function settle(r, okMsg) {
+    st.busy = false; st.err = ""; st.refusal = null; st.note = "";
+    var p = problem(r);
+    if (p) { st.err = p.err || ""; st.refusal = p.refusal || null; }
+    else if (okMsg) st.note = okMsg;
+    return !p;
+  }
+
+  // ---- pure render -------------------------------------------------------------------------
+  function when(iso) {
+    if (!iso) return "-";
+    var d = new Date(iso); if (isNaN(d.getTime())) return esc(iso);
+    return d.toLocaleString([], { day: "2-digit", month: "short", hour: "2-digit", minute: "2-digit" });
+  }
+  function dose(d) { return d && d.value != null ? esc(String(d.value) + " " + (d.unit || "")) : ""; }
+
+  /* The eMAR states, and the actions the machine will accept out of each. This mirrors the server's
+   * transition table so the screen does not offer a button that is certain to be refused - it is a
+   * DISPLAY convenience only. The machine remains the authority: an action shown here can still be
+   * refused, and an action hidden here is not thereby permitted. */
+  var NEXT = {
+    "": ["verify"], "null": ["verify"],
+    ORDERED: ["verify", "hold", "refuse", "cancel"],
+    VERIFIED: ["dispense", "hold", "refuse", "cancel"],
+    DISPENSED: ["scan", "hold", "refuse", "cancel"],
+    SCANNED: ["administer", "hold", "refuse"],
+    ADMINISTERED: [], HELD: ["dispense", "refuse", "cancel"], REFUSED: [], CANCELLED: []
+  };
+  function nextFor(status) { return NEXT[status == null ? "" : String(status)] || []; }
+
+  function banner(state) {
+    if (state.refusal) {
+      var rs = (state.refusal.reasons || []).map(function (r) {
+        return "<li>" + esc(typeof r === "string" ? r : (r.code || JSON.stringify(r))) + "</li>";
+      }).join("");
+      return '<div class="w-refusal">' + ms("gpp_maybe") + "<div><h4>Refused" + (state.refusal.action ? " on " + esc(state.refusal.action) : "") + "</h4>" +
+        (rs ? "<ul>" + rs + "</ul>" : "") +
+        (state.refusal.detail ? "<p>" + esc(state.refusal.detail) + "</p>" : "") +
+        '</div><button class="w-x" data-w-act="dismiss">' + ms("close") + "</button></div>";
+    }
+    if (state.err) return '<div class="w-err">' + ms("error") + "<p>" + esc(state.err) + '</p><button class="w-x" data-w-act="dismiss">' + ms("close") + "</button></div>";
+    if (state.note) return '<div class="w-ok">' + ms("check_circle") + "<p>" + esc(state.note) + '</p><button class="w-x" data-w-act="dismiss">' + ms("close") + "</button></div>";
+    return "";
+  }
+
+  function listView(state) {
+    var rows = (state.patients || []).map(function (p) {
+      return '<button class="w-bed" data-w-act="open:' + esc(p.encounterId) + '">' +
+        '<span class="w-bed-no">' + esc(p.bed || "-") + "</span>" +
+        '<span class="w-bed-b"><b>' + esc(p.patientId) + "</b><small>" + esc(p.ward || "") + " &middot; admitted " + when(p.admittedAt) + "</small></span>" +
+        ms("chevron_right") + "</button>";
+    }).join("");
+    return '<div class="w-card"><div class="w-card-h">' + ms("bed") + "<h3>Ward" + (state.ward ? ": " + esc(state.ward) : "") + "</h3>" +
+      '<button class="w-ic" data-w-act="reload" title="Refresh">' + ms("refresh") + "</button></div>" +
+      '<div class="w-filter"><input id="wWard" type="text" placeholder="Filter by ward (blank = all)" value="' + esc(state.ward) + '">' +
+      '<button class="w-btn ghost" data-w-act="setward">Apply</button></div>' +
+      (rows || (state.loaded ? '<p class="w-empty">No patients are currently admitted' + (state.ward ? " to " + esc(state.ward) : "") + ".</p>" : '<p class="w-empty">Loading the ward…</p>')) +
+      "</div>";
+  }
+
+  function problemsCard(state) {
+    var rows = (state.problems || []).map(function (p) {
+      return '<li><b>' + esc(p.display) + "</b>" + (p.codeSystem && p.codeSystem !== "text" ? ' <span class="w-code">' + esc(p.code) + "</span>" : "") +
+        ' <span class="w-vs ' + esc(p.verificationStatus) + '">' + esc(p.verificationStatus) + "</span></li>";
+    }).join("");
+    return '<div class="w-card"><div class="w-card-h">' + ms("clinical_notes") + "<h3>Problem list</h3></div>" +
+      (rows ? "<ul class=\"w-problems\">" + rows + "</ul>" : '<p class="w-empty">No problems recorded. A diagnosis is entered by the treating doctor.</p>') +
+      "</div>";
+  }
+
+  var VITALS = [
+    { k: "sbp", l: "Systolic", u: "mmHg" }, { k: "dbp", l: "Diastolic", u: "mmHg" },
+    { k: "pulse", l: "Pulse", u: "/min" }, { k: "rr", l: "Resp rate", u: "/min" },
+    { k: "temp", l: "Temp", u: "°F" }, { k: "spo2", l: "SpO₂", u: "%" },
+    { k: "weight", l: "Weight", u: "kg" }
+  ];
+  function vitalsCard() {
+    var f = VITALS.map(function (v) {
+      return '<label class="w-f"><span>' + esc(v.l) + ' <i>' + esc(v.u) + "</i></span>" +
+        '<input id="wv_' + v.k + '" type="text" inputmode="decimal" autocomplete="off"></label>';
+    }).join("");
+    return '<div class="w-card"><div class="w-card-h">' + ms("monitor_heart") + "<h3>Vitals</h3></div>" +
+      '<div class="w-grid">' + f + "</div>" +
+      // Weight is not decoration: a weight-based dose is REFUSED at the bedside until the ward has
+      // actually weighed the patient, and this is where that weight comes from.
+      '<p class="w-hint">Blank fields are not recorded. A value that is not plainly one number is skipped, never guessed at.</p>' +
+      '<button class="w-btn" data-w-act="vitals">' + ms("save") + "Record vitals</button></div>";
+  }
+
+  function marCard(state) {
+    var rows = (state.due || []).map(function (d) {
+      var acts = nextFor(d.status).map(function (a) {
+        return '<button class="w-btn tiny' + (a === "administer" ? " go" : (a === "refuse" || a === "cancel" ? " warn" : "")) + '" data-w-act="mar:' + a + "|" + esc(d.orderId) + '">' + esc(a) + "</button>";
+      }).join("");
+      return '<li><div class="w-dose-h"><b>' + esc(d.drug) + "</b> <span>" + dose(d.dose) + (d.route ? " &middot; " + esc(d.route) : "") + (d.frequency ? " &middot; " + esc(d.frequency) : "") + "</span></div>" +
+        '<div class="w-dose-s"><span class="w-st ' + esc(String(d.status || "notstarted").toLowerCase()) + '">' + esc(d.status || "not started") + "</span>" +
+        (d.administeredAt ? "<small>given " + when(d.administeredAt) + "</small>" : "") + "</div>" +
+        '<div class="w-dose-a">' + (acts || '<small class="w-empty">No further action.</small>') + "</div></li>";
+    }).join("");
+    return '<div class="w-card"><div class="w-card-h">' + ms("pill") + "<h3>Medication round</h3></div>" +
+      '<div class="w-filter"><input id="wDueAt" type="datetime-local" value="' + esc(state.dueAt) + '">' +
+      '<button class="w-btn ghost" data-w-act="round">Load round</button></div>' +
+      // Said out loud on the screen, because it is a real limitation and a nurse must not read this
+      // list as "the system says these are due now".
+      '<p class="w-hint">' + ms("info") + "This round time is the one you chose. WardSynQ does not yet compute a schedule, so nothing here is asserting a dose is due.</p>" +
+      '<div class="w-scan"><label class="w-f"><span>Wristband scan</span><input id="wScanP" type="text" autocomplete="off" placeholder="Patient barcode"></label>' +
+      '<label class="w-f"><span>Drug scan</span><input id="wScanD" type="text" autocomplete="off" placeholder="Drug barcode"></label></div>' +
+      (rows ? '<ul class="w-doses">' + rows + "</ul>" : '<p class="w-empty">No active orders for this patient at that time.</p>') +
+      "</div>";
+  }
+
+  function chartView(state) {
+    var s = state.sel || {};
+    return '<div class="w-chart-h"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button>" +
+      "<div><b>" + esc(s.patientId || "") + "</b><small>" + esc(s.ward || "") + (s.bed ? " &middot; bed " + esc(s.bed) : "") + " &middot; admitted " + when(s.admittedAt) + "</small></div></div>" +
+      problemsCard(state) + vitalsCard() + marCard(state);
+  }
+
+  function _render(state) {
+    return '<div class="w-shell"><header class="w-top"><button class="w-ic" data-w-act="close">' + ms("close") + "</button>" +
+      '<span class="w-title">WardSynQ &middot; Inpatient</span>' +
+      (state.busy ? '<span class="w-busy">' + ms("progress_activity") + "</span>" : "<span></span>") + "</header>" +
+      '<div class="w-canvas">' + banner(state) +
+      (state.view === "chart" ? chartView(state) : listView(state)) + "</div></div>";
+  }
+
+  // ---- controller --------------------------------------------------------------------------
+  function root() { var el = document.getElementById("smdWard"); if (!el) { el = document.createElement("div"); el.id = "smdWard"; document.body.appendChild(el); } return el; }
+  function paint() { root().innerHTML = _render(st); }
+
+  function loadWard() {
+    st.busy = true; paint();
+    return apiGet("/ward/list?orgId=" + encodeURIComponent(st.orgId) + (st.ward ? "&ward=" + encodeURIComponent(st.ward) : ""))
+      .then(function (r) { if (settle(r)) st.patients = r.patients || []; st.loaded = true; paint(); })
+      .catch(function () { st.busy = false; st.err = "Could not reach the ward."; st.loaded = true; paint(); });
+  }
+  function loadChart() {
+    var s = st.sel; if (!s) return Promise.resolve();
+    st.busy = true; paint();
+    return apiGet("/ward/problems?orgId=" + encodeURIComponent(st.orgId) + "&patientId=" + encodeURIComponent(s.patientId))
+      .then(function (r) { if (settle(r)) st.problems = r.problems || []; paint(); })
+      .catch(function () { st.busy = false; paint(); });
+  }
+  function loadRound() {
+    var s = st.sel; if (!s || !st.dueAt) { st.err = "Choose the round time first."; paint(); return Promise.resolve(); }
+    st.busy = true; paint();
+    var iso = new Date(st.dueAt).toISOString();
+    return apiGet("/ward/round?orgId=" + encodeURIComponent(st.orgId) + "&patientId=" + encodeURIComponent(s.patientId) + "&dueAt=" + encodeURIComponent(iso))
+      .then(function (r) { if (settle(r)) st.due = r.due || []; paint(); })
+      .catch(function () { st.busy = false; st.err = "Could not load the round."; paint(); });
+  }
+  function saveVitals() {
+    var s = st.sel; if (!s) return;
+    var v = {}, any = false;
+    VITALS.forEach(function (f) { var x = val("wv_" + f.k); if (x) { v[f.k] = x; any = true; } });
+    if (!any) { st.err = "Nothing to record."; paint(); return; }
+    st.busy = true; paint();
+    apiPost("/ward/vitals", { orgId: st.orgId, encounterId: s.encounterId, patientId: s.patientId, vitals: v })
+      .then(function (r) {
+        // `written: 0` with ok:true is the server saying nothing was numeric. Say so plainly rather
+        // than showing a success message for a save that recorded nothing.
+        if (settle(r, r && r.written ? "Recorded " + r.written + " observation" + (r.written === 1 ? "" : "s") + "." : null)) {
+          if (r && !r.written) st.err = "Nothing was recorded - no field held a plain number.";
+          else VITALS.forEach(function (f) { var el = document.getElementById("wv_" + f.k); if (el) el.value = ""; });
+        }
+        paint();
+      })
+      .catch(function () { st.busy = false; st.err = "Could not record vitals."; paint(); });
+  }
+  function marAction(action, orderId) {
+    var s = st.sel; if (!s || !st.dueAt) { st.err = "Choose the round time first."; paint(); return; }
+    var body = {
+      orgId: st.orgId, action: action, orderId: orderId, dueAt: new Date(st.dueAt).toISOString(),
+      patient: { id: s.patientId }
+    };
+    // The five rights are checked on the server against what was actually scanned. The UI passes the
+    // scans through untouched; it does not compare them itself and does not proceed on its own.
+    if (action === "scan") body.scan = { patient: val("wScanP"), drug: val("wScanD") };
+    if (action === "hold" || action === "refuse" || action === "cancel") {
+      var why = ""; try { why = G.prompt("Reason for " + action + ":") || ""; } catch (e) {}
+      if (!why.trim()) { st.err = "A reason is required to " + action + " a dose."; paint(); return; }
+      body.reason = why.trim();
+    }
+    st.busy = true; paint();
+    apiPost("/ward/mar", body)
+      .then(function (r) { if (settle(r, r && r.to ? action + ": " + r.from + " → " + r.to : null)) loadRound(); else paint(); })
+      .catch(function () { st.busy = false; st.err = "Could not reach the eMAR."; paint(); });
+  }
+
+  function onClick(e) {
+    var b = e.target.closest && e.target.closest("[data-w-act]"); if (!b) return;
+    var a = b.getAttribute("data-w-act"), i = a.indexOf(":"), cmd = i < 0 ? a : a.slice(0, i), arg = i < 0 ? "" : a.slice(i + 1);
+    if (cmd === "close") { close(); return; }
+    if (cmd === "dismiss") { st.err = ""; st.note = ""; st.refusal = null; paint(); return; }
+    if (cmd === "reload") { loadWard(); return; }
+    if (cmd === "setward") { st.ward = val("wWard"); loadWard(); return; }
+    if (cmd === "back") { st.view = "list"; st.sel = null; st.due = []; st.problems = []; paint(); return; }
+    if (cmd === "open") {
+      var p = null;
+      for (var j = 0; j < st.patients.length; j++) { if (st.patients[j].encounterId === arg) { p = st.patients[j]; break; } }
+      if (!p) return;
+      st.sel = p; st.view = "chart"; st.due = []; st.problems = []; st.err = ""; st.note = ""; st.refusal = null;
+      paint(); loadChart(); return;
+    }
+    if (cmd === "vitals") { saveVitals(); return; }
+    if (cmd === "round") { st.dueAt = val("wDueAt"); loadRound(); return; }
+    if (cmd === "mar") { var k = arg.indexOf("|"); if (k > 0) marAction(arg.slice(0, k), arg.slice(k + 1)); return; }
+  }
+
+  function open(opts) {
+    opts = opts || {};
+    st.orgId = opts.orgId || st.orgId || "";
+    if (!st.orgId) { try { G.toast && G.toast("The ward needs a hospital."); } catch (e) {} return; }
+    st.view = "list"; st.sel = null; st.loaded = false; st.err = ""; st.note = ""; st.refusal = null;
+    var el = root(); el.classList.add("on");
+    el.removeEventListener("click", onClick); el.addEventListener("click", onClick);
+    paint(); loadWard();
+  }
+  function close() { var el = root(); el.classList.remove("on"); el.innerHTML = ""; }
+
+  G.WARD = { open: open, close: close, _render: _render, _st: st, _nextFor: nextFor, _problem: problem };
+})();
