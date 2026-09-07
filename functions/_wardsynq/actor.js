@@ -79,7 +79,7 @@ const ORDER_TYPES = Object.freeze(["MedicationOrder", "ServiceRequest"]);
 /* SpecimenCollection joined on 2026-09-07: taking a sample is nursing work, the same authority as
  * recording a vital. It records that a sample was TAKEN and never what it showed - the result is the
  * laboratory's own authority, so this grants nothing towards one. */
-const VITALS_TYPES = Object.freeze(["Observation", "ShiftHandover", "BreakGlassGrant", "MedicationReconciliation", "PatientConsent", "CarePlan", "RiskAssessment", "SpecimenCollection"]);
+const VITALS_TYPES = Object.freeze(["Observation", "ShiftHandover", "BreakGlassGrant", "MedicationReconciliation", "PatientConsent", "CarePlan", "RiskAssessment", "SpecimenCollection", "WoundAssessment"]);
 const PATIENT_TYPE = "Patient";
 // Added 2026-09-06 (the Encounter migration), alongside PATIENT_TYPE and for the identical reason:
 // checking a patient in for today's visit is the SAME administrative act QUEUE_ADD already covers
