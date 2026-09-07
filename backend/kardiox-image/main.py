@@ -139,10 +139,21 @@ def _mi_any(img: Image.Image):
     x = _tf(img.convert("RGB")).unsqueeze(0)
     with torch.no_grad(): return float(torch.sigmoid(_mi_model(x))[0,0])
 
+def _token_eq(supplied: str, expected: str) -> bool:
+    """Constant-time token comparison that cannot 500 on a hostile header.
+
+    secrets.compare_digest (== hmac.compare_digest) raises TypeError on str containing non-ASCII
+    characters. HTTP headers decode as latin-1, so a single byte >127 in X-Pipeline-Token or
+    X-Admin-Token made the comparison raise, and with no exception handler on this app that returned
+    500 instead of 401 - an unauthenticated error an anonymous caller could trigger at will on the
+    admin endpoints, and a 500-vs-401 signal the constant-time comparison was added to avoid giving.
+    Comparing the UTF-8 bytes keeps the constant-time property and accepts any byte sequence."""
+    return secrets.compare_digest(str(supplied).encode("utf-8"), str(expected).encode("utf-8"))
+
 @app.post("/v1/ecg/analyze-image")
 async def analyze_image(image: UploadFile = File(...), x_pipeline_token: str = Header(default=""),
                         variant: str = Query("prod")):
-    if TOKEN and not secrets.compare_digest(x_pipeline_token, TOKEN): raise HTTPException(401, "bad token")
+    if TOKEN and not _token_eq(x_pipeline_token, TOKEN): raise HTTPException(401, "bad token")
     data = await image.read()
     try: img = Image.open(io.BytesIO(data))
     except Exception: raise HTTPException(400, "invalid image")
@@ -273,7 +284,7 @@ async def feedback(aiVerdict: str = Form(""), label: str = Form(""), correct: st
 
 @app.get("/v1/admin/limits")
 def admin_get(x_admin_token: str = Header(default="")):
-    if not ADMIN_TOKEN or not secrets.compare_digest(x_admin_token, ADMIN_TOKEN): raise HTTPException(401, "bad admin token")
+    if not ADMIN_TOKEN or not _token_eq(x_admin_token, ADMIN_TOKEN): raise HTTPException(401, "bad admin token")
     if _fb_bucket is None: return {"error": "no storage"}
     cfg = _limits_cfg(); month = _month(); usage = {}
     for b in _fb_bucket.list_blobs(prefix=f"counters/{month}/"):
@@ -288,7 +299,7 @@ def admin_get(x_admin_token: str = Header(default="")):
 @app.post("/v1/admin/limits")
 async def admin_set(monthlyLimit: int = Form(default=None), exempt: str = Form(default=None),
                     modelLab: str = Form(default=None), x_admin_token: str = Header(default="")):
-    if not ADMIN_TOKEN or not secrets.compare_digest(x_admin_token, ADMIN_TOKEN): raise HTTPException(401, "bad admin token")
+    if not ADMIN_TOKEN or not _token_eq(x_admin_token, ADMIN_TOKEN): raise HTTPException(401, "bad admin token")
     if _fb_bucket is None: raise HTTPException(503, "no storage")
     cfg = _limits_cfg()
     if monthlyLimit is not None: cfg["monthlyLimit"] = int(monthlyLimit)
