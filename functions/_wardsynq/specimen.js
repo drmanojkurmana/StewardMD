@@ -34,6 +34,7 @@ import { VersionConflictError } from "./repository.js";
 import { resolveClinicalActor } from "./actor.js";
 import { RecordService } from "./service.js";
 import { AuthError, PermissionError } from "../_connect/permission.js";
+import { priorityRank } from "./ward-order.js";
 
 const str = (v) => (v == null ? "" : String(v).trim());
 const TYPE = "SpecimenCollection";
@@ -273,12 +274,18 @@ async function collectionList(request, env, ctx) {
     .filter((o) => o && o.status !== "revoked" && o.status !== "completed")
     .map((o) => ({
       serviceRequestId: o.id, code: o.code, display: o.display || o.code, category: o.category || null,
+      priority: o.priority || "routine",
       requestedAt: (o.meta && o.meta.recordedAt) || null,
       collection: collectionState(byRequest.get(str(o.id))),
     }))
-    /* Uncollected first, then failed, then collected, then received. The top of this list is work
-     * somebody has to do; the bottom is work that is done. */
-    .sort((a, b) => ({ none: 0, failed: 1, collected: 2, received: 3 })[a.collection.state] - ({ none: 0, failed: 1, collected: 2, received: 3 })[b.collection.state]);
+    /* Uncollected first, then failed, then collected, then received - the top of this list is work
+     * somebody has to do, the bottom is work that is done. WITHIN that, by priority: a stat order
+     * that sorted below a routine one would make the priority decoration, and prescribers stop
+     * setting it honestly within a week. It orders the worklist and nothing else. */
+    .sort((a, b) => {
+      const rank = { none: 0, failed: 1, collected: 2, received: 3 };
+      return (rank[a.collection.state] - rank[b.collection.state]) || (priorityRank(a.priority) - priorityRank(b.priority));
+    });
 
   return {
     ...base, ok: true, patientId, requests,

@@ -2725,6 +2725,63 @@ test("sending is prescribing's business, and nothing unsendable is sent", async 
   assert.equal(bogus.error, "unknown_channel");
 });
 
+/* ---- ordering an investigation from the ward ----------------------------------------------------- */
+
+test("THE WARD CAN ORDER A TEST, and a STAT one is at the top of the list of whoever takes the blood", async () => {
+  seedHospital();
+  const { adm } = await admittedPatientOnDrug();
+  const order = (code, body) => as(DOCTOR, "/ward/investigation", "POST", { orgId: ORG, encounterId: adm.encounterId, code, ...(body || {}) });
+
+  const routine = await order("Full blood count");
+  assert.equal(routine.__status, 200, JSON.stringify(routine));
+  assert.equal(routine.priority, "routine", "the safest default");
+  assert.equal(routine.category, "laboratory");
+  // No code system is invented: the ward typed a name, and a code it did not give is not guessed at.
+  assert.equal((await RECORD.latest(TENANT_ROW.id, "ServiceRequest", routine.orderId)).codeSystem, "wardsynq-order-local");
+
+  const stat = await order("Potassium", { priority: "stat", reason: "Suspected hyperkalaemia" });
+  assert.equal(stat.priority, "stat");
+  /* Said on every response. `stat` reaches the person who has to take the blood; it does not reach
+   * the analyser, and a system implying otherwise gets trusted for something it cannot do. */
+  assert.match(stat.priorityNote, /does not make the laboratory faster/);
+
+  /* AND IT ACTUALLY REACHES THEM. A priority that changed nothing downstream would be decoration,
+   * and prescribers stop setting it honestly within a week. */
+  const list = await as(NURSE, `/ward/collections?orgId=${ORG}&patientId=${adm.patientId}`);
+  assert.equal(list.awaitingCollection, 2);
+  assert.equal(list.requests[0].code, "Potassium", "the stat order is first");
+  assert.equal(list.requests[0].priority, "stat");
+  assert.equal(list.requests[1].priority, "routine");
+
+  // A word the system does not know is recorded as routine and SAID, not silently dropped.
+  const odd = await order("Magnesium", { priority: "URGENT!!" });
+  assert.equal(odd.priority, "routine");
+  assert.equal(odd.priorityNotUnderstood, "URGENT!!");
+  assert.match(odd.note, /is not a priority this system knows/);
+
+  // Asking for the same test again on the same stay is the SAME order, not a second specimen.
+  assert.equal((await order("Full blood count")).skipped, "already_ordered");
+});
+
+test("an investigation needs a stay that exists and is open, and is not a nurse's to order", async () => {
+  seedHospital();
+  const { adm } = await admittedPatientOnDrug();
+
+  // An order against a stay that does not exist is a specimen nobody can match to a patient.
+  const ghost = await as(DOCTOR, "/ward/investigation", "POST", { orgId: ORG, encounterId: "wsq-adm-nope", code: "Potassium" });
+  assert.equal(ghost.__status, 404);
+  assert.equal(ghost.error, "encounter_not_found");
+
+  assert.equal((await as(NURSE, "/ward/investigation", "POST", { orgId: ORG, encounterId: adm.encounterId, code: "Potassium" })).__status, 403,
+    "asking for an investigation is a clinical act");
+
+  await as(DOCTOR, "/ward/discharge", "POST", { orgId: ORG, encounterId: adm.encounterId, dischargedAt: "2026-09-09T10:00:00.000Z" });
+  const closed = await as(DOCTOR, "/ward/investigation", "POST", { orgId: ORG, encounterId: adm.encounterId, code: "Potassium" });
+  assert.equal(closed.__status, 409);
+  assert.equal(closed.error, "encounter_closed");
+  assert.match(closed.detail, /order it against the current one/);
+});
+
 /* ---- the flowsheet, from the real record --------------------------------------------------------- */
 
 test("A CONFIGURED ROW WITH NOTHING IN IT STILL APPEARS, which is the whole point", async () => {
