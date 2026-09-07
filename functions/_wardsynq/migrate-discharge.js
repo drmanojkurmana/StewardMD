@@ -218,8 +218,15 @@ async function draftDischargeSummary(request, env, ctx) {
     dischargedAt: ctx.dischargedAt || encounter.periodEnd || null,
   });
 
-  const sections = { ...assembled, ...(ctx.sections && typeof ctx.sections === "object" ? ctx.sections : {}) };
   const id = dischargeSummaryIdFor(encounterId);
+  let current;
+  try { current = await svc.get("ClinicalNote", id); }
+  catch (e) { return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), written: 0 }; }
+  if (current && current.signedBy) {
+    return { ...base, ok: false, status: 409, error: "already_signed", detail: "this discharge summary is signed; a correction is a new signed version, not a redraft", noteId: id, version: current.version };
+  }
+
+  const { sections, editedSections } = mergeSections(assembled, current, ctx.sections);
   const candidate = ClinicalNote({
     id, patientId: encounter.patientId, encounterId,
     noteType: "discharge-summary",
@@ -229,20 +236,50 @@ async function draftDischargeSummary(request, env, ctx) {
     signedBy: null,            // a draft until a clinician signs it
     source: { system: "wardsynq-native", sourceId: `discharge-summary:${id}` },
   });
-
-  let current;
-  try { current = await svc.get("ClinicalNote", id); }
-  catch (e) { return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), written: 0 }; }
-  if (current && current.signedBy) {
-    return { ...base, ok: false, status: 409, error: "already_signed", detail: "this discharge summary is signed; a correction is a new signed version, not a redraft", noteId: id, version: current.version };
-  }
+  // Which sections a human wrote. Bolted on, the convention every sibling migration uses for a field
+  // the canonical model has no slot for. Without it nothing can tell a clinician's words apart from
+  // assembled text, and the summary would have to either claim everything is sourced or claim
+  // nothing is.
+  candidate.editedSections = editedSections;
 
   try {
     const out = await svc.put(candidate, { expectedVersion: current ? current.version : undefined, idempotencyKey: ctx.idempotencyKey || null });
-    return { ...base, ok: true, written: 1, noteId: id, patientId: encounter.patientId, encounterId, sections, signed: false, version: out.record.version, actor: resolved.actor.id, role: resolved.role };
+    return { ...base, ok: true, written: 1, noteId: id, patientId: encounter.patientId, encounterId, sections, editedSections, assembled, signed: false, version: out.record.version, actor: resolved.actor.id, role: resolved.role };
   } catch (e) {
     return { ...base, ...writeFailure(e, { noteId: id, written: 0, actor: resolved.actor.id }) };
   }
+}
+
+/**
+ * PURE. The sections to store, and which of them a clinician wrote.
+ *
+ * THE ASSEMBLER RE-READS THE RECORD ON EVERY DRAFT, so an untouched section refreshes - that is the
+ * point of it. A CORRECTED one must NOT: before this, a re-draft silently reverted a clinician's
+ * words to the assembled text, which meant the screen merely loading the summary would undo them. A
+ * correction a refresh can quietly undo is not a correction.
+ *
+ * A clinician can also take a correction BACK, by submitting text that matches the assembled value
+ * again. That drops the section out of `editedSections` and returns it to tracking the record,
+ * rather than freezing it forever at a value that happens to agree today.
+ */
+function mergeSections(assembled, current, incoming) {
+  const prior = Array.isArray(current && current.editedSections) ? current.editedSections : [];
+  const priorSections = (current && current.sections) || {};
+  const given = incoming && typeof incoming === "object" ? incoming : {};
+
+  const sections = { ...assembled };
+  const edited = new Set();
+  // Corrections already on the record stay, unless this call replaces them.
+  for (const k of prior) if (Object.prototype.hasOwnProperty.call(priorSections, k)) { sections[k] = priorSections[k]; edited.add(k); }
+  for (const k of Object.keys(given)) {
+    const v = given[k];
+    if (v == null) continue;
+    sections[k] = v;
+    // Text that matches what the record assembles is not an override; it is agreement.
+    if (str(v) === str(assembled[k])) { edited.delete(k); sections[k] = assembled[k]; }
+    else edited.add(k);
+  }
+  return { sections, editedSections: [...edited].sort() };
 }
 
 /** Signs the discharge summary. Requires a credential, exactly as the OPD assessment sign-off does. */
@@ -266,9 +303,12 @@ async function signDischargeSummary(request, env, ctx) {
     aiDrafted: !!current.aiDrafted, signedBy: resolved.actor.id,
     source: { system: "wardsynq-native", sourceId: `discharge-summary:${current.id}` },
   });
+  // Carried onto the signed version. Signing must not erase the record of which words were the
+  // clinician's own: that provenance is part of what is being signed.
+  if (Array.isArray(current.editedSections)) signed.editedSections = current.editedSections;
   try {
     const out = await svc.put(signed, { expectedVersion: current.version, idempotencyKey: ctx.idempotencyKey || null });
-    return { ...base, ok: true, written: 1, noteId: id, signed: true, signedBy: resolved.actor.id, version: out.record.version, actor: resolved.actor.id };
+    return { ...base, ok: true, written: 1, noteId: id, signed: true, signedBy: resolved.actor.id, editedSections: signed.editedSections || [], version: out.record.version, actor: resolved.actor.id };
   } catch (e) {
     return { ...base, ...writeFailure(e, { noteId: id, written: 0, actor: resolved.actor.id }) };
   }
@@ -333,7 +373,115 @@ async function dischargePatient(request, env, ctx) {
   }
 }
 
+/**
+ * PURE. What is still outstanding on this stay, and would leave with the patient unresolved.
+ *
+ * A discharge summary that says nothing about a dose still in flight or a test still open reads as
+ * a complete account of the stay when it is not. None of this blocks a discharge - a ward has real
+ * reasons to send a patient home with a result pending - but it must be SHOWN, and shown before the
+ * clinician signs rather than discovered afterwards.
+ */
+function pendingItems(r) {
+  const orders = r.orders || [];
+  const doses = (r.administrations || [])
+    .filter((a) => a && ["ordered", "verified", "dispensed", "scanned", "held"].includes(a.status))
+    .map((a) => ({ kind: "dose", id: a.id, orderId: a.orderId, status: a.status, drug: a.drug || (orders.find((o) => o.id === a.orderId) || {}).drug || null }));
+  const investigations = (r.serviceRequests || [])
+    .filter((s) => s && s.status !== "completed" && s.status !== "cancelled" && s.status !== "revoked")
+    .map((s) => ({ kind: "investigation", id: s.id, status: s.status || "unknown", display: s.display || s.code || null }));
+  // An active medication order on a discharged patient is not itself wrong - it may be the
+  // discharge prescription - but it is a decision somebody has to have made deliberately.
+  const meds = orders.filter((o) => o && o.status === "active")
+    .map((o) => ({ kind: "medication", id: o.id, status: o.status, drug: o.drug, dose: o.dose || null, frequency: o.frequency || null }));
+  const problems = (r.problems || [])
+    .filter((c) => c && c.clinicalStatus === "active" && c.verificationStatus !== "confirmed")
+    .map((c) => ({ kind: "problem", id: c.id, status: c.verificationStatus, display: c.display }));
+  return [...doses, ...investigations, ...meds, ...problems];
+}
+
+/**
+ * READS the discharge summary. Writes nothing.
+ *
+ * Returns the STORED note (if one exists) and, beside it, what the assembler says the record
+ * contains RIGHT NOW. Both, deliberately: that pairing is the only honest way for a screen to show
+ * a clinician's own words apart from the record's, and to show when a correction has since drifted
+ * from what the chart says. A screen that could only read one of them would have to guess.
+ *
+ * ctx: { migration, encounterId, patientId?, actorDeps, recordDeps }
+ */
+async function readDischargeSummary(request, env, ctx) {
+  const mig = ctx.migration;
+  const base = { mode: mig && mig.mode, tenantId: (mig && mig.tenantId) || null };
+  if (!mig || mig.mode === "off") return { ...base, ok: true, skipped: "off", stored: null, assembled: null };
+
+  const encounterId = str(ctx.encounterId);
+  if (!encounterId) return { ...base, ok: false, status: 422, error: "encounter_required" };
+
+  const { svc, error } = await openService(request, env, ctx, "record:read");
+  if (error) return { ...base, ...error };
+
+  let encounter, patient, observations, orders, administrations, allergies, serviceRequests, notes, problems, stored;
+  try {
+    encounter = await svc.get("Encounter", encounterId);
+    if (!encounter) return { ...base, ok: false, status: 404, error: "encounter_not_found", encounterId };
+    const patientId = str(ctx.patientId) || encounter.patientId;
+    [patient, observations, orders, administrations, allergies, serviceRequests, notes, problems, stored] = await Promise.all([
+      svc.get("Patient", patientId).catch(() => null),
+      svc.byPatient("Observation", patientId).catch(() => []),
+      svc.byPatient("MedicationOrder", patientId).catch(() => []),
+      svc.byPatient("MedicationAdministration", patientId).catch(() => []),
+      svc.byPatient("AllergyIntolerance", patientId).catch(() => []),
+      svc.byPatient("ServiceRequest", patientId).catch(() => []),
+      svc.byPatient("ClinicalNote", patientId).catch(() => []),
+      svc.byPatient("Condition", patientId).catch(() => []),
+      svc.get("ClinicalNote", dischargeSummaryIdFor(encounterId)).catch(() => null),
+    ]);
+  } catch (e) {
+    return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message) };
+  }
+
+  const mine = (rows) => (rows || []).filter((x) => x && (x.encounterId === encounterId || x.id === encounterId));
+  const myOrders = mine(orders);
+  const myAdmins = (administrations || []).filter((a) => myOrders.some((o) => o.id === a.orderId));
+  const assembled = assembleDischargeSummary({
+    encounter, patient,
+    observations: mine(observations), orders: myOrders, administrations: myAdmins,
+    allergies: allergies || [], serviceRequests: mine(serviceRequests), notes: mine(notes),
+    problems: problems || [],
+    dischargedAt: encounter.periodEnd || null,
+  });
+
+  return {
+    ...base, ok: true, encounterId, patientId: encounter.patientId,
+    /* Who this document is about. A discharge summary that cannot name its patient is not one, and
+     * the assembled prose deliberately does not carry identity - it describes the stay. `provisional`
+     * is carried through because an unmerged trauma record must never be mistaken for a confirmed
+     * identity on a document that leaves the hospital. */
+    patient: patient ? {
+      name: patient.name || null, mrn: patient.mrn || null, sex: patient.sex || null,
+      dob: patient.dob || null, provisional: !!patient.provisional,
+    } : null,
+    encounter: {
+      status: encounter.status, class: encounter.class,
+      ward: (encounter.location && encounter.location.ward) || null,
+      bed: (encounter.location && encounter.location.bed) || null,
+      admittedAt: encounter.periodStart || null, dischargedAt: encounter.periodEnd || null,
+      disposition: encounter.disposition || null, attendingId: encounter.attendingId || null,
+    },
+    assembled,
+    stored: stored ? {
+      noteId: stored.id, sections: stored.sections || {},
+      editedSections: Array.isArray(stored.editedSections) ? stored.editedSections : [],
+      signed: !!stored.signedBy, signedBy: stored.signedBy || null,
+      authorId: stored.authorId || null, version: stored.version,
+      recordedAt: (stored.meta && stored.meta.recordedAt) || null,
+    } : null,
+    pending: pendingItems({ orders: myOrders, administrations: myAdmins, serviceRequests: mine(serviceRequests), problems: problems || [] }),
+  };
+}
+
 export {
   NOT_RECORDED, dischargeSummaryIdFor, lengthOfStayDays, assembleDischargeSummary,
+  mergeSections, pendingItems, readDischargeSummary,
   draftDischargeSummary, signDischargeSummary, dischargePatient,
 };
