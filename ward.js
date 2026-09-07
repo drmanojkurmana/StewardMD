@@ -37,6 +37,7 @@
     /* The terminology search: null while it runs, an array once it answers, undefined when nobody has
      * asked. Three states, because "searching" and "no matches" must not look the same. */
     icd: undefined, probText: "", probCode: "",
+    templates: [], noteTemplateId: "", noteResult: null,
     due: [], prn: [], unscheduled: [], truncated: false,
     from: "", to: "",          // the window being viewed, NOT a claim about when a dose is due
     busy: false, err: "", note: "", refusal: null, loaded: false
@@ -351,7 +352,7 @@
       // stay being closed - the summary screen states plainly when a stay is still open.
       '<button class="w-btn ghost" data-w-act="move" title="Transfer to another ward or bed">' + ms("swap_horiz") + "Transfer</button>" +
       '<button class="w-btn ghost" data-w-act="summary" title="Discharge summary">' + ms("description") + "Summary</button></div>" +
-      criticalsCard(state) + problemsCard(state) + vitalsCard() + fluidCard(state) + marCard(state) + outboxCard(state);
+      criticalsCard(state) + problemsCard(state) + noteCard(state) + vitalsCard() + fluidCard(state) + marCard(state) + outboxCard(state);
   }
 
   var FLUID_IN = [["oral", "Oral"], ["iv", "IV"], ["ng", "NG / enteral"], ["blood", "Blood"], ["other", "Other"]];
@@ -518,6 +519,49 @@
       "</div>";
   }
 
+  /* The ward round note. The templates are the HOSPITAL's - this screen supplies no headings of its
+   * own and no text at all, which is the rule note-templates.js already keeps on the server: the
+   * questions a hospital wants asked are a clinical decision, and inventing them would be making it.
+   *
+   * A REQUIRED SECTION LEFT BLANK DOES NOT BLOCK THE SAVE. A clinician interrupted mid-note by an
+   * arrest must be able to keep what they have, and a screen that refuses is one people stop using
+   * for the notes that matter most. The server names the gap and the note is stored incomplete,
+   * visibly - which is also what the discharge summary does.
+   *
+   * IT NEVER SIGNS. Signing is its own act with its own authority (note-cosign.js), and a composer
+   * that signed on the way past would put a name against a note nobody re-read. */
+  function noteCard(state) {
+    var tpls = state.templates || [];
+    if (!tpls.length) return "";
+    var chosen = null, i;
+    for (i = 0; i < tpls.length; i++) if (tpls[i].id === state.noteTemplateId) chosen = tpls[i];
+
+    var opts = '<option value="">Choose a note…</option>' + tpls.map(function (t) {
+      return '<option value="' + esc(t.id) + '"' + (chosen && chosen.id === t.id ? " selected" : "") + ">" + esc(t.name) + "</option>";
+    }).join("");
+
+    var fields = chosen ? chosen.sections.map(function (sec) {
+      return '<label class="w-f"><span>' + esc(sec.title) + (sec.required ? " <i>required</i>" : "") + "</span>" +
+        '<textarea id="wNote_' + esc(sec.key) + '" rows="3" placeholder="' + esc(sec.prompt || "") + '"></textarea></label>';
+    }).join("") : "";
+
+    var r = state.noteResult;
+    return '<div class="w-card"><div class="w-card-h">' + ms("edit_note") + "<h3>Ward round note</h3></div>" +
+      '<div class="w-filter"><select id="wNoteTpl">' + opts + "</select>" +
+      '<button class="w-btn ghost" data-w-act="pickTpl">Open</button></div>' +
+      (chosen
+        ? '<div class="w-note">' + fields + "</div>" +
+          '<p class="w-hint">' + ms("info") + "A blank section is recorded as not recorded, and the note says so. Nothing here writes text for you.</p>" +
+          '<button class="w-btn" data-w-act="note">' + ms("save") + "Save note</button>"
+        : '<p class="w-empty">The headings come from this hospital&#39;s own templates.</p>') +
+      (r ? '<div class="w-sub"><h4>' + ms("task_alt") + "Saved</h4>" +
+        '<p class="w-hint' + (r.incomplete ? " warn" : "") + '">' + (r.incomplete
+          ? ms("warning") + "Saved with " + esc((r.missing || []).map(function (m) { return m.title; }).join(", ")) + " still blank. It is on the record as incomplete."
+          : ms("check_circle") + "Every section was filled in.") + "</p>" +
+        '<p class="w-hint">' + ms("info") + "Unsigned. Submit it for signature from the ward list.</p></div>" : "") +
+      "</div>";
+  }
+
   function _render(state) {
     return '<div class="w-shell"><header class="w-top"><button class="w-ic" data-w-act="close">' + ms("close") + "</button>" +
       '<span class="w-title">WardSynQ &middot; Inpatient</span>' +
@@ -643,6 +687,35 @@
   /* Searching the terminology. The words the clinician typed are the query and nothing else - no
    * patient identifier is sent, because a lookup that carried the patient it was for would leak a
    * diagnosis to a reference service that has no business knowing one. */
+  function loadTemplates() {
+    return apiGet("/ward/templates?orgId=" + encodeURIComponent(st.orgId))
+      .then(function (r) { if (r && r.ok) st.templates = r.templates || []; paint(); })
+      // Silent: a ward whose note templates would not load can still chart everything else, and an
+      // error banner over the whole chart for a missing composer helps nobody.
+      .catch(function () {});
+  }
+  /* Saves the note. The sections go up exactly as typed - this screen composes nothing, expands no
+   * abbreviation and fills nothing in. */
+  function saveNote() {
+    var s = st.sel; if (!s || !st.noteTemplateId) return;
+    var tpl = null, i;
+    for (i = 0; i < st.templates.length; i++) if (st.templates[i].id === st.noteTemplateId) tpl = st.templates[i];
+    if (!tpl) return;
+    var sections = {};
+    tpl.sections.forEach(function (sec) { var v = val("wNote_" + sec.key); if (v) sections[sec.key] = v; });
+    st.busy = true; paint();
+    apiPost("/ward/note", { orgId: st.orgId, templateId: tpl.id, encounterId: s.encounterId, sections: sections })
+      .then(function (r) {
+        if (settle(r, r && r.incomplete ? null : "Note saved.")) {
+          st.noteResult = r;
+          tpl.sections.forEach(function (sec) { var el = document.getElementById("wNote_" + sec.key); if (el) el.value = ""; });
+          loadCosigns();
+        }
+        paint();
+      })
+      .catch(function () { st.busy = false; st.err = "Could not save the note."; paint(); });
+  }
+
   function findCode() {
     var q = val("wProbText");
     st.probText = q; st.probCode = val("wProbCode");
@@ -836,7 +909,8 @@
       st.sel = p; st.view = "chart"; st.due = []; st.prn = []; st.unscheduled = []; st.problems = []; st.criticals = []; st.balance = null; st.outbox = [];
       st.err = ""; st.note = ""; st.refusal = null;
       defaultWindow();
-      paint(); loadChart(); loadRound(); loadBalance(); loadOutbox(); return;
+      st.noteTemplateId = ""; st.noteResult = null;
+      paint(); loadChart(); loadRound(); loadBalance(); loadOutbox(); loadTemplates(); return;
     }
     if (cmd === "summary") {
       var sel = st.sel; if (!sel) return;
@@ -856,6 +930,8 @@
     if (cmd === "quality") { loadQuality(); return; }
     if (cmd === "problem") { addProblem(); return; }
     if (cmd === "icd") { findCode(); return; }
+    if (cmd === "pickTpl") { st.noteTemplateId = val("wNoteTpl"); st.noteResult = null; paint(); return; }
+    if (cmd === "note") { saveNote(); return; }
     if (cmd === "icdpick") { pickCode(Number(arg)); return; }
     if (cmd === "resolve") { resolveProblem(arg); return; }
     if (cmd === "downtime") { loadDowntime(); return; }
