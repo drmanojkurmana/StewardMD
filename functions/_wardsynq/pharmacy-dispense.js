@@ -26,9 +26,19 @@
  * order with no verification at all can still be dispensed - and the record says `unverified: true`
  * rather than implying a check that never happened.
  *
- * NO INVENTORY. There is no stock level, no reorder, no expiry, no location. That is a pharmacy
- * management system and it is deliberately out of scope; this records the ISSUE against the order,
- * which is what the clinical record needs and what an audit asks for.
+ * NO INVENTORY. There is no stock level, no reorder and no location. That is a pharmacy management
+ * system and it is deliberately out of scope; this records the ISSUE against the order, which is what
+ * the clinical record needs and what an audit asks for.
+ *
+ * BATCH AND EXPIRY ARE NOT INVENTORY. They are what the pharmacist reads off the box in front of them,
+ * and they are the two facts a recall and a harm investigation ask for first: WHICH batch went to
+ * which patient. Recording them here needs no stock system, and an EXPIRED one is REFUSED - the one
+ * place this file blocks on something other than the prescription, because dispensing an expired drug
+ * is a recognised harm and the box says so in the pharmacist's hand.
+ *
+ * AN ABSENT EXPIRY IS NOT A VALID ONE. A dispense with no expiry recorded is allowed - not every
+ * hospital captures it, and refusing would stop supply everywhere that does not - but it is recorded
+ * as absent and never as "checked and fine".
  */
 
 import { GovernanceError } from "../../wardsynq/wardsynq-actors.js";
@@ -60,6 +70,10 @@ function MedicationDispense(input) {
      * Recording a quantity as though it were a dose is how a drug chart acquires a number nobody
      * prescribed. */
     quantity: i.quantity || null,
+    /* What the pharmacist read off the box. The two facts a recall asks for first: WHICH batch went
+     * to which patient. Neither is derived, and neither is a stock level. */
+    batch: i.batch || null,
+    expiry: i.expiry || null,
     state: STATES.includes(i.state) ? i.state : "issued",
     destination: i.destination || null,          // the ward it went to
     // Whether a pharmacist had checked this exact version when it was issued. Stated, never assumed.
@@ -86,6 +100,36 @@ function dispenseIdFor(orderId, orderVersion, dispensedAt) {
   if (orderVersion === null || orderVersion === undefined || orderVersion === "") return null;
   const v = Number(orderVersion);
   return o && t && Number.isFinite(v) ? `wsq-disp-${o}-v${v}-${t}` : null;
+}
+
+/**
+ * PURE. Is this stock expired at the moment it is being issued?
+ *
+ * `unknown` is its own answer and never "fine": a hospital that does not capture expiry has not
+ * checked it, and a system that reported that as a pass would be asserting something nobody looked at.
+ */
+function expiryState(expiry, atIso) {
+  const e = str(expiry);
+  if (!e) return { state: "unknown", detail: "No expiry was recorded, so none was checked." };
+  /* A date-only expiry means the END of that day: a box marked 09/2026 is usable on 30 September.
+   * Parsing it as midnight would refuse a month of usable stock, and a pharmacy that has to work
+   * around a refusal stops reading them. */
+  const dayOnly = /^\d{4}-\d{2}-\d{2}$/.test(e);
+  const monthOnly = /^\d{4}-\d{2}$/.test(e);
+  let endMs;
+  if (monthOnly) {
+    const [y, m] = e.split("-").map(Number);
+    endMs = Date.UTC(y, m, 1) - 1;                       // the last instant of that month
+  } else if (dayOnly) {
+    endMs = Date.parse(e + "T23:59:59.999Z");
+  } else {
+    endMs = Date.parse(e);
+  }
+  if (!Number.isFinite(endMs)) return { state: "unreadable", detail: `"${e}" is not a date this system can read, so no expiry was checked.` };
+  const atMs = Date.parse(str(atIso)) || Date.now();
+  return endMs < atMs
+    ? { state: "expired", expiredAt: new Date(endMs).toISOString(), detail: `This stock expired on ${e}.` }
+    : { state: "in-date", expiresAt: new Date(endMs).toISOString() };
 }
 
 /** PURE. A quantity is two things or it is nothing. "Some" is not a supply record. */
@@ -134,7 +178,7 @@ function writeFailure(e, extra) {
 function summary(d) {
   return {
     dispenseId: d.id, orderId: d.orderId, orderVersion: d.orderVersion,
-    drug: d.drug || null, quantity: d.quantity || null, state: d.state,
+    drug: d.drug || null, quantity: d.quantity || null, batch: d.batch || null, expiry: d.expiry || null, state: d.state,
     destination: d.destination || null, unverified: !!d.unverified, verifiedVersion: d.verifiedVersion,
     dispensedBy: d.dispensedBy, dispensedAt: d.dispensedAt,
     returnedBy: d.returnedBy || null, returnedAt: d.returnedAt || null, returnReason: d.returnReason || null,
@@ -166,6 +210,20 @@ async function dispenseOrder(request, env, ctx) {
   // A stopped or draft prescription is not supplied. Only a live order gets stock issued against it.
   if (order.status !== "active") return { ...base, ok: false, status: 409, error: "order_not_active", detail: `this order is ${order.status}`, orderId, written: 0 };
 
+  /* THE ONE PLACE THIS FILE BLOCKS ON SOMETHING OTHER THAN THE PRESCRIPTION. Dispensing an expired
+   * drug is a recognised harm, and the box says so in the pharmacist's hand. `unknown` and
+   * `unreadable` do NOT block - not every hospital captures expiry, and refusing everywhere would
+   * stop supply for a field nobody fills in - but neither is ever recorded as "checked and fine". */
+  const at0 = str(ctx.at) || new Date().toISOString();
+  const expiry = expiryState(ctx.expiry, at0);
+  if (expiry.state === "expired") {
+    return {
+      ...base, ok: false, status: 409, error: "expired_stock",
+      detail: expiry.detail, expiry: str(ctx.expiry), batch: str(ctx.batch) || null,
+      basis: "the expiry recorded on this supply, not a clinical finding", written: 0,
+    };
+  }
+
   const mine = (verifications || []).filter((v) => v && str(v.orderId) === orderId);
   const check = verificationFor(mine, order.version);
   if (check.state === "superseded") {
@@ -178,7 +236,7 @@ async function dispenseOrder(request, env, ctx) {
     };
   }
 
-  const at = str(ctx.at) || new Date().toISOString();
+  const at = at0;
   const id = dispenseIdFor(orderId, order.version, at);
   if (!id) return { ...base, ok: false, status: 422, error: "bad_identifiers", written: 0 };
 
@@ -190,7 +248,8 @@ async function dispenseOrder(request, env, ctx) {
   const record = MedicationDispense({
     id, patientId: order.patientId, encounterId: order.encounterId || null,
     orderId, orderVersion: order.version, drug: order.drug, drugCode: order.drugCode || null,
-    quantity, state: "issued", destination: str(ctx.destination) || null,
+    quantity, batch: str(ctx.batch) || null, expiry: str(ctx.expiry) || null,
+    state: "issued", destination: str(ctx.destination) || null,
     verifiedVersion: check.state === "current" ? check.verifiedVersion : null,
     // Stated on the record rather than left to be inferred from an absent verification.
     unverified: check.state === "none",
@@ -203,6 +262,8 @@ async function dispenseOrder(request, env, ctx) {
       ...base, ok: true, written: 1, ...summary({ ...record, version: out.record.version }),
       /* Said on every response, because this is the confusion the whole file exists to prevent. */
       note: "Issued to the ward. No dose has been administered, and no administration record was touched.",
+      expiryCheck: expiry,
+      ...(expiry.state === "unknown" || expiry.state === "unreadable" ? { expiryWarning: expiry.detail } : {}),
       ...(check.state === "none" ? { warning: "No pharmacist verification exists for this order. It is recorded as unverified." } : {}),
       actor: resolved.actor.id,
     };
@@ -270,4 +331,4 @@ async function listDispenses(request, env, ctx) {
   };
 }
 
-export { TYPE, STATES, MedicationDispense, dispenseIdFor, quantityOf, verificationFor, dispenseOrder, returnDispense, listDispenses };
+export { TYPE, STATES, MedicationDispense, dispenseIdFor, quantityOf, expiryState, verificationFor, dispenseOrder, returnDispense, listDispenses };

@@ -4,7 +4,7 @@
  */
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { STATES, MedicationDispense, dispenseIdFor, quantityOf, verificationFor } from "../functions/_wardsynq/pharmacy-dispense.js";
+import { STATES, MedicationDispense, dispenseIdFor, quantityOf, expiryState, verificationFor } from "../functions/_wardsynq/pharmacy-dispense.js";
 
 test("THERE IS NO 'GIVEN' STATE, because that is a different record entirely", () => {
   /* A dispense is a SUPPLY fact: medicine left the pharmacy. A system where "dispensed" can drift
@@ -70,4 +70,32 @@ test("what was issued stays what was issued", () => {
   assert.equal(d.unverified, false);
   // A non-numeric version is null rather than a coerced 0.
   assert.equal(MedicationDispense({ id: "d", orderId: "o", orderVersion: "2" }).orderVersion, null);
+});
+
+test("AN EXPIRY IS THE END OF ITS DAY, and an absent one is never 'checked and fine'", () => {
+  const at = "2026-09-30T10:00:00.000Z";
+  /* A box marked 09/2026 is usable on 30 September. Parsing that as midnight would refuse a month of
+   * usable stock, and a pharmacy that has to work around a refusal stops reading them. */
+  assert.equal(expiryState("2026-09", at).state, "in-date");
+  assert.equal(expiryState("2026-09-30", at).state, "in-date");
+  assert.equal(expiryState("2026-08", at).state, "expired");
+  assert.equal(expiryState("2026-09-29", at).state, "expired");
+  assert.match(expiryState("2026-08", at).detail, /expired on 2026-08/);
+
+  /* `unknown` is its OWN answer and never a pass: a hospital that does not capture expiry has not
+   * checked it, and reporting that as fine would assert something nobody looked at. */
+  assert.equal(expiryState("", at).state, "unknown");
+  assert.equal(expiryState(null, at).state, "unknown");
+  assert.match(expiryState("", at).detail, /none was checked/);
+  assert.equal(expiryState("next Tuesday", at).state, "unreadable");
+  assert.match(expiryState("next Tuesday", at).detail, /no expiry was checked/);
+});
+
+test("batch and expiry are recorded, and neither is derived", () => {
+  const d = MedicationDispense({ id: "d", orderId: "o", batch: "B-4471", expiry: "2027-03" });
+  assert.equal(d.batch, "B-4471");
+  assert.equal(d.expiry, "2027-03");
+  // Which batch went to which patient is the first thing a recall asks. Nothing invents either.
+  assert.equal(MedicationDispense({ id: "d", orderId: "o" }).batch, null);
+  assert.equal(MedicationDispense({ id: "d", orderId: "o" }).expiry, null);
 });
