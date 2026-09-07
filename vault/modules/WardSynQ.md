@@ -1170,3 +1170,49 @@ rather than code. Recorded plainly so nobody re-does the engineering expecting t
 **Applies to all 16 hazards, not just these two:** zero have clinical sign-off. Every threshold pack
 — MEOWS cut-offs, PEWS bands, critical-result limits, escalation policy — is UNAPPROVED seed content
 owned by the relevant lead. `scripts/wardsynq-assurance.mjs` prints that unconditionally.
+
+## The subsystems added 2026-09-07 (#907–#917)
+
+Eleven PRs in one session, all `functions/_wardsynq/*.js` behind `/api/queue/ward/*`, all with their
+own resource type in `service.js`'s allow-list and their own narrow grant in `actor.js`. **None of
+them has run on a phone.**
+
+| file | resource | the one thing it exists to prevent |
+|---|---|---|
+| `risk-assessment.js` | `RiskAssessment` | a score with no consequence attached to it |
+| `prescription-transmit.js` | `PrescriptionTransmission` | "sent" reading as "the pharmacy has it" |
+| `note-cosign.js` | (`ClinicalNote`) | a note the system cannot verify sitting unsigned forever |
+| `override-analytics.js` | `SafetyFiring` | an override count with no denominator |
+| `downtime.js` | none — **read only** | a blank allergy line reading as "no known allergies" |
+| `backup.js` | none — pure | a restore that is silently missing a version |
+| `quality.js` | none — computed | a rate printed over a denominator of one |
+| `pharmacy-dispense.js` | `MedicationDispense` | "dispensed" drifting into "given" |
+| `specimen.js` | `SpecimenCollection` | an uncollected order looking like one awaiting a result |
+
+### Rules these eleven all followed, worth not re-litigating
+
+- **A workflow fact gets its own resource type**, never a status column on a clinical one. Transmission,
+  dispensing and collection are all statements about a MESSAGE or a SUPPLY, and none of them may
+  touch the `MedicationOrder` or the `MedicationAdministration` they refer to.
+- **A new capability gets its own enumerated grant**, never a widening of an existing one. Where two
+  authorities genuinely share a route (`specimen-outcome`: the ward fails a draw, the lab receives
+  it) the route falls back to the second capability and the STORE still checks the write.
+- **Absence is stated, never rendered as a zero or a blank.** `overrideRate: null` not 0; "allergies
+  could not be read" not an empty line; "no dose times could be worked out" not an empty column.
+- **A deterministic id must include everything that makes the act distinct.** Twice this session an
+  id keyed only on the parent would have silently overwritten a real second event — a repeat supply,
+  a second venepuncture. Both are exactly what an audit asks about.
+- **`Number(null)` is 0 and 0 is finite.** That guard let a missing order version through as "v0" in
+  `prescription-transmit.js`. Check for the absent value, not for finiteness.
+
+### Two things found by accident and worth remembering
+
+- **A literal NUL byte in `migrate-inpatient.js`** (a key separator in a template literal) made grep
+  classify the whole 475-line file as binary, so every search over the ordering path silently
+  returned nothing. Fixed to a `\u0000` escape - same value at runtime, and the file stays text.
+  (Writing this note reintroduced the byte once, which is how easy it is.) If a grep over a
+  known-good path returns nothing, check
+  whether the file is being treated as binary before concluding the code is not there.
+- **`--experimental-sqlite` is missing from CI**, so nine real-SQL tests SKIP rather than run. A
+  skipping test keeps the build green while nothing executes. Fix committed on the local branch
+  `wardsynq-ci-sqlite`; it needs a token with `workflow` scope.

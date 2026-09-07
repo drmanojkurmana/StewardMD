@@ -147,3 +147,88 @@ body.dark #smdWard { --bg: #191c1e; --on-surface: #eff1f3; --on-surface-variant:
 #smdWard .w-mini { list-style: none; margin: 8px 0 0; padding: 0; display: flex; flex-direction: column; gap: 6px; font-size: 14px; }
 #smdWard .w-mini span { color: var(--on-surface-variant); font-size: 13px; }
 #smdWard .w-sub.warn .w-mini span, #smdWard .w-sub.warn .w-hint { color: inherit; opacity: .85; }
+
+/* Prescription outbox. Only "confirmed received" is styled as finished; queued, sent and failed all
+   read as unfinished work, because they are. Restrained on purpose: this is a worklist, not an
+   alarm, and the one that failed is distinguished by a left edge and a reason, not by a red card. */
+#smdWard .w-tx li { border-left-width: 3px; border-left-color: var(--outline-variant); }
+#smdWard .w-tx li.open { border-left-color: var(--outline); }
+#smdWard .w-tx li.tx-failed { border-left-color: var(--on-warn-container); }
+#smdWard .w-st.acknowledged { background: var(--ok-container); color: var(--on-ok-container); }
+#smdWard .w-st.failed { background: var(--warn-container); color: var(--on-warn-container); }
+#smdWard .w-tx .w-dose-h span { text-transform: capitalize; }
+#smdWard .w-unsent li { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+#smdWard .w-unsent li b { flex: 0 0 auto; }
+#smdWard .w-unsent li .w-btn { margin-left: auto; }
+
+/* Problem entry. The code box sits beside the words and is never filled in from them. */
+#smdWard .w-prob { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
+#smdWard .w-prob input, #smdWard .w-prob select { flex: 1 1 140px; min-width: 0; border: 1px solid var(--outline-variant); border-radius: 12px;
+  background: var(--sc-low); color: var(--on-surface); font: 400 14px var(--w-sans); padding: 11px 12px; min-height: 44px; }
+#smdWard .w-prob input#wProbText { flex: 2 1 200px; }
+#smdWard .w-problems li .w-btn.tiny { margin-left: auto; }
+
+/* Terminology results. Each one is a BUTTON somebody has to press: nothing is preselected, so the
+   list can never be mistaken for a choice already made. */
+#smdWard .w-icd { list-style: none; margin: 8px 0 0; padding: 0; display: flex; flex-direction: column; gap: 6px; }
+#smdWard .w-icd-p { display: flex; align-items: baseline; gap: 10px; width: 100%; text-align: left; cursor: pointer;
+  border: 1px solid var(--outline-variant); border-radius: 10px; background: var(--sc-low); color: inherit;
+  font: 400 14px var(--w-sans); padding: 9px 11px; min-height: 44px; }
+#smdWard .w-icd-p:active { background: var(--sc); }
+#smdWard .w-icd-p b { font: 700 13px var(--mono, ui-monospace, Menlo, monospace); flex: 0 0 auto; }
+#smdWard .w-icd-p span { flex: 1; min-width: 0; }
+#smdWard .w-icd-p small { color: var(--on-surface-variant); font-size: 11px; text-transform: uppercase; letter-spacing: .05em; }
+
+/* Measures. A big number and, always beside it, the two numbers it came from: a rate whose
+   denominator is not shown is a rate nobody can argue with, and these exist to be argued with. */
+#smdWard .w-q { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+#smdWard .w-q li { border: 1px solid var(--outline-variant); border-radius: 12px; padding: 11px 13px; background: var(--sc-low); }
+#smdWard .w-q li.unavailable { background: none; border-style: dashed; }
+#smdWard .w-q h4 { margin: 0 0 6px; font-size: 13.5px; font-weight: 600; }
+#smdWard .w-q-n { display: flex; align-items: baseline; gap: 10px; }
+#smdWard .w-q-n b { font: 700 26px var(--mono, ui-monospace, Menlo, monospace); font-variant-numeric: tabular-nums; }
+#smdWard .w-q-n span { font-size: 12.5px; color: var(--on-surface-variant); }
+#smdWard .w-q .w-hint { margin: 6px 0 0; }
+
+/* The downtime pack. On screen it is a preview; on paper it is the thing. Everything about the
+   styling serves one property: it must be obvious that this is a COPY, and obvious where it does not
+   know something. A gap is set in the error colour and in words, never left as a reassuring blank. */
+#smdWard .w-dt { display: flex; flex-direction: column; gap: 12px; }
+#smdWard .w-dt-bar { display: flex; align-items: center; gap: 10px; }
+#smdWard .w-dt-bar .w-btn { margin-left: 0; }
+#smdWard .w-dt-h { background: var(--sc-lowest); border: 1px solid var(--outline-variant); border-radius: 16px; padding: 14px; }
+#smdWard .w-dt-h h2 { margin: 0 0 4px; font-size: 17px; }
+#smdWard .w-dt-h p { margin: 4px 0 0; font-size: 13px; color: var(--on-surface-variant); }
+#smdWard .w-dt-warn { border-left: 3px solid var(--on-warn-container); background: var(--warn-container); color: var(--on-warn-container) !important;
+  padding: 9px 11px; border-radius: 0 10px 10px 0; line-height: 1.5; }
+#smdWard .w-dt-gap { color: var(--on-error-container); background: var(--error-container); padding: 2px 7px; border-radius: 6px; font-weight: 700; display: inline-block; }
+#smdWard .w-dt-p { background: var(--sc-lowest); border: 1px solid var(--outline-variant); border-radius: 16px; padding: 14px; break-inside: avoid; }
+#smdWard .w-dt-p header { display: flex; align-items: center; gap: 12px; }
+#smdWard .w-dt-bed { flex: 0 0 46px; height: 46px; border-radius: 12px; background: var(--primary-container); color: var(--on-primary-container); display: grid; place-items: center; font-weight: 700; }
+#smdWard .w-dt-p header b { display: block; font-size: 15px; }
+#smdWard .w-dt-p header small { color: var(--on-surface-variant); font-size: 12px; }
+#smdWard .w-dt-alg { margin: 10px 0 0; font-size: 14px; }
+#smdWard .w-dt-crit { margin: 8px 0 0; font-size: 13px; display: flex; align-items: center; gap: 5px; color: var(--on-error-container); }
+#smdWard .w-dt-crit .material-symbols-outlined { font-size: 17px; }
+#smdWard .w-dt-meds { list-style: none; margin: 10px 0 0; padding: 0; display: flex; flex-direction: column; gap: 8px; font-size: 14px; }
+#smdWard .w-dt-meds li { border-top: 1px solid var(--outline-variant); padding-top: 8px; }
+#smdWard .w-dt-times { font: 500 12.5px var(--mono, ui-monospace, Menlo, monospace); color: var(--on-surface-variant); margin-top: 3px; }
+/* Space to write in. A downtime pack with nowhere to record what was given is half a plan. */
+#smdWard .w-dt-blank { margin-top: 12px; border: 1px dashed var(--outline-variant); border-radius: 10px; height: 84px; position: relative; }
+#smdWard .w-dt-blank span { position: absolute; top: 6px; left: 10px; font: 600 10.5px var(--w-sans); text-transform: uppercase; letter-spacing: .06em; color: var(--on-surface-variant); }
+
+@media print {
+  /* The pack is the page. Everything else in the app is hidden, and the shell's fixed positioning is
+     undone so more than the first screenful reaches the paper. */
+  #smdWard { position: static; background: #fff; color: #000; }
+  #smdWard .w-shell, #smdWard .w-canvas { display: block; height: auto; overflow: visible; padding: 0; }
+  #smdWard .w-top, #smdWard .w-noprint, #smdWard .w-refusal, #smdWard .w-err, #smdWard .w-ok { display: none !important; }
+  #smdWard .w-dt-p { page-break-inside: avoid; break-inside: avoid; border: 0; border-bottom: 1.5pt solid #000; border-radius: 0; padding: 0 0 10pt; margin-bottom: 12pt; }
+  #smdWard .w-dt-h { border: 0; border-bottom: 2pt solid #000; border-radius: 0; padding: 0 0 8pt; }
+  #smdWard .w-dt-bed { background: #000; color: #fff; border-radius: 0; }
+  /* The warning and the gaps must survive a black-and-white printer, so they carry a border and
+     weight rather than relying on a tint that prints as pale grey. */
+  #smdWard .w-dt-warn { background: none; color: #000 !important; border: 1.5pt solid #000; border-radius: 0; font-weight: 600; }
+  #smdWard .w-dt-gap { background: none; color: #000; border: 1.5pt solid #000; border-radius: 0; }
+  @page { size: A4; margin: 12mm; }
+}

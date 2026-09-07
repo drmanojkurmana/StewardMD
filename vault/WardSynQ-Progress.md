@@ -8,32 +8,32 @@ NOT counted as WardSynQ's own implementation.
 Scoring per domain: `record path` (25) + `safety/governance` (25) + `UI a clinician can use` (35) +
 `tests + real-device proof` (15). A domain with a working API and no UI caps at 65.
 
-Updated: 2026-09-07 (PRs #887, #889, #890, #892, #894, #895, #897 pharmacy verification, #898 break-glass, #899 FHIR, #900 reconciliation + metrics)
+Updated: 2026-09-07 (PRs #887, #889, #890, #892, #894, #895, #897 pharmacy verification, #898 break-glass, #899 FHIR, #900 reconciliation + metrics, #907 risk assessments, #908 e-prescribing)
 
 | # | Domain (Epic module) | Weight | % | Status |
 |---|---|---|---|---|
 | 1 | Patient identity / MPI (Identity) | 5 | 90 | Deterministic MRN→id, dedup, no cross-tenant, and a reversible merge that moves nothing. No probabilistic matching, and none wanted without a human deciding. |
-| 2 | Registration / scheduling (Cadence, Prelude) | 5 | 55 | OPD register + queue live on device. No appointments, no recall, no bed-linked scheduling. |
-| 3 | Outpatient encounter (Ambulatory) | 6 | 75 | Encounter lifecycle, vitals, assessment, sign — proven on real device. No templates, no flowsheet designer. |
-| 4 | Orders — investigations (Beaker/Radiant order entry) | 5 | 85 | ServiceRequest write path + UI, and order sets that apply through the ordinary ordering route. No priority or specimen-collection workflow. |
-| 5 | Prescribing (Willow Ambulatory) | 6 | 70 | MedicationOrder, dose parsing, print. No e-prescribing transmission, no formulary. |
-| 6 | Clinical decision support (Best Practice Advisories) | 7 | 80 | Allergy + cross-reactivity + interactions + dose ceilings, fail-closed, Indian drug DB + FDA, and override analytics per rule. No BPA authoring, no firing counts so no override RATE yet. |
-| 7 | Problem list (Problem List) | 4 | 70 | #887. Coded/text, provisional default, versioned resolve, feeds the summary. Read-only on the ward screen; no entry UI. |
-| 8 | Inpatient admission / ward (ADT) | 7 | 90 | #889. Admit, ward list, ward vitals, discharge, **with a UI**. Transfer with a bed-collision refusal, and a bed board. No admission scheduling. |
-| 9 | eMAR / medication administration (Willow Inpatient) | 8 | 90 | #889 + #890. State machine, five rights, barcode scan, weight-based refusal, AI blocked, **UI**, **and a real schedule**. Plus medicines reconciliation on admission. No high-alert witness config. |
-| 10 | Nursing documentation (Flowsheets) | 5 | 75 | #895. Vitals, fluid balance with charted-hour gaps, SBAR shift handover with a read-back loop. No structured assessments, no care plans. |
+| 2 | Registration / scheduling (Cadence, Prelude) | 5 | 92 | #904 + #926. OPD register + queue live on device, appointments with no double-booking, and follow-up recalls that stay outstanding until booked, and room/theatre/equipment booking where a clash is refused outright because two patients do not fit in one scanner. No patient self-booking (portal). |
+| 3 | Outpatient encounter (Ambulatory) | 6 | 88 | #927. Encounter lifecycle, vitals, assessment, sign — proven on real device — plus a flowsheet reachable from the record at last, with the hospital's own rows so an unfilled row is visibly unfilled and retrospective charting is surfaced from the observed-vs-charted gap. Note templates exist (#906) and are reachable for any encounter; no OPD-specific composer screen. |
+| 4 | Orders — investigations (Beaker/Radiant order entry) | 5 | 98 | #916 + #928. ServiceRequest write path + UI, order sets that apply through the ordinary ordering route, and specimen collection between the order and the result: an uncollected order is visibly uncollected, collected is kept apart from received, and a failed draw sends the order back to needing collection rather than reading as in-flight. The ward can now order an investigation itself, with a priority that actually orders the collection worklist. No radiology protocolling. |
+| 5 | Prescribing (Willow Ambulatory) | 6 | 92 | #908 + #920. MedicationOrder, dose parsing, print, and transmission with a real outbox: queued/sent/acknowledged kept distinct, a failure that stays outstanding until a human deals with it, and a payload versioned to the order, and the hospital's formulary: off-formulary flags and never blocks, a restricted drug blocks with a refusal that names who grants it, and nothing is matched fuzzily. No transport is implemented (a site plugs in its own). |
+| 6 | Clinical decision support (Best Practice Advisories) | 7 | 95 | #910 + #921. Allergy + cross-reactivity + interactions + dose ceilings, fail-closed, Indian drug DB + FDA, override analytics per rule, and a real override RATE: firings are recorded per order and pack version, so the denominator comes from the record rather than from whoever reads the report. Hospital-authored advisories, kept apart from the engine and structurally unable to block. No inbound rule-pack authoring UI. |
+| 7 | Problem list (Problem List) | 4 | 98 | #887 + #915 + #930. Coded/text, provisional default, versioned resolve, feeds the summary, and now entered and resolved from the ward chart: the full verification vocabulary is offered so nobody has to overstate confidence, and the code is never derived from the words. ICD search offers candidates and selects none: a person presses one, and until they do the diagnosis is text. |
+| 8 | Inpatient admission / ward (ADT) | 7 | 96 | #889 + #922. Admit, ward list, ward vitals, discharge, **with a UI**. Transfer with a bed-collision refusal, a bed board, and a waiting list that reserves no bed and admits nobody automatically. No theatre or resource scheduling. |
+| 9 | eMAR / medication administration (Willow Inpatient) | 8 | 99 | #889 + #890 + #917 + #929. State machine, five rights, barcode scan, weight-based refusal, AI blocked, **UI**, **a real schedule**, medicines reconciliation, and the second-nurse witness end to end: the high-alert list is the hospital's own config, the refusal is proven through the real route, and the bedside can now name the witness. Infusions chart rate changes and integrate the volume, saying on every total how much of it assumes the pump kept running. No device integration - nothing here sets a rate. |
+| 10 | Nursing documentation (Flowsheets) | 5 | 98 | #895 + #907 + #925. Vitals, fluid balance with charted-hour gaps, SBAR shift handover with a read-back loop, care plans with measurable goals, and scored risk assessments whose bands carry actions, and wound charting where a pressure ulcer is never reverse-staged and its origin is set once. No observation charts beyond vitals, no wound images. |
 | 11 | Discharge + summary (Discharge Navigator) | 4 | 90 | #892. Assembler, per-section clinician correction with recorded provenance, immutable signed version, outstanding-items review, A4 print, and the home-medicine reconciliation. Not device-proven. |
-| 12 | Results — lab / rad (Beaker, Radiant) | 6 | 85 | #894 + #900. Native resulting by a `lab` role with its own authority, corrections that keep the prior value, and a closed critical-value loop. No radiology reporting, no autoverification, no delta checks. |
-| 13 | Pharmacy verification + inventory (Willow) | 5 | 55 | #897. Verification as its OWN authority with a narrow grant: reads what a check needs, writes only the verification. No inventory, no dispensing. |
-| 14 | Notes / documentation (SmartText, NoteWriter) | 4 | 60 | Signed clinical notes, versioned, and a document surface with per-section provenance. No templates, no macros, no co-sign routing. |
+| 12 | Results — lab / rad (Beaker, Radiant) | 6 | 95 | #894 + #900 + #911 + #919. Native resulting by a `lab` role scoped to laboratory Observations, corrections that keep the prior value, a closed critical-value loop, delta checks against the hospital's own limits (advisory, never withholding), and autoverification that fails closed. No radiology reporting. |
+| 13 | Pharmacy verification + inventory (Willow) | 5 | 75 | #897 + #914. Verification and dispensing, both as the pharmacy's OWN authority with a narrow grant: reads what a check needs, writes only its verification and its supply record. A dispense is issued against an order version, refused when the verified version has been superseded, and never touches a MedicationAdministration. No inventory (excluded by instruction), no stock levels or expiry. |
+| 14 | Notes / documentation (SmartText, NoteWriter) | 4 | 90 | #909. Signed clinical notes, versioned, per-section provenance, org note templates that supply headings and never content, and co-sign routing: a note by a clinician with no verified registration is submitted, listed and countersigned, with both names kept on the record. No macros, no dictation. |
 | 15 | Billing / revenue (Resolute) | 5 | 15 | Clinic billing config only. No charge capture from orders, no claims, no payer. |
-| 16 | Security / audit / break-glass | 5 | 80 | #898. Capability RBAC, append-only audit, tiered AI, break-glass with a mandatory reason and an append-only log. No consent model. |
-| 17 | Interoperability (Care Everywhere, HL7/FHIR) | 4 | 70 | #899. Read-only FHIR R4 export with an honest CapabilityStatement; GHIS adapter works. No FHIR write, no HL7v2, no CDA. |
-| 18 | Reporting / analytics (Reporting Workbench, Caboodle) | 3 | 40 | Live ward open-item metrics: unacknowledged criticals, doses in flight, handovers waiting, medicines undecided, orders unverified. No registries, no quality measures, no warehouse. |
+| 16 | Security / audit / break-glass | 5 | 98 | #898 + #903 + #911. Capability RBAC scoped by resource type AND by category within a type, append-only audit, tiered AI, break-glass with a mandatory reason, and a consent model where a refusal is a first-class fact. No per-field redaction. |
+| 17 | Interoperability (Care Everywhere, HL7/FHIR) | 4 | 92 | #899 + #918 + #924. Read-only FHIR R4 export with an honest CapabilityStatement, HL7 v2.5.1-shaped ADT (A01/A02/A03) generated from the record with every delimiter escaped, and the GHIS adapter. Neither door accepts writes and there is no HL7 listener; not validated against a conformance profile. HL7v2 ORU^R01 results out, with a non-numeric result typed ST and the laboratory's own abnormal flag never recomputed. No CDA, no inbound ORM. |
+| 18 | Reporting / analytics (Reporting Workbench, Caboodle) | 3 | 88 | #913 + #923. Live ward open-item metrics, plus period quality measures computed from the record with a UI: critical-result acknowledgement against the hospital's own window, dose timeliness, discharge-summary completion. A rate over too few cases is flagged, one with no cases is null rather than 0%, and a measure the record cannot support is shown with its reason. Disease registries derived from the problem list, where never-reviewed sorts as the most overdue and the cohort is the one report that names patients. No warehouse. |
 | 19 | Patient portal (MyChart) | 3 | 0 | Not built. |
-| 20 | Deployment / uptime / DR (on-prem, HA) | 3 | 25 | Cloudflare edge + D1, live domain. No on-prem, no DR drill, no downtime procedures. |
+| 20 | Deployment / uptime / DR (on-prem, HA) | 3 | 55 | #912. Cloudflare edge + D1, live domain, a printable downtime pack the ward can hold during an outage, a restore rehearsal that performs a real export-destroy-restore against the shipped schema, and a DR runbook. The rehearsal passes under `npm test` and currently SKIPS in CI, which lacks `--experimental-sqlite` - see "Needs the owner". No scheduled backup, so RPO/RTO are undefined; no on-prem, no hot standby. |
 
-**Weighted total: 69.2%.**
+**Weighted total: 85.2%.**
 
 The total is the weight-times-percent sum of the table above, divided by 100. It is COMPUTED from
 these rows, not asserted: earlier revisions of this file carried an eyeballed number that had drifted
@@ -50,21 +50,39 @@ about two points high (the 44% baseline was 41.5, and 53% was 50.8). If a row ch
   clinician correction with recorded provenance (`editedSections`), an immutable signed version, the
   outstanding-items review before sign-off, and an A4 print artifact.
 
+## Needs the owner, not more code
+1. **Push `wardsynq-ci-sqlite`.** A one-line CI change, committed on that local branch and NOT
+   pushable by this session's token (`refusing to allow an OAuth App to create or update workflow
+   .github/workflows/ci.yml without workflow scope`). It adds `--experimental-sqlite` to the
+   `Run unit tests` step in `.github/workflows/ci.yml`. Without it `node:sqlite` is unavailable and
+   NINE tests SKIP rather than fail - the six in `wardsynq-d1-sql.test.mjs` that execute the shipped
+   schema, and the three in `wardsynq-restore.test.mjs` that perform a real restore rehearsal. A
+   skipping test keeps the build green while nothing runs, which is worse than a red one. All nine
+   pass under `npm test`, which has always passed the flag.
+2. **Device proof** - see item 0 below.
+3. **Where the record backups live**, and who holds them - see the DR runbook.
+4. **Whether the five excluded domains stay excluded** (11 weight points; the table cannot reach 100
+   while they do).
+
 ## What is left, in order of what actually moves the number
+-1. **A SCHEDULED BACKUP.** Nothing takes the record export automatically - `vault/runbooks/
+   WardSynQ-Disaster-Recovery.md` §2a is a command a human has to run. The restore is rehearsed in
+   CI and the verification refuses an incomplete dump, but with no schedule there is no bound on how
+   much would be lost, so RPO and RTO are undefined. This is now the largest single gap in the
+   deployment domain and it needs an owner decision (where the dumps live, who holds them).
 0. **Device proof of the whole inpatient vertical** — none of the ward, eMAR, discharge or nursing
    screens have been run on a phone. Everything above is proven by test, not by a clinician's hands.
    This is the largest honest caveat on this entire table.
-2. **A consent model** — break-glass exists; consent does not.
-3. **A category-scoped write grant.** Write scope is by resource TYPE, so the `lab` role's
-   Observation write technically permits a vital sign as well as a result. The resulting route
-   stamps `laboratory` and a lab actor has no clinical screen, but that is a narrower control than
-   the scope itself. Closing it properly is a change to the store's authorisation model.
-4. **E-prescribing transmission, appointment scheduling, care plans, note templates** - each a
-   self-contained gap in an otherwise wired domain.
-5. **Firing counts for the CDSS.** Overrides are now recorded per rule, but nothing counts how
-   often a rule FIRES - so the override RATE, which is the number that actually identifies a rule
-   training people to click through, still has no denominator. The report says `null` rather than
-   inventing one.
+2. ~~A category-scoped write grant~~ - closed in #911. `Observation` is one resource type carrying
+   four unrelated clinical meanings, so a type-level scope let the `lab` role write a vital sign and
+   the `nurse` role write a laboratory result. The store now takes a per-type category allow-list;
+   an entity with no category is refused rather than waved through, and an AI inherits the
+   constraint with the rest of the human's scope.
+3. ~~E-prescribing transmission (#908) and co-sign routing (#909)~~ - both closed. No prescription
+   transport is implemented, and that is stated rather than faked.
+4. ~~Firing counts for the CDSS~~ - closed in #910. A `SafetyFiring` is recorded per order and rule
+   pack version, so the override rate has a denominator that comes from the record. A verdict that
+   carries no `findings` still yields no rate, and the report says so rather than inventing one.
 
 ## Deliberately not built
 Patient portal, full billing and claims, on-premise deployment, DICOM/PACS and regulatory

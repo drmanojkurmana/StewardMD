@@ -98,6 +98,22 @@ const INSTRUCTION_TYPES = Object.freeze([
   "CarePlan",
 ]);
 
+/**
+ * Types only a HUMAN may originate, whatever tier or scope the actor otherwise holds.
+ *
+ * The instruction rule above keys on `status`, and a resource that does not carry one slips past it.
+ * A PrescriptionTransmission is exactly that: its lifecycle is `state`, and its content is a claim
+ * about the physical world - this left, the pharmacy has it, it was printed and handed over. A model
+ * cannot observe any of those, so it must not be able to assert them. It matters because an AI actor
+ * inherits the scope of the human it runs on behalf of, and a nurse legitimately writes these; the
+ * cap to DRAFT would not have stopped a draft that read "acknowledged".
+ *
+ * Devices and adapters are refused here too, and that is not an oversight: a real transport reporting
+ * a delivery is a feature that does not exist yet (see prescription-transmit.js), and when it does it
+ * will need its own actor kind and its own narrow grant rather than this one silently widened.
+ */
+const HUMAN_ORIGINATED = Object.freeze(["PrescriptionTransmission"]);
+
 class GovernanceError extends Error {
   /**
    * Carries its reasons as DATA, not only flattened into the message.
@@ -136,6 +152,16 @@ function makeActor(spec) {
   // the object and loudly in the audit, which is safer than a throw a caller might catch and retry.
   const granted = rank(asked) > rank(ceiling) ? ceiling : asked;
   const scopeList = (v) => (Array.isArray(v) ? Object.freeze(v.map(String)) : null);
+  /* Per-type category allow-lists, e.g. {Observation: ["laboratory"]}. Absent for most actors, and
+   * an absent map means the type-level scope is the whole control - which is the behaviour every
+   * actor had before this existed. A malformed entry is DROPPED rather than treated as a constraint,
+   * because a half-parsed constraint that refuses everything would take a working role offline. */
+  const scopeMap = (v) => {
+    if (!v || typeof v !== "object" || Array.isArray(v)) return null;
+    const out = {};
+    for (const k of Object.keys(v)) if (Array.isArray(v[k]) && v[k].length) out[k] = Object.freeze(v[k].map(String));
+    return Object.keys(out).length ? Object.freeze(out) : null;
+  };
   return Object.freeze({
     id: String(spec.id),
     kind: spec.kind,
@@ -146,7 +172,11 @@ function makeActor(spec) {
     // A human's signature is only valid if they hold a credential. Absent for non-humans by design.
     credential: spec.kind === KIND.HUMAN ? (spec.credential || null) : null,
     // Resource-type allow-lists. null = every type (the pre-scope behaviour); [] = none.
-    scope: Object.freeze({ read: scopeList(spec.scope && spec.scope.read), write: scopeList(spec.scope && spec.scope.write) }),
+    scope: Object.freeze({
+      read: scopeList(spec.scope && spec.scope.read),
+      write: scopeList(spec.scope && spec.scope.write),
+      writeCategories: scopeMap(spec.scope && spec.scope.writeCategories),
+    }),
     // The human this actor is acting for, when it is not acting for itself. Set for AI drafts.
     onBehalfOf: spec.onBehalfOf ? String(spec.onBehalfOf) : null,
   });
@@ -246,9 +276,34 @@ function authoriseWrite(actor, entity, ctx) {
     reasons.push({ code: "DEVICE_SCOPE", message: `a device may not write a ${entity.resourceType}` });
   }
 
+  // 4a. Some records are a claim about the physical world, and only a human can make one.
+  if (actor.kind !== KIND.HUMAN && HUMAN_ORIGINATED.includes(entity.resourceType)) {
+    reasons.push({ code: "HUMAN_ONLY", message: `a ${actor.kind} actor may not write a ${entity.resourceType}` });
+  }
+
   // 4b. Declared scope. A nurse's EXECUTE is for the observations she records, not for an order.
   if (!inScope(actor, "write", entity.resourceType)) {
     reasons.push({ code: "SCOPE_DENIED", message: `${actor.id} may not write a ${entity.resourceType}` });
+  }
+
+  /* 4c. Scope WITHIN a type. `Observation` is one resource type carrying four unrelated clinical
+   * meanings - a vital sign, a laboratory result, a fluid entry, a device reading - so a scope
+   * expressed only as "may write Observation" let a laboratory actor write a blood pressure and a
+   * nurse write a potassium result. Both are believed by everything downstream: the eMAR reads
+   * vitals for weight-based dosing, and the critical-value loop reads laboratory results.
+   *
+   * ABSENCE IS REFUSED, NOT WAVED THROUGH. An entity with no category is the exact shape that would
+   * otherwise slip past, and the model factory defaults a missing category to "vital-signs", so
+   * omitting the field is not a neutral act - it is a claim. */
+  const allowed = actor.scope && actor.scope.writeCategories && actor.scope.writeCategories[entity.resourceType];
+  if (Array.isArray(allowed)) {
+    const cat = entity.category;
+    if (typeof cat !== "string" || !allowed.includes(cat)) {
+      reasons.push({
+        code: "CATEGORY_DENIED",
+        message: `${actor.id} may write a ${entity.resourceType} of category ${allowed.join(" or ")}, not ${cat === undefined || cat === null ? "one with no category" : `"${cat}"`}`,
+      });
+    }
   }
 
   // 5. Session binding. HAZ-ID-01: a write must land on the chart the actor actually has open.
@@ -380,7 +435,7 @@ class GovernedStore {
 }
 
 export {
-  TIER, LADDER, KIND, CEILING, DEVICE_WRITABLE, INSTRUCTION_TYPES,
+  TIER, LADDER, KIND, CEILING, DEVICE_WRITABLE, INSTRUCTION_TYPES, HUMAN_ORIGINATED,
   GovernanceError, GovernedStore,
   makeActor, can, canRead, inScope, effectiveTier, authoriseWrite, rank,
 };

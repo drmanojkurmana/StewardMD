@@ -33,6 +33,8 @@ import { AuthError, PermissionError } from "../_connect/permission.js";
 import { vitalsToObservations } from "./migrate-vitals.js";
 import { patientIdForMrn, admissionIdFor } from "./opd-identity.js";
 import { recordOverrides } from "./override-analytics.js";
+import { resolveFormulary, formularyStatus } from "./formulary.js";
+import { compileAdvisories, evaluateAdvisories } from "./advisories.js";
 
 const IPD = "IPD";
 const OPEN = "in-progress";
@@ -275,6 +277,56 @@ async function createWardMedicationOrder(request, env, ctx) {
   const candidate = orderFromWardRequest({ ...(ctx.order || {}), prescriberId: resolved.actor.id });
   if (!candidate) return { ...base, ok: false, status: 422, error: "order_incomplete", detail: "drug, patientId, encounterId and a numeric dose {value, unit} are all required", written: 0 };
 
+  /* THE FORMULARY, and it is NOT the safety engine. It answers "does this hospital stock this, and
+   * does it want a word first" - a stewardship control the hospital owns. Off-formulary never blocks:
+   * a drug not on the list is not dangerous, it is not stocked, and refusing on those grounds would
+   * teach prescribers that the safety warnings are bureaucratic too.
+   *
+   * A RESTRICTED drug does block, because the hospital configured that. Antimicrobial stewardship is
+   * why: meropenem needs a word with microbiology, and a system that lets it be ordered at 2am
+   * without one is the system that produces the resistance. The refusal names what is missing and
+   * who grants it, since one a prescriber cannot act on is one they will work around. */
+  const formulary = resolveFormulary(ctx.formulary);
+  const fStatus = formularyStatus({
+    formulary, drug: candidate.drug, code: candidate.drugCode,
+    specialty: str(ctx.specialty), approvalRef: str(ctx.approvalRef), reason: str(ctx.formularyReason),
+    requireReasonOffFormulary: ctx.requireReasonOffFormulary === true,
+  });
+  if (fStatus.blocked) {
+    return {
+      ...base, ok: false, status: 409, error: fStatus.state === "restricted" ? "restricted_drug" : "formulary_reason_required",
+      detail: fStatus.detail, needs: fStatus.needs || null, drug: candidate.drug,
+      ...(fStatus.note ? { note: fStatus.note } : {}),
+      // Said plainly, so nobody reads this as the safety engine having found something clinical.
+      basis: "hospital formulary, not a clinical safety finding",
+      written: 0,
+    };
+  }
+  // Recorded ON the order: which of its medicines a hospital is prescribing off-formulary is a
+  // question the pharmacy asks, and the answer belongs on the record rather than in a response.
+  candidate.formularyState = fStatus.state;
+  if (fStatus.state === "non-formulary" && str(ctx.formularyReason)) candidate.formularyReason = str(ctx.formularyReason);
+  if (fStatus.satisfiedBy === "approval") candidate.restrictionApprovalRef = str(ctx.approvalRef);
+
+  /* THE HOSPITAL'S OWN ADVISORIES, evaluated AFTER the formulary and unable to affect the write.
+   * They are read from records the ward already has, and a failure to read them costs the prescriber
+   * nothing: an advisory that could not be computed is simply absent, and losing a hospital's own
+   * reminder must never cost a patient their medicine. */
+  let advisories = [];
+  try {
+    const compiled = compileAdvisories(ctx.advisories);
+    if (compiled.rules.length) {
+      const [obsRows, probRows] = await Promise.all([
+        svc.byPatient("Observation", candidate.patientId).catch(() => []),
+        svc.byPatient("Condition", candidate.patientId).catch(() => []),
+      ]);
+      advisories = evaluateAdvisories({
+        compiled, drug: candidate.drug, observations: obsRows || [], problems: probRows || [],
+        ageYears: ctx.ageYears, nowMs: Date.now(),
+      });
+    }
+  } catch { advisories = []; }
+
   let current;
   try { current = await svc.get("MedicationOrder", candidate.id); }
   catch (e) { return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), written: 0 }; }
@@ -306,7 +358,13 @@ async function createWardMedicationOrder(request, env, ctx) {
     ...base, ok: true, written: 1, orderId: candidate.id, patientId: candidate.patientId,
     encounterId: candidate.encounterId, version: out.record.version, status: candidate.status,
     safety: ctx.safety || null,
-    ...(overrides && (overrides.written || overrides.error || overrides.rejected) ? { overridesRecorded: overrides } : {}),
+    /* The hospital's own advice, alongside the safety engine's findings and never mixed into them.
+     * Every entry carries source:"hospital-advisory" and blocking:false. */
+    ...(advisories.length ? { advisories } : {}),
+    formulary: fStatus.state,
+    // `fired` is included: an evaluation where the rule was RESPECTED writes a firing and no
+    // override, and leaving that off the response made the denominator invisible to the caller.
+    ...(overrides && (overrides.written || overrides.error || overrides.rejected || overrides.fired) ? { overridesRecorded: overrides } : {}),
     actor: resolved.actor.id, role: resolved.role,
   };
 }
@@ -323,7 +381,7 @@ async function createWardMedicationOrder(request, env, ctx) {
 
 /** PURE. Ward and bed, compared the way a ward means them: case and spacing are not identity. */
 function sameBed(a, b) {
-  const k = (x) => `${str(x && x.ward).toLowerCase()} ${str(x && x.bed).toLowerCase()}`;
+  const k = (x) => `${str(x && x.ward).toLowerCase()}\u0000${str(x && x.bed).toLowerCase()}`;
   return !!str(a && a.bed) && !!str(b && b.bed) && k(a) === k(b);
 }
 

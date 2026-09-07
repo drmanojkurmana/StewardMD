@@ -75,10 +75,56 @@ const RESOURCE_TYPES = Object.freeze([
    * discarded it, so nothing could answer which rules were being clicked through. Stored so a rule
    * pack can be told; never aggregated by clinician. */
   "SafetyOverride",
+  /* Which overridable rules fired on one order evaluation. The DENOMINATOR: an override count with
+   * no firing count is a fact about how busy the ward was, not about the rule. Kept as its own
+   * append-only fact rather than a counter, because a counter loses one of two concurrent orders and
+   * a lost firing silently lowers a rule's override rate - the direction that hides a bad rule. */
+  "SafetyFiring",
+  /* The pharmacy issued stock against an order. A SUPPLY fact and never a clinical one: it says
+   * medicine left the pharmacy, not that a patient received anything. Kept apart from
+   * MedicationAdministration on purpose - a system where "dispensed" can drift into "given" puts
+   * doses on charts that nobody administered. */
+  "MedicationDispense",
+  /* A sample somebody actually took, between the order and the result. Without it an order nobody
+   * collected looks exactly like one awaiting a result - both are "requested, no result yet" - and
+   * only one of them has a nurse who still has to go and do something. */
+  "SpecimenCollection",
+  /* A patient promised a bed. A waiting-list entry and NEVER a bed reservation: reserving a bed for
+   * somebody who is not in it makes the board show full while beds stand empty, and a ward that
+   * cannot trust the board stops reading it. */
+  "AdmissionRequest",
+  /* A wound, assessed over time. Its worst stage is carried forward and never lowered, and where it
+   * came from is set at the first assessment - a system that let either fall is one where a hospital
+   * stops having pressure ulcers. */
+  "WoundAssessment",
+  /* A room, a theatre or a scanner, booked. Unlike a clinician's diary this one CANNOT be
+   * overbooked: two patients do not fit inside one CT scanner, and a diary that says they do is
+   * worse than no diary because the ward acts on it. */
+  "ResourceBooking",
+  /* A change in an infusion's rate. The VOLUME is integrated from these and never stored, because a
+   * stored total stops being true the moment the pump changes - and an infusion that stops being
+   * charted is uncharted, not stopped. */
+  "InfusionRate",
   /* A record that an order set was applied, and exactly what landed and what did not. NOT the orders
    * themselves - those go through the ordinary path and are ordinary orders. This is what makes a
    * partial application visible, and what finds the patients a bad set touched. */
   "OrderSetApplication",
+  /* What the patient agreed to, and what they REFUSED - which is a clinical fact, not an absent
+   * consent. Append-only so a withdrawal keeps the original grant: "they consented and later
+   * withdrew" and "they never consented" are different histories and only one is true. */
+  "PatientConsent",
+  /* The diary. An Appointment holds a slot; an AppointmentRequest is a follow-up somebody PROMISED
+   * and which stays visibly outstanding until a human books it - auto-booking would make the
+   * promise look kept when nobody had spoken to the patient. */
+  "Appointment", "AppointmentRequest",
+  /* A scored nursing risk assessment. The score selects the ACTIONS, which are the only part that
+   * changes anything for the patient - so the actions and what was done about them live on the
+   * record beside the number. */
+  "RiskAssessment",
+  /* Sending a prescription somewhere, and knowing whether it arrived. A DELIVERY fact, never a
+   * clinical one: nothing here touches the MedicationOrder, because "we sent this" is a statement
+   * about a message, not about the treatment. */
+  "PrescriptionTransmission",
 ]);
 
 const MODE = Object.freeze({ SYSTEM_OF_RECORD: "system-of-record", INTEGRATION: "integration" });

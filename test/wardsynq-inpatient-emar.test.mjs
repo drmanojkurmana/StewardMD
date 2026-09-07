@@ -102,6 +102,10 @@ const ORG = "org-wsq";
 const sanitize = (x) => String(x == null ? "" : x).replace(/[^A-Za-z0-9_-]/g, "-").slice(0, 80);
 const idFor = (email) => "cfa:" + createHash("sha256").update(email.toLowerCase()).digest("hex").slice(0, 24);
 const DOCTOR = "doctor@example.test", NURSE = "nurse@example.test", PHARM = "pharmacy@example.test", LABTECH = "lab@example.test";
+/* A doctor with no verified registration - a PIN session, a locum whose registration is not on file.
+ * Holds emr.treat, so writes a note perfectly well, and cannot sign one. This is the ordinary case
+ * co-signature exists for, and the harness has to contain one or the whole flow is untestable. */
+const LOCUM = "locum@example.test";
 const ENV = {
   QUEUE_ENABLED: "1",
   QUEUE_TOKEN_SECRET: "test-secret-that-is-long-enough-for-hmac",
@@ -120,13 +124,23 @@ const ORDER_SETS = [{
   ],
 }];
 
+/* The hospital's own note templates. ORG content, exactly as the order sets are: headings, never
+ * content. */
+const NOTE_TEMPLATES = [{
+  id: "ward-round", name: "Ward round note", version: "2", noteType: "progress",
+  sections: [
+    { key: "impression", title: "Impression", required: true },
+    { key: "plan", title: "Plan", required: true },
+  ],
+}];
+
 function seedHospital(mode = "wardsynq") {
   docs.clear(); clock = 1;
   RECORD = new MemoryRepository();
   // ownerUid is nobody on this ward: an owner resolves to `admin` and holds every capability, which
   // would make every separation assertion below vacuous.
-  docs.set(`q_orgs/${ORG}`, { fields: { id: ORG, code: "SMD-WARD01", name: "WSQ Ward Hospital", kind: "clinic", mode, connectTenantId: TENANT_ROW.id, ownerUid: "cfa:nobody", createdAt: 1, wardsynq: { orderSets: ORDER_SETS } }, updateTime: "t1" });
-  for (const [email, role] of [[DOCTOR, "doctor"], [NURSE, "nurse"], [PHARM, "pharmacy"], [LABTECH, "lab"]]) {
+  docs.set(`q_orgs/${ORG}`, { fields: { id: ORG, code: "SMD-WARD01", name: "WSQ Ward Hospital", kind: "clinic", mode, connectTenantId: TENANT_ROW.id, ownerUid: "cfa:nobody", createdAt: 1, wardsynq: { orderSets: ORDER_SETS, noteTemplates: NOTE_TEMPLATES } }, updateTime: "t1" });
+  for (const [email, role] of [[DOCTOR, "doctor"], [NURSE, "nurse"], [PHARM, "pharmacy"], [LABTECH, "lab"], [LOCUM, "doctor"]]) {
     docs.set(`q_members/${sanitize(ORG)}__${sanitize(idFor(email))}`, { fields: { orgId: ORG, identity: idFor(email), role, active: true }, updateTime: "t1" });
   }
 }
@@ -1199,6 +1213,300 @@ test("the bed board says who is where, and never confuses 'no free beds' with 'w
   assert.equal(withUnplaced.wards[0].unplaced.length, 1);
 });
 
+/* ---- the care plan -------------------------------------------------------------------------------------
+ *
+ * `CarePlan` has been in the model and the record service's allowed types since P0 and NOTHING HAS
+ * EVER WRITTEN ONE - the same pattern `Condition` had before the problem list.
+ */
+
+test("a plan needs measurable goals, and progress is recorded rather than computed", async () => {
+  seedHospital();
+  const { adm } = await admittedPatientOnDrug();
+
+  // An absent plan is STATED, not returned as an empty one: "no plan has been written" and "a plan
+  // with no goals" are different, and the first is what a ward acts on.
+  const none = await as(NURSE, `/ward/plan?orgId=${ORG}&encounterId=${adm.encounterId}`);
+  assert.equal(none.__status, 200, JSON.stringify(none));
+  assert.equal(none.exists, false);
+  assert.equal(none.plan, null);
+
+  // A plan of wishes is refused.
+  const wishes = await as(NURSE, "/ward/care-plan", "POST", { orgId: ORG, encounterId: adm.encounterId, goals: [{ title: "Improve mobility" }] });
+  assert.equal(wishes.__status, 422);
+  assert.equal(wishes.error, "no_goals");
+
+  const plan = await as(NURSE, "/ward/care-plan", "POST", {
+    orgId: ORG, encounterId: adm.encounterId, title: "Recovery from pneumonia",
+    reviewBy: "2026-09-09T00:00:00.000Z",
+    goals: [
+      { title: "Mobilise", measure: "Walk to the bathroom with one assistant, by Friday" },
+      { title: "Oxygen", measure: "Saturations above 94% on air for 24 hours" },
+    ],
+  });
+  assert.equal(plan.__status, 200, JSON.stringify(plan));
+  assert.equal(plan.activeGoals, 2);
+  assert.ok(plan.goals.every((g) => g.setBy), "each goal names who set it");
+
+  // Progress is somebody's decision, with their name and the date on it.
+  const met = await as(NURSE, "/ward/progress", "POST", { orgId: ORG, encounterId: adm.encounterId, key: "mobilise", state: "met" });
+  assert.equal(met.__status, 200, JSON.stringify(met));
+  assert.equal(met.counts.met, 1);
+  assert.ok(met.goals.find((g) => g.key === "mobilise").decidedBy);
+
+  // "Not met" is a real outcome and needs a reason - it is the one somebody asks about later.
+  assert.equal((await as(NURSE, "/ward/progress", "POST", { orgId: ORG, encounterId: adm.encounterId, key: "oxygen", state: "not-met" })).error, "note_required");
+  const notMet = await as(NURSE, "/ward/progress", "POST", { orgId: ORG, encounterId: adm.encounterId, key: "oxygen", state: "not-met", note: "Still needs 2L via nasal cannulae." });
+  assert.equal(notMet.counts["not-met"], 1);
+
+  // A decision about a goal that is not on the plan is refused, never appended.
+  assert.equal((await as(NURSE, "/ward/progress", "POST", { orgId: ORG, encounterId: adm.encounterId, key: "nutrition", state: "met" })).error, "goal_not_on_plan");
+});
+
+test("a second pass keeps the progress already recorded, and a stale plan says so", async () => {
+  seedHospital();
+  const { adm } = await admittedPatientOnDrug();
+  const goals = [{ title: "Mobilise", measure: "Walk to the bathroom by Friday" }];
+  await as(NURSE, "/ward/care-plan", "POST", { orgId: ORG, encounterId: adm.encounterId, goals, reviewBy: "2020-01-01T00:00:00.000Z" });
+  await as(NURSE, "/ward/progress", "POST", { orgId: ORG, encounterId: adm.encounterId, key: "mobilise", state: "met" });
+
+  /* The night shift adds a goal. What the day shift decided must not reset - and a goal that has
+   * DISAPPEARED from the list is dropped, because somebody removed it deliberately. */
+  const second = await as(NURSE, "/ward/care-plan", "POST", {
+    orgId: ORG, encounterId: adm.encounterId,
+    goals: [...goals, { title: "Nutrition", measure: "Eating half of each meal by Monday" }],
+  });
+  assert.equal(second.counts.met, 1, "the decision survived the second pass");
+  assert.equal(second.counts.active, 1);
+
+  // A plan nobody has reviewed says it is stale rather than looking current.
+  const read = await as(DOCTOR, `/ward/plan?orgId=${ORG}&encounterId=${adm.encounterId}`);
+  assert.equal(read.plan.review.state, "stale");
+  assert.ok(read.plan.review.overdueDays > 0);
+
+  // Reviewing it is its own act, with a name and a date, and that is what makes "stale" mean anything.
+  const reviewed = await as(NURSE, "/ward/progress", "POST", { orgId: ORG, encounterId: adm.encounterId, review: true, reviewBy: "2030-01-01T00:00:00.000Z" });
+  assert.equal(reviewed.reviewed, true);
+  assert.ok(reviewed.lastReviewedBy);
+  assert.equal((await as(DOCTOR, `/ward/plan?orgId=${ORG}&encounterId=${adm.encounterId}`)).plan.review.state, "current");
+});
+
+test("care planning is nursing work, and the plan orders nothing", async () => {
+  seedHospital();
+  const { adm } = await admittedPatientOnDrug();
+  const body = { orgId: ORG, encounterId: adm.encounterId, goals: [{ title: "Mobilise", measure: "Walk by Friday" }] };
+  assert.equal((await as(NURSE, "/ward/care-plan", "POST", body)).__status, 200);
+  assert.equal((await as(DOCTOR, "/ward/care-plan", "POST", body)).__status, 200);
+  assert.equal((await as(PHARM, "/ward/care-plan", "POST", body)).__status, 403);
+  assert.equal((await as(LABTECH, `/ward/plan?orgId=${ORG}&encounterId=${adm.encounterId}`)).__status, 403);
+  // A plan says what is being aimed at; it writes no order of any kind.
+  const orders = await RECORD.byPatient(TENANT_ROW.id, "ServiceRequest", adm.patientId);
+  assert.equal(orders.length, 0);
+  assert.equal((await as(NURSE, "/ward/progress", "POST", { orgId: ORG, encounterId: adm.encounterId })).error, "nothing_to_record");
+});
+
+/* ---- scheduling --------------------------------------------------------------------------------------
+ *
+ * Every discharge summary this system writes can say "review in clinic in one week", and until now
+ * that sentence went nowhere.
+ */
+
+test("TWO PATIENTS CANNOT HOLD ONE SLOT, and overbooking says it is overbooking", async () => {
+  seedHospital();
+  const { adm } = await admittedPatientOnDrug();
+  const other = await secondPatient("Medical A", "40");
+  const slot = { clinicianId: "cfa:dr-clinic", startAt: "2026-09-14T09:00:00.000Z", minutes: 15 };
+
+  const first = await as(DOCTOR, "/ward/book", "POST", { orgId: ORG, patientId: adm.patientId, ...slot, reason: "Post-discharge review" });
+  assert.equal(first.__status, 200, JSON.stringify(first));
+  assert.equal(first.state, "booked");
+  assert.equal(first.overbooked, false);
+
+  // A clash is refused with the appointment in the way NAMED, so the desk can offer another time
+  // rather than being told "no".
+  const clash = await as(DOCTOR, "/ward/book", "POST", { orgId: ORG, patientId: other.patientId, ...slot });
+  assert.equal(clash.__status, 409);
+  assert.equal(clash.error, "slot_taken");
+  assert.equal(clash.clashesWith.patientId, adm.patientId);
+
+  // Overlapping, not just identical, times clash.
+  assert.equal((await as(DOCTOR, "/ward/book", "POST", { orgId: ORG, patientId: other.patientId, clinicianId: slot.clinicianId, startAt: "2026-09-14T09:10:00.000Z", minutes: 15 })).error, "slot_taken");
+  // Back to back is fine.
+  assert.equal((await as(DOCTOR, "/ward/book", "POST", { orgId: ORG, patientId: other.patientId, clinicianId: slot.clinicianId, startAt: "2026-09-14T09:15:00.000Z", minutes: 15 })).__status, 200);
+
+  /* Overbooking is ALLOWED - real clinics overbook, and a system that refuses gets worked around -
+   * but it must say why, or it is indistinguishable from the double-book this refuses. */
+  assert.equal((await as(DOCTOR, "/ward/book", "POST", { orgId: ORG, patientId: other.patientId, ...slot, overbook: true })).error, "overbook_reason_required");
+  const over = await as(DOCTOR, "/ward/book", "POST", { orgId: ORG, patientId: other.patientId, ...slot, overbook: true, overbookReason: "Urgent review, consultant agreed." });
+  assert.equal(over.__status, 200, JSON.stringify(over));
+  assert.equal(over.overbooked, true);
+  assert.match(over.overbookReason, /consultant agreed/);
+
+  // An appointment with no length cannot be checked for collision, so it is refused outright.
+  assert.equal((await as(DOCTOR, "/ward/book", "POST", { orgId: ORG, patientId: adm.patientId, clinicianId: "cfa:x", startAt: "2026-09-15T09:00:00.000Z" })).error, "minutes_required");
+});
+
+test("A PROMISED FOLLOW-UP STAYS OUTSTANDING UNTIL SOMEBODY BOOKS IT", async () => {
+  seedHospital();
+  const { adm } = await admittedPatientOnDrug();
+  const req = await as(DOCTOR, "/ward/follow-up", "POST", {
+    orgId: ORG, patientId: adm.patientId, encounterId: adm.encounterId,
+    reason: "Review chest film and repeat CRP", dueBy: "2026-09-14T00:00:00.000Z",
+  });
+  assert.equal(req.__status, 200, JSON.stringify(req));
+  assert.equal(req.state, "open");
+  assert.match(req.note, /Nothing is booked until somebody books it/);
+
+  /* NOTHING WAS BOOKED. Auto-booking would put an appointment in a diary nobody agreed to, at a time
+   * nobody offered the patient - and would make the promise look kept when nobody had spoken to
+   * them. */
+  const before = await as(NURSE, `/ward/diary?orgId=${ORG}&patientId=${adm.patientId}`);
+  assert.deepEqual(before.appointments, []);
+  assert.equal(before.unbookedRecalls, 1);
+  assert.equal(before.recalls[0].reason, "Review chest film and repeat CRP");
+
+  // Booking against the recall closes it, which is the point of the link.
+  const booked = await as(DOCTOR, "/ward/book", "POST", {
+    orgId: ORG, patientId: adm.patientId, clinicianId: "cfa:dr-clinic",
+    startAt: "2026-09-12T10:00:00.000Z", minutes: 20, requestId: req.requestId,
+  });
+  assert.equal(booked.__status, 200, JSON.stringify(booked));
+  assert.equal(booked.recall.state, "booked");
+  const after = await as(NURSE, `/ward/diary?orgId=${ORG}&patientId=${adm.patientId}`);
+  assert.equal(after.unbookedRecalls, 0);
+  assert.equal(after.appointments.length, 1);
+  assert.equal(after.appointments[0].requestId, req.requestId);
+});
+
+test("cancelling frees the slot and keeps the history; a closed appointment is not reopened", async () => {
+  seedHospital();
+  const { adm } = await admittedPatientOnDrug();
+  const other = await secondPatient("Medical A", "41");
+  const slot = { clinicianId: "cfa:dr-clinic", startAt: "2026-09-14T11:00:00.000Z", minutes: 15 };
+  const a = await as(DOCTOR, "/ward/book", "POST", { orgId: ORG, patientId: adm.patientId, ...slot });
+
+  // Cancelling and marking a DNA both need a reason: they are the two a patient may later ask about.
+  assert.equal((await as(DOCTOR, "/ward/appointment", "POST", { orgId: ORG, appointmentId: a.appointmentId, state: "cancelled" })).error, "reason_required");
+  const gone = await as(DOCTOR, "/ward/appointment", "POST", { orgId: ORG, appointmentId: a.appointmentId, state: "cancelled", reason: "Patient rang to cancel." });
+  assert.equal(gone.__status, 200, JSON.stringify(gone));
+  assert.equal(gone.slotFreed, true);
+
+  // The slot is genuinely free for somebody else.
+  assert.equal((await as(DOCTOR, "/ward/book", "POST", { orgId: ORG, patientId: other.patientId, ...slot })).__status, 200);
+
+  /* "They cancelled" and "they never had one" are different facts, and the second is what a
+   * complaint turns on. Both versions stay on the record. */
+  const hist = await RECORD.history(TENANT_ROW.id, "Appointment", a.appointmentId);
+  assert.deepEqual(hist.map((h) => h.state), ["booked", "cancelled"]);
+  assert.match(hist[1].changeReason, /rang to cancel/);
+
+  // A closed appointment is not reopened: a completed visit going back to "booked" would put a slot
+  // in a diary for a consultation that already happened.
+  assert.equal((await as(DOCTOR, "/ward/appointment", "POST", { orgId: ORG, appointmentId: a.appointmentId, state: "arrived" })).error, "already_closed");
+});
+
+test("the diary is the front desk's; promising a follow-up is clinical", async () => {
+  seedHospital();
+  const { adm } = await admittedPatientOnDrug();
+  const slot = { orgId: ORG, patientId: adm.patientId, clinicianId: "cfa:dr-clinic", startAt: "2026-09-16T09:00:00.000Z", minutes: 15 };
+  // Booking is the same administrative act as registering a walk-in, so the nurse at the desk can.
+  assert.equal((await as(NURSE, "/ward/book", "POST", slot)).__status, 200);
+  // Deciding the patient needs to be seen again is clinical.
+  assert.equal((await as(NURSE, "/ward/follow-up", "POST", { orgId: ORG, patientId: adm.patientId, reason: "Review" })).__status, 403);
+  assert.equal((await as(DOCTOR, "/ward/follow-up", "POST", { orgId: ORG, patientId: adm.patientId, reason: "Review" })).__status, 200);
+  // A follow-up with no reason is not a follow-up.
+  assert.equal((await as(DOCTOR, "/ward/follow-up", "POST", { orgId: ORG, patientId: adm.patientId })).error, "reason_required");
+  // The laboratory has no business in the diary.
+  assert.equal((await as(LABTECH, `/ward/diary?orgId=${ORG}`)).__status, 403);
+});
+
+/* ---- consent -----------------------------------------------------------------------------------------
+ *
+ * Break-glass answered "who looked at this chart in an emergency". Consent answers the prior
+ * question: whether this patient permitted it at all, and for what.
+ */
+
+test("A REFUSAL IS RECORDED AS LOUDLY AS A GRANT, and survives being asked again", async () => {
+  seedHospital();
+  const { adm } = await admittedPatientOnDrug();
+
+  // Nothing recorded is NOT a refusal, and the answer says which it is.
+  const cold = await as(NURSE, `/ward/consents?orgId=${ORG}&patientId=${adm.patientId}&scope=share-registry`);
+  assert.equal(cold.__status, 200, JSON.stringify(cold));
+  assert.equal(cold.status, "not-recorded");
+  assert.equal(cold.permitted, false);
+
+  const no = await as(NURSE, "/ward/consent", "POST", {
+    orgId: ORG, patientId: adm.patientId, scope: "share-registry", decision: "refused",
+    givenBy: "patient", capacity: true,
+  });
+  assert.equal(no.__status, 200, JSON.stringify(no));
+  assert.equal(no.status, "refused");
+
+  const asked = await as(DOCTOR, `/ward/consents?orgId=${ORG}&patientId=${adm.patientId}&scope=share-registry`);
+  assert.equal(asked.status, "refused", "the next person to ask is told the patient already said no");
+  assert.equal(asked.permitted, false);
+  assert.equal(asked.consent.givenBy, "patient");
+  assert.equal(asked.consent.capacity, true);
+
+  // On the whole-patient view a refusal is counted and sorted to the top, never buried among grants.
+  await as(NURSE, "/ward/consent", "POST", { orgId: ORG, patientId: adm.patientId, scope: "treatment", decision: "granted" });
+  const all = await as(DOCTOR, `/ward/consents?orgId=${ORG}&patientId=${adm.patientId}`);
+  assert.equal(all.refused, 1);
+  assert.equal(all.consents[0].status, "refused");
+  assert.equal(all.consents[0].scopeLabel, "Sharing with a registry or exchange");
+});
+
+test("consent is withdrawable, and the original grant stays on the record", async () => {
+  seedHospital();
+  const { adm } = await admittedPatientOnDrug();
+  const yes = await as(NURSE, "/ward/consent", "POST", { orgId: ORG, patientId: adm.patientId, scope: "research", decision: "granted", capacity: true });
+  assert.equal(yes.status, "granted");
+
+  const gone = await as(NURSE, "/ward/withdraw-consent", "POST", { orgId: ORG, patientId: adm.patientId, scope: "research", reason: "Patient changed their mind." });
+  assert.equal(gone.__status, 200, JSON.stringify(gone));
+  assert.equal(gone.status, "withdrawn");
+  assert.equal(gone.previousDecision, "granted");
+  assert.equal((await as(DOCTOR, `/ward/consents?orgId=${ORG}&patientId=${adm.patientId}&scope=research`)).permitted, false);
+
+  /* "They consented and later withdrew" and "they never consented" are different histories, and only
+   * one of them is true. The grant survives as a version. */
+  const hist = await RECORD.history(TENANT_ROW.id, "PatientConsent", yes.consentId);
+  assert.deepEqual(hist.map((h) => h.decision), ["granted", "withdrawn"]);
+  assert.ok(hist[1].withdrawalReason);
+
+  // Withdrawing twice is a no-op; withdrawing something never granted says so rather than writing a
+  // withdrawal of nothing.
+  assert.equal((await as(NURSE, "/ward/withdraw-consent", "POST", { orgId: ORG, patientId: adm.patientId, scope: "research", reason: "again" })).skipped, "already_withdrawn");
+  assert.equal((await as(NURSE, "/ward/withdraw-consent", "POST", { orgId: ORG, patientId: adm.patientId, scope: "photography", reason: "x" })).error, "no_consent_recorded");
+});
+
+test("a vague consent is refused, and consent does not gate care", async () => {
+  seedHospital();
+  const { adm, ord, patient, scan } = await admittedPatientOnDrug();
+  // "Other" and "a specific procedure" mean nothing without saying which.
+  assert.equal((await as(NURSE, "/ward/consent", "POST", { orgId: ORG, patientId: adm.patientId, scope: "procedure", decision: "granted" })).error, "detail_required");
+  assert.equal((await as(NURSE, "/ward/consent", "POST", { orgId: ORG, patientId: adm.patientId, scope: "other", decision: "granted" })).error, "detail_required");
+  assert.equal((await as(NURSE, "/ward/consent", "POST", { orgId: ORG, patientId: adm.patientId, scope: "telepathy", decision: "granted" })).error, "unknown_scope");
+  // Withdrawal has its own path, so "withdrawn" is not a decision that can be recorded directly.
+  assert.equal((await as(NURSE, "/ward/consent", "POST", { orgId: ORG, patientId: adm.patientId, scope: "research", decision: "withdrawn" })).error, "unknown_decision");
+
+  /* IT DOES NOT ENFORCE, and that is deliberate. A generic gate refusing writes on a missing
+   * tick-box would be wrong in an emergency and wrong for an unconscious patient - exactly the
+   * moments it would fire. A refused treatment consent does not stop the ward giving a dose. */
+  await as(NURSE, "/ward/consent", "POST", { orgId: ORG, patientId: adm.patientId, scope: "treatment", decision: "refused" });
+  const step = (a, x) => as(NURSE, "/ward/mar", "POST", { orgId: ORG, action: a, orderId: ord.orderId, dueAt: DUE, patient, ...(x || {}) });
+  await step("verify"); await step("dispense"); await step("scan", { scan });
+  assert.equal((await step("administer")).__status, 200, "the record informs; it does not block");
+
+  // Two procedures are two consents, so the second cannot overwrite the first.
+  await as(NURSE, "/ward/consent", "POST", { orgId: ORG, patientId: adm.patientId, scope: "procedure", decision: "granted", detail: "Right total hip replacement" });
+  await as(NURSE, "/ward/consent", "POST", { orgId: ORG, patientId: adm.patientId, scope: "procedure", decision: "refused", detail: "Left total knee replacement" });
+  const list = await as(DOCTOR, `/ward/consents?orgId=${ORG}&patientId=${adm.patientId}`);
+  const procs = list.consents.filter((c) => c.scope === "procedure");
+  assert.equal(procs.length, 2);
+  assert.deepEqual(procs.map((p) => p.decision).sort(), ["granted", "refused"]);
+});
+
 /* ---- order sets -------------------------------------------------------------------------------------
  *
  * An order set applies a lot of clinical decisions very fast, which is what makes it useful and what
@@ -1319,8 +1627,12 @@ test("an override is recorded against the RULE, and the report names no clinicia
   assert.equal(rep.report.totalOverrides, 1);
   assert.equal(rep.report.rules[0].targetId, "ddi-warfarin-nsaid");
   assert.equal(rep.report.rules[0].topReason, "benefit-outweighs-risk");
-  // A rate needs a denominator nobody has counted yet, and it says so rather than inventing one.
+  /* This verdict carries no `findings`, so nothing counted what fired and there is no denominator.
+   * The report says so rather than inventing one. The test below sends a full verdict and gets a
+   * real rate. */
   assert.equal(rep.report.rules[0].overrideRate, null);
+  assert.equal(rep.report.evaluationsRecorded, 0);
+  assert.match(rep.report.note2, /numerators without a denominator/);
   // NO CLINICIAN IS NAMED. The report is evidence about rules; naming people would stop them
   // writing honest rationales, which is the only data that makes a rule fixable.
   assert.ok(!JSON.stringify(rep.report).includes("cfa:dr"));
@@ -1329,6 +1641,56 @@ test("an override is recorded against the RULE, and the report names no clinicia
   assert.equal(stored.length, 1);
   assert.equal(stored[0].actorId, "cfa:dr");
   assert.equal(stored[0].rulePackVersion, "rx-2026.09");
+});
+
+test("THE OVERRIDE RATE GETS ITS DENOMINATOR: a rule respected twice and overridden once reads 0.33", async () => {
+  seedHospital();
+  const { adm } = await admittedPatientOnDrug();
+  const RULE = { code: "interaction", ruleId: "ddi-warfarin-nsaid", disposition: "overridable", severity: "major" };
+  const order = (drug, safety) => as(DOCTOR, "/ward/medication-order", "POST", {
+    orgId: ORG, safety,
+    order: { patientId: adm.patientId, encounterId: adm.encounterId, drug, dose: { value: 400, unit: "mg" }, route: "oral", frequency: "TDS" },
+  });
+
+  /* Twice the rule fires and the prescriber respects it. THIS is the case that has to reach the
+   * denominator: counting only the orders where somebody overrode something would make every rule in
+   * the pack read as overridden 100% of the time. */
+  const respected = { rulePackVersion: "rx-2026.09", findings: [RULE], warnings: [], overrides: [] };
+  const a = await order("Ibuprofen", respected);
+  assert.equal(a.__status, 200, JSON.stringify(a));
+  assert.deepEqual(a.overridesRecorded.fired.keys, ["interaction:ddi-warfarin-nsaid"]);
+  assert.equal(a.overridesRecorded.written, 0, "nothing was overridden, and nothing pretends it was");
+  await order("Naproxen", respected);
+
+  // The third time, the prescriber overrides it.
+  const overridden = {
+    ...respected,
+    warnings: [{ ...RULE, overridden: true }],
+    overrides: [{ code: "interaction", targetId: "ddi-warfarin-nsaid", reasonCode: "benefit-outweighs-risk", rationale: "Single dose, INR checked today.", actorId: "cfa:dr" }],
+  };
+  const c = await order("Diclofenac", overridden);
+  assert.equal(c.overridesRecorded.written, 1);
+
+  const rep = await as(NURSE, `/ward/overrides?orgId=${ORG}`);
+  assert.equal(rep.__status, 200, JSON.stringify(rep));
+  assert.equal(rep.report.evaluationsRecorded, 3);
+  const rule = rep.report.rules.find((r) => r.targetId === "ddi-warfarin-nsaid");
+  assert.equal(rule.fired, 3, "three orders, three alerts");
+  assert.equal(rule.overridden, 1);
+  assert.equal(rule.overrideRate, 0.33, "the number that says whether this rule is worth keeping");
+  assert.equal(rep.report.note2, undefined, "and no caveat, because the denominator is real");
+
+  // A retried identical order is the same evaluation, not a second alert. Inflating the denominator
+  // would quietly lower the rate, which is the direction that hides a bad rule.
+  await order("Diclofenac", overridden);
+  const again = await as(NURSE, `/ward/overrides?orgId=${ORG}`);
+  assert.equal(again.report.evaluationsRecorded, 3);
+  assert.equal(again.report.rules.find((r) => r.targetId === "ddi-warfarin-nsaid").fired, 3);
+
+  // The denominator comes from the RECORD, not from whoever reads the report.
+  const firings = await RECORD.byPatient(TENANT_ROW.id, "SafetyFiring", adm.patientId);
+  assert.equal(firings.length, 3);
+  assert.ok(firings.every((f) => f.rulePackVersion === "rx-2026.09"));
 });
 
 test("AN ANALYTICS FAILURE NEVER COSTS A PATIENT THEIR MEDICINE", async () => {
@@ -1584,14 +1946,40 @@ test("THE LAB'S AUTHORITY IS ITS OWN: it results, and it does nothing else", asy
   assert.equal((await as(LABTECH, "/ward/mar", "POST", { orgId: ORG, action: "administer", orderId: ord.orderId, dueAt: DUE, patient: { id: adm.patientId } })).__status, 403);
   assert.equal((await as(LABTECH, `/ward/criticals?orgId=${ORG}`)).__status, 403, "and not the ward's critical list");
 
-  /* THE ROUTE ALWAYS STAMPS "laboratory". The write scope in this system is by resource TYPE, and a
-   * lab result and a nurse's blood pressure are both Observations - so the grant does technically
-   * permit an Observation of any category through the raw record API. This pins the door that
-   * exists; the residual is stated in actor.js and recorded in the vault rather than hidden. */
+  /* THE ROUTE ALWAYS STAMPS "laboratory", and it is no longer the only thing standing there: the
+   * grant now carries a category allow-list, so the raw record API refuses a lab actor a vital sign
+   * even if it never reaches this route. See the scope test below. */
   const obs = await RECORD.byPatient(TENANT_ROW.id, "Observation", adm.patientId);
   const fromLab = obs.filter((o) => o.codeSystem === "http://loinc.org" && o.code === "2823-3");
   assert.ok(fromLab.length >= 1);
   assert.ok(fromLab.every((o) => o.category === "laboratory"));
+});
+
+test("A LABORATORY MAY NOT WRITE A VITAL SIGN, AND A NURSE MAY NOT WRITE A RESULT", async () => {
+  seedHospital();
+  const { grantForRole } = await import("../functions/_wardsynq/actor.js");
+
+  /* One resource type, four unrelated clinical meanings. Both directions matter and both were open:
+   * the eMAR reads a vital sign to check a weight-based dose, and the critical-value loop believes
+   * anything categorised `laboratory`. */
+  const lab = grantForRole("lab");
+  assert.deepEqual(lab.writeCategories, { Observation: ["laboratory"] });
+  assert.ok(lab.write.includes("Observation"), "still the same type scope as before");
+
+  const nurse = grantForRole("nurse");
+  assert.deepEqual(nurse.writeCategories, { Observation: ["vital-signs", "fluid-balance"] });
+
+  // A doctor writes every type, so no category constraint applies: an unconstrained scope cannot be
+  // partly constrained, and leaving one attached would refuse the one type it names while
+  // permitting every other.
+  assert.equal(grantForRole("doctor").write, null);
+  assert.equal(grantForRole("doctor").writeCategories, null);
+
+  // The nurse's real work is unaffected, which is the point of listing fluid-balance beside vitals.
+  const { adm } = await admittedPatientOnDrug();
+  assert.equal((await as(NURSE, "/ward/vitals", "POST", { orgId: ORG, encounterId: adm.encounterId, patientId: adm.patientId, vitals: { sbp: "120", dbp: "80" } })).written, 2);
+  const fluid = await as(NURSE, "/ward/fluid", "POST", { orgId: ORG, encounterId: adm.encounterId, patientId: adm.patientId, entries: [{ direction: "intake", kind: "oral", value: 200, at: "2026-09-07T09:00:00.000Z" }] });
+  assert.equal(fluid.__status, 200, JSON.stringify(fluid));
 });
 
 test("the ward metrics count what every other mechanism left open, from the real record", async () => {
@@ -2205,4 +2593,1368 @@ test("fluid entries never pollute the vitals the eMAR reads", async () => {
   const step = (a, x) => as(NURSE, "/ward/mar", "POST", { orgId: ORG, action: a, orderId: ord.orderId, dueAt: DUE, patient, ...(x || {}) });
   await step("verify"); await step("dispense"); await step("scan", { scan });
   assert.equal((await step("administer")).__status, 200, "the weight-based check still uses the recorded weight");
+});
+
+/* ---- sending the prescription, and knowing it arrived ------------------------------------------ */
+
+const outbox = (email, q) => as(email, `/ward/outbox?orgId=${ORG}${q || ""}`);
+
+test("QUEUED IS NOT SENT: a prescription is outstanding until the far end says it has it", async () => {
+  seedHospital();
+  const { adm, ord } = await admittedPatientOnDrug();
+
+  const q = await as(DOCTOR, "/ward/transmit", "POST", { orgId: ORG, orderId: ord.orderId, channel: "pharmacy", destination: "City Pharmacy" });
+  assert.equal(q.__status, 200, JSON.stringify(q));
+  assert.equal(q.state, "queued");
+  assert.equal(q.outstanding, true);
+  assert.match(q.note, /Nothing has been transmitted yet/);
+
+  /* THE ORDER IS UNTOUCHED. "We sent this" is a statement about a message, not about the treatment;
+   * an order quietly moved to completed on transmission would say the patient had their medicine. */
+  const order = await RECORD.latest(TENANT_ROW.id, "MedicationOrder", ord.orderId);
+  assert.equal(order.status, "active");
+  assert.equal(order.version, 1, "and no version was burned on it either");
+
+  // The outbox shows it, and counts it as still needing somebody.
+  const box = await outbox(NURSE, `&patientId=${adm.patientId}`);
+  assert.equal(box.__status, 200, JSON.stringify(box));
+  assert.equal(box.transmissions.length, 1);
+  assert.equal(box.outstanding, 1);
+  assert.equal(box.transmissions[0].orderVersion, 1, "and it names WHICH version was queued");
+
+  // `sent` is the transport reporting it left. It is still outstanding.
+  const sent = await as(NURSE, "/ward/transmit-outcome", "POST", { orgId: ORG, transmissionId: q.transmissionId, state: "sent" });
+  assert.equal(sent.__status, 200, JSON.stringify(sent));
+  assert.equal(sent.outstanding, true, "left the building is not arrived");
+  assert.equal((await outbox(NURSE, "&outstanding=1")).outstanding, 1);
+
+  // `acknowledged` is the far end saying it has it. Only now does it leave the list.
+  const ack = await as(NURSE, "/ward/transmit-outcome", "POST", { orgId: ORG, transmissionId: q.transmissionId, state: "acknowledged", reference: "RX-88213" });
+  assert.equal(ack.state, "acknowledged");
+  assert.equal(ack.reference, "RX-88213", "the far end's own id for it is kept");
+  assert.ok(ack.acknowledgedAt && ack.sentAt);
+  assert.equal((await outbox(NURSE, "&outstanding=1")).transmissions.length, 0);
+
+  /* ACKNOWLEDGED IS TERMINAL: nothing can un-say that the pharmacy has the prescription. */
+  const late = await as(NURSE, "/ward/transmit-outcome", "POST", { orgId: ORG, transmissionId: q.transmissionId, state: "failed", failureReason: "timeout" });
+  assert.equal(late.skipped, "already_acknowledged");
+  assert.equal(late.state, "acknowledged");
+  assert.equal(late.written, 0);
+});
+
+test("A FAILURE STAYS LOUD, and resolving it never claims a delivery that did not happen", async () => {
+  seedHospital();
+  const { ord } = await admittedPatientOnDrug();
+  const q = await as(DOCTOR, "/ward/transmit", "POST", { orgId: ORG, orderId: ord.orderId, channel: "pharmacy" });
+
+  // A failure with no reason cannot be acted on, and acting on it is the entire point.
+  const mute = await as(NURSE, "/ward/transmit-outcome", "POST", { orgId: ORG, transmissionId: q.transmissionId, state: "failed" });
+  assert.equal(mute.__status, 422);
+  assert.equal(mute.error, "reason_required");
+
+  const failed = await as(NURSE, "/ward/transmit-outcome", "POST", { orgId: ORG, transmissionId: q.transmissionId, state: "failed", failureReason: "Pharmacy endpoint refused the message." });
+  assert.equal(failed.state, "failed");
+  const box = await outbox(NURSE);
+  assert.equal(box.failed, 1, "an undelivered prescription is a patient told there is nothing for them");
+  assert.equal(box.transmissions[0].failureReason, "Pharmacy endpoint refused the message.");
+
+  // It cannot be cleared off the list silently: say what was done instead.
+  const silent = await as(NURSE, "/ward/transmit-resolve", "POST", { orgId: ORG, transmissionId: q.transmissionId });
+  assert.equal(silent.__status, 422);
+  assert.equal(silent.error, "resolution_required");
+
+  const done = await as(NURSE, "/ward/transmit-resolve", "POST", { orgId: ORG, transmissionId: q.transmissionId, resolution: "Printed and handed to the patient." });
+  assert.equal(done.__status, 200, JSON.stringify(done));
+  assert.equal(done.outstanding, false);
+  assert.equal(done.state, "failed", "it was never acknowledged, and the record does not say it was");
+  assert.equal(done.resolvedBy, idFor(NURSE));
+  assert.equal((await outbox(NURSE)).outstanding, 0);
+});
+
+test("a CHANGED prescription is a new transmission, and the old one still says what was sent", async () => {
+  seedHospital();
+  const { adm, ord } = await admittedPatientOnDrug();
+  const first = await as(DOCTOR, "/ward/transmit", "POST", { orgId: ORG, orderId: ord.orderId, channel: "pharmacy" });
+  await as(NURSE, "/ward/transmit-outcome", "POST", { orgId: ORG, transmissionId: first.transmissionId, state: "acknowledged" });
+
+  // The prescriber doubles the dose. The order moves to version 2.
+  const amended = await as(DOCTOR, "/ward/medication-order", "POST", {
+    orgId: ORG,
+    order: { patientId: adm.patientId, encounterId: adm.encounterId, drug: "Paracetamol 500mg", dose: { value: 1000, unit: "mg" }, route: "oral", frequency: "TID" },
+  });
+  assert.equal(amended.orderId, ord.orderId, "the same order, amended");
+
+  const second = await as(DOCTOR, "/ward/transmit", "POST", { orgId: ORG, orderId: ord.orderId, channel: "pharmacy" });
+  assert.notEqual(second.transmissionId, first.transmissionId, "a different dose is a different message entirely");
+  assert.equal(second.state, "queued");
+
+  /* WHAT WAS SENT IS STILL WHAT WAS SENT. The first transmission's payload is kept verbatim, so the
+   * record can answer "what did they get", not "what does the order say now". */
+  const old = await RECORD.latest(TENANT_ROW.id, "PrescriptionTransmission", first.transmissionId);
+  assert.equal(old.payload.prescription.dose.value, 500);
+  assert.equal(old.state, "acknowledged");
+  const fresh = await RECORD.latest(TENANT_ROW.id, "PrescriptionTransmission", second.transmissionId);
+  assert.equal(fresh.payload.prescription.dose.value, 1000);
+
+  // And the payload carries no clinical history: a dispenser needs to identify a person, not read a chart.
+  assert.deepEqual(Object.keys(fresh.payload).sort(), ["patient", "prescription"]);
+  assert.deepEqual(Object.keys(fresh.payload.patient).sort(), ["dob", "mrn", "name", "sex"]);
+
+  // Both are on the record, and the outbox counts only the one still needing somebody.
+  const box = await outbox(NURSE);
+  assert.equal(box.transmissions.length, 2);
+  assert.equal(box.outstanding, 1);
+});
+
+test("sending is prescribing's business, and nothing unsendable is sent", async () => {
+  seedHospital();
+  const { ord } = await admittedPatientOnDrug();
+
+  // A nurse may record what the transport reported; a nurse may not decide a prescription goes out.
+  const nurseSend = await as(NURSE, "/ward/transmit", "POST", { orgId: ORG, orderId: ord.orderId, channel: "pharmacy" });
+  assert.equal(nurseSend.__status, 403, "transmitting needs emr.treat, which a nurse does not hold");
+
+  // An order that does not exist is not quietly queued against a made-up id.
+  const ghost = await as(DOCTOR, "/ward/transmit", "POST", { orgId: ORG, orderId: "wsq-rx-nope", channel: "pharmacy" });
+  assert.equal(ghost.__status, 404);
+  assert.equal(ghost.error, "order_not_found");
+
+  // A channel WardSynQ has no meaning for is refused rather than defaulted into something plausible.
+  const bogus = await as(DOCTOR, "/ward/transmit", "POST", { orgId: ORG, orderId: ord.orderId, channel: "carrier-pigeon" });
+  assert.equal(bogus.__status, 400);
+  assert.equal(bogus.error, "unknown_channel");
+});
+
+/* ---- the drip ------------------------------------------------------------------------------------ */
+
+test("AN INFUSION'S VOLUME IS COMPUTED, and it says how much of it is assumption", async () => {
+  seedHospital();
+  const { adm } = await admittedPatientOnDrug();
+  const ord = await as(DOCTOR, "/ward/medication-order", "POST", {
+    orgId: ORG, order: { patientId: adm.patientId, encounterId: adm.encounterId, drug: "Noradrenaline", dose: { value: 4, unit: "mg" }, route: "iv", frequency: "continuous" },
+  });
+  const chart = (body) => as(NURSE, "/ward/infusion", "POST", { orgId: ORG, orderId: ord.orderId, ...body });
+
+  const started = await chart({ event: "started", ratePerHour: 10, at: "2026-09-07T00:00:00.000Z" });
+  assert.equal(started.__status, 200, JSON.stringify(started));
+  /* Said on every write. This records what a human says the pump is doing; there is no device
+   * integration here and nothing should ever read as having set a rate. */
+  assert.match(started.note, /Nothing here has set a rate or controls a device/);
+
+  await chart({ event: "rate-changed", ratePerHour: 20, at: "2026-09-07T01:00:00.000Z" });
+  const paused = await chart({ event: "paused", at: "2026-09-07T02:00:00.000Z" });
+  // A pause is its own event and its rate is forced to zero: a paused drip charted at 20 would keep
+  // counting volume into a patient who is not receiving any.
+  assert.equal(paused.ratePerHour, 0);
+
+  const list = await as(NURSE, `/ward/infusions?orgId=${ORG}&patientId=${adm.patientId}&to=2026-09-07T04:00:00.000Z`);
+  assert.equal(list.__status, 200, JSON.stringify(list));
+  assert.equal(list.infusions.length, 1);
+  const inf = list.infusions[0];
+  assert.equal(inf.volume.ml, 30, "10 for an hour, 20 for an hour, then paused");
+  assert.equal(inf.running, true, "paused is not stopped");
+  assert.equal(inf.entries, 3);
+  assert.match(list.note, /uncharted, not stopped/);
+
+  /* THE CAVEAT. The total assumes the pump ran at the last charted rate for every minute since - and
+   * if it occluded at 02:00 and nobody noticed, the fluid balance built on it is wrong. */
+  assert.match(inf.volume.assumption, /assumes the pump has run/);
+});
+
+test("an infusion is never stopped by silence, and a stopped one is not restarted by a rate change", async () => {
+  seedHospital();
+  const { adm } = await admittedPatientOnDrug();
+  const ord = await as(DOCTOR, "/ward/medication-order", "POST", {
+    orgId: ORG, order: { patientId: adm.patientId, encounterId: adm.encounterId, drug: "Insulin infusion", dose: { value: 50, unit: "unit" }, route: "iv", frequency: "continuous" },
+  });
+  const chart = (body) => as(NURSE, "/ward/infusion", "POST", { orgId: ORG, orderId: ord.orderId, ...body });
+
+  await chart({ event: "started", ratePerHour: 4, at: "2026-09-07T00:00:00.000Z" });
+  // A long silence is FLAGGED rather than treated as a stop: those mean opposite things about the
+  // patient - one is no longer receiving a drug, the other is receiving it with nobody looking.
+  const late = await as(NURSE, `/ward/infusions?orgId=${ORG}&patientId=${adm.patientId}&to=2026-09-07T18:00:00.000Z`);
+  assert.equal(late.infusions[0].running, true);
+  assert.equal(late.infusions[0].volume.stale, true);
+  assert.equal(late.stale, 1);
+  assert.match(late.infusions[0].volume.staleDetail, /Check the pump/);
+
+  await chart({ event: "stopped", at: "2026-09-07T06:00:00.000Z" });
+  const stopped = await as(NURSE, `/ward/infusions?orgId=${ORG}&patientId=${adm.patientId}&to=2026-09-07T18:00:00.000Z`);
+  assert.equal(stopped.infusions[0].running, false);
+  assert.equal(stopped.infusions[0].volume.ml, 24, "six hours at 4, and nothing after the stop");
+
+  /* Restarting is a new prescription decision. Letting a rate entry quietly revive a stopped
+   * infusion would put a drug back up with nobody having decided to. */
+  const revive = await chart({ event: "rate-changed", ratePerHour: 6, at: "2026-09-07T07:00:00.000Z" });
+  assert.equal(revive.__status, 409);
+  assert.equal(revive.error, "infusion_stopped");
+  assert.match(revive.detail, /a new order, not a rate change/);
+
+  // A running infusion needs a rate: a drip charted as running at nothing cannot be accounted for.
+  assert.equal((await chart({ event: "started" })).error, "rate_required");
+  // And charting a pump is the bedside's act, not the pharmacy's.
+  assert.equal((await as(PHARM, "/ward/infusion", "POST", { orgId: ORG, orderId: ord.orderId, event: "started", ratePerHour: 4 })).__status, 403);
+});
+
+/* ---- ordering an investigation from the ward ----------------------------------------------------- */
+
+test("THE WARD CAN ORDER A TEST, and a STAT one is at the top of the list of whoever takes the blood", async () => {
+  seedHospital();
+  const { adm } = await admittedPatientOnDrug();
+  const order = (code, body) => as(DOCTOR, "/ward/investigation", "POST", { orgId: ORG, encounterId: adm.encounterId, code, ...(body || {}) });
+
+  const routine = await order("Full blood count");
+  assert.equal(routine.__status, 200, JSON.stringify(routine));
+  assert.equal(routine.priority, "routine", "the safest default");
+  assert.equal(routine.category, "laboratory");
+  // No code system is invented: the ward typed a name, and a code it did not give is not guessed at.
+  assert.equal((await RECORD.latest(TENANT_ROW.id, "ServiceRequest", routine.orderId)).codeSystem, "wardsynq-order-local");
+
+  const stat = await order("Potassium", { priority: "stat", reason: "Suspected hyperkalaemia" });
+  assert.equal(stat.priority, "stat");
+  /* Said on every response. `stat` reaches the person who has to take the blood; it does not reach
+   * the analyser, and a system implying otherwise gets trusted for something it cannot do. */
+  assert.match(stat.priorityNote, /does not make the laboratory faster/);
+
+  /* AND IT ACTUALLY REACHES THEM. A priority that changed nothing downstream would be decoration,
+   * and prescribers stop setting it honestly within a week. */
+  const list = await as(NURSE, `/ward/collections?orgId=${ORG}&patientId=${adm.patientId}`);
+  assert.equal(list.awaitingCollection, 2);
+  assert.equal(list.requests[0].code, "Potassium", "the stat order is first");
+  assert.equal(list.requests[0].priority, "stat");
+  assert.equal(list.requests[1].priority, "routine");
+
+  // A word the system does not know is recorded as routine and SAID, not silently dropped.
+  const odd = await order("Magnesium", { priority: "URGENT!!" });
+  assert.equal(odd.priority, "routine");
+  assert.equal(odd.priorityNotUnderstood, "URGENT!!");
+  assert.match(odd.note, /is not a priority this system knows/);
+
+  // Asking for the same test again on the same stay is the SAME order, not a second specimen.
+  assert.equal((await order("Full blood count")).skipped, "already_ordered");
+});
+
+test("an investigation needs a stay that exists and is open, and is not a nurse's to order", async () => {
+  seedHospital();
+  const { adm } = await admittedPatientOnDrug();
+
+  // An order against a stay that does not exist is a specimen nobody can match to a patient.
+  const ghost = await as(DOCTOR, "/ward/investigation", "POST", { orgId: ORG, encounterId: "wsq-adm-nope", code: "Potassium" });
+  assert.equal(ghost.__status, 404);
+  assert.equal(ghost.error, "encounter_not_found");
+
+  assert.equal((await as(NURSE, "/ward/investigation", "POST", { orgId: ORG, encounterId: adm.encounterId, code: "Potassium" })).__status, 403,
+    "asking for an investigation is a clinical act");
+
+  await as(DOCTOR, "/ward/discharge", "POST", { orgId: ORG, encounterId: adm.encounterId, dischargedAt: "2026-09-09T10:00:00.000Z" });
+  const closed = await as(DOCTOR, "/ward/investigation", "POST", { orgId: ORG, encounterId: adm.encounterId, code: "Potassium" });
+  assert.equal(closed.__status, 409);
+  assert.equal(closed.error, "encounter_closed");
+  assert.match(closed.detail, /order it against the current one/);
+});
+
+/* ---- the flowsheet, from the real record --------------------------------------------------------- */
+
+test("A CONFIGURED ROW WITH NOTHING IN IT STILL APPEARS, which is the whole point", async () => {
+  seedHospital();
+  const org = docs.get(`q_orgs/${ORG}`);
+  org.fields.wardsynq = {
+    ...org.fields.wardsynq,
+    // The hospital's own rows. Respiratory rate is on the chart and will be charted; SpO2 is on the
+    // chart and will NOT be.
+    flowsheetRows: [{ code: "8480-6", label: "Systolic BP" }, { code: "9279-1", label: "Resp rate" }, { code: "59408-5", label: "SpO2" }],
+  };
+  const { adm } = await admittedPatientOnDrug();
+  await as(NURSE, "/ward/vitals", "POST", { orgId: ORG, encounterId: adm.encounterId, patientId: adm.patientId, vitals: { sbp: "126", rr: "18" } });
+
+  const fs = await as(NURSE, `/ward/flowsheet?orgId=${ORG}&patientId=${adm.patientId}&hours=6`);
+  assert.equal(fs.__status, 200, JSON.stringify(fs));
+  assert.equal(fs.rowsConfigured, true);
+  assert.deepEqual(fs.grid.rows.map((r) => r.code), ["8480-6", "9279-1", "59408-5"]);
+
+  /* THE POINT. A row that vanished because nobody charted it reads as "not part of this chart"
+   * rather than "nobody charted it", and those are opposite conclusions. */
+  const spo2 = fs.grid.rows.find((r) => r.code === "59408-5");
+  assert.equal(spo2.chartedHours, 0);
+  assert.equal(spo2.completeness, 0);
+  assert.ok(spo2.cells.every((c) => c.empty), "every hour of it is visibly empty");
+  assert.equal(spo2.label, "SpO2", "and it is headed by the hospital's own label, not a bare code");
+
+  const sbp = fs.grid.rows.find((r) => r.code === "8480-6");
+  assert.equal(sbp.chartedHours, 1);
+  assert.equal(sbp.cells.find((c) => !c.empty).value, 126);
+  assert.equal(sbp.label, "Systolic BP");
+
+  // A laboratory result is not a flowsheet row: it has its own report and its own critical loop.
+  const sr = await orderTest(adm, "Potassium", "wsq-sr-fs");
+  await as(LABTECH, "/ward/release-result", "POST", { orgId: ORG, serviceRequestId: sr, tests: [{ test: "Potassium", value: 4.1, unit: "mmol/L" }] });
+  const after = await as(NURSE, `/ward/flowsheet?orgId=${ORG}&patientId=${adm.patientId}&hours=6`);
+  assert.deepEqual(after.grid.rows.map((r) => r.code), ["8480-6", "9279-1", "59408-5"], "the potassium did not become a row");
+
+  // With no rows configured the grid shows what was charted, and SAYS it cannot show an omission.
+  seedHospital();
+  const { adm: adm2 } = await admittedPatientOnDrug();
+  await as(NURSE, "/ward/vitals", "POST", { orgId: ORG, encounterId: adm2.encounterId, patientId: adm2.patientId, vitals: { sbp: "130" } });
+  const loose = await as(NURSE, `/ward/flowsheet?orgId=${ORG}&patientId=${adm2.patientId}&hours=6`);
+  assert.equal(loose.rowsConfigured, false);
+  assert.match(loose.note, /cannot show a row nobody filled in/);
+  assert.ok(loose.grid.rows.length >= 1);
+});
+
+/* ---- the room, the theatre and the scanner ------------------------------------------------------- */
+
+test("A ROOM CANNOT BE OVERBOOKED, and the refusal names what is already there", async () => {
+  seedHospital();
+  const org = docs.get(`q_orgs/${ORG}`);
+  org.fields.wardsynq = {
+    ...org.fields.wardsynq,
+    resources: [{ id: "ct-1", name: "CT scanner", kind: "equipment", location: "Radiology" }, { id: "th-1", name: "Theatre 1", kind: "theatre" }],
+  };
+  const { adm } = await admittedPatientOnDrug();
+  const book = (body) => as(NURSE, "/ward/book-resource", "POST", { orgId: ORG, patientId: adm.patientId, ...body });
+
+  const first = await book({ resourceId: "ct-1", startAt: "2026-09-07T09:00:00.000Z", minutes: 30, purpose: "CT head" });
+  assert.equal(first.__status, 200, JSON.stringify(first));
+  assert.equal(first.resourceName, "CT scanner");
+
+  /* THE REFUSAL, AND THERE IS NO OVERRIDE. A clinician's diary may be overbooked - real clinics do
+   * it. Two patients do not fit inside one CT scanner, and no amount of "deliberate" makes them. */
+  const clash = await book({ resourceId: "ct-1", startAt: "2026-09-07T09:15:00.000Z", minutes: 30 });
+  assert.equal(clash.__status, 409);
+  assert.equal(clash.error, "resource_busy");
+  // It names the booking already there: a refusal a scheduler cannot act on is one they replace
+  // with a paper list.
+  assert.match(clash.detail, /CT scanner is already booked from 2026-09-07T09:00/);
+  assert.equal(clash.clashesWith.bookingId, first.bookingId);
+
+  // Touching but not overlapping is fine: 09:00+30 ends exactly as 09:30 begins.
+  assert.equal((await book({ resourceId: "ct-1", startAt: "2026-09-07T09:30:00.000Z", minutes: 30 })).__status, 200);
+  // A different resource at the same time is not a clash.
+  assert.equal((await book({ resourceId: "th-1", startAt: "2026-09-07T09:15:00.000Z", minutes: 60 })).__status, 200);
+
+  /* CANCELLING FREES IT IMMEDIATELY AND KEEPS THE HISTORY. "They cancelled" and "they never had
+   * one" are different facts, and the second is what a complaint turns on. */
+  const off = await as(NURSE, "/ward/resource-state", "POST", { orgId: ORG, bookingId: first.bookingId, state: "cancelled", reason: "Patient too unwell to move." });
+  assert.equal(off.state, "cancelled");
+  assert.deepEqual((await RECORD.history(TENANT_ROW.id, "ResourceBooking", first.bookingId)).map((h) => h.state), ["booked", "cancelled"]);
+  /* The freed slot is bookable again. 09:15 would NOT be - it still overlaps the 09:30 booking above,
+   * which is the rule working rather than a stale one. */
+  const stillBusy = await book({ resourceId: "ct-1", startAt: "2026-09-07T09:15:00.000Z", minutes: 30 });
+  assert.equal(stillBusy.__status, 409, "cancelling the 09:00 did not free the 09:30");
+  const rebooked = await book({ resourceId: "ct-1", startAt: "2026-09-07T09:00:00.000Z", minutes: 30 });
+  assert.equal(rebooked.__status, 200, "a cancelled slot is bookable again");
+  assert.equal(rebooked.state, "booked");
+
+  const sched = await as(NURSE, `/ward/resource-schedule?orgId=${ORG}&resourceId=ct-1`);
+  assert.equal(sched.resourcesConfigured, true);
+  assert.equal(sched.resources[0].booked, 2, "two live bookings; the cancelled one is not counted");
+});
+
+test("a resource the hospital does not have cannot be booked, and a booking needs a length", async () => {
+  seedHospital();
+  const org = docs.get(`q_orgs/${ORG}`);
+  org.fields.wardsynq = { ...org.fields.wardsynq, resources: [{ id: "ct-1", name: "CT scanner" }] };
+  const { adm } = await admittedPatientOnDrug();
+  const book = (body) => as(NURSE, "/ward/book-resource", "POST", { orgId: ORG, patientId: adm.patientId, ...body });
+
+  /* Accepting a made-up room is how a patient is sent somewhere that does not exist, and nobody
+   * finds out until they are standing in a corridor. */
+  const ghost = await book({ resourceId: "mri-9", startAt: "2026-09-07T09:00:00.000Z", minutes: 30 });
+  assert.equal(ghost.__status, 404);
+  assert.equal(ghost.error, "resource_not_found");
+  assert.deepEqual(ghost.known, ["ct-1"], "and it says what this hospital does have");
+
+  // A booking with no length has no end, so nothing could ever clash with it - which would silently
+  // disable the one rule this file exists for.
+  const endless = await book({ resourceId: "ct-1", startAt: "2026-09-07T09:00:00.000Z" });
+  assert.equal(endless.__status, 422);
+  assert.equal(endless.error, "minutes_required");
+  assert.match(endless.detail, /nothing can clash with it/);
+
+  // Cancelling without a reason loses why a slot was given up.
+  const bk = await book({ resourceId: "ct-1", startAt: "2026-09-07T09:00:00.000Z", minutes: 30 });
+  assert.equal((await as(NURSE, "/ward/resource-state", "POST", { orgId: ORG, bookingId: bk.bookingId, state: "cancelled" })).error, "reason_required");
+
+  // A hospital with nothing configured says so, rather than reading as "no bookings".
+  seedHospital();
+  const none = await as(NURSE, `/ward/resource-schedule?orgId=${ORG}`);
+  assert.equal(none.resourcesConfigured, false);
+});
+
+/* ---- the wound, over time ------------------------------------------------------------------------ */
+
+test("A HEALING CATEGORY 4 IS STILL A CATEGORY 4, and where it came from cannot be edited", async () => {
+  seedHospital();
+  const { adm } = await admittedPatientOnDrug();
+  const chart = (body) => as(NURSE, "/ward/wound", "POST", { orgId: ORG, patientId: adm.patientId, encounterId: adm.encounterId, site: "Sacrum", kind: "pressure", ...body });
+
+  const first = await chart({ stage: "4", origin: "acquired-here", lengthCm: 5, widthCm: 4, depthCm: 2, tissue: "Sloughy", assessedAt: "2026-09-01T09:00:00.000Z" });
+  assert.equal(first.__status, 200, JSON.stringify(first));
+  assert.equal(first.stage, "4");
+  assert.equal(first.areaCm2, 20);
+  assert.equal(first.comparison.state, "first");
+
+  /* THE RULE. Two weeks later it is granulating and a nurse would reasonably chart it as a 2. The
+   * lost tissue has not come back, and a chart that let the stage fall would report less harm than
+   * the hospital caused. */
+  const later = await chart({ stage: "2", lengthCm: 3, widthCm: 2, tissue: "Granulating", assessedAt: "2026-09-15T09:00:00.000Z" });
+  assert.equal(later.__status, 200, JSON.stringify(later));
+  assert.equal(later.stage, "2", "what the nurse saw today is recorded faithfully");
+  assert.equal(later.worstStage, "4", "and the wound is still a category 4");
+  assert.match(later.note, /never reverse-staged/);
+
+  // The area change is reported as a change, never as "healing".
+  assert.equal(later.comparison.state, "smaller");
+  assert.equal(later.comparison.changeCm2, -14);
+  assert.match(later.comparison.note, /not a judgement that the wound is healing/);
+
+  /* WHERE IT CAME FROM IS SET ONCE. A system that let this be edited later is one where a hospital
+   * can stop having pressure ulcers. */
+  const relabel = await chart({ stage: "2", origin: "present-on-admission", assessedAt: "2026-09-16T09:00:00.000Z" });
+  assert.equal(relabel.__status, 200);
+  assert.equal(relabel.origin, "acquired-here", "unchanged");
+  assert.equal(relabel.originNotChanged, "acquired-here");
+  assert.match(relabel.warning, /not editable/);
+
+  const list = await as(NURSE, `/ward/wounds?orgId=${ORG}&patientId=${adm.patientId}`);
+  assert.equal(list.wounds.length, 1);
+  assert.equal(list.wounds[0].worstStage, "4");
+  assert.equal(list.wounds[0].assessments, 3);
+  assert.equal(list.acquiredHere, 1, "the number the hospital is accountable for");
+});
+
+test("a different site is a different wound, and no image is accepted", async () => {
+  seedHospital();
+  const { adm } = await admittedPatientOnDrug();
+  const chart = (body) => as(NURSE, "/ward/wound", "POST", { orgId: ORG, patientId: adm.patientId, site: "Sacrum", ...body });
+
+  await chart({ stage: "2", origin: "acquired-here", assessedAt: "2026-09-01T09:00:00.000Z" });
+  await chart({ site: "Left heel", stage: "unstageable", origin: "present-on-admission", assessedAt: "2026-09-01T09:00:00.000Z" });
+  const list = await as(NURSE, `/ward/wounds?orgId=${ORG}&patientId=${adm.patientId}`);
+  assert.equal(list.wounds.length, 2, "two pressure ulcers on one patient are two problems");
+  assert.equal(list.acquiredHere, 1, "and only one of them is the hospital's");
+  // unstageable outranks 4: it may conceal full-thickness loss, and treating it as lesser is how a
+  // serious ulcer is recorded as a minor one.
+  assert.equal(list.wounds.find((w) => w.site === "Left heel").worstStage, "unstageable");
+
+  /* A wound image is identifiable PHI with its own storage, consent and retention problems. Refusing
+   * beats silently ignoring a field somebody sent and believing it was saved. */
+  const withPhoto = await chart({ stage: "2", photo: "data:image/jpeg;base64,...", assessedAt: "2026-09-02T09:00:00.000Z" });
+  assert.equal(withPhoto.__status, 400);
+  assert.equal(withPhoto.error, "no_images");
+
+  // A stage outside the recognised vocabulary is refused rather than stored as a word.
+  assert.equal((await chart({ stage: "nearly better" })).error, "unknown_stage");
+  // And a wound with no site has no identity: two of them would be one record.
+  assert.equal((await as(NURSE, "/ward/wound", "POST", { orgId: ORG, patientId: adm.patientId, stage: "2" })).error, "patient_and_site_required");
+});
+
+/* ---- the result, going out ----------------------------------------------------------------------- */
+
+test("AN ORU CARRIES ONLY THIS REPORT'S RESULTS, and the lab's own flag", async () => {
+  seedHospital();
+  const { adm } = await admittedPatientOnDrug();
+
+  // Two separate reports on the same patient.
+  const srA = await orderTest(adm, "Potassium", "wsq-sr-oru-a");
+  const a = await as(LABTECH, "/ward/release-result", "POST", {
+    orgId: ORG, serviceRequestId: srA, panel: "Renal profile",
+    tests: [{ test: "Potassium", value: 7.4, unit: "mmol/L", low: 3.5, high: 5.1, critical: true }],
+  });
+  const srB = await orderTest(adm, "Culture", "wsq-sr-oru-b");
+  await as(LABTECH, "/ward/release-result", "POST", {
+    orgId: ORG, serviceRequestId: srB, tests: [{ test: "Culture", value: "No growth at 48h" }],
+  });
+
+  const oru = await as(DOCTOR, `/ward/oru?orgId=${ORG}&reportId=${a.reportId}`);
+  assert.equal(oru.__status, 200, JSON.stringify(oru));
+  /* ONLY THIS REPORT'S. Sending the patient's whole Observation history in one ORU would send a
+   * receiver every result the hospital has ever produced, every time. */
+  assert.equal(oru.observations, 1);
+  assert.ok(!oru.message.includes("No growth at 48h"));
+
+  const segs = oru.message.split("\r");
+  assert.ok(segs[0].startsWith("MSH|^~\\&|WardSynQ|SMD-WARD01|"));
+  assert.match(segs[0], /ORU\^R01\^ORU_R01/);
+  const obx = segs.find((s) => s.startsWith("OBX|")).split("|");
+  assert.equal(obx[2], "NM", "a number is NM");
+  assert.equal(obx[5], "7.4");
+  assert.equal(obx[6], "mmol/L");
+  // The LABORATORY's flag, carried through. Nothing here compared 7.4 to the range and decided.
+  assert.equal(obx[8], "AA");
+  assert.match(oru.note, /not certified/);
+
+  // A report that does not exist is named, not returned as an empty body.
+  const ghost = await as(DOCTOR, `/ward/oru?orgId=${ORG}&reportId=wsq-dr-nope`);
+  assert.equal(ghost.__status, 404);
+  assert.equal(ghost.error, "report_not_found");
+  // And reading a chart in another wire format still needs the authority to read a chart.
+  assert.equal((await as(PHARM, `/ward/oru?orgId=${ORG}&reportId=${a.reportId}`)).__status, 403);
+});
+
+/* ---- the cohort, and who in it is overdue -------------------------------------------------------- */
+
+test("A REGISTRY NAMES PATIENTS, derives them from the problem list, and finds the ones never seen", async () => {
+  seedHospital();
+  const org = docs.get(`q_orgs/${ORG}`);
+  org.fields.wardsynq = {
+    ...org.fields.wardsynq,
+    /* The review test is named by the code THIS hospital's laboratory actually produces. HbA1c is
+     * not in the LOINC seed, so lab-result.js records it under a local code rather than guessing
+     * one - and a registry has to match the record as it is, not as a standard wishes it were. */
+    registries: [{ id: "diabetes", name: "Diabetes register", problemCodes: ["E11"], review: { everyMonths: 12, observationCode: "HbA1c", display: "HbA1c" } }],
+  };
+
+  const { adm } = await admittedPatientOnDrug();
+  const empty = await as(DOCTOR, `/ward/registries?orgId=${ORG}`);
+  assert.equal(empty.__status, 200, JSON.stringify(empty));
+  assert.equal(empty.registries[0].total, 0, "nobody has the diagnosis yet");
+
+  await as(DOCTOR, "/ward/problem", "POST", { orgId: ORG, problem: { patientId: adm.patientId, encounterId: adm.encounterId, code: "E11", display: "Type 2 diabetes" } });
+
+  const one = await as(DOCTOR, `/ward/registries?orgId=${ORG}`);
+  const reg = one.registries[0];
+  assert.equal(reg.total, 1);
+  /* NEVER REVIEWED IS THE MOST OVERDUE, not the least. Sorting somebody with no result as though
+   * they had just been seen is how a patient goes years without a review. */
+  assert.equal(reg.neverReviewed, 1);
+  assert.equal(reg.members[0].patientId, adm.patientId);
+  assert.equal(reg.members[0].review.state, "never");
+  assert.equal(reg.members[0].because, "Type 2 diabetes", "why they are on the list, without opening a chart");
+  /* It NAMES them, and that is the point - a registry that could not would be a number nobody can
+   * act on. It is the one report in WardSynQ that does. */
+  assert.match(one.note, /NAMES PATIENTS/);
+
+  // A qualifying result takes them off the overdue list. A different test would not.
+  const sr = await orderTest(adm, "HbA1c", "wsq-sr-hba");
+  const rel = await as(LABTECH, "/ward/release-result", "POST", { orgId: ORG, serviceRequestId: sr, tests: [{ test: "HbA1c", value: 58, unit: "mmol/mol" }] });
+  assert.equal(rel.observations[0].codeSystem, "wardsynq-lab-local", "no LOINC is invented for a test the seed does not know");
+  const after = await as(DOCTOR, `/ward/registries?orgId=${ORG}`);
+  assert.equal(after.registries[0].neverReviewed + after.registries[0].overdue, 0, "reviewed today");
+  assert.equal(after.registries[0].members[0].review.state, "current");
+
+  /* MEMBERSHIP IS DERIVED. Resolve the diagnosis and the patient leaves the cohort - no separate
+   * registry table to forget to update. */
+  await as(DOCTOR, "/ward/problem", "POST", { orgId: ORG, problem: { patientId: adm.patientId, encounterId: adm.encounterId, code: "E11", display: "Type 2 diabetes", clinicalStatus: "resolved" } });
+  assert.equal((await as(DOCTOR, `/ward/registries?orgId=${ORG}`)).registries[0].total, 0);
+
+  // And a pharmacist, who holds no emr.view, does not get a list of patients beside their diagnoses.
+  assert.equal((await as(PHARM, `/ward/registries?orgId=${ORG}`)).__status, 403);
+});
+
+/* ---- the patient promised a bed ----------------------------------------------------------------- */
+
+test("A WAITING LIST THAT RESERVES NOTHING AND ADMITS NOBODY", async () => {
+  seedHospital();
+  const reg = await as(DOCTOR, "/patient/register", "POST", { orgId: ORG, name: "Waiting Testcase", mobile: "9876500033", gender: "male", ageYears: 61 });
+
+  // A reason is required: an entry nobody can prioritise, review or explain to the patient is not a
+  // waiting list, it is a queue.
+  const bare = await as(NURSE, "/ward/request-admission", "POST", { orgId: ORG, mrn: reg.mrn, specialty: "Medicine" });
+  assert.equal(bare.__status, 422);
+  assert.equal(bare.error, "reason_required");
+
+  const req = await as(NURSE, "/ward/request-admission", "POST", {
+    orgId: ORG, mrn: reg.mrn, specialty: "Medicine", ward: "Medical A", reason: "Elective cardioversion",
+    urgency: "soon", requestedAt: "2026-09-01T09:00:00.000Z",
+  });
+  assert.equal(req.__status, 200, JSON.stringify(req));
+  assert.equal(req.state, "waiting");
+  assert.match(req.note, /NO bed is reserved/);
+
+  /* IT RESERVES NOTHING. The bed board is unchanged - a board that showed full while beds stood
+   * empty is a board the ward stops reading. */
+  const beds = await as(NURSE, `/ward/beds?orgId=${ORG}`);
+  assert.equal(beds.__status, 200, JSON.stringify(beds));
+  const medical = (beds.wards || []).find((w) => w.ward === "Medical A");
+  assert.equal(medical, undefined, "nobody is in Medical A, so it is not on the board at all");
+
+  const list = await as(NURSE, `/ward/waiting-list?orgId=${ORG}`);
+  assert.equal(list.waiting, 1);
+  assert.ok(list.requests[0].waitingHours >= 24, "how long they have waited is computed");
+  assert.match(list.note, /not a bed allocation/);
+
+  // ADMITTING IS A SEPARATE HUMAN ACT. Nothing on the list admits itself.
+  const adm = await as(DOCTOR, "/ward/admit", "POST", { orgId: ORG, mrn: reg.mrn, ward: "Medical A", bed: "04", admittedAt: "2026-09-07T08:00:00.000Z" });
+  assert.equal(adm.__status, 200, JSON.stringify(adm));
+
+  /* AND IT DOES NOT CLOSE THE REQUEST BY GUESSING. A patient may hold two - a medical bed now and a
+   * surgical slot next month - so the list REPORTS that they are an inpatient and a human closes the
+   * right one. */
+  const after = await as(NURSE, `/ward/waiting-list?orgId=${ORG}`);
+  assert.equal(after.waiting, 1, "still open");
+  assert.equal(after.requests[0].patientAlreadyAdmitted, true);
+  assert.match(after.requests[0].detail, /Close this request against their admission/);
+
+  const closed = await as(NURSE, "/ward/close-admission-request", "POST", { orgId: ORG, requestId: req.requestId, state: "admitted", encounterId: adm.encounterId });
+  assert.equal(closed.__status, 200, JSON.stringify(closed));
+  assert.equal(closed.state, "admitted");
+  assert.equal(closed.encounterId, adm.encounterId);
+  assert.equal(closed.waitingHours, null, "a closed request has no growing wait");
+  assert.equal((await as(NURSE, `/ward/waiting-list?orgId=${ORG}`)).waiting, 0);
+});
+
+test("a request is closed AGAINST a real admission, of the RIGHT patient, or with a reason", async () => {
+  seedHospital();
+  const reg = await as(DOCTOR, "/patient/register", "POST", { orgId: ORG, name: "Waiting Two", mobile: "9876500044", gender: "female", ageYears: 44 });
+  const req = await as(NURSE, "/ward/request-admission", "POST", { orgId: ORG, mrn: reg.mrn, specialty: "Surgery", reason: "Hernia repair", urgency: "elective" });
+
+  // "Admitted" with no encounter is a waiting list that empties itself and a patient nobody can find.
+  const hollow = await as(NURSE, "/ward/close-admission-request", "POST", { orgId: ORG, requestId: req.requestId, state: "admitted" });
+  assert.equal(hollow.__status, 422);
+  assert.equal(hollow.error, "encounter_required");
+
+  // Closing one patient's request with another's admission would put two people in one record.
+  const { adm: other } = await admittedPatientOnDrug();
+  const wrong = await as(NURSE, "/ward/close-admission-request", "POST", { orgId: ORG, requestId: req.requestId, state: "admitted", encounterId: other.encounterId });
+  assert.equal(wrong.__status, 409);
+  assert.equal(wrong.error, "wrong_patient");
+
+  /* Cancelling without a reason loses why a patient who was promised a bed did not get one - the
+   * single question a complaint about a waiting list asks. */
+  const silent = await as(NURSE, "/ward/close-admission-request", "POST", { orgId: ORG, requestId: req.requestId, state: "cancelled" });
+  assert.equal(silent.__status, 422);
+  assert.equal(silent.error, "reason_required");
+
+  const off = await as(NURSE, "/ward/close-admission-request", "POST", { orgId: ORG, requestId: req.requestId, state: "cancelled", reason: "Patient declined surgery." });
+  assert.equal(off.state, "cancelled");
+  assert.equal(off.closeReason, "Patient declined surgery.");
+  // The history survives: a cancelled promise is still a promise that was made.
+  assert.deepEqual((await RECORD.history(TENANT_ROW.id, "AdmissionRequest", req.requestId)).map((h) => h.state), ["waiting", "cancelled"]);
+  assert.equal((await as(NURSE, "/ward/close-admission-request", "POST", { orgId: ORG, requestId: req.requestId, state: "cancelled", reason: "again" })).skipped, "already_closed");
+});
+
+/* ---- the hospital's own advice ------------------------------------------------------------------ */
+
+test("A HOSPITAL'S OWN ADVISORY APPEARS AND CANNOT BLOCK", async () => {
+  seedHospital();
+  const org = docs.get(`q_orgs/${ORG}`);
+  org.fields.wardsynq = {
+    ...org.fields.wardsynq,
+    advisories: [{
+      id: "nephrotoxic-in-aki", level: "warn",
+      message: "Creatinine is above 200. Review the dose of this nephrotoxic drug.",
+      action: "Discuss with the renal team before the next dose.",
+      reference: "Local renal prescribing guideline, 2026",
+      when: [{ kind: "drug", value: "Gentamicin" }, { kind: "observation-above", code: "2160-0", value: 200, withinHours: 72 }],
+    }],
+  };
+  const { adm } = await admittedPatientOnDrug();
+  const order = (drug) => as(DOCTOR, "/ward/medication-order", "POST", {
+    orgId: ORG, order: { patientId: adm.patientId, encounterId: adm.encounterId, drug, dose: { value: 240, unit: "mg" }, route: "iv", frequency: "OD" },
+  });
+
+  /* NOT MEASURED IS NOT "BELOW". With no creatinine on file the rule does not fire - advising about
+   * a patient nobody has measured is worse than saying nothing. */
+  const quiet = await order("Gentamicin");
+  assert.equal(quiet.__status, 200, JSON.stringify(quiet));
+  assert.equal(quiet.advisories, undefined);
+
+  const sr = await orderTest(adm, "Creatinine", "wsq-sr-adv");
+  await as(LABTECH, "/ward/release-result", "POST", { orgId: ORG, serviceRequestId: sr, tests: [{ test: "Creatinine", value: 240, unit: "umol/L" }] });
+
+  const loud = await order("Gentamicin");
+  /* IT CANNOT BLOCK. A hospital-authored rule is written by somebody who is not a software engineer,
+   * in a hospital with no staging environment; a typo that could stop prescribing takes the ward
+   * offline at 3am with nobody to roll it back. */
+  assert.equal(loud.__status, 200, "the order is written regardless");
+  assert.equal(loud.written, 1);
+  assert.equal(loud.advisories.length, 1);
+  assert.equal(loud.advisories[0].blocking, false);
+  assert.equal(loud.advisories[0].message, "Creatinine is above 200. Review the dose of this nephrotoxic drug.");
+  assert.equal(loud.advisories[0].reference, "Local renal prescribing guideline, 2026");
+  /* Marked as the HOSPITAL's, so a prescriber can tell "your hospital asked me to tell you this"
+   * from "this drug will harm this patient". */
+  assert.equal(loud.advisories[0].source, "hospital-advisory");
+
+  // A different drug on the same patient does not fire it: every condition must hold.
+  assert.equal((await order("Paracetamol")).advisories, undefined);
+});
+
+/* ---- what this hospital stocks, and what it guards ---------------------------------------------- */
+
+test("OFF-FORMULARY NEVER BLOCKS, and a RESTRICTED drug does - because the hospital said so", async () => {
+  seedHospital();
+  const org = docs.get(`q_orgs/${ORG}`);
+  org.fields.wardsynq = {
+    ...org.fields.wardsynq,
+    formulary: [
+      { drug: "Paracetamol 500mg" },
+      { drug: "Meropenem", restricted: true, requiresApproval: true, approvedBy: "Microbiology", note: "Carbapenem stewardship." },
+      { drug: "Vancomycin", restricted: true, restrictedTo: ["Intensive care"] },
+    ],
+  };
+  const { adm } = await admittedPatientOnDrug();
+  const order = (drug, extra) => as(DOCTOR, "/ward/medication-order", "POST", {
+    orgId: ORG, ...(extra || {}),
+    order: { patientId: adm.patientId, encounterId: adm.encounterId, drug, dose: { value: 1, unit: "g" }, route: "iv", frequency: "TDS" },
+  });
+
+  /* A drug not on the list is not dangerous - it is not stocked. Refusing on those grounds would
+   * teach prescribers that the safety warnings are bureaucratic too, which is how the ones that
+   * matter stop being read. */
+  const off = await order("Rifaximin");
+  assert.equal(off.__status, 200, JSON.stringify(off));
+  const stored = await RECORD.latest(TENANT_ROW.id, "MedicationOrder", off.orderId);
+  assert.equal(stored.formularyState, "non-formulary", "recorded on the order, which is where pharmacy asks");
+
+  // A RESTRICTED drug blocks, and the refusal names what is missing AND who grants it - one a
+  // prescriber cannot act on at 2am is one they will work around.
+  const mero = await order("Meropenem");
+  assert.equal(mero.__status, 409);
+  assert.equal(mero.error, "restricted_drug");
+  assert.match(mero.detail, /approval reference from Microbiology/);
+  assert.equal(mero.note, "Carbapenem stewardship.");
+  /* Said plainly, so nobody reads this as the safety engine having found something clinical. A
+   * formulary answers "does this hospital stock this"; the safety engine answers "would this harm
+   * this patient". */
+  assert.match(mero.basis, /not a clinical safety finding/);
+  assert.equal(await RECORD.latest(TENANT_ROW.id, "MedicationOrder", "wsq-rx-" + adm.encounterId.toLowerCase() + "-meropenem"), null, "and nothing was written");
+
+  const approved = await order("Meropenem", { approvalRef: "MICRO-2291" });
+  assert.equal(approved.__status, 200, JSON.stringify(approved));
+  assert.equal((await RECORD.latest(TENANT_ROW.id, "MedicationOrder", approved.orderId)).restrictionApprovalRef, "MICRO-2291");
+
+  // A specialty restriction is satisfied by the specialty, not by an approval number.
+  assert.equal((await order("Vancomycin", { approvalRef: "X" })).__status, 409);
+  assert.equal((await order("Vancomycin", { specialty: "Intensive care" })).__status, 200);
+
+  // Nothing is matched fuzzily: "Meropenem 1g" is a different string and is simply off-formulary,
+  // not a restriction that was missed.
+  const near = await order("Meropenem 1g");
+  assert.equal(near.__status, 200);
+  assert.equal((await RECORD.latest(TENANT_ROW.id, "MedicationOrder", near.orderId)).formularyState, "non-formulary");
+});
+
+test("a hospital MAY require a reason off-formulary, and no formulary is no opinion", async () => {
+  seedHospital();
+  const org = docs.get(`q_orgs/${ORG}`);
+  org.fields.wardsynq = { ...org.fields.wardsynq, formulary: [{ drug: "Paracetamol 500mg" }], requireReasonOffFormulary: true };
+  const { adm } = await admittedPatientOnDrug();
+  const order = (drug, extra) => as(DOCTOR, "/ward/medication-order", "POST", {
+    orgId: ORG, ...(extra || {}),
+    order: { patientId: adm.patientId, encounterId: adm.encounterId, drug, dose: { value: 1, unit: "g" }, route: "iv", frequency: "TDS" },
+  });
+
+  const bare = await order("Rifaximin");
+  assert.equal(bare.__status, 409);
+  assert.equal(bare.error, "formulary_reason_required");
+  assert.match(bare.detail, /Say why this drug/);
+
+  // The reason is RECORDED, never adjudicated.
+  const withReason = await order("Rifaximin", { formularyReason: "Patient's own supply from home." });
+  assert.equal(withReason.__status, 200, JSON.stringify(withReason));
+  assert.equal((await RECORD.latest(TENANT_ROW.id, "MedicationOrder", withReason.orderId)).formularyReason, "Patient's own supply from home.");
+
+  // A hospital with no formulary configured has no opinion, and blocks nothing - even with the
+  // reason switch on, because there is nothing to be off.
+  seedHospital();
+  const { adm: adm2 } = await admittedPatientOnDrug();
+  const none = await as(DOCTOR, "/ward/medication-order", "POST", {
+    orgId: ORG, order: { patientId: adm2.patientId, encounterId: adm2.encounterId, drug: "Meropenem", dose: { value: 1, unit: "g" }, route: "iv", frequency: "TDS" },
+  });
+  assert.equal(none.__status, 200, JSON.stringify(none));
+});
+
+/* ---- "this cannot be the same patient" ---------------------------------------------------------- */
+
+test("A DELTA BREACH FLAGS THE RESULT AND NEVER WITHHOLDS IT", async () => {
+  seedHospital();
+  /* The thresholds are the hospital's, exactly like the critical limits. Nothing in the code knows
+   * what a big change in a creatinine is. */
+  const org = docs.get(`q_orgs/${ORG}`);
+  org.fields.wardsynq = {
+    ...org.fields.wardsynq,
+    deltaLimits: { "2160-0": { maxAbsolute: 50, maxPercent: 30, withinHours: 72 } },
+    autoVerify: { enabled: true, codes: ["2160-0"] },
+  };
+
+  const { adm } = await admittedPatientOnDrug();
+  const sr1 = await orderTest(adm, "Creatinine", "wsq-sr-cr1");
+  const first = await as(LABTECH, "/ward/release-result", "POST", {
+    orgId: ORG, serviceRequestId: sr1, reportedAt: "2026-09-06T12:00:00.000Z",
+    tests: [{ test: "Creatinine", value: 78, unit: "umol/L", low: 60, high: 110 }],
+  });
+  assert.equal(first.__status, 200, JSON.stringify(first));
+  // A first result has no previous to compare against, and holding every one would hold most of a
+  // new admission's bloods for no finding.
+  assert.equal(first.observations[0].delta.state, "not-checked");
+  assert.equal(first.observations[0].delta.reason, "no_previous_result");
+  assert.equal(first.observations[0].autoVerified, true, "in range, no critical flag, no delta to breach");
+  assert.equal(first.needsReview, 0);
+
+  const sr2 = await orderTest(adm, "Creatinine", "wsq-sr-cr2");
+  const second = await as(LABTECH, "/ward/release-result", "POST", {
+    orgId: ORG, serviceRequestId: sr2, reportedAt: "2026-09-07T12:00:00.000Z",
+    tests: [{ test: "Creatinine", value: 240, unit: "umol/L", low: 60, high: 110 }],
+  });
+  assert.equal(second.__status, 200, "the result is RELEASED, not withheld");
+  assert.equal(second.deltaBreaches, 1);
+  const d = second.observations[0].delta;
+  assert.equal(d.state, "breach");
+  assert.equal(d.previous.value, 78);
+  assert.equal(d.direction, "rise");
+  /* The commonest explanation for an impossible change is a mislabelled tube or two swapped samples,
+   * and the wording has to make a reader think of that first. */
+  assert.match(d.detail, /check the sample identity/);
+
+  // The flag travels ON the observation, not just in the response to whoever released it.
+  const stored = (await RECORD.byPatient(TENANT_ROW.id, "Observation", adm.patientId)).filter((o) => o.deltaBreach);
+  assert.equal(stored.length, 1);
+  assert.equal(stored[0].value, 240);
+
+  // Out of range AND a delta breach: both reasons are reported, because both are work.
+  assert.equal(second.observations[0].autoVerified, false);
+  assert.deepEqual(second.observations[0].needsReview.sort(), ["above_reference_range", "delta_breach"]);
+});
+
+test("AUTOVERIFICATION IS OFF UNLESS THE HOSPITAL ASKS, and never releases what it could not check", async () => {
+  seedHospital();
+  const { adm } = await admittedPatientOnDrug();
+
+  // No config at all: every result needs a human, and says why.
+  const sr = await orderTest(adm, "Creatinine", "wsq-sr-cr3");
+  const plain = await as(LABTECH, "/ward/release-result", "POST", {
+    orgId: ORG, serviceRequestId: sr, tests: [{ test: "Creatinine", value: 80, unit: "umol/L", low: 60, high: 110 }],
+  });
+  assert.equal(plain.observations[0].autoVerified, false);
+  assert.deepEqual(plain.observations[0].needsReview, ["not_enabled"]);
+  assert.equal(plain.needsReview, 1);
+  // And with no configured limit, the delta is reported as NOT CHECKED rather than as a pass.
+  assert.equal(plain.observations[0].delta.reason, "no_limit_configured");
+
+  const org = docs.get(`q_orgs/${ORG}`);
+  org.fields.wardsynq = { ...org.fields.wardsynq, autoVerify: { enabled: true, codes: ["2160-0"] } };
+
+  // A non-numeric result is a sentence somebody wrote. It is never released unread.
+  const sr2 = await orderTest(adm, "Creatinine", "wsq-sr-cr4");
+  const text = await as(LABTECH, "/ward/release-result", "POST", {
+    orgId: ORG, serviceRequestId: sr2, tests: [{ test: "Creatinine", value: "Haemolysed", unit: "umol/L", low: 60, high: 110 }],
+  });
+  assert.equal(text.observations[0].autoVerified, false);
+  assert.ok(text.observations[0].needsReview.includes("non_numeric"));
+
+  // The laboratory's own critical flag always wins, exactly as in the critical-value loop.
+  const sr3 = await orderTest(adm, "Creatinine", "wsq-sr-cr5");
+  const crit = await as(LABTECH, "/ward/release-result", "POST", {
+    orgId: ORG, serviceRequestId: sr3, tests: [{ test: "Creatinine", value: 80, unit: "umol/L", low: 60, high: 110, critical: true }],
+  });
+  assert.ok(crit.observations[0].needsReview.includes("flagged_critical_by_lab"));
+
+  // NO RANGE IS NOT A PASS: there is nothing to check against, so a human checks.
+  const sr4 = await orderTest(adm, "Creatinine", "wsq-sr-cr6");
+  const noRange = await as(LABTECH, "/ward/release-result", "POST", {
+    orgId: ORG, serviceRequestId: sr4, tests: [{ test: "Creatinine", value: 80, unit: "umol/L" }],
+  });
+  assert.deepEqual(noRange.observations[0].needsReview, ["no_reference_range"]);
+});
+
+/* ---- ADT out ------------------------------------------------------------------------------------- */
+
+test("THE ADT MESSAGE IS BUILT FROM THE RECORD, and a stay it cannot describe is refused", async () => {
+  seedHospital();
+  const { reg, adm } = await admittedPatientOnDrug();
+
+  const admit = await as(NURSE, `/ward/adt?orgId=${ORG}&encounterId=${adm.encounterId}`);
+  assert.equal(admit.__status, 200, JSON.stringify(admit));
+  assert.equal(admit.event, "A01");
+  const segs = admit.message.split("\r");
+  assert.deepEqual(segs.map((s) => s.slice(0, 3)), ["MSH", "EVN", "PID", "PV1"]);
+  assert.ok(admit.message.startsWith("MSH|^~\\&|WardSynQ|SMD-WARD01|"), "the sending facility is the org's own code");
+  assert.match(segs[2], new RegExp(reg.mrn + "\\^\\^\\^SMD-WARD01\\^MR"), "PID-3 carries its assigning authority");
+  assert.equal(segs[3].split("|")[3], "Medical A^^12", "PV1-3 is ward, room, bed");
+  assert.equal(segs[3].split("|")[19], adm.encounterId, "PV1-19 is the visit");
+  /* Shaped is not conformant, and the response says so every time rather than letting an integration
+   * engineer assume otherwise. */
+  assert.match(admit.note, /not certified/);
+
+  // Discharging the patient changes the EVENT, from the record - a message can never announce an
+  // admission for a stay that has ended.
+  await as(DOCTOR, "/ward/discharge", "POST", { orgId: ORG, encounterId: adm.encounterId, dischargedAt: "2026-09-09T10:00:00.000Z" });
+  const out = await as(NURSE, `/ward/adt?orgId=${ORG}&encounterId=${adm.encounterId}`);
+  assert.equal(out.event, "A03");
+  assert.match(out.message.split("\r")[0], /ADT\^A03/);
+
+  // An encounter ADT does not describe is NAMED, not returned as an empty body.
+  const reg2 = await as(DOCTOR, "/patient/register", "POST", { orgId: ORG, name: "OPD Only", mobile: "9876500022", gender: "male", ageYears: 40 });
+  assert.ok(reg2.mrn);
+  const missing = await as(NURSE, `/ward/adt?orgId=${ORG}&encounterId=wsq-adm-nope`);
+  assert.equal(missing.__status, 404);
+  assert.equal(missing.error, "encounter_not_found");
+  // And a pharmacist, who holds no emr.view, does not get the chart in another wire format either.
+  assert.equal((await as(PHARM, `/ward/adt?orgId=${ORG}&encounterId=${adm.encounterId}`)).__status, 403);
+});
+
+/* ---- the second nurse ---------------------------------------------------------------------------- */
+
+test("A HIGH-ALERT DRUG NEEDS A SECOND NURSE, and the LIST is the hospital's", async () => {
+  seedHospital();
+  /* The high-alert list is org configuration, never clinical logic in the code: which products need
+   * a witness belongs to the hospital formulary. This is the org's list reaching the bedside. */
+  const org = docs.get(`q_orgs/${ORG}`);
+  org.fields.wardsynq = { ...org.fields.wardsynq, highAlertDrugs: ["INSULIN"] };
+
+  const { adm, patient, ord: plain, scan: plainScan } = await admittedPatientOnDrug();
+  const ord = await as(DOCTOR, "/ward/medication-order", "POST", {
+    orgId: ORG,
+    order: { patientId: adm.patientId, encounterId: adm.encounterId, drug: "Insulin glargine", dose: { value: 10, unit: "unit" }, route: "subcutaneous", frequency: "OD" },
+  });
+  assert.equal(ord.__status, 200, JSON.stringify(ord));
+  const step = (a, x) => as(NURSE, "/ward/mar", "POST", { orgId: ORG, action: a, orderId: ord.orderId, dueAt: DUE, patient, ...(x || {}) });
+  await step("verify"); await step("dispense");
+  const scanned = await step("scan", { scan: { patientBarcode: patient.mrn, drugBarcode: "Insulin glargine", dose: { value: 10, unit: "unit" }, route: "subcutaneous" } });
+  assert.equal(scanned.to, "scanned", JSON.stringify(scanned));
+
+  // Without a witness it is REFUSED, with the reason a nurse can act on.
+  const alone = await step("administer");
+  assert.equal(alone.__status, 409);
+  assert.deepEqual(alone.reasons.map((r) => r.code), ["WITNESS_REQUIRED"]);
+
+  // The witness must be somebody else. A nurse cannot witness herself.
+  const self = await step("administer", { witnessId: idFor(NURSE) });
+  assert.equal(self.__status, 409);
+  assert.deepEqual(self.reasons.map((r) => r.code), ["WITNESS_NOT_INDEPENDENT"]);
+
+  const given = await step("administer", { witnessId: idFor(DOCTOR) });
+  assert.equal(given.__status, 200, JSON.stringify(given));
+  assert.equal(given.to, "administered");
+  // Both names are on the record: who gave it and who watched.
+  const rec = await RECORD.latest(TENANT_ROW.id, "MedicationAdministration", given.administrationId);
+  assert.equal(rec.administeredBy, idFor(NURSE));
+  assert.equal(rec.witnessedBy, idFor(DOCTOR));
+
+  /* AND A DRUG THE HOSPITAL DID NOT LIST NEEDS NO WITNESS. The list is the whole rule - nothing in
+   * the code decides that insulin is high-alert, which is why a hospital can add to it. */
+  const other = (a, x) => as(NURSE, "/ward/mar", "POST", { orgId: ORG, action: a, orderId: plain.orderId, dueAt: DUE, patient, ...(x || {}) });
+  await other("verify"); await other("dispense"); await other("scan", { scan: plainScan });
+  assert.equal((await other("administer")).to, "administered", "paracetamol is not on this hospital's list");
+});
+
+/* ---- the sample somebody has to take ----------------------------------------------------------- */
+
+test("ORDER -> COLLECT -> RECEIVE -> RESULT, and an uncollected order is VISIBLY uncollected", async () => {
+  seedHospital();
+  const { adm } = await admittedPatientOnDrug();
+  const sr = await orderTest(adm, "Potassium", "wsq-sr-k");
+
+  /* THE STATE THIS WHOLE FEATURE EXISTS FOR. Before it, this order and one whose blood is sitting in
+   * the analyser were the same thing on screen: "requested, no result yet". Only one of them has a
+   * nurse who still has to go and do something. */
+  const before = await as(NURSE, `/ward/collections?orgId=${ORG}&patientId=${adm.patientId}`);
+  assert.equal(before.__status, 200, JSON.stringify(before));
+  assert.equal(before.awaitingCollection, 1);
+  assert.equal(before.requests[0].collection.state, "none");
+  assert.match(before.requests[0].collection.detail, /No sample has been taken/);
+
+  const got = await as(NURSE, "/ward/collect", "POST", { orgId: ORG, serviceRequestId: sr, specimenType: "Whole blood", container: "Lithium heparin", at: "2026-09-07T09:00:00.000Z" });
+  assert.equal(got.__status, 200, JSON.stringify(got));
+  assert.equal(got.state, "collected");
+  assert.equal(got.collectedBy, idFor(NURSE));
+  assert.match(got.note, /laboratory has not received it yet/);
+
+  // COLLECTED IS NOT RECEIVED. A tube in a nurse's pocket and a tube on the bench are different
+  // facts, and the space between them is where samples are lost.
+  const mid = await as(NURSE, `/ward/collections?orgId=${ORG}&patientId=${adm.patientId}`);
+  assert.equal(mid.awaitingCollection, 0);
+  assert.equal(mid.inTransit, 1);
+  assert.equal(mid.requests[0].collection.state, "collected");
+
+  /* THE LABORATORY says it arrived - the other half of the journey, and its own authority. The nurse
+   * holds no lab.result and the lab holds no emr.vitals, so this is the alternative-authority path. */
+  const arrived = await as(LABTECH, "/ward/specimen-outcome", "POST", { orgId: ORG, specimenId: got.specimenId, state: "received" });
+  assert.equal(arrived.__status, 200, JSON.stringify(arrived));
+  assert.equal(arrived.state, "received");
+  assert.equal(arrived.receivedBy, idFor(LABTECH));
+  assert.equal((await as(NURSE, `/ward/collections?orgId=${ORG}&patientId=${adm.patientId}`)).inTransit, 0);
+
+  // And the result still comes through the laboratory's own route. Collection produced nothing.
+  const stored = await RECORD.byPatient(TENANT_ROW.id, "SpecimenCollection", adm.patientId);
+  assert.equal(stored.length, 1);
+  assert.equal(stored[0].value, undefined, "a specimen record never carries a result");
+  assert.equal((await as(LABTECH, "/ward/release-result", "POST", { orgId: ORG, serviceRequestId: sr, tests: [{ test: "Potassium", value: 4.1, unit: "mmol/L" }] })).__status, 200);
+});
+
+test("A FAILED ATTEMPT SENDS THE ORDER BACK TO NEEDING COLLECTION, loudly", async () => {
+  seedHospital();
+  const { adm } = await admittedPatientOnDrug();
+  const sr = await orderTest(adm, "Potassium", "wsq-sr-k2");
+  const first = await as(NURSE, "/ward/collect", "POST", { orgId: ORG, serviceRequestId: sr, specimenType: "Whole blood", at: "2026-09-07T09:00:00.000Z" });
+
+  // A failure with no reason cannot be acted on, and "take it again, differently" is the action.
+  const mute = await as(NURSE, "/ward/specimen-outcome", "POST", { orgId: ORG, specimenId: first.specimenId, state: "failed" });
+  assert.equal(mute.__status, 422);
+  assert.equal(mute.error, "reason_required");
+
+  const failed = await as(NURSE, "/ward/specimen-outcome", "POST", { orgId: ORG, specimenId: first.specimenId, state: "failed", failureReason: "Haemolysed, laboratory rejected it." });
+  assert.equal(failed.state, "failed");
+  assert.match(failed.note, /still needs taking/);
+
+  /* NEVER 'IN PROGRESS'. A ward that reads a failed draw as in-flight waits forever for a result
+   * that is never coming. */
+  const list = await as(NURSE, `/ward/collections?orgId=${ORG}&patientId=${adm.patientId}`);
+  assert.equal(list.awaitingCollection, 1);
+  assert.equal(list.inTransit, 0);
+  assert.equal(list.requests[0].collection.state, "failed");
+  assert.equal(list.requests[0].collection.reason, "Haemolysed, laboratory rejected it.");
+
+  // The second attempt is a SECOND specimen. The first is not erased: the patient was bled twice,
+  // which is exactly what a complaint asks about.
+  const second = await as(NURSE, "/ward/collect", "POST", { orgId: ORG, serviceRequestId: sr, specimenType: "Whole blood", at: "2026-09-07T09:40:00.000Z" });
+  assert.notEqual(second.specimenId, first.specimenId);
+  assert.equal((await RECORD.byPatient(TENANT_ROW.id, "SpecimenCollection", adm.patientId)).length, 2);
+  assert.equal((await as(NURSE, `/ward/collections?orgId=${ORG}&patientId=${adm.patientId}`)).requests[0].collection.state, "collected");
+
+  // Received is terminal: a later failure is a statement about the assay, not the specimen.
+  await as(LABTECH, "/ward/specimen-outcome", "POST", { orgId: ORG, specimenId: second.specimenId, state: "received" });
+  const late = await as(NURSE, "/ward/specimen-outcome", "POST", { orgId: ORG, specimenId: second.specimenId, state: "failed", failureReason: "clotted" });
+  assert.equal(late.skipped, "already_received");
+});
+
+test("no sample is taken against an order that does not exist, and a pharmacist takes none at all", async () => {
+  seedHospital();
+  const { adm } = await admittedPatientOnDrug();
+
+  // An unlabelled tube reaching a laboratory with a request number nobody can match is the failure
+  // this refusal prevents.
+  const ghost = await as(NURSE, "/ward/collect", "POST", { orgId: ORG, serviceRequestId: "wsq-sr-nope" });
+  assert.equal(ghost.__status, 404);
+  assert.equal(ghost.error, "request_not_found");
+
+  const sr = await orderTest(adm, "Potassium", "wsq-sr-k3");
+  assert.equal((await as(PHARM, "/ward/collect", "POST", { orgId: ORG, serviceRequestId: sr })).__status, 403);
+
+  // A specimen with no recorded type is accepted and SAYS it has none rather than acquiring one from
+  // the test name.
+  const bare = await as(NURSE, "/ward/collect", "POST", { orgId: ORG, serviceRequestId: sr, at: "2026-09-07T09:00:00.000Z" });
+  assert.equal(bare.__status, 200, JSON.stringify(bare));
+  assert.equal(bare.specimenType, null);
+  assert.match(bare.warning, /guesses one from the test name/);
+});
+
+/* ---- the pharmacy issued it; nobody has taken it ----------------------------------------------- */
+
+test("DISPENSING IS SUPPLY, NOT ADMINISTRATION, and the pharmacy still cannot write a dose", async () => {
+  seedHospital();
+  const { adm, ord, patient, scan } = await admittedPatientOnDrug();
+
+  const d = await as(PHARM, "/ward/dispense", "POST", { orgId: ORG, orderId: ord.orderId, quantity: { value: 21, unit: "tablet" }, destination: "Medical A", at: "2026-09-07T08:30:00.000Z" });
+  assert.equal(d.__status, 200, JSON.stringify(d));
+  assert.equal(d.state, "issued");
+  assert.equal(d.orderVersion, 1, "issued against a version, so an amendment later is visible");
+  assert.match(d.note, /No dose has been administered/);
+  // No pharmacist verification exists for this order, so it is RECORDED as unverified rather than
+  // implying a check that never happened. Not every hospital runs verification, so it is not refused.
+  assert.equal(d.unverified, true);
+  assert.match(d.warning, /recorded as unverified/);
+
+  /* THE SEPARATION. A dispense writes its own resource and never touches the administration record:
+   * a system where "dispensed" drifts into "given" puts doses on charts nobody administered. */
+  assert.equal(await RECORD.latest(TENANT_ROW.id, "MedicationAdministration", "wsq-mar-" + ord.orderId.toLowerCase() + "-x"), null);
+  const stored = await RECORD.byPatient(TENANT_ROW.id, "MedicationDispense", adm.patientId);
+  assert.equal(stored.length, 1);
+  assert.equal(stored[0].resourceType, "MedicationDispense");
+  assert.equal(stored[0].administeredAt, undefined);
+
+  // And the eMAR is entirely unmoved: the dose has not started.
+  const round = await as(NURSE, `/ward/round?orgId=${ORG}&patientId=${adm.patientId}&dueAt=${encodeURIComponent(DUE)}`);
+  assert.equal(round.due[0].status, null, "issuing stock did not start a dose");
+
+  /* THE REFUSAL THAT MATTERS. The pharmacy can now write a supply record, and still cannot post an
+   * administration - a role that could do both could fabricate a dose through the raw API without
+   * going near a patient. */
+  const mar = await as(PHARM, "/ward/mar", "POST", { orgId: ORG, action: "scan", orderId: ord.orderId, dueAt: DUE, patient, scan });
+  assert.equal(mar.__status, 403);
+
+  // The nurse's own loop is untouched by any of it.
+  const step = (a, x) => as(NURSE, "/ward/mar", "POST", { orgId: ORG, action: a, orderId: ord.orderId, dueAt: DUE, patient, ...(x || {}) });
+  await step("verify"); await step("dispense"); await step("scan", { scan });
+  assert.equal((await step("administer")).to, "administered");
+});
+
+test("A SUPERSEDED VERIFICATION STOPS THE SUPPLY, and a repeat supply is a second record", async () => {
+  seedHospital();
+  const { adm, ord } = await admittedPatientOnDrug();
+  const issue = (at, q) => as(PHARM, "/ward/dispense", "POST", { orgId: ORG, orderId: ord.orderId, quantity: q || { value: 21, unit: "tablet" }, at });
+
+  await as(PHARM, "/ward/verify-order", "POST", { orgId: ORG, orderId: ord.orderId, outcome: "verified" });
+  const first = await issue("2026-09-07T08:00:00.000Z");
+  assert.equal(first.unverified, false);
+  assert.equal(first.verifiedVersion, 1);
+
+  // A second supply the same day is a NEW record. An id keyed only on the order would have
+  // overwritten the first, losing the fact that the ward was supplied twice.
+  const second = await issue("2026-09-07T20:00:00.000Z");
+  assert.notEqual(second.dispenseId, first.dispenseId);
+  assert.equal((await as(PHARM, `/ward/dispenses?orgId=${ORG}&patientId=${adm.patientId}`)).dispenses.length, 2);
+  // The identical request again is the same dispense, not a third.
+  assert.equal((await issue("2026-09-07T20:00:00.000Z")).skipped, "already_dispensed");
+
+  /* The prescriber doubles the dose. The pharmacist's approval was of version 1, so issuing now
+   * would put "the pharmacist approved this" against a prescription they never saw. */
+  await as(DOCTOR, "/ward/medication-order", "POST", {
+    orgId: ORG, order: { patientId: adm.patientId, encounterId: adm.encounterId, drug: "Paracetamol 500mg", dose: { value: 1000, unit: "mg" }, route: "oral", frequency: "TID" },
+  });
+  const stale = await issue("2026-09-08T08:00:00.000Z");
+  assert.equal(stale.__status, 409);
+  assert.equal(stale.error, "verification_superseded");
+  assert.equal(stale.verifiedVersion, 1);
+  assert.equal(stale.orderVersion, 2);
+  assert.match(stale.detail, /Re-verify before issuing/);
+
+  // Re-verified, it goes out again.
+  await as(PHARM, "/ward/verify-order", "POST", { orgId: ORG, orderId: ord.orderId, outcome: "verified" });
+  assert.equal((await issue("2026-09-08T08:00:00.000Z")).__status, 200);
+});
+
+test("stock that comes back is a RETURN, and the issue is never erased", async () => {
+  seedHospital();
+  const { adm, ord } = await admittedPatientOnDrug();
+  const d = await as(PHARM, "/ward/dispense", "POST", { orgId: ORG, orderId: ord.orderId, quantity: { value: 21, unit: "tablet" }, at: "2026-09-07T08:00:00.000Z" });
+
+  // Clearing it off without saying why would lose the reason the ward had medicine it did not use.
+  const silent = await as(PHARM, "/ward/dispense-return", "POST", { orgId: ORG, dispenseId: d.dispenseId });
+  assert.equal(silent.__status, 422);
+  assert.equal(silent.error, "reason_required");
+
+  const back = await as(PHARM, "/ward/dispense-return", "POST", { orgId: ORG, dispenseId: d.dispenseId, reason: "Patient discharged; unused stock returned." });
+  assert.equal(back.__status, 200, JSON.stringify(back));
+  assert.equal(back.state, "returned");
+
+  /* THE ISSUE HAPPENED. The medicine was on the ward, and a controlled-drug audit asks exactly that,
+   * so the return is the next VERSION of the same record rather than a deletion. */
+  const history = await RECORD.history(TENANT_ROW.id, "MedicationDispense", d.dispenseId);
+  assert.deepEqual(history.map((h) => h.state), ["issued", "returned"]);
+  assert.equal(history[0].quantity.value, 21, "and what was issued is still on the record");
+
+  // A quantity nobody stated is refused outright: "we sent some" is not a supply record.
+  const vague = await as(PHARM, "/ward/dispense", "POST", { orgId: ORG, orderId: ord.orderId, quantity: { value: 21 } });
+  assert.equal(vague.__status, 422);
+  assert.equal(vague.error, "quantity_required");
+
+  // A nurse does not issue pharmacy stock, and a doctor does not either.
+  assert.equal((await as(NURSE, "/ward/dispense", "POST", { orgId: ORG, orderId: ord.orderId, quantity: { value: 1, unit: "tablet" } })).__status, 403);
+  assert.ok(adm.patientId);
+});
+
+/* ---- measures about the system --------------------------------------------------------------- */
+
+test("A DOSE RECORD NOW SAYS WHEN IT WAS DUE, so the ward can ask whether it was late", async () => {
+  seedHospital();
+  const { ord, patient, scan } = await admittedPatientOnDrug();
+  const step = (a, x) => as(NURSE, "/ward/mar", "POST", { orgId: ORG, action: a, orderId: ord.orderId, dueAt: DUE, patient, ...(x || {}) });
+  await step("verify"); await step("dispense"); await step("scan", { scan });
+  const given = await step("administer");
+  assert.equal(given.to, "administered");
+
+  /* The due time was in the administration's ID and nowhere else, so the record could say a dose was
+   * given and could not say whether it was given late. Recovering it by parsing the id back would be
+   * guessing at a slug. */
+  const rec = await RECORD.latest(TENANT_ROW.id, "MedicationAdministration", given.administrationId);
+  assert.equal(rec.dueAt, DUE);
+  assert.ok(rec.administeredAt);
+  // Never derived from administeredAt, which would make every dose on time by definition.
+  assert.notEqual(rec.dueAt, rec.administeredAt);
+});
+
+test("THE QUALITY REPORT MEASURES THE SYSTEM, names nobody, and admits what it cannot compute", async () => {
+  seedHospital();
+  const { adm } = await admittedPatientOnDrug();
+
+  const rep = await as(NURSE, `/ward/quality?orgId=${ORG}&days=30`);
+  assert.equal(rep.__status, 200, JSON.stringify(rep));
+  assert.equal(rep.measures.length, 4);
+  assert.equal(rep.period.days, 30);
+
+  /* NO CLINICIAN IS NAMED OR COUNTED. The moment a number can be attributed to an individual it
+   * stops measuring the process and starts managing the staff. */
+  const body = JSON.stringify(rep);
+  assert.ok(!body.includes(idFor(NURSE)) && !body.includes(idFor(DOCTOR)));
+  assert.match(rep.note, /No clinician is named or counted/);
+
+  // Two measures this hospital's record cannot support, each shown WITH its reason rather than left
+  // off - a missing row on a dashboard reads as "nothing to report".
+  assert.equal(rep.notComputable, 2);
+  const allergy = rep.measures.find((m) => m.id === "allergy-status-documented");
+  assert.equal(allergy.computable, false);
+  assert.match(allergy.reason, /asked, and there are none/);
+  // No escalation window is configured on this org, so that measure is refused rather than scored
+  // against a threshold nobody agreed to.
+  assert.equal(rep.measures.find((m) => m.id === "critical-ack-within-window").computable, false);
+
+  // A stay that is still open is not a missing discharge summary.
+  const dcs = rep.measures.find((m) => m.id === "discharge-summary-signed");
+  assert.equal(dcs.denominator, 0);
+  assert.equal(dcs.rate, null, "no cases is null, not 0% and not 100%");
+  assert.ok(adm.encounterId);
+
+  // A pharmacist holds no emr.view.
+  assert.equal((await as(PHARM, `/ward/quality?orgId=${ORG}`)).__status, 403);
+});
+
+/* ---- what the ward holds when the system is not there ------------------------------------------ */
+
+test("THE DOWNTIME PACK IS ASSEMBLED FROM THE REAL RECORD, and it writes nothing", async () => {
+  seedHospital();
+  const { reg, adm, ord } = await admittedPatientOnDrug();
+  await as(DOCTOR, "/ward/problem", "POST", { orgId: ORG, problem: { patientId: adm.patientId, display: "Community-acquired pneumonia" } });
+
+  const before = (await RECORD.latestByType(TENANT_ROW.id, "Encounter", 200)).length;
+  const pack = await as(NURSE, `/ward/downtime?orgId=${ORG}&ward=Medical A`);
+  assert.equal(pack.__status, 200, JSON.stringify(pack));
+  assert.equal(pack.count, 1);
+
+  const p = pack.patients[0];
+  assert.equal(p.encounterId, adm.encounterId);
+  assert.equal(p.mrn, reg.mrn, "enough to identify the right person at a bedside");
+  assert.equal(p.bed, "12");
+  assert.equal(p.orders.length, 1);
+  assert.equal(p.orders[0].drug, "Paracetamol 500mg");
+  assert.ok(p.orders[0].due.length >= 3, "and when it is due, so the ward can keep giving it");
+  assert.deepEqual(p.problems, [], "nothing on this page is missing");
+
+  /* IT SAYS WHAT IT IS, on the pack. A downtime sheet is dangerous in exactly one way - a clinician
+   * trusting it after it has gone stale - so this is printed, not left to a policy document nobody
+   * has read at 03:00. */
+  assert.match(pack.warning, /point-in-time COPY/);
+  assert.match(pack.note, /NOT on this sheet/);
+  assert.ok(pack.generatedAt && pack.coversUntil > pack.generatedAt);
+
+  // IT WRITES NOTHING. No flag, no "downtime mode", no record that it was taken. A route that
+  // mutated the record in order to prepare for an outage is one more thing to go wrong during one.
+  assert.equal((await RECORD.latestByType(TENANT_ROW.id, "Encounter", 200)).length, before);
+  assert.equal(await RECORD.latest(TENANT_ROW.id, "Encounter", adm.encounterId).then((e) => e.version), 1);
+
+  // The ward filter is the ward's own, and an empty ward is an empty pack rather than everybody.
+  assert.equal((await as(NURSE, `/ward/downtime?orgId=${ORG}&ward=Surgical B`)).count, 0);
+
+  // A pharmacist holds no emr.view, and the whole ward's chart on one sheet needs it.
+  assert.equal((await as(PHARM, `/ward/downtime?orgId=${ORG}`)).__status, 403);
+  assert.ok(ord.orderId);
+});
+
+/* ---- the note that needs a second name on it --------------------------------------------------- */
+
+async function noteBy(email, adm, sections, at) {
+  return as(email, "/ward/note", "POST", {
+    orgId: ORG, templateId: "ward-round", encounterId: adm.encounterId,
+    sections: sections || { impression: "Improving. Afebrile overnight.", plan: "Continue oral antibiotics." },
+    at: at || "2026-09-07T11:00:00.000Z",
+  });
+}
+
+test("A NOTE THE SYSTEM CANNOT VERIFY IS ROUTED, not left lying unsigned", async () => {
+  seedHospital();
+  const { adm } = await admittedPatientOnDrug();
+
+  // The locum writes the note perfectly well. emr.treat is a capability; a registration is not.
+  const n = await noteBy(LOCUM, adm);
+  assert.equal(n.__status, 200, JSON.stringify(n));
+  assert.equal(n.signed, false);
+  const stored = await RECORD.latest(TENANT_ROW.id, "ClinicalNote", n.noteId);
+  assert.equal(stored.authorId, idFor(LOCUM));
+
+  /* They cannot sign it, and they are TOLD WHY. The store would refuse the write anyway; this is
+   * the difference between a clinician reading "you hold no verified registration, submit it for a
+   * colleague" and being handed a governance code. */
+  const cannot = await as(LOCUM, "/ward/note-sign", "POST", { orgId: ORG, noteId: n.noteId });
+  assert.equal(cannot.__status, 403);
+  assert.equal(cannot.error, "no_credential");
+  assert.match(cannot.detail, /verified medical registration/);
+
+  // Nobody countersigns work its author has not declared finished.
+  const early = await as(DOCTOR, "/ward/note-sign", "POST", { orgId: ORG, noteId: n.noteId });
+  assert.equal(early.__status, 403);
+  assert.equal(early.error, "not_submitted");
+
+  // Nor does anyone else declare it finished on the author's behalf.
+  const notMine = await as(DOCTOR, "/ward/note-submit", "POST", { orgId: ORG, noteId: n.noteId });
+  assert.equal(notMine.__status, 403);
+  assert.equal(notMine.error, "not_the_author");
+
+  /* The author's own unfinished note comes back on the same call. Both halves of the loop are one
+   * question - what is between me and a signed record - and a screen that could route a note onward
+   * but not start it moving would leave the commonest case with nowhere to click. */
+  const mine = await as(LOCUM, `/ward/cosign-queue?orgId=${ORG}`);
+  assert.equal(mine.unsubmitted, 1);
+  assert.equal(mine.mine[0].noteId, n.noteId);
+  assert.equal((await as(DOCTOR, `/ward/cosign-queue?orgId=${ORG}`)).unsubmitted, 0, "somebody else's draft is not mine to finish");
+
+  const sub = await as(LOCUM, "/ward/note-submit", "POST", { orgId: ORG, noteId: n.noteId });
+  assert.equal(sub.__status, 200, JSON.stringify(sub));
+  assert.equal(sub.state, "awaiting");
+  assert.match(sub.note, /unsigned until a clinician with a verified registration signs it/);
+
+  // THE WORKLIST. It is the routing: a note nobody can see is a note nobody signs.
+  const q = await as(DOCTOR, `/ward/cosign-queue?orgId=${ORG}`);
+  assert.equal(q.__status, 200, JSON.stringify(q));
+  assert.equal(q.waiting, 1);
+  assert.equal(q.notes[0].noteId, n.noteId);
+  assert.equal(q.notes[0].authorId, idFor(LOCUM));
+  assert.equal(q.canSign, true, "the registered doctor can clear this list");
+  // And the locum is told plainly that they cannot, rather than shown a worklist they cannot act on.
+  assert.equal((await as(LOCUM, `/ward/cosign-queue?orgId=${ORG}`)).canSign, false);
+
+  const signed = await as(DOCTOR, "/ward/note-sign", "POST", { orgId: ORG, noteId: n.noteId });
+  assert.equal(signed.__status, 200, JSON.stringify(signed));
+  assert.equal(signed.state, "cosigned");
+  assert.equal(signed.coSigned, true);
+
+  /* BOTH NAMES STAY ON THE RECORD. "Who wrote this" and "who is accountable for it" are different
+   * questions, and a supervisor's signature must not quietly answer the first one. */
+  const after = await RECORD.latest(TENANT_ROW.id, "ClinicalNote", n.noteId);
+  assert.equal(after.authorId, idFor(LOCUM), "the locum still wrote it");
+  assert.equal(after.signedBy, idFor(DOCTOR));
+  assert.ok(after.signedAt);
+  // The prior unsigned versions survive: the note was not rewritten, it was appended to.
+  const history = await RECORD.history(TENANT_ROW.id, "ClinicalNote", n.noteId);
+  assert.equal(history.length, 3, "written, submitted, signed");
+  assert.deepEqual(history.map((h) => !!h.signedBy), [false, false, true]);
+
+  assert.equal((await as(DOCTOR, `/ward/cosign-queue?orgId=${ORG}`)).waiting, 0);
+});
+
+test("a registered doctor signs their own note, and a signed note is never re-signed", async () => {
+  seedHospital();
+  const { adm } = await admittedPatientOnDrug();
+  const n = await noteBy(DOCTOR, adm);
+
+  // No submission step: the author with a registration is already the one saying it is finished.
+  const signed = await as(DOCTOR, "/ward/note-sign", "POST", { orgId: ORG, noteId: n.noteId });
+  assert.equal(signed.__status, 200, JSON.stringify(signed));
+  assert.equal(signed.state, "signed");
+  assert.equal(signed.coSigned, false, "signing your own note is not a co-signature");
+  assert.equal((await as(DOCTOR, `/ward/cosign-queue?orgId=${ORG}`)).waiting, 0, "and it never entered the queue");
+
+  const again = await as(LOCUM, "/ward/note-sign", "POST", { orgId: ORG, noteId: n.noteId });
+  assert.equal(again.__status, 409);
+  assert.equal(again.error, "already_signed");
+
+  // A signed note is closed to further saves: a correction is a new note, exactly as elsewhere. The
+  // same template at the same time is the same note id, so this is a rewrite attempt, not a new one.
+  const rewrite = await noteBy(DOCTOR, adm, { impression: "Actually deteriorating.", plan: "Escalate." });
+  assert.equal(rewrite.__status, 409);
+  assert.equal(rewrite.error, "already_signed");
+});
+
+test("signing is not a nurse's act, and an unfinished note is signed as unfinished rather than refused", async () => {
+  seedHospital();
+  const { adm } = await admittedPatientOnDrug();
+
+  // Only a section the template asks for, leaving a required one blank.
+  const partial = await noteBy(LOCUM, adm, { impression: "Reviewed." });
+  assert.equal(partial.incomplete, true);
+  assert.deepEqual(partial.missing.map((m) => m.key), ["plan"]);
+
+  const nurse = await as(NURSE, "/ward/note-sign", "POST", { orgId: ORG, noteId: partial.noteId });
+  assert.equal(nurse.__status, 403, "signing a clinical document needs emr.treat");
+
+  await as(LOCUM, "/ward/note-submit", "POST", { orgId: ORG, noteId: partial.noteId });
+  const q = await as(DOCTOR, `/ward/cosign-queue?orgId=${ORG}`);
+  /* The gap travels WITH the note to the person being asked to put their name to it. A signature
+   * does not fill in a missing plan, and the signer should know before they sign, not after. */
+  assert.deepEqual(q.notes[0].incompleteSections, ["plan"]);
+
+  const signed = await as(DOCTOR, "/ward/note-sign", "POST", { orgId: ORG, noteId: partial.noteId });
+  assert.equal(signed.__status, 200, JSON.stringify(signed));
+  assert.deepEqual(signed.incompleteSections, ["plan"], "and it is still recorded as incomplete after signing");
 });

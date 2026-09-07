@@ -76,7 +76,10 @@ const ORDER_TYPES = Object.freeze(["MedicationOrder", "ServiceRequest"]);
  * this write is. DECIDING what happens to each medicine is prescribing-adjacent and is gated
  * separately at emr.treat on the route, so this grant lets a nurse record the history and not
  * decide its fate. */
-const VITALS_TYPES = Object.freeze(["Observation", "ShiftHandover", "BreakGlassGrant", "MedicationReconciliation"]);
+/* SpecimenCollection joined on 2026-09-07: taking a sample is nursing work, the same authority as
+ * recording a vital. It records that a sample was TAKEN and never what it showed - the result is the
+ * laboratory's own authority, so this grants nothing towards one. */
+const VITALS_TYPES = Object.freeze(["Observation", "ShiftHandover", "BreakGlassGrant", "MedicationReconciliation", "PatientConsent", "CarePlan", "RiskAssessment", "SpecimenCollection", "WoundAssessment"]);
 const PATIENT_TYPE = "Patient";
 // Added 2026-09-06 (the Encounter migration), alongside PATIENT_TYPE and for the identical reason:
 // checking a patient in for today's visit is the SAME administrative act QUEUE_ADD already covers
@@ -92,9 +95,29 @@ const ADMINISTRATION_TYPE = "MedicationAdministration";
  */
 function grantForCaps(caps) {
   const has = (c) => Array.isArray(caps) && caps.includes(c);
+  /* Category allow-lists are unioned exactly as the type lists are, and for the same reason: adding
+   * a capability must never narrow what a role could already do. A doctor who is also on the lab
+   * rota holds EMR_TREAT, whose write scope is unconstrained, and the tail of this function drops
+   * every category constraint in that case - an unconstrained scope cannot be partly constrained. */
+  const mergeCats = (a, b) => {
+    if (!b) return a;
+    const out = { ...(a || {}) };
+    for (const k of Object.keys(b)) out[k] = [...new Set([...(out[k] || []), ...b[k]])];
+    return out;
+  };
   let grant = null;
   if (has(CAPS.EMR_TREAT)) grant = { tier: TIER.EXECUTE, read: null, write: null, basis: CAPS.EMR_TREAT };
-  else if (has(CAPS.EMR_VITALS)) grant = { tier: TIER.EXECUTE, read: has(CAPS.EMR_VIEW) ? null : [...VITALS_TYPES], write: [...VITALS_TYPES], basis: CAPS.EMR_VITALS };
+  else if (has(CAPS.EMR_VITALS)) {
+    /* A nurse charts vital signs and fluid. She does not issue laboratory results, and before this
+     * constraint existed the type-level scope let her: `Observation` is one resource type carrying
+     * four unrelated clinical meanings, and the critical-value loop believes anything categorised
+     * `laboratory`. */
+    grant = {
+      tier: TIER.EXECUTE, read: has(CAPS.EMR_VIEW) ? null : [...VITALS_TYPES], write: [...VITALS_TYPES],
+      writeCategories: { Observation: ["vital-signs", "fluid-balance"] },
+      basis: CAPS.EMR_VITALS,
+    };
+  }
   else if (has(CAPS.EMR_VIEW)) grant = { tier: TIER.READ, read: null, write: [], basis: CAPS.EMR_VIEW };
   else if (has(CAPS.ORDER_READ)) grant = { tier: TIER.READ, read: [...ORDER_TYPES], write: [], basis: CAPS.ORDER_READ };
 
@@ -105,11 +128,19 @@ function grantForCaps(caps) {
     // Union, never narrow: this only ever ADDS these two types to whatever write scope the EMR
     // capabilities already produced, and only ever RAISES the tier. Every role holding QUEUE_STATUS
     // (closing a visit) already holds QUEUE_ADD too, so no separate grant is needed for close.
-    const added = [PATIENT_TYPE, ENCOUNTER_TYPE];
+    /* Appointment and PatientLink joined them on 2026-09-07. Booking a patient in, and resolving two
+     * records that turned out to be one person, are the SAME administrative act as registering them
+     * in the first place - the front desk's work, not a clinical decision. An AppointmentRequest is
+     * NOT here: promising that a patient needs to be seen again is clinical, and it is granted by
+     * EMR_TREAT, which carries unrestricted write. */
+    const added = [PATIENT_TYPE, ENCOUNTER_TYPE, "Appointment", "PatientLink", "PrescriptionTransmission", "AdmissionRequest", "ResourceBooking"];
     if (!grant) grant = { tier: TIER.EXECUTE, read: null, write: added, basis: CAPS.QUEUE_ADD };
     else grant = {
       tier: TIER.EXECUTE, read: grant.read,
       write: grant.write === null ? null : [...new Set([...grant.write, ...added])],
+      // Carried, not dropped. A union branch that rebuilt the grant without this would silently
+      // remove the category constraint the earlier branch established - widening by omission.
+      writeCategories: grant.writeCategories,
       basis: grant.basis + "+" + CAPS.QUEUE_ADD,
     };
   }
@@ -118,21 +149,24 @@ function grantForCaps(caps) {
     /* The laboratory, 2026-09-07. It reads the requests it is working from and writes the results:
      * the Observations that carry the values and the DiagnosticReport that releases them.
      *
-     * ONE RESIDUAL, STATED RATHER THAN HIDDEN: write scope in this system is by resource TYPE, and
-     * a laboratory result and a nurse's blood pressure are both Observations. So this grant does
-     * technically let a lab actor write an Observation of any category through the raw record API.
-     * The resulting ROUTE always stamps category "laboratory" (asserted by a test), and a lab actor
-     * has no EMR capability so no clinical screen is open to them - but that is a narrower control
-     * than the scope itself, and it is worth saying so plainly. Closing it properly needs a
-     * category-scoped grant, which is a change to the store's authorisation model rather than to
-     * this table, and it is recorded in the vault as such rather than fudged here. */
-    const canRead = ["ServiceRequest", "Observation", "DiagnosticReport"];
-    const canWrite = ["Observation", "DiagnosticReport"];
-    if (!grant) grant = { tier: TIER.EXECUTE, read: canRead, write: canWrite, basis: CAPS.LAB_RESULT };
+     * THE RESIDUAL THIS COMMENT USED TO DESCRIBE IS CLOSED. Write scope was by resource TYPE alone,
+     * and a laboratory result and a nurse's blood pressure are both Observations, so this grant let
+     * a lab actor write a vital sign through the raw record API - which the eMAR then believes when
+     * it checks a weight-based dose. The store now takes a per-type category allow-list, and this
+     * grant carries one: laboratory, and nothing else. The route stamping category "laboratory" is
+     * still asserted by its own test; it is no longer the only thing standing there. */
+    /* SpecimenCollection is on both lists as of 2026-09-07: the laboratory is the half of the journey
+     * that RECEIVES the sample, and a lab that cannot record "we have it" leaves every tube reading
+     * as still in a nurse's pocket. It writes the specimen's arrival, never its collection. */
+    const canRead = ["ServiceRequest", "Observation", "DiagnosticReport", "SpecimenCollection"];
+    const canWrite = ["Observation", "DiagnosticReport", "SpecimenCollection"];
+    const cats = { Observation: ["laboratory"] };
+    if (!grant) grant = { tier: TIER.EXECUTE, read: canRead, write: canWrite, writeCategories: cats, basis: CAPS.LAB_RESULT };
     else grant = {
       tier: TIER.EXECUTE,
       read: grant.read === null ? null : [...new Set([...grant.read, ...canRead])],
       write: grant.write === null ? null : [...new Set([...grant.write, ...canWrite])],
+      writeCategories: mergeCats(grant.writeCategories, cats),
       basis: grant.basis + "+" + CAPS.LAB_RESULT,
     };
   }
@@ -154,13 +188,19 @@ function grantForCaps(caps) {
      * what a role already had. */
     // MedicationVerification is on BOTH lists: a verifier who cannot read back what was already
     // verified cannot see their own queue, and would re-check every order on every shift.
-    const canRead = ["MedicationOrder", "ServiceRequest", "AllergyIntolerance", "Observation", "Condition", "MedicationAdministration", "CriticalResultLoop", "MedicationVerification"];
-    const canWrite = ["MedicationVerification"];
+    /* MedicationDispense joined the write list on 2026-09-07, and MedicationAdministration
+     * deliberately did NOT. Issuing stock to a ward is the pharmacy's own act and gets its own
+     * resource; recording that a patient was given a dose is the nurse's, at a bedside. A role that
+     * could write both could post a fabricated administration through the raw record API without
+     * going near a patient. */
+    const canRead = ["MedicationOrder", "ServiceRequest", "AllergyIntolerance", "Observation", "Condition", "MedicationAdministration", "CriticalResultLoop", "MedicationVerification", "MedicationDispense"];
+    const canWrite = ["MedicationVerification", "MedicationDispense"];
     if (!grant) grant = { tier: TIER.EXECUTE, read: canRead, write: canWrite, basis: CAPS.ORDER_VERIFY };
     else grant = {
       tier: TIER.EXECUTE,
       read: grant.read === null ? null : [...new Set([...grant.read, ...canRead])],
       write: grant.write === null ? null : [...new Set([...grant.write, ...canWrite])],
+      writeCategories: grant.writeCategories,
       basis: grant.basis + "+" + CAPS.ORDER_VERIFY,
     };
   }
@@ -175,15 +215,26 @@ function grantForCaps(caps) {
      * was given against - that needs EMR_TREAT. Order and administration stay two resources written
      * by two authorities, which is what makes "someone ordered it" and "someone gave it" different
      * claims in the record. */
-    const added = [ADMINISTRATION_TYPE];
+    /* InfusionRate joins the bedside authority: charting what a pump is doing is the same act as
+     * recording that a dose was given, by the same nurse, at the same bedside. It grants nothing
+     * towards the ORDER - changing a rate is not re-prescribing. */
+    const added = [ADMINISTRATION_TYPE, "InfusionRate"];
     if (!grant) grant = { tier: TIER.EXECUTE, read: [...ORDER_TYPES, ADMINISTRATION_TYPE], write: added, basis: CAPS.MED_ADMINISTER };
     else grant = {
       tier: TIER.EXECUTE,
       read: grant.read === null ? null : [...new Set([...grant.read, ...ORDER_TYPES, ADMINISTRATION_TYPE])],
       write: grant.write === null ? null : [...new Set([...grant.write, ...added])],
+      writeCategories: grant.writeCategories,
       basis: grant.basis + "+" + CAPS.MED_ADMINISTER,
     };
   }
+  /* An unconstrained write scope cannot be partly constrained. A role that ends up with `write: null`
+   * may write every type, and leaving a category allow-list attached to that would refuse the one
+   * type it names while permitting every other - a rule that reads as tighter and behaves as
+   * nonsense. This is the doctor who is also on the lab rota. */
+  // Always present, so a caller reading the grant never has to tell "no constraint" from "this
+  // branch forgot to set the field".
+  if (grant) grant = { ...grant, writeCategories: grant.write === null ? null : (grant.writeCategories || null) };
   return grant;
 }
 
@@ -215,7 +266,7 @@ function actorFromOpdRole({ identity, role, claims }) {
     id: identity.id, kind: KIND.HUMAN, tier: grant.tier,
     display: claims.name || identity.name || identity.email || identity.id,
     credential: claims.regNo ? String(claims.regNo) : null,
-    scope: { read: grant.read, write: grant.write },
+    scope: { read: grant.read, write: grant.write, writeCategories: grant.writeCategories || null },
   });
 }
 
@@ -249,7 +300,14 @@ function aiActorFor(human, origin) {
   return makeActor({
     id: `ai:${name}`, kind: KIND.AI, tier: TIER.DRAFT,
     display: origin.display || `${name} (AI, drafting for ${human.display})`,
-    scope: { read: human.scope.read, write: actorCan(human, TIER.DRAFT) ? human.scope.write : [] },
+    /* The category constraint is inherited with the rest. Copying only the type lists would have
+     * made the AI WIDER than the human it drafts for - drafting a laboratory result for a nurse who
+     * may not write one. "No wider than the human" is the whole rule this scope exists to keep. */
+    scope: {
+      read: human.scope.read,
+      write: actorCan(human, TIER.DRAFT) ? human.scope.write : [],
+      writeCategories: actorCan(human, TIER.DRAFT) ? human.scope.writeCategories : null,
+    },
     onBehalfOf: human.id,
   });
 }

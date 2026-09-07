@@ -59,6 +59,7 @@ import { openCriticalLoops, acknowledgeCritical, listCriticalLoops } from "../..
 import { recordFluid, fluidBalance } from "../../_wardsynq/fluid-balance.js";
 import { giveHandover, receiveHandover, listHandovers } from "../../_wardsynq/handover.js";
 import { verifyOrder, verificationQueue } from "../../_wardsynq/pharmacy-verify.js";
+import { dispenseOrder, returnDispense, listDispenses } from "../../_wardsynq/pharmacy-dispense.js";
 import { declareBreakGlass, openEmergencyChart, listBreakGlass } from "../../_wardsynq/break-glass.js";
 import { patientEverything, readResource, capabilityStatement } from "../../_wardsynq/fhir.js";
 import { startReconciliation, decideMedicine, readReconciliation } from "../../_wardsynq/med-reconciliation.js";
@@ -67,6 +68,27 @@ import { releaseResult, pendingRequests } from "../../_wardsynq/lab-result.js";
 import { mergePatients, unmergePatients, identityOf } from "../../_wardsynq/identity-merge.js";
 import { overrideReport } from "../../_wardsynq/override-analytics.js";
 import { listOrderSets, prepareOrderSet, recordApplication } from "../../_wardsynq/order-sets.js";
+import { recordConsent, withdrawConsent, consentStatus } from "../../_wardsynq/consent.js";
+import { bookAppointment, setAppointmentState, requestFollowUp, listSchedule } from "../../_wardsynq/scheduling.js";
+import { setCarePlan, recordProgress, readCarePlan } from "../../_wardsynq/care-plan.js";
+import { listTemplates, writeTemplatedNote } from "../../_wardsynq/note-templates.js";
+/* Aliased: `recordAssessment` is already the OPD assessment writer in this file, and a risk
+ * assessment is a different thing entirely. Two names that read the same for two different
+ * clinical acts is how the wrong one gets called. */
+import { queueTransmission, recordOutcome, resolveTransmission, listTransmissions } from "../../_wardsynq/prescription-transmit.js";
+import { submitNote, signNote, listAwaitingCoSign } from "../../_wardsynq/note-cosign.js";
+import { downtimePack } from "../../_wardsynq/downtime.js";
+import { qualityReport } from "../../_wardsynq/quality.js";
+import { collectSpecimen, specimenOutcome, collectionList } from "../../_wardsynq/specimen.js";
+import { adtForEncounter, oruForReport } from "../../_wardsynq/hl7v2.js";
+import { requestAdmission, closeAdmissionRequest, admissionWaitingList } from "../../_wardsynq/admission-request.js";
+import { registryReport } from "../../_wardsynq/registry.js";
+import { chartWound, listWounds } from "../../_wardsynq/wound.js";
+import { bookResource, setBookingState, resourceSchedule } from "../../_wardsynq/resource-booking.js";
+import { flowsheet } from "../../_wardsynq/flowsheet-view.js";
+import { orderInvestigation } from "../../_wardsynq/ward-order.js";
+import { chartInfusion, listInfusions } from "../../_wardsynq/infusion.js";
+import { listTools as listRiskTools, recordAssessment as recordRiskAssessment, completeAction as completeRiskAction, listAssessments as listRiskAssessments } from "../../_wardsynq/risk-assessment.js";
 import { recordAllergiesFromAssessment } from "../../_wardsynq/migrate-allergy.js";
 
 // The Encounter migration's one shared call site. Every hook below (ticket add, import, a terminal
@@ -441,6 +463,9 @@ export async function onRequest(context) {
          * is readable by the same capability, because a pharmacist with no way to SEE the orders
          * cannot verify them - which is what made this impossible to do honestly before. */
         "verify-order": CAPS.ORDER_VERIFY, "verification-queue": CAPS.ORDER_VERIFY,
+        /* Issuing stock is the same pharmacy authority as verifying. It is NOT med.administer, and
+         * that separation is the point: this writes a supply record and never an administration. */
+        dispense: CAPS.ORDER_VERIFY, "dispense-return": CAPS.ORDER_VERIFY, dispenses: CAPS.ORDER_VERIFY,
         /* Break-glass. ONLY A CLINICIAN may declare one: emr.vitals is the lowest capability that
          * means "this person has clinical business with patients", which a cashier or an HR user
          * does not hold. It widens what a clinician may SEE in an emergency; it never turns a
@@ -473,6 +498,58 @@ export async function onRequest(context) {
          * application is emr.treat, because applying a set is ordering. The set itself writes no
          * order - every request still goes through the ordinary ordering route. */
         "order-sets": CAPS.EMR_VIEW, "prepare-set": CAPS.EMR_TREAT, "applied-set": CAPS.EMR_TREAT,
+        /* Consent. Taking one is ward-staff work - a nurse witnesses and records what a patient
+         * agreed to - so emr.vitals, the same authority as the rest of what she records. Reading is
+         * emr.view: a refusal nobody can see is a refusal that gets asked again. */
+        consent: CAPS.EMR_VITALS, "withdraw-consent": CAPS.EMR_VITALS, consents: CAPS.EMR_VIEW,
+        /* The diary is the front desk's: booking, cancelling and marking arrival are the same
+         * administrative act as registering a walk-in. PROMISING a follow-up is clinical - it is a
+         * decision that the patient needs to be seen again - so that one is emr.treat. */
+        book: CAPS.QUEUE_ADD, appointment: CAPS.QUEUE_ADD, schedule_: CAPS.QUEUE_VIEW,
+        "follow-up": CAPS.EMR_TREAT, diary: CAPS.QUEUE_VIEW,
+        /* The care plan is nursing work: setting goals and recording whether they were met is what
+         * a nurse does all shift, so emr.vitals. Reading it is emr.view. */
+        "care-plan": CAPS.EMR_VITALS, progress: CAPS.EMR_VITALS, plan: CAPS.EMR_VIEW,
+        // Writing a clinical note from a template is authoring a clinical document: emr.treat.
+        templates: CAPS.EMR_VIEW, "note": CAPS.EMR_TREAT,
+        /* Signing and co-signing are the same act and the same capability: what separates them is
+         * the actor's registration, which the store checks, not a capability a hospital can grant. */
+        "note-submit": CAPS.EMR_TREAT, "note-sign": CAPS.EMR_TREAT, "cosign-queue": CAPS.EMR_VIEW,
+        /* The downtime pack is the whole ward's chart on one sheet, so it needs the authority to read
+         * a chart - not the lower bar that opens the bed list. It writes nothing. */
+        downtime: CAPS.EMR_VIEW,
+        // Measures about the system, naming no clinician. Readable by anyone who can read a chart,
+        // for the same reason the override report is: the people the machinery acts on can see it.
+        quality: CAPS.EMR_VIEW,
+        /* A registry NAMES PATIENTS beside their diagnoses - chart-level PHI, and exactly what a
+         * browsing incident looks like. So it needs the authority to read a chart, not the lower bar
+         * that opens a ward list. quality.js, which names nobody, sits at the same level because it
+         * cannot go lower; this one could not go lower even if it wanted to. */
+        registries: CAPS.EMR_VIEW,
+        /* Taking a sample is nursing work, the same authority as recording a vital. The outcome
+         * falls back to lab.result above, because the laboratory is the half that receives it. */
+        collect: CAPS.EMR_VITALS, "specimen-outcome": CAPS.EMR_VITALS, collections: CAPS.EMR_VIEW,
+        // Asking for an investigation is a clinical act, like prescribing.
+        investigation: CAPS.EMR_TREAT,
+        // Charting a pump is the bedside's act, exactly like giving a dose.
+        infusion: CAPS.MED_ADMINISTER, infusions: CAPS.EMR_VIEW,
+        // Charting a wound is nursing work, the same authority as a vital or a fluid entry.
+        wound: CAPS.EMR_VITALS, wounds: CAPS.EMR_VIEW,
+        // Reading the flowsheet is reading the chart. It writes nothing.
+        flowsheet: CAPS.EMR_VIEW,
+        // ADT out. Reading a stay in another wire format is still reading a chart, so it needs the
+        // authority to read one. It writes nothing and there is no inbound listener.
+        adt: CAPS.EMR_VIEW, oru: CAPS.EMR_VIEW,
+        /* Putting somebody on the waiting list is the same administrative act as admitting them to a
+         * bed - the front desk's work. It reserves nothing and admits nobody. */
+        "request-admission": CAPS.QUEUE_ADD, "close-admission-request": CAPS.QUEUE_ADD, "waiting-list": CAPS.QUEUE_VIEW,
+        // Booking a room is the front desk's act, the same authority as booking an appointment.
+        "book-resource": CAPS.QUEUE_ADD, "resource-state": CAPS.QUEUE_ADD, "resource-schedule": CAPS.QUEUE_VIEW,
+        // Risk assessment is nursing work, like the rest of the flowsheet.
+        "risk-tools": CAPS.EMR_VIEW, assess: CAPS.EMR_VITALS, "risk-action": CAPS.EMR_VITALS, risks: CAPS.EMR_VIEW,
+        /* Sending a prescription is part of prescribing, so queueing is emr.treat. Recording what
+         * the transport said, and resolving a failure by printing it instead, is desk work. */
+        transmit: CAPS.EMR_TREAT, "transmit-outcome": CAPS.QUEUE_ADD, "transmit-resolve": CAPS.QUEUE_ADD, outbox: CAPS.QUEUE_VIEW,
         // Closing a stay is the administrative act QUEUE_ADD already covers for opening one.
         // The summary is a clinical document: drafting and signing it are EMR_TREAT.
         discharge: CAPS.QUEUE_ADD, "discharge-summary": CAPS.EMR_TREAT, "sign-discharge-summary": CAPS.EMR_TREAT,
@@ -503,6 +580,11 @@ export async function onRequest(context) {
        * alternative authority, never a widening: order.verify grants the narrow record scope in
        * actor.js and nothing more, so this cannot open any other route. */
       if (!wAz.ok && sub === "criticals") wAz = await ORG.authorizeOrg(env, actor, wOrgId, CAPS.ORDER_VERIFY);
+      /* A specimen's outcome is recorded by whichever side of the journey it happened on: the ward
+       * says the attempt failed, the LABORATORY says it arrived. Same alternative-authority shape,
+       * and the same reason it is not a widening - lab.result grants only the narrow record scope in
+       * actor.js, so this opens no other route and the store still checks the write itself. */
+      if (!wAz.ok && sub === "specimen-outcome") wAz = await ORG.authorizeOrg(env, actor, wOrgId, CAPS.LAB_RESULT);
       if (!wAz.ok) return json(azRefusal(wAz), wAz.reason === "org_not_found" ? 404 : 403, request);
 
       const wOrg = await ORG.getOrg(env, wOrgId);
@@ -530,7 +612,18 @@ export async function onRequest(context) {
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "medication-order" && method === "POST") {
-        const r = await createWardMedicationOrder(request, env, { ...deps, order: body.order || body, safety: body.safety || null, idempotencyKey: body.idempotencyKey || null });
+        const r = await createWardMedicationOrder(request, env, {
+          ...deps, order: body.order || body, safety: body.safety || null,
+          /* The formulary is ORG content, exactly as the order sets and the critical limits are: a
+           * caller who could pass one could lift any restriction the hospital had set. */
+          formulary: (wsqCfg && wsqCfg.formulary) || null,
+          // The hospital's own advisories, ORG content like everything else here. They can never
+          // block: see the header of _wardsynq/advisories.js.
+          advisories: (wsqCfg && wsqCfg.advisories) || null, ageYears: body.ageYears,
+          requireReasonOffFormulary: !!(wsqCfg && wsqCfg.requireReasonOffFormulary),
+          specialty: body.specialty, approvalRef: body.approvalRef, formularyReason: body.formularyReason,
+          idempotencyKey: body.idempotencyKey || null,
+        });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "round" && method === "GET") {
@@ -555,6 +648,199 @@ export async function onRequest(context) {
               types: (url.searchParams.get("_type") || "").split(",").map((t) => t.trim()).filter(Boolean),
             });
         return json(r.ok ? (r.bundle || r.resource) : r.outcome, r.status, request);
+      }
+      if (sub === "transmit" && method === "POST") {
+        const r = await queueTransmission(request, env, { ...deps, orderId: body.orderId, channel: body.channel, destination: body.destination, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "transmit-outcome" && method === "POST") {
+        const r = await recordOutcome(request, env, { ...deps, transmissionId: body.transmissionId, state: body.state, reference: body.reference, failureReason: body.failureReason, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "transmit-resolve" && method === "POST") {
+        const r = await resolveTransmission(request, env, { ...deps, transmissionId: body.transmissionId, resolution: body.resolution, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "outbox" && method === "GET") {
+        const r = await listTransmissions(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "", outstandingOnly: url.searchParams.get("outstanding") === "1" });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "risk-tools" && method === "GET") {
+        const r = await listRiskTools(request, env, { ...deps, tools: (wsqCfg && wsqCfg.riskTools) || [] });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "assess" && method === "POST") {
+        const r = await recordRiskAssessment(request, env, { ...deps, tools: (wsqCfg && wsqCfg.riskTools) || [], toolId: body.toolId, encounterId: body.encounterId, answers: body.answers, at: body.at, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "risk-action" && method === "POST") {
+        const r = await completeRiskAction(request, env, { ...deps, assessmentId: body.assessmentId, action: body.action, note: body.note, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "risks" && method === "GET") {
+        const r = await listRiskAssessments(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "" });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "templates" && method === "GET") {
+        const r = await listTemplates(request, env, { ...deps, templates: (wsqCfg && wsqCfg.noteTemplates) || [] });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "note" && method === "POST") {
+        // Templates are ORG content for the same reason order sets are.
+        const r = await writeTemplatedNote(request, env, { ...deps, templates: (wsqCfg && wsqCfg.noteTemplates) || [], templateId: body.templateId, encounterId: body.encounterId, sections: body.sections, at: body.at, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "note-submit" && method === "POST") {
+        const r = await submitNote(request, env, { ...deps, noteId: body.noteId, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "note-sign" && method === "POST") {
+        const r = await signNote(request, env, { ...deps, noteId: body.noteId, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "book-resource" && method === "POST") {
+        const r = await bookResource(request, env, { ...deps, resources: (wsqCfg && wsqCfg.resources) || null, resourceId: body.resourceId, startAt: body.startAt, minutes: body.minutes, patientId: body.patientId, encounterId: body.encounterId, purpose: body.purpose, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "resource-state" && method === "POST") {
+        const r = await setBookingState(request, env, { ...deps, bookingId: body.bookingId, state: body.state, reason: body.reason, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "resource-schedule" && method === "GET") {
+        const r = await resourceSchedule(request, env, { ...deps, resources: (wsqCfg && wsqCfg.resources) || null, resourceId: url.searchParams.get("resourceId") || "", from: url.searchParams.get("from") || "", to: url.searchParams.get("to") || "" });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "request-admission" && method === "POST") {
+        const r = await requestAdmission(request, env, { ...deps, mrn: body.mrn, specialty: body.specialty, ward: body.ward, reason: body.reason, urgency: body.urgency, plannedFor: body.plannedFor, requestedAt: body.requestedAt, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "close-admission-request" && method === "POST") {
+        const r = await closeAdmissionRequest(request, env, { ...deps, requestId: body.requestId, state: body.state, encounterId: body.encounterId, reason: body.reason, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "waiting-list" && method === "GET") {
+        const r = await admissionWaitingList(request, env, { ...deps, specialty: url.searchParams.get("specialty") || "", includeClosed: url.searchParams.get("includeClosed") === "1" });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "oru" && method === "GET") {
+        const r = await oruForReport(request, env, { ...deps, reportId: url.searchParams.get("reportId") || "", sendingFacility: (wOrg && wOrg.code) || "" });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "adt" && method === "GET") {
+        const r = await adtForEncounter(request, env, {
+          ...deps, encounterId: url.searchParams.get("encounterId") || "",
+          event: url.searchParams.get("event") || "", sendingFacility: (wOrg && wOrg.code) || "",
+        });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "flowsheet" && method === "GET") {
+        const r = await flowsheet(request, env, {
+          ...deps, patientId: url.searchParams.get("patientId") || "",
+          from: url.searchParams.get("from") || "", to: url.searchParams.get("to") || "", hours: url.searchParams.get("hours") || "",
+          rows: (wsqCfg && wsqCfg.flowsheetRows) || null,
+        });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "wound" && method === "POST") {
+        const r = await chartWound(request, env, { ...deps, patientId: body.patientId, encounterId: body.encounterId, site: body.site, kind: body.kind, stage: body.stage, origin: body.origin, lengthCm: body.lengthCm, widthCm: body.widthCm, depthCm: body.depthCm, tissue: body.tissue, exudate: body.exudate, infectionSigns: body.infectionSigns, dressing: body.dressing, note: body.note, assessedAt: body.assessedAt, photo: body.photo, image: body.image, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "wounds" && method === "GET") {
+        const r = await listWounds(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "" });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "infusion" && method === "POST") {
+        const r = await chartInfusion(request, env, { ...deps, orderId: body.orderId, event: body.event, ratePerHour: body.ratePerHour, reason: body.reason, at: body.at, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "infusions" && method === "GET") {
+        const r = await listInfusions(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "", from: url.searchParams.get("from") || "", to: url.searchParams.get("to") || "" });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "investigation" && method === "POST") {
+        const r = await orderInvestigation(request, env, { ...deps, encounterId: body.encounterId, code: body.code, display: body.display, codeSystem: body.codeSystem, category: body.category, priority: body.priority, reason: body.reason, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "collect" && method === "POST") {
+        const r = await collectSpecimen(request, env, { ...deps, serviceRequestId: body.serviceRequestId, specimenType: body.specimenType, container: body.container, at: body.at, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "specimen-outcome" && method === "POST") {
+        const r = await specimenOutcome(request, env, { ...deps, specimenId: body.specimenId, state: body.state, failureReason: body.failureReason, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "collections" && method === "GET") {
+        const r = await collectionList(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "" });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "registries" && method === "GET") {
+        const r = await registryReport(request, env, {
+          ...deps, registries: (wsqCfg && wsqCfg.registries) || null,
+          registryId: url.searchParams.get("registry") || "", overdueOnly: url.searchParams.get("overdue") === "1",
+        });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "quality" && method === "GET") {
+        const esc = (wsqCfg && wsqCfg.criticalEscalation) || null;
+        const r = await qualityReport(request, env, {
+          ...deps, days: url.searchParams.get("days") || "",
+          // The threshold is the HOSPITAL's, not a default invented here: a measure scored against a
+          // window nobody agreed to is a number nobody will act on.
+          ackWindowMinutes: esc && esc.acknowledgeWithinMinutes,
+          graceMinutes: (wsqCfg && wsqCfg.marGraceMinutes),
+        });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "downtime" && method === "GET") {
+        const r = await downtimePack(request, env, {
+          ...deps, ward: url.searchParams.get("ward") || "", hours: url.searchParams.get("hours") || "",
+          marTimes: (wsqCfg && wsqCfg.marTimes) || null, offsetMinutes: (wsqCfg && wsqCfg.utcOffsetMinutes) || 0,
+        });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "cosign-queue" && method === "GET") {
+        const r = await listAwaitingCoSign(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "" });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "care-plan" && method === "POST") {
+        const r = await setCarePlan(request, env, { ...deps, encounterId: body.encounterId, title: body.title, goals: body.goals, reviewBy: body.reviewBy, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "progress" && method === "POST") {
+        const r = await recordProgress(request, env, { ...deps, encounterId: body.encounterId, key: body.key, title: body.title, state: body.state, note: body.note, review: !!body.review, reviewBy: body.reviewBy, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "plan" && method === "GET") {
+        const r = await readCarePlan(request, env, { ...deps, encounterId: url.searchParams.get("encounterId") || "" });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "book" && method === "POST") {
+        const r = await bookAppointment(request, env, { ...deps, patientId: body.patientId, clinicianId: body.clinicianId, startAt: body.startAt, minutes: body.minutes, reason: body.reason, requestId: body.requestId, overbook: !!body.overbook, overbookReason: body.overbookReason, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "appointment" && method === "POST") {
+        const r = await setAppointmentState(request, env, { ...deps, appointmentId: body.appointmentId, state: body.state, reason: body.reason, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "follow-up" && method === "POST") {
+        const r = await requestFollowUp(request, env, { ...deps, patientId: body.patientId, encounterId: body.encounterId, clinicianId: body.clinicianId, reason: body.reason, dueBy: body.dueBy, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "diary" && method === "GET") {
+        const r = await listSchedule(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "", clinicianId: url.searchParams.get("clinicianId") || "", from: url.searchParams.get("from") || "", to: url.searchParams.get("to") || "" });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "consent" && method === "POST") {
+        const r = await recordConsent(request, env, { ...deps, patientId: body.patientId, encounterId: body.encounterId, scope: body.scope, decision: body.decision, detail: body.detail, givenBy: body.givenBy, giverName: body.giverName, capacity: body.capacity, validFrom: body.validFrom, validUntil: body.validUntil, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "withdraw-consent" && method === "POST") {
+        const r = await withdrawConsent(request, env, { ...deps, patientId: body.patientId, scope: body.scope, detail: body.detail, reason: body.reason, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "consents" && method === "GET") {
+        const r = await consentStatus(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "", scope: url.searchParams.get("scope") || "" });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "order-sets" && method === "GET") {
         const r = await listOrderSets(request, env, { ...deps, sets: (wsqCfg && wsqCfg.orderSets) || [] });
@@ -587,7 +873,14 @@ export async function onRequest(context) {
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "release-result" && method === "POST") {
-        const r = await releaseResult(request, env, { ...deps, serviceRequestId: body.serviceRequestId, patientId: body.patientId, encounterId: body.encounterId, panel: body.panel, tests: body.tests, status: body.status, reportedAt: body.reportedAt, conclusion: body.conclusion, idempotencyKey: body.idempotencyKey || null });
+        const r = await releaseResult(request, env, {
+          ...deps, serviceRequestId: body.serviceRequestId, patientId: body.patientId, encounterId: body.encounterId,
+          panel: body.panel, tests: body.tests, status: body.status, reportedAt: body.reportedAt, conclusion: body.conclusion,
+          // What counts as an implausible change, and what may be released unread, are the HOSPITAL's
+          // clinical content - the same shape as the critical limits this file already passes.
+          deltaLimits: (wsqCfg && wsqCfg.deltaLimits) || null, autoVerify: (wsqCfg && wsqCfg.autoVerify) || null,
+          idempotencyKey: body.idempotencyKey || null,
+        });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "pending-tests" && method === "GET") {
@@ -628,6 +921,18 @@ export async function onRequest(context) {
       }
       if (sub === "verification-queue" && method === "GET") {
         const r = await verificationQueue(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "" });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "dispense" && method === "POST") {
+        const r = await dispenseOrder(request, env, { ...deps, orderId: body.orderId, quantity: body.quantity, destination: body.destination, at: body.at, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "dispense-return" && method === "POST") {
+        const r = await returnDispense(request, env, { ...deps, dispenseId: body.dispenseId, reason: body.reason, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "dispenses" && method === "GET") {
+        const r = await listDispenses(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "" });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "handover" && method === "POST") {

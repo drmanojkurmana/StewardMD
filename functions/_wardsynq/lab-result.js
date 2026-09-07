@@ -33,6 +33,7 @@ import { resolveClinicalActor } from "./actor.js";
 import { RecordService } from "./service.js";
 import { AuthError, PermissionError } from "../_connect/permission.js";
 import { LAB_CODE_SEED } from "../../wardsynq/adapters/wardsynq-ghis-adapter.js";
+import { deltaCheck, autoVerify } from "./lab-delta.js";
 
 const str = (v) => (v == null ? "" : String(v).trim());
 const CATEGORY = "laboratory";
@@ -188,13 +189,38 @@ async function releaseResult(request, env, ctx) {
     };
   }
 
+  /* DELTA CHECK AND AUTOVERIFICATION, both advisory. Neither can stop a result being released: a
+   * laboratory that cannot release a number because software disagreed with it is a laboratory that
+   * routes around the software by the end of the week. A failure to READ the history is likewise not
+   * a reason to withhold anything - the check is simply reported as not done. */
+  let history = [];
+  try { history = (await svc.byPatient("Observation", patientId)) || []; }
+  catch { history = null; }
+  const nowMs = Date.parse(reportedAt) || Date.now();
+
   let written = 0;
   const results = [];
   for (const obs of observations) {
+    const delta = history === null
+      ? { state: "not-checked", reason: "history_unreadable" }
+      : deltaCheck({ code: obs.code, unit: obs.unit, value: obs.value, deltaLimits: ctx.deltaLimits, observations: history, nowMs });
+    const auto = autoVerify({
+      code: obs.code, value: obs.value, referenceRange: obs.referenceRange, sourceCritical: obs.sourceCritical,
+      autoVerify: ctx.autoVerify, delta,
+    });
+    // Stored ON the observation, so the flag travels with the result rather than living only in the
+    // response to whoever happened to release it.
+    if (delta.state === "breach") obs.deltaBreach = delta;
+    obs.autoVerified = auto.verified === true;
+
     try {
       const out = await svc.put(obs, { idempotencyKey: ctx.idempotencyKey ? `${ctx.idempotencyKey}:${obs.id}` : null });
       written += 1;
-      results.push({ id: obs.id, code: obs.code, codeSystem: obs.codeSystem, display: obs.display, value: obs.value, unit: obs.unit, version: out.record.version, critical: !!obs.sourceCritical });
+      results.push({
+        id: obs.id, code: obs.code, codeSystem: obs.codeSystem, display: obs.display, value: obs.value, unit: obs.unit,
+        version: out.record.version, critical: !!obs.sourceCritical,
+        delta, autoVerified: auto.verified === true, ...(auto.verified ? {} : { needsReview: auto.reasons }),
+      });
     } catch (e) {
       return { ...base, ...writeFailure(e, { reportId, written, observations: results, actor: resolved.actor.id }) };
     }
@@ -221,6 +247,12 @@ async function releaseResult(request, env, ctx) {
       ...base, ok: true, written: written + 1, reportId, patientId, status,
       serviceRequestId: serviceRequestId || null, unsolicited: !serviceRequestId,
       observations: results, critical: report.critical,
+      /* Counted at the top level, because these are the two numbers a laboratory acts on. A breach
+       * has NOT withheld anything - it is a prompt to check the sample identity before the ward acts
+       * on the number, which it can already see. */
+      deltaBreaches: results.filter((r) => r.delta && r.delta.state === "breach").length,
+      needsReview: results.filter((r) => !r.autoVerified).length,
+      ...(history === null ? { deltaUnavailable: "The patient's previous results could not be read, so no delta check was performed. The result is released regardless." } : {}),
       corrected: status === "corrected" && !!current,
       version: out.record.version, releasedBy: resolved.actor.id,
       ...(rejected.length ? { rejected } : {}),
