@@ -2725,6 +2725,99 @@ test("sending is prescribing's business, and nothing unsendable is sent", async 
   assert.equal(bogus.error, "unknown_channel");
 });
 
+/* ---- "this cannot be the same patient" ---------------------------------------------------------- */
+
+test("A DELTA BREACH FLAGS THE RESULT AND NEVER WITHHOLDS IT", async () => {
+  seedHospital();
+  /* The thresholds are the hospital's, exactly like the critical limits. Nothing in the code knows
+   * what a big change in a creatinine is. */
+  const org = docs.get(`q_orgs/${ORG}`);
+  org.fields.wardsynq = {
+    ...org.fields.wardsynq,
+    deltaLimits: { "2160-0": { maxAbsolute: 50, maxPercent: 30, withinHours: 72 } },
+    autoVerify: { enabled: true, codes: ["2160-0"] },
+  };
+
+  const { adm } = await admittedPatientOnDrug();
+  const sr1 = await orderTest(adm, "Creatinine", "wsq-sr-cr1");
+  const first = await as(LABTECH, "/ward/release-result", "POST", {
+    orgId: ORG, serviceRequestId: sr1, reportedAt: "2026-09-06T12:00:00.000Z",
+    tests: [{ test: "Creatinine", value: 78, unit: "umol/L", low: 60, high: 110 }],
+  });
+  assert.equal(first.__status, 200, JSON.stringify(first));
+  // A first result has no previous to compare against, and holding every one would hold most of a
+  // new admission's bloods for no finding.
+  assert.equal(first.observations[0].delta.state, "not-checked");
+  assert.equal(first.observations[0].delta.reason, "no_previous_result");
+  assert.equal(first.observations[0].autoVerified, true, "in range, no critical flag, no delta to breach");
+  assert.equal(first.needsReview, 0);
+
+  const sr2 = await orderTest(adm, "Creatinine", "wsq-sr-cr2");
+  const second = await as(LABTECH, "/ward/release-result", "POST", {
+    orgId: ORG, serviceRequestId: sr2, reportedAt: "2026-09-07T12:00:00.000Z",
+    tests: [{ test: "Creatinine", value: 240, unit: "umol/L", low: 60, high: 110 }],
+  });
+  assert.equal(second.__status, 200, "the result is RELEASED, not withheld");
+  assert.equal(second.deltaBreaches, 1);
+  const d = second.observations[0].delta;
+  assert.equal(d.state, "breach");
+  assert.equal(d.previous.value, 78);
+  assert.equal(d.direction, "rise");
+  /* The commonest explanation for an impossible change is a mislabelled tube or two swapped samples,
+   * and the wording has to make a reader think of that first. */
+  assert.match(d.detail, /check the sample identity/);
+
+  // The flag travels ON the observation, not just in the response to whoever released it.
+  const stored = (await RECORD.byPatient(TENANT_ROW.id, "Observation", adm.patientId)).filter((o) => o.deltaBreach);
+  assert.equal(stored.length, 1);
+  assert.equal(stored[0].value, 240);
+
+  // Out of range AND a delta breach: both reasons are reported, because both are work.
+  assert.equal(second.observations[0].autoVerified, false);
+  assert.deepEqual(second.observations[0].needsReview.sort(), ["above_reference_range", "delta_breach"]);
+});
+
+test("AUTOVERIFICATION IS OFF UNLESS THE HOSPITAL ASKS, and never releases what it could not check", async () => {
+  seedHospital();
+  const { adm } = await admittedPatientOnDrug();
+
+  // No config at all: every result needs a human, and says why.
+  const sr = await orderTest(adm, "Creatinine", "wsq-sr-cr3");
+  const plain = await as(LABTECH, "/ward/release-result", "POST", {
+    orgId: ORG, serviceRequestId: sr, tests: [{ test: "Creatinine", value: 80, unit: "umol/L", low: 60, high: 110 }],
+  });
+  assert.equal(plain.observations[0].autoVerified, false);
+  assert.deepEqual(plain.observations[0].needsReview, ["not_enabled"]);
+  assert.equal(plain.needsReview, 1);
+  // And with no configured limit, the delta is reported as NOT CHECKED rather than as a pass.
+  assert.equal(plain.observations[0].delta.reason, "no_limit_configured");
+
+  const org = docs.get(`q_orgs/${ORG}`);
+  org.fields.wardsynq = { ...org.fields.wardsynq, autoVerify: { enabled: true, codes: ["2160-0"] } };
+
+  // A non-numeric result is a sentence somebody wrote. It is never released unread.
+  const sr2 = await orderTest(adm, "Creatinine", "wsq-sr-cr4");
+  const text = await as(LABTECH, "/ward/release-result", "POST", {
+    orgId: ORG, serviceRequestId: sr2, tests: [{ test: "Creatinine", value: "Haemolysed", unit: "umol/L", low: 60, high: 110 }],
+  });
+  assert.equal(text.observations[0].autoVerified, false);
+  assert.ok(text.observations[0].needsReview.includes("non_numeric"));
+
+  // The laboratory's own critical flag always wins, exactly as in the critical-value loop.
+  const sr3 = await orderTest(adm, "Creatinine", "wsq-sr-cr5");
+  const crit = await as(LABTECH, "/ward/release-result", "POST", {
+    orgId: ORG, serviceRequestId: sr3, tests: [{ test: "Creatinine", value: 80, unit: "umol/L", low: 60, high: 110, critical: true }],
+  });
+  assert.ok(crit.observations[0].needsReview.includes("flagged_critical_by_lab"));
+
+  // NO RANGE IS NOT A PASS: there is nothing to check against, so a human checks.
+  const sr4 = await orderTest(adm, "Creatinine", "wsq-sr-cr6");
+  const noRange = await as(LABTECH, "/ward/release-result", "POST", {
+    orgId: ORG, serviceRequestId: sr4, tests: [{ test: "Creatinine", value: 80, unit: "umol/L" }],
+  });
+  assert.deepEqual(noRange.observations[0].needsReview, ["no_reference_range"]);
+});
+
 /* ---- ADT out ------------------------------------------------------------------------------------- */
 
 test("THE ADT MESSAGE IS BUILT FROM THE RECORD, and a stay it cannot describe is refused", async () => {
