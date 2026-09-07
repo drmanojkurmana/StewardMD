@@ -62,6 +62,28 @@ missing order version into "v0" (#908), a configured-but-empty delta rule into a
   clinician correction with recorded provenance (`editedSections`), an immutable signed version, the
   outstanding-items review before sign-off, and an A4 print artifact.
 
+## Finished code nothing calls - the remaining four
+
+Six were found and wired this session (buildGrid #927, infusionVolume #929, the override report #935,
+the note templates #932, NEWS2 #936, PEWS #937). Four are still unreachable from any route, and each
+is a decision rather than an oversight:
+
+- **`wardsynq-readlog.js`** - the most significant. `vault/modules/WardSynQ.md` records HAZ-FLUID-01 as
+  PARTIAL *because* "nothing records that anyone read it... Closing that needs a view log, which does
+  not exist". IT DOES EXIST, unwired. Wiring it means logging every clinical READ, which is a
+  cross-cutting PHI and retention decision (what is kept, for how long, who may query it) that the
+  owner should make rather than a session.
+- **`wardsynq-lineage.js`** - click a derived value and see the raw observations behind it. Partly
+  redundant now: `news2()` already returns per-parameter `sources` with the observation id, time and
+  code, and #935's override report carries its own denominator. Worth wiring if a UI ever needs one
+  tracing surface across all derived values.
+- **`wardsynq-quality.js`** - a regulator-grade measure engine. `functions/_wardsynq/quality.js`
+  (#913) covers the measures WardSynQ can honestly compute today; this is the larger engine and
+  duplicating its scope without a regulator's specification would be inventing the specification.
+- **`wardsynq-temporal.js`** - bi-temporal queries ("what did the team believe at 15:00 yesterday").
+  The record is already bi-temporal via `recordedAt`/`effectiveAt` and `history()`; this is the query
+  layer, and nothing yet asks the question.
+
 ## Needs the owner, not more code
 1. **Push `wardsynq-ci-sqlite`.** A one-line CI change, committed on that local branch and NOT
    pushable by this session's token (`refusing to allow an OAuth App to create or update workflow
