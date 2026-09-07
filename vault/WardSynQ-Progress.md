@@ -26,14 +26,14 @@ Updated: 2026-09-07 (PRs #887, #889, #890, #892, #894, #895, #897 pharmacy verif
 | 12 | Results — lab / rad (Beaker, Radiant) | 6 | 99 | #894 + #900 + #911 + #919 + #933. Native resulting by a `lab` role scoped to laboratory Observations, corrections that keep the prior value, a closed critical-value loop, delta checks against the hospital's own limits (advisory, never withholding), autoverification that fails closed, and radiology reporting where a preliminary reading survives the final one and a changed impression is flagged as a discrepancy. No images (DICOM/PACS excluded). |
 | 13 | Pharmacy verification + inventory (Willow) | 5 | 88 | #897 + #914 + #931. Verification and dispensing, both as the pharmacy's OWN authority with a narrow grant: reads what a check needs, writes only its verification and its supply record. A dispense is issued against an order version, refused when the verified version has been superseded, and never touches a MedicationAdministration. Batch and expiry are recorded from the box and expired stock is refused - the only non-prescription block in the file. No inventory (excluded by instruction): no stock levels, no reorder, no locations. |
 | 14 | Notes / documentation (SmartText, NoteWriter) | 4 | 96 | #909 + #932. Signed clinical notes, versioned, per-section provenance, org note templates that supply headings and never content, and co-sign routing: a note by a clinician with no verified registration is submitted, listed and countersigned, with both names kept on the record - and a ward round composer that supplies the hospital's headings, writes no text of its own, and never signs. No macros, no dictation. |
-| 15 | Billing / revenue (Resolute) | 5 | 15 | Clinic billing config only. No charge capture from orders, no claims, no payer. |
+| 15 | Billing / revenue (Resolute) | 5 | 80 | #939. The claims engine, reachable at last: a claim is coded against the problem list and a code the record does not document is REFUSED rather than queried, a differential or refuted condition is never evidence, coding that changes after a denial is flagged permanently, a pre-auth is recorded as a funding decision that is explicitly not a clinical one, and the one function that could gate care always returns yes. The guarantee is the grant, not the header: BILLING_CHARGE writes Claim and PreAuthorisation and cannot write a Condition, so billing cannot manufacture its own justification. No tariff, no rate card, no payer transport, no ledger, no charge capture from orders. |
 | 16 | Security / audit / break-glass | 5 | 100 | #898 + #903 + #911 + #938. Capability RBAC scoped by resource type AND by category within a type, append-only audit, tiered AI, break-glass with a mandatory reason, a consent model where a refusal is a first-class fact, and a read log that closes HAZ-FLUID-01 - bounded, purpose-stamped, and with no way to ask what a person has read. No per-field redaction. |
 | 17 | Interoperability (Care Everywhere, HL7/FHIR) | 4 | 98 | #899 + #918 + #924 + #934. Read-only FHIR R4 export with an honest CapabilityStatement, HL7 v2.5.1-shaped ADT (A01/A02/A03) generated from the record with every delimiter escaped, and the GHIS adapter. Neither door accepts writes and there is no HL7 listener; not validated against a conformance profile. HL7v2 ORU^R01 results out, with a non-numeric result typed ST and the laboratory's own abnormal flag never recomputed. CDA R2 level 1 for a SIGNED discharge summary - a real header wrapping a narrative body, no templateId claiming conformance nobody validated. No inbound ORM, no listener of any kind. |
 | 18 | Reporting / analytics (Reporting Workbench, Caboodle) | 3 | 88 | #913 + #923. Live ward open-item metrics, plus period quality measures computed from the record with a UI: critical-result acknowledgement against the hospital's own window, dose timeliness, discharge-summary completion. A rate over too few cases is flagged, one with no cases is null rather than 0%, and a measure the record cannot support is shown with its reason. Disease registries derived from the problem list, where never-reviewed sorts as the most overdue and the cohort is the one report that names patients. No warehouse. |
 | 19 | Patient portal (MyChart) | 3 | 0 | Not built. |
 | 20 | Deployment / uptime / DR (on-prem, HA) | 3 | 55 | #912. Cloudflare edge + D1, live domain, a printable downtime pack the ward can hold during an outage, a restore rehearsal that performs a real export-destroy-restore against the shipped schema, and a DR runbook. The rehearsal passes under `npm test` and currently SKIPS in CI, which lacks `--experimental-sqlite` - see "Needs the owner". No scheduled backup, so RPO/RTO are undefined; no on-prem, no hot standby. |
 
-**Weighted total: 87.2%.**
+**Weighted total: 90.5%.**
 
 The total is the weight-times-percent sum of the table above, divided by 100. It is COMPUTED from
 these rows, not asserted: earlier revisions of this file carried an eyeballed number that had drifted
@@ -42,10 +42,15 @@ about two points high (the 44% baseline was 41.5, and 53% was 50.8). If a row ch
 ## The 2026-09-07/08 session: 73.0% -> 86.3%, twenty-seven PRs
 
 Every gap this file named at the start of that session is closed. The pattern that produced most of
-the value, worth repeating: **look for finished library code nothing calls.** Three separate
-subsystems were complete, tested and unreachable - `buildGrid` and `infusionVolume` in
-wardsynq-flowsheet.js (#927, #929), and the note templates and co-sign routing that had no screen
-(#932). Reaching them was cheaper than building anything and worth more.
+the value, worth repeating: **look for finished library code nothing calls.** EIGHT separate
+subsystems were complete, tested and reachable by nobody - `buildGrid` and `infusionVolume` in
+wardsynq-flowsheet.js (#927, #929), the override report (#935), the note templates and co-sign
+routing that had no screen (#932), NEWS2 (#936), PEWS (#937), the read log (#938) and the claims
+engine (#939). Reaching them was cheaper than building anything and worth more, and twice it
+exposed a second-order fault that only surfaced once something called the code: the vitals form
+could not record supplemental oxygen or ACVPU, so NEWS2 could never have completed a score, and
+HAZ-FLUID-01's note said its blocker "does not exist" when the module for it was sitting in the
+repository.
 
 The recurring bug, three times in one session: **`Number("")` is 0 and 0 is finite.** It turned a
 missing order version into "v0" (#908), a configured-but-empty delta rule into a threshold of zero
@@ -62,11 +67,20 @@ missing order version into "v0" (#908), a configured-but-empty delta rule into a
   clinician correction with recorded provenance (`editedSections`), an immutable signed version, the
   outstanding-items review before sign-off, and an A4 print artifact.
 
-## Finished code nothing calls - the remaining four
+## Finished code nothing calls - the remaining three
 
-Six were found and wired this session (buildGrid #927, infusionVolume #929, the override report #935,
-the note templates #932, NEWS2 #936, PEWS #937). Four are still unreachable from any route, and each
-is a decision rather than an oversight:
+Eight were found and wired this session (buildGrid #927, infusionVolume #929, the override report
+#935, the note templates #932, NEWS2 #936, PEWS #937, the read log #938, the claims engine #939).
+Three are still unreachable from any route, and each is a decision rather than an oversight:
+
+- ~~`wardsynq-billing.js`~~ - WIRED (#939), once the owner lifted the exclusion. Its rule is that
+  the clinical record is the source and billing never writes to it, and that rule is now enforced by
+  the GRANT rather than by its header: BILLING_CHARGE writes `Claim` and `PreAuthorisation` and
+  cannot write a `Condition`, so a coder cannot add the diagnosis that would justify their own
+  charge. Two things this record genuinely cannot support are stated rather than faked - no order,
+  result or prescription carries an indication, so INFERRED support never fires and every code is
+  either on the problem list or refused; and `Condition` has no severity field, so every
+  severity-tiered code is flagged, which is the true answer.
 
 - ~~`wardsynq-readlog.js`~~ - WIRED (#938), on the owner's instruction. It closes the blocker
   HAZ-FLUID-01 named. The PHI questions were answered structurally rather than by policy: the purpose
@@ -95,8 +109,20 @@ is a decision rather than an oversight:
    pass under `npm test`, which has always passed the flag.
 2. **Device proof** - see item 0 below.
 3. **Where the record backups live**, and who holds them - see the DR runbook.
-4. **Whether the five excluded domains stay excluded** (11 weight points; the table cannot reach 100
-   while they do).
+4. ~~Whether the five excluded domains stay excluded~~ - ANSWERED 2026-09-08: "nothing is excluded".
+5. **Is the cashier the coder?** (#939) In `_queue_roles.js` one role holds QUEUE_VIEW, ORDER_READ,
+   BILLING_VIEW and BILLING_CHARGE, and BILLING_CHARGE now carries read on `Condition` - because
+   coding a claim asks exactly one question, is this diagnosis written down, and it cannot be
+   answered without it. The read is the problem list and NOTHING else clinical: not the notes, not
+   the results, not the drug chart. But it does mean the person taking cash at the counter can read
+   a patient's diagnoses through the raw record API. A hospital that employs separate coders should
+   hold BILLING_CHARGE for them alone and leave the cashier on BILLING_VIEW, which reads claims and
+   writes nothing. That is a role-mapping decision, not a code change.
+6. **A hospital-wide upcoding sweep.** `GET upcoding` answers per patient, because the repository is
+   queried by patient and a route that walked every claim in the hospital is a compliance report
+   rather than a safety check - it needs its own owner, its own retention decision and its own
+   authority. The module's instruction is that the list is read "by somebody who is not paid on
+   collections", which is why the route sits behind STAFF_ADMIN and not BILLING_VIEW.
 
 ## What is left, in order of what actually moves the number
 -1. **A SCHEDULED BACKUP.** Nothing takes the record export automatically - `vault/runbooks/
