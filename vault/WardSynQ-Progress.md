@@ -39,6 +39,18 @@ The total is the weight-times-percent sum of the table above, divided by 100. It
 these rows, not asserted: earlier revisions of this file carried an eyeballed number that had drifted
 about two points high (the 44% baseline was 41.5, and 53% was 50.8). If a row changes, recompute.
 
+## The 2026-09-07/08 session: 73.0% -> 86.3%, twenty-seven PRs
+
+Every gap this file named at the start of that session is closed. The pattern that produced most of
+the value, worth repeating: **look for finished library code nothing calls.** Three separate
+subsystems were complete, tested and unreachable - `buildGrid` and `infusionVolume` in
+wardsynq-flowsheet.js (#927, #929), and the note templates and co-sign routing that had no screen
+(#932). Reaching them was cheaper than building anything and worth more.
+
+The recurring bug, three times in one session: **`Number("")` is 0 and 0 is finite.** It turned a
+missing order version into "v0" (#908), a configured-but-empty delta rule into a threshold of zero
+(#919), and would have done it again. Check for the absent value, never for finiteness.
+
 ## Done since the baseline (41.5% -> 52.4%)
 - **Problem list** (#887) — `Condition` had zero write paths; diagnoses lived only as prose.
 - **Ward UI** (#889) — the inpatient stack was server-authoritative and tested with nothing calling
@@ -83,6 +95,22 @@ about two points high (the 44% baseline was 41.5, and 53% was 50.8). If a row ch
 4. ~~Firing counts for the CDSS~~ - closed in #910. A `SafetyFiring` is recorded per order and rule
    pack version, so the override rate has a denominator that comes from the record. A verdict that
    carries no `findings` still yields no rate, and the report says so rather than inventing one.
+
+## What is left, honestly (13.7 points)
+
+- **7.25 excluded by instruction**: billing/claims (4.25) and the patient portal (3.00).
+- **1.35 deployment**, of which the scheduled backup needs an owner decision (where dumps live, who
+  holds them) and on-premise/HA is excluded.
+- **0.98 stated non-goals**: probabilistic identity matching (d1) and an e-prescribing transport (d5)
+  are deliberate absences with their reasoning recorded, not unfinished work.
+- **0.40 device proof** (d11): the discharge screen, like every other screen built this session, has
+  never run on a phone.
+- **0.40 patient self-booking** (d2), which is the portal again.
+- **~3.3 genuinely buildable**: an OPD-specific note composer, a rule-pack authoring screen, CDA
+  export, a data warehouse, and a scattering of half-points.
+
+So the reachable ceiling is about 92.75, and the honest remainder is roughly three points of real
+work plus four things only the owner can do.
 
 ## Deliberately not built
 Patient portal, full billing and claims, on-premise deployment, DICOM/PACS and regulatory
