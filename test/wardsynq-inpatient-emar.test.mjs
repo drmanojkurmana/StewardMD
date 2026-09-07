@@ -2725,6 +2725,73 @@ test("sending is prescribing's business, and nothing unsendable is sent", async 
   assert.equal(bogus.error, "unknown_channel");
 });
 
+/* ---- the imaging report --------------------------------------------------------------------------- */
+
+test("A FINAL IMPRESSION THAT CHANGED IS FLAGGED, and the preliminary one survives", async () => {
+  seedHospital();
+  const { adm } = await admittedPatientOnDrug();
+  const sr = await as(DOCTOR, "/ward/investigation", "POST", { orgId: ORG, encounterId: adm.encounterId, code: "CT head", category: "imaging", priority: "stat" });
+  assert.equal(sr.__status, 200, JSON.stringify(sr));
+  const report = (body) => as(LABTECH, "/ward/report-imaging", "POST", { orgId: ORG, serviceRequestId: sr.orderId, ...body });
+
+  /* A REPORT WITH NOTHING SEEN IS NOT A REPORT, and a FINAL one needs the sentence a clinician will
+   * act on - releasing it without would leave a ward drawing its own radiological conclusion. */
+  assert.equal((await report({ impression: "Normal" })).error, "findings_required");
+  const noImpression = await report({ findings: "No acute intracranial abnormality.", status: "final" });
+  assert.equal(noImpression.__status, 422);
+  assert.equal(noImpression.error, "impression_required");
+  assert.match(noImpression.detail, /release it as preliminary/);
+
+  // The registrar at 02:00.
+  const prelim = await report({ findings: "Study degraded by motion.", impression: "No intracranial haemorrhage.", status: "preliminary", modality: "CT" });
+  assert.equal(prelim.__status, 200, JSON.stringify(prelim));
+  assert.equal(prelim.status, "preliminary");
+  assert.match(prelim.note, /stays on the record/);
+
+  /* The consultant at 09:00, and the impression has changed. This is the commonest serious event in
+   * radiology and it is flagged rather than quietly overwritten. */
+  const final = await report({ findings: "Small left frontal contusion.", impression: "Small left frontal contusion. No mass effect.", status: "final" });
+  assert.equal(final.__status, 200, JSON.stringify(final));
+  assert.equal(final.discrepancy, true);
+  assert.equal(final.previousImpression, "No intracranial haemorrhage.");
+  // Nothing here decides whether the change matters clinically - it says who to ask.
+  assert.match(final.detail, /not this system's call/);
+  assert.match(final.detail, /tell the team looking after this patient/);
+
+  /* THE PRELIMINARY READING SURVIVES. A system that kept only the final one would erase what the
+   * night team actually saw and decided from. */
+  const history = await RECORD.history(TENANT_ROW.id, "DiagnosticReport", final.reportId);
+  assert.deepEqual(history.map((h) => h.status), ["preliminary", "final"]);
+  assert.equal(history[0].impression, "No intracranial haemorrhage.");
+  assert.equal(history[1].discrepancy, true);
+
+  // A final report is CORRECTED, never re-finalised silently.
+  const again = await report({ findings: "x", impression: "y", status: "final" });
+  assert.equal(again.__status, 409);
+  assert.equal(again.error, "already_final");
+  assert.equal((await report({ findings: "x", impression: "y", status: "corrected" })).__status, 200);
+});
+
+test("reporting a study is the reporter's authority, and it answers a request that exists", async () => {
+  seedHospital();
+  const { adm } = await admittedPatientOnDrug();
+  const sr = await as(DOCTOR, "/ward/investigation", "POST", { orgId: ORG, encounterId: adm.encounterId, code: "Chest X-ray", category: "imaging" });
+
+  const ghost = await as(LABTECH, "/ward/report-imaging", "POST", { orgId: ORG, serviceRequestId: "wsq-sr-nope", findings: "x" });
+  assert.equal(ghost.__status, 404);
+  assert.equal(ghost.error, "request_not_found");
+
+  // A nurse charts, a doctor orders; neither reports the film.
+  assert.equal((await as(NURSE, "/ward/report-imaging", "POST", { orgId: ORG, serviceRequestId: sr.orderId, findings: "x" })).__status, 403);
+  // The report holds no pixels: DICOM/PACS is out of scope and a study half-living here is worse
+  // than one that does not.
+  const done = await as(LABTECH, "/ward/report-imaging", "POST", { orgId: ORG, serviceRequestId: sr.orderId, findings: "Clear lung fields.", impression: "Normal chest radiograph.", status: "final" });
+  const stored = await RECORD.latest(TENANT_ROW.id, "DiagnosticReport", done.reportId);
+  assert.equal(stored.category, "imaging");
+  assert.equal(stored.image, undefined);
+  assert.deepEqual(stored.resultObservationIds, [], "an imaging report has no values");
+});
+
 /* ---- the drip ------------------------------------------------------------------------------------ */
 
 test("AN INFUSION'S VOLUME IS COMPUTED, and it says how much of it is assumption", async () => {
