@@ -2725,6 +2725,54 @@ test("sending is prescribing's business, and nothing unsendable is sent", async 
   assert.equal(bogus.error, "unknown_channel");
 });
 
+/* ---- the flowsheet, from the real record --------------------------------------------------------- */
+
+test("A CONFIGURED ROW WITH NOTHING IN IT STILL APPEARS, which is the whole point", async () => {
+  seedHospital();
+  const org = docs.get(`q_orgs/${ORG}`);
+  org.fields.wardsynq = {
+    ...org.fields.wardsynq,
+    // The hospital's own rows. Respiratory rate is on the chart and will be charted; SpO2 is on the
+    // chart and will NOT be.
+    flowsheetRows: [{ code: "8480-6", label: "Systolic BP" }, { code: "9279-1", label: "Resp rate" }, { code: "59408-5", label: "SpO2" }],
+  };
+  const { adm } = await admittedPatientOnDrug();
+  await as(NURSE, "/ward/vitals", "POST", { orgId: ORG, encounterId: adm.encounterId, patientId: adm.patientId, vitals: { sbp: "126", rr: "18" } });
+
+  const fs = await as(NURSE, `/ward/flowsheet?orgId=${ORG}&patientId=${adm.patientId}&hours=6`);
+  assert.equal(fs.__status, 200, JSON.stringify(fs));
+  assert.equal(fs.rowsConfigured, true);
+  assert.deepEqual(fs.grid.rows.map((r) => r.code), ["8480-6", "9279-1", "59408-5"]);
+
+  /* THE POINT. A row that vanished because nobody charted it reads as "not part of this chart"
+   * rather than "nobody charted it", and those are opposite conclusions. */
+  const spo2 = fs.grid.rows.find((r) => r.code === "59408-5");
+  assert.equal(spo2.chartedHours, 0);
+  assert.equal(spo2.completeness, 0);
+  assert.ok(spo2.cells.every((c) => c.empty), "every hour of it is visibly empty");
+  assert.equal(spo2.label, "SpO2", "and it is headed by the hospital's own label, not a bare code");
+
+  const sbp = fs.grid.rows.find((r) => r.code === "8480-6");
+  assert.equal(sbp.chartedHours, 1);
+  assert.equal(sbp.cells.find((c) => !c.empty).value, 126);
+  assert.equal(sbp.label, "Systolic BP");
+
+  // A laboratory result is not a flowsheet row: it has its own report and its own critical loop.
+  const sr = await orderTest(adm, "Potassium", "wsq-sr-fs");
+  await as(LABTECH, "/ward/release-result", "POST", { orgId: ORG, serviceRequestId: sr, tests: [{ test: "Potassium", value: 4.1, unit: "mmol/L" }] });
+  const after = await as(NURSE, `/ward/flowsheet?orgId=${ORG}&patientId=${adm.patientId}&hours=6`);
+  assert.deepEqual(after.grid.rows.map((r) => r.code), ["8480-6", "9279-1", "59408-5"], "the potassium did not become a row");
+
+  // With no rows configured the grid shows what was charted, and SAYS it cannot show an omission.
+  seedHospital();
+  const { adm: adm2 } = await admittedPatientOnDrug();
+  await as(NURSE, "/ward/vitals", "POST", { orgId: ORG, encounterId: adm2.encounterId, patientId: adm2.patientId, vitals: { sbp: "130" } });
+  const loose = await as(NURSE, `/ward/flowsheet?orgId=${ORG}&patientId=${adm2.patientId}&hours=6`);
+  assert.equal(loose.rowsConfigured, false);
+  assert.match(loose.note, /cannot show a row nobody filled in/);
+  assert.ok(loose.grid.rows.length >= 1);
+});
+
 /* ---- the room, the theatre and the scanner ------------------------------------------------------- */
 
 test("A ROOM CANNOT BE OVERBOOKED, and the refusal names what is already there", async () => {
