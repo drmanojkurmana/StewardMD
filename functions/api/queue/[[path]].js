@@ -67,6 +67,7 @@ import { releaseResult, pendingRequests } from "../../_wardsynq/lab-result.js";
 import { mergePatients, unmergePatients, identityOf } from "../../_wardsynq/identity-merge.js";
 import { overrideReport } from "../../_wardsynq/override-analytics.js";
 import { listOrderSets, prepareOrderSet, recordApplication } from "../../_wardsynq/order-sets.js";
+import { recordConsent, withdrawConsent, consentStatus } from "../../_wardsynq/consent.js";
 import { recordAllergiesFromAssessment } from "../../_wardsynq/migrate-allergy.js";
 
 // The Encounter migration's one shared call site. Every hook below (ticket add, import, a terminal
@@ -473,6 +474,10 @@ export async function onRequest(context) {
          * application is emr.treat, because applying a set is ordering. The set itself writes no
          * order - every request still goes through the ordinary ordering route. */
         "order-sets": CAPS.EMR_VIEW, "prepare-set": CAPS.EMR_TREAT, "applied-set": CAPS.EMR_TREAT,
+        /* Consent. Taking one is ward-staff work - a nurse witnesses and records what a patient
+         * agreed to - so emr.vitals, the same authority as the rest of what she records. Reading is
+         * emr.view: a refusal nobody can see is a refusal that gets asked again. */
+        consent: CAPS.EMR_VITALS, "withdraw-consent": CAPS.EMR_VITALS, consents: CAPS.EMR_VIEW,
         // Closing a stay is the administrative act QUEUE_ADD already covers for opening one.
         // The summary is a clinical document: drafting and signing it are EMR_TREAT.
         discharge: CAPS.QUEUE_ADD, "discharge-summary": CAPS.EMR_TREAT, "sign-discharge-summary": CAPS.EMR_TREAT,
@@ -555,6 +560,18 @@ export async function onRequest(context) {
               types: (url.searchParams.get("_type") || "").split(",").map((t) => t.trim()).filter(Boolean),
             });
         return json(r.ok ? (r.bundle || r.resource) : r.outcome, r.status, request);
+      }
+      if (sub === "consent" && method === "POST") {
+        const r = await recordConsent(request, env, { ...deps, patientId: body.patientId, encounterId: body.encounterId, scope: body.scope, decision: body.decision, detail: body.detail, givenBy: body.givenBy, giverName: body.giverName, capacity: body.capacity, validFrom: body.validFrom, validUntil: body.validUntil, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "withdraw-consent" && method === "POST") {
+        const r = await withdrawConsent(request, env, { ...deps, patientId: body.patientId, scope: body.scope, detail: body.detail, reason: body.reason, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "consents" && method === "GET") {
+        const r = await consentStatus(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "", scope: url.searchParams.get("scope") || "" });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "order-sets" && method === "GET") {
         const r = await listOrderSets(request, env, { ...deps, sets: (wsqCfg && wsqCfg.orderSets) || [] });

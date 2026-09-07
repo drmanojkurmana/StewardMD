@@ -1199,6 +1199,94 @@ test("the bed board says who is where, and never confuses 'no free beds' with 'w
   assert.equal(withUnplaced.wards[0].unplaced.length, 1);
 });
 
+/* ---- consent -----------------------------------------------------------------------------------------
+ *
+ * Break-glass answered "who looked at this chart in an emergency". Consent answers the prior
+ * question: whether this patient permitted it at all, and for what.
+ */
+
+test("A REFUSAL IS RECORDED AS LOUDLY AS A GRANT, and survives being asked again", async () => {
+  seedHospital();
+  const { adm } = await admittedPatientOnDrug();
+
+  // Nothing recorded is NOT a refusal, and the answer says which it is.
+  const cold = await as(NURSE, `/ward/consents?orgId=${ORG}&patientId=${adm.patientId}&scope=share-registry`);
+  assert.equal(cold.__status, 200, JSON.stringify(cold));
+  assert.equal(cold.status, "not-recorded");
+  assert.equal(cold.permitted, false);
+
+  const no = await as(NURSE, "/ward/consent", "POST", {
+    orgId: ORG, patientId: adm.patientId, scope: "share-registry", decision: "refused",
+    givenBy: "patient", capacity: true,
+  });
+  assert.equal(no.__status, 200, JSON.stringify(no));
+  assert.equal(no.status, "refused");
+
+  const asked = await as(DOCTOR, `/ward/consents?orgId=${ORG}&patientId=${adm.patientId}&scope=share-registry`);
+  assert.equal(asked.status, "refused", "the next person to ask is told the patient already said no");
+  assert.equal(asked.permitted, false);
+  assert.equal(asked.consent.givenBy, "patient");
+  assert.equal(asked.consent.capacity, true);
+
+  // On the whole-patient view a refusal is counted and sorted to the top, never buried among grants.
+  await as(NURSE, "/ward/consent", "POST", { orgId: ORG, patientId: adm.patientId, scope: "treatment", decision: "granted" });
+  const all = await as(DOCTOR, `/ward/consents?orgId=${ORG}&patientId=${adm.patientId}`);
+  assert.equal(all.refused, 1);
+  assert.equal(all.consents[0].status, "refused");
+  assert.equal(all.consents[0].scopeLabel, "Sharing with a registry or exchange");
+});
+
+test("consent is withdrawable, and the original grant stays on the record", async () => {
+  seedHospital();
+  const { adm } = await admittedPatientOnDrug();
+  const yes = await as(NURSE, "/ward/consent", "POST", { orgId: ORG, patientId: adm.patientId, scope: "research", decision: "granted", capacity: true });
+  assert.equal(yes.status, "granted");
+
+  const gone = await as(NURSE, "/ward/withdraw-consent", "POST", { orgId: ORG, patientId: adm.patientId, scope: "research", reason: "Patient changed their mind." });
+  assert.equal(gone.__status, 200, JSON.stringify(gone));
+  assert.equal(gone.status, "withdrawn");
+  assert.equal(gone.previousDecision, "granted");
+  assert.equal((await as(DOCTOR, `/ward/consents?orgId=${ORG}&patientId=${adm.patientId}&scope=research`)).permitted, false);
+
+  /* "They consented and later withdrew" and "they never consented" are different histories, and only
+   * one of them is true. The grant survives as a version. */
+  const hist = await RECORD.history(TENANT_ROW.id, "PatientConsent", yes.consentId);
+  assert.deepEqual(hist.map((h) => h.decision), ["granted", "withdrawn"]);
+  assert.ok(hist[1].withdrawalReason);
+
+  // Withdrawing twice is a no-op; withdrawing something never granted says so rather than writing a
+  // withdrawal of nothing.
+  assert.equal((await as(NURSE, "/ward/withdraw-consent", "POST", { orgId: ORG, patientId: adm.patientId, scope: "research", reason: "again" })).skipped, "already_withdrawn");
+  assert.equal((await as(NURSE, "/ward/withdraw-consent", "POST", { orgId: ORG, patientId: adm.patientId, scope: "photography", reason: "x" })).error, "no_consent_recorded");
+});
+
+test("a vague consent is refused, and consent does not gate care", async () => {
+  seedHospital();
+  const { adm, ord, patient, scan } = await admittedPatientOnDrug();
+  // "Other" and "a specific procedure" mean nothing without saying which.
+  assert.equal((await as(NURSE, "/ward/consent", "POST", { orgId: ORG, patientId: adm.patientId, scope: "procedure", decision: "granted" })).error, "detail_required");
+  assert.equal((await as(NURSE, "/ward/consent", "POST", { orgId: ORG, patientId: adm.patientId, scope: "other", decision: "granted" })).error, "detail_required");
+  assert.equal((await as(NURSE, "/ward/consent", "POST", { orgId: ORG, patientId: adm.patientId, scope: "telepathy", decision: "granted" })).error, "unknown_scope");
+  // Withdrawal has its own path, so "withdrawn" is not a decision that can be recorded directly.
+  assert.equal((await as(NURSE, "/ward/consent", "POST", { orgId: ORG, patientId: adm.patientId, scope: "research", decision: "withdrawn" })).error, "unknown_decision");
+
+  /* IT DOES NOT ENFORCE, and that is deliberate. A generic gate refusing writes on a missing
+   * tick-box would be wrong in an emergency and wrong for an unconscious patient - exactly the
+   * moments it would fire. A refused treatment consent does not stop the ward giving a dose. */
+  await as(NURSE, "/ward/consent", "POST", { orgId: ORG, patientId: adm.patientId, scope: "treatment", decision: "refused" });
+  const step = (a, x) => as(NURSE, "/ward/mar", "POST", { orgId: ORG, action: a, orderId: ord.orderId, dueAt: DUE, patient, ...(x || {}) });
+  await step("verify"); await step("dispense"); await step("scan", { scan });
+  assert.equal((await step("administer")).__status, 200, "the record informs; it does not block");
+
+  // Two procedures are two consents, so the second cannot overwrite the first.
+  await as(NURSE, "/ward/consent", "POST", { orgId: ORG, patientId: adm.patientId, scope: "procedure", decision: "granted", detail: "Right total hip replacement" });
+  await as(NURSE, "/ward/consent", "POST", { orgId: ORG, patientId: adm.patientId, scope: "procedure", decision: "refused", detail: "Left total knee replacement" });
+  const list = await as(DOCTOR, `/ward/consents?orgId=${ORG}&patientId=${adm.patientId}`);
+  const procs = list.consents.filter((c) => c.scope === "procedure");
+  assert.equal(procs.length, 2);
+  assert.deepEqual(procs.map((p) => p.decision).sort(), ["granted", "refused"]);
+});
+
 /* ---- order sets -------------------------------------------------------------------------------------
  *
  * An order set applies a lot of clinical decisions very fast, which is what makes it useful and what

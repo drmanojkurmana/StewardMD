@@ -76,7 +76,7 @@ const ORDER_TYPES = Object.freeze(["MedicationOrder", "ServiceRequest"]);
  * this write is. DECIDING what happens to each medicine is prescribing-adjacent and is gated
  * separately at emr.treat on the route, so this grant lets a nurse record the history and not
  * decide its fate. */
-const VITALS_TYPES = Object.freeze(["Observation", "ShiftHandover", "BreakGlassGrant", "MedicationReconciliation"]);
+const VITALS_TYPES = Object.freeze(["Observation", "ShiftHandover", "BreakGlassGrant", "MedicationReconciliation", "PatientConsent"]);
 const PATIENT_TYPE = "Patient";
 // Added 2026-09-06 (the Encounter migration), alongside PATIENT_TYPE and for the identical reason:
 // checking a patient in for today's visit is the SAME administrative act QUEUE_ADD already covers
