@@ -82,6 +82,7 @@ import { qualityReport } from "../../_wardsynq/quality.js";
 import { collectSpecimen, specimenOutcome, collectionList } from "../../_wardsynq/specimen.js";
 import { adtForEncounter } from "../../_wardsynq/hl7v2.js";
 import { requestAdmission, closeAdmissionRequest, admissionWaitingList } from "../../_wardsynq/admission-request.js";
+import { registryReport } from "../../_wardsynq/registry.js";
 import { listTools as listRiskTools, recordAssessment as recordRiskAssessment, completeAction as completeRiskAction, listAssessments as listRiskAssessments } from "../../_wardsynq/risk-assessment.js";
 import { recordAllergiesFromAssessment } from "../../_wardsynq/migrate-allergy.js";
 
@@ -515,6 +516,11 @@ export async function onRequest(context) {
         // Measures about the system, naming no clinician. Readable by anyone who can read a chart,
         // for the same reason the override report is: the people the machinery acts on can see it.
         quality: CAPS.EMR_VIEW,
+        /* A registry NAMES PATIENTS beside their diagnoses - chart-level PHI, and exactly what a
+         * browsing incident looks like. So it needs the authority to read a chart, not the lower bar
+         * that opens a ward list. quality.js, which names nobody, sits at the same level because it
+         * cannot go lower; this one could not go lower even if it wanted to. */
+        registries: CAPS.EMR_VIEW,
         /* Taking a sample is nursing work, the same authority as recording a vital. The outcome
          * falls back to lab.result above, because the laboratory is the half that receives it. */
         collect: CAPS.EMR_VITALS, "specimen-outcome": CAPS.EMR_VITALS, collections: CAPS.EMR_VIEW,
@@ -706,6 +712,13 @@ export async function onRequest(context) {
       }
       if (sub === "collections" && method === "GET") {
         const r = await collectionList(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "" });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "registries" && method === "GET") {
+        const r = await registryReport(request, env, {
+          ...deps, registries: (wsqCfg && wsqCfg.registries) || null,
+          registryId: url.searchParams.get("registry") || "", overdueOnly: url.searchParams.get("overdue") === "1",
+        });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "quality" && method === "GET") {

@@ -2725,6 +2725,56 @@ test("sending is prescribing's business, and nothing unsendable is sent", async 
   assert.equal(bogus.error, "unknown_channel");
 });
 
+/* ---- the cohort, and who in it is overdue -------------------------------------------------------- */
+
+test("A REGISTRY NAMES PATIENTS, derives them from the problem list, and finds the ones never seen", async () => {
+  seedHospital();
+  const org = docs.get(`q_orgs/${ORG}`);
+  org.fields.wardsynq = {
+    ...org.fields.wardsynq,
+    /* The review test is named by the code THIS hospital's laboratory actually produces. HbA1c is
+     * not in the LOINC seed, so lab-result.js records it under a local code rather than guessing
+     * one - and a registry has to match the record as it is, not as a standard wishes it were. */
+    registries: [{ id: "diabetes", name: "Diabetes register", problemCodes: ["E11"], review: { everyMonths: 12, observationCode: "HbA1c", display: "HbA1c" } }],
+  };
+
+  const { adm } = await admittedPatientOnDrug();
+  const empty = await as(DOCTOR, `/ward/registries?orgId=${ORG}`);
+  assert.equal(empty.__status, 200, JSON.stringify(empty));
+  assert.equal(empty.registries[0].total, 0, "nobody has the diagnosis yet");
+
+  await as(DOCTOR, "/ward/problem", "POST", { orgId: ORG, problem: { patientId: adm.patientId, encounterId: adm.encounterId, code: "E11", display: "Type 2 diabetes" } });
+
+  const one = await as(DOCTOR, `/ward/registries?orgId=${ORG}`);
+  const reg = one.registries[0];
+  assert.equal(reg.total, 1);
+  /* NEVER REVIEWED IS THE MOST OVERDUE, not the least. Sorting somebody with no result as though
+   * they had just been seen is how a patient goes years without a review. */
+  assert.equal(reg.neverReviewed, 1);
+  assert.equal(reg.members[0].patientId, adm.patientId);
+  assert.equal(reg.members[0].review.state, "never");
+  assert.equal(reg.members[0].because, "Type 2 diabetes", "why they are on the list, without opening a chart");
+  /* It NAMES them, and that is the point - a registry that could not would be a number nobody can
+   * act on. It is the one report in WardSynQ that does. */
+  assert.match(one.note, /NAMES PATIENTS/);
+
+  // A qualifying result takes them off the overdue list. A different test would not.
+  const sr = await orderTest(adm, "HbA1c", "wsq-sr-hba");
+  const rel = await as(LABTECH, "/ward/release-result", "POST", { orgId: ORG, serviceRequestId: sr, tests: [{ test: "HbA1c", value: 58, unit: "mmol/mol" }] });
+  assert.equal(rel.observations[0].codeSystem, "wardsynq-lab-local", "no LOINC is invented for a test the seed does not know");
+  const after = await as(DOCTOR, `/ward/registries?orgId=${ORG}`);
+  assert.equal(after.registries[0].neverReviewed + after.registries[0].overdue, 0, "reviewed today");
+  assert.equal(after.registries[0].members[0].review.state, "current");
+
+  /* MEMBERSHIP IS DERIVED. Resolve the diagnosis and the patient leaves the cohort - no separate
+   * registry table to forget to update. */
+  await as(DOCTOR, "/ward/problem", "POST", { orgId: ORG, problem: { patientId: adm.patientId, encounterId: adm.encounterId, code: "E11", display: "Type 2 diabetes", clinicalStatus: "resolved" } });
+  assert.equal((await as(DOCTOR, `/ward/registries?orgId=${ORG}`)).registries[0].total, 0);
+
+  // And a pharmacist, who holds no emr.view, does not get a list of patients beside their diagnoses.
+  assert.equal((await as(PHARM, `/ward/registries?orgId=${ORG}`)).__status, 403);
+});
+
 /* ---- the patient promised a bed ----------------------------------------------------------------- */
 
 test("A WAITING LIST THAT RESERVES NOTHING AND ADMITS NOBODY", async () => {
