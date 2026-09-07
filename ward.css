@@ -161,6 +161,17 @@ body.dark #smdWard { --bg: #191c1e; --on-surface: #eff1f3; --on-surface-variant:
 #smdWard .w-unsent li b { flex: 0 0 auto; }
 #smdWard .w-unsent li .w-btn { margin-left: auto; }
 
+/* Measures. A big number and, always beside it, the two numbers it came from: a rate whose
+   denominator is not shown is a rate nobody can argue with, and these exist to be argued with. */
+#smdWard .w-q { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+#smdWard .w-q li { border: 1px solid var(--outline-variant); border-radius: 12px; padding: 11px 13px; background: var(--sc-low); }
+#smdWard .w-q li.unavailable { background: none; border-style: dashed; }
+#smdWard .w-q h4 { margin: 0 0 6px; font-size: 13.5px; font-weight: 600; }
+#smdWard .w-q-n { display: flex; align-items: baseline; gap: 10px; }
+#smdWard .w-q-n b { font: 700 26px var(--mono, ui-monospace, Menlo, monospace); font-variant-numeric: tabular-nums; }
+#smdWard .w-q-n span { font-size: 12.5px; color: var(--on-surface-variant); }
+#smdWard .w-q .w-hint { margin: 6px 0 0; }
+
 /* The downtime pack. On screen it is a preview; on paper it is the thing. Everything about the
    styling serves one property: it must be obvious that this is a COPY, and obvious where it does not
    know something. A gap is set in the error colour and in words, never left as a reassuring blank. */

@@ -33,7 +33,7 @@
   var st = {
     orgId: "", ward: "", patients: [], view: "list",
     sel: null,                 // the selected {encounterId, patientId, ward, bed, admittedAt}
-    problems: [], criticals: [], balance: null, outbox: [], cosign: null, downtime: null,
+    problems: [], criticals: [], balance: null, outbox: [], cosign: null, downtime: null, quality: null,
     due: [], prn: [], unscheduled: [], truncated: false,
     from: "", to: "",          // the window being viewed, NOT a claim about when a dose is due
     busy: false, err: "", note: "", refusal: null, loaded: false
@@ -141,7 +141,40 @@
       // to while the system is up is a pack the ward has to remember to take while the system is up.
       '<button class="w-btn ghost" data-w-act="downtime" title="Printable sheet for when the system is unavailable">' + ms("print") + "Downtime pack</button></div>" +
       (rows || (state.loaded ? '<p class="w-empty">No patients are currently admitted' + (state.ward ? " to " + esc(state.ward) : "") + ".</p>" : '<p class="w-empty">Loading the ward…</p>')) +
-      "</div>" + cosignCard(state);
+      "</div>" + cosignCard(state) + qualityCard(state);
+  }
+
+  /* Measures about the SYSTEM, over a period. Never about a person: nothing here is aggregated by
+   * clinician, because the moment a number can be attributed to an individual it stops measuring the
+   * process and starts managing the staff.
+   *
+   * The two rules this card exists to keep visible: a rate over too few cases is not shown as a
+   * percentage, and a measure the record cannot support is shown WITH its reason rather than left
+   * off - a missing row on a dashboard reads as "nothing to report". */
+  function qualityCard(state) {
+    var q = state.quality;
+    if (!q || !(q.measures || []).length) return "";
+    var pct = function (r) { return Math.round(r * 100) + "%"; };
+
+    var rows = q.measures.map(function (m) {
+      var body = !m.computable
+        ? '<p class="w-hint warn">' + ms("help") + esc(m.reason) + "</p>"
+        : m.rate === null
+          // No cases is not 0% and not 100%. Both of those are how a dashboard lies.
+          ? '<p class="w-hint">' + ms("info") + "No cases in this period." + "</p>"
+          : '<div class="w-q-n"><b>' + esc(pct(m.rate)) + "</b><span>" + esc(m.numerator) + " of " + esc(m.denominator) + "</span></div>" +
+            (m.underpowered ? '<p class="w-hint warn">' + ms("warning") + esc(m.note) + "</p>" : "") +
+            (m.neverAcknowledged ? '<p class="w-hint">' + ms("error") + esc(m.neverAcknowledged) + " were never acknowledged at all.</p>" : "") +
+            (m.excludedNoDueTime ? '<p class="w-hint">' + ms("info") + esc(m.excludedNoDueTime) + " dose(s) had no recorded due time and are in neither half.</p>" : "");
+      return '<li' + (m.computable ? "" : ' class="unavailable"') + "><h4>" + esc(m.title) + "</h4>" + body + "</li>";
+    }).join("");
+
+    return '<div class="w-card"><div class="w-card-h">' + ms("query_stats") + "<h3>Measures</h3>" +
+      '<button class="w-ic" data-w-act="quality" title="Refresh">' + ms("refresh") + "</button></div>" +
+      '<p class="w-hint">' + ms("info") + "Last " + esc(q.period && q.period.days) + " days. These measure the system, not any clinician. Nobody is named or counted.</p>" +
+      '<ul class="w-q">' + rows + "</ul>" +
+      (q.notComputable ? '<p class="w-hint">' + ms("help") + esc(q.notComputable) + " of these cannot be computed from the record as it stands. The reason is on each one.</p>" : "") +
+      "</div>";
   }
 
   /* Notes waiting on a signature. This is the routing: a note the system cannot verify is not a
@@ -443,7 +476,7 @@
   function loadWard() {
     st.busy = true; paint();
     return apiGet("/ward/list?orgId=" + encodeURIComponent(st.orgId) + (st.ward ? "&ward=" + encodeURIComponent(st.ward) : ""))
-      .then(function (r) { if (settle(r)) st.patients = r.patients || []; st.loaded = true; paint(); return loadCosigns(); })
+      .then(function (r) { if (settle(r)) st.patients = r.patients || []; st.loaded = true; paint(); return Promise.all([loadCosigns(), loadQuality()]); })
       .catch(function () { st.busy = false; st.err = "Could not reach the ward."; st.loaded = true; paint(); });
   }
   function loadChart() {
@@ -546,6 +579,13 @@
         paint();
       })
       .catch(function () { st.busy = false; st.err = "Could not load the round."; paint(); });
+  }
+  function loadQuality() {
+    return apiGet("/ward/quality?orgId=" + encodeURIComponent(st.orgId))
+      .then(function (r) { if (r && r.ok) st.quality = r; paint(); })
+      // Silent on failure, like the co-sign worklist: an error banner over the bed board because a
+      // secondary panel would not load helps nobody find a patient.
+      .catch(function () {});
   }
   function loadDowntime() {
     st.busy = true; st.view = "downtime"; paint();
@@ -680,6 +720,7 @@
     if (cmd === "mar") { var k = arg.indexOf("|"); if (k > 0) marAction(arg.slice(0, k), Number(arg.slice(k + 1))); return; }
     if (cmd === "outbox") { loadOutbox(); return; }
     if (cmd === "cosigns") { loadCosigns(); return; }
+    if (cmd === "quality") { loadQuality(); return; }
     if (cmd === "downtime") { loadDowntime(); return; }
     if (cmd === "printpack") { try { G.print(); } catch (e) {} return; }
     if (cmd === "cosign") { cosign(arg); return; }

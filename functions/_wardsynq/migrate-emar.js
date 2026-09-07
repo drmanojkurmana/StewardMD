@@ -215,6 +215,11 @@ async function administerStep(request, env, ctx) {
     record = emar.open(order);
     record.id = marId;                       // deterministic, so a retry is the same dose
     record.encounterId = order.encounterId || null;
+    /* WHEN THE DOSE WAS DUE. It was in the id and nowhere else, so the record could say a dose was
+     * given and could not say whether it was given late - and "was this dose on time" is a question
+     * a ward has to be able to answer about its own eMAR. Recovering it by parsing the id back would
+     * be guessing at a slug; this is the value the caller actually passed. */
+    record.dueAt = dueAt;
   }
 
   const before = record.status;

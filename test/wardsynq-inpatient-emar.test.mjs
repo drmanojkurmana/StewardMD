@@ -2725,6 +2725,61 @@ test("sending is prescribing's business, and nothing unsendable is sent", async 
   assert.equal(bogus.error, "unknown_channel");
 });
 
+/* ---- measures about the system --------------------------------------------------------------- */
+
+test("A DOSE RECORD NOW SAYS WHEN IT WAS DUE, so the ward can ask whether it was late", async () => {
+  seedHospital();
+  const { ord, patient, scan } = await admittedPatientOnDrug();
+  const step = (a, x) => as(NURSE, "/ward/mar", "POST", { orgId: ORG, action: a, orderId: ord.orderId, dueAt: DUE, patient, ...(x || {}) });
+  await step("verify"); await step("dispense"); await step("scan", { scan });
+  const given = await step("administer");
+  assert.equal(given.to, "administered");
+
+  /* The due time was in the administration's ID and nowhere else, so the record could say a dose was
+   * given and could not say whether it was given late. Recovering it by parsing the id back would be
+   * guessing at a slug. */
+  const rec = await RECORD.latest(TENANT_ROW.id, "MedicationAdministration", given.administrationId);
+  assert.equal(rec.dueAt, DUE);
+  assert.ok(rec.administeredAt);
+  // Never derived from administeredAt, which would make every dose on time by definition.
+  assert.notEqual(rec.dueAt, rec.administeredAt);
+});
+
+test("THE QUALITY REPORT MEASURES THE SYSTEM, names nobody, and admits what it cannot compute", async () => {
+  seedHospital();
+  const { adm } = await admittedPatientOnDrug();
+
+  const rep = await as(NURSE, `/ward/quality?orgId=${ORG}&days=30`);
+  assert.equal(rep.__status, 200, JSON.stringify(rep));
+  assert.equal(rep.measures.length, 4);
+  assert.equal(rep.period.days, 30);
+
+  /* NO CLINICIAN IS NAMED OR COUNTED. The moment a number can be attributed to an individual it
+   * stops measuring the process and starts managing the staff. */
+  const body = JSON.stringify(rep);
+  assert.ok(!body.includes(idFor(NURSE)) && !body.includes(idFor(DOCTOR)));
+  assert.match(rep.note, /No clinician is named or counted/);
+
+  // Two measures this hospital's record cannot support, each shown WITH its reason rather than left
+  // off - a missing row on a dashboard reads as "nothing to report".
+  assert.equal(rep.notComputable, 2);
+  const allergy = rep.measures.find((m) => m.id === "allergy-status-documented");
+  assert.equal(allergy.computable, false);
+  assert.match(allergy.reason, /asked, and there are none/);
+  // No escalation window is configured on this org, so that measure is refused rather than scored
+  // against a threshold nobody agreed to.
+  assert.equal(rep.measures.find((m) => m.id === "critical-ack-within-window").computable, false);
+
+  // A stay that is still open is not a missing discharge summary.
+  const dcs = rep.measures.find((m) => m.id === "discharge-summary-signed");
+  assert.equal(dcs.denominator, 0);
+  assert.equal(dcs.rate, null, "no cases is null, not 0% and not 100%");
+  assert.ok(adm.encounterId);
+
+  // A pharmacist holds no emr.view.
+  assert.equal((await as(PHARM, `/ward/quality?orgId=${ORG}`)).__status, 403);
+});
+
 /* ---- what the ward holds when the system is not there ------------------------------------------ */
 
 test("THE DOWNTIME PACK IS ASSEMBLED FROM THE REAL RECORD, and it writes nothing", async () => {
