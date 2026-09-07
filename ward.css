@@ -161,6 +161,13 @@ body.dark #smdWard { --bg: #191c1e; --on-surface: #eff1f3; --on-surface-variant:
 #smdWard .w-unsent li b { flex: 0 0 auto; }
 #smdWard .w-unsent li .w-btn { margin-left: auto; }
 
+/* Problem entry. The code box sits beside the words and is never filled in from them. */
+#smdWard .w-prob { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
+#smdWard .w-prob input, #smdWard .w-prob select { flex: 1 1 140px; min-width: 0; border: 1px solid var(--outline-variant); border-radius: 12px;
+  background: var(--sc-low); color: var(--on-surface); font: 400 14px var(--w-sans); padding: 11px 12px; min-height: 44px; }
+#smdWard .w-prob input#wProbText { flex: 2 1 200px; }
+#smdWard .w-problems li .w-btn.tiny { margin-left: auto; }
+
 /* Measures. A big number and, always beside it, the two numbers it came from: a rate whose
    denominator is not shown is a rate nobody can argue with, and these exist to be argued with. */
 #smdWard .w-q { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
