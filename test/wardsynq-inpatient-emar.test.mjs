@@ -1199,6 +1199,121 @@ test("the bed board says who is where, and never confuses 'no free beds' with 'w
   assert.equal(withUnplaced.wards[0].unplaced.length, 1);
 });
 
+/* ---- scheduling --------------------------------------------------------------------------------------
+ *
+ * Every discharge summary this system writes can say "review in clinic in one week", and until now
+ * that sentence went nowhere.
+ */
+
+test("TWO PATIENTS CANNOT HOLD ONE SLOT, and overbooking says it is overbooking", async () => {
+  seedHospital();
+  const { adm } = await admittedPatientOnDrug();
+  const other = await secondPatient("Medical A", "40");
+  const slot = { clinicianId: "cfa:dr-clinic", startAt: "2026-09-14T09:00:00.000Z", minutes: 15 };
+
+  const first = await as(DOCTOR, "/ward/book", "POST", { orgId: ORG, patientId: adm.patientId, ...slot, reason: "Post-discharge review" });
+  assert.equal(first.__status, 200, JSON.stringify(first));
+  assert.equal(first.state, "booked");
+  assert.equal(first.overbooked, false);
+
+  // A clash is refused with the appointment in the way NAMED, so the desk can offer another time
+  // rather than being told "no".
+  const clash = await as(DOCTOR, "/ward/book", "POST", { orgId: ORG, patientId: other.patientId, ...slot });
+  assert.equal(clash.__status, 409);
+  assert.equal(clash.error, "slot_taken");
+  assert.equal(clash.clashesWith.patientId, adm.patientId);
+
+  // Overlapping, not just identical, times clash.
+  assert.equal((await as(DOCTOR, "/ward/book", "POST", { orgId: ORG, patientId: other.patientId, clinicianId: slot.clinicianId, startAt: "2026-09-14T09:10:00.000Z", minutes: 15 })).error, "slot_taken");
+  // Back to back is fine.
+  assert.equal((await as(DOCTOR, "/ward/book", "POST", { orgId: ORG, patientId: other.patientId, clinicianId: slot.clinicianId, startAt: "2026-09-14T09:15:00.000Z", minutes: 15 })).__status, 200);
+
+  /* Overbooking is ALLOWED - real clinics overbook, and a system that refuses gets worked around -
+   * but it must say why, or it is indistinguishable from the double-book this refuses. */
+  assert.equal((await as(DOCTOR, "/ward/book", "POST", { orgId: ORG, patientId: other.patientId, ...slot, overbook: true })).error, "overbook_reason_required");
+  const over = await as(DOCTOR, "/ward/book", "POST", { orgId: ORG, patientId: other.patientId, ...slot, overbook: true, overbookReason: "Urgent review, consultant agreed." });
+  assert.equal(over.__status, 200, JSON.stringify(over));
+  assert.equal(over.overbooked, true);
+  assert.match(over.overbookReason, /consultant agreed/);
+
+  // An appointment with no length cannot be checked for collision, so it is refused outright.
+  assert.equal((await as(DOCTOR, "/ward/book", "POST", { orgId: ORG, patientId: adm.patientId, clinicianId: "cfa:x", startAt: "2026-09-15T09:00:00.000Z" })).error, "minutes_required");
+});
+
+test("A PROMISED FOLLOW-UP STAYS OUTSTANDING UNTIL SOMEBODY BOOKS IT", async () => {
+  seedHospital();
+  const { adm } = await admittedPatientOnDrug();
+  const req = await as(DOCTOR, "/ward/follow-up", "POST", {
+    orgId: ORG, patientId: adm.patientId, encounterId: adm.encounterId,
+    reason: "Review chest film and repeat CRP", dueBy: "2026-09-14T00:00:00.000Z",
+  });
+  assert.equal(req.__status, 200, JSON.stringify(req));
+  assert.equal(req.state, "open");
+  assert.match(req.note, /Nothing is booked until somebody books it/);
+
+  /* NOTHING WAS BOOKED. Auto-booking would put an appointment in a diary nobody agreed to, at a time
+   * nobody offered the patient - and would make the promise look kept when nobody had spoken to
+   * them. */
+  const before = await as(NURSE, `/ward/diary?orgId=${ORG}&patientId=${adm.patientId}`);
+  assert.deepEqual(before.appointments, []);
+  assert.equal(before.unbookedRecalls, 1);
+  assert.equal(before.recalls[0].reason, "Review chest film and repeat CRP");
+
+  // Booking against the recall closes it, which is the point of the link.
+  const booked = await as(DOCTOR, "/ward/book", "POST", {
+    orgId: ORG, patientId: adm.patientId, clinicianId: "cfa:dr-clinic",
+    startAt: "2026-09-12T10:00:00.000Z", minutes: 20, requestId: req.requestId,
+  });
+  assert.equal(booked.__status, 200, JSON.stringify(booked));
+  assert.equal(booked.recall.state, "booked");
+  const after = await as(NURSE, `/ward/diary?orgId=${ORG}&patientId=${adm.patientId}`);
+  assert.equal(after.unbookedRecalls, 0);
+  assert.equal(after.appointments.length, 1);
+  assert.equal(after.appointments[0].requestId, req.requestId);
+});
+
+test("cancelling frees the slot and keeps the history; a closed appointment is not reopened", async () => {
+  seedHospital();
+  const { adm } = await admittedPatientOnDrug();
+  const other = await secondPatient("Medical A", "41");
+  const slot = { clinicianId: "cfa:dr-clinic", startAt: "2026-09-14T11:00:00.000Z", minutes: 15 };
+  const a = await as(DOCTOR, "/ward/book", "POST", { orgId: ORG, patientId: adm.patientId, ...slot });
+
+  // Cancelling and marking a DNA both need a reason: they are the two a patient may later ask about.
+  assert.equal((await as(DOCTOR, "/ward/appointment", "POST", { orgId: ORG, appointmentId: a.appointmentId, state: "cancelled" })).error, "reason_required");
+  const gone = await as(DOCTOR, "/ward/appointment", "POST", { orgId: ORG, appointmentId: a.appointmentId, state: "cancelled", reason: "Patient rang to cancel." });
+  assert.equal(gone.__status, 200, JSON.stringify(gone));
+  assert.equal(gone.slotFreed, true);
+
+  // The slot is genuinely free for somebody else.
+  assert.equal((await as(DOCTOR, "/ward/book", "POST", { orgId: ORG, patientId: other.patientId, ...slot })).__status, 200);
+
+  /* "They cancelled" and "they never had one" are different facts, and the second is what a
+   * complaint turns on. Both versions stay on the record. */
+  const hist = await RECORD.history(TENANT_ROW.id, "Appointment", a.appointmentId);
+  assert.deepEqual(hist.map((h) => h.state), ["booked", "cancelled"]);
+  assert.match(hist[1].changeReason, /rang to cancel/);
+
+  // A closed appointment is not reopened: a completed visit going back to "booked" would put a slot
+  // in a diary for a consultation that already happened.
+  assert.equal((await as(DOCTOR, "/ward/appointment", "POST", { orgId: ORG, appointmentId: a.appointmentId, state: "arrived" })).error, "already_closed");
+});
+
+test("the diary is the front desk's; promising a follow-up is clinical", async () => {
+  seedHospital();
+  const { adm } = await admittedPatientOnDrug();
+  const slot = { orgId: ORG, patientId: adm.patientId, clinicianId: "cfa:dr-clinic", startAt: "2026-09-16T09:00:00.000Z", minutes: 15 };
+  // Booking is the same administrative act as registering a walk-in, so the nurse at the desk can.
+  assert.equal((await as(NURSE, "/ward/book", "POST", slot)).__status, 200);
+  // Deciding the patient needs to be seen again is clinical.
+  assert.equal((await as(NURSE, "/ward/follow-up", "POST", { orgId: ORG, patientId: adm.patientId, reason: "Review" })).__status, 403);
+  assert.equal((await as(DOCTOR, "/ward/follow-up", "POST", { orgId: ORG, patientId: adm.patientId, reason: "Review" })).__status, 200);
+  // A follow-up with no reason is not a follow-up.
+  assert.equal((await as(DOCTOR, "/ward/follow-up", "POST", { orgId: ORG, patientId: adm.patientId })).error, "reason_required");
+  // The laboratory has no business in the diary.
+  assert.equal((await as(LABTECH, `/ward/diary?orgId=${ORG}`)).__status, 403);
+});
+
 /* ---- consent -----------------------------------------------------------------------------------------
  *
  * Break-glass answered "who looked at this chart in an emergency". Consent answers the prior

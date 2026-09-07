@@ -105,7 +105,12 @@ function grantForCaps(caps) {
     // Union, never narrow: this only ever ADDS these two types to whatever write scope the EMR
     // capabilities already produced, and only ever RAISES the tier. Every role holding QUEUE_STATUS
     // (closing a visit) already holds QUEUE_ADD too, so no separate grant is needed for close.
-    const added = [PATIENT_TYPE, ENCOUNTER_TYPE];
+    /* Appointment and PatientLink joined them on 2026-09-07. Booking a patient in, and resolving two
+     * records that turned out to be one person, are the SAME administrative act as registering them
+     * in the first place - the front desk's work, not a clinical decision. An AppointmentRequest is
+     * NOT here: promising that a patient needs to be seen again is clinical, and it is granted by
+     * EMR_TREAT, which carries unrestricted write. */
+    const added = [PATIENT_TYPE, ENCOUNTER_TYPE, "Appointment", "PatientLink"];
     if (!grant) grant = { tier: TIER.EXECUTE, read: null, write: added, basis: CAPS.QUEUE_ADD };
     else grant = {
       tier: TIER.EXECUTE, read: grant.read,

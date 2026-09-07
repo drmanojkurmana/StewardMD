@@ -68,6 +68,7 @@ import { mergePatients, unmergePatients, identityOf } from "../../_wardsynq/iden
 import { overrideReport } from "../../_wardsynq/override-analytics.js";
 import { listOrderSets, prepareOrderSet, recordApplication } from "../../_wardsynq/order-sets.js";
 import { recordConsent, withdrawConsent, consentStatus } from "../../_wardsynq/consent.js";
+import { bookAppointment, setAppointmentState, requestFollowUp, listSchedule } from "../../_wardsynq/scheduling.js";
 import { recordAllergiesFromAssessment } from "../../_wardsynq/migrate-allergy.js";
 
 // The Encounter migration's one shared call site. Every hook below (ticket add, import, a terminal
@@ -478,6 +479,11 @@ export async function onRequest(context) {
          * agreed to - so emr.vitals, the same authority as the rest of what she records. Reading is
          * emr.view: a refusal nobody can see is a refusal that gets asked again. */
         consent: CAPS.EMR_VITALS, "withdraw-consent": CAPS.EMR_VITALS, consents: CAPS.EMR_VIEW,
+        /* The diary is the front desk's: booking, cancelling and marking arrival are the same
+         * administrative act as registering a walk-in. PROMISING a follow-up is clinical - it is a
+         * decision that the patient needs to be seen again - so that one is emr.treat. */
+        book: CAPS.QUEUE_ADD, appointment: CAPS.QUEUE_ADD, schedule_: CAPS.QUEUE_VIEW,
+        "follow-up": CAPS.EMR_TREAT, diary: CAPS.QUEUE_VIEW,
         // Closing a stay is the administrative act QUEUE_ADD already covers for opening one.
         // The summary is a clinical document: drafting and signing it are EMR_TREAT.
         discharge: CAPS.QUEUE_ADD, "discharge-summary": CAPS.EMR_TREAT, "sign-discharge-summary": CAPS.EMR_TREAT,
@@ -560,6 +566,22 @@ export async function onRequest(context) {
               types: (url.searchParams.get("_type") || "").split(",").map((t) => t.trim()).filter(Boolean),
             });
         return json(r.ok ? (r.bundle || r.resource) : r.outcome, r.status, request);
+      }
+      if (sub === "book" && method === "POST") {
+        const r = await bookAppointment(request, env, { ...deps, patientId: body.patientId, clinicianId: body.clinicianId, startAt: body.startAt, minutes: body.minutes, reason: body.reason, requestId: body.requestId, overbook: !!body.overbook, overbookReason: body.overbookReason, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "appointment" && method === "POST") {
+        const r = await setAppointmentState(request, env, { ...deps, appointmentId: body.appointmentId, state: body.state, reason: body.reason, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "follow-up" && method === "POST") {
+        const r = await requestFollowUp(request, env, { ...deps, patientId: body.patientId, encounterId: body.encounterId, clinicianId: body.clinicianId, reason: body.reason, dueBy: body.dueBy, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "diary" && method === "GET") {
+        const r = await listSchedule(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "", clinicianId: url.searchParams.get("clinicianId") || "", from: url.searchParams.get("from") || "", to: url.searchParams.get("to") || "" });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "consent" && method === "POST") {
         const r = await recordConsent(request, env, { ...deps, patientId: body.patientId, encounterId: body.encounterId, scope: body.scope, decision: body.decision, detail: body.detail, givenBy: body.givenBy, giverName: body.giverName, capacity: body.capacity, validFrom: body.validFrom, validUntil: body.validUntil, idempotencyKey: body.idempotencyKey || null });

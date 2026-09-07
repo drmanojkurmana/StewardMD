@@ -13,7 +13,7 @@ Updated: 2026-09-07 (PRs #887, #889, #890, #892, #894, #895, #897 pharmacy verif
 | # | Domain (Epic module) | Weight | % | Status |
 |---|---|---|---|---|
 | 1 | Patient identity / MPI (Identity) | 5 | 90 | Deterministic MRN→id, dedup, no cross-tenant, and a reversible merge that moves nothing. No probabilistic matching, and none wanted without a human deciding. |
-| 2 | Registration / scheduling (Cadence, Prelude) | 5 | 55 | OPD register + queue live on device. No appointments, no recall, no bed-linked scheduling. |
+| 2 | Registration / scheduling (Cadence, Prelude) | 5 | 80 | #904. OPD register + queue live on device, appointments with no double-booking, and follow-up recalls that stay outstanding until booked. No resource/room scheduling, no patient self-booking. |
 | 3 | Outpatient encounter (Ambulatory) | 6 | 75 | Encounter lifecycle, vitals, assessment, sign — proven on real device. No templates, no flowsheet designer. |
 | 4 | Orders — investigations (Beaker/Radiant order entry) | 5 | 85 | ServiceRequest write path + UI, and order sets that apply through the ordinary ordering route. No priority or specimen-collection workflow. |
 | 5 | Prescribing (Willow Ambulatory) | 6 | 70 | MedicationOrder, dose parsing, print. No e-prescribing transmission, no formulary. |
@@ -33,7 +33,7 @@ Updated: 2026-09-07 (PRs #887, #889, #890, #892, #894, #895, #897 pharmacy verif
 | 19 | Patient portal (MyChart) | 3 | 0 | Not built. |
 | 20 | Deployment / uptime / DR (on-prem, HA) | 3 | 25 | Cloudflare edge + D1, live domain. No on-prem, no DR drill, no downtime procedures. |
 
-**Weighted total: 70.0%.**
+**Weighted total: 71.2%.**
 
 The total is the weight-times-percent sum of the table above, divided by 100. It is COMPUTED from
 these rows, not asserted: earlier revisions of this file carried an eyeballed number that had drifted
@@ -58,8 +58,8 @@ about two points high (the 44% baseline was 41.5, and 53% was 50.8). If a row ch
    Observation write technically permits a vital sign as well as a result. The resulting route
    stamps `laboratory` and a lab actor has no clinical screen, but that is a narrower control than
    the scope itself. Closing it properly is a change to the store's authorisation model.
-3. **E-prescribing transmission, appointment scheduling, care plans, note templates** - each a
-   self-contained gap in an otherwise wired domain.
+3. **E-prescribing transmission, care plans, note templates** - each a self-contained gap in an
+   otherwise wired domain.
 4. **Firing counts for the CDSS.** Overrides are now recorded per rule, but nothing counts how
    often a rule FIRES - so the override RATE, which is the number that actually identifies a rule
    training people to click through, still has no denominator. The report says `null` rather than
