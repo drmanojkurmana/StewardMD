@@ -90,6 +90,7 @@ import { flowsheet } from "../../_wardsynq/flowsheet-view.js";
 import { orderInvestigation } from "../../_wardsynq/ward-order.js";
 import { chartInfusion, listInfusions } from "../../_wardsynq/infusion.js";
 import { reportImaging } from "../../_wardsynq/radiology-report.js";
+import { protocolContext, recordProtocol } from "../../_wardsynq/radiology-protocol.js";
 import { cdaForEncounter } from "../../_wardsynq/cda.js";
 import { news2ForPatient } from "../../_wardsynq/news2-view.js";
 import { recordRead, readersToNotify } from "../../_wardsynq/read-log.js";
@@ -101,6 +102,7 @@ import { recordMovement, stockLevels } from "../../_wardsynq/stock.js";
 import { possibleDuplicates } from "../../_wardsynq/mpi-view.js";
 import { enrolPatient, redeemCode, portalRead, revokeAccess } from "../../_wardsynq/patient-access.js";
 import { messageWorklist, replyToMessage } from "../../_wardsynq/portal-requests.js";
+import { extract as analyticsExtract } from "../../_wardsynq/analytics-extract.js";
 import { listTools as listRiskTools, recordAssessment as recordRiskAssessment, completeAction as completeRiskAction, listAssessments as listRiskAssessments } from "../../_wardsynq/risk-assessment.js";
 import { recordAllergiesFromAssessment } from "../../_wardsynq/migrate-allergy.js";
 
@@ -548,6 +550,9 @@ export async function onRequest(context) {
          * authority the laboratory reports under. A reporter is a reporter, and it writes only its
          * own report. */
         "report-imaging": CAPS.LAB_RESULT,
+        /* Protocolling is the radiology department's own act, the same authority that reports the
+         * study. It decides whether contrast is given, so it is emphatically not the ward's. */
+        "protocol-context": CAPS.LAB_RESULT, "protocol-set": CAPS.LAB_RESULT,
         // Charting a pump is the bedside's act, exactly like giving a dose.
         infusion: CAPS.MED_ADMINISTER, infusions: CAPS.EMR_VIEW,
         // Charting a wound is nursing work, the same authority as a vital or a fluid entry.
@@ -597,6 +602,10 @@ export async function onRequest(context) {
          * ward-level safety fact, not one doctor's inbox. ANSWERING is EMR_TREAT: replying to a
          * patient's clinical question is a clinical act, and nothing non-human can reach it. */
         "patient-messages": CAPS.EMR_VIEW, "patient-reply": CAPS.EMR_TREAT,
+        /* The analytics extract is meant to LEAVE the building, which is a different act from
+         * reading a ward's own measures. analytics.view, not emr.view: the person who takes numbers
+         * out is not automatically every clinician who can open a chart. It names no patient. */
+        "analytics-extract": CAPS.ANALYTICS_VIEW,
         /* THE BACKUP EXPORT HANDS OVER AN ENTIRE HOSPITAL. It deliberately bypasses the per-actor
          * read scoping every other route obeys, because a backup filtered by somebody's permissions
          * restores into a chart with holes in it. So no clinical capability reaches it at any dose:
@@ -889,6 +898,18 @@ export async function onRequest(context) {
       }
       if (sub === "backup-status" && method === "GET") {
         const r = await backupStatus(request, env, { ...deps, rpoMinutes: (wsqCfg && wsqCfg.rpoMinutes) || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "protocol-context" && method === "GET") {
+        const r = await protocolContext(request, env, { ...deps, serviceRequestId: url.searchParams.get("serviceRequestId") || "" });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "protocol-set" && method === "POST") {
+        const r = await recordProtocol(request, env, { ...deps, serviceRequestId: body.serviceRequestId, protocol: body.protocol, contrast: body.contrast === true, contrastReason: body.contrastReason, notes: body.notes, at: body.at, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "analytics-extract" && method === "GET") {
+        const r = await analyticsExtract(request, env, { ...deps, from: url.searchParams.get("from") || "", to: url.searchParams.get("to") || "", minCell: url.searchParams.get("minCell") });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "patient-messages" && method === "GET") {

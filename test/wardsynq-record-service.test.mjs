@@ -546,8 +546,8 @@ test("role mapping: every operational role resolves to exactly the grant its cap
    * "laboratory" (pinned in the inpatient suite), and closing it properly needs a category-scoped
    * grant, which is a change to the store's authorisation model rather than to this table. */
   assert.equal(tier("lab"), TIER.EXECUTE);
-  assert.deepEqual(write("lab"), ["Observation", "DiagnosticReport", "SpecimenCollection"]);
-  assert.deepEqual(read("lab"), ["ServiceRequest", "Observation", "DiagnosticReport", "SpecimenCollection"]);
+  assert.deepEqual(write("lab"), ["Observation", "DiagnosticReport", "SpecimenCollection", "ImagingProtocol"]);
+  assert.deepEqual(read("lab"), ["ServiceRequest", "Observation", "DiagnosticReport", "SpecimenCollection", "AllergyIntolerance", "ImagingProtocol"]);
   assert.ok(!write("lab").includes("MedicationOrder") && !write("lab").includes("Condition"), "a laboratory does not prescribe or diagnose");
   assert.ok(!read("lab").includes("Patient") && !read("lab").includes("ClinicalNote"), "and never reads the chart");
   for (const r of ["hr", "viewer", "oncqis_protocol_author", "oncqis_clinical_reviewer", "oncqis_institutional_approver", "academic_cell"]) assert.equal(m[r], null, r + " has no clinical actor");
