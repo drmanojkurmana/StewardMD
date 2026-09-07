@@ -58,6 +58,10 @@ const RESOURCE_TYPES = Object.freeze([
    * pharmacy write on that would let the role post a fabricated "administered" row through the raw
    * record API without going near a bedside. Its own type, granted only by ORDER_VERIFY. */
   "MedicationVerification",
+  /* A break-glass declaration. The record OF an emergency access, not a clinical fact - and it is
+   * stored here precisely so it is append-only: a break-glass grant somebody could delete afterwards
+   * would defeat the entire mechanism, whose only value is being legible later. */
+  "BreakGlassGrant",
 ]);
 
 const MODE = Object.freeze({ SYSTEM_OF_RECORD: "system-of-record", INTEGRATION: "integration" });

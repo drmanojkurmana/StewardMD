@@ -59,6 +59,7 @@ import { openCriticalLoops, acknowledgeCritical, listCriticalLoops } from "../..
 import { recordFluid, fluidBalance } from "../../_wardsynq/fluid-balance.js";
 import { giveHandover, receiveHandover, listHandovers } from "../../_wardsynq/handover.js";
 import { verifyOrder, verificationQueue } from "../../_wardsynq/pharmacy-verify.js";
+import { declareBreakGlass, openEmergencyChart, listBreakGlass } from "../../_wardsynq/break-glass.js";
 import { recordAllergiesFromAssessment } from "../../_wardsynq/migrate-allergy.js";
 
 // The Encounter migration's one shared call site. Every hook below (ticket add, import, a terminal
@@ -433,6 +434,12 @@ export async function onRequest(context) {
          * is readable by the same capability, because a pharmacist with no way to SEE the orders
          * cannot verify them - which is what made this impossible to do honestly before. */
         "verify-order": CAPS.ORDER_VERIFY, "verification-queue": CAPS.ORDER_VERIFY,
+        /* Break-glass. ONLY A CLINICIAN may declare one: emr.vitals is the lowest capability that
+         * means "this person has clinical business with patients", which a cashier or an HR user
+         * does not hold. It widens what a clinician may SEE in an emergency; it never turns a
+         * non-clinician into one. The list is deliberately readable by any clinical role - the whole
+         * value of break-glass is that the ward can see it happened, not only an administrator. */
+        "break-glass": CAPS.EMR_VITALS, "emergency-chart": CAPS.EMR_VITALS, "break-glass-log": CAPS.EMR_VITALS,
         // Closing a stay is the administrative act QUEUE_ADD already covers for opening one.
         // The summary is a clinical document: drafting and signing it are EMR_TREAT.
         discharge: CAPS.QUEUE_ADD, "discharge-summary": CAPS.EMR_TREAT, "sign-discharge-summary": CAPS.EMR_TREAT,
@@ -489,6 +496,18 @@ export async function onRequest(context) {
       }
       if (sub === "round" && method === "GET") {
         const r = await medicationRound(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "", dueAt: url.searchParams.get("dueAt") || "" });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "break-glass" && method === "POST") {
+        const r = await declareBreakGlass(request, env, { ...deps, patientId: body.patientId, reason: body.reason, minutes: body.minutes, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "emergency-chart" && method === "GET") {
+        const r = await openEmergencyChart(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "" });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "break-glass-log" && method === "GET") {
+        const r = await listBreakGlass(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "", activeOnly: url.searchParams.get("active") === "1" });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "verify-order" && method === "POST") {

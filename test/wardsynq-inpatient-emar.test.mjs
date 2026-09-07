@@ -1188,6 +1188,100 @@ test("the bed board says who is where, and never confuses 'no free beds' with 'w
   assert.equal(withUnplaced.wards[0].unplaced.length, 1);
 });
 
+/* ---- break-glass ---------------------------------------------------------------------------------
+ *
+ * An EMR that cannot be opened in an emergency gets worked around: a shared login, a borrowed badge,
+ * a password on a whiteboard. Every one of those is worse than a front door with an alarm on it,
+ * because none of them leave a name.
+ */
+
+test("BREAK-GLASS IS READ ONLY, one patient, and never implicit", async () => {
+  seedHospital();
+  const { adm } = await admittedPatientOnDrug();
+  const other = await secondPatient("Medical A", "20");
+
+  // A break-glass read is NEVER implicit: the emergency has to be declared first, by name.
+  const cold = await as(NURSE, `/ward/emergency-chart?orgId=${ORG}&patientId=${adm.patientId}`);
+  assert.equal(cold.__status, 403);
+  assert.equal(cold.error, "no_active_grant");
+
+  // And a reason is mandatory. It is the whole accountability of the mechanism.
+  const noReason = await as(NURSE, "/ward/break-glass", "POST", { orgId: ORG, patientId: adm.patientId, reason: "urgent" });
+  assert.equal(noReason.__status, 422);
+  assert.equal(noReason.error, "reason_required");
+
+  const g = await as(NURSE, "/ward/break-glass", "POST", {
+    orgId: ORG, patientId: adm.patientId, reason: "Found unresponsive on the ward, treating team unreachable.",
+  });
+  assert.equal(g.__status, 200, JSON.stringify(g));
+  assert.equal(g.active, true);
+  assert.equal(g.reads, 0);
+  assert.ok(g.expiresAt > g.grantedAt, "it is time-boxed");
+
+  const chart = await as(NURSE, `/ward/emergency-chart?orgId=${ORG}&patientId=${adm.patientId}`);
+  assert.equal(chart.__status, 200, JSON.stringify(chart));
+  assert.equal(chart.readOnly, true);
+  assert.ok(chart.chart.MedicationOrder.length >= 1, "the clinician can see what the patient is on");
+  assert.ok(Array.isArray(chart.chart.AllergyIntolerance));
+  // The reader is always told what they are holding and under what.
+  assert.match(chart.underGrant.reason, /Found unresponsive/);
+  assert.equal(chart.underGrant.grantId, g.grantId);
+
+  // ONE PATIENT. The grant does not become a general widening.
+  const spill = await as(NURSE, `/ward/emergency-chart?orgId=${ORG}&patientId=${other.patientId}`);
+  assert.equal(spill.__status, 403);
+  assert.equal(spill.error, "no_active_grant");
+
+  // READ ONLY. Breaking glass grants no write of any kind - a nurse still cannot prescribe or
+  // diagnose, and the emergency does not become an authority she did not have.
+  assert.equal((await as(NURSE, "/ward/problem", "POST", { orgId: ORG, problem: { patientId: adm.patientId, display: "Sepsis" } })).__status, 403);
+  assert.equal((await as(NURSE, "/ward/medication-order", "POST", { orgId: ORG, order: { patientId: adm.patientId, encounterId: adm.encounterId, drug: "X", dose: { value: 1, unit: "mg" } } })).__status, 403);
+  assert.equal((await as(NURSE, `/ward/discharge-summary?orgId=${ORG}&encounterId=${adm.encounterId}`)).__status, 200, "her ordinary access is unchanged either way");
+});
+
+test("THE ACCOUNTABILITY SURFACE: every declaration is on the record, with its reason and its use", async () => {
+  seedHospital();
+  const { adm } = await admittedPatientOnDrug();
+  const g = await as(NURSE, "/ward/break-glass", "POST", {
+    orgId: ORG, patientId: adm.patientId, reason: "Cardiac arrest call, need the allergy list now.",
+  });
+  await as(NURSE, `/ward/emergency-chart?orgId=${ORG}&patientId=${adm.patientId}`);
+  await as(NURSE, `/ward/emergency-chart?orgId=${ORG}&patientId=${adm.patientId}`);
+
+  // The list is the point of the mechanism, and the WARD can see it - not only an administrator.
+  const log = await as(DOCTOR, `/ward/break-glass-log?orgId=${ORG}`);
+  assert.equal(log.__status, 200, JSON.stringify(log));
+  assert.equal(log.grants.length, 1);
+  assert.equal(log.active, 1);
+  assert.match(log.grants[0].reason, /Cardiac arrest call/);
+  assert.ok(log.grants[0].actorId, "with a name on it");
+  // "Declared and never used" and "declared and read twice" are visibly different afterwards.
+  assert.equal(log.grants[0].reads, 2);
+
+  // It is append-only: the whole life of the grant survives, so it cannot be tidied away later.
+  const hist = await RECORD.history(TENANT_ROW.id, "BreakGlassGrant", g.grantId);
+  assert.ok(hist.length >= 2);
+  assert.equal(hist[0].reads, 0);
+  assert.match(hist[0].reason, /Cardiac arrest call/);
+});
+
+test("ONLY A CLINICIAN, AND ONLY A HUMAN, may declare an emergency", async () => {
+  seedHospital();
+  const { adm } = await admittedPatientOnDrug();
+  const reason = "Patient collapsed in the corridor, no identification.";
+  // A pharmacist has clinical business with medicines, not with opening charts in an emergency.
+  assert.equal((await as(PHARM, "/ward/break-glass", "POST", { orgId: ORG, patientId: adm.patientId, reason })).__status, 403);
+  // Both clinical roles can. Break-glass widens what a clinician may SEE; it never makes one.
+  assert.equal((await as(NURSE, "/ward/break-glass", "POST", { orgId: ORG, patientId: adm.patientId, reason })).__status, 200);
+  assert.equal((await as(DOCTOR, "/ward/break-glass", "POST", { orgId: ORG, patientId: adm.patientId, reason })).__status, 200);
+
+  // Each clinician's grant is their own: the doctor's declaration does not open the chart for anyone
+  // else, which is what keeps the log a list of individuals rather than of doors left ajar.
+  const log = await as(DOCTOR, `/ward/break-glass-log?orgId=${ORG}&patientId=${adm.patientId}`);
+  assert.equal(log.grants.length, 2);
+  assert.equal(new Set(log.grants.map((x) => x.actorId)).size, 2);
+});
+
 /* ---- pharmacy verification ----------------------------------------------------------------------
  *
  * The eMAR's `verify` step required MED_ADMINISTER - the NURSE's authority - because granting it to
