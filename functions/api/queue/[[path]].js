@@ -774,7 +774,14 @@ export async function onRequest(context) {
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "release-result" && method === "POST") {
-        const r = await releaseResult(request, env, { ...deps, serviceRequestId: body.serviceRequestId, patientId: body.patientId, encounterId: body.encounterId, panel: body.panel, tests: body.tests, status: body.status, reportedAt: body.reportedAt, conclusion: body.conclusion, idempotencyKey: body.idempotencyKey || null });
+        const r = await releaseResult(request, env, {
+          ...deps, serviceRequestId: body.serviceRequestId, patientId: body.patientId, encounterId: body.encounterId,
+          panel: body.panel, tests: body.tests, status: body.status, reportedAt: body.reportedAt, conclusion: body.conclusion,
+          // What counts as an implausible change, and what may be released unread, are the HOSPITAL's
+          // clinical content - the same shape as the critical limits this file already passes.
+          deltaLimits: (wsqCfg && wsqCfg.deltaLimits) || null, autoVerify: (wsqCfg && wsqCfg.autoVerify) || null,
+          idempotencyKey: body.idempotencyKey || null,
+        });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "pending-tests" && method === "GET") {
