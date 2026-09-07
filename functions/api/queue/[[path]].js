@@ -91,6 +91,7 @@ import { orderInvestigation } from "../../_wardsynq/ward-order.js";
 import { chartInfusion, listInfusions } from "../../_wardsynq/infusion.js";
 import { reportImaging } from "../../_wardsynq/radiology-report.js";
 import { protocolContext, recordProtocol } from "../../_wardsynq/radiology-protocol.js";
+import { checkAdvisories } from "../../_wardsynq/advisory-authoring.js";
 import { cdaForEncounter } from "../../_wardsynq/cda.js";
 import { news2ForPatient } from "../../_wardsynq/news2-view.js";
 import { recordRead, readersToNotify } from "../../_wardsynq/read-log.js";
@@ -606,6 +607,9 @@ export async function onRequest(context) {
          * reading a ward's own measures. analytics.view, not emr.view: the person who takes numbers
          * out is not automatically every clinician who can open a chart. It names no patient. */
         "analytics-extract": CAPS.ANALYTICS_VIEW,
+        /* Authoring the hospital's own advisories is an administrative act by whoever owns the
+         * configuration, not a clinical one - and the check writes nothing and activates nothing. */
+        "advisory-check": CAPS.STAFF_ADMIN,
         /* THE BACKUP EXPORT HANDS OVER AN ENTIRE HOSPITAL. It deliberately bypasses the per-actor
          * read scoping every other route obeys, because a backup filtered by somebody's permissions
          * restores into a chart with holes in it. So no clinical capability reaches it at any dose:
@@ -898,6 +902,10 @@ export async function onRequest(context) {
       }
       if (sub === "backup-status" && method === "GET") {
         const r = await backupStatus(request, env, { ...deps, rpoMinutes: (wsqCfg && wsqCfg.rpoMinutes) || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "advisory-check" && method === "POST") {
+        const r = await checkAdvisories(request, env, { ...deps, advisories: body.advisories, now: body.now });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "protocol-context" && method === "GET") {
