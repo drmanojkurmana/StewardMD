@@ -61,6 +61,10 @@ import { giveHandover, receiveHandover, listHandovers } from "../../_wardsynq/ha
 import { verifyOrder, verificationQueue } from "../../_wardsynq/pharmacy-verify.js";
 import { declareBreakGlass, openEmergencyChart, listBreakGlass } from "../../_wardsynq/break-glass.js";
 import { patientEverything, readResource, capabilityStatement } from "../../_wardsynq/fhir.js";
+import { startReconciliation, decideMedicine, readReconciliation } from "../../_wardsynq/med-reconciliation.js";
+import { wardMetrics } from "../../_wardsynq/ward-metrics.js";
+import { releaseResult, pendingRequests } from "../../_wardsynq/lab-result.js";
+import { mergePatients, unmergePatients, identityOf } from "../../_wardsynq/identity-merge.js";
 import { recordAllergiesFromAssessment } from "../../_wardsynq/migrate-allergy.js";
 
 // The Encounter migration's one shared call site. Every hook below (ticket add, import, a terminal
@@ -446,6 +450,19 @@ export async function onRequest(context) {
          * every other control on this file. The record service still applies the actor's own read
          * scope on top, so the bundle contains only what that clinician could already see. */
         fhir: CAPS.EMR_VIEW,
+        /* Taking a medicines history is a nurse-or-pharmacist act (emr.vitals covers the ward
+         * staff who do it). DECIDING what happens to a home medicine is prescribing-adjacent and
+         * belongs to the treating clinician, so it is emr.treat. */
+        "med-history": CAPS.EMR_VITALS, "med-decide": CAPS.EMR_TREAT, "med-reconciliation": CAPS.EMR_VIEW,
+        // What is outstanding on the ward. A count of open items, naming no patient except on the
+        // oldest unacknowledged critical result - so it is readable by the ward, at emr.view.
+        metrics: CAPS.EMR_VIEW,
+        // The laboratory. Its own authority: releasing a result is not treating a patient.
+        "release-result": CAPS.LAB_RESULT, "pending-tests": CAPS.LAB_RESULT,
+        /* Resolving identity is the registration authority, not a clinical one: it is the same act
+         * as creating the record in the first place. Reading who a patient is needs only emr.view -
+         * a clinician who followed a link to a merged record must be told where the chart went. */
+        merge: CAPS.QUEUE_ADD, unmerge: CAPS.QUEUE_ADD, identity: CAPS.EMR_VIEW,
         // Closing a stay is the administrative act QUEUE_ADD already covers for opening one.
         // The summary is a clinical document: drafting and signing it are EMR_TREAT.
         discharge: CAPS.QUEUE_ADD, "discharge-summary": CAPS.EMR_TREAT, "sign-discharge-summary": CAPS.EMR_TREAT,
@@ -522,6 +539,42 @@ export async function onRequest(context) {
               types: (url.searchParams.get("_type") || "").split(",").map((t) => t.trim()).filter(Boolean),
             });
         return json(r.ok ? (r.bundle || r.resource) : r.outcome, r.status, request);
+      }
+      if (sub === "merge" && method === "POST") {
+        const r = await mergePatients(request, env, { ...deps, survivorId: body.survivorId, mergedId: body.mergedId, reason: body.reason, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "unmerge" && method === "POST") {
+        const r = await unmergePatients(request, env, { ...deps, survivorId: body.survivorId, mergedId: body.mergedId, reason: body.reason, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "identity" && method === "GET") {
+        const r = await identityOf(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "" });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "release-result" && method === "POST") {
+        const r = await releaseResult(request, env, { ...deps, serviceRequestId: body.serviceRequestId, patientId: body.patientId, encounterId: body.encounterId, panel: body.panel, tests: body.tests, status: body.status, reportedAt: body.reportedAt, conclusion: body.conclusion, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "pending-tests" && method === "GET") {
+        const r = await pendingRequests(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "" });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "metrics" && method === "GET") {
+        const r = await wardMetrics(request, env, { ...deps, ward: url.searchParams.get("ward") || "", escalationPolicy: (wOrg && wOrg.criticalEscalation) || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "med-history" && method === "POST") {
+        const r = await startReconciliation(request, env, { ...deps, encounterId: body.encounterId, stage: body.stage, medicines: body.medicines, historySource: body.source, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "med-decide" && method === "POST") {
+        const r = await decideMedicine(request, env, { ...deps, encounterId: body.encounterId, stage: body.stage, key: body.key, drug: body.drug, decision: body.decision, reason: body.reason, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "med-reconciliation" && method === "GET") {
+        const r = await readReconciliation(request, env, { ...deps, encounterId: url.searchParams.get("encounterId") || "", stage: url.searchParams.get("stage") || "" });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "break-glass" && method === "POST") {
         const r = await declareBreakGlass(request, env, { ...deps, patientId: body.patientId, reason: body.reason, minutes: body.minutes, idempotencyKey: body.idempotencyKey || null });

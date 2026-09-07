@@ -47,6 +47,10 @@ export const CAPS = {
    * "administered" row through the raw record API without going near a bedside. So verification
    * writes its own resource and reads only what a verification actually needs. */
   ORDER_VERIFY: "order.verify",     // check an order against the chart before the ward gives it (pharmacy)
+  /* Resulting a test, 2026-09-07. Its own authority, like verification: a laboratory releasing a
+   * result is not a clinician treating a patient, and the two must not borrow each other's powers.
+   * See _wardsynq/lab-result.js for what it grants and the one residual it does not close. */
+  LAB_RESULT: "lab.result",         // release a result against an ordered test (laboratory)
   // ---- ONCQIS (oncology protocol governance) caps -------------------------------------------
   // Strict role separation: authoring, clinical review, and institutional approval are DISTINCT
   // caps held by DISTINCT roles. Doctor/Nurse never hold any of these (they consume ACTIVE
@@ -126,6 +130,15 @@ export const ROLE_CAPS = {
   // NOT given EMR_VIEW - dispensing needs the order, not the consultation notes - and never
   // BILLING_CHARGE, so the person handing over medicines is not the person taking the money.
   pharmacy: [C.QUEUE_VIEW, C.ORDER_READ, C.ORDER_DISPENSE, C.ORDER_VERIFY],
+  /* Laboratory: sees the tests that were ordered and releases results against them. Deliberately NO
+   * EMR_VIEW - resulting a potassium needs the request, not the consultation notes - and no
+   * ordering, dispensing or billing capability of any kind. */
+  /* No ORDER_READ, deliberately. It would have been the obvious thing to include - the comment on
+   * that capability even anticipates a lab - but it grants MedicationOrder as well as
+   * ServiceRequest, and a laboratory has no need to know what the patient is being prescribed.
+   * LAB_RESULT already carries the investigation requests, which is the only order a lab works from.
+   * Caught by the role-mapping test, which is what it is for. */
+  lab: [C.QUEUE_VIEW, C.LAB_RESULT],
   // HR / practice manager: runs the staff list and reads operational analytics. NO queue control, NO
   // vitals, NO EMR, NO billing. Exists so onboarding a nurse does not require handing someone full
   // admin (which carries every clinical and billing capability in the system).

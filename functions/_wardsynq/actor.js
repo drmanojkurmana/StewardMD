@@ -71,7 +71,12 @@ const ORDER_TYPES = Object.freeze(["MedicationOrder", "ServiceRequest"]);
  * clinical business with patients" - which is exactly who may declare one. It grants no clinical
  * write whatsoever: the grant that gets written is read-only in what it confers, and a nurse who
  * breaks glass still cannot prescribe or diagnose. See break-glass.js. */
-const VITALS_TYPES = Object.freeze(["Observation", "ShiftHandover", "BreakGlassGrant"]);
+/* MedicationReconciliation joined them the same day. TAKING a medicines history is ward-staff work -
+ * a nurse or a pharmacist sits with the patient and writes down what they take - and that is what
+ * this write is. DECIDING what happens to each medicine is prescribing-adjacent and is gated
+ * separately at emr.treat on the route, so this grant lets a nurse record the history and not
+ * decide its fate. */
+const VITALS_TYPES = Object.freeze(["Observation", "ShiftHandover", "BreakGlassGrant", "MedicationReconciliation"]);
 const PATIENT_TYPE = "Patient";
 // Added 2026-09-06 (the Encounter migration), alongside PATIENT_TYPE and for the identical reason:
 // checking a patient in for today's visit is the SAME administrative act QUEUE_ADD already covers
@@ -106,6 +111,29 @@ function grantForCaps(caps) {
       tier: TIER.EXECUTE, read: grant.read,
       write: grant.write === null ? null : [...new Set([...grant.write, ...added])],
       basis: grant.basis + "+" + CAPS.QUEUE_ADD,
+    };
+  }
+
+  if (has(CAPS.LAB_RESULT)) {
+    /* The laboratory, 2026-09-07. It reads the requests it is working from and writes the results:
+     * the Observations that carry the values and the DiagnosticReport that releases them.
+     *
+     * ONE RESIDUAL, STATED RATHER THAN HIDDEN: write scope in this system is by resource TYPE, and
+     * a laboratory result and a nurse's blood pressure are both Observations. So this grant does
+     * technically let a lab actor write an Observation of any category through the raw record API.
+     * The resulting ROUTE always stamps category "laboratory" (asserted by a test), and a lab actor
+     * has no EMR capability so no clinical screen is open to them - but that is a narrower control
+     * than the scope itself, and it is worth saying so plainly. Closing it properly needs a
+     * category-scoped grant, which is a change to the store's authorisation model rather than to
+     * this table, and it is recorded in the vault as such rather than fudged here. */
+    const canRead = ["ServiceRequest", "Observation", "DiagnosticReport"];
+    const canWrite = ["Observation", "DiagnosticReport"];
+    if (!grant) grant = { tier: TIER.EXECUTE, read: canRead, write: canWrite, basis: CAPS.LAB_RESULT };
+    else grant = {
+      tier: TIER.EXECUTE,
+      read: grant.read === null ? null : [...new Set([...grant.read, ...canRead])],
+      write: grant.write === null ? null : [...new Set([...grant.write, ...canWrite])],
+      basis: grant.basis + "+" + CAPS.LAB_RESULT,
     };
   }
 

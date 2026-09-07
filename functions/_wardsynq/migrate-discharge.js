@@ -36,6 +36,7 @@ import { RecordService } from "./service.js";
 import { AuthError, PermissionError } from "../_connect/permission.js";
 import { VITAL_CODES } from "./migrate-vitals.js";
 import { problemsForSummary } from "./migrate-problem.js";
+import { reconciliationIdFor, reconciliationForSummary } from "./med-reconciliation.js";
 
 const str = (v) => (v == null ? "" : String(v).trim());
 const NOT_RECORDED = "Not recorded.";
@@ -155,6 +156,12 @@ function assembleDischargeSummary(r) {
     vitals,
     investigations,
     medications: medsOrdered,
+    /* What the patient was taking BEFORE they came in, and what was decided about each. A discharge
+     * summary that lists only the inpatient orders tells the GP what we started and nothing about
+     * what we stopped - which is exactly how a home anticoagulant disappears at the boundary
+     * between two teams. Undecided medicines are named outright rather than omitted: a summary that
+     * showed only the decided ones would read as a completed reconciliation. */
+    homeMedicines: reconciliationForSummary(r.reconciliation) || NOT_RECORDED,
     assessment,
     plan,
     // Stated on the document itself, because a reader has to know what they are holding.
@@ -183,12 +190,12 @@ async function draftDischargeSummary(request, env, ctx) {
   const { svc, resolved, error } = await openService(request, env, ctx, "record:write");
   if (error) return { ...base, ...error, written: 0 };
 
-  let encounter, patient, observations, orders, administrations, allergies, serviceRequests, notes, problems;
+  let encounter, patient, observations, orders, administrations, allergies, serviceRequests, notes, problems, reconciliation;
   try {
     encounter = await svc.get("Encounter", encounterId);
     if (!encounter) return { ...base, ok: false, status: 404, error: "encounter_not_found", encounterId };
     const patientId = str(ctx.patientId) || encounter.patientId;
-    [patient, observations, orders, administrations, allergies, serviceRequests, notes, problems] = await Promise.all([
+    [patient, observations, orders, administrations, allergies, serviceRequests, notes, problems, reconciliation] = await Promise.all([
       svc.get("Patient", patientId).catch(() => null),
       svc.byPatient("Observation", patientId).catch(() => []),
       svc.byPatient("MedicationOrder", patientId).catch(() => []),
@@ -197,6 +204,7 @@ async function draftDischargeSummary(request, env, ctx) {
       svc.byPatient("ServiceRequest", patientId).catch(() => []),
       svc.byPatient("ClinicalNote", patientId).catch(() => []),
       svc.byPatient("Condition", patientId).catch(() => []),
+      svc.get("MedicationReconciliation", reconciliationIdFor(encounterId, "admission")).catch(() => null),
     ]);
   } catch (e) {
     return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), written: 0 };
@@ -215,6 +223,7 @@ async function draftDischargeSummary(request, env, ctx) {
     // The problem list is the PATIENT's, not this admission's: a chronic diagnosis carried in from
     // before the stay belongs on the summary too.
     problems: problems || [],
+    reconciliation,
     dischargedAt: ctx.dischargedAt || encounter.periodEnd || null,
   });
 
@@ -420,12 +429,12 @@ async function readDischargeSummary(request, env, ctx) {
   const { svc, error } = await openService(request, env, ctx, "record:read");
   if (error) return { ...base, ...error };
 
-  let encounter, patient, observations, orders, administrations, allergies, serviceRequests, notes, problems, stored;
+  let encounter, patient, observations, orders, administrations, allergies, serviceRequests, notes, problems, reconciliation, stored;
   try {
     encounter = await svc.get("Encounter", encounterId);
     if (!encounter) return { ...base, ok: false, status: 404, error: "encounter_not_found", encounterId };
     const patientId = str(ctx.patientId) || encounter.patientId;
-    [patient, observations, orders, administrations, allergies, serviceRequests, notes, problems, stored] = await Promise.all([
+    [patient, observations, orders, administrations, allergies, serviceRequests, notes, problems, reconciliation, stored] = await Promise.all([
       svc.get("Patient", patientId).catch(() => null),
       svc.byPatient("Observation", patientId).catch(() => []),
       svc.byPatient("MedicationOrder", patientId).catch(() => []),
@@ -434,6 +443,7 @@ async function readDischargeSummary(request, env, ctx) {
       svc.byPatient("ServiceRequest", patientId).catch(() => []),
       svc.byPatient("ClinicalNote", patientId).catch(() => []),
       svc.byPatient("Condition", patientId).catch(() => []),
+      svc.get("MedicationReconciliation", reconciliationIdFor(encounterId, "admission")).catch(() => null),
       svc.get("ClinicalNote", dischargeSummaryIdFor(encounterId)).catch(() => null),
     ]);
   } catch (e) {
@@ -448,6 +458,7 @@ async function readDischargeSummary(request, env, ctx) {
     observations: mine(observations), orders: myOrders, administrations: myAdmins,
     allergies: allergies || [], serviceRequests: mine(serviceRequests), notes: mine(notes),
     problems: problems || [],
+    reconciliation,
     dischargedAt: encounter.periodEnd || null,
   });
 
