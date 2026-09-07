@@ -393,6 +393,44 @@ test("THE NOTE COMPOSER SUPPLIES HEADINGS AND NEVER CONTENT", () => {
   assert.ok(!/note-sign|signedBy|sign\(/.test(saveNote), "and it carries no signature");
 });
 
+test("THE OVERRIDE REPORT IS ABOUT RULES, AND THE WORST ONE IS FIRST", () => {
+  const W = load();
+  const html = W._render(Object.assign({}, base, {
+    overrides: {
+      totalOverrides: 45, distinctRules: 3,
+      note: "Override counts are evidence about RULES, not about clinicians.",
+      rules: [
+        { key: "dose", code: "dose", targetId: null, overridden: 5, fired: 40, overrideRate: 0.125, topReason: "clinical-judgement" },
+        { key: "interaction:ddi-a", code: "interaction", targetId: "ddi-a", overridden: 39, fired: 40, overrideRate: 0.975, topReason: "benefit-outweighs-risk" },
+        { key: "allergy:alg-1", code: "allergy", targetId: "alg-1", overridden: 1, fired: null, overrideRate: null },
+      ],
+    },
+  }));
+
+  /* WORST FIRST. A rule overridden on 39 of 40 firings is not protecting anyone - it is training
+   * every clinician in the hospital to click through warnings, including the one that mattered. */
+  assert.ok(html.indexOf("ddi-a") < html.indexOf(">dose<"), "the 97% rule is above the 12% one");
+  assert.match(html, /98%/, "0.975 rounds up");
+  assert.match(html, /39 of 40 firings/, "the denominator is always beside the rate");
+  assert.match(html, /trains people to click through warnings/);
+  assert.match(html, /class="hot"/);
+
+  // A rate with no denominator is not drawn as a measurement.
+  assert.match(html, /no firing count, so no rate/);
+  assert.ok(!/>0%</.test(html));
+  // And a rule that CAN be judged sorts above one that cannot: no rate is not the same as fine.
+  assert.ok(html.indexOf("ddi-a") < html.indexOf("alg-1"));
+
+  /* IT NAMES NO CLINICIAN. A screen that ranked people by override rate would stop them writing
+   * honest rationales, and the rationale is the only thing that makes a bad rule fixable. */
+  assert.match(html, /evidence about RULES, not about clinicians/);
+  const src = SRC.replace(/\/\*[\s\S]*?\*\//g, " ").replace(/^\s*\/\/.*$/gm, " ");
+  const card = src.slice(src.indexOf("function overrideCard"), src.indexOf("function qualityCard"));
+  assert.ok(!/actorId|clinician|prescriber|byActor/i.test(card), "the card cannot even reach for an actor");
+
+  assert.ok(!W._render(base).includes("Safety rules being overridden"), "no data, no card");
+});
+
 test("A MEASURE SHOWS ITS DENOMINATOR, AND ONE THAT CANNOT BE COMPUTED SHOWS ITS REASON", () => {
   const W = load();
   const html = W._render(Object.assign({}, base, {

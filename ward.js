@@ -37,7 +37,7 @@
     /* The terminology search: null while it runs, an array once it answers, undefined when nobody has
      * asked. Three states, because "searching" and "no matches" must not look the same. */
     icd: undefined, probText: "", probCode: "",
-    templates: [], noteTemplateId: "", noteResult: null,
+    templates: [], noteTemplateId: "", noteResult: null, overrides: null,
     due: [], prn: [], unscheduled: [], truncated: false,
     from: "", to: "",          // the window being viewed, NOT a claim about when a dose is due
     busy: false, err: "", note: "", refusal: null, loaded: false
@@ -154,7 +154,54 @@
       // to while the system is up is a pack the ward has to remember to take while the system is up.
       '<button class="w-btn ghost" data-w-act="downtime" title="Printable sheet for when the system is unavailable">' + ms("print") + "Downtime pack</button></div>" +
       (rows || (state.loaded ? '<p class="w-empty">No patients are currently admitted' + (state.ward ? " to " + esc(state.ward) : "") + ".</p>" : '<p class="w-empty">Loading the ward…</p>')) +
-      "</div>" + cosignCard(state) + qualityCard(state);
+      "</div>" + cosignCard(state) + qualityCard(state) + overrideCard(state);
+  }
+
+  /* Which safety rules are being clicked through. ALERT FATIGUE IS THE CHARACTERISTIC FAILURE OF
+   * CDSS: a rule that fires on every third order and is overridden 98% of the time is not protecting
+   * anyone - it is training every clinician in the hospital to click through warnings, including the
+   * one that mattered. This report existed on the server from the day override analytics landed and
+   * nothing displayed it, which made it evidence nobody could act on.
+   *
+   * IT IS ABOUT RULES, NEVER ABOUT PEOPLE. No clinician is named or counted, here or on the server.
+   * A screen that ranked clinicians by override rate would stop them writing honest rationales, and
+   * the rationale is the only thing that makes a bad rule fixable.
+   *
+   * A RATE WITH NO DENOMINATOR IS NOT A RATE. It shows the count and says the denominator is missing,
+   * rather than drawing a bar that looks like a measurement. */
+  function overrideCard(state) {
+    var rep = state.overrides;
+    if (!rep || !(rep.rules || []).length) return "";
+    var pct = function (r) { return Math.round(r * 100) + "%"; };
+
+    /* Worst first: the rule overridden most OFTEN, proportionally, is the one to look at. Rules with
+     * no rate sort after the ones that have one - they cannot be judged yet, not that they are fine. */
+    var rows = (rep.rules || []).slice().sort(function (a, b) {
+      if (a.overrideRate === null && b.overrideRate === null) return b.overridden - a.overridden;
+      if (a.overrideRate === null) return 1;
+      if (b.overrideRate === null) return -1;
+      return b.overrideRate - a.overrideRate;
+    }).map(function (m) {
+      return '<li' + (m.overrideRate !== null && m.overrideRate >= 0.9 ? ' class="hot"' : "") + ">" +
+        "<h4>" + esc(m.code) + (m.targetId ? ' <span class="w-code">' + esc(m.targetId) + "</span>" : "") + "</h4>" +
+        (m.overrideRate === null
+          ? '<div class="w-q-n"><b>' + esc(m.overridden) + "</b><span>overridden &middot; no firing count, so no rate</span></div>"
+          : '<div class="w-q-n"><b>' + esc(pct(m.overrideRate)) + "</b><span>" + esc(m.overridden) + " of " + esc(m.fired) + " firings</span></div>") +
+        (m.topReason ? '<p class="w-hint">' + ms("info") + "Most given reason: " + esc(m.topReason) + "</p>" : "") +
+        (m.overrideRate !== null && m.overrideRate >= 0.9
+          ? '<p class="w-hint warn">' + ms("warning") + "Overridden almost every time it fires. A rule like this trains people to click through warnings.</p>"
+          : "") +
+        "</li>";
+    }).join("");
+
+    return '<div class="w-card"><div class="w-card-h">' + ms("rule") + "<h3>Safety rules being overridden</h3>" +
+      '<button class="w-ic" data-w-act="overrides" title="Refresh">' + ms("refresh") + "</button></div>" +
+      '<ul class="w-q">' + rows + "</ul>" +
+      // The server's own sentence, shown verbatim. The conclusion people reach from an override table
+      // is usually the wrong one, so it is stated rather than left to be inferred.
+      (rep.note ? '<p class="w-hint">' + ms("info") + esc(rep.note) + "</p>" : "") +
+      (rep.note2 ? '<p class="w-hint warn">' + ms("warning") + esc(rep.note2) + "</p>" : "") +
+      "</div>";
   }
 
   /* Measures about the SYSTEM, over a period. Never about a person: nothing here is aggregated by
@@ -577,7 +624,7 @@
   function loadWard() {
     st.busy = true; paint();
     return apiGet("/ward/list?orgId=" + encodeURIComponent(st.orgId) + (st.ward ? "&ward=" + encodeURIComponent(st.ward) : ""))
-      .then(function (r) { if (settle(r)) st.patients = r.patients || []; st.loaded = true; paint(); return Promise.all([loadCosigns(), loadQuality()]); })
+      .then(function (r) { if (settle(r)) st.patients = r.patients || []; st.loaded = true; paint(); return Promise.all([loadCosigns(), loadQuality(), loadOverrides()]); })
       .catch(function () { st.busy = false; st.err = "Could not reach the ward."; st.loaded = true; paint(); });
   }
   function loadChart() {
@@ -782,6 +829,13 @@
       .catch(function () { st.busy = false; st.err = "Could not resolve the problem."; paint(); });
   }
 
+  function loadOverrides() {
+    return apiGet("/ward/overrides?orgId=" + encodeURIComponent(st.orgId))
+      .then(function (r) { if (r && r.ok) st.overrides = r.report; paint(); })
+      // Silent, like the other secondary panels: a ward that cannot load its override report can
+      // still look after every patient on it.
+      .catch(function () {});
+  }
   function loadQuality() {
     return apiGet("/ward/quality?orgId=" + encodeURIComponent(st.orgId))
       .then(function (r) { if (r && r.ok) st.quality = r; paint(); })
@@ -928,6 +982,7 @@
     if (cmd === "outbox") { loadOutbox(); return; }
     if (cmd === "cosigns") { loadCosigns(); return; }
     if (cmd === "quality") { loadQuality(); return; }
+    if (cmd === "overrides") { loadOverrides(); return; }
     if (cmd === "problem") { addProblem(); return; }
     if (cmd === "icd") { findCode(); return; }
     if (cmd === "pickTpl") { st.noteTemplateId = val("wNoteTpl"); st.noteResult = null; paint(); return; }
