@@ -8,7 +8,7 @@ NOT counted as WardSynQ's own implementation.
 Scoring per domain: `record path` (25) + `safety/governance` (25) + `UI a clinician can use` (35) +
 `tests + real-device proof` (15). A domain with a working API and no UI caps at 65.
 
-Updated: 2026-09-07 (PR #887)
+Updated: 2026-09-07 (PRs #887 problem list, #889 ward UI, #890 MAR scheduling)
 
 | # | Domain (Epic module) | Weight | % | Status |
 |---|---|---|---|---|
@@ -18,10 +18,10 @@ Updated: 2026-09-07 (PR #887)
 | 4 | Orders — investigations (Beaker/Radiant order entry) | 5 | 60 | ServiceRequest write path + UI. No order sets, no priority/collection workflow. |
 | 5 | Prescribing (Willow Ambulatory) | 6 | 70 | MedicationOrder, dose parsing, print. No e-prescribing transmission, no formulary. |
 | 6 | Clinical decision support (Best Practice Advisories) | 7 | 65 | Allergy + cross-reactivity + interactions + dose ceilings, fail-closed, Indian drug DB + FDA. No BPA authoring, no override analytics. |
-| 7 | Problem list (Problem List) | 4 | 60 | **NEW #887.** Coded/text, provisional default, versioned resolve, feeds the summary. **No UI.** |
-| 8 | Inpatient admission / ward (ADT) | 7 | 45 | Admit, ward list, ward vitals, discharge. **API only, no UI.** No transfer, no bed board. |
-| 9 | eMAR / medication administration (Willow Inpatient) | 8 | 45 | Full state machine, five rights, barcode scan, weight-based refusal, AI blocked. **API only, no UI.** No MAR scheduling — nothing computes what is due. |
-| 10 | Nursing documentation (Flowsheets) | 5 | 20 | Ward vitals only. No assessments, no I/O, no shift handover, no care plans. |
+| 7 | Problem list (Problem List) | 4 | 70 | #887. Coded/text, provisional default, versioned resolve, feeds the summary. Read-only on the ward screen; no entry UI. |
+| 8 | Inpatient admission / ward (ADT) | 7 | 75 | #889. Admit, ward list, ward vitals, discharge, **with a UI**. No transfer, no bed board. |
+| 9 | eMAR / medication administration (Willow Inpatient) | 8 | 80 | #889 + #890. State machine, five rights, barcode scan, weight-based refusal, AI blocked, **UI**, **and a real schedule**. No pharmacy verification as its own authority, no high-alert witness config. |
+| 10 | Nursing documentation (Flowsheets) | 5 | 40 | Ward vitals with a UI. No assessments, no I/O, no shift handover, no care plans. |
 | 11 | Discharge + summary (Discharge Navigator) | 4 | 55 | Deterministic assembler, sign, corrections survive. **No UI.** Not device-proven. |
 | 12 | Results — lab / rad (Beaker, Radiant) | 6 | 25 | DiagnosticReport read from GHIS. No native resulting, no autoverification, no critical-value loop. |
 | 13 | Pharmacy verification + inventory (Willow) | 5 | 10 | Pharmacist role exists; verification is not its own authority. No inventory, no dispensing. |
@@ -33,11 +33,20 @@ Updated: 2026-09-07 (PR #887)
 | 19 | Patient portal (MyChart) | 3 | 0 | Not built. |
 | 20 | Deployment / uptime / DR (on-prem, HA) | 3 | 25 | Cloudflare edge + D1, live domain. No on-prem, no DR drill, no downtime procedures. |
 
-**Weighted total: 44%.**
+**Weighted total: 53%.**
 
-## The three things that most move this number
-1. **Ward UI** — domains 8, 9, 10, 11 are all capped at ~45-55 purely because a nurse cannot open
-   a screen. That single deliverable is worth ~8 points of the total.
-2. **MAR scheduling** — nothing computes what dose is due when. Without it the eMAR is a state
-   machine nobody can drive.
-3. **Results + critical-value loop** — the biggest pure-clinical gap after that.
+## Done since the baseline
+- **Ward UI** (#889) — the inpatient stack was server-authoritative and tested with nothing calling
+  it. `ward.js`/`ward.css`, same pattern as `queue.js`. Lifted 8/9/10 out of the no-screen cap.
+- **MAR scheduling** (#890) — the frequency the prescriber wrote now becomes the doses that are due.
+  PRN never scheduled, unreadable frequencies reported rather than dropped, TDS distinguished from
+  Q8H, and `stopAt` so a course cannot run forever.
+
+## The three things that most move it now
+1. **Discharge UI + device proof** — the summary assembler is finished and nobody can reach it.
+2. **Results + critical-value loop** — the biggest pure-clinical gap; a lab that goes nowhere.
+3. **Transfer / bed management** — a ward you can admit to and discharge from but not move within.
+
+Pharmacy verification as its own authority is deliberately still open (see the note in
+`functions/api/queue/[[path]].js`): granting it would give the pharmacy role write access to
+`MedicationAdministration`, which needs its own narrower grant, not a widened one.
