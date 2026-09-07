@@ -27,13 +27,13 @@ Updated: 2026-09-07 (PRs #887, #889, #890, #892, #894, #895, #897 pharmacy verif
 | 13 | Pharmacy verification + inventory (Willow) | 5 | 55 | #897. Verification as its OWN authority with a narrow grant: reads what a check needs, writes only the verification. No inventory, no dispensing. |
 | 14 | Notes / documentation (SmartText, NoteWriter) | 4 | 60 | Signed clinical notes, versioned, and a document surface with per-section provenance. No templates, no macros, no co-sign routing. |
 | 15 | Billing / revenue (Resolute) | 5 | 15 | Clinic billing config only. No charge capture from orders, no claims, no payer. |
-| 16 | Security / audit / break-glass | 5 | 80 | #898. Capability RBAC, append-only audit, tiered AI, break-glass with a mandatory reason and an append-only log. No consent model. |
+| 16 | Security / audit / break-glass | 5 | 95 | #898 + #903. Capability RBAC, append-only audit, tiered AI, break-glass with a mandatory reason, and a consent model where a refusal is a first-class fact. No per-field redaction. |
 | 17 | Interoperability (Care Everywhere, HL7/FHIR) | 4 | 70 | #899. Read-only FHIR R4 export with an honest CapabilityStatement; GHIS adapter works. No FHIR write, no HL7v2, no CDA. |
 | 18 | Reporting / analytics (Reporting Workbench, Caboodle) | 3 | 40 | Live ward open-item metrics: unacknowledged criticals, doses in flight, handovers waiting, medicines undecided, orders unverified. No registries, no quality measures, no warehouse. |
 | 19 | Patient portal (MyChart) | 3 | 0 | Not built. |
 | 20 | Deployment / uptime / DR (on-prem, HA) | 3 | 25 | Cloudflare edge + D1, live domain. No on-prem, no DR drill, no downtime procedures. |
 
-**Weighted total: 69.2%.**
+**Weighted total: 70.0%.**
 
 The total is the weight-times-percent sum of the table above, divided by 100. It is COMPUTED from
 these rows, not asserted: earlier revisions of this file carried an eyeballed number that had drifted
@@ -54,14 +54,13 @@ about two points high (the 44% baseline was 41.5, and 53% was 50.8). If a row ch
 0. **Device proof of the whole inpatient vertical** — none of the ward, eMAR, discharge or nursing
    screens have been run on a phone. Everything above is proven by test, not by a clinician's hands.
    This is the largest honest caveat on this entire table.
-2. **A consent model** — break-glass exists; consent does not.
-3. **A category-scoped write grant.** Write scope is by resource TYPE, so the `lab` role's
+2. **A category-scoped write grant.** Write scope is by resource TYPE, so the `lab` role's
    Observation write technically permits a vital sign as well as a result. The resulting route
    stamps `laboratory` and a lab actor has no clinical screen, but that is a narrower control than
    the scope itself. Closing it properly is a change to the store's authorisation model.
-4. **E-prescribing transmission, appointment scheduling, care plans, note templates** - each a
+3. **E-prescribing transmission, appointment scheduling, care plans, note templates** - each a
    self-contained gap in an otherwise wired domain.
-5. **Firing counts for the CDSS.** Overrides are now recorded per rule, but nothing counts how
+4. **Firing counts for the CDSS.** Overrides are now recorded per rule, but nothing counts how
    often a rule FIRES - so the override RATE, which is the number that actually identifies a rule
    training people to click through, still has no denominator. The report says `null` rather than
    inventing one.

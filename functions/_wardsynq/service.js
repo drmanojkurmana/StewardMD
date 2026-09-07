@@ -79,6 +79,10 @@ const RESOURCE_TYPES = Object.freeze([
    * themselves - those go through the ordinary path and are ordinary orders. This is what makes a
    * partial application visible, and what finds the patients a bad set touched. */
   "OrderSetApplication",
+  /* What the patient agreed to, and what they REFUSED - which is a clinical fact, not an absent
+   * consent. Append-only so a withdrawal keeps the original grant: "they consented and later
+   * withdrew" and "they never consented" are different histories and only one is true. */
+  "PatientConsent",
 ]);
 
 const MODE = Object.freeze({ SYSTEM_OF_RECORD: "system-of-record", INTEGRATION: "integration" });
