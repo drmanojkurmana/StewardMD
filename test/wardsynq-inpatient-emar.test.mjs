@@ -401,3 +401,119 @@ test("an order with no dose cannot be created, because the bedside could never c
   assert.equal(noDose.__status, 422);
   assert.equal(noDose.error, "order_incomplete");
 });
+
+/* ---- discharge ---------------------------------------------------------------------------------
+ *
+ * The auto maker is an ASSEMBLER: every line it writes is copied from a resource already in the
+ * record. What is asserted below is not that it produces nice prose but that it cannot produce a
+ * clinical claim nobody recorded, and that an empty section says so out loud rather than vanishing.
+ */
+
+test("discharge closes the stay, and a discharged patient leaves the ward list", async () => {
+  seedHospital();
+  const { adm } = await admittedPatientOnDrug();
+  const before = await as(NURSE, `/ward/list?orgId=${ORG}&ward=Medical A`);
+  assert.equal(before.patients.length, 1);
+
+  const out = await as(DOCTOR, "/ward/discharge", "POST", { orgId: ORG, encounterId: adm.encounterId, dischargedAt: "2026-09-08T11:00:00.000Z", disposition: "home" });
+  assert.equal(out.__status, 200, JSON.stringify(out));
+  assert.equal(out.status, "finished");
+
+  const enc = await RECORD.latest(TENANT_ROW.id, "Encounter", adm.encounterId);
+  assert.equal(enc.status, "finished");
+  assert.equal(enc.periodEnd, "2026-09-08T11:00:00.000Z", "a discharged stay has a real end");
+  assert.equal(enc.location.ward, "Medical A", "and keeps where it happened");
+
+  const after = await as(NURSE, `/ward/list?orgId=${ORG}&ward=Medical A`);
+  assert.equal(after.patients.length, 0, "the ward list is open admissions only");
+
+  const again = await as(DOCTOR, "/ward/discharge", "POST", { orgId: ORG, encounterId: adm.encounterId });
+  assert.equal(again.written, 0);
+  assert.equal(again.skipped, "already_discharged");
+  assert.deepEqual((await RECORD.history(TENANT_ROW.id, "Encounter", adm.encounterId)).map((h) => h.status), ["in-progress", "finished"]);
+});
+
+test("discharge reports doses still in flight rather than silently closing over them", async () => {
+  seedHospital();
+  const { ord, patient, adm } = await admittedPatientOnDrug();
+  await as(NURSE, "/ward/mar", "POST", { orgId: ORG, action: "verify", orderId: ord.orderId, dueAt: DUE, patient });
+
+  const out = await as(DOCTOR, "/ward/discharge", "POST", { orgId: ORG, encounterId: adm.encounterId });
+  assert.equal(out.__status, 200, "an unfinished dose is a hospital's policy call, not a refusal invented here");
+  assert.equal(out.dosesInFlight.length, 1);
+  assert.equal(out.dosesInFlight[0].status, "verified");
+});
+
+test("the auto maker assembles the summary from the record and invents nothing", async () => {
+  seedHospital();
+  const { ord, patient, adm } = await admittedPatientOnDrug();
+  const mar = (action, extra) => as(NURSE, "/ward/mar", "POST", { orgId: ORG, action, orderId: ord.orderId, dueAt: DUE, patient, ...extra });
+  await mar("verify"); await mar("dispense");
+  await mar("scan", { scan: { patientBarcode: patient.mrn, drugBarcode: "Paracetamol 500mg", dose: { value: 500, unit: "mg" }, route: "oral" } });
+  await mar("administer");
+  await as(DOCTOR, "/ward/discharge", "POST", { orgId: ORG, encounterId: adm.encounterId, dischargedAt: "2026-09-09T08:00:00.000Z" });
+
+  const draft = await as(DOCTOR, "/ward/discharge-summary", "POST", { orgId: ORG, encounterId: adm.encounterId });
+  assert.equal(draft.__status, 200, JSON.stringify(draft));
+  const s = draft.sections;
+
+  assert.match(s.admission, /Ward: Medical A, bed 12/);
+  assert.match(s.admission, /Length of stay: 2 days/);
+  assert.match(s.vitals, /Body weight|Systolic blood pressure/, "vitals are the recorded ones");
+  assert.match(s.medications, /Paracetamol 500mg - 500 mg, oral/);
+  assert.match(s.medications, /doses administered on this admission: 1/, "what was GIVEN, counted from administrations");
+  assert.match(s.provenance, /Nothing here is generated or inferred/);
+
+  // A section with no data says so; it does not disappear and it is not filled in.
+  assert.equal(s.assessment, "Not recorded.", "no assessment was written on this stay, and the summary says so");
+  assert.equal(s.investigations, "Not recorded.");
+  assert.equal(s.allergies, "None documented on this admission.");
+
+  assert.equal(draft.signed, false);
+  const note = await RECORD.latest(TENANT_ROW.id, "ClinicalNote", draft.noteId);
+  assert.equal(note.noteType, "discharge-summary");
+  assert.equal(note.signedBy, null, "unsigned until a clinician signs it");
+  assert.equal(note.aiDrafted, false, "assembled from the record, not generated");
+});
+
+test("a discharge summary is signed as its own version, and a signed one is not redrafted", async () => {
+  seedHospital();
+  const { adm } = await admittedPatientOnDrug();
+  await as(DOCTOR, "/ward/discharge", "POST", { orgId: ORG, encounterId: adm.encounterId });
+  const draft = await as(DOCTOR, "/ward/discharge-summary", "POST", { orgId: ORG, encounterId: adm.encounterId });
+
+  assert.equal((await as(NURSE, "/ward/discharge-summary", "POST", { orgId: ORG, encounterId: adm.encounterId })).__status, 403);
+  assert.equal((await as(NURSE, "/ward/sign-discharge-summary", "POST", { orgId: ORG, encounterId: adm.encounterId })).__status, 403);
+
+  const signed = await as(DOCTOR, "/ward/sign-discharge-summary", "POST", { orgId: ORG, encounterId: adm.encounterId });
+  assert.equal(signed.__status, 200, JSON.stringify(signed));
+  assert.equal(signed.signed, true);
+  const note = await RECORD.latest(TENANT_ROW.id, "ClinicalNote", draft.noteId);
+  assert.ok(note.signedBy, "the signature names the signer");
+  assert.deepEqual((await RECORD.history(TENANT_ROW.id, "ClinicalNote", draft.noteId)).map((h) => !!h.signedBy), [false, true],
+    "draft then signature, as two versions");
+
+  const redraft = await as(DOCTOR, "/ward/discharge-summary", "POST", { orgId: ORG, encounterId: adm.encounterId });
+  assert.equal(redraft.__status, 409);
+  assert.equal(redraft.error, "already_signed");
+});
+
+test("a clinician's corrections survive, and only an inpatient stay can be discharged", async () => {
+  seedHospital();
+  const { adm } = await admittedPatientOnDrug();
+  await as(DOCTOR, "/ward/discharge", "POST", { orgId: ORG, encounterId: adm.encounterId });
+  const edited = await as(DOCTOR, "/ward/discharge-summary", "POST", {
+    orgId: ORG, encounterId: adm.encounterId,
+    sections: { assessment: "Community-acquired pneumonia, resolved.", plan: "Oral amoxicillin 5 days, review in clinic." },
+  });
+  assert.equal(edited.sections.assessment, "Community-acquired pneumonia, resolved.", "the clinician's words are kept verbatim");
+  assert.match(edited.sections.admission, /Ward: Medical A/, "and the assembled sections they did not touch survive");
+
+  // An OPD ticket encounter is not an admission.
+  const S = await as(DOCTOR, `/session?hospitalId=${ORG}`);
+  const T = await as(DOCTOR, "/ticket", "POST", { sessionId: S.session.id, name: "OPD Testcase", mobile: "9876500099", mrn: "SMD-WARD01-00099", visitType: "new" });
+  const opdEnc = "opd-enc-" + String(T.ticket.id).toLowerCase().replace(/[^a-z0-9]+/g, "-");
+  const bad = await as(DOCTOR, "/ward/discharge", "POST", { orgId: ORG, encounterId: opdEnc });
+  assert.equal(bad.__status, 409);
+  assert.equal(bad.error, "not_an_admission");
+});
