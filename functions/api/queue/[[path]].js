@@ -53,6 +53,7 @@ import { getRulePack } from "../../_wardsynq/rulepack.js";
 import { admitPatient, listWard, recordWardVitals, createWardMedicationOrder } from "../../_wardsynq/migrate-inpatient.js";
 import { medicationRound, administerStep } from "../../_wardsynq/migrate-emar.js";
 import { draftDischargeSummary, signDischargeSummary, dischargePatient } from "../../_wardsynq/migrate-discharge.js";
+import { recordProblem, listProblems } from "../../_wardsynq/migrate-problem.js";
 import { recordAllergiesFromAssessment } from "../../_wardsynq/migrate-allergy.js";
 
 // The Encounter migration's one shared call site. Every hook below (ticket add, import, a terminal
@@ -411,6 +412,8 @@ export async function onRequest(context) {
         // Closing a stay is the administrative act QUEUE_ADD already covers for opening one.
         // The summary is a clinical document: drafting and signing it are EMR_TREAT.
         discharge: CAPS.QUEUE_ADD, "discharge-summary": CAPS.EMR_TREAT, "sign-discharge-summary": CAPS.EMR_TREAT,
+        // Asserting a diagnosis is a clinical act; reading the list is not.
+        problem: CAPS.EMR_TREAT, problems: CAPS.EMR_VIEW,
       };
       /* Every eMAR transition needs MED_ADMINISTER, including verify and dispense.
        *
@@ -451,6 +454,14 @@ export async function onRequest(context) {
       }
       if (sub === "round" && method === "GET") {
         const r = await medicationRound(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "", dueAt: url.searchParams.get("dueAt") || "" });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "problem" && method === "POST") {
+        const r = await recordProblem(request, env, { ...deps, problem: body.problem || body, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "problems" && method === "GET") {
+        const r = await listProblems(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "", includeInactive: url.searchParams.get("includeInactive") === "1" });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "discharge" && method === "POST") {

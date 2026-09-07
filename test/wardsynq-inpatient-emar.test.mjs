@@ -517,3 +517,73 @@ test("a clinician's corrections survive, and only an inpatient stay can be disch
   assert.equal(bad.__status, 409);
   assert.equal(bad.error, "not_an_admission");
 });
+
+/* ---- problem list -------------------------------------------------------------------------------
+ *
+ * Condition had ZERO write paths before this: diagnoses existed only as prose inside an assessment
+ * note, which is why the discharge summary's diagnoses section could never say anything.
+ */
+
+test("a diagnosis is recorded as a coded problem, updated in place, and resolved as a new version", async () => {
+  seedHospital();
+  const { adm } = await admittedPatientOnDrug();
+  const p = (problem) => as(DOCTOR, "/ward/problem", "POST", { orgId: ORG, problem: { patientId: adm.patientId, encounterId: adm.encounterId, ...problem } });
+
+  const first = await p({ code: "J18.9", codeSystem: "ICD-10", display: "Pneumonia, unspecified organism", onsetDate: "2026-09-06" });
+  assert.equal(first.__status, 200, JSON.stringify(first));
+  assert.equal(first.verificationStatus, "provisional", "a new diagnosis is a claim, not a fact");
+  assert.equal(first.clinicalStatus, "active");
+
+  // The same concept again is an UPDATE of the one entry, not a duplicate.
+  const confirmed = await p({ code: "J18.9", codeSystem: "ICD-10", display: "Pneumonia, unspecified organism", verificationStatus: "confirmed" });
+  assert.equal(confirmed.problemId, first.problemId, "one problem per coded concept");
+  assert.equal(confirmed.updated, true);
+  assert.equal((await RECORD.byPatient(TENANT_ROW.id, "Condition", adm.patientId)).length, 1, "the list does not grow a duplicate");
+
+  // Unchanged input writes nothing.
+  assert.equal((await p({ code: "J18.9", codeSystem: "ICD-10", display: "Pneumonia, unspecified organism", verificationStatus: "confirmed" })).written, 0);
+
+  // Resolving is a new version; the prior claim stays on the record.
+  const resolved = await p({ code: "J18.9", codeSystem: "ICD-10", display: "Pneumonia, unspecified organism", verificationStatus: "confirmed", clinicalStatus: "resolved" });
+  assert.equal(resolved.clinicalStatus, "resolved");
+  const hist = await RECORD.history(TENANT_ROW.id, "Condition", first.problemId);
+  assert.deepEqual(hist.map((h) => `${h.verificationStatus}/${h.clinicalStatus}`),
+    ["provisional/active", "confirmed/active", "confirmed/resolved"], "the whole claim history survives");
+
+  // The list reads active-first and hides resolved unless asked.
+  await p({ code: "E11.9", codeSystem: "ICD-10", display: "Type 2 diabetes mellitus" });
+  const active = await as(NURSE, `/ward/problems?orgId=${ORG}&patientId=${adm.patientId}`);
+  assert.deepEqual(active.problems.map((x) => x.display), ["Type 2 diabetes mellitus"]);
+  const all = await as(NURSE, `/ward/problems?orgId=${ORG}&patientId=${adm.patientId}&includeInactive=1`);
+  assert.equal(all.problems.length, 2);
+  assert.equal(all.problems[0].clinicalStatus, "active", "active first, because that is how it is read");
+});
+
+test("an uncoded problem is recorded honestly as text, and a nurse cannot assert a diagnosis", async () => {
+  seedHospital();
+  const { adm } = await admittedPatientOnDrug();
+
+  const text = await as(DOCTOR, "/ward/problem", "POST", { orgId: ORG, problem: { patientId: adm.patientId, display: "Query connective tissue disorder" } });
+  assert.equal(text.__status, 200, JSON.stringify(text));
+  assert.equal(text.codeSystem, "text", "no code to hand is recorded as text, not forced into a code nobody chose");
+
+  // Asserting a diagnosis is emr.treat. A nurse may READ the list and not write to it.
+  const nurseWrite = await as(NURSE, "/ward/problem", "POST", { orgId: ORG, problem: { patientId: adm.patientId, display: "Sepsis" } });
+  assert.equal(nurseWrite.__status, 403);
+  assert.equal((await as(NURSE, `/ward/problems?orgId=${ORG}&patientId=${adm.patientId}`)).__status, 200, "but she can read it");
+});
+
+test("the discharge summary now carries the problem list instead of an empty assessment", async () => {
+  seedHospital();
+  const { adm } = await admittedPatientOnDrug();
+  await as(DOCTOR, "/ward/problem", "POST", { orgId: ORG, problem: { patientId: adm.patientId, encounterId: adm.encounterId, code: "J18.9", codeSystem: "ICD-10", display: "Pneumonia, unspecified organism", verificationStatus: "confirmed" } });
+  await as(DOCTOR, "/ward/problem", "POST", { orgId: ORG, problem: { patientId: adm.patientId, code: "E11.9", codeSystem: "ICD-10", display: "Type 2 diabetes mellitus", clinicalStatus: "resolved" } });
+  await as(DOCTOR, "/ward/discharge", "POST", { orgId: ORG, encounterId: adm.encounterId });
+
+  const draft = await as(DOCTOR, "/ward/discharge-summary", "POST", { orgId: ORG, encounterId: adm.encounterId });
+  assert.match(draft.sections.diagnoses, /Active:/);
+  assert.match(draft.sections.diagnoses, /Pneumonia, unspecified organism \[J18\.9\] - confirmed/);
+  assert.match(draft.sections.diagnoses, /Resolved or inactive:[\s\S]*Type 2 diabetes/);
+  // Still assembled, still not invented: a patient with no problems says so.
+  assert.equal(draft.sections.provenance.includes("Nothing here is generated or inferred"), true);
+});
