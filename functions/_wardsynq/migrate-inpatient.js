@@ -34,6 +34,7 @@ import { vitalsToObservations } from "./migrate-vitals.js";
 import { patientIdForMrn, admissionIdFor } from "./opd-identity.js";
 import { recordOverrides } from "./override-analytics.js";
 import { resolveFormulary, formularyStatus } from "./formulary.js";
+import { compileAdvisories, evaluateAdvisories } from "./advisories.js";
 
 const IPD = "IPD";
 const OPEN = "in-progress";
@@ -307,6 +308,25 @@ async function createWardMedicationOrder(request, env, ctx) {
   if (fStatus.state === "non-formulary" && str(ctx.formularyReason)) candidate.formularyReason = str(ctx.formularyReason);
   if (fStatus.satisfiedBy === "approval") candidate.restrictionApprovalRef = str(ctx.approvalRef);
 
+  /* THE HOSPITAL'S OWN ADVISORIES, evaluated AFTER the formulary and unable to affect the write.
+   * They are read from records the ward already has, and a failure to read them costs the prescriber
+   * nothing: an advisory that could not be computed is simply absent, and losing a hospital's own
+   * reminder must never cost a patient their medicine. */
+  let advisories = [];
+  try {
+    const compiled = compileAdvisories(ctx.advisories);
+    if (compiled.rules.length) {
+      const [obsRows, probRows] = await Promise.all([
+        svc.byPatient("Observation", candidate.patientId).catch(() => []),
+        svc.byPatient("Condition", candidate.patientId).catch(() => []),
+      ]);
+      advisories = evaluateAdvisories({
+        compiled, drug: candidate.drug, observations: obsRows || [], problems: probRows || [],
+        ageYears: ctx.ageYears, nowMs: Date.now(),
+      });
+    }
+  } catch { advisories = []; }
+
   let current;
   try { current = await svc.get("MedicationOrder", candidate.id); }
   catch (e) { return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), written: 0 }; }
@@ -338,6 +358,10 @@ async function createWardMedicationOrder(request, env, ctx) {
     ...base, ok: true, written: 1, orderId: candidate.id, patientId: candidate.patientId,
     encounterId: candidate.encounterId, version: out.record.version, status: candidate.status,
     safety: ctx.safety || null,
+    /* The hospital's own advice, alongside the safety engine's findings and never mixed into them.
+     * Every entry carries source:"hospital-advisory" and blocking:false. */
+    ...(advisories.length ? { advisories } : {}),
+    formulary: fStatus.state,
     // `fired` is included: an evaluation where the rule was RESPECTED writes a firing and no
     // override, and leaving that off the response made the denominator invisible to the caller.
     ...(overrides && (overrides.written || overrides.error || overrides.rejected || overrides.fired) ? { overridesRecorded: overrides } : {}),
