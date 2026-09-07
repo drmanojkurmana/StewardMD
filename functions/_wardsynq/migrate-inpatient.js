@@ -32,6 +32,7 @@ import { RecordService } from "./service.js";
 import { AuthError, PermissionError } from "../_connect/permission.js";
 import { vitalsToObservations } from "./migrate-vitals.js";
 import { patientIdForMrn, admissionIdFor } from "./opd-identity.js";
+import { recordOverrides } from "./override-analytics.js";
 
 const IPD = "IPD";
 const OPEN = "in-progress";
@@ -278,12 +279,36 @@ async function createWardMedicationOrder(request, env, ctx) {
   try { current = await svc.get("MedicationOrder", candidate.id); }
   catch (e) { return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), written: 0 }; }
 
+  let out;
   try {
-    const out = await svc.put(candidate, { expectedVersion: current ? current.version : undefined, idempotencyKey: ctx.idempotencyKey || null });
-    return { ...base, ok: true, written: 1, orderId: candidate.id, patientId: candidate.patientId, encounterId: candidate.encounterId, version: out.record.version, status: candidate.status, safety: ctx.safety || null, actor: resolved.actor.id, role: resolved.role };
+    out = await svc.put(candidate, { expectedVersion: current ? current.version : undefined, idempotencyKey: ctx.idempotencyKey || null });
   } catch (e) {
     return { ...base, ...writeFailure(e, { orderId: candidate.id, written: 0, actor: resolved.actor.id }) };
   }
+
+  /* Any warning the prescriber overrode is recorded, so the rule pack can be told which of its rules
+   * are being clicked through. The safety engine has always REQUIRED a reason to clear a finding and
+   * then discarded it, which meant the most important question about a decision-support system -
+   * which rules are overridden, and why - could not be asked at all.
+   *
+   * A FAILURE HERE NEVER FAILS THE ORDER. The order and the prescriber's safety decision are the
+   * clinical act; losing an analytics row must not cost a patient their medicine. It is reported on
+   * the response rather than thrown. */
+  let overrides = null;
+  try {
+    overrides = await recordOverrides(svc, {
+      safety: ctx.safety, orderId: candidate.id, patientId: candidate.patientId,
+      encounterId: candidate.encounterId, drug: candidate.drug, idempotencyKey: ctx.idempotencyKey || null,
+    });
+  } catch (e) { overrides = { written: 0, overrides: [], error: "override_not_recorded", detail: str(e && e.message) }; }
+
+  return {
+    ...base, ok: true, written: 1, orderId: candidate.id, patientId: candidate.patientId,
+    encounterId: candidate.encounterId, version: out.record.version, status: candidate.status,
+    safety: ctx.safety || null,
+    ...(overrides && (overrides.written || overrides.error || overrides.rejected) ? { overridesRecorded: overrides } : {}),
+    actor: resolved.actor.id, role: resolved.role,
+  };
 }
 
 /* ---- transfer and the bed board -----------------------------------------------------------------

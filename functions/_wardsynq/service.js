@@ -71,6 +71,10 @@ const RESOURCE_TYPES = Object.freeze([
    * as its own record precisely so it moves nothing: the two Patient records and every clinical row
    * under them stay exactly as they are, which is what makes the claim retractable. */
   "PatientLink",
+  /* A recorded CDSS override. The safety engine always required a reason to clear a warning and then
+   * discarded it, so nothing could answer which rules were being clicked through. Stored so a rule
+   * pack can be told; never aggregated by clinician. */
+  "SafetyOverride",
 ]);
 
 const MODE = Object.freeze({ SYSTEM_OF_RECORD: "system-of-record", INTEGRATION: "integration" });
