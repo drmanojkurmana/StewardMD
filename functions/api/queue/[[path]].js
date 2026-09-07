@@ -77,6 +77,7 @@ import { listTemplates, writeTemplatedNote } from "../../_wardsynq/note-template
 import { queueTransmission, recordOutcome, resolveTransmission, listTransmissions } from "../../_wardsynq/prescription-transmit.js";
 import { submitNote, signNote, listAwaitingCoSign } from "../../_wardsynq/note-cosign.js";
 import { downtimePack } from "../../_wardsynq/downtime.js";
+import { qualityReport } from "../../_wardsynq/quality.js";
 import { listTools as listRiskTools, recordAssessment as recordRiskAssessment, completeAction as completeRiskAction, listAssessments as listRiskAssessments } from "../../_wardsynq/risk-assessment.js";
 import { recordAllergiesFromAssessment } from "../../_wardsynq/migrate-allergy.js";
 
@@ -504,6 +505,9 @@ export async function onRequest(context) {
         /* The downtime pack is the whole ward's chart on one sheet, so it needs the authority to read
          * a chart - not the lower bar that opens the bed list. It writes nothing. */
         downtime: CAPS.EMR_VIEW,
+        // Measures about the system, naming no clinician. Readable by anyone who can read a chart,
+        // for the same reason the override report is: the people the machinery acts on can see it.
+        quality: CAPS.EMR_VIEW,
         // Risk assessment is nursing work, like the rest of the flowsheet.
         "risk-tools": CAPS.EMR_VIEW, assess: CAPS.EMR_VITALS, "risk-action": CAPS.EMR_VITALS, risks: CAPS.EMR_VIEW,
         /* Sending a prescription is part of prescribing, so queueing is emr.treat. Recording what
@@ -639,6 +643,17 @@ export async function onRequest(context) {
       }
       if (sub === "note-sign" && method === "POST") {
         const r = await signNote(request, env, { ...deps, noteId: body.noteId, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "quality" && method === "GET") {
+        const esc = (wsqCfg && wsqCfg.criticalEscalation) || null;
+        const r = await qualityReport(request, env, {
+          ...deps, days: url.searchParams.get("days") || "",
+          // The threshold is the HOSPITAL's, not a default invented here: a measure scored against a
+          // window nobody agreed to is a number nobody will act on.
+          ackWindowMinutes: esc && esc.acknowledgeWithinMinutes,
+          graceMinutes: (wsqCfg && wsqCfg.marGraceMinutes),
+        });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "downtime" && method === "GET") {

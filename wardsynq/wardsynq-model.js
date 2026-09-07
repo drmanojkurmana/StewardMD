@@ -244,6 +244,10 @@ function MedicationAdministration(input) {
     administeredBy: input.administeredBy || null,
     witnessedBy: input.witnessedBy || null, // required for high-alert drugs
     administeredAt: input.administeredAt || null,
+    // When the dose was DUE, as the schedule computed it. Without this a record can say a dose was
+    // given and cannot say whether it was late, which is the only way to ask whether an eMAR is
+    // working. Never derived from administeredAt: that would make every dose on time by definition.
+    dueAt: input.dueAt || null,
     holdReason: input.holdReason || null,
     meta: makeMeta(input),
   };

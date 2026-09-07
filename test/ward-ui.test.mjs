@@ -283,6 +283,42 @@ test("HTML is escaped: a hostile ward or drug name cannot inject markup", () => 
   assert.match(html, /p&amp;p/);
 });
 
+test("A MEASURE SHOWS ITS DENOMINATOR, AND ONE THAT CANNOT BE COMPUTED SHOWS ITS REASON", () => {
+  const W = load();
+  const html = W._render(Object.assign({}, base, {
+    quality: {
+      period: { days: 30 }, notComputable: 1,
+      measures: [
+        { id: "a", title: "Critical results acknowledged in time", computable: true, rate: 0.75, numerator: 30, denominator: 40, neverAcknowledged: 2 },
+        { id: "b", title: "Doses on time", computable: true, rate: 1, numerator: 2, denominator: 2, underpowered: true, note: "2 cases in this period. Too few to read as a rate." },
+        { id: "c", title: "Discharges with a signed summary", computable: true, rate: null, numerator: 0, denominator: 0 },
+        { id: "d", title: "Allergy status documented", computable: false, reason: "WardSynQ cannot record \"asked, and there are none\"." },
+      ],
+    },
+  }));
+  /* A rate whose denominator is not shown is a rate nobody can argue with, and these exist to be
+   * argued with. */
+  assert.match(html, /75%/);
+  assert.match(html, /30 of 40/);
+  assert.match(html, /were never acknowledged at all/, "late and never-at-all are different failures");
+
+  // 100% over two cases is the commonest way a quality dashboard lies.
+  assert.match(html, /Too few to read as a rate/);
+
+  // No cases is neither 0% nor 100%.
+  assert.match(html, /No cases in this period/);
+  assert.ok(!/>0%</.test(html));
+
+  // The unavailable measure is SHOWN, with its reason. Omitting it would read as "nothing to report".
+  assert.match(html, /asked, and there are none/);
+  assert.match(html, /class="unavailable"/);
+  assert.match(html, /cannot be computed from the record/);
+
+  // And the card says out loud what it is not measuring.
+  assert.match(html, /measure the system, not any clinician/);
+  assert.ok(!W._render(base).includes("Measures"), "no data, no card");
+});
+
 test("THE DOWNTIME PACK NEVER PRINTS A REASSURING BLANK", () => {
   const W = load();
   const pack = (patients, over) => W._render(Object.assign({}, base, {
