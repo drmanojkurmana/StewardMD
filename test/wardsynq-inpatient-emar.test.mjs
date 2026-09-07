@@ -1188,6 +1188,87 @@ test("the bed board says who is where, and never confuses 'no free beds' with 'w
   assert.equal(withUnplaced.wards[0].unplaced.length, 1);
 });
 
+/* ---- FHIR export ----------------------------------------------------------------------------------
+ *
+ * How a hospital gets its own data OUT: into a national exchange, a research extract, a successor
+ * system, or a regulator's hands. Read only.
+ */
+
+test("the whole stay exports as a FHIR bundle, from the real record", async () => {
+  seedHospital();
+  const { reg, adm, ord, patient, scan } = await admittedPatientOnDrug();
+  await as(DOCTOR, "/ward/problem", "POST", { orgId: ORG, problem: { patientId: adm.patientId, encounterId: adm.encounterId, code: "J18.9", codeSystem: "ICD-10", display: "Pneumonia", verificationStatus: "provisional" } });
+  const step = (a, x) => as(NURSE, "/ward/mar", "POST", { orgId: ORG, action: a, orderId: ord.orderId, dueAt: DUE, patient, ...(x || {}) });
+  await step("verify"); await step("dispense"); await step("scan", { scan }); await step("administer");
+
+  const b = await as(DOCTOR, `/ward/fhir?orgId=${ORG}&patient=${adm.patientId}`);
+  assert.equal(b.__status, 200, JSON.stringify(b).slice(0, 300));
+  assert.equal(b.resourceType, "Bundle");
+  assert.equal(b.type, "searchset");
+  const byType = {};
+  for (const e of b.entry) (byType[e.resource.resourceType] ||= []).push(e.resource);
+
+  assert.equal(byType.Patient[0].name[0].text, "Ward Testcase");
+  assert.equal(byType.Patient[0].identifier[0].value, reg.mrn);
+  assert.equal(byType.Encounter[0].class.code, "IMP", "an admission is an inpatient encounter");
+  // The diagnosis keeps its ICD-10 coding AND its provisional status across the boundary.
+  assert.deepEqual(byType.Condition[0].code.coding, [{ system: "http://hl7.org/fhir/sid/icd-10", code: "J18.9", display: "Pneumonia" }]);
+  assert.equal(byType.Condition[0].verificationStatus.coding[0].code, "provisional");
+  // The order is a MedicationRequest; the dose that was actually given is a completed
+  // MedicationAdministration pointing back at it.
+  assert.equal(byType.MedicationRequest[0].dosageInstruction[0].doseAndRate[0].doseQuantity.value, 500);
+  assert.equal(byType.MedicationAdministration[0].status, "completed");
+  assert.deepEqual(byType.MedicationAdministration[0].request, { reference: `MedicationRequest/${ord.orderId}` });
+  // The vitals are LOINC-coded observations, because those genuinely are LOINC.
+  assert.ok(byType.Observation.some((o) => o.code.coding && o.code.coding[0].system === "http://loinc.org"));
+
+  // One resource by id, and a type WardSynQ does not export is a 404 OperationOutcome rather than
+  // something approximate.
+  const one = await as(DOCTOR, `/ward/fhir/Encounter/${adm.encounterId}?orgId=${ORG}`);
+  assert.equal(one.resourceType, "Encounter");
+  const nope = await as(DOCTOR, `/ward/fhir/Practitioner/abc?orgId=${ORG}`);
+  assert.equal(nope.__status, 404);
+  assert.equal(nope.resourceType, "OperationOutcome", "a FHIR client parses OperationOutcome, not our error shape");
+});
+
+test("the FHIR door is not a way around the record's own access rules", async () => {
+  seedHospital();
+  const { adm } = await admittedPatientOnDrug();
+  // An export door easier to open than the chart would be the way around every other control.
+  assert.equal((await as(PHARM, `/ward/fhir?orgId=${ORG}&patient=${adm.patientId}`)).__status, 403);
+  const nurse = await as(NURSE, `/ward/fhir?orgId=${ORG}&patient=${adm.patientId}`);
+  assert.equal(nurse.__status, 200, "a clinician exports what a clinician can already read");
+
+  // The CapabilityStatement is public to any clinician and advertises read and search only.
+  const cap = await as(NURSE, `/ward/fhir/metadata?orgId=${ORG}`);
+  assert.equal(cap.resourceType, "CapabilityStatement");
+  const codes = new Set(cap.rest[0].resource.flatMap((r) => r.interaction.map((i) => i.code)));
+  assert.deepEqual([...codes].sort(), ["read", "search-type"]);
+
+  // And there is no write door: POST to the FHIR path is not a create.
+  const write = await as(DOCTOR, "/ward/fhir", "POST", { orgId: ORG, resourceType: "Patient", id: "smuggled" });
+  assert.equal(write.__status, 404);
+  assert.equal(await RECORD.latest(TENANT_ROW.id, "Patient", "smuggled"), null);
+});
+
+test("_type narrows the bundle without inventing anything", async () => {
+  seedHospital();
+  const { adm } = await admittedPatientOnDrug();
+  const b = await as(DOCTOR, `/ward/fhir?orgId=${ORG}&patient=${adm.patientId}&_type=AllergyIntolerance,MedicationRequest`);
+  assert.equal(b.__status, 200);
+  const types = new Set(b.entry.map((e) => e.resource.resourceType));
+  assert.ok(!types.has("Observation"), "the ward vitals are not in a bundle that did not ask for them");
+  assert.ok(types.has("MedicationRequest"));
+  // A patient with nothing of a requested type yields an empty bundle, not a fabricated resource.
+  const empty = await as(DOCTOR, `/ward/fhir?orgId=${ORG}&patient=${adm.patientId}&_type=DiagnosticReport`);
+  assert.equal(empty.total, 0);
+  assert.deepEqual(empty.entry, []);
+  // No patient at all is a 400 OperationOutcome, not an export of the whole hospital.
+  const all = await as(DOCTOR, `/ward/fhir?orgId=${ORG}`);
+  assert.equal(all.__status, 400);
+  assert.equal(all.resourceType, "OperationOutcome");
+});
+
 /* ---- break-glass ---------------------------------------------------------------------------------
  *
  * An EMR that cannot be opened in an emergency gets worked around: a shared login, a borrowed badge,

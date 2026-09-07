@@ -60,6 +60,7 @@ import { recordFluid, fluidBalance } from "../../_wardsynq/fluid-balance.js";
 import { giveHandover, receiveHandover, listHandovers } from "../../_wardsynq/handover.js";
 import { verifyOrder, verificationQueue } from "../../_wardsynq/pharmacy-verify.js";
 import { declareBreakGlass, openEmergencyChart, listBreakGlass } from "../../_wardsynq/break-glass.js";
+import { patientEverything, readResource, capabilityStatement } from "../../_wardsynq/fhir.js";
 import { recordAllergiesFromAssessment } from "../../_wardsynq/migrate-allergy.js";
 
 // The Encounter migration's one shared call site. Every hook below (ticket add, import, a terminal
@@ -440,6 +441,11 @@ export async function onRequest(context) {
          * non-clinician into one. The list is deliberately readable by any clinical role - the whole
          * value of break-glass is that the ward can see it happened, not only an administrator. */
         "break-glass": CAPS.EMR_VITALS, "emergency-chart": CAPS.EMR_VITALS, "break-glass-log": CAPS.EMR_VITALS,
+        /* The FHIR export. emr.view because it renders the chart: exporting a record is reading it,
+         * and an export door that was easier to open than the chart itself would be the way around
+         * every other control on this file. The record service still applies the actor's own read
+         * scope on top, so the bundle contains only what that clinician could already see. */
+        fhir: CAPS.EMR_VIEW,
         // Closing a stay is the administrative act QUEUE_ADD already covers for opening one.
         // The summary is a clinical document: drafting and signing it are EMR_TREAT.
         discharge: CAPS.QUEUE_ADD, "discharge-summary": CAPS.EMR_TREAT, "sign-discharge-summary": CAPS.EMR_TREAT,
@@ -497,6 +503,25 @@ export async function onRequest(context) {
       if (sub === "round" && method === "GET") {
         const r = await medicationRound(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "", dueAt: url.searchParams.get("dueAt") || "" });
         return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      /* FHIR, read only. Three shapes, all GET:
+       *   /ward/fhir/metadata                    the CapabilityStatement
+       *   /ward/fhir/Patient/<id>                one resource
+       *   /ward/fhir?patient=<id>[&_type=A,B]    everything for one patient, as a Bundle
+       * Errors come back as OperationOutcome, because that is what a FHIR client parses. */
+      if (sub === "fhir" && method === "GET") {
+        const fType = parts[2] || "", fId = parts[3] || "";
+        if (fType === "metadata") {
+          return json(capabilityStatement({ date: new Date().toISOString(), version: "wardsynq-1" }), 200, request);
+        }
+        const fctx = { ...deps, base: `${url.origin}/api/queue/ward/fhir` };
+        const r = fType && fId
+          ? await readResource(request, env, { ...fctx, type: fType, id: fId })
+          : await patientEverything(request, env, {
+              ...fctx, patientId: url.searchParams.get("patient") || url.searchParams.get("patientId") || "",
+              types: (url.searchParams.get("_type") || "").split(",").map((t) => t.trim()).filter(Boolean),
+            });
+        return json(r.ok ? (r.bundle || r.resource) : r.outcome, r.status, request);
       }
       if (sub === "break-glass" && method === "POST") {
         const r = await declareBreakGlass(request, env, { ...deps, patientId: body.patientId, reason: body.reason, minutes: body.minutes, idempotencyKey: body.idempotencyKey || null });

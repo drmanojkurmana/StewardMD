@@ -954,7 +954,15 @@ test("THE PROOF: nurse enters vitals -> record stores Observations -> doctor ope
   // 5. The read was audited as the doctor, PHI-free.
   const reads = h.repository.audit.filter((a) => a.action === "record.read" && a.actor === "fb:dr-menon");
   assert.ok(reads.length >= 1);
-  assert.ok(!JSON.stringify(reads).includes("138"), "no values in the audit");
+  /* No clinical VALUE in the audit. The timestamp is excluded from the search deliberately: `ts`
+   * carries milliseconds, and an ISO instant ending ".138Z" contains "138" all by itself. This
+   * assertion used to stringify the whole row and failed roughly once in a thousand runs for that
+   * reason alone - a flake that had nothing to do with PHI and would have eroded trust in a real
+   * safety assertion. What it means is "no recorded observation value leaked", so it now looks at
+   * everything except the clock. */
+  const auditBody = JSON.stringify(reads.map(({ ts, ...rest }) => rest));
+  assert.ok(!auditBody.includes("138"), "no values in the audit: " + auditBody.slice(0, 400));
+  assert.ok(!auditBody.includes("96"), "nor any other reading");
 });
 
 /* ------------------------------------------------------------------ the patient-registration migration */
