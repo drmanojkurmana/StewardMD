@@ -1179,6 +1179,117 @@ test("the bed board says who is where, and never confuses 'no free beds' with 'w
   assert.equal(withUnplaced.wards[0].unplaced.length, 1);
 });
 
+/* ---- shift handover -----------------------------------------------------------------------------
+ *
+ * Handover failure is one of the best-documented causes of harm in hospitals: the information
+ * existed, somebody knew it, and it did not survive the change of shift.
+ */
+
+test("A HANDOVER IS ONLY COMPLETE WHEN SOMEBODY ELSE HAS TAKEN IT", async () => {
+  seedHospital();
+  const { adm } = await admittedPatientOnDrug();
+
+  const given = await as(NURSE, "/ward/handover", "POST", {
+    orgId: ORG, encounterId: adm.encounterId, givenAt: "2026-09-07T20:00:00.000Z",
+    sbar: {
+      situation: "Day 2 of community-acquired pneumonia, on IV amoxicillin.",
+      background: "Admitted with fever and cough. Type 2 diabetic.",
+      assessment: "Afebrile since 14:00, saturations 96% on air.",
+      recommendation: "Repeat CRP in the morning. Chase the blood culture.",
+    },
+  });
+  assert.equal(given.__status, 200, JSON.stringify(given));
+  assert.equal(given.state, "waiting", "given is not the same as taken");
+  assert.ok(given.givenBy);
+  assert.equal(given.receivedBy, null);
+  assert.match(given.sections.recommendation, /Chase the blood culture/);
+
+  // It sits on the incoming shift's list until somebody takes it. Nothing expires it.
+  const waiting = await as(DOCTOR, `/ward/handovers?orgId=${ORG}`);
+  assert.equal(waiting.waiting, 1);
+  assert.equal(waiting.handovers[0].handoverId, given.handoverId);
+
+  /* THE RECEIVER CANNOT BE THE AUTHOR. Letting the outgoing nurse close her own loop would close it
+   * at exactly the moment the information is lost. */
+  const self = await as(NURSE, "/ward/receive-handover", "POST", { orgId: ORG, handoverId: given.handoverId });
+  assert.equal(self.__status, 409);
+  assert.equal(self.error, "same_clinician");
+
+  const taken = await as(DOCTOR, "/ward/receive-handover", "POST", { orgId: ORG, handoverId: given.handoverId, note: "Taken. Will chase the culture at 08:00." });
+  assert.equal(taken.__status, 200, JSON.stringify(taken));
+  assert.equal(taken.state, "received");
+  assert.ok(taken.receivedBy && taken.receivedBy !== taken.givenBy, "two different clinicians, permanently on the record");
+  assert.match(taken.readBack, /chase the culture/i);
+
+  // Both names survive as versions: who wrote it and who took it.
+  const hist = await RECORD.history(TENANT_ROW.id, "ShiftHandover", given.handoverId);
+  assert.deepEqual(hist.map((h) => !!h.receivedBy), [false, true]);
+  assert.equal(hist[1].givenBy, given.givenBy, "and it still names the clinician who gave it");
+
+  // Taken handovers leave the waiting list rather than burying the ones that still need somebody.
+  assert.equal((await as(DOCTOR, `/ward/handovers?orgId=${ORG}`)).waiting, 0);
+  assert.equal((await as(DOCTOR, `/ward/handovers?orgId=${ORG}&state=received`)).handovers.length, 1);
+});
+
+test("an empty handover is not a handover, and a taken one is not rewritten", async () => {
+  seedHospital();
+  const { adm } = await admittedPatientOnDrug();
+  // An empty record where the incoming shift expects an account reads as "nothing to say" rather
+  // than "nobody wrote it", which is the more dangerous of the two.
+  const empty = await as(NURSE, "/ward/handover", "POST", { orgId: ORG, encounterId: adm.encounterId, sbar: { situation: "  " } });
+  assert.equal(empty.__status, 422);
+  assert.equal(empty.error, "nothing_handed_over");
+
+  const given = await as(NURSE, "/ward/handover", "POST", { orgId: ORG, encounterId: adm.encounterId, givenAt: "2026-09-07T20:00:00.000Z", sbar: { situation: "Stable overnight." } });
+  // A section nobody filled in says so, rather than being assembled from the chart: a handover that
+  // writes its own background is one nobody actually gave.
+  assert.equal(given.sections.background, "Not stated.");
+  assert.equal(given.sbarStated, 1);
+
+  // Re-submitting the same shift's handover before it is taken is a correction, not a duplicate.
+  const fixed = await as(NURSE, "/ward/handover", "POST", { orgId: ORG, encounterId: adm.encounterId, givenAt: "2026-09-07T20:00:00.000Z", sbar: { situation: "Stable overnight.", recommendation: "Chase potassium." } });
+  assert.equal(fixed.handoverId, given.handoverId);
+  assert.equal(fixed.sections.recommendation, "Chase potassium.");
+
+  await as(DOCTOR, "/ward/receive-handover", "POST", { orgId: ORG, handoverId: given.handoverId });
+  // Once taken it is not rewritten: the receiving clinician acted on what it said.
+  const late = await as(NURSE, "/ward/handover", "POST", { orgId: ORG, encounterId: adm.encounterId, givenAt: "2026-09-07T20:00:00.000Z", sbar: { situation: "Actually deteriorating." } });
+  assert.equal(late.__status, 409);
+  assert.equal(late.error, "already_received");
+  assert.equal((await RECORD.latest(TENANT_ROW.id, "ShiftHandover", given.handoverId)).sections.situation, "Stable overnight.");
+
+  // Taking it twice is not an error, and does not change who took it first.
+  const twice = await as(DOCTOR, "/ward/receive-handover", "POST", { orgId: ORG, handoverId: given.handoverId });
+  assert.equal(twice.written, 0);
+  assert.equal(twice.skipped, "already_received");
+});
+
+test("a handover never pollutes the discharge summary's clinical notes", async () => {
+  seedHospital();
+  const { adm } = await admittedPatientOnDrug();
+  await as(NURSE, "/ward/handover", "POST", { orgId: ORG, encounterId: adm.encounterId, sbar: { assessment: "Nursing handover assessment, not a medical one." } });
+  await as(DOCTOR, "/ward/discharge", "POST", { orgId: ORG, encounterId: adm.encounterId });
+  const draft = await as(DOCTOR, "/ward/discharge-summary", "POST", { orgId: ORG, encounterId: adm.encounterId });
+  /* The summary copies a CLINICIAN'S assessment note. A shift handover is a different document and
+   * must not be mistaken for the medical assessment of the admission. It is a separate resource
+   * type, which is why this holds structurally rather than by a filter somebody has to remember. */
+  assert.equal(draft.sections.assessment, "Not recorded.");
+  assert.ok(!/Nursing handover/.test(JSON.stringify(draft.sections)));
+  assert.equal((await RECORD.byPatient(TENANT_ROW.id, "ClinicalNote", adm.patientId)).filter((n) => n.noteType === "handover").length, 0,
+    "a handover is not a ClinicalNote at all");
+});
+
+test("a nurse may hand over but still may not author a clinical document", async () => {
+  seedHospital();
+  const { adm } = await admittedPatientOnDrug();
+  // EMR_VITALS was widened to cover ShiftHandover, and that widening must be NARROW: it must not
+  // have handed a nurse the ability to write discharge summaries or assessments along with it.
+  assert.equal((await as(NURSE, "/ward/handover", "POST", { orgId: ORG, encounterId: adm.encounterId, sbar: { situation: "Stable." } })).__status, 200);
+  assert.equal((await as(NURSE, "/ward/discharge-summary", "POST", { orgId: ORG, encounterId: adm.encounterId })).__status, 403);
+  assert.equal((await as(NURSE, "/ward/problem", "POST", { orgId: ORG, problem: { patientId: adm.patientId, display: "Sepsis" } })).__status, 403);
+  assert.equal((await as(PHARM, "/ward/handover", "POST", { orgId: ORG, encounterId: adm.encounterId, sbar: { situation: "x" } })).__status, 403);
+});
+
 /* ---- fluid balance ------------------------------------------------------------------------------
  *
  * The oldest nursing chart there is, and WardSynQ recorded vitals and nothing else a nurse writes.

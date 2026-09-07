@@ -57,6 +57,7 @@ import { recordProblem, listProblems } from "../../_wardsynq/migrate-problem.js"
 import { marSchedule } from "../../_wardsynq/mar-schedule.js";
 import { openCriticalLoops, acknowledgeCritical, listCriticalLoops } from "../../_wardsynq/critical-results.js";
 import { recordFluid, fluidBalance } from "../../_wardsynq/fluid-balance.js";
+import { giveHandover, receiveHandover, listHandovers } from "../../_wardsynq/handover.js";
 import { recordAllergiesFromAssessment } from "../../_wardsynq/migrate-allergy.js";
 
 // The Encounter migration's one shared call site. Every hook below (ticket add, import, a terminal
@@ -424,6 +425,9 @@ export async function onRequest(context) {
         transfer: CAPS.QUEUE_ADD, beds: CAPS.QUEUE_VIEW,
         // Charting fluid is the nurse's own record, the same authority as recording a vital.
         fluid: CAPS.EMR_VITALS, balance: CAPS.EMR_VIEW,
+        // Handing a patient over is the clinical account of a shift: the same authority as recording
+        // a vital, because it is the nurse's own record of their own patients.
+        handover: CAPS.EMR_VITALS, "receive-handover": CAPS.EMR_VITALS, handovers: CAPS.EMR_VIEW,
         // Closing a stay is the administrative act QUEUE_ADD already covers for opening one.
         // The summary is a clinical document: drafting and signing it are EMR_TREAT.
         discharge: CAPS.QUEUE_ADD, "discharge-summary": CAPS.EMR_TREAT, "sign-discharge-summary": CAPS.EMR_TREAT,
@@ -474,6 +478,18 @@ export async function onRequest(context) {
       }
       if (sub === "round" && method === "GET") {
         const r = await medicationRound(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "", dueAt: url.searchParams.get("dueAt") || "" });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "handover" && method === "POST") {
+        const r = await giveHandover(request, env, { ...deps, encounterId: body.encounterId, sbar: body.sbar || body, givenAt: body.givenAt, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "receive-handover" && method === "POST") {
+        const r = await receiveHandover(request, env, { ...deps, handoverId: body.handoverId, note: body.note, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "handovers" && method === "GET") {
+        const r = await listHandovers(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "", state: url.searchParams.get("state") || "" });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "fluid" && method === "POST") {
