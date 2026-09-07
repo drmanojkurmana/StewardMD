@@ -95,12 +95,17 @@ test("THE GRANT IS THE GUARANTEE: billing cannot write the diagnosis that justif
   assert.ok(!cashier.write.includes("Observation"));
   assert.ok(!cashier.write.includes("ClinicalNote"));
 
-  /* Read is the problem list and nothing else clinical: coding asks one question, and a coder handed
-   * the notes and the results to answer it has been given the whole chart for no reason. */
+  /* Read is the problem list plus, since charge capture (#942), the four "what was DONE" types.
+   * Both of those earned their place: coding asks whether a diagnosis is documented, and charge
+   * capture asks what actually happened. Neither needs the notes, and the coder still does not get
+   * the vitals or the laboratory values - a coder handed the whole chart to answer two questions
+   * has been given it for no reason. */
   assert.ok(cashier.read.includes("Condition"));
+  assert.ok(cashier.read.includes("DiagnosticReport"), "billing what happened requires knowing what happened");
   assert.ok(!cashier.read.includes("ClinicalNote"));
-  assert.ok(!cashier.read.includes("DiagnosticReport"));
-  assert.ok(!cashier.read.includes("MedicationAdministration"));
+  assert.ok(!cashier.read.includes("Observation"));
+  // And reading that a dose was given never becomes the power to record one.
+  assert.ok(!cashier.write.includes("MedicationAdministration"));
 
   // Pharmacy is deliberately never given BILLING_CHARGE, so it gains nothing from any of this.
   assert.ok(!grantForRole("pharmacy").write.includes(CLAIM_TYPE));

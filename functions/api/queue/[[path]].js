@@ -95,6 +95,7 @@ import { recordRead, readersToNotify } from "../../_wardsynq/read-log.js";
 import { codeClaimForEncounter, claimAction, recordPreAuth, claimsForPatient, watchlist as upcodingList } from "../../_wardsynq/billing.js";
 import { patientCopy, releaseToPatient } from "../../_wardsynq/patient-record.js";
 import { exportPage, recordBackupRun, backupStatus } from "../../_wardsynq/backup-run.js";
+import { chargesForPatient } from "../../_wardsynq/charge-capture.js";
 import { listTools as listRiskTools, recordAssessment as recordRiskAssessment, completeAction as completeRiskAction, listAssessments as listRiskAssessments } from "../../_wardsynq/risk-assessment.js";
 import { recordAllergiesFromAssessment } from "../../_wardsynq/migrate-allergy.js";
 
@@ -566,6 +567,9 @@ export async function onRequest(context) {
          * collections" - and billing.view is precisely the person who is. */
         claim: CAPS.BILLING_CHARGE, "claim-state": CAPS.BILLING_CHARGE, preauth: CAPS.BILLING_CHARGE,
         claims: CAPS.BILLING_VIEW, upcoding: CAPS.STAFF_ADMIN,
+        /* Charge capture reads what was DONE and proposes nothing binding, so it sits with the rest
+         * of coding at billing.charge. It writes nothing at all - not even a Claim. */
+        charges: CAPS.BILLING_CHARGE,
         /* The patient's own copy. Seeing what the patient WOULD be given is reading the chart, so
          * emr.view. HANDING IT OVER IS EMR_TREAT: deciding a patient is ready to be told what is in
          * their record is a clinical act, not a clerical one, and the person who does it has to be
@@ -810,6 +814,14 @@ export async function onRequest(context) {
       }
       if (sub === "upcoding" && method === "GET") {
         const r = await upcodingList(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "" });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "charges" && method === "GET") {
+        const r = await chargesForPatient(request, env, {
+          ...deps, patientId: url.searchParams.get("patientId") || "",
+          encounterId: url.searchParams.get("encounterId") || "",
+          tariff: (wsqCfg && wsqCfg.tariff) || null,
+        });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "backup" && method === "GET") {
