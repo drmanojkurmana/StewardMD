@@ -2725,6 +2725,67 @@ test("sending is prescribing's business, and nothing unsendable is sent", async 
   assert.equal(bogus.error, "unknown_channel");
 });
 
+/* ---- the early warning score ---------------------------------------------------------------------- */
+
+test("AN INCOMPLETE NEWS2 IS NEVER REASSURING, however low the partial total", async () => {
+  seedHospital();
+  const { reg, adm } = await admittedPatientOnDrug();
+  assert.ok(reg.mrn);
+
+  /* admittedPatientOnDrug charts only a weight, so nearly every parameter is missing. A system that
+   * scored an absent respiratory rate as zero would produce a reassuring total about a patient
+   * nobody has looked at - the single most dangerous way to implement NEWS2. */
+  const thin = await as(NURSE, `/ward/news2?orgId=${ORG}&patientId=${adm.patientId}`);
+  assert.equal(thin.__status, 200, JSON.stringify(thin));
+  assert.equal(thin.score.scorable, false);
+  /* The partial total IS returned - hiding it would be its own kind of dishonesty - but there is NO
+   * RISK, and the reason says in words that the total must not be read as one. A consumer that read
+   * `total` without `scorable` would see a reassuring 0 about a patient nobody has examined. */
+  assert.equal(thin.score.risk, null, "a partial total is not a risk assessment");
+  assert.ok(thin.score.missing.length > 0);
+  assert.match(thin.score.reason, /must not be read as one/);
+  assert.ok(thin.note, "and the response repeats it");
+
+  // A full set of observations scores.
+  await as(NURSE, "/ward/vitals", "POST", {
+    orgId: ORG, encounterId: adm.encounterId, patientId: adm.patientId,
+    // All six numeric parameters PLUS the two NEWS2 could never record before: supplemental oxygen
+    // and level of consciousness. Without them no early warning score can ever complete.
+    vitals: { rr: "18", spo2: "97", sbp: "126", pulse: "78", temp: "98.6", tempUnit: "F", o2: false, acvpu: "A" },
+  });
+  const scored = await as(NURSE, `/ward/news2?orgId=${ORG}&patientId=${adm.patientId}`);
+  assert.equal(scored.score.scorable, true, JSON.stringify(scored.score));
+  assert.equal(typeof scored.score.total, "number");
+  assert.ok(scored.score.risk);
+
+  /* SCALE 2 IS A PRESCRIPTION AND IS NEVER INFERRED. Using Scale 1 on a patient targeted at 88-92%
+   * escalates somebody who is at their target; using Scale 2 on anyone else hides real hypoxia. */
+  assert.equal(scored.scale, 1);
+  assert.match(scored.scaleNote, /never inferred/);
+  const two = await as(NURSE, `/ward/news2?orgId=${ORG}&patientId=${adm.patientId}&scale=2`);
+  assert.equal(two.scale, 2);
+  assert.match(two.scaleNote, /documented target of 88-92%/);
+
+  /* THE ESCALATION POLICY IS UNAPPROVED AND SAYS SO. A response time nobody signed off, presented as
+   * fact, is how a system gets trusted for something it has no authority to say. */
+  assert.equal(scored.escalationApproved, false);
+  assert.match(scored.escalationWarning, /UNAPPROVED seed content/);
+  assert.match(scored.monitoring, /Nothing has been paged/);
+
+  // With the hospital's own policy configured, it is theirs and the warning goes.
+  const org = docs.get(`q_orgs/${ORG}`);
+  org.fields.wardsynq = { ...org.fields.wardsynq, criticalEscalation: { high: { responder: "ICU outreach", respondWithinMinutes: 10 }, medium: {}, low: {}, "low-medium": {} } };
+  const owned = await as(NURSE, `/ward/news2?orgId=${ORG}&patientId=${adm.patientId}`);
+  assert.equal(owned.escalationApproved, true);
+  assert.equal(owned.escalationWarning, undefined);
+
+  // A laboratory result is not a NEWS2 parameter and must not reach the scorer.
+  const sr = await orderTest(adm, "Potassium", "wsq-sr-news");
+  await as(LABTECH, "/ward/release-result", "POST", { orgId: ORG, serviceRequestId: sr, tests: [{ test: "Potassium", value: 7.4, unit: "mmol/L" }] });
+  const after = await as(NURSE, `/ward/news2?orgId=${ORG}&patientId=${adm.patientId}`);
+  assert.equal(after.score.total, scored.score.total, "the potassium changed nothing");
+});
+
 /* ---- the summary as a document ------------------------------------------------------------------- */
 
 test("A DRAFT SUMMARY IS NOT A DOCUMENT, and a signed one is CDA level 1", async () => {
