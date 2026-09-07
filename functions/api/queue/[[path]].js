@@ -87,6 +87,7 @@ import { chartWound, listWounds } from "../../_wardsynq/wound.js";
 import { bookResource, setBookingState, resourceSchedule } from "../../_wardsynq/resource-booking.js";
 import { flowsheet } from "../../_wardsynq/flowsheet-view.js";
 import { orderInvestigation } from "../../_wardsynq/ward-order.js";
+import { chartInfusion, listInfusions } from "../../_wardsynq/infusion.js";
 import { listTools as listRiskTools, recordAssessment as recordRiskAssessment, completeAction as completeRiskAction, listAssessments as listRiskAssessments } from "../../_wardsynq/risk-assessment.js";
 import { recordAllergiesFromAssessment } from "../../_wardsynq/migrate-allergy.js";
 
@@ -530,6 +531,8 @@ export async function onRequest(context) {
         collect: CAPS.EMR_VITALS, "specimen-outcome": CAPS.EMR_VITALS, collections: CAPS.EMR_VIEW,
         // Asking for an investigation is a clinical act, like prescribing.
         investigation: CAPS.EMR_TREAT,
+        // Charting a pump is the bedside's act, exactly like giving a dose.
+        infusion: CAPS.MED_ADMINISTER, infusions: CAPS.EMR_VIEW,
         // Charting a wound is nursing work, the same authority as a vital or a fluid entry.
         wound: CAPS.EMR_VITALS, wounds: CAPS.EMR_VIEW,
         // Reading the flowsheet is reading the chart. It writes nothing.
@@ -744,6 +747,14 @@ export async function onRequest(context) {
       }
       if (sub === "wounds" && method === "GET") {
         const r = await listWounds(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "" });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "infusion" && method === "POST") {
+        const r = await chartInfusion(request, env, { ...deps, orderId: body.orderId, event: body.event, ratePerHour: body.ratePerHour, reason: body.reason, at: body.at, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "infusions" && method === "GET") {
+        const r = await listInfusions(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "", from: url.searchParams.get("from") || "", to: url.searchParams.get("to") || "" });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "investigation" && method === "POST") {

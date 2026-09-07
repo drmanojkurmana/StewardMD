@@ -215,7 +215,10 @@ function grantForCaps(caps) {
      * was given against - that needs EMR_TREAT. Order and administration stay two resources written
      * by two authorities, which is what makes "someone ordered it" and "someone gave it" different
      * claims in the record. */
-    const added = [ADMINISTRATION_TYPE];
+    /* InfusionRate joins the bedside authority: charting what a pump is doing is the same act as
+     * recording that a dose was given, by the same nurse, at the same bedside. It grants nothing
+     * towards the ORDER - changing a rate is not re-prescribing. */
+    const added = [ADMINISTRATION_TYPE, "InfusionRate"];
     if (!grant) grant = { tier: TIER.EXECUTE, read: [...ORDER_TYPES, ADMINISTRATION_TYPE], write: added, basis: CAPS.MED_ADMINISTER };
     else grant = {
       tier: TIER.EXECUTE,
