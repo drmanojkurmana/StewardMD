@@ -62,6 +62,80 @@ function SafetyOverride(input) {
   };
 }
 
+/* ---- the denominator ---------------------------------------------------------------------------
+ *
+ * An override COUNT identifies nothing on its own. "This interaction rule was overridden 40 times"
+ * is a fact about how busy the ward was; "it fired 42 times and was overridden 40" is a fact about
+ * the rule, and it is the one that says the rule is training people to click through warnings.
+ *
+ * Until now nothing counted the firings, so `overrideRate` was honestly `null` on every row. This is
+ * that count: one record per (order, rule pack version) naming which overridable rules fired. It is
+ * kept as its own append-only fact rather than a counter, because a counter incremented from two
+ * concurrent orders loses one of them, and a lost firing silently lowers a rule's override rate -
+ * which is the direction that hides a bad rule.
+ *
+ * ONE PER ORDER AND PACK VERSION, deterministically. A retried or idempotent order write is the same
+ * evaluation, not a second alert, and counting it twice would deflate the rate. A genuinely different
+ * pack version is a different set of rules, so it counts again.
+ *
+ * ONLY OVERRIDABLE FINDINGS ARE COUNTED. A hard block is not part of an override rate: nobody can
+ * override it, so a rate over those would be zero by construction and would drag every real number
+ * down with it.
+ */
+const FIRING_TYPE = "SafetyFiring";
+
+/** PURE. The key a firing and an override are counted under. Identical on both sides by design. */
+function ruleKey(code, targetId) { return targetId ? `${code}:${targetId}` : String(code); }
+
+function firingIdFor(orderId, rulePackVersion) {
+  const slug = (v) => str(v).toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
+  const o = slug(orderId);
+  if (!o) return null;
+  const v = slug(rulePackVersion);
+  return v ? `wsq-fire-${o}-${v}` : `wsq-fire-${o}`;
+}
+
+/**
+ * PURE. Which overridable rules this verdict fired, as one record. Null when none did - an order that
+ * raised nothing is not an evaluation worth storing, and storing it would put an empty row against
+ * every prescription in the hospital.
+ *
+ * Read from the engine's own `findings`, where a cleared finding keeps its original OVERRIDABLE
+ * disposition. Reading `overridables` instead would have counted only the ones NOBODY overrode,
+ * making the denominator smaller exactly when the numerator was larger.
+ */
+function firingFrom(input) {
+  const i = input || {};
+  const verdict = i.safety || {};
+  const findings = Array.isArray(verdict.findings) ? verdict.findings : [];
+  const keys = [];
+  for (const f of findings) {
+    if (!f || f.disposition !== "overridable") continue;
+    const k = ruleKey(f.code, f.ruleId || f.allergyId || null);
+    if (k && keys.indexOf(k) < 0) keys.push(k);
+  }
+  if (!keys.length) return null;
+  const id = firingIdFor(i.orderId, verdict.rulePackVersion);
+  if (!id) return null;
+  return {
+    resourceType: FIRING_TYPE, id,
+    patientId: i.patientId, encounterId: i.encounterId || null, orderId: i.orderId,
+    rulePackVersion: verdict.rulePackVersion || null,
+    keys,
+    at: i.at || new Date().toISOString(),
+    source: { system: "wardsynq-native", sourceId: `firing:${id}` },
+  };
+}
+
+/** PURE. The denominator, from the stored firings. */
+function firedCountsFrom(firings) {
+  const out = {};
+  for (const f of firings || []) {
+    for (const k of (f && Array.isArray(f.keys) ? f.keys : [])) out[k] = (out[k] || 0) + 1;
+  }
+  return out;
+}
+
 /** PURE. One record per (order, finding). A retried order write is the same override. */
 function overrideIdFor(orderId, code, targetId) {
   const slug = (v) => str(v).toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
@@ -119,11 +193,12 @@ function summariseOverrides(input) {
   const overrides = i.overrides || [];
   const fired = i.firedCounts || {};      // optional: {key: n} from whatever recorded firings
   const byKey = new Map();
-  const keyOf = (code, targetId) => (targetId ? `${code}:${targetId}` : code);
 
   for (const o of overrides) {
     if (!o) continue;
-    const key = keyOf(o.code, o.targetId);
+    // The SAME key function the firings are counted under. Two spellings of "this rule" is how a
+    // numerator and a denominator end up describing different things.
+    const key = ruleKey(o.code, o.targetId);
     const row = byKey.get(key) || { key, code: o.code, targetId: o.targetId || null, overridden: 0, reasons: {}, severities: {}, rulePackVersions: {} };
     row.overridden += 1;
     if (o.reasonCode) row.reasons[o.reasonCode] = (row.reasons[o.reasonCode] || 0) + 1;
@@ -178,16 +253,34 @@ async function open(request, env, ctx, need) {
  */
 async function recordOverrides(svc, ctx) {
   const { overrides, rejected } = overridesFrom(ctx);
-  if (!overrides.length) return { written: 0, overrides: [], ...(rejected.length ? { rejected } : {}) };
+
+  /* THE FIRING IS RECORDED WHETHER OR NOT ANYTHING WAS OVERRIDDEN, and it is recorded FIRST. A rule
+   * that fires and is respected is the good case, and it is precisely the case that has to reach the
+   * denominator - counting only the orders where somebody overrode something would make every rule
+   * in the pack look like it is overridden 100% of the time. */
+  const firing = firingFrom(ctx);
+  let fired = null;
+  if (firing) {
+    try {
+      const res = await svc.put(firing, { idempotencyKey: ctx.idempotencyKey ? `${ctx.idempotencyKey}:${firing.id}` : null });
+      fired = { id: firing.id, keys: firing.keys, version: res.record.version };
+    } catch (e) {
+      // Losing the denominator is a smaller loss than losing the override itself, so this is reported
+      // and the overrides below are still attempted.
+      fired = { error: "firing_not_recorded", detail: str(e && e.message) };
+    }
+  }
+
+  if (!overrides.length) return { written: 0, overrides: [], ...(fired ? { fired } : {}), ...(rejected.length ? { rejected } : {}) };
   const out = [];
   for (const o of overrides) {
     try { const res = await svc.put(o, { idempotencyKey: ctx.idempotencyKey ? `${ctx.idempotencyKey}:${o.id}` : null }); out.push({ id: o.id, code: o.code, targetId: o.targetId, version: res.record.version }); }
     catch (e) {
-      if (e instanceof GovernanceError || e instanceof VersionConflictError) return { written: out.length, overrides: out, error: "override_not_recorded", detail: str(e.message) };
-      return { written: out.length, overrides: out, error: "override_not_recorded", detail: str(e && e.message) };
+      if (e instanceof GovernanceError || e instanceof VersionConflictError) return { written: out.length, overrides: out, ...(fired ? { fired } : {}), error: "override_not_recorded", detail: str(e.message) };
+      return { written: out.length, overrides: out, ...(fired ? { fired } : {}), error: "override_not_recorded", detail: str(e && e.message) };
     }
   }
-  return { written: out.length, overrides: out, ...(rejected.length ? { rejected } : {}) };
+  return { written: out.length, overrides: out, ...(fired ? { fired } : {}), ...(rejected.length ? { rejected } : {}) };
 }
 
 /** The report. ctx: { migration, patientId?, firedCounts?, actorDeps, recordDeps } */
@@ -199,12 +292,35 @@ async function overrideReport(request, env, ctx) {
   const { svc, error } = await open(request, env, ctx, "record:read");
   if (error) return { ...base, ...error, report: null };
 
-  let rows;
+  let rows, firings;
   try {
-    rows = str(ctx.patientId) ? await svc.byPatient(TYPE, str(ctx.patientId)) : await svc.list(TYPE, 500);
+    const pid = str(ctx.patientId);
+    [rows, firings] = await Promise.all([
+      pid ? svc.byPatient(TYPE, pid) : svc.list(TYPE, 500),
+      pid ? svc.byPatient(FIRING_TYPE, pid) : svc.list(FIRING_TYPE, 500),
+    ]);
   } catch (e) { return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), report: null }; }
 
-  return { ...base, ok: true, report: summariseOverrides({ overrides: rows || [], firedCounts: ctx.firedCounts }) };
+  /* The denominator comes from the record, not from the caller. An earlier signature took
+   * `firedCounts` from the request, which would have let whoever reads the report decide what the
+   * override rate is. It is still honoured when passed, but only as a fallback for a caller that
+   * counted firings some other way; the stored firings win. */
+  const counts = { ...(ctx.firedCounts || {}), ...firedCountsFrom(firings) };
+  const report = summariseOverrides({ overrides: rows || [], firedCounts: counts });
+  return {
+    ...base, ok: true,
+    report: {
+      ...report,
+      evaluationsRecorded: (firings || []).length,
+      // Said plainly: a rate needs both halves, and a report that has only one should not look complete.
+      ...(!(firings || []).length && report.totalOverrides
+        ? { note2: "No rule firings are on record for this scope, so no override rate can be computed. The counts below are numerators without a denominator." }
+        : {}),
+    },
+  };
 }
 
-export { TYPE, SafetyOverride, overrideIdFor, overridesFrom, summariseOverrides, recordOverrides, overrideReport };
+export {
+  TYPE, FIRING_TYPE, SafetyOverride, overrideIdFor, overridesFrom, summariseOverrides, recordOverrides, overrideReport,
+  ruleKey, firingIdFor, firingFrom, firedCountsFrom,
+};

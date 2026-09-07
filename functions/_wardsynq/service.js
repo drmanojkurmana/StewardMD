@@ -75,6 +75,11 @@ const RESOURCE_TYPES = Object.freeze([
    * discarded it, so nothing could answer which rules were being clicked through. Stored so a rule
    * pack can be told; never aggregated by clinician. */
   "SafetyOverride",
+  /* Which overridable rules fired on one order evaluation. The DENOMINATOR: an override count with
+   * no firing count is a fact about how busy the ward was, not about the rule. Kept as its own
+   * append-only fact rather than a counter, because a counter loses one of two concurrent orders and
+   * a lost firing silently lowers a rule's override rate - the direction that hides a bad rule. */
+  "SafetyFiring",
   /* A record that an order set was applied, and exactly what landed and what did not. NOT the orders
    * themselves - those go through the ordinary path and are ordinary orders. This is what makes a
    * partial application visible, and what finds the patients a bad set touched. */

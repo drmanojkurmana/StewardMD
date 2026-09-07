@@ -17,7 +17,7 @@ Updated: 2026-09-07 (PRs #887, #889, #890, #892, #894, #895, #897 pharmacy verif
 | 3 | Outpatient encounter (Ambulatory) | 6 | 75 | Encounter lifecycle, vitals, assessment, sign — proven on real device. No templates, no flowsheet designer. |
 | 4 | Orders — investigations (Beaker/Radiant order entry) | 5 | 85 | ServiceRequest write path + UI, and order sets that apply through the ordinary ordering route. No priority or specimen-collection workflow. |
 | 5 | Prescribing (Willow Ambulatory) | 6 | 85 | #908. MedicationOrder, dose parsing, print, and transmission with a real outbox: queued/sent/acknowledged kept distinct, a failure that stays outstanding until a human deals with it, and a payload versioned to the order. No transport is implemented (a site plugs in its own), no formulary. |
-| 6 | Clinical decision support (Best Practice Advisories) | 7 | 80 | Allergy + cross-reactivity + interactions + dose ceilings, fail-closed, Indian drug DB + FDA, and override analytics per rule. No BPA authoring, no firing counts so no override RATE yet. |
+| 6 | Clinical decision support (Best Practice Advisories) | 7 | 88 | #910. Allergy + cross-reactivity + interactions + dose ceilings, fail-closed, Indian drug DB + FDA, override analytics per rule, and a real override RATE: firings are recorded per order and pack version, so the denominator comes from the record rather than from whoever reads the report. No BPA authoring. |
 | 7 | Problem list (Problem List) | 4 | 70 | #887. Coded/text, provisional default, versioned resolve, feeds the summary. Read-only on the ward screen; no entry UI. |
 | 8 | Inpatient admission / ward (ADT) | 7 | 90 | #889. Admit, ward list, ward vitals, discharge, **with a UI**. Transfer with a bed-collision refusal, and a bed board. No admission scheduling. |
 | 9 | eMAR / medication administration (Willow Inpatient) | 8 | 90 | #889 + #890. State machine, five rights, barcode scan, weight-based refusal, AI blocked, **UI**, **and a real schedule**. Plus medicines reconciliation on admission. No high-alert witness config. |
@@ -33,7 +33,7 @@ Updated: 2026-09-07 (PRs #887, #889, #890, #892, #894, #895, #897 pharmacy verif
 | 19 | Patient portal (MyChart) | 3 | 0 | Not built. |
 | 20 | Deployment / uptime / DR (on-prem, HA) | 3 | 25 | Cloudflare edge + D1, live domain. No on-prem, no DR drill, no downtime procedures. |
 
-**Weighted total: 74.3%.**
+**Weighted total: 74.9%.**
 
 The total is the weight-times-percent sum of the table above, divided by 100. It is COMPUTED from
 these rows, not asserted: earlier revisions of this file carried an eyeballed number that had drifted
@@ -60,10 +60,9 @@ about two points high (the 44% baseline was 41.5, and 53% was 50.8). If a row ch
    the scope itself. Closing it properly is a change to the store's authorisation model.
 3. ~~E-prescribing transmission (#908) and co-sign routing (#909)~~ - both closed. No prescription
    transport is implemented, and that is stated rather than faked.
-4. **Firing counts for the CDSS.** Overrides are now recorded per rule, but nothing counts how
-   often a rule FIRES - so the override RATE, which is the number that actually identifies a rule
-   training people to click through, still has no denominator. The report says `null` rather than
-   inventing one.
+4. ~~Firing counts for the CDSS~~ - closed in #910. A `SafetyFiring` is recorded per order and rule
+   pack version, so the override rate has a denominator that comes from the record. A verdict that
+   carries no `findings` still yields no rate, and the report says so rather than inventing one.
 
 ## Deliberately not built
 Patient portal, full billing and claims, on-premise deployment, DICOM/PACS and regulatory
