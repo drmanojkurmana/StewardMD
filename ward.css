@@ -168,6 +168,14 @@ body.dark #smdWard { --bg: #191c1e; --on-surface: #eff1f3; --on-surface-variant:
 #smdWard .w-prob input#wProbText { flex: 2 1 200px; }
 #smdWard .w-problems li .w-btn.tiny { margin-left: auto; }
 
+/* The note composer. Wide fields, because a ward round note written into a one-line box is a ward
+   round note nobody writes. */
+#smdWard .w-note { display: flex; flex-direction: column; gap: 10px; }
+#smdWard .w-note textarea { border: 1px solid var(--outline-variant); border-radius: 12px; background: var(--sc-low);
+  color: var(--on-surface); font: 400 15px var(--w-sans); padding: 10px 12px; resize: vertical; min-height: 76px; }
+#smdWard .w-note textarea:focus { outline: 2px solid var(--primary); outline-offset: -2px; }
+#smdWard .w-note .w-f span i { color: var(--on-warn-container); font-style: normal; font-weight: 600; }
+
 /* Terminology results. Each one is a BUTTON somebody has to press: nothing is preselected, so the
    list can never be mistaken for a choice already made. */
 #smdWard .w-icd { list-style: none; margin: 8px 0 0; padding: 0; display: flex; flex-direction: column; gap: 6px; }

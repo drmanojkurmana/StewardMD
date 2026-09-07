@@ -924,7 +924,7 @@ export async function onRequest(context) {
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "dispense" && method === "POST") {
-        const r = await dispenseOrder(request, env, { ...deps, orderId: body.orderId, quantity: body.quantity, destination: body.destination, at: body.at, idempotencyKey: body.idempotencyKey || null });
+        const r = await dispenseOrder(request, env, { ...deps, orderId: body.orderId, quantity: body.quantity, batch: body.batch, expiry: body.expiry, destination: body.destination, at: body.at, idempotencyKey: body.idempotencyKey || null });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "dispense-return" && method === "POST") {
