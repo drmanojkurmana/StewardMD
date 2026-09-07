@@ -8,7 +8,7 @@ NOT counted as WardSynQ's own implementation.
 Scoring per domain: `record path` (25) + `safety/governance` (25) + `UI a clinician can use` (35) +
 `tests + real-device proof` (15). A domain with a working API and no UI caps at 65.
 
-Updated: 2026-09-07 (PRs #887, #889, #890, #892, #894 critical results, #895 transfer/fluid/handover)
+Updated: 2026-09-07 (PRs #887, #889, #890, #892, #894, #895, #897 pharmacy verification, #898 break-glass, #899 FHIR, #900 reconciliation + metrics)
 
 | # | Domain (Epic module) | Weight | % | Status |
 |---|---|---|---|---|
@@ -20,20 +20,20 @@ Updated: 2026-09-07 (PRs #887, #889, #890, #892, #894 critical results, #895 tra
 | 6 | Clinical decision support (Best Practice Advisories) | 7 | 65 | Allergy + cross-reactivity + interactions + dose ceilings, fail-closed, Indian drug DB + FDA. No BPA authoring, no override analytics. |
 | 7 | Problem list (Problem List) | 4 | 70 | #887. Coded/text, provisional default, versioned resolve, feeds the summary. Read-only on the ward screen; no entry UI. |
 | 8 | Inpatient admission / ward (ADT) | 7 | 90 | #889. Admit, ward list, ward vitals, discharge, **with a UI**. Transfer with a bed-collision refusal, and a bed board. No admission scheduling. |
-| 9 | eMAR / medication administration (Willow Inpatient) | 8 | 80 | #889 + #890. State machine, five rights, barcode scan, weight-based refusal, AI blocked, **UI**, **and a real schedule**. No pharmacy verification as its own authority, no high-alert witness config. |
+| 9 | eMAR / medication administration (Willow Inpatient) | 8 | 90 | #889 + #890. State machine, five rights, barcode scan, weight-based refusal, AI blocked, **UI**, **and a real schedule**. Plus medicines reconciliation on admission. No high-alert witness config. |
 | 10 | Nursing documentation (Flowsheets) | 5 | 75 | #895. Vitals, fluid balance with charted-hour gaps, SBAR shift handover with a read-back loop. No structured assessments, no care plans. |
-| 11 | Discharge + summary (Discharge Navigator) | 4 | 85 | #892. Assembler, per-section clinician correction with recorded provenance, immutable signed version, outstanding-items review, A4 print. Not device-proven. |
+| 11 | Discharge + summary (Discharge Navigator) | 4 | 90 | #892. Assembler, per-section clinician correction with recorded provenance, immutable signed version, outstanding-items review, A4 print, and the home-medicine reconciliation. Not device-proven. |
 | 12 | Results — lab / rad (Beaker, Radiant) | 6 | 55 | #894. DiagnosticReport ingest plus a closed critical-value loop with acknowledgement and escalation. No native resulting, no autoverification. |
-| 13 | Pharmacy verification + inventory (Willow) | 5 | 10 | Pharmacist role exists; verification is not its own authority. No inventory, no dispensing. |
+| 13 | Pharmacy verification + inventory (Willow) | 5 | 55 | #897. Verification as its OWN authority with a narrow grant: reads what a check needs, writes only the verification. No inventory, no dispensing. |
 | 14 | Notes / documentation (SmartText, NoteWriter) | 4 | 60 | Signed clinical notes, versioned, and a document surface with per-section provenance. No templates, no macros, no co-sign routing. |
 | 15 | Billing / revenue (Resolute) | 5 | 15 | Clinic billing config only. No charge capture from orders, no claims, no payer. |
-| 16 | Security / audit / break-glass | 5 | 55 | Capability RBAC, append-only audit, tiered AI. **No break-glass**, no consent model. |
-| 17 | Interoperability (Care Everywhere, HL7/FHIR) | 4 | 30 | Canonical model is FHIR-shaped; GHIS adapter works. No FHIR endpoint, no HL7, no CDA. |
-| 18 | Reporting / analytics (Reporting Workbench, Caboodle) | 3 | 5 | Usage counters only. No clinical reporting, no registries, no quality measures. |
+| 16 | Security / audit / break-glass | 5 | 80 | #898. Capability RBAC, append-only audit, tiered AI, break-glass with a mandatory reason and an append-only log. No consent model. |
+| 17 | Interoperability (Care Everywhere, HL7/FHIR) | 4 | 70 | #899. Read-only FHIR R4 export with an honest CapabilityStatement; GHIS adapter works. No FHIR write, no HL7v2, no CDA. |
+| 18 | Reporting / analytics (Reporting Workbench, Caboodle) | 3 | 40 | Live ward open-item metrics: unacknowledged criticals, doses in flight, handovers waiting, medicines undecided, orders unverified. No registries, no quality measures, no warehouse. |
 | 19 | Patient portal (MyChart) | 3 | 0 | Not built. |
 | 20 | Deployment / uptime / DR (on-prem, HA) | 3 | 25 | Cloudflare edge + D1, live domain. No on-prem, no DR drill, no downtime procedures. |
 
-**Weighted total: 57.0%.**
+**Weighted total: 64.1%.**
 
 The total is the weight-times-percent sum of the table above, divided by 100. It is COMPUTED from
 these rows, not asserted: earlier revisions of this file carried an eyeballed number that had drifted
@@ -51,7 +51,7 @@ about two points high (the 44% baseline was 41.5, and 53% was 50.8). If a row ch
   outstanding-items review before sign-off, and an A4 print artifact.
 
 ## What is left, in order of what actually moves the number
-1. **Device proof of the whole inpatient vertical** — none of the ward, eMAR, discharge or nursing
+0. **Device proof of the whole inpatient vertical** — none of the ward, eMAR, discharge or nursing
    screens have been run on a phone. Everything above is proven by test, not by a clinician's hands.
    This is the largest honest caveat on this entire table.
 2. **Native resulting** — results still arrive from GHIS; WardSynQ cannot resource a lab itself.

@@ -62,6 +62,11 @@ const RESOURCE_TYPES = Object.freeze([
    * stored here precisely so it is append-only: a break-glass grant somebody could delete afterwards
    * would defeat the entire mechanism, whose only value is being legible later. */
   "BreakGlassGrant",
+  /* Medicines reconciliation. A record of DECISIONS about medicines taken before admission - not a
+   * prescription and deliberately not modelled as one: deciding to continue a home medicine records
+   * the decision, and the inpatient order is still written through the ordering path with its own
+   * authority and its own safety checks. */
+  "MedicationReconciliation",
 ]);
 
 const MODE = Object.freeze({ SYSTEM_OF_RECORD: "system-of-record", INTEGRATION: "integration" });

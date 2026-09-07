@@ -71,7 +71,12 @@ const ORDER_TYPES = Object.freeze(["MedicationOrder", "ServiceRequest"]);
  * clinical business with patients" - which is exactly who may declare one. It grants no clinical
  * write whatsoever: the grant that gets written is read-only in what it confers, and a nurse who
  * breaks glass still cannot prescribe or diagnose. See break-glass.js. */
-const VITALS_TYPES = Object.freeze(["Observation", "ShiftHandover", "BreakGlassGrant"]);
+/* MedicationReconciliation joined them the same day. TAKING a medicines history is ward-staff work -
+ * a nurse or a pharmacist sits with the patient and writes down what they take - and that is what
+ * this write is. DECIDING what happens to each medicine is prescribing-adjacent and is gated
+ * separately at emr.treat on the route, so this grant lets a nurse record the history and not
+ * decide its fate. */
+const VITALS_TYPES = Object.freeze(["Observation", "ShiftHandover", "BreakGlassGrant", "MedicationReconciliation"]);
 const PATIENT_TYPE = "Patient";
 // Added 2026-09-06 (the Encounter migration), alongside PATIENT_TYPE and for the identical reason:
 // checking a patient in for today's visit is the SAME administrative act QUEUE_ADD already covers

@@ -1188,6 +1188,131 @@ test("the bed board says who is where, and never confuses 'no free beds' with 'w
   assert.equal(withUnplaced.wards[0].unplaced.length, 1);
 });
 
+test("the ward metrics count what every other mechanism left open, from the real record", async () => {
+  seedHospital();
+  const { adm, ord } = await admittedPatientOnDrug();
+  // Leave one of each kind of open item behind.
+  const reportId = await labReport(adm, [{ code: "2823-3", value: 7.4, unit: "mmol/L" }]);
+  await as(DOCTOR, "/ward/flag-critical", "POST", { orgId: ORG, reportId });
+  await as(NURSE, "/ward/mar", "POST", { orgId: ORG, action: "verify", orderId: ord.orderId, dueAt: DUE, patient: { id: adm.patientId } });
+  await as(NURSE, "/ward/handover", "POST", { orgId: ORG, encounterId: adm.encounterId, sbar: { situation: "Stable." } });
+  await as(NURSE, "/ward/med-history", "POST", { orgId: ORG, encounterId: adm.encounterId, medicines: [{ drug: "Warfarin", dose: "3 mg" }] });
+
+  const m = await as(NURSE, `/ward/metrics?orgId=${ORG}`);
+  assert.equal(m.__status, 200, JSON.stringify(m).slice(0, 300));
+  assert.equal(m.metrics.patients, 1);
+  assert.equal(m.metrics.open.criticalResults, 1);
+  assert.equal(m.metrics.open.dosesInFlight, 1, "verified is started and not finished");
+  assert.equal(m.metrics.open.handoversWaiting, 1);
+  assert.equal(m.metrics.open.medicinesUndecided, 1);
+  assert.equal(m.metrics.open.ordersNotPharmacyVerified, 1);
+  assert.equal(m.metrics.openItems, 5);
+  assert.equal(m.metrics.oldestUnacknowledgedCritical.display, "Potassium");
+
+  // Finishing the work is the only thing that moves it.
+  await as(DOCTOR, "/ward/acknowledge", "POST", { orgId: ORG, loopId: m.metrics.oldestUnacknowledgedCritical.loopId, action: "Treated." });
+  await as(PHARM, "/ward/verify-order", "POST", { orgId: ORG, orderId: ord.orderId, outcome: "verified" });
+  const after = await as(NURSE, `/ward/metrics?orgId=${ORG}`);
+  assert.equal(after.metrics.open.criticalResults, 0);
+  assert.equal(after.metrics.open.ordersNotPharmacyVerified, 0);
+  assert.equal(after.metrics.openItems, 3);
+  assert.equal(after.metrics.oldestUnacknowledgedCritical, null);
+});
+
+/* ---- medicines reconciliation ---------------------------------------------------------------------
+ *
+ * The best-evidenced medication harm in hospital medicine is not a wrong dose. It is a home medicine
+ * that quietly stopped.
+ */
+
+test("a home medicine with no decision is NAMED, and reaches the discharge summary as unreconciled", async () => {
+  seedHospital();
+  const { adm } = await admittedPatientOnDrug();
+  const hx = await as(NURSE, "/ward/med-history", "POST", {
+    orgId: ORG, encounterId: adm.encounterId, stage: "admission", source: "gp-record",
+    medicines: [
+      { drug: "Warfarin", dose: "3 mg", frequency: "OD" },
+      { drug: "Levothyroxine", dose: "75 mcg", frequency: "OM" },
+    ],
+  });
+  assert.equal(hx.__status, 200, JSON.stringify(hx));
+  assert.equal(hx.undecided, 2, "nothing is assumed continued");
+  assert.equal(hx.complete, false);
+
+  // Deciding is the treating clinician's act, not the history-taker's.
+  assert.equal((await as(NURSE, "/ward/med-decide", "POST", { orgId: ORG, encounterId: adm.encounterId, key: "warfarin", decision: "continued" })).__status, 403);
+  // And STOPPING needs a reason: it is the decision that causes the harm.
+  const bare = await as(DOCTOR, "/ward/med-decide", "POST", { orgId: ORG, encounterId: adm.encounterId, key: "warfarin", decision: "stopped" });
+  assert.equal(bare.__status, 422);
+  assert.equal(bare.error, "reason_required");
+
+  const stopped = await as(DOCTOR, "/ward/med-decide", "POST", { orgId: ORG, encounterId: adm.encounterId, key: "warfarin", decision: "stopped", reason: "Held pre-operatively, restart per haematology." });
+  assert.equal(stopped.__status, 200, JSON.stringify(stopped));
+  assert.equal(stopped.undecided, 1, "the levothyroxine is still open");
+  assert.equal(stopped.complete, false);
+
+  // THE SUMMARY NAMES THE ONE NOBODY DECIDED. A summary listing only the decided medicines would
+  // read as a completed reconciliation, and the undecided one is exactly the one that gets lost.
+  await as(DOCTOR, "/ward/discharge", "POST", { orgId: ORG, encounterId: adm.encounterId });
+  const draft = await as(DOCTOR, "/ward/discharge-summary", "POST", { orgId: ORG, encounterId: adm.encounterId });
+  assert.match(draft.sections.homeMedicines, /Stopped:\nWarfarin 3 mg, OD - Held pre-operatively/);
+  assert.match(draft.sections.homeMedicines, /NOT RECONCILED[\s\S]*Levothyroxine/);
+
+  // Finish it, and the summary stops saying so.
+  await as(DOCTOR, "/ward/med-decide", "POST", { orgId: ORG, encounterId: adm.encounterId, key: "levothyroxine", decision: "continued" });
+  const rec = await as(NURSE, `/ward/med-reconciliation?orgId=${ORG}&encounterId=${adm.encounterId}`);
+  assert.equal(rec.undecided, 0);
+  assert.equal(rec.reconciliations[0].complete, true);
+  assert.ok(rec.reconciliations[0].completedBy);
+});
+
+test("a second history pass keeps the decisions already made", async () => {
+  seedHospital();
+  const { adm } = await admittedPatientOnDrug();
+  const put = (medicines) => as(NURSE, "/ward/med-history", "POST", { orgId: ORG, encounterId: adm.encounterId, stage: "admission", medicines });
+  await put([{ drug: "Warfarin", dose: "3 mg" }, { drug: "Amlodipine", dose: "5 mg" }]);
+  await as(DOCTOR, "/ward/med-decide", "POST", { orgId: ORG, encounterId: adm.encounterId, key: "warfarin", decision: "continued" });
+
+  /* The pharmacist arrives with the GP record after the nurse took a history. The work already done
+   * must not be wiped, and a medicine that has DISAPPEARED from the list is dropped - it was not
+   * something the patient takes. */
+  const second = await put([{ drug: "Warfarin", dose: "3 mg" }, { drug: "Ramipril", dose: "5 mg" }]);
+  assert.equal(second.__status, 200, JSON.stringify(second));
+  const warf = second.medicines.find((m) => m.key === "warfarin");
+  assert.equal(warf.decision, "continued", "the decision survived the second pass");
+  assert.ok(warf.decidedBy);
+  assert.ok(!second.medicines.some((m) => m.key === "amlodipine"), "a medicine no longer on the list is dropped");
+  assert.equal(second.medicines.find((m) => m.key === "ramipril").decision, "undecided");
+  assert.equal(second.undecided, 1);
+});
+
+test("NOTHING IS MATCHED BY NAME, and a decision cannot invent a medicine", async () => {
+  seedHospital();
+  const { adm } = await admittedPatientOnDrug();     // already on Paracetamol as an inpatient
+  await as(NURSE, "/ward/med-history", "POST", {
+    orgId: ORG, encounterId: adm.encounterId, stage: "admission",
+    medicines: [{ drug: "Warfarin", dose: "3 mg" }],
+  });
+  const rec = await as(NURSE, `/ward/med-reconciliation?orgId=${ORG}&encounterId=${adm.encounterId}`);
+  /* The inpatient Paracetamol order does NOT mark anything reconciled, and nothing was auto-decided
+   * from a similar-looking drug. Marking warfarin continued because an anticoagulant appears on the
+   * chart is precisely the silent failure this refuses to risk. */
+  assert.equal(rec.reconciliations[0].undecided, 1);
+  assert.equal(rec.reconciliations[0].medicines.length, 1);
+
+  // A decision about a medicine that is not on the list is refused, never appended.
+  const ghost = await as(DOCTOR, "/ward/med-decide", "POST", { orgId: ORG, encounterId: adm.encounterId, key: "digoxin", decision: "continued" });
+  assert.equal(ghost.__status, 404);
+  assert.equal(ghost.error, "medicine_not_on_list");
+  // And "undecided" is not a decision anyone can record.
+  assert.equal((await as(DOCTOR, "/ward/med-decide", "POST", { orgId: ORG, encounterId: adm.encounterId, key: "warfarin", decision: "undecided" })).__status, 400);
+
+  // IT DOES NOT PRESCRIBE: continuing a home medicine records the decision, and writes no order.
+  await as(DOCTOR, "/ward/med-decide", "POST", { orgId: ORG, encounterId: adm.encounterId, key: "warfarin", decision: "continued" });
+  const orders = await RECORD.byPatient(TENANT_ROW.id, "MedicationOrder", adm.patientId);
+  assert.ok(!orders.some((o) => /warfarin/i.test(o.drug)), "no order appeared: the eMAR's controls are not bypassed");
+});
+
 /* ---- FHIR export ----------------------------------------------------------------------------------
  *
  * How a hospital gets its own data OUT: into a national exchange, a research extract, a successor
