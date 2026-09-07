@@ -1188,6 +1188,69 @@ test("the bed board says who is where, and never confuses 'no free beds' with 'w
   assert.equal(withUnplaced.wards[0].unplaced.length, 1);
 });
 
+/* ---- CDSS override analytics -----------------------------------------------------------------------
+ *
+ * The safety engine always REQUIRED a reason to override a warning, and then discarded it. Alert
+ * fatigue is the characteristic failure of decision support, and a system that cannot see its own
+ * override rate cannot know it has the problem.
+ */
+
+test("an override is recorded against the RULE, and the report names no clinician", async () => {
+  seedHospital();
+  const { adm } = await admittedPatientOnDrug();
+  const safety = {
+    rulePackVersion: "rx-2026.09",
+    warnings: [{ code: "interaction", ruleId: "ddi-warfarin-nsaid", severity: "major", overridden: true }],
+    overrides: [{ code: "interaction", targetId: "ddi-warfarin-nsaid", reasonCode: "benefit-outweighs-risk", rationale: "Single dose, INR checked today.", actorId: "cfa:dr" }],
+  };
+  const ord = await as(DOCTOR, "/ward/medication-order", "POST", {
+    orgId: ORG, safety,
+    order: { patientId: adm.patientId, encounterId: adm.encounterId, drug: "Ibuprofen", dose: { value: 400, unit: "mg" }, route: "oral", frequency: "TDS" },
+  });
+  assert.equal(ord.__status, 200, JSON.stringify(ord));
+  assert.equal(ord.overridesRecorded.written, 1, "the override is no longer thrown away");
+
+  const rep = await as(NURSE, `/ward/overrides?orgId=${ORG}`);
+  assert.equal(rep.__status, 200, JSON.stringify(rep));
+  assert.equal(rep.report.totalOverrides, 1);
+  assert.equal(rep.report.rules[0].targetId, "ddi-warfarin-nsaid");
+  assert.equal(rep.report.rules[0].topReason, "benefit-outweighs-risk");
+  // A rate needs a denominator nobody has counted yet, and it says so rather than inventing one.
+  assert.equal(rep.report.rules[0].overrideRate, null);
+  // NO CLINICIAN IS NAMED. The report is evidence about rules; naming people would stop them
+  // writing honest rationales, which is the only data that makes a rule fixable.
+  assert.ok(!JSON.stringify(rep.report).includes("cfa:dr"));
+  // The actor IS on the stored record, because a clinical decision needs an author.
+  const stored = await RECORD.byPatient(TENANT_ROW.id, "SafetyOverride", adm.patientId);
+  assert.equal(stored.length, 1);
+  assert.equal(stored[0].actorId, "cfa:dr");
+  assert.equal(stored[0].rulePackVersion, "rx-2026.09");
+});
+
+test("AN ANALYTICS FAILURE NEVER COSTS A PATIENT THEIR MEDICINE", async () => {
+  seedHospital();
+  const { adm } = await admittedPatientOnDrug();
+  // A verdict whose override cannot be attributed: the analytics row is refused, and the ORDER is
+  // still written. The order and the prescriber's safety decision are the clinical act.
+  const ord = await as(DOCTOR, "/ward/medication-order", "POST", {
+    orgId: ORG,
+    safety: { warnings: [{ code: "dose", overridden: true }], overrides: [] },
+    order: { patientId: adm.patientId, encounterId: adm.encounterId, drug: "Codeine", dose: { value: 30, unit: "mg" }, route: "oral", frequency: "QDS" },
+  });
+  assert.equal(ord.__status, 200, JSON.stringify(ord));
+  assert.equal(ord.written, 1, "the order is written regardless");
+  assert.ok(await RECORD.latest(TENANT_ROW.id, "MedicationOrder", ord.orderId));
+  assert.equal(ord.overridesRecorded.written, 0);
+  assert.deepEqual(ord.overridesRecorded.rejected.map((r) => r.reason), ["override_not_attributable"]);
+
+  // An order with no safety verdict at all records nothing and says nothing about overrides.
+  const plain = await as(DOCTOR, "/ward/medication-order", "POST", {
+    orgId: ORG, order: { patientId: adm.patientId, encounterId: adm.encounterId, drug: "Senna", dose: { value: 15, unit: "mg" }, route: "oral", frequency: "ON" },
+  });
+  assert.equal(plain.__status, 200);
+  assert.equal(plain.overridesRecorded, undefined);
+});
+
 /* ---- identity: two records, one person -------------------------------------------------------------
  *
  * The harm of a duplicate is not the duplication. It is that half the clinical picture is invisible

@@ -65,6 +65,7 @@ import { startReconciliation, decideMedicine, readReconciliation } from "../../_
 import { wardMetrics } from "../../_wardsynq/ward-metrics.js";
 import { releaseResult, pendingRequests } from "../../_wardsynq/lab-result.js";
 import { mergePatients, unmergePatients, identityOf } from "../../_wardsynq/identity-merge.js";
+import { overrideReport } from "../../_wardsynq/override-analytics.js";
 import { recordAllergiesFromAssessment } from "../../_wardsynq/migrate-allergy.js";
 
 // The Encounter migration's one shared call site. Every hook below (ticket add, import, a terminal
@@ -463,6 +464,10 @@ export async function onRequest(context) {
          * as creating the record in the first place. Reading who a patient is needs only emr.view -
          * a clinician who followed a link to a merged record must be told where the chart went. */
         merge: CAPS.QUEUE_ADD, unmerge: CAPS.QUEUE_ADD, identity: CAPS.EMR_VIEW,
+        /* Which safety rules are being overridden. Per RULE, never per clinician - see
+         * override-analytics.js. Readable by any clinician, because the people the rules fire at
+         * are the ones best placed to say a rule is wrong. */
+        overrides: CAPS.EMR_VIEW,
         // Closing a stay is the administrative act QUEUE_ADD already covers for opening one.
         // The summary is a clinical document: drafting and signing it are EMR_TREAT.
         discharge: CAPS.QUEUE_ADD, "discharge-summary": CAPS.EMR_TREAT, "sign-discharge-summary": CAPS.EMR_TREAT,
@@ -539,6 +544,10 @@ export async function onRequest(context) {
               types: (url.searchParams.get("_type") || "").split(",").map((t) => t.trim()).filter(Boolean),
             });
         return json(r.ok ? (r.bundle || r.resource) : r.outcome, r.status, request);
+      }
+      if (sub === "overrides" && method === "GET") {
+        const r = await overrideReport(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "" });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "merge" && method === "POST") {
         const r = await mergePatients(request, env, { ...deps, survivorId: body.survivorId, mergedId: body.mergedId, reason: body.reason, idempotencyKey: body.idempotencyKey || null });
