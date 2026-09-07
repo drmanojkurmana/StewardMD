@@ -109,12 +109,23 @@ const ENV = {
   CONNECT_DB: tenantDb,
 };
 
+/* The hospital's own order sets. ORG content, exactly as they are in production: a caller who could
+ * pass a set could hand themselves any order they liked with a set's name on it. */
+const ORDER_SETS = [{
+  id: "cap-admission", name: "Community-acquired pneumonia, admission", version: "3",
+  items: [
+    { key: "amox", kind: "medication", drug: "Amoxicillin", dose: { value: 1, unit: "g" }, route: "iv", frequency: "TDS" },
+    { key: "fluids", kind: "medication", drug: "Sodium chloride 0.9%", dose: { value: 1000, unit: "mL" }, route: "iv", frequency: "OD", defaultSelected: false },
+    { key: "cxr", kind: "investigation", code: "CXR", display: "Chest X-ray" },
+  ],
+}];
+
 function seedHospital(mode = "wardsynq") {
   docs.clear(); clock = 1;
   RECORD = new MemoryRepository();
   // ownerUid is nobody on this ward: an owner resolves to `admin` and holds every capability, which
   // would make every separation assertion below vacuous.
-  docs.set(`q_orgs/${ORG}`, { fields: { id: ORG, code: "SMD-WARD01", name: "WSQ Ward Hospital", kind: "clinic", mode, connectTenantId: TENANT_ROW.id, ownerUid: "cfa:nobody", createdAt: 1 }, updateTime: "t1" });
+  docs.set(`q_orgs/${ORG}`, { fields: { id: ORG, code: "SMD-WARD01", name: "WSQ Ward Hospital", kind: "clinic", mode, connectTenantId: TENANT_ROW.id, ownerUid: "cfa:nobody", createdAt: 1, wardsynq: { orderSets: ORDER_SETS } }, updateTime: "t1" });
   for (const [email, role] of [[DOCTOR, "doctor"], [NURSE, "nurse"], [PHARM, "pharmacy"], [LABTECH, "lab"]]) {
     docs.set(`q_members/${sanitize(ORG)}__${sanitize(idFor(email))}`, { fields: { orgId: ORG, identity: idFor(email), role, active: true }, updateTime: "t1" });
   }
@@ -1186,6 +1197,99 @@ test("the bed board says who is where, and never confuses 'no free beds' with 'w
   assert.equal(third.__status, 200, JSON.stringify(third));
   const withUnplaced = await as(NURSE, `/ward/beds?orgId=${ORG}&ward=Medical A`);
   assert.equal(withUnplaced.wards[0].unplaced.length, 1);
+});
+
+/* ---- order sets -------------------------------------------------------------------------------------
+ *
+ * An order set applies a lot of clinical decisions very fast, which is what makes it useful and what
+ * makes it dangerous. The whole design turns on one rule.
+ */
+
+test("APPLYING A SET IS APPLYING EACH ORDER THROUGH THE ORDINARY PATH", async () => {
+  seedHospital();
+  const { adm } = await admittedPatientOnDrug();
+
+  const sets = await as(NURSE, `/ward/order-sets?orgId=${ORG}`);
+  assert.equal(sets.__status, 200, JSON.stringify(sets));
+  assert.equal(sets.sets[0].id, "cap-admission");
+  assert.equal(sets.sets[0].items.length, 3, "a clinician sees exactly what the set would order");
+
+  const prep = await as(DOCTOR, "/ward/prepare-set", "POST", {
+    orgId: ORG, setId: "cap-admission", patientId: adm.patientId, encounterId: adm.encounterId,
+  });
+  assert.equal(prep.__status, 200, JSON.stringify(prep));
+  // Only the set's own defaults; the fluids were not pre-selected and are named as not ordered.
+  assert.deepEqual(prep.requests.map((r) => r.key).sort(), ["amox", "cxr"]);
+  assert.deepEqual(prep.deselected, ["fluids"]);
+  assert.match(prep.note, /order REQUESTS, not orders/);
+
+  /* NOTHING WAS ORDERED BY PREPARING. This is the property the whole design rests on: a set that
+   * wrote orders directly would be a hole straight through every control in this system, and the
+   * orders would look exactly like ordinary ones. */
+  const before = await RECORD.byPatient(TENANT_ROW.id, "MedicationOrder", adm.patientId);
+  assert.ok(!before.some((o) => /Amoxicillin/i.test(o.drug)), "preparing wrote no order");
+
+  // The caller applies each request through the ORDINARY route, which is where the checks live.
+  const med = prep.requests.find((r) => r.kind === "medication");
+  const placed = await as(DOCTOR, "/ward/medication-order", "POST", { orgId: ORG, order: med.order });
+  assert.equal(placed.__status, 200, JSON.stringify(placed));
+  assert.equal(placed.written, 1);
+
+  const rec = await as(DOCTOR, "/ward/applied-set", "POST", {
+    orgId: ORG, setId: prep.setId, setName: prep.setName, setVersion: prep.setVersion,
+    patientId: adm.patientId, encounterId: adm.encounterId,
+    applied: [{ key: "amox", orderId: placed.orderId }], failed: [], deselected: prep.deselected,
+  });
+  assert.equal(rec.__status, 200, JSON.stringify(rec));
+  assert.equal(rec.setVersion, "3", "which set and which version, so a bad set's patients can be found");
+  assert.equal(rec.appliedCount, 1);
+  assert.equal(rec.partial, undefined);
+});
+
+test("PARTIAL APPLICATION IS LOUD: seven of eight is the dangerous case", async () => {
+  seedHospital();
+  const { adm } = await admittedPatientOnDrug();
+  const rec = await as(DOCTOR, "/ward/applied-set", "POST", {
+    orgId: ORG, setId: "cap-admission", setName: "CAP", setVersion: "3",
+    patientId: adm.patientId, encounterId: adm.encounterId,
+    applied: [{ key: "cxr", orderId: "sr-1" }],
+    failed: [{ key: "amox", reason: "governance", detail: "refused: documented penicillin allergy" }],
+  });
+  assert.equal(rec.__status, 200, JSON.stringify(rec));
+  // The missing one is invisible in a chart full of new orders unless the record says so.
+  assert.equal(rec.partial, true);
+  assert.equal(rec.failedCount, 1);
+  assert.match(rec.failed[0].detail, /penicillin allergy/);
+  const stored = await RECORD.byPatient(TENANT_ROW.id, "OrderSetApplication", adm.patientId);
+  assert.equal(stored.length, 1);
+  assert.deepEqual(stored[0].failed.map((f) => f.key), ["amox"]);
+});
+
+test("an item the clinician never saw is refused, and the sets are ORG content", async () => {
+  seedHospital();
+  const { adm } = await admittedPatientOnDrug();
+  const bad = await as(DOCTOR, "/ward/prepare-set", "POST", {
+    orgId: ORG, setId: "cap-admission", patientId: adm.patientId, encounterId: adm.encounterId,
+    select: ["amox", "vancomycin"],
+  });
+  assert.equal(bad.__status, 409);
+  assert.equal(bad.error, "not_in_set");
+  assert.deepEqual(bad.unknown, ["vancomycin"]);
+  assert.deepEqual(bad.requests, [], "and nothing at all is prepared");
+
+  /* A caller cannot bring their own set. One who could would be handing themselves any order they
+   * liked with a set's name and a set's authority on it. */
+  const smuggled = await as(DOCTOR, "/ward/prepare-set", "POST", {
+    orgId: ORG, setId: "mine", patientId: adm.patientId, encounterId: adm.encounterId,
+    sets: [{ id: "mine", name: "Mine", items: [{ key: "m", kind: "medication", drug: "Morphine", dose: { value: 100, unit: "mg" } }] }],
+  });
+  assert.equal(smuggled.__status, 404);
+  assert.equal(smuggled.error, "set_not_found");
+
+  // Seeing a set is emr.view; applying one is ordering, so it is emr.treat.
+  assert.equal((await as(NURSE, `/ward/order-sets?orgId=${ORG}`)).__status, 200);
+  assert.equal((await as(NURSE, "/ward/prepare-set", "POST", { orgId: ORG, setId: "cap-admission", patientId: adm.patientId, encounterId: adm.encounterId })).__status, 403);
+  assert.equal((await as(LABTECH, `/ward/order-sets?orgId=${ORG}`)).__status, 403);
 });
 
 /* ---- CDSS override analytics -----------------------------------------------------------------------
