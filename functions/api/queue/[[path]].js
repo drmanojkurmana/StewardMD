@@ -86,6 +86,7 @@ import { registryReport } from "../../_wardsynq/registry.js";
 import { chartWound, listWounds } from "../../_wardsynq/wound.js";
 import { bookResource, setBookingState, resourceSchedule } from "../../_wardsynq/resource-booking.js";
 import { flowsheet } from "../../_wardsynq/flowsheet-view.js";
+import { orderInvestigation } from "../../_wardsynq/ward-order.js";
 import { listTools as listRiskTools, recordAssessment as recordRiskAssessment, completeAction as completeRiskAction, listAssessments as listRiskAssessments } from "../../_wardsynq/risk-assessment.js";
 import { recordAllergiesFromAssessment } from "../../_wardsynq/migrate-allergy.js";
 
@@ -527,6 +528,8 @@ export async function onRequest(context) {
         /* Taking a sample is nursing work, the same authority as recording a vital. The outcome
          * falls back to lab.result above, because the laboratory is the half that receives it. */
         collect: CAPS.EMR_VITALS, "specimen-outcome": CAPS.EMR_VITALS, collections: CAPS.EMR_VIEW,
+        // Asking for an investigation is a clinical act, like prescribing.
+        investigation: CAPS.EMR_TREAT,
         // Charting a wound is nursing work, the same authority as a vital or a fluid entry.
         wound: CAPS.EMR_VITALS, wounds: CAPS.EMR_VIEW,
         // Reading the flowsheet is reading the chart. It writes nothing.
@@ -741,6 +744,10 @@ export async function onRequest(context) {
       }
       if (sub === "wounds" && method === "GET") {
         const r = await listWounds(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "" });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "investigation" && method === "POST") {
+        const r = await orderInvestigation(request, env, { ...deps, encounterId: body.encounterId, code: body.code, display: body.display, codeSystem: body.codeSystem, category: body.category, priority: body.priority, reason: body.reason, idempotencyKey: body.idempotencyKey || null });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "collect" && method === "POST") {
