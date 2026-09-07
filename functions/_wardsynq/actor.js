@@ -66,7 +66,12 @@ const ORDER_TYPES = Object.freeze(["MedicationOrder", "ServiceRequest"]);
  * handover is the nurse's own account of a shift, not a clinical document. Putting it in
  * ClinicalNote instead would have required widening this scope to cover every clinical document,
  * which would also have let a nurse author a discharge summary or an assessment. */
-const VITALS_TYPES = Object.freeze(["Observation", "ShiftHandover"]);
+/* BreakGlassGrant joined them on 2026-09-07 with emergency access. Declaring an emergency is a
+ * write of the DECLARATION, and EMR_VITALS is the lowest capability meaning "this person has
+ * clinical business with patients" - which is exactly who may declare one. It grants no clinical
+ * write whatsoever: the grant that gets written is read-only in what it confers, and a nurse who
+ * breaks glass still cannot prescribe or diagnose. See break-glass.js. */
+const VITALS_TYPES = Object.freeze(["Observation", "ShiftHandover", "BreakGlassGrant"]);
 const PATIENT_TYPE = "Patient";
 // Added 2026-09-06 (the Encounter migration), alongside PATIENT_TYPE and for the identical reason:
 // checking a patient in for today's visit is the SAME administrative act QUEUE_ADD already covers
