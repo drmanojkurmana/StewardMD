@@ -32,6 +32,12 @@ export const CAPS = {
   BILLING_VIEW: "billing.view",     // see the billing station queue + tariff catalog
   BILLING_CHARGE: "billing.charge", // generate an invoice + record payment (cashier)
   ORDER_DISPENSE: "order.dispense", // hand medicines to the patient + mark the order dispensed (pharmacy)
+  // ---- inpatient eMAR (2026-09-07) ------------------------------------------------------------
+  // Giving a dose at the bedside is its OWN authority, deliberately not folded into EMR_VITALS or
+  // EMR_TREAT. A nurse must be able to administer without gaining the right to prescribe, and a
+  // doctor holding EMR_TREAT should not silently inherit the bedside role either — so this is
+  // granted explicitly to the roles that give medicines, and to nobody else.
+  MED_ADMINISTER: "med.administer", // scan + give a dose and record the administration (ward nurse)
   // ---- ONCQIS (oncology protocol governance) caps -------------------------------------------
   // Strict role separation: authoring, clinical review, and institutional approval are DISTINCT
   // caps held by DISTINCT roles. Doctor/Nurse never hold any of these (they consume ACTIVE
@@ -90,8 +96,11 @@ export const ROLE_CAPS = {
   // Nurse ("sister"): runs the queue at the desk — add/reorder/assign/status/priority — may record
   // vitals/temperature, and may READ a patient's clinical notes/history (view-only, e.g. from the
   // console). Explicitly NO emr.treat (no orders/prescriptions/edits). This is the owner's core ask.
+  // MED_ADMINISTER added 2026-09-07 with the inpatient eMAR: giving a dose at the bedside is the
+  // nurse's job and nobody else's here. It grants the administration record ONLY - still no
+  // emr.treat, so a nurse who can give a dose still cannot write the order for it.
   nurse: [C.QUEUE_VIEW, C.QUEUE_ADD, C.QUEUE_REORDER, C.QUEUE_STATUS, C.QUEUE_PRIORITY, C.QUEUE_ASSIGN,
-          C.EMR_VITALS, C.EMR_VIEW],
+          C.EMR_VITALS, C.EMR_VIEW, C.MED_ADMINISTER],
   // Intern / resident: clinical trainees — see the queue, register a walk-in, advance status, record
   // vitals, view EMR. QUEUE_ADD added 2026-08-24: an intern is often the person handed a walk-in, and
   // withholding it meant they could move patients through consultation but not enter them. Reorder and
