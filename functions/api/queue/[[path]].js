@@ -80,6 +80,7 @@ import { submitNote, signNote, listAwaitingCoSign } from "../../_wardsynq/note-c
 import { downtimePack } from "../../_wardsynq/downtime.js";
 import { qualityReport } from "../../_wardsynq/quality.js";
 import { collectSpecimen, specimenOutcome, collectionList } from "../../_wardsynq/specimen.js";
+import { adtForEncounter } from "../../_wardsynq/hl7v2.js";
 import { listTools as listRiskTools, recordAssessment as recordRiskAssessment, completeAction as completeRiskAction, listAssessments as listRiskAssessments } from "../../_wardsynq/risk-assessment.js";
 import { recordAllergiesFromAssessment } from "../../_wardsynq/migrate-allergy.js";
 
@@ -516,6 +517,9 @@ export async function onRequest(context) {
         /* Taking a sample is nursing work, the same authority as recording a vital. The outcome
          * falls back to lab.result above, because the laboratory is the half that receives it. */
         collect: CAPS.EMR_VITALS, "specimen-outcome": CAPS.EMR_VITALS, collections: CAPS.EMR_VIEW,
+        // ADT out. Reading a stay in another wire format is still reading a chart, so it needs the
+        // authority to read one. It writes nothing and there is no inbound listener.
+        adt: CAPS.EMR_VIEW,
         // Risk assessment is nursing work, like the rest of the flowsheet.
         "risk-tools": CAPS.EMR_VIEW, assess: CAPS.EMR_VITALS, "risk-action": CAPS.EMR_VITALS, risks: CAPS.EMR_VIEW,
         /* Sending a prescription is part of prescribing, so queueing is emr.treat. Recording what
@@ -656,6 +660,13 @@ export async function onRequest(context) {
       }
       if (sub === "note-sign" && method === "POST") {
         const r = await signNote(request, env, { ...deps, noteId: body.noteId, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "adt" && method === "GET") {
+        const r = await adtForEncounter(request, env, {
+          ...deps, encounterId: url.searchParams.get("encounterId") || "",
+          event: url.searchParams.get("event") || "", sendingFacility: (wOrg && wOrg.code) || "",
+        });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "collect" && method === "POST") {

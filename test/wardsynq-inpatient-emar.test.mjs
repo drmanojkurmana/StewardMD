@@ -2725,6 +2725,42 @@ test("sending is prescribing's business, and nothing unsendable is sent", async 
   assert.equal(bogus.error, "unknown_channel");
 });
 
+/* ---- ADT out ------------------------------------------------------------------------------------- */
+
+test("THE ADT MESSAGE IS BUILT FROM THE RECORD, and a stay it cannot describe is refused", async () => {
+  seedHospital();
+  const { reg, adm } = await admittedPatientOnDrug();
+
+  const admit = await as(NURSE, `/ward/adt?orgId=${ORG}&encounterId=${adm.encounterId}`);
+  assert.equal(admit.__status, 200, JSON.stringify(admit));
+  assert.equal(admit.event, "A01");
+  const segs = admit.message.split("\r");
+  assert.deepEqual(segs.map((s) => s.slice(0, 3)), ["MSH", "EVN", "PID", "PV1"]);
+  assert.ok(admit.message.startsWith("MSH|^~\\&|WardSynQ|SMD-WARD01|"), "the sending facility is the org's own code");
+  assert.match(segs[2], new RegExp(reg.mrn + "\\^\\^\\^SMD-WARD01\\^MR"), "PID-3 carries its assigning authority");
+  assert.equal(segs[3].split("|")[3], "Medical A^^12", "PV1-3 is ward, room, bed");
+  assert.equal(segs[3].split("|")[19], adm.encounterId, "PV1-19 is the visit");
+  /* Shaped is not conformant, and the response says so every time rather than letting an integration
+   * engineer assume otherwise. */
+  assert.match(admit.note, /not certified/);
+
+  // Discharging the patient changes the EVENT, from the record - a message can never announce an
+  // admission for a stay that has ended.
+  await as(DOCTOR, "/ward/discharge", "POST", { orgId: ORG, encounterId: adm.encounterId, dischargedAt: "2026-09-09T10:00:00.000Z" });
+  const out = await as(NURSE, `/ward/adt?orgId=${ORG}&encounterId=${adm.encounterId}`);
+  assert.equal(out.event, "A03");
+  assert.match(out.message.split("\r")[0], /ADT\^A03/);
+
+  // An encounter ADT does not describe is NAMED, not returned as an empty body.
+  const reg2 = await as(DOCTOR, "/patient/register", "POST", { orgId: ORG, name: "OPD Only", mobile: "9876500022", gender: "male", ageYears: 40 });
+  assert.ok(reg2.mrn);
+  const missing = await as(NURSE, `/ward/adt?orgId=${ORG}&encounterId=wsq-adm-nope`);
+  assert.equal(missing.__status, 404);
+  assert.equal(missing.error, "encounter_not_found");
+  // And a pharmacist, who holds no emr.view, does not get the chart in another wire format either.
+  assert.equal((await as(PHARM, `/ward/adt?orgId=${ORG}&encounterId=${adm.encounterId}`)).__status, 403);
+});
+
 /* ---- the second nurse ---------------------------------------------------------------------------- */
 
 test("A HIGH-ALERT DRUG NEEDS A SECOND NURSE, and the LIST is the hospital's", async () => {
