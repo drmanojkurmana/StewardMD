@@ -1207,6 +1207,10 @@ them has run on a phone.**
 
 ### Two things found by accident and worth remembering
 
+- **`wardsynq-readlog.js` was the blocker HAZ-FLUID-01 named, and it was already written.** This file
+  recorded the hazard as PARTIAL *because* "nothing records that anyone read it... Closing that needs
+  a view log, which does not exist". It did exist, unreachable. Wired 2026-09-08 as `ClinicalRead`
+  (`functions/_wardsynq/read-log.js`). Before writing "X does not exist" in a hazard note, grep for X.
 - **A literal NUL byte in `migrate-inpatient.js`** (a key separator in a template literal) made grep
   classify the whole 475-line file as binary, so every search over the ordering path silently
   returned nothing. Fixed to a `\u0000` escape - same value at runtime, and the file stays text.

@@ -91,6 +91,7 @@ import { chartInfusion, listInfusions } from "../../_wardsynq/infusion.js";
 import { reportImaging } from "../../_wardsynq/radiology-report.js";
 import { cdaForEncounter } from "../../_wardsynq/cda.js";
 import { news2ForPatient } from "../../_wardsynq/news2-view.js";
+import { recordRead, readersToNotify } from "../../_wardsynq/read-log.js";
 import { listTools as listRiskTools, recordAssessment as recordRiskAssessment, completeAction as completeRiskAction, listAssessments as listRiskAssessments } from "../../_wardsynq/risk-assessment.js";
 import { recordAllergiesFromAssessment } from "../../_wardsynq/migrate-allergy.js";
 
@@ -547,6 +548,11 @@ export async function onRequest(context) {
         /* An early warning score is a reading of the chart's own vitals. It writes nothing and
          * escalates nobody, so it needs the authority to read a chart and no more. */
         news2: CAPS.EMR_VIEW,
+        /* Recording that a value was decisive is part of reading a chart, so it needs the authority
+         * to read one - emr.vitals, the same bar as charting an observation about the patient.
+         * Asking WHO to tell about a correction is emr.view: it is the safety question, and the
+         * people who have to make the calls must be able to ask it. */
+        read: CAPS.EMR_VITALS, readers: CAPS.EMR_VIEW,
         // ADT out. Reading a stay in another wire format is still reading a chart, so it needs the
         // authority to read one. It writes nothing and there is no inbound listener.
         adt: CAPS.EMR_VIEW, oru: CAPS.EMR_VIEW, cda: CAPS.EMR_VIEW,
@@ -747,6 +753,19 @@ export async function onRequest(context) {
         const r = await adtForEncounter(request, env, {
           ...deps, encounterId: url.searchParams.get("encounterId") || "",
           event: url.searchParams.get("event") || "", sendingFacility: (wOrg && wOrg.code) || "",
+        });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "read" && method === "POST") {
+        const r = await recordRead(request, env, { ...deps, patientId: body.patientId, valueId: body.valueId, version: body.version, value: body.value, kind: body.kind, context: body.context, at: body.at, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "readers" && method === "GET") {
+        const r = await readersToNotify(request, env, {
+          ...deps, patientId: url.searchParams.get("patientId") || "", valueId: url.searchParams.get("valueId") || "",
+          supersededVersion: url.searchParams.get("supersededVersion"), correctedAt: url.searchParams.get("correctedAt") || "",
+          label: url.searchParams.get("label") || "", unit: url.searchParams.get("unit") || "",
+          wasValue: url.searchParams.get("wasValue"), nowValue: url.searchParams.get("nowValue"),
         });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }

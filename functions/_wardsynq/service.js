@@ -105,6 +105,10 @@ const RESOURCE_TYPES = Object.freeze([
    * stored total stops being true the moment the pump changes - and an infusion that stops being
    * charted is uncharted, not stopped. */
   "InfusionRate",
+  /* That a value was DECISIVE for a named person at a time. Not a view log: a page rendering a
+   * hundred numbers has not shown a clinician a hundred numbers. It exists so that when a figure is
+   * later found to be wrong there is a list of people to tell - HAZ-FLUID-01's missing half. */
+  "ClinicalRead",
   /* A record that an order set was applied, and exactly what landed and what did not. NOT the orders
    * themselves - those go through the ordinary path and are ordinary orders. This is what makes a
    * partial application visible, and what finds the patients a bad set touched. */
