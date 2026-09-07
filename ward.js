@@ -303,7 +303,14 @@
       '<input id="wTo" type="datetime-local" value="' + esc(state.to) + '">' +
       '<button class="w-btn ghost" data-w-act="round">Load</button></div>' +
       '<div class="w-scan"><label class="w-f"><span>Wristband scan</span><input id="wScanP" type="text" autocomplete="off" placeholder="Patient barcode"></label>' +
-      '<label class="w-f"><span>Drug scan</span><input id="wScanD" type="text" autocomplete="off" placeholder="Drug barcode"></label></div>' +
+      '<label class="w-f"><span>Drug scan</span><input id="wScanD" type="text" autocomplete="off" placeholder="Drug barcode"></label>' +
+      /* The second nurse. The hospital's own high-alert list decides which drugs need one, and the
+       * SERVER refuses without it - insulin, heparin, opioids. Before this field existed the refusal
+       * was correct and unanswerable: a nurse at the bedside had no way to name the witness, so a
+       * high-alert dose could not be given from this screen at all. The field is always shown, never
+       * shown only for drugs the browser thinks are high-alert: that would be a second copy of the
+       * formulary living in the UI. */
+      '<label class="w-f"><span>Second nurse <i>high-alert drugs only</i></span><input id="wWitness" type="text" autocomplete="off" placeholder="Witness ID"></label></div>' +
       (rows ? '<ul class="w-doses">' + rows + "</ul>" : '<p class="w-empty">No doses fall in this window.</p>') +
       (prn ? '<div class="w-sub"><h4>' + ms("touch_app") + 'As needed (PRN)</h4><p class="w-hint">Given on the patient’s need. These are never due at a time.</p><ul class="w-mini">' + prn + "</ul></div>" : "") +
       (unsched ? '<div class="w-sub warn"><h4>' + ms("help") + 'Not on the round</h4><p class="w-hint">The frequency on these orders could not be read, so no dose times were computed. They need a look.</p><ul class="w-mini">' + unsched + "</ul></div>" : "") +
@@ -747,6 +754,10 @@
     // The five rights are checked on the server against what was actually scanned. The UI passes the
     // scans through untouched; it does not compare them itself and does not proceed on its own.
     if (action === "scan") body.scan = { patient: val("wScanP"), drug: val("wScanD") };
+    /* Passed through untouched, and only ever passed. The screen does not decide whether a witness is
+     * needed - the hospital's high-alert list does, on the server - and it never compares the witness
+     * to the nurse. `WITNESS_NOT_INDEPENDENT` is the server's refusal to make. */
+    if (action === "administer") { var w = val("wWitness"); if (w) body.witnessId = w; }
     if (action === "hold" || action === "refuse" || action === "cancel") {
       var why = ""; try { why = G.prompt("Reason for " + action + ":") || ""; } catch (e) {}
       if (!why.trim()) { st.err = "A reason is required to " + action + " a dose."; paint(); return; }
