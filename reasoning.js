@@ -3285,7 +3285,7 @@
     box.querySelectorAll("#smdKbSec [data-kb]").forEach(function (b) { b.addEventListener("click", function () { kbOpen(b.getAttribute("data-kb")); }); });
   }
   // ---- Knowledge Library: override window.SB.openRef for the syndromes tab ----
-  var _libState = { q: "", cls: "all", src: "all", branch: "all" };
+  var _libState = { q: "", cls: "all", src: "all", branch: "all", limit: 40 };
   function wireSyndromeLibrary() {
     if (!window.SB || typeof window.SB.openRef !== "function" || window.SB.__smdKbWrapped) return;
     var orig = window.SB.openRef;
@@ -3299,22 +3299,30 @@
   function kbRenderLibrary() {
     var body = document.getElementById("sbrefBody"); if (!body) return;
     var sec = body.querySelector(".sbref-sec"); if (!sec) return;
+    sec.classList.add("kblib-discover");
     try { var t = document.getElementById("sbrefTitle"); if (t) t.textContent = "Knowledge Library"; } catch (e) {}
-    var branches = [], seen = {};
-    kbBuildIndex().forEach(function (d) { if (!seen[d.branch]) { seen[d.branch] = 1; branches.push(d.branch); } });
+    var branches = [], seen = {}, entries = kbBuildIndex();
+    entries.forEach(function (d) { if (!seen[d.branch]) { seen[d.branch] = 0; branches.push(d.branch); } seen[d.branch]++; });
     branches.sort();
-    var f = function (on, attr, val, label) { return '<button class="kblib-f' + (on ? " on" : "") + '" data-' + attr + '="' + val + '">' + label + '</button>'; };
+    var f = function (on, attr, val, label) { return '<button type="button" aria-pressed="' + on + '" class="kblib-f' + (on ? " on" : "") + '" data-' + attr + '="' + esc(val) + '">' + label + '</button>'; };
+    var featured = ["Cardiology", "Neurology", "Respiratory", "GI / Hepatology"].filter(function (b) { return !!seen[b]; });
+    var tile = function (b) { return f(_libState.branch === b, "br", b, '<span class="kblib-tile-icon" aria-hidden="true">' + rIco("book") + '</span><span>' + esc(b) + '</span><small>' + seen[b].toLocaleString() + ' entries</small>'); };
     sec.innerHTML =
-      '<input id="kblibQ" class="kblib-search" placeholder="Search any disease or clinical detail…" autocomplete="off" value="' + esc(_libState.q) + '">' +
-      '<div class="kblib-filters">' +
+      '<header class="kblib-intro"><span class="kblib-kicker">STEWARDMD · DISCOVER</span><h1>Knowledge Library</h1><p><strong>' + (entries.length >= 4800 ? '4,800+ diseases' : entries.length.toLocaleString() + ' disease entries') + '</strong> across ' + branches.length + ' medical branches.</p></header>' +
+      '<label class="kblib-search-label" for="kblibQ">Search the full library</label><input id="kblibQ" class="kblib-search" type="search" placeholder="Disease, syndrome or clinical detail" autocomplete="off" value="' + esc(_libState.q) + '">' +
+      '<div class="kblib-discovery" id="kblibDiscovery"><div class="kblib-feature"><span class="kblib-kicker">CLINICAL COLLECTIONS</span><h2>A world of medicine.<br>One library.</h2><p>Diseases · Syndromes · References</p></div>' +
+      '<div class="kblib-section-heading"><h2>Explore a branch</h2><span>' + branches.length + ' branches</span></div><div class="kblib-tiles">' + featured.map(tile).join("") + '</div>' +
+      '<details class="kblib-all-branches"><summary>See all medical branches</summary><div class="kblib-tiles">' + branches.filter(function (b) { return featured.indexOf(b) < 0; }).map(tile).join("") + '</div></details></div>' +
+      '<div class="kblib-section-heading"><h2 id="kblibResultsTitle">Disease index</h2><button type="button" id="kblibClear" class="kblib-clear">Clear filters</button></div>' +
+      '<details class="kblib-refine"><summary>Refine by type, source or branch</summary><div class="kblib-filters">' +
         '<div class="kblib-grp"><span class="kblib-lbl">Type</span>' +
           f(_libState.cls === "all", "cls", "all", "All") + f(_libState.cls === "inf", "cls", "inf", '<span class="kbdot" style="color:#dc2626">●</span> Infective') + f(_libState.cls === "ni", "cls", "ni", '<span class="kbdot" style="color:#16a34a">●</span> Non-infective') + '</div>' +
         '<div class="kblib-grp"><span class="kblib-lbl">Source</span>' +
           f(_libState.src === "all", "src", "all", "All") + f(_libState.src === "dx", "src", "dx", "Diagnostic") + f(_libState.src === "ref", "src", "ref", "Reference") + '</div></div>' +
       '<div class="kblib-grp" style="margin:8px 0 4px"><span class="kblib-lbl">System</span>' +
         f(_libState.branch === "all", "br", "all", "All") +
-        branches.map(function (b) { return f(_libState.branch === b, "br", b, esc(b)); }).join("") + '</div>' +
-      '<div class="kblib-count" id="kblibCount"></div><div class="kblib-grid" id="kblibGrid"></div>';
+        branches.map(function (b) { return f(_libState.branch === b, "br", b, esc(b)); }).join("") + '</div></details>' +
+      '<div class="kblib-count" id="kblibCount" role="status"></div><div class="kblib-grid" id="kblibGrid"></div><button type="button" id="kblibMore" class="kblib-more">Show more diseases</button>';
     kbWireLibrary();   // ensure the (delegated) handlers exist
     kbPaintLibrary();  // fill the grid from current filters/search
     // No per-element addEventListener here: search/filter/card events are handled by ONE
@@ -3383,8 +3391,13 @@
     // tie-broken alphabetically; with no query keep the alphabetical index order.
     if (searching) scored.sort(function (a, b) { return b.s - a.s || (a.d.name < b.d.name ? -1 : a.d.name > b.d.name ? 1 : 0); });
     var res = scored.map(function (x) { return x.d; });
-    var cnt = document.getElementById("kblibCount"); if (cnt) cnt.textContent = res.length + " of " + all.length + " entries";
-    grid.innerHTML = res.slice(0, 400).map(function (d) {
+    var shown = Math.min(_libState.limit, res.length);
+    var cnt = document.getElementById("kblibCount"); if (cnt) cnt.textContent = 'Showing ' + shown + ' of ' + res.length.toLocaleString() + ' entries';
+    var discovery = document.getElementById("kblibDiscovery"); if (discovery) discovery.hidden = searching || _libState.branch !== "all" || _libState.cls !== "all" || _libState.src !== "all";
+    var title = document.getElementById("kblibResultsTitle"); if (title) title.textContent = searching ? "Search results" : _libState.branch !== "all" ? _libState.branch : "Disease index";
+    var clear = document.getElementById("kblibClear"); if (clear) clear.hidden = !(_libState.q || _libState.branch !== "all" || _libState.cls !== "all" || _libState.src !== "all");
+    var more = document.getElementById("kblibMore"); if (more) more.hidden = shown >= res.length;
+    grid.innerHTML = res.slice(0, _libState.limit).map(function (d) {
       return '<button class="kblib-row ' + d.cls + '" data-kb="' + d.id + '">' +
         '<div class="kblib-eye">' + (d.cls === "inf" ? "Infective" : "Non-infective") + '</div>' +
         '<div class="kblib-name">' + esc(d.name) + '</div>' +
@@ -3397,12 +3410,15 @@
   function kbWireLibrary() {
     if (window.__smdKbLibWired) return; window.__smdKbLibWired = true;
     document.addEventListener("input", function (e) {
-      if (e.target && e.target.id === "kblibQ") { _libState.q = String(e.target.value || "").trim(); kbPaintLibrary(); }
+      if (e.target && e.target.id === "kblibQ") { _libState.q = String(e.target.value || "").trim(); _libState.limit = 40; kbPaintLibrary(); }
     }, false);
     document.addEventListener("click", function (e) {
       var t = e.target; if (!t || !t.closest) return;
+      if (t.closest("#kblibMore")) { _libState.limit += 40; kbPaintLibrary(); return; }
+      if (t.closest("#kblibClear")) { _libState = { q: "", cls: "all", src: "all", branch: "all", limit: 40 }; kbRenderLibrary(); return; }
       var fb = t.closest(".kblib-f");
       if (fb) {
+        _libState.limit = 40;
         if (fb.hasAttribute("data-cls")) _libState.cls = fb.getAttribute("data-cls");
         if (fb.hasAttribute("data-src")) _libState.src = fb.getAttribute("data-src");
         if (fb.hasAttribute("data-br")) _libState.branch = fb.getAttribute("data-br");
