@@ -1059,14 +1059,23 @@ test("the ward list is visible to the ward, and a stranger's hospital is not", a
   // Without a patient it is the whole ward's list, which is how a shift picks it up.
   assert.equal((await as(NURSE, `/ward/criticals?orgId=${ORG}`)).open, 1);
 
-  /* THE PHARMACIST CANNOT SEE THIS, and that is a real gap rather than a decision made here. The
-   * pharmacy role holds queue.view, order.read and order.dispense and no EMR capability at all
-   * (functions/_queue_roles.js), so it cannot read the chart. A pharmacist verifying a dose has a
-   * genuine need for a critical potassium or creatinine - but the only lever available today is
-   * emr.view, which grants the WHOLE record, and quietly handing the pharmacy role the entire chart
-   * to solve this would be a far larger change than the problem asks for. It wants its own narrow
-   * grant, the same way pharmacy verification does (see the note in api/queue/[[path]].js). */
-  assert.equal((await as(PHARM, `/ward/criticals?orgId=${ORG}`)).__status, 403);
+  /* THE PHARMACIST CAN SEE THIS TOO, since order.verify existed. This assertion previously recorded
+   * the opposite as a known gap: the pharmacy role held no EMR capability at all, so a pharmacist
+   * verifying a dose could not see the critical potassium they were meant to be checking against,
+   * and the only lever available - emr.view - would have handed them the whole chart. The narrow
+   * ORDER_VERIFY grant closed it. Reading the list is an alternative authority here, not a
+   * widening: order.verify opens no other ward route. */
+  assert.equal((await as(PHARM, `/ward/criticals?orgId=${ORG}`)).__status, 200);
+  // Seeing a critical result still confers nothing else: it is a read, not a way in. Acknowledging
+  // one is a clinical decision and stays with the treating clinician.
+  assert.equal((await as(PHARM, "/ward/acknowledge", "POST", { orgId: ORG, loopId: "x", action: "seen" })).__status, 403);
+  assert.equal((await as(PHARM, `/ward/vitals?orgId=${ORG}`)).__status, 403, "and no chart-writing route is open to them");
+  /* The ward roster is refused too. Pharmacy holds queue.view, which opens the ROUTE, but has no
+   * read scope on Encounter - so the record layer says no. It used to say so as a 502, which told
+   * the caller the server was broken when it had simply refused; it is now the 403 it always was. */
+  const roster = await as(PHARM, `/ward/list?orgId=${ORG}`);
+  assert.equal(roster.__status, 403);
+  assert.deepEqual(roster.reasons, ["READ_SCOPE_DENIED"]);
 });
 
 /* ---- transfer and the bed board -----------------------------------------------------------------
@@ -1177,6 +1186,109 @@ test("the bed board says who is where, and never confuses 'no free beds' with 'w
   assert.equal(third.__status, 200, JSON.stringify(third));
   const withUnplaced = await as(NURSE, `/ward/beds?orgId=${ORG}&ward=Medical A`);
   assert.equal(withUnplaced.wards[0].unplaced.length, 1);
+});
+
+/* ---- pharmacy verification ----------------------------------------------------------------------
+ *
+ * The eMAR's `verify` step required MED_ADMINISTER - the NURSE's authority - because granting it to
+ * pharmacy would have meant granting write on MedicationAdministration, and a role that can write
+ * that could post a fabricated "administered" row without going near a bedside. This is the narrow
+ * authority that note said the problem wanted.
+ */
+
+test("a pharmacist verifies the ORDER, and never touches the administration", async () => {
+  seedHospital();
+  const { adm, ord } = await admittedPatientOnDrug();
+
+  const q = await as(PHARM, `/ward/verification-queue?orgId=${ORG}&patientId=${adm.patientId}`);
+  assert.equal(q.__status, 200, JSON.stringify(q));
+  assert.equal(q.orders.length, 1);
+  assert.equal(q.orders[0].state, "unverified");
+  assert.equal(q.unverified, 1);
+
+  const v = await as(PHARM, "/ward/verify-order", "POST", { orgId: ORG, orderId: ord.orderId, outcome: "verified" });
+  assert.equal(v.__status, 200, JSON.stringify(v));
+  assert.equal(v.outcome, "verified");
+  assert.ok(v.verifiedBy);
+  assert.equal((await as(PHARM, `/ward/verification-queue?orgId=${ORG}&patientId=${adm.patientId}`)).orders[0].state, "verified");
+
+  /* VERIFYING IS NOT GIVING. Nothing above wrote a MedicationAdministration, and the pharmacist
+   * still cannot: that is the whole reason this is its own resource. */
+  assert.equal((await RECORD.byPatient(TENANT_ROW.id, "MedicationAdministration", adm.patientId)).length, 0);
+  const give = await as(PHARM, "/ward/mar", "POST", { orgId: ORG, action: "administer", orderId: ord.orderId, dueAt: DUE, patient: { id: adm.patientId } });
+  assert.equal(give.__status, 403, "a pharmacist still cannot administer, or claim to have");
+
+  // Re-recording the same conclusion on the same version of the order writes nothing.
+  assert.equal((await as(PHARM, "/ward/verify-order", "POST", { orgId: ORG, orderId: ord.orderId, outcome: "verified" })).written, 0);
+});
+
+test("A VERIFICATION IS OF ONE VERSION: change the order and it is no longer verified", async () => {
+  seedHospital();
+  const { adm, ord } = await admittedPatientOnDrug();
+  await as(PHARM, "/ward/verify-order", "POST", { orgId: ORG, orderId: ord.orderId, outcome: "verified" });
+  assert.equal((await as(PHARM, `/ward/verification-queue?orgId=${ORG}&patientId=${adm.patientId}`)).orders[0].state, "verified");
+
+  // The prescriber doubles the dose after the pharmacist checked it.
+  const changed = await as(DOCTOR, "/ward/medication-order", "POST", {
+    orgId: ORG, order: { patientId: adm.patientId, encounterId: adm.encounterId, drug: "Paracetamol 500mg", dose: { value: 1000, unit: "mg" }, route: "oral", frequency: "TID" },
+  });
+  assert.equal(changed.__status, 200, JSON.stringify(changed));
+
+  const q = await as(PHARM, `/ward/verification-queue?orgId=${ORG}&patientId=${adm.patientId}`);
+  const row = q.orders.find((o) => o.orderId === ord.orderId);
+  // Presenting this as "verified" would be a false reassurance about the exact thing verification
+  // is for: the dose that was checked is not the dose the ward is about to give.
+  assert.equal(row.state, "stale");
+  assert.ok(row.currentVersion > row.verifiedVersion);
+  assert.equal(q.unverified, 1);
+});
+
+test("A QUERY IS AS FIRST-CLASS AS AN APPROVAL, and must say what it is", async () => {
+  seedHospital();
+  const { adm, ord } = await admittedPatientOnDrug();
+  // A system that can only record agreement quietly loses every disagreement.
+  const noReason = await as(PHARM, "/ward/verify-order", "POST", { orgId: ORG, orderId: ord.orderId, outcome: "queried" });
+  assert.equal(noReason.__status, 422);
+  assert.equal(noReason.error, "reason_required");
+
+  const q = await as(PHARM, "/ward/verify-order", "POST", { orgId: ORG, orderId: ord.orderId, outcome: "queried", reason: "Creatinine 3.2 - confirm the dose interval for renal impairment." });
+  assert.equal(q.__status, 200, JSON.stringify(q));
+  const queue = await as(PHARM, `/ward/verification-queue?orgId=${ORG}&patientId=${adm.patientId}`);
+  assert.equal(queue.orders[0].state, "queried");
+  assert.match(queue.orders[0].verification.reason, /renal impairment/);
+  assert.equal((await as(PHARM, "/ward/verify-order", "POST", { orgId: ORG, orderId: ord.orderId, outcome: "guessed" })).__status, 400);
+
+  /* IT NEVER BLOCKS THE BEDSIDE ON ITS OWN. Whether a queried order may still be given is hospital
+   * policy, not this file's: silently refusing would strand every ward with no pharmacist at 3am. */
+  const step = (a, x) => as(NURSE, "/ward/mar", "POST", { orgId: ORG, action: a, orderId: ord.orderId, dueAt: DUE, patient: { id: adm.patientId, mrn: "x", wristbandBarcode: "x" }, ...(x || {}) });
+  assert.equal((await step("verify")).__status, 200, "the ward's own eMAR verify is untouched");
+});
+
+test("THE NARROW GRANT: a pharmacist can see what a verification needs, and nothing else", async () => {
+  seedHospital();
+  const { adm } = await admittedPatientOnDrug();
+  await as(DOCTOR, "/ward/problem", "POST", { orgId: ORG, problem: { patientId: adm.patientId, display: "Chronic kidney disease" } });
+  await as(DOCTOR, "/ward/discharge", "POST", { orgId: ORG, encounterId: adm.encounterId });
+  await as(DOCTOR, "/ward/discharge-summary", "POST", { orgId: ORG, encounterId: adm.encounterId });
+
+  // What they CAN see: the orders, and the allergies that travel with the queue. A pharmacist who
+  // has to look allergies up separately is one who sometimes will not.
+  const q = await as(PHARM, `/ward/verification-queue?orgId=${ORG}&patientId=${adm.patientId}`);
+  assert.equal(q.__status, 200);
+  assert.ok(Array.isArray(q.allergies));
+  // And the critical results they are supposed to be checking against - the gap this closes.
+  const reportId = await labReport(adm, [{ code: "2823-3", value: 7.4, unit: "mmol/L" }]);
+  await as(DOCTOR, "/ward/flag-critical", "POST", { orgId: ORG, reportId });
+  assert.equal((await as(PHARM, `/ward/criticals?orgId=${ORG}&patientId=${adm.patientId}`)).__status, 200,
+    "a pharmacist can now see a critical potassium; before this they held no EMR capability at all");
+
+  // What they still CANNOT see or do: the rest of the chart, and any clinical authorship.
+  assert.equal((await as(PHARM, `/ward/discharge-summary?orgId=${ORG}&encounterId=${adm.encounterId}`)).__status, 403, "not the discharge summary");
+  assert.equal((await as(PHARM, "/ward/problem", "POST", { orgId: ORG, problem: { patientId: adm.patientId, display: "Sepsis" } })).__status, 403);
+  assert.equal((await as(PHARM, "/ward/medication-order", "POST", { orgId: ORG, order: { patientId: adm.patientId, encounterId: adm.encounterId, drug: "X", dose: { value: 1, unit: "mg" } } })).__status, 403);
+  assert.equal((await as(PHARM, "/ward/fluid", "POST", { orgId: ORG, encounterId: adm.encounterId, patientId: adm.patientId, entries: [] })).__status, 403);
+  // And a nurse does not become a pharmacist by holding the bedside authority.
+  assert.equal((await as(NURSE, "/ward/verify-order", "POST", { orgId: ORG, orderId: "x", outcome: "verified" })).__status, 403);
 });
 
 /* ---- shift handover -----------------------------------------------------------------------------
