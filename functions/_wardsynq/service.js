@@ -165,6 +165,12 @@ const RESOURCE_TYPES = Object.freeze([
    * investigator - needs to know what the patient had been told about the channel. Nothing
    * auto-replies to one, and a reply is written by a clinician's own actor. */
   "PatientMessage",
+  /* What will actually be done in the scanner. Its own type because protocolling is the point where
+   * an imaging REQUEST becomes a drug administration - the contrast decision - and that decision has
+   * a different author, a different moment and different evidence from the request itself. Kept
+   * against the request VERSION, so a later change to the request cannot make it look as though the
+   * protocol was decided for a study nobody protocolled. */
+  "ImagingProtocol",
 ]);
 
 const MODE = Object.freeze({ SYSTEM_OF_RECORD: "system-of-record", INTEGRATION: "integration" });

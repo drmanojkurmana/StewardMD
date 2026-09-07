@@ -158,8 +158,14 @@ function grantForCaps(caps) {
     /* SpecimenCollection is on both lists as of 2026-09-07: the laboratory is the half of the journey
      * that RECEIVES the sample, and a lab that cannot record "we have it" leaves every tube reading
      * as still in a nurse's pocket. It writes the specimen's arrival, never its collection. */
-    const canRead = ["ServiceRequest", "Observation", "DiagnosticReport", "SpecimenCollection"];
-    const canWrite = ["Observation", "DiagnosticReport", "SpecimenCollection"];
+    /* AllergyIntolerance and ImagingProtocol joined on 2026-09-08 with radiology protocolling.
+     * Deciding to give intravenous contrast is the point where an imaging request becomes a drug
+     * administration, and it cannot be made safely without seeing a previous contrast reaction - so
+     * the read is required for the check to be honest rather than decorative. The write is the
+     * protocol itself and nothing else: this grant still reaches no prescription, no administration
+     * and no diagnosis. */
+    const canRead = ["ServiceRequest", "Observation", "DiagnosticReport", "SpecimenCollection", "AllergyIntolerance", "ImagingProtocol"];
+    const canWrite = ["Observation", "DiagnosticReport", "SpecimenCollection", "ImagingProtocol"];
     const cats = { Observation: ["laboratory"] };
     if (!grant) grant = { tier: TIER.EXECUTE, read: canRead, write: canWrite, writeCategories: cats, basis: CAPS.LAB_RESULT };
     else grant = {
