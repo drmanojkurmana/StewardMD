@@ -1068,3 +1068,323 @@ test("the ward list is visible to the ward, and a stranger's hospital is not", a
    * grant, the same way pharmacy verification does (see the note in api/queue/[[path]].js). */
   assert.equal((await as(PHARM, `/ward/criticals?orgId=${ORG}`)).__status, 403);
 });
+
+/* ---- transfer and the bed board -----------------------------------------------------------------
+ *
+ * A ward you can admit to and discharge from but not move within is not a ward.
+ */
+
+/* Another admitted patient, so a bed can actually be contended for. Each one gets its OWN mobile:
+ * registration is keyed on it, and reusing one silently returns no MRN, which then surfaces much
+ * later as an unrelated "no_patient_identity" on the admission. */
+let nthPatient = 0;
+async function secondPatient(ward = "Medical A", bed = "14") {
+  const n = ++nthPatient;
+  const reg = await as(DOCTOR, "/patient/register", "POST", { orgId: ORG, name: `Ward Testcase ${n + 1}`, mobile: `98765001${String(n).padStart(2, "0")}`, gender: "male", ageYears: 61 });
+  assert.ok(reg.mrn, `registration ${n} produced no MRN: ${JSON.stringify(reg)}`);
+  return as(DOCTOR, "/ward/admit", "POST", { orgId: ORG, mrn: reg.mrn, ward, bed, admittedAt: "2026-09-07T08:30:00.000Z" });
+}
+
+test("a transfer is a NEW VERSION of the same stay, and the history is the movement history", async () => {
+  seedHospital();
+  const { adm } = await admittedPatientOnDrug();
+
+  const moved = await as(DOCTOR, "/ward/transfer", "POST", { orgId: ORG, encounterId: adm.encounterId, ward: "HDU", bed: "3", reason: "Rising oxygen requirement" });
+  assert.equal(moved.__status, 200, JSON.stringify(moved));
+  assert.deepEqual(moved.from, { ward: "Medical A", bed: "12" });
+  assert.deepEqual(moved.to, { ward: "HDU", bed: "3" });
+
+  // ONE encounter, not two: the stay is one stay.
+  const hist = await RECORD.history(TENANT_ROW.id, "Encounter", adm.encounterId);
+  assert.deepEqual(hist.map((h) => `${h.location.ward}/${h.location.bed}`), ["Medical A/12", "HDU/3"]);
+  assert.equal(hist[1].movedBy, hist[1].movedBy && hist[1].movedBy, "and it names who moved them");
+  assert.ok(hist[1].movedBy);
+  assert.equal(hist[1].moveReason, "Rising oxygen requirement");
+  assert.deepEqual(hist[1].movedFrom, { ward: "Medical A", bed: "12" });
+  // The admission itself is untouched: same id, same start, still open.
+  assert.equal(hist[1].periodStart, hist[0].periodStart);
+  assert.equal(hist[1].status, "in-progress");
+
+  // The ward list follows them.
+  assert.equal((await as(NURSE, `/ward/list?orgId=${ORG}&ward=Medical A`)).patients.length, 0);
+  const hdu = await as(NURSE, `/ward/list?orgId=${ORG}&ward=HDU`);
+  assert.equal(hdu.patients.length, 1);
+  assert.equal(hdu.patients[0].bed, "3");
+
+  // Moving to where they already are writes nothing.
+  assert.equal((await as(DOCTOR, "/ward/transfer", "POST", { orgId: ORG, encounterId: adm.encounterId, ward: "HDU", bed: "3" })).written, 0);
+});
+
+test("TWO PATIENTS CANNOT OCCUPY ONE BED, and the refusal names the occupant", async () => {
+  seedHospital();
+  const { adm } = await admittedPatientOnDrug();          // Medical A, bed 12
+  const other = await secondPatient("Medical A", "14");
+
+  // A chart that puts two people in bed 12 is a chart that will hand one of them the other's drugs.
+  const clash = await as(DOCTOR, "/ward/transfer", "POST", { orgId: ORG, encounterId: other.encounterId, ward: "Medical A", bed: "12" });
+  assert.equal(clash.__status, 409);
+  assert.equal(clash.error, "bed_occupied");
+  assert.equal(clash.occupiedBy.encounterId, adm.encounterId, "the ward is told WHAT the conflict is, not just no");
+  assert.equal(clash.written, 0);
+
+  // Case and spacing are not identity: "medical a" bed "12" is the same bed.
+  assert.equal((await as(DOCTOR, "/ward/transfer", "POST", { orgId: ORG, encounterId: other.encounterId, ward: "medical a", bed: "12" })).error, "bed_occupied");
+
+  // The bed frees the moment its occupant leaves it, by transfer or by discharge.
+  await as(DOCTOR, "/ward/transfer", "POST", { orgId: ORG, encounterId: adm.encounterId, ward: "HDU", bed: "3" });
+  assert.equal((await as(DOCTOR, "/ward/transfer", "POST", { orgId: ORG, encounterId: other.encounterId, ward: "Medical A", bed: "12" })).__status, 200);
+
+  // A ward with no bed named cannot collide: a patient can be on a ward awaiting a bed.
+  const third = await secondPatient("Medical A", "16");
+  assert.equal((await as(DOCTOR, "/ward/transfer", "POST", { orgId: ORG, encounterId: third.encounterId, ward: "Medical A" })).__status, 200);
+});
+
+test("a closed stay is not transferred, and neither is an OPD visit", async () => {
+  seedHospital();
+  const { adm } = await admittedPatientOnDrug();
+  await as(DOCTOR, "/ward/discharge", "POST", { orgId: ORG, encounterId: adm.encounterId });
+  const gone = await as(DOCTOR, "/ward/transfer", "POST", { orgId: ORG, encounterId: adm.encounterId, ward: "HDU", bed: "3" });
+  assert.equal(gone.__status, 409);
+  assert.equal(gone.error, "not_admitted", "re-opening the stay to accommodate the request would be far worse than refusing");
+
+  // A discharged patient's bed is free for the next admission.
+  const next = await secondPatient("Ward B", "1");
+  assert.equal((await as(DOCTOR, "/ward/transfer", "POST", { orgId: ORG, encounterId: next.encounterId, ward: "Medical A", bed: "12" })).__status, 200);
+
+  const missing = await as(DOCTOR, "/ward/transfer", "POST", { orgId: ORG, encounterId: "wsq-adm-nobody", ward: "HDU", bed: "1" });
+  assert.equal(missing.__status, 404);
+  // A move to nowhere is not a transfer: blanking the location would lose the bed.
+  assert.equal((await as(DOCTOR, "/ward/transfer", "POST", { orgId: ORG, encounterId: next.encounterId, bed: "9" })).error, "ward_required");
+});
+
+test("the bed board says who is where, and never confuses 'no free beds' with 'we do not know'", async () => {
+  seedHospital();
+  const { adm } = await admittedPatientOnDrug();          // Medical A, bed 12
+  await secondPatient("Medical A", "14");
+
+  // With no bed list configured it reports the occupied beds and SAYS it cannot know what is free.
+  const unknown = await as(NURSE, `/ward/beds?orgId=${ORG}`);
+  assert.equal(unknown.__status, 200, JSON.stringify(unknown));
+  assert.equal(unknown.bedsConfigured, false);
+  const medA = unknown.wards.find((w) => w.ward === "Medical A");
+  assert.equal(medA.occupied.length, 2);
+  assert.equal(medA.bedsKnown, false, "a ward would read 0 free as full");
+  assert.deepEqual(medA.free, []);
+  assert.ok(medA.occupied.some((o) => o.encounterId === adm.encounterId));
+
+  // A patient admitted to a ward with no bed yet is on the board, but not in a bed.
+  const third = await secondPatient("Medical A", "");
+  assert.equal(third.__status, 200, JSON.stringify(third));
+  const withUnplaced = await as(NURSE, `/ward/beds?orgId=${ORG}&ward=Medical A`);
+  assert.equal(withUnplaced.wards[0].unplaced.length, 1);
+});
+
+/* ---- shift handover -----------------------------------------------------------------------------
+ *
+ * Handover failure is one of the best-documented causes of harm in hospitals: the information
+ * existed, somebody knew it, and it did not survive the change of shift.
+ */
+
+test("A HANDOVER IS ONLY COMPLETE WHEN SOMEBODY ELSE HAS TAKEN IT", async () => {
+  seedHospital();
+  const { adm } = await admittedPatientOnDrug();
+
+  const given = await as(NURSE, "/ward/handover", "POST", {
+    orgId: ORG, encounterId: adm.encounterId, givenAt: "2026-09-07T20:00:00.000Z",
+    sbar: {
+      situation: "Day 2 of community-acquired pneumonia, on IV amoxicillin.",
+      background: "Admitted with fever and cough. Type 2 diabetic.",
+      assessment: "Afebrile since 14:00, saturations 96% on air.",
+      recommendation: "Repeat CRP in the morning. Chase the blood culture.",
+    },
+  });
+  assert.equal(given.__status, 200, JSON.stringify(given));
+  assert.equal(given.state, "waiting", "given is not the same as taken");
+  assert.ok(given.givenBy);
+  assert.equal(given.receivedBy, null);
+  assert.match(given.sections.recommendation, /Chase the blood culture/);
+
+  // It sits on the incoming shift's list until somebody takes it. Nothing expires it.
+  const waiting = await as(DOCTOR, `/ward/handovers?orgId=${ORG}`);
+  assert.equal(waiting.waiting, 1);
+  assert.equal(waiting.handovers[0].handoverId, given.handoverId);
+
+  /* THE RECEIVER CANNOT BE THE AUTHOR. Letting the outgoing nurse close her own loop would close it
+   * at exactly the moment the information is lost. */
+  const self = await as(NURSE, "/ward/receive-handover", "POST", { orgId: ORG, handoverId: given.handoverId });
+  assert.equal(self.__status, 409);
+  assert.equal(self.error, "same_clinician");
+
+  const taken = await as(DOCTOR, "/ward/receive-handover", "POST", { orgId: ORG, handoverId: given.handoverId, note: "Taken. Will chase the culture at 08:00." });
+  assert.equal(taken.__status, 200, JSON.stringify(taken));
+  assert.equal(taken.state, "received");
+  assert.ok(taken.receivedBy && taken.receivedBy !== taken.givenBy, "two different clinicians, permanently on the record");
+  assert.match(taken.readBack, /chase the culture/i);
+
+  // Both names survive as versions: who wrote it and who took it.
+  const hist = await RECORD.history(TENANT_ROW.id, "ShiftHandover", given.handoverId);
+  assert.deepEqual(hist.map((h) => !!h.receivedBy), [false, true]);
+  assert.equal(hist[1].givenBy, given.givenBy, "and it still names the clinician who gave it");
+
+  // Taken handovers leave the waiting list rather than burying the ones that still need somebody.
+  assert.equal((await as(DOCTOR, `/ward/handovers?orgId=${ORG}`)).waiting, 0);
+  assert.equal((await as(DOCTOR, `/ward/handovers?orgId=${ORG}&state=received`)).handovers.length, 1);
+});
+
+test("an empty handover is not a handover, and a taken one is not rewritten", async () => {
+  seedHospital();
+  const { adm } = await admittedPatientOnDrug();
+  // An empty record where the incoming shift expects an account reads as "nothing to say" rather
+  // than "nobody wrote it", which is the more dangerous of the two.
+  const empty = await as(NURSE, "/ward/handover", "POST", { orgId: ORG, encounterId: adm.encounterId, sbar: { situation: "  " } });
+  assert.equal(empty.__status, 422);
+  assert.equal(empty.error, "nothing_handed_over");
+
+  const given = await as(NURSE, "/ward/handover", "POST", { orgId: ORG, encounterId: adm.encounterId, givenAt: "2026-09-07T20:00:00.000Z", sbar: { situation: "Stable overnight." } });
+  // A section nobody filled in says so, rather than being assembled from the chart: a handover that
+  // writes its own background is one nobody actually gave.
+  assert.equal(given.sections.background, "Not stated.");
+  assert.equal(given.sbarStated, 1);
+
+  // Re-submitting the same shift's handover before it is taken is a correction, not a duplicate.
+  const fixed = await as(NURSE, "/ward/handover", "POST", { orgId: ORG, encounterId: adm.encounterId, givenAt: "2026-09-07T20:00:00.000Z", sbar: { situation: "Stable overnight.", recommendation: "Chase potassium." } });
+  assert.equal(fixed.handoverId, given.handoverId);
+  assert.equal(fixed.sections.recommendation, "Chase potassium.");
+
+  await as(DOCTOR, "/ward/receive-handover", "POST", { orgId: ORG, handoverId: given.handoverId });
+  // Once taken it is not rewritten: the receiving clinician acted on what it said.
+  const late = await as(NURSE, "/ward/handover", "POST", { orgId: ORG, encounterId: adm.encounterId, givenAt: "2026-09-07T20:00:00.000Z", sbar: { situation: "Actually deteriorating." } });
+  assert.equal(late.__status, 409);
+  assert.equal(late.error, "already_received");
+  assert.equal((await RECORD.latest(TENANT_ROW.id, "ShiftHandover", given.handoverId)).sections.situation, "Stable overnight.");
+
+  // Taking it twice is not an error, and does not change who took it first.
+  const twice = await as(DOCTOR, "/ward/receive-handover", "POST", { orgId: ORG, handoverId: given.handoverId });
+  assert.equal(twice.written, 0);
+  assert.equal(twice.skipped, "already_received");
+});
+
+test("a handover never pollutes the discharge summary's clinical notes", async () => {
+  seedHospital();
+  const { adm } = await admittedPatientOnDrug();
+  await as(NURSE, "/ward/handover", "POST", { orgId: ORG, encounterId: adm.encounterId, sbar: { assessment: "Nursing handover assessment, not a medical one." } });
+  await as(DOCTOR, "/ward/discharge", "POST", { orgId: ORG, encounterId: adm.encounterId });
+  const draft = await as(DOCTOR, "/ward/discharge-summary", "POST", { orgId: ORG, encounterId: adm.encounterId });
+  /* The summary copies a CLINICIAN'S assessment note. A shift handover is a different document and
+   * must not be mistaken for the medical assessment of the admission. It is a separate resource
+   * type, which is why this holds structurally rather than by a filter somebody has to remember. */
+  assert.equal(draft.sections.assessment, "Not recorded.");
+  assert.ok(!/Nursing handover/.test(JSON.stringify(draft.sections)));
+  assert.equal((await RECORD.byPatient(TENANT_ROW.id, "ClinicalNote", adm.patientId)).filter((n) => n.noteType === "handover").length, 0,
+    "a handover is not a ClinicalNote at all");
+});
+
+test("a nurse may hand over but still may not author a clinical document", async () => {
+  seedHospital();
+  const { adm } = await admittedPatientOnDrug();
+  // EMR_VITALS was widened to cover ShiftHandover, and that widening must be NARROW: it must not
+  // have handed a nurse the ability to write discharge summaries or assessments along with it.
+  assert.equal((await as(NURSE, "/ward/handover", "POST", { orgId: ORG, encounterId: adm.encounterId, sbar: { situation: "Stable." } })).__status, 200);
+  assert.equal((await as(NURSE, "/ward/discharge-summary", "POST", { orgId: ORG, encounterId: adm.encounterId })).__status, 403);
+  assert.equal((await as(NURSE, "/ward/problem", "POST", { orgId: ORG, problem: { patientId: adm.patientId, display: "Sepsis" } })).__status, 403);
+  assert.equal((await as(PHARM, "/ward/handover", "POST", { orgId: ORG, encounterId: adm.encounterId, sbar: { situation: "x" } })).__status, 403);
+});
+
+/* ---- fluid balance ------------------------------------------------------------------------------
+ *
+ * The oldest nursing chart there is, and WardSynQ recorded vitals and nothing else a nurse writes.
+ */
+
+test("a nurse charts fluid, and the balance shows intake and output rather than a bare net", async () => {
+  seedHospital();
+  const { adm } = await admittedPatientOnDrug();
+  const put = (entries) => as(NURSE, "/ward/fluid", "POST", { orgId: ORG, encounterId: adm.encounterId, patientId: adm.patientId, entries });
+
+  const r = await put([
+    { direction: "intake", kind: "oral", value: 200, at: "2026-09-07T09:10:00.000Z" },
+    { direction: "intake", kind: "iv", value: 1000, unit: "ml", at: "2026-09-07T09:20:00.000Z" },
+    { direction: "output", kind: "urine", value: 450, at: "2026-09-07T09:40:00.000Z" },
+  ]);
+  assert.equal(r.__status, 200, JSON.stringify(r));
+  assert.equal(r.written, 3);
+  assert.ok(!r.rejected, "nothing was rejected");
+
+  const bal = await as(NURSE, `/ward/balance?orgId=${ORG}&patientId=${adm.patientId}&from=2026-09-07T09:00:00.000Z&to=2026-09-07T10:00:00.000Z`);
+  assert.equal(bal.__status, 200, JSON.stringify(bal));
+  assert.deepEqual([bal.balance.intake, bal.balance.output, bal.balance.balance], [1200, 450, 750]);
+  assert.equal(bal.balance.unit, "mL");
+  assert.equal(bal.balance.complete, true, "the whole one-hour window has entries");
+  assert.deepEqual(bal.balance.byKind, { "intake.oral": 200, "intake.iv": 1000, "output.urine": 450 });
+
+  // Re-sending the same entries is one entry per kind per minute, not a doubled balance.
+  await put([{ direction: "intake", kind: "oral", value: 200, at: "2026-09-07T09:10:00.000Z" }]);
+  const again = await as(NURSE, `/ward/balance?orgId=${ORG}&patientId=${adm.patientId}&from=2026-09-07T09:00:00.000Z&to=2026-09-07T10:00:00.000Z`);
+  assert.equal(again.balance.intake, 1200, "a retried request does not become a second cup of tea");
+});
+
+test("the balance NAMES THE HOURS NOBODY CHARTED rather than handing over a tidy total", async () => {
+  seedHospital();
+  const { adm } = await admittedPatientOnDrug();
+  await as(NURSE, "/ward/fluid", "POST", {
+    orgId: ORG, encounterId: adm.encounterId, patientId: adm.patientId,
+    entries: [{ direction: "output", kind: "urine", value: 100, at: "2026-09-07T08:30:00.000Z" }],
+  });
+  const bal = await as(NURSE, `/ward/balance?orgId=${ORG}&patientId=${adm.patientId}&from=2026-09-07T08:00:00.000Z&to=2026-09-07T20:00:00.000Z`);
+  assert.equal(bal.balance.entries, 1);
+  assert.equal(bal.balance.complete, false, "a twelve-hour balance from one entry is not a twelve-hour balance");
+  assert.equal(bal.balance.gaps.length, 11);
+
+  // A balance needs a stated period, and is not charted over weeks.
+  assert.equal((await as(NURSE, `/ward/balance?orgId=${ORG}&patientId=${adm.patientId}`)).error, "from_required");
+  assert.equal((await as(NURSE, `/ward/balance?orgId=${ORG}&patientId=${adm.patientId}&from=2026-01-01T00:00:00.000Z&to=2026-06-01T00:00:00.000Z`)).error, "window_too_wide");
+});
+
+test("an unusable entry is reported, never silently dropped and never converted", async () => {
+  seedHospital();
+  const { adm } = await admittedPatientOnDrug();
+  const r = await as(NURSE, "/ward/fluid", "POST", {
+    orgId: ORG, encounterId: adm.encounterId, patientId: adm.patientId,
+    entries: [
+      { direction: "intake", kind: "iv", value: 1, unit: "L", at: "2026-09-07T09:00:00.000Z" },     // a silent x1000
+      { direction: "intake", kind: "oral", value: "a cup", at: "2026-09-07T09:05:00.000Z" },
+      { direction: "output", kind: "urine", value: 200, at: "2026-09-07T09:10:00.000Z" },
+    ],
+  });
+  assert.equal(r.written, 1);
+  assert.deepEqual(r.rejected.map((x) => x.reason), ["unusable_unit", "not_a_number"]);
+  // Nothing was converted: the litre did not become 1000 mL behind the nurse's back.
+  const bal = await as(NURSE, `/ward/balance?orgId=${ORG}&patientId=${adm.patientId}&from=2026-09-07T09:00:00.000Z&to=2026-09-07T10:00:00.000Z`);
+  assert.equal(bal.balance.intake, 0);
+  assert.equal(bal.balance.output, 200);
+
+  // A request where NOTHING is usable is a 422, not a cheerful "wrote 0".
+  const none = await as(NURSE, "/ward/fluid", "POST", {
+    orgId: ORG, encounterId: adm.encounterId, patientId: adm.patientId,
+    entries: [{ direction: "intake", kind: "telepathy", value: 100, at: "2026-09-07T09:00:00.000Z" }],
+  });
+  assert.equal(none.__status, 422);
+  assert.equal(none.error, "nothing_recordable");
+});
+
+test("charting fluid is the nurse's own record; a pharmacist has no business in it", async () => {
+  seedHospital();
+  const { adm } = await admittedPatientOnDrug();
+  const entries = [{ direction: "output", kind: "urine", value: 100, at: "2026-09-07T09:00:00.000Z" }];
+  assert.equal((await as(NURSE, "/ward/fluid", "POST", { orgId: ORG, encounterId: adm.encounterId, patientId: adm.patientId, entries })).__status, 200);
+  assert.equal((await as(DOCTOR, "/ward/fluid", "POST", { orgId: ORG, encounterId: adm.encounterId, patientId: adm.patientId, entries })).__status, 200);
+  assert.equal((await as(PHARM, "/ward/fluid", "POST", { orgId: ORG, encounterId: adm.encounterId, patientId: adm.patientId, entries })).__status, 403);
+  assert.equal((await as(PHARM, `/ward/balance?orgId=${ORG}&patientId=${adm.patientId}&from=2026-09-07T09:00:00.000Z`)).__status, 403);
+});
+
+test("fluid entries never pollute the vitals the eMAR reads", async () => {
+  seedHospital();
+  const { adm, ord, patient, scan } = await admittedPatientOnDrug();
+  await as(NURSE, "/ward/fluid", "POST", {
+    orgId: ORG, encounterId: adm.encounterId, patientId: adm.patientId,
+    entries: [{ direction: "intake", kind: "oral", value: 68, at: "2026-09-07T09:00:00.000Z" }],
+  });
+  // A fluid volume of 68 mL must never be mistaken for a body weight of 68 kg by the dose check.
+  const step = (a, x) => as(NURSE, "/ward/mar", "POST", { orgId: ORG, action: a, orderId: ord.orderId, dueAt: DUE, patient, ...(x || {}) });
+  await step("verify"); await step("dispense"); await step("scan", { scan });
+  assert.equal((await step("administer")).__status, 200, "the weight-based check still uses the recorded weight");
+});

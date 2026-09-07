@@ -50,12 +50,14 @@ import { checkPrescriptionSafety } from "../../_wardsynq/rx-safety.js";
 import { getRulePack } from "../../_wardsynq/rulepack.js";
 // Inpatient ward + eMAR (2026-09-07). Same shape as every OPD migration above: the route resolves
 // the org and the forced wardsynq migration, these do the governed record write.
-import { admitPatient, listWard, recordWardVitals, createWardMedicationOrder } from "../../_wardsynq/migrate-inpatient.js";
+import { admitPatient, listWard, recordWardVitals, createWardMedicationOrder, transferPatient, bedBoard } from "../../_wardsynq/migrate-inpatient.js";
 import { medicationRound, administerStep } from "../../_wardsynq/migrate-emar.js";
 import { draftDischargeSummary, signDischargeSummary, dischargePatient, readDischargeSummary } from "../../_wardsynq/migrate-discharge.js";
 import { recordProblem, listProblems } from "../../_wardsynq/migrate-problem.js";
 import { marSchedule } from "../../_wardsynq/mar-schedule.js";
 import { openCriticalLoops, acknowledgeCritical, listCriticalLoops } from "../../_wardsynq/critical-results.js";
+import { recordFluid, fluidBalance } from "../../_wardsynq/fluid-balance.js";
+import { giveHandover, receiveHandover, listHandovers } from "../../_wardsynq/handover.js";
 import { recordAllergiesFromAssessment } from "../../_wardsynq/migrate-allergy.js";
 
 // The Encounter migration's one shared call site. Every hook below (ticket add, import, a terminal
@@ -419,6 +421,13 @@ export async function onRequest(context) {
          * authority to act. ACKNOWLEDGING is emr.treat: it is a clinical decision recorded against a
          * named clinician, and the store enforces the write scope independently. */
         criticals: CAPS.EMR_VIEW, acknowledge: CAPS.EMR_TREAT, "flag-critical": CAPS.EMR_TREAT,
+        // Moving a patient between beds is the same administrative act as admitting them to one.
+        transfer: CAPS.QUEUE_ADD, beds: CAPS.QUEUE_VIEW,
+        // Charting fluid is the nurse's own record, the same authority as recording a vital.
+        fluid: CAPS.EMR_VITALS, balance: CAPS.EMR_VIEW,
+        // Handing a patient over is the clinical account of a shift: the same authority as recording
+        // a vital, because it is the nurse's own record of their own patients.
+        handover: CAPS.EMR_VITALS, "receive-handover": CAPS.EMR_VITALS, handovers: CAPS.EMR_VIEW,
         // Closing a stay is the administrative act QUEUE_ADD already covers for opening one.
         // The summary is a clinical document: drafting and signing it are EMR_TREAT.
         discharge: CAPS.QUEUE_ADD, "discharge-summary": CAPS.EMR_TREAT, "sign-discharge-summary": CAPS.EMR_TREAT,
@@ -469,6 +478,36 @@ export async function onRequest(context) {
       }
       if (sub === "round" && method === "GET") {
         const r = await medicationRound(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "", dueAt: url.searchParams.get("dueAt") || "" });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "handover" && method === "POST") {
+        const r = await giveHandover(request, env, { ...deps, encounterId: body.encounterId, sbar: body.sbar || body, givenAt: body.givenAt, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "receive-handover" && method === "POST") {
+        const r = await receiveHandover(request, env, { ...deps, handoverId: body.handoverId, note: body.note, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "handovers" && method === "GET") {
+        const r = await listHandovers(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "", state: url.searchParams.get("state") || "" });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "fluid" && method === "POST") {
+        const r = await recordFluid(request, env, { ...deps, encounterId: body.encounterId, patientId: body.patientId, entries: body.entries, recordedAt: body.recordedAt, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "balance" && method === "GET") {
+        const r = await fluidBalance(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "", from: url.searchParams.get("from") || "", to: url.searchParams.get("to") || "" });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "transfer" && method === "POST") {
+        const r = await transferPatient(request, env, { ...deps, encounterId: body.encounterId, ward: body.ward, bed: body.bed, reason: body.reason, movedAt: body.movedAt, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "beds" && method === "GET") {
+        // The ward's bed list is ORG configuration. With none configured the board reports what is
+        // occupied and says it cannot know what is free, rather than reporting zero free beds.
+        const r = await bedBoard(request, env, { ...deps, ward: url.searchParams.get("ward") || "", beds: (wOrg && wOrg.beds) || null });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "criticals" && method === "GET") {

@@ -61,7 +61,12 @@ const RESOURCE_TYPES = Object.freeze([
   "CarePlan", "ClinicalNote",
 ]);
 const ORDER_TYPES = Object.freeze(["MedicationOrder", "ServiceRequest"]);
-const VITALS_TYPES = Object.freeze(["Observation"]);
+/* What EMR_VITALS lets a nurse write: what she records about her own patients. ShiftHandover joined
+ * Observation on 2026-09-07 with the nursing flowsheet, and it is a NARROW addition on purpose - a
+ * handover is the nurse's own account of a shift, not a clinical document. Putting it in
+ * ClinicalNote instead would have required widening this scope to cover every clinical document,
+ * which would also have let a nurse author a discharge summary or an assessment. */
+const VITALS_TYPES = Object.freeze(["Observation", "ShiftHandover"]);
 const PATIENT_TYPE = "Patient";
 // Added 2026-09-06 (the Encounter migration), alongside PATIENT_TYPE and for the identical reason:
 // checking a patient in for today's visit is the SAME administrative act QUEUE_ADD already covers

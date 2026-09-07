@@ -479,11 +479,16 @@ test("role mapping: every one of the eighteen operational roles resolves to exac
   // A nurse additionally holds MED_ADMINISTER (2026-09-07, the inpatient eMAR), which adds
   // MedicationAdministration and nothing else. Interns and residents do not give medicines here.
   assert.equal(tier("nurse"), TIER.EXECUTE);
-  assert.deepEqual(write("nurse"), ["Observation", "Patient", "Encounter", "MedicationAdministration"]);
+  /* 2026-09-07: ShiftHandover joined Observation in the EMR_VITALS scope with the nursing
+   * flowsheet. A handover is the nurse's own account of her shift, not a clinical document - which
+   * is exactly why it got its OWN type rather than being written as a ClinicalNote. Putting it
+   * there would have forced this scope open to every clinical document, and the two assertions
+   * below would have had to be deleted rather than kept. */
+  assert.deepEqual(write("nurse"), ["Observation", "ShiftHandover", "Patient", "Encounter", "MedicationAdministration"]);
   assert.equal(read("nurse"), null);
   assert.ok(!write("nurse").includes("MedicationOrder"), "a nurse who can give a dose still cannot write the order for it");
-  assert.ok(!write("nurse").includes("ClinicalNote"), "nor an assessment");
-  for (const r of ["intern", "resident", "pg_resident"]) { assert.equal(tier(r), TIER.EXECUTE, r); assert.deepEqual(write(r), ["Observation", "Patient", "Encounter"], r); assert.equal(read(r), null, r); }
+  assert.ok(!write("nurse").includes("ClinicalNote"), "nor an assessment, nor a discharge summary");
+  for (const r of ["intern", "resident", "pg_resident"]) { assert.equal(tier(r), TIER.EXECUTE, r); assert.deepEqual(write(r), ["Observation", "ShiftHandover", "Patient", "Encounter"], r); assert.equal(read(r), null, r); }
   for (const r of ["supervisor", "reception"]) { assert.equal(tier(r), TIER.EXECUTE, r); assert.deepEqual(write(r), ["Patient", "Encounter"], r); assert.equal(read(r), null, r); }
   for (const r of ["cashier", "pharmacy"]) { assert.equal(tier(r), TIER.READ, r); assert.deepEqual(write(r), [], r); assert.deepEqual(read(r), ["MedicationOrder", "ServiceRequest"], r); }
   for (const r of ["hr", "viewer", "oncqis_protocol_author", "oncqis_clinical_reviewer", "oncqis_institutional_approver", "academic_cell"]) assert.equal(m[r], null, r + " has no clinical actor");
@@ -519,7 +524,7 @@ test("OPD roles at the door: doctor writes and signs, nurse records vitals and n
   const nurse = await client(h, "fb:sister-anu");
   assert.equal(nurse.descriptor.role, "nurse");
   assert.equal(nurse.descriptor.actor.tier, "execute");
-  assert.deepEqual(nurse.descriptor.actor.writable, ["Observation", "Patient", "Encounter", "MedicationAdministration"]);
+  assert.deepEqual(nurse.descriptor.actor.writable, ["Observation", "ShiftHandover", "Patient", "Encounter", "MedicationAdministration"]);
   assert.equal(nurse.descriptor.actor.canSign, false);
   const bp = await nurse.session("pat-20").put(Observation({ id: "obs-20", patientId: "pat-20", code: "85354-9", value: "142/91", category: "vital-signs" }));
   assert.equal(bp.writtenBy.id, "fb:sister-anu");
@@ -573,7 +578,7 @@ test("staff sessions: a nurse signed in with email+PIN on a hospital PC reaches 
   const nurse = await (async () => { const b = new RemoteBackend({ tenantId: "gimsr", baseUrl: "https://x", fetch: asStaff(nurseTok) }); await b.open(); return b; })();
   assert.equal(nurse.descriptor.actor.id, "nurse.anu");
   assert.equal(nurse.descriptor.role, "nurse");
-  assert.deepEqual(nurse.descriptor.actor.writable, ["Observation", "Patient", "Encounter", "MedicationAdministration"]);
+  assert.deepEqual(nurse.descriptor.actor.writable, ["Observation", "ShiftHandover", "Patient", "Encounter", "MedicationAdministration"]);
   // Staff sessions are off unless the deployment says so, and org-bound.
   assert.equal((await handle(new Request("https://x/api/wardsynq/gimsr", { headers: { "X-Staff-Token": nurseTok } }), ENV, h.deps)).status, 401);
   assert.equal((await asStaff(otherOrgTok)("https://x/api/wardsynq/gimsr")).status, 403);
@@ -626,7 +631,7 @@ test("AI drafts: written by the AI actor on the clinician's behalf, never author
   // Pure: the AI actor is DRAFT whatever it asks, and its scope is the human's.
   const human = actorFromOpdRole({ identity: { id: "fb:n" }, role: "nurse" });
   const bot = aiActorFor(human, { id: "maik" });
-  assert.equal(bot.tier, "draft"); assert.deepEqual([...bot.scope.write], ["Observation", "Patient", "Encounter", "MedicationAdministration"]); assert.equal(bot.onBehalfOf, "fb:n");
+  assert.equal(bot.tier, "draft"); assert.deepEqual([...bot.scope.write], ["Observation", "ShiftHandover", "Patient", "Encounter", "MedicationAdministration"]); assert.equal(bot.onBehalfOf, "fb:n");
 });
 
 /* ------------------------------------------------------------------ the nurse-vitals migration */

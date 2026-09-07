@@ -33,7 +33,7 @@
   var st = {
     orgId: "", ward: "", patients: [], view: "list",
     sel: null,                 // the selected {encounterId, patientId, ward, bed, admittedAt}
-    problems: [], criticals: [],
+    problems: [], criticals: [], balance: null,
     due: [], prn: [], unscheduled: [], truncated: false,
     from: "", to: "",          // the window being viewed, NOT a claim about when a dose is due
     busy: false, err: "", note: "", refusal: null, loaded: false
@@ -218,8 +218,40 @@
       // The summary is reachable from the patient, not from a menu somewhere else. A planned
       // discharge is prepared while the patient is still on the ward, so this is not gated on the
       // stay being closed - the summary screen states plainly when a stay is still open.
+      '<button class="w-btn ghost" data-w-act="move" title="Transfer to another ward or bed">' + ms("swap_horiz") + "Transfer</button>" +
       '<button class="w-btn ghost" data-w-act="summary" title="Discharge summary">' + ms("description") + "Summary</button></div>" +
-      criticalsCard(state) + problemsCard(state) + vitalsCard() + marCard(state);
+      criticalsCard(state) + problemsCard(state) + vitalsCard() + fluidCard(state) + marCard(state);
+  }
+
+  var FLUID_IN = [["oral", "Oral"], ["iv", "IV"], ["ng", "NG / enteral"], ["blood", "Blood"], ["other", "Other"]];
+  var FLUID_OUT = [["urine", "Urine"], ["drain", "Drain"], ["vomit", "Vomit"], ["stool", "Stool"], ["blood", "Blood loss"], ["other", "Other"]];
+  /* Fluid balance. The total is never shown on its own: "+400" hides whether that is a patient who
+   * drank 400 and passed nothing, or one who took three litres and passed 2.6 - different patients,
+   * one of them in trouble. And the hours nobody charted are shown beside the number, because a
+   * balance presented as a fact implies a chart that was actually kept. */
+  function fluidCard(state) {
+    var b = state.balance;
+    var opts = function (list) {
+      return list.map(function (x) { return '<option value="' + esc(x[0]) + '">' + esc(x[1]) + "</option>"; }).join("");
+    };
+    var totals = !b ? '<p class="w-empty">No fluid charted for this period.</p>'
+      : '<div class="w-bal">' +
+          '<div class="w-bal-c"><span>In</span><b>' + esc(b.intake) + " mL</b></div>" +
+          '<div class="w-bal-c"><span>Out</span><b>' + esc(b.output) + " mL</b></div>" +
+          '<div class="w-bal-c net"><span>Balance</span><b>' + (b.balance > 0 ? "+" : "") + esc(b.balance) + " mL</b></div>" +
+        "</div>" +
+        (b.complete
+          ? '<p class="w-hint">' + ms("check_circle") + "Every hour of this period has an entry.</p>"
+          : '<p class="w-hint warn">' + ms("error") + esc(b.gaps.length) + " of the last " + esc(b.gaps.length + b.hours.length) +
+            " hours have nothing charted. Read this balance as incomplete.</p>");
+    return '<div class="w-card"><div class="w-card-h">' + ms("water_drop") + "<h3>Fluid balance</h3>" +
+      '<button class="w-ic" data-w-act="balance" title="Refresh">' + ms("refresh") + "</button></div>" +
+      totals +
+      '<div class="w-fluid"><select id="wFDir"><option value="intake">Intake</option><option value="output">Output</option></select>' +
+      '<select id="wFKind">' + opts(FLUID_IN) + "</select>" +
+      '<input id="wFVal" type="text" inputmode="decimal" placeholder="mL" autocomplete="off">' +
+      '<button class="w-btn" data-w-act="fluid">' + ms("add") + "Chart</button></div>" +
+      '<p class="w-hint">Volumes are recorded in mL. A value that is not plainly one number is not recorded.</p></div>';
   }
 
   /* Open critical results, ABOVE everything else on the chart. A critical result that reaches a
@@ -279,6 +311,56 @@
         paint();
       })
       .catch(function () { st.busy = false; st.err = "Could not load the chart."; paint(); });
+  }
+  /* A transfer, from the patient's own chart. The refusal a busy bed produces is the important part
+   * of this flow: the server names the occupant, and that is shown as-is rather than collapsed into
+   * "could not transfer", because "bed 12 already has someone in it" is what the ward has to act on. */
+  function transfer() {
+    var s = st.sel; if (!s) return;
+    var ward = "", bed = "";
+    try {
+      ward = G.prompt("Transfer to which ward?", s.ward || "") || "";
+      if (!ward.trim()) return;
+      bed = G.prompt("Which bed? (leave blank if awaiting one)", "") || "";
+    } catch (e) { return; }
+    st.busy = true; paint();
+    apiPost("/ward/transfer", { orgId: st.orgId, encounterId: s.encounterId, ward: ward.trim(), bed: bed.trim() })
+      .then(function (r) {
+        if (r && r.error === "bed_occupied") {
+          st.busy = false;
+          st.err = r.detail + (r.occupiedBy && r.occupiedBy.patientId ? " by " + r.occupiedBy.patientId : "") + ". Choose another bed.";
+          paint(); return;
+        }
+        if (settle(r, r && r.written ? "Moved to " + ward.trim() + (bed.trim() ? ", bed " + bed.trim() : "") + "." : "Already there.")) {
+          st.sel = null; st.view = "list"; loadWard();
+        } else paint();
+      })
+      .catch(function () { st.busy = false; st.err = "Could not record the transfer."; paint(); });
+  }
+  /* The balance window is the last 12 hours: a shift. Recomputed each load rather than stored, so a
+   * chart opened at the end of a shift shows that shift and not a stale window. */
+  function loadBalance() {
+    var s = st.sel; if (!s) return Promise.resolve();
+    var to = new Date(), from = new Date(to.getTime() - 12 * 3600000);
+    return apiGet("/ward/balance?orgId=" + encodeURIComponent(st.orgId) + "&patientId=" + encodeURIComponent(s.patientId) +
+      "&from=" + encodeURIComponent(from.toISOString()) + "&to=" + encodeURIComponent(to.toISOString()))
+      .then(function (r) { if (r && r.ok) st.balance = r.balance; paint(); })
+      .catch(function () { /* the card says "no fluid charted"; a failure is not a zero balance */ });
+  }
+  function chartFluid() {
+    var s = st.sel; if (!s) return;
+    var v = val("wFVal");
+    if (!v) { st.err = "How much?"; paint(); return; }
+    st.busy = true; paint();
+    apiPost("/ward/fluid", {
+      orgId: st.orgId, encounterId: s.encounterId, patientId: s.patientId,
+      entries: [{ direction: val("wFDir"), kind: val("wFKind"), value: v, at: new Date().toISOString() }],
+    }).then(function (r) {
+      // A rejected row is the answer, not something to hide behind a success message.
+      if (r && r.rejected && r.rejected.length && !r.written) { st.busy = false; st.err = "Not recorded: " + r.rejected[0].reason.replace(/_/g, " ") + "."; paint(); return; }
+      if (settle(r, "Charted.")) { var el = document.getElementById("wFVal"); if (el) el.value = ""; loadBalance(); }
+      else paint();
+    }).catch(function () { st.busy = false; st.err = "Could not chart that."; paint(); });
   }
   function acknowledge(loopId) {
     var why = ""; try { why = G.prompt("What did you do about this result?") || ""; } catch (e) {}
@@ -369,10 +451,10 @@
       var p = null;
       for (var j = 0; j < st.patients.length; j++) { if (st.patients[j].encounterId === arg) { p = st.patients[j]; break; } }
       if (!p) return;
-      st.sel = p; st.view = "chart"; st.due = []; st.prn = []; st.unscheduled = []; st.problems = []; st.criticals = [];
+      st.sel = p; st.view = "chart"; st.due = []; st.prn = []; st.unscheduled = []; st.problems = []; st.criticals = []; st.balance = null;
       st.err = ""; st.note = ""; st.refusal = null;
       defaultWindow();
-      paint(); loadChart(); loadRound(); return;
+      paint(); loadChart(); loadRound(); loadBalance(); return;
     }
     if (cmd === "summary") {
       var sel = st.sel; if (!sel) return;
@@ -381,6 +463,9 @@
       return;
     }
     if (cmd === "ack") { acknowledge(arg); return; }
+    if (cmd === "move") { transfer(); return; }
+    if (cmd === "fluid") { chartFluid(); return; }
+    if (cmd === "balance") { loadBalance(); return; }
     if (cmd === "vitals") { saveVitals(); return; }
     if (cmd === "round") { st.from = val("wFrom") || st.from; st.to = val("wTo") || st.to; loadRound(); return; }
     if (cmd === "mar") { var k = arg.indexOf("|"); if (k > 0) marAction(arg.slice(0, k), Number(arg.slice(k + 1))); return; }

@@ -49,6 +49,11 @@ const RESOURCE_TYPES = Object.freeze([
    * unrestricted read, so a doctor can acknowledge and a nurse can see the list, which is the
    * policy wanted. A nurse's write scope is enumerated and does not include this type. */
   "CriticalResultLoop",
+  /* The shift handover. Also not a clinical finding, and deliberately not a ClinicalNote: that is a
+   * clinical DOCUMENT, and a nurse's write scope rightly excludes one. Widening that scope so a
+   * handover could be written would have let a nurse author a discharge summary too. Its own type,
+   * granted narrowly by EMR_VITALS - what the nurse records about their own patients. */
+  "ShiftHandover",
 ]);
 
 const MODE = Object.freeze({ SYSTEM_OF_RECORD: "system-of-record", INTEGRATION: "integration" });
