@@ -34,6 +34,9 @@
     orgId: "", ward: "", patients: [], view: "list",
     sel: null,                 // the selected {encounterId, patientId, ward, bed, admittedAt}
     problems: [], criticals: [], balance: null, outbox: [], cosign: null, downtime: null, quality: null,
+    /* The terminology search: null while it runs, an array once it answers, undefined when nobody has
+     * asked. Three states, because "searching" and "no matches" must not look the same. */
+    icd: undefined, probText: "", probCode: "",
     due: [], prn: [], unscheduled: [], truncated: false,
     from: "", to: "",          // the window being viewed, NOT a claim about when a dose is due
     busy: false, err: "", note: "", refusal: null, loaded: false
@@ -63,6 +66,15 @@
     });
   }
   function apiGet(path) { return authHeaders().then(function (h) { return fetchRetry(API + path, { headers: h, credentials: "include" }); }).then(function (r) { return r.json(); }); }
+  /* The ICD reference API is public, read-only, non-PHI and lives on its own path. It is fetched
+   * separately rather than through apiGet so no patient identifier can ever be sent to it: a
+   * terminology lookup that carried the patient it was for would leak a diagnosis to a service that
+   * has no business knowing one. */
+  function icdSearch(q) {
+    return fetchRetry("/api/icd/search?limit=8&q=" + encodeURIComponent(q), { credentials: "omit" })
+      .then(function (r) { return r.json(); })
+      .then(function (j) { return (j && j.results) || []; });
+  }
   function apiPost(path, body) { return authHeaders().then(function (h) { return fetchRetry(API + path, { method: "POST", headers: h, credentials: "include", body: JSON.stringify(body || {}) }); }).then(function (r) { return r.json(); }); }
 
   /* One place that turns any ward response into what the screen shows. A refusal keeps its reasons;
@@ -242,10 +254,22 @@
        * server, which refuses and says why. A UI that hides a refusal teaches people the feature does
        * not exist. */
       '<div class="w-sub"><h4>' + ms("add") + "Add a problem</h4>" +
-      '<div class="w-prob"><input id="wProbText" type="text" autocomplete="off" placeholder="Diagnosis, in words">' +
-      '<input id="wProbCode" type="text" autocomplete="off" placeholder="ICD code (optional)">' +
+      '<div class="w-prob"><input id="wProbText" type="text" autocomplete="off" placeholder="Diagnosis, in words" value="' + esc(state.probText || "") + '">' +
+      '<input id="wProbCode" type="text" autocomplete="off" placeholder="ICD code (optional)" value="' + esc(state.probCode || "") + '">' +
       '<select id="wProbVs">' + opts + "</select>" +
+      '<button class="w-btn ghost" data-w-act="icd">' + ms("search") + "Find code</button>" +
       '<button class="w-btn" data-w-act="problem">' + ms("save") + "Record</button></div>" +
+      /* THE CODE IS PICKED BY A PERSON, NEVER DERIVED. The search offers candidates and attaches
+       * nothing: no result is preselected, not even when there is exactly one, because a single
+       * result is not the same as the right one. Until somebody clicks, the diagnosis is text. */
+      (state.icd === null ? '<p class="w-hint">' + ms("info") + "Searching…</p>" : "") +
+      (Array.isArray(state.icd)
+        ? (state.icd.length
+          ? '<ul class="w-icd">' + state.icd.map(function (c, i) {
+              return '<li><button class="w-icd-p" data-w-act="icdpick:' + i + '"><b>' + esc(c.code) + "</b><span>" + esc(c.title) + "</span><small>" + esc(c.system || "") + "</small></button></li>";
+            }).join("") + "</ul>"
+          : '<p class="w-hint">' + ms("info") + "No matching code. Record it in words: an uncoded diagnosis is honest, a guessed code is not.</p>")
+        : "") +
       // Said plainly, because a code box beside a text box invites typing one in and hoping.
       '<p class="w-hint">' + ms("info") + "Left blank, the code is not guessed at: the diagnosis is recorded as text, and says so. Nothing here decides what the words mean.</p>" +
       "</div></div>";
@@ -616,6 +640,33 @@
   /* Asserting a diagnosis. The screen carries the words and, if the clinician has one, the code; it
    * never derives a code from the words. An uncoded diagnosis is recorded as text and the server says
    * so - which is true, and is the one thing a receiving system can act on honestly. */
+  /* Searching the terminology. The words the clinician typed are the query and nothing else - no
+   * patient identifier is sent, because a lookup that carried the patient it was for would leak a
+   * diagnosis to a reference service that has no business knowing one. */
+  function findCode() {
+    var q = val("wProbText");
+    st.probText = q; st.probCode = val("wProbCode");
+    if (!q) { st.err = "Type the diagnosis first, then search for its code."; paint(); return; }
+    st.icd = null; paint();
+    icdSearch(q)
+      .then(function (rows) { st.icd = rows; paint(); })
+      // A terminology service that is down must never stop a diagnosis being recorded. The words
+      // still work, and the screen says so rather than leaving a spinner up.
+      .catch(function () { st.icd = []; st.err = "The code search is unavailable. Record the diagnosis in words."; paint(); });
+  }
+  /* A PERSON PICKS. Nothing here scores, ranks or auto-selects a result - not even when there is
+   * exactly one, because one result is not the same as the right one. */
+  function pickCode(i) {
+    var c = (st.icd || [])[i];
+    if (!c) return;
+    st.probCode = c.code;
+    // The official title becomes the words, so the record says what the code actually means rather
+    // than what somebody typed on the way to finding it.
+    st.probText = c.title;
+    st.icd = undefined;
+    paint();
+  }
+
   function addProblem() {
     var s = st.sel; if (!s) return;
     var text = val("wProbText"), code = val("wProbCode");
@@ -631,6 +682,7 @@
     })
       .then(function (r) {
         if (settle(r, r && r.written ? "Recorded as " + r.verificationStatus + "." : (r && r.skipped === "unchanged" ? "Already on the list, unchanged." : null))) {
+          st.probText = ""; st.probCode = ""; st.icd = undefined;
           ["wProbText", "wProbCode"].forEach(function (id) { var el = document.getElementById(id); if (el) el.value = ""; });
           loadChart();
         } else paint();
@@ -803,6 +855,8 @@
     if (cmd === "cosigns") { loadCosigns(); return; }
     if (cmd === "quality") { loadQuality(); return; }
     if (cmd === "problem") { addProblem(); return; }
+    if (cmd === "icd") { findCode(); return; }
+    if (cmd === "icdpick") { pickCode(Number(arg)); return; }
     if (cmd === "resolve") { resolveProblem(arg); return; }
     if (cmd === "downtime") { loadDowntime(); return; }
     if (cmd === "printpack") { try { G.print(); } catch (e) {} return; }

@@ -168,6 +168,17 @@ body.dark #smdWard { --bg: #191c1e; --on-surface: #eff1f3; --on-surface-variant:
 #smdWard .w-prob input#wProbText { flex: 2 1 200px; }
 #smdWard .w-problems li .w-btn.tiny { margin-left: auto; }
 
+/* Terminology results. Each one is a BUTTON somebody has to press: nothing is preselected, so the
+   list can never be mistaken for a choice already made. */
+#smdWard .w-icd { list-style: none; margin: 8px 0 0; padding: 0; display: flex; flex-direction: column; gap: 6px; }
+#smdWard .w-icd-p { display: flex; align-items: baseline; gap: 10px; width: 100%; text-align: left; cursor: pointer;
+  border: 1px solid var(--outline-variant); border-radius: 10px; background: var(--sc-low); color: inherit;
+  font: 400 14px var(--w-sans); padding: 9px 11px; min-height: 44px; }
+#smdWard .w-icd-p:active { background: var(--sc); }
+#smdWard .w-icd-p b { font: 700 13px var(--mono, ui-monospace, Menlo, monospace); flex: 0 0 auto; }
+#smdWard .w-icd-p span { flex: 1; min-width: 0; }
+#smdWard .w-icd-p small { color: var(--on-surface-variant); font-size: 11px; text-transform: uppercase; letter-spacing: .05em; }
+
 /* Measures. A big number and, always beside it, the two numbers it came from: a rate whose
    denominator is not shown is a rate nobody can argue with, and these exist to be argued with. */
 #smdWard .w-q { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }

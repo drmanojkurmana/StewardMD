@@ -294,11 +294,33 @@ test("A DIAGNOSIS IS ENTERED HERE, AND THE SCREEN NEVER DECIDES WHO MAY ENTER ON
   /* THE CODE IS NEVER DERIVED FROM THE WORDS. An uncoded diagnosis is recorded as text and says so;
    * emitting a guessed code is a lie that survives every export afterwards. */
   assert.match(html, /the code is not guessed at/);
-  /* Naming the code system on a placeholder is fine and helps. What must not exist is any mapping
-   * from words to a code: a lookup table, a fetch to a terminology service, or a guess. */
   const code = SRC.replace(/\/\*[\s\S]*?\*\//g, " ").replace(/^\s*\/\/.*$/gm, " ");
-  assert.ok(!/\/api\/icd|icdLookup|terminolog|snomed|codeFor\s*\(/i.test(code), "the UI never looks a code up");
-  assert.ok(!/code\s*:\s*["'][A-Z]\d/.test(code), "and carries no code values of its own");
+  /* THE PROPERTY IS "NEVER DERIVED", NOT "NEVER LOOKED UP". This assertion originally forbade any
+   * terminology call at all, which was a proxy: it stopped the screen mapping words to a code by
+   * itself, and it also stopped a clinician being OFFERED the real ICD titles to choose from - which
+   * is how a coded problem list gets coded at all. Searching is allowed; SELECTING is not. */
+  assert.ok(!/code\s*:\s*["'][A-Z]\d/.test(code), "the UI carries no code values of its own");
+  // No scoring, ranking or best-match anywhere: those are how a search quietly becomes a derivation.
+  assert.ok(!/bestMatch|score\s*\(|confidence|autoSelect|\.sort\s*\([^)]*match/i.test(code), "nothing ranks or auto-selects a code");
+  // The only thing that sets a code is a human pressing one of the results.
+  assert.match(code, /st\.probCode = c\.code/);
+  assert.match(code, /data-w-act="icdpick:/);
+
+  /* THE SEARCH OFFERS, IT DOES NOT CHOOSE. Not even a single result is preselected: one result is
+   * not the same as the right one, and a list that filled the box in would be a derivation with an
+   * extra step. */
+  const offered = W._render(Object.assign({}, chart, {
+    icd: [{ code: "J18.9", title: "Pneumonia, unspecified organism", system: "icd10" }],
+  }));
+  assert.match(offered, /data-w-act="icdpick:0"/);
+  assert.match(offered, /J18\.9/);
+  assert.match(offered, /Pneumonia, unspecified organism/);
+  assert.ok(!/id="wProbCode"[^>]*value="J18\.9"/.test(offered), "and the code box is still empty until somebody presses it");
+
+  // Three states, because "searching" and "no matches" must never look the same.
+  assert.match(W._render(Object.assign({}, chart, { icd: null })), /Searching/);
+  assert.match(W._render(Object.assign({}, chart, { icd: [] })), /an uncoded diagnosis is honest, a guessed code is not/);
+  assert.ok(!W._render(chart).includes("Searching"), "and nothing is shown before anybody asks");
 
   // Resolving is offered on an active problem and is a new version, never a deletion.
   assert.match(html, /data-w-act="resolve:p1"/);
