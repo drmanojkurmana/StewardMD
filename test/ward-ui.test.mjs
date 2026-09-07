@@ -353,6 +353,46 @@ test("HTML is escaped: a hostile ward or drug name cannot inject markup", () => 
   assert.match(html, /p&amp;p/);
 });
 
+test("THE NOTE COMPOSER SUPPLIES HEADINGS AND NEVER CONTENT", () => {
+  const W = load();
+  const TPL = {
+    id: "ward-round", name: "Ward round note", noteType: "progress",
+    sections: [{ key: "impression", title: "Impression", required: true, prompt: "How is the patient today?" }, { key: "plan", title: "Plan" }],
+  };
+  // No templates configured, no card: this screen ships no headings of its own.
+  assert.ok(!W._render(chart).includes("Ward round note"));
+
+  const open = W._render(Object.assign({}, chart, { templates: [TPL], noteTemplateId: "ward-round" }));
+  assert.match(open, /id="wNote_impression"/);
+  assert.match(open, /id="wNote_plan"/);
+  assert.match(open, /How is the patient today\?/, "the hospital's own prompt, verbatim");
+  assert.match(open, /required/);
+  /* The screen writes nothing. No default text, no "normal examination", no expansion - a composer
+   * that pre-filled a finding would document an examination that never happened. */
+  assert.ok(!/<textarea[^>]*>[^<]/.test(open), "every field opens empty");
+  assert.match(open, /Nothing here writes text for you/);
+
+  /* A REQUIRED SECTION LEFT BLANK DOES NOT BLOCK THE SAVE, and the result says what is missing. A
+   * screen that refused would be one people stop using for the notes that matter most. */
+  const partial = W._render(Object.assign({}, chart, {
+    templates: [TPL], noteTemplateId: "ward-round",
+    noteResult: { ok: true, incomplete: true, missing: [{ key: "impression", title: "Impression" }] },
+  }));
+  assert.match(partial, /Saved with Impression still blank/);
+  assert.match(partial, /on the record as incomplete/);
+
+  /* IT NEVER SIGNS. Signing is its own act with its own authority, and it lives on the co-sign
+   * worklist - which is why "note-sign" DOES appear elsewhere in this file. What matters is that the
+   * composer's own save posts to /ward/note and carries no signature: one that signed on the way
+   * past would put a name against a note nobody re-read. */
+  assert.match(partial, /Unsigned/);
+  const src = SRC.replace(/\/\*[\s\S]*?\*\//g, " ").replace(/^\s*\/\/.*$/gm, " ");
+  const saveNote = src.slice(src.indexOf("function saveNote"), src.indexOf("function findCode"));
+  assert.ok(saveNote.length > 100, "found the composer's save");
+  assert.match(saveNote, /apiPost\("\/ward\/note",/);
+  assert.ok(!/note-sign|signedBy|sign\(/.test(saveNote), "and it carries no signature");
+});
+
 test("A MEASURE SHOWS ITS DENOMINATOR, AND ONE THAT CANNOT BE COMPUTED SHOWS ITS REASON", () => {
   const W = load();
   const html = W._render(Object.assign({}, base, {
