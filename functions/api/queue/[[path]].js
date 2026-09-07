@@ -83,6 +83,7 @@ import { collectSpecimen, specimenOutcome, collectionList } from "../../_wardsyn
 import { adtForEncounter, oruForReport } from "../../_wardsynq/hl7v2.js";
 import { requestAdmission, closeAdmissionRequest, admissionWaitingList } from "../../_wardsynq/admission-request.js";
 import { registryReport } from "../../_wardsynq/registry.js";
+import { chartWound, listWounds } from "../../_wardsynq/wound.js";
 import { listTools as listRiskTools, recordAssessment as recordRiskAssessment, completeAction as completeRiskAction, listAssessments as listRiskAssessments } from "../../_wardsynq/risk-assessment.js";
 import { recordAllergiesFromAssessment } from "../../_wardsynq/migrate-allergy.js";
 
@@ -524,6 +525,8 @@ export async function onRequest(context) {
         /* Taking a sample is nursing work, the same authority as recording a vital. The outcome
          * falls back to lab.result above, because the laboratory is the half that receives it. */
         collect: CAPS.EMR_VITALS, "specimen-outcome": CAPS.EMR_VITALS, collections: CAPS.EMR_VIEW,
+        // Charting a wound is nursing work, the same authority as a vital or a fluid entry.
+        wound: CAPS.EMR_VITALS, wounds: CAPS.EMR_VIEW,
         // ADT out. Reading a stay in another wire format is still reading a chart, so it needs the
         // authority to read one. It writes nothing and there is no inbound listener.
         adt: CAPS.EMR_VIEW, oru: CAPS.EMR_VIEW,
@@ -704,6 +707,14 @@ export async function onRequest(context) {
           ...deps, encounterId: url.searchParams.get("encounterId") || "",
           event: url.searchParams.get("event") || "", sendingFacility: (wOrg && wOrg.code) || "",
         });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "wound" && method === "POST") {
+        const r = await chartWound(request, env, { ...deps, patientId: body.patientId, encounterId: body.encounterId, site: body.site, kind: body.kind, stage: body.stage, origin: body.origin, lengthCm: body.lengthCm, widthCm: body.widthCm, depthCm: body.depthCm, tissue: body.tissue, exudate: body.exudate, infectionSigns: body.infectionSigns, dressing: body.dressing, note: body.note, assessedAt: body.assessedAt, photo: body.photo, image: body.image, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "wounds" && method === "GET") {
+        const r = await listWounds(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "" });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "collect" && method === "POST") {

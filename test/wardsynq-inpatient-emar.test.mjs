@@ -2725,6 +2725,74 @@ test("sending is prescribing's business, and nothing unsendable is sent", async 
   assert.equal(bogus.error, "unknown_channel");
 });
 
+/* ---- the wound, over time ------------------------------------------------------------------------ */
+
+test("A HEALING CATEGORY 4 IS STILL A CATEGORY 4, and where it came from cannot be edited", async () => {
+  seedHospital();
+  const { adm } = await admittedPatientOnDrug();
+  const chart = (body) => as(NURSE, "/ward/wound", "POST", { orgId: ORG, patientId: adm.patientId, encounterId: adm.encounterId, site: "Sacrum", kind: "pressure", ...body });
+
+  const first = await chart({ stage: "4", origin: "acquired-here", lengthCm: 5, widthCm: 4, depthCm: 2, tissue: "Sloughy", assessedAt: "2026-09-01T09:00:00.000Z" });
+  assert.equal(first.__status, 200, JSON.stringify(first));
+  assert.equal(first.stage, "4");
+  assert.equal(first.areaCm2, 20);
+  assert.equal(first.comparison.state, "first");
+
+  /* THE RULE. Two weeks later it is granulating and a nurse would reasonably chart it as a 2. The
+   * lost tissue has not come back, and a chart that let the stage fall would report less harm than
+   * the hospital caused. */
+  const later = await chart({ stage: "2", lengthCm: 3, widthCm: 2, tissue: "Granulating", assessedAt: "2026-09-15T09:00:00.000Z" });
+  assert.equal(later.__status, 200, JSON.stringify(later));
+  assert.equal(later.stage, "2", "what the nurse saw today is recorded faithfully");
+  assert.equal(later.worstStage, "4", "and the wound is still a category 4");
+  assert.match(later.note, /never reverse-staged/);
+
+  // The area change is reported as a change, never as "healing".
+  assert.equal(later.comparison.state, "smaller");
+  assert.equal(later.comparison.changeCm2, -14);
+  assert.match(later.comparison.note, /not a judgement that the wound is healing/);
+
+  /* WHERE IT CAME FROM IS SET ONCE. A system that let this be edited later is one where a hospital
+   * can stop having pressure ulcers. */
+  const relabel = await chart({ stage: "2", origin: "present-on-admission", assessedAt: "2026-09-16T09:00:00.000Z" });
+  assert.equal(relabel.__status, 200);
+  assert.equal(relabel.origin, "acquired-here", "unchanged");
+  assert.equal(relabel.originNotChanged, "acquired-here");
+  assert.match(relabel.warning, /not editable/);
+
+  const list = await as(NURSE, `/ward/wounds?orgId=${ORG}&patientId=${adm.patientId}`);
+  assert.equal(list.wounds.length, 1);
+  assert.equal(list.wounds[0].worstStage, "4");
+  assert.equal(list.wounds[0].assessments, 3);
+  assert.equal(list.acquiredHere, 1, "the number the hospital is accountable for");
+});
+
+test("a different site is a different wound, and no image is accepted", async () => {
+  seedHospital();
+  const { adm } = await admittedPatientOnDrug();
+  const chart = (body) => as(NURSE, "/ward/wound", "POST", { orgId: ORG, patientId: adm.patientId, site: "Sacrum", ...body });
+
+  await chart({ stage: "2", origin: "acquired-here", assessedAt: "2026-09-01T09:00:00.000Z" });
+  await chart({ site: "Left heel", stage: "unstageable", origin: "present-on-admission", assessedAt: "2026-09-01T09:00:00.000Z" });
+  const list = await as(NURSE, `/ward/wounds?orgId=${ORG}&patientId=${adm.patientId}`);
+  assert.equal(list.wounds.length, 2, "two pressure ulcers on one patient are two problems");
+  assert.equal(list.acquiredHere, 1, "and only one of them is the hospital's");
+  // unstageable outranks 4: it may conceal full-thickness loss, and treating it as lesser is how a
+  // serious ulcer is recorded as a minor one.
+  assert.equal(list.wounds.find((w) => w.site === "Left heel").worstStage, "unstageable");
+
+  /* A wound image is identifiable PHI with its own storage, consent and retention problems. Refusing
+   * beats silently ignoring a field somebody sent and believing it was saved. */
+  const withPhoto = await chart({ stage: "2", photo: "data:image/jpeg;base64,...", assessedAt: "2026-09-02T09:00:00.000Z" });
+  assert.equal(withPhoto.__status, 400);
+  assert.equal(withPhoto.error, "no_images");
+
+  // A stage outside the recognised vocabulary is refused rather than stored as a word.
+  assert.equal((await chart({ stage: "nearly better" })).error, "unknown_stage");
+  // And a wound with no site has no identity: two of them would be one record.
+  assert.equal((await as(NURSE, "/ward/wound", "POST", { orgId: ORG, patientId: adm.patientId, stage: "2" })).error, "patient_and_site_required");
+});
+
 /* ---- the result, going out ----------------------------------------------------------------------- */
 
 test("AN ORU CARRIES ONLY THIS REPORT'S RESULTS, and the lab's own flag", async () => {

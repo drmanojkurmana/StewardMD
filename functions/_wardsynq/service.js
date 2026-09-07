@@ -93,6 +93,10 @@ const RESOURCE_TYPES = Object.freeze([
    * somebody who is not in it makes the board show full while beds stand empty, and a ward that
    * cannot trust the board stops reading it. */
   "AdmissionRequest",
+  /* A wound, assessed over time. Its worst stage is carried forward and never lowered, and where it
+   * came from is set at the first assessment - a system that let either fall is one where a hospital
+   * stops having pressure ulcers. */
+  "WoundAssessment",
   /* A record that an order set was applied, and exactly what landed and what did not. NOT the orders
    * themselves - those go through the ordinary path and are ordinary orders. This is what makes a
    * partial application visible, and what finds the patients a bad set touched. */
