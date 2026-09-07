@@ -80,6 +80,11 @@ const RESOURCE_TYPES = Object.freeze([
    * append-only fact rather than a counter, because a counter loses one of two concurrent orders and
    * a lost firing silently lowers a rule's override rate - the direction that hides a bad rule. */
   "SafetyFiring",
+  /* The pharmacy issued stock against an order. A SUPPLY fact and never a clinical one: it says
+   * medicine left the pharmacy, not that a patient received anything. Kept apart from
+   * MedicationAdministration on purpose - a system where "dispensed" can drift into "given" puts
+   * doses on charts that nobody administered. */
+  "MedicationDispense",
   /* A record that an order set was applied, and exactly what landed and what did not. NOT the orders
    * themselves - those go through the ordinary path and are ordinary orders. This is what makes a
    * partial application visible, and what finds the patients a bad set touched. */

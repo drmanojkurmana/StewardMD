@@ -2725,6 +2725,111 @@ test("sending is prescribing's business, and nothing unsendable is sent", async 
   assert.equal(bogus.error, "unknown_channel");
 });
 
+/* ---- the pharmacy issued it; nobody has taken it ----------------------------------------------- */
+
+test("DISPENSING IS SUPPLY, NOT ADMINISTRATION, and the pharmacy still cannot write a dose", async () => {
+  seedHospital();
+  const { adm, ord, patient, scan } = await admittedPatientOnDrug();
+
+  const d = await as(PHARM, "/ward/dispense", "POST", { orgId: ORG, orderId: ord.orderId, quantity: { value: 21, unit: "tablet" }, destination: "Medical A", at: "2026-09-07T08:30:00.000Z" });
+  assert.equal(d.__status, 200, JSON.stringify(d));
+  assert.equal(d.state, "issued");
+  assert.equal(d.orderVersion, 1, "issued against a version, so an amendment later is visible");
+  assert.match(d.note, /No dose has been administered/);
+  // No pharmacist verification exists for this order, so it is RECORDED as unverified rather than
+  // implying a check that never happened. Not every hospital runs verification, so it is not refused.
+  assert.equal(d.unverified, true);
+  assert.match(d.warning, /recorded as unverified/);
+
+  /* THE SEPARATION. A dispense writes its own resource and never touches the administration record:
+   * a system where "dispensed" drifts into "given" puts doses on charts nobody administered. */
+  assert.equal(await RECORD.latest(TENANT_ROW.id, "MedicationAdministration", "wsq-mar-" + ord.orderId.toLowerCase() + "-x"), null);
+  const stored = await RECORD.byPatient(TENANT_ROW.id, "MedicationDispense", adm.patientId);
+  assert.equal(stored.length, 1);
+  assert.equal(stored[0].resourceType, "MedicationDispense");
+  assert.equal(stored[0].administeredAt, undefined);
+
+  // And the eMAR is entirely unmoved: the dose has not started.
+  const round = await as(NURSE, `/ward/round?orgId=${ORG}&patientId=${adm.patientId}&dueAt=${encodeURIComponent(DUE)}`);
+  assert.equal(round.due[0].status, null, "issuing stock did not start a dose");
+
+  /* THE REFUSAL THAT MATTERS. The pharmacy can now write a supply record, and still cannot post an
+   * administration - a role that could do both could fabricate a dose through the raw API without
+   * going near a patient. */
+  const mar = await as(PHARM, "/ward/mar", "POST", { orgId: ORG, action: "scan", orderId: ord.orderId, dueAt: DUE, patient, scan });
+  assert.equal(mar.__status, 403);
+
+  // The nurse's own loop is untouched by any of it.
+  const step = (a, x) => as(NURSE, "/ward/mar", "POST", { orgId: ORG, action: a, orderId: ord.orderId, dueAt: DUE, patient, ...(x || {}) });
+  await step("verify"); await step("dispense"); await step("scan", { scan });
+  assert.equal((await step("administer")).to, "administered");
+});
+
+test("A SUPERSEDED VERIFICATION STOPS THE SUPPLY, and a repeat supply is a second record", async () => {
+  seedHospital();
+  const { adm, ord } = await admittedPatientOnDrug();
+  const issue = (at, q) => as(PHARM, "/ward/dispense", "POST", { orgId: ORG, orderId: ord.orderId, quantity: q || { value: 21, unit: "tablet" }, at });
+
+  await as(PHARM, "/ward/verify-order", "POST", { orgId: ORG, orderId: ord.orderId, outcome: "verified" });
+  const first = await issue("2026-09-07T08:00:00.000Z");
+  assert.equal(first.unverified, false);
+  assert.equal(first.verifiedVersion, 1);
+
+  // A second supply the same day is a NEW record. An id keyed only on the order would have
+  // overwritten the first, losing the fact that the ward was supplied twice.
+  const second = await issue("2026-09-07T20:00:00.000Z");
+  assert.notEqual(second.dispenseId, first.dispenseId);
+  assert.equal((await as(PHARM, `/ward/dispenses?orgId=${ORG}&patientId=${adm.patientId}`)).dispenses.length, 2);
+  // The identical request again is the same dispense, not a third.
+  assert.equal((await issue("2026-09-07T20:00:00.000Z")).skipped, "already_dispensed");
+
+  /* The prescriber doubles the dose. The pharmacist's approval was of version 1, so issuing now
+   * would put "the pharmacist approved this" against a prescription they never saw. */
+  await as(DOCTOR, "/ward/medication-order", "POST", {
+    orgId: ORG, order: { patientId: adm.patientId, encounterId: adm.encounterId, drug: "Paracetamol 500mg", dose: { value: 1000, unit: "mg" }, route: "oral", frequency: "TID" },
+  });
+  const stale = await issue("2026-09-08T08:00:00.000Z");
+  assert.equal(stale.__status, 409);
+  assert.equal(stale.error, "verification_superseded");
+  assert.equal(stale.verifiedVersion, 1);
+  assert.equal(stale.orderVersion, 2);
+  assert.match(stale.detail, /Re-verify before issuing/);
+
+  // Re-verified, it goes out again.
+  await as(PHARM, "/ward/verify-order", "POST", { orgId: ORG, orderId: ord.orderId, outcome: "verified" });
+  assert.equal((await issue("2026-09-08T08:00:00.000Z")).__status, 200);
+});
+
+test("stock that comes back is a RETURN, and the issue is never erased", async () => {
+  seedHospital();
+  const { adm, ord } = await admittedPatientOnDrug();
+  const d = await as(PHARM, "/ward/dispense", "POST", { orgId: ORG, orderId: ord.orderId, quantity: { value: 21, unit: "tablet" }, at: "2026-09-07T08:00:00.000Z" });
+
+  // Clearing it off without saying why would lose the reason the ward had medicine it did not use.
+  const silent = await as(PHARM, "/ward/dispense-return", "POST", { orgId: ORG, dispenseId: d.dispenseId });
+  assert.equal(silent.__status, 422);
+  assert.equal(silent.error, "reason_required");
+
+  const back = await as(PHARM, "/ward/dispense-return", "POST", { orgId: ORG, dispenseId: d.dispenseId, reason: "Patient discharged; unused stock returned." });
+  assert.equal(back.__status, 200, JSON.stringify(back));
+  assert.equal(back.state, "returned");
+
+  /* THE ISSUE HAPPENED. The medicine was on the ward, and a controlled-drug audit asks exactly that,
+   * so the return is the next VERSION of the same record rather than a deletion. */
+  const history = await RECORD.history(TENANT_ROW.id, "MedicationDispense", d.dispenseId);
+  assert.deepEqual(history.map((h) => h.state), ["issued", "returned"]);
+  assert.equal(history[0].quantity.value, 21, "and what was issued is still on the record");
+
+  // A quantity nobody stated is refused outright: "we sent some" is not a supply record.
+  const vague = await as(PHARM, "/ward/dispense", "POST", { orgId: ORG, orderId: ord.orderId, quantity: { value: 21 } });
+  assert.equal(vague.__status, 422);
+  assert.equal(vague.error, "quantity_required");
+
+  // A nurse does not issue pharmacy stock, and a doctor does not either.
+  assert.equal((await as(NURSE, "/ward/dispense", "POST", { orgId: ORG, orderId: ord.orderId, quantity: { value: 1, unit: "tablet" } })).__status, 403);
+  assert.ok(adm.patientId);
+});
+
 /* ---- measures about the system --------------------------------------------------------------- */
 
 test("A DOSE RECORD NOW SAYS WHEN IT WAS DUE, so the ward can ask whether it was late", async () => {
