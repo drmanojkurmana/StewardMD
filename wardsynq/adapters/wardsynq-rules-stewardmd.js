@@ -137,9 +137,10 @@ function buildRulePack(raw, allergySeed, opts) {
     // First-word aliases first, so a curated brand key can never quietly displace the RxNorm
     // reconciliation the engine already depends on.
     aliases: { ...brandAliases, ...firstWord },
+    combinations: buildCombinations(raw, brandMap, firstWord),
     drugClasses: raw.drugClasses || {},
     interactions: (raw.rules || []).map(mapInteractionRule),
-    allergyClasses: allergySeed.allergyClasses || {},
+    allergyClasses: withSpellingVariants(allergySeed.allergyClasses || {}, raw),
     crossReactivity: allergySeed.crossReactivity || [],
     doseLimits: opts.doseLimits || (includeSeeds ? DOSE_LIMITS_SEED : {}),
     renalAdjustments: opts.renalAdjustments || {},
@@ -263,6 +264,76 @@ function buildBrandAliases(raw, brandMap, firstWordAliases) {
     const known = [...new Set(molecules.map(resolve).filter(Boolean))];
     if (known.length !== 1) continue;                 // 0: nothing checkable. 2+: refuse to drop one.
     out[key] = known[0];
+  }
+  return out;
+}
+
+/**
+ * Combination brands -> every molecule in them that this pack can actually check.
+ *
+ * The counterpart to buildBrandAliases' second refusal. An alias is 1:1, so it cannot say Bactrim is
+ * BOTH trimethoprim and sulfamethoxazole, and collapsing it to either silently drops the other -
+ * for a sulfa-allergic patient, the half that mattered. These go into the pack's `combinations` map
+ * instead, which resolveComponents() reads, so every component is checked.
+ *
+ * @returns {Record<string,string[]>} brand -> pack generics
+ */
+function buildCombinations(raw, brandMap, firstWordAliases) {
+  const generics = new Set((raw.generics || []).map((g) => String(g).toLowerCase()));
+  for (const g of Object.keys(raw.drugClasses || {})) generics.add(g.toLowerCase());
+  const resolve = (m) => {
+    const k = String(m || "").toLowerCase().trim();
+    if (!k) return null;
+    if (generics.has(k)) return k;
+    return (firstWordAliases && firstWordAliases[k]) || null;
+  };
+
+  const out = {};
+  for (const brand of Object.keys(brandMap || {})) {
+    const key = String(brand).toLowerCase().trim();
+    if (!key || key.length < 4 || generics.has(key)) continue;
+    const molecules = brandMap[brand];
+    if (!Array.isArray(molecules) || molecules.length < 2) continue;
+    const known = [...new Set(molecules.map(resolve).filter(Boolean))];
+    if (known.length > 1) out[key] = known;   // one known component is already a plain alias
+  }
+  return out;
+}
+
+/**
+ * Adds spelling variants that are ALREADY generics in this pack to the allergy class they belong to.
+ *
+ * Found 2026-09-07 against the real data: the pack carries both "amoxicillin anhydrous" and the
+ * British "amoxycillin" as separate generics, but the allergy seed lists only the former. So an
+ * order the drug database reports as "Amoxycillin (500mg)" resolved perfectly and then belonged to
+ * NO allergy class, and the penicillin shield stayed silent. This is not a clinical judgement -
+ * amoxycillin IS amoxicillin - so it is derived mechanically from the pack rather than authored, and
+ * only for variants the pack already contains. Two entries today, both amoxycillin.
+ */
+function withSpellingVariants(allergyClasses, raw) {
+  const generics = new Set((raw.generics || []).map((g) => String(g).toLowerCase()));
+  for (const g of Object.keys(raw.drugClasses || {})) generics.add(g.toLowerCase());
+  // The BAN/USAN differences that actually occur in drug names, applied both ways.
+  const variantsOf = (m) => {
+    const v = new Set([
+      m.replace(/oxy/g, "oxi"), m.replace(/oxi/g, "oxy"),
+      m.replace(/^sulph/, "sulf"), m.replace(/^sulf/, "sulph"),
+      m.replace(/^ceph/, "cef"), m.replace(/^cef/, "ceph"),
+    ]);
+    v.delete(m);
+    return [...v];
+  };
+
+  const out = {};
+  for (const [cls, members] of Object.entries(allergyClasses)) {
+    const list = (members || []).map((x) => String(x).toLowerCase());
+    const seen = new Set(list);
+    for (const m of list) {
+      for (const v of variantsOf(m)) {
+        if (generics.has(v) && !seen.has(v)) { seen.add(v); list.push(v); }
+      }
+    }
+    out[cls] = list;
   }
   return out;
 }
