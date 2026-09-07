@@ -79,6 +79,7 @@ import { queueTransmission, recordOutcome, resolveTransmission, listTransmission
 import { submitNote, signNote, listAwaitingCoSign } from "../../_wardsynq/note-cosign.js";
 import { downtimePack } from "../../_wardsynq/downtime.js";
 import { qualityReport } from "../../_wardsynq/quality.js";
+import { collectSpecimen, specimenOutcome, collectionList } from "../../_wardsynq/specimen.js";
 import { listTools as listRiskTools, recordAssessment as recordRiskAssessment, completeAction as completeRiskAction, listAssessments as listRiskAssessments } from "../../_wardsynq/risk-assessment.js";
 import { recordAllergiesFromAssessment } from "../../_wardsynq/migrate-allergy.js";
 
@@ -512,6 +513,9 @@ export async function onRequest(context) {
         // Measures about the system, naming no clinician. Readable by anyone who can read a chart,
         // for the same reason the override report is: the people the machinery acts on can see it.
         quality: CAPS.EMR_VIEW,
+        /* Taking a sample is nursing work, the same authority as recording a vital. The outcome
+         * falls back to lab.result above, because the laboratory is the half that receives it. */
+        collect: CAPS.EMR_VITALS, "specimen-outcome": CAPS.EMR_VITALS, collections: CAPS.EMR_VIEW,
         // Risk assessment is nursing work, like the rest of the flowsheet.
         "risk-tools": CAPS.EMR_VIEW, assess: CAPS.EMR_VITALS, "risk-action": CAPS.EMR_VITALS, risks: CAPS.EMR_VIEW,
         /* Sending a prescription is part of prescribing, so queueing is emr.treat. Recording what
@@ -547,6 +551,11 @@ export async function onRequest(context) {
        * alternative authority, never a widening: order.verify grants the narrow record scope in
        * actor.js and nothing more, so this cannot open any other route. */
       if (!wAz.ok && sub === "criticals") wAz = await ORG.authorizeOrg(env, actor, wOrgId, CAPS.ORDER_VERIFY);
+      /* A specimen's outcome is recorded by whichever side of the journey it happened on: the ward
+       * says the attempt failed, the LABORATORY says it arrived. Same alternative-authority shape,
+       * and the same reason it is not a widening - lab.result grants only the narrow record scope in
+       * actor.js, so this opens no other route and the store still checks the write itself. */
+      if (!wAz.ok && sub === "specimen-outcome") wAz = await ORG.authorizeOrg(env, actor, wOrgId, CAPS.LAB_RESULT);
       if (!wAz.ok) return json(azRefusal(wAz), wAz.reason === "org_not_found" ? 404 : 403, request);
 
       const wOrg = await ORG.getOrg(env, wOrgId);
@@ -647,6 +656,18 @@ export async function onRequest(context) {
       }
       if (sub === "note-sign" && method === "POST") {
         const r = await signNote(request, env, { ...deps, noteId: body.noteId, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "collect" && method === "POST") {
+        const r = await collectSpecimen(request, env, { ...deps, serviceRequestId: body.serviceRequestId, specimenType: body.specimenType, container: body.container, at: body.at, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "specimen-outcome" && method === "POST") {
+        const r = await specimenOutcome(request, env, { ...deps, specimenId: body.specimenId, state: body.state, failureReason: body.failureReason, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "collections" && method === "GET") {
+        const r = await collectionList(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "" });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "quality" && method === "GET") {

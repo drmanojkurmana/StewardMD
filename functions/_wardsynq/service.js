@@ -85,6 +85,10 @@ const RESOURCE_TYPES = Object.freeze([
    * MedicationAdministration on purpose - a system where "dispensed" can drift into "given" puts
    * doses on charts that nobody administered. */
   "MedicationDispense",
+  /* A sample somebody actually took, between the order and the result. Without it an order nobody
+   * collected looks exactly like one awaiting a result - both are "requested, no result yet" - and
+   * only one of them has a nurse who still has to go and do something. */
+  "SpecimenCollection",
   /* A record that an order set was applied, and exactly what landed and what did not. NOT the orders
    * themselves - those go through the ordinary path and are ordinary orders. This is what makes a
    * partial application visible, and what finds the patients a bad set touched. */

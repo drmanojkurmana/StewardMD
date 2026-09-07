@@ -2725,6 +2725,107 @@ test("sending is prescribing's business, and nothing unsendable is sent", async 
   assert.equal(bogus.error, "unknown_channel");
 });
 
+/* ---- the sample somebody has to take ----------------------------------------------------------- */
+
+test("ORDER -> COLLECT -> RECEIVE -> RESULT, and an uncollected order is VISIBLY uncollected", async () => {
+  seedHospital();
+  const { adm } = await admittedPatientOnDrug();
+  const sr = await orderTest(adm, "Potassium", "wsq-sr-k");
+
+  /* THE STATE THIS WHOLE FEATURE EXISTS FOR. Before it, this order and one whose blood is sitting in
+   * the analyser were the same thing on screen: "requested, no result yet". Only one of them has a
+   * nurse who still has to go and do something. */
+  const before = await as(NURSE, `/ward/collections?orgId=${ORG}&patientId=${adm.patientId}`);
+  assert.equal(before.__status, 200, JSON.stringify(before));
+  assert.equal(before.awaitingCollection, 1);
+  assert.equal(before.requests[0].collection.state, "none");
+  assert.match(before.requests[0].collection.detail, /No sample has been taken/);
+
+  const got = await as(NURSE, "/ward/collect", "POST", { orgId: ORG, serviceRequestId: sr, specimenType: "Whole blood", container: "Lithium heparin", at: "2026-09-07T09:00:00.000Z" });
+  assert.equal(got.__status, 200, JSON.stringify(got));
+  assert.equal(got.state, "collected");
+  assert.equal(got.collectedBy, idFor(NURSE));
+  assert.match(got.note, /laboratory has not received it yet/);
+
+  // COLLECTED IS NOT RECEIVED. A tube in a nurse's pocket and a tube on the bench are different
+  // facts, and the space between them is where samples are lost.
+  const mid = await as(NURSE, `/ward/collections?orgId=${ORG}&patientId=${adm.patientId}`);
+  assert.equal(mid.awaitingCollection, 0);
+  assert.equal(mid.inTransit, 1);
+  assert.equal(mid.requests[0].collection.state, "collected");
+
+  /* THE LABORATORY says it arrived - the other half of the journey, and its own authority. The nurse
+   * holds no lab.result and the lab holds no emr.vitals, so this is the alternative-authority path. */
+  const arrived = await as(LABTECH, "/ward/specimen-outcome", "POST", { orgId: ORG, specimenId: got.specimenId, state: "received" });
+  assert.equal(arrived.__status, 200, JSON.stringify(arrived));
+  assert.equal(arrived.state, "received");
+  assert.equal(arrived.receivedBy, idFor(LABTECH));
+  assert.equal((await as(NURSE, `/ward/collections?orgId=${ORG}&patientId=${adm.patientId}`)).inTransit, 0);
+
+  // And the result still comes through the laboratory's own route. Collection produced nothing.
+  const stored = await RECORD.byPatient(TENANT_ROW.id, "SpecimenCollection", adm.patientId);
+  assert.equal(stored.length, 1);
+  assert.equal(stored[0].value, undefined, "a specimen record never carries a result");
+  assert.equal((await as(LABTECH, "/ward/release-result", "POST", { orgId: ORG, serviceRequestId: sr, tests: [{ test: "Potassium", value: 4.1, unit: "mmol/L" }] })).__status, 200);
+});
+
+test("A FAILED ATTEMPT SENDS THE ORDER BACK TO NEEDING COLLECTION, loudly", async () => {
+  seedHospital();
+  const { adm } = await admittedPatientOnDrug();
+  const sr = await orderTest(adm, "Potassium", "wsq-sr-k2");
+  const first = await as(NURSE, "/ward/collect", "POST", { orgId: ORG, serviceRequestId: sr, specimenType: "Whole blood", at: "2026-09-07T09:00:00.000Z" });
+
+  // A failure with no reason cannot be acted on, and "take it again, differently" is the action.
+  const mute = await as(NURSE, "/ward/specimen-outcome", "POST", { orgId: ORG, specimenId: first.specimenId, state: "failed" });
+  assert.equal(mute.__status, 422);
+  assert.equal(mute.error, "reason_required");
+
+  const failed = await as(NURSE, "/ward/specimen-outcome", "POST", { orgId: ORG, specimenId: first.specimenId, state: "failed", failureReason: "Haemolysed, laboratory rejected it." });
+  assert.equal(failed.state, "failed");
+  assert.match(failed.note, /still needs taking/);
+
+  /* NEVER 'IN PROGRESS'. A ward that reads a failed draw as in-flight waits forever for a result
+   * that is never coming. */
+  const list = await as(NURSE, `/ward/collections?orgId=${ORG}&patientId=${adm.patientId}`);
+  assert.equal(list.awaitingCollection, 1);
+  assert.equal(list.inTransit, 0);
+  assert.equal(list.requests[0].collection.state, "failed");
+  assert.equal(list.requests[0].collection.reason, "Haemolysed, laboratory rejected it.");
+
+  // The second attempt is a SECOND specimen. The first is not erased: the patient was bled twice,
+  // which is exactly what a complaint asks about.
+  const second = await as(NURSE, "/ward/collect", "POST", { orgId: ORG, serviceRequestId: sr, specimenType: "Whole blood", at: "2026-09-07T09:40:00.000Z" });
+  assert.notEqual(second.specimenId, first.specimenId);
+  assert.equal((await RECORD.byPatient(TENANT_ROW.id, "SpecimenCollection", adm.patientId)).length, 2);
+  assert.equal((await as(NURSE, `/ward/collections?orgId=${ORG}&patientId=${adm.patientId}`)).requests[0].collection.state, "collected");
+
+  // Received is terminal: a later failure is a statement about the assay, not the specimen.
+  await as(LABTECH, "/ward/specimen-outcome", "POST", { orgId: ORG, specimenId: second.specimenId, state: "received" });
+  const late = await as(NURSE, "/ward/specimen-outcome", "POST", { orgId: ORG, specimenId: second.specimenId, state: "failed", failureReason: "clotted" });
+  assert.equal(late.skipped, "already_received");
+});
+
+test("no sample is taken against an order that does not exist, and a pharmacist takes none at all", async () => {
+  seedHospital();
+  const { adm } = await admittedPatientOnDrug();
+
+  // An unlabelled tube reaching a laboratory with a request number nobody can match is the failure
+  // this refusal prevents.
+  const ghost = await as(NURSE, "/ward/collect", "POST", { orgId: ORG, serviceRequestId: "wsq-sr-nope" });
+  assert.equal(ghost.__status, 404);
+  assert.equal(ghost.error, "request_not_found");
+
+  const sr = await orderTest(adm, "Potassium", "wsq-sr-k3");
+  assert.equal((await as(PHARM, "/ward/collect", "POST", { orgId: ORG, serviceRequestId: sr })).__status, 403);
+
+  // A specimen with no recorded type is accepted and SAYS it has none rather than acquiring one from
+  // the test name.
+  const bare = await as(NURSE, "/ward/collect", "POST", { orgId: ORG, serviceRequestId: sr, at: "2026-09-07T09:00:00.000Z" });
+  assert.equal(bare.__status, 200, JSON.stringify(bare));
+  assert.equal(bare.specimenType, null);
+  assert.match(bare.warning, /guesses one from the test name/);
+});
+
 /* ---- the pharmacy issued it; nobody has taken it ----------------------------------------------- */
 
 test("DISPENSING IS SUPPLY, NOT ADMINISTRATION, and the pharmacy still cannot write a dose", async () => {
