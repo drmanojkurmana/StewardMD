@@ -50,6 +50,20 @@ about two points high (the 44% baseline was 41.5, and 53% was 50.8). If a row ch
   clinician correction with recorded provenance (`editedSections`), an immutable signed version, the
   outstanding-items review before sign-off, and an A4 print artifact.
 
+## Needs the owner, not more code
+1. **Push `wardsynq-ci-sqlite`.** A one-line CI change, committed on that local branch and NOT
+   pushable by this session's token (`refusing to allow an OAuth App to create or update workflow
+   .github/workflows/ci.yml without workflow scope`). It adds `--experimental-sqlite` to the
+   `Run unit tests` step in `.github/workflows/ci.yml`. Without it `node:sqlite` is unavailable and
+   NINE tests SKIP rather than fail - the six in `wardsynq-d1-sql.test.mjs` that execute the shipped
+   schema, and the three in `wardsynq-restore.test.mjs` that perform a real restore rehearsal. A
+   skipping test keeps the build green while nothing runs, which is worse than a red one. All nine
+   pass under `npm test`, which has always passed the flag.
+2. **Device proof** - see item 0 below.
+3. **Where the record backups live**, and who holds them - see the DR runbook.
+4. **Whether the five excluded domains stay excluded** (11 weight points; the table cannot reach 100
+   while they do).
+
 ## What is left, in order of what actually moves the number
 -1. **A SCHEDULED BACKUP.** Nothing takes the record export automatically - `vault/runbooks/
    WardSynQ-Disaster-Recovery.md` §2a is a command a human has to run. The restore is rehearsed in
