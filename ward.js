@@ -33,7 +33,7 @@
   var st = {
     orgId: "", ward: "", patients: [], view: "list",
     sel: null,                 // the selected {encounterId, patientId, ward, bed, admittedAt}
-    problems: [], criticals: [], balance: null, outbox: [],
+    problems: [], criticals: [], balance: null, outbox: [], cosign: null,
     due: [], prn: [], unscheduled: [], truncated: false,
     from: "", to: "",          // the window being viewed, NOT a claim about when a dose is due
     busy: false, err: "", note: "", refusal: null, loaded: false
@@ -138,6 +138,44 @@
       '<div class="w-filter"><input id="wWard" type="text" placeholder="Filter by ward (blank = all)" value="' + esc(state.ward) + '">' +
       '<button class="w-btn ghost" data-w-act="setward">Apply</button></div>' +
       (rows || (state.loaded ? '<p class="w-empty">No patients are currently admitted' + (state.ward ? " to " + esc(state.ward) : "") + ".</p>" : '<p class="w-empty">Loading the ward…</p>')) +
+      "</div>" + cosignCard(state);
+  }
+
+  /* Notes waiting on a signature. This is the routing: a note the system cannot verify is not a
+   * failure state to sweep up, it is the ordinary case on a ward round, and without a list of them
+   * it simply sits unsigned and indistinguishable from one nobody finished.
+   *
+   * It sits on the ward list rather than a patient's chart because that is what a worklist is - the
+   * question "what is between me and a signed record" is asked once, not once per bed. */
+  function cosignCard(state) {
+    var q = state.cosign;
+    if (!q || (!(q.notes || []).length && !(q.mine || []).length)) return "";
+    var wait = function (m) { return m == null ? "" : m < 60 ? m + " min" : Math.floor(m / 60) + " h " + (m % 60) + " min"; };
+
+    var rows = (q.notes || []).map(function (n) {
+      return "<li><div class=\"w-dose-h\"><b>" + esc(n.noteType || "note") + "</b> <span>written by " + esc(n.authorId) + "</span></div>" +
+        '<div class="w-dose-s"><span class="w-due">' + ms("schedule") + "waiting " + esc(wait(n.waitingMinutes)) + "</span>" +
+        // The gap travels WITH the note to the person being asked to put their name to it. A
+        // signature does not fill in a missing plan, and the signer should know before, not after.
+        ((n.incompleteSections || []).length ? '<span class="w-st overdue">' + esc(n.incompleteSections.join(", ")) + " not filled in</span>" : "") + "</div>" +
+        (q.canSign ? '<div class="w-dose-a"><button class="w-btn tiny go" data-w-act="cosign:' + esc(n.noteId) + '">' + ms("draw") + "Sign</button></div>" : "") +
+        "</li>";
+    }).join("");
+
+    var mine = (q.mine || []).map(function (n) {
+      return "<li><b>" + esc(n.noteType || "note") + "</b> <span>" + ((n.incompleteSections || []).length ? esc(n.incompleteSections.join(", ")) + " still blank" : "complete") + "</span>" +
+        '<button class="w-btn tiny" data-w-act="submitnote:' + esc(n.noteId) + '">' + ms("outbox") + "Submit</button></li>";
+    }).join("");
+
+    return '<div class="w-card"><div class="w-card-h">' + ms("draw") + "<h3>Notes awaiting signature" + ((q.notes || []).length ? " &middot; " + q.notes.length : "") + "</h3>" +
+      '<button class="w-ic" data-w-act="cosigns" title="Refresh">' + ms("refresh") + "</button></div>" +
+      (rows ? '<ul class="w-doses w-tx">' + rows + "</ul>" : '<p class="w-empty">No notes are waiting on a signature.</p>') +
+      // Said plainly rather than by hiding the buttons: a worklist somebody cannot act on, with no
+      // explanation, is how a queue grows while everybody assumes it is handled.
+      (rows && !q.canSign ? '<p class="w-hint">' + ms("info") + "You hold no verified registration on this account, so you cannot sign these. They need a registered clinician." + "</p>" : "") +
+      (mine ? '<div class="w-sub"><h4>' + ms("edit_note") + "Your notes, not yet submitted</h4>" +
+        '<p class="w-hint">Submitting says the note is finished. It is not a signature, and it does not need a registration.</p>' +
+        '<ul class="w-mini w-unsent">' + mine + "</ul></div>" : "") +
       "</div>";
   }
 
@@ -346,7 +384,7 @@
   function loadWard() {
     st.busy = true; paint();
     return apiGet("/ward/list?orgId=" + encodeURIComponent(st.orgId) + (st.ward ? "&ward=" + encodeURIComponent(st.ward) : ""))
-      .then(function (r) { if (settle(r)) st.patients = r.patients || []; st.loaded = true; paint(); })
+      .then(function (r) { if (settle(r)) st.patients = r.patients || []; st.loaded = true; paint(); return loadCosigns(); })
       .catch(function () { st.busy = false; st.err = "Could not reach the ward."; st.loaded = true; paint(); });
   }
   function loadChart() {
@@ -450,6 +488,30 @@
       })
       .catch(function () { st.busy = false; st.err = "Could not load the round."; paint(); });
   }
+  function loadCosigns() {
+    return apiGet("/ward/cosign-queue?orgId=" + encodeURIComponent(st.orgId))
+      .then(function (r) { if (r && r.ok) st.cosign = r; paint(); })
+      // Silent on a failure by design: this is a worklist beside the ward list, and an error banner
+      // over the bed board because a secondary list would not load helps nobody find a patient.
+      .catch(function () {});
+  }
+  function submitNote(id) {
+    if (!id) return;
+    st.busy = true; paint();
+    apiPost("/ward/note-submit", { orgId: st.orgId, noteId: id })
+      .then(function (r) { if (settle(r, r && r.note)) loadCosigns(); else paint(); })
+      .catch(function () { st.busy = false; st.err = "Could not submit the note."; paint(); });
+  }
+  function cosign(id) {
+    if (!id) return;
+    st.busy = true; paint();
+    apiPost("/ward/note-sign", { orgId: st.orgId, noteId: id })
+      // The server says whether this was a signature or a co-signature, and its wording names the
+      // author who remains the author. The screen does not paraphrase that.
+      .then(function (r) { if (settle(r, r && (r.note || "Signed."))) loadCosigns(); else paint(); })
+      .catch(function () { st.busy = false; st.err = "Could not sign the note."; paint(); });
+  }
+
   function loadOutbox() {
     var s = st.sel; if (!s) return Promise.resolve();
     return apiGet("/ward/outbox?orgId=" + encodeURIComponent(st.orgId) + "&patientId=" + encodeURIComponent(s.patientId))
@@ -550,6 +612,9 @@
     if (cmd === "round") { st.from = val("wFrom") || st.from; st.to = val("wTo") || st.to; loadRound(); return; }
     if (cmd === "mar") { var k = arg.indexOf("|"); if (k > 0) marAction(arg.slice(0, k), Number(arg.slice(k + 1))); return; }
     if (cmd === "outbox") { loadOutbox(); return; }
+    if (cmd === "cosigns") { loadCosigns(); return; }
+    if (cmd === "cosign") { cosign(arg); return; }
+    if (cmd === "submitnote") { submitNote(arg); return; }
     if (cmd === "tx") { transmit(arg); return; }
     if (cmd === "txr") { resolveTx(arg); return; }
   }

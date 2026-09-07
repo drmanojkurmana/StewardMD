@@ -264,6 +264,38 @@ test("HTML is escaped: a hostile ward or drug name cannot inject markup", () => 
   assert.match(html, /p&amp;p/);
 });
 
+test("THE CO-SIGN WORKLIST SAYS WHO WROTE IT, HOW LONG IT HAS WAITED, AND WHAT IS STILL BLANK", () => {
+  const W = load();
+  const q = {
+    canSign: true,
+    notes: [{ noteId: "n1", noteType: "progress", authorId: "cfa:locum", waitingMinutes: 195, incompleteSections: ["plan"] }],
+    mine: [],
+  };
+  const html = W._render(Object.assign({}, base, { cosign: q }));
+  assert.match(html, /written by cfa:locum/, "the author is named, not replaced by the signer");
+  assert.match(html, /waiting 3 h 15 min/);
+  /* The gap travels WITH the note to the person being asked to put their name to it: a signature
+   * does not fill in a missing plan, and the signer should know before they sign, not after. */
+  assert.match(html, /plan not filled in/);
+  assert.match(html, /data-w-act="cosign:n1"/);
+
+  // A reader who cannot sign is TOLD SO, rather than shown a button that will be refused - or a
+  // silently empty list, which is how a queue grows while everybody assumes it is handled.
+  const cannot = W._render(Object.assign({}, base, { cosign: Object.assign({}, q, { canSign: false }) }));
+  assert.ok(!cannot.includes('data-w-act="cosign:n1"'));
+  assert.match(cannot, /no verified registration/);
+
+  // The author's own unfinished note offers the other half of the loop, and says plainly that
+  // submitting is not signing.
+  const mine = W._render(Object.assign({}, base, { cosign: { canSign: false, notes: [], mine: [{ noteId: "n2", noteType: "progress", incompleteSections: [] }] } }));
+  assert.match(mine, /data-w-act="submitnote:n2"/);
+  assert.match(mine, /It is not a signature/);
+  assert.match(mine, /No notes are waiting on a signature/);
+
+  // Nothing waiting and nothing of mine: the card stays off the screen entirely.
+  assert.ok(!W._render(base).includes("Notes awaiting signature"));
+});
+
 test("THE OUTBOX NEVER READS 'SENT' AS 'ARRIVED', and an unsent prescription is named", () => {
   const W = load();
   const withTx = Object.assign({}, chart, {
