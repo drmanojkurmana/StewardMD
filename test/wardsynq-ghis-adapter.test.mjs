@@ -170,6 +170,9 @@ test("labs: the 2026-09-06 LOINC coverage widening resolves every newly added co
       // Deliberately excluded — genuinely ambiguous, not merely unseeded (see LAB_CODE_SEED's own header).
       { test: "Bicarbonate", result: "24", units: "mEq/L" },
       { test: "Neutrophils", result: "70", units: "%" },
+      // "PCT" is procalcitonin on a biochemistry report and PLATELETCRIT on an automated CBC, where
+      // it prints alongside MPV/PDW. This adapter maps CBC parameters too, so both reach it.
+      { test: "PCT", result: "0.22", units: "%" },
     ],
   });
   const { observations, issues } = mapGhisBundle(b);
@@ -195,6 +198,12 @@ test("labs: the 2026-09-06 LOINC coverage widening resolves every newly added co
   assert.equal(codeFor("Bicarbonate"), "Bicarbonate", "kept under its own name, not coded");
   assert.equal(systemFor("Neutrophils"), "ghis-local");
   assert.equal(codeFor("Neutrophils"), "Neutrophils");
+  // The bare abbreviation must NOT become procalcitonin: a plateletcrit coded as a sepsis biomarker
+  // is a fabricated result, at a value that reads plausibly as either.
+  assert.equal(systemFor("PCT"), "ghis-local", "PCT is ambiguous (procalcitonin vs plateletcrit)");
+  assert.notEqual(codeFor("PCT"), "33959-8", "PCT must never be coded as procalcitonin");
+  // ...while the full name still is, and PCV (packed cell volume) is unambiguously haematocrit.
+  assert.equal(codeFor("Procalcitonin"), "33959-8");
   assert.equal(issues.filter((i) => i.code === "GHIS_LAB_UNMAPPED" && (i.testName === "Bicarbonate" || i.testName === "Neutrophils")).length, 2);
 });
 

@@ -66,6 +66,16 @@ const UNKNOWN_DOB = "0000-00-00";
  *   neut   "Neutrophils" alone does not say percent (770-8) or absolute count (751-8) — different
  *          codes, and GHIS's own report format for this was never seen to disambiguate. Stays
  *          ghis-local.
+ *
+ * AND ONE ABBREVIATION, for the same reason (added 2026-09-07 in review of this widening): the full
+ * name "Procalcitonin" is seeded, but the bare abbreviation "PCT" is NOT. PCT means procalcitonin on
+ * a biochemistry report and PLATELETCRIT on an automated CBC, where it is printed as standard
+ * alongside MPV and PDW by the Sysmex/Mindray analysers most Indian labs run. This file already maps
+ * CBC parameters (see `platelet` below), so both report shapes reach it, and a plateletcrit of
+ * "0.22 %" coded as procalcitonin turns a platelet index into a sepsis biomarker at a value that
+ * reads plausibly either way. The full name is unambiguous and stays; the abbreviation is exactly
+ * the ambiguity the two exclusions above are held out for. "PCV" is different and is kept: packed
+ * cell volume is haematocrit and nothing else.
  */
 const LAB_CODE_SEED = Object.freeze({
   sodium: { code: "2951-2", display: "Sodium" },
@@ -112,7 +122,7 @@ const LAB_CODE_SEED = Object.freeze({
   amylase: { code: "1798-8", display: "Amylase" },
   lipase: { code: "3040-3", display: "Lipase" },
   procalcitonin: { code: "33959-8", display: "Procalcitonin" },
-  pct: { code: "33959-8", display: "Procalcitonin" },
+  // NO bare "pct" alias — see the header. It is not unambiguous: on an automated CBC it is plateletcrit.
   haematocrit: { code: "4544-3", display: "Haematocrit" },
   hematocrit: { code: "4544-3", display: "Haematocrit" },
   pcv: { code: "4544-3", display: "Haematocrit" },
