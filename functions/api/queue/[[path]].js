@@ -71,6 +71,10 @@ import { recordConsent, withdrawConsent, consentStatus } from "../../_wardsynq/c
 import { bookAppointment, setAppointmentState, requestFollowUp, listSchedule } from "../../_wardsynq/scheduling.js";
 import { setCarePlan, recordProgress, readCarePlan } from "../../_wardsynq/care-plan.js";
 import { listTemplates, writeTemplatedNote } from "../../_wardsynq/note-templates.js";
+/* Aliased: `recordAssessment` is already the OPD assessment writer in this file, and a risk
+ * assessment is a different thing entirely. Two names that read the same for two different
+ * clinical acts is how the wrong one gets called. */
+import { listTools as listRiskTools, recordAssessment as recordRiskAssessment, completeAction as completeRiskAction, listAssessments as listRiskAssessments } from "../../_wardsynq/risk-assessment.js";
 import { recordAllergiesFromAssessment } from "../../_wardsynq/migrate-allergy.js";
 
 // The Encounter migration's one shared call site. Every hook below (ticket add, import, a terminal
@@ -491,6 +495,8 @@ export async function onRequest(context) {
         "care-plan": CAPS.EMR_VITALS, progress: CAPS.EMR_VITALS, plan: CAPS.EMR_VIEW,
         // Writing a clinical note from a template is authoring a clinical document: emr.treat.
         templates: CAPS.EMR_VIEW, "note": CAPS.EMR_TREAT,
+        // Risk assessment is nursing work, like the rest of the flowsheet.
+        "risk-tools": CAPS.EMR_VIEW, assess: CAPS.EMR_VITALS, "risk-action": CAPS.EMR_VITALS, risks: CAPS.EMR_VIEW,
         // Closing a stay is the administrative act QUEUE_ADD already covers for opening one.
         // The summary is a clinical document: drafting and signing it are EMR_TREAT.
         discharge: CAPS.QUEUE_ADD, "discharge-summary": CAPS.EMR_TREAT, "sign-discharge-summary": CAPS.EMR_TREAT,
@@ -573,6 +579,22 @@ export async function onRequest(context) {
               types: (url.searchParams.get("_type") || "").split(",").map((t) => t.trim()).filter(Boolean),
             });
         return json(r.ok ? (r.bundle || r.resource) : r.outcome, r.status, request);
+      }
+      if (sub === "risk-tools" && method === "GET") {
+        const r = await listRiskTools(request, env, { ...deps, tools: (wsqCfg && wsqCfg.riskTools) || [] });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "assess" && method === "POST") {
+        const r = await recordRiskAssessment(request, env, { ...deps, tools: (wsqCfg && wsqCfg.riskTools) || [], toolId: body.toolId, encounterId: body.encounterId, answers: body.answers, at: body.at, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "risk-action" && method === "POST") {
+        const r = await completeRiskAction(request, env, { ...deps, assessmentId: body.assessmentId, action: body.action, note: body.note, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "risks" && method === "GET") {
+        const r = await listRiskAssessments(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "" });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "templates" && method === "GET") {
         const r = await listTemplates(request, env, { ...deps, templates: (wsqCfg && wsqCfg.noteTemplates) || [] });
