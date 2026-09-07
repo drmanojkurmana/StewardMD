@@ -76,6 +76,7 @@ import { listTemplates, writeTemplatedNote } from "../../_wardsynq/note-template
  * clinical acts is how the wrong one gets called. */
 import { queueTransmission, recordOutcome, resolveTransmission, listTransmissions } from "../../_wardsynq/prescription-transmit.js";
 import { submitNote, signNote, listAwaitingCoSign } from "../../_wardsynq/note-cosign.js";
+import { downtimePack } from "../../_wardsynq/downtime.js";
 import { listTools as listRiskTools, recordAssessment as recordRiskAssessment, completeAction as completeRiskAction, listAssessments as listRiskAssessments } from "../../_wardsynq/risk-assessment.js";
 import { recordAllergiesFromAssessment } from "../../_wardsynq/migrate-allergy.js";
 
@@ -500,6 +501,9 @@ export async function onRequest(context) {
         /* Signing and co-signing are the same act and the same capability: what separates them is
          * the actor's registration, which the store checks, not a capability a hospital can grant. */
         "note-submit": CAPS.EMR_TREAT, "note-sign": CAPS.EMR_TREAT, "cosign-queue": CAPS.EMR_VIEW,
+        /* The downtime pack is the whole ward's chart on one sheet, so it needs the authority to read
+         * a chart - not the lower bar that opens the bed list. It writes nothing. */
+        downtime: CAPS.EMR_VIEW,
         // Risk assessment is nursing work, like the rest of the flowsheet.
         "risk-tools": CAPS.EMR_VIEW, assess: CAPS.EMR_VITALS, "risk-action": CAPS.EMR_VITALS, risks: CAPS.EMR_VIEW,
         /* Sending a prescription is part of prescribing, so queueing is emr.treat. Recording what
@@ -635,6 +639,13 @@ export async function onRequest(context) {
       }
       if (sub === "note-sign" && method === "POST") {
         const r = await signNote(request, env, { ...deps, noteId: body.noteId, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "downtime" && method === "GET") {
+        const r = await downtimePack(request, env, {
+          ...deps, ward: url.searchParams.get("ward") || "", hours: url.searchParams.get("hours") || "",
+          marTimes: (wsqCfg && wsqCfg.marTimes) || null, offsetMinutes: (wsqCfg && wsqCfg.utcOffsetMinutes) || 0,
+        });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "cosign-queue" && method === "GET") {
