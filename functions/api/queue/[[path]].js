@@ -70,6 +70,7 @@ import { listOrderSets, prepareOrderSet, recordApplication } from "../../_wardsy
 import { recordConsent, withdrawConsent, consentStatus } from "../../_wardsynq/consent.js";
 import { bookAppointment, setAppointmentState, requestFollowUp, listSchedule } from "../../_wardsynq/scheduling.js";
 import { setCarePlan, recordProgress, readCarePlan } from "../../_wardsynq/care-plan.js";
+import { listTemplates, writeTemplatedNote } from "../../_wardsynq/note-templates.js";
 import { recordAllergiesFromAssessment } from "../../_wardsynq/migrate-allergy.js";
 
 // The Encounter migration's one shared call site. Every hook below (ticket add, import, a terminal
@@ -488,6 +489,8 @@ export async function onRequest(context) {
         /* The care plan is nursing work: setting goals and recording whether they were met is what
          * a nurse does all shift, so emr.vitals. Reading it is emr.view. */
         "care-plan": CAPS.EMR_VITALS, progress: CAPS.EMR_VITALS, plan: CAPS.EMR_VIEW,
+        // Writing a clinical note from a template is authoring a clinical document: emr.treat.
+        templates: CAPS.EMR_VIEW, "note": CAPS.EMR_TREAT,
         // Closing a stay is the administrative act QUEUE_ADD already covers for opening one.
         // The summary is a clinical document: drafting and signing it are EMR_TREAT.
         discharge: CAPS.QUEUE_ADD, "discharge-summary": CAPS.EMR_TREAT, "sign-discharge-summary": CAPS.EMR_TREAT,
@@ -570,6 +573,15 @@ export async function onRequest(context) {
               types: (url.searchParams.get("_type") || "").split(",").map((t) => t.trim()).filter(Boolean),
             });
         return json(r.ok ? (r.bundle || r.resource) : r.outcome, r.status, request);
+      }
+      if (sub === "templates" && method === "GET") {
+        const r = await listTemplates(request, env, { ...deps, templates: (wsqCfg && wsqCfg.noteTemplates) || [] });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "note" && method === "POST") {
+        // Templates are ORG content for the same reason order sets are.
+        const r = await writeTemplatedNote(request, env, { ...deps, templates: (wsqCfg && wsqCfg.noteTemplates) || [], templateId: body.templateId, encounterId: body.encounterId, sections: body.sections, at: body.at, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "care-plan" && method === "POST") {
         const r = await setCarePlan(request, env, { ...deps, encounterId: body.encounterId, title: body.title, goals: body.goals, reviewBy: body.reviewBy, idempotencyKey: body.idempotencyKey || null });
