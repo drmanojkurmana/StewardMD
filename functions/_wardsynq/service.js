@@ -83,6 +83,10 @@ const RESOURCE_TYPES = Object.freeze([
    * consent. Append-only so a withdrawal keeps the original grant: "they consented and later
    * withdrew" and "they never consented" are different histories and only one is true. */
   "PatientConsent",
+  /* The diary. An Appointment holds a slot; an AppointmentRequest is a follow-up somebody PROMISED
+   * and which stays visibly outstanding until a human books it - auto-booking would make the
+   * promise look kept when nobody had spoken to the patient. */
+  "Appointment", "AppointmentRequest",
 ]);
 
 const MODE = Object.freeze({ SYSTEM_OF_RECORD: "system-of-record", INTEGRATION: "integration" });
