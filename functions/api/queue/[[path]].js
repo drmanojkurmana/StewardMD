@@ -92,6 +92,7 @@ import { reportImaging } from "../../_wardsynq/radiology-report.js";
 import { cdaForEncounter } from "../../_wardsynq/cda.js";
 import { news2ForPatient } from "../../_wardsynq/news2-view.js";
 import { recordRead, readersToNotify } from "../../_wardsynq/read-log.js";
+import { codeClaimForEncounter, claimAction, recordPreAuth, claimsForPatient, watchlist as upcodingList } from "../../_wardsynq/billing.js";
 import { listTools as listRiskTools, recordAssessment as recordRiskAssessment, completeAction as completeRiskAction, listAssessments as listRiskAssessments } from "../../_wardsynq/risk-assessment.js";
 import { recordAllergiesFromAssessment } from "../../_wardsynq/migrate-allergy.js";
 
@@ -553,6 +554,16 @@ export async function onRequest(context) {
          * Asking WHO to tell about a correction is emr.view: it is the safety question, and the
          * people who have to make the calls must be able to ask it. */
         read: CAPS.EMR_VITALS, readers: CAPS.EMR_VIEW,
+        /* Billing. Coding a claim and moving it through its lifecycle is billing.charge - the
+         * cashier's own capability, deliberately NOT a clinical one: the whole point of
+         * wardsynq-billing.js is that the money never gets a write path to the chart, and giving a
+         * coder an EMR capability to reach these routes would have handed them exactly that.
+         *
+         * Reading a patient's claims is billing.view. The upcoding watchlist is STAFF_ADMIN, because
+         * the module's own instruction is that it is checked "by somebody who is not paid on
+         * collections" - and billing.view is precisely the person who is. */
+        claim: CAPS.BILLING_CHARGE, "claim-state": CAPS.BILLING_CHARGE, preauth: CAPS.BILLING_CHARGE,
+        claims: CAPS.BILLING_VIEW, upcoding: CAPS.STAFF_ADMIN,
         // ADT out. Reading a stay in another wire format is still reading a chart, so it needs the
         // authority to read one. It writes nothing and there is no inbound listener.
         adt: CAPS.EMR_VIEW, oru: CAPS.EMR_VIEW, cda: CAPS.EMR_VIEW,
@@ -767,6 +778,26 @@ export async function onRequest(context) {
           label: url.searchParams.get("label") || "", unit: url.searchParams.get("unit") || "",
           wasValue: url.searchParams.get("wasValue"), nowValue: url.searchParams.get("nowValue"),
         });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "claim" && method === "POST") {
+        const r = await codeClaimForEncounter(request, env, { ...deps, patientId: body.patientId, encounterId: body.encounterId, codes: body.codes, now: body.now, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "claim-state" && method === "POST") {
+        const r = await claimAction(request, env, { ...deps, claimId: body.claimId, action: body.action, reason: body.reason, codes: body.codes || null, now: body.now });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "preauth" && method === "POST") {
+        const r = await recordPreAuth(request, env, { ...deps, patientId: body.patientId, treatment: body.treatment, state: body.state, scheme: body.scheme, reason: body.reason, decidedAt: body.decidedAt, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "claims" && method === "GET") {
+        const r = await claimsForPatient(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "" });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "upcoding" && method === "GET") {
+        const r = await upcodingList(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "" });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "news2" && method === "GET") {

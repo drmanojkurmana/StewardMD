@@ -228,6 +228,37 @@ function grantForCaps(caps) {
       basis: grant.basis + "+" + CAPS.MED_ADMINISTER,
     };
   }
+  if (has(CAPS.BILLING_CHARGE) || has(CAPS.BILLING_VIEW)) {
+    /* Billing, 2026-09-08. The grant IS the safety property that wardsynq-billing.js is built on.
+     *
+     * Its central rule is that the clinical record is the source and billing never writes to it -
+     * a charge whose diagnosis appears nowhere in the chart is refused, because the cheapest way to
+     * clear a queried code is to add the diagnosis. That rule is worth nothing as a promise in a
+     * module header. Here it is structural: a coder holding BILLING_CHARGE and no EMR capability may
+     * write Claim and PreAuthorisation and NOTHING ELSE, so the record service refuses the write
+     * that would justify the charge. Removing the boundary means deliberately widening this list.
+     *
+     * READ IS THE PROBLEM LIST AND NOTHING MORE. Coding asks one question - is this diagnosis
+     * written down - and answering it does not need the notes, the results or the drug chart. A
+     * coder handed EMR_VIEW to solve this would have been given the whole chart for one question,
+     * which is the same mistake ORDER_VERIFY above exists to avoid.
+     *
+     * BILLING_VIEW reads and writes nothing: the cashier sees the claims, and cannot code one. */
+    const canRead = has(CAPS.BILLING_CHARGE) ? ["Condition", "Claim", "PreAuthorisation"] : ["Claim", "PreAuthorisation"];
+    const canWrite = has(CAPS.BILLING_CHARGE) ? ["Claim", "PreAuthorisation"] : [];
+    if (!grant) grant = { tier: canWrite.length ? TIER.EXECUTE : TIER.READ, read: canRead, write: canWrite, basis: has(CAPS.BILLING_CHARGE) ? CAPS.BILLING_CHARGE : CAPS.BILLING_VIEW };
+    else grant = {
+      // Raised, never lowered - the same union rule as every branch above. A cashier who also holds
+      // EMR_VIEW lands on TIER.READ, and leaving her there would have given her a write scope she
+      // could not use: the list would read as a grant and behave as a refusal.
+      tier: canWrite.length ? TIER.EXECUTE : grant.tier,
+      read: grant.read === null ? null : [...new Set([...grant.read, ...canRead])],
+      write: grant.write === null ? null : [...new Set([...grant.write, ...canWrite])],
+      writeCategories: grant.writeCategories,
+      basis: grant.basis + "+" + (has(CAPS.BILLING_CHARGE) ? CAPS.BILLING_CHARGE : CAPS.BILLING_VIEW),
+    };
+  }
+
   /* An unconstrained write scope cannot be partly constrained. A role that ends up with `write: null`
    * may write every type, and leaving a category allow-list attached to that would refuse the one
    * type it names while permitting every other - a rule that reads as tighter and behaves as

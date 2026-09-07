@@ -129,6 +129,16 @@ const RESOURCE_TYPES = Object.freeze([
    * clinical one: nothing here touches the MedicationOrder, because "we sent this" is a statement
    * about a message, not about the treatment. */
   "PrescriptionTransmission",
+  /* A coded claim. Stored here for one reason: append-only. The whole safety property of
+   * wardsynq-billing.js is that a claim's coding history survives - "we found more documentation"
+   * after a denial is the commonest shape of real upcoding, and a claim whose earlier coding could
+   * be edited away would make it invisible. It is a financial record and never a clinical one:
+   * nothing reads a Claim to decide anything about a patient. */
+  "Claim",
+  /* A payer's funding decision. Its own type precisely so it can never be mistaken for a clinical
+   * one - a refused pre-auth means the payer will not pay, and it does not mean the treatment is
+   * not indicated. Kept apart from the chart so nothing clinical can ever read it as an answer. */
+  "PreAuthorisation",
 ]);
 
 const MODE = Object.freeze({ SYSTEM_OF_RECORD: "system-of-record", INTEGRATION: "integration" });

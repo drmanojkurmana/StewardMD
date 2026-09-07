@@ -493,10 +493,25 @@ test("role mapping: every operational role resolves to exactly the grant its cap
   assert.ok(!write("nurse").includes("ClinicalNote"), "nor an assessment, nor a discharge summary");
   for (const r of ["intern", "resident", "pg_resident"]) { assert.equal(tier(r), TIER.EXECUTE, r); assert.deepEqual(write(r), ["Observation", "ShiftHandover", "BreakGlassGrant", "MedicationReconciliation", "PatientConsent", "CarePlan", "RiskAssessment", "SpecimenCollection", "WoundAssessment", "ClinicalRead", "Patient", "Encounter", "Appointment", "PatientLink", "PrescriptionTransmission", "AdmissionRequest", "ResourceBooking"], r); assert.equal(read(r), null, r); }
   for (const r of ["supervisor", "reception"]) { assert.equal(tier(r), TIER.EXECUTE, r); assert.deepEqual(write(r), ["Patient", "Encounter", "Appointment", "PatientLink", "PrescriptionTransmission", "AdmissionRequest", "ResourceBooking"], r); assert.equal(read(r), null, r); }
-  // A cashier reads the orders they bill for and writes nothing at all.
-  assert.equal(tier("cashier"), TIER.READ);
-  assert.deepEqual(write("cashier"), []);
-  assert.deepEqual(read("cashier"), ["MedicationOrder", "ServiceRequest"]);
+  /* 2026-09-08: the cashier gained BILLING_CHARGE's claim grant, and it is narrow BY ENUMERATION.
+   *
+   * The entire safety thesis of wardsynq-billing.js is that the money reads the chart and never
+   * writes to it - a charge whose diagnosis is nowhere in the record is refused, because the cheapest
+   * way to clear a queried code is to add the diagnosis. These two assertions ARE that rule: the
+   * write scope is a Claim and a funding decision, and a role holding it cannot write a Condition,
+   * so it cannot manufacture the justification for its own charge. Widening this list is how that
+   * property gets deleted, and it has to be done deliberately.
+   *
+   * Condition is on the READ list because coding asks exactly one question - is this diagnosis
+   * written down - and it is the ONLY clinical type here: not the notes, not the results, not the
+   * drug chart. In this build one role is both cashier and coder; a hospital that separates them
+   * should hold BILLING_CHARGE for coders only. */
+  assert.equal(tier("cashier"), TIER.EXECUTE, "it writes its own claim, so it is not READ-only any more");
+  assert.deepEqual(write("cashier"), ["Claim", "PreAuthorisation"]);
+  assert.ok(!write("cashier").includes("Condition"), "billing can never write the diagnosis that would justify its own charge");
+  assert.ok(!write("cashier").includes("Observation"), "nor any other clinical fact");
+  assert.deepEqual(read("cashier"), ["MedicationOrder", "ServiceRequest", "Condition", "Claim", "PreAuthorisation"]);
+  assert.ok(!read("cashier").includes("ClinicalNote"), "a coder is not given the whole chart to answer one question");
   /* 2026-09-07: pharmacy gained ORDER_VERIFY. Verification is only as good as what the verifier can
    * READ, and until this the pharmacy role held no EMR capability at all - so a pharmacist could not
    * see the allergy, the creatinine or the critical potassium they are supposed to check against,
