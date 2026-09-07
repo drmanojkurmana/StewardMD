@@ -8,7 +8,8 @@
  * typed) is exactly the case mergedVitals exists for (see its own header comment, "R1 C1"), but it
  * was only wired into the alert engine (recompute()) and curMap()/shockIndex() — not into any of
  * the clinician-facing tiles. This test charts HR alone, then BP alone in a SEPARATE call (as the
- * clinician does through two separate "Add / update data" edits), and asserts HR is still shown.
+ * clinician does through two separate "Add / update data" edits), and asserts HR is still shown on the
+ * Live Status tiles AND on the unit-board card (v2Snapshot: header chips, board card, severity ranking).
  * USAGE: node test/run-icu-livestatus-merge.mjs
  */
 import { spawn } from "node:child_process";
@@ -64,6 +65,17 @@ try {
   `);
   ok(r.hr != null && r.hr.indexOf("84") !== -1, `Heart Rate tile still shows 84 after a later, separate BP entry (got "${r.hr}")`);
   ok(r.bp != null && r.bp.indexOf("128") !== -1 && r.bp.indexOf("82") !== -1, `BP tile shows the newly entered 128/82 (got "${r.bp}")`);
+
+  // ---- the unit-board card + header chips read v2Snapshot(), which had the SAME newest-row bug via a
+  // direct latestByTs() call (bypassing latestVitals). Board card must show the earlier HR too. ----
+  const card = await J(`
+    ICU.savePatient(); ICU.close(); ICU.open();
+    var c = document.querySelector(".icu-v2-card"); if (!c) return JSON.stringify({ err: "no board card" });
+    var out = {}; Array.prototype.forEach.call(c.querySelectorAll(".icu-v2-vc"), function (el) { out[el.querySelector(".icu-v2-vk").textContent] = el.querySelector(".icu-v2-vv").textContent; });
+    return JSON.stringify(out);
+  `);
+  ok(card.HR === "84", `unit-board card shows HR 84 after the separate BP save (got ${JSON.stringify(card)})`);
+  ok(card.MAP === "97", `unit-board card MAP derived from the BP row (got ${card.MAP})`);
 
   console.log(fails === 0 ? "\nALL GREEN — Live Status tiles forward-fill across separate vitals entries" : `\n${fails} FAILED`);
 } catch (e) { console.error("HARNESS ERROR:", e.message); fails++; }
