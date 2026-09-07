@@ -72,6 +72,7 @@ import { recordConsent, withdrawConsent, consentStatus } from "../../_wardsynq/c
 import { bookAppointment, setAppointmentState, requestFollowUp, listSchedule } from "../../_wardsynq/scheduling.js";
 import { setCarePlan, recordProgress, readCarePlan } from "../../_wardsynq/care-plan.js";
 import { listTemplates, writeTemplatedNote } from "../../_wardsynq/note-templates.js";
+import { encounterIdForTicket } from "../../_wardsynq/opd-identity.js";
 /* Aliased: `recordAssessment` is already the OPD assessment writer in this file, and a risk
  * assessment is a different thing entirely. Two names that read the same for two different
  * clinical acts is how the wrong one gets called. */
@@ -758,7 +759,17 @@ export async function onRequest(context) {
       }
       if (sub === "note" && method === "POST") {
         // Templates are ORG content for the same reason order sets are.
-        const r = await writeTemplatedNote(request, env, { ...deps, templates: (wsqCfg && wsqCfg.noteTemplates) || [], templateId: body.templateId, encounterId: body.encounterId, sections: body.sections, at: body.at, idempotencyKey: body.idempotencyKey || null });
+        /* An OPD caller knows its TICKET, not its encounter, and the encounter id depends on whether
+         * the ticket carries a GHIS episode. Deriving it here from the canonical
+         * `encounterIdForTicket` keeps ONE formula: a client that computed it would be a second copy
+         * that silently files notes under a non-existent encounter the day a ticket gains an
+         * episode id. An explicit encounterId still wins, so the ward path is unchanged. */
+        let noteEncounterId = body.encounterId;
+        if (!noteEncounterId && body.ticketId) {
+          const t = await Q.getTicket(env, String(body.ticketId));
+          noteEncounterId = t ? encounterIdForTicket(t) : null;
+        }
+        const r = await writeTemplatedNote(request, env, { ...deps, templates: (wsqCfg && wsqCfg.noteTemplates) || [], templateId: body.templateId, encounterId: noteEncounterId, sections: body.sections, at: body.at, idempotencyKey: body.idempotencyKey || null });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "note-submit" && method === "POST") {
