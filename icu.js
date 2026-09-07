@@ -2712,7 +2712,7 @@
     return parts.join("\n  ");
   }
   function buildSummary(st) {
-    var s = st || _raw, p = s.patient || {}, vits = s.vitals || [], lv = latestByTs(s.vitals), L = s.labs && s.labs.recent || {}, g = s.abg || {}, f = s.fluids || {}, v = s.ventilator || {}, mp = (lv.map != null ? lv.map : mapCalc(lv.sbp, lv.dbp)), rounds = s.rounds || {}, alerts = s.alerts || [], goals = s.goals || [], infusions = s.infusions || [], out = [];   // BUG #6: latest vital by max ts, not last-pushed
+    var s = st || _raw, p = s.patient || {}, vits = s.vitals || [], lv = mergedVitals(s.vitals), L = s.labs && s.labs.recent || {}, g = s.abg || {}, f = s.fluids || {}, v = s.ventilator || {}, mp = (lv.map != null ? lv.map : mapCalc(lv.sbp, lv.dbp)), rounds = s.rounds || {}, alerts = s.alerts || [], goals = s.goals || [], infusions = s.infusions || [], out = [];   // BUG #6: latest vital by max ts, not last-pushed
     out.push("STEWARDMD — DAILY ICU SUMMARY");
     out.push((p.name || "ICU patient") + (p.age != null ? ", " + p.age + "y" : "") + (p.sex ? " " + p.sex : "") + (p.bed ? " · Bed " + p.bed : "") + (p.icuDay != null ? " · ICU day " + p.icuDay : ""));
     if (p.diagnosis) out.push("Diagnosis: " + p.diagnosis);
@@ -3955,7 +3955,7 @@
   // Acuity derived from RAW values WITHOUT calling recompute (entry.state.alerts is stripped on save).
   function v2Snapshot(st) {
     st = st || {};
-    var lv = latestByTs(st.vitals || []);
+    var lv = mergedVitals(st.vitals || []);   // forward-filled per field, NOT the newest-timestamp row: a sparse save (BP only) must not blank HR/SpO2/lactate on the header chips, the board card, or the severity ranking
     var mp = lv.map != null ? lv.map : mapCalc(lv.sbp, lv.dbp);
     var press = (st.infusions || []).filter(function (i) { return isPressor(i.drug); });
     var L = (st.labs && st.labs.recent) || {};
@@ -6460,7 +6460,7 @@
   ];
   // Auto-filled defaults from recorded data (used when the clinician hasn't edited that field yet).
   function dischargeDefaults(st) {
-    var s = st || _raw, p = s.patient || {}, lv = latestByTs(s.vitals), L = (s.labs && s.labs.recent) || {}, g = s.abg || {}, f = s.fluids || {}, v = s.ventilator || {}, mp = (lv.map != null ? lv.map : mapCalc(lv.sbp, lv.dbp)), rounds = s.rounds || {}, alerts = s.alerts || [], infusions = s.infusions || [], tx = s.treatment || [];
+    var s = st || _raw, p = s.patient || {}, lv = mergedVitals(s.vitals), L = (s.labs && s.labs.recent) || {}, g = s.abg || {}, f = s.fluids || {}, v = s.ventilator || {}, mp = (lv.map != null ? lv.map : mapCalc(lv.sbp, lv.dbp)), rounds = s.rounds || {}, alerts = s.alerts || [], infusions = s.infusions || [], tx = s.treatment || [];
     var d = {};
     var today = ""; try { today = new Date().toLocaleDateString(undefined, { day: "numeric", month: "short", year: "numeric" }); } catch (e) {}
     d.admitDate = "";
@@ -7432,7 +7432,7 @@
   }
   // Compact latest-vitals concept strings (numbers only — no identifiers). Feeds the unified context.
   function latestVitalsSummary() {
-    var v = latestByTs(_raw.vitals || []), out = [];
+    var v = mergedVitals(_raw.vitals || []), out = [];
     if (!v || !Object.keys(v).length) return out;
     if (v.sbp != null && v.dbp != null) { var mp = mapCalc(v.sbp, v.dbp); out.push("BP " + v.sbp + "/" + v.dbp + (mp != null ? " (MAP " + mp + ")" : "")); }
     if (v.hr != null) out.push("HR " + v.hr);

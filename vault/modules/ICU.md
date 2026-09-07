@@ -73,5 +73,12 @@ figures; selection is colour + weight, press is brightness. See [[Decisions]] (2
   `recompute()`/`curMap()`/`shockIndex()`, not the display code. Fixed 2026-09-07 in
   `renderLiveStatus`, the Hemo tab, the Fluids tab, `liveSummaryLine`, `patientBanner`, and the
   import-review "current value" comparison (`openImportReview`/`openImportReviewAll`) — all six now
-  use `mergedVitals`. Regression test: `test/run-icu-livestatus-merge.mjs`.
+  use `mergedVitals`. **Second sweep (same day):** four more sites called `latestByTs(vitals)`
+  DIRECTLY, bypassing `latestVitals()`, so the header chips (MAP/HR/SpO2/LACT), the unit-board
+  card, and `v2Severity` (board colour + ranking) all blanked the same way; a critical SpO2 charted
+  earlier dropped out of the acuity ranking after a BP-only save. Fixed in `v2Snapshot`,
+  `buildSummary`, `dischargeDefaults`, `latestVitalsSummary` (Deep Review context). Only
+  `v2LastObsTs` keeps `latestByTs` - it wants the newest TIMESTAMP, which is correct there.
+  `icu-autoscores.js` already forward-fills (NEWS2 was never affected).
+  Regression test: `test/run-icu-livestatus-merge.mjs`.
 Deps: [[Scan-Meds and Drug Index]] · [[Medical Knowledge Base]] · [[FollowCare]] (discharge). See [[Roadmap]].
