@@ -158,6 +158,40 @@ test("IT NEVER DECIDES A DOSE IS SAFE: there is no client-side safety rule anywh
   assert.match(code, /body\.scan = \{ patient: val\("wScanP"\), drug: val\("wScanD"\) \}/, "scans are forwarded verbatim");
 });
 
+test("critical results sit ABOVE everything else on the chart, and say whose call each one was", () => {
+  const html = load()._render(Object.assign({}, chart, {
+    criticals: [
+      { loopId: "l1", code: "2823-3", display: "Potassium", value: 7.4, unit: "mmol/L", basis: "limit", state: "open", escalation: { level: "escalate", minutesOpen: 95 } },
+      { loopId: "l2", code: "Blood culture", display: "Blood culture", value: null, basis: "lab", state: "acknowledged", acknowledgedBy: "cfa:doc", escalation: { level: "none", minutesOpen: 0 } },
+    ],
+    problems: [{ problemId: "p1", display: "Pneumonia", codeSystem: "text", verificationStatus: "confirmed" }],
+  }));
+  assert.match(html, /Critical results &middot; 2/);
+  assert.ok(html.indexOf("Critical results") < html.indexOf("Problem list"), "first on the chart");
+  assert.match(html, /7\.4 mmol\/L/);
+  // A laboratory's own flag and a configured threshold are never presented as the same thing.
+  assert.match(html, /outside critical limit/);
+  assert.match(html, /flagged by the lab/);
+  assert.match(html, /95 min since reported/);
+  assert.match(html, /ESCALATE/);
+  // An open loop can be acknowledged; one already acknowledged names who saw it and offers nothing.
+  assert.match(html, /data-w-act="ack:l1"/);
+  assert.ok(!html.includes('data-w-act="ack:l2"'));
+  assert.match(html, /acknowledged by cfa:doc/);
+  assert.match(html, /It is not a way to clear the list\./);
+});
+
+test("A FAILED READ NEVER LOOKS LIKE A CLEAR CHART", () => {
+  const W = load();
+  // No card at all when nothing is open, so it cannot become wallpaper a ward stops seeing.
+  assert.ok(!/Critical results/.test(W._render(chart)));
+  // But an unreachable list is not an empty one, and the difference is calm versus dangerous.
+  const code = SRC.replace(/\/\*[\s\S]*?\*\//g, " ").replace(/^\s*\/\/.*$/gm, " ");
+  assert.match(code, /Do not read this chart as clear/);
+  // Acknowledging requires a sentence: an acknowledgement with no action recorded is a tick-box.
+  assert.match(code, /An acknowledgement records what was done/);
+});
+
 test("the problem list is read-only on the ward screen: a nurse sees the diagnosis, she does not assert one", () => {
   const html = load()._render(Object.assign({}, chart, {
     problems: [{ problemId: "p1", display: "Pneumonia", code: "J18.9", codeSystem: "ICD-10", verificationStatus: "confirmed", clinicalStatus: "active" }],

@@ -33,7 +33,7 @@
   var st = {
     orgId: "", ward: "", patients: [], view: "list",
     sel: null,                 // the selected {encounterId, patientId, ward, bed, admittedAt}
-    problems: [],
+    problems: [], criticals: [],
     due: [], prn: [], unscheduled: [], truncated: false,
     from: "", to: "",          // the window being viewed, NOT a claim about when a dose is due
     busy: false, err: "", note: "", refusal: null, loaded: false
@@ -219,7 +219,32 @@
       // discharge is prepared while the patient is still on the ward, so this is not gated on the
       // stay being closed - the summary screen states plainly when a stay is still open.
       '<button class="w-btn ghost" data-w-act="summary" title="Discharge summary">' + ms("description") + "Summary</button></div>" +
-      problemsCard(state) + vitalsCard() + marCard(state);
+      criticalsCard(state) + problemsCard(state) + vitalsCard() + marCard(state);
+  }
+
+  /* Open critical results, ABOVE everything else on the chart. A critical result that reaches a
+   * chart nobody reads is the oldest preventable death in hospital medicine, and the failure is
+   * never the measurement - it is that no named human said "I have seen this". So this sits first,
+   * and it stays until somebody acknowledges it. */
+  function criticalsCard(state) {
+    var rows = (state.criticals || []).map(function (c) {
+      var esc_ = c.escalation || {}, mins = esc_.minutesOpen;
+      return '<li class="lvl-' + esc(esc_.level || "due") + '">' +
+        '<div class="w-crit-h"><b>' + esc(c.display || c.code) + "</b>" +
+        (c.value == null ? "" : '<span class="w-crit-v">' + esc(c.value) + (c.unit ? " " + esc(c.unit) : "") + "</span>") +
+        // Whose call this was. A laboratory's own flag and a configured threshold are never
+        // presented as the same thing.
+        '<span class="w-crit-b">' + (c.basis === "lab" ? "flagged by the lab" : c.basis === "limit" ? "outside critical limit" : esc(c.basis || "")) + "</span></div>" +
+        '<div class="w-crit-m">' + ms("schedule") + (mins == null ? "" : mins + " min since reported") +
+        (esc_.level === "escalate" ? " &middot; ESCALATE" : esc_.level === "overdue" ? " &middot; overdue" : "") +
+        (c.state === "acknowledged" ? " &middot; acknowledged by " + esc(c.acknowledgedBy || "a clinician") : "") + "</div>" +
+        (c.state === "open" ? '<button class="w-btn tiny go" data-w-act="ack:' + esc(c.loopId) + '">' + ms("task_alt") + "Acknowledge</button>" : "") +
+      "</li>";
+    }).join("");
+    if (!rows) return "";
+    return '<div class="w-card crit"><div class="w-card-h">' + ms("priority_high") + "<h3>Critical results &middot; " + state.criticals.length + "</h3></div>" +
+      '<p class="w-hint">Acknowledging records that you have seen this and what you did. It is not a way to clear the list.</p>' +
+      '<ul class="w-crits">' + rows + "</ul></div>";
   }
 
   function _render(state) {
@@ -243,9 +268,25 @@
   function loadChart() {
     var s = st.sel; if (!s) return Promise.resolve();
     st.busy = true; paint();
-    return apiGet("/ward/problems?orgId=" + encodeURIComponent(st.orgId) + "&patientId=" + encodeURIComponent(s.patientId))
-      .then(function (r) { if (settle(r)) st.problems = r.problems || []; paint(); })
-      .catch(function () { st.busy = false; paint(); });
+    var q = "orgId=" + encodeURIComponent(st.orgId) + "&patientId=" + encodeURIComponent(s.patientId);
+    return Promise.all([apiGet("/ward/problems?" + q), apiGet("/ward/criticals?" + q)])
+      .then(function (rs) {
+        if (settle(rs[0])) st.problems = rs[0].problems || [];
+        // A failure to READ the critical list must not be silent: an empty list and an unreachable
+        // one look identical on screen, and that is the difference between calm and dangerous.
+        if (rs[1] && rs[1].ok) st.criticals = rs[1].loops || [];
+        else st.err = st.err || "Could not load critical results. Do not read this chart as clear.";
+        paint();
+      })
+      .catch(function () { st.busy = false; st.err = "Could not load the chart."; paint(); });
+  }
+  function acknowledge(loopId) {
+    var why = ""; try { why = G.prompt("What did you do about this result?") || ""; } catch (e) {}
+    if (!why.trim()) { st.err = "An acknowledgement records what was done. It needs a sentence."; paint(); return; }
+    st.busy = true; paint();
+    apiPost("/ward/acknowledge", { orgId: st.orgId, loopId: loopId, action: why.trim() })
+      .then(function (r) { if (settle(r, "Acknowledged.")) loadChart(); else paint(); })
+      .catch(function () { st.busy = false; st.err = "Could not record the acknowledgement."; paint(); });
   }
   /* A datetime-local value ("YYYY-MM-DDTHH:mm") for an instant, in the BROWSER's clock, which is
    * what the input shows and what the nurse reads. The hospital's own round times come from the
@@ -328,7 +369,7 @@
       var p = null;
       for (var j = 0; j < st.patients.length; j++) { if (st.patients[j].encounterId === arg) { p = st.patients[j]; break; } }
       if (!p) return;
-      st.sel = p; st.view = "chart"; st.due = []; st.prn = []; st.unscheduled = []; st.problems = [];
+      st.sel = p; st.view = "chart"; st.due = []; st.prn = []; st.unscheduled = []; st.problems = []; st.criticals = [];
       st.err = ""; st.note = ""; st.refusal = null;
       defaultWindow();
       paint(); loadChart(); loadRound(); return;
@@ -339,6 +380,7 @@
       G.DISCHARGE.open({ orgId: st.orgId, encounterId: sel.encounterId, patientId: sel.patientId });
       return;
     }
+    if (cmd === "ack") { acknowledge(arg); return; }
     if (cmd === "vitals") { saveVitals(); return; }
     if (cmd === "round") { st.from = val("wFrom") || st.from; st.to = val("wTo") || st.to; loadRound(); return; }
     if (cmd === "mar") { var k = arg.indexOf("|"); if (k > 0) marAction(arg.slice(0, k), Number(arg.slice(k + 1))); return; }

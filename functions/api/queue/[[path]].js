@@ -55,6 +55,7 @@ import { medicationRound, administerStep } from "../../_wardsynq/migrate-emar.js
 import { draftDischargeSummary, signDischargeSummary, dischargePatient, readDischargeSummary } from "../../_wardsynq/migrate-discharge.js";
 import { recordProblem, listProblems } from "../../_wardsynq/migrate-problem.js";
 import { marSchedule } from "../../_wardsynq/mar-schedule.js";
+import { openCriticalLoops, acknowledgeCritical, listCriticalLoops } from "../../_wardsynq/critical-results.js";
 import { recordAllergiesFromAssessment } from "../../_wardsynq/migrate-allergy.js";
 
 // The Encounter migration's one shared call site. Every hook below (ticket add, import, a terminal
@@ -413,6 +414,11 @@ export async function onRequest(context) {
         // Reading what is due is reading the ward, not acting on it: the same view capability the
         // ward list uses. Nothing here writes, so this grants no ability to move a dose.
         schedule: CAPS.QUEUE_VIEW,
+        /* Critical results. SEEING the list is emr.view - a ward that cannot see its open critical
+         * results is the failure this whole path exists to prevent, so it is not gated behind the
+         * authority to act. ACKNOWLEDGING is emr.treat: it is a clinical decision recorded against a
+         * named clinician, and the store enforces the write scope independently. */
+        criticals: CAPS.EMR_VIEW, acknowledge: CAPS.EMR_TREAT, "flag-critical": CAPS.EMR_TREAT,
         // Closing a stay is the administrative act QUEUE_ADD already covers for opening one.
         // The summary is a clinical document: drafting and signing it are EMR_TREAT.
         discharge: CAPS.QUEUE_ADD, "discharge-summary": CAPS.EMR_TREAT, "sign-discharge-summary": CAPS.EMR_TREAT,
@@ -463,6 +469,33 @@ export async function onRequest(context) {
       }
       if (sub === "round" && method === "GET") {
         const r = await medicationRound(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "", dueAt: url.searchParams.get("dueAt") || "" });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "criticals" && method === "GET") {
+        const r = await listCriticalLoops(request, env, {
+          ...deps, patientId: url.searchParams.get("patientId") || "", state: url.searchParams.get("state") || "",
+          policy: (wOrg && wOrg.criticalEscalation) || null,
+        });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "flag-critical" && method === "POST") {
+        // Opens the loops for a report that has already been recorded. Separate from ingestion on
+        // purpose: a result is written by whoever received it, and the loop is opened against the
+        // report on the record rather than against whatever a caller happened to send.
+        const r = await openCriticalLoops(request, env, {
+          ...deps, reportId: body.reportId,
+          // The site's limits, never a request parameter: a caller who could pass these could decide
+          // a potassium of 7 was not critical by asking differently.
+          limits: (wOrg && wOrg.criticalLimits) || null,
+          idempotencyKey: body.idempotencyKey || null,
+        });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "acknowledge" && method === "POST") {
+        const r = await acknowledgeCritical(request, env, {
+          ...deps, loopId: body.loopId, action: body.action, close: !!body.close,
+          idempotencyKey: body.idempotencyKey || null,
+        });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "schedule" && method === "GET") {
