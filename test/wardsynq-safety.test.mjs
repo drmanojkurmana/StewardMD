@@ -466,6 +466,49 @@ test("integration: the StewardMD pack loads and finds its own contraindicated pa
   assert.equal(v.blocks[0].severity, SEVERITY.CONTRAINDICATED);
 });
 
+/* 2026-09-07. Indian OPD prescribing is overwhelmingly by BRAND, and the pack is RxNorm-derived
+ * molecules. "Augmentin 625" resolved to nothing, so no allergy and no interaction check ran for it
+ * at all - the very case vault/modules/WardSynQ.md records. Two brand maps the app already owned
+ * were going unused: the 292-entry `brands` map inside data/interaction-rules.json (which this
+ * adapter received on the same object it reads `generics` from, and never looked at), and the
+ * curated antibiotic map in brand-generics.js that rx-validity already trusts. */
+test("integration: a drug prescribed by BRAND is checked, not silently skipped", async () => {
+  const pack = await loadStewardMDRulePack();
+  const real = new SafetyEngine({ rulePack: pack });
+  const allergic = [AllergyIntolerance({ patientId: "p1", substance: "Penicillins", reaction: "rash" })];
+
+  for (const brand of ["Augmentin 625", "Amoxiclav 625", "Clavam 625"]) {
+    const v = real.evaluate({ order: MedicationOrder({ patientId: "p1", drug: brand, prescriberId: "dr-1" }), allergies: allergic });
+    assert.equal(v.unresolvedDrug, false, `${brand} must resolve`);
+    assert.ok(v.findings.some((f) => f.code === "ALLERGY_CLASS"), `${brand} is a penicillin and must trip the shield`);
+  }
+  const ctx = real.evaluate({ order: MedicationOrder({ patientId: "p1", drug: "Monocef 1g", prescriberId: "dr-1" }), allergies: allergic });
+  assert.ok(ctx.findings.some((f) => f.code === "ALLERGY_CROSS_REACTIVITY"), "a cephalosporin brand trips cross-reactivity");
+
+  const onWarfarin = [{ drug: "Warfarin 5mg", drugCode: "warfarin" }];
+  for (const brand of ["Brufen 400", "Combiflam", "Voveran 50"]) {
+    const v = real.evaluate({ order: MedicationOrder({ patientId: "p1", drug: brand, prescriberId: "dr-1" }), activeMeds: onWarfarin });
+    assert.ok(v.findings.some((f) => f.code === "INTERACTION_MAJOR"), `${brand} + warfarin is a major bleeding interaction`);
+  }
+  const safe = real.evaluate({ order: MedicationOrder({ patientId: "p1", drug: "Crocin 650", prescriberId: "dr-1" }), activeMeds: onWarfarin, allergies: allergic });
+  assert.equal(safe.findings.filter((f) => f.code.startsWith("ALLERGY") || f.code.startsWith("INTERACTION")).length, 0,
+    "paracetamol by brand must not be flagged for a penicillin allergy or a warfarin interaction");
+});
+
+test("integration: a CLASS name must never resolve to one member of that class", async () => {
+  const pack = await loadStewardMDRulePack();
+  // Both brand maps carry class abbreviations as search keys ("nsaid" -> diclofenac). As a safety
+  // alias that is a fabrication: "on an NSAID" is not "on diclofenac", and it would check the wrong
+  // drug's rules while missing the right one's. The pack's own class vocabulary is the filter.
+  for (const cls of ["nsaid", "ppi", "statin", "arb", "insulin", "lmwh", "doac"]) {
+    assert.equal(resolveGeneric(cls, pack), null, `"${cls}" names a class and must stay unresolved`);
+  }
+  // A combination whose components are BOTH checkable is left unresolved rather than collapsed to
+  // one of them - the engine resolves an order to a single generic, so aliasing would silently drop
+  // the other half. Reported as unchecked, never as clean.
+  assert.equal(resolveGeneric("Bactrim DS", pack), null, "trimethoprim + sulfamethoxazole are both checkable");
+});
+
 test("integration: the seeded allergy shield works against real drug names", async () => {
   const pack = await loadStewardMDRulePack();
   const real = new SafetyEngine({ rulePack: pack });

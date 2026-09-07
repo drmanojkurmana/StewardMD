@@ -12,10 +12,14 @@
 import { buildRulePack } from "../../wardsynq/adapters/wardsynq-rules-stewardmd.js";
 import RAW_INTERACTION_RULES from "../../data/interaction-rules.json";
 import ALLERGY_SEED from "../../wardsynq/data/allergy-classes.seed.json";
+// The app's own curated brand -> molecule map, already trusted by rx-validity's antibiotic /
+// habit-forming / scheduled classification. Indian OPD prescribing is by brand, and without this
+// "Augmentin 625" resolves to nothing, so no allergy or interaction check runs for it at all.
+import SMD_BRANDS from "../../brand-generics.js";
 
 let _pack = null;
 function getRulePack() {
-  if (!_pack) _pack = buildRulePack(RAW_INTERACTION_RULES, ALLERGY_SEED, {});
+  if (!_pack) _pack = buildRulePack(RAW_INTERACTION_RULES, ALLERGY_SEED, { brands: SMD_BRANDS && SMD_BRANDS.BRANDS });
   return _pack;
 }
 
