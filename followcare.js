@@ -269,6 +269,66 @@
       // (onco-home.css), so every module hero card carries the identical brand mark.
       ".mai-mark{position:absolute;right:-14px;bottom:-20px;width:128px;height:128px;opacity:.16;-webkit-mask:url(/logo.png) center/contain no-repeat;mask:url(/logo.png) center/contain no-repeat;background:#fff;pointer-events:none}",
 
+      // Quiet Intelligence: a calmer, information-first surface for FollowCare and MAiTRI.
+      // Clinical state colours remain unchanged; the new layer only changes hierarchy and chrome.
+      ".fc-ov.fcui2{align-items:stretch;overflow:hidden;background:rgba(0,0,0,.58);backdrop-filter:blur(14px)}",
+      ".fc-sheet.fcui2{width:100%;max-width:680px;height:100%;min-height:0;max-height:100%;margin:0 auto;border-radius:0;background:var(--rds-bg);box-shadow:0 0 70px rgba(0,0,0,.28)}",
+      ".fc-sheet.fcui2 .fc-hd{position:relative;top:auto;margin-top:0;flex:0 0 auto;display:grid;grid-template-columns:44px minmax(0,1fr) 44px;gap:10px;padding:calc(9px + env(safe-area-inset-top)) 16px 9px;background:color-mix(in srgb,var(--rds-surface) 94%,transparent);color:var(--rds-ink);border-color:var(--rds-line);backdrop-filter:blur(18px)}",
+      ".fc-sheet.fcui2 .fc-hd .fc-hd-logo{display:none}",
+      ".fc-sheet.fcui2 .fc-hd-title{grid-column:2;text-align:center;min-width:0;align-self:center}",
+      ".fc-sheet.fcui2 .fc-hd-title b{display:block;color:var(--rds-ink);font-size:16px;font-weight:700;line-height:1.2;letter-spacing:-.02em;background:none;-webkit-text-fill-color:currentColor}",
+      ".fc-sheet.fcui2 .fc-hd-title small{display:block;margin-top:2px;color:var(--rds-muted);font-size:10.5px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}",
+      ".fc-sheet.fcui2 .fc-hd .fc-x{grid-column:3;width:40px;height:40px;border-radius:50%;background:var(--rds-surface-2);color:var(--rds-ink);font-size:22px}",
+      ".fc-sheet.fcui2 .fc-bd{min-height:0;overflow-y:auto;padding:20px 18px calc(24px + env(safe-area-inset-bottom));background:var(--rds-bg)}",
+      ".fc-q-intro{margin:4px 0 18px}",
+      ".fc-q-eyebrow{display:block;color:var(--rds-muted);font-size:11px;font-weight:750;letter-spacing:.1em;text-transform:uppercase;margin-bottom:8px}",
+      ".fc-q-intro h2{margin:0;color:var(--rds-ink);font-size:29px;line-height:1.12;letter-spacing:-.045em;font-weight:760}",
+      ".fc-q-intro p{margin:8px 0 0;color:var(--rds-muted);font-size:13.5px;line-height:1.55;max-width:520px}",
+      ".fc-q-metrics{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin-bottom:14px}",
+      ".fc-sheet.fcui2 .fc-cc{min-width:0!important;padding:13px 10px!important;border:1px solid var(--rds-line)!important;border-radius:15px!important;background:var(--rds-surface)!important;box-shadow:none!important;text-align:left!important}",
+      ".fc-sheet.fcui2 .fc-cc-n{font-size:23px;font-weight:760;line-height:1;letter-spacing:-.04em;color:var(--rds-ink)}",
+      ".fc-sheet.fcui2 .fc-cc-l{font-size:10.5px;color:var(--rds-muted);margin-top:6px;line-height:1.2}",
+      ".fc-q-actions{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin:14px 0 4px}",
+      ".fc-sheet.fcui2 .fc-q-actions .fc-btn{display:flex;align-items:center;justify-content:center;gap:8px;margin:0!important;padding:11px 12px!important;line-height:1.2!important}",
+      ".fc-q-actions .fc-maitri-btn img{width:23px;height:23px;object-fit:contain}",
+      ".fc-sheet.fcui2 .fc-q-settings{width:100%;margin:9px 0 0!important;background:var(--rds-surface)!important;color:var(--rds-ink)!important;border:1px solid var(--rds-line)!important;box-shadow:none!important}",
+      ".fc-sheet.fcui2 .fc-sum{margin:13px 0 3px;gap:7px}",
+      ".fc-sheet.fcui2 .fc-pill{padding:6px 10px;font-size:11.5px}",
+      ".fc-sheet.fcui2 .fc-sect{display:flex;align-items:center;justify-content:space-between;margin:23px 1px 10px;padding:0;color:var(--rds-ink);font-size:14px;letter-spacing:0;text-transform:none}",
+      ".fc-sheet.fcui2 .fc-row{width:100%;min-height:66px;margin:0;padding:0;border:0;border-bottom:1px solid var(--rds-line);border-radius:0;background:transparent;box-shadow:none;display:flex;align-items:center;color:var(--rds-ink);font:inherit;text-align:left}",
+      ".fc-sheet.fcui2 .fc-row:hover{transform:none;background:color-mix(in srgb,var(--rds-surface) 72%,transparent);box-shadow:none}",
+      ".fc-sheet.fcui2 .fc-row .fc-badge{width:40px;height:40px;flex:0 0 40px;margin-left:2px;padding:0;border:0;border-radius:50%;background:var(--rds-surface-2)!important}",
+      ".fc-sheet.fcui2 .fc-row .fc-meta{min-width:0;padding:13px 11px}",
+      ".fc-sheet.fcui2 .fc-row .fc-meta .fc-t{display:flex;align-items:center;gap:7px;min-width:0;margin:0;color:var(--rds-ink);font-size:14px;font-weight:700;line-height:1.3}",
+      ".fc-sheet.fcui2 .fc-status{flex:0 0 auto;margin-left:auto;padding:5px 8px;border-radius:999px;font-size:10.5px;font-weight:700}",
+      ".fc-sheet.fcui2 .fc-row .fc-meta .fc-s{display:flex;gap:0;flex-wrap:wrap;margin-top:4px;color:var(--rds-muted);font-size:11px;font-weight:500;line-height:1.4}",
+      ".fc-sheet.fcui2 .fc-row .fc-flag{padding:20px 7px 20px 0!important}",
+      ".fc-maitri{padding-top:1px}",
+      ".fc-maitri-back{width:auto!important;min-height:40px!important;margin:0 0 12px!important;padding:8px 11px!important;background:transparent!important;border-color:var(--rds-line)!important;color:var(--rds-muted)!important;box-shadow:none!important}",
+      ".fc-sheet.fcui2 .mai-hero{margin:0 0 16px;padding:19px 14px 17px!important;border:1px solid var(--rds-line);border-radius:24px!important;background:var(--rds-surface)!important;color:var(--rds-ink)!important;box-shadow:none!important;text-align:center}",
+      ".fc-sheet.fcui2 .mai-aura{inset:auto;left:50%;top:10px;width:126px;height:126px;transform:translateX(-50%);border-radius:42px;background:radial-gradient(circle,rgba(87,211,189,.18),transparent 70%);animation:none}",
+      ".fc-sheet.fcui2 .mai-live{position:absolute;top:12px;right:12px;z-index:2;display:inline-flex;align-items:center;gap:6px;padding:5px 9px;border:1px solid var(--rds-line);border-radius:999px;background:var(--rds-surface-2);color:var(--rds-muted);font-size:10.5px;font-weight:700}",
+      ".fc-sheet.fcui2 .mai-logo{position:relative;z-index:1;display:block;width:88px;height:88px;object-fit:contain;margin:0 auto 5px;filter:drop-shadow(0 8px 16px rgba(0,0,0,.24))}",
+      ".fc-sheet.fcui2 .mai-wordmark{position:relative;z-index:1;display:block;width:190px;max-width:72%;object-fit:contain;margin:0 auto}",
+      "body.dark .fc-sheet.fcui2 .mai-wordmark,body.v3-dark .fc-sheet.fcui2 .mai-wordmark{filter:brightness(0) invert(1)}",
+      ".fc-sheet.fcui2 .mai-language{position:relative;z-index:1;display:inline-flex;align-items:center;gap:6px;margin-top:12px;padding:6px 11px;border-radius:999px;background:color-mix(in srgb,var(--fc-accent,#0e6e63) 13%,transparent);color:var(--fc-accent,#0e6e63);font-size:11px;font-weight:700}",
+      ".fc-sheet.fcui2 .mai-language::before{content:'';width:6px;height:6px;border-radius:50%;background:currentColor}",
+      ".fc-sheet.fcui2 .mai-mark{display:none}",
+      ".fc-maitri .fc-q-metrics{margin-bottom:12px}",
+      ".fc-maitri-status{display:flex;align-items:center;gap:10px;padding:13px 14px;margin-bottom:16px;border:1px solid var(--rds-line);border-radius:16px;background:var(--rds-surface)}",
+      ".fc-maitri-status>div{flex:1;color:var(--rds-muted);font-size:12.5px;line-height:1.45}",
+      ".fc-maitri-section{display:flex;align-items:center;justify-content:space-between;gap:8px;margin:19px 1px 9px;color:var(--rds-ink);font-size:14px;font-weight:750}",
+      ".fc-maitri-section span{padding:4px 8px;border-radius:999px;background:var(--rds-surface-2);color:var(--rds-muted);font-size:11px}",
+      ".fc-maitri-actions{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:15px}",
+      ".fc-maitri-actions .fc-btn{margin:0!important;padding:11px 9px!important;font-size:13.5px!important;line-height:1.25!important}",
+      "body.dark .fc-sheet.fcai,body.v3-dark .fc-sheet.fcai{background:var(--rds-bg)!important;box-shadow:0 0 70px rgba(0,0,0,.55)}",
+      "body.dark .fc-sheet.fcai::before,body.v3-dark .fc-sheet.fcai::before{display:none}",
+      "body.dark .fc-sheet.fcai .fc-hd,body.v3-dark .fc-sheet.fcai .fc-hd{background:color-mix(in srgb,var(--rds-surface) 94%,transparent);border-color:var(--rds-line);box-shadow:none}",
+      "body.dark .fc-sheet.fcai .fc-row,body.v3-dark .fc-sheet.fcai .fc-row{background:transparent!important;border:0!important;border-bottom:1px solid var(--rds-line)!important;border-radius:0!important;box-shadow:none}",
+      "body.dark .fc-sheet.fcai .fc-btn,body.v3-dark .fc-sheet.fcai .fc-btn{background:var(--rds-primary);border:0;box-shadow:none;color:#fff;font-weight:750;letter-spacing:0}",
+      "body.dark .fc-sheet.fcai .fc-btn.sec,body.v3-dark .fc-sheet.fcai .fc-btn.sec{background:var(--rds-surface);color:var(--rds-ink);border:1px solid var(--rds-line)}",
+      "@media(max-width:460px){.fc-q-metrics{grid-template-columns:repeat(2,minmax(0,1fr))}.fc-q-actions,.fc-maitri-actions{grid-template-columns:1fr}.fc-q-intro h2{font-size:27px}.fc-sheet.fcui2 .fc-row .fc-meta .fc-t{align-items:flex-start;flex-direction:column;gap:4px}.fc-sheet.fcui2 .fc-status{margin-left:0}.fc-sheet.fcui2 .fc-row .fc-flag{align-self:center}}",
+
       /* == Keyboard focus =====================================================================
        * There was exactly ONE :focus rule in this whole module, so a doctor driving it from an
        * external keyboard (or any switch/AT user) had no idea where they were. Browser defaults do
@@ -316,7 +376,10 @@
     var sheet = h("div", { "class": "fc-sheet fcai" + (ui2() ? " fcui2" : "") }, [
       h("div", { "class": "fc-hd" }, [
         h("span", { "class": "fc-hd-logo", "aria-hidden": "true", text: "🩺" }),
-        h("b", { text: "FollowCare" }),
+        h("div", { "class": "fc-hd-title" }, [
+          h("b", { text: title || "FollowCare" }),
+          h("small", { text: "Post-discharge recovery" })
+        ]),
         h("button", { "class": "fc-x", "aria-label": "Close", onclick: close, text: "×" })
       ]),
       body
@@ -325,6 +388,14 @@
     document.body.appendChild(root);
     mSheetIn(sheet);
     return body;
+  }
+  function setShellHeading(body, title, subtitle) {
+    var sheet = body && body.closest ? body.closest(".fc-sheet") : null;
+    var heading = sheet && sheet.querySelector(".fc-hd-title");
+    if (!heading) return;
+    var main = heading.querySelector("b"), sub = heading.querySelector("small");
+    if (main) main.textContent = title || "FollowCare";
+    if (sub) sub.textContent = subtitle || "Post-discharge recovery";
   }
 
   function notReadyView() {
@@ -348,6 +419,7 @@
   function openEnroll(prefill) { if (!enabled()) { toast("FollowCare is not enabled."); return; } var b = shell(); withReady(b, function (x) { renderEnroll(x, prefill || {}); }); }
 
   function renderDashboard(body) {
+    setShellHeading(body, "FollowCare", "Post-discharge recovery");
     body.innerHTML = "";
     body.appendChild(h("div", { "class": "fc-empty", text: "Loading recovery board…" }));
     API.episodes().then(function (res) {
@@ -355,25 +427,32 @@
       if (res.status === 401) { body.appendChild(h("div", { "class": "fc-empty", text: "Please sign in to use FollowCare." })); return; }
       var list = sortEpisodes((res.body && res.body.episodes) || []);
       var c = counts(list);
+      var page = h("div", { "class": "fc-dashboard" });
+      body.appendChild(page);
+      page.appendChild(h("div", { "class": "fc-q-intro" }, [
+        h("span", { "class": "fc-q-eyebrow", text: "Recovery overview" }),
+        h("h2", { text: "Your patients at a glance." }),
+        h("p", { text: c.red || c.orange ? "Clinical changes are prioritized below so you can act quickly." : "No urgent recovery signals are waiting right now." })
+      ]));
       // Phase 3 — command-center strip (MODULE 1): the doctor's at-a-glance counts.
       try {
         if (G.FollowCareAnalytics) {
           var cc = FollowCareAnalytics.commandCenter(list, (G.Date && Date.now) ? Date.now() : 0);
-          body.appendChild(h("div", { style: "display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px" }, [
+          page.appendChild(h("div", { "class": "fc-q-metrics" }, [
             ccBox(cc.active, "Active"), ccBox(cc.needReview, "Need review"), ccBox(cc.highRisk, "High risk"), ccBox(cc.recoveredToday, "Recovered today")
           ]));
         }
       } catch (e) {}
-      body.appendChild(h("div", { "class": "fc-sum" }, [
+      page.appendChild(h("div", { "class": "fc-sum" }, [
         pill(c.red + " urgent", ESC.red), pill(c.orange + " review", ESC.orange), pill(c.green + " on track", ESC.green)
       ]));
       // The two primary actions sit on ONE row: they are siblings, not a sequence, and stacking
       // them pushed the recovery board (the actual content of this screen) below the fold.
       // Equal columns so neither reads as the more important one. min-height:46px on .fc-btn keeps
       // both above the touch minimum even at half width.
-      body.appendChild(h("div", { style: "display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px" }, [
-        h("button", { "class": "fc-btn", style: "background:var(--rds-primary);display:flex;align-items:center;justify-content:center;gap:8px;padding:12px 10px;line-height:1.2", onclick: function () { renderMaitri(body); }, html: '<img src="/maitri-logo.png" alt="" aria-hidden="true" style="width:20px;height:20px;flex:0 0 auto;object-fit:contain;filter:brightness(0) invert(1)">' + '<span style="font-weight:800">MAiTRI</span>' }),
-        h("button", { "class": "fc-btn", style: "padding:12px 10px;line-height:1.2", onclick: function () { renderEnroll(body); }, text: "+ Enroll a patient" })
+      page.appendChild(h("div", { "class": "fc-q-actions" }, [
+        h("button", { "class": "fc-btn fc-maitri-btn", onclick: function () { renderMaitri(body); }, html: '<img src="/maitri-logo.png" alt="" aria-hidden="true">' + '<span>Open MAiTRI</span>' }),
+        h("button", { "class": "fc-btn", onclick: function () { renderEnroll(body); }, text: "+ Enroll a patient" })
       ]));
       /* Always reachable, and deliberately NOT behind voiceEnabled().
        *
@@ -384,27 +463,27 @@
        *
        * Opening a settings screen grants nothing: the server still checks owner auth on every voice
        * action and per-hospital enablement on every call. */
-      body.appendChild(h("button", { "class": "fc-btn sec", style: "margin-top:8px", onclick: function () { renderVoiceSettings(body); }, text: "Voice & ambulance settings" }));
-      if (!list.length) { body.appendChild(h("div", { "class": "fc-empty", text: "No active recovery episodes yet. Enroll a discharged patient to begin." })); return; }
-      body.appendChild(h("div", { "class": "fc-sect", text: "RECOVERY BOARD" }));
-      var rows = list.map(function (ep) { var r = episodeRow(ep); body.appendChild(r); return r; });
+      page.appendChild(h("button", { "class": "fc-btn sec fc-q-settings", onclick: function () { renderVoiceSettings(body); }, text: "Voice & ambulance settings" }));
+      if (!list.length) { page.appendChild(h("div", { "class": "fc-empty", text: "No active recovery episodes yet. Enroll a discharged patient to begin." })); return; }
+      page.appendChild(h("div", { "class": "fc-sect", text: "Needs attention" }));
+      var rows = list.map(function (ep) { var r = episodeRow(ep); page.appendChild(r); return r; });
       if (ui2()) mStagger(rows);
     }).catch(function () { body.innerHTML = ""; body.appendChild(h("div", { "class": "fc-empty", text: "Could not load the recovery board. Check your connection." })); });
   }
   function pill(text, meta) { return h("span", { "class": "fc-pill", style: "background:" + meta.bg + ";color:" + meta.color, text: text }); }
-  function ccBox(n, label) { return h("div", { "class": "fc-cc", style: "flex:1 1 auto;min-width:72px;text-align:center;background:var(--panel,#fff);border:1px solid var(--line,#dbe4e2);border-radius:12px;padding:10px 8px" }, [h("div", { style: "font-size:21px;font-weight:850;color:var(--fc-accent,#0e6e63)", text: String(n) }), h("div", { style: "font-size:11.5px;color:var(--slate,#5a7184)", text: label })]); }
+  function ccBox(n, label) { return h("div", { "class": "fc-cc" }, [h("div", { "class": "fc-cc-n", text: String(n) }), h("div", { "class": "fc-cc-l", text: label })]); }
   function episodeRow(ep) {
     var m = escalationMeta(ep.escalation);
     // Each "· segment" gets its own nowrap span so a narrow row wraps BETWEEN segments, never
     // mid-phrase (the joined-string version could strand a lone word like "review" on its own line).
     var segs = [statusMeta(ep.status), "next " + fmtWhen(ep.nextDueMs)];
     if (ep.riskPercent) segs.push(ep.riskPercent + "% readmit risk");
-    return h("div", { "class": "fc-row", onclick: function () { renderDetail(ep.episodeId); } }, [
-      h("span", { "class": "fc-badge", style: "background:#f8fafc;color:" + m.color, text: m.icon }),
+    return h("button", { "class": "fc-row", type: "button", onclick: function () { renderDetail(ep.episodeId); } }, [
+      h("span", { "class": "fc-badge", style: "color:" + m.color, text: m.icon }),
       h("div", { "class": "fc-meta" }, [
         h("div", { "class": "fc-t" }, [
           document.createTextNode((ep.disease || "Recovery") + (ep.score != null && ep.score >= 0 ? "  ·  " + ep.score + "/100" : "")),
-          h("span", { style: "font-size:12px;font-weight:600;color:#475569;background:#f1f5f9;padding:4px 8px;border-radius:4px;margin-left:8px;", text: m.label })
+          h("span", { "class": "fc-status", style: "background:" + m.bg + ";color:" + m.color, text: m.label })
         ]),
         h("div", { "class": "fc-s" }, segs.map(function (s, i) { return h("span", { "class": "fc-s-seg", text: (i ? " · " : "") + s }); }))
       ]),
@@ -1061,39 +1140,35 @@
   }
   function maitriHero(sv) {
     var on = !!(sv && sv.voice && sv.voice.enabled);
-    var wrap = h("div", { "class": "mai-hero", style: "border-radius:16px;padding:18px 14px 13px;margin:2px 0 14px;color:#fff;position:relative;overflow:hidden;text-align:center" });
+    var wrap = h("div", { "class": "mai-hero", style: "position:relative;overflow:hidden" });
     wrap.innerHTML =
       '<div class="mai-aura"></div>' +
-      '<div style="position:absolute;top:10px;right:10px;z-index:2;display:flex;align-items:center;gap:6px;background:rgba(255,255,255,' + (on ? ".2" : ".1") + ');padding:5px 10px;border-radius:999px;font-size:10.5px;font-weight:800;border:1px solid rgba(255,255,255,.22)">' +
-        '<span class="mai-dot" style="width:7px;height:7px;border-radius:50%;background:' + (on ? "#7CF5C6" : "#ffd27a") + '"></span>' + (on ? "Live" : "Standby") + '</div>' +
-      '<div style="position:relative;z-index:1">' +
-        '<img src="/maitri-logo.png" alt="MAiTRI" style="display:block;margin:2px auto 4px;width:70px;height:70px;object-fit:contain;filter:brightness(0) invert(1) drop-shadow(0 5px 12px rgba(0,0,0,.4)) drop-shadow(0 0 20px rgba(94,234,212,.7))">' +
-        // The real brand lockup (title + tagline, cropped from the official logo file) rather than a
-        // CSS re-typeset — guarantees an exact match to the "MAiTRI" wordmark and its rounded "i".
-        '<img src="/maitri-wordmark.png" alt="MAiTRI — Medical Adaptive Intelligence for Treatment &amp; Recovery Integration" style="display:block;margin:5px auto 0;width:168px;max-width:100%;object-fit:contain;filter:brightness(0) invert(1) drop-shadow(0 2px 14px rgba(94,234,212,.4))">' +
-        '<div style="display:inline-flex;align-items:center;gap:6px;margin-top:10px;background:rgba(94,234,212,.14);border:1px solid rgba(94,234,212,.32);border-radius:999px;padding:6px 13px;font-size:11px;font-weight:700;color:#bff3ea">' +
-          '<span style="width:7px;height:7px;border-radius:50%;background:#7CF5C6"></span>Speaks 10 Indian languages + English</div>' +
-      '</div>' +
+      '<div class="mai-live"><span class="mai-dot" aria-hidden="true"></span>' + (on ? "Live" : "Standby") + '</div>' +
+      '<img class="mai-logo" src="/maitri-logo.png" alt="MAiTRI logo">' +
+      // Preserve the official lockup, including the full expansion of MAiTRI.
+      '<img class="mai-wordmark" src="/maitri-wordmark.png" alt="MAiTRI, Medical Adaptive Intelligence for Treatment &amp; Recovery Integration">' +
+      '<div class="mai-language">Speaks 10 Indian languages + English</div>' +
       '<span class="mai-mark" aria-hidden="true"></span>';
     return wrap;
   }
   function maitriStatus(sv) {
     var on = !!(sv && sv.voice && sv.voice.enabled), col = on ? ESC.green : ESC[""];
-    return h("div", { style: "border:1px solid var(--line,#dbe4e2);border-radius:14px;padding:12px 14px;margin-bottom:12px;background:var(--panel,#fff);display:flex;align-items:center;gap:11px" }, [
+    return h("div", { "class": "fc-maitri-status" }, [
       pill(on ? "Voice calling ON" : "Voice calling OFF", col),
-      h("div", { style: "font-size:12.5px;color:var(--slate,#5a7184);flex:1", text: on ? "Maitri calls patients who miss their check-in, in their language." : "Turn on in settings to enable AI wellbeing calls." })
+      h("div", { text: on ? "MAiTRI calls patients who miss their check-in, in their language." : "Turn on voice calling to enable AI wellbeing calls." })
     ]);
   }
   function maitriSection(t, n) {
-    return h("div", { style: "display:flex;align-items:center;gap:8px;margin:8px 0 10px;font-weight:800;font-size:14px;color:var(--ink,#14202b)" }, [
+    return h("div", { "class": "fc-maitri-section" }, [
       document.createTextNode(t),
-      n != null ? h("span", { style: "font-size:11.5px;font-weight:800;color:#0e6e63;background:#e7f6ee;border-radius:999px;padding:2px 9px", text: String(n) }) : null
+      n != null ? h("span", { text: String(n) }) : null
     ]);
   }
   function renderMaitri(body) {
+    setShellHeading(body, "MAiTRI", "Recovery intelligence");
     body.innerHTML = "";
-    body.appendChild(h("button", { "class": "fc-btn sec", onclick: function () { renderDashboard(body); }, text: "‹ Back" }));
-    var host = h("div"); body.appendChild(host);
+    body.appendChild(h("button", { "class": "fc-btn sec fc-maitri-back", onclick: function () { renderDashboard(body); }, text: "‹ FollowCare" }));
+    var host = h("div", { "class": "fc-maitri" }); body.appendChild(host);
     host.appendChild(maitriHero(null));
     host.appendChild(h("div", { "class": "fc-empty", text: "Loading MAiTRI…" }));
     Promise.all([
@@ -1105,7 +1180,7 @@
       host.innerHTML = "";
       host.appendChild(maitriHero(sv));
       var list = sortEpisodes(eps), c = counts(list);
-      host.appendChild(h("div", { style: "display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px" }, [
+      host.appendChild(h("div", { "class": "fc-q-metrics" }, [
         ccBox(c.total, "Recovering"), ccBox(c.red, "Urgent"), ccBox(c.orange + c.yellow, "Watch"), ccBox(c.green, "On track")
       ]));
       host.appendChild(maitriStatus(sv));
@@ -1114,9 +1189,9 @@
       if (!urgent.length) host.appendChild(h("div", { "class": "fc-empty", text: "No red flags right now. Everyone is on track." }));
       else urgent.slice(0, 8).forEach(function (ep) { host.appendChild(episodeRow(ep)); });
       // Same pairing as the dashboard, so the two screens do not disagree about how actions look.
-      host.appendChild(h("div", { style: "display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px" }, [
-        h("button", { "class": "fc-btn", style: "padding:12px 10px;font-size:13.5px;line-height:1.25", onclick: function () { renderVoiceSettings(body); }, text: "Voice & escalation" }),
-        h("button", { "class": "fc-btn sec", style: "padding:12px 10px;font-size:13.5px;line-height:1.25", onclick: function () { renderEnroll(body); }, text: "+ Enroll a patient" })
+      host.appendChild(h("div", { "class": "fc-maitri-actions" }, [
+        h("button", { "class": "fc-btn", onclick: function () { renderVoiceSettings(body); }, text: "Voice & escalation" }),
+        h("button", { "class": "fc-btn sec", onclick: function () { renderEnroll(body); }, text: "+ Enroll a patient" })
       ]));
     }).catch(function () {
       host.innerHTML = ""; host.appendChild(maitriHero(null));

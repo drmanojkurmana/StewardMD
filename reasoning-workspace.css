@@ -1,5 +1,5 @@
 /* Presentation-only layer. Clinical ranking, thresholds and evidence remain in reasoning.js. */
-#dxOverlay { --dx-accent:#5550a5; --dx-surface:var(--panel,#fff); --dx-muted:var(--slate-soft,#576b7c); --dx-border:var(--line,#dce5e9); height:100dvh; max-height:100dvh; }
+#dxOverlay { --dx-accent:#5550a5; --dx-surface:var(--panel,#fff); --dx-muted:var(--slate-soft,#576b7c); --dx-border:var(--line,#dce5e9); }
 body.dark #dxOverlay { --dx-accent:#b6b0ff; }
 #dxOverlay [hidden] { display:none!important; }
 #dxOverlay .dx-work-nav button[aria-pressed=true] { background:var(--dx-accent); color:var(--dx-surface); }
@@ -25,6 +25,9 @@ body.dark #dxOverlay { --dx-accent:#b6b0ff; }
 #dxOverlay #dxFindingCount { background:var(--dx-accent); color:#fff; border-radius:7px; padding:3px 7px; font-size:11px; }
 #dxOverlay .dx-body { max-width:1440px; padding:24px 20px calc(32px + env(safe-area-inset-bottom,0px)); overscroll-behavior:contain; }
 #dxOverlay .dx-intake, #dxOverlay .dx-review { min-width:0; scroll-margin-top:20px; }
+#dxOverlay .dx-intake:not([hidden]) { display:flex; min-height:100%; flex-direction:column; }
+#dxOverlay .dx-intake:not([hidden]) .dx-adv-toggle { margin-top:auto; }
+#dxOverlay.dx-has-case .dx-intake:not([hidden]) .dx-adv-toggle { margin-top:8px; }
 #dxOverlay .dx-section-intro { margin-bottom:24px; }
 #dxOverlay .dx-eyebrow { font-size:10px; font-weight:750; letter-spacing:.13em; color:var(--dx-accent); }
 #dxOverlay .dx-section-intro h2 { font-size:29px; line-height:1.15; letter-spacing:-.04em; margin:10px 0; }

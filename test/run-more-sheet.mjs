@@ -74,7 +74,7 @@ try {
     return JSON.stringify({ bg: cs.backgroundColor, color: cs.color });
   `);
   ok(dark.bg !== light.bg, `body.dark actually changes the sheet's resolved background (light: ${light.bg}, dark: ${dark.bg})`);
-  ok(dark.bg === "rgb(17, 27, 46)", `resolves to the intended dark panel color #111B2E (got ${dark.bg})`);
+  ok(dark.bg === "rgb(36, 36, 39)", `resolves to the Graphite panel color #242427 (got ${dark.bg})`);
 
   console.log(fails === 0 ? "\nALL GREEN — More sheet cleanup + dark-mode theming verified end to end" : `\n${fails} FAILED`);
 } catch (e) { console.error("HARNESS ERROR:", e.message); fails++; }

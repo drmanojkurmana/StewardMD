@@ -38,6 +38,17 @@ affects hits it. Four real findings in the doctor-facing overlay (`followcare.js
 - `ESC.red.icon` now carries **U+FE0E** (text presentation): iOS renders a bare U+26A0 as the colour
   emoji, inside a red-styled clinical badge.
 
+## Quiet Intelligence UI (September 2026)
+
+FollowCare and MAiTRI use one restrained, full-height workspace with compact phone chrome, a clear
+recovery overview, accessible patient-row buttons and responsive metric cards. The design removes the
+old glowing AI-console treatment while preserving explicit urgency labels and all clinical status
+colours. MAiTRI retains the existing `maitri-logo.png` and the official `maitri-wordmark.png`, including
+“Medical Adaptive Intelligence for Treatment & Recovery Integration.” Voice settings, enrollment,
+patient detail navigation and escalation actions are unchanged.
+
+Browser verification: `FC_SHOTS=/tmp/stewardmd-followcare-quiet node test/run-followcare-quiet-ui.mjs`.
+
 **Left alone deliberately:** the escalation glyphs (● ○ ✓) are not an accessibility bug - every level
 ships a text `label` alongside colour, which is the rule the ui-ux-pro-max set flags hardest. The
 generic dark-slate palette the tool proposed was NOT adopted; FollowCare keeps StewardMD's teal

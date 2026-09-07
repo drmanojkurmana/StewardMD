@@ -21,8 +21,14 @@ try {
   for(let i=0;i<80;i++){if(await ev('!!window.DX'))break;await sleep(300);}
   await ev(`['introPoster','splash','accountGate','introOverlay','smdBootSplash'].forEach(k=>document.getElementById(k)?.remove());DX.openWorkspace();DX.reset();document.body.classList.remove('dark');document.activeElement?.blur();`);
   await call('Emulation.setDeviceMetricsOverride',{width:390,height:844,deviceScaleFactor:1,mobile:true});
+  await sleep(350);
   ok(await ev(`!!document.querySelector('#dxIntake') && !!document.querySelector('#dxReview')`),'intake and review render');
   ok(await ev(`document.querySelector('#dxAdv').style.display==='none'`),'case tools start collapsed');
+  const viewportFit=await ev(`({top:document.querySelector('#dxOverlay').getBoundingClientRect().top,bottom:document.querySelector('#dxOverlay').getBoundingClientRect().bottom,height:innerHeight,position:getComputedStyle(document.querySelector('#dxOverlay')).position})`);
+  console.log('Dx viewport fit',viewportFit);
+  ok(viewportFit.position==='fixed' && viewportFit.top>=-1 && Math.abs(viewportFit.bottom-viewportFit.height)<=1,'workspace ends at the visible viewport');
+  ok(await ev(`innerHeight-document.querySelector('#dxAdvToggle').getBoundingClientRect().bottom <= 50`),'empty-case tools sit near the bottom edge');
+  ok(await ev(`document.querySelector('.dx-body').scrollHeight <= document.querySelector('.dx-body').clientHeight+1`),'empty case has no phantom vertical scroll');
   await shot('dx-empty-mobile');
   await ev(`document.querySelector('#dxAdvToggle').click();document.querySelector('#dxFreeText').value='Synthetic note retained during review';DX.addFindings(['fever']);`);
   ok(await ev(`document.querySelector('#dxFreeText').value === 'Synthetic note retained during review'`),'adding findings preserves narrative draft');

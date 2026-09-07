@@ -1,0 +1,173 @@
+/* StewardMD Graphite dark appearance. Neutral surfaces only; clinical status ramps stay unchanged. */
+html:has(body.dark), html:has(body.v3-dark) { background:#171719; }
+
+html body.dark,
+html body.v3-dark,
+html body.ui-v2.dark,
+html body.ui-v2.v3-dark,
+html[data-theme] body.dark,
+html[data-theme] body.v3-dark,
+html[data-theme] body.ui-v2.dark,
+html[data-theme] body.ui-v2.v3-dark {
+  color-scheme:dark;
+  --paper:#171719;
+  --panel:#242427;
+  --ink:#f4f4f5;
+  --slate:#c0c0c5;
+  --slate-soft:#9a9aa1;
+  --line:#3a3a3f;
+  --teal:#57d3bd;
+  --teal-soft:#203a36;
+  --amber:#f0c060;
+
+  --v3-bg:#171719;
+  --v3-panel:#242427;
+  --v3-panel-2:#2d2d31;
+  --v3-border:#3a3a3f;
+  --v3-ink:#f4f4f5;
+  --v3-muted:#a6a6ad;
+  --v3-primary:#57d3bd;
+  --v3-primary-2:#39b9a4;
+  --v3-primary-3:#83e3d3;
+  --v3-primary-soft:#203a36;
+
+  --rds-bg:#171719;
+  --rds-surface:#242427;
+  --rds-surface-2:#2d2d31;
+  --rds-line:#3a3a3f;
+  --rds-line-soft:#303034;
+  --rds-ink:#f4f4f5;
+  --rds-muted:#c0c0c5;
+  --rds-faint:#9a9aa1;
+  --rds-primary:#57d3bd;
+  --rds-primary-2:#39b9a4;
+  --rds-primary-soft:#203a36;
+}
+
+/* Home and app sheets declare local tokens, so map those to the same graphite scale. */
+html body.dark #homeV2,
+html body.v3-dark #homeV2,
+html body.dark .hv-sheet,
+html body.v3-dark .hv-sheet {
+  --hbg:#171719;
+  --hpanel:#242427;
+  --hbd:#3a3a3f;
+  --hink:#f4f4f5;
+  --hmut:#a6a6ad;
+  --hps:#203a36;
+  --hsh:0 1px 2px rgba(0,0,0,.28),0 8px 24px rgba(0,0,0,.26);
+}
+
+html body.dark #maikSheet,
+html body.v3-dark #maikSheet,
+html body.mk2.dark #maikSheet,
+html body.mk2.v3-dark #maikSheet {
+  --mk-bg:#171719;
+  --mk-sheet:#1d1d20;
+  --mk-ink:#f4f4f5;
+  --mk-mut:#a6a6ad;
+  --mk-faint:#77777e;
+  --mk-bd:#3a3a3f;
+  --mk-soft:#242427;
+  --mk-field:#2d2d31;
+  --mk-teal:#57d3bd;
+  --mk-tsoft:#203a36;
+  --mk-acc:#8ccbc0;
+  --mk-glow:rgba(87,211,189,.3);
+}
+
+html body.dark .sbr-set-ov,
+html body.v3-dark .sbr-set-ov { background:#171719; color:#f4f4f5; }
+html body.dark .sbr-set-ov :is(.sbr-row,.sbr-tg,.smd-nav-row,.sbr-card),
+html body.v3-dark .sbr-set-ov :is(.sbr-row,.sbr-tg,.smd-nav-row,.sbr-card) { background:#242427; border-color:#3a3a3f; }
+html body.dark .sbr-set-ov .smd-nav-btn,
+html body.v3-dark .sbr-set-ov .smd-nav-btn { background:#2d2d31; border-color:#444449; color:#f4f4f5; }
+html body.dark .sbr-set-ov .smd-nav-btn:hover,
+html body.v3-dark .sbr-set-ov .smd-nav-btn:hover { background:#35353a; }
+
+html body.dark .ai-usage,
+html body.dark .aic { --aiuCard:#242427; --aiuBg:#171719; --card:#242427; --bg:#171719; }
+html body.dark .sbref-sec { background:#242427; }
+html body.dark #smdBackToTop { background:#2d2d31; color:#57d3bd; }
+
+/* Module palettes that previously bypassed the shared surface tokens. */
+html body.dark #sknxRoot {
+  --sknx-bg:#171719;
+  --sknx-card:#242427;
+  --sknx-surf-2:#2d2d31;
+  --sknx-text:#f4f4f5;
+  --sknx-ink:#f4f4f5;
+  --sknx-text-2:#a6a6ad;
+  --sknx-hairline:#3a3a3f;
+  --sknx-primary:#78d9c6;
+}
+html body.dark .fc-sheet,
+html body.v3-dark .fc-sheet { --panel:#242427; --ink:#f4f4f5; --slate:#a6a6ad; --line:#3a3a3f; }
+html body.dark .fc-sheet.fcai,
+html body.v3-dark .fc-sheet.fcai {
+  --panel:#242427;
+  --ink:#f4f4f5;
+  --slate:#a6a6ad;
+  --line:#3a3a3f;
+  --fc-accent:#57d3bd;
+  background:linear-gradient(180deg,#242427,#171719)!important;
+}
+html body.dark .fc-ov.fcai,
+html body.v3-dark .fc-ov.fcai { background:radial-gradient(900px 500px at 50% -10%,rgba(87,211,189,.13),transparent 58%),rgba(0,0,0,.72)!important; }
+html body.dark .fc-sheet.fcai .fc-hd,
+html body.v3-dark .fc-sheet.fcai .fc-hd { background:rgba(36,36,39,.94); border-color:#3a3a3f; }
+html body.dark .fc-sheet.fcai :is(.fc-row,.fc-act,.fc-cm,.fc-cc,.fc-hero2),
+html body.v3-dark .fc-sheet.fcai :is(.fc-row,.fc-act,.fc-cm,.fc-cc,.fc-hero2) {
+  background:linear-gradient(180deg,#2d2d31,#242427);
+  border-color:#3a3a3f;
+}
+html body.dark #surgxRoot .sgx-hero,
+html body.v3-dark #surgxRoot .sgx-hero { background:linear-gradient(160deg,#2d2d31,#202023); }
+
+html body.dark .ece,
+html body.v3-dark .ece,
+html body.dark .cs-ov,
+html body.v3-dark .cs-ov {
+  --bg:#171719;
+  --panel:#242427;
+  --ink:#f4f4f5;
+  --mut:#a6a6ad;
+  --line:#3a3a3f;
+  --tl:#57d3bd;
+  --tls:#203a36;
+}
+html body.dark .smdonb-card,
+html body.v3-dark .smdonb-card,
+html body.dark .smdea-card,
+html body.v3-dark .smdea-card {
+  background:#242427;
+  color:#f4f4f5;
+  --line:#3a3a3f;
+  --paper:#171719;
+  --mut:#a6a6ad;
+}
+html body.dark .smdea-list,
+html body.v3-dark .smdea-list { background:#242427; }
+html body.dark .smdnmc-sheet,
+html body.dark .smdv-sheet { --panel:#242427; --ink:#f4f4f5; }
+html body.dark .smdnmc-card { --bg:#171719; }
+html body.dark .smdv-unmatched { background:#171719; }
+
+html.abx-ui body.dark #abxWizard,
+html body.dark.abx-ui #abxWizard {
+  --w-paper:#171719;
+  --w-panel:#242427;
+  --w-panel2:#2d2d31;
+  --w-inputbg:#202023;
+  --w-ink:#f4f4f5;
+  --w-slate:#c0c0c5;
+  --w-soft:#a6a6ad;
+  --w-muted:#8d8d94;
+  --w-line:#3a3a3f;
+  --w-linesoft:#303034;
+  --w-tealsoft:#203a36;
+  --w-tealbd:#32665d;
+  --w-teal-ink:#57d3bd;
+}
+
+@media (prefers-color-scheme:dark) { html { background:#171719; } }
