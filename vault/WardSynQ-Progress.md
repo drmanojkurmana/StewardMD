@@ -8,7 +8,7 @@ NOT counted as WardSynQ's own implementation.
 Scoring per domain: `record path` (25) + `safety/governance` (25) + `UI a clinician can use` (35) +
 `tests + real-device proof` (15). A domain with a working API and no UI caps at 65.
 
-Updated: 2026-09-07 (PRs #887 problem list, #889 ward UI, #890 MAR scheduling)
+Updated: 2026-09-07 (PRs #887 problem list, #889 ward UI, #890 MAR scheduling, #892 discharge workstation)
 
 | # | Domain (Epic module) | Weight | % | Status |
 |---|---|---|---|---|
@@ -22,10 +22,10 @@ Updated: 2026-09-07 (PRs #887 problem list, #889 ward UI, #890 MAR scheduling)
 | 8 | Inpatient admission / ward (ADT) | 7 | 75 | #889. Admit, ward list, ward vitals, discharge, **with a UI**. No transfer, no bed board. |
 | 9 | eMAR / medication administration (Willow Inpatient) | 8 | 80 | #889 + #890. State machine, five rights, barcode scan, weight-based refusal, AI blocked, **UI**, **and a real schedule**. No pharmacy verification as its own authority, no high-alert witness config. |
 | 10 | Nursing documentation (Flowsheets) | 5 | 40 | Ward vitals with a UI. No assessments, no I/O, no shift handover, no care plans. |
-| 11 | Discharge + summary (Discharge Navigator) | 4 | 55 | Deterministic assembler, sign, corrections survive. **No UI.** Not device-proven. |
+| 11 | Discharge + summary (Discharge Navigator) | 4 | 85 | #892. Assembler, per-section clinician correction with recorded provenance, immutable signed version, outstanding-items review, A4 print. Not device-proven. |
 | 12 | Results — lab / rad (Beaker, Radiant) | 6 | 25 | DiagnosticReport read from GHIS. No native resulting, no autoverification, no critical-value loop. |
 | 13 | Pharmacy verification + inventory (Willow) | 5 | 10 | Pharmacist role exists; verification is not its own authority. No inventory, no dispensing. |
-| 14 | Notes / documentation (SmartText, NoteWriter) | 4 | 50 | Signed clinical notes, versioned. No templates, no macros, no co-sign routing. |
+| 14 | Notes / documentation (SmartText, NoteWriter) | 4 | 60 | Signed clinical notes, versioned, and a document surface with per-section provenance. No templates, no macros, no co-sign routing. |
 | 15 | Billing / revenue (Resolute) | 5 | 15 | Clinic billing config only. No charge capture from orders, no claims, no payer. |
 | 16 | Security / audit / break-glass | 5 | 55 | Capability RBAC, append-only audit, tiered AI. **No break-glass**, no consent model. |
 | 17 | Interoperability (Care Everywhere, HL7/FHIR) | 4 | 30 | Canonical model is FHIR-shaped; GHIS adapter works. No FHIR endpoint, no HL7, no CDA. |
@@ -33,19 +33,28 @@ Updated: 2026-09-07 (PRs #887 problem list, #889 ward UI, #890 MAR scheduling)
 | 19 | Patient portal (MyChart) | 3 | 0 | Not built. |
 | 20 | Deployment / uptime / DR (on-prem, HA) | 3 | 25 | Cloudflare edge + D1, live domain. No on-prem, no DR drill, no downtime procedures. |
 
-**Weighted total: 53%.**
+**Weighted total: 52.4%.**
 
-## Done since the baseline
+The total is the weight-times-percent sum of the table above, divided by 100. It is COMPUTED from
+these rows, not asserted: earlier revisions of this file carried an eyeballed number that had drifted
+about two points high (the 44% baseline was 41.5, and 53% was 50.8). If a row changes, recompute.
+
+## Done since the baseline (41.5% -> 52.4%)
+- **Problem list** (#887) — `Condition` had zero write paths; diagnoses lived only as prose.
 - **Ward UI** (#889) — the inpatient stack was server-authoritative and tested with nothing calling
   it. `ward.js`/`ward.css`, same pattern as `queue.js`. Lifted 8/9/10 out of the no-screen cap.
 - **MAR scheduling** (#890) — the frequency the prescriber wrote now becomes the doses that are due.
   PRN never scheduled, unreadable frequencies reported rather than dropped, TDS distinguished from
   Q8H, and `stopAt` so a course cannot run forever.
+- **Discharge workstation** (#892) — the assembler was finished and unreachable. Per-section
+  clinician correction with recorded provenance (`editedSections`), an immutable signed version, the
+  outstanding-items review before sign-off, and an A4 print artifact.
 
 ## The three things that most move it now
-1. **Discharge UI + device proof** — the summary assembler is finished and nobody can reach it.
-2. **Results + critical-value loop** — the biggest pure-clinical gap; a lab that goes nowhere.
-3. **Transfer / bed management** — a ward you can admit to and discharge from but not move within.
+1. **Results + critical-value loop** — the biggest pure-clinical gap; a lab that goes nowhere.
+2. **Transfer / bed management** — a ward you can admit to and discharge from but not move within.
+3. **Device proof of the inpatient vertical** — none of the ward, eMAR or discharge screens have
+   been run on the phone yet. Everything above is proven by test, not by a clinician's hands.
 
 Pharmacy verification as its own authority is deliberately still open (see the note in
 `functions/api/queue/[[path]].js`): granting it would give the pharmacy role write access to
