@@ -3706,6 +3706,40 @@ test("A SUPERSEDED VERIFICATION STOPS THE SUPPLY, and a repeat supply is a secon
   assert.equal((await issue("2026-09-08T08:00:00.000Z")).__status, 200);
 });
 
+test("EXPIRED STOCK IS REFUSED, and a batch nobody recorded is not a batch that was checked", async () => {
+  seedHospital();
+  const { adm, ord } = await admittedPatientOnDrug();
+  const issue = (body) => as(PHARM, "/ward/dispense", "POST", { orgId: ORG, orderId: ord.orderId, quantity: { value: 21, unit: "tablet" }, ...body });
+
+  /* THE ONE PLACE THIS FILE BLOCKS ON SOMETHING OTHER THAN THE PRESCRIPTION. Dispensing an expired
+   * drug is a recognised harm, and the box says so in the pharmacist's hand. */
+  const dead = await issue({ batch: "B-1", expiry: "2026-08", at: "2026-09-07T09:00:00.000Z" });
+  assert.equal(dead.__status, 409);
+  assert.equal(dead.error, "expired_stock");
+  assert.match(dead.detail, /expired on 2026-08/);
+  // Said plainly, so nobody reads a stock refusal as the safety engine finding something clinical.
+  assert.match(dead.basis, /not a clinical finding/);
+  assert.equal((await RECORD.byPatient(TENANT_ROW.id, "MedicationDispense", adm.patientId)).length, 0, "and nothing was written");
+
+  // A box marked 09/2026 is usable on 30 September: an expiry is the END of its period.
+  const ok = await issue({ batch: "B-2", expiry: "2026-09", at: "2026-09-30T10:00:00.000Z" });
+  assert.equal(ok.__status, 200, JSON.stringify(ok));
+  assert.equal(ok.expiryCheck.state, "in-date");
+  assert.equal(ok.batch, "B-2");
+  // Which batch went to which patient is the first thing a recall asks, and it is on the record.
+  assert.equal((await RECORD.latest(TENANT_ROW.id, "MedicationDispense", ok.dispenseId)).batch, "B-2");
+
+  /* AN ABSENT EXPIRY IS NOT A VALID ONE. Not every hospital captures it and refusing everywhere
+   * would stop supply, so it goes through - recorded as unchecked, never as "checked and fine". */
+  const blind = await issue({ at: "2026-10-01T10:00:00.000Z" });
+  assert.equal(blind.__status, 200);
+  assert.equal(blind.expiryCheck.state, "unknown");
+  assert.match(blind.expiryWarning, /none was checked/);
+  const unreadable = await issue({ expiry: "next Tuesday", at: "2026-10-02T10:00:00.000Z" });
+  assert.equal(unreadable.expiryCheck.state, "unreadable");
+  assert.match(unreadable.expiryWarning, /no expiry was checked/);
+});
+
 test("stock that comes back is a RETURN, and the issue is never erased", async () => {
   seedHospital();
   const { adm, ord } = await admittedPatientOnDrug();
