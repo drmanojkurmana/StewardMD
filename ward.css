@@ -110,6 +110,23 @@ body.dark #smdWard { --bg: #191c1e; --on-surface: #eff1f3; --on-surface-variant:
 #smdWard .w-due .material-symbols-outlined { font-size: 16px; }
 #smdWard .w-st.overdue { background: var(--error-container); color: var(--on-error-container); }
 
+/* Critical results. The loudest card on the chart, and it sits first — the only thing on this
+   screen allowed to outrank the medication round. Restrained even so: a border, a tint and text,
+   because a wall of red on a ward screen stops being read within a shift. */
+#smdWard .w-card.crit { border-color: var(--on-error-container); border-left-width: 3px; }
+#smdWard .w-card.crit .w-card-h { color: var(--on-error-container); }
+#smdWard .w-crits { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+#smdWard .w-crits li { border: 1px solid var(--outline-variant); border-left-width: 3px; border-radius: 12px; padding: 11px 13px; background: var(--sc-low); }
+#smdWard .w-crits li.lvl-escalate { border-left-color: var(--on-error-container); background: var(--error-container); color: var(--on-error-container); }
+#smdWard .w-crits li.lvl-overdue { border-left-color: var(--on-warn-container); background: var(--warn-container); color: var(--on-warn-container); }
+#smdWard .w-crits li.lvl-due { border-left-color: var(--outline); }
+#smdWard .w-crit-h { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 9px; }
+#smdWard .w-crit-h b { font: 700 15px var(--w-sans); }
+#smdWard .w-crit-v { font: 700 15px var(--mono, ui-monospace, Menlo, monospace); font-variant-numeric: tabular-nums; }
+#smdWard .w-crit-b { font: 600 10.5px var(--w-sans); text-transform: uppercase; letter-spacing: .05em; opacity: .85; }
+#smdWard .w-crit-m { display: flex; align-items: center; gap: 5px; margin: 6px 0 8px; font: 500 12px var(--w-sans); opacity: .9; }
+#smdWard .w-crit-m .material-symbols-outlined { font-size: 15px; }
+
 /* PRN and unreadable-frequency orders: visible, and visibly NOT part of the round */
 #smdWard .w-sub { margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--outline-variant); }
 #smdWard .w-sub h4 { margin: 0; font-size: 13px; display: flex; align-items: center; gap: 6px; color: var(--on-surface-variant); }

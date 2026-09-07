@@ -39,6 +39,16 @@ const RESOURCE_TYPES = Object.freeze([
   "Patient", "Encounter", "Condition", "AllergyIntolerance", "Observation",
   "MedicationOrder", "MedicationAdministration", "ServiceRequest", "DiagnosticReport",
   "CarePlan", "ClinicalNote",
+  /* The critical-result loop. NOT a clinical finding and deliberately not modelled as one: there is
+   * no FHIR type for "a named human must look at this", and dressing a workflow fact up as a
+   * clinical resource would put a process artefact where a reader expects a diagnosis. It lives
+   * here so it is versioned and append-only like everything else, which is what makes an
+   * acknowledgement impossible to edit away afterwards.
+   *
+   * No grant change accompanies this: EMR_TREAT already carries unrestricted write and EMR_VIEW
+   * unrestricted read, so a doctor can acknowledge and a nurse can see the list, which is the
+   * policy wanted. A nurse's write scope is enumerated and does not include this type. */
+  "CriticalResultLoop",
 ]);
 
 const MODE = Object.freeze({ SYSTEM_OF_RECORD: "system-of-record", INTEGRATION: "integration" });

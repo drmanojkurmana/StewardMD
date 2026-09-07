@@ -887,3 +887,184 @@ test("an unsigned summary is marked as a draft ON PAPER, so it cannot be mistake
   assert.match(paper, /UNSIGNED DRAFT - not a final discharge summary\./);
   assert.ok(!/Signed by/.test(paper));
 });
+
+/* ---- the critical result loop -------------------------------------------------------------------
+ *
+ * DiagnosticReport.critical carried a comment saying it gated a closed-loop escalation, and
+ * wardsynq-simulation.js asserted "No critical result loop was closed without an acknowledgement"
+ * against a world nothing ever populated. This is the loop.
+ */
+
+/** Puts a lab report with structured values straight onto the record, as an ingest would. */
+async function labReport(adm, rows, opts) {
+  const o = opts || {};
+  const reportId = o.reportId || "wsq-dr-lab-1";
+  const obsIds = [];
+  for (const r of rows) {
+    const id = `${reportId}-${r.code}`;
+    obsIds.push(id);
+    await RECORD.append(TENANT_ROW.id, [{
+      resourceType: "Observation", id, version: 1, patientId: adm.patientId, encounterId: adm.encounterId,
+      category: "laboratory", code: r.code, codeSystem: "http://loinc.org", value: r.value, unit: r.unit,
+      sourceCritical: !!r.sourceCritical,
+      meta: { recordedAt: "2026-09-07T09:00:00.000Z", effectiveAt: "2026-09-07T09:00:00.000Z" },
+    }], { actor: "test" });
+  }
+  await RECORD.append(TENANT_ROW.id, [{
+    resourceType: "DiagnosticReport", id: reportId, version: 1, patientId: adm.patientId,
+    encounterId: adm.encounterId, code: o.code || "Renal profile", status: "final",
+    critical: !!o.critical, resultObservationIds: obsIds,
+    reportedAt: o.reportedAt || "2026-09-07T09:00:00.000Z",
+    meta: { recordedAt: "2026-09-07T09:00:00.000Z", effectiveAt: "2026-09-07T09:00:00.000Z" },
+  }], { actor: "test" });
+  return reportId;
+}
+
+test("a critical result opens a loop, is acknowledged by a named clinician, and only then closes", async () => {
+  seedHospital();
+  const { adm } = await admittedPatientOnDrug();
+  const reportId = await labReport(adm, [
+    { code: "2823-3", value: 7.4, unit: "mmol/L" },      // potassium, critical by limit
+    { code: "2951-2", value: 138, unit: "mmol/L" },      // sodium, normal
+  ]);
+
+  const opened = await as(DOCTOR, "/ward/flag-critical", "POST", { orgId: ORG, reportId });
+  assert.equal(opened.__status, 200, JSON.stringify(opened));
+  assert.equal(opened.opened, 1, "one loop, for the one critical analyte");
+  assert.equal(opened.loops[0].code, "2823-3");
+  assert.equal(opened.loops[0].basis, "limit");
+  assert.equal(opened.loops[0].state, "open");
+  assert.equal(opened.loops[0].acknowledgedBy, null);
+
+  // The ward can SEE it without being able to act on it.
+  const list = await as(NURSE, `/ward/criticals?orgId=${ORG}&patientId=${adm.patientId}`);
+  assert.equal(list.__status, 200, JSON.stringify(list));
+  assert.equal(list.open, 1);
+  assert.equal(list.loops[0].display, "Potassium");
+  assert.equal(list.loops[0].value, 7.4);
+
+  // A nurse cannot acknowledge: it is a clinical decision recorded against a named clinician.
+  const nurseAck = await as(NURSE, "/ward/acknowledge", "POST", { orgId: ORG, loopId: opened.loops[0].loopId, action: "seen" });
+  assert.equal(nurseAck.__status, 403);
+
+  // An acknowledgement with no action is a tick-box, and is refused.
+  const empty = await as(DOCTOR, "/ward/acknowledge", "POST", { orgId: ORG, loopId: opened.loops[0].loopId, action: "  " });
+  assert.equal(empty.__status, 422);
+  assert.equal(empty.error, "action_required");
+
+  const ack = await as(DOCTOR, "/ward/acknowledge", "POST", {
+    orgId: ORG, loopId: opened.loops[0].loopId, action: "Seen. ECG done, calcium gluconate and insulin-dextrose given, repeat K in 1 hour.",
+  });
+  assert.equal(ack.__status, 200, JSON.stringify(ack));
+  assert.equal(ack.state, "acknowledged");
+  assert.ok(ack.acknowledgedBy, "and it names who saw it");
+  assert.match(ack.action, /calcium gluconate/);
+  assert.equal(ack.escalation.level, "none", "an acknowledged loop is no longer chased");
+
+  // Closing keeps the acknowledgement; the invariant is that nothing closes without one.
+  const closed = await as(DOCTOR, "/ward/acknowledge", "POST", { orgId: ORG, loopId: opened.loops[0].loopId, action: "Repeat K 4.9, resolved.", close: true });
+  assert.equal(closed.state, "closed");
+  assert.equal(closed.acknowledgedBy, ack.acknowledgedBy, "the FIRST acknowledgement is never overwritten");
+  assert.match(closed.action, /calcium gluconate[\s\S]*Repeat K 4\.9/, "both entries survive");
+
+  // The whole life of the loop is on the record, and an acknowledgement cannot be edited away.
+  const hist = await RECORD.history(TENANT_ROW.id, "CriticalResultLoop", opened.loops[0].loopId);
+  assert.deepEqual(hist.map((h) => h.state), ["open", "acknowledged", "closed"]);
+  assert.equal(hist[0].acknowledgedBy, null);
+  assert.ok(hist[1].acknowledgedBy);
+
+  // Closed loops leave the default list rather than burying the open ones.
+  assert.equal((await as(NURSE, `/ward/criticals?orgId=${ORG}&patientId=${adm.patientId}`)).loops.length, 0);
+  assert.equal((await as(NURSE, `/ward/criticals?orgId=${ORG}&patientId=${adm.patientId}&state=closed`)).loops.length, 1);
+});
+
+test("a re-ingested result never reopens a loop a clinician already acknowledged", async () => {
+  seedHospital();
+  const { adm } = await admittedPatientOnDrug();
+  const reportId = await labReport(adm, [{ code: "2823-3", value: 7.4, unit: "mmol/L" }]);
+  const opened = await as(DOCTOR, "/ward/flag-critical", "POST", { orgId: ORG, reportId });
+  await as(DOCTOR, "/ward/acknowledge", "POST", { orgId: ORG, loopId: opened.loops[0].loopId, action: "Treated." });
+
+  // The same report arrives again, as an interface replay does.
+  const again = await as(DOCTOR, "/ward/flag-critical", "POST", { orgId: ORG, reportId });
+  assert.equal(again.opened, 0, "nothing new");
+  assert.equal(again.loops[0].state, "acknowledged", "and the acknowledgement is not discarded because a message arrived twice");
+  assert.equal((await RECORD.history(TENANT_ROW.id, "CriticalResultLoop", opened.loops[0].loopId)).length, 2);
+});
+
+test("a laboratory's own flag opens a loop even when the value looks fine, and even with no rows", async () => {
+  seedHospital();
+  const { adm } = await admittedPatientOnDrug();
+  // A normal-looking potassium the LAB flagged. Nothing here may talk the laboratory out of it.
+  const r1 = await labReport(adm, [{ code: "2823-3", value: 4.2, unit: "mmol/L", sourceCritical: true }], { reportId: "wsq-dr-lab-a" });
+  const a = await as(DOCTOR, "/ward/flag-critical", "POST", { orgId: ORG, reportId: r1 });
+  assert.equal(a.opened, 1);
+  assert.equal(a.loops[0].basis, "lab");
+
+  // A report flagged critical at the header whose rows carry nothing we can attribute still opens a
+  // loop. Dropping it because the row detail is thinner than the header is the silent failure.
+  const r2 = await labReport(adm, [{ code: "2951-2", value: 139, unit: "mmol/L" }], { reportId: "wsq-dr-lab-b", critical: true, code: "Blood culture" });
+  const b = await as(DOCTOR, "/ward/flag-critical", "POST", { orgId: ORG, reportId: r2 });
+  assert.equal(b.opened, 1, "the header flag is not lost");
+  assert.equal(b.loops[0].basis, "lab");
+  assert.equal(b.loops[0].code, "Blood culture");
+});
+
+test("a value nobody could compare is reported as uncomparable, never as normal", async () => {
+  seedHospital();
+  const { adm } = await admittedPatientOnDrug();
+  const reportId = await labReport(adm, [
+    { code: "2823-3", value: 7.4, unit: "mg/dL" },       // right analyte, wrong unit
+    { code: "718-7", value: "haemolysed", unit: "g/dL" }, // not a number at all
+  ]);
+  const r = await as(DOCTOR, "/ward/flag-critical", "POST", { orgId: ORG, reportId });
+  assert.equal(r.opened, 0, "neither is flagged, because neither could be compared");
+  assert.equal(r.uncomparable.length, 1);
+  assert.equal(r.uncomparable[0].code, "2823-3");
+  assert.equal(r.uncomparable[0].expectedUnit, "mmol/L");
+});
+
+test("an open loop gets louder, and the ward list puts the loudest first", async () => {
+  seedHospital();
+  const { adm } = await admittedPatientOnDrug();
+  await labReport(adm, [{ code: "2823-3", value: 7.4, unit: "mmol/L" }], { reportId: "wsq-dr-old", reportedAt: "2026-09-07T08:00:00.000Z" });
+  await labReport(adm, [{ code: "2951-2", value: 118, unit: "mmol/L" }], { reportId: "wsq-dr-new", reportedAt: "2026-09-07T09:50:00.000Z" });
+  await as(DOCTOR, "/ward/flag-critical", "POST", { orgId: ORG, reportId: "wsq-dr-old" });
+  await as(DOCTOR, "/ward/flag-critical", "POST", { orgId: ORG, reportId: "wsq-dr-new" });
+
+  const list = await as(NURSE, `/ward/criticals?orgId=${ORG}&patientId=${adm.patientId}`);
+  assert.equal(list.loops.length, 2);
+  /* The older potassium outranks the newer sodium, whatever order they were written in. The exact
+   * escalation LEVEL is deliberately not asserted here: it is a function of the wall clock, so a
+   * test that pinned it would pass or fail depending on when it ran. The pure test covers the
+   * thresholds exactly; this covers the ordering, which is the property the ward depends on. */
+  assert.equal(list.loops[0].display, "Potassium");
+  assert.equal(list.loops[1].display, "Sodium");
+  const RANK = { escalate: 0, overdue: 1, due: 2, none: 3 };
+  assert.ok(RANK[list.loops[0].escalation.level] <= RANK[list.loops[1].escalation.level], "loudest first");
+  assert.ok(list.loops[0].escalation.minutesOpen >= list.loops[1].escalation.minutesOpen);
+});
+
+test("the ward list is visible to the ward, and a stranger's hospital is not", async () => {
+  seedHospital();
+  const { adm } = await admittedPatientOnDrug();
+  const reportId = await labReport(adm, [{ code: "2823-3", value: 7.4, unit: "mmol/L" }]);
+  await as(DOCTOR, "/ward/flag-critical", "POST", { orgId: ORG, reportId });
+
+  // Seeing is not gated behind the authority to act: a ward that cannot see its open critical
+  // results is the exact failure this path exists to prevent. Both clinical roles can look.
+  for (const who of [DOCTOR, NURSE]) {
+    assert.equal((await as(who, `/ward/criticals?orgId=${ORG}`)).__status, 200, who);
+  }
+  // Without a patient it is the whole ward's list, which is how a shift picks it up.
+  assert.equal((await as(NURSE, `/ward/criticals?orgId=${ORG}`)).open, 1);
+
+  /* THE PHARMACIST CANNOT SEE THIS, and that is a real gap rather than a decision made here. The
+   * pharmacy role holds queue.view, order.read and order.dispense and no EMR capability at all
+   * (functions/_queue_roles.js), so it cannot read the chart. A pharmacist verifying a dose has a
+   * genuine need for a critical potassium or creatinine - but the only lever available today is
+   * emr.view, which grants the WHOLE record, and quietly handing the pharmacy role the entire chart
+   * to solve this would be a far larger change than the problem asks for. It wants its own narrow
+   * grant, the same way pharmacy verification does (see the note in api/queue/[[path]].js). */
+  assert.equal((await as(PHARM, `/ward/criticals?orgId=${ORG}`)).__status, 403);
+});
