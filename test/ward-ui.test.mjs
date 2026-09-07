@@ -144,6 +144,24 @@ test("the MAR offers only the transitions the state machine accepts, and nothing
   assert.match(html, /500 mg/);
 });
 
+test("THE SECOND NURSE CAN BE NAMED, and the screen never decides when one is needed", () => {
+  const W = load();
+  const html = W._render(chart);
+  /* Before this field existed the server's refusal was correct and unanswerable: a nurse at the
+   * bedside had no way to name the witness, so a high-alert dose could not be given from this screen
+   * at all. */
+  assert.match(html, /id="wWitness"/);
+  assert.match(html, /Second nurse/);
+
+  const code = SRC.replace(/\/\*[\s\S]*?\*\//g, " ").replace(/^\s*\/\/.*$/gm, " ");
+  // The field is always rendered, never shown only for drugs the browser thinks are high-alert:
+  // that would be a second copy of the hospital's formulary living in the UI.
+  assert.ok(!/highAlert|HIGH_ALERT|insulin|heparin|opioid/i.test(code), "no formulary in the UI");
+  // And it never compares the witness to the nurse: WITNESS_NOT_INDEPENDENT is the server's refusal.
+  assert.ok(!/witness\w*\s*(?:={2,3}|!={1,2})(?!=)\s*(?!null\b|undefined\b)\S/i.test(code), "the UI never judges the witness");
+  assert.match(code, /body\.witnessId = w/, "it is forwarded, and only forwarded");
+});
+
 test("IT NEVER DECIDES A DOSE IS SAFE: there is no client-side safety rule anywhere in the file", () => {
   // A second copy of the rules is how the screen and the server start disagreeing about whether a
   // drug is contraindicated. This asserts the absence, because the absence IS the safety property.

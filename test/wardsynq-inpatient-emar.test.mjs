@@ -2725,6 +2725,51 @@ test("sending is prescribing's business, and nothing unsendable is sent", async 
   assert.equal(bogus.error, "unknown_channel");
 });
 
+/* ---- the second nurse ---------------------------------------------------------------------------- */
+
+test("A HIGH-ALERT DRUG NEEDS A SECOND NURSE, and the LIST is the hospital's", async () => {
+  seedHospital();
+  /* The high-alert list is org configuration, never clinical logic in the code: which products need
+   * a witness belongs to the hospital formulary. This is the org's list reaching the bedside. */
+  const org = docs.get(`q_orgs/${ORG}`);
+  org.fields.wardsynq = { ...org.fields.wardsynq, highAlertDrugs: ["INSULIN"] };
+
+  const { adm, patient, ord: plain, scan: plainScan } = await admittedPatientOnDrug();
+  const ord = await as(DOCTOR, "/ward/medication-order", "POST", {
+    orgId: ORG,
+    order: { patientId: adm.patientId, encounterId: adm.encounterId, drug: "Insulin glargine", dose: { value: 10, unit: "unit" }, route: "subcutaneous", frequency: "OD" },
+  });
+  assert.equal(ord.__status, 200, JSON.stringify(ord));
+  const step = (a, x) => as(NURSE, "/ward/mar", "POST", { orgId: ORG, action: a, orderId: ord.orderId, dueAt: DUE, patient, ...(x || {}) });
+  await step("verify"); await step("dispense");
+  const scanned = await step("scan", { scan: { patientBarcode: patient.mrn, drugBarcode: "Insulin glargine", dose: { value: 10, unit: "unit" }, route: "subcutaneous" } });
+  assert.equal(scanned.to, "scanned", JSON.stringify(scanned));
+
+  // Without a witness it is REFUSED, with the reason a nurse can act on.
+  const alone = await step("administer");
+  assert.equal(alone.__status, 409);
+  assert.deepEqual(alone.reasons.map((r) => r.code), ["WITNESS_REQUIRED"]);
+
+  // The witness must be somebody else. A nurse cannot witness herself.
+  const self = await step("administer", { witnessId: idFor(NURSE) });
+  assert.equal(self.__status, 409);
+  assert.deepEqual(self.reasons.map((r) => r.code), ["WITNESS_NOT_INDEPENDENT"]);
+
+  const given = await step("administer", { witnessId: idFor(DOCTOR) });
+  assert.equal(given.__status, 200, JSON.stringify(given));
+  assert.equal(given.to, "administered");
+  // Both names are on the record: who gave it and who watched.
+  const rec = await RECORD.latest(TENANT_ROW.id, "MedicationAdministration", given.administrationId);
+  assert.equal(rec.administeredBy, idFor(NURSE));
+  assert.equal(rec.witnessedBy, idFor(DOCTOR));
+
+  /* AND A DRUG THE HOSPITAL DID NOT LIST NEEDS NO WITNESS. The list is the whole rule - nothing in
+   * the code decides that insulin is high-alert, which is why a hospital can add to it. */
+  const other = (a, x) => as(NURSE, "/ward/mar", "POST", { orgId: ORG, action: a, orderId: plain.orderId, dueAt: DUE, patient, ...(x || {}) });
+  await other("verify"); await other("dispense"); await other("scan", { scan: plainScan });
+  assert.equal((await other("administer")).to, "administered", "paracetamol is not on this hospital's list");
+});
+
 /* ---- the sample somebody has to take ----------------------------------------------------------- */
 
 test("ORDER -> COLLECT -> RECEIVE -> RESULT, and an uncollected order is VISIBLY uncollected", async () => {
