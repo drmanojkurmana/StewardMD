@@ -249,16 +249,46 @@ test("A FAILED READ NEVER LOOKS LIKE A CLEAR CHART", () => {
   assert.match(code, /An acknowledgement records what was done/);
 });
 
-test("the problem list is read-only on the ward screen: a nurse sees the diagnosis, she does not assert one", () => {
-  const html = load()._render(Object.assign({}, chart, {
+test("A DIAGNOSIS IS ENTERED HERE, AND THE SCREEN NEVER DECIDES WHO MAY ENTER ONE", () => {
+  const W = load();
+  const html = W._render(Object.assign({}, chart, {
     problems: [{ problemId: "p1", display: "Pneumonia", code: "J18.9", codeSystem: "ICD-10", verificationStatus: "confirmed", clinicalStatus: "active" }],
   }));
   assert.match(html, /Pneumonia/);
   assert.match(html, /J18\.9/);
   assert.match(html, /confirmed/);
-  assert.ok(!/data-w-act="problem/.test(html), "no way to add a diagnosis from the ward screen");
-  const none = load()._render(chart);
-  assert.match(none, /A diagnosis is entered by the treating doctor\./);
+
+  /* The form is rendered unconditionally. This file holds no notion of the caller's role - by design,
+   * every authority question in it is the server's - so gating the form would mean adding
+   * client-side authorisation, which is the pattern this screen exists without. `emr.treat` is
+   * enforced on /ward/problem and a nurse gets a 403 that says so; that refusal is asserted three
+   * times in wardsynq-inpatient-emar.test.mjs, and it, not a hidden button, is the control. */
+  assert.match(html, /data-w-act="problem"/);
+  assert.ok(!/\brole\b/.test(W._render(chart)), "the screen has no idea who is looking at it");
+
+  // Every value the server's own vocabulary accepts, so nobody is forced to overstate their
+  // confidence. A list offering only "confirmed" turns every working idea into a diagnosis.
+  for (const v of ["provisional", "differential", "confirmed", "refuted"]) {
+    assert.match(html, new RegExp(`value="${v}"`), `${v} must be offerable`);
+  }
+  assert.match(html, /working diagnosis/, "and it says what provisional means");
+
+  /* THE CODE IS NEVER DERIVED FROM THE WORDS. An uncoded diagnosis is recorded as text and says so;
+   * emitting a guessed code is a lie that survives every export afterwards. */
+  assert.match(html, /the code is not guessed at/);
+  /* Naming the code system on a placeholder is fine and helps. What must not exist is any mapping
+   * from words to a code: a lookup table, a fetch to a terminology service, or a guess. */
+  const code = SRC.replace(/\/\*[\s\S]*?\*\//g, " ").replace(/^\s*\/\/.*$/gm, " ");
+  assert.ok(!/\/api\/icd|icdLookup|terminolog|snomed|codeFor\s*\(/i.test(code), "the UI never looks a code up");
+  assert.ok(!/code\s*:\s*["'][A-Z]\d/.test(code), "and carries no code values of its own");
+
+  // Resolving is offered on an active problem and is a new version, never a deletion.
+  assert.match(html, /data-w-act="resolve:p1"/);
+  const done = W._render(Object.assign({}, chart, {
+    problems: [{ problemId: "p1", display: "Pneumonia", verificationStatus: "confirmed", clinicalStatus: "resolved" }],
+  }));
+  assert.ok(!done.includes('data-w-act="resolve:p1"'));
+  assert.match(done, /resolved/);
 });
 
 test("vitals: every field the record path accepts is on the form, and blanks are not defaulted", () => {

@@ -215,14 +215,40 @@
       "</div>";
   }
 
+  /* HOW CONFIDENT SOMEBODY WAS. The server's own vocabulary, offered in full: a list that only let a
+   * clinician say "confirmed" would turn every working idea into a diagnosis on the chart, and the
+   * default is `provisional` for exactly that reason. */
+  var VERIFICATION = [
+    ["provisional", "Provisional - a working diagnosis"],
+    ["differential", "Differential - one of several being considered"],
+    ["confirmed", "Confirmed"],
+    ["refuted", "Refuted - considered and ruled out"]
+  ];
   function problemsCard(state) {
     var rows = (state.problems || []).map(function (p) {
       return '<li><b>' + esc(p.display) + "</b>" + (p.codeSystem && p.codeSystem !== "text" ? ' <span class="w-code">' + esc(p.code) + "</span>" : "") +
-        ' <span class="w-vs ' + esc(p.verificationStatus) + '">' + esc(p.verificationStatus) + "</span></li>";
+        ' <span class="w-vs ' + esc(p.verificationStatus) + '">' + esc(p.verificationStatus) + "</span>" +
+        // Resolving is a new version, never a deletion: the diagnosis stays on the record with its
+        // history, which is what makes "we thought it was X" answerable later.
+        (p.clinicalStatus === "active" ? '<button class="w-btn tiny" data-w-act="resolve:' + esc(p.problemId) + '">' + ms("task_alt") + "Resolve</button>" : '<span class="w-vs">' + esc(p.clinicalStatus) + "</span>") +
+        "</li>";
     }).join("");
+
+    var opts = VERIFICATION.map(function (v) { return '<option value="' + esc(v[0]) + '">' + esc(v[1]) + "</option>"; }).join("");
     return '<div class="w-card"><div class="w-card-h">' + ms("clinical_notes") + "<h3>Problem list</h3></div>" +
-      (rows ? "<ul class=\"w-problems\">" + rows + "</ul>" : '<p class="w-empty">No problems recorded. A diagnosis is entered by the treating doctor.</p>') +
-      "</div>";
+      (rows ? "<ul class=\"w-problems\">" + rows + "</ul>" : '<p class="w-empty">No problems recorded.</p>') +
+      /* The entry form is always rendered. Hiding it from a nurse would be the screen deciding who
+       * may assert a diagnosis, and it is not the screen's decision: the capability is checked on the
+       * server, which refuses and says why. A UI that hides a refusal teaches people the feature does
+       * not exist. */
+      '<div class="w-sub"><h4>' + ms("add") + "Add a problem</h4>" +
+      '<div class="w-prob"><input id="wProbText" type="text" autocomplete="off" placeholder="Diagnosis, in words">' +
+      '<input id="wProbCode" type="text" autocomplete="off" placeholder="ICD code (optional)">' +
+      '<select id="wProbVs">' + opts + "</select>" +
+      '<button class="w-btn" data-w-act="problem">' + ms("save") + "Record</button></div>" +
+      // Said plainly, because a code box beside a text box invites typing one in and hoping.
+      '<p class="w-hint">' + ms("info") + "Left blank, the code is not guessed at: the diagnosis is recorded as text, and says so. Nothing here decides what the words mean.</p>" +
+      "</div></div>";
   }
 
   var VITALS = [
@@ -580,6 +606,50 @@
       })
       .catch(function () { st.busy = false; st.err = "Could not load the round."; paint(); });
   }
+  /* Asserting a diagnosis. The screen carries the words and, if the clinician has one, the code; it
+   * never derives a code from the words. An uncoded diagnosis is recorded as text and the server says
+   * so - which is true, and is the one thing a receiving system can act on honestly. */
+  function addProblem() {
+    var s = st.sel; if (!s) return;
+    var text = val("wProbText"), code = val("wProbCode");
+    if (!text && !code) { st.err = "A diagnosis needs words, a code, or both."; paint(); return; }
+    st.busy = true; paint();
+    apiPost("/ward/problem", {
+      orgId: st.orgId,
+      problem: {
+        patientId: s.patientId, encounterId: s.encounterId,
+        display: text, code: code,
+        verificationStatus: val("wProbVs") || undefined,
+      },
+    })
+      .then(function (r) {
+        if (settle(r, r && r.written ? "Recorded as " + r.verificationStatus + "." : (r && r.skipped === "unchanged" ? "Already on the list, unchanged." : null))) {
+          ["wProbText", "wProbCode"].forEach(function (id) { var el = document.getElementById(id); if (el) el.value = ""; });
+          loadChart();
+        } else paint();
+      })
+      .catch(function () { st.busy = false; st.err = "Could not record the problem."; paint(); });
+  }
+  /* RESOLVING IS A NEW VERSION, NOT A DELETION. The same problem is re-asserted with a resolved
+   * clinical status, so "we thought it was this" stays answerable afterwards. */
+  function resolveProblem(id) {
+    var s = st.sel; if (!s || !id) return;
+    var p = null;
+    for (var i = 0; i < (st.problems || []).length; i++) if (st.problems[i].problemId === id) p = st.problems[i];
+    if (!p) { st.err = "That problem is no longer on the list. Reload the chart."; paint(); return; }
+    st.busy = true; paint();
+    apiPost("/ward/problem", {
+      orgId: st.orgId,
+      problem: {
+        patientId: s.patientId, encounterId: s.encounterId,
+        display: p.display, code: p.code, codeSystem: p.codeSystem,
+        verificationStatus: p.verificationStatus, clinicalStatus: "resolved",
+      },
+    })
+      .then(function (r) { if (settle(r, "Resolved. The problem stays on the record with its history.")) loadChart(); else paint(); })
+      .catch(function () { st.busy = false; st.err = "Could not resolve the problem."; paint(); });
+  }
+
   function loadQuality() {
     return apiGet("/ward/quality?orgId=" + encodeURIComponent(st.orgId))
       .then(function (r) { if (r && r.ok) st.quality = r; paint(); })
@@ -721,6 +791,8 @@
     if (cmd === "outbox") { loadOutbox(); return; }
     if (cmd === "cosigns") { loadCosigns(); return; }
     if (cmd === "quality") { loadQuality(); return; }
+    if (cmd === "problem") { addProblem(); return; }
+    if (cmd === "resolve") { resolveProblem(arg); return; }
     if (cmd === "downtime") { loadDowntime(); return; }
     if (cmd === "printpack") { try { G.print(); } catch (e) {} return; }
     if (cmd === "cosign") { cosign(arg); return; }

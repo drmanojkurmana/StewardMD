@@ -18,7 +18,7 @@ Updated: 2026-09-07 (PRs #887, #889, #890, #892, #894, #895, #897 pharmacy verif
 | 4 | Orders — investigations (Beaker/Radiant order entry) | 5 | 85 | ServiceRequest write path + UI, and order sets that apply through the ordinary ordering route. No priority or specimen-collection workflow. |
 | 5 | Prescribing (Willow Ambulatory) | 6 | 85 | #908. MedicationOrder, dose parsing, print, and transmission with a real outbox: queued/sent/acknowledged kept distinct, a failure that stays outstanding until a human deals with it, and a payload versioned to the order. No transport is implemented (a site plugs in its own), no formulary. |
 | 6 | Clinical decision support (Best Practice Advisories) | 7 | 88 | #910. Allergy + cross-reactivity + interactions + dose ceilings, fail-closed, Indian drug DB + FDA, override analytics per rule, and a real override RATE: firings are recorded per order and pack version, so the denominator comes from the record rather than from whoever reads the report. No BPA authoring. |
-| 7 | Problem list (Problem List) | 4 | 70 | #887. Coded/text, provisional default, versioned resolve, feeds the summary. Read-only on the ward screen; no entry UI. |
+| 7 | Problem list (Problem List) | 4 | 88 | #887 + #915. Coded/text, provisional default, versioned resolve, feeds the summary, and now entered and resolved from the ward chart: the full verification vocabulary is offered so nobody has to overstate confidence, and the code is never derived from the words. No terminology lookup in the UI. |
 | 8 | Inpatient admission / ward (ADT) | 7 | 90 | #889. Admit, ward list, ward vitals, discharge, **with a UI**. Transfer with a bed-collision refusal, and a bed board. No admission scheduling. |
 | 9 | eMAR / medication administration (Willow Inpatient) | 8 | 90 | #889 + #890. State machine, five rights, barcode scan, weight-based refusal, AI blocked, **UI**, **and a real schedule**. Plus medicines reconciliation on admission. No high-alert witness config. |
 | 10 | Nursing documentation (Flowsheets) | 5 | 95 | #895. Vitals, fluid balance with charted-hour gaps, SBAR shift handover with a read-back loop, care plans with measurable goals, and scored risk assessments whose bands carry actions. No wound charting, no observation charts beyond vitals. |
@@ -33,7 +33,7 @@ Updated: 2026-09-07 (PRs #887, #889, #890, #892, #894, #895, #897 pharmacy verif
 | 19 | Patient portal (MyChart) | 3 | 0 | Not built. |
 | 20 | Deployment / uptime / DR (on-prem, HA) | 3 | 55 | #912. Cloudflare edge + D1, live domain, a printable downtime pack the ward can hold during an outage, a restore rehearsal that runs in CI against the shipped schema, and a DR runbook. No scheduled backup, so RPO/RTO are undefined; no on-prem, no hot standby. |
 
-**Weighted total: 78.0%.**
+**Weighted total: 78.7%.**
 
 The total is the weight-times-percent sum of the table above, divided by 100. It is COMPUTED from
 these rows, not asserted: earlier revisions of this file carried an eyeballed number that had drifted
