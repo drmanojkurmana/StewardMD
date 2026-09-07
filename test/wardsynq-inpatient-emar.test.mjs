@@ -102,6 +102,10 @@ const ORG = "org-wsq";
 const sanitize = (x) => String(x == null ? "" : x).replace(/[^A-Za-z0-9_-]/g, "-").slice(0, 80);
 const idFor = (email) => "cfa:" + createHash("sha256").update(email.toLowerCase()).digest("hex").slice(0, 24);
 const DOCTOR = "doctor@example.test", NURSE = "nurse@example.test", PHARM = "pharmacy@example.test", LABTECH = "lab@example.test";
+/* A doctor with no verified registration - a PIN session, a locum whose registration is not on file.
+ * Holds emr.treat, so writes a note perfectly well, and cannot sign one. This is the ordinary case
+ * co-signature exists for, and the harness has to contain one or the whole flow is untestable. */
+const LOCUM = "locum@example.test";
 const ENV = {
   QUEUE_ENABLED: "1",
   QUEUE_TOKEN_SECRET: "test-secret-that-is-long-enough-for-hmac",
@@ -120,13 +124,23 @@ const ORDER_SETS = [{
   ],
 }];
 
+/* The hospital's own note templates. ORG content, exactly as the order sets are: headings, never
+ * content. */
+const NOTE_TEMPLATES = [{
+  id: "ward-round", name: "Ward round note", version: "2", noteType: "progress",
+  sections: [
+    { key: "impression", title: "Impression", required: true },
+    { key: "plan", title: "Plan", required: true },
+  ],
+}];
+
 function seedHospital(mode = "wardsynq") {
   docs.clear(); clock = 1;
   RECORD = new MemoryRepository();
   // ownerUid is nobody on this ward: an owner resolves to `admin` and holds every capability, which
   // would make every separation assertion below vacuous.
-  docs.set(`q_orgs/${ORG}`, { fields: { id: ORG, code: "SMD-WARD01", name: "WSQ Ward Hospital", kind: "clinic", mode, connectTenantId: TENANT_ROW.id, ownerUid: "cfa:nobody", createdAt: 1, wardsynq: { orderSets: ORDER_SETS } }, updateTime: "t1" });
-  for (const [email, role] of [[DOCTOR, "doctor"], [NURSE, "nurse"], [PHARM, "pharmacy"], [LABTECH, "lab"]]) {
+  docs.set(`q_orgs/${ORG}`, { fields: { id: ORG, code: "SMD-WARD01", name: "WSQ Ward Hospital", kind: "clinic", mode, connectTenantId: TENANT_ROW.id, ownerUid: "cfa:nobody", createdAt: 1, wardsynq: { orderSets: ORDER_SETS, noteTemplates: NOTE_TEMPLATES } }, updateTime: "t1" });
+  for (const [email, role] of [[DOCTOR, "doctor"], [NURSE, "nurse"], [PHARM, "pharmacy"], [LABTECH, "lab"], [LOCUM, "doctor"]]) {
     docs.set(`q_members/${sanitize(ORG)}__${sanitize(idFor(email))}`, { fields: { orgId: ORG, identity: idFor(email), role, active: true }, updateTime: "t1" });
   }
 }
@@ -2629,4 +2643,131 @@ test("sending is prescribing's business, and nothing unsendable is sent", async 
   const bogus = await as(DOCTOR, "/ward/transmit", "POST", { orgId: ORG, orderId: ord.orderId, channel: "carrier-pigeon" });
   assert.equal(bogus.__status, 400);
   assert.equal(bogus.error, "unknown_channel");
+});
+
+/* ---- the note that needs a second name on it --------------------------------------------------- */
+
+async function noteBy(email, adm, sections, at) {
+  return as(email, "/ward/note", "POST", {
+    orgId: ORG, templateId: "ward-round", encounterId: adm.encounterId,
+    sections: sections || { impression: "Improving. Afebrile overnight.", plan: "Continue oral antibiotics." },
+    at: at || "2026-09-07T11:00:00.000Z",
+  });
+}
+
+test("A NOTE THE SYSTEM CANNOT VERIFY IS ROUTED, not left lying unsigned", async () => {
+  seedHospital();
+  const { adm } = await admittedPatientOnDrug();
+
+  // The locum writes the note perfectly well. emr.treat is a capability; a registration is not.
+  const n = await noteBy(LOCUM, adm);
+  assert.equal(n.__status, 200, JSON.stringify(n));
+  assert.equal(n.signed, false);
+  const stored = await RECORD.latest(TENANT_ROW.id, "ClinicalNote", n.noteId);
+  assert.equal(stored.authorId, idFor(LOCUM));
+
+  /* They cannot sign it, and they are TOLD WHY. The store would refuse the write anyway; this is
+   * the difference between a clinician reading "you hold no verified registration, submit it for a
+   * colleague" and being handed a governance code. */
+  const cannot = await as(LOCUM, "/ward/note-sign", "POST", { orgId: ORG, noteId: n.noteId });
+  assert.equal(cannot.__status, 403);
+  assert.equal(cannot.error, "no_credential");
+  assert.match(cannot.detail, /verified medical registration/);
+
+  // Nobody countersigns work its author has not declared finished.
+  const early = await as(DOCTOR, "/ward/note-sign", "POST", { orgId: ORG, noteId: n.noteId });
+  assert.equal(early.__status, 403);
+  assert.equal(early.error, "not_submitted");
+
+  // Nor does anyone else declare it finished on the author's behalf.
+  const notMine = await as(DOCTOR, "/ward/note-submit", "POST", { orgId: ORG, noteId: n.noteId });
+  assert.equal(notMine.__status, 403);
+  assert.equal(notMine.error, "not_the_author");
+
+  /* The author's own unfinished note comes back on the same call. Both halves of the loop are one
+   * question - what is between me and a signed record - and a screen that could route a note onward
+   * but not start it moving would leave the commonest case with nowhere to click. */
+  const mine = await as(LOCUM, `/ward/cosign-queue?orgId=${ORG}`);
+  assert.equal(mine.unsubmitted, 1);
+  assert.equal(mine.mine[0].noteId, n.noteId);
+  assert.equal((await as(DOCTOR, `/ward/cosign-queue?orgId=${ORG}`)).unsubmitted, 0, "somebody else's draft is not mine to finish");
+
+  const sub = await as(LOCUM, "/ward/note-submit", "POST", { orgId: ORG, noteId: n.noteId });
+  assert.equal(sub.__status, 200, JSON.stringify(sub));
+  assert.equal(sub.state, "awaiting");
+  assert.match(sub.note, /unsigned until a clinician with a verified registration signs it/);
+
+  // THE WORKLIST. It is the routing: a note nobody can see is a note nobody signs.
+  const q = await as(DOCTOR, `/ward/cosign-queue?orgId=${ORG}`);
+  assert.equal(q.__status, 200, JSON.stringify(q));
+  assert.equal(q.waiting, 1);
+  assert.equal(q.notes[0].noteId, n.noteId);
+  assert.equal(q.notes[0].authorId, idFor(LOCUM));
+  assert.equal(q.canSign, true, "the registered doctor can clear this list");
+  // And the locum is told plainly that they cannot, rather than shown a worklist they cannot act on.
+  assert.equal((await as(LOCUM, `/ward/cosign-queue?orgId=${ORG}`)).canSign, false);
+
+  const signed = await as(DOCTOR, "/ward/note-sign", "POST", { orgId: ORG, noteId: n.noteId });
+  assert.equal(signed.__status, 200, JSON.stringify(signed));
+  assert.equal(signed.state, "cosigned");
+  assert.equal(signed.coSigned, true);
+
+  /* BOTH NAMES STAY ON THE RECORD. "Who wrote this" and "who is accountable for it" are different
+   * questions, and a supervisor's signature must not quietly answer the first one. */
+  const after = await RECORD.latest(TENANT_ROW.id, "ClinicalNote", n.noteId);
+  assert.equal(after.authorId, idFor(LOCUM), "the locum still wrote it");
+  assert.equal(after.signedBy, idFor(DOCTOR));
+  assert.ok(after.signedAt);
+  // The prior unsigned versions survive: the note was not rewritten, it was appended to.
+  const history = await RECORD.history(TENANT_ROW.id, "ClinicalNote", n.noteId);
+  assert.equal(history.length, 3, "written, submitted, signed");
+  assert.deepEqual(history.map((h) => !!h.signedBy), [false, false, true]);
+
+  assert.equal((await as(DOCTOR, `/ward/cosign-queue?orgId=${ORG}`)).waiting, 0);
+});
+
+test("a registered doctor signs their own note, and a signed note is never re-signed", async () => {
+  seedHospital();
+  const { adm } = await admittedPatientOnDrug();
+  const n = await noteBy(DOCTOR, adm);
+
+  // No submission step: the author with a registration is already the one saying it is finished.
+  const signed = await as(DOCTOR, "/ward/note-sign", "POST", { orgId: ORG, noteId: n.noteId });
+  assert.equal(signed.__status, 200, JSON.stringify(signed));
+  assert.equal(signed.state, "signed");
+  assert.equal(signed.coSigned, false, "signing your own note is not a co-signature");
+  assert.equal((await as(DOCTOR, `/ward/cosign-queue?orgId=${ORG}`)).waiting, 0, "and it never entered the queue");
+
+  const again = await as(LOCUM, "/ward/note-sign", "POST", { orgId: ORG, noteId: n.noteId });
+  assert.equal(again.__status, 409);
+  assert.equal(again.error, "already_signed");
+
+  // A signed note is closed to further saves: a correction is a new note, exactly as elsewhere. The
+  // same template at the same time is the same note id, so this is a rewrite attempt, not a new one.
+  const rewrite = await noteBy(DOCTOR, adm, { impression: "Actually deteriorating.", plan: "Escalate." });
+  assert.equal(rewrite.__status, 409);
+  assert.equal(rewrite.error, "already_signed");
+});
+
+test("signing is not a nurse's act, and an unfinished note is signed as unfinished rather than refused", async () => {
+  seedHospital();
+  const { adm } = await admittedPatientOnDrug();
+
+  // Only a section the template asks for, leaving a required one blank.
+  const partial = await noteBy(LOCUM, adm, { impression: "Reviewed." });
+  assert.equal(partial.incomplete, true);
+  assert.deepEqual(partial.missing.map((m) => m.key), ["plan"]);
+
+  const nurse = await as(NURSE, "/ward/note-sign", "POST", { orgId: ORG, noteId: partial.noteId });
+  assert.equal(nurse.__status, 403, "signing a clinical document needs emr.treat");
+
+  await as(LOCUM, "/ward/note-submit", "POST", { orgId: ORG, noteId: partial.noteId });
+  const q = await as(DOCTOR, `/ward/cosign-queue?orgId=${ORG}`);
+  /* The gap travels WITH the note to the person being asked to put their name to it. A signature
+   * does not fill in a missing plan, and the signer should know before they sign, not after. */
+  assert.deepEqual(q.notes[0].incompleteSections, ["plan"]);
+
+  const signed = await as(DOCTOR, "/ward/note-sign", "POST", { orgId: ORG, noteId: partial.noteId });
+  assert.equal(signed.__status, 200, JSON.stringify(signed));
+  assert.deepEqual(signed.incompleteSections, ["plan"], "and it is still recorded as incomplete after signing");
 });

@@ -75,6 +75,7 @@ import { listTemplates, writeTemplatedNote } from "../../_wardsynq/note-template
  * assessment is a different thing entirely. Two names that read the same for two different
  * clinical acts is how the wrong one gets called. */
 import { queueTransmission, recordOutcome, resolveTransmission, listTransmissions } from "../../_wardsynq/prescription-transmit.js";
+import { submitNote, signNote, listAwaitingCoSign } from "../../_wardsynq/note-cosign.js";
 import { listTools as listRiskTools, recordAssessment as recordRiskAssessment, completeAction as completeRiskAction, listAssessments as listRiskAssessments } from "../../_wardsynq/risk-assessment.js";
 import { recordAllergiesFromAssessment } from "../../_wardsynq/migrate-allergy.js";
 
@@ -496,6 +497,9 @@ export async function onRequest(context) {
         "care-plan": CAPS.EMR_VITALS, progress: CAPS.EMR_VITALS, plan: CAPS.EMR_VIEW,
         // Writing a clinical note from a template is authoring a clinical document: emr.treat.
         templates: CAPS.EMR_VIEW, "note": CAPS.EMR_TREAT,
+        /* Signing and co-signing are the same act and the same capability: what separates them is
+         * the actor's registration, which the store checks, not a capability a hospital can grant. */
+        "note-submit": CAPS.EMR_TREAT, "note-sign": CAPS.EMR_TREAT, "cosign-queue": CAPS.EMR_VIEW,
         // Risk assessment is nursing work, like the rest of the flowsheet.
         "risk-tools": CAPS.EMR_VIEW, assess: CAPS.EMR_VITALS, "risk-action": CAPS.EMR_VITALS, risks: CAPS.EMR_VIEW,
         /* Sending a prescription is part of prescribing, so queueing is emr.treat. Recording what
@@ -623,6 +627,18 @@ export async function onRequest(context) {
       if (sub === "note" && method === "POST") {
         // Templates are ORG content for the same reason order sets are.
         const r = await writeTemplatedNote(request, env, { ...deps, templates: (wsqCfg && wsqCfg.noteTemplates) || [], templateId: body.templateId, encounterId: body.encounterId, sections: body.sections, at: body.at, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "note-submit" && method === "POST") {
+        const r = await submitNote(request, env, { ...deps, noteId: body.noteId, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "note-sign" && method === "POST") {
+        const r = await signNote(request, env, { ...deps, noteId: body.noteId, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "cosign-queue" && method === "GET") {
+        const r = await listAwaitingCoSign(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "" });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "care-plan" && method === "POST") {
