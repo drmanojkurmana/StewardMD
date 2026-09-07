@@ -101,6 +101,10 @@ const RESOURCE_TYPES = Object.freeze([
    * overbooked: two patients do not fit inside one CT scanner, and a diary that says they do is
    * worse than no diary because the ward acts on it. */
   "ResourceBooking",
+  /* A change in an infusion's rate. The VOLUME is integrated from these and never stored, because a
+   * stored total stops being true the moment the pump changes - and an infusion that stops being
+   * charted is uncharted, not stopped. */
+  "InfusionRate",
   /* A record that an order set was applied, and exactly what landed and what did not. NOT the orders
    * themselves - those go through the ordinary path and are ordinary orders. This is what makes a
    * partial application visible, and what finds the patients a bad set touched. */

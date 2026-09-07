@@ -2725,6 +2725,77 @@ test("sending is prescribing's business, and nothing unsendable is sent", async 
   assert.equal(bogus.error, "unknown_channel");
 });
 
+/* ---- the drip ------------------------------------------------------------------------------------ */
+
+test("AN INFUSION'S VOLUME IS COMPUTED, and it says how much of it is assumption", async () => {
+  seedHospital();
+  const { adm } = await admittedPatientOnDrug();
+  const ord = await as(DOCTOR, "/ward/medication-order", "POST", {
+    orgId: ORG, order: { patientId: adm.patientId, encounterId: adm.encounterId, drug: "Noradrenaline", dose: { value: 4, unit: "mg" }, route: "iv", frequency: "continuous" },
+  });
+  const chart = (body) => as(NURSE, "/ward/infusion", "POST", { orgId: ORG, orderId: ord.orderId, ...body });
+
+  const started = await chart({ event: "started", ratePerHour: 10, at: "2026-09-07T00:00:00.000Z" });
+  assert.equal(started.__status, 200, JSON.stringify(started));
+  /* Said on every write. This records what a human says the pump is doing; there is no device
+   * integration here and nothing should ever read as having set a rate. */
+  assert.match(started.note, /Nothing here has set a rate or controls a device/);
+
+  await chart({ event: "rate-changed", ratePerHour: 20, at: "2026-09-07T01:00:00.000Z" });
+  const paused = await chart({ event: "paused", at: "2026-09-07T02:00:00.000Z" });
+  // A pause is its own event and its rate is forced to zero: a paused drip charted at 20 would keep
+  // counting volume into a patient who is not receiving any.
+  assert.equal(paused.ratePerHour, 0);
+
+  const list = await as(NURSE, `/ward/infusions?orgId=${ORG}&patientId=${adm.patientId}&to=2026-09-07T04:00:00.000Z`);
+  assert.equal(list.__status, 200, JSON.stringify(list));
+  assert.equal(list.infusions.length, 1);
+  const inf = list.infusions[0];
+  assert.equal(inf.volume.ml, 30, "10 for an hour, 20 for an hour, then paused");
+  assert.equal(inf.running, true, "paused is not stopped");
+  assert.equal(inf.entries, 3);
+  assert.match(list.note, /uncharted, not stopped/);
+
+  /* THE CAVEAT. The total assumes the pump ran at the last charted rate for every minute since - and
+   * if it occluded at 02:00 and nobody noticed, the fluid balance built on it is wrong. */
+  assert.match(inf.volume.assumption, /assumes the pump has run/);
+});
+
+test("an infusion is never stopped by silence, and a stopped one is not restarted by a rate change", async () => {
+  seedHospital();
+  const { adm } = await admittedPatientOnDrug();
+  const ord = await as(DOCTOR, "/ward/medication-order", "POST", {
+    orgId: ORG, order: { patientId: adm.patientId, encounterId: adm.encounterId, drug: "Insulin infusion", dose: { value: 50, unit: "unit" }, route: "iv", frequency: "continuous" },
+  });
+  const chart = (body) => as(NURSE, "/ward/infusion", "POST", { orgId: ORG, orderId: ord.orderId, ...body });
+
+  await chart({ event: "started", ratePerHour: 4, at: "2026-09-07T00:00:00.000Z" });
+  // A long silence is FLAGGED rather than treated as a stop: those mean opposite things about the
+  // patient - one is no longer receiving a drug, the other is receiving it with nobody looking.
+  const late = await as(NURSE, `/ward/infusions?orgId=${ORG}&patientId=${adm.patientId}&to=2026-09-07T18:00:00.000Z`);
+  assert.equal(late.infusions[0].running, true);
+  assert.equal(late.infusions[0].volume.stale, true);
+  assert.equal(late.stale, 1);
+  assert.match(late.infusions[0].volume.staleDetail, /Check the pump/);
+
+  await chart({ event: "stopped", at: "2026-09-07T06:00:00.000Z" });
+  const stopped = await as(NURSE, `/ward/infusions?orgId=${ORG}&patientId=${adm.patientId}&to=2026-09-07T18:00:00.000Z`);
+  assert.equal(stopped.infusions[0].running, false);
+  assert.equal(stopped.infusions[0].volume.ml, 24, "six hours at 4, and nothing after the stop");
+
+  /* Restarting is a new prescription decision. Letting a rate entry quietly revive a stopped
+   * infusion would put a drug back up with nobody having decided to. */
+  const revive = await chart({ event: "rate-changed", ratePerHour: 6, at: "2026-09-07T07:00:00.000Z" });
+  assert.equal(revive.__status, 409);
+  assert.equal(revive.error, "infusion_stopped");
+  assert.match(revive.detail, /a new order, not a rate change/);
+
+  // A running infusion needs a rate: a drip charted as running at nothing cannot be accounted for.
+  assert.equal((await chart({ event: "started" })).error, "rate_required");
+  // And charting a pump is the bedside's act, not the pharmacy's.
+  assert.equal((await as(PHARM, "/ward/infusion", "POST", { orgId: ORG, orderId: ord.orderId, event: "started", ratePerHour: 4 })).__status, 403);
+});
+
 /* ---- ordering an investigation from the ward ----------------------------------------------------- */
 
 test("THE WARD CAN ORDER A TEST, and a STAT one is at the top of the list of whoever takes the blood", async () => {
