@@ -495,6 +495,37 @@ test("integration: a drug prescribed by BRAND is checked, not silently skipped",
     "paracetamol by brand must not be flagged for a penicillin allergy or a warfarin interaction");
 });
 
+/* 2026-09-07 cephalosporin audit. Two different causes produced the same silence for a
+ * penicillin-allergic patient: cefdinir and cefoxitin were simply absent from the class, while
+ * "Cefpodoxime Proxetil" and "Cefixime anhydrous" are SEPARATE pack generics from the bare molecule
+ * the seed names, so they resolved cleanly and belonged to no class at all. The drug database
+ * reports the ester form ("Cepodem" -> "Cefpodoxime Proxetil"), which is how it surfaced. */
+test("integration: every cephalosporin the pack knows trips cross-reactivity, including salt and ester forms", async () => {
+  const pack = await loadStewardMDRulePack();
+  const real = new SafetyEngine({ rulePack: pack });
+  const allergic = [AllergyIntolerance({ patientId: "p1", substance: "Penicillins", reaction: "rash" })];
+  const codes = (drug) => real.evaluate({ order: MedicationOrder({ patientId: "p1", drug, prescriberId: "dr-1" }), allergies: allergic })
+    .findings.filter((f) => f.code.startsWith("ALLERGY")).map((f) => f.code);
+
+  for (const drug of ["Cefpodoxime Proxetil", "Cefixime anhydrous", "Cefuroxime axetil", "Cefdinir",
+                      "Cefoxitin", "Ceftriaxone", "Cephalexin"]) {
+    assert.ok(codes(drug).includes("ALLERGY_CROSS_REACTIVITY"), `${drug} must warn a penicillin-allergic patient`);
+  }
+  // The boundary: drugs that are neither penicillins nor cephalosporins must stay silent.
+  for (const drug of ["Azithromycin", "Paracetamol", "Ciprofloxacin", "Doxycycline anhydrous", "Vancomycin"]) {
+    assert.deepEqual(codes(drug), [], `${drug} must not be flagged for a penicillin allergy`);
+  }
+
+  // The R1 side-chain subclass is a specific clinical property pharmacy curated. It may only ever
+  // gain a different PHYSICAL FORM of a molecule already in it, never a new molecule.
+  const r1 = [...(pack.allergyMembers.get("cephalosporins_r1_aminopenicillin_like") || [])];
+  const curated = ["cefalexin", "cephalexin", "cefadroxil", "cefaclor", "cefprozil"];
+  for (const m of r1) {
+    assert.ok(curated.some((c) => m === c || m.startsWith(c + " ") || m.startsWith(c + " (")),
+      `"${m}" is not a form of a curated R1 member - the R1 list must not grow new molecules`);
+  }
+});
+
 test("integration: a CLASS name must never resolve to one member of that class", async () => {
   const pack = await loadStewardMDRulePack();
   // Both brand maps carry class abbreviations as search keys ("nsaid" -> diclofenac). As a safety

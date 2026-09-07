@@ -6,7 +6,8 @@
   "sources": [
     "Beta-lactam cross-reactivity figures reflect the modern side-chain-based understanding rather than the historical 10 percent penicillin-to-cephalosporin figure, which originated from studies using cephalosporins contaminated with penicillin and is now regarded as a substantial overestimate.",
     "Cross-reactivity here is driven primarily by shared R1 side chains, not by the beta-lactam ring itself.",
-    "Every likelihood value below needs local verification against the site's own formulary and allergy service before sign-off."
+    "Every likelihood value below needs local verification against the site's own formulary and allergy service before sign-off.",
+    "2026-09-07, cephalosporin membership audit: the 10 cephalosporins added to `cephalosporins` on this date were not chosen from memory. Each is tagged `epc:cephalosporin_antibacterial` by data/interaction-rules.json itself (openFDA/RxNorm-derived), and each was absent from this list while resolving perfectly in the pack - so an order for one belonged to no allergy class and produced no cross-reactivity warning at all. Note cefotetan and cefoxitin are strictly cephamycins; they are tagged as cephalosporins by the source data and are handled as such for allergy purposes, which pharmacy should confirm. NOTHING was added to cephalosporins_r1_aminopenicillin_like: R1 side-chain similarity is a specific clinical property and that list stays exactly as pharmacy curated it."
   ],
 
   "allergyClasses": {
@@ -18,7 +19,9 @@
     "aminopenicillins": ["amoxicillin", "ampicillin", "co-amoxiclav", "amoxicillin-clavulanate"],
     "cephalosporins": [
       "cefalexin", "cephalexin", "cefadroxil", "cefaclor", "cefuroxime", "cefixime",
-      "ceftriaxone", "cefotaxime", "ceftazidime", "cefepime", "cefazolin", "cefprozil", "cefpodoxime"
+      "ceftriaxone", "cefotaxime", "ceftazidime", "cefepime", "cefazolin", "cefprozil", "cefpodoxime",
+      "cefdinir", "cefditoren", "cefotetan", "cefoxitin", "ceftibuten", "ceftizoxime",
+      "ceftaroline", "ceftobiprole", "ceftolozane", "cefiderocol"
     ],
     "cephalosporins_r1_aminopenicillin_like": ["cefalexin", "cephalexin", "cefadroxil", "cefaclor", "cefprozil"],
     "carbapenems": ["meropenem", "imipenem", "ertapenem", "doripenem", "imipenem-cilastatin"],

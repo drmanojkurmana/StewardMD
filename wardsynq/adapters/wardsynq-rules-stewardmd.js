@@ -333,6 +333,22 @@ function withSpellingVariants(allergyClasses, raw) {
         if (generics.has(v) && !seen.has(v)) { seen.add(v); list.push(v); }
       }
     }
+    /* And the SAME molecule carrying a pharmaceutical qualifier. The pack lists the plain molecule
+     * and its salt/ester/hydrate form as separate generics - "cefpodoxime" AND "cefpodoxime
+     * proxetil", "cefixime" AND "cefixime anhydrous", "flucloxacillin" AND "flucloxacillin sodium" -
+     * and the seed can only reasonably name one of each. Measured 2026-09-07: the drug database
+     * reports Cepodem as "Cefpodoxime Proxetil", which resolved cleanly and then belonged to NO
+     * allergy class, so a penicillin-allergic patient got no cross-reactivity warning for it.
+     *
+     * A generic that is a class member followed by further words is that member in a different
+     * physical form, not a different drug, so it inherits the membership. Mechanical, and bounded:
+     * it can only ever add a generic the pack already has, and only one that STARTS with a name
+     * pharmacy already put in this class. */
+    for (const m of [...seen]) {
+      for (const g of generics) {
+        if (!seen.has(g) && g.startsWith(m + " ")) { seen.add(g); list.push(g); }
+      }
+    }
     out[cls] = list;
   }
   return out;
