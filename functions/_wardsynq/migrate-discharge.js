@@ -35,6 +35,7 @@ import { resolveClinicalActor } from "./actor.js";
 import { RecordService } from "./service.js";
 import { AuthError, PermissionError } from "../_connect/permission.js";
 import { VITAL_CODES } from "./migrate-vitals.js";
+import { problemsForSummary } from "./migrate-problem.js";
 
 const str = (v) => (v == null ? "" : String(v).trim());
 const NOT_RECORDED = "Not recorded.";
@@ -87,7 +88,7 @@ function vitalsLine(observations) {
  * PURE. The discharge summary, assembled from the record.
  *
  * @param {{encounter, patient, observations, orders, administrations, allergies, serviceRequests,
- *   notes, dischargedAt}} r everything already read from the record
+ *   notes, problems, dischargedAt}} r everything already read from the record
  */
 function assembleDischargeSummary(r) {
   const enc = r.encounter || {};
@@ -141,11 +142,15 @@ function assembleDischargeSummary(r) {
   const clinical = [...(r.notes || [])]
     .filter((n) => n && n.noteType !== "discharge-summary" && n.sections)
     .sort((a, b) => String((b.meta && b.meta.recordedAt) || "").localeCompare(String((a.meta && a.meta.recordedAt) || "")))[0];
+  // Diagnoses come from the PROBLEM LIST, not from prose. Before the problem list existed this
+  // section could only ever be whatever a clinician happened to type into an assessment note.
+  const diagnoses = problemsForSummary(r.problems) || NOT_RECORDED;
   const assessment = clinical && str(clinical.sections.assessment) ? str(clinical.sections.assessment) : NOT_RECORDED;
   const plan = clinical && str(clinical.sections.plan) ? str(clinical.sections.plan) : NOT_RECORDED;
 
   return {
     admission,
+    diagnoses,
     allergies,
     vitals,
     investigations,
@@ -178,12 +183,12 @@ async function draftDischargeSummary(request, env, ctx) {
   const { svc, resolved, error } = await openService(request, env, ctx, "record:write");
   if (error) return { ...base, ...error, written: 0 };
 
-  let encounter, patient, observations, orders, administrations, allergies, serviceRequests, notes;
+  let encounter, patient, observations, orders, administrations, allergies, serviceRequests, notes, problems;
   try {
     encounter = await svc.get("Encounter", encounterId);
     if (!encounter) return { ...base, ok: false, status: 404, error: "encounter_not_found", encounterId };
     const patientId = str(ctx.patientId) || encounter.patientId;
-    [patient, observations, orders, administrations, allergies, serviceRequests, notes] = await Promise.all([
+    [patient, observations, orders, administrations, allergies, serviceRequests, notes, problems] = await Promise.all([
       svc.get("Patient", patientId).catch(() => null),
       svc.byPatient("Observation", patientId).catch(() => []),
       svc.byPatient("MedicationOrder", patientId).catch(() => []),
@@ -191,6 +196,7 @@ async function draftDischargeSummary(request, env, ctx) {
       svc.byPatient("AllergyIntolerance", patientId).catch(() => []),
       svc.byPatient("ServiceRequest", patientId).catch(() => []),
       svc.byPatient("ClinicalNote", patientId).catch(() => []),
+      svc.byPatient("Condition", patientId).catch(() => []),
     ]);
   } catch (e) {
     return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), written: 0 };
@@ -206,6 +212,9 @@ async function draftDischargeSummary(request, env, ctx) {
     allergies: allergies || [],
     serviceRequests: mine(serviceRequests),
     notes: mine(notes),
+    // The problem list is the PATIENT's, not this admission's: a chronic diagnosis carried in from
+    // before the stay belongs on the summary too.
+    problems: problems || [],
     dischargedAt: ctx.dischargedAt || encounter.periodEnd || null,
   });
 
