@@ -80,7 +80,7 @@ import { submitNote, signNote, listAwaitingCoSign } from "../../_wardsynq/note-c
 import { downtimePack } from "../../_wardsynq/downtime.js";
 import { qualityReport } from "../../_wardsynq/quality.js";
 import { collectSpecimen, specimenOutcome, collectionList } from "../../_wardsynq/specimen.js";
-import { adtForEncounter } from "../../_wardsynq/hl7v2.js";
+import { adtForEncounter, oruForReport } from "../../_wardsynq/hl7v2.js";
 import { requestAdmission, closeAdmissionRequest, admissionWaitingList } from "../../_wardsynq/admission-request.js";
 import { registryReport } from "../../_wardsynq/registry.js";
 import { listTools as listRiskTools, recordAssessment as recordRiskAssessment, completeAction as completeRiskAction, listAssessments as listRiskAssessments } from "../../_wardsynq/risk-assessment.js";
@@ -526,7 +526,7 @@ export async function onRequest(context) {
         collect: CAPS.EMR_VITALS, "specimen-outcome": CAPS.EMR_VITALS, collections: CAPS.EMR_VIEW,
         // ADT out. Reading a stay in another wire format is still reading a chart, so it needs the
         // authority to read one. It writes nothing and there is no inbound listener.
-        adt: CAPS.EMR_VIEW,
+        adt: CAPS.EMR_VIEW, oru: CAPS.EMR_VIEW,
         /* Putting somebody on the waiting list is the same administrative act as admitting them to a
          * bed - the front desk's work. It reserves nothing and admits nobody. */
         "request-admission": CAPS.QUEUE_ADD, "close-admission-request": CAPS.QUEUE_ADD, "waiting-list": CAPS.QUEUE_VIEW,
@@ -693,6 +693,10 @@ export async function onRequest(context) {
       }
       if (sub === "waiting-list" && method === "GET") {
         const r = await admissionWaitingList(request, env, { ...deps, specialty: url.searchParams.get("specialty") || "", includeClosed: url.searchParams.get("includeClosed") === "1" });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "oru" && method === "GET") {
+        const r = await oruForReport(request, env, { ...deps, reportId: url.searchParams.get("reportId") || "", sendingFacility: (wOrg && wOrg.code) || "" });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "adt" && method === "GET") {
