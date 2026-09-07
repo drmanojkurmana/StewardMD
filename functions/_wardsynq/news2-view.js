@@ -32,6 +32,7 @@ import { resolveClinicalActor } from "./actor.js";
 import { RecordService } from "./service.js";
 import { AuthError, PermissionError } from "../_connect/permission.js";
 import { news2, ESCALATION } from "../../wardsynq/wardsynq-deterioration.js";
+import { pewsFromObservations } from "../../wardsynq/wardsynq-pews.js";
 
 const str = (v) => (v == null ? "" : String(v).trim());
 
@@ -81,12 +82,19 @@ async function news2ForPatient(request, env, ctx) {
   // potassium coded like an observation is how a parameter gets matched to the wrong number.
   const vitals = (observations || []).filter((o) => o && o.category === "vital-signs");
 
-  let score;
+  const now = str(ctx.now) || new Date().toISOString();
+  let score, tool = "NEWS2";
   try {
-    score = news2({
-      observations: vitals, patient, scale: scaleFrom(ctx.scale),
-      now: str(ctx.now) || new Date().toISOString(),
-    });
+    score = news2({ observations: vitals, patient, scale: scaleFrom(ctx.scale), now });
+    /* NEWS2 REFUSES CHILDREN, AND A REFUSAL WITH NOTHING BEHIND IT LEAVES THEM LESS PROTECTED than
+     * before - it removes even the crude signal they were getting. wardsynq-pews.js exists for
+     * exactly this and was, like NEWS2, reachable by nobody. A child's normal is a curve, not a
+     * number: 150 is unremarkable at two months and peri-arrest at twelve years, which is why
+     * applying the adult chart to them is not slightly wrong but wrong in the reassuring direction. */
+    if (!score.scorable && score.code === "NOT_ADULT" && patient) {
+      const paed = pewsFromObservations(vitals, patient, { now });
+      if (paed) { score = paed; tool = "PEWS"; }
+    }
   } catch (e) {
     // A scorer that throws must not take the ward screen down with it.
     return { ...base, ok: false, status: 502, error: "score_failed", detail: str(e && e.message), score: null };
@@ -100,6 +108,13 @@ async function news2ForPatient(request, env, ctx) {
 
   return {
     ...base, ok: true, patientId,
+    /* WHICH TOOL SCORED THIS, always. A PEWS total and a NEWS2 total are different numbers on
+     * different scales, and a reader who assumed the wrong one would misread both. */
+    tool,
+    ...(tool === "PEWS" ? {
+      toolNote: "NEWS2 is not validated below 16 years, so this is PEWS. Its age bands are UNAPPROVED "
+        + "seed content and vary between every unit that uses one - read the total against your own chart.",
+    } : {}),
     score,
     scale: scaleFrom(ctx.scale),
     /* Said every time, and not only when a score comes out: Scale 2 not being asked for is exactly

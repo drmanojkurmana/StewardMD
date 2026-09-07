@@ -2784,6 +2784,26 @@ test("AN INCOMPLETE NEWS2 IS NEVER REASSURING, however low the partial total", a
   await as(LABTECH, "/ward/release-result", "POST", { orgId: ORG, serviceRequestId: sr, tests: [{ test: "Potassium", value: 7.4, unit: "mmol/L" }] });
   const after = await as(NURSE, `/ward/news2?orgId=${ORG}&patientId=${adm.patientId}`);
   assert.equal(after.score.total, scored.score.total, "the potassium changed nothing");
+  assert.equal(after.tool, "NEWS2", "and the tool is always named");
+});
+
+test("A CHILD GETS PEWS, because a refusal with nothing behind it protects them less", async () => {
+  seedHospital();
+  const reg = await as(DOCTOR, "/patient/register", "POST", { orgId: ORG, name: "Child Testcase", mobile: "9876500055", gender: "male", ageYears: 4 });
+  const adm = await as(DOCTOR, "/ward/admit", "POST", { orgId: ORG, mrn: reg.mrn, ward: "Paediatrics", bed: "3", admittedAt: "2026-09-07T08:00:00.000Z" });
+  await as(NURSE, "/ward/vitals", "POST", {
+    orgId: ORG, encounterId: adm.encounterId, patientId: adm.patientId,
+    vitals: { rr: "24", spo2: "98", pulse: "110", temp: "98.6", tempUnit: "F", sbp: "95", o2: false, acvpu: "A" },
+  });
+
+  const ews = await as(NURSE, `/ward/news2?orgId=${ORG}&patientId=${adm.patientId}`);
+  assert.equal(ews.__status, 200, JSON.stringify(ews));
+  /* NEWS2 is not validated below 16 and refuses. Leaving it there would remove even the crude signal
+   * a child was getting - so PEWS answers instead, and the response NAMES which tool scored it: a
+   * PEWS total and a NEWS2 total are different numbers on different scales. */
+  assert.equal(ews.tool, "PEWS");
+  assert.match(ews.toolNote, /not validated below 16 years/);
+  assert.match(ews.toolNote, /UNAPPROVED/, "and its bands are nobody's approved content yet");
 });
 
 /* ---- the summary as a document ------------------------------------------------------------------- */

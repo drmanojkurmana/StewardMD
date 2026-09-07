@@ -21,7 +21,7 @@ Updated: 2026-09-07 (PRs #887, #889, #890, #892, #894, #895, #897 pharmacy verif
 | 7 | Problem list (Problem List) | 4 | 98 | #887 + #915 + #930. Coded/text, provisional default, versioned resolve, feeds the summary, and now entered and resolved from the ward chart: the full verification vocabulary is offered so nobody has to overstate confidence, and the code is never derived from the words. ICD search offers candidates and selects none: a person presses one, and until they do the diagnosis is text. |
 | 8 | Inpatient admission / ward (ADT) | 7 | 100 | #889 + #922 + #936. Admit, ward list, ward vitals, discharge, **with a UI**. Transfer with a bed-collision refusal, a bed board, and a waiting list that reserves no bed and admits nobody automatically, and NEWS2 from the ward's own observations - incomplete is never reassuring, Scale 2 is never inferred, and the escalation policy says when it is unapproved. |
 | 9 | eMAR / medication administration (Willow Inpatient) | 8 | 99 | #889 + #890 + #917 + #929. State machine, five rights, barcode scan, weight-based refusal, AI blocked, **UI**, **a real schedule**, medicines reconciliation, and the second-nurse witness end to end: the high-alert list is the hospital's own config, the refusal is proven through the real route, and the bedside can now name the witness. Infusions chart rate changes and integrate the volume, saying on every total how much of it assumes the pump kept running. No device integration - nothing here sets a rate. |
-| 10 | Nursing documentation (Flowsheets) | 5 | 100 | #895 + #907 + #925 + #936. Vitals, fluid balance with charted-hour gaps, SBAR shift handover with a read-back loop, care plans with measurable goals, and scored risk assessments whose bands carry actions, and wound charting where a pressure ulcer is never reverse-staged and its origin is set once. Supplemental oxygen and ACVPU are recordable at last, so an early warning score can complete. No wound images. |
+| 10 | Nursing documentation (Flowsheets) | 5 | 100 | #895 + #907 + #925 + #936. Vitals, fluid balance with charted-hour gaps, SBAR shift handover with a read-back loop, care plans with measurable goals, and scored risk assessments whose bands carry actions, and wound charting where a pressure ulcer is never reverse-staged and its origin is set once. Supplemental oxygen and ACVPU are recordable at last, so an early warning score can complete - and a child gets PEWS rather than a refusal. No wound images. |
 | 11 | Discharge + summary (Discharge Navigator) | 4 | 90 | #892. Assembler, per-section clinician correction with recorded provenance, immutable signed version, outstanding-items review, A4 print, and the home-medicine reconciliation. Not device-proven. |
 | 12 | Results — lab / rad (Beaker, Radiant) | 6 | 99 | #894 + #900 + #911 + #919 + #933. Native resulting by a `lab` role scoped to laboratory Observations, corrections that keep the prior value, a closed critical-value loop, delta checks against the hospital's own limits (advisory, never withholding), autoverification that fails closed, and radiology reporting where a preliminary reading survives the final one and a changed impression is flagged as a discrepancy. No images (DICOM/PACS excluded). |
 | 13 | Pharmacy verification + inventory (Willow) | 5 | 88 | #897 + #914 + #931. Verification and dispensing, both as the pharmacy's OWN authority with a narrow grant: reads what a check needs, writes only its verification and its supply record. A dispense is issued against an order version, refused when the verified version has been superseded, and never touches a MedicationAdministration. Batch and expiry are recorded from the box and expired stock is refused - the only non-prescription block in the file. No inventory (excluded by instruction): no stock levels, no reorder, no locations. |
@@ -61,6 +61,28 @@ missing order version into "v0" (#908), a configured-but-empty delta rule into a
 - **Discharge workstation** (#892) — the assembler was finished and unreachable. Per-section
   clinician correction with recorded provenance (`editedSections`), an immutable signed version, the
   outstanding-items review before sign-off, and an A4 print artifact.
+
+## Finished code nothing calls - the remaining four
+
+Six were found and wired this session (buildGrid #927, infusionVolume #929, the override report #935,
+the note templates #932, NEWS2 #936, PEWS #937). Four are still unreachable from any route, and each
+is a decision rather than an oversight:
+
+- **`wardsynq-readlog.js`** - the most significant. `vault/modules/WardSynQ.md` records HAZ-FLUID-01 as
+  PARTIAL *because* "nothing records that anyone read it... Closing that needs a view log, which does
+  not exist". IT DOES EXIST, unwired. Wiring it means logging every clinical READ, which is a
+  cross-cutting PHI and retention decision (what is kept, for how long, who may query it) that the
+  owner should make rather than a session.
+- **`wardsynq-lineage.js`** - click a derived value and see the raw observations behind it. Partly
+  redundant now: `news2()` already returns per-parameter `sources` with the observation id, time and
+  code, and #935's override report carries its own denominator. Worth wiring if a UI ever needs one
+  tracing surface across all derived values.
+- **`wardsynq-quality.js`** - a regulator-grade measure engine. `functions/_wardsynq/quality.js`
+  (#913) covers the measures WardSynQ can honestly compute today; this is the larger engine and
+  duplicating its scope without a regulator's specification would be inventing the specification.
+- **`wardsynq-temporal.js`** - bi-temporal queries ("what did the team believe at 15:00 yesterday").
+  The record is already bi-temporal via `recordedAt`/`effectiveAt` and `history()`; this is the query
+  layer, and nothing yet asks the question.
 
 ## Needs the owner, not more code
 1. **Push `wardsynq-ci-sqlite`.** A one-line CI change, committed on that local branch and NOT
