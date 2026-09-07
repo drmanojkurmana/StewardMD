@@ -40,7 +40,7 @@
 
   /* -------------------------------------------------- the data model shape */
   var DEFAULT_STATE = {
-    patient: { name: "", age: null, sex: "", weightKg: null, heightCm: null, complaints: "", diagnosis: "", hospital: "", bed: "", icuDay: null, status: "", mrn: "", doctor: "", dept: "", allergies: "", codeStatus: "" },
+    patient: { name: "", age: null, sex: "", weightKg: null, heightCm: null, complaints: "", diagnosis: "", hospital: "", bed: "", icuDay: null, status: "", mrn: "", doctor: "", dept: "", allergies: "", codeStatus: "", pastHistory: "" },
     vitals: [],                 // [{ ts, hr, sbp, dbp, map, rr, spo2, temp, uop, lactate, cvp, etco2, gcs }]
     labs: { recent: {}, trends: [] },  // recent: { na,k,cl,hco3,ca,mg,po4,glu,creat,alb,wbc,hb,plt,inr,ferritin,trig,fibrinogen,... }
     abg: {},                    // { ts, ph, paco2, pao2, hco3, fio2, lactate, be }
@@ -2604,6 +2604,7 @@
     out.push("STEWARDMD — DAILY ICU SUMMARY");
     out.push((p.name || "ICU patient") + (p.age != null ? ", " + p.age + "y" : "") + (p.sex ? " " + p.sex : "") + (p.bed ? " · Bed " + p.bed : "") + (p.icuDay != null ? " · ICU day " + p.icuDay : ""));
     if (p.diagnosis) out.push("Diagnosis: " + p.diagnosis);
+    if (p.pastHistory) out.push("Past history: " + p.pastHistory);
     var finds = s.findings || [];
     if (finds.length) out.push("CLINICAL FINDINGS: " + finds.map(function (c) { return findChipLabel(c); }).join("; "));
     out.push("");
@@ -2657,6 +2658,7 @@
     // BACKGROUND — complaints, structured findings, active infusions.
     var bg = [];
     if (p.complaints) bg.push(String(p.complaints));
+    if (p.pastHistory) bg.push("Past history: " + String(p.pastHistory));
     if (finds.length) bg.push("Findings: " + finds.slice(0, 8).map(function (c) { return findChipLabel(c); }).join(", "));
     if (infusions.length) bg.push("On " + infusions.map(function (i) { return i.drug; }).join(", "));
     // ASSESSMENT — current haemodynamics, ABG, key labs, trajectory.
@@ -5718,7 +5720,9 @@
       { k: "icuDay", l: "ICU day", t: "number" }, { k: "hospital", l: "Hospital", t: "text" },
       { k: "allergies", l: "Allergies / ADR", t: "text", wide: true, ph: "e.g. Penicillin (rash); or Nil known" },
       { k: "codeStatus", l: "Resuscitation status", t: "select", opts: ["", "Full code", "DNR / DNAR", "DNI", "Comfort care only"] },
-      { k: "complaints", l: "Presenting complaints", t: "textarea", wide: true }, { k: "diagnosis", l: "Working diagnosis", t: "text", wide: true }, { k: "status", l: "Current status", t: "text", wide: true } ] },
+      { k: "complaints", l: "Presenting complaints", t: "textarea", wide: true },
+      { k: "pastHistory", l: "Past history / comorbidities", t: "textarea", wide: true },
+      { k: "diagnosis", l: "Working diagnosis", t: "text", wide: true }, { k: "status", l: "Current status", t: "text", wide: true } ] },
     monitor: { title: "Vitals (ICU monitor)", ingest: ingestMonitor, fields: [
       { k: "hr", l: "Heart rate", t: "number" }, { k: "sbp", l: "Systolic BP", t: "number" }, { k: "dbp", l: "Diastolic BP", t: "number" }, { k: "map", l: "MAP (optional)", t: "number" },
       { k: "rr", l: "Resp rate", t: "number" }, { k: "spo2", l: "SpO₂ %", t: "number" }, { k: "temp", l: "Temp °C", t: "number" }, { k: "uop", l: "Urine mL/h", t: "number" },
@@ -5868,7 +5872,7 @@
     // image via SMD_IMAGE_ENGINE. Hidden on web (no native capture/OCR).
     var canSnap = !!(window.SMD_IS_NATIVE && ((window.SMD_NATIVE && window.SMD_NATIVE.ocr) ||
       (window.SMD_IMAGE_ENGINE && SMD_IMAGE_ENGINE.aiAvailable && SMD_IMAGE_ENGINE.aiAvailable())));
-    var steps = [["📷", "ICU Monitor", "monitor", "pulse"], ["🩸", "ABG report", "abg", "abg"], ["🧪", "Laboratory Report", "labs", "flask"], ["🫁", "Ventilator", "ventilator", "lungs"], ["📋", "ICU Flow Sheet", "flowsheet", "droplet"]];
+    var steps = [["🧑", "Patient details / Case sheet", "patient", "user"], ["📷", "ICU Monitor", "monitor", "pulse"], ["🩸", "ABG report", "abg", "abg"], ["🧪", "Laboratory Report", "labs", "flask"], ["🫁", "Ventilator", "ventilator", "lungs"], ["📋", "ICU Flow Sheet", "flowsheet", "droplet"]];
     modalEl.innerHTML = '<div class="icu-sheet"><h3>' + ico("camera", "📷") + ' ICU Snapshot</h3>' +
       '<div class="icu-steps">' + steps.map(function (s, i) {
         return '<div class="icu-step"><div class="n">' + (i + 1) + '</div><div style="flex:1"><div style="font:700 14px var(--font)">' + ico(s[3], s[0]) + " Capture " + s[1] + "</div>" +
@@ -5878,7 +5882,7 @@
           "</div></div>";
       }).join("") + "</div>" +
       (canSnap
-        ? '<div class="icu-card" style="margin-top:12px"><span class="icu-badge" style="background:var(--ok-soft);color:var(--ok)">' + ico("camera", "📷") + ' Image Engine ready</span><p style="margin-top:8px">Capture any screen or report — you\'ll choose <b>Private Device OCR</b> (free, on-device) or <b>AI Vision</b> (Pro). Each capture reads the <b>whole report</b> and fills <b>every</b> relevant tab (an ABG slip fills both ABG <i>and</i> electrolytes). <b>Verify every value.</b></p></div>'
+        ? '<div class="icu-card" style="margin-top:12px"><span class="icu-badge" style="background:var(--ok-soft);color:var(--ok)">' + ico("camera", "📷") + ' Image Engine ready</span><p style="margin-top:8px">Capture any screen or report — you\'ll choose <b>Private Device OCR</b> (free, on-device) or <b>AI Vision</b> (Pro). A monitor/lab/ABG/ventilator photo reads the <b>whole report</b> and fills <b>every</b> relevant tab (an ABG slip fills both ABG <i>and</i> electrolytes); a case sheet / EMR screen photo reads name, age, sex, MRN, history and more into <b>Patient details</b> for you to review. <b>Verify every value.</b></p></div>'
         : '<div class="icu-card" style="margin-top:12px;text-align:center"><span class="icu-badge">🚧 Snapshot · mobile app only</span><p style="margin-top:8px">Capture ICU screens and have them read into the tabs. Available in the StewardMD iOS/Android app.</p></div>') +
       '<button class="icu-btn ghost" data-icu-act="closeform">Close</button></div>';
     modalEl.classList.add("on");
@@ -5891,6 +5895,25 @@
       }
       function runSnap(kind, out, dataUrl) {
         if (!dataUrl) { if (out) out.textContent = "Couldn't read that image — try again or enter manually."; return; }
+        // Patient details / EMR case sheet: its own schema (name/age/sex/history/etc. are mostly
+        // free text, not the numeric labs/vitals/ABG/vent set), so it gets a dedicated review sheet
+        // instead of the direct-apply-then-"verify in the tabs" flow the numeric kinds use below —
+        // misread identity/history text is worth a proper look before it lands on the patient.
+        if (kind === "patient") {
+          var runP = (window.SMD_IMAGE_ENGINE && SMD_IMAGE_ENGINE.process)
+            ? SMD_IMAGE_ENGINE.process({ image: dataUrl, kind: "patient" })
+            : ((window.SMD_AI && SMD_AI.readImage) ? SMD_AI.readImage(dataUrl, "patient") : Promise.reject(new Error("no-reader")));
+          runP.then(function (r) {
+            if (!r || r.cancelled) { if (out) out.textContent = ""; return; }
+            if (r.mode === "fields" && r.fields && Object.keys(r.fields).length) {
+              if (out) out.textContent = "✓ Read — review below.";
+              openPatientReview(r.fields, dataUrl);
+              return;
+            }
+            if (!linesMsg(out, r) && out) out.textContent = "Couldn't read that image — try again or enter manually.";
+          }).catch(function () { if (out) out.textContent = "Couldn't read this — enter manually."; });
+          return;
+        }
         // COMBINED extraction (gold250): whichever report the clinician taps (Monitor/ABG/Labs/
         // Ventilator), read the WHOLE image/report and route EVERY value to its own tab — so an
         // ABG slip fills the ABG tab (pH, PaCO₂, PaO₂, HCO₃, base excess, lactate) AND the
@@ -5898,7 +5921,7 @@
         // intake/output fields aren't in the combined set). Route via the clinician-controlled
         // Image Engine (device OCR vs AI Vision — choice preserved).
         var combined = (kind !== "flowsheet");
-        var useKind = combined ? "all" : "flowsheet";
+        var useKind = combined ? "all" : kind;
         var run = (window.SMD_IMAGE_ENGINE && SMD_IMAGE_ENGINE.process)
           ? SMD_IMAGE_ENGINE.process({ image: dataUrl, kind: useKind })
           : ((window.SMD_AI && SMD_AI.readImage) ? SMD_AI.readImage(dataUrl, useKind) : Promise.reject(new Error("no-reader")));
@@ -5950,6 +5973,58 @@
         });
       }
     }
+  }
+
+  /* ---- Patient / EMR case-sheet capture review (Snapshot → "Patient details / Case sheet") ----
+   * A photographed case sheet, admission note, ID band or EMR/EHR screen is read via the SAME
+   * clinician-controlled Image Engine (Private Device OCR vs AI Vision) the other Snapshot steps
+   * use, but is NOT routed through the numeric-only openImportReview sheet: name, sex, allergies,
+   * history etc. are free text, and identity/history data is worth a dedicated look before it lands
+   * on the patient record. Always shows the FULL patient-detail field set (like the manual "Patient
+   * details" form), pre-filled from whatever the capture read — any field it missed is simply blank
+   * for the clinician to fill in. Nothing writes to STATE.patient until "Save to patient" is tapped. */
+  var PATIENT_CAP_FIELDS = [
+    { k: "name", l: "Name / initials", t: "text" }, { k: "age", l: "Age", t: "number" }, { k: "sex", l: "Sex", t: "select", opts: ["", "M", "F", "Other"] },
+    { k: "weightKg", l: "Weight (kg)", t: "number" }, { k: "heightCm", l: "Height (cm)", t: "number" }, { k: "bed", l: "Bed", t: "text" },
+    { k: "mrn", l: "MR / UHID", t: "text" }, { k: "doctor", l: "Treating doctor", t: "text" }, { k: "dept", l: "Department / specialty", t: "text" },
+    { k: "hospital", l: "Hospital", t: "text" },
+    { k: "codeStatus", l: "Resuscitation status", t: "select", opts: ["", "Full code", "DNR / DNAR", "DNI", "Comfort care only"] },
+    { k: "allergies", l: "Allergies / ADR", t: "text", wide: true },
+    { k: "complaints", l: "Presenting complaints / history of present illness", t: "textarea", wide: true },
+    { k: "pastHistory", l: "Past history / comorbidities", t: "textarea", wide: true },
+    { k: "diagnosis", l: "Working / admitting diagnosis", t: "text", wide: true }
+  ];
+  function openPatientReview(fields, dataUrl) {
+    fields = fields || {};
+    ensureModal();
+    var rowsHTML = PATIENT_CAP_FIELDS.map(function (f) {
+      var v = fields[f.k] != null ? fields[f.k] : "";
+      var fid = "icupatcap-" + f.k, al = esc(f.l), attrs = ' id="' + fid + '" aria-label="' + al + '"';
+      var inp;
+      if (f.t === "select") inp = '<select data-pk="' + f.k + '"' + attrs + '>' + f.opts.map(function (o) { return '<option' + (String(o) === String(v) ? " selected" : "") + ">" + esc(o || "—") + "</option>"; }).join("") + "</select>";
+      else if (f.t === "textarea") inp = '<textarea data-pk="' + f.k + '"' + attrs + ' rows="3" style="font:600 14px var(--font);padding:10px;border:1px solid var(--border);border-radius:10px;background:var(--panel2);color:var(--ink);width:100%">' + esc(v) + "</textarea>";
+      else inp = '<input data-pk="' + f.k + '"' + attrs + ' type="' + (f.t === "number" ? "number" : "text") + '" step="any"' + (f.t === "number" ? ' inputmode="decimal"' : "") + ' value="' + esc(v) + '">';
+      return '<div class="icu-fld" style="' + (f.wide ? "grid-column:1/-1" : "") + '"><label for="' + fid + '">' + al + "</label>" + inp + "</div>";
+    }).join("");
+    modalEl.innerHTML = '<div class="icu-sheet"><h3>' + ico("user", "🧑") + ' Review captured patient details</h3>' +
+      '<p style="margin:0 0 12px;color:var(--muted);font:600 13px var(--font)">Read from the photo — verify every field (especially name, age, sex and MRN) before saving. Blank fields were not found; fill them in if you have them. Nothing is applied until you save.</p>' +
+      (dataUrl ? '<img src="' + dataUrl + '" style="max-width:100%;max-height:160px;border-radius:10px;margin-bottom:10px;display:block;object-fit:contain">' : "") +
+      '<div class="icu-grid2">' + rowsHTML + "</div>" +
+      '<button class="icu-btn" data-icu-act="savepatientcap">' + ico("check", "✓") + ' Save to patient</button><button class="icu-btn ghost" data-icu-act="closeform">Cancel</button></div>';
+    modalEl.classList.add("on");
+  }
+  function savePatientCapture() {
+    if (!modalEl) return;
+    var obj = {};
+    modalEl.querySelectorAll("[data-pk]").forEach(function (el) {
+      var k = el.getAttribute("data-pk"), val = el.value; if (val === "" || val == null) return;
+      obj[k] = (el.type === "number") ? num(val) : val;
+    });
+    closeForm();
+    if (!Object.keys(obj).length) return;
+    ingestPatient(obj);
+    if (window.toast) toast("Patient details saved from capture (" + Object.keys(obj).length + " field" + (Object.keys(obj).length === 1 ? "" : "s") + ") — verify in Patient details.");
+    paint();
   }
 
   function ensureModal() { if (!modalEl) { modalEl = document.createElement("div"); modalEl.className = "icu-modal"; modalEl.id = "icuModal"; modalEl.setAttribute("role", "dialog"); modalEl.setAttribute("aria-modal", "true"); document.body.appendChild(modalEl); modalEl.addEventListener("click", function (e) { if (e.target === modalEl) closeForm(); }); modalEl.addEventListener("click", onClick); } }
@@ -6951,6 +7026,7 @@
   function correlationEvidence() {
     var p = _raw.patient || {}, img = extractImagingConcepts(), crit = imagingCriticalFlags(), labs = extractLabConcepts(), clinical = [];
     if (p.complaints) clinical.push(String(p.complaints));
+    if (p.pastHistory) clinical.push("past history: " + String(p.pastHistory));
     if (p.diagnosis) clinical.push("working diagnosis: " + p.diagnosis);
     var findings = [], vitals = [];
     if (icuDxFlowOn()) {
@@ -7853,10 +7929,10 @@
     ensureModal();
     var A = ' style="justify-content:flex-start;text-align:left"';
     modalEl.innerHTML = '<div class="icu-sheet"><h3>Add / import data</h3>' +
-      '<p style="margin:0 0 12px;color:var(--muted);font:600 13px var(--font)">Enter, speak, or snap this patient’s vitals, labs, ABG or ventilator settings. Nothing is applied until you review it.</p>' +
+      '<p style="margin:0 0 12px;color:var(--muted);font:600 13px var(--font)">Enter, speak, or snap this patient’s details, vitals, labs, ABG or ventilator settings — including a photo of a case sheet or EMR screen to autofill name, age, sex, history and more. Nothing is applied until you review it.</p>' +
       '<div class="icu-grid2">' +
         '<button class="icu-btn" data-icu-act="voice"' + A + '>' + ico("mic", "🎤") + ' Speak <span style="opacity:.8;font-weight:700">· MaiK Scribe</span></button>' +
-        '<button class="icu-btn ghost" data-icu-act="snapshot"' + A + '>' + ico("camera", "📷") + ' Snap a photo</button>' +
+        '<button class="icu-btn ghost" data-icu-act="snapshot"' + A + '>' + ico("camera", "📷") + ' Snap a photo <span style="opacity:.8;font-weight:700">· patient details, vitals, labs, ABG, vent</span></button>' +
         '<button class="icu-btn ghost" data-icu-act="impmethod:file"' + A + '>' + ico("upload", "📄") + ' Upload PDF / image</button>' +
         '<button class="icu-btn ghost" data-icu-act="wardfetch"' + A + '>' + ico("hospital", "🏥") + ' Import from ward</button>' +
       '</div>' +
@@ -8197,6 +8273,7 @@
         break;
       }
       case "snapshot": openSnapshot(); break;
+      case "savepatientcap": savePatientCapture(); break;
       case "launch":
         if (arg === "elyte") launch(function () {
           if (!window.ELYTE) return;
@@ -8553,6 +8630,7 @@
     ingestReferral: function (entry) { if (!entry || !entry.state) return; var r = loadRoster(); r.push(entry); saveRoster(capTen(r)); try { ICU.open(); } catch (e) {} applyState(entry.state, entry.id); },
     ingestInfusion: ingestInfusion, _bridgeInfusion: bridgeInfusion, _bridgeInfusionFromCalc: bridgeInfusionFromCalc, _installInfBridge: installInfBridge, _infWeightBridge: infWeightBridge,
     ingestFromWard: ingestFromWard, ingestWardHistory: ingestWardHistory, addWardPatientToRoster: addWardPatientToRoster, removeWardPatientFromRoster: removeWardPatientFromRoster, _buildWardState: buildWardState, parseWardDate: parseWardDate, mapWardLab: mapWardLab, _compressImage: compressImage, startImport: startImport, _review: openImportReview, reviewVoice: reviewVoice,
+    _patientReview: openPatientReview, _savePatientCapture: savePatientCapture, _patientCapFields: PATIENT_CAP_FIELDS,
     ingestImaging: ingestImaging, ingestWardImaging: ingestWardImaging, imagingOn: icuImagingOn, _imgModality: imgModality, _imgCritical: imgCritical, _parseImaging: parseImagingSections,
     _buildImagingAiPacket: buildImagingAiPacket, _imagingDeterministic: imagingDeterministic,
     openFindingPicker: openFindingPicker, _addFindingChip: addFindingChip, _applyFindState: applyFindState, _findStateOf: findStateOf, _vocabNlpCtx: vocabNlpCtx,

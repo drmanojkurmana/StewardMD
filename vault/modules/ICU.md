@@ -34,6 +34,19 @@ calculators, guided clinical workflow, imaging import, alerts, Lab Watch.
   `**bold**`, `3. Numbered:`); unplaceable output is kept in `_rest`, never dropped. The review sheet
   reuses the one modal, so field values are captured first and restored on Insert AND Cancel.
   Test: `test/run-icu-discharge-ai.mjs`. See [[Decisions]] (2026-08-22).
+- Patient details / Case sheet capture — Snapshot step (2026-09-07): photograph a case sheet,
+  admission note, ID band or EMR/EHR screen → name, age, sex, weight/height, MRN, hospital, bed,
+  doctor, dept, allergies, presenting complaints, past history / comorbidities, working diagnosis,
+  code status. Own vision schema `VISION_SYS.patient` (`functions/api/ai/[[path]].js`) + on-device
+  fallback regex extraction (`parseFieldsOnDevice` kind `"patient"` in `reasoning.js`, covers the
+  labelled fields only — free text like complaints/past history needs AI Vision). Does NOT reuse the
+  numeric-only `openImportReview` sheet — identity/history text gets its own review
+  (`openPatientReview`/`savePatientCapture`), always showing the full Patient-details field set
+  (blank where nothing was read) so the clinician fills any gap, and applies via the existing
+  `ingestPatient()` (never blanks a field the capture didn't return). `STATE.patient.pastHistory` is
+  a new field (also in the manual "Patient details" form, `buildSummary`/`buildSBAR`, and the MaiK/
+  Deep-Review evidence pack `correlationEvidence()`). Test hooks: `ICU._patientReview`,
+  `ICU._savePatientCapture`. Test: `test/run-icu-patient-capture.mjs`.
 - Imaging import + correlation — Phase 1 shipped (`smd_icu_imaging`); phases 2–4 pending
 - ICU v2 redesign + collab — `feat/icu-v2-redesign` BUILT, flags `smd_icu_v2`/`smd_icu_groups` OFF, NOT deployed (owner must deploy rules+indexes, emulator + 2-device test)
 - Alert-safety fix — `fix/icu-alert-safety` committed NOT pushed

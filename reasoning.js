@@ -3744,6 +3744,32 @@
       set("rr", grab(/\b(?:RR|rate)\D{0,4}(\d{1,2})\b/i));
       set("peak", grab(/\b(?:Ppeak|peak|PIP)\D{0,4}(\d{1,2})\b/i));
       set("plateau", grab(/\b(?:Pplat|plat\w*)\D{0,4}(\d{1,2})\b/i));
+    } else if (kind === "patient") {
+      // Patient / EMR case-sheet capture — FREE, on-device path (label-based text grab; no
+      // network). Best-effort: real case sheets vary a lot in layout, so this covers the common
+      // labelled fields only (name/age/sex/MRN/hospital/bed/doctor/dept/allergies/diagnosis).
+      // AI Vision (Pro, cloud) reads the same photo with a real model and also gets the free-text
+      // history fields (complaints/past history) — offered as the alternative in the Image Engine
+      // chooser for a layout this can't parse.
+      var NEXT_LBL = "(?:Name|Age|Sex|Gender|MRN|UHID|Reg(?:istration)?\\s*No\\.?|Hospital|Bed|Ward|Doctor|Consultant|Dept|Department|Allerg\\w*|Diagnosis|Dx)\\s*[:\\-]";
+      function grabTxt(labels) {
+        var m = t.match(new RegExp("\\b(?:" + labels + ")\\s*[:\\-]\\s*", "i")); if (!m) return null;
+        var rest = t.slice(m.index + m[0].length);
+        var stop = rest.search(new RegExp(NEXT_LBL, "i"));
+        var val = (stop > 0 ? rest.slice(0, stop) : rest.slice(0, 60)).replace(/\s{2,}/g, " ").trim();
+        return val || null;
+      }
+      var pName = grabTxt("Name|Patient\\s*Name"); if (pName) out.name = pName;
+      var pAge = grab(/\bAge\D{0,3}(\d{1,3})\b/i); if (pAge != null && pAge > 0 && pAge < 130) out.age = pAge;
+      var pSex = t.match(/\b(?:Sex|Gender)\s*[:\-]?\s*(Male|Female|Other|M|F)\b/i);
+      if (pSex) out.sex = /^m/i.test(pSex[1]) ? "M" : /^f/i.test(pSex[1]) ? "F" : "Other";
+      var pMrn = grabTxt("MRN|UHID|Reg(?:istration)?\\s*No\\.?"); if (pMrn) out.mrn = pMrn;
+      var pHosp = grabTxt("Hospital"); if (pHosp) out.hospital = pHosp;
+      var pBed = grabTxt("Bed|Ward"); if (pBed) out.bed = pBed;
+      var pDoc = grabTxt("Doctor|Consultant"); if (pDoc) out.doctor = pDoc;
+      var pDept = grabTxt("Dept|Department"); if (pDept) out.dept = pDept;
+      var pAllergy = grabTxt("Allerg\\w*"); if (pAllergy) out.allergies = pAllergy;
+      var pDx = grabTxt("Diagnosis|Dx"); if (pDx) out.diagnosis = pDx;
     } else if (kind === "all") {
       // Combined extractor (gold249): parse EVERY category from one blob (a photo with a monitor
       // + ABG together, or multi-page PDF text) and return SECTIONS. Overlapping keys (hco3,
