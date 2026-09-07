@@ -2725,6 +2725,86 @@ test("sending is prescribing's business, and nothing unsendable is sent", async 
   assert.equal(bogus.error, "unknown_channel");
 });
 
+/* ---- the room, the theatre and the scanner ------------------------------------------------------- */
+
+test("A ROOM CANNOT BE OVERBOOKED, and the refusal names what is already there", async () => {
+  seedHospital();
+  const org = docs.get(`q_orgs/${ORG}`);
+  org.fields.wardsynq = {
+    ...org.fields.wardsynq,
+    resources: [{ id: "ct-1", name: "CT scanner", kind: "equipment", location: "Radiology" }, { id: "th-1", name: "Theatre 1", kind: "theatre" }],
+  };
+  const { adm } = await admittedPatientOnDrug();
+  const book = (body) => as(NURSE, "/ward/book-resource", "POST", { orgId: ORG, patientId: adm.patientId, ...body });
+
+  const first = await book({ resourceId: "ct-1", startAt: "2026-09-07T09:00:00.000Z", minutes: 30, purpose: "CT head" });
+  assert.equal(first.__status, 200, JSON.stringify(first));
+  assert.equal(first.resourceName, "CT scanner");
+
+  /* THE REFUSAL, AND THERE IS NO OVERRIDE. A clinician's diary may be overbooked - real clinics do
+   * it. Two patients do not fit inside one CT scanner, and no amount of "deliberate" makes them. */
+  const clash = await book({ resourceId: "ct-1", startAt: "2026-09-07T09:15:00.000Z", minutes: 30 });
+  assert.equal(clash.__status, 409);
+  assert.equal(clash.error, "resource_busy");
+  // It names the booking already there: a refusal a scheduler cannot act on is one they replace
+  // with a paper list.
+  assert.match(clash.detail, /CT scanner is already booked from 2026-09-07T09:00/);
+  assert.equal(clash.clashesWith.bookingId, first.bookingId);
+
+  // Touching but not overlapping is fine: 09:00+30 ends exactly as 09:30 begins.
+  assert.equal((await book({ resourceId: "ct-1", startAt: "2026-09-07T09:30:00.000Z", minutes: 30 })).__status, 200);
+  // A different resource at the same time is not a clash.
+  assert.equal((await book({ resourceId: "th-1", startAt: "2026-09-07T09:15:00.000Z", minutes: 60 })).__status, 200);
+
+  /* CANCELLING FREES IT IMMEDIATELY AND KEEPS THE HISTORY. "They cancelled" and "they never had
+   * one" are different facts, and the second is what a complaint turns on. */
+  const off = await as(NURSE, "/ward/resource-state", "POST", { orgId: ORG, bookingId: first.bookingId, state: "cancelled", reason: "Patient too unwell to move." });
+  assert.equal(off.state, "cancelled");
+  assert.deepEqual((await RECORD.history(TENANT_ROW.id, "ResourceBooking", first.bookingId)).map((h) => h.state), ["booked", "cancelled"]);
+  /* The freed slot is bookable again. 09:15 would NOT be - it still overlaps the 09:30 booking above,
+   * which is the rule working rather than a stale one. */
+  const stillBusy = await book({ resourceId: "ct-1", startAt: "2026-09-07T09:15:00.000Z", minutes: 30 });
+  assert.equal(stillBusy.__status, 409, "cancelling the 09:00 did not free the 09:30");
+  const rebooked = await book({ resourceId: "ct-1", startAt: "2026-09-07T09:00:00.000Z", minutes: 30 });
+  assert.equal(rebooked.__status, 200, "a cancelled slot is bookable again");
+  assert.equal(rebooked.state, "booked");
+
+  const sched = await as(NURSE, `/ward/resource-schedule?orgId=${ORG}&resourceId=ct-1`);
+  assert.equal(sched.resourcesConfigured, true);
+  assert.equal(sched.resources[0].booked, 2, "two live bookings; the cancelled one is not counted");
+});
+
+test("a resource the hospital does not have cannot be booked, and a booking needs a length", async () => {
+  seedHospital();
+  const org = docs.get(`q_orgs/${ORG}`);
+  org.fields.wardsynq = { ...org.fields.wardsynq, resources: [{ id: "ct-1", name: "CT scanner" }] };
+  const { adm } = await admittedPatientOnDrug();
+  const book = (body) => as(NURSE, "/ward/book-resource", "POST", { orgId: ORG, patientId: adm.patientId, ...body });
+
+  /* Accepting a made-up room is how a patient is sent somewhere that does not exist, and nobody
+   * finds out until they are standing in a corridor. */
+  const ghost = await book({ resourceId: "mri-9", startAt: "2026-09-07T09:00:00.000Z", minutes: 30 });
+  assert.equal(ghost.__status, 404);
+  assert.equal(ghost.error, "resource_not_found");
+  assert.deepEqual(ghost.known, ["ct-1"], "and it says what this hospital does have");
+
+  // A booking with no length has no end, so nothing could ever clash with it - which would silently
+  // disable the one rule this file exists for.
+  const endless = await book({ resourceId: "ct-1", startAt: "2026-09-07T09:00:00.000Z" });
+  assert.equal(endless.__status, 422);
+  assert.equal(endless.error, "minutes_required");
+  assert.match(endless.detail, /nothing can clash with it/);
+
+  // Cancelling without a reason loses why a slot was given up.
+  const bk = await book({ resourceId: "ct-1", startAt: "2026-09-07T09:00:00.000Z", minutes: 30 });
+  assert.equal((await as(NURSE, "/ward/resource-state", "POST", { orgId: ORG, bookingId: bk.bookingId, state: "cancelled" })).error, "reason_required");
+
+  // A hospital with nothing configured says so, rather than reading as "no bookings".
+  seedHospital();
+  const none = await as(NURSE, `/ward/resource-schedule?orgId=${ORG}`);
+  assert.equal(none.resourcesConfigured, false);
+});
+
 /* ---- the wound, over time ------------------------------------------------------------------------ */
 
 test("A HEALING CATEGORY 4 IS STILL A CATEGORY 4, and where it came from cannot be edited", async () => {

@@ -84,6 +84,7 @@ import { adtForEncounter, oruForReport } from "../../_wardsynq/hl7v2.js";
 import { requestAdmission, closeAdmissionRequest, admissionWaitingList } from "../../_wardsynq/admission-request.js";
 import { registryReport } from "../../_wardsynq/registry.js";
 import { chartWound, listWounds } from "../../_wardsynq/wound.js";
+import { bookResource, setBookingState, resourceSchedule } from "../../_wardsynq/resource-booking.js";
 import { listTools as listRiskTools, recordAssessment as recordRiskAssessment, completeAction as completeRiskAction, listAssessments as listRiskAssessments } from "../../_wardsynq/risk-assessment.js";
 import { recordAllergiesFromAssessment } from "../../_wardsynq/migrate-allergy.js";
 
@@ -533,6 +534,8 @@ export async function onRequest(context) {
         /* Putting somebody on the waiting list is the same administrative act as admitting them to a
          * bed - the front desk's work. It reserves nothing and admits nobody. */
         "request-admission": CAPS.QUEUE_ADD, "close-admission-request": CAPS.QUEUE_ADD, "waiting-list": CAPS.QUEUE_VIEW,
+        // Booking a room is the front desk's act, the same authority as booking an appointment.
+        "book-resource": CAPS.QUEUE_ADD, "resource-state": CAPS.QUEUE_ADD, "resource-schedule": CAPS.QUEUE_VIEW,
         // Risk assessment is nursing work, like the rest of the flowsheet.
         "risk-tools": CAPS.EMR_VIEW, assess: CAPS.EMR_VITALS, "risk-action": CAPS.EMR_VITALS, risks: CAPS.EMR_VIEW,
         /* Sending a prescription is part of prescribing, so queueing is emr.treat. Recording what
@@ -684,6 +687,18 @@ export async function onRequest(context) {
       }
       if (sub === "note-sign" && method === "POST") {
         const r = await signNote(request, env, { ...deps, noteId: body.noteId, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "book-resource" && method === "POST") {
+        const r = await bookResource(request, env, { ...deps, resources: (wsqCfg && wsqCfg.resources) || null, resourceId: body.resourceId, startAt: body.startAt, minutes: body.minutes, patientId: body.patientId, encounterId: body.encounterId, purpose: body.purpose, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "resource-state" && method === "POST") {
+        const r = await setBookingState(request, env, { ...deps, bookingId: body.bookingId, state: body.state, reason: body.reason, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "resource-schedule" && method === "GET") {
+        const r = await resourceSchedule(request, env, { ...deps, resources: (wsqCfg && wsqCfg.resources) || null, resourceId: url.searchParams.get("resourceId") || "", from: url.searchParams.get("from") || "", to: url.searchParams.get("to") || "" });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "request-admission" && method === "POST") {
