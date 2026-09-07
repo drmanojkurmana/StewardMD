@@ -97,6 +97,10 @@ const RESOURCE_TYPES = Object.freeze([
    * came from is set at the first assessment - a system that let either fall is one where a hospital
    * stops having pressure ulcers. */
   "WoundAssessment",
+  /* A room, a theatre or a scanner, booked. Unlike a clinician's diary this one CANNOT be
+   * overbooked: two patients do not fit inside one CT scanner, and a diary that says they do is
+   * worse than no diary because the ward acts on it. */
+  "ResourceBooking",
   /* A record that an order set was applied, and exactly what landed and what did not. NOT the orders
    * themselves - those go through the ordinary path and are ordinary orders. This is what makes a
    * partial application visible, and what finds the patients a bad set touched. */
