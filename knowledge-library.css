@@ -1,0 +1,52 @@
+/* Discover presentation scoped to the Knowledge Library, not other reference tabs. */
+#sbrefOverlay:has(.kblib-discover) { height:100dvh; max-height:100dvh; overflow-y:auto; overscroll-behavior:contain; background:var(--paper,#f5f5f7); }
+#sbrefOverlay:has(.kblib-discover) .sbref-top { background:var(--panel,#fff); color:var(--ink); border-bottom:1px solid var(--line); padding:calc(8px + env(safe-area-inset-top)) 18px 8px; }
+#sbrefOverlay:has(.kblib-discover) .sbref-top h2 { font-size:14px; font-weight:600; }
+#sbrefOverlay:has(.kblib-discover) .sbref-top .sb-x { color:var(--ink)!important; min-width:44px; min-height:44px; border-radius:50%; }
+#sbrefBody:has(.kblib-discover) .sbref-tabs { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:4px; margin:8px 0 0; }
+#sbrefBody:has(.kblib-discover) .sbref-tab { min-width:0; min-height:44px; padding:7px 2px; font-size:11px; font-weight:500; border:0; border-radius:10px; }
+#sbrefBody:has(.kblib-discover) .sbref-tab svg { display:none; }
+#sbrefBody:has(.kblib-discover) .sbref-tab.active { background:var(--panel); color:var(--ink); box-shadow:0 1px 4px #00000012; }
+#sbrefBody:has(.kblib-discover) { width:100%; max-width:1000px; margin:auto; padding:0 20px calc(24px + env(safe-area-inset-bottom)); box-sizing:border-box; }
+.kblib-discover { --kl-accent:#5956a5; --kl-muted:var(--slate-soft,#646b77); --kl-paper:var(--panel,#fff); --kl-line:var(--line,#e3e5eb); background:none!important; border:0!important; padding:14px 0!important; font-family:-apple-system,BlinkMacSystemFont,system-ui,sans-serif; color:var(--ink,#1d1d1f); }
+body.dark .kblib-discover { --kl-accent:#bebaff; }
+.kblib-discover *, .kblib-discover *::before { box-sizing:border-box; }
+.kblib-discover [hidden] { display:none!important; }
+.kblib-discover button { font-family:inherit; }
+.kblib-discover .kblib-intro h1 { font-size:clamp(29px,5vw,40px); line-height:1.08; letter-spacing:-.045em; margin:9px 0 12px; }
+.kblib-discover .kblib-intro p { font-size:14px; color:var(--kl-muted); line-height:1.6; margin:0 0 19px; }
+.kblib-discover .kblib-intro strong { color:var(--ink); font-weight:650; }
+.kblib-discover .kblib-kicker { font-size:10px; letter-spacing:.12em; color:var(--kl-muted); font-weight:650; }
+.kblib-discover .kblib-search-label { display:block; margin-bottom:7px; font-size:12px; color:var(--kl-muted); }
+.kblib-discover .kblib-search { min-height:48px; border:1px solid var(--kl-line); border-radius:13px; background:var(--kl-paper); color:var(--ink); font-size:16px; margin:0; padding:12px 14px; }
+.kblib-discover .kblib-feature { position:relative; overflow:hidden; isolation:isolate; margin:20px 0; padding:22px; border-radius:22px; background:color-mix(in srgb,var(--kl-accent) 10%,var(--kl-paper)); }
+.kblib-discover .kblib-feature::after { content:''; position:absolute; z-index:-1; width:230px; height:230px; right:-50px; top:-90px; border-radius:50%; background:radial-gradient(circle,color-mix(in srgb,var(--kl-accent) 24%,transparent),transparent 70%); }
+.kblib-discover .kblib-feature h2 { font-size:26px; letter-spacing:-.04em; line-height:1.13; margin:10px 0; }
+.kblib-discover .kblib-feature p { font-size:12px; color:var(--kl-muted); margin:0; }
+.kblib-discover .kblib-section-heading { display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:8px; margin:22px 0 12px; }
+.kblib-discover .kblib-section-heading h2 { font-size:20px; letter-spacing:-.03em; margin:0; }
+.kblib-discover .kblib-section-heading > span { font-size:12px; color:var(--kl-muted); }
+.kblib-discover .kblib-tiles { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; }
+.kblib-discover .kblib-tiles .kblib-f { min-width:0; min-height:112px; display:flex; flex-direction:column; align-items:flex-start; gap:8px; padding:16px; border:1px solid var(--kl-line); border-radius:18px; white-space:normal; text-align:left; background:var(--kl-paper); color:var(--ink); font-size:14px; font-weight:600; }
+.kblib-discover .kblib-tile-icon { color:var(--kl-accent); }
+.kblib-discover .kblib-tile-icon svg { width:20px; height:20px; }
+.kblib-discover .kblib-tiles small { color:var(--kl-muted); font-size:11px; font-weight:400; }
+.kblib-discover summary { cursor:pointer; min-height:44px; padding:14px 0; font-size:13px; color:var(--kl-accent); }
+.kblib-discover .kblib-grp { flex-wrap:wrap; overflow:visible; gap:7px; }
+.kblib-discover .kblib-lbl { width:100%; color:var(--kl-muted); margin:6px 0; }
+.kblib-discover .kblib-f { min-height:44px; white-space:normal; border-color:var(--kl-line); background:var(--kl-paper); color:var(--ink); }
+.kblib-discover .kblib-f.on { background:var(--kl-accent); border-color:var(--kl-accent); color:var(--kl-paper); }
+.kblib-discover .kblib-count { color:var(--kl-muted); margin:14px 0 10px; }
+.kblib-discover .kblib-grid { border:1px solid var(--kl-line); border-radius:18px; }
+.kblib-discover .kblib-row { background:var(--kl-paper); padding:17px; border-color:var(--kl-line); }
+.kblib-discover .kblib-row::before { display:none; }
+.kblib-discover .kblib-name { font-size:16px; font-weight:600; color:var(--ink); line-height:1.45; overflow-wrap:anywhere; }
+.kblib-discover .kblib-eye, .kblib-discover .kblib-row.inf .kblib-eye { color:var(--kl-accent); font-size:10px; font-weight:600; }
+.kblib-discover .kblib-meta { flex-wrap:wrap; color:var(--kl-muted); }
+.kblib-discover .kblib-sys { color:var(--kl-muted); }
+.kblib-discover .kblib-clear { border:0; background:none; color:var(--kl-accent); min-height:44px; font-size:13px; }
+.kblib-discover .kblib-more { display:block; width:100%; min-height:48px; margin-top:14px; border:1px solid var(--kl-line); border-radius:13px; background:var(--kl-paper); color:var(--kl-accent); font-size:14px; }
+.kblib-discover :is(button,input,summary):focus-visible { outline:3px solid var(--kl-accent); outline-offset:3px; }
+@media(min-width:760px) { .kblib-discover .kblib-tiles { grid-template-columns:repeat(4,minmax(0,1fr)); } .kblib-discover .kblib-feature { padding:28px; } }
+@media(max-width:600px) { .kblib-discover .kblib-feature { padding:18px; margin:16px 0; } .kblib-discover .kblib-feature h2 { font-size:24px; } .kblib-discover .kblib-section-heading { margin-top:18px; } }
+@media(max-width:360px) { #sbrefBody:has(.kblib-discover) { padding-inline:14px; } .kblib-discover .kblib-tiles .kblib-f { padding:13px; } }
