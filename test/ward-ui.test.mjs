@@ -195,6 +195,30 @@ test("a transfer is reachable from the chart, and a busy bed is explained rather
   assert.match(code, /apiPost\("\/ward\/transfer"/, "it asks the server");
 });
 
+test("fluid balance shows in and out beside the net, never the net alone", () => {
+  const W = load();
+  const html = W._render(Object.assign({}, chart, {
+    balance: { intake: 3000, output: 2600, balance: 400, entries: 8, unit: "mL", complete: true, gaps: [], hours: [{}], byKind: {} },
+  }));
+  // "+400" alone hides whether this patient drank 400 and passed nothing, or took three litres and
+  // passed 2.6. Those are different patients and one of them is in trouble.
+  assert.match(html, /3000 mL/);
+  assert.match(html, /2600 mL/);
+  assert.match(html, /\+400 mL/);
+  assert.match(html, /Every hour of this period has an entry\./);
+
+  // An incomplete chart says so, in the caution tier, right beside the number.
+  const thin = W._render(Object.assign({}, chart, {
+    balance: { intake: 200, output: 0, balance: 200, entries: 1, unit: "mL", complete: false, gaps: new Array(11).fill("h"), hours: [{}], byKind: {} },
+  }));
+  assert.match(thin, /11 of the last 12 hours have nothing charted/);
+  assert.match(thin, /Read this balance as incomplete\./);
+  assert.match(thin, /w-hint warn/);
+  // No balance at all is stated, not rendered as zero.
+  assert.match(W._render(chart), /No fluid charted for this period\./);
+  assert.ok(!/0 mL/.test(W._render(chart)), "an absent balance is never drawn as zeroes");
+});
+
 test("A FAILED READ NEVER LOOKS LIKE A CLEAR CHART", () => {
   const W = load();
   // No card at all when nothing is open, so it cannot become wallpaper a ward stops seeing.

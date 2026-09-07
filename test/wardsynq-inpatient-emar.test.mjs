@@ -1178,3 +1178,102 @@ test("the bed board says who is where, and never confuses 'no free beds' with 'w
   const withUnplaced = await as(NURSE, `/ward/beds?orgId=${ORG}&ward=Medical A`);
   assert.equal(withUnplaced.wards[0].unplaced.length, 1);
 });
+
+/* ---- fluid balance ------------------------------------------------------------------------------
+ *
+ * The oldest nursing chart there is, and WardSynQ recorded vitals and nothing else a nurse writes.
+ */
+
+test("a nurse charts fluid, and the balance shows intake and output rather than a bare net", async () => {
+  seedHospital();
+  const { adm } = await admittedPatientOnDrug();
+  const put = (entries) => as(NURSE, "/ward/fluid", "POST", { orgId: ORG, encounterId: adm.encounterId, patientId: adm.patientId, entries });
+
+  const r = await put([
+    { direction: "intake", kind: "oral", value: 200, at: "2026-09-07T09:10:00.000Z" },
+    { direction: "intake", kind: "iv", value: 1000, unit: "ml", at: "2026-09-07T09:20:00.000Z" },
+    { direction: "output", kind: "urine", value: 450, at: "2026-09-07T09:40:00.000Z" },
+  ]);
+  assert.equal(r.__status, 200, JSON.stringify(r));
+  assert.equal(r.written, 3);
+  assert.ok(!r.rejected, "nothing was rejected");
+
+  const bal = await as(NURSE, `/ward/balance?orgId=${ORG}&patientId=${adm.patientId}&from=2026-09-07T09:00:00.000Z&to=2026-09-07T10:00:00.000Z`);
+  assert.equal(bal.__status, 200, JSON.stringify(bal));
+  assert.deepEqual([bal.balance.intake, bal.balance.output, bal.balance.balance], [1200, 450, 750]);
+  assert.equal(bal.balance.unit, "mL");
+  assert.equal(bal.balance.complete, true, "the whole one-hour window has entries");
+  assert.deepEqual(bal.balance.byKind, { "intake.oral": 200, "intake.iv": 1000, "output.urine": 450 });
+
+  // Re-sending the same entries is one entry per kind per minute, not a doubled balance.
+  await put([{ direction: "intake", kind: "oral", value: 200, at: "2026-09-07T09:10:00.000Z" }]);
+  const again = await as(NURSE, `/ward/balance?orgId=${ORG}&patientId=${adm.patientId}&from=2026-09-07T09:00:00.000Z&to=2026-09-07T10:00:00.000Z`);
+  assert.equal(again.balance.intake, 1200, "a retried request does not become a second cup of tea");
+});
+
+test("the balance NAMES THE HOURS NOBODY CHARTED rather than handing over a tidy total", async () => {
+  seedHospital();
+  const { adm } = await admittedPatientOnDrug();
+  await as(NURSE, "/ward/fluid", "POST", {
+    orgId: ORG, encounterId: adm.encounterId, patientId: adm.patientId,
+    entries: [{ direction: "output", kind: "urine", value: 100, at: "2026-09-07T08:30:00.000Z" }],
+  });
+  const bal = await as(NURSE, `/ward/balance?orgId=${ORG}&patientId=${adm.patientId}&from=2026-09-07T08:00:00.000Z&to=2026-09-07T20:00:00.000Z`);
+  assert.equal(bal.balance.entries, 1);
+  assert.equal(bal.balance.complete, false, "a twelve-hour balance from one entry is not a twelve-hour balance");
+  assert.equal(bal.balance.gaps.length, 11);
+
+  // A balance needs a stated period, and is not charted over weeks.
+  assert.equal((await as(NURSE, `/ward/balance?orgId=${ORG}&patientId=${adm.patientId}`)).error, "from_required");
+  assert.equal((await as(NURSE, `/ward/balance?orgId=${ORG}&patientId=${adm.patientId}&from=2026-01-01T00:00:00.000Z&to=2026-06-01T00:00:00.000Z`)).error, "window_too_wide");
+});
+
+test("an unusable entry is reported, never silently dropped and never converted", async () => {
+  seedHospital();
+  const { adm } = await admittedPatientOnDrug();
+  const r = await as(NURSE, "/ward/fluid", "POST", {
+    orgId: ORG, encounterId: adm.encounterId, patientId: adm.patientId,
+    entries: [
+      { direction: "intake", kind: "iv", value: 1, unit: "L", at: "2026-09-07T09:00:00.000Z" },     // a silent x1000
+      { direction: "intake", kind: "oral", value: "a cup", at: "2026-09-07T09:05:00.000Z" },
+      { direction: "output", kind: "urine", value: 200, at: "2026-09-07T09:10:00.000Z" },
+    ],
+  });
+  assert.equal(r.written, 1);
+  assert.deepEqual(r.rejected.map((x) => x.reason), ["unusable_unit", "not_a_number"]);
+  // Nothing was converted: the litre did not become 1000 mL behind the nurse's back.
+  const bal = await as(NURSE, `/ward/balance?orgId=${ORG}&patientId=${adm.patientId}&from=2026-09-07T09:00:00.000Z&to=2026-09-07T10:00:00.000Z`);
+  assert.equal(bal.balance.intake, 0);
+  assert.equal(bal.balance.output, 200);
+
+  // A request where NOTHING is usable is a 422, not a cheerful "wrote 0".
+  const none = await as(NURSE, "/ward/fluid", "POST", {
+    orgId: ORG, encounterId: adm.encounterId, patientId: adm.patientId,
+    entries: [{ direction: "intake", kind: "telepathy", value: 100, at: "2026-09-07T09:00:00.000Z" }],
+  });
+  assert.equal(none.__status, 422);
+  assert.equal(none.error, "nothing_recordable");
+});
+
+test("charting fluid is the nurse's own record; a pharmacist has no business in it", async () => {
+  seedHospital();
+  const { adm } = await admittedPatientOnDrug();
+  const entries = [{ direction: "output", kind: "urine", value: 100, at: "2026-09-07T09:00:00.000Z" }];
+  assert.equal((await as(NURSE, "/ward/fluid", "POST", { orgId: ORG, encounterId: adm.encounterId, patientId: adm.patientId, entries })).__status, 200);
+  assert.equal((await as(DOCTOR, "/ward/fluid", "POST", { orgId: ORG, encounterId: adm.encounterId, patientId: adm.patientId, entries })).__status, 200);
+  assert.equal((await as(PHARM, "/ward/fluid", "POST", { orgId: ORG, encounterId: adm.encounterId, patientId: adm.patientId, entries })).__status, 403);
+  assert.equal((await as(PHARM, `/ward/balance?orgId=${ORG}&patientId=${adm.patientId}&from=2026-09-07T09:00:00.000Z`)).__status, 403);
+});
+
+test("fluid entries never pollute the vitals the eMAR reads", async () => {
+  seedHospital();
+  const { adm, ord, patient, scan } = await admittedPatientOnDrug();
+  await as(NURSE, "/ward/fluid", "POST", {
+    orgId: ORG, encounterId: adm.encounterId, patientId: adm.patientId,
+    entries: [{ direction: "intake", kind: "oral", value: 68, at: "2026-09-07T09:00:00.000Z" }],
+  });
+  // A fluid volume of 68 mL must never be mistaken for a body weight of 68 kg by the dose check.
+  const step = (a, x) => as(NURSE, "/ward/mar", "POST", { orgId: ORG, action: a, orderId: ord.orderId, dueAt: DUE, patient, ...(x || {}) });
+  await step("verify"); await step("dispense"); await step("scan", { scan });
+  assert.equal((await step("administer")).__status, 200, "the weight-based check still uses the recorded weight");
+});

@@ -127,6 +127,17 @@ body.dark #smdWard { --bg: #191c1e; --on-surface: #eff1f3; --on-surface-variant:
 #smdWard .w-crit-m { display: flex; align-items: center; gap: 5px; margin: 6px 0 8px; font: 500 12px var(--w-sans); opacity: .9; }
 #smdWard .w-crit-m .material-symbols-outlined { font-size: 15px; }
 
+/* Fluid balance. In and out are always both shown, at the same weight: the net alone hides whether
+   "+400" is a patient who drank 400 and passed nothing or one who took three litres and passed 2.6. */
+#smdWard .w-bal { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 12px; }
+#smdWard .w-bal-c { border: 1px solid var(--outline-variant); border-radius: 12px; padding: 10px 12px; background: var(--sc-low); }
+#smdWard .w-bal-c span { display: block; font: 600 10.5px var(--w-sans); text-transform: uppercase; letter-spacing: .06em; color: var(--on-surface-variant); }
+#smdWard .w-bal-c b { display: block; margin-top: 3px; font: 700 18px var(--mono, ui-monospace, Menlo, monospace); font-variant-numeric: tabular-nums; }
+#smdWard .w-bal-c.net { border-color: var(--primary); }
+#smdWard .w-hint.warn { color: var(--on-warn-container); background: var(--warn-container); border-radius: 10px; padding: 8px 10px; }
+#smdWard .w-fluid { display: flex; flex-wrap: wrap; gap: 8px; }
+#smdWard .w-fluid select, #smdWard .w-fluid input { flex: 1 1 110px; min-width: 0; border: 1px solid var(--outline-variant); border-radius: 12px; background: var(--sc-low); color: var(--on-surface); font: 400 14px var(--w-sans); padding: 11px 12px; min-height: 44px; }
+
 /* PRN and unreadable-frequency orders: visible, and visibly NOT part of the round */
 #smdWard .w-sub { margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--outline-variant); }
 #smdWard .w-sub h4 { margin: 0; font-size: 13px; display: flex; align-items: center; gap: 6px; color: var(--on-surface-variant); }
