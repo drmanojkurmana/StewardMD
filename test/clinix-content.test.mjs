@@ -461,7 +461,10 @@ test("TEACHING: taught content cites the standard texts, and never a private aut
   // three standard texts it was built from. No individual is named anywhere in shipped content:
   // the authors asked not to be, and a citation is not the place to overrule that.
   const shared = loadAllSkills();
-  const OK = ["StewardMD Clinical KB", "Macleod", "Alagappan", "Harrison", "GOLD", "WHO", "Indian Medical Council"];
+  // GINA is the asthma counterpart of GOLD: an international guideline body, not an individual.
+  // It was already cited by skill.hx.asthma.triggers but escaped this check while that skill had no
+  // teach block, so the rule did not apply to it.
+  const OK = ["StewardMD Clinical KB", "Macleod", "Alagappan", "Harrison", "GOLD", "GINA", "WHO", "Indian Medical Council"];
   const taughtIds = Object.keys(shared).filter((id) => Array.isArray(shared[id].teach));
   assert.ok(taughtIds.length > 0);
   for (const id of taughtIds) {

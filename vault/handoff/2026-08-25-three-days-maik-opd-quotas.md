@@ -104,9 +104,10 @@ a signed-in user silently becomes a guest until they sign in again. This cost re
 - **TTFV p50 is 2333ms, not the ≤2s target.** Gemini's own first token (0.8-2.8s) is now
   essentially the entire wait. Going lower needs a faster model tier or provisioned Vertex
   capacity — an INFRASTRUCTURE decision, deliberately not taken unilaterally.
-- **The MaiK answer cache writes nothing.** `maik:ans:*` stays empty even with
-  `MAIK_ANSWER_CACHE=1` deployed. NOT the KV binding — that is proven bound (the router cache
-  returns `cached:"kv"` from the same namespace). Cause still unknown.
+- ~~**The MaiK answer cache writes nothing.**~~ **RESOLVED 2026-08-26** — the block sat below the
+  live-stream early return in `/explain`, so with `MAIK_LIVE_STREAM` on the handler returned the SSE
+  response without ever reading or writing it. Your instinct was right: not the KV binding. See
+  [[Decisions]]. Still empty in prod until the fix DEPLOYS (push to `main`).
 - **2 pre-existing failures in `functions/_research.test.mjs`** — verified pre-existing by running
   them against the pre-change file, where they fail identically. Not caused by this window's work.
 - The Gemini `streamGenerateContent?alt=sse` staging probe (`test/staging/gemini-sse-probe.js`) was
@@ -114,9 +115,9 @@ a signed-in user silently becomes a guest until they sign in again. This cost re
 
 ## 5. MUST REVERT — temporary values left in production
 
-- **`MAIK_GUEST_DAILY_LIMIT` is 300**, raised for device testing. Put back to **15**:
-  `printf '15' | npx wrangler pages secret put MAIK_GUEST_DAILY_LIMIT --project-name stewardmd`
-  then redeploy. (Safer to restore now that guests are bucketed per device.)
+- ~~**`MAIK_GUEST_DAILY_LIMIT` is 300**~~ **SECRET RESET to 15 on 2026-08-26.** Pages binds secrets
+  at deploy time, so it takes effect on the NEXT production deployment; prod was still `87b57391`
+  (`main` @ `d59d8ba`) when it was written. Nothing further to run.
 - **KV `ai:limits` = `{"maik":500}`** — this one is INTENTIONAL and predates the benchmarking;
   deleting it drops the MaiK module cap to the 50/day default and blocks the owner's own testing.
   Do not "clean it up" again.

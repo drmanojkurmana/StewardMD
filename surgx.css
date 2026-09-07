@@ -494,3 +494,48 @@ html.sgx-lock .mc-overlay { z-index: 1300; }
    test/surgx-deeplinks.test.mjs asserts every one of these stays above SURGX and below the Rx pad. */
 html.sgx-lock .db-overlay { z-index: 1300; }
 html.sgx-lock .abg { z-index: 1300; }
+
+/* ── Notes backup card (surgx-backup.js) ───────────────────────────────────── */
+#surgxRoot .sgx-bk-h { font: 700 14.5px/1.3 var(--sgx-font, system-ui); margin-bottom: 4px; }
+#surgxRoot .sgx-bk-s { font: 400 12.5px/1.5 var(--sgx-font, system-ui); opacity: .82; }
+#surgxRoot .sgx-bk-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+#surgxRoot .sgx-bk-row .sgx-btn { flex: 1 1 auto; min-width: 46%; }
+#surgxRoot .sgx-bk-off { margin-top: 10px; font: 600 12px var(--sgx-font, system-ui); opacity: .7; }
+#surgxRoot .sgx-bk-msg:not(:empty) { margin-top: 10px; font: 600 12.5px/1.45 var(--sgx-font, system-ui); }
+
+#surgxRoot .sgx-bk-form { display: flex; flex-direction: column; gap: 8px; width: 100%; }
+#surgxRoot .sgx-bk-l { font: 700 11.5px/1 var(--sgx-font, system-ui); letter-spacing: .04em; text-transform: uppercase; opacity: .7; }
+#surgxRoot .sgx-bk-in { width: 100%; box-sizing: border-box; min-height: 46px; padding: 11px 12px; border-radius: 10px;
+  border: 1px solid var(--sgx-line, #d7dee3); background: var(--sgx-surface, #fff); color: var(--sgx-ink, #14202b);
+  font: 600 14px var(--sgx-font, system-ui); }
+#surgxRoot .sgx-bk-warn { font: 400 11.5px/1.5 var(--sgx-font, system-ui); opacity: .85; }
+#surgxRoot .sgx-bk-actions { display: flex; gap: 8px; }
+#surgxRoot .sgx-bk-actions .sgx-btn { flex: 1 1 0; }
+
+/* ── MaiK Evidence Review body ────────────────────────────────────────────────
+   The model answers in markdown. It used to render inside .sgx-pre (monospace,
+   pre-wrap), so a clinical summary read like a code dump with literal asterisks.
+   This is the same card surface, set as prose. See mdLite() in surgx-screens.js. */
+#surgxRoot .sgx-md {
+  font: 500 13.5px/1.65 var(--sgx-sans); color: var(--sgx-ink);
+  background: var(--sgx-surface-2); border: 1px solid var(--sgx-line);
+  border-radius: var(--sgx-r-ctl); padding: 13px 15px; margin: 0;
+  overflow-wrap: break-word;
+}
+#surgxRoot .sgx-md > :first-child { margin-top: 0; }
+#surgxRoot .sgx-md > :last-child { margin-bottom: 0; }
+#surgxRoot .sgx-md p { margin: 0 0 9px; }
+#surgxRoot .sgx-md strong { font-weight: 700; color: var(--sgx-ink); }
+#surgxRoot .sgx-md-h {
+  font: 700 12px var(--sgx-sans); letter-spacing: .04em; text-transform: uppercase;
+  color: var(--sgx-steel); margin: 14px 0 6px;
+}
+#surgxRoot .sgx-md-ul { margin: 0 0 9px; padding-left: 18px; }
+#surgxRoot .sgx-md-ul li { margin-bottom: 5px; }
+
+#surgxRoot .sgx-fld input, #surgxRoot .sgx-fld textarea {
+  transition: border-color var(--sgx-dur, .2s) var(--sgx-ease, ease), box-shadow var(--sgx-dur, .2s) var(--sgx-ease, ease);
+}
+#surgxRoot .sgx-fld input:focus, #surgxRoot .sgx-fld textarea:focus {
+  outline: none; border-color: var(--sgx-steel); box-shadow: 0 0 0 3px rgba(31,78,95,.25);
+}

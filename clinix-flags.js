@@ -8,13 +8,15 @@
  * Resolution order: ?query param -> localStorage -> default. Persistence is localStorage only.
  * Dual export: module.exports for node tests, window.SMD_CLINIX_FLAGS for the browser.
  *
- * PUBLIC-RELEASE-GATE: smd_clinix is the master flag and stays def:false until the owner signs off
- * the clinical content. Flag off must be a COMPLETE no-op (clinix.js returns before touching DOM).
+ * PUBLIC-RELEASE-GATE: smd_clinix is the master flag. It is currently def:TRUE (owner decision,
+ * 2026-08-23, recorded at the top of this file) because the app ships only to testers. Flag off
+ * must be a COMPLETE no-op (clinix.js returns before touching DOM).
  *
- * smd_clinix_draft is the one that matters for safety: with it OFF (the default), the runtime
- * refuses to render any content object whose review.status is not approved/published. The KB COPD
- * reference this module grounds on is currently review.status "ai_drafted", so the draft flag is
- * how an author sees it at all. It must never ship on.
+ * smd_clinix_draft is the one that matters for safety: with it OFF the runtime refuses to render
+ * any content object whose review.status is not approved/published. It is currently def:TRUE, so
+ * unreviewed content DOES render today, badged "Draft, pending clinician review". That is
+ * deliberate for testers and is the single flag that must be flipped to false before any public
+ * release - do not read the default as a safety guarantee.
  */
 (function () {
   "use strict";
@@ -34,8 +36,10 @@
         "clinician review' line and its sources. Set to 0 before any non-tester release."
     },
     smd_clinix_tutor: {
-      type: "bool", def: false, query: "clinixtutor",
-      desc: "MaiK tutor turns inside a lesson (Phase 2). Off = deterministic content only."
+      type: "bool", def: true, query: "clinixtutor",
+      desc: "MaiK tutor turns inside a lesson (Phase 2). Off = deterministic content only. " +
+        "Turned ON by owner decision 2026-08-26: the feature is complete and read through the " +
+        "registry, so the default is the only thing that was holding it back."
     },
     smd_clinix_haptics: {
       type: "bool", def: true, query: "clinixhaptics",
@@ -52,7 +56,7 @@
         "an author flips - persisted so it survives between viva sessions."
     },
     smd_clinix_viva_voice: {
-      type: "bool", def: false, query: "clinixvoice",
+      type: "bool", def: true, query: "clinixvoice",
       desc: "Spoken viva: MaiK speaks the question aloud (native TTS) and the student answers by " +
         "voice (on-device Whisper via SMD_VOICE, same STT already used by MaiK Ask - falls back to " +
         "the device's default on-device recognizer if Whisper is not built for this platform). " +

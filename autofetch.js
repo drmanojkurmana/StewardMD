@@ -10,7 +10,8 @@
  *     our servers, never in plaintext. Stored ONLY after explicit consent, deletable anytime.
  *   - This is separate from Lab Watch 24/7 (which stores server-side for background push).
  *
- * Gated behind localStorage flag `smd_autofetch` (OFF by default until tested on device).
+ * Gated behind localStorage flag `smd_autofetch`, which defaults OFF: the doctor opts in from
+ * Settings, and then consents again per patient before a credential is stored.
  * Depends on: window.SMD_SECURE (native-bridge), window.GHIS (ghis-ward), window.ICU_STATE.
  */
 (function () {
@@ -40,10 +41,11 @@
   // Feature AVAILABILITY (not per-patient). NATIVE-ONLY: the credential lives in the OS secure
   // store (Keychain/Keystore), which doesn't exist on the web/PWA — so the whole feature (on-bar
   // pill, lab-drawer button, auto-run) is hidden off-device by gating on window.SMD_IS_NATIVE.
-  // On native it defaults ON (reachable without the Settings section rendering); the Settings
-  // toggle is a global kill-switch that sets it to "0". No credential/PHI is ever stored without
-  // explicit per-patient consent.
-  function on() { try { return !!window.SMD_IS_NATIVE && localStorage.getItem("smd_autofetch") !== "0"; } catch (e) { return !!window.SMD_IS_NATIVE; } }
+  // OPT-IN, defaults OFF: the doctor turns it on in Settings, THEN consents per patient before any
+  // credential is stored. Two independent gates. The consent tick is what actually authorises
+  // storage, so no credential/PHI is ever stored without it regardless of this switch.
+  // Fails CLOSED: if the flag cannot be read, the feature stays off rather than becoming reachable.
+  function on() { try { return !!window.SMD_IS_NATIVE && localStorage.getItem("smd_autofetch") === "1"; } catch (e) { return false; } }
   function toast(m) { try { (window.SMD_toast || window.toast || function () {})(m); } catch (e) {} }
   function esc(s) { return String(s == null ? "" : s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
 

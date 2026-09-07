@@ -29,6 +29,7 @@ function b64ToBytes(b) {
 }
 function bytesToB64(u) { let s = ""; for (let i = 0; i < u.length; i++) s += String.fromCharCode(u[i]); return btoa(s); }
 
+function randRef() { const u = crypto.getRandomValues(new Uint8Array(16)); return Array.from(u, b => b.toString(16).padStart(2, "0")).join(""); }
 async function aesKey(env) { return crypto.subtle.importKey("raw", b64ToBytes(env.WATCH_ENC_KEY), "AES-GCM", false, ["encrypt", "decrypt"]); }
 async function enc(env, obj) {
   const iv = crypto.getRandomValues(new Uint8Array(12));
@@ -59,14 +60,53 @@ export async function deleteCred(env, uid) { const kv = watchKv(env); if (kv) aw
 export async function getList(env, uid) {
   const kv = watchKv(env); if (!kv) return [];
   let list; try { list = (await kv.get(LIST(uid), "json")) || []; } catch (e) { return []; }
-  // Decrypt the at-rest patient name so callers still get plaintext (behaviour unchanged); older
-  // entries stored `name` in plaintext — keep those as-is for backward compatibility.
-  for (const p of list) { if (p && p.name == null && p.nameEnc) { try { p.name = await dec(env, p.nameEnc); } catch (e) { p.name = ""; } } }
+  // Decrypt the at-rest patient name so callers still get plaintext (behaviour unchanged).
+  let legacy = false;
+  for (const p of list) {
+    if (!p) continue;
+    if (p.name == null && p.nameEnc) { try { p.name = await dec(env, p.nameEnc); } catch (e) { p.name = ""; } }
+    else if (p.name != null && !p.nameEnc) legacy = true;   // stored before at-rest encryption existed
+    if (!p.ref) legacy = true;                              // stored before the opaque push-ref existed
+  }
+  // Migrate legacy rows (plaintext name, or missing ref) on first read rather than leaving them
+  // that way until they expire. setList does the encrypting/ref-assigning; this only has to notice
+  // and use what it returns — the migrated fields land on a COPY, not on `list` in place (see
+  // setList's own comment), so a caller must get that copy back, not the original. Best-effort:
+  // a failed migration must not fail the read the doctor is waiting on.
+  if (legacy) { try { return await setList(env, uid, list); } catch (e) { } }
   return list;
 }
+/* The ONE seam every writer routes through, so the plaintext name is stripped here rather than in
+ * each caller. getList decrypts `nameEnc` into `name` for its callers, and addWatch/removeWatch
+ * both read-then-write — so without this, every add or remove wrote the decrypted names of all the
+ * OTHER entries straight back to KV, undoing the at-rest encryption on each list change.
+ * A legacy row (plaintext `name`, no `nameEnc`) is encrypted here on its first write.
+ *
+ * Also assigns `ref`: a random per-patient reference, opaque outside an authenticated call to
+ * getList for this uid. This is what a lab-watch PUSH NOTIFICATION carries instead of the real
+ * patientId — see functions/api/watch/[[path]].js runForUid(). The push relay (APNs/FCM) and the
+ * device lock screen never see a hospital identifier; the app resolves ref -> patientId itself,
+ * by calling GET /api/watch/status with the doctor's own token, after the doctor is signed in.
+ *
+ * Returns what it wrote (with `name` re-attached in memory) so getList's migration path can hand
+ * the caller the up-to-date objects — `list` itself is never mutated with the new ref/nameEnc,
+ * only the `safe` copy destructured here is, so a caller reading the ORIGINAL array back would
+ * silently miss the very field this migration exists to add. */
 export async function setList(env, uid, list) {
-  const kv = watchKv(env); if (!kv) return;
-  await kv.put(LIST(uid), JSON.stringify(list || []), { expirationTtl: TTL_S });
+  const kv = watchKv(env); if (!kv) return [];
+  const safe = [];
+  for (const p of (list || [])) {
+    if (!p) { safe.push(p); continue; }
+    const { name, ...rest } = p;
+    if (!rest.nameEnc && name != null) {
+      // Fail closed: if encryption is unavailable, drop the name rather than persist it readable.
+      try { rest.nameEnc = await enc(env, name); } catch (e) { }
+    }
+    if (!rest.ref) rest.ref = randRef();
+    safe.push(name != null ? { ...rest, name } : rest);
+  }
+  await kv.put(LIST(uid), JSON.stringify(safe.map(({ name, ...rest }) => rest)), { expirationTtl: TTL_S });
+  return safe;
 }
 export async function addWatch(env, uid, patient) {
   const list = await getList(env, uid);
@@ -74,7 +114,7 @@ export async function addWatch(env, uid, patient) {
   if (!list.some((p) => String(p.patientId) === pid)) {
     // Encrypt the patient name at rest (PHI) — GHIS creds in this module are already AES-GCM encrypted.
     let nameEnc = ""; try { nameEnc = await enc(env, patient.name || ""); } catch (e) {}
-    list.push({ patientId: pid, episodeId: patient.episodeId || "", nameEnc: nameEnc, since: Date.now() });
+    list.push({ patientId: pid, episodeId: patient.episodeId || "", nameEnc: nameEnc, since: Date.now(), ref: randRef() });
     await setList(env, uid, list);
   }
   return list;

@@ -29,8 +29,14 @@ test("uncleared media stays OFF - that one is a licence question, not a review q
   assert.equal(F.bool("smd_clinix_uncleared_media"), false);
 });
 
-test("the tutor is OFF by default, so a lesson is deterministic content only", () => {
-  assert.equal(F.bool("smd_clinix_tutor"), false);
+/* Was "OFF by default, so a lesson is deterministic content only". Owner turned it ON on
+ * 2026-08-26. The default changed; what must NOT change is that it can still be closed, so the
+ * assertion now pins the escape hatch rather than the old default. */
+test("the tutor is ON by default, and can still be turned off per device", () => {
+  assert.equal(F.bool("smd_clinix_tutor"), true);
+  F.set("smd_clinix_tutor", false);
+  assert.equal(F.bool("smd_clinix_tutor"), false, "a device must always be able to opt out");
+  F.set("smd_clinix_tutor", true);
 });
 
 test("viva tier defaults to mbbs, and only accepts the two real values", () => {
@@ -41,8 +47,15 @@ test("viva tier defaults to mbbs, and only accepts the two real values", () => {
   assert.equal(F.get("smd_clinix_viva_tier"), "mbbs", "...but read back as the default, never as garbage");
 });
 
-test("viva voice mode is OFF by default (a per-device student opt-in, never forced on)", () => {
-  assert.equal(F.bool("smd_clinix_viva_voice"), false);
+/* This one was "a per-device student opt-in, never forced on". That property is GONE by owner
+ * decision on 2026-08-26 - it is now on by default, so a student who wants a silent viva has to
+ * turn it off rather than never being asked. Recording the change honestly instead of quietly
+ * re-pointing the test: what remains guaranteed is only that turning it off works. */
+test("viva voice mode is ON by default, and a student can still switch it off", () => {
+  assert.equal(F.bool("smd_clinix_viva_voice"), true);
+  F.set("smd_clinix_viva_voice", false);
+  assert.equal(F.bool("smd_clinix_viva_voice"), false, "the opt-out must survive the default flip");
+  F.set("smd_clinix_viva_voice", true);
 });
 
 test("haptics default ON, matching the other modules", () => {

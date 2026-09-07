@@ -100,9 +100,14 @@
     // The eyebrow must not simply repeat the title. "Acute abdomen / Acute abdomen" is what
     // category-as-subtitle produces for a protocol whose name IS its category.
     if (sub && String(sub).toLowerCase() === String(title).toLowerCase()) sub = "";
-    return '<div class="sgx-head">' + lead +
+    // titleless: the screen below already carries the wordmark. On HOME the hero sits directly under
+    // this bar, so printing SURGX in both stacked the same title twice (reported from internal
+    // testing: "Remove this....keep it as clinix"). The bar is kept for its close button; the overlay
+    // and that button both still name SURGX for screen readers.
+    return '<div class="sgx-head' + (opts.titleless ? " sgx-head-bare" : "") + '">' + lead +
+      (opts.titleless ? '<div class="sgx-htitle"></div>' :
       '<div class="sgx-htitle">' + (sub ? '<span class="sgx-hsub">' + esc(sub) + "</span>" : "") +
-      (opts.rawTitle || esc(title)) + "</div>" +
+      (opts.rawTitle || esc(title)) + "</div>") +
       right +
       (isHome ? "" : '<button class="sgx-hbtn sgx-close" data-sgx="close" aria-label="Close SURGX">' + ic("close") + "</button>") +
       "</div>";
@@ -258,7 +263,7 @@
       }).join("");
     }
 
-    return head("SURGX", "", { rawTitle: 'SURG<sup style="font-size:.62em;font-weight:700;position:relative;top:-.5em">x</sup>' }) +
+    return head("SURGX", "", { titleless: true }) +
       '<div class="sgx-hero">' +
       // The owner-supplied monogram, forced white against the hero gradient (the PNG is
       // alpha-masked, so brightness(0) invert(1) yields clean white). The wordmark below stays LIVE
@@ -657,6 +662,32 @@
     return head(rec.title, "04 · Evidence") + wrap(body);
   }
 
+  /* The evidence review comes back as MARKDOWN from the model ("*   **A - Airway:** Ensure ...").
+   * It used to be dropped into .sgx-pre - a monospace, pre-wrap block - so every asterisk was shown
+   * literally and a clinical summary read like a code dump. Render the small subset the model
+   * actually emits: headings, bullets and bold.
+   * SAFETY: each fragment is esc()'d FIRST and the markdown pass only ever runs on already-inert
+   * text, so no HTML in a model response can survive into the DOM. */
+  function mdLite(src) {
+    var lines = String(src == null ? "" : src).replace(/\r/g, "").split("\n");
+    var out = [], inList = false, i, ln, h, b;
+    function closeList() { if (inList) { out.push("</ul>"); inList = false; } }
+    function inline(s) { return esc(s).replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>"); }
+    for (i = 0; i < lines.length; i++) {
+      ln = lines[i].trim();
+      if (!ln) { closeList(); continue; }
+      h = ln.match(/^#{1,6}\s*(.+)$/);
+      if (h) { closeList(); out.push('<h5 class="sgx-md-h">' + inline(h[1].replace(/:$/, "")) + "</h5>"); continue; }
+      // A bullet marker must be followed by whitespace, so a line that merely OPENS with bold
+      // ("**A - Airway:** ...") is a paragraph, not a list item.
+      b = ln.match(/^(?:[-*•]|\d+[.)])\s+(.+)$/);
+      if (b) { if (!inList) { out.push('<ul class="sgx-md-ul">'); inList = true; } out.push("<li>" + inline(b[1]) + "</li>"); continue; }
+      closeList(); out.push("<p>" + inline(ln) + "</p>");
+    }
+    closeList();
+    return out.join("");
+  }
+
   function runLitReview(q, hostEl) {
     var ev = EV(); if (!ev || !hostEl) return;
     hostEl.innerHTML = '<div class="sgx-skel"><i></i></div>';
@@ -675,7 +706,7 @@
       }).join("");
       hostEl.innerHTML = '<div class="sgx-banner info">' + ic("auto_awesome") +
         " MaiK Evidence Review · trusted literature, verify independently" + (r.cached ? " · cached" : "") + "</div>" +
-        '<div class="sgx-pre">' + esc(r.text) + "</div>" +
+        '<div class="sgx-md">' + mdLite(r.text) + "</div>" +
         (srcs ? '<div class="sgx-card" style="margin-top:10px"><h4>Sources</h4><ol style="margin:0;padding-left:18px;font:500 12.5px/1.6 var(--sgx-sans)">' + srcs + "</ol></div>" : "");
     });
   }
@@ -902,12 +933,67 @@
         '<span class="go">' + ic("chevron_right") + "</span></button>";
     }).join("") : '<div class="sgx-empty">No notes on this device yet.</div>';
 
+    /* Backup to the doctor's OWN Drive. Offered here rather than buried in settings because the
+     * loss it prevents happens at reinstall time, when the surgeon is already looking at an empty
+     * Notes list and it is too late. Both directions are explicit taps - there is still no silent
+     * upload path (see surgx-backup.js). */
+    var bk = (typeof window !== "undefined" && window.SMD_SURGX_BACKUP) || null;
+    var bkAvail = bk ? bk.available() : { ok: false, reason: "Unavailable." };
+    var backupHTML = bk ? ('<div class="sgx-seclabel">Backup</div>' +
+      '<div class="sgx-card"><div class="sgx-bk-h">Your own Google Drive</div>' +
+      '<div class="sgx-bk-s">Notes live only on this device, so reinstalling the app destroys them. ' +
+      'A backup encrypts them <b>on this device</b> with a password only you know, then writes them to ' +
+      'a folder in <b>your</b> Drive. Google stores ciphertext; nothing but this app, with your ' +
+      'password, can open it. Nothing is sent unless you tap.</div>' +
+      (bkAvail.ok
+        ? '<div class="sgx-bk-row">' +
+            '<button class="sgx-btn pri" data-sgx="bkup" ' + (list.length ? "" : "disabled ") + '>Back up ' + list.length + ' note' + (list.length === 1 ? "" : "s") + '</button>' +
+            '<button class="sgx-btn" data-sgx="bkrestore">Restore from Drive</button>' +
+          "</div>"
+        : '<div class="sgx-bk-off">' + esc(bkAvail.reason) + "</div>") +
+      '<div class="sgx-bk-msg" id="sgxBkMsg" role="status" aria-live="polite"></div></div>') : "";
+
     return head("Notes", "01") + wrap(
-      '<div class="sgx-banner info">' + ic("lock") +
-      " Encrypted on this device and never uploaded. There is no SURGX note server, by design. " +
-      "Sign out wipes them.</div>" +
+      notesBanner() +
       '<div class="sgx-seclabel">New note</div>' + newRows +
-      '<div class="sgx-seclabel">On this device</div>' + listHTML);
+      '<div class="sgx-seclabel">On this device</div>' + listHTML +
+      backupHTML);
+  }
+
+  /* The encrypted Drive backup lives in surgx-backup.js (the SMD_SURGX_BACKUP global), built in
+   * parallel by another session and kept because its crypto and PHI handling are stricter: its own
+   * password with double confirmation, an explicit no-escrow warning, only the KDF parameters and a
+   * timestamp outside the ciphertext, and plaintext backups refused on read. A duplicate
+   * surgx-sync.js of mine was removed rather than ship two backup systems.
+   *
+   * That module is NOT in main yet (PR #760). Until it lands this banner states the unconditional
+   * truth, and deliberately does not reach for a global nothing defines - test/surgx-deeplinks
+   * catches exactly that, and caught this. When surgx-backup.js merges it makes the wording
+   * conditional on whether a backup actually exists. */
+  /* Three different true statements, and which one is true depends on the device. Written as a
+   * ladder rather than one line because the harsh version, shown to a surgeon who HAS set up a
+   * backup, just teaches them to ignore the banner - and the reassuring version, shown to one who
+   * has not, is a lie that costs notes. FAILS TOWARDS THE HARDER WARNING: anything unproven reads
+   * as "permanent". */
+  function notesBanner() {
+    var B = (typeof window !== "undefined" && window.SMD_SURGX_BACKUP) || null;
+    var st = null;
+    try { if (B && B.status) st = B.status(); } catch (e) { st = null; }
+    if (st && st.hasBackup) {
+      return '<div class="sgx-banner info">' + ic("lock") +
+        " Encrypted on this device, and backed up to your own Google Drive" +
+        (st.lastBackupAtText ? " (" + esc(st.lastBackupAtText) + ")" : "") +
+        ". Signing out or reinstalling removes them from this device; your backup password restores " +
+        "them.</div>";
+    }
+    if (B) {
+      return '<div class="sgx-banner warn">' + ic("lock") +
+        " Encrypted on this device and never uploaded. There is no SURGX note server, by design - so " +
+        "signing out or reinstalling the app DELETES these notes permanently. Back them up below.</div>";
+    }
+    return '<div class="sgx-banner warn">' + ic("lock") +
+      " Encrypted on this device and never uploaded. There is no SURGX note server, by design - so " +
+      "signing out or reinstalling the app DELETES these notes permanently.</div>";
   }
 
   /* Create a blank note of a type, optionally from a procedure template. */
@@ -940,6 +1026,28 @@
       rows);
   }
 
+  /* A linked patient already IS the patient reference. Re-typing the UHID you just selected from
+   * the ward list is pure friction, and because patientRef is required on every note type it was
+   * blocking Finalise - which blocks the EMR write, which is the whole point of linking them.
+   *
+   * Only fills an EMPTY field: whatever the surgeon typed always wins. Marked "auto" rather than
+   * "clinician" so the provenance trail still distinguishes what a person actually wrote. */
+  function applyPatientToFields(link) {
+    if (!state.note || !link) return;
+    state.note.values = state.note.values || {};
+    state.note.provenance = state.note.provenance || {};
+    if (!String(state.note.values.patientRef || "").trim()) {
+      var ref = String(link.patientId || "").trim();
+      var nm = String(link.name || "").trim();
+      state.note.values.patientRef = ref && nm ? (nm + " (" + ref + ")") : (ref || nm);
+      state.note.provenance.patientRef = "auto";
+    }
+    if (!String(state.note.values.date || "").trim()) {
+      state.note.values.date = todayISO();
+      state.note.provenance.date = "auto";
+    }
+  }
+
   function createNote(typeId, templateId) {
     var schema = NS().schemaFor(typeId, templateId);
     if (!schema) { toast("Unknown note type"); return; }
@@ -948,6 +1056,10 @@
       values[k] = schema.prefill[k];
       prov[k] = "ai";      // prefilled boilerplate is NOT the clinician's words until they confirm it
     }
+    /* `date` is required on EVERY note type and is always today. Making a surgeon type it is
+     * friction with no safety value - the note carries createdAt regardless - and it is one of the
+     * "required fields missing" that blocks Finalise, which in turn blocks the EMR write. */
+    if (!values.date) { values.date = todayISO(); prov.date = "auto"; }
     state.noteSchema = schema;
     state.note = {
       id: null, type: typeId, templateId: templateId || "",
@@ -997,7 +1109,9 @@
     var w = P.writability(link);
     var body = '<div class="sgx-row" style="cursor:default">' +
       '<span class="tx"><span class="tt">' + esc(P.describe(link)) + "</span>" +
-      '<span class="sb">' + esc(w.canWrite ? "Can be written to the hospital record." : w.reason) + "</span></span></div>";
+      '<span class="sb">' + esc(w.canWrite
+        ? (w.willCreate ? w.note : "Can be written to the hospital record.")
+        : w.reason) + "</span></span></div>";
 
     if (state.ptPick === "sources") {
       body += '<div class="sgx-btnrow" style="flex-wrap:wrap">' +
@@ -1044,6 +1158,44 @@
    * destination is shown greyed WITH its reason rather than hidden - a row that silently vanishes
    * is the most confusing thing you can do to someone looking for it mid-list.
    * Export needs a finalised note: a draft is explicitly not a record. */
+  /* ── armed confirmations live in STATE, never on the DOM node ──────────────
+   *
+   * They used to be a `data-armed` attribute on the button. Any repaint - the assessment probe
+   * resolving, a status refresh, a save completing - replaces that element and takes the attribute
+   * with it, so the SECOND tap re-arms instead of acting and the surgeon loops forever believing
+   * they confirmed. Measured on a Pixel 9 on 2026-08-26: tap, tap, and the toast "Tap once more to
+   * sign and send" fired TWICE with the note still unsigned. It is very likely the original cause
+   * of a note that was finalised and never sent.
+   *
+   * Keyed by action+target so arming one row cannot arm another, and time-boxed so a stale arm from
+   * five minutes ago cannot be completed by an unrelated tap. */
+  var ARM_MS = 15000;
+  function armKey(act, id) { return String(act) + ":" + String(id == null ? "" : id); }
+  function isArmed(act, id) {
+    var a = state.armed;
+    return !!(a && a.key === armKey(act, id) && a.until > Date.now());
+  }
+  function arm(act, id) {
+    state.armed = { key: armKey(act, id), until: Date.now() + ARM_MS };
+    if (state.armTimer) { try { clearTimeout(state.armTimer); } catch (e) {} }
+    state.armTimer = setTimeout(function () {
+      state.armTimer = null;
+      if (state.armed && state.armed.until <= Date.now()) { state.armed = null; render(); }
+    }, ARM_MS);
+  }
+  function disarm() {
+    state.armed = null;
+    if (state.armTimer) { try { clearTimeout(state.armTimer); } catch (e) {} state.armTimer = null; }
+  }
+
+  /* Complete AND confirmed - the same gate the Finalise button uses, asked without a DOM. */
+  function readyToFinalize(n) {
+    try {
+      var sc = state.noteSchema || NS().schemaFor(n.type, n.templateId);
+      return M().noteCompleteness(sc.sections, n.values, n.provenance).canFinalize === true;
+    } catch (e) { return false; }
+  }
+
   function destinationCard(n) {
     var D = DEST();
     if (!D || !D.availability) return "";
@@ -1055,11 +1207,45 @@
       d = rows[i];
       var blocked = !d.available || (d.id !== "local" && !n.finalized);
       var why = d.reason;
+      var act = "notedest", label = d.label;
       if (d.id === "emr" && !w.canWrite) { blocked = true; why = w.reason || why; }
-      if (!why && d.id !== "local" && !n.finalized) why = "Finalise the note before sending it anywhere.";
-      out += '<button class="sgx-row" data-sgx="notedest" data-id="' + attr(d.id) + '"' +
+      // Writable, but this note will CREATE the Initial Assessment rather than append to one.
+      // Not a warning - a description, so the surgeon knows what they are about to start.
+      else if (d.id === "emr" && w.willCreate && n.finalized) why = w.note;
+
+      /* ONE action for the overwhelmingly common intent.
+       *
+       * A note that is complete and has a writable patient was being told "Finalise the note before
+       * sending it anywhere" - and finalising is its OWN armed double-tap, so filing one note took
+       * FOUR deliberate taps across two separate gates. The owner lost an hour to exactly that on
+       * 2026-08-26: finalised, confirmed, and reasonably believed it had sent.
+       *
+       * So when the note is ready but not yet finalised, this row becomes "Finalise and write...".
+       * It still arms and still carries the PHI disclosure - one confirmation before patient data
+       * leaves the device is the safety feature. Two in a row is theatre that teaches people to tap
+       * through, which is worse than one they actually read. */
+      if (d.id !== "local" && !n.finalized && d.available && (d.id !== "emr" || w.canWrite) && readyToFinalize(n)) {
+        blocked = false;
+        act = "notefinalsend";
+        label = d.id === "drive" ? "Finalise and send to Drive" : "Finalise and write to the hospital record";
+        why = d.id === "emr" && w.willCreate ? w.note : "Signs the note, then sends it. Confirmed once.";
+      } else if (!why && d.id !== "local" && !n.finalized) {
+        why = "Finalise the note before sending it anywhere.";
+      }
+      /* Armed appearance comes FROM STATE, so a repaint mid-confirmation redraws the armed row
+       * instead of silently resetting it to "tap me" while the user believes it is still armed. */
+      var isArm = isArmed(act, d.id);
+      if (isArm) {
+        label = act === "notefinalsend"
+          ? (d.id === "drive" ? "Tap again to sign and send to Drive" : "Tap again to sign and write to the record")
+          : (d.id === "drive" ? "Tap again to send to Drive" : "Tap again to write to the hospital record");
+        why = act === "notefinalsend"
+          ? "Signs the note as final and sends it. Contains patient identifiers."
+          : "Contains patient identifiers.";
+      }
+      out += '<button class="sgx-row' + (isArm ? " danger" : "") + '" data-sgx="' + act + '" data-id="' + attr(d.id) + '"' +
         (blocked ? " disabled" : "") + '><span class="tx">' +
-        '<span class="tt">' + esc(d.label) + "</span>" +
+        '<span class="tt">' + esc(label) + "</span>" +
         '<span class="sb">' + esc(why || d.sub) + "</span></span>" +
         '<span class="go">' + ic(blocked ? "block" : "chevron_right") + "</span></button>";
     }
@@ -1088,6 +1274,14 @@
     }
     if (e === "no_active_assessment" || /no_active_assessment/.test(String(r && r.resp))) {
       return "No active visit assessment for this patient. Open their visit in GHIS first.";
+    }
+    /* The server says login_required when the stored GHIS session has timed out - GHIS expires in
+     * about 30 minutes, so this is the NORMAL state for a note written an hour after Ward Sync was
+     * last opened. It was falling through to the generic "could not reach the hospital record",
+     * which sent the owner hunting a network fault for an expired sign-in. Only the clinician can
+     * fix it (it needs their credentials), so say exactly that. */
+    if (e === "login_required" || e === "ghis_session_expired") {
+      return "Your GHIS sign-in has expired. Open Ward Sync, sign in again, then send the note.";
     }
     if (e.indexOf("http_401") === 0 || e.indexOf("http_403") === 0) return "Access refused. Sign in again.";
     if (e.indexOf("http_") === 0) return (dest === "drive" ? "Drive" : "The hospital record") + " refused the save (" + e.replace("http_", "") + ")";
@@ -1145,12 +1339,20 @@
     if (comp.missing.length) stat = "<b>" + comp.missing.length + " required field" + (comp.missing.length === 1 ? "" : "s") + " missing</b>";
     else if (comp.unconfirmed.length) stat = "<b>" + comp.unconfirmed.length + " field" + (comp.unconfirmed.length === 1 ? "" : "s") + " to confirm</b>";
     else { stat = "<b>Ready to finalise</b>"; cls = " ok"; }
-    var sticky = '<div class="sgx-sticky"><div class="stat' + cls + '">' + stat +
-      " · " + comp.filled + " of " + comp.total + " filled</div>" +
+    /* The count alone is a dead end on a twenty-field form: "6 required fields missing" does not say
+     * which, and they are above the preview while the sticky bar sits at the bottom, so the surgeon
+     * is told they are blocked and left to hunt (owner, 2026-08-26). Make the number the way there:
+     * tap it and it scrolls to the first blocking field and focuses it. */
+    var jumpTo = (comp.missing[0] || comp.unconfirmed[0] || {}).k || "";
+    var sticky = '<div class="sgx-sticky"><div class="stat' + cls + '"' +
+      (jumpTo ? ' data-sgx="notejump" data-k="' + attr(jumpTo) + '" role="button" tabindex="0" style="cursor:pointer;text-decoration:underline"' : "") +
+      ">" + stat + " · " + comp.filled + " of " + comp.total + " filled</div>" +
       '<button class="sgx-btn" data-sgx="notesave">' + ic("save") + " Save</button>" +
       (n.finalized
         ? '<button class="sgx-btn" data-sgx="noteunfinal">Reopen</button>'
-        : '<button class="sgx-btn pri" data-sgx="notefinal"' + (comp.canFinalize ? "" : " disabled") + '>Finalise</button>') +
+        : '<button class="sgx-btn pri' + (isArmed("notefinal", "") ? " danger" : "") + '" data-sgx="notefinal"' +
+          (comp.canFinalize ? "" : " disabled") + '>' +
+          (isArmed("notefinal", "") ? ic("warning") + " Tap again to finalise" : "Finalise") + "</button>") +
       "</div>";
 
     return head(schema.title, "01 · " + (n.finalized ? "Finalised" : "Draft")) + wrap(body) + sticky;
@@ -1286,6 +1488,83 @@
       if (act === "retry") { state.protoIndex = null; state.procList = null; state.evList = null; state.caseList = null; render(); return; }
 
       if (act === "calc") { openCalc(t.getAttribute("data-id")); return; }
+
+      /* Notes backup / restore. DOUBLE PRESS, the armSignOff() discipline used elsewhere for actions
+       * that move patient data: the first tap arms and says what will happen, the second performs it.
+       * That is the "second in-UI tap" the PHI posture requires, and it also means a mis-tap on
+       * Restore cannot overwrite anything. */
+      /* Notes backup / restore. Tapping a button does NOT send: it opens the password form, which
+       * is the deliberate second step (and carries the warning that a lost password is final).
+       * The notes are encrypted on THIS device before anything reaches Google. */
+      if (act === "bkup" || act === "bkrestore") {
+        var BK = window.SMD_SURGX_BACKUP;
+        var msg = rootEl.querySelector("#sgxBkMsg");
+        if (!BK) { if (msg) msg.textContent = "Backup did not finish loading."; return; }
+        var restoring = act === "bkrestore";
+        var row = rootEl.querySelector(".sgx-bk-row");
+        if (!row) return;
+        if (msg) msg.textContent = "";
+        haptic("light");
+        row.innerHTML =
+          '<div class="sgx-bk-form" data-mode="' + (restoring ? "restore" : "backup") + '">' +
+            '<label class="sgx-bk-l" for="sgxBkPw">' + (restoring ? "Backup password" : "Set a backup password") + "</label>" +
+            '<input class="sgx-bk-in" id="sgxBkPw" type="password" autocomplete="off" autocapitalize="off" ' +
+              'autocorrect="off" spellcheck="false" placeholder="' + (restoring ? "The password you used" : "At least 8 characters") + '">' +
+            (restoring ? "" :
+              '<input class="sgx-bk-in" id="sgxBkPw2" type="password" autocomplete="off" autocapitalize="off" ' +
+              'autocorrect="off" spellcheck="false" placeholder="Type it again">') +
+            '<div class="sgx-bk-warn">' + ic("lock") +
+              (restoring
+                ? " Your notes were encrypted on your device before they were uploaded. Only this password can open them."
+                : " Your notes are encrypted on this device first, so Google stores only ciphertext. <b>If you lose this password nobody can open the backup - not you, not StewardMD. There is no reset.</b>") +
+            "</div>" +
+            '<div class="sgx-bk-actions">' +
+              '<button class="sgx-btn" data-sgx="bkcancel" type="button">Cancel</button>' +
+              '<button class="sgx-btn pri" data-sgx="bkgo" data-mode="' + (restoring ? "restore" : "backup") + '" type="button">' +
+                (restoring ? "Unlock and restore" : "Encrypt and back up") + "</button>" +
+            "</div>" +
+          "</div>";
+        var f = row.querySelector("#sgxBkPw"); if (f) { try { f.focus(); } catch (e) {} }
+        return;
+      }
+      if (act === "bkcancel") { render(); return; }
+      if (act === "bkgo") {
+        var BK2 = window.SMD_SURGX_BACKUP;
+        var msg2 = rootEl.querySelector("#sgxBkMsg");
+        if (!BK2) { if (msg2) msg2.textContent = "Backup did not finish loading."; return; }
+        var isRestore = t.getAttribute("data-mode") === "restore";
+        var p1 = rootEl.querySelector("#sgxBkPw"), p2 = rootEl.querySelector("#sgxBkPw2");
+        var pw = p1 ? String(p1.value || "") : "";
+        // A typo in a password nobody can reset is a permanent loss, so it is caught HERE, before
+        // anything is written, rather than months later at restore time.
+        if (!isRestore) {
+          var chk = BK2.checkPassword(pw);
+          if (!chk.ok) { if (msg2) msg2.textContent = BK2.describe({ error: chk.error }); return; }
+          if (!p2 || String(p2.value || "") !== pw) {
+            if (msg2) msg2.textContent = "The two passwords do not match.";
+            return;
+          }
+        } else if (!pw) { if (msg2) msg2.textContent = BK2.describe({ error: "password_required" }); return; }
+
+        t.disabled = true;
+        t.textContent = isRestore ? "Unlocking…" : "Encrypting…";
+        if (msg2) msg2.textContent = "";
+        (isRestore ? BK2.restoreNow({ confirmed: true, password: pw })
+                   : BK2.backupNow({ confirmed: true, password: pw })).then(function (res) {
+          // Do not leave the password sitting in a DOM node once it has been used.
+          try { if (p1) p1.value = ""; if (p2) p2.value = ""; } catch (e) {}
+          var text = BK2.describe(res);
+          if (res && res.ok) {
+            render();
+            var m2 = rootEl.querySelector("#sgxBkMsg"); if (m2) m2.textContent = text;
+            return;
+          }
+          t.disabled = false;
+          t.textContent = isRestore ? "Unlock and restore" : "Encrypt and back up";
+          if (msg2) msg2.textContent = text;
+        });
+        return;
+      }
       /* MEDDB.openList() is the app's own Drugs Database entry point (api.js; the same call
        * home.js's `drugs` action makes). MEDDRUGS is a DIFFERENT module - home.js uses it only for
        * openInteractions - so do not "correct" this to that one.
@@ -1355,6 +1634,16 @@
 
       // notes
       if (act === "newnote") { startNote(t.getAttribute("data-id")); return; }
+      if (act === "notejump") {
+        var fk = t.getAttribute("data-k");
+        var el = fk && document.getElementById("sgxF-" + fk);
+        if (!el) return;
+        try { el.scrollIntoView({ behavior: "smooth", block: "center" }); } catch (e) { try { el.scrollIntoView(); } catch (er) {} }
+        // Focus AFTER the scroll settles, or the keyboard opening fights the animation.
+        setTimeout(function () { try { el.focus({ preventScroll: true }); } catch (e) { try { el.focus(); } catch (er) {} } }, 320);
+        haptic("tap");
+        return;
+      }
       if (act === "mknote") { createNote(t.getAttribute("data-t"), t.getAttribute("data-tpl")); return; }
       if (act === "confirm") {
         var fk = t.getAttribute("data-k");
@@ -1399,6 +1688,7 @@
               setTimeout(function () {
                 if (!state.note || state.note.id !== backTo) return;   // they navigated away; don't overwrite
                 state.note.patient = picked;
+                applyPatientToFields(picked);
                 saveNote(true).then(function () {
                   toast(picked.episodeId ? "Patient linked" : "Linked, but this patient has no open visit");
                   render();
@@ -1450,7 +1740,7 @@
         var p = (state.ptResults || [])[+t.getAttribute("data-idx")];
         var cl = PT().linkFromConnect(state.ptTenant, p);
         if (!cl) { toast("Could not read that patient"); return; }
-        state.note.patient = cl; state.ptPick = null; state.ptResults = null;
+        state.note.patient = cl; applyPatientToFields(cl); state.ptPick = null; state.ptResults = null;
         saveNote(true).then(function () { toast("Patient linked"); render(); });
         return;
       }
@@ -1458,11 +1748,75 @@
         var mEl = rootEl.querySelector("[data-sgx-ptmanual]");
         var ml = PT().linkManual(mEl ? mEl.value : "");
         if (!ml) { toast("Enter a patient reference"); return; }
-        state.note.patient = ml; state.ptPick = null;
+        state.note.patient = ml; applyPatientToFields(ml); state.ptPick = null;
         saveNote(true).then(function () { toast("Patient set"); render(); });
         return;
       }
       if (act === "notesave") { saveNote(false); return; }
+      /* Finalise AND send, behind ONE armed confirmation.
+       *
+       * Deliberately not two gates in a row. Finalising is a clinical act and sending PHI off-device
+       * is a disclosure, but a surgeon who has just filled a complete note and tapped "Finalise and
+       * write to the hospital record" has stated both intentions in one gesture. Asking twice does
+       * not make them think twice; it teaches them to tap through, and it is how a note ended up
+       * finalised-but-never-sent while its author believed otherwise. */
+      if (act === "notefinalsend") {
+        var fsDest = t.getAttribute("data-id");
+        var fsNote = state.note;
+        if (!fsNote) return;
+        var fsComp = M().noteCompleteness(state.noteSchema.sections, fsNote.values, fsNote.provenance);
+        if (!fsComp.canFinalize) { toast("Complete and confirm every required field first"); return; }
+        /* A DIALOG, not a second tap.
+         *
+         * The two-tap gate failed for the owner over and over on a real phone: the first tap armed
+         * visibly, the second did nothing they could see. Whether that was the 15s window expiring
+         * while they read the disclosure, or a repaint, the mechanism itself is the problem - it is
+         * invisible state with a clock on it, and when it goes wrong there is no feedback at all.
+         *
+         * A confirm() is unmissable, has no timer, survives any repaint, cannot be half-completed,
+         * and is a STRONGER confirmation than tapping the same spot twice. Same pattern the sign-out
+         * and restore paths already use. */
+        var fsMsg = fsDest === "drive"
+          ? "Sign this note as final and send it to your Google Drive?\n\nIt contains patient identifiers."
+          : "Sign this note as final and write it into the patient's hospital record?\n\nIt contains patient identifiers. It is added to the Management plan of their Initial Assessment, below whatever is already there.";
+        var goFs = true;
+        try { goFs = window.confirm(fsMsg); } catch (e) { goFs = true; }
+        if (!goFs) return;
+
+        fsNote.finalized = true;
+        fsNote.finalizedAt = todayISO();
+        fsNote.finalizedBy = "clinician";
+        fsNote.audit.push({ a: "finalize" });
+        haptic("medium");
+        toast(fsDest === "drive" ? "Signing and sending to Drive..." : "Signing and writing to the hospital record...");
+        saveNote(true).then(function (okLocal) {
+          if (okLocal === false) { toast("Could not save on this device - nothing was sent"); render(); return; }
+          var D = DEST(); if (!D) { toast("Destinations unavailable"); render(); return; }
+          var mm = M(), sc = state.noteSchema;
+          var text = mm.renderNoteText(sc.sections, fsNote.values, fsNote.provenance, {
+            title: sc.title, finalized: fsNote.finalized,
+            finalizedBy: fsNote.finalizedBy, finalizedAt: fsNote.finalizedAt
+          });
+          D.send(fsDest, fsNote, text, { confirmed: true }).then(function (r) {
+            if (r && r.ok) {
+              fsNote.audit.push({ a: "sent", to: fsDest });
+              saveNote(true);
+              try { window.alert(fsDest === "drive" ? "Saved to your Drive."
+                : "Written into the hospital record.\n\nOpen the patient's Initial Assessment in GHIS and scroll to Management plan."); } catch (e) {}
+            } else {
+              /* Never let a failed write be silent. The note IS signed; say so, and say why the send
+               * failed, in a dialog they cannot miss. */
+              var whyFs = destError(fsDest, r);
+              try { window.alert("The note is SIGNED and saved on this phone, but it was NOT written to the hospital record.\n\nReason: " + whyFs + "\n\nThe note is safe - nothing is lost."); } catch (e) {}
+              // An expired sign-in is the one failure the clinician can fix right now, so take them there.
+              if (/sign-in has expired/i.test(whyFs)) { try { window.openGHIS && window.openGHIS(); } catch (e) {} }
+            }
+            render();
+          });
+        });
+        return;
+      }
+
       if (act === "notedest") {
         var dest = t.getAttribute("data-id");
         // ALWAYS write the device copy first, whatever the destination. If the export then fails
@@ -1473,15 +1827,13 @@
           if (!state.note.finalized) { toast("Finalise the note before sending it anywhere"); return; }
           var D = DEST(); if (!D) { toast("Destinations unavailable"); return; }
           // Second tap confirms: this puts patient-identifying text outside the device.
-          if (t.getAttribute("data-armed") !== "1") {
-            t.setAttribute("data-armed", "1");
-            t.classList.add("danger");
-            var label = dest === "drive" ? "Confirm: send to Drive" : "Confirm: write to the hospital record";
-            t.innerHTML = '<span class="tx"><span class="tt">' + esc(label) + "</span>" +
-              '<span class="sb">Contains patient identifiers. Tap again to send.</span></span>';
-            setTimeout(function () { if (t && t.getAttribute("data-armed") === "1") render(); }, 6000);
-            return;
-          }
+          /* Dialog, not a second tap - same reasoning as notefinalsend above. */
+          var dMsg = dest === "drive"
+            ? "Send this note to your Google Drive?\n\nIt contains patient identifiers."
+            : "Write this note into the patient's hospital record?\n\nIt contains patient identifiers. It is added to the Management plan of their Initial Assessment, below whatever is already there.";
+          var goD = true;
+          try { goD = window.confirm(dMsg); } catch (e) { goD = true; }
+          if (!goD) return;
           var mm = M(), sc = state.noteSchema;
           var text = mm.renderNoteText(sc.sections, state.note.values, state.note.provenance, {
             title: sc.title, finalized: state.note.finalized,
@@ -1489,8 +1841,16 @@
           });
           toast(dest === "drive" ? "Sending to Drive…" : "Writing to the hospital record…");
           D.send(dest, state.note, text, { confirmed: true }).then(function (r) {
-            if (r && r.ok) { toast(dest === "drive" ? "Saved to Google Drive" : "Written to the hospital record"); }
-            else { toast(destError(dest, r)); }
+            /* A toast is missable, and a write into a patient's chart that silently did not happen
+             * is the worst outcome this screen has. Both results are a dialog. */
+            if (r && r.ok) {
+              try { window.alert(dest === "drive" ? "Saved to your Drive."
+                : "Written into the hospital record.\n\nOpen the patient's Initial Assessment in GHIS and scroll to Management plan."); } catch (e) {}
+            } else {
+              var whyD = destError(dest, r);
+              try { window.alert("NOT written to the hospital record.\n\nReason: " + whyD + "\n\nThe note is safe on this phone."); } catch (e) {}
+              if (/sign-in has expired/i.test(whyD)) { try { window.openGHIS && window.openGHIS(); } catch (e) {} }
+            }
             render();
           });
         });
@@ -1500,24 +1860,57 @@
         var mm = M();
         var comp = mm.noteCompleteness(state.noteSchema.sections, state.note.values, state.note.provenance);
         if (!comp.canFinalize) { toast("Complete and confirm every required field first"); return; }
-        // Double-press gate: finalising a clinical record is never a single tap.
-        // (Same discipline as discharge-ghis.js armSignOff().)
-        if (t.getAttribute("data-armed") !== "1") {
-          t.setAttribute("data-armed", "1");
-          t.classList.add("danger");
-          t.innerHTML = ic("warning") + " Confirm: this is final";
-          setTimeout(function () {
-            if (!t || t.getAttribute("data-armed") !== "1") return;
-            t.removeAttribute("data-armed"); t.classList.remove("danger"); t.textContent = "Finalise";
-          }, 5000);
-          return;
-        }
+        /* FINALISING DOES NOT SEND, and that caught the owner out at 00:50 on 2026-08-27: they
+         * tapped the big green Finalise button, saw "Finalised", and reasonably believed the note
+         * had gone to GHIS. It had not - the chart still showed the previous write. Worse, signing
+         * REMOVES the "Finalise and write to the hospital record" row (that row only exists on a
+         * draft) and replaces it with a plain destination that needs a separate action. So the most
+         * obvious button on the screen quietly took the send AWAY.
+         *
+         * Signing is still its own act - a surgeon may well sign now and file later. But the moment
+         * it is signed, if there is a writable hospital record waiting, ASK. */
+        var writable = false;
+        try { var wf = PT().writability(state.note.patient || null); writable = !!(wf && wf.canWrite); } catch (e) {}
+        var goSign = true;
+        try {
+          goSign = window.confirm(writable
+            ? "Sign this note as final?\n\nYou will be asked next whether to write it into the patient's hospital record."
+            : "Sign this note as final?\n\nIt can still be reopened afterwards.");
+        } catch (e) {}
+        if (!goSign) return;
+        disarm();
         state.note.finalized = true;
         state.note.finalizedAt = todayISO();
         state.note.finalizedBy = "clinician";
         state.note.audit.push({ a: "finalize" });
         haptic("medium");
-        saveNote(true).then(function () { toast("Finalised"); render(); });
+        saveNote(true).then(function () {
+          render();
+          if (!writable) { toast("Finalised"); return; }
+          var sendNow = false;
+          try {
+            sendNow = window.confirm("Note signed.\n\nWrite it into the patient's hospital record now?\n\nIt goes into the Management plan of their Initial Assessment. Contains patient identifiers.");
+          } catch (e) {}
+          if (!sendNow) { toast("Signed. Not sent - use Hospital EMR when you are ready."); return; }
+          var D = DEST(); if (!D) { toast("Destinations unavailable"); return; }
+          var sc = state.noteSchema, nn = state.note;
+          var text = mm.renderNoteText(sc.sections, nn.values, nn.provenance, {
+            title: sc.title, finalized: nn.finalized, finalizedBy: nn.finalizedBy, finalizedAt: nn.finalizedAt
+          });
+          toast("Writing to the hospital record...");
+          D.send("emr", nn, text, { confirmed: true }).then(function (r) {
+            if (r && r.ok) {
+              nn.audit.push({ a: "sent", to: "emr" });
+              saveNote(true);
+              try { window.alert("Written into the hospital record.\n\nOpen the patient's Initial Assessment in GHIS and scroll to Management plan."); } catch (e) {}
+            } else {
+              var whyN = destError("emr", r);
+              try { window.alert("The note is SIGNED and saved on this phone, but it was NOT written to the hospital record.\n\nReason: " + whyN + "\n\nThe note is safe - nothing is lost."); } catch (e) {}
+              if (/sign-in has expired/i.test(whyN)) { try { window.openGHIS && window.openGHIS(); } catch (e) {} }
+            }
+            render();
+          });
+        });
         return;
       }
       if (act === "noteunfinal") {
@@ -1547,15 +1940,15 @@
         return;
       }
       if (act === "notedelete") {
-        if (t.getAttribute("data-armed") !== "1") {
-          t.setAttribute("data-armed", "1");
-          t.innerHTML = ic("warning") + " Confirm delete";
-          setTimeout(function () {
-            if (!t || t.getAttribute("data-armed") !== "1") return;
-            t.removeAttribute("data-armed"); t.innerHTML = ic("delete") + " Delete note";
-          }, 5000);
+        /* State-backed like the others. A repaint disarming a DELETE is fail-safe rather than
+         * dangerous, but it produces the same unwinnable loop for the surgeon. */
+        if (!isArmed("notedelete", "")) {
+          arm("notedelete", "");
+          toast("Tap Delete once more to remove this note");
+          render();
           return;
         }
+        disarm();
         try { ST().deleteNote(state.note.id); } catch (er) {}
         state.note = null;
         toast("Deleted");
@@ -1601,6 +1994,8 @@
 
   function onClose() { /* state is intentionally retained so reopening returns you to context */ }
 
-  var API = { mount: mount, onClose: onClose, go: go, _state: function () { return state; } };
+  // _mdLite is exposed for the same reason _state is: the evidence-review renderer is a small parser
+  // and needs a runnable check (test/run-surgx-md-ui.mjs). It is pure and reads no state.
+  var API = { mount: mount, onClose: onClose, go: go, _state: function () { return state; }, _mdLite: mdLite };
   if (typeof window !== "undefined") window.SMD_SURGX_SCREENS = API;
 })();

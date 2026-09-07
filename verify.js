@@ -6,7 +6,9 @@
  * then sets the Firebase custom claim verified:true (mirrors the `pro` claim in account.js).
  *
  * Two surfaces, one overlay (#verifyGate):
- *   • FORCED gate — unverified signed-in users are blocked until they verify (no close).
+ *   • FORCED gate — unverified signed-in users are asked to verify. Skipping drops them to the
+ *     FREE tier (no Pro), and the account is removed after 7 days if it is never verified
+ *     (owner decision 2026-08-27; enforced server-side in _entitlement.js + the lifecycle sweep).
  *   • ACCOUNT PANEL — opened from the sidebar menu ("Account & Verification"); shows the
  *     linked account (provider + email) ↔ registration number ↔ status, with an upload
  *     option when not yet verified. Closable.
@@ -41,12 +43,59 @@
     return "—";
   }
 
-  // Resolve the verified custom claim → Promise<boolean>. Pass force=true to refresh the
-  // ID token first (needed right after an owner approval, whose claim the cached token lacks).
+  /* isVerified() is the ONE answer the whole app uses for "is this doctor verified?", so it must not
+   * hand back a stale one. A custom claim set by the owner's approval does NOT appear in the client's
+   * ID token until that token refreshes, which Firebase does about hourly. That lag was the reported
+   * bug: a genuinely verified doctor was told to verify by Ward Sync and the Rx pad, and then the
+   * verify panel - which does consult the server - showed "verified" and let them straight through.
+   * The panel already knew how to resolve the disagreement (see evaluate() below); the gates did not,
+   * because they read the cached claim and stopped there.
+   *
+   * The resolution now lives HERE, so every caller gets it:
+   *   cached claim true   -> true immediately, no network
+   *   cached claim false  -> refresh the token once; a fresh claim settles it
+   *   still false         -> ask the server, which is authoritative, then refresh so the claim agrees
+   *
+   * A TRUE answer is remembered for the session. A FALSE answer is remembered only briefly, so a
+   * doctor approved while the app is open is not locked out until they relaunch. force=true skips
+   * the cache entirely.
+   *
+   * NOTE: this deliberately does NOT call fetchStatus(). fetchStatus() falls back to isVerifiedClaim()
+   * when the network fails, so calling it from here would be mutual recursion. */
+  var _vCache = { val: null, at: 0 };
+  var VERIFY_FALSE_TTL = 60000;   // re-check a "no" at most once a minute, not on every gate render
+  function _rememberVerified(v) { _vCache = { val: v, at: Date.now() }; return v; }
+  function _claimOf(u, force) {
+    return u.getIdTokenResult(!!force)
+      .then(function (r) { return !!(r && r.claims && r.claims.verified === true); })
+      .catch(function () { return false; });
+  }
+  // Minimal, self-contained server check — no claim fallback, so it can never recurse into us.
+  function _serverSaysVerified(u) {
+    return u.getIdToken().then(function (tok) {
+      return fetch("/api/verify-doctor", { headers: { "Authorization": "Bearer " + tok } })
+        .then(function (r) { return r.ok ? r.json() : null; })
+        .then(function (d) { return !!(d && d.status === "verified"); });
+    }).catch(function () { return false; });
+  }
   function isVerifiedClaim(force) {
     if (allowlisted()) return Promise.resolve(true);
     var u = fbUser(); if (!u) return Promise.resolve(false);
-    return u.getIdTokenResult(!!force).then(function (r) { return !!(r && r.claims && r.claims.verified === true); }).catch(function () { return false; });
+    if (!force && _vCache.val === true) return Promise.resolve(true);
+    if (!force && _vCache.val === false && (Date.now() - _vCache.at) < VERIFY_FALSE_TTL) return Promise.resolve(false);
+    return _claimOf(u, !!force).then(function (ok) {
+      if (ok) return _rememberVerified(true);
+      return _claimOf(u, true).then(function (fresh) {          // the token may simply be stale
+        if (fresh) return _rememberVerified(true);
+        return _serverSaysVerified(u).then(function (sv) {       // the server is authoritative
+          if (!sv) return _rememberVerified(false);
+          // Approved, but the claim has not propagated. Refresh so everything else agrees, and let
+          // them in either way - the server already said yes.
+          return _claimOf(u, true).then(function () { return _rememberVerified(true); },
+                                        function () { return _rememberVerified(true); });
+        });
+      });
+    }).catch(function () { return false; });
   }
   // Full status (incl. pending) from the server; falls back to the claim.
   function fetchStatus() {
@@ -61,6 +110,14 @@
       return isVerifiedClaim().then(function (ok) { return { status: ok ? "verified" : "unverified" }; });
     });
   }
+  /* account.js caches the last /api/billing/status verdict, and every Pro gate - the Subscription
+   * row, SMD_PRO_NOTICE, the paywall's own verify-bounce - reads that cache. It is refreshed at
+   * sign-in and on app open, NOT at the moment a verification lands, so a doctor who had just been
+   * verified tapped Subscription and was told to verify again (reported 2026-09-02). Push a refresh
+   * at the moment the answer changes. Best-effort: sync() never rejects; a failure keeps the last
+   * verdict, which is what would have been shown anyway. Called AFTER the forced token refresh so
+   * the request carries the new claim. */
+  function resyncPro() { try { if (window.SMD_PRO && typeof window.SMD_PRO.sync === "function") window.SMD_PRO.sync(); } catch (e) {} }
   window.SMD_VERIFY = { isVerified: isVerifiedClaim, openPanel: openPanel, VERIFY_ALLOWLIST: VERIFY_ALLOWLIST };
 
   // ---- Overlay refs ----
@@ -132,15 +189,15 @@
       $("verifyAccReg").textContent = (data && data.regNo) || (verified ? "—" : "not linked yet");
       var badge = $("verifyBadge");
       badge.className = "verify-badge " + (st === "trial" ? "pending" : st);   // reuse pending styling for trial
-      badge.innerHTML = ({ verified: vfIco("check") + " Verified", pending: "Under review", trial: "Trial access", rejected: "Rejected", unverified: "Not verified" })[st] || st;
+      badge.innerHTML = ({ verified: vfIco("check") + " Verified", pending: "Under review", trial: "Free plan", rejected: "Rejected", unverified: "Not verified" })[st] || st;
     }
 
-    $("verifyTitle").textContent = verified ? "Your account is verified" : (trial ? "You're on a 7-day trial" : (pending ? "Verification under review" : "Verify you're a registered doctor"));
+    $("verifyTitle").textContent = verified ? "Your account is verified" : (trial ? "You're on the free plan" : (pending ? "Verification under review" : "Verify you're a registered doctor"));
     var sub = $("verifySubtitle");
     if (sub) sub.textContent = verified
-      ? "Your medical registration is linked to this account."
+      ? "Your medical registration is linked to this account. Pro is free for your first 7 days as a verified doctor."
       : (trial
-        ? "You have full access for a few more days. Verify your medical registration anytime to keep access and unlock the prescription generator — upload your certificate below, or enter your registration number with a photo ID."
+        ? "You're using StewardMD's free tools. Verify your medical registration to unlock Pro free for 7 days and the prescription generator. Upload your certificate below, or enter your registration number with a photo ID. Accounts that are never verified are removed after 7 days."
         : (pending
           ? "We've received your certificate and our team is reviewing it — we'll email you once it's approved. In the meantime you can upload a clearer certificate below to try instant verification again."
           : "StewardMD is for registered doctors. Verify instantly by uploading your NMC / State Medical Council registration certificate — or enter your registration number and upload Aadhaar / any government photo ID (we read only your name to match the register; the ID is never stored)."));
@@ -159,7 +216,7 @@
     }
 
     var closable = mode !== "forced";
-    var x = $("verifyClose"); if (x) x.style.display = "";   // always shown; on the forced gate ✕ starts the trial
+    var x = $("verifyClose"); if (x) x.style.display = "";   // always shown; on the forced gate ✕ continues on the free plan
     var skip = $("verifySkipBtn"); if (skip) skip.style.display = (mode === "forced" && !verified) ? "" : "none";
     var done = $("verifyDoneBtn"); if (done) done.style.display = (closable && (verified || pending)) ? "" : "none";
 
@@ -175,7 +232,7 @@
       setStatusMsg("info", "Offline mode — verification resumes automatically when you're back online.");
       if (skipBtn) { skipBtn.textContent = "Continue in offline mode"; skipBtn.style.display = ""; }
     } else if (skipBtn) {
-      skipBtn.textContent = "Skip for now — start your 7-day trial";   // restore default when online
+      skipBtn.textContent = "Not now, continue on the free plan";   // restore default when online
     }
 
     g.classList.remove("hidden"); g.style.display = "flex";
@@ -228,6 +285,8 @@
       if (data.status === "verified") {
         setStatusMsg("success", vfIco("check") + " Verified — Dr. " + (data.name || "") + " (" + (data.regNo || "") + "). A confirmation email is on its way. Opening StewardMD…");
         try { await u.getIdToken(true); } catch (e) {}
+        _rememberVerified(true);
+        resyncPro();   // the cached entitlement verdict predates this verification
         setTimeout(hideGate, 1200);
         return;
       }
@@ -284,7 +343,7 @@
       if (d && d.status === "trial") {
         var n = daysLeft(d.provisionalUntil) || d.provisionalDays || 7;
         hideGate();
-        try { (window.toast || window.SMD_toast || function () {})("7-day trial started · " + n + "d left · prescription locked until verified"); } catch (e) {}
+        try { (window.toast || window.SMD_toast || function () {})("Free plan · verify within " + n + "d to keep this account and unlock Pro"); } catch (e) {}
         return;
       }
       if (d && d.status === "verified") {   // already verified — just let them in
@@ -292,10 +351,10 @@
         return;
       }
       if (d && d.status === "trial_expired") {
-        setStatusMsg("error", "Your 7-day trial has ended — please verify your registration to continue.");
+        setStatusMsg("error", "This account has been unverified for 7 days and is due for removal — verify your registration now to keep it.");
         return;
       }
-      setStatusMsg("error", "Couldn't start the trial — please try again, or verify your certificate.");
+      setStatusMsg("error", "Couldn't continue — please try again, or verify your certificate.");
     }).catch(function () {
       trialing = false; if (skip) skip.disabled = false;
       setStatusMsg("error", "Network error — please try again.");
@@ -334,7 +393,7 @@
     if (x && !x._smdWired) {
       x._smdWired = true;
       x.addEventListener("click", function () {
-        // On the FORCED gate the ✕ must consume the trial (a plain close just re-forces);
+        // On the FORCED gate the ✕ records the free-plan choice (a plain close just re-forces);
         // elsewhere (panel / already provisional) it simply dismisses.
         var g = gate();
         if (g && g.dataset.mode === "forced") startTrial(); else hideGate();
@@ -355,6 +414,11 @@
           var g = window.google;
           if (g && g.accounts && g.accounts.id && g.accounts.id.disableAutoSelect) g.accounts.id.disableAutoSelect();
         } catch (e) {}
+        /* Drop the cached logbook FIRST. pglog's storage key is derived from the signed-in uid, so
+         * once stewardmd_account is gone the store can no longer find the record to delete - and
+         * store.clearAccount() had no callers anywhere, leaving a full cached dashboard (case
+         * references, diagnoses, entry titles) in device storage after sign-out. */
+        try { if (window.SMD_PGLOG_STORE && SMD_PGLOG_STORE.clearAccount) SMD_PGLOG_STORE.clearAccount(); } catch (e) {}
         try { localStorage.removeItem("stewardmd_account"); } catch (e) {}
         var a = auth();
         var p = (a && a.signOut) ? a.signOut() : Promise.resolve();
@@ -368,6 +432,7 @@
   }
 
   // ---- Forced gate: signed-in real accounts must be verified ----
+  var _promptedThisOpen = false;   // re-ask once per app open, not once per evaluate() call
   function evaluate() {
     var u = fbUser();
     if (!u) { hideGate(); return; }            // not signed in → app.js's account gate handles it
@@ -381,8 +446,12 @@
         // verified:true claim yet — force a token refresh so the claim catches up, then let
         // the doctor straight in. No re-upload, no re-login, no manual admin step.
         if (d && d.status === "verified") {
+          // Tell isVerified() too, or every feature gate keeps saying "not verified" from the cached
+          // negative until its TTL lapses - which is the bug this whole path exists to work around.
+          _rememberVerified(true);
           var u2 = fbUser();
           (u2 && u2.getIdToken ? u2.getIdToken(true) : Promise.resolve()).catch(function () {}).then(function () {
+            resyncPro();   // owner approval landed while the app was open: refresh the cached verdict too
             if (gate() && gate().dataset.mode !== "panel") hideGate();
           });
           return;
@@ -391,6 +460,18 @@
         // "skip" trial — while inside the window; else force verification.
         var provisional = d && (d.status === "pending" || d.status === "trial") && provisionalActive(d.provisionalUntil);
         if (provisional) {
+          /* ASK ON EVERY APP OPEN until verified (owner decision, 2026-08-27). Before this, one tap
+           * on "Not now" silenced the prompt for the whole 7 days, so an account could reach the
+           * deletion sweep having been asked exactly once. Still dismissible - an unverified doctor
+           * keeps the free tier - but they are asked again next time they open the app.
+           *
+           * PENDING REVIEW IS EXEMT: they have already sent us their proof and are waiting on us.
+           * Nagging someone for something they have already done is how an app loses a real doctor.
+           * Once per app OPEN, not per evaluate(): this runs on every auth/account change too. */
+          if (d.status !== "pending" && !_promptedThisOpen) {
+            _promptedThisOpen = true;
+            if (!gate() || gate().dataset.mode !== "panel") { render("forced", d); return; }
+          }
           if (gate() && gate().dataset.mode !== "panel") hideGate();
           try { (window.toast || window.SMD_toast || function () {})((d.status === "trial" ? "Trial access · " : "Provisional access · ") + daysLeft(d.provisionalUntil) + "d left to verify · prescription locked"); } catch (e) {}
         } else {

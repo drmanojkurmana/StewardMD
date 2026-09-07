@@ -64,7 +64,10 @@
       ".rx-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:6px}.rx-title{font:800 18px var(--hfont,system-ui)}.rx-x{border:0;background:transparent;font-size:20px;cursor:pointer;color:var(--hmut,#64748b)}" +
       ".rx-clinic{font:700 15px var(--hfont);color:var(--hink)}.rx-disc{font:500 11px var(--hfont);color:var(--hmut,#64748b);background:rgba(245,158,11,.1);border-radius:8px;padding:6px 9px;margin:8px 0}" +
       ".rx-pt{display:flex;gap:8px;margin:8px 0}.rx-pt input{flex:1;min-width:0}" +
-      ".rx-in{border:1px solid var(--hbd,#e2e8f0);border-radius:8px;padding:7px 9px;font:400 13px var(--hfont);background:var(--hpanel,#fff);color:var(--hink)}" +
+      /* Fields were 7px-tall hairline boxes with no focus state - the sheet read as a grey stack and nothing told you where the caret was. Taller touch target, softer radius, and a real focus ring so the active field is unmistakable on a phone held one-handed at the bedside. */
+      ".rx-in{border:1px solid var(--hbd,#e2e8f0);border-radius:10px;padding:10px 12px;font:400 13.5px var(--hfont);background:var(--hpanel,#fff);color:var(--hink);transition:border-color .15s,box-shadow .15s}" +
+      ".rx-in::placeholder{color:var(--hmut,#94a3b8)}" +
+      ".rx-in:focus{outline:none;border-color:var(--teal,#0e6e63);box-shadow:0 0 0 3px color-mix(in srgb, var(--teal,#0e6e63) 18%, transparent)}" +
       ".rx-symbol{font:800 22px var(--hfont);margin:6px 0 2px}" +
       ".rx-line{border:1px solid var(--hbd,#e2e8f0);border-radius:10px;padding:9px;margin:8px 0}.rx-line.unv{border-color:#f59e0b;background:rgba(245,158,11,.06)}.rx-line.adv{background:rgba(100,116,139,.06)}" +
       ".rx-line .r1{display:flex;gap:6px;flex-wrap:wrap}.rx-line .r1 input{}.rx-drug{flex:2 1 160px}.rx-brand{flex:1 1 110px}.rx-line .r2{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px}.rx-dose{flex:2 1 160px}.rx-freq{flex:1 1 90px}.rx-dur{flex:1 1 90px}" +
@@ -72,7 +75,7 @@
       ".rx-ac{border:1px solid var(--hbd,#e2e8f0);border-radius:10px;margin-top:6px;background:var(--hpanel,#fff);max-height:240px;overflow:auto;box-shadow:0 8px 24px rgba(0,0,0,.12)}" +
       ".rx-ac-item{display:block;width:100%;text-align:left;border:0;border-bottom:1px solid var(--hbd,#eef1f4);background:none;padding:8px 10px;cursor:pointer;font:500 13px var(--hfont);color:var(--hink,#14202b)}.rx-ac-item:last-child{border-bottom:0}.rx-ac-item:hover,.rx-ac-item.on{background:var(--paper,#f6f7f5)}" +
       ".rx-ac-g{font-weight:800}.rx-ac-b{color:var(--teal,#0e6e63);font-weight:600}.rx-ac-d{display:block;color:var(--hmut,#64748b);font-size:11.5px;margin-top:2px}.rx-ac-empty{padding:8px 10px;color:var(--hmut,#64748b);font:500 12px var(--hfont)}" +
-      ".rx-btn{border:0;border-radius:999px;padding:9px 16px;font:800 13px var(--hfont);cursor:pointer}.rx-add{background:rgba(100,116,139,.12);color:var(--hink)}.rx-print{background:#2563eb;color:#fff}.rx-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px;align-items:center}.rx-ico{width:14px;height:14px;vertical-align:-2px;display:inline-block;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}.rx-x .rx-ico,.rx-del .rx-ico{width:16px;height:16px}.rx-print .rx-ico{margin-right:5px}" +
+      ".rx-btn{border:0;border-radius:999px;padding:9px 16px;font:800 13px var(--hfont);cursor:pointer}.rx-add{background:rgba(100,116,139,.12);color:var(--hink)}.rx-print{background:var(--teal,#0e6e63);color:#fff}.rx-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px;align-items:center}.rx-ico{width:14px;height:14px;vertical-align:-2px;display:inline-block;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}.rx-x .rx-ico,.rx-del .rx-ico{width:16px;height:16px}.rx-print .rx-ico{margin-right:5px}" +
       ".rx-sign{margin-top:14px;border-top:1px dashed var(--hbd,#e2e8f0);padding-top:10px;font:600 13px var(--hfont);color:var(--hink)}.rx-sign small{color:var(--hmut,#64748b);font-weight:500}" +
       ".rx-gate{font:500 13px var(--hfont);color:var(--hink)}.rx-gate input{margin-top:10px;width:100%}" +
       ".rx-clinic-card{display:flex;align-items:center;gap:10px;border:1px solid var(--hbd,#e2e8f0);border-radius:12px;padding:9px 11px;margin-bottom:6px;background:var(--paper,#f8faf9)}.rx-clinic-logo{width:42px;height:42px;object-fit:contain;border-radius:8px;background:#fff}.rx-clinic-meta{flex:1;min-width:0}.rx-clinic-nm{font:800 14px var(--hfont);color:var(--hink)}.rx-clinic-ad{font:500 11.5px var(--hfont);color:var(--hmut,#64748b)}.rx-clinic-edit{border:0;background:transparent;color:var(--teal,#0e6e63);font:700 12px var(--hfont);cursor:pointer}" +
@@ -93,7 +96,29 @@
     if (!scrim) { scrim = document.createElement("div"); scrim.className = "rx-scrim"; scrim.id = "rxScrim"; document.body.appendChild(scrim); scrim.addEventListener("click", close); }
     if (!sheet) { sheet = document.createElement("div"); sheet.className = "rx-sheet"; sheet.id = "rxSheet"; sheet.setAttribute("role", "dialog"); sheet.setAttribute("aria-modal", "true"); sheet.setAttribute("aria-label", "Prescription"); document.body.appendChild(sheet); }
   }
-  function show(html) { ensureEls(); sheet.innerHTML = '<div class="rx-wrap">' + html + '</div>'; scrim.classList.add("on"); sheet.classList.add("on"); }
+  /* Every field on this sheet is placeholder-only - no <label>, no aria-label. A placeholder
+   * disappears the moment you type, so once the pad is half filled the doctor is looking at
+   * unlabelled grey boxes, and a screen reader has nothing dependable to announce. Mirroring the
+   * placeholder into aria-label closes that hole without adding visible chrome nobody asked for.
+   * Done HERE because show() is the one funnel every screen of the pad renders through - drug rows,
+   * the clinic form, the registration gate - so no field can be missed or later forgotten. The
+   * trailing hint is trimmed: "Brand - tap for brands + prices" is a prompt; the label is "Brand". */
+  function rxLabelInputs() {
+    try {
+      var els = sheet.querySelectorAll("input[placeholder]:not([aria-label])");
+      for (var i = 0; i < els.length; i++) {
+        var p = String(els[i].getAttribute("placeholder") || "");
+        var lab = p.split(/\s+[—–-]\s+/)[0].split(" (")[0].trim();
+        if (lab) els[i].setAttribute("aria-label", lab);
+      }
+    } catch (e) {}
+  }
+  function show(html) {
+    ensureEls();
+    sheet.innerHTML = '<div class="rx-wrap">' + html + '</div>';
+    rxLabelInputs();
+    scrim.classList.add("on"); sheet.classList.add("on");
+  }
   function close() { if (sheet) sheet.classList.remove("on"); if (scrim) scrim.classList.remove("on"); }
 
   // ---- WebView-safe Print / PDF ----------------------------------------------------------------
@@ -124,7 +149,312 @@
     });
     return { name: name, age: age, dx: dx, complaints: cc, vitals: vitals, lines: lines };
   }
-  function rxPrintHTML(topic, regNo) {
+  /* ---- Verifiable prescriptions (habit-forming drugs + antibiotics) --------------------------
+   * A printed prescription is trivially forged: a name, a registration number and a drug list on
+   * paper. For the two classes where that does the most harm, the sheet now carries an opaque code
+   * and a QR pointing at stewardmd.in/verify/<code>, and the server holds the authoritative record
+   * of WHO wrote WHICH drugs and until when.
+   *
+   * The record is minted server-side from the signed-in doctor's own verified token claims, never
+   * from anything this file sends (functions/_rx_store.js), and it holds no patient data at all -
+   * which is what lets the verify page be public. Note what is NOT posted below: no name, no age.
+   *
+   * FAIL-OPEN, DELIBERATELY. If the app is offline or the issue call fails, the prescription still
+   * prints, just without a QR. A doctor at a bedside must never be unable to print because a network
+   * is down, and an unverifiable prescription is exactly what exists today - so this can only ever
+   * add assurance, never withhold a prescription.
+   */
+  function rxvOn() { try { return !!(window.SMD_RX_VALIDITY && window.SMD_PGLOG_QR); } catch (e) { return false; } }
+  function rxIdToken() {
+    try {
+      var u = window.SMD_AUTH && window.SMD_AUTH.currentUser;
+      if (u && u.getIdToken) return u.getIdToken();
+    } catch (e) {}
+    return Promise.resolve("");
+  }
+  // Resolves to a record {code, validUntil, ...} when this prescription is in scope, else null.
+  // Never rejects: every failure path prints an ordinary prescription.
+  /* "Manoj Kumar" -> "M*** K***". Computed HERE, on the device, and only the mask is ever sent: the
+   * server never receives the patient's name, so there is no name in transit and none at rest to
+   * leak. A fixed three stars, never the real length - keeping the length (or alternate letters,
+   * M*N*JK*M*R) hands back a skeleton a human reconstructs on sight, which is not a mask at all.
+   *
+   * What it is FOR: the pharmacist compares the initials against the ID in front of them, so a
+   * stolen PDF presented by someone with different initials is refused. What it is NOT: proof of
+   * identity. Initials collide constantly, so this catches the opportunistic case, not a targeted
+   * one. It is also still personal data - pseudonymised, not anonymous - see the verify page.
+   */
+  function rxMaskName(name) {
+    var parts = String(name == null ? "" : name).trim().split(/\s+/).filter(Boolean).slice(0, 4);
+    var out = [];
+    for (var i = 0; i < parts.length; i++) {
+      var first = parts[i].charAt(0);
+      if (/[A-Za-z]/.test(first)) out.push(first.toUpperCase() + "***");
+    }
+    return out.join(" ");
+  }
+
+  function rxIssueVerification(lines, patientName) {
+    if (!rxvOn()) return Promise.resolve(null);
+    var drugs = (lines || []).filter(function (L) { return !L.advice && L.drug; }).map(function (L) {
+      return { name: L.drug, dose: L.dose || "", freq: L.freq || "", duration: L.duration || "" };
+    });
+    var mask = rxMaskName(patientName);
+    // No scope gate and no minimum drug count: EVERY prescription this app prints carries an ID and
+    // a QR, a blank sheet included. The rules module still decides how LONG a prescription is valid
+    // and still explains why one is worth checking - it just no longer decides whether a sheet gets
+    // a code at all. A sheet with no code cannot be checked by anyone holding it.
+    return rxIdToken().then(function (tok) {
+      if (!tok) return null;                       // not signed in: print without a QR
+      return fetch("/api/rx/issue", {
+        method: "POST",
+        headers: { "content-type": "application/json", "Authorization": "Bearer " + tok },
+        body: JSON.stringify({ drugs: drugs, country: "IN", patientMask: mask })
+      }).then(function (r) { return r.ok ? r.json() : null; });
+    }).then(function (d) { return (d && d.ok && d.issued) ? d : null; }).catch(function () { return null; });
+  }
+  // Why this sheet printed without a QR. rxIssueVerification collapses every failure to null, which
+  // is right for printing but leaves the prescriber holding a sheet with no code and no reason - the
+  // one case that reads as a bug when it is usually the scope rule working correctly. Names which it
+  // was, and never blocks the print.
+  function rxNoQrWhy() {
+    if (!rxvOn()) return "";
+    // Scope is no longer a reason - every prescription gets a code now - so the only two ways to
+    // reach a bare sheet are being signed out or being unable to reach the server. Both are
+    // actionable by the prescriber, which is the point of saying which one it was.
+    try {
+      var u = window.SMD_AUTH && window.SMD_AUTH.currentUser;
+      if (!u) return "Printed without a QR - sign in to give prescriptions a verification code.";
+    } catch (e) {}
+    return "Printed without a QR - the verification service could not be reached. The prescription is still valid.";
+  }
+
+  // The block printed on the sheet. No network at print time: the SVG is generated on device by the
+  // same encoder the PG logbook prints with (pglog-qr.js), so this works on a ward with no signal.
+  // The URL a phone camera opens. Absolute on purpose: a relative path resolves against nothing once
+  // the sheet is paper. Shared, so the printed sheet and the exported PDF can never encode
+  // different URLs for the same prescription.
+  function rxVerifyUrl(code) { return "https://stewardmd.in/verify/" + String(code || "").replace(/[^0-9A-Za-z-]/g, ""); }
+  /* The encoder sizes the SVG from its module count - a longer URL means more modules means a wider
+   * drawing - and it ignores whatever box we put it in. At scale 3 it came out roughly twice the
+   * 96px slot, overflowed, and painted straight over the code, the verify URL and the validity line
+   * printed beside it. Pin the element to the box, stripping the encoder's own width/height so ours
+   * is the only one, and keep the viewBox so it scales instead of cropping. */
+  function rxQrSvg(rec, px) {
+    var size = px || 96;
+    try {
+      var s = SMD_PGLOG_QR.toSvg(rxVerifyUrl(rec.code), { scale: 3, label: "Verify prescription " + rec.code });
+      return s.replace(/^<svg([^>]*)>/, function (m, attrs) {
+        return '<svg' + String(attrs).replace(/\s(width|height)\s*=\s*"[^"]*"/g, "") +
+          ' width="' + size + '" height="' + size + '"' +
+          ' style="display:block;width:' + size + 'px;height:' + size + 'px">';
+      });
+    } catch (e) { return ""; }
+  }
+  function rxValidUntil(rec) {
+    try { return rec.validUntil ? new Date(rec.validUntil).toISOString().slice(0, 10) : ""; } catch (e) { return ""; }
+  }
+
+  /* The same block for the EXPORTED sheet (Save as PDF / JPEG), which is a DIFFERENT document from
+   * the printed one: rxDoc builds a DOM node that html2canvas rasterises, so it inherits none of
+   * rxPrintHTML's <style> and every rule must be inline or it renders unstyled. Without this the
+   * PDF carried no QR and no code at all, while its own footer still said "signed & verified".
+   */
+  /* Laid out as a TABLE, not flex. html2canvas rasterises this, and a flex row let the QR spill out
+   * of its track and sit on top of the code and the URL. Two table cells cannot overlap: the text
+   * column starts where the QR column ends, whatever the QR's natural size turns out to be.
+   * `border-top:0` on the block is set by the caller when it is stamped on its own. */
+  function rxDocQrBlock(rec, bare) {
+    if (!rec || !rec.code) return "";
+    var until = rxValidUntil(rec);
+    return '<table style="width:100%;border-collapse:collapse;margin-top:' + (bare ? "0" : "14px") +
+        ';padding-top:12px;border-top:' + (bare ? "0" : "1px solid #e2e8f0") + '"><tr>' +
+      '<td style="width:104px;padding:8px 12px 0 0;vertical-align:top">' + rxQrSvg(rec, 96) + '</td>' +
+      '<td style="padding:8px 0 0 0;vertical-align:top">' +
+        '<div style="font:700 13px ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.06em;color:#0f172a;word-break:break-all">' + esc(rec.code) + '</div>' +
+        '<div style="font-size:10.5px;color:#64748b;margin-top:3px">Scan to verify this prescription</div>' +
+        '<div style="font-size:10.5px;color:#0e6e63;font-weight:700;margin-top:2px">stewardmd.in/verify</div>' +
+        (until ? '<div style="font-size:10.5px;color:#64748b;margin-top:2px">Valid until ' + esc(until) + '</div>' : '') +
+      '</td></tr></table>';
+  }
+
+  function rxQrBlock(rec) {
+    if (!rec || !rec.code) return "";
+    var svg = rxQrSvg(rec);
+    var until = rxValidUntil(rec);
+    return '<div class="rxv">' + svg +
+      '<div class="rxv-m"><div class="rxv-c">' + esc(rec.code) + '</div>' +
+      '<div class="rxv-l">Scan to verify this prescription</div>' +
+      '<div class="rxv-u">stewardmd.in/verify</div>' +
+      (until ? '<div class="rxv-l">Valid until ' + esc(until) + '</div>' : '') + '</div></div>';
+  }
+
+  /* ---- Verify a prescription, inside the app ------------------------------------------------
+   * The QR on a printed sheet is scanned with an ordinary phone camera, which opens
+   * stewardmd.in/verify/<code> — that path needs nothing from us. This is the other half: a doctor
+   * or pharmacist ALREADY IN the app who has a code in front of them and wants to check it without
+   * leaving for a browser.
+   *
+   * Reads the same public endpoint the web page does (/api/rx/v/<code>), so the two can never give
+   * different answers. No sign-in: verification is public by design (functions/_rx_public.js), and
+   * requiring a login here would make the in-app check useless to the pharmacist it is for. */
+  function injectVerifyCSS() {
+    if (document.getElementById("rxvCss")) return;
+    var s = document.createElement("style"); s.id = "rxvCss";
+    s.textContent =
+      ".rxv-ov{position:fixed;inset:0;z-index:16200;background:rgba(15,23,42,.5);display:flex;align-items:flex-end;justify-content:center}" +
+      ".rxv-sh{background:var(--hpanel,#fff);color:var(--hink,#0f172a);width:100%;max-width:560px;max-height:88vh;overflow:auto;border-radius:18px 18px 0 0;padding:16px 16px 26px}" +
+      ".rxv-h{display:flex;align-items:center;justify-content:space-between;font:800 16px var(--hfont);margin-bottom:2px}" +
+      ".rxv-x{border:0;background:transparent;cursor:pointer;color:var(--hmut,#64748b);font-size:20px;line-height:1;padding:4px 6px}" +
+      ".rxv-sub{font:600 12.5px var(--hfont);color:var(--hmut,#64748b);margin:0 0 12px}" +
+      ".rxv-in{display:flex;gap:8px}" +
+      ".rxv-in input{flex:1;min-width:0;padding:13px 13px;font:700 15px ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.06em;border:1px solid var(--hline,#e2e8f0);border-radius:12px;background:var(--hbg,#fff);color:inherit}" +
+      ".rxv-go{padding:13px 18px;border:0;border-radius:12px;background:#0e6e63;color:#fff;font:800 14px var(--hfont);cursor:pointer}" +
+      // Scan is the primary way in on a phone, so it is full-width and above the typed field.
+      ".rxv-scan{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;min-height:48px;margin:0 0 10px;padding:13px;border:0;border-radius:12px;background:#0e6e63;color:#fff;font:800 14.5px var(--hfont);cursor:pointer;transition:transform .12s}" +
+      ".rxv-scan:active{transform:scale(.98)}.rxv-scan svg{width:19px;height:19px;stroke:currentColor;fill:none}" +
+      ".rxv-scan:disabled{opacity:.6}" +
+      ".rxv-go:disabled{opacity:.55}" +
+      ".rxv-badge{border-radius:13px;padding:14px 15px;color:#fff;margin:14px 0 4px}" +
+      ".rxv-badge b{display:block;font:800 17px var(--hfont)}.rxv-badge p{margin:6px 0 0;font:600 12.5px var(--hfont);opacity:.95}" +
+      ".rxv-card{border:1px solid var(--hline,#e2e8f0);border-radius:13px;padding:2px 14px;margin-top:10px}" +
+      ".rxv-r{display:flex;gap:12px;padding:10px 0;border-bottom:1px solid var(--hline,#eef2f1)}.rxv-r:last-child{border-bottom:0}" +
+      ".rxv-k{flex:0 0 42%;font:600 12.5px var(--hfont);color:var(--hmut,#64748b)}.rxv-v{flex:1;font:700 13.5px var(--hfont);word-break:break-word}" +
+      ".rxv-ok{color:#0f7a4a}.rxv-no{color:#9b1c1c}" +
+      ".rxv-d{padding:10px 0;border-bottom:1px solid var(--hline,#eef2f1)}.rxv-d:last-child{border-bottom:0}" +
+      ".rxv-d b{font:800 14px var(--hfont)}.rxv-d span{display:block;font:600 12px var(--hfont);color:var(--hmut,#64748b)}" +
+      ".rxv-note{font:600 11.5px var(--hfont);color:var(--hmut,#64748b);margin-top:12px;line-height:1.5}";
+    document.head.appendChild(s);
+  }
+  var RXV_TONE = {
+    ACTIVE:   { bg: "#0f7a4a", t: "Valid prescription", s: "Issued by the prescriber below and still within its validity period." },
+    EXPIRED:  { bg: "#8a5a00", t: "Expired", s: "Genuine, but past its validity date. Do not dispense against it." },
+    REVOKED:  { bg: "#9b1c1c", t: "Withdrawn by the prescriber", s: "The prescriber withdrew this prescription. Do not dispense against it." },
+    ARCHIVED: { bg: "#4a5568", t: "Archived", s: "Beyond its retention window and no longer active." },
+    not_found:{ bg: "#4a5568", t: "Not found", s: "No prescription carries that code. Check the code, or treat the document as unverified." },
+    malformed:{ bg: "#4a5568", t: "Not a valid code", s: "That is not a StewardMD prescription code." },
+    rate_limited: { bg: "#4a5568", t: "Too many lookups", s: "Try again in a minute." },
+    error:    { bg: "#4a5568", t: "Could not check", s: "No connection to the verification service. Try again when you are online." }
+  };
+  /* ---- Native QR scan (@capacitor/barcode-scanner) -------------------------------------------
+   * The phone's own scanner UI: Google Play Services' code scanner on Android, the native
+   * AVFoundation scanner on iOS. We deliberately do NOT ship a camera view of our own — the system
+   * one is faster, already localised, already accessible, and on Android it needs no camera
+   * permission at all because the scanning happens inside Play Services.
+   *
+   * Called through Capacitor.Plugins rather than an import: this app is buildless ES5, so the
+   * package's ESM wrapper is not reachable. That wrapper is also where the option defaults are
+   * applied, so every option it would have filled in is passed explicitly below — omitting them
+   * sends undefined straight to the native layer.
+   *
+   * NATIVE-ONLY on purpose. The package's web fallback is a lazily-imported ESM module (html5-qrcode)
+   * that cannot load in this context, so the button is hidden off-device and the typed code remains
+   * the way in. Better a missing button than one that does nothing.
+   */
+  var RXV_HINT_QR = 0;        // Html5QrcodeSupportedFormats.QR_CODE
+  var RXV_CAM_BACK = 1;       // CapacitorBarcodeScannerCameraDirection.BACK
+  var RXV_ORIENT_ADAPTIVE = 3; // CapacitorBarcodeScannerScanOrientation.ADAPTIVE
+  function rxvScanner() {
+    try {
+      var C = window.Capacitor;
+      if (!C || !C.isNativePlatform || !C.isNativePlatform()) return null;
+      return (C.Plugins && C.Plugins.CapacitorBarcodeScanner) || null;
+    } catch (e) { return null; }
+  }
+  function rxvScan() {
+    var P = rxvScanner();
+    if (!P || !P.scanBarcode) return Promise.reject(new Error("unavailable"));
+    return P.scanBarcode({
+      hint: RXV_HINT_QR,
+      scanInstructions: "Point the camera at the QR on the prescription",
+      scanButton: false,
+      scanText: " ",
+      cameraDirection: RXV_CAM_BACK,
+      scanOrientation: RXV_ORIENT_ADAPTIVE,
+      cancelButtonAccessibilityLabel: "Cancel scanning",
+      torchButtonOnAccessibilityLabel: "Turn the torch off",
+      torchButtonOffAccessibilityLabel: "Turn the torch on"
+    }).then(function (r) { return (r && r.ScanResult) || ""; });
+  }
+  // A scanned QR carries the full verify URL; a human might paste just the code. Accept both, and
+  // ignore anything after the code (a query string, a trailing slash) rather than failing the lookup.
+  function rxvCodeFrom(text) {
+    var t = String(text || "").trim();
+    var m = t.match(/\/verify\/([^/?#\s]+)/i);
+    return m ? m[1] : t;
+  }
+  function rxvDay(ms) { try { return ms ? new Date(ms).toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" }) : ""; } catch (e) { return ""; } }
+  function rxvRow(k, v) { return v || v === 0 ? '<div class="rxv-r"><div class="rxv-k">' + esc(k) + '</div><div class="rxv-v">' + esc(v) + "</div></div>" : ""; }
+  function rxvResultHTML(d) {
+    var tone = RXV_TONE[(d && d.status) || "error"] || RXV_TONE.error;
+    var out = '<div class="rxv-badge" style="background:' + tone.bg + '"><b>' + esc(tone.t) + "</b><p>" +
+      esc(d && d.revokedReason ? tone.s + " Reason: " + d.revokedReason : tone.s) + "</p></div>";
+    if (!d || !d.ok) return out;
+    var doc = d.doctor || {};
+    out += '<div class="rxv-card">' + rxvRow("Code", d.code) + rxvRow("Issued", rxvDay(d.issuedAt)) +
+      rxvRow("Valid until", rxvDay(d.validUntil)) + rxvRow("Schedule", d.schedule) +
+      (d.refillsAllowed != null ? rxvRow("Refills allowed", String(d.refillsAllowed)) : "") + "</div>";
+    out += '<div class="rxv-card">' + rxvRow("Prescriber", doc.name || "(not recorded)") +
+      rxvRow("Registration no.", doc.regNo || "(not recorded)") +
+      '<div class="rxv-r"><div class="rxv-k">Registration verified</div><div class="rxv-v ' +
+      (doc.verified ? "rxv-ok" : "rxv-no") + '">' + (doc.verified ? "Verified by StewardMD" : "NOT verified") + "</div></div></div>";
+    var drugs = [].concat(d.drugs || []);
+    out += '<div class="rxv-card">' + drugs.map(function (x) {
+      var sub = [x.dose, x.freq, x.duration].filter(Boolean).join(" · ");
+      return '<div class="rxv-d"><b>' + esc(x.name) + "</b>" + (sub ? "<span>" + esc(sub) + "</span>" : "") + "</div>";
+    }).join("") + "</div>";
+    out += '<p class="rxv-note">Compare this list against the paper in your hand. If they differ, the document has been altered. No patient information is stored on a verification record.</p>';
+    return out;
+  }
+  function openVerify(prefill) {
+    injectCSS(); injectVerifyCSS();
+    var ov = document.createElement("div"); ov.className = "rxv-ov";
+    ov.innerHTML = '<div class="rxv-sh" role="dialog" aria-modal="true" aria-label="Verify a prescription">' +
+      '<div class="rxv-h"><span>Verify a prescription</span><button class="rxv-x" aria-label="Close">&times;</button></div>' +
+      '<p class="rxv-sub">' + (rxvScanner() ? "Scan the QR on the prescription, or type the code printed beside it." : "Type the code printed on the prescription.") + "</p>" +
+      (rxvScanner() ? '<button class="rxv-scan" id="rxvScan">' + rxIco("camera") + " Scan QR code</button>" : "") +
+      '<div class="rxv-in"><input id="rxvCode" inputmode="latin" autocapitalize="characters" spellcheck="false" ' +
+        'placeholder="XXXX-XXXX-XXXX-XXXX" aria-label="Prescription code" value="' + esc(prefill || "") + '">' +
+      '<button class="rxv-go" id="rxvGo">Check</button></div>' +
+      '<div id="rxvOut"></div>' +
+      '<p class="rxv-note">Only prescriptions containing a habit-forming drug or an antibiotic carry a code.</p></div>';
+    document.body.appendChild(ov);
+    var close = function () { try { ov.remove(); } catch (e) {} };
+    ov.addEventListener("click", function (e) { if (e.target === ov) close(); });
+    ov.querySelector(".rxv-x").addEventListener("click", close);
+    var inp = ov.querySelector("#rxvCode"), go = ov.querySelector("#rxvGo"), out = ov.querySelector("#rxvOut");
+    function run() {
+      var raw = (inp.value || "").trim();
+      var code = window.SMD_RX_VALIDITY ? SMD_RX_VALIDITY.normalizeCode(raw) : raw.replace(/[^0-9A-Za-z]/g, "").toUpperCase();
+      if (!code || code.length < 12) { out.innerHTML = rxvResultHTML({ status: "malformed" }); return; }
+      go.disabled = true; out.innerHTML = '<p class="rxv-note">Checking…</p>';
+      fetch("/api/rx/v/" + encodeURIComponent(code))
+        .then(function (r) { return r.json().catch(function () { return null; }); })
+        .then(function (d) { out.innerHTML = rxvResultHTML(d); })
+        .catch(function () { out.innerHTML = rxvResultHTML({ status: "error" }); })
+        .then(function () { go.disabled = false; });
+    }
+    go.addEventListener("click", run);
+    inp.addEventListener("keydown", function (e) { if (e.key === "Enter") run(); });
+    var scanBtn = ov.querySelector("#rxvScan");
+    if (scanBtn) scanBtn.addEventListener("click", function () {
+      scanBtn.disabled = true;
+      rxvScan().then(function (text) {
+        var code = rxvCodeFrom(text);
+        if (!code) return;
+        inp.value = code;
+        run();                                   // scanned = checked; no second tap to confirm
+      }, function () {
+        /* Cancelling is the common case and must not look like a failure, but a denied camera would
+         * otherwise be silent - so one neutral line covers both and points at the way that works. */
+        out.innerHTML = '<p class="rxv-note">Scan cancelled, or the camera is unavailable. Type the code printed on the prescription instead.</p>';
+      }).then(function () { scanBtn.disabled = false; });
+    });
+    setTimeout(function () { try { inp.focus(); } catch (e) {} }, 60);
+    if (prefill) run();
+  }
+
+  function rxPrintHTML(topic, regNo, rxv) {
     var d = collectRx(), date = ""; try { date = new Date().toISOString().slice(0, 10); } catch (e) {}
     var n = 0;
     var rows = d.lines.map(function (L) {
@@ -147,6 +477,12 @@
       '.adv{padding:6px 0;color:#475569;font-size:13px}' +
       '.sign{margin-top:34px;text-align:right}.sign .nm{font-weight:700}.sign .mt{color:#64748b;font-size:12px}' +
       '.disc{margin-top:22px;padding-top:12px;border-top:1px solid #e2e8f0;font-size:11px;color:#64748b;line-height:1.5}' +
+      // The verification block sits with the signature: a reader checking authenticity is already
+      // looking at who signed it. Kept off the page break so the QR is never split in half.
+      '.rxv{display:flex;gap:12px;align-items:center;margin-top:18px;padding-top:14px;border-top:1px solid #e2e8f0;break-inside:avoid;page-break-inside:avoid}' +
+      '.rxv svg{width:96px;height:96px;flex:0 0 auto}' +
+      '.rxv-c{font:700 14px ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.06em;color:#0f172a}' +
+      '.rxv-l{font-size:11px;color:#64748b;margin-top:2px}.rxv-u{font-size:11px;color:#0e6e63;font-weight:700;margin-top:2px}' +
       '@media print{body{padding:0}@page{margin:16mm}}' +
       '</style></head><body>' +
       '<div class="hd"><span class="logo">Steward<b>MD</b></span><span class="tag">Prescription</span></div>' +
@@ -154,6 +490,7 @@
       ((d.name || d.age) ? '<div class="pt">' + esc(d.name) + (d.age ? '  &middot;  ' + esc(d.age) : '') + '</div>' : '') +
       '<div class="rxsym">&#8478;</div><main>' + (rows || '<div class="adv">No items.</div>') + '</main>' +
       '<div class="sign"><div class="nm">Dr. ' + esc(docName() || "—") + '</div><div class="mt">NMC Reg: ' + esc(regNo || "—") + '  &middot;  ' + esc(date) + '</div></div>' +
+      rxQrBlock(rxv) +
       '<div class="disc">Draft prescription generated with StewardMD. Verify every drug, dose, route and interaction against the patient and local protocol. The prescriber is responsible for what they sign.</div>' +
       '</body></html>';
   }
@@ -181,9 +518,17 @@
     return false;
   }
   function doRxPrint(topic, regNo) {
-    var html = rxPrintHTML(topic, regNo);
-    if (rxNative()) { if (!rxNativePrint(html)) rxWebPrint(html); return; }
-    if (!rxWebPrint(html)) rxNativePrint(html);
+    // Mint the verification record BEFORE rendering, so the code and its QR are on the sheet that
+    // gets printed. rxIssueVerification never rejects and resolves to null when the prescription is
+    // out of scope, when the doctor is not signed in, or when the network is down - in every one of
+    // those cases the prescription still prints, just without a QR (see rxIssueVerification).
+    var d = collectRx();
+    rxIssueVerification(d && d.lines, d && d.name).then(function (rxv) {
+      if (!rxv) { var why = rxNoQrWhy(d && d.lines); if (why) rxToast(why); }
+      var html = rxPrintHTML(topic, regNo, rxv);
+      if (rxNative()) { if (!rxNativePrint(html)) rxWebPrint(html); return; }
+      if (!rxWebPrint(html)) rxNativePrint(html);
+    });
   }
 
   // Drug dictionary for text extraction — the interaction engine (~3k generics, incl. specialty
@@ -301,14 +646,66 @@
       try { showPriceHint(line, r.generic); } catch (e) {}   // lowest-cost brand awareness
     }
     function paint() { Array.prototype.forEach.call(ac.querySelectorAll(".rx-ac-item"), function (b, i) { b.classList.toggle("on", i === active); }); }
+    /* THE SAME DRUG DATABASE THE ICU TREATMENT SEARCH USES.
+     *
+     * This searched MEDDRUGS.searchIndex alone - the on-device ward formulary, ~70 drugs - so most
+     * molecules simply "were not in the database" when typed here, while ICU's Add Treatment search
+     * found them at once. Two search bars over two different datasets, inside one app.
+     *
+     * Same arrangement as icu.js txRemoteSearch, deliberately: the local formulary answers instantly
+     * and is the only thing that works with no signal, and the server's hits (MEDAPI, the full
+     * composition index) merge in when they arrive. Debounced, and a reply for a query the doctor
+     * has already typed past is dropped rather than painted over what they are reading.
+     */
+    var remoteRows = [], remoteQ = "", remoteT = null;
+    function remoteSearch(q, fromBrand) {
+      if (q.length < 2 || !window.MEDAPI || !MEDAPI.searchCompositions) return;
+      if (q === remoteQ) return;                        // already fetched or in flight for this query
+      remoteQ = q;
+      if (remoteT) { try { clearTimeout(remoteT); } catch (e) {} }
+      remoteT = setTimeout(function () {
+        remoteT = null;
+        try {
+          MEDAPI.searchCompositions(q, 8).then(function (d) {
+            if (q !== remoteQ) return;                  // newer query typed - discard this reply
+            remoteRows = ((d && d.results) || []).map(function (x) {
+              // `brands` from the API is a COUNT, not a list, so it is kept as one and never handed
+              // to fill() as though it were an array of brand names.
+              return { generic: x.composition, brands: [], dose: "", cls: x["class"] || "",
+                       brandCount: Number(x.brands) || 0, remote: true };
+            });
+            paintList(q, fromBrand);
+          }, function () {});
+        } catch (e) {}
+      }, 220);
+    }
+
     function search(q, fromBrand) {
       q = (q || "").trim();
-      if (!window.MEDDRUGS || !MEDDRUGS.searchIndex || q.length < 2) { closeAc(); return; }
-      rows = MEDDRUGS.searchIndex(q).slice(0, 8); active = -1;
+      if (q.length < 2) { remoteRows = []; remoteQ = ""; closeAc(); return; }
+      remoteSearch(q, fromBrand);
+      paintList(q, fromBrand);
+    }
+
+    function paintList(q, fromBrand) {
+      var local = (window.MEDDRUGS && MEDDRUGS.searchIndex) ? MEDDRUGS.searchIndex(q).slice(0, 8) : [];
+      // Local first - it carries doses and real brand names - then server molecules the formulary
+      // does not have. Deduped on the generic, so a drug never appears twice.
+      var seen = {}, merged = [];
+      local.forEach(function (r) { seen[String(r.generic || "").toLowerCase()] = 1; merged.push(r); });
+      remoteRows.forEach(function (r) {
+        var k = String(r.generic || "").toLowerCase();
+        if (!k || seen[k] || merged.length >= 10) return;
+        seen[k] = 1; merged.push(r);
+      });
+      rows = merged; active = -1;
       if (!rows.length) { closeAc(); return; }
       if (!ac) { ac = document.createElement("div"); ac.className = "rx-ac"; r1.insertAdjacentElement("afterend", ac); }
       ac.innerHTML = rows.map(function (r, i) {
+        // A local row lists real brand names; a server row has only a count, so it says how many
+        // rather than pretending to name them.
         var brands = (r.brands || []).slice(0, 3).join(", ");
+        if (!brands && r.remote && r.brandCount) brands = r.brandCount + (r.brandCount === 1 ? " brand" : " brands");
         return '<button type="button" class="rx-ac-item" data-i="' + i + '"><span class="rx-ac-g">' + esc(r.generic) + '</span>' + (brands ? ' <span class="rx-ac-b">' + esc(brands) + '</span>' : '') + '<span class="rx-ac-d">' + esc(r.dose || '') + '</span></button>';
       }).join("");
       Array.prototype.forEach.call(ac.querySelectorAll(".rx-ac-item"), function (b) {
@@ -336,28 +733,76 @@
     var drugIn = line.querySelector('[data-f="drug"]'), brandIn = line.querySelector('[data-f="brand"]'), r1 = line.querySelector(".r1");
     if (!drugIn || !brandIn || !r1) return; line._brandWired = true;
     var box = null, brands = [], loadedFor = "", loading = false;
+    var typed = [], typedFor = "", typing = false, _deb = null;      // direct brand-name hits
     function closeB() { if (box) { box.remove(); box = null; } }
+    function rowsHTML(list) {
+      return list.slice(0, 50).map(function (b, i) { var meta = [b.manufacturer, b.form].filter(Boolean).join(" · "); return '<button type="button" class="rx-ac-item" data-i="' + i + '"><span class="rx-ac-g">' + esc(b.brand) + '</span>' + (b.mrp != null ? ' <span class="rx-ac-b">₹' + b.mrp + '</span>' : '') + (b.discontinued ? ' <span class="rx-ac-x">disc.</span>' : '') + (meta ? '<span class="rx-ac-d">' + esc(meta) + '</span>' : '') + '</button>'; }).join("");
+    }
     function draw(msg) {
       if (!box) { box = document.createElement("div"); box.className = "rx-ac"; r1.insertAdjacentElement("afterend", box); }
       if (msg) { box.innerHTML = '<div class="rx-ac-empty">' + esc(msg) + '</div>'; return; }
       var q = (brandIn.value || "").trim().toLowerCase();
-      var list = q ? brands.filter(function (b) { return String(b.brand || "").toLowerCase().indexOf(q) >= 0; }) : brands;
-      if (!list.length) { box.innerHTML = '<div class="rx-ac-empty">' + (brands.length ? "No matching brand" : "Type the drug first, then tap here for brands") + '</div>'; return; }
-      box.innerHTML = list.slice(0, 50).map(function (b, i) { var meta = [b.manufacturer, b.form].filter(Boolean).join(" · "); return '<button type="button" class="rx-ac-item" data-i="' + i + '"><span class="rx-ac-g">' + esc(b.brand) + '</span>' + (b.mrp != null ? ' <span class="rx-ac-b">₹' + b.mrp + '</span>' : '') + (b.discontinued ? ' <span class="rx-ac-x">disc.</span>' : '') + (meta ? '<span class="rx-ac-d">' + esc(meta) + '</span>' : '') + '</button>'; }).join("");
-      Array.prototype.forEach.call(box.querySelectorAll(".rx-ac-item"), function (btn) { btn.addEventListener("mousedown", function (e) { e.preventDefault(); brandIn.value = list[+btn.getAttribute("data-i")].brand; closeB(); }); });
+      /* Merge in brands matched BY NAME (rx-brand-match.js owns the rules, and is unit-tested).
+       * Without this the field could only ever show brands of the molecule the drug field resolved
+       * to, so typing a brand the clinician actually knows found nothing whenever the drug field
+       * held a shorthand the composition index does not carry ("Amoxiclav" for Amoxycillin +
+       * Clavulanic Acid) - while the Drugs Database, which queries BOTH endpoints, listed those same
+       * brands instantly. Same backend, one missing query. */
+      var B = window.SMD_RX_BRANDS;
+      var merged = B ? B.merge(brands, typed, q) : brands;
+      if (!merged.length) {
+        var why = B ? B.emptyMessage(drugIn.value, q, loading || typing)
+          : "Type the drug first, then tap here for brands";
+        box.innerHTML = '<div class="rx-ac-empty">' + esc(why) + "</div>"; return;
+      }
+      box.innerHTML = rowsHTML(merged);
+      Array.prototype.forEach.call(box.querySelectorAll(".rx-ac-item"), function (btn) { btn.addEventListener("mousedown", function (e) { e.preventDefault(); brandIn.value = merged[+btn.getAttribute("data-i")].brand; closeB(); }); });
     }
+    /* Brand-name search, the same endpoint the Drugs Database pairs with the composition lookup. */
+    function loadTyped(q) {
+      q = String(q || "").trim();
+      var B0 = window.SMD_RX_BRANDS;
+      if (!(B0 ? B0.shouldSearchBrands(q) : q.length >= 3) || !window.MEDAPI || !MEDAPI.searchBrands) {
+        // Clearing the field must clear the suggestions too, and REDRAW: without the redraw the
+        // previous brand's hits stayed on screen under a drug they have nothing to do with.
+        var had = typed.length; typed = []; typedFor = q; typing = false;
+        if (had) draw();
+        return;
+      }
+      if (q === typedFor) return;
+      typing = true; typedFor = q;
+      MEDAPI.searchBrands(q, 20).then(function (d) {
+        if (String(brandIn.value || "").trim() !== q) return;    // a later keystroke superseded this
+        typed = ((d && d.results) || []).filter(Boolean);
+        typing = false; draw();
+      }).catch(function () { typing = false; typed = []; draw(); });
+    }
+    /* `if (loading) return` used to DROP a newer drug while an older lookup was still in flight, and
+     * loadedFor kept the stale value, so the field could sit on the wrong molecule's brands forever.
+     * Requests now supersede: the newest drug wins and late replies for a drug the user has already
+     * moved off are discarded. */
     function load(drug) {
-      drug = (drug || "").trim(); if (!drug || !window.MEDAPI || !MEDAPI.searchCompositions) { draw("Type the drug first, then tap here for brands"); return; }
+      drug = (drug || "").trim(); if (!drug || !window.MEDAPI || !MEDAPI.searchCompositions) { draw(); return; }
       if (drug === loadedFor) { draw(); return; }
-      if (loading) return; loading = true; draw("Loading brands for " + drug + "…");
-      MEDAPI.searchCompositions(drug, 6).then(function (d) {
+      var want = drug; loading = true; draw();
+      var current = function () { return want === String(drugIn.value || "").trim(); };
+      MEDAPI.searchCompositions(want, 6).then(function (d) {
+        if (!current()) { loading = false; return; }
         var comp = ((d && d.results) || []).map(function (r) { return r.composition; }).filter(Boolean)[0];
-        if (!comp) { loading = false; brands = []; loadedFor = drug; draw("No match for “" + drug + "” — check the spelling"); return; }
-        return MEDAPI.composition(comp, "price", "all", 60, 0).then(function (c) { brands = (c && c.brands) || []; loadedFor = drug; loading = false; draw(); });
-      }).catch(function () { loading = false; brands = []; loadedFor = drug; draw("Couldn’t load brands — check connection"); });
+        // No composition is NOT a dead end any more: the brand-name search can still answer.
+        if (!comp) { loading = false; brands = []; loadedFor = want; draw(); return; }
+        return MEDAPI.composition(comp, "price", "all", 60, 0).then(function (c) {
+          if (!current()) { loading = false; return; }
+          brands = (c && c.brands) || []; loadedFor = want; loading = false; draw();
+        });
+      }).catch(function () { loading = false; if (current()) { brands = []; loadedFor = want; draw(); } });
     }
-    brandIn.addEventListener("focus", function () { load(drugIn.value); });
-    brandIn.addEventListener("input", function () { if ((drugIn.value || "").trim() === loadedFor) draw(); else load(drugIn.value); });
+    brandIn.addEventListener("focus", function () { load(drugIn.value); loadTyped(brandIn.value); });
+    brandIn.addEventListener("input", function () {
+      if ((drugIn.value || "").trim() !== loadedFor) load(drugIn.value);
+      draw();
+      clearTimeout(_deb); _deb = setTimeout(function () { loadTyped(brandIn.value); }, 220);
+    });
     brandIn.addEventListener("blur", function () { setTimeout(closeB, 200); });
   }
 
@@ -421,6 +866,7 @@
     (lines || []).forEach(function (l) {
       var i = wrap.children.length;
       wrap.insertAdjacentHTML("beforeend", lineHTML({ drug: l.drug || "", brand: l.brand || "", dose: l.dose || "", freq: l.freq || "", duration: l.duration || "", unverified: false, isAdvice: false }, i));
+      rxLabelInputs();   // rows added after show() need labelling too
       var ln = wrap.lastElementChild; acAttach(ln); rxBrandAC(ln);
       var del = ln.querySelector(".rx-del"); if (del) del.onclick = function () { ln.remove(); refreshSafety(); };
     });
@@ -430,17 +876,10 @@
   // ---- Voice-to-Rx: parse a spoken line like "amox 500 TDS 5 days" into a drug row. Brand->generic via
   // the Drug Index; frequency abbreviations + duration recognized. Best-effort; the doctor edits after. ----
   var RX_FREQ = { od: "OD", "once daily": "OD", "once a day": "OD", bd: "BD", "twice daily": "BD", "twice a day": "BD", "two times": "BD", tds: "TDS", tid: "TDS", "thrice": "TDS", "three times": "TDS", qid: "QID", "four times": "QID", hs: "HS", "at night": "HS", "bed time": "HS", bedtime: "HS", sos: "SOS", "as needed": "SOS", prn: "SOS", stat: "STAT" };
-  // Dictation plumbing. voice.js reports WHY it stopped; a doctor who taps Dictate and gets silence
-  // cannot tell a denied microphone from a broken button, so every code gets a plain sentence.
-  var RX_MIC_TITLE = "Dictate a drug, e.g. amox 500 TDS 5 days";
-  var RX_VOICE_ERR = {
-    "mic-denied": "Microphone is blocked - allow mic access for StewardMD, then try again.",
-    "no-voice-engine": "This device has no dictation engine available.",
-    "stt-unavailable": "On-device dictation is not available on this build.",
-    "clinical-unavailable": "Clinical dictation is not ready on this device.",
-    "transcription-failed": "Could not transcribe that - try again.",
-    "speech-error": "Dictation stopped - try again.",
-  };
+  // Dictation error copy used to live here, for a bespoke SMD_VOICE.listen() path that reported
+  // itself through a `title` tooltip nothing on a phone could show. That path is gone: Dictate now
+  // opens the shared SMD_VOICE.openDialog sheet, which already carries the permission/model/engine
+  // messages (and keeps them in ONE place instead of two drifting copies). See the #rxMic handler.
   function rxSay(m) { try { if (window.toast) window.toast(m); } catch (e) {} }
 
   function parseVoiceRx(text) {
@@ -459,6 +898,16 @@
   function renderRx(topic, lines, regNo) {
     var now = new Date();
     var date = now.toISOString().slice(0, 10);
+    /* Opened with no regimen (the Hospital hub's Prescription tile, or any answer that carried no
+     * drugs) the pad rendered no DRUG row at all, so the first thing a doctor had to do was hunt for
+     * "+ Add drug" before they could type anything. Note the test is "no drug row", not "no rows":
+     * regimenFromCtx() always seeds a "Lifestyle & general measures" ADVICE row, which has no drug or
+     * brand input, so a length check alone never fires. An empty row collects as nothing until a drug
+     * is typed, so Sign & Export still refuses an empty prescription. */
+    lines = lines || [];
+    var _hasDrugRow = false;
+    for (var _li = 0; _li < lines.length; _li++) if (lines[_li] && !lines[_li].isAdvice) { _hasDrugRow = true; break; }
+    if (!_hasDrugRow) lines = lines.concat([{ drug: "", brand: "", dose: "", freq: "", duration: "", unverified: false, isAdvice: false }]);
     var body =
       '<div class="rx-head"><div class="rx-title">Prescription</div><button class="rx-x" id="rxX" aria-label="Close">'+rxIco("close")+'</button></div>' +
       '<div class="rx-disc">Draft prescription — verify every drug, dose, route and interaction against the patient and local protocol. The prescriber is responsible for what they sign.</div>' +
@@ -481,6 +930,7 @@
     sheet.querySelector("#rxAdd").addEventListener("click", function () {
       var wrap = sheet.querySelector("#rxLines"); var i = wrap.children.length;
       wrap.insertAdjacentHTML("beforeend", lineHTML({ drug: "", brand: "", dose: "", freq: "", duration: "", unverified: false, isAdvice: false }, i));
+      rxLabelInputs();   // rows added after show() need labelling too
       bindDel();
       acAttach(wrap.lastElementChild); rxBrandAC(wrap.lastElementChild);   // drug AC + live brand picker
       refreshSafety();
@@ -505,31 +955,31 @@
       var s = sheet.querySelector("#rxTpl"); if (s) s.innerHTML = tplOptions();
     };
     // Voice-to-Rx: dictate a drug line ("amox 500 TDS 5 days"), parse it, add the row.
+    /* Dictate opens the SHARED dictation sheet (SMD_VOICE.openDialog) - the same one ICU, MaiK and
+     * ThoreX already use. The old path called SMD_VOICE.listen() directly and reported progress by
+     * writing to the button's `title`: a hover tooltip, invisible on a phone. `.rx-btn.on` had no CSS
+     * rule at all, so the "on" class did nothing either. A doctor tapping Dictate therefore saw
+     * NOTHING - no listening state, no transcript, no error. It could not have worked as written:
+     * on native the clinical Whisper engine never fires onPartial (WhisperEngine.swift declares the
+     * callback and never calls it), so the "live feedback" line was dead code.
+     *
+     * The shared sheet brings the recording animation, the elapsed timer and the model/permission
+     * error copy, and - the part that matters most for a PRESCRIPTION - it shows the transcript and
+     * lets the doctor CORRECT it before it is parsed into a drug row. */
     var _mic = sheet.querySelector("#rxMic");
     if (_mic) _mic.onclick = function () {
-      if (!(window.SMD_VOICE && SMD_VOICE.listen)) { rxSay("Voice not available on this device"); return; }
-      // Idle the button. voice.js has NO onEnd callback — a session ends by delivering onFinal OR
-      // onError, so BOTH must reset here. Passing `onEnd` (which is never called) left the mic stuck
-      // "on" after every successful dictation: the next tap only cancelled it, so Dictate looked dead.
-      function idle() { _mic.classList.remove("on"); _mic._sess = null; try { _mic.title = RX_MIC_TITLE; } catch (e) {} }
-      if (_mic._sess) { try { _mic._sess.stop(); } catch (e) {} idle(); return; }
-      _mic.classList.add("on");
-      try {
-        _mic._sess = SMD_VOICE.listen({
-          // Live feedback while speaking — without it the button gave no sign it was listening.
-          onPartial: function (t) { try { _mic.title = t ? ("Heard: " + t) : RX_MIC_TITLE; } catch (e) {} },
-          onFinal: function (txt) {
-            idle();
-            var p = parseVoiceRx(txt);
-            if (p && p.drug) { applyTemplate([p]); rxSay("Added: " + p.drug); return; }
-            // Silence here was indistinguishable from a broken button. Say what was heard.
-            var heard = String(txt || "").trim();
-            rxSay(heard ? ('Could not read a drug from "' + heard.slice(0, 40) + '"') : "Nothing was heard - try again.");
-          },
-          onError: function (code) { idle(); rxSay(RX_VOICE_ERR[code] || "Dictation stopped."); }
-        });
-        if (!_mic._sess) idle();     // listen() already reported the reason through onError
-      } catch (e) { idle(); rxSay("Could not start dictation."); }
+      var V = window.SMD_VOICE;
+      if (!(V && V.openDialog)) { rxSay("Voice not available on this device"); return; }
+      V.openDialog({
+        target: "text",
+        onText: function (txt) {
+          var p = parseVoiceRx(txt);
+          if (p && p.drug) { applyTemplate([p]); rxSay("Added: " + p.drug); return; }
+          // Silence here was indistinguishable from a broken button. Say what was heard.
+          var heard = String(txt || "").trim();
+          rxSay(heard ? ('Could not read a drug from "' + heard.slice(0, 40) + '"') : "Nothing was heard - try again.");
+        }
+      });
     };
     function bindDel() { sheet.querySelectorAll(".rx-del").forEach(function (b) { b.onclick = function () { var ln = b.closest(".rx-line"); if (ln) { ln.remove(); refreshSafety(); } }; }); }
   }
@@ -657,7 +1107,7 @@
   var _smdLogoData = "";
   (function preloadSmdLogo(){ try{ var img=new Image(); img.onload=function(){ try{ var c=document.createElement("canvas"); c.width=img.naturalWidth||368; c.height=img.naturalHeight||368; c.getContext("2d").drawImage(img,0,0); _smdLogoData=c.toDataURL("image/png"); }catch(e){} }; img.src="/logo.png"; }catch(e){} })();
   // ---- Professional Rx document + PDF/JPEG export ----
-  function rxDoc(topic, regNo, signImg){
+  function rxDoc(topic, regNo, signImg, rxv){
     var d=collectRx(), c=getClinic(), date=""; try{ date=new Date().toLocaleDateString("en-GB",{day:"2-digit",month:"short",year:"numeric"}); }catch(e){}
     var n=0;
     var rows=d.lines.map(function(L){ if(L.advice) return '<tr class="advr"><td></td><td colspan="2">• '+esc(L.text)+'</td></tr>'; n++; var sub=[L.dose,L.freq,L.duration].filter(Boolean).join(" · "); return '<tr><td class="sn">'+n+'</td><td class="dg"><b>'+esc(L.drug)+'</b>'+(L.brand?' <span class="br">('+esc(L.brand)+')</span>':'')+'</td><td class="dz">'+esc(sub)+'</td></tr>'; }).join("");
@@ -671,6 +1121,7 @@
       '<div class="rxdoc-rx">℞</div>'+
       '<table class="rxdoc-tbl">'+(rows||'<tr><td colspan="3">No items.</td></tr>')+'</table>'+
       '<div class="rxdoc-ft"><div class="rxdoc-sg">'+(signImg?'<img class="rxdoc-sgimg" src="'+esc(signImg)+'">':'')+'<div class="rxdoc-drn">Dr. '+esc(docName()||"—")+'</div><div class="rxdoc-reg">Reg. No: '+esc(regNo||"—")+'</div></div></div>'+
+      rxDocQrBlock(rxv) +
       '<div class="rxdoc-foot"><div class="rxdoc-brand">'+(_smdLogoData?'<img class="rxdoc-smdlogo" src="'+_smdLogoData+'">':'<span class="rxdoc-smdwm">Steward<b>MD</b></span>')+'<span>Prescription generated using <b>StewardMD</b></span></div>'+
       '<div class="rxdoc-resp">Digitally <b>signed &amp; verified</b> by the prescriber named above, who takes <b>complete responsibility</b> for this prescription. Verify every drug, dose, route and interaction against the patient and local protocol before dispensing.</div></div></div>';
     return node;
@@ -679,17 +1130,63 @@
     if(rxNative()){ var P=rxPlugins(); var b64=(dataURL.split(",")[1]||""); if(P.Filesystem&&P.Filesystem.writeFile&&P.Share&&P.Share.share){ P.Filesystem.writeFile({ path:filename, data:b64, directory:"CACHE" }).then(function(res){ return P.Share.share({ title:"Prescription", url:res.uri, dialogTitle:"Save or share prescription" }); }).catch(function(){ rxToast("Export failed"); }); return; } }
     try{ var a=document.createElement("a"); a.href=dataURL; a.download=filename; document.body.appendChild(a); a.click(); a.remove(); }catch(e){ rxToast("Export failed"); }
   }
+  /* Mint BEFORE rendering, exactly as doRxPrint does - html2canvas rasterises whatever the node
+   * holds at that instant, so a record arriving later would be a PDF with an empty box where the QR
+   * should be. Same fail-open contract: rxIssueVerification never rejects, and an out-of-scope or
+   * offline prescription still exports, just without a QR (and rxNoQrWhy says which). */
   function exportRx(kind, topic, regNo, signImg){
     if(!window.html2canvas){ rxToast("Export engine still loading — try again"); return; }
-    var node=rxDoc(topic, regNo, signImg); node.style.cssText="position:fixed;left:-9999px;top:0;width:794px;background:#fff;z-index:-1"; document.body.appendChild(node);
+    var d=collectRx()||{}, lines=d.lines;
+    rxIssueVerification(lines, d.name).then(function(rxv){
+      if(!rxv){ var why=rxNoQrWhy(lines); if(why) rxToast(why); }
+      exportRxNow(kind, topic, regNo, signImg, rxv);
+    });
+  }
+  /* The QR block rasterised on its own, so it can be stamped in PDF units instead of being baked
+   * into the page image. Two reasons, both of which bit a long prescription: a page break sliced
+   * straight through the QR and left half of one on each page, and only the LAST page carried it at
+   * all - so page 1 of a two-page prescription was unverifiable paper. */
+  function rxQrStamp(rec){
+    if(!rec || !rec.code || !window.html2canvas) return Promise.resolve(null);
+    var n=document.createElement("div");
+    n.style.cssText="position:fixed;left:-9999px;top:0;width:700px;background:#fff;z-index:-1";
+    n.innerHTML=rxDocQrBlock(rec, true);
+    document.body.appendChild(n);
+    return window.html2canvas(n, { scale:2, backgroundColor:"#ffffff", useCORS:true }).then(function(c){
+      n.remove();
+      return { data:c.toDataURL("image/jpeg",0.95), ratio:(c.height/c.width) };
+    }).catch(function(){ try{ n.remove(); }catch(e){} return null; });
+  }
+
+  function exportRxNow(kind, topic, regNo, signImg, rxv){
+    // JPEG is a single image, so the block sits in the document. A PDF can run to several pages, so
+    // it is left OUT of the document and stamped onto every page below.
+    var node=rxDoc(topic, regNo, signImg, kind==="pdf" ? null : rxv);
+    node.style.cssText="position:fixed;left:-9999px;top:0;width:794px;background:#fff;z-index:-1"; document.body.appendChild(node);
     window.html2canvas(node, { scale:2, backgroundColor:"#ffffff", useCORS:true }).then(function(canvas){
       node.remove();
       if(kind==="jpeg"){ rxSaveOrShare(canvas.toDataURL("image/jpeg",0.95), "prescription.jpg"); return; }
       var JS=(window.jspdf&&window.jspdf.jsPDF)||window.jsPDF; if(!JS){ rxToast("PDF engine unavailable"); return; }
-      var pdf=new JS({ unit:"pt", format:"a4" }), pw=pdf.internal.pageSize.getWidth(), ph=pdf.internal.pageSize.getHeight();
-      var imgW=pw, imgH=canvas.height*(pw/canvas.width), img=canvas.toDataURL("image/jpeg",0.95);
-      if(imgH<=ph){ pdf.addImage(img,"JPEG",0,0,imgW,imgH); } else { var y=0; while(y<imgH-1){ pdf.addImage(img,"JPEG",0,-y,imgW,imgH); y+=ph; if(y<imgH-1) pdf.addPage(); } }
-      rxSaveOrShare(pdf.output("datauristring"), "prescription.pdf");
+      return rxQrStamp(rxv).then(function(stamp){
+        var pdf=new JS({ unit:"pt", format:"a4" }), pw=pdf.internal.pageSize.getWidth(), ph=pdf.internal.pageSize.getHeight();
+        var imgW=pw, imgH=canvas.height*(pw/canvas.width), img=canvas.toDataURL("image/jpeg",0.95);
+        var mg=24, stampW=stamp? (pw-mg*2) : 0, stampH=stamp? (stampW*stamp.ratio) : 0;
+        // Content is paged against the height LEFT OVER once the footer band is reserved, so the
+        // stamp never lands on top of a drug line.
+        var band=stamp? (stampH+mg) : 0, usable=Math.max(120, ph-band), y=0, guard=0;
+        while(guard++ < 60){
+          pdf.addImage(img,"JPEG",0,-y,imgW,imgH);
+          if(stamp){
+            pdf.setFillColor(255,255,255);
+            pdf.rect(0, ph-band, pw, band, "F");     // clear the band: the tall image paints through it
+            pdf.addImage(stamp.data,"JPEG", mg, ph-stampH-(mg/2), stampW, stampH);
+          }
+          y+=usable;
+          if(y >= imgH-1) break;
+          pdf.addPage();
+        }
+        rxSaveOrShare(pdf.output("datauristring"), "prescription.pdf");
+      });
     }).catch(function(){ try{ node.remove(); }catch(e){} rxToast("Couldn’t render the prescription"); });
   }
   function signAndExport(topic, regNo){
@@ -697,7 +1194,9 @@
     var existing=getSign(); if(existing) chooser(existing); else openSignPad(function(sig){ chooser(sig); });
   }
 
-  window.SMD_RX = { open: open, canPrescribe: canPrescribe, verifiedInfo: verifiedInfo, _getNmc: getNmc, _setNmc: setNmc, getClinic: getClinic, _parseVoiceRx: parseVoiceRx };
+  // openVerify is deliberately NOT gated on canPrescribe(): checking someone else's prescription is
+  // not prescribing, and the pharmacist doing it may not be a prescriber at all.
+  window.SMD_RX = { open: open, openVerify: openVerify, canPrescribe: canPrescribe, verifiedInfo: verifiedInfo, _getNmc: getNmc, _setNmc: setNmc, getClinic: getClinic, _parseVoiceRx: parseVoiceRx };
 
   /* Prime the verification cache at boot.
    * canPrescribe() is a SYNCHRONOUS read of _vcache, but ONLY verifiedInfo() fills it — and that

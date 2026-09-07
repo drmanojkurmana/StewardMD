@@ -28,7 +28,50 @@ export function roomStatus(waiting, inConsult, t) {
 // ---- entities ----------------------------------------------------------------------------------
 export function org(o = {}) {
   requireId(o);
-  return { id: s(o.id), code: s(o.code), name: s(o.name), mode: o.mode === "connect" ? "connect" : "native", connectorId: orNull(o.connectorId), connectTenantId: orNull(o.connectTenantId), connectConnectionId: orNull(o.connectConnectionId), ownerUid: s(o.ownerUid), thresholds: thresholds(o.thresholds), createdAt: Number(o.createdAt) || 0 };
+  /* kind is NOT mode. mode is the EMR coupling; kind is what the organisation is. Without it an OPD
+   * clinic and a medical college are indistinguishable, so the eLOGBook offered a clinic as "your
+   * institution" and adopted it. Default "clinic" - only the PG path sets "institution" - so no
+   * existing document changes meaning.
+   *
+   * mode is THREE-WAY, each value semantically separate - never inferred, never collapsed into
+   * another: "native" (personal/shared clinic, on-device storage, no EMR), "connect" (hospital on an
+   * external FHIR EMR), "wardsynq" (hospital where WardSynQ itself is the EMR/HIS - server-side
+   * clinical record, no GHIS, no _localStore). Anything else defaults to "native" - the ORIGINAL two-
+   * way behaviour for every org that predates "wardsynq" is unchanged; only a document explicitly
+   * stamped mode:"wardsynq" gets it, so no existing org silently changes meaning. */
+  const MODE = o.mode === "connect" ? "connect" : o.mode === "wardsynq" ? "wardsynq" : "native";
+  return { id: s(o.id), code: s(o.code), name: s(o.name), kind: o.kind === "institution" ? "institution" : "clinic",
+           mode: MODE, connectorId: orNull(o.connectorId), connectTenantId: orNull(o.connectTenantId), connectConnectionId: orNull(o.connectConnectionId), ownerUid: s(o.ownerUid), thresholds: thresholds(o.thresholds),
+           wardsynq: wardsynqConfig(o.wardsynq), createdAt: Number(o.createdAt) || 0 };
+}
+
+/**
+ * The hospital's own WardSynQ configuration, carried through this projection.
+ *
+ * WHY IT IS ONE NAMED OBJECT rather than a handful of loose fields: this projection is a WHITELIST,
+ * and everything not listed is silently dropped. The inpatient work added six pieces of per-hospital
+ * clinical configuration - critical-value limits, the ward's drug-round times, its bed list, its
+ * escalation policy, its high-alert drugs, its order sets - and every one of them was being read as
+ * `org.someField` and arriving undefined, because none was listed here. Nothing broke, which is
+ * exactly the problem: each read fell back to a sensible default, so a hospital that carefully
+ * configured its own potassium limits would have been silently running on WardSynQ's.
+ *
+ * A nested object means the next piece of WardSynQ configuration cannot repeat that failure by
+ * being forgotten here.
+ *
+ * Values are passed through as stored, NOT validated: each consumer already validates its own -
+ * limitsFor() falls back per analyte, timesFor() falls back per frequency, resolveSet() reports an
+ * unusable set. Validating here as well would be a second opinion that could disagree with theirs.
+ */
+function wardsynqConfig(w) {
+  if (!w || typeof w !== "object" || Array.isArray(w)) return null;
+  const pick = {};
+  // deltaLimits and autoVerify joined 2026-09-07. Both are clinical content the HOSPITAL owns: what
+  // counts as an implausible change in an analyte, and which analytes may be released unread.
+  for (const k of ["criticalLimits", "criticalEscalation", "marTimes", "marGraceMinutes", "beds", "highAlertDrugs", "orderSets", "noteTemplates", "riskTools", "utcOffsetMinutes", "deltaLimits", "autoVerify", "formulary", "requireReasonOffFormulary", "advisories", "registries", "resources", "flowsheetRows", "neverRelease"]) {
+    if (w[k] !== undefined && w[k] !== null) pick[k] = w[k];
+  }
+  return Object.keys(pick).length ? pick : null;
 }
 // Human StewardMD IDs: short, unambiguous (no 0/O/1/I). Clinics "SMD-XXXXXX", users "SMD-U-XXXXX".
 const SMD_ALPHABET = "23456789ABCDEFGHJKMNPQRSTUVWXYZ";

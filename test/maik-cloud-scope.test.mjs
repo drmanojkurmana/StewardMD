@@ -22,9 +22,11 @@ const require = createRequire(import.meta.url);
 const MaiKScope = require("../kb/ai/maik-scope.js");
 const SRC = readFileSync(new URL("../functions/api/ai/[[path]].js", import.meta.url), "utf8");
 
-// The four clinician-facing free-text answer prompts. Structured internal tasks (imaging, onco,
-// extraction) are not open chat and intentionally carry no scope rule.
-const CHAT_PROMPTS = ["KNOWLEDGE_SYS", "RESEARCH_SYS", "RESEARCH_SYS_SNIPPETS", "EVIDENCE_REVIEW_SYS"];
+// The clinician-facing free-text answer prompts. Structured internal tasks (imaging, onco,
+// extraction) are not open chat and intentionally carry no scope rule. RESEARCH_SYS (the Gemini
+// grounded-search fallback prompt) was removed 2026-09-04 along with that fallback itself -
+// RESEARCH_SYS_SNIPPETS is now the only web-research prompt, TinyFish-only, no Gemini fallback.
+const CHAT_PROMPTS = ["KNOWLEDGE_SYS", "RESEARCH_SYS_SNIPPETS", "EVIDENCE_REVIEW_SYS"];
 
 test("cloud: every clinician-facing prompt carries the medical-only scope rule", () => {
   assert.match(SRC, /const MEDICAL_ONLY\s*=/, "MEDICAL_ONLY must be defined once and shared");

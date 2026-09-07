@@ -116,6 +116,24 @@ body.dark {
   font-display: block;
   src: url(/assets/fonts/sacramento.woff2) format('woff2');
 }
+/* ---- Bricolage Grotesque (display face for the interstitials, html.smd-splash-v2) ----
+   The brand moments on the intro poster / landing splash / boot splash needed type with
+   real character instead of another weight of the UI sans. Bricolage Grotesque (SIL OFL
+   1.1, Mathieu Triay / ATF) is a grotesque with genuinely idiosyncratic details and a
+   200..800 weight axis, which is what carries the light/extrabold "Steward|MD" lock-up.
+   SELF-HOSTED for the SAME reason as every other face here, and doubly so because these
+   screens paint BEFORE any network is guaranteed inside the Capacitor shell: a runtime
+   Google Fonts <link> would silently fall back to the system sans offline. The bundled
+   woff2 is the Latin subset trimmed to the characters these screens use, with the opsz
+   and wght axes kept (48 KB). font-display:block so the word-mark never flashes in a
+   fallback face; index.html preloads it so that block period is effectively zero. */
+@font-face {
+  font-family: 'Bricolage Grotesque';
+  font-style: normal;
+  font-weight: 200 800;
+  font-display: block;
+  src: url(/assets/fonts/bricolage-grotesque.woff2) format('woff2');
+}
 /* ---- Primary UI type: Inter (Latin) + Noto Sans Telugu / Devanagari (Indic) ----------
    SELF-HOSTED for the SAME reason as above: the Google Fonts CDN <link> does not reliably
    apply inside the WKWebView, so the app fell back to the system font (Roboto). Bundling the
@@ -707,30 +725,78 @@ html body.rds-on #sbMenu [data-smd-top] { margin: 2px 8px; }
    a round badge; the featured tile gets the dark "signature" badge + dot. */
 #homeV2.rnav .rnav-grid { grid-template-columns: repeat(3, 1fr); gap: 16px 6px; }
 #homeV2.rnav .rnav-tile { flex-direction: column; align-items: center; gap: 0; padding: 4px 2px; border: none; background: none; text-align: center; min-height: 0; }
-#homeV2.rnav .rnav-badge { width: 70px; height: 70px; border-radius: 50%; display: flex; align-items: center; justify-content: center; position: relative; background: color-mix(in srgb, var(--rds-primary) 13%, var(--rds-surface, #fff)); color: var(--rds-primary); }
-#homeV2.rnav .rnav-badge .rds-icon { font-size: 28px; color: inherit; margin: 0; }
-#homeV2.rnav .rnav-tile .rnav-tile-tt { margin-top: 10px; font-weight: 800; }
-#homeV2.rnav .rnav-tile .rnav-tile-sub { margin-top: 1px; }
-/* Round 3D glossy sphere for the AI tiles (light top sheen + dark base + drop shadow). */
-#homeV2.rnav .rnav-tile.feat .rnav-badge {
+/* EVERY tile badge is the glossy sphere. It used to be a flat mint disc with a dark outline glyph,
+ * and only `.feat` (the branded AI modules) got the sphere - so a home screen of eighteen tools read
+ * as two unrelated icon sets, six "real" and twelve placeholders. One treatment, one visual weight,
+ * and the module logos stop looking like a different product. `.addtool` still opts out below: it is
+ * an action, not a tool, and it should not pretend to be one. */
+#homeV2.rnav .rnav-badge {
+  width: 70px; height: 70px; border-radius: 50%; display: flex; align-items: center;
+  justify-content: center; position: relative;
   background: radial-gradient(circle at 34% 26%, #2f9184 0%, #12564a 52%, #06231e 100%);
   color: #fff;
   box-shadow: inset 0 3px 8px rgba(255,255,255,.28), inset 0 -9px 16px rgba(0,0,0,.42), 0 10px 20px -7px rgba(8,40,35,.6);
 }
-#homeV2.rnav .rnav-tile.feat .rnav-badge::before {
+/* The specular highlight, the thing that actually reads as "sphere" rather than "dark circle". */
+#homeV2.rnav .rnav-badge::before {
   content: ""; position: absolute; top: 9%; left: 21%; width: 34%; height: 26%; border-radius: 50%;
   background: radial-gradient(circle at 50% 50%, rgba(255,255,255,.6), rgba(255,255,255,0) 70%);
   pointer-events: none;
 }
+/* ── ONE stroke weight across three different glyph systems ────────────────────────────────────
+ * The badges hold Material Symbols ligatures, hand-authored inline SVG, and raster brand marks.
+ * Measured on the real page, they disagreed badly:
+ *     inline SVG (24-wide viewBox at 32px)   2 x 1.333 = 2.67px
+ *     the ECG    (48-wide viewBox at 36px)   2 x 0.75  = 1.50px   <- nearly half the others
+ *     Material Symbols, wght 400 at 28px     approx.     2.3px
+ * Stroke-width is in USER units, so the same "2" draws a different thickness in every viewBox -
+ * which is why this drifted silently as icons were added.
+ *
+ * `vector-effect: non-scaling-stroke` takes the viewBox out of the equation: stroke-width then means
+ * SCREEN pixels, so one number governs every SVG no matter how its artboard was drawn. Material's
+ * weight axis is nudged to 500 to sit on the same line. Change --rds-glyph-stroke and the whole set
+ * moves together. */
+#homeV2.rnav .rnav-badge { --rds-glyph-stroke: 2.5; }
+#homeV2.rnav .rnav-badge .rds-icon {
+  font-size: 28px; color: #fff; margin: 0;
+  font-variation-settings: "FILL" 0, "GRAD" 0, "opsz" 24, "wght" 500;
+}
+#homeV2.rnav .rnav-badge svg { color: #fff; stroke: currentColor; fill: none; overflow: visible; }
+#homeV2.rnav .rnav-badge svg * { vector-effect: non-scaling-stroke; }
+#homeV2.rnav .rnav-badge svg,
+#homeV2.rnav .rnav-badge svg *:not([fill]):not(.pupil):not(.p):not(.n):not(.beam) { stroke-width: var(--rds-glyph-stroke); }
+/* Solid shapes are mass, not line - they must NOT pick up a stroke or they bloat. */
+#homeV2.rnav .rnav-badge svg .pupil, #homeV2.rnav .rnav-badge svg .p,
+#homeV2.rnav .rnav-badge svg .n, #homeV2.rnav .rnav-badge svg .beam { stroke: none; }
+
+/* The raster brand marks (MAiTRI, CliniX, SURGX) were inline-styled at 48 / 38 / 34px, so three
+ * logos that sit side by side had three different optical weights. One box, object-fit: contain, so
+ * each keeps its own aspect ratio while occupying the same optical area as every other glyph. */
+#homeV2.rnav .rnav-badge .ai-brandmark {
+  width: auto; height: auto; max-width: 38px; max-height: 38px; object-fit: contain;
+  filter: brightness(0) invert(1) drop-shadow(0 2px 3px rgba(0, 0, 0, .35));
+}
+#homeV2.rnav .rnav-tile .rnav-tile-tt { margin-top: 10px; font-weight: 800; }
+#homeV2.rnav .rnav-tile .rnav-tile-sub { margin-top: 1px; }
+/* `.feat` no longer owns the sphere - every badge has it (above). What `.feat` still marks is a
+ * BRANDED module, which is why it keeps the status dot. Kept as a hook rather than deleted: the
+ * markup, the tools registry and the customise sheet all still set it. */
 #homeV2.rnav .rnav-dot { position: absolute; top: 7px; right: 15px; width: 11px; height: 11px; border-radius: 50%; background: #f2a33c; border: 2px solid #0c332e; }
-#homeV2.rnav .rnav-tile.addtool .rnav-badge { background: none; border: 2px dashed var(--rds-line); color: var(--rds-muted); }
+/* Add Tool opts OUT of the sphere on purpose: it is an empty slot inviting a choice, not a tool.
+ * Must also clear the inherited sheen and shadow, or it reads as a broken sphere. */
+#homeV2.rnav .rnav-tile.addtool .rnav-badge { background: none; border: 2px dashed var(--rds-line); color: var(--rds-muted); box-shadow: none; }
+#homeV2.rnav .rnav-tile.addtool .rnav-badge::before { display: none; }
+#homeV2.rnav .rnav-tile.addtool .rnav-badge .rds-icon, #homeV2.rnav .rnav-tile.addtool .rnav-badge svg { color: var(--rds-muted); }
 #homeV2.rnav .rnav-tile.addtool .rnav-tile-tt, #homeV2.rnav .rnav-tile.addtool .rnav-tile-sub { color: var(--rds-muted); }
 
 /* ── AI tile live-icon animations (dark feat badge) ────────────────────────────
    eye blink · ECG sweep · lesion pulse · X-ray beam. Motion only when the user
    allows it (reduced-motion keeps a clean static icon). */
-#homeV2.rnav .rnav-badge .ai-anim { width: 32px; height: 32px; fill: none; stroke: #eafff8; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; color: #eafff8; }
-#homeV2.rnav .rnav-badge .ai-ecg { width: 36px; }
+/* Sizes only. Stroke weight and colour come from the normalisation block above, so an icon added
+ * later cannot reintroduce its own thickness. The ECG keeps a wider box because its artboard is
+ * 48 wide rather than 24 - with non-scaling-stroke that changes its footprint, not its weight. */
+#homeV2.rnav .rnav-badge .ai-anim { width: 30px; height: 30px; stroke-linecap: round; stroke-linejoin: round; }
+#homeV2.rnav .rnav-badge .ai-ecg { width: 40px; height: 30px; }
 #homeV2.rnav .ai-eye .pupil, #homeV2.rnav .ai-derm .p { fill: #eafff8; stroke: none; }
 #homeV2.rnav .ai-cxr .beam { fill: rgba(138,255,234,.5); stroke: none; }
 #homeV2.rnav .ai-oncotree .n { fill: #eafff8; stroke: none; }
@@ -756,3 +822,40 @@ html body.rds-on #sbMenu [data-smd-top] { margin: 2px 8px; }
   #homeV2.rnav .ai-clinix-img { animation: cxBreathe 3.2s ease-in-out infinite; }
   @keyframes cxBreathe { 0%,100% { transform: scale(1); } 50% { transform: scale(1.07); } }
 }
+
+
+/* iPad / Tablet layout expansions */
+@media (min-width: 768px) {
+  #homeV2.rnav .rnav-stack { max-width: 820px; }
+  .tx-tile { padding: 24px; }
+}
+@media (min-width: 1024px) {
+  #homeV2.rnav .rnav-stack { max-width: 960px; }
+}
+
+/* --- 2c · ICD & Scheme Overlays (icd.js .icd-*, govschemes.js .gs-*) --- */
+html body.rds-on #icdOverlay, html body.rds-on #gsOverlay { background: var(--rds-bg); }
+html body.rds-on .icd-top, html body.rds-on .gs-top { background: var(--rds-surface); border-bottom: 1px solid var(--rds-line); }
+html body.rds-on .icd-title, html body.rds-on .gs-title { font-family: var(--rds-font); color: var(--rds-ink); }
+html body.rds-on .icd-back, html body.rds-on .gs-back { border-radius: var(--rds-r-ctl); min-height: 44px; color: var(--rds-primary); font-family: var(--rds-font); }
+html body.rds-on .icd-search, html body.rds-on .gs-search {
+  border-radius: var(--rds-r-ctl);
+  border: 1.5px solid var(--rds-line);
+  background: var(--rds-surface);
+  color: var(--rds-ink);
+  min-height: 50px;
+  font: var(--rds-fw-reg) var(--rds-fs-body) var(--rds-font);
+  transition: border-color var(--rds-dur) var(--rds-ease), box-shadow var(--rds-dur) var(--rds-ease);
+}
+html body.rds-on .icd-search:focus, html body.rds-on .gs-search:focus { outline: none; border-color: var(--rds-primary); box-shadow: 0 0 0 3px rgba(15,118,110,.25); }
+html body.rds-on .icd-sys, html body.rds-on .gs-tab { border-radius: var(--rds-r-pill); border: 1.5px solid var(--rds-line); background: var(--rds-surface); color: var(--rds-ink); font-family: var(--rds-font); }
+html body.rds-on .icd-src, html body.rds-on .gs-src { font-family: var(--rds-font); color: var(--rds-muted); }
+html body.rds-on .gs-tabs { border: none; background: transparent; padding: 0; gap: 8px; }
+html body.rds-on .gs-state { border-radius: var(--rds-r-ctl); border: 1.5px solid var(--rds-line); background: var(--rds-surface); color: var(--rds-ink); min-height: 50px; font-family: var(--rds-font); }
+html body.rds-on .icd-sys.on, html body.rds-on .gs-tab.on { background: var(--rds-primary-soft); border-color: var(--rds-primary); color: var(--rds-primary-2); box-shadow: none; }
+html body.rds-on .icd-card, html body.rds-on .gs-card, html body.rds-on .gs-cat, html body.rds-on .gs-sec, html body.rds-on .gs-cmpcard { border: 1px solid var(--rds-line); border-radius: var(--rds-r); background: var(--rds-surface); box-shadow: var(--rds-el-card); }
+html body.rds-on .icd-card-name, html body.rds-on .gs-card-name, html body.rds-on .gs-dname, html body.rds-on .icd-dname { font-family: var(--rds-font); color: var(--rds-ink); }
+html body.rds-on .icd-card-code, html body.rds-on .icd-dcode, html body.rds-on .gs-card-code, html body.rds-on .gs-pill-code { font-family: var(--rds-mono); color: var(--rds-ink); }
+html body.rds-on .icd-card-sys, html body.rds-on .gs-pill { border-radius: var(--rds-r-pill); background: var(--rds-primary-soft); color: var(--rds-primary-2); font-family: var(--rds-font); }
+html body.rds-on .icd-card-ch, html body.rds-on .gs-amt.unset { color: var(--rds-muted); font-family: var(--rds-font); }
+html body.rds-on #csOverlay, html body.rds-on #eceOverlay, html body.rds-on #abgOverlay, html body.rds-on #feaOverlay { background: var(--rds-bg); }

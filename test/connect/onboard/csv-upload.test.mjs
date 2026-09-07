@@ -49,7 +49,11 @@ test("well-formed CSV -> valid SCCM bundle with the right counts + PHI-free audi
   assert.ok(parsedRow, "a csv-parsed audit row is written");
   assert.equal(parsedRow.outcome, "ok");
   // PHI-free: no raw patient name / value / MRN / test name reaches the audit sink.
-  const blob = JSON.stringify(auditRows);
+  // The TIMESTAMP is excluded from the scan. It is an ISO 8601 string whose seconds-and-millis field
+  // (SS.mmm) can itself contain "9.2" — e.g. "...T10:19:59.234Z" — so scanning it failed this
+  // assertion on roughly 1% of runs, reporting a PHI leak that was only ever a clock reading. A
+  // timestamp is not PHI here; every field that could actually carry a value is still scanned.
+  const blob = JSON.stringify(auditRows.map(({ ts, ...rest }) => rest));
   for (const phi of ["Jane", "Doe", "9.2", "Hemoglobin", "Creatinine"]) assert.equal(blob.includes(phi), false);
   // counts only (rows + per-resource-type) survive the audit ALLOW filter.
   const counts = JSON.parse(parsedRow.resource_counts);

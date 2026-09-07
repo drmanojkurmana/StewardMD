@@ -19,7 +19,10 @@
 
   // ---- pure view-model layer (testable) ----------------------------------------------------
   var ESC = {
-    red:    { label: "Urgent", rank: 3, color: "#b3261e", bg: "#fdeceb", icon: "⚠" },
+    // U+FE0E = text presentation. Without it iOS renders a bare U+26A0 as the colour emoji, so the
+    // most severe badge in a clinical list picks up a yellow-and-black glyph that fights its own
+    // red styling and matches nothing else in the app.
+    red:    { label: "Urgent", rank: 3, color: "#b3261e", bg: "#fdeceb", icon: "\u26a0\ufe0e" },
     orange: { label: "Review", rank: 2, color: "#8a5a00", bg: "#fdf1dc", icon: "●" },
     yellow: { label: "Watch",  rank: 1, color: "#8a6d00", bg: "#fbf6e0", icon: "○" },
     green:  { label: "On track", rank: 0, color: "#127a52", bg: "#e7f6ee", icon: "✓" },
@@ -119,7 +122,14 @@
     // AI Voice Fallback (flag smd_followcare_voice)
     queueCall: function (episodeId) { return req("POST", "/voice/call", { episodeId: episodeId }); },
     voiceSettingsGet: function () { return req("GET", "/voice/settings"); },
-    voiceSettingsSet: function (payload) { return req("POST", "/voice/settings", payload); }
+    voiceSettingsSet: function (payload) { return req("POST", "/voice/settings", payload); },
+    /* The owner-only test call. The endpoint takes a service token OR owner auth, and req() already
+     * sends the signed-in Firebase bearer - so an owner triggers this from the app and nobody has to
+     * handle FOLLOWCARE_VOICE_SERVICE_TOKEN by hand. It was API-only before, which meant pasting a
+     * production secret into a shell to place a single test call. */
+    voiceTest: function (phone, pathwayId, name) {
+      return req("POST", "/voice/test", { phone: phone, pathwayId: pathwayId || "heart_failure", name: name || "Test Patient" });
+    }
   };
   var CM = (function () { try { return G.FollowCareComms || null; } catch (e) { return null; } })();
   function actionsEnabled() { try { return !!(G.SMD_FOLLOWCARE_FLAGS && G.SMD_FOLLOWCARE_FLAGS.bool("smd_followcare_actions")); } catch (e) { return true; } }
@@ -147,22 +157,28 @@
   function css() {
     return [
       ".fc-ov{position:fixed;inset:0;z-index:9600;background:rgba(8,18,24,.5);backdrop-filter:blur(3px);display:flex;justify-content:center;align-items:flex-start;overflow:auto;padding:0}",
-      ".fc-sheet{background:var(--panel,#fff);color:var(--ink,#14202b);width:100%;max-width:620px;min-height:100%;box-shadow:0 20px 60px -20px rgba(0,0,0,.5);display:flex;flex-direction:column}",
-      ".fc-hd{position:sticky;top:0;background:#0e6e63;color:#fff;padding:calc(14px + env(safe-area-inset-top)) 16px 14px;display:flex;align-items:center;gap:10px;z-index:2}",
-      ".fc-hd b{font-size:16px;font-weight:800}.fc-hd .fc-x{margin-left:auto;background:rgba(255,255,255,.16);border:none;color:#fff;width:34px;height:34px;border-radius:9px;font-size:18px;cursor:pointer}",
-      ".fc-bd{padding:16px 16px calc(16px + env(safe-area-inset-bottom));flex:1}",
+      ".fc-sheet{background:var(--rds-surface);color:var(--rds-ink);font-family:var(--rds-font);width:100%;max-width:620px;min-height:100%;box-shadow:0 24px 60px -20px rgba(0,0,0,.15);display:flex;flex-direction:column;border-radius:20px;overflow:hidden;margin:40px auto}",
+      // The guest bar is fixed to the viewport top and the sheet is a fixed overlay, so the bar sat on
+      // this header. guest-timer.js publishes its measured height; 0px when no guest is running.
+      ".fc-hd{position:sticky;top:var(--smd-guestbar-h,0px);margin-top:var(--smd-guestbar-h,0px);background:var(--rds-surface);color:var(--rds-ink);padding:calc(20px + env(safe-area-inset-top)) 24px 20px;display:flex;align-items:center;gap:12px;z-index:2;border-bottom:1px solid var(--rds-line)}",
+      // The close control is the most-tapped thing on this overlay and it was 34x34 - under the 44x44
+      // minimum, on a surface used one-handed on a ward round. The box grows; the header padding
+      // already had room for it.
+      ".fc-hd b{font-size:18px;font-weight:700}.fc-hd .fc-x{margin-left:auto;background:var(--rds-surface-2);border:none;color:var(--rds-ink);width:44px;height:44px;border-radius:12px;font-size:24px;line-height:1;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;transition:background 0.2s}",
+      ".fc-hd .fc-x:hover{background:var(--rds-line)}",
+      ".fc-bd{padding:24px 24px calc(24px + env(safe-area-inset-bottom));flex:1;background:var(--rds-bg)}",
       ".fc-sum{display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap}",
-      ".fc-sect{font:800 11px var(--sans,system-ui);letter-spacing:.08em;color:var(--slate,#5a7184);margin:18px 0 8px;padding:0 2px}",
+      ".fc-sect{font:700 12px var(--rds-font);letter-spacing:.06em;color:var(--rds-muted);margin:24px 0 12px;padding:0 2px;text-transform:uppercase}",
       ".fc-pill{border-radius:999px;padding:6px 12px;font-size:12.5px;font-weight:700}",
-      ".fc-btn{background:#0e6e63;color:#fff;border:none;border-radius:12px;padding:12px 16px;font-weight:750;font-size:14px;cursor:pointer;min-height:46px}",
-      ".fc-btn.sec{background:transparent;color:#0e6e63;border:1.5px solid #0e6e63}",
-      ".fc-row{border:1px solid var(--line,#dbe4e2);border-radius:14px;padding:13px 14px;margin-bottom:10px;display:flex;align-items:center;gap:12px;cursor:pointer;background:var(--panel,#fff)}",
-      // min-width + centered text: a fixed badge column so every row's title starts at the SAME x,
-      // regardless of whether the label is "Watch" or "On track" (was drifting per row before).
-      ".fc-row .fc-badge{flex:0 0 auto;min-width:74px;text-align:center;border-radius:10px;padding:5px 9px;font-size:12px;font-weight:800}",
-      ".fc-row .fc-meta{flex:1;min-width:0}.fc-row .fc-meta .fc-t{font-weight:700;font-size:14.5px}.fc-row .fc-meta .fc-s{color:var(--slate,#5a7184);font-size:12.5px}",
-      // Each segment is its own nowrap span (see episodeRow) — wraps land BETWEEN segments, not mid-word.
-      ".fc-row .fc-meta .fc-s-seg{white-space:nowrap}",
+      ".fc-btn{background:var(--rds-primary);color:#fff;border:none;border-radius:12px;padding:12px 16px;font-weight:700;font-size:15px;cursor:pointer;min-height:48px;transition:filter 0.2s}",
+      ".fc-btn:hover{filter:brightness(1.1)}",
+      ".fc-btn.sec{background:transparent;color:var(--rds-primary);border:1.5px solid var(--rds-primary)}",
+      ".fc-row{border:1px solid #cbd5e1;border-radius:12px;margin-bottom:12px;display:flex;align-items:stretch;gap:0;cursor:pointer;background:#ffffff;box-shadow:4px 4px 0px #94a3b8;padding:0;overflow:hidden;transition:transform 0.1s, box-shadow 0.1s;font-family:'IBM Plex Sans', sans-serif}",
+      ".fc-row:hover{transform:translate(1px, 1px);box-shadow:3px 3px 0px #94a3b8}",
+      ".fc-row .fc-badge{display:flex;flex-direction:column;align-items:center;justify-content:center;width:48px;border-radius:0;padding:16px 0;background:#f8fafc;border-right:1px solid #cbd5e1;font-size:14px;font-weight:700}",
+      ".fc-row .fc-meta{padding:20px 24px;flex:1}",
+      ".fc-row .fc-meta .fc-t{font-size:17px;font-weight:700;color:#0f172a;margin:0 0 12px 0}",
+      ".fc-row .fc-meta .fc-s{display:flex;gap:16px;color:#64748b;font-size:13px;font-weight:500}",
       ".fc-row .fc-flag{flex:0 0 auto;color:#b3261e;font-size:14px;line-height:1;margin-left:2px}",
       ".fc-field{margin-bottom:14px}.fc-field label{display:block;font-weight:650;font-size:13.5px;margin-bottom:6px}",
       ".fc-field input,.fc-field select{width:100%;padding:11px 12px;border:1.5px solid var(--line,#dbe4e2);border-radius:11px;font-size:15px;background:var(--panel,#fff);color:var(--ink,#14202b);min-height:46px}",
@@ -202,11 +218,6 @@
       ".fc-hd .fc-hd-logo{display:none}.fc-sheet.fcui2 .fc-hd .fc-hd-logo{display:inline-flex;font-size:18px;margin-right:2px}",
       ".fc-sheet.fcui2 .fc-hd b{letter-spacing:-.01em}",
       ".fc-sheet.fcui2 .fc-bd{padding:18px 16px 30px}",
-      ".fc-sheet.fcui2 .fc-btn{border-radius:12px;font-weight:750;transition:filter .15s,transform .1s}",
-      ".fc-sheet.fcui2 .fc-btn:active{transform:scale(.99)}.fc-sheet.fcui2 .fc-btn:hover{filter:brightness(1.06)}",
-      ".fc-sheet.fcui2 .fc-btn.sec{background:transparent;border:1.5px solid #0e6e63}",
-      ".fc-sheet.fcui2 .fc-row{border-radius:14px;border:1px solid var(--line,#dbe4e2);transition:border-color .15s,transform .1s}",
-      ".fc-sheet.fcui2 .fc-row:hover{border-color:#0e6e63}",
       ".fc-sheet.fcui2 .fc-row:active{transform:scale(.99)}",
       ".fc-sheet.fcui2 .fc-pill{border-radius:999px;font-weight:700}",
       ".fc-sheet.fcui2 .fc-field input,.fc-sheet.fcui2 .fc-field select,.fc-sheet.fcui2 .fc-ta,.fc-sheet.fcui2 input,.fc-sheet.fcui2 select,.fc-sheet.fcui2 textarea{border-radius:13px}",
@@ -254,9 +265,96 @@
       "body.dark .fc-sheet.fcai .mai-hero,body.v3-dark .fc-sheet.fcai .mai-hero{background:linear-gradient(130deg,#0a3b3a 0%,#0e6e63 42%,#0a8fb0 100%);box-shadow:0 24px 66px -22px rgba(20,184,166,.6),0 0 0 1px rgba(94,234,212,.28)}",
       ".mai-aura{position:absolute;inset:-45%;z-index:0;pointer-events:none;background:radial-gradient(circle at 28% 22%,rgba(94,234,212,.4),transparent 42%),radial-gradient(circle at 82% 78%,rgba(56,189,248,.34),transparent 46%);animation:maiAura 8s ease-in-out infinite}",
       ".mai-dot{animation:maiPulse 2.4s ease-out infinite}",
-      // StewardMD corner watermark — same masked-logo technique as ONCqis's .oh-hero-mark
+      // StewardMD corner watermark — same masked-logo technique as ONCQIS's .oh-hero-mark
       // (onco-home.css), so every module hero card carries the identical brand mark.
-      ".mai-mark{position:absolute;right:-14px;bottom:-20px;width:128px;height:128px;opacity:.16;-webkit-mask:url(/logo.png) center/contain no-repeat;mask:url(/logo.png) center/contain no-repeat;background:#fff;pointer-events:none}"
+      ".mai-mark{position:absolute;right:-14px;bottom:-20px;width:128px;height:128px;opacity:.16;-webkit-mask:url(/logo.png) center/contain no-repeat;mask:url(/logo.png) center/contain no-repeat;background:#fff;pointer-events:none}",
+
+      // Quiet Intelligence: a calmer, information-first surface for FollowCare and MAiTRI.
+      // Clinical state colours remain unchanged; the new layer only changes hierarchy and chrome.
+      "html:has(body.fc-lock),body.fc-lock{height:100%;overflow:hidden!important;overscroll-behavior:none}",
+      ".fc-ov.fcui2{align-items:stretch;overflow:hidden;overscroll-behavior:none;touch-action:none;background:rgba(0,0,0,.58);backdrop-filter:blur(14px)}",
+      ".fc-sheet.fcui2{width:100%;max-width:680px;height:100%;min-height:0;max-height:100%;margin:0 auto;border-radius:0;background:var(--rds-bg);box-shadow:0 0 70px rgba(0,0,0,.28)}",
+      ".fc-sheet.fcui2 .fc-hd{position:relative;top:auto;margin-top:0;flex:0 0 auto;display:grid;grid-template-columns:44px minmax(0,1fr) 44px;gap:10px;padding:calc(9px + env(safe-area-inset-top)) 16px 9px;background:color-mix(in srgb,var(--rds-surface) 94%,transparent);color:var(--rds-ink);border-color:var(--rds-line);backdrop-filter:blur(18px)}",
+      ".fc-sheet.fcui2 .fc-hd .fc-hd-logo{display:none}",
+      ".fc-sheet.fcui2 .fc-hd-title{grid-column:2;text-align:center;min-width:0;align-self:center}",
+      ".fc-sheet.fcui2 .fc-hd-title b{display:block;color:var(--rds-ink);font-size:16px;font-weight:700;line-height:1.2;letter-spacing:-.02em;background:none;-webkit-text-fill-color:currentColor}",
+      ".fc-sheet.fcui2 .fc-hd-title small{display:block;margin-top:2px;color:var(--rds-muted);font-size:10.5px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}",
+      ".fc-sheet.fcui2 .fc-hd .fc-x{grid-column:3;width:40px;height:40px;border-radius:50%;background:var(--rds-surface-2);color:var(--rds-ink);font-size:22px}",
+      ".fc-sheet.fcui2 .fc-bd{min-height:0;overflow-y:auto;overscroll-behavior-y:contain;touch-action:pan-y;padding:20px 18px calc(24px + env(safe-area-inset-bottom));background:var(--rds-bg)}",
+      ".fc-q-intro{margin:4px 0 18px}",
+      ".fc-q-eyebrow{display:block;color:var(--rds-muted);font-size:11px;font-weight:750;letter-spacing:.1em;text-transform:uppercase;margin-bottom:8px}",
+      ".fc-q-intro h2{margin:0;color:var(--rds-ink);font-size:29px;line-height:1.12;letter-spacing:-.045em;font-weight:760}",
+      ".fc-q-intro p{margin:8px 0 0;color:var(--rds-muted);font-size:13.5px;line-height:1.55;max-width:520px}",
+      ".fc-q-metrics{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin-bottom:14px}",
+      ".fc-sheet.fcui2 .fc-cc{min-width:0!important;padding:13px 10px!important;border:1px solid var(--rds-line)!important;border-radius:15px!important;background:var(--rds-surface)!important;box-shadow:none!important;text-align:left!important}",
+      ".fc-sheet.fcui2 .fc-cc-n{font-size:23px;font-weight:760;line-height:1;letter-spacing:-.04em;color:var(--rds-ink)}",
+      ".fc-sheet.fcui2 .fc-cc-l{font-size:10.5px;color:var(--rds-muted);margin-top:6px;line-height:1.2}",
+      ".fc-q-actions{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin:14px 0 4px}",
+      ".fc-sheet.fcui2 .fc-q-actions .fc-btn{display:flex;align-items:center;justify-content:center;gap:8px;margin:0!important;padding:11px 12px!important;line-height:1.2!important}",
+      ".fc-q-actions .fc-maitri-btn img{width:23px;height:23px;object-fit:contain}",
+      ".fc-sheet.fcui2 .fc-q-settings{width:100%;margin:9px 0 0!important;background:var(--rds-surface)!important;color:var(--rds-ink)!important;border:1px solid var(--rds-line)!important;box-shadow:none!important}",
+      ".fc-sheet.fcui2 .fc-sum{margin:13px 0 3px;gap:7px}",
+      ".fc-sheet.fcui2 .fc-pill{padding:6px 10px;font-size:11.5px}",
+      ".fc-sheet.fcui2 .fc-sect{display:flex;align-items:center;justify-content:space-between;margin:23px 1px 10px;padding:0;color:var(--rds-ink);font-size:14px;letter-spacing:0;text-transform:none}",
+      ".fc-sheet.fcui2 .fc-row{width:100%;min-height:66px;margin:0;padding:0;border:0;border-bottom:1px solid var(--rds-line);border-radius:0;background:transparent;box-shadow:none;display:flex;align-items:center;color:var(--rds-ink);font:inherit;text-align:left}",
+      ".fc-sheet.fcui2 .fc-row:hover{transform:none;background:color-mix(in srgb,var(--rds-surface) 72%,transparent);box-shadow:none}",
+      ".fc-sheet.fcui2 .fc-row .fc-badge{width:40px;height:40px;flex:0 0 40px;margin-left:2px;padding:0;border:0;border-radius:50%;background:var(--rds-surface-2)!important}",
+      ".fc-sheet.fcui2 .fc-row .fc-meta{min-width:0;padding:13px 11px}",
+      ".fc-sheet.fcui2 .fc-row .fc-meta .fc-t{display:flex;align-items:center;gap:7px;min-width:0;margin:0;color:var(--rds-ink);font-size:14px;font-weight:700;line-height:1.3}",
+      ".fc-sheet.fcui2 .fc-status{flex:0 0 auto;margin-left:auto;padding:5px 8px;border-radius:999px;font-size:10.5px;font-weight:700}",
+      ".fc-sheet.fcui2 .fc-row .fc-meta .fc-s{display:flex;gap:0;flex-wrap:wrap;margin-top:4px;color:var(--rds-muted);font-size:11px;font-weight:500;line-height:1.4}",
+      ".fc-sheet.fcui2 .fc-row .fc-flag{padding:20px 7px 20px 0!important}",
+      ".fc-maitri{padding-top:1px}",
+      ".fc-maitri-back{width:auto!important;min-height:40px!important;margin:0 0 12px!important;padding:8px 11px!important;background:transparent!important;border-color:var(--rds-line)!important;color:var(--rds-muted)!important;box-shadow:none!important}",
+      ".fc-sheet.fcui2 .mai-hero{margin:0 0 16px;padding:19px 14px 17px!important;border:1px solid var(--rds-line);border-radius:24px!important;background:var(--rds-surface)!important;color:var(--rds-ink)!important;box-shadow:none!important;text-align:center}",
+      ".fc-sheet.fcui2 .mai-aura{inset:auto;left:50%;top:10px;width:126px;height:126px;transform:translateX(-50%);border-radius:42px;background:radial-gradient(circle,rgba(87,211,189,.18),transparent 70%);animation:none}",
+      ".fc-sheet.fcui2 .mai-live{position:absolute;top:12px;right:12px;z-index:2;display:inline-flex;align-items:center;gap:6px;padding:5px 9px;border:1px solid var(--rds-line);border-radius:999px;background:var(--rds-surface-2);color:var(--rds-muted);font-size:10.5px;font-weight:700}",
+      ".fc-sheet.fcui2 .mai-logo{position:relative;z-index:1;display:block;width:88px;height:88px;object-fit:contain;margin:0 auto 5px;filter:drop-shadow(0 8px 16px rgba(0,0,0,.24))}",
+      ".fc-sheet.fcui2 .mai-wordmark{position:relative;z-index:1;display:block;width:190px;max-width:72%;object-fit:contain;margin:0 auto}",
+      "body.dark .fc-sheet.fcui2 .mai-wordmark,body.v3-dark .fc-sheet.fcui2 .mai-wordmark{filter:brightness(0) invert(1)}",
+      ".fc-sheet.fcui2 .mai-language{position:relative;z-index:1;display:inline-flex;align-items:center;gap:6px;margin-top:12px;padding:6px 11px;border-radius:999px;background:color-mix(in srgb,var(--fc-accent,#0e6e63) 13%,transparent);color:var(--fc-accent,#0e6e63);font-size:11px;font-weight:700}",
+      ".fc-sheet.fcui2 .mai-language::before{content:'';width:6px;height:6px;border-radius:50%;background:currentColor}",
+      ".fc-sheet.fcui2 .mai-mark{display:none}",
+      ".fc-maitri .fc-q-metrics{margin-bottom:12px}",
+      ".fc-maitri-status{display:flex;align-items:center;gap:10px;padding:13px 14px;margin-bottom:16px;border:1px solid var(--rds-line);border-radius:16px;background:var(--rds-surface)}",
+      ".fc-maitri-status>div{flex:1;color:var(--rds-muted);font-size:12.5px;line-height:1.45}",
+      ".fc-maitri-section{display:flex;align-items:center;justify-content:space-between;gap:8px;margin:19px 1px 9px;color:var(--rds-ink);font-size:14px;font-weight:750}",
+      ".fc-maitri-section span{padding:4px 8px;border-radius:999px;background:var(--rds-surface-2);color:var(--rds-muted);font-size:11px}",
+      ".fc-maitri-actions{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:15px}",
+      ".fc-maitri-actions .fc-btn{margin:0!important;padding:11px 9px!important;font-size:13.5px!important;line-height:1.25!important}",
+      "body.dark .fc-sheet.fcai,body.v3-dark .fc-sheet.fcai{background:var(--rds-bg)!important;box-shadow:0 0 70px rgba(0,0,0,.55)}",
+      "body.dark .fc-sheet.fcai::before,body.v3-dark .fc-sheet.fcai::before{display:none}",
+      "body.dark .fc-sheet.fcai .fc-hd,body.v3-dark .fc-sheet.fcai .fc-hd{background:color-mix(in srgb,var(--rds-surface) 94%,transparent);border-color:var(--rds-line);box-shadow:none}",
+      "body.dark .fc-sheet.fcai .fc-row,body.v3-dark .fc-sheet.fcai .fc-row{background:transparent!important;border:0!important;border-bottom:1px solid var(--rds-line)!important;border-radius:0!important;box-shadow:none}",
+      "body.dark .fc-sheet.fcai .fc-btn,body.v3-dark .fc-sheet.fcai .fc-btn{background:var(--rds-primary);border:0;box-shadow:none;color:#fff;font-weight:750;letter-spacing:0}",
+      "body.dark .fc-sheet.fcai .fc-btn.sec,body.v3-dark .fc-sheet.fcai .fc-btn.sec{background:var(--rds-surface);color:var(--rds-ink);border:1px solid var(--rds-line)}",
+      "@media(max-width:460px){.fc-q-metrics{grid-template-columns:repeat(2,minmax(0,1fr))}.fc-q-actions,.fc-maitri-actions{grid-template-columns:1fr}.fc-q-intro h2{font-size:27px}.fc-sheet.fcui2 .fc-row .fc-meta .fc-t{align-items:flex-start;flex-direction:column;gap:4px}.fc-sheet.fcui2 .fc-status{margin-left:0}.fc-sheet.fcui2 .fc-row .fc-flag{align-self:center}}",
+
+      /* == Keyboard focus =====================================================================
+       * There was exactly ONE :focus rule in this whole module, so a doctor driving it from an
+       * external keyboard (or any switch/AT user) had no idea where they were. Browser defaults do
+       * not survive here because these are restyled buttons and divs. :focus-visible keeps it off
+       * the pointer path, so nothing changes for touch. */
+      ".fc-sheet :focus-visible{outline:2.5px solid #0e6e63;outline-offset:2px;border-radius:10px}",
+      // On the teal header a teal ring is invisible, so the ring inverts there.
+      ".fc-hd :focus-visible{outline-color:#fff;outline-offset:2px}",
+      "body.dark .fc-sheet :focus-visible,body.v3-dark .fc-sheet :focus-visible{outline-color:#5eead4}",
+
+      /* == Reduced motion =====================================================================
+       * The JS guard (_RM) only covers the motion.dev helpers. It never covered the CSS: UI v2 adds
+       * transitions and :active transforms, and the MAiTRI hero runs .mai-aura and .mai-dot as
+       * INFINITE animations. Continuous unstoppable motion on a clinical dashboard is the exact
+       * thing this media query exists for, and it is a vestibular trigger, not a taste preference. */
+      "@media (prefers-reduced-motion:reduce){",
+      "  .fc-sheet *,.fc-sheet *::before,.fc-sheet *::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}",
+      "  .fc-sheet .mai-aura{animation:none;opacity:.5}",
+      "  .fc-sheet .fc-btn:active,.fc-sheet .fc-row:active{transform:none}",
+      "}",
+
+      /* == Dark mode: the one chip that never got a dark rule =================================
+       * .fc-soon is a light amber pill (#ffe9c7) on what becomes a dark card, so it glowed as the
+       * brightest thing on the screen while marking the LEAST important item (a not-yet feature). */
+      "body.dark .fc-sheet .fc-act .fc-soon,body.v3-dark .fc-sheet .fc-act .fc-soon{background:rgba(230,162,60,.18);color:#f0c060}"
     ].join("");
   }
   function ensureStyle() { if (mounted) return; var s = document.createElement("style"); s.id = "fc-style"; s.textContent = css(); document.head.appendChild(s); mounted = true; }
@@ -271,7 +369,7 @@
   function toast(m) { try { (G.toast || G.SMD_toast || function () {})(m); } catch (e) {} }
   function isoDate(ms) { try { return new Date(ms).toISOString().slice(0, 10); } catch (e) { return ""; } }
 
-  function close() { if (root && root.parentNode) root.parentNode.removeChild(root); root = null; }
+  function close() { if (root && root.parentNode) root.parentNode.removeChild(root); root = null; try { document.body.classList.remove("fc-lock"); } catch (e) {} }
   function shell(title, bodyEl) {
     ensureStyle();
     close();
@@ -279,15 +377,27 @@
     var sheet = h("div", { "class": "fc-sheet fcai" + (ui2() ? " fcui2" : "") }, [
       h("div", { "class": "fc-hd" }, [
         h("span", { "class": "fc-hd-logo", "aria-hidden": "true", text: "🩺" }),
-        h("b", { text: "FollowCare" }),
+        h("div", { "class": "fc-hd-title" }, [
+          h("b", { text: title || "FollowCare" }),
+          h("small", { text: "Post-discharge recovery" })
+        ]),
         h("button", { "class": "fc-x", "aria-label": "Close", onclick: close, text: "×" })
       ]),
       body
     ]);
     root = h("div", { "class": "fc-ov fcai" + (ui2() ? " fcui2" : ""), onclick: function (e) { if (e.target === root) close(); } }, [sheet]);
     document.body.appendChild(root);
+    document.body.classList.add("fc-lock");
     mSheetIn(sheet);
     return body;
+  }
+  function setShellHeading(body, title, subtitle) {
+    var sheet = body && body.closest ? body.closest(".fc-sheet") : null;
+    var heading = sheet && sheet.querySelector(".fc-hd-title");
+    if (!heading) return;
+    var main = heading.querySelector("b"), sub = heading.querySelector("small");
+    if (main) main.textContent = title || "FollowCare";
+    if (sub) sub.textContent = subtitle || "Post-discharge recovery";
   }
 
   function notReadyView() {
@@ -311,6 +421,7 @@
   function openEnroll(prefill) { if (!enabled()) { toast("FollowCare is not enabled."); return; } var b = shell(); withReady(b, function (x) { renderEnroll(x, prefill || {}); }); }
 
   function renderDashboard(body) {
+    setShellHeading(body, "FollowCare", "Post-discharge recovery");
     body.innerHTML = "";
     body.appendChild(h("div", { "class": "fc-empty", text: "Loading recovery board…" }));
     API.episodes().then(function (res) {
@@ -318,42 +429,67 @@
       if (res.status === 401) { body.appendChild(h("div", { "class": "fc-empty", text: "Please sign in to use FollowCare." })); return; }
       var list = sortEpisodes((res.body && res.body.episodes) || []);
       var c = counts(list);
+      var page = h("div", { "class": "fc-dashboard" });
+      body.appendChild(page);
+      page.appendChild(h("div", { "class": "fc-q-intro" }, [
+        h("span", { "class": "fc-q-eyebrow", text: "Recovery overview" }),
+        h("h2", { text: "Your patients at a glance." }),
+        h("p", { text: c.red || c.orange ? "Clinical changes are prioritized below so you can act quickly." : "No urgent recovery signals are waiting right now." })
+      ]));
       // Phase 3 — command-center strip (MODULE 1): the doctor's at-a-glance counts.
       try {
         if (G.FollowCareAnalytics) {
           var cc = FollowCareAnalytics.commandCenter(list, (G.Date && Date.now) ? Date.now() : 0);
-          body.appendChild(h("div", { style: "display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px" }, [
+          page.appendChild(h("div", { "class": "fc-q-metrics" }, [
             ccBox(cc.active, "Active"), ccBox(cc.needReview, "Need review"), ccBox(cc.highRisk, "High risk"), ccBox(cc.recoveredToday, "Recovered today")
           ]));
         }
       } catch (e) {}
-      body.appendChild(h("div", { "class": "fc-sum" }, [
+      page.appendChild(h("div", { "class": "fc-sum" }, [
         pill(c.red + " urgent", ESC.red), pill(c.orange + " review", ESC.orange), pill(c.green + " on track", ESC.green)
       ]));
-      body.appendChild(h("button", { "class": "fc-btn", style: "margin-bottom:8px;background:linear-gradient(135deg,#0e7d70,#0b544c);display:flex;align-items:center;justify-content:center;gap:8px", onclick: function () { renderMaitri(body); }, html: '<img src="/maitri-logo.png" alt="" aria-hidden="true" style="width:20px;height:20px;object-fit:contain;filter:brightness(0) invert(1)">' + '<span style="font-weight:800">MAiTRI dashboard</span>' }));
-      body.appendChild(h("button", { "class": "fc-btn", onclick: function () { renderEnroll(body); }, text: "+ Enroll a patient" }));
-      if (voiceEnabled()) body.appendChild(h("button", { "class": "fc-btn sec", style: "margin-top:8px", onclick: function () { renderVoiceSettings(body); }, text: "Voice & ambulance settings" }));
-      if (!list.length) { body.appendChild(h("div", { "class": "fc-empty", text: "No active recovery episodes yet. Enroll a discharged patient to begin." })); return; }
-      body.appendChild(h("div", { "class": "fc-sect", text: "RECOVERY BOARD" }));
-      var rows = list.map(function (ep) { var r = episodeRow(ep); body.appendChild(r); return r; });
+      // The two primary actions sit on ONE row: they are siblings, not a sequence, and stacking
+      // them pushed the recovery board (the actual content of this screen) below the fold.
+      // Equal columns so neither reads as the more important one. min-height:46px on .fc-btn keeps
+      // both above the touch minimum even at half width.
+      page.appendChild(h("div", { "class": "fc-q-actions" }, [
+        h("button", { "class": "fc-btn fc-maitri-btn", onclick: function () { renderMaitri(body); }, html: '<img src="/maitri-logo.png" alt="" aria-hidden="true">' + '<span>Open MAiTRI</span>' }),
+        h("button", { "class": "fc-btn", onclick: function () { renderEnroll(body); }, text: "+ Enroll a patient" })
+      ]));
+      /* Always reachable, and deliberately NOT behind voiceEnabled().
+       *
+       * The gate was circular: this screen is where voice gets turned on, so hiding it until voice
+       * is already on left no way in. smd_followcare_voice defaults false and lives in
+       * localStorage, so a fresh install (or an iOS reinstall, which wipes the container) hid the
+       * settings - and with them the test call - with nothing on screen explaining why.
+       *
+       * Opening a settings screen grants nothing: the server still checks owner auth on every voice
+       * action and per-hospital enablement on every call. */
+      page.appendChild(h("button", { "class": "fc-btn sec fc-q-settings", onclick: function () { renderVoiceSettings(body); }, text: "Voice & ambulance settings" }));
+      if (!list.length) { page.appendChild(h("div", { "class": "fc-empty", text: "No active recovery episodes yet. Enroll a discharged patient to begin." })); return; }
+      page.appendChild(h("div", { "class": "fc-sect", text: "Needs attention" }));
+      var rows = list.map(function (ep) { var r = episodeRow(ep); page.appendChild(r); return r; });
       if (ui2()) mStagger(rows);
     }).catch(function () { body.innerHTML = ""; body.appendChild(h("div", { "class": "fc-empty", text: "Could not load the recovery board. Check your connection." })); });
   }
   function pill(text, meta) { return h("span", { "class": "fc-pill", style: "background:" + meta.bg + ";color:" + meta.color, text: text }); }
-  function ccBox(n, label) { return h("div", { "class": "fc-cc", style: "flex:1 1 auto;min-width:72px;text-align:center;background:var(--panel,#fff);border:1px solid var(--line,#dbe4e2);border-radius:12px;padding:10px 8px" }, [h("div", { style: "font-size:21px;font-weight:850;color:var(--fc-accent,#0e6e63)", text: String(n) }), h("div", { style: "font-size:11.5px;color:var(--slate,#5a7184)", text: label })]); }
+  function ccBox(n, label) { return h("div", { "class": "fc-cc" }, [h("div", { "class": "fc-cc-n", text: String(n) }), h("div", { "class": "fc-cc-l", text: label })]); }
   function episodeRow(ep) {
     var m = escalationMeta(ep.escalation);
     // Each "· segment" gets its own nowrap span so a narrow row wraps BETWEEN segments, never
     // mid-phrase (the joined-string version could strand a lone word like "review" on its own line).
     var segs = [statusMeta(ep.status), "next " + fmtWhen(ep.nextDueMs)];
     if (ep.riskPercent) segs.push(ep.riskPercent + "% readmit risk");
-    return h("div", { "class": "fc-row", onclick: function () { renderDetail(ep.episodeId); } }, [
-      h("span", { "class": "fc-badge", style: "background:" + m.bg + ";color:" + m.color, text: m.icon + " " + m.label }),
+    return h("button", { "class": "fc-row", type: "button", onclick: function () { renderDetail(ep.episodeId); } }, [
+      h("span", { "class": "fc-badge", style: "color:" + m.color, text: m.icon }),
       h("div", { "class": "fc-meta" }, [
-        h("div", { "class": "fc-t", text: (ep.disease || "Recovery") + (ep.score != null && ep.score >= 0 ? "  ·  " + ep.score + "/100" : "") }),
+        h("div", { "class": "fc-t" }, [
+          document.createTextNode((ep.disease || "Recovery") + (ep.score != null && ep.score >= 0 ? "  ·  " + ep.score + "/100" : "")),
+          h("span", { "class": "fc-status", style: "background:" + m.bg + ";color:" + m.color, text: m.label })
+        ]),
         h("div", { "class": "fc-s" }, segs.map(function (s, i) { return h("span", { "class": "fc-s-seg", text: (i ? " · " : "") + s }); }))
       ]),
-      ep.needsReview ? h("span", { "class": "fc-flag", title: "Needs review", "aria-label": "Needs review" }, ["⚑"]) : null
+      ep.needsReview ? h("span", { "class": "fc-flag", title: "Needs review", "aria-label": "Needs review", style: "padding: 20px 16px 20px 0" }, ["⚑"]) : null
     ]);
   }
 
@@ -589,7 +725,56 @@
         }).catch(function () { save.disabled = false; save.textContent = "Save settings"; err.appendChild(h("div", { "class": "fc-err", text: "Connection problem." })); });
       });
       body.appendChild(err); body.appendChild(save);
-    }).catch(function () { body.innerHTML = ""; body.appendChild(h("button", { "class": "fc-btn sec", onclick: function () { renderDashboard(body); }, text: "‹ Back" })); body.appendChild(h("div", { "class": "fc-empty", text: "Could not load voice settings." })); });
+
+      /* ── Test call ────────────────────────────────────────────────────────────────────────────
+       * Places a REAL call through the AI follow-up service, so it says so plainly and asks for the
+       * number every time rather than remembering one - a test call that dials a stale number is a
+       * call to a patient who did not expect it. The episode is created under the isolated
+       * VOICE_TEST hospital, never a real clinic.
+       *
+       * The server refuses this to anyone who is not an owner (403), so this is a convenience, not
+       * the access control. */
+      body.appendChild(h("div", { style: "margin:18px 0 6px;font-weight:800;font-size:15px;color:#0e6e63", text: "Test call" }));
+      body.appendChild(h("div", { style: "margin:0 0 10px;color:var(--slate,#5a7184);font-size:12.5px",
+        text: "Places a real AI follow-up call to the number below, using a test episode discharged 3 days ago. Use your own number." }));
+      var tPhone = h("input", { type: "tel", inputmode: "numeric", placeholder: "Your mobile number" });
+      var tPath = h("select", {}, [
+        h("option", { value: "heart_failure", text: "Heart failure" }),
+        h("option", { value: "copd", text: "COPD" }),
+        h("option", { value: "post_op", text: "Post-op" })
+      ]);
+      body.appendChild(field("Call this number", tPhone));
+      body.appendChild(field("Pathway", tPath));
+      var tErr = h("div", { role: "alert", tabindex: "-1" });
+      var tBtn = h("button", { "class": "fc-btn sec", style: "margin-top:6px", text: "Place test call" });
+      tBtn.addEventListener("click", function () {
+        tErr.innerHTML = "";
+        var ph = String(tPhone.value || "").replace(/[^\d]/g, "");
+        if (ph.length < 10) { tErr.appendChild(h("div", { "class": "fc-err", text: "Enter a 10-digit mobile number." })); return; }
+        tBtn.disabled = true; tBtn.textContent = "Calling…";
+        API.voiceTest(ph, tPath.value, "Test Patient").then(function (r) {
+          tBtn.disabled = false; tBtn.textContent = "Place test call";
+          var b = (r && r.body) || {};
+          /* Queued and DIALLED are different things, and saying "queued" for a call the dialer
+           * never took is how this looked fine while no phone rang. The server reports which. */
+          if (b.ok && b.dialed) { toast("Calling now — your phone should ring"); return; }
+          if (b.ok) {
+            tErr.appendChild(h("div", { "class": "fc-err",
+              text: "Queued, but the dialer did not pick it up" + (b.dialError ? " (" + b.dialError + ")" : "") + ". The call was not placed." }));
+            return;
+          }
+          // Name the refusal instead of a generic failure: 403 here means the account is not an owner.
+          tErr.appendChild(h("div", { "class": "fc-err",
+            text: (r && r.status === 403) ? "Only an owner account can place a test call."
+              : (b.error === "bad_phone") ? "That number does not look dialable."
+                : ("Could not place the call" + (b.error ? " (" + b.error + ")." : ".")) }));
+        }).catch(function () {
+          tBtn.disabled = false; tBtn.textContent = "Place test call";
+          tErr.appendChild(h("div", { "class": "fc-err", text: "Connection problem. Try again." }));
+        });
+      });
+      body.appendChild(tErr); body.appendChild(tBtn);
+    }).catch(function () { body.innerHTML = ""; body.appendChild(h("button", { "class": "fc-btn sec", onclick: function () { renderDashboard(body); }, text: "‹ Back" })); body.appendChild(h("div",{ "class": "fc-empty", text: "Could not load voice settings." })); });
   }
 
   // The "AI Follow-up Call" card in the patient detail view: status + the manual call button (1/day enforced).
@@ -639,9 +824,9 @@
       var rec = "";
       try { if (G.FollowCareAI) rec = FollowCareAI.recommendation({ escalation: ep.currentEscalation || ep.escalation, trend: ep.trend, needsReview: ep.needsReview, recoveryScore: ep.score }); } catch (e) {}
       var heroKids = [
-        h("div", { style: "font-size:18px;font-weight:800", text: ep.disease || "Recovery" }),
+        h("div", { style: "font-size:24px;font-weight:700;color:#0f172a;margin-bottom:8px;font-family:'IBM Plex Sans', sans-serif", text: ep.disease || "Recovery" }),
         h("div", { "class": "fc-pill", style: "display:inline-block;margin-top:6px;background:" + m.bg + ";color:" + m.color, text: m.icon + " " + m.label + (ui2() ? "" : (ep.score != null && ep.score >= 0 ? "  ·  " + ep.score + "/100" : "")) + (ep.riskPercent ? "  ·  " + ep.riskPercent + "% risk" : "") }),
-        h("div", { style: "color:var(--slate,#5a7184);font-size:13px;margin-top:6px", text: statusMeta(ep.status) + "  ·  next check-in " + fmtWhen(ep.nextDueMs) + (ep.trend ? "  ·  trend " + ep.trend : "") }),
+        h("div", { style: "color:#475569;font-size:14px;font-weight:600;margin-top:8px", text: statusMeta(ep.status) + "  ·  next check-in " + fmtWhen(ep.nextDueMs) + (ep.trend ? "  ·  trend " + ep.trend : "") }),
         rec ? h("div", { style: "margin-top:8px;padding:10px 12px;background:color-mix(in srgb,var(--teal,#0e6e63) 10%,transparent);border-radius:10px;font-size:13.5px;font-weight:600;color:var(--ink,#14202b)", text: "AI recommendation: " + rec }) : null
       ];
       if (ui2()) {
@@ -691,15 +876,15 @@
       if (voiceEnabled() && res.body && res.body.voice) { body.appendChild(voiceCard(episodeId, res.body.voice)); }
       // Acknowledge clears the "needs review" flag (an escalated episode leaves the list only by clinician action).
       if (ep.escalation === "red" || ep.escalation === "orange") {
-        var ack = h("button", { "class": "fc-btn", style: "margin-top:14px", text: "Mark reviewed" });
+        var ack = h("button", { "class": "fc-btn", style: "margin-top:14px;width:100%", text: "Mark reviewed" });
         ack.addEventListener("click", function () { ack.disabled = true; API.ack(episodeId).then(function () { toast("Marked reviewed"); renderDetail(episodeId); }); });
         body.appendChild(ack);
       }
-      var rev = h("button", { "class": "fc-btn sec", style: "margin-top:10px", text: "Revoke patient link" });
+      var rev = h("button", { "class": "fc-btn sec", style: "margin-top:10px;width:100%", text: "Revoke patient link" });
       rev.addEventListener("click", function () { API.revoke(episodeId).then(function () { toast("Link revoked"); }); });
       body.appendChild(rev);
       // Right-to-erasure: permanently delete this patient's episode + all check-in data.
-      var er = h("button", { "class": "fc-btn sec", style: "margin-top:10px;color:#b3261e;border-color:#b3261e", text: "Delete patient data" });
+      var er = h("button", { "class": "fc-btn sec", style: "margin-top:10px;width:100%;color:#b3261e;border-color:#b3261e", text: "Delete patient data" });
       er.addEventListener("click", function () {
         if (!(G.confirm && confirm("Permanently delete this patient's recovery episode and all check-ins? This cannot be undone."))) return;
         er.disabled = true; API.erase(episodeId).then(function () { toast("Patient data deleted"); open(); });
@@ -957,39 +1142,35 @@
   }
   function maitriHero(sv) {
     var on = !!(sv && sv.voice && sv.voice.enabled);
-    var wrap = h("div", { "class": "mai-hero", style: "border-radius:20px;padding:22px 18px 16px;margin:2px 0 14px;color:#fff;position:relative;overflow:hidden;text-align:center" });
+    var wrap = h("div", { "class": "mai-hero", style: "position:relative;overflow:hidden" });
     wrap.innerHTML =
       '<div class="mai-aura"></div>' +
-      '<div style="position:absolute;top:12px;right:12px;z-index:2;display:flex;align-items:center;gap:6px;background:rgba(255,255,255,' + (on ? ".2" : ".1") + ');padding:5px 10px;border-radius:999px;font-size:10.5px;font-weight:800;border:1px solid rgba(255,255,255,.22)">' +
-        '<span class="mai-dot" style="width:7px;height:7px;border-radius:50%;background:' + (on ? "#7CF5C6" : "#ffd27a") + '"></span>' + (on ? "Live" : "Standby") + '</div>' +
-      '<div style="position:relative;z-index:1">' +
-        '<img src="/maitri-logo.png" alt="MAiTRI" style="display:block;margin:2px auto 4px;width:88px;height:88px;object-fit:contain;filter:brightness(0) invert(1) drop-shadow(0 5px 12px rgba(0,0,0,.4)) drop-shadow(0 0 20px rgba(94,234,212,.7))">' +
-        // The real brand lockup (title + tagline, cropped from the official logo file) rather than a
-        // CSS re-typeset — guarantees an exact match to the "MAiTRI" wordmark and its rounded "i".
-        '<img src="/maitri-wordmark.png" alt="MAiTRI — Medical Adaptive Intelligence for Treatment &amp; Recovery Integration" style="display:block;margin:6px auto 0;width:210px;max-width:100%;object-fit:contain;filter:brightness(0) invert(1) drop-shadow(0 2px 14px rgba(94,234,212,.4))">' +
-        '<div style="display:inline-flex;align-items:center;gap:6px;margin-top:12px;background:rgba(94,234,212,.14);border:1px solid rgba(94,234,212,.32);border-radius:999px;padding:6px 13px;font-size:11px;font-weight:700;color:#bff3ea">' +
-          '<span style="width:7px;height:7px;border-radius:50%;background:#7CF5C6"></span>Speaks 10 Indian languages + English</div>' +
-      '</div>' +
+      '<div class="mai-live"><span class="mai-dot" aria-hidden="true"></span>' + (on ? "Live" : "Standby") + '</div>' +
+      '<img class="mai-logo" src="/maitri-logo.png" alt="MAiTRI logo">' +
+      // Preserve the official lockup, including the full expansion of MAiTRI.
+      '<img class="mai-wordmark" src="/maitri-wordmark.png" alt="MAiTRI, Medical Adaptive Intelligence for Treatment &amp; Recovery Integration">' +
+      '<div class="mai-language">Speaks 10 Indian languages + English</div>' +
       '<span class="mai-mark" aria-hidden="true"></span>';
     return wrap;
   }
   function maitriStatus(sv) {
     var on = !!(sv && sv.voice && sv.voice.enabled), col = on ? ESC.green : ESC[""];
-    return h("div", { style: "border:1px solid var(--line,#dbe4e2);border-radius:14px;padding:12px 14px;margin-bottom:12px;background:var(--panel,#fff);display:flex;align-items:center;gap:11px" }, [
+    return h("div", { "class": "fc-maitri-status" }, [
       pill(on ? "Voice calling ON" : "Voice calling OFF", col),
-      h("div", { style: "font-size:12.5px;color:var(--slate,#5a7184);flex:1", text: on ? "Maitri calls patients who miss their check-in, in their language." : "Turn on in settings to enable AI wellbeing calls." })
+      h("div", { text: on ? "MAiTRI calls patients who miss their check-in, in their language." : "Turn on voice calling to enable AI wellbeing calls." })
     ]);
   }
   function maitriSection(t, n) {
-    return h("div", { style: "display:flex;align-items:center;gap:8px;margin:8px 0 10px;font-weight:800;font-size:14px;color:var(--ink,#14202b)" }, [
+    return h("div", { "class": "fc-maitri-section" }, [
       document.createTextNode(t),
-      n != null ? h("span", { style: "font-size:11.5px;font-weight:800;color:#0e6e63;background:#e7f6ee;border-radius:999px;padding:2px 9px", text: String(n) }) : null
+      n != null ? h("span", { text: String(n) }) : null
     ]);
   }
   function renderMaitri(body) {
+    setShellHeading(body, "MAiTRI", "Recovery intelligence");
     body.innerHTML = "";
-    body.appendChild(h("button", { "class": "fc-btn sec", onclick: function () { renderDashboard(body); }, text: "‹ Back" }));
-    var host = h("div"); body.appendChild(host);
+    body.appendChild(h("button", { "class": "fc-btn sec fc-maitri-back", onclick: function () { renderDashboard(body); }, text: "‹ FollowCare" }));
+    var host = h("div", { "class": "fc-maitri" }); body.appendChild(host);
     host.appendChild(maitriHero(null));
     host.appendChild(h("div", { "class": "fc-empty", text: "Loading MAiTRI…" }));
     Promise.all([
@@ -1001,7 +1182,7 @@
       host.innerHTML = "";
       host.appendChild(maitriHero(sv));
       var list = sortEpisodes(eps), c = counts(list);
-      host.appendChild(h("div", { style: "display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px" }, [
+      host.appendChild(h("div", { "class": "fc-q-metrics" }, [
         ccBox(c.total, "Recovering"), ccBox(c.red, "Urgent"), ccBox(c.orange + c.yellow, "Watch"), ccBox(c.green, "On track")
       ]));
       host.appendChild(maitriStatus(sv));
@@ -1009,8 +1190,11 @@
       host.appendChild(maitriSection("Needs attention", urgent.length));
       if (!urgent.length) host.appendChild(h("div", { "class": "fc-empty", text: "No red flags right now. Everyone is on track." }));
       else urgent.slice(0, 8).forEach(function (ep) { host.appendChild(episodeRow(ep)); });
-      host.appendChild(h("button", { "class": "fc-btn", style: "margin-top:10px", onclick: function () { renderVoiceSettings(body); }, text: "Voice & escalation settings" }));
-      host.appendChild(h("button", { "class": "fc-btn sec", style: "margin-top:8px", onclick: function () { renderEnroll(body); }, text: "+ Enroll a patient" }));
+      // Same pairing as the dashboard, so the two screens do not disagree about how actions look.
+      host.appendChild(h("div", { "class": "fc-maitri-actions" }, [
+        h("button", { "class": "fc-btn", onclick: function () { renderVoiceSettings(body); }, text: "Voice & escalation" }),
+        h("button", { "class": "fc-btn sec", onclick: function () { renderEnroll(body); }, text: "+ Enroll a patient" })
+      ]));
     }).catch(function () {
       host.innerHTML = ""; host.appendChild(maitriHero(null));
       host.appendChild(h("div", { "class": "fc-empty", text: "Could not load MAiTRI. Check your connection." }));

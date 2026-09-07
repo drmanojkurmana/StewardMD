@@ -1,0 +1,179 @@
+/* functions/_wardsynq/repository.js — the persistence PORT of the WardSynQ Clinical Record Service.
+ *
+ * This file is the deployment boundary. Everything above it (the clinical model, the ClinicalStore,
+ * the GovernedStore, the API contract) is deployment-independent; everything below it is one
+ * database. A managed India-hosted WardSynQ, a hospital-controlled on-premise one and a hybrid all
+ * run the SAME service and differ only in which implementation of this port they are handed.
+ *
+ *   repository-d1.js     Cloudflare D1        the current managed deployment       IMPLEMENTED
+ *   MemoryRepository     process memory       tests, and the reference semantics   IMPLEMENTED
+ *   (postgres / sqlite)  hospital-local       on-premise                           NOT IMPLEMENTED
+ *
+ * The port is deliberately small: eight methods, one error type. A hospital's database team can
+ * implement it against their own engine in an afternoon and never touch the clinical application.
+ *
+ * THE CONTRACT, which every implementation must honour and MemoryRepository demonstrates:
+ *
+ *   latest(tenantId, resourceType, id)               -> record | null       the highest version
+ *   history(tenantId, resourceType, id)              -> record[]            every version, ascending
+ *   byPatient(tenantId, resourceType, patientId)     -> record[]            latest version per id
+ *   latestByType(tenantId, resourceType, limit)      -> record[]            latest per id, a roster
+ *   append(tenantId, records, ctx)                   -> {seq}               ATOMIC; see below
+ *   changes(tenantId, sinceSeq, limit)               -> {records, cursor}   ascending by seq
+ *   recall(tenantId, idempotencyKey)                 -> {resourceType,id,version} | null
+ *   auditOnly(tenantId, event)                       -> void                a read's audit row
+ *
+ * append() is the only write and it is append-only: it inserts new versions and never updates or
+ * deletes. It MUST be atomic across the records, the idempotency key and the audit event it is
+ * given, and it MUST throw VersionConflictError if any (resourceType, id, version) already exists
+ * for that tenant. That last rule is the concurrency control for the whole system: two clients
+ * that both derive version N+1 from version N cannot both land, whatever the network did.
+ *
+ * Every method takes tenantId FIRST and every implementation must scope by it. There is no
+ * cross-tenant method and there never will be one at this layer.
+ */
+
+class VersionConflictError extends Error {
+  constructor(message, detail) {
+    super(message);
+    this.name = "VersionConflictError";
+    this.code = "VERSION_CONFLICT";
+    this.detail = detail || null;
+  }
+}
+
+class RepositoryError extends Error {
+  constructor(message, code) {
+    super(message);
+    this.name = "RepositoryError";
+    this.code = code || "REPOSITORY_ERROR";
+  }
+}
+
+const PORT_METHODS = Object.freeze(["latest", "history", "byPatient", "latestByType", "append", "changes", "recall", "auditOnly"]);
+
+/** Refuses at boot rather than at the first clinical write. */
+function assertRepository(repo) {
+  if (!repo || typeof repo !== "object") throw new RepositoryError("a repository is required", "NO_REPOSITORY");
+  for (const m of PORT_METHODS) {
+    if (typeof repo[m] !== "function") throw new RepositoryError(`repository is missing ${m}()`, "PORT_INCOMPLETE");
+  }
+  return repo;
+}
+
+function clone(v) {
+  return v === null || typeof v !== "object" ? v : JSON.parse(JSON.stringify(v));
+}
+
+/** What the record row carries besides the body, so an implementation can index without parsing. */
+function rowOf(tenantId, record) {
+  const meta = record.meta || {};
+  const by = record.writtenBy || {};
+  return {
+    tenantId,
+    resourceType: record.resourceType,
+    id: record.id,
+    version: record.version,
+    patientId: record.resourceType === "Patient" ? record.id : (record.patientId || null),
+    recordedAt: meta.recordedAt || (by.at || new Date().toISOString()),
+    effectiveAt: meta.effectiveAt || null,
+    actorId: by.id || null,
+    actorKind: by.kind || null,
+    body: record,
+  };
+}
+
+/**
+ * The reference implementation. Also what the tests run against, so the semantics every other
+ * implementation must match are executable rather than described.
+ */
+class MemoryRepository {
+  constructor() {
+    this._rows = [];            // every version ever written, in seq order
+    this._seq = 0;
+    this._idem = new Map();     // `${tenant}|${key}` -> {resourceType,id,version}
+    this.audit = [];            // audit events, in order, for inspection
+  }
+
+  _versionsOf(tenantId, resourceType, id) {
+    return this._rows.filter((r) => r.tenantId === tenantId && r.resourceType === resourceType && r.id === id);
+  }
+
+  async latest(tenantId, resourceType, id) {
+    const v = this._versionsOf(tenantId, resourceType, id);
+    return v.length ? clone(v[v.length - 1].body) : null;
+  }
+
+  async history(tenantId, resourceType, id) {
+    return this._versionsOf(tenantId, resourceType, id).map((r) => clone(r.body));
+  }
+
+  async byPatient(tenantId, resourceType, patientId) {
+    const byId = new Map();
+    for (const r of this._rows) {
+      if (r.tenantId !== tenantId || r.resourceType !== resourceType || r.patientId !== patientId) continue;
+      byId.set(r.id, r);                       // rows are in seq order, so the last wins
+    }
+    return [...byId.values()].map((r) => clone(r.body));
+  }
+
+  async latestByType(tenantId, resourceType, limit) {
+    const max = Math.max(1, Math.min(200, Number(limit) || 100));
+    const byId = new Map();
+    for (const r of this._rows) {
+      if (r.tenantId !== tenantId || r.resourceType !== resourceType) continue;
+      byId.set(r.id, r);
+    }
+    return [...byId.values()].slice(0, max).map((r) => clone(r.body));
+  }
+
+  /**
+   * @param {string} tenantId
+   * @param {object[]} records  canonical entities, each already carrying its version
+   * @param {{idempotencyKey?: string, audit?: object}} [ctx]
+   */
+  async append(tenantId, records, ctx) {
+    ctx = ctx || {};
+    // Atomicity: check every row first, then write every row. Nothing lands if anything conflicts.
+    for (const rec of records) {
+      const dup = this._rows.find((r) => r.tenantId === tenantId && r.resourceType === rec.resourceType && r.id === rec.id && r.version === rec.version);
+      if (dup) {
+        throw new VersionConflictError(`${rec.resourceType}/${rec.id} version ${rec.version} already exists`, { resourceType: rec.resourceType, id: rec.id, version: rec.version });
+      }
+    }
+    if (ctx.idempotencyKey && this._idem.has(`${tenantId}|${ctx.idempotencyKey}`)) {
+      throw new VersionConflictError("idempotency key already used", { idempotencyKey: ctx.idempotencyKey });
+    }
+    let last = this._seq;
+    for (const rec of records) {
+      this._seq += 1;
+      last = this._seq;
+      this._rows.push({ seq: this._seq, ...rowOf(tenantId, clone(rec)) });
+    }
+    if (ctx.idempotencyKey && records.length) {
+      const r = records[records.length - 1];
+      this._idem.set(`${tenantId}|${ctx.idempotencyKey}`, { resourceType: r.resourceType, id: r.id, version: r.version });
+    }
+    if (ctx.audit) this.audit.push({ tenantId, ...clone(ctx.audit) });
+    return { seq: last };
+  }
+
+  async changes(tenantId, sinceSeq, limit) {
+    const since = Number(sinceSeq) || 0;
+    const max = Math.max(1, Math.min(500, Number(limit) || 100));
+    const rows = this._rows.filter((r) => r.tenantId === tenantId && r.seq > since).slice(0, max);
+    return { records: rows.map((r) => ({ seq: r.seq, ...clone(r.body) })), cursor: rows.length ? rows[rows.length - 1].seq : since };
+  }
+
+  async recall(tenantId, idempotencyKey) {
+    const hit = this._idem.get(`${tenantId}|${idempotencyKey}`);
+    return hit ? { ...hit } : null;
+  }
+
+  /** Reads are audited too. Separate from append because a read writes nothing else. */
+  async auditOnly(tenantId, event) {
+    this.audit.push({ tenantId, ...clone(event) });
+  }
+}
+
+export { VersionConflictError, RepositoryError, PORT_METHODS, assertRepository, rowOf, MemoryRepository };

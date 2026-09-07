@@ -1,0 +1,393 @@
+/* App Lock UI test (flag-gated: smd_applock, off by default). Verifies:
+ *   - the flag is OFF by default (window.SMD_APPLOCK.required() is false, no gate) and
+ *     ?applock=1 turns it on for the session,
+ *   - promptSetup() renders exactly 3 options for a personal account (no hospital on file),
+ *     and only 2 (PIN + biometric-if-available, no "no lock") for an institutional one,
+ *   - choosing PIN round-trips: setting "1234" then reading it back with verifyPin succeeds,
+ *     a wrong PIN fails, and 5 wrong attempts trips the lockout window,
+ *   - choosing "no lock" only requires the risk checkbox before it can be confirmed,
+ *   - biometric is correctly reported unavailable (no plugin installed on this build) and so
+ *     never renders as an option,
+ *   - once a PIN is configured and the flag is on, the boot splash's finish() hook actually
+ *     HOLDS behind the unlock screen instead of revealing the app, and a correct PIN releases
+ *     it (mirrors the fail-open contract test/run-splash-ui.mjs already holds the gate to),
+ *   - no uncaught JS errors on any path.
+ * USAGE: CHROME=/path/to/chrome node test/run-applock-ui.mjs
+ */
+import { spawn } from "node:child_process";
+import { setTimeout as sleep } from "node:timers/promises";
+import { dirname, join } from "node:path";
+import { fileURLToPath } from "node:url";
+
+const HERE = dirname(fileURLToPath(import.meta.url));
+const BASE = (process.env.BASE || "http://localhost:8993/").replace(/\/?$/, "/");
+const PORT = 9385;
+const userDir = (process.env.CLAUDE_JOB_DIR || "/tmp") + "/applock-ui-chrome";
+const CHROME = process.env.CHROME || "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome";
+
+let serveProc = null;
+async function ensureServer() {
+  try { await fetch(BASE); return; } catch {}
+  const port = (BASE.match(/:(\d+)/) || [, "8993"])[1];
+  serveProc = spawn("node", [join(HERE, "serve.mjs"), join(HERE, ".."), port], { stdio: "ignore" });
+  for (let i = 0; i < 40; i++) { try { await fetch(BASE); return; } catch { await sleep(200); } }
+}
+await ensureServer();
+
+const chrome = spawn(CHROME, ["--headless=new", `--remote-debugging-port=${PORT}`, `--user-data-dir=${userDir}`,
+  "--no-first-run", "--no-sandbox", "--disable-gpu", "--mute-audio", "--hide-scrollbars"], { stdio: "ignore" });
+
+let msgId = 1; const pending = new Map(); let ws, sessionId;
+const errors = [];
+const call = (m, p) => { const i = msgId++; return new Promise(r => { pending.set(i, r); ws.send(JSON.stringify({ id: i, method: m, params: p || {}, sessionId })); }); };
+const ev = async (e) => {
+  const r = await call("Runtime.evaluate", { expression: `(function(){try{${e}}catch(x){return JSON.stringify({__err:String(x&&x.message||x)})}})()`, returnByValue: true, awaitPromise: true });
+  return r.result && r.result.result ? r.result.result.value : null;
+};
+let fails = 0;
+const ok = (c, m, got) => { console.log((c ? "PASS " : "FAIL ") + m + (c || got === undefined ? "" : "  [got: " + JSON.stringify(got) + "]")); if (!c) fails++; };
+const okv = (v, want, m) => ok(v === want, m, v);
+
+async function newTab() {
+  const { result: { targetId } } = await call("Target.createTarget", { url: "about:blank" });
+  const { result: { sessionId: sid } } = await call("Target.attachToTarget", { targetId, flatten: true });
+  sessionId = sid;
+  await call("Runtime.enable", {});
+  await call("Page.enable", {});
+  await call("Emulation.setDeviceMetricsOverride", { width: 390, height: 844, deviceScaleFactor: 2, mobile: true });
+}
+async function fresh(url) {
+  // clear on the TARGET origin, not whatever page is current (about:blank on the first call,
+  // so a previous run's leftovers in the persisted profile would survive into section 1)
+  await call("Page.navigate", { url });
+  await sleep(600);
+  await ev(`localStorage.clear(); return 1;`);
+  await call("Page.navigate", { url });
+  await sleep(1500);
+}
+
+try {
+  let ver, t = 0;
+  while (t++ < 60) { try { ver = await (await fetch(`http://localhost:${PORT}/json/version`)).json(); break; } catch { await sleep(200); } }
+  ws = new WebSocket(ver.webSocketDebuggerUrl);
+  await new Promise((res, rej) => { ws.onopen = res; ws.onerror = rej; });
+  ws.onmessage = (e) => {
+    const m = JSON.parse(e.data);
+    if (m.id && pending.has(m.id)) { pending.get(m.id)(m); pending.delete(m.id); return; }
+    if (m.method === "Runtime.exceptionThrown") {
+      const d = m.params && m.params.exceptionDetails;
+      errors.push((d && d.exception && d.exception.description) || (d && d.text) || "unknown");
+    }
+  };
+  await newTab();
+
+  /* ---------- 1. flag off by default, module loaded, fully inert ---------- */
+  await fresh(BASE);
+  ok(await ev(`return !!window.SMD_APPLOCK;`) === true, "window.SMD_APPLOCK is defined");
+  okv(await ev(`return window.SMD_APPLOCK.isOn();`), false, "smd_applock is OFF by default");
+  okv(await ev(`return window.SMD_APPLOCK.required();`), false, "required() is false when the flag is off");
+
+  /* ---------- 2. ?applock=1 turns it on for the session ---------- */
+  await fresh(BASE + "?applock=1");
+  okv(await ev(`return window.SMD_APPLOCK.isOn();`), true, "?applock=1 turns the flag on");
+  okv(await ev(`return window.SMD_APPLOCK.configured();`), false, "not configured until a method is chosen");
+  okv(await ev(`return window.SMD_APPLOCK.method();`), "none", "method() defaults to \"none\" unconfigured");
+
+  /* ---------- 3. setup chooser: personal account gets all 3 (minus biometric, unavailable) ---------- */
+  await ev(`window.SMD_APPLOCK.promptSetup({hospital:""}); return 1;`);
+  await sleep(150);
+  okv(await ev(`return document.querySelectorAll("#smdApplock [data-m]").length;`), 2,
+    "personal account: 2 options render (PIN + no-lock; biometric absent — no Capacitor bridge in plain Chrome)");
+  ok(await ev(`return !!document.querySelector('#smdApplock [data-m="none"]');`) === true,
+    "\"No lock\" option is offered for a personal account");
+  ok(await ev(`return !document.querySelector('#smdApplock [data-m="biometric"]');`) === true,
+    "biometric is correctly absent outside a native shell — canBiometric() resolves false with no window.Capacitor");
+
+  /* ---------- 4. institutional account: "no lock" must not even render ---------- */
+  await fresh(BASE + "?applock=1");
+  await ev(`window.SMD_APPLOCK.promptSetup({hospital:"AIIMS Delhi"}); return 1;`);
+  await sleep(150);
+  okv(await ev(`return document.querySelectorAll("#smdApplock [data-m]").length;`), 1,
+    "institutional account: only PIN is offered (no native bridge here, no lock hidden)");
+  ok(await ev(`return !document.querySelector('#smdApplock [data-m="none"]');`) === true,
+    "\"No lock\" is never offered once a hospital is on file — the whole point of the gate");
+
+  /* ---------- 5. PIN set/verify round-trip + lockout ---------- */
+  await fresh(BASE + "?applock=1");
+  okv(await ev(`return window.SMD_APPLOCK.method();`), "none", "clean slate before PIN setup");
+  const pinOk = await ev(`
+    return new Promise(function(res){
+      window.SMD_APPLOCK.promptSetup({hospital:""});
+      setTimeout(function(){
+        document.querySelector('[data-m="pin"]').click();
+        setTimeout(function(){
+          var i=document.getElementById("salSetupPin"); i.value="1234";
+          document.getElementById("salSetupGo").click();
+          setTimeout(function(){
+            var i2=document.getElementById("salSetupPin"); i2.value="1234";
+            document.getElementById("salSetupGo").click();
+            setTimeout(function(){ res(window.SMD_APPLOCK.method()); }, 300);
+          }, 150);
+        }, 150);
+      }, 150);
+    });
+  `);
+  okv(pinOk, "pin", "PIN setup flow (enter 1234, confirm 1234) sets method to \"pin\"");
+  okv(await ev(`return window.SMD_APPLOCK.required();`), false, "required() is false right after setup: entering the PIN twice IS this boot's unlock");
+  // REGRESSION: required() used to also check flagOn(), so a device app (no ?applock URL param
+  // ever reachable) that configured a PIN via Manage would never actually be gated — "set a PIN,
+  // restart, never asked for it". The flag must gate only the automatic first-run prompt.
+  await ev(`localStorage.removeItem("smd_applock"); return 1;`);
+  await call("Page.navigate", { url: BASE });   // no ?applock param this time — the real device shape
+  await sleep(1500);
+  okv(await ev(`return window.SMD_APPLOCK.isOn();`), false, "flag is off again (no URL param, localStorage cleared)");
+  okv(await ev(`return window.SMD_APPLOCK.method();`), "pin", "the PIN is still there (device-local, not flag-gated)");
+  okv(await ev(`return window.SMD_APPLOCK.required();`), true, "required() stays true with the flag OFF once a PIN is configured — this is the actual bug report");
+
+  // reload (fresh page = fresh _unlockedThisBoot) then verify wrong vs right PIN via the unlock screen
+  await call("Page.navigate", { url: BASE + "?applock=1" });
+  await sleep(1500);
+  okv(await ev(`return window.SMD_APPLOCK.method();`), "pin", "PIN survives a reload (persisted to localStorage)");
+  const wrongThenRight = await ev(`
+    return new Promise(function(res){
+      var unlockedAt = null;
+      window.SMD_APPLOCK.unlock(function(){ unlockedAt = Date.now(); });
+      var t0 = Date.now();
+      setTimeout(function(){
+        var i=document.getElementById("salUnlockPin"); i.value="0000";
+        document.getElementById("salUnlockGo").click();
+        setTimeout(function(){
+          var stillUpAfterWrong = !!document.getElementById("salUnlockPin");
+          var wrongUnlockedTooSoon = unlockedAt !== null;
+          var i2=document.getElementById("salUnlockPin"); i2.value="1234";
+          document.getElementById("salUnlockGo").click();
+          setTimeout(function(){
+            res(JSON.stringify({ stillUpAfterWrong: stillUpAfterWrong, wrongUnlockedTooSoon: wrongUnlockedTooSoon, unlockedByRight: unlockedAt !== null }));
+          }, 250);
+        }, 200);
+      }, 150);
+    });
+  `);
+  okv(wrongThenRight, JSON.stringify({ stillUpAfterWrong: true, wrongUnlockedTooSoon: false, unlockedByRight: true }),
+    "wrong PIN is rejected (screen stays up, done() not called), correct PIN then unlocks");
+
+  await call("Page.navigate", { url: BASE + "?applock=1" });
+  await sleep(1500);
+  const lockout = await ev(`
+    return new Promise(function(res){
+      window.SMD_APPLOCK.unlock(function(){});
+      function fail(n){
+        if(n>=5){ res(document.getElementById("salUnlockGo") ? document.getElementById("salUnlockGo").disabled : "no-btn"); return; }
+        setTimeout(function(){
+          var i=document.getElementById("salUnlockPin"); if(!i){res("input-gone");return;}
+          i.value="0000"; document.getElementById("salUnlockGo").click();
+          setTimeout(function(){ fail(n+1); }, 120);
+        }, 120);
+      }
+      fail(0);
+    });
+  `);
+  okv(lockout, true, "5 wrong PINs trip the lockout window (Unlock button disabled)");
+
+  /* ---------- 6. "no lock" requires the risk checkbox ---------- */
+  await fresh(BASE + "?applock=1");
+  const riskGate = await ev(`
+    return new Promise(function(res){
+      window.SMD_APPLOCK.promptSetup({hospital:""});
+      setTimeout(function(){
+        document.querySelector('[data-m="none"]').click();
+        setTimeout(function(){
+          var before = document.getElementById("salRiskGo").disabled;
+          document.getElementById("salRiskChk").click();
+          document.getElementById("salRiskChk").dispatchEvent(new Event("change"));
+          var after = document.getElementById("salRiskGo").disabled;
+          res(JSON.stringify({before: before, after: after}));
+        }, 150);
+      }, 150);
+    });
+  `);
+  okv(riskGate, JSON.stringify({ before: true, after: false }),
+    "\"no lock\" Confirm is disabled until the risk checkbox is ticked");
+
+  /* ---------- 7. no-lock actually clears the requirement ---------- */
+  await ev(`document.getElementById("salRiskGo").click(); return 1;`);
+  okv(await ev(`return window.SMD_APPLOCK.method();`), "none", "no-lock path sets method to \"none\"");
+  okv(await ev(`return window.SMD_APPLOCK.required();`), false, "required() is false again once method is \"none\"");
+
+  /* ---------- 8. end-to-end: the REAL boot splash finish() hook holds behind the lock ---------- */
+  await ev(`localStorage.clear(); return 1;`);
+  const setupForGate = await ev(`
+    return new Promise(function(res){
+      window.SMD_APPLOCK.promptSetup({hospital:""});
+      setTimeout(function(){
+        document.querySelector('[data-m="pin"]').click();
+        setTimeout(function(){
+          document.getElementById("salSetupPin").value="9999";
+          document.getElementById("salSetupGo").click();
+          setTimeout(function(){
+            document.getElementById("salSetupPin").value="9999";
+            document.getElementById("salSetupGo").click();
+            setTimeout(function(){ res(window.SMD_APPLOCK.method()); }, 300);
+          }, 150);
+        }, 150);
+      }, 150);
+    });
+  `);
+  okv(setupForGate, "pin", "PIN configured ahead of the real boot-splash gate check");
+  await call("Page.navigate", { url: BASE + "?applock=1" });
+  await sleep(3900); // > MIN(3000ms) + t0 offset + tick: the frame has been up 3s and finish() has run
+  ok(await ev(`var s=document.getElementById("smdBootSplash"); return !!s && !s.classList.contains("sbs-hide");`) === true,
+    "the real boot splash HOLDS (not hidden) past MIN when a PIN is configured");
+  ok(await ev(`return !!document.getElementById("smdApplock");`) === true,
+    "the unlock screen is showing on top of the held boot splash");
+  await ev(`document.getElementById("salUnlockPin").value="9999"; document.getElementById("salUnlockGo").click(); return 1;`);
+  await sleep(700); // finish()'s own 480ms removal timeout
+  ok(await ev(`return !document.getElementById("smdApplock");`) === true,
+    "the unlock screen is gone after the correct PIN");
+  ok(await ev(`var s=document.getElementById("smdBootSplash"); return !s || s.classList.contains("sbs-hide");`) === true,
+    "the boot splash actually completes (hidden/removed) once unlocked");
+
+  /* ---------- 9. biometric goes through the NATIVE method name (internalAuthenticate) ---------- */
+  // Mirrors Capacitor's real native proxy: EVERY property is a function (so a `!p.authenticate`
+  // guard can never catch a wrong name), and only the plugin's pluginMethods succeed. Calling
+  // authenticate() on the raw proxy is what the device shipped with: instant UNIMPLEMENTED reject,
+  // LAContext never touched, no permission dialog, no Dynamic Island animation.
+  await fresh(BASE); // a fresh boot: section 8 already unlocked this one (_unlockedThisBoot)
+  await ev(`
+    window.__bioCalls = [];
+    window.__bioNext = null; // null = resolve; an object = reject with it
+    var impl = {
+      checkBiometry: function () { return Promise.resolve({ isAvailable: true, biometryType: 2 }); },
+      internalAuthenticate: function (o) { window.__bioCalls.push(o); if (window.__bioHold) return new Promise(function (r) { window.__bioRelease = r; }); return window.__bioNext ? Promise.reject(window.__bioNext) : Promise.resolve(); }
+    };
+    var proxy = new Proxy({}, { get: function (_, prop) {
+      return impl[prop] || function () { return Promise.reject({ code: "UNIMPLEMENTED", message: '"BiometricAuthNative.' + String(prop) + '()" is not implemented on ios' }); };
+    } });
+    window.Capacitor = { isNativePlatform: function () { return true; }, isPluginAvailable: function (n) { return n === "BiometricAuthNative"; }, Plugins: { BiometricAuthNative: proxy } };
+    return 1;
+  `);
+  await ev(`window.SMD_APPLOCK.manage(""); return 1;`);
+  await sleep(300);
+  ok(await ev(`return !!document.querySelector('#smdApplock [data-m="biometric"]');`) === true,
+    "biometric row renders once checkBiometry() reports isAvailable");
+  await ev(`document.querySelector('#smdApplock [data-m="biometric"]').click(); return 1;`);
+  await sleep(300);
+  okv(await ev(`return window.__bioCalls.length;`), 1, "setup called the NATIVE internalAuthenticate() exactly once");
+  okv(await ev(`return window.__bioCalls[0] && window.__bioCalls[0].reason;`), "Set up biometric unlock for StewardMD", "a non-empty reason is passed (evaluatePolicy crashes on an empty one)");
+  okv(await ev(`return window.SMD_APPLOCK.method();`), "biometric", "a resolved internalAuthenticate() enables the biometric method");
+  ok(await ev(`return !document.getElementById("smdApplock");`) === true, "setup overlay closes on success");
+  okv(await ev(`return window.SMD_APPLOCK.required();`), false, "required() is false right after biometric setup: the scan IS this boot's unlock");
+
+  // unlock: while the system sheet is up there is NO card of ours; a rejected scan then shows
+  // the LAError-specific text and a retry, and a good scan unlocks
+  await ev(`window.__bioHold = true; window.__unl = false; window.SMD_APPLOCK.unlock(function(){ window.__unl = true; }); return 1;`);
+  await sleep(200);
+  okv(await ev(`return window.__bioCalls.length;`), 2, "unlock called internalAuthenticate() again");
+  ok(await ev(`return !document.getElementById("smdApplock");`) === true, "NO unlock card while the biometric scan is in flight (the system sheet is the UI)");
+  await ev(`window.__bioHold = false; window.__bioNext = { code: "biometryLockout", message: "Biometry is locked out." }; window.__bioRelease(); return 1;`);
+  await sleep(300);
+  okv(await ev(`return window.__unl;`), true, "a held-then-resolved scan unlocks");
+  await ev(`window.__unl = false; window.SMD_APPLOCK.unlock(function(){ window.__unl = true; }); return 1;`);
+  await sleep(300);
+  okv(await ev(`return window.__bioCalls.length;`), 3, "third call for the rejected scan");
+  ok(await ev(`var b=document.getElementById("salBURetry"); return !!b && /Face ID again/.test(b.textContent);`) === true, "the retry card names the actual biometry (Face ID) from checkBiometry");
+  ok(await ev(`var e=document.getElementById("salBUErr"); return !!e && /locked/i.test(e.textContent);`) === true,
+    "a biometryLockout reject shows the lockout-specific text, not a generic failure");
+  okv(await ev(`return window.__unl;`), false, "a rejected scan does NOT unlock");
+  await ev(`window.__bioNext = null; document.getElementById("salBURetry").click(); return 1;`);
+  await sleep(300);
+  okv(await ev(`return window.__unl;`), true, "Try again with a resolved scan unlocks");
+  ok(await ev(`return !document.getElementById("smdApplock");`) === true, "unlock overlay is gone after success");
+  await ev(`localStorage.clear(); return 1;`); // leave the persisted profile clean for the next run
+
+  /* ---------- 10. Manage is closable, the lock shows at load, and the 2h grace window ---------- */
+  await fresh(BASE);
+  await ev(`window.SMD_APPLOCK.manage(""); return 1;`);
+  await sleep(300);
+  ok(await ev(`return !!document.getElementById("salKeep");`) === true, "Manage chooser has a close button (first-run does not)");
+  ok(await ev(`return !!document.getElementById("salGrace");`) === true, "personal account sees the 2h grace toggle");
+  await ev(`document.getElementById("salKeep").click(); return 1;`);
+  ok(await ev(`return !document.getElementById("smdApplock");`) === true, "closing Manage keeps things as they were");
+  okv(await ev(`return window.SMD_APPLOCK.configured();`), false, "...and did not force a method");
+  await ev(`window.SMD_APPLOCK.manage("Apollo"); return 1;`);
+  await sleep(300);
+  ok(await ev(`return !document.getElementById("salGrace");`) === true, "institutional account gets NO grace toggle (same rule as no-lock)");
+  await ev(`window.SMD_APPLOCK.manage(""); return 1;`);
+  await sleep(300);
+  await ev(`document.getElementById("salGrace").click(); return 1;`);
+  okv(await ev(`return localStorage.getItem("smd_applock_grace");`), "2h", "toggle persists smd_applock_grace=2h");
+  const pinViaManage = await ev(`
+    return new Promise(function(res){
+      document.querySelector('[data-m="pin"]').click();
+      setTimeout(function(){
+        document.getElementById("salSetupPin").value="4321"; document.getElementById("salSetupGo").click();
+        setTimeout(function(){
+          document.getElementById("salSetupPin").value="4321"; document.getElementById("salSetupGo").click();
+          setTimeout(function(){ res(window.SMD_APPLOCK.method() + "|" + window.SMD_APPLOCK.required() + "|" + !!localStorage.getItem("smd_applock_lastunlock")); }, 300);
+        }, 150);
+      }, 150);
+    });
+  `);
+  okv(pinViaManage, "pin|false|true", "setting a PIN counts as this boot's unlock and stamps lastunlock");
+  await ev(`window.SMD_APPLOCK.manage(""); return 1;`);
+  await sleep(300);
+  ok(await ev(`var c=document.querySelector('[data-m="pin"]'); return !!c && c.classList.contains("smdal-cur");`) === true, "Manage marks the current method");
+  await ev(`document.getElementById("salKeep").click(); return 1;`);
+  // reopen within the window: no prompt at all, and the window slides
+  await call("Page.navigate", { url: BASE }); await sleep(1300);
+  okv(await ev(`return window.SMD_APPLOCK.required();`), false, "reopened within 2h: required() is false (grace)");
+  ok(await ev(`return !document.getElementById("smdApplock");`) === true, "...and no unlock screen was shown");
+  // 2h+1min ago: the lock is back, and it is up BEFORE the splash's finish() (right at load)
+  await ev(`localStorage.setItem("smd_applock_lastunlock", String(Date.now() - 2*3600*1000 - 60000)); return 1;`);
+  await call("Page.navigate", { url: BASE }); await sleep(1500); // inside the constant 3s frame
+  ok(await ev(`return !document.getElementById("smdApplock");`) === true, "outside 2h: nothing but the splash during its 3s frame (no early PIN pad)");
+  await sleep(2000); // past MIN: finish() -> unlock()
+  ok(await ev(`return !!document.getElementById("salUnlockPin");`) === true, "...then the PIN pad is up by itself");
+  await ev(`document.getElementById("salUnlockPin").value="4321"; document.getElementById("salUnlockGo").click(); return 1;`);
+  await sleep(700);
+  ok(await ev(`return !document.getElementById("smdApplock");`) === true, "unlock screen gone after the correct PIN");
+  ok(await ev(`var s=document.getElementById("smdBootSplash"); return !s || s.classList.contains("sbs-hide");`) === true, "the boot splash completed via the queued finish() callback");
+  await ev(`localStorage.clear(); return 1;`);
+
+  /* ---------- 11. FORCED: signed in + no method = the chooser, once the screen is free ---------- */
+  await fresh(BASE); // the boot splash is still up (constant 3s frame)
+  ok(await ev(`return !document.getElementById("smdApplock");`) === true, "signed out: no chooser");
+  await ev(`localStorage.setItem("stewardmd_account", JSON.stringify({type:"google",name:"Dr. Forced",email:"forced@example.com"}));
+    window.SMD_EMAIL_AUTH.gateUp = function () { return false; }; // the harness never gets past the account gate; the splash is the only thing left in the way
+    window.SMD_ACCOUNT._emit(); return 1;`);
+  await sleep(300);
+  ok(await ev(`return !document.getElementById("smdApplock");`) === true, "just signed in, boot splash still up: the chooser WAITS");
+  await ev(`var s=document.getElementById("smdBootSplash"); if (s) s.parentNode.removeChild(s); return 1;`);
+  await sleep(900);
+  ok(await ev(`return !!document.querySelector('#smdApplock [data-m="pin"]');`) === true, "screen free: the forced chooser is up");
+  ok(await ev(`return !document.getElementById("salKeep");`) === true, "...with NO close (first-run shape, not Manage)");
+  okv(await ev(`return window.SMD_APPLOCK.isOn();`), false, "...even though the rollout flag is off (forcing is not flag-gated)");
+  await ev(`window.SMD_ACCOUNT._emit(); window.SMD_ACCOUNT._emit(); return 1;`);
+  await sleep(300);
+  okv(await ev(`return document.querySelectorAll("#smdApplock").length;`), 1, "repeat sign-in events do not stack a second chooser");
+  const forcedPin = await ev(`
+    return new Promise(function(res){
+      document.querySelector('[data-m="pin"]').click();
+      setTimeout(function(){
+        document.getElementById("salSetupPin").value="2468"; document.getElementById("salSetupGo").click();
+        setTimeout(function(){
+          document.getElementById("salSetupPin").value="2468"; document.getElementById("salSetupGo").click();
+          setTimeout(function(){ window.SMD_ACCOUNT._emit(); setTimeout(function(){ res(window.SMD_APPLOCK.method() + "|" + !!document.getElementById("smdApplock")); }, 400); }, 300);
+        }, 150);
+      }, 150);
+    });
+  `);
+  okv(forcedPin, "pin|false", "once a method is chosen, later sign-in events leave the user alone");
+  await ev(`localStorage.clear(); return 1;`);
+
+  ok(errors.length === 0, "no uncaught JS errors (" + (errors.length ? errors.join(" | ") : "none") + ")");
+} catch (e) {
+  console.log("HARNESS ERROR: " + (e && e.stack || e));
+  fails++;
+} finally {
+  try { ws && ws.close(); } catch {}
+  try { chrome.kill(); } catch {}
+  try { serveProc && serveProc.kill(); } catch {}
+}
+console.log(fails === 0 ? "ALL PASS" : fails + " FAILED");
+process.exit(fails === 0 ? 0 : 1);

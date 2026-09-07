@@ -118,6 +118,7 @@ import { proFromRequest } from "../../_entitlement.js";
 import { normalizeResearchQuery, researchCacheKey, RESEARCH_PUBTYPE_FILTER, researchTermFor, researchKeywords, sourceOnTopic, researchTopic } from "../../_research.js";
 import { ownerOK } from "../../_adminauth.js";
 import { getClientErrors, clearClientErrors } from "../../_clientlog.js";
+import { getFeedback, getFeedbackAgg, clearFeedback } from "../../_maik_feedback.js";
 import { getRemoteConfig, setRemoteConfig } from "../../_remoteconfig.js";
 import { lookupUidByEmail, getUserRecord, setUserDisabled, mergeUserClaims } from "../../_fbadmin.js";
 import { getAnalytics } from "../../_analytics.js";
@@ -130,6 +131,8 @@ import { assessmentExtractPrompt, sanitizeAssessmentFields } from "./_assessment
 import { scribeExtractPrompt, sanitizeScribeOutput } from "./_opd-scribe.js";
 import { maikNextPrompt, maikExtractPrompt, sanitizeMaikNext, sanitizeMaikExtract } from "./_maik-ask.js";
 import { opdSuggestPrompt, sanitizeOpdSuggest } from "./_opd-suggest.js";
+import { icdSuggestPrompt, sanitizeIcdSuggest } from "./_icd-suggest.js";
+import * as icdRepo from "../../_icd_repo.js";
 import { surgxNotePrompt, sanitizeSurgxNote } from "./_surgx-note.js";
 // The effective Gemini model. The admin "switch models" control (KV override, validated to a priced
 // model by setModelOverride) wins; otherwise the exact prior behaviour (env.GEMINI_MODEL || default).
@@ -657,15 +660,13 @@ const TUTOR_SYS =
   "5. Do not mention the AI provider, model, retrieval or any internal detail." + MEDICAL_ONLY;
 
 // Web-research mode (opt-in, token-frugal): used ONLY when the topic is not in StewardMD's KB
-// and the clinician explicitly taps "Research on the web". Gemini does the Google search +
-// synthesis in one grounded call; we keep the answer short to conserve tokens.
+// and the clinician explicitly taps "Research on the web". TinyFish does the search; Gemini writes
+// the answer from the returned snippets (RESEARCH_SYS_SNIPPETS below) - this is the ONLY web-search
+// path now (owner, 2026-09-04: the Gemini-grounded fallback for a TinyFish miss was removed as the
+// slower, costlier of the two; a TinyFish miss is now an honest "no results").
 // Web-research answers must read like a knowledgeable medical AI (OpenEvidence/ChatGPT), NOT a
 // search-results digest: fluent, complete, confident prose that happens to cite sources — never a
 // terse bullet list of snippet fragments. The UI shows the advisory/verify note, so no disclaimer.
-const RESEARCH_SYS =
-  "You are MaiK, a knowledgeable clinical AI assistant for qualified doctors. The clinician has asked a question StewardMD's own knowledge base does not cover — answer it directly, thoroughly and naturally, the way a sharp senior colleague would and the way a modern medical AI does, using web search to ground current, authoritative specifics. " +
-  "Lead with the direct answer, then give enough well-organised detail to be genuinely useful at the bedside: flowing prose, with short bullets only for real lists (drugs, doses, steps, differentials) and a brief markdown heading only when it truly helps. Bold key terms sparingly. Give standard adult doses/routes/durations where relevant. " +
-  "Be honest in one line if evidence is weak or sources disagree. Never fabricate a specific figure or a citation. Do not describe your sources or process, and do NOT append any disclaimer — the interface already shows one." + MEDICAL_ONLY;
 // FAST PATH prompt: the search is done externally (TinyFish); the model writes the ANSWER from its
 // own medical knowledge and uses the provided results to ground specifics + cite [n] — it must NOT
 // merely summarise the snippets or limit itself to what they happen to mention.
@@ -1073,7 +1074,7 @@ export async function onRequest(context) {
 
   // AI Control Center admin console APIs (owner-gated): model switch, quota editor, global rollup,
   // emergency kill switch, runtime budget, audit log. Every mutation is written to the audit log.
-  if (seg === "admin/model" || seg === "admin/ai-usage" || seg === "admin/limits" || seg === "admin/emergency" || seg === "admin/budget" || seg === "admin/audit" || seg === "admin/abuse" || seg === "admin/clientlog" || seg === "admin/config" || seg === "admin/analytics" || seg === "admin/support" || seg === "admin/support-reply" || seg === "admin/maik-config") {
+  if (seg === "admin/model" || seg === "admin/ai-usage" || seg === "admin/limits" || seg === "admin/emergency" || seg === "admin/budget" || seg === "admin/audit" || seg === "admin/abuse" || seg === "admin/clientlog" || seg === "admin/config" || seg === "admin/analytics" || seg === "admin/support" || seg === "admin/support-reply" || seg === "admin/maik-config" || seg === "admin/maik-feedback") {
     const url = new URL(request.url);
     if (!(await aiAdminAuthed(request, env, url))) return json({ error: "forbidden" }, 403);
     const store = usageKv(env);
@@ -1085,6 +1086,14 @@ export async function onRequest(context) {
     if (seg === "admin/clientlog") {
       if (request.method === "POST") { await clearClientErrors(store); await auditRecord(store, "clientlog", "cleared", actorId, Date.now()); }
       return json({ errors: await getClientErrors(store) });
+    }
+
+    // "Was this helpful?" feedback (owner, 2026-09-04): entries include the doctor's own free-text
+    // reason for a "No" - the ONLY admin route that returns it (the public /api/maik-feedback GET is
+    // counts-only, same privacy split as ws-feedback.js).
+    if (seg === "admin/maik-feedback") {
+      if (request.method === "POST") { await clearFeedback(store); await auditRecord(store, "maik-feedback", "cleared", actorId, Date.now()); }
+      return json({ entries: await getFeedback(store), agg: await getFeedbackAgg(store) });
     }
 
     if (seg === "admin/analytics") return json(await getAnalytics(store, 14, Date.now()));
@@ -1209,9 +1218,9 @@ export async function onRequest(context) {
     if (!(await aiAdminAuthed(request, env, url))) return json({ error: "forbidden" }, 403);
     const email = String(url.searchParams.get("email") || "").toLowerCase().trim();
     if (!email) return json({ error: "no-email" }, 400);
-    const uid = await lookupUidByEmail(env, email);
-    if (!uid) return json({ ok: true, found: false, email: email });
-    return json({ ok: true, found: true, user: (await getUserRecord(env, uid)) || { uid, email } });
+    const found = await lookupUidByEmail(env, email);   // { uid, email, name } | null
+    if (!found || !found.uid) return json({ ok: true, found: false, email: email });
+    return json({ ok: true, found: true, user: (await getUserRecord(env, found.uid)) || { uid: found.uid, email } });
   }
   // Per-user actions: grant/revoke Pro, approve/revoke NMC verification, enable/disable sign-in.
   if (seg === "admin/user-action" && request.method === "POST") {
@@ -1221,13 +1230,14 @@ export async function onRequest(context) {
     const email = String(b.email || "").toLowerCase().trim();
     const action = String(b.action || "");
     if (!email || !action) return json({ error: "bad-request" }, 400);
-    const uid = await lookupUidByEmail(env, email);
+    const foundUser = await lookupUidByEmail(env, email);   // { uid, email, name } | null
+    const uid = foundUser && foundUser.uid;
     if (!uid) return json({ ok: false, error: "not-found" }, 404);
     let ok = false;
     try {
       if (action === "grant-pro") { await mergeUserClaims(env, uid, { pro: true }); ok = true; }
       else if (action === "revoke-pro") { await mergeUserClaims(env, uid, { pro: false }); ok = true; }
-      else if (action === "verify") { await mergeUserClaims(env, uid, { verified: true }); ok = true; }
+      else if (action === "verify") { await mergeUserClaims(env, uid, { verified: true, verifiedAt: Date.now(), provUntil: null }); ok = true; }
       else if (action === "unverify") { await mergeUserClaims(env, uid, { verified: false }); ok = true; }
       else if (action === "disable") { ok = await setUserDisabled(env, uid, true); }
       else if (action === "enable") { ok = await setUserDisabled(env, uid, false); }
@@ -1537,21 +1547,34 @@ export async function onRequest(context) {
         // regression here cannot reach a clinician who did not ask for it.
         const liveStream = ["1", "true", "on", "yes"].indexOf(String(env.MAIK_LIVE_STREAM || "").toLowerCase()) >= 0
           || new URL(request.url).searchParams.get("livestream") === "1";
-        if (wantStream && liveStream) {
-          let up = null;
-          const _tUp = Date.now();   // when we ISSUE the upstream request — the baseline for firstTokMs
-          try { up = await geminiStreamUpstream(env, [{ text: sysA + "\n\n" + grounded }], MAX_OUT, { temperature: hasDx ? 0.25 : 0.45, maik: true, model: isTutor ? (env.CLINIX_TUTOR_MODEL || CHEAP_MODEL) : undefined }); } catch (e) { up = null; _mark.streamErr = String((e && e.message) || e).slice(0, 120); }
-          _at("streamOpen"); _mark.liveStream = !!up;
-          if (up) return withCors(request, streamGeminiToSSE(up, function (full) { try { recordUsage(gate, { inTok: estTokens(sys.length + grounded.length), outTok: estTokens((full || "").length), status: "success" }); } catch (e) {} }, _tUp, { idleMs: streamIdleMs(env), totalMs: streamTotalMs(env), model: isTutor ? (env.CLINIX_TUTOR_MODEL || CHEAP_MODEL) : modelId(env), preMs: _tUp - _mark.t0, headMs: _mark.t0 - _reqT0, hm: _hm, pm: { gate: _mark.gate, rerank: _mark.rerank, connect: _mark.connect, prompt: _mark.prompt, cfg: _mark.cfg, qms: _mark.qms } }));
-        }
         // ── Answer cache (flag MAIK_ANSWER_CACHE, default OFF) ──────────────────────────────────────
-        // Only GENERIC knowledge answers: no computed Dx (case commentary), no lazy tiers, and never
-        // when Connect-MaiK wiring is on (that path can carry PHI). A hit is a zero-token instant reply.
-        const _cacheEligible = _mcfg.answerCache && !hasDx && !(body && body.tier) && !maikWiringOn(env);
+        // This MUST sit above the live-stream early return below. It used to sit under it, so whenever
+        // MAIK_LIVE_STREAM (or ?livestream=1) was on the handler returned the SSE response before ever
+        // reading or writing the cache - the "maik:ans:* stays empty though the KV binding is proven"
+        // bug. The stream path now writes the finished answer back from its completion callback.
+        /* Only GENERIC knowledge answers: no computed Dx (case commentary), and never when
+         * Connect-MaiK wiring is on (that path can carry PHI). A hit is a zero-token instant reply.
+         *
+         * LAZY TIERS USED TO BE EXCLUDED WHOLESALE, and that quietly disabled the cache for EVERYONE.
+         * maikLazyOn() in home.js defaults TRUE (`localStorage.getItem("smd_maik_lazy") !== "0"`), so
+         * the client sends `tier: 1` on essentially every question, `!(body.tier)` was therefore false
+         * on essentially every request, and `maik:ans:*` could never fill no matter what else was
+         * fixed. The exclusion was right in spirit and too blunt in practice.
+         *
+         * What actually must not be cached is a tier whose output depends on state NOT in the key:
+         * the tier-2 "more" call is conditioned on `priorLead` (the lead already shown), so two
+         * requests with the same question can legitimately need different detail. Tier 1 is a pure
+         * function of the question, exactly like an untiered answer.
+         *
+         * So: cache tier 1 and untiered, refuse anything carrying priorLead, and put the tier IN THE
+         * KEY so a short lead can never be served to a request that wanted the full answer. */
+        const _tier = (body && body.tier) || 0;
+        const _tierCacheable = (_tier === 0 || _tier === 1) && !(body && body.priorLead);
+        const _cacheEligible = _mcfg.answerCache && !hasDx && _tierCacheable && !maikWiringOn(env);
         let _ckey = null;
         if (_cacheEligible) {
           try {
-            _ckey = await answerCacheKey(sha256hex, env, { question: pkg.question, depth: body && body.depth, audience: pkg.audience, model: modelId(env), version: _mcfg.cacheVersion });
+            _ckey = await answerCacheKey(sha256hex, env, { question: pkg.question, depth: body && body.depth, audience: pkg.audience, model: modelId(env), version: _mcfg.cacheVersion, tier: _tier });
             if (_ckey) {
               const _hit = await getCachedAnswer(usageKv(env), _ckey);
               if (_hit && _hit.text) {
@@ -1562,6 +1585,17 @@ export async function onRequest(context) {
               }
             }
           } catch (e) { _ckey = null; }
+        }
+        if (wantStream && liveStream) {
+          let up = null;
+          const _tUp = Date.now();   // when we ISSUE the upstream request — the baseline for firstTokMs
+          try { up = await geminiStreamUpstream(env, [{ text: sysA + "\n\n" + grounded }], MAX_OUT, { temperature: hasDx ? 0.25 : 0.45, maik: true, model: isTutor ? (env.CLINIX_TUTOR_MODEL || CHEAP_MODEL) : undefined }); } catch (e) { up = null; _mark.streamErr = String((e && e.message) || e).slice(0, 120); }
+          _at("streamOpen"); _mark.liveStream = !!up;
+          if (up) return withCors(request, streamGeminiToSSE(up, function (full) { try { recordUsage(gate, { inTok: estTokens(sys.length + grounded.length), outTok: estTokens((full || "").length), status: "success" }); } catch (e) {}
+            // Populate the answer cache from the STREAM path too. waitUntil, because the response has
+            // already been handed to the client by the time the last token lands (same pattern as the
+            // router cache write below, which is why that one has always worked and this one did not).
+            if (_ckey && full) { try { context.waitUntil(putCachedAnswer(usageKv(env), _ckey, { text: full }, env)); } catch (e) {} } }, _tUp, { idleMs: streamIdleMs(env), totalMs: streamTotalMs(env), model: isTutor ? (env.CLINIX_TUTOR_MODEL || CHEAP_MODEL) : modelId(env), preMs: _tUp - _mark.t0, headMs: _mark.t0 - _reqT0, hm: _hm, pm: { gate: _mark.gate, rerank: _mark.rerank, connect: _mark.connect, prompt: _mark.prompt, cfg: _mark.cfg, qms: _mark.qms } }));
         }
         let text;
         // Non-stream path (native, or a stream that failed to open): use the SAME full system prompt +
@@ -1922,6 +1956,17 @@ export async function onRequest(context) {
         return json({ text: text, mode: "evidence-review", sources: sources, cached: false, usage: { module: "research", used: usedNow, limit: capNow } });
       }
 
+      // SNIPPETS-ONLY (owner, 2026-09-04): the on-device model does the snippet-to-prose conversion
+      // for free on the offline/local engine - "we can't charge them for snippet conversion into
+      // clean language". TinyFish itself costs nothing (see functions/_search.js), so this path makes
+      // NO Gemini call and burns no AI-usage quota; it is a plain search proxy. Gemini stays the
+      // writer only when MaiK Cloud is the selected engine (the ordinary branch below).
+      if (body.snippetsOnly) {
+        let raw = [];
+        try { raw = await tinyfishSearch(env, q); } catch (e) { raw = []; }
+        return json({ sources: raw.map(function (r) { return { title: r.title, url: r.url, site: r.site, snippet: r.snippet }; }) });
+      }
+
       const gate = await checkQuota(env, request, "general");
       if (!gate.ok) return json({ error: "quota", reason: gate.reason, needsPro: !!gate.needsPro, message: gate.message }, gate.needsPro ? 402 : 429);
       const RES_MAX = Math.max(256, Math.min(1600, Number(env.MAIK_RESEARCH_MAX_OUTPUT) || 1200));
@@ -1929,26 +1974,29 @@ export async function onRequest(context) {
       let results = [];
       try { results = await tinyfishSearch(env, q); } catch (e) { results = []; }
 
-      let text = null, mode = "web", sources = [], inTok = estTokens(RESEARCH_SYS.length + q.length);
-      if (results.length) {
-        const ctx = results.map(function (r, i) {
-          return "[" + (i + 1) + "] " + r.title + (r.site ? " (" + r.site + ")" : "") + "\n" + (r.snippet || "") + "\n" + r.url;
-        }).join("\n\n");
-        const prompt = RESEARCH_SYS_SNIPPETS + "\n\nQuestion: " + q + "\n\nWeb results:\n" + ctx;
-        inTok = estTokens(prompt.length);
-        try {
-          text = await callGemini(env, [{ text: prompt }], RES_MAX, { temperature: 0.2 });
-          sources = results.map(function (r) { return { title: r.title, url: r.url, site: r.site }; });
-          mode = "web-tinyfish";
-        } catch (e) { text = null; }   // summarise failed → fall through to Gemini grounding
-      }
-      if (!text) {
-        inTok = estTokens(RESEARCH_SYS.length + q.length);
-        try { text = await callGemini(env, [{ text: RESEARCH_SYS + "\n\nQuestion: " + q }], RES_MAX, { webSearch: true, temperature: 0.3 }); mode = "web-grounded"; }
-        catch (e) { try { console.warn("[ai] research-failed", String(e && e.message || e).slice(0, 200)); } catch (_e) {} await recordUsage(gate, { inTok: inTok, outTok: 0, status: "failed" }); return json({ error: "research-failed" }, 502); }
+      // No Gemini-grounded fallback (owner, 2026-09-04, removed): it was the slow multi-hop path and
+      // TinyFish already covers the same ground faster and at $0 per search (see functions/_search.js
+      // and the tinyfishSearch comment). If TinyFish itself returns nothing, that is an honest
+      // "no web results" rather than a second, more expensive attempt - the client's existing
+      // no-text branch already shows a clear retry, exactly as a real network miss would.
+      if (!results.length) return json({ text: null, mode: "web", sources: [] });
+
+      const ctx = results.map(function (r, i) {
+        return "[" + (i + 1) + "] " + r.title + (r.site ? " (" + r.site + ")" : "") + "\n" + (r.snippet || "") + "\n" + r.url;
+      }).join("\n\n");
+      const prompt = RESEARCH_SYS_SNIPPETS + "\n\nQuestion: " + q + "\n\nWeb results:\n" + ctx;
+      const inTok = estTokens(prompt.length);
+      let text = null, sources = [];
+      try {
+        text = await callGemini(env, [{ text: prompt }], RES_MAX, { temperature: 0.2 });
+        sources = results.map(function (r) { return { title: r.title, url: r.url, site: r.site }; });
+      } catch (e) {
+        try { console.warn("[ai] research-failed", String(e && e.message || e).slice(0, 200)); } catch (_e) {}
+        await recordUsage(gate, { inTok: inTok, outTok: 0, status: "failed" });
+        return json({ error: "research-failed" }, 502);
       }
       await recordUsage(gate, { inTok: inTok, outTok: estTokens((text || "").length), status: "success" });
-      return json({ text: text, mode: mode, sources: sources });
+      return json({ text: text, mode: "web-tinyfish", sources: sources });
     }
     if (seg === "summary") {
       // Whole-patient timeline summary (Pro, module "summary" = 15/day). Factual overview ONLY from the
@@ -2089,6 +2137,21 @@ export async function onRequest(context) {
         catch (e) { await recordUsage(gate, { inTok: estTokens(prompt.length), outTok: 0, status: "failed" }); throw e; }
         await recordUsage(gate, { inTok: estTokens(prompt.length), outTok: estTokens((text || "").length), status: "success" });
         return json({ kind: "opd-suggest", ...sanitizeOpdSuggest(parseJsonLoose(text)), mode: "opd-suggest" });
+      }
+      if (body.kind === "icd-suggest") {
+        // Diagnosis/symptom text -> ranked ICD-10/ICD-11 suggestions, GROUNDED against real D1
+        // rows (functions/_icd_repo.js searchCodes()) so the model picks from a real candidate
+        // list rather than free-generating a code - sanitizeIcdSuggest() re-validates every id
+        // against that same list before it ever reaches the client. Advisory only; nothing is
+        // attached to any chart until the clinician taps Accept on a specific suggestion (see
+        // icu.js openIcuIcdSuggest() / opd-emr.js openOpdIcdSuggest()).
+        const candidates = icdRepo.hasDb(env) ? await icdRepo.searchCodes(env, { q: transcript, limit: 30 }) : [];
+        const prompt = icdSuggestPrompt(transcript, candidates);
+        let text;
+        try { text = await callGemini(env, [{ text: prompt }], 1024); }
+        catch (e) { await recordUsage(gate, { inTok: estTokens(prompt.length), outTok: 0, status: "failed" }); throw e; }
+        await recordUsage(gate, { inTok: estTokens(prompt.length), outTok: estTokens((text || "").length), status: "success" });
+        return json({ kind: "icd-suggest", ...sanitizeIcdSuggest(parseJsonLoose(text), candidates), mode: "icd-suggest" });
       }
       if (body.kind === "translate") {
         // Field mic: translate a single dictated field to clinical English so GHIS + MaiK stay English.

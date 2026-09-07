@@ -544,7 +544,7 @@
           "text": "Do you use an electronic cigarette or vape?"
         }
       ],
-      "practice": "Calculate pack-years for three cases out loud: 20 a day for 30 years; 10 a day for 40 years; 40 a day for 15 years. All three are 30, 20 and 30 pack-years respectively.",
+      "practice": "Calculate pack-years for three cases out loud: 20 a day for 30 years; 10 a day for 40 years; 40 a day for 15 years. The answers are 30, 20 and 30 pack-years respectively, so the first and third carry the same cumulative exposure by very different routes.",
       "pitfalls": [
         "Asking only about cigarettes. Bidis and hookah are frequently not volunteered as smoking.",
         "Never asking about cooking fuel, which is the single commonest missed exposure in women with COPD in South Asia.",
@@ -609,11 +609,72 @@
         {
           "source": "Harrison's Principles of Internal Medicine 22e",
           "locator": "COPD, p.2249-2259 (cigarette smoke, biomass fuels, vaping)"
+        },
+        {
+          "source": "GOLD Report",
+          "locator": "Risk factors: tobacco and biomass smoke exposure"
+        },
+        {
+          "source": "Macleod's Clinical Examination",
+          "locator": "The respiratory system: the history, smoking and occupational exposure"
         }
       ],
       "review": {
         "status": "ai_drafted"
-      }
+      },
+      "teach": [
+        {
+          "heading": "Pack-years are a dose, not a label",
+          "body": "Pack-years let you compare one smoker with another and track risk over time: packs per day multiplied by years smoked, where a pack is twenty cigarettes. Recording 'smoker' loses that entirely. Risk of COPD and of lung malignancy both rise with cumulative dose, which is why the number belongs in the notes rather than an adjective.",
+          "table": {
+            "cols": [
+              "Consumption",
+              "Duration",
+              "Pack-years"
+            ],
+            "rows": [
+              [
+                "20 a day (1 pack)",
+                "30 years",
+                "30"
+              ],
+              [
+                "10 a day (0.5 pack)",
+                "40 years",
+                "20"
+              ],
+              [
+                "40 a day (2 packs)",
+                "15 years",
+                "30"
+              ]
+            ]
+          },
+          "note": "Bidis, hookah and cannabis are frequently denied under the word 'smoking'. Name them, or the dose is understated."
+        },
+        {
+          "heading": "Biomass fuel is the exposure that gets missed",
+          "body": "A large share of COPD in Indian women occurs in people who have never smoked. The exposure is wood, dung cake, crop residue or coal burned in an unventilated kitchen, often for decades of daily cooking. If the only question asked is about cigarettes, the diagnosis is either missed or attributed to asthma.",
+          "points": [
+            {
+              "t": "Ask the fuel, not the habit.",
+              "d": "What is used for cooking, and is there a chimney or window."
+            },
+            {
+              "t": "Ask the years.",
+              "d": "Hours a day over decades is a cumulative dose like pack-years."
+            },
+            {
+              "t": "Ask about the childhood home too.",
+              "d": "Exposure often started long before the current house."
+            }
+          ]
+        },
+        {
+          "heading": "Stopping changes the trajectory, not the history",
+          "body": "Lung function lost to smoking does not return, but the accelerated rate of decline slows towards normal after cessation, so the date of stopping matters as much as the quantity. An ex-smoker of 40 pack-years still carries the risk that dose conferred, which is why 'ex-smoker' without a number is not a useful record."
+        }
+      ]
     },
     "skill.hx.resp.drug": {
       "id": "skill.hx.resp.drug",
@@ -724,7 +785,64 @@
       ],
       "review": {
         "status": "ai_drafted"
-      }
+      },
+      "teach": [
+        {
+          "heading": "Ask what they take, then watch them take it",
+          "body": "Reported adherence and actual delivery are different things. A large share of patients labelled as having uncontrolled asthma or COPD are using an adequate drug with an inadequate technique, so no dose increase will help. The history is incomplete until the device has been demonstrated back to you.",
+          "points": [
+            {
+              "t": "Which inhaler, and what colour.",
+              "d": "Patients recall colour and shape far better than drug names."
+            },
+            {
+              "t": "How many times a day, honestly.",
+              "d": "Ask how many days last week they missed, not whether they are compliant."
+            },
+            {
+              "t": "Reliever frequency.",
+              "d": "A short-acting reliever needed more than twice a week is uncontrolled disease, whatever the patient says."
+            },
+            {
+              "t": "Spacer.",
+              "d": "Ask whether one was ever supplied, and whether it is used."
+            }
+          ],
+          "note": "Rising reliever use is the earliest objective marker of losing control, and it is available from the history alone."
+        },
+        {
+          "heading": "Drugs that cause the symptom you are investigating",
+          "table": {
+            "cols": [
+              "Drug",
+              "Effect"
+            ],
+            "rows": [
+              [
+                "Beta blockers, including eye drops",
+                "Bronchoconstriction in asthma"
+              ],
+              [
+                "ACE inhibitors",
+                "Dry persistent cough, often months after starting"
+              ],
+              [
+                "Aspirin and other NSAIDs",
+                "Bronchospasm in aspirin-sensitive asthma"
+              ],
+              [
+                "Amiodarone, methotrexate, nitrofurantoin",
+                "Interstitial lung disease"
+              ]
+            ]
+          },
+          "note": "An ACE inhibitor cough is a diagnosis made by asking the start date, not by imaging."
+        },
+        {
+          "heading": "Steroids, past and present",
+          "body": "Ask about courses of oral steroids in the last year and about maintenance use. Frequency of rescue courses grades severity better than the patient's own account of how bad the disease is, and current or recent use changes the risk of infection and of adrenal suppression during an acute illness."
+        }
+      ]
     },
     "skill.exam.resp.inspection": {
       "id": "skill.exam.resp.inspection",
@@ -1315,7 +1433,8 @@
         "media.snd.fine",
         "media.snd.monophonic",
         "media.snd.rub",
-        "media.snd.wheeze"
+        "media.snd.wheeze",
+        "media.snd.stridor"
       ],
       "probes": [
         {
@@ -2020,7 +2139,8 @@
         "Skipping the swallowing and aspiration questions because the patient looks alert at rest.",
         "Not asking about recent influenza, which is a recognised setup for a severe secondary bacterial pneumonia.",
         "Treating vaccination history as an afterthought rather than a modifiable risk factor worth acting on at discharge.",
-        "Forgetting that alcohol raises risk through two separate mechanisms, aspiration and impaired host defence, not one."
+        "Forgetting that alcohol raises risk through two separate mechanisms, aspiration and impaired host defence, not one.",
+        "Scoring urea against 7 when the laboratory reported mg/dL, which reverses the answer."
       ],
       "media": [],
       "probes": [
@@ -2087,7 +2207,79 @@
       ],
       "review": {
         "status": "ai_drafted"
-      }
+      },
+      "teach": [
+        {
+          "heading": "Severity is decided at the bedside, before any imaging",
+          "body": "The decision that matters in pneumonia is not the organism but the disposition: home, ward, or critical care. CURB-65 uses confusion, urea, respiratory rate, blood pressure and age over 65, and every component except urea comes from the history and examination.",
+          "table": {
+            "cols": [
+              "Component",
+              "Threshold"
+            ],
+            "rows": [
+              [
+                "Confusion",
+                "New disorientation"
+              ],
+              [
+                "Urea",
+                "Above 7 mmol/L (about 42 mg/dL urea, or blood urea nitrogen above 20 mg/dL)"
+              ],
+              [
+                "Respiratory rate",
+                "30 or more per minute"
+              ],
+              [
+                "Blood pressure",
+                "Systolic under 90, or diastolic 60 or less"
+              ],
+              [
+                "Age",
+                "65 or over"
+              ],
+              [
+                "SCORE 0 to 1",
+                "Suitable for outpatient management"
+              ],
+              [
+                "SCORE 2",
+                "Short stay or ward admission"
+              ],
+              [
+                "SCORE 3 or more",
+                "Severe: assess for critical care"
+              ]
+            ]
+          },
+          "note": "Count the respiratory rate yourself for a full minute. It is the most frequently fabricated observation in the chart and one of the most predictive. Indian laboratories usually report urea in mg/dL, not mmol/L, so read the units before scoring: 45 mg/dL is ABOVE the threshold, not below it."
+        },
+        {
+          "heading": "Where it was acquired changes the likely organism",
+          "points": [
+            {
+              "t": "Community.",
+              "d": "Pneumococcus most often, then atypicals."
+            },
+            {
+              "t": "Hospital, after 48 hours.",
+              "d": "Gram negatives and resistant organisms, so the empirical choice differs."
+            },
+            {
+              "t": "Aspiration risk.",
+              "d": "Stroke, reduced consciousness, alcohol, dysphagia. Ask about choking on swallowing."
+            },
+            {
+              "t": "Immunosuppression.",
+              "d": "Steroids, chemotherapy, diabetes, HIV. It widens the differential well beyond the usual organisms."
+            }
+          ]
+        },
+        {
+          "heading": "The features that suggest it is not simple pneumonia",
+          "body": "Ask about weight loss, night sweats and a cough lasting more than two weeks, because tuberculosis presents as a pneumonia that fails to resolve. Ask about a recent long journey or immobility, because pulmonary embolism with infarction mimics it. Failure to improve after 48 to 72 hours of appropriate treatment should send you back to the history rather than up the antibiotic ladder."
+        }
+      ]
     },
     "skill.hx.asthma.triggers": {
       "id": "skill.hx.asthma.triggers",
@@ -2199,7 +2391,77 @@
       ],
       "review": {
         "status": "ai_drafted"
-      }
+      },
+      "teach": [
+        {
+          "heading": "Variability is the diagnosis",
+          "body": "Asthma is defined by airflow obstruction that varies, so the history is looking for change rather than severity. Diurnal variation, seasonal variation, and symptoms that appear on exposure and settle on removal are what separate it from COPD, which is comparatively fixed and progressive.",
+          "table": {
+            "cols": [
+              "Pattern",
+              "Asthma",
+              "COPD"
+            ],
+            "rows": [
+              [
+                "Onset",
+                "Often childhood or early adult",
+                "Usually after 40"
+              ],
+              [
+                "Course",
+                "Episodic, with well periods",
+                "Progressive, few well periods"
+              ],
+              [
+                "Night and early morning",
+                "Characteristically worse",
+                "Less diurnal"
+              ],
+              [
+                "Atopy",
+                "Eczema, allergic rhinitis, family history",
+                "Not typical"
+              ],
+              [
+                "Smoking",
+                "May be absent",
+                "Usually substantial"
+              ]
+            ]
+          },
+          "note": "Waking at night with cough or wheeze is both a diagnostic clue and a control marker, so ask about it at every visit."
+        },
+        {
+          "heading": "Triggers, asked by category",
+          "points": [
+            {
+              "t": "Allergens.",
+              "d": "Dust, pets, pollen, cockroach. Ask what the bedding and the room are like."
+            },
+            {
+              "t": "Irritants.",
+              "d": "Smoke, incense, cooking fumes, perfumes, cold air."
+            },
+            {
+              "t": "Exercise.",
+              "d": "Cough or wheeze minutes into exertion, settling with rest."
+            },
+            {
+              "t": "Drugs.",
+              "d": "Aspirin, NSAIDs, beta blockers including eye drops."
+            },
+            {
+              "t": "Occupation.",
+              "d": "Better at weekends and on holiday is the classic pattern of occupational asthma, and it is only found by asking."
+            }
+          ]
+        },
+        {
+          "heading": "Grading control without a spirometer",
+          "body": "Four questions grade control anywhere: daytime symptoms more than twice a week, any night waking, reliever use more than twice a week, and any limitation of activity. Any one of them present means the disease is not controlled, regardless of how well the patient says they are managing."
+        }
+      ]
     },
     "skill.hx.tb.exposure": {
       "id": "skill.hx.tb.exposure",
@@ -2308,6 +2570,1113 @@
         {
           "source": "StewardMD Clinical KB",
           "locator": "Respiratory: pulmonary tuberculosis"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "teach": [
+        {
+          "heading": "The exposure history is an epidemiological question, asked kindly",
+          "body": "Transmission needs a source, proximity and time. Ask who in the house or workplace has had a prolonged cough or has been treated for tuberculosis, how many people share the sleeping room, and how well it is ventilated. Household contact of a sputum positive case is the single highest yield question in the whole history.",
+          "points": [
+            {
+              "t": "Who else coughs.",
+              "d": "Household, workplace, and anyone treated for TB in the last two years."
+            },
+            {
+              "t": "Crowding.",
+              "d": "How many sleep in the room, and whether there is a window that opens."
+            },
+            {
+              "t": "Prior treatment.",
+              "d": "Any previous anti-tuberculous treatment, whether it was completed, and for how long. This drives resistance risk."
+            }
+          ],
+          "note": "Incomplete or interrupted prior treatment is the strongest historical pointer to drug resistance, and it changes the regimen entirely."
+        },
+        {
+          "heading": "Susceptibility, not just exposure",
+          "table": {
+            "cols": [
+              "Factor",
+              "Why it matters"
+            ],
+            "rows": [
+              [
+                "HIV",
+                "The strongest single risk for progression to active disease"
+              ],
+              [
+                "Diabetes",
+                "Common, and substantially increases risk"
+              ],
+              [
+                "Malnutrition and low body weight",
+                "Both a risk factor and a consequence"
+              ],
+              [
+                "Steroids and other immunosuppression",
+                "Includes anti-TNF therapy"
+              ],
+              [
+                "Silica exposure",
+                "Stone cutting, mining, sandblasting"
+              ],
+              [
+                "Smoking and alcohol",
+                "Independent risks, often coexisting"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "The constitutional symptoms are the reason to ask at all",
+          "body": "Cough for more than two weeks, evening rise of temperature, drenching night sweats, loss of appetite and loss of weight together make tuberculosis likely enough to test, even when the chest sounds normal. Quantify the weight loss and the duration of cough, because those two numbers are what justify sending sputum."
+        }
+      ]
+    },
+    "skill.hx.resp.haemoptysis": {
+      "id": "skill.hx.resp.haemoptysis",
+      "kind": "history",
+      "system": "respiratory",
+      "title": "Haemoptysis",
+      "oneLine": "Confirm it came from the chest, quantify it, then work out why",
+      "why": "Haemoptysis frightens patients and is often under-quantified by clinicians. Two things must happen before any differential: prove the blood is from the airway and not the gut or nose, and measure how much there is, because volume alone can make it an emergency.",
+      "asks": [
+        {
+          "text": "Did you cough it up, or vomit it, or was it dripping from the back of the nose?"
+        },
+        {
+          "text": "Was it bright red and frothy, or dark like coffee grounds?"
+        },
+        {
+          "text": "How much: streaks in the sputum, a teaspoon, a cup? Ask them to show you with a vessel."
+        },
+        {
+          "text": "How many times, and over how many days?"
+        },
+        {
+          "text": "What colour is the rest of the sputum, and how much do you bring up in a day?"
+        },
+        {
+          "text": "Any fever, night sweats, weight loss, or cough for more than two weeks?"
+        },
+        {
+          "text": "Any chest pain that catches when you breathe in, or swelling in one calf?"
+        },
+        {
+          "text": "Do you smoke, and for how many pack-years?"
+        },
+        {
+          "text": "Any blood thinners, or any bleeding elsewhere: gums, nose, urine?"
+        },
+        {
+          "text": "Have you ever been treated for tuberculosis, or told you have a heart valve problem?"
+        }
+      ],
+      "teach": [
+        {
+          "heading": "First prove it is haemoptysis",
+          "table": {
+            "cols": [
+              "Feature",
+              "Haemoptysis",
+              "Haematemesis"
+            ],
+            "rows": [
+              [
+                "How it came up",
+                "Coughed",
+                "Vomited, often with retching"
+              ],
+              [
+                "Colour",
+                "Bright red",
+                "Dark, coffee grounds"
+              ],
+              [
+                "Consistency",
+                "Frothy, mixed with sputum",
+                "May contain food"
+              ],
+              [
+                "Reaction (traditional)",
+                "Alkaline. Classical teaching, essentially never tested and unreliable",
+                "Acidic. Same caveat"
+              ],
+              [
+                "Preceding symptom",
+                "Cough, tickle in the chest",
+                "Nausea, epigastric discomfort"
+              ]
+            ]
+          },
+          "note": "Also examine the nose and throat. Blood tracking back from a posterior nosebleed is coughed up and mistaken for haemoptysis surprisingly often."
+        },
+        {
+          "heading": "Quantify it, because volume changes the plan",
+          "body": "Streaking of sputum is not the same problem as frank blood. Massive haemoptysis is a threat to the airway rather than to the haemoglobin: patients drown before they exsanguinate, which is why volume and rate are the urgent measurements.",
+          "points": [
+            {
+              "t": "Streaks in sputum.",
+              "d": "Usually infection or bronchitis, but still needs a cause in a smoker."
+            },
+            {
+              "t": "Frank blood, repeated.",
+              "d": "Bronchiectasis, tuberculosis, malignancy, pulmonary embolism."
+            },
+            {
+              "t": "Large volume over hours.",
+              "d": "An emergency. Protect the airway and lie the patient with the bleeding side DOWN to keep blood out of the good lung. Call for help early: these patients asphyxiate rather than exsanguinate."
+            }
+          ]
+        },
+        {
+          "heading": "What counts as massive",
+          "body": "Conventionally 100 mL or more in 24 hours, though published definitions run from 100 to 600 mL.",
+          "note": "The number is not the whole rule. ANY volume that obstructs the airway, impairs gas exchange or causes haemodynamic compromise is life-threatening, whatever the measured total."
+        },
+        {
+          "heading": "The pattern around the blood names the cause",
+          "table": {
+            "cols": [
+              "Company it keeps",
+              "Suggests"
+            ],
+            "rows": [
+              [
+                "Cough over two weeks, evening fever, night sweats, weight loss",
+                "Pulmonary tuberculosis"
+              ],
+              [
+                "Large volumes of purulent sputum daily, for years",
+                "Bronchiectasis"
+              ],
+              [
+                "Smoker, over 40, weight loss, new or changed cough",
+                "Bronchogenic carcinoma"
+              ],
+              [
+                "Sudden pleuritic pain, breathlessness, calf swelling",
+                "Pulmonary embolism with infarction"
+              ],
+              [
+                "Rusty sputum with acute fever and pleuritic pain",
+                "Pneumococcal pneumonia"
+              ],
+              [
+                "Frothy pink sputum, orthopnoea",
+                "Pulmonary oedema, not a primary lung bleed"
+              ],
+              [
+                "Known rheumatic heart disease, exertional breathlessness, a diastolic murmur",
+                "Mitral stenosis"
+              ],
+              [
+                "Previous treated tuberculosis, now recurrent or massive bleeding",
+                "Aspergilloma in a healed cavity, a leading cause of MASSIVE haemoptysis in a post-TB lung"
+              ]
+            ]
+          }
+        }
+      ],
+      "pitfalls": [
+        "Not establishing whether the blood was coughed or vomited before building a differential.",
+        "Recording haemoptysis without a volume, so nobody knows if it is streaking or frank blood.",
+        "Forgetting the nose and throat as a source.",
+        "Missing tuberculosis by not asking about duration of cough, evening fever and weight loss.",
+        "Not asking about anticoagulants and bleeding elsewhere.",
+        "Not quantifying against the 100 mL in 24 hours mark, or forgetting that any airway-compromising volume counts."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Name two features that separate haemoptysis from haematemesis.",
+          "a": "Haemoptysis is coughed, bright red, frothy, mixed with sputum and alkaline. Haematemesis is vomited, darker, may contain food, and is acidic.",
+          "accept": [
+            "cough",
+            "frothy",
+            "bright",
+            "alkal",
+            "vomit",
+            "acid",
+            "food"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "In massive haemoptysis, which side should be dependent, and why?",
+          "a": "The bleeding side down. The immediate danger is asphyxiation from blood flooding the airways, so gravity is used to keep blood out of the unaffected lung.",
+          "accept": [
+            "bleeding side",
+            "affected side",
+            "down",
+            "depend",
+            "asphyx",
+            "airway"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "A 60 year old smoker has haemoptysis, weight loss and a cough that changed character two months ago. Which two diagnoses lead, and which single question best separates them?",
+          "a": "Bronchogenic carcinoma and pulmonary tuberculosis, which overlap heavily in this presentation. Ask about evening rise of temperature, drenching night sweats and contact with a case of tuberculosis, which point to TB; a changed cough with weight loss in a heavy smoker points to malignancy. Both may need investigating together.",
+          "accept": [
+            "carcinoma",
+            "cancer",
+            "malignan",
+            "tubercul",
+            "tb",
+            "night sweat"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "confirm",
+          "text": "Establishes that the blood was coughed, not vomited or from the nose"
+        },
+        {
+          "id": "quantify",
+          "text": "Quantifies volume, frequency and duration"
+        },
+        {
+          "id": "pattern",
+          "text": "Asks about the sputum, fever, weight loss and duration of cough"
+        },
+        {
+          "id": "risk",
+          "text": "Covers smoking, anticoagulants and thromboembolic risk"
+        }
+      ],
+      "media": [],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Respiratory: symptomatology"
+        },
+        {
+          "source": "Macleod's Clinical Examination",
+          "locator": "The respiratory system: the history"
+        },
+        {
+          "source": "Harrison's Principles of Internal Medicine 22e",
+          "locator": "Cough and haemoptysis"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.hx.resp.chestpain": {
+      "id": "skill.hx.resp.chestpain",
+      "kind": "history",
+      "system": "respiratory",
+      "title": "Pleuritic chest pain",
+      "oneLine": "Does it change with breathing? That one question moves the pain out of the heart and into the chest wall or pleura",
+      "why": "Chest pain that varies with respiration is behaving like pleura or chest wall, not like myocardium. Establishing that early stops a respiratory presentation being worked up as an infarct, and stops a pulmonary embolism being dismissed as muscular.",
+      "asks": [
+        {
+          "text": "Does the pain change when you breathe in deeply, or when you cough?"
+        },
+        {
+          "text": "Can you point to it with one finger, or is it spread across?"
+        },
+        {
+          "text": "Is it worse in any particular position, or lying on one side?"
+        },
+        {
+          "text": "Is it better sitting forward and worse lying flat?"
+        },
+        {
+          "text": "Did it come on suddenly, over seconds, or build up over days?"
+        },
+        {
+          "text": "Any breathlessness that started at the same time?"
+        },
+        {
+          "text": "Any fever, cough or coloured sputum before the pain?"
+        },
+        {
+          "text": "Any calf pain or swelling, long journey, surgery or period of immobility?"
+        },
+        {
+          "text": "Any rash appearing in a band, or tenderness when I press here?"
+        },
+        {
+          "text": "Did it start abruptly and tear through to your back, and is it worst at the very start?"
+        }
+      ],
+      "teach": [
+        {
+          "heading": "Respirophasic means pleura or chest wall",
+          "body": "The parietal pleura is pain sensitive and moves with every breath; the visceral pleura and the myocardium are not. So pain that sharpens on inspiration or coughing is arising from parietal pleura or the chest wall, which reframes the whole differential.",
+          "table": {
+            "cols": [
+              "Pattern",
+              "Suggests"
+            ],
+            "rows": [
+              [
+                "Sharp, worse on inspiration, localised",
+                "Pleuritic: infection, infarction, pneumothorax"
+              ],
+              [
+                "Sharp, retrosternal, WORSE LYING FLAT and relieved sitting forward",
+                "Acute pericarditis. Listen for a rub. Often post-viral; in India consider tuberculous pericarditis"
+              ],
+              [
+                "Abrupt, tearing, maximal AT ONSET, radiating between the shoulder blades",
+                "Aortic dissection. Check pulses and blood pressure in both arms"
+              ],
+              [
+                "Sudden, with breathlessness, in a tall thin young man",
+                "Primary spontaneous pneumothorax. A SECONDARY one complicates COPD or old tuberculous lung and is far more dangerous"
+              ],
+              [
+                "Sudden, with breathlessness and risk factors",
+                "Pulmonary embolism"
+              ],
+              [
+                "Reproduced exactly by pressing on the spot",
+                "Musculoskeletal or costochondritis"
+              ],
+              [
+                "Band of pain, then vesicles days later",
+                "Herpes zoster, painful before the rash"
+              ],
+              [
+                "Central, heavy, unaffected by breathing, exertional",
+                "Cardiac. Leave the respiratory pathway."
+              ]
+            ]
+          },
+          "note": "Pain that you can reproduce exactly by palpating one spot is usually chest wall, but a pulmonary embolism can be tender too. Tenderness reassures only when the risk assessment is otherwise low."
+        },
+        {
+          "heading": "Pleuritic pain that STOPS is not necessarily better",
+          "body": "As a pleural effusion accumulates, the inflamed pleural surfaces are separated by fluid and stop rubbing, so the pain eases while the breathlessness worsens. A patient reporting that the pain has gone but breathing is harder has usually not improved."
+        },
+        {
+          "heading": "The one that must not be missed",
+          "body": "Pulmonary embolism presents as sudden pleuritic pain with breathlessness and often nothing to find on examination. Ask every time about calf swelling, recent immobility, long travel, surgery, malignancy, pregnancy and the oral contraceptive pill. The history is where the risk is established, not the chest examination."
+        },
+        {
+          "heading": "The two that are missed because they sound pleuritic",
+          "points": [
+            {
+              "t": "Acute pericarditis.",
+              "d": "Positional and respirophasic, so it is easily filed as pleuritic. Worse supine, relieved leaning forward. Look for a friction rub and widespread saddle-shaped ST elevation. Tuberculous pericarditis is a real cause in India and presents subacutely with fever and weight loss."
+            },
+            {
+              "t": "Aortic dissection.",
+              "d": "The pain that most often kills the person who was told it was musculoskeletal. Abrupt, tearing, MAXIMAL AT ONSET rather than building, radiating between the scapulae. Check both arms for a pulse or pressure difference before accepting any benign label."
+            }
+          ],
+          "note": "Pleuritic pain that builds over hours behaves differently from dissection, which is worst in the first second. Ask when it was at its worst, not just when it started."
+        }
+      ],
+      "pitfalls": [
+        "Filing positional, respirophasic pain as pleuritic without considering pericarditis.",
+        "Accepting a musculoskeletal label for pain that was maximal at onset, and missing dissection.",
+        "Not asking whether the pain varies with respiration, which is the single discriminating question.",
+        "Treating reproducible tenderness as proof of a musculoskeletal cause in a patient at risk of embolism.",
+        "Reading the resolution of pleuritic pain as improvement when an effusion is forming.",
+        "Missing zoster, which is painful for days before the rash appears."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Which single question separates pleuritic from cardiac chest pain?",
+          "a": "Does the pain change with breathing or coughing. Respirophasic pain points to parietal pleura or chest wall, not myocardium.",
+          "accept": [
+            "breath",
+            "inspir",
+            "cough",
+            "respir"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "Why does pleuritic pain often ease as a pleural effusion grows?",
+          "a": "The fluid separates the inflamed parietal and visceral pleural surfaces so they no longer rub, removing the pain while the effusion continues to compromise ventilation.",
+          "accept": [
+            "separat",
+            "fluid",
+            "rub",
+            "surfaces"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "A young man develops sudden right-sided pleuritic pain and breathlessness. Give two diagnoses and the feature of the history that separates them.",
+          "a": "Spontaneous pneumothorax and pulmonary embolism. Both begin abruptly. The embolism carries thrombotic risk factors, immobility, travel, surgery, malignancy or calf symptoms, while the pneumothorax typically occurs in a tall thin young man at rest with no such risk factors.",
+          "accept": [
+            "pneumothorax",
+            "embol",
+            "risk factor",
+            "calf",
+            "immobil"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "Chest pain that is worse lying flat and relieved by sitting forward. What is it, and what will you listen for?",
+          "a": "Acute pericarditis. Listen for a pericardial friction rub, and look for widespread concave ST elevation with PR depression on the ECG.",
+          "accept": [
+            "pericard",
+            "rub",
+            "st eleva"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [
+        {
+          "id": "respirophasic",
+          "text": "Establishes whether the pain varies with respiration"
+        },
+        {
+          "id": "onset",
+          "text": "Establishes speed of onset and associated breathlessness"
+        },
+        {
+          "id": "vte",
+          "text": "Takes a thromboembolic risk history"
+        },
+        {
+          "id": "wall",
+          "text": "Examines for reproducible tenderness and looks for zoster"
+        },
+        {
+          "id": "killers",
+          "text": "Considers pericarditis and aortic dissection before accepting a benign cause"
+        }
+      ],
+      "media": [],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Respiratory: symptomatology"
+        },
+        {
+          "source": "Macleod's Clinical Examination",
+          "locator": "The respiratory system: the history"
+        },
+        {
+          "source": "Harrison's Principles of Internal Medicine 22e",
+          "locator": "Cough and haemoptysis"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.hx.resp.wheeze": {
+      "id": "skill.hx.resp.wheeze",
+      "kind": "history",
+      "system": "respiratory",
+      "title": "Wheeze",
+      "oneLine": "Episodic or continuous, and whether it is really coming from the chest at all",
+      "why": "Wheeze is a musical sound from narrowed intrathoracic airways, and patients apply the word to almost any noisy breathing. Establishing that it is truly a wheeze, and whether it comes and goes, does most of the diagnostic work before a stethoscope is used.",
+      "asks": [
+        {
+          "text": "Right now, can you complete a full sentence in one breath?"
+        },
+        {
+          "text": "Has the wheeze got QUIETER while the breathing got harder?"
+        },
+        {
+          "text": "Make the sound for me, or describe it. Is it a musical whistle, or noisy breathing?"
+        },
+        {
+          "text": "Is it there all the time, or does it come and go with clear periods between?"
+        },
+        {
+          "text": "Is it worse at night or early morning?"
+        },
+        {
+          "text": "Is it worse breathing in, or breathing out?"
+        },
+        {
+          "text": "What brings it on: dust, smoke, cold air, exercise, a particular room or season?"
+        },
+        {
+          "text": "Any eczema, allergic rhinitis, or family history of asthma or allergy?"
+        },
+        {
+          "text": "Is it better on days away from work, or on holiday?"
+        },
+        {
+          "text": "Did it start suddenly, and could anything have been inhaled?"
+        }
+      ],
+      "teach": [
+        {
+          "heading": "First: is this an emergency in front of you?",
+          "body": "Acute severe asthma kills, and it kills patients who were audibly wheezing an hour earlier. Severity is judged on effort and gas exchange, not on how loud the chest is.",
+          "table": {
+            "cols": [
+              "Sign",
+              "Means"
+            ],
+            "rows": [
+              [
+                "Cannot complete a sentence in one breath",
+                "Acute severe"
+              ],
+              [
+                "Respiratory rate 25 or more, pulse 110 or more",
+                "Acute severe"
+              ],
+              [
+                "Peak flow 33 to 50 percent of best or predicted",
+                "Acute severe"
+              ],
+              [
+                "SILENT CHEST, or a wheeze that is fading",
+                "LIFE-THREATENING: too little airflow to make the sound"
+              ],
+              [
+                "Exhaustion, confusion, drowsiness, poor respiratory effort",
+                "LIFE-THREATENING"
+              ],
+              [
+                "SpO2 below 92 percent, or cyanosis",
+                "LIFE-THREATENING"
+              ],
+              [
+                "Peak flow below 33 percent, or a normal or rising CO2",
+                "LIFE-THREATENING"
+              ]
+            ]
+          },
+          "note": "A QUIETENING CHEST IS NOT IMPROVEMENT. If the wheeze is disappearing while the patient works harder, airflow is failing. Treat and call for help; do not wait for the next peak flow."
+        },
+        {
+          "heading": "Episodic or continuous is the first fork",
+          "table": {
+            "cols": [
+              "Pattern",
+              "Suggests"
+            ],
+            "rows": [
+              [
+                "Episodic, with completely clear periods",
+                "Asthma"
+              ],
+              [
+                "Continuous, slowly progressive, older smoker",
+                "COPD"
+              ],
+              [
+                "Fixed, localised, unilateral",
+                "Obstruction of one airway: tumour, foreign body"
+              ],
+              [
+                "Sudden onset in a child or a confused adult",
+                "Inhaled foreign body until excluded"
+              ],
+              [
+                "With orthopnoea and basal crackles",
+                "Cardiac, the so-called cardiac asthma"
+              ],
+              [
+                "Sudden, with urticaria, lip or tongue swelling, or after a sting, food or drug",
+                "ANAPHYLAXIS: intramuscular adrenaline, not a bronchodilator alone"
+              ]
+            ]
+          },
+          "note": "A wheeze that is always in the same place and never moves is a localised obstruction, not asthma, however wheezy it sounds."
+        },
+        {
+          "heading": "Inspiratory noise is a different emergency",
+          "body": "Wheeze is predominantly expiratory, because intrathoracic airways narrow further on expiration. A noise that is loudest on INSPIRATION is stridor, arising from the larynx or trachea, and it signals large airway obstruction. Confusing the two delays an airway emergency, so ask which phase is noisier and listen over the neck as well as the chest.",
+          "note": "Stridor is a reason to call for help now. So is wheeze in a patient who cannot complete a sentence, or whose chest has gone quiet. Do not read either as reassurance."
+        },
+        {
+          "heading": "Atopy and the occupational question",
+          "points": [
+            {
+              "t": "Personal atopy.",
+              "d": "Eczema and allergic rhinitis raise the likelihood of asthma considerably."
+            },
+            {
+              "t": "Family history.",
+              "d": "Asthma, eczema or hay fever in first degree relatives."
+            },
+            {
+              "t": "Better away from work.",
+              "d": "Improvement at weekends and on holiday is the signature of occupational asthma, and it is only ever found by asking."
+            },
+            {
+              "t": "Drugs.",
+              "d": "Beta blockers, including eye drops, and aspirin or other NSAIDs can provoke it."
+            }
+          ]
+        }
+      ],
+      "pitfalls": [
+        "Reading a quietening chest as improvement, when it is a failing airflow.",
+        "Judging severity by the loudness of the wheeze rather than by speech, effort and saturation.",
+        "Treating sudden wheeze with urticaria or facial swelling as asthma, and withholding adrenaline.",
+        "Accepting the patient's word 'wheeze' without establishing it is a musical, expiratory sound.",
+        "Missing stridor by not asking which phase of breathing is noisier.",
+        "Calling a fixed unilateral wheeze asthma.",
+        "Never asking whether it improves away from work, so occupational asthma is missed."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Wheeze is loudest in which phase of respiration, and why?",
+          "a": "Expiration. Intrathoracic airways narrow further as pleural pressure rises during expiration, so a narrowed airway becomes more obstructed.",
+          "accept": [
+            "expir",
+            "narrow",
+            "pleural pressure"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "A noise loudest on inspiration, heard over the neck. What is it, and why does it matter more?",
+          "a": "Stridor, from obstruction of the larynx or trachea. Extrathoracic airways collapse inward on inspiration. It signals large airway obstruction and is an airway emergency rather than a bronchospasm to be nebulised.",
+          "accept": [
+            "stridor",
+            "laryn",
+            "trachea",
+            "upper airway",
+            "extrathoracic"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "A wheeze always heard in the same place, never varying, in a 60 year old smoker. Why is asthma the wrong answer?",
+          "a": "Asthma is diffuse and variable because bronchospasm affects airways throughout both lungs and changes over time. A fixed, localised, monophonic wheeze indicates narrowing of one airway, so a bronchial carcinoma or an inhaled foreign body must be excluded.",
+          "accept": [
+            "localis",
+            "localiz",
+            "fixed",
+            "monophonic",
+            "tumour",
+            "tumor",
+            "carcinoma",
+            "foreign"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "A patient with acute asthma was wheezing loudly; now the chest is quiet and they look exhausted. Better or worse?",
+          "a": "Much worse. A silent chest means airflow has fallen too low to generate a wheeze. Together with exhaustion it is life-threatening asthma needing immediate treatment and senior help, not reassurance.",
+          "accept": [
+            "silent chest",
+            "worse",
+            "life-threat",
+            "airflow"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [
+        {
+          "id": "confirm",
+          "text": "Confirms the sound is a musical expiratory wheeze"
+        },
+        {
+          "id": "pattern",
+          "text": "Establishes episodic versus continuous, and diurnal variation"
+        },
+        {
+          "id": "stridor",
+          "text": "Excludes stridor by asking about the inspiratory phase"
+        },
+        {
+          "id": "atopy",
+          "text": "Covers atopy, family history, occupation and drugs"
+        },
+        {
+          "id": "severity",
+          "text": "Assesses acute severity: speech, effort, saturation, and a silent chest"
+        }
+      ],
+      "media": [],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Respiratory: wheeze"
+        },
+        {
+          "source": "Macleod's Clinical Examination",
+          "locator": "The respiratory system: the history"
+        },
+        {
+          "source": "GINA Global Strategy for Asthma Management and Prevention",
+          "locator": "Diagnosis"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.annex.tobacco": {
+      "id": "skill.annex.tobacco",
+      "kind": "annexure",
+      "system": "respiratory",
+      "title": "Tobacco: pack-years, smoking index and complications",
+      "oneLine": "Two different numbers, two different uses, and they are not interchangeable",
+      "why": "Pack-years and the smoking index both quantify tobacco exposure, but they are calculated differently and used for different things. Confusing them overstates or understates exposure twentyfold.",
+      "calcs": [
+        "pack_years",
+        "smoking_index"
+      ],
+      "asks": [
+        {
+          "text": "How many cigarettes a day, and for how many years? Include bidis and hookah."
+        },
+        {
+          "text": "If you have stopped, when did you stop, and what were you smoking before?"
+        },
+        {
+          "text": "Does anyone smoke indoors at home?"
+        },
+        {
+          "text": "What fuel is used for cooking, and is the kitchen ventilated?"
+        },
+        {
+          "text": "Do you chew tobacco, gutkha or paan?"
+        },
+        {
+          "text": "Do you use an electronic cigarette or vape?"
+        }
+      ],
+      "teach": [
+        {
+          "heading": "Two numbers, and when to use each",
+          "table": {
+            "cols": [
+              "Measure",
+              "Formula",
+              "Used for"
+            ],
+            "rows": [
+              [
+                "Pack-years",
+                "packs per day x years (1 pack = 20 cigarettes)",
+                "Screening thresholds and international comparison"
+              ],
+              [
+                "Smoking index",
+                "cigarettes per day x years",
+                "Bedside severity grading"
+              ]
+            ]
+          },
+          "note": "Twenty cigarettes a day for 30 years is 30 pack-years and a smoking index of 600. Same patient, same exposure, two very different numbers. Never quote one as the other."
+        },
+        {
+          "heading": "Grading by smoking index",
+          "points": [
+            {
+              "t": "Under 100.",
+              "d": "Mild smoker."
+            },
+            {
+              "t": "101 to 300.",
+              "d": "Moderate smoker."
+            },
+            {
+              "t": "Over 300.",
+              "d": "Heavy smoker. Lung cancer is common above this level."
+            }
+          ],
+          "note": "For screening, the threshold that matters is pack-years, not the smoking index. Current USPSTF guidance (2021) is annual low-dose CT from age 50 to 80 with 20 or more pack-years, in people who still smoke or quit within the past 15 years. The older age 55 and 30 pack-year rule is superseded. Note that India has no LDCT screening programme, and high background tuberculosis prevalence produces many false positives, so this is quoted for reference rather than as local practice."
+        },
+        {
+          "heading": "Complications, by system",
+          "table": {
+            "cols": [
+              "System",
+              "What to look for"
+            ],
+            "rows": [
+              [
+                "Respiratory",
+                "COPD, cancer of lung, bronchus and trachea, tuberculosis and other respiratory infection, interstitial lung disease, pneumothorax, post-operative complications"
+              ],
+              [
+                "Cardiovascular",
+                "Premature coronary disease, peripheral vascular disease and erectile dysfunction, cerebrovascular disease, aortic aneurysm"
+              ],
+              [
+                "Gastrointestinal",
+                "Gastro-oesophageal reflux, peptic ulceration, pancreatitis, Crohn disease, gallstones in women"
+              ],
+              [
+                "Obstetric",
+                "Spontaneous abortion, abruptio placentae, premature rupture of membranes, fetal and neonatal death, sudden infant death, postpartum thromboembolism"
+              ],
+              [
+                "Neurological and ocular",
+                "Dementia and cognitive decline, macular degeneration, cataract"
+              ],
+              [
+                "Other",
+                "Chronic kidney disease, diabetes, osteoporosis and hip fracture, and increased risk of many infections"
+              ]
+            ]
+          },
+          "note": "Three causes account for most smoking-related mortality: atherosclerotic cardiovascular disease, lung cancer, and COPD."
+        },
+        {
+          "heading": "The exposures that are not cigarettes",
+          "body": "Bidis, hookah, chewed tobacco, gutkha and paan all carry risk and are routinely denied when the question is 'do you smoke'. Biomass cooking fuel produces COPD in people who have never smoked, and it is the dominant cause in many Indian women. Second-hand smoke at home counts too. Ask each by name."
+        },
+        {
+          "heading": "Smoking changes how drugs behave",
+          "body": "Tobacco smoke induces hepatic microsomal enzymes, so the metabolism of several drugs increases and doses that were correct while smoking may become excessive after stopping. Propranolol and theophylline are the classic examples. Reassess doses at cessation rather than months later."
+        }
+      ],
+      "pitfalls": [
+        "Quoting a smoking index as pack-years, or the reverse.",
+        "Asking only about cigarettes, so bidis, hookah and chewed tobacco are missed.",
+        "Recording 'ex-smoker' with no quantity and no stop date.",
+        "Forgetting biomass fuel exposure in a never-smoker with COPD.",
+        "Not reviewing drug doses after cessation, when enzyme induction reverses."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Twenty cigarettes a day for 30 years. Give both the pack-years and the smoking index.",
+          "a": "Thirty pack-years, and a smoking index of 600. Pack-years divides by twenty; the smoking index does not.",
+          "accept": [
+            "30",
+            "600"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "A never-smoker woman presents with COPD. What exposure must you ask about?",
+          "a": "Biomass cooking fuel: wood, dung cake, crop residue or coal burned in an unventilated kitchen, often for decades. It is a leading cause of COPD in Indian women.",
+          "accept": [
+            "biomass",
+            "wood",
+            "dung",
+            "cooking",
+            "fuel"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "Why might a patient stabilised on theophylline become toxic after they stop smoking?",
+          "a": "Tobacco smoke induces hepatic microsomal enzymes and accelerates theophylline metabolism. When smoking stops the induction reverses, clearance falls, and an unchanged dose produces rising levels and toxicity.",
+          "accept": [
+            "induc",
+            "enzyme",
+            "metabol",
+            "clearance"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [
+        {
+          "id": "quantify",
+          "text": "Obtains cigarettes per day and years, and computes both measures correctly"
+        },
+        {
+          "id": "forms",
+          "text": "Asks about bidis, hookah, chewed tobacco and vaping"
+        },
+        {
+          "id": "biomass",
+          "text": "Asks about cooking fuel and second-hand smoke"
+        },
+        {
+          "id": "drugs",
+          "text": "Considers enzyme induction and dose review at cessation"
+        }
+      ],
+      "media": [],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Annexure: tobacco use"
+        },
+        {
+          "source": "Harrison's Principles of Internal Medicine 22e",
+          "locator": "Nicotine addiction and tobacco-related disease"
+        },
+        {
+          "source": "GOLD Report",
+          "locator": "Risk factors: tobacco"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.annex.defs.resp": {
+      "id": "skill.annex.defs.resp",
+      "kind": "annexure",
+      "system": "respiratory",
+      "title": "Definitions: breathlessness and its positional variants",
+      "oneLine": "Six words that all mean breathless, and the posture that separates them",
+      "why": "Orthopnoea, platypnoea, trepopnoea and bendopnoea are not synonyms and not interchangeable. Each names a specific relationship between posture and breathlessness, and each points somewhere different, so using the wrong word records the wrong sign.",
+      "teach": [
+        {
+          "heading": "Posture is the discriminator",
+          "table": {
+            "cols": [
+              "Term",
+              "Breathless when",
+              "Points to"
+            ],
+            "rows": [
+              [
+                "Dyspnoea",
+                "Any time. A subjective awareness of uncomfortable breathing",
+                "Anything"
+              ],
+              [
+                "Orthopnoea",
+                "Lying flat, relieved by sitting up",
+                "Raised left atrial pressure, heart failure"
+              ],
+              [
+                "Paroxysmal nocturnal dyspnoea",
+                "Waking from sleep, typically 1 to 3 hours after retiring",
+                "Heart failure"
+              ],
+              [
+                "Platypnoea",
+                "Sitting or standing UP, relieved by lying down",
+                "Right to left shunt, hepatopulmonary syndrome"
+              ],
+              [
+                "Trepopnoea",
+                "Lying on one particular side",
+                "Unilateral lung or pleural disease"
+              ],
+              [
+                "Bendopnoea",
+                "Bending forward, as when putting on shoes",
+                "Raised filling pressures in heart failure"
+              ]
+            ]
+          },
+          "note": "Platypnoea is the mirror image of orthopnoea. If you remember only one, remember that: upright makes it worse, lying down relieves it."
+        },
+        {
+          "heading": "Orthodeoxia is a measurement, not a symptom",
+          "body": "Orthodeoxia is arterial desaturation on standing up. It is what the oximeter shows while the patient describes platypnoea, and the two typically occur together. The mechanism is a right to left shunt that worsens when gravity redistributes blood towards dependent, shunting lung bases, classically in hepatopulmonary syndrome."
+        },
+        {
+          "heading": "Why trepopnoea localises",
+          "body": "Lying on one side makes that lung dependent, so it receives more perfusion. The consequence depends on the pathology, and the two cases point opposite ways.",
+          "points": [
+            {
+              "t": "Unilateral parenchymal disease, such as consolidation.",
+              "d": "Patients lie with the GOOD lung DOWN. Perfusing the lung that still ventilates improves matching; lying on the diseased side worsens hypoxaemia."
+            },
+            {
+              "t": "Large pleural effusion or pneumothorax.",
+              "d": "Patients commonly lie on the AFFECTED side, which lets the normal lung expand freely and splints pleuritic pain. This is the opposite of the parenchymal rule."
+            }
+          ],
+          "note": "Which side a patient chooses is a sign worth recording, but read it against the pathology rather than as a single rule."
+        },
+        {
+          "heading": "Two more that are often mixed up",
+          "points": [
+            {
+              "t": "Massive haemoptysis.",
+              "d": "Defined by volume and rate, not by appearance. The danger is asphyxiation rather than exsanguination, which is why airway protection and positioning come before transfusion."
+            },
+            {
+              "t": "Cough.",
+              "d": "A forced expiratory manoeuvre against an initially closed glottis. Classified by duration: acute under 3 weeks, subacute 3 to 8 weeks, chronic beyond 8. Those are the ACCP bands. OPERATIONALLY IN INDIA, cough of 2 weeks or more is presumptive tuberculosis under the NTEP and triggers sputum testing regardless of which band it falls in."
+            }
+          ]
+        }
+      ],
+      "pitfalls": [
+        "Writing orthopnoea when the patient means platypnoea, which reverses the implication entirely.",
+        "Recording breathlessness without asking which posture changes it.",
+        "Treating orthodeoxia and platypnoea as separate findings rather than the same phenomenon measured two ways.",
+        "Not noting which side a patient with unilateral lung disease chooses to lie on."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "A patient is breathless standing and better lying flat. Which term?",
+          "a": "Platypnoea. It is the opposite of orthopnoea.",
+          "accept": [
+            "platypn"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "Why does a patient with unilateral lung disease prefer to lie with the good lung down?",
+          "a": "The dependent lung receives more perfusion. With the good lung down, perfusion is matched to the lung that is ventilating properly. Lying on the diseased side perfuses the bad lung and worsens the mismatch and the hypoxaemia, which is trepopnoea.",
+          "accept": [
+            "perfus",
+            "dependent",
+            "mismatch",
+            "v/q"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "Platypnoea with orthodeoxia in a patient with chronic liver disease. What is the mechanism?",
+          "a": "Hepatopulmonary syndrome: intrapulmonary vascular dilatations act as a right to left shunt, predominantly at the bases. Standing directs more blood to the bases, so shunting increases, saturation falls and breathlessness worsens, and both resolve on lying down.",
+          "accept": [
+            "hepatopulmonary",
+            "shunt",
+            "dilat",
+            "base"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [
+        {
+          "id": "posture",
+          "text": "Establishes which posture provokes and which relieves"
+        },
+        {
+          "id": "term",
+          "text": "Uses the correct term rather than 'breathless'"
+        },
+        {
+          "id": "side",
+          "text": "Records which side the patient lies on in unilateral disease"
+        }
+      ],
+      "media": [],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Annexure: definitions"
+        },
+        {
+          "source": "Harrison's Principles of Internal Medicine 22e",
+          "locator": "Dyspnea"
+        },
+        {
+          "source": "Macleod's Clinical Examination",
+          "locator": "The respiratory system: the history"
         }
       ],
       "review": {

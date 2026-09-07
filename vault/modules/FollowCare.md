@@ -22,6 +22,41 @@ Flagship **Hospital Recovery Intelligence** — post-discharge follow-up. Patien
 ## Owner TODO
 clinician sign-off on thresholds · reviewed non-en/hi/te translations · bind `FOLLOWCARE_R2` for photos · rotate exposed creds · BSP for WhatsApp scale.
 
+## UI/UX floor (2026-08-27, ui-ux-pro-max pass)
+Pinned by `test/followcare-ux.test.mjs` because each of these is invisible until the person it
+affects hits it. Four real findings in the doctor-facing overlay (`followcare.js` `css()`):
+- **`.fc-x` close button was 34x34**, under the 44x44 touch minimum, on the most-tapped control of a
+  one-handed ward-round surface. Now 44x44.
+- **Exactly ONE `:focus` rule existed** in 1033 lines, and these are restyled buttons/divs so the
+  browser default does not survive. Added `:focus-visible` rings, inverted on the teal `.fc-hd`
+  (a teal ring on a teal header is invisible) and re-coloured for dark.
+- **Reduced motion never reached the CSS.** The `_RM` guard only covers the motion.dev helpers, while
+  UI v2 adds transitions/`:active` transforms and the MAiTRI hero runs `.mai-aura` + `.mai-dot` as
+  `infinite`. Unstoppable continuous motion on a clinical dashboard is a vestibular trigger.
+- **`.fc-soon` had no dark rule** - a light amber pill (#ffe9c7) glowing as the brightest thing on a
+  dark screen while marking the LEAST important item.
+- `ESC.red.icon` now carries **U+FE0E** (text presentation): iOS renders a bare U+26A0 as the colour
+  emoji, inside a red-styled clinical badge.
+
+## Quiet Intelligence UI (September 2026)
+
+FollowCare and MAiTRI use one restrained, full-height workspace with compact phone chrome, a clear
+recovery overview, accessible patient-row buttons and responsive metric cards. The design removes the
+old glowing AI-console treatment while preserving explicit urgency labels and all clinical status
+colours. MAiTRI retains the existing `maitri-logo.png` and the official `maitri-wordmark.png`, including
+“Medical Adaptive Intelligence for Treatment & Recovery Integration.” Voice settings, enrollment,
+patient detail navigation and escalation actions are unchanged.
+
+The FollowCare shell now locks page overscroll while open. Header chrome stays fixed and only the
+workspace body scrolls, so the interface continues to fill the phone screen without exposing the app beneath it.
+
+Browser verification: `FC_SHOTS=/tmp/stewardmd-followcare-quiet node test/run-followcare-quiet-ui.mjs`.
+
+**Left alone deliberately:** the escalation glyphs (● ○ ✓) are not an accessibility bug - every level
+ships a text `label` alongside colour, which is the rule the ui-ux-pro-max set flags hardest. The
+generic dark-slate palette the tool proposed was NOT adopted; FollowCare keeps StewardMD's teal
+tokens, because consistency with the rest of the app outranks a standalone-pretty module.
+
 ## Gotchas
 - Fixed a live portal crash: Motion `spring()` in `pop()` escaped try/catch → "Connection problem" for unconfirmed non-English patients.
 Deps: [[Infra]] (R2, WhatsApp) · [[Decisions]] (retention).

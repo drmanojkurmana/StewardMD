@@ -18,6 +18,73 @@
     return u;
   }
 
+  /* ── Atlas images: retry through the authenticated route ──────────────────────────────────────
+   * Reported as "ecg learn cases not displaying ecgs". The direct load above CANNOT succeed:
+   * functions/_middleware.js hard-404s every static asset on stewardmd.in so the web bundle cannot
+   * be scraped, and the atlas is deliberately not bundled into the app (scripts/build-www.sh), so
+   * the ECGs asked the one origin that refuses to serve them. Verified in production - the atlas
+   * 404s while /logo.png, which that middleware explicitly allowlists, returns 200.
+   *
+   * /api/ecg-atlas/<name> serves the same image to a SIGNED-IN doctor only, so the atlas stays
+   * protected from anonymous scraping. An <img> cannot send an Authorization header, so the image
+   * is fetched in JS and handed back as an object URL.
+   *
+   * Done as an ERROR fallback rather than by rewriting kxImg(), for three reasons: the three call
+   * sites and their markup stay untouched; e.target IS the exact <img>, so no marker attributes and
+   * no re-render pass are needed; and if these are ever served directly again (an allowlist, a
+   * preview deploy, SITE_ALLOW_WEB=1) the normal path simply works and this never runs. The cost is
+   * one 404 per image, and images are loading="lazy", so that is one or two per screen.
+   *
+   * arrayBuffer() rather than blob(): on native, window.fetch is the CapacitorHttp bridge, and
+   * arrayBuffer() is the primitive already proven there by the model-pack downloader
+   * (maik-models.js). Blobs are cached per session, so revisiting a lesson costs nothing. */
+  var _kxAtlas = {};        // filename -> object URL
+  var _kxAtlasWait = {};    // filename -> in-flight promise (never fetch the same image twice)
+  function kxAtlasName(src) {
+    var m = String(src || "").match(/\/assets\/kardiox-learn\/([A-Za-z0-9._-]+)$/);
+    return m ? m[1] : "";
+  }
+  function kxIdToken() {
+    try {
+      var u = window.SMD_AUTH && window.SMD_AUTH.currentUser;
+      if (u && u.getIdToken) return u.getIdToken();
+    } catch (e) {}
+    return Promise.resolve("");
+  }
+  function kxFetchAtlas(name) {
+    if (_kxAtlas[name]) return Promise.resolve(_kxAtlas[name]);
+    if (_kxAtlasWait[name]) return _kxAtlasWait[name];
+    var p = kxIdToken().then(function (tok) {
+      if (!tok) return "";                       // signed out: nothing to show, and nothing to leak
+      return fetch("https://stewardmd.in/api/ecg-atlas/" + encodeURIComponent(name), {
+        headers: { "Authorization": "Bearer " + tok }
+      }).then(function (r) {
+        if (!r || !r.ok) return null;
+        var ct = (r.headers && r.headers.get && r.headers.get("content-type")) || "image/jpeg";
+        return r.arrayBuffer().then(function (ab) {
+          return (ab && ab.byteLength) ? new Blob([ab], { type: ct }) : null;
+        });
+      }).then(function (b) {
+        if (!b) return "";
+        var url = URL.createObjectURL(b);
+        _kxAtlas[name] = url;
+        return url;
+      });
+    }).catch(function () { return ""; })
+      .then(function (u) { delete _kxAtlasWait[name]; return u; });
+    _kxAtlasWait[name] = p;
+    return p;
+  }
+  // Capture phase: an <img> error event does not bubble, so a document listener only sees it here.
+  document.addEventListener("error", function (e) {
+    var el = e && e.target;
+    if (!el || el.tagName !== "IMG" || el.getAttribute("data-kx-retried")) return;
+    var name = kxAtlasName(el.getAttribute("src"));
+    if (!name) return;
+    el.setAttribute("data-kx-retried", "1");     // one retry per element, never a loop
+    kxFetchAtlas(name).then(function (url) { if (url) el.src = url; });
+  }, true);
+
   /* landing */
   /* Screen 02 · Module landing.
    * host = #kxScroll; ctx = { providers, analysis, nav(id), close() }.
@@ -1712,6 +1779,9 @@
           '<button type="button" class="kx-lib-chip" data-tier="core" aria-pressed="false">Core</button>' +
           '<button type="button" class="kx-lib-chip" data-tier="emergency" aria-pressed="false">Emergency</button>' +
           '<button type="button" class="kx-lib-chip" data-tier="rare" aria-pressed="false">Rare</button>' +
+          // The 1,041-lesson textbook pack is all tier:"atlas"; without this chip it is reachable
+          // only under "All", and every tier filter silently hides it.
+          '<button type="button" class="kx-lib-chip" data-tier="atlas" aria-pressed="false">Atlas</button>' +
         '</div>' +
         '<div id="kxLibSections"></div>' +
       '</div>';
@@ -2845,7 +2915,14 @@
       show("settings");
     } catch (e) {}
   }
-  function toggleBookmark() { var P = providers(); if (P && P.library && state.lessonId) { Promise.resolve(P.library.toggleBookmark(state.lessonId)).then(function () { haptic("light"); }); } }
+  /* NOTE: there is deliberately no router-level bookmark toggle. `data-act="kx-bookmark"` is emitted
+   * in exactly ONE place (the lesson screen, render09) and that screen handles it locally — it owns
+   * the aria-pressed/label update and the toast. A duplicate case here ALSO fired, because the
+   * screen's host.onclick sits on #kxScroll and the click then bubbles to this delegated listener on
+   * #kardioxRoot: one tap toggled the store twice and netted zero, so bookmarks never stuck. That was
+   * invisible while toggleBookmark only mutated the in-memory content record (already lost on reload);
+   * it became THE remaining bug once the 2026-08-26 sweep made the store real. Pinned by
+   * test/run-kardiox-progress-ui.mjs. */
 
   // Capture a real ECG image and return its bytes as a Blob. Native: Capacitor Camera (camera/photo) or
   // FilePicker (files/pdf); Web: a hidden <input type=file>. Rejects with {cancelled:true} on user cancel.
@@ -2960,7 +3037,7 @@
       case "kx-toggle-odimage": haptic("light"); toggleOdImage(); return;
       case "kx-toggle-parity": haptic("light"); toggleParity(); return;
       case "kx-ondevice-ai": haptic("light"); ondeviceAction(); return;
-      case "kx-bookmark": toggleBookmark(); return;
+      /* "kx-bookmark" is intentionally absent — render09 owns it locally (see the note by captureImage). */
     }
     if (act.indexOf("kxnav:") === 0) { deferred(act.slice(6)); return; }
     /* other data-act values are screen-internal (chips, quiz options, flip, tabs) — screens handle them. */
@@ -2973,8 +3050,12 @@
   function wireSignout() {
     if (_signoutWired || typeof window === "undefined") return; _signoutWired = true;
     ["smd:signout", "smd-signout", "signout", "smd:logout"].forEach(function (ev) { try { window.addEventListener(ev, wipe); } catch (e) {} });
-    window.SMD_KARDIOX_WIPE = wipe;   // StewardMD sign-out can call this directly. 🔧 hook the real signout.
+    window.SMD_KARDIOX_WIPE = wipe;   // Also callable directly; signout-fix.js dispatches the event.
   }
+
+  /* At LOAD, not on mount: a module the student never opened this session would otherwise
+   * keep the previous account's data through a sign-out. wireSignout() is idempotent. */
+  wireSignout();
 
   if (typeof window !== "undefined") window.SMD_KARDIOX_ROUTER = { mountLanding: mountLanding, nav: go, runPipeline: runPipeline, wipe: wipe };
 

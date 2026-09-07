@@ -1,0 +1,155 @@
+{
+  "id": "orthopaedics",
+  "programmeType": "PG",
+  "degree": "MS",
+  "specialty": "Orthopaedics",
+  "durationMonths": 36,
+  "version": "2026-08-27",
+  "extends": [
+    "_pgmer-common",
+    "_revised-2022-common"
+  ],
+  "source": {
+    "title": "Guidelines for Competency Based Postgraduate Training Programme for MS in Orthopaedics (revised)",
+    "publisher": "National Medical Commission",
+    "year": 2022,
+    "url": "https://www.nmc.org.in/wp-content/uploads/2022/revised/MS_Orthopedics_( revised ).pdf",
+    "retrieved": "2026-08-27"
+  },
+  "requirements": [
+    {
+      "target": 1,
+      "per": "course",
+      "source": "nmc_curriculum",
+      "mandatoryForExam": false,
+      "id": "or_research_methodology_6m",
+      "kind": "certification",
+      "label": "Research Methodology course — within six months of the batch commencing",
+      "dueByMonths": 6,
+      "requiresEvidence": true,
+      "match": {
+        "subtype": "research_methodology"
+      },
+      "clause": "K. Course in Research Methodology",
+      "quote": "All postgraduate students shall complete an online course in Research Methodology within six months of the commencement of the batch and generate the online certificate on successful completion of the course.",
+      "note": "STRICTER than PGMER-2023 5.2(xi)(a), which says 'first year'. Both are shown; the module never silently replaces the regulation's deadline with the curriculum's."
+    },
+    {
+      "target": 4,
+      "per": "quarter",
+      "source": "nmc_curriculum",
+      "mandatoryForExam": false,
+      "id": "or_minicex",
+      "kind": "academic",
+      "label": "Mini-CEX encounters",
+      "match": {
+        "academicType": "case_discussion"
+      },
+      "clause": "Assessment — Quarterly assessment",
+      "quote": "Mini Cex encounter – at least 4"
+    },
+    {
+      "target": 4,
+      "per": "quarter",
+      "source": "nmc_curriculum",
+      "mandatoryForExam": false,
+      "id": "or_encounter_cards",
+      "kind": "academic",
+      "label": "Clinical encounter cards",
+      "match": {
+        "academicType": "case_presentation"
+      },
+      "clause": "Assessment — Quarterly assessment",
+      "quote": "Clinical encounter cards - at least -4"
+    },
+    {
+      "target": 6,
+      "per": "quarter",
+      "source": "nmc_curriculum",
+      "mandatoryForExam": false,
+      "id": "or_dops",
+      "kind": "procedure",
+      "label": "Direct observation of procedural skills (incl. cadaver dissection)",
+      "match": {
+        "roles": [
+          "performed_supervised",
+          "performed_independent"
+        ]
+      },
+      "clause": "Assessment — Quarterly assessment",
+      "quote": "Direct observation of procedural skills – at least 6 including Cadaver dissection"
+    },
+    {
+      "target": 2,
+      "per": "course",
+      "source": "nmc_curriculum",
+      "mandatoryForExam": false,
+      "id": "or_cme",
+      "kind": "academic",
+      "label": "Attendance at scientific meetings / CME programmes",
+      "match": {
+        "academicType": "cme_conference"
+      },
+      "clause": "Assessment — Quarterly assessment",
+      "quote": "Attendance at Scientific meetings, CME programmes (at least 02 each)"
+    },
+    {
+      "target": 2,
+      "per": "course",
+      "source": "nmc_curriculum",
+      "mandatoryForExam": true,
+      "id": "or_exam_conference_presentations",
+      "kind": "research",
+      "label": "At least two presentations at a national-level conference",
+      "match": {
+        "subtype": "conference_paper"
+      },
+      "clause": "Summative assessment — essential pre-requisites",
+      "quote": "At least two presentations at national level conference. One research paper should be published / accepted in an indexed journal. (It is suggested that the local or University Review committee assess the work sent for publication).",
+      "note": "EXCEEDS PGMER-2023 5.2(x), which requires one poster OR one paper read OR one first-author publication. Both are evaluated and reported separately."
+    },
+    {
+      "target": 1,
+      "per": "course",
+      "source": "nmc_curriculum",
+      "mandatoryForExam": true,
+      "id": "or_exam_indexed_publication",
+      "kind": "research",
+      "label": "One research paper published / accepted in an indexed journal",
+      "match": {
+        "subtype": "publication"
+      },
+      "clause": "Summative assessment — essential pre-requisites",
+      "quote": "At least two presentations at national level conference. One research paper should be published / accepted in an indexed journal. (It is suggested that the local or University Review committee assess the work sent for publication)."
+    },
+    {
+      "target": 1,
+      "per": "course",
+      "source": "nmc_curriculum",
+      "mandatoryForExam": true,
+      "id": "or_exam_logbook_submitted",
+      "kind": "meta",
+      "label": "Log book of work done submitted, incl. rotation postings, departmental presentations and internal assessment reports",
+      "engine": "report:portfolio",
+      "clause": "Summative assessment — essential pre-requisites",
+      "quote": "Log book of work done during the training period including rotation postings, departmental presentations, and internal assessment reports should be submitted."
+    },
+    {
+      "target": null,
+      "per": "course",
+      "source": "nmc_curriculum",
+      "mandatoryForExam": false,
+      "id": "or_bone_lab",
+      "kind": "academic",
+      "label": "Bone skill-lab performance assessment",
+      "match": {
+        "academicType": "workshop"
+      },
+      "clause": "Assessment — Quarterly assessment",
+      "quote": "Bone Skill Lab performance assessment"
+    }
+  ],
+  "procedures": [],
+  "proceduresNote": "No operation counts in the MS Orthopaedics guidelines. The per-quarter figures above are assessment counts, not operation counts.",
+  "disclaimer": "Requirements are traced to the NMC source named above. A requirement with target null is one the source mandates WITHOUT giving a number — it is counted, never scored against an invented target. This pack does not certify compliance; see NMC_PG_LOGBOOK_REQUIREMENTS.md."
+}

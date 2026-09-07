@@ -11,10 +11,11 @@
  * gated by the same UPDATES_ADMIN_TOKEN as the notifications API.
  */
 import { saveSubscription, deleteSubscription, sendPushToAll, pushEnabled } from "../../_webpush.js";
-import { saveNativeToken, deleteNativeToken, sendNativeToAll, nativePushEnabled } from "../../_nativepush.js";
+import { saveNativeToken, deleteNativeToken, sendNativeToAll, nativePushEnabled, listNativeTokens } from "../../_nativepush.js";
 import { identify } from "../../_fbauth.js";
 import { ownerOK } from "../../_adminauth.js";
 import { escalateOverdueTask, sweepOverdue, isGroupMember, notifyNewInstruction, notifyCriticalValue, remindTask } from "../../_taskpush.js";
+import { saveReceipt, listReceipts } from "../../_wardsynq_receipts.js";
 
 const json = (obj, status = 200) => new Response(JSON.stringify(obj), {
   status, headers: { "Content-Type": "application/json", "Cache-Control": "no-store" }
@@ -58,7 +59,16 @@ export async function onRequest(context) {
     // else's account and receive their patients' lab alerts. Guests get uid=null
     // (broadcast updates only, never per-patient alerts).
     const uid = await identify(request, env);
-    const okSave = await saveNativeToken(env, { token: body.token, platform: body.platform, uid, workspaces: cleanWorkspaces(body.workspaces) });
+    // Device identity, captured for IDENTIFICATION ONLY. Nothing below changes who a push is sent
+    // to: fan-out is still every active token for the account. This exists so a human can later
+    // look at a list and say which handset a registration belongs to, which was impossible before -
+    // six iOS tokens on one account were indistinguishable from six different iPhones, so nothing
+    // could be safely pruned.
+    const okSave = await saveNativeToken(env, {
+      token: body.token, platform: body.platform, uid,
+      workspaces: cleanWorkspaces(body.workspaces),
+      device: body.device,
+    });
     return okSave ? json({ ok: true, scoped: !!uid }) : json({ error: "store-unavailable" }, 501);
   }
   if (method === "POST" && seg === "unregister-native") {
@@ -122,6 +132,68 @@ export async function onRequest(context) {
     if (!(await isGroupMember(env, gid, uid))) return json({ error: "not-a-member" }, 403);
     const res = await notifyCriticalValue(env, gid, pid, uid, { label: body.label, value: body.value, unit: body.unit, bed: body.bed, reason: body.reason });
     return json(res || { error: "failed" });
+  }
+  // ── WardSynQ escalation channel (HAZ-DET-01) ────────────────────────────────────────────────
+  // Additive: nothing above this block changes. A WardSynQ notice is pushed to the caller's OWN
+  // registered devices, and the handset posts back a receipt so "delivered" can mean a phone
+  // actually has it rather than a gateway having accepted bytes.
+  if (method === "POST" && seg === "wardsynq-alert") {
+    if (!nativePushEnabled(env)) return json({ error: "push-disabled" }, 501);
+    const uid = await identify(request, env);
+    if (!uid) return json({ error: "auth-required" }, 401);
+    let body = {}; try { body = (await request.json()) || {}; } catch (e) {}
+    if (!body.title) return json({ error: "bad-args" }, 400);
+    const data = body.data || {};
+    if (!data.noticeId) return json({ error: "no-notice-id" }, 400);
+    // Scoped to the caller's own devices. Fanning a clinical alert to a whole unit is a policy
+    // decision that belongs to the escalation ladder, not to a transport endpoint.
+    const res = await sendNativeToAll(env, {
+      title: String(body.title).slice(0, 200),
+      body: String(body.body || "").slice(0, 500),
+      data,
+    }, { uid });
+    // `sent` counts gateway acceptances. It is reported as such and the client turns it into SENT,
+    // never DELIVERED.
+    return json({ sent: res.sent || 0, total: res.total || 0 });
+  }
+  // The caller's OWN registered devices. Read-only, and deliberately so: this exists to make the
+  // registrations identifiable, not to remove them. The token itself is never returned - it is a
+  // device credential, and an 8-character fingerprint is enough to tell two rows apart.
+  if (method === "GET" && seg === "devices") {
+    const uid = await identify(request, env);
+    if (!uid) return json({ error: "auth-required" }, 401);
+    const all = await listNativeTokens(env);
+    const mine = all.filter((t) => t.uid === uid).map((t) => ({
+      fingerprint: String(t.token || "").slice(0, 8),
+      platform: t.platform,
+      apnsEnv: t.apnsEnv || null,
+      lastSeen: t.ts ? new Date(t.ts).toISOString() : null,
+      firstSeen: (t.device && t.device.firstSeen) || null,
+      label: (t.device && t.device.label) || null,
+      model: (t.device && t.device.model) || null,
+      osVersion: (t.device && t.device.osVersion) || null,
+      appVersion: (t.device && t.device.appVersion) || null,
+      installId: (t.device && t.device.installId) || null,
+      // Registrations made before identity was captured. Stated rather than left as blanks, so a
+      // reader does not mistake "we never recorded this" for "this device reported nothing".
+      identified: !!(t.device && t.device.installId),
+    })).sort((a, b) => String(b.lastSeen).localeCompare(String(a.lastSeen)));
+    return json({ devices: mine, total: mine.length });
+  }
+  // The handset confirming what actually happened to it: received, opened, acknowledged.
+  if (method === "POST" && seg === "wardsynq-receipt") {
+    const uid = await identify(request, env);
+    if (!uid) return json({ error: "auth-required" }, 401);
+    let body = {}; try { body = (await request.json()) || {}; } catch (e) {}
+    const out = await saveReceipt(env, uid, body);
+    return json(out, out.ok ? 200 : 400);
+  }
+  // The workstation that raised the alert, polling those receipts back.
+  if (method === "GET" && seg === "wardsynq-receipts") {
+    const uid = await identify(request, env);
+    if (!uid) return json({ error: "auth-required" }, 401);
+    const since = new URL(request.url).searchParams.get("since") || null;
+    return json({ receipts: await listReceipts(env, uid, since) });
   }
   // On-demand "nudge": re-push a task's reminder to the unit's executor roles. Member-triggered;
   // remindTask enforces that the caller holds an instructing role.

@@ -214,9 +214,15 @@
           if (first) first.focus();
           return;
         }
+        /* Prefer the server's own sentence. It knows WHICH refusal this is - no role granted, not
+         * on this clinic's staff list, wrong clinic, outside your departments - and each has a
+         * different fix. This flattened all of them to "You do not have permission", which tells
+         * the person at the desk nothing they can act on and sends them to the owner with no idea
+         * what to ask for. The message carries a clinic id and a role name, never patient data. */
         host.querySelector("#prFerr").textContent =
-          (r && r.error === "forbidden") ? "You do not have permission to add patients."
-            : "Could not add the patient. Check your connection and try again.";
+          (r && r.message) ? r.message
+            : (r && r.error === "forbidden") ? "You do not have permission to add patients."
+              : "Could not add the patient. Check your connection and try again.";
       }).catch(function () {
         reset();
         host.querySelector("#prFerr").textContent = "Could not reach the server. Try again.";

@@ -149,7 +149,14 @@ test("SAVE: the caller's episode is verified, not trusted", () => {
 test("SAVE: every identifier GHIS gives for the visit is tried, not one guess", () => {
   assert.match(SAVE, /cands\.push\(\['epi', row\.episodeId\], \['visit', row\.visitId\]\)/, "episode AND visit number");
   assert.match(SAVE, /for \(let i = 0; i < cands\.length && !got\.live; i\+\+\)/, "stops at the first that activates");
-  assert.match(SAVE, /v === String\(body\.episodeId \|\| ''\)\) continue/, "never repeats the one already tried");
+  /* The guarantee is "never activate the same identifier twice", not one particular expression.
+   * It was `v === String(body.episodeId || '')`, which only covered the CALLER's episode; it is now
+   * a `tried` Set seeded with that value, so it also spans the OPD and ward passes - each attempt
+   * is a live POST that re-points the active visit in GHIS's session, so a repeat is not free. */
+  assert.match(SAVE, /const tried = new Set\(\[String\(body\.episodeId \|\| ''\)\]\)/,
+    "the caller's episode still counts as already tried");
+  assert.match(SAVE, /if \(!v \|\| tried\.has\(v\)\) continue/, "never repeats one already tried");
+  assert.match(SAVE, /tried\.add\(v\)/, "and each attempt is recorded");
 });
 
 test("PARSE: the episode column is captured, not swallowed by the OP number", () => {
@@ -218,6 +225,181 @@ test("REGRESSION: no dangling `gr` after the activate-then-check refactor", () =
   const save = GHIS.slice(GHIS.indexOf("export async function saveAssessment"), GHIS.indexOf("export async function onRequest"));
   assert.ok(!/mergeCookies\(s\.cookie, gr\.setCookie\)/.test(save),
     "`gr` was removed by that refactor — this line would throw on the first save that got past the guard");
+});
+
+/* ---- THE REGRESSION, finally identified from live evidence --------------------------------------
+ * The live form comes back fully rendered (175KB, 113 fields) with patient_id "" and doc_id 0, while
+ * Searchnew returns 200 and sets NO cookies. That is not a failed activation — it is GHIS handing us
+ * a blank NEW assessment form. This file's own header says as much: "New = docId 0".
+ *
+ * The guard added 2026-08-13 refused EVERY doc_id 0, so the first-ever assessment for any visit could
+ * never be saved. That is the "it used to work and now it doesn't". The two meanings of 0 are told
+ * apart by whether we have a patient AND a visit to attach the new record to.
+ */
+test("CREATE: doc_id 0 needs a patient, a visit, AND a confirmed activation", () => {
+  /* Tightened on 2026-08-26 together with the payload flip below. While the POST carried the
+   * patient and episode ids, knowing the episode was enough - the ids themselves targeted the
+   * record. Now that the ids go out empty (matching GHIS's own UI), the session's active visit is
+   * the ONLY thing deciding which chart a create lands in, so naming an episode proves nothing.
+   * Only a Searchnew that actually returned 2xx does. */
+  const save = GHIS.slice(GHIS.indexOf("export async function saveAssessment"), GHIS.indexOf("export async function onRequest"));
+  assert.match(save, /const canCreate = !!\(mr && attachTo && epiActivated\)/,
+    "a create needs both ids and a confirmed activation");
+  assert.match(save, /&& !clientDoc && !canCreate\)/, "…and only then is the refusal still correct");
+  assert.match(save, /const attachTo = String\(body\.episodeId \|\| ''\) \|\| epiUsed/,
+    "the visit may have come from the roster lookup rather than the caller");
+  /* MEASURED against the live server, 2026-08-26: HTTP 200 proves nothing. An unauthenticated
+   * session and a working one BOTH answered 200 to Searchnew - the first a redirect stub, the
+   * second the patient's own page. A guard on the status alone could not fail. What separates them
+   * is the body echoing the MR that was activated (13 occurrences vs 0). */
+  assert.match(save, /const echoed = String\(\(a && a\.body\) \|\| ''\)\.indexOf\(mr\) !== -1/,
+    "activation is confirmed by the response naming the patient, not by the status");
+  assert.match(save, /epiActivated = !!\(a && a\.status >= 200 && a\.status < 300 && echoed\)/,
+    "both the transport AND the identity must agree");
+  assert.match(save, /:mr-ok' : ':mr-absent'/,
+    "the attempt trail distinguishes a real activation from a 200 that did nothing");
+  assert.match(save, /\{ epiActivated = false; attempts\.push\(how \+ ':no-epi'\); \}/,
+    "no episode means no activation, never a stale true from a previous candidate");
+});
+
+test("CREATE: the ids go out EXACTLY as the form gave them — empty for a new record", () => {
+  /* THE PAYLOAD FLIP (live capture, 2026-08-26, docs/ghis/captured-initial-assessment-write.md).
+   *
+   * This file used to fill both ids in whenever the form omitted them, justified in a comment
+   * asserting that posting them set "is exactly how GHIS's own form creates the first assessment
+   * for a visit". The capture shows the opposite: the real UI posts
+   *     assessment.Initial_Assessment_doc_id=0
+   *     assessment.episode_id=
+   *     assessment.patient_id=
+   * and GHIS answers 200, resolving the target from the active visit in its session. Every create
+   * we sent therefore deviated from the only payload known to work. */
+  const save = GHIS.slice(GHIS.indexOf("export async function saveAssessment"), GHIS.indexOf("export async function onRequest"));
+  assert.ok(!/all\['assessment\.patient_id'\] = String\(body\.patientId\)/.test(save),
+    "the patient id must no longer be invented when the form left it blank");
+  assert.ok(!/all\['assessment\.episode_id'\] = String\(attachTo\)/.test(save),
+    "nor the episode id");
+  assert.match(save, /all\['assessment\.patient_id'\] = ''/, "an absent patient id is sent as empty");
+  assert.match(save, /all\['assessment\.episode_id'\] = ''/, "an absent episode id is sent as empty");
+});
+
+test("UPDATE is untouched: a form that HAS the ids still passes them through", () => {
+  /* The flip must only affect the create path. On an update the form supplies the real ids and
+   * overwriting them with a stale client value is what made GHIS answer "Unable to process". */
+  const save = GHIS.slice(GHIS.indexOf("export async function saveAssessment"), GHIS.indexOf("export async function onRequest"));
+  // Both writes are guarded on the field being ABSENT, so a populated form value survives.
+  assert.match(save, /if \(!all\['assessment\.patient_id'\]\) all\['assessment\.patient_id'\] = ''/);
+  assert.match(save, /if \(!all\['assessment\.episode_id'\]\) all\['assessment\.episode_id'\] = ''/);
+  assert.match(save, /if \(!all\['assessment\.Initial_Assessment_doc_id'\] && body\.docId/,
+    "the doc id keeps its client fallback — that one IS still read back from the form");
+});
+
+test("the patient-mismatch abort still fires, and still runs BEFORE the payload is built", () => {
+  // The one guard that stops a write landing on another patient's chart. Emptying the ids must not
+  // have moved or weakened it.
+  const save = GHIS.slice(GHIS.indexOf("export async function saveAssessment"), GHIS.indexOf("export async function onRequest"));
+  assert.match(save, /patient_mismatch: loaded form for/);
+  assert.ok(save.indexOf("patient_mismatch") < save.indexOf("all['assessment.patient_id'] = ''"),
+    "the mismatch check reads the form's own patient_id before anything is normalised away");
+});
+
+test("CREATE: the response says whether it created or updated", () => {
+  const save = GHIS.slice(GHIS.indexOf("export async function saveAssessment"), GHIS.indexOf("export async function onRequest"));
+  assert.match(save, /const mode = \(formDoc && String\(formDoc\) !== '0'\) \|\| clientDoc \? 'update' : 'create'/);
+});
+
+test("REFUSAL still stands when there is nothing to attach to", () => {
+  const save = GHIS.slice(GHIS.indexOf("export async function saveAssessment"), GHIS.indexOf("export async function onRequest"));
+  assert.match(save, /no_active_assessment: form doc_id is 0/, "no patient/visit -> still refused, no orphan");
+});
+
+/* ---- Sign-off from the queue ------------------------------------------------------------------
+ * Before this, the ONLY way to finish a consult after saving was a swipe control in the post-save
+ * panel — easy to miss, and not named for what the doctor is doing. */
+test("AUTHORISE: an explicit sign-off button appears once the note is saved", () => {
+  const panel = OPD.slice(OPD.indexOf("function postConsultPanel"), OPD.indexOf("function oncoTab"));
+  assert.match(panel, /data-oe-act="consult-authorise"/, "the button exists in the post-save panel");
+  assert.match(panel, /Authorise &amp; sign off/);
+  assert.match(panel, /oe-swipe/, "the original swipe still works — this is additive");
+});
+
+/* The real GHIS action, read off the live form rather than guessed:
+ *   <button name="ButtonType" value="true" onclick="signOff1('20015')">Authorize</button>
+ *   signOff1 -> POST ./Home/signoffinitialAssessmentnew {__RequestVerificationToken, id:<doc_id>}
+ *   success when the response body is "Successfully signed off"
+ * I had previously reported GHIS has no authorise action — wrong: /assessment truncates the page to
+ * 8000 chars of tag-stripped text and the buttons sit at the end of a 355KB page. */
+/* The intended model, in the owner's words: "Save to GHIS for only editable save, and once he saves
+ * it the Authorise button appears for locked permanent save." GHIS enforces the lock — after sign-off
+ * the form renders read-only — so the app must mirror it rather than let a doctor edit a record that
+ * can no longer be written. */
+test("LOCK: the server reports whether the record is already authorised", () => {
+  assert.match(GHIS, /Authori\[sz\]ed\\s\+on\\s\+/, "parsed from GHIS's own 'Authorized on … by …' stamp");
+  assert.match(GHIS, /authorized: authorized/, "and returned with the form");
+});
+
+test("LOCK: three states — draft saves, saved offers Authorise, authorised offers neither", () => {
+  const bar = OPD.slice(OPD.indexOf("var lock = st.assessAuthorized"), OPD.indexOf("return consultBar(st)"));
+  assert.match(bar, /if \(lock\)/, "authorised renders the locked bar");
+  assert.match(bar, /oe-savebar locked/);
+  assert.match(bar, /Authorised/, "…naming who signed it off and when");
+  assert.match(bar, /oeDocId\(\)\)\s*\n?\s*\? '<button class="oe-btn authorise"/,
+    "Authorise appears on a SAVED record — by doc id, so reopening an earlier note still offers it");
+});
+
+test("LOCK: saving an authorised record is refused with an explanation", () => {
+  const fn = OPD.slice(OPD.indexOf("function submitAssessment"), OPD.indexOf("function clearAssessment"));
+  assert.match(fn, /if \(st\.assessAuthorized\)/, "blocked before the request");
+  assert.match(fn, /authorised and locked/, "and the doctor is told why, not shown a failure");
+});
+
+test("LOCK: authorising is spelled out as irreversible, and re-authorising is blocked", () => {
+  const fn = OPD.slice(OPD.indexOf("function authoriseConsult"), OPD.indexOf("function endConsult"));
+  assert.match(fn, /already authorised/, "no double sign-off");
+  assert.match(fn, /Save the assessment first/, "and nothing to sign off before a save");
+  assert.match(fn, /LOCKED/, "the confirm says plainly that it cannot be edited afterwards");
+  assert.match(fn, /st\.assessAuthorized = \{/, "the lock is reflected immediately on success");
+});
+
+test("AUTHORISE: the server calls GHIS's real sign-off endpoint", () => {
+  assert.match(GHIS, /signoffinitialAssessmentnew/, "the exact URL signOff1 posts to");
+  const fn = GHIS.slice(GHIS.indexOf("export async function authorizeAssessment"), GHIS.indexOf("const json = (obj, status = 200)"));
+  assert.match(fn, /'__RequestVerificationToken=' \+ encodeURIComponent\(csrf\) \+ '&id=' \+ encodeURIComponent\(docId\)/, "same payload shape");
+  assert.match(fn, /successfully\\s\+signed\\s\*off/, "keyed on GHIS's own success string");
+  assert.match(fn, /Searchnew[\s\S]{0,400}?'Cookie': cookie/, "activates the visit and threads the cookie, like the save");
+});
+
+test("AUTHORISE: never signs off a record that was never saved", () => {
+  const fn = GHIS.slice(GHIS.indexOf("export async function authorizeAssessment"), GHIS.indexOf("const json = (obj, status = 200)"));
+  assert.match(fn, /if \(!docId\) return \{ ok: false, status: 409, resp: 'no_saved_assessment/,
+    "doc_id 0 would sign off nothing");
+  assert.match(fn, /patient_mismatch/, "and the wrong-patient guard applies here too");
+});
+
+test("AUTHORISE: the route is write-gated like the save", () => {
+  assert.match(GHIS, /seg === 'assessment-authorize' && request\.method === 'POST'[\s\S]{0,120}emrWriteEnabled\(env\)/,
+    "authorising is a clinical record write");
+});
+
+test("AUTHORISE: the consult finishes only after GHIS confirms", () => {
+  // Sliced from the GHIS-specific body (after the 2026-09-06 WardSynQ-native early-return branch,
+  // which has its own postWrite-free endConsult() call and would otherwise confuse this ordering check).
+  const fn = OPD.slice(OPD.indexOf("if (!oeDocId())"), OPD.indexOf("function endConsult"));
+  assert.match(fn, /postWrite\("\/assessment-authorize"/, "calls the endpoint");
+  assert.match(fn, /endConsult\(\)/, "…and ends the consult in the success callback");
+  assert.ok(fn.indexOf("endConsult()") > fn.indexOf("postWrite"),
+    "a failed authorise must never silently advance the queue");
+});
+
+test("AUTHORISE: it confirms, then ends the consult so the queue advances", () => {
+  const fn = OPD.slice(OPD.indexOf("function authoriseConsult"), OPD.indexOf("function endConsult"));
+  assert.match(fn, /confirmed\(/, "signing off is deliberate, never a stray tap");
+  assert.match(fn, /endConsult\(\)/, "…and ends the consult, which queue.js turns into /advance");
+  assert.match(OPD, /if \(cmd === "consult-authorise"\) return authoriseConsult\(\)/, "the action is routed");
+});
+
+test("AUTHORISE: queue.js still advances on the consult-end event", () => {
+  const Q = readFileSync(new URL("../queue.js", import.meta.url), "utf8");
+  assert.match(Q, /smd:consult-end[\s\S]{0,120}\/advance/, "the sign-off actually moves the queue on");
 });
 
 test("the doctor still gets a plain sentence, with the trace appended for diagnosis", () => {

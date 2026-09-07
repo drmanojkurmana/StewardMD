@@ -1753,6 +1753,7 @@
         }
       ],
       "media": [
+        "media.vid.neuroexam",
         "media.vid.tonepower"
       ],
       "sources": [
@@ -3580,6 +3581,922 @@
         {
           "source": "Harrison's Principles of Internal Medicine",
           "locator": "Ataxic disorders"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.hx.neuro.weakness": {
+      "id": "skill.hx.neuro.weakness",
+      "kind": "history",
+      "system": "neurology",
+      "title": "Weakness",
+      "oneLine": "What can you no longer do, and how fast did it happen",
+      "why": "Asking a patient to grade their own power is useless. Asking what they can no longer do localises the weakness to proximal or distal muscles before you touch them, and the speed of onset narrows the cause almost as sharply as imaging.",
+      "asks": [
+        {
+          "text": "What can you not do now that you could do a month ago? Let them answer freely first."
+        },
+        {
+          "text": "Can you comb your hair, or reach something from a high shelf?"
+        },
+        {
+          "text": "Can you get up from a chair or from squatting without using your hands?"
+        },
+        {
+          "text": "Can you button a shirt, open a jar, or turn a key?"
+        },
+        {
+          "text": "Do your chappals slip off, or do you catch your toes on the ground?"
+        },
+        {
+          "text": "Did it come on in seconds, over days, or over months?"
+        },
+        {
+          "text": "Was it worst at the very beginning, or has it been getting worse?"
+        },
+        {
+          "text": "Did it start in the legs and move up, or in the arms and move down?"
+        },
+        {
+          "text": "Is it worse at the end of the day, or after using the muscle?"
+        },
+        {
+          "text": "Any numbness, tingling, or trouble passing urine?"
+        },
+        {
+          "text": "Are you more breathless lying flat? Can you count to twenty in one breath?"
+        },
+        {
+          "text": "Any change in your voice, or choking on food or drink?"
+        }
+      ],
+      "teach": [
+        {
+          "heading": "Grade it by task, not by number",
+          "body": "Each everyday task maps onto a muscle group, so the answer localises the lesion. This is also the only grading a patient can give reliably, and the only one that can be repeated at the next visit to see whether they are worse.",
+          "table": {
+            "cols": [
+              "Cannot do",
+              "Muscle group",
+              "Pattern"
+            ],
+            "rows": [
+              [
+                "Comb hair, reach a high shelf",
+                "Shoulder girdle",
+                "Proximal upper limb"
+              ],
+              [
+                "Button a shirt, open a jar, turn a key",
+                "Hand and forearm",
+                "Distal upper limb"
+              ],
+              [
+                "Rise from a chair or from squatting",
+                "Pelvic girdle",
+                "Proximal lower limb"
+              ],
+              [
+                "Keep chappals on, walk on heels, clears the toes",
+                "Ankle dorsiflexors",
+                "Distal lower limb, foot drop"
+              ],
+              [
+                "Hold the head up",
+                "Neck extensors",
+                "Dropped head"
+              ],
+              [
+                "Roll over in bed",
+                "Trunk",
+                "Axial"
+              ]
+            ]
+          },
+          "note": "Symmetrical PROXIMAL weakness is muscle until proven otherwise. Symmetrical DISTAL weakness is nerve until proven otherwise."
+        },
+        {
+          "heading": "Speed of onset narrows the cause",
+          "table": {
+            "cols": [
+              "Onset",
+              "Suggests"
+            ],
+            "rows": [
+              [
+                "Seconds to minutes, maximal at onset, then static",
+                "Vascular: infarct or haemorrhage"
+              ],
+              [
+                "Hours to days, ascending",
+                "Guillain-Barre syndrome. Ask about BREATHING and SWALLOWING at once: it kills through neuromuscular respiratory failure and aspiration"
+              ],
+              [
+                "Days to weeks",
+                "Inflammatory, infective, or compressive"
+              ],
+              [
+                "Weeks to months, progressive",
+                "Tumour, degenerative, or chronic inflammatory"
+              ],
+              [
+                "Fluctuating, worse with use and at day's end",
+                "Neuromuscular junction, as in myasthenia"
+              ],
+              [
+                "Sudden flaccid quadriparesis, often on waking, sparing breathing and swallowing",
+                "Hypokalaemic periodic paralysis. Check potassium; may be thyrotoxic or from renal tubular acidosis. Immediately treatable"
+              ]
+            ]
+          },
+          "note": "Weakness that is maximal at the moment of onset and does not progress is the signature of an embolic event."
+        },
+        {
+          "heading": "Distribution answers 'where', before the examination does",
+          "points": [
+            {
+              "t": "One side, face and limbs together.",
+              "d": "Above the foramen magnum, contralateral hemisphere."
+            },
+            {
+              "t": "Both legs, with a sensory level and bladder involvement.",
+              "d": "Spinal cord. Ask about the level and the sphincters every time."
+            },
+            {
+              "t": "Ascending from the feet, symmetrical, with areflexia.",
+              "d": "Polyradiculopathy."
+            },
+            {
+              "t": "One nerve territory, with a clear edge.",
+              "d": "Mononeuropathy, so ask about entrapment, injury and diabetes."
+            }
+          ]
+        },
+        {
+          "heading": "Ascending weakness: the two questions that decide the bed",
+          "body": "In Guillain-Barre syndrome the limbs are what the patient notices and the diaphragm is what kills them. Breathlessness lying flat, a single breath count under twenty, a nasal voice or choking on liquids all mean the patient needs monitoring in a place that can ventilate, before any of it shows on a saturation probe.",
+          "note": "Oxygen saturation falls LATE in neuromuscular respiratory failure. Do not use it to reassure yourself."
+        }
+      ],
+      "pitfalls": [
+        "Asking the patient to rate their strength instead of asking what they cannot do.",
+        "Not asking about the bladder in a patient with weakness of both legs.",
+        "Missing the fatigable pattern of myasthenia by not asking about the end of the day.",
+        "Recording weakness without a time course, which is half the diagnosis.",
+        "Watching the limbs in ascending weakness and not asking about breathing and swallowing.",
+        "Missing hypokalaemic periodic paralysis, which is common in India and reverses with potassium."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "A patient cannot rise from a chair without using their hands but can button a shirt. Where is the weakness?",
+          "a": "Proximal lower limb, the pelvic girdle. Distal hand function is intact.",
+          "accept": [
+            "proximal",
+            "pelvic",
+            "girdle"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "Why does symmetrical proximal weakness point to muscle, and symmetrical distal weakness to nerve?",
+          "a": "Myopathies affect the large proximal girdle muscles earliest. Length-dependent polyneuropathies affect the longest axons first, so the feet and hands go before the girdles.",
+          "accept": [
+            "myopath",
+            "muscle",
+            "length",
+            "axon",
+            "polyneuropath"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "Weakness maximal at the instant of onset, unchanged since. What does that time course mean, and what does progressive weakness over days suggest instead?",
+          "a": "Maximal at onset and static is vascular, typically embolic, because the insult is complete the moment the vessel occludes. Weakness that progresses over days implies an ongoing process: inflammation, compression, or infiltration.",
+          "accept": [
+            "vascular",
+            "embol",
+            "infarct",
+            "stroke"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [
+        {
+          "id": "function",
+          "text": "Grades weakness by lost tasks rather than by self-rated power"
+        },
+        {
+          "id": "distribution",
+          "text": "Establishes proximal versus distal, and which limbs"
+        },
+        {
+          "id": "tempo",
+          "text": "Establishes speed of onset and whether it progressed"
+        },
+        {
+          "id": "cord",
+          "text": "Asks about sensory level and sphincters when both legs are weak"
+        },
+        {
+          "id": "bulbar",
+          "text": "Asks about breathing and swallowing in ascending weakness"
+        }
+      ],
+      "media": [],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Nervous system: symptomatology"
+        },
+        {
+          "source": "Macleod's Clinical Examination",
+          "locator": "The nervous system: the history"
+        },
+        {
+          "source": "Harrison's Principles of Internal Medicine 22e",
+          "locator": "Neurologic evaluation"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.hx.neuro.headache": {
+      "id": "skill.hx.neuro.headache",
+      "kind": "history",
+      "system": "neurology",
+      "title": "Headache",
+      "oneLine": "Almost all are primary; the history exists to find the few that are not",
+      "why": "Headache is common and imaging is not the answer to it. The history carries the red flags, and the pattern of a primary headache is distinctive enough to diagnose positively rather than by exclusion.",
+      "asks": [
+        {
+          "text": "Is this the first or the worst headache of your life?"
+        },
+        {
+          "text": "How quickly did it reach its peak: instantly, over minutes, or over hours?"
+        },
+        {
+          "text": "How long does an attack last, and how often do they come?"
+        },
+        {
+          "text": "Where is it, and what is it like: throbbing, tight, boring, stabbing?"
+        },
+        {
+          "text": "Is it worse on waking, on coughing, straining or bending forward?"
+        },
+        {
+          "text": "Any nausea, or dislike of light or noise? Do you have to lie in a dark room?"
+        },
+        {
+          "text": "Any visual disturbance, weakness, numbness or speech difficulty before or during?"
+        },
+        {
+          "text": "Any fever, neck stiffness, rash, or recent head injury?"
+        },
+        {
+          "text": "How many days a month do you take painkillers for it?"
+        },
+        {
+          "text": "Any pain in or around one eye with blurred vision, haloes around lights, or vomiting?"
+        }
+      ],
+      "teach": [
+        {
+          "heading": "The red flags, each one a single question",
+          "table": {
+            "cols": [
+              "Red flag",
+              "Concern"
+            ],
+            "rows": [
+              [
+                "Thunderclap: maximal within a minute",
+                "Subarachnoid haemorrhage"
+              ],
+              [
+                "First or worst headache ever",
+                "Secondary cause"
+              ],
+              [
+                "Fever with neck stiffness or rash",
+                "Meningitis"
+              ],
+              [
+                "Worse on waking, coughing, straining or bending",
+                "Raised intracranial pressure"
+              ],
+              [
+                "New headache over 50, with scalp tenderness or jaw claudication",
+                "Giant cell arteritis"
+              ],
+              [
+                "Progressive over weeks, with focal signs or seizure",
+                "Space-occupying lesion"
+              ],
+              [
+                "New headache in pregnancy or immunosuppression",
+                "Pre-eclampsia and eclampsia, cerebral venous thrombosis, infection. Check the blood pressure and urine"
+              ],
+              [
+                "Unilateral eye pain, red eye, haloes, blurred vision, vomiting",
+                "ACUTE ANGLE-CLOSURE GLAUCOMA: blinds the eye in hours"
+              ],
+              [
+                "Head injury, even weeks earlier, in the elderly, anticoagulated or heavy drinker",
+                "Chronic subdural haematoma"
+              ]
+            ]
+          },
+          "note": "Thunderclap onset is defined by the SPEED of reaching peak intensity, not by severity. A headache that took an hour to build is not thunderclap however severe it became."
+        },
+        {
+          "heading": "Diagnose the primary headaches positively",
+          "table": {
+            "cols": [
+              "Feature",
+              "Migraine",
+              "Tension type",
+              "Cluster"
+            ],
+            "rows": [
+              [
+                "Duration",
+                "4 to 72 hours",
+                "30 minutes to days",
+                "15 to 180 minutes"
+              ],
+              [
+                "Site",
+                "Often unilateral",
+                "Bilateral, band-like",
+                "Strictly around one eye"
+              ],
+              [
+                "Character",
+                "Throbbing",
+                "Tight, pressing",
+                "Boring, excruciating"
+              ],
+              [
+                "Movement",
+                "Worse; patient lies still",
+                "No change",
+                "Restless, paces about"
+              ],
+              [
+                "Autonomic features",
+                "Usually not, though cranial autonomic symptoms occur in a substantial minority",
+                "No",
+                "Tearing, red eye, blocked nostril, ptosis"
+              ]
+            ]
+          },
+          "note": "Whether the patient lies still or paces is a genuinely useful discriminator: migraine keeps them still, cluster makes them restless. Beware the cluster mimic: unilateral periorbital pain with a RED EYE may be acute angle-closure glaucoma, which needs an eye pressure measured, not a triptan."
+        },
+        {
+          "heading": "The one that is created by treatment",
+          "body": "Medication overuse headache is a daily or near-daily headache in someone taking acute treatment too often, for more than three months. The threshold depends on the drug: 15 or more days a month for simple analgesics such as paracetamol, aspirin or an NSAID, but only 10 or more days a month for triptans, ergots, opioids and combination analgesics. Ask the number of days a month, not whether they take painkillers. Escalating the analgesia makes it worse."
+        }
+      ],
+      "pitfalls": [
+        "Judging thunderclap by severity rather than by time to peak.",
+        "Imaging a classical migraine while not asking about analgesic days per month.",
+        "Missing giant cell arteritis in a new headache over 50 by not asking about scalp tenderness and jaw claudication.",
+        "Attributing headache worse on waking to stress without asking about cough and straining.",
+        "Using one analgesic threshold for every drug; triptans and opioids overuse at 10 days a month, not 15.",
+        "Diagnosing cluster headache in a red painful eye without excluding acute angle-closure glaucoma."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What defines a thunderclap headache?",
+          "a": "Reaching maximum intensity within about a minute of onset. The defining feature is speed, not severity.",
+          "accept": [
+            "minute",
+            "peak",
+            "sudden",
+            "speed",
+            "instant"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "Why does headache from raised intracranial pressure worsen on waking, coughing and bending?",
+          "a": "All three raise intracranial pressure further: overnight recumbency and hypercapnia increase cerebral blood volume, and coughing or bending raise venous and intrathoracic pressure, which is transmitted to the cranial cavity.",
+          "accept": [
+            "intracranial",
+            "venous",
+            "recumben",
+            "pressure",
+            "co2",
+            "hypercap"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "A patient with unilateral periorbital pain lasting an hour, several times a day, who paces the room with a red watering eye. Diagnosis, and which feature separates it from migraine?",
+          "a": "Cluster headache. The cranial autonomic features, tearing, conjunctival injection, nasal blockage and ptosis, together with restless agitation, distinguish it. A migraine sufferer lies still in the dark and the attack lasts hours to days.",
+          "accept": [
+            "cluster",
+            "autonomic",
+            "restless",
+            "tearing"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [
+        {
+          "id": "tempo",
+          "text": "Establishes time to peak intensity"
+        },
+        {
+          "id": "redflags",
+          "text": "Runs the red flag list"
+        },
+        {
+          "id": "pattern",
+          "text": "Characterises duration, site, character and behaviour during an attack"
+        },
+        {
+          "id": "overuse",
+          "text": "Quantifies analgesic days per month"
+        }
+      ],
+      "media": [],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Nervous system: symptomatology"
+        },
+        {
+          "source": "Macleod's Clinical Examination",
+          "locator": "The nervous system: the history"
+        },
+        {
+          "source": "Harrison's Principles of Internal Medicine 22e",
+          "locator": "Neurologic evaluation"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.hx.neuro.seizure": {
+      "id": "skill.hx.neuro.seizure",
+      "kind": "history",
+      "system": "neurology",
+      "title": "Seizures and blackouts",
+      "oneLine": "Before, during and after, taken from the patient and from whoever watched",
+      "why": "The patient cannot describe the part of the event that matters, because they were unconscious for it. A seizure history is really two histories, and without the witness it is usually guesswork.",
+      "asks": [
+        {
+          "text": "Is the patient still fitting, or did they recover fully between events? Time it."
+        },
+        {
+          "text": "What is the last thing you remember before it, and the first thing after?"
+        },
+        {
+          "text": "Any warning: a smell, a taste, a rising feeling in the stomach, deja vu?"
+        },
+        {
+          "text": "Ask the witness. Did the eyes stay open? Was there stiffening then jerking, and for how long?"
+        },
+        {
+          "text": "Did the jerking involve one side or both, and did it start in one place and spread?"
+        },
+        {
+          "text": "Was the tongue bitten, and where? Ask them to show you."
+        },
+        {
+          "text": "Any incontinence of urine?"
+        },
+        {
+          "text": "How long before you were back to normal: seconds, or half an hour of confusion?"
+        },
+        {
+          "text": "Any aching muscles, headache, or injury afterwards?"
+        },
+        {
+          "text": "Any sleep deprivation, alcohol, missed medication, fever, or flashing lights beforehand?"
+        },
+        {
+          "text": "Has anyone checked a blood sugar? If not, do it now."
+        }
+      ],
+      "teach": [
+        {
+          "heading": "Two things before the history: is it still going, and what is the glucose?",
+          "body": "A history is taken from a patient who has stopped fitting. If they have not stopped, the history waits.",
+          "points": [
+            {
+              "t": "Five minutes.",
+              "d": "A convulsive seizure lasting five minutes or more, OR repeated seizures without full recovery of consciousness between them, is convulsive status epilepticus. It needs a benzodiazepine now, not observation."
+            },
+            {
+              "t": "Capillary glucose in EVERY seizure and every blackout.",
+              "d": "Hypoglycaemia is a fully reversible cause that is missed by taking a history instead of a reading. It costs seconds."
+            },
+            {
+              "t": "Then the reversible rest.",
+              "d": "Sodium, calcium, magnesium; pregnancy, because eclampsia can present with a first seizure and needs magnesium and delivery, not an anticonvulsant."
+            }
+          ],
+          "note": "Status epilepticus is defined by the CLOCK, not by how dramatic it looks. Note the time the seizure started; nobody remembers it afterwards."
+        },
+        {
+          "heading": "The three-part structure",
+          "body": "Take it as before, during and after. The before belongs to the patient, the during belongs to the witness, and the after is the most discriminating part of the whole history.",
+          "table": {
+            "cols": [
+              "Phase",
+              "Seizure",
+              "Syncope"
+            ],
+            "rows": [
+              [
+                "Before",
+                "Aura: smell, taste, rising epigastric sensation, deja vu",
+                "Nausea, sweating, tunnel vision, or nothing"
+              ],
+              [
+                "During",
+                "Stiffening then rhythmic jerking, over a minute; eyes open",
+                "Limp and pale; brief irregular jerks possible"
+              ],
+              [
+                "After",
+                "Confusion for minutes to an hour, drowsiness, headache",
+                "Oriented within seconds"
+              ],
+              [
+                "Tongue",
+                "Bitten laterally",
+                "Not bitten, or tip only"
+              ],
+              [
+                "Posture",
+                "Any, including asleep",
+                "Usually upright"
+              ]
+            ]
+          },
+          "note": "The lateral tongue bite and prolonged post-event confusion are the two features that most reliably indicate a seizure. Incontinence occurs in both and separates nothing."
+        },
+        {
+          "heading": "Focal onset matters more than the convulsion",
+          "body": "Ask whether the jerking began in one limb or one side of the face and spread. A focal onset localises the lesion and changes the investigation, and it is frequently lost because everybody describes the generalised part that followed. A period of weakness in the affected limb afterwards, lasting minutes to hours, supports a focal onset."
+        },
+        {
+          "heading": "Provocation, and what it changes",
+          "points": [
+            {
+              "t": "Hypoglycaemia.",
+              "d": "Check it in every case. Reversible in minutes."
+            },
+            {
+              "t": "Hyponatraemia, hypocalcaemia, hypomagnesaemia.",
+              "d": "Treat the cause, not the seizure."
+            },
+            {
+              "t": "Pregnancy or the postpartum period.",
+              "d": "Eclampsia. Magnesium sulphate, and obstetric help."
+            },
+            {
+              "t": "Sleep deprivation, alcohol excess or withdrawal, missed doses.",
+              "d": "Provoked. Address the provocation rather than escalating drugs."
+            },
+            {
+              "t": "Fever in a child.",
+              "d": "Febrile convulsion has its own age range and pattern."
+            },
+            {
+              "t": "Head injury, recent or remote.",
+              "d": "Both matter; ask about a remote one specifically."
+            },
+            {
+              "t": "First seizure over 40 with no provocation.",
+              "d": "Look for a structural cause."
+            }
+          ]
+        }
+      ],
+      "pitfalls": [
+        "Taking a history while the patient is still convulsing, instead of timing it and treating status.",
+        "Not checking a capillary glucose in a seizure or a blackout.",
+        "Taking the history only from the patient, who was unconscious for the important part.",
+        "Using incontinence to distinguish seizure from syncope; it does not.",
+        "Missing a focal onset because the witness described only the generalised phase.",
+        "Not asking where the tongue was bitten, when the side is what matters."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "How long must a convulsive seizure last before it is status epilepticus, and what else counts?",
+          "a": "Five minutes or more. Repeated seizures without full recovery of consciousness in between also count, even if each one is shorter.",
+          "accept": [
+            "5",
+            "five",
+            "minute",
+            "recover"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 1,
+          "q": "Which two features best separate a seizure from a faint?",
+          "a": "A lateral tongue bite, and prolonged post-event confusion. Incontinence and brief jerking occur in both.",
+          "accept": [
+            "tongue",
+            "confus",
+            "lateral",
+            "post-ictal",
+            "postictal"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "Why does a focal onset change the investigation even when the seizure generalises?",
+          "a": "Focal onset implies a structural or localised cortical origin, which directs imaging to that region and raises the likelihood of a lesion, whereas a primarily generalised seizure suggests a different mechanism.",
+          "accept": [
+            "structur",
+            "focal",
+            "lesion",
+            "localis",
+            "localiz",
+            "imaging"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "A witness reports jerking of the right arm spreading to the face, then a generalised convulsion, with right arm weakness for two hours afterwards. What does the post-event weakness indicate?",
+          "a": "A Todd's paresis: transient weakness of the limb involved at the focal onset, following exhaustion of the epileptogenic cortex. It confirms a focal onset in the contralateral, in this case left, motor cortex.",
+          "accept": [
+            "todd",
+            "focal",
+            "postictal",
+            "post-ictal",
+            "motor cortex"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [
+        {
+          "id": "status",
+          "text": "Times the seizure and recognises status epilepticus at five minutes"
+        },
+        {
+          "id": "glucose",
+          "text": "Checks a capillary glucose"
+        },
+        {
+          "id": "witness",
+          "text": "Obtains a witness account of the event itself"
+        },
+        {
+          "id": "focal",
+          "text": "Asks whether there was a focal onset and any subsequent limb weakness"
+        },
+        {
+          "id": "after",
+          "text": "Establishes the recovery period and any confusion"
+        },
+        {
+          "id": "provocation",
+          "text": "Asks about sleep, alcohol, missed doses and fever"
+        }
+      ],
+      "media": [],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Nervous system: symptomatology"
+        },
+        {
+          "source": "Macleod's Clinical Examination",
+          "locator": "The nervous system: the history"
+        },
+        {
+          "source": "Harrison's Principles of Internal Medicine 22e",
+          "locator": "Neurologic evaluation"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.hx.neuro.vertigo": {
+      "id": "skill.hx.neuro.vertigo",
+      "kind": "history",
+      "system": "neurology",
+      "title": "Dizziness and vertigo",
+      "oneLine": "Make them describe it without the word dizzy, then time it",
+      "why": "Dizziness means four different things to four patients. Until you know which one, the differential spans the ear, the heart, the brainstem and anxiety. The duration of an attack then separates the causes of true vertigo more reliably than any bedside test.",
+      "asks": [
+        {
+          "text": "Describe it without using the word dizzy. What actually happens?"
+        },
+        {
+          "text": "Does the room spin, or do you feel faint, or unsteady on your feet?"
+        },
+        {
+          "text": "How long does one attack last: seconds, minutes, hours, or days?"
+        },
+        {
+          "text": "Does it come on when you turn over in bed or look up?"
+        },
+        {
+          "text": "Any hearing loss, ringing, or fullness in one ear?"
+        },
+        {
+          "text": "Any double vision, slurred speech, numbness, weakness or difficulty swallowing?"
+        },
+        {
+          "text": "Any recent viral illness, or new medicines?"
+        },
+        {
+          "text": "Does it happen on standing up from sitting or lying?"
+        },
+        {
+          "text": "Can you stand and walk unaided right now? Ask them to try, with someone alongside."
+        },
+        {
+          "text": "Any streptomycin, gentamicin or amikacin, now or in the past?"
+        }
+      ],
+      "teach": [
+        {
+          "heading": "Four different symptoms wearing one word",
+          "table": {
+            "cols": [
+              "What they describe",
+              "Means",
+              "Look at"
+            ],
+            "rows": [
+              [
+                "The room spins or I spin",
+                "True vertigo",
+                "Vestibular: ear or brainstem"
+              ],
+              [
+                "I feel I will faint",
+                "Presyncope",
+                "Cardiovascular"
+              ],
+              [
+                "I am unsteady on my feet",
+                "Disequilibrium",
+                "Cerebellum, proprioception, vision, gait"
+              ],
+              [
+                "Light-headed, floating, unreal",
+                "Non-specific",
+                "Anxiety, hyperventilation, drugs"
+              ]
+            ]
+          },
+          "note": "Getting this first split right removes three quarters of the differential in one question."
+        },
+        {
+          "heading": "For true vertigo, duration is the discriminator",
+          "table": {
+            "cols": [
+              "Attack lasts",
+              "Suggests",
+              "Clue"
+            ],
+            "rows": [
+              [
+                "Seconds, on head movement",
+                "Benign paroxysmal positional vertigo",
+                "Turning in bed, looking up"
+              ],
+              [
+                "Minutes to hours, with hearing loss and tinnitus",
+                "Meniere disease",
+                "Aural fullness"
+              ],
+              [
+                "Days, constant, after a viral illness",
+                "Vestibular neuritis",
+                "Hearing preserved"
+              ],
+              [
+                "Days, with hearing loss",
+                "Labyrinthitis",
+                "Hearing affected"
+              ],
+              [
+                "Sudden, with brainstem symptoms",
+                "Central: stroke or TIA",
+                "Diplopia, dysarthria, dysphagia, ataxia"
+              ],
+              [
+                "Recurrent, with migrainous headache, photophobia or aura",
+                "Vestibular migraine",
+                "Headache history; attacks may occur without headache"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Peripheral or central",
+          "body": "Peripheral vertigo is usually more violent, with prominent nausea and vomiting, and it fatigues on repetition. Central vertigo may be milder but often comes with company: double vision, dysarthria, dysphagia, facial numbness, limb ataxia or a new headache. BUT ISOLATED VERTIGO DOES NOT EXCLUDE A STROKE: a substantial minority of cerebellar and lateral medullary infarcts present as an acute vestibular syndrome with no other brainstem sign at all.",
+          "note": "The most useful single bedside test is whether they can STAND AND WALK UNAIDED. Truncal ataxia out of proportion to the vertigo is a cerebellar stroke until proven otherwise, however mild the spinning feels. Direction-changing nystagmus and vascular risk factors point the same way; HINTS is the referral-grade discriminator."
+        }
+      ],
+      "pitfalls": [
+        "Accepting the word dizzy without making the patient describe it.",
+        "Not timing a single attack, which is what separates the causes of vertigo.",
+        "Assuming severity indicates a peripheral cause and mildness a benign one.",
+        "Missing the brainstem symptoms that make it central.",
+        "Taking isolated vertigo as proof of a peripheral cause, and not testing gait.",
+        "Not asking about aminoglycosides, which are still used in injectable anti-tuberculous regimens."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Vertigo lasting seconds, brought on by turning over in bed. Diagnosis?",
+          "a": "Benign paroxysmal positional vertigo, from otoconia displaced into a semicircular canal.",
+          "accept": [
+            "bppv",
+            "positional",
+            "benign paroxysmal",
+            "otoconi",
+            "canal"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "Which features move vertigo from peripheral to central, regardless of severity?",
+          "a": "Accompanying brainstem or cerebellar symptoms: diplopia, dysarthria, dysphagia, facial or limb numbness, limb ataxia, or a new headache. Their presence outweighs how violent the vertigo feels.",
+          "accept": [
+            "diplopia",
+            "dysarthr",
+            "dysphag",
+            "ataxia",
+            "brainstem",
+            "cerebell"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "Why does episodic vertigo with fluctuating hearing loss and aural fullness suggest Meniere disease rather than BPPV?",
+          "a": "Meniere disease involves endolymphatic hydrops affecting the cochlea as well as the vestibular apparatus, so hearing symptoms accompany attacks lasting minutes to hours. BPPV is purely mechanical displacement within a canal, lasts seconds, is triggered by position, and never affects hearing.",
+          "accept": [
+            "hydrops",
+            "cochlea",
+            "endolymph",
+            "hearing"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [
+        {
+          "id": "define",
+          "text": "Makes the patient describe the sensation without the word dizzy"
+        },
+        {
+          "id": "duration",
+          "text": "Times a single attack"
+        },
+        {
+          "id": "aural",
+          "text": "Asks about hearing loss, tinnitus and aural fullness"
+        },
+        {
+          "id": "central",
+          "text": "Screens for brainstem and cerebellar symptoms"
+        }
+      ],
+      "media": [],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Nervous system: symptomatology"
+        },
+        {
+          "source": "Macleod's Clinical Examination",
+          "locator": "The nervous system: the history"
+        },
+        {
+          "source": "Harrison's Principles of Internal Medicine 22e",
+          "locator": "Neurologic evaluation"
         }
       ],
       "review": {

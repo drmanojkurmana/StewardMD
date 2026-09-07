@@ -1,0 +1,116 @@
+{
+  "id": "pathology",
+  "programmeType": "PG",
+  "degree": "MD",
+  "specialty": "Pathology",
+  "durationMonths": 36,
+  "version": "2026-08-27",
+  "extends": [
+    "_pgmer-common",
+    "_revised-2022-common"
+  ],
+  "source": {
+    "title": "Guidelines for Competency Based Postgraduate Training Programme for MD in Pathology (revised)",
+    "publisher": "National Medical Commission",
+    "year": 2022,
+    "url": "https://www.nmc.org.in/wp-content/uploads/2022/revised/MD_Pathology_(revised).pdf",
+    "retrieved": "2026-08-27"
+  },
+  "requirements": [
+    {
+      "target": 1,
+      "per": "course",
+      "source": "nmc_curriculum",
+      "mandatoryForExam": false,
+      "id": "pa_research_methodology_6m",
+      "kind": "certification",
+      "label": "Research Methodology course — within six months of the batch commencing",
+      "dueByMonths": 6,
+      "requiresEvidence": true,
+      "match": {
+        "subtype": "research_methodology"
+      },
+      "clause": "K. Course in Research Methodology",
+      "quote": "All postgraduate students shall complete an online course in Research Methodology within six months of the commencement of the batch and generate the online certificate on successful completion of the course.",
+      "note": "STRICTER than PGMER-2023 5.2(xi)(a), which says 'first year'. Both are shown; the module never silently replaces the regulation's deadline with the curriculum's."
+    },
+    {
+      "target": 2,
+      "per": "course",
+      "source": "nmc_curriculum",
+      "mandatoryForExam": true,
+      "id": "pa_exam_conference_presentations",
+      "kind": "research",
+      "label": "At least two presentations at a state or national level conference",
+      "match": {
+        "subtype": "conference_paper"
+      },
+      "clause": "Summative assessment — essential pre-requisites",
+      "quote": "At least two presentations at state/national level conference. One paper (thesis or non-thesis related work) should be published /accepted/publication draft in an indexed journal.",
+      "note": "Pathology accepts STATE level, where General Medicine and Orthopaedics say national."
+    },
+    {
+      "target": 1,
+      "per": "course",
+      "source": "nmc_curriculum",
+      "mandatoryForExam": true,
+      "id": "pa_exam_indexed_publication",
+      "kind": "research",
+      "label": "One paper (thesis or non-thesis work) published, accepted OR in publication draft in an indexed journal",
+      "match": {
+        "subtype": "publication"
+      },
+      "clause": "Summative assessment — essential pre-requisites",
+      "quote": "At least two presentations at state/national level conference. One paper (thesis or non-thesis related work) should be published /accepted/publication draft in an indexed journal.",
+      "note": "A publication DRAFT satisfies this in Pathology; General Medicine and Orthopaedics require published/accepted."
+    },
+    {
+      "target": 1,
+      "per": "course",
+      "source": "nmc_curriculum",
+      "mandatoryForExam": true,
+      "id": "pa_exam_logbook_submitted",
+      "kind": "meta",
+      "label": "Log book of work done submitted, incl. rotation postings, departmental presentations and internal assessment reports",
+      "engine": "report:portfolio",
+      "clause": "Summative assessment — essential pre-requisites",
+      "quote": "Log book of work done during the training period including rotation postings, departmental presentations, and internal assessment reports should be submitted."
+    },
+    {
+      "target": null,
+      "per": "course",
+      "source": "nmc_curriculum",
+      "mandatoryForExam": false,
+      "id": "pa_lab_work",
+      "kind": "academic",
+      "label": "Laboratory bench work / reporting sessions",
+      "match": {
+        "academicType": "laboratory_work"
+      },
+      "clause": "Teaching and learning methods",
+      "quote": "Laboratory work / Bedside clinics … should be coordinated and guided by faculty from the department."
+    },
+    {
+      "target": null,
+      "per": "course",
+      "source": "nmc_curriculum",
+      "mandatoryForExam": false,
+      "id": "pa_lab_reporting",
+      "kind": "procedure",
+      "label": "Laboratory reporting workload",
+      "match": {
+        "roles": [
+          "observed",
+          "assisted",
+          "performed_supervised",
+          "performed_independent"
+        ]
+      },
+      "clause": "Teaching and learning methods",
+      "quote": "Laboratory work / Bedside clinics … should be coordinated and guided by faculty from the department."
+    }
+  ],
+  "procedures": [],
+  "proceduresNote": "No specimen/slide counts in the MD Pathology guidelines. Reporting workload is counted.",
+  "disclaimer": "Requirements are traced to the NMC source named above. A requirement with target null is one the source mandates WITHOUT giving a number — it is counted, never scored against an invented target. This pack does not certify compliance; see NMC_PG_LOGBOOK_REQUIREMENTS.md."
+}

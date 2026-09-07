@@ -1,0 +1,77 @@
+{
+  "id": "psychiatry",
+  "programmeType": "PG",
+  "degree": "MD",
+  "specialty": "Psychiatry",
+  "durationMonths": 36,
+  "version": "2026-08-27",
+  "extends": [
+    "_pgmer-common"
+  ],
+  "source": {
+    "title": "Guidelines for Competency Based Postgraduate Training Programme for MD in Psychiatry (revised)",
+    "publisher": "National Medical Commission",
+    "year": 2022,
+    "url": "https://www.nmc.org.in/wp-content/uploads/2022/revised/MD_Psychiatry_( revised ).pdf",
+    "retrieved": "2026-08-27"
+  },
+  "requirements": [
+    {
+      "target": null,
+      "per": "course",
+      "source": "nmc_curriculum",
+      "mandatoryForExam": false,
+      "id": "ps_logbook",
+      "kind": "meta",
+      "label": "Log book signed by the authorized teacher and Head of Department",
+      "clause": "18. Log book",
+      "quote": "Each student must be asked to present a specified number of cases for clinical discussion, perform procedures/present seminars/review articles from various journals in inter-unit/interdepartmental teaching sessions. They should be entered in a Log Book and signed by the authorized teacher and Head of Department."
+    },
+    {
+      "target": null,
+      "per": "course",
+      "source": "nmc_curriculum",
+      "mandatoryForExam": false,
+      "id": "ps_case_presentation",
+      "kind": "academic",
+      "label": "Cases presented for clinical discussion",
+      "match": {
+        "academicType": "case_presentation"
+      },
+      "clause": "18. Log book",
+      "quote": "Each student must be asked to present a specified number of cases for clinical discussion…",
+      "note": "'a specified number' — specified by the department. Counted, never targeted."
+    },
+    {
+      "target": null,
+      "per": "course",
+      "source": "nmc_curriculum",
+      "mandatoryForExam": false,
+      "id": "ps_seminar",
+      "kind": "academic",
+      "label": "Seminars / review articles presented",
+      "match": {
+        "academicType": "seminar"
+      },
+      "clause": "18. Log book",
+      "quote": "…present seminars/review articles from various journals in inter-unit/interdepartmental teaching sessions."
+    },
+    {
+      "target": null,
+      "per": "course",
+      "source": "nmc_curriculum",
+      "mandatoryForExam": false,
+      "id": "ps_clinical_meeting",
+      "kind": "academic",
+      "label": "Intra- and inter-departmental meetings",
+      "match": {
+        "academicType": "clinical_meeting"
+      },
+      "clause": "17.",
+      "quote": "There should be intra - and inter - departmental meetings for discussing the uncommon / interesting medical problems."
+    }
+  ],
+  "procedures": [],
+  "proceduresNote": "No procedure counts in the MD Psychiatry guidelines.",
+  "disclaimer": "Requirements are traced to the NMC source named above. A requirement with target null is one the source mandates WITHOUT giving a number — it is counted, never scored against an invented target. This pack does not certify compliance; see NMC_PG_LOGBOOK_REQUIREMENTS.md."
+}

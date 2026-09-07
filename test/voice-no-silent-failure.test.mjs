@@ -80,7 +80,14 @@ test("VOICE: the finish flag always clears, so ticks stay quiet afterwards", () 
     "a stuck flag would make every later background hiccup nag the doctor");
 });
 
-test("VOICE: Rx Dictate reports every error code voice.js can emit", () => {
-  [...VOICE.matchAll(/onError\(["']([a-z-]+)["']\)/g)].map((m) => m[1])
-    .forEach((c) => assert.ok(RX.includes('"' + c + '"'), "prescription.js has no message for: " + c));
+test("VOICE: every error code voice.js can emit has a message, in ONE place", () => {
+  // Rx Dictate used to keep its OWN copy of this mapping, so this asserted against prescription.js.
+  // It now opens the shared dictation sheet (SMD_VOICE.openDialog), which owns the copy - the second
+  // copy was exactly the kind of thing that drifts. Assert where the messages actually live now, and
+  // that the Rx pad has not quietly grown a duplicate again.
+  const emitted = [...VOICE.matchAll(/onError\(["']([a-z-]+)["']\)/g)].map((m) => m[1]);
+  assert.ok(emitted.length >= 3, "expected voice.js to emit several error codes");
+  emitted.forEach((c) => assert.match(VOICE, new RegExp('err === "' + c + '"'), "voice.js has no message for: " + c));
+  assert.equal(/RX_VOICE_ERR/.test(RX), false, "prescription.js must not re-declare a second, drifting copy");
+  assert.match(RX, /openDialog\(/, "Rx Dictate must route through the shared sheet that owns the copy");
 });

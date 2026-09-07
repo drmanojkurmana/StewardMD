@@ -62,8 +62,49 @@
     profRef(db, uid).get().then(function (snap) {
       var data = (snap && snap.exists) ? (snap.data() || {}) : {};
       if (data.smdId) { _cache.uid = uid; _cache.smdId = data.smdId; cb && cb(data.smdId); return; }
-      mint(db, uid, getName(), getEmail(), serverTs, 0, cb);
-    }, function () { mint(db, uid, getName(), getEmail(), serverTs, 0, cb); });
+      adoptOrMint(db, uid, getName(), getEmail(), serverTs, cb);
+    }, function () {
+      // A FAILED read is NOT "this user has no ID". Minting here is how a permanent ID changed:
+      // one unreachable-Firestore moment (native cold start, flaky ward wifi) and the user came
+      // back with a brand-new SMD-XXXXXX that overwrote the old one everywhere. Fail closed —
+      // the next ensure() retries and the real ID comes back.
+      cb && cb(null);
+    });
+  }
+
+  // No smdId on the private profile doc. Before minting, look the user up in their own email
+  // index: that pointer survives a lost/unreadable profile doc, so the SAME account gets the SAME
+  // ID back instead of a new one. Only ever adopts a pointer this uid already owns.
+  function adoptOrMint(db, uid, name, email, serverTs, cb) {
+    if (!email) { mint(db, uid, name, email, serverTs, 0, cb); return; }
+    dirRef(db, "e_" + emailHash(email)).get().then(function (d) {
+      var cur = (d && d.exists && d.data) ? (d.data() || {}) : {};
+      if (cur.smdId && cur.uid === uid) {
+        claimProfile(db, uid, cur.smdId, name, serverTs && serverTs(), function (id) {
+          _cache.uid = uid; _cache.smdId = id; cb && cb(id);
+        });
+        return;
+      }
+      mint(db, uid, name, email, serverTs, 0, cb);
+    }, function () {
+      // Same reasoning as above: an unreadable index may be hiding an existing ID.
+      cb && cb(null);
+    });
+  }
+
+  // Write smdId onto users/{uid}/profile/self, but NEVER over one that is already there — two
+  // devices signing in at once both mint, and the loser must adopt the winner's ID rather than
+  // renaming the account. Returns the id that actually stands.
+  function claimProfile(db, uid, smdId, name, ts, cb) {
+    var pr = profRef(db, uid);
+    db.runTransaction(function (tx) {
+      return tx.get(pr).then(function (d) {
+        var cur = (d && d.exists && d.data) ? (d.data() || {}) : {};
+        if (cur.smdId) return cur.smdId;
+        tx.set(pr, { smdId: smdId, name: name, at: ts }, { merge: true });
+        return smdId;
+      });
+    }).then(function (id) { cb(id || smdId); }, function () { cb(smdId); });
   }
 
   function mint(db, uid, name, email, serverTs, attempt, cb) {
@@ -77,24 +118,27 @@
         return smdId;
       });
     }).then(function () {
-      _cache.uid = uid; _cache.smdId = smdId;
-      try { profRef(db, uid).set({ smdId: smdId, name: name, at: ts }, { merge: true }).catch(function () {}); } catch (e) {}
-      // Email-index write is GUARDED: never overwrite an e_{hash} pointer that already belongs to a
-      // DIFFERENT uid (one-email-one-account). Chained before cb so the write order is deterministic.
-      var p = Promise.resolve();
-      if (email) {
-        var eRef = dirRef(db, "e_" + emailHash(email));
-        try {
-          p = db.runTransaction(function (tx) {
-            return tx.get(eRef).then(function (d) {
-              var cur = d && d.exists && d.data ? (d.data() || {}) : {};
-              if (cur.uid && cur.uid !== uid) return;   // owned by another account — leave it alone
-              tx.set(eRef, { uid: uid, name: name, smdId: smdId, at: ts }, { merge: true });
-            });
-          }).catch(function () {});
-        } catch (e) { p = Promise.resolve(); }
-      }
-      p.then(function () { cb && cb(smdId); });
+      // The profile doc decides — if another device minted first, that ID wins and this one is
+      // abandoned (its directory row is an unreferenced orphan, which costs nothing).
+      claimProfile(db, uid, smdId, name, ts, function (finalId) {
+        _cache.uid = uid; _cache.smdId = finalId;
+        // Email-index write is GUARDED: never overwrite an e_{hash} pointer that already belongs to a
+        // DIFFERENT uid (one-email-one-account). Chained before cb so the write order is deterministic.
+        var p = Promise.resolve();
+        if (email) {
+          var eRef = dirRef(db, "e_" + emailHash(email));
+          try {
+            p = db.runTransaction(function (tx) {
+              return tx.get(eRef).then(function (d) {
+                var cur = d && d.exists && d.data ? (d.data() || {}) : {};
+                if (cur.uid && cur.uid !== uid) return;   // owned by another account — leave it alone
+                tx.set(eRef, { uid: uid, name: name, smdId: finalId, at: ts }, { merge: true });
+              });
+            }).catch(function () {});
+          } catch (e) { p = Promise.resolve(); }
+        }
+        p.then(function () { cb && cb(finalId); });
+      });
     }, function () {
       if (attempt < 6) { mint(db, uid, name, email, serverTs, attempt + 1, cb); return; }
       cb && cb(null);

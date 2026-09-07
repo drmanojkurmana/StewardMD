@@ -8,7 +8,7 @@
  *                             clinician is told plainly instead of a paid call being made.
  *   • MaiK Cloud · Pro      — today's pipeline, unchanged: KB grounding → Vertex/Gemini.
  *   • On-device · Beta      — the KB answer, then a local GGUF model on a KB miss. Zero
- *                             tokens, no network. Needs the ~2.5 GB model pack.
+ *                             tokens, no network. Needs the ~2.5 GB model pack. Pro only.
  *
  * Pref: localStorage "stewardmd.maikEngine" ∈ {rag, cloud, local} (default cloud, so an
  * untouched install behaves EXACTLY as before).
@@ -32,7 +32,6 @@
   var KEY_ENGINE = "stewardmd.maikEngine";
   var KEY_LLM_FIRST = "smd_maik_llm_first";      // home.js maikLLMFirst() reads this
   var ENGINES = { rag: 1, cloud: 1, local: 1 };
-  var XA_FEATURE = "maik_local";                 // experimental.js gate, same as fundx/kardiox
   var PACK_ID = "maik-mxcore";
   // The pack the clinician ASKED for that is not installed yet. Kept separate from the ANSWERING
   // pack (SMD_MAIK_MODELS.activePack) on purpose: picking a model to download must never pull the
@@ -64,21 +63,26 @@
   }
 
   // ── is the on-device engine usable right now? ──
-  // Gate (access code) and pack (downloaded) are separate: gated-but-not-downloaded must show a
+  // Entitlement and pack (downloaded) are separate: entitled-but-not-downloaded must show a
   // download row, not disappear.
+  //
+  // PRO IS THE GATE (owner decision, 2026-08-27). The shared experimental access-code gate
+  // (SMD_XACCESS "maik_local") is gone: on-device answering is a paid feature, not a private beta,
+  // so a code must not unlock it for a non-subscriber, and a subscriber must never be asked for
+  // one. SMD_PRO (account.js) is the single source of truth and fails OPEN, which is the right
+  // direction here - a network blip must never lock a paying clinician out of a 2.5 GB model that
+  // is already sitting on their phone.
   function gateActive() {
     // Owner/QA escape hatch, same convention as the NMC verify bypass: lets the on-device engine be
-    // tested on a real device BEFORE the server-side FEATURES entry for maik_local is deployed
-    // (SMD_XACCESS.devBypass only covers non-native, non-prod). Set it in the WebView console:
+    // driven on a device that has no Pro state to read. The device harnesses set it
+    // (test/eval-device-maik-local.mjs, test/drive-device-llama.mjs); by hand, in the WebView console:
     //   localStorage.setItem("smd_maik_local_bypass","1")
     try { if (lget("smd_maik_local_bypass") === "1") return true; } catch (e) {}
-    // A DEVELOPMENT build opens the gate. Without this the feature is unreachable on a device:
-    // SMD_XACCESS needs a server-issued code (the maik_local FEATURES entry is not deployed yet) and
-    // iOS has no JS console to set the bypass by hand. Release builds report debugBuild:false from
-    // the native plugin, so production still requires a code.
+    // A DEVELOPMENT build opens it too, so the feature is reachable on a debug install with no Pro
+    // state and no JS console to set the bypass by hand. Release builds report debugBuild:false
+    // from the native plugin, so production still requires a live subscription.
     try { if (window.SMD_MAIK_LOCAL && window.SMD_MAIK_LOCAL.isDebugBuild && window.SMD_MAIK_LOCAL.isDebugBuild()) return true; } catch (e) {}
-    try { if (window.SMD_XACCESS && window.SMD_XACCESS.devBypass && window.SMD_XACCESS.devBypass()) return true; } catch (e) {}
-    try { return !!(window.SMD_XACCESS && window.SMD_XACCESS.isActiveCached && window.SMD_XACCESS.isActiveCached(XA_FEATURE)); } catch (e) { return false; }
+    try { return !!(window.SMD_PRO && window.SMD_PRO.isProSync && window.SMD_PRO.isProSync()); } catch (e) { return false; }
   }
   function runtimeAvailable() {
     try {
@@ -100,9 +104,21 @@
   // Effective engine — never route to a local engine that cannot answer. A stale "local" pref
   // (model deleted, code expired, web build with no plugin) silently behaves as KB-only rather
   // than dead-ending, because KB-only is the honest subset of what the user asked for.
+  // Offline stand-in (owner decision, 2026-09-03): a clinician on MaiK Cloud with no network gets
+  // the installed on-device model instead of a failed cloud call. The cloud PREFERENCE is untouched,
+  // so the next question with the network back goes to the cloud again. Flag smd_maik_offline_local:
+  // "0" turns it off. Only fires when the local engine can actually answer (gate, runtime, pack).
+  function offlineStandIn() {
+    if (lget("smd_maik_offline_local") === "0") return false;
+    try {
+      var nav = (typeof window !== "undefined" && window.navigator) || (typeof navigator !== "undefined" ? navigator : null);
+      return !!nav && nav.onLine === false;
+    } catch (e) { return false; }
+  }
   function effective() {
     var p = getPref();
     if (p === "local" && !localReady()) return "rag";
+    if (p === "cloud" && offlineStandIn() && localReady()) return "local";
     return p;
   }
 
@@ -125,10 +141,10 @@
       else if (packInstalled() && !gateActive()) {
         var L0 = window.SMD_MAIK_LOCAL;
         var checking = !!(L0 && L0.debugProbed && !L0.debugProbed());
-        why = "**" + label + "** is downloaded, but on-device answering is not unlocked on this build";
+        why = "**" + label + "** is downloaded, but on-device answering is not unlocked on this account";
         how = checking
           ? "Still checking with the device - reopen this screen in a moment. If it stays locked, use **MaiK Cloud**."
-          : "Use **MaiK Cloud** for now, or enter the on-device access code in Settings.";
+          : "Use **MaiK Cloud** for now. On-device answering is included with Pro.";
       }
       else if (st.downloading) { why = "**" + label + "** is still downloading (" + (st.frac * 100).toFixed(0) + "%)"; how = "It will answer here as soon as the download finishes. Until then pick **MaiK Cloud** or **KB only**."; }
       else if (st.frac > 0) { why = "**" + label + "** is only partly downloaded (" + (st.frac * 100).toFixed(0) + "%)"; how = "Tap the model name at the top of this screen and select it again to resume the download."; }
@@ -154,6 +170,34 @@
   // typewriter exactly as the cloud path does.
   function route(kind, orig, self, args) {
     var e = effective();
+    // Structured calls with an on-device version (owner, 2026-09-04): the CliniX viva judge and the
+    // OPD "Ask MaiK Pro" differential (extract kind "opd-suggest"). They go local ONLY when the
+    // effective engine is local; every other extract kind (voice, translate, MaiK Ask) has no local
+    // implementation and keeps today's cloud behaviour regardless of engine. KB-only mode has no
+    // model to judge or suggest with, so it also stays on the cloud path here rather than dead-ending.
+    // Web research (owner, 2026-09-04): "we can't charge them for snippet conversion into clean
+    // language" for anything but MaiK Cloud. The search itself (TinyFish) is free either way; on the
+    // local engine, fetch the raw sources via SMD_AI.researchSnippets (no Gemini call, no quota) and
+    // have the ON-DEVICE model write the answer instead. Evidence Review (mode "evidence-review") is
+    // a distinct paid PubMed-synthesis feature, untouched, always cloud.
+    if (kind === "research") {
+      var mode = args[1];
+      var Lw = window.SMD_MAIK_LOCAL, Aw = window.SMD_AI;
+      var wantLocalWeb = e === "local" && mode !== "evidence-review" && !!Lw && !!Lw.webAnswer &&
+        !!Aw && typeof Aw.researchSnippets === "function";
+      if (!wantLocalWeb) return orig.apply(self, args);
+      return Aw.researchSnippets(args[0], args[2]).then(function (snip) {
+        if (!snip || snip.error) return { error: (snip && snip.error) || "no-results" };
+        return Lw.webAnswer(args[0], snip.sources || []);
+      }).catch(function (err) { return { error: String((err && err.message) || err || "local-failed") }; });
+    }
+    if (kind === "vivaJudge" || kind === "extract") {
+      var Lc = window.SMD_MAIK_LOCAL;
+      var wantLocal = e === "local" && !!Lc && (kind === "vivaJudge" ? !!Lc.vivaJudge : (args[1] === "opd-suggest" && !!Lc.opdSuggest));
+      if (!wantLocal) return orig.apply(self, args);
+      var pl = kind === "vivaJudge" ? Lc.vivaJudge(args[0], args[1], args[2]) : Lc.opdSuggest(args[0]);
+      return Promise.resolve(pl).catch(function (err) { return { error: String((err && err.message) || err || "local-failed") }; });
+    }
     if (e === "cloud") return orig.apply(self, args);
     if (e === "rag") {
       // refine() is a paid Gemini round-trip whose callers all treat null as "no refinement".
@@ -201,7 +245,7 @@
     if (_installed) return false;
     var A = window.SMD_AI;
     if (!A || typeof A.explainGrounded !== "function") return false;
-    ["explain", "explainGrounded", "explainGroundedStream", "refine"].forEach(function (name) {
+    ["explain", "explainGrounded", "explainGroundedStream", "refine", "vivaJudge", "extract", "research"].forEach(function (name) {
       var orig = A[name];
       if (typeof orig !== "function") return;
       A[name] = function () { return route(name, orig, A, arguments); };
@@ -209,8 +253,9 @@
     // route() is an alias for refine() in reasoning.js; re-point it at the wrapped refine.
     if (typeof A.route === "function") A.route = function (q) { return A.refine(q); };
     _installed = true;
-    // Deferred so it never competes with first paint.
-    try { if (typeof setTimeout === "function") setTimeout(warmIfLocal, 2500); } catch (e) {}
+    // No warm-up at app start any more (owner, 2026-09-04): a resident 1 to 4 GB model the doctor may
+    // never use this session heats the phone and starves other modules. home.js openAskAi() warms
+    // when the MaiK sheet opens, and maik-local.js releases it after idle/close.
     return true;
   }
 
@@ -249,19 +294,25 @@
 
     var gated = gateActive(), rt = runtimeAvailable(), have = packInstalled();
     var localDesc, localDisabled = false;
-    if (!gated) { localDesc = "Private beta. Unlock with an access code below, then download the model."; localDisabled = true; }
+    var proKnown = true;
+    try { proKnown = !window.SMD_PRO || !window.SMD_PRO.proKnown || window.SMD_PRO.proKnown(); } catch (e) { proKnown = true; }
+    // "Not Pro" and "have not asked the server yet" are different answers. On the first launch of a
+    // build the per-uid Pro cache is empty, so the honest state for a second is CHECKING, not
+    // "subscribe". The row re-renders itself when the verdict lands (see watchPro).
+    if (!gated && !proKnown) { localDesc = "Checking your subscription…"; localDisabled = true; }
+    else if (!gated) { localDesc = "Included with Pro. Subscribe to unlock, then download the model."; localDisabled = true; }
     else if (!rt) { localDesc = "Needs the latest native app build. Update the app to use this."; localDisabled = true; }
     else if (!have) { localDesc = "Ready to set up. Download the model to answer without any AI tokens."; }
     else { localDesc = "The model's own knowledge, on this device. Fast, no network, no tokens, and no StewardMD grounding, so it can be wrong."; }
 
     return '<div class="me-seg">' +
       '<div class="smd-nav-lbl" style="margin-bottom:6px">Answer engine</div>' +
-      '<div role="radiogroup" aria-label="MaiK answer engine" style="border:1px solid var(--line,#e2e8f0);border-radius:14px;overflow:hidden;background:var(--card,#fff);margin-bottom:8px">' +
+      '<div role="radiogroup" aria-label="MaiK answer engine" style="border:1px solid var(--line,#e2e8f0);border-radius:14px;overflow:hidden;background:var(--panel,#fff);margin-bottom:8px">' +
       opt("rag", "KB only", pill("Free", "#dcfce7", "#166534"),
           "StewardMD knowledge base only, with citations. No AI tokens, works offline.", true, false) +
       opt("cloud", "MaiK Cloud", pill("Pro", "#fef3c7", "#92400e"),
           "Gemini, grounded in the StewardMD knowledge base. Uses AI tokens.", false, false) +
-      opt("local", "On-device model", pill("Beta", "#e0e7ff", "#3730a3"),
+      opt("local", "On-device model", pill("Pro", "#fef3c7", "#92400e") + " " + pill("Beta", "#e0e7ff", "#3730a3"),
           localDesc, false, localDisabled) +
       '</div>' +
       (gated && rt ? modelRowHTML() : "") +
@@ -356,7 +407,7 @@
       // ABOVE the list, not below it: the hardware warning has to be read before a 3 GB tap, not
       // discovered afterwards. Same text is repeated at the moment of selection.
       deviceWarnHTML() +
-      '<div role="radiogroup" aria-label="On-device model" style="border:1px solid var(--line,#e2e8f0);border-radius:14px;overflow:hidden;background:var(--card,#fff)">' + rows + '</div>' +
+      '<div role="radiogroup" aria-label="On-device model" style="border:1px solid var(--line,#e2e8f0);border-radius:14px;overflow:hidden;background:var(--panel,#fff)">' + rows + '</div>' +
       '<div class="smd-nav-note" style="margin-top:6px">Downloads over Wi-Fi or mobile data and resumes if interrupted. You can leave this screen; the download keeps going.</div>' +
       '<button type="button" class="smd-nav-btn" data-me-guide aria-expanded="false" style="margin:8px 0 0;width:100%">Which one should I download?</button>' +
       guideHTML();
@@ -455,7 +506,7 @@
       "</div>";
     }).join("");
 
-    return '<div data-me-guide-panel hidden style="border:1px solid var(--line,#e2e8f0);border-radius:14px;background:var(--card,#fff);padding:14px;margin-top:8px">' +
+    return '<div data-me-guide-panel hidden style="border:1px solid var(--line,#e2e8f0);border-radius:14px;background:var(--panel,#fff);padding:14px;margin-top:8px">' +
       '<div style="font:700 13px/1.3 var(--sans,system-ui);margin-bottom:8px">Will it run on my phone?</div>' +
       deviceWarnHTML() +
       '<div style="font:700 13px/1.3 var(--sans,system-ui);margin-bottom:8px">How on-device mode works</div>' +
@@ -464,9 +515,9 @@
       '<div style="font:500 11.5px/1.45 var(--sans,system-ui);color:var(--slate-soft,#5a7184);margin-top:3px">Ratings compare these options with each other, nothing else.</div>' +
       rows +
       '<div style="font:500 12px/1.5 var(--sans,system-ui);color:var(--slate-soft,#5a7184);border-top:1px solid var(--line,#e2e8f0);padding-top:10px;margin-top:2px">' +
-        "Start with MAiK MxCore: fastest, lightest, and enough for most questions. Neural for stronger " +
-        "medical detail, Horizon for broader general knowledge, Apex on a flagship phone when you want " +
-        "the best answer and can wait a little longer." +
+        "Start with MAiK Lite: StewardMD's own model, the smallest download and the fastest answers. " +
+        "MxCore and Neural for deeper medical detail, Horizon for broader general knowledge, Apex on a " +
+        "flagship phone when you want the best answer and can wait a little longer." +
       "</div>" +
     "</div>";
   }
@@ -530,7 +581,7 @@
     root.querySelectorAll("[data-me-opt]").forEach(function (b) {
       b.addEventListener("click", function () {
         var want = b.getAttribute("data-me-opt");
-        if (want === "local" && !gateActive()) { toast("Enter an access code under Experimental Features to try the on-device model."); return; }
+        if (want === "local" && !gateActive()) { toast("The on-device model is included with Pro."); return; }
         if (want === "local" && !runtimeAvailable()) { toast("The on-device model needs the latest app build."); return; }
         if (want === "local" && !packInstalled()) { setPref(want); rerender(b, root); return startDownload(b, root); }
         setPref(want);
@@ -626,9 +677,9 @@
              : have ? "On this device, works offline"
              : st.frac > 0 ? "Paused at " + (st.frac * 100).toFixed(0) + "% - tap to resume"
              : "Tap to download " + M.sizeLabel(pid),
-          // FLAGSHIP badge instead of OFFLINE for the heaviest tier, so the hardware requirement is
-          // visible in the picker row itself and not only in the guide.
-          badge: M.PACKS[pid].flagship ? "FLAGSHIP" : "OFFLINE",
+          // STEWARDMD badge for our own model, FLAGSHIP instead of OFFLINE for the heaviest tier
+          // (so the hardware requirement is visible in the picker row itself, not only in the guide).
+          badge: M.PACKS[pid].own ? "STEWARDMD" : M.PACKS[pid].flagship ? "FLAGSHIP" : "OFFLINE",
           flagship: !!M.PACKS[pid].flagship,
           warn: M.DEVICE_WARNING || "",
           pack: pid, needsDownload: !have && !st.downloading,
@@ -832,8 +883,30 @@
     syncChip();
   }
 
+  /* Pro decides gateActive(), and it is read synchronously while painting the settings row and the
+   * picker - but /billing/status resolves AFTER that paint. Before this, the row rendered locked on
+   * first launch of a build (the per-uid Pro cache had never been written) and never corrected
+   * itself, which is exactly "the on-device model is not working". Re-render on the flip. */
+  (function watchPro() {
+    if (typeof window === "undefined" || window.__smdMaikProWatch) return;
+    window.__smdMaikProWatch = 1;
+    var onFlip = function () {
+      try {
+        var seg = document.querySelector(".me-seg");
+        if (seg) rerender(seg.querySelector("[data-me-opt]") || seg, seg.parentNode || document);
+      } catch (e) {}
+      try { syncChip(); } catch (e) {}
+      // Now that the gate may be open, warm the model if it is the chosen engine.
+      try { warmIfLocal(); } catch (e) {}
+    };
+    try {
+      if (window.SMD_PRO && window.SMD_PRO.onProChange) window.SMD_PRO.onProChange(onFlip);
+      else window.addEventListener("smd:pro", onFlip);   // account.js may load after this module
+    } catch (e) {}
+  })();
+
   var API = {
-    KEY_ENGINE: KEY_ENGINE, KEY_LLM_FIRST: KEY_LLM_FIRST, XA_FEATURE: XA_FEATURE, PACK_ID: PACK_ID,
+    KEY_ENGINE: KEY_ENGINE, KEY_LLM_FIRST: KEY_LLM_FIRST, PACK_ID: PACK_ID,
     getPref: getPref, setPref: setPref, effective: effective,
     gateActive: gateActive, runtimeAvailable: runtimeAvailable, packInstalled: packInstalled, localReady: localReady,
     kbOnlyNotice: kbOnlyNotice, route: route, install: install, activePack: activePack,

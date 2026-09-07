@@ -19,6 +19,7 @@
   "use strict";
 
   var ROOT_ID = "sknxRoot";
+  var returnFocus = null;
 
   // ── Gating (isOn) — the ONE unit-tested function; deps are injectable for test/sknx-entry.test.mjs.
   function dFlag() { try { return !!(window.SMD_SKNX_FLAGS && SMD_SKNX_FLAGS.bool("smd_sknx")); } catch (e) { return false; } }
@@ -70,23 +71,49 @@
     el.setAttribute("role", "dialog");
     el.setAttribute("aria-modal", "true");
     el.setAttribute("aria-label", "SknX AI");
+    el.setAttribute("tabindex", "-1");
+    el.addEventListener("keydown", function (event) {
+      if (event.key === "Escape") { event.preventDefault(); event.stopPropagation(); close(); return; }
+      if (event.key !== "Tab") return;
+      var controls = Array.prototype.filter.call(el.querySelectorAll('button, a[href], input, textarea, summary, [tabindex="0"]'), function (node) { return !node.disabled && node.getClientRects().length > 0; });
+      var first = controls[0], last = controls[controls.length - 1];
+      if (!first) { event.preventDefault(); el.focus(); return; }
+      if (event.shiftKey && (document.activeElement === first || document.activeElement === el)) { event.preventDefault(); last.focus(); }
+      else if (!event.shiftKey && (document.activeElement === last || document.activeElement === el)) { event.preventDefault(); first.focus(); }
+    });
     document.body.appendChild(el);
     return el;
   }
 
   function open() {
-    if (!isOn()) return;               // hard gate: flag off OR free entitlement -> complete no-op
+    if (!isOn()) {
+      /* isOn() is false for two very different reasons, and they deserve different behaviour.
+       *   flag OFF          -> the module is not shipped in this build. No tile should have been
+       *                        tappable, so staying silent is correct.
+       *   flag ON, no entitlement -> a clinician tapped a tile they can SEE and got absolutely
+       *                        nothing back. That is the "the app is broken" report, and it was a
+       *                        deliberate no-op. Say why instead, and offer the right next step
+       *                        (verify vs subscribe - pro-notice.js decides which).
+       * Checked against the flag directly, since isOn() has already collapsed the two. */
+      try { if (dFlag() && window.SMD_PRO_NOTICE) SMD_PRO_NOTICE.show("sknx"); } catch (e) {}
+      return;
+    }
     var el = root();
+    returnFocus = document.activeElement;
     el.classList.add("sknx-open");
     document.documentElement.classList.add("sknx-lock");
     haptic("light");
     try { if (window.SMD_SKNX_SCREENS && SMD_SKNX_SCREENS.mount) SMD_SKNX_SCREENS.mount(el); } catch (e) {}
+    el.focus();
   }
 
   function close() {
+    try { if (window.SMD_SKNX_SCREENS && SMD_SKNX_SCREENS.resetCase) SMD_SKNX_SCREENS.resetCase(); } catch (e) {}
     var el = document.getElementById(ROOT_ID);
     if (el) el.classList.remove("sknx-open");
     document.documentElement.classList.remove("sknx-lock");
+    if (returnFocus && returnFocus.isConnected) returnFocus.focus();
+    returnFocus = null;
   }
 
   var API = { isOn: isOn, open: open, close: close, homeCardHtml: homeCardHtml };

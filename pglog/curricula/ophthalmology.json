@@ -1,0 +1,67 @@
+{
+  "id": "ophthalmology",
+  "programmeType": "PG",
+  "degree": "MS",
+  "specialty": "Ophthalmology",
+  "durationMonths": 36,
+  "version": "2026-08-27",
+  "extends": [
+    "_pgmer-common"
+  ],
+  "source": {
+    "title": "Guidelines for Competency Based Postgraduate Training Programme for MS in Ophthalmology",
+    "publisher": "National Medical Commission",
+    "year": 2019,
+    "url": "https://www.nmc.org.in/wp-content/uploads/2019/09/MS-Ophthamology.pdf",
+    "retrieved": "2026-08-27"
+  },
+  "requirements": [
+    {
+      "target": null,
+      "per": "course",
+      "source": "nmc_curriculum",
+      "mandatoryForExam": false,
+      "id": "op_logbook",
+      "kind": "meta",
+      "label": "Log book checked and assessed periodically",
+      "clause": "13. Maintenance of log book",
+      "quote": "Maintenance of log book: Log books shall be checked and assessed periodically by the faculty members imparting the training."
+    },
+    {
+      "target": null,
+      "per": "course",
+      "source": "nmc_curriculum",
+      "mandatoryForExam": false,
+      "id": "op_cme",
+      "kind": "academic",
+      "label": "Accredited scientific meetings (CME, symposia, conferences)",
+      "match": {
+        "academicType": "cme_conference"
+      },
+      "clause": "10.",
+      "quote": "Attend accredited scientific meetings (CME, Symposia, and Conferences)."
+    },
+    {
+      "target": null,
+      "per": "course",
+      "source": "nmc_curriculum",
+      "mandatoryForExam": false,
+      "id": "op_procedures",
+      "kind": "procedure",
+      "label": "Surgical procedures — models, then supervised, then independent",
+      "match": {
+        "roles": [
+          "observed",
+          "assisted",
+          "performed_supervised",
+          "performed_independent"
+        ]
+      },
+      "clause": "During the training programme",
+      "quote": "During the training programme, patient safety is of paramount importance; therefore, skills are to be learnt initially on the models, later to be performed under supervision followed by performing independently; for this purpose, provision of surgical skills laboratories in medical colleges is mandatory."
+    }
+  ],
+  "procedures": [],
+  "proceduresNote": "No operation counts in the MS Ophthalmology guidelines.",
+  "disclaimer": "Requirements are traced to the NMC source named above. A requirement with target null is one the source mandates WITHOUT giving a number — it is counted, never scored against an invented target. This pack does not certify compliance; see NMC_PG_LOGBOOK_REQUIREMENTS.md."
+}

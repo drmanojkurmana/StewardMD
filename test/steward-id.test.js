@@ -126,5 +126,61 @@ function depsFor(db, uid, name, email) {
   const idB = await new Promise(r => S.ensure(depsFor(makeFakeDb(profB, dirAB), "uidB", "Dr B", "b@h.org"), r));
   assert.equal(idB, "SMD-BBBBB3", "account B resolves ITS id, not A's cached one");
   assert.equal(S.my("uidB"), "SMD-BBBBB3", "cache now belongs to B");
+
+  // ---- PERMANENCE ----------------------------------------------------------
+  // The ID is advertised as permanent ("It never changes"), so every path that could
+  // hand back a DIFFERENT id for the same account is pinned here.
+
+  // A profile read that FAILS must not mint. This was the bug: one unreachable-Firestore
+  // moment reissued the user's "permanent" ID and overwrote the old one.
+  S._reset();
+  const dirFail = {};
+  const failDb = Object.assign(makeFakeDb({ self: { smdId: "SMD-KEEPME" } }, dirFail), {
+    collection(name) {
+      if (name === "users") return { doc() { return { collection() { return { doc() { return { get: () => Promise.reject(new Error("unavailable")) }; } }; } }; } };
+      return { doc(id) { return docRef(dirFail, id); } };
+    }
+  });
+  const idFail = await new Promise(r => S.ensure(depsFor(failDb, "uidF", "Dr F", "f@h.org"), r));
+  assert.equal(idFail, null, "unreadable profile -> no id, NOT a fresh mint");
+  assert.equal(Object.keys(dirFail).length, 0, "nothing was written to the directory");
+
+  // A profile doc that lost its smdId recovers the account's OWN id from the email index
+  // instead of minting a new one (same uid only).
+  S._reset();
+  const eOwn = "e_" + S.emailHash("own@h.org");
+  const profLost = { self: { name: "Dr O" } };
+  const dirOwn = {}; dirOwn[eOwn] = { uid: "uidO", name: "Dr O", smdId: "SMD-OWNID2", at: "T0" };
+  const idAdopt = await new Promise(r => S.ensure(depsFor(makeFakeDb(profLost, dirOwn), "uidO", "Dr O", "own@h.org"), r));
+  assert.equal(idAdopt, "SMD-OWNID2", "adopted its own id back");
+  assert.equal(profLost.self.smdId, "SMD-OWNID2", "and wrote it back to the profile");
+  assert.equal(Object.keys(dirOwn).length, 1, "no new directory row was minted");
+
+  // ... but never adopts an index pointer owned by someone else.
+  S._reset();
+  const eOther = "e_" + S.emailHash("other@h.org");
+  const dirOther = {}; dirOther[eOther] = { uid: "someone-else", name: "Dr X", smdId: "SMD-THEIRS", at: "T0" };
+  const idNoSteal = await new Promise(r => S.ensure(depsFor(makeFakeDb({ self: {} }, dirOther), "uidN", "Dr N", "other@h.org"), r));
+  assert.ok(idNoSteal && idNoSteal !== "SMD-THEIRS", "minted its own id, did not take theirs");
+  assert.equal(dirOther[eOther].uid, "someone-else", "the other account's pointer is untouched");
+
+  // Two devices minting at once: the second must adopt the id the first already wrote to the
+  // profile doc, not rename the account to its own fresh one.
+  S._reset();
+  const profRace = { self: {} };
+  const dirRace = {};
+  const raceDb = makeFakeDb(profRace, dirRace);
+  const baseTx = raceDb.runTransaction.bind(raceDb);
+  let firstDirClaim = true;
+  raceDb.runTransaction = function (fn) {
+    // The other device wins the profile doc between our directory claim and our profile write.
+    if (firstDirClaim && Object.keys(dirRace).length === 1) { firstDirClaim = false; profRace.self = { smdId: "SMD-OTHERD" }; }
+    return baseTx(fn);
+  };
+  const idRace = await new Promise(r => S.ensure(depsFor(raceDb, "uidR", "Dr R", "r@h.org"), r));
+  assert.equal(idRace, "SMD-OTHERD", "loser adopts the winner's id");
+  assert.equal(profRace.self.smdId, "SMD-OTHERD", "profile keeps the id it already had");
+  assert.equal(dirRace["e_" + S.emailHash("r@h.org")].smdId, "SMD-OTHERD", "email index points at the surviving id");
+
   console.log("ok");
 })();

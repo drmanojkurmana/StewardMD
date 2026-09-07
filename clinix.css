@@ -753,3 +753,20 @@ html.cx-lock .ghis-ward-fab { display: none !important; }
 @media (prefers-reduced-motion: reduce) {
   #clinixRoot .cx-rotate-hint .material-symbols-rounded { animation: none; }
 }
+
+/* ── deep-linked calculators must render ABOVE the CliniX overlay ─────────────
+   CliniX owns no calculators; an annexure that needs one links into the
+   Calculators module. But .mc-overlay is z-index 870 and the CliniX overlay is
+   1250, so without this the calculator opens behind it, fully working and
+   completely invisible. Scoped to html.cx-lock, the class clinix.js adds on open
+   and removes on close, so the lift applies only while CliniX is the host and
+   reverts itself. 1300 stays far below the prescription pad (16000).
+   The identical bug was found and fixed in SURGX on 2026-08-25. */
+html.cx-lock .mc-overlay { z-index: 1300; }
+
+#clinixRoot .cx-input {
+  transition: border-color var(--cx-dur, .2s) var(--cx-ease, ease), box-shadow var(--cx-dur, .2s) var(--cx-ease, ease);
+}
+#clinixRoot .cx-input:focus {
+  outline: none; border-color: var(--cx-primary); box-shadow: 0 0 0 3px rgba(15,118,110,.25);
+}

@@ -243,8 +243,33 @@
     ]).then(function (res) { _status = res[0]; _plans = (res[1] && res[1].plans) || null; if (_root) paint(); });
   }
 
-  function openPaywall() {
+  function noticeReason() {
+    try { var N = window.SMD_PRO_NOTICE; return (N && N.reason) ? N.reason() : null; } catch (e) { return null; }
+  }
+  function openPaywall(feature, fresh) {
     if (_root) return;
+    /* Never sell a subscription to someone whose problem is verification. An unverified doctor who
+     * pays here gets nothing they would not have got free by uploading a certificate, so hand them
+     * to the explainer instead. SMD_PRO_NOTICE routes them onward and never bounces back here for
+     * this reason, so there is no loop.
+     *
+     * DECIDE ON A FRESH VERDICT (reported 2026-09-02). The reason comes from the /api/billing/status
+     * payload account.js cached at sign-in. A doctor who verified DURING this session still had the
+     * pre-verification verdict cached, so tapping Subscription told them to verify again - while the
+     * header badge, which reads the claim, already said Pro. Opening the paywall is a rare,
+     * user-initiated tap, so one status round trip before bouncing is cheap and ends the lie. The
+     * second pass (`fresh`) never re-syncs, so a still-unverified account is shown the explainer
+     * exactly once and nothing loops. */
+    var r = noticeReason();
+    if (r === "unverified" || r === "pending") {
+      if (!fresh && window.SMD_PRO && typeof window.SMD_PRO.sync === "function") {
+        var again = function () { openPaywall(feature, true); };
+        try { window.SMD_PRO.sync().then(again, again); } catch (e) { again(); }
+        return;
+      }
+      try { window.SMD_PRO_NOTICE.show(feature); } catch (e) {}
+      return;
+    }
     var div = document.createElement("div");
     div.innerHTML = shell(header("") + '<div style="padding:40px;text-align:center;color:var(--slate-soft);font:500 13px var(--sans)">Loading…</div>');
     _root = div.firstChild; document.body.appendChild(_root); document.body.style.overflow = "hidden";

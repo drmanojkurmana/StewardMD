@@ -192,9 +192,48 @@ export async function onRequest(context) {
   //     module and its public-domain NLM imagery only — the clinical app bundle (app.js, engine, kb/,
   //     MaiK) stays 404'd. Considered trade-off: without it there is no reachable sign-off sheet, which
   //     means shipping unverified anatomy labels to students. Delete these two lines to close it again.
+  //   • /pglog/v/* — the login-free PG logbook signature verification page. An examiner holding a
+  //     PRINTED logbook scans the QR on it; they have no StewardMD account, no app and no /realapp
+  //     cookie, so it must resolve for an anonymous visitor or every printed QR lands on the
+  //     marketing page instead. Safe to expose: the code in the URL is an opaque 80-bit handle, the
+  //     page is PHI-free by construction (functions/_pglog_public.js decides what it may say), it is
+  //     rate-limited per IP, and it is served noindex. NOT /pglog/* — the curriculum packs under
+  //     /pglog/ are app assets and stay 404'd by the asset rule below.
+  //   • /verify and /verify/* — the login-free PRESCRIPTION verification page. Identical reasoning
+  //     to /pglog/v/* above: a pharmacist or drug inspector holding a printed prescription scans the
+  //     QR on it, has no StewardMD account and no /realapp cookie, so it must resolve for an
+  //     anonymous visitor or every printed QR lands on the marketing page instead. Safe to expose:
+  //     the code is an opaque 80-bit handle, the record is PHI-FREE BY CONSTRUCTION (functions/
+  //     _rx_store.js never writes a patient field and functions/_rx_public.js decides what may be
+  //     said), it is rate-limited per IP, it runs no script at all, and it is served noindex.
   if (url.pathname.startsWith("/api/") || url.pathname.startsWith("/admin") ||
       url.pathname.startsWith("/vendor/") || url.pathname.startsWith("/followcare") ||
+      url.pathname.startsWith("/pglog/v/") ||
+      url.pathname === "/verify" || url.pathname.startsWith("/verify/") ||
       url.pathname === "/atlas.js" || url.pathname === "/atlas.css" ||
+      // The check-in sheet the STAFF OPD CONSOLE loads. "opd" is already a PUBLIC_PAGE below, but
+      // the page alone is not enough: opd.html pulls /patient-register.js, and the blanket asset
+      // 404 further down was swallowing it. window.SMD_PATIENTREG then never defined, so every
+      // check-in on the console answered "Patient check-in is unavailable." - a page let in without
+      // the one script it cannot work without. Exactly this file, never a directory.
+      url.pathname === "/patient-register.js" ||
+      // SAME TRAP, missed the first time: the sheet's OWN STYLESHEET was never added alongside its
+      // script. A CSS 404 degrades silently (no console error, nothing "unavailable") - it just
+      // renders as unstyled HTML flowing off the bottom of the page, so it went unnoticed here.
+      url.pathname === "/patient-register.css" ||
+      // SAME TRAP as patient-register.js/.css above (a pattern that has already bitten this repo
+      // twice) - the Government Health Schemes tool's own script, stylesheet and flags file must
+      // be allowlisted here too, or the tile opens to nothing with no console error once the
+      // blanket asset 404 below swallows them.
+      url.pathname === "/govschemes.js" ||
+      url.pathname === "/govschemes.css" ||
+      url.pathname === "/govschemes-flags.js" ||
+      // Self-hosted fonts (Inter Variable body text + Material Symbols Rounded icon font, both
+      // @font-face'd by every PUBLIC_PAGE: opd/opd-display/queue/subscribe). Public, non-sensitive
+      // font files - not app code - same reasoning as the brand-image allowlist below. Missing this
+      // is why icon buttons rendered their raw ligature name ("chevron_right", "play_arrow") as
+      // literal text instead of an icon on every one of those pages.
+      /^\/assets\/fonts\/[\w.-]+\.(woff2?|ttf|otf)$/i.test(url.pathname) ||
       url.pathname.startsWith("/atlas/")) {
     return next();
   }

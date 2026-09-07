@@ -726,7 +726,11 @@
         var data = (snap && snap.exists) ? (snap.data() || {}) : {};
         if (data.smdId) { _identity.uid = uid; _identity.smdId = data.smdId; cb && cb(data.smdId); return; }
         mintIdentity(db, uid, 0, cb);
-      }, function () { mintIdentity(db, uid, 0, cb); });
+      }, function () {
+        // A failed read is NOT "no ID" — minting here reissued the user's permanent ID every time
+        // Firestore was unreachable. Fail closed and let the next ensure() retry. See steward-id.js.
+        cb && cb(null);
+      });
     });
   }
   // Inline fallback mint path — used ONLY when window.SMD_STEWARD_ID hasn't loaded. Unchanged from

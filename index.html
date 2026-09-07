@@ -50,20 +50,33 @@
      @font-face in redesign-system.css (assets/fonts/sacramento.woff2). The old Google-CDN <link>
      used a media="print" trick that never loaded in the WKWebView, so the app fell back to a
      different cursive. Self-hosting renders it identically on web + app. -->
-<link rel="stylesheet" href="/redesign-system.css?v=oncotile1-clinix2">
+<!-- Bricolage Grotesque is the display face for the interstitials (@font-face in
+     redesign-system.css). It is font-display:block so the brand word-mark never flashes in a
+     fallback, and the interstitials are the very first paint, so start the fetch here rather
+     than waiting for the stylesheet to be parsed. Same-origin, so no crossorigin mismatch. -->
+<link rel="preload" href="/assets/fonts/bricolage-grotesque.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/redesign-system.css?v=spheretiles2-splashv2e">
 <link rel="stylesheet" href="/motion.css?v=gold1">
 <link rel="stylesheet" href="/maik-ask.css?v=mkfast2">
 <script>/* Redesign flag → html.rds-on early (before boot) so the onboarding gate is covered too. */
 try{var _q=location.search||"";var _on=!/[?&]rnav=0\b/.test(_q)&&(/[?&]rnav=1\b/.test(_q)||localStorage.getItem("smd_redesign_nav")!=="0");if(_on)document.documentElement.classList.add("rds-on");}catch(e){}</script>
+<script>/* Interstitial revamp flag → html.smd-splash-v2, set before first paint so the boot splash,
+   intro poster and landing splash all pick it up with no flash. Presentation only (CSS overrides
+   + the personalised greeting on the boot splash); default ON, ?splashv2=0 or
+   localStorage smd_splash_v2="0" reverts to the previous look. */
+try{var _sq=location.search||"";var _sv=!/[?&]splashv2=0\b/.test(_sq)&&(/[?&]splashv2=1\b/.test(_sq)||localStorage.getItem("smd_splash_v2")!=="0");if(_sv)document.documentElement.classList.add("smd-splash-v2");}catch(e){}</script>
 <!-- Antibiotic-engine UI restyle (presentation-only CSS layer, scoped to #dxOverlay/#dxMgmt/classic
      engine). Flag html.abx-ui: default ON; ?abxui=0 (or localStorage smd_abx_ui="0") disables. -->
 <link rel="stylesheet" href="/abx-redesign.css?v=gold432">
 <link rel="stylesheet" href="/abx-wizard.css?v=bug809-build7">
 <link rel="stylesheet" href="/queue.css?v=q10-staffadmin">
-<link rel="stylesheet" href="/opd-emr.css?v=voicenote1-micbar1">
-<link rel="stylesheet" href="/atlas.css?v=atlas1">
-<link rel="stylesheet" href="/onco-home.css?v=op5">
-<link rel="stylesheet" href="/oncotree.css?v=op3-map">
+<link rel="stylesheet" href="/ward.css?v=ward16-pcopy">
+<link rel="stylesheet" href="/discharge.css?v=dis1">
+<link rel="stylesheet" href="/opd-emr.css?v=voicenote1-micbar1-auth2-icdsug1">
+<link rel="stylesheet" href="/atlas.css?v=atlas2">
+<link rel="stylesheet" href="/atlas3d.css?v=a3d2">
+<link rel="stylesheet" href="/onco-home.css?v=op5-oncqis">
+<link rel="stylesheet" href="/oncotree.css?v=op3-map-fit1">
 <link rel="stylesheet" href="/protocol-sheet.css?v=ps1">
 <link rel="stylesheet" href="/protocol-maker.css?v=pm1">
 <link rel="stylesheet" href="/fundx.css?v=sar1">
@@ -71,13 +84,17 @@ try{var _q=location.search||"";var _on=!/[?&]rnav=0\b/.test(_q)&&(/[?&]rnav=1\b/
 <link rel="stylesheet" href="/kardiox-screens.css?v=kx7">
 <link rel="stylesheet" href="/thorex.css?v=tx2">
 <link rel="stylesheet" href="/thorex-screens.css?v=tx12">
-<link rel="stylesheet" href="/sknx-screens.css?v=sx13">
-<link rel="stylesheet" href="/insulin.css?v=ins11">
-<link rel="stylesheet" href="/clinix.css?v=cx16">
-<link rel="stylesheet" href="/surgx.css?v=sg7-deeplink">
+<link rel="stylesheet" href="/sknx-screens.css?v=sx17-appshell">
+<link rel="stylesheet" href="/insulin.css?v=ins15">
+<link rel="stylesheet" href="/clinix.css?v=cx17-annex">
+<link rel="stylesheet" href="/surgx.css?v=sg9-bkenc-md1">
+<link rel="stylesheet" href="/pglog.css?v=pgl5-guestbar">
+<link rel="stylesheet" href="/govschemes.css?v=gs2-browse">
+<link rel="stylesheet" href="/icd.css?v=icd1">
 <!-- App-wide Liquid Glass appearance (Display & Accessibility → App appearance). Sets
      html[data-appearance] before paint so glass surfaces don't flash. ICU/GHIS never touched. -->
 <link rel="stylesheet" href="/appearance.css?v=appx5-flatsquare">
+<link rel="stylesheet" href="/graphite-dark.css?v=graphite2">
 <!-- Horizontal-slide lock: a device sub-pixel / vw / safe-area overflow was letting full-screen
      overlays scroll sideways, dragging the page and exposing the dark scrim on the right. Lock the
      horizontal axis on the app's scroll surfaces (vertical scroll kept). Nested horizontal scrollers
@@ -252,6 +269,16 @@ body.smd-ddi-open #smdBackToTop{display:none!important}
     <span class="sbs-mark" aria-hidden="true"></span>
     <div class="sbs-word">Steward<span>MD</span></div>
     <div class="sbs-tag">Built by clinicians, for clinicians</div>
+    <!-- Returning, signed-in clinicians get their own face + name here instead of the generic
+         tagline (populated by the script below from the SAME localStorage account record the
+         sidebar/profile use). Hidden and inert for guests and first-time users. -->
+    <div class="sbs-hello" id="sbsHello" hidden>
+      <span class="sbs-dp" id="sbsDp" aria-hidden="true"></span>
+      <span class="sbs-hello-txt">
+        <span class="sbs-hello-k">Welcome back</span>
+        <span class="sbs-hello-n" id="sbsHelloName"></span>
+      </span>
+    </div>
     <div class="sbs-bar"><span></span></div>
   </div>
   <div class="sbs-foot">
@@ -262,12 +289,57 @@ body.smd-ddi-open #smdBackToTop{display:none!important}
 </div>
 <script>/* splash theme — iOS/web: follow OS light/dark; Android: day (06-18)=light, night=dark. Runs pre-paint, no flash. */
 (function(){try{var s=document.getElementById("smdBootSplash");if(!s)return;var plat="";try{plat=(window.Capacitor&&Capacitor.getPlatform&&Capacitor.getPlatform())||"";}catch(e){}var ua=navigator.userAgent||"",android=plat==="android"||(/Android/i.test(ua)&&!/iPhone|iPad|iPod/i.test(ua)),dark;if(android){var h=new Date().getHours();dark=!(h>=6&&h<18);}else{dark=!!(window.matchMedia&&matchMedia("(prefers-color-scheme: dark)").matches);}if(dark)s.classList.add("sbs-dark");}catch(e){}})();</script>
+<script>/* Personalised boot splash (flag smd-splash-v2). Reads the SAME account record the sidebar and
+   profile sheet read — localStorage "stewardmd_account" (.name/.email/.picture, mirrored from the
+   Firebase user by account.js) — because Firebase has not booted this early. Signed-in users only;
+   guests and first-time users keep the generic brand tagline. Name/photo are the viewer's own, never
+   another person's data, and nothing is written or sent anywhere. Fails silently. */
+(function(){try{
+  if(!document.documentElement.classList.contains("smd-splash-v2"))return;
+  var s=document.getElementById("smdBootSplash");if(!s)return;
+  var a=null;try{a=JSON.parse(localStorage.getItem("stewardmd_account")||"null");}catch(e){}
+  if(!a||!(a.email||a.type==="google"||a.type==="apple"))return;
+  var nm=String(a.name||a.email||"").trim();if(!nm)return;
+  var label=nm.indexOf("@")>-1?nm.split("@")[0]:nm;
+  if(label.length>28)label=label.slice(0,27)+"\u2026";
+  var host=document.getElementById("sbsHello"),who=document.getElementById("sbsHelloName"),dp=document.getElementById("sbsDp");
+  if(!host||!who||!dp)return;
+  who.textContent=label;
+  var pic=String(a.picture||"");
+  if(/^https:\/\//.test(pic)){
+    var img=new Image();
+    img.onload=function(){try{dp.style.backgroundImage='url("'+pic.replace(/["\\]/g,"")+'")';dp.textContent="";dp.className="sbs-dp has-pic";}catch(e){}};
+    img.referrerPolicy="no-referrer";img.src=pic;
+  }
+  dp.textContent=(label.replace(/^dr\.?\s+/i,"").charAt(0)||"S").toUpperCase();
+  host.hidden=false;s.classList.add("sbs-personal");
+  /* SEQUENCE: the classic frame holds a beat, then crossfades into the personalised phase 2
+     (avatar, name, glass foot), which holds until the boot script's constant 3s is up and
+     Face ID / PIN fires by itself. Both screens are passive: no button, no hold. */
+  var BEAT=1200,XF=220,rm=false,t0=Date.now();
+  try{rm=!!(window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches);}catch(e){}
+  function live(){return !!s.parentNode&&!s.classList.contains("sbs-hide");}
+  /* the beat counts from when the frame is actually SEEN (native-bridge stamps __smdSplashShownAt
+     when it lifts the native splash), the same clock the boot script's hold below uses. Screen 1
+     for BEAT, then screen 2 for the rest of that hold (3s: MIN is 4500 for a personalised boot). */
+  function seen(){try{return Date.now()-(window.__smdSplashShownAt||t0);}catch(e){return Date.now()-t0;}}
+  (function beat(){
+    if(!live())return;
+    if(seen()<BEAT){setTimeout(beat,100);return;}
+    if(rm){s.classList.add("smd-boot-phase2");return;}
+    s.classList.add("sbs-xfade");
+    setTimeout(function(){
+      if(!live())return;
+      s.classList.add("smd-boot-phase2");s.classList.remove("sbs-xfade");
+    },XF);
+  })();
+}catch(e){}})();</script>
 <style>
   #smdBootSplash{position:fixed;inset:0;z-index:2147483000;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;opacity:1;transition:opacity .45s ease;-webkit-font-smoothing:antialiased;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,system-ui,sans-serif}
   #smdBootSplash.sbs-hide{opacity:0;pointer-events:none}
   #smdBootSplash .sbs-center{display:flex;flex-direction:column;align-items:center;gap:16px;transform:translateY(-3%)}
-  #smdBootSplash .sbs-logo{width:107px;height:107px;object-fit:contain;animation:sbsPop .6s cubic-bezier(.2,.7,.2,1) both}
-  #smdBootSplash .sbs-word{font-size:30px;font-weight:800;letter-spacing:-.02em;color:#0f172a;animation:sbsFade .7s .12s ease both}
+  #smdBootSplash .sbs-logo{width:107px;height:107px;object-fit:contain}
+  #smdBootSplash .sbs-word{font-size:30px;font-weight:800;letter-spacing:-.02em;color:#0f172a}
   #smdBootSplash .sbs-word span{color:#0e6e63}
   #smdBootSplash .sbs-bar{width:132px;height:3px;border-radius:999px;background:#e6efee;overflow:hidden;margin-top:4px}
   #smdBootSplash .sbs-bar>span{display:block;width:42%;height:100%;border-radius:999px;background:#0e6e63;animation:sbsBar 1.15s ease-in-out infinite}
@@ -275,9 +347,9 @@ body.smd-ddi-open #smdBackToTop{display:none!important}
   #smdBootSplash .sbs-by{font-size:10.5px;letter-spacing:.09em;text-transform:uppercase;color:#94a3b8}
   #smdBootSplash .sbs-maik{height:53px;width:auto;object-fit:contain}
   /* tagline */
-  #smdBootSplash .sbs-tag{font-size:13.5px;font-weight:600;letter-spacing:.005em;color:#5a7184;margin-top:-4px;animation:sbsFade .7s .2s ease both}
+  #smdBootSplash .sbs-tag{font-size:13.5px;font-weight:600;letter-spacing:.005em;color:#5a7184;margin-top:-4px}
   /* white-masked mark (used in the dark Style-B splash) */
-  #smdBootSplash .sbs-mark{width:107px;height:107px;display:none;background:#fff;-webkit-mask:url(/logo.png) center/contain no-repeat;mask:url(/logo.png) center/contain no-repeat;animation:sbsPop .6s cubic-bezier(.2,.7,.2,1) both}
+  #smdBootSplash .sbs-mark{width:107px;height:107px;display:none;background:#fff;-webkit-mask:url(/logo.png) center/contain no-repeat;mask:url(/logo.png) center/contain no-repeat}
   #smdBootSplash .sbs-maik-dark{display:none}
   /* ── Style B: premium dark teal (iOS dark mode · Android night) ── */
   #smdBootSplash.sbs-dark{background:radial-gradient(125% 90% at 50% 18%,#0d5049 0%,#08302b 55%,#061f1c 100%)}
@@ -291,12 +363,162 @@ body.smd-ddi-open #smdBackToTop{display:none!important}
   #smdBootSplash.sbs-dark .sbs-by{color:rgba(255,255,255,.45)}
   #smdBootSplash.sbs-dark .sbs-maik-light{display:none}
   #smdBootSplash.sbs-dark .sbs-maik-dark{display:inline-block}
-  @keyframes sbsPop{from{opacity:0;transform:scale(.82)}to{opacity:1;transform:scale(1)}}
-  @keyframes sbsFade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
   @keyframes sbsBar{0%{transform:translateX(-130%)}100%{transform:translateX(340%)}}
-  @media (prefers-reduced-motion:reduce){#smdBootSplash .sbs-logo,#smdBootSplash .sbs-word{animation:none}#smdBootSplash .sbs-bar>span{animation-duration:2.2s}}
+  @media (prefers-reduced-motion:reduce){#smdBootSplash .sbs-bar>span{animation-duration:2.2s}}
+  /* ── v2 (html.smd-splash-v2) · Direction C: gradient depth, glass cards, bold type ──
+     THE BOOT SPLASH IS A SEQUENCE OF TWO PASSIVE SCREENS (no button, no hold; the boot script
+     holds a constant 3s and then Face ID / PIN fires by itself). Phase 1 (no .smd-boot-phase2) is the
+     CLASSIC splash, untouched: the interlocked mark, the Steward/MD two-tone wordmark, the
+     "Built by clinicians, for clinicians" tagline, the thin progress bar and the developed-by
+     foot, in both the light and the dark theme. Everything below that restyles composition is
+     scoped to .smd-boot-phase2, which the script above adds after a short beat for a signed-in
+     returning clinician only. The one thing that carries into phase 1 is the liquid-glass
+     material on the developed-by bar, which the owner asked for: material only, classic layout.
+     Guests and first-run users never enter phase 2 and see the classic splash for the whole
+     boot. Presentation only; ?splashv2=0 still drops the entire layer. */
+
+  /* the phase-2 field is an overlay layer rather than a background swap, so it can crossfade */
+  html.smd-splash-v2 #smdBootSplash::before{content:"";position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity .34s ease;background:radial-gradient(360px 360px at 4% 2%,rgba(14,110,99,.17) 0%,rgba(14,110,99,0) 70%),radial-gradient(380px 380px at 100% 98%,rgba(146,98,10,.11) 0%,rgba(146,98,10,0) 70%),radial-gradient(300px 260px at 84% 16%,rgba(63,199,179,.13) 0%,rgba(63,199,179,0) 72%),radial-gradient(420px 300px at 50% 68%,rgba(14,110,99,.1) 0%,rgba(14,110,99,0) 72%),radial-gradient(460px 260px at 50% 100%,rgba(63,199,179,.14) 0%,rgba(63,199,179,0) 74%),#f7fbfa}
+  html.smd-splash-v2 #smdBootSplash.sbs-dark::before{background:radial-gradient(280px 280px at 4% 2%,rgba(63,199,179,.3) 0%,rgba(63,199,179,0) 70%),radial-gradient(300px 300px at 100% 98%,rgba(240,192,96,.14) 0%,rgba(240,192,96,0) 70%),radial-gradient(120% 90% at 18% 8%,#1a4a42 0%,#0e2e2a 32%,#0d1b26 62%,#0a141c 100%)}
+  html.smd-splash-v2 #smdBootSplash.smd-boot-phase2::before{opacity:1}
+  html.smd-splash-v2 #smdBootSplash .sbs-center{position:relative;z-index:1}
+  html.smd-splash-v2 #smdBootSplash .sbs-foot{z-index:1}
+
+  /* the crossfade between the two phases (instant swap under reduced motion) */
+  html.smd-splash-v2 #smdBootSplash .sbs-center,
+  html.smd-splash-v2 #smdBootSplash .sbs-foot{transition:opacity .2s ease}
+  html.smd-splash-v2 #smdBootSplash.sbs-xfade .sbs-center,
+  html.smd-splash-v2 #smdBootSplash.sbs-xfade .sbs-foot{opacity:0}
+
+  /* the hello block is built at boot but stays out of phase 1 entirely */
+  html.smd-splash-v2 #smdBootSplash .sbs-hello{display:none}
+
+  /* phase 1 is the classic splash, pixel-identical: no overrides on the foot or its copy */
+  html.smd-splash-v2 #smdBootSplash.smd-boot-phase2 .sbs-by{color:#54707f}
+  html.smd-splash-v2 #smdBootSplash.smd-boot-phase2.sbs-dark .sbs-by{color:rgba(246,247,245,.62)}
+
+  /* ══ phase 2 ══════════════════════════════════════════════════════════════════════════ */
+  html.smd-splash-v2 #smdBootSplash.smd-boot-phase2 .sbs-center{gap:14px}
+  /* the mark is the hero here: bigger, with its own shadow, so the screen is a brand moment */
+  html.smd-splash-v2 #smdBootSplash.smd-boot-phase2 .sbs-logo,
+  html.smd-splash-v2 #smdBootSplash.smd-boot-phase2 .sbs-mark{width:126px;height:126px}
+  /* the glow goes ONLY on .sbs-mark, which is a CSS mask and therefore genuinely transparent.
+     .sbs-logo is /logo.png, whose bitmap is opaque to its edges, so a drop-shadow on it renders
+     as a square halo around the artwork instead of following the mark. */
+  html.smd-splash-v2 #smdBootSplash.smd-boot-phase2.sbs-dark .sbs-mark{filter:drop-shadow(0 0 38px rgba(63,199,179,.34))}
+  /* the same light/extrabold lock-up the poster and the landing splash use */
+  html.smd-splash-v2 #smdBootSplash.smd-boot-phase2 .sbs-word{font-family:var(--smd-dsp);font-size:40px;font-weight:300;letter-spacing:-.045em;line-height:1}
+  html.smd-splash-v2 #smdBootSplash.smd-boot-phase2 .sbs-word span{font-weight:800}
+  html.smd-splash-v2 #smdBootSplash.smd-boot-phase2 .sbs-tag{font-family:var(--smd-dsp);font-size:9.5px;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:#7d94a6}
+  html.smd-splash-v2 #smdBootSplash.smd-boot-phase2.sbs-dark .sbs-tag{color:rgba(246,247,245,.6)}
+  /* progress becomes a translucent glass pill (Direction C) */
+  html.smd-splash-v2 #smdBootSplash.smd-boot-phase2 .sbs-bar{width:auto;height:auto;margin-top:8px;padding:9px 18px;border-radius:999px;background:rgba(14,110,99,.05);border:1px solid rgba(14,110,99,.14);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);overflow:visible;position:relative}
+  html.smd-splash-v2 #smdBootSplash.smd-boot-phase2 .sbs-bar>span{display:none}
+  html.smd-splash-v2 #smdBootSplash.smd-boot-phase2 .sbs-bar::after{content:"Loading your workspace\2026";display:block;font-size:11.5px;font-weight:500;letter-spacing:.01em;color:#6b8398;animation:sbsGlow 1.8s ease-in-out infinite}
+  html.smd-splash-v2 #smdBootSplash.smd-boot-phase2.sbs-dark .sbs-bar{background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.12)}
+  html.smd-splash-v2 #smdBootSplash.smd-boot-phase2.sbs-dark .sbs-bar::after{color:rgba(246,247,245,.6)}
+  /* "developed by MaiK" foot: a glass bar carrying the REAL MaiK logo (light/dark swap kept) */
+  html.smd-splash-v2 #smdBootSplash.smd-boot-phase2 .sbs-foot{left:24px;right:24px;transform:none;flex-direction:row;align-items:center;justify-content:center;gap:11px;padding:11px 18px;border-radius:18px}
+  html.smd-splash-v2 #smdBootSplash.smd-boot-phase2 .sbs-by{font-family:var(--smd-dsp);font-size:9px;font-weight:600;letter-spacing:.2em}
+  html.smd-splash-v2 #smdBootSplash.smd-boot-phase2 .sbs-maik{height:30px}
+  /* ── personalised state (phase 2 only) ── */
+  html.smd-splash-v2 #smdBootSplash.smd-boot-phase2.sbs-personal .sbs-logo,
+  html.smd-splash-v2 #smdBootSplash.smd-boot-phase2.sbs-personal .sbs-mark{width:92px;height:92px}
+  html.smd-splash-v2 #smdBootSplash.smd-boot-phase2.sbs-personal .sbs-word{display:none}
+  html.smd-splash-v2 #smdBootSplash.smd-boot-phase2.sbs-personal .sbs-tag{display:none}
+  html.smd-splash-v2 #smdBootSplash.smd-boot-phase2 .sbs-hello[hidden]{display:none}
+  html.smd-splash-v2 #smdBootSplash.smd-boot-phase2 .sbs-hello{display:flex;flex-direction:column;align-items:center;gap:14px;margin-top:6px;max-width:min(88vw,320px)}
+  html.smd-splash-v2 #smdBootSplash .sbs-dp{position:relative;flex:0 0 auto;width:84px;height:84px;border-radius:50%;background:linear-gradient(135deg,#3fc7b3,#0e6e63) center/cover no-repeat;box-shadow:0 16px 40px rgba(14,110,99,.32);display:flex;align-items:center;justify-content:center;font-family:var(--smd-dsp);font-size:30px;font-weight:800;color:#0a141c;letter-spacing:-.03em}
+  html.smd-splash-v2 #smdBootSplash .sbs-dp.has-pic{background-color:#0e6e63;box-shadow:0 16px 40px rgba(14,110,99,.32),inset 0 0 0 2px rgba(255,255,255,.16)}
+  /* online-status accent (generated decoration, no brand asset involved) */
+  html.smd-splash-v2 #smdBootSplash .sbs-dp::after{content:"";position:absolute;right:5px;bottom:5px;width:16px;height:16px;border-radius:50%;background:#4dd68c;border:3px solid #fbfdfc}
+  html.smd-splash-v2 #smdBootSplash.sbs-dark .sbs-dp::after{border-color:#0d1922}
+  html.smd-splash-v2 #smdBootSplash .sbs-hello-txt{display:flex;flex-direction:column;align-items:center;gap:4px;min-width:0;text-align:center;max-width:100%}
+  html.smd-splash-v2 #smdBootSplash .sbs-hello-k{font-family:var(--smd-dsp);font-size:9.5px;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:#7d94a6;line-height:1.2}
+  html.smd-splash-v2 #smdBootSplash .sbs-hello-n{font-family:var(--smd-dsp);font-size:23px;font-weight:700;letter-spacing:-.032em;color:#0f172a;line-height:1.25;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
+  html.smd-splash-v2 #smdBootSplash.sbs-dark .sbs-hello-k{color:rgba(246,247,245,.55)}
+  html.smd-splash-v2 #smdBootSplash.sbs-dark .sbs-hello-n{color:#f6f7f5}
+  @keyframes sbsGlow{0%,100%{opacity:1}50%{opacity:.55}}
+  @media (prefers-reduced-motion:reduce){
+    html.smd-splash-v2 #smdBootSplash::before,
+    html.smd-splash-v2 #smdBootSplash .sbs-center,
+    html.smd-splash-v2 #smdBootSplash .sbs-foot{transition:none}
+    html.smd-splash-v2 #smdBootSplash.smd-boot-phase2 .sbs-hello{animation:none}
+    html.smd-splash-v2 #smdBootSplash.smd-boot-phase2 .sbs-bar::after{animation:none}
+  }
+
+  /* ══ LIQUID GLASS material (shared tokens) ═════════════════════════════════════════════
+     The Direction C surfaces were "translucent panel + flat 1px border", which on the light
+     boot splash rendered as a near-white shape on a near-white field: flat, not glass. This
+     is the Apple-style material instead, and every pill/card on the five interstitials is
+     rebuilt from these tokens so they read as ONE material:
+       - a real refraction: blur + saturate on the backdrop, so the gradient behind bends
+         through the surface (both -webkit- and unprefixed, for WKWebView and Chrome WebView),
+       - a fill that is a soft vertical sheen rather than one flat alpha, which is what sells
+         the curvature of the "liquid" surface,
+       - the signature specular edge: a bright rim along the top and a dimmer one along the
+         bottom, drawn as a 1px GRADIENT border (fill painted to padding-box, rim gradient to
+         border-box) plus layered inset highlights. A flat solid border cannot do this.
+       - a soft ambient shadow so the surface floats above the field instead of being cut
+         into it. On the light theme that shadow is most of what makes the glass visible.
+     Tokens are declared once here and consumed by the poster/landing layer further down.
+     Everything is presentation only: no markup, ID, size or layout change. */
+  html.smd-splash-v2{
+    --lg-blur:blur(22px) saturate(180%);
+    --lg-blur-sm:blur(16px) saturate(180%);
+    /* light theme */
+    --lg-fill:linear-gradient(180deg,rgba(255,255,255,.74) 0%,rgba(255,255,255,.26) 44%,rgba(223,241,237,.34) 100%);
+    --lg-rim:linear-gradient(155deg,rgba(255,255,255,1) 0%,rgba(255,255,255,.55) 26%,rgba(14,110,99,.22) 58%,rgba(255,255,255,.9) 100%);
+    --lg-inset:inset 0 1px 0 rgba(255,255,255,1),inset 0 -1px 1px rgba(255,255,255,.7),inset 0 -12px 24px rgba(14,110,99,.055);
+    --lg-shadow:0 12px 30px rgba(12,58,52,.16),0 3px 8px rgba(12,58,52,.08),0 0 0 .5px rgba(14,110,99,.1);
+    --lg-solid:rgba(255,255,255,.9);
+    /* dark theme (set on .sbs-dark / the dark interstitials below) */
+    --lg-fill-d:linear-gradient(180deg,rgba(255,255,255,.15) 0%,rgba(255,255,255,.055) 48%,rgba(255,255,255,.1) 100%);
+    --lg-rim-d:linear-gradient(155deg,rgba(255,255,255,.58) 0%,rgba(255,255,255,.17) 30%,rgba(255,255,255,.04) 56%,rgba(255,255,255,.32) 100%);
+    --lg-inset-d:inset 0 1px 0 rgba(255,255,255,.34),inset 0 -1px 0 rgba(255,255,255,.13),inset 0 0 26px rgba(255,255,255,.06);
+    --lg-shadow-d:0 14px 42px rgba(0,0,0,.44),0 2px 10px rgba(0,0,0,.28);
+    --lg-solid-d:rgba(28,52,60,.86);
+  }
+
+  /* ── the two surfaces the owner circled ──
+     Both are phase-2 only: the owner wants phase 1 to be the classic splash exactly as it
+     shipped, so the glass on the developed-by foot and the loading pill appear with phase 2. */
+  html.smd-splash-v2 #smdBootSplash.smd-boot-phase2 .sbs-foot,
+  html.smd-splash-v2 #smdBootSplash.smd-boot-phase2 .sbs-bar{
+    border:1px solid rgba(14,110,99,.16);
+    background:var(--lg-solid);
+    box-shadow:var(--lg-shadow);
+  }
+  html.smd-splash-v2 #smdBootSplash.smd-boot-phase2.sbs-dark .sbs-foot,
+  html.smd-splash-v2 #smdBootSplash.smd-boot-phase2.sbs-dark .sbs-bar{
+    border-color:rgba(255,255,255,.16);
+    background:var(--lg-solid-d);
+    box-shadow:var(--lg-shadow-d);
+  }
+  @supports ((-webkit-backdrop-filter:blur(1px)) or (backdrop-filter:blur(1px))){
+    html.smd-splash-v2 #smdBootSplash.smd-boot-phase2 .sbs-foot,
+    html.smd-splash-v2 #smdBootSplash.smd-boot-phase2 .sbs-bar{
+      border-color:transparent;
+      background:var(--lg-fill) padding-box,var(--lg-rim) border-box;
+      box-shadow:var(--lg-inset),var(--lg-shadow);
+      -webkit-backdrop-filter:var(--lg-blur);
+      backdrop-filter:var(--lg-blur);
+    }
+    html.smd-splash-v2 #smdBootSplash.smd-boot-phase2.sbs-dark .sbs-foot,
+    html.smd-splash-v2 #smdBootSplash.smd-boot-phase2.sbs-dark .sbs-bar{
+      background:var(--lg-fill-d) padding-box,var(--lg-rim-d) border-box;
+      box-shadow:var(--lg-inset-d),var(--lg-shadow-d);
+    }
+  }
+  /* text on the new material: the glass is brighter than the old panel, so the light-theme
+     copy is darkened to keep it comfortably readable over the gradient */
+  html.smd-splash-v2 #smdBootSplash.smd-boot-phase2 .sbs-bar::after{color:#4a6577}
+  html.smd-splash-v2 #smdBootSplash.smd-boot-phase2.sbs-dark .sbs-bar::after{color:rgba(246,247,245,.72)}
 </style>
-<script>(function(){var s=document.getElementById("smdBootSplash");if(!s)return;var t0=Date.now(),done=false,MIN=900,CAP=15000;
+<script>(function(){var s=document.getElementById("smdBootSplash");if(!s)return;var t0=Date.now(),done=false,
+/* seen-time hold: guests see screen 1 for 3s; a signed-in clinician (.sbs-personal, set by the script above) sees
+   screen 1 for 1.2s, a 220ms crossfade, then screen 2 for a full 3s */
+MIN=s.classList.contains("sbs-personal")?4500:3000,CAP=15000;
 /* Native handoff: once this white splash has actually PAINTED (two rAFs after it is in the
    DOM), signal native-bridge to lift the native splash. Hiding only on this signal — never on
    a timer — guarantees the native splash covers the WebView-init gap, so there is no black
@@ -314,8 +536,29 @@ function ready(){try{
   if(!returning){ if(vis("introPoster")||vis("splash"))return true; }
   var a=document.querySelector(".app-head");if(a&&getComputedStyle(a).display!=="none"&&a.offsetHeight>0)return true;
 }catch(e){return true;}return false;}
-function finish(){if(done)return;done=true;s.classList.add("sbs-hide");setTimeout(function(){if(s.parentNode)s.parentNode.removeChild(s);},480);}
-function tick(){if(done)return;var el=Date.now()-t0;if((ready()&&el>=MIN)||el>=CAP){finish();return;}setTimeout(tick,120);}
+var lockShowing=false;
+function reallyFinish(){done=true;s.classList.add("sbs-hide");setTimeout(function(){if(s.parentNode)s.parentNode.removeChild(s);},480);}
+/* App Lock: if a PIN/biometric is configured, the splash holds after its constant 3s frame and
+   Face ID / PIN fires by itself instead of revealing the app. Fails open —
+   if applock.js hasn't loaded yet (or throws), window.SMD_APPLOCK is undefined/required()
+   is false, and boot proceeds exactly as before this existed. */
+function finish(){if(done)return;
+  try{
+    if(window.SMD_APPLOCK&&window.SMD_APPLOCK.required()){
+      if(lockShowing)return;
+      lockShowing=true;
+      window.SMD_APPLOCK.unlock(reallyFinish);
+      return;
+    }
+  }catch(e){}
+  reallyFinish();
+}
+/* MIN is 3s of the frame actually being SEEN: native-bridge stamps __smdSplashShownAt when it lifts
+   the native splash (which covers this frame until the page has painted), so the hold counts from
+   that moment, not from script start. On the web (no native splash) it is script start. */
+function shownAt(){try{return window.__smdSplashShownAt||t0;}catch(e){return t0;}}
+function tick(){if(done)return;var el=Date.now()-shownAt();
+  if((ready()&&el>=MIN)||el>=CAP){finish();return;}setTimeout(tick,120);}
 tick();})();</script>
 <script>/* anti-flash theme boot — mirrors theme-sync.js resolution so the initial paint matches the OS (no flash) */
 (function(){try{var L=localStorage,os=!!(window.matchMedia&&matchMedia("(prefers-color-scheme: dark)").matches),stored=L.getItem("stewardmd_theme"),src=L.getItem("stewardmd_theme_source"),on=L.getItem("stewardmd_theme_autosync")!=="0",dark;
@@ -327,6 +570,237 @@ document.body.classList.toggle("dark",dark);}catch(e){}})();</script>
 <h1 class="sr-only">StewardMD</h1>
 <!-- ===== INTRO POSTER: shows first, auto-dismisses after 4s or on tap ===== -->
 
+
+<!-- ===== INTERSTITIAL REVAMP (html.smd-splash-v2) - DIRECTION C =====
+     Presentation-only override layer for the intro poster and the landing splash: a deep
+     teal-to-navy radial gradient mesh with soft off-edge glows, glass cards (translucent fill,
+     hairline border, blur, generous radius, soft elevation) and depth. Nothing here changes
+     markup or logic, so ?splashv2=0 falls straight back to the previous look. Brand marks are
+     the REAL assets (/mark-white.png and /maik-logo-white.png), swapped in via CSS so the
+     markup stays untouched.
+
+     CRAFT PASS on top of that foundation, after review:
+     - TYPE. One display face, Bricolage Grotesque (self-hosted, see redesign-system.css), does
+       every brand and headline moment; supporting copy stays on the app sans (var(--sans)), so
+       the two roles read as two voices instead of one font at five weights. The recurring
+       device is weight contrast on a single line: "Steward" at 300 against "MD" at 800, the
+       AMR headline at 800 against its kicker at 200. Display sizes are set tight (-.04em and
+       negative leading) and the small labels are set loose (.22em+) so the hierarchy is
+       optical, not just numeric.
+     - LOGO. The mark is the hero, not an icon: 152px on the poster and 118px on the landing
+       splash, standing free with its own glow and drop-shadow instead of being parked in a
+       rounded glass tile (that tile was the single most template-looking thing here).
+     - COMPOSITION. The poster is left-aligned and top-weighted rather than centred in a void,
+       so phases 1-3 share one axis, and the AMR figures are an open editorial list on a teal
+       rule instead of a third identical glass card. Cards are now the exception (the credit
+       and the case preview) rather than the default, which is what makes them read. -->
+<style>
+/* The display face for every brand/headline moment on the interstitials. Supporting copy stays
+   on var(--sans) so the two roles stay audibly different. The fallbacks matter: if the woff2 is
+   ever missing, the layout must still be sane rather than collapsing to a serif. */
+html.smd-splash-v2{--smd-dsp:'Bricolage Grotesque','Inter Variable',system-ui,-apple-system,sans-serif}
+
+/* -- Intro poster (first-run, brand-led) -- */
+html.smd-splash-v2 #introPoster{padding:calc(env(safe-area-inset-top,0px) + 20px) 0 calc(env(safe-area-inset-bottom,0px) + 92px)}
+/* the base .ip-bg animates the background shorthand, which would otherwise win over any static value */
+html.smd-splash-v2 .ip-bg{animation:none;background:radial-gradient(280px 280px at 100% 0%,rgba(63,199,179,.3) 0%,rgba(63,199,179,0) 70%),radial-gradient(300px 300px at 0% 100%,rgba(240,192,96,.14) 0%,rgba(240,192,96,0) 70%),radial-gradient(120% 90% at 18% 8%,#1a4a42 0%,#0e2e2a 32%,#0d1b26 62%,#0a141c 100%)}
+html.smd-splash-v2 .ip-phase{max-width:392px;padding:0 26px;animation:ipRise .62s cubic-bezier(.2,.75,.25,1) both}
+@keyframes ipRise{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+
+/* Phase 1 - the hero brand moment: a big free-standing mark over a light/bold word-mark.
+   Left-aligned on the same axis as phases 2 and 3, so the poster reads as one composition
+   instead of three centred slides. */
+/* offset with position, not transform or margin: .ip-phase is a centred flex child running the
+   ipRise animation, so a transform here would be overwritten and a margin would just re-centre.
+   Dropping the stack below the optical centre turns the empty upper half into deliberate sky
+   rather than the even top-and-bottom void of a dead-centred lock-up. */
+html.smd-splash-v2 #ipPhase1{gap:0;align-items:flex-start;text-align:left;position:relative;top:58px}
+/* the glass tile is gone: the mark carries its own light. .ip-logo-wrap keeps only the job of
+   positioning, and ::before is the glow the mark sits in (drawn behind, never clipping it). */
+html.smd-splash-v2 .ip-logo-wrap{position:relative;width:100%!important;height:auto!important;margin-bottom:30px!important;justify-content:flex-start;border-radius:0;background:none;border:0;-webkit-backdrop-filter:none;backdrop-filter:none;box-shadow:none}
+html.smd-splash-v2 .ip-logo-wrap::before{content:"";position:absolute;left:-46px;top:-62px;width:264px;height:264px;border-radius:50%;background:radial-gradient(circle,rgba(63,199,179,.26) 0%,rgba(63,199,179,.07) 46%,rgba(63,199,179,0) 70%);pointer-events:none}
+/* the element carries inline width/display, hence the !important the base layer already needed */
+html.smd-splash-v2 .ip-logo-fallback{position:relative;width:152px!important;height:152px;background:url("/mark-white.png") left center/contain no-repeat;filter:drop-shadow(0 20px 44px rgba(0,0,0,.5)) drop-shadow(0 0 34px rgba(63,199,179,.3));animation:ipBreathe 5.2s ease-in-out infinite}
+html.smd-splash-v2 .ip-logo-img{display:none!important}
+/* the lock-up: one word, two weights. 300 against 800 is the whole idea, so the size is set
+   large and the tracking tight enough that the pair reads as a single drawn mark. */
+html.smd-splash-v2 .ip-appname{width:100%;font-family:var(--smd-dsp);font-size:54px;font-weight:300;letter-spacing:-.045em;line-height:.94;margin-bottom:0;text-align:left}
+html.smd-splash-v2 .ip-appname span{font-weight:800;color:#3fc7b3}
+html.smd-splash-v2 .ip-in{font-size:15px;font-weight:500;letter-spacing:.01em;vertical-align:super;color:rgba(246,247,245,.45);opacity:1}
+/* the label is set as loose as the word-mark is tight, on a rule that is tealed for its first
+   46px - a small piece of drawing that is cheaper and calmer than another glass panel. */
+html.smd-splash-v2 .ip-tagline-sub{position:relative;width:100%;margin-top:22px;padding-top:15px;border-top:1px solid rgba(255,255,255,.11);font-family:var(--smd-dsp);font-size:9.5px;font-weight:600;letter-spacing:.24em;line-height:1.4;color:rgba(246,247,245,.44);text-align:left}
+html.smd-splash-v2 .ip-tagline-sub::before{content:"";position:absolute;left:0;top:-1px;width:46px;height:1px;background:#3fc7b3}
+/* decorative pulse line (generated decoration, not a brand mark), now anchored to the same
+   left edge and bleeding off it rather than floating centred under the phase */
+html.smd-splash-v2 #ipPhase1::after{content:"";position:absolute;left:26px;right:auto;bottom:-56px;transform:none;width:196px;height:28px;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 40'%3E%3Cpath d='M0 20 H60 L70 5 L82 35 L94 20 H140 L150 8 L160 32 L172 20 H200' stroke='%233fc7b3' stroke-width='1.4' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") left center/contain no-repeat;opacity:.3;pointer-events:none}
+
+/* Phase 2 - AMR. The headline is the scale moment of the poster and the figures are an open
+   editorial list on a teal rule, NOT a third glass card: three identical panels in a row was
+   most of what made the set feel templated. */
+html.smd-splash-v2 #ipPhase2{align-items:stretch;text-align:left}
+html.smd-splash-v2 .ip-amr-head{font-family:var(--smd-dsp);font-size:40px;font-weight:800;line-height:.98;letter-spacing:-.042em;margin-bottom:0}
+/* the kicker drops to the lightest weight on the axis - same size, opposite mass */
+html.smd-splash-v2 .ip-amr-sub{font-family:var(--smd-dsp);font-size:40px;font-weight:200;letter-spacing:-.03em;line-height:1.06;display:inline-block;color:#3fc7b3}
+html.smd-splash-v2 .ip-amr-desc{font-family:var(--sans);font-size:13px;line-height:1.65;color:rgba(246,247,245,.56);max-width:288px;margin:18px 0 26px}
+html.smd-splash-v2 .ip-stats{display:grid;grid-template-columns:1fr;gap:0;padding:2px 0 2px 20px;border:0;border-left:1px solid rgba(63,199,179,.4);border-radius:0;background:none;-webkit-backdrop-filter:none;backdrop-filter:none;box-shadow:none;margin-bottom:26px}
+html.smd-splash-v2 .ip-stat{display:flex;flex-direction:row;align-items:baseline;gap:14px;padding:13px 0;text-align:left}
+html.smd-splash-v2 .ip-stat-num{flex:0 0 auto;min-width:100px;font-family:var(--smd-dsp);font-size:34px;font-weight:800;font-variant-numeric:tabular-nums;letter-spacing:-.05em;line-height:1;margin-bottom:0;color:#f6f7f5}
+html.smd-splash-v2 .ip-stat-label{font-family:var(--sans);font-size:11.5px;line-height:1.45;color:rgba(246,247,245,.52)}
+html.smd-splash-v2 .ip-stat:nth-child(5) .ip-stat-num{color:#f0c060}
+html.smd-splash-v2 .ip-stat-div{width:auto;height:1px;align-self:auto;background:rgba(255,255,255,.08)}
+html.smd-splash-v2 .ip-together{font-family:var(--smd-dsp);font-size:14px;font-weight:700;letter-spacing:-.005em;line-height:1.35;color:#f6f7f5}
+html.smd-splash-v2 .ip-together span{display:block;margin-top:10px;font-family:var(--sans);font-size:11.5px;font-weight:400;letter-spacing:.01em;line-height:1.55;color:rgba(246,247,245,.48)}
+
+/* Phase 3 - the quote and the real MaiK credit. This is where the ONE glass card is spent, so
+   it has to earn it: the quote is set large and light on the same left axis as phases 1-2, and
+   the card's bottom-left corner is cut back to 8px so the panel is a shape rather than another
+   evenly-rounded rectangle. */
+html.smd-splash-v2 #ipPhase3{width:322px;max-width:calc(100vw - 44px);align-items:flex-start;text-align:left;padding:32px 26px 26px;gap:22px;border-radius:26px 26px 26px 8px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);box-shadow:0 24px 60px rgba(0,0,0,.35)}
+/* the markup hard-wraps the quote mid-sentence; at this size it should set on its own measure */
+/* NB: the quote's <br> STAYS. The markup is "...the only thing<br>standing between...", with no
+   space on either side of it, so suppressing the break sets "thingstanding". At 18px on this
+   measure the forced break falls where the line would have wrapped anyway. */
+html.smd-splash-v2 .ip-grave{order:1;margin:0;padding:0 0 22px;border-left:none;text-align:left;font-family:var(--smd-dsp);font-style:normal;font-size:18px;font-weight:300;line-height:1.46;letter-spacing:-.022em;color:#f6f7f5;position:relative}
+html.smd-splash-v2 .ip-grave::after{content:"";position:absolute;left:0;bottom:0;transform:none;width:40px;height:1px;background:#3fc7b3}
+html.smd-splash-v2 .ip-dev-company{order:2;align-items:flex-start;gap:9px;margin-bottom:0}
+html.smd-splash-v2 .ip-dev-product-of{font-family:var(--smd-dsp);font-size:9px;font-weight:600;letter-spacing:.24em;color:rgba(246,247,245,.38)}
+/* the REAL MaiK word-mark (white asset on the dark poster) replaces the inline placeholder image */
+html.smd-splash-v2 .ip-dev-maik-logo{display:none!important}
+html.smd-splash-v2 .ip-dev-company::after{content:"";display:block;width:124px;height:50px;background:url("/maik-logo-white.png") left center/contain no-repeat}
+html.smd-splash-v2 .ip-copy{order:3;text-align:left;font-size:9.5px;letter-spacing:.05em;color:rgba(246,247,245,.32)}
+
+/* Poster chrome - progress reads as progress, skip is a glass pill */
+html.smd-splash-v2 .ip-footer{bottom:max(24px,env(safe-area-inset-bottom,24px));padding:0 22px}
+html.smd-splash-v2 .ip-dots{gap:6px;align-items:center}
+html.smd-splash-v2 .ip-dot{width:5px;height:5px;border-radius:3px;background:rgba(255,255,255,.25);transition:width .32s cubic-bezier(.2,.75,.25,1),background .32s ease}
+html.smd-splash-v2 .ip-dot.active{width:20px;transform:none;background:#3fc7b3}
+html.smd-splash-v2 .ip-skip{padding:8px 15px;font-size:12.5px;font-weight:600;letter-spacing:.01em;border-radius:999px;background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.14);color:rgba(246,247,245,.78);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);transition:background .18s ease,color .18s ease,transform .12s ease}
+html.smd-splash-v2 .ip-skip:active{transform:scale(.96);background:rgba(255,255,255,.14)}
+
+/* -- Landing splash (#splash) -- */
+html.smd-splash-v2 #splash{background:radial-gradient(280px 280px at 100% 0%,rgba(63,199,179,.3) 0%,rgba(63,199,179,0) 70%),radial-gradient(300px 300px at 0% 100%,rgba(240,192,96,.14) 0%,rgba(240,192,96,0) 70%),radial-gradient(120% 90% at 18% 8%,#1a4a42 0%,#0e2e2a 32%,#0d1b26 62%,#0a141c 100%)}
+html.smd-splash-v2 #splash .splash-inner{max-width:404px;padding:0 24px}
+/* The landing header is the second hero moment, so it gets the same treatment as poster phase
+   1: a big free-standing mark on the left axis, no tile, its own glow. The demo card below it
+   stays centred-content and untouched, which is what gives the screen its scale contrast. */
+html.smd-splash-v2 #splash .splash-mark{position:relative;width:auto;height:auto;margin:0 0 18px;justify-content:flex-start;border-radius:0;background:none;border:0;-webkit-backdrop-filter:none;backdrop-filter:none;box-shadow:none}
+html.smd-splash-v2 #splash .splash-mark::before{content:"";position:absolute;left:-40px;top:-48px;width:210px;height:210px;border-radius:50%;background:radial-gradient(circle,rgba(63,199,179,.24) 0%,rgba(63,199,179,.06) 46%,rgba(63,199,179,0) 70%);pointer-events:none}
+/* the REAL white app mark, in place of the masked-logo silhouette */
+html.smd-splash-v2 #splash .splash-mark-logo{position:relative;width:118px;height:118px;-webkit-mask:none;mask:none;background:url("/mark-white.png") left center/contain no-repeat;filter:drop-shadow(0 16px 36px rgba(0,0,0,.5)) drop-shadow(0 0 28px rgba(63,199,179,.28))}
+html.smd-splash-v2 #splash .splash-name{font-family:var(--smd-dsp);font-size:42px;font-weight:300;letter-spacing:-.045em;line-height:1;text-align:left}
+html.smd-splash-v2 #splash .splash-name .accent{font-weight:800;color:#3fc7b3}
+html.smd-splash-v2 #splash .splash-tagline{text-align:left;margin-top:11px;font-family:var(--smd-dsp);font-size:9.5px;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:rgba(246,247,245,.44)}
+html.smd-splash-v2 #splash .splash-modules{justify-content:flex-start;gap:5px;margin-top:18px;flex-wrap:nowrap;white-space:nowrap}
+/* chips, not pills: squared-off hairline tags, with only the first one filled so the row has a
+   start instead of five identical lozenges */
+html.smd-splash-v2 #splash .splash-module-pill{font-family:var(--smd-dsp);font-size:8.5px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;padding:5px 7px;border-radius:6px;border:1px solid rgba(63,199,179,.24);background:none;color:rgba(246,247,245,.6);flex:0 0 auto}
+html.smd-splash-v2 #splash .splash-module-pill:first-child{border-color:transparent;background:rgba(63,199,179,.18);color:#7fe6d6}
+html.smd-splash-v2 #splash .demo-wrap{margin-top:22px}
+html.smd-splash-v2 #splash .demo-label{text-align:left;margin-bottom:12px;font-family:var(--smd-dsp);font-size:9.5px;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:rgba(246,247,245,.42)}
+html.smd-splash-v2 #splash .demo-card{border-radius:22px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.14);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);box-shadow:0 24px 60px rgba(0,0,0,.35)}
+html.smd-splash-v2 #splash .demo-case-head{padding:16px 18px 14px;border-bottom-color:rgba(255,255,255,.1)}
+html.smd-splash-v2 #splash .demo-case-icon{border-radius:14px;background:rgba(63,199,179,.14);border-color:rgba(63,199,179,.22)}
+html.smd-splash-v2 #splash .demo-case-title{font-family:var(--smd-dsp);font-size:18px;font-weight:700;line-height:1.24;letter-spacing:-.028em;margin-bottom:7px}
+html.smd-splash-v2 #splash .demo-case-tags{gap:6px}
+html.smd-splash-v2 #splash .demo-case-tag{border-radius:20px;padding:4px 10px;font-size:10px;font-weight:600;letter-spacing:.01em;border:none;background:rgba(63,199,179,.16);color:#6fe0cf}
+html.smd-splash-v2 #splash .demo-rx{background:rgba(63,199,179,.06);border-bottom-color:rgba(255,255,255,.1)}
+html.smd-splash-v2 #splash .demo-rx-label{font-size:9.5px;letter-spacing:.1em;color:rgba(246,247,245,.5)}
+html.smd-splash-v2 #splash .demo-drug{border-radius:999px;padding:6px 14px;font-size:13px;letter-spacing:-.005em;background:rgba(63,199,179,.16);border:1px solid rgba(63,199,179,.28);color:#eafbf7}
+html.smd-splash-v2 #splash .demo-notes-row{font-size:12.5px;line-height:1.45;margin-bottom:8px;color:rgba(246,247,245,.85)}
+html.smd-splash-v2 #splash .demo-notes-row:last-child{color:rgba(246,247,245,.55)}
+html.smd-splash-v2 #splash .demo-notes-row:last-child .demo-dot{background:#f0c060}
+html.smd-splash-v2 #splash .demo-dot-btn{border-radius:3px;transition:width .3s cubic-bezier(.2,.75,.25,1),background .3s ease}
+html.smd-splash-v2 #splash .demo-dot-btn.active{width:20px;height:5px;border-radius:3px;transform:none}
+html.smd-splash-v2 #splash .demo-cta{margin-top:16px;padding:16px;border-radius:16px;font-family:var(--smd-dsp);font-size:15px;font-weight:700;letter-spacing:-.015em;background:linear-gradient(135deg,#3fc7b3,#0e6e63);color:#0a141c;box-shadow:0 12px 30px rgba(63,199,179,.35);transition:opacity .15s ease,transform .12s ease}
+html.smd-splash-v2 #splash .demo-cta:active{transform:scale(.985)}
+html.smd-splash-v2 #splash .splash-foot{margin-top:18px;font-size:11px;line-height:1.65;color:rgba(246,247,245,.35)}
+
+@media (prefers-reduced-motion:reduce){
+  html.smd-splash-v2 .ip-bg,
+  html.smd-splash-v2 .ip-phase,
+  html.smd-splash-v2 .ip-logo-fallback,
+  html.smd-splash-v2 #splash .demo-slide{animation:none!important}
+  html.smd-splash-v2 .ip-dot,
+  html.smd-splash-v2 .ip-skip,
+  html.smd-splash-v2 #splash .demo-dot-btn,
+  html.smd-splash-v2 #splash .demo-cta{transition:none!important}
+}
+
+/* ══ LIQUID GLASS pass (poster + landing) ══════════════════════════════════════════════════
+   Same material as the boot splash, built from the tokens declared in the boot-splash layer
+   above, so all five interstitials share ONE surface language instead of three different
+   translucent panels. Every rule here is a material swap on an existing surface: no markup,
+   ID, size, radius or layout is touched, and ?splashv2=0 still reverts the lot.
+   These screens are always on the dark gradient mesh, so they take the dark tokens.
+   Structure of each surface:
+     fallback (no backdrop-filter)  -> a MORE OPAQUE plain fill + solid hairline, still legible
+     @supports (backdrop-filter)    -> refraction (blur + saturate), sheen fill painted to
+                                       padding-box, 1px specular RIM gradient painted to
+                                       border-box, inset highlights top/bottom, ambient shadow */
+html.smd-splash-v2 #ipPhase3,
+html.smd-splash-v2 .ip-skip,
+html.smd-splash-v2 #splash .demo-card,
+html.smd-splash-v2 #splash .splash-module-pill{
+  border:1px solid rgba(255,255,255,.18);
+  background:var(--lg-solid-d);
+  box-shadow:var(--lg-shadow-d);
+}
+@supports ((-webkit-backdrop-filter:blur(1px)) or (backdrop-filter:blur(1px))){
+  html.smd-splash-v2 #ipPhase3,
+  html.smd-splash-v2 #splash .demo-card{
+    border-color:transparent;
+    background:var(--lg-fill-d) padding-box,var(--lg-rim-d) border-box;
+    box-shadow:var(--lg-inset-d),var(--lg-shadow-d);
+    -webkit-backdrop-filter:var(--lg-blur);
+    backdrop-filter:var(--lg-blur);
+  }
+  /* home.js injects "body.ui-v2 .demo-card{border-radius:16px!important;border:...!important;
+     box-shadow:...!important}" for the advanced app theme, and that sheet lands after this one.
+     It was already flattening the Direction C card whenever that theme is on (the radius and
+     the elevation were being replaced by the app-card treatment). The interstitial is a splash
+     surface, not an app card, so it holds its own material here. Scoped to this one card. */
+  html.smd-splash-v2 #splash .demo-card{
+    border-radius:22px!important;
+    border:1px solid transparent!important;
+    box-shadow:var(--lg-inset-d),var(--lg-shadow-d)!important;
+  }
+  /* the small controls get the same material at a tighter blur, so a 30px-tall pill does not
+     smear the whole background behind it */
+  html.smd-splash-v2 .ip-skip,
+  html.smd-splash-v2 #splash .splash-module-pill{
+    border-color:transparent;
+    background:var(--lg-fill-d) padding-box,var(--lg-rim-d) border-box;
+    box-shadow:var(--lg-inset-d),0 6px 18px rgba(0,0,0,.3);
+    -webkit-backdrop-filter:var(--lg-blur-sm);
+    backdrop-filter:var(--lg-blur-sm);
+  }
+  /* the first chip stays the filled/accent one: same glass, tinted teal so the row still has
+     a start rather than five identical lozenges */
+  html.smd-splash-v2 #splash .splash-module-pill:first-child{
+    background:linear-gradient(180deg,rgba(63,199,179,.34) 0%,rgba(63,199,179,.16) 48%,rgba(63,199,179,.26) 100%) padding-box,
+               linear-gradient(155deg,rgba(160,255,238,.7) 0%,rgba(63,199,179,.2) 34%,rgba(63,199,179,.06) 58%,rgba(160,255,238,.4) 100%) border-box;
+    color:#9defdd;
+  }
+  html.smd-splash-v2 .ip-skip:active{background:var(--lg-fill-d) padding-box,var(--lg-rim-d) border-box;box-shadow:var(--lg-inset-d),0 2px 8px rgba(0,0,0,.34)}
+  /* inner pills sit ON glass, so they get the specular edge but no second blur pass */
+  html.smd-splash-v2 #splash .demo-drug,
+  html.smd-splash-v2 #splash .demo-case-tag{
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.30),inset 0 -1px 0 rgba(255,255,255,.08);
+  }
+  /* PRIMARY CTA: tinted glass, not clear glass. It keeps a near-solid teal gradient so the
+     dark label stays fully legible and the button still reads as the one tappable thing on
+     the screen; the glass shows up as the specular rim, the sheen and the refracted edge. */
+  html.smd-splash-v2 #splash .demo-cta{
+    border:1px solid transparent;
+    background:linear-gradient(160deg,rgba(104,231,212,.95) 0%,rgba(63,199,179,.92) 38%,rgba(14,110,99,.94) 100%) padding-box,
+               linear-gradient(155deg,rgba(220,255,249,.95) 0%,rgba(255,255,255,.32) 32%,rgba(255,255,255,.06) 58%,rgba(180,245,233,.6) 100%) border-box;
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.6),inset 0 -1px 0 rgba(255,255,255,.18),0 14px 34px rgba(63,199,179,.34),0 2px 8px rgba(0,0,0,.22);
+    -webkit-backdrop-filter:var(--lg-blur-sm);
+    backdrop-filter:var(--lg-blur-sm);
+  }
+}
+</style>
 
 <!-- ===== CODED INTRO SPLASH SCREEN ===== -->
 <div id="introPoster">
@@ -342,8 +816,8 @@ document.body.classList.toggle("dark",dark);}catch(e){}})();</script>
         <img loading="lazy" src="data:image/webp;base64,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" alt="StewardMD" class="ip-logo-img" style="width:130px;height:auto;object-fit:contain;">
       </div>
     </div>
-    <div class="ip-appname">Steward<span>MD</span><span class="ip-in">.in</span></div>
-    <div class="ip-tagline-sub">ANTIBIOTIC DECISION ENGINE</div>
+    <div class="ip-appname">Steward<span>MD</span></div>
+    <div class="ip-tagline-sub">CLINICAL DECISION SUPPORT PLATFORM</div>
   </div>
 
   <!-- Phase 2: AMR message -->
@@ -373,8 +847,6 @@ document.body.classList.toggle("dark",dark);}catch(e){}})();</script>
 
   <!-- Phase 3: Developer credit -->
   <div class="ip-phase ip-hidden" id="ipPhase3">
-    <div class="ip-dev-label">Created with dedication by</div>
-    <div class="ip-dev-name">Dr. Manoj Kumar Kurmana</div>
     <div class="ip-dev-company">
       <div class="ip-dev-product-of">A PRODUCT OF</div>
       <img loading="lazy" src="data:image/webp;base64,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" alt="MaiKnowledge" class="ip-dev-maik-logo" style="height:84px;width:auto;object-fit:contain;opacity:0.9;">
@@ -382,7 +854,7 @@ document.body.classList.toggle("dark",dark);}catch(e){}})();</script>
       
     </div>
     <div class="ip-grave">"Be ready for the day when you are the only thing<br>standing between a patient and the grave."</div>
-    <div class="ip-copy">© 2026 StewardMD.in · All rights reserved</div>
+    <div class="ip-copy">© 2026 StewardMD · All rights reserved</div>
   </div>
 
   <!-- Always visible: progress dots + skip -->
@@ -405,6 +877,7 @@ document.body.classList.toggle("dark",dark);}catch(e){}})();</script>
 #splash .splash-mark svg{width:30px;height:30px}
 #splash .splash-name{font-size:25px}
 #splash .splash-tagline{margin-top:3px;font-size:12.5px}
+#splash .splash-modules{margin-top:10px}
 #splash .demo-wrap{margin-top:12px}
 #splash .demo-label{margin-bottom:7px}
 #splash .demo-cta{padding:13px}
@@ -412,9 +885,13 @@ document.body.classList.toggle("dark",dark);}catch(e){}})();</script>
 #splash .splash-inner{padding-top:max(10px,env(safe-area-inset-top))}
 @media (max-height:740px){
   #splash .splash-mark-logo{width:76px;height:76px}
+  #splash .splash-modules{margin-top:7px}
   #splash .demo-wrap{margin-top:8px}
   #splash .splash-foot{margin-top:8px}
 }
+/* Module strip — quick visual proof the platform now spans more than antibiotics */
+.splash-modules{display:flex;flex-wrap:wrap;justify-content:center;gap:6px;margin-top:14px}
+.splash-module-pill{font-size:10px;font-weight:600;letter-spacing:.03em;color:#7fe0cf;background:rgba(63,199,179,.1);border:1px solid rgba(63,199,179,.25);border-radius:999px;padding:5px 10px;white-space:nowrap}
 </style>
 <div id="splash">
   <div class="splash-inner">
@@ -422,18 +899,25 @@ document.body.classList.toggle("dark",dark);}catch(e){}})();</script>
       <div class="splash-mark-logo" role="img" aria-label="StewardMD"></div>
     </div>
     <div class="splash-name">Steward<span class="accent">MD</span></div>
-    <div class="splash-tagline">Antibiotic Decision Engine</div>
+    <div class="splash-tagline">Clinical Decision Support Platform</div>
+    <div class="splash-modules" aria-hidden="true">
+      <span class="splash-module-pill">Antibiogram</span>
+      <span class="splash-module-pill">ICU</span>
+      <span class="splash-module-pill">FollowCare</span>
+      <span class="splash-module-pill">MaiK AI</span>
+      <span class="splash-module-pill">Scan-Meds</span>
+    </div>
 
     <!-- ===== CASE SLIDESHOW ===== -->
     <div class="demo-wrap">
-      <div class="demo-label">See what StewardMD recommends →</div>
+      <div class="demo-label">See StewardMD in action →</div>
 
       <div class="demo-card">
 
         <!-- SLIDE 1: CAP -->
         <div class="demo-slide active" id="demo-0">
           <div class="demo-case-head">
-            <div class="demo-case-icon">🫁</div>
+            <div class="demo-case-icon"><span class="material-symbols-rounded" aria-hidden="true">pulmonology</span></div>
             <div>
               <div class="demo-case-title">Community-Acquired Pneumonia</div>
               <div class="demo-case-tags">
@@ -461,7 +945,7 @@ document.body.classList.toggle("dark",dark);}catch(e){}})();</script>
         <!-- SLIDE 2: Typhoid -->
         <div class="demo-slide" id="demo-1">
           <div class="demo-case-head">
-            <div class="demo-case-icon">🌡️</div>
+            <div class="demo-case-icon"><span class="material-symbols-rounded" aria-hidden="true">thermostat</span></div>
             <div>
               <div class="demo-case-title">Enteric Fever (Typhoid)</div>
               <div class="demo-case-tags">
@@ -480,7 +964,7 @@ document.body.classList.toggle("dark",dark);}catch(e){}})();</script>
             </div>
           </div>
           <div class="demo-notes">
-            <div class="demo-notes-row"><div class="demo-dot"></div>Fluoroquinolone resistance common — avoid empirically</div>
+            <div class="demo-notes-row"><div class="demo-dot"></div>Fluoroquinolone resistance common, avoid empirically</div>
             <div class="demo-notes-row"><div class="demo-dot"></div>Step down to oral once sensitivity confirmed</div>
             <div class="demo-notes-row"><div class="demo-dot"></div>WHO Typhoid Guidelines · NCDC India</div>
           </div>
@@ -489,7 +973,7 @@ document.body.classList.toggle("dark",dark);}catch(e){}})();</script>
         <!-- SLIDE 3: Malaria -->
         <div class="demo-slide" id="demo-2">
           <div class="demo-case-head">
-            <div class="demo-case-icon">🦟</div>
+            <div class="demo-case-icon"><span class="material-symbols-rounded" aria-hidden="true">coronavirus</span></div>
             <div>
               <div class="demo-case-title">Severe Falciparum Malaria</div>
               <div class="demo-case-tags">
@@ -512,59 +996,59 @@ document.body.classList.toggle("dark",dark);}catch(e){}})();</script>
           </div>
         </div>
 
-        <!-- SLIDE 4: Pyelonephritis -->
+        <!-- SLIDE 4: ICU Workstation -->
         <div class="demo-slide" id="demo-3">
           <div class="demo-case-head">
-            <div class="demo-case-icon">🫘</div>
+            <div class="demo-case-icon"><span class="material-symbols-rounded" aria-hidden="true">stethoscope</span></div>
             <div>
-              <div class="demo-case-title">Acute Pyelonephritis</div>
+              <div class="demo-case-title">ICU Workstation</div>
               <div class="demo-case-tags">
-                <span class="demo-case-tag">35F</span>
-                <span class="demo-case-tag">Uncomplicated</span>
-                <span class="demo-case-tag">No Prior UTI</span>
+                <span class="demo-case-tag">62M</span>
+                <span class="demo-case-tag">Septic Shock</span>
+                <span class="demo-case-tag">On Vasopressors</span>
               </div>
             </div>
           </div>
           <div class="demo-rx">
-            <div class="demo-rx-label">Recommended Regimen</div>
+            <div class="demo-rx-label">Guided Workflow</div>
             <div class="demo-rx-drugs">
-              <span class="demo-drug">Ceftriaxone IV</span>
+              <span class="demo-drug">Findings</span>
               <span class="demo-plus">→</span>
-              <span class="demo-drug">Oral Step-Down</span>
+              <span class="demo-drug">Working Dx</span>
+              <span class="demo-plus">→</span>
+              <span class="demo-drug">Deep Review</span>
             </div>
           </div>
           <div class="demo-notes">
-            <div class="demo-notes-row"><div class="demo-dot"></div>IV therapy until afebrile 24–48 h; then oral</div>
-            <div class="demo-notes-row"><div class="demo-dot"></div>Total 10–14 day course; urine culture to guide</div>
-            <div class="demo-notes-row"><div class="demo-dot"></div>IDSA UTI/Pyelonephritis Guidelines</div>
+            <div class="demo-notes-row"><div class="demo-dot"></div>Live vitals, trends and organ-support tracking in one view</div>
+            <div class="demo-notes-row"><div class="demo-dot"></div>Ask MaiK about this patient — inline AI second opinion</div>
+            <div class="demo-notes-row"><div class="demo-dot"></div>Vasopressor and infusion dose calculators built in</div>
           </div>
         </div>
 
-        <!-- SLIDE 5: Infective Endocarditis -->
+        <!-- SLIDE 5: MaiK AI Assistant -->
         <div class="demo-slide" id="demo-4">
           <div class="demo-case-head">
-            <div class="demo-case-icon">❤️</div>
+            <div class="demo-case-icon"><span class="material-symbols-rounded" aria-hidden="true">auto_awesome</span></div>
             <div>
-              <div class="demo-case-title">Infective Endocarditis</div>
+              <div class="demo-case-title">MaiK AI Assistant</div>
               <div class="demo-case-tags">
-                <span class="demo-case-tag">58M</span>
-                <span class="demo-case-tag">Native Valve</span>
-                <span class="demo-case-tag">Strep Viridans</span>
+                <span class="demo-case-tag">Case-Aware</span>
+                <span class="demo-case-tag">Cites Sources</span>
+                <span class="demo-case-tag">Available 24/7</span>
               </div>
             </div>
           </div>
           <div class="demo-rx">
-            <div class="demo-rx-label">Recommended Regimen</div>
+            <div class="demo-rx-label">Clinician Asked</div>
             <div class="demo-rx-drugs">
-              <span class="demo-drug">Penicillin G</span>
-              <span class="demo-plus">±</span>
-              <span class="demo-drug">Gentamicin</span>
+              <span class="demo-drug">"Adjust dose for eGFR 28?"</span>
             </div>
           </div>
           <div class="demo-notes">
-            <div class="demo-notes-row"><div class="demo-dot"></div>4-week regimen for penicillin-sensitive strep</div>
-            <div class="demo-notes-row"><div class="demo-dot"></div>Echo and ID consult mandatory</div>
-            <div class="demo-notes-row"><div class="demo-dot"></div>AHA IE Guidelines · Modified Duke Criteria</div>
+            <div class="demo-notes-row"><div class="demo-dot"></div>MaiK: reduce to 1g q24h, avoid nephrotoxic combos</div>
+            <div class="demo-notes-row"><div class="demo-dot"></div>Cites Harrison's, IDSA and hospital protocol inline</div>
+            <div class="demo-notes-row"><div class="demo-dot"></div>Reads the open case — labs, allergies, current orders</div>
           </div>
         </div>
 
@@ -638,6 +1122,43 @@ document.body.classList.toggle("dark",dark);}catch(e){}})();</script>
       }
       wire(); // wire splash/consent NOW during parse — elements are above this script. Do NOT wait for DOMContentLoaded: deferred scripts (~1.3MB JS) delay it ~5-6s and froze the splash.
       if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",wire); // safety net (idempotent via 'wired')
+    })();
+    </script>
+
+    <!-- Case-slide carousel: auto-advance + tap-a-dot. Was dead markup before (5 dots, no JS) —
+         now actually cycles, and respects prefers-reduced-motion. -->
+    <script>
+    (function(){
+      var slides,dots,idx=0,timer=null,wired=false;
+      var AUTO_MS=4200;
+      var reduceMotion=false;
+      try{reduceMotion=!!(window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches);}catch(e){}
+      function go(i){
+        if(!slides||!slides.length)return;
+        idx=(i+slides.length)%slides.length;
+        for(var k=0;k<slides.length;k++)slides[k].classList.toggle("active",k===idx);
+        if(dots)for(var j=0;j<dots.length;j++)dots[j].classList.toggle("active",j===idx);
+      }
+      function next(){go(idx+1);}
+      function stop(){if(timer){clearInterval(timer);timer=null;}}
+      function start(){if(reduceMotion)return;stop();timer=setInterval(next,AUTO_MS);}
+      function wireCarousel(){
+        if(wired)return;
+        var card=document.querySelector("#splash .demo-card");
+        if(!card)return;
+        slides=card.querySelectorAll(".demo-slide");
+        dots=document.querySelectorAll("#demoDots .demo-dot-btn");
+        if(!slides.length)return;
+        wired=true;
+        for(var i=0;i<dots.length;i++){(function(n){dots[n].addEventListener("click",function(){go(n);start();});})(i);}
+        card.addEventListener("mouseenter",stop);
+        card.addEventListener("mouseleave",start);
+        card.addEventListener("touchstart",stop,{passive:true});
+        document.addEventListener("visibilitychange",function(){if(document.hidden)stop();else start();});
+        start();
+      }
+      wireCarousel();
+      if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",wireCarousel);
     })();
     </script>
 
@@ -969,7 +1490,11 @@ document.body.classList.toggle("dark",dark);}catch(e){}})();</script>
               </span>
             </span>
             <span class="ctp-bio">
-              Clinician, researcher, and builder. Trained across two of India's finest government institutions, published in PubMed, presented at ACC, and building open tools that make antimicrobial stewardship accessible to every doctor, not just the ones with access to expensive systems. Aspiring oncologist, with a particular interest in cancer-related infections and supportive care. Believes good medicine starts with the right question, not the right drug.
+              MBBS from Andhra Medical College, Visakhapatnam — founded in 1923, among India's oldest and most respected government medical colleges, and the teaching hospital for the whole of north coastal Andhra. MD Internal Medicine from Jawaharlal Nehru Government Medical College, Ajmer — a Rajasthan institution known for the sheer breadth of undifferentiated medicine that passes through its wards.
+              <br><br>
+              A clinician first, and a builder because the wards kept asking for tools that did not exist. Now practising Internal Medicine at GIMSR, Visakhapatnam. Published in the peer-reviewed literature and indexed on PubMed, presented at the American College of Cardiology, and the author of a textbook chapter. Aspiring oncologist, with a particular interest in cancer-related infections and supportive care.
+              <br><br>
+              Builds open tools that make antimicrobial stewardship reachable for every doctor, not only the ones with access to expensive systems. Believes good medicine starts with the right question, not the right drug.
             </span>
             <a class="ctp-linkedin" href="https://www.linkedin.com/in/manoj-kumar-kurmana-5365882b7" target="_blank" rel="noopener">
               <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
@@ -992,6 +1517,8 @@ document.body.classList.toggle("dark",dark);}catch(e){}})();</script>
               </span>
             </span>
             <span class="ctp-bio">
+              Graduated from the National Institute of Technology, Calicut — one of India's premier engineering institutes.
+              <br><br>
               The driving force behind StewardMD's technology and product execution. He built and shaped the platform's digital foundation, turning clinical ideas into a reliable, practical experience for doctors and healthcare teams.
             </span>
           </span>
@@ -1016,6 +1543,22 @@ document.body.classList.toggle("dark",dark);}catch(e){}})();</script>
           <span class="ack-tip">
             <strong>The Idea Behind It All</strong>
             Dr. M. Suryanarayana Murthy sir provided the foundational idea and vision that gave birth to StewardMD. His insight into the need for a practical antibiotic decision tool shaped the app's core purpose.
+          </span>
+        </span>
+
+        <span class="ack-contrib-name" tabindex="0">
+          Mr. S. Sai Niranjan
+          <span class="ack-tip">
+            <strong>Testing &amp; Marketing</strong>
+            Contributed hands-on testing and helped bring StewardMD to the doctors who need it, outreach, adoption, and real-world feedback.
+          </span>
+        </span>
+
+        <span class="ack-contrib-name" tabindex="0">
+          Dr. Sri Harsha Gora
+          <span class="ack-tip">
+            <strong>Field Testing &amp; Bug Reports</strong>
+            Dr. Sri Harsha Gora uses StewardMD on the wards every day and reports what he finds. Precise, reproducible bug reports and honest reviews that say when something is wrong rather than when it is merely imperfect. The kind of feedback that only comes from someone actually relying on the tool.
           </span>
         </span>
 
@@ -1048,14 +1591,6 @@ document.body.classList.toggle("dark",dark);}catch(e){}})();</script>
           <span class="ack-tip">
             <strong>Review &amp; Feedback</strong>
             Contributed valuable review and feedback that helped refine the experience and polish StewardMD for the people who use it.
-          </span>
-        </span>
-
-        <span class="ack-contrib-name" tabindex="0">
-          Mr. S. Sai Niranjan
-          <span class="ack-tip">
-            <strong>Testing &amp; Marketing</strong>
-            Contributed hands-on testing and helped bring StewardMD to the doctors who need it, outreach, adoption, and real-world feedback.
           </span>
         </span>
 
@@ -1483,32 +2018,42 @@ window.openExternal = function (u) {
   </div>
 </div>
 
-<script src="/native-bridge.js?v=pdffallback1" defer></script>
+<script src="/native-bridge.js?v=nb-splashat" defer></script>
 <!-- Server-driven fleet controls: force-upgrade floor, maintenance mode, remote banners, feature flags.
      Loads after native-bridge so /api/config routes correctly on native. Fail-open. -->
 <script src="/remote-config.js?v=rc1" defer></script>
 <script src="/wear-bridge.js?v=gold1" defer></script>
-<script src="/app.js?v=gold1034" defer></script>
+<!-- The ONE brand->generic map (app.js search, medlist.js, rx-validity.js all read it). Must load
+     before all three; every tag here is defer, so document order is execution order. -->
+<script src="/brand-generics.js?v=bg1" defer></script>
+<script src="/app.js?v=gold1034-brands1" defer></script>
 <!-- Firebase App Check bridge: native App Attest/Play Integrity token -> compat JS SDK. Fail-open,
      native-only, no-op unless the plugin + app-check-compat are present. Loads after app.js (which
      calls firebase.initializeApp); it polls until firebase is booted, then activates. -->
-<script src="/app-check-init.js?v=appcheck3" defer></script>
+<script src="/app-check-init.js?v=appcheck4" defer></script>
 <script src="/antibiogram-data.js?v=gold363" defer></script>
 <script src="/theme-sync.js?v=gold363" defer></script>
 <script src="/theme-reveal.js?v=gold1721" defer></script>
-<script src="/account.js?v=gold364-thread" defer></script>
-<script src="/iap.js?v=iap2" defer></script><script src="/pro-paywall.js?v=gold990" defer></script>
+<script src="/account.js?v=gold364-thread-vclaim1-proevt1-boot1" defer></script>
+<!-- Guest session bar: the 300 s auto-sign-out clock, across the top instead of buried in
+     the account chip. Additive, reads app.js's account record; never edits app.js. -->
+<script src="/guest-timer.js?v=gold1200-guestbar2" defer></script>
+<script src="/iap.js?v=iap2" defer></script><script src="/pro-paywall.js?v=gold990-resync1" defer></script>
 <script src="/pro-badge.js?v=gold692" defer></script>
-<script src="/signout-fix.js?v=gold339" defer></script>
+<!-- "Why is this locked?" - the one place that turns a Pro refusal into a sentence and the
+     RIGHT button (verify vs subscribe). A silent Pro gate reads as a broken app. -->
+<script src="/pro-notice.js?v=gold1200-why" defer></script>
+<script src="/signout-fix.js?v=gold342-bkstatus" defer></script>
 <script src="/welcome-email.js?v=gold342" defer></script>
-<script src="/verify.js?v=gold1026-roles" defer></script>
+<script src="/verify.js?v=gold1026-roles-auth1-resync1" defer></script>
 <!-- Search the Indian Medical Register (window.SMD_NMC), opened from More. Backend: /api/nmc-search. -->
 <script src="/nmc-register.js?v=gold1" defer></script>
 <!-- Prescription PDF/JPEG export libraries (html2canvas → canvas, jsPDF → PDF). Loaded before
      prescription.js; export is user-triggered so defer order is safe. -->
 <script src="/vendor-html2canvas.js?v=1" defer></script>
 <script src="/vendor-jspdf.js?v=1" defer></script>
-<script src="/prescription.js?v=gold981-rx5night-vfyprime-mic1" defer></script>
+<script src="/rx-brand-match.js?v=rxb1" defer></script>
+<script src="/prescription.js?v=gold982-brandsearch-dict1-ui1-rxscan1-why1-pdfqr1-always1-qrfix1-mask1" defer></script>
 <script src="/ku.js?v=gold434-thread" defer></script>
 <!-- Learning-streak active-time engine, achievement share card, and the Clinical Progress
      dashboard (levels / quests / badges / stats / timeline). Load after ku.js + account.js. -->
@@ -1523,20 +2068,21 @@ window.openExternal = function (u) {
      update" row in Settings (home.js) + a proactive banner. Inert (no-op) until the owner adds
      @capgo/capacitor-updater via `npm install && npx cap sync` and rebuilds natively — see
      vault/modules/OTA Updates.md. Must load AFTER native-bridge.js (needs window.SMD_IS_NATIVE). -->
-<script src="/native-ota.js?v=ota2" defer></script>
+<script src="/native-ota.js?v=ota3-noleak-gate1" defer></script>
 <!-- Email sign-up/sign-in + Resend OTP verification + doctor profile (hospital/state/city).
      Additive over Firebase Auth; smd-geo.js is the India states/cities + curated hospital list. -->
 <script src="/smd-geo.js?v=gold472" defer></script>
-<script src="/email-auth.js?v=gold473" defer></script>
+<script src="/email-auth.js?v=gold474" defer></script>
+<script src="/applock.js?v=gold8" defer></script>
 <script src="/policy.js?v=gold363" defer></script>
 <script src="/features.js?v=gold997" defer></script>
-<script src="/calculators.js?v=gold1051-attrib" defer></script>
+<script src="/calculators.js?v=gold1051-r1d-rail1" defer></script>
 <script src="/calc-links.js?v=gold400" defer></script>
 <script src="/icu-autoscores.js?v=gold403" defer></script>
 <script src="/drugs.js?v=gold978" defer></script>
 <script src="/interaction-rules.js?v=gold363" defer></script>
 <script defer src="/kb/ai/drug-fuzzy.js?v=gold1047"></script>
-<script defer src="/medlist.js?v=gold1048-scan"></script>
+<script defer src="/medlist.js?v=gold1049-scan-choose-brands1"></script>
 <script defer src="/ghis-meds.js?v=gold363"></script>
 <script defer src="/interactions.js"></script>
 <script src="/api.js?v=gold465-azclass" defer></script>
@@ -1553,7 +2099,9 @@ window.openExternal = function (u) {
 <script src="/dxmgmt.js?v=gold363" defer></script>
 <script src="/clinical-nlp.js?v=gold363" defer></script>
 <script src="/id-token.js?v=idtok2" defer></script>
-<script src="/reasoning.js?v=nstream1-clinix3" defer></script>
+<link rel="stylesheet" href="/reasoning-workspace.css?v=dxfit7">
+<link rel="stylesheet" href="/knowledge-library.css?v=klall5">
+<script src="/reasoning.js?v=nstream1-clinix3-rail1-dxux3-klall6" defer></script>
 <script src="/renal-dose.js?v=rd1" defer></script>
 <!-- Privacy PR-A: SMD_PRIVACY config (version constants) + consent gate / versioned Privacy Notice
      (SMD_CONSENT). Loads after reasoning.js so it can guard SMD_AI. Reversible via localStorage
@@ -1562,16 +2110,22 @@ window.openExternal = function (u) {
 <script src="/privacy.js?v=gold363" defer></script>
 <!-- Image Engine chooser for ICU Snapshot (Private Device OCR vs AI Vision). Needs SMD_AI
      (reasoning.js) at runtime; used by icu.js + the Settings section in home.js. -->
-<script src="/image-engine.js?v=ie-local2" defer></script>
+<script src="/image-engine.js?v=ie-local3-choose" defer></script>
 <!-- MaiK Answer Engine chooser (KB only · Cloud · On-device). DECORATES window.SMD_AI, so it must
      load after reasoning.js; the Settings row is rendered by home.js. Default pref is "cloud", so
      an untouched install is byte-for-byte the current behaviour. -->
-<script src="/maik-engine.js?v=mxgate2" defer></script>
+<script src="/maik-engine.js?v=mxgate4-dark" defer></script>
 <!-- On-device MaiK: model pack download/cache (SMD_MAIK_MODELS) + llama.cpp inference
      (SMD_MAIK_LOCAL). Native-only in effect; both are inert on the web PWA because the
      capacitor-llama plugin is absent, which is what keeps the picker's third option hidden there. -->
-<script src="/maik-models.js?v=ux1-polish" defer></script>
-<script src="/maik-local.js?v=mxfix3" defer></script>
+<script src="/maik-models.js?v=ux1-polish-lite" defer></script>
+<!-- MaiK Lite on-device RAG (window.SMD_MAIK_RAG / SMD_MAIK_KB_STORE): BM25 over the book chunks +
+     evidence gate, ported from the server pipeline, so MaiK Lite's answers are checked against the
+     actual book text instead of trusting its own recollection. Loaded before maik-local.js, which
+     reads these globals lazily (only when a maik-lite question is actually asked). -->
+<script src="/kb/ai/maik-lite-rag.js?v=rag1" defer></script>
+<script src="/kb/ai/maik-lite-kb-store.js?v=rag1" defer></script>
+<script src="/maik-local.js?v=mxfix4-greet" defer></script>
 <script src="/kb/ai/steward-ai.browser.js?v=gold1034" defer></script>
 <!-- MaiK V2 — deterministic KB Answer Engine (window.MaiKKB). Retrieval-first: answers KB
      knowledge questions locally with citations, no Gemini. Loads before home.js. -->
@@ -1583,17 +2137,17 @@ window.openExternal = function (u) {
 <script src="/kb/ai/ambig-abbrev.js?v=gold1057-lang" defer></script><script src="/kb/ai/maik-brain.js?v=brain-ambig1" defer></script>
 <script src="/kb/ai/maik-evidence.js?v=gold1052-brain" defer></script>
 <script src="/kb/ai/maik-copilot.js?v=gold1053-calcfix" defer></script>
-<script src="/electrolytes.js?v=bug808" defer></script>
+<script src="/electrolytes.js?v=bug808-nodupe-focus1" defer></script>
 <script src="/caseshare.js?v=gold363" defer></script>
-<script src="/hospitals-in.js?v=gold1018" defer></script><script src="/connect-source.js?v=cs3docs" defer></script><script src="/connect-patient.js?v=cp4" defer></script><script src="/queue-flags.js?v=q5-all-on" defer></script><script src="/home.js?v=nstream1-clinix5-surgx2-logo-aiu1" defer></script><script src="/syndromes-motion.js?v=synmo5" defer></script><script src="/dialog-motion.js?v=dm2" defer></script>
-<!-- Lean sidebar redesign (Tools / Reference & Help / Settings / Advanced). Additive; wraps
+<script src="/hospitals-in.js?v=gold1018" defer></script><script src="/connect-source.js?v=cs3docs" defer></script><script src="/connect-patient.js?v=cp4" defer></script><script src="/queue-flags.js?v=q5-all-on" defer></script><script src="/govschemes-flags.js?v=gs2-defaulton" defer></script><script src="/home.js?v=nstream1-clinix5-surgx2-logo-aiu1-profile2-rxtile-glyphs-maikart2-pglog1-ack1-otasay-oncqis-sync1-prompt1-about1-icons1-rxv1-applock3-afoptin-gsrename1-icdtile1-hvtilealign1-sknx16" defer></script><script src="/profile-setup.js?v=pfs1" defer></script><script src="/syndromes-motion.js?v=synmo5" defer></script><script src="/dialog-motion.js?v=dm2" defer></script>
+<!-- Lean sidebar redesign (Tools / Reference & Help / Settings / Advanced / Experimental). Additive; wraps
      SB.open and rebuilds #sbMenu, superseding home.js's legacy reorganizer (which stands down
      via window.SMD_SBR). Must load AFTER home.js. -->
-<script defer src="/sidebar-redesign.js?v=settings-page2-clinix2-surgx1"></script>
+<script defer src="/sidebar-redesign.js?v=settings-page3-exp1-clinix3-surgx1"></script>
 <!-- Settings ▸ Apple Watch page (SMD_APPLE_WATCH). Additive; the sidebar's Apple Watch row
      opens it. Auto-detects pairing via the WatchBridge plugin; degrades to an info card on web.
      Must load after sidebar-redesign.js so the row's action resolves. -->
-<script defer src="/watch-settings.js?v=gold475"></script>
+<script defer src="/watch-settings.js?v=gold476"></script>
 <!-- Guided tour (SMD_TOUR): first-run interactive onboarding + one-time contextual tips.
      Additive/flag-gated (smd_onboarding_tour, default ON; ?tour=0 disables). Loads after
      home.js + account.js so it can read the home DOM and the signed-in account. -->
@@ -1603,8 +2157,10 @@ window.openExternal = function (u) {
      (default ON; ?haptics=0 disables). Loads after native-bridge so Capacitor.Plugins exists. -->
 <script src="/haptics.js?v=gold348" defer></script>
 <script src="/antibiogram.js?v=gold992" defer></script>
+<script src="/govschemes.js?v=gs4-catsearch" defer></script>
+<script src="/icd.js?v=icd1" defer></script>
 <script src="/asp-region.js?v=gold363" defer></script>
-<script src="/swipe-back.js?v=gold481-homemenu" defer></script>
+<script src="/swipe-back.js?v=gold482-edgeback-gestnav1" defer></script>
 <script src="/workspaces.js?v=gold1051-wsroute-surgx1" defer></script>
 <script src="/ws-surgery.js?v=gold363" defer></script>
 <script src="/ws-ent.js?v=gold363" defer></script>
@@ -1616,16 +2172,58 @@ window.openExternal = function (u) {
 <!-- Clinical vocabulary registry (SMD_VOCAB) - deterministic offline finding autocomplete for the
      ICU complaint/finding picker. Separate from disease scoring; maps to existing canonical finding IDs. -->
 <script src="/clinical-vocab.js?v=gold363" defer></script>
-<script src="/icu.js?v=gold999-askmaik" defer></script>
+<script src="/icu.js?v=gold999-askmaik-think1-lytes1-micuvit1-proto3-icdsug1" defer></script>
 <script src="/discharge-ghis.js?v=dg1" defer></script>
+
+<!-- WardSynQ shadow observation of GHIS ingest. BOTH DEFAULT OFF and neither ships enabled.
+
+     wardsynq-flags.js is the flag registry (query param -> localStorage -> default). It was not
+     loaded here before, which meant the flags existed in the codebase and not at runtime.
+
+     wardsynq-shadow-boot.js does nothing at all unless ?wardsynq_shadow=1 is set. When it is, a
+     GHIS bundle already ingested by the legacy path is additionally mapped through the WardSynQ
+     adapter and the result COUNTED AND DISCARDED: no store, no event bus, no chart, no safety
+     state, no change to production behaviour. The legacy ingest runs first and its result is
+     returned untouched.
+
+     It does NOT read or enable smd_wardsynq_cutover. That is a separate flag and remains off. -->
+<script src="/wardsynq-flags.js?v=wsq1" defer></script>
+<script type="module" src="/wardsynq-shadow-boot.js?v=wsq1"></script>
+<!-- WardSynQ Clinical Record: the doctor's phone opening the SAME record the hospital PC charts
+     into. Inert unless a tenant is named (?wardsynq_record=<tenantId>, remembered in localStorage;
+     ?wardsynq_record=off forgets it). Nothing in the app reads window.SMD_WARDSYNQ_RECORD yet. -->
+<script type="module" src="/wardsynq-record-boot.js?v=wsq1"></script>
+<!-- WardSynQ GHIS cut-over. DEFAULT OFF and does not ship enabled.
+
+     wardsynq-ghis-live-boot.js does nothing at all unless ?wardsynq_cutover=1 (or the flag is set
+     directly, on native) is set — the SAME smd_wardsynq_cutover flag wardsynq-flags.js already
+     defines; nothing new is added here. When it is, wardsynq/wardsynq-ghis-live.js (implemented,
+     tested, owner-approved 2026-09-05) wraps the real GHIS ward-sync ingest exactly as
+     wardsynq-shadow-boot.js already wraps it for observation: legacy runs first and is returned
+     untouched, the adapter path can never throw into the caller, and it is idempotent on the
+     source's own event identity.
+
+     It writes ONLY through the connection wardsynq-record-boot.js already opened above
+     (window.SMD_WARDSYNQ_RECORD) — never a new store, never a new tenant. With no tenant configured
+     there, it runs as installLiveGhis's own documented DRY RUN: mapped and counted, nothing written.
+     Real writes need BOTH flags deliberately set. window.SMD_WARDSYNQ_LIVE.halt() stops it
+     in-process without a reload. -->
+<script type="module" src="/wardsynq-ghis-live-boot.js?v=wsq1"></script>
+
+<!-- The acknowledgement screen for a deterioration escalation (HAZ-DET-01).
+
+     Deliberately NOT behind a flag. It is inert until a push of type "wardsynq-alert" arrives, and
+     gating it off would mean an escalation that reaches a handset and cannot be answered on it,
+     which is a worse failure than the screen existing unused. -->
+<script src="/wardsynq-alert-ui.js?v=wsq1" defer></script>
 <!-- ICU v2 Phase 2: real-time collaboration backend (window.SMD_ICU_GROUPS). Pure data +
      Firestore subscription layer; NO DOM. Flag smd_icu_groups (default OFF). Loads AFTER icu.js
      (icu.js reads window.SMD_ICU_GROUPS lazily at runtime, so this order is safe). -->
-<script src="/icu-collab.js?v=gold454" defer></script><script src="/referrals.js?v=ref1" defer></script>
+<script src="/icu-collab.js?v=gold455" defer></script><script src="/referrals.js?v=ref1" defer></script>
 <!-- Native push (APNs iOS + FCM Android) + closed-app watch-lab (SMD_WATCH). native-push.js
      exposes SMD_localNotify/SMD_enableNativePush; watch-lab.js exposes window.SMD_WATCH. -->
-<script src="/native-push.js?v=gold364-thread" defer></script>
-<script src="/watch-lab.js?v=gold363" defer></script>
+<script src="/native-push.js?v=gold364-thread-ref1" defer></script>
+<script src="/watch-lab.js?v=gold363-ref1" defer></script>
 <!-- Apple Watch bridge — publishes session + favorites/recents to the paired
      watch via the WatchBridge plugin (App Group + WatchConnectivity). No-op on
      web and until the native plugin is present; never affects existing flows. -->
@@ -1634,7 +2232,7 @@ window.openExternal = function (u) {
 <script src="/infusion-actions.js?v=gold363" defer></script>
 <!-- MaiK Scribe voice intake (SMD_VOICE): capture → /api/ai/extract → review-first autofill.
      Loads after icu.js/reasoning.js/native-bridge/api.js - only invoked on user tap, so order is safe. -->
-<script src="/voice.js?v=mkfast1-vtiers2" defer></script>
+<script src="/voice.js?v=mkfast1-vtiers2-stt1" defer></script>
 <!-- Ambient voice extraction engine (window.SMD_VVITALS / SMD_EMRMAP / SMD_AMBIENT). Deterministic,
      zero-token, offline: spoken vitals/exam -> structured assessment fields, with a patient-speech +
      manual-override safety gate. A building block for autofilling the OPD assessment (opd-emr.js);
@@ -1683,7 +2281,7 @@ window.openExternal = function (u) {
 <script src="/kardiox-rules.js?v=kx3" defer></script>
 <script src="/kardiox-fusion.js?v=kx1" defer></script>
 <script src="/kardiox-ort-image.js?v=kx1" defer></script>
-<script src="/kardiox-providers.js?v=kx20-edge" defer></script>
+<script src="/kardiox-providers.js?v=kx22-progress" defer></script>
 <script src="/kardiox-net.js?v=kx4" defer></script>
 <script src="/kardiox-reconstruct.js?v=kx1" defer></script>
 <script src="/kardiox-stemi.js?v=kx1" defer></script>
@@ -1696,7 +2294,7 @@ window.openExternal = function (u) {
 <script src="/kardiox-acs.js?v=kx1" defer></script>
 <script src="/kardiox-feedback.js?v=kx1" defer></script>
 <script src="/kardiox-pdf.js?v=kx1" defer></script>
-<script src="/kardiox-screens.js?v=kx21-notecg" defer></script>
+<script src="/kardiox-screens.js?v=kx24-bmfix-wipe-atlas1" defer></script>
 <script src="/kardiox.js?v=kx7" defer></script>
 <!-- ThoreX AI · chest X-ray interpretation (additive, flag-gated smd_thorex, DEFAULT OFF;
      enable with ?thorex=1 or Settings). Sibling of KardioX: scoped #thorexRoot + .tx-* +
@@ -1712,7 +2310,7 @@ window.openExternal = function (u) {
 <script src="/thorex-report.js?v=tx8" defer></script>
 <script src="/thorex-llm.js?v=tx2" defer></script>
 <script src="/thorex-correlate.js?v=tx1" defer></script>
-<script src="/thorex-screens.js?v=tx14" defer></script>
+<script src="/thorex-screens.js?v=tx15-wipe" defer></script>
 <script src="/thorex.js?v=tx1" defer></script>
 <!-- SknX AI · on-device dermatology (lesion/rash) analysis (additive, flag-gated smd_sknx, DEFAULT ON
      in dev - gated before public release, see sknx-flags.js). Sibling of ThoreX/KardioX: scoped
@@ -1727,32 +2325,33 @@ window.openExternal = function (u) {
 <script src="/sknx-vision.js?v=sx13" defer></script>
 <script src="/sknx-realvision.js?v=sx13" defer></script>
 <script src="/sknx-cloudvision.js?v=sx13" defer></script>
-<script src="/sknx-history.js?v=sx13" defer></script>
+<script src="/sknx-history.js?v=sx16-ux" defer></script>
 <script src="/sknx-providers.js?v=sx13" defer></script>
-<script src="/sknx-store.js?v=sx13" defer></script>
+<script src="/sknx-store.js?v=sx16-ux" defer></script>
 <script src="/sknx-evidence.js?v=sx13" defer></script>
 <script src="/sknx-llm.js?v=sx13" defer></script>
 <script src="/sknx-report.js?v=sx13" defer></script>
 <script src="/sknx-compare.js?v=sx13" defer></script>
 <script src="/sknx-rx.js?v=sx13" defer></script>
-<script src="/sknx.js?v=sx14-xagate" defer></script>
-<script src="/sknx-screens.js?v=sx13" defer></script>
-<!-- CliniX · clinical learning for medical students (additive, flag-gated smd_clinix, DEFAULT OFF;
-     reveal with ?clinix=1 or Settings → Experimental). Scoped #clinixRoot + .cx-* + SMD_CLINIX_*
+<script src="/sknx.js?v=sx16-ux" defer></script>
+<script src="/sknx-screens.js?v=sx16-ux" defer></script>
+<!-- CliniX · clinical learning for medical students (additive, flag-gated smd_clinix, DEFAULT ON
+     for testers per the 2026-08-23 owner decision - see clinix-flags.js, which is the authority;
+     force either way with ?clinix=1 / ?clinix=0 or Settings → Experimental). Scoped #clinixRoot + .cx-* + SMD_CLINIX_*
      globals. When the flag is off, clinix.js never mounts the root and nothing is fetched, so the
      whole module is a no-op.
      LOAD ORDER IS LOAD-BEARING: model before content (content resolves the model for its review and
      licence gates), and store before screens (screens read window.SMD_CLINIX_PROGRESS at mount).
      Content itself is NOT bundled here - it is lazily fetched from /clinix/*.json on first open,
      deliberately unlike kardiox-content-pack.js which parses 1.9 MB on every page load. -->
-<script src="/clinix-flags.js?v=cx13" defer></script>
-<script src="/clinix-model.js?v=cx19" defer></script>
-<script src="/clinix-content.js?v=cx14" defer></script>
+<script src="/clinix-flags.js?v=cx14-session" defer></script>
+<script src="/clinix-model.js?v=cx20-annex" defer></script>
+<script src="/clinix-content.js?v=cx15-ver" defer></script>
 <script src="/clinix-diagrams.js?v=cx13" defer></script>
-<script src="/clinix-audio.js?v=cx12" defer></script>
+<script src="/clinix-audio.js?v=cx-stridor2" defer></script>
 <script src="/clinix-store.js?v=cx12" defer></script>
 <script src="/clinix-tutor.js?v=cx14" defer></script>
-<script src="/clinix-screens.js?v=cx22" defer></script>
+<script src="/clinix-screens.js?v=cx24-session" defer></script>
 <script src="/clinix.js?v=cx12" defer></script>
 <!-- SURGX (SURGˣ) · Surgical Intelligence (additive, flag-gated smd_surgx; ON for testers, flip to
      false before any non-tester release - see surgx-flags.js). Scoped #surgxRoot + .sgx-* +
@@ -1764,26 +2363,56 @@ window.openExternal = function (u) {
      (ws-surgery.js, loaded above at the workspaces block) onto its seven-band spine, so the
      surgical decision engine has exactly one home and parity is structural.
      Content is NOT bundled - it is lazily fetched from /surgx/*.json on first open. -->
-<script src="/surgx-flags.js?v=sg10-nogate" defer></script>
-<script src="/surgx-model.js?v=sg1" defer></script>
+<script src="/surgx-flags.js?v=sg13-backup" defer></script>
+<script src="/surgx-model.js?v=sg16-confirm" defer></script>
 <script src="/surgx-content.js?v=sg1" defer></script>
 <script src="/surgx-note-schema.js?v=sg1" defer></script>
-<script src="/surgx-store.js?v=sg5-pt" defer></script>
+<script src="/surgx-store.js?v=sg13-backup" defer></script>
 <script src="/surgx-entitlement.js?v=sg10-nogate" defer></script>
-<script src="/surgx-patient.js?v=sg12-assess" defer></script>
-<script src="/surgx-destinations.js?v=sg5-pt" defer></script>
+<script src="/surgx-patient.js?v=sg14-create" defer></script>
+<script src="/surgx-destinations.js?v=sg6-bk" defer></script>
+<script src="/surgx-backup.js?v=sgbk2-enc" defer></script>
 <script src="/surgx-evidence.js?v=sg1" defer></script>
 <script src="/surgx-diagrams.js?v=sg1" defer></script>
-<script src="/surgx-screens.js?v=sg12-assess" defer></script>
+<script src="/surgx-screens.js?v=sg25-signsend-md2" defer></script>
 <script src="/surgx.js?v=sg1" defer></script>
+<!-- NMC Logbook (PG digital logbook) - additive, flag-gated smd_pglog, DEFAULT ON for testers, same
+     owner decision as clinix/surgx (see pglog-flags.js, which is the authority); force either way
+     with ?pglog=1 / ?pglog=0. Scoped #pglogRoot + .pgl-* + SMD_PGLOG_* globals. Flag off = a
+     COMPLETE no-op: pglog.js never mounts the root, no curriculum pack is fetched and no
+     /api/pglog call is made (test/run-pglog-ui.mjs asserts it).
+     Load order matters: flags -> model (the pure core everything else calls) -> curriculum packs ->
+     store -> reports -> ai -> screens -> pglog.js (the entry that mounts).
+     THE RULES ARE NOT IN THE UI. Validation, the verification state machine, progress and the audit
+     trail live in pglog-model.js and are enforced identically on the server
+     (functions/_pglog_store.js imports the same file). See NMC_PG_LOGBOOK_REQUIREMENTS.md for
+     source -> clause -> feature traceability for every NMC requirement this module implements.
+     Curriculum packs are NOT bundled inline - they are fetched from /pglog/curricula/*.json on
+     first open (copied into www/ by scripts/build-www.sh). -->
+<script src="/pglog-flags.js?v=pgl4" defer></script>
+<script src="/pglog-model.js?v=pgl4" defer></script>
+<script src="/pglog-curriculum.js?v=pgl4" defer></script>
+<script src="/pglog-store.js?v=pgl14-token" defer></script>
+<!-- qrcode-generator (MIT, Kazuhiko Arase). MUST load before pglog-qr.js, which delegates its
+     matrix generation to it: the in-house assembly drew QR codes no scanner could decode. -->
+<script src="/vendor/qrcode-generator.js?v=qrgen1" defer></script>
+<script src="/pglog-qr.js?v=pgl5-lib" defer></script>
+<!-- Prescription validity + schedule rules (pure). Decides which prescriptions get a verification
+     QR and how long they stay valid; the QR itself is encoded by pglog-qr.js above. -->
+<script src="/rx-validity.js?v=rxv3-brands" defer></script>
+<script src="/pglog-reports.js?v=pgl5-diag" defer></script>
+<script src="/pglog-ai.js?v=pgl4" defer></script>
+<script src="/pglog-screens.js?v=pgl26-del" defer></script>
+<script src="/pglog.js?v=pgl5" defer></script>
 <!-- Insulin dose CDSS · additive, flag-gated smd_insulin (DEFAULT OFF; reveal with ?insulin=1). Pure
      engine + safety load before the UI; when the flag is off, insulin.js is a complete no-op. -->
-<script src="/insulin-flags.js?v=ins12" defer></script>
-<script src="/insulin-engine.js?v=ins11" defer></script>
-<script src="/insulin-safety.js?v=ins11" defer></script>
+<script src="/insulin-flags.js?v=ins17" defer></script>
+<script src="/insulin-engine.js?v=ins17" defer></script>
+<script src="/insulin-safety.js?v=ins15" defer></script>
 <script src="/insulin-db.js?v=ins11" defer></script>
 <script src="/insulin-convert.js?v=ins11" defer></script>
-<script src="/insulin.js?v=ins11" defer></script>
+<script src="/insulin-ask.js?v=ins15" defer></script>
+<script src="/insulin.js?v=ins17" defer></script>
 <!-- FollowCare AI · post-discharge recovery follow-up (additive, flag-gated smd_followcare, DEFAULT OFF;
      enable with ?fc=1 or Settings). Doctor module only — patients use the login-free web portal
      (/followcare?t=…), never the app. Engines (pathways/engine/assessment/schedule) also power the
@@ -1797,7 +2426,7 @@ window.openExternal = function (u) {
 <script src="/followcare-analytics.js?v=fc3" defer></script>
 <script src="/followcare-integration.js?v=fc7" defer></script>
 <script src="/followcare-intel.js?v=fc7" defer></script>
-<script src="/followcare.js?v=fc13" defer></script>
+<script src="/followcare.js?v=fc21-appshell" defer></script>
 <!-- Smart OPD Queue (flag smd_opd_queue, default OFF). Inert unless the flag is on + QUEUE.open() is
      called (or ?queue=1). Doctor dashboard is a faithful port of the Google Stitch design. -->
 
@@ -1808,7 +2437,15 @@ window.openExternal = function (u) {
      (opd.html), so the two registration forms can never drift apart. -->
 <link rel="stylesheet" href="/patient-register.css?v=preg1">
 <script src="/patient-register.js?v=preg1" defer></script>
-<script src="/queue.js?v=fdesk1" defer></script>
+<script src="/queue.js?v=fdesk1-addpt1" defer></script>
+<!-- WardSynQ inpatient ward (window.WARD). The admission/ward/eMAR/discharge routes have been
+     server-authoritative and tested for a while with nothing in the app calling them; this is the
+     screen. Self-mounting overlay, no nav coupling yet - opened via WARD.open({orgId}). -->
+<script src="/ward.js?v=ward16-pcopy" defer></script>
+<!-- Discharge summary workstation (window.DISCHARGE). Reads the assembled summary, lets a treating
+     clinician correct it section by section, and signs it into an immutable version. Opened from a
+     discharged patient on the ward screen: DISCHARGE.open({orgId, encounterId}). -->
+<script src="/discharge.js?v=dis1" defer></script>
 <!-- Oncology dose engine (pure, no DOM/fetch). Phase 4 needs it client-side: applying a protocol
      computes calculatedDoses via window.SMD_ONCODOSE.planDoses() before anything is staged/posted. -->
 <script src="/onco-dose.js?v=op1" defer></script>
@@ -1826,7 +2463,7 @@ window.openExternal = function (u) {
 <script src="/onco-protocol-report.js?v=onco1" defer></script>
 <!-- OPD patient profile + reports (flag smd_opd_emr, default OFF). Read-only view over the existing GHIS
      read proxy; inert unless the flag is on + OPDEMR.openProfile() is called from a queue ticket. -->
-<script src="/opd-emr.js?v=mkfast1-scribeloud2-ghisdoc3-mic1" defer></script>
+<script src="/opd-emr.js?v=mkfast1-scribeloud2-ghisdoc3-mic1-auth3-oncqis-scroll1-icdsug1" defer></script>
 <!-- My Clinic — on-device EMR for personal clinics (reuses opd-emr's form; flag smd_personal_clinic). -->
 <script src="/personal-clinic.js?v=gold6" defer></script>
 <!-- Shared Clinic — multi-device encrypted EMR for clinics/small hospitals with no EMR (flag
@@ -1871,7 +2508,7 @@ window.openExternal = function (u) {
      every proposed dose comes from SMD_ONCODOSE with the full lineage visible. Reuses SMD_ONCORECOMMEND
      (Phase B), SMD_ONCOEV (Phase C), SMD_ONCOUI matrix/drawer + SMD_ONCODOSE. Loaded before onco-home.js. -->
 <script src="/onco-plan-flow.js?v=op1" defer></script>
-<script src="/onco-home.js?v=op6" defer></script>
+<script src="/onco-home.js?v=op6-oncqis-open1" defer></script>
 <!-- ONCOTREE navigator (flag smd_onco_navigator, DEFAULT OFF): deterministic disease pathway
      (phenotype -> APPLICABLE EXISTING Standard Protocols by reference). Decision-support only; never a
      second protocol DB, never auto-selects/doses. engine + recommend loaded before the UI. -->
@@ -1888,7 +2525,7 @@ window.openExternal = function (u) {
      they ever open ICU or touch Group mode. The verified-email / Apple-proxy anchor
      CAPTURE UI remains flag-gated (smd_steward_id, DEFAULT OFF; ?stewardid=1). -->
 <script src="steward-id-flags.js?v=smdid2"></script>
-<script src="steward-id.js?v=smdid2"></script>
+<script src="steward-id.js?v=smdid3"></script>
 <script src="anchor-email.js?v=smdid2"></script>
 <script src="steward-id-onboard.js?v=smdid2"></script>
 <!-- GHIS Ward Sync (additive integration; flag-gated, reversible). The frontend
@@ -1917,11 +2554,15 @@ window.openExternal = function (u) {
   // #sbMenu is rebuilt on each SB.open, so re-inject the item every open (mirrors home.js).
   function ghisWrapSB() { try { if (window.SB && typeof SB.open === "function" && !SB.__ghisWrapped) { var o = SB.open; SB.open = function () { var r = o.apply(this, arguments); setTimeout(ghisSidebarItem, 50); return r; }; SB.__ghisWrapped = true; } } catch (e) {} }
   function loadGhis() {
-    if (!document.getElementById("ghis-ward-script")) { var s = document.createElement("script"); s.id = "ghis-ward-script"; s.src = "/ghis-ward.js?v=gold1002-pick"; document.body.appendChild(s); }
+    if (!document.getElementById("ghis-ward-script")) { var s = document.createElement("script"); s.id = "ghis-ward-script"; s.src = "/ghis-ward.js?v=gw-assess1-demohosp3"; document.body.appendChild(s); }
+    // Offline "Test Hospital" demo dataset — 25 fictional patients, real-shaped labs, no GHIS
+    // login needed. Loaded alongside ghis-ward.js so the setup screen's demo button works the
+    // moment Ward Sync opens.
+    if (!document.getElementById("demo-hospital-script")) { var ds = document.createElement("script"); ds.id = "demo-hospital-script"; ds.src = "/demo-hospital.js?v=demohosp2"; document.body.appendChild(ds); }
     // Auto-fetch (device-local, opt-in): keeps a linked Ward Sync patient's reports fresh on
     // launch/resume. Depends on window.GHIS above, so loaded right after it. Flag-gated with GHIS
     // itself — meaningless without Ward Sync. Consent + toggle live entirely in autofetch.js.
-    if (!document.getElementById("smd-autofetch-script")) { var af = document.createElement("script"); af.id = "smd-autofetch-script"; af.src = "/autofetch.js?v=gold440"; document.body.appendChild(af); }
+    if (!document.getElementById("smd-autofetch-script")) { var af = document.createElement("script"); af.id = "smd-autofetch-script"; af.src = "/autofetch.js?v=gold440-afoptin"; document.body.appendChild(af); }
     ghisHideFab(); ghisWrapSB(); ghisSidebarItem();
     [400, 1200, 2500].forEach(function (ms) { setTimeout(function () { ghisWrapSB(); ghisSidebarItem(); }, ms); });
   }
@@ -2073,6 +2714,7 @@ window.openExternal = function (u) {
   else init();
 })();
 </script>
-<script src="/atlas.js?v=atlas1"></script>
+<script src="/atlas.js?v=atlas1-3d1"></script>
+<script src="/atlas3d.js?v=a3d8"></script>
 </body>
 </html>

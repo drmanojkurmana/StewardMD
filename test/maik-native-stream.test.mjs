@@ -80,3 +80,35 @@ test("the server side really does stream (the contract this relies on)", () => {
   assert.match(api, /text\/event-stream/, "and it is relayed as SSE");
   assert.match(api, /X-Accel-Buffering/, "with proxy buffering disabled");
 });
+
+/* ── the app must recover its network after the phone sleeps ──────────────── */
+
+test("a lost-network request is retried, then falls back to the WebView stack", () => {
+  /* Measured on a Pixel 9, 2026-08-26: after the device slept, EVERY CapacitorHttp request failed
+   * with `Unable to resolve host "stewardmd.in"` while the OS pinged the same host in 67ms. It
+   * stayed broken until the app was force-restarted, and returned on the next sleep. A surgeon
+   * tapped "write to the hospital record", the note was signed, and the send died silently on DNS.
+   * Twice, in front of the owner. */
+  const src = readFileSync(new URL("../native-bridge.js", import.meta.url), "utf8");
+  assert.match(src, /function isNetworkLost\(e\)/);
+  assert.match(src, /Unable to resolve host\|No address associated with hostname\|UnknownHostException/);
+  const fn = src.slice(src.indexOf("function nativeApiFetch"), src.indexOf("if (typeof window.fetch === \"function\")"));
+  assert.match(fn, /Http\.request\(reqOpts\)\.catch/, "the first failure must be caught, not surfaced");
+  assert.match(fn, /CapacitorWebFetch/, "and fall back to the stack with its own resolver");
+  assert.match(fn, /if \(!isNetworkLost\(err\)\) throw err/,
+    "a real HTTP error must NOT be retried - only a lost network");
+});
+
+test("the failure a clinician sees says what to DO", () => {
+  const src = readFileSync(new URL("../native-bridge.js", import.meta.url), "utf8");
+  assert.match(src, /Close and reopen StewardMD/, '"Failed to fetch" is not actionable');
+  assert.match(src, /code = "network_lost"/);
+});
+
+test("resume re-warms the resolver, so the first tap is not the failing one", () => {
+  const src = readFileSync(new URL("../native-bridge.js", import.meta.url), "utf8");
+  assert.match(src, /appStateChange/);
+  assert.match(src, /if \(!st \|\| !st\.isActive\) return/, "only on coming to the foreground");
+  assert.match(src, /catch\(function \(\) \{\}\)|catch\(function \(\)\{\}\)|\.catch\(function \(\) \{\}\)/,
+    "fire and forget - the warm-up must never surface an error of its own");
+});

@@ -231,7 +231,11 @@
     // pure, for tests
     driveFilename: driveFilename,
     driveMultipartBody: driveMultipartBody,
-    DRIVE_FOLDER: DRIVE_FOLDER
+    DRIVE_FOLDER: DRIVE_FOLDER,
+    // Shared with surgx-backup.js so the backup writes into the SAME folder with the SAME account,
+    // rather than growing a second Drive integration that could drift from this one.
+    driveToken: driveToken,
+    driveFolderId: driveFolderId
   };
 
   if (typeof module !== "undefined" && module.exports) module.exports = API;

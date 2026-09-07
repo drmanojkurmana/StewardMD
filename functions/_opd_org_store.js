@@ -27,17 +27,23 @@ export async function createOrg(env, body, ownerUid) {
   body = body || {};
   const id = body.id ? sanitize(body.id) : newId();
   const code = await uniqueOrgCode(env);
-  const f = M.org({ id, code, name: body.name, mode: body.mode, connectorId: body.connectorId, ownerUid, thresholds: body.thresholds, createdAt: now() });
+  const f = M.org({ id, code, name: body.name, kind: body.kind, mode: body.mode, connectorId: body.connectorId, ownerUid, thresholds: body.thresholds, createdAt: now() });
   await fsCommit(env, [wCreate(env, "q_orgs/" + id, f)]);
   await audit(env, id, ownerUid, "org:create", f.mode + " " + code);
   return f;
 }
 export async function getOrg(env, orgId) {
-  const d = await fsGet(env, "q_orgs/" + sanitize(orgId)); if (!d) return null;
-  const o = M.org(withId(sanitize(orgId), d.fields));
+  let id = sanitize(orgId);
+  let d = await fsGet(env, "q_orgs/" + id);
+  /* Document ids are lower-case hex, and clients have upper-cased them: the pglog setup screen
+   * applied .toUpperCase() to every handle a user typed, which is correct for an SMD-XXXXXX code
+   * and fatal for a pasted org id. Retry once folded so those devices resolve instead of 404ing. */
+  if (!d && /^[0-9A-F]{32}$/.test(id)) { id = id.toLowerCase(); d = await fsGet(env, "q_orgs/" + id); }
+  if (!d) return null;
+  const o = M.org(withId(id, d.fields));
   if (!o.code) {   // lazy-assign a StewardMD ID to a legacy org on first load
     o.code = await uniqueOrgCode(env);
-    try { await fsCommit(env, [wUpdate(env, "q_orgs/" + sanitize(orgId), { code: o.code })]); } catch (e) {}
+    try { await fsCommit(env, [wUpdate(env, "q_orgs/" + id, { code: o.code })]); } catch (e) {}
   }
   return o;
 }
@@ -59,6 +65,12 @@ export async function userSmdId(env, uid, email) {
   const smdId = M.genSmdCode("SMD-U-", 5);
   try { await fsCommit(env, [wUpdate(env, "q_users/" + id, { smdId, email: String(email || "").toLowerCase(), createdAt: now() })]); } catch (e) {}
   return smdId;
+}
+// Every institution, for the PLATFORM owner's tenant console only (never an org-scoped caller).
+// Decoding goes through M.org/withId like every other read in this file, so the shape cannot drift.
+export async function listAllOrgs(env, limit) {
+  const r = await fsQuery(env, "q_orgs", { limit: limit || 300 });
+  return r.map((x) => M.org(withId(x.id, x.fields)));
 }
 export async function listOrgsForOwner(env, ownerUid) {
   const r = await fsQuery(env, "q_orgs", { where: { field: "ownerUid", value: String(ownerUid) }, limit: 100 });
@@ -116,7 +128,34 @@ export async function updateRoom(env, roomId, patch, actorId) {
 function memberId(orgId, identity) { return sanitize(orgId) + "__" + sanitize(identity); }
 export async function setMembership(env, orgId, identity, body, actorId) {
   const id = memberId(orgId, identity);
-  const f = M.membership({ id, orgId, identity, role: (body || {}).role, scope: (body || {}).scope, active: (body || {}).active !== false, createdAt: now() });
+  /* MERGE, do not overwrite. M.membership() fills an omitted scope with {departments:[],opds:[],
+   * rooms:[]}, and an EMPTY scope means whole-org (see withinScope in _opd_org.js). wUpdate's mask
+   * covers every key present, so a caller that sends no scope - /api/pglog/enrol never does -
+   * silently promoted an HoD scoped to one department into institution-wide access, and flipped
+   * `active` back to true. Re-enrolling someone to fix a typo must not widen what they can see. */
+  const prev = (await getMembership(env, orgId, identity)) || null;
+  const b = body || {};
+
+  /* ROLE FALLS BACK TO THE EXISTING ROLE, exactly as scope and active do below.
+   *
+   * It did not, and M.membership defaults a missing role to "viewer" - which holds queue.view and
+   * nothing else. So re-saving a member to change their scope, or to flip them active again, wiped
+   * a nurse to read-only. The only symptom is that check-in starts answering 403 forbidden, with
+   * nothing on screen connecting that to an edit nobody thought was about roles.
+   *
+   * A member created with no role at all cannot do the one job the staff console exists for, so
+   * that is refused rather than quietly written as a viewer. Never defaulted UPWARDS - guessing
+   * "nurse" would hand out queue control nobody granted. */
+  const role = String(b.role || (prev && prev.role) || "").trim();
+  if (!role) return { ok: false, error: "role_required", message: "Choose a role for this person - a member with no role can only watch the queue." };
+
+  const f = M.membership({
+    id, orgId, identity,
+    role: role,
+    scope: b.scope !== undefined ? b.scope : (prev && prev.scope),
+    active: b.active !== undefined ? b.active !== false : (prev ? prev.active !== false : true),
+    createdAt: (prev && prev.createdAt) || now(),
+  });
   await fsCommit(env, [wUpdate(env, "q_members/" + id, f)]);
   await audit(env, orgId, actorId, "member:set", identity + ":" + f.role); return f;
 }

@@ -117,10 +117,16 @@
     },
     stridor: {
       label: "Stridor",
-      hint: "INSPIRATORY, harsh, loudest over the neck. Upper airway obstruction. An emergency, not a wheeze.",
-      insp: 1.8, exp: 1.0, gap: 0, rest: 0.6,
-      band: 500, q: 0.8, inspGain: 0.4, expGain: 0.12,
-      wheezeHz: [420], wheezePhase: "insp", wheezeGain: 0.34
+      hint: "Harsh, HIGH pitched, loudest over the neck. Upper airway obstruction, and an emergency. This model plays the INSPIRATORY pattern of laryngeal obstruction; the phase itself localises, so biphasic stridor points to the subglottis or trachea and expiratory stridor to an intrathoracic large airway.",
+      insp: 1.9, exp: 1.0, gap: 0, rest: 0.6,
+      // Turbulent noise centred HIGH: this is a supraglottic/tracheal sound, not a small-airway one.
+      band: 950, q: 1.3, inspGain: 0.42, expGain: 0.10,
+      /* PITCH IS THE WHOLE TEACHING POINT. Stridor must sit clearly ABOVE the wheezes, or a student
+       * comparing them learns the discriminator backwards. It was 420 Hz, below the 520 Hz
+       * monophonic wheeze (owner report, 2026-08-25).
+       * A fundamental plus its octave reads as ONE harsh note rather than as a polyphonic chord,
+       * which is what makes stridor sound strained rather than musical. */
+      wheezeHz: [1000, 2000], wheezePhase: "insp", wheezeGain: 0.30
     }
   };
 

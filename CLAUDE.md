@@ -41,7 +41,7 @@ while the phone kept running the previous bundle; only the third took. After ins
 **No `.xcworkspace`** — this is Capacitor SPM, not CocoaPods. Build the `App` scheme of
 `ios/App/App.xcodeproj`; `-workspace ios/App/App.xcworkspace` fails with "does not exist".
 `xcode-select` points at CommandLineTools (no iOS SDK), so pass the real Xcode per-command:
-`export DEVELOPER_DIR="/Users/diwakarkumar/Downloads/Xcode-beta 2.app/Contents/Developer"` —
+`export DEVELOPER_DIR="/Applications/Xcode-beta 2.app/Contents/Developer"` —
 don't `xcode-select -s` (needs sudo, changes it for every other worktree/session).
 
 **Plugin symbols are NOT in `App.app/App`.** Xcode 16+ Debug builds put the code in
@@ -71,3 +71,10 @@ Push to `main` → Cloudflare Pages auto-deploys (repo root static + `functions/
 changes reach the native app only after `build-www` → `cap sync` → native rebuild + reinstall.
 
 Detailed, session-spanning facts are in the user's auto-loaded memory (`MEMORY.md`).
+
+## Output style (token efficiency)
+- Thorough in reasoning, concise in output. Short sentences, no filler, no preamble/pleasantries.
+- Tool first, result first. No explanation unless asked.
+- Skip files over 100KB unless required.
+- No sycophantic openers or closing fluff, no emojis, no em-dashes (or replacement hyphens) outside code.
+- Do not guess APIs, versions, flags, commit SHAs, or package names. Verify by reading code or docs before asserting.

@@ -14,6 +14,7 @@
 import { emailProUpsell } from "./_email.js";
 import { promoActive, promoUntil } from "./_entitlement.js";
 import { getUserClaims } from "./_fbadmin.js";
+import { fsGet, fsCommit, wDelete } from "./_fbfirestore.js";
 
 function lcKv(env) { return env.MAIK_KV || env.GHIS_KV || env.UPDATES_KV || null; }
 const PREFIX = "lifecycle:u:";
@@ -31,7 +32,8 @@ export async function getLifecycle(env, uid) {
 async function putLifecycle(env, uid, rec) {
   const kv = lcKv(env); if (!kv || !uid) return;
   // Mirror the sweep-relevant fields into metadata so list() can filter without reading each value.
-  const metadata = { firstSeen: rec.firstSeen || 0, upsellAt: rec.upsellAt || 0, verifiedAt: rec.verifiedAt || 0 };
+  const metadata = { firstSeen: rec.firstSeen || 0, upsellAt: rec.upsellAt || 0, verifiedAt: rec.verifiedAt || 0,
+                     purgeWarnedAt: rec.purgeWarnedAt || 0, purgedAt: rec.purgedAt || 0 };
   try { await kv.put(KEY(uid), JSON.stringify(rec), { metadata }); } catch (e) {}
 }
 
@@ -90,6 +92,133 @@ export async function sendProUpsellOnce(env, uid, { email, name } = {}) {
   if (ok) rec.upsellAt = Date.now();
   await putLifecycle(env, uid, rec);
   return { sent: ok };
+}
+
+/* ── Unverified-account sweep (owner decision, 2026-08-27) ────────────────────────────────────
+ * "Who signs up just gets access to FREE, with auto account deletion after 7 days."
+ *
+ * decidePurge() is deliberately PURE: given a lifecycle record and the account's claims it returns
+ * what should happen, with no network and no writes. Every skip rule below is a way for a real
+ * person to be spared, so they are worth reading as a list rather than trusting to a KV filter:
+ * KV list() metadata can be stale, claims are authoritative, and this is a destructive path.
+ *
+ * Returns { action, reason, ageDays } where action is one of:
+ *   "skip"    leave the account alone
+ *   "warn"    send the day-5 reminder (once)
+ *   "purge"   the account is due for removal (the CALLER decides disable vs delete)
+ */
+export const PURGE_DAYS_DEFAULT = 7;
+export const WARN_DAYS_DEFAULT = 5;
+
+export function purgeDays(env) {
+  const n = +(env && env.UNVERIFIED_PURGE_DAYS);
+  return Number.isFinite(n) && n > 0 ? n : PURGE_DAYS_DEFAULT;
+}
+export function warnDays(env) {
+  const n = +(env && env.UNVERIFIED_WARN_DAYS);
+  return Number.isFinite(n) && n > 0 ? n : WARN_DAYS_DEFAULT;
+}
+// ARMED by owner decision, 2026-08-27. Set UNVERIFIED_PURGE_ON=0 to put it back into report-only
+// mode without a deploy. The protections in decidePurge() are what make this safe to leave running:
+// verified, paying and pending-review accounts are spared, and nobody is removed unwarned.
+export function purgeEnabled(env) {
+  const v = env && env.UNVERIFIED_PURGE_ON;
+  if (v === undefined || v === null || v === "") return true;
+  return !(String(v) === "0" || String(v) === "false");
+}
+// Owner asked for DELETE, not disable. Set UNVERIFIED_PURGE_HARD_DELETE=0 to soften it back to a
+// reversible account disable. When this is on, purgeUserData() runs FIRST - deleting the sign-in
+// while leaving the clinical data behind would be the worst of both: the doctor cannot reach their
+// own records and we are still holding them.
+export function hardDeleteEnabled(env) {
+  const v = env && env.UNVERIFIED_PURGE_HARD_DELETE;
+  if (v === undefined || v === null || v === "") return true;
+  return !(String(v) === "0" || String(v) === "false");
+}
+
+/* Remove the server-side data an account owns, before the account itself goes.
+ *
+ * An unverified account is by definition one that never unlocked the clinical tools, so in practice
+ * this is near-empty - but "near" is not "always", and a delete that orphans patient data is a
+ * retention problem, not a tidy-up. Best-effort and never throws: a failure here must not stop the
+ * sweep, and every step is independently safe to retry.
+ *
+ * Deliberately NOT deleted: the lifecycle record itself, which stays as a tombstone (purgedAt) so a
+ * later run does not reprocess the same uid.
+ */
+export async function purgeUserData(env, uid) {
+  const out = { cases: 0, index: false, doctor: false, budget: false, profile: false, directory: false };
+  if (!uid) return out;
+  const cs = (env && (env.CASES_KV || env.GHIS_KV)) || null;
+  if (cs) {
+    try {
+      const idx = (await cs.get("icu:index:" + uid, "json")) || [];
+      for (const e of (Array.isArray(idx) ? idx : [])) {
+        if (!e || !e.id) continue;
+        try { await cs.delete("icu:case:" + uid + ":" + e.id); out.cases++; } catch (x) {}
+      }
+      await cs.delete("icu:index:" + uid); out.index = true;
+    } catch (e) {}
+    try { await cs.delete("icu:doctor:" + uid); out.doctor = true; } catch (e) {}   // verification record
+  }
+  const mk = lcKv(env);
+  if (mk) { try { await mk.delete("maik:budget:" + uid); out.budget = true; } catch (e) {} }
+
+  // Firestore: the private profile, and the directory pointer that makes them findable by ID.
+  try {
+    const prof = await fsGet(env, "users/" + uid + "/profile/self");
+    const writes = [wDelete(env, "users/" + uid + "/profile/self")];
+    const smdId = prof && prof.smdId;
+    if (smdId) writes.push(wDelete(env, "doctorDirectory/" + smdId));
+    await fsCommit(env, writes);
+    out.profile = true; out.directory = !!smdId;
+  } catch (e) {}
+  return out;
+}
+
+export function decidePurge(env, rec, claims, now) {
+  now = now || Date.now();
+  const c = claims || {};
+  const r = rec || {};
+  const ageDays = r.firstSeen ? (now - r.firstSeen) / 86400000 : null;
+
+  // --- reasons a real account is spared, checked against CLAIMS, not the KV metadata ---
+  if (c.verified === true) return { action: "skip", reason: "verified", ageDays };
+  if (c.provUntil && +c.provUntil > now) return { action: "skip", reason: "pending-review", ageDays };
+  // Never remove someone who paid us, verified or not. If that ever happens it is a refund
+  // conversation, not a cron job.
+  if (c.pro === true && (!c.proExp || +c.proExp > now)) return { action: "skip", reason: "paying", ageDays };
+  if (r.verifiedAt) return { action: "skip", reason: "verified-record", ageDays };
+  if (r.purgedAt) return { action: "skip", reason: "already-purged", ageDays };
+  if (!r.firstSeen) return { action: "skip", reason: "no-first-seen", ageDays };
+
+  const age = ageDays;
+  if (age >= purgeDays(env)) {
+    // Nobody is removed who was never told. If the warning has not gone out (a sweep that only
+    // started running today, an email that kept failing), warn now and purge on a later run.
+    if (!r.purgeWarnedAt) return { action: "warn", reason: "overdue-but-unwarned", ageDays };
+    return { action: "purge", reason: "unverified", ageDays };
+  }
+  if (age >= warnDays(env) && !r.purgeWarnedAt) return { action: "warn", reason: "approaching", ageDays };
+  return { action: "skip", reason: "too-young", ageDays };
+}
+
+// Stamp the day-5 warning (send-once guard).
+export async function markPurgeWarned(env, uid) {
+  if (!lcKv(env) || !uid) return null;
+  const rec = (await getLifecycle(env, uid)) || { firstSeen: Date.now() };
+  rec.purgeWarnedAt = Date.now();
+  await putLifecycle(env, uid, rec);
+  return rec;
+}
+// Stamp the removal, so a re-run never touches the same account twice.
+export async function markPurged(env, uid, how) {
+  if (!lcKv(env) || !uid) return null;
+  const rec = (await getLifecycle(env, uid)) || { firstSeen: Date.now() };
+  rec.purgedAt = Date.now();
+  rec.purgedHow = how || "disable";
+  await putLifecycle(env, uid, rec);
+  return rec;
 }
 
 // List uids whose entry passes `pred(metadata)` — filtered from list() metadata, no per-key get.

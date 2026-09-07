@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<!--
+  wardsynq/ui/opd.html — the bedside surface.
+
+  A phone or tablet held at a patient's side. It is the same design system as the workstation, and
+  deliberately does much less: confirm the patient, scan a dose, give it, record what you saw.
+
+  NOT REACHABLE. This is behind no route in the mobile app and is not in the www/ build. It is a
+  surface with tested logic (test/wardsynq-opd.test.mjs) and no way for a user to open it, which is
+  the correct state for something that touches medication administration and has never been used on
+  a ward.
+-->
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <!-- viewport-fit so the safe-area insets in the CSS actually apply on a notched device.
+       user-scalable is NOT disabled: a clinician who needs to zoom a number must be able to. -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="light">
+  <title>WardSynQ Bedside</title>
+  <link rel="stylesheet" href="./opd.css">
+  <link rel="icon" type="image/png" sizes="32x32" href="./brand/icon-32.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="./brand/icon-180.png">
+  <link rel="manifest" href="./brand/wardsynq.webmanifest">
+  <meta name="theme-color" content="#1c3048">
+</head>
+<body class="opd">
+
+  <!-- The patient, always visible, never scrolled away. Every wrong-patient error starts with
+       somebody being sure which chart they are on. -->
+  <header class="opd-header" id="header" data-identity="unconfirmed">
+    <div class="who">
+      <div class="name" id="patient-name">No patient open</div>
+      <div class="ids" id="patient-ids"></div>
+    </div>
+    <div class="band" id="patient-band"></div>
+    <img class="brand-mark" src="./brand/wardsynq-mark.png" alt="" aria-hidden="true"
+         width="24" height="17" decoding="async">
+  </header>
+
+  <!-- Offline is a normal state on a ward with a basement, so it is stated plainly rather than
+       being a red error. -->
+  <div class="opd-offline" id="offline" hidden>
+    Working offline. <span id="held-count">0</span> item(s) held on this device.
+  </div>
+
+  <main>
+    <!-- Identity first. Nothing else on this screen works until this is answered. -->
+    <section class="opd-scan" aria-labelledby="identity-h">
+      <h2 id="identity-h" style="margin:0 0 8px;font-size:14.5px;">Confirm the patient</h2>
+      <label for="wristband" style="display:block;font-size:13.5px;margin-bottom:6px;">
+        Scan the wristband on the patient in front of you
+      </label>
+      <input id="wristband" name="wristband" type="text" inputmode="text"
+             autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false"
+             aria-describedby="identity-state">
+      <!-- role=status so a screen reader announces the result; the height is reserved in CSS so
+           confirming does not reflow the buttons under a descending thumb. -->
+      <p class="state" id="identity-state" role="status" aria-live="polite"></p>
+    </section>
+
+    <!-- Refusals live here. They persist until acknowledged, and are never toasts. -->
+    <div id="refusals" role="alert" aria-live="assertive"></div>
+
+    <section aria-labelledby="due-h">
+      <h2 id="due-h" style="margin:16px 16px 8px;font-size:14.5px;">Due now</h2>
+      <ul class="opd-list" id="due"></ul>
+    </section>
+
+    <div class="opd-actions">
+      <!-- Disabled in markup, and the underlying action refuses independently. A UI field existing
+           is never what makes an action legal. -->
+      <button type="button" class="opd-btn" data-kind="commit" id="administer" disabled>
+        Scan and administer
+      </button>
+      <button type="button" class="opd-btn" id="observations" disabled>
+        Record observations
+      </button>
+      <button type="button" class="opd-btn" data-kind="irreversible" id="hold" disabled>
+        Hold this dose
+      </button>
+    </div>
+  </main>
+
+  <!--
+    The renderer (opd-render.js, covered by test/wardsynq-opd-render.test.mjs) is deliberately thin:
+    it reads session.state(), writes DOM, forwards events, and contains no clinical rule at all,
+    because a rule duplicated in a view drifts from the engine invisibly.
+
+    It is now MOUNTED by opd-boot.js, and the constraint that kept it unmounted still holds: this
+    page constructs no actor. Booting needs a store, an authenticated actor and a real eMAR, and
+    which of those a site supplies is a deployment decision rather than a markup one - a page that
+    constructed its own actor would be a page that decided who was allowed to give a drug. So the
+    boot module REQUIRES them, from window.WARDSYNQ_OPD_DEPLOYMENT, and when they are absent it
+    paints a surface that says so and leaves every action disabled.
+
+    That empty state is the point. Before it, an unconfigured page rendered a plausible bedside
+    screen with a wristband field and three buttons and no system behind it, which is the worst of
+    the available failures: it looks like a working drug round.
+
+    ?opd_demo=1 mounts an in-memory demonstration with a permanent, undismissable banner.
+  -->
+  <script type="module" src="./opd-boot.js?v=1"></script>
+  <script type="module">
+    // The service worker is registered independently of the boot, because caching the shell is what
+    // makes this surface exist at all in a basement, and it is independent of who is logged in.
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker.register("./wardsynq-sw.js", { scope: "./" }).catch(() => {
+        // A failed registration must not break the page. It means no offline shell, not no app.
+      });
+    }
+  </script>
+</body>
+</html>

@@ -67,6 +67,23 @@ if [ -d assets/vendor ]; then mkdir -p "$WWW/assets/vendor"; cp -R assets/vendor
 # offline-clinical.js). Built by scripts/build-offline-clinical.mjs. ────────────
 [ -f data/offline-clinical.json.gz ] && cp data/offline-clinical.json.gz "$WWW/"
 
+# ── 4c. WardSynQ clinical surface ─────────────────────────────────────────────
+# The EMR surface and the modules it imports. Copied WHOLE rather than cherry-picked:
+# these are native ES modules that import each other by relative path, so a partial
+# copy produces a surface that loads until it reaches the one module nobody listed.
+#
+# NOTE: shipping these files does NOT make WardSynQ reachable to a user. Nothing in
+# the StewardMD app links to wardsynq.html and no flag turns it on; it is present so
+# the offline shell and the assets are cached and testable, not so a clinician can
+# open it. Reachability is a separate, deliberate decision that has not been taken.
+if [ -d wardsynq ]; then
+  mkdir -p "$WWW/wardsynq"
+  cp -R wardsynq/. "$WWW/wardsynq/"
+  # Test fixtures and seed data used only by node --test are not runtime assets.
+  rm -rf "$WWW/wardsynq/data/"*.seed.json.bak 2>/dev/null || true
+  echo "  wardsynq: $(find "$WWW/wardsynq" -type f | wc -l | tr -d ' ') files"
+fi
+
 # ── 5. Knowledge base — RUNTIME pieces only ───────────────────────────────────
 # Loaded by index.html + steward-ai.browser.js; the 13 MB kb.index.json and all
 # source/dev dirs (diseases, reference, validation, tools, schema, manifest…) are
@@ -93,6 +110,12 @@ if [ -d atlas ]; then
   mkdir -p "$WWW/atlas"
   cp atlas/modules.json "$WWW/atlas/" 2>/dev/null || true
   for d in atlas/*/; do [ -f "$d/atlas.json" ] && mkdir -p "$WWW/$d" && cp "$d/atlas.json" "$WWW/$d"; done
+  # 3D layer (atlas3d.js): ship the manifest + canonical index, NOT the 31 MB of .bin.gz
+  # geometry -- atlas3d.js dataUrl() fetches those from the live origin natively.
+  if [ -d atlas/3d ]; then
+    mkdir -p "$WWW/atlas/3d"
+    cp atlas/3d/manifest.json atlas/3d/index.json "$WWW/atlas/3d/" 2>/dev/null || true
+  fi
 fi
 [ -d clinical-pathways ] && mkdir -p "$WWW/clinical-pathways" && cp -R clinical-pathways/. "$WWW/clinical-pathways/"
 # CliniX clinical-learning content (catalog + skill packs + disease pathways + the media licence
@@ -109,6 +132,16 @@ fi
 # The surgical DECISION logic is not here - it lives in ws-surgery.js, which the root *.js glob
 # already copies, so there is nothing extra to do for it.
 [ -d surgx ] && mkdir -p "$WWW/surgx" && cp -R surgx/. "$WWW/surgx/"
+
+# NMC Logbook curriculum packs + assessment templates. Same rule and the same failure mode as clinix
+# and surgx above: the root *.js glob copies the module code, DATA DIRECTORIES ARE NOT COPIED. Without
+# this line pglog loads, the tile appears, and every requirement list is empty on the device — which
+# for THIS module means a logbook that cannot tell a resident what the NMC requires. These are small
+# plain-JSON files (well under a MB in total), so they are bundled rather than fetched from Pages.
+[ -d pglog ] && mkdir -p "$WWW/pglog" && cp -R pglog/. "$WWW/pglog/"
+# NOTE: pglog-sources/ (the extracted text of the NMC PDFs, ~900 KB) is deliberately NOT copied. It is
+# the evidence the provenance test checks the packs against, not a runtime asset, and it lives outside
+# pglog/ precisely so this line cannot pick it up.
 
 # Native-only license lock (Phase 2b): when KB_ENCRYPT=1 (+ env KB_KEY = the server APP_KB_KEY secret,
 # base64 32B), AES-GCM-encrypt the KB blobs the loader gates, ship ONLY the .enc (drop the plaintext KB),

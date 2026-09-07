@@ -7,8 +7,10 @@
  *      screen back to the previous page instead of dismissing all the way to home).
  *   2. Else the clinical engine (5-step form / Clinical Decision output) → window._SMD_goBack().
  *   3. Else (home/root) → nothing (iOS); Android exits the app.
- * At HOME the same edge-drag has nothing to go back to, so it SLIDES THE MENU OPEN instead
- * (gesture only — Android's hardware back still exits at root).
+ * At HOME the same edge-drag has nothing to go back to, so it OPENS THE MENU instead. On Android
+ * gesture navigation that drag IS the system back gesture and never reaches the WebView as touches,
+ * so the backButton handler at the bottom of this file implements the same rule; back still exits at
+ * root by pressing it once more after the menu closes (see EXIT_MS).
  * Reuses each screen's own back logic — no per-screen wiring. The edge-handle appears on
  * every screen that can go back, so no module is a dead-end even without its own button.
  *
@@ -88,12 +90,49 @@
   // further "back" to go (see #3 in the file header), no matter what topBackControl()'s
   // pattern-matching (BACK_SEL is necessarily broad — any "-close"/"-back" class or aria-label
   // prefix) thinks it found on the page; a stray match there must never win over this.
+  /* Is a LIVE overlay stacked above home right now? Structural, not a hit test.
+   *
+   * homeIsForeground() used to ask elementFromPoint() about ONE pixel — the exact centre of the
+   * viewport. Anything that does not cover that pixel was invisible to it: a bottom sheet shorter
+   * than half the screen, a small confirm dialog, a top-anchored panel. On those screens home still
+   * looked like the foreground, so the left-edge swipe opened the MENU instead of dismissing the
+   * thing on top — the "sidebar opens on every page" report.
+   *
+   * Measured on the real app: at home every layer above #homeV2 (sbBackdrop, hvScrim,
+   * harrisonQuotePopup) is opacity:0 AND pointer-events:none, while an open sheet's scrim/sheet are
+   * opacity:1 and pointer-events:auto. So "live" = on screen, not transparent, and not click-through.
+   * Both conditions are required, so a parked-but-present layer can never suppress the home menu. */
+  function overlayAboveHome() {
+    var h = document.getElementById("homeV2");
+    if (!h || !document.body) return false;
+    var hz = parseInt(window.getComputedStyle(h).zIndex, 10); if (isNaN(hz)) hz = 0;
+    var kids = document.body.children;
+    for (var i = 0; i < kids.length; i++) {
+      var n = kids[i];
+      if (n === h || n.id === "smdTopBack") continue;
+      var cs = window.getComputedStyle(n);
+      if (cs.position !== "fixed" && cs.position !== "absolute") continue;
+      if (cs.display === "none" || cs.visibility === "hidden") continue;
+      if (parseFloat(cs.opacity || "1") < 0.05) continue;          // parked scrim
+      if (cs.pointerEvents === "none") continue;                   // click-through -> not a real layer
+      var z = parseInt(cs.zIndex, 10); if (isNaN(z) || z <= hz) continue;
+      var r = n.getBoundingClientRect();
+      if (r.width < 120 || r.height < 80) continue;                // toasts/badges are not screens
+      if (r.right <= 0 || r.left >= window.innerWidth) continue;   // parked off-screen (closed drawer)
+      if (r.bottom <= 0 || r.top >= window.innerHeight) continue;  // parked below (closed sheet)
+      return true;
+    }
+    return false;
+  }
   function homeIsForeground() {
     var h = document.getElementById("homeV2");
     if (!h || !h.classList.contains("on")) return false;
     var cs = window.getComputedStyle(h);
     if (cs.display === "none" || cs.visibility === "hidden") return false;
+    if (overlayAboveHome()) return false;          // a sheet/dialog is up -> home is NOT the root screen
     try {
+      // Kept as a second, independent condition: it still catches an overlay rendered INSIDE #homeV2,
+      // which the body-level scan above cannot see. Both must agree that home owns the screen.
       var el = document.elementFromPoint(Math.round(window.innerWidth / 2), Math.round(window.innerHeight / 2));
       return !!(el && h.contains(el));
     } catch (e) { return false; }
@@ -114,6 +153,15 @@
     // 0) FundX / Atlas AI full-screen overlay owns back while open.
     try { if (window.ATLAS && window.ATLAS.isOpen && window.ATLAS.isOpen()) { _last = now; return window.ATLAS.back() !== false; }
     if (window.FUNDX && window.FUNDX.isOpen && window.FUNDX.isOpen()) { _last = now; return window.FUNDX.back() !== false; } } catch (e) {}
+    // 0b) home's bottom-sheet system (#hvSheet + #hvScrim): the More sheet, the settings sheets,
+    // Customize tools, Account. Its rows are `.hv-mi` buttons and it ships NO back/close control, so
+    // the BACK_SEL scan below finds nothing inside it and instead clicks a stray match on the home
+    // screen UNDERNEATH — leaving the sheet open and doing something the user never asked for. The
+    // scrim's own click handler is closeSheet(), so that is the dismissal the app already defines.
+    try {
+      var _sheet = document.getElementById("hvSheet"), _scrim = document.getElementById("hvScrim");
+      if (_sheet && _scrim && _sheet.classList.contains("on")) { _last = now; _scrim.click(); return true; }
+    } catch (e) {}
     // 1) top-most open overlay → its BACK control (never Close, so we step back, not jump home)
     var ctrl = topBackControl();
     if (ctrl) { _last = now; try { ctrl.click(); } catch (e) {} return true; }
@@ -140,9 +188,15 @@
   }
   // With the menu already open it covers the left edge, so a further RIGHTWARD drag on it is a
   // no-op (it closes by swiping left, tapping the backdrop, or hardware back — all unchanged).
+  /* The two behaviours are MUTUALLY EXCLUSIVE, and "go back" is the default everywhere.
+   * This was `openMenuAtHome() || goBack()`, which meant any false positive from the home test
+   * opened the menu on a screen the user expected to step back from, and — when SB was missing —
+   * could fall through to goBack() ON HOME and click whatever stray "-close" element BACK_SEL
+   * matched there. Home (and only home) opens the menu; every other screen goes back. */
   function edgeSwipeAction() {
     try { var d = document.getElementById("sbDrawer"); if (d && d.classList.contains("open")) return true; } catch (e) {}
-    return openMenuAtHome() || goBack();
+    if (homeIsForeground()) return openMenuAtHome();
+    return goBack();
   }
 
   // The screen to slide during an interactive edge-drag = the largest positioned (fixed/absolute) ancestor
@@ -160,11 +214,17 @@
     return best;
   }
 
-  // Skip when the gesture starts inside a horizontally-scrollable area (let it scroll).
+  // Skip when the gesture starts inside a horizontally-scrollable area THAT CAN ACTUALLY SCROLL
+  // for this gesture (let it scroll instead of going back). The back-swipe always drags RIGHTWARD
+  // from the left edge, which only a scroller already moved off its leftmost position (scrollLeft
+  // > 0) can consume - one still at scrollLeft 0 has nothing further to reveal that way. Without
+  // this check, any wide table/row parked at its default (0) position within ~30px of the edge
+  // (e.g. the Drugs Database dosage table, db-body's 14px inset) silently ate every back-swipe
+  // that started over it, even though the table itself had nowhere to scroll.
   function inHScroll(el) {
     var n = el;
     while (n && n.nodeType === 1 && n !== document.body) {
-      if (n.scrollWidth > n.clientWidth + 4) {
+      if (n.scrollWidth > n.clientWidth + 4 && n.scrollLeft > 0) {
         var ox = window.getComputedStyle(n).overflowX;
         if (ox === "auto" || ox === "scroll") return true;
       }
@@ -182,8 +242,10 @@
     var b = document.createElement("button");
     b.id = "smdTopBack"; b.type = "button"; b.setAttribute("aria-label", "Back");
     b.innerHTML = '<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg>';
+    // display stays flex; visibility does the hiding. wouldOverlap() has to know where this button
+    // WOULD land before deciding whether to show it, and a display:none element measures 0x0.
     b.style.cssText = "position:fixed;left:9px;top:calc(env(safe-area-inset-top,0px) + 9px);z-index:99000;width:38px;height:38px;"
-      + "display:none;align-items:center;justify-content:center;border:none;border-radius:50%;cursor:pointer;"
+      + "display:flex;visibility:hidden;opacity:0;pointer-events:none;align-items:center;justify-content:center;border:none;border-radius:50%;cursor:pointer;"
       + "background:rgba(15,118,110,.92);color:#fff;box-shadow:0 2px 10px -2px rgba(0,0,0,.45);-webkit-tap-highlight-color:transparent";
     b.addEventListener("click", function (ev) { ev.stopPropagation(); goBack(); setTimeout(syncHandle, 80); });
     (document.body || document.documentElement).appendChild(b);
@@ -211,8 +273,40 @@
     var root = ctrl && overlayRootOf(ctrl);
     return !!(root && root.getBoundingClientRect().top > 8);
   }
+  /* GEOMETRY, NOT NAMING. hasTopLeftControl() only recognises a control that MATCHES BACK_SEL, so a
+   * header whose own control is simply named something else (the OPD queue's round add-patient /
+   * refresh cluster) or a screen whose TITLE starts at the left edge (the insulin module) was
+   * invisible to it, and this button was painted straight on top - the reported "bad overlapping.
+   * I never asked for overlapping button". Ask the much simpler question instead: is anything
+   * already drawn where this button would sit? elementsFromPoint gives the answer exactly, and only
+   * probes three points rather than walking the DOM. */
+  var OVERLAP_SEL = 'button,a[href],[role="button"],[data-act],[data-ins],[data-oh-act],[data-oe-act],'
+    + 'input,select,textarea,h1,h2,h3,[class*="title"],[class*="-tt"],[class*="head"]';
+  function wouldOverlap(b) {
+    if (!document.elementsFromPoint) return false;
+    var r = b.getBoundingClientRect();
+    if (!(r.width > 0 && r.height > 0)) return false;
+    var pts = [[r.left + r.width / 2, r.top + r.height / 2], [r.left + 4, r.top + 4], [r.right - 4, r.bottom - 4]];
+    for (var p = 0; p < pts.length; p++) {
+      var stack = document.elementsFromPoint(pts[p][0], pts[p][1]) || [];
+      for (var i = 0; i < stack.length; i++) {
+        var e = stack[i];
+        if (e === b || e === document.body || e === document.documentElement) continue;
+        try { if (e.matches && e.matches(OVERLAP_SEL)) return true; } catch (x) {}
+      }
+    }
+    return false;
+  }
   function syncHandle() {
-    try { ensureBackBtn().style.display = (canGoBack() && !hasTopLeftControl() && !topExposesHome()) ? "flex" : "none"; } catch (e) {}
+    try {
+      var b = ensureBackBtn();
+      // Measure BEFORE deciding: the button must be laid out for wouldOverlap() to read its rect,
+      // which is why hiding is visibility-based rather than display:none.
+      var show = canGoBack() && !hasTopLeftControl() && !topExposesHome() && !wouldOverlap(b);
+      b.style.visibility = show ? "visible" : "hidden";
+      b.style.opacity = show ? "1" : "0";
+      b.style.pointerEvents = show ? "auto" : "none";
+    } catch (e) {}
   }
 
   var enable = isNative || (window.matchMedia && window.matchMedia("(display-mode: standalone)").matches);
@@ -251,6 +345,14 @@
       curDx = Math.max(0, dx);
       if (dragEl) { setX(dragEl, curDx, false); if (e.cancelable) e.preventDefault(); }   // own the horizontal drag
     }, { passive: false });
+    // The SYSTEM can claim a gesture mid-stream — Android's edge back-gesture does exactly this — and
+    // then touchend NEVER arrives. Without this the screen stayed frozen mid-slide under the finger
+    // and `tracking` stayed true until the next touchstart happened to reset it.
+    document.addEventListener("touchcancel", function () {
+      if (!tracking && !dragging) return;
+      tracking = false;
+      if (dragging) endDrag(false);          // slide back, take NO action: the system owns the gesture now
+    }, { passive: true });
     document.addEventListener("touchend", function (e) {
       if (!tracking) return; tracking = false;
       var t = e.changedTouches && e.changedTouches[0], dt = Date.now() - t0;
@@ -266,15 +368,40 @@
   if (document.readyState !== "loading") syncHandle();
   else document.addEventListener("DOMContentLoaded", syncHandle);
 
-  // Android system-gesture / hardware back → close the top menu / step back, else exit at root.
+  /* Android system-gesture / hardware back. THE EDGE DRAG ARRIVES HERE, NOT AS TOUCH EVENTS.
+   *
+   * With gesture navigation on (the Pixel default — `adb shell settings get secure navigation_mode`
+   * returned 2 on the reported device) the left-to-right edge drag IS the system back gesture. The
+   * framework claims the touch stream at the edge, so the WebView receives a touchcancel and the touch
+   * handler above can never complete: on such a phone it is effectively dead code. The gesture reaches
+   * the app ONLY as this backButton event, indistinguishable from a hardware back press.
+   *
+   * So the home→menu half of edgeSwipeAction() has to live here as well, or it can never fire on the
+   * phones most people actually use. Previously goBack() simply returned false at home and the app
+   * EXITED — the reported "sidebar swipe does nothing".
+   *
+   * Back must still be able to exit at root, so this is a toggle with an escape hatch rather than an
+   * unconditional menu: back opens the menu, back closes it, back once more within EXIT_MS exits.
+   * Without that timestamp the two halves toggle forever and the app can never be dismissed with back. */
+  var EXIT_MS = 2000, _menuClosedAt = 0;
+  function drawerIsOpen() {
+    try { var d = document.getElementById("sbDrawer"); return !!(d && d.classList.contains("open")); } catch (e) { return false; }
+  }
+  // false → nothing left to do at this level, so the caller exits the app.
+  function hardwareBack() {
+    var wasOpen = drawerIsOpen();
+    if (goBack()) { if (wasOpen) _menuClosedAt = Date.now(); return true; }   // incl. closing the menu via .sb-x
+    if (Date.now() - _menuClosedAt < EXIT_MS) return false;                   // menu was just closed by back → exit
+    return openMenuAtHome();                                                  // at home: the same action as the edge drag
+  }
   try {
     if (isNative && C.Plugins && C.Plugins.App && C.Plugins.App.addListener) {
       C.Plugins.App.addListener("backButton", function () {
-        if (!goBack()) { try { C.Plugins.App.exitApp(); } catch (e) {} }
+        if (!hardwareBack()) { try { C.Plugins.App.exitApp(); } catch (e) {} }
         setTimeout(syncHandle, 80);
       });
     }
   } catch (e) {}
 
-  window.SMD_SWIPE_BACK = { goBack: goBack, canGoBack: canGoBack, openMenuAtHome: openMenuAtHome, edgeSwipeAction: edgeSwipeAction, enabled: enable, engineActive: engineActive, syncHandle: syncHandle };
+  window.SMD_SWIPE_BACK = { goBack: goBack, hardwareBack: hardwareBack, drawerIsOpen: drawerIsOpen, canGoBack: canGoBack, openMenuAtHome: openMenuAtHome, edgeSwipeAction: edgeSwipeAction, enabled: enable, engineActive: engineActive, syncHandle: syncHandle };
 })();

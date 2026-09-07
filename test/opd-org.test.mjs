@@ -15,6 +15,20 @@ test("org: mode/connector; native default; thresholds normalised", () => {
   assert.equal(org({ id: "o", thresholds: { moderate: 5, busy: 2 } }).thresholds.busy, 6); // busy forced > moderate
 });
 
+// The third, explicit organisation mode: a hospital where WardSynQ itself is the EMR/HIS. Must survive
+// the normalizer as its OWN value - never silently collapsed into "native" (personal clinic, on-device)
+// or "connect" (external FHIR EMR), and never produced by anything other than an explicit mode:"wardsynq".
+test("org: mode 'wardsynq' is a third, explicit value - never inferred, never collapsed into native/connect", () => {
+  assert.equal(org({ id: "o", mode: "wardsynq" }).mode, "wardsynq");
+  // Every existing org shape (no mode, or an unrecognised one) still defaults to "native" - adding
+  // "wardsynq" must not change the meaning of any pre-existing document.
+  assert.equal(org({ id: "o" }).mode, "native");
+  assert.equal(org({ id: "o", mode: "x" }).mode, "native");
+  assert.equal(org({ id: "o", mode: "connect" }).mode, "connect");
+  // connectTenantId is the SAME existing tenant-link field a wardsynq org reuses - not a new one.
+  assert.equal(org({ id: "o", mode: "wardsynq", connectTenantId: "t1" }).connectTenantId, "t1");
+});
+
 test("roomStatus honours editable thresholds", () => {
   const t = { moderate: 3, busy: 6 };
   assert.equal(roomStatus(0, false, t), "normal");

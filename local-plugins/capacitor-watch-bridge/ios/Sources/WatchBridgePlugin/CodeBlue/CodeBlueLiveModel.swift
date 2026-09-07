@@ -19,6 +19,8 @@ final class CodeBlueLiveModel: ObservableObject {
     @Published private(set) var state: CodeBlueState = .empty
     @Published private(set) var connected = false
     @Published private(set) var lastUpdate: Date?
+    // Phone scribe entries must not make an old watch snapshot appear live.
+    @Published private(set) var lastWatchUpdate: Date?
 
     private let sync: CodeBlueSyncService
     private let store = CodeBlueLocalStore()
@@ -35,7 +37,9 @@ final class CodeBlueLiveModel: ObservableObject {
         sync.start()
         // Watch tapped Reset → wipe the phone's records too.
         NotificationCenter.default.addObserver(forName: WatchConnectivityRelay.codeBlueReset,
-                                               object: nil, queue: .main) { [weak self] _ in self?.clearLocal() }
+                                               object: nil, queue: .main) { [weak self] _ in
+            Task { @MainActor [weak self] in self?.clearLocal() }
+        }
         refreshReachability()
         reachTimer = Timer.publish(every: 2, on: .main, in: .common).autoconnect()
             .sink { [weak self] _ in self?.refreshReachability() }
@@ -48,6 +52,7 @@ final class CodeBlueLiveModel: ObservableObject {
         merged.events = mergeEvents(state.events, incoming.events)
         state = merged
         lastUpdate = Date()
+        lastWatchUpdate = lastUpdate
         store.save(merged)
         syncLiveActivity()
     }
@@ -120,5 +125,5 @@ final class CodeBlueLiveModel: ObservableObject {
     }
 
     /// Clear local logs (privacy — offered on sign-out).
-    func clearLocal() { store.clear(); state = .empty; lastUpdate = nil; syncLiveActivity() }
+    func clearLocal() { store.clear(); state = .empty; lastUpdate = nil; lastWatchUpdate = nil; syncLiveActivity() }
 }
