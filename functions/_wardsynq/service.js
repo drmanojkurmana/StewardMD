@@ -87,6 +87,10 @@ const RESOURCE_TYPES = Object.freeze([
    * and which stays visibly outstanding until a human books it - auto-booking would make the
    * promise look kept when nobody had spoken to the patient. */
   "Appointment", "AppointmentRequest",
+  /* A scored nursing risk assessment. The score selects the ACTIONS, which are the only part that
+   * changes anything for the patient - so the actions and what was done about them live on the
+   * record beside the number. */
+  "RiskAssessment",
 ]);
 
 const MODE = Object.freeze({ SYSTEM_OF_RECORD: "system-of-record", INTEGRATION: "integration" });
