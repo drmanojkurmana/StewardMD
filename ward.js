@@ -33,7 +33,7 @@
   var st = {
     orgId: "", ward: "", patients: [], view: "list",
     sel: null,                 // the selected {encounterId, patientId, ward, bed, admittedAt}
-    problems: [], criticals: [], balance: null, outbox: [], cosign: null,
+    problems: [], criticals: [], balance: null, outbox: [], cosign: null, downtime: null,
     due: [], prn: [], unscheduled: [], truncated: false,
     from: "", to: "",          // the window being viewed, NOT a claim about when a dose is due
     busy: false, err: "", note: "", refusal: null, loaded: false
@@ -136,7 +136,10 @@
     return '<div class="w-card"><div class="w-card-h">' + ms("bed") + "<h3>Ward" + (state.ward ? ": " + esc(state.ward) : "") + "</h3>" +
       '<button class="w-ic" data-w-act="reload" title="Refresh">' + ms("refresh") + "</button></div>" +
       '<div class="w-filter"><input id="wWard" type="text" placeholder="Filter by ward (blank = all)" value="' + esc(state.ward) + '">' +
-      '<button class="w-btn ghost" data-w-act="setward">Apply</button></div>' +
+      '<button class="w-btn ghost" data-w-act="setward">Apply</button>' +
+      // Reachable BEFORE an outage, which is the only time it can be taken. A pack you can only get
+      // to while the system is up is a pack the ward has to remember to take while the system is up.
+      '<button class="w-btn ghost" data-w-act="downtime" title="Printable sheet for when the system is unavailable">' + ms("print") + "Downtime pack</button></div>" +
       (rows || (state.loaded ? '<p class="w-empty">No patients are currently admitted' + (state.ward ? " to " + esc(state.ward) : "") + ".</p>" : '<p class="w-empty">Loading the ward…</p>')) +
       "</div>" + cosignCard(state);
   }
@@ -369,12 +372,68 @@
     return orderId;   // the order is no longer active; its id is the honest label, not a guessed name
   }
 
+  /* The downtime pack, on screen and on paper. Every safety property of this view is about being
+   * honest that it is a COPY: it is stamped, it says what it does not know, and a page with a gap in
+   * it says so beside the patient's name rather than printing a reassuring blank. */
+  function downtimeView(state) {
+    var d = state.downtime;
+    if (!d) return '<div class="w-card"><p class="w-empty">Preparing the pack…</p></div>';
+
+    var pages = (d.patients || []).map(function (p) {
+      var allergies = p.allergies === null
+        // The single most dangerous line this screen could print. An empty allergy row reads as "no
+        // known allergies" to every clinician alive, so a failed read never renders as one.
+        ? '<b class="w-dt-gap">ALLERGIES COULD NOT BE READ. Ask before giving anything.</b>'
+        : (p.allergies.length
+          ? p.allergies.map(function (a) { return "<b>" + esc(a.substance) + "</b>" + (a.reaction ? " (" + esc(a.reaction) + ")" : ""); }).join(", ")
+          : "No allergies recorded.");
+
+      var meds = p.orders === null
+        ? '<li class="w-dt-gap">MEDICINES COULD NOT BE READ.</li>'
+        : (p.orders.length ? p.orders.map(function (o) {
+            var times = o.asNeeded ? "as needed (PRN)"
+              : o.scheduleKnown ? (o.due || []).map(function (t) { return when(t); }).join(" &middot; ")
+              // Stated, never blank: an empty time column reads as "nothing due today", which is how
+              // a dose gets missed for a whole outage.
+              : '<span class="w-dt-gap">no dose times could be worked out from "' + esc(o.frequency || "") + '"</span>';
+            return "<li><b>" + esc(o.drug) + "</b> " + dose(o.dose) + (o.route ? " &middot; " + esc(o.route) : "") +
+              '<div class="w-dt-times">' + times + "</div></li>";
+          }).join("") : "<li>No active medicines.</li>");
+
+      var crit = p.criticals === null
+        ? '<p class="w-dt-gap">OPEN CRITICAL RESULTS COULD NOT BE READ.</p>'
+        : (p.criticals.length ? '<p class="w-dt-crit">' + ms("priority_high") + "Outstanding: " +
+            p.criticals.map(function (c) { return esc(c.display) + (c.value == null ? "" : " " + esc(c.value) + (c.unit ? " " + esc(c.unit) : "")); }).join("; ") + "</p>" : "");
+
+      return '<section class="w-dt-p">' +
+        '<header><span class="w-dt-bed">' + esc(p.bed || "-") + "</span>" +
+        "<div><b>" + esc(p.name || p.patientId) + "</b><small>" + esc(p.mrn || "") + (p.dob ? " &middot; " + esc(p.dob) : "") +
+        " &middot; admitted " + when(p.admittedAt) + "</small></div></header>" +
+        '<p class="w-dt-alg">' + allergies + "</p>" + crit +
+        "<ul class=\"w-dt-meds\">" + meds + "</ul>" +
+        '<div class="w-dt-blank"><span>Given during downtime - drug, dose, time, signature</span></div>' +
+        "</section>";
+    }).join("");
+
+    return '<div class="w-dt">' +
+      '<div class="w-dt-bar w-noprint"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button>" +
+      '<button class="w-btn" data-w-act="printpack">' + ms("print") + "Print</button>" +
+      '<button class="w-btn ghost" data-w-act="downtime">' + ms("refresh") + "Refresh</button></div>" +
+      '<header class="w-dt-h"><h2>Downtime pack' + (d.ward ? " &middot; " + esc(d.ward) : "") + "</h2>" +
+      "<p><b>" + esc(d.count) + "</b> patient" + (d.count === 1 ? "" : "s") + " &middot; printed " + when(d.generatedAt) + "</p>" +
+      '<p class="w-dt-warn">' + esc(d.warning) + "</p>" +
+      (d.incomplete ? '<p class="w-dt-gap">' + esc(d.incomplete) + " of these pages could not be fully read. Those gaps are marked on the page.</p>" : "") +
+      "</header>" +
+      (pages || '<p class="w-empty">No patients are admitted, so there is nothing to print.</p>') +
+      "</div>";
+  }
+
   function _render(state) {
     return '<div class="w-shell"><header class="w-top"><button class="w-ic" data-w-act="close">' + ms("close") + "</button>" +
       '<span class="w-title">WardSynQ &middot; Inpatient</span>' +
       (state.busy ? '<span class="w-busy">' + ms("progress_activity") + "</span>" : "<span></span>") + "</header>" +
       '<div class="w-canvas">' + banner(state) +
-      (state.view === "chart" ? chartView(state) : listView(state)) + "</div></div>";
+      (state.view === "chart" ? chartView(state) : state.view === "downtime" ? downtimeView(state) : listView(state)) + "</div></div>";
   }
 
   // ---- controller --------------------------------------------------------------------------
@@ -488,6 +547,14 @@
       })
       .catch(function () { st.busy = false; st.err = "Could not load the round."; paint(); });
   }
+  function loadDowntime() {
+    st.busy = true; st.view = "downtime"; paint();
+    return apiGet("/ward/downtime?orgId=" + encodeURIComponent(st.orgId) + (st.ward ? "&ward=" + encodeURIComponent(st.ward) : ""))
+      .then(function (r) { if (settle(r)) st.downtime = r; paint(); })
+      /* A pack that failed to load must never leave the previous one on screen: the whole hazard of
+       * this feature is a clinician reading a sheet that is older than they think. */
+      .catch(function () { st.busy = false; st.downtime = null; st.err = "Could not build the downtime pack. Do not print an older one."; paint(); });
+  }
   function loadCosigns() {
     return apiGet("/ward/cosign-queue?orgId=" + encodeURIComponent(st.orgId))
       .then(function (r) { if (r && r.ok) st.cosign = r; paint(); })
@@ -588,7 +655,7 @@
     if (cmd === "dismiss") { st.err = ""; st.note = ""; st.refusal = null; paint(); return; }
     if (cmd === "reload") { loadWard(); return; }
     if (cmd === "setward") { st.ward = val("wWard"); loadWard(); return; }
-    if (cmd === "back") { st.view = "list"; st.sel = null; st.due = []; st.problems = []; st.outbox = []; paint(); return; }
+    if (cmd === "back") { st.view = "list"; st.sel = null; st.due = []; st.problems = []; st.outbox = []; st.downtime = null; paint(); return; }
     if (cmd === "open") {
       var p = null;
       for (var j = 0; j < st.patients.length; j++) { if (st.patients[j].encounterId === arg) { p = st.patients[j]; break; } }
@@ -613,6 +680,8 @@
     if (cmd === "mar") { var k = arg.indexOf("|"); if (k > 0) marAction(arg.slice(0, k), Number(arg.slice(k + 1))); return; }
     if (cmd === "outbox") { loadOutbox(); return; }
     if (cmd === "cosigns") { loadCosigns(); return; }
+    if (cmd === "downtime") { loadDowntime(); return; }
+    if (cmd === "printpack") { try { G.print(); } catch (e) {} return; }
     if (cmd === "cosign") { cosign(arg); return; }
     if (cmd === "submitnote") { submitNote(arg); return; }
     if (cmd === "tx") { transmit(arg); return; }

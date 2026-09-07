@@ -2725,6 +2725,47 @@ test("sending is prescribing's business, and nothing unsendable is sent", async 
   assert.equal(bogus.error, "unknown_channel");
 });
 
+/* ---- what the ward holds when the system is not there ------------------------------------------ */
+
+test("THE DOWNTIME PACK IS ASSEMBLED FROM THE REAL RECORD, and it writes nothing", async () => {
+  seedHospital();
+  const { reg, adm, ord } = await admittedPatientOnDrug();
+  await as(DOCTOR, "/ward/problem", "POST", { orgId: ORG, problem: { patientId: adm.patientId, display: "Community-acquired pneumonia" } });
+
+  const before = (await RECORD.latestByType(TENANT_ROW.id, "Encounter", 200)).length;
+  const pack = await as(NURSE, `/ward/downtime?orgId=${ORG}&ward=Medical A`);
+  assert.equal(pack.__status, 200, JSON.stringify(pack));
+  assert.equal(pack.count, 1);
+
+  const p = pack.patients[0];
+  assert.equal(p.encounterId, adm.encounterId);
+  assert.equal(p.mrn, reg.mrn, "enough to identify the right person at a bedside");
+  assert.equal(p.bed, "12");
+  assert.equal(p.orders.length, 1);
+  assert.equal(p.orders[0].drug, "Paracetamol 500mg");
+  assert.ok(p.orders[0].due.length >= 3, "and when it is due, so the ward can keep giving it");
+  assert.deepEqual(p.problems, [], "nothing on this page is missing");
+
+  /* IT SAYS WHAT IT IS, on the pack. A downtime sheet is dangerous in exactly one way - a clinician
+   * trusting it after it has gone stale - so this is printed, not left to a policy document nobody
+   * has read at 03:00. */
+  assert.match(pack.warning, /point-in-time COPY/);
+  assert.match(pack.note, /NOT on this sheet/);
+  assert.ok(pack.generatedAt && pack.coversUntil > pack.generatedAt);
+
+  // IT WRITES NOTHING. No flag, no "downtime mode", no record that it was taken. A route that
+  // mutated the record in order to prepare for an outage is one more thing to go wrong during one.
+  assert.equal((await RECORD.latestByType(TENANT_ROW.id, "Encounter", 200)).length, before);
+  assert.equal(await RECORD.latest(TENANT_ROW.id, "Encounter", adm.encounterId).then((e) => e.version), 1);
+
+  // The ward filter is the ward's own, and an empty ward is an empty pack rather than everybody.
+  assert.equal((await as(NURSE, `/ward/downtime?orgId=${ORG}&ward=Surgical B`)).count, 0);
+
+  // A pharmacist holds no emr.view, and the whole ward's chart on one sheet needs it.
+  assert.equal((await as(PHARM, `/ward/downtime?orgId=${ORG}`)).__status, 403);
+  assert.ok(ord.orderId);
+});
+
 /* ---- the note that needs a second name on it --------------------------------------------------- */
 
 async function noteBy(email, adm, sections, at) {

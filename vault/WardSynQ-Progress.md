@@ -31,9 +31,9 @@ Updated: 2026-09-07 (PRs #887, #889, #890, #892, #894, #895, #897 pharmacy verif
 | 17 | Interoperability (Care Everywhere, HL7/FHIR) | 4 | 70 | #899. Read-only FHIR R4 export with an honest CapabilityStatement; GHIS adapter works. No FHIR write, no HL7v2, no CDA. |
 | 18 | Reporting / analytics (Reporting Workbench, Caboodle) | 3 | 40 | Live ward open-item metrics: unacknowledged criticals, doses in flight, handovers waiting, medicines undecided, orders unverified. No registries, no quality measures, no warehouse. |
 | 19 | Patient portal (MyChart) | 3 | 0 | Not built. |
-| 20 | Deployment / uptime / DR (on-prem, HA) | 3 | 25 | Cloudflare edge + D1, live domain. No on-prem, no DR drill, no downtime procedures. |
+| 20 | Deployment / uptime / DR (on-prem, HA) | 3 | 55 | #912. Cloudflare edge + D1, live domain, a printable downtime pack the ward can hold during an outage, a restore rehearsal that runs in CI against the shipped schema, and a DR runbook. No scheduled backup, so RPO/RTO are undefined; no on-prem, no hot standby. |
 
-**Weighted total: 75.2%.**
+**Weighted total: 76.1%.**
 
 The total is the weight-times-percent sum of the table above, divided by 100. It is COMPUTED from
 these rows, not asserted: earlier revisions of this file carried an eyeballed number that had drifted
@@ -51,6 +51,11 @@ about two points high (the 44% baseline was 41.5, and 53% was 50.8). If a row ch
   outstanding-items review before sign-off, and an A4 print artifact.
 
 ## What is left, in order of what actually moves the number
+-1. **A SCHEDULED BACKUP.** Nothing takes the record export automatically - `vault/runbooks/
+   WardSynQ-Disaster-Recovery.md` §2a is a command a human has to run. The restore is rehearsed in
+   CI and the verification refuses an incomplete dump, but with no schedule there is no bound on how
+   much would be lost, so RPO and RTO are undefined. This is now the largest single gap in the
+   deployment domain and it needs an owner decision (where the dumps live, who holds them).
 0. **Device proof of the whole inpatient vertical** — none of the ward, eMAR, discharge or nursing
    screens have been run on a phone. Everything above is proven by test, not by a clinician's hands.
    This is the largest honest caveat on this entire table.

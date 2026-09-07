@@ -150,7 +150,26 @@ test("IT NEVER DECIDES A DOSE IS SAFE: there is no client-side safety rule anywh
   // Comments are stripped first: the file explains at length why it has no safety logic, and
   // scanning the prose would fail on the very sentences that promise the code is not there.
   const code = SRC.replace(/\/\*[\s\S]*?\*\//g, " ").replace(/^\s*\/\/.*$/gm, " ");
-  assert.ok(!/allerg|interaction|contraindicat|maxdose|ceiling|cross.?react/i.test(code), "no clinical rule logic in the UI");
+  assert.ok(!/interaction|contraindicat|maxdose|ceiling|cross.?react/i.test(code), "no clinical rule logic in the UI");
+  /* The word "allergy" used to be on that list as a proxy, and it stopped being a usable one when the
+   * downtime pack began DISPLAYING an allergy list the server assembled. Displaying is not deciding,
+   * and the property this test defends is that the screen never decides. So the check now tests the
+   * actual property: the file may name an allergy or a drug, and must never compare, search or match
+   * one - which is what a second copy of the rules would have to do. */
+  assert.ok(
+    // Comparing against null or undefined is ALLOWED and is itself a safety rule: "could not be read"
+    // and "none recorded" must never render the same, so the screen has to be able to tell them apart.
+    // `(?!=)` matters: without it the `==` branch matches the first two characters of `===` and the
+    // operand check then reads the third `=` instead of the value, so every comparison "passes".
+    !/(allerg|substance|drug)\w*\s*(?:={2,3}|!={1,2})(?!=)\s*(?!null\b|undefined\b)\S/i.test(code),
+    "the UI never compares an allergy or a drug VALUE, it only renders one",
+  );
+  assert.ok(
+    !/(allerg|substance|drug)\w*\s*\.\s*(includes|indexOf|match|search|test)\s*\(/i.test(code),
+    "and never searches one",
+  );
+  // The distinction it IS allowed to make, because printing them the same way is the hazard.
+  assert.match(code, /p\.allergies === null/, "a failed read and an empty list stay distinguishable");
   assert.ok(!/wardsynq-safety|SafetyEngine|resolveGeneric|rulePack/i.test(code), "the UI does not reach for the safety engine");
   // It must not decide the five rights itself either: the scans go to the server untouched, and the
   // server compares them against the order. The UI only collects and forwards.
@@ -262,6 +281,51 @@ test("HTML is escaped: a hostile ward or drug name cannot inject markup", () => 
   assert.match(html, /&lt;img src=x onerror=alert\(1\)&gt;/, "rendered as inert text");
   assert.ok(!/value="[^"]*"[^>]*<script/.test(html), "the quoted attribute is never broken out of");
   assert.match(html, /p&amp;p/);
+});
+
+test("THE DOWNTIME PACK NEVER PRINTS A REASSURING BLANK", () => {
+  const W = load();
+  const pack = (patients, over) => W._render(Object.assign({}, base, {
+    view: "downtime",
+    downtime: Object.assign({
+      ward: "Medical A", count: patients.length, generatedAt: "2026-09-07T09:00:00.000Z",
+      coversUntil: "2026-09-08T09:00:00.000Z", incomplete: 0,
+      warning: "This is a point-in-time COPY, not the record.",
+      patients,
+    }, over || {}),
+  }));
+
+  const ok = pack([{
+    patientId: "p", bed: "12", name: "Asha Rao", mrn: "SMD-1", admittedAt: "2026-09-07T04:00:00.000Z",
+    allergies: [{ substance: "Penicillin", reaction: "anaphylaxis" }],
+    orders: [{ drug: "Amoxicillin", dose: { value: 500, unit: "mg" }, route: "oral", scheduleKnown: true, due: ["2026-09-07T12:00:00.000Z"] }],
+    criticals: [], problems: [],
+  }]);
+  assert.match(ok, /point-in-time COPY/, "it says what it is, on the sheet");
+  assert.match(ok, /Penicillin/);
+  assert.match(ok, /Given during downtime/, "and leaves space to record what was given");
+
+  /* THE ONE THAT MATTERS. An empty allergy line on paper reads as "no known allergies" to every
+   * clinician alive, so a read that FAILED must never render as one. */
+  const blind = pack([{ patientId: "p", bed: "12", allergies: null, orders: null, criticals: null, problems: ["allergies could not be read"] }], { incomplete: 1 });
+  assert.match(blind, /ALLERGIES COULD NOT BE READ/);
+  assert.match(blind, /MEDICINES COULD NOT BE READ/);
+  assert.match(blind, /OPEN CRITICAL RESULTS COULD NOT BE READ/);
+  assert.match(blind, /could not be fully read/, "and the cover page counts the pages with holes in them");
+
+  // A patient genuinely without allergies says so in words rather than showing nothing.
+  assert.match(pack([{ patientId: "p", bed: "1", allergies: [], orders: [], criticals: [], problems: [] }]), /No allergies recorded/);
+
+  /* An order whose frequency nobody could parse gets no times and SAYS so. A blank time column reads
+   * as "nothing due today", which is how a dose gets missed for a whole outage. */
+  const vague = pack([{ patientId: "p", bed: "1", allergies: [], criticals: [], problems: [],
+    orders: [{ drug: "Warfarin", frequency: "as directed", scheduleKnown: false, due: [] }] }]);
+  assert.match(vague, /no dose times could be worked out/);
+  assert.match(vague, /as directed/);
+
+  // The controls do not reach the paper, and the print action is offered.
+  assert.match(ok, /w-noprint/);
+  assert.match(ok, /data-w-act="printpack"/);
 });
 
 test("THE CO-SIGN WORKLIST SAYS WHO WROTE IT, HOW LONG IT HAS WAITED, AND WHAT IS STILL BLANK", () => {
