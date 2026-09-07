@@ -22,7 +22,8 @@
 
 import * as ORG from "../../_opd_org_store.js";
 import { recordDeps } from "../../_wardsynq/deps.js";
-import { redeemCode, portalRead } from "../../_wardsynq/patient-access.js";
+import { redeemCode, portalRead, sessionPatient } from "../../_wardsynq/patient-access.js";
+import { sendMessage, requestAppointment } from "../../_wardsynq/portal-requests.js";
 
 function corsHeaders(request) {
   const origin = (request && request.headers && request.headers.get("Origin")) || "";
@@ -82,5 +83,19 @@ export async function onRequest(context) {
     });
     return json(r, r.ok ? 200 : (r.status || 502), request);
   }
+  /* The two write routes. Both check the session FIRST and then take the patient id from the grant -
+   * a caller cannot name whose record it writes onto, exactly as on the read side. */
+  if (sub === "message" || sub === "appointment-request") {
+    const session = await sessionPatient({ ...deps, grantId: body.grantId, token: body.token });
+    if (!session.ok) return json({ ok: false, error: session.error, detail: session.detail || null }, session.status || 401, request);
+
+    if (sub === "message") {
+      const r = await sendMessage(request, env, { ...deps, patientId: session.patientId, subject: body.subject, body: body.body });
+      return json(r, r.ok ? 200 : (r.status || 502), request);
+    }
+    const r = await requestAppointment(request, env, { ...deps, patientId: session.patientId, reason: body.reason, preference: body.preference });
+    return json(r, r.ok ? 200 : (r.status || 502), request);
+  }
+
   return json({ ok: false, error: "not_found" }, 404, request);
 }
