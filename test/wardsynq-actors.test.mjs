@@ -378,7 +378,7 @@ test("scope: an actor built without scope behaves exactly as before; a scoped on
   const { GovernedStore, makeActor, KIND, TIER, authoriseWrite, canRead, GovernanceError } = await import("../wardsynq/wardsynq-actors.js");
   const { ClinicalStore, MemoryBackend } = await import("../wardsynq/wardsynq-store.js");
   const unscoped = makeActor({ id: "dr", kind: KIND.HUMAN, tier: TIER.EXECUTE, credential: "R1" });
-  assert.deepEqual(unscoped.scope, { read: null, write: null });
+  assert.deepEqual(unscoped.scope, { read: null, write: null, writeCategories: null });
   assert.equal(canRead(unscoped, "ClinicalNote"), true);
   const nurse = makeActor({ id: "rn", kind: KIND.HUMAN, tier: TIER.EXECUTE, scope: { read: null, write: ["Observation"] } });
   assert.equal(authoriseWrite(nurse, { resourceType: "Observation", id: "o" }).allowed, true);
@@ -391,6 +391,46 @@ test("scope: an actor built without scope behaves exactly as before; a scoped on
   assert.equal(await g.get(pharm, "MedicationOrder", "rx"), null);
   assert.equal(nurse.scope.write.includes("Observation"), true);
   assert.throws(() => { nurse.scope.write.push("MedicationOrder"); }, /object is not extensible|read only/);
+});
+
+test("SCOPE WITHIN A TYPE: one Observation carries four clinical meanings, and a role gets only its own", async () => {
+  const { makeActor, KIND, TIER, authoriseWrite } = await import("../wardsynq/wardsynq-actors.js");
+  /* `Observation` is a vital sign, a laboratory result, a fluid entry and a device reading. A scope
+   * expressed only as "may write Observation" let a laboratory actor write a blood pressure, which
+   * the eMAR then believes when it checks a weight-based dose. */
+  const lab = makeActor({
+    id: "lab", kind: KIND.HUMAN, tier: TIER.EXECUTE,
+    scope: { read: null, write: ["Observation"], writeCategories: { Observation: ["laboratory"] } },
+  });
+  assert.equal(authoriseWrite(lab, { resourceType: "Observation", id: "o", category: "laboratory" }).allowed, true);
+
+  const vital = authoriseWrite(lab, { resourceType: "Observation", id: "o", category: "vital-signs" });
+  assert.equal(vital.allowed, false);
+  assert.deepEqual(vital.reasons.map((r) => r.code), ["CATEGORY_DENIED"]);
+  assert.match(vital.reasons[0].message, /"vital-signs"/, "the refusal names what was actually asked for");
+
+  /* ABSENCE IS REFUSED, NOT WAVED THROUGH. The model factory defaults a missing category to
+   * "vital-signs", so omitting the field is a claim, not a neutral act - and it is the exact shape
+   * that would otherwise slip past a check written as "if a category is present". */
+  const bare = authoriseWrite(lab, { resourceType: "Observation", id: "o" });
+  assert.equal(bare.allowed, false);
+  assert.deepEqual(bare.reasons.map((r) => r.code), ["CATEGORY_DENIED"]);
+  assert.match(bare.reasons[0].message, /no category/);
+  assert.equal(authoriseWrite(lab, { resourceType: "Observation", id: "o", category: null }).allowed, false);
+
+  // A type with no entry in the map is unconstrained: the constraint is per type, not a mode.
+  assert.equal(authoriseWrite(lab, { resourceType: "DiagnosticReport", id: "d" }).allowed, false, "still out of type scope");
+  const both = makeActor({
+    id: "lab2", kind: KIND.HUMAN, tier: TIER.EXECUTE,
+    scope: { read: null, write: ["Observation", "DiagnosticReport"], writeCategories: { Observation: ["laboratory"] } },
+  });
+  assert.equal(authoriseWrite(both, { resourceType: "DiagnosticReport", id: "d" }).allowed, true);
+
+  // A malformed map is dropped rather than treated as a constraint: a half-parsed rule that refuses
+  // everything would take a working role offline.
+  const junk = makeActor({ id: "x", kind: KIND.HUMAN, tier: TIER.EXECUTE, scope: { read: null, write: ["Observation"], writeCategories: { Observation: [] } } });
+  assert.equal(junk.scope.writeCategories, null);
+  assert.equal(authoriseWrite(junk, { resourceType: "Observation", id: "o", category: "anything" }).allowed, true);
 });
 
 test("delegation: an AI acting for a human is stamped as the AI with onBehalfOf, never as the human", async () => {

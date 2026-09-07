@@ -1946,14 +1946,40 @@ test("THE LAB'S AUTHORITY IS ITS OWN: it results, and it does nothing else", asy
   assert.equal((await as(LABTECH, "/ward/mar", "POST", { orgId: ORG, action: "administer", orderId: ord.orderId, dueAt: DUE, patient: { id: adm.patientId } })).__status, 403);
   assert.equal((await as(LABTECH, `/ward/criticals?orgId=${ORG}`)).__status, 403, "and not the ward's critical list");
 
-  /* THE ROUTE ALWAYS STAMPS "laboratory". The write scope in this system is by resource TYPE, and a
-   * lab result and a nurse's blood pressure are both Observations - so the grant does technically
-   * permit an Observation of any category through the raw record API. This pins the door that
-   * exists; the residual is stated in actor.js and recorded in the vault rather than hidden. */
+  /* THE ROUTE ALWAYS STAMPS "laboratory", and it is no longer the only thing standing there: the
+   * grant now carries a category allow-list, so the raw record API refuses a lab actor a vital sign
+   * even if it never reaches this route. See the scope test below. */
   const obs = await RECORD.byPatient(TENANT_ROW.id, "Observation", adm.patientId);
   const fromLab = obs.filter((o) => o.codeSystem === "http://loinc.org" && o.code === "2823-3");
   assert.ok(fromLab.length >= 1);
   assert.ok(fromLab.every((o) => o.category === "laboratory"));
+});
+
+test("A LABORATORY MAY NOT WRITE A VITAL SIGN, AND A NURSE MAY NOT WRITE A RESULT", async () => {
+  seedHospital();
+  const { grantForRole } = await import("../functions/_wardsynq/actor.js");
+
+  /* One resource type, four unrelated clinical meanings. Both directions matter and both were open:
+   * the eMAR reads a vital sign to check a weight-based dose, and the critical-value loop believes
+   * anything categorised `laboratory`. */
+  const lab = grantForRole("lab");
+  assert.deepEqual(lab.writeCategories, { Observation: ["laboratory"] });
+  assert.ok(lab.write.includes("Observation"), "still the same type scope as before");
+
+  const nurse = grantForRole("nurse");
+  assert.deepEqual(nurse.writeCategories, { Observation: ["vital-signs", "fluid-balance"] });
+
+  // A doctor writes every type, so no category constraint applies: an unconstrained scope cannot be
+  // partly constrained, and leaving one attached would refuse the one type it names while
+  // permitting every other.
+  assert.equal(grantForRole("doctor").write, null);
+  assert.equal(grantForRole("doctor").writeCategories, null);
+
+  // The nurse's real work is unaffected, which is the point of listing fluid-balance beside vitals.
+  const { adm } = await admittedPatientOnDrug();
+  assert.equal((await as(NURSE, "/ward/vitals", "POST", { orgId: ORG, encounterId: adm.encounterId, patientId: adm.patientId, vitals: { sbp: "120", dbp: "80" } })).written, 2);
+  const fluid = await as(NURSE, "/ward/fluid", "POST", { orgId: ORG, encounterId: adm.encounterId, patientId: adm.patientId, entries: [{ direction: "intake", kind: "oral", value: 200, at: "2026-09-07T09:00:00.000Z" }] });
+  assert.equal(fluid.__status, 200, JSON.stringify(fluid));
 });
 
 test("the ward metrics count what every other mechanism left open, from the real record", async () => {
