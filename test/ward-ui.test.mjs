@@ -338,6 +338,21 @@ test("vitals: every field the record path accepts is on the form, and blanks are
   }
   assert.match(html, /Blank fields are not recorded/);
   assert.match(html, /never guessed at/);
+
+  /* The two an early warning score cannot do without, and which this form could not record until
+   * 2026-09-08. Without them NEWS2 can never complete, however many numbers a ward charts. */
+  assert.match(html, /id="wv_o2"/);
+  assert.match(html, /id="wv_acvpu"/);
+  // NOT RECORDED and "no" are different, and the form offers both.
+  assert.match(html, /<option value="">Not recorded<\/option>/);
+  assert.match(html, /<option value="0">Breathing air<\/option>/);
+  assert.match(html, /Consciousness: not assessed/);
+  for (const l of ["A", "C", "V", "P", "U"]) {
+    assert.match(html, new RegExp(`<option value="${l}">`), `${l} must be offerable`);
+  }
+  // The letters are spelled out: "C" on its own is not a thing a nurse should have to remember.
+  assert.match(html, /new confusion/);
+  assert.match(html, /unresponsive/);
 });
 
 test("HTML is escaped: a hostile ward or drug name cannot inject markup", () => {

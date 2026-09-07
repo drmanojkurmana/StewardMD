@@ -329,6 +329,10 @@
     { k: "temp", l: "Temp", u: "°F" }, { k: "spo2", l: "SpO₂", u: "%" },
     { k: "weight", l: "Weight", u: "kg" }
   ];
+  /* The two an early warning score cannot do without. They are not numbers, so they sit beside the
+   * numeric grid rather than in it - and leaving them blank leaves the score INCOMPLETE, which is
+   * the honest outcome rather than a reassuring total about a patient nobody finished examining. */
+  var ACVPU = [["", "Consciousness: not assessed"], ["A", "A - alert"], ["C", "C - new confusion"], ["V", "V - responds to voice"], ["P", "P - responds to pain"], ["U", "U - unresponsive"]];
   function vitalsCard() {
     var f = VITALS.map(function (v) {
       return '<label class="w-f"><span>' + esc(v.l) + ' <i>' + esc(v.u) + "</i></span>" +
@@ -336,6 +340,10 @@
     }).join("");
     return '<div class="w-card"><div class="w-card-h">' + ms("monitor_heart") + "<h3>Vitals</h3></div>" +
       '<div class="w-grid">' + f + "</div>" +
+      '<div class="w-fluid"><label class="w-f"><span>Supplemental oxygen</span>' +
+      '<select id="wv_o2"><option value="">Not recorded</option><option value="0">Breathing air</option><option value="1">On oxygen</option></select></label>' +
+      '<label class="w-f"><span>Consciousness <i>ACVPU</i></span><select id="wv_acvpu">' +
+      ACVPU.map(function (a) { return '<option value="' + esc(a[0]) + '">' + esc(a[1]) + "</option>"; }).join("") + "</select></label></div>" +
       // Weight is not decoration: a weight-based dose is REFUSED at the bedside until the ward has
       // actually weighed the patient, and this is where that weight comes from.
       '<p class="w-hint">Blank fields are not recorded. A value that is not plainly one number is skipped, never guessed at.</p>' +
@@ -907,6 +915,9 @@
     var s = st.sel; if (!s) return;
     var v = {}, any = false;
     VITALS.forEach(function (f) { var x = val("wv_" + f.k); if (x) { v[f.k] = x; any = true; } });
+    // Not recorded and "no" are different: an empty select writes nothing, "0" records breathing air.
+    var o2 = val("wv_o2"); if (o2 !== "") { v.o2 = o2; any = true; }
+    var ac = val("wv_acvpu"); if (ac) { v.acvpu = ac; any = true; }
     if (!any) { st.err = "Nothing to record."; paint(); return; }
     st.busy = true; paint();
     apiPost("/ward/vitals", { orgId: st.orgId, encounterId: s.encounterId, patientId: s.patientId, vitals: v })
@@ -915,7 +926,10 @@
         // than showing a success message for a save that recorded nothing.
         if (settle(r, r && r.written ? "Recorded " + r.written + " observation" + (r.written === 1 ? "" : "s") + "." : null)) {
           if (r && !r.written) st.err = "Nothing was recorded - no field held a plain number.";
-          else VITALS.forEach(function (f) { var el = document.getElementById("wv_" + f.k); if (el) el.value = ""; });
+          else {
+            VITALS.forEach(function (f) { var el = document.getElementById("wv_" + f.k); if (el) el.value = ""; });
+            ["wv_o2", "wv_acvpu"].forEach(function (id) { var el = document.getElementById(id); if (el) el.value = ""; });
+          }
         }
         paint();
       })

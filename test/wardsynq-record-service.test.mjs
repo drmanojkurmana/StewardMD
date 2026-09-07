@@ -736,7 +736,29 @@ test("vitals to observations: coded, as reported, nothing invented, stable ids",
   assert.equal(obs[0].id, `opd-vitals-t1-${Date.parse("2026-09-06T10:00:00.000Z")}-sbp`);
   assert.deepEqual(vitalsToObservations({ vitals: { temp: "37.2", tempUnit: "C" }, patientId: "p", ticketId: "T" }).map((o) => o.unit), ["Cel"]);
   assert.deepEqual(vitalsToObservations({ vitals: { pulse: "" }, patientId: "p", ticketId: "T" }), []);
-  assert.deepEqual(Object.keys(VITAL_CODES), ["sbp", "dbp", "pulse", "temp", "spo2", "rr", "weight"]);
+  /* `o2` joined 2026-09-08 for NEWS2, which cannot complete without it. ACVPU is NOT in this table
+   * and must not be: its value is a LETTER, and this table is the numeric path. */
+  assert.deepEqual(Object.keys(VITAL_CODES), ["sbp", "dbp", "pulse", "temp", "spo2", "rr", "weight", "o2"]);
+
+  /* NOT RECORDED AND "NO" ARE DIFFERENT. "Not on supplemental oxygen" is a real NEWS2 input worth
+   * zero points; "nobody wrote it down" is a missing parameter the score refuses to complete on. */
+  const noO2 = vitalsToObservations({ vitals: { pulse: "80" }, patientId: "p", ticketId: "T" });
+  assert.ok(!noO2.some((o) => o.code === "80288-4"), "an absent o2 writes nothing");
+  const onAir = vitalsToObservations({ vitals: { o2: false }, patientId: "p", ticketId: "T" })[0];
+  assert.equal(onAir.value, 0, "and an explicit no is a recorded zero");
+  assert.equal(onAir.valueLabel, "Breathing air", "read as a word, so nobody decodes a 0 on a chart");
+  assert.equal(vitalsToObservations({ vitals: { o2: "yes" }, patientId: "p", ticketId: "T" })[0].value, 1);
+
+  /* ACVPU IS A LETTER, because the score reads it as one. Encoding it as an ordinal would have
+   * stored a 0 for "Alert" that the scorer could not read, leaving every ward with a permanently
+   * incomplete NEWS2 and the observation sitting right there. */
+  const acvpu = vitalsToObservations({ vitals: { acvpu: "v" }, patientId: "p", ticketId: "T" })[0];
+  assert.equal(acvpu.code, "80339-5");
+  assert.equal(acvpu.value, "V", "upper-cased, and stored as the letter");
+  // A word the scale does not contain is not a level of consciousness: an invented "A" would
+  // complete a score about a patient whose consciousness nobody assessed.
+  assert.deepEqual(vitalsToObservations({ vitals: { acvpu: "drowsy" }, patientId: "p", ticketId: "T" }), []);
+  assert.deepEqual(vitalsToObservations({ vitals: { acvpu: "" }, patientId: "p", ticketId: "T" }), []);
 });
 
 /* 2026-09-07. num() was `parseFloat(String(v).replace(/[^0-9.\-]/g, ""))`, which deletes the
