@@ -94,6 +94,7 @@ import { news2ForPatient } from "../../_wardsynq/news2-view.js";
 import { recordRead, readersToNotify } from "../../_wardsynq/read-log.js";
 import { codeClaimForEncounter, claimAction, recordPreAuth, claimsForPatient, watchlist as upcodingList } from "../../_wardsynq/billing.js";
 import { patientCopy, releaseToPatient } from "../../_wardsynq/patient-record.js";
+import { exportPage, recordBackupRun, backupStatus } from "../../_wardsynq/backup-run.js";
 import { listTools as listRiskTools, recordAssessment as recordRiskAssessment, completeAction as completeRiskAction, listAssessments as listRiskAssessments } from "../../_wardsynq/risk-assessment.js";
 import { recordAllergiesFromAssessment } from "../../_wardsynq/migrate-allergy.js";
 
@@ -570,6 +571,11 @@ export async function onRequest(context) {
          * their record is a clinical act, not a clerical one, and the person who does it has to be
          * the person who can answer the questions it produces. */
         "patient-copy": CAPS.EMR_VIEW, "patient-release": CAPS.EMR_TREAT,
+        /* THE BACKUP EXPORT HANDS OVER AN ENTIRE HOSPITAL. It deliberately bypasses the per-actor
+         * read scoping every other route obeys, because a backup filtered by somebody's permissions
+         * restores into a chart with holes in it. So no clinical capability reaches it at any dose:
+         * it is STAFF_ADMIN, the person who owns the deployment, and every page is audited. */
+        backup: CAPS.STAFF_ADMIN, "backup-status": CAPS.STAFF_ADMIN,
         // ADT out. Reading a stay in another wire format is still reading a chart, so it needs the
         // authority to read one. It writes nothing and there is no inbound listener.
         adt: CAPS.EMR_VIEW, oru: CAPS.EMR_VIEW, cda: CAPS.EMR_VIEW,
@@ -804,6 +810,18 @@ export async function onRequest(context) {
       }
       if (sub === "upcoding" && method === "GET") {
         const r = await upcodingList(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "" });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "backup" && method === "GET") {
+        const r = await exportPage(request, env, { ...deps, since: url.searchParams.get("since"), limit: url.searchParams.get("limit") });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "backup" && method === "POST") {
+        const r = await recordBackupRun(request, env, { ...deps, throughSeq: body.throughSeq, rows: body.rows, location: body.location, at: body.at, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "backup-status" && method === "GET") {
+        const r = await backupStatus(request, env, { ...deps, rpoMinutes: (wsqCfg && wsqCfg.rpoMinutes) || null });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "patient-copy" && method === "GET") {
