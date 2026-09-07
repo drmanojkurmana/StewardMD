@@ -133,7 +133,7 @@ function grantForCaps(caps) {
      * in the first place - the front desk's work, not a clinical decision. An AppointmentRequest is
      * NOT here: promising that a patient needs to be seen again is clinical, and it is granted by
      * EMR_TREAT, which carries unrestricted write. */
-    const added = [PATIENT_TYPE, ENCOUNTER_TYPE, "Appointment", "PatientLink", "PrescriptionTransmission"];
+    const added = [PATIENT_TYPE, ENCOUNTER_TYPE, "Appointment", "PatientLink", "PrescriptionTransmission", "AdmissionRequest"];
     if (!grant) grant = { tier: TIER.EXECUTE, read: null, write: added, basis: CAPS.QUEUE_ADD };
     else grant = {
       tier: TIER.EXECUTE, read: grant.read,
