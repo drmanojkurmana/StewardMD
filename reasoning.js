@@ -1041,35 +1041,38 @@
     root.innerHTML =
       '<div class="dx-top">' +
         '<button class="dx-back" id="dxClose" aria-label="Close reasoning">‹ Close</button>' +
-        '<div class="dx-title">Clinical Reasoning</div>' +
-        '<button class="dx-reset" id="dxReset" title="Start over">Reset</button>' +
+        '<div class="dx-title">Dx My Patient<span class="dx-brand-sub">Guided clinical consult</span></div>' +
+        '<button class="dx-reset" id="dxReset" title="Clear this case">Clear</button>' +
       '</div>' +
+      '<nav class="dx-work-nav" aria-label="Reasoning workspace"><button type="button" data-dx-jump="dxIntake">Findings <span id="dxFindingCount">0</span></button><button type="button" data-dx-jump="dxReview">Review differential <span aria-hidden="true">↓</span></button></nav>' +
       '<div class="dx-body">' +
-        '<div class="dx-discl">For clinical decision support only — not a diagnosis. The treating physician remains responsible for all clinical decisions; always verify against the patient.</div>' +
+        '<section class="dx-intake" id="dxIntake" aria-labelledby="dxIntakeTitle"><div class="dx-section-intro"><span class="dx-eyebrow">GUIDED CONSULT</span><h2 id="dxIntakeTitle">One useful question<br>at a time.</h2><p>Start with the presentation. Add confirmed findings, then explore what else to check.</p></div>' +
         '<div id="dxImported" class="dx-imported"></div>' +
         '<div id="dxHosp" class="dx-hosp"></div>' +
-        '<button id="dxAdvToggle" class="dx-adv-toggle" type="button">' + rIco("flask") + ' Advanced workspace ▾</button>' +
-        '<div id="dxAdv" class="dx-adv" style="display:none"></div>' +
         '<div class="dx-find-wrap">' +
           '<button id="dxSpeak" class="dx-speak" type="button" aria-label="Speak about your patient — MaiK Scribe">' + rIco("mic") + ' Speak about your patient <span class="dx-speak-tag">MaiK Scribe</span></button>' +
           '<div class="dx-search-box">' +
-            '<input id="dxSearch" class="dx-search" type="text" placeholder="Search findings (e.g. pap → Papilledema, dys → Dysuria/Dysphagia)…" autocomplete="off" role="combobox" aria-expanded="false" aria-autocomplete="list">' +
+            '<label class="dx-field-label" for="dxSearch">Find a symptom, sign or result</label><input id="dxSearch" class="dx-search" type="text" placeholder="Search findings, e.g. fever or dysuria" autocomplete="off" role="combobox" aria-controls="dxSearchDrop" aria-expanded="false" aria-autocomplete="list">' +
             '<div id="dxSearchDrop" class="dx-search-drop" role="listbox" style="display:none"></div>' +
           '</div>' +
-          '<div id="dxSel" class="dx-selected"></div>' +
           '<div id="dxSuggest" class="dx-suggest"></div>' +
-          '<div id="dxPicker" class="dx-picker"></div>' +
-        '</div>' +
+          '<div class="dx-field-label">Added to this case <span class="dx-inline-hint">Tap a finding to remove it</span></div><div id="dxSel" class="dx-selected"></div>' +
+          '<details class="dx-browse"><summary>Browse all findings by system</summary><div id="dxPicker" class="dx-picker"></div></details>' +
+        '</div><button id="dxAdvToggle" class="dx-adv-toggle" type="button">' + rIco("flask") + ' Case notes &amp; tools ▾</button><div id="dxAdv" class="dx-adv" style="display:none"></div></section>' +
+        '<section class="dx-review" id="dxReview" aria-labelledby="dxReviewTitle"><div class="dx-review-heading"><div><span class="dx-eyebrow">REVIEW &amp; REFINE</span><h2 id="dxReviewTitle">Your differential</h2></div><span class="dx-update-label">Updates with your findings</span></div><p class="dx-score-note">Scores rank the fit to entered findings. They are not calibrated disease probabilities.</p>' +
         '<div id="dxGate" class="dx-gate"></div>' +
         '<div id="dxPolicy" class="dx-policy-wrap"></div>' +
         '<div id="dxChanged" class="dx-changed" style="display:none"></div>' +
         '<div id="dxCompare" class="dx-compare"></div>' +
         '<div id="dxDom" class="dx-dom-wrap"></div>' +
         '<div id="dxCols" class="dx-cols"></div>' +
+        '<div class="dx-discl">Educational reasoning support, not a diagnosis. Verify findings, evidence and next steps against the patient and local guidance.</div></section>' +
       '</div>';
     document.body.appendChild(root);
     root.querySelector("#dxClose").addEventListener("click", close);
-    root.querySelector("#dxReset").addEventListener("click", resetAll);
+    root.querySelector("#dxReset").addEventListener("click", function () { if (!Object.keys(S.f).length || window.confirm("Clear the findings in this working case?")) resetAll(); });
+    root.querySelectorAll("[data-dx-jump]").forEach(function (b) { b.addEventListener("click", function () { showConsultPane(b.getAttribute("data-dx-jump")); }); });
+    root.addEventListener("keydown", function (e) { var h = e.target.closest && e.target.closest(".dx-row-head"); if (h && e.target === h && (e.key === "Enter" || e.key === " ")) { e.preventDefault(); h.click(); } });
     root.querySelector("#dxAdvToggle").addEventListener("click", function () { S.advOpen = !S.advOpen; renderAdv(); });
     var dxSp = root.querySelector("#dxSpeak");
     if (dxSp) dxSp.addEventListener("click", function () {
@@ -1108,7 +1111,9 @@
   function renderSelected() {
     var el = root.querySelector("#dxSel");
     var keys = Object.keys(S.f);
-    if (!keys.length) { el.innerHTML = '<span class="dx-sel-empty">No findings yet — tap below to add.</span>'; return; }
+    root.classList.toggle("dx-has-case", keys.length > 0);
+    var count = root.querySelector("#dxFindingCount"); if (count) count.textContent = keys.length;
+    if (!keys.length) { el.innerHTML = '<span class="dx-sel-empty">No findings added yet. Search above or browse the systems below.</span>'; return; }
     // red-flag review alert for extracted emergency findings (from the NLP layer), still selected
     var rf = ((S._lastExtract && S._lastExtract.redFlags) || []).filter(function (k) { return S.f[k]; });
     var banner = rf.length ? '<div class="dx-redflag">' + rIco("warn") + ' Urgent red flags for review: ' + rf.map(function (k) { return esc(lbl(k)); }).join(" · ") + '</div>' : "";
@@ -1117,7 +1122,7 @@
       banner += '<div class="dx-redflag">' + rIco("warn") + ' Altered sensorium with a focal / seizure / pupillary sign — check glucose now and obtain urgent neuroimaging (CT/MRI) to exclude a structural or vascular emergency before diagnosing a primary infection.</div>';
     }
     el.innerHTML = banner + keys.map(function (k) {
-      return '<button class="dx-sel-chip" data-f="' + k + '">' + esc(lbl(k)) + ' ✕</button>';
+      return '<button class="dx-sel-chip" aria-label="Remove ' + esc(lbl(k)) + '" data-f="' + k + '">' + esc(lbl(k)) + ' ✕</button>';
     }).join("");
     el.querySelectorAll(".dx-sel-chip").forEach(function (b) {
       b.addEventListener("click", function () { delete S.f[b.getAttribute("data-f")]; recompute(); });
@@ -1248,13 +1253,25 @@
     var el = root.querySelector("#dxSuggest");
     if (!el) return;
     if (!Object.keys(S.f).length) { el.innerHTML = ""; return; }
-    var sug = suggestionKeys(d);
-    if (!sug.length) { el.innerHTML = ""; return; }
-    el.innerHTML = '<div class="dx-sugg-h">💡 Suggested next findings</div><div class="dx-chips">' +
-      sug.map(function (k) { return '<button class="dx-chip sug" data-f="' + k + '">+ ' + esc(LABEL[k]) + '</button>'; }).join("") + '</div>';
-    el.querySelectorAll(".dx-chip[data-f]").forEach(function (b) {
-      b.addEventListener("click", function () { addFinding(b.getAttribute("data-f")); });
-    });
+    var skipped = S.consultSkipped || [];
+    var sug = suggestionKeys(d).filter(function (k) { return skipped.indexOf(k) < 0; });
+    if (!sug.length) {
+      el.innerHTML = '<div class="dx-sugg-h">Ready to review?</div><p class="dx-suggest-note">No further suggestions in this set. You can still search for findings or review the differential.</p>' + (skipped.length ? '<button class="dx-chip" id="dxRevisit">Revisit skipped questions</button>' : '');
+      var revisit = el.querySelector("#dxRevisit"); if (revisit) revisit.onclick = function () { S.consultSkipped = []; renderSuggest(); };
+      return;
+    }
+    var key = sug[0];
+    el.innerHTML = '<div class="dx-eyebrow">CLARIFY THE CLINICAL PICTURE</div><h3 class="dx-question">Is this finding present?</h3><div class="dx-question-finding">' + esc(LABEL[key]) + '</div><p class="dx-suggest-note">Suggested from missing findings across the current differential. Verify before adding.</p><div class="dx-answer-row"><button class="dx-chip" data-confirm="' + key + '">Present · add</button><button class="dx-chip" id="dxSkipQuestion">Skip for now</button></div><p class="dx-question-foot">Skipping does not record absence or change the ranking.</p>';
+    el.querySelector("[data-confirm]").onclick = function () { addFinding(key); };
+    el.querySelector("#dxSkipQuestion").onclick = function () { S.consultSkipped = skipped.concat([key]); renderSuggest(); var next = el.querySelector("[data-confirm], #dxRevisit"); if (next) next.focus({ preventScroll: true }); };
+  }
+
+  function showConsultPane(id) {
+    if (!root) return;
+    root.querySelector("#dxIntake").hidden = id !== "dxIntake";
+    root.querySelector("#dxReview").hidden = id !== "dxReview";
+    root.querySelectorAll("[data-dx-jump]").forEach(function (b) { b.setAttribute("aria-pressed", String(b.getAttribute("data-dx-jump") === id)); });
+    root.querySelector(".dx-body").scrollTop = 0;
   }
 
   /* ---- Advanced workspace: free-text, sessions, export/print, timeline ---- */
@@ -1477,12 +1494,13 @@
   }
   function renderAdv() {
     var el = root.querySelector("#dxAdv"); if (!el) return;
+    var previousNote = el.querySelector("#dxFreeText"); if (previousNote) S.noteDraft = previousNote.value;
     el.style.display = S.advOpen ? "" : "none";
-    var tog = root.querySelector("#dxAdvToggle"); if (tog) tog.innerHTML = rIco("flask") + " Advanced workspace " + (S.advOpen ? "▲" : "▾");
+    var tog = root.querySelector("#dxAdvToggle"); if (tog) { tog.innerHTML = rIco("flask") + " Case notes & tools " + (S.advOpen ? "▲" : "▾"); tog.setAttribute("aria-expanded", String(!!S.advOpen)); tog.setAttribute("aria-controls", "dxAdv"); }
     if (!S.advOpen) return;
     var sessions = loadSessions();
     el.innerHTML =
-      '<textarea id="dxFreeText" class="dx-free" rows="3" placeholder="Describe the case in plain text — e.g. 65M, 2 days fever, neck stiffness, photophobia, drowsy…"></textarea>' +
+      '<label class="dx-field-label" for="dxFreeText">Clinical summary</label><textarea id="dxFreeText" class="dx-free" rows="3" placeholder="Age, symptom onset, relevant history and examination. Avoid names and identifiers.">' + esc(S.noteDraft || "") + '</textarea>' +
       '<div class="dx-adv-row">' +
         '<button class="dx-adv-btn primary" id="dxExtract">' + rIco("spark") + ' Extract findings</button>' +
         '<button class="dx-adv-btn" id="dxSaveSess">' + rIco("save") + ' Save session</button>' +
@@ -2255,15 +2273,15 @@
     if (p != null && p !== r.score) delta = r.score > p ? '<span class="dx-up">▲</span>' : '<span class="dx-down">▼</span>';
     else if (p == null && S.started && Object.keys(S.prev).length) delta = '<span class="dx-new">NEW</span>';
     var head =
-      '<div class="dx-row-head" data-id="' + r.id + '">' +
+      '<div class="dx-row-head" role="button" tabindex="0" aria-expanded="' + (!!open) + '" aria-label="Review ' + esc(r.name) + '" data-id="' + r.id + '">' +
         '<div class="dx-rank ' + cls + '">' + rank + '</div>' +
         '<div class="dx-row-main">' +
           '<div class="dx-row-name">' + esc(r.name) + ' ' + delta + (r.matched ? ' <span class="dx-met">criteria met</span>' : '') + (!r.inf && MIMIC[r.id] ? ' <span class="dx-mimic">↔ mimics ' + esc(MIMIC[r.id]) + '</span>' : '') + '</div>' +
           '<div class="dx-bar ' + cls + '"><span style="width:' + r.score + '%"></span></div>' +
           '<div class="dx-row-sys">' + esc(r.system) + '</div>' +
         '</div>' +
-        '<button class="dx-cmp' + (S.compare.indexOf(r.id) >= 0 ? " on" : "") + '" data-cmp="' + r.id + '" title="Add to compare">⚖</button>' +
-        '<div class="dx-score">' + r.score + '<small>/100</small></div>' +
+        '<button class="dx-cmp' + (S.compare.indexOf(r.id) >= 0 ? " on" : "") + '" aria-label="Compare ' + esc(r.name) + '" aria-pressed="' + (S.compare.indexOf(r.id) >= 0) + '" data-cmp="' + r.id + '" title="Add to compare">⚖</button>' +
+        '<div class="dx-score" aria-label="Ranking score ' + r.score + ' out of 100">' + r.score + '<small>/100</small></div>' +
       '</div>';
     if (!open) return '<div class="dx-card ' + cls + '">' + head + '</div>';
     function fl(keys, c, sign) { return keys.map(function (k) { return '<span class="dx-f ' + c + '">' + (sign || "") + esc(lbl(k)) + '</span>'; }).join("") || '<span class="dx-none">—</span>'; }
@@ -2275,7 +2293,7 @@
       if (S.lastAddedKey && r.supporting && r.supporting.indexOf(S.lastAddedKey) >= 0) eff = ' · <span class="up">' + esc(S.lastAdded) + ' supports this</span>';
       else if (S.lastAddedKey && r.contra && r.contra.indexOf(S.lastAddedKey) >= 0) eff = ' · <span class="down">' + esc(S.lastAdded) + ' argues against this</span>';
       else if (S.lastAdded) eff = ' · after adding ' + esc(S.lastAdded);
-      confLine = '<div class="dx-conf">Confidence ' + pv + ' → ' + r.score + eff + '</div>';
+      confLine = '<div class="dx-conf">Ranking score ' + pv + ' → ' + r.score + eff + '</div>';
     }
     // Why-not-higher: name the actual competitor ranked immediately above (the
     // differential a consultant voices), then the contradictory / would-strengthen findings.
@@ -2544,8 +2562,8 @@
     }
     if (!ready) {
       gateEl.innerHTML = ""; polEl.innerHTML = ""; chEl.style.display = "none"; if (domEl) domEl.innerHTML = "";
-      colEl.innerHTML = '<div class="dx-threshold">🧩 Please add more clinical findings to improve diagnostic accuracy.' +
-        '<span>Add at least 3 findings (or one highly specific finding) to generate a reliable differential — use the suggestions above.</span></div>';
+      colEl.innerHTML = '<div class="dx-threshold">More clinical context is needed.' +
+        '<span>Add at least 3 findings, a highly specific finding, or findings that meet syndrome criteria. The differential is provisional and should be reviewed clinically.</span></div>';
       S.prev = {}; return;
     }
     if (domEl) {
@@ -2766,18 +2784,18 @@
     });
   }
 
-  function resetAll() { S.f = {}; S.prev = {}; S.expanded = {}; S.started = false; S.system = null; S.showRare = false; S.compare = []; S.timeline = []; if (!S._restoring) S._caseId = null; filter = ""; closeMgmt(); var si = root && root.querySelector("#dxSearch"); if (si) si.value = ""; recompute(); }
+  function resetAll() { S.consultSkipped = []; S.f = {}; S.prev = {}; S.expanded = {}; S.started = false; S.system = null; S.showRare = false; S.compare = []; S.timeline = []; S.noteDraft = ""; var note = root && root.querySelector("#dxFreeText"); if (note) note.value = ""; if (!S._restoring) S._caseId = null; filter = ""; closeMgmt(); var si = root && root.querySelector("#dxSearch"); if (si) si.value = ""; recompute(); }
   function open(opts) {
     ensureRoot();
-    if (opts && opts.workspace) { S.workspace = true; S.advOpen = true; }
+    if (opts && opts.workspace) { S.workspace = true; S.advOpen = false; }
     // Bridge: carry over findings already entered in the legacy checkbox wizard
     if (!Object.keys(S.f).length && typeof window.SMD_getFindings === "function") {
       try { var lf = window.SMD_getFindings(), n = 0; for (var k in lf) { if (lf[k] && VALID[k]) { S.f[k] = true; n++; } } if (n) { S.started = true; S.lastAdded = null; } } catch (e) {}
     }
-    root.classList.add("on"); document.body.classList.add("dx-lock"); recompute();
+    root.classList.add("on"); document.body.classList.add("dx-lock"); recompute(); showConsultPane("dxIntake");
     // focus the findings search so the clinician can start typing immediately
     // Native: skip programmatic focus — it pops the iOS keyboard with no user intent.
-    try { var sif = root.querySelector("#dxSearch"); if (sif && !window.SMD_IS_NATIVE) setTimeout(function () { try { sif.focus(); } catch (e) {} }, 60); } catch (e) {}
+    try { var sif = root.querySelector("#dxSearch"); if (sif && !window.SMD_IS_NATIVE && window.innerWidth >= 1024) setTimeout(function () { try { sif.focus({ preventScroll: true }); } catch (e) {} }, 60); } catch (e) {}
   }
   function openWorkspace() { if (!S._restoring) S._caseId = null; open({ workspace: true }); }
   // Reopen the workspace and restore a Recent-Cases snapshot (findings + case id) so
