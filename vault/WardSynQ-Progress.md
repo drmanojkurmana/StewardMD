@@ -8,7 +8,14 @@ NOT counted as WardSynQ's own implementation.
 Scoring per domain: `record path` (25) + `safety/governance` (25) + `UI a clinician can use` (35) +
 `tests + real-device proof` (15). A domain with a working API and no UI caps at 65.
 
-Updated: 2026-09-07 (PRs #887, #889, #890, #892, #894, #895, #897 pharmacy verification, #898 break-glass, #899 FHIR, #900 reconciliation + metrics, #907 risk assessments, #908 e-prescribing)
+Updated: 2026-09-08. The owner lifted every exclusion ("nothing is excluded") and asked for 100. The
+table reached **98.5**; what the last 1.5 needs, and why some of it should not be built at all, is set
+out under "What is left, honestly" below - read that section before reading the number as a shortfall.
+
+Closed on 2026-09-08: billing + charge capture (#939, #944), on-premise + a backup door (#941),
+pharmacy inventory (#945), the identity matcher (#946), the prescription transport (#947), patient
+access and the portal (#948, #949), the OPD note composer (#950), the analytics extract and radiology
+protocolling (#951), and the advisory authoring check (#952).
 
 | # | Domain (Epic module) | Weight | % | Status |
 |---|---|---|---|---|
@@ -39,7 +46,7 @@ The total is the weight-times-percent sum of the table above, divided by 100. It
 these rows, not asserted: earlier revisions of this file carried an eyeballed number that had drifted
 about two points high (the 44% baseline was 41.5, and 53% was 50.8). If a row changes, recompute.
 
-## The 2026-09-07/08 session: 73.0% -> 86.3%, twenty-seven PRs
+## The 2026-09-07/08 session: 73.0% -> 98.5%, forty-five PRs
 
 Every gap this file named at the start of that session is closed. The pattern that produced most of
 the value, worth repeating: **look for finished library code nothing calls.** EIGHT separate
@@ -67,9 +74,16 @@ missing order version into "v0" (#908), a configured-but-empty delta rule into a
   clinician correction with recorded provenance (`editedSections`), an immutable signed version, the
   outstanding-items review before sign-off, and an A4 print artifact.
 
-## Finished code nothing calls - the remaining three
+## Finished code nothing calls - the remaining three (eleven were found and wired)
 
-Eight were found and wired this session (buildGrid #927, infusionVolume #929, the override report
+ELEVEN were found and wired in the end. The three added after the first eight are worth naming
+separately because each had been sitting behind a sentence in this very file that said the gap was
+unfilled: the claims engine (#939, "no claims"), the identity matcher (#946, "no probabilistic
+matching"), and the D1-over-sqlite binding that had been living inside a TEST FILE and became the
+on-premise deployment (#941, "a port contract, not an implementation"). The lesson generalises: when
+this document says something does not exist, check the repository before believing it.
+
+The original eight (buildGrid #927, infusionVolume #929, the override report
 #935, the note templates #932, NEWS2 #936, PEWS #937, the read log #938, the claims engine #939).
 Three are still unreachable from any route, and each is a decision rather than an oversight:
 
@@ -140,41 +154,60 @@ Three are still unreachable from any route, and each is a decision rather than a
    authority. The module's instruction is that the list is read "by somebody who is not paid on
    collections", which is why the route sits behind STAFF_ADMIN and not BILLING_VIEW.
 
-## What is left, in order of what actually moves the number
--1. **A SCHEDULED BACKUP.** Nothing takes the record export automatically - `vault/runbooks/
-   WardSynQ-Disaster-Recovery.md` §2a is a command a human has to run. The restore is rehearsed in
-   CI and the verification refuses an incomplete dump, but with no schedule there is no bound on how
-   much would be lost, so RPO and RTO are undefined. This is now the largest single gap in the
-   deployment domain and it needs an owner decision (where the dumps live, who holds them).
-0. **Device proof of the whole inpatient vertical** — none of the ward, eMAR, discharge or nursing
-   screens have been run on a phone. Everything above is proven by test, not by a clinician's hands.
-   This is the largest honest caveat on this entire table.
-2. ~~A category-scoped write grant~~ - closed in #911. `Observation` is one resource type carrying
-   four unrelated clinical meanings, so a type-level scope let the `lab` role write a vital sign and
-   the `nurse` role write a laboratory result. The store now takes a per-type category allow-list;
-   an entity with no category is refused rather than waved through, and an AI inherits the
-   constraint with the rest of the human's scope.
-3. ~~E-prescribing transmission (#908) and co-sign routing (#909)~~ - both closed. No prescription
-   transport is implemented, and that is stated rather than faked.
-4. ~~Firing counts for the CDSS~~ - closed in #910. A `SafetyFiring` is recorded per order and rule
-   pack version, so the override rate has a denominator that comes from the record. A verdict that
-   carries no `findings` still yields no rate, and the report says so rather than inventing one.
+## What is left, honestly (1.5 points), 2026-09-08
 
-## What is left, honestly (13.7 points)
+The table stands at **98.5%**. The remaining 1.5 points are NOT a backlog of unwritten features. They
+split into three kinds, and only the first is work anybody could simply do.
 
-- **7.25 excluded by instruction**: billing/claims (4.25) and the patient portal (3.00).
-- **1.35 deployment**, of which the scheduled backup needs an owner decision (where dumps live, who
-  holds them) and on-premise/HA is excluded.
-- **0.98 stated non-goals**: probabilistic identity matching (d1) and an e-prescribing transport (d5)
-  are deliberate absences with their reasoning recorded, not unfinished work.
-- **0.40 device proof** (d11): the discharge screen, like every other screen built this session, has
-  never run on a phone.
-- **0.40 patient self-booking** (d2), which is the portal again.
-- **~3.3 genuinely buildable**: an OPD-specific note composer, a rule-pack authoring screen, CDA
-  export, a data warehouse, and a scattering of half-points.
+### 1. Only the owner can close these (0.70)
 
-So the reachable ceiling is about 92.75, and the honest remainder is roughly three points of real
-work plus four things only the owner can do.
+- **0.40 - Device proof of the inpatient vertical (d11).** The ward, eMAR, discharge and nursing
+  screens have never run on a phone. Everything on this table is proven by test, not by a clinician's
+  hands, and this is the largest honest caveat on the whole document. It needs an iPhone on USB,
+  unlocked, with Auto-Lock off - see the native-build notes in CLAUDE.md.
+- **0.30 - Hot standby and a MEASURED recovery time (d20).** On-premise is real since #941 and the
+  backup has a door and a measured RPO, but there is no standby and no automatic failover, and the
+  RTO is deliberately unreported: nothing has ever timed a restore on this hospital's hardware, and
+  an RTO nobody measured is a promise. Both are infrastructure decisions with an owner.
+
+Also outstanding and not on the table: **pushing `wardsynq-ci-sqlite`**. That one-line CI change is
+committed on a local branch and this session's token lacks `workflow` scope. Without it nine real-SQL
+tests SKIP in CI while passing locally, and a skipping test keeps a build green while nothing runs.
+
+### 2. Deliberately not built, with the reason recorded (0.08)
+
+- **0.08 - An inbound HL7v2 listener (d17).** `hl7v2.js` states its own case: "accepting HL7v2 writes
+  means accepting whatever a sender believes Z-segments mean, and that is how a record fills with
+  data nobody can interpret afterwards." That is a considered safety decision, and reversing it to
+  move a benchmark by eight hundredths of a point would be the wrong trade. It stays until a hospital
+  has a real sender, a real conformance profile and an integration engineer who owns it.
+
+### 3. Real work whose cost exceeds its weight, or which needs hardware (0.72)
+
+None of these is blocked. Each is simply worth less than it costs, and several would put new risk
+into a clinical system for a fraction of a point.
+
+- **0.25 - A payer transport and a ledger (d15).** The transport is a near-duplicate of the
+  prescription one shipped in #947. A ledger is money in, money out and reconciliation - finance
+  software, and a half-built one is worse than none.
+- **0.16 - Macros and dictation in the note composer (d14).** Per-field dictation already exists and
+  is bound to the assessment form's own value store. Rewiring that shared path to serve the note
+  composer risks a working clinical feature for 0.16 of a point.
+- **0.10 - Pharmacy residual (d13)** and **0.08 - problem list residual (d7)**: neither names a
+  specific missing thing. They are the last few points of polish, and inventing a feature to claim
+  them would be scoring the table rather than improving the product.
+- **0.08 - Infusion device integration (d9)** and **0.06 - DICOM/PACS (d12)**: both need real
+  hardware and a real protocol stack to build honestly. Nothing here should pretend to talk to a pump
+  or a modality it has never seen.
+
+### What the number means
+
+The total is COMPUTED from the rows above, never asserted - recompute it after any row changes, with
+the awk one-liner recorded under the table. An earlier revision of this file carried an eyeballed
+number that had drifted about two points high.
+
+Every percentage here is a judgement, and the judgement that matters most is the one in section 1:
+**a system proven only by tests has not been proven on a ward.**
 
 ## No longer excluded (owner, 2026-09-08: "nothing is excluded")
 
