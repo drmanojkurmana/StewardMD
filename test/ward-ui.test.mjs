@@ -595,3 +595,59 @@ test("THE OUTBOX NEVER READS 'SENT' AS 'ARRIVED', and an unsent prescription is 
   // Nothing prescribed and nothing sent: the card stays off the chart rather than showing an empty box.
   assert.ok(!W._render(chart).includes("Prescriptions sent"));
 });
+
+const copy = Object.assign({}, base, {
+  view: "pcopy",
+  sel: { encounterId: "wsq-adm-x", patientId: "opd-pat-x", ward: "Ward A", bed: "12", admittedAt: "2026-09-07T04:00:00.000Z" },
+  pcopy: {
+    ok: true, patientId: "opd-pat-x",
+    statements: ["1 result is not included here. Your care team will discuss it with you.",
+      "This is a summary your care team has given you. It is not your complete medical record - you can ask the hospital for that separately."],
+    clinicianWarnings: ["This hospital has not configured wardsynq.neverRelease, so no result is withheld from this page on grounds of sensitivity. Read it before you hand it over."],
+    document: {
+      patient: { id: "opd-pat-x", name: "Test Patient", mrn: "MRN-1", dob: "1970-01-01" },
+      diagnoses: [{ display: "Type 2 diabetes" }, { display: "COPD", note: "This is a working diagnosis. Your team is still confirming it." }],
+      excludedDiagnoses: 1,
+      allergies: [{ substance: "Penicillin", reaction: "rash" }],
+      medicines: [{ drug: "Metformin", dose: { value: 500, unit: "mg" }, route: "oral", frequency: "BD" }],
+      results: [{ id: "rep-2", name: "Renal profile", reportedAt: "2026-09-08T09:00:00.000Z", status: "final", conclusion: null }],
+      withheldResults: [{ reason: "critical_unacknowledged", say: "Your care team is reviewing this result and will discuss it with you.", reportedAt: "2026-09-08T10:00:00.000Z" }],
+      appointments: [],
+    },
+  },
+});
+
+test("THE CLINICIAN'S WARNING NEVER PRINTS ON THE PATIENT'S OWN COPY", () => {
+  const html = load()._render(copy);
+  /* Two audiences on one page. The patient's sentences print; the line telling the clinician to
+   * check the page before handing it over carries w-noprint, because a document reading "not for
+   * the patient" handed to the patient is the most careless thing this screen could do. */
+  assert.ok(/<p class="w-dt-gap w-noprint">[^<]*neverRelease/.test(html), "the warning is on screen and marked not to print");
+  assert.match(html, /w-dt-warn">1 result is not included here/, "and the patient's own sentences are not w-noprint");
+  assert.ok(!/w-dt-warn">[^<]*neverRelease/.test(html), "the two are never mixed into one block");
+});
+
+test("a withheld result is ON the page, in the patient's words and never its reason code", () => {
+  const html = load()._render(copy);
+  assert.match(html, /Not included here/);
+  assert.match(html, /Your care team is reviewing this result/);
+  /* The reason code is for the clinician and the audit trail. Printing "critical_unacknowledged" on
+   * a page a patient reads tells them something alarming and nothing useful. */
+  assert.ok(!html.includes("critical_unacknowledged"));
+  // A result that IS releasable appears under its own heading, so the two are never confused.
+  assert.match(html, /Renal profile/);
+});
+
+test("the patient copy never renders a stale patient, and the handover is its own act", () => {
+  const W = load();
+  // Nothing loaded yet renders a placeholder, never the previous patient's page.
+  assert.match(W._render(Object.assign({}, copy, { pcopy: null })), /Preparing the copy/);
+
+  const html = W._render(copy);
+  assert.match(html, /Test Patient/);
+  assert.match(html, /Penicillin/);
+  // The working diagnosis is labelled rather than printed as settled.
+  assert.match(html, /working diagnosis/);
+  // Recording the handover is a separate, deliberate act with its own button.
+  assert.match(html, /data-w-act="pcopyGive"/);
+});

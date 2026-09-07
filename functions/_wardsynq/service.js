@@ -139,6 +139,12 @@ const RESOURCE_TYPES = Object.freeze([
    * one - a refused pre-auth means the payer will not pay, and it does not mean the treatment is
    * not indicated. Kept apart from the chart so nothing clinical can ever read it as an answer. */
   "PreAuthorisation",
+  /* That a patient was given their own copy of the record, by a named clinician, at a time. A
+   * RECEIPT and never a copy: it holds which results went and how many diagnoses, and none of their
+   * values - a frozen second copy of clinical data that no correction ever reaches is a liability,
+   * not a record. Append-only, because "you were given this" is exactly the claim that has to
+   * survive somebody wishing it had not been. */
+  "PatientRecordRelease",
 ]);
 
 const MODE = Object.freeze({ SYSTEM_OF_RECORD: "system-of-record", INTEGRATION: "integration" });

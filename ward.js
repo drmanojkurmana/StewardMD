@@ -33,7 +33,7 @@
   var st = {
     orgId: "", ward: "", patients: [], view: "list",
     sel: null,                 // the selected {encounterId, patientId, ward, bed, admittedAt}
-    problems: [], criticals: [], balance: null, outbox: [], cosign: null, downtime: null, quality: null,
+    problems: [], criticals: [], balance: null, outbox: [], cosign: null, downtime: null, quality: null, pcopy: null,
     /* The terminology search: null while it runs, an array once it answers, undefined when nobody has
      * asked. Three states, because "searching" and "no matches" must not look the same. */
     icd: undefined, probText: "", probCode: "",
@@ -406,8 +406,79 @@
       // discharge is prepared while the patient is still on the ward, so this is not gated on the
       // stay being closed - the summary screen states plainly when a stay is still open.
       '<button class="w-btn ghost" data-w-act="move" title="Transfer to another ward or bed">' + ms("swap_horiz") + "Transfer</button>" +
-      '<button class="w-btn ghost" data-w-act="summary" title="Discharge summary">' + ms("description") + "Summary</button></div>" +
+      '<button class="w-btn ghost" data-w-act="summary" title="Discharge summary">' + ms("description") + "Summary</button>" +
+      // The patient's own copy. Reachable from the patient because that is where the conversation
+      // that produces it happens, not from a menu somewhere else.
+      '<button class="w-btn ghost" data-w-act="pcopy" title="The copy this patient can be given">' + ms("assignment_ind") + "Patient copy</button></div>" +
       criticalsCard(state) + problemsCard(state) + noteCard(state) + vitalsCard() + fluidCard(state) + marCard(state) + outboxCard(state);
+  }
+
+  /* The patient's own copy, on screen and on paper. It reuses the downtime pack's print styling
+   * deliberately: both are documents that leave the building, and both have to be legible in black
+   * and white and honest about what they do not contain.
+   *
+   * THE WITHHELD ITEMS ARE ON THE PAGE. A result left off silently reads as a test nobody did, which
+   * is a more reassuring statement than the truth. Each one prints the sentence the server wrote for
+   * the patient, and never the reason code, which is for the clinician and not for them. */
+  function pcopyView(state) {
+    var r = state.pcopy;
+    if (!r) return '<div class="w-card"><p class="w-empty">Preparing the copy…</p></div>';
+    var d = r.document || {};
+    var p = d.patient || {};
+
+    var list = function (arr, empty, fn) {
+      return arr && arr.length ? "<ul class=\"w-dt-meds\">" + arr.map(fn).join("") + "</ul>" : '<p class="w-empty">' + empty + "</p>";
+    };
+
+    /* The allergies are never filtered by anything, and an empty list is stated in words. A blank
+     * allergy block reads as "no known allergies" to every clinician alive, and this page is one a
+     * patient carries to the next hospital. */
+    var allergies = d.allergies && d.allergies.length
+      ? d.allergies.map(function (a) { return "<b>" + esc(a.substance) + "</b>" + (a.reaction ? " (" + esc(a.reaction) + ")" : ""); }).join(", ")
+      : "No allergies are recorded for you. Tell your care team if you know of any.";
+
+    var withheld = (d.withheldResults || []).length
+      ? '<section class="w-dt-p"><h3>Not included here</h3>' +
+        "<ul class=\"w-dt-meds\">" + d.withheldResults.map(function (w) {
+          return "<li>" + esc(w.say) + (w.reportedAt ? ' <span class="w-dt-times">' + when(w.reportedAt) + "</span>" : "") + "</li>";
+        }).join("") + "</ul></section>"
+      : "";
+
+    return '<div class="w-dt">' +
+      '<div class="w-dt-bar w-noprint"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button>" +
+      '<button class="w-btn" data-w-act="printpack">' + ms("print") + "Print</button>" +
+      '<button class="w-btn ghost" data-w-act="pcopyGive" title="Record that you gave this to the patient">' + ms("how_to_reg") + "Record handover</button>" +
+      '<button class="w-btn ghost" data-w-act="pcopy">' + ms("refresh") + "Refresh</button></div>" +
+      '<header class="w-dt-h"><h2>Your record</h2>' +
+      "<p><b>" + esc(p.name || r.patientId || "") + "</b>" + (p.mrn ? " &middot; " + esc(p.mrn) : "") + (p.dob ? " &middot; " + esc(p.dob) : "") + "</p>" +
+      /* Two audiences, and they are never mixed. `statements` is addressed to the patient and
+       * prints. `clinicianWarnings` is w-noprint: a line reading "not for the patient" printed on
+       * the patient's own copy would be the most careless thing on the page. */
+      (r.statements || []).map(function (s) { return '<p class="w-dt-warn">' + esc(s) + "</p>"; }).join("") +
+      (r.clinicianWarnings || []).map(function (s) { return '<p class="w-dt-gap w-noprint">' + esc(s) + "</p>"; }).join("") +
+      (r.release ? '<p class="w-ok w-noprint">Handover recorded at ' + when(r.release.at) + ".</p>" : "") +
+      "</header>" +
+      '<section class="w-dt-p"><h3>Allergies</h3><p class="w-dt-alg">' + allergies + "</p></section>" +
+      '<section class="w-dt-p"><h3>Your diagnoses</h3>' +
+      list(d.diagnoses, "No diagnoses are recorded.", function (x) {
+        return "<li><b>" + esc(x.display) + "</b>" + (x.note ? '<div class="w-dt-times">' + esc(x.note) + "</div>" : "") + "</li>";
+      }) + "</section>" +
+      '<section class="w-dt-p"><h3>Your medicines</h3>' +
+      list(d.medicines, "No medicines are recorded.", function (m) {
+        return "<li><b>" + esc(m.drug) + "</b> " + dose(m.dose) + (m.route ? " &middot; " + esc(m.route) : "") +
+          (m.frequency ? '<div class="w-dt-times">' + esc(m.frequency) + "</div>" : "") + "</li>";
+      }) + "</section>" +
+      '<section class="w-dt-p"><h3>Your results</h3>' +
+      list(d.results, "No results are ready to be given to you yet.", function (x) {
+        return "<li><b>" + esc(x.name) + "</b>" + (x.conclusion ? "<div>" + esc(x.conclusion) + "</div>" : "") +
+          '<div class="w-dt-times">' + when(x.reportedAt) + "</div></li>";
+      }) + "</section>" +
+      withheld +
+      '<section class="w-dt-p"><h3>Next appointments</h3>' +
+      list(d.appointments, "No appointment is booked.", function (a) {
+        return "<li>" + when(a.at) + (a.with ? " &middot; " + esc(a.with) : "") + "</li>";
+      }) + "</section>" +
+      "</div>";
   }
 
   var FLUID_IN = [["oral", "Oral"], ["iv", "IV"], ["ng", "NG / enteral"], ["blood", "Blood"], ["other", "Other"]];
@@ -622,7 +693,10 @@
       '<span class="w-title">WardSynQ &middot; Inpatient</span>' +
       (state.busy ? '<span class="w-busy">' + ms("progress_activity") + "</span>" : "<span></span>") + "</header>" +
       '<div class="w-canvas">' + banner(state) +
-      (state.view === "chart" ? chartView(state) : state.view === "downtime" ? downtimeView(state) : listView(state)) + "</div></div>";
+      (state.view === "chart" ? chartView(state)
+        : state.view === "downtime" ? downtimeView(state)
+        : state.view === "pcopy" ? pcopyView(state)
+        : listView(state)) + "</div></div>";
   }
 
   // ---- controller --------------------------------------------------------------------------
@@ -859,6 +933,25 @@
        * this feature is a clinician reading a sheet that is older than they think. */
       .catch(function () { st.busy = false; st.downtime = null; st.err = "Could not build the downtime pack. Do not print an older one."; paint(); });
   }
+  function loadPatientCopy() {
+    if (!st.sel || !st.sel.patientId) return;
+    st.busy = true; st.view = "pcopy"; st.pcopy = null; paint();
+    return apiGet("/ward/patient-copy?orgId=" + encodeURIComponent(st.orgId) + "&patientId=" + encodeURIComponent(st.sel.patientId))
+      .then(function (r) { if (settle(r)) st.pcopy = r; paint(); })
+      /* Never leave a previous patient's copy on screen. The hazard of this feature is handing the
+       * wrong person a page with somebody else's diagnoses on it, and a stale render is exactly how
+       * that happens. */
+      .catch(function () { st.busy = false; st.pcopy = null; st.err = "Could not build the patient's copy. Do not print an older one."; paint(); });
+  }
+  function givePatientCopy() {
+    if (!st.sel || !st.sel.patientId) return;
+    st.busy = true; paint();
+    return apiPost("/ward/patient-release", { orgId: st.orgId, patientId: st.sel.patientId })
+      /* The response carries the document it recorded, so the page then on screen is the page that
+       * was released - not the one loaded some minutes earlier that the record may have moved past. */
+      .then(function (r) { if (settle(r)) { st.pcopy = r; st.ok = "Handover recorded."; } paint(); })
+      .catch(function () { st.busy = false; st.err = "Could not record the handover."; paint(); });
+  }
   function loadCosigns() {
     return apiGet("/ward/cosign-queue?orgId=" + encodeURIComponent(st.orgId))
       .then(function (r) { if (r && r.ok) st.cosign = r; paint(); })
@@ -969,7 +1062,13 @@
     if (cmd === "dismiss") { st.err = ""; st.note = ""; st.refusal = null; paint(); return; }
     if (cmd === "reload") { loadWard(); return; }
     if (cmd === "setward") { st.ward = val("wWard"); loadWard(); return; }
-    if (cmd === "back") { st.view = "list"; st.sel = null; st.due = []; st.problems = []; st.outbox = []; st.downtime = null; paint(); return; }
+    if (cmd === "back") {
+      /* The patient's copy is opened FROM a chart, so back returns to that chart rather than
+       * throwing the selection away - and the copy itself is always dropped, because a page with
+       * one patient's diagnoses left on screen is how the next person gets handed the wrong one. */
+      if (st.view === "pcopy") { st.view = "chart"; st.pcopy = null; paint(); return; }
+      st.view = "list"; st.sel = null; st.due = []; st.problems = []; st.outbox = []; st.downtime = null; st.pcopy = null; paint(); return;
+    }
     if (cmd === "open") {
       var p = null;
       for (var j = 0; j < st.patients.length; j++) { if (st.patients[j].encounterId === arg) { p = st.patients[j]; break; } }
@@ -1005,6 +1104,8 @@
     if (cmd === "resolve") { resolveProblem(arg); return; }
     if (cmd === "downtime") { loadDowntime(); return; }
     if (cmd === "printpack") { try { G.print(); } catch (e) {} return; }
+    if (cmd === "pcopy") { loadPatientCopy(); return; }
+    if (cmd === "pcopyGive") { givePatientCopy(); return; }
     if (cmd === "cosign") { cosign(arg); return; }
     if (cmd === "submitnote") { submitNote(arg); return; }
     if (cmd === "tx") { transmit(arg); return; }

@@ -30,10 +30,10 @@ Updated: 2026-09-07 (PRs #887, #889, #890, #892, #894, #895, #897 pharmacy verif
 | 16 | Security / audit / break-glass | 5 | 100 | #898 + #903 + #911 + #938. Capability RBAC scoped by resource type AND by category within a type, append-only audit, tiered AI, break-glass with a mandatory reason, a consent model where a refusal is a first-class fact, and a read log that closes HAZ-FLUID-01 - bounded, purpose-stamped, and with no way to ask what a person has read. No per-field redaction. |
 | 17 | Interoperability (Care Everywhere, HL7/FHIR) | 4 | 98 | #899 + #918 + #924 + #934. Read-only FHIR R4 export with an honest CapabilityStatement, HL7 v2.5.1-shaped ADT (A01/A02/A03) generated from the record with every delimiter escaped, and the GHIS adapter. Neither door accepts writes and there is no HL7 listener; not validated against a conformance profile. HL7v2 ORU^R01 results out, with a non-numeric result typed ST and the laboratory's own abnormal flag never recomputed. CDA R2 level 1 for a SIGNED discharge summary - a real header wrapping a narrative body, no templateId claiming conformance nobody validated. No inbound ORM, no listener of any kind. |
 | 18 | Reporting / analytics (Reporting Workbench, Caboodle) | 3 | 88 | #913 + #923. Live ward open-item metrics, plus period quality measures computed from the record with a UI: critical-result acknowledgement against the hospital's own window, dose timeliness, discharge-summary completion. A rate over too few cases is flagged, one with no cases is null rather than 0%, and a measure the record cannot support is shown with its reason. Disease registries derived from the problem list, where never-reviewed sorts as the most overdue and the cohort is the one report that names patients. No warehouse. |
-| 19 | Patient portal (MyChart) | 3 | 0 | Not built. |
+| 19 | Patient portal (MyChart) | 3 | 40 | #940. NOT a portal, and scored as what it is: a clinician-mediated handout of the patient's own record, printable, with a receipt. It carries every hazard a portal would - a report with an OPEN critical-result loop is withheld so a patient never learns a critical value from a printout, preliminary results never leave, differential and refuted conditions are never printed as diagnoses and a provisional one is labelled, nothing is withheld silently, allergies can be filtered by nothing, and the clinician's own warning carries w-noprint so it can never appear on the patient's page. NO PATIENT LOGIN: `Patient` holds no contact detail and there is no patient identity anywhere in this build, so no result feed, no messaging and no self-booking. That is the owner's decision, below. |
 | 20 | Deployment / uptime / DR (on-prem, HA) | 3 | 55 | #912. Cloudflare edge + D1, live domain, a printable downtime pack the ward can hold during an outage, a restore rehearsal that performs a real export-destroy-restore against the shipped schema, and a DR runbook. The rehearsal passes under `npm test` and currently SKIPS in CI, which lacks `--experimental-sqlite` - see "Needs the owner". No scheduled backup, so RPO/RTO are undefined; no on-prem, no hot standby. |
 
-**Weighted total: 90.5%.**
+**Weighted total: 91.7%.**
 
 The total is the weight-times-percent sum of the table above, divided by 100. It is COMPUTED from
 these rows, not asserted: earlier revisions of this file carried an eyeballed number that had drifted
@@ -118,7 +118,23 @@ Three are still unreachable from any route, and each is a decision rather than a
    a patient's diagnoses through the raw record API. A hospital that employs separate coders should
    hold BILLING_CHARGE for them alone and leave the cashier on BILLING_VIEW, which reads claims and
    writes nothing. That is a role-mapping decision, not a code change.
-6. **A hospital-wide upcoding sweep.** `GET upcoding` answers per patient, because the repository is
+6. **PATIENT AUTHENTICATION - the whole of what separates #940 from a real portal.** `Patient` holds
+   a name, an MRN, a date of birth and a wristband barcode, and NO contact detail of any kind. There
+   is no patient identity anywhere in this build. A portal needs one, and every part of it is the
+   owner's decision and not a programmer's: who may enrol a patient, what proves they are who they
+   say, what happens when the number in the record belongs to a relative or to a shared family
+   phone, what a patient sees before a clinician has seen it (immediate release is law in some
+   jurisdictions and unsafe practice in others), and what happens to access after a death or a
+   safeguarding flag. #940 deliberately builds the half that needs none of that - a clinician-
+   mediated handout - and solves every hazard a portal would inherit: critical results, preliminary
+   results, differentials, silent withholding and sensitivity. The remaining 60% of domain 19 is
+   that decision, not more code.
+7. **`wardsynq.neverRelease` is unset and there is no default.** No result is withheld from a
+   patient's copy on grounds of sensitivity until a hospital names the panels. The record carries no
+   sensitivity flag and this build will not invent a code list, so the page tells the clinician, on
+   screen and never in print, to read it before handing it over. A hospital handing out results at a
+   counter should configure this before it does.
+8. **A hospital-wide upcoding sweep.** `GET upcoding` answers per patient, because the repository is
    queried by patient and a route that walked every claim in the hospital is a compliance report
    rather than a safety check - it needs its own owner, its own retention decision and its own
    authority. The module's instruction is that the list is read "by somebody who is not paid on
