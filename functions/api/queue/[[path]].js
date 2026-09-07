@@ -89,6 +89,7 @@ import { flowsheet } from "../../_wardsynq/flowsheet-view.js";
 import { orderInvestigation } from "../../_wardsynq/ward-order.js";
 import { chartInfusion, listInfusions } from "../../_wardsynq/infusion.js";
 import { reportImaging } from "../../_wardsynq/radiology-report.js";
+import { cdaForEncounter } from "../../_wardsynq/cda.js";
 import { listTools as listRiskTools, recordAssessment as recordRiskAssessment, completeAction as completeRiskAction, listAssessments as listRiskAssessments } from "../../_wardsynq/risk-assessment.js";
 import { recordAllergiesFromAssessment } from "../../_wardsynq/migrate-allergy.js";
 
@@ -544,7 +545,7 @@ export async function onRequest(context) {
         flowsheet: CAPS.EMR_VIEW,
         // ADT out. Reading a stay in another wire format is still reading a chart, so it needs the
         // authority to read one. It writes nothing and there is no inbound listener.
-        adt: CAPS.EMR_VIEW, oru: CAPS.EMR_VIEW,
+        adt: CAPS.EMR_VIEW, oru: CAPS.EMR_VIEW, cda: CAPS.EMR_VIEW,
         /* Putting somebody on the waiting list is the same administrative act as admitting them to a
          * bed - the front desk's work. It reserves nothing and admits nobody. */
         "request-admission": CAPS.QUEUE_ADD, "close-admission-request": CAPS.QUEUE_ADD, "waiting-list": CAPS.QUEUE_VIEW,
@@ -725,6 +726,13 @@ export async function onRequest(context) {
       }
       if (sub === "waiting-list" && method === "GET") {
         const r = await admissionWaitingList(request, env, { ...deps, specialty: url.searchParams.get("specialty") || "", includeClosed: url.searchParams.get("includeClosed") === "1" });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "cda" && method === "GET") {
+        const r = await cdaForEncounter(request, env, {
+          ...deps, encounterId: url.searchParams.get("encounterId") || "",
+          org: { name: (wOrg && wOrg.name) || "", oid: (wOrg && wOrg.code) || "" },
+        });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "oru" && method === "GET") {

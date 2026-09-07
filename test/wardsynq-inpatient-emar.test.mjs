@@ -2725,6 +2725,52 @@ test("sending is prescribing's business, and nothing unsendable is sent", async 
   assert.equal(bogus.error, "unknown_channel");
 });
 
+/* ---- the summary as a document ------------------------------------------------------------------- */
+
+test("A DRAFT SUMMARY IS NOT A DOCUMENT, and a signed one is CDA level 1", async () => {
+  seedHospital();
+  const { adm } = await admittedPatientOnDrug();
+  await as(DOCTOR, "/ward/problem", "POST", { orgId: ORG, problem: { patientId: adm.patientId, encounterId: adm.encounterId, display: "Community-acquired pneumonia" } });
+
+  // Nothing drafted yet.
+  const none = await as(DOCTOR, `/ward/cda?orgId=${ORG}&encounterId=${adm.encounterId}`);
+  assert.equal(none.__status, 404);
+  assert.equal(none.error, "summary_not_found");
+
+  // Drafting WRITES, so it is the POST. The GET only reads what is already there.
+  const drafted = await as(DOCTOR, "/ward/discharge-summary", "POST", { orgId: ORG, encounterId: adm.encounterId, patientId: adm.patientId });
+  assert.equal(drafted.__status, 200, JSON.stringify(drafted));
+
+  /* THE REFUSAL THAT MATTERS. A receiving hospital reading a draft would be reading something nobody
+   * here has agreed to. */
+  const draft = await as(DOCTOR, `/ward/cda?orgId=${ORG}&encounterId=${adm.encounterId}`);
+  assert.equal(draft.__status, 409);
+  assert.equal(draft.error, "summary_not_signed");
+  assert.match(draft.detail, /once a clinician has signed it/);
+
+  await as(DOCTOR, "/ward/sign-discharge-summary", "POST", { orgId: ORG, encounterId: adm.encounterId });
+
+  const cda = await as(DOCTOR, `/ward/cda?orgId=${ORG}&encounterId=${adm.encounterId}`);
+  assert.equal(cda.__status, 200, JSON.stringify(cda));
+  assert.ok(cda.document.startsWith('<?xml version="1.0" encoding="UTF-8"?>'));
+  assert.match(cda.document, /<ClinicalDocument xmlns="urn:hl7-org:v3">/);
+  assert.match(cda.document, /code="18842-5"/, "it says it is a discharge summary");
+  assert.match(cda.document, /WSQ Ward Hospital/, "and names the custodian");
+  // The author is who SIGNED it, not who exported it.
+  assert.match(cda.document, new RegExp('<id extension="' + idFor(DOCTOR) + '"/>'));
+  assert.match(cda.document, /Community-acquired pneumonia/, "the summary's own words travel");
+
+  /* IT CLAIMS LEVEL 1 AND NO MORE. A templateId would assert conformance to a profile this has never
+   * been validated against, and a receiver cannot tell a real claim from an invented one. */
+  assert.ok(!cda.document.includes("templateId"));
+  assert.ok(!cda.document.includes("<entry>"));
+  assert.match(cda.note, /LEVEL 1/);
+  assert.match(cda.note, /has not been validated against/);
+
+  // Reading a chart as a document still needs the authority to read a chart.
+  assert.equal((await as(PHARM, `/ward/cda?orgId=${ORG}&encounterId=${adm.encounterId}`)).__status, 403);
+});
+
 /* ---- the imaging report --------------------------------------------------------------------------- */
 
 test("A FINAL IMPRESSION THAT CHANGED IS FLAGGED, and the preliminary one survives", async () => {
