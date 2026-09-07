@@ -161,6 +161,22 @@ function compileRulePack(raw) {
     if (genericIndex.has(target)) aliases.set(lower(from), target);
   }
 
+  /* Combination products, brand -> EVERY molecule in it. An alias is 1:1 and so cannot say that
+   * Bactrim is both trimethoprim and sulfamethoxazole; collapsing it to either one silently drops
+   * the other, which for a sulfa-allergic patient is the allergy you most needed to catch. Only
+   * molecules the pack actually knows are kept - an unknown component contributes nothing to check. */
+  const combinations = new Map();
+  for (const [brand, molecules] of Object.entries(raw.combinations || {})) {
+    if (!Array.isArray(molecules)) continue;
+    const known = [];
+    for (const m of molecules) {
+      const k = lower(m);
+      const target = genericIndex.has(k) ? k : aliases.get(k);
+      if (target && !known.includes(target)) known.push(target);
+    }
+    if (known.length) combinations.set(lower(brand), known);
+  }
+
   // Index interaction rules by every subject token they mention, so a check only has to look at
   // rules that could possibly involve the drugs actually present.
   const byToken = new Map();
@@ -232,7 +248,7 @@ function compileRulePack(raw) {
   return Object.freeze({
     version: raw.version || "unversioned",
     generatedAt: raw.generatedAt || null,
-    drugClasses, genericIndex, aliases, interactions, byToken,
+    drugClasses, genericIndex, aliases, combinations, interactions, byToken,
     allergyClassOf, allergyMembers, crossReactivity,
     doseLimits, renalAdjustments,
   });
@@ -261,6 +277,50 @@ function defaultDisposition(severity) {
   return DISPOSITION.WARN;
 }
 
+/**
+ * PURE. Every molecule in what was ordered, not just the one that happened to match first.
+ *
+ * resolveGeneric() returns a single generic, and for a combination product that is not merely
+ * incomplete - it can be WRONG. Measured 2026-09-07 against the real pack: the drug database reports
+ * co-amoxiclav as "Amoxycillin + Clavulanic Acid", and because resolveGeneric tries longest token
+ * spans first it matched the two-word "clavulanic acid" and never tried the one-word "amoxycillin".
+ * Clavulanic acid is in no allergy class, so the penicillin shield stayed silent for the most
+ * prescribed antibiotic in the country, and reported a clean check while doing it.
+ *
+ * Three sources, in order:
+ *   1. a known combination BRAND ("Bactrim DS" -> trimethoprim + sulfamethoxazole), including the
+ *      leading-word form a prescriber actually writes;
+ *   2. an explicit "A + B" composition string, each part resolved on its own;
+ *   3. otherwise exactly what resolveGeneric would have returned, so single-molecule drugs behave
+ *      identically to before.
+ *
+ * Returns [] when nothing resolves, which callers report as unchecked rather than as clean.
+ */
+function resolveComponents(text, pack) {
+  const t = String(text == null ? "" : text).trim();
+  if (!t) return [];
+  const combos = pack instanceof Set ? null : pack.combinations;
+  if (combos) {
+    const whole = combos.get(lower(t));
+    if (whole) return whole.slice();
+    const first = lower(t).split(/[\s/,()+-]+/)[0];
+    const byFirst = first && combos.get(first);
+    if (byFirst) return byFirst.slice();
+  }
+
+  const parts = t.split("+").map((p) => p.replace(/\([^)]*\)/g, "").trim()).filter(Boolean);
+  if (parts.length > 1) {
+    const out = [];
+    for (const p of parts) {
+      const g = resolveGeneric(p, pack);
+      if (g && !out.includes(g)) out.push(g);
+    }
+    if (out.length) return out;
+  }
+  const one = resolveGeneric(t, pack);
+  return one ? [one] : [];
+}
+
 /* ------------------------------------------------------------------ checks */
 
 /**
@@ -279,9 +339,18 @@ function defaultDisposition(severity) {
  */
 function checkAllergies(pack, order, allergies) {
   const out = [];
-  const ordered = resolveGeneric(order.drugCode || order.drug, pack) || drugKey(order);
-  if (!ordered) return out;
+  // EVERY molecule in the product, not just the first one that matched - see resolveComponents().
+  const components = resolveComponents(order.drugCode || order.drug, pack);
+  const ordered0 = components.length ? null : drugKey(order);
+  const orderedList = components.length ? components : (ordered0 ? [ordered0] : []);
+  if (!orderedList.length) return out;
 
+  // One finding per (kind of match, allergy), however many components of a combination trip it:
+  // the messages name the product, so a second copy would say the same thing twice.
+  const seen = new Set();
+  const push = (f) => { const k = f.code + "|" + (f.allergyId || ""); if (seen.has(k)) return; seen.add(k); out.push(f); };
+
+  for (const ordered of orderedList) {
   const orderedClasses = pack.allergyClassOf.get(ordered) || new Set();
 
   for (const allergy of allergies || []) {
@@ -292,7 +361,7 @@ function checkAllergies(pack, order, allergies) {
 
     // 1. direct substance match
     if (substance === ordered) {
-      out.push(finding(
+      push(finding(
         "ALLERGY_DIRECT",
         severe && verified ? DISPOSITION.BLOCK : DISPOSITION.OVERRIDABLE,
         SEVERITY.CONTRAINDICATED,
@@ -309,7 +378,7 @@ function checkAllergies(pack, order, allergies) {
       : (pack.allergyClassOf.get(substance) || new Set());
     const shared = [...allergyClasses].filter((c) => orderedClasses.has(c) || (pack.allergyMembers.get(c) || new Set()).has(ordered));
     if (shared.length) {
-      out.push(finding(
+      push(finding(
         "ALLERGY_CLASS",
         severe && verified ? DISPOSITION.BLOCK : DISPOSITION.OVERRIDABLE,
         SEVERITY.CONTRAINDICATED,
@@ -329,7 +398,7 @@ function checkAllergies(pack, order, allergies) {
       const sameSide = (orderedClasses.has(a) && (allergyClasses.has(a) || (pack.allergyMembers.get(a) || new Set()).has(substance)))
         || (orderedClasses.has(b) && (allergyClasses.has(b) || (pack.allergyMembers.get(b) || new Set()).has(substance)));
       if (sameSide) continue;
-      out.push(finding(
+      push(finding(
         "ALLERGY_CROSS_REACTIVITY",
         xr.disposition || (severe && verified ? DISPOSITION.BLOCK : DISPOSITION.OVERRIDABLE),
         severe ? SEVERITY.CONTRAINDICATED : SEVERITY.MAJOR,
@@ -338,6 +407,7 @@ function checkAllergies(pack, order, allergies) {
       ));
       break;
     }
+  }
   }
   return out;
 }
@@ -360,10 +430,12 @@ function isSevereReaction(allergy) {
  */
 function checkInteractions(pack, order, activeMeds) {
   const out = [];
-  const orderedGeneric = resolveGeneric(order.drugCode || order.drug, pack);
-  if (!orderedGeneric) return out;
+  // Every molecule in the ordered product counts as ordered: a combination interacts through each
+  // of its components, and the rule candidate set is a Set, so no rule can fire twice for this.
+  const orderedGenerics = resolveComponents(order.drugCode || order.drug, pack);
+  if (!orderedGenerics.length) return out;
 
-  const list = [{ generic: orderedGeneric, isOrdered: true, label: order.drug }];
+  const list = orderedGenerics.map((g) => ({ generic: g, isOrdered: true, label: order.drug }));
   for (const med of activeMeds || []) {
     const g = resolveGeneric(med.drugCode || med.drug, pack);
     if (g) list.push({ generic: g, isOrdered: false, label: med.drug || g });
@@ -671,7 +743,7 @@ class SafetyEngine {
 
     // A drug the pack does not recognise is reported, not silently treated as safe. Whether that
     // should stop an order is a site policy decision, so it is a flag rather than a block here.
-    const unresolvedDrug = !resolveGeneric(order.drugCode || order.drug, this.rulePack);
+    const unresolvedDrug = resolveComponents(order.drugCode || order.drug, this.rulePack).length === 0;
 
     /* The SAME honesty, owed for the other half of the pair. checkInteractions() drops any active
      * medication it cannot resolve (it has to - an unknown token matches no rule), and until now it
@@ -748,5 +820,5 @@ export {
   SafetyEngine, SafetyEngineError,
   compileRulePack, emptyRulePack, defaultDisposition,
   checkAllergies, checkInteractions, checkDose, checkRenal, collapseDuplicateFindings,
-  resolveGeneric, renalBand, isSevereReaction, satisfyRule, satisfyDuplicationRule, isDuplicationRule,
+  resolveGeneric, resolveComponents, renalBand, isSevereReaction, satisfyRule, satisfyDuplicationRule, isDuplicationRule,
 };
