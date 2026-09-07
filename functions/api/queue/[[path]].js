@@ -97,6 +97,7 @@ import { patientCopy, releaseToPatient } from "../../_wardsynq/patient-record.js
 import { exportPage, recordBackupRun, backupStatus } from "../../_wardsynq/backup-run.js";
 import { chargesForPatient } from "../../_wardsynq/charge-capture.js";
 import { recordMovement, stockLevels } from "../../_wardsynq/stock.js";
+import { possibleDuplicates } from "../../_wardsynq/mpi-view.js";
 import { listTools as listRiskTools, recordAssessment as recordRiskAssessment, completeAction as completeRiskAction, listAssessments as listRiskAssessments } from "../../_wardsynq/risk-assessment.js";
 import { recordAllergiesFromAssessment } from "../../_wardsynq/migrate-allergy.js";
 
@@ -574,6 +575,10 @@ export async function onRequest(context) {
         /* Stock control is the dispensing side of pharmacy. Nothing behind these routes can refuse a
          * dispense: a count is a belief and the box in the pharmacist's hand is the fact. */
         "stock-move": CAPS.ORDER_DISPENSE, stock: CAPS.ORDER_DISPENSE,
+        /* Asking "is this person already here" is the front desk's work, and it is the same
+         * authority that registers them - QUEUE_ADD. It proposes candidates and can link nothing:
+         * a merge is a separate, human, retractable claim through its own route. */
+        "id-match": CAPS.QUEUE_ADD,
         /* The patient's own copy. Seeing what the patient WOULD be given is reading the chart, so
          * emr.view. HANDING IT OVER IS EMR_TREAT: deciding a patient is ready to be told what is in
          * their record is a clinical act, not a clerical one, and the person who does it has to be
@@ -818,6 +823,14 @@ export async function onRequest(context) {
       }
       if (sub === "upcoding" && method === "GET") {
         const r = await upcodingList(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "" });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "id-match" && method === "POST") {
+        const r = await possibleDuplicates(request, env, {
+          ...deps, name: body.name, dob: body.dob, sex: body.sex, mrn: body.mrn,
+          identifiers: body.identifiers, patientId: body.patientId, limit: body.limit,
+          thresholds: (wsqCfg && wsqCfg.mpiThresholds) || null,
+        });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "stock-move" && method === "POST") {
