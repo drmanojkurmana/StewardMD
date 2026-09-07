@@ -160,6 +160,11 @@ const RESOURCE_TYPES = Object.freeze([
    * by staff must not be a way to become the patient. Append-only so a revocation cannot be deleted
    * afterwards, which is the only thing that makes revocation mean anything. */
   "PatientAccessGrant",
+  /* A message a patient sent to their care team. It carries the warning they were shown at the
+   * moment they sent it, stamped on the row: anybody reading this later - a clinician, an
+   * investigator - needs to know what the patient had been told about the channel. Nothing
+   * auto-replies to one, and a reply is written by a clinician's own actor. */
+  "PatientMessage",
 ]);
 
 const MODE = Object.freeze({ SYSTEM_OF_RECORD: "system-of-record", INTEGRATION: "integration" });

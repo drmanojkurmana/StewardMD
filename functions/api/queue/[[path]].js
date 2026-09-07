@@ -99,6 +99,7 @@ import { chargesForPatient } from "../../_wardsynq/charge-capture.js";
 import { recordMovement, stockLevels } from "../../_wardsynq/stock.js";
 import { possibleDuplicates } from "../../_wardsynq/mpi-view.js";
 import { enrolPatient, redeemCode, portalRead, revokeAccess } from "../../_wardsynq/patient-access.js";
+import { messageWorklist, replyToMessage } from "../../_wardsynq/portal-requests.js";
 import { listTools as listRiskTools, recordAssessment as recordRiskAssessment, completeAction as completeRiskAction, listAssessments as listRiskAssessments } from "../../_wardsynq/risk-assessment.js";
 import { recordAllergiesFromAssessment } from "../../_wardsynq/migrate-allergy.js";
 
@@ -591,6 +592,10 @@ export async function onRequest(context) {
          * patient's own two routes are NOT here - they live under /api/portal, outside the block
          * that assumes an employee. */
         "patient-enrol": CAPS.EMR_TREAT, "patient-revoke": CAPS.EMR_TREAT,
+        /* The patient message worklist is readable by any clinician - an unanswered message is a
+         * ward-level safety fact, not one doctor's inbox. ANSWERING is EMR_TREAT: replying to a
+         * patient's clinical question is a clinical act, and nothing non-human can reach it. */
+        "patient-messages": CAPS.EMR_VIEW, "patient-reply": CAPS.EMR_TREAT,
         /* THE BACKUP EXPORT HANDS OVER AN ENTIRE HOSPITAL. It deliberately bypasses the per-actor
          * read scoping every other route obeys, because a backup filtered by somebody's permissions
          * restores into a chart with holes in it. So no clinical capability reaches it at any dose:
@@ -873,6 +878,14 @@ export async function onRequest(context) {
       }
       if (sub === "backup-status" && method === "GET") {
         const r = await backupStatus(request, env, { ...deps, rpoMinutes: (wsqCfg && wsqCfg.rpoMinutes) || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "patient-messages" && method === "GET") {
+        const r = await messageWorklist(request, env, { ...deps });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "patient-reply" && method === "POST") {
+        const r = await replyToMessage(request, env, { ...deps, messageId: body.messageId, reply: body.reply });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "patient-enrol" && method === "POST") {

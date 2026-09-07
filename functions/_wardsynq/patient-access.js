@@ -50,6 +50,9 @@ import { AuthError, PermissionError } from "../_connect/permission.js";
  * with an open critical loop, nothing preliminary, no differential printed as a diagnosis - applies
  * here unchanged, because this is one view of the chart with two doors and not two views. */
 import { assemble as patientCopyAssemble, statements as patientStatements } from "./patient-record.js";
+/* One wording for the channel warning, defined where the messaging rules are. Two copies would
+ * drift, and the copy that drifts is the one on the screen the patient actually reads. */
+import { NOT_EMERGENCY } from "./portal-requests.js";
 
 const str = (v) => (v == null ? "" : String(v).trim());
 
@@ -198,7 +201,10 @@ function patientActor(patientId) {
     kind: KIND.HUMAN,
     tier: TIER.READ,
     scope: {
-      read: ["Patient", "Condition", "AllergyIntolerance", "MedicationOrder", "DiagnosticReport", "CriticalResultLoop", "Appointment"],
+      /* PatientMessage joins the read list so a patient can see the REPLY to their own question.
+       * Without it the portal is a place messages go and never come back, and the patient has no way
+       * to tell "nobody has answered" from "the answer is somewhere else". */
+      read: ["Patient", "Condition", "AllergyIntolerance", "MedicationOrder", "DiagnosticReport", "CriticalResultLoop", "Appointment", "PatientMessage"],
       write: [],
     },
   });
@@ -375,14 +381,56 @@ async function portalRead(request, env, ctx) {
     return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), document: null };
   }
 
+  /* The patient's own messages and any replies. A portal where messages go and never come back
+   * leaves the patient unable to tell "nobody has answered" from "the answer is somewhere else". */
+  let messages = [];
+  try {
+    messages = (await svc.byPatient("PatientMessage", patientId).catch(() => []) || [])
+      .filter(Boolean)
+      .sort((a, b) => String(b.sentAt || "").localeCompare(String(a.sentAt || "")))
+      .slice(0, 20)
+      .map((m) => ({ sentAt: m.sentAt, body: m.body, reply: m.reply || null, answeredAt: m.answeredAt || null }));
+  } catch (_) { messages = []; }
+
   return {
     ...base, ok: true, patientId,
     document: doc,
+    messages,
+    /* Carried on the read so the page can show it above the message box rather than under the send
+     * button. The person about to type "my chest hurts" is the one who most needs to read it first. */
+    notEmergency: NOT_EMERGENCY,
     statements: patientStatements(doc),
     /* The clinician-only warnings from #940 are NOT in this payload at all. On the handout they are
      * marked not-to-print; here the patient is the reader, so they are simply absent. */
     note: "This is your own record, as your care team has released it.",
   };
+}
+
+/**
+ * Verifies a session and returns the patient it is for.
+ *
+ * The ONE place a session is checked, so every patient-facing route gets the same answer to the same
+ * question. It returns the patient id FROM THE GRANT, which is what makes it safe to hand to a write
+ * path: a caller cannot influence which record it names.
+ *
+ * ctx: { migration, grantId, token, config, recordDeps }
+ */
+async function sessionPatient(ctx) {
+  if (!accessEnabled(ctx.config)) return { ok: false, status: 404, error: "patient_access_disabled" };
+  const grantId = str(ctx.grantId), token = str(ctx.token);
+  const deny = { ok: false, status: 401, error: "not_valid", detail: "This session is not valid. Ask your care team for a new code." };
+  if (!grantId || !token) return deny;
+
+  let grant;
+  try { grant = await serviceFor(ctx, accessActor()).get(GRANT_TYPE, grantId); }
+  catch (e) { return { ok: false, status: 502, error: "record_read_failed" }; }
+  if (!grant || !grant.tokenHash) return deny;
+
+  const live = sessionLive(grant, new Date().toISOString(), ctx.config && ctx.config.sessionTtlMinutes);
+  if (!live.ok) return { ok: false, status: 401, error: live.reason, detail: "This session has ended. Ask your care team for a new code." };
+  if (!sameSecret(await hashSecret(token, grantId), grant.tokenHash)) return deny;
+
+  return { ok: true, patientId: str(grant.patientId), grantId };
 }
 
 /**
@@ -429,5 +477,5 @@ async function revokeAccess(request, env, ctx) {
 export {
   GRANT_TYPE, CODE_DIGITS, MAX_ATTEMPTS, CODE_TTL_MINUTES, SESSION_TTL_MINUTES,
   makeCode, hashSecret, sameSecret, accessEnabled, minutesOr, redeemable, sessionLive, AccessGrant,
-  patientActor, accessActor, enrolPatient, redeemCode, portalRead, revokeAccess,
+  patientActor, accessActor, sessionPatient, enrolPatient, redeemCode, portalRead, revokeAccess,
 };

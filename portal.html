@@ -40,7 +40,7 @@
   li:first-child { border-top: 0; }
   .small { color: var(--muted); font-size: 13px; }
   label { display: block; font-size: 14px; margin: 12px 0 4px; }
-  input { width: 100%; padding: 11px 12px; font-size: 17px; border: 1px solid var(--line); border-radius: 10px; background: var(--bg); color: var(--fg); }
+  input, textarea { width: 100%; padding: 11px 12px; font-size: 17px; border: 1px solid var(--line); border-radius: 10px; background: var(--bg); color: var(--fg); font-family: inherit; }
   button { margin-top: 16px; width: 100%; padding: 13px; font-size: 16px; font-weight: 600; border: 0; border-radius: 10px; background: #1f6feb; color: #fff; }
   button[disabled] { opacity: .55; }
   .note { background: var(--warn-bg); color: var(--warn-fg); border-left: 3px solid var(--warn-line); padding: 10px 12px; border-radius: 0 10px 10px 0; margin: 0 0 12px; font-size: 14px; }
@@ -155,7 +155,55 @@
         return "<li>" + esc(a.at || "") + (a.with ? " &middot; " + esc(a.with) : "") + "</li>";
       }) + "</section>" +
 
+      // Messages the patient sent, and any reply. Without this the portal is a place messages go and
+      // never come back, and "nobody has answered" is indistinguishable from "it went somewhere else".
+      ((r.messages || []).length
+        ? "<section><h2>Your messages</h2>" +
+          list(r.messages, "", function (m) {
+            return "<li><div>" + esc(m.body) + '</div><div class="small">' + esc(m.sentAt || "") + "</div>" +
+              (m.reply
+                ? "<div><b>Reply:</b> " + esc(m.reply) + '</div><div class="small">' + esc(m.answeredAt || "") + "</div>"
+                : '<div class="small">No reply yet.</div>') + "</li>";
+          }) + "</section>"
+        : "") +
+
+      // Asking for something. The emergency warning sits ABOVE the boxes, not under the send button:
+      // the person about to type "my chest hurts" is the one who most needs to read it first.
+      '<section><h2>Ask your care team</h2>' +
+      '<p class="note" id="urgent">' + esc(r.notEmergency || "") + "</p>" +
+      '<label for="msg">A question for your team</label>' +
+      '<textarea id="msg" rows="4" maxlength="2000"></textarea>' +
+      '<button id="send">Send message</button>' +
+      '<label for="apt">Or ask for an appointment - say briefly what it is for</label>' +
+      '<input id="apt" autocomplete="off">' +
+      '<button id="askapt">Request an appointment</button>' +
+      '<p id="said" class="small"></p></section>' +
+
       '<p class="small">' + esc(r.note || "") + " This page keeps nothing on your phone. Close the tab to sign out.</p>";
+
+    var said = document.getElementById("said");
+    function after(res, fallback) {
+      // Never "booked" and never "answered": both are things a person still has to do.
+      said.textContent = (res && res.ok) ? (res.note || fallback) : ((res && res.detail) || "That did not send. Try again.");
+    }
+    document.getElementById("send").onclick = function () {
+      var b = document.getElementById("msg").value.trim();
+      if (!b) { said.textContent = "Write your question first."; return; }
+      this.disabled = true;
+      var btn = this;
+      post("message", { orgId: session.orgId, grantId: session.grantId, token: session.token, body: b })
+        .then(function (res) { btn.disabled = false; if (res && res.ok) document.getElementById("msg").value = ""; after(res, "Sent."); })
+        .catch(function () { btn.disabled = false; said.textContent = "Could not reach the hospital."; });
+    };
+    document.getElementById("askapt").onclick = function () {
+      var why = document.getElementById("apt").value.trim();
+      if (!why) { said.textContent = "Say briefly what the appointment is for."; return; }
+      this.disabled = true;
+      var btn = this;
+      post("appointment-request", { orgId: session.orgId, grantId: session.grantId, token: session.token, reason: why })
+        .then(function (res) { btn.disabled = false; if (res && res.ok) document.getElementById("apt").value = ""; after(res, "Requested."); })
+        .catch(function () { btn.disabled = false; said.textContent = "Could not reach the hospital."; });
+    };
   }
 
   function load() {
