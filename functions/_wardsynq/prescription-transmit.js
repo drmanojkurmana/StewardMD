@@ -35,6 +35,7 @@ import { VersionConflictError } from "./repository.js";
 import { resolveClinicalActor } from "./actor.js";
 import { RecordService } from "./service.js";
 import { AuthError, PermissionError } from "../_connect/permission.js";
+import { sendTransmission } from "./transmit-send.js";
 
 const str = (v) => (v == null ? "" : String(v).trim());
 const TYPE = "PrescriptionTransmission";
@@ -322,8 +323,63 @@ async function listTransmissions(request, env, ctx) {
   };
 }
 
+/**
+ * Sends a queued transmission and records what the transport reported.
+ *
+ * The transport (transmit-send.js) performs the HTTP and decides nothing; this records the outcome
+ * through `recordOutcome`, so the state machine keeps exactly ONE author. A second writer would be a
+ * second opinion about what "delivered" means.
+ *
+ * ctx: { migration, transmissionId, endpoints, fetchImpl?, actorDeps, recordDeps }
+ */
+async function sendQueued(request, env, ctx) {
+  const mig = ctx.migration;
+  const base = { mode: mig && mig.mode, tenantId: (mig && mig.tenantId) || null };
+  if (!mig || mig.mode === "off") return { ...base, ok: true, skipped: "off", sent: 0 };
+
+  const transmissionId = str(ctx.transmissionId);
+  if (!transmissionId) return { ...base, ok: false, status: 422, error: "transmission_required", sent: 0 };
+
+  const { svc, error } = await open(request, env, ctx, "record:read");
+  if (error) return { ...base, ...error, sent: 0 };
+
+  let current;
+  try { current = await svc.get(TYPE, transmissionId); }
+  catch (e) { return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), sent: 0 }; }
+  if (!current) return { ...base, ok: false, status: 404, error: "transmission_not_found", transmissionId, sent: 0 };
+
+  /* ACKNOWLEDGED IS TERMINAL and re-sending one would duplicate a prescription the far end has
+   * already confirmed it holds. Refused here as well as in recordOutcome, because by the time
+   * recordOutcome saw it the message would already have gone out. */
+  if (current.state === "acknowledged") {
+    return { ...base, ok: true, sent: 0, skipped: "already_acknowledged", ...summary(current),
+      note: "The far end has already confirmed it holds this prescription. Sending again would duplicate it." };
+  }
+
+  const report = await sendTransmission({
+    channel: current.channel, payload: current.payload, endpoints: ctx.endpoints, fetchImpl: ctx.fetchImpl,
+  });
+
+  /* NOTHING RECORDED unless the transport is certain. `indeterminate` and "no endpoint configured"
+   * both leave the transmission exactly as it was: still queued, still outstanding, still a human's
+   * to resolve. Writing `failed` here would invite a re-send that duplicates a prescription; writing
+   * `sent` would lose one silently. */
+  if (!report.attempted || report.outcome === "indeterminate") {
+    return { ...base, ok: !!report.ok, sent: 0, ...summary(current), transport: report,
+      note: report.note || report.detail };
+  }
+
+  const outcome = await recordOutcome(request, env, {
+    ...ctx,
+    transmissionId,
+    state: report.outcome,
+    ...(report.outcome === "failed" ? { failureReason: report.detail } : {}),
+  });
+  return { ...outcome, sent: report.outcome === "sent" ? 1 : 0, transport: report };
+}
+
 export {
   TYPE, STATES, OUTSTANDING, CHANNELS, PrescriptionTransmission,
   transmissionIdFor, payloadFor, isOutstanding,
-  queueTransmission, recordOutcome, resolveTransmission, listTransmissions,
+  queueTransmission, recordOutcome, resolveTransmission, listTransmissions, sendQueued,
 };
