@@ -27,13 +27,13 @@ Updated: 2026-09-07 (PRs #887, #889, #890, #892, #894, #895, #897 pharmacy verif
 | 13 | Pharmacy verification + inventory (Willow) | 5 | 88 | #897 + #914 + #931. Verification and dispensing, both as the pharmacy's OWN authority with a narrow grant: reads what a check needs, writes only its verification and its supply record. A dispense is issued against an order version, refused when the verified version has been superseded, and never touches a MedicationAdministration. Batch and expiry are recorded from the box and expired stock is refused - the only non-prescription block in the file. No inventory (excluded by instruction): no stock levels, no reorder, no locations. |
 | 14 | Notes / documentation (SmartText, NoteWriter) | 4 | 96 | #909 + #932. Signed clinical notes, versioned, per-section provenance, org note templates that supply headings and never content, and co-sign routing: a note by a clinician with no verified registration is submitted, listed and countersigned, with both names kept on the record - and a ward round composer that supplies the hospital's headings, writes no text of its own, and never signs. No macros, no dictation. |
 | 15 | Billing / revenue (Resolute) | 5 | 15 | Clinic billing config only. No charge capture from orders, no claims, no payer. |
-| 16 | Security / audit / break-glass | 5 | 98 | #898 + #903 + #911. Capability RBAC scoped by resource type AND by category within a type, append-only audit, tiered AI, break-glass with a mandatory reason, and a consent model where a refusal is a first-class fact. No per-field redaction. |
+| 16 | Security / audit / break-glass | 5 | 100 | #898 + #903 + #911 + #938. Capability RBAC scoped by resource type AND by category within a type, append-only audit, tiered AI, break-glass with a mandatory reason, a consent model where a refusal is a first-class fact, and a read log that closes HAZ-FLUID-01 - bounded, purpose-stamped, and with no way to ask what a person has read. No per-field redaction. |
 | 17 | Interoperability (Care Everywhere, HL7/FHIR) | 4 | 98 | #899 + #918 + #924 + #934. Read-only FHIR R4 export with an honest CapabilityStatement, HL7 v2.5.1-shaped ADT (A01/A02/A03) generated from the record with every delimiter escaped, and the GHIS adapter. Neither door accepts writes and there is no HL7 listener; not validated against a conformance profile. HL7v2 ORU^R01 results out, with a non-numeric result typed ST and the laboratory's own abnormal flag never recomputed. CDA R2 level 1 for a SIGNED discharge summary - a real header wrapping a narrative body, no templateId claiming conformance nobody validated. No inbound ORM, no listener of any kind. |
 | 18 | Reporting / analytics (Reporting Workbench, Caboodle) | 3 | 88 | #913 + #923. Live ward open-item metrics, plus period quality measures computed from the record with a UI: critical-result acknowledgement against the hospital's own window, dose timeliness, discharge-summary completion. A rate over too few cases is flagged, one with no cases is null rather than 0%, and a measure the record cannot support is shown with its reason. Disease registries derived from the problem list, where never-reviewed sorts as the most overdue and the cohort is the one report that names patients. No warehouse. |
 | 19 | Patient portal (MyChart) | 3 | 0 | Not built. |
 | 20 | Deployment / uptime / DR (on-prem, HA) | 3 | 55 | #912. Cloudflare edge + D1, live domain, a printable downtime pack the ward can hold during an outage, a restore rehearsal that performs a real export-destroy-restore against the shipped schema, and a DR runbook. The rehearsal passes under `npm test` and currently SKIPS in CI, which lacks `--experimental-sqlite` - see "Needs the owner". No scheduled backup, so RPO/RTO are undefined; no on-prem, no hot standby. |
 
-**Weighted total: 87.1%.**
+**Weighted total: 87.2%.**
 
 The total is the weight-times-percent sum of the table above, divided by 100. It is COMPUTED from
 these rows, not asserted: earlier revisions of this file carried an eyeballed number that had drifted
@@ -68,11 +68,11 @@ Six were found and wired this session (buildGrid #927, infusionVolume #929, the 
 the note templates #932, NEWS2 #936, PEWS #937). Four are still unreachable from any route, and each
 is a decision rather than an oversight:
 
-- **`wardsynq-readlog.js`** - the most significant. `vault/modules/WardSynQ.md` records HAZ-FLUID-01 as
-  PARTIAL *because* "nothing records that anyone read it... Closing that needs a view log, which does
-  not exist". IT DOES EXIST, unwired. Wiring it means logging every clinical READ, which is a
-  cross-cutting PHI and retention decision (what is kept, for how long, who may query it) that the
-  owner should make rather than a session.
+- ~~`wardsynq-readlog.js`~~ - WIRED (#938), on the owner's instruction. It closes the blocker
+  HAZ-FLUID-01 named. The PHI questions were answered structurally rather than by policy: the purpose
+  is stamped on every row, retention is bounded at 90 days and enforced on the ANSWER rather than only
+  by a cleanup job, and there is deliberately NO "what did this person read" query - the only question
+  the routes answer is "who has to be told about THIS correction".
 - **`wardsynq-lineage.js`** - click a derived value and see the raw observations behind it. Partly
   redundant now: `news2()` already returns per-parameter `sources` with the observation id, time and
   code, and #935's override report carries its own denominator. Worth wiring if a UI ever needs one
@@ -134,7 +134,13 @@ is a decision rather than an oversight:
 So the reachable ceiling is about 92.75, and the honest remainder is roughly three points of real
 work plus four things only the owner can do.
 
-## Deliberately not built
+## No longer excluded (owner, 2026-09-08: "nothing is excluded")
+
+Billing/claims, the patient portal, on-premise deployment, DICOM/PACS and regulatory certification
+were excluded for most of this build. That instruction was lifted, so the ceiling is 100 and the two
+largest remaining items are billing (4.25 weight points, at 15%) and the patient portal (3.00, at 0%).
+
+## Previously deliberately not built
 Patient portal, full billing and claims, on-premise deployment, DICOM/PACS and regulatory
 certification are excluded by the owner's instruction, not by oversight. Together they are 11
 weight points, so this table cannot reach 100 while they stand excluded.

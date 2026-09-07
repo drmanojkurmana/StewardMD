@@ -2725,6 +2725,76 @@ test("sending is prescribing's business, and nothing unsendable is sent", async 
   assert.equal(bogus.error, "unknown_channel");
 });
 
+/* ---- who acted on the number before it was corrected ---------------------------------------------- */
+
+test("A CORRECTION PRODUCES A LIST OF PEOPLE, and a read of the right figure is not on it", async () => {
+  seedHospital();
+  const { adm } = await admittedPatientOnDrug();
+  const read = (body) => as(NURSE, "/ward/read", "POST", { orgId: ORG, patientId: adm.patientId, valueId: "fluid-balance-0600", ...body });
+
+  /* A VALUE MERELY RENDERED IS NOT A READ. A page showing a hundred numbers has not shown a clinician
+   * a hundred numbers, and logging everything buries the three reads that mattered. */
+  const noKind = await read({ version: 1, kind: "rendered" });
+  assert.equal(noKind.__status, 400);
+  assert.equal(noKind.error, "unknown_kind");
+  assert.match(noKind.detail, /merely rendered on a page is not a read/);
+
+  // And a read without a version cannot tell a read of the wrong figure from a read of the right one.
+  assert.equal((await read({ kind: "acted-on" })).error, "version_required");
+
+  const acted = await read({ version: 1, value: 400, kind: "acted-on", context: "Prescribed diuresis", at: "2026-09-07T06:12:00.000Z" });
+  assert.equal(acted.__status, 200, JSON.stringify(acted));
+  // The purpose is stamped on the ROW, so it travels with the data rather than living in a policy
+  // document nobody reads before running a query.
+  assert.match(acted.purpose, /Not for performance management/);
+  const stored = await RECORD.latest(TENANT_ROW.id, "ClinicalRead", acted.readId);
+  assert.match(stored.purpose, /told if the value is later found to be wrong/);
+
+  // A second person reads the same wrong figure, and somebody else reads it AFTER the correction.
+  await as(DOCTOR, "/ward/read", "POST", { orgId: ORG, patientId: adm.patientId, valueId: "fluid-balance-0600", version: 1, value: 400, kind: "opened", at: "2026-09-07T06:30:00.000Z" });
+  await as(DOCTOR, "/ward/read", "POST", { orgId: ORG, patientId: adm.patientId, valueId: "fluid-balance-0600", version: 2, value: 40, kind: "opened", at: "2026-09-07T09:00:00.000Z" });
+
+  const who = await as(NURSE, `/ward/readers?orgId=${ORG}&patientId=${adm.patientId}&valueId=fluid-balance-0600&supersededVersion=1&correctedAt=${encodeURIComponent("2026-09-07T08:00:00.000Z")}&label=${encodeURIComponent("06:00 fluid balance")}&unit=mL`);
+  assert.equal(who.__status, 200, JSON.stringify(who));
+  /* "Three totals changed" is not actionable. "Dr Shah read the 06:00 balance and it was wrong" is,
+   * and the difference is whether anybody does anything. */
+  assert.equal(who.people.length, 2);
+  const names = who.people.map((p) => p.person).sort();
+  assert.deepEqual(names, [idFor(DOCTOR), idFor(NURSE)].sort());
+  assert.match(who.note, /Telling them is a human act; nothing here has sent anything/);
+
+  /* READING A VALUE THAT WAS ALREADY CORRECT IS NOT AN INCIDENT. The 09:00 read was of version 2,
+   * after the correction, and notifying it would flood the list and teach people this is noise. */
+  const v2 = await as(NURSE, `/ward/readers?orgId=${ORG}&patientId=${adm.patientId}&valueId=fluid-balance-0600&supersededVersion=2&correctedAt=${encodeURIComponent("2026-09-07T12:00:00.000Z")}`);
+  assert.equal(v2.people.length, 1, "only the version-2 read");
+
+  // An empty list is not "nobody was affected", and it says so.
+  const none = await as(NURSE, `/ward/readers?orgId=${ORG}&patientId=${adm.patientId}&valueId=some-other-value&supersededVersion=1&correctedAt=${encodeURIComponent("2026-09-07T08:00:00.000Z")}`);
+  assert.deepEqual(none.people, []);
+  assert.match(none.note, /not the same as nobody having seen it/);
+});
+
+test("THERE IS NO 'WHAT DID THIS PERSON READ' QUERY, and retention is enforced on the answer", async () => {
+  seedHospital();
+  const { adm } = await admittedPatientOnDrug();
+
+  /* A log of which clinician looked at what is also a management tool for something other than
+   * safety, and if it is used that way people stop opening things - which makes the record less safe.
+   * The only question the routes answer is "who has to be told about THIS correction". */
+  const routes = await Promise.all([
+    as(DOCTOR, `/ward/reads?orgId=${ORG}&by=${idFor(NURSE)}`),
+    as(DOCTOR, `/ward/read-log?orgId=${ORG}&patientId=${adm.patientId}`),
+  ]);
+  assert.ok(routes.every((r) => r.__status === 404), "no route lists what a person has read");
+
+  // A read older than the retention window is not returned, even though its row is still there.
+  await as(NURSE, "/ward/read", "POST", { orgId: ORG, patientId: adm.patientId, valueId: "old-value", version: 1, kind: "opened", at: "2026-01-01T09:00:00.000Z" });
+  const stale = await as(NURSE, `/ward/readers?orgId=${ORG}&patientId=${adm.patientId}&valueId=old-value&supersededVersion=1&correctedAt=${encodeURIComponent("2026-09-07T08:00:00.000Z")}`);
+  assert.deepEqual(stale.people, [], "a read log that grows forever becomes a dossier");
+  assert.equal(stale.outsideRetention, 1, "and it says how many it would not answer with");
+  assert.ok(await RECORD.byPatient(TENANT_ROW.id, "ClinicalRead", adm.patientId), "the row itself is untouched");
+});
+
 /* ---- the early warning score ---------------------------------------------------------------------- */
 
 test("AN INCOMPLETE NEWS2 IS NEVER REASSURING, however low the partial total", async () => {
