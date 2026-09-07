@@ -75,6 +75,10 @@ const RESOURCE_TYPES = Object.freeze([
    * discarded it, so nothing could answer which rules were being clicked through. Stored so a rule
    * pack can be told; never aggregated by clinician. */
   "SafetyOverride",
+  /* A record that an order set was applied, and exactly what landed and what did not. NOT the orders
+   * themselves - those go through the ordinary path and are ordinary orders. This is what makes a
+   * partial application visible, and what finds the patients a bad set touched. */
+  "OrderSetApplication",
 ]);
 
 const MODE = Object.freeze({ SYSTEM_OF_RECORD: "system-of-record", INTEGRATION: "integration" });

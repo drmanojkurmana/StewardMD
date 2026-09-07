@@ -66,6 +66,7 @@ import { wardMetrics } from "../../_wardsynq/ward-metrics.js";
 import { releaseResult, pendingRequests } from "../../_wardsynq/lab-result.js";
 import { mergePatients, unmergePatients, identityOf } from "../../_wardsynq/identity-merge.js";
 import { overrideReport } from "../../_wardsynq/override-analytics.js";
+import { listOrderSets, prepareOrderSet, recordApplication } from "../../_wardsynq/order-sets.js";
 import { recordAllergiesFromAssessment } from "../../_wardsynq/migrate-allergy.js";
 
 // The Encounter migration's one shared call site. Every hook below (ticket add, import, a terminal
@@ -468,6 +469,10 @@ export async function onRequest(context) {
          * override-analytics.js. Readable by any clinician, because the people the rules fire at
          * are the ones best placed to say a rule is wrong. */
         overrides: CAPS.EMR_VIEW,
+        /* Order sets. Seeing what a set WOULD order is emr.view; preparing and recording an
+         * application is emr.treat, because applying a set is ordering. The set itself writes no
+         * order - every request still goes through the ordinary ordering route. */
+        "order-sets": CAPS.EMR_VIEW, "prepare-set": CAPS.EMR_TREAT, "applied-set": CAPS.EMR_TREAT,
         // Closing a stay is the administrative act QUEUE_ADD already covers for opening one.
         // The summary is a clinical document: drafting and signing it are EMR_TREAT.
         discharge: CAPS.QUEUE_ADD, "discharge-summary": CAPS.EMR_TREAT, "sign-discharge-summary": CAPS.EMR_TREAT,
@@ -501,6 +506,12 @@ export async function onRequest(context) {
       if (!wAz.ok) return json(azRefusal(wAz), wAz.reason === "org_not_found" ? 404 : 403, request);
 
       const wOrg = await ORG.getOrg(env, wOrgId);
+      /* The hospital's own WardSynQ configuration: critical limits, round times, beds, order sets.
+       * It is a NESTED object on the org because that projection is a whitelist - every one of
+       * these was being read as a top-level field and arriving undefined, so a hospital that had
+       * carefully set its own potassium limits was silently running on WardSynQ's defaults. See
+       * wardsynqConfig() in _opd_org.js. */
+      const wsqCfg = (wOrg && wOrg.wardsynq) || null;
       const mig = await wsqForcedMigration(env, wOrg);
       if (!mig) return json({ ok: false, error: "not_a_wardsynq_hospital", message: "The inpatient ward is only available for a WardSynQ-native hospital." }, 409, request);
       if (mig.error) return json({ ok: false, error: mig.error }, 409, request);
@@ -545,6 +556,20 @@ export async function onRequest(context) {
             });
         return json(r.ok ? (r.bundle || r.resource) : r.outcome, r.status, request);
       }
+      if (sub === "order-sets" && method === "GET") {
+        const r = await listOrderSets(request, env, { ...deps, sets: (wsqCfg && wsqCfg.orderSets) || [] });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "prepare-set" && method === "POST") {
+        /* The sets are ORG content, never a request parameter: a caller who could pass a set could
+         * hand themselves any order they liked with a set's name on it. */
+        const r = await prepareOrderSet(request, env, { ...deps, sets: (wsqCfg && wsqCfg.orderSets) || [], setId: body.setId, patientId: body.patientId, encounterId: body.encounterId, select: body.select });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "applied-set" && method === "POST") {
+        const r = await recordApplication(request, env, { ...deps, setId: body.setId, setName: body.setName, setVersion: body.setVersion, patientId: body.patientId, encounterId: body.encounterId, applied: body.applied, failed: body.failed, deselected: body.deselected, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
       if (sub === "overrides" && method === "GET") {
         const r = await overrideReport(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "" });
         return json(r, r.ok ? 200 : (r.status || 502), request);
@@ -570,7 +595,7 @@ export async function onRequest(context) {
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "metrics" && method === "GET") {
-        const r = await wardMetrics(request, env, { ...deps, ward: url.searchParams.get("ward") || "", escalationPolicy: (wOrg && wOrg.criticalEscalation) || null });
+        const r = await wardMetrics(request, env, { ...deps, ward: url.searchParams.get("ward") || "", escalationPolicy: (wsqCfg && wsqCfg.criticalEscalation) || null });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "med-history" && method === "POST") {
@@ -632,13 +657,13 @@ export async function onRequest(context) {
       if (sub === "beds" && method === "GET") {
         // The ward's bed list is ORG configuration. With none configured the board reports what is
         // occupied and says it cannot know what is free, rather than reporting zero free beds.
-        const r = await bedBoard(request, env, { ...deps, ward: url.searchParams.get("ward") || "", beds: (wOrg && wOrg.beds) || null });
+        const r = await bedBoard(request, env, { ...deps, ward: url.searchParams.get("ward") || "", beds: (wsqCfg && wsqCfg.beds) || null });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "criticals" && method === "GET") {
         const r = await listCriticalLoops(request, env, {
           ...deps, patientId: url.searchParams.get("patientId") || "", state: url.searchParams.get("state") || "",
-          policy: (wOrg && wOrg.criticalEscalation) || null,
+          policy: (wsqCfg && wsqCfg.criticalEscalation) || null,
         });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
@@ -650,7 +675,7 @@ export async function onRequest(context) {
           ...deps, reportId: body.reportId,
           // The site's limits, never a request parameter: a caller who could pass these could decide
           // a potassium of 7 was not critical by asking differently.
-          limits: (wOrg && wOrg.criticalLimits) || null,
+          limits: (wsqCfg && wsqCfg.criticalLimits) || null,
           idempotencyKey: body.idempotencyKey || null,
         });
         return json(r, r.ok ? 200 : (r.status || 502), request);
@@ -669,9 +694,9 @@ export async function onRequest(context) {
           from: url.searchParams.get("from") || "", to: url.searchParams.get("to") || "",
           // The ward's own round times and clock. Org configuration, never a request parameter: a
           // caller who could pass these could move every dose on the chart by asking differently.
-          marTimes: (wOrg && wOrg.marTimes) || null,
-          offsetMinutes: Number.isFinite(wOrg && wOrg.utcOffsetMinutes) ? wOrg.utcOffsetMinutes : undefined,
-          graceMinutes: Number.isFinite(wOrg && wOrg.marGraceMinutes) ? wOrg.marGraceMinutes : undefined,
+          marTimes: (wsqCfg && wsqCfg.marTimes) || null,
+          offsetMinutes: Number.isFinite(wsqCfg && wsqCfg.utcOffsetMinutes) ? wsqCfg.utcOffsetMinutes : undefined,
+          graceMinutes: Number.isFinite(wsqCfg && wsqCfg.marGraceMinutes) ? wsqCfg.marGraceMinutes : undefined,
         });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
@@ -710,7 +735,7 @@ export async function onRequest(context) {
         const r = await administerStep(request, env, {
           ...deps, action: body.action, orderId: body.orderId, dueAt: body.dueAt,
           patient: body.patient, scan: body.scan, reason: body.reason, witnessId: body.witnessId,
-          rulePack: getRulePack(), highAlertDrugs: (wOrg && wOrg.highAlertDrugs) || [],
+          rulePack: getRulePack(), highAlertDrugs: (wsqCfg && wsqCfg.highAlertDrugs) || [],
           idempotencyKey: body.idempotencyKey || null,
         });
         return json(r, r.ok ? 200 : (r.status || 502), request);
