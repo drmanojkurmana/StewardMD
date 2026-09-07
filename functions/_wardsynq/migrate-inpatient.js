@@ -33,6 +33,7 @@ import { AuthError, PermissionError } from "../_connect/permission.js";
 import { vitalsToObservations } from "./migrate-vitals.js";
 import { patientIdForMrn, admissionIdFor } from "./opd-identity.js";
 import { recordOverrides } from "./override-analytics.js";
+import { resolveFormulary, formularyStatus } from "./formulary.js";
 
 const IPD = "IPD";
 const OPEN = "in-progress";
@@ -274,6 +275,37 @@ async function createWardMedicationOrder(request, env, ctx) {
 
   const candidate = orderFromWardRequest({ ...(ctx.order || {}), prescriberId: resolved.actor.id });
   if (!candidate) return { ...base, ok: false, status: 422, error: "order_incomplete", detail: "drug, patientId, encounterId and a numeric dose {value, unit} are all required", written: 0 };
+
+  /* THE FORMULARY, and it is NOT the safety engine. It answers "does this hospital stock this, and
+   * does it want a word first" - a stewardship control the hospital owns. Off-formulary never blocks:
+   * a drug not on the list is not dangerous, it is not stocked, and refusing on those grounds would
+   * teach prescribers that the safety warnings are bureaucratic too.
+   *
+   * A RESTRICTED drug does block, because the hospital configured that. Antimicrobial stewardship is
+   * why: meropenem needs a word with microbiology, and a system that lets it be ordered at 2am
+   * without one is the system that produces the resistance. The refusal names what is missing and
+   * who grants it, since one a prescriber cannot act on is one they will work around. */
+  const formulary = resolveFormulary(ctx.formulary);
+  const fStatus = formularyStatus({
+    formulary, drug: candidate.drug, code: candidate.drugCode,
+    specialty: str(ctx.specialty), approvalRef: str(ctx.approvalRef), reason: str(ctx.formularyReason),
+    requireReasonOffFormulary: ctx.requireReasonOffFormulary === true,
+  });
+  if (fStatus.blocked) {
+    return {
+      ...base, ok: false, status: 409, error: fStatus.state === "restricted" ? "restricted_drug" : "formulary_reason_required",
+      detail: fStatus.detail, needs: fStatus.needs || null, drug: candidate.drug,
+      ...(fStatus.note ? { note: fStatus.note } : {}),
+      // Said plainly, so nobody reads this as the safety engine having found something clinical.
+      basis: "hospital formulary, not a clinical safety finding",
+      written: 0,
+    };
+  }
+  // Recorded ON the order: which of its medicines a hospital is prescribing off-formulary is a
+  // question the pharmacy asks, and the answer belongs on the record rather than in a response.
+  candidate.formularyState = fStatus.state;
+  if (fStatus.state === "non-formulary" && str(ctx.formularyReason)) candidate.formularyReason = str(ctx.formularyReason);
+  if (fStatus.satisfiedBy === "approval") candidate.restrictionApprovalRef = str(ctx.approvalRef);
 
   let current;
   try { current = await svc.get("MedicationOrder", candidate.id); }

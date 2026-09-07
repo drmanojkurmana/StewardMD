@@ -2725,6 +2725,91 @@ test("sending is prescribing's business, and nothing unsendable is sent", async 
   assert.equal(bogus.error, "unknown_channel");
 });
 
+/* ---- what this hospital stocks, and what it guards ---------------------------------------------- */
+
+test("OFF-FORMULARY NEVER BLOCKS, and a RESTRICTED drug does - because the hospital said so", async () => {
+  seedHospital();
+  const org = docs.get(`q_orgs/${ORG}`);
+  org.fields.wardsynq = {
+    ...org.fields.wardsynq,
+    formulary: [
+      { drug: "Paracetamol 500mg" },
+      { drug: "Meropenem", restricted: true, requiresApproval: true, approvedBy: "Microbiology", note: "Carbapenem stewardship." },
+      { drug: "Vancomycin", restricted: true, restrictedTo: ["Intensive care"] },
+    ],
+  };
+  const { adm } = await admittedPatientOnDrug();
+  const order = (drug, extra) => as(DOCTOR, "/ward/medication-order", "POST", {
+    orgId: ORG, ...(extra || {}),
+    order: { patientId: adm.patientId, encounterId: adm.encounterId, drug, dose: { value: 1, unit: "g" }, route: "iv", frequency: "TDS" },
+  });
+
+  /* A drug not on the list is not dangerous - it is not stocked. Refusing on those grounds would
+   * teach prescribers that the safety warnings are bureaucratic too, which is how the ones that
+   * matter stop being read. */
+  const off = await order("Rifaximin");
+  assert.equal(off.__status, 200, JSON.stringify(off));
+  const stored = await RECORD.latest(TENANT_ROW.id, "MedicationOrder", off.orderId);
+  assert.equal(stored.formularyState, "non-formulary", "recorded on the order, which is where pharmacy asks");
+
+  // A RESTRICTED drug blocks, and the refusal names what is missing AND who grants it - one a
+  // prescriber cannot act on at 2am is one they will work around.
+  const mero = await order("Meropenem");
+  assert.equal(mero.__status, 409);
+  assert.equal(mero.error, "restricted_drug");
+  assert.match(mero.detail, /approval reference from Microbiology/);
+  assert.equal(mero.note, "Carbapenem stewardship.");
+  /* Said plainly, so nobody reads this as the safety engine having found something clinical. A
+   * formulary answers "does this hospital stock this"; the safety engine answers "would this harm
+   * this patient". */
+  assert.match(mero.basis, /not a clinical safety finding/);
+  assert.equal(await RECORD.latest(TENANT_ROW.id, "MedicationOrder", "wsq-rx-" + adm.encounterId.toLowerCase() + "-meropenem"), null, "and nothing was written");
+
+  const approved = await order("Meropenem", { approvalRef: "MICRO-2291" });
+  assert.equal(approved.__status, 200, JSON.stringify(approved));
+  assert.equal((await RECORD.latest(TENANT_ROW.id, "MedicationOrder", approved.orderId)).restrictionApprovalRef, "MICRO-2291");
+
+  // A specialty restriction is satisfied by the specialty, not by an approval number.
+  assert.equal((await order("Vancomycin", { approvalRef: "X" })).__status, 409);
+  assert.equal((await order("Vancomycin", { specialty: "Intensive care" })).__status, 200);
+
+  // Nothing is matched fuzzily: "Meropenem 1g" is a different string and is simply off-formulary,
+  // not a restriction that was missed.
+  const near = await order("Meropenem 1g");
+  assert.equal(near.__status, 200);
+  assert.equal((await RECORD.latest(TENANT_ROW.id, "MedicationOrder", near.orderId)).formularyState, "non-formulary");
+});
+
+test("a hospital MAY require a reason off-formulary, and no formulary is no opinion", async () => {
+  seedHospital();
+  const org = docs.get(`q_orgs/${ORG}`);
+  org.fields.wardsynq = { ...org.fields.wardsynq, formulary: [{ drug: "Paracetamol 500mg" }], requireReasonOffFormulary: true };
+  const { adm } = await admittedPatientOnDrug();
+  const order = (drug, extra) => as(DOCTOR, "/ward/medication-order", "POST", {
+    orgId: ORG, ...(extra || {}),
+    order: { patientId: adm.patientId, encounterId: adm.encounterId, drug, dose: { value: 1, unit: "g" }, route: "iv", frequency: "TDS" },
+  });
+
+  const bare = await order("Rifaximin");
+  assert.equal(bare.__status, 409);
+  assert.equal(bare.error, "formulary_reason_required");
+  assert.match(bare.detail, /Say why this drug/);
+
+  // The reason is RECORDED, never adjudicated.
+  const withReason = await order("Rifaximin", { formularyReason: "Patient's own supply from home." });
+  assert.equal(withReason.__status, 200, JSON.stringify(withReason));
+  assert.equal((await RECORD.latest(TENANT_ROW.id, "MedicationOrder", withReason.orderId)).formularyReason, "Patient's own supply from home.");
+
+  // A hospital with no formulary configured has no opinion, and blocks nothing - even with the
+  // reason switch on, because there is nothing to be off.
+  seedHospital();
+  const { adm: adm2 } = await admittedPatientOnDrug();
+  const none = await as(DOCTOR, "/ward/medication-order", "POST", {
+    orgId: ORG, order: { patientId: adm2.patientId, encounterId: adm2.encounterId, drug: "Meropenem", dose: { value: 1, unit: "g" }, route: "iv", frequency: "TDS" },
+  });
+  assert.equal(none.__status, 200, JSON.stringify(none));
+});
+
 /* ---- "this cannot be the same patient" ---------------------------------------------------------- */
 
 test("A DELTA BREACH FLAGS THE RESULT AND NEVER WITHHOLDS IT", async () => {

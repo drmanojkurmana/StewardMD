@@ -587,7 +587,15 @@ export async function onRequest(context) {
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "medication-order" && method === "POST") {
-        const r = await createWardMedicationOrder(request, env, { ...deps, order: body.order || body, safety: body.safety || null, idempotencyKey: body.idempotencyKey || null });
+        const r = await createWardMedicationOrder(request, env, {
+          ...deps, order: body.order || body, safety: body.safety || null,
+          /* The formulary is ORG content, exactly as the order sets and the critical limits are: a
+           * caller who could pass one could lift any restriction the hospital had set. */
+          formulary: (wsqCfg && wsqCfg.formulary) || null,
+          requireReasonOffFormulary: !!(wsqCfg && wsqCfg.requireReasonOffFormulary),
+          specialty: body.specialty, approvalRef: body.approvalRef, formularyReason: body.formularyReason,
+          idempotencyKey: body.idempotencyKey || null,
+        });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "round" && method === "GET") {

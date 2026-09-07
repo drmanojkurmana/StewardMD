@@ -16,7 +16,7 @@ Updated: 2026-09-07 (PRs #887, #889, #890, #892, #894, #895, #897 pharmacy verif
 | 2 | Registration / scheduling (Cadence, Prelude) | 5 | 80 | #904. OPD register + queue live on device, appointments with no double-booking, and follow-up recalls that stay outstanding until booked. No resource/room scheduling, no patient self-booking. |
 | 3 | Outpatient encounter (Ambulatory) | 6 | 75 | Encounter lifecycle, vitals, assessment, sign — proven on real device. No templates, no flowsheet designer. |
 | 4 | Orders — investigations (Beaker/Radiant order entry) | 5 | 92 | #916. ServiceRequest write path + UI, order sets that apply through the ordinary ordering route, and specimen collection between the order and the result: an uncollected order is visibly uncollected, collected is kept apart from received, and a failed draw sends the order back to needing collection rather than reading as in-flight. No order priority. |
-| 5 | Prescribing (Willow Ambulatory) | 6 | 85 | #908. MedicationOrder, dose parsing, print, and transmission with a real outbox: queued/sent/acknowledged kept distinct, a failure that stays outstanding until a human deals with it, and a payload versioned to the order. No transport is implemented (a site plugs in its own), no formulary. |
+| 5 | Prescribing (Willow Ambulatory) | 6 | 92 | #908 + #920. MedicationOrder, dose parsing, print, and transmission with a real outbox: queued/sent/acknowledged kept distinct, a failure that stays outstanding until a human deals with it, and a payload versioned to the order, and the hospital's formulary: off-formulary flags and never blocks, a restricted drug blocks with a refusal that names who grants it, and nothing is matched fuzzily. No transport is implemented (a site plugs in its own). |
 | 6 | Clinical decision support (Best Practice Advisories) | 7 | 88 | #910. Allergy + cross-reactivity + interactions + dose ceilings, fail-closed, Indian drug DB + FDA, override analytics per rule, and a real override RATE: firings are recorded per order and pack version, so the denominator comes from the record rather than from whoever reads the report. No BPA authoring. |
 | 7 | Problem list (Problem List) | 4 | 88 | #887 + #915. Coded/text, provisional default, versioned resolve, feeds the summary, and now entered and resolved from the ward chart: the full verification vocabulary is offered so nobody has to overstate confidence, and the code is never derived from the words. No terminology lookup in the UI. |
 | 8 | Inpatient admission / ward (ADT) | 7 | 90 | #889. Admit, ward list, ward vitals, discharge, **with a UI**. Transfer with a bed-collision refusal, and a bed board. No admission scheduling. |
@@ -33,7 +33,7 @@ Updated: 2026-09-07 (PRs #887, #889, #890, #892, #894, #895, #897 pharmacy verif
 | 19 | Patient portal (MyChart) | 3 | 0 | Not built. |
 | 20 | Deployment / uptime / DR (on-prem, HA) | 3 | 55 | #912. Cloudflare edge + D1, live domain, a printable downtime pack the ward can hold during an outage, a restore rehearsal that performs a real export-destroy-restore against the shipped schema, and a DR runbook. The rehearsal passes under `npm test` and currently SKIPS in CI, which lacks `--experimental-sqlite` - see "Needs the owner". No scheduled backup, so RPO/RTO are undefined; no on-prem, no hot standby. |
 
-**Weighted total: 80.4%.**
+**Weighted total: 80.8%.**
 
 The total is the weight-times-percent sum of the table above, divided by 100. It is COMPUTED from
 these rows, not asserted: earlier revisions of this file carried an eyeballed number that had drifted
