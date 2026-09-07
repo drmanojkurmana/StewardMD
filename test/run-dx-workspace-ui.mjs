@@ -24,6 +24,7 @@ try {
   await sleep(350);
   ok(await ev(`!!document.querySelector('#dxIntake') && !!document.querySelector('#dxReview')`),'intake and review render');
   ok(await ev(`document.querySelector('#dxAdv').style.display==='none'`),'case tools start collapsed');
+  ok(await ev(`document.body.classList.contains('dx-lock') && getComputedStyle(document.querySelector('#dxOverlay')).overflow==='hidden' && getComputedStyle(document.querySelector('.dx-body')).overflowY==='auto'`),'workspace stays pinned while its content scrolls');
   const viewportFit=await ev(`({top:document.querySelector('#dxOverlay').getBoundingClientRect().top,bottom:document.querySelector('#dxOverlay').getBoundingClientRect().bottom,height:innerHeight,position:getComputedStyle(document.querySelector('#dxOverlay')).position})`);
   console.log('Dx viewport fit',viewportFit);
   ok(viewportFit.position==='fixed' && viewportFit.top>=-1 && Math.abs(viewportFit.bottom-viewportFit.height)<=1,'workspace ends at the visible viewport');

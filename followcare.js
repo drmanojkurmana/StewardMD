@@ -271,7 +271,8 @@
 
       // Quiet Intelligence: a calmer, information-first surface for FollowCare and MAiTRI.
       // Clinical state colours remain unchanged; the new layer only changes hierarchy and chrome.
-      ".fc-ov.fcui2{align-items:stretch;overflow:hidden;background:rgba(0,0,0,.58);backdrop-filter:blur(14px)}",
+      "html:has(body.fc-lock),body.fc-lock{height:100%;overflow:hidden!important;overscroll-behavior:none}",
+      ".fc-ov.fcui2{align-items:stretch;overflow:hidden;overscroll-behavior:none;touch-action:none;background:rgba(0,0,0,.58);backdrop-filter:blur(14px)}",
       ".fc-sheet.fcui2{width:100%;max-width:680px;height:100%;min-height:0;max-height:100%;margin:0 auto;border-radius:0;background:var(--rds-bg);box-shadow:0 0 70px rgba(0,0,0,.28)}",
       ".fc-sheet.fcui2 .fc-hd{position:relative;top:auto;margin-top:0;flex:0 0 auto;display:grid;grid-template-columns:44px minmax(0,1fr) 44px;gap:10px;padding:calc(9px + env(safe-area-inset-top)) 16px 9px;background:color-mix(in srgb,var(--rds-surface) 94%,transparent);color:var(--rds-ink);border-color:var(--rds-line);backdrop-filter:blur(18px)}",
       ".fc-sheet.fcui2 .fc-hd .fc-hd-logo{display:none}",
@@ -279,7 +280,7 @@
       ".fc-sheet.fcui2 .fc-hd-title b{display:block;color:var(--rds-ink);font-size:16px;font-weight:700;line-height:1.2;letter-spacing:-.02em;background:none;-webkit-text-fill-color:currentColor}",
       ".fc-sheet.fcui2 .fc-hd-title small{display:block;margin-top:2px;color:var(--rds-muted);font-size:10.5px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}",
       ".fc-sheet.fcui2 .fc-hd .fc-x{grid-column:3;width:40px;height:40px;border-radius:50%;background:var(--rds-surface-2);color:var(--rds-ink);font-size:22px}",
-      ".fc-sheet.fcui2 .fc-bd{min-height:0;overflow-y:auto;padding:20px 18px calc(24px + env(safe-area-inset-bottom));background:var(--rds-bg)}",
+      ".fc-sheet.fcui2 .fc-bd{min-height:0;overflow-y:auto;overscroll-behavior-y:contain;touch-action:pan-y;padding:20px 18px calc(24px + env(safe-area-inset-bottom));background:var(--rds-bg)}",
       ".fc-q-intro{margin:4px 0 18px}",
       ".fc-q-eyebrow{display:block;color:var(--rds-muted);font-size:11px;font-weight:750;letter-spacing:.1em;text-transform:uppercase;margin-bottom:8px}",
       ".fc-q-intro h2{margin:0;color:var(--rds-ink);font-size:29px;line-height:1.12;letter-spacing:-.045em;font-weight:760}",
@@ -368,7 +369,7 @@
   function toast(m) { try { (G.toast || G.SMD_toast || function () {})(m); } catch (e) {} }
   function isoDate(ms) { try { return new Date(ms).toISOString().slice(0, 10); } catch (e) { return ""; } }
 
-  function close() { if (root && root.parentNode) root.parentNode.removeChild(root); root = null; }
+  function close() { if (root && root.parentNode) root.parentNode.removeChild(root); root = null; try { document.body.classList.remove("fc-lock"); } catch (e) {} }
   function shell(title, bodyEl) {
     ensureStyle();
     close();
@@ -386,6 +387,7 @@
     ]);
     root = h("div", { "class": "fc-ov fcai" + (ui2() ? " fcui2" : ""), onclick: function (e) { if (e.target === root) close(); } }, [sheet]);
     document.body.appendChild(root);
+    document.body.classList.add("fc-lock");
     mSheetIn(sheet);
     return body;
   }

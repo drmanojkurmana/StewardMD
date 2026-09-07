@@ -102,6 +102,7 @@ try {
   await sleep(300);
   ok(await ev(`var r=document.getElementById("sknxRoot"); return !!(r && r.classList.contains("sknx-open"));`) === true, "home route dispatches to SKNX.open() (#sknxRoot.sknx-open)");
   ok(await ev(`return !!document.querySelector("#sknxRoot .sknx-cap-title");`) === true, "capture screen renders on open");
+  ok(await ev(`var root=document.getElementById('sknxRoot'),scroll=document.getElementById('sknxScroll');return document.documentElement.classList.contains('sknx-lock')&&getComputedStyle(root).overflow==='hidden'&&getComputedStyle(scroll).overflowY==='auto';`) === true, "SknX stays pinned while its content scrolls");
 
   await call("Emulation.setDeviceMetricsOverride", { width: 390, height: 844, deviceScaleFactor: 1, mobile: true });
   await ev(`document.body.classList.remove('dark'); return 1;`);

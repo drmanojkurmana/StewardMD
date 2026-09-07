@@ -48,9 +48,12 @@
   font-family: var(--sknx-sans);
   -webkit-font-smoothing: antialiased;
   overflow: hidden;
+  overscroll-behavior: none;
+  touch-action: none;
 }
 #sknxRoot.sknx-open { display: flex; }
-#sknxRoot .sknx-scroll { flex: 1; overflow-y: auto; -webkit-overflow-scrolling: touch; padding-bottom: env(safe-area-inset-bottom, 0); }
+html.sknx-lock, html.sknx-lock body { height: 100%; overflow: hidden !important; overscroll-behavior: none; }
+#sknxRoot .sknx-scroll { flex: 1; min-height: 0; overflow-y: auto; overscroll-behavior-y: contain; touch-action: pan-y; -webkit-overflow-scrolling: touch; padding-bottom: env(safe-area-inset-bottom, 0); }
 @media (min-width: 820px) {
   #sknxRoot .sknx-scroll { padding-left: max(16px, calc((100% - 760px) / 2)); padding-right: max(16px, calc((100% - 760px) / 2)); }
 }

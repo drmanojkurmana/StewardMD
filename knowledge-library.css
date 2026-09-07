@@ -1,8 +1,19 @@
 /* Discover presentation scoped to the Knowledge Library, not other reference tabs. */
-#sbrefOverlay:has(.kblib-discover) { height:100dvh; max-height:100dvh; overflow-y:auto; overscroll-behavior:contain; background:var(--paper,#f5f5f7); }
-#sbrefOverlay:has(.kblib-discover) .sbref-top { background:var(--panel,#fff); color:var(--ink); border-bottom:1px solid var(--line); padding:calc(8px + env(safe-area-inset-top)) 18px 8px; }
-#sbrefOverlay:has(.kblib-discover) .sbref-top h2 { font-size:14px; font-weight:600; }
-#sbrefOverlay:has(.kblib-discover) .sbref-top .sb-x { color:var(--ink)!important; min-width:44px; min-height:44px; border-radius:50%; }
+.kblib-personal,.kblib-compare { margin:18px 0; padding:18px; border:1px solid var(--line); border-radius:18px; background:var(--panel); color:var(--ink); }
+.kblib-personal h2,.kblib-compare h2 { font-size:18px; margin:0 0 5px; }
+.kblib-personal small,.kblib-personal p,.kblib-compare p,.kblib-compare small { color:var(--slate-soft); font-size:12px; }
+.kblib-personal .kblib-row { border-radius:10px; font:inherit; font-size:14px; min-height:44px; }
+.kblib-compare-results { margin-top:14px; font-size:13px; }
+.kblib-compare-results>div { display:flex; justify-content:space-between; gap:16px; padding:12px 0; border-top:1px solid var(--line); }
+.sbref-row input[type=checkbox] { width:20px; height:20px; margin:0 9px 0 0; vertical-align:middle; accent-color:var(--teal); }
+html:has(#sbrefOverlay.open), body:has(#sbrefOverlay.open) { height:100%; overflow:hidden!important; overscroll-behavior:none; }
+#sbrefOverlay:has(.kblib-discover), #sbrefOverlay:has(.kblib-tool-page) { overflow:hidden; overscroll-behavior:none; background:var(--paper,#f5f5f7); touch-action:none; }
+body:has(#sbrefOverlay.open) #smdTopBack { visibility:hidden!important; opacity:0!important; pointer-events:none!important; }
+#sbrefOverlay:has(.kblib-discover) .sbref-shell, #sbrefOverlay:has(.kblib-tool-page) .sbref-shell { width:100%; height:100%; min-height:0; display:flex; flex-direction:column; overflow:hidden; background:var(--paper,#f5f5f7); }
+#sbrefOverlay:has(.kblib-discover) .sbref-top, #sbrefOverlay:has(.kblib-tool-page) .sbref-top { position:relative; top:auto; flex:0 0 auto; background:var(--panel,#fff); color:var(--ink); border-bottom:1px solid var(--line); padding:calc(8px + env(safe-area-inset-top)) 18px 8px; }
+#sbrefOverlay:has(.kblib-discover) .sbref-top h2, #sbrefOverlay:has(.kblib-tool-page) .sbref-top h2 { font-size:14px; font-weight:600; }
+#sbrefOverlay:has(.kblib-discover) .sbref-top .sb-x, #sbrefOverlay:has(.kblib-tool-page) .sbref-top .sb-x { color:var(--ink)!important; min-width:44px; min-height:44px; border-radius:50%; }
+#sbrefOverlay:has(.kblib-discover) #sbrefBody, #sbrefOverlay:has(.kblib-tool-page) #sbrefBody { flex:1; min-height:0; overflow-y:auto; overscroll-behavior-y:contain; -webkit-overflow-scrolling:touch; touch-action:pan-y; }
 #sbrefBody:has(.kblib-discover) .sbref-tabs { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:4px; margin:8px 0 0; }
 #sbrefBody:has(.kblib-discover) .sbref-tab { min-width:0; min-height:44px; padding:7px 2px; font-size:11px; font-weight:500; border:0; border-radius:10px; }
 #sbrefBody:has(.kblib-discover) .sbref-tab svg { display:none; }
@@ -50,3 +61,42 @@ body.dark .kblib-discover { --kl-accent:#bebaff; }
 @media(min-width:760px) { .kblib-discover .kblib-tiles { grid-template-columns:repeat(4,minmax(0,1fr)); } .kblib-discover .kblib-feature { padding:28px; } }
 @media(max-width:600px) { .kblib-discover .kblib-feature { padding:18px; margin:16px 0; } .kblib-discover .kblib-feature h2 { font-size:24px; } .kblib-discover .kblib-section-heading { margin-top:18px; } }
 @media(max-width:360px) { #sbrefBody:has(.kblib-discover) { padding-inline:14px; } .kblib-discover .kblib-tiles .kblib-f { padding:13px; } }
+
+/* The remaining Knowledge Library collections use the same app-style hierarchy as Discover. */
+#sbrefBody.kblib-tool-page { --kl-accent:#5956a5; --kl-muted:var(--slate-soft,#646b77); --kl-paper:var(--panel,#fff); --kl-line:var(--line,#e3e5eb); width:100%; max-width:1000px; margin:0 auto; padding:0 20px calc(28px + env(safe-area-inset-bottom)); box-sizing:border-box; color:var(--ink,#1d1d1f); font-family:-apple-system,BlinkMacSystemFont,system-ui,sans-serif; }
+body.dark #sbrefBody.kblib-tool-page { --kl-accent:#bebaff; }
+#sbrefBody.kblib-tool-page *, #sbrefBody.kblib-tool-page *::before { box-sizing:border-box; }
+#sbrefBody.kblib-tool-page [hidden] { display:none!important; }
+#sbrefBody.kblib-tool-page .sbref-tabs { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:4px; margin:8px 0 0; }
+#sbrefBody.kblib-tool-page .sbref-tab { min-width:0; min-height:44px; padding:7px 2px; border:0; border-radius:10px; background:transparent; color:var(--kl-muted); font-size:11px; font-weight:500; }
+#sbrefBody.kblib-tool-page .sbref-tab svg { display:none; }
+#sbrefBody.kblib-tool-page .sbref-tab.active { background:var(--kl-paper); color:var(--ink); box-shadow:0 1px 4px #00000012; }
+.kblib-tool-intro { padding:28px 0 16px; }
+.kblib-tool-kicker { color:var(--kl-muted); font-size:10px; font-weight:650; letter-spacing:.12em; text-transform:uppercase; }
+.kblib-tool-intro h1 { margin:9px 0 10px; color:var(--ink); font-size:clamp(29px,5vw,40px); line-height:1.08; letter-spacing:-.045em; }
+.kblib-tool-intro p { max-width:650px; margin:0 0 20px; color:var(--kl-muted); font-size:14px; line-height:1.6; }
+.kblib-tool-intro label { display:block; margin-bottom:7px; color:var(--kl-muted); font-size:12px; }
+.kblib-tool-search { width:100%; min-height:48px; padding:12px 14px; border:1px solid var(--kl-line); border-radius:13px; background:var(--kl-paper); color:var(--ink); font:inherit; font-size:16px; }
+.kblib-tool-count { min-height:20px; margin:10px 2px 0; color:var(--kl-muted); font-size:12px; }
+#sbrefBody.kblib-tool-page .sbref-sec { padding:18px; margin-bottom:12px; border:1px solid var(--kl-line); border-radius:18px; background:var(--kl-paper); }
+#sbrefBody.kblib-tool-antibiogram .sbref-sec { padding:20px; }
+#sbrefBody.kblib-tool-antibiogram .sbref-sec > div:first-child { color:var(--kl-muted)!important; font-size:12px!important; line-height:1.5; }
+#sbrefBody.kblib-tool-antibiogram select.sbref-tab { width:100%!important; min-height:48px; margin:12px 0 18px!important; padding:10px 12px; border:1px solid var(--kl-line); border-radius:13px; background:var(--kl-paper); color:var(--ink); font-size:14px; }
+#sbrefBody.kblib-tool-page .sbref-row { grid-template-columns:minmax(108px,1.25fr) minmax(70px,1fr) 50px; gap:10px; min-height:45px; margin:0; padding:9px 0; border-bottom:1px solid var(--kl-line); color:var(--ink); }
+#sbrefBody.kblib-tool-page .sbref-row:last-of-type { border-bottom:0; }
+#sbrefBody.kblib-tool-page .sbref-bar { height:8px; border-radius:999px; background:color-mix(in srgb,var(--kl-line) 75%,transparent); }
+#sbrefBody.kblib-tool-aware .aware-card { position:relative; margin-bottom:12px; padding:20px 20px 18px; border:1px solid var(--kl-line)!important; border-left:1px solid var(--kl-line)!important; border-radius:18px; background:var(--kl-paper); overflow:hidden; }
+#sbrefBody.kblib-tool-aware .aware-card::before { content:''; position:absolute; inset:0 auto 0 0; width:4px; background:currentColor; }
+#sbrefBody.kblib-tool-aware .aware-card h4 { margin:0 0 8px; font-size:20px; letter-spacing:-.025em; }
+#sbrefBody.kblib-tool-aware .aware-card > div:not(.ex) { color:var(--ink)!important; font-size:13px!important; line-height:1.55; }
+#sbrefBody.kblib-tool-aware .aware-card .ex { margin-top:12px; color:var(--kl-muted); font-size:12px; line-height:1.55; }
+#sbrefBody.kblib-tool-guidelines .sbref-sec { padding:8px 0 0; overflow:hidden; }
+#sbrefBody.kblib-tool-guidelines .sbref-sec > div:first-child { padding:10px 16px 12px; margin:0!important; color:var(--kl-muted)!important; }
+#sbrefBody.kblib-tool-guidelines .sbref-gl { min-height:58px; margin:0; padding:12px 16px; border:0; border-top:1px solid var(--kl-line); border-radius:0; background:transparent; }
+#sbrefBody.kblib-tool-guidelines .sbref-gl:hover { background:color-mix(in srgb,var(--kl-accent) 7%,var(--kl-paper)); }
+#sbrefBody.kblib-tool-guidelines .sbref-gl .gl-n { font-size:13.5px; line-height:1.4; }
+#sbrefBody.kblib-tool-guidelines .sbref-gl .gl-dom { margin-top:3px; color:var(--kl-muted); }
+#sbrefBody.kblib-tool-guidelines .sbref-gl .gl-go { color:var(--kl-accent); }
+#sbrefBody.kblib-tool-page :is(button,input,select,a):focus-visible { outline:3px solid var(--kl-accent); outline-offset:3px; }
+@media(max-width:600px) { .kblib-tool-intro { padding-top:22px; } #sbrefBody.kblib-tool-page .sbref-sec { padding:15px; border-radius:16px; } #sbrefBody.kblib-tool-guidelines .sbref-sec { padding:7px 0 0; } }
+@media(max-width:360px) { #sbrefBody.kblib-tool-page { padding-inline:14px; } #sbrefBody.kblib-tool-page .sbref-tab { font-size:10.5px; } }

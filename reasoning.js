@@ -2686,6 +2686,7 @@
     var H = (window.KB_ENRICHMENT && window.KB_ENRICHMENT.byId && window.KB_ENRICHMENT.byId[r.id]) || null;
     var el = root.querySelector("#dxMgmt");
     if (!el) { el = document.createElement("div"); el.id = "dxMgmt"; el.className = "dx-mgmt"; root.appendChild(el); }
+    el.className = "dx-mgmt";
     var tx = (m && m.tx && m.tx.length) ? m.tx : ((r.mgmt && r.mgmt.length) ? r.mgmt : ((H && H.management && H.management.length) ? H.management : null));
     var ix = (m && m.ix && m.ix.length) ? m.ix : (r.inv && r.inv.length ? r.inv : ((H && H.additionalInvestigations) || []));
     var red = (r.red && r.red.length) ? r.red : ((H && H.redFlags) || []);
@@ -2730,6 +2731,7 @@
   // current differential) — reuses the #dxMgmt panel. Shows the Harrison reference
   // and an action to open the full stewardship/management page.
   function openDiseaseRef(id, opts) {
+    kbSaveList("recent", [id].concat(kbReadList("recent").filter(function (x) { return x !== id; })).slice(0, 12));
     try { if (window.SMD_KU) SMD_KU.emit("read", id); } catch (e) {}   // KU: reading clinical content
     var syn = (window.SYNDROMES || {})[id];
     var ni = null; (DDX_NI || []).forEach(function (d) { if (d.id === id) ni = d; });
@@ -2753,17 +2755,30 @@
       : "";
     var el = root.querySelector("#dxMgmt");
     if (!el) { el = document.createElement("div"); el.id = "dxMgmt"; el.className = "dx-mgmt"; root.appendChild(el); }
-    el.innerHTML = '<div class="dx-mgmt-top"><button class="dx-back" id="dxMgmtBack" type="button">‹ Back</button></div>' +
+    el.className = "dx-mgmt dx-reader";
+    el.innerHTML = '<div class="dx-mgmt-top"><button class="dx-back" id="dxMgmtBack" type="button">‹ Library</button>' +
+        '<div class="dx-reader-brand"><strong>Knowledge Library</strong><span>Clinical disease reference</span></div><span class="dx-reader-spacer" aria-hidden="true"></span></div>' +
       '<div class="dx-mgmt-body">' +
-        '<div class="dx-mgmt-badge">Disease reference · ' + (inf ? "infective" : "non-infective") + '</div>' +
+        '<section class="dx-reader-hero"><div class="dx-mgmt-badge">Disease reference · ' + (inf ? "infective" : "non-infective") + '</div>' +
         '<h2 class="dx-mgmt-name">' + esc(name) + '</h2>' +
-        (system ? '<div class="dx-mgmt-sys">' + esc(system) + '</div>' : '') +
+        (system ? '<div class="dx-mgmt-sys">' + esc(system) + '</div>' : '') + '</section>' +
+        '<div class="dx-reader-glance"><h3>At a glance</h3>' +
+          (reason ? '<p>' + esc(reason) + '</p>' : '') +
+          (H && H.redFlags && H.redFlags.length ? '<section class="dx-reader-alert"><h4>Red flags</h4>' + evList(H.redFlags, "danger") + '</section>' : '') +
+          (H && H.additionalInvestigations && H.additionalInvestigations.length ? '<details><summary>Investigations</summary>' + evList(H.additionalInvestigations) + '</details>' : '') +
+          (briefTx && briefTx.length ? '<details><summary>Management</summary><ul>' + briefTx.map(function (x) { return '<li>' + esc(x) + '</li>'; }).join('') + '</ul></details>' : '') +
+        '</div><div class="dx-reader-content">' +
         (reason ? '<div class="dx-mgmt-sec">Why this</div><p>' + esc(reason) + '</p>' : '') +
         mgmtHtml +
         (harrisonRef(id, { expanded: true }) || '<p class="dx-sel-empty">No Harrison reference loaded for this disease.</p>') +
         (refInf ? '' : '<button class="dx-select ' + (inf ? "inf" : "ni") + '" data-sel="' + id + '">Open full ' + (inf ? "stewardship" : "management") + ' page →</button>') +
-        '<div class="dx-mgmt-disc">' + rIco("warn") + ' Decision-support only — reference knowledge paraphrased from Harrison\'s 22e and standard guidelines. Verify against full guidelines and prescribing references before acting.</div>' +
+        '<div class="dx-mgmt-disc">' + rIco("warn") + ' Decision-support only. Reference knowledge is paraphrased from Harrison\'s 22e and standard guidelines. Verify against full guidelines and prescribing references before acting.</div></div>' +
       '</div>';
+    var favourite = document.createElement("button"); favourite.type = "button"; favourite.className = "dx-reader-favourite";
+    function favouritePaint() { var saved = kbReadList("favourites").indexOf(id) >= 0; favourite.textContent = saved ? "★ Saved to favourites" : "☆ Add to favourites"; favourite.setAttribute("aria-pressed", String(saved)); }
+    favouritePaint();
+    favourite.addEventListener("click", function () { var list = kbReadList("favourites"), saved = list.indexOf(id) >= 0; if (kbSaveList("favourites", saved ? list.filter(function (x) { return x !== id; }) : list.concat(id))) favouritePaint(); else favourite.textContent = "Could not save. Try again."; });
+    el.querySelector(".dx-reader-hero").appendChild(favourite);
     el.classList.add("on"); el.scrollTop = 0;
     var bk = el.querySelector("#dxMgmtBack"); if (bk) bk.addEventListener("click", function () {
       el.classList.remove("on");
@@ -2774,6 +2789,11 @@
       if (opts && opts.standalone) {
         try { close(); } catch (e) {}
         try { if (window.SB && SB.openRef) SB.openRef("syndromes"); } catch (e) {}
+        if (_libReturnScroll !== null) {
+          var libraryBody = document.getElementById("sbrefBody");
+          if (libraryBody) libraryBody.scrollTop = _libReturnScroll;
+          _libReturnScroll = null;
+        }
       }
     });
     var sel = el.querySelector(".dx-select[data-sel]");
@@ -3182,6 +3202,8 @@
     return out.slice(0, limit || 40);
   }
   function kbOpen(id) {
+    var library = document.getElementById("sbrefOverlay"), libraryBody = document.getElementById("sbrefBody");
+    _libReturnScroll = library && library.classList.contains("open") && libraryBody ? libraryBody.scrollTop : null;
     try { var bd = document.getElementById("spBackdrop"); if (bd) bd.classList.add("hidden"); } catch (e) {}
     try { var p = document.getElementById("smdSearchPanel"); if (p) p.classList.remove("open"); } catch (e) {}
     try { if (window.SB && SB.closeRef) SB.closeRef(); } catch (e) {}
@@ -3190,6 +3212,15 @@
     // infective syndromes). For infective diseases the viewer itself offers a button
     // to open the full antibiotic-stewardship console, so nothing is lost.
     if (window.DX && DX.openRef) DX.openRef(id);
+  }
+  function kbReadList(kind) { try { var list = JSON.parse(localStorage.getItem("smd_library_" + kind) || "[]"); return Array.isArray(list) ? list.filter(function (x) { return typeof x === "string"; }) : []; } catch (e) { return []; } }
+  function kbSaveList(kind, list) { try { localStorage.setItem("smd_library_" + kind, JSON.stringify(list)); return true; } catch (e) { return false; } }
+  function kbPersonalHTML(entries) {
+    var byId = {}; entries.forEach(function (d) { byId[d.id] = d; });
+    return '<section class="kblib-personal"><h2>Your library</h2><small>Saved on this device</small>' + ["favourites", "recent"].map(function (kind) {
+      var ids = kbReadList(kind).filter(function (id) { return !!byId[id]; });
+      return '<details' + (kind === "favourites" ? ' open' : '') + '><summary>' + (kind === "favourites" ? "Favourites" : "Recently viewed") + ' · ' + ids.length + '</summary>' + (ids.length ? ids.map(function (id) { return '<button type="button" class="kblib-row" data-kb="' + esc(id) + '">' + esc(byId[id].name) + '</button>'; }).join('') : '<p>' + (kind === "favourites" ? "Save a disease from its reference page for quick access." : "Diseases you open will appear here.") + '</p>') + '</details>';
+    }).join('') + '</section>';
   }
   // ---- recent search history (replaces the hardcoded #spChips example chips) --------------
   var SMD_RECENT_KEY = "smd_recent_searches", SMD_RECENT_MAX = 8;
@@ -3284,7 +3315,8 @@
     box.insertAdjacentHTML("afterbegin", html);
     box.querySelectorAll("#smdKbSec [data-kb]").forEach(function (b) { b.addEventListener("click", function () { kbOpen(b.getAttribute("data-kb")); }); });
   }
-  // ---- Knowledge Library: override window.SB.openRef for the syndromes tab ----
+  // ---- Knowledge Library: upgrade all four reference tabs into one visual system ----
+  var _libReturnScroll = null;
   var _libState = { q: "", cls: "all", src: "all", branch: "all", limit: 40 };
   function wireSyndromeLibrary() {
     if (!window.SB || typeof window.SB.openRef !== "function" || window.SB.__smdKbWrapped) return;
@@ -3293,11 +3325,65 @@
     window.SB.openRef = function (tab) {
       var r = orig.apply(this, arguments);
       if (tab === "syndromes") { try { kbRenderLibrary(); } catch (e) {} }
+      else { try { kbPolishReference(tab); } catch (e) {} }
       return r;
     };
+    if (typeof window.SB.abgOrg === "function" && !window.SB.__smdAbgWrapped) {
+      var abgOrig = window.SB.abgOrg;
+      window.SB.__smdAbgWrapped = true;
+      window.SB.abgOrg = function () { var r = abgOrig.apply(this, arguments); try { kbPolishReference("antibiogram"); } catch (e) {} return r; };
+    }
+  }
+  function kbPolishReference(tab) {
+    var spec = {
+      antibiogram: { kicker: "National resistance intelligence", title: "Antibiogram", copy: "Compare ICMR AMRSN susceptibility data by organism. Your local hospital antibiogram should take priority when available.", search: "Search antibiotics" },
+      aware: { kicker: "WHO stewardship framework", title: "AWaRe classification", copy: "Understand Access, Watch and Reserve groups at a glance, then review the antibiotics available in StewardMD.", search: "Search classes or antibiotics" },
+      guidelines: { kicker: "Trusted clinical sources", title: "Guidelines & references", copy: "Browse official national and international guidance in one focused clinical index. Confirm the current published version before use.", search: "Search guidelines or organisations" }
+    }[tab];
+    var body = document.getElementById("sbrefBody"); if (!body || !spec) return;
+    body.scrollTop = 0;
+    body.className = "sbref-body kblib-tool-page kblib-tool-" + tab;
+    var title = document.getElementById("sbrefTitle"); if (title) title.textContent = "Knowledge Library";
+    var tabs = body.querySelector(".sbref-tabs"); if (!tabs) return;
+    Array.prototype.forEach.call(tabs.querySelectorAll(".sbref-tab"), function (button) {
+      button.type = "button";
+      if (button.classList.contains("active")) button.setAttribute("aria-current", "page");
+      else button.removeAttribute("aria-current");
+    });
+    var intro = document.createElement("div"); intro.className = "kblib-tool-intro";
+    intro.innerHTML = '<span class="kblib-tool-kicker">' + spec.kicker + '</span><h1>' + spec.title + '</h1><p>' + spec.copy + '</p>' +
+      '<label for="kblibToolSearch">Search this collection</label><input id="kblibToolSearch" class="kblib-tool-search" type="search" autocomplete="off" placeholder="' + spec.search + '"><div id="kblibToolCount" class="kblib-tool-count" role="status"></div>';
+    tabs.insertAdjacentElement("afterend", intro);
+    function paint() {
+      var q = String(intro.querySelector("input").value || "").trim().toLowerCase();
+      var nodes = tab === "antibiogram" ? body.querySelectorAll(".sbref-row") : tab === "aware" ? body.querySelectorAll(".aware-card") : body.querySelectorAll(".sbref-gl");
+      var shown = 0;
+      Array.prototype.forEach.call(nodes, function (node) { var on = !q || node.textContent.toLowerCase().indexOf(q) >= 0; node.hidden = !on; if (on) shown++; });
+      if (tab === "guidelines") Array.prototype.forEach.call(body.querySelectorAll(".sbref-sec"), function (sec) { var links = sec.querySelectorAll(".sbref-gl"); if (links.length) sec.hidden = !Array.prototype.some.call(links, function (link) { return !link.hidden; }); });
+      var count = document.getElementById("kblibToolCount");
+      if (count) count.textContent = shown ? (q ? "Showing " : "") + shown + (tab === "antibiogram" ? " antibiotics" : tab === "aware" ? " AWaRe groups" : " guideline sources") : "No matches. Try a broader search.";
+    }
+    intro.querySelector("input").addEventListener("input", paint);
+    if (tab === "antibiogram") {
+      var compare = document.createElement("section"); compare.className = "kblib-compare";
+      compare.innerHTML = '<h2>Compare antibiotics</h2><p>National data · ICMR AMRSN 2024</p><small>Hospital-specific data is not loaded in this view.</small><div class="kblib-compare-results" aria-live="polite">Select two or more antibiotics below.</div>';
+      intro.insertAdjacentElement("afterend", compare);
+      var rows = Array.prototype.slice.call(body.querySelectorAll('.sbref-row'));
+      rows.forEach(function (row) {
+        var name = row.firstElementChild, label = name.textContent, checkbox = document.createElement('input'); checkbox.type = 'checkbox'; checkbox.setAttribute('aria-label', 'Compare ' + label);
+        name.prepend(checkbox);
+        checkbox.addEventListener('change', function () {
+          var selected = rows.filter(function (r) { return r.querySelector('input').checked; });
+          compare.querySelector('.kblib-compare-results').innerHTML = selected.length ? selected.map(function (r) { return '<div><strong>' + esc(r.firstElementChild.textContent) + '</strong><span>' + esc(r.lastElementChild.textContent || r.children[1].textContent) + '</span></div>'; }).join('') : 'Select two or more antibiotics below.';
+        });
+      });
+    }
+    paint();
   }
   function kbRenderLibrary() {
     var body = document.getElementById("sbrefBody"); if (!body) return;
+    body.scrollTop = 0;
+    body.className = "sbref-body";
     var sec = body.querySelector(".sbref-sec"); if (!sec) return;
     sec.classList.add("kblib-discover");
     try { var t = document.getElementById("sbrefTitle"); if (t) t.textContent = "Knowledge Library"; } catch (e) {}
@@ -3310,6 +3396,7 @@
     sec.innerHTML =
       '<header class="kblib-intro"><span class="kblib-kicker">STEWARDMD · DISCOVER</span><h1>Knowledge Library</h1><p><strong>' + (entries.length >= 4800 ? '4,800+ diseases' : entries.length.toLocaleString() + ' disease entries') + '</strong> across ' + branches.length + ' medical branches.</p></header>' +
       '<label class="kblib-search-label" for="kblibQ">Search the full library</label><input id="kblibQ" class="kblib-search" type="search" placeholder="Disease, syndrome or clinical detail" autocomplete="off" value="' + esc(_libState.q) + '">' +
+      kbPersonalHTML(entries) +
       '<div class="kblib-discovery" id="kblibDiscovery"><div class="kblib-feature"><span class="kblib-kicker">CLINICAL COLLECTIONS</span><h2>A world of medicine.<br>One library.</h2><p>Diseases · Syndromes · References</p></div>' +
       '<div class="kblib-section-heading"><h2>Explore a branch</h2><span>' + branches.length + ' branches</span></div><div class="kblib-tiles">' + featured.map(tile).join("") + '</div>' +
       '<details class="kblib-all-branches"><summary>See all medical branches</summary><div class="kblib-tiles">' + branches.filter(function (b) { return featured.indexOf(b) < 0; }).map(tile).join("") + '</div></details></div>' +

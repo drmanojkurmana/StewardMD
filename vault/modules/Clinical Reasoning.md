@@ -11,6 +11,8 @@
 
 User selected direction B, Guided Consult. Intake and differential use separate switchable panes with a centered reading column and violet accents. Existing missing-finding suggestions appear one at a time, with Present/add and Skip for now. The focused question sits before the case finding chips; case notes/tools and system browsing start collapsed so the primary interaction fits the phone viewport. The fixed overlay follows the visible viewport insets instead of combining inset positioning with an explicit viewport height. On an empty case, the collapsed tools control uses the remaining space and sits near the safe bottom edge without creating phantom scrolling. Skips are session-only presentation state, never negative findings or ranking inputs; reset clears them and revisit restores them. No new clinical question-generation logic. All findings remain searchable; system browsing uses progressive disclosure.
 
+The workspace now locks document overscroll while open. Its header and mode switch stay pinned, and only the central clinical content scrolls, so iOS pull-down cannot reveal the app underneath.
+
 Finding count, labeled inputs, 44px controls, keyboard-operable diagnosis disclosure and compare state, clearer score wording and suggestion verification guidance. Case-note drafts survive finding changes. Clear asks before discarding a populated case; programmatic DX.reset clears draft and skips. Search autofocus is desktop-only and does not scroll the intake out of view.
 
 Clinical scoring, thresholds, treatment content, patient import and AI transport are not changed. Scores are ranking values, not calibrated disease probabilities. Findings currently represent positive entries, not a complete present/absent/unknown examination.

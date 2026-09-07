@@ -38,6 +38,7 @@ try{
   for(let i=0;i<40;i++){if(await ev(`!!document.querySelector('.fc-dashboard .fc-row')`))break;await sleep(150);}
   await sleep(350);
   ok(await ev(`document.querySelector('.fc-hd-title b')?.textContent==='FollowCare'`),'FollowCare heading is clear');
+  ok(await ev(`document.body.classList.contains('fc-lock') && getComputedStyle(document.querySelector('.fc-ov')).overflow==='hidden' && getComputedStyle(document.querySelector('.fc-bd')).overflowY==='auto'`),'FollowCare stays pinned while its content scrolls');
   ok(await ev(`document.querySelector('.fc-x').getBoundingClientRect().right<=innerWidth && document.querySelector('.fc-x').getBoundingClientRect().left>=0`),'close control stays inside the phone viewport');
   ok(await ev(`document.querySelector('.fc-q-intro h2')?.textContent==='Your patients at a glance.'`),'quiet recovery overview renders');
   ok(await ev(`document.querySelectorAll('.fc-q-metrics .fc-cc').length===4`),'recovery metrics remain available');
@@ -62,6 +63,8 @@ try{
   ok(await ev(`document.querySelector('.fc-bd').scrollWidth<=document.querySelector('.fc-bd').clientWidth`),'MAiTRI fits at 320px');
   await ev(`document.querySelector('.fc-maitri-back').click()`);await sleep(250);
   ok(await ev(`!!document.querySelector('.fc-dashboard') && document.querySelector('.fc-hd-title b')?.textContent==='FollowCare'`),'back returns to FollowCare');
+  await ev(`document.querySelector('.fc-x').click()`);
+  ok(await ev(`!document.body.classList.contains('fc-lock') && !document.querySelector('.fc-ov')`),'closing FollowCare restores the app shell');
   console.log(failures?`${failures} failures`:'All FollowCare Quiet Intelligence checks pass');
 }catch(error){console.error(error);failures++;}
 finally{ws?.close();chrome.kill();server.kill();process.exitCode=failures?1:0;}

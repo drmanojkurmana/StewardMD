@@ -14,6 +14,8 @@ flag: smd_sknx (client, def:false) + v2beta access + smd_sknx_rx (Phase 3, def:f
 - Results retain the differential-first ordering and existing clinical gates, with report/history
   navigation, readable confidence labels (neutral colour, not severity), larger controls, dark mode,
   keyboard focus management and reduced-motion support.
+- The module locks the document while open and uses one contained internal scroll region, preventing
+  iOS elastic pull-down from exposing the underlying app or bottom navigation.
 - Save status reflects a successful local-storage write. A failed write returns null and can be retried.
 - `sknx-mark.svg` is the original vector SknX brand mark, used in the module and the home tool tile.
 - Verification: `node --test test/sknx-*.test.mjs`; build then `node test/run-sknx-ui.mjs`.

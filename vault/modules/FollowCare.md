@@ -47,6 +47,9 @@ colours. MAiTRI retains the existing `maitri-logo.png` and the official `maitri-
 “Medical Adaptive Intelligence for Treatment & Recovery Integration.” Voice settings, enrollment,
 patient detail navigation and escalation actions are unchanged.
 
+The FollowCare shell now locks page overscroll while open. Header chrome stays fixed and only the
+workspace body scrolls, so the interface continues to fill the phone screen without exposing the app beneath it.
+
 Browser verification: `FC_SHOTS=/tmp/stewardmd-followcare-quiet node test/run-followcare-quiet-ui.mjs`.
 
 **Left alone deliberately:** the escalation glyphs (● ○ ✓) are not an accessibility bug - every level
