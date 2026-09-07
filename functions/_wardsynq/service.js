@@ -155,6 +155,11 @@ const RESOURCE_TYPES = Object.freeze([
    * there is more stock than there is. Issues are deliberately NOT movements: the quantity that left
    * the pharmacy is already a MedicationDispense, and two entries for one event can disagree. */
   "StockMovement",
+  /* A patient's own access to their own record: who enrolled them, how they were identified, and the
+   * DIGESTS of the code and session token - never the secrets themselves, because a grant readable
+   * by staff must not be a way to become the patient. Append-only so a revocation cannot be deleted
+   * afterwards, which is the only thing that makes revocation mean anything. */
+  "PatientAccessGrant",
 ]);
 
 const MODE = Object.freeze({ SYSTEM_OF_RECORD: "system-of-record", INTEGRATION: "integration" });

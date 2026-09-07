@@ -294,6 +294,6 @@ async function releaseToPatient(request, env, ctx) {
 
 export {
   RELEASE_TYPE, RELEASABLE_STATUS, NOT_A_DIAGNOSIS,
-  openCriticalReportIds, releasableReport, diagnosisFor, statements, clinicianWarnings,
+  openCriticalReportIds, releasableReport, diagnosisFor, statements, clinicianWarnings, assemble,
   patientCopy, releaseToPatient,
 };
