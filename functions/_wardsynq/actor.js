@@ -104,6 +104,34 @@ function grantForCaps(caps) {
     };
   }
 
+  if (has(CAPS.ORDER_VERIFY)) {
+    /* Pharmacy verification, 2026-09-07. The narrow grant this file's own comment (and the note in
+     * api/queue/[[path]].js) said the problem wanted, rather than the two wrong answers available
+     * before it existed:
+     *
+     *   - MED_ADMINISTER would have let pharmacy write MedicationAdministration, and a role that can
+     *     write that can post a fabricated "administered" row through the raw record API without
+     *     ever going near a bedside.
+     *   - EMR_VIEW would have handed the pharmacy role the WHOLE chart to solve a problem that needs
+     *     four resource types.
+     *
+     * So: read exactly what verifying a medicine against a patient requires - the orders, the
+     * allergies, the observations that carry renal function and drug levels, and the problem list
+     * that says why - and write ONLY the verification itself. It is a union, so it can never narrow
+     * what a role already had. */
+    // MedicationVerification is on BOTH lists: a verifier who cannot read back what was already
+    // verified cannot see their own queue, and would re-check every order on every shift.
+    const canRead = ["MedicationOrder", "ServiceRequest", "AllergyIntolerance", "Observation", "Condition", "MedicationAdministration", "CriticalResultLoop", "MedicationVerification"];
+    const canWrite = ["MedicationVerification"];
+    if (!grant) grant = { tier: TIER.EXECUTE, read: canRead, write: canWrite, basis: CAPS.ORDER_VERIFY };
+    else grant = {
+      tier: TIER.EXECUTE,
+      read: grant.read === null ? null : [...new Set([...grant.read, ...canRead])],
+      write: grant.write === null ? null : [...new Set([...grant.write, ...canWrite])],
+      basis: grant.basis + "+" + CAPS.ORDER_VERIFY,
+    };
+  }
+
   if (has(CAPS.MED_ADMINISTER)) {
     /* The bedside authority, added 2026-09-07 with the inpatient eMAR, in the same union shape as
      * QUEUE_ADD above and for the same reason: it only ever ADDS one type and only ever RAISES the

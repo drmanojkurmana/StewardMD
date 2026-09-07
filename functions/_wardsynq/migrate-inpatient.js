@@ -147,7 +147,13 @@ async function listWard(request, env, ctx) {
 
   let encounters;
   try { encounters = await svc.list("Encounter", 200); }
-  catch (e) { return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), patients: [] }; }
+  catch (e) {
+    /* A SCOPE REFUSAL IS A 403, NOT A SERVER ERROR. A role can hold queue.view (which opens this
+     * route) and still have no read scope on Encounter - pharmacy is exactly that - and answering
+     * 502 told the caller the server was broken when in fact it had simply said no. */
+    if (e instanceof GovernanceError) return { ...base, ok: false, status: 403, error: "permission", reasons: (e.reasons || []).map((r) => r.code), detail: str(e.message), patients: [] };
+    return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), patients: [] };
+  }
 
   const want = str(ctx.ward).toLowerCase();
   const patients = (encounters || [])

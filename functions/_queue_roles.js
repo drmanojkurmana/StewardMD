@@ -38,6 +38,15 @@ export const CAPS = {
   // doctor holding EMR_TREAT should not silently inherit the bedside role either — so this is
   // granted explicitly to the roles that give medicines, and to nobody else.
   MED_ADMINISTER: "med.administer", // scan + give a dose and record the administration (ward nurse)
+  /* Pharmacy verification, 2026-09-07. Its OWN authority, and narrow on purpose.
+   *
+   * A pharmacist checking an order against the patient's allergies, renal function and the rest of
+   * their medicines is a distinct clinical safety step from a nurse giving the dose, and folding it
+   * into MED_ADMINISTER (which is what the eMAR did) would have meant granting pharmacy write access
+   * to MedicationAdministration - and a role that can write that could post a fabricated
+   * "administered" row through the raw record API without going near a bedside. So verification
+   * writes its own resource and reads only what a verification actually needs. */
+  ORDER_VERIFY: "order.verify",     // check an order against the chart before the ward gives it (pharmacy)
   // ---- ONCQIS (oncology protocol governance) caps -------------------------------------------
   // Strict role separation: authoring, clinical review, and institutional approval are DISTINCT
   // caps held by DISTINCT roles. Doctor/Nurse never hold any of these (they consume ACTIVE
@@ -116,7 +125,7 @@ export const ROLE_CAPS = {
   // Pharmacy: reads the patient's medication orders and marks them dispensed once paid. Deliberately
   // NOT given EMR_VIEW - dispensing needs the order, not the consultation notes - and never
   // BILLING_CHARGE, so the person handing over medicines is not the person taking the money.
-  pharmacy: [C.QUEUE_VIEW, C.ORDER_READ, C.ORDER_DISPENSE],
+  pharmacy: [C.QUEUE_VIEW, C.ORDER_READ, C.ORDER_DISPENSE, C.ORDER_VERIFY],
   // HR / practice manager: runs the staff list and reads operational analytics. NO queue control, NO
   // vitals, NO EMR, NO billing. Exists so onboarding a nurse does not require handing someone full
   // admin (which carries every clinical and billing capability in the system).

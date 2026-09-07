@@ -54,6 +54,10 @@ const RESOURCE_TYPES = Object.freeze([
    * handover could be written would have let a nurse author a discharge summary too. Its own type,
    * granted narrowly by EMR_VITALS - what the nurse records about their own patients. */
   "ShiftHandover",
+  /* Pharmacy verification of an ORDER. Emphatically not a MedicationAdministration: granting
+   * pharmacy write on that would let the role post a fabricated "administered" row through the raw
+   * record API without going near a bedside. Its own type, granted only by ORDER_VERIFY. */
+  "MedicationVerification",
 ]);
 
 const MODE = Object.freeze({ SYSTEM_OF_RECORD: "system-of-record", INTEGRATION: "integration" });

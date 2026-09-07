@@ -490,7 +490,25 @@ test("role mapping: every one of the eighteen operational roles resolves to exac
   assert.ok(!write("nurse").includes("ClinicalNote"), "nor an assessment, nor a discharge summary");
   for (const r of ["intern", "resident", "pg_resident"]) { assert.equal(tier(r), TIER.EXECUTE, r); assert.deepEqual(write(r), ["Observation", "ShiftHandover", "Patient", "Encounter"], r); assert.equal(read(r), null, r); }
   for (const r of ["supervisor", "reception"]) { assert.equal(tier(r), TIER.EXECUTE, r); assert.deepEqual(write(r), ["Patient", "Encounter"], r); assert.equal(read(r), null, r); }
-  for (const r of ["cashier", "pharmacy"]) { assert.equal(tier(r), TIER.READ, r); assert.deepEqual(write(r), [], r); assert.deepEqual(read(r), ["MedicationOrder", "ServiceRequest"], r); }
+  // A cashier reads the orders they bill for and writes nothing at all.
+  assert.equal(tier("cashier"), TIER.READ);
+  assert.deepEqual(write("cashier"), []);
+  assert.deepEqual(read("cashier"), ["MedicationOrder", "ServiceRequest"]);
+  /* 2026-09-07: pharmacy gained ORDER_VERIFY. Verification is only as good as what the verifier can
+   * READ, and until this the pharmacy role held no EMR capability at all - so a pharmacist could not
+   * see the allergy, the creatinine or the critical potassium they are supposed to check against,
+   * which made pharmacy verification impossible to do honestly.
+   *
+   * The grant is narrow BY ENUMERATION and the assertions below are what keeps it narrow: exactly
+   * what a verification needs, and one write - its own verification record. NOT
+   * MedicationAdministration, because a role that can write that could post a fabricated
+   * "administered" row through the raw record API without going near a bedside. */
+  assert.equal(tier("pharmacy"), TIER.EXECUTE, "it writes its own verification, so it is not READ-only any more");
+  assert.deepEqual(write("pharmacy"), ["MedicationVerification"]);
+  assert.deepEqual(read("pharmacy"), ["MedicationOrder", "ServiceRequest", "AllergyIntolerance", "Observation", "Condition", "MedicationAdministration", "CriticalResultLoop", "MedicationVerification"]);
+  assert.ok(!write("pharmacy").includes("MedicationAdministration"), "a pharmacist can never claim a dose was given");
+  assert.ok(!write("pharmacy").includes("MedicationOrder"), "nor change the order they are checking");
+  assert.ok(!read("pharmacy").includes("ClinicalNote"), "and not the notes or the discharge summary");
   for (const r of ["hr", "viewer", "oncqis_protocol_author", "oncqis_clinical_reviewer", "oncqis_institutional_approver", "academic_cell"]) assert.equal(m[r], null, r + " has no clinical actor");
   // The mapping is derived, so it cannot drift from the queue's own non-negotiable.
   for (const r of ROLES) {
@@ -547,16 +565,27 @@ test("OPD roles at the door: doctor writes and signs, nurse records vitals and n
   const deskPatient = await h.fetchAs("fb:desk-1")("https://x/api/wardsynq/gimsr/record", { method: "POST", body: JSON.stringify({ entity: Patient({ id: "pat-21", mrn: "GH-21", name: "Desk-registered", dob: "1970-01-01" }) }) });
   assert.equal(deskPatient.status, 201, "reception can register a patient identity");
 
-  // Pharmacy: the orders, and only the orders. The chart it sees has no other keys.
+  /* Pharmacy: what a VERIFICATION needs, and nothing beyond it. Since ORDER_VERIFY (2026-09-07)
+   * that includes the observations and allergies a pharmacist checks a dose against - they could
+   * not see any of it before, which made pharmacy verification impossible to do honestly. It still
+   * stops well short of the chart: no Patient, no notes, no discharge summary. */
   const pharm = await client(h, "fb:pharm-1");
-  assert.deepEqual(pharm.descriptor.actor.readable, ["MedicationOrder", "ServiceRequest"]);
+  assert.deepEqual(pharm.descriptor.actor.readable,
+    ["MedicationOrder", "ServiceRequest", "AllergyIntolerance", "Observation", "Condition", "MedicationAdministration", "CriticalResultLoop", "MedicationVerification"]);
   const chart = await pharm.backend.chart("pat-20");
-  assert.deepEqual(Object.keys(chart).sort(), ["MedicationOrder", "ServiceRequest"]);
+  assert.ok(Object.keys(chart).includes("MedicationOrder"));
   assert.equal(chart.MedicationOrder.length, 1);
-  await assert.rejects(pharm.governed.get(pharm.actor, "Observation", "obs-20"), (e) => e.code === "READ_SCOPE_DENIED");
+  assert.ok(!Object.keys(chart).includes("Patient"), "the identity master is still not theirs to read");
+  assert.ok(!Object.keys(chart).includes("ClinicalNote"));
+  assert.equal((await pharm.governed.get(pharm.actor, "Observation", "obs-20")).id, "obs-20", "a lab result IS readable now: it is what they verify against");
+  await assert.rejects(pharm.governed.get(pharm.actor, "ClinicalNote", "note-20"), (e) => e.code === "READ_SCOPE_DENIED");
   assert.equal((await h.fetchAs("fb:pharm-1")("https://x/api/wardsynq/gimsr/record/Patient/pat-20")).status, 403);
   const feed = await pharm.backend.changes(0);
-  assert.deepEqual(feed.records.map((x) => x.resourceType), ["MedicationOrder"], "the feed withholds what the role may not read");
+  // The feed still withholds what the role may not read; the readable set is simply wider now.
+  const fed = [...new Set(feed.records.map((x) => x.resourceType))].sort();
+  assert.ok(fed.every((t) => pharm.descriptor.actor.readable.includes(t)), `feed leaked ${fed}`);
+  assert.ok(fed.includes("MedicationOrder"));
+  assert.ok(!fed.includes("Patient") && !fed.includes("ClinicalNote"), "and never the identity master or the notes");
 
   // HR: a hospital member with no business on the chart.
   await assert.rejects(client(h, "fb:hr-1"), (e) => e.code === "FORBIDDEN");
@@ -918,7 +947,10 @@ test("THE PROOF: nurse enters vitals -> record stores Observations -> doctor ope
   // 4. Tenant isolation and role scope hold on the read: another hospital's clinician gets nothing,
   //    a pharmacist may read orders but not vitals.
   assert.equal((await h.fetchAs("fb:dr-elsewhere")("https://x/api/wardsynq/gimsr/patient/opd-pat-gh-40233/Observation")).status, 403);
-  assert.equal((await h.fetchAs("fb:pharm-1")("https://x/api/wardsynq/gimsr/patient/opd-pat-gh-40233/Observation")).status, 403);
+  /* A pharmacist MAY read observations since ORDER_VERIFY (2026-09-07), and that is the point of it:
+   * the weight a weight-based dose is checked against, the creatinine, the drug level. They could
+   * read none of it before, which is what made pharmacy verification impossible to do honestly. */
+  assert.equal((await h.fetchAs("fb:pharm-1")("https://x/api/wardsynq/gimsr/patient/opd-pat-gh-40233/Observation")).status, 200);
   // 5. The read was audited as the doctor, PHI-free.
   const reads = h.repository.audit.filter((a) => a.action === "record.read" && a.actor === "fb:dr-menon");
   assert.ok(reads.length >= 1);
@@ -1022,7 +1054,10 @@ test("THE PROOF: registration on device A creates the WardSynQ Patient master; d
   assert.equal(pharmAz.ok, false); assert.equal(pharmAz.reason, "forbidden", "she IS a member, her ROLE lacks queue.add — the pre-existing OPD-level guard already refuses this");
   const asPharm = new Request("https://x/api/queue/patient", { method: "POST", headers: { "X-Test-User": "fb:pharm-1" } });
   const refused = await registerPatientRecord(asPharm, ENV, { migration: { mode: "shadow", tenantId: "gimsr" }, registration: { mrn: "SMD-GIMSR-00100", mrSource: "stewardmd", patient: { name: "X", birthDate: "1970-01-01", gender: "male" } }, actorDeps, recordDeps });
-  assert.equal(refused.ok, false); assert.equal(refused.status, 403); assert.equal(refused.error, "permission");
+  /* Refused on SCOPE ("governance") rather than on TIER ("permission"), since ORDER_VERIFY made
+   * pharmacy an EXECUTE actor that writes exactly one type. The layer moved; the refusal did not,
+   * and no Patient was created. Both doors still say no independently, which is what this asserts. */
+  assert.equal(refused.ok, false); assert.equal(refused.status, 403); assert.equal(refused.error, "governance");
   assert.equal(await h.repository.latest("gimsr", "Patient", "opd-pat-smd-gimsr-00100"), null);
 
   // Every registration write is audited as the real human actor, PHI-free.
@@ -1479,7 +1514,12 @@ test("THE PROOF, investigation order: the doctor orders on device A; device B re
   // Pharmacy reads orders (that is its whole clinical read scope) and cannot write one.
   const pharm = await client(h, "fb:pharm-1");
   assert.equal((await pharm.governed.get(pharm.actor, "ServiceRequest", "opd-order-ep-80-lab1118")).code, "LAB1118");
-  await assert.rejects(() => pharm.session("opd-pat-gh-40233").put(ServiceRequest({ id: "opd-order-ep-80-x", patientId: "opd-pat-gh-40233", code: "X", requesterId: "fb:pharm-1", status: "active" })), GovernanceError);
+  /* Refused, and the class is deliberately not asserted. Since ORDER_VERIFY made pharmacy an EXECUTE
+   * actor (it writes its own verification), the refusal now comes from the server's WRITE SCOPE
+   * check rather than the client's tier check, so it arrives as RemoteRefusedError instead of
+   * GovernanceError. The refusal is the property; which layer said no is not. */
+  await assert.rejects(() => pharm.session("opd-pat-gh-40233").put(ServiceRequest({ id: "opd-order-ep-80-x", patientId: "opd-pat-gh-40233", code: "X", requesterId: "fb:pharm-1", status: "active" })));
+  assert.equal(await h.repository.latest("gimsr", "ServiceRequest", "opd-order-ep-80-x"), null, "and nothing was written");
 
   // A nurse orders nothing: ServiceRequest is an instruction type and is not in her write scope.
   const asNurse = new Request("https://x/api/queue/timeline", { method: "POST", headers: { "X-Test-User": "fb:sister-anu" } });
@@ -1689,7 +1729,9 @@ test("THE PROOF, prescription: the doctor prescribes on device A; device B reads
   // Pharmacy reads medication orders (its whole clinical read scope) and can write none.
   const pharm = await client(h, "fb:pharm-1");
   assert.equal((await pharm.governed.get(pharm.actor, "MedicationOrder", "opd-rx-ep-90-drg5521")).drug, "Tab Paracetamol 650");
-  await assert.rejects(() => pharm.session("opd-pat-gh-40233").put(MedicationOrder({ id: "opd-rx-ep-90-x", patientId: "opd-pat-gh-40233", drug: "X", prescriberId: "fb:pharm-1", status: "active" })), GovernanceError);
+  // Refused; see the note on the ServiceRequest case above for why the class is not asserted.
+  await assert.rejects(() => pharm.session("opd-pat-gh-40233").put(MedicationOrder({ id: "opd-rx-ep-90-x", patientId: "opd-pat-gh-40233", drug: "X", prescriberId: "fb:pharm-1", status: "active" })));
+  assert.equal(await h.repository.latest("gimsr", "MedicationOrder", "opd-rx-ep-90-x"), null, "a pharmacist still cannot prescribe");
 
   // A nurse prescribes nothing: MedicationOrder is an instruction type outside her write scope.
   const asNurse = new Request("https://x/api/queue/timeline", { method: "POST", headers: { "X-Test-User": "fb:sister-anu" } });
@@ -2144,18 +2186,22 @@ test("a closed encounter is never reopened or overwritten — not even to the OT
   assert.equal((await h.repository.history("gimsr", "Encounter", "opd-enc-ep-200")).length, 2, "open, then close — the refused attempts wrote nothing");
 });
 
-test("an unauthorized role cannot open or close an encounter: pharmacy holds READ tier only (no EMR capability, no QUEUE_ADD), refused before it ever reaches the record, nothing written", async () => {
+test("an unauthorized role cannot open or close an encounter: pharmacy has no Encounter write scope, refused at the record, nothing written", async () => {
   const h = opdHospital({ "fb:pharm-1": { role: "pharmacy" } }, { settings: { wardsynq: { migrations: { encounter: "shadow" } } } });
   const actorDeps = { db: h.db, identifyFn: h.deps.identifyFn, claimsFn: h.deps.claimsFn, staffSession: null, orgForTenant: h.deps.orgForTenant, authorizeOrg: h.deps.authorizeOrg };
   const recordDeps = { repository: h.repository, pseudonym: async () => null };
   const req = new Request("https://x/api/queue/ticket", { method: "POST", headers: { "X-Test-User": "fb:pharm-1" } });
   const out = await recordEncounterSync(req, ENV, { migration: { mode: "shadow", tenantId: "gimsr" }, ticket: encTicket(), session: { doctorUid: "" }, actorDeps, recordDeps });
-  // Pharmacy's grant is READ tier (ORDER_READ only) with no QUEUE_ADD to raise it, so
-  // resolveClinicalActor refuses the "record:write" purpose itself ("a READ actor writes nothing at
-  // all", wardsynq-actors.js) — before this file's own Encounter-scope check ever runs. A role that
-  // holds SOME write capability but the wrong SCOPE (reception, tested above and in every sibling
-  // migration) is refused one layer deeper, as "governance"; pharmacy never gets that far.
-  assert.equal(out.ok, false); assert.equal(out.status, 403); assert.equal(out.error, "permission");
+  /* Refused on SCOPE, one layer deeper than it used to be. Until ORDER_VERIFY (2026-09-07) pharmacy
+   * was a READ-tier actor and resolveClinicalActor refused the "record:write" purpose itself ("a
+   * READ actor writes nothing at all"), so this came back as "permission". Pharmacy now writes
+   * exactly one type - its own verification - which makes it EXECUTE, so it reaches the record and
+   * is refused there for having no Encounter write scope, as "governance".
+   *
+   * The layer moved; the answer did not. That is the point of enumerating the write scope rather
+   * than relying on the tier: an EXECUTE actor with a one-item scope can write that one item and
+   * nothing else, and this test is what holds that true. */
+  assert.equal(out.ok, false); assert.equal(out.status, 403); assert.equal(out.error, "governance");
   assert.equal(await h.repository.latest("gimsr", "Encounter", "opd-enc-ep-200"), null);
 });
 

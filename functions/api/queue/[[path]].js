@@ -58,6 +58,7 @@ import { marSchedule } from "../../_wardsynq/mar-schedule.js";
 import { openCriticalLoops, acknowledgeCritical, listCriticalLoops } from "../../_wardsynq/critical-results.js";
 import { recordFluid, fluidBalance } from "../../_wardsynq/fluid-balance.js";
 import { giveHandover, receiveHandover, listHandovers } from "../../_wardsynq/handover.js";
+import { verifyOrder, verificationQueue } from "../../_wardsynq/pharmacy-verify.js";
 import { recordAllergiesFromAssessment } from "../../_wardsynq/migrate-allergy.js";
 
 // The Encounter migration's one shared call site. Every hook below (ticket add, import, a terminal
@@ -428,6 +429,10 @@ export async function onRequest(context) {
         // Handing a patient over is the clinical account of a shift: the same authority as recording
         // a vital, because it is the nurse's own record of their own patients.
         handover: CAPS.EMR_VITALS, "receive-handover": CAPS.EMR_VITALS, handovers: CAPS.EMR_VIEW,
+        /* Pharmacy verification is its OWN authority now, not borrowed from the nurse's. The queue
+         * is readable by the same capability, because a pharmacist with no way to SEE the orders
+         * cannot verify them - which is what made this impossible to do honestly before. */
+        "verify-order": CAPS.ORDER_VERIFY, "verification-queue": CAPS.ORDER_VERIFY,
         // Closing a stay is the administrative act QUEUE_ADD already covers for opening one.
         // The summary is a clinical document: drafting and signing it are EMR_TREAT.
         discharge: CAPS.QUEUE_ADD, "discharge-summary": CAPS.EMR_TREAT, "sign-discharge-summary": CAPS.EMR_TREAT,
@@ -451,7 +456,13 @@ export async function onRequest(context) {
         : (sub === "discharge-summary" && method === "GET") ? CAPS.EMR_VIEW
         : capFor[sub];
       if (!need) return json({ ok: false, error: "not_found" }, 404, request);
-      const wAz = await ORG.authorizeOrg(env, actor, wOrgId, need);
+      let wAz = await ORG.authorizeOrg(env, actor, wOrgId, need);
+      /* The open critical results are readable by a VERIFIER as well as by the ward. A pharmacist
+       * checking a dose against the patient's potassium needs to see that potassium, and gating this
+       * list on emr.view alone was the reason they could not - the gap this build closes. It is an
+       * alternative authority, never a widening: order.verify grants the narrow record scope in
+       * actor.js and nothing more, so this cannot open any other route. */
+      if (!wAz.ok && sub === "criticals") wAz = await ORG.authorizeOrg(env, actor, wOrgId, CAPS.ORDER_VERIFY);
       if (!wAz.ok) return json(azRefusal(wAz), wAz.reason === "org_not_found" ? 404 : 403, request);
 
       const wOrg = await ORG.getOrg(env, wOrgId);
@@ -478,6 +489,14 @@ export async function onRequest(context) {
       }
       if (sub === "round" && method === "GET") {
         const r = await medicationRound(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "", dueAt: url.searchParams.get("dueAt") || "" });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "verify-order" && method === "POST") {
+        const r = await verifyOrder(request, env, { ...deps, orderId: body.orderId, outcome: body.outcome, reason: body.reason, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "verification-queue" && method === "GET") {
+        const r = await verificationQueue(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "" });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "handover" && method === "POST") {
