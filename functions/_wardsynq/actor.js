@@ -244,7 +244,20 @@ function grantForCaps(caps) {
      * which is the same mistake ORDER_VERIFY above exists to avoid.
      *
      * BILLING_VIEW reads and writes nothing: the cashier sees the claims, and cannot code one. */
-    const canRead = has(CAPS.BILLING_CHARGE) ? ["Condition", "Claim", "PreAuthorisation"] : ["Claim", "PreAuthorisation"];
+    /* CHARGE CAPTURE (2026-09-08) adds four types to the READ list and NOTHING to the write list,
+     * which is the whole point. Billing what happened requires knowing what happened: the doses
+     * given, the reports released, the samples taken and the medicine issued. Billing from ORDERS
+     * instead would need none of this and would bill for doses the patient refused and tests nobody
+     * performed - the patient receives that bill and has to argue with it.
+     *
+     * It is a real widening and is named as one: MedicationAdministration tells a coder every drug
+     * a patient received. It is what charge capture IS, it is what a coder in any hospital sees, and
+     * the containment is that the write scope below did not move. A site wanting tighter separation
+     * should hold BILLING_CHARGE for coders and leave the cashier on BILLING_VIEW. */
+    const CAPTURE_TYPES = ["MedicationAdministration", "DiagnosticReport", "SpecimenCollection", "MedicationDispense"];
+    const canRead = has(CAPS.BILLING_CHARGE)
+      ? ["Condition", "Claim", "PreAuthorisation", ...CAPTURE_TYPES]
+      : ["Claim", "PreAuthorisation"];
     const canWrite = has(CAPS.BILLING_CHARGE) ? ["Claim", "PreAuthorisation"] : [];
     if (!grant) grant = { tier: canWrite.length ? TIER.EXECUTE : TIER.READ, read: canRead, write: canWrite, basis: has(CAPS.BILLING_CHARGE) ? CAPS.BILLING_CHARGE : CAPS.BILLING_VIEW };
     else grant = {
