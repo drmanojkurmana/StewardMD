@@ -263,3 +263,40 @@ test("HTML is escaped: a hostile ward or drug name cannot inject markup", () => 
   assert.ok(!/value="[^"]*"[^>]*<script/.test(html), "the quoted attribute is never broken out of");
   assert.match(html, /p&amp;p/);
 });
+
+test("THE OUTBOX NEVER READS 'SENT' AS 'ARRIVED', and an unsent prescription is named", () => {
+  const W = load();
+  const withTx = Object.assign({}, chart, {
+    due: [{ orderId: "wsq-rx-1", drug: "Amoxicillin", dose: { value: 500, unit: "mg" }, route: "oral", dueAt: "2026-09-07T09:00:00.000Z", status: null }],
+    prn: [{ orderId: "wsq-rx-2", drug: "Paracetamol", dose: { value: 1, unit: "g" }, route: "oral" }],
+    outbox: [
+      { transmissionId: "wsq-tx-1", orderId: "wsq-rx-1", orderVersion: 2, channel: "pharmacy", destination: "City Pharmacy", state: "sent", outstanding: true, queuedAt: "2026-09-07T08:00:00.000Z" },
+    ],
+  });
+  const html = W._render(withTx);
+  /* The whole point of the card: "sent" is the transport saying it left, not the pharmacy saying it
+   * has it. A screen that showed those as the same thing would tell a nurse a prescription is at the
+   * counter when it is sitting in an outbox. */
+  assert.match(html, /sent, not confirmed/);
+  assert.ok(!/confirmed received/.test(html), "nothing has been confirmed here");
+  assert.match(html, /order v2/, "and the version that left is on the row");
+  assert.match(html, /data-w-act="txr:wsq-tx-1"/, "an outstanding one can be dealt with");
+
+  // The medicine with nothing in the outbox is NAMED. An order nobody sent looks exactly like one
+  // that arrived, unless the screen says otherwise.
+  assert.match(html, /Not sent anywhere/);
+  assert.match(html, /data-w-act="tx:wsq-rx-2"/);
+  assert.ok(!html.includes('data-w-act="tx:wsq-rx-1"'), "the one already in the outbox is not offered again");
+
+  // A failure carries its reason, and resolving it never restyles it as delivered.
+  const failed = W._render(Object.assign({}, withTx, {
+    outbox: [{ transmissionId: "wsq-tx-1", orderId: "wsq-rx-1", channel: "pharmacy", state: "failed", outstanding: false, failureReason: "Pharmacy endpoint refused the message.", resolvedAt: "2026-09-07T10:00:00.000Z", resolution: "Printed and handed over." }],
+  }));
+  assert.match(failed, /Pharmacy endpoint refused the message\./);
+  assert.match(failed, /not delivered/);
+  assert.match(failed, /Dealt with: Printed and handed over\./);
+  assert.ok(!/confirmed received/.test(failed), "a resolved failure is not a delivery");
+
+  // Nothing prescribed and nothing sent: the card stays off the chart rather than showing an empty box.
+  assert.ok(!W._render(chart).includes("Prescriptions sent"));
+});

@@ -2500,3 +2500,133 @@ test("fluid entries never pollute the vitals the eMAR reads", async () => {
   await step("verify"); await step("dispense"); await step("scan", { scan });
   assert.equal((await step("administer")).__status, 200, "the weight-based check still uses the recorded weight");
 });
+
+/* ---- sending the prescription, and knowing it arrived ------------------------------------------ */
+
+const outbox = (email, q) => as(email, `/ward/outbox?orgId=${ORG}${q || ""}`);
+
+test("QUEUED IS NOT SENT: a prescription is outstanding until the far end says it has it", async () => {
+  seedHospital();
+  const { adm, ord } = await admittedPatientOnDrug();
+
+  const q = await as(DOCTOR, "/ward/transmit", "POST", { orgId: ORG, orderId: ord.orderId, channel: "pharmacy", destination: "City Pharmacy" });
+  assert.equal(q.__status, 200, JSON.stringify(q));
+  assert.equal(q.state, "queued");
+  assert.equal(q.outstanding, true);
+  assert.match(q.note, /Nothing has been transmitted yet/);
+
+  /* THE ORDER IS UNTOUCHED. "We sent this" is a statement about a message, not about the treatment;
+   * an order quietly moved to completed on transmission would say the patient had their medicine. */
+  const order = await RECORD.latest(TENANT_ROW.id, "MedicationOrder", ord.orderId);
+  assert.equal(order.status, "active");
+  assert.equal(order.version, 1, "and no version was burned on it either");
+
+  // The outbox shows it, and counts it as still needing somebody.
+  const box = await outbox(NURSE, `&patientId=${adm.patientId}`);
+  assert.equal(box.__status, 200, JSON.stringify(box));
+  assert.equal(box.transmissions.length, 1);
+  assert.equal(box.outstanding, 1);
+  assert.equal(box.transmissions[0].orderVersion, 1, "and it names WHICH version was queued");
+
+  // `sent` is the transport reporting it left. It is still outstanding.
+  const sent = await as(NURSE, "/ward/transmit-outcome", "POST", { orgId: ORG, transmissionId: q.transmissionId, state: "sent" });
+  assert.equal(sent.__status, 200, JSON.stringify(sent));
+  assert.equal(sent.outstanding, true, "left the building is not arrived");
+  assert.equal((await outbox(NURSE, "&outstanding=1")).outstanding, 1);
+
+  // `acknowledged` is the far end saying it has it. Only now does it leave the list.
+  const ack = await as(NURSE, "/ward/transmit-outcome", "POST", { orgId: ORG, transmissionId: q.transmissionId, state: "acknowledged", reference: "RX-88213" });
+  assert.equal(ack.state, "acknowledged");
+  assert.equal(ack.reference, "RX-88213", "the far end's own id for it is kept");
+  assert.ok(ack.acknowledgedAt && ack.sentAt);
+  assert.equal((await outbox(NURSE, "&outstanding=1")).transmissions.length, 0);
+
+  /* ACKNOWLEDGED IS TERMINAL: nothing can un-say that the pharmacy has the prescription. */
+  const late = await as(NURSE, "/ward/transmit-outcome", "POST", { orgId: ORG, transmissionId: q.transmissionId, state: "failed", failureReason: "timeout" });
+  assert.equal(late.skipped, "already_acknowledged");
+  assert.equal(late.state, "acknowledged");
+  assert.equal(late.written, 0);
+});
+
+test("A FAILURE STAYS LOUD, and resolving it never claims a delivery that did not happen", async () => {
+  seedHospital();
+  const { ord } = await admittedPatientOnDrug();
+  const q = await as(DOCTOR, "/ward/transmit", "POST", { orgId: ORG, orderId: ord.orderId, channel: "pharmacy" });
+
+  // A failure with no reason cannot be acted on, and acting on it is the entire point.
+  const mute = await as(NURSE, "/ward/transmit-outcome", "POST", { orgId: ORG, transmissionId: q.transmissionId, state: "failed" });
+  assert.equal(mute.__status, 422);
+  assert.equal(mute.error, "reason_required");
+
+  const failed = await as(NURSE, "/ward/transmit-outcome", "POST", { orgId: ORG, transmissionId: q.transmissionId, state: "failed", failureReason: "Pharmacy endpoint refused the message." });
+  assert.equal(failed.state, "failed");
+  const box = await outbox(NURSE);
+  assert.equal(box.failed, 1, "an undelivered prescription is a patient told there is nothing for them");
+  assert.equal(box.transmissions[0].failureReason, "Pharmacy endpoint refused the message.");
+
+  // It cannot be cleared off the list silently: say what was done instead.
+  const silent = await as(NURSE, "/ward/transmit-resolve", "POST", { orgId: ORG, transmissionId: q.transmissionId });
+  assert.equal(silent.__status, 422);
+  assert.equal(silent.error, "resolution_required");
+
+  const done = await as(NURSE, "/ward/transmit-resolve", "POST", { orgId: ORG, transmissionId: q.transmissionId, resolution: "Printed and handed to the patient." });
+  assert.equal(done.__status, 200, JSON.stringify(done));
+  assert.equal(done.outstanding, false);
+  assert.equal(done.state, "failed", "it was never acknowledged, and the record does not say it was");
+  assert.equal(done.resolvedBy, idFor(NURSE));
+  assert.equal((await outbox(NURSE)).outstanding, 0);
+});
+
+test("a CHANGED prescription is a new transmission, and the old one still says what was sent", async () => {
+  seedHospital();
+  const { adm, ord } = await admittedPatientOnDrug();
+  const first = await as(DOCTOR, "/ward/transmit", "POST", { orgId: ORG, orderId: ord.orderId, channel: "pharmacy" });
+  await as(NURSE, "/ward/transmit-outcome", "POST", { orgId: ORG, transmissionId: first.transmissionId, state: "acknowledged" });
+
+  // The prescriber doubles the dose. The order moves to version 2.
+  const amended = await as(DOCTOR, "/ward/medication-order", "POST", {
+    orgId: ORG,
+    order: { patientId: adm.patientId, encounterId: adm.encounterId, drug: "Paracetamol 500mg", dose: { value: 1000, unit: "mg" }, route: "oral", frequency: "TID" },
+  });
+  assert.equal(amended.orderId, ord.orderId, "the same order, amended");
+
+  const second = await as(DOCTOR, "/ward/transmit", "POST", { orgId: ORG, orderId: ord.orderId, channel: "pharmacy" });
+  assert.notEqual(second.transmissionId, first.transmissionId, "a different dose is a different message entirely");
+  assert.equal(second.state, "queued");
+
+  /* WHAT WAS SENT IS STILL WHAT WAS SENT. The first transmission's payload is kept verbatim, so the
+   * record can answer "what did they get", not "what does the order say now". */
+  const old = await RECORD.latest(TENANT_ROW.id, "PrescriptionTransmission", first.transmissionId);
+  assert.equal(old.payload.prescription.dose.value, 500);
+  assert.equal(old.state, "acknowledged");
+  const fresh = await RECORD.latest(TENANT_ROW.id, "PrescriptionTransmission", second.transmissionId);
+  assert.equal(fresh.payload.prescription.dose.value, 1000);
+
+  // And the payload carries no clinical history: a dispenser needs to identify a person, not read a chart.
+  assert.deepEqual(Object.keys(fresh.payload).sort(), ["patient", "prescription"]);
+  assert.deepEqual(Object.keys(fresh.payload.patient).sort(), ["dob", "mrn", "name", "sex"]);
+
+  // Both are on the record, and the outbox counts only the one still needing somebody.
+  const box = await outbox(NURSE);
+  assert.equal(box.transmissions.length, 2);
+  assert.equal(box.outstanding, 1);
+});
+
+test("sending is prescribing's business, and nothing unsendable is sent", async () => {
+  seedHospital();
+  const { ord } = await admittedPatientOnDrug();
+
+  // A nurse may record what the transport reported; a nurse may not decide a prescription goes out.
+  const nurseSend = await as(NURSE, "/ward/transmit", "POST", { orgId: ORG, orderId: ord.orderId, channel: "pharmacy" });
+  assert.equal(nurseSend.__status, 403, "transmitting needs emr.treat, which a nurse does not hold");
+
+  // An order that does not exist is not quietly queued against a made-up id.
+  const ghost = await as(DOCTOR, "/ward/transmit", "POST", { orgId: ORG, orderId: "wsq-rx-nope", channel: "pharmacy" });
+  assert.equal(ghost.__status, 404);
+  assert.equal(ghost.error, "order_not_found");
+
+  // A channel WardSynQ has no meaning for is refused rather than defaulted into something plausible.
+  const bogus = await as(DOCTOR, "/ward/transmit", "POST", { orgId: ORG, orderId: ord.orderId, channel: "carrier-pigeon" });
+  assert.equal(bogus.__status, 400);
+  assert.equal(bogus.error, "unknown_channel");
+});
