@@ -76,7 +76,10 @@ const ORDER_TYPES = Object.freeze(["MedicationOrder", "ServiceRequest"]);
  * this write is. DECIDING what happens to each medicine is prescribing-adjacent and is gated
  * separately at emr.treat on the route, so this grant lets a nurse record the history and not
  * decide its fate. */
-const VITALS_TYPES = Object.freeze(["Observation", "ShiftHandover", "BreakGlassGrant", "MedicationReconciliation", "PatientConsent", "CarePlan", "RiskAssessment"]);
+/* SpecimenCollection joined on 2026-09-07: taking a sample is nursing work, the same authority as
+ * recording a vital. It records that a sample was TAKEN and never what it showed - the result is the
+ * laboratory's own authority, so this grants nothing towards one. */
+const VITALS_TYPES = Object.freeze(["Observation", "ShiftHandover", "BreakGlassGrant", "MedicationReconciliation", "PatientConsent", "CarePlan", "RiskAssessment", "SpecimenCollection"]);
 const PATIENT_TYPE = "Patient";
 // Added 2026-09-06 (the Encounter migration), alongside PATIENT_TYPE and for the identical reason:
 // checking a patient in for today's visit is the SAME administrative act QUEUE_ADD already covers
@@ -152,8 +155,11 @@ function grantForCaps(caps) {
      * it checks a weight-based dose. The store now takes a per-type category allow-list, and this
      * grant carries one: laboratory, and nothing else. The route stamping category "laboratory" is
      * still asserted by its own test; it is no longer the only thing standing there. */
-    const canRead = ["ServiceRequest", "Observation", "DiagnosticReport"];
-    const canWrite = ["Observation", "DiagnosticReport"];
+    /* SpecimenCollection is on both lists as of 2026-09-07: the laboratory is the half of the journey
+     * that RECEIVES the sample, and a lab that cannot record "we have it" leaves every tube reading
+     * as still in a nurse's pocket. It writes the specimen's arrival, never its collection. */
+    const canRead = ["ServiceRequest", "Observation", "DiagnosticReport", "SpecimenCollection"];
+    const canWrite = ["Observation", "DiagnosticReport", "SpecimenCollection"];
     const cats = { Observation: ["laboratory"] };
     if (!grant) grant = { tier: TIER.EXECUTE, read: canRead, write: canWrite, writeCategories: cats, basis: CAPS.LAB_RESULT };
     else grant = {
