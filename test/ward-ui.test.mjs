@@ -61,31 +61,85 @@ test("a governance refusal keeps its reason codes too, and an ordinary error doe
   assert.match(W._problem(null).err, /No response/);
 });
 
-test("IT NEVER INVENTS A DUE TIME: the round time is empty until chosen, and the screen says it is the nurse's choice", () => {
-  const html = load()._render(chart);
-  assert.match(html, /id="wDueAt" type="datetime-local" value=""/, "no defaulted round time");
-  assert.match(html, /This round time is the one you chose/);
-  assert.match(html, /does not yet compute a schedule/);
+test("the due time is the server's, computed from the frequency - the screen never derives one", () => {
+  // This replaces the old rule 3. The nurse used to have to pick a round time and the screen had to
+  // say the system was asserting nothing, because nothing computed a schedule. Now mar-schedule.js
+  // does, and the two datetime fields are a VIEW WINDOW, not a claim about when a dose is due.
+  const html = load()._render(Object.assign({}, chart, {
+    from: "2026-09-09T00:00", to: "2026-09-10T00:00",
+    due: [{ orderId: "rx-1", drug: "Paracetamol", dose: { value: 500, unit: "mg" }, frequency: "TDS", dueAt: "2026-09-09T02:30:00.000Z", status: null }],
+  }));
+  assert.match(html, /id="wFrom"/);
+  assert.match(html, /id="wTo"/);
+  assert.ok(!/wDueAt/.test(html), "the per-dose time picker is gone");
+  assert.ok(!/round time is the one you chose/.test(html), "and so is the disclaimer it needed");
+
+  // The dose carries its own computed time, and the action addresses it BY INDEX so a click acts on
+  // the row the nurse is looking at rather than a time recomputed in the browser.
+  assert.match(html, /data-w-act="mar:verify\|0"/);
+  const code = SRC.replace(/\/\*[\s\S]*?\*\//g, " ").replace(/^\s*\/\/.*$/gm, " ");
+  assert.match(code, /dueAt: d\.dueAt/, "the server's own dueAt is sent back verbatim");
+  assert.ok(!/new Date\(st\.dueAt\)/.test(code), "the browser never derives a dose time");
+});
+
+test("an overdue dose is marked, and one that was dealt with is not chased", () => {
+  const html = load()._render(Object.assign({}, chart, {
+    from: "2026-09-09T00:00", to: "2026-09-10T00:00",
+    due: [
+      { orderId: "rx-1", drug: "Paracetamol", dueAt: "2026-09-09T02:30:00.000Z", status: null, overdue: true },
+      { orderId: "rx-2", drug: "Amoxicillin", dueAt: "2026-09-09T08:30:00.000Z", status: "administered", administeredAt: "2026-09-09T08:35:00.000Z", overdue: false },
+    ],
+  }));
+  assert.match(html, /<li class="overdue">/);
+  assert.match(html, /<span class="w-st overdue">overdue<\/span>/);
+  assert.equal((html.match(/>overdue</g) || []).length, 1, "only the one that is actually overdue");
+});
+
+test("PRN is shown APART from the round, and an unreadable frequency is surfaced loudly", () => {
+  const html = load()._render(Object.assign({}, chart, {
+    from: "2026-09-09T00:00", to: "2026-09-10T00:00", due: [],
+    prn: [{ orderId: "rx-3", drug: "Morphine", dose: { value: 5, unit: "mg" }, route: "iv" }],
+    unscheduled: [{ orderId: "rx-4", drug: "Enoxaparin", frequency: "alternate days after dialysis", reason: "frequency_not_understood" }],
+  }));
+  // As-needed is visible to the ward but never among the doses that are due.
+  assert.match(html, /As needed \(PRN\)/);
+  assert.match(html, /Morphine/);
+  assert.ok(!/data-w-act="mar:[a-z]+\|/.test(html), "a PRN drug gets no round action");
+  assert.match(html, /Given on the patient/);
+  // An order the ward cannot see on the round is a dose nobody knows is missing.
+  assert.match(html, /Not on the round/);
+  assert.match(html, /Enoxaparin/);
+  assert.match(html, /alternate days after dialysis/);
+  assert.match(html, /w-sub warn/);
+});
+
+test("a truncated round says so rather than looking complete", () => {
+  const html = load()._render(Object.assign({}, chart, { truncated: true, due: [] }));
+  assert.match(html, /More doses fall in this window than can be listed/);
 });
 
 test("the MAR offers only the transitions the state machine accepts, and nothing after a dose is given", () => {
   const W = load();
+  // The eMAR's states are LOWER CASE (wardsynq-meds.js STATES). This map was written in capitals
+  // first, so every lookup missed and the round rendered no buttons at all once a dose had a status.
   assert.deepEqual(W._nextFor(null), ["verify"], "an unstarted dose can only be verified");
-  assert.deepEqual(W._nextFor("ADMINISTERED"), [], "a given dose has nowhere left to go");
-  assert.deepEqual(W._nextFor("REFUSED"), []);
-  assert.ok(W._nextFor("DISPENSED").includes("scan"));
-  assert.ok(!W._nextFor("DISPENSED").includes("administer"), "administering skips the scan; the five rights are checked on a scan");
+  assert.deepEqual(W._nextFor("administered"), [], "a given dose has nowhere left to go");
+  assert.deepEqual(W._nextFor("refused"), []);
+  assert.ok(W._nextFor("dispensed").includes("scan"));
+  assert.ok(!W._nextFor("dispensed").includes("administer"), "administering skips the scan; the five rights are checked on a scan");
+  assert.deepEqual(W._nextFor("DISPENSED"), W._nextFor("dispensed"), "case never empties the round");
 
   const html = W._render(Object.assign({}, chart, {
     dueAt: "2026-09-07T09:00",
     due: [
-      { orderId: "rx-1", drug: "Paracetamol", dose: { value: 500, unit: "mg" }, route: "oral", frequency: "TDS", status: "DISPENSED", administrationId: "mar-1" },
-      { orderId: "rx-2", drug: "Amoxicillin", dose: { value: 250, unit: "mg" }, status: "ADMINISTERED", administeredAt: "2026-09-07T09:05:00.000Z" },
+      { orderId: "rx-1", drug: "Paracetamol", dose: { value: 500, unit: "mg" }, route: "oral", frequency: "TDS", status: "dispensed", administrationId: "mar-1" },
+      { orderId: "rx-2", drug: "Amoxicillin", dose: { value: 250, unit: "mg" }, status: "administered", administeredAt: "2026-09-07T09:05:00.000Z" },
     ],
   }));
-  assert.match(html, /data-w-act="mar:scan\|rx-1"/);
-  assert.ok(!html.includes('data-w-act="mar:administer|rx-1"'), "no administer button before the scan");
-  assert.ok(!html.includes("|rx-2"), "a given dose offers no action at all");
+  // Doses are addressed by their index in the loaded round: rx-1 is 0, rx-2 is 1.
+  assert.match(html, /data-w-act="mar:scan\|0"/);
+  assert.ok(!html.includes('data-w-act="mar:administer|0"'), "no administer button before the scan");
+  assert.ok(!html.includes('|1"'), "a given dose offers no action at all");
   assert.match(html, /No further action\./);
   assert.match(html, /500 mg/);
 });

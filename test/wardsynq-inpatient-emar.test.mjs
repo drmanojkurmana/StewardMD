@@ -587,3 +587,89 @@ test("the discharge summary now carries the problem list instead of an empty ass
   // Still assembled, still not invented: a patient with no problems says so.
   assert.equal(draft.sections.provenance.includes("Nothing here is generated or inferred"), true);
 });
+
+/* ---- MAR scheduling ----------------------------------------------------------------------------
+ *
+ * Until this existed nothing computed what was due, so the ward screen had to ask the nurse to pick
+ * a round time and say out loud that the system was not asserting anything.
+ */
+
+test("the round is computed from the frequency the doctor already wrote, and a given dose shows as given", async () => {
+  seedHospital();
+  const { adm, patient, scan } = await admittedPatientOnDrug();   // TID, ordered 2026-09-07
+
+  const sched = await as(NURSE, `/ward/schedule?orgId=${ORG}&patientId=${adm.patientId}&from=2026-09-09T18:30:00.000Z&to=2026-09-10T18:30:00.000Z`);
+  assert.equal(sched.__status, 200, JSON.stringify(sched));
+  // TID on the default Indian ward round: 08:00, 14:00, 22:00 IST.
+  assert.deepEqual(sched.due.map((d) => d.dueAt),
+    ["2026-09-10T02:30:00.000Z", "2026-09-10T08:30:00.000Z", "2026-09-10T16:30:00.000Z"]);
+  assert.equal(sched.due[0].drug, "Paracetamol 500mg");
+  assert.deepEqual(sched.due.map((d) => d.status), [null, null, null], "nothing is started, and nothing pretends to be");
+  assert.deepEqual(sched.prn, []);
+  assert.deepEqual(sched.unscheduled, []);
+
+  // NOTHING WAS WRITTEN. A schedule is derived; the administration record still only exists once a
+  // nurse acts. Pre-created rows would put doses on the chart that nobody gave.
+  assert.equal((await RECORD.byPatient(TENANT_ROW.id, "MedicationAdministration", adm.patientId)).length, 0);
+
+  // Give the first one through the real eMAR, then the schedule reports it as given.
+  const dueAt = sched.due[0].dueAt;
+  const step = (action, extra) => as(NURSE, "/ward/mar", "POST", { orgId: ORG, action, orderId: sched.due[0].orderId, dueAt, patient, ...(extra || {}) });
+  await step("verify"); await step("dispense"); await step("scan", { scan });
+  const given = await step("administer");
+  assert.equal(given.__status, 200, JSON.stringify(given));
+
+  const after = await as(NURSE, `/ward/schedule?orgId=${ORG}&patientId=${adm.patientId}&from=2026-09-09T18:30:00.000Z&to=2026-09-10T18:30:00.000Z`);
+  assert.equal(after.due[0].status, "administered");
+  assert.equal(after.due[0].administrationId, given.administrationId, "the slot and the record are the same dose");
+  assert.equal(after.due[0].overdue, false, "a given dose is never chased");
+  assert.equal(after.due[1].status, null);
+});
+
+test("a PRN drug never appears on the round, and an unreadable frequency is reported rather than dropped", async () => {
+  seedHospital();
+  const { adm } = await admittedPatientOnDrug();
+  const order = (drug, frequency) => as(DOCTOR, "/ward/medication-order", "POST", {
+    orgId: ORG, order: { patientId: adm.patientId, encounterId: adm.encounterId, drug, dose: { value: 5, unit: "mg" }, route: "oral", frequency },
+  });
+  await order("Morphine", "PRN");
+  await order("Enoxaparin", "alternate days after dialysis");
+  await order("Digoxin", "");
+
+  const s = await as(NURSE, `/ward/schedule?orgId=${ORG}&patientId=${adm.patientId}&from=2026-09-09T18:30:00.000Z&to=2026-09-10T18:30:00.000Z`);
+  assert.equal(s.__status, 200);
+  assert.ok(!s.due.some((d) => d.drug === "Morphine"), "an as-needed drug is not due at a time");
+  assert.deepEqual(s.prn.map((p) => p.drug), ["Morphine"], "but the ward can still see it and give one deliberately");
+  assert.deepEqual(s.unscheduled.map((u) => [u.drug, u.reason]).sort(),
+    [["Digoxin", "no_frequency"], ["Enoxaparin", "frequency_not_understood"]],
+    "named, because a ward that cannot see the order has no way to know a dose is missing");
+});
+
+test("a finished course stops appearing, and the window is bounded", async () => {
+  seedHospital();
+  const { adm } = await admittedPatientOnDrug();
+  await as(DOCTOR, "/ward/medication-order", "POST", {
+    orgId: ORG,
+    order: { patientId: adm.patientId, encounterId: adm.encounterId, drug: "Ceftriaxone", dose: { value: 1, unit: "g" }, route: "iv", frequency: "OD", stopAt: "2026-09-08T00:00:00.000Z" },
+  });
+  const s = await as(NURSE, `/ward/schedule?orgId=${ORG}&patientId=${adm.patientId}&from=2026-09-09T18:30:00.000Z&to=2026-09-10T18:30:00.000Z`);
+  assert.ok(!s.due.some((d) => d.drug === "Ceftriaxone"), "a course that ended is not still being given");
+
+  assert.equal((await as(NURSE, `/ward/schedule?orgId=${ORG}&patientId=${adm.patientId}`)).__status, 422, "a schedule needs a window");
+  const wide = await as(NURSE, `/ward/schedule?orgId=${ORG}&patientId=${adm.patientId}&from=2026-01-01T00:00:00.000Z&to=2026-12-31T00:00:00.000Z`);
+  assert.equal(wide.__status, 422);
+  assert.equal(wide.error, "window_too_wide");
+});
+
+test("reading the round is a view, and it grants nothing: it cannot move a dose", async () => {
+  seedHospital();
+  const { adm } = await admittedPatientOnDrug();
+  const q = `?orgId=${ORG}&patientId=${adm.patientId}&from=2026-09-09T18:30:00.000Z&to=2026-09-10T18:30:00.000Z`;
+  // The doctor and the pharmacist can both READ what is due.
+  assert.equal((await as(DOCTOR, "/ward/schedule" + q)).__status, 200);
+  assert.equal((await as(PHARM, "/ward/schedule" + q)).__status, 200);
+  // And the pharmacist still cannot administer: the view capability is not an administration one.
+  const s = await as(NURSE, "/ward/schedule" + q);
+  const bad = await as(PHARM, "/ward/mar", "POST", { orgId: ORG, action: "verify", orderId: s.due[0].orderId, dueAt: s.due[0].dueAt, patient: { id: adm.patientId } });
+  assert.equal(bad.__status, 403);
+});

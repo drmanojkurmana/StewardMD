@@ -33,8 +33,9 @@
   var st = {
     orgId: "", ward: "", patients: [], view: "list",
     sel: null,                 // the selected {encounterId, patientId, ward, bed, admittedAt}
-    problems: [], due: [], dueAt: "",
-    scan: { patient: "", drug: "" },
+    problems: [],
+    due: [], prn: [], unscheduled: [], truncated: false,
+    from: "", to: "",          // the window being viewed, NOT a claim about when a dose is due
     busy: false, err: "", note: "", refusal: null, loaded: false
   };
 
@@ -93,16 +94,22 @@
   /* The eMAR states, and the actions the machine will accept out of each. This mirrors the server's
    * transition table so the screen does not offer a button that is certain to be refused - it is a
    * DISPLAY convenience only. The machine remains the authority: an action shown here can still be
-   * refused, and an action hidden here is not thereby permitted. */
+   * refused, and an action hidden here is not thereby permitted.
+   *
+   * THE KEYS ARE THE STATE MACHINE'S OWN SPELLING, IN LOWER CASE. This map was written in capitals
+   * first, which meant every lookup missed and the round rendered no action buttons at all once a
+   * dose had any status - the screen would have looked like a ward where nothing could be given.
+   * The status is lowercased on the way in so a server that ever changes case cannot silently
+   * empty the round again. */
   var NEXT = {
-    "": ["verify"], "null": ["verify"],
-    ORDERED: ["verify", "hold", "refuse", "cancel"],
-    VERIFIED: ["dispense", "hold", "refuse", "cancel"],
-    DISPENSED: ["scan", "hold", "refuse", "cancel"],
-    SCANNED: ["administer", "hold", "refuse"],
-    ADMINISTERED: [], HELD: ["dispense", "refuse", "cancel"], REFUSED: [], CANCELLED: []
+    "": ["verify"],
+    ordered: ["verify", "hold", "refuse", "cancel"],
+    verified: ["dispense", "hold", "refuse", "cancel"],
+    dispensed: ["scan", "hold", "refuse", "cancel"],
+    scanned: ["administer", "hold", "refuse"],
+    administered: [], held: ["dispense", "refuse", "cancel"], refused: [], cancelled: []
   };
-  function nextFor(status) { return NEXT[status == null ? "" : String(status)] || []; }
+  function nextFor(status) { return NEXT[status == null ? "" : String(status).toLowerCase()] || []; }
 
   function banner(state) {
     if (state.refusal) {
@@ -164,24 +171,43 @@
   }
 
   function marCard(state) {
-    var rows = (state.due || []).map(function (d) {
+    var rows = (state.due || []).map(function (d, i) {
       var acts = nextFor(d.status).map(function (a) {
-        return '<button class="w-btn tiny' + (a === "administer" ? " go" : (a === "refuse" || a === "cancel" ? " warn" : "")) + '" data-w-act="mar:' + a + "|" + esc(d.orderId) + '">' + esc(a) + "</button>";
+        // The dose is addressed by its INDEX in the loaded round, so the exact dueAt the server
+        // computed is the one sent back. Re-deriving a time in the browser is how a click could
+        // land on a different dose than the row the nurse is looking at.
+        return '<button class="w-btn tiny' + (a === "administer" ? " go" : (a === "refuse" || a === "cancel" ? " warn" : "")) + '" data-w-act="mar:' + a + "|" + i + '">' + esc(a) + "</button>";
       }).join("");
-      return '<li><div class="w-dose-h"><b>' + esc(d.drug) + "</b> <span>" + dose(d.dose) + (d.route ? " &middot; " + esc(d.route) : "") + (d.frequency ? " &middot; " + esc(d.frequency) : "") + "</span></div>" +
-        '<div class="w-dose-s"><span class="w-st ' + esc(String(d.status || "notstarted").toLowerCase()) + '">' + esc(d.status || "not started") + "</span>" +
+      return '<li' + (d.overdue ? ' class="overdue"' : "") + '><div class="w-dose-h"><b>' + esc(d.drug) + "</b> <span>" + dose(d.dose) + (d.route ? " &middot; " + esc(d.route) : "") + (d.frequency ? " &middot; " + esc(d.frequency) : "") + "</span></div>" +
+        '<div class="w-dose-s"><span class="w-due">' + ms("schedule") + when(d.dueAt) + "</span>" +
+        (d.overdue ? '<span class="w-st overdue">overdue</span>' : "") +
+        '<span class="w-st ' + esc(String(d.status || "notstarted").toLowerCase()) + '">' + esc(d.status || "not started") + "</span>" +
         (d.administeredAt ? "<small>given " + when(d.administeredAt) + "</small>" : "") + "</div>" +
         '<div class="w-dose-a">' + (acts || '<small class="w-empty">No further action.</small>') + "</div></li>";
     }).join("");
-    return '<div class="w-card"><div class="w-card-h">' + ms("pill") + "<h3>Medication round</h3></div>" +
-      '<div class="w-filter"><input id="wDueAt" type="datetime-local" value="' + esc(state.dueAt) + '">' +
-      '<button class="w-btn ghost" data-w-act="round">Load round</button></div>' +
-      // Said out loud on the screen, because it is a real limitation and a nurse must not read this
-      // list as "the system says these are due now".
-      '<p class="w-hint">' + ms("info") + "This round time is the one you chose. WardSynQ does not yet compute a schedule, so nothing here is asserting a dose is due.</p>" +
+
+    // PRN is shown, and shown APART. An as-needed drug is given on the patient's need, not on the
+    // clock, so it must be visible to the ward without ever appearing among the doses that are due.
+    var prn = (state.prn || []).map(function (p) {
+      return "<li><b>" + esc(p.drug) + "</b> <span>" + dose(p.dose) + (p.route ? " &middot; " + esc(p.route) : "") + "</span></li>";
+    }).join("");
+    // The orders the schedule could not read. Surfaced loudly: an order the ward cannot see on the
+    // round is a dose nobody knows is missing.
+    var unsched = (state.unscheduled || []).map(function (u) {
+      return "<li><b>" + esc(u.drug) + "</b> <span>" + (u.frequency ? '"' + esc(u.frequency) + '"' : "no frequency written") + "</span></li>";
+    }).join("");
+
+    return '<div class="w-card"><div class="w-card-h">' + ms("pill") + "<h3>Medication round</h3>" +
+      '<button class="w-ic" data-w-act="round" title="Reload the round">' + ms("refresh") + "</button></div>" +
+      '<div class="w-filter"><input id="wFrom" type="datetime-local" value="' + esc(state.from) + '">' +
+      '<input id="wTo" type="datetime-local" value="' + esc(state.to) + '">' +
+      '<button class="w-btn ghost" data-w-act="round">Load</button></div>' +
       '<div class="w-scan"><label class="w-f"><span>Wristband scan</span><input id="wScanP" type="text" autocomplete="off" placeholder="Patient barcode"></label>' +
       '<label class="w-f"><span>Drug scan</span><input id="wScanD" type="text" autocomplete="off" placeholder="Drug barcode"></label></div>' +
-      (rows ? '<ul class="w-doses">' + rows + "</ul>" : '<p class="w-empty">No active orders for this patient at that time.</p>') +
+      (rows ? '<ul class="w-doses">' + rows + "</ul>" : '<p class="w-empty">No doses fall in this window.</p>') +
+      (prn ? '<div class="w-sub"><h4>' + ms("touch_app") + 'As needed (PRN)</h4><p class="w-hint">Given on the patient’s need. These are never due at a time.</p><ul class="w-mini">' + prn + "</ul></div>" : "") +
+      (unsched ? '<div class="w-sub warn"><h4>' + ms("help") + 'Not on the round</h4><p class="w-hint">The frequency on these orders could not be read, so no dose times were computed. They need a look.</p><ul class="w-mini">' + unsched + "</ul></div>" : "") +
+      (state.truncated ? '<p class="w-hint">' + ms("warning") + "More doses fall in this window than can be listed. Narrow it.</p>" : "") +
       "</div>";
   }
 
@@ -217,12 +243,32 @@
       .then(function (r) { if (settle(r)) st.problems = r.problems || []; paint(); })
       .catch(function () { st.busy = false; paint(); });
   }
+  /* A datetime-local value ("YYYY-MM-DDTHH:mm") for an instant, in the BROWSER's clock, which is
+   * what the input shows and what the nurse reads. The hospital's own round times come from the
+   * server; this is only the window being looked at. */
+  function localInput(ms) {
+    var d = new Date(ms - new Date(ms).getTimezoneOffset() * 60000);
+    return d.toISOString().slice(0, 16);
+  }
+  /* The default window is TODAY. It is a view range, not an assertion: the server decides what is
+   * due, from the frequency the prescriber wrote. Before scheduling existed this field had to be
+   * filled in by the nurse and the screen had to say the system was claiming nothing. */
+  function defaultWindow() {
+    var d = new Date(); d.setHours(0, 0, 0, 0);
+    st.from = localInput(d.getTime());
+    st.to = localInput(d.getTime() + 86400000);
+  }
   function loadRound() {
-    var s = st.sel; if (!s || !st.dueAt) { st.err = "Choose the round time first."; paint(); return Promise.resolve(); }
+    var s = st.sel; if (!s) return Promise.resolve();
+    if (!st.from || !st.to) defaultWindow();
     st.busy = true; paint();
-    var iso = new Date(st.dueAt).toISOString();
-    return apiGet("/ward/round?orgId=" + encodeURIComponent(st.orgId) + "&patientId=" + encodeURIComponent(s.patientId) + "&dueAt=" + encodeURIComponent(iso))
-      .then(function (r) { if (settle(r)) st.due = r.due || []; paint(); })
+    var q = "/ward/schedule?orgId=" + encodeURIComponent(st.orgId) + "&patientId=" + encodeURIComponent(s.patientId) +
+      "&from=" + encodeURIComponent(new Date(st.from).toISOString()) + "&to=" + encodeURIComponent(new Date(st.to).toISOString());
+    return apiGet(q)
+      .then(function (r) {
+        if (settle(r)) { st.due = r.due || []; st.prn = r.prn || []; st.unscheduled = r.unscheduled || []; st.truncated = !!r.truncated; }
+        paint();
+      })
       .catch(function () { st.busy = false; st.err = "Could not load the round."; paint(); });
   }
   function saveVitals() {
@@ -243,10 +289,13 @@
       })
       .catch(function () { st.busy = false; st.err = "Could not record vitals."; paint(); });
   }
-  function marAction(action, orderId) {
-    var s = st.sel; if (!s || !st.dueAt) { st.err = "Choose the round time first."; paint(); return; }
+  function marAction(action, idx) {
+    var s = st.sel, d = st.due[idx];
+    // The dose carries its own computed time. The browser never re-derives one: a click must act on
+    // the row it was on, not on a time recomputed a moment later.
+    if (!s || !d || !d.dueAt) { st.err = "That dose is no longer on the round. Reload it."; paint(); return; }
     var body = {
-      orgId: st.orgId, action: action, orderId: orderId, dueAt: new Date(st.dueAt).toISOString(),
+      orgId: st.orgId, action: action, orderId: d.orderId, dueAt: d.dueAt,
       patient: { id: s.patientId }
     };
     // The five rights are checked on the server against what was actually scanned. The UI passes the
@@ -275,12 +324,14 @@
       var p = null;
       for (var j = 0; j < st.patients.length; j++) { if (st.patients[j].encounterId === arg) { p = st.patients[j]; break; } }
       if (!p) return;
-      st.sel = p; st.view = "chart"; st.due = []; st.problems = []; st.err = ""; st.note = ""; st.refusal = null;
-      paint(); loadChart(); return;
+      st.sel = p; st.view = "chart"; st.due = []; st.prn = []; st.unscheduled = []; st.problems = [];
+      st.err = ""; st.note = ""; st.refusal = null;
+      defaultWindow();
+      paint(); loadChart(); loadRound(); return;
     }
     if (cmd === "vitals") { saveVitals(); return; }
-    if (cmd === "round") { st.dueAt = val("wDueAt"); loadRound(); return; }
-    if (cmd === "mar") { var k = arg.indexOf("|"); if (k > 0) marAction(arg.slice(0, k), arg.slice(k + 1)); return; }
+    if (cmd === "round") { st.from = val("wFrom") || st.from; st.to = val("wTo") || st.to; loadRound(); return; }
+    if (cmd === "mar") { var k = arg.indexOf("|"); if (k > 0) marAction(arg.slice(0, k), Number(arg.slice(k + 1))); return; }
   }
 
   function open(opts) {
