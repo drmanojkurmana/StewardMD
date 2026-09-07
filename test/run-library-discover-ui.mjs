@@ -60,7 +60,9 @@ try{
  await call('Emulation.setDeviceMetricsOverride',{width:390,height:844,deviceScaleFactor:1,mobile:true});await shot('discover-dark');
  const diseaseName=await ev(`document.querySelector('#kblibGrid .kblib-name').textContent`);
  const returnScroll=await ev(`document.querySelector('#sbrefBody').scrollTop=500;document.querySelector('#sbrefBody').scrollTop`);
- await ev(`document.querySelector('#kblibGrid .kblib-row').click()`);await sleep(250);
+ await ev(`document.querySelector('#kblibGrid .kblib-row').click()`);
+ ok(await ev(`document.querySelector('#dxMgmt').classList.contains('on') && document.querySelector('#dxOverlay').classList.contains('dx-reference-mode')`),'reader is present immediately without an intermediate Dx screen');
+ await sleep(250);
  ok(await ev(`document.querySelector('#dxOverlay').textContent`).then(t=>t.includes(diseaseName)),'disease entry opens existing reference');
  ok(await ev(`document.querySelector('#dxMgmt').classList.contains('dx-reader') && document.querySelector('.dx-reader-brand strong').textContent==='Knowledge Library'`),'disease entry uses the shared Knowledge Library reader');
  ok(await ev(`(()=>{const panel=document.querySelector('#dxMgmt'),body=panel.querySelector('.dx-mgmt-body'),r=panel.getBoundingClientRect();return getComputedStyle(panel).position==='fixed'&&getComputedStyle(panel).overflow==='hidden'&&getComputedStyle(body).overflowY==='auto'&&Math.abs(r.height-innerHeight)<=1})()`),'disease reader remains a pinned full-screen app surface');

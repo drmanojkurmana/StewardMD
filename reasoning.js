@@ -2763,10 +2763,10 @@
         '<h2 class="dx-mgmt-name">' + esc(name) + '</h2>' +
         (system ? '<div class="dx-mgmt-sys">' + esc(system) + '</div>' : '') + '</section>' +
         '<div class="dx-reader-glance"><h3>At a glance</h3>' +
-          (reason ? '<p>' + esc(reason) + '</p>' : '') +
+          (reason ? '<p>' + medFormat(reason) + '</p>' : '') +
           (H && H.redFlags && H.redFlags.length ? '<section class="dx-reader-alert"><h4>Red flags</h4>' + evList(H.redFlags, "danger") + '</section>' : '') +
           (H && H.additionalInvestigations && H.additionalInvestigations.length ? '<details><summary>Investigations</summary>' + evList(H.additionalInvestigations) + '</details>' : '') +
-          (briefTx && briefTx.length ? '<details><summary>Management</summary><ul>' + briefTx.map(function (x) { return '<li>' + esc(x) + '</li>'; }).join('') + '</ul></details>' : '') +
+          (briefTx && briefTx.length ? '<details><summary>Management</summary><ul>' + briefTx.map(function (x) { return '<li>' + medFormat(x) + '</li>'; }).join('') + '</ul></details>' : '') +
         '</div><div class="dx-reader-content">' +
         (reason ? '<div class="dx-mgmt-sec">Why this</div><p>' + esc(reason) + '</p>' : '') +
         mgmtHtml +
@@ -2807,6 +2807,7 @@
   function resetAll() { S.consultSkipped = []; S.f = {}; S.prev = {}; S.expanded = {}; S.started = false; S.system = null; S.showRare = false; S.compare = []; S.timeline = []; S.noteDraft = ""; var note = root && root.querySelector("#dxFreeText"); if (note) note.value = ""; if (!S._restoring) S._caseId = null; filter = ""; closeMgmt(); var si = root && root.querySelector("#dxSearch"); if (si) si.value = ""; recompute(); }
   function open(opts) {
     ensureRoot();
+    root.classList.remove("dx-reference-mode");
     if (opts && opts.workspace) { S.workspace = true; S.advOpen = false; }
     // Bridge: carry over findings already entered in the legacy checkbox wizard
     if (!Object.keys(S.f).length && typeof window.SMD_getFindings === "function") {
@@ -2836,7 +2837,7 @@
     // sync findings back to the legacy wizard (one source of truth)
     try { if (typeof window.SMD_setFindings === "function") window.SMD_setFindings(S.f); } catch (e) {}
     closeMgmt();
-    if (root) { root.classList.remove("on"); document.body.classList.remove("dx-lock"); }
+    if (root) { root.classList.remove("on", "dx-reference-mode"); document.body.classList.remove("dx-lock"); }
     // Reasoning was opened from the home (which hideV2()'d it) — restore the home shell,
     // otherwise closing falls through to the empty classic view (blank screen on native).
     try { if (window.SMD_setUI) window.SMD_setUI(true); } catch (e) {}
@@ -3206,12 +3207,11 @@
     _libReturnScroll = library && library.classList.contains("open") && libraryBody ? libraryBody.scrollTop : null;
     try { var bd = document.getElementById("spBackdrop"); if (bd) bd.classList.add("hidden"); } catch (e) {}
     try { var p = document.getElementById("smdSearchPanel"); if (p) p.classList.remove("open"); } catch (e) {}
-    try { if (window.SB && SB.closeRef) SB.closeRef(); } catch (e) {}
     try { document.body.style.overflow = ""; } catch (e) {}
     // ALWAYS open the Harrison evidence viewer (works for all 444, incl. the 51
     // infective syndromes). For infective diseases the viewer itself offers a button
     // to open the full antibiotic-stewardship console, so nothing is lost.
-    if (window.DX && DX.openRef) DX.openRef(id);
+    if (window.DX && DX.openRef) { DX.openRef(id); try { if (window.SB && SB.closeRef) SB.closeRef(); } catch (e) {} }
   }
   function kbReadList(kind) { try { var list = JSON.parse(localStorage.getItem("smd_library_" + kind) || "[]"); return Array.isArray(list) ? list.filter(function (x) { return typeof x === "string"; }) : []; } catch (e) { return []; } }
   function kbSaveList(kind, list) { try { localStorage.setItem("smd_library_" + kind, JSON.stringify(list)); return true; } catch (e) { return false; } }
@@ -3634,7 +3634,13 @@
     },
     // open ANY disease's reference panel from outside the reasoning workspace
     // (global search, knowledge library): open the panel, then show the ref.
-    openRef: function (id) { var wasOpen = !!(root && root.classList.contains("on")); try { open(); } catch (e) {} setTimeout(function () { try { openDiseaseRef(id, { standalone: !wasOpen }); } catch (e) {} }, 90); },
+    openRef: function (id) {
+      var wasOpen = !!(root && root.classList.contains("on"));
+      ensureRoot();
+      openDiseaseRef(id, { standalone: !wasOpen });
+      root.classList.add("dx-reference-mode", "on");
+      document.body.classList.add("dx-lock");
+    },
     _assess: function () {
       var d = differential(), g = gate(d), info = GATEINFO[g.cls];
       return { cls: g.cls, ab: !!info.ab, lead: g.lead && g.lead.name,
