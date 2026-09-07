@@ -507,8 +507,11 @@ test("role mapping: every operational role resolves to exactly the grant its cap
    * MedicationAdministration, because a role that can write that could post a fabricated
    * "administered" row through the raw record API without going near a bedside. */
   assert.equal(tier("pharmacy"), TIER.EXECUTE, "it writes its own verification, so it is not READ-only any more");
-  assert.deepEqual(write("pharmacy"), ["MedicationVerification"]);
-  assert.deepEqual(read("pharmacy"), ["MedicationOrder", "ServiceRequest", "AllergyIntolerance", "Observation", "Condition", "MedicationAdministration", "CriticalResultLoop", "MedicationVerification"]);
+  /* Two writes since 2026-09-07: its own verification, and its own supply record. Issuing stock is
+   * the pharmacy's act and gets its own resource; recording that a patient was GIVEN a dose is the
+   * nurse's, at a bedside, and is still not on this list. */
+  assert.deepEqual(write("pharmacy"), ["MedicationVerification", "MedicationDispense"]);
+  assert.deepEqual(read("pharmacy"), ["MedicationOrder", "ServiceRequest", "AllergyIntolerance", "Observation", "Condition", "MedicationAdministration", "CriticalResultLoop", "MedicationVerification", "MedicationDispense"]);
   assert.ok(!write("pharmacy").includes("MedicationAdministration"), "a pharmacist can never claim a dose was given");
   assert.ok(!write("pharmacy").includes("MedicationOrder"), "nor change the order they are checking");
   assert.ok(!read("pharmacy").includes("ClinicalNote"), "and not the notes or the discharge summary");
@@ -593,7 +596,7 @@ test("OPD roles at the door: doctor writes and signs, nurse records vitals and n
    * stops well short of the chart: no Patient, no notes, no discharge summary. */
   const pharm = await client(h, "fb:pharm-1");
   assert.deepEqual(pharm.descriptor.actor.readable,
-    ["MedicationOrder", "ServiceRequest", "AllergyIntolerance", "Observation", "Condition", "MedicationAdministration", "CriticalResultLoop", "MedicationVerification"]);
+    ["MedicationOrder", "ServiceRequest", "AllergyIntolerance", "Observation", "Condition", "MedicationAdministration", "CriticalResultLoop", "MedicationVerification", "MedicationDispense"]);
   const chart = await pharm.backend.chart("pat-20");
   assert.ok(Object.keys(chart).includes("MedicationOrder"));
   assert.equal(chart.MedicationOrder.length, 1);

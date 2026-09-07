@@ -182,8 +182,13 @@ function grantForCaps(caps) {
      * what a role already had. */
     // MedicationVerification is on BOTH lists: a verifier who cannot read back what was already
     // verified cannot see their own queue, and would re-check every order on every shift.
-    const canRead = ["MedicationOrder", "ServiceRequest", "AllergyIntolerance", "Observation", "Condition", "MedicationAdministration", "CriticalResultLoop", "MedicationVerification"];
-    const canWrite = ["MedicationVerification"];
+    /* MedicationDispense joined the write list on 2026-09-07, and MedicationAdministration
+     * deliberately did NOT. Issuing stock to a ward is the pharmacy's own act and gets its own
+     * resource; recording that a patient was given a dose is the nurse's, at a bedside. A role that
+     * could write both could post a fabricated administration through the raw record API without
+     * going near a patient. */
+    const canRead = ["MedicationOrder", "ServiceRequest", "AllergyIntolerance", "Observation", "Condition", "MedicationAdministration", "CriticalResultLoop", "MedicationVerification", "MedicationDispense"];
+    const canWrite = ["MedicationVerification", "MedicationDispense"];
     if (!grant) grant = { tier: TIER.EXECUTE, read: canRead, write: canWrite, basis: CAPS.ORDER_VERIFY };
     else grant = {
       tier: TIER.EXECUTE,

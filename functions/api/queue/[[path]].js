@@ -59,6 +59,7 @@ import { openCriticalLoops, acknowledgeCritical, listCriticalLoops } from "../..
 import { recordFluid, fluidBalance } from "../../_wardsynq/fluid-balance.js";
 import { giveHandover, receiveHandover, listHandovers } from "../../_wardsynq/handover.js";
 import { verifyOrder, verificationQueue } from "../../_wardsynq/pharmacy-verify.js";
+import { dispenseOrder, returnDispense, listDispenses } from "../../_wardsynq/pharmacy-dispense.js";
 import { declareBreakGlass, openEmergencyChart, listBreakGlass } from "../../_wardsynq/break-glass.js";
 import { patientEverything, readResource, capabilityStatement } from "../../_wardsynq/fhir.js";
 import { startReconciliation, decideMedicine, readReconciliation } from "../../_wardsynq/med-reconciliation.js";
@@ -453,6 +454,9 @@ export async function onRequest(context) {
          * is readable by the same capability, because a pharmacist with no way to SEE the orders
          * cannot verify them - which is what made this impossible to do honestly before. */
         "verify-order": CAPS.ORDER_VERIFY, "verification-queue": CAPS.ORDER_VERIFY,
+        /* Issuing stock is the same pharmacy authority as verifying. It is NOT med.administer, and
+         * that separation is the point: this writes a supply record and never an administration. */
+        dispense: CAPS.ORDER_VERIFY, "dispense-return": CAPS.ORDER_VERIFY, dispenses: CAPS.ORDER_VERIFY,
         /* Break-glass. ONLY A CLINICIAN may declare one: emr.vitals is the lowest capability that
          * means "this person has clinical business with patients", which a cashier or an HR user
          * does not hold. It widens what a clinician may SEE in an emergency; it never turns a
@@ -779,6 +783,18 @@ export async function onRequest(context) {
       }
       if (sub === "verification-queue" && method === "GET") {
         const r = await verificationQueue(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "" });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "dispense" && method === "POST") {
+        const r = await dispenseOrder(request, env, { ...deps, orderId: body.orderId, quantity: body.quantity, destination: body.destination, at: body.at, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "dispense-return" && method === "POST") {
+        const r = await returnDispense(request, env, { ...deps, dispenseId: body.dispenseId, reason: body.reason, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "dispenses" && method === "GET") {
+        const r = await listDispenses(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "" });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "handover" && method === "POST") {
