@@ -75,7 +75,7 @@ import { listTemplates, writeTemplatedNote } from "../../_wardsynq/note-template
 /* Aliased: `recordAssessment` is already the OPD assessment writer in this file, and a risk
  * assessment is a different thing entirely. Two names that read the same for two different
  * clinical acts is how the wrong one gets called. */
-import { queueTransmission, recordOutcome, resolveTransmission, listTransmissions } from "../../_wardsynq/prescription-transmit.js";
+import { queueTransmission, recordOutcome, resolveTransmission, listTransmissions, sendQueued } from "../../_wardsynq/prescription-transmit.js";
 import { submitNote, signNote, listAwaitingCoSign } from "../../_wardsynq/note-cosign.js";
 import { downtimePack } from "../../_wardsynq/downtime.js";
 import { qualityReport } from "../../_wardsynq/quality.js";
@@ -601,7 +601,7 @@ export async function onRequest(context) {
         "risk-tools": CAPS.EMR_VIEW, assess: CAPS.EMR_VITALS, "risk-action": CAPS.EMR_VITALS, risks: CAPS.EMR_VIEW,
         /* Sending a prescription is part of prescribing, so queueing is emr.treat. Recording what
          * the transport said, and resolving a failure by printing it instead, is desk work. */
-        transmit: CAPS.EMR_TREAT, "transmit-outcome": CAPS.QUEUE_ADD, "transmit-resolve": CAPS.QUEUE_ADD, outbox: CAPS.QUEUE_VIEW,
+        transmit: CAPS.EMR_TREAT, "transmit-send": CAPS.QUEUE_ADD, "transmit-outcome": CAPS.QUEUE_ADD, "transmit-resolve": CAPS.QUEUE_ADD, outbox: CAPS.QUEUE_VIEW,
         // Closing a stay is the administrative act QUEUE_ADD already covers for opening one.
         // The summary is a clinical document: drafting and signing it are EMR_TREAT.
         discharge: CAPS.QUEUE_ADD, "discharge-summary": CAPS.EMR_TREAT, "sign-discharge-summary": CAPS.EMR_TREAT,
@@ -703,6 +703,13 @@ export async function onRequest(context) {
       }
       if (sub === "transmit" && method === "POST") {
         const r = await queueTransmission(request, env, { ...deps, orderId: body.orderId, channel: body.channel, destination: body.destination, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "transmit-send" && method === "POST") {
+        /* The destination comes from org config and NEVER from the body: if a caller could name it,
+         * anyone who can queue a prescription could post a patient's medicines to a host of their
+         * choosing, and the audit would show a successful transmission. */
+        const r = await sendQueued(request, env, { ...deps, transmissionId: body.transmissionId, endpoints: (wsqCfg && wsqCfg.transmitEndpoints) || null });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "transmit-outcome" && method === "POST") {
