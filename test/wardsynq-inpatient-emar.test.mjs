@@ -2725,6 +2725,49 @@ test("sending is prescribing's business, and nothing unsendable is sent", async 
   assert.equal(bogus.error, "unknown_channel");
 });
 
+/* ---- the result, going out ----------------------------------------------------------------------- */
+
+test("AN ORU CARRIES ONLY THIS REPORT'S RESULTS, and the lab's own flag", async () => {
+  seedHospital();
+  const { adm } = await admittedPatientOnDrug();
+
+  // Two separate reports on the same patient.
+  const srA = await orderTest(adm, "Potassium", "wsq-sr-oru-a");
+  const a = await as(LABTECH, "/ward/release-result", "POST", {
+    orgId: ORG, serviceRequestId: srA, panel: "Renal profile",
+    tests: [{ test: "Potassium", value: 7.4, unit: "mmol/L", low: 3.5, high: 5.1, critical: true }],
+  });
+  const srB = await orderTest(adm, "Culture", "wsq-sr-oru-b");
+  await as(LABTECH, "/ward/release-result", "POST", {
+    orgId: ORG, serviceRequestId: srB, tests: [{ test: "Culture", value: "No growth at 48h" }],
+  });
+
+  const oru = await as(DOCTOR, `/ward/oru?orgId=${ORG}&reportId=${a.reportId}`);
+  assert.equal(oru.__status, 200, JSON.stringify(oru));
+  /* ONLY THIS REPORT'S. Sending the patient's whole Observation history in one ORU would send a
+   * receiver every result the hospital has ever produced, every time. */
+  assert.equal(oru.observations, 1);
+  assert.ok(!oru.message.includes("No growth at 48h"));
+
+  const segs = oru.message.split("\r");
+  assert.ok(segs[0].startsWith("MSH|^~\\&|WardSynQ|SMD-WARD01|"));
+  assert.match(segs[0], /ORU\^R01\^ORU_R01/);
+  const obx = segs.find((s) => s.startsWith("OBX|")).split("|");
+  assert.equal(obx[2], "NM", "a number is NM");
+  assert.equal(obx[5], "7.4");
+  assert.equal(obx[6], "mmol/L");
+  // The LABORATORY's flag, carried through. Nothing here compared 7.4 to the range and decided.
+  assert.equal(obx[8], "AA");
+  assert.match(oru.note, /not certified/);
+
+  // A report that does not exist is named, not returned as an empty body.
+  const ghost = await as(DOCTOR, `/ward/oru?orgId=${ORG}&reportId=wsq-dr-nope`);
+  assert.equal(ghost.__status, 404);
+  assert.equal(ghost.error, "report_not_found");
+  // And reading a chart in another wire format still needs the authority to read a chart.
+  assert.equal((await as(PHARM, `/ward/oru?orgId=${ORG}&reportId=${a.reportId}`)).__status, 403);
+});
+
 /* ---- the cohort, and who in it is overdue -------------------------------------------------------- */
 
 test("A REGISTRY NAMES PATIENTS, derives them from the problem list, and finds the ones never seen", async () => {

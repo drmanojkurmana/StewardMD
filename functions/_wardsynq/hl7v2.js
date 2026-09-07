@@ -166,6 +166,111 @@ function adtMessage(input) {
   return [msh, evn, pid, pv1].join("\r");
 }
 
+/* ---- ORU^R01: the result, going out -------------------------------------------------------------
+ *
+ * ADT tells the other systems who is here. ORU tells them what came back, and it is the message an
+ * Indian hospital's billing package, its analyser middleware and its referring clinics all actually
+ * consume. Same rules as everything else in this file: every value escaped, nothing invented.
+ *
+ * A NON-NUMERIC RESULT IS SENT AS TEXT, WITH ITS TYPE SAID. "No growth at 48h" is a real laboratory
+ * answer and OBX-2 has a value type field for exactly this ("ST" rather than "NM"). Sending it as
+ * numeric would have the receiver parse it to zero or to nothing, and either way a culture that grew
+ * something would arrive as a number nobody wrote.
+ *
+ * ABNORMAL FLAGS ARE THE LABORATORY'S, NEVER COMPUTED HERE. OBX-8 carries what the lab reported and
+ * nothing else. Deriving "H" by comparing the value to the reference range would be this file
+ * interpreting a result, which fhir.js does not do either and for the same reason.
+ */
+
+/** PURE. The HL7 value type for one observation. NM for a number, ST for anything else. */
+function valueType(value) { return typeof value === "number" && Number.isFinite(value) ? "NM" : "ST"; }
+
+/** PURE. OBX-11, the observation result status. A corrected result says so, in the field for it. */
+function obxStatus(reportStatus) {
+  const s = str(reportStatus).toLowerCase();
+  if (s === "preliminary") return "P";
+  if (s === "corrected") return "C";
+  return "F";
+}
+
+/**
+ * PURE. An ORU^R01 for one report, or null when there is nothing to send.
+ *
+ * input: { report, observations, patient, encounter?, controlId, sendingApp?, sendingFacility?, now }
+ */
+function oruMessage(input) {
+  const i = input || {};
+  const report = i.report, rows = Array.isArray(i.observations) ? i.observations.filter(Boolean) : [];
+  if (!report || !report.id || !rows.length) return null;
+  const p = i.patient || {};
+  const e = i.encounter || null;
+
+  const when = ts(i.now) || ts(new Date().toISOString());
+  const msh = segment("MSH", [
+    `${COMPONENT}${REPEAT}${ESCAPE}${SUBCOMPONENT}`,
+    esc(i.sendingApp || "WardSynQ"), esc(i.sendingFacility || ""),
+    esc(i.receivingApp || ""), esc(i.receivingFacility || ""),
+    when, "", `ORU${COMPONENT}R01${COMPONENT}ORU_R01`,
+    esc(i.controlId || report.id), "P", "2.5.1",
+  ]);
+
+  const pid = segment("PID", [
+    "1", "",
+    `${esc(p.mrn || p.id || report.patientId)}${COMPONENT}${COMPONENT}${COMPONENT}${esc(i.sendingFacility || "WardSynQ")}${COMPONENT}MR`,
+    "", esc(p.name || ""), "", dt(p.dob), sex(p.sex),
+  ]);
+
+  const segments = [msh, pid];
+  if (e && e.id) {
+    const loc = e.location || {};
+    const pv1 = [];
+    const at = (n, v) => { pv1[n - 1] = v; };
+    at(1, "1");
+    at(2, e.class === "IPD" ? "I" : "O");
+    at(3, `${esc(loc.ward || "")}${COMPONENT}${esc(loc.room || "")}${COMPONENT}${esc(loc.bed || "")}`);
+    at(19, esc(e.id));
+    segments.push(segment("PV1", Array.from(pv1, (v) => v || "")));
+  }
+
+  /* OBR-4 is the panel that was ordered; OBR-3 the filler's own number for it, which is what a
+   * receiver quotes back when it asks about a result. */
+  segments.push(segment("OBR", [
+    "1", esc(report.serviceRequestId || ""), esc(report.id),
+    esc(report.code || "Laboratory result"),
+    "", "", ts(report.reportedAt), "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "",
+    ts(report.reportedAt), "", obxStatus(report.status),
+  ]));
+
+  rows.forEach((o, idx) => {
+    const range = o.referenceRange || null;
+    // As REPORTED. A range this file composed would be this file deciding what is normal.
+    const rangeText = range ? (str(range.text) || [range.low, range.high].filter((v) => v !== null && v !== undefined).join("-")) : "";
+    segments.push(segment("OBX", [
+      String(idx + 1),
+      valueType(o.value),
+      // The code, its system, and the display - all as the record holds them. A local code stays a
+      // local code; nothing here promotes one to LOINC.
+      `${esc(o.code)}${COMPONENT}${esc(o.display || o.code)}${COMPONENT}${esc(o.codeSystem || "")}`,
+      "",
+      esc(o.value === null || o.value === undefined ? "" : o.value),
+      esc(o.unit || ""),
+      esc(rangeText),
+      /* OBX-8, the abnormal flag. The LABORATORY's, never computed here: deriving "H" from the range
+       * would be this file interpreting a result. */
+      o.sourceCritical === true ? "AA" : "",
+      "", "", obxStatus(report.status),
+      "", "", "", "",
+      ts((o.meta && o.meta.effectiveAt) || o.effectiveAt || report.reportedAt),
+    ]));
+  });
+
+  if (str(report.conclusion)) {
+    // The laboratory's own words, in the segment for them. Never composed.
+    segments.push(segment("NTE", ["1", "L", esc(report.conclusion)]));
+  }
+  return segments.join("\r");
+}
+
 /* ---- the door ------------------------------------------------------------------------------------
  *
  * READ ONLY. It renders what the record already says. There is no inbound parser and no listener.
@@ -229,4 +334,48 @@ async function adtForEncounter(request, env, ctx) {
   };
 }
 
-export { esc, ts, dt, sex, segment, eventOf, adtMessage, adtForEncounter };
+/** ctx: { migration, reportId, sendingFacility?, actorDeps, recordDeps } */
+async function oruForReport(request, env, ctx) {
+  const mig = ctx.migration;
+  const base = { mode: mig && mig.mode, tenantId: (mig && mig.tenantId) || null };
+  if (!mig || mig.mode === "off") return { ...base, ok: true, skipped: "off", message: null };
+
+  const reportId = str(ctx.reportId).trim();
+  if (!reportId) return { ...base, ok: false, status: 422, error: "report_required", message: null };
+
+  const { svc, resolved, error } = await open(request, env, ctx, "record:read");
+  if (error) return { ...base, ...error, message: null };
+
+  let report, observations, patient, encounter;
+  try {
+    report = await svc.get("DiagnosticReport", reportId);
+    if (report) {
+      [observations, patient, encounter] = await Promise.all([
+        svc.byPatient("Observation", report.patientId).catch(() => []),
+        svc.get("Patient", report.patientId).catch(() => null),
+        report.encounterId ? svc.get("Encounter", report.encounterId).catch(() => null) : Promise.resolve(null),
+      ]);
+    }
+  } catch (e) { return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), message: null }; }
+  if (!report) return { ...base, ok: false, status: 404, error: "report_not_found", reportId, message: null };
+
+  /* Only the observations THIS report released. A patient's whole Observation history in one ORU
+   * would send a receiver every result the hospital has ever produced, every time. */
+  const wanted = new Set((report.resultObservationIds || []).map(str));
+  const rows = (observations || []).filter((o) => o && wanted.has(str(o.id)));
+
+  const message = oruMessage({
+    report, observations: rows, patient, encounter,
+    controlId: reportId, sendingFacility: str(ctx.sendingFacility) || "", now: new Date().toISOString(),
+  });
+  if (!message) {
+    return { ...base, ok: false, status: 409, error: "nothing_to_send", detail: "this report released no observations that are still on the record", reportId, message: null };
+  }
+  return {
+    ...base, ok: true, reportId, observations: rows.length, message,
+    note: "HL7 v2.5.1-shaped ORU^R01, generated from the record. Not validated against a conformance profile and not certified.",
+    actor: resolved.actor.id,
+  };
+}
+
+export { esc, ts, dt, sex, segment, eventOf, adtMessage, adtForEncounter, valueType, obxStatus, oruMessage, oruForReport };

@@ -4,7 +4,7 @@
  */
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { esc, ts, dt, sex, segment, eventOf, adtMessage } from "../functions/_wardsynq/hl7v2.js";
+import { esc, ts, dt, sex, segment, eventOf, adtMessage, valueType, obxStatus, oruMessage } from "../functions/_wardsynq/hl7v2.js";
 
 const ENC = {
   id: "wsq-adm-1", class: "IPD", status: "in-progress", patientId: "pat-1",
@@ -100,6 +100,72 @@ test("the segments carry what a receiver needs to place the patient", () => {
 
   // A ward with no bed emits an empty bed component, never the ward name repeated into it.
   assert.equal(seg(msg({ encounter: { ...ENC, location: { ward: "Medical A" } } }), "PV1").split("|")[3], "Medical A^^");
+});
+
+/* ---- ORU: the result, going out ----------------------------------------------------------------- */
+
+const REPORT = {
+  id: "wsq-dr-1", patientId: "pat-1", serviceRequestId: "wsq-sr-1", code: "Renal profile",
+  status: "final", reportedAt: "2026-09-07T10:00:00.000Z", conclusion: null,
+  resultObservationIds: ["o1", "o2"],
+};
+const OBS = [
+  { id: "o1", code: "2823-3", display: "Potassium", codeSystem: "http://loinc.org", value: 7.4, unit: "mmol/L", referenceRange: { low: 3.5, high: 5.1 }, sourceCritical: true },
+  { id: "o2", code: "Culture", display: "Culture", codeSystem: "wardsynq-lab-local", value: "No growth at 48h", unit: null },
+];
+const oru = (over) => oruMessage({ report: REPORT, observations: OBS, patient: PAT, controlId: "c1", sendingFacility: "WSQ", now: "2026-09-07T11:00:00.000Z", ...(over || {}) });
+const obx = (m, n) => m.split("\r").filter((s) => s.startsWith("OBX|"))[n].split("|");
+
+test("A NON-NUMERIC RESULT IS SENT AS TEXT, with its type said", () => {
+  const m = oru();
+  assert.equal(obx(m, 0)[2], "NM", "a number is NM");
+  /* "No growth at 48h" is a real laboratory answer. Sending it as numeric would have the receiver
+   * parse it to zero or to nothing, and a culture that grew something would arrive as a number
+   * nobody wrote. */
+  assert.equal(obx(m, 1)[2], "ST");
+  assert.equal(obx(m, 1)[5], "No growth at 48h");
+  assert.equal(valueType(7.4), "NM");
+  assert.equal(valueType("<0.01"), "ST", "a censored value is text, not a number");
+  assert.equal(valueType(null), "ST");
+});
+
+test("THE ABNORMAL FLAG IS THE LABORATORY'S, never computed here", () => {
+  const m = oru();
+  // The potassium is 7.4 against a range topping out at 5.1, and the flag is present only because
+  // the LAB said so. Deriving "H" from the range would be this file interpreting a result.
+  assert.equal(obx(m, 0)[8], "AA");
+  const unflagged = oru({ observations: [{ ...OBS[0], sourceCritical: false }] });
+  assert.equal(obx(unflagged, 0)[8], "", "out of range and unflagged stays unflagged");
+  // The range travels as reported.
+  assert.equal(obx(m, 0)[7], "3.5-5.1");
+});
+
+test("a local code stays a local code, and a corrected report says so in every OBX", () => {
+  const m = oru();
+  assert.equal(obx(m, 0)[3], "2823-3^Potassium^http://loinc.org");
+  // Nothing here promotes a local code to LOINC.
+  assert.equal(obx(m, 1)[3], "Culture^Culture^wardsynq-lab-local");
+
+  assert.equal(obxStatus("final"), "F");
+  assert.equal(obxStatus("preliminary"), "P");
+  assert.equal(obxStatus("corrected"), "C");
+  const corrected = oru({ report: { ...REPORT, status: "corrected" } });
+  assert.ok(corrected.split("\r").filter((s) => s.startsWith("OBX|")).every((s) => s.split("|")[11] === "C"));
+});
+
+test("ORU escapes exactly as ADT does, and sends nothing when there is nothing", () => {
+  const hostile = oru({ observations: [{ ...OBS[1], value: "Grew E|coli^fast" }] });
+  const f = obx(hostile, 0);
+  assert.equal(f[5], "Grew E\\F\\coli\\S\\fast", "no field or component boundary is created by a result");
+  assert.equal(f.length, obx(oru(), 1).length, "and the field count is unchanged");
+
+  // A report with no observations is not an empty message, it is no message.
+  assert.equal(oruMessage({ report: REPORT, observations: [] }), null);
+  assert.equal(oruMessage({ report: null, observations: OBS }), null);
+
+  // The laboratory's own conclusion travels in the segment for it, and only when there is one.
+  assert.ok(!oru().includes("NTE|"));
+  assert.match(oru({ report: { ...REPORT, conclusion: "Consistent with sepsis." } }), /NTE\|1\|L\|Consistent with sepsis\./);
 });
 
 test("EVN carries the event time from the record, not the time the message was built", () => {
