@@ -4,7 +4,7 @@
  */
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { MOVE_TYPE, KINDS, quantityOf, levelsFrom, flagLevels, mixedUnits } from "../functions/_wardsynq/stock.js";
+import { MOVE_TYPE, KINDS, quantityOf, levelsFrom, flagLevels, mixedUnits, nearExpiry } from "../functions/_wardsynq/stock.js";
 import { grantForRole } from "../functions/_wardsynq/actor.js";
 import { RESOURCE_TYPES } from "../functions/_wardsynq/service.js";
 
@@ -102,4 +102,34 @@ test("stock is the dispensing side of pharmacy, and confers nothing clinical", (
 
   // A ward nurse gains no stock authority from being able to give a dose.
   assert.ok(!grantForRole("nurse").write.includes(MOVE_TYPE));
+});
+
+test("TASK 3.4: NEAR EXPIRY is computed per batch, never guessed for stock with no recorded expiry", () => {
+  const now = "2026-09-08T00:00:00.000Z";
+  const soon = mv({ id: "e1", code: "AMOX250", batch: "B1", expiry: "2026-10-01T00:00:00.000Z" }); // ~23 days
+  const far = mv({ id: "e2", code: "AMOX250", batch: "B2", expiry: "2027-06-01T00:00:00.000Z" });
+  const gone = mv({ id: "e3", code: "AMOX250", batch: "B3", expiry: "2026-08-01T00:00:00.000Z" }); // already past
+  const noExpiry = mv({ id: "e4", code: "AMOX250", batch: "B4", expiry: undefined });
+
+  const out = nearExpiry([soon, far, gone, noExpiry], 90, now);
+  const batches = out.map((r) => r.batch).sort();
+  assert.deepEqual(batches, ["B1", "B3"], "only the near-expiry and the already-expired batch appear; the far one and the un-dated one do not");
+  const expired = out.find((r) => r.batch === "B3");
+  assert.equal(expired.expired, true);
+  assert.ok(expired.daysRemaining < 0);
+  const soonRow = out.find((r) => r.batch === "B1");
+  assert.equal(soonRow.expired, false);
+  assert.ok(soonRow.daysRemaining > 0 && soonRow.daysRemaining <= 90);
+
+  // Only receipts are expiry candidates - a wastage row naming an expiry is not a stock the pharmacy
+  // still holds.
+  const wasted = mv({ id: "e5", kind: "wastage", code: "AMOX250", batch: "B5", expiry: "2026-09-15T00:00:00.000Z" });
+  assert.equal(nearExpiry([wasted], 90, now).length, 0);
+
+  // Two receipts logged against the SAME batch key: the sooner expiry is the one that matters.
+  const dup1 = mv({ id: "e6", code: "PARA500", batch: "B6", expiry: "2026-09-20T00:00:00.000Z" });
+  const dup2 = mv({ id: "e7", code: "PARA500", batch: "B6", expiry: "2026-12-20T00:00:00.000Z" });
+  const dupOut = nearExpiry([dup1, dup2], 90, now);
+  assert.equal(dupOut.length, 1);
+  assert.equal(dupOut[0].expiry, "2026-09-20T00:00:00.000Z");
 });

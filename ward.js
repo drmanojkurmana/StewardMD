@@ -170,6 +170,9 @@
       '<button class="w-btn" data-w-act="board" title="Admit a patient to a bed">' + ms("add_circle") + "Admit</button>" +
       '<button class="w-btn ghost" data-w-act="edboard" title="Emergency department">' + ms("emergency") + "ED</button>" +
       '<button class="w-btn ghost" data-w-act="surgeryboard" title="Surgery / OT / PACU">' + ms("medical_services") + "Surgery</button>" +
+      // Not patient-scoped: a real stock levels, receipts, adjustments and reconciliation
+      // workstation, the same shape as ED/Surgery's own ward-wide boards.
+      '<button class="w-btn ghost" data-w-act="inventoryboard" title="Pharmacy stock: levels, receipts, adjustments, reconciliation">' + ms("inventory_2") + "Inventory</button>" +
       // Reachable BEFORE an outage, which is the only time it can be taken. A pack you can only get
       // to while the system is up is a pack the ward has to remember to take while the system is up.
       '<button class="w-btn ghost" data-w-act="downtime" title="Printable sheet for when the system is unavailable">' + ms("print") + "Downtime pack</button></div>" +
@@ -1471,6 +1474,79 @@
       ) : '<p class="w-empty" style="padding:0 16px">Pick an order above to verify or dispense it.</p>');
   }
 
+  /* TASK 3.4: hospital-wide pharmacy stock, not patient-scoped - the same shape ED/Surgery's own
+   * ward-wide boards already use. A level is DERIVED (stock.js's own rule) and shown exactly as
+   * computed: negative levels are never clamped, mixed units are never summed, and a dispense
+   * already reduces the level without a second movement being written for it. */
+  function inventoryView(state) {
+    var inv = state.inventory || {};
+    var s = inv.stock;
+    var levels = (s && s.levels) || [];
+    var expiring = (s && s.expiring) || [];
+
+    var levelRows = levels.map(function (r) {
+      return "<li><b>" + esc(r.display) + "</b><span>" + esc(r.location || "") + " &middot; " + esc(r.level) + " " + esc(r.unit) +
+        (r.impossible ? '<span class="w-st overdue">' + ms("error") + "impossible</span>" : "") +
+        (r.belowReorder ? '<span class="w-st due">' + ms("warning") + "reorder</span>" : "") +
+        "</span></li>";
+    }).join("");
+
+    var expiringRows = expiring.map(function (r) {
+      return "<li><b>" + esc(r.display) + "</b><span>" + esc(r.location || "") + " &middot; batch " + esc(r.batch || "-") + " &middot; " +
+        (r.expired ? '<span class="w-st overdue">expired</span>' : esc(r.daysRemaining) + " days left") + "</span></li>";
+    }).join("");
+
+    return '<div class="w-chart-h"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button>" +
+      "<div><b>Inventory</b></div>" +
+      '<button class="w-ic" data-w-act="inventoryload" title="Refresh">' + ms("refresh") + "</button></div>" +
+
+      (s && s.negative && s.negative.length ? '<p class="w-hint warn">' + ms("error") + esc(s.negativeWarning) + "</p>" : "") +
+      (s && s.mixedUnitsWarning ? '<p class="w-hint warn">' + ms("warning") + esc(s.mixedUnitsWarning) + "</p>" : "") +
+
+      '<div class="w-card"><div class="w-card-h">' + ms("inventory_2") + "<h3>Stock levels</h3></div>" +
+      (levelRows ? '<ul class="w-mini">' + levelRows + "</ul>" : '<p class="w-empty">No stock movements recorded yet.</p>') +
+      "</div>" +
+
+      '<div class="w-card"><div class="w-card-h">' + ms("event_busy") + "<h3>Near expiry</h3></div>" +
+      (expiringRows ? '<ul class="w-mini">' + expiringRows + "</ul>" : '<p class="w-empty">Nothing expiring soon.</p>') +
+      "</div>" +
+
+      '<div class="w-card"><div class="w-card-h">' + ms("call_received") + "<h3>Receipt</h3></div>" +
+      '<div class="w-grid">' +
+      '<label class="w-f"><span>Drug</span><input id="wStkCode" type="text" autocomplete="off"></label>' +
+      '<label class="w-f"><span>Quantity</span><input id="wStkQty" type="text" inputmode="decimal" autocomplete="off"></label>' +
+      '<label class="w-f"><span>Unit</span><input id="wStkUnit" type="text" autocomplete="off" placeholder="e.g. tablet, vial"></label>' +
+      '<label class="w-f"><span>Location</span><input id="wStkLoc" type="text" autocomplete="off" placeholder="e.g. Main"></label>' +
+      '<label class="w-f"><span>Batch</span><input id="wStkBatch" type="text" autocomplete="off"></label>' +
+      '<label class="w-f"><span>Expiry</span><input id="wStkExpiry" type="date"></label>' +
+      "</div>" +
+      '<button class="w-btn go" data-w-act="stockreceive">' + ms("add") + "Record receipt</button></div>" +
+
+      '<div class="w-card"><div class="w-card-h">' + ms("edit") + "<h3>Adjustment / wastage</h3></div>" +
+      '<div class="w-grid">' +
+      '<label class="w-f"><span>Drug</span><input id="wAdjCode" type="text" autocomplete="off"></label>' +
+      '<label class="w-f"><span>Quantity (+/-)</span><input id="wAdjQty" type="text" inputmode="decimal" autocomplete="off"></label>' +
+      '<label class="w-f"><span>Unit</span><input id="wAdjUnit" type="text" autocomplete="off"></label>' +
+      '<label class="w-f"><span>Location</span><input id="wAdjLoc" type="text" autocomplete="off"></label>' +
+      "</div>" +
+      '<label class="w-f"><span>Reason (required)</span><input id="wAdjReason" type="text" autocomplete="off"></label>' +
+      '<div class="w-actions">' +
+      '<button class="w-btn warn" data-w-act="stockadjust">' + ms("edit") + "Adjust</button>" +
+      '<button class="w-btn warn" data-w-act="stockwaste">' + ms("delete") + "Wastage</button>" +
+      "</div></div>" +
+
+      '<div class="w-card"><div class="w-card-h">' + ms("fact_check") + "<h3>Reconciliation</h3></div>" +
+      '<div class="w-grid">' +
+      '<label class="w-f"><span>Drug</span><input id="wRecCode" type="text" autocomplete="off"></label>' +
+      '<label class="w-f"><span>Unit</span><input id="wRecUnit" type="text" autocomplete="off"></label>' +
+      '<label class="w-f"><span>Location</span><input id="wRecLoc" type="text" autocomplete="off"></label>' +
+      '<label class="w-f"><span>Counted quantity</span><input id="wRecCounted" type="text" inputmode="decimal" autocomplete="off"></label>' +
+      "</div>" +
+      '<label class="w-f"><span>Note (optional)</span><input id="wRecReason" type="text" autocomplete="off"></label>' +
+      '<button class="w-btn go" data-w-act="stockreconcile">' + ms("check") + "Reconcile</button>" +
+      '<p class="w-hint">' + ms("info") + "Posts the counted quantity against the derived level as an auditable adjustment naming the expected value and the variance. A matching count writes nothing." + "</p></div>";
+  }
+
   /* Open critical results, ABOVE everything else on the chart. A critical result that reaches a
    * chart nobody reads is the oldest preventable death in hospital medicine, and the failure is
    * never the measurement - it is that no named human said "I have seen this". So this sits first,
@@ -1657,6 +1733,7 @@
         : state.view === "pcopy" ? pcopyView(state)
         : state.view === "board" ? boardView(state)
         : state.view === "ed" ? edBoardView(state)
+        : state.view === "inventory" ? inventoryView(state)
         : state.view === "surgery" ? surgeryBoardView(state)
         : state.view === "surgerycase" ? surgeryCaseView(state)
         : state.view === "oncology" ? oncologyView(state)
@@ -2345,6 +2422,52 @@
       })
       .catch(function () { st.busy = false; st.err = "Could not record the dispense."; paint(); });
   }
+  function inventoryOpen() {
+    st.view = "inventory"; st.inventory = null; paint(); loadInventory();
+  }
+  function loadInventory() {
+    if (!st.inventory) st.inventory = {};
+    return apiGet("/ward/stock?orgId=" + encodeURIComponent(st.orgId))
+      .then(function (r) { st.inventory.stock = (r && r.ok) ? r : null; paint(); })
+      .catch(function () { paint(); });
+  }
+  function stockReceive() {
+    var code = val("wStkCode"), qty = val("wStkQty"), unit = val("wStkUnit"), loc = val("wStkLoc"), batch = val("wStkBatch"), expiry = val("wStkExpiry");
+    if (!code || !qty || !unit) { st.err = "A receipt needs a drug, a quantity and a unit."; paint(); return; }
+    st.busy = true; paint();
+    apiPost("/ward/stock-move", { orgId: st.orgId, kind: "receipt", code: code, quantity: { value: Number(qty), unit: unit }, location: loc || undefined, batch: batch || undefined, expiry: expiry || undefined })
+      .then(function (r) {
+        if (settle(r, "Receipt recorded.")) { ["wStkCode", "wStkQty", "wStkUnit", "wStkLoc", "wStkBatch", "wStkExpiry"].forEach(function (id) { var el = document.getElementById(id); if (el) el.value = ""; }); loadInventory(); }
+        else paint();
+      })
+      .catch(function () { st.busy = false; st.err = "Could not record the receipt."; paint(); });
+  }
+  function stockAdjustOrWaste(kind) {
+    var code = val("wAdjCode"), qty = val("wAdjQty"), unit = val("wAdjUnit"), loc = val("wAdjLoc"), reason = val("wAdjReason");
+    if (!code || !qty || !unit) { st.err = "Fill in the drug, quantity and unit."; paint(); return; }
+    if (!reason) { st.err = "An adjustment or wastage needs a reason."; paint(); return; }
+    st.busy = true; paint();
+    apiPost("/ward/stock-move", { orgId: st.orgId, kind: kind, code: code, quantity: { value: Number(qty), unit: unit }, location: loc || undefined, reason: reason })
+      .then(function (r) {
+        if (r && r.error === "reason_required") { st.busy = false; st.err = "An adjustment or wastage needs a reason."; paint(); return; }
+        if (settle(r, kind === "wastage" ? "Wastage recorded." : "Adjustment recorded.")) { ["wAdjCode", "wAdjQty", "wAdjUnit", "wAdjLoc", "wAdjReason"].forEach(function (id) { var el = document.getElementById(id); if (el) el.value = ""; }); loadInventory(); }
+        else paint();
+      })
+      .catch(function () { st.busy = false; st.err = "Could not record the movement."; paint(); });
+  }
+  function stockReconcile() {
+    var code = val("wRecCode"), unit = val("wRecUnit"), loc = val("wRecLoc"), counted = val("wRecCounted"), reason = val("wRecReason");
+    if (!code || !unit || counted === "") { st.err = "A reconciliation needs a drug, a unit and the counted quantity."; paint(); return; }
+    st.busy = true; paint();
+    apiPost("/ward/stock-reconcile", { orgId: st.orgId, code: code, unit: unit, location: loc || undefined, counted: Number(counted), reason: reason || undefined })
+      .then(function (r) {
+        if (r && r.error === "counted_required") { st.busy = false; st.err = "Enter the number actually counted."; paint(); return; }
+        var msg = r && r.skipped === "no_variance" ? "The count matches the record. Nothing was posted." : (r && r.reason) || "Reconciled.";
+        if (settle(r, msg)) { ["wRecCode", "wRecUnit", "wRecLoc", "wRecCounted", "wRecReason"].forEach(function (id) { var el = document.getElementById(id); if (el) el.value = ""; }); loadInventory(); }
+        else paint();
+      })
+      .catch(function () { st.busy = false; st.err = "Could not reconcile."; paint(); });
+  }
   function edDispose(disposition, extra) {
     var s = st.sel; if (!s) return;
     st.busy = true; paint();
@@ -2831,6 +2954,7 @@
       if (st.view === "cardiology") { st.view = "chart"; st.cardiology = null; paint(); return; }
       if (st.view === "radiology") { st.view = "chart"; st.radiology = null; paint(); return; }
       if (st.view === "pharmacy") { st.view = "chart"; st.pharmacy = null; paint(); return; }
+      if (st.view === "inventory") { st.inventory = null; st.view = "list"; paint(); return; }
       // Picking a bed to admit an ED patient opens the SAME bed board a fresh admission uses;
       // backing out of it returns to that patient's ED chart, not the ward list, and drops the
       // pending admit rather than leaving it to fire on some later, unrelated bed pick.
@@ -2884,6 +3008,12 @@
       paint(); loadChart(); loadRound(); loadBalance(); loadOutbox(); loadTemplates(); loadFlowsheet(); loadNews2(); loadInvestigations(); loadResus(); return;
     }
     if (cmd === "edboard") { loadEd(); return; }
+    if (cmd === "inventoryboard") { inventoryOpen(); return; }
+    if (cmd === "inventoryload") { loadInventory(); return; }
+    if (cmd === "stockreceive") { stockReceive(); return; }
+    if (cmd === "stockadjust") { stockAdjustOrWaste("adjustment"); return; }
+    if (cmd === "stockwaste") { stockAdjustOrWaste("wastage"); return; }
+    if (cmd === "stockreconcile") { stockReconcile(); return; }
     if (cmd === "surgeryboard") { loadSurgeryBoard(); return; }
     if (cmd === "surgerybookopen") { surgeryBookOpen(); return; }
     if (cmd === "surgerybookclose") { surgeryBookClose(); return; }

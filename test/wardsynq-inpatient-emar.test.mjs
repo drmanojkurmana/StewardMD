@@ -2650,6 +2650,70 @@ test("TASK 3.3: the verification queue now carries the SAME safety-engine verdic
   assert.ok(Array.isArray(q.orders[0].safety.warnings));
 });
 
+/* ---- pharmacy inventory (TASK 3.4) ---------------------------------------------------------------
+ *
+ * stock.js's own rule: a level is DERIVED, never a gate, and a dispense is never re-entered as a
+ * movement - the level subtracts MedicationDispense rows directly. This proves that coupling holds
+ * end to end through the REAL routes, not just against hand-built fixtures.
+ */
+test("TASK 3.4: a real dispense reduces the real derived stock level - no second movement, no double entry", async () => {
+  seedHospital();
+  const { adm, ord } = await admittedPatientOnDrug();
+
+  const receipt = await as(PHARM, "/ward/stock-move", "POST", { orgId: ORG, kind: "receipt", code: "Paracetamol 500mg", quantity: { value: 100, unit: "tablet" }, location: "Main" });
+  assert.equal(receipt.__status, 200, JSON.stringify(receipt));
+
+  const before = await as(PHARM, `/ward/stock?orgId=${ORG}`);
+  const rowBefore = before.levels.find((r) => r.code === "Paracetamol 500mg");
+  assert.equal(rowBefore.level, 100);
+
+  await as(PHARM, "/ward/verify-order", "POST", { orgId: ORG, orderId: ord.orderId, outcome: "verified" });
+  const dispensed = await as(PHARM, "/ward/dispense", "POST", { orgId: ORG, orderId: ord.orderId, quantity: { value: 20, unit: "tablet" }, destination: "Main" });
+  assert.equal(dispensed.__status, 200, JSON.stringify(dispensed));
+
+  const after = await as(PHARM, `/ward/stock?orgId=${ORG}`);
+  const rowAfter = after.levels.find((r) => r.code === "Paracetamol 500mg");
+  assert.equal(rowAfter.level, 80, "the dispense reduced the DERIVED level - it was never written as a second StockMovement");
+  assert.equal(rowAfter.issued, 20);
+});
+
+test("TASK 3.4: RECONCILIATION posts an auditable adjustment naming the expected/counted/variance, and a matching count writes nothing", async () => {
+  seedHospital();
+  await as(PHARM, "/ward/stock-move", "POST", { orgId: ORG, kind: "receipt", code: "Amoxicillin 500mg", quantity: { value: 50, unit: "capsule" }, location: "Main" });
+
+  // A count that disagrees with the derived level.
+  const recon = await as(PHARM, "/ward/stock-reconcile", "POST", { orgId: ORG, code: "Amoxicillin 500mg", location: "Main", unit: "capsule", counted: 45, reason: "Shelf count, morning round." });
+  assert.equal(recon.__status, 200, JSON.stringify(recon));
+  assert.equal(recon.expected, 50); assert.equal(recon.counted, 45); assert.equal(recon.variance, -5);
+  assert.match(recon.reason, /Expected 50 capsule, counted 45 capsule, variance -5 capsule/);
+
+  const after = await as(PHARM, `/ward/stock?orgId=${ORG}`);
+  assert.equal(after.levels.find((r) => r.code === "Amoxicillin 500mg").level, 45, "the adjustment moved the derived level to match the physical count");
+
+  // A count that MATCHES the derived level writes nothing - a reconciliation is not a fresh log entry
+  // every time somebody confirms the shelf agrees with the record.
+  const again = await as(PHARM, "/ward/stock-reconcile", "POST", { orgId: ORG, code: "Amoxicillin 500mg", location: "Main", unit: "capsule", counted: 45 });
+  assert.equal(again.written, 0); assert.equal(again.skipped, "no_variance");
+
+  // A reason is not required by this route (the underlying adjustment movement still records who and
+  // when), but the variance itself is always in the record even with none given.
+  await as(PHARM, "/ward/stock-move", "POST", { orgId: ORG, kind: "receipt", code: "Ibuprofen 400mg", quantity: { value: 10, unit: "tablet" }, location: "Main" });
+  const noReason = await as(PHARM, "/ward/stock-reconcile", "POST", { orgId: ORG, code: "Ibuprofen 400mg", location: "Main", unit: "tablet", counted: 8 });
+  assert.equal(noReason.__status, 200, JSON.stringify(noReason));
+  assert.match(noReason.reason, /variance -2 tablet/);
+});
+
+test("TASK 3.4: NEAR-EXPIRY appears on the real stock read, and a nurse holds no stock authority", async () => {
+  seedHospital();
+  await as(PHARM, "/ward/stock-move", "POST", { orgId: ORG, kind: "receipt", code: "Insulin Glargine", quantity: { value: 5, unit: "vial" }, location: "Fridge", batch: "INS-77", expiry: "2026-09-20T00:00:00.000Z" });
+  const stock = await as(PHARM, `/ward/stock?orgId=${ORG}`);
+  assert.equal(stock.__status, 200, JSON.stringify(stock));
+  assert.ok(stock.expiring.some((r) => r.batch === "INS-77"), "the near-expiry batch shows on the same read as the levels: " + JSON.stringify(stock.expiring));
+
+  assert.equal((await as(NURSE, "/ward/stock-move", "POST", { orgId: ORG, kind: "receipt", code: "X", quantity: { value: 1, unit: "tablet" } })).__status, 403);
+  assert.equal((await as(NURSE, `/ward/stock?orgId=${ORG}`)).__status, 403);
+});
+
 test("A VERIFICATION IS OF ONE VERSION: change the order and it is no longer verified", async () => {
   seedHospital();
   const { adm, ord } = await admittedPatientOnDrug();

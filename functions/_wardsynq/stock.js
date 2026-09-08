@@ -162,6 +162,91 @@ function flagLevels(levels, reorderLevels) {
   return { levels: out, belowReorder, negative };
 }
 
+/**
+ * PURE. TASK 3.4: which received batches are close to expiry, or already past it.
+ *
+ * Grouped by (code, location, batch) - a batch is the unit expiry actually applies to, not the
+ * aggregate level. A movement with no batch and no expiry is simply not a candidate: nothing here
+ * guesses an expiry for stock that was never recorded with one.
+ */
+function nearExpiry(movements, days, now) {
+  // Number(null) is 0, and 0 is finite - so absence must be checked before finiteness, exactly the
+  // discipline quantityOf() already applies to a movement's own quantity.
+  const windowDays = days != null && str(days) !== "" && Number.isFinite(Number(days)) ? Number(days) : 90;
+  const nowMs = now ? Date.parse(now) : Date.now();
+  const rows = new Map();
+  for (const m of movements || []) {
+    if (!m || str(m.kind) !== "receipt") continue;
+    const expiry = str(m.expiry);
+    if (!expiry) continue;
+    const expiryMs = Date.parse(expiry);
+    if (!Number.isFinite(expiryMs)) continue;
+    const k = `${key(m.code)}|${key(m.location)}|${key(m.batch)}`;
+    // The SOONEST expiry recorded for this exact batch key wins - two receipts logged for what is
+    // genuinely the same batch should never let a later, longer-dated entry hide the sooner one.
+    const existing = rows.get(k);
+    if (!existing || expiryMs < existing.expiryMs) {
+      rows.set(k, { code: m.code, display: m.display || m.code, location: m.location || null, batch: m.batch || null, expiry, expiryMs });
+    }
+  }
+  const out = [...rows.values()].map((r) => ({
+    ...r, daysRemaining: Math.round((r.expiryMs - nowMs) / 86400000),
+    expired: r.expiryMs < nowMs,
+  })).filter((r) => r.expired || r.daysRemaining <= windowDays);
+  out.sort((a, b) => a.expiryMs - b.expiryMs);
+  return out;
+}
+
+/**
+ * A physical count against the derived level, posted as an auditable adjustment - never a silent
+ * overwrite of the level. ctx: { migration, code, location?, unit, counted, reason?, at? }
+ *
+ * THE VARIANCE IS THE RECORD. The adjustment movement carries the counted quantity, the level this
+ * file believed before the count, and their difference - so a reader sees not just what changed but
+ * what the count DISAGREED with, which is the fact a reconciliation exists to surface.
+ */
+async function reconcileCount(request, env, ctx) {
+  const mig = ctx.migration;
+  const base = { mode: mig && mig.mode, tenantId: (mig && mig.tenantId) || null };
+  if (!mig || mig.mode === "off") return { ...base, ok: true, skipped: "off", written: 0 };
+
+  const code = str(ctx.code), unit = str(ctx.unit);
+  if (!code || !unit) return { ...base, ok: false, status: 422, error: "code_and_unit_required", written: 0 };
+  const counted = Number(ctx.counted);
+  if (!Number.isFinite(counted)) return { ...base, ok: false, status: 422, error: "counted_required", detail: "a reconciliation needs the number actually counted, not \"some\".", written: 0 };
+
+  const { svc, error } = await open_(request, env, ctx, "record:read");
+  if (error) return { ...base, ...error, written: 0 };
+
+  let movements, dispenses;
+  try {
+    [movements, dispenses] = await Promise.all([
+      svc.list(MOVE_TYPE, 1000).catch(() => []),
+      svc.list("MedicationDispense", 1000).catch(() => []),
+    ]);
+  } catch (e) { return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), written: 0 }; }
+
+  const computed = levelsFrom((movements || []).filter(Boolean), (dispenses || []).filter(Boolean));
+  const k = `${key(code)}|${key(ctx.location)}|${key(unit)}`;
+  const before = computed.levels.find((r) => `${key(r.code)}|${key(r.location)}|${key(r.unit)}` === k);
+  const expected = before ? before.level : 0;
+  const variance = counted - expected;
+
+  if (variance === 0) {
+    return { ...base, ok: true, written: 0, skipped: "no_variance", expected, counted, note: "The count matches the derived level exactly. No adjustment was needed." };
+  }
+
+  const reasonGiven = str(ctx.reason);
+  const reason = `Count reconciliation. Expected ${expected} ${unit}, counted ${counted} ${unit}, variance ${variance > 0 ? "+" : ""}${variance} ${unit}.` + (reasonGiven ? ` ${reasonGiven}` : "");
+
+  const moved = await recordMovement(request, env, {
+    ...ctx, kind: "adjustment", code, display: (before && before.display) || code, location: ctx.location || null,
+    quantity: { value: variance, unit }, reason, at: ctx.at,
+  });
+  if (!moved.ok) return moved;
+  return { ...base, ok: true, written: moved.written, movementId: moved.movementId, expected, counted, variance, reason, actor: moved.actor };
+}
+
 /** PURE. More than one unit for the same item and location is reported, never summed. */
 function mixedUnits(levels) {
   const seen = new Map();
@@ -261,12 +346,15 @@ async function stockLevels(request, env, ctx) {
   const where = str(ctx.location);
   const levels = where ? flagged.levels.filter((r) => key(r.location) === key(where)) : flagged.levels;
   const mixed = mixedUnits(flagged.levels);
+  const expiring = nearExpiry((movements || []).filter(Boolean), ctx.nearExpiryDays, ctx.now)
+    .filter((r) => !where || key(r.location) === key(where));
 
   return {
     ...base, ok: true,
     levels: levels.sort((a, b) => String(a.display).localeCompare(String(b.display))),
     belowReorder: flagged.belowReorder,
     negative: flagged.negative,
+    expiring,
     problems: computed.problems,
     ...(mixed.length ? {
       mixedUnits: mixed,
@@ -281,4 +369,4 @@ async function stockLevels(request, env, ctx) {
   };
 }
 
-export { MOVE_TYPE, KINDS, SIGN, quantityOf, levelsFrom, flagLevels, mixedUnits, recordMovement, stockLevels };
+export { MOVE_TYPE, KINDS, SIGN, quantityOf, levelsFrom, flagLevels, mixedUnits, nearExpiry, recordMovement, stockLevels, reconcileCount };
