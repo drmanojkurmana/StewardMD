@@ -267,14 +267,26 @@ async function recordWardVitals(request, env, ctx) {
   const patientId = str(ctx.patientId);
   if (!encounterId || !patientId) return { ...base, ok: false, status: 422, error: "encounter_required", written: 0 };
 
+  const { svc, resolved, error } = await openService(request, env, ctx, "record:write");
+  if (error) return { ...base, ...error, written: 0 };
+
+  /* TASK 2.10 negative-test fix: this route never checked that encounterId actually belongs to
+   * patientId. A caller supplying a real encounter id from a DIFFERENT patient silently wrote
+   * vitals claiming the wrong identity - the "wrong encounter" hazard the master plan's own
+   * negative-test list names, found by a dedicated adversarial probe before it shipped further. */
+  let encounter;
+  try { encounter = await svc.get("Encounter", encounterId); }
+  catch (e) { return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), written: 0 }; }
+  if (!encounter) return { ...base, ok: false, status: 404, error: "encounter_not_found", encounterId, written: 0 };
+  if (encounter.patientId !== patientId) {
+    return { ...base, ok: false, status: 409, error: "encounter_patient_mismatch", detail: "this encounter does not belong to the given patient", encounterId, written: 0 };
+  }
+
   const observations = vitalsToObservations({
     vitals: ctx.vitals, patientId, ticketId: encounterId, encounterId,
     recordedAt: ctx.recordedAt || new Date().toISOString(), idPrefix: "wsq-ward-vitals",
   });
   if (!observations.length) return { ...base, ok: true, written: 0, skipped: "no_numeric_values" };
-
-  const { svc, resolved, error } = await openService(request, env, ctx, "record:write");
-  if (error) return { ...base, ...error, written: 0 };
 
   let written = 0;
   const results = [];
