@@ -1220,3 +1220,69 @@ them has run on a phone.**
 - **`--experimental-sqlite` is missing from CI**, so nine real-SQL tests SKIP rather than run. A
   skipping test keeps the build green while nothing executes. Fix committed on the local branch
   `wardsynq-ci-sqlite`; it needs a token with `workflow` scope.
+
+## The golden path, reachable for the first time (2026-09-08)
+
+The whole inpatient vertical — admission, bed/ward assignment, the doctor/nurse chart, ward vitals,
+medication ordering, eMAR administration, investigation ordering, results, discharge — has been
+server-authoritative and tested since early September (~150 `/api/queue/ward/*` routes, 267+ tests
+in `test/wardsynq-inpatient-emar.test.mjs` alone). Until today none of it had a UI a clinician could
+actually reach: `ward.js` was loaded by `index.html` but wired to zero nav entry points (the file's
+own header said so — "no nav coupling yet"), and three of the nine steps (admission, medication
+ordering, investigation ordering) had no screen at all.
+
+**What was added, all in `ward.js` (+`ward.css`, +`home.js`), reusing the existing route table —
+no new backend module, one exception noted below:**
+
+- **Reachability.** `home.js` gets an "Inpatient Ward" tile, flag-gated on `smd_wardsynq` (existing
+  flag, `wardsynq-flags.js`, DEFAULT OFF), same fallback shape (query param → flag registry →
+  localStorage) as the OPD queue tile beside it. `WARD.open()` with no `orgId` now falls back to the
+  SAME remembered-workplace key `queue.js`'s router already writes (`localStorage.smd_opd_workplace`,
+  `"wardsynq:<hospitalId>"`) — reused, not re-derived, so the ward screen and the OPD desk can never
+  disagree about which hospital is signed in.
+- **Bed board + admission** (`boardView`, `GET /ward/beds` — existed, was never called). Admitting is
+  two steps on purpose: pick a free bed from the board's own live occupancy, THEN name the patient —
+  never the reverse, which is how "whichever bed is free" quietly becomes a stale bed number. An
+  existing patient is looked up by MRN and their NAME is shown for a human to confirm before
+  `POST /ward/admit` fires — nobody is admitted on a typed MRN alone. A new patient goes through the
+  SAME check-in sheet the front desk uses (`window.SMD_PATIENTREG`, `patient-register.js`) — one
+  form, not a second one that could drift from it.
+- **Medication order** (`medOrderCard`, `POST /ward/medication-order` — existed, no caller). Writes
+  the same `MedicationOrder` the eMAR round already reads, so a new order appears on the round the
+  moment it reloads. No safety check lives client-side; a formulary/restriction refusal comes back on
+  the response and is rendered exactly like every other refusal on this screen (`banner()`/`settle()`
+  — unchanged).
+- **Investigation order + results** (`investigationsCard`, `POST /ward/investigation`, `GET
+  /ward/collections`, `GET /ward/pending-tests` — all existed, none called). Results are read through
+  the EXISTING read-only FHIR export door (`GET /ward/fhir?patient=<id>&_type=DiagnosticReport`) —
+  this is the one place a genuinely missing capability (there was no "list a patient's completed
+  results" route at all, only `pendingRequests`/`collectionList` for open orders) was covered by
+  reusing an already-tested endpoint rather than adding a new backend route.
+- **Flowsheet + NEWS2/PEWS** (`flowsheetCard`, `GET /ward/flowsheet`, `GET /ward/news2` — both
+  existed per `flowsheet-view.js`/`news2-view.js`, both unreachable). An empty hour renders as a
+  plain dash, never a value that looks recorded, mirroring `wardsynq-flowsheet.js`'s own rule that a
+  configured row with nothing charted still appears, empty. The score is shown as a score, with the
+  server's own sentence that nothing here pages anyone.
+- **eMAR and discharge were already real and already wired** (`marCard`/`marAction`,
+  `discharge.js`/`G.DISCHARGE.open`) — untouched, and are what closes the loop once the rest of the
+  path can actually reach them.
+
+**What this did NOT do:** no client-side clinical decision anywhere in the additions (every
+formulary/safety/identity answer is the server's, rendered verbatim); no new canonical resource type,
+no new capability, no new production flag turned on (`smd_wardsynq` stays `def:false`); the doctor
+and nurse still share one capability-gated chart, per the app's existing design, rather than two
+screens that could drift apart.
+
+**Verification.** `test/ward-ui.test.mjs` (+6 tests, pure `_render`, no DOM) and a new
+`test/run-ward-golden-path.mjs` — the REAL `ward.js`/`ward.css` in real headless Chrome over CDP,
+driving admission (via the bed board) → chart → vitals → flowsheet auto-load → a prescribed
+medication order appearing on the round → the eMAR state machine (verify→dispense→scan→administer,
+one real click per state) → an investigation order → its result appearing → the discharge handoff
+carrying the right patient — plus a horizontal-overflow check at phone/tablet/desktop widths. This
+proves the CLIENT half end to end against a stubbed transport; the server-side contracts these same
+calls rely on are the pre-existing, unmodified 267+ tests in `wardsynq-inpatient-emar.test.mjs`.
+
+**NOT verified:** a live Cloudflare Pages deployment, or a physical iOS/Android device. The home.js
+tile → `WARD.open()` hand-off is code-reviewed and syntax-checked (mirrors the working OPD-queue tile
+pattern exactly) but has no headless-Chrome click-through of its own — `home.js` is a large,
+session/auth-heavy file and a full click-through of it was out of scope for this pass.

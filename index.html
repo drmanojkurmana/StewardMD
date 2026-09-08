@@ -70,7 +70,7 @@ try{var _sq=location.search||"";var _sv=!/[?&]splashv2=0\b/.test(_sq)&&(/[?&]spl
 <link rel="stylesheet" href="/abx-redesign.css?v=gold432">
 <link rel="stylesheet" href="/abx-wizard.css?v=bug809-build7">
 <link rel="stylesheet" href="/queue.css?v=q10-staffadmin">
-<link rel="stylesheet" href="/ward.css?v=ward17-xchg">
+<link rel="stylesheet" href="/ward.css?v=ward18-golden">
 <link rel="stylesheet" href="/discharge.css?v=dis1">
 <link rel="stylesheet" href="/opd-emr.css?v=voicenote1-micbar1-auth2-icdsug1">
 <link rel="stylesheet" href="/atlas.css?v=atlas2">
@@ -2140,7 +2140,7 @@ window.openExternal = function (u) {
 <script src="/kb/ai/maik-copilot.js?v=gold1053-calcfix" defer></script>
 <script src="/electrolytes.js?v=bug808-nodupe-focus1" defer></script>
 <script src="/caseshare.js?v=gold363" defer></script>
-<!-- lazy loaded: hospitals-in --><script src="/connect-source.js?v=cs3docs" defer></script><script src="/connect-patient.js?v=cp4" defer></script><script src="/queue-flags.js?v=q5-all-on" defer></script><script src="/govschemes-flags.js?v=gs2-defaulton" defer></script><script src="/home.js?v=nstream1-clinix5-surgx2-logo-aiu1-profile2-rxtile-glyphs-maikart2-pglog1-ack1-otasay-oncqis-sync1-prompt1-about1-icons1-rxv1-applock3-afoptin-gsrename1-icdtile1-hvtilealign1-sknx16" defer></script><script src="/profile-setup.js?v=pfs1" defer></script><script src="/syndromes-motion.js?v=synmo5" defer></script><script src="/dialog-motion.js?v=dm2" defer></script>
+<!-- lazy loaded: hospitals-in --><script src="/connect-source.js?v=cs3docs" defer></script><script src="/connect-patient.js?v=cp4" defer></script><script src="/queue-flags.js?v=q5-all-on" defer></script><script src="/govschemes-flags.js?v=gs2-defaulton" defer></script><script src="/home.js?v=nstream1-clinix5-surgx2-logo-aiu1-profile2-rxtile-glyphs-maikart2-pglog1-ack1-otasay-oncqis-sync1-prompt1-about1-icons1-rxv1-applock3-afoptin-gsrename1-icdtile1-hvtilealign1-sknx16-wsqtile1" defer></script><script src="/profile-setup.js?v=pfs1" defer></script><script src="/syndromes-motion.js?v=synmo5" defer></script><script src="/dialog-motion.js?v=dm2" defer></script>
 <!-- Lean sidebar redesign (Tools / Reference & Help / Settings / Advanced / Experimental). Additive; wraps
      SB.open and rebuilds #sbMenu, superseding home.js's legacy reorganizer (which stands down
      via window.SMD_SBR). Must load AFTER home.js. -->
@@ -2439,10 +2439,13 @@ window.openExternal = function (u) {
 <link rel="stylesheet" href="/patient-register.css?v=preg1">
 <script src="/patient-register.js?v=preg1" defer></script>
 <script src="/queue.js?v=fdesk1-addpt1" defer></script>
-<!-- WardSynQ inpatient ward (window.WARD). The admission/ward/eMAR/discharge routes have been
-     server-authoritative and tested for a while with nothing in the app calling them; this is the
-     screen. Self-mounting overlay, no nav coupling yet - opened via WARD.open({orgId}). -->
-<script src="/ward.js?v=ward17-xchg" defer></script>
+<!-- WardSynQ inpatient ward (window.WARD): admission (bed board), the doctor/nurse chart,
+     medication ordering + eMAR, investigation ordering + results, the vitals flowsheet, and
+     discharge - the whole golden path, through the same server-authoritative routes as before.
+     Self-mounting overlay. Reached from the home screen's "Inpatient Ward" tile (flag
+     smd_wardsynq, DEFAULT OFF - see home.js) or directly via WARD.open({orgId}); with no orgId
+     given it falls back to the workplace queue.js already remembers ("wardsynq:<hospitalId>"). -->
+<script src="/ward.js?v=ward18-golden" defer></script>
 <!-- Discharge summary workstation (window.DISCHARGE). Reads the assembled summary, lets a treating
      clinician correct it section by section, and signs it into an immutable version. Opened from a
      discharged patient on the ward screen: DISCHARGE.open({orgId, encounterId}). -->
