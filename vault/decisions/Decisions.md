@@ -5,6 +5,14 @@ tags: [decisions, adr]
 
 Dated architectural calls + why. Newest first. Keep each short: **decision · why · trade-off · status**.
 
+## 2026-09-09 · Selected outline and glow splash finish
+
+The owner selected option B: retain logo formation, remove the solid fill, and finish with one
+restrained halo. Rounded quadratic contour corners and a 4.4-unit stroke keep the outline crisp.
+Formation and glow durations are 30% longer (1.56s and 1.43s). The welcome phase begins after the
+formation, within the existing three-second readiness window. Reduce Motion shows the completed
+outline immediately. Web cache marker: `splashv2k`.
+
 ## 2026-09-09 · One visible three-second boot sequence; native launch mark removed
 
 **Decision:** make the required iOS/Android native launch surface an unbranded white bridge and

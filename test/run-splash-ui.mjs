@@ -311,8 +311,8 @@ try {
       label + ": the developed-by foot keeps its classic stacked composition");
     /* The logo traces and fills while the rest of the classic composition is already present. */
     okv(await ev(`var paths=document.querySelectorAll("#smdBootSplash .sbs-logo-trace path"),fill=[document.querySelector("#smdBootSplash .sbs-logo"),document.querySelector("#smdBootSplash .sbs-mark")].filter(function(x){return x&&getComputedStyle(x).display!=="none"})[0];
-        return paths.length===3 && paths[0].getAttribute("pathLength")==="1" && fill && getComputedStyle(fill).animationName==="sbsLogoFill" && getComputedStyle(paths[0]).animationPlayState==="running" ? "draw-fill-running" : "missing";`), "draw-fill-running",
-      label + ": the visible mark traces in three ordered paths and then fills");
+        return paths.length===3 && paths[0].getAttribute("pathLength")==="1" && fill && parseFloat(getComputedStyle(fill).opacity)===0 && getComputedStyle(paths[0]).animationPlayState==="running" ? "outline-running" : "missing";`), "outline-running",
+      label + ": the visible mark traces without a solid fill");
     okv(await ev(`var bad=[]; [".sbs-word",".sbs-tag",".sbs-foot",".sbs-center"].forEach(function(sel){
         var e=document.querySelector("#smdBootSplash "+sel); if(!e||getComputedStyle(e).display==="none") return;
         var s=getComputedStyle(e); if(s.animationName!=="none") bad.push(sel+":"+s.animationName); if(parseFloat(s.opacity)<1) bad.push(sel+":opacity "+s.opacity); });
@@ -393,7 +393,7 @@ try {
   okv(await ev(`var e=document.getElementById("smdBootSplash"); return !!e && e.classList.contains("sbs-dark");`), true, "the dark theme variant resolves");
   await classic("screen 1 dark");
   await shot("splash-05b-boot-classic-dark");
-  await sleep(1500);
+  await sleep(1800); // allow the 30% slower formation and background crossfade to settle
   ok(await ev(`var e=document.getElementById("smdBootSplash");
       return !!e && e.classList.contains("sbs-dark") && e.classList.contains("smd-boot-phase2") &&
              /radial-gradient/.test(getComputedStyle(e,"::before").backgroundImage||"") &&
@@ -444,7 +444,7 @@ try {
         if(getComputedStyle(e).animationName!=="none")out.push(sel[i]+":"+getComputedStyle(e).animationName);}
       return out.join(",")||"all still";`), "all still",
     "prefers-reduced-motion stills the intro poster animations");
-  okv(await ev(`var t=document.querySelector("#smdBootSplash .sbs-logo-trace"),f=[document.querySelector("#smdBootSplash .sbs-logo"),document.querySelector("#smdBootSplash .sbs-mark")].filter(function(x){return x&&getComputedStyle(x).display!=="none"})[0];return t&&getComputedStyle(t).display==="none"&&f&&parseFloat(getComputedStyle(f).opacity)===1?"still":"moving";`), "still",
+  okv(await ev(`var t=document.querySelector("#smdBootSplash .sbs-logo-trace"),f=[document.querySelector("#smdBootSplash .sbs-logo"),document.querySelector("#smdBootSplash .sbs-mark")].filter(function(x){return x&&getComputedStyle(x).display!=="none"})[0];return t&&getComputedStyle(t).display!=="none"&&getComputedStyle(t.querySelector("path")).strokeDashoffset==="0px"&&f&&parseFloat(getComputedStyle(f).opacity)===0?"still":"moving";`), "still",
     "prefers-reduced-motion shows the completed mark without tracing");
   await ev(`localStorage.setItem("stewardmd_account", JSON.stringify({type:"google",name:"Dr. Test",email:"t@example.com"})); return 1;`);
   await call("Page.navigate", { url: BASE });
