@@ -456,7 +456,14 @@ function capabilityStatement(opts) {
     },
     rest: [{
       mode: "server",
-      security: { description: "Bearer token or staff session, scoped to one hospital. Same authority as every other WardSynQ door." },
+      security: clean({
+        description: "A staff session, or - where the hospital has enabled it - a SMART on FHIR bearer token issued by this server, scoped to one hospital and narrowed to READ. Same governed store and audit as every other WardSynQ door.",
+        service: o.smart ? [{ coding: [{ system: "http://terminology.hl7.org/CodeSystem/restful-security-service", code: "SMART-on-FHIR" }] }] : undefined,
+        extension: o.smart ? [{
+          url: "http://fhir-registry.smarthealthit.org/StructureDefinition/oauth-uris",
+          extension: [{ url: "authorize", valueUri: o.smart.authorize }, { url: "token", valueUri: o.smart.token }, ...(o.smart.revoke ? [{ url: "revoke", valueUri: o.smart.revoke }] : [])],
+        }] : undefined,
+      }),
       /* Derived from the SAME tables the search parser reads (fhir-search.js), so what is declared
        * here is what actually parses. A CapabilityStatement maintained by hand drifts the first time
        * either side changes, and a client trusts the declaration. */
@@ -491,7 +498,11 @@ function capabilityStatement(opts) {
 
 async function open(request, env, ctx) {
   try {
-    const resolved = await resolveClinicalActor(request, env, ctx.migration.tenantId, "record:read", ctx.actorDeps);
+    /* A SMART bearer arrives already resolved (smart-server.js): a READ-tier actor narrowed to its
+     * granted types, with an empty write scope. It is used AS IS - never re-derived from an org role
+     * it does not hold - and everything below it (the governed store, the audit) treats it exactly
+     * as it treats a clinician's session. */
+    const resolved = ctx.actorOverride || await resolveClinicalActor(request, env, ctx.migration.tenantId, "record:read", ctx.actorDeps);
     const svc = new RecordService({
       repository: ctx.recordDeps.repository, pseudonym: ctx.recordDeps.pseudonym,
       tenant: resolved.tenant, actor: resolved.actor, role: resolved.role, roleSource: resolved.source,
