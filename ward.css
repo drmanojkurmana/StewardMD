@@ -314,3 +314,9 @@ body.dark #smdWard { --bg: #191c1e; --on-surface: #eff1f3; --on-surface-variant:
 #smdWard .w-ed-board { list-style: none; margin: 0; padding: 0; }
 #smdWard .w-ed-board li { border-top: 1px solid var(--outline-variant); }
 #smdWard .w-ed-board li:first-child { border-top: 0; }
+
+/* ICU: the admit-panel's own class toggle, and the device-association card's short device list. */
+#smdWard .w-chk { display: flex; align-items: center; gap: 8px; padding: 8px 0; font-size: 13px; }
+#smdWard .w-devices { list-style: none; margin: 0 0 8px; padding: 0; }
+#smdWard .w-devices li { display: flex; justify-content: space-between; align-items: center; padding: 6px 0; border-top: 1px solid var(--outline-variant); gap: 8px; }
+#smdWard .w-devices li:first-child { border-top: 0; }

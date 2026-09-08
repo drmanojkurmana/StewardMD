@@ -37,6 +37,15 @@ import { resolveFormulary, formularyStatus } from "./formulary.js";
 import { compileAdvisories, evaluateAdvisories } from "./advisories.js";
 
 const IPD = "IPD";
+// ICU joined 2026-09-08 (Task 2.2). An admission is still ONE act through this ONE file - a ward
+// named "ICU" is not what decides it, the admitting request says so explicitly, because inferring a
+// clinical unit from a free-text ward NAME is exactly the guess this file's own header refuses to
+// make about a bed. Everywhere IPD alone gated a filter below now reads either, because an ICU stay
+// is still an inpatient stay for every one of these purposes: it occupies a bed, it can be
+// discharged, it can be transferred, and a ward roster that only knew about IPD would show an ICU
+// full of admitted patients as an ICU with nobody in it.
+const ICU = "ICU";
+const ADMISSION_CLASSES = Object.freeze([IPD, ICU]);
 const OPEN = "in-progress";
 
 const str = (v) => (v == null ? "" : String(v).trim());
@@ -74,8 +83,12 @@ function encounterFromAdmission(input) {
   const id = admissionIdFor(mrn, admittedAt);
   if (!patientId || !id) return null;
 
+  // Explicit, requested, and validated - never inferred from the ward name. An unrecognised or
+  // absent value defaults to IPD, the behaviour every existing caller/test already depends on.
+  const requestedClass = str(input && input.class).toUpperCase();
+  const admissionClass = requestedClass === ICU ? ICU : IPD;
   const enc = Encounter({
-    id, patientId, class: IPD, status: OPEN,
+    id, patientId, class: admissionClass, status: OPEN,
     identifiers: [{ system: "opd-mrn", value: mrn }],
     location: {
       facilityId: str(input.facilityId) || null,
@@ -135,7 +148,7 @@ async function admitPatient(request, env, ctx) {
     let openEncounters;
     try { openEncounters = await svc.list("Encounter", 200); }
     catch (e) { return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), written: 0 }; }
-    const clash = (openEncounters || []).find((e) => e && e.id !== candidate.id && e.class === IPD && e.status === OPEN && sameBed(e.location, candidate.location));
+    const clash = (openEncounters || []).find((e) => e && e.id !== candidate.id && ADMISSION_CLASSES.includes(e.class) && e.status === OPEN && sameBed(e.location, candidate.location));
     if (clash) return bedOccupied(base, candidate);
 
     /* THE CHECK ABOVE IS NOT THE GUARD; IT IS THE FAST PATH. Two admissions racing for the same
@@ -222,10 +235,10 @@ async function listWard(request, env, ctx) {
 
   const want = str(ctx.ward).toLowerCase();
   const patients = (encounters || [])
-    .filter((e) => e && e.class === IPD && e.status === OPEN)
+    .filter((e) => e && ADMISSION_CLASSES.includes(e.class) && e.status === OPEN)
     .filter((e) => !want || str(e.location && e.location.ward).toLowerCase() === want)
     .map((e) => ({
-      encounterId: e.id, patientId: e.patientId,
+      encounterId: e.id, patientId: e.patientId, class: e.class,
       ward: (e.location && e.location.ward) || null, bed: (e.location && e.location.bed) || null,
       admittedAt: e.periodStart || null, attendingId: e.attendingId || null, version: e.version,
     }));
@@ -473,7 +486,7 @@ async function transferPatient(request, env, ctx) {
   } catch (e) { return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), written: 0 }; }
 
   if (!current) return { ...base, ok: false, status: 404, error: "encounter_not_found", encounterId, written: 0 };
-  if (current.class !== IPD) return { ...base, ok: false, status: 409, error: "not_an_admission", detail: "only an inpatient stay can be transferred", encounterId, written: 0 };
+  if (!ADMISSION_CLASSES.includes(current.class)) return { ...base, ok: false, status: 409, error: "not_an_admission", detail: "only an inpatient or ICU stay can be transferred", encounterId, written: 0 };
   // A discharged patient has no bed to move between. Silently re-opening the stay to accommodate the
   // request would be far worse than refusing it.
   if (current.status !== OPEN) return { ...base, ok: false, status: 409, error: "not_admitted", detail: "this stay is closed; re-admit rather than transfer", encounterId, status_: current.status, written: 0 };
@@ -489,7 +502,7 @@ async function transferPatient(request, env, ctx) {
    * can see what the conflict actually is rather than being told "no". A move to a ward with no bed
    * named is allowed - a patient can be on a ward awaiting a bed - and cannot collide. */
   if (bed) {
-    const clash = (all || []).find((e) => e && e.id !== encounterId && e.class === IPD && e.status === OPEN && sameBed(e.location, to));
+    const clash = (all || []).find((e) => e && e.id !== encounterId && ADMISSION_CLASSES.includes(e.class) && e.status === OPEN && sameBed(e.location, to));
     if (clash) {
       return {
         ...base, ok: false, status: 409, error: "bed_occupied",
@@ -549,7 +562,7 @@ async function bedBoard(request, env, ctx) {
   catch (e) { return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), wards: [] }; }
 
   const want = str(ctx.ward).toLowerCase();
-  const open = (encounters || []).filter((e) => e && e.class === IPD && e.status === OPEN)
+  const open = (encounters || []).filter((e) => e && ADMISSION_CLASSES.includes(e.class) && e.status === OPEN)
     .filter((e) => !want || str(e.location && e.location.ward).toLowerCase() === want);
 
   const cfg = ctx.beds && typeof ctx.beds === "object" ? ctx.beds : null;
@@ -588,7 +601,7 @@ async function bedBoard(request, env, ctx) {
 }
 
 export {
-  IPD, OPEN,
+  IPD, ICU, ADMISSION_CLASSES, OPEN,
   encounterFromAdmission, sameAdmission, admitPatient, listWard,
   recordWardVitals, orderFromWardRequest, createWardMedicationOrder,
   sameBed, transferPatient, bedBoard,

@@ -79,7 +79,10 @@ const ORDER_TYPES = Object.freeze(["MedicationOrder", "ServiceRequest"]);
 /* SpecimenCollection joined on 2026-09-07: taking a sample is nursing work, the same authority as
  * recording a vital. It records that a sample was TAKEN and never what it showed - the result is the
  * laboratory's own authority, so this grants nothing towards one. */
-const VITALS_TYPES = Object.freeze(["Observation", "ShiftHandover", "BreakGlassGrant", "MedicationReconciliation", "PatientConsent", "CarePlan", "RiskAssessment", "SpecimenCollection", "WoundAssessment", "ClinicalRead"]);
+/* DeviceAssociation joined 2026-09-08 (Task 2.2, ICU): scanning a patient's wristband and a
+ * monitor's asset tag onto each other is a bedside act, the same authority as recording a vital -
+ * not a device-inventory decision, which would belong somewhere administrative instead. */
+const VITALS_TYPES = Object.freeze(["Observation", "ShiftHandover", "BreakGlassGrant", "MedicationReconciliation", "PatientConsent", "CarePlan", "RiskAssessment", "SpecimenCollection", "WoundAssessment", "ClinicalRead", "DeviceAssociation"]);
 const PATIENT_TYPE = "Patient";
 // Added 2026-09-06 (the Encounter migration), alongside PATIENT_TYPE and for the identical reason:
 // checking a patient in for today's visit is the SAME administrative act QUEUE_ADD already covers
@@ -112,9 +115,13 @@ function grantForCaps(caps) {
      * constraint existed the type-level scope let her: `Observation` is one resource type carrying
      * four unrelated clinical meanings, and the critical-value loop believes anything categorised
      * `laboratory`. */
+    /* "device" joined 2026-09-08 (Task 2.2, ICU): a device reading reaches the chart through
+     * migrate-device.js's rehydrated DeviceGateway, called by the SAME nurse action as charting a
+     * vital - scanning a wristband and an asset tag onto each other. Without this category a device
+     * observation is refused by the exact CATEGORY_DENIED rule this comment already describes. */
     grant = {
       tier: TIER.EXECUTE, read: has(CAPS.EMR_VIEW) ? null : [...VITALS_TYPES], write: [...VITALS_TYPES],
-      writeCategories: { Observation: ["vital-signs", "fluid-balance"] },
+      writeCategories: { Observation: ["vital-signs", "fluid-balance", "device"] },
       basis: CAPS.EMR_VITALS,
     };
   }

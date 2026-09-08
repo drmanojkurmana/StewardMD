@@ -2274,7 +2274,9 @@ test("A LABORATORY MAY NOT WRITE A VITAL SIGN, AND A NURSE MAY NOT WRITE A RESUL
   assert.ok(lab.write.includes("Observation"), "still the same type scope as before");
 
   const nurse = grantForRole("nurse");
-  assert.deepEqual(nurse.writeCategories, { Observation: ["vital-signs", "fluid-balance"] });
+  // "device" joined 2026-09-08 (Task 2.2, ICU): a device reading reaches the chart through the
+  // same bedside authority as a vital sign or a fluid entry.
+  assert.deepEqual(nurse.writeCategories, { Observation: ["vital-signs", "fluid-balance", "device"] });
 
   // A doctor writes every type, so no category constraint applies: an unconstrained scope cannot be
   // partly constrained, and leaving one attached would refuse the one type it names while

@@ -210,6 +210,9 @@
     var admitPanel = !t ? "" :
       '<div class="w-card admit"><div class="w-card-h">' + ms("bed") + "<h3>Admit to " + esc(t.ward) + ", bed " + esc(t.bed) + "</h3>" +
         '<button class="w-ic" data-w-act="unpickbed" title="Choose a different bed">' + ms("close") + "</button></div>" +
+        // Explicit, never inferred from the ward's name - the same rule migrate-inpatient.js's own
+        // header states: a ward literally named "ICU" admits as IPD unless this is checked.
+        '<label class="w-chk"><input type="checkbox" id="wAdmitIcu"' + (state.admitAsIcu ? " checked" : "") + '> Critical care (ICU) admission</label>' +
         '<div class="w-sub"><h4>' + ms("badge") + "Existing patient (by MRN)</h4>" +
         '<div class="w-filter"><input id="wAdmitMrn" type="text" autocomplete="off" placeholder="MRN">' +
         '<button class="w-btn ghost" data-w-act="mrnlookup">' + ms("search") + "Find</button></div>" +
@@ -684,6 +687,7 @@
   function chartView(state) {
     var s = state.sel || {};
     var isEd = s.class === "ED";
+    var isIcu = s.class === "ICU";
     var header = isEd
       ? '<div class="w-chart-h"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button>" +
         "<div><b>" + esc(s.mrn || s.patientId || "") + "</b><small>" + ms("emergency", true) + "ED" +
@@ -702,7 +706,7 @@
 
     return header +
       criticalsCard(state) + (isEd ? triageCard(state) : "") + problemsCard(state) + noteCard(state) + vitalsCard() + flowsheetCard(state) + fluidCard(state) +
-      (isEd ? resusCard(state) : "") +
+      (isEd ? resusCard(state) : "") + (isIcu ? deviceCard(state) : "") +
       medOrderCard(state) + marCard(state) + outboxCard(state) + investigationsCard(state) +
       (isEd ? dispositionCard(state) : "");
   }
@@ -866,6 +870,25 @@
       '<input id="wFVal" type="text" inputmode="decimal" placeholder="mL" autocomplete="off">' +
       '<button class="w-btn" data-w-act="fluid">' + ms("add") + "Chart</button></div>" +
       '<p class="w-hint">Volumes are recorded in mL. A value that is not plainly one number is not recorded.</p></div>';
+  }
+
+  /* DEVICE ASSOCIATION (HAZ-DEV-01). Both the patient's wristband and the monitor's own asset tag
+   * must be scanned, and match, before a reading from it can reach this chart - the real check runs
+   * server-side in wardsynq-iomt.js's DeviceGateway, this card only shows what is currently bound
+   * and lets a nurse scan a new one on or take one off. */
+  function deviceCard(state) {
+    var rows = (state.devices || []).map(function (d) {
+      return "<li><div><b>" + esc(d.deviceId) + "</b><small>" + esc(d.kind || "monitor") + " &middot; " + esc(d.assetTag) + "</small></div>" +
+        '<button class="w-btn tiny warn" data-w-act="devicedissociate:' + esc(d.deviceId) + '">' + ms("link_off") + "Remove</button></li>";
+    }).join("");
+    return '<div class="w-card"><div class="w-card-h">' + ms("sensors") + "<h3>Devices</h3>" +
+      '<button class="w-ic" data-w-act="deviceload" title="Refresh">' + ms("refresh") + "</button></div>" +
+      (rows ? '<ul class="w-devices">' + rows + "</ul>" : '<p class="w-empty">No monitor currently associated with this patient.</p>') +
+      '<div class="w-filter"><input id="wDevId" type="text" placeholder="Device ID" autocomplete="off">' +
+      '<input id="wDevTag" type="text" placeholder="Scan asset tag" autocomplete="off">' +
+      '<input id="wDevWrist" type="text" placeholder="Scan wristband" autocomplete="off">' +
+      '<button class="w-btn" data-w-act="deviceassociate">' + ms("sensors") + "Associate</button></div>" +
+      '<p class="w-hint">' + ms("info") + "Both codes must be scanned and must match this patient - a device found in the room is not the same as a device confirmed on the patient." + "</p></div>";
   }
 
   /* Open critical results, ABOVE everything else on the chart. A critical result that reaches a
@@ -1099,14 +1122,20 @@
     // the disposition directly, never through the admit panel's own MRN-lookup/register flow,
     // which is for a patient the board does not already have open.
     if (st.edAdmitPending) { st.edAdmitPending = false; edDispose("admitted", { admission: { ward: ward, bed: bed } }); return; }
-    st.admitTarget = { ward: ward, bed: bed }; st.mrnLookup = null; st.mrnLookupErr = ""; paint();
+    st.admitTarget = { ward: ward, bed: bed }; st.mrnLookup = null; st.mrnLookupErr = ""; st.admitAsIcu = false; paint();
   }
   /* The one write in this whole flow: an Encounter, exactly as /ward/transfer and every other admit
-   * caller writes it. Nothing here invents a second admission path. */
+   * caller writes it. Nothing here invents a second admission path.
+   *
+   * ICU is read from st.admitAsIcu, captured the moment it was checked (mrnLookup/admitNew, below) -
+   * NOT from the checkbox's live DOM state here. paint() replaces the admit panel's whole innerHTML
+   * on the way to this call (the lookup's own busy-state repaint), which silently unchecks an
+   * uncontrolled checkbox; reading the DOM at this point would quietly drop the ICU choice a nurse
+   * already made. */
   function doAdmit(mrn) {
     var t = st.admitTarget; if (!t || !mrn) return;
     st.busy = true; paint();
-    apiPost("/ward/admit", { orgId: st.orgId, mrn: mrn, ward: t.ward, bed: t.bed, admittedAt: new Date().toISOString() })
+    apiPost("/ward/admit", { orgId: st.orgId, mrn: mrn, ward: t.ward, bed: t.bed, admittedAt: new Date().toISOString(), class: st.admitAsIcu ? "ICU" : undefined })
       .then(function (r) {
         if (r && r.error === "no_patient_identity") { st.busy = false; st.err = "That MRN is not registered here."; paint(); return; }
         if (settle(r, r && r.written ? "Admitted to " + t.ward + ", bed " + t.bed + "." : "Already admitted there.")) {
@@ -1119,6 +1148,8 @@
    * is a second, separate click (admitconfirm) once a human has read who it is. */
   function mrnLookup() {
     var mrn = val("wAdmitMrn");
+    var icuEl = document.getElementById("wAdmitIcu");
+    if (icuEl) st.admitAsIcu = !!icuEl.checked;
     if (!mrn) { st.mrnLookupErr = "Enter an MRN."; st.mrnLookup = null; paint(); return; }
     st.busy = true; st.mrnLookupErr = ""; st.mrnLookup = null; paint();
     apiGet("/patient/get?orgId=" + encodeURIComponent(st.orgId) + "&mrn=" + encodeURIComponent(mrn))
@@ -1137,6 +1168,8 @@
    * never silently discarded. */
   function admitNew() {
     var t = st.admitTarget; if (!t) return;
+    var icuEl = document.getElementById("wAdmitIcu");
+    if (icuEl) st.admitAsIcu = !!icuEl.checked;
     if (!(G.SMD_PATIENTREG && G.SMD_PATIENTREG.open)) { st.err = "Registration is unavailable on this build."; paint(); return; }
     G.SMD_PATIENTREG.open({
       submit: function (payload) { return apiPost("/patient/register", Object.assign({ orgId: st.orgId }, payload)); },
@@ -1225,6 +1258,41 @@
     apiPost("/ward/resus-void", { orgId: st.orgId, bundleId: bundleId, reason: reason.trim() })
       .then(function (r) { if (settle(r, "Voided.")) loadResus(); else paint(); })
       .catch(function () { st.busy = false; st.err = "Could not void the bundle."; paint(); });
+  }
+  // ---- ICU device association (HAZ-DEV-01) --------------------------------------------------
+  function loadDevices() {
+    var s = st.sel; if (!s) return Promise.resolve();
+    return apiGet("/ward/device-list?orgId=" + encodeURIComponent(st.orgId) + "&patientId=" + encodeURIComponent(s.patientId))
+      .then(function (r) { if (r && r.ok) st.devices = r.devices; paint(); })
+      .catch(function () {});
+  }
+  function deviceAssociate() {
+    var s = st.sel; if (!s) return;
+    var deviceId = val("wDevId"), assetTag = val("wDevTag"), wristband = val("wDevWrist");
+    if (!deviceId || !assetTag || !wristband) { st.err = "Scan the device's asset tag and the patient's wristband, and give the device an ID."; paint(); return; }
+    st.busy = true; paint();
+    apiPost("/ward/device-associate", {
+      orgId: st.orgId,
+      association: {
+        // The server looks up this patient's own MRN itself and checks the scanned wristband
+        // against IT - it never trusts an mrn/wristbandBarcode value sent from here.
+        device: { deviceId: deviceId, assetTag: assetTag },
+        patient: { id: s.patientId },
+        encounterId: s.encounterId, scannedWristband: wristband, scannedAssetTag: assetTag,
+      },
+    })
+      .then(function (r) {
+        if (r && !r.ok && r.error === "WRISTBAND_MISMATCH") { st.busy = false; st.err = "That wristband does not match this patient."; paint(); return; }
+        if (r && !r.ok && r.error === "ASSET_TAG_MISMATCH") { st.busy = false; st.err = "That asset tag does not match the device ID entered."; paint(); return; }
+        if (settle(r, "Device associated.")) loadDevices(); else paint();
+      })
+      .catch(function () { st.busy = false; st.err = "Could not associate the device."; paint(); });
+  }
+  function deviceDissociate(deviceId) {
+    st.busy = true; paint();
+    apiPost("/ward/device-dissociate", { orgId: st.orgId, deviceId: deviceId, reason: "removed from patient" })
+      .then(function (r) { if (settle(r, "Device removed.")) loadDevices(); else paint(); })
+      .catch(function () { st.busy = false; st.err = "Could not remove the device."; paint(); });
   }
   function edDispose(disposition, extra) {
     var s = st.sel; if (!s) return;
@@ -1714,10 +1782,12 @@
       if (!p) return;
       st.sel = p; st.view = "chart"; st.due = []; st.prn = []; st.unscheduled = []; st.problems = []; st.criticals = []; st.balance = null; st.outbox = [];
       st.flowsheet = null; st.news2 = null; st.investigations = null; st.results = null;
-      st.err = ""; st.note = ""; st.refusal = null;
+      st.err = ""; st.note = ""; st.refusal = null; st.devices = null;
       defaultWindow();
       st.noteTemplateId = ""; st.noteResult = null;
-      paint(); loadChart(); loadRound(); loadBalance(); loadOutbox(); loadTemplates(); loadFlowsheet(); loadNews2(); loadInvestigations(); return;
+      paint(); loadChart(); loadRound(); loadBalance(); loadOutbox(); loadTemplates(); loadFlowsheet(); loadNews2(); loadInvestigations();
+      if (p.class === "ICU") loadDevices();
+      return;
     }
     if (cmd === "openEd") {
       var pe = null;
@@ -1741,6 +1811,9 @@
     if (cmd === "resusstart") { resusStart(); return; }
     if (cmd === "resusmark") { var rm = arg.indexOf("|"); if (rm > 0) resusMark(arg.slice(0, rm), arg.slice(rm + 1)); return; }
     if (cmd === "resusvoid") { resusVoid(arg); return; }
+    if (cmd === "deviceload") { loadDevices(); return; }
+    if (cmd === "deviceassociate") { deviceAssociate(); return; }
+    if (cmd === "devicedissociate") { deviceDissociate(arg); return; }
     if (cmd === "dispositionadmit") { edDispositionAdmit(); return; }
     if (cmd === "disposition") { edDispositionHome(arg); return; }
     if (cmd === "summary") {

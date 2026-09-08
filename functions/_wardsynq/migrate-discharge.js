@@ -37,6 +37,7 @@ import { AuthError, PermissionError } from "../_connect/permission.js";
 import { VITAL_CODES } from "./migrate-vitals.js";
 import { problemsForSummary } from "./migrate-problem.js";
 import { reconciliationIdFor, reconciliationForSummary } from "./med-reconciliation.js";
+import { ADMISSION_CLASSES } from "./migrate-inpatient.js";
 
 const str = (v) => (v == null ? "" : String(v).trim());
 const NOT_RECORDED = "Not recorded.";
@@ -350,7 +351,7 @@ async function dischargePatient(request, env, ctx) {
   try { current = await svc.get("Encounter", encounterId); }
   catch (e) { return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), written: 0 }; }
   if (!current) return { ...base, ok: false, status: 404, error: "encounter_not_found", encounterId };
-  if (current.class !== "IPD") return { ...base, ok: false, status: 409, error: "not_an_admission", detail: "only an inpatient stay is discharged here", encounterId };
+  if (!ADMISSION_CLASSES.includes(current.class)) return { ...base, ok: false, status: 409, error: "not_an_admission", detail: "only an inpatient or ICU stay is discharged here", encounterId };
   if (current.status === "finished") {
     return { ...base, ok: true, written: 0, skipped: "already_discharged", encounterId, dischargedAt: current.periodEnd, version: current.version };
   }
