@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { sameOrigin, safeHeaders, safeUrl, responseSchema } from '../connect-agent/redact.mjs';
+import { sameOrigin, safeHeaders, safeUrl, responseSchema, requestSchema } from '../connect-agent/redact.mjs';
 
 test('sameOrigin only accepts the exact scheme+host', () => {
   assert.equal(sameOrigin('https://emr.example/patients', 'https://emr.example/login'), true);
@@ -16,6 +16,8 @@ test('safeHeaders removes credential-bearing headers', () => {
 test('safeUrl strips query values and rejects cross-origin URLs', () => {
   assert.equal(safeUrl('https://emr.example/api/patient?id=123&name=John', 'https://emr.example'), 'https://emr.example/api/patient?<query>');
   assert.equal(safeUrl('https://evil.example/steal', 'https://emr.example'), null);
+  const allowed = new Set(['https://emr.example', 'https://sso.example']);
+  assert.equal(safeUrl('https://sso.example/login?ticket=secret', 'https://emr.example', allowed), 'https://sso.example/login?<query>');
 });
 
 test('responseSchema keeps keys and types but not values', () => {
@@ -25,4 +27,16 @@ test('responseSchema keeps keys and types but not values', () => {
   assert.equal(schema.fields.patient.fields.age.type, 'number');
   assert.equal(schema.fields.token.type, 'redacted');
   assert.equal(schema.fields.rows.type, 'array');
+});
+
+test('requestSchema never preserves submitted credential values', () => {
+  const json = requestSchema(JSON.stringify({ patientId: '123', password: 'dont-store', accessToken: 'secret' }));
+  assert.equal(json.fields.patientId.type, 'string');
+  assert.equal(json.fields.password.type, 'redacted');
+  assert.equal(json.fields.accessToken.type, 'redacted');
+
+  const form = requestSchema('patientId=123&password=dont-store&search=cardiology');
+  assert.equal(form.fields.patientId.type, 'string');
+  assert.equal(form.fields.password.type, 'redacted');
+  assert.equal(form.fields.search.type, 'string');
 });
