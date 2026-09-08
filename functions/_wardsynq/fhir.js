@@ -646,17 +646,38 @@ async function validateCodeOperation(request, env, ctx) {
   return { ok: true, status: 200, parameters: validateCodeParameters(v), validation: v };
 }
 
+/**
+ * A read service FENCED to one patient's compartment, for a SMART token with patient/ scopes. The
+ * fence is on the READ LAYER, not on a search parameter: a get of a resource that belongs to another
+ * patient, a history of one, a compartment read for another patient id, or a roster read of a fenced
+ * type is refused as a permission error before a row is seen. `types` is "*" (every type) or the
+ * list of canonical types the token holds only by patient/ scope.
+ */
+function fenced(svc, patientId, types) {
+  const pid = str(patientId);
+  const isFenced = (t) => types === "*" || (Array.isArray(types) && types.includes(t));
+  const belongs = (t, rec) => !rec || (t === "Patient" ? str(rec.id) === pid : str(rec.patientId) === pid);
+  const refuse = () => { throw new PermissionError("outside the token's patient context"); };
+  return {
+    get: async (t, id) => { const r = await svc.get(t, id); if (isFenced(t) && !belongs(t, r)) refuse(); return r; },
+    history: async (t, id) => { const rows = await svc.history(t, id); const last = rows && rows[rows.length - 1]; if (isFenced(t) && !belongs(t, last)) refuse(); return rows; },
+    byPatient: async (t, p) => { if (isFenced(t) && str(p) !== pid) refuse(); return svc.byPatient(t, p); },
+    list: async (t, n) => { if (isFenced(t)) refuse(); return svc.list(t, n); },
+  };
+}
+
 async function open(request, env, ctx) {
   try {
     /* A SMART bearer arrives already resolved (smart-server.js): a READ-tier actor narrowed to its
      * granted types, with an empty write scope. It is used AS IS - never re-derived from an org role
      * it does not hold - and everything below it (the governed store, the audit) treats it exactly
-     * as it treats a clinician's session. */
+     * as it treats a clinician's session. A bearer with a patient context is fenced to it. */
     const resolved = ctx.actorOverride || await resolveClinicalActor(request, env, ctx.migration.tenantId, "record:read", ctx.actorDeps);
-    const svc = new RecordService({
+    const base = new RecordService({
       repository: ctx.recordDeps.repository, pseudonym: ctx.recordDeps.pseudonym,
       tenant: resolved.tenant, actor: resolved.actor, role: resolved.role, roleSource: resolved.source,
     });
+    const svc = resolved.patientId && resolved.compartmentTypes !== null && resolved.compartmentTypes !== undefined ? fenced(base, resolved.patientId, resolved.compartmentTypes) : base;
     return { svc, resolved };
   } catch (e) {
     const status = e instanceof AuthError ? 401 : e instanceof PermissionError ? 403 : 502;
@@ -710,9 +731,14 @@ async function patientEverything(request, env, ctx) {
   const unknown = typeNames.filter((t) => !CANONICAL_TYPE[t] && !MAPPERS[t]);
   if (unknown.length) return { ok: false, status: 400, outcome: operationOutcome("error", "not-supported", `_type: WardSynQ does not export ${unknown.join(", ")}`) };
 
-  const { svc, error } = await open(request, env, ctx);
+  const { svc, resolved, error } = await open(request, env, ctx);
   if (error) return { ok: false, status: error.status, outcome: operationOutcome("error", error.status === 401 ? "login" : "forbidden", error.detail || error.error) };
   const patientId = await resolveId(svc, "Patient", requestedId);
+  /* A token launched for one patient may ask for EVERYTHING about that patient only. Another
+   * patient's everything is outside the context as a whole, and is refused as a whole. */
+  if (resolved && resolved.patientId && resolved.compartmentTypes !== null && resolved.compartmentTypes !== undefined && patientId !== str(resolved.patientId)) {
+    return { ok: false, status: 403, outcome: operationOutcome("error", "forbidden", "outside the token's patient context") };
+  }
 
   const wanted = typeNames.length ? typeNames.map((t) => CANONICAL_TYPE[t] || t).filter((t) => MAPPERS[t]) : Object.keys(MAPPERS);
 
@@ -810,8 +836,10 @@ async function searchType(request, env, ctx) {
     return { ok: false, status: 400, outcome: { resourceType: "OperationOutcome", issue: problems.map((p) => ({ severity: "error", code: "not-supported", diagnostics: `${p.param}: ${p.reason}`, expression: [p.param] })) } };
   }
 
-  const { svc, error } = await open(request, env, ctx);
+  const { svc, resolved, error } = await open(request, env, ctx);
   if (error) return { ok: false, status: error.status, outcome: operationOutcome("error", error.status === 401 ? "login" : "forbidden", error.detail || error.error) };
+  // A token launched for one patient reads that patient unless it says otherwise: SMART's patient context.
+  if (!query.patient && resolved && resolved.patientId) query.patient = resolved.patientId;
 
   let rows;
   try {
@@ -985,7 +1013,7 @@ export {
   systemUriFor, codeable, identifier, withMeta, toFhir, bundle, capabilityStatement, operationOutcome,
   fhirPatient, fhirEncounter, fhirCondition, fhirAllergy, fhirObservation,
   fhirMedicationRequest, fhirMedicationAdministration, fhirServiceRequest,
-  fhirDiagnosticReport, fhirDocumentReference, fhirConsent, fhirProvenance, parseProvenanceId, compartmentOf, parseEverything, resolveId,
+  fhirDiagnosticReport, fhirDocumentReference, fhirConsent, fhirProvenance, parseProvenanceId, compartmentOf, parseEverything, resolveId, fenced,
   patientEverything, readResource, searchType, historyOf, vread, provenanceRead, provenanceSearch,
   validateFully, validateOperation, validateCodeOperation,
 };

@@ -5146,8 +5146,32 @@ test("SMART: authorize (PKCE) -> token -> read as the clinician, narrowed to the
   // No session: the clinician has to be there to say yes.
   assert.equal((await viaFhirDoor(`${ORG}/smart/authorize?${q()}`)).status, 401);
 
-  const az = await viaFhirDoor(`${ORG}/smart/authorize?${q()}`, { email: DOCTOR });
-  assert.equal(az.status, 302);
+  /* THE CONSENT SCREEN. Nothing is granted on GET: the clinician sees the application by name, what
+   * it will get, what it asked for and will not get, and decides. The form's anti-forgery token is
+   * the transaction itself, bound to this clinician. */
+  const screen = await viaFhirDoor(`${ORG}/smart/authorize?${q()}`, { email: DOCTOR });
+  const screenText = await screen.text();
+  assert.equal(screen.status, 200, screenText);
+  assert.match(screen.headers.get("content-type"), /^text\/html/);
+  assert.match(screen.headers.get("content-security-policy"), /default-src 'none'/);
+  assert.match(screenText, /Allow Chart viewer to read this record as you\?/);
+  assert.match(screenText, /user\/Observation\.read/, "what it will get");
+  assert.match(screenText, /will NOT get[\s\S]*user\/Encounter\.read/, "what it asked for and will not get");
+  assert.ok(!/<script/i.test(screenText), "no script on the consent page");
+  const authz = (/name="authz" value="([^"]+)"/.exec(screenText) || [])[1];
+  assert.ok(authz && authz.length > 20);
+  // Another clinician cannot use this transaction; a forged one is refused; a deny goes back as access_denied.
+  assert.equal((await viaFhirDoor(`${ORG}/smart/authorize`, { ...form({ authz, decision: "allow" }), email: LOCUM })).status, 403);
+  assert.equal((await viaFhirDoor(`${ORG}/smart/authorize`, { ...form({ authz: "forged", decision: "allow" }), email: DOCTOR })).status, 400);
+  const denied = await viaFhirDoor(`${ORG}/smart/authorize?${q()}`, { email: DOCTOR });
+  const deniedAuthz = (/name="authz" value="([^"]+)"/.exec(await denied.text()) || [])[1];
+  const deny = await viaFhirDoor(`${ORG}/smart/authorize`, { ...form({ authz: deniedAuthz, decision: "deny" }), email: DOCTOR });
+  assert.equal(deny.status, 302);
+  assert.match(deny.headers.get("location"), /error=access_denied/);
+
+  const az = await viaFhirDoor(`${ORG}/smart/authorize`, { ...form({ authz, decision: "allow" }), email: DOCTOR });
+  assert.equal(az.status, 302, await az.text());
+  assert.equal((await viaFhirDoor(`${ORG}/smart/authorize`, { ...form({ authz, decision: "allow" }), email: DOCTOR })).status, 400, "the transaction is spent");
   const loc = new URL(az.headers.get("location"));
   assert.equal(loc.origin + loc.pathname, "https://viewer.example/cb");
   assert.equal(loc.searchParams.get("state"), "xyz");
@@ -5388,6 +5412,185 @@ test("AUDIT: every imported row and every token carries who, as what, and for wh
   const issued = RECORD.audit.find((a) => a.action === "smart.token" && a.actor === "smart:lab-sys");
   assert.ok(issued);
   assert.ok(!JSON.stringify(issued).includes((await ok.json()).access_token), "the token itself is never in the audit");
+});
+
+/** A signing key for id_tokens, in the shape the deployment holds it (a private JWK in an env secret). */
+async function signingJwk() {
+  const kp = await webcrypto.subtle.generateKey({ name: "ECDSA", namedCurve: "P-256" }, true, ["sign", "verify"]);
+  const jwk = await webcrypto.subtle.exportKey("jwk", kp.privateKey);
+  return JSON.stringify({ ...jwk, kid: "wsq-test-key" });
+}
+/** The flow a SMART application runs, as a function: GET the consent screen, POST allow, exchange the code. */
+async function smartCodeFlow(o) {
+  const verifier = "v".repeat(20) + "ERIFIER-with-enough-length-to-be-legal-abcdef0123456789";
+  const challenge = b64u(await webcrypto.subtle.digest("SHA-256", new TextEncoder().encode(verifier)));
+  const params = new URLSearchParams({ response_type: "code", client_id: o.clientId, redirect_uri: o.redirectUri, scope: o.scope, state: "s1", code_challenge: challenge, code_challenge_method: "S256", ...(o.launch ? { launch: o.launch } : {}), ...(o.nonce ? { nonce: o.nonce } : {}) }).toString();
+  const screen = await viaFhirDoor(`${ORG}/smart/authorize?${params}`, { email: o.email || DOCTOR });
+  const screenText = await screen.text();
+  if (screen.status !== 200) return { screen, screenText };
+  const authz = (/name="authz" value="([^"]+)"/.exec(screenText) || [])[1];
+  const az = await viaFhirDoor(`${ORG}/smart/authorize`, { ...form({ authz, decision: "allow", ...(o.patientInput ? { patient: o.patientInput } : {}) }), email: o.email || DOCTOR });
+  if (az.status !== 302) return { screen, screenText, az, azText: await az.text() };
+  const code = new URL(az.headers.get("location")).searchParams.get("code");
+  const tok = await viaFhirDoor(`${ORG}/smart/token`, form({ grant_type: "authorization_code", client_id: o.clientId, code, code_verifier: verifier, redirect_uri: o.redirectUri }));
+  const tokText = await tok.text();
+  return { screen, screenText, az, tok, tokText, token: tok.status === 200 ? JSON.parse(tokText) : null };
+}
+
+test("SMART: an EHR launch fixes the patient before consent; patient/ scopes are FENCED to that compartment on every read, not by a parameter; the token says which patient", async () => {
+  seedHospital(); resetRateLimit();
+  const app = { clientId: "bedside-app", name: "Bedside app", kind: "public", redirectUris: ["https://bedside.example/cb"], scopes: ["launch", "launch/patient", "patient/*.read", "user/Patient.read", "offline_access", "openid", "fhirUser"] };
+  enableSmart([app]);
+  const { adm } = await admittedPatientOnDrug();
+  // A second patient on the ward, whose chart the token must never see.
+  const other = await as(DOCTOR, "/patient/register", "POST", { orgId: ORG, name: "Other Person", mobile: "9876500022", gender: "male", ageYears: 36 });
+  const otherAdm = await as(DOCTOR, "/ward/admit", "POST", { orgId: ORG, mrn: other.mrn, ward: "Medical A", bed: "14", admittedAt: "2026-09-07T09:00:00.000Z" });
+  const otherId = otherAdm.patientId;
+  assert.ok(otherId, JSON.stringify(otherAdm).slice(0, 200));
+
+  // The ward launches the app for THIS patient: a clinician's own capability, a token that lives five minutes.
+  const launch = await as(DOCTOR, "/ward/smart-launch", "POST", { orgId: ORG, clientId: "bedside-app", patientId: adm.patientId, encounterId: adm.encounterId });
+  assert.equal(launch.__status, 200, JSON.stringify(launch).slice(0, 200));
+  assert.ok(launch.launch && launch.launch.length > 20);
+  assert.equal((await as(DOCTOR, "/ward/smart-launch", "POST", { orgId: ORG, clientId: "chart-viewer", patientId: adm.patientId })).__status, 400, "an unregistered or non-launch client cannot be launched");
+  assert.equal((await as(DOCTOR, "/ward/smart-launch", "POST", { orgId: ORG, clientId: "bedside-app", patientId: "nobody" })).__status, 404);
+
+  const r = await smartCodeFlow({ clientId: "bedside-app", redirectUri: "https://bedside.example/cb", scope: "launch patient/Observation.read patient/Encounter.read user/Patient.read offline_access", launch: launch.launch });
+  assert.equal(r.screen.status, 200, r.screenText);
+  assert.match(r.screenText, new RegExp(`Confined to patient <strong>${adm.patientId}`), "the consent screen names the patient it is confined to");
+  assert.ok(r.token, r.tokText || (r.azText || ""));
+  assert.equal(r.token.patient, adm.patientId, "the token says which patient");
+  assert.equal(r.token.encounter, adm.encounterId);
+  assert.ok(r.token.refresh_token, "offline_access was granted");
+  assert.ok(!r.token.id_token, "openid was not requested");
+  const t = r.token.access_token;
+
+  // Their own observations: yes, with or without patient=. Another patient's: refused, whatever the parameter says.
+  const mine = await (await viaFhirDoor(`${ORG}/Observation`, { bearer: t })).json();
+  assert.equal(mine.resourceType, "Bundle"); assert.ok(mine.total >= 1);
+  assert.ok(mine.entry.every((e) => e.resource.subject.reference === `Patient/${adm.patientId}`));
+  assert.equal((await viaFhirDoor(`${ORG}/Observation?patient=${otherId}`, { bearer: t })).status, 403, "fenced: the parameter does not widen the token");
+  assert.equal((await viaFhirDoor(`${ORG}/Patient/${otherId}/$everything`, { bearer: t })).status, 403);
+  assert.equal((await viaFhirDoor(`${ORG}/Encounter/${adm.encounterId}`, { bearer: t })).status, 200);
+  // A read of a specific resource that belongs to another patient is refused even by direct id.
+  const otherVitals = await as(NURSE, "/ward/vitals", "POST", { orgId: ORG, encounterId: otherAdm.encounterId, patientId: otherId, vitals: { pulse: "70" } });
+  assert.equal(otherVitals.__status, 200, JSON.stringify(otherVitals).slice(0, 200));
+  const otherObs = (await as(DOCTOR, `/ward/fhir/Observation?orgId=${ORG}&patient=${otherId}`)).entry[0].resource.id;
+  assert.equal((await viaFhirDoor(`${ORG}/Observation/${otherObs}`, { bearer: t })).status, 403);
+  assert.equal((await viaFhirDoor(`${ORG}/Observation/${otherObs}/_history`, { bearer: t })).status, 403);
+  // user/Patient.read was granted too: THAT type is not fenced, so the roster read the user scope allows still works.
+  assert.equal((await viaFhirDoor(`${ORG}/Patient/${otherId}`, { bearer: t })).status, 200, "user/ scope on Patient is not narrowed by the patient context");
+  // Condition was not granted at all: 403 from the governed store, as before.
+  assert.equal((await viaFhirDoor(`${ORG}/Condition`, { bearer: t })).status, 403);
+
+  // The launch is single use, and a different clinician cannot consume it.
+  const again = await smartCodeFlow({ clientId: "bedside-app", redirectUri: "https://bedside.example/cb", scope: "launch patient/Observation.read", launch: launch.launch });
+  assert.equal(again.screen.status, 302, "a spent launch goes back to the app as an error");
+  assert.match(again.screen.headers.get("location"), /error=invalid_request/);
+  const launch2 = await as(DOCTOR, "/ward/smart-launch", "POST", { orgId: ORG, clientId: "bedside-app", patientId: adm.patientId });
+  const stranger = await smartCodeFlow({ clientId: "bedside-app", redirectUri: "https://bedside.example/cb", scope: "launch patient/Observation.read", launch: launch2.launch, email: LOCUM });
+  assert.equal(stranger.screen.status, 302);
+  assert.match(stranger.screen.headers.get("location"), /error=invalid_request/);
+  // patient/ scopes with no context at all are refused before anyone is asked.
+  const noctx = await smartCodeFlow({ clientId: "bedside-app", redirectUri: "https://bedside.example/cb", scope: "patient/Observation.read" });
+  assert.equal(noctx.screen.status, 302);
+  assert.match(noctx.screen.headers.get("location"), /error=invalid_scope/);
+
+  // STANDALONE: launch/patient asks the clinician to name the patient, by MRN, and refuses a stranger's name.
+  const wrong = await smartCodeFlow({ clientId: "bedside-app", redirectUri: "https://bedside.example/cb", scope: "launch/patient patient/Observation.read", patientInput: "NOBODY-9" });
+  assert.equal(wrong.az && wrong.az.status, 200, "asked again on the same screen");
+  assert.match(wrong.azText, /No patient here matches/);
+  const patRec = await (await viaFhirDoor(`${ORG}/Patient/${adm.patientId}`, { bearer: t })).json();
+  const mrn = patRec.identifier.find((i) => i.system === "urn:stewardmd:mrn").value;
+  const standalone = await smartCodeFlow({ clientId: "bedside-app", redirectUri: "https://bedside.example/cb", scope: "launch/patient patient/Observation.read", patientInput: mrn });
+  assert.ok(standalone.token, standalone.tokText || standalone.azText);
+  assert.equal(standalone.token.patient, adm.patientId);
+  assert.equal((await viaFhirDoor(`${ORG}/Observation?patient=${otherId}`, { bearer: standalone.token.access_token })).status, 403);
+
+  // REFRESH: rotated on use; the old one is dead; presenting a dead one again kills the family.
+  const rt = r.token.refresh_token;
+  const refreshed = await viaFhirDoor(`${ORG}/smart/token`, form({ grant_type: "refresh_token", client_id: "bedside-app", refresh_token: rt }));
+  const refreshedText = await refreshed.text();
+  assert.equal(refreshed.status, 200, refreshedText);
+  const r2 = JSON.parse(refreshedText);
+  assert.ok(r2.access_token && r2.refresh_token && r2.refresh_token !== rt);
+  assert.equal(r2.patient, adm.patientId, "the patient context survives a refresh");
+  assert.equal((await viaFhirDoor(`${ORG}/Observation`, { bearer: r2.access_token })).status, 200);
+  const reuse = await viaFhirDoor(`${ORG}/smart/token`, form({ grant_type: "refresh_token", client_id: "bedside-app", refresh_token: rt }));
+  assert.equal(reuse.status, 400, "a rotated refresh token presented again");
+  assert.equal((await viaFhirDoor(`${ORG}/Observation`, { bearer: r2.access_token })).status, 401, "and the whole family is revoked: the newest access token is dead");
+  assert.equal((await viaFhirDoor(`${ORG}/smart/token`, form({ grant_type: "refresh_token", client_id: "bedside-app", refresh_token: r2.refresh_token }))).status, 400);
+  assert.ok(RECORD.audit.some((a) => a.action === "smart.refresh.reuse"));
+});
+
+test("SMART: openid issues an ES256 id_token verifiable at jwks.json, fhirUser resolves to the bearer's own Practitioner and nothing else; without a key the scope is dropped and said so", async () => {
+  seedHospital(); resetRateLimit();
+  const app = { clientId: "id-app", name: "Identity app", kind: "public", redirectUris: ["https://id.example/cb"], scopes: ["user/Patient.read", "openid", "fhirUser"] };
+  enableSmart([app]);
+  const { adm } = await admittedPatientOnDrug();
+  // No key: openid is not offered, not granted, and the consent screen says it will not be.
+  delete ENV.WSQ_SMART_SIGNING_JWK;
+  const conf0 = await (await viaFhirDoor(`${ORG}/.well-known/smart-configuration`)).json();
+  assert.ok(!conf0.jwks_uri && !conf0.scopes_supported.includes("openid") && !conf0.capabilities.includes("sso-openid-connect"));
+  const nokey = await smartCodeFlow({ clientId: "id-app", redirectUri: "https://id.example/cb", scope: "user/Patient.read openid", nonce: "n1" });
+  assert.match(nokey.screenText, /will NOT get[\s\S]*openid/);
+  assert.ok(nokey.token && !nokey.token.id_token);
+
+  ENV.WSQ_SMART_SIGNING_JWK = await signingJwk();
+  const conf = await (await viaFhirDoor(`${ORG}/.well-known/smart-configuration`)).json();
+  assert.equal(conf.jwks_uri, `https://x/api/fhir/${ORG}/.well-known/jwks.json`);
+  assert.ok(conf.capabilities.includes("sso-openid-connect"));
+  const jwks = await (await viaFhirDoor(`${ORG}/.well-known/jwks.json`)).json();
+  assert.equal(jwks.keys.length, 1); assert.equal(jwks.keys[0].kid, "wsq-test-key"); assert.ok(!("d" in jwks.keys[0]), "the private half never leaves");
+
+  const r = await smartCodeFlow({ clientId: "id-app", redirectUri: "https://id.example/cb", scope: "user/Patient.read openid fhirUser", nonce: "n2" });
+  assert.ok(r.token && r.token.id_token, r.tokText);
+  const [h, p, s] = r.token.id_token.split(".");
+  const header = JSON.parse(Buffer.from(h, "base64url").toString()), claims = JSON.parse(Buffer.from(p, "base64url").toString());
+  assert.equal(header.alg, "ES256"); assert.equal(header.kid, "wsq-test-key");
+  assert.equal(claims.iss, `https://x/api/fhir/${ORG}`); assert.equal(claims.aud, "id-app"); assert.equal(claims.sub, idFor(DOCTOR)); assert.equal(claims.nonce, "n2");
+  assert.equal(claims.fhirUser, `https://x/api/fhir/${ORG}/Practitioner/${encodeURIComponent(idFor(DOCTOR))}`);
+  const pub = await webcrypto.subtle.importKey("jwk", jwks.keys[0], { name: "ECDSA", namedCurve: "P-256" }, false, ["verify"]);
+  assert.equal(await webcrypto.subtle.verify({ name: "ECDSA", hash: "SHA-256" }, pub, Buffer.from(s, "base64url"), new TextEncoder().encode(`${h}.${p}`)), true, "verifies with the published key");
+  const me = await viaFhirDoor(`${ORG}/Practitioner/${encodeURIComponent(idFor(DOCTOR))}`, { bearer: r.token.access_token });
+  assert.equal(me.status, 200);
+  assert.equal((await me.json()).id, idFor(DOCTOR));
+  assert.equal((await viaFhirDoor(`${ORG}/Practitioner/${encodeURIComponent(idFor(NURSE))}`, { bearer: r.token.access_token })).status, 404, "only its own");
+  delete ENV.WSQ_SMART_SIGNING_JWK;
+});
+
+test("SMART: a backend client registered with a jwks_uri is verified against keys fetched through the hardened fetch, cached, and refreshed once on an unknown kid", async () => {
+  seedHospital(); resetRateLimit();
+  const { resetJwksCache } = await import("../functions/_wardsynq/smart-server.js");
+  resetJwksCache();
+  const lab = await smartBackendClient("lab-uri");
+  const remote = { keys: lab.config.jwks.keys };
+  const fetched = [];
+  const realFetch = globalThis.fetch;
+  globalThis.fetch = async (url) => { fetched.push(String(url)); return new Response(JSON.stringify(remote), { status: 200 }); };
+  try {
+    enableSmart([{ clientId: "lab-uri", name: "Lab by URL", kind: "backend", scopes: ["system/Observation.read"], jwksUri: "https://keys.example/lab/jwks.json" }]);
+    await admittedPatientOnDrug();
+    const tokenUrl = `https://x/api/fhir/${ORG}/smart/token`;
+    const claims = () => ({ iss: "lab-uri", sub: "lab-uri", aud: tokenUrl, exp: Math.floor(Date.now() / 1000) + 120, jti: "j-" + Math.random().toString(36).slice(2) });
+    const cc = async (assertion) => viaFhirDoor(`${ORG}/smart/token`, form({ grant_type: "client_credentials", client_assertion_type: "urn:ietf:params:oauth:client-assertion-type:jwt-bearer", client_assertion: assertion }));
+    const ok = await cc(await lab.sign(claims()));
+    assert.equal(ok.status, 200, await ok.text());
+    assert.deepEqual(fetched, ["https://keys.example/lab/jwks.json"], "fetched from the URL the HOSPITAL registered");
+    await cc(await lab.sign(claims()));
+    assert.equal(fetched.length, 1, "cached");
+    // The key rotates at the source: the cached set misses the new kid, one fresh fetch finds it.
+    const lab2 = await smartBackendClient("lab-uri");
+    remote.keys = [{ ...lab2.config.jwks.keys[0], kid: "k2" }];
+    const rotated = await cc(await lab2.sign({ ...claims() }).then((j) => j));
+    // lab2 signs with kid k1 in its header (the helper's fixed kid); the remote now holds k2 only, so this must fail verification, not crash.
+    assert.equal(rotated.status, 401);
+    assert.equal(fetched.length, 2, "one fresh fetch on a miss, then the honest answer");
+    // A client with neither inline keys nor a registered URL proves nothing.
+    enableSmart([{ clientId: "lab-none", name: "No keys", kind: "backend", scopes: ["system/Observation.read"] }]);
+    const none = await smartBackendClient("lab-none");
+    assert.equal((await viaFhirDoor(`${ORG}/smart/token`, form({ grant_type: "client_credentials", client_assertion_type: "urn:ietf:params:oauth:client-assertion-type:jwt-bearer", client_assertion: await none.sign({ iss: "lab-none", sub: "lab-none", aud: tokenUrl, exp: Math.floor(Date.now() / 1000) + 60, jti: "z" }) }))).status, 401);
+  } finally { globalThis.fetch = realFetch; }
 });
 
 test("SMART: the token endpoint is rate limited per client, and says so with Retry-After", async () => {

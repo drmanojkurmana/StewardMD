@@ -40,15 +40,30 @@ function kvStore(kv) {
  * @returns {Promise<{allowed: boolean, remaining: number, retryAfterSeconds: number, store: string}>}
  */
 async function hit(deps, opts) {
-  const store = (deps && deps.store) || kvStore(deps && deps.kv) || memoryStore();
-  const key = `rl:${str(opts.key)}`;
   const limit = Math.max(1, Number(opts.limit) || 1);
   const windowMs = Math.max(1000, Number(opts.windowMs) || 60000);
   const now = Number.isFinite(opts.now) ? opts.now : Date.now();
+  /* A Workers rate-limit binding, when the deployment bound one (env.WSQ_RL): the platform counts,
+   * exactly, across every isolate. Its limit and period are the binding's own configuration; the
+   * caller's numbers are documentation of intent. Preferred whenever present. */
+  const binding = deps && deps.binding;
+  if (binding && typeof binding.limit === "function") {
+    try {
+      const r = await binding.limit({ key: str(opts.key) });
+      const allowed = !!(r && r.success);
+      return { allowed, remaining: allowed ? -1 : 0, retryAfterSeconds: allowed ? 0 : Math.max(1, Math.ceil(windowMs / 1000)), store: "binding" };
+    } catch { /* a binding that errors falls through to the store, never to "allowed" without counting */ }
+  }
+  const store = (deps && deps.store) || kvStore(deps && deps.kv) || memoryStore();
+  /* KV is eventually consistent, so a read-modify-write on one key under-counts when two isolates
+   * race. The window is keyed by its INDEX rather than reset in place, so the worst case is a brief
+   * under-count inside one window and never a stuck or runaway counter. ponytail: KV under-counts
+   * under concurrent bursts; the binding above is exact and is the production answer. */
+  const windowStart = Math.floor(now / windowMs) * windowMs;
+  const key = `rl:${str(opts.key)}:${windowStart}`;
   const cur = await store.get(key);
-  const windowStart = cur && cur.windowStart && now - cur.windowStart < windowMs ? cur.windowStart : now;
-  const count = (cur && windowStart === cur.windowStart ? Number(cur.count) || 0 : 0) + 1;
-  await store.put(key, { windowStart, count }, windowMs);
+  const count = (cur ? Number(cur.count) || 0 : 0) + 1;
+  await store.put(key, { windowStart, count }, windowMs * 2);
   const allowed = count <= limit;
   return {
     allowed, remaining: Math.max(0, limit - count),

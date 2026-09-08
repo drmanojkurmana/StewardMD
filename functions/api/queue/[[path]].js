@@ -64,6 +64,7 @@ import { declareBreakGlass, openEmergencyChart, listBreakGlass } from "../../_wa
 import { operationOutcome } from "../../_wardsynq/fhir.js";
 import { dispatchRead, dispatchOperation } from "../../_wardsynq/fhir-route.js";
 import { ingestFhir, listExceptions, resolveException, inboundEnabled } from "../../_wardsynq/fhir-inbound.js";
+import { createLaunch } from "../../_wardsynq/smart-server.js";
 import { startReconciliation, decideMedicine, readReconciliation } from "../../_wardsynq/med-reconciliation.js";
 import { wardMetrics } from "../../_wardsynq/ward-metrics.js";
 import { releaseResult, pendingRequests } from "../../_wardsynq/lab-result.js";
@@ -513,6 +514,7 @@ export async function onRequest(context) {
         /* DECIDING is emr.treat: "this is the same person" and "the feed's version replaces ours"
          * are clinical judgements about a chart, and they are recorded under the decider's name. */
         "fhir-exception-resolve": CAPS.EMR_TREAT,
+        "smart-launch": CAPS.EMR_VIEW,
         /* Taking a medicines history is a nurse-or-pharmacist act (emr.vitals covers the ward
          * staff who do it). DECIDING what happens to a home medicine is prescribing-adjacent and
          * belongs to the treating clinician, so it is emr.treat. */
@@ -735,6 +737,13 @@ export async function onRequest(context) {
        * Errors come back as OperationOutcome, because that is what a FHIR client parses. */
       if (sub === "fhir-exceptions" && method === "GET") {
         const r = await listExceptions(request, env, { ...deps, config: (wsqCfg && wsqCfg.fhir) || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "smart-launch" && method === "POST") {
+        /* An EHR launch: this clinician starts a registered application for the patient (and
+         * encounter) they are looking at. The application then arrives at the external door's
+         * authorize endpoint with the launch token, and the consent screen already knows the patient. */
+        const r = await createLaunch(request, env, { ...deps, config: (wsqCfg && wsqCfg.fhir) || null, base: `${url.origin}/api/fhir/${wOrgId}`, clientId: body.clientId, patientId: body.patientId, encounterId: body.encounterId });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "fhir-exception-resolve" && method === "POST") {
