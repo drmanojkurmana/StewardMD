@@ -23,7 +23,9 @@
 
   /* ---------------- fetch client ---------------- */
   function api(path) {
-    return fetch(API_BASE + path).then(function (r) { return r.ok ? r.json() : null; }).catch(function () { return null; });
+    var controller = new AbortController();
+    var timeoutId = setTimeout(function() { controller.abort(); }, 20000);
+    return fetch(API_BASE + path, { signal: controller.signal }).then(function (r) { clearTimeout(timeoutId); return r.ok ? r.json() : null; }).catch(function () { clearTimeout(timeoutId); return null; });
   }
   var MEDAPI = {
     base: API_BASE,
@@ -149,7 +151,7 @@
   }
   function setTitle(t, showBack) {
     root.querySelector("#dbTitle").textContent = t;
-    root.querySelector("#dbBack").style.visibility = showBack ? "visible" : "hidden";
+    root.querySelector("#dbBack").style.visibility = "visible";
   }
 
   /* ---- dynamic drug-count label (never goes stale) ---- */
@@ -426,9 +428,20 @@
     if (st.loading) return; st.loading = true;
     MEDAPI.composition(st.name, st.sort, st.tier, PAGE, st.offset, st.bq).then(function (d) {
       st.loading = false;
-      if (!d || st.name !== d.composition) { if (first) root.querySelector("#dbBody").innerHTML = '<div class="db-empty">Could not load this drug.</div>'; return; }
+      if (!d || st.name !== d.composition) {
+        if (first) {
+          openList(st.name);
+          return;
+        }
+        return;
+      }
       if (first) { st.info = d; st.total = d.total || 0; st.brands = d.brands || []; renderDetail(); }
       else { st.brands = st.brands.concat(d.brands || []); appendBrands(d.brands || []); }
+    }).catch(function () {
+      st.loading = false;
+      if (first) {
+        openList(st.name);
+      }
     });
   }
   function sortBtn(key, label) {
@@ -565,9 +578,12 @@
     });
   }
 
-  function openList() {
+  function openList(q) {
     ensureRoot();
     if (st.name) st.name = null;
+    if (typeof q === "string" && q.trim()) {
+      q2 = q.trim();
+    }
     root.classList.add("on"); document.body.classList.add("db-lock");
     renderList();
   }
@@ -715,7 +731,7 @@
     if (el("smd-db-styles")) return;
     var css = [
       "#smdBrandResults:not(:empty){margin-top:6px}",
-      ".db-overlay{position:fixed;inset:0;z-index:880;background:var(--paper,#f7f7f5);display:none;flex-direction:column;overflow:hidden}",
+      ".db-overlay{position:fixed;inset:0;z-index:1000;background:var(--paper,#f7f7f5);display:none;flex-direction:column;overflow:hidden}",
       ".db-overlay.on{display:flex;animation:dbIn .22s ease}@keyframes dbIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}",
       "body.db-lock{overflow:hidden}",
       ".db-top{position:sticky;top:0;display:flex;align-items:center;gap:10px;padding:calc(12px + env(safe-area-inset-top)) 14px 12px;background:var(--panel,#fff);border-bottom:1px solid var(--line,#e5e5e0);z-index:3}",

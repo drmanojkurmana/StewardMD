@@ -292,20 +292,22 @@ function check() {
     return;
   }
   const p = S.current;
-  const v = S.engine.evaluate({
-    order: o, patient: p, weightKg: p.weightKg, egfr: p.egfr,
-    allergies: p.allergies || [], activeMeds: p.activeMeds || [], overrides: S.overrides,
+  smdLazy('/interaction-rules.js?v=gold363').then(function() {
+    const v = S.engine.evaluate({
+      order: o, patient: p, weightKg: p.weightKg, egfr: p.egfr,
+      allergies: p.allergies || [], activeMeds: p.activeMeds || [], overrides: S.overrides,
+    });
+    S.verdict = v;
+    S.orderSubject = o.drug;
+
+    const allergyLive = v.findings.some((f) => String(f.code || "").startsWith("ALLERGY"));
+    renderIdentity(allergyLive);
+    renderMeds(v.findings.flatMap((f) => f.drugs || []));
+    renderFindings(v, o);
+
+    $("sign").disabled = !v.allowed;
+    $("signWhy").textContent = v.allowed ? "" : v.blocks.length ? "A hard stop is standing." : "An override is required first.";
   });
-  S.verdict = v;
-  S.orderSubject = o.drug;
-
-  const allergyLive = v.findings.some((f) => String(f.code || "").startsWith("ALLERGY"));
-  renderIdentity(allergyLive);
-  renderMeds(v.findings.flatMap((f) => f.drugs || []));
-  renderFindings(v, o);
-
-  $("sign").disabled = !v.allowed;
-  $("signWhy").textContent = v.allowed ? "" : v.blocks.length ? "A hard stop is standing." : "An override is required first.";
 }
 
 /** Engine disposition and severity, expressed as clinical significance. */

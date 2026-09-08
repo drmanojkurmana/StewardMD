@@ -1416,7 +1416,9 @@
   function runCheck() {
     if (!window.INTERACTIONS || typeof window.INTERACTIONS.checkInteractions !== "function") return;
     // Resolve any locally-unmapped brand via the catalogue API, THEN screen.
-    resolveUnresolvedViaApi().then(function () {
+    smdLazy('/interaction-rules.js?v=gold363').then(function() {
+      return resolveUnresolvedViaApi();
+    }).then(function () {
       _results = window.INTERACTIONS.checkInteractions(getList());
       _view = "results";
       _hideMinor = true;
@@ -1429,8 +1431,10 @@
   function recheckAfterEdit() {
     var resolved = getList().filter(function (m) { return m.generic && String(m.generic).trim(); });
     if (resolved.length >= 2 && window.INTERACTIONS && window.INTERACTIONS.checkInteractions) {
-      _results = window.INTERACTIONS.checkInteractions(getList());
-      _view = "results"; render();
+      smdLazy('/interaction-rules.js?v=gold363').then(function() {
+        _results = window.INTERACTIONS.checkInteractions(getList());
+        _view = "results"; render();
+      });
     } else {
       _view = "list"; render();
       toast("Fewer than 2 medicines left — add more to re-check.");
