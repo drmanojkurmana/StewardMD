@@ -667,16 +667,19 @@ test("HELD FROM OTHER SYSTEMS: every held message is listed with its reason verb
   assert.match(html, /identity-probable-duplicate/, "the reason code, verbatim");
   assert.match(html, /a patient here looks like this person/, "and in plain words");
   assert.match(html, /2 records held/);
-  // Candidates are offered as the choice for a link, with the MRN and the band the matcher gave.
-  assert.match(html, /name="wxP-wsq-xchg-1" value="wsq-pat-1" checked/);
+  // Candidates are offered as the choice for a link, with the MRN and the band the matcher gave -
+  // but NONE is preselected: an identity decision this clinician never touched is not one they made.
+  assert.match(html, /name="wxP-wsq-xchg-1" value="wsq-pat-1"[^>]*>/);
+  assert.doesNotMatch(html, /name="wxP-wsq-xchg-1"[^>]*checked/, "no candidate is checked by default");
   assert.match(html, /SMD-WARD01-00002/);
   assert.match(html, /probable 0\.91/);
-  // Only the decisions that fit: identity gets link/create/reject; an ownership conflict gets accept-feed/keep-local;
-  // a patient-mismatch conflict gets keep-local ONLY, because accepting it would move a fact between people.
+  // Only the decisions that fit, and the decision dropdown itself starts on an unchosen placeholder:
+  // identity gets link/create/reject; an ownership conflict gets accept-feed/keep-local; a
+  // patient-mismatch conflict gets REJECT ONLY, because it can never be accepted or kept as ours.
   const sel = (id) => (new RegExp(`<select id="wxR-${id}">([\\s\\S]*?)</select>`).exec(html) || [])[1] || "";
-  assert.deepEqual([...sel("wsq-xchg-1").matchAll(/value="([^"]+)"/g)].map((m) => m[1]), ["link", "create", "reject"]);
-  assert.deepEqual([...sel("wsq-xchg-2").matchAll(/value="([^"]+)"/g)].map((m) => m[1]), ["accept-feed", "keep-local"]);
-  assert.deepEqual([...sel("wsq-xchg-3").matchAll(/value="([^"]+)"/g)].map((m) => m[1]), ["keep-local"]);
+  assert.deepEqual([...sel("wsq-xchg-1").matchAll(/value="([^"]*)"/g)].map((m) => m[1]), ["", "link", "create", "reject"]);
+  assert.deepEqual([...sel("wsq-xchg-2").matchAll(/value="([^"]*)"/g)].map((m) => m[1]), ["", "accept-feed", "keep-local"]);
+  assert.deepEqual([...sel("wsq-xchg-3").matchAll(/value="([^"]*)"/g)].map((m) => m[1]), ["", "reject"]);
   assert.match(html, /ours: Observation\/wsq-obs-9 v3 \(wardsynq-native\)/, "the conflicting record of ours is named");
   assert.match(html, /Why \(required\)/);
   assert.match(html, /data-w-act="xchg:wsq-xchg-1"/);

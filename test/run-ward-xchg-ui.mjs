@@ -48,8 +48,8 @@ try {
   ok(await ev(`return (window.__calls.filter(function(c){return c.url.indexOf("fhir-exception-resolve")>=0}).length);`) === 0, "no reason, no request");
   ok(await ev(`return /A reason is required/.test(document.getElementById("smdWard").textContent);`), "and the screen says a reason is required");
 
-  // 2. Pick the second candidate, keep "link", give a reason: the post carries exactly that.
-  await ev(`document.querySelector('input[name="wxP-wsq-xchg-1"][value="wsq-pat-2"]').checked = true; document.getElementById("wxW-wsq-xchg-1").value = "Same person, confirmed by phone."; document.querySelector('[data-w-act="xchg:wsq-xchg-1"]').click(); return true;`);
+  // 2. Pick the second candidate, choose "link", give a reason: the post carries exactly that.
+  await ev(`document.querySelector('input[name="wxP-wsq-xchg-1"][value="wsq-pat-2"]').checked = true; document.getElementById("wxR-wsq-xchg-1").value = "link"; document.getElementById("wxW-wsq-xchg-1").value = "Same person, confirmed by phone."; document.querySelector('[data-w-act="xchg:wsq-xchg-1"]').click(); return true;`);
   for (let i = 0; i < 30; i++) { await sleep(100); if (await ev(`return document.querySelectorAll(".w-xchg li").length === 1;`)) break; }
   const posted = JSON.parse(await ev(`return JSON.stringify(window.__calls.filter(function(c){return c.url.indexOf("fhir-exception-resolve")>=0}).map(function(c){return c.body}));`));
   ok(posted.length === 1 && posted[0].exceptionId === "wsq-xchg-1" && posted[0].resolution === "link" && posted[0].localPatientId === "wsq-pat-2" && posted[0].reason === "Same person, confirmed by phone.",

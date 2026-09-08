@@ -168,8 +168,12 @@
    * THE SCREEN OFFERS ONLY THE DECISIONS THAT FIT. The server refuses a resolution that does not fit
    * the reason, and the screen mirrors that table as a display convenience so nobody is offered a
    * button that is certain to be refused; the server remains the authority. A patient-mismatch
-   * conflict can never be accepted from the feed (accepting it would move a clinical fact between
-   * people), so only keep-local is offered for it.
+   * conflict can never be accepted from the feed, and keeping it as ours would file a fact that
+   * belongs to a different person onto this one's chart - so only reject is offered for it.
+   *
+   * NO DECISION IS EVER PRESELECTED. An identity or resolution choice a clinician never touched is
+   * not a decision they made; the candidate list and the decision dropdown both start unchosen, and
+   * deciding is refused until something is actually picked.
    *
    * A REASON IS REQUIRED AND SHOWN AS REQUIRED. It is read next year by somebody asking why. */
   var XCHG_WORDS = {
@@ -177,7 +181,7 @@
     "identity-probable-duplicate": "No identifier matched, but a patient here looks like this person.",
     "conflict-local-authoritative": "This hospital authored the current version of this record.",
     "conflict-other-source": "Another feed authored the current version of this record.",
-    "conflict-patient-mismatch": "The feed re-sent this record for a different patient. It cannot be accepted; it can be kept as ours or rejected.",
+    "conflict-patient-mismatch": "The feed re-sent this record for a different patient. It cannot be accepted or kept; it can only be rejected.",
     "version-mismatch": "The feed updated a version that is no longer current.",
     "unsupported-resource": "A kind of record WardSynQ does not import.",
     "invalid-resource": "The record could not be understood."
@@ -187,7 +191,7 @@
     "identity-probable-duplicate": ["link", "create", "reject"],
     "conflict-local-authoritative": ["accept-feed", "keep-local"],
     "conflict-other-source": ["accept-feed", "keep-local"],
-    "conflict-patient-mismatch": ["keep-local"]
+    "conflict-patient-mismatch": ["reject"]
   };
   var XCHG_RES = {
     link: "Link - this IS the patient chosen below; file the message on their chart",
@@ -203,11 +207,11 @@
     var rows = open.map(function (x) {
       var fits = xchgFits(x.reason);
       var cands = (x.candidates || []).map(function (c, i) {
-        return '<label class="w-xc"><input type="radio" name="wxP-' + esc(x.id) + '" value="' + esc(c.id) + '"' + (i === 0 ? " checked" : "") + "> <b>" + esc(c.id) + "</b>" +
+        return '<label class="w-xc"><input type="radio" name="wxP-' + esc(x.id) + '" value="' + esc(c.id) + '"> <b>' + esc(c.id) + "</b>" +
           (c.mrn ? ' <span class="w-code">' + esc(c.mrn) + "</span>" : "") +
           (c.band ? " <small>" + esc(c.band) + (c.score != null ? " " + esc(Math.round(Number(c.score) * 100) / 100) : "") + "</small>" : "") + "</label>";
       }).join("");
-      var opts = fits.map(function (r) { return '<option value="' + esc(r) + '">' + esc(XCHG_RES[r] || r) + "</option>"; }).join("");
+      var opts = '<option value="">Choose&hellip;</option>' + fits.map(function (r) { return '<option value="' + esc(r) + '">' + esc(XCHG_RES[r] || r) + "</option>"; }).join("");
       return '<li class="w-xchg-row">' +
         "<h4>" + esc(x.reason) + ' <span class="w-code">' + esc(x.source || "") + "</span></h4>" +
         '<p class="w-xw">' + esc(XCHG_WORDS[x.reason] || "") + (x.detail ? " " + esc(x.detail) : "") + "</p>" +
@@ -1056,6 +1060,7 @@
     try { var el = document.querySelector('input[name="wxP-' + id + '"]:checked'); picked = el ? String(el.value || "") : null; } catch (e) {}
     var localPatientId = picked || val("wxPid-" + id);
     if (!why) { st.err = "A reason is required to decide what happens to a held message."; paint(); return; }
+    if (!resolution) { st.err = "Choose a decision before deciding."; paint(); return; }
     if (resolution === "link" && !localPatientId) { st.err = "A link needs the local patient it links to."; paint(); return; }
     st.busy = true; paint();
     var body = { orgId: st.orgId, exceptionId: id, resolution: resolution, reason: why };
