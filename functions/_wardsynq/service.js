@@ -204,6 +204,23 @@ const RESOURCE_TYPES = Object.freeze([
    * EMR_VITALS (VITALS_TYPES in actor.js) - scanning a wristband and a device tag onto a patient is
    * the nurse's own bedside act, the same authority as charting a vital. */
   "DeviceAssociation",
+  /* The WHO Surgical Safety Checklist gate, the persisted state of wardsynq-surgical.js's
+   * SurgicalCase (Task 2.3). Its own type, not a CarePlan or a ClinicalNote: the checklist state,
+   * signatures and laterality chain are a safety-gate ledger, not a plan or a document. No grant
+   * change accompanies this: EMR_TREAT's unrestricted write already covers booking/checklisting a
+   * case (the same "clinical commitment" reasoning ResusBundle's own comment gives), and EMR_VIEW's
+   * unrestricted read covers seeing one. */
+  "SurgicalCase",
+  /* An anaesthesia record for one surgical case: induction/maintenance/emergence and the drugs
+   * actually given. Not a MedicationAdministration - those are for ordered ward medicines going
+   * through the five-rights eMAR; an anaesthetic is given directly by the anaesthetist inside a
+   * theatre already gated by the checklist above, a different authority and a different record. */
+  "AnesthesiaRecord",
+  /* Implant/prosthesis traceability (device, lot, serial, site) - explicitly absent before Task 2.3
+   * (wardsynq-surgical.js's own header names it as not modelled). A recall notice is only actionable
+   * against a hospital that can answer "which patients got lot X", so this is append-only and keyed
+   * to the case it was placed in. */
+  "ImplantRecord",
 ]);
 
 const MODE = Object.freeze({ SYSTEM_OF_RECORD: "system-of-record", INTEGRATION: "integration" });
