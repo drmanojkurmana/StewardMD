@@ -332,16 +332,11 @@ test("RBAC: the bed board is refused to somebody who is not on this hospital's s
   assert.ok(r.__status === 403 || r.__status === 404, "a non-member gets no bed board, whatever the exact refusal code: " + r.__status);
 });
 
-/* DOCUMENTS A REAL GAP, DOES NOT PAPER OVER IT. admitPatient() (migrate-inpatient.js) writes an
- * Encounter keyed by mrn+admittedAt and never reads the bed board or any other open admission -
- * unlike transferPatient(), which DOES refuse a busy bed (bed_occupied, tested elsewhere).
- * ward.js's own admission UI is the only current guard: it always admits into a bed the board's
- * own GET /ward/beds just reported free. That is a real, working guard for a person using the
- * screen - but it is a CLIENT-SIDE guard for a server write that has none of its own, which this
- * test proves directly rather than assuming. Flagged as a remaining blocker in the session report;
- * not fixed here (changing admission's write path is a clinical-safety decision, not a
- * verification task). */
-test("wrong-patient / bed-safety GAP: /ward/admit has no server-side check against a bed another patient already occupies", async () => {
+/* THE GAP THIS TEST ONCE DOCUMENTED IS CLOSED (migrate-inpatient.js: the bed-occupancy check +
+ * claimBed()). admitPatient() now refuses a busy bed the same way transferPatient() always has -
+ * SEQUENTIAL admissions to an occupied bed are refused via the ordinary list-scan (the fast path);
+ * the test after this one proves the TRUE concurrent case, which the list-scan alone cannot. */
+test("wrong-patient / bed-safety: /ward/admit refuses a bed another open admission already occupies, sequentially", async () => {
   seedHospital();
   const regA = await as(DOCTOR, "/patient/register", "POST", { orgId: ORG, name: "Bed Claimant A", mobile: "9876500061", gender: "female", ageYears: 30 });
   const regB = await as(DOCTOR, "/patient/register", "POST", { orgId: ORG, name: "Bed Claimant B", mobile: "9876500062", gender: "male", ageYears: 45 });
@@ -354,12 +349,73 @@ test("wrong-patient / bed-safety GAP: /ward/admit has no server-side check again
   // A second, different patient admitted to the SAME bed via the raw route - not through the UI,
   // which would never have offered bed 31 - to test the SERVER's own guard in isolation.
   const admB = await as(DOCTOR, "/ward/admit", "POST", { orgId: ORG, mrn: regB.mrn, ward: "Medical A", bed: "31", admittedAt: "2026-09-08T08:00:00.000Z" });
-  // THIS ASSERTION DOCUMENTS THE GAP: today the server accepts it (200, a second Encounter
-  // written), where a hospital would want a refusal matching transfer's own bed_occupied. If a
-  // future change adds that guard, this assertion is meant to start failing and be updated to
-  // assert the refusal instead - it is a tripwire, not an endorsement.
-  assert.equal(admB.__status, 200, "GAP: admit does not check bed occupancy the way transfer does - see the comment above this test");
-  assert.equal(admB.written, 1, "a second Encounter was written to the same ward+bed as an open admission");
+  assert.equal(admB.__status, 409, JSON.stringify(admB));
+  assert.equal(admB.error, "bed_occupied");
+  assert.equal(admB.written, 0, "nothing lands for the second patient - not a partial admission, not a silent overwrite");
+  assert.equal(await as(DOCTOR, `/ward/list?orgId=${ORG}&ward=Medical A`).then((r) => r.patients.length), 1, "the ward list still shows exactly the one real admission");
+
+  // The bed frees the moment its occupant is discharged, exactly as it does for transfer.
+  await as(DOCTOR, "/ward/discharge", "POST", { orgId: ORG, encounterId: admA.encounterId, dischargedAt: "2026-09-08T09:00:00.000Z" });
+  const admB2 = await as(DOCTOR, "/ward/admit", "POST", { orgId: ORG, mrn: regB.mrn, ward: "Medical A", bed: "31", admittedAt: "2026-09-08T10:00:00.000Z" });
+  assert.equal(admB2.__status, 200, JSON.stringify(admB2));
+
+  // Case and spacing are not identity here either, matching transfer's own rule.
+  const regC = await as(DOCTOR, "/patient/register", "POST", { orgId: ORG, name: "Bed Claimant C", mobile: "9876500063", gender: "male", ageYears: 50 });
+  const admC = await as(DOCTOR, "/ward/admit", "POST", { orgId: ORG, mrn: regC.mrn, ward: "medical a", bed: "31", admittedAt: "2026-09-08T11:00:00.000Z" });
+  assert.equal(admC.error, "bed_occupied");
+
+  // A ward named with no bed cannot collide with anything - a patient can be admitted awaiting one.
+  const regD = await as(DOCTOR, "/patient/register", "POST", { orgId: ORG, name: "Bed Claimant D", mobile: "9876500064", gender: "female", ageYears: 22 });
+  const admD = await as(DOCTOR, "/ward/admit", "POST", { orgId: ORG, mrn: regD.mrn, ward: "Medical A", admittedAt: "2026-09-08T12:00:00.000Z" });
+  assert.equal(admD.__status, 200, JSON.stringify(admD));
+});
+
+/* THE ACTUAL ATOMICITY PROOF. A sequential list-scan (above) cannot, by construction, stop two
+ * admissions that both read "free" before either writes - the check and the write are two
+ * different moments. This fires both requests together with Promise.all so their real interleaving
+ * (Node schedules each at its own await boundaries, exactly as two near-simultaneous requests would
+ * on a live server) is what decides the outcome, not the order this test happens to write them in.
+ * Exactly one must land; the storage layer's own (tenant, resourceType, id, version) uniqueness
+ * (claimBed(), migrate-inpatient.js) is what makes that true regardless of which request's
+ * continuation the event loop happens to run first. */
+test("wrong-patient / bed-safety, CONCURRENT: two admissions racing for the same bed at once - exactly one lands, deterministically", async () => {
+  seedHospital();
+  const regA = await as(DOCTOR, "/patient/register", "POST", { orgId: ORG, name: "Race Claimant A", mobile: "9876500071", gender: "female", ageYears: 40 });
+  const regB = await as(DOCTOR, "/patient/register", "POST", { orgId: ORG, name: "Race Claimant B", mobile: "9876500072", gender: "male", ageYears: 41 });
+
+  const [a, b] = await Promise.all([
+    as(DOCTOR, "/ward/admit", "POST", { orgId: ORG, mrn: regA.mrn, ward: "ICU", bed: "5", admittedAt: "2026-09-07T08:00:00.000Z" }),
+    as(DOCTOR, "/ward/admit", "POST", { orgId: ORG, mrn: regB.mrn, ward: "ICU", bed: "5", admittedAt: "2026-09-07T08:00:01.000Z" }),
+  ]);
+
+  const outcomes = [a, b];
+  const winners = outcomes.filter((r) => r.__status === 200 && r.written === 1);
+  const losers = outcomes.filter((r) => r.__status === 409 && r.error === "bed_occupied");
+  assert.equal(winners.length, 1, "exactly one of the two concurrent admissions landed: " + JSON.stringify(outcomes));
+  assert.equal(losers.length, 1, "and the other was refused as a bed conflict, not silently dropped or double-written: " + JSON.stringify(outcomes));
+
+  // The chart agrees with the response: one real Encounter in that bed, not two, not zero.
+  const board = await as(DOCTOR, `/ward/beds?orgId=${ORG}`);
+  const row = board.wards.find((w) => w.ward === "ICU");
+  const occupants = (row.occupied || []).filter((o) => o.bed === "5");
+  assert.equal(occupants.length, 1, "the record itself has exactly one occupant of ICU bed 5: " + JSON.stringify(occupants));
+});
+
+/* DUPLICATE ADMISSION: the SAME request retried (a lost response, a doubled click) is idempotent,
+ * exactly as every other write in this system is, and is NOT itself treated as a bed conflict - a
+ * patient re-admitting themselves to their own bed is a no-op, not a collision with themselves. */
+test("wrong-patient / bed-safety: a genuinely duplicate admission (same mrn, same admittedAt) is a no-op, not a bed conflict", async () => {
+  seedHospital();
+  const reg = await as(DOCTOR, "/patient/register", "POST", { orgId: ORG, name: "Duplicate Claimant", mobile: "9876500081", gender: "female", ageYears: 35 });
+  const body = { orgId: ORG, mrn: reg.mrn, ward: "Medical A", bed: "40", admittedAt: "2026-09-07T08:00:00.000Z" };
+  const first = await as(DOCTOR, "/ward/admit", "POST", body);
+  assert.equal(first.__status, 200); assert.equal(first.written, 1);
+  const [again1, again2] = await Promise.all([as(DOCTOR, "/ward/admit", "POST", body), as(DOCTOR, "/ward/admit", "POST", body)]);
+  for (const r of [again1, again2]) {
+    assert.equal(r.__status, 200, JSON.stringify(r));
+    assert.equal(r.written, 0); assert.equal(r.skipped, "unchanged", "the SAME admission again is recognised as itself, never as a conflict with itself");
+  }
+  assert.equal((await RECORD.history(TENANT_ROW.id, "Encounter", first.encounterId)).length, 1, "still exactly one version - the duplicates wrote nothing");
 });
 
 test("a dose cannot jump to administered, and cannot be given twice", async () => {

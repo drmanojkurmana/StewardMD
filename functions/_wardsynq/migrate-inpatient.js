@@ -127,12 +127,74 @@ async function admitPatient(request, env, ctx) {
   if (current && sameAdmission(current, candidate)) {
     return { ...base, ok: true, written: 0, skipped: "unchanged", encounterId: candidate.id, patientId: candidate.patientId, version: current.version, actor: resolved.actor.id };
   }
+
+  /* TWO PATIENTS CANNOT OCCUPY ONE BED - admission's own version of the invariant transfer already
+   * enforces (sameBed, below). A ward with no bed named cannot collide, exactly as transfer allows a
+   * patient on a ward awaiting one. */
+  if (candidate.location.bed) {
+    let openEncounters;
+    try { openEncounters = await svc.list("Encounter", 200); }
+    catch (e) { return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), written: 0 }; }
+    const clash = (openEncounters || []).find((e) => e && e.id !== candidate.id && e.class === IPD && e.status === OPEN && sameBed(e.location, candidate.location));
+    if (clash) return bedOccupied(base, candidate);
+
+    /* THE CHECK ABOVE IS NOT THE GUARD; IT IS THE FAST PATH. Two admissions racing for the same
+     * bed can both pass it, because reading "who is here" and writing "I am here now" are two
+     * separate steps. The guard is this: claimBed() lands ONE atomic row per (ward, bed, version),
+     * through the SAME repository.append() uniqueness (tenant, resourceType, id, version) every
+     * other write in this system already depends on for its own concurrency control (see
+     * repository.js and functions/db/wardsynq_schema.sql's UNIQUE constraint) - reused here, not
+     * reinvented. Two concurrent admissions computing the same next version both attempt the same
+     * append(); the storage layer lands exactly one, and the loser's append() throws
+     * VersionConflictError. That is the actual atomicity; the list-scan above only makes the
+     * ordinary, non-racing case answer without needing a conflict to say so. */
+    try { await claimBed(svc, candidate); }
+    catch (e) {
+      if (e instanceof VersionConflictError) return bedOccupied(base, candidate);
+      return { ...base, ok: false, status: 502, error: "record_write_failed", detail: str(e && e.message), written: 0 };
+    }
+  }
+
   try {
     const out = await svc.put(candidate, { expectedVersion: current ? current.version : undefined, idempotencyKey: ctx.idempotencyKey || null });
     return { ...base, ok: true, written: 1, encounterId: candidate.id, patientId: candidate.patientId, version: out.record.version, replayed: out.replayed, actor: resolved.actor.id, role: resolved.role };
   } catch (e) {
     return { ...base, ...writeFailure(e, { encounterId: candidate.id, written: 0, actor: resolved.actor.id }) };
   }
+}
+
+/** Same refusal shape transfer's own bed_occupied answers with, so a ward reads the two identically. */
+function bedOccupied(base, candidate) {
+  const { ward, bed } = candidate.location;
+  return { ...base, ok: false, status: 409, error: "bed_occupied", detail: `${ward} bed ${bed} is occupied`, encounterId: candidate.id, written: 0 };
+}
+
+/* THE BED CLAIM. Not a new store, not a new resource type in the canonical model (RESOURCE_TYPES,
+ * GovernedStore, FHIR export none of them know it exists) - one internal, non-clinical row per
+ * (tenant, ward, bed), written through the SAME repository port every clinical record already
+ * goes through, purely so the storage layer's own version-uniqueness can serialize two admissions
+ * that land on the same bed at once. It carries no fact a chart does not already carry elsewhere
+ * (the Encounter is still the one source of truth for who is admitted where); losing it would cost
+ * nothing but this guard.
+ *
+ * STALE CLAIMS SELF-HEAL. A bed a claim points at is read as free the moment the Encounter it
+ * names is no longer open AT THAT LOCATION - discharged, or moved on by /ward/transfer (which
+ * this file deliberately does not touch: transfer keeps its own existing list-scan guard,
+ * unchanged, and a patient who has moved away makes their old bed's claim stale by the simple fact
+ * that their Encounter's location has changed under it). */
+const BED_CLAIM_TYPE = "_wardsynq_bed_claim";
+function bedClaimIdFor(ward, bed) {
+  return `wsq-bedclaim-${str(ward).toLowerCase().replace(/[^a-z0-9]+/g, "-")}-${str(bed).toLowerCase().replace(/[^a-z0-9]+/g, "-")}`;
+}
+async function claimBed(svc, candidate) {
+  const { ward, bed } = candidate.location;
+  const claimId = bedClaimIdFor(ward, bed);
+  const latest = await svc.repository.latest(svc.tenantId, BED_CLAIM_TYPE, claimId);
+  const version = latest ? latest.version + 1 : 1;
+  await svc.repository.append(svc.tenantId, [{
+    resourceType: BED_CLAIM_TYPE, id: claimId, version,
+    patientId: candidate.patientId, encounterId: candidate.id, ward, bed, claimedAt: new Date().toISOString(),
+  }], {});
 }
 
 /**
