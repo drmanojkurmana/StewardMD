@@ -227,7 +227,10 @@ function oruMessage(input) {
     const pv1 = [];
     const at = (n, v) => { pv1[n - 1] = v; };
     at(1, "1");
-    at(2, e.class === "IPD" ? "I" : "O");
+    // HL7 v2 Table 0004 (Patient Class): I inpatient, O outpatient, E emergency - the standard
+    // codes, the same as IMP/AMB/EMER are for FHIR. Misclassifying ED as O is a data error, not a
+    // display nicety: a downstream ADT consumer reads this to decide where the patient IS.
+    at(2, e.class === "IPD" ? "I" : e.class === "ED" ? "E" : "O");
     at(3, `${esc(loc.ward || "")}${COMPONENT}${esc(loc.room || "")}${COMPONENT}${esc(loc.bed || "")}`);
     at(19, esc(e.id));
     segments.push(segment("PV1", Array.from(pv1, (v) => v || "")));

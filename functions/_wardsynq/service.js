@@ -188,6 +188,14 @@ const RESOURCE_TYPES = Object.freeze([
    * stolen table cannot be replayed as a token. Expiry is the record's, revocation is a new version
    * that cannot be deleted, and every one names the person or system it acts as. */
   "SmartGrant",
+  /* A time-critical resuscitation bundle (Code Sepsis / Code Blue / Code STEMI), the persisted state
+   * of wardsynq-emergency.js's EmergencyBundle. Its own type, not a CarePlan: a CarePlan is a plan a
+   * clinician wrote, and a bundle's elements, targets and time zero are the hospital's SEEDED,
+   * UNAPPROVED protocol content, never invented by a clinician on the screen. No grant change
+   * accompanies this: EMR_TREAT's unrestricted write already covers starting/marking a bundle (a
+   * "clinical commitment", per that file's own words - never started by a screen result alone), and
+   * EMR_VIEW's unrestricted read covers seeing one running. */
+  "ResusBundle",
 ]);
 
 const MODE = Object.freeze({ SYSTEM_OF_RECORD: "system-of-record", INTEGRATION: "integration" });
