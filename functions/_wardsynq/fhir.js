@@ -31,6 +31,7 @@
 import { resolveClinicalActor } from "./actor.js";
 import { RecordService } from "./service.js";
 import { AuthError, PermissionError } from "../_connect/permission.js";
+import { parseSearch, applySearch, paginate, resolveIncludes, searchBundle, declaredSearch, INCLUDES } from "./fhir-search.js";
 
 const str = (v) => (v == null ? "" : String(v).trim());
 
@@ -76,6 +77,35 @@ function codeable(code, codeSystem, display) {
 
 const ref = (type, id) => (str(id) ? { reference: `${type}/${id}` } : undefined);
 const clean = (o) => { for (const k of Object.keys(o)) if (o[k] === undefined) delete o[k]; return o; };
+
+/** Our provenance namespace. It is OURS - a URN for a source system WardSynQ recorded - and so not an
+ *  invented vocabulary: the thing it names is the fact that this record came from that system. */
+const SOURCE_URN = (system) => `urn:stewardmd:source:${str(system).toLowerCase().replace(/[^a-z0-9.-]+/g, "-") || "unknown"}`;
+
+/**
+ * PURE. FHIR `meta` from what the record service already stamps on every version.
+ *
+ * versionId IS the record version, so an ETag round-trips to an `expectedVersion` on a later write
+ * and a client's `If-Match` means the same thing to both sides. lastUpdated is when WardSynQ learned
+ * the fact, which is what a `_lastUpdated` search is asking. `source` is the originating system,
+ * and `wardsynq-native` is itself a source - a receiver must be able to tell what we authored from
+ * what we imported.
+ */
+function withMeta(fhir, record) {
+  if (!fhir || !record) return fhir;
+  const m = record.meta || {};
+  const by = record.writtenBy || {};
+  const lastUpdated = str(m.recordedAt) || str(by.at) || undefined;
+  const version = record.version;
+  return {
+    ...fhir,
+    meta: clean({
+      versionId: version === undefined || version === null ? undefined : String(version),
+      lastUpdated,
+      source: SOURCE_URN((m.source && m.source.system) || "wardsynq-native"),
+    }),
+  };
+}
 
 /* ---- resource mappers. PURE, one per canonical type. ------------------------------------------- */
 
@@ -127,6 +157,8 @@ function fhirCondition(c) {
     subject: ref("Patient", c.patientId),
     encounter: ref("Encounter", c.encounterId),
     onsetDateTime: str(c.onsetDate) || undefined,
+    // When it was written down, which is what a client's `date=` on a Condition is usually asking.
+    recordedDate: str(c.meta && c.meta.recordedAt) || undefined,
     note: c.note ? [{ text: c.note }] : undefined,
   });
 }
@@ -134,6 +166,7 @@ function fhirCondition(c) {
 function fhirAllergy(a) {
   return clean({
     resourceType: "AllergyIntolerance", id: a.id,
+    recordedDate: str(a.meta && a.meta.recordedAt) || undefined,
     clinicalStatus: { coding: [{ system: "http://terminology.hl7.org/CodeSystem/allergyintolerance-clinical", code: str(a.clinicalStatus) === "inactive" ? "inactive" : "active" }] },
     // "unable-to-assess" is a real FHIR value and is what our model already says when nobody knows.
     criticality: ["low", "high", "unable-to-assess"].includes(str(a.criticality)) ? str(a.criticality) : "unable-to-assess",
@@ -167,6 +200,7 @@ function fhirMedicationRequest(m) {
     resourceType: "MedicationRequest", id: m.id,
     status: STATUS[str(m.status)] || "unknown",
     intent: "order",
+    authoredOn: str(m.meta && m.meta.recordedAt) || undefined,
     medicationCodeableConcept: codeable(m.drugCode || m.drug, m.drugCodeSystem, m.drug),
     subject: ref("Patient", m.patientId),
     encounter: ref("Encounter", m.encounterId),
@@ -204,6 +238,7 @@ function fhirServiceRequest(s) {
     resourceType: "ServiceRequest", id: s.id,
     status: ["active", "completed", "revoked", "draft"].includes(str(s.status)) ? str(s.status) : "unknown",
     intent: "order",
+    authoredOn: str(s.meta && s.meta.recordedAt) || undefined,
     code: codeable(s.code, s.codeSystem, s.display),
     subject: ref("Patient", s.patientId),
     encounter: ref("Encounter", s.encounterId),
@@ -218,6 +253,8 @@ function fhirDiagnosticReport(d) {
     code: codeable(d.code, d.codeSystem, d.code),
     subject: ref("Patient", d.patientId),
     encounter: ref("Encounter", d.encounterId),
+    effectiveDateTime: str(d.reportedAt) || undefined,
+    issued: str(d.meta && d.meta.recordedAt) || undefined,
     conclusion: d.conclusion || undefined,
     result: (d.resultObservationIds || []).map((id) => ref("Observation", id)).filter(Boolean),
   });
@@ -265,10 +302,10 @@ const FHIR_TYPE = Object.freeze({
 /** And back, so a caller can ask for the FHIR name. */
 const CANONICAL_TYPE = Object.freeze(Object.fromEntries(Object.entries(FHIR_TYPE).map(([k, v]) => [v, k])));
 
-/** PURE. One canonical record to FHIR, or null when this file has no honest mapping for its type. */
+/** PURE. One canonical record to FHIR, with meta, or null when this file has no honest mapping. */
 function toFhir(record) {
   const m = record && MAPPERS[record.resourceType];
-  return m ? m(record) : null;
+  return m ? withMeta(m(record), record) : null;
 }
 
 /** PURE. A searchset Bundle. */
@@ -308,12 +345,22 @@ function capabilityStatement(opts) {
     rest: [{
       mode: "server",
       security: { description: "Bearer token or staff session, scoped to one hospital. Same authority as every other WardSynQ door." },
-      resource: Object.values(FHIR_TYPE).map((t) => ({
-        type: t,
-        // READ and SEARCH. No create, no update, no delete - and nothing here implies otherwise.
-        interaction: [{ code: "read" }, { code: "search-type" }],
-        searchParam: [{ name: "patient", type: "reference" }],
-      })),
+      /* Derived from the SAME tables the search parser reads (fhir-search.js), so what is declared
+       * here is what actually parses. A CapabilityStatement maintained by hand drifts the first time
+       * either side changes, and a client trusts the declaration. */
+      resource: Object.values(FHIR_TYPE).map((t) => {
+        const d = declaredSearch(t);
+        return clean({
+          type: t,
+          versioning: "versioned",
+          readHistory: true,
+          // READ, VREAD, HISTORY and SEARCH. No create, no update, no delete - and nothing implies otherwise.
+          interaction: [{ code: "read" }, { code: "vread" }, { code: "history-instance" }, { code: "search-type" }],
+          searchParam: d.params,
+          searchInclude: d.includes.length ? d.includes : undefined,
+        });
+      }),
+      operation: [{ name: "everything", definition: "http://hl7.org/fhir/OperationDefinition/Patient-everything" }],
     }],
   };
 }
@@ -393,11 +440,134 @@ async function readResource(request, env, ctx) {
   return { ok: true, status: 200, resource: f };
 }
 
+/** How many of a type one search may consider. Stated in the bundle when it bites. */
+const SEARCH_POOL = 1000;
+
+/**
+ * Search one type. `patient=` reads the compartment (scoped and audited by the store); without it,
+ * a roster of the latest SEARCH_POOL records, which is the one cross-patient read the record
+ * service already permits and audits as a list.
+ *
+ * ctx: { migration, type, searchParams, rawQuery, base, lenient?, actorDeps, recordDeps }
+ */
+async function searchType(request, env, ctx) {
+  const mig = ctx.migration;
+  if (!mig || mig.mode === "off") return { ok: false, status: 404, outcome: operationOutcome("error", "not-supported", "this hospital does not run the WardSynQ record") };
+
+  const fhirType = str(ctx.type);
+  const canonical = CANONICAL_TYPE[fhirType];
+  if (!canonical) return { ok: false, status: 404, outcome: operationOutcome("error", "not-supported", `WardSynQ does not export ${fhirType || "that type"}`) };
+
+  const { query, problems } = parseSearch(fhirType, ctx.searchParams);
+  /* STRICT BY DEFAULT. A dropped parameter means a client asked for the final results and got all
+   * of them, believing they were final. Lenient handling is opt-in and every dropped parameter is
+   * still reported inside the bundle. */
+  if (problems.length && !ctx.lenient) {
+    return { ok: false, status: 400, outcome: { resourceType: "OperationOutcome", issue: problems.map((p) => ({ severity: "error", code: "not-supported", diagnostics: `${p.param}: ${p.reason}`, expression: [p.param] })) } };
+  }
+
+  const { svc, error } = await open(request, env, ctx);
+  if (error) return { ok: false, status: error.status, outcome: operationOutcome("error", error.status === 401 ? "login" : "forbidden", error.detail || error.error) };
+
+  let rows;
+  try {
+    if (canonical === "Patient") {
+      rows = query.patient ? [await svc.get("Patient", query.patient)].filter(Boolean) : await svc.list("Patient", SEARCH_POOL);
+    } else {
+      rows = query.patient ? await svc.byPatient(canonical, query.patient) : await svc.list(canonical, SEARCH_POOL);
+    }
+  } catch (e) {
+    return { ok: false, status: 403, outcome: operationOutcome("error", "forbidden", str(e && e.message)) };
+  }
+  const pooled = (rows || []).length;
+  const resources = (rows || []).map(toFhir).filter(Boolean);
+
+  const matched = applySearch(resources, query);
+  const page = paginate(matched, query);
+
+  /* Includes are resolved by REFERENCE through the same governed reads, so an actor who may not see
+   * an Encounter does not receive one because a report pointed at it. */
+  const cache = new Map();
+  const lookup = (t, id) => { const k = `${t}/${id}`; return cache.has(k) ? cache.get(k) : null; };
+  if (query.include.length) {
+    const wanted = new Set();
+    for (const r of page.entries) for (const key of query.include) {
+      const spec = INCLUDES[key];
+      if (!spec) continue;
+      for (const rf of [].concat(spec.path(r) || []).filter(Boolean)) { const m = /^([A-Za-z]+)\/([^/]+)$/.exec(str(rf.reference)); if (m) wanted.add(`${m[1]}/${m[2]}`); }
+    }
+    for (const k of wanted) {
+      const [t, id] = k.split("/");
+      const c = CANONICAL_TYPE[t];
+      if (!c) continue;
+      try { const rec = await svc.get(c, id); cache.set(k, rec ? toFhir(rec) : null); } catch { cache.set(k, null); }
+    }
+  }
+  const included = resolveIncludes(page.entries, query, lookup);
+
+  const outcomes = [];
+  if (problems.length) outcomes.push({ resourceType: "OperationOutcome", issue: problems.map((p) => ({ severity: "warning", code: "not-supported", diagnostics: `${p.param} was ignored: ${p.reason}` })) });
+  /* A search over a roster that hit the pool cap is a search over PART of the record, and a client
+   * that read `total` as the hospital's total would be wrong. Said in the bundle, in FHIR's own way. */
+  if (!query.patient && pooled >= SEARCH_POOL) {
+    outcomes.push(operationOutcome("warning", "too-costly", `This search considered the most recent ${SEARCH_POOL} ${fhirType} records only. Narrow it with patient= or _lastUpdated=.`));
+  }
+
+  return { ok: true, status: 200, bundle: searchBundle({ base: str(ctx.base), type: fhirType, q: query, page, included, outcomes, rawQuery: ctx.rawQuery }) };
+}
+
+/** Every version of one resource, as a history Bundle. ctx: { migration, type, id, base } */
+async function historyOf(request, env, ctx) {
+  const mig = ctx.migration;
+  if (!mig || mig.mode === "off") return { ok: false, status: 404, outcome: operationOutcome("error", "not-supported", "this hospital does not run the WardSynQ record") };
+  const fhirType = str(ctx.type), canonical = CANONICAL_TYPE[fhirType];
+  if (!canonical) return { ok: false, status: 404, outcome: operationOutcome("error", "not-supported", `WardSynQ does not export ${fhirType || "that type"}`) };
+
+  const { svc, error } = await open(request, env, ctx);
+  if (error) return { ok: false, status: error.status, outcome: operationOutcome("error", error.status === 401 ? "login" : "forbidden", error.detail || error.error) };
+
+  let versions;
+  try { versions = await svc.history(canonical, str(ctx.id)); }
+  catch (e) { return { ok: false, status: 403, outcome: operationOutcome("error", "forbidden", str(e && e.message)) }; }
+  if (!versions || !versions.length) return { ok: false, status: 404, outcome: operationOutcome("error", "not-found", "no such resource") };
+
+  const base = str(ctx.base);
+  // Newest first, as FHIR history is read.
+  const entries = versions.map(toFhir).filter(Boolean).reverse().map((r) => ({
+    fullUrl: `${base}/${r.resourceType}/${r.id}`,
+    resource: r,
+    // Every version here is a real write. This store has no updates in place and no deletes.
+    request: { method: r.meta && r.meta.versionId === "1" ? "POST" : "PUT", url: `${r.resourceType}/${r.id}` },
+    response: { status: "200", etag: r.meta && r.meta.versionId ? `W/"${r.meta.versionId}"` : undefined, lastModified: r.meta && r.meta.lastUpdated },
+  }));
+  return { ok: true, status: 200, bundle: { resourceType: "Bundle", type: "history", total: entries.length, link: [{ relation: "self", url: `${base}/${fhirType}/${str(ctx.id)}/_history` }], entry: entries } };
+}
+
+/** One specific version. ctx: { migration, type, id, versionId } */
+async function vread(request, env, ctx) {
+  const mig = ctx.migration;
+  if (!mig || mig.mode === "off") return { ok: false, status: 404, outcome: operationOutcome("error", "not-supported", "this hospital does not run the WardSynQ record") };
+  const fhirType = str(ctx.type), canonical = CANONICAL_TYPE[fhirType];
+  if (!canonical) return { ok: false, status: 404, outcome: operationOutcome("error", "not-supported", `WardSynQ does not export ${fhirType || "that type"}`) };
+  const want = str(ctx.versionId);
+  if (!/^\d+$/.test(want)) return { ok: false, status: 404, outcome: operationOutcome("error", "not-found", "version ids here are integers") };
+
+  const { svc, error } = await open(request, env, ctx);
+  if (error) return { ok: false, status: error.status, outcome: operationOutcome("error", error.status === 401 ? "login" : "forbidden", error.detail || error.error) };
+
+  let versions;
+  try { versions = await svc.history(canonical, str(ctx.id)); }
+  catch (e) { return { ok: false, status: 403, outcome: operationOutcome("error", "forbidden", str(e && e.message)) }; }
+  const hit = (versions || []).find((v) => String(v.version) === want);
+  if (!hit) return { ok: false, status: 404, outcome: operationOutcome("error", "not-found", "no such version") };
+  return { ok: true, status: 200, resource: toFhir(hit) };
+}
+
 export {
-  SYSTEM_URI, UNCODED, MAPPERS, FHIR_TYPE, CANONICAL_TYPE,
-  systemUriFor, codeable, toFhir, bundle, capabilityStatement, operationOutcome,
+  SYSTEM_URI, UNCODED, MAPPERS, FHIR_TYPE, CANONICAL_TYPE, SEARCH_POOL, SOURCE_URN,
+  systemUriFor, codeable, withMeta, toFhir, bundle, capabilityStatement, operationOutcome,
   fhirPatient, fhirEncounter, fhirCondition, fhirAllergy, fhirObservation,
   fhirMedicationRequest, fhirMedicationAdministration, fhirServiceRequest,
   fhirDiagnosticReport, fhirDocumentReference,
-  patientEverything, readResource,
+  patientEverything, readResource, searchType, historyOf, vread,
 };
