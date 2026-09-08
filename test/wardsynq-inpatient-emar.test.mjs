@@ -3312,6 +3312,40 @@ test("reporting a study is the reporter's authority, and it answers a request th
   assert.deepEqual(stored.resultObservationIds, [], "an imaging report has no values");
 });
 
+test("TASK 3.2: a CRITICAL imaging finding (text, no number) opens the SAME closed loop a critical lab value does", async () => {
+  seedHospital();
+  const { adm } = await admittedPatientOnDrug();
+  const sr = await as(DOCTOR, "/ward/investigation", "POST", { orgId: ORG, encounterId: adm.encounterId, code: "Chest X-ray", category: "imaging", priority: "stat" });
+  const done = await as(LABTECH, "/ward/report-imaging", "POST", {
+    orgId: ORG, serviceRequestId: sr.orderId,
+    findings: "Large right-sided pneumothorax with mediastinal shift.",
+    impression: "Tension pneumothorax - requires immediate decompression.",
+    status: "final", critical: true,
+  });
+  assert.equal(done.__status, 200, JSON.stringify(done));
+  assert.equal(done.critical, true);
+  const stored = await RECORD.latest(TENANT_ROW.id, "DiagnosticReport", done.reportId);
+  assert.equal(stored.critical, true, "the flag is on the record, not just the response");
+
+  // The SAME critical-loop mechanism opens for this text finding - no numeric value anywhere.
+  const opened = await as(DOCTOR, "/ward/flag-critical", "POST", { orgId: ORG, reportId: done.reportId });
+  assert.equal(opened.__status, 200, JSON.stringify(opened));
+  assert.equal(opened.opened, 1, "one loop, for a report-level critical flag with no comparable value");
+  assert.equal(opened.loops[0].value, null);
+  assert.equal(opened.loops[0].basis, "lab", "attributed to whoever flagged it, the same as a lab's own critical flag");
+  // And the same honest notification discipline applies - no channel wired, no silent 'sent'.
+  assert.equal(opened.loops[0].notification.attempted, true);
+  assert.equal(opened.loops[0].notification.delivered, false);
+  assert.equal(opened.loops[0].notification.reason, "NO_CHANNEL");
+
+  // A non-critical finding never sets the flag, and opens no loop.
+  const sr2 = await as(DOCTOR, "/ward/investigation", "POST", { orgId: ORG, encounterId: adm.encounterId, code: "Abdominal X-ray", category: "imaging" });
+  const normal = await as(LABTECH, "/ward/report-imaging", "POST", { orgId: ORG, serviceRequestId: sr2.orderId, findings: "Normal bowel gas pattern.", impression: "No acute abnormality.", status: "final" });
+  assert.equal(normal.critical, false);
+  const openedNormal = await as(DOCTOR, "/ward/flag-critical", "POST", { orgId: ORG, reportId: normal.reportId });
+  assert.equal(openedNormal.opened, 0);
+});
+
 /* ---- the drip ------------------------------------------------------------------------------------ */
 
 test("AN INFUSION'S VOLUME IS COMPUTED, and it says how much of it is assumption", async () => {
