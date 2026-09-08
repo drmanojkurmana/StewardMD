@@ -177,6 +177,11 @@ const RESOURCE_TYPES = Object.freeze([
    * guessed at - because the failure mode of every interface is the message that vanished and the
    * clinician who never knew it had been sent. Append-only, and resolved by a person. */
   "ExchangeException",
+  /* A person's decision that a patient in ANOTHER system is (or is not) a patient here. Recorded
+   * once, by name, and consulted before any probabilistic matching on every later message from that
+   * system for that patient - so the same look-alike is not held and decided again, and so the
+   * decision is on the record if it turns out to be wrong. Never made by software. */
+  "ExchangeIdentityDecision",
 ]);
 
 const MODE = Object.freeze({ SYSTEM_OF_RECORD: "system-of-record", INTEGRATION: "integration" });
