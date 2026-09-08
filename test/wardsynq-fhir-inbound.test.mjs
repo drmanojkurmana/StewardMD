@@ -10,8 +10,64 @@ import {
   reconcileIdentity, rebind, partitionConflicts, ExchangeException, ExchangeIdentityDecision, priorDecision, EXCEPTION_TYPE, DECISION_TYPE,
 } from "../functions/_wardsynq/fhir-inbound.js";
 import { RESOURCE_TYPES, NATIVE_SYSTEM } from "../functions/_wardsynq/service.js";
+import { normalizeFhir } from "../functions/_connect/connectors/fhir-r4/normalize.js";
+import { validateBundle } from "../functions/_connect/canonical/validate.js";
+import { mapSccmBundle } from "../wardsynq/adapters/wardsynq-sccm-adapter.js";
 
 const SRC = readFileSync(new URL("../functions/_wardsynq/fhir-inbound.js", import.meta.url), "utf8");
+
+test("SCCM 1.1: administrations, service requests and consents travel through the SAME normaliser and adapter, honestly bounded", () => {
+  const raw = {
+    patient: { id: "P1", name: [{ text: "A" }] },
+    resources: [
+      { resourceType: "MedicationRequest", id: "RX1", status: "active", intent: "order", medicationCodeableConcept: { text: "Metformin" }, subject: { reference: "Patient/P1" } },
+      { resourceType: "MedicationAdministration", id: "MA1", status: "completed", medicationCodeableConcept: { coding: [{ system: "http://www.nlm.nih.gov/research/umls/rxnorm", code: "6809", display: "Metformin" }] }, subject: { reference: "Patient/P1" }, effectiveDateTime: "2026-08-02T08:00:00Z", performer: [{ actor: { display: "Nurse Elsewhere" } }], request: { reference: "MedicationRequest/RX1" }, dosage: { text: "500 mg", dose: { value: 500, unit: "mg" }, route: { text: "oral" } } },
+      { resourceType: "MedicationAdministration", id: "MA2", status: "in-progress", medicationCodeableConcept: { text: "Insulin" }, subject: { reference: "Patient/P1" }, effectiveDateTime: "2026-08-02T09:00:00Z" },
+      { resourceType: "MedicationAdministration", id: "MA3", status: "not-done", medicationCodeableConcept: { text: "Aspirin" }, subject: { reference: "Patient/P1" }, effectiveDateTime: "2026-08-02T10:00:00Z", statusReason: [{ text: "Patient refused" }] },
+      { resourceType: "ServiceRequest", id: "SR1", status: "active", intent: "order", code: { text: "Chest X-ray" }, category: [{ coding: [{ code: "363679005", display: "Imaging" }] }], priority: "asap", subject: { reference: "Patient/P1" }, authoredOn: "2026-08-01T09:00:00Z", requester: { display: "Dr Elsewhere" } },
+      { resourceType: "DiagnosticReport", id: "DR1", status: "final", code: { text: "Chest X-ray report" }, subject: { reference: "Patient/P1" }, basedOn: [{ reference: "ServiceRequest/SR1" }], conclusion: "Clear." },
+      { resourceType: "Consent", id: "C1", status: "active", scope: { coding: [{ system: "http://terminology.hl7.org/CodeSystem/consentscope", code: "treatment" }] }, category: [{ text: "General consent" }], patient: { reference: "Patient/P1" }, dateTime: "2026-08-01T08:00:00Z", performer: [{ display: "The patient" }], provision: { type: "permit" } },
+      { resourceType: "Consent", id: "C2", status: "rejected", scope: { coding: [{ code: "patient-privacy" }], text: "Sharing with the registry" }, category: [{ text: "Data sharing" }], patient: { reference: "Patient/P1" } },
+      { resourceType: "Consent", id: "C3", status: "proposed", scope: { text: "research" }, category: [{ text: "Research" }], patient: { reference: "Patient/P1" } },
+    ],
+  };
+  const sccm = normalizeFhir({ tenant: { id: "t" }, now: () => new Date("2026-09-08T00:00:00Z") }, raw);
+  assert.equal(sccm.sccmVersion, "1.1");
+  assert.equal(sccm.administrations.length, 3);
+  assert.deepEqual(sccm.administrations[0].request, { type: "MedicationStatement", id: "RX1" });
+  assert.equal(sccm.administrations[0].performer, "Nurse Elsewhere");
+  assert.equal(sccm.serviceRequests.length, 1);
+  assert.deepEqual(sccm.diagnosticReports[0].basedOn, { type: "ServiceRequest", id: "SR1" });
+  assert.deepEqual(sccm.consents.map((c) => c.decision), ["permit", "deny", null], "permit, deny, and undecided is null - never guessed");
+  assert.equal(validateBundle(sccm).ok, true, JSON.stringify(validateBundle(sccm).errors));
+
+  sccm.meta.sourceConnector = "fhir-his";
+  const m = mapSccmBundle(sccm);
+  const by = (t) => m.entities.filter((e) => e.resourceType === t);
+  const mars = by("MedicationAdministration");
+  assert.equal(mars.length, 2, "completed and not-done are dose events; in-progress is not and is named");
+  assert.ok(m.issues.some((i) => i.code === "SCCM_ADMIN_STATE" && /MA2/.test(i.message)));
+  const given = mars.find((x) => x.id === "fhir-his-mar-ma1");
+  assert.equal(given.status, "administered");
+  assert.equal(given.orderId, "fhir-his-rx-rx1", "the source's OWN order, under its own id");
+  assert.equal(given.administeredBy, "external:fhir-his:Nurse Elsewhere", "never a clinician here");
+  assert.equal(given.drugCodeSystem, "http://www.nlm.nih.gov/research/umls/rxnorm");
+  assert.deepEqual(given.dose, { value: 500, unit: "mg" });
+  assert.equal(given.meta.source.system, "fhir-his");
+  const refused = mars.find((x) => x.id === "fhir-his-mar-ma3");
+  assert.equal(refused.status, "cancelled");
+  assert.equal(refused.orderId, "external:fhir-his:unreferenced", "no order is invented to hang a dose on");
+  assert.equal(refused.holdReason, "Patient refused");
+  const sr = by("ServiceRequest")[0];
+  assert.equal(sr.id, "fhir-his-sr-sr1");
+  assert.equal(sr.status, "draft", "never active: nothing here collects or bills from another hospital's order");
+  assert.equal(sr.requesterId, "external:fhir-his");
+  assert.equal(sr.category, "imaging");
+  assert.equal(sr.priority, "urgent", "asap has no home in the closed list and becomes urgent, not stat");
+  assert.equal(sr.externalStatus, "active");
+  assert.equal(by("DiagnosticReport")[0].serviceRequestId, "fhir-his-sr-sr1", "the report answers the source's order");
+  assert.equal(by("PatientConsent").length, 0, "consent is a governance record: the adapter does not build it, fhir-inbound.js does");
+});
 
 test("OFF UNLESS THE HOSPITAL TURNS IT ON, and a feed must name itself", () => {
   assert.equal(inboundEnabled(null), false);

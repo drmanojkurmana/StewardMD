@@ -30,7 +30,7 @@ import { Observation, DiagnosticReport, numericValue } from "../../wardsynq/ward
 import { GovernanceError } from "../../wardsynq/wardsynq-actors.js";
 import { VersionConflictError } from "./repository.js";
 import { resolveClinicalActor } from "./actor.js";
-import { RecordService } from "./service.js";
+import { RecordService, isExternalRecord } from "./service.js";
 import { AuthError, PermissionError } from "../_connect/permission.js";
 import { LAB_CODE_SEED } from "../../wardsynq/adapters/wardsynq-ghis-adapter.js";
 import { deltaCheck, autoVerify } from "./lab-delta.js";
@@ -285,7 +285,8 @@ async function pendingRequests(request, env, ctx) {
 
   const resulted = new Set((reports || []).filter((r) => r && r.serviceRequestId).map((r) => r.serviceRequestId));
   const pending = (requests || [])
-    .filter((s) => s && s.status !== "completed" && s.status !== "revoked" && s.status !== "cancelled")
+    // Another hospital's order is not one this laboratory owes a result for.
+    .filter((s) => s && s.status !== "completed" && s.status !== "revoked" && s.status !== "cancelled" && !isExternalRecord(s))
     .filter((s) => !resulted.has(s.id))
     .map((s) => ({ serviceRequestId: s.id, code: s.code, display: s.display || s.code, encounterId: s.encounterId || null, requestedBy: s.requesterId || null, status: s.status }));
   return { ...base, ok: true, patientId, pending };

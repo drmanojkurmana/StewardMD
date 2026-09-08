@@ -1,7 +1,7 @@
 // functions/_connect/canonical/validate.js — SCCM validator + reference resolution (spec §4.3, C5)
 import { RESOURCE_KEYS, SCCM_VERSION } from "./model.js";
 
-const REF_TARGET_KEY = { Encounter: "encounters", Condition: "conditions", Observation: "observations", DiagnosticReport: "diagnosticReports", DocumentReference: "documents" };
+const REF_TARGET_KEY = { Encounter: "encounters", Condition: "conditions", Observation: "observations", DiagnosticReport: "diagnosticReports", DocumentReference: "documents", MedicationStatement: "medications", ServiceRequest: "serviceRequests" };
 
 // ImagingStudy is metadata-only (spec groundwork for a future DICOMweb QIDO-RS connector): a plain string/number
 // field allowlist, no codeable-concept, no intra-bundle reference. Any binary/url-shaped field is a hard error —
@@ -38,9 +38,13 @@ export function validateBundle(b) {
   (b.medications || []).forEach((m) => checkCoded(m.medication, "MedicationStatement"));
   (b.allergies || []).forEach((a) => checkCoded(a.code, "AllergyIntolerance"));
   (b.observations || []).forEach((o) => { checkCoded(o.code, "Observation"); if (!o.category) errors.push("Observation " + o.id + " missing category"); });
-  (b.diagnosticReports || []).forEach((d) => { checkCoded(d.code, "DiagnosticReport"); (d.results || []).forEach((_, i) => resolveRef(d.results, i, "DiagnosticReport.results")); });
+  (b.diagnosticReports || []).forEach((d) => { checkCoded(d.code, "DiagnosticReport"); (d.results || []).forEach((_, i) => resolveRef(d.results, i, "DiagnosticReport.results")); if (d.basedOn) resolveRef(d, "basedOn", "DiagnosticReport"); });
   (b.documents || []).forEach((d) => { checkCoded(d.type, "DocumentReference"); resolveRef(d, "encounter", "DocumentReference"); });
   (b.imagingStudies || []).forEach((im) => validateImagingStudy(im, errors));
+  // SCCM 1.1 collections. Absent on a 1.0 bundle, which is fine: every check below is over an empty list.
+  (b.administrations || []).forEach((a) => { checkCoded(a.medication, "MedicationAdministration"); if (a.request) resolveRef(a, "request", "MedicationAdministration"); resolveRef(a, "encounter", "MedicationAdministration"); });
+  (b.serviceRequests || []).forEach((s) => { checkCoded(s.code, "ServiceRequest"); resolveRef(s, "encounter", "ServiceRequest"); });
+  (b.consents || []).forEach((c) => { checkCoded(c.scope, "Consent"); (c.category || []).forEach((cat) => checkCoded(cat, "Consent.category")); });
 
   return { ok: errors.length === 0, errors, warnings };
 }

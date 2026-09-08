@@ -194,6 +194,17 @@ const MODE = Object.freeze({ SYSTEM_OF_RECORD: "system-of-record", INTEGRATION: 
 /** Provenance value the model stamps on records WardSynQ itself originated. */
 const NATIVE_SYSTEM = "wardsynq-native";
 
+/**
+ * PURE. Whether a record was imported from another system (a feed, a connector, an exchange partner)
+ * rather than authored here. THE ONE QUESTION every ward workflow must ask before acting on a row:
+ * a dose another hospital gave is not one this hospital bills, an order another hospital placed is
+ * not one this ward's phlebotomist collects, a result matched to a stranger's order is a wrong chart.
+ */
+function isExternalRecord(record) {
+  const sys = record && record.meta && record.meta.source && record.meta.source.system;
+  return !!sys && sys !== NATIVE_SYSTEM;
+}
+
 class AuthorityError extends Error {
   constructor(message, code, detail) {
     super(message);
@@ -524,7 +535,7 @@ class RecordService {
 }
 
 export {
-  RESOURCE_TYPES, MODE, NATIVE_SYSTEM,
+  RESOURCE_TYPES, MODE, NATIVE_SYSTEM, isExternalRecord,
   AuthorityError, RecordRequestError,
   TenantBackend, RecordService, recordPolicy, actorForMembership, externallyOwned,
 };

@@ -10,7 +10,7 @@ test("describe(fhir-r4) -> pull / ga / emitsBundle true", () => {
   assert.equal(d.profile, "pull");
   assert.equal(d.lifecycle, "ga");
   assert.equal(d.capabilities.emitsBundle, true);
-  assert.equal(d.sccmVersion, "1.0");
+  assert.equal(d.sccmVersion, "1.1", "the FHIR connector emits the 1.1 collections; a 1.x minor is additive");
   assert.equal(d.id, "fhir-r4");
 });
 

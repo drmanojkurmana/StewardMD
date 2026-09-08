@@ -125,7 +125,7 @@ import { DiagnosticReport, Observation, numericValue } from "../../wardsynq/ward
 import { GovernanceError } from "../../wardsynq/wardsynq-actors.js";
 import { VersionConflictError } from "./repository.js";
 import { resolveClinicalActor } from "./actor.js";
-import { RecordService } from "./service.js";
+import { RecordService, isExternalRecord } from "./service.js";
 import { AuthError, PermissionError } from "../_connect/permission.js";
 import { resolveMigration } from "./migration-tenant.js";
 import { patientIdForTicket, encounterIdForTicket, diagnosticReportIdForTicket } from "./opd-identity.js";
@@ -316,7 +316,8 @@ async function matchServiceRequest(svc, patientId, encounterId, name) {
     return { id: null, linkage: "unmatched" };
   }
   const target = norm(name);
-  const onEncounter = (candidates || []).filter((sr) => sr.encounterId === encounterId);
+  // Only this hospital's own orders can be answered by this hospital's results.
+  const onEncounter = (candidates || []).filter((sr) => sr && sr.encounterId === encounterId && !isExternalRecord(sr));
   const matches = onEncounter.filter((sr) => norm(sr.display) === target);
   if (matches.length === 1) return { id: matches[0].id, linkage: "matched" };
   if (matches.length > 1) return { id: null, linkage: "ambiguous" };

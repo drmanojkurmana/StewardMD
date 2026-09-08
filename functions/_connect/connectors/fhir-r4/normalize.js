@@ -1,6 +1,6 @@
 // functions/_connect/connectors/fhir-r4/normalize.js — FHIR R4 → SCCM (the anti-corruption map)
 import { coding, codeable, quantity } from "../../canonical/coding.js";
-import { bundle, patient, encounter, condition, medicationStatement, allergyIntolerance, observation, diagnosticReport, documentReference } from "../../canonical/model.js";
+import { bundle, patient, encounter, condition, medicationStatement, allergyIntolerance, observation, diagnosticReport, documentReference, medicationAdministration, serviceRequest, consent } from "../../canonical/model.js";
 
 const STD = ["http://loinc.org", "http://snomed.info/sct", "http://hl7.org/fhir/sid/icd-10", "http://hl7.org/fhir/sid/icd-11", "http://www.nlm.nih.gov/research/umls/rxnorm", "http://www.whocc.no/atc"];
 function cc(fhirCC, fallback) {
@@ -18,6 +18,9 @@ function obsCategory(r) {
 }
 const qOrNull = (q) => (q && q.value != null ? quantity({ value: q.value, unit: q.unit, code: q.code }) : null);
 const refIdOf = (ref) => { const s = String((ref && ref.reference) || ""); return s ? (s.includes("/") ? s.split("/").pop() : s) : null; };
+const refTo = (ref, type) => { const id = refIdOf(ref); return id ? { type, id } : null; };
+const encRef = (ref) => refTo(ref, "Encounter");
+const displayOf = (ref) => (ref && (ref.display || refIdOf(ref))) || null;
 
 export function normalizeFhir(ctx, raw) {
   const P = raw.patient || {};
@@ -55,7 +58,31 @@ export function normalizeFhir(ctx, raw) {
       }
       case "DiagnosticReport": out.diagnosticReports.push(diagnosticReport({ id: r.id, code: cc(r.code, "report"), status: r.status || "unknown",
         effectiveDateTime: r.effectiveDateTime || null, conclusion: r.conclusion || null,
-        results: (r.result || []).map((x) => { const id = refIdOf(x); return id ? { type: "Observation", id } : null; }).filter(Boolean) })); break;
+        results: (r.result || []).map((x) => { const id = refIdOf(x); return id ? { type: "Observation", id } : null; }).filter(Boolean),
+        // SCCM 1.1: the order this report answers, when the sender says so and it is a ServiceRequest.
+        basedOn: (r.basedOn || []).map((x) => (/(^|\/)ServiceRequest\//.test(String(x && x.reference)) ? refTo(x, "ServiceRequest") : null)).find(Boolean) || null })); break;
+      /* SCCM 1.1. A dose given (or explicitly not given) elsewhere. Carried as sent: the FHIR status
+       * verbatim, the performer as the sender named them, the request when referenced. */
+      case "MedicationAdministration": out.administrations.push(medicationAdministration({ id: r.id, medication: cc(r.medicationCodeableConcept, "medication"), status: r.status || "unknown",
+        effectiveDateTime: r.effectiveDateTime || (r.effectivePeriod && (r.effectivePeriod.start || r.effectivePeriod.end)) || null,
+        performer: r.performer && r.performer[0] && r.performer[0].actor ? displayOf(r.performer[0].actor) : null,
+        dosage: r.dosage ? { text: r.dosage.text || null, route: r.dosage.route ? cc(r.dosage.route, "route") : null, dose: r.dosage.dose && r.dosage.dose.value != null ? quantity({ value: r.dosage.dose.value, unit: r.dosage.dose.unit, code: r.dosage.dose.code }) : null } : null,
+        encounter: encRef(r.context), request: refTo(r.request, "MedicationStatement"), reason: r.statusReason && r.statusReason[0] ? cc(r.statusReason[0], "reason") : null })); break;
+      /* SCCM 1.1. An order for something other than a medicine. The category is the sender's coding;
+       * the adapter maps it to WardSynQ's closed list or "other", never a guess. */
+      case "ServiceRequest": out.serviceRequests.push(serviceRequest({ id: r.id, code: cc(r.code, "request"), category: r.category && r.category[0] ? cc(r.category[0], "category") : null,
+        status: r.status || "unknown", intent: r.intent || "order", priority: r.priority || null, authoredOn: r.authoredOn || null,
+        requester: displayOf(r.requester), encounter: encRef(r.encounter), occurrence: r.occurrenceDateTime || (r.occurrencePeriod && r.occurrencePeriod.start) || null })); break;
+      /* SCCM 1.1. A consent decision. permit/deny is read from status AND provision, because a sender
+       * may express a refusal either way; anything less than an active or rejected decision is null. */
+      case "Consent": {
+        const prov = r.provision && r.provision.type;
+        const decision = r.status === "rejected" || prov === "deny" ? "deny" : r.status === "active" && (!prov || prov === "permit") ? "permit" : null;
+        out.consents.push(consent({ id: r.id, status: r.status || "unknown", scope: r.scope ? cc(r.scope, "scope") : null, category: (r.category || []).map((c) => cc(c, "category")),
+          decision, dateTime: r.dateTime || null, performer: r.performer && r.performer[0] ? displayOf(r.performer[0]) : null,
+          period: r.provision && r.provision.period ? { start: r.provision.period.start || null, end: r.provision.period.end || null } : null,
+          policy: r.policyRule ? cc(r.policyRule, "policy") : null })); break;
+      }
       case "DocumentReference": {
         if (r.content && r.content.some((c) => c.attachment && c.attachment.data)) out.meta.warnings.push("document " + (r.id || "?") + " inline attachment bytes dropped (narrative-only)");
         out.documents.push(documentReference({ id: r.id, type: cc(r.type, "document"), status: r.status || "unknown", date: r.date || null, text: r.description || (r.text && r.text.div) || null })); break;

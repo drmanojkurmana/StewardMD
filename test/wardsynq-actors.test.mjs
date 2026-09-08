@@ -11,11 +11,11 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 
 import {
-  TIER, KIND, INSTRUCTION_TYPES, GovernanceError, GovernedStore, makeActor, can, effectiveTier, authoriseWrite,
+  TIER, KIND, INSTRUCTION_TYPES, GovernanceError, GovernedStore, makeActor, can, effectiveTier, authoriseWrite, isExternalDoseRecord, EXTERNAL_DOSE_STATES,
 } from "../wardsynq/wardsynq-actors.js";
 import { ClinicalStore, MemoryBackend } from "../wardsynq/wardsynq-store.js";
 import { ClinicalEventBus } from "../wardsynq/wardsynq-events.js";
-import { MedicationOrder, Observation, ClinicalNote } from "../wardsynq/wardsynq-model.js";
+import { MedicationOrder, MedicationAdministration, Observation, ClinicalNote } from "../wardsynq/wardsynq-model.js";
 
 const doctor = makeActor({ id: "dr-menon", kind: KIND.HUMAN, tier: TIER.EXECUTE, credential: "NMC-88421" });
 const uncredentialled = makeActor({ id: "dr-locum", kind: KIND.HUMAN, tier: TIER.EXECUTE });
@@ -64,6 +64,35 @@ test("ADVERSARIAL: an unrecognised actor kind gets no permissions at all", () =>
 });
 
 /* ------------------------------------------------------------------ ADVERSARIAL: the AI boundary */
+
+test("THE ONE NARROW GRANT: a feed may file a dose ANOTHER hospital gave, and nothing that could be an instruction to this ward", async () => {
+  const g = await governed();
+  const external = (over) => ({
+    ...MedicationAdministration({ id: "his-mar-1", patientId: "pat-1", orderId: "his-rx-9", drug: "Metformin", status: "administered", administeredBy: "external:his:Nurse Elsewhere", administeredAt: "2026-08-02T08:00:00.000Z", source: { system: "his", sourceId: "MA1" } }),
+    ...over,
+  });
+  const feed = makeActor({ id: "adapter:his", kind: KIND.ADAPTER, tier: TIER.DRAFT });
+  // The record of fact, exactly as the adapter builds it: allowed.
+  assert.equal(authoriseWrite(feed, external()).allowed, true);
+  assert.equal(isExternalDoseRecord(feed, external({ orderId: "external:his:unreferenced", status: "cancelled" })), true, "an unreferenced dose, and a dose not given");
+  await g.put(feed, external());
+  // Each condition removed on its own is an instruction to this ward, and is refused as before.
+  const denied = (e, why) => { const v = authoriseWrite(feed, e); assert.equal(v.allowed, false, why); assert.ok(v.reasons.some((r) => r.code === "EXECUTE_DENIED"), why); };
+  denied(external({ orderId: "wsq-rx-ours-1" }), "against THIS hospital's order: the eMAR would count the dose as given");
+  denied(external({ status: "ordered" }), "a state this eMAR acts on next");
+  denied(external({ status: "scanned" }), "likewise");
+  denied(external({ administeredBy: "nurse-here" }), "a feed cannot say a nurse here gave it");
+  denied({ ...external(), meta: { ...external().meta, source: { system: "wardsynq-native", sourceId: null, importedAt: "x" } } }, "not stamped external");
+  denied({ ...external(), meta: { ...external().meta, source: { system: "other-his", sourceId: "MA1", importedAt: "x" } } }, "an order id from a DIFFERENT source than the row's own");
+  // And never an AI, whatever the row says about itself.
+  const ai = makeActor({ id: "maik", kind: KIND.AI, tier: TIER.DRAFT });
+  assert.equal(isExternalDoseRecord(ai, external()), false);
+  await assert.rejects(() => g.put(ai, external()), (e) => { assert.equal(e.code, "EXECUTE_DENIED"); return true; }, "an AI filing a given dose is the hazard, external stamp or not");
+  // The grant is for doses only: an external order still files as draft or not at all.
+  const extOrder = { ...order({ id: "his-rx-9", status: "active", prescriberId: "external:his", source: { system: "his", sourceId: "RX9" } }) };
+  assert.equal(authoriseWrite(feed, extOrder).allowed, false);
+  assert.deepEqual(EXTERNAL_DOSE_STATES, ["administered", "cancelled", "held"]);
+});
 
 test("ADVERSARIAL: an AI cannot commit an active order", async () => {
   const g = await governed();

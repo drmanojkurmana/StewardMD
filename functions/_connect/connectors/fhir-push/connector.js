@@ -26,7 +26,7 @@ function toRaw(rawBody, budget) {
 }
 
 export const fhirPushConnector = {
-  meta: { id: "fhir-push", name: "FHIR R4 push (webhook)", version: "1.0", profile: "push", kinds: ["fhir-push"], sccmVersion: "1.0" },
+  meta: { id: "fhir-push", name: "FHIR R4 push (webhook)", version: "1.0", profile: "push", kinds: ["fhir-push"], sccmVersion: "1.1" },
   authenticate: async () => ({ ok: true }),                    // auth handled by the HMAC-gated spine
   validate: async () => ({ ok: true, checks: [{ name: "json", ok: true }] }),
   normalize: async (ctx, raw) => normalizeFhir(ctx, raw),

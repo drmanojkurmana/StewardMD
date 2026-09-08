@@ -279,7 +279,7 @@ function fhirMedicationAdministration(a) {
   return clean({
     resourceType: "MedicationAdministration", id: fhirId(a.id),
     status: STATUS[str(a.status)] || "in-progress",
-    medicationCodeableConcept: codeable(a.drugCode || a.drug, a.drugCodeSystem, a.drug),
+    medicationCodeableConcept: codeable(a.drugCode || a.drug, a.drugCodeSystem, a.drug, a.sourceCoding, a.terminologyStatus),
     subject: ref("Patient", a.patientId),
     context: ref("Encounter", a.encounterId),
     effectiveDateTime: str(a.administeredAt) || undefined,
@@ -313,7 +313,8 @@ function fhirDiagnosticReport(d) {
     effectiveDateTime: str(d.reportedAt) || undefined,
     issued: str(d.meta && d.meta.recordedAt) || undefined,
     conclusion: d.conclusion || undefined,
-    result: (d.resultObservationIds || []).map((id) => ref("Observation", id)).filter(Boolean),
+    // Omitted, not empty, when a report has no observations: R4 forbids an empty element (ele-1).
+    result: (d.resultObservationIds || []).length ? (d.resultObservationIds || []).map((id) => ref("Observation", id)).filter(Boolean) : undefined,
   });
 }
 

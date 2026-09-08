@@ -35,7 +35,7 @@
 
 import { GovernanceError } from "../../wardsynq/wardsynq-actors.js";
 import { resolveClinicalActor } from "./actor.js";
-import { RecordService } from "./service.js";
+import { RecordService, isExternalRecord } from "./service.js";
 import { AuthError, PermissionError } from "../_connect/permission.js";
 
 const str = (v) => (v == null ? "" : String(v).trim());
@@ -92,6 +92,13 @@ function capturableFrom(slices) {
   for (const type of Object.keys(HAPPENED)) {
     for (const row of (slices && slices[type]) || []) {
       if (!row) continue;
+      /* A dose another hospital gave, a report another laboratory released: real events, on this
+       * chart because a feed brought them, and NOT this hospital's to bill. Named as skipped so a
+       * finance office can see they were seen. */
+      if (isExternalRecord(row)) {
+        skipped.push({ sourceType: type, sourceId: row.id || null, status: str(row.status) || null, reason: "external_source", system: row.meta.source.system });
+        continue;
+      }
       const status = str(row.status);
       if (!HAPPENED[type].includes(status)) {
         /* Named, not silently absent. A held dose and a dose nobody charted look identical on a
