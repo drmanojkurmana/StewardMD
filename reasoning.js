@@ -1589,7 +1589,7 @@
   function medRe() { if (!_medRe) _medRe = new RegExp(MED_RULES.map(function (r) { return "(" + r.re + ")"; }).join("|"), "gi"); return _medRe; }
   function medFormat(text) {
     if (text == null) return "";
-    var s = esc(String(text));
+    var s = esc(stripCite(String(text)));
     return s.replace(medRe(), function () {
       var a = arguments;                       // [match, g1..gN, offset, string]
       for (var i = 0; i < MED_RULES.length; i++) if (a[i + 1] != null) {
@@ -1618,6 +1618,8 @@
   // like "(>45 mg/dL)" or "(meningoencephalitis)" are preserved.
   function stripCite(t) {
     return String(t == null ? "" : t)
+      .replace(/\s*\((?:pp?\.?\s*\d|Harrison)[^)]*\)/gi, "")
+      .replace(/\b(?:pages?\s+|pp?\.\s*)\d+(?:\s*[–-]\s*\d+)?(?:\s*,\s*(?:pp?\.\s*)?\d+(?:\s*[–-]\s*\d+)?)*\b/gi, "")
       .replace(/\s*\((?:Harrison[^)]*|pp?\.?\s*[\dIVXLC][\d,\s–\-]*)\)/g, "")
       .replace(/\s*\bHarrison(?:[’']s)?\s*22e(?:\s*pp?\.?\s*[\d,\s–\-]+)?/g, "")
       .replace(/\s*\bpp?\.\s*\d{2,4}(?:[–\-]\d{2,4})?(?:\s*,\s*\d{2,4}(?:[–\-]\d{2,4})?)*/g, "") // bare "p.818" / "pp. 1118-1125" (dot required → p.o./p53 safe)
@@ -1687,8 +1689,7 @@
     if (e.severityClassification) cp += '<div class="ev-subh">Severity</div><p>' + medFormat(stripCite(e.severityClassification)) + '</p>';
     if (e.prognosis) cp += '<div class="ev-subh">Prognosis</div><p>' + medFormat(stripCite(e.prognosis)) + '</p>';
     if (cp) sections.push({ ic: rIco("trend"), title: "Course & prognosis", html: cp });
-    // Original Reference — VERBATIM detail with inline page citations preserved
-    // (distinct from the de-cited summary sections above; citations also in footer).
+    // Expanded clinical detail uses the same citation-free presentation as the summary.
     var rawUl = function (arr) { return (arr && arr.length) ? '<ul class="ev-ul">' + arr.map(function (x) { return '<li>' + medFormat(x) + '</li>'; }).join("") + '</ul>' : ""; };
     var full = "";
     full += evSub("Clinical pearls", rawUl(pearls));
@@ -1702,15 +1703,13 @@
     if (e.prognosis) full += '<div class="ev-subh">Prognosis</div><p>' + medFormat(e.prognosis) + '</p>';
     if (!pearls.length && !sections.length) return null;
     var srcName = e.source ? String(e.source).replace(/,?\s*22e.*$/, "") : "Standard internal-medicine reference";
-    var pages = evPages(e);
     return {
       _id: id, srcKey: "harrison", icon: rIco("book"),
       sourceName: srcName,
       edition: "22e", tag: "Primary Reference",
       pages: "",                              // not in the header — references live in the footer
       pearls: pearls, sections: sections, fullHTML: full,
-      cite: '<strong>' + rIco("book") + ' ' + esc(srcName) + ' (22e)</strong>' + (pages.length ? ' — pp. ' + pages.join(", ") : "") +
-        '<br>Reference knowledge paraphrased &amp; page-cited. Not a treatment regimen — verify against full guidelines before acting.'
+      cite: '<strong>Reference: ' + esc(srcName) + '</strong>'
     };
   }
   /* FLAGSHIP CLINICIAN-CURATED BRIEFINGS — hand-authored high-yield blocks for
@@ -1981,7 +1980,7 @@
     });
     if (src.fullHTML) {
       h += '<div class="ev-sec ev-full"><button type="button" class="ev-sec-h">' +
-        '<span class="ev-sec-ic">' + rIco("note") + '</span><span class="ev-sec-t">Original Reference</span><span class="ev-chev">⌄</span></button>' +
+        '<span class="ev-sec-ic">' + rIco("note") + '</span><span class="ev-sec-t">Clinical details</span><span class="ev-chev">⌄</span></button>' +
         '<div class="ev-sec-p"><div class="ev-sec-in">' + src.fullHTML + '</div></div></div>';
     }
     h += '<div class="ev-cite">' + src.cite + '</div></div>';
@@ -1991,10 +1990,10 @@
     if (!src) return "";
     opts = opts || {};
     var open = !!opts.expanded;
-    var sub = [src.edition, src.tag, src.pages].filter(Boolean).join(" · ");
+    var sub = src.srcKey === "harrison" ? "Clinical details and key points" : [src.edition, src.tag].filter(Boolean).join(" · ");
     return '<div class="ev-wrap' + (open ? " ev-open" : "") + '" data-ev="' + src._id + '" data-ev-src="' + (src.srcKey || "harrison") + '">' +
       '<button type="button" class="ev-top"><span class="ev-top-ic">' + src.icon + '</span>' +
-        '<span class="ev-top-main"><span class="ev-top-title">' + esc(src.sourceName) + '</span>' +
+        '<span class="ev-top-main"><span class="ev-top-title">' + (src.srcKey === "harrison" ? "Read more" : esc(src.sourceName)) + '</span>' +
         (sub ? '<span class="ev-top-sub">' + esc(sub) + '</span>' : '') + '</span>' +
         '<span class="ev-chev ev-chev-top">⌄</span></button>' +
       '<div class="ev-panel"><div class="ev-panel-in">' + (open ? evBodyHTML(src) : '') + '</div></div></div>';
@@ -2225,7 +2224,7 @@
       pearls: g.recs || [], sections: sections, fullHTML: "",
       cite: '<strong>' + rIco("book") + ' ' + esc(g.title) + (g.year ? " (" + g.year + ")" : "") + '</strong>' +
         (g.url ? '<br><a href="' + esc(g.url) + '" target="_blank" rel="noopener noreferrer">' + esc(g.url) + '</a>' : '') +
-        '<br>Key recommendations paraphrased for decision support — consult the full guideline before acting.'
+        '<br>Consult the full guideline before acting.'
     };
   }
   function evSanfordSrc(id) {
@@ -2772,7 +2771,7 @@
         mgmtHtml +
         (harrisonRef(id, { expanded: true }) || '<p class="dx-sel-empty">No Harrison reference loaded for this disease.</p>') +
         (refInf ? '' : '<button class="dx-select ' + (inf ? "inf" : "ni") + '" data-sel="' + id + '">Open full ' + (inf ? "stewardship" : "management") + ' page →</button>') +
-        '<div class="dx-mgmt-disc">' + rIco("warn") + ' Decision-support only. Reference knowledge is paraphrased from Harrison\'s 22e and standard guidelines. Verify against full guidelines and prescribing references before acting.</div></div>' +
+        '</div>' +
       '</div>';
     var favourite = document.createElement("button"); favourite.type = "button"; favourite.className = "dx-reader-favourite";
     function favouritePaint() { var saved = kbReadList("favourites").indexOf(id) >= 0; favourite.textContent = saved ? "★ Saved to favourites" : "☆ Add to favourites"; favourite.setAttribute("aria-pressed", String(saved)); }
