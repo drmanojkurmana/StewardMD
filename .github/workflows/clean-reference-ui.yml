@@ -58,3 +58,5 @@ jobs:
           fi
           git commit -m "fix(kb): simplify Knowledge Library references"
           git push
+
+          # One-time branch-local migration; workflow removes itself after patching.
