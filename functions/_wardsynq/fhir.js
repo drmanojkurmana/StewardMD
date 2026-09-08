@@ -301,9 +301,24 @@ function fhirDiagnosticReport(d) {
   });
 }
 
+/** PURE. A note's sections as one plain-text document, headings in the order they were written. */
+function noteText(n) {
+  const s = n && n.sections;
+  if (!s) return "";
+  if (typeof s === "string") return s;
+  if (typeof s === "object") {
+    /* `type` is what an imported note's sections carry as metadata (the sender's document type),
+     * not a heading a clinician wrote. Everything else is narrative and is rendered under its key. */
+    return Object.keys(s).filter((k) => k !== "type").map((k) => { const v = s[k]; if (v == null || v === "") return ""; const body = typeof v === "object" ? (v.text || JSON.stringify(v)) : String(v); return k === "text" ? body : `${k}:\n${body}`; }).filter(Boolean).join("\n\n");
+  }
+  return String(s);
+}
+const escapeXhtml = (t) => String(t).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+
 function fhirDocumentReference(n) {
   // A clinical note is a DOCUMENT in FHIR, and the signature state travels with it: a draft that
   // exported as `current` would look like a finished, signed note to everyone downstream.
+  const text = noteText(n);
   return clean({
     resourceType: "DocumentReference", id: n.id,
     status: "current",
@@ -314,7 +329,13 @@ function fhirDocumentReference(n) {
     author: n.authorId ? [{ display: n.authorId }] : undefined,
     authenticator: n.signedBy ? { display: n.signedBy } : undefined,
     context: n.encounterId ? { encounter: [ref("Encounter", n.encounterId)] } : undefined,
-    content: [{ attachment: clean({ contentType: "text/plain", data: undefined, title: str(n.noteType) || undefined }) }],
+    /* THE WORDS TRAVEL. Until 2026-09-08 this carried a title and no content, so a note left here as
+     * an empty document and a receiver's normaliser dropped it as having no narrative. The text goes
+     * as the attachment (base64 text/plain) and as `description`, which is what a receiver that
+     * ignores attachment bytes reads. */
+    description: text || undefined,
+    text: text ? { status: "generated", div: `<div xmlns="http://www.w3.org/1999/xhtml">${escapeXhtml(text).replace(/\n/g, "<br/>")}</div>` } : undefined,
+    content: [{ attachment: clean({ contentType: "text/plain", data: text ? btoa(unescape(encodeURIComponent(text))) : undefined, title: str(n.noteType) || undefined }) }],
   });
 }
 

@@ -69,9 +69,12 @@ const { verifyStaffSession } = await import("../functions/_opd_auth.js");
 const { orgForTenant, authorizeOrg } = await import("../functions/_wardsynq/org.js");
 let RECORD = new MemoryRepository();
 const TENANT_ROW = { id: "tenant-wsq", name: "WSQ Ward", status: "active", mode: "live", settings: JSON.stringify({ wardsynq: { orgId: "org-wsq" } }) };
+// A SECOND hospital, for the isolation tests: same repository object, different tenant, and nothing
+// one may see of the other. Added 2026-09-08 with the FHIR exchange.
+const TENANT_ROW2 = { id: "tenant-two", name: "Other Hospital", status: "active", mode: "live", settings: JSON.stringify({ wardsynq: { orgId: "org-two" } }) };
 const tenantDb = {
   prepare: () => ({ bind: (...a) => ({
-    first: async () => (String(a[0]) === TENANT_ROW.id ? { ...TENANT_ROW } : null),
+    first: async () => (String(a[0]) === TENANT_ROW.id ? { ...TENANT_ROW } : String(a[0]) === TENANT_ROW2.id ? { ...TENANT_ROW2 } : null),
     all: async () => ({ results: [] }), run: async () => ({ success: true, meta: {} }),
   }) }),
   batch: async () => [],
@@ -4861,6 +4864,156 @@ test("SMART: a backend system proves itself with a signed assertion against its 
   const put = await viaFhirDoor(`${ORG}/Observation/x`, { method: "PUT", bearer: t.access_token, headers: { "Content-Type": "application/fhir+json" }, body: "{}" });
   assert.equal(put.status, 405);
   assert.equal(put.headers.get("allow"), "GET");
+});
+
+/* ---- Hardening (2026-09-08): isolation, round trip, malformed input, audit ------------------- */
+
+const ORG2 = "org-two";
+function seedSecondHospital(clients) {
+  docs.set(`q_orgs/${ORG2}`, { fields: { id: ORG2, code: "SMD-TWO", name: "Other Hospital", kind: "clinic", mode: "wardsynq", connectTenantId: TENANT_ROW2.id, ownerUid: "cfa:nobody", createdAt: 1,
+    wardsynq: { fhir: { inbound: { enabled: true }, smart: { enabled: true, clients: clients || [] } } } }, updateTime: "t1" });
+  docs.set(`q_members/${sanitize(ORG2)}__${sanitize(idFor(DOCTOR))}`, { fields: { orgId: ORG2, identity: idFor(DOCTOR), role: "doctor", active: true }, updateTime: "t1" });
+}
+
+test("ISOLATION: a chart, an import and a token in one hospital do not exist in another, at either door", async () => {
+  seedHospital(); enableInboundFhir(); resetRateLimit();
+  const lab = await smartBackendClient("lab-sys");
+  enableSmart([lab.config]);
+  seedSecondHospital([]);
+  const { reg, adm } = await admittedPatientOnDrug();
+  await pushFhir(DOCTOR, `/ward/fhir?orgId=${ORG}`, partnerBundle({ bundleId: "iso-1", suffix: "-iso" }));
+
+  // The same doctor, a member of both, reading hospital two: our patient is not there.
+  const rd = await asRaw(DOCTOR, `/ward/fhir/Patient/${adm.patientId}?orgId=${ORG2}`);
+  assert.equal(rd.status, 404);
+  const srch = await (await asRaw(DOCTOR, `/ward/fhir/Observation?orgId=${ORG2}&patient=${adm.patientId}`)).json();
+  assert.equal(srch.total, 0);
+  assert.equal((await RECORD.latest(TENANT_ROW2.id, "Patient", "fhir-partner-his-pat-his-pat-77")), null, "the import landed in hospital one only");
+
+  // An import into hospital two carrying hospital ONE's MRN links to nobody: identity is per tenant.
+  const two = await pushFhir(DOCTOR, `/ward/fhir?orgId=${ORG2}`, partnerBundle({ patientId: "HIS-PAT-X", mrn: reg.mrn, abha: "00-0000-0000-0099", bundleId: "iso-2", suffix: "-iso2" }));
+  assert.equal(two.status, 200, await two.text());
+  assert.ok(await RECORD.latest(TENANT_ROW2.id, "Patient", "fhir-partner-his-pat-his-pat-x"), "created anew in hospital two");
+  assert.equal((await (await asRaw(DOCTOR, `/ward/fhir/Observation?orgId=${ORG}&patient=${adm.patientId}&code=2160-0`)).json()).total, 0, "nothing reached hospital one's chart");
+
+  // A SMART token issued by hospital one is nothing at hospital two, and vice versa.
+  const t = await (await viaFhirDoor(`${ORG}/smart/token`, form({ grant_type: "client_credentials", client_assertion_type: "urn:ietf:params:oauth:client-assertion-type:jwt-bearer", client_assertion: await lab.sign({ iss: "lab-sys", sub: "lab-sys", aud: `https://x/api/fhir/${ORG}/smart/token`, exp: Math.floor(Date.now() / 1000) + 60, jti: "iso-j1" }) }))).json();
+  assert.ok(t.access_token);
+  assert.equal((await viaFhirDoor(`${ORG}/Observation?patient=${adm.patientId}`, { bearer: t.access_token })).status, 200);
+  assert.equal((await viaFhirDoor(`${ORG2}/Observation?patient=${adm.patientId}`, { bearer: t.access_token })).status, 401, "not a token hospital two issued");
+});
+
+test("ROUND TRIP: WardSynQ -> an external EMR -> WardSynQ, and the clinical content survives field for field", async () => {
+  seedHospital(); enableInboundFhir();
+  const { adm, ord, patient, scan } = await admittedPatientOnDrug();
+  await as(DOCTOR, "/ward/problem", "POST", { orgId: ORG, problem: { patientId: adm.patientId, encounterId: adm.encounterId, code: "J18.9", codeSystem: "ICD-10", display: "Pneumonia", verificationStatus: "confirmed" } });
+  const step = (a, x) => as(NURSE, "/ward/mar", "POST", { orgId: ORG, action: a, orderId: ord.orderId, dueAt: DUE, patient, ...(x || {}) });
+  await step("verify"); await step("dispense"); await step("scan", { scan }); await step("administer");
+  const sr = await as(DOCTOR, "/ward/investigation", "POST", { orgId: ORG, encounterId: adm.encounterId, code: "Renal profile", category: "laboratory" });
+  await as(LABTECH, "/ward/release-result", "POST", { orgId: ORG, serviceRequestId: sr.orderId, status: "final", reportedAt: "2026-09-07T10:00:00.000Z", conclusion: "Renal function normal.", tests: [{ test: "Creatinine", value: 88, unit: "umol/L" }] });
+  const note = await as(DOCTOR, "/ward/note", "POST", { orgId: ORG, templateId: "ward-round", encounterId: adm.encounterId, sections: { impression: "Improving pneumonia.", plan: "Continue antibiotics; review tomorrow." } });
+  assert.equal(note.__status, 200, JSON.stringify(note).slice(0, 200));
+
+  // OUT: everything for the patient, as another EMR would pull it.
+  const out = await (await asRaw(DOCTOR, `/ward/fhir/Patient/${adm.patientId}/$everything?orgId=${ORG}`)).json();
+  const byType = {}; for (const e of out.entry) (byType[e.resource.resourceType] ||= []).push(e.resource);
+  assert.ok(byType.Patient && byType.Encounter && byType.Condition && byType.Observation && byType.MedicationRequest && byType.MedicationAdministration && byType.DiagnosticReport && byType.DocumentReference, Object.keys(byType).join(","));
+  assert.match(byType.DocumentReference[0].description, /Improving pneumonia/, "the note's words travel");
+  assert.ok(byType.DocumentReference[0].content[0].attachment.data, "and as an attachment");
+
+  // The other EMR re-identifies the patient as its own and sends it all back. A different person
+  // on paper (new name, dob, MRN) so identity does not hold the bundle; the CONTENT is what is measured.
+  const mirror = { resourceType: "Bundle", type: "collection", id: "mirror-1", entry: out.entry.map((e) => ({ resource: e.resource })) };
+  const mp = mirror.entry.find((e) => e.resource.resourceType === "Patient").resource;
+  mp.identifier = [{ type: { coding: [{ code: "MR" }] }, system: "urn:mirror:mrn", value: "MIRROR-0001" }];
+  mp.name = [{ text: "Mirror Person" }]; mp.birthDate = "1961-11-05";
+  const back = await pushFhir(DOCTOR, `/ward/fhir?orgId=${ORG}`, mirror, { "X-Source-System": "mirror" });
+  const backText = await back.text();
+  assert.equal(back.status, 200, backText);
+  const bb = JSON.parse(backText);
+  // The one export-only type is REPORTED as unsupported on the way in, not silently dropped.
+  assert.ok((bb.meta.tag || []).some((t) => /MedicationAdministration is not a resource WardSynQ imports/.test(t.display)), JSON.stringify(bb.meta));
+  const mirrored = `fhir-mirror-pat-${adm.patientId}`;
+  assert.ok(await RECORD.latest(TENANT_ROW.id, "Patient", mirrored));
+
+  const back$ = await (await asRaw(DOCTOR, `/ward/fhir/Patient/${mirrored}/$everything?orgId=${ORG}`)).json();
+  const got = {}; for (const e of back$.entry) (got[e.resource.resourceType] ||= []).push(e.resource);
+
+  // Condition: the ICD-10 coding is intact and still ICD-10.
+  assert.deepEqual(got.Condition[0].code.coding[0], byType.Condition[0].code.coding[0]);
+  assert.equal(got.Condition[0].verificationStatus.coding[0].code, "provisional", "an imported diagnosis is provisional HERE until a clinician here confirms it - never silently confirmed");
+  // Observations: same count, and the creatinine is the same number in the same unit at the same time under the same LOINC.
+  assert.equal(got.Observation.length, byType.Observation.length);
+  const cre0 = byType.Observation.find((o) => o.code.coding && o.code.coding[0].code === "2160-0");
+  const cre1 = got.Observation.find((o) => o.code.coding && o.code.coding[0].code === "2160-0");
+  assert.deepEqual([cre1.valueQuantity.value, cre1.valueQuantity.unit, cre1.effectiveDateTime, cre1.code.coding[0].system], [cre0.valueQuantity.value, cre0.valueQuantity.unit, cre0.effectiveDateTime, "http://loinc.org"]);
+  // Medication: the drug and the instruction text survive; the order is a DRAFT here, attributed to the sender.
+  assert.equal(got.MedicationRequest[0].medicationCodeableConcept.text, byType.MedicationRequest[0].medicationCodeableConcept.text);
+  assert.equal(got.MedicationRequest[0].dosageInstruction[0].text, byType.MedicationRequest[0].dosageInstruction[0].text);
+  assert.equal(got.MedicationRequest[0].status, "draft");
+  // Report: status, conclusion, and it still points at its observation.
+  assert.equal(got.DiagnosticReport[0].status, "final");
+  assert.equal(got.DiagnosticReport[0].conclusion, "Renal function normal.");
+  assert.equal(got.DiagnosticReport[0].result.length, 1);
+  // Note: the words are the same words.
+  assert.equal(got.DocumentReference[0].description, byType.DocumentReference[0].description);
+  // Encounter: class and start survive.
+  assert.equal(got.Encounter[0].class.code, "IMP");
+  assert.equal(got.Encounter[0].period.start, byType.Encounter[0].period.start);
+  // Provenance on the way back names the sender's system and the sender's own id for each row.
+  const prov = await (await asRaw(DOCTOR, `/ward/fhir/Provenance?orgId=${ORG}&target=Observation/${cre1.id}`)).json();
+  assert.equal(prov.entry[0].resource.entity[0].what.identifier.system, "urn:stewardmd:source:fhir-mirror");
+  assert.equal(prov.entry[0].resource.entity[0].what.identifier.value, cre0.id, "the sender's id for it is our original id: the loop closes");
+});
+
+test("MALFORMED INPUT is refused with an OperationOutcome naming the fault, and nothing is written", async () => {
+  seedHospital(); enableInboundFhir();
+  const { adm } = await admittedPatientOnDrug();
+  const before = RECORD.audit.length;
+  const raw = (body, headers) => onRequest({ request: new Request(`https://x/api/queue/ward/fhir?orgId=${ORG}`, { method: "POST", headers: { "Cf-Access-Authenticated-User-Email": DOCTOR, "Content-Type": "application/fhir+json", "X-Source-System": "partner-his", ...(headers || {}) }, body }), env: ENV });
+
+  const notJson = await raw("{this is not json");
+  assert.equal(notJson.status, 400);
+  assert.equal((await notJson.json()).resourceType, "OperationOutcome");
+  const emptyEntry = await raw(JSON.stringify({ resourceType: "Bundle", entry: [{ resource: { resourceType: "Patient", id: "p" } }, { fullUrl: "x" }] }));
+  assert.equal(emptyEntry.status, 400);
+  assert.match((await emptyEntry.json()).issue[0].diagnostics, /1 bundle entry has no resource/);
+  const noId = await raw(JSON.stringify({ resourceType: "Bundle", entry: [{ resource: { resourceType: "Patient", id: "p" } }, { resource: { resourceType: "Observation" } }] }));
+  assert.equal(noId.status, 400);
+  assert.match((await noId.json()).issue[0].diagnostics, /has no id/);
+  const noPatient = await raw(JSON.stringify({ resourceType: "Bundle", entry: [{ resource: { resourceType: "Observation", id: "o1" } }] }));
+  assert.equal(noPatient.status, 400);
+  assert.match((await noPatient.json()).issue[0].diagnostics, /must carry the Patient/);
+  // A resource with no id cannot be attributed or replayed safely, whatever type it is.
+  const noIdPatient = await raw(JSON.stringify({ resourceType: "Patient", name: [{ text: "Nobody" }] }));
+  assert.equal(noIdPatient.status, 400);
+  assert.match((await noIdPatient.json()).issue[0].diagnostics, /has no id/);
+  assert.equal(await RECORD.latest(TENANT_ROW.id, "Patient", "fhir-partner-his-pat-p"), null);
+  assert.equal((await RECORD.latest(TENANT_ROW.id, "Observation", "fhir-partner-his-obs-o1")), null);
+  assert.ok(!RECORD.audit.slice(before).some((a) => a.action === "record.ingest"), "no ingest audit row: nothing was ingested");
+});
+
+test("AUDIT: every imported row and every token carries who, as what, and for whom", async () => {
+  seedHospital(); enableInboundFhir(); resetRateLimit();
+  const lab = await smartBackendClient("lab-sys");
+  enableSmart([lab.config]);
+  const { adm } = await admittedPatientOnDrug();
+  const mark = RECORD.audit.length;
+  await pushFhir(DOCTOR, `/ward/fhir?orgId=${ORG}`, partnerBundle({ bundleId: "aud-1", suffix: "-aud" }));
+  const ingests = RECORD.audit.slice(mark).filter((a) => a.action === "record.ingest");
+  assert.ok(ingests.length >= 8, `ingest rows ${ingests.length}`);
+  assert.ok(ingests.every((a) => a.actor === "adapter:fhir-partner-his"), "attributed to the feed, never to the doctor");
+  assert.ok(ingests.every((a) => a.scope && a.scope.system === "fhir-partner-his"));
+  assert.ok(ingests.every((a) => !JSON.stringify(a).includes("Partner Testcase")), "PHI-free: no name in the audit");
+
+  const denied = await viaFhirDoor(`${ORG}/smart/token`, form({ grant_type: "client_credentials", client_assertion_type: "urn:ietf:params:oauth:client-assertion-type:jwt-bearer", client_assertion: await lab.sign({ iss: "lab-sys", sub: "lab-sys", aud: "https://wrong/", exp: Math.floor(Date.now() / 1000) + 60, jti: "aud-j0" }) }));
+  assert.equal(denied.status, 401);
+  assert.ok(RECORD.audit.some((a) => a.action === "smart.token.denied" && a.scope && a.scope.clientId === "lab-sys"));
+  const ok = await viaFhirDoor(`${ORG}/smart/token`, form({ grant_type: "client_credentials", client_assertion_type: "urn:ietf:params:oauth:client-assertion-type:jwt-bearer", client_assertion: await lab.sign({ iss: "lab-sys", sub: "lab-sys", aud: `https://x/api/fhir/${ORG}/smart/token`, exp: Math.floor(Date.now() / 1000) + 60, jti: "aud-j1" }) }));
+  assert.equal(ok.status, 200);
+  const issued = RECORD.audit.find((a) => a.action === "smart.token" && a.actor === "smart:lab-sys");
+  assert.ok(issued);
+  assert.ok(!JSON.stringify(issued).includes((await ok.json()).access_token), "the token itself is never in the audit");
 });
 
 test("SMART: the token endpoint is rate limited per client, and says so with Retry-After", async () => {

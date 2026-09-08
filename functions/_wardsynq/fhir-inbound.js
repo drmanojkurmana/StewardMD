@@ -111,10 +111,17 @@ function splitBundle(body) {
   const problems = [];
   const resources = [];
   let patient = null;
-  const items = body && body.resourceType === "Bundle"
-    ? (Array.isArray(body.entry) ? body.entry.map((e) => e && e.resource).filter(Boolean) : [])
-    : (body && body.resourceType ? [body] : []);
-  if (!items.length) problems.push({ reason: REASON.INVALID, detail: "no resource in the request" });
+  let items = [];
+  if (body && body.resourceType === "Bundle") {
+    const entries = Array.isArray(body.entry) ? body.entry : [];
+    // An entry with no resource is named, not skipped: a sender counting entries would believe it landed.
+    const empty = entries.filter((e) => !e || !e.resource || typeof e.resource !== "object").length;
+    if (empty) problems.push({ reason: REASON.INVALID, detail: `${empty} bundle entr${empty === 1 ? "y has" : "ies have"} no resource` });
+    items = entries.map((e) => e && e.resource).filter((r) => r && typeof r === "object");
+  } else if (body && body.resourceType) {
+    items = [body];
+  }
+  if (!items.length && !problems.length) problems.push({ reason: REASON.INVALID, detail: "no resource in the request" });
   for (const r of items) {
     const t = str(r.resourceType);
     if (!t) { problems.push({ reason: REASON.INVALID, detail: "an entry has no resourceType" }); continue; }
