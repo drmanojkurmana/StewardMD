@@ -63,7 +63,7 @@ mock.module("../functions/_fbfirestore.js", {
   },
 });
 
-const { MemoryRepository } = await import("../functions/_wardsynq/repository.js");
+const { MemoryRepository, VersionConflictError } = await import("../functions/_wardsynq/repository.js");
 const { identify } = await import("../functions/_usage.js");
 const { verifyStaffSession } = await import("../functions/_opd_auth.js");
 const { orgForTenant, authorizeOrg } = await import("../functions/_wardsynq/org.js");
@@ -370,15 +370,15 @@ test("wrong-patient / bed-safety: /ward/admit refuses a bed another open admissi
   assert.equal(admD.__status, 200, JSON.stringify(admD));
 });
 
-/* THE ACTUAL ATOMICITY PROOF. A sequential list-scan (above) cannot, by construction, stop two
- * admissions that both read "free" before either writes - the check and the write are two
- * different moments. This fires both requests together with Promise.all so their real interleaving
- * (Node schedules each at its own await boundaries, exactly as two near-simultaneous requests would
- * on a live server) is what decides the outcome, not the order this test happens to write them in.
- * Exactly one must land; the storage layer's own (tenant, resourceType, id, version) uniqueness
- * (claimBed(), migrate-inpatient.js) is what makes that true regardless of which request's
- * continuation the event loop happens to run first. */
-test("wrong-patient / bed-safety, CONCURRENT: two admissions racing for the same bed at once - exactly one lands, deterministically", async () => {
+/* Two admissions fired together via Promise.all. In THIS harness (one Node process, a
+ * MemoryRepository with no real I/O latency) request A's whole chain typically completes -
+ * including its own claimBed() - before request B's list-scan even runs, so B is usually refused
+ * by the ordinary FAST PATH (the plain list-scan, same as transfer's own check), not by
+ * claimBed()'s VersionConflictError. That is still a real, useful guarantee (exactly one request
+ * ever lands, whichever path catches the second one) - it is just not, on its own, proof of the
+ * atomic path. The test after this one forces the two requests to actually reach claimBed()
+ * without having seen each other, which is the case this test cannot reliably manufacture. */
+test("wrong-patient / bed-safety, CONCURRENT: two admissions racing for the same bed at once - exactly one lands, whichever guard catches the second", async () => {
   seedHospital();
   const regA = await as(DOCTOR, "/patient/register", "POST", { orgId: ORG, name: "Race Claimant A", mobile: "9876500071", gender: "female", ageYears: 40 });
   const regB = await as(DOCTOR, "/patient/register", "POST", { orgId: ORG, name: "Race Claimant B", mobile: "9876500072", gender: "male", ageYears: 41 });
@@ -399,6 +399,58 @@ test("wrong-patient / bed-safety, CONCURRENT: two admissions racing for the same
   const row = board.wards.find((w) => w.ward === "ICU");
   const occupants = (row.occupied || []).filter((o) => o.bed === "5");
   assert.equal(occupants.length, 1, "the record itself has exactly one occupant of ICU bed 5: " + JSON.stringify(occupants));
+});
+
+/* THE ACTUAL ATOMICITY PROOF, forced. The test above cannot reliably make BOTH requests reach
+ * claimBed() without having seen each other's Encounter - request A usually finishes first and B's
+ * OWN list-scan then sees A's already-written admission, so B is refused by the ordinary fast path
+ * and claimBed()'s VersionConflictError is never reached. This test closes that gap directly: it
+ * holds BOTH requests' Encounter list-scan at a rendezvous barrier (a monkey-patch on RECORD's own
+ * read method, restored in `finally`) until both have arrived, so NEITHER can see the other's
+ * write - both see the bed as free, both proceed to claimBed(), and it is claimBed()'s own
+ * append()-level (tenant, resourceType, id, version) uniqueness, not the list-scan, that decides
+ * the winner. This is the path a genuinely simultaneous pair of requests on a live, slower-than-
+ * single-process server (real network latency between the read and the write) would actually take. */
+test("wrong-patient / bed-safety, THE ATOMIC PATH ITSELF: forced to race inside claimBed(), the loser genuinely hits VersionConflictError", async () => {
+  seedHospital();
+  const regA = await as(DOCTOR, "/patient/register", "POST", { orgId: ORG, name: "Barrier Claimant A", mobile: "9876500073", gender: "female", ageYears: 42 });
+  const regB = await as(DOCTOR, "/patient/register", "POST", { orgId: ORG, name: "Barrier Claimant B", mobile: "9876500074", gender: "male", ageYears: 43 });
+
+  const realLatestByType = RECORD.latestByType.bind(RECORD);
+  const realAppend = RECORD.append.bind(RECORD);
+  let arrived = 0, releaseGate, claimConflicts = 0;
+  const gate = new Promise((resolve) => { releaseGate = resolve; });
+  RECORD.latestByType = async (tenantId, resourceType, limit) => {
+    if (resourceType === "Encounter") {
+      arrived += 1;
+      if (arrived === 2) releaseGate();          // both callers have now asked "who is here" -
+      await gate;                                // neither has seen the other's answer yet.
+    }
+    return realLatestByType(tenantId, resourceType, limit);
+  };
+  // Instrumented, not assumed: this is the SAME evidence a prior review demanded before trusting
+  // this test's own claim - proof the bed-claim row itself, not the ordinary list-scan, is what
+  // decided the loser.
+  RECORD.append = async (tenantId, records, ctx) => {
+    try { return await realAppend(tenantId, records, ctx); }
+    catch (e) { if (e instanceof VersionConflictError && records.some((r) => r.resourceType === "_wardsynq_bed_claim")) claimConflicts += 1; throw e; }
+  };
+
+  let a, b;
+  try {
+    [a, b] = await Promise.all([
+      as(DOCTOR, "/ward/admit", "POST", { orgId: ORG, mrn: regA.mrn, ward: "ICU", bed: "6", admittedAt: "2026-09-07T08:00:00.000Z" }),
+      as(DOCTOR, "/ward/admit", "POST", { orgId: ORG, mrn: regB.mrn, ward: "ICU", bed: "6", admittedAt: "2026-09-07T08:00:01.000Z" }),
+    ]);
+  } finally { RECORD.latestByType = realLatestByType; RECORD.append = realAppend; }
+
+  assert.equal(arrived, 2, "both requests genuinely reached the list-scan before either was released - the race was real, not assumed");
+  assert.equal(claimConflicts, 1, "claimBed()'s own append() genuinely threw VersionConflictError for the loser - the atomic path, not the list-scan, decided this");
+  const outcomes = [a, b];
+  assert.equal(outcomes.filter((r) => r.__status === 200 && r.written === 1).length, 1, "exactly one landed even with neither request able to see the other's Encounter: " + JSON.stringify(outcomes));
+  assert.equal(outcomes.filter((r) => r.__status === 409 && r.error === "bed_occupied").length, 1, JSON.stringify(outcomes));
+  const board = await as(DOCTOR, `/ward/beds?orgId=${ORG}`);
+  assert.equal((board.wards.find((w) => w.ward === "ICU").occupied || []).filter((o) => o.bed === "6").length, 1, "and the record still has exactly one real occupant");
 });
 
 /* DUPLICATE ADMISSION: the SAME request retried (a lost response, a doubled click) is idempotent,
