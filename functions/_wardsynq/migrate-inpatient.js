@@ -50,7 +50,11 @@ const ICU = "ICU";
 // discharge - the maternity-specific facts (pregnancy episode, labour, delivery, newborn linkage)
 // live in migrate-maternity.js and are never a reason to duplicate this file's own admission path.
 const MATERNITY = "MATERNITY";
-const ADMISSION_CLASSES = Object.freeze([IPD, ICU, MATERNITY]);
+// PEDIATRICS and NICU joined 2026-09-08 (Task 2.5), the identical reasoning: age-aware charting,
+// weight/dose safety and a newborn's own identity (migrate-pediatrics.js, migrate-maternity.js) are
+// never a reason to duplicate this file's own admission/bed/transfer/discharge path.
+const PEDIATRICS = "PEDIATRICS", NICU = "NICU";
+const ADMISSION_CLASSES = Object.freeze([IPD, ICU, MATERNITY, PEDIATRICS, NICU]);
 const OPEN = "in-progress";
 
 const str = (v) => (v == null ? "" : String(v).trim());
@@ -91,7 +95,7 @@ function encounterFromAdmission(input) {
   // Explicit, requested, and validated - never inferred from the ward name. An unrecognised or
   // absent value defaults to IPD, the behaviour every existing caller/test already depends on.
   const requestedClass = str(input && input.class).toUpperCase();
-  const admissionClass = requestedClass === ICU ? ICU : requestedClass === MATERNITY ? MATERNITY : IPD;
+  const admissionClass = ADMISSION_CLASSES.includes(requestedClass) ? requestedClass : IPD;
   const enc = Encounter({
     id, patientId, class: admissionClass, status: OPEN,
     identifiers: [{ system: "opd-mrn", value: mrn }],
@@ -606,7 +610,7 @@ async function bedBoard(request, env, ctx) {
 }
 
 export {
-  IPD, ICU, MATERNITY, ADMISSION_CLASSES, OPEN,
+  IPD, ICU, MATERNITY, PEDIATRICS, NICU, ADMISSION_CLASSES, OPEN,
   encounterFromAdmission, sameAdmission, admitPatient, listWard,
   recordWardVitals, orderFromWardRequest, createWardMedicationOrder,
   sameBed, transferPatient, bedBoard,

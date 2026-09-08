@@ -241,6 +241,12 @@ const RESOURCE_TYPES = Object.freeze([
    * ResusBundle and SurgicalCase's own comments already give), and EMR_VIEW's unrestricted read
    * covers seeing one. */
   "FamilyLink",
+  /* A line, catheter or drain: site, type, when placed, when removed (Task 2.5). A placement log,
+   * not a protocol - it carries no judgement about when a line is indicated or how to care for it,
+   * the same restraint migrate-surgery.js's ImplantRecord already keeps for a prosthesis. No grant
+   * change accompanies this: EMR_TREAT's unrestricted write already covers it, matching
+   * ImplantRecord's own precedent - placing a line is a clinical commitment, not routine charting. */
+  "LineRecord",
 ]);
 
 const MODE = Object.freeze({ SYSTEM_OF_RECORD: "system-of-record", INTEGRATION: "integration" });

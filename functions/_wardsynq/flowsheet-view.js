@@ -38,7 +38,8 @@ const str = (v) => (v == null ? "" : String(v).trim());
 // frequency, fetal heart rate, a stated labour status) is charted the same way a vital sign is -
 // this grid's own missing-hour honesty and bitemporal correction apply to it unchanged. The WHO
 // partogram's alert/action-line plotting is NOT built here; this shows what was charted, nothing more.
-const CATEGORIES = Object.freeze(["vital-signs", "fluid-balance", "device", "labour"]);
+// "neonatal" joined the same way (Task 2.5): FiO2, PEEP and respiratory-support mode on a NICU cot.
+const CATEGORIES = Object.freeze(["vital-signs", "fluid-balance", "device", "labour", "neonatal"]);
 
 /**
  * PURE. The hospital's chosen rows, validated. An entry with no code is reported: a row that silently
