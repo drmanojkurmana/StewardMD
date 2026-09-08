@@ -265,8 +265,8 @@ try {
   await shot("splash-04-landing");
 
   /* ---------- 2. RETURNING signed-in clinician: classic frame, THEN the welcome-back screen ----
-     Two passive screens (owner: "i want both"). Screen 1 is the classic frame, fully on screen
-     at first paint with no entrance animation. After a 1.5s beat it crossfades into screen 2:
+     Two passive screens (owner: "i want both"). Screen 1 keeps the classic frame while the mark
+     traces and fills over 1.2s. After a 1.5s beat it crossfades into screen 2:
      avatar, name, glass foot. The boot script holds a constant 3s in total, then Face ID / PIN
      fires by itself. No button, no hold, on either screen. */
   await newTab();
@@ -301,12 +301,15 @@ try {
         var img=[].slice.call(f.querySelectorAll(".sbs-maik")).filter(function(x){return getComputedStyle(x).display!=="none"})[0];
         return getComputedStyle(f).flexDirection==="column" && img && Math.round(parseFloat(getComputedStyle(img).height))===53 ? "classic foot" : "foot changed";`), "classic foot",
       label + ": the developed-by foot keeps its classic stacked composition");
-    /* ALL AT ONCE: nothing on screen 1 animates in */
-    okv(await ev(`var bad=[]; [".sbs-logo",".sbs-mark",".sbs-word",".sbs-tag",".sbs-foot",".sbs-center"].forEach(function(sel){
+    /* The logo traces and fills while the rest of the classic composition is already present. */
+    okv(await ev(`var paths=document.querySelectorAll("#smdBootSplash .sbs-logo-trace path"),fill=[document.querySelector("#smdBootSplash .sbs-logo"),document.querySelector("#smdBootSplash .sbs-mark")].filter(function(x){return x&&getComputedStyle(x).display!=="none"})[0];
+        return paths.length===3 && paths[0].getAttribute("pathLength")==="1" && fill && getComputedStyle(fill).animationName==="sbsLogoFill" ? "draw-fill" : "missing";`), "draw-fill",
+      label + ": the mark traces in three ordered paths and then fills");
+    okv(await ev(`var bad=[]; [".sbs-word",".sbs-tag",".sbs-foot",".sbs-center"].forEach(function(sel){
         var e=document.querySelector("#smdBootSplash "+sel); if(!e||getComputedStyle(e).display==="none") return;
         var s=getComputedStyle(e); if(s.animationName!=="none") bad.push(sel+":"+s.animationName); if(parseFloat(s.opacity)<1) bad.push(sel+":opacity "+s.opacity); });
         return bad.length ? bad.join(",") : "static";`), "static",
-      label + ": every element of screen 1 is fully on screen at first paint (no entrance animation)");
+      label + ": the wordmark, tagline and foot remain fully present while the logo draws");
     okv(await ev(`var b=document.querySelector("#smdBootSplash .sbs-go"); return !b && !window.__smdBootGate;`), true,
       label + ": no Open Workspace button, no hold");
   };
@@ -435,6 +438,8 @@ try {
         if(getComputedStyle(e).animationName!=="none")out.push(sel[i]+":"+getComputedStyle(e).animationName);}
       return out.join(",")||"all still";`), "all still",
     "prefers-reduced-motion stills the intro poster animations");
+  okv(await ev(`var t=document.querySelector("#smdBootSplash .sbs-logo-trace"),f=[document.querySelector("#smdBootSplash .sbs-logo"),document.querySelector("#smdBootSplash .sbs-mark")].filter(function(x){return x&&getComputedStyle(x).display!=="none"})[0];return t&&getComputedStyle(t).display==="none"&&f&&parseFloat(getComputedStyle(f).opacity)===1?"still":"moving";`), "still",
+    "prefers-reduced-motion shows the completed mark without tracing");
   await ev(`localStorage.setItem("stewardmd_account", JSON.stringify({type:"google",name:"Dr. Test",email:"t@example.com"})); return 1;`);
   await call("Page.navigate", { url: BASE });
   await sleep(1200);

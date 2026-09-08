@@ -265,8 +265,15 @@ body.smd-ddi-open #smdBackToTop{display:none!important}
      (min 1.6s, hard-cap 3.6s) then self-removes. Sits above every app overlay. -->
 <div id="smdBootSplash" role="status" aria-label="Loading StewardMD">
   <div class="sbs-center">
-    <img class="sbs-logo" src="/logo.png" alt="StewardMD logo" width="97" height="97">
-    <span class="sbs-mark" aria-hidden="true"></span>
+    <div class="sbs-logo-stage">
+      <img class="sbs-logo" src="/logo.png" alt="StewardMD logo" width="107" height="107">
+      <span class="sbs-mark" aria-hidden="true"></span>
+      <svg class="sbs-logo-trace" viewBox="0 0 368 368" aria-hidden="true" focusable="false">
+        <path pathLength="1" style="--sbs-trace-duration:.36s;--sbs-trace-delay:0s" d="M143 53 L159 56 L174 63 L210 98 L210 101 L197 111 L193 111 L166 83 L149 75 L128 75 L112 82 L100 94 L95 104 L93 110 L93 131 L103 150 L130 176 L115 189 L81 155 L72 129 L73 106 L81 86 L99 66 L122 55 L143 53 Z"></path>
+        <path pathLength="1" style="--sbs-trace-duration:.36s;--sbs-trace-delay:.36s" d="M186 171 L125 224 L110 233 L97 236 L84 235 L74 232 L62 224 L62 222 L77 211 L86 215 L106 213 L213 124 L235 118 L256 120 L274 129 L284 138 L284 141 L271 151 L268 151 L259 143 L249 139 L230 139 L216 146 L186 171 Z"></path>
+        <path pathLength="1" style="--sbs-trace-duration:.48s;--sbs-trace-delay:.72s" d="M180 201 L185 197 L189 197 L200 210 L165 239 L164 242 L198 276 L205 281 L220 285 L240 282 L255 270 L263 255 L264 239 L256 219 L212 175 L225 163 L228 163 L272 206 L279 217 L284 232 L284 255 L276 276 L264 291 L252 299 L236 305 L222 306 L202 302 L185 292 L135 242 L136 239 L143 235 L180 201 Z"></path>
+      </svg>
+    </div>
     <div class="sbs-word">Steward<span>MD</span></div>
     <div class="sbs-tag">Built by clinicians, for clinicians</div>
     <!-- Returning, signed-in clinicians get their own face + name here instead of the generic
@@ -338,7 +345,11 @@ body.smd-ddi-open #smdBackToTop{display:none!important}
   #smdBootSplash{position:fixed;inset:0;z-index:2147483000;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;opacity:1;transition:opacity .45s ease;-webkit-font-smoothing:antialiased;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,system-ui,sans-serif}
   #smdBootSplash.sbs-hide{opacity:0;pointer-events:none}
   #smdBootSplash .sbs-center{display:flex;flex-direction:column;align-items:center;gap:16px;transform:translateY(-3%)}
-  #smdBootSplash .sbs-logo{width:107px;height:107px;object-fit:contain}
+  #smdBootSplash .sbs-logo-stage{position:relative;width:107px;height:107px;flex:0 0 auto}
+  #smdBootSplash .sbs-logo,#smdBootSplash .sbs-mark,#smdBootSplash .sbs-logo-trace{position:absolute;inset:0;width:100%;height:100%}
+  #smdBootSplash .sbs-logo{object-fit:contain;opacity:0;animation:sbsLogoFill .35s cubic-bezier(.4,0,.2,1) .84s both}
+  #smdBootSplash .sbs-logo-trace{display:block;overflow:visible;color:#0e6e63;filter:drop-shadow(0 0 7px rgba(14,110,99,.22))}
+  #smdBootSplash .sbs-logo-trace path{fill:none;stroke:currentColor;stroke-width:5.2;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:1;stroke-dashoffset:1;animation:sbsLogoTrace var(--sbs-trace-duration) cubic-bezier(.4,0,.2,1) var(--sbs-trace-delay) forwards}
   #smdBootSplash .sbs-word{font-size:30px;font-weight:800;letter-spacing:-.02em;color:#0f172a}
   #smdBootSplash .sbs-word span{color:#0e6e63}
   #smdBootSplash .sbs-bar{width:132px;height:3px;border-radius:999px;background:#e6efee;overflow:hidden;margin-top:4px}
@@ -349,12 +360,13 @@ body.smd-ddi-open #smdBackToTop{display:none!important}
   /* tagline */
   #smdBootSplash .sbs-tag{font-size:13.5px;font-weight:600;letter-spacing:.005em;color:#5a7184;margin-top:-4px}
   /* white-masked mark (used in the dark Style-B splash) */
-  #smdBootSplash .sbs-mark{width:107px;height:107px;display:none;background:#fff;-webkit-mask:url(/logo.png) center/contain no-repeat;mask:url(/logo.png) center/contain no-repeat}
+  #smdBootSplash .sbs-mark{display:none;background:#fff;-webkit-mask:url(/logo.png) center/contain no-repeat;mask:url(/logo.png) center/contain no-repeat;opacity:0;animation:sbsLogoFill .35s cubic-bezier(.4,0,.2,1) .84s both}
   #smdBootSplash .sbs-maik-dark{display:none}
   /* ── Style B: premium dark teal (iOS dark mode · Android night) ── */
   #smdBootSplash.sbs-dark{background:radial-gradient(125% 90% at 50% 18%,#0d5049 0%,#08302b 55%,#061f1c 100%)}
   #smdBootSplash.sbs-dark .sbs-logo{display:none}
   #smdBootSplash.sbs-dark .sbs-mark{display:block}
+  #smdBootSplash.sbs-dark .sbs-logo-trace{color:#fff;filter:drop-shadow(0 0 8px rgba(79,214,194,.42))}
   #smdBootSplash.sbs-dark .sbs-word{color:#fff}
   #smdBootSplash.sbs-dark .sbs-word span{color:#4fd6c2}
   #smdBootSplash.sbs-dark .sbs-tag{color:#8fd8cf}
@@ -364,7 +376,13 @@ body.smd-ddi-open #smdBackToTop{display:none!important}
   #smdBootSplash.sbs-dark .sbs-maik-light{display:none}
   #smdBootSplash.sbs-dark .sbs-maik-dark{display:inline-block}
   @keyframes sbsBar{0%{transform:translateX(-130%)}100%{transform:translateX(340%)}}
-  @media (prefers-reduced-motion:reduce){#smdBootSplash .sbs-bar>span{animation-duration:2.2s}}
+  @keyframes sbsLogoTrace{to{stroke-dashoffset:0}}
+  @keyframes sbsLogoFill{to{opacity:1}}
+  @media (prefers-reduced-motion:reduce){
+    #smdBootSplash .sbs-bar>span{animation-duration:2.2s}
+    #smdBootSplash .sbs-logo,#smdBootSplash .sbs-mark{animation:none;opacity:1}
+    #smdBootSplash .sbs-logo-trace{display:none}
+  }
   /* ── v2 (html.smd-splash-v2) · Direction C: gradient depth, glass cards, bold type ──
      THE BOOT SPLASH IS A SEQUENCE OF TWO PASSIVE SCREENS (no button, no hold; the boot script
      holds a constant 3s and then Face ID / PIN fires by itself). Phase 1 (no .smd-boot-phase2) is the
@@ -402,6 +420,7 @@ body.smd-ddi-open #smdBackToTop{display:none!important}
   /* the mark is the hero here: bigger, with its own shadow, so the screen is a brand moment */
   html.smd-splash-v2 #smdBootSplash.smd-boot-phase2 .sbs-logo,
   html.smd-splash-v2 #smdBootSplash.smd-boot-phase2 .sbs-mark{width:126px;height:126px}
+  html.smd-splash-v2 #smdBootSplash.smd-boot-phase2 .sbs-logo-stage{width:126px;height:126px}
   /* the glow goes ONLY on .sbs-mark, which is a CSS mask and therefore genuinely transparent.
      .sbs-logo is /logo.png, whose bitmap is opaque to its edges, so a drop-shadow on it renders
      as a square halo around the artwork instead of following the mark. */
@@ -424,6 +443,7 @@ body.smd-ddi-open #smdBackToTop{display:none!important}
   /* ── personalised state (phase 2 only) ── */
   html.smd-splash-v2 #smdBootSplash.smd-boot-phase2.sbs-personal .sbs-logo,
   html.smd-splash-v2 #smdBootSplash.smd-boot-phase2.sbs-personal .sbs-mark{width:92px;height:92px}
+  html.smd-splash-v2 #smdBootSplash.smd-boot-phase2.sbs-personal .sbs-logo-stage{width:92px;height:92px}
   html.smd-splash-v2 #smdBootSplash.smd-boot-phase2.sbs-personal .sbs-word{display:none}
   html.smd-splash-v2 #smdBootSplash.smd-boot-phase2.sbs-personal .sbs-tag{display:none}
   html.smd-splash-v2 #smdBootSplash.smd-boot-phase2 .sbs-hello[hidden]{display:none}

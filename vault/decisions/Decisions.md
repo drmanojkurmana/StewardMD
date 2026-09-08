@@ -5,6 +5,19 @@ tags: [decisions, adr]
 
 Dated architectural calls + why. Newest first. Keep each short: **decision · why · trade-off · status**.
 
+## 2026-09-09 · Boot splash logo traces, then fills while the app loads
+
+**Decision:** port the draw-then-fill motion from the MIT-licensed `swiftui-logo-draw` reference
+into the existing Capacitor boot splash rather than adding its SwiftUI package. StewardMD's mark is
+traced as three ordered inline SVG contours over 1.2 seconds; the existing light/dark logo layer
+begins filling at 70% and completes in 350 ms. The rest of the splash remains present while the app
+loads, and the existing native-splash handoff, personalised second phase, App Lock timing and hard
+loading cap are unchanged. Reduce Motion displays the completed existing logo immediately. This
+keeps the behavior identical in iOS WKWebView, Android WebView and the web app, while the operating
+system launch screen remains the required static bridge until the web splash has painted. `sw.js`
+cache marker is `splashv2i`; `test/run-splash-ui.mjs` covers the three paths, fill, both themes,
+guest/returning flows, timing and Reduce Motion.
+
 ## 2026-09-06 · RadioAnatome 3D — a second, LIVING body from the CT masks; geometry on R2; mobile LOD
 
 **Decision:** add the living-torso CT subject (TotalSegmentator s0108, CC BY 4.0, the same scan
