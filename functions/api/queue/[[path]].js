@@ -61,7 +61,8 @@ import { giveHandover, receiveHandover, listHandovers } from "../../_wardsynq/ha
 import { verifyOrder, verificationQueue } from "../../_wardsynq/pharmacy-verify.js";
 import { dispenseOrder, returnDispense, listDispenses } from "../../_wardsynq/pharmacy-dispense.js";
 import { declareBreakGlass, openEmergencyChart, listBreakGlass } from "../../_wardsynq/break-glass.js";
-import { patientEverything, readResource, capabilityStatement, searchType, historyOf, vread, operationOutcome, provenanceRead, provenanceSearch } from "../../_wardsynq/fhir.js";
+import { operationOutcome } from "../../_wardsynq/fhir.js";
+import { dispatchRead } from "../../_wardsynq/fhir-route.js";
 import { ingestFhir, listExceptions, resolveException, inboundEnabled } from "../../_wardsynq/fhir-inbound.js";
 import { startReconciliation, decideMedicine, readReconciliation } from "../../_wardsynq/med-reconciliation.js";
 import { wardMetrics } from "../../_wardsynq/ward-metrics.js";
@@ -786,53 +787,11 @@ export async function onRequest(context) {
         if (method !== "GET") {
           return fhirJson(operationOutcome("error", "not-supported", "method not supported on this path"), 405, request, { Allow: "GET, POST, PUT" });
         }
-        if (fType === "metadata") {
-          return fhirJson(capabilityStatement({ date: new Date().toISOString(), version: "wardsynq-1" }), 200, request);
-        }
-        if (!fType) {
-          const r = await patientEverything(request, env, {
-            ...fctx, patientId: url.searchParams.get("patient") || url.searchParams.get("patientId") || "",
-            types: (url.searchParams.get("_type") || "").split(",").map((t) => t.trim()).filter(Boolean),
-          });
-          return fhirJson(r.ok ? r.bundle : r.outcome, r.status, request);
-        }
-        if (fType === "Provenance") {
-          const pParams = new URLSearchParams(url.searchParams); pParams.delete("orgId");
-          const r = fId
-            ? await provenanceRead(request, env, { ...fctx, id: fId })
-            : await provenanceSearch(request, env, { ...fctx, searchParams: pParams, rawQuery: url.search.replace(/^\?/, "") });
-          return fhirJson(r.ok ? (r.resource || r.bundle) : r.outcome, r.status, request);
-        }
-        if (fType === "Patient" && fId && fOp === "$everything") {
-          const r = await patientEverything(request, env, { ...fctx, patientId: fId, types: [] });
-          return fhirJson(r.ok ? r.bundle : r.outcome, r.status, request);
-        }
-        if (fId && fOp === "_history" && fVid) {
-          const r = await vread(request, env, { ...fctx, type: fType, id: fId, versionId: fVid });
-          return fhirJson(r.ok ? r.resource : r.outcome, r.status, request);
-        }
-        if (fId && fOp === "_history") {
-          const r = await historyOf(request, env, { ...fctx, type: fType, id: fId });
-          return fhirJson(r.ok ? r.bundle : r.outcome, r.status, request);
-        }
-        if (fId && fOp) {
-          return fhirJson(operationOutcome("error", "not-found", `no such operation: ${fOp}`), 404, request);
-        }
-        if (fId) {
-          const r = await readResource(request, env, { ...fctx, type: fType, id: fId });
-          return fhirJson(r.ok ? r.resource : r.outcome, r.status, request);
-        }
-        const prefer = request.headers.get("Prefer") || "";
-        /* `orgId` is THIS API's transport parameter, not a FHIR search parameter, and the strict
-         * parser would rightly refuse it. Stripped before parsing; kept in the Bundle links so the
-         * next page is fetchable through the same door. */
-        const fhirParams = new URLSearchParams(url.searchParams);
-        fhirParams.delete("orgId");
-        const r = await searchType(request, env, {
-          ...fctx, type: fType, searchParams: fhirParams, rawQuery: url.search.replace(/^\?/, ""),
-          lenient: /handling=lenient/i.test(prefer),
-        });
-        return fhirJson(r.ok ? r.bundle : r.outcome, r.status, request);
+        /* The read grammar lives ONCE, in fhir-route.js, shared with the external SMART door, so both
+         * doors answer the same path the same way. `orgId` is this API's transport parameter, not a
+         * FHIR one; the dispatcher strips it before parsing and keeps it in the Bundle links. */
+        const { obj, status } = await dispatchRead(request, env, parts.slice(2), url, fctx, request.headers.get("Prefer") || "");
+        return fhirJson(obj, status, request);
       }
       if (sub === "transmit" && method === "POST") {
         const r = await queueTransmission(request, env, { ...deps, orderId: body.orderId, channel: body.channel, destination: body.destination, idempotencyKey: body.idempotencyKey || null });

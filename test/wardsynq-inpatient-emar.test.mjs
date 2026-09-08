@@ -4334,15 +4334,45 @@ test("FHIR: search filters by patient, code and date, pages with links, and refu
   assert.equal(hrLoinc.entry[0].resource.valueQuantity.value, 92);
 
   // Strict by default: an unsupported parameter is a 400 naming the parameter.
-  const bad = await asRaw(DOCTOR, `/ward/fhir/Observation?orgId=${ORG}&patient=${adm.patientId}&status=final`);
+  const bad = await asRaw(DOCTOR, `/ward/fhir/Observation?orgId=${ORG}&patient=${adm.patientId}&performer=Practitioner/x`);
   assert.equal(bad.status, 400);
   const oo = await bad.json();
   assert.equal(oo.resourceType, "OperationOutcome");
-  assert.match(oo.issue[0].diagnostics, /^status:/);
+  assert.match(oo.issue[0].diagnostics, /^performer:/);
   // Lenient on request: the parameter is dropped AND reported inside the bundle.
-  const len = await (await asRaw(DOCTOR, `/ward/fhir/Observation?orgId=${ORG}&patient=${adm.patientId}&status=final`, "GET", { Prefer: "handling=lenient" })).json();
+  const len = await (await asRaw(DOCTOR, `/ward/fhir/Observation?orgId=${ORG}&patient=${adm.patientId}&performer=Practitioner/x`, "GET", { Prefer: "handling=lenient" })).json();
   assert.equal(len.resourceType, "Bundle");
-  assert.ok(len.entry.some((e) => e.search.mode === "outcome" && /status was ignored/.test(e.resource.issue[0].diagnostics)));
+  assert.ok(len.entry.some((e) => e.search.mode === "outcome" && /performer was ignored/.test(e.resource.issue[0].diagnostics)));
+
+  // The named parameters: status and category with their implicit systems, _summary=count, _elements, _total=none.
+  const fin = await (await asRaw(DOCTOR, `/ward/fhir/Observation?orgId=${ORG}&patient=${adm.patientId}&status=final&category=vital-signs`)).json();
+  assert.equal(fin.resourceType, "Bundle", JSON.stringify(fin).slice(0, 300));
+  assert.ok(fin.total >= 2 && fin.entry.every((e) => e.resource.category[0].coding[0].code === "vital-signs"), "only vital-signs, and the two we wrote are among them");
+  assert.equal((await (await asRaw(DOCTOR, `/ward/fhir/Observation?orgId=${ORG}&patient=${adm.patientId}&category=vital-signs&status:not=final`)).json()).total, 0);
+  const cnt = await (await asRaw(DOCTOR, `/ward/fhir/Observation?orgId=${ORG}&patient=${adm.patientId}&_summary=count`)).json();
+  assert.ok(cnt.total >= 3 && cnt.entry.length === 0, "count only");
+  const els = await (await asRaw(DOCTOR, `/ward/fhir/Observation?orgId=${ORG}&patient=${adm.patientId}&_elements=code&_total=none`)).json();
+  assert.equal(els.total, undefined);
+  assert.deepEqual(Object.keys(els.entry[0].resource).sort(), ["code", "id", "meta", "resourceType"]);
+  assert.ok(els.entry[0].resource.meta.tag.some((t) => t.code === "SUBSETTED"));
+  // A single read honours _elements too.
+  const one = await (await asRaw(DOCTOR, `/ward/fhir/Observation/${els.entry[0].resource.id}?orgId=${ORG}&_elements=status`)).json();
+  assert.deepEqual(Object.keys(one).sort(), ["id", "meta", "resourceType", "status"]);
+
+  // Chaining through the compartment: the patient's own MRN finds their observations, a stranger's finds nothing;
+  // _has finds the patient from the observation; a generic _revinclude brings the observations back with the patient.
+  const pat = await (await asRaw(DOCTOR, `/ward/fhir/Patient/${adm.patientId}?orgId=${ORG}`)).json();
+  const mrn = pat.identifier.find((i) => i.system === "urn:stewardmd:mrn").value;
+  const chained = await (await asRaw(DOCTOR, `/ward/fhir/Observation?orgId=${ORG}&patient=${adm.patientId}&patient.identifier=urn:stewardmd:mrn|${encodeURIComponent(mrn)}&code=8867-4`)).json();
+  assert.equal(chained.total, 2, JSON.stringify(chained).slice(0, 300));
+  const strangers = await (await asRaw(DOCTOR, `/ward/fhir/Observation?orgId=${ORG}&patient=${adm.patientId}&patient.identifier=urn:stewardmd:mrn|NOBODY`)).json();
+  assert.equal(strangers.total, 0);
+  const hasQ = await (await asRaw(DOCTOR, `/ward/fhir/Patient?orgId=${ORG}&_has:Observation:patient:code=8867-4&_revinclude=Observation:subject`)).json();
+  assert.equal(hasQ.resourceType, "Bundle", JSON.stringify(hasQ).slice(0, 300));
+  assert.deepEqual(hasQ.entry.filter((e) => e.search.mode === "match").map((e) => e.resource.id), [adm.patientId]);
+  assert.ok(hasQ.entry.filter((e) => e.search.mode === "include").length >= 3, "their observations ride along");
+  assert.equal((await (await asRaw(DOCTOR, `/ward/fhir/Patient?orgId=${ORG}&_has:Observation:patient:code=0000-0`)).json()).total, 0);
+  assert.equal((await (await asRaw(DOCTOR, `/ward/fhir/Patient?orgId=${ORG}&identifier=${encodeURIComponent(mrn)}&name:missing=false`)).json()).total, 1, "identifier and name search");
 
   // With inbound off (the default) a write is a 404 OperationOutcome, and an unknown operation is a 404 one.
   const post = await asRaw(DOCTOR, `/ward/fhir/Observation?orgId=${ORG}`, "POST");
@@ -4375,8 +4405,25 @@ test("FHIR: _include pulls the report's observations through the governed read, 
 
   const ev = await (await asRaw(DOCTOR, `/ward/fhir/Patient/${adm.patientId}/$everything?orgId=${ORG}`)).json();
   assert.equal(ev.resourceType, "Bundle");
-  assert.ok(ev.entry.some((e) => e.resource.resourceType === "Patient"));
+  assert.equal(ev.type, "searchset");
+  assert.equal(ev.entry[0].resource.resourceType, "Patient", "the patient leads");
   assert.ok(ev.entry.some((e) => e.resource.resourceType === "DiagnosticReport"));
+  assert.ok(ev.link.some((l) => l.relation === "self" && /\$everything/.test(l.url)));
+
+  // $everything pages, narrows by _type, and _since keeps only what changed at or after that instant.
+  const paged = await (await asRaw(DOCTOR, `/ward/fhir/Patient/${adm.patientId}/$everything?orgId=${ORG}&_count=2`)).json();
+  assert.equal(paged.entry.length, 2);
+  assert.ok(paged.link.some((l) => l.relation === "next" && /_page=1/.test(l.url)));
+  const typed = await (await asRaw(DOCTOR, `/ward/fhir/Patient/${adm.patientId}/$everything?orgId=${ORG}&_type=DiagnosticReport`)).json();
+  assert.deepEqual([...new Set(typed.entry.map((e) => e.resource.resourceType))], ["DiagnosticReport"]);
+  const future = await (await asRaw(DOCTOR, `/ward/fhir/Patient/${adm.patientId}/$everything?orgId=${ORG}&_since=2999-01-01`)).json();
+  assert.equal(future.total, 0, "nothing has changed since the far future");
+  const recent = await (await asRaw(DOCTOR, `/ward/fhir/Patient/${adm.patientId}/$everything?orgId=${ORG}&_since=2000-01-01`)).json();
+  assert.equal(recent.total, ev.total);
+  const badOp = await asRaw(DOCTOR, `/ward/fhir/Patient/${adm.patientId}/$everything?orgId=${ORG}&start=2020-01-01`);
+  assert.equal(badOp.status, 400, "start/end are not offered; the parameter is named, not dropped");
+  const noOne = await asRaw(DOCTOR, `/ward/fhir/Patient/nobody/$everything?orgId=${ORG}`);
+  assert.equal(noOne.status, 404, "no such patient is a 404, not an empty bundle");
 });
 
 test("FHIR: Provenance by target shows every version with its real author, Consent exports honestly, and _revinclude rides along", async () => {
