@@ -34,7 +34,11 @@ const str = (v) => (v == null ? "" : String(v).trim());
 
 /** The categories a flowsheet draws from. A laboratory result is not a flowsheet row: it has its own
  *  report, its own critical loop and its own release rules. */
-const CATEGORIES = Object.freeze(["vital-signs", "fluid-balance", "device"]);
+// "labour" joined 2026-09-08 (Task 2.4): a partogram's raw data (cervical dilation, contraction
+// frequency, fetal heart rate, a stated labour status) is charted the same way a vital sign is -
+// this grid's own missing-hour honesty and bitemporal correction apply to it unchanged. The WHO
+// partogram's alert/action-line plotting is NOT built here; this shows what was charted, nothing more.
+const CATEGORIES = Object.freeze(["vital-signs", "fluid-balance", "device", "labour"]);
 
 /**
  * PURE. The hospital's chosen rows, validated. An entry with no code is reported: a row that silently

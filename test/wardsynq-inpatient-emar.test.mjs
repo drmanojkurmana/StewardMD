@@ -2275,8 +2275,9 @@ test("A LABORATORY MAY NOT WRITE A VITAL SIGN, AND A NURSE MAY NOT WRITE A RESUL
 
   const nurse = grantForRole("nurse");
   // "device" joined 2026-09-08 (Task 2.2, ICU): a device reading reaches the chart through the
-  // same bedside authority as a vital sign or a fluid entry.
-  assert.deepEqual(nurse.writeCategories, { Observation: ["vital-signs", "fluid-balance", "device"] });
+  // same bedside authority as a vital sign or a fluid entry. "labour" joined the same day
+  // (Task 2.4): a partogram's raw data is the midwife's own bedside charting, same authority.
+  assert.deepEqual(nurse.writeCategories, { Observation: ["vital-signs", "fluid-balance", "device", "labour"] });
 
   // A doctor writes every type, so no category constraint applies: an unconstrained scope cannot be
   // partly constrained, and leaving one attached would refuse the one type it names while

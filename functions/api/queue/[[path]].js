@@ -63,6 +63,10 @@ import {
   listOpenCases, startAnesthesia, recordAnesthesiaEvent, endAnesthesia, getAnesthesia,
   recordImplant, listImplants,
 } from "../../_wardsynq/migrate-surgery.js";
+import {
+  recordPregnancy, getPregnancy, maternityStatus, maternityMeows, recordLabourObservation,
+  recordMaternalBloodLoss, listBloodLoss, recordDelivery, getDelivery, registerNewborn, listFamilyLinks,
+} from "../../_wardsynq/migrate-maternity.js";
 import { medicationRound, administerStep } from "../../_wardsynq/migrate-emar.js";
 import { draftDischargeSummary, signDischargeSummary, dischargePatient, readDischargeSummary } from "../../_wardsynq/migrate-discharge.js";
 import { recordProblem, listProblems } from "../../_wardsynq/migrate-problem.js";
@@ -531,6 +535,15 @@ export async function onRequest(context) {
         "surgery-board": CAPS.EMR_VIEW,
         "anesthesia-start": CAPS.EMR_TREAT, "anesthesia-event": CAPS.EMR_TREAT, "anesthesia-end": CAPS.EMR_TREAT,
         "anesthesia-get": CAPS.EMR_VIEW, implant: CAPS.EMR_TREAT, "implant-list": CAPS.EMR_VIEW,
+        /* Maternity (Task 2.4). Antenatal history, delivery and newborn linkage are clinical
+         * commitments the same way a resus bundle or a surgical checklist step is - emr.treat. A
+         * partogram observation is the midwife's own bedside charting - emr.vitals, the same
+         * authority as a vital sign (VITALS_TYPES/writeCategories "labour" in actor.js). Reading any
+         * of it is emr.view, the same as the rest of the chart. */
+        pregnancy: CAPS.EMR_TREAT, "pregnancy-get": CAPS.EMR_VIEW, "maternity-status": CAPS.EMR_VIEW, meows: CAPS.EMR_VIEW,
+        labour: CAPS.EMR_VITALS, "blood-loss": CAPS.EMR_VITALS, "blood-loss-list": CAPS.EMR_VIEW,
+        delivery: CAPS.EMR_TREAT, "delivery-get": CAPS.EMR_VIEW,
+        newborn: CAPS.EMR_TREAT, "family-links": CAPS.EMR_VIEW,
         // Charting fluid is the nurse's own record, the same authority as recording a vital.
         fluid: CAPS.EMR_VITALS, balance: CAPS.EMR_VIEW,
         // Handing a patient over is the clinical account of a shift: the same authority as recording
@@ -883,6 +896,50 @@ export async function onRequest(context) {
       }
       if (sub === "implant-list" && method === "GET") {
         const r = await listImplants(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "", caseId: url.searchParams.get("caseId") || "" });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "pregnancy" && method === "POST") {
+        const r = await recordPregnancy(request, env, { ...deps, patientId: body.patientId, pregnancy: body.pregnancy || body, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "pregnancy-get" && method === "GET") {
+        const r = await getPregnancy(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "" });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "maternity-status" && method === "GET") {
+        const r = await maternityStatus(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "" });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "meows" && method === "GET") {
+        const r = await maternityMeows(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "" });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "labour" && method === "POST") {
+        const r = await recordLabourObservation(request, env, { ...deps, encounterId: body.encounterId, patientId: body.patientId, code: body.code, value: body.value, at: body.at, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "blood-loss" && method === "POST") {
+        const r = await recordMaternalBloodLoss(request, env, { ...deps, patientId: body.patientId, encounterId: body.encounterId, loss: body.loss || body, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "blood-loss-list" && method === "GET") {
+        const r = await listBloodLoss(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "" });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "delivery" && method === "POST") {
+        const r = await recordDelivery(request, env, { ...deps, patientId: body.patientId, encounterId: body.encounterId, delivery: body.delivery || body, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "delivery-get" && method === "GET") {
+        const r = await getDelivery(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "" });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "newborn" && method === "POST") {
+        const r = await registerNewborn(request, env, { ...deps, motherPatientId: body.motherPatientId, encounterId: body.encounterId, sex: body.sex, name: body.name, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "family-links" && method === "GET") {
+        const r = await listFamilyLinks(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "" });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "vitals" && method === "POST") {

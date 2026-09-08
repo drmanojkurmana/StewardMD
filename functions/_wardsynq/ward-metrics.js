@@ -49,7 +49,7 @@ function summariseWard(input) {
   // ED, ICU, surgical and PACU patients are open encounters this ward is responsible for too -
   // excluding them would report zero open critical results and zero in-flight medications for a
   // department at full capacity.
-  const stays = (i.encounters || []).filter((e) => e && (e.class === IPD || e.class === "ED" || e.class === "ICU" || e.class === "SURGERY" || e.class === "PACU") && e.status === OPEN_ENC)
+  const stays = (i.encounters || []).filter((e) => e && (e.class === IPD || e.class === "ED" || e.class === "ICU" || e.class === "SURGERY" || e.class === "PACU" || e.class === "MATERNITY") && e.status === OPEN_ENC)
     .filter((e) => !want || str(e.location && e.location.ward).toLowerCase() === want);
   const patientIds = new Set(stays.map((e) => e.patientId));
   const mine = (r) => !want || patientIds.has(r && r.patientId);

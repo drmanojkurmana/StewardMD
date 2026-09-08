@@ -86,7 +86,10 @@ function Encounter(input) {
   // SURGERY and PACU joined 2026-09-08 (Task 2.3): a case in theatre and post-anaesthesia recovery
   // are their own encounters, not the inpatient stay that may surround them - the same reasoning ED
   // and ICU already established for this list.
-  const validClasses = ["OPD", "IPD", "ED", "ICU", "SURGERY", "PACU", "DAYCARE", "VIRTUAL"];
+  // MATERNITY joined 2026-09-08 (Task 2.4): antenatal admission, labour and delivery, and the
+  // postpartum stay are one visit to one department, the same reasoning ED/ICU/SURGERY/PACU already
+  // established for this list.
+  const validClasses = ["OPD", "IPD", "ED", "ICU", "SURGERY", "PACU", "MATERNITY", "DAYCARE", "VIRTUAL"];
   if (!validClasses.includes(input.class)) {
     throw new TypeError(`Encounter.class must be one of ${validClasses.join(", ")}`);
   }
