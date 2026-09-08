@@ -25,7 +25,12 @@ export function normalizeFhir(ctx, raw) {
     tenantId: ctx.tenant.id, sourceConnector: "fhir-r4",
     generatedAt: ctx.now().toISOString(), provenance: [],
     patient: patient({ id: P.id, gender: P.gender || "unknown", birthDate: P.birthDate || null,
-      name: P.name && P.name[0] ? { text: P.name[0].text || null, given: P.name[0].given || [], family: P.name[0].family || null } : null }),
+      name: P.name && P.name[0] ? { text: P.name[0].text || null, given: P.name[0].given || [], family: P.name[0].family || null } : null,
+      /* Identifiers were dropped here until 2026-09-08, which made cross-system patient
+       * reconciliation impossible: a bundle's MRN and ABHA never reached the record. Carried
+       * verbatim - system, the v2-0203 type code when given, value - and never interpreted. */
+      identifiers: (P.identifier || []).filter((i) => i && i.value != null && String(i.value).trim())
+        .map((i) => ({ system: i.system || null, type: (i.type && i.type.coding && i.type.coding[0] && i.type.coding[0].code) || (i.type && i.type.text) || null, value: String(i.value).trim() })) }),
   });
   for (const r of raw.resources || []) {
     out.meta.provenance.push({ resource: r.resourceType, sourceConnector: "fhir-r4", sourceId: r.resourceType + "/" + r.id });

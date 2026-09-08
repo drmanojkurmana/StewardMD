@@ -94,8 +94,14 @@ function identifier(systemKey, value, extra) {
       system: known.uri, value: v,
     });
   }
-  // A system we do not know: emitted as a system ONLY when it is already a URI, else as a typed value.
-  return clean({ system: isUri(systemKey) ? str(systemKey) : undefined, type: !isUri(systemKey) && str(systemKey) ? { text: str(systemKey) } : undefined, value: v });
+  /* A system we do not know: emitted as a system ONLY when it is already a URI. The sender's own
+   * declared type is kept when it is a v2-0203 code, because "this is their MRN" is a fact they
+   * asserted and one a receiver filters on; otherwise the system name stands in as type text. */
+  const declared = str(extra && extra.type);
+  const type = /^[A-Z]{2,4}$/.test(declared)
+    ? { coding: [{ system: "http://terminology.hl7.org/CodeSystem/v2-0203", code: declared }] }
+    : (declared ? { text: declared } : (!isUri(systemKey) && str(systemKey) ? { text: str(systemKey) } : undefined));
+  return clean({ system: isUri(systemKey) ? str(systemKey) : undefined, type, value: v });
 }
 
 const ref = (type, id) => (str(id) ? { reference: `${type}/${id}` } : undefined);
@@ -135,10 +141,20 @@ function withMeta(fhir, record) {
 function fhirPatient(p) {
   return clean({
     resourceType: "Patient", id: p.id,
-    identifier: [
-      identifier("mrn", p.mrn, { use: "usual" }),
-      ...(p.identifiers || []).map((i) => (i && i.value ? identifier(i.system, i.value) : undefined)),
-    ].filter(Boolean),
+    identifier: (() => {
+      const others = (p.identifiers || []).map((i) => (i && i.value ? identifier(i.system, i.value, { type: i.type }) : undefined)).filter(Boolean);
+      const srcSystem = str(p.meta && p.meta.source && p.meta.source.system);
+      const imported = srcSystem && srcSystem !== "wardsynq-native";
+      /* A NATIVE record's mrn slot is this hospital's MRN and goes out under our system. An IMPORTED
+       * record's mrn slot holds the SENDER'S number (the adapter fills it from their identifiers),
+       * and exporting that as ours would claim an MRN this hospital never issued. It is skipped when
+       * the same value already travels as the sender's identifier, else emitted under the sender's
+       * own namespace. */
+      let own;
+      if (!imported) own = identifier("mrn", p.mrn, { use: "usual" });
+      else if (!others.some((o) => o.value === str(p.mrn))) own = str(p.mrn) ? { type: { coding: [{ system: "http://terminology.hl7.org/CodeSystem/v2-0203", code: "MR" }] }, system: `${SOURCE_URN(srcSystem)}:mrn`, value: str(p.mrn) } : undefined;
+      return [own, ...others].filter(Boolean);
+    })(),
     // A single unparsed name. FHIR wants given/family and we do not hold them separately, so the
     // whole name goes in `text` rather than being split on a space and guessed wrong for most of
     // the world's names.

@@ -171,6 +171,12 @@ const RESOURCE_TYPES = Object.freeze([
    * against the request VERSION, so a later change to the request cannot make it look as though the
    * protocol was decided for a study nobody protocolled. */
   "ImagingProtocol",
+  /* Something another system sent that WardSynQ would not write silently: a patient who might be
+   * one of two people here, a probable duplicate, a record that would overwrite one this hospital
+   * authored, a resource type nothing maps. Held HERE, with the payload, rather than dropped or
+   * guessed at - because the failure mode of every interface is the message that vanished and the
+   * clinician who never knew it had been sent. Append-only, and resolved by a person. */
+  "ExchangeException",
 ]);
 
 const MODE = Object.freeze({ SYSTEM_OF_RECORD: "system-of-record", INTEGRATION: "integration" });
