@@ -34,6 +34,10 @@
     orgId: "", ward: "", patients: [], view: "list",
     sel: null,                 // the selected {encounterId, patientId, ward, bed, admittedAt}
     problems: [], criticals: [], balance: null, outbox: [], cosign: null, downtime: null, quality: null, pcopy: null,
+    /* Held from other systems. null until asked, an object once answered, and a separate error
+     * string when the list could not be read: an unreadable queue of held clinical data must never
+     * look like an empty one. */
+    xchg: null, xchgErr: "",
     /* The terminology search: null while it runs, an array once it answers, undefined when nobody has
      * asked. Three states, because "searching" and "no matches" must not look the same. */
     icd: undefined, probText: "", probCode: "",
@@ -154,7 +158,75 @@
       // to while the system is up is a pack the ward has to remember to take while the system is up.
       '<button class="w-btn ghost" data-w-act="downtime" title="Printable sheet for when the system is unavailable">' + ms("print") + "Downtime pack</button></div>" +
       (rows || (state.loaded ? '<p class="w-empty">No patients are currently admitted' + (state.ward ? " to " + esc(state.ward) : "") + ".</p>" : '<p class="w-empty">Loading the ward…</p>')) +
-      "</div>" + cosignCard(state) + qualityCard(state) + overrideCard(state);
+      "</div>" + xchgCard(state) + cosignCard(state) + qualityCard(state) + overrideCard(state);
+  }
+
+  /* HELD FROM OTHER SYSTEMS. Everything here is something another system sent that WardSynQ would
+   * not file without a person deciding: a patient who might be one of two, a record another feed
+   * owns, a fact re-sent for a different person. NOTHING ON THIS CARD IS ON A CHART YET.
+   *
+   * THE SCREEN OFFERS ONLY THE DECISIONS THAT FIT. The server refuses a resolution that does not fit
+   * the reason, and the screen mirrors that table as a display convenience so nobody is offered a
+   * button that is certain to be refused; the server remains the authority. A patient-mismatch
+   * conflict can never be accepted from the feed (accepting it would move a clinical fact between
+   * people), so only keep-local is offered for it.
+   *
+   * A REASON IS REQUIRED AND SHOWN AS REQUIRED. It is read next year by somebody asking why. */
+  var XCHG_WORDS = {
+    "identity-ambiguous": "More than one patient here carries this identifier.",
+    "identity-probable-duplicate": "No identifier matched, but a patient here looks like this person.",
+    "conflict-local-authoritative": "This hospital authored the current version of this record.",
+    "conflict-other-source": "Another feed authored the current version of this record.",
+    "conflict-patient-mismatch": "The feed re-sent this record for a different patient. It cannot be accepted; it can be kept as ours or rejected.",
+    "version-mismatch": "The feed updated a version that is no longer current.",
+    "unsupported-resource": "A kind of record WardSynQ does not import.",
+    "invalid-resource": "The record could not be understood."
+  };
+  var XCHG_FITS = {
+    "identity-ambiguous": ["link", "create", "reject"],
+    "identity-probable-duplicate": ["link", "create", "reject"],
+    "conflict-local-authoritative": ["accept-feed", "keep-local"],
+    "conflict-other-source": ["accept-feed", "keep-local"],
+    "conflict-patient-mismatch": ["keep-local"]
+  };
+  var XCHG_RES = {
+    link: "Link - this IS the patient chosen below; file the message on their chart",
+    create: "Create - nobody here is this patient; register them from the message",
+    reject: "Reject - file nothing",
+    "accept-feed": "Accept the feed's version - it becomes the next version of OUR record, attributed to the feed",
+    "keep-local": "Keep ours - the feed's version is not filed"
+  };
+  function xchgFits(reason) { return XCHG_FITS[reason] || ["reject"]; }
+  function xchgCard(state) {
+    var q = state.xchg;
+    var open = (q && q.open) || [];
+    var rows = open.map(function (x) {
+      var fits = xchgFits(x.reason);
+      var cands = (x.candidates || []).map(function (c, i) {
+        return '<label class="w-xc"><input type="radio" name="wxP-' + esc(x.id) + '" value="' + esc(c.id) + '"' + (i === 0 ? " checked" : "") + "> <b>" + esc(c.id) + "</b>" +
+          (c.mrn ? ' <span class="w-code">' + esc(c.mrn) + "</span>" : "") +
+          (c.band ? " <small>" + esc(c.band) + (c.score != null ? " " + esc(Math.round(Number(c.score) * 100) / 100) : "") + "</small>" : "") + "</label>";
+      }).join("");
+      var opts = fits.map(function (r) { return '<option value="' + esc(r) + '">' + esc(XCHG_RES[r] || r) + "</option>"; }).join("");
+      return '<li class="w-xchg-row">' +
+        "<h4>" + esc(x.reason) + ' <span class="w-code">' + esc(x.source || "") + "</span></h4>" +
+        '<p class="w-xw">' + esc(XCHG_WORDS[x.reason] || "") + (x.detail ? " " + esc(x.detail) : "") + "</p>" +
+        "<small>Raised " + when(x.raisedAt) + " &middot; " + esc((x.entityRefs || []).length) + " record" + ((x.entityRefs || []).length === 1 ? "" : "s") + " held" +
+        (x.conflict ? " &middot; ours: " + esc(x.conflict.resourceType || "") + "/" + esc(x.conflict.id || "") + " v" + esc(x.conflict.version == null ? "?" : x.conflict.version) + " (" + esc(x.conflict.source || "") + ")" : "") + "</small>" +
+        (cands ? '<div class="w-xcs"><span class="w-xl">Which patient here, if any:</span>' + cands + "</div>" : "") +
+        (fits.indexOf("link") >= 0 && !cands ? '<label class="w-xl">Local patient id for a link<input id="wxPid-' + esc(x.id) + '" type="text" autocomplete="off"></label>' : "") +
+        '<label class="w-xl">Decision<select id="wxR-' + esc(x.id) + '">' + opts + "</select></label>" +
+        '<label class="w-xl">Why (required)<textarea id="wxW-' + esc(x.id) + '" rows="2" placeholder="In a sentence somebody can read next year"></textarea></label>' +
+        '<div class="w-dose-a"><button class="w-btn tiny go" data-w-act="xchg:' + esc(x.id) + '">' + ms("gavel") + "Decide</button></div>" +
+        "</li>";
+    }).join("");
+    return '<div class="w-card"><div class="w-card-h">' + ms("swap_horiz") + "<h3>Held from other systems" + (open.length ? " &middot; " + open.length : "") + "</h3>" +
+      '<button class="w-ic" data-w-act="xchgs" title="Refresh">' + ms("refresh") + "</button></div>" +
+      (state.xchgErr ? '<p class="w-hint warn">' + ms("warning") + esc(state.xchgErr) + "</p>"
+        : rows ? '<ul class="w-q w-xchg">' + rows + "</ul>"
+        : (q ? '<p class="w-empty">Nothing is held from another system.</p>' : '<p class="w-empty">Loading the exchange queue&hellip;</p>')) +
+      (rows ? '<p class="w-hint">' + ms("info") + "Nothing here is on a chart yet. Deciding needs the right to treat; a decision is recorded under your name and cannot be deleted afterwards.</p>" : "") +
+      "</div>";
   }
 
   /* Which safety rules are being clicked through. ALERT FATIGUE IS THE CHARACTERISTIC FAILURE OF
@@ -706,7 +778,7 @@
   function loadWard() {
     st.busy = true; paint();
     return apiGet("/ward/list?orgId=" + encodeURIComponent(st.orgId) + (st.ward ? "&ward=" + encodeURIComponent(st.ward) : ""))
-      .then(function (r) { if (settle(r)) st.patients = r.patients || []; st.loaded = true; paint(); return Promise.all([loadCosigns(), loadQuality(), loadOverrides()]); })
+      .then(function (r) { if (settle(r)) st.patients = r.patients || []; st.loaded = true; paint(); return Promise.all([loadCosigns(), loadQuality(), loadOverrides(), loadExceptions()]); })
       .catch(function () { st.busy = false; st.err = "Could not reach the ward."; st.loaded = true; paint(); });
   }
   function loadChart() {
@@ -966,6 +1038,34 @@
       .then(function (r) { if (settle(r, r && r.note)) loadCosigns(); else paint(); })
       .catch(function () { st.busy = false; st.err = "Could not submit the note."; paint(); });
   }
+  /* Unlike the cosign queue, a failure here is NOT silent: held clinical data that cannot be listed
+   * must not look like nothing is held. The card says it could not load. */
+  function loadExceptions() {
+    return apiGet("/ward/fhir-exceptions?orgId=" + encodeURIComponent(st.orgId))
+      .then(function (r) {
+        if (r && r.ok) { st.xchg = r; st.xchgErr = ""; }
+        else st.xchgErr = (r && (r.detail || r.message || r.error)) ? "Could not load the exchange queue: " + (r.detail || r.message || r.error) : "Could not load the exchange queue.";
+        paint();
+      })
+      .catch(function () { st.xchgErr = "Could not reach the exchange queue."; paint(); });
+  }
+  function decideException(id) {
+    if (!id) return;
+    var resolution = val("wxR-" + id), why = val("wxW-" + id);
+    var picked = null;
+    try { var el = document.querySelector('input[name="wxP-' + id + '"]:checked'); picked = el ? String(el.value || "") : null; } catch (e) {}
+    var localPatientId = picked || val("wxPid-" + id);
+    if (!why) { st.err = "A reason is required to decide what happens to a held message."; paint(); return; }
+    if (resolution === "link" && !localPatientId) { st.err = "A link needs the local patient it links to."; paint(); return; }
+    st.busy = true; paint();
+    var body = { orgId: st.orgId, exceptionId: id, resolution: resolution, reason: why };
+    if (resolution === "link") body.localPatientId = localPatientId;
+    apiPost("/ward/fhir-exception-resolve", body)
+      // The server's own sentence: what was filed, or why not. Never paraphrased into "done".
+      .then(function (r) { if (settle(r, r && (r.note || (r.written != null ? "Decided: " + r.resolution + ", " + r.written + " record" + (r.written === 1 ? "" : "s") + " filed." : "Decided.")))) loadExceptions(); else paint(); })
+      .catch(function () { st.busy = false; st.err = "Could not reach the exchange queue."; paint(); });
+  }
+
   function cosign(id) {
     if (!id) return;
     st.busy = true; paint();
@@ -1094,6 +1194,8 @@
     if (cmd === "mar") { var k = arg.indexOf("|"); if (k > 0) marAction(arg.slice(0, k), Number(arg.slice(k + 1))); return; }
     if (cmd === "outbox") { loadOutbox(); return; }
     if (cmd === "cosigns") { loadCosigns(); return; }
+    if (cmd === "xchgs") { loadExceptions(); return; }
+    if (cmd === "xchg") { decideException(arg); return; }
     if (cmd === "quality") { loadQuality(); return; }
     if (cmd === "overrides") { loadOverrides(); return; }
     if (cmd === "problem") { addProblem(); return; }

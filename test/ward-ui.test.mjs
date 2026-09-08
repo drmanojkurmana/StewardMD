@@ -651,3 +651,52 @@ test("the patient copy never renders a stale patient, and the handover is its ow
   // Recording the handover is a separate, deliberate act with its own button.
   assert.match(html, /data-w-act="pcopyGive"/);
 });
+
+/* ---- Held from other systems (2026-09-08): the exchange exception queue ------------------------ */
+
+const held = (over = {}) => ({
+  id: "wsq-xchg-1", source: "fhir-partner-his", reason: "identity-probable-duplicate", detail: "no identifier matched, but a local patient resembles this one closely enough that a person must decide",
+  patientId: null, raisedAt: "2026-09-08T10:00:00.000Z", entityRefs: ["Patient/HIS-PAT-77", "Observation/HIS-OBS-1"],
+  candidates: [{ id: "wsq-pat-1", mrn: "SMD-WARD01-00001", score: 0.91, band: "probable" }, { id: "wsq-pat-2", mrn: "SMD-WARD01-00002", score: 0.62, band: "possible" }],
+  conflict: null, ...over,
+});
+
+test("HELD FROM OTHER SYSTEMS: every held message is listed with its reason verbatim, in plain words, and only the decisions that fit it", () => {
+  const html = load()._render(Object.assign({}, base, { xchg: { ok: true, open: [held(), held({ id: "wsq-xchg-2", reason: "conflict-local-authoritative", candidates: null, conflict: { resourceType: "Observation", id: "wsq-obs-9", version: 3, source: "wardsynq-native" } }), held({ id: "wsq-xchg-3", reason: "conflict-patient-mismatch", candidates: null, conflict: { resourceType: "Observation", id: "wsq-obs-8", version: 1, source: "fhir-partner-his" } })] } }));
+  assert.match(html, /Held from other systems &middot; 3/);
+  assert.match(html, /identity-probable-duplicate/, "the reason code, verbatim");
+  assert.match(html, /a patient here looks like this person/, "and in plain words");
+  assert.match(html, /2 records held/);
+  // Candidates are offered as the choice for a link, with the MRN and the band the matcher gave.
+  assert.match(html, /name="wxP-wsq-xchg-1" value="wsq-pat-1" checked/);
+  assert.match(html, /SMD-WARD01-00002/);
+  assert.match(html, /probable 0\.91/);
+  // Only the decisions that fit: identity gets link/create/reject; an ownership conflict gets accept-feed/keep-local;
+  // a patient-mismatch conflict gets keep-local ONLY, because accepting it would move a fact between people.
+  const sel = (id) => (new RegExp(`<select id="wxR-${id}">([\\s\\S]*?)</select>`).exec(html) || [])[1] || "";
+  assert.deepEqual([...sel("wsq-xchg-1").matchAll(/value="([^"]+)"/g)].map((m) => m[1]), ["link", "create", "reject"]);
+  assert.deepEqual([...sel("wsq-xchg-2").matchAll(/value="([^"]+)"/g)].map((m) => m[1]), ["accept-feed", "keep-local"]);
+  assert.deepEqual([...sel("wsq-xchg-3").matchAll(/value="([^"]+)"/g)].map((m) => m[1]), ["keep-local"]);
+  assert.match(html, /ours: Observation\/wsq-obs-9 v3 \(wardsynq-native\)/, "the conflicting record of ours is named");
+  assert.match(html, /Why \(required\)/);
+  assert.match(html, /data-w-act="xchg:wsq-xchg-1"/);
+  assert.match(html, /Nothing here is on a chart yet/);
+  assert.ok(!/—/.test(html), "no em-dash");
+});
+
+test("an empty exchange queue says so; an UNREADABLE one never looks empty", () => {
+  const W = load();
+  assert.match(W._render(Object.assign({}, base, { xchg: { ok: true, open: [] } })), /Nothing is held from another system\./);
+  assert.match(W._render(Object.assign({}, base, { xchg: null })), /Loading the exchange queue/);
+  const err = W._render(Object.assign({}, base, { xchg: null, xchgErr: "Could not load the exchange queue: permission" }));
+  assert.match(err, /Could not load the exchange queue: permission/);
+  assert.ok(!/Nothing is held/.test(err), "an error is not an empty list");
+});
+
+test("a held message whose reason has no candidates still lets a person name the patient for a link, and text is escaped", () => {
+  const html = load()._render(Object.assign({}, base, { xchg: { ok: true, open: [held({ candidates: [], detail: "<b>x</b>", source: "his<script>" })] } }));
+  assert.match(html, /id="wxPid-wsq-xchg-1"/, "a free-text local patient id for the link");
+  assert.match(html, /&lt;b&gt;x&lt;\/b&gt;/);
+  assert.match(html, /his&lt;script&gt;/);
+  assert.ok(!/<script/.test(html));
+});

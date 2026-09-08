@@ -250,3 +250,15 @@ body.dark #smdWard { --bg: #191c1e; --on-surface: #eff1f3; --on-surface-variant:
   #smdWard .w-dt-gap { background: none; color: #000; border: 1.5pt solid #000; border-radius: 0; }
   @page { size: A4; margin: 12mm; }
 }
+
+/* Held from other systems. A worklist of decisions, not an alarm: each row is one held message with
+   the decisions that fit it and a required reason. Nothing on it is on a chart. */
+#smdWard .w-xchg li h4 { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; font: 600 13.5px var(--mono, ui-monospace, Menlo, monospace); }
+#smdWard .w-xchg .w-xw { margin: 0 0 6px; font-size: 13.5px; line-height: 1.45; }
+#smdWard .w-xchg small { display: block; color: var(--on-surface-variant); font-size: 12px; margin-bottom: 8px; }
+#smdWard .w-xchg .w-xl { display: block; margin: 8px 0 0; font-size: 12px; color: var(--on-surface-variant); }
+#smdWard .w-xchg .w-xl select, #smdWard .w-xchg .w-xl textarea, #smdWard .w-xchg .w-xl input[type="text"] { display: block; width: 100%; margin-top: 4px; font-size: 14px; padding: 8px; border: 1px solid var(--outline-variant); border-radius: 8px; background: var(--surface); color: var(--on-surface); box-sizing: border-box; }
+#smdWard .w-xchg .w-xcs { margin-top: 6px; }
+#smdWard .w-xchg .w-xc { display: flex; align-items: center; gap: 8px; padding: 6px 0; font-size: 13.5px; }
+#smdWard .w-xchg .w-xc b { font: 600 13px var(--mono, ui-monospace, Menlo, monospace); }
+#smdWard .w-xchg .w-xc small { display: inline; margin: 0; }
