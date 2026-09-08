@@ -1,0 +1,67 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>WardSynQ TASK 3.2: radiology golden path harness</title>
+<link rel="stylesheet" href="../ward.css">
+<style>html,body{margin:0;height:100%}</style>
+</head><body>
+<script>
+/* The REAL ward.js driven through the radiology golden path (open a chart -> Radiology button ->
+ * pick a study -> protocol context/set -> release a report with a critical finding) against an
+ * in-memory stub server whose response shapes are confirmed against
+ * functions/_wardsynq/radiology-report.js, functions/_wardsynq/radiology-protocol.js and the
+ * route-level test in test/wardsynq-inpatient-emar.test.mjs, which prove these same contracts
+ * persist for real. This proves the CLIENT half; it is not a live server. */
+window.__calls = [];
+localStorage.setItem("smd_opd_staff_tok", "harness-token");
+
+var PATIENT_ID = "opd-pat-smd-h1-rad01", ENC_ID = "wsq-enc-smd-h1-rad01", SR_ID = "wsq-sr-rad-h1";
+var PROTOCOL = null, REPORT_STATUS = "none";
+
+window.fetch = function (url, opts) {
+  var u = String(url), body = null;
+  try { body = opts && opts.body ? JSON.parse(opts.body) : null; } catch (e) {}
+  window.__calls.push({ url: u, method: (opts && opts.method) || "GET", body: body });
+  var reply = function (obj) { return Promise.resolve({ ok: true, status: 200, json: function () { return Promise.resolve(obj); } }); };
+
+  if (u.indexOf("/ward/list") >= 0) return reply({ ok: true, patients: [{ encounterId: ENC_ID, patientId: PATIENT_ID, class: "IPD", ward: "Medical A", bed: "1", admittedAt: "2026-09-09T06:00:00.000Z" }] });
+  if (u.indexOf("/ward/beds") >= 0) return reply({ ok: true, bedsConfigured: true, wards: [{ ward: "Medical A", bedsKnown: true, occupied: [], free: ["1"], unplaced: [] }] });
+
+  if (u.indexOf("/ward/collections") >= 0) {
+    return reply({ ok: true, patientId: PATIENT_ID, requests: [{
+      serviceRequestId: SR_ID, code: "Chest X-ray", display: "Chest X-ray", category: "imaging", priority: "stat",
+      collection: { state: "none", detail: "No sample has been taken for this request." },
+    }], awaitingCollection: 1, inTransit: 0 });
+  }
+  if (u.indexOf("/ward/pending-tests") >= 0) return reply({ ok: true, pending: [] });
+  if (u.indexOf("/ward/fhir") >= 0) return reply({ resourceType: "Bundle", type: "searchset", entry: [] });
+
+  if (u.indexOf("/ward/protocol-context") >= 0) {
+    return reply({ ok: true, request: { id: SR_ID, code: "Chest X-ray", display: "Chest X-ray" }, contrastAllergies: [], renal: null,
+      note: "No contrast reaction is recorded. That is what the record holds, not a guarantee that none happened elsewhere." });
+  }
+  if (u.indexOf("/ward/protocol-set") >= 0 && (opts && opts.method) === "POST") {
+    PROTOCOL = body; return reply({ ok: true, written: 1 });
+  }
+  if (u.indexOf("/ward/report-imaging") >= 0 && (opts && opts.method) === "POST") {
+    REPORT_STATUS = body.status;
+    return reply({ ok: true, written: 1, reportId: "wsq-rad-h1", status: body.status, critical: !!body.critical, findings: body.findings, impression: body.impression || null });
+  }
+
+  if (u.indexOf("/ward/problems") >= 0) return reply({ ok: true, problems: [] });
+  if (u.indexOf("/ward/criticals") >= 0) return reply({ ok: true, loops: [] });
+  if (u.indexOf("/ward/balance") >= 0) return reply({ ok: true, balance: null });
+  if (u.indexOf("/ward/outbox") >= 0) return reply({ ok: true, transmissions: [] });
+  if (u.indexOf("/ward/templates") >= 0) return reply({ ok: true, templates: [] });
+  if (u.indexOf("/ward/news2") >= 0) return reply({ ok: true, tool: "NEWS2", score: { scorable: false, reason: "Not enough vitals recorded to score." } });
+  if (u.indexOf("/ward/flowsheet") >= 0) return reply({ ok: true, grid: { hours: [], rows: [] } });
+  if (u.indexOf("/ward/vitals") >= 0) return reply({ ok: true, written: 0 });
+  if (u.indexOf("/ward/schedule") >= 0) return reply({ ok: true, due: [], prn: [], unscheduled: [] });
+
+  return reply({ ok: true });
+};
+</script>
+<script src="../ward.js"></script>
+<script>
+window.__ready = !!(window.WARD && window.WARD.open);
+</script>
+</body></html>

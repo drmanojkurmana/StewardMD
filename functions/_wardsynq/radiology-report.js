@@ -138,6 +138,12 @@ async function reportImaging(request, env, ctx) {
   report.impression = impression || null;
   report.reportedBy = resolved.actor.id;
   report.reportedAt = str(ctx.reportedAt) || new Date().toISOString();
+  // TASK 3.2: a critical FINDING is text, not a number - the same report.critical flag
+  // critical-results.js's openCriticalLoops() already reads as its report-level fallback
+  // (a synthetic sourceCritical:true row, value:null), unchanged. Radiology simply never set it
+  // before this; the closed-loop notification/acknowledgement/escalation machinery was built and
+  // waiting, unreachable for imaging until this one flag is wired through.
+  if (ctx.critical === true) report.critical = true;
   if (changed) {
     report.impressionChangedFrom = current.impression || null;
     report.discrepancy = true;
@@ -149,6 +155,7 @@ async function reportImaging(request, env, ctx) {
       ...base, ok: true, written: 1, reportId: id, patientId: report.patientId,
       serviceRequestId, status, modality: report.modality,
       findings, impression: report.impression, version: out.record.version,
+      critical: !!report.critical,
       supersedes: current ? { status: current.status, version: current.version } : null,
       ...(changed ? {
         discrepancy: true,

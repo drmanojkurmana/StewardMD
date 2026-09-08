@@ -879,6 +879,9 @@
         // KardiQ X is a separate product; this is only the LINK into it. Reachable from any
         // patient for the same reason oncology is - a layered workflow, not a ward of its own.
         '<button class="w-btn ghost" data-w-act="cardiologyopen" title="KardiQ X link and ECG reference">' + ms("monitor_heart") + "Cardiology</button>" +
+        // A radiologist's own worklist for THIS patient's imaging orders - protocol, report, and an
+        // honest IMAGE SOURCE UNAVAILABLE in place of a viewer that does not exist.
+        '<button class="w-btn ghost" data-w-act="radiologyopen" title="Imaging worklist, protocol and report">' + ms("medical_information") + "Radiology</button>" +
         // The patient's own copy. Reachable from the patient because that is where the conversation
         // that produces it happens, not from a menu somewhere else.
         '<button class="w-btn ghost" data-w-act="pcopy" title="The copy this patient can be given">' + ms("assignment_ind") + "Patient copy</button></div>";
@@ -1318,6 +1321,70 @@
       '<p class="w-hint">' + ms("warning") + "KardiQ X is self-declared clinically unvalidated, regulatory-pending. This records its AI verdict as external, unvalidated output - never a validated clinical finding." + "</p></div>";
   }
 
+  /* TASK 3.2: the radiologist's actual workflow, not the generic order/result list - a worklist of
+   * this patient's imaging orders, the contrast/allergy protocol context ALREADY built
+   * (radiology-protocol.js) but never reachable from any screen before this, and report entry
+   * through the SAME state machine (radiology-report.js) that already keeps a preliminary reading on
+   * the record and flags a changed impression as a discrepancy. NO IMAGE VIEWER: DICOM/PACS does not
+   * exist in this build, and a screen that pretended otherwise would be worse than one that says so. */
+  function radiologyView(state) {
+    var rad = state.radiology || {};
+    var studies = ((state.investigations && state.investigations.requests) || []).filter(function (r) { return r.category === "imaging"; });
+    var pc = rad.protocol;
+    var picked = rad.pickedRequestId;
+
+    var studyRows = studies.map(function (s) {
+      var st_ = (s.collection && s.collection.state) || "ordered";
+      return '<li' + (s.serviceRequestId === picked ? ' class="picked"' : '') + '>' +
+        '<button class="w-btn ghost tiny" data-w-act="radpick:' + esc(s.serviceRequestId) + '"><b>' + esc(s.display || s.code) + "</b></button>" +
+        "<span>" + (s.priority && s.priority !== "routine" ? esc(s.priority).toUpperCase() + " &middot; " : "") + esc(st_.replace(/_/g, " ")) + "</span></li>";
+    }).join("");
+
+    var allergyRows = pc && pc.contrastAllergies && pc.contrastAllergies.length
+      ? '<ul class="w-mini">' + pc.contrastAllergies.map(function (a) {
+          return "<li><b>" + esc(a.substance) + "</b><span>" + esc(a.reaction || "") + (a.severity ? " &middot; " + esc(a.severity) : "") + "</span></li>";
+        }).join("") + "</ul>"
+      : "";
+
+    return '<div class="w-chart-h"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button>" +
+      "<div><b>Radiology</b><small>" + esc((state.sel && state.sel.patientId) || "") + "</small></div>" +
+      '<button class="w-ic" data-w-act="radiologyload" title="Refresh">' + ms("refresh") + "</button></div>" +
+
+      '<div class="w-card"><div class="w-card-h">' + ms("list") + "<h3>Imaging worklist</h3></div>" +
+      (studyRows ? '<ul class="w-mini">' + studyRows + "</ul>" : '<p class="w-empty">No imaging ordered for this patient.</p>') +
+      "</div>" +
+
+      (picked ? (
+        '<div class="w-card"><div class="w-card-h">' + ms("shield") + "<h3>Protocol context</h3></div>" +
+        (pc ? (
+          (allergyRows ? '<p class="w-hint warn">' + ms("warning") + "A contrast reaction is recorded for this patient.</p>" + allergyRows
+                       : '<p class="w-hint">' + ms("info") + "No contrast reaction is recorded. That is what the record holds, not a guarantee none happened elsewhere.</p>") +
+          (pc.renal ? "<p><b>Latest creatinine</b>: " + esc(pc.renal.value) + " " + esc(pc.renal.unit || "") + " (" + when(pc.renal.at) + ")</p>" : "<p class=\"w-empty\">No creatinine on record.</p>") +
+          '<div class="w-grid">' +
+          '<label class="w-f"><span>Protocol</span><input id="wRadProtocol" type="text" autocomplete="off" placeholder="e.g. CT abdomen with contrast"></label>' +
+          '<label class="w-chk"><input type="checkbox" id="wRadContrast"> Contrast planned</label>' +
+          "</div>" +
+          '<button class="w-btn go" data-w-act="radprotocolsave">' + ms("save") + "Record protocol</button>"
+        ) : '<p class="w-empty">Loading&hellip;</p>') +
+        "</div>" +
+
+        '<div class="w-card"><div class="w-card-h">' + ms("image_not_supported") + "<h3>Study images</h3></div>" +
+        '<p class="w-hint warn">' + ms("visibility_off") + "IMAGE SOURCE UNAVAILABLE. No PACS/DICOM viewer is connected in this build; the report below is the record, not the pixels.</p>" +
+        "</div>" +
+
+        '<div class="w-card"><div class="w-card-h">' + ms("edit_note") + "<h3>Report</h3></div>" +
+        '<div class="w-grid">' +
+        '<label class="w-f"><span>Modality</span><input id="wRadModality" type="text" autocomplete="off" placeholder="e.g. CT, XR, US, MR"></label>' +
+        '<label class="w-f"><span>Status</span><select id="wRadStatus"><option value="preliminary">Preliminary</option><option value="final">Final</option><option value="corrected">Corrected</option></select></label>' +
+        "</div>" +
+        '<label class="w-f"><span>Findings</span><textarea id="wRadFindings" rows="3"></textarea></label>' +
+        '<label class="w-f"><span>Impression</span><textarea id="wRadImpression" rows="2"></textarea></label>' +
+        '<label class="w-chk"><input type="checkbox" id="wRadCritical"> Critical finding - opens the SAME closed-loop notification a critical lab value does</label>' +
+        '<button class="w-btn go" data-w-act="radreportsave">' + ms("send") + "Release report</button>" +
+        '<p class="w-hint">' + ms("info") + "A final report needs an impression. A changed impression from a preliminary reading is flagged as a discrepancy, never silently overwritten." + "</p></div>"
+      ) : '<p class="w-empty" style="padding:0 16px">Pick a study above to protocol or report it.</p>');
+  }
+
   /* Open critical results, ABOVE everything else on the chart. A critical result that reaches a
    * chart nobody reads is the oldest preventable death in hospital medicine, and the failure is
    * never the measurement - it is that no named human said "I have seen this". So this sits first,
@@ -1508,6 +1575,7 @@
         : state.view === "surgerycase" ? surgeryCaseView(state)
         : state.view === "oncology" ? oncologyView(state)
         : state.view === "cardiology" ? cardiologyView(state)
+        : state.view === "radiology" ? radiologyView(state)
         : listView(state)) + "</div></div>";
   }
 
@@ -2101,6 +2169,48 @@
       .then(function (r) { if (settle(r, "ECG reference recorded.")) loadCardiology(); else paint(); })
       .catch(function () { st.busy = false; st.err = "Could not record the ECG reference."; paint(); });
   }
+  function radiologyOpen() {
+    st.view = "radiology"; st.radiology = null; paint(); loadInvestigations().then(loadRadiology);
+  }
+  function loadRadiology() {
+    if (!st.radiology) st.radiology = {};
+    paint();
+    var picked = st.radiology.pickedRequestId;
+    if (!picked) return Promise.resolve();
+    return apiGet("/ward/protocol-context?orgId=" + encodeURIComponent(st.orgId) + "&serviceRequestId=" + encodeURIComponent(picked))
+      .then(function (r) { st.radiology.protocol = (r && r.ok) ? r : null; paint(); })
+      .catch(function () {});
+  }
+  function radiologyPick(serviceRequestId) {
+    if (!st.radiology) st.radiology = {};
+    st.radiology.pickedRequestId = serviceRequestId;
+    st.radiology.protocol = null;
+    loadRadiology();
+  }
+  function radiologyProtocolSave() {
+    var picked = st.radiology && st.radiology.pickedRequestId; if (!picked) return;
+    var protocol = val("wRadProtocol"), contrast = !!(document.getElementById("wRadContrast") || {}).checked;
+    if (!protocol) { st.err = "Name the protocol."; paint(); return; }
+    st.busy = true; paint();
+    apiPost("/ward/protocol-set", { orgId: st.orgId, serviceRequestId: picked, protocol: protocol, contrast: contrast })
+      .then(function (r) { if (settle(r, "Protocol recorded.")) loadRadiology(); else paint(); })
+      .catch(function () { st.busy = false; st.err = "Could not record the protocol."; paint(); });
+  }
+  function radiologyReportSave() {
+    var s = st.sel, picked = st.radiology && st.radiology.pickedRequestId; if (!s || !picked) return;
+    var modality = val("wRadModality"), status = val("wRadStatus"), findings = val("wRadFindings"), impression = val("wRadImpression");
+    var critical = !!(document.getElementById("wRadCritical") || {}).checked;
+    if (!findings) { st.err = "Say what was seen; the impression may follow."; paint(); return; }
+    st.busy = true; paint();
+    apiPost("/ward/report-imaging", { orgId: st.orgId, serviceRequestId: picked, modality: modality || undefined, status: status || "preliminary", findings: findings, impression: impression || undefined, critical: critical })
+      .then(function (r) {
+        if (r && r.error === "impression_required") { st.busy = false; st.err = "A final report needs an impression; release it as preliminary if it is not ready."; paint(); return; }
+        if (r && r.discrepancy) { st.busy = false; st.note = "Released. The impression changed from a reading that may already have been acted on - flagged as a discrepancy on the record."; loadInvestigations().then(loadRadiology); return; }
+        if (settle(r, r && r.critical ? "Released. Critical finding - a closed loop was opened." : "Released.")) loadInvestigations().then(loadRadiology);
+        else paint();
+      })
+      .catch(function () { st.busy = false; st.err = "Could not release the report."; paint(); });
+  }
   function edDispose(disposition, extra) {
     var s = st.sel; if (!s) return;
     st.busy = true; paint();
@@ -2585,6 +2695,7 @@
       if (st.view === "pcopy") { st.view = "chart"; st.pcopy = null; paint(); return; }
       if (st.view === "oncology") { st.view = "chart"; st.oncology = null; paint(); return; }
       if (st.view === "cardiology") { st.view = "chart"; st.cardiology = null; paint(); return; }
+      if (st.view === "radiology") { st.view = "chart"; st.radiology = null; paint(); return; }
       // Picking a bed to admit an ED patient opens the SAME bed board a fresh admission uses;
       // backing out of it returns to that patient's ED chart, not the ward list, and drops the
       // pending admit rather than leaving it to fire on some later, unrelated bed pick.
@@ -2597,7 +2708,7 @@
       st.flowsheet = null; st.news2 = null; st.investigations = null; st.results = null; st.resusBundles = null;
       st.ed = null; st.edArrivalOpen = false; st.edMrnLookup = null; st.edMrnLookupErr = "";
       st.surgBoard = null; st.surgCase = null; st.surgBookOpen = false; st.surgMrnLookup = null; st.surgMrnLookupErr = ""; st.surgErr = "";
-      st.maternity = null; st.admitClass = ""; st.ageBand = null; st.lines = null; st.rateResult = null; st.oncology = null; st.cardiology = null;
+      st.maternity = null; st.admitClass = ""; st.ageBand = null; st.lines = null; st.rateResult = null; st.oncology = null; st.cardiology = null; st.radiology = null;
       paint(); return;
     }
     if (cmd === "board") { loadBoard(); return; }
@@ -2616,7 +2727,7 @@
       if (!p) return;
       st.sel = p; st.view = "chart"; st.due = []; st.prn = []; st.unscheduled = []; st.problems = []; st.criticals = []; st.balance = null; st.outbox = [];
       st.flowsheet = null; st.news2 = null; st.investigations = null; st.results = null;
-      st.err = ""; st.note = ""; st.refusal = null; st.devices = null; st.maternity = null; st.ageBand = null; st.lines = null; st.rateResult = null; st.oncology = null; st.cardiology = null;
+      st.err = ""; st.note = ""; st.refusal = null; st.devices = null; st.maternity = null; st.ageBand = null; st.lines = null; st.rateResult = null; st.oncology = null; st.cardiology = null; st.radiology = null;
       defaultWindow();
       st.noteTemplateId = ""; st.noteResult = null;
       paint(); loadChart(); loadRound(); loadBalance(); loadOutbox(); loadTemplates(); loadFlowsheet(); loadNews2(); loadInvestigations();
@@ -2677,6 +2788,11 @@
     if (cmd === "cardiologyload") { loadCardiology(); return; }
     if (cmd === "cardiolinksave") { cardioLinkSave(); return; }
     if (cmd === "cardioecgsave") { cardioEcgSave(); return; }
+    if (cmd === "radiologyopen") { radiologyOpen(); return; }
+    if (cmd === "radiologyload") { loadInvestigations().then(loadRadiology); return; }
+    if (cmd === "radpick") { radiologyPick(arg); return; }
+    if (cmd === "radprotocolsave") { radiologyProtocolSave(); return; }
+    if (cmd === "radreportsave") { radiologyReportSave(); return; }
     if (cmd === "edarrivalopen") { st.edArrivalOpen = true; st.edMrnLookup = null; st.edMrnLookupErr = ""; paint(); return; }
     if (cmd === "edarrivalclose") { st.edArrivalOpen = false; st.edMrnLookup = null; st.edMrnLookupErr = ""; paint(); return; }
     if (cmd === "edmrnlookup") { edMrnLookup(); return; }
