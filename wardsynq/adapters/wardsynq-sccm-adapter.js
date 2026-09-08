@@ -136,9 +136,11 @@ function mapSccmBundle(bundle) {
     entities.push(Encounter({
       id, patientId: patient.id, class: cls || "IPD",
       status: e.status && e.status !== "unknown" ? e.status : "in-progress",
-      identifiers: [{ system: `${system}-encounter-id`, value: String(e.id) }],
+      identifiers: [{ system: `${system}-encounter-id`, value: String(e.id) }, ...((e.identifiers || []).filter((i) => i && i.value).map((i) => ({ system: i.system || `${system}-visit`, type: i.type || null, value: String(i.value) })))],
       periodStart: (e.period && e.period.start) || undefined,
       periodEnd: (e.period && e.period.end) || null,
+      // Where the source says the patient is, as the source names it. Never mapped to this hospital's beds.
+      location: e.location && (e.location.ward || e.location.bed) ? { facilityId: e.location.facility || null, ward: e.location.ward || null, bed: e.location.bed || null } : null,
       source: src("enc", e.id),
     }));
   }
