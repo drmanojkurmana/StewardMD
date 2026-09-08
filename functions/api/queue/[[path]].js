@@ -62,7 +62,7 @@ import { verifyOrder, verificationQueue } from "../../_wardsynq/pharmacy-verify.
 import { dispenseOrder, returnDispense, listDispenses } from "../../_wardsynq/pharmacy-dispense.js";
 import { declareBreakGlass, openEmergencyChart, listBreakGlass } from "../../_wardsynq/break-glass.js";
 import { patientEverything, readResource, capabilityStatement, searchType, historyOf, vread, operationOutcome, provenanceRead, provenanceSearch } from "../../_wardsynq/fhir.js";
-import { ingestFhir, listExceptions, inboundEnabled } from "../../_wardsynq/fhir-inbound.js";
+import { ingestFhir, listExceptions, resolveException, inboundEnabled } from "../../_wardsynq/fhir-inbound.js";
 import { startReconciliation, decideMedicine, readReconciliation } from "../../_wardsynq/med-reconciliation.js";
 import { wardMetrics } from "../../_wardsynq/ward-metrics.js";
 import { releaseResult, pendingRequests } from "../../_wardsynq/lab-result.js";
@@ -509,6 +509,9 @@ export async function onRequest(context) {
         fhir: CAPS.EMR_VIEW,
         // What another system sent that WardSynQ would not write without a person deciding.
         "fhir-exceptions": CAPS.EMR_VIEW,
+        /* DECIDING is emr.treat: "this is the same person" and "the feed's version replaces ours"
+         * are clinical judgements about a chart, and they are recorded under the decider's name. */
+        "fhir-exception-resolve": CAPS.EMR_TREAT,
         /* Taking a medicines history is a nurse-or-pharmacist act (emr.vitals covers the ward
          * staff who do it). DECIDING what happens to a home medicine is prescribing-adjacent and
          * belongs to the treating clinician, so it is emr.treat. */
@@ -731,6 +734,10 @@ export async function onRequest(context) {
        * Errors come back as OperationOutcome, because that is what a FHIR client parses. */
       if (sub === "fhir-exceptions" && method === "GET") {
         const r = await listExceptions(request, env, { ...deps, config: (wsqCfg && wsqCfg.fhir) || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "fhir-exception-resolve" && method === "POST") {
+        const r = await resolveException(request, env, { ...deps, config: (wsqCfg && wsqCfg.fhir) || null, base: `${url.origin}/api/queue/ward/fhir`, exceptionId: body.exceptionId, resolution: body.resolution, localPatientId: body.localPatientId, reason: body.reason });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "fhir") {

@@ -6,8 +6,8 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import {
-  REASON, INBOUND_TYPES, inboundEnabled, sourceSystemOf, splitBundle, markTerminology,
-  reconcileIdentity, rebind, partitionConflicts, ExchangeException, EXCEPTION_TYPE,
+  REASON, RESOLUTION, INBOUND_TYPES, inboundEnabled, sourceSystemOf, splitBundle, markTerminology,
+  reconcileIdentity, rebind, partitionConflicts, ExchangeException, ExchangeIdentityDecision, priorDecision, EXCEPTION_TYPE, DECISION_TYPE,
 } from "../functions/_wardsynq/fhir-inbound.js";
 import { RESOURCE_TYPES, NATIVE_SYSTEM } from "../functions/_wardsynq/service.js";
 
@@ -144,6 +144,28 @@ test("OWNERSHIP: a feed updates its own rows, never this hospital's and never an
   assert.equal(moved.writable.length, 0);
   assert.equal(moved.conflicts[0].reason, REASON.PATIENT_MISMATCH);
   assert.equal(moved.conflicts[0].current.patientId, "P-ORIG");
+});
+
+test("A PERSON'S IDENTITY DECISION IS DURABLE: the latest one for a source patient wins, and a reject is not a link", () => {
+  const decisions = [
+    { source: "fhir-his", sourcePatientId: "HIS-1", decision: RESOLUTION.LINK, patientId: "L1", decidedAt: "2026-09-01T00:00:00.000Z" },
+    { source: "fhir-his", sourcePatientId: "HIS-1", decision: RESOLUTION.LINK, patientId: "L9", decidedAt: "2026-09-05T00:00:00.000Z" },
+    { source: "fhir-other", sourcePatientId: "HIS-1", decision: RESOLUTION.LINK, patientId: "L2", decidedAt: "2026-09-06T00:00:00.000Z" },
+    { source: "fhir-his", sourcePatientId: "HIS-2", decision: RESOLUTION.REJECT, patientId: null, decidedAt: "2026-09-02T00:00:00.000Z" },
+  ];
+  assert.equal(priorDecision(decisions, "fhir-his", "HIS-1").patientId, "L9", "the most recent decision, for THIS source");
+  assert.equal(priorDecision(decisions, "fhir-other", "HIS-1").patientId, "L2", "the same source id in another system is a different patient");
+  assert.equal(priorDecision(decisions, "fhir-his", "HIS-2").decision, RESOLUTION.REJECT);
+  assert.equal(priorDecision(decisions, "fhir-his", "HIS-3"), null);
+  assert.equal(priorDecision(decisions, "", "HIS-1"), null);
+
+  const d = ExchangeIdentityDecision({ id: "x", source: "fhir-his", sourcePatientId: "HIS-1", decision: RESOLUTION.CREATE, createdPatientId: "fhir-his-pat-his-1", decidedBy: "fb:dr", decidedAt: "2026-09-08T00:00:00.000Z", reason: "new to us" });
+  assert.equal(d.resourceType, DECISION_TYPE);
+  assert.equal(d.patientId, null, "create links to nobody existing; the created id is recorded separately");
+  assert.equal(d.createdPatientId, "fhir-his-pat-his-1");
+  assert.equal(d.decidedBy, "fb:dr");
+  assert.ok(RESOURCE_TYPES.includes(DECISION_TYPE), "append-only: a wrong decision stays visible");
+  assert.deepEqual(Object.values(RESOLUTION).sort(), ["accept-feed", "create", "keep-local", "link", "reject"]);
 });
 
 test("the exception is a record that keeps the payload, and the pipeline is the record's own", () => {

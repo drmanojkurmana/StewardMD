@@ -55,6 +55,16 @@ const str = (v) => (v == null ? "" : String(v).trim());
 const slug = (v) => str(v).toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
 
 const EXCEPTION_TYPE = "ExchangeException";
+const DECISION_TYPE = "ExchangeIdentityDecision";
+
+/** What a person may decide about a held message. */
+const RESOLUTION = Object.freeze({
+  LINK: "link",              // the incoming patient IS local patient X: file the bundle on X
+  CREATE: "create",          // the incoming patient is nobody here: create them
+  REJECT: "reject",          // do not file this; nothing is written
+  ACCEPT_FEED: "accept-feed",// the feed's version of a conflicting row becomes the new version
+  KEEP_LOCAL: "keep-local",  // the local version stands; the feed's is discarded
+});
 
 /** Why a bundle, or part of one, was held rather than written. */
 const REASON = Object.freeze({
@@ -216,7 +226,8 @@ function partitionConflicts(entities, currentOf, system) {
 const ORDER = { Patient: 0, Encounter: 1 };
 const byDependency = (a, b) => (ORDER[a.resourceType] ?? 2) - (ORDER[b.resourceType] ?? 2);
 
-/** PURE. The exception record. The payload is the bundle as received, so nothing is lost. */
+/** PURE. The exception record. The payload is the bundle as received, so nothing is lost, and the
+ *  request context travels with it so the message can be re-driven exactly as it arrived. */
 function ExchangeException(input) {
   const i = input || {};
   return {
@@ -226,10 +237,37 @@ function ExchangeException(input) {
     candidates: i.candidates || null,
     conflict: i.conflict || null,
     payload: i.payload || null,
+    context: i.context || null,
+    sourcePatientId: i.sourcePatientId || null,
     entityRefs: i.entityRefs || [],
     status: "open", raisedAt: i.raisedAt, raisedFor: i.raisedFor || null,
-    resolvedBy: null, resolvedAt: null, resolution: null,
+    resolvedBy: null, resolvedAt: null, resolution: null, resolutionReason: null,
   };
+}
+
+/** PURE. A person's durable answer to "who is this patient", for one source and one source id. */
+function ExchangeIdentityDecision(input) {
+  const i = input || {};
+  return {
+    resourceType: DECISION_TYPE, id: i.id,
+    source: i.source, sourcePatientId: i.sourcePatientId,
+    // `patientId` is the LOCAL patient when linked; null when the decision was "create" (the created
+    // patient's own id is then recorded in `createdPatientId`) or "reject".
+    patientId: i.patientId || null,
+    decision: i.decision,
+    createdPatientId: i.createdPatientId || null,
+    decidedBy: i.decidedBy, decidedAt: i.decidedAt, reason: i.reason || null,
+    exceptionId: i.exceptionId || null,
+  };
+}
+
+/** PURE. The prior decision for this source patient, if a person already made one. */
+function priorDecision(decisions, source, sourcePatientId) {
+  const s = str(source), p = str(sourcePatientId);
+  if (!s || !p) return null;
+  const hits = (decisions || []).filter((d) => d && str(d.source) === s && str(d.sourcePatientId) === p)
+    .sort((a, b) => String(b.decidedAt || "").localeCompare(String(a.decidedAt || "")));
+  return hits[0] || null;
 }
 
 async function sha256(text) {
@@ -305,16 +343,18 @@ async function ingestFhir(request, env, ctx) {
    * design, and a Bundle.id is whatever the sender chose to reuse; keying on either turned a stale
    * PUT into a silent "already done". A resent identical message is a no-op; a corrected re-send is
    * a new message and is judged on its own merits. */
-  const idempotencyKey = `fhir-in:${adapterSystem}:${await sha256(JSON.stringify(ctx.body || {}))}`;
+  const idempotencyKey = `fhir-in:${adapterSystem}:${await sha256(JSON.stringify(ctx.body || {}))}${ctx.replayKeySuffix ? ":" + str(ctx.replayKeySuffix) : ""}`;
   const ingest = svc.governedForIngest({ idempotencyKey });
   if (await ingest.alreadyIngested()) {
     return { ok: true, status: 200, duplicate: true, bundle: { resourceType: "Bundle", type: "transaction-response", entry: [], meta: { tag: [{ system: "urn:stewardmd:fhir", code: "replayed" }] } } };
   }
 
   const now = new Date().toISOString();
+  const context = { mode: ctx.mode || "bundle", targetType: str(ctx.targetType) || null, targetId: str(ctx.targetId) || null, patientRef: str(ctx.patientRef) || null, ifMatch: str(ctx.ifMatch) || null, sourceSystem: system };
+  const sourcePatientId = patient ? str(patient.id) : null;
   const raise = async (reason, extra) => {
     const id = `wsq-xchg-${adapterSystem}-${(await sha256(`${reason}|${idempotencyKey}|${JSON.stringify(extra && extra.entityRefs || [])}`))}`;
-    const rec = ExchangeException({ id, source: adapterSystem, reason, raisedAt: now, raisedFor: resolved.actor.id, payload: ctx.body, ...extra });
+    const rec = ExchangeException({ id, source: adapterSystem, reason, raisedAt: now, raisedFor: resolved.actor.id, payload: ctx.body, context, sourcePatientId, ...extra });
     try { await ingest.put(adapterActor, rec); } catch (e) { /* an exception that cannot be recorded is still returned to the caller below */ }
     return id;
   };
@@ -323,7 +363,15 @@ async function ingestFhir(request, env, ctx) {
    * uncertain is held WHOLE - a potassium filed on the wrong chart is worse than one that waited. */
   const incoming = entities.find((e) => e.resourceType === "Patient");
   let linkedTo = null;
-  if (incoming && !patient) {
+  const override = ctx.override && typeof ctx.override === "object" ? ctx.override : null;
+  if (incoming && override && override.identity === RESOLUTION.LINK && str(override.localId)) {
+    /* A PERSON ALREADY DECIDED. The re-drive of a held message carries their answer; the matcher
+     * is not consulted again, and the answer is on the record under their name. */
+    linkedTo = str(override.localId);
+    entities = rebind(entities, incoming.id, linkedTo);
+  } else if (incoming && override && override.identity === RESOLUTION.CREATE) {
+    linkedTo = null; // create as sent: the person decided nobody here is this patient
+  } else if (incoming && !patient) {
     /* A single resource with no Patient in the request: the normaliser had to invent a placeholder
      * from the subject reference, and the adapter dutifully built a Patient from it. That Patient
      * must NEVER be written - it has no name and no date of birth. The reference must name a
@@ -335,10 +383,17 @@ async function ingestFhir(request, env, ctx) {
     linkedTo = local.id;
     entities = rebind(entities, incoming.id, local.id);
   } else if (incoming) {
-    let locals = [];
-    try { locals = await svc.list("Patient", 1000); }
-    catch (e) { if (e instanceof GovernanceError) return { ok: false, status: 403, outcome: operationOutcome("error", "forbidden", "cannot read the patient register to reconcile identity") }; throw e; }
-    const who = reconcileIdentity(incoming, locals, hadMrn);
+    let locals = [], decisions = [];
+    try {
+      [locals, decisions] = await Promise.all([svc.list("Patient", 1000), svc.list(DECISION_TYPE, 1000).catch(() => [])]);
+    } catch (e) { if (e instanceof GovernanceError) return { ok: false, status: 403, outcome: operationOutcome("error", "forbidden", "cannot read the patient register to reconcile identity") }; throw e; }
+    /* A decision a person already made for THIS source patient outranks the matcher: the same
+     * look-alike is not held and decided again on every message. A prior "reject" holds again -
+     * the person said do not file, and a new message is a new chance to look. */
+    const prior = priorDecision(decisions, adapterSystem, sourcePatientId);
+    const who = prior && prior.decision === RESOLUTION.LINK && prior.patientId ? { decision: "link", localId: prior.patientId, by: "prior-decision" }
+      : prior && prior.decision === RESOLUTION.CREATE && prior.createdPatientId ? { decision: "link", localId: prior.createdPatientId, by: "prior-decision" }
+      : reconcileIdentity(incoming, locals, hadMrn);
     if (who.decision === "ambiguous" || who.decision === "probable") {
       const reason = who.decision === "ambiguous" ? REASON.IDENTITY_AMBIGUOUS : REASON.IDENTITY_PROBABLE_DUPLICATE;
       const exId = await raise(reason, { candidates: who.candidates, entityRefs: entities.map((e) => `${e.resourceType}/${e.id}`),
@@ -363,10 +418,23 @@ async function ingestFhir(request, env, ctx) {
       try { target = await svc.get(canonicalType, str(ctx.targetId)); } catch { target = null; }
       if (!target) return { ok: false, status: 404, outcome: operationOutcome("error", "not-found", `${ctx.targetType}/${ctx.targetId} is not here; this server does not create on update`) };
       const owner = str(target.meta && target.meta.source && target.meta.source.system) || NATIVE_SYSTEM;
+      /* A PERSON ACCEPTED THE FEED'S VERSION of this very record. The feed's content becomes the next
+       * version of the LOCAL record - same id, same patient - rather than a conflict. The ownership
+       * partition below still sees it and still honours the same override; nothing else changes. */
+      if (override && str(override.acceptFeedFor) === `${ctx.targetType}/${ctx.targetId}`) {
+        const targetPatient = target.resourceType === "Patient" ? target.id : str(target.patientId);
+        const mine = primary.resourceType === "Patient" ? primary.id : str(primary.patientId);
+        if (targetPatient && mine && targetPatient !== mine) {
+          return { ok: false, status: 409, outcome: operationOutcome("error", "conflict", `${ctx.targetType}/${ctx.targetId} belongs to a different patient; accepting the feed's version would move it`) };
+        }
+        entities = entities.map((e) => (e === primary ? { ...e, id: str(ctx.targetId) } : e));
+        override.acceptFeedFor = `${canonicalType}/${ctx.targetId}`;
+      } else {
       const reason = owner === NATIVE_SYSTEM ? REASON.CONFLICT_LOCAL_AUTHORITATIVE : REASON.CONFLICT_OTHER_SOURCE;
       const exId = await raise(reason, { patientId: target.patientId || (target.resourceType === "Patient" ? target.id : null), conflict: { id: target.id, resourceType: target.resourceType, version: target.version, source: owner }, entityRefs: [`${ctx.targetType}/${ctx.targetId}`],
         detail: owner === NATIVE_SYSTEM ? "this hospital authored the current version; a feed does not overwrite it" : `another feed (${owner}) authored the current version` });
       return { ok: false, status: 409, outcome: operationOutcome("error", "conflict", `${ctx.targetType}/${ctx.targetId}: ${reason}; see ExchangeException/${exId}`) };
+      }
     }
   }
 
@@ -377,7 +445,16 @@ async function ingestFhir(request, env, ctx) {
     try { const cur = await svc.get(e.resourceType, e.id); if (cur) currents.set(`${e.resourceType}/${e.id}`, cur); }
     catch { /* unreadable to this actor: treated as absent for conflict purposes; the write itself is still governed */ }
   }
-  const { writable, conflicts } = partitionConflicts(entities, (e) => currents.get(`${e.resourceType}/${e.id}`) || null, adapterSystem);
+  let { writable, conflicts } = partitionConflicts(entities, (e) => currents.get(`${e.resourceType}/${e.id}`) || null, adapterSystem);
+  /* A PERSON ACCEPTED THE FEED'S VERSION of one named row. Only that row, only by its reference,
+   * and only for the two ownership reasons - a patient-mismatch conflict is never overridable, because
+   * accepting it would move a clinical fact between people. */
+  if (override && override.acceptFeedFor) {
+    const ref = str(override.acceptFeedFor);
+    const accepted = conflicts.filter((c) => `${c.entity.resourceType}/${c.entity.id}` === ref && c.reason !== REASON.PATIENT_MISMATCH);
+    conflicts = conflicts.filter((c) => !accepted.includes(c));
+    writable = writable.concat(accepted.map((c) => ({ ...c.entity, _currentVersion: c.current.version, _acceptedOver: c.current.source })));
+  }
 
   if (ctx.mode === "update") {
     const target = writable[0] || (conflicts[0] && conflicts[0].entity);
@@ -397,7 +474,7 @@ async function ingestFhir(request, env, ctx) {
 
   const written = [];
   for (const e of [...writable].sort(byDependency)) {
-    const { _currentVersion, ...entity } = e;
+    const { _currentVersion, _acceptedOver, ...entity } = e;
     try {
       const saved = await ingest.put(adapterActor, entity);
       const rec = saved && saved.record ? saved.record : (saved || entity);
@@ -422,6 +499,113 @@ async function ingestFhir(request, env, ctx) {
   };
 }
 
+/**
+ * A person resolves a held message.
+ *
+ * link / create re-drive the held payload with the person's answer and record that answer as an
+ * ExchangeIdentityDecision so the same patient is never held again. accept-feed re-drives with one
+ * named row allowed to overwrite. reject / keep-local write nothing. Every path writes a new version
+ * of the exception naming who decided, so nothing here can be undone by deleting it.
+ *
+ * ctx: { migration, exceptionId, resolution, localPatientId?, reason, config, base, actorDeps, recordDeps }
+ */
+async function resolveException(request, env, ctx) {
+  const mig = ctx.migration;
+  const base = { mode: mig && mig.mode, tenantId: (mig && mig.tenantId) || null };
+  if (!mig || mig.mode === "off") return { ...base, ok: true, skipped: "off", written: 0 };
+  if (!inboundEnabled(ctx.config)) return { ...base, ok: false, status: 404, error: "not_found", written: 0 };
+
+  const exceptionId = str(ctx.exceptionId), resolution = str(ctx.resolution), reason = str(ctx.reason);
+  if (!exceptionId || !Object.values(RESOLUTION).includes(resolution)) {
+    return { ...base, ok: false, status: 400, error: "bad_resolution", detail: `resolution must be one of ${Object.values(RESOLUTION).join(", ")}`, written: 0 };
+  }
+  /* The reason is required for every resolution. It is read later by somebody asking why a
+   * potassium is on this chart, or why one is not. */
+  if (!reason) return { ...base, ok: false, status: 422, error: "reason_required", detail: "say why, in a sentence somebody can read next year", written: 0 };
+
+  const { svc, resolved, error } = await open_(request, env, ctx);
+  if (error) return { ...base, ok: false, status: error.status, error: "permission", detail: error.outcome.issue[0].diagnostics, written: 0 };
+
+  let ex;
+  try { ex = await svc.get(EXCEPTION_TYPE, exceptionId); }
+  catch (e) { return { ...base, ok: false, status: 502, error: "record_read_failed", written: 0 }; }
+  if (!ex) return { ...base, ok: false, status: 404, error: "exception_not_found", written: 0 };
+  if (ex.status !== "open") return { ...base, ok: false, status: 409, error: "already_resolved", detail: `resolved by ${ex.resolvedBy} at ${ex.resolvedAt} as ${ex.resolution}`, written: 0 };
+
+  const identityReasons = [REASON.IDENTITY_AMBIGUOUS, REASON.IDENTITY_PROBABLE_DUPLICATE];
+  const conflictReasons = [REASON.CONFLICT_LOCAL_AUTHORITATIVE, REASON.CONFLICT_OTHER_SOURCE];
+  const isIdentity = identityReasons.includes(ex.reason), isConflict = conflictReasons.includes(ex.reason);
+  const fits = (isIdentity && [RESOLUTION.LINK, RESOLUTION.CREATE, RESOLUTION.REJECT].includes(resolution))
+    || (isConflict && [RESOLUTION.ACCEPT_FEED, RESOLUTION.KEEP_LOCAL].includes(resolution))
+    || (!isIdentity && !isConflict && resolution === RESOLUTION.REJECT);
+  if (!fits) return { ...base, ok: false, status: 400, error: "resolution_does_not_fit", detail: `${ex.reason} cannot be resolved by ${resolution}`, written: 0 };
+
+  const now = new Date().toISOString();
+  let localPatientId = str(ctx.localPatientId) || null;
+  if (resolution === RESOLUTION.LINK) {
+    if (!localPatientId) return { ...base, ok: false, status: 422, error: "local_patient_required", detail: "link names the local patient this person is", written: 0 };
+    /* Named among the candidates, or existing at all: a link to a patient the matcher never
+     * proposed is allowed - the person may know something the matcher does not - but a link to a
+     * patient who does not exist is not a decision, it is a typo. */
+    let local = null;
+    try { local = await svc.get("Patient", localPatientId); } catch { local = null; }
+    if (!local) return { ...base, ok: false, status: 404, error: "local_patient_not_found", written: 0 };
+  }
+
+  let redrive = null;
+  if (resolution === RESOLUTION.LINK || resolution === RESOLUTION.CREATE || resolution === RESOLUTION.ACCEPT_FEED) {
+    const c = ex.context || {};
+    const override = resolution === RESOLUTION.ACCEPT_FEED
+      ? { acceptFeedFor: (ex.entityRefs || [])[0] || null }
+      : { identity: resolution, localId: localPatientId };
+    redrive = await ingestFhir(request, env, {
+      ...ctx, body: ex.payload, sourceSystem: c.sourceSystem || str(ex.source).replace(/^fhir-/, ""),
+      mode: c.mode || "bundle", targetType: c.targetType || undefined, targetId: c.targetId || undefined, patientRef: c.patientRef || undefined,
+      ifMatch: c.ifMatch || undefined, override,
+      /* A distinct key from the original push. The original's key was consumed when the exception
+       * was recorded; this is the re-drive of THAT exception and must land. */
+      replayKeySuffix: `resolved:${exceptionId}`,
+    });
+    if (!redrive.ok && redrive.status >= 400) {
+      return { ...base, ok: false, status: redrive.status, error: "redrive_failed", detail: redrive.outcome && redrive.outcome.issue && redrive.outcome.issue[0].diagnostics, written: 0 };
+    }
+  }
+
+  /* The identity answer, recorded by name, before the exception closes. For "create", the patient
+   * that was just created is what later messages must link to. */
+  if (isIdentity && ex.sourcePatientId && (resolution === RESOLUTION.LINK || resolution === RESOLUTION.CREATE)) {
+    const createdId = resolution === RESOLUTION.CREATE && redrive && redrive.written
+      ? (redrive.written.find((w) => w.resourceType === "Patient") || {}).id || null : null;
+    const dec = ExchangeIdentityDecision({
+      id: `wsq-xid-${str(ex.source)}-${await sha256(`${ex.source}|${ex.sourcePatientId}|${now}`)}`,
+      source: ex.source, sourcePatientId: ex.sourcePatientId, decision: resolution,
+      patientId: resolution === RESOLUTION.LINK ? localPatientId : null, createdPatientId: createdId,
+      decidedBy: resolved.actor.id, decidedAt: now, reason, exceptionId,
+    });
+    try { await svc.put(dec); } catch (e) {
+      if (e instanceof GovernanceError) return { ...base, ok: false, status: 403, error: "governance", reasons: e.reasons.map((r) => r.code), written: 0 };
+      return { ...base, ok: false, status: 502, error: "record_write_failed", detail: str(e && e.message), written: 0 };
+    }
+  }
+
+  const { meta, version, ...rest } = ex;
+  try {
+    await svc.put({ ...rest, status: "resolved", resolvedBy: resolved.actor.id, resolvedAt: now, resolution, resolutionReason: reason, resolvedPatientId: localPatientId }, { expectedVersion: version });
+  } catch (e) {
+    if (e instanceof GovernanceError) return { ...base, ok: false, status: 403, error: "governance", reasons: e.reasons.map((r) => r.code), written: 0 };
+    return { ...base, ok: false, status: 502, error: "record_write_failed", detail: str(e && e.message), written: 0 };
+  }
+
+  return {
+    ...base, ok: true, exceptionId, resolution, resolvedBy: resolved.actor.id, resolvedAt: now,
+    written: redrive ? (redrive.written || []).length : 0,
+    ...(redrive ? { linkedTo: redrive.linkedTo || null, conflictsRemaining: redrive.conflicts || 0, redrive: redrive.bundle } : {}),
+    note: resolution === RESOLUTION.REJECT || resolution === RESOLUTION.KEEP_LOCAL
+      ? "Nothing was filed. The message stays on the exception, resolved, under your name."
+      : "The held message was filed with your decision applied, and the decision is on the record under your name.",
+  };
+}
+
 /** ctx: { migration, config } - what is held, for a person. */
 async function listExceptions(request, env, ctx) {
   const mig = ctx.migration;
@@ -437,7 +621,8 @@ async function listExceptions(request, env, ctx) {
 }
 
 export {
-  EXCEPTION_TYPE, REASON, INBOUND_TYPES, CODE_FIELDS,
-  inboundEnabled, sourceSystemOf, splitBundle, markTerminology, reconcileIdentity, rebind, partitionConflicts, ExchangeException,
-  ingestFhir, listExceptions,
+  EXCEPTION_TYPE, DECISION_TYPE, REASON, RESOLUTION, INBOUND_TYPES, CODE_FIELDS,
+  inboundEnabled, sourceSystemOf, splitBundle, markTerminology, reconcileIdentity, rebind, partitionConflicts,
+  ExchangeException, ExchangeIdentityDecision, priorDecision,
+  ingestFhir, listExceptions, resolveException,
 };

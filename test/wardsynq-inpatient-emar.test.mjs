@@ -4595,3 +4595,114 @@ test("FHIR inbound: a feed never overwrites what this hospital authored; a PUT n
   assert.equal(orphan.status, 422);
   assert.equal(await RECORD.latest(TENANT_ROW.id, "Patient", "fhir-partner-his-pat-nobody-here"), null);
 });
+
+/* ---- Resolving what was held (2026-09-08): a person decides, by name, once ------------------- */
+
+const resolveAs = (email, body) => as(email, "/ward/fhir-exception-resolve", "POST", { orgId: ORG, ...body });
+const openExceptions = async () => (await as(DOCTOR, `/ward/fhir-exceptions?orgId=${ORG}`)).open;
+
+test("FHIR exceptions: LINK files the held bundle on the chosen chart, records the decision, and the same source patient is never held again", async () => {
+  seedHospital(); enableInboundFhir();
+  const { adm } = await admittedPatientOnDrug();
+  const local = await (await asRaw(DOCTOR, `/ward/fhir/Patient/${adm.patientId}?orgId=${ORG}`)).json();
+  const lookalike = (over) => partnerBundle({ patientId: "HIS-PAT-20", mrn: "HIS-MRN-20", abha: "00-0000-0000-0020", name: local.name[0].text, dob: local.birthDate, ...over });
+
+  const held = await pushFhir(DOCTOR, `/ward/fhir?orgId=${ORG}`, lookalike({ bundleId: "b-hold-1", suffix: "-h1" }));
+  assert.equal(held.status, 202);
+  const [ex] = await openExceptions();
+  assert.equal(ex.reason, "identity-probable-duplicate");
+  assert.equal(ex.candidates[0].id, adm.patientId);
+
+  // Guard rails on the decision itself.
+  assert.equal((await resolveAs(NURSE, { exceptionId: ex.id, resolution: "link", localPatientId: adm.patientId, reason: "same person" })).__status, 403, "deciding is emr.treat");
+  assert.equal((await resolveAs(DOCTOR, { exceptionId: ex.id, resolution: "link", localPatientId: adm.patientId })).__status, 422, "a reason is required");
+  assert.equal((await resolveAs(DOCTOR, { exceptionId: ex.id, resolution: "accept-feed", reason: "x" })).__status, 400, "a conflict resolution does not fit an identity exception");
+  assert.equal((await resolveAs(DOCTOR, { exceptionId: ex.id, resolution: "link", localPatientId: "nobody", reason: "x" })).__status, 404, "a link to a patient who does not exist is a typo, not a decision");
+
+  const r = await resolveAs(DOCTOR, { exceptionId: ex.id, resolution: "link", localPatientId: adm.patientId, reason: "Same person - confirmed by phone with the partner ward." });
+  assert.equal(r.__status, 200, JSON.stringify(r).slice(0, 300));
+  assert.equal(r.linkedTo, adm.patientId);
+  assert.ok(r.written >= 8, `written ${r.written}`);
+  assert.equal(r.resolvedBy, idFor(DOCTOR));
+  // The observations are on OUR patient's chart, and no partner Patient record exists.
+  const cre = await (await asRaw(DOCTOR, `/ward/fhir/Observation?orgId=${ORG}&patient=${adm.patientId}&code=2160-0`)).json();
+  assert.equal(cre.total, 1);
+  assert.equal(await RECORD.latest(TENANT_ROW.id, "Patient", "fhir-partner-his-pat-his-pat-20"), null);
+  assert.deepEqual(await openExceptions(), [], "resolved");
+  // Resolving again is refused: the decision is on the record and is not re-made.
+  assert.equal((await resolveAs(DOCTOR, { exceptionId: ex.id, resolution: "reject", reason: "changed my mind" })).__status, 409);
+  const dec = await RECORD.latestByType(TENANT_ROW.id, "ExchangeIdentityDecision", 10);
+  assert.equal(dec.length, 1);
+  assert.equal(dec[0].patientId, adm.patientId);
+  assert.equal(dec[0].sourcePatientId, "HIS-PAT-20");
+  assert.equal(dec[0].decidedBy, idFor(DOCTOR));
+
+  // THE SAME SOURCE PATIENT AGAIN, with new results: linked by the prior decision, never held.
+  const again = await pushFhir(DOCTOR, `/ward/fhir?orgId=${ORG}`, lookalike({ bundleId: "b-hold-2", suffix: "-h2" }));
+  assert.equal(again.status, 200, await again.text());
+  assert.deepEqual(await openExceptions(), []);
+  assert.equal((await (await asRaw(DOCTOR, `/ward/fhir/Observation?orgId=${ORG}&patient=${adm.patientId}&code=2160-0`)).json()).total, 2);
+});
+
+test("FHIR exceptions: CREATE makes the patient once and later messages link to them; REJECT files nothing", async () => {
+  seedHospital(); enableInboundFhir();
+  const { adm } = await admittedPatientOnDrug();
+  const local = await (await asRaw(DOCTOR, `/ward/fhir/Patient/${adm.patientId}?orgId=${ORG}`)).json();
+  const twin = (over) => partnerBundle({ patientId: "HIS-PAT-30", mrn: "HIS-MRN-30", abha: "00-0000-0000-0030", name: local.name[0].text, dob: local.birthDate, ...over });
+
+  await pushFhir(DOCTOR, `/ward/fhir?orgId=${ORG}`, twin({ bundleId: "b-c1", suffix: "-c1" }));
+  const [ex] = await openExceptions();
+  const r = await resolveAs(DOCTOR, { exceptionId: ex.id, resolution: "create", reason: "Different person: the partner confirmed a different father's name." });
+  assert.equal(r.__status, 200, JSON.stringify(r).slice(0, 300));
+  const created = await RECORD.latest(TENANT_ROW.id, "Patient", "fhir-partner-his-pat-his-pat-30");
+  assert.ok(created, "the partner's patient now exists here, as theirs");
+  assert.equal(created.meta.source.system, "fhir-partner-his");
+  const dec = (await RECORD.latestByType(TENANT_ROW.id, "ExchangeIdentityDecision", 10))[0];
+  assert.equal(dec.decision, "create");
+  assert.equal(dec.createdPatientId, created.id);
+
+  // Next message for that source patient goes to the created chart, and is not held.
+  const next = await pushFhir(DOCTOR, `/ward/fhir?orgId=${ORG}`, twin({ bundleId: "b-c2", suffix: "-c2" }));
+  assert.equal(next.status, 200);
+  assert.equal((await (await asRaw(DOCTOR, `/ward/fhir/Observation?orgId=${ORG}&patient=${created.id}&code=2160-0`)).json()).total, 2);
+  assert.equal((await (await asRaw(DOCTOR, `/ward/fhir/Observation?orgId=${ORG}&patient=${adm.patientId}&code=2160-0`)).json()).total, 0, "and nothing landed on our look-alike");
+
+  // REJECT: a different held twin, nothing written, exception closed under the decider's name.
+  await pushFhir(DOCTOR, `/ward/fhir?orgId=${ORG}`, partnerBundle({ patientId: "HIS-PAT-31", mrn: "HIS-MRN-31", abha: "00-0000-0000-0031", name: local.name[0].text, dob: local.birthDate, bundleId: "b-r1", suffix: "-r1" }));
+  const [rx] = await openExceptions();
+  const rej = await resolveAs(DOCTOR, { exceptionId: rx.id, resolution: "reject", reason: "Sent to us in error; belongs to another hospital." });
+  assert.equal(rej.__status, 200);
+  assert.equal(rej.written, 0);
+  assert.equal(await RECORD.latest(TENANT_ROW.id, "Patient", "fhir-partner-his-pat-his-pat-31"), null);
+  assert.deepEqual(await openExceptions(), []);
+});
+
+test("FHIR exceptions: KEEP-LOCAL leaves ours alone; ACCEPT-FEED makes the feed's content the next version of OUR record, attributed to the feed", async () => {
+  seedHospital(); enableInboundFhir();
+  const { adm } = await admittedPatientOnDrug();
+  const enc = await (await asRaw(DOCTOR, `/ward/fhir/Encounter/${adm.encounterId}?orgId=${ORG}`)).json();
+  const feedVersion = { ...enc, id: adm.encounterId, status: "finished", period: { start: enc.period.start, end: "2026-09-07T18:00:00Z" } };
+
+  await pushFhir(DOCTOR, `/ward/fhir/Encounter/${adm.encounterId}?orgId=${ORG}`, feedVersion, { method: "PUT", "If-Match": 'W/"1"' });
+  let [ex] = await openExceptions();
+  assert.equal(ex.reason, "conflict-local-authoritative");
+  const keep = await resolveAs(DOCTOR, { exceptionId: ex.id, resolution: "keep-local", reason: "Our discharge time is the right one." });
+  assert.equal(keep.__status, 200);
+  assert.equal((await RECORD.latest(TENANT_ROW.id, "Encounter", adm.encounterId)).version, 1, "untouched");
+  assert.equal((await resolveAs(DOCTOR, { exceptionId: ex.id, resolution: "link", localPatientId: adm.patientId, reason: "x" })).__status, 409, "closed");
+
+  // The same conflict again, this time accepted.
+  await pushFhir(DOCTOR, `/ward/fhir/Encounter/${adm.encounterId}?orgId=${ORG}`, { ...feedVersion, period: { start: enc.period.start, end: "2026-09-07T19:00:00Z" } }, { method: "PUT", "If-Match": 'W/"1"' });
+  [ex] = await openExceptions();
+  assert.equal((await resolveAs(DOCTOR, { exceptionId: ex.id, resolution: "link", localPatientId: adm.patientId, reason: "x" })).__status, 400, "an identity resolution does not fit a conflict");
+  const acc = await resolveAs(DOCTOR, { exceptionId: ex.id, resolution: "accept-feed", reason: "The partner's discharge time is correct; ours was provisional." });
+  assert.equal(acc.__status, 200, JSON.stringify(acc).slice(0, 400));
+  const now = await RECORD.latest(TENANT_ROW.id, "Encounter", adm.encounterId);
+  assert.equal(now.version, 2, "a NEW version of OUR record; version 1 survives");
+  assert.equal(now.periodEnd, "2026-09-07T19:00:00Z");
+  assert.equal(now.writtenBy.id, "adapter:fhir-partner-his", "attributed to the feed");
+  assert.equal(now.writtenBy.onBehalfOf, idFor(DOCTOR), "on behalf of the person who accepted it");
+  const prov = await (await asRaw(DOCTOR, `/ward/fhir/Provenance?orgId=${ORG}&target=Encounter/${adm.encounterId}`)).json();
+  assert.deepEqual(prov.entry.map((e) => e.resource.agent[0].type.coding[0].code), ["assembler", "author"], "v2 assembled by the feed, v1 authored by us");
+  assert.deepEqual(await openExceptions(), []);
+});
