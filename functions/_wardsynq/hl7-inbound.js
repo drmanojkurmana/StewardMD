@@ -156,10 +156,19 @@ async function ingestHl7(request, env, ctx) {
 
   const unsupported = (msg.segments || []).filter((s) => !/^Z/i.test(s.id) && !["MSH", "EVN", "PID", "PD1", "NK1", "PV1", "PV2", "DG1", "AL1", "OBR", "OBX", "NTE", "ORC", "ROL", "IN1", "GT1", "ZZZ"].includes(s.id)).map((s) => s.id);
   const landingProblems = [...new Set(unsupported)].map((id) => ({ reason: REASON.UNSUPPORTED, detail: `segment ${id} is not one this gateway files; carried in the raw message only` }));
-  const landed = await landBundle(request, env, {
-    ...ctx, svc, resolved, sccm, system, adapterSystem, patient: sccm.patient, problems: landingProblems, requests: new Map(), bundleType: "transaction", atomic: true,
-    protocol: "hl7v2", mode: "bundle", body: raw, messageControlId: kind.controlId, targetType: undefined, targetId: undefined, patientRef: undefined, ifMatch: undefined,
-  });
+  // landBundle reads the record (identity candidates, ownership) before it writes anything, and a
+  // repository failure on one of those reads is not caught inside it - it throws. EVERY message that
+  // parsed this far still gets an ACK: an MLLP bridge treats an uncaught 500 as a transport failure
+  // and retries the same message forever rather than seeing the AE it should hold and act on.
+  let landed;
+  try {
+    landed = await landBundle(request, env, {
+      ...ctx, svc, resolved, sccm, system, adapterSystem, patient: sccm.patient, problems: landingProblems, requests: new Map(), bundleType: "transaction", atomic: true,
+      protocol: "hl7v2", mode: "bundle", body: raw, messageControlId: kind.controlId, targetType: undefined, targetId: undefined, patientRef: undefined, ifMatch: undefined,
+    });
+  } catch (e) {
+    return { ...ackWith("AE", "the record could not be read to file this message: " + str(e && e.message), [{ code: "207", name: ERR_NAME[207], detail: str(e && e.message) }]) };
+  }
 
   /* The receipt, when kept: the message verbatim (Z-segments and all), what became of it, and the
    * exception it raised if any. A separate append under the adapter's own name. */

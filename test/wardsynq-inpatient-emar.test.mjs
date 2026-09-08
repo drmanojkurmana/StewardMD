@@ -5460,6 +5460,26 @@ test("HL7 v2: OFF by default; ON, an ADT A01 lands a patient and a visit through
   assert.equal(f.status, "finished"); assert.equal(f.meta.source, "urn:stewardmd:source:hl7v2-his-genhosp");
 });
 
+test("HL7 v2: a repository failure while reading the record to reconcile identity still gets an ACK, not an uncaught 500", async () => {
+  seedHospital(); enableHl7();
+  const real = RECORD.latestByType.bind(RECORD);
+  RECORD.latestByType = async (tenantId, resourceType, limit) => {
+    if (resourceType === "Patient") throw new Error("simulated repository outage");
+    return real(tenantId, resourceType, limit);
+  };
+  try {
+    const r = await pushHl7(DOCTOR, adt({ controlId: "MSG-DOWN" }));
+    assert.equal(r.status, 200, "an MLLP bridge treats anything but 200 as a transport failure and retries forever");
+    assert.equal(r.headers.get("x-wardsynq-ack"), "AE");
+    const ack = await r.text();
+    const [code, ctl, text] = msa(ack);
+    assert.equal(code, "AE"); assert.equal(ctl, "MSG-DOWN");
+    assert.match(text, /could not be read/);
+    assert.match(ack, /^MSH\|\^~\\&\|WardSynQ\|WSQ Ward Hospital\|HIS\|GENHOSP\|/, "still addressed back to the sender, not a bare error page");
+  } finally { RECORD.latestByType = real; }
+  assert.equal(await RECORD.latest(TENANT_ROW.id, "Encounter", "hl7v2-his-genhosp-enc-v-2026-001"), null, "nothing was filed from the failed attempt");
+});
+
 test("HL7 v2: an A01 carrying THIS hospital's MRN links to the local chart and writes no Patient; a look-alike is HELD with an AE naming the exception, its Z-segment kept verbatim, decided from the same queue", async () => {
   seedHospital(); enableHl7();
   const { reg, adm } = await admittedPatientOnDrug();
