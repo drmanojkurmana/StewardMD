@@ -38,7 +38,7 @@
 
 import {
   Patient, Encounter, Condition, AllergyIntolerance, Observation, MedicationOrder,
-  DiagnosticReport, ClinicalNote,
+  DiagnosticReport, ClinicalNote, MedicationAdministration, ServiceRequest,
 } from "../wardsynq-model.js";
 import { Adapter } from "../wardsynq-interop.js";
 
@@ -214,6 +214,33 @@ function mapSccmBundle(bundle) {
     entities.push(order);
   }
 
+  /* SCCM 1.1: orders for things other than medicines. Filed as DRAFT and requested by the system
+   * that asserted them - never active, never attributed to a clinician here - so nothing this ward
+   * collects, schedules or bills can come from an order another hospital placed. What the source
+   * said the status was is kept beside it. */
+  const SR_CATEGORY = { laboratory: "laboratory", imaging: "imaging", procedure: "procedure", referral: "referral", other: "other" };
+  for (const s of bundle.serviceRequests || []) {
+    if (!s || !s.id) continue;
+    const k = codeOf(s.code);
+    if (!k.code && !k.display) { issues.push({ code: "SCCM_REQUEST_NO_CODE", message: `service request ${s.id} carried no code and was skipped` }); continue; }
+    // By the sender's own words (code or display), against the closed list; anything else is "other", not a guess.
+    const cat = codeOf(s.category);
+    const words = [cat.code, cat.display].map((w) => String(w || "").toLowerCase()).filter(Boolean);
+    const category = words.map((w) => SR_CATEGORY[w] || (/\blab/.test(w) ? "laboratory" : /imag|radiol/.test(w) ? "imaging" : /procedur/.test(w) ? "procedure" : /referr/.test(w) ? "referral" : null)).find(Boolean) || "other";
+    const req = ServiceRequest({
+      id: sourceId(system, "sr", s.id), patientId: patient.id, encounterId: encRef(s.encounter),
+      code: k.code || k.display, category, priority: ["routine", "urgent", "stat"].includes(s.priority) ? s.priority : (s.priority === "asap" ? "urgent" : "routine"),
+      requesterId: `external:${system}`, status: "draft",
+      source: src("sr", s.id),
+    });
+    req.codeSystem = k.system || "unspecified";
+    req.display = k.display || k.code;
+    req.externalStatus = s.status || "unknown";
+    req.externalRequester = s.requester || null;
+    if (s.authoredOn) req.authoredAt = s.authoredOn;
+    entities.push(req);
+  }
+
   for (const d of bundle.diagnosticReports || []) {
     if (!d || !d.id) continue;
     const k = codeOf(d.code);
@@ -223,10 +250,43 @@ function mapSccmBundle(bundle) {
       id: sourceId(system, "dr", d.id), patientId: patient.id,
       code: k.code || k.display, status, conclusion: d.conclusion || null,
       resultObservationIds: (d.results || []).map((r) => (r && r.id ? sourceId(system, "obs", r.id) : null)).filter(Boolean),
+      // The order this report answers, when the source said so: its OWN order, under its own id.
+      serviceRequestId: d.basedOn && d.basedOn.id ? sourceId(system, "sr", d.basedOn.id) : undefined,
       critical: false,   // criticality is decided by WardSynQ's own critical-result engine, never asserted by a feed
       effectiveAt: d.effectiveDateTime || undefined,
       source: src("dr", d.id),
     }));
+  }
+
+  /* SCCM 1.1: doses given elsewhere. ONLY a state WardSynQ's eMAR can represent honestly is filed:
+   * completed -> administered, not-done -> cancelled, on-hold -> held. An in-progress, stopped or
+   * unknown dose is not a fact about a dose and is named, not filed; entered-in-error is never
+   * filed. The order it answered is the source's own order when referenced, else an explicit
+   * "unreferenced" marker: an order is never invented to hang a dose on. */
+  const ADMIN_STATUS = { completed: "administered", "not-done": "cancelled", "on-hold": "held" };
+  for (const a of bundle.administrations || []) {
+    if (!a || !a.id) continue;
+    const k = codeOf(a.medication);
+    if (!k.display && !k.code) { issues.push({ code: "SCCM_ADMIN_NO_DRUG", message: `administration ${a.id} named no drug and was skipped` }); continue; }
+    const status = ADMIN_STATUS[String(a.status || "")];
+    if (!status) { issues.push({ code: "SCCM_ADMIN_STATE", message: `administration ${a.id} status "${a.status}" is not a dose event WardSynQ can file and was not written` }); continue; }
+    const mar = MedicationAdministration({
+      id: sourceId(system, "mar", a.id), patientId: patient.id,
+      orderId: a.request && a.request.id ? sourceId(system, "rx", a.request.id) : `external:${system}:unreferenced`,
+      drug: k.display || k.code, drugCode: k.code || null,
+      status,
+      administeredBy: a.performer ? `external:${system}:${a.performer}` : `external:${system}`,
+      administeredAt: a.effectiveDateTime || null,
+      source: src("mar", a.id),
+    });
+    mar.drugCodeSystem = k.system || "unspecified";
+    mar.encounterId = encRef(a.encounter);
+    mar.externalStatus = a.status;
+    if (a.dosage && a.dosage.text) mar.externalDosageText = a.dosage.text;
+    if (a.dosage && a.dosage.dose && a.dosage.dose.value != null) mar.dose = { value: a.dosage.dose.value, unit: a.dosage.dose.unit || a.dosage.dose.code || null };
+    if (a.dosage && a.dosage.route) mar.route = codeOf(a.dosage.route).display;
+    if (a.reason) mar.holdReason = codeOf(a.reason).display;
+    entities.push(mar);
   }
 
   for (const doc of bundle.documents || []) {
@@ -264,4 +324,4 @@ function sccmAdapter() {
   });
 }
 
-export { mapSccmBundle, sccmAdapter, ENCOUNTER_CLASS, UNKNOWN_DOB };
+export { mapSccmBundle, sccmAdapter, sourceId, codeOf, ENCOUNTER_CLASS, UNKNOWN_DOB };

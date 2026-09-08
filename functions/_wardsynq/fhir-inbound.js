@@ -42,7 +42,8 @@
  */
 
 import { normalizeFhir } from "../_connect/connectors/fhir-r4/normalize.js";
-import { sccmAdapter } from "../../wardsynq/adapters/wardsynq-sccm-adapter.js";
+import { sccmAdapter, sourceId } from "../../wardsynq/adapters/wardsynq-sccm-adapter.js";
+import { PatientConsent } from "./consent.js";
 import { makeActor, KIND, TIER, GovernanceError } from "../../wardsynq/wardsynq-actors.js";
 import { findCandidates } from "../../wardsynq/wardsynq-mpi.js";
 import { classifyCoding, unmappedCoding, UNMAPPED, INVALID, identifierKey, validateCode } from "./terminology.js";
@@ -81,7 +82,39 @@ const REASON = Object.freeze({
 });
 
 /** The FHIR types the normaliser can turn into SCCM. Anything else is reported, never dropped. */
-const INBOUND_TYPES = Object.freeze(["Patient", "Encounter", "Condition", "Observation", "MedicationRequest", "MedicationStatement", "AllergyIntolerance", "DiagnosticReport", "DocumentReference"]);
+const INBOUND_TYPES = Object.freeze(["Patient", "Encounter", "Condition", "Observation", "MedicationRequest", "MedicationStatement", "AllergyIntolerance", "DiagnosticReport", "DocumentReference", "MedicationAdministration", "ServiceRequest", "Consent"]);
+
+/** Our closed consent scopes, from FHIR's consentscope codes. Nothing else is mapped: an unknown
+ *  scope is `other` with the sender's words in the detail, never a scope somebody here would act on. */
+const CONSENT_SCOPE = Object.freeze({ treatment: "treatment", research: "research" });
+
+/**
+ * PURE. An SCCM consent into a PatientConsent for this patient, recorded as witnessed ELSEWHERE:
+ * decided by the sender's own words (permit/deny), given by whoever the sender named, capacity
+ * never asserted, and `recordedBy` the feed. A consent the sender has not decided (draft, proposed)
+ * is not a decision and is not filed.
+ */
+function consentFromSccm(c, patientId, system, now) {
+  if (!c || !c.id || !c.decision) return null;
+  const scopeCode = c.scope && c.scope.coding && c.scope.coding[0] ? str(c.scope.coding[0].code) : "";
+  const scopeText = (c.scope && str(c.scope.text)) || scopeCode;
+  const categories = (c.category || []).map((k) => (k && (str(k.text) || (k.coding && k.coding[0] && str(k.coding[0].display || k.coding[0].code)))) || "").filter(Boolean);
+  const scope = CONSENT_SCOPE[scopeCode] || "other";
+  const decision = c.decision === "permit" ? (c.status === "inactive" ? "withdrawn" : "granted") : "refused";
+  const detail = [scope === "other" && scopeText ? `Scope as sent: ${scopeText}` : null, categories.length ? `Category: ${categories.join("; ")}` : null, c.performer ? `Decided by (as sent): ${c.performer}` : "Giver not stated by the sender", c.policy && str(c.policy.text) ? `Policy: ${c.policy.text}` : null].filter(Boolean).join(". ");
+  const record = PatientConsent({
+    id: sourceId(system, "consent", c.id), patientId, scope, decision, detail,
+    givenBy: "patient", giverName: c.performer || null, capacity: null,
+    recordedBy: `external:${system}`, recordedAt: c.dateTime || now,
+    validFrom: c.period && c.period.start ? c.period.start : null, validUntil: c.period && c.period.end ? c.period.end : null,
+  });
+  /* The constructor stamps its own native source; an imported consent must say where it came from,
+   * so the record's meta (which every ownership and provenance check reads) names the feed. */
+  record.source = { system, sourceId: String(c.id) };
+  record.meta = { recordedAt: now, effectiveAt: c.dateTime || now, amendedAt: null, source: { system, sourceId: String(c.id), importedAt: now }, derivedFrom: [] };
+  record.externalStatus = c.status || null;
+  return record;
+}
 
 /** PURE. Whether the feature is on. Absent config is OFF. */
 function inboundEnabled(config) {
@@ -142,6 +175,7 @@ const CODE_FIELDS = Object.freeze({
   Condition: { code: "code", system: "codeSystem", display: "display" },
   Observation: { code: "code", system: "codeSystem", display: "display" },
   MedicationOrder: { code: "drugCode", system: "drugCodeSystem", display: "drug" },
+  MedicationAdministration: { code: "drugCode", system: "drugCodeSystem", display: "drug" },
   AllergyIntolerance: { code: "substance", system: "substanceCodeSystem", display: "substance" },
   DiagnosticReport: { code: "code", system: "codeSystem", display: "code" },
   ServiceRequest: { code: "code", system: "codeSystem", display: "display" },
@@ -250,9 +284,9 @@ function partitionConflicts(entities, currentOf, system) {
   return { writable, conflicts };
 }
 
-/** Patient first, then encounters, then everything that points at them. */
-const ORDER = { Patient: 0, Encounter: 1 };
-const byDependency = (a, b) => (ORDER[a.resourceType] ?? 2) - (ORDER[b.resourceType] ?? 2);
+/** Patient first, then encounters, then orders, then everything that points at them. */
+const ORDER = { Patient: 0, Encounter: 1, MedicationOrder: 2, ServiceRequest: 2 };
+const byDependency = (a, b) => (ORDER[a.resourceType] ?? 3) - (ORDER[b.resourceType] ?? 3);
 
 /** PURE. The exception record. The payload is the bundle as received, so nothing is lost, and the
  *  request context travels with it so the message can be re-driven exactly as it arrived. */
@@ -379,6 +413,15 @@ async function ingestFhir(request, env, ctx) {
   const txDeps = { config: ctx.terminology || null, kv: env && env.WSQ_TX_KV, fetchImpl: ctx.fetchImpl || (typeof fetch === "function" ? makeSafeFetch(fetch) : null) };
   let entities = await Promise.all((mapped.entities || []).map((e) => markTerminologyWithService(e, txDeps)));
   const issues = [...(mapped.issues || []), ...problems.filter((p) => p.reason !== REASON.INVALID).map((p) => ({ code: "FHIR_UNSUPPORTED_TYPE", message: p.detail }))];
+  /* Consent is a governance record owned by consent.js, not a clinical entity the adapter builds; it
+   * is mapped here from the same SCCM bundle, for the same patient, under the same feed. */
+  const importedPatient = entities.find((e) => e.resourceType === "Patient");
+  const nowIso = new Date().toISOString();
+  for (const c of sccm.consents || []) {
+    const rec = importedPatient ? consentFromSccm(c, importedPatient.id, adapterSystem, nowIso) : null;
+    if (rec) entities.push(rec);
+    else issues.push({ code: "SCCM_CONSENT_UNDECIDED", message: `consent ${c && c.id} carries no decision (status ${c && c.status}) and was not written` });
+  }
   const hadMrn = !(mapped.issues || []).some((i) => i.code === "SCCM_PATIENT_NO_MRN");
 
   /* REPLAY IS DECIDED BY CONTENT, NEVER BY AN ID. A resource's id is stable across updates by

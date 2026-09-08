@@ -32,6 +32,14 @@ test("A HELD OR REFUSED DOSE IS NOT A CHARGE, and the patient is the one who wou
   assert.deepEqual(HAPPENED.MedicationAdministration, ["administered"]);
 });
 
+test("A DOSE ANOTHER HOSPITAL GAVE IS NOT THIS HOSPITAL'S CHARGE, and it is named as seen, not silently absent", () => {
+  const theirs = adm({ id: "his-mar-1", meta: { source: { system: "fhir-partner-his", sourceId: "MA1" } } });
+  const ours = adm({ meta: { source: { system: "wardsynq-native", sourceId: null } } });
+  const { items, skipped } = capturableFrom({ MedicationAdministration: [theirs, ours], DiagnosticReport: [{ id: "their-rep", status: "final", code: "CXR", meta: { source: { system: "fhir-partner-his" } } }] });
+  assert.deepEqual(items.map((i) => i.sourceId), ["mar-1"], "only ours is an item, even though both are administered");
+  assert.deepEqual(skipped.map((s) => [s.sourceId, s.reason, s.system]), [["his-mar-1", "external_source", "fhir-partner-his"], ["their-rep", "external_source", "fhir-partner-his"]]);
+});
+
 test("A PRELIMINARY REPORT IS NOT A COMPLETED TEST", () => {
   /* Billing a preliminary result means billing again when it finalises, or never correcting it if
    * the result is withdrawn. */

@@ -32,7 +32,7 @@
 import { GovernanceError } from "../../wardsynq/wardsynq-actors.js";
 import { VersionConflictError } from "./repository.js";
 import { resolveClinicalActor } from "./actor.js";
-import { RecordService } from "./service.js";
+import { RecordService, isExternalRecord } from "./service.js";
 import { AuthError, PermissionError } from "../_connect/permission.js";
 import { priorityRank } from "./ward-order.js";
 
@@ -271,7 +271,8 @@ async function collectionList(request, env, ctx) {
   }
 
   const requests = (orders || [])
-    .filter((o) => o && o.status !== "revoked" && o.status !== "completed")
+    // An order another hospital placed is on this chart for the record, not for this ward's phlebotomist.
+    .filter((o) => o && o.status !== "revoked" && o.status !== "completed" && !isExternalRecord(o))
     .map((o) => ({
       serviceRequestId: o.id, code: o.code, display: o.display || o.code, category: o.category || null,
       priority: o.priority || "routine",

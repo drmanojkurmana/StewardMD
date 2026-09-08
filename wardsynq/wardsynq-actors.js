@@ -114,6 +114,35 @@ const INSTRUCTION_TYPES = Object.freeze([
  */
 const HUMAN_ORIGINATED = Object.freeze(["PrescriptionTransmission"]);
 
+/**
+ * THE ONE NARROW GRANT the comment above said would be needed, made explicit rather than the rule
+ * silently widened (2026-09-08, inbound exchange).
+ *
+ * A dose ANOTHER hospital gave is a record of fact, like an encounter or a laboratory value, and
+ * filing it is exactly what a feed is for. It is a record of fact ONLY when every one of these
+ * holds, and each is a distinct way the same row could instead be an instruction to this ward:
+ *   - the actor is an ADAPTER. Never an AI, whatever it runs on behalf of.
+ *   - the row is stamped from an external source (meta.source.system, not wardsynq-native).
+ *   - its status is past tense: administered, cancelled or held. Never ordered/scanned, which are
+ *     the states this eMAR acts on next.
+ *   - the order it answers is STRUCTURALLY not this hospital's: an id the same source issued, or the
+ *     explicit external:<system> marker. Every eMAR read that counts or schedules a dose keys on
+ *     orderId, so a row that can never name a native order can never make a due dose look given.
+ *   - whoever gave it is named as external. A feed cannot say a nurse here did it.
+ */
+const EXTERNAL_DOSE_STATES = Object.freeze(["administered", "cancelled", "held"]);
+function isExternalDoseRecord(actor, entity) {
+  if (!actor || actor.kind !== KIND.ADAPTER) return false;
+  if (!entity || entity.resourceType !== "MedicationAdministration") return false;
+  const system = entity.meta && entity.meta.source && entity.meta.source.system;
+  if (!system || system === "wardsynq-native") return false;
+  if (!EXTERNAL_DOSE_STATES.includes(entity.status)) return false;
+  const orderId = String(entity.orderId || "");
+  if (!(orderId.startsWith(`${system}-`) || orderId.startsWith(`external:${system}`))) return false;
+  if (!String(entity.administeredBy || "").startsWith(`external:${system}`)) return false;
+  return true;
+}
+
 class GovernanceError extends Error {
   /**
    * Carries its reasons as DATA, not only flattened into the message.
@@ -254,7 +283,7 @@ function authoriseWrite(actor, entity, ctx) {
   //    Scoped to instruction types rather than to any non-draft status: see INSTRUCTION_TYPES for
   //    why, and for the dangling-encounter defect that scoping it wrongly produced.
   const isInstruction = INSTRUCTION_TYPES.includes(entity.resourceType);
-  if (claimsActive && isInstruction && !can(actor, TIER.EXECUTE)) {
+  if (claimsActive && isInstruction && !can(actor, TIER.EXECUTE) && !isExternalDoseRecord(actor, entity)) {
     reasons.push({
       code: "EXECUTE_DENIED",
       message: `${actor.kind} actor ${actor.id} holds ${actor.tier} and cannot commit a ${entity.resourceType} with status "${entity.status}"`,
@@ -435,7 +464,7 @@ class GovernedStore {
 }
 
 export {
-  TIER, LADDER, KIND, CEILING, DEVICE_WRITABLE, INSTRUCTION_TYPES, HUMAN_ORIGINATED,
+  TIER, LADDER, KIND, CEILING, DEVICE_WRITABLE, INSTRUCTION_TYPES, HUMAN_ORIGINATED, EXTERNAL_DOSE_STATES, isExternalDoseRecord,
   GovernanceError, GovernedStore,
   makeActor, can, canRead, inScope, effectiveTier, authoriseWrite, rank,
 };

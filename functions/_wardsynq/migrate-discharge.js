@@ -32,7 +32,7 @@ import { Encounter, ClinicalNote } from "../../wardsynq/wardsynq-model.js";
 import { GovernanceError } from "../../wardsynq/wardsynq-actors.js";
 import { VersionConflictError } from "./repository.js";
 import { resolveClinicalActor } from "./actor.js";
-import { RecordService } from "./service.js";
+import { RecordService, isExternalRecord } from "./service.js";
 import { AuthError, PermissionError } from "../_connect/permission.js";
 import { VITAL_CODES } from "./migrate-vitals.js";
 import { problemsForSummary } from "./migrate-problem.js";
@@ -210,7 +210,12 @@ async function draftDischargeSummary(request, env, ctx) {
     return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), written: 0 };
   }
 
-  // Only this admission's activity belongs in this admission's summary.
+  // Only this admission's activity belongs in this admission's summary, and only native records
+  // (a fed-in external Medication* / ServiceRequest record must never appear as ours).
+  const native = (rows) => (rows || []).filter((r) => r && !isExternalRecord(r));
+  orders = native(orders);
+  administrations = native(administrations);
+  serviceRequests = native(serviceRequests);
   const mine = (rows) => (rows || []).filter((x) => x && (x.encounterId === encounterId || x.id === encounterId));
   const assembled = assembleDischargeSummary({
     encounter, patient,
@@ -354,8 +359,9 @@ async function dischargePatient(request, env, ctx) {
   let inFlight = [];
   try {
     const orders = (await svc.byPatient("MedicationOrder", current.patientId).catch(() => []))
-      .filter((o) => o && o.encounterId === encounterId);
-    const admins = await svc.byPatient("MedicationAdministration", current.patientId).catch(() => []);
+      .filter((o) => o && !isExternalRecord(o) && o.encounterId === encounterId);
+    const admins = (await svc.byPatient("MedicationAdministration", current.patientId).catch(() => []))
+      .filter((a) => a && !isExternalRecord(a));
     inFlight = (admins || [])
       .filter((a) => a && orders.some((o) => o.id === a.orderId))
       .filter((a) => ["ordered", "verified", "dispensed", "scanned", "held"].includes(a.status))
@@ -446,6 +452,9 @@ async function readDischargeSummary(request, env, ctx) {
       svc.get("MedicationReconciliation", reconciliationIdFor(encounterId, "admission")).catch(() => null),
       svc.get("ClinicalNote", dischargeSummaryIdFor(encounterId)).catch(() => null),
     ]);
+    orders = (orders || []).filter((r) => r && !isExternalRecord(r));
+    administrations = (administrations || []).filter((r) => r && !isExternalRecord(r));
+    serviceRequests = (serviceRequests || []).filter((r) => r && !isExternalRecord(r));
   } catch (e) {
     return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message) };
   }

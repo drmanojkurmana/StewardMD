@@ -10,7 +10,8 @@ export function assertConnector(c) {
   const need = c.meta.profile === "event" ? EVENT_METHODS : PULL_METHODS;
   const missing = need.filter((m) => typeof c[m] !== "function");
   if (missing.length) throw new Error("connector missing method(s): " + missing.join(", "));
-  if (c.meta.sccmVersion !== "1.0") throw new Error("connector must declare sccmVersion 1.0");
+  // SCCM 1.x: a minor is additive, so a connector declaring 1.0 still emits (through bundle()) and a consumer of 1.x still reads.
+  if (!/^1\.\d+$/.test(String(c.meta.sccmVersion || ""))) throw new Error("connector must declare an sccmVersion of 1.x");
 }
 
 const AUDIT_ALLOW = new Set(AUDIT_ALLOW_LIST);

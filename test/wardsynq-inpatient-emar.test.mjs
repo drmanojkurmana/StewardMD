@@ -505,6 +505,53 @@ test("the auto maker assembles the summary from the record and invents nothing",
   assert.equal(note.aiDrafted, false, "assembled from the record, not generated");
 });
 
+/* A feed's MedicationOrder/MedicationAdministration/ServiceRequest can land on this patient's chart
+ * (fhir-inbound.js) with the same patientId as this admission - and, by coincidence or forgery, the
+ * same encounterId too, which is the one case the encounterId filter alone does not catch. It must
+ * never be read as this hospital's own: not in the discharge summary, and not as a dose this ward
+ * left mid-flight. */
+test("a fed-in Medication*/ServiceRequest record never appears as this admission's own, in the discharge summary or the in-flight dose check", async () => {
+  seedHospital();
+  const { ord, patient, adm } = await admittedPatientOnDrug();
+  const mar = (action, extra) => as(NURSE, "/ward/mar", "POST", { orgId: ORG, action, orderId: ord.orderId, dueAt: DUE, patient, ...extra });
+  await mar("verify"); await mar("dispense");
+  await mar("scan", { scan: { patientBarcode: patient.mrn, drugBarcode: "Paracetamol 500mg", dose: { value: 500, unit: "mg" }, route: "oral" } });
+  await mar("administer");
+
+  const EXT = { system: "fhir-partner-his", sourceId: "ext-1", importedAt: "2026-09-07T09:00:00.000Z" };
+  await RECORD.append(TENANT_ROW.id, [{
+    resourceType: "MedicationOrder", id: "ext-rx-1", version: 1, patientId: adm.patientId, encounterId: adm.encounterId,
+    drug: "Warfarin 5mg", status: "active", dose: { value: 5, unit: "mg" }, route: "oral", frequency: "OD",
+    meta: { recordedAt: EXT.importedAt, effectiveAt: EXT.importedAt, source: EXT },
+  }], { actor: "test" });
+  await RECORD.append(TENANT_ROW.id, [{
+    resourceType: "MedicationAdministration", id: "ext-mar-1", version: 1, patientId: adm.patientId, encounterId: adm.encounterId,
+    orderId: "ext-rx-1", status: "verified",
+    meta: { recordedAt: EXT.importedAt, effectiveAt: EXT.importedAt, source: EXT },
+  }], { actor: "test" });
+  await RECORD.append(TENANT_ROW.id, [{
+    resourceType: "ServiceRequest", id: "ext-sr-1", version: 1, patientId: adm.patientId, encounterId: adm.encounterId,
+    display: "MRI Brain", code: "MRI Brain", status: "active",
+    meta: { recordedAt: EXT.importedAt, effectiveAt: EXT.importedAt, source: EXT },
+  }], { actor: "test" });
+
+  const out = await as(DOCTOR, "/ward/discharge", "POST", { orgId: ORG, encounterId: adm.encounterId, dischargedAt: "2026-09-09T08:00:00.000Z" });
+  assert.equal(out.__status, 200, JSON.stringify(out));
+  assert.equal(out.dosesInFlight.length, 0, "the feed's own unfinished dose is not this hospital's to report");
+
+  const draft = await as(DOCTOR, "/ward/discharge-summary", "POST", { orgId: ORG, encounterId: adm.encounterId });
+  assert.equal(draft.__status, 200, JSON.stringify(draft));
+  assert.doesNotMatch(draft.sections.medications, /Warfarin/, "a fed-in order is not this hospital's medication list");
+  assert.doesNotMatch(draft.sections.investigations, /MRI Brain/, "nor a fed-in service request its investigation list");
+  assert.match(draft.sections.medications, /Paracetamol 500mg/, "the real order is still there");
+  assert.match(draft.sections.medications, /doses administered on this admission: 1/, "and its count is not inflated by the feed's administration");
+
+  const read = await as(NURSE, `/ward/discharge-summary?orgId=${ORG}&encounterId=${adm.encounterId}`);
+  assert.equal(read.__status, 200, JSON.stringify(read));
+  assert.doesNotMatch(read.assembled.medications, /Warfarin/);
+  assert.doesNotMatch(read.assembled.investigations, /MRI Brain/);
+});
+
 test("a discharge summary is signed as its own version, and a signed one is not redrafted", async () => {
   seedHospital();
   const { adm } = await admittedPatientOnDrug();
@@ -4484,6 +4531,77 @@ test("FHIR terminology: $validate-code answers from the seed, the hospital's own
   } finally { globalThis.fetch = realFetch; }
 });
 
+test("FHIR inbound: a dose given elsewhere, an order placed elsewhere and a consent taken elsewhere are filed through SCCM 1.1, exported conformantly, and never bill, never reach the collection worklist, never match a result here", async () => {
+  seedHospital(); enableInboundFhir();
+  const org = docs.get(`q_orgs/${ORG}`);
+  org.fields.wardsynq = { ...org.fields.wardsynq, tariff: { currency: "INR", items: { 6809: { price: 10, display: "Metformin dose" }, "Chest X-ray": { price: 500 } } } };
+  docs.set(`q_orgs/${ORG}`, org);
+  const b = partnerBundle({ patientId: "HIS-PAT-31", mrn: "HIS-MRN-31", suffix: "-31" });
+  b.entry.push(
+    { resource: { resourceType: "MedicationAdministration", id: "HIS-MA-1", status: "completed", medicationCodeableConcept: { coding: [{ system: "http://www.nlm.nih.gov/research/umls/rxnorm", code: "6809", display: "Metformin" }] }, subject: { reference: "Patient/HIS-PAT-31" }, effectiveDateTime: "2026-08-02T08:00:00Z", performer: [{ actor: { display: "Nurse Elsewhere" } }], request: { reference: "MedicationRequest/HIS-RX-1-31" }, dosage: { text: "500 mg oral", dose: { value: 500, unit: "mg" } } } },
+    { resource: { resourceType: "ServiceRequest", id: "HIS-SR-1", status: "active", intent: "order", code: { text: "Chest X-ray" }, category: [{ text: "Imaging" }], priority: "routine", subject: { reference: "Patient/HIS-PAT-31" }, authoredOn: "2026-08-01T09:00:00Z", requester: { display: "Dr Elsewhere" } } },
+    { resource: { resourceType: "DiagnosticReport", id: "HIS-REP-XR", status: "final", code: { text: "Chest X-ray report" }, subject: { reference: "Patient/HIS-PAT-31" }, basedOn: [{ reference: "ServiceRequest/HIS-SR-1" }], effectiveDateTime: "2026-08-01T12:00:00Z", conclusion: "Clear." } },
+    { resource: { resourceType: "Consent", id: "HIS-CON-1", status: "active", scope: { coding: [{ system: "http://terminology.hl7.org/CodeSystem/consentscope", code: "treatment" }] }, category: [{ text: "General consent" }], patient: { reference: "Patient/HIS-PAT-31" }, dateTime: "2026-08-01T08:00:00Z", performer: [{ display: "The patient" }], provision: { type: "permit" } } },
+    { resource: { resourceType: "Consent", id: "HIS-CON-2", status: "proposed", scope: { text: "research" }, category: [{ text: "Research" }], patient: { reference: "Patient/HIS-PAT-31" } } },
+  );
+  const res = await pushFhir(DOCTOR, `/ward/fhir?orgId=${ORG}`, b);
+  const text = await res.text();
+  assert.equal(res.status, 200, text);
+  const out = JSON.parse(text);
+  assert.ok(out.meta.tag.some((t) => /HIS-CON-2/.test(t.display || t.code) || /HIS-CON-2/.test(JSON.stringify(t))), "the undecided consent is named, not filed: " + JSON.stringify(out.meta.tag).slice(0, 300));
+
+  const pid = "fhir-partner-his-pat-his-pat-31";
+  const mar = await RECORD.latest(TENANT_ROW.id, "MedicationAdministration", "fhir-partner-his-mar-his-ma-1");
+  assert.ok(mar, "the dose is on the chart: " + JSON.stringify(out.entry.map((e) => e.response).filter((r) => !/^20/.test(r.status))).slice(0, 900));
+  assert.equal(mar.status, "administered");
+  assert.equal(mar.orderId, "fhir-partner-his-rx-his-rx-1-31", "against the feed's own order");
+  assert.equal(mar.administeredBy, "external:fhir-partner-his:Nurse Elsewhere");
+  assert.equal(mar.meta.source.system, "fhir-partner-his");
+  assert.equal(mar.writtenBy.id, "adapter:fhir-partner-his");
+  const sr = await RECORD.latest(TENANT_ROW.id, "ServiceRequest", "fhir-partner-his-sr-his-sr-1");
+  assert.equal(sr.status, "draft"); assert.equal(sr.category, "imaging"); assert.equal(sr.requesterId, "external:fhir-partner-his");
+  const rep = await RECORD.latest(TENANT_ROW.id, "DiagnosticReport", "fhir-partner-his-dr-his-rep-xr");
+  assert.equal(rep.serviceRequestId, sr.id);
+  const con = await RECORD.latest(TENANT_ROW.id, "PatientConsent", "fhir-partner-his-consent-his-con-1");
+  assert.ok(con, "the consent is on the chart");
+  assert.equal(con.scope, "treatment"); assert.equal(con.decision, "granted"); assert.equal(con.capacity, null, "capacity is never asserted for a consent taken elsewhere");
+  assert.equal(con.recordedBy, "external:fhir-partner-his"); assert.equal(con.meta.source.system, "fhir-partner-his");
+  assert.equal(await RECORD.latest(TENANT_ROW.id, "PatientConsent", "fhir-partner-his-consent-his-con-2"), null);
+
+  // Exported, each is a conformant resource pointing at the right things.
+  const ev = await (await asRaw(DOCTOR, `/ward/fhir/Patient/${pid}/$everything?orgId=${ORG}`)).json();
+  const types = ev.entry.map((e) => e.resource.resourceType);
+  assert.ok(types.includes("MedicationAdministration") && types.includes("ServiceRequest") && types.includes("Consent"));
+  for (const e of ev.entry) {
+    const r = await asRaw(DOCTOR, `/ward/fhir/${e.resource.resourceType}/$validate?orgId=${ORG}`, "POST", { "Content-Type": "application/fhir+json" }, e.resource);
+    const t = await r.text();
+    assert.equal(r.status, 200, `${e.resource.resourceType}/${e.resource.id}: ${t}`);
+  }
+  const fm = ev.entry.find((e) => e.resource.resourceType === "MedicationAdministration").resource;
+  assert.equal(fm.status, "completed");
+  assert.equal(fm.meta.source, "urn:stewardmd:source:fhir-partner-his");
+  assert.match(fm.request.reference, /^MedicationRequest\//);
+  const fc = ev.entry.find((e) => e.resource.resourceType === "Consent").resource;
+  assert.equal(fc.status, "active"); assert.equal(fc.provision.type, "permit");
+
+  // THE GUARDS. Charges: the dose is seen and named as external, never priced. The collection worklist and the
+  // pending-results list do not carry the foreign order. A result released here cannot be matched to it.
+  const CASHIER = "cash@wsq.test";
+  docs.set(`q_members/${sanitize(ORG)}__${sanitize(idFor(CASHIER))}`, { fields: { orgId: ORG, identity: idFor(CASHIER), role: "cashier", active: true }, updateTime: "t1" });
+  const charges = await as(CASHIER, `/ward/charges?orgId=${ORG}&patientId=${pid}`);
+  assert.equal(charges.__status, 200, JSON.stringify(charges).slice(0, 200));
+  assert.ok(!charges.items.some((i) => i.sourceId === mar.id), "not an item");
+  assert.ok(charges.notCharged.some((s) => s.sourceId === mar.id && s.reason === "external_source" && s.system === "fhir-partner-his"), JSON.stringify(charges.notCharged));
+  assert.ok(!charges.items.some((i) => i.sourceId === rep.id), "nor the foreign report");
+  const coll = await as(NURSE, `/ward/collections?orgId=${ORG}&patientId=${pid}`);
+  assert.equal(coll.__status, 200, JSON.stringify(coll).slice(0, 200));
+  assert.ok(!(coll.requests || []).some((r) => r.serviceRequestId === sr.id), "not on this ward's worklist");
+  const consents = await as(NURSE, `/ward/consents?orgId=${ORG}&patientId=${pid}`);
+  assert.equal(consents.__status, 200);
+  const shown = consents.consents.find((c) => c.consentId === con.id);
+  assert.ok(shown && shown.recordedBy === "external:fhir-partner-his" && shown.status === "granted", JSON.stringify(consents.consents));
+});
+
 test("FHIR ids: a canonical id longer than R4 allows is exported hashed, read back by that hash, searchable by its canonical id, and referenced consistently", async () => {
   seedHospital();
   const { adm } = await admittedPatientOnDrug();
@@ -5105,10 +5223,16 @@ test("ROUND TRIP: WardSynQ -> an external EMR -> WardSynQ, and the clinical cont
   const backText = await back.text();
   assert.equal(back.status, 200, backText);
   const bb = JSON.parse(backText);
-  // The one export-only type is REPORTED as unsupported on the way in, not silently dropped.
-  assert.ok((bb.meta.tag || []).some((t) => /MedicationAdministration is not a resource WardSynQ imports/.test(t.display)), JSON.stringify(bb.meta));
+  // Every exported type comes back in, including the dose we gave: filed as the MIRROR's record of a dose
+  // given elsewhere, against the mirror's own copy of the order, never as a second dose of OUR order.
+  assert.ok(!((bb.meta && bb.meta.tag) || []).some((t) => /MedicationAdministration is not a resource WardSynQ imports/.test(t.display)), JSON.stringify(bb.meta));
   const mirrored = `fhir-mirror-pat-${adm.patientId}`;
   assert.ok(await RECORD.latest(TENANT_ROW.id, "Patient", mirrored));
+  const backDose = bb.entry.map((e) => e.resource).find((r) => r && r.resourceType === "MedicationAdministration");
+  assert.ok(backDose, JSON.stringify(bb.entry.map((e) => e.response)).slice(0, 400));
+  const backDoseRec = await RECORD.latest(TENANT_ROW.id, "MedicationAdministration", backDose.identifier.find((i) => i.system === "urn:stewardmd:record-id").value);
+  assert.ok(backDoseRec.orderId.startsWith("fhir-mirror-rx-"), "the mirror's order, not ours: " + backDoseRec.orderId);
+  assert.ok(backDoseRec.administeredBy.startsWith("external:fhir-mirror"), backDoseRec.administeredBy);
 
   const back$ = await (await asRaw(DOCTOR, `/ward/fhir/Patient/${mirrored}/$everything?orgId=${ORG}`)).json();
   const got = {}; for (const e of back$.entry) (got[e.resource.resourceType] ||= []).push(e.resource);

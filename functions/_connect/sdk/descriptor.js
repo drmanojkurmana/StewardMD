@@ -33,7 +33,8 @@ export function assertDescriptor(d) {
   if (!d || typeof d !== "object") throw new Error("descriptor must be an object");
   if (typeof d.id !== "string" || !d.id) throw new Error("descriptor.id must be a non-empty string");
   if (d.profile !== "pull" && d.profile !== "event") throw new Error("descriptor.profile must be 'pull' or 'event'");
-  if (d.sccmVersion !== "1.0") throw new Error("descriptor.sccmVersion must be '1.0'");
+  // SCCM 1.x: a minor is additive (1.1 added optional collections), so any 1.x descriptor is consumable.
+  if (!/^1\.\d+$/.test(String(d.sccmVersion || ""))) throw new Error("descriptor.sccmVersion must be '1.x'");
   if (!Array.isArray(d.kinds)) throw new Error("descriptor.kinds must be an array");
   if (!LIFECYCLES.includes(d.lifecycle)) throw new Error("descriptor.lifecycle must be one of " + LIFECYCLES.join("|"));
   const c = d.capabilities;
