@@ -605,6 +605,59 @@ const HAZARDS = Object.freeze([
     approver: "Clinical Director of Paediatrics and Lead Paediatric Nurse",
     caveat: "IMPLEMENTED and TESTED, not clinically validated or approved. THE BANDS ARE UNAPPROVED and this matters more here than for adults: a child's normal range is narrow, so a wrong band means a false alarm on every well child or silence on a sick one, and paediatric charts differ between every unit that uses one. The paediatric lead owns these values. NOT modelled: neonatal early warning of any kind, which is refused rather than attempted; PICU-specific scoring; gestational-age correction; growth centiles. Escalation delivery is the transport described under HAZ-DET-01 and carries the same limitation: no real pager, SMS or phone system is integrated in this build.",
   },
+  {
+    id: "HAZ-ONCO-01",
+    source: "LOCAL: not transcribed from the spec's assurance table, which has no oncology row. Added because a chemotherapy administration is a vesicant/dose-error hazard in its own right, and Task 2.6's bridge is the first place WardSynQ records one.",
+    hazard: "A chemotherapy administration recorded without dose lineage or a structured extravasation flag, masking a dosing error or a vesicant injury",
+    initialRisk: "catastrophic x rare",
+    requirement: "A chemotherapy administration must carry the dose actually given, the BSA it was calculated from, and an explicit, structured (never free-text-only) extravasation fact; the same administration retried must not create a duplicate record; the identity it is filed under must resolve to the same canonical patient every other bridge already keys on.",
+    control: {
+      // FULL for what it claims: recording discipline for a fact ONCqis itself already determined.
+      // It does not compute a dose, grade a toxicity, or gate the bedside five-rights act - that
+      // remains wardsynq-meds.js, argued under HAZ-MED-04, run unchanged through the existing
+      // /ward/mar door.
+      kind: "structured documentation gate on an idempotent, identity-resolved bridge record", adequacy: "full",
+      module: "functions/_wardsynq/migrate-oncology.js",
+      summary: "recordChemoAdministration() requires drug, a positive doseGiven and a plan/cycle before it writes anything; extravasation is a structured {occurred, detail} object rather than a bare text field, so whether it happened is a queryable fact rather than something buried in prose; the same cycle/drug/start retried is dispositioned skipped:already_recorded rather than duplicated; the patient it files under is resolved from the bare identifier ONCqis's own store keys on (ghisPatientId) through the SAME patientIdForMrn() every other GHIS-sourced record uses, not a second identity scheme.",
+    },
+    verification: {
+      file: "test/wardsynq-oncology.test.mjs",
+      tests: [
+        "CHEMO ADMINISTRATION: dose lineage, premedications and a structured extravasation field all round-trip; the SAME record retried is idempotent",
+        "LINK: an ONCqis plan resolves its bare ghisPatientId to the SAME canonical patientId every other GHIS-sourced record already keys on",
+        "ADVERSE EVENT: a CTCAE grade is recorded, never computed, and an out-of-range grade is refused",
+      ],
+    },
+    residualRisk: "reduced for documentation completeness and identity; unaddressed for the dose/toxicity CONTENT, which remains ONCqis's own, unverified here",
+    approver: "Head of Oncology and Chief Pharmacist",
+    caveat: "IMPLEMENTED and TESTED, not clinically validated or approved. This gate gives no opinion on whether a dose or a grade is CORRECT: staging, CTCAE grading and dose calculation remain onco-staging.js/onco-ctcae.js/onco-dose.js's sole authority, recorded here and never recomputed. The bedside five-rights act for the actual chemo administration is wardsynq-meds.js, unchanged, argued under HAZ-MED-04. NOT modelled: premedication interaction checking, cumulative lifetime dose limits (e.g. anthracycline ceiling), extravasation TREATMENT protocol.",
+  },
+  {
+    id: "HAZ-CARDIO-01",
+    source: "LOCAL: not transcribed from the spec's assurance table, which has no cardiology row. Added because KardiQ X (Task 2.7) is the first externally-sourced diagnostic AI verdict WardSynQ records, and it is self-declared clinically unvalidated - the specific hazard is a reader mistaking that verdict for a validated finding, not the AI acting.",
+    hazard: "An unvalidated AI ECG interpretation (KardiQ X) presented or read as a validated clinical finding",
+    initialRisk: "catastrophic x occasional",
+    requirement: "Every AI ECG verdict recorded in the canonical record must carry an explicit, structural, non-optional flag stating it is unvalidated and naming its source, never presented as an equal-status finding to a clinician- or lab-verified result; the verdict and any HEART/TIMI score must be recorded exactly as KardiQ X produced them and never recomputed here.",
+    control: {
+      // FULL for what it claims: labelling discipline on a reference record. It is not an AI-EXECUTE
+      // control - KardiQ X commits nothing to the record on its own, a clinician links and records
+      // through the ordinary governed write path, argued under HAZ-AI-01 - and it asserts nothing
+      // about whether KardiQ X's underlying classifier is accurate.
+      kind: "non-optional provenance flag on every recorded reference", adequacy: "full",
+      module: "functions/_wardsynq/migrate-cardiology.js",
+      summary: "recordEcgReference() sets unvalidated: true and source: \"kardiox\" on every ECGReference it writes - not caller-suppliable, not conditional, and not something a request payload can clear. The verdict, HEART score and TIMI score are recorded verbatim from what the caller (KardiQ X's own UI) supplies; nothing here re-interprets an ECG or re-derives a score. Identity is resolved from a bare mrn through the same patientIdForMrn() every other bridge uses, not a parallel scheme.",
+    },
+    verification: {
+      file: "test/wardsynq-cardiology.test.mjs",
+      tests: [
+        "ECG REFERENCE: the AI verdict and HEART/TIMI scores are recorded exactly as KardiQ X produced them, never recomputed - and every reference carries unvalidated:true",
+        "LINK: a KardiQ X record resolves its bare mrn to the SAME canonical patientId every other bridge already keys on",
+      ],
+    },
+    residualRisk: "reduced for mislabelling; unaddressed for the classifier's own diagnostic accuracy, which this file does not and cannot verify",
+    approver: "Clinical Director of Cardiology and AI Clinical Governance Committee",
+    caveat: "IMPLEMENTED and TESTED, not clinically validated or approved. KardiQ X's own documentation (docs/ecg-engine-roadmap.md) states no real-phone-photo performance has ever been measured; this control does not change that, it only ensures the record never hides it. The flag is structural on write, but nothing here yet gates or warns the WARD.JS DISPLAY layer if a future screen were to render the verdict without also rendering the flag - the UI built in this task always shows both together, but that is a UI convention, not a second enforced control, and a future screen must not drop it silently.",
+  },
 ]);
 
 /**
