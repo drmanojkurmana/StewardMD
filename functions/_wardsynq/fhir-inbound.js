@@ -45,11 +45,13 @@ import { normalizeFhir } from "../_connect/connectors/fhir-r4/normalize.js";
 import { sccmAdapter } from "../../wardsynq/adapters/wardsynq-sccm-adapter.js";
 import { makeActor, KIND, TIER, GovernanceError } from "../../wardsynq/wardsynq-actors.js";
 import { findCandidates } from "../../wardsynq/wardsynq-mpi.js";
-import { classifyCoding, unmappedCoding, UNMAPPED, identifierKey } from "./terminology.js";
+import { classifyCoding, unmappedCoding, UNMAPPED, INVALID, identifierKey, validateCode } from "./terminology.js";
+import { validateResource } from "./fhir-validate.js";
+import { makeSafeFetch } from "../_connect/onboard/net.js";
 import { resolveClinicalActor } from "./actor.js";
 import { RecordService, NATIVE_SYSTEM } from "./service.js";
 import { AuthError, PermissionError } from "../_connect/permission.js";
-import { CANONICAL_TYPE, FHIR_TYPE, toFhir, operationOutcome } from "./fhir.js";
+import { CANONICAL_TYPE, FHIR_TYPE, toFhir, operationOutcome, resolveId } from "./fhir.js";
 
 const str = (v) => (v == null ? "" : String(v).trim());
 const slug = (v) => str(v).toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
@@ -164,6 +166,25 @@ function markTerminology(entity) {
   if (!system || ["unspecified", "text", "local", UNMAPPED].includes(system.toLowerCase())) return entity;
   const u = unmappedCoding(system, code, entity[f.display]);
   return { ...entity, [f.system]: u.codeSystem, terminologyStatus: u.terminologyStatus, sourceCoding: u.sourceCoding };
+}
+
+/**
+ * The same rule, then the terminology SERVICE for anything the tables could not settle: a code the
+ * hospital's own lists or its terminology server verify becomes `verified`; one the server says does
+ * not exist is kept VERBATIM beside the record as `invalid` - the sender's clinical fact is filed,
+ * their coding is not vouched for, and nothing is dropped or guessed. deps: { config, kv, fetchImpl }.
+ */
+async function markTerminologyWithService(entity, deps) {
+  const marked = markTerminology(entity);
+  const f = marked && CODE_FIELDS[marked.resourceType];
+  if (!f || marked.terminologyStatus !== "recognised") return marked;
+  const v = await validateCode({ system: marked[f.system], code: marked[f.code], display: marked[f.display] }, deps);
+  if (v.status === "verified") return { ...marked, terminologyStatus: "verified", terminologySource: v.source };
+  if (v.status === INVALID) {
+    const source = { system: str(marked[f.system]), code: str(marked[f.code]), display: str(marked[f.display]) || null };
+    return { ...marked, [f.system]: INVALID, terminologyStatus: INVALID, terminologyNote: v.note || null, sourceCoding: source };
+  }
+  return marked;
 }
 
 /** PURE. Normalised identifier for deterministic comparison. */
@@ -315,6 +336,15 @@ async function ingestFhir(request, env, ctx) {
   const { patient, resources, problems } = splitBundle(ctx.body);
   const fatal = problems.filter((p) => p.reason === REASON.INVALID);
   if (fatal.length) return { ok: false, status: 400, outcome: { resourceType: "OperationOutcome", issue: fatal.map((p) => ({ severity: "error", code: "invalid", diagnostics: p.detail })) } };
+
+  /* CONFORMANCE BEFORE CONTENT. Every resource that will be filed is validated against R4 base (and
+   * any profile the hospital loaded) first; a request with one non-conformant resource is refused
+   * WHOLE as a 422 naming every issue at its path, because half a bundle filed is half a story on a
+   * chart. Unsupported types were named above and are not validated: they are not filed either. */
+  const conformance = [patient, ...resources].filter(Boolean).map((r) => ({ r, v: validateResource(r, { profiles: ctx.profiles || null }) })).filter((x) => !x.v.valid);
+  if (conformance.length) {
+    return { ok: false, status: 422, outcome: { resourceType: "OperationOutcome", issue: conformance.flatMap((x) => x.v.issues.filter((i) => i.severity === "error" || i.severity === "fatal").map((i) => ({ ...i, expression: i.expression.map((p) => `${x.r.resourceType}/${x.r.id}: ${p}`) }))) } };
+  }
   if (!patient && ctx.mode === "bundle") return { ok: false, status: 400, outcome: operationOutcome("error", "required", "a bundle must carry the Patient its resources belong to; a resource with no patient cannot be filed") };
 
   /* A single-resource PUT names its target. The body's id must be the sender's own id for that
@@ -326,6 +356,10 @@ async function ingestFhir(request, env, ctx) {
 
   const { svc, resolved, error } = await open_(request, env, ctx);
   if (error) return { ok: false, ...error };
+  /* A URL names resources by their FHIR id, which for a long canonical id is a hash (fhir-id.js).
+   * Resolved back here, once, so everything below reasons in canonical ids. */
+  if (str(ctx.targetId) && CANONICAL_TYPE[str(ctx.targetType)]) ctx = { ...ctx, targetId: await resolveId(svc, CANONICAL_TYPE[str(ctx.targetType)], ctx.targetId) };
+  if (str(ctx.patientRef)) ctx = { ...ctx, patientRef: await resolveId(svc, "Patient", ctx.patientRef) };
 
   // The SAME normaliser Connect uses, then the SAME adapter, with the sender named as the system.
   let sccm;
@@ -342,7 +376,8 @@ async function ingestFhir(request, env, ctx) {
   try { mapped = await base.normalise(sccm); }
   catch (e) { return { ok: false, status: 422, outcome: operationOutcome("error", "invalid", `could not map: ${str(e && e.message)}`) }; }
 
-  let entities = (mapped.entities || []).map(markTerminology);
+  const txDeps = { config: ctx.terminology || null, kv: env && env.WSQ_TX_KV, fetchImpl: ctx.fetchImpl || (typeof fetch === "function" ? makeSafeFetch(fetch) : null) };
+  let entities = await Promise.all((mapped.entities || []).map((e) => markTerminologyWithService(e, txDeps)));
   const issues = [...(mapped.issues || []), ...problems.filter((p) => p.reason !== REASON.INVALID).map((p) => ({ code: "FHIR_UNSUPPORTED_TYPE", message: p.detail }))];
   const hadMrn = !(mapped.issues || []).some((i) => i.code === "SCCM_PATIENT_NO_MRN");
 
@@ -629,7 +664,7 @@ async function listExceptions(request, env, ctx) {
 
 export {
   EXCEPTION_TYPE, DECISION_TYPE, REASON, RESOLUTION, INBOUND_TYPES, CODE_FIELDS,
-  inboundEnabled, sourceSystemOf, splitBundle, markTerminology, reconcileIdentity, rebind, partitionConflicts,
+  inboundEnabled, sourceSystemOf, splitBundle, markTerminology, markTerminologyWithService, reconcileIdentity, rebind, partitionConflicts,
   ExchangeException, ExchangeIdentityDecision, priorDecision,
   ingestFhir, listExceptions, resolveException,
 };

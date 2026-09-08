@@ -47,7 +47,7 @@ export async function onRequest(context) {
   const migration = { mode: "authoritative", tenantId: String(org.connectTenantId) };
   const base = `${url.origin}/api/fhir/${orgId}`;
   const smart = smartEnabled(cfg) ? { authorize: `${base}/smart/authorize`, token: `${base}/smart/token`, revoke: `${base}/smart/revoke` } : null;
-  const ctx = { migration, config: cfg, base, actorDeps: actorDeps(env), recordDeps: recordDeps(env, migration.tenantId), smart };
+  const ctx = { migration, config: cfg, base, actorDeps: actorDeps(env), recordDeps: recordDeps(env, migration.tenantId), smart, terminology: (org.wardsynq && org.wardsynq.terminology) || null, profiles: (cfg && cfg.profiles) || null };
 
   const sub = parts[1] || "", sub2 = parts[2] || "";
 

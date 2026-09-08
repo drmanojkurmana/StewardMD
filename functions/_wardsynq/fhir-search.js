@@ -76,12 +76,14 @@ const PARAMS = Object.freeze({
     active: { type: "token", get: (r) => r.active },
   },
   Encounter: {
+    identifier: { type: "token", get: (r) => r.identifier, doc: "urn:stewardmd:record-id|<canonical id> finds a resource by its WardSynQ id" },
     status: { type: "token", get: (r) => r.status, system: S.encStatus },
     class: { type: "token", get: (r) => r.class },
     date: { type: "date", get: (r) => r.period && r.period.start },
     subject: { type: "reference", get: (r) => r.subject, target: "Patient" },
   },
   Condition: {
+    identifier: { type: "token", get: (r) => r.identifier },
     code: { type: "token", get: (r) => r.code },
     "clinical-status": { type: "token", get: (r) => r.clinicalStatus },
     "verification-status": { type: "token", get: (r) => r.verificationStatus },
@@ -92,12 +94,14 @@ const PARAMS = Object.freeze({
     "recorded-date": { type: "date", get: (r) => r.recordedDate },
   },
   AllergyIntolerance: {
+    identifier: { type: "token", get: (r) => r.identifier },
     code: { type: "token", get: (r) => r.code },
     "clinical-status": { type: "token", get: (r) => r.clinicalStatus },
     criticality: { type: "token", get: (r) => r.criticality, system: S.criticality },
     date: { type: "date", get: (r) => r.recordedDate },
   },
   Observation: {
+    identifier: { type: "token", get: (r) => r.identifier },
     code: { type: "token", get: (r) => r.code },
     category: { type: "token", get: (r) => r.category },
     status: { type: "token", get: (r) => r.status, system: S.obsStatus },
@@ -106,6 +110,7 @@ const PARAMS = Object.freeze({
     date: { type: "date", get: (r) => r.effectiveDateTime },
   },
   MedicationRequest: {
+    identifier: { type: "token", get: (r) => r.identifier },
     code: { type: "token", get: (r) => r.medicationCodeableConcept },
     medication: { type: "token", get: (r) => r.medicationCodeableConcept },
     status: { type: "token", get: (r) => r.status, system: S.rxStatus },
@@ -116,6 +121,7 @@ const PARAMS = Object.freeze({
     authoredon: { type: "date", get: (r) => r.authoredOn },
   },
   MedicationAdministration: {
+    identifier: { type: "token", get: (r) => r.identifier },
     code: { type: "token", get: (r) => r.medicationCodeableConcept },
     medication: { type: "token", get: (r) => r.medicationCodeableConcept },
     status: { type: "token", get: (r) => r.status, system: S.adminStatus },
@@ -126,6 +132,7 @@ const PARAMS = Object.freeze({
     "effective-time": { type: "date", get: (r) => r.effectiveDateTime },
   },
   ServiceRequest: {
+    identifier: { type: "token", get: (r) => r.identifier },
     code: { type: "token", get: (r) => r.code },
     status: { type: "token", get: (r) => r.status, system: S.srStatus },
     intent: { type: "token", get: (r) => r.intent, system: S.srIntent },
@@ -135,6 +142,7 @@ const PARAMS = Object.freeze({
     authored: { type: "date", get: (r) => r.authoredOn },
   },
   DiagnosticReport: {
+    identifier: { type: "token", get: (r) => r.identifier },
     code: { type: "token", get: (r) => r.code },
     status: { type: "token", get: (r) => r.status, system: S.drStatus },
     encounter: { type: "reference", get: (r) => r.encounter, target: "Encounter" },
@@ -145,6 +153,7 @@ const PARAMS = Object.freeze({
     issued: { type: "date", get: (r) => r.issued },
   },
   DocumentReference: {
+    identifier: { type: "token", get: (r) => r.identifier },
     type: { type: "token", get: (r) => r.type },
     status: { type: "token", get: (r) => r.status, system: S.docStatus },
     encounter: { type: "reference", get: (r) => r.context && r.context.encounter, target: "Encounter" },
@@ -152,6 +161,7 @@ const PARAMS = Object.freeze({
     date: { type: "date", get: (r) => r.date },
   },
   Consent: {
+    identifier: { type: "token", get: (r) => r.identifier },
     status: { type: "token", get: (r) => r.status, system: S.consentStatus },
     scope: { type: "token", get: (r) => r.scope },
     category: { type: "token", get: (r) => r.category },

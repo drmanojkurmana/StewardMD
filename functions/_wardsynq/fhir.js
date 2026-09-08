@@ -32,9 +32,22 @@ import { resolveClinicalActor } from "./actor.js";
 import { RecordService } from "./service.js";
 import { AuthError, PermissionError } from "../_connect/permission.js";
 import { parseSearch, applySearch, paginate, resolveIncludes, resolveRevIncludes, searchBundle, declaredSearch, chainTargets, includeTargets, subset, refsOf, PATIENT_REF, DEFAULT_COUNT, MAX_COUNT, dateClause, dateMatches } from "./fhir-search.js";
-import { SYSTEMS, UNCODED, UNMAPPED, IDENTIFIER_SYSTEMS, systemUri, isUri, coverage } from "./terminology.js";
+import { SYSTEMS, UNCODED, UNMAPPED, INVALID, IDENTIFIER_SYSTEMS, systemUri, isUri, coverage, validateCode, validateCodeParameters } from "./terminology.js";
+import { validateResource, validationOutcome, VALIDATED_TYPES } from "./fhir-validate.js";
+import { makeSafeFetch } from "../_connect/onboard/net.js";
+import { fhirId, hashedId, isHashedId, RECORD_ID_SYSTEM, provenanceId, parseProvenanceId } from "./fhir-id.js";
 
 const str = (v) => (v == null ? "" : String(v).trim());
+
+/* Hashed FHIR ids seen on the way out, so a read by one resolves without a scan when the same
+ * isolate exported it. Bounded; a miss falls back to the governed reads in resolveId(). */
+const ALIASES = new Map();
+const ALIAS_CAP = 20000;
+function remember(fid, canonicalId) {
+  if (fid === canonicalId) return;
+  if (ALIASES.size >= ALIAS_CAP) ALIASES.clear();
+  ALIASES.set(fid, canonicalId);
+}
 
 /* The one registry of vocabularies lives in terminology.js. Kept under this name so nothing that
  * imported it breaks; it is the same table. */
@@ -60,7 +73,7 @@ const EXT_TERMINOLOGY_STATUS = "urn:stewardmd:fhir:extension:terminology-status"
  * said - and is marked with our extension so they can also see we did not verify it. A source
  * system that is not a URI cannot be a FHIR coding at all and stays in the text.
  */
-function codeable(code, codeSystem, display, source) {
+function codeable(code, codeSystem, display, source, status) {
   const c = str(code), d = str(display) || c;
   if (!c && !d) return undefined;
   const system = systemUriFor(codeSystem);
@@ -70,9 +83,12 @@ function codeable(code, codeSystem, display, source) {
   if (source && str(source.code)) {
     const su = systemUri(source.system) || (isUri(source.system) ? str(source.system) : null);
     if (su && !codings.some((x) => x.system === su && x.code === str(source.code))) {
+      /* The status travels with the coding: `unmapped` (a system we do not know), or `invalid` (a
+       * system we know whose server says this code does not exist in it). Either way the receiver
+       * sees the sender's exact words and exactly what we did not vouch for. */
       codings.push(clean({
         system: su, code: str(source.code), display: str(source.display) || undefined,
-        extension: [{ url: EXT_TERMINOLOGY_STATUS, valueCode: UNMAPPED }],
+        extension: [{ url: EXT_TERMINOLOGY_STATUS, valueCode: str(status) === INVALID ? INVALID : UNMAPPED }],
       }));
     }
   }
@@ -104,7 +120,7 @@ function identifier(systemKey, value, extra) {
   return clean({ system: isUri(systemKey) ? str(systemKey) : undefined, type, value: v });
 }
 
-const ref = (type, id) => (str(id) ? { reference: `${type}/${id}` } : undefined);
+const ref = (type, id) => (str(id) ? { reference: `${type}/${fhirId(id)}` } : undefined);
 const clean = (o) => { for (const k of Object.keys(o)) if (o[k] === undefined) delete o[k]; return o; };
 
 /** Our provenance namespace. It is OURS - a URN for a source system WardSynQ recorded - and so not an
@@ -140,7 +156,7 @@ function withMeta(fhir, record) {
 
 function fhirPatient(p) {
   return clean({
-    resourceType: "Patient", id: p.id,
+    resourceType: "Patient", id: fhirId(p.id),
     identifier: (() => {
       const others = (p.identifiers || []).map((i) => (i && i.value ? identifier(i.system, i.value, { type: i.type }) : undefined)).filter(Boolean);
       const srcSystem = str(p.meta && p.meta.source && p.meta.source.system);
@@ -169,7 +185,7 @@ function fhirPatient(p) {
 function fhirEncounter(e) {
   const STATUS = { "in-progress": "in-progress", finished: "finished", cancelled: "cancelled", planned: "planned" };
   return clean({
-    resourceType: "Encounter", id: e.id,
+    resourceType: "Encounter", id: fhirId(e.id),
     status: STATUS[str(e.status)] || "unknown",
     class: e.class === "IPD" ? { system: "http://terminology.hl7.org/CodeSystem/v3-ActCode", code: "IMP", display: "inpatient encounter" }
       : e.class === "OPD" ? { system: "http://terminology.hl7.org/CodeSystem/v3-ActCode", code: "AMB", display: "ambulatory" }
@@ -187,12 +203,12 @@ function fhirCondition(c) {
   const VERIF = { confirmed: "confirmed", provisional: "provisional", differential: "differential", refuted: "refuted" };
   const CLIN = { active: "active", resolved: "resolved", inactive: "inactive" };
   return clean({
-    resourceType: "Condition", id: c.id,
+    resourceType: "Condition", id: fhirId(c.id),
     clinicalStatus: CLIN[str(c.clinicalStatus)] ? { coding: [{ system: "http://terminology.hl7.org/CodeSystem/condition-clinical", code: CLIN[str(c.clinicalStatus)] }] } : undefined,
     // Provisional stays provisional on the way out. A problem list that exported everything as
     // "confirmed" would turn every working diagnosis into a fact at the hospital boundary.
     verificationStatus: VERIF[str(c.verificationStatus)] ? { coding: [{ system: "http://terminology.hl7.org/CodeSystem/condition-ver-status", code: VERIF[str(c.verificationStatus)] }] } : undefined,
-    code: codeable(c.code, c.codeSystem, c.display, c.sourceCoding),
+    code: codeable(c.code, c.codeSystem, c.display, c.sourceCoding, c.terminologyStatus),
     subject: ref("Patient", c.patientId),
     encounter: ref("Encounter", c.encounterId),
     onsetDateTime: str(c.onsetDate) || undefined,
@@ -204,12 +220,12 @@ function fhirCondition(c) {
 
 function fhirAllergy(a) {
   return clean({
-    resourceType: "AllergyIntolerance", id: a.id,
+    resourceType: "AllergyIntolerance", id: fhirId(a.id),
     recordedDate: str(a.meta && a.meta.recordedAt) || undefined,
     clinicalStatus: { coding: [{ system: "http://terminology.hl7.org/CodeSystem/allergyintolerance-clinical", code: str(a.clinicalStatus) === "inactive" ? "inactive" : "active" }] },
     // "unable-to-assess" is a real FHIR value and is what our model already says when nobody knows.
     criticality: ["low", "high", "unable-to-assess"].includes(str(a.criticality)) ? str(a.criticality) : "unable-to-assess",
-    code: codeable(a.substance, a.substanceCodeSystem, a.substance),
+    code: codeable(a.substance, a.substanceCodeSystem, a.substance, a.sourceCoding, a.terminologyStatus),
     patient: ref("Patient", a.patientId),
     reaction: a.reaction || a.severity ? [clean({ manifestation: a.reaction ? [{ text: String(a.reaction) }] : [{ text: "not recorded" }], severity: ["mild", "moderate", "severe"].includes(str(a.severity)) ? str(a.severity) : undefined })] : undefined,
     note: a.reportedText ? [{ text: `Reported as: ${a.reportedText}` }] : undefined,
@@ -222,10 +238,10 @@ function fhirObservation(o) {
     ? { valueQuantity: clean({ value: o.value, unit: str(o.unit) || undefined, system: o.unit ? "http://unitsofmeasure.org" : undefined, code: str(o.unit) || undefined }) }
     : (o.value == null || o.value === "" ? {} : { valueString: String(o.value) });
   return clean({
-    resourceType: "Observation", id: o.id,
+    resourceType: "Observation", id: fhirId(o.id),
     status: "final",
     category: CAT[str(o.category)] ? [{ coding: [{ system: "http://terminology.hl7.org/CodeSystem/observation-category", code: CAT[str(o.category)] }] }] : undefined,
-    code: codeable(o.code, o.codeSystem, o.display, o.sourceCoding),
+    code: codeable(o.code, o.codeSystem, o.display, o.sourceCoding, o.terminologyStatus),
     subject: ref("Patient", o.patientId),
     encounter: ref("Encounter", o.encounterId),
     effectiveDateTime: str((o.meta && o.meta.effectiveAt) || o.effectiveAt) || undefined,
@@ -236,11 +252,11 @@ function fhirObservation(o) {
 function fhirMedicationRequest(m) {
   const STATUS = { active: "active", draft: "draft", "on-hold": "on-hold", cancelled: "cancelled", completed: "completed" };
   return clean({
-    resourceType: "MedicationRequest", id: m.id,
+    resourceType: "MedicationRequest", id: fhirId(m.id),
     status: STATUS[str(m.status)] || "unknown",
     intent: "order",
     authoredOn: str(m.meta && m.meta.recordedAt) || undefined,
-    medicationCodeableConcept: codeable(m.drugCode || m.drug, m.drugCodeSystem, m.drug, m.sourceCoding),
+    medicationCodeableConcept: codeable(m.drugCode || m.drug, m.drugCodeSystem, m.drug, m.sourceCoding, m.terminologyStatus),
     subject: ref("Patient", m.patientId),
     encounter: ref("Encounter", m.encounterId),
     requester: m.prescriberId ? { display: m.prescriberId } : undefined,
@@ -261,7 +277,7 @@ function fhirMedicationAdministration(a) {
   // else is in-flight or stopped, and must not export as "completed".
   const STATUS = { administered: "completed", refused: "not-done", cancelled: "not-done", held: "on-hold" };
   return clean({
-    resourceType: "MedicationAdministration", id: a.id,
+    resourceType: "MedicationAdministration", id: fhirId(a.id),
     status: STATUS[str(a.status)] || "in-progress",
     medicationCodeableConcept: codeable(a.drugCode || a.drug, a.drugCodeSystem, a.drug),
     subject: ref("Patient", a.patientId),
@@ -274,11 +290,11 @@ function fhirMedicationAdministration(a) {
 
 function fhirServiceRequest(s) {
   return clean({
-    resourceType: "ServiceRequest", id: s.id,
+    resourceType: "ServiceRequest", id: fhirId(s.id),
     status: ["active", "completed", "revoked", "draft"].includes(str(s.status)) ? str(s.status) : "unknown",
     intent: "order",
     authoredOn: str(s.meta && s.meta.recordedAt) || undefined,
-    code: codeable(s.code, s.codeSystem, s.display, s.sourceCoding),
+    code: codeable(s.code, s.codeSystem, s.display, s.sourceCoding, s.terminologyStatus),
     subject: ref("Patient", s.patientId),
     encounter: ref("Encounter", s.encounterId),
     requester: s.requesterId ? { display: s.requesterId } : undefined,
@@ -287,9 +303,9 @@ function fhirServiceRequest(s) {
 
 function fhirDiagnosticReport(d) {
   return clean({
-    resourceType: "DiagnosticReport", id: d.id,
+    resourceType: "DiagnosticReport", id: fhirId(d.id),
     status: ["preliminary", "final", "corrected", "cancelled"].includes(str(d.status)) ? str(d.status) : "unknown",
-    code: codeable(d.code, d.codeSystem, d.code, d.sourceCoding),
+    code: codeable(d.code, d.codeSystem, d.code, d.sourceCoding, d.terminologyStatus),
     subject: ref("Patient", d.patientId),
     encounter: ref("Encounter", d.encounterId),
     // The request this answers, so a receiver can close its own loop.
@@ -320,7 +336,7 @@ function fhirDocumentReference(n) {
   // exported as `current` would look like a finished, signed note to everyone downstream.
   const text = noteText(n);
   return clean({
-    resourceType: "DocumentReference", id: n.id,
+    resourceType: "DocumentReference", id: fhirId(n.id),
     status: "current",
     docStatus: n.signedBy ? "final" : "preliminary",
     type: { text: str(n.noteType) || "note" },
@@ -349,7 +365,7 @@ function fhirConsent(c) {
   const SCOPE = { treatment: "treatment", research: "research" };
   const scopeCode = SCOPE[str(c.scope)] || "patient-privacy";
   return clean({
-    resourceType: "Consent", id: c.id,
+    resourceType: "Consent", id: fhirId(c.id),
     status: STATUS[str(c.decision)] || "unknown",
     scope: { coding: [{ system: "http://terminology.hl7.org/CodeSystem/consentscope", code: scopeCode }] },
     // Our scope vocabulary is ours; it goes out as text, never dressed as a standard category.
@@ -384,10 +400,13 @@ function fhirProvenance(record) {
   const version = record.version === undefined || record.version === null ? null : Number(record.version);
   const src = m.source || {};
   const external = str(src.system) && str(src.system) !== "wardsynq-native";
+  const fid = fhirId(record.id);
+  remember(fid, str(record.id));
+  remember(hashedId(record.id), str(record.id)); // a Provenance id may carry the hashed form even when the resource id did not need it
   return clean({
     resourceType: "Provenance",
-    id: `${fhirType}-${record.id}-v${version === null ? "0" : version}`,
-    target: [{ reference: version === null ? `${fhirType}/${record.id}` : `${fhirType}/${record.id}/_history/${version}` }],
+    id: provenanceId(fhirType, record.id, version),
+    target: [{ reference: version === null ? `${fhirType}/${fid}` : `${fhirType}/${fid}/_history/${version}` }],
     recorded: str(by.at) || str(m.recordedAt) || undefined,
     activity: { coding: [{ system: "http://terminology.hl7.org/CodeSystem/v3-DataOperation", code: version === 1 ? "CREATE" : "UPDATE" }] },
     agent: [clean({
@@ -434,7 +453,36 @@ const CANONICAL_TYPE = Object.freeze(Object.fromEntries(Object.entries(FHIR_TYPE
 /** PURE. One canonical record to FHIR, with meta, or null when this file has no honest mapping. */
 function toFhir(record) {
   const m = record && MAPPERS[record.resourceType];
-  return m ? withMeta(m(record), record) : null;
+  if (!m) return null;
+  const f = withMeta(m(record), record);
+  /* The canonical id always travels, as an Identifier under our own system: it is the record's real
+   * key, and when the FHIR id had to be hashed to fit R4's 64 characters it is the only way a
+   * receiver (or we, on a read) gets back to it. */
+  const fid = fhirId(record.id);
+  remember(fid, str(record.id));
+  const own = { system: RECORD_ID_SYSTEM, value: str(record.id) };
+  f.identifier = [...(f.identifier || []).filter((i) => !(i && i.system === RECORD_ID_SYSTEM)), own];
+  return f;
+}
+
+/**
+ * A FHIR id back to the canonical id it stands for, through the governed reads: verbatim when it
+ * was never hashed, from the alias cache when this isolate exported it, else by scanning what the
+ * actor may read (the patient's compartment when one is known, otherwise the latest SEARCH_POOL of
+ * the type). ponytail: pool scan; a persisted alias index if a hospital's roster outgrows it.
+ */
+async function resolveId(svc, canonical, fid, hint) {
+  const id = str(fid);
+  if (!id || !isHashedId(id)) return id;
+  if (ALIASES.has(id)) return ALIASES.get(id);
+  const rows = [];
+  try {
+    if (hint && str(hint.patientId) && canonical !== "Patient") rows.push(...((await svc.byPatient(canonical, str(hint.patientId))) || []));
+    if (!rows.length) rows.push(...((await svc.list(canonical, SEARCH_POOL)) || []));
+  } catch { /* unreadable is unresolved */ }
+  const hit = rows.find((r) => r && hashedId(r.id) === id);
+  if (hit) { remember(id, str(hit.id)); return str(hit.id); }
+  return id;
 }
 
 /** PURE. A searchset Bundle. */
@@ -467,8 +515,10 @@ function capabilityStatement(opts) {
     /* Said in the document itself, where a machine and a human both see it. WardSynQ's model has
      * been FHIR-SHAPED since P0, and shaped is not conformant. */
     implementation: {
-      description: "WardSynQ clinical record, read-only FHIR R4 export. Not profile-validated; "
-        + "no claim of conformance to US Core or any national profile. Concepts WardSynQ holds "
+      description: "WardSynQ clinical record, FHIR R4. Every resource this server emits validates against the R4 base "
+        + "StructureDefinition of its type ($validate is offered so a partner can check that for themselves); no implementation "
+        + "guide is carried, so conformance to US Core or a national profile is neither claimed nor checked unless the hospital "
+        + "has loaded that profile's constraints. Concepts WardSynQ holds "
         + "without a coding are emitted as CodeableConcept.text with no coding, never as a guessed code. "
         + `Verified codes carried by this build: ${Object.entries(coverage()).map(([u, n]) => `${n} in ${u}`).join(", ") || "none"}. `
         + "A coding imported from another system that WardSynQ did not verify is emitted under the sender's "
@@ -512,9 +562,79 @@ function capabilityStatement(opts) {
           documentation: "Derived from every version's writtenBy and meta.source. target is required on search.",
         }),
       ],
-      operation: [{ name: "everything", definition: "http://hl7.org/fhir/OperationDefinition/Patient-everything" }],
+      operation: [
+        { name: "everything", definition: "http://hl7.org/fhir/OperationDefinition/Patient-everything", documentation: "Patient/{id}/$everything: _since, _type, _count, _page, _summary, _elements, _total" },
+        { name: "validate", definition: "http://hl7.org/fhir/OperationDefinition/Resource-validate", documentation: `POST {Type}/$validate or $validate (a Bundle validates every entry) with the resource as the body, or GET {Type}/{id}/$validate for a stored resource. R4 base structure, cardinality, primitives, choice types, required bindings and invariants for ${VALIDATED_TYPES.join(", ")}; codings are checked with the terminology service; profiles named in meta.profile are evaluated only when the hospital has loaded them (wardsynq.fhir.profiles), and said so otherwise.` },
+        { name: "validate-code", definition: "http://hl7.org/fhir/OperationDefinition/CodeSystem-validate-code", documentation: "GET CodeSystem/$validate-code?url=<system>&code=<code>[&display=]. Answers verified (seed tables, the hospital's code lists, or its terminology server), invalid (the server says no), recognised (a real system, not verified) or unmapped (a system this server does not know). Nothing is guessed." },
+      ],
     }],
   };
+}
+
+/* ---- operations: $validate and $validate-code ---------------------------------------------- */
+
+/** The terminology service's dependencies for one request. `fetchImpl` may be injected by a test. */
+function txDeps(env, ctx) {
+  return { config: (ctx && ctx.terminology) || null, kv: env && env.WSQ_TX_KV, fetchImpl: (ctx && ctx.fetchImpl) || (typeof fetch === "function" ? makeSafeFetch(fetch) : null) };
+}
+
+/**
+ * Validates one resource fully: structure and profiles (pure), then every coding with a system
+ * through the terminology service. An `invalid` code is an error; a code merely not verified is an
+ * information issue, because "this server cannot vouch for it" is not "it is wrong".
+ */
+async function validateFully(resource, env, ctx) {
+  const v = validateResource(resource, { profiles: (ctx && ctx.profiles) || null });
+  const deps = txDeps(env, ctx);
+  const seen = new Map();
+  for (const c of v.codings) {
+    const key = `${c.system}|${c.code}`;
+    if (!seen.has(key)) seen.set(key, await validateCode(c, deps));
+    const t = seen.get(key);
+    if (t.status === INVALID) v.issues.push({ severity: "error", code: "code-invalid", diagnostics: `${c.system}|${c.code}: ${t.note || "not a code in this system"}`, expression: [c.path] });
+    else if (t.status === "recognised") v.issues.push({ severity: "information", code: "informational", diagnostics: `${c.system}|${c.code}: ${t.note || "not verified by this server"}`, expression: [c.path] });
+    else if (t.status === UNMAPPED) v.issues.push({ severity: "information", code: "informational", diagnostics: `${c.system}: ${t.note || "not a vocabulary this server knows"}`, expression: [c.path] });
+    else if (t.display && c.display && t.display.toLowerCase() !== c.display.toLowerCase()) v.issues.push({ severity: "warning", code: "informational", diagnostics: `${c.system}|${c.code}: display "${c.display}" differs from the verified display "${t.display}"`, expression: [`${c.path}.display`] });
+  }
+  v.valid = !v.issues.some((i) => i.severity === "error" || i.severity === "fatal");
+  return v;
+}
+
+/**
+ * $validate. ctx: { migration, body?, type?, id?, profiles?, terminology?, fetchImpl?, actorDeps, recordDeps }
+ * With a body: validates it (the URL type, when given, must match). With an id: validates the stored
+ * resource's export, through the governed read. 200 when valid, 422 with the issues when not.
+ */
+async function validateOperation(request, env, ctx) {
+  const mig = ctx.migration;
+  if (!mig || mig.mode === "off") return { ok: false, status: 404, outcome: operationOutcome("error", "not-supported", "this hospital does not run the WardSynQ record") };
+  let resource = ctx.body;
+  if (resource && resource.resourceType === "Parameters" && Array.isArray(resource.parameter)) {
+    const p = resource.parameter.find((x) => x && x.name === "resource" && x.resource);
+    resource = p ? p.resource : null;
+  }
+  if (str(ctx.id)) {
+    const r = await readResource(request, env, { ...ctx, searchParams: "" });
+    if (!r.ok) return r;
+    resource = r.resource;
+  }
+  if (!resource || typeof resource !== "object") return { ok: false, status: 400, outcome: operationOutcome("error", "required", "send the resource as the body, or as Parameters.parameter[name=resource].resource") };
+  if (str(ctx.type) && str(resource.resourceType) !== str(ctx.type)) return { ok: false, status: 400, outcome: operationOutcome("error", "invalid", `body is ${resource.resourceType}, URL says ${ctx.type}`) };
+  const v = await validateFully(resource, env, ctx);
+  return { ok: true, status: v.valid ? 200 : 422, valid: v.valid, outcome: validationOutcome(v) };
+}
+
+/** CodeSystem/$validate-code. ctx: { migration, searchParams, terminology?, fetchImpl? } */
+async function validateCodeOperation(request, env, ctx) {
+  const mig = ctx.migration;
+  if (!mig || mig.mode === "off") return { ok: false, status: 404, outcome: operationOutcome("error", "not-supported", "this hospital does not run the WardSynQ record") };
+  const params = ctx.searchParams instanceof URLSearchParams ? ctx.searchParams : new URLSearchParams(ctx.searchParams || "");
+  let system = str(params.get("url") || params.get("system")), code = str(params.get("code")), display = str(params.get("display"));
+  const coding = params.get("coding");
+  if (!code && coding) { try { const c = JSON.parse(coding); system = str(c.system); code = str(c.code); display = str(c.display); } catch { /* named below */ } }
+  if (!system || !code) return { ok: false, status: 400, outcome: operationOutcome("error", "required", "url (the code system) and code are required") };
+  const v = await validateCode({ system, code, display }, txDeps(env, ctx));
+  return { ok: true, status: 200, parameters: validateCodeParameters(v), validation: v };
 }
 
 async function open(request, env, ctx) {
@@ -570,8 +690,8 @@ async function patientEverything(request, env, ctx) {
   const mig = ctx.migration;
   if (!mig || mig.mode === "off") return { ok: false, status: 404, outcome: operationOutcome("error", "not-supported", "this hospital does not run the WardSynQ record") };
 
-  const patientId = str(ctx.patientId);
-  if (!patientId) return { ok: false, status: 400, outcome: operationOutcome("error", "required", "patient is required") };
+  const requestedId = str(ctx.patientId);
+  if (!requestedId) return { ok: false, status: 400, outcome: operationOutcome("error", "required", "patient is required") };
 
   const { query, problems } = parseEverything(ctx.searchParams);
   if (problems.length && !ctx.lenient) {
@@ -583,6 +703,7 @@ async function patientEverything(request, env, ctx) {
 
   const { svc, error } = await open(request, env, ctx);
   if (error) return { ok: false, status: error.status, outcome: operationOutcome("error", error.status === 401 ? "login" : "forbidden", error.detail || error.error) };
+  const patientId = await resolveId(svc, "Patient", requestedId);
 
   const wanted = typeNames.length ? typeNames.map((t) => CANONICAL_TYPE[t] || t).filter((t) => MAPPERS[t]) : Object.keys(MAPPERS);
 
@@ -612,7 +733,7 @@ async function patientEverything(request, env, ctx) {
   rest.sort((a, b) => { const ka = str(a.meta && a.meta.lastUpdated), kb = str(b.meta && b.meta.lastUpdated); return ka === kb ? str(a.id).localeCompare(str(b.id)) : kb.localeCompare(ka); });
   const all = [...(wanted.includes("Patient") && since(patient) ? [patient] : []), ...rest.filter(since)];
   const page = paginate(all, query);
-  const b = searchBundle({ base: str(ctx.base), type: "Patient", path: `Patient/${patientId}/$everything`, q: query, page, included: [], outcomes: problems.length ? [{ resourceType: "OperationOutcome", issue: problems.map((p) => ({ severity: "warning", code: "not-supported", diagnostics: `${p.param} was ignored: ${p.reason}` })) }] : [], rawQuery: ctx.rawQuery });
+  const b = searchBundle({ base: str(ctx.base), type: "Patient", path: `Patient/${fhirId(patientId)}/$everything`, q: query, page, included: [], outcomes: problems.length ? [{ resourceType: "OperationOutcome", issue: problems.map((p) => ({ severity: "warning", code: "not-supported", diagnostics: `${p.param} was ignored: ${p.reason}` })) }] : [], rawQuery: ctx.rawQuery });
   b.timestamp = new Date().toISOString();
   return { ok: true, status: 200, bundle: b };
 }
@@ -630,7 +751,7 @@ async function readResource(request, env, ctx) {
   if (error) return { ok: false, status: error.status, outcome: operationOutcome("error", error.status === 401 ? "login" : "forbidden", error.detail || error.error) };
 
   let record;
-  try { record = await svc.get(canonical, str(ctx.id)); }
+  try { record = await svc.get(canonical, await resolveId(svc, canonical, ctx.id)); }
   catch (e) { return { ok: false, status: 403, outcome: operationOutcome("error", "forbidden", str(e && e.message)) }; }
   if (!record) return { ok: false, status: 404, outcome: operationOutcome("error", "not-found", "no such resource") };
 
@@ -682,10 +803,11 @@ async function searchType(request, env, ctx) {
 
   let rows;
   try {
+    const pid = query.patient ? await resolveId(svc, "Patient", query.patient) : "";
     if (canonical === "Patient") {
-      rows = query.patient ? [await svc.get("Patient", query.patient)].filter(Boolean) : await svc.list("Patient", SEARCH_POOL);
+      rows = pid ? [await svc.get("Patient", pid)].filter(Boolean) : await svc.list("Patient", SEARCH_POOL);
     } else {
-      rows = query.patient ? await svc.byPatient(canonical, query.patient) : await svc.list(canonical, SEARCH_POOL);
+      rows = pid ? await svc.byPatient(canonical, pid) : await svc.list(canonical, SEARCH_POOL);
     }
   } catch (e) {
     return { ok: false, status: 403, outcome: operationOutcome("error", "forbidden", str(e && e.message)) };
@@ -705,7 +827,7 @@ async function searchType(request, env, ctx) {
       const [t, id] = k.split("/");
       const c = CANONICAL_TYPE[t];
       if (!c) { cache.set(k, null); continue; }
-      try { const rec = await svc.get(c, id); cache.set(k, rec ? toFhir(rec) : null); } catch { cache.set(k, null); }
+      try { const rec = await svc.get(c, await resolveId(svc, c, id)); cache.set(k, rec ? toFhir(rec) : null); } catch { cache.set(k, null); }
     }
   };
   /* `has(type, resource)`: the resources of `type` in that resource's patient compartment, read by
@@ -721,7 +843,7 @@ async function searchType(request, env, ctx) {
         if (!pid) continue;
         const k = `${t}|${pid}`;
         if (compartments.has(k)) continue;
-        try { compartments.set(k, ((await svc.byPatient(c, pid)) || []).map(toFhir).filter(Boolean)); } catch { compartments.set(k, []); }
+        try { compartments.set(k, ((await svc.byPatient(c, await resolveId(svc, "Patient", pid))) || []).map(toFhir).filter(Boolean)); } catch { compartments.set(k, []); }
       }
     }
   };
@@ -739,7 +861,7 @@ async function searchType(request, env, ctx) {
   /* _revinclude=Provenance:target: the provenance of each matched resource's CURRENT version,
    * derived from the canonical rows already in hand - no second read, no second opinion. */
   if (query.revInclude.some((rv) => rv.key === "Provenance:target")) {
-    const byId = new Map((rows || []).filter(Boolean).map((r) => [str(r.id), r]));
+    const byId = new Map((rows || []).filter(Boolean).map((r) => [fhirId(r.id), r]));
     for (const r of page.entries) {
       const p = fhirProvenance(byId.get(str(r.id)));
       if (p) included.push(p);
@@ -768,7 +890,7 @@ async function historyOf(request, env, ctx) {
   if (error) return { ok: false, status: error.status, outcome: operationOutcome("error", error.status === 401 ? "login" : "forbidden", error.detail || error.error) };
 
   let versions;
-  try { versions = await svc.history(canonical, str(ctx.id)); }
+  try { versions = await svc.history(canonical, await resolveId(svc, canonical, ctx.id)); }
   catch (e) { return { ok: false, status: 403, outcome: operationOutcome("error", "forbidden", str(e && e.message)) }; }
   if (!versions || !versions.length) return { ok: false, status: 404, outcome: operationOutcome("error", "not-found", "no such resource") };
 
@@ -797,18 +919,11 @@ async function vread(request, env, ctx) {
   if (error) return { ok: false, status: error.status, outcome: operationOutcome("error", error.status === 401 ? "login" : "forbidden", error.detail || error.error) };
 
   let versions;
-  try { versions = await svc.history(canonical, str(ctx.id)); }
+  try { versions = await svc.history(canonical, await resolveId(svc, canonical, ctx.id)); }
   catch (e) { return { ok: false, status: 403, outcome: operationOutcome("error", "forbidden", str(e && e.message)) }; }
   const hit = (versions || []).find((v) => String(v.version) === want);
   if (!hit) return { ok: false, status: 404, outcome: operationOutcome("error", "not-found", "no such version") };
   return { ok: true, status: 200, resource: toFhir(hit) };
-}
-
-/** PURE. A Provenance id back to the version it names, or null. */
-function parseProvenanceId(id) {
-  const m = /^([A-Za-z]+)-(.+)-v(\d+)$/.exec(str(id));
-  if (!m || !CANONICAL_TYPE[m[1]]) return null;
-  return { fhirType: m[1], canonical: CANONICAL_TYPE[m[1]], id: m[2], version: Number(m[3]) };
 }
 
 /** One Provenance by id. ctx: { migration, id } */
@@ -816,11 +931,12 @@ async function provenanceRead(request, env, ctx) {
   const mig = ctx.migration;
   if (!mig || mig.mode === "off") return { ok: false, status: 404, outcome: operationOutcome("error", "not-supported", "this hospital does not run the WardSynQ record") };
   const p = parseProvenanceId(ctx.id);
-  if (!p) return { ok: false, status: 404, outcome: operationOutcome("error", "not-found", "no such Provenance") };
+  const canonicalType = p && CANONICAL_TYPE[p.fhirType];
+  if (!p || !canonicalType) return { ok: false, status: 404, outcome: operationOutcome("error", "not-found", "no such Provenance") };
   const { svc, error } = await open(request, env, ctx);
   if (error) return { ok: false, status: error.status, outcome: operationOutcome("error", error.status === 401 ? "login" : "forbidden", error.detail || error.error) };
   let versions;
-  try { versions = await svc.history(p.canonical, p.id); }
+  try { versions = await svc.history(canonicalType, await resolveId(svc, canonicalType, p.fhirId)); }
   catch (e) { return { ok: false, status: 403, outcome: operationOutcome("error", "forbidden", str(e && e.message)) }; }
   const hit = (versions || []).find((v) => Number(v.version) === p.version);
   if (!hit) return { ok: false, status: 404, outcome: operationOutcome("error", "not-found", "no such Provenance") };
@@ -844,7 +960,7 @@ async function provenanceSearch(request, env, ctx) {
   const { svc, error } = await open(request, env, ctx);
   if (error) return { ok: false, status: error.status, outcome: operationOutcome("error", error.status === 401 ? "login" : "forbidden", error.detail || error.error) };
   let versions;
-  try { versions = await svc.history(canonical, query.target.id); }
+  try { versions = await svc.history(canonical, await resolveId(svc, canonical, query.target.id)); }
   catch (e) { return { ok: false, status: 403, outcome: operationOutcome("error", "forbidden", str(e && e.message)) }; }
 
   const all = (versions || []).map(fhirProvenance).filter(Boolean).reverse();
@@ -857,6 +973,7 @@ export {
   systemUriFor, codeable, identifier, withMeta, toFhir, bundle, capabilityStatement, operationOutcome,
   fhirPatient, fhirEncounter, fhirCondition, fhirAllergy, fhirObservation,
   fhirMedicationRequest, fhirMedicationAdministration, fhirServiceRequest,
-  fhirDiagnosticReport, fhirDocumentReference, fhirConsent, fhirProvenance, parseProvenanceId, compartmentOf, parseEverything,
+  fhirDiagnosticReport, fhirDocumentReference, fhirConsent, fhirProvenance, parseProvenanceId, compartmentOf, parseEverything, resolveId,
   patientEverything, readResource, searchType, historyOf, vread, provenanceRead, provenanceSearch,
+  validateFully, validateOperation, validateCodeOperation,
 };

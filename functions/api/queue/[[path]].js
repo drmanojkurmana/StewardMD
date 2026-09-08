@@ -62,7 +62,7 @@ import { verifyOrder, verificationQueue } from "../../_wardsynq/pharmacy-verify.
 import { dispenseOrder, returnDispense, listDispenses } from "../../_wardsynq/pharmacy-dispense.js";
 import { declareBreakGlass, openEmergencyChart, listBreakGlass } from "../../_wardsynq/break-glass.js";
 import { operationOutcome } from "../../_wardsynq/fhir.js";
-import { dispatchRead } from "../../_wardsynq/fhir-route.js";
+import { dispatchRead, dispatchOperation } from "../../_wardsynq/fhir-route.js";
 import { ingestFhir, listExceptions, resolveException, inboundEnabled } from "../../_wardsynq/fhir-inbound.js";
 import { startReconciliation, decideMedicine, readReconciliation } from "../../_wardsynq/med-reconciliation.js";
 import { wardMetrics } from "../../_wardsynq/ward-metrics.js";
@@ -752,7 +752,13 @@ export async function onRequest(context) {
          *   GET /ward/fhir/Patient/{id}/$everything          everything for one patient
          *   GET /ward/fhir?patient={id}[&_type=A,B]          the same, older spelling */
         const fType = parts[2] || "", fId = parts[3] || "", fOp = parts[4] || "", fVid = parts[5] || "";
-        const fctx = { ...deps, base: `${url.origin}/api/queue/ward/fhir` };
+        const fctx = { ...deps, base: `${url.origin}/api/queue/ward/fhir`, terminology: (wsqCfg && wsqCfg.terminology) || null, profiles: (wsqCfg && wsqCfg.fhir && wsqCfg.fhir.profiles) || null };
+        /* $validate is an operation, not a write: it files nothing, so it is open to anyone who may
+         * read, whether or not the hospital has opened the inbound door. */
+        if (method === "POST") {
+          const op = await dispatchOperation(request, env, parts.slice(2), body, fctx);
+          if (op) return fhirJson(op.obj, op.status, request);
+        }
         /* WRITES. Off unless the hospital enabled wardsynq.fhir.inbound, and only for an actor who
          * may already write the chart (emr.treat) - the FHIR sub is emr.view for reads, so the write
          * methods check the stronger capability themselves. Everything goes through fhir-inbound.js:

@@ -2140,7 +2140,11 @@ test("the whole stay exports as a FHIR bundle, from the real record", async () =
   // MedicationAdministration pointing back at it.
   assert.equal(byType.MedicationRequest[0].dosageInstruction[0].doseAndRate[0].doseQuantity.value, 500);
   assert.equal(byType.MedicationAdministration[0].status, "completed");
-  assert.deepEqual(byType.MedicationAdministration[0].request, { reference: `MedicationRequest/${ord.orderId}` });
+  // The order's canonical id is longer than R4 allows, so the reference carries its hashed FHIR id and the
+  // MedicationRequest itself is exported under that same id with the canonical one as an identifier.
+  assert.match(byType.MedicationAdministration[0].request.reference, /^MedicationRequest\/wsq-[0-9a-f]{48}$/);
+  assert.equal(`MedicationRequest/${byType.MedicationRequest[0].id}`, byType.MedicationAdministration[0].request.reference);
+  assert.ok(byType.MedicationRequest[0].identifier.some((i) => i.system === "urn:stewardmd:record-id" && i.value === ord.orderId));
   // The vitals are LOINC-coded observations, because those genuinely are LOINC.
   assert.ok(byType.Observation.some((o) => o.code.coding && o.code.coding[0].system === "http://loinc.org"));
 
@@ -4269,9 +4273,9 @@ test("signing is not a nurse's act, and an unfinished note is signed as unfinish
  * the route served application/json, and no search grammar, no versionId, no history. These are the
  * route-level proofs, against the real record, for what a standards-compliant client needs. */
 
-async function asRaw(email, path, method, headers) {
+async function asRaw(email, path, method, headers, body) {
   return onRequest({
-    request: new Request("https://x/api/queue" + path, { method: method || "GET", headers: { "Cf-Access-Authenticated-User-Email": email, ...(headers || {}) } }),
+    request: new Request("https://x/api/queue" + path, { method: method || "GET", headers: { "Cf-Access-Authenticated-User-Email": email, ...(headers || {}) }, ...(body !== undefined ? { body: typeof body === "string" ? body : JSON.stringify(body) } : {}) }),
     env: ENV,
   });
 }
@@ -4381,9 +4385,132 @@ test("FHIR: search filters by patient, code and date, pages with links, and refu
   const del = await asRaw(DOCTOR, `/ward/fhir/Observation/x?orgId=${ORG}`, "DELETE");
   assert.equal(del.status, 405, "a method the server never supports is a 405 with Allow");
   assert.ok(/GET/.test(del.headers.get("allow")));
-  const op = await asRaw(DOCTOR, `/ward/fhir/Encounter/${adm.encounterId}/$validate?orgId=${ORG}`);
+  const op = await asRaw(DOCTOR, `/ward/fhir/Encounter/${adm.encounterId}/$bogus?orgId=${ORG}`);
   assert.equal(op.status, 404);
   assert.equal((await op.json()).resourceType, "OperationOutcome");
+});
+
+test("FHIR $validate: our own export validates; a partner's resource is judged against R4 base at every path; codes go through the terminology service; it needs no inbound door", async () => {
+  seedHospital();
+  const { adm } = await admittedPatientOnDrug();
+  // GET {Type}/{id}/$validate checks the stored resource's export. Inbound is OFF and that is irrelevant: validation writes nothing.
+  const mine = await asRaw(DOCTOR, `/ward/fhir/Encounter/${adm.encounterId}/$validate?orgId=${ORG}`);
+  const mineText = await mine.text();
+  assert.equal(mine.status, 200, mineText);
+  const oo = JSON.parse(mineText);
+  assert.equal(oo.resourceType, "OperationOutcome");
+  assert.equal(oo.issue[0].diagnostics, "All OK");
+
+  // POST {Type}/$validate with a body: conformant is 200, and a LOINC code from the seed is verified silently.
+  const good = await asRaw(DOCTOR, `/ward/fhir/Observation/$validate?orgId=${ORG}`, "POST", { "Content-Type": "application/fhir+json" }, { resourceType: "Observation", status: "final", code: { coding: [{ system: "http://loinc.org", code: "2160-0" }] }, subject: { reference: `Patient/${adm.patientId}` }, valueQuantity: { value: 88, unit: "umol/L" } });
+  const goodText = await good.text();
+  assert.equal(good.status, 200, goodText);
+  assert.ok(!/not verified/.test(goodText), "a seed-verified LOINC code raises nothing");
+  // Non-conformant is 422 with every issue at its path.
+  const bad = await asRaw(DOCTOR, `/ward/fhir/Observation/$validate?orgId=${ORG}`, "POST", { "Content-Type": "application/fhir+json" }, { resourceType: "Observation", status: "done", code: { text: "x" }, valueQuantiy: { value: 1 } });
+  assert.equal(bad.status, 422);
+  const issues = (await bad.json()).issue;
+  assert.ok(issues.some((i) => i.code === "code-invalid" && i.expression[0] === "Observation.status"));
+  assert.ok(issues.some((i) => i.code === "structure" && i.expression[0] === "Observation.valueQuantiy"));
+  // A body of the wrong type for the URL is refused, and a Bundle validates every entry.
+  const wrong = await asRaw(DOCTOR, `/ward/fhir/Condition/$validate?orgId=${ORG}`, "POST", { "Content-Type": "application/fhir+json" }, { resourceType: "Observation", status: "final", code: { text: "x" } });
+  assert.equal(wrong.status, 400);
+  const bundle = await asRaw(DOCTOR, `/ward/fhir/$validate?orgId=${ORG}`, "POST", { "Content-Type": "application/fhir+json" }, { resourceType: "Bundle", type: "collection", entry: [{ resource: { resourceType: "Patient", id: "p", gender: "F" } }] });
+  assert.equal(bundle.status, 422);
+  assert.ok((await bundle.json()).issue.some((i) => i.expression[0] === "Bundle.entry[0].resource.gender"));
+  // A SNOMED code nobody here verified is an information issue, not an error: "cannot vouch" is not "wrong".
+  const sct = await asRaw(DOCTOR, `/ward/fhir/Condition/$validate?orgId=${ORG}`, "POST", { "Content-Type": "application/fhir+json" }, { resourceType: "Condition", subject: { reference: `Patient/${adm.patientId}` }, code: { coding: [{ system: "http://snomed.info/sct", code: "44054006" }] } });
+  assert.equal(sct.status, 200);
+  assert.ok((await sct.json()).issue.some((i) => i.severity === "information" && /not verified/.test(i.diagnostics)));
+  // The whole stay validates, resource by resource.
+  const ev = await (await asRaw(DOCTOR, `/ward/fhir/Patient/${adm.patientId}/$everything?orgId=${ORG}`)).json();
+  for (const e of ev.entry) {
+    const r = await asRaw(DOCTOR, `/ward/fhir/${e.resource.resourceType}/$validate?orgId=${ORG}`, "POST", { "Content-Type": "application/fhir+json" }, e.resource);
+    const t = await r.text();
+    assert.equal(r.status, 200, `${e.resource.resourceType}/${e.resource.id}: ${t}`);
+    assert.ok(e.resource.id.length <= 64 && /^[A-Za-z0-9.-]+$/.test(e.resource.id), "every id fits R4");
+    assert.ok(e.resource.identifier.some((i) => i.system === "urn:stewardmd:record-id"), "and the canonical id travels as an identifier");
+  }
+});
+
+test("FHIR terminology: $validate-code answers from the seed, the hospital's own lists and its terminology server; an invalid code on a feed is filed verbatim and marked, never dropped or promoted", async () => {
+  seedHospital(); enableInboundFhir();
+  const org = docs.get(`q_orgs/${ORG}`);
+  org.fields.wardsynq = { ...org.fields.wardsynq, terminology: { codeSystems: { "http://loinc.org": { "4548-4": "HbA1c" } }, server: { url: "https://tx.example/fhir", systems: ["snomed"] } } };
+  docs.set(`q_orgs/${ORG}`, org);
+  const asked = [];
+  const realFetch = globalThis.fetch;
+  globalThis.fetch = async (url) => {
+    const u = new URL(url); asked.push(u.href);
+    const key = `${u.searchParams.get("url")}|${u.searchParams.get("code")}`;
+    const known = { "http://snomed.info/sct|22298006": true, "http://snomed.info/sct|999999": false };
+    if (!(key in known)) return new Response("boom", { status: 500 });
+    return new Response(JSON.stringify({ resourceType: "Parameters", parameter: [{ name: "result", valueBoolean: known[key] }, { name: "message", valueString: known[key] ? "ok" : "Unknown code" }] }), { status: 200 });
+  };
+  try {
+    const q = (url, code) => asRaw(DOCTOR, `/ward/fhir/CodeSystem/$validate-code?orgId=${ORG}&url=${encodeURIComponent(url)}&code=${code}`);
+    const seed = await (await q("http://loinc.org", "2160-0")).json();
+    assert.equal(seed.resourceType, "Parameters");
+    assert.equal(seed.parameter.find((p) => p.name === "result").valueBoolean, true);
+    assert.match(seed.parameter.find((p) => p.name === "message").valueString, /seed/);
+    assert.match((await (await q("http://loinc.org", "4548-4")).json()).parameter.find((p) => p.name === "message").valueString, /org/, "the hospital's own list");
+    assert.match((await (await q("http://snomed.info/sct", "22298006")).json()).parameter.find((p) => p.name === "message").valueString, /server/);
+    const bad = await (await q("http://snomed.info/sct", "999999")).json();
+    assert.equal(bad.parameter.find((p) => p.name === "result").valueBoolean, false);
+    assert.equal(bad.parameter.find((p) => p.name === "x-wardsynq-status").valueCode, "invalid");
+    assert.equal((await (await q("http://www.whocc.no/atc", "A10BA02")).json()).parameter.find((p) => p.name === "x-wardsynq-status").valueCode, "recognised", "a system the server is not configured for is not asked");
+    assert.equal((await (await q("http://his.example/codes", "X")).json()).parameter.find((p) => p.name === "x-wardsynq-status").valueCode, "unmapped");
+    assert.equal((await q("", "x")).status, 400);
+    assert.ok(asked.every((u) => u.startsWith("https://tx.example/fhir/CodeSystem/$validate-code?")), "asked through the configured server only");
+
+    // A feed carrying the invalid SNOMED code: filed, marked invalid, exported under the sender's system with the extension.
+    const b = partnerBundle({ patientId: "HIS-PAT-TX", mrn: "HIS-MRN-TX", suffix: "-tx" });
+    b.entry.push({ resource: { resourceType: "Condition", id: "HIS-DX-BAD-tx", code: { coding: [{ system: "http://snomed.info/sct", code: "999999", display: "Nonsense" }] }, subject: { reference: "Patient/HIS-PAT-TX" }, clinicalStatus: { coding: [{ system: "http://terminology.hl7.org/CodeSystem/condition-clinical", code: "active" }] } } });
+    b.entry.push({ resource: { resourceType: "Condition", id: "HIS-DX-MI-tx", code: { coding: [{ system: "http://snomed.info/sct", code: "22298006", display: "MI" }] }, subject: { reference: "Patient/HIS-PAT-TX" }, clinicalStatus: { coding: [{ system: "http://terminology.hl7.org/CodeSystem/condition-clinical", code: "active" }] } } });
+    const res = await pushFhir(DOCTOR, `/ward/fhir?orgId=${ORG}`, b);
+    assert.equal(res.status, 200, await res.text());
+    const badRec = await RECORD.latest(TENANT_ROW.id, "Condition", "fhir-partner-his-cond-his-dx-bad-tx");
+    assert.ok(badRec, "filed");
+    assert.equal(badRec.terminologyStatus, "invalid");
+    assert.equal(badRec.code, "999999");
+    assert.equal(badRec.sourceCoding.system, "http://snomed.info/sct");
+    const miRec = await RECORD.latest(TENANT_ROW.id, "Condition", "fhir-partner-his-cond-his-dx-mi-tx");
+    assert.equal(miRec.terminologyStatus, "verified");
+    assert.equal(miRec.terminologySource, "server");
+    const out = await (await asRaw(DOCTOR, `/ward/fhir/Condition/fhir-partner-his-cond-his-dx-bad-tx?orgId=${ORG}`)).json();
+    assert.equal(out.code.coding[0].code, "999999");
+    assert.equal(out.code.coding[0].extension[0].valueCode, "invalid");
+    assert.equal((await (await asRaw(DOCTOR, `/ward/fhir/Condition/fhir-partner-his-cond-his-dx-mi-tx?orgId=${ORG}`)).json()).code.coding[0].extension, undefined, "a verified code carries no caveat");
+  } finally { globalThis.fetch = realFetch; }
+});
+
+test("FHIR ids: a canonical id longer than R4 allows is exported hashed, read back by that hash, searchable by its canonical id, and referenced consistently", async () => {
+  seedHospital();
+  const { adm } = await admittedPatientOnDrug();
+  const sr = await as(DOCTOR, "/ward/investigation", "POST", { orgId: ORG, encounterId: adm.encounterId, code: "Renal profile", category: "laboratory" });
+  const rep = await as(LABTECH, "/ward/release-result", "POST", { orgId: ORG, serviceRequestId: sr.orderId, status: "final", reportedAt: "2026-09-07T10:00:00.000Z", tests: [{ test: "Creatinine", value: 88, unit: "umol/L" }] });
+  assert.equal(rep.__status, 200, JSON.stringify(rep).slice(0, 200));
+  const reports = await (await asRaw(DOCTOR, `/ward/fhir/DiagnosticReport?orgId=${ORG}&patient=${adm.patientId}`)).json();
+  const dr = reports.entry[0].resource;
+  assert.match(dr.id, /^wsq-[0-9a-f]{48}$/, "the report's canonical id is fourth-generation and too long, so it is hashed");
+  const canonical = dr.identifier.find((i) => i.system === "urn:stewardmd:record-id").value;
+  assert.ok(canonical.length > 64);
+  // Read by the hash, history by the hash, Provenance of it, and the observation it references by the same rule.
+  const byHash = await asRaw(DOCTOR, `/ward/fhir/DiagnosticReport/${dr.id}?orgId=${ORG}`);
+  assert.equal(byHash.status, 200);
+  assert.equal((await byHash.json()).id, dr.id);
+  assert.equal((await asRaw(DOCTOR, `/ward/fhir/DiagnosticReport/${dr.id}/_history/1?orgId=${ORG}`)).status, 200);
+  const prov = await (await asRaw(DOCTOR, `/ward/fhir/Provenance?orgId=${ORG}&target=DiagnosticReport/${dr.id}`)).json();
+  assert.equal(prov.total, 1, JSON.stringify(prov).slice(0, 300));
+  assert.ok(prov.entry[0].resource.id.length <= 64);
+  assert.equal((await asRaw(DOCTOR, `/ward/fhir/Provenance/${prov.entry[0].resource.id}?orgId=${ORG}`)).status, 200);
+  const obsRef = dr.result[0].reference;
+  assert.match(obsRef, /^Observation\/wsq-[0-9a-f]{48}$/);
+  const inc = await (await asRaw(DOCTOR, `/ward/fhir/DiagnosticReport?orgId=${ORG}&patient=${adm.patientId}&_include=DiagnosticReport:result`)).json();
+  assert.ok(inc.entry.some((e) => e.search.mode === "include" && `Observation/${e.resource.id}` === obsRef), "the include resolves the hashed reference");
+  // And the canonical id finds it through the identifier search.
+  const found = await (await asRaw(DOCTOR, `/ward/fhir/DiagnosticReport?orgId=${ORG}&patient=${adm.patientId}&identifier=urn:stewardmd:record-id|${encodeURIComponent(canonical)}`)).json();
+  assert.equal(found.total, 1);
 });
 
 test("FHIR: _include pulls the report's observations through the governed read, and $everything is the standard spelling", async () => {
@@ -4441,7 +4568,7 @@ test("FHIR: Provenance by target shows every version with its real author, Conse
   assert.ok(prov.entry.every((e) => e.resource.agent[0].type.coding[0].code === "author"));
   assert.equal(prov.entry[1].resource.target[0].reference, `Encounter/${adm.encounterId}/_history/1`);
 
-  const one = await asRaw(DOCTOR, `/ward/fhir/Provenance/Encounter-${adm.encounterId}-v1?orgId=${ORG}`);
+  const one = await asRaw(DOCTOR, `/ward/fhir/Provenance/en-${adm.encounterId}-v1?orgId=${ORG}`);
   assert.equal(one.status, 200);
   assert.equal((await one.json()).resourceType, "Provenance");
   // A hospital-wide provenance dump is not offered: target is required.
@@ -4453,7 +4580,7 @@ test("FHIR: Provenance by target shows every version with its real author, Conse
   const inc = rev.entry.filter((e) => e.search.mode === "include");
   assert.equal(inc.length, 1);
   assert.equal(inc[0].resource.resourceType, "Provenance");
-  assert.equal(inc[0].resource.id, `Encounter-${adm.encounterId}-v2`, "the CURRENT version's provenance");
+  assert.equal(inc[0].resource.id, `en-${adm.encounterId}-v2`, "the CURRENT version's provenance");
 
   // A refusal of external sharing exports as a rejected Consent with a deny provision.
   const c = await as(NURSE, "/ward/consent", "POST", { orgId: ORG, patientId: adm.patientId, scope: "share-external", decision: "refused" });
@@ -4484,13 +4611,13 @@ function partnerBundle(over = {}) {
       { resource: { resourceType: "Patient", id: pid, identifier: [{ type: { coding: [{ code: "MR" }] }, system: "urn:his:mrn", value: mrn }, { system: "https://healthid.ndhm.gov.in", value: over.abha || "91-1234-5678-9012" }],
         name: [{ text: over.name || "Partner Testcase" }], gender: "female", birthDate: over.dob || "1975-03-09" } },
       { resource: { resourceType: "Encounter", id: `HIS-ENC-1${s}`, status: "finished", class: { code: "IMP" }, subject: { reference: `Patient/${pid}` }, period: { start: "2026-08-01T08:00:00Z", end: "2026-08-04T10:00:00Z" } } },
-      { resource: { resourceType: "Condition", id: `HIS-DX-1${s}`, code: { coding: [{ system: "http://hl7.org/fhir/sid/icd-10", code: "E11.9", display: "Type 2 diabetes" }] }, subject: { reference: `Patient/${pid}` }, clinicalStatus: { coding: [{ code: "active" }] } } },
+      { resource: { resourceType: "Condition", id: `HIS-DX-1${s}`, code: { coding: [{ system: "http://hl7.org/fhir/sid/icd-10", code: "E11.9", display: "Type 2 diabetes" }] }, subject: { reference: `Patient/${pid}` }, clinicalStatus: { coding: [{ system: "http://terminology.hl7.org/CodeSystem/condition-clinical", code: "active" }] } } },
       { resource: { resourceType: "Observation", id: `HIS-OBS-1${s}`, status: "final", category: [{ coding: [{ code: "laboratory" }] }], code: { coding: [{ system: "http://loinc.org", code: "2160-0", display: "Creatinine" }] }, subject: { reference: `Patient/${pid}` }, effectiveDateTime: "2026-08-02T06:00:00Z", valueQuantity: { value: 96, unit: "umol/L" } } },
       { resource: { resourceType: "Observation", id: `HIS-OBS-2${s}`, status: "final", category: [{ coding: [{ code: "laboratory" }] }], code: { coding: [{ system: "http://his.example/local-codes", code: "HBA1C-X", display: "HbA1c (local)" }] }, subject: { reference: `Patient/${pid}` }, effectiveDateTime: "2026-08-02T06:00:00Z", valueQuantity: { value: 7.9, unit: "%" } } },
       { resource: { resourceType: "MedicationRequest", id: `HIS-RX-1${s}`, status: "active", intent: "order", medicationCodeableConcept: { coding: [{ system: "http://www.nlm.nih.gov/research/umls/rxnorm", code: "6809", display: "Metformin" }], text: "Metformin 500 mg" }, subject: { reference: `Patient/${pid}` }, dosageInstruction: [{ text: "500 mg twice daily" }] } },
       { resource: { resourceType: "AllergyIntolerance", id: `HIS-ALG-1${s}`, code: { text: "Penicillin" }, patient: { reference: `Patient/${pid}` }, criticality: "high", reaction: [{ manifestation: [{ text: "Anaphylaxis" }], severity: "severe" }] } },
       { resource: { resourceType: "DiagnosticReport", id: `HIS-REP-1${s}`, status: "final", code: { text: "Renal profile" }, subject: { reference: `Patient/${pid}` }, effectiveDateTime: "2026-08-02T06:00:00Z", result: [{ reference: `Observation/HIS-OBS-1${s}` }], conclusion: "Within limits." } },
-      { resource: { resourceType: "DocumentReference", id: `HIS-DOC-1${s}`, status: "current", type: { text: "Discharge summary" }, subject: { reference: `Patient/${pid}` }, date: "2026-08-04T10:00:00Z", description: "Admitted with hyperglycaemia; discharged on metformin." } },
+      { resource: { resourceType: "DocumentReference", id: `HIS-DOC-1${s}`, status: "current", type: { text: "Discharge summary" }, subject: { reference: `Patient/${pid}` }, date: "2026-08-04T10:00:00Z", description: "Admitted with hyperglycaemia; discharged on metformin.", content: [{ attachment: { contentType: "text/plain", title: "Discharge summary" } }] } },
     ],
   };
 }
@@ -5028,9 +5155,13 @@ test("MALFORMED INPUT is refused with an OperationOutcome naming the fault, and 
   const noId = await raw(JSON.stringify({ resourceType: "Bundle", entry: [{ resource: { resourceType: "Patient", id: "p" } }, { resource: { resourceType: "Observation" } }] }));
   assert.equal(noId.status, 400);
   assert.match((await noId.json()).issue[0].diagnostics, /has no id/);
-  const noPatient = await raw(JSON.stringify({ resourceType: "Bundle", entry: [{ resource: { resourceType: "Observation", id: "o1" } }] }));
+  const noPatient = await raw(JSON.stringify({ resourceType: "Bundle", entry: [{ resource: { resourceType: "Observation", id: "o1", status: "final", code: { text: "x" } } }] }));
   assert.equal(noPatient.status, 400);
   assert.match((await noPatient.json()).issue[0].diagnostics, /must carry the Patient/);
+  // A non-conformant resource is a 422 naming the path, before identity or content is considered.
+  const nonConformant = await raw(JSON.stringify({ resourceType: "Bundle", entry: [{ resource: { resourceType: "Patient", id: "p", name: [{ text: "X" }] } }, { resource: { resourceType: "Observation", id: "o1", subject: { reference: "Patient/p" } } }] }));
+  assert.equal(nonConformant.status, 422);
+  assert.ok((await nonConformant.json()).issue.some((i) => i.code === "required" && /Observation\/o1: Observation\.status/.test(i.expression[0])));
   // A resource with no id cannot be attributed or replayed safely, whatever type it is.
   const noIdPatient = await raw(JSON.stringify({ resourceType: "Patient", name: [{ text: "Nobody" }] }));
   assert.equal(noIdPatient.status, 400);
