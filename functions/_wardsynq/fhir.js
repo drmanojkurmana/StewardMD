@@ -189,10 +189,11 @@ function fhirEncounter(e) {
     status: STATUS[str(e.status)] || "unknown",
     // FHIR's Encounter.class is required (1..1) - leaving it undefined for a class this file has
     // not yet mapped exports a resource that fails R4 validation. ED maps to the standard v3-ActCode
-    // EMER, the same terminology IMP/AMB already use; nothing invented. ICU maps to IMP as well -
-    // v3-ActCode has no distinct "ICU" class code; which UNIT an inpatient is on is carried by
-    // Encounter.location, not by class, so IMP is the correct code here and not a simplification.
-    class: (e.class === "IPD" || e.class === "ICU") ? { system: "http://terminology.hl7.org/CodeSystem/v3-ActCode", code: "IMP", display: "inpatient encounter" }
+    // EMER, the same terminology IMP/AMB already use; nothing invented. ICU, SURGERY and PACU all
+    // map to IMP as well - v3-ActCode has no distinct class code for any of them; which UNIT an
+    // inpatient is on (theatre, recovery, critical care) is carried by Encounter.location, not by
+    // class, so IMP is the correct code here and not a simplification.
+    class: (e.class === "IPD" || e.class === "ICU" || e.class === "SURGERY" || e.class === "PACU") ? { system: "http://terminology.hl7.org/CodeSystem/v3-ActCode", code: "IMP", display: "inpatient encounter" }
       : e.class === "OPD" ? { system: "http://terminology.hl7.org/CodeSystem/v3-ActCode", code: "AMB", display: "ambulatory" }
       : e.class === "ED" ? { system: "http://terminology.hl7.org/CodeSystem/v3-ActCode", code: "EMER", display: "emergency" }
       : undefined,

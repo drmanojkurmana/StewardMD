@@ -57,6 +57,12 @@ import { admitPatient, listWard, recordWardVitals, createWardMedicationOrder, tr
 import { edArrival, recordEdTriage, edDisposition, listEd } from "../../_wardsynq/migrate-ed.js";
 import { startResusBundle, markResusElement, waiveResusElement, voidResusBundle, listResusBundles } from "../../_wardsynq/migrate-resus.js";
 import { deviceAssociate, deviceDissociate, deviceIngest, deviceStatus, deviceList } from "../../_wardsynq/migrate-device.js";
+import {
+  bookSurgicalCase, recordCaseConsent, markCaseSite, signInCase, timeOutCase, inciseCase,
+  signOutCase, abandonCase, recordOperativeNote, dispositionCase, getSurgicalCase, listSurgicalCases,
+  listOpenCases, startAnesthesia, recordAnesthesiaEvent, endAnesthesia, getAnesthesia,
+  recordImplant, listImplants,
+} from "../../_wardsynq/migrate-surgery.js";
 import { medicationRound, administerStep } from "../../_wardsynq/migrate-emar.js";
 import { draftDischargeSummary, signDischargeSummary, dischargePatient, readDischargeSummary } from "../../_wardsynq/migrate-discharge.js";
 import { recordProblem, listProblems } from "../../_wardsynq/migrate-problem.js";
@@ -514,6 +520,17 @@ export async function onRequest(context) {
          * (VITALS_TYPES in actor.js). A reading is the same act repeated by the device's own gateway. */
         "device-associate": CAPS.EMR_VITALS, "device-dissociate": CAPS.EMR_VITALS,
         "device-ingest": CAPS.EMR_VITALS, "device-status": CAPS.EMR_VIEW, "device-list": CAPS.EMR_VIEW,
+        /* The WHO checklist gate (Task 2.3). Every write here is "a clinical commitment" in the same
+         * sense wardsynq-emergency.js's own resus bundle already is - emr.treat, unrestricted.
+         * Reading a case, an anaesthesia record or an implant log is emr.view, the same as the
+         * chart they hang off. */
+        "surgery-book": CAPS.EMR_TREAT, "surgery-consent": CAPS.EMR_TREAT, "surgery-marksite": CAPS.EMR_TREAT,
+        "surgery-signin": CAPS.EMR_TREAT, "surgery-timeout": CAPS.EMR_TREAT, "surgery-incise": CAPS.EMR_TREAT,
+        "surgery-signout": CAPS.EMR_TREAT, "surgery-abandon": CAPS.EMR_TREAT, "surgery-note": CAPS.EMR_TREAT,
+        "surgery-disposition": CAPS.EMR_TREAT, "surgery-get": CAPS.EMR_VIEW, "surgery-list": CAPS.EMR_VIEW,
+        "surgery-board": CAPS.EMR_VIEW,
+        "anesthesia-start": CAPS.EMR_TREAT, "anesthesia-event": CAPS.EMR_TREAT, "anesthesia-end": CAPS.EMR_TREAT,
+        "anesthesia-get": CAPS.EMR_VIEW, implant: CAPS.EMR_TREAT, "implant-list": CAPS.EMR_VIEW,
         // Charting fluid is the nurse's own record, the same authority as recording a vital.
         fluid: CAPS.EMR_VITALS, balance: CAPS.EMR_VIEW,
         // Handing a patient over is the clinical account of a shift: the same authority as recording
@@ -790,6 +807,82 @@ export async function onRequest(context) {
       }
       if (sub === "device-list" && method === "GET") {
         const r = await deviceList(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "" });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "surgery-book" && method === "POST") {
+        const r = await bookSurgicalCase(request, env, { ...deps, booking: body.booking || body, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "surgery-consent" && method === "POST") {
+        const r = await recordCaseConsent(request, env, { ...deps, caseId: body.caseId, consent: body.consent, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "surgery-marksite" && method === "POST") {
+        const r = await markCaseSite(request, env, { ...deps, caseId: body.caseId, marking: body.marking, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "surgery-signin" && method === "POST") {
+        const r = await signInCase(request, env, { ...deps, caseId: body.caseId, submission: body.submission, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "surgery-timeout" && method === "POST") {
+        const r = await timeOutCase(request, env, { ...deps, caseId: body.caseId, submission: body.submission, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "surgery-incise" && method === "POST") {
+        const r = await inciseCase(request, env, { ...deps, caseId: body.caseId, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "surgery-signout" && method === "POST") {
+        const r = await signOutCase(request, env, { ...deps, caseId: body.caseId, submission: body.submission, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "surgery-abandon" && method === "POST") {
+        const r = await abandonCase(request, env, { ...deps, caseId: body.caseId, reason: body.reason, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "surgery-note" && method === "POST") {
+        const r = await recordOperativeNote(request, env, { ...deps, caseId: body.caseId, note: body.note, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "surgery-disposition" && method === "POST") {
+        const r = await dispositionCase(request, env, { ...deps, caseId: body.caseId, disposition: body.disposition, pacuBed: body.pacuBed, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "surgery-get" && method === "GET") {
+        const r = await getSurgicalCase(request, env, { ...deps, caseId: url.searchParams.get("caseId") || "" });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "surgery-list" && method === "GET") {
+        const r = await listSurgicalCases(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "" });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "surgery-board" && method === "GET") {
+        const r = await listOpenCases(request, env, { ...deps });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "anesthesia-start" && method === "POST") {
+        const r = await startAnesthesia(request, env, { ...deps, caseId: body.caseId, asaClass: body.asaClass, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "anesthesia-event" && method === "POST") {
+        const r = await recordAnesthesiaEvent(request, env, { ...deps, caseId: body.caseId, event: body.event, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "anesthesia-end" && method === "POST") {
+        const r = await endAnesthesia(request, env, { ...deps, caseId: body.caseId, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "anesthesia-get" && method === "GET") {
+        const r = await getAnesthesia(request, env, { ...deps, caseId: url.searchParams.get("caseId") || "" });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "implant" && method === "POST") {
+        const r = await recordImplant(request, env, { ...deps, caseId: body.caseId, implant: body.implant, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "implant-list" && method === "GET") {
+        const r = await listImplants(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "", caseId: url.searchParams.get("caseId") || "" });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "vitals" && method === "POST") {
