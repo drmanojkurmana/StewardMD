@@ -6,11 +6,12 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import {
-  GRANT_TYPE, JWT_BEARER, smartEnabled, findClient, parseScope, grantScopes, readTypesFor, pkceMatches, randomToken,
-  smartConfiguration, decodeJws, verifyClientAssertion, SmartGrant, grantLive,
+  GRANT_TYPE, JWT_BEARER, smartEnabled, findClient, parseScope, grantScopes, readTypesFor, compartmentTypesFor, pkceMatches, randomToken,
+  smartConfiguration, decodeJws, verifyClientAssertion, SmartGrant, grantLive, consentPage, signingKey, publicJwks, signJwt,
 } from "../functions/_wardsynq/smart-server.js";
 import { hit, resetMemory, memoryStore } from "../functions/_wardsynq/rate-limit.js";
 import { RESOURCE_TYPES } from "../functions/_wardsynq/service.js";
+import { FHIR_TYPE } from "../functions/_wardsynq/fhir.js";
 
 const SRC = readFileSync(new URL("../functions/_wardsynq/smart-server.js", import.meta.url), "utf8");
 const subtle = globalThis.crypto.subtle;
@@ -45,7 +46,7 @@ test("OFF UNLESS THE HOSPITAL TURNS IT ON, and clients are configuration, not re
 test("SCOPES: user/ and system/ read only; never widened; a registered wildcard covers, a requested one does not", () => {
   assert.deepEqual(parseScope("user/Observation.read"), { context: "user", resource: "Observation", access: "read", raw: "user/Observation.read" });
   assert.equal(parseScope("user/Observation.rs").raw, "user/Observation.read", "v2 spelling accepted, normalised");
-  assert.equal(parseScope("patient/Observation.read"), null, "no patient context exists, so no patient scope is honoured");
+  assert.deepEqual(parseScope("patient/Observation.read"), { context: "patient", resource: "Observation", access: "read", raw: "patient/Observation.read" }, "a patient scope, fenced to the token's patient by the read layer");
   assert.equal(parseScope("user/Observation.write"), null, "no writes");
   assert.equal(parseScope("user/Observation.*"), null);
   assert.equal(parseScope("user/Practitioner.read"), null, "a type this server does not export");
@@ -81,10 +82,47 @@ test("the smart-configuration document declares exactly what is implemented", ()
   assert.equal(d.authorization_endpoint, "https://h/api/fhir/org1/smart/authorize");
   assert.equal(d.token_endpoint, "https://h/api/fhir/org1/smart/token");
   assert.deepEqual(d.code_challenge_methods_supported, ["S256"]);
-  assert.deepEqual(d.grant_types_supported, ["authorization_code", "client_credentials"]);
+  assert.deepEqual(d.grant_types_supported, ["authorization_code", "client_credentials", "refresh_token"]);
   assert.deepEqual(d.scopes_supported.sort(), ["system/Patient.read", "user/*.read", "user/Observation.read"], "only scopes a registered client actually holds, and nothing unparseable");
-  assert.ok(!d.grant_types_supported.includes("refresh_token"));
-  assert.deepEqual(d["x-wardsynq"], { launch: false, patientScopes: false, refreshTokens: false, writes: false });
+  assert.deepEqual(d["x-wardsynq"], { launch: true, patientScopes: true, refreshTokens: true, idToken: false, writes: false });
+  assert.equal(d.jwks_uri, undefined, "no signing key, no jwks_uri and no OpenID");
+  assert.ok(!d.capabilities.includes("sso-openid-connect"));
+  // With a key, and a client registered for openid: OpenID is offered and the key is discoverable.
+  const cfg2 = { smart: { enabled: true, clients: [{ clientId: "a", scopes: ["user/*.read", "openid", "fhirUser", "launch", "offline_access"] }] } };
+  const d2 = smartConfiguration("https://h/api/fhir/org1", cfg2, { signingKey: { kid: "k" } });
+  assert.equal(d2.jwks_uri, "https://h/api/fhir/org1/.well-known/jwks.json");
+  assert.ok(d2.capabilities.includes("sso-openid-connect") && d2.capabilities.includes("launch-ehr") && d2.capabilities.includes("permission-patient"));
+  assert.deepEqual(d2.scopes_supported.sort(), ["fhirUser", "launch", "offline_access", "openid", "user/*.read"]);
+  assert.ok(!smartConfiguration("https://h/api/fhir/org1", cfg2).scopes_supported.includes("openid"), "openid is not offered without a key even when a client is registered for it");
+  assert.equal(d2["x-wardsynq"].idToken, true);
+});
+
+test("PATIENT SCOPES: fenced types are exactly those held ONLY by a patient/ scope; special scopes are granted by registration, by name", () => {
+  assert.equal(compartmentTypesFor(["user/Observation.read"]), null, "no patient scope: nothing fenced");
+  assert.deepEqual(compartmentTypesFor(["patient/Observation.read", "patient/Encounter.read"]), ["Observation", "Encounter"]);
+  assert.deepEqual(compartmentTypesFor(["patient/Observation.read", "user/Observation.read"]), [], "a user scope on the same type lifts the fence for it");
+  assert.equal(compartmentTypesFor(["patient/*.read"]), "*", "everything fenced");
+  assert.deepEqual(compartmentTypesFor(["patient/*.read", "user/Patient.read"]), Object.keys(FHIR_TYPE).filter((t) => t !== "Patient"));
+  assert.deepEqual(compartmentTypesFor(["patient/*.read", "user/*.read"]), []);
+  const g = grantScopes("launch patient/Observation.read user/Patient.read openid offline_access bogus", ["launch", "patient/*.read", "user/Patient.read", "openid"], ["user", "patient"]);
+  assert.deepEqual(g.granted, ["patient/Observation.read", "user/Patient.read", "launch", "openid"]);
+  assert.deepEqual(g.dropped, ["offline_access", "bogus"], "offline_access was not registered, so it is dropped and named");
+  assert.deepEqual(grantScopes("launch/patient patient/Observation.read", ["patient/*.read"], ["user", "patient"]).dropped, ["launch/patient"], "a special scope is never implied by a resource scope");
+});
+
+test("THE CONSENT PAGE says everything, escapes everything, and runs nothing", () => {
+  const html = consentPage({ clientName: "Viewer <b>x</b>", who: "Dr A", hospital: "H", granted: ["patient/Observation.read", "launch", "offline_access"], dropped: ["user/Encounter.read"], patient: { id: "p1", display: "p1" }, encounter: "e1", action: "https://h/api/fhir/o/smart/authorize", authz: "tx\"quoted", tokenTtlSeconds: 3600, refresh: true, refreshTtlSeconds: 86400 });
+  assert.match(html, /Viewer &lt;b&gt;x&lt;\/b&gt;/, "the client name is escaped");
+  assert.match(html, /value="tx&quot;quoted"/, "the transaction id is escaped");
+  assert.match(html, /Read this patient's Observation data/);
+  assert.match(html, /will NOT get[\s\S]*user\/Encounter\.read/);
+  assert.match(html, /Confined to patient <strong>p1<\/strong> \(encounter e1\)/);
+  assert.match(html, /may be refreshed for up to 24 hours/);
+  assert.ok(!/<script/i.test(html) && !/\son[a-z]+=/i.test(html), "no script, no inline handler");
+  assert.ok(!/—/.test(html), "no em-dash");
+  const ask = consentPage({ clientName: "A", who: "w", hospital: "h", granted: ["launch/patient", "patient/*.read"], dropped: [], needsPatient: true, patientError: "No patient here matches that MRN or id.", action: "/a", authz: "t" });
+  assert.match(ask, /<input name="patient" required/);
+  assert.match(ask, /No patient here matches/);
 });
 
 test("CLIENT ASSERTION: verified against the REGISTERED key, and every claim checked", async () => {
@@ -140,15 +178,39 @@ test("RATE LIMIT: a fixed window that says which store it is", async () => {
   // A new window starts clean; another key is unaffected.
   assert.equal((await hit(deps, { key: "t", limit: 3, windowMs: 60000, now: 1000 + 60001 })).allowed, true);
   assert.equal((await hit(deps, { key: "u", limit: 1, windowMs: 60000, now: 1000 })).allowed, true);
+  // A Workers rate-limit binding, when bound, is asked first and is the exact, cross-isolate answer.
+  const calls = [];
+  const binding = { limit: async ({ key }) => { calls.push(key); return { success: calls.length <= 2 }; } };
+  assert.equal((await hit({ binding, store: memoryStore() }, { key: "b", limit: 99, windowMs: 60000 })).store, "binding");
+  await hit({ binding }, { key: "b", limit: 99, windowMs: 60000 });
+  const third = await hit({ binding }, { key: "b", limit: 99, windowMs: 60000 });
+  assert.equal(third.allowed, false); assert.ok(third.retryAfterSeconds >= 1);
+  assert.deepEqual(calls, ["b", "b", "b"]);
+  // A binding that throws falls through to a store that counts, never to "allowed" without counting.
+  const broken = { limit: async () => { throw new Error("binding down"); } };
+  assert.equal((await hit({ binding: broken, store: memoryStore() }, { key: "c", limit: 1, windowMs: 60000, now: 5000 })).store, "memory");
+  assert.equal((await hit({ binding: broken, store: memoryStore() }, { key: "c", limit: 1, windowMs: 60000, now: 5000 })).allowed, false);
 });
 
-test("NO LAUNCH, NO PATIENT SCOPES, NO REFRESH, NO WRITES - said in code, not only in prose", () => {
+test("NO WRITES, EVER - said in code, not only in prose; and nothing is signed without the hospital's key", async () => {
   const code = SRC.replace(/\/\*[\s\S]*?\*\//g, "").replace(/\/\/[^\n]*/g, "");
-  assert.ok(!/refresh_token/.test(code));
-  assert.ok(!/"patient\//.test(code));
   assert.ok(/tier: TIER\.READ/.test(code), "the bearer's actor is READ tier");
   assert.ok(/write: \[\]/.test(code), "with an empty write scope");
   // Exactly one place asks for a write authority: a person revoking somebody else's token. Nothing else.
   assert.equal((code.match(/"record:write"/g) || []).length, 1, "no write door except the admin revoking another's token");
   assert.ok(/"record:read"/.test(code), "authorising an app needs the clinician to be able to read the record themselves");
+  assert.equal(signingKey({}), null);
+  assert.equal(signingKey({ WSQ_SMART_SIGNING_JWK: "not json" }), null);
+  assert.equal(signingKey({ WSQ_SMART_SIGNING_JWK: JSON.stringify({ kty: "RSA" }) }), null, "only the key shape this server signs with");
+  const kp = await subtle.generateKey({ name: "ECDSA", namedCurve: "P-256" }, true, ["sign", "verify"]);
+  const priv = await subtle.exportKey("jwk", kp.privateKey);
+  const key = signingKey({ WSQ_SMART_SIGNING_JWK: JSON.stringify({ ...priv, kid: "k9" }) });
+  assert.equal(key.kid, "k9");
+  const pub = publicJwks(key);
+  assert.equal(pub.keys.length, 1); assert.ok(!("d" in pub.keys[0])); assert.equal(pub.keys[0].alg, "ES256");
+  const jwt = await signJwt(key, { iss: "i", sub: "s", aud: "a", exp: 9999999999 });
+  const d = decodeJws(jwt);
+  assert.equal(d.header.kid, "k9");
+  const verifier = await subtle.importKey("jwk", pub.keys[0], { name: "ECDSA", namedCurve: "P-256" }, false, ["verify"]);
+  assert.equal(await subtle.verify({ name: "ECDSA", hash: "SHA-256" }, verifier, d.signature, new TextEncoder().encode(d.signingInput)), true);
 });
