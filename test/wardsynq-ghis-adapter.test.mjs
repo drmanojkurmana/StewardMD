@@ -153,6 +153,60 @@ test("labs: a source critical flag does not by itself gate anything", () => {
     "criticality as a clinical control belongs to the safety engine, not to whatever a source system asserts");
 });
 
+test("labs: the 2026-09-06 LOINC coverage widening resolves every newly added concept, and both deliberately-excluded ones stay ghis-local", () => {
+  const b = bundle({
+    labs: [
+      { test: "Calcium", result: "9.2", units: "mg/dL" },
+      { test: "Ionised Calcium", result: "1.15", units: "mmol/L" },
+      { test: "Magnesium", result: "2.1", units: "mg/dL" },
+      { test: "Phosphate", result: "3.4", units: "mg/dL" },
+      { test: "Phosphorus", result: "3.4", units: "mg/dL" },
+      { test: "Direct Bilirubin", result: "0.3", units: "mg/dL" },
+      { test: "Alkaline Phosphatase", result: "88", units: "U/L" },
+      { test: "Amylase", result: "60", units: "U/L" },
+      { test: "Lipase", result: "40", units: "U/L" },
+      { test: "Procalcitonin", result: "0.1", units: "ng/mL" },
+      { test: "Haematocrit", result: "38", units: "%" },
+      // Deliberately excluded — genuinely ambiguous, not merely unseeded (see LAB_CODE_SEED's own header).
+      { test: "Bicarbonate", result: "24", units: "mEq/L" },
+      { test: "Neutrophils", result: "70", units: "%" },
+      // "PCT" is procalcitonin on a biochemistry report and PLATELETCRIT on an automated CBC, where
+      // it prints alongside MPV/PDW. This adapter maps CBC parameters too, so both reach it.
+      { test: "PCT", result: "0.22", units: "%" },
+    ],
+  });
+  const { observations, issues } = mapGhisBundle(b);
+  const codeFor = (name) => (observations.find((o) => o.sourceTestName === name) || {}).code;
+  const systemFor = (name) => (observations.find((o) => o.sourceTestName === name) || {}).codeSystem;
+
+  assert.equal(codeFor("Calcium"), "17861-6");
+  assert.equal(codeFor("Ionised Calcium"), "1994-3");
+  assert.notEqual(codeFor("Ionised Calcium"), codeFor("Calcium"), "ionised and total calcium are different analytes with different codes");
+  assert.equal(codeFor("Magnesium"), "19123-9");
+  assert.equal(codeFor("Phosphate"), "2777-1");
+  assert.equal(codeFor("Phosphorus"), "2777-1", "phosphate and phosphorus name the same analyte");
+  assert.equal(codeFor("Direct Bilirubin"), "1968-7");
+  assert.equal(codeFor("Alkaline Phosphatase"), "6768-6");
+  assert.equal(codeFor("Amylase"), "1798-8");
+  assert.equal(codeFor("Lipase"), "3040-3");
+  assert.equal(codeFor("Procalcitonin"), "33959-8");
+  assert.equal(codeFor("Haematocrit"), "4544-3");
+
+  // Bicarbonate/TCO2 and neutrophil %/absolute each carry MORE THAN ONE possible LOINC code for
+  // one bare test name — no code is guessed for either, exactly like any other unseeded test.
+  assert.equal(systemFor("Bicarbonate"), "ghis-local");
+  assert.equal(codeFor("Bicarbonate"), "Bicarbonate", "kept under its own name, not coded");
+  assert.equal(systemFor("Neutrophils"), "ghis-local");
+  assert.equal(codeFor("Neutrophils"), "Neutrophils");
+  // The bare abbreviation must NOT become procalcitonin: a plateletcrit coded as a sepsis biomarker
+  // is a fabricated result, at a value that reads plausibly as either.
+  assert.equal(systemFor("PCT"), "ghis-local", "PCT is ambiguous (procalcitonin vs plateletcrit)");
+  assert.notEqual(codeFor("PCT"), "33959-8", "PCT must never be coded as procalcitonin");
+  // ...while the full name still is, and PCV (packed cell volume) is unambiguously haematocrit.
+  assert.equal(codeFor("Procalcitonin"), "33959-8");
+  assert.equal(issues.filter((i) => i.code === "GHIS_LAB_UNMAPPED" && (i.testName === "Bicarbonate" || i.testName === "Neutrophils")).length, 2);
+});
+
 test("labs: an unmapped test keeps its name and is reported, never dropped", () => {
   const { observations, issues } = mapGhisBundle(bundle({ labs: [{ test: "Serum Xyzase", result: "3", units: "U/L" }] }));
   assert.equal(observations.length, 1, "an unmapped lab is still a real result and must reach the chart");

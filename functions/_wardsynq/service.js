@@ -105,6 +105,10 @@ const RESOURCE_TYPES = Object.freeze([
    * stored total stops being true the moment the pump changes - and an infusion that stops being
    * charted is uncharted, not stopped. */
   "InfusionRate",
+  /* That a value was DECISIVE for a named person at a time. Not a view log: a page rendering a
+   * hundred numbers has not shown a clinician a hundred numbers. It exists so that when a figure is
+   * later found to be wrong there is a list of people to tell - HAZ-FLUID-01's missing half. */
+  "ClinicalRead",
   /* A record that an order set was applied, and exactly what landed and what did not. NOT the orders
    * themselves - those go through the ordinary path and are ordinary orders. This is what makes a
    * partial application visible, and what finds the patients a bad set touched. */
@@ -125,6 +129,54 @@ const RESOURCE_TYPES = Object.freeze([
    * clinical one: nothing here touches the MedicationOrder, because "we sent this" is a statement
    * about a message, not about the treatment. */
   "PrescriptionTransmission",
+  /* A coded claim. Stored here for one reason: append-only. The whole safety property of
+   * wardsynq-billing.js is that a claim's coding history survives - "we found more documentation"
+   * after a denial is the commonest shape of real upcoding, and a claim whose earlier coding could
+   * be edited away would make it invisible. It is a financial record and never a clinical one:
+   * nothing reads a Claim to decide anything about a patient. */
+  "Claim",
+  /* A payer's funding decision. Its own type precisely so it can never be mistaken for a clinical
+   * one - a refused pre-auth means the payer will not pay, and it does not mean the treatment is
+   * not indicated. Kept apart from the chart so nothing clinical can ever read it as an answer. */
+  "PreAuthorisation",
+  /* That a patient was given their own copy of the record, by a named clinician, at a time. A
+   * RECEIPT and never a copy: it holds which results went and how many diagnoses, and none of their
+   * values - a frozen second copy of clinical data that no correction ever reaches is a liability,
+   * not a record. Append-only, because "you were given this" is exactly the claim that has to
+   * survive somebody wishing it had not been. */
+  "PatientRecordRelease",
+  /* That a backup run finished, and what sequence it covered. A RECEIPT written by the caller, never
+   * inferred from the export pages: a caller that stopped halfway holds a file that verifies and is
+   * short, and only the caller knows whether it actually stored the last page. Kept in the record
+   * itself so the recovery point is answerable from the same store a restore would rebuild. */
+  "BackupRun",
+  /* A pharmacy stock movement. The LEVEL is summed from these and never stored as a counter, because
+   * a counter loses one of two concurrent updates and the direction it loses in is the one that says
+   * there is more stock than there is. Issues are deliberately NOT movements: the quantity that left
+   * the pharmacy is already a MedicationDispense, and two entries for one event can disagree. */
+  "StockMovement",
+  /* A patient's own access to their own record: who enrolled them, how they were identified, and the
+   * DIGESTS of the code and session token - never the secrets themselves, because a grant readable
+   * by staff must not be a way to become the patient. Append-only so a revocation cannot be deleted
+   * afterwards, which is the only thing that makes revocation mean anything. */
+  "PatientAccessGrant",
+  /* A message a patient sent to their care team. It carries the warning they were shown at the
+   * moment they sent it, stamped on the row: anybody reading this later - a clinician, an
+   * investigator - needs to know what the patient had been told about the channel. Nothing
+   * auto-replies to one, and a reply is written by a clinician's own actor. */
+  "PatientMessage",
+  /* What will actually be done in the scanner. Its own type because protocolling is the point where
+   * an imaging REQUEST becomes a drug administration - the contrast decision - and that decision has
+   * a different author, a different moment and different evidence from the request itself. Kept
+   * against the request VERSION, so a later change to the request cannot make it look as though the
+   * protocol was decided for a study nobody protocolled. */
+  "ImagingProtocol",
+  /* Something another system sent that WardSynQ would not write silently: a patient who might be
+   * one of two people here, a probable duplicate, a record that would overwrite one this hospital
+   * authored, a resource type nothing maps. Held HERE, with the payload, rather than dropped or
+   * guessed at - because the failure mode of every interface is the message that vanished and the
+   * clinician who never knew it had been sent. Append-only, and resolved by a person. */
+  "ExchangeException",
 ]);
 
 const MODE = Object.freeze({ SYSTEM_OF_RECORD: "system-of-record", INTEGRATION: "integration" });

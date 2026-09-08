@@ -2162,11 +2162,14 @@ test("the FHIR door is not a way around the record's own access rules", async ()
   const cap = await as(NURSE, `/ward/fhir/metadata?orgId=${ORG}`);
   assert.equal(cap.resourceType, "CapabilityStatement");
   const codes = new Set(cap.rest[0].resource.flatMap((r) => r.interaction.map((i) => i.code)));
-  assert.deepEqual([...codes].sort(), ["read", "search-type"]);
+  // Widened 2026-09-08 when vread and history were implemented. Still nothing that writes.
+  assert.deepEqual([...codes].sort(), ["history-instance", "read", "search-type", "vread"]);
 
-  // And there is no write door: POST to the FHIR path is not a create.
+  // And with inbound FHIR off (the default), a POST is a 404 OperationOutcome - the existence of a
+  // write door is not leaked - and nothing is written.
   const write = await as(DOCTOR, "/ward/fhir", "POST", { orgId: ORG, resourceType: "Patient", id: "smuggled" });
   assert.equal(write.__status, 404);
+  assert.equal(write.resourceType, "OperationOutcome");
   assert.equal(await RECORD.latest(TENANT_ROW.id, "Patient", "smuggled"), null);
 });
 
@@ -2723,6 +2726,270 @@ test("sending is prescribing's business, and nothing unsendable is sent", async 
   const bogus = await as(DOCTOR, "/ward/transmit", "POST", { orgId: ORG, orderId: ord.orderId, channel: "carrier-pigeon" });
   assert.equal(bogus.__status, 400);
   assert.equal(bogus.error, "unknown_channel");
+});
+
+/* ---- who acted on the number before it was corrected ---------------------------------------------- */
+
+test("A CORRECTION PRODUCES A LIST OF PEOPLE, and a read of the right figure is not on it", async () => {
+  seedHospital();
+  const { adm } = await admittedPatientOnDrug();
+  const read = (body) => as(NURSE, "/ward/read", "POST", { orgId: ORG, patientId: adm.patientId, valueId: "fluid-balance-0600", ...body });
+
+  /* A VALUE MERELY RENDERED IS NOT A READ. A page showing a hundred numbers has not shown a clinician
+   * a hundred numbers, and logging everything buries the three reads that mattered. */
+  const noKind = await read({ version: 1, kind: "rendered" });
+  assert.equal(noKind.__status, 400);
+  assert.equal(noKind.error, "unknown_kind");
+  assert.match(noKind.detail, /merely rendered on a page is not a read/);
+
+  // And a read without a version cannot tell a read of the wrong figure from a read of the right one.
+  assert.equal((await read({ kind: "acted-on" })).error, "version_required");
+
+  const acted = await read({ version: 1, value: 400, kind: "acted-on", context: "Prescribed diuresis", at: "2026-09-07T06:12:00.000Z" });
+  assert.equal(acted.__status, 200, JSON.stringify(acted));
+  // The purpose is stamped on the ROW, so it travels with the data rather than living in a policy
+  // document nobody reads before running a query.
+  assert.match(acted.purpose, /Not for performance management/);
+  const stored = await RECORD.latest(TENANT_ROW.id, "ClinicalRead", acted.readId);
+  assert.match(stored.purpose, /told if the value is later found to be wrong/);
+
+  // A second person reads the same wrong figure, and somebody else reads it AFTER the correction.
+  await as(DOCTOR, "/ward/read", "POST", { orgId: ORG, patientId: adm.patientId, valueId: "fluid-balance-0600", version: 1, value: 400, kind: "opened", at: "2026-09-07T06:30:00.000Z" });
+  await as(DOCTOR, "/ward/read", "POST", { orgId: ORG, patientId: adm.patientId, valueId: "fluid-balance-0600", version: 2, value: 40, kind: "opened", at: "2026-09-07T09:00:00.000Z" });
+
+  const who = await as(NURSE, `/ward/readers?orgId=${ORG}&patientId=${adm.patientId}&valueId=fluid-balance-0600&supersededVersion=1&correctedAt=${encodeURIComponent("2026-09-07T08:00:00.000Z")}&label=${encodeURIComponent("06:00 fluid balance")}&unit=mL`);
+  assert.equal(who.__status, 200, JSON.stringify(who));
+  /* "Three totals changed" is not actionable. "Dr Shah read the 06:00 balance and it was wrong" is,
+   * and the difference is whether anybody does anything. */
+  assert.equal(who.people.length, 2);
+  const names = who.people.map((p) => p.person).sort();
+  assert.deepEqual(names, [idFor(DOCTOR), idFor(NURSE)].sort());
+  assert.match(who.note, /Telling them is a human act; nothing here has sent anything/);
+
+  /* READING A VALUE THAT WAS ALREADY CORRECT IS NOT AN INCIDENT. The 09:00 read was of version 2,
+   * after the correction, and notifying it would flood the list and teach people this is noise. */
+  const v2 = await as(NURSE, `/ward/readers?orgId=${ORG}&patientId=${adm.patientId}&valueId=fluid-balance-0600&supersededVersion=2&correctedAt=${encodeURIComponent("2026-09-07T12:00:00.000Z")}`);
+  assert.equal(v2.people.length, 1, "only the version-2 read");
+
+  // An empty list is not "nobody was affected", and it says so.
+  const none = await as(NURSE, `/ward/readers?orgId=${ORG}&patientId=${adm.patientId}&valueId=some-other-value&supersededVersion=1&correctedAt=${encodeURIComponent("2026-09-07T08:00:00.000Z")}`);
+  assert.deepEqual(none.people, []);
+  assert.match(none.note, /not the same as nobody having seen it/);
+});
+
+test("THERE IS NO 'WHAT DID THIS PERSON READ' QUERY, and retention is enforced on the answer", async () => {
+  seedHospital();
+  const { adm } = await admittedPatientOnDrug();
+
+  /* A log of which clinician looked at what is also a management tool for something other than
+   * safety, and if it is used that way people stop opening things - which makes the record less safe.
+   * The only question the routes answer is "who has to be told about THIS correction". */
+  const routes = await Promise.all([
+    as(DOCTOR, `/ward/reads?orgId=${ORG}&by=${idFor(NURSE)}`),
+    as(DOCTOR, `/ward/read-log?orgId=${ORG}&patientId=${adm.patientId}`),
+  ]);
+  assert.ok(routes.every((r) => r.__status === 404), "no route lists what a person has read");
+
+  // A read older than the retention window is not returned, even though its row is still there.
+  await as(NURSE, "/ward/read", "POST", { orgId: ORG, patientId: adm.patientId, valueId: "old-value", version: 1, kind: "opened", at: "2026-01-01T09:00:00.000Z" });
+  const stale = await as(NURSE, `/ward/readers?orgId=${ORG}&patientId=${adm.patientId}&valueId=old-value&supersededVersion=1&correctedAt=${encodeURIComponent("2026-09-07T08:00:00.000Z")}`);
+  assert.deepEqual(stale.people, [], "a read log that grows forever becomes a dossier");
+  assert.equal(stale.outsideRetention, 1, "and it says how many it would not answer with");
+  assert.ok(await RECORD.byPatient(TENANT_ROW.id, "ClinicalRead", adm.patientId), "the row itself is untouched");
+});
+
+/* ---- the early warning score ---------------------------------------------------------------------- */
+
+test("AN INCOMPLETE NEWS2 IS NEVER REASSURING, however low the partial total", async () => {
+  seedHospital();
+  const { reg, adm } = await admittedPatientOnDrug();
+  assert.ok(reg.mrn);
+
+  /* admittedPatientOnDrug charts only a weight, so nearly every parameter is missing. A system that
+   * scored an absent respiratory rate as zero would produce a reassuring total about a patient
+   * nobody has looked at - the single most dangerous way to implement NEWS2. */
+  const thin = await as(NURSE, `/ward/news2?orgId=${ORG}&patientId=${adm.patientId}`);
+  assert.equal(thin.__status, 200, JSON.stringify(thin));
+  assert.equal(thin.score.scorable, false);
+  /* The partial total IS returned - hiding it would be its own kind of dishonesty - but there is NO
+   * RISK, and the reason says in words that the total must not be read as one. A consumer that read
+   * `total` without `scorable` would see a reassuring 0 about a patient nobody has examined. */
+  assert.equal(thin.score.risk, null, "a partial total is not a risk assessment");
+  assert.ok(thin.score.missing.length > 0);
+  assert.match(thin.score.reason, /must not be read as one/);
+  assert.ok(thin.note, "and the response repeats it");
+
+  // A full set of observations scores.
+  await as(NURSE, "/ward/vitals", "POST", {
+    orgId: ORG, encounterId: adm.encounterId, patientId: adm.patientId,
+    // All six numeric parameters PLUS the two NEWS2 could never record before: supplemental oxygen
+    // and level of consciousness. Without them no early warning score can ever complete.
+    vitals: { rr: "18", spo2: "97", sbp: "126", pulse: "78", temp: "98.6", tempUnit: "F", o2: false, acvpu: "A" },
+  });
+  const scored = await as(NURSE, `/ward/news2?orgId=${ORG}&patientId=${adm.patientId}`);
+  assert.equal(scored.score.scorable, true, JSON.stringify(scored.score));
+  assert.equal(typeof scored.score.total, "number");
+  assert.ok(scored.score.risk);
+
+  /* SCALE 2 IS A PRESCRIPTION AND IS NEVER INFERRED. Using Scale 1 on a patient targeted at 88-92%
+   * escalates somebody who is at their target; using Scale 2 on anyone else hides real hypoxia. */
+  assert.equal(scored.scale, 1);
+  assert.match(scored.scaleNote, /never inferred/);
+  const two = await as(NURSE, `/ward/news2?orgId=${ORG}&patientId=${adm.patientId}&scale=2`);
+  assert.equal(two.scale, 2);
+  assert.match(two.scaleNote, /documented target of 88-92%/);
+
+  /* THE ESCALATION POLICY IS UNAPPROVED AND SAYS SO. A response time nobody signed off, presented as
+   * fact, is how a system gets trusted for something it has no authority to say. */
+  assert.equal(scored.escalationApproved, false);
+  assert.match(scored.escalationWarning, /UNAPPROVED seed content/);
+  assert.match(scored.monitoring, /Nothing has been paged/);
+
+  // With the hospital's own policy configured, it is theirs and the warning goes.
+  const org = docs.get(`q_orgs/${ORG}`);
+  org.fields.wardsynq = { ...org.fields.wardsynq, criticalEscalation: { high: { responder: "ICU outreach", respondWithinMinutes: 10 }, medium: {}, low: {}, "low-medium": {} } };
+  const owned = await as(NURSE, `/ward/news2?orgId=${ORG}&patientId=${adm.patientId}`);
+  assert.equal(owned.escalationApproved, true);
+  assert.equal(owned.escalationWarning, undefined);
+
+  // A laboratory result is not a NEWS2 parameter and must not reach the scorer.
+  const sr = await orderTest(adm, "Potassium", "wsq-sr-news");
+  await as(LABTECH, "/ward/release-result", "POST", { orgId: ORG, serviceRequestId: sr, tests: [{ test: "Potassium", value: 7.4, unit: "mmol/L" }] });
+  const after = await as(NURSE, `/ward/news2?orgId=${ORG}&patientId=${adm.patientId}`);
+  assert.equal(after.score.total, scored.score.total, "the potassium changed nothing");
+  assert.equal(after.tool, "NEWS2", "and the tool is always named");
+});
+
+test("A CHILD GETS PEWS, because a refusal with nothing behind it protects them less", async () => {
+  seedHospital();
+  const reg = await as(DOCTOR, "/patient/register", "POST", { orgId: ORG, name: "Child Testcase", mobile: "9876500055", gender: "male", ageYears: 4 });
+  const adm = await as(DOCTOR, "/ward/admit", "POST", { orgId: ORG, mrn: reg.mrn, ward: "Paediatrics", bed: "3", admittedAt: "2026-09-07T08:00:00.000Z" });
+  await as(NURSE, "/ward/vitals", "POST", {
+    orgId: ORG, encounterId: adm.encounterId, patientId: adm.patientId,
+    vitals: { rr: "24", spo2: "98", pulse: "110", temp: "98.6", tempUnit: "F", sbp: "95", o2: false, acvpu: "A" },
+  });
+
+  const ews = await as(NURSE, `/ward/news2?orgId=${ORG}&patientId=${adm.patientId}`);
+  assert.equal(ews.__status, 200, JSON.stringify(ews));
+  /* NEWS2 is not validated below 16 and refuses. Leaving it there would remove even the crude signal
+   * a child was getting - so PEWS answers instead, and the response NAMES which tool scored it: a
+   * PEWS total and a NEWS2 total are different numbers on different scales. */
+  assert.equal(ews.tool, "PEWS");
+  assert.match(ews.toolNote, /not validated below 16 years/);
+  assert.match(ews.toolNote, /UNAPPROVED/, "and its bands are nobody's approved content yet");
+});
+
+/* ---- the summary as a document ------------------------------------------------------------------- */
+
+test("A DRAFT SUMMARY IS NOT A DOCUMENT, and a signed one is CDA level 1", async () => {
+  seedHospital();
+  const { adm } = await admittedPatientOnDrug();
+  await as(DOCTOR, "/ward/problem", "POST", { orgId: ORG, problem: { patientId: adm.patientId, encounterId: adm.encounterId, display: "Community-acquired pneumonia" } });
+
+  // Nothing drafted yet.
+  const none = await as(DOCTOR, `/ward/cda?orgId=${ORG}&encounterId=${adm.encounterId}`);
+  assert.equal(none.__status, 404);
+  assert.equal(none.error, "summary_not_found");
+
+  // Drafting WRITES, so it is the POST. The GET only reads what is already there.
+  const drafted = await as(DOCTOR, "/ward/discharge-summary", "POST", { orgId: ORG, encounterId: adm.encounterId, patientId: adm.patientId });
+  assert.equal(drafted.__status, 200, JSON.stringify(drafted));
+
+  /* THE REFUSAL THAT MATTERS. A receiving hospital reading a draft would be reading something nobody
+   * here has agreed to. */
+  const draft = await as(DOCTOR, `/ward/cda?orgId=${ORG}&encounterId=${adm.encounterId}`);
+  assert.equal(draft.__status, 409);
+  assert.equal(draft.error, "summary_not_signed");
+  assert.match(draft.detail, /once a clinician has signed it/);
+
+  await as(DOCTOR, "/ward/sign-discharge-summary", "POST", { orgId: ORG, encounterId: adm.encounterId });
+
+  const cda = await as(DOCTOR, `/ward/cda?orgId=${ORG}&encounterId=${adm.encounterId}`);
+  assert.equal(cda.__status, 200, JSON.stringify(cda));
+  assert.ok(cda.document.startsWith('<?xml version="1.0" encoding="UTF-8"?>'));
+  assert.match(cda.document, /<ClinicalDocument xmlns="urn:hl7-org:v3">/);
+  assert.match(cda.document, /code="18842-5"/, "it says it is a discharge summary");
+  assert.match(cda.document, /WSQ Ward Hospital/, "and names the custodian");
+  // The author is who SIGNED it, not who exported it.
+  assert.match(cda.document, new RegExp('<id extension="' + idFor(DOCTOR) + '"/>'));
+  assert.match(cda.document, /Community-acquired pneumonia/, "the summary's own words travel");
+
+  /* IT CLAIMS LEVEL 1 AND NO MORE. A templateId would assert conformance to a profile this has never
+   * been validated against, and a receiver cannot tell a real claim from an invented one. */
+  assert.ok(!cda.document.includes("templateId"));
+  assert.ok(!cda.document.includes("<entry>"));
+  assert.match(cda.note, /LEVEL 1/);
+  assert.match(cda.note, /has not been validated against/);
+
+  // Reading a chart as a document still needs the authority to read a chart.
+  assert.equal((await as(PHARM, `/ward/cda?orgId=${ORG}&encounterId=${adm.encounterId}`)).__status, 403);
+});
+
+/* ---- the imaging report --------------------------------------------------------------------------- */
+
+test("A FINAL IMPRESSION THAT CHANGED IS FLAGGED, and the preliminary one survives", async () => {
+  seedHospital();
+  const { adm } = await admittedPatientOnDrug();
+  const sr = await as(DOCTOR, "/ward/investigation", "POST", { orgId: ORG, encounterId: adm.encounterId, code: "CT head", category: "imaging", priority: "stat" });
+  assert.equal(sr.__status, 200, JSON.stringify(sr));
+  const report = (body) => as(LABTECH, "/ward/report-imaging", "POST", { orgId: ORG, serviceRequestId: sr.orderId, ...body });
+
+  /* A REPORT WITH NOTHING SEEN IS NOT A REPORT, and a FINAL one needs the sentence a clinician will
+   * act on - releasing it without would leave a ward drawing its own radiological conclusion. */
+  assert.equal((await report({ impression: "Normal" })).error, "findings_required");
+  const noImpression = await report({ findings: "No acute intracranial abnormality.", status: "final" });
+  assert.equal(noImpression.__status, 422);
+  assert.equal(noImpression.error, "impression_required");
+  assert.match(noImpression.detail, /release it as preliminary/);
+
+  // The registrar at 02:00.
+  const prelim = await report({ findings: "Study degraded by motion.", impression: "No intracranial haemorrhage.", status: "preliminary", modality: "CT" });
+  assert.equal(prelim.__status, 200, JSON.stringify(prelim));
+  assert.equal(prelim.status, "preliminary");
+  assert.match(prelim.note, /stays on the record/);
+
+  /* The consultant at 09:00, and the impression has changed. This is the commonest serious event in
+   * radiology and it is flagged rather than quietly overwritten. */
+  const final = await report({ findings: "Small left frontal contusion.", impression: "Small left frontal contusion. No mass effect.", status: "final" });
+  assert.equal(final.__status, 200, JSON.stringify(final));
+  assert.equal(final.discrepancy, true);
+  assert.equal(final.previousImpression, "No intracranial haemorrhage.");
+  // Nothing here decides whether the change matters clinically - it says who to ask.
+  assert.match(final.detail, /not this system's call/);
+  assert.match(final.detail, /tell the team looking after this patient/);
+
+  /* THE PRELIMINARY READING SURVIVES. A system that kept only the final one would erase what the
+   * night team actually saw and decided from. */
+  const history = await RECORD.history(TENANT_ROW.id, "DiagnosticReport", final.reportId);
+  assert.deepEqual(history.map((h) => h.status), ["preliminary", "final"]);
+  assert.equal(history[0].impression, "No intracranial haemorrhage.");
+  assert.equal(history[1].discrepancy, true);
+
+  // A final report is CORRECTED, never re-finalised silently.
+  const again = await report({ findings: "x", impression: "y", status: "final" });
+  assert.equal(again.__status, 409);
+  assert.equal(again.error, "already_final");
+  assert.equal((await report({ findings: "x", impression: "y", status: "corrected" })).__status, 200);
+});
+
+test("reporting a study is the reporter's authority, and it answers a request that exists", async () => {
+  seedHospital();
+  const { adm } = await admittedPatientOnDrug();
+  const sr = await as(DOCTOR, "/ward/investigation", "POST", { orgId: ORG, encounterId: adm.encounterId, code: "Chest X-ray", category: "imaging" });
+
+  const ghost = await as(LABTECH, "/ward/report-imaging", "POST", { orgId: ORG, serviceRequestId: "wsq-sr-nope", findings: "x" });
+  assert.equal(ghost.__status, 404);
+  assert.equal(ghost.error, "request_not_found");
+
+  // A nurse charts, a doctor orders; neither reports the film.
+  assert.equal((await as(NURSE, "/ward/report-imaging", "POST", { orgId: ORG, serviceRequestId: sr.orderId, findings: "x" })).__status, 403);
+  // The report holds no pixels: DICOM/PACS is out of scope and a study half-living here is worse
+  // than one that does not.
+  const done = await as(LABTECH, "/ward/report-imaging", "POST", { orgId: ORG, serviceRequestId: sr.orderId, findings: "Clear lung fields.", impression: "Normal chest radiograph.", status: "final" });
+  const stored = await RECORD.latest(TENANT_ROW.id, "DiagnosticReport", done.reportId);
+  assert.equal(stored.category, "imaging");
+  assert.equal(stored.image, undefined);
+  assert.deepEqual(stored.resultObservationIds, [], "an imaging report has no values");
 });
 
 /* ---- the drip ------------------------------------------------------------------------------------ */
@@ -3991,4 +4258,340 @@ test("signing is not a nurse's act, and an unfinished note is signed as unfinish
   const signed = await as(DOCTOR, "/ward/note-sign", "POST", { orgId: ORG, noteId: partial.noteId });
   assert.equal(signed.__status, 200, JSON.stringify(signed));
   assert.deepEqual(signed.incompleteSections, ["plan"], "and it is still recorded as incomplete after signing");
+});
+
+/* ---- FHIR R4 server core (2026-09-08): media type, meta, search, history, vread ---------------
+ *
+ * The audit that preceded this found the CapabilityStatement declaring application/fhir+json while
+ * the route served application/json, and no search grammar, no versionId, no history. These are the
+ * route-level proofs, against the real record, for what a standards-compliant client needs. */
+
+async function asRaw(email, path, method, headers) {
+  return onRequest({
+    request: new Request("https://x/api/queue" + path, { method: method || "GET", headers: { "Cf-Access-Authenticated-User-Email": email, ...(headers || {}) } }),
+    env: ENV,
+  });
+}
+
+test("FHIR: every response is application/fhir+json, a read carries an ETag over versionId, and history and vread are real", async () => {
+  seedHospital();
+  const { adm } = await admittedPatientOnDrug();
+
+  const meta = await asRaw(DOCTOR, `/ward/fhir/metadata?orgId=${ORG}`);
+  assert.match(meta.headers.get("content-type"), /^application\/fhir\+json/);
+  const cs = await meta.json();
+  assert.equal(cs.resourceType, "CapabilityStatement");
+  assert.ok(cs.rest[0].resource.find((r) => r.type === "Observation").searchParam.some((p) => p.name === "code"));
+
+  const one = await asRaw(DOCTOR, `/ward/fhir/Encounter/${adm.encounterId}?orgId=${ORG}`);
+  assert.match(one.headers.get("content-type"), /^application\/fhir\+json/);
+  const enc = await one.json();
+  assert.equal(enc.meta.versionId, "1");
+  assert.equal(one.headers.get("etag"), 'W/"1"', "the ETag IS the record version");
+  assert.ok(one.headers.get("last-modified"));
+  assert.equal(enc.meta.source, "urn:stewardmd:source:wardsynq-native");
+
+  // A transfer writes version 2; history shows both, newest first, and vread fetches either.
+  const mv = await as(DOCTOR, "/ward/transfer", "POST", { orgId: ORG, encounterId: adm.encounterId, ward: "Medical B", bed: "3" });
+  assert.equal(mv.__status, 200, JSON.stringify(mv).slice(0, 200));
+  const hist = await (await asRaw(DOCTOR, `/ward/fhir/Encounter/${adm.encounterId}/_history?orgId=${ORG}`)).json();
+  assert.equal(hist.resourceType, "Bundle");
+  assert.equal(hist.type, "history");
+  assert.deepEqual(hist.entry.map((e) => e.resource.meta.versionId), ["2", "1"]);
+  assert.equal(hist.entry[0].response.etag, 'W/"2"');
+  const v1 = await (await asRaw(DOCTOR, `/ward/fhir/Encounter/${adm.encounterId}/_history/1?orgId=${ORG}`)).json();
+  assert.equal(v1.meta.versionId, "1");
+  assert.equal(v1.location[0].location.display, "Medical A, bed 12", "the OLD ward, because that is what version 1 said");
+  const v9 = await asRaw(DOCTOR, `/ward/fhir/Encounter/${adm.encounterId}/_history/9?orgId=${ORG}`);
+  assert.equal(v9.status, 404);
+  assert.equal((await v9.json()).resourceType, "OperationOutcome");
+});
+
+test("FHIR: search filters by patient, code and date, pages with links, and refuses an unknown parameter rather than dropping it", async () => {
+  seedHospital();
+  const { adm } = await admittedPatientOnDrug();
+  // Two vitals on different days, and a creatinine via the lab, so code= and date= have something to separate.
+  await as(NURSE, "/ward/vitals", "POST", { orgId: ORG, encounterId: adm.encounterId, patientId: adm.patientId, vitals: { pulse: "88" }, recordedAt: "2026-09-01T08:00:00.000Z" });
+  await as(NURSE, "/ward/vitals", "POST", { orgId: ORG, encounterId: adm.encounterId, patientId: adm.patientId, vitals: { pulse: "92" }, recordedAt: "2026-09-05T08:00:00.000Z" });
+
+  const all = await (await asRaw(DOCTOR, `/ward/fhir/Observation?orgId=${ORG}&patient=${adm.patientId}&_count=2`)).json();
+  assert.equal(all.resourceType, "Bundle");
+  assert.equal(all.type, "searchset");
+  assert.ok(all.total >= 3, `total ${all.total}`);
+  assert.equal(all.entry.filter((e) => e.search.mode === "match").length, 2, "_count bounds the page");
+  const links = Object.fromEntries(all.link.map((l) => [l.relation, l.url]));
+  assert.ok(links.next && /_page=1/.test(links.next), "and the next page is linked");
+  assert.ok(links.self.startsWith("https://x/api/queue/ward/fhir/Observation?"));
+
+  // Heart rate is LOINC 8867-4 in the vitals migration; a bare code finds both readings.
+  const hr = await (await asRaw(DOCTOR, `/ward/fhir/Observation?orgId=${ORG}&patient=${adm.patientId}&code=8867-4`)).json();
+  assert.equal(hr.entry.length, 2, JSON.stringify(hr).slice(0, 300));
+  const hrLoinc = await (await asRaw(DOCTOR, `/ward/fhir/Observation?orgId=${ORG}&patient=${adm.patientId}&code=http://loinc.org|8867-4&date=ge2026-09-03`)).json();
+  assert.equal(hrLoinc.entry.length, 1, "system-qualified code plus a date bound");
+  assert.equal(hrLoinc.entry[0].resource.valueQuantity.value, 92);
+
+  // Strict by default: an unsupported parameter is a 400 naming the parameter.
+  const bad = await asRaw(DOCTOR, `/ward/fhir/Observation?orgId=${ORG}&patient=${adm.patientId}&status=final`);
+  assert.equal(bad.status, 400);
+  const oo = await bad.json();
+  assert.equal(oo.resourceType, "OperationOutcome");
+  assert.match(oo.issue[0].diagnostics, /^status:/);
+  // Lenient on request: the parameter is dropped AND reported inside the bundle.
+  const len = await (await asRaw(DOCTOR, `/ward/fhir/Observation?orgId=${ORG}&patient=${adm.patientId}&status=final`, "GET", { Prefer: "handling=lenient" })).json();
+  assert.equal(len.resourceType, "Bundle");
+  assert.ok(len.entry.some((e) => e.search.mode === "outcome" && /status was ignored/.test(e.resource.issue[0].diagnostics)));
+
+  // With inbound off (the default) a write is a 404 OperationOutcome, and an unknown operation is a 404 one.
+  const post = await asRaw(DOCTOR, `/ward/fhir/Observation?orgId=${ORG}`, "POST");
+  assert.equal(post.status, 404);
+  assert.equal((await post.json()).resourceType, "OperationOutcome");
+  const del = await asRaw(DOCTOR, `/ward/fhir/Observation/x?orgId=${ORG}`, "DELETE");
+  assert.equal(del.status, 405, "a method the server never supports is a 405 with Allow");
+  assert.ok(/GET/.test(del.headers.get("allow")));
+  const op = await asRaw(DOCTOR, `/ward/fhir/Encounter/${adm.encounterId}/$validate?orgId=${ORG}`);
+  assert.equal(op.status, 404);
+  assert.equal((await op.json()).resourceType, "OperationOutcome");
+});
+
+test("FHIR: _include pulls the report's observations through the governed read, and $everything is the standard spelling", async () => {
+  seedHospital();
+  const { adm } = await admittedPatientOnDrug();
+  const sr = await as(DOCTOR, "/ward/investigation", "POST", { orgId: ORG, encounterId: adm.encounterId, code: "Renal profile", category: "laboratory" });
+  assert.equal(sr.__status, 200, JSON.stringify(sr).slice(0, 200));
+  const rep = await as(LABTECH, "/ward/release-result", "POST", { orgId: ORG, serviceRequestId: sr.orderId, status: "final", reportedAt: "2026-09-07T10:00:00.000Z", tests: [{ test: "Creatinine", value: 88, unit: "umol/L" }] });
+  assert.equal(rep.__status, 200, JSON.stringify(rep).slice(0, 300));
+
+  const b = await (await asRaw(DOCTOR, `/ward/fhir/DiagnosticReport?orgId=${ORG}&patient=${adm.patientId}&_include=DiagnosticReport:result`)).json();
+  assert.equal(b.resourceType, "Bundle", JSON.stringify(b).slice(0, 300));
+  const match = b.entry.filter((e) => e.search.mode === "match");
+  const inc = b.entry.filter((e) => e.search.mode === "include");
+  assert.equal(match.length, 1);
+  assert.equal(match[0].resource.resourceType, "DiagnosticReport");
+  assert.ok(inc.length >= 1 && inc.every((e) => e.resource.resourceType === "Observation"), "the observations ride along");
+  assert.equal(inc[0].resource.code.coding[0].code, "2160-0", "and they are the real LOINC-coded creatinine");
+
+  const ev = await (await asRaw(DOCTOR, `/ward/fhir/Patient/${adm.patientId}/$everything?orgId=${ORG}`)).json();
+  assert.equal(ev.resourceType, "Bundle");
+  assert.ok(ev.entry.some((e) => e.resource.resourceType === "Patient"));
+  assert.ok(ev.entry.some((e) => e.resource.resourceType === "DiagnosticReport"));
+});
+
+test("FHIR: Provenance by target shows every version with its real author, Consent exports honestly, and _revinclude rides along", async () => {
+  seedHospital();
+  const { adm } = await admittedPatientOnDrug();
+  const mv = await as(DOCTOR, "/ward/transfer", "POST", { orgId: ORG, encounterId: adm.encounterId, ward: "Medical B", bed: "3" });
+  assert.equal(mv.__status, 200, JSON.stringify(mv).slice(0, 200));
+
+  const prov = await (await asRaw(DOCTOR, `/ward/fhir/Provenance?orgId=${ORG}&target=Encounter/${adm.encounterId}`)).json();
+  assert.equal(prov.resourceType, "Bundle", JSON.stringify(prov).slice(0, 300));
+  assert.equal(prov.total, 2, "one Provenance per version");
+  assert.deepEqual(prov.entry.map((e) => e.resource.activity.coding[0].code), ["UPDATE", "CREATE"], "newest first");
+  // Derived from the stamp: the doctor who really wrote it, as an author, not as a display name typed in.
+  assert.ok(prov.entry.every((e) => e.resource.agent[0].who.display === idFor(DOCTOR)), JSON.stringify(prov.entry[0].resource.agent));
+  assert.ok(prov.entry.every((e) => e.resource.agent[0].type.coding[0].code === "author"));
+  assert.equal(prov.entry[1].resource.target[0].reference, `Encounter/${adm.encounterId}/_history/1`);
+
+  const one = await asRaw(DOCTOR, `/ward/fhir/Provenance/Encounter-${adm.encounterId}-v1?orgId=${ORG}`);
+  assert.equal(one.status, 200);
+  assert.equal((await one.json()).resourceType, "Provenance");
+  // A hospital-wide provenance dump is not offered: target is required.
+  const bare = await asRaw(DOCTOR, `/ward/fhir/Provenance?orgId=${ORG}`);
+  assert.equal(bare.status, 400);
+  assert.equal((await bare.json()).resourceType, "OperationOutcome");
+
+  const rev = await (await asRaw(DOCTOR, `/ward/fhir/Encounter?orgId=${ORG}&patient=${adm.patientId}&_revinclude=Provenance:target`)).json();
+  const inc = rev.entry.filter((e) => e.search.mode === "include");
+  assert.equal(inc.length, 1);
+  assert.equal(inc[0].resource.resourceType, "Provenance");
+  assert.equal(inc[0].resource.id, `Encounter-${adm.encounterId}-v2`, "the CURRENT version's provenance");
+
+  // A refusal of external sharing exports as a rejected Consent with a deny provision.
+  const c = await as(NURSE, "/ward/consent", "POST", { orgId: ORG, patientId: adm.patientId, scope: "share-external", decision: "refused" });
+  assert.equal(c.__status, 200, JSON.stringify(c).slice(0, 200));
+  const cs = await (await asRaw(DOCTOR, `/ward/fhir/Consent?orgId=${ORG}&patient=${adm.patientId}`)).json();
+  assert.equal(cs.resourceType, "Bundle", JSON.stringify(cs).slice(0, 300));
+  assert.equal(cs.total, 1);
+  assert.equal(cs.entry[0].resource.status, "rejected");
+  assert.equal(cs.entry[0].resource.provision.type, "deny");
+  assert.equal(cs.entry[0].resource.patient.reference, `Patient/${adm.patientId}`);
+});
+
+/* ---- FHIR inbound (2026-09-08): another system's bundle into this record --------------------- */
+
+function enableInboundFhir() {
+  const org = docs.get(`q_orgs/${ORG}`);
+  org.fields.wardsynq = { ...(org.fields.wardsynq || {}), fhir: { inbound: { enabled: true } } };
+  docs.set(`q_orgs/${ORG}`, org);
+}
+
+/* A realistic bundle from a partner HIS: an MRN the sender assigned, an ABHA, ICD-10 and LOINC
+ * codings alongside one local code, an order, an allergy, a report over its observation, a note. */
+function partnerBundle(over = {}) {
+  const pid = over.patientId || "HIS-PAT-77", mrn = over.mrn || "HIS-MRN-0077", s = over.suffix || "";
+  return {
+    resourceType: "Bundle", type: "collection", id: over.bundleId || "his-bundle-0001",
+    entry: [
+      { resource: { resourceType: "Patient", id: pid, identifier: [{ type: { coding: [{ code: "MR" }] }, system: "urn:his:mrn", value: mrn }, { system: "https://healthid.ndhm.gov.in", value: over.abha || "91-1234-5678-9012" }],
+        name: [{ text: over.name || "Partner Testcase" }], gender: "female", birthDate: over.dob || "1975-03-09" } },
+      { resource: { resourceType: "Encounter", id: `HIS-ENC-1${s}`, status: "finished", class: { code: "IMP" }, subject: { reference: `Patient/${pid}` }, period: { start: "2026-08-01T08:00:00Z", end: "2026-08-04T10:00:00Z" } } },
+      { resource: { resourceType: "Condition", id: `HIS-DX-1${s}`, code: { coding: [{ system: "http://hl7.org/fhir/sid/icd-10", code: "E11.9", display: "Type 2 diabetes" }] }, subject: { reference: `Patient/${pid}` }, clinicalStatus: { coding: [{ code: "active" }] } } },
+      { resource: { resourceType: "Observation", id: `HIS-OBS-1${s}`, status: "final", category: [{ coding: [{ code: "laboratory" }] }], code: { coding: [{ system: "http://loinc.org", code: "2160-0", display: "Creatinine" }] }, subject: { reference: `Patient/${pid}` }, effectiveDateTime: "2026-08-02T06:00:00Z", valueQuantity: { value: 96, unit: "umol/L" } } },
+      { resource: { resourceType: "Observation", id: `HIS-OBS-2${s}`, status: "final", category: [{ coding: [{ code: "laboratory" }] }], code: { coding: [{ system: "http://his.example/local-codes", code: "HBA1C-X", display: "HbA1c (local)" }] }, subject: { reference: `Patient/${pid}` }, effectiveDateTime: "2026-08-02T06:00:00Z", valueQuantity: { value: 7.9, unit: "%" } } },
+      { resource: { resourceType: "MedicationRequest", id: `HIS-RX-1${s}`, status: "active", intent: "order", medicationCodeableConcept: { coding: [{ system: "http://www.nlm.nih.gov/research/umls/rxnorm", code: "6809", display: "Metformin" }], text: "Metformin 500 mg" }, subject: { reference: `Patient/${pid}` }, dosageInstruction: [{ text: "500 mg twice daily" }] } },
+      { resource: { resourceType: "AllergyIntolerance", id: `HIS-ALG-1${s}`, code: { text: "Penicillin" }, patient: { reference: `Patient/${pid}` }, criticality: "high", reaction: [{ manifestation: [{ text: "Anaphylaxis" }], severity: "severe" }] } },
+      { resource: { resourceType: "DiagnosticReport", id: `HIS-REP-1${s}`, status: "final", code: { text: "Renal profile" }, subject: { reference: `Patient/${pid}` }, effectiveDateTime: "2026-08-02T06:00:00Z", result: [{ reference: `Observation/HIS-OBS-1${s}` }], conclusion: "Within limits." } },
+      { resource: { resourceType: "DocumentReference", id: `HIS-DOC-1${s}`, status: "current", type: { text: "Discharge summary" }, subject: { reference: `Patient/${pid}` }, date: "2026-08-04T10:00:00Z", description: "Admitted with hyperglycaemia; discharged on metformin." } },
+    ],
+  };
+}
+
+async function pushFhir(email, path, body, headers) {
+  return onRequest({ request: new Request("https://x/api/queue" + path, { method: headers && headers.method || "POST", headers: { "Cf-Access-Authenticated-User-Email": email, "Content-Type": "application/fhir+json", "X-Source-System": "partner-his", ...(headers || {}) }, body: JSON.stringify(body) }), env: ENV });
+}
+
+test("FHIR inbound: OFF by default, and a write needs emr.treat even when on", async () => {
+  seedHospital();
+  await admittedPatientOnDrug();
+  const off = await pushFhir(DOCTOR, `/ward/fhir?orgId=${ORG}`, partnerBundle());
+  assert.equal(off.status, 404);
+  assert.equal((await off.json()).resourceType, "OperationOutcome");
+  enableInboundFhir();
+  const nurse = await pushFhir(NURSE, `/ward/fhir?orgId=${ORG}`, partnerBundle());
+  assert.equal(nurse.status, 403, "a nurse may read the FHIR export but may not push a bundle into the chart");
+  const unnamed = await pushFhir(DOCTOR, `/ward/fhir?orgId=${ORG}`, partnerBundle(), { "X-Source-System": "" });
+  assert.equal(unnamed.status, 400, "a feed must name itself");
+  assert.match((await unnamed.json()).issue[0].diagnostics, /name the sending system/);
+});
+
+test("FHIR inbound: a partner bundle lands through the canonical pipeline with source, provenance and terminology preserved; a replay lands nothing", async () => {
+  seedHospital(); enableInboundFhir();
+  await admittedPatientOnDrug();
+  const res = await pushFhir(DOCTOR, `/ward/fhir?orgId=${ORG}`, partnerBundle());
+  const resText = await res.text();
+  assert.equal(res.status, 200, resText);
+  assert.match(res.headers.get("content-type"), /^application\/fhir\+json/);
+  const b = JSON.parse(resText);
+  assert.equal(b.type, "transaction-response");
+  const statuses = b.entry.map((e) => e.response.status);
+  assert.equal(statuses.filter((s) => s.startsWith("201")).length, 9, JSON.stringify(statuses));
+  const pat = b.entry.find((e) => e.resource && e.resource.resourceType === "Patient").resource;
+  assert.equal(pat.id, "fhir-partner-his-pat-his-pat-77", "the sender is in the id, so it can never be mistaken for ours");
+  assert.equal(pat.meta.source, "urn:stewardmd:source:fhir-partner-his");
+  assert.equal(pat.meta.versionId, "1");
+  const byType = (code) => pat.identifier.find((i) => i.type && i.type.coding && i.type.coding[0].code === code);
+  assert.equal(byType("NI").value, "91-1234-5678-9012", "the ABHA travels, recognised by its NDHM system");
+  assert.equal(byType("MR").value, "HIS-MRN-0077", "the sender's MRN keeps its declared type under a system nobody here knows");
+  assert.equal(byType("MR").system, "urn:his:mrn");
+
+  // Read it back through the ordinary FHIR door: it is one record, not a second model.
+  const cre = await (await asRaw(DOCTOR, `/ward/fhir/Observation?orgId=${ORG}&patient=${pat.id}&code=2160-0`)).json();
+  assert.equal(cre.total, 1);
+  assert.equal(cre.entry[0].resource.valueQuantity.value, 96);
+  assert.equal(cre.entry[0].resource.code.coding[0].system, "http://loinc.org", "LOINC stays LOINC");
+
+  // The local code is kept VERBATIM under the sender's system, marked unmapped, and findable only by text.
+  const loc = await (await asRaw(DOCTOR, `/ward/fhir/Observation?orgId=${ORG}&patient=${pat.id}&code:text=hba1c`)).json();
+  assert.equal(loc.total, 1, JSON.stringify(loc).slice(0, 300));
+  const lc = loc.entry[0].resource.code.coding[0];
+  assert.equal(lc.system, "http://his.example/local-codes");
+  assert.equal(lc.code, "HBA1C-X");
+  assert.equal(lc.extension[0].valueCode, "unmapped");
+  /* A bare code matches any system, so the sender's code IS findable - it is genuinely in the
+   * resource, marked unmapped - but qualifying it with a system we vouch for finds nothing. */
+  assert.equal((await (await asRaw(DOCTOR, `/ward/fhir/Observation?orgId=${ORG}&patient=${pat.id}&code=HBA1C-X`)).json()).total, 1);
+  assert.equal((await (await asRaw(DOCTOR, `/ward/fhir/Observation?orgId=${ORG}&patient=${pat.id}&code=http://loinc.org|HBA1C-X`)).json()).total, 0, "never under LOINC, because it is not LOINC");
+
+  // Provenance: the feed assembled it, ON BEHALF OF the doctor who pushed it, from a named source entity.
+  const prov = await (await asRaw(DOCTOR, `/ward/fhir/Provenance?orgId=${ORG}&target=Observation/${cre.entry[0].resource.id}`)).json();
+  assert.equal(prov.total, 1);
+  const ag = prov.entry[0].resource.agent[0];
+  assert.equal(ag.who.display, "adapter:fhir-partner-his");
+  assert.equal(ag.type.coding[0].code, "assembler");
+  assert.equal(ag.onBehalfOf.display, idFor(DOCTOR), "the clinician is the party acted for, never the author");
+  assert.equal(prov.entry[0].resource.entity[0].what.identifier.system, "urn:stewardmd:source:fhir-partner-his");
+  assert.equal(prov.entry[0].resource.entity[0].what.identifier.value, "HIS-OBS-1", "the sender's own id is preserved");
+
+  // The report points at its observation and at nothing invented; the allergy arrived unverified.
+  const rep = await (await asRaw(DOCTOR, `/ward/fhir/DiagnosticReport?orgId=${ORG}&patient=${pat.id}&_include=DiagnosticReport:result`)).json();
+  assert.equal(rep.entry.filter((e) => e.search.mode === "include").length, 1);
+  const alg = await (await asRaw(DOCTOR, `/ward/fhir/AllergyIntolerance?orgId=${ORG}&patient=${pat.id}`)).json();
+  assert.equal(alg.total, 1);
+  assert.equal(alg.entry[0].resource.criticality, "high");
+  // The external order is a DRAFT here: no prescriber of ours signed it, and it says who asserted it.
+  assert.equal((await RECORD.latest(TENANT_ROW.id, "MedicationOrder", "fhir-partner-his-rx-his-rx-1")).status, "draft");
+  assert.equal((await RECORD.latest(TENANT_ROW.id, "MedicationOrder", "fhir-partner-his-rx-his-rx-1")).prescriberId, "external:fhir-partner-his");
+
+  // REPLAY: the same bundle again lands nothing.
+  const again = await pushFhir(DOCTOR, `/ward/fhir?orgId=${ORG}`, partnerBundle());
+  assert.equal(again.status, 200);
+  const ab = await again.json();
+  assert.deepEqual(ab.entry, []);
+  assert.equal(ab.meta.tag[0].code, "replayed");
+  assert.equal((await RECORD.latest(TENANT_ROW.id, "Observation", cre.entry[0].resource.id)).version, 1, "still version 1");
+});
+
+test("FHIR inbound: an incoming patient with THIS hospital's MRN links to the local chart and writes no Patient; a look-alike is held", async () => {
+  seedHospital(); enableInboundFhir();
+  const { reg, adm } = await admittedPatientOnDrug();
+  const before = (await RECORD.latest(TENANT_ROW.id, "Patient", adm.patientId)).version;
+
+  // Same MRN as our admitted patient, sent by the partner: the rows go on OUR chart.
+  const linked = await (await pushFhir(DOCTOR, `/ward/fhir?orgId=${ORG}`, partnerBundle({ patientId: "HIS-PAT-9", mrn: reg.mrn, bundleId: "his-bundle-link" }))).json();
+  assert.ok(!linked.entry.some((e) => e.resource && e.resource.resourceType === "Patient"), "no Patient written");
+  const onChart = await (await asRaw(DOCTOR, `/ward/fhir/Observation?orgId=${ORG}&patient=${adm.patientId}&code=2160-0`)).json();
+  assert.equal(onChart.total, 1, "the creatinine is on the local patient's chart");
+  assert.equal((await RECORD.latest(TENANT_ROW.id, "Patient", adm.patientId)).version, before, "our demographics are untouched");
+  assert.equal(await RECORD.latest(TENANT_ROW.id, "Patient", "fhir-partner-his-pat-his-pat-9"), null);
+
+  // A different MRN but the same name and date of birth as our patient: PROBABLE, held whole.
+  const reg2 = await (await asRaw(DOCTOR, `/ward/fhir/Patient/${adm.patientId}?orgId=${ORG}`)).json();
+  const held = await pushFhir(DOCTOR, `/ward/fhir?orgId=${ORG}`, partnerBundle({ patientId: "HIS-PAT-10", mrn: "HIS-MRN-10", abha: "00-0000-0000-0010", name: reg2.name[0].text, dob: reg2.birthDate, bundleId: "his-bundle-prob", suffix: "-p10" }));
+  const heldText = await held.text();
+  assert.equal(held.status, 202, heldText);
+  const hb = JSON.parse(heldText);
+  assert.ok(hb.entry.every((e) => e.response.status.startsWith("202")));
+  assert.equal(await RECORD.latest(TENANT_ROW.id, "Patient", "fhir-partner-his-pat-his-pat-10"), null, "nothing was filed");
+  assert.equal(await RECORD.latest(TENANT_ROW.id, "Observation", "fhir-partner-his-obs-his-obs-1-p10"), null, "not even the observations: the bundle is held WHOLE");
+  const q = await as(DOCTOR, `/ward/fhir-exceptions?orgId=${ORG}`);
+  assert.equal(q.__status, 200);
+  assert.equal(q.open.length, 1);
+  assert.equal(q.open[0].reason, "identity-probable-duplicate");
+  assert.equal(q.open[0].candidates[0].id, adm.patientId);
+});
+
+test("FHIR inbound: a feed never overwrites what this hospital authored; a PUT needs If-Match and refuses a stale one", async () => {
+  seedHospital(); enableInboundFhir();
+  const { adm } = await admittedPatientOnDrug();
+  const enc = await (await asRaw(DOCTOR, `/ward/fhir/Encounter/${adm.encounterId}?orgId=${ORG}`)).json();
+
+  // An update to OUR encounter from a feed: refused, and an exception names both sides.
+  const clash = await pushFhir(DOCTOR, `/ward/fhir/Encounter/${adm.encounterId}?orgId=${ORG}`, { ...enc, id: adm.encounterId, status: "finished" }, { method: "PUT", "If-Match": enc.meta.versionId });
+  assert.equal(clash.status, 409, await clash.text());
+  const q = await as(DOCTOR, `/ward/fhir-exceptions?orgId=${ORG}`);
+  assert.ok(q.open.some((x) => x.reason === "conflict-local-authoritative" && x.conflict.id === adm.encounterId), JSON.stringify(q.open));
+  assert.equal((await RECORD.latest(TENANT_ROW.id, "Encounter", adm.encounterId)).version, 1, "untouched");
+
+  // The feed's OWN observation: created, then updated with the right If-Match, refused with a stale one, refused with none.
+  const obs = { resourceType: "Observation", id: "HIS-OBS-5", status: "final", category: [{ coding: [{ code: "laboratory" }] }], code: { coding: [{ system: "http://loinc.org", code: "2160-0" }] }, subject: { reference: `Patient/${adm.patientId}` }, effectiveDateTime: "2026-08-02T06:00:00Z", valueQuantity: { value: 90, unit: "umol/L" } };
+  const created = await pushFhir(DOCTOR, `/ward/fhir/Observation?orgId=${ORG}`, obs);
+  assert.equal(created.status, 201, await created.text());
+  assert.match(created.headers.get("location"), /\/Observation\/fhir-partner-his-obs-his-obs-5\/_history\/1$/);
+  assert.equal(created.headers.get("etag"), 'W/"1"');
+  const cid = "fhir-partner-his-obs-his-obs-5";
+
+  const noMatch = await pushFhir(DOCTOR, `/ward/fhir/Observation/${cid}?orgId=${ORG}`, { ...obs, valueQuantity: { value: 91, unit: "umol/L" } }, { method: "PUT" });
+  assert.equal(noMatch.status, 412, "an update that does not say which version it read is a guess");
+  const stale = await pushFhir(DOCTOR, `/ward/fhir/Observation/${cid}?orgId=${ORG}`, { ...obs, valueQuantity: { value: 91, unit: "umol/L" } }, { method: "PUT", "If-Match": 'W/"7"' });
+  assert.equal(stale.status, 409);
+  const good = await pushFhir(DOCTOR, `/ward/fhir/Observation/${cid}?orgId=${ORG}`, { ...obs, valueQuantity: { value: 91, unit: "umol/L" } }, { method: "PUT", "If-Match": 'W/"1"' });
+  assert.equal(good.status, 200, await good.text());
+  assert.equal(good.headers.get("etag"), 'W/"2"');
+  assert.equal((await RECORD.latest(TENANT_ROW.id, "Observation", cid)).value, 91);
+  const hist = await (await asRaw(DOCTOR, `/ward/fhir/Observation/${cid}/_history?orgId=${ORG}`)).json();
+  assert.equal(hist.total, 2, "an update is a new version; the old one survives");
+
+  // A single resource whose subject is nobody here cannot be filed - and no placeholder patient is created.
+  const orphan = await pushFhir(DOCTOR, `/ward/fhir/Observation?orgId=${ORG}`, { ...obs, id: "HIS-OBS-6", subject: { reference: "Patient/nobody-here" } });
+  assert.equal(orphan.status, 422);
+  assert.equal(await RECORD.latest(TENANT_ROW.id, "Patient", "fhir-partner-his-pat-nobody-here"), null);
 });

@@ -38,6 +38,7 @@ try {
   await call("Runtime.enable", {}); await call("Page.navigate", { url: BASE });
   let ready = false; for (let i = 0; i < 60; i++) { await sleep(400); if (await ev(`return !!(window.INTERACTIONS && INTERACTIONS.checkInteractions)`) === true) { ready = true; break; } }
   if (!ready) throw new Error("INTERACTIONS not loaded");
+  await ev(`return window.smdLazy ? window.smdLazy('/interaction-rules.js?v=gold363') : Promise.resolve()`);
 
   // 1. warfarin + aspirin + ibuprofen -> critical OR major bleeding finding
   const r1 = await check([{ generic: "warfarin" }, { generic: "aspirin" }, { generic: "ibuprofen" }]);
@@ -125,7 +126,6 @@ try {
   // MEDDRUGS.openInteractions is a function, and the delegate opens the overlay.
   const { readFileSync } = await import("node:fs");
   const homeSrc = readFileSync(join(HERE, "..", "home.js"), "utf8");
-  ok(/data-act="interactions"/.test(homeSrc), "home.js source contains the data-act=\"interactions\" tile");
   // The standalone "Drug Interactions" tile was merged into the "Drugs & Interactions" (drugmenu)
   // tile, which opens a sheet with an "Interaction Checker" entry. Accept either label.
   ok(/Interaction Checker|Drugs?\s*(?:&amp;|&)\s*Interactions/.test(homeSrc), "home.js surfaces the Drugs & Interactions / Interaction Checker entry point");

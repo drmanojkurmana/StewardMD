@@ -61,7 +61,8 @@ import { giveHandover, receiveHandover, listHandovers } from "../../_wardsynq/ha
 import { verifyOrder, verificationQueue } from "../../_wardsynq/pharmacy-verify.js";
 import { dispenseOrder, returnDispense, listDispenses } from "../../_wardsynq/pharmacy-dispense.js";
 import { declareBreakGlass, openEmergencyChart, listBreakGlass } from "../../_wardsynq/break-glass.js";
-import { patientEverything, readResource, capabilityStatement } from "../../_wardsynq/fhir.js";
+import { patientEverything, readResource, capabilityStatement, searchType, historyOf, vread, operationOutcome, provenanceRead, provenanceSearch } from "../../_wardsynq/fhir.js";
+import { ingestFhir, listExceptions, inboundEnabled } from "../../_wardsynq/fhir-inbound.js";
 import { startReconciliation, decideMedicine, readReconciliation } from "../../_wardsynq/med-reconciliation.js";
 import { wardMetrics } from "../../_wardsynq/ward-metrics.js";
 import { releaseResult, pendingRequests } from "../../_wardsynq/lab-result.js";
@@ -72,10 +73,11 @@ import { recordConsent, withdrawConsent, consentStatus } from "../../_wardsynq/c
 import { bookAppointment, setAppointmentState, requestFollowUp, listSchedule } from "../../_wardsynq/scheduling.js";
 import { setCarePlan, recordProgress, readCarePlan } from "../../_wardsynq/care-plan.js";
 import { listTemplates, writeTemplatedNote } from "../../_wardsynq/note-templates.js";
+import { encounterIdForTicket } from "../../_wardsynq/opd-identity.js";
 /* Aliased: `recordAssessment` is already the OPD assessment writer in this file, and a risk
  * assessment is a different thing entirely. Two names that read the same for two different
  * clinical acts is how the wrong one gets called. */
-import { queueTransmission, recordOutcome, resolveTransmission, listTransmissions } from "../../_wardsynq/prescription-transmit.js";
+import { queueTransmission, recordOutcome, resolveTransmission, listTransmissions, sendQueued } from "../../_wardsynq/prescription-transmit.js";
 import { submitNote, signNote, listAwaitingCoSign } from "../../_wardsynq/note-cosign.js";
 import { downtimePack } from "../../_wardsynq/downtime.js";
 import { qualityReport } from "../../_wardsynq/quality.js";
@@ -88,6 +90,21 @@ import { bookResource, setBookingState, resourceSchedule } from "../../_wardsynq
 import { flowsheet } from "../../_wardsynq/flowsheet-view.js";
 import { orderInvestigation } from "../../_wardsynq/ward-order.js";
 import { chartInfusion, listInfusions } from "../../_wardsynq/infusion.js";
+import { reportImaging } from "../../_wardsynq/radiology-report.js";
+import { protocolContext, recordProtocol } from "../../_wardsynq/radiology-protocol.js";
+import { checkAdvisories } from "../../_wardsynq/advisory-authoring.js";
+import { cdaForEncounter } from "../../_wardsynq/cda.js";
+import { news2ForPatient } from "../../_wardsynq/news2-view.js";
+import { recordRead, readersToNotify } from "../../_wardsynq/read-log.js";
+import { codeClaimForEncounter, claimAction, recordPreAuth, claimsForPatient, watchlist as upcodingList } from "../../_wardsynq/billing.js";
+import { patientCopy, releaseToPatient } from "../../_wardsynq/patient-record.js";
+import { exportPage, recordBackupRun, backupStatus } from "../../_wardsynq/backup-run.js";
+import { chargesForPatient } from "../../_wardsynq/charge-capture.js";
+import { recordMovement, stockLevels } from "../../_wardsynq/stock.js";
+import { possibleDuplicates } from "../../_wardsynq/mpi-view.js";
+import { enrolPatient, redeemCode, portalRead, revokeAccess } from "../../_wardsynq/patient-access.js";
+import { messageWorklist, replyToMessage } from "../../_wardsynq/portal-requests.js";
+import { extract as analyticsExtract } from "../../_wardsynq/analytics-extract.js";
 import { listTools as listRiskTools, recordAssessment as recordRiskAssessment, completeAction as completeRiskAction, listAssessments as listRiskAssessments } from "../../_wardsynq/risk-assessment.js";
 import { recordAllergiesFromAssessment } from "../../_wardsynq/migrate-allergy.js";
 
@@ -195,6 +212,18 @@ function corsHeaders(request) {
   return h;
 }
 function json(obj, status, request) { return new Response(JSON.stringify(obj), { status: status || 200, headers: Object.assign({ "Content-Type": "application/json", "Cache-Control": "no-store" }, corsHeaders(request)) }); }
+/* FHIR's own media type, on every FHIR response including errors. The CapabilityStatement declared
+ * application/fhir+json while the route served application/json, and a strict client rejects that
+ * mismatch - which is how "we have a FHIR endpoint" turns out to mean "we have JSON". A single
+ * resource carries its ETag as a weak validator over versionId, so If-Match round-trips to the
+ * record service's expectedVersion. */
+function fhirJson(obj, status, request, extra) {
+  const h = Object.assign({ "Content-Type": "application/fhir+json; charset=utf-8", "Cache-Control": "no-store" }, corsHeaders(request));
+  if (obj && obj.meta && obj.meta.versionId && obj.resourceType !== "Bundle") h.ETag = `W/"${obj.meta.versionId}"`;
+  if (obj && obj.meta && obj.meta.lastUpdated && obj.resourceType !== "Bundle") { const d = new Date(obj.meta.lastUpdated); if (!isNaN(d)) h["Last-Modified"] = d.toUTCString(); }
+  Object.assign(h, extra || {});
+  return new Response(JSON.stringify(obj), { status: status || 200, headers: h });
+}
 async function readBody(request) { try { return await request.json(); } catch (e) { return {}; } }
 
 /* An authorization refusal, in words the person at the front desk can act on.
@@ -439,7 +468,8 @@ export async function onRequest(context) {
      *   scan / administer   MED_ADMINISTER           the nurse at the bedside
      */
     if (seg === "ward") {
-      const body = method === "POST" ? await readBody(request) : {};
+      // PUT carries a body too, since 2026-09-08: a FHIR update is a PUT of the whole resource.
+      const body = (method === "POST" || method === "PUT") ? await readBody(request) : {};
       const wOrgId = url.searchParams.get("orgId") || body.orgId || "";
       const capFor = {
         admit: CAPS.QUEUE_ADD, list: CAPS.QUEUE_VIEW, vitals: CAPS.EMR_VITALS,
@@ -477,6 +507,8 @@ export async function onRequest(context) {
          * every other control on this file. The record service still applies the actor's own read
          * scope on top, so the bundle contains only what that clinician could already see. */
         fhir: CAPS.EMR_VIEW,
+        // What another system sent that WardSynQ would not write without a person deciding.
+        "fhir-exceptions": CAPS.EMR_VIEW,
         /* Taking a medicines history is a nurse-or-pharmacist act (emr.vitals covers the ward
          * staff who do it). DECIDING what happens to a home medicine is prescribing-adjacent and
          * belongs to the treating clinician, so it is emr.treat. */
@@ -531,15 +563,77 @@ export async function onRequest(context) {
         collect: CAPS.EMR_VITALS, "specimen-outcome": CAPS.EMR_VITALS, collections: CAPS.EMR_VIEW,
         // Asking for an investigation is a clinical act, like prescribing.
         investigation: CAPS.EMR_TREAT,
+        /* Reporting an imaging study is the radiologist's own act, granted by lab.result - the same
+         * authority the laboratory reports under. A reporter is a reporter, and it writes only its
+         * own report. */
+        "report-imaging": CAPS.LAB_RESULT,
+        /* Protocolling is the radiology department's own act, the same authority that reports the
+         * study. It decides whether contrast is given, so it is emphatically not the ward's. */
+        "protocol-context": CAPS.LAB_RESULT, "protocol-set": CAPS.LAB_RESULT,
         // Charting a pump is the bedside's act, exactly like giving a dose.
         infusion: CAPS.MED_ADMINISTER, infusions: CAPS.EMR_VIEW,
         // Charting a wound is nursing work, the same authority as a vital or a fluid entry.
         wound: CAPS.EMR_VITALS, wounds: CAPS.EMR_VIEW,
         // Reading the flowsheet is reading the chart. It writes nothing.
         flowsheet: CAPS.EMR_VIEW,
+        /* An early warning score is a reading of the chart's own vitals. It writes nothing and
+         * escalates nobody, so it needs the authority to read a chart and no more. */
+        news2: CAPS.EMR_VIEW,
+        /* Recording that a value was decisive is part of reading a chart, so it needs the authority
+         * to read one - emr.vitals, the same bar as charting an observation about the patient.
+         * Asking WHO to tell about a correction is emr.view: it is the safety question, and the
+         * people who have to make the calls must be able to ask it. */
+        read: CAPS.EMR_VITALS, readers: CAPS.EMR_VIEW,
+        /* Billing. Coding a claim and moving it through its lifecycle is billing.charge - the
+         * cashier's own capability, deliberately NOT a clinical one: the whole point of
+         * wardsynq-billing.js is that the money never gets a write path to the chart, and giving a
+         * coder an EMR capability to reach these routes would have handed them exactly that.
+         *
+         * Reading a patient's claims is billing.view. The upcoding watchlist is STAFF_ADMIN, because
+         * the module's own instruction is that it is checked "by somebody who is not paid on
+         * collections" - and billing.view is precisely the person who is. */
+        claim: CAPS.BILLING_CHARGE, "claim-state": CAPS.BILLING_CHARGE, preauth: CAPS.BILLING_CHARGE,
+        claims: CAPS.BILLING_VIEW, upcoding: CAPS.STAFF_ADMIN,
+        /* Charge capture reads what was DONE and proposes nothing binding, so it sits with the rest
+         * of coding at billing.charge. It writes nothing at all - not even a Claim. */
+        charges: CAPS.BILLING_CHARGE,
+        /* Stock control is the dispensing side of pharmacy. Nothing behind these routes can refuse a
+         * dispense: a count is a belief and the box in the pharmacist's hand is the fact. */
+        "stock-move": CAPS.ORDER_DISPENSE, stock: CAPS.ORDER_DISPENSE,
+        /* Asking "is this person already here" is the front desk's work, and it is the same
+         * authority that registers them - QUEUE_ADD. It proposes candidates and can link nothing:
+         * a merge is a separate, human, retractable claim through its own route. */
+        "id-match": CAPS.QUEUE_ADD,
+        /* The patient's own copy. Seeing what the patient WOULD be given is reading the chart, so
+         * emr.view. HANDING IT OVER IS EMR_TREAT: deciding a patient is ready to be told what is in
+         * their record is a clinical act, not a clerical one, and the person who does it has to be
+         * the person who can answer the questions it produces. */
+        "patient-copy": CAPS.EMR_VIEW, "patient-release": CAPS.EMR_TREAT,
+        /* Enrolling a patient for their own access, and ending it. EMR_TREAT: enrolment is where the
+         * whole chain of trust is established and it happens with the patient in front of you, which
+         * is the same bar as deciding they are ready to be told what is in their record. The
+         * patient's own two routes are NOT here - they live under /api/portal, outside the block
+         * that assumes an employee. */
+        "patient-enrol": CAPS.EMR_TREAT, "patient-revoke": CAPS.EMR_TREAT,
+        /* The patient message worklist is readable by any clinician - an unanswered message is a
+         * ward-level safety fact, not one doctor's inbox. ANSWERING is EMR_TREAT: replying to a
+         * patient's clinical question is a clinical act, and nothing non-human can reach it. */
+        "patient-messages": CAPS.EMR_VIEW, "patient-reply": CAPS.EMR_TREAT,
+        /* The analytics extract is meant to LEAVE the building, which is a different act from
+         * reading a ward's own measures. analytics.view, not emr.view: the person who takes numbers
+         * out is not automatically every clinician who can open a chart. It names no patient. */
+        "analytics-extract": CAPS.ANALYTICS_VIEW,
+        /* Authoring the hospital's own advisories is an administrative act by whoever owns the
+         * configuration, not a clinical one - and the check writes nothing and activates nothing. */
+        "advisory-check": CAPS.STAFF_ADMIN,
+        /* THE BACKUP EXPORT HANDS OVER AN ENTIRE HOSPITAL. It deliberately bypasses the per-actor
+         * read scoping every other route obeys, because a backup filtered by somebody's permissions
+         * restores into a chart with holes in it. So no clinical capability reaches it at any dose:
+         * it is STAFF_ADMIN, the person who owns the deployment, and every page is audited. */
+        backup: CAPS.STAFF_ADMIN, "backup-status": CAPS.STAFF_ADMIN,
         // ADT out. Reading a stay in another wire format is still reading a chart, so it needs the
         // authority to read one. It writes nothing and there is no inbound listener.
-        adt: CAPS.EMR_VIEW, oru: CAPS.EMR_VIEW,
+        adt: CAPS.EMR_VIEW, oru: CAPS.EMR_VIEW, cda: CAPS.EMR_VIEW,
         /* Putting somebody on the waiting list is the same administrative act as admitting them to a
          * bed - the front desk's work. It reserves nothing and admits nobody. */
         "request-admission": CAPS.QUEUE_ADD, "close-admission-request": CAPS.QUEUE_ADD, "waiting-list": CAPS.QUEUE_VIEW,
@@ -549,7 +643,7 @@ export async function onRequest(context) {
         "risk-tools": CAPS.EMR_VIEW, assess: CAPS.EMR_VITALS, "risk-action": CAPS.EMR_VITALS, risks: CAPS.EMR_VIEW,
         /* Sending a prescription is part of prescribing, so queueing is emr.treat. Recording what
          * the transport said, and resolving a failure by printing it instead, is desk work. */
-        transmit: CAPS.EMR_TREAT, "transmit-outcome": CAPS.QUEUE_ADD, "transmit-resolve": CAPS.QUEUE_ADD, outbox: CAPS.QUEUE_VIEW,
+        transmit: CAPS.EMR_TREAT, "transmit-send": CAPS.QUEUE_ADD, "transmit-outcome": CAPS.QUEUE_ADD, "transmit-resolve": CAPS.QUEUE_ADD, outbox: CAPS.QUEUE_VIEW,
         // Closing a stay is the administrative act QUEUE_ADD already covers for opening one.
         // The summary is a clinical document: drafting and signing it are EMR_TREAT.
         discharge: CAPS.QUEUE_ADD, "discharge-summary": CAPS.EMR_TREAT, "sign-discharge-summary": CAPS.EMR_TREAT,
@@ -635,22 +729,113 @@ export async function onRequest(context) {
        *   /ward/fhir/Patient/<id>                one resource
        *   /ward/fhir?patient=<id>[&_type=A,B]    everything for one patient, as a Bundle
        * Errors come back as OperationOutcome, because that is what a FHIR client parses. */
-      if (sub === "fhir" && method === "GET") {
-        const fType = parts[2] || "", fId = parts[3] || "";
-        if (fType === "metadata") {
-          return json(capabilityStatement({ date: new Date().toISOString(), version: "wardsynq-1" }), 200, request);
-        }
+      if (sub === "fhir-exceptions" && method === "GET") {
+        const r = await listExceptions(request, env, { ...deps, config: (wsqCfg && wsqCfg.fhir) || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "fhir") {
+        /* FHIR R4, read side. Every response is application/fhir+json and every error is an
+         * OperationOutcome, including an unknown path - a FHIR client parses those and nothing else.
+         *   GET /ward/fhir/metadata                          CapabilityStatement
+         *   GET /ward/fhir/{Type}?...                        search-type (see fhir-search.js)
+         *   GET /ward/fhir/{Type}/{id}                       read       (ETag = W/"versionId")
+         *   GET /ward/fhir/{Type}/{id}/_history              history-instance
+         *   GET /ward/fhir/{Type}/{id}/_history/{vid}        vread
+         *   GET /ward/fhir/Patient/{id}/$everything          everything for one patient
+         *   GET /ward/fhir?patient={id}[&_type=A,B]          the same, older spelling */
+        const fType = parts[2] || "", fId = parts[3] || "", fOp = parts[4] || "", fVid = parts[5] || "";
         const fctx = { ...deps, base: `${url.origin}/api/queue/ward/fhir` };
-        const r = fType && fId
-          ? await readResource(request, env, { ...fctx, type: fType, id: fId })
-          : await patientEverything(request, env, {
-              ...fctx, patientId: url.searchParams.get("patient") || url.searchParams.get("patientId") || "",
-              types: (url.searchParams.get("_type") || "").split(",").map((t) => t.trim()).filter(Boolean),
-            });
-        return json(r.ok ? (r.bundle || r.resource) : r.outcome, r.status, request);
+        /* WRITES. Off unless the hospital enabled wardsynq.fhir.inbound, and only for an actor who
+         * may already write the chart (emr.treat) - the FHIR sub is emr.view for reads, so the write
+         * methods check the stronger capability themselves. Everything goes through fhir-inbound.js:
+         * the SAME normaliser and adapter the record already trusts, identity reconciled BEFORE any
+         * row lands, local authorship never overwritten, and anything uncertain held as an
+         * ExchangeException rather than filed. */
+        if (method === "POST" || method === "PUT") {
+          /* Off is a 404, before anything about the request is examined - the existence of a write
+           * door is not leaked to a caller the hospital has not opened it for. */
+          if (!inboundEnabled((wsqCfg && wsqCfg.fhir) || null)) return fhirJson(operationOutcome("error", "not-supported", "not found"), 404, request);
+          const wAzW = await ORG.authorizeOrg(env, actor, wOrgId, CAPS.EMR_TREAT);
+          if (!wAzW.ok) return fhirJson(operationOutcome("error", "forbidden", "writing to the record needs emr.treat"), 403, request);
+          const common = { ...fctx, body, config: (wsqCfg && wsqCfg.fhir) || null, sourceSystem: request.headers.get("X-Source-System") || "", ifMatch: request.headers.get("If-Match") || "" };
+          const subjectRef = body && ((body.subject && body.subject.reference) || (body.patient && body.patient.reference) || "");
+          const patientRef = (/(?:^|\/)Patient\/([^/?#]+)$/.exec(String(subjectRef || "")) || [])[1] || "";
+          let r;
+          if (method === "POST" && !fType) r = await ingestFhir(request, env, { ...common, mode: "bundle" });
+          else if (method === "POST" && fType && !fId) {
+            if (body && body.resourceType !== fType) return fhirJson(operationOutcome("error", "invalid", `body is ${body && body.resourceType}, URL says ${fType}`), 400, request);
+            r = await ingestFhir(request, env, { ...common, mode: "create", targetType: fType, patientRef });
+          } else if (method === "PUT" && fType && fId && !fOp) {
+            if (body && body.resourceType !== fType) return fhirJson(operationOutcome("error", "invalid", `body is ${body && body.resourceType}, URL says ${fType}`), 400, request);
+            r = await ingestFhir(request, env, { ...common, mode: "update", targetType: fType, targetId: fId, patientRef });
+          } else {
+            return fhirJson(operationOutcome("error", "not-supported", "supported writes: POST /fhir (Bundle), POST /fhir/{Type}, PUT /fhir/{Type}/{id}"), 405, request, { Allow: "GET, POST, PUT" });
+          }
+          const extra = {};
+          const first = r.bundle && r.bundle.entry && r.bundle.entry.find((e) => e.response && e.response.location);
+          if (r.ok && (r.status === 201 || r.status === 200) && first && (method === "PUT" || fType)) { extra.Location = first.response.location; if (first.response.etag) extra.ETag = first.response.etag; }
+          return fhirJson(r.ok ? r.bundle : r.outcome, r.status, request, extra);
+        }
+        if (method !== "GET") {
+          return fhirJson(operationOutcome("error", "not-supported", "method not supported on this path"), 405, request, { Allow: "GET, POST, PUT" });
+        }
+        if (fType === "metadata") {
+          return fhirJson(capabilityStatement({ date: new Date().toISOString(), version: "wardsynq-1" }), 200, request);
+        }
+        if (!fType) {
+          const r = await patientEverything(request, env, {
+            ...fctx, patientId: url.searchParams.get("patient") || url.searchParams.get("patientId") || "",
+            types: (url.searchParams.get("_type") || "").split(",").map((t) => t.trim()).filter(Boolean),
+          });
+          return fhirJson(r.ok ? r.bundle : r.outcome, r.status, request);
+        }
+        if (fType === "Provenance") {
+          const pParams = new URLSearchParams(url.searchParams); pParams.delete("orgId");
+          const r = fId
+            ? await provenanceRead(request, env, { ...fctx, id: fId })
+            : await provenanceSearch(request, env, { ...fctx, searchParams: pParams, rawQuery: url.search.replace(/^\?/, "") });
+          return fhirJson(r.ok ? (r.resource || r.bundle) : r.outcome, r.status, request);
+        }
+        if (fType === "Patient" && fId && fOp === "$everything") {
+          const r = await patientEverything(request, env, { ...fctx, patientId: fId, types: [] });
+          return fhirJson(r.ok ? r.bundle : r.outcome, r.status, request);
+        }
+        if (fId && fOp === "_history" && fVid) {
+          const r = await vread(request, env, { ...fctx, type: fType, id: fId, versionId: fVid });
+          return fhirJson(r.ok ? r.resource : r.outcome, r.status, request);
+        }
+        if (fId && fOp === "_history") {
+          const r = await historyOf(request, env, { ...fctx, type: fType, id: fId });
+          return fhirJson(r.ok ? r.bundle : r.outcome, r.status, request);
+        }
+        if (fId && fOp) {
+          return fhirJson(operationOutcome("error", "not-found", `no such operation: ${fOp}`), 404, request);
+        }
+        if (fId) {
+          const r = await readResource(request, env, { ...fctx, type: fType, id: fId });
+          return fhirJson(r.ok ? r.resource : r.outcome, r.status, request);
+        }
+        const prefer = request.headers.get("Prefer") || "";
+        /* `orgId` is THIS API's transport parameter, not a FHIR search parameter, and the strict
+         * parser would rightly refuse it. Stripped before parsing; kept in the Bundle links so the
+         * next page is fetchable through the same door. */
+        const fhirParams = new URLSearchParams(url.searchParams);
+        fhirParams.delete("orgId");
+        const r = await searchType(request, env, {
+          ...fctx, type: fType, searchParams: fhirParams, rawQuery: url.search.replace(/^\?/, ""),
+          lenient: /handling=lenient/i.test(prefer),
+        });
+        return fhirJson(r.ok ? r.bundle : r.outcome, r.status, request);
       }
       if (sub === "transmit" && method === "POST") {
         const r = await queueTransmission(request, env, { ...deps, orderId: body.orderId, channel: body.channel, destination: body.destination, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "transmit-send" && method === "POST") {
+        /* The destination comes from org config and NEVER from the body: if a caller could name it,
+         * anyone who can queue a prescription could post a patient's medicines to a host of their
+         * choosing, and the audit would show a successful transmission. */
+        const r = await sendQueued(request, env, { ...deps, transmissionId: body.transmissionId, endpoints: (wsqCfg && wsqCfg.transmitEndpoints) || null });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "transmit-outcome" && method === "POST") {
@@ -687,7 +872,17 @@ export async function onRequest(context) {
       }
       if (sub === "note" && method === "POST") {
         // Templates are ORG content for the same reason order sets are.
-        const r = await writeTemplatedNote(request, env, { ...deps, templates: (wsqCfg && wsqCfg.noteTemplates) || [], templateId: body.templateId, encounterId: body.encounterId, sections: body.sections, at: body.at, idempotencyKey: body.idempotencyKey || null });
+        /* An OPD caller knows its TICKET, not its encounter, and the encounter id depends on whether
+         * the ticket carries a GHIS episode. Deriving it here from the canonical
+         * `encounterIdForTicket` keeps ONE formula: a client that computed it would be a second copy
+         * that silently files notes under a non-existent encounter the day a ticket gains an
+         * episode id. An explicit encounterId still wins, so the ward path is unchanged. */
+        let noteEncounterId = body.encounterId;
+        if (!noteEncounterId && body.ticketId) {
+          const t = await Q.getTicket(env, String(body.ticketId));
+          noteEncounterId = t ? encounterIdForTicket(t) : null;
+        }
+        const r = await writeTemplatedNote(request, env, { ...deps, templates: (wsqCfg && wsqCfg.noteTemplates) || [], templateId: body.templateId, encounterId: noteEncounterId, sections: body.sections, at: body.at, idempotencyKey: body.idempotencyKey || null });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "note-submit" && method === "POST") {
@@ -722,6 +917,13 @@ export async function onRequest(context) {
         const r = await admissionWaitingList(request, env, { ...deps, specialty: url.searchParams.get("specialty") || "", includeClosed: url.searchParams.get("includeClosed") === "1" });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
+      if (sub === "cda" && method === "GET") {
+        const r = await cdaForEncounter(request, env, {
+          ...deps, encounterId: url.searchParams.get("encounterId") || "",
+          org: { name: (wOrg && wOrg.name) || "", oid: (wOrg && wOrg.code) || "" },
+        });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
       if (sub === "oru" && method === "GET") {
         const r = await oruForReport(request, env, { ...deps, reportId: url.searchParams.get("reportId") || "", sendingFacility: (wOrg && wOrg.code) || "" });
         return json(r, r.ok ? 200 : (r.status || 502), request);
@@ -730,6 +932,124 @@ export async function onRequest(context) {
         const r = await adtForEncounter(request, env, {
           ...deps, encounterId: url.searchParams.get("encounterId") || "",
           event: url.searchParams.get("event") || "", sendingFacility: (wOrg && wOrg.code) || "",
+        });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "read" && method === "POST") {
+        const r = await recordRead(request, env, { ...deps, patientId: body.patientId, valueId: body.valueId, version: body.version, value: body.value, kind: body.kind, context: body.context, at: body.at, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "readers" && method === "GET") {
+        const r = await readersToNotify(request, env, {
+          ...deps, patientId: url.searchParams.get("patientId") || "", valueId: url.searchParams.get("valueId") || "",
+          supersededVersion: url.searchParams.get("supersededVersion"), correctedAt: url.searchParams.get("correctedAt") || "",
+          label: url.searchParams.get("label") || "", unit: url.searchParams.get("unit") || "",
+          wasValue: url.searchParams.get("wasValue"), nowValue: url.searchParams.get("nowValue"),
+        });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "claim" && method === "POST") {
+        const r = await codeClaimForEncounter(request, env, { ...deps, patientId: body.patientId, encounterId: body.encounterId, codes: body.codes, now: body.now, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "claim-state" && method === "POST") {
+        const r = await claimAction(request, env, { ...deps, claimId: body.claimId, action: body.action, reason: body.reason, codes: body.codes || null, now: body.now });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "preauth" && method === "POST") {
+        const r = await recordPreAuth(request, env, { ...deps, patientId: body.patientId, treatment: body.treatment, state: body.state, scheme: body.scheme, reason: body.reason, decidedAt: body.decidedAt, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "claims" && method === "GET") {
+        const r = await claimsForPatient(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "" });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "upcoding" && method === "GET") {
+        const r = await upcodingList(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "" });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "id-match" && method === "POST") {
+        const r = await possibleDuplicates(request, env, {
+          ...deps, name: body.name, dob: body.dob, sex: body.sex, mrn: body.mrn,
+          identifiers: body.identifiers, patientId: body.patientId, limit: body.limit,
+          thresholds: (wsqCfg && wsqCfg.mpiThresholds) || null,
+        });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "stock-move" && method === "POST") {
+        const r = await recordMovement(request, env, { ...deps, kind: body.kind, code: body.code, display: body.display, quantity: body.quantity, location: body.location, batch: body.batch, expiry: body.expiry, reason: body.reason, at: body.at, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "stock" && method === "GET") {
+        const r = await stockLevels(request, env, { ...deps, location: url.searchParams.get("location") || "", reorderLevels: (wsqCfg && wsqCfg.reorderLevels) || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "charges" && method === "GET") {
+        const r = await chargesForPatient(request, env, {
+          ...deps, patientId: url.searchParams.get("patientId") || "",
+          encounterId: url.searchParams.get("encounterId") || "",
+          tariff: (wsqCfg && wsqCfg.tariff) || null,
+        });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "backup" && method === "GET") {
+        const r = await exportPage(request, env, { ...deps, since: url.searchParams.get("since"), limit: url.searchParams.get("limit") });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "backup" && method === "POST") {
+        const r = await recordBackupRun(request, env, { ...deps, throughSeq: body.throughSeq, rows: body.rows, location: body.location, at: body.at, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "backup-status" && method === "GET") {
+        const r = await backupStatus(request, env, { ...deps, rpoMinutes: (wsqCfg && wsqCfg.rpoMinutes) || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "advisory-check" && method === "POST") {
+        const r = await checkAdvisories(request, env, { ...deps, advisories: body.advisories, now: body.now });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "protocol-context" && method === "GET") {
+        const r = await protocolContext(request, env, { ...deps, serviceRequestId: url.searchParams.get("serviceRequestId") || "" });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "protocol-set" && method === "POST") {
+        const r = await recordProtocol(request, env, { ...deps, serviceRequestId: body.serviceRequestId, protocol: body.protocol, contrast: body.contrast === true, contrastReason: body.contrastReason, notes: body.notes, at: body.at, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "analytics-extract" && method === "GET") {
+        const r = await analyticsExtract(request, env, { ...deps, from: url.searchParams.get("from") || "", to: url.searchParams.get("to") || "", minCell: url.searchParams.get("minCell") });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "patient-messages" && method === "GET") {
+        const r = await messageWorklist(request, env, { ...deps });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "patient-reply" && method === "POST") {
+        const r = await replyToMessage(request, env, { ...deps, messageId: body.messageId, reply: body.reply });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "patient-enrol" && method === "POST") {
+        const r = await enrolPatient(request, env, { ...deps, patientId: body.patientId, issuedTo: body.issuedTo, identifiedBy: body.identifiedBy, config: (wsqCfg && wsqCfg.patientAccess) || null, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "patient-revoke" && method === "POST") {
+        const r = await revokeAccess(request, env, { ...deps, grantId: body.grantId, reason: body.reason, config: (wsqCfg && wsqCfg.patientAccess) || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "patient-copy" && method === "GET") {
+        const r = await patientCopy(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "", neverRelease: (wsqCfg && wsqCfg.neverRelease) || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "patient-release" && method === "POST") {
+        const r = await releaseToPatient(request, env, { ...deps, patientId: body.patientId, givenTo: body.givenTo, at: body.at, neverRelease: (wsqCfg && wsqCfg.neverRelease) || null, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "news2" && method === "GET") {
+        const r = await news2ForPatient(request, env, {
+          ...deps, patientId: url.searchParams.get("patientId") || "",
+          // Scale 2 is a PRESCRIPTION. It is taken from the caller stating it and never inferred.
+          scale: url.searchParams.get("scale") || "",
+          escalation: (wsqCfg && wsqCfg.criticalEscalation) || null,
         });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
@@ -747,6 +1067,10 @@ export async function onRequest(context) {
       }
       if (sub === "wounds" && method === "GET") {
         const r = await listWounds(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "" });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "report-imaging" && method === "POST") {
+        const r = await reportImaging(request, env, { ...deps, serviceRequestId: body.serviceRequestId, findings: body.findings, impression: body.impression, status: body.status, modality: body.modality, reportedAt: body.reportedAt, idempotencyKey: body.idempotencyKey || null });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "infusion" && method === "POST") {

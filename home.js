@@ -3235,28 +3235,30 @@
       }
       return hits.map(opt).join("");
     }
-    openSheet('<div class="hv-sh-t">Choose your hospital</div>' +
-      '<input id="hospSearch" type="search" placeholder="Search hospital or medical college" autocomplete="off" style="width:100%;box-sizing:border-box;padding:11px 12px;border:1px solid var(--hbd,#e2e8f0);border-radius:12px;font:600 14px var(--hfont,system-ui);margin:2px 0 8px;background:var(--hpanel,#fff);color:var(--hink,#0f172a)">' +
-      '<div id="hospList" style="max-height:54vh;overflow:auto;-webkit-overflow-scrolling:touch">' + render("") + '</div>');
-    var sh = sheetEl();
-    var inp = sh.querySelector("#hospSearch"), lst = sh.querySelector("#hospList");
-    if (inp) inp.addEventListener("input", function () { if (lst) lst.innerHTML = render(inp.value); });
-    if (lst) lst.addEventListener("click", function (e) {
-      // Request to add a hospital to the directory → submit for admin review (does NOT set the field).
-      var rq = e.target.closest && e.target.closest("[data-h-request]");
-      if (rq) {
-        var name = (inp ? inp.value.trim() : ""); if (!name) return;
-        rq.disabled = true; rq.textContent = "Sending…";
-        submitHospitalRequest(name).then(function (ok) {
-          rq.textContent = ok ? "✓ Requested — we'll review it" : "Couldn't send — try again";
-          if (ok) { try { if (window.toast) toast("Hospital requested — you can use it now; we'll verify and add it."); } catch (e) {} setTimeout(function () { closeSheet(); try { onPick(name); } catch (e) {} }, 900); }
-          else rq.disabled = false;
-        });
-        return;
-      }
-      var b = e.target.closest && e.target.closest(".hosp-opt, [data-h-custom]"); if (!b) return;
-      var val = b.getAttribute("data-h-custom") ? (inp ? inp.value.trim() : "") : b.getAttribute("data-h");
-      if (!val) return; closeSheet(); setTimeout(function () { try { onPick(val); } catch (e) {} }, 60);
+    smdLazy('/hospitals-in.js?v=1').then(function() {
+      openSheet('<div class="hv-sh-t">Choose your hospital</div>' +
+        '<input id="hospSearch" type="search" placeholder="Search hospital or medical college" autocomplete="off" style="width:100%;box-sizing:border-box;padding:11px 12px;border:1px solid var(--hbd,#e2e8f0);border-radius:12px;font:600 14px var(--hfont,system-ui);margin:2px 0 8px;background:var(--hpanel,#fff);color:var(--hink,#0f172a)">' +
+        '<div id="hospList" style="max-height:54vh;overflow:auto;-webkit-overflow-scrolling:touch">' + render("") + '</div>');
+      var sh = sheetEl();
+      var inp = sh.querySelector("#hospSearch"), lst = sh.querySelector("#hospList");
+      if (inp) inp.addEventListener("input", function () { if (lst) lst.innerHTML = render(inp.value); });
+      if (lst) lst.addEventListener("click", function (e) {
+        // Request to add a hospital to the directory → submit for admin review (does NOT set the field).
+        var rq = e.target.closest && e.target.closest("[data-h-request]");
+        if (rq) {
+          var name = (inp ? inp.value.trim() : ""); if (!name) return;
+          rq.disabled = true; rq.textContent = "Sending…";
+          submitHospitalRequest(name).then(function (ok) {
+            rq.textContent = ok ? "✓ Requested — we'll review it" : "Couldn't send — try again";
+            if (ok) { try { if (window.toast) toast("Hospital requested — you can use it now; we'll verify and add it."); } catch (e) {} setTimeout(function () { closeSheet(); try { onPick(name); } catch (e) {} }, 900); }
+            else rq.disabled = false;
+          });
+          return;
+        }
+        var b = e.target.closest && e.target.closest(".hosp-opt, [data-h-custom]"); if (!b) return;
+        var val = b.getAttribute("data-h-custom") ? (inp ? inp.value.trim() : "") : b.getAttribute("data-h");
+        if (!val) return; closeSheet(); setTimeout(function () { try { onPick(val); } catch (e) {} }, 60);
+      });
     });
   }
   // ---- Account + data deletion (store requirement: Apple 5.1.1(v) / Google Play) ----

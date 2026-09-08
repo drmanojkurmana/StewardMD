@@ -338,6 +338,21 @@ test("vitals: every field the record path accepts is on the form, and blanks are
   }
   assert.match(html, /Blank fields are not recorded/);
   assert.match(html, /never guessed at/);
+
+  /* The two an early warning score cannot do without, and which this form could not record until
+   * 2026-09-08. Without them NEWS2 can never complete, however many numbers a ward charts. */
+  assert.match(html, /id="wv_o2"/);
+  assert.match(html, /id="wv_acvpu"/);
+  // NOT RECORDED and "no" are different, and the form offers both.
+  assert.match(html, /<option value="">Not recorded<\/option>/);
+  assert.match(html, /<option value="0">Breathing air<\/option>/);
+  assert.match(html, /Consciousness: not assessed/);
+  for (const l of ["A", "C", "V", "P", "U"]) {
+    assert.match(html, new RegExp(`<option value="${l}">`), `${l} must be offerable`);
+  }
+  // The letters are spelled out: "C" on its own is not a thing a nurse should have to remember.
+  assert.match(html, /new confusion/);
+  assert.match(html, /unresponsive/);
 });
 
 test("HTML is escaped: a hostile ward or drug name cannot inject markup", () => {
@@ -391,6 +406,44 @@ test("THE NOTE COMPOSER SUPPLIES HEADINGS AND NEVER CONTENT", () => {
   assert.ok(saveNote.length > 100, "found the composer's save");
   assert.match(saveNote, /apiPost\("\/ward\/note",/);
   assert.ok(!/note-sign|signedBy|sign\(/.test(saveNote), "and it carries no signature");
+});
+
+test("THE OVERRIDE REPORT IS ABOUT RULES, AND THE WORST ONE IS FIRST", () => {
+  const W = load();
+  const html = W._render(Object.assign({}, base, {
+    overrides: {
+      totalOverrides: 45, distinctRules: 3,
+      note: "Override counts are evidence about RULES, not about clinicians.",
+      rules: [
+        { key: "dose", code: "dose", targetId: null, overridden: 5, fired: 40, overrideRate: 0.125, topReason: "clinical-judgement" },
+        { key: "interaction:ddi-a", code: "interaction", targetId: "ddi-a", overridden: 39, fired: 40, overrideRate: 0.975, topReason: "benefit-outweighs-risk" },
+        { key: "allergy:alg-1", code: "allergy", targetId: "alg-1", overridden: 1, fired: null, overrideRate: null },
+      ],
+    },
+  }));
+
+  /* WORST FIRST. A rule overridden on 39 of 40 firings is not protecting anyone - it is training
+   * every clinician in the hospital to click through warnings, including the one that mattered. */
+  assert.ok(html.indexOf("ddi-a") < html.indexOf(">dose<"), "the 97% rule is above the 12% one");
+  assert.match(html, /98%/, "0.975 rounds up");
+  assert.match(html, /39 of 40 firings/, "the denominator is always beside the rate");
+  assert.match(html, /trains people to click through warnings/);
+  assert.match(html, /class="hot"/);
+
+  // A rate with no denominator is not drawn as a measurement.
+  assert.match(html, /no firing count, so no rate/);
+  assert.ok(!/>0%</.test(html));
+  // And a rule that CAN be judged sorts above one that cannot: no rate is not the same as fine.
+  assert.ok(html.indexOf("ddi-a") < html.indexOf("alg-1"));
+
+  /* IT NAMES NO CLINICIAN. A screen that ranked people by override rate would stop them writing
+   * honest rationales, and the rationale is the only thing that makes a bad rule fixable. */
+  assert.match(html, /evidence about RULES, not about clinicians/);
+  const src = SRC.replace(/\/\*[\s\S]*?\*\//g, " ").replace(/^\s*\/\/.*$/gm, " ");
+  const card = src.slice(src.indexOf("function overrideCard"), src.indexOf("function qualityCard"));
+  assert.ok(!/actorId|clinician|prescriber|byActor/i.test(card), "the card cannot even reach for an actor");
+
+  assert.ok(!W._render(base).includes("Safety rules being overridden"), "no data, no card");
 });
 
 test("A MEASURE SHOWS ITS DENOMINATOR, AND ONE THAT CANNOT BE COMPUTED SHOWS ITS REASON", () => {
@@ -541,4 +594,60 @@ test("THE OUTBOX NEVER READS 'SENT' AS 'ARRIVED', and an unsent prescription is 
 
   // Nothing prescribed and nothing sent: the card stays off the chart rather than showing an empty box.
   assert.ok(!W._render(chart).includes("Prescriptions sent"));
+});
+
+const copy = Object.assign({}, base, {
+  view: "pcopy",
+  sel: { encounterId: "wsq-adm-x", patientId: "opd-pat-x", ward: "Ward A", bed: "12", admittedAt: "2026-09-07T04:00:00.000Z" },
+  pcopy: {
+    ok: true, patientId: "opd-pat-x",
+    statements: ["1 result is not included here. Your care team will discuss it with you.",
+      "This is a summary your care team has given you. It is not your complete medical record - you can ask the hospital for that separately."],
+    clinicianWarnings: ["This hospital has not configured wardsynq.neverRelease, so no result is withheld from this page on grounds of sensitivity. Read it before you hand it over."],
+    document: {
+      patient: { id: "opd-pat-x", name: "Test Patient", mrn: "MRN-1", dob: "1970-01-01" },
+      diagnoses: [{ display: "Type 2 diabetes" }, { display: "COPD", note: "This is a working diagnosis. Your team is still confirming it." }],
+      excludedDiagnoses: 1,
+      allergies: [{ substance: "Penicillin", reaction: "rash" }],
+      medicines: [{ drug: "Metformin", dose: { value: 500, unit: "mg" }, route: "oral", frequency: "BD" }],
+      results: [{ id: "rep-2", name: "Renal profile", reportedAt: "2026-09-08T09:00:00.000Z", status: "final", conclusion: null }],
+      withheldResults: [{ reason: "critical_unacknowledged", say: "Your care team is reviewing this result and will discuss it with you.", reportedAt: "2026-09-08T10:00:00.000Z" }],
+      appointments: [],
+    },
+  },
+});
+
+test("THE CLINICIAN'S WARNING NEVER PRINTS ON THE PATIENT'S OWN COPY", () => {
+  const html = load()._render(copy);
+  /* Two audiences on one page. The patient's sentences print; the line telling the clinician to
+   * check the page before handing it over carries w-noprint, because a document reading "not for
+   * the patient" handed to the patient is the most careless thing this screen could do. */
+  assert.ok(/<p class="w-dt-gap w-noprint">[^<]*neverRelease/.test(html), "the warning is on screen and marked not to print");
+  assert.match(html, /w-dt-warn">1 result is not included here/, "and the patient's own sentences are not w-noprint");
+  assert.ok(!/w-dt-warn">[^<]*neverRelease/.test(html), "the two are never mixed into one block");
+});
+
+test("a withheld result is ON the page, in the patient's words and never its reason code", () => {
+  const html = load()._render(copy);
+  assert.match(html, /Not included here/);
+  assert.match(html, /Your care team is reviewing this result/);
+  /* The reason code is for the clinician and the audit trail. Printing "critical_unacknowledged" on
+   * a page a patient reads tells them something alarming and nothing useful. */
+  assert.ok(!html.includes("critical_unacknowledged"));
+  // A result that IS releasable appears under its own heading, so the two are never confused.
+  assert.match(html, /Renal profile/);
+});
+
+test("the patient copy never renders a stale patient, and the handover is its own act", () => {
+  const W = load();
+  // Nothing loaded yet renders a placeholder, never the previous patient's page.
+  assert.match(W._render(Object.assign({}, copy, { pcopy: null })), /Preparing the copy/);
+
+  const html = W._render(copy);
+  assert.match(html, /Test Patient/);
+  assert.match(html, /Penicillin/);
+  // The working diagnosis is labelled rather than printed as settled.
+  assert.match(html, /working diagnosis/);
+  // Recording the handover is a separate, deliberate act with its own button.
+  assert.match(html, /data-w-act="pcopyGive"/);
 });

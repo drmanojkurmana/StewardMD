@@ -157,16 +157,20 @@ test("THE CAPABILITY STATEMENT DOES NOT OVERSTATE", () => {
   const c = capabilityStatement({ date: "2026-09-07T00:00:00.000Z", version: "wardsynq-1" });
   assert.equal(c.resourceType, "CapabilityStatement");
   assert.equal(c.fhirVersion, "4.0.1");
-  // READ and SEARCH only. Nothing anywhere implies a write is accepted.
+  /* READ, VREAD, HISTORY and SEARCH - every one of them real - and nothing that writes. This list
+   * widened on 2026-09-08 when vread and history were implemented; it must never widen ahead of
+   * the implementation, because a client trusts the declaration. */
   const codes = new Set(c.rest[0].resource.flatMap((r) => r.interaction.map((i) => i.code)));
-  assert.deepEqual([...codes].sort(), ["read", "search-type"]);
+  assert.deepEqual([...codes].sort(), ["history-instance", "read", "search-type", "vread"]);
   for (const bad of ["create", "update", "delete", "patch"]) assert.ok(!codes.has(bad), `must not advertise ${bad}`);
   // And it says outright that this is not profile-validated, where a machine and a human both see
   // it - because a CapabilityStatement that overstates is how a receiver trusts what it should not.
   assert.match(c.implementation.description, /Not profile-validated/);
   assert.match(c.implementation.description, /no claim of conformance to US Core/);
   assert.match(c.implementation.description, /never as a guessed code/);
-  assert.equal(c.rest[0].resource.length, Object.keys(FHIR_TYPE).length, "it advertises exactly what it maps");
+  // Every mapped type, plus Provenance, which is derived from each of them rather than mapped from a stored one.
+  assert.equal(c.rest[0].resource.length, Object.keys(FHIR_TYPE).length + 1, "it advertises exactly what it maps, plus derived Provenance");
+  assert.ok(c.rest[0].resource.some((r) => r.type === "Provenance"));
 });
 
 test("a bundle is a searchset with fullUrls that resolve back here", () => {

@@ -70,8 +70,25 @@ function codeOf(c) {
 
 function mrnOf(p) {
   const ids = Array.isArray(p.identifiers) ? p.identifiers : [];
-  const mrn = ids.find((i) => i && /mrn|uhid|medical-record|hospital/i.test(String(i.type || i.system || "")));
+  // `MR` is the HL7 v2-0203 identifier type for a medical record number, which is what a FHIR
+  // Patient.identifier carries; the word forms are what an HIS export tends to write instead.
+  const mrn = ids.find((i) => i && /^mr$|mrn|uhid|medical-record|hospital/i.test(String(i.type || i.system || "")));
   return (mrn && mrn.value) || (ids[0] && ids[0].value) || null;
+}
+
+/** An SCCM name is a string from some connectors and {text, given, family} from the FHIR one. A
+ *  constructor that needs a string got an object here until 2026-09-08 and refused every FHIR
+ *  patient. Never split or reordered: text as given, else the parts in the order the sender used. */
+function nameOf(p) {
+  const n = p && p.name;
+  if (!n) return null;
+  if (typeof n === "string") return n;
+  if (typeof n === "object") {
+    if (n.text) return String(n.text);
+    const parts = [...(Array.isArray(n.given) ? n.given : []), n.family].filter(Boolean).map(String);
+    return parts.length ? parts.join(" ") : null;
+  }
+  return null;
 }
 
 /**
@@ -87,20 +104,23 @@ function mapSccmBundle(bundle) {
   if (!p || !p.id) return { patient: null, entities: [], issues: [{ code: "SCCM_NO_PATIENT", message: "the bundle carries no patient" }] };
 
   const mrn = mrnOf(p);
+  const name = nameOf(p);
   if (!mrn) issues.push({ code: "SCCM_PATIENT_NO_MRN", message: "no MRN-like identifier; the source id is used as the MRN" });
-  if (!p.name) issues.push({ code: "SCCM_PATIENT_NO_NAME", message: "the source carried no name; the source id stands in and is marked" });
+  if (!name) issues.push({ code: "SCCM_PATIENT_NO_NAME", message: "the source carried no name; the source id stands in and is marked" });
   if (!p.birthDate) issues.push({ code: "SCCM_PATIENT_NO_DOB", message: "no date of birth; the unknown sentinel is used, not a guess" });
 
   const patient = Patient({
     id: sourceId(system, "pat", p.id),
     mrn: mrn || String(p.id),
-    name: p.name || String(p.id),
+    name: name || String(p.id),
     dob: p.birthDate || UNKNOWN_DOB,
     sex: p.gender || "unknown",
-    identifiers: (p.identifiers || []).map((i) => ({ system: i.system || i.type || null, value: i.value })).filter((i) => i.value),
+    // The sender's declared type (a v2-0203 code such as MR or NI) travels beside the system, so an
+    // MRN under a system nobody here knows is still exported as an MRN and not as an anonymous value.
+    identifiers: (p.identifiers || []).map((i) => ({ system: i.system || i.type || null, type: i.type || null, value: i.value })).filter((i) => i.value),
     source: src("pat", p.id),
   });
-  if (!p.name) patient.nameIsUnknown = true;
+  if (!name) patient.nameIsUnknown = true;
   if (!p.birthDate) patient.dobIsUnknown = true;
   if (p.deceased != null) patient.deceased = p.deceased;
 

@@ -79,7 +79,7 @@ const ORDER_TYPES = Object.freeze(["MedicationOrder", "ServiceRequest"]);
 /* SpecimenCollection joined on 2026-09-07: taking a sample is nursing work, the same authority as
  * recording a vital. It records that a sample was TAKEN and never what it showed - the result is the
  * laboratory's own authority, so this grants nothing towards one. */
-const VITALS_TYPES = Object.freeze(["Observation", "ShiftHandover", "BreakGlassGrant", "MedicationReconciliation", "PatientConsent", "CarePlan", "RiskAssessment", "SpecimenCollection", "WoundAssessment"]);
+const VITALS_TYPES = Object.freeze(["Observation", "ShiftHandover", "BreakGlassGrant", "MedicationReconciliation", "PatientConsent", "CarePlan", "RiskAssessment", "SpecimenCollection", "WoundAssessment", "ClinicalRead"]);
 const PATIENT_TYPE = "Patient";
 // Added 2026-09-06 (the Encounter migration), alongside PATIENT_TYPE and for the identical reason:
 // checking a patient in for today's visit is the SAME administrative act QUEUE_ADD already covers
@@ -158,8 +158,14 @@ function grantForCaps(caps) {
     /* SpecimenCollection is on both lists as of 2026-09-07: the laboratory is the half of the journey
      * that RECEIVES the sample, and a lab that cannot record "we have it" leaves every tube reading
      * as still in a nurse's pocket. It writes the specimen's arrival, never its collection. */
-    const canRead = ["ServiceRequest", "Observation", "DiagnosticReport", "SpecimenCollection"];
-    const canWrite = ["Observation", "DiagnosticReport", "SpecimenCollection"];
+    /* AllergyIntolerance and ImagingProtocol joined on 2026-09-08 with radiology protocolling.
+     * Deciding to give intravenous contrast is the point where an imaging request becomes a drug
+     * administration, and it cannot be made safely without seeing a previous contrast reaction - so
+     * the read is required for the check to be honest rather than decorative. The write is the
+     * protocol itself and nothing else: this grant still reaches no prescription, no administration
+     * and no diagnosis. */
+    const canRead = ["ServiceRequest", "Observation", "DiagnosticReport", "SpecimenCollection", "AllergyIntolerance", "ImagingProtocol"];
+    const canWrite = ["Observation", "DiagnosticReport", "SpecimenCollection", "ImagingProtocol"];
     const cats = { Observation: ["laboratory"] };
     if (!grant) grant = { tier: TIER.EXECUTE, read: canRead, write: canWrite, writeCategories: cats, basis: CAPS.LAB_RESULT };
     else grant = {
@@ -205,6 +211,28 @@ function grantForCaps(caps) {
     };
   }
 
+  if (has(CAPS.ORDER_DISPENSE)) {
+    /* Stock control, 2026-09-08. Its own capability - "hand medicines to the patient + mark the
+     * order dispensed" - rather than folded into ORDER_VERIFY, because counting the shelf is the
+     * dispensing side of pharmacy and not the checking side, and a site that separates the two
+     * should be able to.
+     *
+     * ONE TYPE, AND IT IS NOT CLINICAL. A StockMovement says a box arrived, was destroyed or was
+     * recounted. It names no patient and this grant confers nothing towards one: MedicationDispense
+     * is granted by ORDER_VERIFY above and is a supply fact against an ORDER, which is a different
+     * thing that a different check governs. Reading MedicationDispense is how the level subtracts
+     * what was issued, and pharmacy already holds that read. */
+    const added = ["StockMovement"];
+    if (!grant) grant = { tier: TIER.EXECUTE, read: added, write: added, basis: CAPS.ORDER_DISPENSE };
+    else grant = {
+      tier: TIER.EXECUTE,
+      read: grant.read === null ? null : [...new Set([...grant.read, ...added])],
+      write: grant.write === null ? null : [...new Set([...grant.write, ...added])],
+      writeCategories: grant.writeCategories,
+      basis: grant.basis + "+" + CAPS.ORDER_DISPENSE,
+    };
+  }
+
   if (has(CAPS.MED_ADMINISTER)) {
     /* The bedside authority, added 2026-09-07 with the inpatient eMAR, in the same union shape as
      * QUEUE_ADD above and for the same reason: it only ever ADDS one type and only ever RAISES the
@@ -228,6 +256,50 @@ function grantForCaps(caps) {
       basis: grant.basis + "+" + CAPS.MED_ADMINISTER,
     };
   }
+  if (has(CAPS.BILLING_CHARGE) || has(CAPS.BILLING_VIEW)) {
+    /* Billing, 2026-09-08. The grant IS the safety property that wardsynq-billing.js is built on.
+     *
+     * Its central rule is that the clinical record is the source and billing never writes to it -
+     * a charge whose diagnosis appears nowhere in the chart is refused, because the cheapest way to
+     * clear a queried code is to add the diagnosis. That rule is worth nothing as a promise in a
+     * module header. Here it is structural: a coder holding BILLING_CHARGE and no EMR capability may
+     * write Claim and PreAuthorisation and NOTHING ELSE, so the record service refuses the write
+     * that would justify the charge. Removing the boundary means deliberately widening this list.
+     *
+     * READ IS THE PROBLEM LIST AND NOTHING MORE. Coding asks one question - is this diagnosis
+     * written down - and answering it does not need the notes, the results or the drug chart. A
+     * coder handed EMR_VIEW to solve this would have been given the whole chart for one question,
+     * which is the same mistake ORDER_VERIFY above exists to avoid.
+     *
+     * BILLING_VIEW reads and writes nothing: the cashier sees the claims, and cannot code one. */
+    /* CHARGE CAPTURE (2026-09-08) adds four types to the READ list and NOTHING to the write list,
+     * which is the whole point. Billing what happened requires knowing what happened: the doses
+     * given, the reports released, the samples taken and the medicine issued. Billing from ORDERS
+     * instead would need none of this and would bill for doses the patient refused and tests nobody
+     * performed - the patient receives that bill and has to argue with it.
+     *
+     * It is a real widening and is named as one: MedicationAdministration tells a coder every drug
+     * a patient received. It is what charge capture IS, it is what a coder in any hospital sees, and
+     * the containment is that the write scope below did not move. A site wanting tighter separation
+     * should hold BILLING_CHARGE for coders and leave the cashier on BILLING_VIEW. */
+    const CAPTURE_TYPES = ["MedicationAdministration", "DiagnosticReport", "SpecimenCollection", "MedicationDispense"];
+    const canRead = has(CAPS.BILLING_CHARGE)
+      ? ["Condition", "Claim", "PreAuthorisation", ...CAPTURE_TYPES]
+      : ["Claim", "PreAuthorisation"];
+    const canWrite = has(CAPS.BILLING_CHARGE) ? ["Claim", "PreAuthorisation"] : [];
+    if (!grant) grant = { tier: canWrite.length ? TIER.EXECUTE : TIER.READ, read: canRead, write: canWrite, basis: has(CAPS.BILLING_CHARGE) ? CAPS.BILLING_CHARGE : CAPS.BILLING_VIEW };
+    else grant = {
+      // Raised, never lowered - the same union rule as every branch above. A cashier who also holds
+      // EMR_VIEW lands on TIER.READ, and leaving her there would have given her a write scope she
+      // could not use: the list would read as a grant and behave as a refusal.
+      tier: canWrite.length ? TIER.EXECUTE : grant.tier,
+      read: grant.read === null ? null : [...new Set([...grant.read, ...canRead])],
+      write: grant.write === null ? null : [...new Set([...grant.write, ...canWrite])],
+      writeCategories: grant.writeCategories,
+      basis: grant.basis + "+" + (has(CAPS.BILLING_CHARGE) ? CAPS.BILLING_CHARGE : CAPS.BILLING_VIEW),
+    };
+  }
+
   /* An unconstrained write scope cannot be partly constrained. A role that ends up with `write: null`
    * may write every type, and leaving a category allow-list attached to that would refuse the one
    * type it names while permitting every other - a rule that reads as tighter and behaves as

@@ -279,7 +279,8 @@
     ventilator: '{"mode":str,"fio2":num,"peep":num,"tv":num,"rr":num,"peak":num,"plateau":num}',
     abg: '{"ph":num,"paco2":num,"pao2":num,"hco3":num,"be":num,"lactate":num,"fio2":num}',
     labs: '{"na":num,"k":num,"cl":num,"hco3":num,"ca":num,"mg":num,"glu":num,"creat":num,"urea":num,"wbc":num,"hb":num,"plt":num,"inr":num,"crp":num,"bili":num,"ast":num,"alt":num,"lactate":num}',
-    all: '{"labs":{...},"abg":{"ph":num,"paco2":num,"pao2":num,"hco3":num,"be":num,"lactate":num,"fio2":num},"vitals":{"hr":num,"sbp":num,"dbp":num,"map":num,"rr":num,"spo2":num,"temp":num},"ventilator":{"mode":str,"fio2":num,"peep":num,"tv":num,"rr":num,"peak":num,"plateau":num}}'
+    all: '{"labs":{...},"abg":{"ph":num,"paco2":num,"pao2":num,"hco3":num,"be":num,"lactate":num,"fio2":num},"vitals":{"hr":num,"sbp":num,"dbp":num,"map":num,"rr":num,"spo2":num,"temp":num},"ventilator":{"mode":str,"fio2":num,"peep":num,"tv":num,"rr":num,"peak":num,"plateau":num}}',
+    patient: '{"name":str,"age":num,"sex":str,"weightKg":num,"heightCm":num,"mrn":str,"hospital":str,"bed":str,"doctor":str,"dept":str,"allergies":str,"complaints":str,"pastHistory":str,"diagnosis":str,"codeStatus":str}'
   };
 
   /* On-device reading. Two shapes, because the callers want different things.

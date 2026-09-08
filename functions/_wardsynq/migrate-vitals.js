@@ -54,7 +54,19 @@ const VITAL_CODES = Object.freeze({
   spo2:   Object.freeze({ code: "59408-5", display: "Oxygen saturation (pulse oximetry)", unit: "%" }),
   rr:     Object.freeze({ code: "9279-1",  display: "Respiratory rate",         unit: "/min" }),
   weight: Object.freeze({ code: "29463-7", display: "Body weight",              unit: "kg" }),
+  /* Supplemental oxygen: a FLAG, 1 or 0. "On oxygen" is a yes/no for NEWS2 and the litres are a
+   * separate fact this form does not claim to hold. Without it an early warning score can never
+   * complete, however many observations a ward charts. */
+  o2:     Object.freeze({ code: "80288-4", display: "Supplemental oxygen",       unit: null }),
 });
+
+/* ACVPU is written SEPARATELY, below, and not through the numeric table - because its value is a
+ * LETTER and the score reads it as one. Encoding it as an ordinal here would have stored a 0 for
+ * "Alert" that the scorer could not read and every ward would have had a permanently incomplete
+ * NEWS2 with an observation sitting right there. An Observation's value is deliberately loose
+ * (wardsynq-model.js) for exactly this. */
+const ACVPU_CODE = Object.freeze({ code: "80339-5", display: "Level of consciousness (ACVPU)" });
+const ACVPU_LETTERS = Object.freeze(["A", "C", "V", "P", "U"]);
 
 // Strict, because the strip-and-parse this used to do turned "120/80" typed into one box into a
 // systolic of 12080 and "98,6" into 986. See numericValue() in wardsynq-model.js. A value that is
@@ -81,8 +93,19 @@ function vitalsToObservations(input) {
   const stamp = Date.parse(at) || Date.now();
   const out = [];
   const tempUnit = String(v.tempUnit || "F").toUpperCase() === "C" ? "Cel" : "[degF]";
+
+  /* The two NEWS2 parameters that are not plain numbers, normalised before the numeric loop.
+   *
+   * NOT RECORDED AND "NO" ARE DIFFERENT. "Not on supplemental oxygen" is a real NEWS2 input worth 0;
+   * "nobody wrote it down" is a missing parameter, and the score refuses to complete on it. So an
+   * absent o2 is skipped and an explicit false is recorded as 0. */
+  const norm = { ...v };
+  if (v.o2 === undefined || v.o2 === null || v.o2 === "") delete norm.o2;
+  else norm.o2 = (v.o2 === true || v.o2 === 1 || /^(1|y|yes|true|on)$/i.test(String(v.o2).trim())) ? 1 : 0;
+  delete norm.acvpu;    // written below, as a letter
+
   for (const key of Object.keys(VITAL_CODES)) {
-    const value = num(v[key]);
+    const value = num(norm[key]);
     if (value === null) continue;
     const spec = VITAL_CODES[key];
     const obs = Observation({
@@ -99,6 +122,25 @@ function vitalsToObservations(input) {
       source: { system: "wardsynq-native", sourceId: `opd-ticket:${input.ticketId}` },
     });
     obs.display = spec.display;
+    // A flag reads as a word, so nobody has to decode a 0 on a chart.
+    if (key === "o2") obs.valueLabel = value === 1 ? "On supplemental oxygen" : "Breathing air";
+    if (note) obs.sourceText = String(note).slice(0, 400);
+    out.push(obs);
+  }
+
+  /* ACVPU, as a letter. A word the scale does not contain is not a level of consciousness and is
+   * SKIPPED rather than guessed at - an invented "A" would complete a score about a patient whose
+   * consciousness nobody assessed, which is the one direction this must never fail. */
+  const letter = String(v.acvpu == null ? "" : v.acvpu).trim().toUpperCase();
+  if (ACVPU_LETTERS.includes(letter)) {
+    const obs = Observation({
+      id: `${input.idPrefix || "opd-vitals"}-${String(input.ticketId).toLowerCase().replace(/[^a-z0-9]+/g, "-")}-${stamp}-acvpu`,
+      patientId: input.patientId, encounterId: input.encounterId || null,
+      category: "vital-signs", code: ACVPU_CODE.code, codeSystem: "http://loinc.org",
+      value: letter, unit: null, effectiveAt: at,
+      source: { system: "wardsynq-native", sourceId: `opd-ticket:${input.ticketId}` },
+    });
+    obs.display = ACVPU_CODE.display;
     if (note) obs.sourceText = String(note).slice(0, 400);
     out.push(obs);
   }

@@ -891,6 +891,11 @@ const VISION_SYS = {
   ventilator: "Read this ventilator screen photo. Return ONLY JSON: {\"mode\":str,\"fio2\":num,\"peep\":num,\"tv\":num,\"rr\":num,\"peak\":num,\"plateau\":num}. Omit unreadable fields. No prose.",
   flowsheet: "Read this ICU flow-sheet photo. Return ONLY JSON: {\"intake24h\":num,\"output24h\":num,\"urine24h\":num,\"drains\":num}. Omit unreadable fields. No prose.",
   abg: "Read this arterial blood gas (ABG) report photo. Return ONLY JSON with any of: {\"ph\":num,\"paco2\":num,\"pao2\":num,\"hco3\":num,\"be\":num,\"lactate\":num,\"fio2\":num}. Omit fields you cannot read with confidence. No prose.",
+  // Patient / EMR case-sheet capture (ICU): a case sheet, admission note, ID band, or EMR/EHR
+  // screen photo — demographics + history, NOT vitals/labs (those are the other kinds above).
+  // Mostly free text, unlike the numeric-only kinds, so the client reviews every field before
+  // applying (see openPatientReview in icu.js) rather than auto-filling.
+  patient: "Read this patient case sheet, admission note, ID band, or EMR/EHR screen photo. Return ONLY JSON with any of: {\"name\":str,\"age\":num,\"sex\":str,\"weightKg\":num,\"heightCm\":num,\"mrn\":str,\"hospital\":str,\"bed\":str,\"doctor\":str,\"dept\":str,\"allergies\":str,\"complaints\":str,\"pastHistory\":str,\"diagnosis\":str,\"codeStatus\":str}. name is the patient's name or initials EXACTLY as written — if illegible, omit it, never invent one. age is a whole number of years. sex is exactly \"M\", \"F\", or \"Other\". weightKg and heightCm are numbers only (convert lb/in to kg/cm if that is what is written). mrn is the hospital registration / UHID number. allergies is drug/food allergies as written, or omit if not stated (never write \"Nil known\" unless the document says so). complaints is the presenting complaint / history of present illness, verbatim. pastHistory is past medical/surgical history and comorbidities, verbatim. diagnosis is the admitting or working diagnosis as written. codeStatus is exactly one of \"Full code\",\"DNR / DNAR\",\"DNI\",\"Comfort care only\" ONLY if explicitly stated, else omit it. Omit any field you cannot read with confidence. Never invent a value. No prose.",
   // Combined extractor (gold249): ONE image OR one multi-page OCR text may contain several report
   // types at once (e.g. a photo showing the monitor AND an ABG slip, or a PDF whose page 1 is
   // chemistry and page 2 is an ABG). Return SECTIONED JSON so overlapping keys (HCO3, lactate,
@@ -936,7 +941,7 @@ function parseJsonLoose(t) {
 // TEXT mode for AI Vision (privacy path D→B): the app runs OCR ON-DEVICE and sends only
 // the extracted text — the image never reaches the server. Reuse each kind's JSON
 // schema/rules but feed OCR text instead of an image.
-const VISION_LABEL = { monitor: "ICU monitor", labs: "laboratory report", ventilator: "ventilator screen", flowsheet: "ICU flow-sheet", abg: "arterial blood gas (ABG) report", all: "clinical report (labs / ABG / ventilator / monitor, possibly multi-page)", medication_list: "medication list / prescription" };
+const VISION_LABEL = { monitor: "ICU monitor", labs: "laboratory report", ventilator: "ventilator screen", flowsheet: "ICU flow-sheet", abg: "arterial blood gas (ABG) report", all: "clinical report (labs / ABG / ventilator / monitor, possibly multi-page)", medication_list: "medication list / prescription", patient: "patient case sheet / EMR" };
 function visionTextPrompt(kind, ocr) {
   var schema = String(VISION_SYS[kind] || VISION_SYS.monitor).replace(/^Read this [^.]*\.\s*/i, "");
   return "The following is text extracted ON-DEVICE by OCR from a " + (VISION_LABEL[kind] || "clinical source") +

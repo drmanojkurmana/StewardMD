@@ -202,9 +202,12 @@
       b.addEventListener("click", function () {
         var k = b.getAttribute("data-pick");
         var f = FIELDS.filter(function (x) { return x.key === k; })[0];
-        var items = (f.kind === "hospital") ? hospitalItems() : f.opts;
-        var title = (f.kind === "hospital") ? "Choose your college or hospital" : ("Choose your " + f.label.toLowerCase());
-        chooser(title, items, draft[k], function (v) { if (v) draft[k] = v; form(force); }, function () { form(force); });
+        var p = (f.kind === "hospital") ? smdLazy('/hospitals-in.js?v=1') : Promise.resolve();
+        p.then(function() {
+          var items = (f.kind === "hospital") ? hospitalItems() : f.opts;
+          var title = (f.kind === "hospital") ? "Choose your college or hospital" : ("Choose your " + f.label.toLowerCase());
+          chooser(title, items, draft[k], function (v) { if (v) draft[k] = v; form(force); }, function () { form(force); });
+        });
       });
     });
     el.querySelector("#pfsLater").addEventListener("click", function () {

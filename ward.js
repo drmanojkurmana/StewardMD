@@ -33,11 +33,11 @@
   var st = {
     orgId: "", ward: "", patients: [], view: "list",
     sel: null,                 // the selected {encounterId, patientId, ward, bed, admittedAt}
-    problems: [], criticals: [], balance: null, outbox: [], cosign: null, downtime: null, quality: null,
+    problems: [], criticals: [], balance: null, outbox: [], cosign: null, downtime: null, quality: null, pcopy: null,
     /* The terminology search: null while it runs, an array once it answers, undefined when nobody has
      * asked. Three states, because "searching" and "no matches" must not look the same. */
     icd: undefined, probText: "", probCode: "",
-    templates: [], noteTemplateId: "", noteResult: null,
+    templates: [], noteTemplateId: "", noteResult: null, overrides: null,
     due: [], prn: [], unscheduled: [], truncated: false,
     from: "", to: "",          // the window being viewed, NOT a claim about when a dose is due
     busy: false, err: "", note: "", refusal: null, loaded: false
@@ -154,7 +154,54 @@
       // to while the system is up is a pack the ward has to remember to take while the system is up.
       '<button class="w-btn ghost" data-w-act="downtime" title="Printable sheet for when the system is unavailable">' + ms("print") + "Downtime pack</button></div>" +
       (rows || (state.loaded ? '<p class="w-empty">No patients are currently admitted' + (state.ward ? " to " + esc(state.ward) : "") + ".</p>" : '<p class="w-empty">Loading the ward…</p>')) +
-      "</div>" + cosignCard(state) + qualityCard(state);
+      "</div>" + cosignCard(state) + qualityCard(state) + overrideCard(state);
+  }
+
+  /* Which safety rules are being clicked through. ALERT FATIGUE IS THE CHARACTERISTIC FAILURE OF
+   * CDSS: a rule that fires on every third order and is overridden 98% of the time is not protecting
+   * anyone - it is training every clinician in the hospital to click through warnings, including the
+   * one that mattered. This report existed on the server from the day override analytics landed and
+   * nothing displayed it, which made it evidence nobody could act on.
+   *
+   * IT IS ABOUT RULES, NEVER ABOUT PEOPLE. No clinician is named or counted, here or on the server.
+   * A screen that ranked clinicians by override rate would stop them writing honest rationales, and
+   * the rationale is the only thing that makes a bad rule fixable.
+   *
+   * A RATE WITH NO DENOMINATOR IS NOT A RATE. It shows the count and says the denominator is missing,
+   * rather than drawing a bar that looks like a measurement. */
+  function overrideCard(state) {
+    var rep = state.overrides;
+    if (!rep || !(rep.rules || []).length) return "";
+    var pct = function (r) { return Math.round(r * 100) + "%"; };
+
+    /* Worst first: the rule overridden most OFTEN, proportionally, is the one to look at. Rules with
+     * no rate sort after the ones that have one - they cannot be judged yet, not that they are fine. */
+    var rows = (rep.rules || []).slice().sort(function (a, b) {
+      if (a.overrideRate === null && b.overrideRate === null) return b.overridden - a.overridden;
+      if (a.overrideRate === null) return 1;
+      if (b.overrideRate === null) return -1;
+      return b.overrideRate - a.overrideRate;
+    }).map(function (m) {
+      return '<li' + (m.overrideRate !== null && m.overrideRate >= 0.9 ? ' class="hot"' : "") + ">" +
+        "<h4>" + esc(m.code) + (m.targetId ? ' <span class="w-code">' + esc(m.targetId) + "</span>" : "") + "</h4>" +
+        (m.overrideRate === null
+          ? '<div class="w-q-n"><b>' + esc(m.overridden) + "</b><span>overridden &middot; no firing count, so no rate</span></div>"
+          : '<div class="w-q-n"><b>' + esc(pct(m.overrideRate)) + "</b><span>" + esc(m.overridden) + " of " + esc(m.fired) + " firings</span></div>") +
+        (m.topReason ? '<p class="w-hint">' + ms("info") + "Most given reason: " + esc(m.topReason) + "</p>" : "") +
+        (m.overrideRate !== null && m.overrideRate >= 0.9
+          ? '<p class="w-hint warn">' + ms("warning") + "Overridden almost every time it fires. A rule like this trains people to click through warnings.</p>"
+          : "") +
+        "</li>";
+    }).join("");
+
+    return '<div class="w-card"><div class="w-card-h">' + ms("rule") + "<h3>Safety rules being overridden</h3>" +
+      '<button class="w-ic" data-w-act="overrides" title="Refresh">' + ms("refresh") + "</button></div>" +
+      '<ul class="w-q">' + rows + "</ul>" +
+      // The server's own sentence, shown verbatim. The conclusion people reach from an override table
+      // is usually the wrong one, so it is stated rather than left to be inferred.
+      (rep.note ? '<p class="w-hint">' + ms("info") + esc(rep.note) + "</p>" : "") +
+      (rep.note2 ? '<p class="w-hint warn">' + ms("warning") + esc(rep.note2) + "</p>" : "") +
+      "</div>";
   }
 
   /* Measures about the SYSTEM, over a period. Never about a person: nothing here is aggregated by
@@ -282,6 +329,10 @@
     { k: "temp", l: "Temp", u: "°F" }, { k: "spo2", l: "SpO₂", u: "%" },
     { k: "weight", l: "Weight", u: "kg" }
   ];
+  /* The two an early warning score cannot do without. They are not numbers, so they sit beside the
+   * numeric grid rather than in it - and leaving them blank leaves the score INCOMPLETE, which is
+   * the honest outcome rather than a reassuring total about a patient nobody finished examining. */
+  var ACVPU = [["", "Consciousness: not assessed"], ["A", "A - alert"], ["C", "C - new confusion"], ["V", "V - responds to voice"], ["P", "P - responds to pain"], ["U", "U - unresponsive"]];
   function vitalsCard() {
     var f = VITALS.map(function (v) {
       return '<label class="w-f"><span>' + esc(v.l) + ' <i>' + esc(v.u) + "</i></span>" +
@@ -289,6 +340,10 @@
     }).join("");
     return '<div class="w-card"><div class="w-card-h">' + ms("monitor_heart") + "<h3>Vitals</h3></div>" +
       '<div class="w-grid">' + f + "</div>" +
+      '<div class="w-fluid"><label class="w-f"><span>Supplemental oxygen</span>' +
+      '<select id="wv_o2"><option value="">Not recorded</option><option value="0">Breathing air</option><option value="1">On oxygen</option></select></label>' +
+      '<label class="w-f"><span>Consciousness <i>ACVPU</i></span><select id="wv_acvpu">' +
+      ACVPU.map(function (a) { return '<option value="' + esc(a[0]) + '">' + esc(a[1]) + "</option>"; }).join("") + "</select></label></div>" +
       // Weight is not decoration: a weight-based dose is REFUSED at the bedside until the ward has
       // actually weighed the patient, and this is where that weight comes from.
       '<p class="w-hint">Blank fields are not recorded. A value that is not plainly one number is skipped, never guessed at.</p>' +
@@ -351,8 +406,79 @@
       // discharge is prepared while the patient is still on the ward, so this is not gated on the
       // stay being closed - the summary screen states plainly when a stay is still open.
       '<button class="w-btn ghost" data-w-act="move" title="Transfer to another ward or bed">' + ms("swap_horiz") + "Transfer</button>" +
-      '<button class="w-btn ghost" data-w-act="summary" title="Discharge summary">' + ms("description") + "Summary</button></div>" +
+      '<button class="w-btn ghost" data-w-act="summary" title="Discharge summary">' + ms("description") + "Summary</button>" +
+      // The patient's own copy. Reachable from the patient because that is where the conversation
+      // that produces it happens, not from a menu somewhere else.
+      '<button class="w-btn ghost" data-w-act="pcopy" title="The copy this patient can be given">' + ms("assignment_ind") + "Patient copy</button></div>" +
       criticalsCard(state) + problemsCard(state) + noteCard(state) + vitalsCard() + fluidCard(state) + marCard(state) + outboxCard(state);
+  }
+
+  /* The patient's own copy, on screen and on paper. It reuses the downtime pack's print styling
+   * deliberately: both are documents that leave the building, and both have to be legible in black
+   * and white and honest about what they do not contain.
+   *
+   * THE WITHHELD ITEMS ARE ON THE PAGE. A result left off silently reads as a test nobody did, which
+   * is a more reassuring statement than the truth. Each one prints the sentence the server wrote for
+   * the patient, and never the reason code, which is for the clinician and not for them. */
+  function pcopyView(state) {
+    var r = state.pcopy;
+    if (!r) return '<div class="w-card"><p class="w-empty">Preparing the copy…</p></div>';
+    var d = r.document || {};
+    var p = d.patient || {};
+
+    var list = function (arr, empty, fn) {
+      return arr && arr.length ? "<ul class=\"w-dt-meds\">" + arr.map(fn).join("") + "</ul>" : '<p class="w-empty">' + empty + "</p>";
+    };
+
+    /* The allergies are never filtered by anything, and an empty list is stated in words. A blank
+     * allergy block reads as "no known allergies" to every clinician alive, and this page is one a
+     * patient carries to the next hospital. */
+    var allergies = d.allergies && d.allergies.length
+      ? d.allergies.map(function (a) { return "<b>" + esc(a.substance) + "</b>" + (a.reaction ? " (" + esc(a.reaction) + ")" : ""); }).join(", ")
+      : "No allergies are recorded for you. Tell your care team if you know of any.";
+
+    var withheld = (d.withheldResults || []).length
+      ? '<section class="w-dt-p"><h3>Not included here</h3>' +
+        "<ul class=\"w-dt-meds\">" + d.withheldResults.map(function (w) {
+          return "<li>" + esc(w.say) + (w.reportedAt ? ' <span class="w-dt-times">' + when(w.reportedAt) + "</span>" : "") + "</li>";
+        }).join("") + "</ul></section>"
+      : "";
+
+    return '<div class="w-dt">' +
+      '<div class="w-dt-bar w-noprint"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button>" +
+      '<button class="w-btn" data-w-act="printpack">' + ms("print") + "Print</button>" +
+      '<button class="w-btn ghost" data-w-act="pcopyGive" title="Record that you gave this to the patient">' + ms("how_to_reg") + "Record handover</button>" +
+      '<button class="w-btn ghost" data-w-act="pcopy">' + ms("refresh") + "Refresh</button></div>" +
+      '<header class="w-dt-h"><h2>Your record</h2>' +
+      "<p><b>" + esc(p.name || r.patientId || "") + "</b>" + (p.mrn ? " &middot; " + esc(p.mrn) : "") + (p.dob ? " &middot; " + esc(p.dob) : "") + "</p>" +
+      /* Two audiences, and they are never mixed. `statements` is addressed to the patient and
+       * prints. `clinicianWarnings` is w-noprint: a line reading "not for the patient" printed on
+       * the patient's own copy would be the most careless thing on the page. */
+      (r.statements || []).map(function (s) { return '<p class="w-dt-warn">' + esc(s) + "</p>"; }).join("") +
+      (r.clinicianWarnings || []).map(function (s) { return '<p class="w-dt-gap w-noprint">' + esc(s) + "</p>"; }).join("") +
+      (r.release ? '<p class="w-ok w-noprint">Handover recorded at ' + when(r.release.at) + ".</p>" : "") +
+      "</header>" +
+      '<section class="w-dt-p"><h3>Allergies</h3><p class="w-dt-alg">' + allergies + "</p></section>" +
+      '<section class="w-dt-p"><h3>Your diagnoses</h3>' +
+      list(d.diagnoses, "No diagnoses are recorded.", function (x) {
+        return "<li><b>" + esc(x.display) + "</b>" + (x.note ? '<div class="w-dt-times">' + esc(x.note) + "</div>" : "") + "</li>";
+      }) + "</section>" +
+      '<section class="w-dt-p"><h3>Your medicines</h3>' +
+      list(d.medicines, "No medicines are recorded.", function (m) {
+        return "<li><b>" + esc(m.drug) + "</b> " + dose(m.dose) + (m.route ? " &middot; " + esc(m.route) : "") +
+          (m.frequency ? '<div class="w-dt-times">' + esc(m.frequency) + "</div>" : "") + "</li>";
+      }) + "</section>" +
+      '<section class="w-dt-p"><h3>Your results</h3>' +
+      list(d.results, "No results are ready to be given to you yet.", function (x) {
+        return "<li><b>" + esc(x.name) + "</b>" + (x.conclusion ? "<div>" + esc(x.conclusion) + "</div>" : "") +
+          '<div class="w-dt-times">' + when(x.reportedAt) + "</div></li>";
+      }) + "</section>" +
+      withheld +
+      '<section class="w-dt-p"><h3>Next appointments</h3>' +
+      list(d.appointments, "No appointment is booked.", function (a) {
+        return "<li>" + when(a.at) + (a.with ? " &middot; " + esc(a.with) : "") + "</li>";
+      }) + "</section>" +
+      "</div>";
   }
 
   var FLUID_IN = [["oral", "Oral"], ["iv", "IV"], ["ng", "NG / enteral"], ["blood", "Blood"], ["other", "Other"]];
@@ -567,7 +693,10 @@
       '<span class="w-title">WardSynQ &middot; Inpatient</span>' +
       (state.busy ? '<span class="w-busy">' + ms("progress_activity") + "</span>" : "<span></span>") + "</header>" +
       '<div class="w-canvas">' + banner(state) +
-      (state.view === "chart" ? chartView(state) : state.view === "downtime" ? downtimeView(state) : listView(state)) + "</div></div>";
+      (state.view === "chart" ? chartView(state)
+        : state.view === "downtime" ? downtimeView(state)
+        : state.view === "pcopy" ? pcopyView(state)
+        : listView(state)) + "</div></div>";
   }
 
   // ---- controller --------------------------------------------------------------------------
@@ -577,7 +706,7 @@
   function loadWard() {
     st.busy = true; paint();
     return apiGet("/ward/list?orgId=" + encodeURIComponent(st.orgId) + (st.ward ? "&ward=" + encodeURIComponent(st.ward) : ""))
-      .then(function (r) { if (settle(r)) st.patients = r.patients || []; st.loaded = true; paint(); return Promise.all([loadCosigns(), loadQuality()]); })
+      .then(function (r) { if (settle(r)) st.patients = r.patients || []; st.loaded = true; paint(); return Promise.all([loadCosigns(), loadQuality(), loadOverrides()]); })
       .catch(function () { st.busy = false; st.err = "Could not reach the ward."; st.loaded = true; paint(); });
   }
   function loadChart() {
@@ -782,6 +911,13 @@
       .catch(function () { st.busy = false; st.err = "Could not resolve the problem."; paint(); });
   }
 
+  function loadOverrides() {
+    return apiGet("/ward/overrides?orgId=" + encodeURIComponent(st.orgId))
+      .then(function (r) { if (r && r.ok) st.overrides = r.report; paint(); })
+      // Silent, like the other secondary panels: a ward that cannot load its override report can
+      // still look after every patient on it.
+      .catch(function () {});
+  }
   function loadQuality() {
     return apiGet("/ward/quality?orgId=" + encodeURIComponent(st.orgId))
       .then(function (r) { if (r && r.ok) st.quality = r; paint(); })
@@ -796,6 +932,25 @@
       /* A pack that failed to load must never leave the previous one on screen: the whole hazard of
        * this feature is a clinician reading a sheet that is older than they think. */
       .catch(function () { st.busy = false; st.downtime = null; st.err = "Could not build the downtime pack. Do not print an older one."; paint(); });
+  }
+  function loadPatientCopy() {
+    if (!st.sel || !st.sel.patientId) return;
+    st.busy = true; st.view = "pcopy"; st.pcopy = null; paint();
+    return apiGet("/ward/patient-copy?orgId=" + encodeURIComponent(st.orgId) + "&patientId=" + encodeURIComponent(st.sel.patientId))
+      .then(function (r) { if (settle(r)) st.pcopy = r; paint(); })
+      /* Never leave a previous patient's copy on screen. The hazard of this feature is handing the
+       * wrong person a page with somebody else's diagnoses on it, and a stale render is exactly how
+       * that happens. */
+      .catch(function () { st.busy = false; st.pcopy = null; st.err = "Could not build the patient's copy. Do not print an older one."; paint(); });
+  }
+  function givePatientCopy() {
+    if (!st.sel || !st.sel.patientId) return;
+    st.busy = true; paint();
+    return apiPost("/ward/patient-release", { orgId: st.orgId, patientId: st.sel.patientId })
+      /* The response carries the document it recorded, so the page then on screen is the page that
+       * was released - not the one loaded some minutes earlier that the record may have moved past. */
+      .then(function (r) { if (settle(r)) { st.pcopy = r; st.ok = "Handover recorded."; } paint(); })
+      .catch(function () { st.busy = false; st.err = "Could not record the handover."; paint(); });
   }
   function loadCosigns() {
     return apiGet("/ward/cosign-queue?orgId=" + encodeURIComponent(st.orgId))
@@ -853,6 +1008,9 @@
     var s = st.sel; if (!s) return;
     var v = {}, any = false;
     VITALS.forEach(function (f) { var x = val("wv_" + f.k); if (x) { v[f.k] = x; any = true; } });
+    // Not recorded and "no" are different: an empty select writes nothing, "0" records breathing air.
+    var o2 = val("wv_o2"); if (o2 !== "") { v.o2 = o2; any = true; }
+    var ac = val("wv_acvpu"); if (ac) { v.acvpu = ac; any = true; }
     if (!any) { st.err = "Nothing to record."; paint(); return; }
     st.busy = true; paint();
     apiPost("/ward/vitals", { orgId: st.orgId, encounterId: s.encounterId, patientId: s.patientId, vitals: v })
@@ -861,7 +1019,10 @@
         // than showing a success message for a save that recorded nothing.
         if (settle(r, r && r.written ? "Recorded " + r.written + " observation" + (r.written === 1 ? "" : "s") + "." : null)) {
           if (r && !r.written) st.err = "Nothing was recorded - no field held a plain number.";
-          else VITALS.forEach(function (f) { var el = document.getElementById("wv_" + f.k); if (el) el.value = ""; });
+          else {
+            VITALS.forEach(function (f) { var el = document.getElementById("wv_" + f.k); if (el) el.value = ""; });
+            ["wv_o2", "wv_acvpu"].forEach(function (id) { var el = document.getElementById(id); if (el) el.value = ""; });
+          }
         }
         paint();
       })
@@ -901,7 +1062,13 @@
     if (cmd === "dismiss") { st.err = ""; st.note = ""; st.refusal = null; paint(); return; }
     if (cmd === "reload") { loadWard(); return; }
     if (cmd === "setward") { st.ward = val("wWard"); loadWard(); return; }
-    if (cmd === "back") { st.view = "list"; st.sel = null; st.due = []; st.problems = []; st.outbox = []; st.downtime = null; paint(); return; }
+    if (cmd === "back") {
+      /* The patient's copy is opened FROM a chart, so back returns to that chart rather than
+       * throwing the selection away - and the copy itself is always dropped, because a page with
+       * one patient's diagnoses left on screen is how the next person gets handed the wrong one. */
+      if (st.view === "pcopy") { st.view = "chart"; st.pcopy = null; paint(); return; }
+      st.view = "list"; st.sel = null; st.due = []; st.problems = []; st.outbox = []; st.downtime = null; st.pcopy = null; paint(); return;
+    }
     if (cmd === "open") {
       var p = null;
       for (var j = 0; j < st.patients.length; j++) { if (st.patients[j].encounterId === arg) { p = st.patients[j]; break; } }
@@ -928,6 +1095,7 @@
     if (cmd === "outbox") { loadOutbox(); return; }
     if (cmd === "cosigns") { loadCosigns(); return; }
     if (cmd === "quality") { loadQuality(); return; }
+    if (cmd === "overrides") { loadOverrides(); return; }
     if (cmd === "problem") { addProblem(); return; }
     if (cmd === "icd") { findCode(); return; }
     if (cmd === "pickTpl") { st.noteTemplateId = val("wNoteTpl"); st.noteResult = null; paint(); return; }
@@ -936,6 +1104,8 @@
     if (cmd === "resolve") { resolveProblem(arg); return; }
     if (cmd === "downtime") { loadDowntime(); return; }
     if (cmd === "printpack") { try { G.print(); } catch (e) {} return; }
+    if (cmd === "pcopy") { loadPatientCopy(); return; }
+    if (cmd === "pcopyGive") { givePatientCopy(); return; }
     if (cmd === "cosign") { cosign(arg); return; }
     if (cmd === "submitnote") { submitNote(arg); return; }
     if (cmd === "tx") { transmit(arg); return; }

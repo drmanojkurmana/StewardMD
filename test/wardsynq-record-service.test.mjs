@@ -487,16 +487,38 @@ test("role mapping: every operational role resolves to exactly the grant its cap
    * is exactly why it got its OWN type rather than being written as a ClinicalNote. Putting it
    * there would have forced this scope open to every clinical document, and the two assertions
    * below would have had to be deleted rather than kept. */
-  assert.deepEqual(write("nurse"), ["Observation", "ShiftHandover", "BreakGlassGrant", "MedicationReconciliation", "PatientConsent", "CarePlan", "RiskAssessment", "SpecimenCollection", "WoundAssessment", "Patient", "Encounter", "Appointment", "PatientLink", "PrescriptionTransmission", "AdmissionRequest", "ResourceBooking", "MedicationAdministration", "InfusionRate"]);
+  assert.deepEqual(write("nurse"), ["Observation", "ShiftHandover", "BreakGlassGrant", "MedicationReconciliation", "PatientConsent", "CarePlan", "RiskAssessment", "SpecimenCollection", "WoundAssessment", "ClinicalRead", "Patient", "Encounter", "Appointment", "PatientLink", "PrescriptionTransmission", "AdmissionRequest", "ResourceBooking", "MedicationAdministration", "InfusionRate"]);
   assert.equal(read("nurse"), null);
   assert.ok(!write("nurse").includes("MedicationOrder"), "a nurse who can give a dose still cannot write the order for it");
   assert.ok(!write("nurse").includes("ClinicalNote"), "nor an assessment, nor a discharge summary");
-  for (const r of ["intern", "resident", "pg_resident"]) { assert.equal(tier(r), TIER.EXECUTE, r); assert.deepEqual(write(r), ["Observation", "ShiftHandover", "BreakGlassGrant", "MedicationReconciliation", "PatientConsent", "CarePlan", "RiskAssessment", "SpecimenCollection", "WoundAssessment", "Patient", "Encounter", "Appointment", "PatientLink", "PrescriptionTransmission", "AdmissionRequest", "ResourceBooking"], r); assert.equal(read(r), null, r); }
+  for (const r of ["intern", "resident", "pg_resident"]) { assert.equal(tier(r), TIER.EXECUTE, r); assert.deepEqual(write(r), ["Observation", "ShiftHandover", "BreakGlassGrant", "MedicationReconciliation", "PatientConsent", "CarePlan", "RiskAssessment", "SpecimenCollection", "WoundAssessment", "ClinicalRead", "Patient", "Encounter", "Appointment", "PatientLink", "PrescriptionTransmission", "AdmissionRequest", "ResourceBooking"], r); assert.equal(read(r), null, r); }
   for (const r of ["supervisor", "reception"]) { assert.equal(tier(r), TIER.EXECUTE, r); assert.deepEqual(write(r), ["Patient", "Encounter", "Appointment", "PatientLink", "PrescriptionTransmission", "AdmissionRequest", "ResourceBooking"], r); assert.equal(read(r), null, r); }
-  // A cashier reads the orders they bill for and writes nothing at all.
-  assert.equal(tier("cashier"), TIER.READ);
-  assert.deepEqual(write("cashier"), []);
-  assert.deepEqual(read("cashier"), ["MedicationOrder", "ServiceRequest"]);
+  /* 2026-09-08: the cashier gained BILLING_CHARGE's claim grant, and it is narrow BY ENUMERATION.
+   *
+   * The entire safety thesis of wardsynq-billing.js is that the money reads the chart and never
+   * writes to it - a charge whose diagnosis is nowhere in the record is refused, because the cheapest
+   * way to clear a queried code is to add the diagnosis. These two assertions ARE that rule: the
+   * write scope is a Claim and a funding decision, and a role holding it cannot write a Condition,
+   * so it cannot manufacture the justification for its own charge. Widening this list is how that
+   * property gets deleted, and it has to be done deliberately.
+   *
+   * Condition is on the READ list because coding asks exactly one question - is this diagnosis
+   * written down - and it is the ONLY clinical type here: not the notes, not the results, not the
+   * drug chart. In this build one role is both cashier and coder; a hospital that separates them
+   * should hold BILLING_CHARGE for coders only. */
+  assert.equal(tier("cashier"), TIER.EXECUTE, "it writes its own claim, so it is not READ-only any more");
+  assert.deepEqual(write("cashier"), ["Claim", "PreAuthorisation"]);
+  assert.ok(!write("cashier").includes("Condition"), "billing can never write the diagnosis that would justify its own charge");
+  assert.ok(!write("cashier").includes("Observation"), "nor any other clinical fact");
+  /* 2026-09-08, charge capture (#942): four "what was DONE" types joined the READ list and NOTHING
+   * joined the write list. Billing what happened requires knowing what happened - the doses given,
+   * the reports released, the samples taken, the medicine issued. Billing from ORDERS instead would
+   * need none of this and would bill for doses the patient refused. It is a real widening and the
+   * containment is the line above: the write scope did not move. */
+  assert.deepEqual(read("cashier"), ["MedicationOrder", "ServiceRequest", "Condition", "Claim", "PreAuthorisation",
+    "MedicationAdministration", "DiagnosticReport", "SpecimenCollection", "MedicationDispense"]);
+  assert.ok(!read("cashier").includes("ClinicalNote"), "a coder is not given the whole chart to answer one question");
+  assert.ok(!read("cashier").includes("Observation"), "nor the vitals and the laboratory values");
   /* 2026-09-07: pharmacy gained ORDER_VERIFY. Verification is only as good as what the verifier can
    * READ, and until this the pharmacy role held no EMR capability at all - so a pharmacist could not
    * see the allergy, the creatinine or the critical potassium they are supposed to check against,
@@ -510,8 +532,8 @@ test("role mapping: every operational role resolves to exactly the grant its cap
   /* Two writes since 2026-09-07: its own verification, and its own supply record. Issuing stock is
    * the pharmacy's act and gets its own resource; recording that a patient was GIVEN a dose is the
    * nurse's, at a bedside, and is still not on this list. */
-  assert.deepEqual(write("pharmacy"), ["MedicationVerification", "MedicationDispense"]);
-  assert.deepEqual(read("pharmacy"), ["MedicationOrder", "ServiceRequest", "AllergyIntolerance", "Observation", "Condition", "MedicationAdministration", "CriticalResultLoop", "MedicationVerification", "MedicationDispense"]);
+  assert.deepEqual(write("pharmacy"), ["MedicationVerification", "MedicationDispense", "StockMovement"]);
+  assert.deepEqual(read("pharmacy"), ["MedicationOrder", "ServiceRequest", "AllergyIntolerance", "Observation", "Condition", "MedicationAdministration", "CriticalResultLoop", "MedicationVerification", "MedicationDispense", "StockMovement"]);
   assert.ok(!write("pharmacy").includes("MedicationAdministration"), "a pharmacist can never claim a dose was given");
   assert.ok(!write("pharmacy").includes("MedicationOrder"), "nor change the order they are checking");
   assert.ok(!read("pharmacy").includes("ClinicalNote"), "and not the notes or the discharge summary");
@@ -524,8 +546,8 @@ test("role mapping: every operational role resolves to exactly the grant its cap
    * "laboratory" (pinned in the inpatient suite), and closing it properly needs a category-scoped
    * grant, which is a change to the store's authorisation model rather than to this table. */
   assert.equal(tier("lab"), TIER.EXECUTE);
-  assert.deepEqual(write("lab"), ["Observation", "DiagnosticReport", "SpecimenCollection"]);
-  assert.deepEqual(read("lab"), ["ServiceRequest", "Observation", "DiagnosticReport", "SpecimenCollection"]);
+  assert.deepEqual(write("lab"), ["Observation", "DiagnosticReport", "SpecimenCollection", "ImagingProtocol"]);
+  assert.deepEqual(read("lab"), ["ServiceRequest", "Observation", "DiagnosticReport", "SpecimenCollection", "AllergyIntolerance", "ImagingProtocol"]);
   assert.ok(!write("lab").includes("MedicationOrder") && !write("lab").includes("Condition"), "a laboratory does not prescribe or diagnose");
   assert.ok(!read("lab").includes("Patient") && !read("lab").includes("ClinicalNote"), "and never reads the chart");
   for (const r of ["hr", "viewer", "oncqis_protocol_author", "oncqis_clinical_reviewer", "oncqis_institutional_approver", "academic_cell"]) assert.equal(m[r], null, r + " has no clinical actor");
@@ -561,7 +583,7 @@ test("OPD roles at the door: doctor writes and signs, nurse records vitals and n
   const nurse = await client(h, "fb:sister-anu");
   assert.equal(nurse.descriptor.role, "nurse");
   assert.equal(nurse.descriptor.actor.tier, "execute");
-  assert.deepEqual(nurse.descriptor.actor.writable, ["Observation", "ShiftHandover", "BreakGlassGrant", "MedicationReconciliation", "PatientConsent", "CarePlan", "RiskAssessment", "SpecimenCollection", "WoundAssessment", "Patient", "Encounter", "Appointment", "PatientLink", "PrescriptionTransmission", "AdmissionRequest", "ResourceBooking", "MedicationAdministration", "InfusionRate"]);
+  assert.deepEqual(nurse.descriptor.actor.writable, ["Observation", "ShiftHandover", "BreakGlassGrant", "MedicationReconciliation", "PatientConsent", "CarePlan", "RiskAssessment", "SpecimenCollection", "WoundAssessment", "ClinicalRead", "Patient", "Encounter", "Appointment", "PatientLink", "PrescriptionTransmission", "AdmissionRequest", "ResourceBooking", "MedicationAdministration", "InfusionRate"]);
   assert.equal(nurse.descriptor.actor.canSign, false);
   const bp = await nurse.session("pat-20").put(Observation({ id: "obs-20", patientId: "pat-20", code: "85354-9", value: "142/91", category: "vital-signs" }));
   assert.equal(bp.writtenBy.id, "fb:sister-anu");
@@ -596,7 +618,7 @@ test("OPD roles at the door: doctor writes and signs, nurse records vitals and n
    * stops well short of the chart: no Patient, no notes, no discharge summary. */
   const pharm = await client(h, "fb:pharm-1");
   assert.deepEqual(pharm.descriptor.actor.readable,
-    ["MedicationOrder", "ServiceRequest", "AllergyIntolerance", "Observation", "Condition", "MedicationAdministration", "CriticalResultLoop", "MedicationVerification", "MedicationDispense"]);
+    ["MedicationOrder", "ServiceRequest", "AllergyIntolerance", "Observation", "Condition", "MedicationAdministration", "CriticalResultLoop", "MedicationVerification", "MedicationDispense", "StockMovement"]);
   const chart = await pharm.backend.chart("pat-20");
   assert.ok(Object.keys(chart).includes("MedicationOrder"));
   assert.equal(chart.MedicationOrder.length, 1);
@@ -632,7 +654,7 @@ test("staff sessions: a nurse signed in with email+PIN on a hospital PC reaches 
   const nurse = await (async () => { const b = new RemoteBackend({ tenantId: "gimsr", baseUrl: "https://x", fetch: asStaff(nurseTok) }); await b.open(); return b; })();
   assert.equal(nurse.descriptor.actor.id, "nurse.anu");
   assert.equal(nurse.descriptor.role, "nurse");
-  assert.deepEqual(nurse.descriptor.actor.writable, ["Observation", "ShiftHandover", "BreakGlassGrant", "MedicationReconciliation", "PatientConsent", "CarePlan", "RiskAssessment", "SpecimenCollection", "WoundAssessment", "Patient", "Encounter", "Appointment", "PatientLink", "PrescriptionTransmission", "AdmissionRequest", "ResourceBooking", "MedicationAdministration", "InfusionRate"]);
+  assert.deepEqual(nurse.descriptor.actor.writable, ["Observation", "ShiftHandover", "BreakGlassGrant", "MedicationReconciliation", "PatientConsent", "CarePlan", "RiskAssessment", "SpecimenCollection", "WoundAssessment", "ClinicalRead", "Patient", "Encounter", "Appointment", "PatientLink", "PrescriptionTransmission", "AdmissionRequest", "ResourceBooking", "MedicationAdministration", "InfusionRate"]);
   // Staff sessions are off unless the deployment says so, and org-bound.
   assert.equal((await handle(new Request("https://x/api/wardsynq/gimsr", { headers: { "X-Staff-Token": nurseTok } }), ENV, h.deps)).status, 401);
   assert.equal((await asStaff(otherOrgTok)("https://x/api/wardsynq/gimsr")).status, 403);
@@ -685,7 +707,7 @@ test("AI drafts: written by the AI actor on the clinician's behalf, never author
   // Pure: the AI actor is DRAFT whatever it asks, and its scope is the human's.
   const human = actorFromOpdRole({ identity: { id: "fb:n" }, role: "nurse" });
   const bot = aiActorFor(human, { id: "maik" });
-  assert.equal(bot.tier, "draft"); assert.deepEqual([...bot.scope.write], ["Observation", "ShiftHandover", "BreakGlassGrant", "MedicationReconciliation", "PatientConsent", "CarePlan", "RiskAssessment", "SpecimenCollection", "WoundAssessment", "Patient", "Encounter", "Appointment", "PatientLink", "PrescriptionTransmission", "AdmissionRequest", "ResourceBooking", "MedicationAdministration", "InfusionRate"]); assert.equal(bot.onBehalfOf, "fb:n");
+  assert.equal(bot.tier, "draft"); assert.deepEqual([...bot.scope.write], ["Observation", "ShiftHandover", "BreakGlassGrant", "MedicationReconciliation", "PatientConsent", "CarePlan", "RiskAssessment", "SpecimenCollection", "WoundAssessment", "ClinicalRead", "Patient", "Encounter", "Appointment", "PatientLink", "PrescriptionTransmission", "AdmissionRequest", "ResourceBooking", "MedicationAdministration", "InfusionRate"]); assert.equal(bot.onBehalfOf, "fb:n");
 
   /* 7. AND IT STILL MAY NOT SAY A PRESCRIPTION ARRIVED. The scope above includes
    * PrescriptionTransmission, because the nurse it drafts for legitimately writes one. But that
@@ -736,7 +758,29 @@ test("vitals to observations: coded, as reported, nothing invented, stable ids",
   assert.equal(obs[0].id, `opd-vitals-t1-${Date.parse("2026-09-06T10:00:00.000Z")}-sbp`);
   assert.deepEqual(vitalsToObservations({ vitals: { temp: "37.2", tempUnit: "C" }, patientId: "p", ticketId: "T" }).map((o) => o.unit), ["Cel"]);
   assert.deepEqual(vitalsToObservations({ vitals: { pulse: "" }, patientId: "p", ticketId: "T" }), []);
-  assert.deepEqual(Object.keys(VITAL_CODES), ["sbp", "dbp", "pulse", "temp", "spo2", "rr", "weight"]);
+  /* `o2` joined 2026-09-08 for NEWS2, which cannot complete without it. ACVPU is NOT in this table
+   * and must not be: its value is a LETTER, and this table is the numeric path. */
+  assert.deepEqual(Object.keys(VITAL_CODES), ["sbp", "dbp", "pulse", "temp", "spo2", "rr", "weight", "o2"]);
+
+  /* NOT RECORDED AND "NO" ARE DIFFERENT. "Not on supplemental oxygen" is a real NEWS2 input worth
+   * zero points; "nobody wrote it down" is a missing parameter the score refuses to complete on. */
+  const noO2 = vitalsToObservations({ vitals: { pulse: "80" }, patientId: "p", ticketId: "T" });
+  assert.ok(!noO2.some((o) => o.code === "80288-4"), "an absent o2 writes nothing");
+  const onAir = vitalsToObservations({ vitals: { o2: false }, patientId: "p", ticketId: "T" })[0];
+  assert.equal(onAir.value, 0, "and an explicit no is a recorded zero");
+  assert.equal(onAir.valueLabel, "Breathing air", "read as a word, so nobody decodes a 0 on a chart");
+  assert.equal(vitalsToObservations({ vitals: { o2: "yes" }, patientId: "p", ticketId: "T" })[0].value, 1);
+
+  /* ACVPU IS A LETTER, because the score reads it as one. Encoding it as an ordinal would have
+   * stored a 0 for "Alert" that the scorer could not read, leaving every ward with a permanently
+   * incomplete NEWS2 and the observation sitting right there. */
+  const acvpu = vitalsToObservations({ vitals: { acvpu: "v" }, patientId: "p", ticketId: "T" })[0];
+  assert.equal(acvpu.code, "80339-5");
+  assert.equal(acvpu.value, "V", "upper-cased, and stored as the letter");
+  // A word the scale does not contain is not a level of consciousness: an invented "A" would
+  // complete a score about a patient whose consciousness nobody assessed.
+  assert.deepEqual(vitalsToObservations({ vitals: { acvpu: "drowsy" }, patientId: "p", ticketId: "T" }), []);
+  assert.deepEqual(vitalsToObservations({ vitals: { acvpu: "" }, patientId: "p", ticketId: "T" }), []);
 });
 
 /* 2026-09-07. num() was `parseFloat(String(v).replace(/[^0-9.\-]/g, ""))`, which deletes the
