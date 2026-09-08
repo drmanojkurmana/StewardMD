@@ -5,6 +5,17 @@ tags: [decisions, adr]
 
 Dated architectural calls + why. Newest first. Keep each short: **decision · why · trade-off · status**.
 
+## 2026-09-09 · One visible three-second boot sequence; native launch mark removed
+
+**Decision:** make the required iOS/Android native launch surface an unbranded white bridge and
+start the existing SVG trace/fill only at the native-to-web handoff. Returning clinicians now see
+the logo draw and the personalised “Loading your workspace…” phase inside one three-second total,
+not a 1.2-second lead-in plus a second three-second hold. The splash fails open at six seconds if
+readiness detection does not resolve, and the native bridge has a four-second safety release.
+`launchAutoHide` is false so native cannot expose an unpainted WebView; JavaScript performs the
+handoff once the web content is composited. Android's required system icon is transparent and the
+iOS launch storyboard has no image. Cache marker: `splashv2j`.
+
 ## 2026-09-09 · Boot splash logo traces, then fills while the app loads
 
 **Decision:** port the draw-then-fill motion from the MIT-licensed `swiftui-logo-draw` reference

@@ -260,9 +260,9 @@ body.smd-ddi-open #smdBackToTop{display:none!important}
 
 
 <body>
-<!-- ===== PREMIUM BOOT SPLASH ===== instant-paint logo screen covering the ~3s JS-load window on
-     EVERY open (fixes the blank white screen). No framework dependency; fades on window 'load'
-     (min 1.6s, hard-cap 3.6s) then self-removes. Sits above every app overlay. -->
+<!-- ===== PREMIUM BOOT SPLASH ===== instant-paint, three-second loading sequence on every open.
+     Native first hands off from an unbranded launch surface; only then does the logo motion begin,
+     so no animation is consumed off-screen. Sits above every app overlay while initialization runs. -->
 <div id="smdBootSplash" role="status" aria-label="Loading StewardMD">
   <div class="sbs-center">
     <div class="sbs-logo-stage">
@@ -321,15 +321,14 @@ body.smd-ddi-open #smdBackToTop{display:none!important}
   dp.textContent=(label.replace(/^dr\.?\s+/i,"").charAt(0)||"S").toUpperCase();
   host.hidden=false;s.classList.add("sbs-personal");
   /* SEQUENCE: the classic frame holds a beat, then crossfades into the personalised phase 2
-     (avatar, name, glass foot), which holds until the boot script's constant 3s is up and
+     (avatar, name, glass foot), which stays within the boot script's three-second total and
      Face ID / PIN fires by itself. Both screens are passive: no button, no hold. */
   var BEAT=1200,XF=220,rm=false,t0=Date.now();
   try{rm=!!(window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches);}catch(e){}
   function live(){return !!s.parentNode&&!s.classList.contains("sbs-hide");}
-  /* the beat counts from when the frame is actually SEEN (native-bridge stamps __smdSplashShownAt
-     when it lifts the native splash), the same clock the boot script's hold below uses. Screen 1
-     for BEAT, then screen 2 for the rest of that hold (3s: MIN is 4500 for a personalised boot). */
-  function seen(){try{return Date.now()-(window.__smdSplashShownAt||t0);}catch(e){return Date.now()-t0;}}
+  /* Do not consume the beat behind the native launch surface. native-bridge starts this clock at
+     the exact handoff, so the drawing motion is visible instead of completing off-screen. */
+  function seen(){try{if(!s.classList.contains("sbs-visible"))return 0;return Date.now()-(window.__smdSplashShownAt||t0);}catch(e){return Date.now()-t0;}}
   (function beat(){
     if(!live())return;
     if(seen()<BEAT){setTimeout(beat,100);return;}
@@ -347,9 +346,10 @@ body.smd-ddi-open #smdBackToTop{display:none!important}
   #smdBootSplash .sbs-center{display:flex;flex-direction:column;align-items:center;gap:16px;transform:translateY(-3%)}
   #smdBootSplash .sbs-logo-stage{position:relative;width:107px;height:107px;flex:0 0 auto}
   #smdBootSplash .sbs-logo,#smdBootSplash .sbs-mark,#smdBootSplash .sbs-logo-trace{position:absolute;inset:0;width:100%;height:100%}
-  #smdBootSplash .sbs-logo{object-fit:contain;opacity:0;animation:sbsLogoFill .35s cubic-bezier(.4,0,.2,1) .84s both}
+  #smdBootSplash .sbs-logo{object-fit:contain;opacity:0;animation:sbsLogoFill .35s cubic-bezier(.4,0,.2,1) .84s both;animation-play-state:paused}
   #smdBootSplash .sbs-logo-trace{display:block;overflow:visible;color:#0e6e63;filter:drop-shadow(0 0 7px rgba(14,110,99,.22))}
-  #smdBootSplash .sbs-logo-trace path{fill:none;stroke:currentColor;stroke-width:5.2;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:1;stroke-dashoffset:1;animation:sbsLogoTrace var(--sbs-trace-duration) cubic-bezier(.4,0,.2,1) var(--sbs-trace-delay) forwards}
+  #smdBootSplash .sbs-logo-trace path{fill:none;stroke:currentColor;stroke-width:5.2;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:1;stroke-dashoffset:1;animation:sbsLogoTrace var(--sbs-trace-duration) cubic-bezier(.4,0,.2,1) var(--sbs-trace-delay) forwards;animation-play-state:paused}
+  #smdBootSplash.sbs-visible .sbs-logo,#smdBootSplash.sbs-visible .sbs-mark,#smdBootSplash.sbs-visible .sbs-logo-trace path{animation-play-state:running}
   #smdBootSplash .sbs-word{font-size:30px;font-weight:800;letter-spacing:-.02em;color:#0f172a}
   #smdBootSplash .sbs-word span{color:#0e6e63}
   #smdBootSplash .sbs-bar{width:132px;height:3px;border-radius:999px;background:#e6efee;overflow:hidden;margin-top:4px}
@@ -360,7 +360,7 @@ body.smd-ddi-open #smdBackToTop{display:none!important}
   /* tagline */
   #smdBootSplash .sbs-tag{font-size:13.5px;font-weight:600;letter-spacing:.005em;color:#5a7184;margin-top:-4px}
   /* white-masked mark (used in the dark Style-B splash) */
-  #smdBootSplash .sbs-mark{display:none;background:#fff;-webkit-mask:url(/logo.png) center/contain no-repeat;mask:url(/logo.png) center/contain no-repeat;opacity:0;animation:sbsLogoFill .35s cubic-bezier(.4,0,.2,1) .84s both}
+  #smdBootSplash .sbs-mark{display:none;background:#fff;-webkit-mask:url(/logo.png) center/contain no-repeat;mask:url(/logo.png) center/contain no-repeat;opacity:0;animation:sbsLogoFill .35s cubic-bezier(.4,0,.2,1) .84s both;animation-play-state:paused}
   #smdBootSplash .sbs-maik-dark{display:none}
   /* ── Style B: premium dark teal (iOS dark mode · Android night) ── */
   #smdBootSplash.sbs-dark{background:radial-gradient(125% 90% at 50% 18%,#0d5049 0%,#08302b 55%,#061f1c 100%)}
@@ -536,21 +536,26 @@ body.smd-ddi-open #smdBackToTop{display:none!important}
   html.smd-splash-v2 #smdBootSplash.smd-boot-phase2.sbs-dark .sbs-bar::after{color:rgba(246,247,245,.72)}
 </style>
 <script>(function(){var s=document.getElementById("smdBootSplash");if(!s)return;var t0=Date.now(),done=false,
-/* seen-time hold: guests see screen 1 for 3s; a signed-in clinician (.sbs-personal, set by the script above) sees
-   screen 1 for 1.2s, a 220ms crossfade, then screen 2 for a full 3s */
-MIN=s.classList.contains("sbs-personal")?4500:3000,CAP=15000;
+/* One fast three-second sequence for everyone: draw first, then (for returning clinicians) show
+   Loading your workspace inside the same window. CAP is a short fail-open, never a stuck splash. */
+MIN=3000,CAP=6000;
 /* Native handoff: once this white splash has actually PAINTED (two rAFs after it is in the
    DOM), signal native-bridge to lift the native splash. Hiding only on this signal — never on
    a timer — guarantees the native splash covers the WebView-init gap, so there is no black
    flash; the user goes native-splash → this white branded splash (with motion) → home. */
-try{requestAnimationFrame(function(){requestAnimationFrame(function(){window.__smdBootPainted=1;try{window.dispatchEvent(new Event("smd-boot-painted"));}catch(e){}});});}catch(e){}
+try{requestAnimationFrame(function(){requestAnimationFrame(function(){window.__smdBootPainted=1;try{window.dispatchEvent(new Event("smd-boot-painted"));}catch(e){}
+  /* Web has no native launch surface, so begin as soon as the first frame is painted. Native is
+     started by native-bridge at the actual handoff. */
+  var C=window.Capacitor,native=!!(C&&(typeof C.isNativePlatform==="function"?C.isNativePlatform():(C.platform&&C.platform!=="web")));
+  if(!native){window.__smdSplashShownAt=Date.now();s.classList.add("sbs-visible");}
+});});}catch(e){s.classList.add("sbs-visible");}
 var returning=false;try{returning=!!(localStorage.getItem("stewardmd_account")||localStorage.getItem("stewardmd_guest_used"));}catch(e){}
 function vis(id){var el=document.getElementById(id);if(!el)return false;var cs=getComputedStyle(el);return cs.display!=="none"&&cs.visibility!=="hidden"&&el.offsetHeight>1&&parseFloat(cs.opacity||"1")>0.01;}
 function ready(){try{
   var h=document.getElementById("homeV2");if(h&&h.classList.contains("on")&&getComputedStyle(h).display!=="none")return true;
   // Unverified/relaunched users land on the verify gate (or the account gate on any launch) — those
   // are real "boot finished" states, so lift the white splash immediately instead of sitting on it
-  // until the 15s cap. Without this an unverified email/Google user saw a long blank splash → looked
+  // until the fail-open cap. Without this an unverified email/Google user saw a long blank splash → looked
   // stuck and "never reached anything".
   if(vis("verifyGate")||vis("accountGate"))return true;
   if(!returning){ if(vis("introPoster")||vis("splash"))return true; }
@@ -576,7 +581,7 @@ function finish(){if(done)return;
 /* MIN is 3s of the frame actually being SEEN: native-bridge stamps __smdSplashShownAt when it lifts
    the native splash (which covers this frame until the page has painted), so the hold counts from
    that moment, not from script start. On the web (no native splash) it is script start. */
-function shownAt(){try{return window.__smdSplashShownAt||t0;}catch(e){return t0;}}
+function shownAt(){try{return s.classList.contains("sbs-visible")?(window.__smdSplashShownAt||t0):Date.now();}catch(e){return t0;}}
 function tick(){if(done)return;var el=Date.now()-shownAt();
   if((ready()&&el>=MIN)||el>=CAP){finish();return;}setTimeout(tick,120);}
 tick();})();</script>
@@ -2038,7 +2043,7 @@ window.openExternal = function (u) {
   </div>
 </div>
 
-<script src="/native-bridge.js?v=nb-splashat" defer></script>
+<script src="/native-bridge.js?v=nb-splashat2" defer></script>
 <!-- Server-driven fleet controls: force-upgrade floor, maintenance mode, remote banners, feature flags.
      Loads after native-bridge so /api/config routes correctly on native. Fail-open. -->
 <script src="/remote-config.js?v=rc1" defer></script>

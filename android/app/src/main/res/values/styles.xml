@@ -19,15 +19,11 @@
     </style>
 
 
-    <!-- Android 12+ system splash. Without these attrs the OS shows the round launcher icon on a
-         plain background first. We brand it to match the app's white HTML splash: white background
-         + the dark-green StewardMD monogram (@drawable/splash_icon, padded so it isn't clipped to
-         a circle). The Capacitor navy splash is disabled (launchShowDuration 0) so this hands off
-         straight to the white HTML splash (logo, name, loading, "created by MaiK") — no dark screen
-         and no teal badge. -->
+    <!-- Android requires a system launch surface, but it deliberately carries no mark. The first
+         visible StewardMD logo belongs to the animated HTML splash after the WebView has painted. -->
     <style name="AppTheme.NoActionBarLaunch" parent="Theme.SplashScreen">
         <item name="windowSplashScreenBackground">@android:color/white</item>
-        <item name="windowSplashScreenAnimatedIcon">@drawable/splash_icon</item>
+        <item name="windowSplashScreenAnimatedIcon">@android:color/transparent</item>
         <item name="postSplashScreenTheme">@style/AppTheme.NoActionBar</item>
         <item name="android:background">@android:color/white</item>
     </style>

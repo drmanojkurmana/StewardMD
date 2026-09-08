@@ -15,10 +15,10 @@
  *     the 132x3 progress bar, the stacked developed-by foot) in BOTH themes, and only after a
  *     short beat crossfades into phase 2,
  *   - phase 2 is the personalised boot splash (84px avatar, status dot), read from the SAME
- *     localStorage "stewardmd_account" record the sidebar/profile use, in both themes, and its
- *     pill is a real "Open Workspace" BUTTON that HOLDS the splash until the clinician taps:
- *     the hold arms only once the button rendered at a 44px+ tap target and bound, carries a
- *     20s safety valve, flips to "Opening..." if boot is still running, and reveals on tap,
+ *     localStorage "stewardmd_account" record the sidebar/profile use, in both themes, with a
+ *     passive "Loading your workspace" pill; both phases fit inside one three-second total,
+ *   - the native iOS/Android launch surfaces are unbranded and manual-hide, so the HTML trace is
+ *     the first visible logo and begins at the actual native handoff rather than behind it,
  *   - guests/first-time users do NOT get it and keep the classic splash for the whole boot,
  *     are never gated, and still auto-hide,
  *   - prefers-reduced-motion still stills every interstitial,
@@ -29,10 +29,11 @@
 import { spawn } from "node:child_process";
 import { setTimeout as sleep } from "node:timers/promises";
 import { dirname, join } from "node:path";
-import { writeFileSync } from "node:fs";
+import { readFileSync, writeFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 
 const HERE = dirname(fileURLToPath(import.meta.url));
+const ROOT = join(HERE, "..");
 const BASE = (process.env.BASE || "http://localhost:8992/").replace(/\/?$/, "/");
 const PORT = 9384;
 const SHOT_DIR = process.env.SHOT_DIR || "/tmp";
@@ -82,6 +83,13 @@ async function newTab() {
 }
 
 try {
+  const iosLaunch = readFileSync(join(ROOT, "ios/App/App/Base.lproj/LaunchScreen.storyboard"), "utf8");
+  const androidTheme = readFileSync(join(ROOT, "android/app/src/main/res/values/styles.xml"), "utf8");
+  const capConfig = JSON.parse(readFileSync(join(ROOT, "capacitor.config.json"), "utf8"));
+  ok(!/image="Splash"/.test(iosLaunch), "iOS native launch surface has no standalone logo");
+  ok(/windowSplashScreenAnimatedIcon">@android:color\/transparent</.test(androidTheme), "Android native launch icon is transparent");
+  ok(capConfig.plugins.SplashScreen.launchAutoHide === false, "native splash waits for the painted web handoff");
+
   let ver, t = 0;
   while (t++ < 60) { try { ver = await (await fetch(`http://localhost:${PORT}/json/version`)).json(); break; } catch { await sleep(200); } }
   ws = new WebSocket(ver.webSocketDebuggerUrl);
@@ -267,7 +275,7 @@ try {
   /* ---------- 2. RETURNING signed-in clinician: classic frame, THEN the welcome-back screen ----
      Two passive screens (owner: "i want both"). Screen 1 keeps the classic frame while the mark
      traces and fills over 1.2s. After a 1.5s beat it crossfades into screen 2:
-     avatar, name, glass foot. The boot script holds a constant 3s in total, then Face ID / PIN
+     avatar, name, glass foot. Both phases fit inside one 3s total, then Face ID / PIN
      fires by itself. No button, no hold, on either screen. */
   await newTab();
   await call("Page.navigate", { url: BASE });
@@ -303,8 +311,8 @@ try {
       label + ": the developed-by foot keeps its classic stacked composition");
     /* The logo traces and fills while the rest of the classic composition is already present. */
     okv(await ev(`var paths=document.querySelectorAll("#smdBootSplash .sbs-logo-trace path"),fill=[document.querySelector("#smdBootSplash .sbs-logo"),document.querySelector("#smdBootSplash .sbs-mark")].filter(function(x){return x&&getComputedStyle(x).display!=="none"})[0];
-        return paths.length===3 && paths[0].getAttribute("pathLength")==="1" && fill && getComputedStyle(fill).animationName==="sbsLogoFill" ? "draw-fill" : "missing";`), "draw-fill",
-      label + ": the mark traces in three ordered paths and then fills");
+        return paths.length===3 && paths[0].getAttribute("pathLength")==="1" && fill && getComputedStyle(fill).animationName==="sbsLogoFill" && getComputedStyle(paths[0]).animationPlayState==="running" ? "draw-fill-running" : "missing";`), "draw-fill-running",
+      label + ": the visible mark traces in three ordered paths and then fills");
     okv(await ev(`var bad=[]; [".sbs-word",".sbs-tag",".sbs-foot",".sbs-center"].forEach(function(sel){
         var e=document.querySelector("#smdBootSplash "+sel); if(!e||getComputedStyle(e).display==="none") return;
         var s=getComputedStyle(e); if(s.animationName!=="none") bad.push(sel+":"+s.animationName); if(parseFloat(s.opacity)<1) bad.push(sel+":opacity "+s.opacity); });
@@ -344,24 +352,25 @@ try {
     "screen 2: still no Open Workspace button, no hold");
   await shot("splash-05-boot-personal-monogram");
 
-  /* ---- screen 2 gets 3s: boot-ready forced now (~2.2s), still up at ~3s, gone by itself once 4.5s of
-     seen time (1.2s screen 1 + crossfade + 3s screen 2) has passed */
+  /* ---- both screens share one fast 3s window; screen 2 does not add another hold ---- */
   const makeReady = `var g=document.getElementById("accountGate");
       if(g){g.classList.remove("hidden"); g.setAttribute("style","display:block;visibility:visible;opacity:1;min-height:200px");}
       return !!g;`;
   okv(await ev(makeReady), true, "the harness can force the hide loop's ready() condition");
-  const holds = `var e=document.getElementById("smdBootSplash"); var up=!!e && !e.classList.contains("sbs-hide"); return up || performance.now() >= 4500;`;
-  await sleep(800);    // t ~3s
-  okv(await ev(holds), true, "ready at ~2.2s: screen 2 still holds at ~3s (screen 2 is held for 3s, not ready-driven)");
-  await sleep(2400);   // t ~5.4s
+  await sleep(500);    // t ~2.5s
+  okv(await ev(`var e=document.getElementById("smdBootSplash"); return !!e && !e.classList.contains("sbs-hide");`), true,
+    "screen 2 stays up until the shared 3s window completes");
+  await sleep(1100);   // t ~3.6s
   okv(await ev(`var e=document.getElementById("smdBootSplash"); return !e || e.classList.contains("sbs-hide");`), true,
-    "by ~5.4s it has hidden BY ITSELF (no tap)");
+    "the complete two-phase splash hides shortly after 3s (no tap)");
 
   /* ---- the clocks start when the frame is SEEN: with the native splash lifting late (native-bridge
      stamps __smdSplashShownAt), both the beat and the hold count from that stamp */
   await call("Page.navigate", { url: BASE });
-  await sleep(1200);   // pretend the native splash only lifts now
-  await ev(`window.__smdSplashShownAt = Date.now(); return 1;`);
+  await sleep(80);
+  await ev(`var e=document.getElementById("smdBootSplash");if(e)e.classList.remove("sbs-visible");delete window.__smdSplashShownAt;return 1;`);
+  await sleep(1200);   // pretend the unbranded native splash still covers the WebView
+  await ev(`window.__smdSplashShownAt = Date.now();var e=document.getElementById("smdBootSplash");if(e)e.classList.add("sbs-visible");return 1;`);
   await ev(makeReady);
   await sleep(700);    // seen ~0.7s: still screen 1
   okv(await ev(`var e=document.getElementById("smdBootSplash"); return !!e && !e.classList.contains("smd-boot-phase2") && !e.classList.contains("sbs-hide");`), true,
@@ -369,12 +378,9 @@ try {
   await sleep(1300);   // seen ~2s: screen 2
   okv(await ev(`var e=document.getElementById("smdBootSplash"); return !!e && e.classList.contains("smd-boot-phase2") && !e.classList.contains("sbs-hide");`), true,
     "...and 2s after the stamp it is screen 2, still up");
-  await sleep(1500);   // seen ~3.5s (page time ~4.7s: would have hidden under script-start counting)
-  okv(await ev(`var e=document.getElementById("smdBootSplash"); var up=!!e && !e.classList.contains("sbs-hide"); return up || (Date.now()-window.__smdSplashShownAt) >= 4500;`), true,
-    "...and still up 3.5s after the stamp (hold counts from the stamp)");
-  await sleep(1600);   // seen ~5.1s
+  await sleep(1300);   // seen ~3.3s
   okv(await ev(`var e=document.getElementById("smdBootSplash"); return !e || e.classList.contains("sbs-hide");`), true,
-    "...and hides by itself once screen 2 has had its 3s");
+    "...and hides after 3s total counted from the native handoff");
 
   // the same two screens in the dark theme (Direction C's gradient mesh on screen 2)
   await newTab();
