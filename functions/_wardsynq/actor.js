@@ -82,7 +82,11 @@ const ORDER_TYPES = Object.freeze(["MedicationOrder", "ServiceRequest"]);
 /* DeviceAssociation joined 2026-09-08 (Task 2.2, ICU): scanning a patient's wristband and a
  * monitor's asset tag onto each other is a bedside act, the same authority as recording a vital -
  * not a device-inventory decision, which would belong somewhere administrative instead. */
-const VITALS_TYPES = Object.freeze(["Observation", "ShiftHandover", "BreakGlassGrant", "MedicationReconciliation", "PatientConsent", "CarePlan", "RiskAssessment", "SpecimenCollection", "WoundAssessment", "ClinicalRead", "DeviceAssociation"]);
+/* BloodLossRecord joined 2026-09-08 (Task 2.4): weighing swabs and drapes (or estimating, when that
+ * is all that's possible) is the midwife's own bedside quantification, the same authority as
+ * charting fluid balance - not a diagnosis, and not gated behind emr.treat the way starting the PPH
+ * bundle itself is. */
+const VITALS_TYPES = Object.freeze(["Observation", "ShiftHandover", "BreakGlassGrant", "MedicationReconciliation", "PatientConsent", "CarePlan", "RiskAssessment", "SpecimenCollection", "WoundAssessment", "ClinicalRead", "DeviceAssociation", "BloodLossRecord"]);
 const PATIENT_TYPE = "Patient";
 // Added 2026-09-06 (the Encounter migration), alongside PATIENT_TYPE and for the identical reason:
 // checking a patient in for today's visit is the SAME administrative act QUEUE_ADD already covers
@@ -119,9 +123,12 @@ function grantForCaps(caps) {
      * migrate-device.js's rehydrated DeviceGateway, called by the SAME nurse action as charting a
      * vital - scanning a wristband and an asset tag onto each other. Without this category a device
      * observation is refused by the exact CATEGORY_DENIED rule this comment already describes. */
+    /* "labour" joined 2026-09-08 (Task 2.4): a partogram's raw data - cervical dilation, contraction
+     * frequency, fetal heart rate, a stated labour status - is the midwife's own bedside charting,
+     * the same authority as a vital sign, through migrate-maternity.js's recordLabourObservation(). */
     grant = {
       tier: TIER.EXECUTE, read: has(CAPS.EMR_VIEW) ? null : [...VITALS_TYPES], write: [...VITALS_TYPES],
-      writeCategories: { Observation: ["vital-signs", "fluid-balance", "device"] },
+      writeCategories: { Observation: ["vital-signs", "fluid-balance", "device", "labour"] },
       basis: CAPS.EMR_VITALS,
     };
   }

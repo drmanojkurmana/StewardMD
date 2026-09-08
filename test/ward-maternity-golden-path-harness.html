@@ -1,0 +1,81 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>WardSynQ Maternity: golden path harness</title>
+<link rel="stylesheet" href="../ward.css">
+<style>html,body{margin:0;height:100%}</style>
+</head><body>
+<script>
+/* The REAL ward.js driven through the maternity golden path (bed board -> admission-type select ->
+ * pregnancy episode -> MEOWS -> blood loss/PPH recognition -> delivery -> newborn) against an
+ * in-memory stub server whose response shapes are confirmed against
+ * functions/_wardsynq/migrate-maternity.js and the route-level tests in
+ * test/wardsynq-maternity.test.mjs, which prove these same contracts persist for real. This proves
+ * the CLIENT half; it is not a live server. */
+window.__calls = [];
+localStorage.setItem("smd_opd_staff_tok", "harness-token");
+
+var PATIENT_ID = "opd-pat-smd-h1-mat01", ENC_ID = "wsq-enc-smd-h1-mat01", MRN = "SMD-H1-MAT01", ADMIT_CLASS = null;
+var PREGNANCY = null, DELIVERY = null, LINKS = [];
+
+window.fetch = function (url, opts) {
+  var u = String(url), body = null;
+  try { body = opts && opts.body ? JSON.parse(opts.body) : null; } catch (e) {}
+  window.__calls.push({ url: u, method: (opts && opts.method) || "GET", body: body });
+  var reply = function (obj) { return Promise.resolve({ ok: true, status: 200, json: function () { return Promise.resolve(obj); } }); };
+
+  if (u.indexOf("/patient/get") >= 0) return reply({ ok: true, patient: { mrn: MRN, name: "Maternity Harness Patient", ageYears: 27, gender: "female" } });
+  if (u.indexOf("/ward/list") >= 0) return reply({ ok: true, patients: ADMIT_CLASS ? [{ encounterId: ENC_ID, patientId: PATIENT_ID, class: ADMIT_CLASS, ward: "Labour Ward", bed: "1", admittedAt: "2026-09-09T06:00:00.000Z" }] : [] });
+  if (u.indexOf("/ward/beds") >= 0) return reply({ ok: true, bedsConfigured: true, wards: [{ ward: "Labour Ward", bedsKnown: true, occupied: [], free: ["1", "2"], unplaced: [] }] });
+  if (u.indexOf("/ward/admit") >= 0 && (opts && opts.method) === "POST") { ADMIT_CLASS = body.class || "IPD"; return reply({ ok: true, written: 1, encounterId: ENC_ID, patientId: PATIENT_ID, version: 1 }); }
+
+  if (u.indexOf("/ward/pregnancy-get") >= 0) return reply({ ok: true, pregnancy: PREGNANCY });
+  if (u.indexOf("/ward/pregnancy") >= 0 && (opts && opts.method) === "POST") {
+    PREGNANCY = Object.assign({ gravida: null, para: 0, gestationWeeks: null, edd: null }, PREGNANCY, body.pregnancy);
+    return reply({ ok: true, written: 1, pregnancyId: "wsq-preg-1", version: 1 });
+  }
+  if (u.indexOf("/ward/meows") >= 0) {
+    return reply({ ok: true, meows: { applicable: true, alert: true, red: [{ parameter: "systolicBloodPressure", label: "Systolic blood pressure", value: 85 }], yellow: [], missing: [], advice: "A pregnant or recently delivered woman compensates well and decompensates late. She can lose 1.5 litres with a normal blood pressure. Absence of triggers is not evidence that she is well; clinical concern overrides this chart.", reason: "1 red trigger: Systolic blood pressure" } });
+  }
+  if (u.indexOf("/ward/blood-loss-list") >= 0) return reply({ ok: true, losses: [] });
+  if (u.indexOf("/ward/blood-loss") >= 0 && (opts && opts.method) === "POST") {
+    return reply({ ok: true, written: 1, lossId: "wsq-loss-1", loss: { ml: body.loss.ml, method: body.loss.method, quantitative: false, plausibleActualMl: body.loss.ml * 2 }, threshold: { reached: null }, recognition: { prompt: true, reasons: ["600 ml estimated visually, plausibly 1200 ml"], code: "code-pph" } });
+  }
+  if (u.indexOf("/ward/labour") >= 0 && (opts && opts.method) === "POST") return reply({ ok: true, written: 1, observationId: "wsq-labour-1" });
+  if (u.indexOf("/ward/delivery-get") >= 0) return reply({ ok: true, delivery: DELIVERY });
+  if (u.indexOf("/ward/delivery") >= 0 && (opts && opts.method) === "POST") {
+    DELIVERY = { mode: body.delivery.mode, deliveredAt: "2026-09-09T14:00:00.000Z", complications: body.delivery.complications || null };
+    return reply({ ok: true, written: 2, deliveryId: "wsq-delivery-1" });
+  }
+  if (u.indexOf("/ward/family-links") >= 0) return reply({ ok: true, links: LINKS });
+  if (u.indexOf("/ward/newborn") >= 0 && (opts && opts.method) === "POST") {
+    if (!DELIVERY) return reply({ ok: false, status: 409, error: "no_delivery_recorded" });
+    LINKS = [{ relatedPatientId: "opd-pat-newborn-1", relationship: "mother-newborn", recordedAt: "2026-09-09T14:05:00.000Z" }];
+    return reply({ ok: true, written: 2, newbornId: "opd-pat-newborn-1", linkId: "wsq-family-1" });
+  }
+
+  if (u.indexOf("/ward/resus-start") >= 0 && (opts && opts.method) === "POST") {
+    return reply({ ok: true, written: 1, bundleId: "wsq-resus-1", status: { code: "code-pph", label: "Postpartum Haemorrhage", state: "running", elapsedMinutes: 0, elements: [{ key: "call", label: "Obstetric emergency call", done: false, targetMinutes: 2, minutesRemaining: 2, overdue: false, notApplicable: false }, { key: "quantify", label: "Blood loss QUANTIFIED by weighing, not estimated", done: false, targetMinutes: 15, minutesRemaining: 15, overdue: false, notApplicable: false }] } });
+  }
+  if (u.indexOf("/ward/resus") >= 0 && (!opts || (opts.method || "GET") === "GET")) return reply({ ok: true, bundles: [] });
+
+  if (u.indexOf("/ward/problems") >= 0) return reply({ ok: true, problems: [] });
+  if (u.indexOf("/ward/criticals") >= 0) return reply({ ok: true, loops: [] });
+  if (u.indexOf("/ward/balance") >= 0) return reply({ ok: true, balance: null });
+  if (u.indexOf("/ward/outbox") >= 0) return reply({ ok: true, transmissions: [] });
+  if (u.indexOf("/ward/templates") >= 0) return reply({ ok: true, templates: [] });
+  if (u.indexOf("/ward/news2") >= 0) return reply({ ok: true, tool: "NEWS2", score: { scorable: false, reason: "Pregnant or postpartum - use MEOWS." } });
+  if (u.indexOf("/ward/flowsheet") >= 0) return reply({ ok: true, grid: { hours: [], rows: [] } });
+  if (u.indexOf("/ward/vitals") >= 0) return reply({ ok: true, written: Object.keys((body && body.vitals) || {}).length });
+  if (u.indexOf("/ward/schedule") >= 0) return reply({ ok: true, due: [], prn: [], unscheduled: [] });
+  if (u.indexOf("/ward/collections") >= 0) return reply({ ok: true, requests: [] });
+  if (u.indexOf("/ward/pending-tests") >= 0) return reply({ ok: true, pending: [] });
+  if (u.indexOf("/ward/fhir") >= 0) return reply({ resourceType: "Bundle", type: "searchset", entry: [] });
+
+  return reply({ ok: true });
+};
+</script>
+<script src="../ward.js"></script>
+<script>
+window.__ready = !!(window.WARD && window.WARD.open);
+</script>
+</body></html>

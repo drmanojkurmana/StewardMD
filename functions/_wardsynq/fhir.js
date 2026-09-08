@@ -193,7 +193,7 @@ function fhirEncounter(e) {
     // map to IMP as well - v3-ActCode has no distinct class code for any of them; which UNIT an
     // inpatient is on (theatre, recovery, critical care) is carried by Encounter.location, not by
     // class, so IMP is the correct code here and not a simplification.
-    class: (e.class === "IPD" || e.class === "ICU" || e.class === "SURGERY" || e.class === "PACU") ? { system: "http://terminology.hl7.org/CodeSystem/v3-ActCode", code: "IMP", display: "inpatient encounter" }
+    class: (e.class === "IPD" || e.class === "ICU" || e.class === "SURGERY" || e.class === "PACU" || e.class === "MATERNITY") ? { system: "http://terminology.hl7.org/CodeSystem/v3-ActCode", code: "IMP", display: "inpatient encounter" }
       : e.class === "OPD" ? { system: "http://terminology.hl7.org/CodeSystem/v3-ActCode", code: "AMB", display: "ambulatory" }
       : e.class === "ED" ? { system: "http://terminology.hl7.org/CodeSystem/v3-ActCode", code: "EMER", display: "emergency" }
       : undefined,

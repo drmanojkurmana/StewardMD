@@ -17,6 +17,11 @@
  */
 
 import { EmergencyBundle } from "../../wardsynq/wardsynq-emergency.js";
+// wardsynq-obstetrics.js's own header: "Passed as `definition` to EmergencyBundle, so these inherit
+// every timing guarantee already built and tested there rather than growing a second clock." Task
+// 2.4 is what actually does the passing - EmergencyBundle's own BUNDLES registry has never heard of
+// "code-pph"/"code-eclampsia", so starting either without this would fail UNKNOWN_CODE.
+import { OBSTETRIC_BUNDLES } from "../../wardsynq/wardsynq-obstetrics.js";
 import { GovernanceError } from "../../wardsynq/wardsynq-actors.js";
 import { VersionConflictError } from "./repository.js";
 import { resolveClinicalActor } from "./actor.js";
@@ -101,6 +106,7 @@ async function startResusBundle(request, env, ctx) {
       code: str(ctx.code), patientId, encounterId: str(ctx.encounterId) || null,
       startedBy: resolved.actor.id, timeZero: str(ctx.timeZero) || undefined,
       evidence: ctx.evidence || null, now,
+      definition: OBSTETRIC_BUNDLES[str(ctx.code)] || undefined,
     });
   } catch (e) { return bundleRefusal(base, e, { written: 0 }); }
 

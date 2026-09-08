@@ -43,11 +43,11 @@ try {
   await ev(`document.querySelector('[data-w-act="board"]').click(); return true;`);
   for (let i = 0; i < 30; i++) { await sleep(100); if (await ev(`return !!document.querySelector('.w-bedcell.free');`)) break; }
   await ev(`document.querySelector('.w-bedcell.free').click(); return true;`);
-  for (let i = 0; i < 20; i++) { await sleep(100); if (await ev(`return !!document.getElementById('wAdmitIcu');`)) break; }
-  ok(await ev(`return !!document.getElementById('wAdmitIcu');`), "the admit panel carries the explicit ICU checkbox - never inferred from the ward's name");
+  for (let i = 0; i < 20; i++) { await sleep(100); if (await ev(`return !!document.getElementById('wAdmitClass');`)) break; }
+  ok(await ev(`return !!document.getElementById('wAdmitClass');`), "the admit panel carries the explicit admission-type select - never inferred from the ward's name");
 
   // ---- 2. Check ICU, look up the (registered) patient, confirm the admit. -----------------------
-  await ev(`document.getElementById('wAdmitIcu').checked = true; document.getElementById('wAdmitMrn').value = 'SMD-H1-ICU01'; document.querySelector('[data-w-act="mrnlookup"]').click(); return true;`);
+  await ev(`document.getElementById('wAdmitClass').value = 'ICU'; document.getElementById('wAdmitMrn').value = 'SMD-H1-ICU01'; document.querySelector('[data-w-act="mrnlookup"]').click(); return true;`);
   for (let i = 0; i < 20; i++) { await sleep(100); if (await ev(`return !!document.querySelector('[data-w-act="admitconfirm"]');`)) break; }
   await ev(`document.querySelector('[data-w-act="admitconfirm"]').click(); return true;`);
   for (let i = 0; i < 30; i++) { await sleep(100); if (await ev(`return !!document.querySelector('.w-bed');`)) break; }

@@ -51,7 +51,9 @@ test("nothing here claims a value was SET when the record only knows what was se
   assert.equal(entryFrom(obs()).kind, "observed");
   assert.equal(entryFrom(obs({ kind: "set" })).kind, "observed", "a caller cannot assert one either");
   // A laboratory result is not a flowsheet row: it has its own report, critical loop and release rules.
-  assert.deepEqual(CATEGORIES, ["vital-signs", "fluid-balance", "device"]);
+  // "labour" joined 2026-09-08 (Task 2.4): a partogram's raw data is charted the same way a vital
+  // sign is - the grid's own missing-hour honesty and bitemporal correction apply to it unchanged.
+  assert.deepEqual(CATEGORIES, ["vital-signs", "fluid-balance", "device", "labour"]);
   assert.ok(!CATEGORIES.includes("laboratory"));
 });
 
