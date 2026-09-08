@@ -1135,12 +1135,15 @@
    * should be. Same fail-open contract: rxIssueVerification never rejects, and an out-of-scope or
    * offline prescription still exports, just without a QR (and rxNoQrWhy says which). */
   function exportRx(kind, topic, regNo, signImg){
-    if(!window.html2canvas){ rxToast("Export engine still loading — try again"); return; }
-    var d=collectRx()||{}, lines=d.lines;
-    rxIssueVerification(lines, d.name).then(function(rxv){
-      if(!rxv){ var why=rxNoQrWhy(lines); if(why) rxToast(why); }
-      exportRxNow(kind, topic, regNo, signImg, rxv);
-    });
+    var v1 = smdLazy('/vendor-html2canvas.js?v=1');
+    var p = kind === "pdf" ? v1.then(function(){ return smdLazy('/vendor-jspdf.js?v=1'); }) : v1;
+    p.then(function() {
+      var d=collectRx()||{}, lines=d.lines;
+      rxIssueVerification(lines, d.name).then(function(rxv){
+        if(!rxv){ var why=rxNoQrWhy(lines); if(why) rxToast(why); }
+        exportRxNow(kind, topic, regNo, signImg, rxv);
+      });
+    }).catch(function(){ rxToast("Export engine failed to load"); });
   }
   /* The QR block rasterised on its own, so it can be stamped in PDF units instead of being baked
    * into the page image. Two reasons, both of which bit a long prescription: a page break sliced

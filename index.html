@@ -2050,8 +2050,9 @@ window.openExternal = function (u) {
 <script src="/nmc-register.js?v=gold1" defer></script>
 <!-- Prescription PDF/JPEG export libraries (html2canvas → canvas, jsPDF → PDF). Loaded before
      prescription.js; export is user-triggered so defer order is safe. -->
-<script src="/vendor-html2canvas.js?v=1" defer></script>
-<script src="/vendor-jspdf.js?v=1" defer></script>
+<script src="/lazy-load.js?v=1" defer></script>
+<!-- lazy loaded: html2canvas -->
+<!-- lazy loaded: jspdf -->
 <script src="/rx-brand-match.js?v=rxb1" defer></script>
 <script src="/prescription.js?v=gold982-brandsearch-dict1-ui1-rxscan1-why1-pdfqr1-always1-qrfix1-mask1" defer></script>
 <script src="/ku.js?v=gold434-thread" defer></script>
@@ -2080,7 +2081,7 @@ window.openExternal = function (u) {
 <script src="/calc-links.js?v=gold400" defer></script>
 <script src="/icu-autoscores.js?v=gold403" defer></script>
 <script src="/drugs.js?v=gold978" defer></script>
-<script src="/interaction-rules.js?v=gold363" defer></script>
+<!-- lazy loaded: interaction-rules -->
 <script defer src="/kb/ai/drug-fuzzy.js?v=gold1047"></script>
 <script defer src="/medlist.js?v=gold1049-scan-choose-brands1"></script>
 <script defer src="/ghis-meds.js?v=gold363"></script>
@@ -2139,7 +2140,7 @@ window.openExternal = function (u) {
 <script src="/kb/ai/maik-copilot.js?v=gold1053-calcfix" defer></script>
 <script src="/electrolytes.js?v=bug808-nodupe-focus1" defer></script>
 <script src="/caseshare.js?v=gold363" defer></script>
-<script src="/hospitals-in.js?v=gold1018" defer></script><script src="/connect-source.js?v=cs3docs" defer></script><script src="/connect-patient.js?v=cp4" defer></script><script src="/queue-flags.js?v=q5-all-on" defer></script><script src="/govschemes-flags.js?v=gs2-defaulton" defer></script><script src="/home.js?v=nstream1-clinix5-surgx2-logo-aiu1-profile2-rxtile-glyphs-maikart2-pglog1-ack1-otasay-oncqis-sync1-prompt1-about1-icons1-rxv1-applock3-afoptin-gsrename1-icdtile1-hvtilealign1-sknx16" defer></script><script src="/profile-setup.js?v=pfs1" defer></script><script src="/syndromes-motion.js?v=synmo5" defer></script><script src="/dialog-motion.js?v=dm2" defer></script>
+<!-- lazy loaded: hospitals-in --><script src="/connect-source.js?v=cs3docs" defer></script><script src="/connect-patient.js?v=cp4" defer></script><script src="/queue-flags.js?v=q5-all-on" defer></script><script src="/govschemes-flags.js?v=gs2-defaulton" defer></script><script src="/home.js?v=nstream1-clinix5-surgx2-logo-aiu1-profile2-rxtile-glyphs-maikart2-pglog1-ack1-otasay-oncqis-sync1-prompt1-about1-icons1-rxv1-applock3-afoptin-gsrename1-icdtile1-hvtilealign1-sknx16" defer></script><script src="/profile-setup.js?v=pfs1" defer></script><script src="/syndromes-motion.js?v=synmo5" defer></script><script src="/dialog-motion.js?v=dm2" defer></script>
 <!-- Lean sidebar redesign (Tools / Reference & Help / Settings / Advanced / Experimental). Additive; wraps
      SB.open and rebuilds #sbMenu, superseding home.js's legacy reorganizer (which stands down
      via window.SMD_SBR). Must load AFTER home.js. -->
@@ -2276,7 +2277,7 @@ window.openExternal = function (u) {
 <script src="/kardiox-signal.js?v=kx1" defer></script>
 <script src="/kardiox-models.js?v=kx2" defer></script>
 <script src="/kardiox-content.js?v=kx6-realimg" defer></script>
-<script src="/kardiox-content-pack.js?v=kx3" defer></script>
+<!-- lazy loaded: kardiox-content-pack -->
 <script src="/kardiox-store.js?v=kx3" defer></script>
 <script src="/kardiox-rules.js?v=kx3" defer></script>
 <script src="/kardiox-fusion.js?v=kx1" defer></script>
@@ -2524,10 +2525,10 @@ window.openExternal = function (u) {
      default ON), so a doctor has an ID to be added / referred / supported BY before
      they ever open ICU or touch Group mode. The verified-email / Apple-proxy anchor
      CAPTURE UI remains flag-gated (smd_steward_id, DEFAULT OFF; ?stewardid=1). -->
-<script src="steward-id-flags.js?v=smdid2"></script>
-<script src="steward-id.js?v=smdid3"></script>
-<script src="anchor-email.js?v=smdid2"></script>
-<script src="steward-id-onboard.js?v=smdid2"></script>
+<script src="steward-id-flags.js?v=smdid2" defer></script>
+<script src="steward-id.js?v=smdid3" defer></script>
+<script src="anchor-email.js?v=smdid2" defer></script>
+<script src="steward-id-onboard.js?v=smdid2" defer></script>
 <!-- GHIS Ward Sync (additive integration; flag-gated, reversible). The frontend
      ghis-ward.js self-injects a 🏥 Ward button + #ghisPanel. Each doctor signs in
      with their OWN GHIS id/password; the token is stored client-side and sent as
@@ -2714,7 +2715,7 @@ window.openExternal = function (u) {
   else init();
 })();
 </script>
-<script src="/atlas.js?v=atlas1-3d1"></script>
-<script src="/atlas3d.js?v=a3d8"></script>
+<script src="/atlas.js?v=atlas1-3d1" defer></script>
+<script src="/atlas3d.js?v=a3d8" defer></script>
 </body>
 </html>
