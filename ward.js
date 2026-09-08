@@ -882,6 +882,9 @@
         // A radiologist's own worklist for THIS patient's imaging orders - protocol, report, and an
         // honest IMAGE SOURCE UNAVAILABLE in place of a viewer that does not exist.
         '<button class="w-btn ghost" data-w-act="radiologyopen" title="Imaging worklist, protocol and report">' + ms("medical_information") + "Radiology</button>" +
+        // A pharmacist's own verification/dispense screen - never a reuse of this doctor's ordering
+        // view. Reachable from any patient chart, gated server-side to the pharmacy role's own caps.
+        '<button class="w-btn ghost" data-w-act="pharmacyopen" title="Verification queue and dispense">' + ms("medication") + "Pharmacy</button>" +
         // The patient's own copy. Reachable from the patient because that is where the conversation
         // that produces it happens, not from a menu somewhere else.
         '<button class="w-btn ghost" data-w-act="pcopy" title="The copy this patient can be given">' + ms("assignment_ind") + "Patient copy</button></div>";
@@ -1385,6 +1388,89 @@
       ) : '<p class="w-empty" style="padding:0 16px">Pick a study above to protocol or report it.</p>');
   }
 
+  /* TASK 3.3: the pharmacist's own verification queue - not a reuse of the doctor's ordering view.
+   * Every row carries the SAME safety-engine verdict the bedside eMAR runs (never a second engine,
+   * never silently skipped - a rule pack that fails to load reads as a NOT_CHECKED_* warning, never
+   * as a quiet "clear"), the allergy list a verification is actually checking against, and the exact
+   * state (unverified/queried/stale/verified) pharmacy-verify.js's own ranking already computes.
+   * Verifying writes ONLY MedicationVerification, never MedicationAdministration - a pharmacist
+   * cannot give or claim to have given a dose through this screen, by construction. */
+  function pharmacyView(state) {
+    var ph = state.pharmacy || {};
+    var q = ph.queue;
+    var picked = ph.pickedOrderId;
+    var dispenses = ph.dispenses || [];
+
+    var orderRows = ((q && q.orders) || []).map(function (o) {
+      var safe = o.safety || {};
+      var blocked = safe.blocks && safe.blocks.length;
+      var warned = safe.warnings && safe.warnings.length;
+      return '<li' + (o.orderId === picked ? ' class="picked"' : '') + '>' +
+        '<button class="w-btn ghost tiny" data-w-act="phpick:' + esc(o.orderId) + '"><b>' + esc(o.drug) + "</b></button>" +
+        '<span class="w-st ' + esc(o.state) + '">' + esc(o.state) + "</span>" +
+        (blocked ? '<span class="w-st overdue">' + ms("block") + safe.blocks.length + " blocked</span>" : "") +
+        (warned ? '<span class="w-st due">' + ms("warning") + safe.warnings.length + " warning</span>" : "") +
+        "</li>";
+    }).join("");
+
+    var allergyRows = (q && q.allergies || []).map(function (a) {
+      return "<li><b>" + esc(a.substance) + "</b>" + (a.severity ? "<span>" + esc(a.severity) + "</span>" : "") + "</li>";
+    }).join("");
+
+    var pickedOrder = picked && q ? q.orders.filter(function (o) { return o.orderId === picked; })[0] : null;
+    var safety = pickedOrder && pickedOrder.safety;
+
+    var dispenseRows = dispenses.map(function (d) {
+      return "<li><b>" + esc(d.drug) + "</b><span>" + esc(d.quantity && (d.quantity.value + " " + d.quantity.unit)) +
+        (d.batch ? " &middot; batch " + esc(d.batch) : "") + (d.expiry ? " &middot; exp " + esc(d.expiry) : "") +
+        " &middot; " + when(d.dispensedAt) + "</span></li>";
+    }).join("");
+
+    return '<div class="w-chart-h"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button>" +
+      "<div><b>Pharmacy</b><small>" + esc((state.sel && state.sel.patientId) || "") + "</small></div>" +
+      '<button class="w-ic" data-w-act="pharmacyload" title="Refresh">' + ms("refresh") + "</button></div>" +
+
+      '<div class="w-card"><div class="w-card-h">' + ms("medication") + "<h3>Verification queue" + (q ? " &middot; " + q.unverified + " unverified" : "") + "</h3></div>" +
+      (orderRows ? '<ul class="w-mini">' + orderRows + "</ul>" : '<p class="w-empty">No active orders for this patient.</p>') +
+      "</div>" +
+
+      '<div class="w-card"><div class="w-card-h">' + ms("warning") + "<h3>Allergies</h3></div>" +
+      (allergyRows ? '<ul class="w-mini">' + allergyRows + "</ul>" : '<p class="w-empty">No allergy recorded.</p>') +
+      "</div>" +
+
+      (pickedOrder ? (
+        '<div class="w-card"><div class="w-card-h">' + ms("health_and_safety") + "<h3>Safety verdict &middot; " + esc(pickedOrder.drug) + "</h3></div>" +
+        (safety ? (
+          (safety.blocks && safety.blocks.length ? '<ul class="w-mini">' + safety.blocks.map(function (b) { return '<li class="w-st overdue">' + esc(b.code) + "<span>" + esc(b.message || "") + "</span></li>"; }).join("") + "</ul>" : "") +
+          (safety.warnings && safety.warnings.length ? '<ul class="w-mini">' + safety.warnings.map(function (w) {
+            var notChecked = String(w.code || "").indexOf("NOT_CHECKED") === 0 || w.code === "NO_RULE_PACK" || w.code === "SAFETY_CHECK_UNAVAILABLE";
+            return '<li class="w-st ' + (notChecked ? "due" : "overdue") + '">' + esc(w.code) + "<span>" + esc(w.message || "") + "</span></li>";
+          }).join("") + "</ul>" : "") +
+          (!(safety.blocks && safety.blocks.length) && !(safety.warnings && safety.warnings.length) ? '<p class="w-empty">The safety engine reports nothing against this order.</p>' : "")
+        ) : '<p class="w-empty">Loading&hellip;</p>') +
+        '<p class="w-hint">' + ms("info") + "This is decision support, not a block: the pharmacist's own judgement decides the outcome." + "</p></div>" +
+
+        '<div class="w-card"><div class="w-card-h">' + ms("fact_check") + "<h3>Verify</h3></div>" +
+        '<label class="w-f"><span>Query reason (required if querying)</span><input id="wPhReason" type="text" autocomplete="off"></label>' +
+        '<div class="w-actions">' +
+        '<button class="w-btn go" data-w-act="phverify">' + ms("check") + "Verify</button>" +
+        '<button class="w-btn warn" data-w-act="phquery">' + ms("help") + "Query</button>" +
+        "</div></div>" +
+
+        '<div class="w-card"><div class="w-card-h">' + ms("outbound") + "<h3>Dispense</h3></div>" +
+        '<div class="w-grid">' +
+        '<label class="w-f"><span>Quantity</span><input id="wPhQty" type="text" inputmode="decimal" autocomplete="off"></label>' +
+        '<label class="w-f"><span>Unit</span><input id="wPhUnit" type="text" autocomplete="off" placeholder="e.g. tablet, mL"></label>' +
+        '<label class="w-f"><span>Batch</span><input id="wPhBatch" type="text" autocomplete="off"></label>' +
+        '<label class="w-f"><span>Expiry</span><input id="wPhExpiry" type="date"></label>' +
+        '<label class="w-f"><span>Destination</span><input id="wPhDest" type="text" autocomplete="off" placeholder="e.g. Ward A cabinet"></label>' +
+        "</div>" +
+        '<button class="w-btn go" data-w-act="phdispense">' + ms("send") + "Dispense</button>" +
+        (dispenseRows ? '<div class="w-sub"><h4>' + ms("history") + "Dispense history</h4><ul class=\"w-mini\">" + dispenseRows + "</ul></div>" : "") +
+        '<p class="w-hint">' + ms("info") + "No stock is deducted without this event. An expired batch or a dispense against an unverified order is shown exactly as the server reports it, never hidden." + "</p></div>"
+      ) : '<p class="w-empty" style="padding:0 16px">Pick an order above to verify or dispense it.</p>');
+  }
+
   /* Open critical results, ABOVE everything else on the chart. A critical result that reaches a
    * chart nobody reads is the oldest preventable death in hospital medicine, and the failure is
    * never the measurement - it is that no named human said "I have seen this". So this sits first,
@@ -1576,6 +1662,7 @@
         : state.view === "oncology" ? oncologyView(state)
         : state.view === "cardiology" ? cardiologyView(state)
         : state.view === "radiology" ? radiologyView(state)
+        : state.view === "pharmacy" ? pharmacyView(state)
         : listView(state)) + "</div></div>";
   }
 
@@ -2211,6 +2298,53 @@
       })
       .catch(function () { st.busy = false; st.err = "Could not release the report."; paint(); });
   }
+  function pharmacyOpen() {
+    st.view = "pharmacy"; st.pharmacy = null; paint(); loadPharmacy();
+  }
+  function loadPharmacy() {
+    var s = st.sel; if (!s) return Promise.resolve();
+    if (!st.pharmacy) st.pharmacy = {};
+    return Promise.all([
+      apiGet("/ward/verification-queue?orgId=" + encodeURIComponent(st.orgId) + "&patientId=" + encodeURIComponent(s.patientId)),
+      apiGet("/ward/dispenses?orgId=" + encodeURIComponent(st.orgId) + "&patientId=" + encodeURIComponent(s.patientId)),
+    ]).then(function (rs) {
+      st.pharmacy.queue = (rs[0] && rs[0].ok) ? rs[0] : null;
+      st.pharmacy.dispenses = (rs[1] && rs[1].ok) ? rs[1].dispenses : [];
+      paint();
+    }).catch(function () { paint(); });
+  }
+  function pharmacyPick(orderId) {
+    if (!st.pharmacy) st.pharmacy = {};
+    st.pharmacy.pickedOrderId = orderId;
+    paint();
+  }
+  function pharmacyVerify(outcome) {
+    var s = st.sel, picked = st.pharmacy && st.pharmacy.pickedOrderId; if (!s || !picked) return;
+    var reason = val("wPhReason");
+    if (outcome === "queried" && !reason) { st.err = "Say what the query is, so the ward can act on it."; paint(); return; }
+    st.busy = true; paint();
+    apiPost("/ward/verify-order", { orgId: st.orgId, orderId: picked, outcome: outcome, reason: reason || undefined })
+      .then(function (r) {
+        if (r && r.error === "reason_required") { st.busy = false; st.err = "Say what the query is, so the ward can act on it."; paint(); return; }
+        if (settle(r, outcome === "verified" ? "Verified." : "Queried.")) loadPharmacy(); else paint();
+      })
+      .catch(function () { st.busy = false; st.err = "Could not record the verification."; paint(); });
+  }
+  function pharmacyDispense() {
+    var s = st.sel, picked = st.pharmacy && st.pharmacy.pickedOrderId; if (!s || !picked) return;
+    var qty = val("wPhQty"), unit = val("wPhUnit"), batch = val("wPhBatch"), expiry = val("wPhExpiry"), dest = val("wPhDest");
+    if (!qty || !unit) { st.err = "A dispense needs a positive quantity and a unit."; paint(); return; }
+    st.busy = true; paint();
+    apiPost("/ward/dispense", { orgId: st.orgId, orderId: picked, quantity: { value: Number(qty), unit: unit }, batch: batch || undefined, expiry: expiry || undefined, destination: dest || undefined })
+      .then(function (r) {
+        if (r && r.error === "quantity_required") { st.busy = false; st.err = "A dispense needs a positive quantity and a unit."; paint(); return; }
+        var msg = "Dispensed.";
+        if (r && r.expiryWarning) msg = "Dispensed. " + r.expiryWarning;
+        if (r && r.warning) msg = "Dispensed. " + r.warning;
+        if (settle(r, msg)) loadPharmacy(); else paint();
+      })
+      .catch(function () { st.busy = false; st.err = "Could not record the dispense."; paint(); });
+  }
   function edDispose(disposition, extra) {
     var s = st.sel; if (!s) return;
     st.busy = true; paint();
@@ -2696,6 +2830,7 @@
       if (st.view === "oncology") { st.view = "chart"; st.oncology = null; paint(); return; }
       if (st.view === "cardiology") { st.view = "chart"; st.cardiology = null; paint(); return; }
       if (st.view === "radiology") { st.view = "chart"; st.radiology = null; paint(); return; }
+      if (st.view === "pharmacy") { st.view = "chart"; st.pharmacy = null; paint(); return; }
       // Picking a bed to admit an ED patient opens the SAME bed board a fresh admission uses;
       // backing out of it returns to that patient's ED chart, not the ward list, and drops the
       // pending admit rather than leaving it to fire on some later, unrelated bed pick.
@@ -2708,7 +2843,7 @@
       st.flowsheet = null; st.news2 = null; st.investigations = null; st.results = null; st.resusBundles = null;
       st.ed = null; st.edArrivalOpen = false; st.edMrnLookup = null; st.edMrnLookupErr = "";
       st.surgBoard = null; st.surgCase = null; st.surgBookOpen = false; st.surgMrnLookup = null; st.surgMrnLookupErr = ""; st.surgErr = "";
-      st.maternity = null; st.admitClass = ""; st.ageBand = null; st.lines = null; st.rateResult = null; st.oncology = null; st.cardiology = null; st.radiology = null;
+      st.maternity = null; st.admitClass = ""; st.ageBand = null; st.lines = null; st.rateResult = null; st.oncology = null; st.cardiology = null; st.radiology = null; st.pharmacy = null;
       paint(); return;
     }
     if (cmd === "board") { loadBoard(); return; }
@@ -2727,7 +2862,7 @@
       if (!p) return;
       st.sel = p; st.view = "chart"; st.due = []; st.prn = []; st.unscheduled = []; st.problems = []; st.criticals = []; st.balance = null; st.outbox = [];
       st.flowsheet = null; st.news2 = null; st.investigations = null; st.results = null;
-      st.err = ""; st.note = ""; st.refusal = null; st.devices = null; st.maternity = null; st.ageBand = null; st.lines = null; st.rateResult = null; st.oncology = null; st.cardiology = null; st.radiology = null;
+      st.err = ""; st.note = ""; st.refusal = null; st.devices = null; st.maternity = null; st.ageBand = null; st.lines = null; st.rateResult = null; st.oncology = null; st.cardiology = null; st.radiology = null; st.pharmacy = null;
       defaultWindow();
       st.noteTemplateId = ""; st.noteResult = null;
       paint(); loadChart(); loadRound(); loadBalance(); loadOutbox(); loadTemplates(); loadFlowsheet(); loadNews2(); loadInvestigations();
@@ -2793,6 +2928,12 @@
     if (cmd === "radpick") { radiologyPick(arg); return; }
     if (cmd === "radprotocolsave") { radiologyProtocolSave(); return; }
     if (cmd === "radreportsave") { radiologyReportSave(); return; }
+    if (cmd === "pharmacyopen") { pharmacyOpen(); return; }
+    if (cmd === "pharmacyload") { loadPharmacy(); return; }
+    if (cmd === "phpick") { pharmacyPick(arg); return; }
+    if (cmd === "phverify") { pharmacyVerify("verified"); return; }
+    if (cmd === "phquery") { pharmacyVerify("queried"); return; }
+    if (cmd === "phdispense") { pharmacyDispense(); return; }
     if (cmd === "edarrivalopen") { st.edArrivalOpen = true; st.edMrnLookup = null; st.edMrnLookupErr = ""; paint(); return; }
     if (cmd === "edarrivalclose") { st.edArrivalOpen = false; st.edMrnLookup = null; st.edMrnLookupErr = ""; paint(); return; }
     if (cmd === "edmrnlookup") { edMrnLookup(); return; }

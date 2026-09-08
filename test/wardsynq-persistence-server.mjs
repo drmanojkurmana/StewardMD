@@ -118,7 +118,7 @@ const { onRequest } = await import("../functions/api/queue/[[path]].js");
 const ORG = "org-wsq";
 const sanitize = (x) => String(x == null ? "" : x).replace(/[^A-Za-z0-9_-]/g, "-").slice(0, 80);
 const idFor = (email) => "cfa:" + createHash("sha256").update(email.toLowerCase()).digest("hex").slice(0, 24);
-const DOCTOR = "doctor@example.test", NURSE = "nurse@example.test", LABTECH = "lab@example.test";
+const DOCTOR = "doctor@example.test", NURSE = "nurse@example.test", LABTECH = "lab@example.test", PHARM = "pharmacy@example.test";
 const ENV = {
   QUEUE_ENABLED: "1", QUEUE_TOKEN_SECRET: "test-secret-that-is-long-enough-for-hmac",
   FOLLOWCARE_PHI_KEY: Buffer.alloc(32, 7).toString("base64url"), CONNECT_DB: tenantDb,
@@ -127,10 +127,10 @@ const ENV = {
 // A fresh org + staff roster EVERY time this script starts, so a restart proves the CLINICAL
 // record (the sqlite file) survived even though the org/membership scaffolding was rebuilt.
 docs.set(`q_orgs/${ORG}`, { fields: { id: ORG, code: "SMD-WARD01", name: "WSQ Ward Hospital", kind: "clinic", mode: "wardsynq", connectTenantId: TENANT_ROW.id, ownerUid: "cfa:nobody", createdAt: 1, wardsynq: {} }, updateTime: "t1" });
-for (const [email, role] of [[DOCTOR, "doctor"], [NURSE, "nurse"], [LABTECH, "lab"]]) {
+for (const [email, role] of [[DOCTOR, "doctor"], [NURSE, "nurse"], [LABTECH, "lab"], [PHARM, "pharmacy"]]) {
   docs.set(`q_members/${sanitize(ORG)}__${sanitize(idFor(email))}`, { fields: { orgId: ORG, identity: idFor(email), role, active: true }, updateTime: "t1" });
 }
-console.error(`[persistence-server] org ${ORG}: doctor=${DOCTOR} nurse=${NURSE} lab=${LABTECH}`);
+console.error(`[persistence-server] org ${ORG}: doctor=${DOCTOR} nurse=${NURSE} lab=${LABTECH} pharmacy=${PHARM}`);
 
 // ---- static files, same origin as /api/queue, so ward.js's relative fetch("/api/queue/...") works ----
 const STATIC = ["ward.js", "ward.css", "discharge.js", "patient-register.js", "patient-register.css"];
