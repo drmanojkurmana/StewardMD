@@ -3,6 +3,8 @@ name: Clean Knowledge Library references
 on:
   push:
     branches: [feat/clean-reference-ui]
+  pull_request:
+    branches: [main]
 
 permissions:
   contents: write
@@ -14,6 +16,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 1
+          ref: feat/clean-reference-ui
 
       - name: Update Knowledge Library reference presentation
         run: |
@@ -57,6 +60,4 @@ jobs:
             exit 0
           fi
           git commit -m "fix(kb): simplify Knowledge Library references"
-          git push
-
-          # One-time branch-local migration; workflow removes itself after patching.
+          git push origin feat/clean-reference-ui
