@@ -75,7 +75,7 @@ try{
  ok(await ev(`document.querySelector('#sbrefBody').scrollTop===${returnScroll}`),'returning restores the exact library scroll position');
  ok(await ev(`document.querySelector('.kblib-personal').textContent.includes(${JSON.stringify(diseaseName)})`),'saved and recent diseases appear in your library');
  await ev(`KB_ENRICHMENT.byId.__citation_test={name:'Reference formatting check',source:'Verified textbook',clinicalPearls:['Dose 5 mg (p.1537). Duration 3 weeks (p.21 context; reference section). Threshold (<45 mg/dL).'],prognosis:'Review in 3-8 weeks (p.252, p.272-273).'};DX.openRef('__citation_test')`);
- ok(await ev(`(()=>{const t=document.querySelector('#dxMgmt').textContent;return !/p\\.1537|p\\.21|p\\.252|p\\.272|paraphras|page-cited/.test(t)&&t.includes('5 mg')&&t.includes('3-8 weeks')&&t.includes('<45 mg/dL')&&t.includes('Reference: Verified textbook')&&t.includes('Read more')})()`),'expanded references omit page citations and retain clinical numbers and true attribution');
+ ok(await ev(`(()=>{const t=document.querySelector('#dxMgmt').textContent;return !/p\\.1537|p\\.21|p\\.252|p\\.272|paraphras|page-cited/.test(t)&&t.includes('5 mg')&&t.includes('3-8 weeks')&&t.includes('<45 mg/dL')&&t.includes('Reference:Verified textbook')&&t.includes('Know more')})()`),'expanded references omit page citations and retain clinical numbers and true attribution');
  await ev(`delete KB_ENRICHMENT.byId.__citation_test`);
  if(process.env.LIBRARY_REFERENCE_SHOTS){
   console.log('Preview disease:',await ev(`(()=>{const id=Object.keys(KB_ENRICHMENT.byId).find(id=>/acute bronchitis/i.test(KB_ENRICHMENT.byId[id].name));if(!id)throw new Error('Acute bronchitis unavailable');document.body.classList.remove('dark');DX.openRef(id);return id})()`));

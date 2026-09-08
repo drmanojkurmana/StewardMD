@@ -15,7 +15,7 @@ User selected option B, Discover: Apple-inspired type hierarchy, a quiet referen
 
 ## Verification
 
-All shared disease/syndrome evidence views now remove displayed page citations, including expanded clinical details. Textbook accordions say Read more, and their footers say Reference followed by the recorded source name. No randomly assigned textbook citations are added. Clinical quantities and emphasis are preserved; the original source records remain unchanged.
+All shared disease/syndrome evidence views remove displayed page citations, including expanded clinical details. Option C uses one Know more control for the complete reference content, without nested duplicate sections. The footer lists up to three distinct recorded references, with editions and page locators removed; when only one source is recorded, it shows that source. No randomly assigned textbook citations are added. Clinical quantities and emphasis are preserved; original source records remain unchanged.
 
 Your library now provides device-local favourites and the twelve most recently opened diseases. The disease reader has a save/remove control with storage-failure feedback. The national antibiogram supports checkbox selection for a compact comparison; changing organism resets the selection. This view explicitly labels national data and does not claim hospital-specific data is loaded. Source metadata expansion remains excluded per the user's request.
 

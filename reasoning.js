@@ -1702,14 +1702,22 @@
     if (e.severityClassification) full += '<div class="ev-subh">Severity</div><p>' + medFormat(e.severityClassification) + '</p>';
     if (e.prognosis) full += '<div class="ev-subh">Prognosis</div><p>' + medFormat(e.prognosis) + '</p>';
     if (!pearls.length && !sections.length) return null;
-    var srcName = e.source ? String(e.source).replace(/,?\s*22e.*$/, "") : "Standard internal-medicine reference";
+    function referenceTitle(value) {
+      return String(value || "").replace(/Harrison(?:[’']s)?(?:\s+Principles of Internal Medicine)?/gi, "Harrison's Principles of Internal Medicine")
+        .replace(/\s*[,;·–-]?\s*\(?\d+(?:e\b|(?:st|nd|rd|th)\s+ed(?:ition)?\.?)[\s\S]*$/i, "")
+        .replace(/\s*\(?\bpp?\.\s*\d[\s\S]*$/i, "").replace(/[,;\s]+$/, "").trim();
+    }
+    var srcName = referenceTitle(e.source);
+    var references = (e.references || []).map(referenceTitle).filter(function (name, i, all) { return name && all.indexOf(name) === i; });
+    if (!references.length && srcName) references.push(srcName);
+    references = references.slice(0, 3);
     return {
       _id: id, srcKey: "harrison", icon: rIco("book"),
       sourceName: srcName,
-      edition: "22e", tag: "Primary Reference",
+      edition: "", tag: "",
       pages: "",                              // not in the header — references live in the footer
       pearls: pearls, sections: sections, fullHTML: full,
-      cite: '<strong>Reference: ' + esc(srcName) + '</strong>'
+      cite: references.length ? '<strong>Reference:</strong>' + references.map(function (name) { return '<div>' + esc(name) + '</div>'; }).join("") : ""
     };
   }
   /* FLAGSHIP CLINICIAN-CURATED BRIEFINGS — hand-authored high-yield blocks for
@@ -1968,6 +1976,9 @@
   function evBodyHTML(src) {
     // the clinician briefing belongs to the disease — show it once, in the primary (Harrison) panel.
     var h = '<div class="ev-body">' + (src.srcKey === "harrison" ? evBriefing(src._id) : "");
+    if (src.srcKey === "harrison" && src.fullHTML) {
+      return h + '<div class="ev-full">' + src.fullHTML + '</div><div class="ev-cite">' + src.cite + '</div></div>';
+    }
     if (src.pearls && src.pearls.length) {
       h += '<div class="ev-pearls"><div class="ev-pearls-h"><span class="ev-tick"></span>' + esc(src.pearlsLabel || "Key clinical pearls") + '</div>' +
         src.pearls.map(function (p) { var k = pearlKind(p); return '<div class="ev-pearl ev-pearl--' + k.a + '"><span class="ev-pearl-ic">' + rIco(k.ic) + '</span><div class="ev-pearl-bd"><span class="ev-pearl-tag ev-tag--' + k.a + '">' + k.label + '</span>' + medFormat(stripCite(p)) + '</div></div>'; }).join("") +
@@ -1992,8 +2003,8 @@
     var open = !!opts.expanded;
     var sub = src.srcKey === "harrison" ? "Clinical details and key points" : [src.edition, src.tag].filter(Boolean).join(" · ");
     return '<div class="ev-wrap' + (open ? " ev-open" : "") + '" data-ev="' + src._id + '" data-ev-src="' + (src.srcKey || "harrison") + '">' +
-      '<button type="button" class="ev-top"><span class="ev-top-ic">' + src.icon + '</span>' +
-        '<span class="ev-top-main"><span class="ev-top-title">' + (src.srcKey === "harrison" ? "Read more" : esc(src.sourceName)) + '</span>' +
+      '<button type="button" class="ev-top" aria-expanded="' + open + '"><span class="ev-top-ic">' + src.icon + '</span>' +
+        '<span class="ev-top-main"><span class="ev-top-title">' + (src.srcKey === "harrison" ? "Know more" : esc(src.sourceName)) + '</span>' +
         (sub ? '<span class="ev-top-sub">' + esc(sub) + '</span>' : '') + '</span>' +
         '<span class="ev-chev ev-chev-top">⌄</span></button>' +
       '<div class="ev-panel"><div class="ev-panel-in">' + (open ? evBodyHTML(src) : '') + '</div></div></div>';
@@ -2016,7 +2027,7 @@
             if (src) { src.srcKey = k; pin.innerHTML = evBodyHTML(src); }
           } catch (e) {}
         }
-        wrap.classList.toggle("ev-open"); return;
+        wrap.classList.toggle("ev-open"); top.setAttribute("aria-expanded", String(wrap.classList.contains("ev-open"))); return;
       }
       var sh = t.closest(".ev-sec-h");
       if (sh && sh.parentNode) sh.parentNode.classList.toggle("ev-open");
