@@ -6,7 +6,7 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import {
-  REASON, RESOLUTION, INBOUND_TYPES, inboundEnabled, sourceSystemOf, splitBundle, markTerminology,
+  REASON, RESOLUTION, INBOUND_TYPES, inboundEnabled, sourceSystemOf, splitBundle, evaluateIfNoneExist, markTerminology,
   reconcileIdentity, rebind, partitionConflicts, ExchangeException, ExchangeIdentityDecision, priorDecision, EXCEPTION_TYPE, DECISION_TYPE,
 } from "../functions/_wardsynq/fhir-inbound.js";
 import { RESOURCE_TYPES, NATIVE_SYSTEM } from "../functions/_wardsynq/service.js";
@@ -67,6 +67,30 @@ test("SCCM 1.1: administrations, service requests and consents travel through th
   assert.equal(sr.externalStatus, "active");
   assert.equal(by("DiagnosticReport")[0].serviceRequestId, "fhir-his-sr-sr1", "the report answers the source's order");
   assert.equal(by("PatientConsent").length, 0, "consent is a governance record: the adapter does not build it, fhir-inbound.js does");
+});
+
+test("TRANSACTION AND BATCH: the entry's request is carried, only POST and PUT are done, If-None-Exist is a search with three answers", () => {
+  const b = { resourceType: "Bundle", type: "transaction", entry: [
+    { resource: { resourceType: "Patient", id: "p1" }, request: { method: "POST", url: "Patient", ifNoneExist: "identifier=urn:his:mrn|M1" } },
+    { resource: { resourceType: "Observation", id: "o1" }, request: { method: "PUT", url: "Observation/o1", ifMatch: 'W/"2"' } },
+    { resource: { resourceType: "Observation", id: "o2" }, request: { method: "DELETE", url: "Observation/o2" } },
+  ] };
+  const s = splitBundle(b);
+  assert.equal(s.bundleType, "transaction"); assert.equal(s.atomic, true);
+  assert.deepEqual(s.requests.get("Patient/p1"), { method: "POST", ifNoneExist: "identifier=urn:his:mrn|M1", ifMatch: null, url: "Patient" });
+  assert.equal(s.requests.get("Observation/o1").ifMatch, 'W/"2"');
+  assert.ok(s.problems.some((p) => p.reason === REASON.INVALID && /DELETE is not supported/.test(p.detail)), "a delete is named, never done as the nearest thing");
+  assert.equal(splitBundle({ ...b, type: "batch" }).atomic, false);
+  assert.equal(splitBundle({ ...b, type: "collection" }).atomic, false, "a collection is processed entry by entry, as before");
+
+  const rows = [
+    { resourceType: "Observation", id: "a", meta: { versionId: "1", lastUpdated: "2026-08-02T00:00:00Z" }, code: { coding: [{ system: "http://loinc.org", code: "2160-0" }] }, effectiveDateTime: "2026-08-02T06:00:00Z" },
+    { resourceType: "Observation", id: "b", meta: { versionId: "1", lastUpdated: "2026-08-02T00:00:00Z" }, code: { coding: [{ system: "http://loinc.org", code: "2160-0" }] }, effectiveDateTime: "2026-08-03T06:00:00Z" },
+  ];
+  assert.equal(evaluateIfNoneExist("Observation", "code=http://loinc.org|2160-0&date=2026-08-02", rows).outcome, "exists");
+  assert.equal(evaluateIfNoneExist("Observation", "code=http://loinc.org|2160-0", rows).outcome, "ambiguous");
+  assert.equal(evaluateIfNoneExist("Observation", "code=http://loinc.org|2345-7", rows).outcome, "create");
+  assert.equal(evaluateIfNoneExist("Observation", "bogus=1", rows).outcome, "invalid", "an unknown parameter is not silently dropped from a precondition either");
 });
 
 test("OFF UNLESS THE HOSPITAL TURNS IT ON, and a feed must name itself", () => {

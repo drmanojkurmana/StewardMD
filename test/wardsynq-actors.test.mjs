@@ -94,6 +94,24 @@ test("THE ONE NARROW GRANT: a feed may file a dose ANOTHER hospital gave, and no
   assert.deepEqual(EXTERNAL_DOSE_STATES, ["administered", "cancelled", "held"]);
 });
 
+test("putMany IS ALL OR NOTHING: one refused row refuses the lot before anything is staged; a clean set lands in one transaction", async () => {
+  const g = await governed();
+  const okObs = (id) => Observation({ id, patientId: "pat-1", code: "8867-4", codeSystem: "loinc", value: 80, category: "vital-signs" });
+  await assert.rejects(() => g.putMany(ghis, [okObs("o1"), order({ id: "rx-active", status: "active" }), okObs("o2")]), (e) => {
+    assert.equal(e.code, "EXECUTE_DENIED");
+    assert.ok(e.reasons.some((r) => r.id === "rx-active"), "the refusal names the row");
+    return true;
+  });
+  assert.equal(await g.get(ghis, "Observation", "o1"), null, "the first observation did not land because the second row was refused");
+  assert.equal(await g.get(ghis, "Observation", "o2"), null);
+  assert.equal(g.denials.length, 1, "one denial recorded, for the one refused row");
+  const saved = await g.putMany(ghis, [okObs("o1"), okObs("o2")]);
+  assert.equal(saved.length, 2);
+  assert.ok(saved.every((s) => s.writtenBy.id === "ghis-adapter" && s.version === 1));
+  assert.ok((await g.get(ghis, "Observation", "o2")));
+  assert.equal(saved[0].writtenBy.at, saved[1].writtenBy.at, "stamped as one act");
+});
+
 test("ADVERSARIAL: an AI cannot commit an active order", async () => {
   const g = await governed();
   await assert.rejects(() => g.put(maik, order({ status: "active" })), (e) => {

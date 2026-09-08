@@ -752,7 +752,7 @@ export async function onRequest(context) {
          *   GET /ward/fhir/Patient/{id}/$everything          everything for one patient
          *   GET /ward/fhir?patient={id}[&_type=A,B]          the same, older spelling */
         const fType = parts[2] || "", fId = parts[3] || "", fOp = parts[4] || "", fVid = parts[5] || "";
-        const fctx = { ...deps, base: `${url.origin}/api/queue/ward/fhir`, terminology: (wsqCfg && wsqCfg.terminology) || null, profiles: (wsqCfg && wsqCfg.fhir && wsqCfg.fhir.profiles) || null };
+        const fctx = { ...deps, base: `${url.origin}/api/queue/ward/fhir`, terminology: (wsqCfg && wsqCfg.terminology) || null, profiles: (wsqCfg && wsqCfg.fhir && wsqCfg.fhir.profiles) || null, inbound: inboundEnabled((wsqCfg && wsqCfg.fhir) || null) };
         /* $validate is an operation, not a write: it files nothing, so it is open to anyone who may
          * read, whether or not the hospital has opened the inbound door. */
         if (method === "POST") {
@@ -771,7 +771,7 @@ export async function onRequest(context) {
           if (!inboundEnabled((wsqCfg && wsqCfg.fhir) || null)) return fhirJson(operationOutcome("error", "not-supported", "not found"), 404, request);
           const wAzW = await ORG.authorizeOrg(env, actor, wOrgId, CAPS.EMR_TREAT);
           if (!wAzW.ok) return fhirJson(operationOutcome("error", "forbidden", "writing to the record needs emr.treat"), 403, request);
-          const common = { ...fctx, body, config: (wsqCfg && wsqCfg.fhir) || null, sourceSystem: request.headers.get("X-Source-System") || "", ifMatch: request.headers.get("If-Match") || "" };
+          const common = { ...fctx, body, config: (wsqCfg && wsqCfg.fhir) || null, sourceSystem: request.headers.get("X-Source-System") || "", ifMatch: request.headers.get("If-Match") || "", ifNoneExist: request.headers.get("If-None-Exist") || "", prefer: /return=minimal/i.test(request.headers.get("Prefer") || "") ? "minimal" : "representation" };
           const subjectRef = body && ((body.subject && body.subject.reference) || (body.patient && body.patient.reference) || "");
           const patientRef = (/(?:^|\/)Patient\/([^/?#]+)$/.exec(String(subjectRef || "")) || [])[1] || "";
           let r;

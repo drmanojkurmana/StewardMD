@@ -4336,6 +4336,11 @@ test("FHIR: every response is application/fhir+json, a read carries an ETag over
   const cs = await meta.json();
   assert.equal(cs.resourceType, "CapabilityStatement");
   assert.ok(cs.rest[0].resource.find((r) => r.type === "Observation").searchParam.some((p) => p.name === "code"));
+  assert.ok(!cs.rest[0].resource.find((r) => r.type === "Observation").interaction.some((i) => i.code === "create"), "inbound is off: no write is declared");
+  enableInboundFhir();
+  const cs2 = await (await asRaw(DOCTOR, `/ward/fhir/metadata?orgId=${ORG}`)).json();
+  assert.ok(cs2.rest[0].resource.find((r) => r.type === "Observation").interaction.some((i) => i.code === "create"), "inbound on: create is declared on the clinician's door");
+  assert.deepEqual(cs2.rest[0].interaction.map((i) => i.code), ["transaction", "batch"]);
 
   const one = await asRaw(DOCTOR, `/ward/fhir/Encounter/${adm.encounterId}?orgId=${ORG}`);
   assert.match(one.headers.get("content-type"), /^application\/fhir\+json/);
@@ -4600,6 +4605,73 @@ test("FHIR inbound: a dose given elsewhere, an order placed elsewhere and a cons
   assert.equal(consents.__status, 200);
   const shown = consents.consents.find((c) => c.consentId === con.id);
   assert.ok(shown && shown.recordedBy === "external:fhir-partner-his" && shown.status === "granted", JSON.stringify(consents.consents));
+});
+
+test("FHIR inbound: a TRANSACTION is all or nothing, a BATCH is entry by entry, If-None-Exist creates once, and a delete is never done as the nearest thing", async () => {
+  seedHospital(); enableInboundFhir();
+  const asTx = (b, type = "transaction") => ({ ...b, type, entry: b.entry.map((e) => ({ resource: e.resource, request: { method: "POST", url: e.resource.resourceType } })) });
+  // Patient A lands. Then patient B's message reuses one of A's observation ids: a clinical fact moving between
+  // people, held as a patient-mismatch conflict. As a transaction that refuses the WHOLE message.
+  const a = await pushFhir(DOCTOR, `/ward/fhir?orgId=${ORG}`, asTx(partnerBundle({ patientId: "HIS-PAT-A", mrn: "HIS-MRN-A", suffix: "-a" })));
+  assert.equal(a.status, 200, await a.text());
+  const bBundle = partnerBundle({ patientId: "HIS-PAT-B", mrn: "HIS-MRN-B", name: "Other Person", dob: "1990-01-01", abha: "91-9999-9999-9999", suffix: "-b" });
+  bBundle.entry.find((e) => e.resource.resourceType === "Observation").resource.id = "HIS-OBS-1-a"; // A's id
+  const tx = await pushFhir(DOCTOR, `/ward/fhir?orgId=${ORG}`, asTx(bBundle));
+  const txText = await tx.text();
+  assert.equal(tx.status, 409, txText);
+  const oo = JSON.parse(txText);
+  assert.equal(oo.resourceType, "OperationOutcome");
+  assert.match(oo.issue[0].diagnostics, /refused whole.*nothing was written/);
+  assert.equal(await RECORD.latest(TENANT_ROW.id, "Patient", "fhir-partner-his-pat-his-pat-b"), null, "B's patient did not land");
+  assert.equal(await RECORD.latest(TENANT_ROW.id, "Condition", "fhir-partner-his-cond-his-dx-1-b"), null, "nor B's condition");
+  assert.ok((await RECORD.latest(TENANT_ROW.id, "Observation", "fhir-partner-his-obs-his-obs-1-a")).patientId.endsWith("his-pat-a"), "A's observation is untouched");
+  assert.ok((await as(DOCTOR, `/ward/fhir-exceptions?orgId=${ORG}`)).open.some((x) => x.reason === "conflict-patient-mismatch"), "and a person is still asked to look");
+
+  // The same message as a BATCH: everything else lands, the one entry is a 409 in a batch-response.
+  const batch = await pushFhir(DOCTOR, `/ward/fhir?orgId=${ORG}`, asTx({ ...bBundle, id: "his-bundle-b-batch" }, "batch"));
+  const batchText = await batch.text();
+  assert.equal(batch.status, 200, batchText);
+  const bb = JSON.parse(batchText);
+  assert.equal(bb.type, "batch-response");
+  assert.ok(bb.entry.some((e) => /^409/.test(e.response.status)));
+  assert.ok(await RECORD.latest(TENANT_ROW.id, "Condition", "fhir-partner-his-cond-his-dx-1-b"), "B's condition landed this time");
+
+  // A transaction whose entries carry no request is not a transaction (bdl-3), refused by the validator.
+  const noReq = await pushFhir(DOCTOR, `/ward/fhir?orgId=${ORG}`, { ...partnerBundle({ patientId: "HIS-PAT-C", mrn: "HIS-MRN-C", suffix: "-c" }), type: "transaction" });
+  assert.equal(noReq.status, 422);
+  assert.ok((await noReq.json()).issue.some((i) => /bdl-3/.test(i.diagnostics)));
+  // A delete is named and refused, never done as the nearest thing.
+  const del = asTx(partnerBundle({ patientId: "HIS-PAT-D", mrn: "HIS-MRN-D", suffix: "-d" }));
+  del.entry[1].request.method = "DELETE";
+  const delRes = await pushFhir(DOCTOR, `/ward/fhir?orgId=${ORG}`, del);
+  const delText = await delRes.text();
+  assert.equal(delRes.status, 400, delText);
+  assert.match(JSON.parse(delText).issue[0].diagnostics, /DELETE is not supported/);
+
+  // If-None-Exist on a single POST: the first creates, the second finds the first and creates nothing; a condition
+  // that matches two is a 412; and a lie in the condition is a 400, not a create.
+  const pidA = "fhir-partner-his-pat-his-pat-a";
+  const obs = (id, day) => ({ resourceType: "Observation", id, status: "final", category: [{ coding: [{ code: "laboratory" }] }], code: { coding: [{ system: "http://loinc.org", code: "2823-3", display: "Potassium" }] }, subject: { reference: `Patient/${pidA}` }, effectiveDateTime: `2026-08-0${day}T06:00:00Z`, valueQuantity: { value: 4.1, unit: "mmol/L" } });
+  const cond = { "If-None-Exist": "code=http://loinc.org|2823-3&date=2026-08-05" };
+  const first = await pushFhir(DOCTOR, `/ward/fhir/Observation?orgId=${ORG}`, obs("K-1", 5), cond);
+  assert.equal(first.status, 201, await first.text());
+  const second = await pushFhir(DOCTOR, `/ward/fhir/Observation?orgId=${ORG}`, obs("K-2", 5), cond);
+  const secondText = await second.text();
+  assert.equal(second.status, 200, secondText);
+  const sb = JSON.parse(secondText);
+  assert.match(sb.entry[0].response.location, /Observation\/fhir-partner-his-obs-k-1\/_history\/1$/, "the existing one is the answer");
+  assert.equal(await RECORD.latest(TENANT_ROW.id, "Observation", "fhir-partner-his-obs-k-2"), null, "and nothing was created");
+  const third = await pushFhir(DOCTOR, `/ward/fhir/Observation?orgId=${ORG}`, obs("K-3", 6));
+  assert.equal(third.status, 201);
+  const ambiguous = await pushFhir(DOCTOR, `/ward/fhir/Observation?orgId=${ORG}`, obs("K-4", 5), { "If-None-Exist": "code=http://loinc.org|2823-3" });
+  assert.equal(ambiguous.status, 412, await ambiguous.text());
+  assert.equal(await RECORD.latest(TENANT_ROW.id, "Observation", "fhir-partner-his-obs-k-4"), null);
+  const bad = await pushFhir(DOCTOR, `/ward/fhir/Observation?orgId=${ORG}`, obs("K-5", 5), { "If-None-Exist": "performer=x" });
+  assert.equal(bad.status, 400);
+  // Prefer: return=minimal keeps the resources out of the response.
+  const minimal = await pushFhir(DOCTOR, `/ward/fhir/Observation?orgId=${ORG}`, obs("K-6", 7), { Prefer: "return=minimal" });
+  assert.equal(minimal.status, 201);
+  assert.ok((await minimal.json()).entry.every((e) => !e.resource));
 });
 
 test("FHIR ids: a canonical id longer than R4 allows is exported hashed, read back by that hash, searchable by its canonical id, and referenced consistently", async () => {
@@ -5279,13 +5351,13 @@ test("MALFORMED INPUT is refused with an OperationOutcome naming the fault, and 
   const noId = await raw(JSON.stringify({ resourceType: "Bundle", entry: [{ resource: { resourceType: "Patient", id: "p" } }, { resource: { resourceType: "Observation" } }] }));
   assert.equal(noId.status, 400);
   assert.match((await noId.json()).issue[0].diagnostics, /has no id/);
-  const noPatient = await raw(JSON.stringify({ resourceType: "Bundle", entry: [{ resource: { resourceType: "Observation", id: "o1", status: "final", code: { text: "x" } } }] }));
+  const noPatient = await raw(JSON.stringify({ resourceType: "Bundle", type: "collection", entry: [{ resource: { resourceType: "Observation", id: "o1", status: "final", code: { text: "x" } } }] }));
   assert.equal(noPatient.status, 400);
   assert.match((await noPatient.json()).issue[0].diagnostics, /must carry the Patient/);
   // A non-conformant resource is a 422 naming the path, before identity or content is considered.
-  const nonConformant = await raw(JSON.stringify({ resourceType: "Bundle", entry: [{ resource: { resourceType: "Patient", id: "p", name: [{ text: "X" }] } }, { resource: { resourceType: "Observation", id: "o1", subject: { reference: "Patient/p" } } }] }));
+  const nonConformant = await raw(JSON.stringify({ resourceType: "Bundle", type: "collection", entry: [{ resource: { resourceType: "Patient", id: "p", name: [{ text: "X" }] } }, { resource: { resourceType: "Observation", id: "o1", subject: { reference: "Patient/p" } } }] }));
   assert.equal(nonConformant.status, 422);
-  assert.ok((await nonConformant.json()).issue.some((i) => i.code === "required" && /Observation\/o1: Observation\.status/.test(i.expression[0])));
+  assert.ok((await nonConformant.json()).issue.some((i) => i.code === "required" && /Bundle\.entry\[1\]\.resource\.status/.test(i.expression[0])));
   // A resource with no id cannot be attributed or replayed safely, whatever type it is.
   const noIdPatient = await raw(JSON.stringify({ resourceType: "Patient", name: [{ text: "Nobody" }] }));
   assert.equal(noIdPatient.status, 400);

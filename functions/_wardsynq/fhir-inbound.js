@@ -52,7 +52,8 @@ import { makeSafeFetch } from "../_connect/onboard/net.js";
 import { resolveClinicalActor } from "./actor.js";
 import { RecordService, NATIVE_SYSTEM } from "./service.js";
 import { AuthError, PermissionError } from "../_connect/permission.js";
-import { CANONICAL_TYPE, FHIR_TYPE, toFhir, operationOutcome, resolveId } from "./fhir.js";
+import { CANONICAL_TYPE, FHIR_TYPE, toFhir, operationOutcome, resolveId, SEARCH_POOL } from "./fhir.js";
+import { parseSearch, applySearch } from "./fhir-search.js";
 
 const str = (v) => (v == null ? "" : String(v).trim());
 const slug = (v) => str(v).toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
@@ -145,14 +146,28 @@ function sourceSystemOf(headerValue, body) {
 function splitBundle(body) {
   const problems = [];
   const resources = [];
+  const requests = new Map();
   let patient = null;
   let items = [];
+  const bundleType = body && body.resourceType === "Bundle" ? str(body.type) : "";
   if (body && body.resourceType === "Bundle") {
     const entries = Array.isArray(body.entry) ? body.entry : [];
     // An entry with no resource is named, not skipped: a sender counting entries would believe it landed.
     const empty = entries.filter((e) => !e || !e.resource || typeof e.resource !== "object").length;
     if (empty) problems.push({ reason: REASON.INVALID, detail: `${empty} bundle entr${empty === 1 ? "y has" : "ies have"} no resource` });
-    items = entries.map((e) => e && e.resource).filter((r) => r && typeof r === "object");
+    for (const e of entries) {
+      if (!e || !e.resource || typeof e.resource !== "object") continue;
+      items.push(e.resource);
+      /* A transaction or batch entry says what it wants done. POST creates, PUT updates (with the
+       * version it read, when it says); anything else is not something this server does to a record,
+       * and is named rather than carried out as the nearest thing. */
+      const req = e.request && typeof e.request === "object" ? e.request : null;
+      if (req) {
+        const method = str(req.method).toUpperCase();
+        if (method && method !== "POST" && method !== "PUT") problems.push({ reason: REASON.INVALID, detail: `${str(e.resource.resourceType)}/${str(e.resource.id)}: request.method ${method} is not supported; this server creates and updates only`, resourceType: str(e.resource.resourceType), id: e.resource.id || null });
+        requests.set(`${str(e.resource.resourceType)}/${str(e.resource.id)}`, { method: method || "POST", ifNoneExist: str(req.ifNoneExist) || null, ifMatch: str(req.ifMatch) || null, url: str(req.url) || null });
+      }
+    }
   } else if (body && body.resourceType) {
     items = [body];
   }
@@ -167,7 +182,23 @@ function splitBundle(body) {
       patient = r;
     } else resources.push(r);
   }
-  return { patient, resources, problems };
+  return { patient, resources, problems, requests, bundleType, atomic: bundleType === "transaction" };
+}
+
+/**
+ * PURE. A conditional create decided: `If-None-Exist` is a search over what is already here, and
+ *   0 matches -> create; 1 match -> nothing to do, that one is the answer; more -> the sender's
+ *   condition is ambiguous and the request cannot be honoured (412).
+ * `rows` are the FHIR resources the caller may see (through the governed reads). A match NEVER links
+ * or overwrites: the incoming resource is simply not created.
+ */
+function evaluateIfNoneExist(fhirType, query, rows, ctx) {
+  const { query: q, problems } = parseSearch(fhirType, query);
+  if (problems.length) return { outcome: "invalid", problems };
+  const matched = applySearch(rows || [], q, ctx || {});
+  if (!matched.length) return { outcome: "create", matches: [] };
+  if (matched.length === 1) return { outcome: "exists", matches: matched };
+  return { outcome: "ambiguous", matches: matched };
 }
 
 /** PURE. The code-bearing fields per canonical type, so terminology marking is table-driven. */
@@ -367,7 +398,7 @@ async function ingestFhir(request, env, ctx) {
   if (system === NATIVE_SYSTEM || system === "wardsynq-native") return { ok: false, status: 400, outcome: operationOutcome("error", "invalid", "a feed cannot claim to be this hospital") };
   const adapterSystem = `fhir-${system}`;
 
-  const { patient, resources, problems } = splitBundle(ctx.body);
+  const { patient, resources, problems, requests, bundleType, atomic } = splitBundle(ctx.body);
   const fatal = problems.filter((p) => p.reason === REASON.INVALID);
   if (fatal.length) return { ok: false, status: 400, outcome: { resourceType: "OperationOutcome", issue: fatal.map((p) => ({ severity: "error", code: "invalid", diagnostics: p.detail })) } };
 
@@ -375,10 +406,18 @@ async function ingestFhir(request, env, ctx) {
    * any profile the hospital loaded) first; a request with one non-conformant resource is refused
    * WHOLE as a 422 naming every issue at its path, because half a bundle filed is half a story on a
    * chart. Unsupported types were named above and are not validated: they are not filed either. */
-  const conformance = [patient, ...resources].filter(Boolean).map((r) => ({ r, v: validateResource(r, { profiles: ctx.profiles || null }) })).filter((x) => !x.v.valid);
-  if (conformance.length) {
-    return { ok: false, status: 422, outcome: { resourceType: "OperationOutcome", issue: conformance.flatMap((x) => x.v.issues.filter((i) => i.severity === "error" || i.severity === "fatal").map((i) => ({ ...i, expression: i.expression.map((p) => `${x.r.resourceType}/${x.r.id}: ${p}`) }))) } };
+  const isError = (i) => i.severity === "error" || i.severity === "fatal";
+  let conformanceIssues = [];
+  if (ctx.body && ctx.body.resourceType === "Bundle") {
+    /* The Bundle itself is validated - its type, its entries' requests (bdl-3), unique fullUrls -
+     * and every entry resource with it, at its path. Entries of a type this server deliberately does
+     * not import were named above and are not filed; their internals are not judged. */
+    const unsupported = new Set((Array.isArray(ctx.body.entry) ? ctx.body.entry : []).map((e, i) => (e && e.resource && str(e.resource.resourceType) && !INBOUND_TYPES.includes(str(e.resource.resourceType)) ? i : -1)).filter((i) => i >= 0));
+    conformanceIssues = validateResource(ctx.body, { profiles: ctx.profiles || null }).issues.filter(isError).filter((i) => { const m = /^Bundle\.entry\[(\d+)\]\.resource/.exec(str(i.expression && i.expression[0])); return !(m && unsupported.has(Number(m[1]))); });
+  } else {
+    conformanceIssues = [patient, ...resources].filter(Boolean).flatMap((r) => validateResource(r, { profiles: ctx.profiles || null }).issues.filter(isError).map((i) => ({ ...i, expression: i.expression.map((p) => `${r.resourceType}/${r.id}: ${p}`) })));
   }
+  if (conformanceIssues.length) return { ok: false, status: 422, outcome: { resourceType: "OperationOutcome", issue: conformanceIssues } };
   if (!patient && ctx.mode === "bundle") return { ok: false, status: 400, outcome: operationOutcome("error", "required", "a bundle must carry the Patient its resources belong to; a resource with no patient cannot be filed") };
 
   /* A single-resource PUT names its target. The body's id must be the sender's own id for that
@@ -550,36 +589,115 @@ async function ingestFhir(request, env, ctx) {
     }
   }
 
+  /* PER-ENTRY REQUEST SEMANTICS: the entry's own If-Match against the current version, and
+   * If-None-Exist as a search over what the actor may already see. Decided BEFORE anything is
+   * written, so a transaction can refuse whole. The header form of If-None-Exist applies to the one
+   * resource a POST {Type} carries. A match never links and never overwrites: the incoming row is
+   * simply not created, and the existing one is the answer. */
+  const requestFor = (entity) => {
+    const fhirType = FHIR_TYPE[entity.resourceType] || entity.resourceType;
+    const srcId = str(entity.meta && entity.meta.source && entity.meta.source.sourceId);
+    const fromBundle = requests && requests.get(`${fhirType}/${srcId}`);
+    if (fromBundle) return fromBundle;
+    if (ctx.mode === "create" && str(ctx.ifNoneExist) && fhirType === str(ctx.targetType)) return { method: "POST", ifNoneExist: str(ctx.ifNoneExist), ifMatch: null, url: null };
+    return null;
+  };
+  const preconditions = [];   // {entity, status, outcome, location?}
+  const keep = [];
+  for (const e of writable) {
+    const req = requestFor(e);
+    if (!req) { keep.push(e); continue; }
+    const fhirType = FHIR_TYPE[e.resourceType] || e.resourceType;
+    if (req.method === "PUT" && req.ifMatch) {
+      const want = req.ifMatch.replace(/^W\//, "").replace(/"/g, "");
+      const cur = e._currentVersion || 0;
+      if (String(cur) !== want) { preconditions.push({ entity: e, status: "412 Precondition Failed", outcome: operationOutcome("error", "conflict", `${fhirType}/${e.id}: If-Match names version ${want}; the record is at version ${cur}`) }); continue; }
+    }
+    if (req.ifNoneExist && !e._currentVersion) {
+      let rows = [];
+      try {
+        const canonical = e.resourceType;
+        const pid = canonical === "Patient" ? null : str(e.patientId);
+        const list = canonical === "Patient" ? await svc.list("Patient", SEARCH_POOL) : (pid ? await svc.byPatient(canonical, pid) : []);
+        rows = (list || []).map(toFhir).filter(Boolean);
+      } catch { rows = []; }
+      const v = evaluateIfNoneExist(fhirType, req.ifNoneExist, rows);
+      if (v.outcome === "invalid") { preconditions.push({ entity: e, status: "400 Bad Request", outcome: { resourceType: "OperationOutcome", issue: v.problems.map((p) => ({ severity: "error", code: "not-supported", diagnostics: `If-None-Exist ${p.param}: ${p.reason}` })) } }); continue; }
+      if (v.outcome === "ambiguous") { preconditions.push({ entity: e, status: "412 Precondition Failed", outcome: operationOutcome("error", "multiple-matches", `${fhirType}/${e.id}: If-None-Exist "${req.ifNoneExist}" matches ${v.matches.length} resources; the condition is ambiguous`) }); continue; }
+      if (v.outcome === "exists") {
+        const m = v.matches[0];
+        preconditions.push({ entity: e, status: "200 OK", location: `${str(ctx.base)}/${m.resourceType}/${m.id}/_history/${str(m.meta && m.meta.versionId) || "1"}`, etag: m.meta && m.meta.versionId ? `W/"${m.meta.versionId}"` : undefined, existing: m });
+        continue;
+      }
+    }
+    keep.push(e);
+  }
+  writable = keep;
+  const failedPreconditions = preconditions.filter((p) => !/^200/.test(p.status));
+
+  /* A TRANSACTION IS ALL OR NOTHING. Anything that would have been a per-entry failure - an
+   * ownership conflict, a failed precondition - refuses the whole request as one OperationOutcome,
+   * and no clinical row is written. The exceptions raised for the conflicts still stand: a person
+   * must still look, and the sender is told where. Governance refusals are decided inside putMany
+   * before anything is staged, for the same reason. */
   const entries = [];
   for (const c of conflicts) {
     const exId = await raise(c.reason, { patientId: c.entity.patientId || null, conflict: c.current, entityRefs: [`${c.entity.resourceType}/${c.entity.id}`],
       detail: c.reason === REASON.CONFLICT_LOCAL_AUTHORITATIVE ? "this hospital authored the current version; a feed does not overwrite it" : `another feed (${c.current.source}) authored the current version` });
     entries.push({ response: { status: "409 Conflict", outcome: operationOutcome("error", "conflict", `${c.entity.resourceType}/${c.entity.id}: ${c.reason}; see ExchangeException/${exId}`) } });
   }
+  for (const p of preconditions) {
+    if (/^200/.test(p.status)) entries.push({ response: { status: p.status, location: p.location, etag: p.etag }, resource: p.existing });
+    else entries.push({ response: { status: p.status, outcome: p.outcome } });
+  }
+  const preconditionStatus = failedPreconditions.length ? (failedPreconditions.some((p) => /^400/.test(p.status)) ? 400 : 412) : null;
+  if (atomic && (conflicts.length || failedPreconditions.length)) {
+    const issue = [...conflicts.map((c) => ({ severity: "error", code: "conflict", diagnostics: `${c.entity.resourceType}/${c.entity.id}: ${c.reason}` })), ...failedPreconditions.flatMap((p) => p.outcome.issue)];
+    return { ok: false, status: conflicts.length ? 409 : preconditionStatus, outcome: { resourceType: "OperationOutcome", issue: [{ severity: "error", code: "processing", diagnostics: `transaction refused whole: ${conflicts.length} conflict(s), ${failedPreconditions.length} failed precondition(s); nothing was written` }, ...issue] } };
+  }
 
   const written = [];
-  for (const e of [...writable].sort(byDependency)) {
+  const ordered = [...writable].sort(byDependency);
+  const describe = (e, rec) => {
     const { _currentVersion, _acceptedOver, ...entity } = e;
+    const f = toFhir({ ...entity, ...rec });
+    const fhirType = FHIR_TYPE[entity.resourceType] || entity.resourceType;
+    const version = rec && rec.version != null ? rec.version : (_currentVersion ? _currentVersion + 1 : 1);
+    written.push({ resourceType: entity.resourceType, id: entity.id, version });
+    return { response: { status: _currentVersion ? "200 OK" : "201 Created", location: `${str(ctx.base)}/${fhirType}/${entity.id}/_history/${version}`, etag: `W/"${version}"`, lastModified: now }, ...(f && ctx.prefer !== "minimal" ? { resource: f } : {}) };
+  };
+  if (atomic) {
+    const bare = ordered.map(({ _currentVersion, _acceptedOver, ...entity }) => entity);
     try {
-      const saved = await ingest.put(adapterActor, entity);
-      const rec = saved && saved.record ? saved.record : (saved || entity);
-      const f = toFhir({ ...entity, ...rec });
-      const fhirType = FHIR_TYPE[entity.resourceType] || entity.resourceType;
-      const version = rec && rec.version != null ? rec.version : (_currentVersion ? _currentVersion + 1 : 1);
-      written.push({ resourceType: entity.resourceType, id: entity.id, version });
-      entries.push({ response: { status: _currentVersion ? "200 OK" : "201 Created", location: `${str(ctx.base)}/${fhirType}/${entity.id}/_history/${version}`, etag: `W/"${version}"`, lastModified: now }, ...(f ? { resource: f } : {}) });
+      const saved = await ingest.putMany(adapterActor, bare);
+      ordered.forEach((e, i) => { const s = saved && saved[i]; entries.push(describe(e, s && s.record ? s.record : (s || bare[i]))); });
     } catch (err) {
       const code = err instanceof GovernanceError ? "forbidden" : "exception";
-      entries.push({ response: { status: err instanceof GovernanceError ? "403 Forbidden" : "500 Internal Server Error", outcome: operationOutcome("error", code, `${entity.resourceType}/${entity.id}: ${str(err && err.message)}`) } });
+      const reasons = err instanceof GovernanceError && Array.isArray(err.reasons) ? err.reasons : [];
+      return { ok: false, status: err instanceof GovernanceError ? 403 : 500, outcome: { resourceType: "OperationOutcome", issue: [
+        { severity: "error", code, diagnostics: `transaction refused whole: ${str(err && err.message)}; nothing was written` },
+        ...reasons.map((r) => ({ severity: "error", code: "forbidden", diagnostics: `${r.resourceType}/${r.id}: ${r.message}` })),
+      ] } };
+    }
+  } else {
+    for (const e of ordered) {
+      const { _currentVersion, _acceptedOver, ...entity } = e;
+      try {
+        const saved = await ingest.put(adapterActor, entity);
+        entries.push(describe(e, saved && saved.record ? saved.record : (saved || entity)));
+      } catch (err) {
+        const code = err instanceof GovernanceError ? "forbidden" : "exception";
+        entries.push({ response: { status: err instanceof GovernanceError ? "403 Forbidden" : "500 Internal Server Error", outcome: operationOutcome("error", code, `${entity.resourceType}/${entity.id}: ${str(err && err.message)}`) } });
+      }
     }
   }
 
-  const status = ctx.mode === "create" ? (written.length ? 201 : (conflicts.length ? 409 : 422))
+  const status = ctx.mode === "create" ? (written.length ? 201 : (preconditions.some((p) => /^200/.test(p.status)) ? 200 : (conflicts.length ? 409 : (preconditionStatus || 422))))
     : ctx.mode === "update" ? (written.length ? 200 : 409)
     : 200;
   return {
-    ok: true, status, system: adapterSystem, linkedTo, written, conflicts: conflicts.length, issues,
-    bundle: { resourceType: "Bundle", type: "transaction-response", entry: entries,
+    ok: true, status, system: adapterSystem, linkedTo, written, conflicts: conflicts.length, issues, preconditions: preconditions.length,
+    bundle: { resourceType: "Bundle", type: bundleType === "batch" ? "batch-response" : "transaction-response", entry: entries,
       ...(issues.length ? { meta: { tag: issues.map((i) => ({ system: "urn:stewardmd:fhir:issue", code: str(i.code), display: str(i.message) })) } } : {}) },
   };
 }
@@ -707,7 +825,7 @@ async function listExceptions(request, env, ctx) {
 
 export {
   EXCEPTION_TYPE, DECISION_TYPE, REASON, RESOLUTION, INBOUND_TYPES, CODE_FIELDS,
-  inboundEnabled, sourceSystemOf, splitBundle, markTerminology, markTerminologyWithService, reconcileIdentity, rebind, partitionConflicts,
+  inboundEnabled, sourceSystemOf, splitBundle, evaluateIfNoneExist, markTerminology, markTerminologyWithService, reconcileIdentity, rebind, partitionConflicts,
   ExchangeException, ExchangeIdentityDecision, priorDecision,
   ingestFhir, listExceptions, resolveException,
 };

@@ -539,15 +539,23 @@ function capabilityStatement(opts) {
       /* Derived from the SAME tables the search parser reads (fhir-search.js), so what is declared
        * here is what actually parses. A CapabilityStatement maintained by hand drifts the first time
        * either side changes, and a client trusts the declaration. */
+      /* Writes are declared ONLY on the door and the hospital that has them: the clinician's door
+       * with wardsynq.fhir.inbound enabled. The external SMART door is read-only and says so. */
+      interaction: o.inbound ? [{ code: "transaction", documentation: "all or nothing: one refusal refuses the whole Bundle and nothing is written" }, { code: "batch" }] : undefined,
       resource: [
         ...Object.values(FHIR_TYPE).map((t) => {
           const d = declaredSearch(t);
+          const writes = o.inbound && INBOUND_FHIR_TYPES.includes(t);
           return clean({
             type: t,
             versioning: "versioned",
             readHistory: true,
-            // READ, VREAD, HISTORY and SEARCH. No create, no update, no delete - and nothing implies otherwise.
-            interaction: [{ code: "read" }, { code: "vread" }, { code: "history-instance" }, { code: "search-type" }],
+            // READ, VREAD, HISTORY and SEARCH always. CREATE and UPDATE only where the inbound door is open; never delete.
+            interaction: [{ code: "read" }, { code: "vread" }, { code: "history-instance" }, { code: "search-type" }, ...(writes ? [{ code: "create" }, { code: "update", documentation: "If-Match is required" }] : [])],
+            updateCreate: writes ? false : undefined,
+            conditionalCreate: writes ? true : undefined,
+            conditionalUpdate: writes ? false : undefined,
+            conditionalDelete: writes ? "not-supported" : undefined,
             searchParam: d.params,
             searchInclude: d.includes.length ? d.includes : undefined,
             searchRevInclude: d.revIncludes.length ? d.revIncludes : undefined,
@@ -767,6 +775,9 @@ async function readResource(request, env, ctx) {
 /** How many of a type one search may consider. Stated in the bundle when it bites. */
 const SEARCH_POOL = 1000;
 
+/** The FHIR types the inbound door accepts. Kept here (not imported from fhir-inbound.js, which imports this file). */
+const INBOUND_FHIR_TYPES = Object.freeze(["Patient", "Encounter", "Condition", "Observation", "MedicationRequest", "AllergyIntolerance", "DiagnosticReport", "DocumentReference", "MedicationAdministration", "ServiceRequest", "Consent"]);
+
 /** PURE. The patient id a FHIR resource belongs to: itself for a Patient, else its compartment reference. */
 function compartmentOf(r) {
   if (!r) return "";
@@ -970,7 +981,7 @@ async function provenanceSearch(request, env, ctx) {
 }
 
 export {
-  SYSTEM_URI, UNCODED, MAPPERS, FHIR_TYPE, CANONICAL_TYPE, SEARCH_POOL, SOURCE_URN, EXT_TERMINOLOGY_STATUS, PARTICIPANT,
+  SYSTEM_URI, UNCODED, MAPPERS, FHIR_TYPE, CANONICAL_TYPE, SEARCH_POOL, INBOUND_FHIR_TYPES, SOURCE_URN, EXT_TERMINOLOGY_STATUS, PARTICIPANT,
   systemUriFor, codeable, identifier, withMeta, toFhir, bundle, capabilityStatement, operationOutcome,
   fhirPatient, fhirEncounter, fhirCondition, fhirAllergy, fhirObservation,
   fhirMedicationRequest, fhirMedicationAdministration, fhirServiceRequest,
