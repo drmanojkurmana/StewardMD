@@ -209,6 +209,76 @@ number that had drifted about two points high.
 Every percentage here is a judgement, and the judgement that matters most is the one in section 1:
 **a system proven only by tests has not been proven on a ward.**
 
+## FHIR R4: the strict capability audit (2026-09-08, after #954-#959)
+
+The baseline was the audit taken before this work: a read-only export of ten types with `patient` as
+its only search parameter, `application/json` served under a CapabilityStatement that declared
+`application/fhir+json`, no versionId, no history, no Provenance, no Consent, no inbound path (two
+finished halves joined to nothing), no SMART server. FHIR maturity then: about 35 percent of the
+agreed scope. This table is the state after six pull requests, and it is deliberately strict.
+
+**This is not 100 percent, and it is not claimed to be.** The material gaps within the agreed scope
+are listed in the last column and summarised after the table.
+
+| FHIR capability | Implemented | Tested | Production wired | Remaining gap |
+|---|---|---|---|---|
+| read, vread, history-instance, search-type for Patient, Encounter, Condition, Observation, MedicationRequest, MedicationAdministration, ServiceRequest, DiagnosticReport, AllergyIntolerance, DocumentReference, Consent | yes | pure + route | yes - `/api/queue/ward/fhir` for any `org.mode=wardsynq`, staff session | none material |
+| `application/fhir+json` on every response including errors; ETag `W/"versionId"`, Last-Modified; OperationOutcome on every error path incl. 404/405 | yes | route | yes | none |
+| `meta.versionId` = record version, `meta.lastUpdated`, `meta.source` URN naming the originating system | yes | pure + route | yes | none |
+| search: `_id`, `patient`, `_lastUpdated` (+`_since` alias), `date`, `code` (bare, `system\|code`, `:text`), `_count`, `_sort`, paging with self/next/previous links; strict 400 on unknown params, `Prefer: handling=lenient` reports drops in-bundle; a roster search names its pool cap | yes | pure + route | yes | offset paging (keyset when volumes require it); no `_summary`, `_elements`, chained or reverse-chained params, `_has`, composite params |
+| `_include` (report→observations, administration→request, *→patient/encounter), `_revinclude=Provenance:target` | yes | pure + route | yes | no other reverse includes |
+| `Patient/{id}/$everything` | yes | route | yes | no `_since` on the operation |
+| CapabilityStatement derived from the parser's own tables (cannot drift); declares SMART security block when enabled; states vocabulary coverage | yes | pure (walks every declared param through the parser) | yes | not profile-validated, and says so |
+| Provenance: one per VERSION, derived from the store's stamp (author vs assembler, onBehalfOf for AI/adapters, source entity with the sender's id); read by id, search by target (required), `_revinclude` | yes | pure + route | yes | derived, never stored; `agent.who` is a display, not a Practitioner reference (no Practitioner resource exists) |
+| Consent export from PatientConsent (refusal = rejected + deny provision) | yes | pure + route | yes | no inbound Consent |
+| Identifiers with system URIs and v2-0203 types; MRN under our namespace only for native records, the sender's namespace for imported ones | yes | pure + route | yes | none |
+| Terminology registry (`terminology.js`): one place for systems (LOINC, SNOMED, ICD-10/-10-CM/-11, RxNorm, ATC, UCUM, NDC); 34 verified LOINC codes; unmapped codings kept verbatim under the sender's system with an extension | yes | pure + route | yes | 34 verified codes only; no code validation against any LOINC/SNOMED/ICD release (none shipped) - a recognised system with an unverified code is `recognised`, never `verified` |
+| Inbound create: `POST /fhir` (Bundle), `POST /fhir/{Type}`; update `PUT /fhir/{Type}/{id}` with If-Match (412 without, 409 stale); through normalizeFhir → SCCM → sccmAdapter → governedForIngest; sender in id prefix, `meta.source` and adapter actor; clinician as `onBehalfOf` | yes | pure + route (partner bundle end to end) | behind `wardsynq.fhir.inbound.enabled` (default off), clinician `emr.treat` door | no conditional create/update (`If-None-Exist`); a `transaction` Bundle is processed entry by entry with per-entry outcomes, NOT atomically; no DELETE; inbound types are Patient, Encounter, Condition, Observation, MedicationRequest/Statement, AllergyIntolerance, DiagnosticReport, DocumentReference - MedicationAdministration, ServiceRequest, Consent, Provenance are export-only and are reported as unsupported on the way in |
+| Identity reconciliation: deterministic identifier match links (writes no Patient; local demographics authoritative); ambiguous or probable held WHOLE; source-id-as-MRN guard; per tenant; a person's decision recorded once and consulted first | yes | pure + route | behind inbound flag | probable matches are always held (by design); no national MPI |
+| Exception queue + resolution: link / create / reject / accept-feed / keep-local, reason required, `emr.treat`, append-only, re-drive through the same pipeline | yes | route | behind inbound flag | API only - no screen in ward.js yet |
+| Conflict handling: local-authoritative, other-source, patient-mismatch (never overridable), If-Match version | yes | pure + route | behind inbound flag | none |
+| Idempotency by content digest (never by id); replay lands nothing | yes | route | behind inbound flag | none |
+| SMART on FHIR server: `.well-known/smart-configuration`, authorize (PKCE S256 required, exact redirect match, errors about client/redirect never redirected), token (authorization_code; client_credentials with private_key_jwt RS256/ES256 against REGISTERED jwks, iss/sub/aud/exp≤5min/jti checked, jti replay refused), revoke (RFC 7009 shape); scopes never widened; bearer → READ-tier actor with empty write scope; tokens hashed at rest, code spent on exchange | yes | pure (real ES256 assertion) + route | `/api/fhir/{orgId}` deployed; behind `wardsynq.fhir.smart.enabled` with clients registered in org config (default off) | no EHR/standalone launch context, no `patient/` scopes, no refresh tokens, no OpenID Connect `id_token`, no `jwks_uri` fetching (inline jwks only), no consent screen (the clinician's own session authorises), no dynamic client registration, no SMART writes |
+| Rate limiting on authorize/token per client with Retry-After | yes | pure + route | memory store per isolate unless `WSQ_RL_KV` is bound (not yet in wrangler.toml) | not on the clinician write door |
+| Audit / observability: `record.read`/`list`/`ingest` per row with actor and source; `smart.authorize`/`token`/`token.denied`/`revoke`; PHI-free; token never logged | yes | route | yes | no metrics, latency or dashboard - the audit trail is the observability |
+| Tenant isolation at both doors (chart, import, token) | yes | route (two tenants) | yes | none |
+| Malformed input: non-JSON, entry without resource, resource without id, bundle without Patient, single resource with no local subject → OperationOutcome, nothing written | yes | route | yes | no StructureDefinition/profile validation |
+| Round trip WardSynQ → external EMR → WardSynQ, field for field (Patient, Encounter, Condition, Observation, MedicationRequest, DiagnosticReport, DocumentReference, Provenance) | yes | route | - | MedicationAdministration and AllergyIntolerance are one-directional in the test (export-only / inbound-tested only) |
+| Outbound FHIR client (pull), SMART client, ABDM HIP/HIU | exists in Connect | Connect suites | behind `CONNECT_FLAG` + `CONNECT_FHIR_FLAG`, both unset in wrangler.toml | Connect's normalised output is not auto-piped into WardSynQ: the join is the inbound door, which a caller POSTs to; ABDM serves FollowCare only, no WardSynQ hip-source |
+
+**Honest maturity within the agreed scope: about 85 percent implemented, all of it tested, and all
+of it deployed behind flags that default off** except the read side, which was already live. What
+would make it 100: conditional operations and an atomic `transaction` Bundle; SMART launch context,
+`patient/` scopes and a consent screen; inbound MedicationAdministration and Consent; and a
+terminology release to validate codes against. None of those was quietly redefined out of scope.
+
+**Can WardSynQ now exchange a real patient's record with another standards-compliant FHIR EMR?**
+Outbound: yes, today, from any hospital running in `wardsynq` mode - a compliant client can pull a
+patient's chart with Provenance and Consent, page it, and filter it. Inbound: yes, once the hospital
+enables `wardsynq.fhir.inbound` - and it will hold rather than guess. Via an external application:
+yes, once `wardsynq.fhir.smart` is enabled with a client registered by name.
+
+Defects in SHARED infrastructure that this work exposed and fixed, none of which any test had
+caught because no code path ran the halves together: Connect's normaliser dropped
+`Patient.identifier` entirely and dropped `Encounter.period`; the SCCM adapter passed a name
+object into a string constructor and refused every FHIR patient, and did not recognise the v2
+`MR` type; an imported patient's MRN was exported under this hospital's own MRN namespace; the
+`DocumentReference` export carried a title and no words; and a stale `If-Match` PUT was silently
+treated as a replay because idempotency keyed on the resource id. The last three were in code this
+session wrote.
+
+### HL7 v2 (deferred by the owner on 2026-09-08 - after the core EMR/UI; recorded here so it is built right)
+
+HL7 v2 must NOT become a second clinical model. The design that fits what now exists: listener →
+parser → per-hospital Integration Profile (which segments, which Z-segments, which code tables) →
+an HL7v2 → SCCM normaliser beside `fhir-r4/normalize.js` → the SAME `sccmAdapter` → the SAME
+inbound pipeline (`ingestFhir`'s identity reconciliation, ownership partition, terminology marking,
+exception queue, provenance, idempotency), so ADT A01/A02/A03/A08 and ORU R01 land through exactly
+the doors a FHIR bundle does. ACK/NACK at the listener, with an AE for anything held; unknown and
+Z-segments preserved verbatim on the exception or the record's source coding and NEVER interpreted;
+the dead-letter queue IS `ExchangeException`. A blind listener that wrote what it parsed would be a
+second clinical model with a pipe symbol in it.
+
 ## No longer excluded (owner, 2026-09-08: "nothing is excluded")
 
 Billing/claims, the patient portal, on-premise deployment, DICOM/PACS and regulatory certification
