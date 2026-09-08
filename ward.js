@@ -870,6 +870,9 @@
         // ONCqis is a separate product; this is only the LINK into it. Reachable from any patient
         // because oncology is a workflow layered on the ordinary chart, not a ward of its own.
         '<button class="w-btn ghost" data-w-act="oncologyopen" title="ONCqis link, diagnosis, adverse events, chemo administration">' + ms("labs") + "Oncology</button>" +
+        // KardiQ X is a separate product; this is only the LINK into it. Reachable from any
+        // patient for the same reason oncology is - a layered workflow, not a ward of its own.
+        '<button class="w-btn ghost" data-w-act="cardiologyopen" title="KardiQ X link and ECG reference">' + ms("monitor_heart") + "Cardiology</button>" +
         // The patient's own copy. Reachable from the patient because that is where the conversation
         // that produces it happens, not from a menu somewhere else.
         '<button class="w-btn ghost" data-w-act="pcopy" title="The copy this patient can be given">' + ms("assignment_ind") + "Patient copy</button></div>";
@@ -1275,6 +1278,40 @@
       '<p class="w-hint">' + ms("info") + "This documents what a cycle's administration was; it does not re-run the bedside five-rights scan, which stays on the ordinary eMAR." + "</p></div>";
   }
 
+  function cardiologyView(state) {
+    var tl = (state.cardiology && state.cardiology.timeline) || null;
+    var linkRows = ((tl && tl.links) || []).map(function (l) {
+      return "<li><b>" + esc(l.kardioxRecordId) + "</b><span>mrn " + esc(l.mrn) + "</span></li>";
+    }).join("");
+    var ecgRows = ((tl && tl.ecgs) || []).map(function (e) {
+      return "<li><b>" + esc(e.verdict) + "</b><span>" +
+        (e.heartScore != null ? "HEART " + esc(e.heartScore) + " &middot; " : "") +
+        (e.timiScore != null ? "TIMI " + esc(e.timiScore) + " &middot; " : "") +
+        '<span class="w-st overdue">unvalidated AI output</span> &middot; ' + when(e.capturedAt || e.recordedAt) + "</span></li>";
+    }).join("");
+
+    return '<div class="w-chart-h"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button>" +
+      "<div><b>Cardiology</b><small>" + esc((state.sel && state.sel.patientId) || "") + "</small></div>" +
+      '<button class="w-ic" data-w-act="cardiologyload" title="Refresh">' + ms("refresh") + "</button></div>" +
+
+      '<div class="w-card"><div class="w-card-h">' + ms("link") + "<h3>KardiQ X record link</h3></div>" +
+      (linkRows ? '<ul class="w-mini">' + linkRows + "</ul>" : '<p class="w-empty">No KardiQ X record linked.</p>') +
+      '<div class="w-grid">' +
+      '<label class="w-f"><span>KardiQ X record id</span><input id="wCardioRecordId" type="text" autocomplete="off"></label>' +
+      "</div>" +
+      '<button class="w-btn go" data-w-act="cardiolinksave">' + ms("link") + "Link record</button></div>" +
+
+      '<div class="w-card"><div class="w-card-h">' + ms("monitor_heart") + "<h3>ECG reference</h3></div>" +
+      (ecgRows ? '<ul class="w-mini">' + ecgRows + "</ul>" : '<p class="w-empty">No ECG reference recorded.</p>') +
+      '<div class="w-grid">' +
+      '<label class="w-f"><span>Verdict (from KardiQ X)</span><input id="wCardioVerdict" type="text" autocomplete="off"></label>' +
+      '<label class="w-f"><span>HEART score</span><input id="wCardioHeart" type="text" inputmode="numeric" autocomplete="off"></label>' +
+      '<label class="w-f"><span>TIMI score</span><input id="wCardioTimi" type="text" inputmode="numeric" autocomplete="off"></label>' +
+      "</div>" +
+      '<button class="w-btn go" data-w-act="cardioecgsave">' + ms("save") + "Record ECG reference</button>" +
+      '<p class="w-hint">' + ms("warning") + "KardiQ X is self-declared clinically unvalidated, regulatory-pending. This records its AI verdict as external, unvalidated output - never a validated clinical finding." + "</p></div>";
+  }
+
   /* Open critical results, ABOVE everything else on the chart. A critical result that reaches a
    * chart nobody reads is the oldest preventable death in hospital medicine, and the failure is
    * never the measurement - it is that no named human said "I have seen this". So this sits first,
@@ -1464,6 +1501,7 @@
         : state.view === "surgery" ? surgeryBoardView(state)
         : state.view === "surgerycase" ? surgeryCaseView(state)
         : state.view === "oncology" ? oncologyView(state)
+        : state.view === "cardiology" ? cardiologyView(state)
         : listView(state)) + "</div></div>";
   }
 
@@ -2026,6 +2064,37 @@
       .then(function (r) { if (settle(r, "Administration recorded.")) loadOncology(); else paint(); })
       .catch(function () { st.busy = false; st.err = "Could not record the administration."; paint(); });
   }
+  function cardiologyOpen() {
+    st.view = "cardiology"; st.cardiology = null; paint(); loadCardiology();
+  }
+  function loadCardiology() {
+    var s = st.sel; if (!s) return Promise.resolve();
+    return apiGet("/ward/cardio-timeline?orgId=" + encodeURIComponent(st.orgId) + "&patientId=" + encodeURIComponent(s.patientId))
+      .then(function (r) { st.cardiology = { timeline: r && r.ok ? r.timeline : null }; paint(); })
+      .catch(function () {});
+  }
+  function cardioLinkSave() {
+    var s = st.sel; if (!s) return;
+    var recordId = val("wCardioRecordId");
+    if (!recordId) { st.err = "Enter the KardiQ X record id."; paint(); return; }
+    st.busy = true; paint();
+    apiPost("/ward/cardio-link", { orgId: st.orgId, encounterId: s.encounterId, link: { kardioxRecordId: recordId, mrn: s.mrn || s.patientId } })
+      .then(function (r) { if (settle(r, "Record linked.")) loadCardiology(); else paint(); })
+      .catch(function () { st.busy = false; st.err = "Could not link the record."; paint(); });
+  }
+  function cardioEcgSave() {
+    var s = st.sel; if (!s) return;
+    var verdict = val("wCardioVerdict"), heart = val("wCardioHeart"), timi = val("wCardioTimi");
+    if (!verdict) { st.err = "Enter the KardiQ X verdict."; paint(); return; }
+    var recordId = (st.cardiology && st.cardiology.timeline && st.cardiology.timeline.links[0] && st.cardiology.timeline.links[0].kardioxRecordId) || "";
+    if (!recordId) { st.err = "Link a KardiQ X record first."; paint(); return; }
+    st.busy = true; paint();
+    apiPost("/ward/cardio-ecg", { orgId: st.orgId, patientId: s.patientId, encounterId: s.encounterId, ecg: {
+      kardioxRecordId: recordId, verdict: verdict, heartScore: heart ? Number(heart) : undefined, timiScore: timi ? Number(timi) : undefined,
+    } })
+      .then(function (r) { if (settle(r, "ECG reference recorded.")) loadCardiology(); else paint(); })
+      .catch(function () { st.busy = false; st.err = "Could not record the ECG reference."; paint(); });
+  }
   function edDispose(disposition, extra) {
     var s = st.sel; if (!s) return;
     st.busy = true; paint();
@@ -2489,6 +2558,7 @@
        * one patient's diagnoses left on screen is how the next person gets handed the wrong one. */
       if (st.view === "pcopy") { st.view = "chart"; st.pcopy = null; paint(); return; }
       if (st.view === "oncology") { st.view = "chart"; st.oncology = null; paint(); return; }
+      if (st.view === "cardiology") { st.view = "chart"; st.cardiology = null; paint(); return; }
       // Picking a bed to admit an ED patient opens the SAME bed board a fresh admission uses;
       // backing out of it returns to that patient's ED chart, not the ward list, and drops the
       // pending admit rather than leaving it to fire on some later, unrelated bed pick.
@@ -2501,7 +2571,7 @@
       st.flowsheet = null; st.news2 = null; st.investigations = null; st.results = null; st.resusBundles = null;
       st.ed = null; st.edArrivalOpen = false; st.edMrnLookup = null; st.edMrnLookupErr = "";
       st.surgBoard = null; st.surgCase = null; st.surgBookOpen = false; st.surgMrnLookup = null; st.surgMrnLookupErr = ""; st.surgErr = "";
-      st.maternity = null; st.admitClass = ""; st.ageBand = null; st.lines = null; st.rateResult = null; st.oncology = null;
+      st.maternity = null; st.admitClass = ""; st.ageBand = null; st.lines = null; st.rateResult = null; st.oncology = null; st.cardiology = null;
       paint(); return;
     }
     if (cmd === "board") { loadBoard(); return; }
@@ -2520,7 +2590,7 @@
       if (!p) return;
       st.sel = p; st.view = "chart"; st.due = []; st.prn = []; st.unscheduled = []; st.problems = []; st.criticals = []; st.balance = null; st.outbox = [];
       st.flowsheet = null; st.news2 = null; st.investigations = null; st.results = null;
-      st.err = ""; st.note = ""; st.refusal = null; st.devices = null; st.maternity = null; st.ageBand = null; st.lines = null; st.rateResult = null; st.oncology = null;
+      st.err = ""; st.note = ""; st.refusal = null; st.devices = null; st.maternity = null; st.ageBand = null; st.lines = null; st.rateResult = null; st.oncology = null; st.cardiology = null;
       defaultWindow();
       st.noteTemplateId = ""; st.noteResult = null;
       paint(); loadChart(); loadRound(); loadBalance(); loadOutbox(); loadTemplates(); loadFlowsheet(); loadNews2(); loadInvestigations();
@@ -2577,6 +2647,10 @@
     if (cmd === "oncodxsave") { oncoDxSave(); return; }
     if (cmd === "oncoaesave") { oncoAeSave(); return; }
     if (cmd === "oncochemosave") { oncoChemoSave(); return; }
+    if (cmd === "cardiologyopen") { cardiologyOpen(); return; }
+    if (cmd === "cardiologyload") { loadCardiology(); return; }
+    if (cmd === "cardiolinksave") { cardioLinkSave(); return; }
+    if (cmd === "cardioecgsave") { cardioEcgSave(); return; }
     if (cmd === "edarrivalopen") { st.edArrivalOpen = true; st.edMrnLookup = null; st.edMrnLookupErr = ""; paint(); return; }
     if (cmd === "edarrivalclose") { st.edArrivalOpen = false; st.edMrnLookup = null; st.edMrnLookupErr = ""; paint(); return; }
     if (cmd === "edmrnlookup") { edMrnLookup(); return; }
