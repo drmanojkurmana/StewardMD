@@ -182,6 +182,11 @@ const RESOURCE_TYPES = Object.freeze([
    * system for that patient - so the same look-alike is not held and decided again, and so the
    * decision is on the record if it turns out to be wrong. Never made by software. */
   "ExchangeIdentityDecision",
+  /* A SMART on FHIR grant: an authorization code, an access token, or a presented assertion id -
+   * each as a DIGEST, never the secret. Looked up by the digest of what the client presents, so a
+   * stolen table cannot be replayed as a token. Expiry is the record's, revocation is a new version
+   * that cannot be deleted, and every one names the person or system it acts as. */
+  "SmartGrant",
 ]);
 
 const MODE = Object.freeze({ SYSTEM_OF_RECORD: "system-of-record", INTEGRATION: "integration" });
