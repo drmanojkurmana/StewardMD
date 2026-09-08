@@ -368,7 +368,7 @@ async function sha256(text) {
   return [...new Uint8Array(d)].map((b) => b.toString(16).padStart(2, "0")).join("").slice(0, 32);
 }
 
-async function open_(request, env, ctx) {
+async function openIngest(request, env, ctx) {
   try {
     const resolved = await resolveClinicalActor(request, env, ctx.migration.tenantId, "record:write", ctx.actorDeps);
     const svc = new RecordService({
@@ -427,7 +427,7 @@ async function ingestFhir(request, env, ctx) {
     if (!str(ctx.ifMatch)) return { ok: false, status: 412, outcome: operationOutcome("error", "conflict", "If-Match is required on an update: an update that does not say which version it read is a guess") };
   }
 
-  const { svc, resolved, error } = await open_(request, env, ctx);
+  const { svc, resolved, error } = await openIngest(request, env, ctx);
   if (error) return { ok: false, ...error };
   /* A URL names resources by their FHIR id, which for a long canonical id is a hash (fhir-id.js).
    * Resolved back here, once, so everything below reasons in canonical ids. */
@@ -443,8 +443,23 @@ async function ingestFhir(request, env, ctx) {
   }
   sccm.meta.sourceConnector = adapterSystem;
 
+  return landBundle(request, env, { ...ctx, svc, resolved, sccm, system, adapterSystem, patient, problems, requests, bundleType, atomic, protocol: "fhir" });
+}
+
+/**
+ * THE LANDING, shared by every protocol. Everything from an SCCM bundle down is the same whatever
+ * wire it came off: the same adapter, the same terminology marking, the same identity reconciliation,
+ * the same ownership partition, the same preconditions, the same all-or-nothing write, the same
+ * exceptions, the same provenance and the same idempotency by content. A FHIR Bundle and an HL7 v2
+ * message differ only in how they were parsed and validated before this line.
+ * ctx adds: { svc, resolved, sccm, system, adapterSystem, patient, problems, requests, bundleType, atomic, protocol, body (the message as received, for the digest and the exception payload) }
+ */
+async function landBundle(request, env, ctx) {
+  const mig = ctx.migration;
+  const { svc, resolved, sccm, system, adapterSystem, patient, problems, requests, bundleType, atomic } = ctx;
+  const protocol = str(ctx.protocol) || "fhir";
   const base = sccmAdapter();
-  const adapterActor = makeActor({ id: `adapter:${adapterSystem}`, kind: KIND.ADAPTER, tier: TIER.DRAFT, display: `FHIR from ${system}`, onBehalfOf: resolved.actor.id });
+  const adapterActor = makeActor({ id: `adapter:${adapterSystem}`, kind: KIND.ADAPTER, tier: TIER.DRAFT, display: `${protocol === "hl7v2" ? "HL7 v2" : "FHIR"} from ${system}`, onBehalfOf: resolved.actor.id });
   let mapped;
   try { mapped = await base.normalise(sccm); }
   catch (e) { return { ok: false, status: 422, outcome: operationOutcome("error", "invalid", `could not map: ${str(e && e.message)}`) }; }
@@ -467,14 +482,14 @@ async function ingestFhir(request, env, ctx) {
    * design, and a Bundle.id is whatever the sender chose to reuse; keying on either turned a stale
    * PUT into a silent "already done". A resent identical message is a no-op; a corrected re-send is
    * a new message and is judged on its own merits. */
-  const idempotencyKey = `fhir-in:${adapterSystem}:${await sha256(JSON.stringify(ctx.body || {}))}${ctx.replayKeySuffix ? ":" + str(ctx.replayKeySuffix) : ""}`;
+  const idempotencyKey = `${protocol}-in:${adapterSystem}:${await sha256(typeof ctx.body === "string" ? ctx.body : JSON.stringify(ctx.body || {}))}${ctx.replayKeySuffix ? ":" + str(ctx.replayKeySuffix) : ""}`;
   const ingest = svc.governedForIngest({ idempotencyKey });
   if (await ingest.alreadyIngested()) {
     return { ok: true, status: 200, duplicate: true, bundle: { resourceType: "Bundle", type: "transaction-response", entry: [], meta: { tag: [{ system: "urn:stewardmd:fhir", code: "replayed" }] } } };
   }
 
   const now = new Date().toISOString();
-  const context = { mode: ctx.mode || "bundle", targetType: str(ctx.targetType) || null, targetId: str(ctx.targetId) || null, patientRef: str(ctx.patientRef) || null, ifMatch: str(ctx.ifMatch) || null, sourceSystem: system };
+  const context = { protocol, mode: ctx.mode || "bundle", targetType: str(ctx.targetType) || null, targetId: str(ctx.targetId) || null, patientRef: str(ctx.patientRef) || null, ifMatch: str(ctx.ifMatch) || null, sourceSystem: system, controlId: str(ctx.messageControlId) || null };
   const sourcePatientId = patient ? str(patient.id) : null;
   const raise = async (reason, extra) => {
     const id = `wsq-xchg-${adapterSystem}-${(await sha256(`${reason}|${idempotencyKey}|${JSON.stringify(extra && extra.entityRefs || [])}`))}`;
@@ -716,7 +731,9 @@ async function resolveException(request, env, ctx) {
   const mig = ctx.migration;
   const base = { mode: mig && mig.mode, tenantId: (mig && mig.tenantId) || null };
   if (!mig || mig.mode === "off") return { ...base, ok: true, skipped: "off", written: 0 };
-  if (!inboundEnabled(ctx.config)) return { ...base, ok: false, status: 404, error: "not_found", written: 0 };
+  // A held message may have come through either door; deciding it needs at least one of them open.
+  const hl7On = !!(ctx.hl7Config && ctx.hl7Config.inbound && ctx.hl7Config.inbound.enabled === true);
+  if (!inboundEnabled(ctx.config) && !hl7On) return { ...base, ok: false, status: 404, error: "not_found", written: 0 };
 
   const exceptionId = str(ctx.exceptionId), resolution = str(ctx.resolution), reason = str(ctx.reason);
   if (!exceptionId || !Object.values(RESOLUTION).includes(resolution)) {
@@ -726,7 +743,7 @@ async function resolveException(request, env, ctx) {
    * potassium is on this chart, or why one is not. */
   if (!reason) return { ...base, ok: false, status: 422, error: "reason_required", detail: "say why, in a sentence somebody can read next year", written: 0 };
 
-  const { svc, resolved, error } = await open_(request, env, ctx);
+  const { svc, resolved, error } = await openIngest(request, env, ctx);
   if (error) return { ...base, ok: false, status: error.status, error: "permission", detail: error.outcome.issue[0].diagnostics, written: 0 };
 
   let ex;
@@ -761,8 +778,11 @@ async function resolveException(request, env, ctx) {
     const override = resolution === RESOLUTION.ACCEPT_FEED
       ? { acceptFeedFor: (ex.entityRefs || [])[0] || null }
       : { identity: resolution, localId: localPatientId };
-    redrive = await ingestFhir(request, env, {
-      ...ctx, body: ex.payload, sourceSystem: c.sourceSystem || str(ex.source).replace(/^fhir-/, ""),
+    /* The held message is re-driven through the door it arrived by. An HL7 v2 message re-enters
+     * through the HL7 gateway (registered below to avoid an import cycle); a FHIR one through here. */
+    const drive = REDRIVE[str(c.protocol)] || ingestFhir;
+    redrive = await drive(request, env, {
+      ...ctx, body: ex.payload, sourceSystem: c.sourceSystem || str(ex.source).replace(/^(fhir|hl7v2)-/, ""),
       mode: c.mode || "bundle", targetType: c.targetType || undefined, targetId: c.targetId || undefined, patientRef: c.patientRef || undefined,
       ifMatch: c.ifMatch || undefined, override,
       /* A distinct key from the original push. The original's key was consumed when the exception
@@ -813,7 +833,7 @@ async function resolveException(request, env, ctx) {
 async function listExceptions(request, env, ctx) {
   const mig = ctx.migration;
   if (!mig || mig.mode === "off") return { ok: true, skipped: "off", open: [] };
-  const { svc, error } = await open_(request, env, { ...ctx });
+  const { svc, error } = await openIngest(request, env, { ...ctx });
   if (error) return { ok: false, status: error.status, error: "permission", detail: error.outcome.issue[0].diagnostics, open: [] };
   let rows;
   try { rows = await svc.list(EXCEPTION_TYPE, 200); }
@@ -823,9 +843,13 @@ async function listExceptions(request, env, ctx) {
   return { ok: true, open, note: "Each of these is something another system sent that WardSynQ would not write without a person deciding. Nothing here has been filed on a chart." };
 }
 
+/** Re-drive handlers by protocol. A gateway registers itself; the FHIR door is the default. */
+const REDRIVE = {};
+function registerRedrive(protocol, fn) { if (str(protocol) && typeof fn === "function") REDRIVE[str(protocol)] = fn; }
+
 export {
   EXCEPTION_TYPE, DECISION_TYPE, REASON, RESOLUTION, INBOUND_TYPES, CODE_FIELDS,
   inboundEnabled, sourceSystemOf, splitBundle, evaluateIfNoneExist, markTerminology, markTerminologyWithService, reconcileIdentity, rebind, partitionConflicts,
   ExchangeException, ExchangeIdentityDecision, priorDecision,
-  ingestFhir, listExceptions, resolveException,
+  ingestFhir, landBundle, openIngest, registerRedrive, listExceptions, resolveException,
 };

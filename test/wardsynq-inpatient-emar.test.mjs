@@ -5391,6 +5391,173 @@ test("MALFORMED INPUT is refused with an OperationOutcome naming the fault, and 
   assert.ok(!RECORD.audit.slice(before).some((a) => a.action === "record.ingest"), "no ingest audit row: nothing was ingested");
 });
 
+/* ---- HL7 v2 gateway (2026-09-08): ADT and ORU through the SAME landing as a FHIR transaction ---- */
+
+function enableHl7(profile) {
+  const org = docs.get(`q_orgs/${ORG}`);
+  org.fields.wardsynq = { ...(org.fields.wardsynq || {}), hl7: { inbound: { enabled: true }, ...(profile ? { profile } : {}) } };
+  docs.set(`q_orgs/${ORG}`, org);
+}
+const HS = (id, at) => { const n = Math.max(...Object.keys(at).map(Number)); const f = [id]; for (let i = 1; i <= n; i++) f.push(at[i] == null ? "" : String(at[i])); return f.join("|"); };
+function adt(o = {}) {
+  const ev = o.event || "A01";
+  return [
+    `MSH|^~\\&|HIS|GENHOSP|WARDSYNQ|WSQ|20260808101500||ADT^${ev}^ADT_${ev === "A03" ? "A03" : "A01"}|${o.controlId || "MSG-" + ev}|${o.processingId || "P"}|2.5.1`,
+    `EVN|${ev}|20260808101500`,
+    `PID|1||${o.mrn || "H-77"}^^^${o.authority || "GENHOSP"}^MR${o.abha ? "~" + o.abha + "^^^NDHM^NI" : ""}||${o.family || "Testcase"}^${o.given || "Partner"}||${o.dob || "19750309"}|${o.sex || "F"}`,
+    HS("PV1", { 1: "1", 2: "I", 3: (o.ward || "MED-A") + "^" + (o.bed || "12") + "^^GENHOSP", 19: (o.visit || "V-2026-001") + "^^^GENHOSP", 44: "20260808100000", ...(ev === "A03" ? { 45: "20260810090000" } : {}) }),
+    ...(o.extra || []),
+  ].join("\r");
+}
+async function pushHl7(email, text, headers) {
+  return onRequest({ request: new Request(`https://x/api/queue/ward/hl7?orgId=${ORG}`, { method: "POST", headers: { "Cf-Access-Authenticated-User-Email": email, "Content-Type": "x-application/hl7-v2+er7", ...(headers || {}) }, body: text }), env: ENV });
+}
+const msa = (ack) => (/^MSA\|(\w+)\|([^|\r]*)\|?([^\r]*)/m.exec(ack) || []).slice(1);
+
+test("HL7 v2: OFF by default; ON, an ADT A01 lands a patient and a visit through the SAME pipeline as FHIR, is ACKed AA, and a replay is ACKed AA without filing twice", async () => {
+  seedHospital();
+  await admittedPatientOnDrug();
+  const off = await pushHl7(DOCTOR, adt());
+  assert.equal(off.status, 404, "off is a 404, before the message is looked at");
+  enableHl7();
+  const nurse = await pushHl7(NURSE, adt());
+  assert.equal(nurse.status, 403, "filing needs the right to treat, exactly as the FHIR door");
+
+  const r = await pushHl7(DOCTOR, adt());
+  const ack = await r.text();
+  assert.equal(r.status, 200, ack);
+  assert.match(r.headers.get("content-type"), /^x-application\/hl7-v2\+er7/);
+  assert.equal(r.headers.get("x-wardsynq-ack"), "AA");
+  const [code, ctl, text] = msa(ack);
+  assert.equal(code, "AA"); assert.equal(ctl, "MSG-A01"); assert.match(text, /2 records filed/);
+  assert.match(ack, /^MSH\|\^~\\&\|WardSynQ\|WSQ Ward Hospital\|HIS\|GENHOSP\|\d{14}\|\|ACK\^A01\^ACK\|/, "the ACK is addressed back to the sender");
+  const pat = await RECORD.latest(TENANT_ROW.id, "Patient", "hl7v2-his-genhosp-pat-h-77");
+  assert.ok(pat, "the patient is on the record under the HL7 feed's own name");
+  assert.equal(pat.mrn, "H-77"); assert.equal(pat.meta.source.system, "hl7v2-his-genhosp"); assert.equal(pat.writtenBy.id, "adapter:hl7v2-his-genhosp"); assert.equal(pat.writtenBy.onBehalfOf, idFor(DOCTOR));
+  const enc = await RECORD.latest(TENANT_ROW.id, "Encounter", "hl7v2-his-genhosp-enc-v-2026-001");
+  assert.equal(enc.status, "in-progress"); assert.deepEqual(enc.location, { facilityId: "GENHOSP", ward: "MED-A", bed: "12" }); assert.equal(enc.class, "IPD");
+  assert.ok(enc.identifiers.some((i) => i.type === "VN" && i.value === "V-2026-001"));
+  const audit = RECORD.audit.filter((a) => a.action === "record.ingest" && a.actor === "adapter:hl7v2-his-genhosp");
+  assert.ok(audit.length >= 1 && audit.some((a) => a.scope && a.scope.transaction), "landed as one transaction, audited under the feed");
+
+  // The same message again: nothing lands twice, and the sender is told so with an AA.
+  const again = await pushHl7(DOCTOR, adt());
+  const [c2, , t2] = msa(await again.text());
+  assert.equal(c2, "AA"); assert.match(t2, /already processed/);
+  assert.equal((await RECORD.latest(TENANT_ROW.id, "Encounter", "hl7v2-his-genhosp-enc-v-2026-001")).version, 1);
+
+  // A02 moves the SAME visit (version 2), A03 finishes it (version 3): the record versions, it does not fork.
+  const a02 = await pushHl7(DOCTOR, adt({ event: "A02", ward: "ICU", bed: "3", controlId: "MSG-A02" }));
+  assert.equal(msa(await a02.text())[0], "AA");
+  const moved = await RECORD.latest(TENANT_ROW.id, "Encounter", "hl7v2-his-genhosp-enc-v-2026-001");
+  assert.equal(moved.version, 2); assert.equal(moved.location.ward, "ICU"); assert.equal(moved.status, "in-progress");
+  const a03 = await pushHl7(DOCTOR, adt({ event: "A03", controlId: "MSG-A03" }));
+  assert.equal(msa(await a03.text())[0], "AA");
+  const done = await RECORD.latest(TENANT_ROW.id, "Encounter", "hl7v2-his-genhosp-enc-v-2026-001");
+  assert.equal(done.version, 3); assert.equal(done.status, "finished"); assert.equal(done.periodEnd, "2026-08-10T09:00:00Z");
+  // Exported, the visit is a conformant FHIR Encounter like any other.
+  const f = await (await asRaw(DOCTOR, `/ward/fhir/Encounter/hl7v2-his-genhosp-enc-v-2026-001?orgId=${ORG}`)).json();
+  assert.equal(f.status, "finished"); assert.equal(f.meta.source, "urn:stewardmd:source:hl7v2-his-genhosp");
+});
+
+test("HL7 v2: a repository failure while reading the record to reconcile identity still gets an ACK, not an uncaught 500", async () => {
+  seedHospital(); enableHl7();
+  const real = RECORD.latestByType.bind(RECORD);
+  RECORD.latestByType = async (tenantId, resourceType, limit) => {
+    if (resourceType === "Patient") throw new Error("simulated repository outage");
+    return real(tenantId, resourceType, limit);
+  };
+  try {
+    const r = await pushHl7(DOCTOR, adt({ controlId: "MSG-DOWN" }));
+    assert.equal(r.status, 200, "an MLLP bridge treats anything but 200 as a transport failure and retries forever");
+    assert.equal(r.headers.get("x-wardsynq-ack"), "AE");
+    const ack = await r.text();
+    const [code, ctl, text] = msa(ack);
+    assert.equal(code, "AE"); assert.equal(ctl, "MSG-DOWN");
+    assert.match(text, /could not be read/);
+    assert.match(ack, /^MSH\|\^~\\&\|WardSynQ\|WSQ Ward Hospital\|HIS\|GENHOSP\|/, "still addressed back to the sender, not a bare error page");
+  } finally { RECORD.latestByType = real; }
+  assert.equal(await RECORD.latest(TENANT_ROW.id, "Encounter", "hl7v2-his-genhosp-enc-v-2026-001"), null, "nothing was filed from the failed attempt");
+});
+
+test("HL7 v2: an A01 carrying THIS hospital's MRN links to the local chart and writes no Patient; a look-alike is HELD with an AE naming the exception, its Z-segment kept verbatim, decided from the same queue", async () => {
+  seedHospital(); enableHl7();
+  const { reg, adm } = await admittedPatientOnDrug();
+  const linked = await pushHl7(DOCTOR, adt({ mrn: reg.mrn, authority: "SMD-WARD01", controlId: "MSG-LINK", visit: "V-LINK" }));
+  const ackL = await linked.text();
+  assert.equal(msa(ackL)[0], "AA", ackL);
+  assert.equal(await RECORD.latest(TENANT_ROW.id, "Patient", `hl7v2-his-genhosp-pat-${reg.mrn.toLowerCase()}`), null, "no second Patient: ours is authoritative");
+  const v = await RECORD.latest(TENANT_ROW.id, "Encounter", "hl7v2-his-genhosp-enc-v-link");
+  assert.equal(v.patientId, adm.patientId, "the visit is filed on OUR chart");
+
+  // Same name and date of birth as our patient, a different MRN: probable duplicate, held whole.
+  const ours = await RECORD.latest(TENANT_ROW.id, "Patient", adm.patientId);
+  const heldMsg = adt({ mrn: "OTHER-9", family: ours.name.split(" ").pop(), given: ours.name.split(" ")[0], dob: String(ours.dob || "").replace(/-/g, ""), sex: "F", controlId: "MSG-HELD", visit: "V-HELD", extra: ["ZPI|1|keep-me-verbatim"] });
+  const held = await pushHl7(DOCTOR, heldMsg);
+  const ackH = await held.text();
+  assert.equal(held.status, 200, "an AE is still a 200: the ACK carries the outcome");
+  assert.equal(held.headers.get("x-wardsynq-ack"), "AE");
+  const [hc, , ht] = msa(ackH);
+  assert.equal(hc, "AE"); assert.match(ht, /held for a person to decide: see ExchangeException\/wsq-xchg-hl7v2-his-genhosp-/);
+  assert.match(ackH, /^ERR\|\|\|207\^Application internal error\^HL70357\|E\|\|\|\|held: wsq-xchg-/m);
+  assert.equal(await RECORD.latest(TENANT_ROW.id, "Encounter", "hl7v2-his-genhosp-enc-v-held"), null, "nothing filed");
+  const q = await as(DOCTOR, `/ward/fhir-exceptions?orgId=${ORG}`);
+  assert.ok(Array.isArray(q.open), JSON.stringify(q).slice(0, 300));
+  const ex = q.open.find((x) => /hl7v2-his-genhosp/.test(x.source));
+  assert.ok(ex, JSON.stringify(q.open).slice(0, 300));
+  assert.equal(ex.reason, "identity-probable-duplicate");
+  const stored = await RECORD.latest(TENANT_ROW.id, "ExchangeException", ex.id);
+  assert.equal(typeof stored.payload, "string"); assert.match(stored.payload, /ZPI\|1\|keep-me-verbatim/, "the raw message, Z-segment and all, is the exception's payload");
+  assert.equal(stored.context.protocol, "hl7v2"); assert.equal(stored.context.controlId, "MSG-HELD");
+  // Decided as a link from the same queue, the message re-enters through the HL7 door and lands on our chart.
+  const decided = await as(DOCTOR, "/ward/fhir-exception-resolve", "POST", { orgId: ORG, exceptionId: ex.id, resolution: "link", localPatientId: adm.patientId, reason: "Same person; the other hospital's MRN." });
+  assert.equal(decided.__status, 200, JSON.stringify(decided).slice(0, 300));
+  const landed = await RECORD.latest(TENANT_ROW.id, "Encounter", "hl7v2-his-genhosp-enc-v-held");
+  assert.ok(landed && landed.patientId === adm.patientId, "filed on our chart after the decision");
+});
+
+test("HL7 v2: the integration profile refuses with an AR before content is looked at; an ORU files a report the ward's own worklists never pick up; keepRaw stores a receipt", async () => {
+  seedHospital();
+  enableHl7({ messages: ["ORU^R01", "ADT^A01"], sendingApplications: ["LAB", "HIS"], keepRaw: true });
+  const { reg, adm } = await admittedPatientOnDrug();
+  const training = await pushHl7(DOCTOR, adt({ processingId: "T", controlId: "MSG-T" }));
+  const [tc, , tt] = msa(await training.text());
+  assert.equal(tc, "AR"); assert.match(tt, /processing id T is not accepted/);
+  const a08 = await pushHl7(DOCTOR, adt({ event: "A08", controlId: "MSG-A08" }));
+  assert.equal(msa(await a08.text())[0], "AR", "A08 is not in this hospital's profile");
+  const stranger = await pushHl7(DOCTOR, adt().replace("MSH|^~\\&|HIS|", "MSH|^~\\&|ROGUE|"));
+  const [sc, , st] = msa(await stranger.text());
+  assert.equal(sc, "AR"); assert.match(st, /"ROGUE" is not registered/);
+  const noMsh = await pushHl7(DOCTOR, "PID|1||X");
+  assert.equal(noMsh.status, 400, "no MSH, no ACK can be built");
+  assert.equal((await noMsh.json()).resourceType, "OperationOutcome");
+
+  const oru = [
+    "MSH|^~\\&|LAB|GENHOSP|WARDSYNQ|WSQ|20260808120000||ORU^R01^ORU_R01|MSG-ORU|P|2.5.1",
+    `PID|1||${reg.mrn}^^^SMD-WARD01^MR||X^Y||19750309|F`,
+    HS("OBR", { 1: "1", 2: "PLC-9", 3: "FIL-9", 4: "RENAL^Renal profile^L", 7: "20260808113000", 25: "F" }),
+    "OBX|1|NM|2160-0^Creatinine^LN||96|umol/L|60-110|N|||F|||20260808113000",
+    "OBX|2|NM|2823-3^Potassium^LN||6.1|mmol/L|3.5-5.1|HH|||F",
+  ].join("\r");
+  const r = await pushHl7(DOCTOR, oru);
+  const ack = await r.text();
+  assert.equal(msa(ack)[0], "AA", ack);
+  const rep = await RECORD.latest(TENANT_ROW.id, "DiagnosticReport", "hl7v2-lab-genhosp-dr-fil-9");
+  assert.ok(rep, "the report is on OUR chart, linked by MRN");
+  assert.equal(rep.patientId, adm.patientId); assert.equal(rep.status, "final"); assert.equal(rep.serviceRequestId, "hl7v2-lab-genhosp-sr-plc-9");
+  const k = await RECORD.latest(TENANT_ROW.id, "Observation", "hl7v2-lab-genhosp-obs-fil-9-2");
+  assert.equal(k.value, 6.1); assert.equal(k.codeSystem, "http://loinc.org"); assert.equal(k.terminologyStatus, "verified");
+  // The laboratory's order is the feed's, draft and external: not on this ward's collection worklist, not pending here.
+  const coll = await as(NURSE, `/ward/collections?orgId=${ORG}&patientId=${adm.patientId}`);
+  assert.ok(!(coll.requests || []).some((x) => x.serviceRequestId === "hl7v2-lab-genhosp-sr-plc-9"));
+  // The receipt: the message verbatim, its outcome, no Z-segment interpreted.
+  const receipts = await RECORD.latestByType(TENANT_ROW.id, "ExchangeMessage", 50);
+  const found = receipts.find((m) => m.controlId === "MSG-ORU");
+  assert.ok(found, "the receipt for the ORU was written");
+  assert.equal(found.outcome, "filed"); assert.match(found.raw, /^MSH\|/); assert.equal(found.protocol, "hl7v2");
+  assert.ok(receipts.some((m) => m.controlId === "MSG-T" && m.outcome === "refused") === false, "a message the profile rejected never reached the landing, so it has no receipt");
+});
+
 test("AUDIT: every imported row and every token carries who, as what, and for whom", async () => {
   seedHospital(); enableInboundFhir(); resetRateLimit();
   const lab = await smartBackendClient("lab-sys");

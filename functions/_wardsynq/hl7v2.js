@@ -50,9 +50,10 @@ function esc(value) {
     .replace(/\^/g, "\\S\\")
     .replace(/~/g, "\\R\\")
     .replace(/&/g, "\\T\\")
-    // A newline inside a field would end the SEGMENT, which is the same class of corruption as a
-    // stray pipe and is easier to arrive at from free text.
-    .replace(/\r?\n/g, " ");
+    // A newline OR a bare carriage return inside a field would end the SEGMENT (HL7's own segment
+    // terminator is \r), which is the same class of corruption as a stray pipe and is easier to
+    // arrive at from free text than either.
+    .replace(/[\r\n]+/g, " ");
 }
 
 /** PURE. YYYYMMDDHHMMSS, or "" when the instant is not one. Never a plausible-looking guess. */

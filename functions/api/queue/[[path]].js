@@ -65,6 +65,7 @@ import { operationOutcome } from "../../_wardsynq/fhir.js";
 import { dispatchRead, dispatchOperation } from "../../_wardsynq/fhir-route.js";
 import { ingestFhir, listExceptions, resolveException, inboundEnabled } from "../../_wardsynq/fhir-inbound.js";
 import { createLaunch } from "../../_wardsynq/smart-server.js";
+import { ingestHl7 } from "../../_wardsynq/hl7-inbound.js";
 import { startReconciliation, decideMedicine, readReconciliation } from "../../_wardsynq/med-reconciliation.js";
 import { wardMetrics } from "../../_wardsynq/ward-metrics.js";
 import { releaseResult, pendingRequests } from "../../_wardsynq/lab-result.js";
@@ -471,7 +472,10 @@ export async function onRequest(context) {
      */
     if (seg === "ward") {
       // PUT carries a body too, since 2026-09-08: a FHIR update is a PUT of the whole resource.
-      const body = (method === "POST" || method === "PUT") ? await readBody(request) : {};
+      // The HL7 door takes the message as text (ER7), never as JSON.
+      const isHl7 = parts[1] === "hl7";
+      const rawText = isHl7 && method === "POST" ? await request.text().catch(() => "") : null;
+      const body = isHl7 ? {} : ((method === "POST" || method === "PUT") ? await readBody(request) : {});
       const wOrgId = url.searchParams.get("orgId") || body.orgId || "";
       const capFor = {
         admit: CAPS.QUEUE_ADD, list: CAPS.QUEUE_VIEW, vitals: CAPS.EMR_VITALS,
@@ -511,6 +515,7 @@ export async function onRequest(context) {
         fhir: CAPS.EMR_VIEW,
         // What another system sent that WardSynQ would not write without a person deciding.
         "fhir-exceptions": CAPS.EMR_VIEW,
+        hl7: CAPS.EMR_TREAT,
         /* DECIDING is emr.treat: "this is the same person" and "the feed's version replaces ours"
          * are clinical judgements about a chart, and they are recorded under the decider's name. */
         "fhir-exception-resolve": CAPS.EMR_TREAT,
@@ -747,8 +752,15 @@ export async function onRequest(context) {
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "fhir-exception-resolve" && method === "POST") {
-        const r = await resolveException(request, env, { ...deps, config: (wsqCfg && wsqCfg.fhir) || null, base: `${url.origin}/api/queue/ward/fhir`, exceptionId: body.exceptionId, resolution: body.resolution, localPatientId: body.localPatientId, reason: body.reason });
+        const r = await resolveException(request, env, { ...deps, config: (wsqCfg && wsqCfg.fhir) || null, hl7Config: (wsqCfg && wsqCfg.hl7) || null, terminology: (wsqCfg && wsqCfg.terminology) || null, profiles: (wsqCfg && wsqCfg.fhir && wsqCfg.fhir.profiles) || null, base: `${url.origin}/api/queue/ward/fhir`, exceptionId: body.exceptionId, resolution: body.resolution, localPatientId: body.localPatientId, reason: body.reason });
         return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "hl7" && method === "POST") {
+        /* The HL7 v2 gateway. Off is a 404 before the message is looked at; a message that could be
+         * parsed is answered with an ACK in ER7, whatever became of it (see hl7-inbound.js). */
+        const r = await ingestHl7(request, env, { ...deps, config: (wsqCfg && wsqCfg.hl7) || null, hl7Config: (wsqCfg && wsqCfg.hl7) || null, terminology: (wsqCfg && wsqCfg.terminology) || null, body: rawText || "", sourceSystem: request.headers.get("X-Source-System") || "", facility: (wOrg && wOrg.name) || "", base: `${url.origin}/api/queue/ward/fhir` });
+        if (r.ack) return new Response(r.ack, { status: r.status || 200, headers: Object.assign({ "Content-Type": "x-application/hl7-v2+er7; charset=utf-8", "Cache-Control": "no-store", "X-WardSynQ-Ack": /^MSA\|(\w+)/m.exec(r.ack) ? /^MSA\|(\w+)/m.exec(r.ack)[1] : "" }, corsHeaders(request)) });
+        return fhirJson(r.outcome || operationOutcome("error", "exception", "no acknowledgement could be built"), r.status || 500, request);
       }
       if (sub === "fhir") {
         /* FHIR R4, read side. Every response is application/fhir+json and every error is an
