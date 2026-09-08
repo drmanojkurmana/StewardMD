@@ -505,6 +505,53 @@ test("the auto maker assembles the summary from the record and invents nothing",
   assert.equal(note.aiDrafted, false, "assembled from the record, not generated");
 });
 
+/* A feed's MedicationOrder/MedicationAdministration/ServiceRequest can land on this patient's chart
+ * (fhir-inbound.js) with the same patientId as this admission - and, by coincidence or forgery, the
+ * same encounterId too, which is the one case the encounterId filter alone does not catch. It must
+ * never be read as this hospital's own: not in the discharge summary, and not as a dose this ward
+ * left mid-flight. */
+test("a fed-in Medication*/ServiceRequest record never appears as this admission's own, in the discharge summary or the in-flight dose check", async () => {
+  seedHospital();
+  const { ord, patient, adm } = await admittedPatientOnDrug();
+  const mar = (action, extra) => as(NURSE, "/ward/mar", "POST", { orgId: ORG, action, orderId: ord.orderId, dueAt: DUE, patient, ...extra });
+  await mar("verify"); await mar("dispense");
+  await mar("scan", { scan: { patientBarcode: patient.mrn, drugBarcode: "Paracetamol 500mg", dose: { value: 500, unit: "mg" }, route: "oral" } });
+  await mar("administer");
+
+  const EXT = { system: "fhir-partner-his", sourceId: "ext-1", importedAt: "2026-09-07T09:00:00.000Z" };
+  await RECORD.append(TENANT_ROW.id, [{
+    resourceType: "MedicationOrder", id: "ext-rx-1", version: 1, patientId: adm.patientId, encounterId: adm.encounterId,
+    drug: "Warfarin 5mg", status: "active", dose: { value: 5, unit: "mg" }, route: "oral", frequency: "OD",
+    meta: { recordedAt: EXT.importedAt, effectiveAt: EXT.importedAt, source: EXT },
+  }], { actor: "test" });
+  await RECORD.append(TENANT_ROW.id, [{
+    resourceType: "MedicationAdministration", id: "ext-mar-1", version: 1, patientId: adm.patientId, encounterId: adm.encounterId,
+    orderId: "ext-rx-1", status: "verified",
+    meta: { recordedAt: EXT.importedAt, effectiveAt: EXT.importedAt, source: EXT },
+  }], { actor: "test" });
+  await RECORD.append(TENANT_ROW.id, [{
+    resourceType: "ServiceRequest", id: "ext-sr-1", version: 1, patientId: adm.patientId, encounterId: adm.encounterId,
+    display: "MRI Brain", code: "MRI Brain", status: "active",
+    meta: { recordedAt: EXT.importedAt, effectiveAt: EXT.importedAt, source: EXT },
+  }], { actor: "test" });
+
+  const out = await as(DOCTOR, "/ward/discharge", "POST", { orgId: ORG, encounterId: adm.encounterId, dischargedAt: "2026-09-09T08:00:00.000Z" });
+  assert.equal(out.__status, 200, JSON.stringify(out));
+  assert.equal(out.dosesInFlight.length, 0, "the feed's own unfinished dose is not this hospital's to report");
+
+  const draft = await as(DOCTOR, "/ward/discharge-summary", "POST", { orgId: ORG, encounterId: adm.encounterId });
+  assert.equal(draft.__status, 200, JSON.stringify(draft));
+  assert.doesNotMatch(draft.sections.medications, /Warfarin/, "a fed-in order is not this hospital's medication list");
+  assert.doesNotMatch(draft.sections.investigations, /MRI Brain/, "nor a fed-in service request its investigation list");
+  assert.match(draft.sections.medications, /Paracetamol 500mg/, "the real order is still there");
+  assert.match(draft.sections.medications, /doses administered on this admission: 1/, "and its count is not inflated by the feed's administration");
+
+  const read = await as(NURSE, `/ward/discharge-summary?orgId=${ORG}&encounterId=${adm.encounterId}`);
+  assert.equal(read.__status, 200, JSON.stringify(read));
+  assert.doesNotMatch(read.assembled.medications, /Warfarin/);
+  assert.doesNotMatch(read.assembled.investigations, /MRI Brain/);
+});
+
 test("a discharge summary is signed as its own version, and a signed one is not redrafted", async () => {
   seedHospital();
   const { adm } = await admittedPatientOnDrug();
