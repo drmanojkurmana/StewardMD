@@ -6,7 +6,7 @@
  * WHO is asking - it is handed a context that already carries the actor or the deps to resolve one.
  */
 
-import { patientEverything, readResource, capabilityStatement, searchType, historyOf, vread, operationOutcome, provenanceRead, provenanceSearch } from "./fhir.js";
+import { patientEverything, readResource, capabilityStatement, searchType, historyOf, vread, operationOutcome, provenanceRead, provenanceSearch, validateOperation, validateCodeOperation } from "./fhir.js";
 
 const str = (v) => (v == null ? "" : String(v).trim());
 
@@ -50,6 +50,14 @@ async function dispatchRead(request, env, parts, url, fctx, prefer) {
     const r = await patientEverything(request, env, { ...fctx, patientId: fId, searchParams: strip(), rawQuery, lenient });
     return { obj: r.ok ? r.bundle : r.outcome, status: r.status };
   }
+  if (fType === "CodeSystem" && fId === "$validate-code") {
+    const r = await validateCodeOperation(request, env, { ...fctx, searchParams: strip() });
+    return { obj: r.ok ? r.parameters : r.outcome, status: r.status };
+  }
+  if (fId && fOp === "$validate") {
+    const r = await validateOperation(request, env, { ...fctx, type: fType, id: fId });
+    return { obj: r.outcome, status: r.status };
+  }
   if (fId && fOp === "_history" && fVid) { const r = await vread(request, env, { ...fctx, type: fType, id: fId, versionId: fVid }); return { obj: r.ok ? r.resource : r.outcome, status: r.status }; }
   if (fId && fOp === "_history") { const r = await historyOf(request, env, { ...fctx, type: fType, id: fId }); return { obj: r.ok ? r.bundle : r.outcome, status: r.status }; }
   if (fId && fOp) return { obj: operationOutcome("error", "not-found", `no such operation: ${fOp}`), status: 404 };
@@ -58,4 +66,16 @@ async function dispatchRead(request, env, parts, url, fctx, prefer) {
   return { obj: r.ok ? r.bundle : r.outcome, status: r.status };
 }
 
-export { fhirResponse, dispatchRead };
+/**
+ * Dispatches a POST that is an OPERATION rather than a write: `$validate` and `{Type}/$validate`.
+ * Returns null when the path is not an operation, so the caller can go on to its write handling.
+ * Validation never writes, so it needs neither the inbound flag nor a write capability.
+ */
+async function dispatchOperation(request, env, parts, body, fctx) {
+  const fType = parts[0] || "", fId = parts[1] || "";
+  if (fType === "$validate" && !fId) { const r = await validateOperation(request, env, { ...fctx, body }); return { obj: r.outcome, status: r.status }; }
+  if (fType && fId === "$validate" && !parts[2]) { const r = await validateOperation(request, env, { ...fctx, body, type: fType }); return { obj: r.outcome, status: r.status }; }
+  return null;
+}
+
+export { fhirResponse, dispatchRead, dispatchOperation };

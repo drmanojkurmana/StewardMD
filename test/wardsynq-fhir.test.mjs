@@ -165,8 +165,8 @@ test("THE CAPABILITY STATEMENT DOES NOT OVERSTATE", () => {
   for (const bad of ["create", "update", "delete", "patch"]) assert.ok(!codes.has(bad), `must not advertise ${bad}`);
   // And it says outright that this is not profile-validated, where a machine and a human both see
   // it - because a CapabilityStatement that overstates is how a receiver trusts what it should not.
-  assert.match(c.implementation.description, /Not profile-validated/);
-  assert.match(c.implementation.description, /no claim of conformance to US Core/);
+  assert.match(c.implementation.description, /no implementation guide is carried/);
+  assert.match(c.implementation.description, /conformance to US Core or a national profile is neither claimed nor checked/);
   assert.match(c.implementation.description, /never as a guessed code/);
   // Every mapped type, plus Provenance, which is derived from each of them rather than mapped from a stored one.
   assert.equal(c.rest[0].resource.length, Object.keys(FHIR_TYPE).length + 1, "it advertises exactly what it maps, plus derived Provenance");
