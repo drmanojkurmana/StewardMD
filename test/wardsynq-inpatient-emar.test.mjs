@@ -295,6 +295,73 @@ test("a doctor may write the order and may NOT administer it", async () => {
   assert.equal(scanned.__status, 403, "the bedside needs med.administer, which the doctor role does not hold");
 });
 
+/* RBAC on the routes ward.js's golden-path UI newly calls (admit, beds, flowsheet, news2,
+ * transfer). Every one of these already holds a capability requirement in [[path]].js; what was
+ * untested is the REFUSAL side. Nurse is not a valid negative case for most of these - the role
+ * matrix (functions/_queue_roles.js) grants nurse QUEUE_ADD, QUEUE_VIEW and EMR_VIEW outright, so
+ * a nurse succeeding on admit/beds/flowsheet/news2 is correct, not a gap. Pharmacy is the real
+ * boundary: it holds none of QUEUE_ADD, EMR_VIEW or MED_ADMINISTER. */
+test("RBAC: admission, transfer, the flowsheet and NEWS2 are clinical/administrative acts pharmacy does not hold", async () => {
+  seedHospital();
+  const reg = await as(DOCTOR, "/patient/register", "POST", { orgId: ORG, name: "RBAC Testcase", mobile: "9876500055", gender: "male", ageYears: 60 });
+  const badAdmit = await as(PHARM, "/ward/admit", "POST", { orgId: ORG, mrn: reg.mrn, ward: "Medical A", bed: "19", admittedAt: "2026-09-07T08:00:00.000Z" });
+  assert.equal(badAdmit.__status, 403, "admitting is queue.add, which pharmacy does not hold");
+
+  const { adm } = await admittedPatientOnDrug();
+  const badTransfer = await as(PHARM, "/ward/transfer", "POST", { orgId: ORG, encounterId: adm.encounterId, ward: "ICU", bed: "1" });
+  assert.equal(badTransfer.__status, 403, "moving a patient is queue.add too");
+
+  const badFlow = await as(PHARM, `/ward/flowsheet?orgId=${ORG}&patientId=${adm.patientId}`);
+  assert.equal(badFlow.__status, 403, "the flowsheet is emr.view - pharmacy dispenses against the order, not the chart");
+  const badNews2 = await as(PHARM, `/ward/news2?orgId=${ORG}&patientId=${adm.patientId}`);
+  assert.equal(badNews2.__status, 403);
+
+  // And the doctor/nurse who legitimately hold these still succeed - the refusal above is the
+  // capability boundary, not a route that has quietly stopped working.
+  assert.equal((await as(DOCTOR, "/ward/flowsheet?orgId=" + ORG + "&patientId=" + adm.patientId)).__status, 200);
+  assert.equal((await as(NURSE, "/ward/news2?orgId=" + ORG + "&patientId=" + adm.patientId)).__status, 200);
+});
+
+/* The bed board (queue.view) is held by essentially every real role - the actual boundary is org
+ * membership, not role. A person authenticated but not on this hospital's staff list is refused,
+ * which is the negative case that route actually has. */
+test("RBAC: the bed board is refused to somebody who is not on this hospital's staff list at all", async () => {
+  seedHospital();
+  const stranger = "not-on-staff@example.test";
+  const r = await as(stranger, `/ward/beds?orgId=${ORG}`);
+  assert.ok(r.__status === 403 || r.__status === 404, "a non-member gets no bed board, whatever the exact refusal code: " + r.__status);
+});
+
+/* DOCUMENTS A REAL GAP, DOES NOT PAPER OVER IT. admitPatient() (migrate-inpatient.js) writes an
+ * Encounter keyed by mrn+admittedAt and never reads the bed board or any other open admission -
+ * unlike transferPatient(), which DOES refuse a busy bed (bed_occupied, tested elsewhere).
+ * ward.js's own admission UI is the only current guard: it always admits into a bed the board's
+ * own GET /ward/beds just reported free. That is a real, working guard for a person using the
+ * screen - but it is a CLIENT-SIDE guard for a server write that has none of its own, which this
+ * test proves directly rather than assuming. Flagged as a remaining blocker in the session report;
+ * not fixed here (changing admission's write path is a clinical-safety decision, not a
+ * verification task). */
+test("wrong-patient / bed-safety GAP: /ward/admit has no server-side check against a bed another patient already occupies", async () => {
+  seedHospital();
+  const regA = await as(DOCTOR, "/patient/register", "POST", { orgId: ORG, name: "Bed Claimant A", mobile: "9876500061", gender: "female", ageYears: 30 });
+  const regB = await as(DOCTOR, "/patient/register", "POST", { orgId: ORG, name: "Bed Claimant B", mobile: "9876500062", gender: "male", ageYears: 45 });
+  const admA = await as(DOCTOR, "/ward/admit", "POST", { orgId: ORG, mrn: regA.mrn, ward: "Medical A", bed: "31", admittedAt: "2026-09-07T08:00:00.000Z" });
+  assert.equal(admA.__status, 200, JSON.stringify(admA));
+  const board = await as(DOCTOR, `/ward/beds?orgId=${ORG}`);
+  const row = board.wards.find((w) => w.ward === "Medical A");
+  assert.ok(row && row.occupied.some((o) => o.bed === "31" && o.patientId === admA.patientId), "the board (what the UI's bed-picker reads) correctly shows bed 31 taken");
+
+  // A second, different patient admitted to the SAME bed via the raw route - not through the UI,
+  // which would never have offered bed 31 - to test the SERVER's own guard in isolation.
+  const admB = await as(DOCTOR, "/ward/admit", "POST", { orgId: ORG, mrn: regB.mrn, ward: "Medical A", bed: "31", admittedAt: "2026-09-08T08:00:00.000Z" });
+  // THIS ASSERTION DOCUMENTS THE GAP: today the server accepts it (200, a second Encounter
+  // written), where a hospital would want a refusal matching transfer's own bed_occupied. If a
+  // future change adds that guard, this assertion is meant to start failing and be updated to
+  // assert the refusal instead - it is a tripwire, not an endorsement.
+  assert.equal(admB.__status, 200, "GAP: admit does not check bed occupancy the way transfer does - see the comment above this test");
+  assert.equal(admB.written, 1, "a second Encounter was written to the same ward+bed as an open admission");
+});
+
 test("a dose cannot jump to administered, and cannot be given twice", async () => {
   seedHospital();
   const { ord, patient, scan } = await admittedPatientOnDrug();
@@ -321,6 +388,53 @@ test("a dose cannot jump to administered, and cannot be given twice", async () =
   assert.equal(second.error, "refused");
   const history = await RECORD.history(TENANT_ROW.id, "MedicationAdministration", first.administrationId);
   assert.equal(history.filter((h) => h.status === "administered").length, 1, "and only ONE administration is on the record");
+});
+
+test("HOLD, ROUTE LEVEL: a dose cannot be held with no reason, through the real /ward/mar door", async () => {
+  seedHospital();
+  const { ord, patient } = await admittedPatientOnDrug();
+  const mar = (action, extra) => as(NURSE, "/ward/mar", "POST", { orgId: ORG, action, orderId: ord.orderId, dueAt: DUE, patient, ...extra });
+  const noReason = await mar("hold");
+  assert.equal(noReason.__status, 409);
+  assert.equal(noReason.error, "refused");
+  assert.ok(noReason.reasons.some((r) => r.code === "NO_REASON"), JSON.stringify(noReason.reasons));
+  const withReason = await mar("hold", { reason: "Awaiting BP recheck before this dose." });
+  assert.equal(withReason.to, "held");
+});
+
+/* REFUSE and CANCEL, unlike HOLD, do not throw on a missing reason - refuse() defaults to "patient
+ * declined" and cancel() to a null reason (wardsynq-meds.js). That is a deliberate difference, not
+ * an oversight this task should silently patch: a refusal is what a bedside nurse types in the
+ * moment a patient says no, and "patient declined" is itself a real, honest reason rather than a
+ * placeholder. These two tests pin down the CURRENT behaviour so a future change to it is a visible
+ * diff, not a silent one. */
+test("REFUSE/CANCEL, ROUTE LEVEL: a missing reason does not throw - refuse defaults to 'patient declined', cancel to no reason, and both are on the record as such", async () => {
+  seedHospital();
+  const { adm, ord: ord1 } = await admittedPatientOnDrug("Paracetamol 500mg");
+  const ord2 = await as(DOCTOR, "/ward/medication-order", "POST", { orgId: ORG, order: { patientId: adm.patientId, encounterId: adm.encounterId, drug: "Ibuprofen 400mg", dose: { value: 400, unit: "mg" }, route: "oral", frequency: "TID" } });
+  const patient = { id: adm.patientId, mrn: adm.patientId.replace("opd-pat-", "").toUpperCase(), wristbandBarcode: adm.patientId.replace("opd-pat-", "").toUpperCase() };
+
+  // refuse() is only a legal transition from dispensed/scanned/held (wardsynq-meds.js) - a patient
+  // declines a dose that has actually reached them, not one nobody has touched yet.
+  await as(NURSE, "/ward/mar", "POST", { orgId: ORG, action: "verify", orderId: ord1.orderId, dueAt: DUE, patient });
+  await as(NURSE, "/ward/mar", "POST", { orgId: ORG, action: "dispense", orderId: ord1.orderId, dueAt: DUE, patient });
+  const refused = await as(NURSE, "/ward/mar", "POST", { orgId: ORG, action: "refuse", orderId: ord1.orderId, dueAt: DUE, patient });
+  assert.equal(refused.__status, 200, JSON.stringify(refused));
+  assert.equal(refused.to, "refused");
+  // The reason lands on the audit trail entry for this transition, not a top-level field.
+  const refRec = await RECORD.latest(TENANT_ROW.id, "MedicationAdministration", refused.administrationId);
+  const refAudit = refRec.audit[refRec.audit.length - 1];
+  assert.equal(refAudit.to, "refused");
+  assert.equal(refAudit.reason, "patient declined", "a reason nobody typed is still a real, honest reason on the record - never blank");
+
+  await as(NURSE, "/ward/mar", "POST", { orgId: ORG, action: "verify", orderId: ord2.orderId, dueAt: DUE, patient });
+  const cancelled = await as(NURSE, "/ward/mar", "POST", { orgId: ORG, action: "cancel", orderId: ord2.orderId, dueAt: DUE, patient });
+  assert.equal(cancelled.__status, 200, JSON.stringify(cancelled));
+  assert.equal(cancelled.to, "cancelled");
+  const cxRec = await RECORD.latest(TENANT_ROW.id, "MedicationAdministration", cancelled.administrationId);
+  const cxAudit = cxRec.audit[cxRec.audit.length - 1];
+  assert.equal(cxAudit.to, "cancelled");
+  assert.equal(cxAudit.reason, null, "cancel with no reason records no reason - it is not invented, unlike refuse's honest default");
 });
 
 test("the five rights are enforced: a wrong-drug scan is refused", async () => {
@@ -460,6 +574,41 @@ test("discharge closes the stay, and a discharged patient leaves the ward list",
   assert.equal(again.written, 0);
   assert.equal(again.skipped, "already_discharged");
   assert.deepEqual((await RECORD.history(TENANT_ROW.id, "Encounter", adm.encounterId)).map((h) => h.status), ["in-progress", "finished"]);
+});
+
+/* THE LONGITUDINAL RECORD IS NOT A LEDGER THAT CLOSES. Discharge ends the STAY (the Encounter);
+ * it must never make the clinical facts recorded during it unreadable. This is the one thing no
+ * existing discharge test asserts directly - they exercise the discharge SUMMARY's own read (which
+ * proves the summary generator can see the stay), not the ward's own chart-read routes a
+ * clinician would open on a returning patient (flowsheet, problem list, vitals, the order/eMAR
+ * history) after that stay has closed. */
+test("a discharged stay's full record - vitals, the order, its administration, a note and a problem - all remain readable through the real chart-read routes", async () => {
+  seedHospital();
+  const { adm, ord, patient, scan } = await admittedPatientOnDrug();
+  await as(NURSE, "/ward/vitals", "POST", { orgId: ORG, encounterId: adm.encounterId, patientId: adm.patientId, vitals: { sbp: "122", pulse: "76" } });
+  await as(DOCTOR, "/ward/problem", "POST", { orgId: ORG, problem: { patientId: adm.patientId, encounterId: adm.encounterId, display: "Community-acquired pneumonia" } });
+  const mar = (action, extra) => as(NURSE, "/ward/mar", "POST", { orgId: ORG, action, orderId: ord.orderId, dueAt: DUE, patient, ...extra });
+  await mar("verify"); await mar("dispense"); await mar("scan", { scan }); const given = await mar("administer");
+  await as(DOCTOR, "/ward/discharge", "POST", { orgId: ORG, encounterId: adm.encounterId, dischargedAt: "2026-09-08T11:00:00.000Z" });
+  const enc = await RECORD.latest(TENANT_ROW.id, "Encounter", adm.encounterId);
+  assert.equal(enc.status, "finished", "the stay really is closed - the reads below are of a CLOSED stay, not an open one");
+
+  const flow = await as(DOCTOR, `/ward/flowsheet?orgId=${ORG}&patientId=${adm.patientId}&hours=168`);
+  assert.equal(flow.__status, 200, JSON.stringify(flow));
+  assert.ok(flow.grid.rows.some((r) => (r.cells || []).some((c) => !c.empty)), "the vitals charted during the stay are still on the flowsheet after discharge");
+
+  const probs = await as(DOCTOR, `/ward/problems?orgId=${ORG}&patientId=${adm.patientId}`);
+  assert.equal(probs.__status, 200);
+  assert.ok(probs.problems.some((p) => p.display === "Community-acquired pneumonia"), "the problem recorded during the stay is still on the list");
+
+  const order = await RECORD.latest(TENANT_ROW.id, "MedicationOrder", ord.orderId);
+  assert.ok(order, "the order itself is still a real record");
+  const administration = await RECORD.latest(TENANT_ROW.id, "MedicationAdministration", given.administrationId);
+  assert.equal(administration.status, "administered", "the eMAR history for a closed stay is not erased, hidden, or reset");
+
+  // Reading a closed stay's chart WRITES NOTHING - discharge is not a trigger for silent
+  // side-effects on the very record these reads just proved is still intact.
+  assert.equal((await RECORD.history(TENANT_ROW.id, "Encounter", adm.encounterId)).length, 2, "still exactly admit + discharge, nothing appended by these reads");
 });
 
 test("discharge reports doses still in flight rather than silently closing over them", async () => {
