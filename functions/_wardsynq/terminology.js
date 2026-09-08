@@ -69,12 +69,27 @@ const UNMAPPED = "unmapped";
  * not an invented vocabulary. ABHA is the NDHM-published system for the Ayushman Bharat Health
  * Account; it is included because the canonical model already carries ABHA identifiers by name.
  */
-const IDENTIFIER_SYSTEMS = Object.freeze({
-  mrn: { uri: "urn:stewardmd:mrn", typeCode: "MR", typeText: "Medical record number" },
-  abha: { uri: "https://healthid.ndhm.gov.in", typeCode: "NI", typeText: "ABHA number" },
-  "opd-ticket-id": { uri: "urn:stewardmd:opd-ticket", typeCode: "VN", typeText: "Visit number" },
-  "ghis-episode-id": { uri: "urn:stewardmd:ghis-episode", typeCode: "VN", typeText: "GHIS episode" },
-});
+const IDENTIFIER_SYSTEMS = (() => {
+  const mrn = { key: "mrn", uri: "urn:stewardmd:mrn", typeCode: "MR", typeText: "Medical record number" };
+  const abha = { key: "abha", uri: "https://healthid.ndhm.gov.in", typeCode: "NI", typeText: "ABHA number" };
+  const ticket = { key: "opd-ticket-id", uri: "urn:stewardmd:opd-ticket", typeCode: "VN", typeText: "Visit number" };
+  const ghis = { key: "ghis-episode-id", uri: "urn:stewardmd:ghis-episode", typeCode: "VN", typeText: "GHIS episode" };
+  // Keyed by every spelling this codebase and a FHIR partner use, INCLUDING the URI itself, so an
+  // identifier that arrives under its published system is recognised as the same thing.
+  return Object.freeze({ mrn, [mrn.uri]: mrn, abha, [abha.uri]: abha, "opd-ticket-id": ticket, [ticket.uri]: ticket, "ghis-episode-id": ghis, [ghis.uri]: ghis });
+})();
+
+/**
+ * PURE. The canonical key for an identifier system, so "ABHA", "abha" and the NDHM URI compare
+ * equal when two patients are reconciled. An unknown system is its own slug - two different unknown
+ * systems never compare equal, and nothing is guessed to be the same.
+ */
+function identifierKey(system) {
+  const s = str(system);
+  if (!s) return "";
+  const hit = IDENTIFIER_SYSTEMS[s] || IDENTIFIER_SYSTEMS[s.toLowerCase()];
+  return hit ? hit.key : s.toLowerCase().replace(/[^a-z0-9]+/g, "-");
+}
 
 /** PURE. The canonical URI for a system alias or URI, or null when WardSynQ does not know it. */
 function systemUri(aliasOrUri) {
@@ -157,4 +172,4 @@ function coverage() {
   return Object.fromEntries(Object.entries(KNOWN).map(([uri, m]) => [uri, m.size]));
 }
 
-export { SYSTEMS, UNCODED, UNMAPPED, IDENTIFIER_SYSTEMS, KNOWN, systemUri, isUri, isKnown, displayOf, unmappedCoding, classifyCoding, coverage };
+export { SYSTEMS, UNCODED, UNMAPPED, IDENTIFIER_SYSTEMS, KNOWN, systemUri, isUri, isKnown, displayOf, unmappedCoding, classifyCoding, coverage, identifierKey };

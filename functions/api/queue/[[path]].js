@@ -62,6 +62,7 @@ import { verifyOrder, verificationQueue } from "../../_wardsynq/pharmacy-verify.
 import { dispenseOrder, returnDispense, listDispenses } from "../../_wardsynq/pharmacy-dispense.js";
 import { declareBreakGlass, openEmergencyChart, listBreakGlass } from "../../_wardsynq/break-glass.js";
 import { patientEverything, readResource, capabilityStatement, searchType, historyOf, vread, operationOutcome, provenanceRead, provenanceSearch } from "../../_wardsynq/fhir.js";
+import { ingestFhir, listExceptions, inboundEnabled } from "../../_wardsynq/fhir-inbound.js";
 import { startReconciliation, decideMedicine, readReconciliation } from "../../_wardsynq/med-reconciliation.js";
 import { wardMetrics } from "../../_wardsynq/ward-metrics.js";
 import { releaseResult, pendingRequests } from "../../_wardsynq/lab-result.js";
@@ -467,7 +468,8 @@ export async function onRequest(context) {
      *   scan / administer   MED_ADMINISTER           the nurse at the bedside
      */
     if (seg === "ward") {
-      const body = method === "POST" ? await readBody(request) : {};
+      // PUT carries a body too, since 2026-09-08: a FHIR update is a PUT of the whole resource.
+      const body = (method === "POST" || method === "PUT") ? await readBody(request) : {};
       const wOrgId = url.searchParams.get("orgId") || body.orgId || "";
       const capFor = {
         admit: CAPS.QUEUE_ADD, list: CAPS.QUEUE_VIEW, vitals: CAPS.EMR_VITALS,
@@ -505,6 +507,8 @@ export async function onRequest(context) {
          * every other control on this file. The record service still applies the actor's own read
          * scope on top, so the bundle contains only what that clinician could already see. */
         fhir: CAPS.EMR_VIEW,
+        // What another system sent that WardSynQ would not write without a person deciding.
+        "fhir-exceptions": CAPS.EMR_VIEW,
         /* Taking a medicines history is a nurse-or-pharmacist act (emr.vitals covers the ward
          * staff who do it). DECIDING what happens to a home medicine is prescribing-adjacent and
          * belongs to the treating clinician, so it is emr.treat. */
@@ -725,6 +729,10 @@ export async function onRequest(context) {
        *   /ward/fhir/Patient/<id>                one resource
        *   /ward/fhir?patient=<id>[&_type=A,B]    everything for one patient, as a Bundle
        * Errors come back as OperationOutcome, because that is what a FHIR client parses. */
+      if (sub === "fhir-exceptions" && method === "GET") {
+        const r = await listExceptions(request, env, { ...deps, config: (wsqCfg && wsqCfg.fhir) || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
       if (sub === "fhir") {
         /* FHIR R4, read side. Every response is application/fhir+json and every error is an
          * OperationOutcome, including an unknown path - a FHIR client parses those and nothing else.
@@ -737,8 +745,39 @@ export async function onRequest(context) {
          *   GET /ward/fhir?patient={id}[&_type=A,B]          the same, older spelling */
         const fType = parts[2] || "", fId = parts[3] || "", fOp = parts[4] || "", fVid = parts[5] || "";
         const fctx = { ...deps, base: `${url.origin}/api/queue/ward/fhir` };
+        /* WRITES. Off unless the hospital enabled wardsynq.fhir.inbound, and only for an actor who
+         * may already write the chart (emr.treat) - the FHIR sub is emr.view for reads, so the write
+         * methods check the stronger capability themselves. Everything goes through fhir-inbound.js:
+         * the SAME normaliser and adapter the record already trusts, identity reconciled BEFORE any
+         * row lands, local authorship never overwritten, and anything uncertain held as an
+         * ExchangeException rather than filed. */
+        if (method === "POST" || method === "PUT") {
+          /* Off is a 404, before anything about the request is examined - the existence of a write
+           * door is not leaked to a caller the hospital has not opened it for. */
+          if (!inboundEnabled((wsqCfg && wsqCfg.fhir) || null)) return fhirJson(operationOutcome("error", "not-supported", "not found"), 404, request);
+          const wAzW = await ORG.authorizeOrg(env, actor, wOrgId, CAPS.EMR_TREAT);
+          if (!wAzW.ok) return fhirJson(operationOutcome("error", "forbidden", "writing to the record needs emr.treat"), 403, request);
+          const common = { ...fctx, body, config: (wsqCfg && wsqCfg.fhir) || null, sourceSystem: request.headers.get("X-Source-System") || "", ifMatch: request.headers.get("If-Match") || "" };
+          const subjectRef = body && ((body.subject && body.subject.reference) || (body.patient && body.patient.reference) || "");
+          const patientRef = (/(?:^|\/)Patient\/([^/?#]+)$/.exec(String(subjectRef || "")) || [])[1] || "";
+          let r;
+          if (method === "POST" && !fType) r = await ingestFhir(request, env, { ...common, mode: "bundle" });
+          else if (method === "POST" && fType && !fId) {
+            if (body && body.resourceType !== fType) return fhirJson(operationOutcome("error", "invalid", `body is ${body && body.resourceType}, URL says ${fType}`), 400, request);
+            r = await ingestFhir(request, env, { ...common, mode: "create", targetType: fType, patientRef });
+          } else if (method === "PUT" && fType && fId && !fOp) {
+            if (body && body.resourceType !== fType) return fhirJson(operationOutcome("error", "invalid", `body is ${body && body.resourceType}, URL says ${fType}`), 400, request);
+            r = await ingestFhir(request, env, { ...common, mode: "update", targetType: fType, targetId: fId, patientRef });
+          } else {
+            return fhirJson(operationOutcome("error", "not-supported", "supported writes: POST /fhir (Bundle), POST /fhir/{Type}, PUT /fhir/{Type}/{id}"), 405, request, { Allow: "GET, POST, PUT" });
+          }
+          const extra = {};
+          const first = r.bundle && r.bundle.entry && r.bundle.entry.find((e) => e.response && e.response.location);
+          if (r.ok && (r.status === 201 || r.status === 200) && first && (method === "PUT" || fType)) { extra.Location = first.response.location; if (first.response.etag) extra.ETag = first.response.etag; }
+          return fhirJson(r.ok ? r.bundle : r.outcome, r.status, request, extra);
+        }
         if (method !== "GET") {
-          return fhirJson(operationOutcome("error", "not-supported", "this FHIR endpoint is read-only: GET only"), 405, request, { Allow: "GET" });
+          return fhirJson(operationOutcome("error", "not-supported", "method not supported on this path"), 405, request, { Allow: "GET, POST, PUT" });
         }
         if (fType === "metadata") {
           return fhirJson(capabilityStatement({ date: new Date().toISOString(), version: "wardsynq-1" }), 200, request);

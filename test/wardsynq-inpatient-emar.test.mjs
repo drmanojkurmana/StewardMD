@@ -2165,10 +2165,10 @@ test("the FHIR door is not a way around the record's own access rules", async ()
   // Widened 2026-09-08 when vread and history were implemented. Still nothing that writes.
   assert.deepEqual([...codes].sort(), ["history-instance", "read", "search-type", "vread"]);
 
-  // And there is no write door: POST to the FHIR path is a 405 OperationOutcome, never a create.
-  // (404 until 2026-09-08; 405 with Allow is what a FHIR client expects from a read-only server.)
+  // And with inbound FHIR off (the default), a POST is a 404 OperationOutcome - the existence of a
+  // write door is not leaked - and nothing is written.
   const write = await as(DOCTOR, "/ward/fhir", "POST", { orgId: ORG, resourceType: "Patient", id: "smuggled" });
-  assert.equal(write.__status, 405);
+  assert.equal(write.__status, 404);
   assert.equal(write.resourceType, "OperationOutcome");
   assert.equal(await RECORD.latest(TENANT_ROW.id, "Patient", "smuggled"), null);
 });
@@ -4341,11 +4341,13 @@ test("FHIR: search filters by patient, code and date, pages with links, and refu
   assert.equal(len.resourceType, "Bundle");
   assert.ok(len.entry.some((e) => e.search.mode === "outcome" && /status was ignored/.test(e.resource.issue[0].diagnostics)));
 
-  // A write to the read-only endpoint is a 405 OperationOutcome with Allow, and an unknown operation is a 404 one.
+  // With inbound off (the default) a write is a 404 OperationOutcome, and an unknown operation is a 404 one.
   const post = await asRaw(DOCTOR, `/ward/fhir/Observation?orgId=${ORG}`, "POST");
-  assert.equal(post.status, 405);
-  assert.equal(post.headers.get("allow"), "GET");
+  assert.equal(post.status, 404);
   assert.equal((await post.json()).resourceType, "OperationOutcome");
+  const del = await asRaw(DOCTOR, `/ward/fhir/Observation/x?orgId=${ORG}`, "DELETE");
+  assert.equal(del.status, 405, "a method the server never supports is a 405 with Allow");
+  assert.ok(/GET/.test(del.headers.get("allow")));
   const op = await asRaw(DOCTOR, `/ward/fhir/Encounter/${adm.encounterId}/$validate?orgId=${ORG}`);
   assert.equal(op.status, 404);
   assert.equal((await op.json()).resourceType, "OperationOutcome");
@@ -4412,4 +4414,184 @@ test("FHIR: Provenance by target shows every version with its real author, Conse
   assert.equal(cs.entry[0].resource.status, "rejected");
   assert.equal(cs.entry[0].resource.provision.type, "deny");
   assert.equal(cs.entry[0].resource.patient.reference, `Patient/${adm.patientId}`);
+});
+
+/* ---- FHIR inbound (2026-09-08): another system's bundle into this record --------------------- */
+
+function enableInboundFhir() {
+  const org = docs.get(`q_orgs/${ORG}`);
+  org.fields.wardsynq = { ...(org.fields.wardsynq || {}), fhir: { inbound: { enabled: true } } };
+  docs.set(`q_orgs/${ORG}`, org);
+}
+
+/* A realistic bundle from a partner HIS: an MRN the sender assigned, an ABHA, ICD-10 and LOINC
+ * codings alongside one local code, an order, an allergy, a report over its observation, a note. */
+function partnerBundle(over = {}) {
+  const pid = over.patientId || "HIS-PAT-77", mrn = over.mrn || "HIS-MRN-0077", s = over.suffix || "";
+  return {
+    resourceType: "Bundle", type: "collection", id: over.bundleId || "his-bundle-0001",
+    entry: [
+      { resource: { resourceType: "Patient", id: pid, identifier: [{ type: { coding: [{ code: "MR" }] }, system: "urn:his:mrn", value: mrn }, { system: "https://healthid.ndhm.gov.in", value: over.abha || "91-1234-5678-9012" }],
+        name: [{ text: over.name || "Partner Testcase" }], gender: "female", birthDate: over.dob || "1975-03-09" } },
+      { resource: { resourceType: "Encounter", id: `HIS-ENC-1${s}`, status: "finished", class: { code: "IMP" }, subject: { reference: `Patient/${pid}` }, period: { start: "2026-08-01T08:00:00Z", end: "2026-08-04T10:00:00Z" } } },
+      { resource: { resourceType: "Condition", id: `HIS-DX-1${s}`, code: { coding: [{ system: "http://hl7.org/fhir/sid/icd-10", code: "E11.9", display: "Type 2 diabetes" }] }, subject: { reference: `Patient/${pid}` }, clinicalStatus: { coding: [{ code: "active" }] } } },
+      { resource: { resourceType: "Observation", id: `HIS-OBS-1${s}`, status: "final", category: [{ coding: [{ code: "laboratory" }] }], code: { coding: [{ system: "http://loinc.org", code: "2160-0", display: "Creatinine" }] }, subject: { reference: `Patient/${pid}` }, effectiveDateTime: "2026-08-02T06:00:00Z", valueQuantity: { value: 96, unit: "umol/L" } } },
+      { resource: { resourceType: "Observation", id: `HIS-OBS-2${s}`, status: "final", category: [{ coding: [{ code: "laboratory" }] }], code: { coding: [{ system: "http://his.example/local-codes", code: "HBA1C-X", display: "HbA1c (local)" }] }, subject: { reference: `Patient/${pid}` }, effectiveDateTime: "2026-08-02T06:00:00Z", valueQuantity: { value: 7.9, unit: "%" } } },
+      { resource: { resourceType: "MedicationRequest", id: `HIS-RX-1${s}`, status: "active", intent: "order", medicationCodeableConcept: { coding: [{ system: "http://www.nlm.nih.gov/research/umls/rxnorm", code: "6809", display: "Metformin" }], text: "Metformin 500 mg" }, subject: { reference: `Patient/${pid}` }, dosageInstruction: [{ text: "500 mg twice daily" }] } },
+      { resource: { resourceType: "AllergyIntolerance", id: `HIS-ALG-1${s}`, code: { text: "Penicillin" }, patient: { reference: `Patient/${pid}` }, criticality: "high", reaction: [{ manifestation: [{ text: "Anaphylaxis" }], severity: "severe" }] } },
+      { resource: { resourceType: "DiagnosticReport", id: `HIS-REP-1${s}`, status: "final", code: { text: "Renal profile" }, subject: { reference: `Patient/${pid}` }, effectiveDateTime: "2026-08-02T06:00:00Z", result: [{ reference: `Observation/HIS-OBS-1${s}` }], conclusion: "Within limits." } },
+      { resource: { resourceType: "DocumentReference", id: `HIS-DOC-1${s}`, status: "current", type: { text: "Discharge summary" }, subject: { reference: `Patient/${pid}` }, date: "2026-08-04T10:00:00Z", description: "Admitted with hyperglycaemia; discharged on metformin." } },
+    ],
+  };
+}
+
+async function pushFhir(email, path, body, headers) {
+  return onRequest({ request: new Request("https://x/api/queue" + path, { method: headers && headers.method || "POST", headers: { "Cf-Access-Authenticated-User-Email": email, "Content-Type": "application/fhir+json", "X-Source-System": "partner-his", ...(headers || {}) }, body: JSON.stringify(body) }), env: ENV });
+}
+
+test("FHIR inbound: OFF by default, and a write needs emr.treat even when on", async () => {
+  seedHospital();
+  await admittedPatientOnDrug();
+  const off = await pushFhir(DOCTOR, `/ward/fhir?orgId=${ORG}`, partnerBundle());
+  assert.equal(off.status, 404);
+  assert.equal((await off.json()).resourceType, "OperationOutcome");
+  enableInboundFhir();
+  const nurse = await pushFhir(NURSE, `/ward/fhir?orgId=${ORG}`, partnerBundle());
+  assert.equal(nurse.status, 403, "a nurse may read the FHIR export but may not push a bundle into the chart");
+  const unnamed = await pushFhir(DOCTOR, `/ward/fhir?orgId=${ORG}`, partnerBundle(), { "X-Source-System": "" });
+  assert.equal(unnamed.status, 400, "a feed must name itself");
+  assert.match((await unnamed.json()).issue[0].diagnostics, /name the sending system/);
+});
+
+test("FHIR inbound: a partner bundle lands through the canonical pipeline with source, provenance and terminology preserved; a replay lands nothing", async () => {
+  seedHospital(); enableInboundFhir();
+  await admittedPatientOnDrug();
+  const res = await pushFhir(DOCTOR, `/ward/fhir?orgId=${ORG}`, partnerBundle());
+  const resText = await res.text();
+  assert.equal(res.status, 200, resText);
+  assert.match(res.headers.get("content-type"), /^application\/fhir\+json/);
+  const b = JSON.parse(resText);
+  assert.equal(b.type, "transaction-response");
+  const statuses = b.entry.map((e) => e.response.status);
+  assert.equal(statuses.filter((s) => s.startsWith("201")).length, 9, JSON.stringify(statuses));
+  const pat = b.entry.find((e) => e.resource && e.resource.resourceType === "Patient").resource;
+  assert.equal(pat.id, "fhir-partner-his-pat-his-pat-77", "the sender is in the id, so it can never be mistaken for ours");
+  assert.equal(pat.meta.source, "urn:stewardmd:source:fhir-partner-his");
+  assert.equal(pat.meta.versionId, "1");
+  const byType = (code) => pat.identifier.find((i) => i.type && i.type.coding && i.type.coding[0].code === code);
+  assert.equal(byType("NI").value, "91-1234-5678-9012", "the ABHA travels, recognised by its NDHM system");
+  assert.equal(byType("MR").value, "HIS-MRN-0077", "the sender's MRN keeps its declared type under a system nobody here knows");
+  assert.equal(byType("MR").system, "urn:his:mrn");
+
+  // Read it back through the ordinary FHIR door: it is one record, not a second model.
+  const cre = await (await asRaw(DOCTOR, `/ward/fhir/Observation?orgId=${ORG}&patient=${pat.id}&code=2160-0`)).json();
+  assert.equal(cre.total, 1);
+  assert.equal(cre.entry[0].resource.valueQuantity.value, 96);
+  assert.equal(cre.entry[0].resource.code.coding[0].system, "http://loinc.org", "LOINC stays LOINC");
+
+  // The local code is kept VERBATIM under the sender's system, marked unmapped, and findable only by text.
+  const loc = await (await asRaw(DOCTOR, `/ward/fhir/Observation?orgId=${ORG}&patient=${pat.id}&code:text=hba1c`)).json();
+  assert.equal(loc.total, 1, JSON.stringify(loc).slice(0, 300));
+  const lc = loc.entry[0].resource.code.coding[0];
+  assert.equal(lc.system, "http://his.example/local-codes");
+  assert.equal(lc.code, "HBA1C-X");
+  assert.equal(lc.extension[0].valueCode, "unmapped");
+  /* A bare code matches any system, so the sender's code IS findable - it is genuinely in the
+   * resource, marked unmapped - but qualifying it with a system we vouch for finds nothing. */
+  assert.equal((await (await asRaw(DOCTOR, `/ward/fhir/Observation?orgId=${ORG}&patient=${pat.id}&code=HBA1C-X`)).json()).total, 1);
+  assert.equal((await (await asRaw(DOCTOR, `/ward/fhir/Observation?orgId=${ORG}&patient=${pat.id}&code=http://loinc.org|HBA1C-X`)).json()).total, 0, "never under LOINC, because it is not LOINC");
+
+  // Provenance: the feed assembled it, ON BEHALF OF the doctor who pushed it, from a named source entity.
+  const prov = await (await asRaw(DOCTOR, `/ward/fhir/Provenance?orgId=${ORG}&target=Observation/${cre.entry[0].resource.id}`)).json();
+  assert.equal(prov.total, 1);
+  const ag = prov.entry[0].resource.agent[0];
+  assert.equal(ag.who.display, "adapter:fhir-partner-his");
+  assert.equal(ag.type.coding[0].code, "assembler");
+  assert.equal(ag.onBehalfOf.display, idFor(DOCTOR), "the clinician is the party acted for, never the author");
+  assert.equal(prov.entry[0].resource.entity[0].what.identifier.system, "urn:stewardmd:source:fhir-partner-his");
+  assert.equal(prov.entry[0].resource.entity[0].what.identifier.value, "HIS-OBS-1", "the sender's own id is preserved");
+
+  // The report points at its observation and at nothing invented; the allergy arrived unverified.
+  const rep = await (await asRaw(DOCTOR, `/ward/fhir/DiagnosticReport?orgId=${ORG}&patient=${pat.id}&_include=DiagnosticReport:result`)).json();
+  assert.equal(rep.entry.filter((e) => e.search.mode === "include").length, 1);
+  const alg = await (await asRaw(DOCTOR, `/ward/fhir/AllergyIntolerance?orgId=${ORG}&patient=${pat.id}`)).json();
+  assert.equal(alg.total, 1);
+  assert.equal(alg.entry[0].resource.criticality, "high");
+  // The external order is a DRAFT here: no prescriber of ours signed it, and it says who asserted it.
+  assert.equal((await RECORD.latest(TENANT_ROW.id, "MedicationOrder", "fhir-partner-his-rx-his-rx-1")).status, "draft");
+  assert.equal((await RECORD.latest(TENANT_ROW.id, "MedicationOrder", "fhir-partner-his-rx-his-rx-1")).prescriberId, "external:fhir-partner-his");
+
+  // REPLAY: the same bundle again lands nothing.
+  const again = await pushFhir(DOCTOR, `/ward/fhir?orgId=${ORG}`, partnerBundle());
+  assert.equal(again.status, 200);
+  const ab = await again.json();
+  assert.deepEqual(ab.entry, []);
+  assert.equal(ab.meta.tag[0].code, "replayed");
+  assert.equal((await RECORD.latest(TENANT_ROW.id, "Observation", cre.entry[0].resource.id)).version, 1, "still version 1");
+});
+
+test("FHIR inbound: an incoming patient with THIS hospital's MRN links to the local chart and writes no Patient; a look-alike is held", async () => {
+  seedHospital(); enableInboundFhir();
+  const { reg, adm } = await admittedPatientOnDrug();
+  const before = (await RECORD.latest(TENANT_ROW.id, "Patient", adm.patientId)).version;
+
+  // Same MRN as our admitted patient, sent by the partner: the rows go on OUR chart.
+  const linked = await (await pushFhir(DOCTOR, `/ward/fhir?orgId=${ORG}`, partnerBundle({ patientId: "HIS-PAT-9", mrn: reg.mrn, bundleId: "his-bundle-link" }))).json();
+  assert.ok(!linked.entry.some((e) => e.resource && e.resource.resourceType === "Patient"), "no Patient written");
+  const onChart = await (await asRaw(DOCTOR, `/ward/fhir/Observation?orgId=${ORG}&patient=${adm.patientId}&code=2160-0`)).json();
+  assert.equal(onChart.total, 1, "the creatinine is on the local patient's chart");
+  assert.equal((await RECORD.latest(TENANT_ROW.id, "Patient", adm.patientId)).version, before, "our demographics are untouched");
+  assert.equal(await RECORD.latest(TENANT_ROW.id, "Patient", "fhir-partner-his-pat-his-pat-9"), null);
+
+  // A different MRN but the same name and date of birth as our patient: PROBABLE, held whole.
+  const reg2 = await (await asRaw(DOCTOR, `/ward/fhir/Patient/${adm.patientId}?orgId=${ORG}`)).json();
+  const held = await pushFhir(DOCTOR, `/ward/fhir?orgId=${ORG}`, partnerBundle({ patientId: "HIS-PAT-10", mrn: "HIS-MRN-10", abha: "00-0000-0000-0010", name: reg2.name[0].text, dob: reg2.birthDate, bundleId: "his-bundle-prob", suffix: "-p10" }));
+  const heldText = await held.text();
+  assert.equal(held.status, 202, heldText);
+  const hb = JSON.parse(heldText);
+  assert.ok(hb.entry.every((e) => e.response.status.startsWith("202")));
+  assert.equal(await RECORD.latest(TENANT_ROW.id, "Patient", "fhir-partner-his-pat-his-pat-10"), null, "nothing was filed");
+  assert.equal(await RECORD.latest(TENANT_ROW.id, "Observation", "fhir-partner-his-obs-his-obs-1-p10"), null, "not even the observations: the bundle is held WHOLE");
+  const q = await as(DOCTOR, `/ward/fhir-exceptions?orgId=${ORG}`);
+  assert.equal(q.__status, 200);
+  assert.equal(q.open.length, 1);
+  assert.equal(q.open[0].reason, "identity-probable-duplicate");
+  assert.equal(q.open[0].candidates[0].id, adm.patientId);
+});
+
+test("FHIR inbound: a feed never overwrites what this hospital authored; a PUT needs If-Match and refuses a stale one", async () => {
+  seedHospital(); enableInboundFhir();
+  const { adm } = await admittedPatientOnDrug();
+  const enc = await (await asRaw(DOCTOR, `/ward/fhir/Encounter/${adm.encounterId}?orgId=${ORG}`)).json();
+
+  // An update to OUR encounter from a feed: refused, and an exception names both sides.
+  const clash = await pushFhir(DOCTOR, `/ward/fhir/Encounter/${adm.encounterId}?orgId=${ORG}`, { ...enc, id: adm.encounterId, status: "finished" }, { method: "PUT", "If-Match": enc.meta.versionId });
+  assert.equal(clash.status, 409, await clash.text());
+  const q = await as(DOCTOR, `/ward/fhir-exceptions?orgId=${ORG}`);
+  assert.ok(q.open.some((x) => x.reason === "conflict-local-authoritative" && x.conflict.id === adm.encounterId), JSON.stringify(q.open));
+  assert.equal((await RECORD.latest(TENANT_ROW.id, "Encounter", adm.encounterId)).version, 1, "untouched");
+
+  // The feed's OWN observation: created, then updated with the right If-Match, refused with a stale one, refused with none.
+  const obs = { resourceType: "Observation", id: "HIS-OBS-5", status: "final", category: [{ coding: [{ code: "laboratory" }] }], code: { coding: [{ system: "http://loinc.org", code: "2160-0" }] }, subject: { reference: `Patient/${adm.patientId}` }, effectiveDateTime: "2026-08-02T06:00:00Z", valueQuantity: { value: 90, unit: "umol/L" } };
+  const created = await pushFhir(DOCTOR, `/ward/fhir/Observation?orgId=${ORG}`, obs);
+  assert.equal(created.status, 201, await created.text());
+  assert.match(created.headers.get("location"), /\/Observation\/fhir-partner-his-obs-his-obs-5\/_history\/1$/);
+  assert.equal(created.headers.get("etag"), 'W/"1"');
+  const cid = "fhir-partner-his-obs-his-obs-5";
+
+  const noMatch = await pushFhir(DOCTOR, `/ward/fhir/Observation/${cid}?orgId=${ORG}`, { ...obs, valueQuantity: { value: 91, unit: "umol/L" } }, { method: "PUT" });
+  assert.equal(noMatch.status, 412, "an update that does not say which version it read is a guess");
+  const stale = await pushFhir(DOCTOR, `/ward/fhir/Observation/${cid}?orgId=${ORG}`, { ...obs, valueQuantity: { value: 91, unit: "umol/L" } }, { method: "PUT", "If-Match": 'W/"7"' });
+  assert.equal(stale.status, 409);
+  const good = await pushFhir(DOCTOR, `/ward/fhir/Observation/${cid}?orgId=${ORG}`, { ...obs, valueQuantity: { value: 91, unit: "umol/L" } }, { method: "PUT", "If-Match": 'W/"1"' });
+  assert.equal(good.status, 200, await good.text());
+  assert.equal(good.headers.get("etag"), 'W/"2"');
+  assert.equal((await RECORD.latest(TENANT_ROW.id, "Observation", cid)).value, 91);
+  const hist = await (await asRaw(DOCTOR, `/ward/fhir/Observation/${cid}/_history?orgId=${ORG}`)).json();
+  assert.equal(hist.total, 2, "an update is a new version; the old one survives");
+
+  // A single resource whose subject is nobody here cannot be filed - and no placeholder patient is created.
+  const orphan = await pushFhir(DOCTOR, `/ward/fhir/Observation?orgId=${ORG}`, { ...obs, id: "HIS-OBS-6", subject: { reference: "Patient/nobody-here" } });
+  assert.equal(orphan.status, 422);
+  assert.equal(await RECORD.latest(TENANT_ROW.id, "Patient", "fhir-partner-his-pat-nobody-here"), null);
 });
