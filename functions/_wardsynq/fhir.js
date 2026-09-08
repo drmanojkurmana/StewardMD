@@ -32,47 +32,70 @@ import { resolveClinicalActor } from "./actor.js";
 import { RecordService } from "./service.js";
 import { AuthError, PermissionError } from "../_connect/permission.js";
 import { parseSearch, applySearch, paginate, resolveIncludes, searchBundle, declaredSearch, INCLUDES } from "./fhir-search.js";
+import { SYSTEMS, UNCODED, UNMAPPED, IDENTIFIER_SYSTEMS, systemUri, isUri, coverage } from "./terminology.js";
 
 const str = (v) => (v == null ? "" : String(v).trim());
 
-/* Code systems this file KNOWS a URI for. Anything not listed is emitted with no system, ever.
- * Adding a row here is a statement that WardSynQ genuinely records that vocabulary. */
-const SYSTEM_URI = Object.freeze({
-  "http://loinc.org": "http://loinc.org",
-  loinc: "http://loinc.org",
-  "icd-10": "http://hl7.org/fhir/sid/icd-10",
-  icd10: "http://hl7.org/fhir/sid/icd-10",
-  rxnorm: "http://www.nlm.nih.gov/research/umls/rxnorm",
-  snomed: "http://snomed.info/sct",
-  "snomed-ct": "http://snomed.info/sct",
-});
-
-/* Values the model uses to mean "nobody gave us a coding". Each is honest in its own file and must
- * stay honest here. */
-const UNCODED = Object.freeze(["", "unspecified", "text", "ghis-local", "wardsynq-fluid", "local"]);
+/* The one registry of vocabularies lives in terminology.js. Kept under this name so nothing that
+ * imported it breaks; it is the same table. */
+const SYSTEM_URI = Object.freeze(Object.fromEntries(Object.entries(SYSTEMS).map(([k, v]) => [k, v.uri])));
 
 /** PURE. The FHIR system URI for one of our codeSystem values, or null when we do not know one. */
 function systemUriFor(codeSystem) {
-  const s = str(codeSystem);
-  if (!s || UNCODED.includes(s.toLowerCase())) return null;
-  return SYSTEM_URI[s] || SYSTEM_URI[s.toLowerCase()] || null;
+  return systemUri(codeSystem);
 }
+
+/** Our extension namespace, for the one fact FHIR has no element for: that WE did not vouch for a
+ *  coding the sender supplied. Ours to define, so not an invented vocabulary. */
+const EXT_TERMINOLOGY_STATUS = "urn:stewardmd:fhir:extension:terminology-status";
 
 /**
  * PURE. A CodeableConcept that never claims a vocabulary it does not have.
  *
  * With a known system: a proper coding, plus text. Without one: TEXT ONLY. A receiving system can
  * then tell the difference, which is the entire point.
+ *
+ * `source` is a coding preserved verbatim from another system at import. It goes out under the
+ * sender's OWN system URI when that is a real URI - so the receiver sees exactly what the sender
+ * said - and is marked with our extension so they can also see we did not verify it. A source
+ * system that is not a URI cannot be a FHIR coding at all and stays in the text.
  */
-function codeable(code, codeSystem, display) {
+function codeable(code, codeSystem, display, source) {
   const c = str(code), d = str(display) || c;
   if (!c && !d) return undefined;
   const system = systemUriFor(codeSystem);
   const out = {};
-  if (system && c) out.coding = [{ system, code: c, ...(d && d !== c ? { display: d } : {}) }];
+  const codings = [];
+  if (system && c) codings.push({ system, code: c, ...(d && d !== c ? { display: d } : {}) });
+  if (source && str(source.code)) {
+    const su = systemUri(source.system) || (isUri(source.system) ? str(source.system) : null);
+    if (su && !codings.some((x) => x.system === su && x.code === str(source.code))) {
+      codings.push(clean({
+        system: su, code: str(source.code), display: str(source.display) || undefined,
+        extension: [{ url: EXT_TERMINOLOGY_STATUS, valueCode: UNMAPPED }],
+      }));
+    }
+  }
+  if (codings.length) out.coding = codings;
   // `text` is always present. It is the only thing that is always true.
-  out.text = d || c;
+  out.text = d || c || (source && str(source.display)) || undefined;
   return out;
+}
+
+/** PURE. A FHIR Identifier for one of ours, with the identifier type a receiver matches on. */
+function identifier(systemKey, value, extra) {
+  const v = str(value);
+  if (!v) return undefined;
+  const known = IDENTIFIER_SYSTEMS[str(systemKey).toLowerCase()];
+  if (known) {
+    return clean({
+      use: extra && extra.use,
+      type: { coding: [{ system: "http://terminology.hl7.org/CodeSystem/v2-0203", code: known.typeCode }], text: known.typeText },
+      system: known.uri, value: v,
+    });
+  }
+  // A system we do not know: emitted as a system ONLY when it is already a URI, else as a typed value.
+  return clean({ system: isUri(systemKey) ? str(systemKey) : undefined, type: !isUri(systemKey) && str(systemKey) ? { text: str(systemKey) } : undefined, value: v });
 }
 
 const ref = (type, id) => (str(id) ? { reference: `${type}/${id}` } : undefined);
@@ -113,8 +136,8 @@ function fhirPatient(p) {
   return clean({
     resourceType: "Patient", id: p.id,
     identifier: [
-      p.mrn ? { use: "usual", type: { text: "Medical record number" }, value: p.mrn } : undefined,
-      ...(p.identifiers || []).map((i) => (i && i.value ? { system: str(i.system) || undefined, value: String(i.value) } : undefined)),
+      identifier("mrn", p.mrn, { use: "usual" }),
+      ...(p.identifiers || []).map((i) => (i && i.value ? identifier(i.system, i.value) : undefined)),
     ].filter(Boolean),
     // A single unparsed name. FHIR wants given/family and we do not hold them separately, so the
     // whole name goes in `text` rather than being split on a space and guessed wrong for most of
@@ -153,7 +176,7 @@ function fhirCondition(c) {
     // Provisional stays provisional on the way out. A problem list that exported everything as
     // "confirmed" would turn every working diagnosis into a fact at the hospital boundary.
     verificationStatus: VERIF[str(c.verificationStatus)] ? { coding: [{ system: "http://terminology.hl7.org/CodeSystem/condition-ver-status", code: VERIF[str(c.verificationStatus)] }] } : undefined,
-    code: codeable(c.code, c.codeSystem, c.display),
+    code: codeable(c.code, c.codeSystem, c.display, c.sourceCoding),
     subject: ref("Patient", c.patientId),
     encounter: ref("Encounter", c.encounterId),
     onsetDateTime: str(c.onsetDate) || undefined,
@@ -186,7 +209,7 @@ function fhirObservation(o) {
     resourceType: "Observation", id: o.id,
     status: "final",
     category: CAT[str(o.category)] ? [{ coding: [{ system: "http://terminology.hl7.org/CodeSystem/observation-category", code: CAT[str(o.category)] }] }] : undefined,
-    code: codeable(o.code, o.codeSystem, o.display),
+    code: codeable(o.code, o.codeSystem, o.display, o.sourceCoding),
     subject: ref("Patient", o.patientId),
     encounter: ref("Encounter", o.encounterId),
     effectiveDateTime: str((o.meta && o.meta.effectiveAt) || o.effectiveAt) || undefined,
@@ -201,7 +224,7 @@ function fhirMedicationRequest(m) {
     status: STATUS[str(m.status)] || "unknown",
     intent: "order",
     authoredOn: str(m.meta && m.meta.recordedAt) || undefined,
-    medicationCodeableConcept: codeable(m.drugCode || m.drug, m.drugCodeSystem, m.drug),
+    medicationCodeableConcept: codeable(m.drugCode || m.drug, m.drugCodeSystem, m.drug, m.sourceCoding),
     subject: ref("Patient", m.patientId),
     encounter: ref("Encounter", m.encounterId),
     requester: m.prescriberId ? { display: m.prescriberId } : undefined,
@@ -239,7 +262,7 @@ function fhirServiceRequest(s) {
     status: ["active", "completed", "revoked", "draft"].includes(str(s.status)) ? str(s.status) : "unknown",
     intent: "order",
     authoredOn: str(s.meta && s.meta.recordedAt) || undefined,
-    code: codeable(s.code, s.codeSystem, s.display),
+    code: codeable(s.code, s.codeSystem, s.display, s.sourceCoding),
     subject: ref("Patient", s.patientId),
     encounter: ref("Encounter", s.encounterId),
     requester: s.requesterId ? { display: s.requesterId } : undefined,
@@ -250,9 +273,11 @@ function fhirDiagnosticReport(d) {
   return clean({
     resourceType: "DiagnosticReport", id: d.id,
     status: ["preliminary", "final", "corrected", "cancelled"].includes(str(d.status)) ? str(d.status) : "unknown",
-    code: codeable(d.code, d.codeSystem, d.code),
+    code: codeable(d.code, d.codeSystem, d.code, d.sourceCoding),
     subject: ref("Patient", d.patientId),
     encounter: ref("Encounter", d.encounterId),
+    // The request this answers, so a receiver can close its own loop.
+    basedOn: d.serviceRequestId ? [ref("ServiceRequest", d.serviceRequestId)] : undefined,
     effectiveDateTime: str(d.reportedAt) || undefined,
     issued: str(d.meta && d.meta.recordedAt) || undefined,
     conclusion: d.conclusion || undefined,
@@ -277,9 +302,75 @@ function fhirDocumentReference(n) {
   });
 }
 
+/**
+ * A recorded consent, as FHIR Consent. The decision maps to status AND to the provision, because a
+ * receiver may read either: a refusal is `rejected` with a `deny` provision, never an `active`
+ * consent whose fine print says no.
+ */
+function fhirConsent(c) {
+  const STATUS = { granted: "active", refused: "rejected", withdrawn: "inactive" };
+  const SCOPE = { treatment: "treatment", research: "research" };
+  const scopeCode = SCOPE[str(c.scope)] || "patient-privacy";
+  return clean({
+    resourceType: "Consent", id: c.id,
+    status: STATUS[str(c.decision)] || "unknown",
+    scope: { coding: [{ system: "http://terminology.hl7.org/CodeSystem/consentscope", code: scopeCode }] },
+    // Our scope vocabulary is ours; it goes out as text, never dressed as a standard category.
+    category: [{ text: str(c.scope) || "other" }],
+    patient: ref("Patient", c.patientId),
+    dateTime: str(c.recordedAt) || str(c.meta && c.meta.recordedAt) || undefined,
+    performer: c.giverName || c.givenBy ? [{ display: [str(c.giverName), str(c.givenBy)].filter(Boolean).join(" - ") }] : undefined,
+    provision: clean({
+      type: str(c.decision) === "granted" ? "permit" : "deny",
+      period: c.validFrom || c.validUntil ? clean({ start: str(c.validFrom) || undefined, end: str(c.validUntil) || undefined }) : undefined,
+    }),
+    // Capacity is a recorded clinical judgement or an honest null; it never becomes an assertion.
+    ...(c.capacity === true || c.capacity === false ? { extension: [{ url: "urn:stewardmd:fhir:extension:capacity-recorded", valueBoolean: c.capacity }] } : {}),
+    ...(c.detail ? { sourceReference: undefined, note: undefined } : {}),
+  });
+}
+
+/** Provenance participant type per actor kind. An AI or an adapter ASSEMBLED a record; a human or a
+ *  device AUTHORED one. Nothing here can make an AI look like the clinician it acted for. */
+const PARTICIPANT = Object.freeze({ human: "author", device: "author", ai: "assembler", adapter: "assembler", service: "assembler" });
+
+/**
+ * PURE. Provenance for ONE VERSION of a record, derived from what the store stamped: who wrote it,
+ * as what kind of actor, when, on whose behalf, and from which source system. Never stored - it is
+ * a view of the audit the record already carries, so it cannot disagree with it.
+ */
+function fhirProvenance(record) {
+  const fhirType = record && FHIR_TYPE[record.resourceType];
+  if (!fhirType || !record.id) return null;
+  const by = record.writtenBy || {};
+  const m = record.meta || {};
+  const version = record.version === undefined || record.version === null ? null : Number(record.version);
+  const src = m.source || {};
+  const external = str(src.system) && str(src.system) !== "wardsynq-native";
+  return clean({
+    resourceType: "Provenance",
+    id: `${fhirType}-${record.id}-v${version === null ? "0" : version}`,
+    target: [{ reference: version === null ? `${fhirType}/${record.id}` : `${fhirType}/${record.id}/_history/${version}` }],
+    recorded: str(by.at) || str(m.recordedAt) || undefined,
+    activity: { coding: [{ system: "http://terminology.hl7.org/CodeSystem/v3-DataOperation", code: version === 1 ? "CREATE" : "UPDATE" }] },
+    agent: [clean({
+      type: { coding: [{ system: "http://terminology.hl7.org/CodeSystem/provenance-participant-type", code: PARTICIPANT[str(by.kind)] || "author" }] },
+      who: { display: str(by.id) || "unknown" },
+      /* The human an AI acted for is named as EXACTLY that - the party it acted on behalf of - and
+       * never as the author. */
+      onBehalfOf: by.onBehalfOf ? { display: str(by.onBehalfOf) } : undefined,
+    })],
+    entity: external ? [{
+      role: "source",
+      what: clean({ identifier: clean({ system: SOURCE_URN(src.system), value: str(src.sourceId) || undefined }), display: `${str(src.system)}${str(src.sourceId) ? ":" + str(src.sourceId) : ""}` }),
+    }] : undefined,
+  });
+}
+
 /** The canonical types this file can render, and the mapper for each. A type absent here is not
  *  exported at all rather than being emitted as something approximate. */
 const MAPPERS = Object.freeze({
+  PatientConsent: fhirConsent,
   Patient: fhirPatient,
   Encounter: fhirEncounter,
   Condition: fhirCondition,
@@ -298,6 +389,7 @@ const FHIR_TYPE = Object.freeze({
   AllergyIntolerance: "AllergyIntolerance", Observation: "Observation",
   MedicationOrder: "MedicationRequest", MedicationAdministration: "MedicationAdministration",
   ServiceRequest: "ServiceRequest", DiagnosticReport: "DiagnosticReport", ClinicalNote: "DocumentReference",
+  PatientConsent: "Consent",
 });
 /** And back, so a caller can ask for the FHIR name. */
 const CANONICAL_TYPE = Object.freeze(Object.fromEntries(Object.entries(FHIR_TYPE).map(([k, v]) => [v, k])));
@@ -340,7 +432,11 @@ function capabilityStatement(opts) {
     implementation: {
       description: "WardSynQ clinical record, read-only FHIR R4 export. Not profile-validated; "
         + "no claim of conformance to US Core or any national profile. Concepts WardSynQ holds "
-        + "without a coding are emitted as CodeableConcept.text with no coding, never as a guessed code.",
+        + "without a coding are emitted as CodeableConcept.text with no coding, never as a guessed code. "
+        + `Verified codes carried by this build: ${Object.entries(coverage()).map(([u, n]) => `${n} in ${u}`).join(", ") || "none"}. `
+        + "A coding imported from another system that WardSynQ did not verify is emitted under the sender's "
+        + `own system with extension ${EXT_TERMINOLOGY_STATUS} = unmapped. Provenance is derived from the `
+        + "record's own audit stamp for every version and is never stored separately.",
     },
     rest: [{
       mode: "server",
@@ -348,18 +444,30 @@ function capabilityStatement(opts) {
       /* Derived from the SAME tables the search parser reads (fhir-search.js), so what is declared
        * here is what actually parses. A CapabilityStatement maintained by hand drifts the first time
        * either side changes, and a client trusts the declaration. */
-      resource: Object.values(FHIR_TYPE).map((t) => {
-        const d = declaredSearch(t);
-        return clean({
-          type: t,
-          versioning: "versioned",
-          readHistory: true,
-          // READ, VREAD, HISTORY and SEARCH. No create, no update, no delete - and nothing implies otherwise.
-          interaction: [{ code: "read" }, { code: "vread" }, { code: "history-instance" }, { code: "search-type" }],
-          searchParam: d.params,
-          searchInclude: d.includes.length ? d.includes : undefined,
-        });
-      }),
+      resource: [
+        ...Object.values(FHIR_TYPE).map((t) => {
+          const d = declaredSearch(t);
+          return clean({
+            type: t,
+            versioning: "versioned",
+            readHistory: true,
+            // READ, VREAD, HISTORY and SEARCH. No create, no update, no delete - and nothing implies otherwise.
+            interaction: [{ code: "read" }, { code: "vread" }, { code: "history-instance" }, { code: "search-type" }],
+            searchParam: d.params,
+            searchInclude: d.includes.length ? d.includes : undefined,
+            searchRevInclude: d.revIncludes.length ? d.revIncludes : undefined,
+          });
+        }),
+        /* Provenance is DERIVED, one per version of every resource above, from the audit stamp the
+         * store puts on each write. It is read and searched by target; it has no history of its own
+         * because it IS the history. */
+        clean({
+          type: "Provenance",
+          interaction: [{ code: "read" }, { code: "search-type" }],
+          searchParam: declaredSearch("Provenance").params,
+          documentation: "Derived from every version's writtenBy and meta.source. target is required on search.",
+        }),
+      ],
       operation: [{ name: "everything", definition: "http://hl7.org/fhir/OperationDefinition/Patient-everything" }],
     }],
   };
@@ -505,6 +613,16 @@ async function searchType(request, env, ctx) {
   }
   const included = resolveIncludes(page.entries, query, lookup);
 
+  /* _revinclude=Provenance:target: the provenance of each matched resource's CURRENT version,
+   * derived from the canonical rows already in hand - no second read, no second opinion. */
+  if (query.revInclude.includes("Provenance:target")) {
+    const byId = new Map((rows || []).filter(Boolean).map((r) => [str(r.id), r]));
+    for (const r of page.entries) {
+      const p = fhirProvenance(byId.get(str(r.id)));
+      if (p) included.push(p);
+    }
+  }
+
   const outcomes = [];
   if (problems.length) outcomes.push({ resourceType: "OperationOutcome", issue: problems.map((p) => ({ severity: "warning", code: "not-supported", diagnostics: `${p.param} was ignored: ${p.reason}` })) });
   /* A search over a roster that hit the pool cap is a search over PART of the record, and a client
@@ -563,11 +681,59 @@ async function vread(request, env, ctx) {
   return { ok: true, status: 200, resource: toFhir(hit) };
 }
 
+/** PURE. A Provenance id back to the version it names, or null. */
+function parseProvenanceId(id) {
+  const m = /^([A-Za-z]+)-(.+)-v(\d+)$/.exec(str(id));
+  if (!m || !CANONICAL_TYPE[m[1]]) return null;
+  return { fhirType: m[1], canonical: CANONICAL_TYPE[m[1]], id: m[2], version: Number(m[3]) };
+}
+
+/** One Provenance by id. ctx: { migration, id } */
+async function provenanceRead(request, env, ctx) {
+  const mig = ctx.migration;
+  if (!mig || mig.mode === "off") return { ok: false, status: 404, outcome: operationOutcome("error", "not-supported", "this hospital does not run the WardSynQ record") };
+  const p = parseProvenanceId(ctx.id);
+  if (!p) return { ok: false, status: 404, outcome: operationOutcome("error", "not-found", "no such Provenance") };
+  const { svc, error } = await open(request, env, ctx);
+  if (error) return { ok: false, status: error.status, outcome: operationOutcome("error", error.status === 401 ? "login" : "forbidden", error.detail || error.error) };
+  let versions;
+  try { versions = await svc.history(p.canonical, p.id); }
+  catch (e) { return { ok: false, status: 403, outcome: operationOutcome("error", "forbidden", str(e && e.message)) }; }
+  const hit = (versions || []).find((v) => Number(v.version) === p.version);
+  if (!hit) return { ok: false, status: 404, outcome: operationOutcome("error", "not-found", "no such Provenance") };
+  return { ok: true, status: 200, resource: fhirProvenance(hit) };
+}
+
+/**
+ * Provenance by target - every version of one resource. `target` is REQUIRED: a hospital-wide
+ * provenance dump is a different act from asking who wrote this, and it is not offered here.
+ * ctx: { migration, searchParams, base }
+ */
+async function provenanceSearch(request, env, ctx) {
+  const mig = ctx.migration;
+  if (!mig || mig.mode === "off") return { ok: false, status: 404, outcome: operationOutcome("error", "not-supported", "this hospital does not run the WardSynQ record") };
+  const { query, problems } = parseSearch("Provenance", ctx.searchParams);
+  if (problems.length) return { ok: false, status: 400, outcome: { resourceType: "OperationOutcome", issue: problems.map((p) => ({ severity: "error", code: "not-supported", diagnostics: `${p.param}: ${p.reason}` })) } };
+  if (!query.target) return { ok: false, status: 400, outcome: operationOutcome("error", "required", "Provenance search needs target=Type/id") };
+  const canonical = CANONICAL_TYPE[query.target.type];
+  if (!canonical) return { ok: false, status: 404, outcome: operationOutcome("error", "not-supported", `WardSynQ does not export ${query.target.type}`) };
+
+  const { svc, error } = await open(request, env, ctx);
+  if (error) return { ok: false, status: error.status, outcome: operationOutcome("error", error.status === 401 ? "login" : "forbidden", error.detail || error.error) };
+  let versions;
+  try { versions = await svc.history(canonical, query.target.id); }
+  catch (e) { return { ok: false, status: 403, outcome: operationOutcome("error", "forbidden", str(e && e.message)) }; }
+
+  const all = (versions || []).map(fhirProvenance).filter(Boolean).reverse();
+  const page = paginate(all, query);
+  return { ok: true, status: 200, bundle: searchBundle({ base: str(ctx.base), type: "Provenance", q: query, page, included: [], outcomes: [], rawQuery: ctx.rawQuery }) };
+}
+
 export {
-  SYSTEM_URI, UNCODED, MAPPERS, FHIR_TYPE, CANONICAL_TYPE, SEARCH_POOL, SOURCE_URN,
-  systemUriFor, codeable, withMeta, toFhir, bundle, capabilityStatement, operationOutcome,
+  SYSTEM_URI, UNCODED, MAPPERS, FHIR_TYPE, CANONICAL_TYPE, SEARCH_POOL, SOURCE_URN, EXT_TERMINOLOGY_STATUS, PARTICIPANT,
+  systemUriFor, codeable, identifier, withMeta, toFhir, bundle, capabilityStatement, operationOutcome,
   fhirPatient, fhirEncounter, fhirCondition, fhirAllergy, fhirObservation,
   fhirMedicationRequest, fhirMedicationAdministration, fhirServiceRequest,
-  fhirDiagnosticReport, fhirDocumentReference,
-  patientEverything, readResource, searchType, historyOf, vread,
+  fhirDiagnosticReport, fhirDocumentReference, fhirConsent, fhirProvenance, parseProvenanceId,
+  patientEverything, readResource, searchType, historyOf, vread, provenanceRead, provenanceSearch,
 };

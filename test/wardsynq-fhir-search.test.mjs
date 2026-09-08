@@ -149,6 +149,8 @@ test("meta.versionId IS the record version, lastUpdated is when we learned it, s
 test("THE CAPABILITYSTATEMENT IS DERIVED FROM THE SAME TABLES THE PARSER USES", () => {
   const cs = capabilityStatement({ date: "2026-09-08" });
   for (const r of cs.rest[0].resource) {
+    // Provenance is derived, read + search-type only, and has its own test. Every STORED type is versioned.
+    if (r.type === "Provenance") continue;
     const d = declaredSearch(r.type);
     assert.deepEqual(r.searchParam.map((p) => p.name), d.params.map((p) => p.name), r.type);
     assert.deepEqual(r.interaction.map((i) => i.code), ["read", "vread", "history-instance", "search-type"], "and nothing that writes");
@@ -160,7 +162,7 @@ test("THE CAPABILITYSTATEMENT IS DERIVED FROM THE SAME TABLES THE PARSER USES", 
     }
     if (r.searchInclude) for (const inc of r.searchInclude) assert.ok(INCLUDES[inc], inc);
   }
-  assert.ok(cs.rest[0].resource.every((r) => Object.values(FHIR_TYPE).includes(r.type)));
+  assert.ok(cs.rest[0].resource.every((r) => r.type === "Provenance" || Object.values(FHIR_TYPE).includes(r.type)));
   assert.equal(cs.format[0], "application/fhir+json");
   assert.ok(!/create|update|delete/.test(JSON.stringify(cs.rest[0].resource.map((r) => r.interaction))));
 });
