@@ -301,9 +301,24 @@ function fhirDiagnosticReport(d) {
   });
 }
 
+/** PURE. A note's sections as one plain-text document, headings in the order they were written. */
+function noteText(n) {
+  const s = n && n.sections;
+  if (!s) return "";
+  if (typeof s === "string") return s;
+  if (typeof s === "object") {
+    /* `type` is what an imported note's sections carry as metadata (the sender's document type),
+     * not a heading a clinician wrote. Everything else is narrative and is rendered under its key. */
+    return Object.keys(s).filter((k) => k !== "type").map((k) => { const v = s[k]; if (v == null || v === "") return ""; const body = typeof v === "object" ? (v.text || JSON.stringify(v)) : String(v); return k === "text" ? body : `${k}:\n${body}`; }).filter(Boolean).join("\n\n");
+  }
+  return String(s);
+}
+const escapeXhtml = (t) => String(t).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+
 function fhirDocumentReference(n) {
   // A clinical note is a DOCUMENT in FHIR, and the signature state travels with it: a draft that
   // exported as `current` would look like a finished, signed note to everyone downstream.
+  const text = noteText(n);
   return clean({
     resourceType: "DocumentReference", id: n.id,
     status: "current",
@@ -314,7 +329,13 @@ function fhirDocumentReference(n) {
     author: n.authorId ? [{ display: n.authorId }] : undefined,
     authenticator: n.signedBy ? { display: n.signedBy } : undefined,
     context: n.encounterId ? { encounter: [ref("Encounter", n.encounterId)] } : undefined,
-    content: [{ attachment: clean({ contentType: "text/plain", data: undefined, title: str(n.noteType) || undefined }) }],
+    /* THE WORDS TRAVEL. Until 2026-09-08 this carried a title and no content, so a note left here as
+     * an empty document and a receiver's normaliser dropped it as having no narrative. The text goes
+     * as the attachment (base64 text/plain) and as `description`, which is what a receiver that
+     * ignores attachment bytes reads. */
+    description: text || undefined,
+    text: text ? { status: "generated", div: `<div xmlns="http://www.w3.org/1999/xhtml">${escapeXhtml(text).replace(/\n/g, "<br/>")}</div>` } : undefined,
+    content: [{ attachment: clean({ contentType: "text/plain", data: text ? btoa(unescape(encodeURIComponent(text))) : undefined, title: str(n.noteType) || undefined }) }],
   });
 }
 
@@ -456,7 +477,14 @@ function capabilityStatement(opts) {
     },
     rest: [{
       mode: "server",
-      security: { description: "Bearer token or staff session, scoped to one hospital. Same authority as every other WardSynQ door." },
+      security: clean({
+        description: "A staff session, or - where the hospital has enabled it - a SMART on FHIR bearer token issued by this server, scoped to one hospital and narrowed to READ. Same governed store and audit as every other WardSynQ door.",
+        service: o.smart ? [{ coding: [{ system: "http://terminology.hl7.org/CodeSystem/restful-security-service", code: "SMART-on-FHIR" }] }] : undefined,
+        extension: o.smart ? [{
+          url: "http://fhir-registry.smarthealthit.org/StructureDefinition/oauth-uris",
+          extension: [{ url: "authorize", valueUri: o.smart.authorize }, { url: "token", valueUri: o.smart.token }, ...(o.smart.revoke ? [{ url: "revoke", valueUri: o.smart.revoke }] : [])],
+        }] : undefined,
+      }),
       /* Derived from the SAME tables the search parser reads (fhir-search.js), so what is declared
        * here is what actually parses. A CapabilityStatement maintained by hand drifts the first time
        * either side changes, and a client trusts the declaration. */
@@ -491,7 +519,11 @@ function capabilityStatement(opts) {
 
 async function open(request, env, ctx) {
   try {
-    const resolved = await resolveClinicalActor(request, env, ctx.migration.tenantId, "record:read", ctx.actorDeps);
+    /* A SMART bearer arrives already resolved (smart-server.js): a READ-tier actor narrowed to its
+     * granted types, with an empty write scope. It is used AS IS - never re-derived from an org role
+     * it does not hold - and everything below it (the governed store, the audit) treats it exactly
+     * as it treats a clinician's session. */
+    const resolved = ctx.actorOverride || await resolveClinicalActor(request, env, ctx.migration.tenantId, "record:read", ctx.actorDeps);
     const svc = new RecordService({
       repository: ctx.recordDeps.repository, pseudonym: ctx.recordDeps.pseudonym,
       tenant: resolved.tenant, actor: resolved.actor, role: resolved.role, roleSource: resolved.source,

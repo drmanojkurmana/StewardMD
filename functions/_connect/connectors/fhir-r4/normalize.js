@@ -35,7 +35,10 @@ export function normalizeFhir(ctx, raw) {
   for (const r of raw.resources || []) {
     out.meta.provenance.push({ resource: r.resourceType, sourceConnector: "fhir-r4", sourceId: r.resourceType + "/" + r.id });
     switch (r.resourceType) {
-      case "Encounter": out.encounters.push(encounter({ id: r.id, status: r.status, class: (r.class && r.class.code) || null })); break;
+      /* period was dropped here until 2026-09-08, so an encounter arrived with no dates at all - an
+       * admission that cannot say when it happened. Carried as sent, never defaulted. */
+      case "Encounter": out.encounters.push(encounter({ id: r.id, status: r.status, class: (r.class && r.class.code) || null,
+        period: r.period && (r.period.start || r.period.end) ? { start: r.period.start || null, end: r.period.end || null } : null })); break;
       case "Condition": out.conditions.push(condition({ id: r.id, code: cc(r.code, "condition"), clinicalStatus: firstCoding([r.clinicalStatus]) || "unknown" })); break;
       case "MedicationStatement": out.medications.push(medicationStatement({ id: r.id, medication: cc(r.medicationCodeableConcept, "medication"), origin: "statement", status: r.status || "unknown", dosage: r.dosage && r.dosage[0] ? { text: r.dosage[0].text || null } : null })); break;
       case "MedicationRequest": out.medications.push(medicationStatement({ id: r.id, medication: cc(r.medicationCodeableConcept, "medication"), origin: "order", status: r.status || "unknown", dosage: r.dosageInstruction && r.dosageInstruction[0] && r.dosageInstruction[0].text ? { text: r.dosageInstruction[0].text } : null })); break;

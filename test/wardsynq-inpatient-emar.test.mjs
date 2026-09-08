@@ -69,9 +69,12 @@ const { verifyStaffSession } = await import("../functions/_opd_auth.js");
 const { orgForTenant, authorizeOrg } = await import("../functions/_wardsynq/org.js");
 let RECORD = new MemoryRepository();
 const TENANT_ROW = { id: "tenant-wsq", name: "WSQ Ward", status: "active", mode: "live", settings: JSON.stringify({ wardsynq: { orgId: "org-wsq" } }) };
+// A SECOND hospital, for the isolation tests: same repository object, different tenant, and nothing
+// one may see of the other. Added 2026-09-08 with the FHIR exchange.
+const TENANT_ROW2 = { id: "tenant-two", name: "Other Hospital", status: "active", mode: "live", settings: JSON.stringify({ wardsynq: { orgId: "org-two" } }) };
 const tenantDb = {
   prepare: () => ({ bind: (...a) => ({
-    first: async () => (String(a[0]) === TENANT_ROW.id ? { ...TENANT_ROW } : null),
+    first: async () => (String(a[0]) === TENANT_ROW.id ? { ...TENANT_ROW } : String(a[0]) === TENANT_ROW2.id ? { ...TENANT_ROW2 } : null),
     all: async () => ({ results: [] }), run: async () => ({ success: true, meta: {} }),
   }) }),
   batch: async () => [],
@@ -4594,4 +4597,435 @@ test("FHIR inbound: a feed never overwrites what this hospital authored; a PUT n
   const orphan = await pushFhir(DOCTOR, `/ward/fhir/Observation?orgId=${ORG}`, { ...obs, id: "HIS-OBS-6", subject: { reference: "Patient/nobody-here" } });
   assert.equal(orphan.status, 422);
   assert.equal(await RECORD.latest(TENANT_ROW.id, "Patient", "fhir-partner-his-pat-nobody-here"), null);
+});
+
+/* ---- Resolving what was held (2026-09-08): a person decides, by name, once ------------------- */
+
+const resolveAs = (email, body) => as(email, "/ward/fhir-exception-resolve", "POST", { orgId: ORG, ...body });
+const openExceptions = async () => (await as(DOCTOR, `/ward/fhir-exceptions?orgId=${ORG}`)).open;
+
+test("FHIR exceptions: LINK files the held bundle on the chosen chart, records the decision, and the same source patient is never held again", async () => {
+  seedHospital(); enableInboundFhir();
+  const { adm } = await admittedPatientOnDrug();
+  const local = await (await asRaw(DOCTOR, `/ward/fhir/Patient/${adm.patientId}?orgId=${ORG}`)).json();
+  const lookalike = (over) => partnerBundle({ patientId: "HIS-PAT-20", mrn: "HIS-MRN-20", abha: "00-0000-0000-0020", name: local.name[0].text, dob: local.birthDate, ...over });
+
+  const held = await pushFhir(DOCTOR, `/ward/fhir?orgId=${ORG}`, lookalike({ bundleId: "b-hold-1", suffix: "-h1" }));
+  assert.equal(held.status, 202);
+  const [ex] = await openExceptions();
+  assert.equal(ex.reason, "identity-probable-duplicate");
+  assert.equal(ex.candidates[0].id, adm.patientId);
+
+  // Guard rails on the decision itself.
+  assert.equal((await resolveAs(NURSE, { exceptionId: ex.id, resolution: "link", localPatientId: adm.patientId, reason: "same person" })).__status, 403, "deciding is emr.treat");
+  assert.equal((await resolveAs(DOCTOR, { exceptionId: ex.id, resolution: "link", localPatientId: adm.patientId })).__status, 422, "a reason is required");
+  assert.equal((await resolveAs(DOCTOR, { exceptionId: ex.id, resolution: "accept-feed", reason: "x" })).__status, 400, "a conflict resolution does not fit an identity exception");
+  assert.equal((await resolveAs(DOCTOR, { exceptionId: ex.id, resolution: "link", localPatientId: "nobody", reason: "x" })).__status, 404, "a link to a patient who does not exist is a typo, not a decision");
+
+  const r = await resolveAs(DOCTOR, { exceptionId: ex.id, resolution: "link", localPatientId: adm.patientId, reason: "Same person - confirmed by phone with the partner ward." });
+  assert.equal(r.__status, 200, JSON.stringify(r).slice(0, 300));
+  assert.equal(r.linkedTo, adm.patientId);
+  assert.ok(r.written >= 8, `written ${r.written}`);
+  assert.equal(r.resolvedBy, idFor(DOCTOR));
+  // The observations are on OUR patient's chart, and no partner Patient record exists.
+  const cre = await (await asRaw(DOCTOR, `/ward/fhir/Observation?orgId=${ORG}&patient=${adm.patientId}&code=2160-0`)).json();
+  assert.equal(cre.total, 1);
+  assert.equal(await RECORD.latest(TENANT_ROW.id, "Patient", "fhir-partner-his-pat-his-pat-20"), null);
+  assert.deepEqual(await openExceptions(), [], "resolved");
+  // Resolving again is refused: the decision is on the record and is not re-made.
+  assert.equal((await resolveAs(DOCTOR, { exceptionId: ex.id, resolution: "reject", reason: "changed my mind" })).__status, 409);
+  const dec = await RECORD.latestByType(TENANT_ROW.id, "ExchangeIdentityDecision", 10);
+  assert.equal(dec.length, 1);
+  assert.equal(dec[0].patientId, adm.patientId);
+  assert.equal(dec[0].sourcePatientId, "HIS-PAT-20");
+  assert.equal(dec[0].decidedBy, idFor(DOCTOR));
+
+  // THE SAME SOURCE PATIENT AGAIN, with new results: linked by the prior decision, never held.
+  const again = await pushFhir(DOCTOR, `/ward/fhir?orgId=${ORG}`, lookalike({ bundleId: "b-hold-2", suffix: "-h2" }));
+  assert.equal(again.status, 200, await again.text());
+  assert.deepEqual(await openExceptions(), []);
+  assert.equal((await (await asRaw(DOCTOR, `/ward/fhir/Observation?orgId=${ORG}&patient=${adm.patientId}&code=2160-0`)).json()).total, 2);
+});
+
+test("FHIR exceptions: CREATE makes the patient once and later messages link to them; REJECT files nothing", async () => {
+  seedHospital(); enableInboundFhir();
+  const { adm } = await admittedPatientOnDrug();
+  const local = await (await asRaw(DOCTOR, `/ward/fhir/Patient/${adm.patientId}?orgId=${ORG}`)).json();
+  const twin = (over) => partnerBundle({ patientId: "HIS-PAT-30", mrn: "HIS-MRN-30", abha: "00-0000-0000-0030", name: local.name[0].text, dob: local.birthDate, ...over });
+
+  await pushFhir(DOCTOR, `/ward/fhir?orgId=${ORG}`, twin({ bundleId: "b-c1", suffix: "-c1" }));
+  const [ex] = await openExceptions();
+  const r = await resolveAs(DOCTOR, { exceptionId: ex.id, resolution: "create", reason: "Different person: the partner confirmed a different father's name." });
+  assert.equal(r.__status, 200, JSON.stringify(r).slice(0, 300));
+  const created = await RECORD.latest(TENANT_ROW.id, "Patient", "fhir-partner-his-pat-his-pat-30");
+  assert.ok(created, "the partner's patient now exists here, as theirs");
+  assert.equal(created.meta.source.system, "fhir-partner-his");
+  const dec = (await RECORD.latestByType(TENANT_ROW.id, "ExchangeIdentityDecision", 10))[0];
+  assert.equal(dec.decision, "create");
+  assert.equal(dec.createdPatientId, created.id);
+
+  // Next message for that source patient goes to the created chart, and is not held.
+  const next = await pushFhir(DOCTOR, `/ward/fhir?orgId=${ORG}`, twin({ bundleId: "b-c2", suffix: "-c2" }));
+  assert.equal(next.status, 200);
+  assert.equal((await (await asRaw(DOCTOR, `/ward/fhir/Observation?orgId=${ORG}&patient=${created.id}&code=2160-0`)).json()).total, 2);
+  assert.equal((await (await asRaw(DOCTOR, `/ward/fhir/Observation?orgId=${ORG}&patient=${adm.patientId}&code=2160-0`)).json()).total, 0, "and nothing landed on our look-alike");
+
+  // REJECT: a different held twin, nothing written, exception closed under the decider's name.
+  await pushFhir(DOCTOR, `/ward/fhir?orgId=${ORG}`, partnerBundle({ patientId: "HIS-PAT-31", mrn: "HIS-MRN-31", abha: "00-0000-0000-0031", name: local.name[0].text, dob: local.birthDate, bundleId: "b-r1", suffix: "-r1" }));
+  const [rx] = await openExceptions();
+  const rej = await resolveAs(DOCTOR, { exceptionId: rx.id, resolution: "reject", reason: "Sent to us in error; belongs to another hospital." });
+  assert.equal(rej.__status, 200);
+  assert.equal(rej.written, 0);
+  assert.equal(await RECORD.latest(TENANT_ROW.id, "Patient", "fhir-partner-his-pat-his-pat-31"), null);
+  assert.deepEqual(await openExceptions(), []);
+});
+
+test("FHIR exceptions: KEEP-LOCAL leaves ours alone; ACCEPT-FEED makes the feed's content the next version of OUR record, attributed to the feed", async () => {
+  seedHospital(); enableInboundFhir();
+  const { adm } = await admittedPatientOnDrug();
+  const enc = await (await asRaw(DOCTOR, `/ward/fhir/Encounter/${adm.encounterId}?orgId=${ORG}`)).json();
+  const feedVersion = { ...enc, id: adm.encounterId, status: "finished", period: { start: enc.period.start, end: "2026-09-07T18:00:00Z" } };
+
+  await pushFhir(DOCTOR, `/ward/fhir/Encounter/${adm.encounterId}?orgId=${ORG}`, feedVersion, { method: "PUT", "If-Match": 'W/"1"' });
+  let [ex] = await openExceptions();
+  assert.equal(ex.reason, "conflict-local-authoritative");
+  const keep = await resolveAs(DOCTOR, { exceptionId: ex.id, resolution: "keep-local", reason: "Our discharge time is the right one." });
+  assert.equal(keep.__status, 200);
+  assert.equal((await RECORD.latest(TENANT_ROW.id, "Encounter", adm.encounterId)).version, 1, "untouched");
+  assert.equal((await resolveAs(DOCTOR, { exceptionId: ex.id, resolution: "link", localPatientId: adm.patientId, reason: "x" })).__status, 409, "closed");
+
+  // The same conflict again, this time accepted.
+  await pushFhir(DOCTOR, `/ward/fhir/Encounter/${adm.encounterId}?orgId=${ORG}`, { ...feedVersion, period: { start: enc.period.start, end: "2026-09-07T19:00:00Z" } }, { method: "PUT", "If-Match": 'W/"1"' });
+  [ex] = await openExceptions();
+  assert.equal((await resolveAs(DOCTOR, { exceptionId: ex.id, resolution: "link", localPatientId: adm.patientId, reason: "x" })).__status, 400, "an identity resolution does not fit a conflict");
+  const acc = await resolveAs(DOCTOR, { exceptionId: ex.id, resolution: "accept-feed", reason: "The partner's discharge time is correct; ours was provisional." });
+  assert.equal(acc.__status, 200, JSON.stringify(acc).slice(0, 400));
+  const now = await RECORD.latest(TENANT_ROW.id, "Encounter", adm.encounterId);
+  assert.equal(now.version, 2, "a NEW version of OUR record; version 1 survives");
+  assert.equal(now.periodEnd, "2026-09-07T19:00:00Z");
+  assert.equal(now.writtenBy.id, "adapter:fhir-partner-his", "attributed to the feed");
+  assert.equal(now.writtenBy.onBehalfOf, idFor(DOCTOR), "on behalf of the person who accepted it");
+  const prov = await (await asRaw(DOCTOR, `/ward/fhir/Provenance?orgId=${ORG}&target=Encounter/${adm.encounterId}`)).json();
+  assert.deepEqual(prov.entry.map((e) => e.resource.agent[0].type.coding[0].code), ["assembler", "author"], "v2 assembled by the feed, v1 authored by us");
+  assert.deepEqual(await openExceptions(), []);
+});
+
+/* ---- SMART on FHIR server (2026-09-08): an application reads, as somebody --------------------- */
+
+const { onRequest: fhirDoor } = await import("../functions/api/fhir/[[path]].js");
+const { resetMemory: resetRateLimit } = await import("../functions/_wardsynq/rate-limit.js");
+const b64u = (bytes) => Buffer.from(bytes).toString("base64url");
+
+async function smartBackendClient(clientId) {
+  const kp = await webcrypto.subtle.generateKey({ name: "ECDSA", namedCurve: "P-256" }, true, ["sign", "verify"]);
+  const pub = await webcrypto.subtle.exportKey("jwk", kp.publicKey);
+  const sign = async (claims) => {
+    const h = b64u(JSON.stringify({ alg: "ES256", typ: "JWT", kid: "k1" })), p = b64u(JSON.stringify(claims));
+    return `${h}.${p}.${b64u(await webcrypto.subtle.sign({ name: "ECDSA", hash: "SHA-256" }, kp.privateKey, new TextEncoder().encode(`${h}.${p}`)))}`;
+  };
+  return { config: { clientId, name: "Lab system", kind: "backend", scopes: ["system/*.read"], jwks: { keys: [{ ...pub, kid: "k1" }] } }, sign };
+}
+
+function enableSmart(clients) {
+  const org = docs.get(`q_orgs/${ORG}`);
+  org.fields.wardsynq = { ...(org.fields.wardsynq || {}), fhir: { ...((org.fields.wardsynq || {}).fhir || {}), smart: { enabled: true, clients } } };
+  docs.set(`q_orgs/${ORG}`, org);
+}
+
+// The external door. `email` is a clinician's session when present (authorize); `bearer` a token.
+async function viaFhirDoor(path, init) {
+  const i = init || {};
+  const headers = { ...(i.headers || {}) };
+  if (i.email) headers["Cf-Access-Authenticated-User-Email"] = i.email;
+  if (i.bearer) headers.Authorization = `Bearer ${i.bearer}`;
+  const segs = path.replace(/^\//, "").split("?")[0].split("/");
+  return fhirDoor({ request: new Request(`https://x/api/fhir/${path.replace(/^\//, "")}`, { method: i.method || "GET", headers, body: i.body }), env: ENV, params: { path: segs } });
+}
+const form = (o) => ({ method: "POST", headers: { "Content-Type": "application/x-www-form-urlencoded" }, body: new URLSearchParams(o).toString() });
+const PUBLIC_CLIENT = { clientId: "chart-viewer", name: "Chart viewer", kind: "public", redirectUris: ["https://viewer.example/cb"], scopes: ["user/Observation.read", "user/Patient.read"] };
+
+test("SMART: OFF by default, and the external door answers nothing without a bearer", async () => {
+  seedHospital();
+  await admittedPatientOnDrug();
+  assert.equal((await viaFhirDoor(`${ORG}/.well-known/smart-configuration`)).status, 404);
+  assert.equal((await viaFhirDoor(`${ORG}/smart/token`, form({ grant_type: "client_credentials" }))).status, 404);
+  const nobearer = await viaFhirDoor(`${ORG}/Observation`);
+  assert.equal(nobearer.status, 401);
+  assert.match(nobearer.headers.get("www-authenticate"), /^Bearer/);
+  assert.equal((await nobearer.json()).resourceType, "OperationOutcome");
+  assert.equal((await viaFhirDoor(`no-such-org/metadata`)).status, 404);
+});
+
+test("SMART: authorize (PKCE) -> token -> read as the clinician, narrowed to the granted scopes; a used code and a revoked token die", async () => {
+  seedHospital(); enableSmart([PUBLIC_CLIENT]); resetRateLimit();
+  const { adm } = await admittedPatientOnDrug();
+
+  const conf = await (await viaFhirDoor(`${ORG}/.well-known/smart-configuration`)).json();
+  assert.deepEqual(conf.code_challenge_methods_supported, ["S256"]);
+  assert.equal(conf.token_endpoint, `https://x/api/fhir/${ORG}/smart/token`);
+  const meta = await (await viaFhirDoor(`${ORG}/metadata`)).json();
+  assert.equal(meta.resourceType, "CapabilityStatement", "metadata is public: it is how a client finds the endpoints");
+  assert.equal(meta.rest[0].security.service[0].coding[0].code, "SMART-on-FHIR");
+  assert.ok(meta.rest[0].security.extension[0].extension.some((e) => e.url === "authorize"));
+
+  const verifier = "v".repeat(20) + "ERIFIER-with-enough-length-to-be-legal-abcdef0123456789";
+  const challenge = b64u(await webcrypto.subtle.digest("SHA-256", new TextEncoder().encode(verifier)));
+  const q = (o) => new URLSearchParams({ response_type: "code", client_id: "chart-viewer", redirect_uri: "https://viewer.example/cb", scope: "user/Observation.read user/Encounter.read", state: "xyz", code_challenge: challenge, code_challenge_method: "S256", ...o }).toString();
+
+  // Errors about the client or the redirect never redirect.
+  assert.equal((await viaFhirDoor(`${ORG}/smart/authorize?${q({ redirect_uri: "https://evil.example/cb" })}`, { email: DOCTOR })).status, 400);
+  assert.equal((await viaFhirDoor(`${ORG}/smart/authorize?${q({ client_id: "nobody" })}`, { email: DOCTOR })).status, 400);
+  // Missing PKCE goes back to the registered redirect as an OAuth error.
+  const nopkce = await viaFhirDoor(`${ORG}/smart/authorize?${q({ code_challenge: "" })}`, { email: DOCTOR });
+  assert.equal(nopkce.status, 302);
+  assert.match(nopkce.headers.get("location"), /^https:\/\/viewer\.example\/cb\?error=invalid_request/);
+  // No session: the clinician has to be there to say yes.
+  assert.equal((await viaFhirDoor(`${ORG}/smart/authorize?${q()}`)).status, 401);
+
+  const az = await viaFhirDoor(`${ORG}/smart/authorize?${q()}`, { email: DOCTOR });
+  assert.equal(az.status, 302);
+  const loc = new URL(az.headers.get("location"));
+  assert.equal(loc.origin + loc.pathname, "https://viewer.example/cb");
+  assert.equal(loc.searchParams.get("state"), "xyz");
+  const code = loc.searchParams.get("code");
+  assert.ok(code && code.length > 20);
+
+  const bad = await viaFhirDoor(`${ORG}/smart/token`, form({ grant_type: "authorization_code", client_id: "chart-viewer", code, code_verifier: "wrong-" + verifier, redirect_uri: "https://viewer.example/cb" }));
+  assert.equal(bad.status, 400);
+  assert.equal((await bad.json()).error, "invalid_grant");
+  const tok = await viaFhirDoor(`${ORG}/smart/token`, form({ grant_type: "authorization_code", client_id: "chart-viewer", code, code_verifier: verifier, redirect_uri: "https://viewer.example/cb" }));
+  const tokText = await tok.text();
+  assert.equal(tok.status, 200, tokText);
+  assert.equal(tok.headers.get("cache-control"), "no-store");
+  const t = JSON.parse(tokText);
+  assert.equal(t.token_type, "Bearer");
+  assert.equal(t.scope, "user/Observation.read", "Encounter was asked for and not registered: dropped, never widened");
+  assert.ok(t.expires_in <= 3600);
+  assert.ok(!("refresh_token" in t));
+  // The code is spent.
+  assert.equal((await viaFhirDoor(`${ORG}/smart/token`, form({ grant_type: "authorization_code", client_id: "chart-viewer", code, code_verifier: verifier, redirect_uri: "https://viewer.example/cb" }))).status, 400);
+
+  // Reading as the clinician, through the external door, narrowed.
+  const obs = await viaFhirDoor(`${ORG}/Observation?patient=${adm.patientId}`, { bearer: t.access_token });
+  const obsText = await obs.text();
+  assert.equal(obs.status, 200, obsText);
+  assert.match(obs.headers.get("content-type"), /^application\/fhir\+json/);
+  const ob = JSON.parse(obsText);
+  assert.equal(ob.resourceType, "Bundle");
+  assert.ok(ob.total >= 1);
+  const enc = await viaFhirDoor(`${ORG}/Encounter?patient=${adm.patientId}`, { bearer: t.access_token });
+  assert.equal(enc.status, 403, "not in the granted scopes, so the governed store refuses it");
+  assert.equal((await enc.json()).resourceType, "OperationOutcome");
+  const one = await viaFhirDoor(`${ORG}/Patient/${adm.patientId}`, { bearer: t.access_token });
+  assert.equal(one.status, 403, "Patient was registered for this client but not requested in this grant");
+  // The audit names the clinician, not the application: the token acts AS them.
+  const auditRows = RECORD.audit.filter((a) => a.action === "record.read" && a.actor === idFor(DOCTOR));
+  assert.ok(auditRows.length >= 1);
+
+  // Revoked: the bearer revokes its own token and is then refused.
+  assert.equal((await viaFhirDoor(`${ORG}/smart/revoke`, { ...form({ token: t.access_token }), bearer: t.access_token })).status, 200);
+  const after = await viaFhirDoor(`${ORG}/Observation?patient=${adm.patientId}`, { bearer: t.access_token });
+  assert.equal(after.status, 401);
+  assert.match(after.headers.get("www-authenticate"), /invalid_token/);
+  assert.equal((await viaFhirDoor(`${ORG}/Observation?patient=${adm.patientId}`, { bearer: "made-up-token" })).status, 401);
+});
+
+test("SMART: a backend system proves itself with a signed assertion against its registered key; a replayed assertion is refused; the token acts as the system", async () => {
+  seedHospital(); resetRateLimit();
+  const lab = await smartBackendClient("lab-sys");
+  enableSmart([PUBLIC_CLIENT, lab.config]);
+  const { adm } = await admittedPatientOnDrug();
+  const tokenUrl = `https://x/api/fhir/${ORG}/smart/token`;
+  const now = Math.floor(Date.now() / 1000);
+  const claims = (o) => ({ iss: "lab-sys", sub: "lab-sys", aud: tokenUrl, exp: now + 120, jti: "jti-" + Math.random().toString(36).slice(2), ...o });
+  const cc = async (assertion, extra) => viaFhirDoor(`${ORG}/smart/token`, form({ grant_type: "client_credentials", client_assertion_type: "urn:ietf:params:oauth:client-assertion-type:jwt-bearer", client_assertion: assertion, scope: "system/Observation.read", ...(extra || {}) }));
+
+  assert.equal((await cc(await lab.sign(claims({ aud: "https://elsewhere/token" })))).status, 401, "aud must be this token endpoint");
+  const publicTry = await viaFhirDoor(`${ORG}/smart/token`, form({ grant_type: "client_credentials", client_id: "chart-viewer" }));
+  assert.equal(publicTry.status, 400, "a public client has no key and no client_credentials");
+
+  const j = claims();
+  const ok = await cc(await lab.sign(j));
+  const okText = await ok.text();
+  assert.equal(ok.status, 200, okText);
+  const t = JSON.parse(okText);
+  assert.equal(t.scope, "system/Observation.read");
+  // The same assertion again: refused. Bounded by the assertion's own five-minute life.
+  assert.equal((await cc(await lab.sign(j))).status, 400);
+  assert.equal((await (await cc(await lab.sign(j))).json()).error, "invalid_grant");
+
+  const obs = await viaFhirDoor(`${ORG}/Observation?patient=${adm.patientId}`, { bearer: t.access_token });
+  assert.equal(obs.status, 200, await obs.text());
+  const auditRows = RECORD.audit.filter((a) => a.action === "record.read" && a.actor === "smart:lab-sys");
+  assert.ok(auditRows.length >= 1, "the audit names the system, never a person");
+  assert.equal((await viaFhirDoor(`${ORG}/Condition?patient=${adm.patientId}`, { bearer: t.access_token })).status, 403);
+
+  // A read door is a read door: no method but GET past the token endpoints.
+  const put = await viaFhirDoor(`${ORG}/Observation/x`, { method: "PUT", bearer: t.access_token, headers: { "Content-Type": "application/fhir+json" }, body: "{}" });
+  assert.equal(put.status, 405);
+  assert.equal(put.headers.get("allow"), "GET");
+});
+
+/* ---- Hardening (2026-09-08): isolation, round trip, malformed input, audit ------------------- */
+
+const ORG2 = "org-two";
+function seedSecondHospital(clients) {
+  docs.set(`q_orgs/${ORG2}`, { fields: { id: ORG2, code: "SMD-TWO", name: "Other Hospital", kind: "clinic", mode: "wardsynq", connectTenantId: TENANT_ROW2.id, ownerUid: "cfa:nobody", createdAt: 1,
+    wardsynq: { fhir: { inbound: { enabled: true }, smart: { enabled: true, clients: clients || [] } } } }, updateTime: "t1" });
+  docs.set(`q_members/${sanitize(ORG2)}__${sanitize(idFor(DOCTOR))}`, { fields: { orgId: ORG2, identity: idFor(DOCTOR), role: "doctor", active: true }, updateTime: "t1" });
+}
+
+test("ISOLATION: a chart, an import and a token in one hospital do not exist in another, at either door", async () => {
+  seedHospital(); enableInboundFhir(); resetRateLimit();
+  const lab = await smartBackendClient("lab-sys");
+  enableSmart([lab.config]);
+  seedSecondHospital([]);
+  const { reg, adm } = await admittedPatientOnDrug();
+  await pushFhir(DOCTOR, `/ward/fhir?orgId=${ORG}`, partnerBundle({ bundleId: "iso-1", suffix: "-iso" }));
+
+  // The same doctor, a member of both, reading hospital two: our patient is not there.
+  const rd = await asRaw(DOCTOR, `/ward/fhir/Patient/${adm.patientId}?orgId=${ORG2}`);
+  assert.equal(rd.status, 404);
+  const srch = await (await asRaw(DOCTOR, `/ward/fhir/Observation?orgId=${ORG2}&patient=${adm.patientId}`)).json();
+  assert.equal(srch.total, 0);
+  assert.equal((await RECORD.latest(TENANT_ROW2.id, "Patient", "fhir-partner-his-pat-his-pat-77")), null, "the import landed in hospital one only");
+
+  // An import into hospital two carrying hospital ONE's MRN links to nobody: identity is per tenant.
+  const two = await pushFhir(DOCTOR, `/ward/fhir?orgId=${ORG2}`, partnerBundle({ patientId: "HIS-PAT-X", mrn: reg.mrn, abha: "00-0000-0000-0099", bundleId: "iso-2", suffix: "-iso2" }));
+  assert.equal(two.status, 200, await two.text());
+  assert.ok(await RECORD.latest(TENANT_ROW2.id, "Patient", "fhir-partner-his-pat-his-pat-x"), "created anew in hospital two");
+  assert.equal((await (await asRaw(DOCTOR, `/ward/fhir/Observation?orgId=${ORG}&patient=${adm.patientId}&code=2160-0`)).json()).total, 0, "nothing reached hospital one's chart");
+
+  // A SMART token issued by hospital one is nothing at hospital two, and vice versa.
+  const t = await (await viaFhirDoor(`${ORG}/smart/token`, form({ grant_type: "client_credentials", client_assertion_type: "urn:ietf:params:oauth:client-assertion-type:jwt-bearer", client_assertion: await lab.sign({ iss: "lab-sys", sub: "lab-sys", aud: `https://x/api/fhir/${ORG}/smart/token`, exp: Math.floor(Date.now() / 1000) + 60, jti: "iso-j1" }) }))).json();
+  assert.ok(t.access_token);
+  assert.equal((await viaFhirDoor(`${ORG}/Observation?patient=${adm.patientId}`, { bearer: t.access_token })).status, 200);
+  assert.equal((await viaFhirDoor(`${ORG2}/Observation?patient=${adm.patientId}`, { bearer: t.access_token })).status, 401, "not a token hospital two issued");
+});
+
+test("ROUND TRIP: WardSynQ -> an external EMR -> WardSynQ, and the clinical content survives field for field", async () => {
+  seedHospital(); enableInboundFhir();
+  const { adm, ord, patient, scan } = await admittedPatientOnDrug();
+  await as(DOCTOR, "/ward/problem", "POST", { orgId: ORG, problem: { patientId: adm.patientId, encounterId: adm.encounterId, code: "J18.9", codeSystem: "ICD-10", display: "Pneumonia", verificationStatus: "confirmed" } });
+  const step = (a, x) => as(NURSE, "/ward/mar", "POST", { orgId: ORG, action: a, orderId: ord.orderId, dueAt: DUE, patient, ...(x || {}) });
+  await step("verify"); await step("dispense"); await step("scan", { scan }); await step("administer");
+  const sr = await as(DOCTOR, "/ward/investigation", "POST", { orgId: ORG, encounterId: adm.encounterId, code: "Renal profile", category: "laboratory" });
+  await as(LABTECH, "/ward/release-result", "POST", { orgId: ORG, serviceRequestId: sr.orderId, status: "final", reportedAt: "2026-09-07T10:00:00.000Z", conclusion: "Renal function normal.", tests: [{ test: "Creatinine", value: 88, unit: "umol/L" }] });
+  const note = await as(DOCTOR, "/ward/note", "POST", { orgId: ORG, templateId: "ward-round", encounterId: adm.encounterId, sections: { impression: "Improving pneumonia.", plan: "Continue antibiotics; review tomorrow." } });
+  assert.equal(note.__status, 200, JSON.stringify(note).slice(0, 200));
+
+  // OUT: everything for the patient, as another EMR would pull it.
+  const out = await (await asRaw(DOCTOR, `/ward/fhir/Patient/${adm.patientId}/$everything?orgId=${ORG}`)).json();
+  const byType = {}; for (const e of out.entry) (byType[e.resource.resourceType] ||= []).push(e.resource);
+  assert.ok(byType.Patient && byType.Encounter && byType.Condition && byType.Observation && byType.MedicationRequest && byType.MedicationAdministration && byType.DiagnosticReport && byType.DocumentReference, Object.keys(byType).join(","));
+  assert.match(byType.DocumentReference[0].description, /Improving pneumonia/, "the note's words travel");
+  assert.ok(byType.DocumentReference[0].content[0].attachment.data, "and as an attachment");
+
+  // The other EMR re-identifies the patient as its own and sends it all back. A different person
+  // on paper (new name, dob, MRN) so identity does not hold the bundle; the CONTENT is what is measured.
+  const mirror = { resourceType: "Bundle", type: "collection", id: "mirror-1", entry: out.entry.map((e) => ({ resource: e.resource })) };
+  const mp = mirror.entry.find((e) => e.resource.resourceType === "Patient").resource;
+  mp.identifier = [{ type: { coding: [{ code: "MR" }] }, system: "urn:mirror:mrn", value: "MIRROR-0001" }];
+  mp.name = [{ text: "Mirror Person" }]; mp.birthDate = "1961-11-05";
+  const back = await pushFhir(DOCTOR, `/ward/fhir?orgId=${ORG}`, mirror, { "X-Source-System": "mirror" });
+  const backText = await back.text();
+  assert.equal(back.status, 200, backText);
+  const bb = JSON.parse(backText);
+  // The one export-only type is REPORTED as unsupported on the way in, not silently dropped.
+  assert.ok((bb.meta.tag || []).some((t) => /MedicationAdministration is not a resource WardSynQ imports/.test(t.display)), JSON.stringify(bb.meta));
+  const mirrored = `fhir-mirror-pat-${adm.patientId}`;
+  assert.ok(await RECORD.latest(TENANT_ROW.id, "Patient", mirrored));
+
+  const back$ = await (await asRaw(DOCTOR, `/ward/fhir/Patient/${mirrored}/$everything?orgId=${ORG}`)).json();
+  const got = {}; for (const e of back$.entry) (got[e.resource.resourceType] ||= []).push(e.resource);
+
+  // Condition: the ICD-10 coding is intact and still ICD-10.
+  assert.deepEqual(got.Condition[0].code.coding[0], byType.Condition[0].code.coding[0]);
+  assert.equal(got.Condition[0].verificationStatus.coding[0].code, "provisional", "an imported diagnosis is provisional HERE until a clinician here confirms it - never silently confirmed");
+  // Observations: same count, and the creatinine is the same number in the same unit at the same time under the same LOINC.
+  assert.equal(got.Observation.length, byType.Observation.length);
+  const cre0 = byType.Observation.find((o) => o.code.coding && o.code.coding[0].code === "2160-0");
+  const cre1 = got.Observation.find((o) => o.code.coding && o.code.coding[0].code === "2160-0");
+  assert.deepEqual([cre1.valueQuantity.value, cre1.valueQuantity.unit, cre1.effectiveDateTime, cre1.code.coding[0].system], [cre0.valueQuantity.value, cre0.valueQuantity.unit, cre0.effectiveDateTime, "http://loinc.org"]);
+  // Medication: the drug and the instruction text survive; the order is a DRAFT here, attributed to the sender.
+  assert.equal(got.MedicationRequest[0].medicationCodeableConcept.text, byType.MedicationRequest[0].medicationCodeableConcept.text);
+  assert.equal(got.MedicationRequest[0].dosageInstruction[0].text, byType.MedicationRequest[0].dosageInstruction[0].text);
+  assert.equal(got.MedicationRequest[0].status, "draft");
+  // Report: status, conclusion, and it still points at its observation.
+  assert.equal(got.DiagnosticReport[0].status, "final");
+  assert.equal(got.DiagnosticReport[0].conclusion, "Renal function normal.");
+  assert.equal(got.DiagnosticReport[0].result.length, 1);
+  // Note: the words are the same words.
+  assert.equal(got.DocumentReference[0].description, byType.DocumentReference[0].description);
+  // Encounter: class and start survive.
+  assert.equal(got.Encounter[0].class.code, "IMP");
+  assert.equal(got.Encounter[0].period.start, byType.Encounter[0].period.start);
+  // Provenance on the way back names the sender's system and the sender's own id for each row.
+  const prov = await (await asRaw(DOCTOR, `/ward/fhir/Provenance?orgId=${ORG}&target=Observation/${cre1.id}`)).json();
+  assert.equal(prov.entry[0].resource.entity[0].what.identifier.system, "urn:stewardmd:source:fhir-mirror");
+  assert.equal(prov.entry[0].resource.entity[0].what.identifier.value, cre0.id, "the sender's id for it is our original id: the loop closes");
+});
+
+test("MALFORMED INPUT is refused with an OperationOutcome naming the fault, and nothing is written", async () => {
+  seedHospital(); enableInboundFhir();
+  const { adm } = await admittedPatientOnDrug();
+  const before = RECORD.audit.length;
+  const raw = (body, headers) => onRequest({ request: new Request(`https://x/api/queue/ward/fhir?orgId=${ORG}`, { method: "POST", headers: { "Cf-Access-Authenticated-User-Email": DOCTOR, "Content-Type": "application/fhir+json", "X-Source-System": "partner-his", ...(headers || {}) }, body }), env: ENV });
+
+  const notJson = await raw("{this is not json");
+  assert.equal(notJson.status, 400);
+  assert.equal((await notJson.json()).resourceType, "OperationOutcome");
+  const emptyEntry = await raw(JSON.stringify({ resourceType: "Bundle", entry: [{ resource: { resourceType: "Patient", id: "p" } }, { fullUrl: "x" }] }));
+  assert.equal(emptyEntry.status, 400);
+  assert.match((await emptyEntry.json()).issue[0].diagnostics, /1 bundle entry has no resource/);
+  const noId = await raw(JSON.stringify({ resourceType: "Bundle", entry: [{ resource: { resourceType: "Patient", id: "p" } }, { resource: { resourceType: "Observation" } }] }));
+  assert.equal(noId.status, 400);
+  assert.match((await noId.json()).issue[0].diagnostics, /has no id/);
+  const noPatient = await raw(JSON.stringify({ resourceType: "Bundle", entry: [{ resource: { resourceType: "Observation", id: "o1" } }] }));
+  assert.equal(noPatient.status, 400);
+  assert.match((await noPatient.json()).issue[0].diagnostics, /must carry the Patient/);
+  // A resource with no id cannot be attributed or replayed safely, whatever type it is.
+  const noIdPatient = await raw(JSON.stringify({ resourceType: "Patient", name: [{ text: "Nobody" }] }));
+  assert.equal(noIdPatient.status, 400);
+  assert.match((await noIdPatient.json()).issue[0].diagnostics, /has no id/);
+  assert.equal(await RECORD.latest(TENANT_ROW.id, "Patient", "fhir-partner-his-pat-p"), null);
+  assert.equal((await RECORD.latest(TENANT_ROW.id, "Observation", "fhir-partner-his-obs-o1")), null);
+  assert.ok(!RECORD.audit.slice(before).some((a) => a.action === "record.ingest"), "no ingest audit row: nothing was ingested");
+});
+
+test("AUDIT: every imported row and every token carries who, as what, and for whom", async () => {
+  seedHospital(); enableInboundFhir(); resetRateLimit();
+  const lab = await smartBackendClient("lab-sys");
+  enableSmart([lab.config]);
+  const { adm } = await admittedPatientOnDrug();
+  const mark = RECORD.audit.length;
+  await pushFhir(DOCTOR, `/ward/fhir?orgId=${ORG}`, partnerBundle({ bundleId: "aud-1", suffix: "-aud" }));
+  const ingests = RECORD.audit.slice(mark).filter((a) => a.action === "record.ingest");
+  assert.ok(ingests.length >= 8, `ingest rows ${ingests.length}`);
+  assert.ok(ingests.every((a) => a.actor === "adapter:fhir-partner-his"), "attributed to the feed, never to the doctor");
+  assert.ok(ingests.every((a) => a.scope && a.scope.system === "fhir-partner-his"));
+  assert.ok(ingests.every((a) => !JSON.stringify(a).includes("Partner Testcase")), "PHI-free: no name in the audit");
+
+  const denied = await viaFhirDoor(`${ORG}/smart/token`, form({ grant_type: "client_credentials", client_assertion_type: "urn:ietf:params:oauth:client-assertion-type:jwt-bearer", client_assertion: await lab.sign({ iss: "lab-sys", sub: "lab-sys", aud: "https://wrong/", exp: Math.floor(Date.now() / 1000) + 60, jti: "aud-j0" }) }));
+  assert.equal(denied.status, 401);
+  assert.ok(RECORD.audit.some((a) => a.action === "smart.token.denied" && a.scope && a.scope.clientId === "lab-sys"));
+  const ok = await viaFhirDoor(`${ORG}/smart/token`, form({ grant_type: "client_credentials", client_assertion_type: "urn:ietf:params:oauth:client-assertion-type:jwt-bearer", client_assertion: await lab.sign({ iss: "lab-sys", sub: "lab-sys", aud: `https://x/api/fhir/${ORG}/smart/token`, exp: Math.floor(Date.now() / 1000) + 60, jti: "aud-j1" }) }));
+  assert.equal(ok.status, 200);
+  const issued = RECORD.audit.find((a) => a.action === "smart.token" && a.actor === "smart:lab-sys");
+  assert.ok(issued);
+  assert.ok(!JSON.stringify(issued).includes((await ok.json()).access_token), "the token itself is never in the audit");
+});
+
+test("SMART: the token endpoint is rate limited per client, and says so with Retry-After", async () => {
+  seedHospital(); resetRateLimit();
+  const lab = await smartBackendClient("lab-sys");
+  enableSmart([lab.config]);
+  await admittedPatientOnDrug();
+  let last;
+  for (let i = 0; i < 31; i++) {
+    last = await viaFhirDoor(`${ORG}/smart/token`, form({ grant_type: "client_credentials", client_assertion_type: "urn:ietf:params:oauth:client-assertion-type:jwt-bearer", client_assertion: await lab.sign({ iss: "lab-sys", sub: "lab-sys", aud: "https://wrong/", exp: Math.floor(Date.now() / 1000) + 60, jti: "x" + i }) }));
+  }
+  assert.equal(last.status, 429);
+  assert.ok(Number(last.headers.get("retry-after")) >= 1);
+  assert.equal((await last.json()).error, "temporarily_unavailable");
 });
