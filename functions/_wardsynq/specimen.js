@@ -37,6 +37,9 @@ import { AuthError, PermissionError } from "../_connect/permission.js";
 import { priorityRank } from "./ward-order.js";
 
 const str = (v) => (v == null ? "" : String(v).trim());
+// The SAME wristband comparator wardsynq-meds.js's five-rights scan already uses (HAZ-MED-04) and
+// wardsynq-transfusion.js's bedside check reuses independently - one comparator, not a third one.
+const normaliseBarcode = (v) => (typeof v === "string" ? v.trim().toUpperCase() : null);
 const TYPE = "SpecimenCollection";
 
 const STATES = Object.freeze(["collected", "received", "failed"]);
@@ -62,6 +65,11 @@ function SpecimenCollection(input) {
     // The label a ward and a laboratory read off the tube. Deterministic, so the same collection
     // relabelled is the same specimen and not a second one.
     label: i.label || null,
+    // TASK 3.1: a human-readable accession number, deterministic from the SAME id every other
+    // identifier here already is - so "duplicate accession" and "accession reuse" are impossible BY
+    // CONSTRUCTION rather than by a lock somebody could forget to take, the same discipline every
+    // deterministic id in this codebase already relies on (patientIdForMrn, caseIdFor, linkIdFor).
+    accessionNumber: i.accessionNumber || null,
     source: { system: "wardsynq-native", sourceId: `specimen:${i.id}` },
   };
 }
@@ -78,6 +86,19 @@ const slug = (v) => str(v).toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-
 function specimenIdFor(serviceRequestId, collectedAt) {
   const r = slug(serviceRequestId), t = slug(collectedAt);
   return r && t ? `wsq-spec-${r}-${t}` : null;
+}
+
+/**
+ * PURE. The accession number a ward and a laboratory read off the tube - derived from the SAME
+ * deterministic specimenId, uppercased and hyphen-stripped into the digits/letters a barcode actually
+ * carries. Two different specimens can never collide (they never share a specimenId, by
+ * specimenIdFor()'s own construction), and the SAME specimen recollected under the SAME id gets the
+ * SAME accession number - which is what makes "accession reuse" a non-event rather than a hazard: it
+ * is the SAME sample being re-labelled, not two samples wearing one number.
+ */
+function accessionNumberFor(specimenId) {
+  const s = str(specimenId).toUpperCase().replace(/[^A-Z0-9]+/g, "");
+  return s ? `ACC-${s.slice(-16)}` : null;
 }
 
 /** PURE. Does this request still need somebody to go and take a sample? */
@@ -127,6 +148,7 @@ function summary(s) {
   return {
     specimenId: s.id, serviceRequestId: s.serviceRequestId, patientId: s.patientId,
     specimenType: s.specimenType || null, container: s.container || null, label: s.label || null,
+    accessionNumber: s.accessionNumber || null,
     state: s.state, outstanding: isOutstanding(s),
     collectedBy: s.collectedBy, collectedAt: s.collectedAt,
     receivedAt: s.receivedAt || null, receivedBy: s.receivedBy || null,
@@ -135,7 +157,16 @@ function summary(s) {
   };
 }
 
-/** A sample was taken. ctx: { migration, serviceRequestId, specimenType?, container?, at?, ... } */
+/**
+ * A sample was taken.
+ * ctx: { migration, serviceRequestId, specimenType?, container?, at?, scannedPatientBarcode?, ... }
+ *
+ * WRONG-PATIENT COLLECTION BLOCKED: when a scan is supplied it must match the actual patient the
+ * order belongs to - the same normaliseBarcode comparator wardsynq-meds.js's five-rights scan and
+ * wardsynq-transfusion.js's bedside check already use. Per the master plan, scanning must never be
+ * the ONLY safeguard: the pre-existing "does this ServiceRequest exist and remain open" check is the
+ * independent second factor, unchanged.
+ */
 async function collectSpecimen(request, env, ctx) {
   const mig = ctx.migration;
   const base = { mode: mig && mig.mode, tenantId: (mig && mig.tenantId) || null };
@@ -157,6 +188,19 @@ async function collectSpecimen(request, env, ctx) {
     return { ...base, ok: false, status: 409, error: "request_not_open", detail: `this request is ${sr.status}`, serviceRequestId, written: 0 };
   }
 
+  const scanned = str(ctx.scannedPatientBarcode);
+  if (scanned) {
+    let patient;
+    try { patient = await svc.get("Patient", sr.patientId); }
+    catch (e) { return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), written: 0 }; }
+    const expected = normaliseBarcode(patient && (patient.wristbandBarcode || patient.mrn));
+    if (!expected || normaliseBarcode(scanned) !== expected) {
+      // WRONG-PATIENT COLLECTION BLOCKED. Nothing is written: an unlabelled tube never leaves this
+      // route thinking it belongs to the wrong chart.
+      return { ...base, ok: false, status: 409, error: "wrong_patient_scan", detail: "the scanned wristband does not match the patient this order belongs to", serviceRequestId, written: 0 };
+    }
+  }
+
   const at = str(ctx.at) || new Date().toISOString();
   const id = specimenIdFor(serviceRequestId, at);
   if (!id) return { ...base, ok: false, status: 422, error: "bad_identifiers", written: 0 };
@@ -170,7 +214,7 @@ async function collectSpecimen(request, env, ctx) {
     id, patientId: sr.patientId, encounterId: sr.encounterId || null, serviceRequestId,
     specimenType: str(ctx.specimenType) || null, container: str(ctx.container) || null,
     state: "collected", collectedBy: resolved.actor.id, collectedAt: at,
-    label: id,
+    label: id, accessionNumber: accessionNumberFor(id),
   });
   try {
     const out = await svc.put(record, { idempotencyKey: ctx.idempotencyKey || null });
@@ -297,4 +341,4 @@ async function collectionList(request, env, ctx) {
   };
 }
 
-export { TYPE, STATES, OUTSTANDING, SpecimenCollection, specimenIdFor, isOutstanding, collectionState, collectSpecimen, specimenOutcome, collectionList };
+export { TYPE, STATES, OUTSTANDING, SpecimenCollection, specimenIdFor, accessionNumberFor, isOutstanding, collectionState, collectSpecimen, specimenOutcome, collectionList };

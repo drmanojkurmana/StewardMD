@@ -824,8 +824,14 @@
 
     var rows = coll.map(function (c) {
       var st_ = (c.collection && c.collection.state) || "ordered";
+      // TASK 3.1: the phlebotomist's actual next action, not just a status word. Only offered while
+      // a sample genuinely still needs taking (none/failed) - a collected or received sample has
+      // nothing left to do here.
+      var canCollect = st_ === "none" || st_ === "failed";
       return "<li><b>" + esc(c.display || c.code) + "</b> <span>" + esc(c.category || "") + (c.priority && c.priority !== "routine" ? " &middot; " + esc(c.priority).toUpperCase() : "") + "</span>" +
-        '<span class="w-st ' + esc(st_) + '">' + esc(st_.replace(/_/g, " ")) + "</span></li>";
+        '<span class="w-st ' + esc(st_) + '">' + esc(st_.replace(/_/g, " ")) + "</span>" +
+        (canCollect ? '<button class="w-btn tiny go" data-w-act="collectspecimen:' + esc(c.serviceRequestId) + '">' + ms("colorize") + "Collect</button>" : "") +
+      "</li>";
     }).join("");
 
     var results = (state.results || []).map(function (r) {
@@ -2256,6 +2262,26 @@
       } else paint();
     }).catch(function () { st.busy = false; st.err = "Could not order that."; paint(); });
   }
+  /* TASK 3.1: collecting the sample the phlebotomist has actually just taken. Specimen type is
+   * asked for plainly (nothing here guesses a tube from the test name), and the wristband scan is
+   * asked for as a real safeguard, not a formality - the server refuses the collection outright if
+   * it does not match the order's own patient (wrong-patient collection blocked). */
+  function collectSpecimen(serviceRequestId) {
+    var specimenType = "", scanned = "";
+    try {
+      specimenType = G.prompt("Specimen type (e.g. Whole blood, Serum, Urine):") || "";
+      if (!specimenType.trim()) return;
+      scanned = G.prompt("Scan or enter the patient's wristband barcode/MRN, to confirm this is the right patient:") || "";
+    } catch (e) { return; }
+    st.busy = true; paint();
+    apiPost("/ward/collect", { orgId: st.orgId, serviceRequestId: serviceRequestId, specimenType: specimenType.trim(), scannedPatientBarcode: scanned.trim() || undefined })
+      .then(function (r) {
+        if (r && r.error === "wrong_patient_scan") { st.busy = false; st.err = "The scanned wristband does not match this patient's order. Nothing was collected."; paint(); return; }
+        if (settle(r, r && r.accessionNumber ? "Collected. Accession " + r.accessionNumber + "." : "Collected.")) loadInvestigations();
+        else paint();
+      })
+      .catch(function () { st.busy = false; st.err = "Could not record the collection."; paint(); });
+  }
   /* The flowsheet and NEWS2/PEWS are READ from the same vitals this chart already records - no
    * second write path. A failure to load either is silent on the card itself (it says "loading"
    * indefinitely rather than throwing a banner over the whole chart for a secondary panel). */
@@ -2673,6 +2699,7 @@
       return;
     }
     if (cmd === "ack") { acknowledge(arg); return; }
+    if (cmd === "collectspecimen") { collectSpecimen(arg); return; }
     if (cmd === "move") { transfer(); return; }
     if (cmd === "fluid") { chartFluid(); return; }
     if (cmd === "balance") { loadBalance(); return; }

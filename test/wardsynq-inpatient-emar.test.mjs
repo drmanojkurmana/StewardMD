@@ -1267,6 +1267,11 @@ test("a critical result opens a loop, is acknowledged by a named clinician, and 
   assert.equal(opened.loops[0].basis, "limit");
   assert.equal(opened.loops[0].state, "open");
   assert.equal(opened.loops[0].acknowledgedBy, null);
+  // TASK 3.1: a notification attempt is made and HONESTLY recorded - no real channel is wired in
+  // this build, so NO_CHANNEL is recorded rather than a silent "sent".
+  assert.equal(opened.loops[0].notification.attempted, true);
+  assert.equal(opened.loops[0].notification.delivered, false);
+  assert.equal(opened.loops[0].notification.reason, "NO_CHANNEL");
 
   // The ward can SEE it without being able to act on it.
   const list = await as(NURSE, `/ward/criticals?orgId=${ORG}&patientId=${adm.patientId}`);
