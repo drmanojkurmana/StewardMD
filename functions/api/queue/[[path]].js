@@ -61,7 +61,7 @@ import { giveHandover, receiveHandover, listHandovers } from "../../_wardsynq/ha
 import { verifyOrder, verificationQueue } from "../../_wardsynq/pharmacy-verify.js";
 import { dispenseOrder, returnDispense, listDispenses } from "../../_wardsynq/pharmacy-dispense.js";
 import { declareBreakGlass, openEmergencyChart, listBreakGlass } from "../../_wardsynq/break-glass.js";
-import { patientEverything, readResource, capabilityStatement } from "../../_wardsynq/fhir.js";
+import { patientEverything, readResource, capabilityStatement, searchType, historyOf, vread, operationOutcome } from "../../_wardsynq/fhir.js";
 import { startReconciliation, decideMedicine, readReconciliation } from "../../_wardsynq/med-reconciliation.js";
 import { wardMetrics } from "../../_wardsynq/ward-metrics.js";
 import { releaseResult, pendingRequests } from "../../_wardsynq/lab-result.js";
@@ -211,6 +211,18 @@ function corsHeaders(request) {
   return h;
 }
 function json(obj, status, request) { return new Response(JSON.stringify(obj), { status: status || 200, headers: Object.assign({ "Content-Type": "application/json", "Cache-Control": "no-store" }, corsHeaders(request)) }); }
+/* FHIR's own media type, on every FHIR response including errors. The CapabilityStatement declared
+ * application/fhir+json while the route served application/json, and a strict client rejects that
+ * mismatch - which is how "we have a FHIR endpoint" turns out to mean "we have JSON". A single
+ * resource carries its ETag as a weak validator over versionId, so If-Match round-trips to the
+ * record service's expectedVersion. */
+function fhirJson(obj, status, request, extra) {
+  const h = Object.assign({ "Content-Type": "application/fhir+json; charset=utf-8", "Cache-Control": "no-store" }, corsHeaders(request));
+  if (obj && obj.meta && obj.meta.versionId && obj.resourceType !== "Bundle") h.ETag = `W/"${obj.meta.versionId}"`;
+  if (obj && obj.meta && obj.meta.lastUpdated && obj.resourceType !== "Bundle") { const d = new Date(obj.meta.lastUpdated); if (!isNaN(d)) h["Last-Modified"] = d.toUTCString(); }
+  Object.assign(h, extra || {});
+  return new Response(JSON.stringify(obj), { status: status || 200, headers: h });
+}
 async function readBody(request) { try { return await request.json(); } catch (e) { return {}; } }
 
 /* An authorization refusal, in words the person at the front desk can act on.
@@ -713,19 +725,61 @@ export async function onRequest(context) {
        *   /ward/fhir/Patient/<id>                one resource
        *   /ward/fhir?patient=<id>[&_type=A,B]    everything for one patient, as a Bundle
        * Errors come back as OperationOutcome, because that is what a FHIR client parses. */
-      if (sub === "fhir" && method === "GET") {
-        const fType = parts[2] || "", fId = parts[3] || "";
-        if (fType === "metadata") {
-          return json(capabilityStatement({ date: new Date().toISOString(), version: "wardsynq-1" }), 200, request);
-        }
+      if (sub === "fhir") {
+        /* FHIR R4, read side. Every response is application/fhir+json and every error is an
+         * OperationOutcome, including an unknown path - a FHIR client parses those and nothing else.
+         *   GET /ward/fhir/metadata                          CapabilityStatement
+         *   GET /ward/fhir/{Type}?...                        search-type (see fhir-search.js)
+         *   GET /ward/fhir/{Type}/{id}                       read       (ETag = W/"versionId")
+         *   GET /ward/fhir/{Type}/{id}/_history              history-instance
+         *   GET /ward/fhir/{Type}/{id}/_history/{vid}        vread
+         *   GET /ward/fhir/Patient/{id}/$everything          everything for one patient
+         *   GET /ward/fhir?patient={id}[&_type=A,B]          the same, older spelling */
+        const fType = parts[2] || "", fId = parts[3] || "", fOp = parts[4] || "", fVid = parts[5] || "";
         const fctx = { ...deps, base: `${url.origin}/api/queue/ward/fhir` };
-        const r = fType && fId
-          ? await readResource(request, env, { ...fctx, type: fType, id: fId })
-          : await patientEverything(request, env, {
-              ...fctx, patientId: url.searchParams.get("patient") || url.searchParams.get("patientId") || "",
-              types: (url.searchParams.get("_type") || "").split(",").map((t) => t.trim()).filter(Boolean),
-            });
-        return json(r.ok ? (r.bundle || r.resource) : r.outcome, r.status, request);
+        if (method !== "GET") {
+          return fhirJson(operationOutcome("error", "not-supported", "this FHIR endpoint is read-only: GET only"), 405, request, { Allow: "GET" });
+        }
+        if (fType === "metadata") {
+          return fhirJson(capabilityStatement({ date: new Date().toISOString(), version: "wardsynq-1" }), 200, request);
+        }
+        if (!fType) {
+          const r = await patientEverything(request, env, {
+            ...fctx, patientId: url.searchParams.get("patient") || url.searchParams.get("patientId") || "",
+            types: (url.searchParams.get("_type") || "").split(",").map((t) => t.trim()).filter(Boolean),
+          });
+          return fhirJson(r.ok ? r.bundle : r.outcome, r.status, request);
+        }
+        if (fType === "Patient" && fId && fOp === "$everything") {
+          const r = await patientEverything(request, env, { ...fctx, patientId: fId, types: [] });
+          return fhirJson(r.ok ? r.bundle : r.outcome, r.status, request);
+        }
+        if (fId && fOp === "_history" && fVid) {
+          const r = await vread(request, env, { ...fctx, type: fType, id: fId, versionId: fVid });
+          return fhirJson(r.ok ? r.resource : r.outcome, r.status, request);
+        }
+        if (fId && fOp === "_history") {
+          const r = await historyOf(request, env, { ...fctx, type: fType, id: fId });
+          return fhirJson(r.ok ? r.bundle : r.outcome, r.status, request);
+        }
+        if (fId && fOp) {
+          return fhirJson(operationOutcome("error", "not-found", `no such operation: ${fOp}`), 404, request);
+        }
+        if (fId) {
+          const r = await readResource(request, env, { ...fctx, type: fType, id: fId });
+          return fhirJson(r.ok ? r.resource : r.outcome, r.status, request);
+        }
+        const prefer = request.headers.get("Prefer") || "";
+        /* `orgId` is THIS API's transport parameter, not a FHIR search parameter, and the strict
+         * parser would rightly refuse it. Stripped before parsing; kept in the Bundle links so the
+         * next page is fetchable through the same door. */
+        const fhirParams = new URLSearchParams(url.searchParams);
+        fhirParams.delete("orgId");
+        const r = await searchType(request, env, {
+          ...fctx, type: fType, searchParams: fhirParams, rawQuery: url.search.replace(/^\?/, ""),
+          lenient: /handling=lenient/i.test(prefer),
+        });
+        return fhirJson(r.ok ? r.bundle : r.outcome, r.status, request);
       }
       if (sub === "transmit" && method === "POST") {
         const r = await queueTransmission(request, env, { ...deps, orderId: body.orderId, channel: body.channel, destination: body.destination, idempotencyKey: body.idempotencyKey || null });
