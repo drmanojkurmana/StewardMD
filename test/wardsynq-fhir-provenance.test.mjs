@@ -158,8 +158,8 @@ test("the CapabilityStatement declares Provenance and Consent exactly as impleme
   assert.equal(parseSearch("Provenance", "target=Encounter/e1").problems.length, 0);
   assert.deepEqual(parseSearch("Provenance", "target=Encounter/e1").query.target, { type: "Encounter", id: "e1" });
   assert.equal(parseSearch("Provenance", "target=nonsense").problems[0].reason, "target must be Type/id");
-  assert.match(parseSearch("Observation", "target=Encounter/e1").problems[0].reason, /has no target/);
-  assert.deepEqual(parseSearch("Observation", "_revinclude=Provenance:target").query.revInclude, ["Provenance:target"]);
+  assert.match(parseSearch("Observation", "target=Encounter/e1").problems[0].reason, /not a search parameter/);
+  assert.deepEqual(parseSearch("Observation", "_revinclude=Provenance:target").query.revInclude.map((r) => r.key), ["Provenance:target"]);
   assert.equal(parseSearch("Provenance", "_revinclude=Provenance:target").problems.length, 1, "not on itself");
   assert.ok(declaredSearch("Consent").params.some((p) => p.name === "patient"));
 });

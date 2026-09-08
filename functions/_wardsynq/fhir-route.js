@@ -35,9 +35,11 @@ async function dispatchRead(request, env, parts, url, fctx, prefer) {
   const strip = () => { const p = new URLSearchParams(url.searchParams); p.delete("orgId"); return p; };
   const rawQuery = url.search.replace(/^\?/, "");
 
+  const lenient = /handling=lenient/i.test(str(prefer));
+
   if (fType === "metadata") return { obj: capabilityStatement({ date: new Date().toISOString(), version: "wardsynq-1", smart: fctx.smart || null }), status: 200 };
   if (!fType) {
-    const r = await patientEverything(request, env, { ...fctx, patientId: url.searchParams.get("patient") || url.searchParams.get("patientId") || "", types: (url.searchParams.get("_type") || "").split(",").map((t) => t.trim()).filter(Boolean) });
+    const r = await patientEverything(request, env, { ...fctx, patientId: url.searchParams.get("patient") || url.searchParams.get("patientId") || "", searchParams: strip(), rawQuery, lenient });
     return { obj: r.ok ? r.bundle : r.outcome, status: r.status };
   }
   if (fType === "Provenance") {
@@ -45,14 +47,14 @@ async function dispatchRead(request, env, parts, url, fctx, prefer) {
     return { obj: r.ok ? (r.resource || r.bundle) : r.outcome, status: r.status };
   }
   if (fType === "Patient" && fId && fOp === "$everything") {
-    const r = await patientEverything(request, env, { ...fctx, patientId: fId, types: [] });
+    const r = await patientEverything(request, env, { ...fctx, patientId: fId, searchParams: strip(), rawQuery, lenient });
     return { obj: r.ok ? r.bundle : r.outcome, status: r.status };
   }
   if (fId && fOp === "_history" && fVid) { const r = await vread(request, env, { ...fctx, type: fType, id: fId, versionId: fVid }); return { obj: r.ok ? r.resource : r.outcome, status: r.status }; }
   if (fId && fOp === "_history") { const r = await historyOf(request, env, { ...fctx, type: fType, id: fId }); return { obj: r.ok ? r.bundle : r.outcome, status: r.status }; }
   if (fId && fOp) return { obj: operationOutcome("error", "not-found", `no such operation: ${fOp}`), status: 404 };
-  if (fId) { const r = await readResource(request, env, { ...fctx, type: fType, id: fId }); return { obj: r.ok ? r.resource : r.outcome, status: r.status }; }
-  const r = await searchType(request, env, { ...fctx, type: fType, searchParams: strip(), rawQuery, lenient: /handling=lenient/i.test(str(prefer)) });
+  if (fId) { const r = await readResource(request, env, { ...fctx, type: fType, id: fId, searchParams: strip() }); return { obj: r.ok ? r.resource : r.outcome, status: r.status }; }
+  const r = await searchType(request, env, { ...fctx, type: fType, searchParams: strip(), rawQuery, lenient });
   return { obj: r.ok ? r.bundle : r.outcome, status: r.status };
 }
 

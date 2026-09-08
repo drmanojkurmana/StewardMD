@@ -31,7 +31,7 @@
 import { resolveClinicalActor } from "./actor.js";
 import { RecordService } from "./service.js";
 import { AuthError, PermissionError } from "../_connect/permission.js";
-import { parseSearch, applySearch, paginate, resolveIncludes, searchBundle, declaredSearch, INCLUDES } from "./fhir-search.js";
+import { parseSearch, applySearch, paginate, resolveIncludes, resolveRevIncludes, searchBundle, declaredSearch, chainTargets, includeTargets, subset, refsOf, PATIENT_REF, DEFAULT_COUNT, MAX_COUNT, dateClause, dateMatches } from "./fhir-search.js";
 import { SYSTEMS, UNCODED, UNMAPPED, IDENTIFIER_SYSTEMS, systemUri, isUri, coverage } from "./terminology.js";
 
 const str = (v) => (v == null ? "" : String(v).trim());
@@ -540,9 +540,31 @@ function operationOutcome(severity, code, detail) {
   return { resourceType: "OperationOutcome", issue: [{ severity, code, diagnostics: detail }] };
 }
 
+/** PURE. The parameters Patient/$everything takes: _since, _type, _count, _page, _summary, _elements, _total. Anything else is named. */
+function parseEverything(searchParams) {
+  const params = searchParams instanceof URLSearchParams ? searchParams : new URLSearchParams(searchParams || "");
+  const q = { type: "$everything", since: null, types: [], count: DEFAULT_COUNT, page: 0, summary: null, elements: null, total: "accurate", include: [], revInclude: [], filters: [], chain: [], has: [], lastUpdated: [] };
+  const problems = [];
+  for (const [key, raw] of params.entries()) {
+    const val = str(raw);
+    if (key === "_since") { const c = dateClause(/^(eq|ne|gt|lt|ge|le|sa|eb|ap)/.test(val) ? val : `ge${val}`); if (!c) problems.push({ param: key, reason: "not a date" }); else q.since = c; continue; }
+    if (key === "_type") { q.types = val.split(",").map(str).filter(Boolean); continue; }
+    if (key === "_count") { const n = Number(val); if (val === "" || !Number.isFinite(n) || n < 0) problems.push({ param: key, reason: "must be a non-negative integer" }); else if (n === 0) q.summary = "count"; else q.count = Math.min(MAX_COUNT, Math.floor(n)); continue; }
+    if (key === "_page") { const n = Number(val); q.page = Number.isFinite(n) && n >= 0 ? Math.floor(n) : 0; continue; }
+    if (key === "_summary") { if (!["true", "text", "data", "count", "false"].includes(val)) problems.push({ param: key, reason: "must be true, text, data, count or false" }); else q.summary = val === "false" ? null : val; continue; }
+    if (key === "_elements") { q.elements = (q.elements || []).concat(val.split(",").map(str).filter(Boolean)); continue; }
+    if (key === "_total") { if (!["none", "estimate", "accurate"].includes(val)) problems.push({ param: key, reason: "must be none, estimate or accurate" }); else q.total = val; continue; }
+    if (key === "_format" || key === "patient" || key === "patientId") continue;
+    problems.push({ param: key, reason: "not a parameter of $everything this server supports (start/end are not: use _since)" });
+  }
+  return { query: q, problems };
+}
+
 /**
- * Everything this server holds for one patient, as a Bundle.
- * ctx: { migration, patientId, types?, actorDeps, recordDeps }
+ * Everything this server holds for one patient, as a paged searchset Bundle - the Patient first,
+ * then everything else newest first. `_since` keeps only what changed at or after that instant
+ * (by meta.lastUpdated, which is when WardSynQ learned it); `_type` narrows the types.
+ * ctx: { migration, patientId, searchParams?, types?, base, actorDeps, recordDeps }
  */
 async function patientEverything(request, env, ctx) {
   const mig = ctx.migration;
@@ -551,19 +573,33 @@ async function patientEverything(request, env, ctx) {
   const patientId = str(ctx.patientId);
   if (!patientId) return { ok: false, status: 400, outcome: operationOutcome("error", "required", "patient is required") };
 
+  const { query, problems } = parseEverything(ctx.searchParams);
+  if (problems.length && !ctx.lenient) {
+    return { ok: false, status: 400, outcome: { resourceType: "OperationOutcome", issue: problems.map((p) => ({ severity: "error", code: "not-supported", diagnostics: `${p.param}: ${p.reason}`, expression: [p.param] })) } };
+  }
+  const typeNames = query.types.length ? query.types : (Array.isArray(ctx.types) ? ctx.types : []);
+  const unknown = typeNames.filter((t) => !CANONICAL_TYPE[t] && !MAPPERS[t]);
+  if (unknown.length) return { ok: false, status: 400, outcome: operationOutcome("error", "not-supported", `_type: WardSynQ does not export ${unknown.join(", ")}`) };
+
   const { svc, error } = await open(request, env, ctx);
   if (error) return { ok: false, status: error.status, outcome: operationOutcome("error", error.status === 401 ? "login" : "forbidden", error.detail || error.error) };
 
-  const wanted = Array.isArray(ctx.types) && ctx.types.length
-    ? ctx.types.map((t) => CANONICAL_TYPE[t] || t).filter((t) => MAPPERS[t])
-    : Object.keys(MAPPERS);
+  const wanted = typeNames.length ? typeNames.map((t) => CANONICAL_TYPE[t] || t).filter((t) => MAPPERS[t]) : Object.keys(MAPPERS);
 
-  const out = [];
+  /* The patient must exist (and be readable) for there to be an "everything": a compartment for a
+   * patient this hospital never registered is a 404, not an empty bundle a client would file as
+   * "no record". */
+  let patient = null;
+  try { const p = await svc.get("Patient", patientId); patient = p ? toFhir(p) : null; }
+  catch (e) { return { ok: false, status: 403, outcome: operationOutcome("error", "forbidden", str(e && e.message)) }; }
+  if (!patient) return { ok: false, status: 404, outcome: operationOutcome("error", "not-found", "no such patient") };
+
+  const rest = [];
   for (const type of wanted) {
+    if (type === "Patient") continue;
     try {
-      if (type === "Patient") { const p = await svc.get("Patient", patientId); if (p) out.push(toFhir(p)); continue; }
       const rows = await svc.byPatient(type, patientId);
-      for (const r of rows || []) { const f = toFhir(r); if (f) out.push(f); }
+      for (const r of rows || []) { const f = toFhir(r); if (f) rest.push(f); }
     } catch {
       /* A type this actor may not read is simply absent from the bundle. It is NOT reported as an
        * empty result set, because "no allergies" and "you may not see the allergies" are different
@@ -571,7 +607,14 @@ async function patientEverything(request, env, ctx) {
        * via the bundle's own contents. */
     }
   }
-  return { ok: true, status: 200, bundle: bundle(out, { base: str(ctx.base), timestamp: new Date().toISOString() }) };
+
+  const since = (r) => !query.since || dateMatches(r.meta && r.meta.lastUpdated, query.since);
+  rest.sort((a, b) => { const ka = str(a.meta && a.meta.lastUpdated), kb = str(b.meta && b.meta.lastUpdated); return ka === kb ? str(a.id).localeCompare(str(b.id)) : kb.localeCompare(ka); });
+  const all = [...(wanted.includes("Patient") && since(patient) ? [patient] : []), ...rest.filter(since)];
+  const page = paginate(all, query);
+  const b = searchBundle({ base: str(ctx.base), type: "Patient", path: `Patient/${patientId}/$everything`, q: query, page, included: [], outcomes: problems.length ? [{ resourceType: "OperationOutcome", issue: problems.map((p) => ({ severity: "warning", code: "not-supported", diagnostics: `${p.param} was ignored: ${p.reason}` })) }] : [], rawQuery: ctx.rawQuery });
+  b.timestamp = new Date().toISOString();
+  return { ok: true, status: 200, bundle: b };
 }
 
 /** One resource by type and id. */
@@ -593,11 +636,23 @@ async function readResource(request, env, ctx) {
 
   const f = toFhir(record);
   if (!f) return { ok: false, status: 404, outcome: operationOutcome("error", "not-supported", "no mapping for that resource") };
-  return { ok: true, status: 200, resource: f };
+  /* _summary and _elements apply to a read too. Parsed by the search grammar, so the same values
+   * mean the same thing on both; anything else on a read URL is not a search and is ignored. */
+  const { query } = parseSearch(fhirType, ctx.searchParams || "");
+  return { ok: true, status: 200, resource: subset(f, { summary: query.summary === "count" ? null : query.summary, elements: query.elements }) };
 }
 
 /** How many of a type one search may consider. Stated in the bundle when it bites. */
 const SEARCH_POOL = 1000;
+
+/** PURE. The patient id a FHIR resource belongs to: itself for a Patient, else its compartment reference. */
+function compartmentOf(r) {
+  if (!r) return "";
+  if (r.resourceType === "Patient") return str(r.id);
+  const get = PATIENT_REF[r.resourceType];
+  const ref = get && refsOf(get(r)).find((x) => x.type === "Patient");
+  return ref ? ref.id : "";
+}
 
 /**
  * Search one type. `patient=` reads the compartment (scoped and audited by the store); without it,
@@ -638,32 +693,52 @@ async function searchType(request, env, ctx) {
   const pooled = (rows || []).length;
   const resources = (rows || []).map(toFhir).filter(Boolean);
 
-  const matched = applySearch(resources, query);
-  const page = paginate(matched, query);
-
-  /* Includes are resolved by REFERENCE through the same governed reads, so an actor who may not see
-   * an Encounter does not receive one because a report pointed at it. */
+  /* EVERY reference this search follows - a chain, an include, a _has, a reverse include - is
+   * resolved through the same governed reads as a direct GET, then handed to the pure matcher as a
+   * lookup. An actor who may not see an Encounter does not receive one because a report pointed at
+   * it, and a Patient they may not read is a Patient a chain does not match. */
   const cache = new Map();
   const lookup = (t, id) => { const k = `${t}/${id}`; return cache.has(k) ? cache.get(k) : null; };
-  if (query.include.length) {
-    const wanted = new Set();
-    for (const r of page.entries) for (const key of query.include) {
-      const spec = INCLUDES[key];
-      if (!spec) continue;
-      for (const rf of [].concat(spec.path(r) || []).filter(Boolean)) { const m = /^([A-Za-z]+)\/([^/]+)$/.exec(str(rf.reference)); if (m) wanted.add(`${m[1]}/${m[2]}`); }
-    }
-    for (const k of wanted) {
+  const fetchAll = async (keys) => {
+    for (const k of keys) {
+      if (cache.has(k)) continue;
       const [t, id] = k.split("/");
       const c = CANONICAL_TYPE[t];
-      if (!c) continue;
+      if (!c) { cache.set(k, null); continue; }
       try { const rec = await svc.get(c, id); cache.set(k, rec ? toFhir(rec) : null); } catch { cache.set(k, null); }
     }
-  }
+  };
+  /* `has(type, resource)`: the resources of `type` in that resource's patient compartment, read by
+   * patient (scoped and audited by the store). Filled before matching for the types a query needs. */
+  const compartments = new Map();
+  const has = (t, r) => { const pid = compartmentOf(r); return (pid && compartments.get(`${t}|${pid}`)) || []; };
+  const fillCompartments = async (types, list) => {
+    for (const t of types) {
+      const c = CANONICAL_TYPE[t];
+      if (!c) continue;
+      for (const r of list) {
+        const pid = compartmentOf(r);
+        if (!pid) continue;
+        const k = `${t}|${pid}`;
+        if (compartments.has(k)) continue;
+        try { compartments.set(k, ((await svc.byPatient(c, pid)) || []).map(toFhir).filter(Boolean)); } catch { compartments.set(k, []); }
+      }
+    }
+  };
+
+  await fetchAll(chainTargets(resources, query));
+  await fillCompartments(query.has.map((h) => h.type), resources);
+  const matched = applySearch(resources, query, { lookup, has });
+  const page = paginate(matched, query);
+
+  await fetchAll(includeTargets(page.entries, query));
   const included = resolveIncludes(page.entries, query, lookup);
+  await fillCompartments(query.revInclude.filter((rv) => rv.ref).map((rv) => rv.type), page.entries);
+  included.push(...resolveRevIncludes(page.entries, query, has));
 
   /* _revinclude=Provenance:target: the provenance of each matched resource's CURRENT version,
    * derived from the canonical rows already in hand - no second read, no second opinion. */
-  if (query.revInclude.includes("Provenance:target")) {
+  if (query.revInclude.some((rv) => rv.key === "Provenance:target")) {
     const byId = new Map((rows || []).filter(Boolean).map((r) => [str(r.id), r]));
     for (const r of page.entries) {
       const p = fhirProvenance(byId.get(str(r.id)));
@@ -782,6 +857,6 @@ export {
   systemUriFor, codeable, identifier, withMeta, toFhir, bundle, capabilityStatement, operationOutcome,
   fhirPatient, fhirEncounter, fhirCondition, fhirAllergy, fhirObservation,
   fhirMedicationRequest, fhirMedicationAdministration, fhirServiceRequest,
-  fhirDiagnosticReport, fhirDocumentReference, fhirConsent, fhirProvenance, parseProvenanceId,
+  fhirDiagnosticReport, fhirDocumentReference, fhirConsent, fhirProvenance, parseProvenanceId, compartmentOf, parseEverything,
   patientEverything, readResource, searchType, historyOf, vread, provenanceRead, provenanceSearch,
 };
