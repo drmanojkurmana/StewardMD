@@ -1,0 +1,107 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>WardSynQ ward: golden path harness</title>
+<link rel="stylesheet" href="../ward.css">
+<style>html,body{margin:0;height:100%}</style>
+</head><body>
+<script>
+/* The REAL ward.js (and, for one step, a stubbed window.SMD_PATIENTREG) driven through the whole
+ * admission -> discharge-handoff golden path against an in-memory stub server that answers with
+ * the SAME shapes the real routes return (confirmed against functions/_wardsynq/*.js and the
+ * server-side route tests in test/wardsynq-inpatient-emar.test.mjs, which prove these same
+ * contracts persist for real). This proves the CLIENT half - real DOM, real ward.css, real
+ * delegated click handler, real request bodies - end to end; it is not a live server.
+ */
+window.__calls = [];
+localStorage.setItem("smd_opd_staff_tok", "harness-token");
+
+var PATIENT_ID = null, ENC_ID = null, MRN = "SMD-H1-00099";
+var ORDER_ID = null, DUE_STATUS = "";     // the one MedicationOrder's eMAR status, advanced by /ward/mar
+var SR_ID = null;                          // the one investigation's ServiceRequest id
+var invStage = "ordered";                  // ordered -> collected -> resulted
+
+// A fake front-desk registration sheet: SMD_PATIENTREG.open() calls submit() immediately with a
+// fixed payload, as if a person had filled the real sheet in.
+window.SMD_PATIENTREG = { open: function (opts) {
+  Promise.resolve(opts.submit({ name: "Harness Testcase", mobile: "9876500000", gender: "female", ageYears: "41", visitType: "new" }))
+    .then(function (r) { if (opts.onAdded) opts.onAdded(r); });
+} };
+
+window.fetch = function (url, opts) {
+  var u = String(url), body = null;
+  try { body = opts && opts.body ? JSON.parse(opts.body) : null; } catch (e) {}
+  window.__calls.push({ url: u, method: (opts && opts.method) || "GET", body: body });
+  var reply = function (obj) { return Promise.resolve({ ok: true, status: 200, json: function () { return Promise.resolve(obj); } }); };
+
+  if (u.indexOf("/ward/list") >= 0) {
+    return reply({ ok: true, patients: ENC_ID ? [{ encounterId: ENC_ID, patientId: PATIENT_ID, ward: "Medical A", bed: "12", admittedAt: "2026-09-08T08:00:00.000Z" }] : [] });
+  }
+  if (u.indexOf("/ward/cosign-queue") >= 0) return reply({ ok: true, notes: [], mine: [] });
+  if (u.indexOf("/ward/quality") >= 0) return reply({ ok: true, measures: [] });
+  if (u.indexOf("/ward/overrides") >= 0) return reply({ ok: true, report: { rules: [] } });
+  if (u.indexOf("/ward/fhir-exceptions") >= 0) return reply({ ok: true, open: [] });
+
+  if (u.indexOf("/ward/beds") >= 0) {
+    return reply({ ok: true, bedsConfigured: true, wards: [
+      { ward: "Medical A", bedsKnown: true, occupied: ENC_ID ? [{ encounterId: ENC_ID, patientId: PATIENT_ID, bed: "12" }] : [],
+        free: ENC_ID ? ["13", "14"] : ["12", "13", "14"], unplaced: [] },
+    ] });
+  }
+  if (u.indexOf("/patient/register") >= 0) return reply({ ok: true, mrn: MRN, patient: { name: "Harness Testcase", mrn: MRN } });
+  if (u.indexOf("/patient/get") >= 0) return reply({ ok: true, patient: { name: "Harness Testcase", mrn: MRN, ageYears: 41, gender: "female" } });
+  if (u.indexOf("/ward/admit") >= 0 && (opts && opts.method) === "POST") {
+    PATIENT_ID = "wsq-pat-" + body.mrn.toLowerCase(); ENC_ID = "wsq-enc-" + body.mrn.toLowerCase();
+    return reply({ ok: true, written: 1, encounterId: ENC_ID, patientId: PATIENT_ID, version: 1 });
+  }
+
+  if (u.indexOf("/ward/problems") >= 0) return reply({ ok: true, problems: [] });
+  if (u.indexOf("/ward/criticals") >= 0) return reply({ ok: true, loops: [] });
+  if (u.indexOf("/ward/balance") >= 0) return reply({ ok: true, balance: null });
+  if (u.indexOf("/ward/outbox") >= 0) return reply({ ok: true, transmissions: [] });
+  if (u.indexOf("/ward/templates") >= 0) return reply({ ok: true, templates: [] });
+  if (u.indexOf("/ward/news2") >= 0) return reply({ ok: true, tool: "NEWS2", score: { scorable: false, reason: "Not enough vitals recorded to score." } });
+  if (u.indexOf("/ward/flowsheet") >= 0) return reply({ ok: true, grid: { hours: [], rows: [] } });
+
+  if (u.indexOf("/ward/vitals") >= 0) return reply({ ok: true, written: Object.keys(body.vitals || {}).length });
+
+  if (u.indexOf("/ward/medication-order") >= 0 && (opts && opts.method) === "POST") {
+    ORDER_ID = "wsq-rx-" + ENC_ID + "-" + body.order.drug.toLowerCase().replace(/\s+/g, "-");
+    DUE_STATUS = "";
+    return reply({ ok: true, written: 1, orderId: ORDER_ID });
+  }
+  if (u.indexOf("/ward/schedule") >= 0) {
+    return reply({ ok: true, due: ORDER_ID ? [{ orderId: ORDER_ID, drug: "Paracetamol 500mg", dose: { value: 500, unit: "mg" }, route: "oral", frequency: "BD", status: DUE_STATUS, dueAt: "2026-09-08T09:00:00.000Z", overdue: false }] : [], prn: [], unscheduled: [] });
+  }
+  if (u.indexOf("/ward/mar") >= 0 && (opts && opts.method) === "POST") {
+    var NEXT2 = { "": "verified", verified: "dispensed", dispensed: "scanned", scanned: "administered" };
+    var from = DUE_STATUS; DUE_STATUS = NEXT2[DUE_STATUS] || DUE_STATUS;
+    return reply({ ok: true, from: from || "ordered", to: DUE_STATUS });
+  }
+
+  if (u.indexOf("/ward/investigation") >= 0 && (opts && opts.method) === "POST") {
+    SR_ID = "wsq-sr-" + ENC_ID; invStage = "ordered";
+    return reply({ ok: true, written: 1, serviceRequestId: SR_ID });
+  }
+  if (u.indexOf("/ward/collections") >= 0) {
+    return reply({ ok: true, requests: SR_ID ? [{ serviceRequestId: SR_ID, display: "Chest X-ray", code: "Chest X-ray", category: "imaging", priority: "routine", collection: { state: invStage === "resulted" ? "received" : invStage } }] : [] });
+  }
+  if (u.indexOf("/ward/pending-tests") >= 0) {
+    return reply({ ok: true, pending: SR_ID && invStage !== "resulted" ? [{ serviceRequestId: SR_ID, display: "Chest X-ray" }] : [] });
+  }
+  if (u.indexOf("/ward/fhir") >= 0 && u.indexOf("_type=DiagnosticReport") >= 0) {
+    if (SR_ID) invStage = "resulted";   // the harness "reports" the test the first time results are checked, so a second load shows it
+    return reply({ resourceType: "Bundle", type: "searchset", entry: (SR_ID && invStage === "resulted") ? [
+      { resource: { resourceType: "DiagnosticReport", id: "dr-1", status: "final", code: { text: "Chest X-ray" }, conclusion: "Clear.", effectiveDateTime: "2026-09-08T10:00:00.000Z" } },
+    ] : [] });
+  }
+
+  return reply({ ok: true });
+};
+</script>
+<!-- patient-register.js is NOT loaded: this harness stubs window.SMD_PATIENTREG itself above (ward.js
+     only needs to call .open({submit, onAdded}) correctly; the sheet's own UI has its own tests). -->
+<script src="../ward.js"></script>
+<script>
+window.__ready = !!(window.WARD && window.WARD.open);
+</script>
+</body></html>

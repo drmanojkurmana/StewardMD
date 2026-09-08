@@ -703,3 +703,74 @@ test("a held message whose reason has no candidates still lets a person name the
   assert.match(html, /his&lt;script&gt;/);
   assert.ok(!/<script/.test(html));
 });
+
+/* ---- the golden path additions: bed board + admission, medication ordering, investigation
+ * ordering + results, and the flowsheet. Pure-render assertions; the interactive behaviour (a
+ * click, a request body, the eMAR state machine, cross-viewport layout) is proven for real in
+ * test/run-ward-golden-path.mjs against a real headless browser. */
+
+test("BED BOARD: occupied and free beds are both shown, no bed is preselected, and picking one opens the admit panel for exactly that bed", () => {
+  const W = load();
+  const board = Object.assign({}, base, { view: "board", board: { ok: true, bedsConfigured: true, wards: [
+    { ward: "Medical A", bedsKnown: true, occupied: [{ encounterId: "e1", patientId: "opd-pat-1", bed: "07" }], free: ["08", "09"], unplaced: [] },
+  ] } });
+  const html = W._render(board);
+  assert.match(html, /Medical A/);
+  assert.match(html, /opd-pat-1/, "the occupant is shown");
+  assert.match(html, /data-w-act="pickbed:Medical A\|08"/);
+  assert.match(html, /data-w-act="pickbed:Medical A\|09"/);
+  assert.ok(!html.includes("picked"), "nothing is preselected until a person clicks a bed");
+  assert.ok(!html.includes('data-w-act="admitnew"'), "no admit panel until a bed is picked");
+
+  const picked = W._render(Object.assign({}, board, { admitTarget: { ward: "Medical A", bed: "08" } }));
+  assert.match(picked, /Admit to Medical A, bed 08/);
+  assert.match(picked, /data-w-act="admitnew"/);
+  assert.match(picked, /data-w-act="mrnlookup"/);
+  assert.ok(!picked.includes('data-w-act="admitconfirm"'), "no confirm button until an MRN lookup actually found somebody");
+
+  const found = W._render(Object.assign({}, board, { admitTarget: { ward: "Medical A", bed: "08" }, mrnLookup: { mrn: "SMD-1", name: "Real Patient" } }));
+  assert.match(found, /Real Patient/);
+  assert.match(found, /data-w-act="admitconfirm"/);
+});
+
+test("a bed board with no configured bed list says so, rather than reporting zero free beds", () => {
+  const html = load()._render(Object.assign({}, base, { view: "board", board: { ok: true, bedsConfigured: false, wards: [
+    { ward: "Medical A", bedsKnown: false, occupied: [], free: [], unplaced: [] },
+  ] } }));
+  assert.match(html, /Bed list not configured/);
+  assert.ok(!/0 free/.test(html));
+});
+
+test("MEDICATION ORDER: the form asks for drug, dose and unit; nothing is preselected or computed", () => {
+  const html = load()._render(chart);
+  assert.match(html, /id="wMoDrug"/);
+  assert.match(html, /id="wMoValue"/);
+  assert.match(html, /id="wMoUnit"/);
+  assert.match(html, /data-w-act="medorder"/);
+  assert.match(html, /Every safety and formulary check happens on the server/);
+});
+
+test("INVESTIGATIONS: an order in flight is shown apart from a resulted one, and a result's conclusion is never invented", () => {
+  const html = load()._render(Object.assign({}, chart, {
+    investigations: { requests: [{ serviceRequestId: "sr1", display: "Chest X-ray", category: "imaging", priority: "urgent", collection: { state: "ordered" } }] },
+    results: [{ display: "Chest X-ray", status: "final", conclusion: "Clear.", reportedAt: "2026-09-08T10:00:00.000Z" }],
+  }));
+  assert.match(html, /Chest X-ray/);
+  assert.match(html, /URGENT/);
+  assert.match(html, /Clear\./);
+  assert.match(html, /On order/);
+  assert.match(html, /Results/);
+});
+
+test("FLOWSHEET: an empty hour is a plain dash, never a value that looks recorded, and NEWS2 states plainly when it could not be scored", () => {
+  const html = load()._render(Object.assign({}, chart, {
+    flowsheet: { hours: ["2026-09-08T08:00:00Z", "2026-09-08T09:00:00Z"], rows: [
+      { code: "8480-6", label: "Systolic BP", cells: [{ hour: "2026-09-08T08:00:00Z", empty: true }, { hour: "2026-09-08T09:00:00Z", empty: false, value: 118, unit: "mmHg" }] },
+    ] },
+    news2: { ok: true, tool: "NEWS2", score: { scorable: false, reason: "Not enough recorded to score." } },
+  }));
+  assert.match(html, /Systolic BP/);
+  assert.match(html, /118 mmHg/);
+  assert.match(html, /Not enough recorded to score\./);
+  assert.match(html, /This is a score, not an escalation/);
+});

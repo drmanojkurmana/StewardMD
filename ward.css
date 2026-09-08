@@ -262,3 +262,45 @@ body.dark #smdWard { --bg: #191c1e; --on-surface: #eff1f3; --on-surface-variant:
 #smdWard .w-xchg .w-xc { display: flex; align-items: center; gap: 8px; padding: 6px 0; font-size: 13.5px; }
 #smdWard .w-xchg .w-xc b { font: 600 13px var(--mono, ui-monospace, Menlo, monospace); }
 #smdWard .w-xchg .w-xc small { display: inline; margin: 0; }
+
+/* Bed board + admission. A grid of beds, not a list of patients: an occupied bed and a free one
+   read as different things at a glance, which a filtered flat list never gave the ward. */
+#smdWard .w-wardrow { margin-bottom: 16px; }
+#smdWard .w-wardrow:last-child { margin-bottom: 0; }
+#smdWard .w-wardrow h4 { display: flex; align-items: baseline; gap: 8px; margin: 0 0 8px; font-size: 13.5px; font-weight: 700; }
+#smdWard .w-wardrow h4 small { font-weight: 400; color: var(--on-surface-variant); font-size: 12px; }
+#smdWard .w-bedgrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(96px, 1fr)); gap: 8px; }
+#smdWard .w-bedcell { border-radius: 12px; padding: 10px; display: flex; flex-direction: column; gap: 2px; min-height: 56px; font: inherit; text-align: left; }
+#smdWard .w-bedcell b { font-size: 13px; font-weight: 700; }
+#smdWard .w-bedcell span { font-size: 11px; color: var(--on-surface-variant); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+#smdWard .w-bedcell.occ { background: var(--sc-high); border: 1px solid var(--outline-variant); }
+#smdWard .w-bedcell.unknown { background: none; border: 1px dashed var(--outline-variant); justify-content: center; align-items: center; grid-column: 1 / -1; }
+#smdWard .w-bedcell.free { appearance: none; border: 1px solid var(--primary); background: var(--primary-container); color: var(--on-primary-container); cursor: pointer; }
+#smdWard .w-bedcell.free span { color: inherit; opacity: .8; }
+#smdWard .w-bedcell.free:active { filter: brightness(.94); }
+#smdWard .w-bedcell.free.picked { outline: 2px solid var(--primary); outline-offset: 1px; }
+#smdWard .w-card.admit { margin-top: 12px; border-color: var(--primary); }
+#smdWard .w-mrn-found { margin-top: 8px; padding: 10px; border-radius: 10px; background: var(--sc-high); display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+#smdWard .w-mrn-found b { font-size: 14px; }
+#smdWard .w-mrn-found span { color: var(--on-surface-variant); font-size: 12.5px; flex: 1; }
+
+/* Flowsheet. Hours across, rows down; an empty cell is a plain dash so a gap in the chart never
+   looks like a normal reading. */
+#smdWard .w-flowgrid { overflow-x: auto; margin-top: 8px; }
+#smdWard .w-flowgrid table { border-collapse: collapse; width: 100%; font-size: 12.5px; }
+#smdWard .w-flowgrid th, #smdWard .w-flowgrid td { padding: 6px 8px; text-align: right; border-bottom: 1px solid var(--outline-variant); white-space: nowrap; }
+#smdWard .w-flowgrid thead th { text-align: right; color: var(--on-surface-variant); font-weight: 600; font-size: 11px; }
+#smdWard .w-flowgrid tbody th { text-align: left; font-weight: 600; position: sticky; left: 0; background: var(--sc-lowest); }
+#smdWard .w-flowgrid td.empty { color: var(--on-surface-variant); opacity: .5; }
+#smdWard .w-flowgrid td.late { color: var(--on-warn-container); }
+#smdWard .w-news2 { display: inline-flex; align-items: baseline; gap: 8px; padding: 8px 12px; border-radius: 12px; background: var(--sc-high); margin-bottom: 10px; }
+#smdWard .w-news2 b { font-size: 20px; font-weight: 800; }
+#smdWard .w-news2 span { font-size: 12px; color: var(--on-surface-variant); text-transform: capitalize; }
+#smdWard .w-news2.risk-medium, #smdWard .w-news2.risk-high { background: var(--warn-container); }
+#smdWard .w-news2.risk-medium b, #smdWard .w-news2.risk-high b { color: var(--on-warn-container); }
+#smdWard .w-news2.na { background: none; border: 1px dashed var(--outline-variant); }
+
+/* Investigations: results carry their own conclusion text and a timestamp, same rhythm as the MAR's
+   own mini-lists. */
+#smdWard .w-results li { display: flex; flex-direction: column; gap: 2px; }
+#smdWard .w-results li div { font-size: 13px; }
