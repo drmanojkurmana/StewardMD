@@ -429,6 +429,45 @@ class GovernedStore {
   }
 
   /**
+   * Several writes, ALL OR NOTHING. Every entity is authorised before any is staged, so one refusal
+   * refuses the lot (and is recorded and announced exactly as a single refusal is); then every
+   * stamped record goes to the store in ONE transaction, which the backend commits as one append.
+   * A FHIR transaction Bundle is the caller this exists for: a partner's admission whose potassium
+   * lands while its encounter is refused is half a story on a chart.
+   */
+  async putMany(actor, entities, ctx) {
+    const list = Array.isArray(entities) ? entities : [];
+    const denials = [];
+    for (const entity of list) {
+      const verdict = authoriseWrite(actor, entity, ctx);
+      if (!verdict.allowed) denials.push({ resourceType: entity ? entity.resourceType : null, id: entity ? entity.id : null, patientId: entity ? entity.patientId : null, reasons: verdict.reasons });
+    }
+    if (denials.length) {
+      for (const denial of denials) {
+        const d = { at: new Date().toISOString(), actorId: actor ? actor.id : null, actorKind: actor ? actor.kind : null, resourceType: denial.resourceType, patientId: denial.patientId, reasons: denial.reasons };
+        this.denials.push(d);
+        if (this.onDenied) this.onDenied(d);
+        if (this.bus) await this.bus.emit("governance.denied", d);
+      }
+      const first = denials[0].reasons[0];
+      throw new GovernanceError(denials.map((d) => `${d.resourceType}/${d.id}: ${d.reasons.map((r) => r.message).join("; ")}`).join(" | "), first.code, denials.flatMap((d) => d.reasons.map((r) => ({ ...r, resourceType: d.resourceType, id: d.id }))));
+    }
+    const at = new Date().toISOString();
+    const stamped = list.map((entity) => ({
+      ...entity,
+      writtenBy: { id: actor.id, kind: actor.kind, tier: actor.tier, at, ...(actor.onBehalfOf ? { onBehalfOf: actor.onBehalfOf } : {}) },
+      ...(actor.kind === KIND.AI ? { aiDrafted: true } : {}),
+    }));
+    const saved = await this._store.transaction(async (tx) => {
+      const out = [];
+      for (const s of stamped) out.push(await tx.put(s));
+      return out;
+    });
+    if (this.bus) for (const entity of list) await this.bus.emit("governance.written", { actorId: actor.id, kind: actor.kind, resourceType: entity.resourceType });
+    return saved;
+  }
+
+  /**
    * A store-shaped handle bound to one actor but to NO chart, for machinery that legitimately spans
    * patients: reconciliation after an outage, a migration, a batch import.
    *

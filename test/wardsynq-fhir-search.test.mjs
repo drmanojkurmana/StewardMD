@@ -312,6 +312,20 @@ test("THE CAPABILITYSTATEMENT IS DERIVED FROM THE SAME TABLES THE PARSER USES", 
   assert.ok(cs.rest[0].resource.every((r) => r.type === "Provenance" || Object.values(FHIR_TYPE).includes(r.type)));
   assert.equal(cs.format[0], "application/fhir+json");
   assert.ok(!/create|update|delete/.test(JSON.stringify(cs.rest[0].resource.map((r) => r.interaction))));
+  assert.equal(cs.rest[0].interaction, undefined, "no transaction or batch on a read-only door");
+
+  // With the inbound door open, and only then, writes are declared exactly as implemented.
+  const w = capabilityStatement({ date: "2026-09-08", inbound: true });
+  assert.deepEqual(w.rest[0].interaction.map((i) => i.code), ["transaction", "batch"]);
+  const obs = w.rest[0].resource.find((r) => r.type === "Observation");
+  assert.deepEqual(obs.interaction.map((i) => i.code), ["read", "vread", "history-instance", "search-type", "create", "update"]);
+  assert.equal(obs.conditionalCreate, true);
+  assert.equal(obs.conditionalUpdate, false);
+  assert.equal(obs.updateCreate, false, "this server does not create on update");
+  assert.equal(obs.conditionalDelete, "not-supported");
+  assert.ok(!/delete"/.test(JSON.stringify(w.rest[0].resource.map((r) => r.interaction))), "never delete");
+  const prov = w.rest[0].resource.find((r) => r.type === "Provenance");
+  assert.deepEqual(prov.interaction.map((i) => i.code), ["read", "search-type"], "Provenance is derived and never written");
 });
 
 test("every exported type either has a date to search or is declared not to", () => {

@@ -530,6 +530,31 @@ class RecordService {
           throw err;
         }
       },
+      /**
+       * Every entity in ONE append: one audit event naming them all, the idempotency key landing with
+       * them, and nothing landing unless everything does. The governed store authorises each first.
+       */
+      putMany: async (adapterActor, entities) => {
+        const list = Array.isArray(entities) ? entities : [];
+        if (!list.length) return [];
+        const counts = {};
+        for (const e of list) counts[e.resourceType] = (counts[e.resourceType] || 0) + 1;
+        const patients = new Set(list.map((e) => (e.resourceType === "Patient" ? e.id : e.patientId)).filter(Boolean));
+        const auditEvent = await self._audit("record.ingest", {
+          scope: { transaction: true, entities: list.map((e) => ({ resourceType: e.resourceType, id: e.id, system: e.meta && e.meta.source && e.meta.source.system })) },
+          resourceCounts: counts, patientId: patients.size === 1 ? [...patients][0] : null,
+        });
+        auditEvent.actor = adapterActor.id;
+        self.backend.withWriteContext({ audit: auditEvent, idempotencyKey: pendingKey });
+        try {
+          const saved = await self.governed.putMany(adapterActor, list);
+          pendingKey = null;
+          return saved;
+        } catch (err) {
+          self.backend.withWriteContext(null);
+          throw err;
+        }
+      },
     };
   }
 }
