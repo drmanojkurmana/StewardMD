@@ -2714,7 +2714,6 @@
         (m && m.dispo ? '<div class="dx-mgmt-sec">Disposition</div><p>' + esc(m.dispo) + '</p>' : '') +
         (red && red.length ? '<div class="dx-mgmt-sec red">Red flags</div><ul class="dx-mgmt-ul">' + red.map(function (x) { return '<li>' + esc(x) + '</li>'; }).join("") + '</ul>' : '') +
         (m && m.src ? '<div class="dx-mgmt-src">Source: ' + esc(m.src) + '</div>' : '') +
-        '<div class="dx-mgmt-disc">' + rIco("warn") + ' Decision-support only — provisional and aligned to standard guidelines / Harrison\'s 22e. Verify against full guidelines, local protocol and current prescribing references (doses, contraindications, renal/hepatic adjustment, pregnancy) before acting.</div>' +
       '</div>';
     el.innerHTML = html;
     el.classList.add("on");
@@ -2951,7 +2950,6 @@
       ".dx-mgmt-ul{margin:0;padding-left:18px}",
       ".dx-mgmt-ul li{font:500 13.5px/1.5 var(--sans);color:var(--slate);margin:4px 0}",
       ".dx-mgmt-src{margin-top:18px;font:600 11.5px var(--sans);color:var(--slate-soft)}",
-      ".dx-mgmt-disc{margin-top:14px;padding:11px 13px;background:var(--panel);border:1px solid var(--line);border-radius:10px;font:500 11.5px/1.5 var(--sans);color:var(--slate-soft)}",
       ".dx-chip{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:6px 11px;font:600 12px var(--sans);color:var(--slate);cursor:pointer;transition:all .12s}",
       ".dx-chip:hover{border-color:var(--teal);color:var(--teal)}",
       ".dx-gate{margin:14px 0 8px}",

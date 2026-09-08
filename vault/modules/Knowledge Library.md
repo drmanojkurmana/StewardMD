@@ -17,6 +17,8 @@ User selected option B, Discover: Apple-inspired type hierarchy, a quiet referen
 
 All shared disease/syndrome evidence views remove displayed page citations, including expanded clinical details. Option C uses one Know more control for the complete reference content, without nested duplicate sections. The footer lists up to three distinct recorded references, with editions and page locators removed; when only one source is recorded, it shows that source. No randomly assigned textbook citations are added. Clinical quantities and emphasis are preserved; original source records remain unchanged.
 
+The separate non-infective syndrome management page no longer shows the generic decision-support/Harrison disclaimer card beneath its content.
+
 Your library now provides device-local favourites and the twelve most recently opened diseases. The disease reader has a save/remove control with storage-failure feedback. The national antibiogram supports checkbox selection for a compact comparison; changing organism resets the selection. This view explicitly labels national data and does not claim hospital-specific data is loaded. Source metadata expansion remains excluded per the user's request.
 
 `node test/run-library-discover-ui.mjs` verifies real catalog counts, 320/390/768/1280px widths, branch selection, pagination, abbreviation search, empty results, infective filtering, all four tabs, pinned scrolling and the disease reader. Screenshots are written to `/tmp/stewardmd-library/`.
