@@ -169,6 +169,7 @@
       '<button class="w-btn ghost" data-w-act="setward">Apply</button>' +
       '<button class="w-btn" data-w-act="board" title="Admit a patient to a bed">' + ms("add_circle") + "Admit</button>" +
       '<button class="w-btn ghost" data-w-act="edboard" title="Emergency department">' + ms("emergency") + "ED</button>" +
+      '<button class="w-btn ghost" data-w-act="surgeryboard" title="Surgery / OT / PACU">' + ms("medical_services") + "Surgery</button>" +
       // Reachable BEFORE an outage, which is the only time it can be taken. A pack you can only get
       // to while the system is up is a pack the ward has to remember to take while the system is up.
       '<button class="w-btn ghost" data-w-act="downtime" title="Printable sheet for when the system is unavailable">' + ms("print") + "Downtime pack</button></div>" +
@@ -280,6 +281,163 @@
         : rows ? '<ul class="w-q w-ed-board">' + rows + "</ul>"
         : '<p class="w-empty">No patients currently in the ED.</p>') +
       "</div>" + arrivalPanel;
+  }
+
+  /* THE THEATRE BOARD. Every open case hospital-wide (functions/_wardsynq/migrate-surgery.js's
+   * listOpenCases), and a booking panel that looks a patient up first, the same rule the bed
+   * board's own admit panel keeps: nobody is booked for a procedure on a typed MRN alone. */
+  var STAGE_WORDS = {
+    booked: "Booked", marked: "Site marked", "signed-in": "Signed in", "timed-out": "Timed out",
+    incised: "In procedure", "signed-out": "Signed out", abandoned: "Abandoned",
+  };
+  function surgeryBoardView(state) {
+    var rows = ((state.surgBoard && state.surgBoard.cases) || []).map(function (c) {
+      return "<li>" + '<button class="w-bed" data-w-act="opensurgery:' + esc(c.id) + '">' +
+        '<span class="w-bed-no untriaged">' + ms("medical_services") + "</span>" +
+        '<span class="w-bed-b"><b>' + esc(c.patientMrn || c.patientId) + "</b><small>" + esc(c.procedure) + " &middot; " + esc(c.theatre || "theatre unstated") + " &middot; " + esc(STAGE_WORDS[c.stage] || c.stage) + "</small></span>" +
+        ms("chevron_right") + "</button></li>";
+    }).join("");
+
+    var lookup = state.surgMrnLookup;
+    var bookPanel = !state.surgBookOpen ? "" :
+      '<div class="w-card admit"><div class="w-card-h">' + ms("medical_services") + "<h3>Book a case</h3>" +
+      '<button class="w-ic" data-w-act="surgerybookclose" title="Cancel">' + ms("close") + "</button></div>" +
+      '<div class="w-filter"><input id="wSurgMrn" type="text" autocomplete="off" placeholder="MRN">' +
+      '<button class="w-btn ghost" data-w-act="surgmrnlookup">' + ms("search") + "Find</button></div>" +
+      (state.surgMrnLookupErr ? '<p class="w-hint warn">' + ms("error") + esc(state.surgMrnLookupErr) + "</p>" : "") +
+      (lookup ? '<div class="w-mrn-found"><b>' + esc(lookup.name || lookup.mrn) + "</b><span>" + esc(lookup.mrn) + "</span></div>" +
+        '<div class="w-grid">' +
+        '<label class="w-f"><span>Procedure</span><input id="wSurgProcedure" type="text" autocomplete="off"></label>' +
+        '<label class="w-f"><span>Site</span><input id="wSurgSite" type="text" autocomplete="off"></label>' +
+        '<label class="w-f"><span>Laterality</span><select id="wSurgLaterality"><option value="not-applicable">Not applicable</option><option value="left">Left</option><option value="right">Right</option><option value="bilateral">Bilateral</option></select></label>' +
+        '<label class="w-f"><span>Theatre</span><input id="wSurgTheatre" type="text" autocomplete="off" placeholder="e.g. OT-1"></label>' +
+        "</div>" +
+        '<button class="w-btn tiny go" data-w-act="surgerybook">' + ms("check") + "Book case</button>" : "") +
+      "</div>";
+
+    return '<div class="w-chart-h"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button>" +
+      "<div><b>Surgery / OT / PACU</b></div>" +
+      '<button class="w-btn tiny go" data-w-act="surgerybookopen">' + ms("add_circle") + "Book</button>" +
+      '<button class="w-ic" data-w-act="surgeryboard" title="Refresh">' + ms("refresh") + "</button></div>" +
+      '<div class="w-card">' +
+      (state.surgErr ? '<p class="w-hint warn">' + ms("error") + esc(state.surgErr) + "</p>"
+        : rows ? '<ul class="w-q w-ed-board">' + rows + "</ul>"
+        : '<p class="w-empty">No open cases.</p>') +
+      "</div>" + bookPanel;
+  }
+
+  /* THE CASE VIEW. What's shown at any moment is driven entirely by the case's own `stage`, read
+   * back from the server on every action - never advanced client-side. Incision stays visibly
+   * locked until BOTH Sign In and Time Out are complete, the real gate wardsynq-surgical.js itself
+   * enforces; this screen cannot open it early, only ask the server, which can refuse. */
+  var SIGN_IN_ITEMS = ["identity-confirmed", "site-confirmed", "procedure-confirmed", "consent-confirmed", "site-marked-confirmed", "anaesthesia-safety-check", "pulse-oximeter-working", "allergies-reviewed", "airway-risk-assessed", "blood-loss-risk-assessed"];
+  var TIME_OUT_ITEMS = ["team-introduced", "identity-site-procedure-reconfirmed", "critical-events-anticipated", "antibiotic-prophylaxis-addressed", "imaging-displayed"];
+  var SIGN_OUT_ITEMS = ["procedure-recorded", "counts-correct", "specimens-labelled", "equipment-problems-addressed", "recovery-concerns-addressed"];
+  var ITEM_WORDS = {
+    "identity-confirmed": "Patient identity confirmed", "site-confirmed": "Site confirmed", "procedure-confirmed": "Procedure confirmed",
+    "consent-confirmed": "Consent confirmed", "site-marked-confirmed": "Site marking confirmed", "anaesthesia-safety-check": "Anaesthesia safety check complete",
+    "pulse-oximeter-working": "Pulse oximeter working", "allergies-reviewed": "Allergies reviewed", "airway-risk-assessed": "Airway risk assessed",
+    "blood-loss-risk-assessed": "Blood loss risk assessed", "team-introduced": "Team introduced by name and role",
+    "identity-site-procedure-reconfirmed": "Identity, site and procedure reconfirmed", "critical-events-anticipated": "Critical events anticipated",
+    "antibiotic-prophylaxis-addressed": "Antibiotic prophylaxis addressed", "imaging-displayed": "Essential imaging displayed",
+    "procedure-recorded": "Procedure performed recorded", "counts-correct": "Instrument, sponge and needle counts correct",
+    "specimens-labelled": "Specimens labelled", "equipment-problems-addressed": "Equipment problems addressed", "recovery-concerns-addressed": "Recovery concerns addressed",
+  };
+  function checklistForm(phase, items, act) {
+    var rows = items.map(function (k) {
+      return '<label class="w-chk"><input type="checkbox" id="wSurgItem-' + esc(phase) + "-" + esc(k) + '"> ' + esc(ITEM_WORDS[k] || k) + "</label>";
+    }).join("");
+    return '<div class="w-sub"><h4>' + ms("checklist") + esc(phase === "signIn" ? "Sign In" : phase === "timeOut" ? "Time Out" : "Sign Out") + "</h4>" +
+      rows +
+      '<div class="w-grid">' +
+      '<label class="w-f"><span>Surgeon</span><input id="wSurgSig-' + esc(phase) + '-surgeon" type="text" autocomplete="off" placeholder="who spoke"></label>' +
+      '<label class="w-f"><span>Anaesthetist</span><input id="wSurgSig-' + esc(phase) + '-anaesthetist" type="text" autocomplete="off" placeholder="who spoke"></label>' +
+      '<label class="w-f"><span>Nurse</span><input id="wSurgSig-' + esc(phase) + '-nurse" type="text" autocomplete="off" placeholder="who spoke"></label>' +
+      (phase !== "signOut" ? '<label class="w-f"><span>Side, stated out loud</span><select id="wSurgLatAssert-' + esc(phase) + '"><option value="not-applicable">Not applicable</option><option value="left">Left</option><option value="right">Right</option><option value="bilateral">Bilateral</option></select></label>' : "") +
+      "</div>" +
+      '<button class="w-btn go" data-w-act="' + esc(act) + ":" + esc(phase) + '">' + ms("task_alt") + "Complete " + esc(phase === "signIn" ? "Sign In" : phase === "timeOut" ? "Time Out" : "Sign Out") + "</button>" +
+      '<p class="w-hint">' + ms("info") + "Every item must be explicitly confirmed; three DIFFERENT people, three different roles - one person signing all three is refused." + "</p></div>";
+  }
+  function surgeryCaseView(state) {
+    var d = state.surgCase; var c = d && d.case;
+    if (!c) return '<div class="w-chart-h"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button><div><b>Case</b></div></div><div class=\"w-card\"><p class=\"w-empty\">Loading&hellip;</p></div>";
+
+    var header = '<div class="w-chart-h"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button>" +
+      "<div><b>" + esc(c.patientMrn || c.patientId) + "</b><small>" + esc(c.procedure) + " &middot; " + esc(c.laterality) + " &middot; " + esc(STAGE_WORDS[c.stage] || c.stage) + "</small></div>" +
+      '<button class="w-ic" data-w-act="surgeryload" title="Refresh">' + ms("refresh") + "</button></div>";
+
+    var consentCard = '<div class="w-card"><div class="w-card-h">' + ms("assignment_turned_in") + "<h3>Consent</h3></div>" +
+      (c.consent
+        ? '<p class="w-hint">' + ms("check_circle") + "Recorded: " + esc(c.consent.procedure) + " " + esc(c.consent.laterality) + "</p>"
+        : '<div class="w-grid">' +
+          '<label class="w-f"><span>Procedure</span><input id="wSurgConsentProc" type="text" autocomplete="off" value="' + esc(c.procedure) + '"></label>' +
+          '<label class="w-f"><span>Laterality</span><select id="wSurgConsentLat"><option value="not-applicable"' + (c.laterality === "not-applicable" ? " selected" : "") + '>Not applicable</option><option value="left"' + (c.laterality === "left" ? " selected" : "") + '>Left</option><option value="right"' + (c.laterality === "right" ? " selected" : "") + '>Right</option><option value="bilateral"' + (c.laterality === "bilateral" ? " selected" : "") + '>Bilateral</option></select></label>' +
+          "</div>" +
+          '<label class="w-chk"><input type="checkbox" id="wSurgConsentSigned"> Signed by the patient or a lawful proxy</label>' +
+          '<button class="w-btn go" data-w-act="surgeryconsent">' + ms("save") + "Record consent</button></div>") +
+      "</div>";
+
+    var siteCard = c.marking ? "" : '<div class="w-card"><div class="w-card-h">' + ms("fact_check") + "<h3>Site marking</h3></div>" +
+      '<label class="w-f"><span>Site marked</span><input id="wSurgMarkSite" type="text" autocomplete="off" value="' + esc(c.site || "") + '"></label>' +
+      '<label class="w-f"><span>Laterality marked</span><select id="wSurgMarkLat"><option value="not-applicable"' + (c.laterality === "not-applicable" ? " selected" : "") + '>Not applicable</option><option value="left"' + (c.laterality === "left" ? " selected" : "") + '>Left</option><option value="right"' + (c.laterality === "right" ? " selected" : "") + '>Right</option><option value="bilateral"' + (c.laterality === "bilateral" ? " selected" : "") + '>Bilateral</option></select></label>' +
+      '<button class="w-btn go" data-w-act="surgerymarksite">' + ms("save") + "Record marking</button></div>";
+
+    var checklistCard = c.stage === "marked" ? checklistForm("signIn", SIGN_IN_ITEMS, "surgeryphase")
+      : c.stage === "signed-in" ? checklistForm("timeOut", TIME_OUT_ITEMS, "surgeryphase")
+      : c.stage === "timed-out" ? '<div class="w-card"><div class="w-card-h">' + ms("cut") + "<h3>Incision</h3></div>" +
+          '<p class="w-hint">' + ms("check_circle") + "Sign In and Time Out are both complete. Incision is unlocked.</p>" +
+          '<button class="w-btn warn" data-w-act="surgeryincise">' + ms("cut") + "Record incision</button></div>"
+      : c.stage === "incised" ? checklistForm("signOut", SIGN_OUT_ITEMS, "surgeryphase")
+      : "";
+
+    var anesCard = (c.stage === "signed-in" || c.stage === "timed-out" || c.stage === "incised") ? anesthesiaCard(state) : "";
+    var implantCard = (c.stage === "incised" || c.stage === "signed-out") ? implantsCard(state) : "";
+
+    var dispositionCard = c.stage !== "signed-out" ? "" : '<div class="w-card"><div class="w-card-h">' + ms("exit_to_app") + "<h3>Operative note &amp; disposition</h3></div>" +
+      '<label class="w-f"><span>Operative note</span><textarea id="wSurgNote" rows="2"></textarea></label>' +
+      '<button class="w-btn ghost" data-w-act="surgerynote">' + ms("save") + "Save note</button>" +
+      '<div class="w-dose-a" style="margin-top:8px">' +
+      '<button class="w-btn" data-w-act="surgerydisposition:pacu">' + ms("bed") + "To PACU</button>" +
+      '<button class="w-btn ghost" data-w-act="surgerydisposition:direct-discharge">' + ms("home") + "Direct discharge</button>" +
+      "</div></div>";
+
+    return header + consentCard + siteCard + checklistCard + anesCard + implantCard + dispositionCard;
+  }
+
+  function anesthesiaCard(state) {
+    var a = state.surgCase && state.surgCase.anesthesia;
+    var rows = ((a && a.events) || []).map(function (e) {
+      return "<li><b>" + esc(e.drug) + "</b><span>" + esc(e.dose) + (e.route ? " " + esc(e.route) : "") + " &middot; " + when(e.at) + "</span></li>";
+    }).join("");
+    return '<div class="w-card"><div class="w-card-h">' + ms("vital_signs") + "<h3>Anaesthesia</h3></div>" +
+      (!a
+        ? '<label class="w-f"><span>ASA class</span><input id="wSurgAsa" type="text" autocomplete="off" placeholder="e.g. ASA II"></label>' +
+          '<button class="w-btn go" data-w-act="anesstart">' + ms("play_arrow") + "Start anaesthesia record</button>"
+        : a.endedAt
+          ? '<p class="w-hint">' + ms("check_circle") + "Ended " + when(a.endedAt) + "</p>" + (rows ? '<ul class="w-mini">' + rows + "</ul>" : "")
+          : (rows ? '<ul class="w-mini">' + rows + "</ul>" : "") +
+            '<div class="w-grid">' +
+            '<label class="w-f"><span>Drug</span><input id="wSurgAnesDrug" type="text" autocomplete="off"></label>' +
+            '<label class="w-f"><span>Dose</span><input id="wSurgAnesDose" type="text" autocomplete="off"></label>' +
+            '<label class="w-f"><span>Route</span><input id="wSurgAnesRoute" type="text" autocomplete="off" placeholder="e.g. IV"></label>' +
+            "</div>" +
+            '<button class="w-btn ghost" data-w-act="anesevent">' + ms("add") + "Record drug given</button>" +
+            '<button class="w-btn" data-w-act="anesend">' + ms("stop") + "End anaesthesia</button>") +
+      "</div>";
+  }
+
+  function implantsCard(state) {
+    var rows = ((state.surgCase && state.surgCase.implants) || []).map(function (i) {
+      return "<li><b>" + esc(i.device) + "</b><span>" + (i.lot ? "lot " + esc(i.lot) : "") + (i.serial ? " &middot; serial " + esc(i.serial) : "") + "</span></li>";
+    }).join("");
+    return '<div class="w-card"><div class="w-card-h">' + ms("device_hub") + "<h3>Implants</h3></div>" +
+      (rows ? '<ul class="w-mini">' + rows + "</ul>" : '<p class="w-empty">Nothing logged.</p>') +
+      '<div class="w-grid">' +
+      '<label class="w-f"><span>Device</span><input id="wSurgImplantDevice" type="text" autocomplete="off"></label>' +
+      '<label class="w-f"><span>Lot</span><input id="wSurgImplantLot" type="text" autocomplete="off"></label>' +
+      '<label class="w-f"><span>Serial</span><input id="wSurgImplantSerial" type="text" autocomplete="off"></label>' +
+      "</div>" +
+      '<button class="w-btn ghost" data-w-act="surgeryimplant">' + ms("add") + "Log implant</button></div>";
   }
 
   /* HELD FROM OTHER SYSTEMS. Everything here is something another system sent that WardSynQ would
@@ -1077,6 +1235,8 @@
         : state.view === "pcopy" ? pcopyView(state)
         : state.view === "board" ? boardView(state)
         : state.view === "ed" ? edBoardView(state)
+        : state.view === "surgery" ? surgeryBoardView(state)
+        : state.view === "surgerycase" ? surgeryCaseView(state)
         : listView(state)) + "</div></div>";
   }
 
@@ -1293,6 +1453,160 @@
     apiPost("/ward/device-dissociate", { orgId: st.orgId, deviceId: deviceId, reason: "removed from patient" })
       .then(function (r) { if (settle(r, "Device removed.")) loadDevices(); else paint(); })
       .catch(function () { st.busy = false; st.err = "Could not remove the device."; paint(); });
+  }
+  // ---- surgery / OT / PACU (Task 2.3) ------------------------------------------------------
+  function loadSurgeryBoard() {
+    st.busy = true; st.view = "surgery"; st.surgErr = ""; paint();
+    return apiGet("/ward/surgery-board?orgId=" + encodeURIComponent(st.orgId))
+      .then(function (r) { st.busy = false; if (r && r.ok) st.surgBoard = r; else st.surgErr = (r && r.detail) || "Could not load the theatre board."; paint(); })
+      .catch(function () { st.busy = false; st.surgErr = "Could not load the theatre board."; paint(); });
+  }
+  function surgeryBookOpen() { st.surgBookOpen = true; st.surgMrnLookup = null; st.surgMrnLookupErr = ""; paint(); }
+  function surgeryBookClose() { st.surgBookOpen = false; st.surgMrnLookup = null; paint(); }
+  function surgMrnLookup() {
+    var mrn = val("wSurgMrn");
+    if (!mrn) { st.surgMrnLookupErr = "Enter an MRN."; st.surgMrnLookup = null; paint(); return; }
+    st.busy = true; st.surgMrnLookupErr = ""; st.surgMrnLookup = null; paint();
+    apiGet("/patient/get?orgId=" + encodeURIComponent(st.orgId) + "&mrn=" + encodeURIComponent(mrn))
+      .then(function (r) {
+        st.busy = false;
+        if (r && r.ok && r.patient) st.surgMrnLookup = Object.assign({ mrn: mrn }, r.patient);
+        else st.surgMrnLookupErr = "No patient found with that MRN.";
+        paint();
+      })
+      .catch(function () { st.busy = false; st.surgMrnLookupErr = "Could not look up that MRN."; paint(); });
+  }
+  // Every field read() happens BEFORE st.busy=true;paint() in every function below: paint() replaces
+  // this panel's whole innerHTML, and reading an input AFTER that reads a freshly-rendered, empty
+  // node instead of what was typed - the same bug the ICU admit checkbox had (Task 2.2's own report).
+  function surgeryBook() {
+    var lookup = st.surgMrnLookup; if (!lookup) return;
+    var procedure = val("wSurgProcedure"), site = val("wSurgSite"), theatre = val("wSurgTheatre");
+    var laterality = (document.getElementById("wSurgLaterality") || {}).value || "not-applicable";
+    st.busy = true; paint();
+    apiPost("/ward/surgery-book", { orgId: st.orgId, booking: { mrn: lookup.mrn, procedure: procedure, site: site, laterality: laterality, theatre: theatre } })
+      .then(function (r) {
+        if (settle(r, "Case booked.")) { st.surgBookOpen = false; st.surgMrnLookup = null; loadSurgeryBoard(); } else paint();
+      })
+      .catch(function () { st.busy = false; st.err = "Could not book the case."; paint(); });
+  }
+  function loadSurgeryCase(caseId) {
+    st.busy = true; paint();
+    return apiGet("/ward/surgery-get?orgId=" + encodeURIComponent(st.orgId) + "&caseId=" + encodeURIComponent(caseId))
+      .then(function (r) {
+        if (!r || !r.ok || !r.case) { st.busy = false; st.err = "That case could not be loaded."; st.view = "surgery"; paint(); return; }
+        st.surgCase = { case: r.case, anesthesia: null, implants: [] };
+        paint();
+        return Promise.all([
+          apiGet("/ward/anesthesia-get?orgId=" + encodeURIComponent(st.orgId) + "&caseId=" + encodeURIComponent(caseId)).then(function (a) { if (a && a.ok) st.surgCase.anesthesia = a.record; }),
+          apiGet("/ward/implant-list?orgId=" + encodeURIComponent(st.orgId) + "&patientId=" + encodeURIComponent(r.case.patientId) + "&caseId=" + encodeURIComponent(caseId)).then(function (i) { if (i && i.ok) st.surgCase.implants = i.implants; }),
+        ]).then(function () { st.busy = false; paint(); });
+      })
+      .catch(function () { st.busy = false; st.err = "Could not load the case."; paint(); });
+  }
+  function openSurgeryCase(caseId) { st.view = "surgerycase"; st.surgCase = null; loadSurgeryCase(caseId); }
+  function surgeryLoad() { var c = st.surgCase && st.surgCase.case; if (c) loadSurgeryCase(c.id); }
+  function surgeryConsent() {
+    var c = st.surgCase && st.surgCase.case; if (!c) return;
+    var signed = !!(document.getElementById("wSurgConsentSigned") || {}).checked;
+    var procedure = val("wSurgConsentProc"), laterality = (document.getElementById("wSurgConsentLat") || {}).value || "not-applicable";
+    st.busy = true; paint();
+    apiPost("/ward/surgery-consent", { orgId: st.orgId, caseId: c.id, consent: { procedure: procedure, laterality: laterality, signedByPatientOrProxy: signed, givenBy: "patient" } })
+      .then(function (r) {
+        if (r && !r.ok && r.code) { st.busy = false; st.err = r.detail || "The consent does not match this booking."; paint(); return; }
+        if (settle(r, "Consent recorded.")) loadSurgeryCase(c.id); else paint();
+      })
+      .catch(function () { st.busy = false; st.err = "Could not record consent."; paint(); });
+  }
+  function surgeryMarkSite() {
+    var c = st.surgCase && st.surgCase.case; if (!c) return;
+    var site = val("wSurgMarkSite"), laterality = (document.getElementById("wSurgMarkLat") || {}).value || "not-applicable";
+    st.busy = true; paint();
+    apiPost("/ward/surgery-marksite", { orgId: st.orgId, caseId: c.id, marking: { site: site, laterality: laterality } })
+      .then(function (r) {
+        if (r && !r.ok && r.code) { st.busy = false; st.err = r.detail || "The marking does not match the booking."; paint(); return; }
+        if (settle(r, "Site marking recorded.")) loadSurgeryCase(c.id); else paint();
+      })
+      .catch(function () { st.busy = false; st.err = "Could not record the marking."; paint(); });
+  }
+  function surgeryPhase(phase) {
+    var c = st.surgCase && st.surgCase.case; if (!c) return;
+    var items = phase === "signIn" ? SIGN_IN_ITEMS : phase === "timeOut" ? TIME_OUT_ITEMS : SIGN_OUT_ITEMS;
+    var itemMap = {}; items.forEach(function (k) { itemMap[k] = !!(document.getElementById("wSurgItem-" + phase + "-" + k) || {}).checked; });
+    var role = function (r) { return val("wSurgSig-" + phase + "-" + r); };
+    var signatures = [];
+    ["surgeon", "anaesthetist", "nurse"].forEach(function (r) { var a = role(r); if (a) signatures.push({ role: r, actorId: a }); });
+    var submission = { items: itemMap, signatures: signatures };
+    if (phase !== "signOut") submission.lateralityAsserted = (document.getElementById("wSurgLatAssert-" + phase) || {}).value || "not-applicable";
+    var route = phase === "signIn" ? "/ward/surgery-signin" : phase === "timeOut" ? "/ward/surgery-timeout" : "/ward/surgery-signout";
+    st.busy = true; paint();
+    apiPost(route, { orgId: st.orgId, caseId: c.id, submission: submission })
+      .then(function (r) {
+        if (r && !r.ok && r.code) { st.busy = false; st.err = r.detail || "The checklist could not be completed."; paint(); return; }
+        if (settle(r, "Completed.")) loadSurgeryCase(c.id); else paint();
+      })
+      .catch(function () { st.busy = false; st.err = "Could not complete this phase."; paint(); });
+  }
+  function surgeryIncise() {
+    var c = st.surgCase && st.surgCase.case; if (!c) return;
+    st.busy = true; paint();
+    apiPost("/ward/surgery-incise", { orgId: st.orgId, caseId: c.id })
+      .then(function (r) {
+        if (r && !r.ok && r.code) { st.busy = false; st.err = r.detail || "Incision is locked."; paint(); return; }
+        if (settle(r, "Incision recorded.")) loadSurgeryCase(c.id); else paint();
+      })
+      .catch(function () { st.busy = false; st.err = "Could not record the incision."; paint(); });
+  }
+  function surgeryImplant() {
+    var c = st.surgCase && st.surgCase.case; if (!c) return;
+    var device = val("wSurgImplantDevice"); if (!device) { st.err = "Enter the device."; paint(); return; }
+    var lot = val("wSurgImplantLot"), serial = val("wSurgImplantSerial");
+    st.busy = true; paint();
+    apiPost("/ward/implant", { orgId: st.orgId, caseId: c.id, implant: { device: device, lot: lot, serial: serial } })
+      .then(function (r) { if (settle(r, "Implant logged.")) loadSurgeryCase(c.id); else paint(); })
+      .catch(function () { st.busy = false; st.err = "Could not log the implant."; paint(); });
+  }
+  function surgeryNote() {
+    var c = st.surgCase && st.surgCase.case; if (!c) return;
+    var note = val("wSurgNote");
+    st.busy = true; paint();
+    apiPost("/ward/surgery-note", { orgId: st.orgId, caseId: c.id, note: note })
+      .then(function (r) { if (settle(r, "Note saved.")) loadSurgeryCase(c.id); else paint(); })
+      .catch(function () { st.busy = false; st.err = "Could not save the note."; paint(); });
+  }
+  function surgeryDisposition(disposition) {
+    var c = st.surgCase && st.surgCase.case; if (!c) return;
+    st.busy = true; paint();
+    apiPost("/ward/surgery-disposition", { orgId: st.orgId, caseId: c.id, disposition: disposition, pacuBed: disposition === "pacu" ? "1" : undefined })
+      .then(function (r) {
+        if (r && !r.ok && r.error === "not_signed_out") { st.busy = false; st.err = "Sign out has to be complete first."; paint(); return; }
+        if (settle(r, "Disposition recorded.")) { st.view = "surgery"; st.surgCase = null; loadSurgeryBoard(); } else paint();
+      })
+      .catch(function () { st.busy = false; st.err = "Could not record the disposition."; paint(); });
+  }
+  function anesStart() {
+    var c = st.surgCase && st.surgCase.case; if (!c) return;
+    var asaClass = val("wSurgAsa");
+    st.busy = true; paint();
+    apiPost("/ward/anesthesia-start", { orgId: st.orgId, caseId: c.id, asaClass: asaClass })
+      .then(function (r) { if (settle(r, "Anaesthesia record started.")) loadSurgeryCase(c.id); else paint(); })
+      .catch(function () { st.busy = false; st.err = "Could not start the anaesthesia record."; paint(); });
+  }
+  function anesEvent() {
+    var c = st.surgCase && st.surgCase.case; if (!c) return;
+    var drug = val("wSurgAnesDrug"), dose = val("wSurgAnesDose"), route = val("wSurgAnesRoute");
+    if (!drug || !dose) { st.err = "Enter the drug and the dose."; paint(); return; }
+    st.busy = true; paint();
+    apiPost("/ward/anesthesia-event", { orgId: st.orgId, caseId: c.id, event: { drug: drug, dose: dose, route: route } })
+      .then(function (r) { if (settle(r, "Recorded.")) loadSurgeryCase(c.id); else paint(); })
+      .catch(function () { st.busy = false; st.err = "Could not record that drug."; paint(); });
+  }
+  function anesEnd() {
+    var c = st.surgCase && st.surgCase.case; if (!c) return;
+    st.busy = true; paint();
+    apiPost("/ward/anesthesia-end", { orgId: st.orgId, caseId: c.id })
+      .then(function (r) { if (settle(r, "Anaesthesia ended.")) loadSurgeryCase(c.id); else paint(); })
+      .catch(function () { st.busy = false; st.err = "Could not end the anaesthesia record."; paint(); });
   }
   function edDispose(disposition, extra) {
     var s = st.sel; if (!s) return;
@@ -1760,10 +2074,14 @@
       // backing out of it returns to that patient's ED chart, not the ward list, and drops the
       // pending admit rather than leaving it to fire on some later, unrelated bed pick.
       if (st.view === "board" && st.edAdmitPending) { st.edAdmitPending = false; st.board = null; st.admitTarget = null; st.view = "chart"; paint(); return; }
+      // A case's own chart backs out to the theatre board, not the ward list - the same reason the
+      // ED chart backs out to the ED board rather than to an unrelated ward roster.
+      if (st.view === "surgerycase") { st.surgCase = null; loadSurgeryBoard(); return; }
       st.view = "list"; st.sel = null; st.due = []; st.problems = []; st.outbox = []; st.downtime = null; st.pcopy = null;
       st.board = null; st.admitTarget = null; st.mrnLookup = null; st.mrnLookupErr = ""; st.edAdmitPending = false;
       st.flowsheet = null; st.news2 = null; st.investigations = null; st.results = null; st.resusBundles = null;
       st.ed = null; st.edArrivalOpen = false; st.edMrnLookup = null; st.edMrnLookupErr = "";
+      st.surgBoard = null; st.surgCase = null; st.surgBookOpen = false; st.surgMrnLookup = null; st.surgMrnLookupErr = ""; st.surgErr = "";
       paint(); return;
     }
     if (cmd === "board") { loadBoard(); return; }
@@ -1801,6 +2119,23 @@
       paint(); loadChart(); loadRound(); loadBalance(); loadOutbox(); loadTemplates(); loadFlowsheet(); loadNews2(); loadInvestigations(); loadResus(); return;
     }
     if (cmd === "edboard") { loadEd(); return; }
+    if (cmd === "surgeryboard") { loadSurgeryBoard(); return; }
+    if (cmd === "surgerybookopen") { surgeryBookOpen(); return; }
+    if (cmd === "surgerybookclose") { surgeryBookClose(); return; }
+    if (cmd === "surgmrnlookup") { surgMrnLookup(); return; }
+    if (cmd === "surgerybook") { surgeryBook(); return; }
+    if (cmd === "opensurgery") { openSurgeryCase(arg); return; }
+    if (cmd === "surgeryload") { surgeryLoad(); return; }
+    if (cmd === "surgeryconsent") { surgeryConsent(); return; }
+    if (cmd === "surgerymarksite") { surgeryMarkSite(); return; }
+    if (cmd === "surgeryphase") { surgeryPhase(arg); return; }
+    if (cmd === "surgeryincise") { surgeryIncise(); return; }
+    if (cmd === "surgeryimplant") { surgeryImplant(); return; }
+    if (cmd === "surgerynote") { surgeryNote(); return; }
+    if (cmd === "surgerydisposition") { surgeryDisposition(arg); return; }
+    if (cmd === "anesstart") { anesStart(); return; }
+    if (cmd === "anesevent") { anesEvent(); return; }
+    if (cmd === "anesend") { anesEnd(); return; }
     if (cmd === "edarrivalopen") { st.edArrivalOpen = true; st.edMrnLookup = null; st.edMrnLookupErr = ""; paint(); return; }
     if (cmd === "edarrivalclose") { st.edArrivalOpen = false; st.edMrnLookup = null; st.edMrnLookupErr = ""; paint(); return; }
     if (cmd === "edmrnlookup") { edMrnLookup(); return; }

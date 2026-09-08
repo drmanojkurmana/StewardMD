@@ -1,0 +1,94 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>WardSynQ Surgery: golden path harness</title>
+<link rel="stylesheet" href="../ward.css">
+<style>html,body{margin:0;height:100%}</style>
+</head><body>
+<script>
+/* The REAL ward.js driven through the surgery/OT/PACU golden path (theatre board -> book a case ->
+ * consent -> mark site -> Sign In -> incision unlocked only after Time Out -> implant logged ->
+ * Sign Out -> disposition to PACU) against an in-memory stub server whose response shapes are
+ * confirmed against functions/_wardsynq/migrate-surgery.js and the route-level tests in
+ * test/wardsynq-surgery.test.mjs, which prove these same contracts persist for real. This proves
+ * the CLIENT half; it is not a live server. */
+window.__calls = [];
+localStorage.setItem("smd_opd_staff_tok", "harness-token");
+
+var CASE_ID = null, ENC_ID = null, PATIENT_ID = "opd-pat-smd-h1-ot01", MRN = "SMD-H1-OT01";
+var STAGE = null, CONSENT = null, MARKING = null, ASA = null, ANES_EVENTS = [], ANES_ENDED = false, IMPLANTS = [];
+
+window.fetch = function (url, opts) {
+  var u = String(url), body = null;
+  try { body = opts && opts.body ? JSON.parse(opts.body) : null; } catch (e) {}
+  window.__calls.push({ url: u, method: (opts && opts.method) || "GET", body: body });
+  var reply = function (obj) { return Promise.resolve({ ok: true, status: 200, json: function () { return Promise.resolve(obj); } }); };
+
+  if (u.indexOf("/patient/get") >= 0) return reply({ ok: true, patient: { mrn: MRN, name: "OT Harness Patient", ageYears: 50, gender: "female" } });
+
+  if (u.indexOf("/ward/surgery-board") >= 0) {
+    return reply({ ok: true, cases: CASE_ID && STAGE !== "signed-out" ? [{ id: CASE_ID, patientId: PATIENT_ID, patientMrn: MRN, procedure: "Cholecystectomy", stage: STAGE, theatre: "OT-1" }] : [] });
+  }
+  if (u.indexOf("/ward/surgery-book") >= 0 && (opts && opts.method) === "POST") {
+    CASE_ID = "wsq-case-smd-h1-ot01-cholecystectomy"; ENC_ID = "wsq-enc-" + CASE_ID; STAGE = "booked";
+    return reply({ ok: true, written: 2, caseId: CASE_ID, encounterId: ENC_ID, patientId: PATIENT_ID, version: 1 });
+  }
+  if (u.indexOf("/ward/surgery-consent") >= 0 && (opts && opts.method) === "POST") {
+    CONSENT = body.consent;
+    return reply({ ok: true, written: 2, caseId: CASE_ID, stage: STAGE, consent: { consentId: "wsq-consent-1" } });
+  }
+  if (u.indexOf("/ward/surgery-marksite") >= 0 && (opts && opts.method) === "POST") {
+    MARKING = body.marking; STAGE = "marked";
+    return reply({ ok: true, written: 1, caseId: CASE_ID, stage: STAGE });
+  }
+  if (u.indexOf("/ward/surgery-signin") >= 0 && (opts && opts.method) === "POST") {
+    STAGE = "signed-in";
+    return reply({ ok: true, written: 1, caseId: CASE_ID, stage: STAGE });
+  }
+  if (u.indexOf("/ward/surgery-timeout") >= 0 && (opts && opts.method) === "POST") {
+    STAGE = "timed-out";
+    return reply({ ok: true, written: 1, caseId: CASE_ID, stage: STAGE });
+  }
+  if (u.indexOf("/ward/surgery-incise") >= 0 && (opts && opts.method) === "POST") {
+    STAGE = "incised";
+    return reply({ ok: true, written: 1, caseId: CASE_ID, stage: STAGE });
+  }
+  if (u.indexOf("/ward/surgery-signout") >= 0 && (opts && opts.method) === "POST") {
+    STAGE = "signed-out";
+    return reply({ ok: true, written: 1, caseId: CASE_ID, stage: STAGE });
+  }
+  if (u.indexOf("/ward/surgery-note") >= 0 && (opts && opts.method) === "POST") return reply({ ok: true, written: 1, caseId: CASE_ID });
+  if (u.indexOf("/ward/surgery-disposition") >= 0 && (opts && opts.method) === "POST") {
+    return reply({ ok: true, written: 2, caseId: CASE_ID, disposition: body.disposition, pacuEncounterId: body.disposition === "pacu" ? "wsq-pacu-" + CASE_ID : null });
+  }
+  if (u.indexOf("/ward/surgery-get") >= 0) {
+    return reply({ ok: true, case: CASE_ID ? {
+      id: CASE_ID, patientId: PATIENT_ID, patientMrn: MRN, encounterId: ENC_ID,
+      procedure: "Cholecystectomy", site: "abdomen", laterality: "not-applicable",
+      consent: CONSENT ? { procedure: CONSENT.procedure, laterality: CONSENT.laterality } : null,
+      marking: MARKING, stage: STAGE,
+    } : null });
+  }
+
+  if (u.indexOf("/ward/anesthesia-start") >= 0 && (opts && opts.method) === "POST") { ASA = body.asaClass; return reply({ ok: true, written: 1, caseId: CASE_ID }); }
+  if (u.indexOf("/ward/anesthesia-event") >= 0 && (opts && opts.method) === "POST") {
+    ANES_EVENTS.push({ drug: body.event.drug, dose: body.event.dose, route: body.event.route, at: new Date().toISOString() });
+    return reply({ ok: true, written: 1, caseId: CASE_ID, events: ANES_EVENTS });
+  }
+  if (u.indexOf("/ward/anesthesia-end") >= 0 && (opts && opts.method) === "POST") { ANES_ENDED = true; return reply({ ok: true, written: 1, caseId: CASE_ID }); }
+  if (u.indexOf("/ward/anesthesia-get") >= 0) {
+    return reply({ ok: true, record: ASA ? { asaClass: ASA, events: ANES_EVENTS, endedAt: ANES_ENDED ? new Date().toISOString() : null } : null });
+  }
+
+  if (u.indexOf("/ward/implant") >= 0 && (opts && opts.method) === "POST") {
+    IMPLANTS.push(body.implant); return reply({ ok: true, written: 1, caseId: CASE_ID, implantId: "wsq-implant-1" });
+  }
+  if (u.indexOf("/ward/implant-list") >= 0) return reply({ ok: true, implants: IMPLANTS });
+
+  return reply({ ok: true });
+};
+</script>
+<script src="../ward.js"></script>
+<script>
+window.__ready = !!(window.WARD && window.WARD.open);
+</script>
+</body></html>
