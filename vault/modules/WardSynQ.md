@@ -1286,3 +1286,60 @@ calls rely on are the pre-existing, unmodified 267+ tests in `wardsynq-inpatient
 tile → `WARD.open()` hand-off is code-reviewed and syntax-checked (mirrors the working OPD-queue tile
 pattern exactly) but has no headless-Chrome click-through of its own — `home.js` is a large,
 session/auth-heavy file and a full click-through of it was out of scope for this pass.
+
+## Golden-path verification gaps closed (2026-09-08, PR #969)
+
+Follow-up to the golden-path build (PR #968) closing the specific gaps named in a later review
+pass. Test-only; the golden path itself was not touched.
+
+- **RBAC negatives, corrected to the real boundary.** The first pass assumed nurse would be a
+  valid negative case for admit/beds/flowsheet/news2; `functions/_queue_roles.js` shows nurse
+  legitimately holds `queue.add`, `queue.view` and `emr.view`, so that would have been a vacuous
+  test. Pharmacy (`[QUEUE_VIEW, ORDER_READ, ORDER_DISPENSE, ORDER_VERIFY]`) is the real boundary
+  for the first three; a non-member entirely is the real boundary for the bed board, since
+  `queue.view` is held by nearly every real role including `viewer`.
+- **A real gap found and documented, not silently patched: `/ward/admit` has no server-side
+  bed-occupancy check.** `admitPatient()` (`migrate-inpatient.js`) writes an Encounter keyed by
+  mrn+admittedAt and never reads the board or any other open admission — unlike
+  `transferPatient()`, which refuses a busy bed (`bed_occupied`). ward.js's own admission UI is a
+  real, working guard today: it only ever offers a bed the board's `GET /ward/beds` just reported
+  free. But that is a client-side guard for a write with none of its own — a second caller of
+  `/ward/admit` (another screen, a future integration, a race between two nurses) is not stopped.
+  Proven directly by a tripwire test
+  (`wardsynq-inpatient-emar.test.mjs`, "wrong-patient / bed-safety GAP"), not assumed. **Not fixed
+  in this pass** — a clinical-safety write-path change is its own decision, not something to
+  bundle with a verification pass. If a future change adds the guard, the tripwire test is meant
+  to start failing (see its comment) and should then be updated to assert the refusal instead.
+- **eMAR negatives now exist at the route level, not only the unit level.** `hold` with no reason
+  refused (`NO_REASON`) was already unit-tested but never through the real `/ward/mar` door.
+  `refuse`/`cancel` DELIBERATELY do not throw on a missing reason (`refuse` defaults to "patient
+  declined", `cancel` to no reason at all — `wardsynq-meds.js`) — pinned down as tripwires rather
+  than silently "fixed" into throwing, since defaulting is the documented, intentional design.
+- **Discharge leaves the longitudinal record intact — now actually proven.** Every existing
+  discharge test exercised the discharge SUMMARY's own read (which reads the whole stay by
+  design); none exercised the ordinary chart-read routes (flowsheet, problem list, the
+  order/eMAR history) AFTER a stay had closed. One new test admits, charts vitals/a
+  problem/an order/an administration, discharges, then reads all four back through the real
+  routes and confirms the reads write nothing.
+- **Real persistence proven against a real on-disk database, not asserted.**
+  `test/wardsynq-persistence-server.mjs` runs the actual `onRequest()` from
+  `functions/api/queue/[[path]].js` against a real `D1Repository` over a real sqlite file
+  (`repository-sqlite.js`, the same on-premise path `wardsynq-onprem.test.mjs` already covers) —
+  reusing the exact org/auth test scaffolding `wardsynq-inpatient-emar.test.mjs` already has
+  (Firestore mocked for org/membership only; the WardSynQ record itself is real). An admission was
+  verified to survive a full process kill and restart against the same file.
+  `test/run-ward-persistence-cross-session.mjs` then drove two independent headless-Chrome CDP
+  sessions against that one real server — genuine "two sessions share real server state" and a
+  full-page-reload proof. This is a local test server, not a Cloudflare Pages deployment, and does
+  not claim to be one.
+- **Home.js tile click-through, against the real file.** The golden-path pass could not get this
+  working in time; this pass did: `test/run-home-wardsynq-tile.mjs` boots the real `home.js`
+  (flag on), finds the real tile the real `homeV4Markup()`/`tileV4()` renders, clicks it, and
+  confirms the real delegated click handler reaches `ACT.wardsynq() -> WARD.open()`. Also confirms
+  the tile is absent with the flag off. One wrinkle: `redesignNavOn()` defaults ON and has no
+  wardsynq tile of its own (only the v4 layout does) — the harness sets
+  `localStorage.smd_redesign_nav = "0"` before load, the same choice a real user opting out of
+  the redesign nav would make, rather than touching home.js.
+
+**Still OPEN, honestly:** a live Cloudflare Pages deployment and a physical iOS/Android device.
+Neither was safely reachable from this session (no production credentials, no device present).
