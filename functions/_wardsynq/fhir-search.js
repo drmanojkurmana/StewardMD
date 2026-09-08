@@ -166,13 +166,28 @@ function codeMatches(concept, clause, textMode) {
 function parseSearch(type, searchParams) {
   const params = searchParams instanceof URLSearchParams ? searchParams : new URLSearchParams(searchParams || "");
   const hasDate = !!DATE_OF[type], hasCode = !!CODE_OF[type];
-  const q = { type, id: null, patient: null, lastUpdated: [], date: [], code: [], codeText: [], count: DEFAULT_COUNT, sort: null, include: [], page: 0 };
+  const q = { type, id: null, patient: null, target: null, lastUpdated: [], date: [], code: [], codeText: [], count: DEFAULT_COUNT, sort: null, include: [], revInclude: [], page: 0 };
   const problems = [];
 
   for (const [rawKey, rawVal] of params.entries()) {
     const [key, modifier] = rawKey.split(":");
     const val = str(rawVal);
     if (key === "_id") { q.id = val ? val.split(",").map(str).filter(Boolean) : null; continue; }
+    if (key === "target") {
+      if (type !== "Provenance") { problems.push({ param: rawKey, reason: `${type} has no target` }); continue; }
+      const m = /^(?:.*\/)?([A-Za-z]+)\/([^/?#]+)$/.exec(val);
+      if (!m) problems.push({ param: rawKey, reason: "target must be Type/id" }); else q.target = { type: m[1], id: m[2] };
+      continue;
+    }
+    if (key === "_revinclude") {
+      for (const inc of val.split(",").map(str).filter(Boolean)) {
+        /* The one reverse include this server offers: the provenance of what you searched for. It is
+         * derived from the rows already read, so it widens nothing. */
+        if (inc === "Provenance:target" && type !== "Provenance") q.revInclude.push(inc);
+        else problems.push({ param: "_revinclude", reason: `${inc} is not a reverse include this server supports for ${type}` });
+      }
+      continue;
+    }
     if (key === "patient" || key === "subject") {
       // Accept `Patient/123`, `123`, and a full URL ending in Patient/123.
       const m = /(?:^|\/)Patient\/([^/?#]+)$/.exec(val);
@@ -322,6 +337,9 @@ function searchBundle({ base, type, q, page, included, outcomes, rawQuery }) {
 /** The search parameters and includes the CapabilityStatement may declare for one type. Derived from
  *  the same tables the parser uses, so the declaration cannot drift from the behaviour. */
 function declaredSearch(type) {
+  if (type === "Provenance") {
+    return { params: [{ name: "target", type: "reference", documentation: "required: Type/id" }, { name: "_count", type: "number" }], includes: [], revIncludes: [] };
+  }
   const params = [
     { name: "_id", type: "token" }, { name: "patient", type: "reference" },
     { name: "_lastUpdated", type: "date" }, { name: "_count", type: "number" }, { name: "_sort", type: "string" },
@@ -329,7 +347,7 @@ function declaredSearch(type) {
   if (DATE_OF[type]) params.push({ name: "date", type: "date" });
   if (CODE_OF[type]) params.push({ name: "code", type: "token", documentation: "code, system|code, or code:text=" });
   const includes = Object.keys(INCLUDES).filter((k) => k.startsWith(type + ":"));
-  return { params, includes };
+  return { params, includes, revIncludes: ["Provenance:target"] };
 }
 
 export {

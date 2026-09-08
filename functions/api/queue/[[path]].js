@@ -61,7 +61,7 @@ import { giveHandover, receiveHandover, listHandovers } from "../../_wardsynq/ha
 import { verifyOrder, verificationQueue } from "../../_wardsynq/pharmacy-verify.js";
 import { dispenseOrder, returnDispense, listDispenses } from "../../_wardsynq/pharmacy-dispense.js";
 import { declareBreakGlass, openEmergencyChart, listBreakGlass } from "../../_wardsynq/break-glass.js";
-import { patientEverything, readResource, capabilityStatement, searchType, historyOf, vread, operationOutcome } from "../../_wardsynq/fhir.js";
+import { patientEverything, readResource, capabilityStatement, searchType, historyOf, vread, operationOutcome, provenanceRead, provenanceSearch } from "../../_wardsynq/fhir.js";
 import { startReconciliation, decideMedicine, readReconciliation } from "../../_wardsynq/med-reconciliation.js";
 import { wardMetrics } from "../../_wardsynq/ward-metrics.js";
 import { releaseResult, pendingRequests } from "../../_wardsynq/lab-result.js";
@@ -749,6 +749,13 @@ export async function onRequest(context) {
             types: (url.searchParams.get("_type") || "").split(",").map((t) => t.trim()).filter(Boolean),
           });
           return fhirJson(r.ok ? r.bundle : r.outcome, r.status, request);
+        }
+        if (fType === "Provenance") {
+          const pParams = new URLSearchParams(url.searchParams); pParams.delete("orgId");
+          const r = fId
+            ? await provenanceRead(request, env, { ...fctx, id: fId })
+            : await provenanceSearch(request, env, { ...fctx, searchParams: pParams, rawQuery: url.search.replace(/^\?/, "") });
+          return fhirJson(r.ok ? (r.resource || r.bundle) : r.outcome, r.status, request);
         }
         if (fType === "Patient" && fId && fOp === "$everything") {
           const r = await patientEverything(request, env, { ...fctx, patientId: fId, types: [] });

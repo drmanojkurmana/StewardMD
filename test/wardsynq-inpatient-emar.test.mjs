@@ -4373,3 +4373,43 @@ test("FHIR: _include pulls the report's observations through the governed read, 
   assert.ok(ev.entry.some((e) => e.resource.resourceType === "Patient"));
   assert.ok(ev.entry.some((e) => e.resource.resourceType === "DiagnosticReport"));
 });
+
+test("FHIR: Provenance by target shows every version with its real author, Consent exports honestly, and _revinclude rides along", async () => {
+  seedHospital();
+  const { adm } = await admittedPatientOnDrug();
+  const mv = await as(DOCTOR, "/ward/transfer", "POST", { orgId: ORG, encounterId: adm.encounterId, ward: "Medical B", bed: "3" });
+  assert.equal(mv.__status, 200, JSON.stringify(mv).slice(0, 200));
+
+  const prov = await (await asRaw(DOCTOR, `/ward/fhir/Provenance?orgId=${ORG}&target=Encounter/${adm.encounterId}`)).json();
+  assert.equal(prov.resourceType, "Bundle", JSON.stringify(prov).slice(0, 300));
+  assert.equal(prov.total, 2, "one Provenance per version");
+  assert.deepEqual(prov.entry.map((e) => e.resource.activity.coding[0].code), ["UPDATE", "CREATE"], "newest first");
+  // Derived from the stamp: the doctor who really wrote it, as an author, not as a display name typed in.
+  assert.ok(prov.entry.every((e) => e.resource.agent[0].who.display === idFor(DOCTOR)), JSON.stringify(prov.entry[0].resource.agent));
+  assert.ok(prov.entry.every((e) => e.resource.agent[0].type.coding[0].code === "author"));
+  assert.equal(prov.entry[1].resource.target[0].reference, `Encounter/${adm.encounterId}/_history/1`);
+
+  const one = await asRaw(DOCTOR, `/ward/fhir/Provenance/Encounter-${adm.encounterId}-v1?orgId=${ORG}`);
+  assert.equal(one.status, 200);
+  assert.equal((await one.json()).resourceType, "Provenance");
+  // A hospital-wide provenance dump is not offered: target is required.
+  const bare = await asRaw(DOCTOR, `/ward/fhir/Provenance?orgId=${ORG}`);
+  assert.equal(bare.status, 400);
+  assert.equal((await bare.json()).resourceType, "OperationOutcome");
+
+  const rev = await (await asRaw(DOCTOR, `/ward/fhir/Encounter?orgId=${ORG}&patient=${adm.patientId}&_revinclude=Provenance:target`)).json();
+  const inc = rev.entry.filter((e) => e.search.mode === "include");
+  assert.equal(inc.length, 1);
+  assert.equal(inc[0].resource.resourceType, "Provenance");
+  assert.equal(inc[0].resource.id, `Encounter-${adm.encounterId}-v2`, "the CURRENT version's provenance");
+
+  // A refusal of external sharing exports as a rejected Consent with a deny provision.
+  const c = await as(NURSE, "/ward/consent", "POST", { orgId: ORG, patientId: adm.patientId, scope: "share-external", decision: "refused" });
+  assert.equal(c.__status, 200, JSON.stringify(c).slice(0, 200));
+  const cs = await (await asRaw(DOCTOR, `/ward/fhir/Consent?orgId=${ORG}&patient=${adm.patientId}`)).json();
+  assert.equal(cs.resourceType, "Bundle", JSON.stringify(cs).slice(0, 300));
+  assert.equal(cs.total, 1);
+  assert.equal(cs.entry[0].resource.status, "rejected");
+  assert.equal(cs.entry[0].resource.provision.type, "deny");
+  assert.equal(cs.entry[0].resource.patient.reference, `Patient/${adm.patientId}`);
+});

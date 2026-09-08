@@ -168,7 +168,9 @@ test("THE CAPABILITY STATEMENT DOES NOT OVERSTATE", () => {
   assert.match(c.implementation.description, /Not profile-validated/);
   assert.match(c.implementation.description, /no claim of conformance to US Core/);
   assert.match(c.implementation.description, /never as a guessed code/);
-  assert.equal(c.rest[0].resource.length, Object.keys(FHIR_TYPE).length, "it advertises exactly what it maps");
+  // Every mapped type, plus Provenance, which is derived from each of them rather than mapped from a stored one.
+  assert.equal(c.rest[0].resource.length, Object.keys(FHIR_TYPE).length + 1, "it advertises exactly what it maps, plus derived Provenance");
+  assert.ok(c.rest[0].resource.some((r) => r.type === "Provenance"));
 });
 
 test("a bundle is a searchset with fullUrls that resolve back here", () => {
