@@ -304,3 +304,13 @@ body.dark #smdWard { --bg: #191c1e; --on-surface: #eff1f3; --on-surface-variant:
    own mini-lists. */
 #smdWard .w-results li { display: flex; flex-direction: column; gap: 2px; }
 #smdWard .w-results li div { font-size: 13px; }
+
+/* Emergency department. The bed-number badge is repurposed as an acuity badge: colour is urgency,
+   never a computed clinical severity - the level is a human's own choice (triageCard, ward.js). */
+#smdWard .w-bed-no.untriaged { background: var(--sc-high); color: var(--on-surface-variant); }
+#smdWard .w-bed-no.acuity-1, #smdWard .w-bed-no.acuity-2 { background: var(--error-container); color: var(--on-error-container); }
+#smdWard .w-bed-no.acuity-3 { background: var(--warn-container); color: var(--on-warn-container); }
+#smdWard .w-bed-no.acuity-4, #smdWard .w-bed-no.acuity-5 { background: var(--ok-container); color: var(--on-ok-container); }
+#smdWard .w-ed-board { list-style: none; margin: 0; padding: 0; }
+#smdWard .w-ed-board li { border-top: 1px solid var(--outline-variant); }
+#smdWard .w-ed-board li:first-child { border-top: 0; }

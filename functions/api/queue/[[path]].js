@@ -51,6 +51,11 @@ import { getRulePack } from "../../_wardsynq/rulepack.js";
 // Inpatient ward + eMAR (2026-09-07). Same shape as every OPD migration above: the route resolves
 // the org and the forced wardsynq migration, these do the governed record write.
 import { admitPatient, listWard, recordWardVitals, createWardMedicationOrder, transferPatient, bedBoard } from "../../_wardsynq/migrate-inpatient.js";
+// Emergency department (2026-09-09). Reuses everything above unchanged - vitals, orders, the eMAR,
+// notes, labs, NEWS2, critical results are all encounter-class-agnostic already. This adds only
+// arrival (known or unidentified), triage acuity, and a non-admitted disposition.
+import { edArrival, recordEdTriage, edDisposition, listEd } from "../../_wardsynq/migrate-ed.js";
+import { startResusBundle, markResusElement, waiveResusElement, voidResusBundle, listResusBundles } from "../../_wardsynq/migrate-resus.js";
 import { medicationRound, administerStep } from "../../_wardsynq/migrate-emar.js";
 import { draftDischargeSummary, signDischargeSummary, dischargePatient, readDischargeSummary } from "../../_wardsynq/migrate-discharge.js";
 import { recordProblem, listProblems } from "../../_wardsynq/migrate-problem.js";
@@ -490,6 +495,18 @@ export async function onRequest(context) {
         criticals: CAPS.EMR_VIEW, acknowledge: CAPS.EMR_TREAT, "flag-critical": CAPS.EMR_TREAT,
         // Moving a patient between beds is the same administrative act as admitting them to one.
         transfer: CAPS.QUEUE_ADD, beds: CAPS.QUEUE_VIEW,
+        /* Emergency department. Arrival is the same administrative act as admit (queue.add) - it
+         * opens a visit, it does not treat one. Triage acuity is the nurse's own record, the same
+         * authority as vitals. Disposition closes the visit - the SAME capability discharge already
+         * uses below (queue.add) - whether that closing is a discharge home or, via "admitted",
+         * a hand-off into admitPatient(), which itself needs only queue.add too. */
+        "ed-arrival": CAPS.QUEUE_ADD, "ed-triage": CAPS.EMR_VITALS, "ed-disposition": CAPS.QUEUE_ADD,
+        "ed-list": CAPS.QUEUE_VIEW,
+        /* Resuscitation bundles. Starting one is "a clinical commitment" (wardsynq-emergency.js's own
+         * words) - emr.treat. Reading a running bundle's status is emr.view, the same as the chart
+         * it hangs off. */
+        "resus-start": CAPS.EMR_TREAT, "resus-mark": CAPS.EMR_TREAT, "resus-waive": CAPS.EMR_TREAT,
+        "resus-void": CAPS.EMR_TREAT, resus: CAPS.EMR_VIEW,
         // Charting fluid is the nurse's own record, the same authority as recording a vital.
         fluid: CAPS.EMR_VITALS, balance: CAPS.EMR_VIEW,
         // Handing a patient over is the clinical account of a shift: the same authority as recording
@@ -710,6 +727,42 @@ export async function onRequest(context) {
       }
       if (sub === "list" && method === "GET") {
         const r = await listWard(request, env, { ...deps, ward: url.searchParams.get("ward") || "" });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "ed-arrival" && method === "POST") {
+        const r = await edArrival(request, env, { ...deps, arrival: body.arrival || body, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "ed-triage" && method === "POST") {
+        const r = await recordEdTriage(request, env, { ...deps, encounterId: body.encounterId, acuity: body.acuity, chiefComplaint: body.chiefComplaint, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "ed-disposition" && method === "POST") {
+        const r = await edDisposition(request, env, { ...deps, encounterId: body.encounterId, disposition: body.disposition, reason: body.reason, at: body.at, admission: body.admission, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "ed-list" && method === "GET") {
+        const r = await listEd(request, env, { ...deps });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "resus-start" && method === "POST") {
+        const r = await startResusBundle(request, env, { ...deps, patientId: body.patientId, encounterId: body.encounterId, code: body.code, evidence: body.evidence, timeZero: body.timeZero, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "resus-mark" && method === "POST") {
+        const r = await markResusElement(request, env, { ...deps, bundleId: body.bundleId, key: body.key, event: body.event, at: body.at, detail: body.detail, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "resus-waive" && method === "POST") {
+        const r = await waiveResusElement(request, env, { ...deps, bundleId: body.bundleId, key: body.key, reason: body.reason, at: body.at, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "resus-void" && method === "POST") {
+        const r = await voidResusBundle(request, env, { ...deps, bundleId: body.bundleId, reason: body.reason, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "resus" && method === "GET") {
+        const r = await listResusBundles(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "" });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "vitals" && method === "POST") {

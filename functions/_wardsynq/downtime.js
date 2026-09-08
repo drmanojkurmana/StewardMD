@@ -142,8 +142,11 @@ async function downtimePack(request, env, ctx) {
   }
 
   const want = str(ctx.ward).toLowerCase();
+  // An outage does not stop the emergency department. A pack that only knew about admitted
+  // inpatients would leave an ED patient's allergies, orders and vitals with nothing printed the
+  // moment the system went down - the exact failure this whole feature exists to prevent.
   const stays = (encounters || [])
-    .filter((e) => e && e.class === IPD && e.status === OPEN)
+    .filter((e) => e && (e.class === IPD || e.class === "ED") && e.status === OPEN)
     .filter((e) => !want || str(e.location && e.location.ward).toLowerCase() === want);
 
   const nowMs = Date.parse(str(ctx.now)) || Date.now();

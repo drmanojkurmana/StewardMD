@@ -51,6 +51,12 @@
     investigations: null, results: null,
     drugOrder: { drug: "", value: "", unit: "", route: "", frequency: "" },
     invOrder: { code: "", display: "", category: "laboratory", priority: "routine", reason: "" },
+    // Emergency department. ed: null until loaded, {patients:[...]} once read (the ED board -
+    // untriaged first, same shape discipline as the ward list). edArrivalOpen: whether the arrival
+    // panel is showing. edMrnLookup/edMrnLookupErr: the SAME confirm-before-admit pattern the bed
+    // board already uses - nobody arrives on a typed MRN alone.
+    ed: null, edErr: "", edArrivalOpen: false, edMrnLookup: null, edMrnLookupErr: "", edAdmitPending: false,
+    resusBundles: null, resusStarting: false,
     busy: false, err: "", note: "", refusal: null, loaded: false
   };
 
@@ -162,6 +168,7 @@
       '<div class="w-filter"><input id="wWard" type="text" placeholder="Filter by ward (blank = all)" value="' + esc(state.ward) + '">' +
       '<button class="w-btn ghost" data-w-act="setward">Apply</button>' +
       '<button class="w-btn" data-w-act="board" title="Admit a patient to a bed">' + ms("add_circle") + "Admit</button>" +
+      '<button class="w-btn ghost" data-w-act="edboard" title="Emergency department">' + ms("emergency") + "ED</button>" +
       // Reachable BEFORE an outage, which is the only time it can be taken. A pack you can only get
       // to while the system is up is a pack the ward has to remember to take while the system is up.
       '<button class="w-btn ghost" data-w-act="downtime" title="Printable sheet for when the system is unavailable">' + ms("print") + "Downtime pack</button></div>" +
@@ -223,6 +230,53 @@
       (state.boardErr ? '<p class="w-hint warn">' + ms("error") + esc(state.boardErr) + "</p>"
         : wardsHtml || '<p class="w-empty">No admissions and no bed lists configured.</p>') +
       "</div>" + admitPanel;
+  }
+
+  /* THE ED BOARD. A worklist, not an arrival log - the server itself sorts untriaged patients
+   * first, then by acuity, then by wait (listEd(), migrate-ed.js), so the same screen that lists
+   * who is here is also the answer to "who needs a nurse's eyes right now". Nothing here computes
+   * an acuity; the board only ever shows what a human has already recorded (or that nobody has
+   * yet). Arrival is a separate, explicit panel - the same "pick a real fact, then confirm" shape
+   * the bed board's admit panel already uses. */
+  var ACUITY_WORDS = { 1: "1 - Immediate", 2: "2 - Emergent", 3: "3 - Urgent", 4: "4 - Less urgent", 5: "5 - Non-urgent" };
+  function edBoardView(state) {
+    var rows = (state.ed && state.ed.patients || []).map(function (p) {
+      return "<li>" + '<button class="w-bed" data-w-act="openEd:' + esc(p.encounterId) + '">' +
+        '<span class="w-bed-no' + (p.acuity == null ? " untriaged" : " acuity-" + esc(p.acuity)) + '">' + (p.acuity == null ? ms("priority_high") : esc(p.acuity)) + "</span>" +
+        '<span class="w-bed-b"><b>' + esc(p.mrn || p.patientId) + "</b><small>" + esc(p.chiefComplaint || "No chief complaint recorded") + " &middot; arrived " + when(p.arrivedAt) + "</small></span>" +
+        ms("chevron_right") + "</button></li>";
+    }).join("");
+
+    var lookup = state.edMrnLookup;
+    var arrivalPanel = !state.edArrivalOpen ? "" :
+      '<div class="w-card admit"><div class="w-card-h">' + ms("emergency") + "<h3>New arrival</h3>" +
+      '<button class="w-ic" data-w-act="edarrivalclose" title="Cancel">' + ms("close") + "</button></div>" +
+      '<div class="w-sub"><h4>' + ms("badge") + "Known patient (by MRN)</h4>" +
+      '<div class="w-filter"><input id="wEdMrn" type="text" autocomplete="off" placeholder="MRN">' +
+      '<button class="w-btn ghost" data-w-act="edmrnlookup">' + ms("search") + "Find</button></div>" +
+      (state.edMrnLookupErr ? '<p class="w-hint warn">' + ms("error") + esc(state.edMrnLookupErr) + "</p>" : "") +
+      (lookup ? '<div class="w-mrn-found"><b>' + esc(lookup.name || lookup.mrn) + "</b><span>" + esc(lookup.mrn) +
+        (lookup.ageYears != null ? " &middot; " + esc(lookup.ageYears) + "y" : "") + (lookup.gender ? " &middot; " + esc(lookup.gender) : "") + "</span>" +
+        '<button class="w-btn tiny go" data-w-act="edarriveknown">' + ms("check") + "This is the patient - arrival</button></div>" : "") +
+      "</div>" +
+      '<div class="w-sub"><h4>' + ms("person_off") + "Unidentified patient</h4>" +
+      '<p class="w-hint">' + ms("info") + "Assigns a provisional MRN this hospital's own scheme generates (never invented on screen), pending identification and a later merge." + "</p>" +
+      '<div class="w-grid">' +
+      '<label class="w-f"><span>Sex</span><select id="wEdSex"><option value="unknown">Not known</option><option value="male">Male</option><option value="female">Female</option></select></label>' +
+      '<label class="w-f"><span>Chief complaint</span><input id="wEdUnkCc" type="text" autocomplete="off" placeholder="e.g. found down, unresponsive"></label>' +
+      "</div>" +
+      '<button class="w-btn warn" data-w-act="edarriveunknown">' + ms("person_add") + "Arrive as unidentified</button></div>" +
+      "</div>";
+
+    return '<div class="w-chart-h"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button>" +
+      "<div><b>Emergency department</b></div>" +
+      '<button class="w-btn tiny go" data-w-act="edarrivalopen">' + ms("add_circle") + "Arrival</button>" +
+      '<button class="w-ic" data-w-act="edboard" title="Refresh">' + ms("refresh") + "</button></div>" +
+      '<div class="w-card">' +
+      (state.edErr ? '<p class="w-hint warn">' + ms("error") + esc(state.edErr) + "</p>"
+        : rows ? '<ul class="w-q w-ed-board">' + rows + "</ul>"
+        : '<p class="w-empty">No patients currently in the ED.</p>') +
+      "</div>" + arrivalPanel;
   }
 
   /* HELD FROM OTHER SYSTEMS. Everything here is something another system sent that WardSynQ would
@@ -629,18 +683,90 @@
 
   function chartView(state) {
     var s = state.sel || {};
-    return '<div class="w-chart-h"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button>" +
-      "<div><b>" + esc(s.patientId || "") + "</b><small>" + esc(s.ward || "") + (s.bed ? " &middot; bed " + esc(s.bed) : "") + " &middot; admitted " + when(s.admittedAt) + "</small></div>" +
-      // The summary is reachable from the patient, not from a menu somewhere else. A planned
-      // discharge is prepared while the patient is still on the ward, so this is not gated on the
-      // stay being closed - the summary screen states plainly when a stay is still open.
-      '<button class="w-btn ghost" data-w-act="move" title="Transfer to another ward or bed">' + ms("swap_horiz") + "Transfer</button>" +
-      '<button class="w-btn ghost" data-w-act="summary" title="Discharge summary">' + ms("description") + "Summary</button>" +
-      // The patient's own copy. Reachable from the patient because that is where the conversation
-      // that produces it happens, not from a menu somewhere else.
-      '<button class="w-btn ghost" data-w-act="pcopy" title="The copy this patient can be given">' + ms("assignment_ind") + "Patient copy</button></div>" +
-      criticalsCard(state) + problemsCard(state) + noteCard(state) + vitalsCard() + flowsheetCard(state) + fluidCard(state) +
-      medOrderCard(state) + marCard(state) + outboxCard(state) + investigationsCard(state);
+    var isEd = s.class === "ED";
+    var header = isEd
+      ? '<div class="w-chart-h"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button>" +
+        "<div><b>" + esc(s.mrn || s.patientId || "") + "</b><small>" + ms("emergency", true) + "ED" +
+        (s.chiefComplaint ? " &middot; " + esc(s.chiefComplaint) : "") + " &middot; arrived " + when(s.arrivedAt) + "</small></div>" +
+        '<button class="w-btn ghost" data-w-act="pcopy" title="The copy this patient can be given">' + ms("assignment_ind") + "Patient copy</button></div>"
+      : '<div class="w-chart-h"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button>" +
+        "<div><b>" + esc(s.patientId || "") + "</b><small>" + esc(s.ward || "") + (s.bed ? " &middot; bed " + esc(s.bed) : "") + " &middot; admitted " + when(s.admittedAt) + "</small></div>" +
+        // The summary is reachable from the patient, not from a menu somewhere else. A planned
+        // discharge is prepared while the patient is still on the ward, so this is not gated on the
+        // stay being closed - the summary screen states plainly when a stay is still open.
+        '<button class="w-btn ghost" data-w-act="move" title="Transfer to another ward or bed">' + ms("swap_horiz") + "Transfer</button>" +
+        '<button class="w-btn ghost" data-w-act="summary" title="Discharge summary">' + ms("description") + "Summary</button>" +
+        // The patient's own copy. Reachable from the patient because that is where the conversation
+        // that produces it happens, not from a menu somewhere else.
+        '<button class="w-btn ghost" data-w-act="pcopy" title="The copy this patient can be given">' + ms("assignment_ind") + "Patient copy</button></div>";
+
+    return header +
+      criticalsCard(state) + (isEd ? triageCard(state) : "") + problemsCard(state) + noteCard(state) + vitalsCard() + flowsheetCard(state) + fluidCard(state) +
+      (isEd ? resusCard(state) : "") +
+      medOrderCard(state) + marCard(state) + outboxCard(state) + investigationsCard(state) +
+      (isEd ? dispositionCard(state) : "");
+  }
+
+  /* TRIAGE. The acuity is a human's choice, made once, shown plainly once made - and this card
+   * NEVER computes one from the vitals sitting right below it on the same chart. The words each
+   * level maps to are ORG content (ACUITY_WORDS is this build's own unapproved seed labelling, not
+   * a claim about ESI/CTAS/any named scale); a hospital that has adopted a real one configures its
+   * own words the same way note-templates.js already lets it configure its own headings. */
+  function triageCard(state) {
+    var s = state.sel || {};
+    if (s.acuity != null) {
+      return '<div class="w-card"><div class="w-card-h">' + ms("priority_high") + "<h3>Triage</h3></div>" +
+        '<div class="w-news2 risk-' + (s.acuity <= 2 ? "high" : s.acuity === 3 ? "medium" : "low") + '"><b>' + esc(s.acuity) + "</b><span>" + esc(ACUITY_WORDS[s.acuity] || "") + "</span></div>" +
+        '<p class="w-hint">' + ms("info") + "Triaged " + when(s.triagedAt) + ". Not clinically validated content - this hospital's own scale." + "</p></div>";
+    }
+    var opts = Object.keys(ACUITY_WORDS).map(function (k) { return '<option value="' + k + '">' + esc(ACUITY_WORDS[k]) + "</option>"; }).join("");
+    return '<div class="w-card"><div class="w-card-h">' + ms("priority_high") + "<h3>Triage</h3></div>" +
+      '<p class="w-hint warn">' + ms("warning") + "Not yet triaged.</p>" +
+      '<label class="w-f"><span>Acuity</span><select id="wTriageAcuity"><option value="">Choose&hellip;</option>' + opts + "</select></label>" +
+      '<button class="w-btn" data-w-act="triage">' + ms("save") + "Record triage</button></div>";
+  }
+
+  /* RESUSCITATION. The bundle is wardsynq-emergency.js's own tested state machine, run for real
+   * (functions/_wardsynq/migrate-resus.js); this card renders exactly what it reports and starts
+   * or marks nothing on its own - a bundle is "a clinical commitment", in that file's own words,
+   * never opened by a screen. STATUS: not clinically validated, per that file's header. */
+  function resusCard(state) {
+    var bundles = state.resusBundles || [];
+    var running = bundles.filter(function (b) { return b.state === "running" || b.state === "breached"; });
+    var rows = running.map(function (b) {
+      var els = b.elements.map(function (e) {
+        return "<li" + (e.done ? "" : e.overdue ? ' class="overdue"' : "") + '><div class="w-dose-h"><b>' + esc(e.label) + "</b>" +
+          (e.done ? '<span class="w-st administered">done ' + when(e.doneAt) + "</span>" : e.overdue ? '<span class="w-st overdue">overdue</span>' : '<span class="w-st">' + esc(Math.round(e.minutesRemaining || 0)) + " min left</span>") +
+          "</div>" +
+          (!e.done && !e.notApplicable ? '<div class="w-dose-a"><button class="w-btn tiny go" data-w-act="resusmark:' + esc(b.bundleId) + "|" + esc(e.key) + '">' + ms("task_alt") + "Mark done</button></div>" : "") +
+          "</li>";
+      }).join("");
+      return '<div class="w-sub"><h4>' + ms("emergency") + esc(b.label) + '<span class="w-st ' + (b.state === "breached" ? "overdue" : "") + '">' + esc(b.state) + "</span></h4>" +
+        "<ul class=\"w-doses\">" + els + "</ul>" +
+        '<button class="w-btn tiny warn" data-w-act="resusvoid:' + esc(b.bundleId) + '">' + ms("cancel") + "Void bundle</button></div>";
+    }).join("");
+
+    return '<div class="w-card"><div class="w-card-h">' + ms("emergency") + "<h3>Resuscitation</h3>" +
+      '<button class="w-ic" data-w-act="resusload" title="Refresh">' + ms("refresh") + "</button></div>" +
+      (rows || '<p class="w-empty">No resuscitation bundle running.</p>') +
+      '<div class="w-filter"><select id="wResusCode"><option value="code-sepsis">Code Sepsis</option><option value="code-blue">Code Blue</option><option value="code-stemi">Code STEMI</option></select>' +
+      '<button class="w-btn warn" data-w-act="resusstart">' + ms("add_circle") + "Start bundle</button></div>" +
+      '<p class="w-hint">' + ms("info") + "Not clinically validated or approved. Records what happened and when; never doses a drug or instructs anyone." + "</p></div>";
+  }
+
+  /* DISPOSITION: the ED visit ends. "Admitted" reuses the SAME bed board an inpatient admission
+   * uses - reachable straight from here, not a second admission flow - because an ED patient being
+   * admitted needs the SAME bed-occupancy guard any admission needs. */
+  function dispositionCard(state) {
+    return '<div class="w-card"><div class="w-card-h">' + ms("exit_to_app") + "<h3>Disposition</h3></div>" +
+      '<p class="w-hint">' + ms("info") + "Ends this ED visit. The chart stays exactly as it is - nothing here is hidden or removed." + "</p>" +
+      '<div class="w-dose-a">' +
+      '<button class="w-btn" data-w-act="dispositionadmit">' + ms("bed") + "Admit</button>" +
+      '<button class="w-btn ghost" data-w-act="disposition:home">' + ms("home") + "Home</button>" +
+      '<button class="w-btn ghost" data-w-act="disposition:transferred">' + ms("local_shipping") + "Transfer</button>" +
+      '<button class="w-btn ghost" data-w-act="disposition:lwbs">' + ms("directions_walk") + "LWBS</button>" +
+      '<button class="w-btn ghost" data-w-act="disposition:deceased">' + ms("healing") + "Deceased</button>" +
+      "</div></div>";
   }
 
   /* The patient's own copy, on screen and on paper. It reuses the downtime pack's print styling
@@ -927,6 +1053,7 @@
         : state.view === "downtime" ? downtimeView(state)
         : state.view === "pcopy" ? pcopyView(state)
         : state.view === "board" ? boardView(state)
+        : state.view === "ed" ? edBoardView(state)
         : listView(state)) + "</div></div>";
   }
 
@@ -968,6 +1095,10 @@
       .catch(function () { st.busy = false; st.boardErr = "Could not reach the bed board."; paint(); });
   }
   function pickBed(ward, bed) {
+    // An ED disposition-to-admit already knows who the patient is (st.sel) - picking a bed fires
+    // the disposition directly, never through the admit panel's own MRN-lookup/register flow,
+    // which is for a patient the board does not already have open.
+    if (st.edAdmitPending) { st.edAdmitPending = false; edDispose("admitted", { admission: { ward: ward, bed: bed } }); return; }
     st.admitTarget = { ward: ward, bed: bed }; st.mrnLookup = null; st.mrnLookupErr = ""; paint();
   }
   /* The one write in this whole flow: an Encounter, exactly as /ward/transfer and every other admit
@@ -1011,6 +1142,111 @@
       submit: function (payload) { return apiPost("/patient/register", Object.assign({ orgId: st.orgId }, payload)); },
       onAdded: function (r) { if (r && r.mrn) doAdmit(r.mrn); },
     });
+  }
+
+  // ---- emergency department ----------------------------------------------------------------
+  function loadEd() {
+    st.busy = true; st.view = "ed"; st.edErr = ""; paint();
+    return apiGet("/ward/ed-list?orgId=" + encodeURIComponent(st.orgId))
+      .then(function (r) {
+        st.busy = false;
+        if (r && r.ok) st.ed = r; else st.edErr = (r && (r.detail || r.message || r.error)) || "Could not load the ED board.";
+        paint();
+      })
+      .catch(function () { st.busy = false; st.edErr = "Could not reach the ED."; paint(); });
+  }
+  function edMrnLookup() {
+    var mrn = val("wEdMrn");
+    if (!mrn) { st.edMrnLookupErr = "Enter an MRN."; st.edMrnLookup = null; paint(); return; }
+    st.busy = true; st.edMrnLookupErr = ""; st.edMrnLookup = null; paint();
+    apiGet("/patient/get?orgId=" + encodeURIComponent(st.orgId) + "&mrn=" + encodeURIComponent(mrn))
+      .then(function (r) {
+        st.busy = false;
+        if (r && r.ok && r.patient) st.edMrnLookup = Object.assign({ mrn: mrn }, r.patient);
+        else st.edMrnLookupErr = "No patient found with that MRN.";
+        paint();
+      })
+      .catch(function () { st.busy = false; st.edMrnLookupErr = "Could not look up that MRN."; paint(); });
+  }
+  function edArrive(arrival) {
+    st.busy = true; paint();
+    apiPost("/ward/ed-arrival", { orgId: st.orgId, arrival: arrival })
+      .then(function (r) {
+        if (settle(r, r && r.written ? "Arrived." : "Already arrived.")) {
+          st.edArrivalOpen = false; st.edMrnLookup = null; loadEd();
+        } else paint();
+      })
+      .catch(function () { st.busy = false; st.err = "Could not record the arrival."; paint(); });
+  }
+  function edArriveKnown() { if (st.edMrnLookup) edArrive({ mrn: st.edMrnLookup.mrn }); }
+  function edArriveUnknown() {
+    var sex = val("wEdSex"), cc = val("wEdUnkCc");
+    edArrive({ unknown: { sex: sex }, chiefComplaint: cc || undefined });
+  }
+  function recordTriage() {
+    var s = st.sel; if (!s) return;
+    var acuity = val("wTriageAcuity");
+    if (!acuity) { st.err = "Choose an acuity level."; paint(); return; }
+    st.busy = true; paint();
+    apiPost("/ward/ed-triage", { orgId: st.orgId, encounterId: s.encounterId, acuity: Number(acuity) })
+      .then(function (r) {
+        if (settle(r, "Triaged.")) { s.acuity = Number(acuity); s.triagedAt = new Date().toISOString(); paint(); }
+        else paint();
+      })
+      .catch(function () { st.busy = false; st.err = "Could not record triage."; paint(); });
+  }
+  function loadResus() {
+    var s = st.sel; if (!s) return Promise.resolve();
+    return apiGet("/ward/resus?orgId=" + encodeURIComponent(st.orgId) + "&patientId=" + encodeURIComponent(s.patientId))
+      .then(function (r) { if (r && r.ok) st.resusBundles = r.bundles; paint(); })
+      .catch(function () {});
+  }
+  function resusStart() {
+    var s = st.sel; if (!s) return;
+    var code = val("wResusCode");
+    st.busy = true; paint();
+    apiPost("/ward/resus-start", { orgId: st.orgId, patientId: s.patientId, encounterId: s.encounterId, code: code })
+      .then(function (r) { if (settle(r, "Bundle started.")) loadResus(); else paint(); })
+      .catch(function () { st.busy = false; st.err = "Could not start the bundle."; paint(); });
+  }
+  function resusMark(bundleId, key) {
+    var event = "";
+    try { event = G.prompt("What actually happened (e.g. resulted, collected, administered)?") || ""; } catch (e) { return; }
+    if (!event.trim()) { st.err = "Say what actually happened - ordering a thing is not doing it."; paint(); return; }
+    st.busy = true; paint();
+    apiPost("/ward/resus-mark", { orgId: st.orgId, bundleId: bundleId, key: key, event: event.trim() })
+      .then(function (r) { if (settle(r, "Recorded.")) loadResus(); else paint(); })
+      .catch(function () { st.busy = false; st.err = "Could not mark that element."; paint(); });
+  }
+  function resusVoid(bundleId) {
+    var reason = ""; try { reason = G.prompt("Why is this bundle being voided?") || ""; } catch (e) { return; }
+    if (!reason.trim()) { st.err = "Voiding a bundle needs a reason."; paint(); return; }
+    st.busy = true; paint();
+    apiPost("/ward/resus-void", { orgId: st.orgId, bundleId: bundleId, reason: reason.trim() })
+      .then(function (r) { if (settle(r, "Voided.")) loadResus(); else paint(); })
+      .catch(function () { st.busy = false; st.err = "Could not void the bundle."; paint(); });
+  }
+  function edDispose(disposition, extra) {
+    var s = st.sel; if (!s) return;
+    st.busy = true; paint();
+    apiPost("/ward/ed-disposition", Object.assign({ orgId: st.orgId, encounterId: s.encounterId, disposition: disposition }, extra || {}))
+      .then(function (r) {
+        if (r && r.error === "bed_occupied") { st.busy = false; st.err = r.detail; paint(); return; }
+        if (settle(r, r && r.disposition ? "Disposition: " + r.disposition + "." : "Already closed.")) { st.sel = null; st.view = "ed"; loadEd(); }
+        else paint();
+      })
+      .catch(function () { st.busy = false; st.err = "Could not record the disposition."; paint(); });
+  }
+  function edDispositionHome(disposition) {
+    var reason = ""; try { reason = G.prompt("Reason for this disposition (optional):") || ""; } catch (e) {}
+    edDispose(disposition, reason.trim() ? { reason: reason.trim() } : {});
+  }
+  /* Admitting an ED patient reuses the SAME bed board an inpatient admission uses - the disposition
+   * itself fires only once a real bed is picked from it, exactly as any other admission does. */
+  function edDispositionAdmit() {
+    var s = st.sel; if (!s) return;
+    st.edAdmitPending = true;
+    loadBoard();
   }
 
   /* A transfer, from the patient's own chart. The refusal a busy bed produces is the important part
@@ -1452,9 +1688,14 @@
        * throwing the selection away - and the copy itself is always dropped, because a page with
        * one patient's diagnoses left on screen is how the next person gets handed the wrong one. */
       if (st.view === "pcopy") { st.view = "chart"; st.pcopy = null; paint(); return; }
+      // Picking a bed to admit an ED patient opens the SAME bed board a fresh admission uses;
+      // backing out of it returns to that patient's ED chart, not the ward list, and drops the
+      // pending admit rather than leaving it to fire on some later, unrelated bed pick.
+      if (st.view === "board" && st.edAdmitPending) { st.edAdmitPending = false; st.board = null; st.admitTarget = null; st.view = "chart"; paint(); return; }
       st.view = "list"; st.sel = null; st.due = []; st.problems = []; st.outbox = []; st.downtime = null; st.pcopy = null;
-      st.board = null; st.admitTarget = null; st.mrnLookup = null; st.mrnLookupErr = "";
-      st.flowsheet = null; st.news2 = null; st.investigations = null; st.results = null;
+      st.board = null; st.admitTarget = null; st.mrnLookup = null; st.mrnLookupErr = ""; st.edAdmitPending = false;
+      st.flowsheet = null; st.news2 = null; st.investigations = null; st.results = null; st.resusBundles = null;
+      st.ed = null; st.edArrivalOpen = false; st.edMrnLookup = null; st.edMrnLookupErr = "";
       paint(); return;
     }
     if (cmd === "board") { loadBoard(); return; }
@@ -1478,6 +1719,30 @@
       st.noteTemplateId = ""; st.noteResult = null;
       paint(); loadChart(); loadRound(); loadBalance(); loadOutbox(); loadTemplates(); loadFlowsheet(); loadNews2(); loadInvestigations(); return;
     }
+    if (cmd === "openEd") {
+      var pe = null;
+      for (var k2 = 0; k2 < ((st.ed && st.ed.patients) || []).length; k2++) { if (st.ed.patients[k2].encounterId === arg) { pe = st.ed.patients[k2]; break; } }
+      if (!pe) return;
+      st.sel = Object.assign({ class: "ED" }, pe); st.view = "chart"; st.due = []; st.prn = []; st.unscheduled = []; st.problems = []; st.criticals = []; st.balance = null; st.outbox = [];
+      st.flowsheet = null; st.news2 = null; st.investigations = null; st.results = null; st.resusBundles = null;
+      st.err = ""; st.note = ""; st.refusal = null;
+      defaultWindow();
+      st.noteTemplateId = ""; st.noteResult = null;
+      paint(); loadChart(); loadRound(); loadBalance(); loadOutbox(); loadTemplates(); loadFlowsheet(); loadNews2(); loadInvestigations(); loadResus(); return;
+    }
+    if (cmd === "edboard") { loadEd(); return; }
+    if (cmd === "edarrivalopen") { st.edArrivalOpen = true; st.edMrnLookup = null; st.edMrnLookupErr = ""; paint(); return; }
+    if (cmd === "edarrivalclose") { st.edArrivalOpen = false; st.edMrnLookup = null; st.edMrnLookupErr = ""; paint(); return; }
+    if (cmd === "edmrnlookup") { edMrnLookup(); return; }
+    if (cmd === "edarriveknown") { edArriveKnown(); return; }
+    if (cmd === "edarriveunknown") { edArriveUnknown(); return; }
+    if (cmd === "triage") { recordTriage(); return; }
+    if (cmd === "resusload") { loadResus(); return; }
+    if (cmd === "resusstart") { resusStart(); return; }
+    if (cmd === "resusmark") { var rm = arg.indexOf("|"); if (rm > 0) resusMark(arg.slice(0, rm), arg.slice(rm + 1)); return; }
+    if (cmd === "resusvoid") { resusVoid(arg); return; }
+    if (cmd === "dispositionadmit") { edDispositionAdmit(); return; }
+    if (cmd === "disposition") { edDispositionHome(arg); return; }
     if (cmd === "summary") {
       var sel = st.sel; if (!sel) return;
       if (!(G.DISCHARGE && G.DISCHARGE.open)) { st.err = "The discharge summary is unavailable on this build."; paint(); return; }
