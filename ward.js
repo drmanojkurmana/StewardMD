@@ -867,6 +867,9 @@
         // stay being closed - the summary screen states plainly when a stay is still open.
         '<button class="w-btn ghost" data-w-act="move" title="Transfer to another ward or bed">' + ms("swap_horiz") + "Transfer</button>" +
         '<button class="w-btn ghost" data-w-act="summary" title="Discharge summary">' + ms("description") + "Summary</button>" +
+        // ONCqis is a separate product; this is only the LINK into it. Reachable from any patient
+        // because oncology is a workflow layered on the ordinary chart, not a ward of its own.
+        '<button class="w-btn ghost" data-w-act="oncologyopen" title="ONCqis link, diagnosis, adverse events, chemo administration">' + ms("labs") + "Oncology</button>" +
         // The patient's own copy. Reachable from the patient because that is where the conversation
         // that produces it happens, not from a menu somewhere else.
         '<button class="w-btn ghost" data-w-act="pcopy" title="The copy this patient can be given">' + ms("assignment_ind") + "Patient copy</button></div>";
@@ -1207,6 +1210,71 @@
       '<button class="w-btn go" data-w-act="linesave">' + ms("add") + "Record line</button></div>";
   }
 
+  /* THE ONCqis BRIDGE VIEW. ONCqis itself (staging, protocols, dosing, CTCAE) is a separate,
+   * owner-approved product and is not rebuilt here - this screen only links a plan, records the
+   * diagnosis/staging IT resolved, an adverse-event grade IT assigned, and a chemo administration's
+   * documentation. Nothing here computes a stage, a dose or a grade. */
+  function oncologyView(state) {
+    var tl = (state.oncology && state.oncology.timeline) || null;
+    var linkRows = ((tl && tl.links) || []).map(function (l) {
+      return "<li><b>" + esc(l.regimen || l.oncoPlanId) + "</b><span>plan " + esc(l.oncoPlanId) + (l.protocolVersion ? " v" + esc(l.protocolVersion) : "") + "</span></li>";
+    }).join("");
+    var dxRows = ((tl && tl.diagnoses) || []).map(function (c) {
+      var s = c.oncologyStaging || {};
+      return "<li><b>" + esc(c.display) + "</b><span>" + (s.stageGroup ? "stage " + esc(s.stageGroup) + " (" + esc(s.t) + " " + esc(s.n) + " " + esc(s.m) + ")" : "") + "</span></li>";
+    }).join("");
+    var aeRows = ((tl && tl.adverseEvents) || []).map(function (e) {
+      return '<li><b>' + esc(e.term) + '</b><span class="w-vs">grade ' + esc(e.grade) + " &middot; CTCAE v" + esc(e.ctcaeVersion) + "</span></li>";
+    }).join("");
+    var chemoRows = ((tl && tl.chemoAdministrations) || []).map(function (a) {
+      return "<li><b>" + esc(a.drug) + "</b><span>" + esc(a.doseGiven) + esc(a.doseUnit || "") + (a.bsaUsed ? " &middot; BSA " + esc(a.bsaUsed) : "") +
+        (a.extravasation && a.extravasation.occurred ? '<span class="w-st overdue">extravasation</span>' : "") + " &middot; " + when(a.startedAt) + "</span></li>";
+    }).join("");
+
+    return '<div class="w-chart-h"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button>" +
+      "<div><b>Oncology</b><small>" + esc((state.sel && state.sel.patientId) || "") + "</small></div>" +
+      '<button class="w-ic" data-w-act="oncologyload" title="Refresh">' + ms("refresh") + "</button></div>" +
+
+      '<div class="w-card"><div class="w-card-h">' + ms("link") + "<h3>ONCqis plan link</h3></div>" +
+      (linkRows ? '<ul class="w-mini">' + linkRows + "</ul>" : '<p class="w-empty">No ONCqis plan linked.</p>') +
+      '<div class="w-grid">' +
+      '<label class="w-f"><span>ONCqis plan id</span><input id="wOncoPlanId" type="text" autocomplete="off"></label>' +
+      '<label class="w-f"><span>Regimen</span><input id="wOncoRegimen" type="text" autocomplete="off"></label>' +
+      '<label class="w-f"><span>Protocol version</span><input id="wOncoVersion" type="text" autocomplete="off"></label>' +
+      "</div>" +
+      '<button class="w-btn go" data-w-act="oncolinksave">' + ms("link") + "Link plan</button></div>" +
+
+      '<div class="w-card"><div class="w-card-h">' + ms("clinical_notes") + "<h3>Diagnosis &amp; staging</h3></div>" +
+      (dxRows ? '<ul class="w-mini">' + dxRows + "</ul>" : '<p class="w-empty">No oncology diagnosis recorded.</p>') +
+      '<div class="w-grid">' +
+      '<label class="w-f"><span>Code</span><input id="wOncoDxCode" type="text" autocomplete="off" placeholder="e.g. C34.1"></label>' +
+      '<label class="w-f"><span>Description</span><input id="wOncoDxDisplay" type="text" autocomplete="off"></label>' +
+      '<label class="w-f"><span>Stage group (from ONCqis)</span><input id="wOncoStage" type="text" autocomplete="off" placeholder="e.g. IIIA"></label>' +
+      "</div>" +
+      '<button class="w-btn go" data-w-act="oncodxsave">' + ms("save") + "Record diagnosis</button>" +
+      '<p class="w-hint">' + ms("info") + "Staging is recorded exactly as ONCqis's own engine resolved it - nothing here derives a stage." + "</p></div>" +
+
+      '<div class="w-card"><div class="w-card-h">' + ms("warning") + "<h3>Adverse events</h3></div>" +
+      (aeRows ? '<ul class="w-mini">' + aeRows + "</ul>" : '<p class="w-empty">None recorded.</p>') +
+      '<div class="w-grid">' +
+      '<label class="w-f"><span>Term</span><input id="wOncoAeTerm" type="text" autocomplete="off"></label>' +
+      '<label class="w-f"><span>CTCAE grade (1-5, from ONCqis)</span><input id="wOncoAeGrade" type="text" inputmode="numeric" autocomplete="off"></label>' +
+      "</div>" +
+      '<button class="w-btn warn" data-w-act="oncoaesave">' + ms("add") + "Record adverse event</button></div>" +
+
+      '<div class="w-card"><div class="w-card-h">' + ms("medication") + "<h3>Chemotherapy administration</h3></div>" +
+      (chemoRows ? '<ul class="w-mini">' + chemoRows + "</ul>" : '<p class="w-empty">None recorded.</p>') +
+      '<div class="w-grid">' +
+      '<label class="w-f"><span>Cycle id</span><input id="wOncoCycleId" type="text" autocomplete="off"></label>' +
+      '<label class="w-f"><span>Drug</span><input id="wOncoDrug" type="text" autocomplete="off"></label>' +
+      '<label class="w-f"><span>Dose given</span><input id="wOncoDose" type="text" inputmode="decimal" autocomplete="off"></label>' +
+      '<label class="w-f"><span>BSA used</span><input id="wOncoBsa" type="text" inputmode="decimal" autocomplete="off"></label>' +
+      "</div>" +
+      '<label class="w-chk"><input type="checkbox" id="wOncoExtrav"> Extravasation occurred</label>' +
+      '<button class="w-btn go" data-w-act="oncochemosave">' + ms("save") + "Record administration</button>" +
+      '<p class="w-hint">' + ms("info") + "This documents what a cycle's administration was; it does not re-run the bedside five-rights scan, which stays on the ordinary eMAR." + "</p></div>";
+  }
+
   /* Open critical results, ABOVE everything else on the chart. A critical result that reaches a
    * chart nobody reads is the oldest preventable death in hospital medicine, and the failure is
    * never the measurement - it is that no named human said "I have seen this". So this sits first,
@@ -1395,6 +1463,7 @@
         : state.view === "ed" ? edBoardView(state)
         : state.view === "surgery" ? surgeryBoardView(state)
         : state.view === "surgerycase" ? surgeryCaseView(state)
+        : state.view === "oncology" ? oncologyView(state)
         : listView(state)) + "</div></div>";
   }
 
@@ -1900,6 +1969,63 @@
       .then(function (r) { if (settle(r, "Line removed.")) loadLines(); else paint(); })
       .catch(function () { st.busy = false; st.err = "Could not remove the line."; paint(); });
   }
+  // ---- ONCqis bridge (Task 2.6) ---------------------------------------------------------------
+  function oncologyOpen() {
+    st.view = "oncology"; st.oncology = null; paint(); loadOncology();
+  }
+  function loadOncology() {
+    var s = st.sel; if (!s) return Promise.resolve();
+    return apiGet("/ward/onco-timeline?orgId=" + encodeURIComponent(st.orgId) + "&patientId=" + encodeURIComponent(s.patientId))
+      .then(function (r) { st.oncology = { timeline: r && r.ok ? r.timeline : null }; paint(); })
+      .catch(function () {});
+  }
+  function oncoLinkSave() {
+    var s = st.sel; if (!s) return;
+    var oncoPlanId = val("wOncoPlanId"), regimen = val("wOncoRegimen"), version = val("wOncoVersion");
+    if (!oncoPlanId) { st.err = "Enter the ONCqis plan id."; paint(); return; }
+    st.busy = true; paint();
+    apiPost("/ward/onco-link", { orgId: st.orgId, encounterId: s.encounterId, plan: {
+      oncoPlanId: oncoPlanId, hospitalId: st.orgId, ghisPatientId: s.mrn || s.patientId, regimen: regimen || undefined, protocolVersion: version || undefined,
+    } })
+      .then(function (r) { if (settle(r, "Plan linked.")) loadOncology(); else paint(); })
+      .catch(function () { st.busy = false; st.err = "Could not link the plan."; paint(); });
+  }
+  function oncoDxSave() {
+    var s = st.sel; if (!s) return;
+    var code = val("wOncoDxCode"), display = val("wOncoDxDisplay"), stage = val("wOncoStage");
+    if (!code) { st.err = "Enter the diagnosis code."; paint(); return; }
+    st.busy = true; paint();
+    apiPost("/ward/onco-diagnosis", { orgId: st.orgId, patientId: s.patientId, encounterId: s.encounterId, condition: { code: code, display: display || undefined },
+      staging: stage ? { stageGroup: stage } : undefined })
+      .then(function (r) { if (settle(r, "Diagnosis recorded.")) loadOncology(); else paint(); })
+      .catch(function () { st.busy = false; st.err = "Could not record the diagnosis."; paint(); });
+  }
+  function oncoAeSave() {
+    var s = st.sel; if (!s) return;
+    var term = val("wOncoAeTerm"), grade = Number(val("wOncoAeGrade"));
+    if (!term || !grade) { st.err = "Enter the term and the CTCAE grade."; paint(); return; }
+    st.busy = true; paint();
+    apiPost("/ward/onco-ae", { orgId: st.orgId, patientId: s.patientId, encounterId: s.encounterId, event: { term: term, grade: grade } })
+      .then(function (r) {
+        if (r && !r.ok && r.error === "grade_must_be_1_to_5") { st.busy = false; st.err = "The CTCAE grade must be 1 to 5."; paint(); return; }
+        if (settle(r, "Adverse event recorded.")) loadOncology(); else paint();
+      })
+      .catch(function () { st.busy = false; st.err = "Could not record the adverse event."; paint(); });
+  }
+  function oncoChemoSave() {
+    var s = st.sel; if (!s) return;
+    var cycleId = val("wOncoCycleId"), drug = val("wOncoDrug"), dose = Number(val("wOncoDose")), bsa = val("wOncoBsa");
+    var extravasated = !!(document.getElementById("wOncoExtrav") || {}).checked;
+    if (!cycleId || !drug || !dose) { st.err = "Enter the cycle id, drug and dose."; paint(); return; }
+    var oncoPlanId = (st.oncology && st.oncology.timeline && st.oncology.timeline.links[0] && st.oncology.timeline.links[0].oncoPlanId) || "";
+    if (!oncoPlanId) { st.err = "Link an ONCqis plan first."; paint(); return; }
+    st.busy = true; paint();
+    apiPost("/ward/onco-chemo", { orgId: st.orgId, patientId: s.patientId, encounterId: s.encounterId, oncoPlanId: oncoPlanId, cycleId: cycleId, admin: {
+      drug: drug, doseGiven: dose, bsaUsed: bsa ? Number(bsa) : undefined, extravasation: { occurred: extravasated },
+    } })
+      .then(function (r) { if (settle(r, "Administration recorded.")) loadOncology(); else paint(); })
+      .catch(function () { st.busy = false; st.err = "Could not record the administration."; paint(); });
+  }
   function edDispose(disposition, extra) {
     var s = st.sel; if (!s) return;
     st.busy = true; paint();
@@ -2362,6 +2488,7 @@
        * throwing the selection away - and the copy itself is always dropped, because a page with
        * one patient's diagnoses left on screen is how the next person gets handed the wrong one. */
       if (st.view === "pcopy") { st.view = "chart"; st.pcopy = null; paint(); return; }
+      if (st.view === "oncology") { st.view = "chart"; st.oncology = null; paint(); return; }
       // Picking a bed to admit an ED patient opens the SAME bed board a fresh admission uses;
       // backing out of it returns to that patient's ED chart, not the ward list, and drops the
       // pending admit rather than leaving it to fire on some later, unrelated bed pick.
@@ -2374,7 +2501,7 @@
       st.flowsheet = null; st.news2 = null; st.investigations = null; st.results = null; st.resusBundles = null;
       st.ed = null; st.edArrivalOpen = false; st.edMrnLookup = null; st.edMrnLookupErr = "";
       st.surgBoard = null; st.surgCase = null; st.surgBookOpen = false; st.surgMrnLookup = null; st.surgMrnLookupErr = ""; st.surgErr = "";
-      st.maternity = null; st.admitClass = ""; st.ageBand = null; st.lines = null; st.rateResult = null;
+      st.maternity = null; st.admitClass = ""; st.ageBand = null; st.lines = null; st.rateResult = null; st.oncology = null;
       paint(); return;
     }
     if (cmd === "board") { loadBoard(); return; }
@@ -2393,7 +2520,7 @@
       if (!p) return;
       st.sel = p; st.view = "chart"; st.due = []; st.prn = []; st.unscheduled = []; st.problems = []; st.criticals = []; st.balance = null; st.outbox = [];
       st.flowsheet = null; st.news2 = null; st.investigations = null; st.results = null;
-      st.err = ""; st.note = ""; st.refusal = null; st.devices = null; st.maternity = null; st.ageBand = null; st.lines = null; st.rateResult = null;
+      st.err = ""; st.note = ""; st.refusal = null; st.devices = null; st.maternity = null; st.ageBand = null; st.lines = null; st.rateResult = null; st.oncology = null;
       defaultWindow();
       st.noteTemplateId = ""; st.noteResult = null;
       paint(); loadChart(); loadRound(); loadBalance(); loadOutbox(); loadTemplates(); loadFlowsheet(); loadNews2(); loadInvestigations();
@@ -2444,6 +2571,12 @@
     if (cmd === "linesload") { loadLines(); return; }
     if (cmd === "linesave") { lineSave(); return; }
     if (cmd === "lineremove") { lineRemove(arg); return; }
+    if (cmd === "oncologyopen") { oncologyOpen(); return; }
+    if (cmd === "oncologyload") { loadOncology(); return; }
+    if (cmd === "oncolinksave") { oncoLinkSave(); return; }
+    if (cmd === "oncodxsave") { oncoDxSave(); return; }
+    if (cmd === "oncoaesave") { oncoAeSave(); return; }
+    if (cmd === "oncochemosave") { oncoChemoSave(); return; }
     if (cmd === "edarrivalopen") { st.edArrivalOpen = true; st.edMrnLookup = null; st.edMrnLookupErr = ""; paint(); return; }
     if (cmd === "edarrivalclose") { st.edArrivalOpen = false; st.edMrnLookup = null; st.edMrnLookupErr = ""; paint(); return; }
     if (cmd === "edmrnlookup") { edMrnLookup(); return; }

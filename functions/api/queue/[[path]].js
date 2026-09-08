@@ -71,6 +71,11 @@ import {
   checkWeightBasedRate, checkPaediatricDoseCeiling, checkAgeBand,
   recordNeonatalObservation, recordLine, removeLine, listLines,
 } from "../../_wardsynq/migrate-pediatrics.js";
+import {
+  linkOncologyPlan, getOncologyLink, recordOncologyDiagnosis,
+  recordAdverseEvent, listAdverseEvents, recordChemoAdministration,
+  listChemoAdministrations, oncologyTimeline,
+} from "../../_wardsynq/migrate-oncology.js";
 import { medicationRound, administerStep } from "../../_wardsynq/migrate-emar.js";
 import { draftDischargeSummary, signDischargeSummary, dischargePatient, readDischargeSummary } from "../../_wardsynq/migrate-discharge.js";
 import { recordProblem, listProblems } from "../../_wardsynq/migrate-problem.js";
@@ -555,6 +560,13 @@ export async function onRequest(context) {
          * migrate-surgery.js's ImplantRecord already uses - emr.treat. */
         "weight-rate": CAPS.EMR_VIEW, "dose-ceiling": CAPS.EMR_VIEW, "age-band": CAPS.EMR_VIEW,
         neonatal: CAPS.EMR_VITALS, line: CAPS.EMR_TREAT, "line-remove": CAPS.EMR_TREAT, "line-list": CAPS.EMR_VIEW,
+        /* The ONCqis bridge (Task 2.6). Linking a plan, recording the oncology diagnosis, an
+         * adverse event or a chemo administration are all clinical commitments - emr.treat, the
+         * same authority every other cross-module link in this file already needs. Reading any of
+         * it is emr.view, the same as the rest of the chart. */
+        "onco-link": CAPS.EMR_TREAT, "onco-link-get": CAPS.EMR_VIEW, "onco-diagnosis": CAPS.EMR_TREAT,
+        "onco-ae": CAPS.EMR_TREAT, "onco-ae-list": CAPS.EMR_VIEW,
+        "onco-chemo": CAPS.EMR_TREAT, "onco-chemo-list": CAPS.EMR_VIEW, "onco-timeline": CAPS.EMR_VIEW,
         // Charting fluid is the nurse's own record, the same authority as recording a vital.
         fluid: CAPS.EMR_VITALS, balance: CAPS.EMR_VIEW,
         // Handing a patient over is the clinical account of a shift: the same authority as recording
@@ -979,6 +991,38 @@ export async function onRequest(context) {
       }
       if (sub === "line-list" && method === "GET") {
         const r = await listLines(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "" });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "onco-link" && method === "POST") {
+        const r = await linkOncologyPlan(request, env, { ...deps, encounterId: body.encounterId, plan: body.plan || body, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "onco-link-get" && method === "GET") {
+        const r = await getOncologyLink(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "" });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "onco-diagnosis" && method === "POST") {
+        const r = await recordOncologyDiagnosis(request, env, { ...deps, patientId: body.patientId, encounterId: body.encounterId, condition: body.condition, staging: body.staging, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "onco-ae" && method === "POST") {
+        const r = await recordAdverseEvent(request, env, { ...deps, patientId: body.patientId, encounterId: body.encounterId, oncoPlanId: body.oncoPlanId, event: body.event, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "onco-ae-list" && method === "GET") {
+        const r = await listAdverseEvents(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "" });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "onco-chemo" && method === "POST") {
+        const r = await recordChemoAdministration(request, env, { ...deps, patientId: body.patientId, encounterId: body.encounterId, oncoPlanId: body.oncoPlanId, cycleId: body.cycleId, admin: body.admin || body, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "onco-chemo-list" && method === "GET") {
+        const r = await listChemoAdministrations(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "" });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "onco-timeline" && method === "GET") {
+        const r = await oncologyTimeline(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "" });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "vitals" && method === "POST") {

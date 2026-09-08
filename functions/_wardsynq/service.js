@@ -247,6 +247,25 @@ const RESOURCE_TYPES = Object.freeze([
    * change accompanies this: EMR_TREAT's unrestricted write already covers it, matching
    * ImplantRecord's own precedent - placing a line is a clinical commitment, not routine charting. */
   "LineRecord",
+  /* The ONCqis bridge (Task 2.6). ONCqis (onco-*.js, functions/_onco_store.js) is a separate,
+   * owner-approved production oncology product with its own plan/cycle store, scoped only by
+   * hospitalId + a bare ghisPatientId - never linked to a canonical WardSynQ patient before this.
+   * OncologyLink names that join; it duplicates none of ONCqis's own staging/dosing/protocol
+   * content, only the identifying facts needed to resolve one system's plan against this record's
+   * patient. No grant change accompanies any of the three types below: EMR_TREAT's unrestricted
+   * write already covers them, the same "clinical commitment" reasoning ResusBundle/SurgicalCase/
+   * DeliveryRecord already establish - and deliberately NOT the oncqis_* roles, which
+   * functions/_wardsynq/actor.js still fences from every clinical capability; see that file's own
+   * comment on this task before changing it. */
+  "OncologyLink",
+  /* A CTCAE-graded adverse event. The grade is asserted here, never computed - onco-ctcae.js's own
+   * catalog and grading logic remain the sole authority for what a grade means. */
+  "AdverseEventRecord",
+  /* One cycle's chemotherapy administration, documented with the fields the audit for this task
+   * found nowhere else carries: dose lineage (BSA), premedication sequence, a structured
+   * extravasation field. It does not re-run wardsynq-meds.js's five-rights state machine - that
+   * machine is reused unchanged, through the existing /ward/mar door, for the bedside act itself. */
+  "ChemoAdministrationRecord",
 ]);
 
 const MODE = Object.freeze({ SYSTEM_OF_RECORD: "system-of-record", INTEGRATION: "integration" });
