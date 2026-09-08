@@ -64,13 +64,17 @@ const SUITES = [
   "test/wardsynq-ghis-live.test.mjs",
   "test/wardsynq-flowsheet-render.test.mjs",
   "test/wardsynq-pipeline.test.mjs",
+  // The Task 2.6/2.7 bridge suites - the first hazards this file argues (HAZ-ONCO-01, HAZ-CARDIO-01)
+  // whose evidence lives in a mock.module()-based test file, hence the added flag below.
+  "test/wardsynq-oncology.test.mjs",
+  "test/wardsynq-cardiology.test.mjs",
   "test/wardsynq-safety-case.test.mjs",
 ];
 
 /** Runs node --test with the TAP reporter and returns a flat list of {name, passed}. */
 function runTests() {
   return new Promise((resolve, reject) => {
-    const child = spawn(process.execPath, ["--test", "--test-reporter=tap", ...SUITES], { cwd: ROOT });
+    const child = spawn(process.execPath, ["--test", "--experimental-test-module-mocks", "--experimental-sqlite", "--test-reporter=tap", ...SUITES], { cwd: ROOT });
     let out = "";
     child.stdout.on("data", (d) => { out += d; });
     child.stderr.on("data", () => {});
