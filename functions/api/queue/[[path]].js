@@ -67,6 +67,10 @@ import {
   recordPregnancy, getPregnancy, maternityStatus, maternityMeows, recordLabourObservation,
   recordMaternalBloodLoss, listBloodLoss, recordDelivery, getDelivery, registerNewborn, listFamilyLinks,
 } from "../../_wardsynq/migrate-maternity.js";
+import {
+  checkWeightBasedRate, checkPaediatricDoseCeiling, checkAgeBand,
+  recordNeonatalObservation, recordLine, removeLine, listLines,
+} from "../../_wardsynq/migrate-pediatrics.js";
 import { medicationRound, administerStep } from "../../_wardsynq/migrate-emar.js";
 import { draftDischargeSummary, signDischargeSummary, dischargePatient, readDischargeSummary } from "../../_wardsynq/migrate-discharge.js";
 import { recordProblem, listProblems } from "../../_wardsynq/migrate-problem.js";
@@ -544,6 +548,13 @@ export async function onRequest(context) {
         labour: CAPS.EMR_VITALS, "blood-loss": CAPS.EMR_VITALS, "blood-loss-list": CAPS.EMR_VIEW,
         delivery: CAPS.EMR_TREAT, "delivery-get": CAPS.EMR_VIEW,
         newborn: CAPS.EMR_TREAT, "family-links": CAPS.EMR_VIEW,
+        /* Pediatrics/NICU (Task 2.5). weight-rate/dose-ceiling/age-band are read-only calculators -
+         * emr.view, the same authority as reading the chart they help interpret; they persist
+         * nothing. A neonatal respiratory/device-settings reading is the same bedside charting act
+         * as a vital sign - emr.vitals. A line is a clinical commitment, the same authority
+         * migrate-surgery.js's ImplantRecord already uses - emr.treat. */
+        "weight-rate": CAPS.EMR_VIEW, "dose-ceiling": CAPS.EMR_VIEW, "age-band": CAPS.EMR_VIEW,
+        neonatal: CAPS.EMR_VITALS, line: CAPS.EMR_TREAT, "line-remove": CAPS.EMR_TREAT, "line-list": CAPS.EMR_VIEW,
         // Charting fluid is the nurse's own record, the same authority as recording a vital.
         fluid: CAPS.EMR_VITALS, balance: CAPS.EMR_VIEW,
         // Handing a patient over is the clinical account of a shift: the same authority as recording
@@ -940,6 +951,34 @@ export async function onRequest(context) {
       }
       if (sub === "family-links" && method === "GET") {
         const r = await listFamilyLinks(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "" });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "weight-rate" && method === "POST") {
+        const r = await checkWeightBasedRate(request, env, { ...deps, dosePerKgPerMin: body.dosePerKgPerMin, weightKg: body.weightKg, concentrationMgPerMl: body.concentrationMgPerMl, patient: body.patient });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "dose-ceiling" && method === "POST") {
+        const r = await checkPaediatricDoseCeiling(request, env, { ...deps, mgPerKg: body.mgPerKg, weightKg: body.weightKg, adultMaxMg: body.adultMaxMg, band: body.band });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "age-band" && method === "POST") {
+        const r = await checkAgeBand(request, env, { ...deps, patient: body.patient, now: body.now });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "neonatal" && method === "POST") {
+        const r = await recordNeonatalObservation(request, env, { ...deps, encounterId: body.encounterId, patientId: body.patientId, code: body.code, value: body.value, at: body.at, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "line" && method === "POST") {
+        const r = await recordLine(request, env, { ...deps, encounterId: body.encounterId, patientId: body.patientId, line: body.line || body, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "line-remove" && method === "POST") {
+        const r = await removeLine(request, env, { ...deps, lineId: body.lineId, reason: body.reason, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "line-list" && method === "GET") {
+        const r = await listLines(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "" });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "vitals" && method === "POST") {

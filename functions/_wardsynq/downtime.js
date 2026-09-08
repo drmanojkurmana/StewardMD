@@ -148,7 +148,7 @@ async function downtimePack(request, env, ctx) {
   // vitals with nothing printed the moment the system went down - the exact failure this whole
   // feature exists to prevent.
   const stays = (encounters || [])
-    .filter((e) => e && (e.class === IPD || e.class === "ED" || e.class === "ICU" || e.class === "SURGERY" || e.class === "PACU" || e.class === "MATERNITY") && e.status === OPEN)
+    .filter((e) => e && (e.class === IPD || e.class === "ED" || e.class === "ICU" || e.class === "SURGERY" || e.class === "PACU" || e.class === "MATERNITY" || e.class === "PEDIATRICS" || e.class === "NICU") && e.status === OPEN)
     .filter((e) => !want || str(e.location && e.location.ward).toLowerCase() === want);
 
   const nowMs = Date.parse(str(ctx.now)) || Date.now();

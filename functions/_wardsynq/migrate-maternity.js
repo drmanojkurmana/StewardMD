@@ -345,10 +345,14 @@ async function registerNewborn(request, env, ctx) {
   const current = await svc.get("Patient", newbornId).catch(() => null);
   if (!current) {
     // A newborn has no MRN of its own yet and no mobile-number identity path an adult registration
-    // assumes - this synthetic MRN is deterministic from the same id every other WardSynQ MRN-based
-    // lookup already keys on, the same discipline wardsynq-mpi.js keeps for an unidentified ED
+    // assumes - this synthetic MRN is deterministic from the SAME (mother, deliveredAt) inputs
+    // newbornIdFor() itself uses, never reverse-engineered by string surgery on the id: built this
+    // way, patientIdForMrn(newbornMrn) reproduces newbornId exactly (opd-identity.js just re-slugs
+    // whatever string it is handed), so a NICU admission using this real MRN lands on the SAME
+    // already-registered Patient migrate-inpatient.js's admitPatient() would otherwise construct a
+    // second, mismatched id for. The same discipline wardsynq-mpi.js keeps for an unidentified ED
     // arrival's provisional MRN.
-    const newbornMrn = `NEWBORN-${newbornId.replace(/^opd-pat-/, "").toUpperCase()}`;
+    const newbornMrn = `NEWBORN-${slug(motherPatientId).toUpperCase()}-${slug(deliveredAt).toUpperCase()}`;
     const patient = Patient({
       id: newbornId, mrn: newbornMrn, name: str(ctx.name) || "Newborn", sex, dob: deliveredAt.slice(0, 10),
       identifiers: [], provisional: true, source: { system: "wardsynq-native", sourceId: `newborn:${newbornId}` },

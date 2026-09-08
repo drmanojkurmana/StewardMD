@@ -126,9 +126,12 @@ function grantForCaps(caps) {
     /* "labour" joined 2026-09-08 (Task 2.4): a partogram's raw data - cervical dilation, contraction
      * frequency, fetal heart rate, a stated labour status - is the midwife's own bedside charting,
      * the same authority as a vital sign, through migrate-maternity.js's recordLabourObservation(). */
+    /* "neonatal" joined 2026-09-08 (Task 2.5): respiratory-support/device-settings readings on a
+     * NICU cot are the same bedside charting act, through migrate-pediatrics.js's
+     * recordNeonatalObservation(). */
     grant = {
       tier: TIER.EXECUTE, read: has(CAPS.EMR_VIEW) ? null : [...VITALS_TYPES], write: [...VITALS_TYPES],
-      writeCategories: { Observation: ["vital-signs", "fluid-balance", "device", "labour"] },
+      writeCategories: { Observation: ["vital-signs", "fluid-balance", "device", "labour", "neonatal"] },
       basis: CAPS.EMR_VITALS,
     };
   }

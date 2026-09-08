@@ -217,6 +217,8 @@
           '<option value=""' + (!state.admitClass ? " selected" : "") + '>General ward</option>' +
           '<option value="ICU"' + (state.admitClass === "ICU" ? " selected" : "") + '>Critical care (ICU)</option>' +
           '<option value="MATERNITY"' + (state.admitClass === "MATERNITY" ? " selected" : "") + '>Maternity</option>' +
+          '<option value="PEDIATRICS"' + (state.admitClass === "PEDIATRICS" ? " selected" : "") + '>Pediatrics</option>' +
+          '<option value="NICU"' + (state.admitClass === "NICU" ? " selected" : "") + '>NICU</option>' +
         '</select></label>' +
         '<div class="w-sub"><h4>' + ms("badge") + "Existing patient (by MRN)</h4>" +
         '<div class="w-filter"><input id="wAdmitMrn" type="text" autocomplete="off" placeholder="MRN">' +
@@ -851,6 +853,8 @@
     var isEd = s.class === "ED";
     var isIcu = s.class === "ICU";
     var isMaternity = s.class === "MATERNITY";
+    var isPediatric = s.class === "PEDIATRICS" || s.class === "NICU";
+    var isNicu = s.class === "NICU";
     var header = isEd
       ? '<div class="w-chart-h"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button>" +
         "<div><b>" + esc(s.mrn || s.patientId || "") + "</b><small>" + ms("emergency", true) + "ED" +
@@ -869,8 +873,10 @@
 
     return header +
       criticalsCard(state) + (isEd ? triageCard(state) : "") + (isMaternity ? pregnancyCard(state) + meowsCard(state) : "") +
+      (isPediatric ? ageBandCard(state) : "") +
       problemsCard(state) + noteCard(state) + vitalsCard() + flowsheetCard(state) + fluidCard(state) +
       (isMaternity ? labourCard() + bloodLossCard(state) : "") +
+      (isNicu ? neonatalCard() + linesCard(state) : "") +
       ((isEd || isMaternity) ? resusCard(state) : "") + (isIcu ? deviceCard(state) : "") +
       medOrderCard(state) + marCard(state) + outboxCard(state) + investigationsCard(state) +
       (isMaternity ? deliveryCard(state) : "") +
@@ -1146,6 +1152,59 @@
       "</div>" +
       '<button class="w-btn go" data-w-act="labourchart">' + ms("save") + "Chart</button>" +
       '<p class="w-hint">' + ms("info") + "Recorded on the flowsheet below, exactly as charted. This is not a WHO partogram alert/action-line plot." + "</p></div>";
+  }
+
+  /* NEONATAL respiratory-support / device-settings entry. Same shape as labourCard: writes ordinary
+   * Observations, category "neonatal", read back on the shared flowsheet grid below. */
+  function neonatalCard() {
+    return '<div class="w-card"><div class="w-card-h">' + ms("air") + "<h3>Respiratory support</h3></div>" +
+      '<div class="w-grid">' +
+      '<label class="w-f"><span>Mode</span><select id="wNeoMode"><option value="room-air">Room air</option><option value="low-flow-oxygen">Low-flow oxygen</option><option value="cpap">CPAP</option><option value="ventilated">Ventilated</option></select></label>' +
+      '<label class="w-f"><span>FiO2 (%)</span><input id="wNeoFio2" type="text" inputmode="decimal" autocomplete="off"></label>' +
+      '<label class="w-f"><span>PEEP (cmH2O)</span><input id="wNeoPeep" type="text" inputmode="decimal" autocomplete="off"></label>' +
+      "</div>" +
+      '<button class="w-btn go" data-w-act="neonatalchart">' + ms("save") + "Chart</button>" +
+      '<p class="w-hint">' + ms("info") + "Recorded on the flowsheet below, exactly as charted." + "</p></div>";
+  }
+
+  /* AGE/WEIGHT SAFETY. The card shows the REAL wardsynq-paediatrics.js banding, never a client-side
+   * guess, and a weight-based-rate calculator that persists nothing - the actual infusion is still
+   * charted through the existing rate/infusion door, unchanged. */
+  function ageBandCard(state) {
+    var b = state.ageBand;
+    return '<div class="w-card"><div class="w-card-h">' + ms("straighten") + "<h3>Age &amp; weight</h3>" +
+      '<button class="w-ic" data-w-act="agebandcheck" title="Check">' + ms("refresh") + "</button></div>" +
+      (b ? '<p class="w-hint' + (b.weightWarning ? " warn" : "") + '">' + ms(b.weightWarning ? "warning" : "info") + "Band: " + esc(b.band) +
+        (b.neonatal && !b.neonatal.ready ? " - " + esc(b.neonatal.reason) : "") +
+        (b.weightWarning ? " - " + esc(b.weightWarning.message) : "") + "</p>" : "") +
+      '<div class="w-grid">' +
+      '<label class="w-f"><span>Weight (kg)</span><input id="wAgeWeight" type="text" inputmode="decimal" autocomplete="off"></label>' +
+      '<label class="w-f"><span>Gestational age (weeks, if neonate)</span><input id="wAgeGest" type="text" inputmode="decimal" autocomplete="off"></label>' +
+      "</div>" +
+      '<div class="w-sub"><h4>' + ms("calculate") + "Weight-based rate</h4>" +
+      '<div class="w-grid">' +
+      '<label class="w-f"><span>mcg/kg/min</span><input id="wRateDose" type="text" inputmode="decimal" autocomplete="off"></label>' +
+      '<label class="w-f"><span>Concentration (mg/mL)</span><input id="wRateConc" type="text" inputmode="decimal" autocomplete="off"></label>' +
+      "</div>" +
+      '<button class="w-btn ghost" data-w-act="ratecalc">' + ms("calculate") + "Calculate</button>" +
+      (state.rateResult ? '<p class="w-hint' + (state.rateResult.weightWarning ? " warn" : "") + '">' + esc(state.rateResult.ratePerHour == null ? state.rateResult.reason : state.rateResult.workings + " = " + state.rateResult.ratePerHour + " mL/h") + "</p>" : "") +
+      "</div></div>";
+  }
+
+  /* LINES. A placement log, mirroring surgery's implant card exactly - site, type, when, by. */
+  function linesCard(state) {
+    var rows = (state.lines || []).map(function (l) {
+      return "<li><b>" + esc(l.type) + "</b><span>" + (l.site ? esc(l.site) + " &middot; " : "") + "placed " + when(l.insertedAt) + (l.removedAt ? " &middot; removed " + when(l.removedAt) : "") + "</span>" +
+        (!l.removedAt ? '<button class="w-btn tiny warn" data-w-act="lineremove:' + esc(l.id) + '">' + ms("close") + "Remove</button>" : "") + "</li>";
+    }).join("");
+    return '<div class="w-card"><div class="w-card-h">' + ms("device_hub") + "<h3>Lines</h3>" +
+      '<button class="w-ic" data-w-act="linesload" title="Refresh">' + ms("refresh") + "</button></div>" +
+      (rows ? '<ul class="w-mini">' + rows + "</ul>" : '<p class="w-empty">No lines recorded.</p>') +
+      '<div class="w-grid">' +
+      '<label class="w-f"><span>Type</span><input id="wLineType" type="text" autocomplete="off" placeholder="e.g. UVC, PICC"></label>' +
+      '<label class="w-f"><span>Site</span><input id="wLineSite" type="text" autocomplete="off"></label>' +
+      "</div>" +
+      '<button class="w-btn go" data-w-act="linesave">' + ms("add") + "Record line</button></div>";
   }
 
   /* Open critical results, ABOVE everything else on the chart. A critical result that reaches a
@@ -1785,6 +1844,62 @@
       })
       .catch(function () { st.busy = false; st.err = "Could not register the newborn."; paint(); });
   }
+  // ---- pediatrics / NICU (Task 2.5) ----------------------------------------------------------
+  function loadAgeBand() {
+    var s = st.sel; if (!s) return Promise.resolve();
+    var weight = val("wAgeWeight"), gest = val("wAgeGest");
+    var patient = {};
+    if (weight) patient.weightKg = Number(weight);
+    if (gest) patient.gestationalAgeWeeks = Number(gest);
+    return apiPost("/ward/age-band", { orgId: st.orgId, patient: patient })
+      .then(function (r) { if (r && r.ok) st.ageBand = r.banding; paint(); })
+      .catch(function () {});
+  }
+  function rateCalc() {
+    var dose = Number(val("wRateDose")), conc = Number(val("wRateConc")), weight = Number(val("wAgeWeight"));
+    if (!dose || !conc) { st.err = "Enter the dose and the concentration."; paint(); return; }
+    st.busy = true; paint();
+    apiPost("/ward/weight-rate", { orgId: st.orgId, dosePerKgPerMin: dose, weightKg: weight, concentrationMgPerMl: conc, patient: weight ? { weightKg: weight } : null })
+      .then(function (r) { st.busy = false; if (r && r.ok) st.rateResult = r.result; else st.err = (r && r.detail) || "Could not calculate."; paint(); })
+      .catch(function () { st.busy = false; st.err = "Could not calculate."; paint(); });
+  }
+  function neonatalChart() {
+    var s = st.sel; if (!s) return;
+    var mode = (document.getElementById("wNeoMode") || {}).value, fio2 = val("wNeoFio2"), peep = val("wNeoPeep");
+    var entries = [["resp-support-mode", mode]];
+    if (fio2) entries.push(["fio2-percent", Number(fio2)]);
+    if (peep) entries.push(["peep-cmh2o", Number(peep)]);
+    st.busy = true; paint();
+    var at = new Date().toISOString();
+    Promise.all(entries.map(function (e) {
+      return apiPost("/ward/neonatal", { orgId: st.orgId, encounterId: s.encounterId, patientId: s.patientId, code: e[0], value: e[1], at: at });
+    })).then(function (rs) {
+      st.busy = false;
+      if (rs.every(function (r) { return r && r.ok; })) { st.note = "Charted."; loadFlowsheet(); } else st.err = "Some values could not be charted.";
+      paint();
+    }).catch(function () { st.busy = false; st.err = "Could not chart the observation."; paint(); });
+  }
+  function loadLines() {
+    var s = st.sel; if (!s) return Promise.resolve();
+    return apiGet("/ward/line-list?orgId=" + encodeURIComponent(st.orgId) + "&patientId=" + encodeURIComponent(s.patientId))
+      .then(function (r) { if (r && r.ok) st.lines = r.lines; paint(); })
+      .catch(function () {});
+  }
+  function lineSave() {
+    var s = st.sel; if (!s) return;
+    var type = val("wLineType"), site = val("wLineSite");
+    if (!type) { st.err = "Enter the line type."; paint(); return; }
+    st.busy = true; paint();
+    apiPost("/ward/line", { orgId: st.orgId, encounterId: s.encounterId, patientId: s.patientId, line: { type: type, site: site || undefined } })
+      .then(function (r) { if (settle(r, "Line recorded.")) loadLines(); else paint(); })
+      .catch(function () { st.busy = false; st.err = "Could not record the line."; paint(); });
+  }
+  function lineRemove(lineId) {
+    st.busy = true; paint();
+    apiPost("/ward/line-remove", { orgId: st.orgId, lineId: lineId })
+      .then(function (r) { if (settle(r, "Line removed.")) loadLines(); else paint(); })
+      .catch(function () { st.busy = false; st.err = "Could not remove the line."; paint(); });
+  }
   function edDispose(disposition, extra) {
     var s = st.sel; if (!s) return;
     st.busy = true; paint();
@@ -2259,7 +2374,7 @@
       st.flowsheet = null; st.news2 = null; st.investigations = null; st.results = null; st.resusBundles = null;
       st.ed = null; st.edArrivalOpen = false; st.edMrnLookup = null; st.edMrnLookupErr = "";
       st.surgBoard = null; st.surgCase = null; st.surgBookOpen = false; st.surgMrnLookup = null; st.surgMrnLookupErr = ""; st.surgErr = "";
-      st.maternity = null; st.admitClass = "";
+      st.maternity = null; st.admitClass = ""; st.ageBand = null; st.lines = null; st.rateResult = null;
       paint(); return;
     }
     if (cmd === "board") { loadBoard(); return; }
@@ -2278,12 +2393,14 @@
       if (!p) return;
       st.sel = p; st.view = "chart"; st.due = []; st.prn = []; st.unscheduled = []; st.problems = []; st.criticals = []; st.balance = null; st.outbox = [];
       st.flowsheet = null; st.news2 = null; st.investigations = null; st.results = null;
-      st.err = ""; st.note = ""; st.refusal = null; st.devices = null; st.maternity = null;
+      st.err = ""; st.note = ""; st.refusal = null; st.devices = null; st.maternity = null; st.ageBand = null; st.lines = null; st.rateResult = null;
       defaultWindow();
       st.noteTemplateId = ""; st.noteResult = null;
       paint(); loadChart(); loadRound(); loadBalance(); loadOutbox(); loadTemplates(); loadFlowsheet(); loadNews2(); loadInvestigations();
       if (p.class === "ICU") loadDevices();
       if (p.class === "MATERNITY") loadMaternity();
+      if (p.class === "PEDIATRICS" || p.class === "NICU") loadAgeBand();
+      if (p.class === "NICU") loadLines();
       return;
     }
     if (cmd === "openEd") {
@@ -2321,6 +2438,12 @@
     if (cmd === "bloodlosssave") { bloodLossSave(); return; }
     if (cmd === "deliverysave") { deliverySave(); return; }
     if (cmd === "newbornsave") { newbornSave(); return; }
+    if (cmd === "agebandcheck") { loadAgeBand(); return; }
+    if (cmd === "ratecalc") { rateCalc(); return; }
+    if (cmd === "neonatalchart") { neonatalChart(); return; }
+    if (cmd === "linesload") { loadLines(); return; }
+    if (cmd === "linesave") { lineSave(); return; }
+    if (cmd === "lineremove") { lineRemove(arg); return; }
     if (cmd === "edarrivalopen") { st.edArrivalOpen = true; st.edMrnLookup = null; st.edMrnLookupErr = ""; paint(); return; }
     if (cmd === "edarrivalclose") { st.edArrivalOpen = false; st.edMrnLookup = null; st.edMrnLookupErr = ""; paint(); return; }
     if (cmd === "edmrnlookup") { edMrnLookup(); return; }
