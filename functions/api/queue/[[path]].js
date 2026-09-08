@@ -56,6 +56,7 @@ import { admitPatient, listWard, recordWardVitals, createWardMedicationOrder, tr
 // arrival (known or unidentified), triage acuity, and a non-admitted disposition.
 import { edArrival, recordEdTriage, edDisposition, listEd } from "../../_wardsynq/migrate-ed.js";
 import { startResusBundle, markResusElement, waiveResusElement, voidResusBundle, listResusBundles } from "../../_wardsynq/migrate-resus.js";
+import { deviceAssociate, deviceDissociate, deviceIngest, deviceStatus, deviceList } from "../../_wardsynq/migrate-device.js";
 import { medicationRound, administerStep } from "../../_wardsynq/migrate-emar.js";
 import { draftDischargeSummary, signDischargeSummary, dischargePatient, readDischargeSummary } from "../../_wardsynq/migrate-discharge.js";
 import { recordProblem, listProblems } from "../../_wardsynq/migrate-problem.js";
@@ -507,6 +508,12 @@ export async function onRequest(context) {
          * it hangs off. */
         "resus-start": CAPS.EMR_TREAT, "resus-mark": CAPS.EMR_TREAT, "resus-waive": CAPS.EMR_TREAT,
         "resus-void": CAPS.EMR_TREAT, resus: CAPS.EMR_VIEW,
+        /* ICU device association (HAZ-DEV-01). Scanning a wristband and an asset tag onto each other
+         * is the nurse's own bedside act, the same authority as charting a vital - emr.vitals, the
+         * same capability that governs everything else DeviceAssociation is granted through
+         * (VITALS_TYPES in actor.js). A reading is the same act repeated by the device's own gateway. */
+        "device-associate": CAPS.EMR_VITALS, "device-dissociate": CAPS.EMR_VITALS,
+        "device-ingest": CAPS.EMR_VITALS, "device-status": CAPS.EMR_VIEW, "device-list": CAPS.EMR_VIEW,
         // Charting fluid is the nurse's own record, the same authority as recording a vital.
         fluid: CAPS.EMR_VITALS, balance: CAPS.EMR_VIEW,
         // Handing a patient over is the clinical account of a shift: the same authority as recording
@@ -763,6 +770,26 @@ export async function onRequest(context) {
       }
       if (sub === "resus" && method === "GET") {
         const r = await listResusBundles(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "" });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "device-associate" && method === "POST") {
+        const r = await deviceAssociate(request, env, { ...deps, association: body.association || body, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "device-dissociate" && method === "POST") {
+        const r = await deviceDissociate(request, env, { ...deps, deviceId: body.deviceId, reason: body.reason, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "device-ingest" && method === "POST") {
+        const r = await deviceIngest(request, env, { ...deps, reading: body.reading || body, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "device-status" && method === "GET") {
+        const r = await deviceStatus(request, env, { ...deps, deviceId: url.searchParams.get("deviceId") || "" });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "device-list" && method === "GET") {
+        const r = await deviceList(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "" });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "vitals" && method === "POST") {

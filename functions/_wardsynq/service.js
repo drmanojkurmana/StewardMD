@@ -196,6 +196,14 @@ const RESOURCE_TYPES = Object.freeze([
    * "clinical commitment", per that file's own words - never started by a screen result alone), and
    * EMR_VIEW's unrestricted read covers seeing one running. */
   "ResusBundle",
+  /* A patient-device binding (HAZ-DEV-01, Task 2.2), the persisted state of wardsynq-iomt.js's
+   * DeviceGateway - keyed by deviceId, one open association at a time. Its own type, not folded
+   * into Observation: the association is the CLAIM that a monitor belongs to a patient, and the
+   * device readings it authorises are Observations in their own right, written separately, exactly
+   * like ResusBundle's elements are distinct from the bundle that governs them. Granted by
+   * EMR_VITALS (VITALS_TYPES in actor.js) - scanning a wristband and a device tag onto a patient is
+   * the nurse's own bedside act, the same authority as charting a vital. */
+  "DeviceAssociation",
 ]);
 
 const MODE = Object.freeze({ SYSTEM_OF_RECORD: "system-of-record", INTEGRATION: "integration" });

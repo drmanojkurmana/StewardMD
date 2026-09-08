@@ -46,9 +46,10 @@ function summariseWard(input) {
   const nowMs = Number.isFinite(i.nowMs) ? i.nowMs : Date.now();
   const want = str(i.ward).toLowerCase();
 
-  // ED patients are open encounters this ward is responsible for too - excluding them would report
-  // zero open critical results and zero in-flight medications for an ED at full capacity.
-  const stays = (i.encounters || []).filter((e) => e && (e.class === IPD || e.class === "ED") && e.status === OPEN_ENC)
+  // ED and ICU patients are open encounters this ward is responsible for too - excluding them would
+  // report zero open critical results and zero in-flight medications for an ED or ICU at full
+  // capacity.
+  const stays = (i.encounters || []).filter((e) => e && (e.class === IPD || e.class === "ED" || e.class === "ICU") && e.status === OPEN_ENC)
     .filter((e) => !want || str(e.location && e.location.ward).toLowerCase() === want);
   const patientIds = new Set(stays.map((e) => e.patientId));
   const mine = (r) => !want || patientIds.has(r && r.patientId);
