@@ -1417,7 +1417,7 @@ export async function onRequest(context) {
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "collect" && method === "POST") {
-        const r = await collectSpecimen(request, env, { ...deps, serviceRequestId: body.serviceRequestId, specimenType: body.specimenType, container: body.container, at: body.at, idempotencyKey: body.idempotencyKey || null });
+        const r = await collectSpecimen(request, env, { ...deps, serviceRequestId: body.serviceRequestId, specimenType: body.specimenType, container: body.container, at: body.at, scannedPatientBarcode: body.scannedPatientBarcode, idempotencyKey: body.idempotencyKey || null });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "specimen-outcome" && method === "POST") {
@@ -1636,6 +1636,12 @@ export async function onRequest(context) {
           // The site's limits, never a request parameter: a caller who could pass these could decide
           // a potassium of 7 was not critical by asking differently.
           limits: (wsqCfg && wsqCfg.criticalLimits) || null,
+          // No channel is wired in this build (a channel is a FUNCTION - wardsynq-notify.js's own
+          // Dispatcher deps - not JSON an org's Firestore config document could ever carry; wiring a
+          // real one means reusing StewardMD's existing APNs/FCM push infrastructure, per
+          // wardsynq-safety-case.js's HAZ-DET-01, and is future work, not fabricated here). Every
+          // opened loop therefore honestly records NO_CHANNEL rather than a silent "sent".
+          notifyDeps: {},
           idempotencyKey: body.idempotencyKey || null,
         });
         return json(r, r.ok ? 200 : (r.status || 502), request);

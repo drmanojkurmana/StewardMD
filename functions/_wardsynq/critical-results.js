@@ -42,6 +42,7 @@ import { resolveClinicalActor } from "./actor.js";
 import { RecordService } from "./service.js";
 import { AuthError, PermissionError } from "../_connect/permission.js";
 import { numericValue } from "../../wardsynq/wardsynq-model.js";
+import { Dispatcher, NotifyError } from "../../wardsynq/wardsynq-notify.js";
 
 const str = (v) => (v == null ? "" : String(v).trim());
 
@@ -200,6 +201,10 @@ function CriticalResultLoop(input) {
     action: i.action || null,             // what the clinician did about it, in their words
     closedBy: i.closedBy || null,
     closedAt: i.closedAt || null,
+    // TASK 3.1: the notification ATTEMPT this loop's opening made - honestly, per wardsynq-notify.js's
+    // one rule: attempted is not delivered. { attempted, delivered, channels, reason?, at }. A site
+    // that wires no channel gets NO_CHANNEL recorded here, never a silent "sent".
+    notification: i.notification || null,
     source: i.source || { system: "wardsynq-native", sourceId: `critical:${i.id}` },
   };
 }
@@ -282,12 +287,25 @@ async function openCriticalLoops(request, env, ctx) {
     // discard a clinician's acknowledgement because a message arrived twice.
     if (current) { out.push(summary(current)); continue; }
 
+    // NOTIFICATION ATTEMPT, honestly recorded before the loop is even written - so a loop that was
+    // never told to anybody says so from the moment it exists, not only when somebody thinks to ask.
+    // A site wires its own channels via ctx.notifyDeps.channels; wiring none is a real, common state
+    // and gets NO_CHANNEL recorded, never a silent "sent".
+    let notification;
+    try {
+      const dispatcher = new Dispatcher(ctx.notifyDeps || {});
+      const sent = await dispatcher.send({ loopId: id, patientId: report.patientId, code: hit.code, display: hit.display, value: hit.value, unit: hit.unit });
+      notification = { attempted: true, delivered: sent.delivered, channels: sent.attempts.map((a) => ({ channel: a.channel, delivered: a.delivered, detail: a.detail })), at: new Date().toISOString() };
+    } catch (e) {
+      notification = { attempted: true, delivered: false, reason: e instanceof NotifyError ? e.code : "NOTIFY_ERROR", detail: str(e && e.message), at: new Date().toISOString() };
+    }
+
     const loop = CriticalResultLoop({
       id, patientId: report.patientId, encounterId: report.encounterId || null,
       reportId, observationId: obs.id || null,
       code: hit.code, display: hit.display, value: hit.value, unit: hit.unit,
       basis: hit.basis, bound: hit.bound, state: "open",
-      reportedAt, openedAt: new Date().toISOString(),
+      reportedAt, openedAt: new Date().toISOString(), notification,
     });
     try {
       const res = await svc.put(loop, { idempotencyKey: ctx.idempotencyKey ? `${ctx.idempotencyKey}:${id}` : null });
@@ -315,6 +333,7 @@ function summary(l, nowMs, policy) {
     action: l.action || null, closedBy: l.closedBy || null, closedAt: l.closedAt || null,
     version: l.version,
     escalation: escalationOf(l, nowMs, policy),
+    notification: l.notification || null,
   };
 }
 

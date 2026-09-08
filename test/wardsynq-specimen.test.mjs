@@ -4,7 +4,7 @@
  */
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { STATES, SpecimenCollection, specimenIdFor, isOutstanding, collectionState } from "../functions/_wardsynq/specimen.js";
+import { STATES, SpecimenCollection, specimenIdFor, accessionNumberFor, isOutstanding, collectionState } from "../functions/_wardsynq/specimen.js";
 
 const spec = (over) => SpecimenCollection({ id: "s1", serviceRequestId: "sr-1", patientId: "pat", ...(over || {}) });
 
@@ -68,4 +68,16 @@ test("NO SPECIMEN TYPE IS INVENTED, and no result is ever produced here", () => 
   assert.equal(s.resourceType, "SpecimenCollection");
   // An unknown state is never accepted as a claim.
   assert.equal(spec({ state: "resulted" }).state, "collected");
+});
+
+test("TASK 3.1: an accession number is deterministic from the SAME specimen id, never a separate counter that could drift or collide", () => {
+  const id = specimenIdFor("wsq-sr-1", "2026-09-07T09:00:00.000Z");
+  const a1 = accessionNumberFor(id), a2 = accessionNumberFor(id);
+  assert.equal(a1, a2, "the same specimen always gets the same accession number");
+  assert.match(a1, /^ACC-[A-Z0-9]+$/);
+  // Two different specimens (different request, or a second attempt at a different instant) can
+  // never collide, because they never share a specimenId in the first place.
+  const other = specimenIdFor("wsq-sr-1", "2026-09-07T09:40:00.000Z");
+  assert.notEqual(accessionNumberFor(id), accessionNumberFor(other));
+  assert.equal(accessionNumberFor(""), null);
 });
