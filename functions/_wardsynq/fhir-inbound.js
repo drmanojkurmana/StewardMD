@@ -42,14 +42,18 @@
  */
 
 import { normalizeFhir } from "../_connect/connectors/fhir-r4/normalize.js";
-import { sccmAdapter } from "../../wardsynq/adapters/wardsynq-sccm-adapter.js";
+import { sccmAdapter, sourceId } from "../../wardsynq/adapters/wardsynq-sccm-adapter.js";
+import { PatientConsent } from "./consent.js";
 import { makeActor, KIND, TIER, GovernanceError } from "../../wardsynq/wardsynq-actors.js";
 import { findCandidates } from "../../wardsynq/wardsynq-mpi.js";
-import { classifyCoding, unmappedCoding, UNMAPPED, identifierKey } from "./terminology.js";
+import { classifyCoding, unmappedCoding, UNMAPPED, INVALID, identifierKey, validateCode } from "./terminology.js";
+import { validateResource } from "./fhir-validate.js";
+import { makeSafeFetch } from "../_connect/onboard/net.js";
 import { resolveClinicalActor } from "./actor.js";
 import { RecordService, NATIVE_SYSTEM } from "./service.js";
 import { AuthError, PermissionError } from "../_connect/permission.js";
-import { CANONICAL_TYPE, FHIR_TYPE, toFhir, operationOutcome } from "./fhir.js";
+import { CANONICAL_TYPE, FHIR_TYPE, toFhir, operationOutcome, resolveId, SEARCH_POOL } from "./fhir.js";
+import { parseSearch, applySearch } from "./fhir-search.js";
 
 const str = (v) => (v == null ? "" : String(v).trim());
 const slug = (v) => str(v).toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
@@ -79,7 +83,39 @@ const REASON = Object.freeze({
 });
 
 /** The FHIR types the normaliser can turn into SCCM. Anything else is reported, never dropped. */
-const INBOUND_TYPES = Object.freeze(["Patient", "Encounter", "Condition", "Observation", "MedicationRequest", "MedicationStatement", "AllergyIntolerance", "DiagnosticReport", "DocumentReference"]);
+const INBOUND_TYPES = Object.freeze(["Patient", "Encounter", "Condition", "Observation", "MedicationRequest", "MedicationStatement", "AllergyIntolerance", "DiagnosticReport", "DocumentReference", "MedicationAdministration", "ServiceRequest", "Consent"]);
+
+/** Our closed consent scopes, from FHIR's consentscope codes. Nothing else is mapped: an unknown
+ *  scope is `other` with the sender's words in the detail, never a scope somebody here would act on. */
+const CONSENT_SCOPE = Object.freeze({ treatment: "treatment", research: "research" });
+
+/**
+ * PURE. An SCCM consent into a PatientConsent for this patient, recorded as witnessed ELSEWHERE:
+ * decided by the sender's own words (permit/deny), given by whoever the sender named, capacity
+ * never asserted, and `recordedBy` the feed. A consent the sender has not decided (draft, proposed)
+ * is not a decision and is not filed.
+ */
+function consentFromSccm(c, patientId, system, now) {
+  if (!c || !c.id || !c.decision) return null;
+  const scopeCode = c.scope && c.scope.coding && c.scope.coding[0] ? str(c.scope.coding[0].code) : "";
+  const scopeText = (c.scope && str(c.scope.text)) || scopeCode;
+  const categories = (c.category || []).map((k) => (k && (str(k.text) || (k.coding && k.coding[0] && str(k.coding[0].display || k.coding[0].code)))) || "").filter(Boolean);
+  const scope = CONSENT_SCOPE[scopeCode] || "other";
+  const decision = c.decision === "permit" ? (c.status === "inactive" ? "withdrawn" : "granted") : "refused";
+  const detail = [scope === "other" && scopeText ? `Scope as sent: ${scopeText}` : null, categories.length ? `Category: ${categories.join("; ")}` : null, c.performer ? `Decided by (as sent): ${c.performer}` : "Giver not stated by the sender", c.policy && str(c.policy.text) ? `Policy: ${c.policy.text}` : null].filter(Boolean).join(". ");
+  const record = PatientConsent({
+    id: sourceId(system, "consent", c.id), patientId, scope, decision, detail,
+    givenBy: "patient", giverName: c.performer || null, capacity: null,
+    recordedBy: `external:${system}`, recordedAt: c.dateTime || now,
+    validFrom: c.period && c.period.start ? c.period.start : null, validUntil: c.period && c.period.end ? c.period.end : null,
+  });
+  /* The constructor stamps its own native source; an imported consent must say where it came from,
+   * so the record's meta (which every ownership and provenance check reads) names the feed. */
+  record.source = { system, sourceId: String(c.id) };
+  record.meta = { recordedAt: now, effectiveAt: c.dateTime || now, amendedAt: null, source: { system, sourceId: String(c.id), importedAt: now }, derivedFrom: [] };
+  record.externalStatus = c.status || null;
+  return record;
+}
 
 /** PURE. Whether the feature is on. Absent config is OFF. */
 function inboundEnabled(config) {
@@ -110,14 +146,28 @@ function sourceSystemOf(headerValue, body) {
 function splitBundle(body) {
   const problems = [];
   const resources = [];
+  const requests = new Map();
   let patient = null;
   let items = [];
+  const bundleType = body && body.resourceType === "Bundle" ? str(body.type) : "";
   if (body && body.resourceType === "Bundle") {
     const entries = Array.isArray(body.entry) ? body.entry : [];
     // An entry with no resource is named, not skipped: a sender counting entries would believe it landed.
     const empty = entries.filter((e) => !e || !e.resource || typeof e.resource !== "object").length;
     if (empty) problems.push({ reason: REASON.INVALID, detail: `${empty} bundle entr${empty === 1 ? "y has" : "ies have"} no resource` });
-    items = entries.map((e) => e && e.resource).filter((r) => r && typeof r === "object");
+    for (const e of entries) {
+      if (!e || !e.resource || typeof e.resource !== "object") continue;
+      items.push(e.resource);
+      /* A transaction or batch entry says what it wants done. POST creates, PUT updates (with the
+       * version it read, when it says); anything else is not something this server does to a record,
+       * and is named rather than carried out as the nearest thing. */
+      const req = e.request && typeof e.request === "object" ? e.request : null;
+      if (req) {
+        const method = str(req.method).toUpperCase();
+        if (method && method !== "POST" && method !== "PUT") problems.push({ reason: REASON.INVALID, detail: `${str(e.resource.resourceType)}/${str(e.resource.id)}: request.method ${method} is not supported; this server creates and updates only`, resourceType: str(e.resource.resourceType), id: e.resource.id || null });
+        requests.set(`${str(e.resource.resourceType)}/${str(e.resource.id)}`, { method: method || "POST", ifNoneExist: str(req.ifNoneExist) || null, ifMatch: str(req.ifMatch) || null, url: str(req.url) || null });
+      }
+    }
   } else if (body && body.resourceType) {
     items = [body];
   }
@@ -132,7 +182,23 @@ function splitBundle(body) {
       patient = r;
     } else resources.push(r);
   }
-  return { patient, resources, problems };
+  return { patient, resources, problems, requests, bundleType, atomic: bundleType === "transaction" };
+}
+
+/**
+ * PURE. A conditional create decided: `If-None-Exist` is a search over what is already here, and
+ *   0 matches -> create; 1 match -> nothing to do, that one is the answer; more -> the sender's
+ *   condition is ambiguous and the request cannot be honoured (412).
+ * `rows` are the FHIR resources the caller may see (through the governed reads). A match NEVER links
+ * or overwrites: the incoming resource is simply not created.
+ */
+function evaluateIfNoneExist(fhirType, query, rows, ctx) {
+  const { query: q, problems } = parseSearch(fhirType, query);
+  if (problems.length) return { outcome: "invalid", problems };
+  const matched = applySearch(rows || [], q, ctx || {});
+  if (!matched.length) return { outcome: "create", matches: [] };
+  if (matched.length === 1) return { outcome: "exists", matches: matched };
+  return { outcome: "ambiguous", matches: matched };
 }
 
 /** PURE. The code-bearing fields per canonical type, so terminology marking is table-driven. */
@@ -140,6 +206,7 @@ const CODE_FIELDS = Object.freeze({
   Condition: { code: "code", system: "codeSystem", display: "display" },
   Observation: { code: "code", system: "codeSystem", display: "display" },
   MedicationOrder: { code: "drugCode", system: "drugCodeSystem", display: "drug" },
+  MedicationAdministration: { code: "drugCode", system: "drugCodeSystem", display: "drug" },
   AllergyIntolerance: { code: "substance", system: "substanceCodeSystem", display: "substance" },
   DiagnosticReport: { code: "code", system: "codeSystem", display: "code" },
   ServiceRequest: { code: "code", system: "codeSystem", display: "display" },
@@ -164,6 +231,25 @@ function markTerminology(entity) {
   if (!system || ["unspecified", "text", "local", UNMAPPED].includes(system.toLowerCase())) return entity;
   const u = unmappedCoding(system, code, entity[f.display]);
   return { ...entity, [f.system]: u.codeSystem, terminologyStatus: u.terminologyStatus, sourceCoding: u.sourceCoding };
+}
+
+/**
+ * The same rule, then the terminology SERVICE for anything the tables could not settle: a code the
+ * hospital's own lists or its terminology server verify becomes `verified`; one the server says does
+ * not exist is kept VERBATIM beside the record as `invalid` - the sender's clinical fact is filed,
+ * their coding is not vouched for, and nothing is dropped or guessed. deps: { config, kv, fetchImpl }.
+ */
+async function markTerminologyWithService(entity, deps) {
+  const marked = markTerminology(entity);
+  const f = marked && CODE_FIELDS[marked.resourceType];
+  if (!f || marked.terminologyStatus !== "recognised") return marked;
+  const v = await validateCode({ system: marked[f.system], code: marked[f.code], display: marked[f.display] }, deps);
+  if (v.status === "verified") return { ...marked, terminologyStatus: "verified", terminologySource: v.source };
+  if (v.status === INVALID) {
+    const source = { system: str(marked[f.system]), code: str(marked[f.code]), display: str(marked[f.display]) || null };
+    return { ...marked, [f.system]: INVALID, terminologyStatus: INVALID, terminologyNote: v.note || null, sourceCoding: source };
+  }
+  return marked;
 }
 
 /** PURE. Normalised identifier for deterministic comparison. */
@@ -229,9 +315,9 @@ function partitionConflicts(entities, currentOf, system) {
   return { writable, conflicts };
 }
 
-/** Patient first, then encounters, then everything that points at them. */
-const ORDER = { Patient: 0, Encounter: 1 };
-const byDependency = (a, b) => (ORDER[a.resourceType] ?? 2) - (ORDER[b.resourceType] ?? 2);
+/** Patient first, then encounters, then orders, then everything that points at them. */
+const ORDER = { Patient: 0, Encounter: 1, MedicationOrder: 2, ServiceRequest: 2 };
+const byDependency = (a, b) => (ORDER[a.resourceType] ?? 3) - (ORDER[b.resourceType] ?? 3);
 
 /** PURE. The exception record. The payload is the bundle as received, so nothing is lost, and the
  *  request context travels with it so the message can be re-driven exactly as it arrived. */
@@ -282,7 +368,7 @@ async function sha256(text) {
   return [...new Uint8Array(d)].map((b) => b.toString(16).padStart(2, "0")).join("").slice(0, 32);
 }
 
-async function open_(request, env, ctx) {
+async function openIngest(request, env, ctx) {
   try {
     const resolved = await resolveClinicalActor(request, env, ctx.migration.tenantId, "record:write", ctx.actorDeps);
     const svc = new RecordService({
@@ -312,9 +398,26 @@ async function ingestFhir(request, env, ctx) {
   if (system === NATIVE_SYSTEM || system === "wardsynq-native") return { ok: false, status: 400, outcome: operationOutcome("error", "invalid", "a feed cannot claim to be this hospital") };
   const adapterSystem = `fhir-${system}`;
 
-  const { patient, resources, problems } = splitBundle(ctx.body);
+  const { patient, resources, problems, requests, bundleType, atomic } = splitBundle(ctx.body);
   const fatal = problems.filter((p) => p.reason === REASON.INVALID);
   if (fatal.length) return { ok: false, status: 400, outcome: { resourceType: "OperationOutcome", issue: fatal.map((p) => ({ severity: "error", code: "invalid", diagnostics: p.detail })) } };
+
+  /* CONFORMANCE BEFORE CONTENT. Every resource that will be filed is validated against R4 base (and
+   * any profile the hospital loaded) first; a request with one non-conformant resource is refused
+   * WHOLE as a 422 naming every issue at its path, because half a bundle filed is half a story on a
+   * chart. Unsupported types were named above and are not validated: they are not filed either. */
+  const isError = (i) => i.severity === "error" || i.severity === "fatal";
+  let conformanceIssues = [];
+  if (ctx.body && ctx.body.resourceType === "Bundle") {
+    /* The Bundle itself is validated - its type, its entries' requests (bdl-3), unique fullUrls -
+     * and every entry resource with it, at its path. Entries of a type this server deliberately does
+     * not import were named above and are not filed; their internals are not judged. */
+    const unsupported = new Set((Array.isArray(ctx.body.entry) ? ctx.body.entry : []).map((e, i) => (e && e.resource && str(e.resource.resourceType) && !INBOUND_TYPES.includes(str(e.resource.resourceType)) ? i : -1)).filter((i) => i >= 0));
+    conformanceIssues = validateResource(ctx.body, { profiles: ctx.profiles || null }).issues.filter(isError).filter((i) => { const m = /^Bundle\.entry\[(\d+)\]\.resource/.exec(str(i.expression && i.expression[0])); return !(m && unsupported.has(Number(m[1]))); });
+  } else {
+    conformanceIssues = [patient, ...resources].filter(Boolean).flatMap((r) => validateResource(r, { profiles: ctx.profiles || null }).issues.filter(isError).map((i) => ({ ...i, expression: i.expression.map((p) => `${r.resourceType}/${r.id}: ${p}`) })));
+  }
+  if (conformanceIssues.length) return { ok: false, status: 422, outcome: { resourceType: "OperationOutcome", issue: conformanceIssues } };
   if (!patient && ctx.mode === "bundle") return { ok: false, status: 400, outcome: operationOutcome("error", "required", "a bundle must carry the Patient its resources belong to; a resource with no patient cannot be filed") };
 
   /* A single-resource PUT names its target. The body's id must be the sender's own id for that
@@ -324,8 +427,12 @@ async function ingestFhir(request, env, ctx) {
     if (!str(ctx.ifMatch)) return { ok: false, status: 412, outcome: operationOutcome("error", "conflict", "If-Match is required on an update: an update that does not say which version it read is a guess") };
   }
 
-  const { svc, resolved, error } = await open_(request, env, ctx);
+  const { svc, resolved, error } = await openIngest(request, env, ctx);
   if (error) return { ok: false, ...error };
+  /* A URL names resources by their FHIR id, which for a long canonical id is a hash (fhir-id.js).
+   * Resolved back here, once, so everything below reasons in canonical ids. */
+  if (str(ctx.targetId) && CANONICAL_TYPE[str(ctx.targetType)]) ctx = { ...ctx, targetId: await resolveId(svc, CANONICAL_TYPE[str(ctx.targetType)], ctx.targetId) };
+  if (str(ctx.patientRef)) ctx = { ...ctx, patientRef: await resolveId(svc, "Patient", ctx.patientRef) };
 
   // The SAME normaliser Connect uses, then the SAME adapter, with the sender named as the system.
   let sccm;
@@ -336,28 +443,53 @@ async function ingestFhir(request, env, ctx) {
   }
   sccm.meta.sourceConnector = adapterSystem;
 
+  return landBundle(request, env, { ...ctx, svc, resolved, sccm, system, adapterSystem, patient, problems, requests, bundleType, atomic, protocol: "fhir" });
+}
+
+/**
+ * THE LANDING, shared by every protocol. Everything from an SCCM bundle down is the same whatever
+ * wire it came off: the same adapter, the same terminology marking, the same identity reconciliation,
+ * the same ownership partition, the same preconditions, the same all-or-nothing write, the same
+ * exceptions, the same provenance and the same idempotency by content. A FHIR Bundle and an HL7 v2
+ * message differ only in how they were parsed and validated before this line.
+ * ctx adds: { svc, resolved, sccm, system, adapterSystem, patient, problems, requests, bundleType, atomic, protocol, body (the message as received, for the digest and the exception payload) }
+ */
+async function landBundle(request, env, ctx) {
+  const mig = ctx.migration;
+  const { svc, resolved, sccm, system, adapterSystem, patient, problems, requests, bundleType, atomic } = ctx;
+  const protocol = str(ctx.protocol) || "fhir";
   const base = sccmAdapter();
-  const adapterActor = makeActor({ id: `adapter:${adapterSystem}`, kind: KIND.ADAPTER, tier: TIER.DRAFT, display: `FHIR from ${system}`, onBehalfOf: resolved.actor.id });
+  const adapterActor = makeActor({ id: `adapter:${adapterSystem}`, kind: KIND.ADAPTER, tier: TIER.DRAFT, display: `${protocol === "hl7v2" ? "HL7 v2" : "FHIR"} from ${system}`, onBehalfOf: resolved.actor.id });
   let mapped;
   try { mapped = await base.normalise(sccm); }
   catch (e) { return { ok: false, status: 422, outcome: operationOutcome("error", "invalid", `could not map: ${str(e && e.message)}`) }; }
 
-  let entities = (mapped.entities || []).map(markTerminology);
+  const txDeps = { config: ctx.terminology || null, kv: env && env.WSQ_TX_KV, fetchImpl: ctx.fetchImpl || (typeof fetch === "function" ? makeSafeFetch(fetch) : null) };
+  let entities = await Promise.all((mapped.entities || []).map((e) => markTerminologyWithService(e, txDeps)));
   const issues = [...(mapped.issues || []), ...problems.filter((p) => p.reason !== REASON.INVALID).map((p) => ({ code: "FHIR_UNSUPPORTED_TYPE", message: p.detail }))];
+  /* Consent is a governance record owned by consent.js, not a clinical entity the adapter builds; it
+   * is mapped here from the same SCCM bundle, for the same patient, under the same feed. */
+  const importedPatient = entities.find((e) => e.resourceType === "Patient");
+  const nowIso = new Date().toISOString();
+  for (const c of sccm.consents || []) {
+    const rec = importedPatient ? consentFromSccm(c, importedPatient.id, adapterSystem, nowIso) : null;
+    if (rec) entities.push(rec);
+    else issues.push({ code: "SCCM_CONSENT_UNDECIDED", message: `consent ${c && c.id} carries no decision (status ${c && c.status}) and was not written` });
+  }
   const hadMrn = !(mapped.issues || []).some((i) => i.code === "SCCM_PATIENT_NO_MRN");
 
   /* REPLAY IS DECIDED BY CONTENT, NEVER BY AN ID. A resource's id is stable across updates by
    * design, and a Bundle.id is whatever the sender chose to reuse; keying on either turned a stale
    * PUT into a silent "already done". A resent identical message is a no-op; a corrected re-send is
    * a new message and is judged on its own merits. */
-  const idempotencyKey = `fhir-in:${adapterSystem}:${await sha256(JSON.stringify(ctx.body || {}))}${ctx.replayKeySuffix ? ":" + str(ctx.replayKeySuffix) : ""}`;
+  const idempotencyKey = `${protocol}-in:${adapterSystem}:${await sha256(typeof ctx.body === "string" ? ctx.body : JSON.stringify(ctx.body || {}))}${ctx.replayKeySuffix ? ":" + str(ctx.replayKeySuffix) : ""}`;
   const ingest = svc.governedForIngest({ idempotencyKey });
   if (await ingest.alreadyIngested()) {
     return { ok: true, status: 200, duplicate: true, bundle: { resourceType: "Bundle", type: "transaction-response", entry: [], meta: { tag: [{ system: "urn:stewardmd:fhir", code: "replayed" }] } } };
   }
 
   const now = new Date().toISOString();
-  const context = { mode: ctx.mode || "bundle", targetType: str(ctx.targetType) || null, targetId: str(ctx.targetId) || null, patientRef: str(ctx.patientRef) || null, ifMatch: str(ctx.ifMatch) || null, sourceSystem: system };
+  const context = { protocol, mode: ctx.mode || "bundle", targetType: str(ctx.targetType) || null, targetId: str(ctx.targetId) || null, patientRef: str(ctx.patientRef) || null, ifMatch: str(ctx.ifMatch) || null, sourceSystem: system, controlId: str(ctx.messageControlId) || null };
   const sourcePatientId = patient ? str(patient.id) : null;
   const raise = async (reason, extra) => {
     const id = `wsq-xchg-${adapterSystem}-${(await sha256(`${reason}|${idempotencyKey}|${JSON.stringify(extra && extra.entityRefs || [])}`))}`;
@@ -472,36 +604,115 @@ async function ingestFhir(request, env, ctx) {
     }
   }
 
+  /* PER-ENTRY REQUEST SEMANTICS: the entry's own If-Match against the current version, and
+   * If-None-Exist as a search over what the actor may already see. Decided BEFORE anything is
+   * written, so a transaction can refuse whole. The header form of If-None-Exist applies to the one
+   * resource a POST {Type} carries. A match never links and never overwrites: the incoming row is
+   * simply not created, and the existing one is the answer. */
+  const requestFor = (entity) => {
+    const fhirType = FHIR_TYPE[entity.resourceType] || entity.resourceType;
+    const srcId = str(entity.meta && entity.meta.source && entity.meta.source.sourceId);
+    const fromBundle = requests && requests.get(`${fhirType}/${srcId}`);
+    if (fromBundle) return fromBundle;
+    if (ctx.mode === "create" && str(ctx.ifNoneExist) && fhirType === str(ctx.targetType)) return { method: "POST", ifNoneExist: str(ctx.ifNoneExist), ifMatch: null, url: null };
+    return null;
+  };
+  const preconditions = [];   // {entity, status, outcome, location?}
+  const keep = [];
+  for (const e of writable) {
+    const req = requestFor(e);
+    if (!req) { keep.push(e); continue; }
+    const fhirType = FHIR_TYPE[e.resourceType] || e.resourceType;
+    if (req.method === "PUT" && req.ifMatch) {
+      const want = req.ifMatch.replace(/^W\//, "").replace(/"/g, "");
+      const cur = e._currentVersion || 0;
+      if (String(cur) !== want) { preconditions.push({ entity: e, status: "412 Precondition Failed", outcome: operationOutcome("error", "conflict", `${fhirType}/${e.id}: If-Match names version ${want}; the record is at version ${cur}`) }); continue; }
+    }
+    if (req.ifNoneExist && !e._currentVersion) {
+      let rows = [];
+      try {
+        const canonical = e.resourceType;
+        const pid = canonical === "Patient" ? null : str(e.patientId);
+        const list = canonical === "Patient" ? await svc.list("Patient", SEARCH_POOL) : (pid ? await svc.byPatient(canonical, pid) : []);
+        rows = (list || []).map(toFhir).filter(Boolean);
+      } catch { rows = []; }
+      const v = evaluateIfNoneExist(fhirType, req.ifNoneExist, rows);
+      if (v.outcome === "invalid") { preconditions.push({ entity: e, status: "400 Bad Request", outcome: { resourceType: "OperationOutcome", issue: v.problems.map((p) => ({ severity: "error", code: "not-supported", diagnostics: `If-None-Exist ${p.param}: ${p.reason}` })) } }); continue; }
+      if (v.outcome === "ambiguous") { preconditions.push({ entity: e, status: "412 Precondition Failed", outcome: operationOutcome("error", "multiple-matches", `${fhirType}/${e.id}: If-None-Exist "${req.ifNoneExist}" matches ${v.matches.length} resources; the condition is ambiguous`) }); continue; }
+      if (v.outcome === "exists") {
+        const m = v.matches[0];
+        preconditions.push({ entity: e, status: "200 OK", location: `${str(ctx.base)}/${m.resourceType}/${m.id}/_history/${str(m.meta && m.meta.versionId) || "1"}`, etag: m.meta && m.meta.versionId ? `W/"${m.meta.versionId}"` : undefined, existing: m });
+        continue;
+      }
+    }
+    keep.push(e);
+  }
+  writable = keep;
+  const failedPreconditions = preconditions.filter((p) => !/^200/.test(p.status));
+
+  /* A TRANSACTION IS ALL OR NOTHING. Anything that would have been a per-entry failure - an
+   * ownership conflict, a failed precondition - refuses the whole request as one OperationOutcome,
+   * and no clinical row is written. The exceptions raised for the conflicts still stand: a person
+   * must still look, and the sender is told where. Governance refusals are decided inside putMany
+   * before anything is staged, for the same reason. */
   const entries = [];
   for (const c of conflicts) {
     const exId = await raise(c.reason, { patientId: c.entity.patientId || null, conflict: c.current, entityRefs: [`${c.entity.resourceType}/${c.entity.id}`],
       detail: c.reason === REASON.CONFLICT_LOCAL_AUTHORITATIVE ? "this hospital authored the current version; a feed does not overwrite it" : `another feed (${c.current.source}) authored the current version` });
     entries.push({ response: { status: "409 Conflict", outcome: operationOutcome("error", "conflict", `${c.entity.resourceType}/${c.entity.id}: ${c.reason}; see ExchangeException/${exId}`) } });
   }
+  for (const p of preconditions) {
+    if (/^200/.test(p.status)) entries.push({ response: { status: p.status, location: p.location, etag: p.etag }, resource: p.existing });
+    else entries.push({ response: { status: p.status, outcome: p.outcome } });
+  }
+  const preconditionStatus = failedPreconditions.length ? (failedPreconditions.some((p) => /^400/.test(p.status)) ? 400 : 412) : null;
+  if (atomic && (conflicts.length || failedPreconditions.length)) {
+    const issue = [...conflicts.map((c) => ({ severity: "error", code: "conflict", diagnostics: `${c.entity.resourceType}/${c.entity.id}: ${c.reason}` })), ...failedPreconditions.flatMap((p) => p.outcome.issue)];
+    return { ok: false, status: conflicts.length ? 409 : preconditionStatus, outcome: { resourceType: "OperationOutcome", issue: [{ severity: "error", code: "processing", diagnostics: `transaction refused whole: ${conflicts.length} conflict(s), ${failedPreconditions.length} failed precondition(s); nothing was written` }, ...issue] } };
+  }
 
   const written = [];
-  for (const e of [...writable].sort(byDependency)) {
+  const ordered = [...writable].sort(byDependency);
+  const describe = (e, rec) => {
     const { _currentVersion, _acceptedOver, ...entity } = e;
+    const f = toFhir({ ...entity, ...rec });
+    const fhirType = FHIR_TYPE[entity.resourceType] || entity.resourceType;
+    const version = rec && rec.version != null ? rec.version : (_currentVersion ? _currentVersion + 1 : 1);
+    written.push({ resourceType: entity.resourceType, id: entity.id, version });
+    return { response: { status: _currentVersion ? "200 OK" : "201 Created", location: `${str(ctx.base)}/${fhirType}/${entity.id}/_history/${version}`, etag: `W/"${version}"`, lastModified: now }, ...(f && ctx.prefer !== "minimal" ? { resource: f } : {}) };
+  };
+  if (atomic) {
+    const bare = ordered.map(({ _currentVersion, _acceptedOver, ...entity }) => entity);
     try {
-      const saved = await ingest.put(adapterActor, entity);
-      const rec = saved && saved.record ? saved.record : (saved || entity);
-      const f = toFhir({ ...entity, ...rec });
-      const fhirType = FHIR_TYPE[entity.resourceType] || entity.resourceType;
-      const version = rec && rec.version != null ? rec.version : (_currentVersion ? _currentVersion + 1 : 1);
-      written.push({ resourceType: entity.resourceType, id: entity.id, version });
-      entries.push({ response: { status: _currentVersion ? "200 OK" : "201 Created", location: `${str(ctx.base)}/${fhirType}/${entity.id}/_history/${version}`, etag: `W/"${version}"`, lastModified: now }, ...(f ? { resource: f } : {}) });
+      const saved = await ingest.putMany(adapterActor, bare);
+      ordered.forEach((e, i) => { const s = saved && saved[i]; entries.push(describe(e, s && s.record ? s.record : (s || bare[i]))); });
     } catch (err) {
       const code = err instanceof GovernanceError ? "forbidden" : "exception";
-      entries.push({ response: { status: err instanceof GovernanceError ? "403 Forbidden" : "500 Internal Server Error", outcome: operationOutcome("error", code, `${entity.resourceType}/${entity.id}: ${str(err && err.message)}`) } });
+      const reasons = err instanceof GovernanceError && Array.isArray(err.reasons) ? err.reasons : [];
+      return { ok: false, status: err instanceof GovernanceError ? 403 : 500, outcome: { resourceType: "OperationOutcome", issue: [
+        { severity: "error", code, diagnostics: `transaction refused whole: ${str(err && err.message)}; nothing was written` },
+        ...reasons.map((r) => ({ severity: "error", code: "forbidden", diagnostics: `${r.resourceType}/${r.id}: ${r.message}` })),
+      ] } };
+    }
+  } else {
+    for (const e of ordered) {
+      const { _currentVersion, _acceptedOver, ...entity } = e;
+      try {
+        const saved = await ingest.put(adapterActor, entity);
+        entries.push(describe(e, saved && saved.record ? saved.record : (saved || entity)));
+      } catch (err) {
+        const code = err instanceof GovernanceError ? "forbidden" : "exception";
+        entries.push({ response: { status: err instanceof GovernanceError ? "403 Forbidden" : "500 Internal Server Error", outcome: operationOutcome("error", code, `${entity.resourceType}/${entity.id}: ${str(err && err.message)}`) } });
+      }
     }
   }
 
-  const status = ctx.mode === "create" ? (written.length ? 201 : (conflicts.length ? 409 : 422))
+  const status = ctx.mode === "create" ? (written.length ? 201 : (preconditions.some((p) => /^200/.test(p.status)) ? 200 : (conflicts.length ? 409 : (preconditionStatus || 422))))
     : ctx.mode === "update" ? (written.length ? 200 : 409)
     : 200;
   return {
-    ok: true, status, system: adapterSystem, linkedTo, written, conflicts: conflicts.length, issues,
-    bundle: { resourceType: "Bundle", type: "transaction-response", entry: entries,
+    ok: true, status, system: adapterSystem, linkedTo, written, conflicts: conflicts.length, issues, preconditions: preconditions.length,
+    bundle: { resourceType: "Bundle", type: bundleType === "batch" ? "batch-response" : "transaction-response", entry: entries,
       ...(issues.length ? { meta: { tag: issues.map((i) => ({ system: "urn:stewardmd:fhir:issue", code: str(i.code), display: str(i.message) })) } } : {}) },
   };
 }
@@ -520,7 +731,9 @@ async function resolveException(request, env, ctx) {
   const mig = ctx.migration;
   const base = { mode: mig && mig.mode, tenantId: (mig && mig.tenantId) || null };
   if (!mig || mig.mode === "off") return { ...base, ok: true, skipped: "off", written: 0 };
-  if (!inboundEnabled(ctx.config)) return { ...base, ok: false, status: 404, error: "not_found", written: 0 };
+  // A held message may have come through either door; deciding it needs at least one of them open.
+  const hl7On = !!(ctx.hl7Config && ctx.hl7Config.inbound && ctx.hl7Config.inbound.enabled === true);
+  if (!inboundEnabled(ctx.config) && !hl7On) return { ...base, ok: false, status: 404, error: "not_found", written: 0 };
 
   const exceptionId = str(ctx.exceptionId), resolution = str(ctx.resolution), reason = str(ctx.reason);
   if (!exceptionId || !Object.values(RESOLUTION).includes(resolution)) {
@@ -530,7 +743,7 @@ async function resolveException(request, env, ctx) {
    * potassium is on this chart, or why one is not. */
   if (!reason) return { ...base, ok: false, status: 422, error: "reason_required", detail: "say why, in a sentence somebody can read next year", written: 0 };
 
-  const { svc, resolved, error } = await open_(request, env, ctx);
+  const { svc, resolved, error } = await openIngest(request, env, ctx);
   if (error) return { ...base, ok: false, status: error.status, error: "permission", detail: error.outcome.issue[0].diagnostics, written: 0 };
 
   let ex;
@@ -565,8 +778,11 @@ async function resolveException(request, env, ctx) {
     const override = resolution === RESOLUTION.ACCEPT_FEED
       ? { acceptFeedFor: (ex.entityRefs || [])[0] || null }
       : { identity: resolution, localId: localPatientId };
-    redrive = await ingestFhir(request, env, {
-      ...ctx, body: ex.payload, sourceSystem: c.sourceSystem || str(ex.source).replace(/^fhir-/, ""),
+    /* The held message is re-driven through the door it arrived by. An HL7 v2 message re-enters
+     * through the HL7 gateway (registered below to avoid an import cycle); a FHIR one through here. */
+    const drive = REDRIVE[str(c.protocol)] || ingestFhir;
+    redrive = await drive(request, env, {
+      ...ctx, body: ex.payload, sourceSystem: c.sourceSystem || str(ex.source).replace(/^(fhir|hl7v2)-/, ""),
       mode: c.mode || "bundle", targetType: c.targetType || undefined, targetId: c.targetId || undefined, patientRef: c.patientRef || undefined,
       ifMatch: c.ifMatch || undefined, override,
       /* A distinct key from the original push. The original's key was consumed when the exception
@@ -617,7 +833,7 @@ async function resolveException(request, env, ctx) {
 async function listExceptions(request, env, ctx) {
   const mig = ctx.migration;
   if (!mig || mig.mode === "off") return { ok: true, skipped: "off", open: [] };
-  const { svc, error } = await open_(request, env, { ...ctx });
+  const { svc, error } = await openIngest(request, env, { ...ctx });
   if (error) return { ok: false, status: error.status, error: "permission", detail: error.outcome.issue[0].diagnostics, open: [] };
   let rows;
   try { rows = await svc.list(EXCEPTION_TYPE, 200); }
@@ -627,9 +843,13 @@ async function listExceptions(request, env, ctx) {
   return { ok: true, open, note: "Each of these is something another system sent that WardSynQ would not write without a person deciding. Nothing here has been filed on a chart." };
 }
 
+/** Re-drive handlers by protocol. A gateway registers itself; the FHIR door is the default. */
+const REDRIVE = {};
+function registerRedrive(protocol, fn) { if (str(protocol) && typeof fn === "function") REDRIVE[str(protocol)] = fn; }
+
 export {
   EXCEPTION_TYPE, DECISION_TYPE, REASON, RESOLUTION, INBOUND_TYPES, CODE_FIELDS,
-  inboundEnabled, sourceSystemOf, splitBundle, markTerminology, reconcileIdentity, rebind, partitionConflicts,
+  inboundEnabled, sourceSystemOf, splitBundle, evaluateIfNoneExist, markTerminology, markTerminologyWithService, reconcileIdentity, rebind, partitionConflicts,
   ExchangeException, ExchangeIdentityDecision, priorDecision,
-  ingestFhir, listExceptions, resolveException,
+  ingestFhir, landBundle, openIngest, registerRedrive, listExceptions, resolveException,
 };

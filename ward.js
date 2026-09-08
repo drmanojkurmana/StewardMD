@@ -34,12 +34,29 @@
     orgId: "", ward: "", patients: [], view: "list",
     sel: null,                 // the selected {encounterId, patientId, ward, bed, admittedAt}
     problems: [], criticals: [], balance: null, outbox: [], cosign: null, downtime: null, quality: null, pcopy: null,
+    /* Held from other systems. null until asked, an object once answered, and a separate error
+     * string when the list could not be read: an unreadable queue of held clinical data must never
+     * look like an empty one. */
+    xchg: null, xchgErr: "",
     /* The terminology search: null while it runs, an array once it answers, undefined when nobody has
      * asked. Three states, because "searching" and "no matches" must not look the same. */
     icd: undefined, probText: "", probCode: "",
     templates: [], noteTemplateId: "", noteResult: null, overrides: null,
     due: [], prn: [], unscheduled: [], truncated: false,
     from: "", to: "",          // the window being viewed, NOT a claim about when a dose is due
+    // Bed board + admission. board: null until loaded, {wards:[...]} once read. admitTarget: the
+    // ward/bed a person clicked, or null - nothing is admitted until a real patient is confirmed.
+    board: null, boardErr: "", admitTarget: null, mrnLookup: null, mrnLookupErr: "",
+    flowsheet: null, news2: null,
+    investigations: null, results: null,
+    drugOrder: { drug: "", value: "", unit: "", route: "", frequency: "" },
+    invOrder: { code: "", display: "", category: "laboratory", priority: "routine", reason: "" },
+    // Emergency department. ed: null until loaded, {patients:[...]} once read (the ED board -
+    // untriaged first, same shape discipline as the ward list). edArrivalOpen: whether the arrival
+    // panel is showing. edMrnLookup/edMrnLookupErr: the SAME confirm-before-admit pattern the bed
+    // board already uses - nobody arrives on a typed MRN alone.
+    ed: null, edErr: "", edArrivalOpen: false, edMrnLookup: null, edMrnLookupErr: "", edAdmitPending: false,
+    resusBundles: null, resusStarting: false,
     busy: false, err: "", note: "", refusal: null, loaded: false
   };
 
@@ -150,11 +167,191 @@
       '<button class="w-ic" data-w-act="reload" title="Refresh">' + ms("refresh") + "</button></div>" +
       '<div class="w-filter"><input id="wWard" type="text" placeholder="Filter by ward (blank = all)" value="' + esc(state.ward) + '">' +
       '<button class="w-btn ghost" data-w-act="setward">Apply</button>' +
+      '<button class="w-btn" data-w-act="board" title="Admit a patient to a bed">' + ms("add_circle") + "Admit</button>" +
+      '<button class="w-btn ghost" data-w-act="edboard" title="Emergency department">' + ms("emergency") + "ED</button>" +
       // Reachable BEFORE an outage, which is the only time it can be taken. A pack you can only get
       // to while the system is up is a pack the ward has to remember to take while the system is up.
       '<button class="w-btn ghost" data-w-act="downtime" title="Printable sheet for when the system is unavailable">' + ms("print") + "Downtime pack</button></div>" +
       (rows || (state.loaded ? '<p class="w-empty">No patients are currently admitted' + (state.ward ? " to " + esc(state.ward) : "") + ".</p>" : '<p class="w-empty">Loading the ward…</p>')) +
-      "</div>" + cosignCard(state) + qualityCard(state) + overrideCard(state);
+      "</div>" + xchgCard(state) + cosignCard(state) + qualityCard(state) + overrideCard(state);
+  }
+
+  /* THE BED BOARD. Every configured ward, every bed, occupied or free - from the record itself
+   * (GET /ward/beds), never guessed at. Admitting is a two-step act on purpose: PICK A BED, then
+   * NAME THE PATIENT. A form that took a patient first and a bed second is how "admit to whichever
+   * bed is free" quietly becomes "admit to bed 4" when bed 4 was actually taken a minute ago -
+   * picking the bed from the board's own live occupancy is what keeps that from happening.
+   *
+   * NOBODY IS ADMITTED ON A TYPED MRN ALONE. Existing-patient admission looks the patient up first
+   * and shows their name for a human to confirm; a mistyped digit in an MRN must never silently
+   * admit the wrong person's chart into a bed. A new patient goes through the SAME registration
+   * sheet the front desk uses (SMD_PATIENTREG) - one form, not a second one that could drift from it. */
+  function boardView(state) {
+    var wards = (state.board && state.board.wards) || [];
+    var t = state.admitTarget;
+    var wardsHtml = wards.map(function (w) {
+      var occ = (w.occupied || []).map(function (o) {
+        return '<div class="w-bedcell occ"><b>' + esc(o.bed) + '</b><span>' + esc(o.patientId) + "</span></div>";
+      }).join("");
+      // Which free cell is highlighted as "picked" - a UI selection compare against what the board
+      // itself already reported as free, never a computation of whether a bed IS free.
+      var isPicked = function (b) { return !!t && t.ward === w.ward && String(t.bed) === String(b); };
+      var free = w.bedsKnown ? (w.free || []).map(function (b) {
+        return '<button class="w-bedcell free' + (isPicked(b) ? " picked" : "") + '" data-w-act="pickbed:' + esc(w.ward) + "|" + esc(b) + '"><b>' + esc(b) + "</b><span>Free</span></button>";
+      }).join("") : '<div class="w-bedcell unknown"><span>Bed list not configured</span></div>';
+      var unplaced = (w.unplaced || []).map(function (o) {
+        return '<div class="w-bedcell occ"><b>&mdash;</b><span>' + esc(o.patientId) + " (no bed assigned)</span></div>";
+      }).join("");
+      return '<div class="w-wardrow"><h4>' + esc(w.ward) + "<small>" + esc((w.occupied || []).length) + " occupied" + (w.bedsKnown ? " &middot; " + esc((w.free || []).length) + " free" : "") + "</small></h4>" +
+        '<div class="w-bedgrid">' + occ + free + unplaced + "</div></div>";
+    }).join("");
+
+    var lookup = state.mrnLookup;
+    var admitPanel = !t ? "" :
+      '<div class="w-card admit"><div class="w-card-h">' + ms("bed") + "<h3>Admit to " + esc(t.ward) + ", bed " + esc(t.bed) + "</h3>" +
+        '<button class="w-ic" data-w-act="unpickbed" title="Choose a different bed">' + ms("close") + "</button></div>" +
+        // Explicit, never inferred from the ward's name - the same rule migrate-inpatient.js's own
+        // header states: a ward literally named "ICU" admits as IPD unless this is checked.
+        '<label class="w-chk"><input type="checkbox" id="wAdmitIcu"' + (state.admitAsIcu ? " checked" : "") + '> Critical care (ICU) admission</label>' +
+        '<div class="w-sub"><h4>' + ms("badge") + "Existing patient (by MRN)</h4>" +
+        '<div class="w-filter"><input id="wAdmitMrn" type="text" autocomplete="off" placeholder="MRN">' +
+        '<button class="w-btn ghost" data-w-act="mrnlookup">' + ms("search") + "Find</button></div>" +
+        (state.mrnLookupErr ? '<p class="w-hint warn">' + ms("error") + esc(state.mrnLookupErr) + "</p>" : "") +
+        (lookup ? '<div class="w-mrn-found"><b>' + esc(lookup.name || lookup.mrn) + "</b><span>" + esc(lookup.mrn) +
+          (lookup.ageYears != null ? " &middot; " + esc(lookup.ageYears) + "y" : "") + (lookup.gender ? " &middot; " + esc(lookup.gender) : "") + "</span>" +
+          '<button class="w-btn tiny go" data-w-act="admitconfirm">' + ms("check") + "This is the patient - admit</button></div>" : "") +
+        "</div>" +
+        '<div class="w-sub"><h4>' + ms("person_add") + "New patient</h4>" +
+        '<p class="w-hint">Opens the same check-in sheet used at the front desk.</p>' +
+        '<button class="w-btn" data-w-act="admitnew">' + ms("person_add") + "Register &amp; admit</button></div>" +
+      "</div>";
+
+    return '<div class="w-chart-h"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button>" +
+      '<div><b>Bed board</b></div>' +
+      '<button class="w-ic" data-w-act="board" title="Refresh">' + ms("refresh") + "</button></div>" +
+      '<div class="w-card">' +
+      (state.boardErr ? '<p class="w-hint warn">' + ms("error") + esc(state.boardErr) + "</p>"
+        : wardsHtml || '<p class="w-empty">No admissions and no bed lists configured.</p>') +
+      "</div>" + admitPanel;
+  }
+
+  /* THE ED BOARD. A worklist, not an arrival log - the server itself sorts untriaged patients
+   * first, then by acuity, then by wait (listEd(), migrate-ed.js), so the same screen that lists
+   * who is here is also the answer to "who needs a nurse's eyes right now". Nothing here computes
+   * an acuity; the board only ever shows what a human has already recorded (or that nobody has
+   * yet). Arrival is a separate, explicit panel - the same "pick a real fact, then confirm" shape
+   * the bed board's admit panel already uses. */
+  var ACUITY_WORDS = { 1: "1 - Immediate", 2: "2 - Emergent", 3: "3 - Urgent", 4: "4 - Less urgent", 5: "5 - Non-urgent" };
+  function edBoardView(state) {
+    var rows = (state.ed && state.ed.patients || []).map(function (p) {
+      return "<li>" + '<button class="w-bed" data-w-act="openEd:' + esc(p.encounterId) + '">' +
+        '<span class="w-bed-no' + (p.acuity == null ? " untriaged" : " acuity-" + esc(p.acuity)) + '">' + (p.acuity == null ? ms("priority_high") : esc(p.acuity)) + "</span>" +
+        '<span class="w-bed-b"><b>' + esc(p.mrn || p.patientId) + "</b><small>" + esc(p.chiefComplaint || "No chief complaint recorded") + " &middot; arrived " + when(p.arrivedAt) + "</small></span>" +
+        ms("chevron_right") + "</button></li>";
+    }).join("");
+
+    var lookup = state.edMrnLookup;
+    var arrivalPanel = !state.edArrivalOpen ? "" :
+      '<div class="w-card admit"><div class="w-card-h">' + ms("emergency") + "<h3>New arrival</h3>" +
+      '<button class="w-ic" data-w-act="edarrivalclose" title="Cancel">' + ms("close") + "</button></div>" +
+      '<div class="w-sub"><h4>' + ms("badge") + "Known patient (by MRN)</h4>" +
+      '<div class="w-filter"><input id="wEdMrn" type="text" autocomplete="off" placeholder="MRN">' +
+      '<button class="w-btn ghost" data-w-act="edmrnlookup">' + ms("search") + "Find</button></div>" +
+      (state.edMrnLookupErr ? '<p class="w-hint warn">' + ms("error") + esc(state.edMrnLookupErr) + "</p>" : "") +
+      (lookup ? '<div class="w-mrn-found"><b>' + esc(lookup.name || lookup.mrn) + "</b><span>" + esc(lookup.mrn) +
+        (lookup.ageYears != null ? " &middot; " + esc(lookup.ageYears) + "y" : "") + (lookup.gender ? " &middot; " + esc(lookup.gender) : "") + "</span>" +
+        '<button class="w-btn tiny go" data-w-act="edarriveknown">' + ms("check") + "This is the patient - arrival</button></div>" : "") +
+      "</div>" +
+      '<div class="w-sub"><h4>' + ms("person_off") + "Unidentified patient</h4>" +
+      '<p class="w-hint">' + ms("info") + "Assigns a provisional MRN this hospital's own scheme generates (never invented on screen), pending identification and a later merge." + "</p>" +
+      '<div class="w-grid">' +
+      '<label class="w-f"><span>Sex</span><select id="wEdSex"><option value="unknown">Not known</option><option value="male">Male</option><option value="female">Female</option></select></label>' +
+      '<label class="w-f"><span>Chief complaint</span><input id="wEdUnkCc" type="text" autocomplete="off" placeholder="e.g. found down, unresponsive"></label>' +
+      "</div>" +
+      '<button class="w-btn warn" data-w-act="edarriveunknown">' + ms("person_add") + "Arrive as unidentified</button></div>" +
+      "</div>";
+
+    return '<div class="w-chart-h"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button>" +
+      "<div><b>Emergency department</b></div>" +
+      '<button class="w-btn tiny go" data-w-act="edarrivalopen">' + ms("add_circle") + "Arrival</button>" +
+      '<button class="w-ic" data-w-act="edboard" title="Refresh">' + ms("refresh") + "</button></div>" +
+      '<div class="w-card">' +
+      (state.edErr ? '<p class="w-hint warn">' + ms("error") + esc(state.edErr) + "</p>"
+        : rows ? '<ul class="w-q w-ed-board">' + rows + "</ul>"
+        : '<p class="w-empty">No patients currently in the ED.</p>') +
+      "</div>" + arrivalPanel;
+  }
+
+  /* HELD FROM OTHER SYSTEMS. Everything here is something another system sent that WardSynQ would
+   * not file without a person deciding: a patient who might be one of two, a record another feed
+   * owns, a fact re-sent for a different person. NOTHING ON THIS CARD IS ON A CHART YET.
+   *
+   * THE SCREEN OFFERS ONLY THE DECISIONS THAT FIT. The server refuses a resolution that does not fit
+   * the reason, and the screen mirrors that table as a display convenience so nobody is offered a
+   * button that is certain to be refused; the server remains the authority. A patient-mismatch
+   * conflict can never be accepted from the feed, and keeping it as ours would file a fact that
+   * belongs to a different person onto this one's chart - so only reject is offered for it.
+   *
+   * NO DECISION IS EVER PRESELECTED. An identity or resolution choice a clinician never touched is
+   * not a decision they made; the candidate list and the decision dropdown both start unchosen, and
+   * deciding is refused until something is actually picked.
+   *
+   * A REASON IS REQUIRED AND SHOWN AS REQUIRED. It is read next year by somebody asking why. */
+  var XCHG_WORDS = {
+    "identity-ambiguous": "More than one patient here carries this identifier.",
+    "identity-probable-duplicate": "No identifier matched, but a patient here looks like this person.",
+    "conflict-local-authoritative": "This hospital authored the current version of this record.",
+    "conflict-other-source": "Another feed authored the current version of this record.",
+    "conflict-patient-mismatch": "The feed re-sent this record for a different patient. It cannot be accepted or kept; it can only be rejected.",
+    "version-mismatch": "The feed updated a version that is no longer current.",
+    "unsupported-resource": "A kind of record WardSynQ does not import.",
+    "invalid-resource": "The record could not be understood."
+  };
+  var XCHG_FITS = {
+    "identity-ambiguous": ["link", "create", "reject"],
+    "identity-probable-duplicate": ["link", "create", "reject"],
+    "conflict-local-authoritative": ["accept-feed", "keep-local"],
+    "conflict-other-source": ["accept-feed", "keep-local"],
+    "conflict-patient-mismatch": ["reject"]
+  };
+  var XCHG_RES = {
+    link: "Link - this IS the patient chosen below; file the message on their chart",
+    create: "Create - nobody here is this patient; register them from the message",
+    reject: "Reject - file nothing",
+    "accept-feed": "Accept the feed's version - it becomes the next version of OUR record, attributed to the feed",
+    "keep-local": "Keep ours - the feed's version is not filed"
+  };
+  function xchgFits(reason) { return XCHG_FITS[reason] || ["reject"]; }
+  function xchgCard(state) {
+    var q = state.xchg;
+    var open = (q && q.open) || [];
+    var rows = open.map(function (x) {
+      var fits = xchgFits(x.reason);
+      var cands = (x.candidates || []).map(function (c, i) {
+        return '<label class="w-xc"><input type="radio" name="wxP-' + esc(x.id) + '" value="' + esc(c.id) + '"> <b>' + esc(c.id) + "</b>" +
+          (c.mrn ? ' <span class="w-code">' + esc(c.mrn) + "</span>" : "") +
+          (c.band ? " <small>" + esc(c.band) + (c.score != null ? " " + esc(Math.round(Number(c.score) * 100) / 100) : "") + "</small>" : "") + "</label>";
+      }).join("");
+      var opts = '<option value="">Choose&hellip;</option>' + fits.map(function (r) { return '<option value="' + esc(r) + '">' + esc(XCHG_RES[r] || r) + "</option>"; }).join("");
+      return '<li class="w-xchg-row">' +
+        "<h4>" + esc(x.reason) + ' <span class="w-code">' + esc(x.source || "") + "</span></h4>" +
+        '<p class="w-xw">' + esc(XCHG_WORDS[x.reason] || "") + (x.detail ? " " + esc(x.detail) : "") + "</p>" +
+        "<small>Raised " + when(x.raisedAt) + " &middot; " + esc((x.entityRefs || []).length) + " record" + ((x.entityRefs || []).length === 1 ? "" : "s") + " held" +
+        (x.conflict ? " &middot; ours: " + esc(x.conflict.resourceType || "") + "/" + esc(x.conflict.id || "") + " v" + esc(x.conflict.version == null ? "?" : x.conflict.version) + " (" + esc(x.conflict.source || "") + ")" : "") + "</small>" +
+        (cands ? '<div class="w-xcs"><span class="w-xl">Which patient here, if any:</span>' + cands + "</div>" : "") +
+        (fits.indexOf("link") >= 0 && !cands ? '<label class="w-xl">Local patient id for a link<input id="wxPid-' + esc(x.id) + '" type="text" autocomplete="off"></label>' : "") +
+        '<label class="w-xl">Decision<select id="wxR-' + esc(x.id) + '">' + opts + "</select></label>" +
+        '<label class="w-xl">Why (required)<textarea id="wxW-' + esc(x.id) + '" rows="2" placeholder="In a sentence somebody can read next year"></textarea></label>' +
+        '<div class="w-dose-a"><button class="w-btn tiny go" data-w-act="xchg:' + esc(x.id) + '">' + ms("gavel") + "Decide</button></div>" +
+        "</li>";
+    }).join("");
+    return '<div class="w-card"><div class="w-card-h">' + ms("swap_horiz") + "<h3>Held from other systems" + (open.length ? " &middot; " + open.length : "") + "</h3>" +
+      '<button class="w-ic" data-w-act="xchgs" title="Refresh">' + ms("refresh") + "</button></div>" +
+      (state.xchgErr ? '<p class="w-hint warn">' + ms("warning") + esc(state.xchgErr) + "</p>"
+        : rows ? '<ul class="w-q w-xchg">' + rows + "</ul>"
+        : (q ? '<p class="w-empty">Nothing is held from another system.</p>' : '<p class="w-empty">Loading the exchange queue&hellip;</p>')) +
+      (rows ? '<p class="w-hint">' + ms("info") + "Nothing here is on a chart yet. Deciding needs the right to treat; a decision is recorded under your name and cannot be deleted afterwards.</p>" : "") +
+      "</div>";
   }
 
   /* Which safety rules are being clicked through. ALERT FATIGUE IS THE CHARACTERISTIC FAILURE OF
@@ -350,6 +547,35 @@
       '<button class="w-btn" data-w-act="vitals">' + ms("save") + "Record vitals</button></div>";
   }
 
+  /* THE FLOWSHEET. A grid, not a form: hours across, the hospital's rows down, from the SAME vitals
+   * this screen just recorded (and the fluid this chart already charts) - a second write path never
+   * existed and none is added here. AN EMPTY CELL IS AN HOUR NOBODY CHARTED, shown as a plain dash,
+   * because a blank that looked the same as a normal value would hide exactly the gap a flowsheet
+   * exists to show. NEWS2/PEWS sits beside it as a score, never as an escalation: it computes, it
+   * pages nobody, and the card says so in the server's own words. */
+  function flowsheetCard(state) {
+    var g = state.flowsheet, n = state.news2;
+    var grid = !g ? '<p class="w-empty">Loading the flowsheet…</p>'
+      : !(g.rows || []).length ? '<p class="w-empty">No vitals charted in this window yet.</p>'
+      : '<div class="w-flowgrid"><table><thead><tr><th>' + (g.hours || []).map(function (h) { return "<th>" + when(h).replace(/^.* /, "") + "</th>"; }).join("").replace(/^<th>/, "") +
+        '</tr></thead><tbody>' + g.rows.map(function (r) {
+          return "<tr><th>" + esc(r.label) + "</th>" + r.cells.map(function (c) {
+            return "<td" + (c.empty ? ' class="empty"' : c.backfilled ? ' class="late"' : "") + ">" + (c.empty ? "&ndash;" : esc(c.value) + (c.unit ? " " + esc(c.unit) : "")) + "</td>";
+          }).join("") + "</tr>";
+        }).join("") + "</tbody></table></div>" +
+        (g.backfillReading ? '<p class="w-hint warn">' + ms("warning") + esc(g.backfillReading) + "</p>" : "") +
+        (g.note ? '<p class="w-hint">' + ms("info") + esc(g.note) + "</p>" : "");
+
+    var score = !n ? "" : !n.score || n.score.scorable === false
+      ? '<div class="w-news2 na"><b>' + esc(n.tool || "NEWS2") + "</b><span>" + esc((n.score && n.score.reason) || n.note || "Not enough recorded to score.") + "</span></div>"
+      : '<div class="w-news2 risk-' + esc(n.score.risk || "low") + '"><b>' + esc(n.score.total) + "</b><span>" + esc(n.tool) + " &middot; " + esc(n.score.risk || "") + " risk</span></div>";
+
+    return '<div class="w-card"><div class="w-card-h">' + ms("monitoring") + "<h3>Flowsheet</h3>" +
+      '<button class="w-ic" data-w-act="flowsheet" title="Refresh">' + ms("refresh") + "</button></div>" +
+      score + grid +
+      '<p class="w-hint">' + ms("info") + "This is a score, not an escalation. Nothing here pages anyone.</p></div>";
+  }
+
   function marCard(state) {
     var rows = (state.due || []).map(function (d, i) {
       var acts = nextFor(d.status).map(function (a) {
@@ -398,19 +624,153 @@
       "</div>";
   }
 
+  /* PRESCRIBING. Writes ONE thing: a MedicationOrder, through the same door the round already reads
+   * from - there is no separate "order" model here, so an order placed here appears on the round the
+   * moment it is reloaded. NO SAFETY CHECK LIVES HERE: the formulary/restriction/advisory answer
+   * comes back on the response and is shown VERBATIM, exactly like every other refusal on this
+   * screen. A dose is never computed for the prescriber; value and unit are typed, not derived. */
+  function medOrderCard(state) {
+    var o = state.drugOrder || {};
+    return '<div class="w-card"><div class="w-card-h">' + ms("edit_calendar") + "<h3>New medication order</h3></div>" +
+      '<div class="w-grid">' +
+      '<label class="w-f"><span>Drug</span><input id="wMoDrug" type="text" autocomplete="off" value="' + esc(o.drug || "") + '"></label>' +
+      '<label class="w-f"><span>Dose</span><input id="wMoValue" type="text" inputmode="decimal" autocomplete="off" value="' + esc(o.value || "") + '"></label>' +
+      '<label class="w-f"><span>Unit</span><input id="wMoUnit" type="text" autocomplete="off" placeholder="mg" value="' + esc(o.unit || "") + '"></label>' +
+      '<label class="w-f"><span>Route</span><input id="wMoRoute" type="text" autocomplete="off" placeholder="oral" value="' + esc(o.route || "") + '"></label>' +
+      '<label class="w-f"><span>Frequency</span><input id="wMoFreq" type="text" autocomplete="off" placeholder="e.g. BD, 8th hourly" value="' + esc(o.frequency || "") + '"></label>' +
+      "</div>" +
+      '<p class="w-hint">' + ms("info") + "Every safety and formulary check happens on the server. A refusal here is shown in full, exactly as the eMAR shows one.</p>" +
+      '<button class="w-btn" data-w-act="medorder">' + ms("send") + "Prescribe</button></div>";
+  }
+
+  /* ORDERING AN INVESTIGATION, AND SEEING WHERE IT STANDS. One card, three honest states: not yet
+   * collected (from GET /ward/collections, the phlebotomy worklist itself), collected and awaiting a
+   * report (from GET /ward/pending-tests), and resulted (DiagnosticReport, read through the SAME
+   * read-only FHIR door the record already exports through - no second results store exists to
+   * build, and none is invented here). Nothing here releases or interprets a result; that authority
+   * stays with lab-result.js and is reached from wherever a report actually gets entered. */
+  var INV_CATEGORY = [["laboratory", "Laboratory"], ["imaging", "Imaging"], ["procedure", "Procedure"], ["other", "Other"]];
+  var INV_PRIORITY = [["routine", "Routine"], ["urgent", "Urgent"], ["stat", "STAT"]];
+  function investigationsCard(state) {
+    var o = state.invOrder || {};
+    var inv = state.investigations;
+    var coll = (inv && inv.requests) || [];
+    var pend = (inv && inv.pending) || [];
+    var pendIds = {}; pend.forEach(function (p) { pendIds[p.serviceRequestId] = 1; });
+
+    var rows = coll.map(function (c) {
+      var st_ = (c.collection && c.collection.state) || "ordered";
+      return "<li><b>" + esc(c.display || c.code) + "</b> <span>" + esc(c.category || "") + (c.priority && c.priority !== "routine" ? " &middot; " + esc(c.priority).toUpperCase() : "") + "</span>" +
+        '<span class="w-st ' + esc(st_) + '">' + esc(st_.replace(/_/g, " ")) + "</span></li>";
+    }).join("");
+
+    var results = (state.results || []).map(function (r) {
+      return "<li><b>" + esc(r.display) + "</b> <span>" + esc(r.status || "") + "</span>" +
+        (r.conclusion ? "<div>" + esc(r.conclusion) + "</div>" : "") +
+        '<small>' + when(r.reportedAt) + "</small></li>";
+    }).join("");
+
+    return '<div class="w-card"><div class="w-card-h">' + ms("science") + "<h3>Investigations</h3>" +
+      '<button class="w-ic" data-w-act="investigations" title="Refresh">' + ms("refresh") + "</button></div>" +
+      '<div class="w-grid">' +
+      '<label class="w-f"><span>Test</span><input id="wInvCode" type="text" autocomplete="off" placeholder="e.g. Chest X-ray" value="' + esc(o.display || "") + '"></label>' +
+      '<label class="w-f"><span>Category</span><select id="wInvCat">' + INV_CATEGORY.map(function (c) { return '<option value="' + esc(c[0]) + '"' + (o.category === c[0] ? " selected" : "") + ">" + esc(c[1]) + "</option>"; }).join("") + "</select></label>" +
+      '<label class="w-f"><span>Priority</span><select id="wInvPri">' + INV_PRIORITY.map(function (c) { return '<option value="' + esc(c[0]) + '"' + (o.priority === c[0] ? " selected" : "") + ">" + esc(c[1]) + "</option>"; }).join("") + "</select></label>" +
+      "</div>" +
+      '<label class="w-f"><span>Reason (optional)</span><input id="wInvReason" type="text" autocomplete="off"></label>' +
+      '<button class="w-btn" data-w-act="investigation">' + ms("send") + "Order</button>" +
+      (rows ? '<div class="w-sub"><h4>' + ms("checklist") + "On order</h4><ul class=\"w-mini\">" + rows + "</ul></div>" : "") +
+      (results ? '<div class="w-sub"><h4>' + ms("fact_check") + "Results</h4><ul class=\"w-mini w-results\">" + results + "</ul></div>" : "") +
+      "</div>";
+  }
+
   function chartView(state) {
     var s = state.sel || {};
-    return '<div class="w-chart-h"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button>" +
-      "<div><b>" + esc(s.patientId || "") + "</b><small>" + esc(s.ward || "") + (s.bed ? " &middot; bed " + esc(s.bed) : "") + " &middot; admitted " + when(s.admittedAt) + "</small></div>" +
-      // The summary is reachable from the patient, not from a menu somewhere else. A planned
-      // discharge is prepared while the patient is still on the ward, so this is not gated on the
-      // stay being closed - the summary screen states plainly when a stay is still open.
-      '<button class="w-btn ghost" data-w-act="move" title="Transfer to another ward or bed">' + ms("swap_horiz") + "Transfer</button>" +
-      '<button class="w-btn ghost" data-w-act="summary" title="Discharge summary">' + ms("description") + "Summary</button>" +
-      // The patient's own copy. Reachable from the patient because that is where the conversation
-      // that produces it happens, not from a menu somewhere else.
-      '<button class="w-btn ghost" data-w-act="pcopy" title="The copy this patient can be given">' + ms("assignment_ind") + "Patient copy</button></div>" +
-      criticalsCard(state) + problemsCard(state) + noteCard(state) + vitalsCard() + fluidCard(state) + marCard(state) + outboxCard(state);
+    var isEd = s.class === "ED";
+    var isIcu = s.class === "ICU";
+    var header = isEd
+      ? '<div class="w-chart-h"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button>" +
+        "<div><b>" + esc(s.mrn || s.patientId || "") + "</b><small>" + ms("emergency", true) + "ED" +
+        (s.chiefComplaint ? " &middot; " + esc(s.chiefComplaint) : "") + " &middot; arrived " + when(s.arrivedAt) + "</small></div>" +
+        '<button class="w-btn ghost" data-w-act="pcopy" title="The copy this patient can be given">' + ms("assignment_ind") + "Patient copy</button></div>"
+      : '<div class="w-chart-h"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button>" +
+        "<div><b>" + esc(s.patientId || "") + "</b><small>" + esc(s.ward || "") + (s.bed ? " &middot; bed " + esc(s.bed) : "") + " &middot; admitted " + when(s.admittedAt) + "</small></div>" +
+        // The summary is reachable from the patient, not from a menu somewhere else. A planned
+        // discharge is prepared while the patient is still on the ward, so this is not gated on the
+        // stay being closed - the summary screen states plainly when a stay is still open.
+        '<button class="w-btn ghost" data-w-act="move" title="Transfer to another ward or bed">' + ms("swap_horiz") + "Transfer</button>" +
+        '<button class="w-btn ghost" data-w-act="summary" title="Discharge summary">' + ms("description") + "Summary</button>" +
+        // The patient's own copy. Reachable from the patient because that is where the conversation
+        // that produces it happens, not from a menu somewhere else.
+        '<button class="w-btn ghost" data-w-act="pcopy" title="The copy this patient can be given">' + ms("assignment_ind") + "Patient copy</button></div>";
+
+    return header +
+      criticalsCard(state) + (isEd ? triageCard(state) : "") + problemsCard(state) + noteCard(state) + vitalsCard() + flowsheetCard(state) + fluidCard(state) +
+      (isEd ? resusCard(state) : "") + (isIcu ? deviceCard(state) : "") +
+      medOrderCard(state) + marCard(state) + outboxCard(state) + investigationsCard(state) +
+      (isEd ? dispositionCard(state) : "");
+  }
+
+  /* TRIAGE. The acuity is a human's choice, made once, shown plainly once made - and this card
+   * NEVER computes one from the vitals sitting right below it on the same chart. The words each
+   * level maps to are ORG content (ACUITY_WORDS is this build's own unapproved seed labelling, not
+   * a claim about ESI/CTAS/any named scale); a hospital that has adopted a real one configures its
+   * own words the same way note-templates.js already lets it configure its own headings. */
+  function triageCard(state) {
+    var s = state.sel || {};
+    if (s.acuity != null) {
+      return '<div class="w-card"><div class="w-card-h">' + ms("priority_high") + "<h3>Triage</h3></div>" +
+        '<div class="w-news2 risk-' + (s.acuity <= 2 ? "high" : s.acuity === 3 ? "medium" : "low") + '"><b>' + esc(s.acuity) + "</b><span>" + esc(ACUITY_WORDS[s.acuity] || "") + "</span></div>" +
+        '<p class="w-hint">' + ms("info") + "Triaged " + when(s.triagedAt) + ". Not clinically validated content - this hospital's own scale." + "</p></div>";
+    }
+    var opts = Object.keys(ACUITY_WORDS).map(function (k) { return '<option value="' + k + '">' + esc(ACUITY_WORDS[k]) + "</option>"; }).join("");
+    return '<div class="w-card"><div class="w-card-h">' + ms("priority_high") + "<h3>Triage</h3></div>" +
+      '<p class="w-hint warn">' + ms("warning") + "Not yet triaged.</p>" +
+      '<label class="w-f"><span>Acuity</span><select id="wTriageAcuity"><option value="">Choose&hellip;</option>' + opts + "</select></label>" +
+      '<button class="w-btn" data-w-act="triage">' + ms("save") + "Record triage</button></div>";
+  }
+
+  /* RESUSCITATION. The bundle is wardsynq-emergency.js's own tested state machine, run for real
+   * (functions/_wardsynq/migrate-resus.js); this card renders exactly what it reports and starts
+   * or marks nothing on its own - a bundle is "a clinical commitment", in that file's own words,
+   * never opened by a screen. STATUS: not clinically validated, per that file's header. */
+  function resusCard(state) {
+    var bundles = state.resusBundles || [];
+    var running = bundles.filter(function (b) { return b.state === "running" || b.state === "breached"; });
+    var rows = running.map(function (b) {
+      var els = b.elements.map(function (e) {
+        return "<li" + (e.done ? "" : e.overdue ? ' class="overdue"' : "") + '><div class="w-dose-h"><b>' + esc(e.label) + "</b>" +
+          (e.done ? '<span class="w-st administered">done ' + when(e.doneAt) + "</span>" : e.overdue ? '<span class="w-st overdue">overdue</span>' : '<span class="w-st">' + esc(Math.round(e.minutesRemaining || 0)) + " min left</span>") +
+          "</div>" +
+          (!e.done && !e.notApplicable ? '<div class="w-dose-a"><button class="w-btn tiny go" data-w-act="resusmark:' + esc(b.bundleId) + "|" + esc(e.key) + '">' + ms("task_alt") + "Mark done</button></div>" : "") +
+          "</li>";
+      }).join("");
+      return '<div class="w-sub"><h4>' + ms("emergency") + esc(b.label) + '<span class="w-st ' + (b.state === "breached" ? "overdue" : "") + '">' + esc(b.state) + "</span></h4>" +
+        "<ul class=\"w-doses\">" + els + "</ul>" +
+        '<button class="w-btn tiny warn" data-w-act="resusvoid:' + esc(b.bundleId) + '">' + ms("cancel") + "Void bundle</button></div>";
+    }).join("");
+
+    return '<div class="w-card"><div class="w-card-h">' + ms("emergency") + "<h3>Resuscitation</h3>" +
+      '<button class="w-ic" data-w-act="resusload" title="Refresh">' + ms("refresh") + "</button></div>" +
+      (rows || '<p class="w-empty">No resuscitation bundle running.</p>') +
+      '<div class="w-filter"><select id="wResusCode"><option value="code-sepsis">Code Sepsis</option><option value="code-blue">Code Blue</option><option value="code-stemi">Code STEMI</option></select>' +
+      '<button class="w-btn warn" data-w-act="resusstart">' + ms("add_circle") + "Start bundle</button></div>" +
+      '<p class="w-hint">' + ms("info") + "Not clinically validated or approved. Records what happened and when; never doses a drug or instructs anyone." + "</p></div>";
+  }
+
+  /* DISPOSITION: the ED visit ends. "Admitted" reuses the SAME bed board an inpatient admission
+   * uses - reachable straight from here, not a second admission flow - because an ED patient being
+   * admitted needs the SAME bed-occupancy guard any admission needs. */
+  function dispositionCard(state) {
+    return '<div class="w-card"><div class="w-card-h">' + ms("exit_to_app") + "<h3>Disposition</h3></div>" +
+      '<p class="w-hint">' + ms("info") + "Ends this ED visit. The chart stays exactly as it is - nothing here is hidden or removed." + "</p>" +
+      '<div class="w-dose-a">' +
+      '<button class="w-btn" data-w-act="dispositionadmit">' + ms("bed") + "Admit</button>" +
+      '<button class="w-btn ghost" data-w-act="disposition:home">' + ms("home") + "Home</button>" +
+      '<button class="w-btn ghost" data-w-act="disposition:transferred">' + ms("local_shipping") + "Transfer</button>" +
+      '<button class="w-btn ghost" data-w-act="disposition:lwbs">' + ms("directions_walk") + "LWBS</button>" +
+      '<button class="w-btn ghost" data-w-act="disposition:deceased">' + ms("healing") + "Deceased</button>" +
+      "</div></div>";
   }
 
   /* The patient's own copy, on screen and on paper. It reuses the downtime pack's print styling
@@ -510,6 +870,25 @@
       '<input id="wFVal" type="text" inputmode="decimal" placeholder="mL" autocomplete="off">' +
       '<button class="w-btn" data-w-act="fluid">' + ms("add") + "Chart</button></div>" +
       '<p class="w-hint">Volumes are recorded in mL. A value that is not plainly one number is not recorded.</p></div>';
+  }
+
+  /* DEVICE ASSOCIATION (HAZ-DEV-01). Both the patient's wristband and the monitor's own asset tag
+   * must be scanned, and match, before a reading from it can reach this chart - the real check runs
+   * server-side in wardsynq-iomt.js's DeviceGateway, this card only shows what is currently bound
+   * and lets a nurse scan a new one on or take one off. */
+  function deviceCard(state) {
+    var rows = (state.devices || []).map(function (d) {
+      return "<li><div><b>" + esc(d.deviceId) + "</b><small>" + esc(d.kind || "monitor") + " &middot; " + esc(d.assetTag) + "</small></div>" +
+        '<button class="w-btn tiny warn" data-w-act="devicedissociate:' + esc(d.deviceId) + '">' + ms("link_off") + "Remove</button></li>";
+    }).join("");
+    return '<div class="w-card"><div class="w-card-h">' + ms("sensors") + "<h3>Devices</h3>" +
+      '<button class="w-ic" data-w-act="deviceload" title="Refresh">' + ms("refresh") + "</button></div>" +
+      (rows ? '<ul class="w-devices">' + rows + "</ul>" : '<p class="w-empty">No monitor currently associated with this patient.</p>') +
+      '<div class="w-filter"><input id="wDevId" type="text" placeholder="Device ID" autocomplete="off">' +
+      '<input id="wDevTag" type="text" placeholder="Scan asset tag" autocomplete="off">' +
+      '<input id="wDevWrist" type="text" placeholder="Scan wristband" autocomplete="off">' +
+      '<button class="w-btn" data-w-act="deviceassociate">' + ms("sensors") + "Associate</button></div>" +
+      '<p class="w-hint">' + ms("info") + "Both codes must be scanned and must match this patient - a device found in the room is not the same as a device confirmed on the patient." + "</p></div>";
   }
 
   /* Open critical results, ABOVE everything else on the chart. A critical result that reaches a
@@ -696,6 +1075,8 @@
       (state.view === "chart" ? chartView(state)
         : state.view === "downtime" ? downtimeView(state)
         : state.view === "pcopy" ? pcopyView(state)
+        : state.view === "board" ? boardView(state)
+        : state.view === "ed" ? edBoardView(state)
         : listView(state)) + "</div></div>";
   }
 
@@ -706,7 +1087,7 @@
   function loadWard() {
     st.busy = true; paint();
     return apiGet("/ward/list?orgId=" + encodeURIComponent(st.orgId) + (st.ward ? "&ward=" + encodeURIComponent(st.ward) : ""))
-      .then(function (r) { if (settle(r)) st.patients = r.patients || []; st.loaded = true; paint(); return Promise.all([loadCosigns(), loadQuality(), loadOverrides()]); })
+      .then(function (r) { if (settle(r)) st.patients = r.patients || []; st.loaded = true; paint(); return Promise.all([loadCosigns(), loadQuality(), loadOverrides(), loadExceptions()]); })
       .catch(function () { st.busy = false; st.err = "Could not reach the ward."; st.loaded = true; paint(); });
   }
   function loadChart() {
@@ -724,6 +1105,218 @@
       })
       .catch(function () { st.busy = false; st.err = "Could not load the chart."; paint(); });
   }
+
+  // ---- bed board + admission ----------------------------------------------------------------
+  function loadBoard() {
+    st.busy = true; st.view = "board"; st.boardErr = ""; paint();
+    return apiGet("/ward/beds?orgId=" + encodeURIComponent(st.orgId) + (st.ward ? "&ward=" + encodeURIComponent(st.ward) : ""))
+      .then(function (r) {
+        st.busy = false;
+        if (r && r.ok) st.board = r; else st.boardErr = (r && (r.detail || r.message || r.error)) || "Could not load the bed board.";
+        paint();
+      })
+      .catch(function () { st.busy = false; st.boardErr = "Could not reach the bed board."; paint(); });
+  }
+  function pickBed(ward, bed) {
+    // An ED disposition-to-admit already knows who the patient is (st.sel) - picking a bed fires
+    // the disposition directly, never through the admit panel's own MRN-lookup/register flow,
+    // which is for a patient the board does not already have open.
+    if (st.edAdmitPending) { st.edAdmitPending = false; edDispose("admitted", { admission: { ward: ward, bed: bed } }); return; }
+    st.admitTarget = { ward: ward, bed: bed }; st.mrnLookup = null; st.mrnLookupErr = ""; st.admitAsIcu = false; paint();
+  }
+  /* The one write in this whole flow: an Encounter, exactly as /ward/transfer and every other admit
+   * caller writes it. Nothing here invents a second admission path.
+   *
+   * ICU is read from st.admitAsIcu, captured the moment it was checked (mrnLookup/admitNew, below) -
+   * NOT from the checkbox's live DOM state here. paint() replaces the admit panel's whole innerHTML
+   * on the way to this call (the lookup's own busy-state repaint), which silently unchecks an
+   * uncontrolled checkbox; reading the DOM at this point would quietly drop the ICU choice a nurse
+   * already made. */
+  function doAdmit(mrn) {
+    var t = st.admitTarget; if (!t || !mrn) return;
+    st.busy = true; paint();
+    apiPost("/ward/admit", { orgId: st.orgId, mrn: mrn, ward: t.ward, bed: t.bed, admittedAt: new Date().toISOString(), class: st.admitAsIcu ? "ICU" : undefined })
+      .then(function (r) {
+        if (r && r.error === "no_patient_identity") { st.busy = false; st.err = "That MRN is not registered here."; paint(); return; }
+        if (settle(r, r && r.written ? "Admitted to " + t.ward + ", bed " + t.bed + "." : "Already admitted there.")) {
+          st.admitTarget = null; st.mrnLookup = null; st.view = "list"; loadWard();
+        } else paint();
+      })
+      .catch(function () { st.busy = false; st.err = "Could not admit the patient."; paint(); });
+  }
+  /* NEVER ADMITS ON THE TYPED MRN ALONE. This looks the patient up and shows their name; admitting
+   * is a second, separate click (admitconfirm) once a human has read who it is. */
+  function mrnLookup() {
+    var mrn = val("wAdmitMrn");
+    var icuEl = document.getElementById("wAdmitIcu");
+    if (icuEl) st.admitAsIcu = !!icuEl.checked;
+    if (!mrn) { st.mrnLookupErr = "Enter an MRN."; st.mrnLookup = null; paint(); return; }
+    st.busy = true; st.mrnLookupErr = ""; st.mrnLookup = null; paint();
+    apiGet("/patient/get?orgId=" + encodeURIComponent(st.orgId) + "&mrn=" + encodeURIComponent(mrn))
+      .then(function (r) {
+        st.busy = false;
+        if (r && r.ok && r.patient) st.mrnLookup = Object.assign({ mrn: mrn }, r.patient);
+        else st.mrnLookupErr = "No patient found with that MRN.";
+        paint();
+      })
+      .catch(function () { st.busy = false; st.mrnLookupErr = "Could not look up that MRN."; paint(); });
+  }
+  function admitConfirm() { if (st.mrnLookup) doAdmit(st.mrnLookup.mrn); }
+  /* NEW PATIENT: the SAME check-in sheet the front desk uses (SMD_PATIENTREG), not a second form
+   * that could drift from it. Registration and admission are two writes, in order - a registration
+   * that succeeds but whose admit then fails still leaves a real, findable patient record; it is
+   * never silently discarded. */
+  function admitNew() {
+    var t = st.admitTarget; if (!t) return;
+    var icuEl = document.getElementById("wAdmitIcu");
+    if (icuEl) st.admitAsIcu = !!icuEl.checked;
+    if (!(G.SMD_PATIENTREG && G.SMD_PATIENTREG.open)) { st.err = "Registration is unavailable on this build."; paint(); return; }
+    G.SMD_PATIENTREG.open({
+      submit: function (payload) { return apiPost("/patient/register", Object.assign({ orgId: st.orgId }, payload)); },
+      onAdded: function (r) { if (r && r.mrn) doAdmit(r.mrn); },
+    });
+  }
+
+  // ---- emergency department ----------------------------------------------------------------
+  function loadEd() {
+    st.busy = true; st.view = "ed"; st.edErr = ""; paint();
+    return apiGet("/ward/ed-list?orgId=" + encodeURIComponent(st.orgId))
+      .then(function (r) {
+        st.busy = false;
+        if (r && r.ok) st.ed = r; else st.edErr = (r && (r.detail || r.message || r.error)) || "Could not load the ED board.";
+        paint();
+      })
+      .catch(function () { st.busy = false; st.edErr = "Could not reach the ED."; paint(); });
+  }
+  function edMrnLookup() {
+    var mrn = val("wEdMrn");
+    if (!mrn) { st.edMrnLookupErr = "Enter an MRN."; st.edMrnLookup = null; paint(); return; }
+    st.busy = true; st.edMrnLookupErr = ""; st.edMrnLookup = null; paint();
+    apiGet("/patient/get?orgId=" + encodeURIComponent(st.orgId) + "&mrn=" + encodeURIComponent(mrn))
+      .then(function (r) {
+        st.busy = false;
+        if (r && r.ok && r.patient) st.edMrnLookup = Object.assign({ mrn: mrn }, r.patient);
+        else st.edMrnLookupErr = "No patient found with that MRN.";
+        paint();
+      })
+      .catch(function () { st.busy = false; st.edMrnLookupErr = "Could not look up that MRN."; paint(); });
+  }
+  function edArrive(arrival) {
+    st.busy = true; paint();
+    apiPost("/ward/ed-arrival", { orgId: st.orgId, arrival: arrival })
+      .then(function (r) {
+        if (settle(r, r && r.written ? "Arrived." : "Already arrived.")) {
+          st.edArrivalOpen = false; st.edMrnLookup = null; loadEd();
+        } else paint();
+      })
+      .catch(function () { st.busy = false; st.err = "Could not record the arrival."; paint(); });
+  }
+  function edArriveKnown() { if (st.edMrnLookup) edArrive({ mrn: st.edMrnLookup.mrn }); }
+  function edArriveUnknown() {
+    var sex = val("wEdSex"), cc = val("wEdUnkCc");
+    edArrive({ unknown: { sex: sex }, chiefComplaint: cc || undefined });
+  }
+  function recordTriage() {
+    var s = st.sel; if (!s) return;
+    var acuity = val("wTriageAcuity");
+    if (!acuity) { st.err = "Choose an acuity level."; paint(); return; }
+    st.busy = true; paint();
+    apiPost("/ward/ed-triage", { orgId: st.orgId, encounterId: s.encounterId, acuity: Number(acuity) })
+      .then(function (r) {
+        if (settle(r, "Triaged.")) { s.acuity = Number(acuity); s.triagedAt = new Date().toISOString(); paint(); }
+        else paint();
+      })
+      .catch(function () { st.busy = false; st.err = "Could not record triage."; paint(); });
+  }
+  function loadResus() {
+    var s = st.sel; if (!s) return Promise.resolve();
+    return apiGet("/ward/resus?orgId=" + encodeURIComponent(st.orgId) + "&patientId=" + encodeURIComponent(s.patientId))
+      .then(function (r) { if (r && r.ok) st.resusBundles = r.bundles; paint(); })
+      .catch(function () {});
+  }
+  function resusStart() {
+    var s = st.sel; if (!s) return;
+    var code = val("wResusCode");
+    st.busy = true; paint();
+    apiPost("/ward/resus-start", { orgId: st.orgId, patientId: s.patientId, encounterId: s.encounterId, code: code })
+      .then(function (r) { if (settle(r, "Bundle started.")) loadResus(); else paint(); })
+      .catch(function () { st.busy = false; st.err = "Could not start the bundle."; paint(); });
+  }
+  function resusMark(bundleId, key) {
+    var event = "";
+    try { event = G.prompt("What actually happened (e.g. resulted, collected, administered)?") || ""; } catch (e) { return; }
+    if (!event.trim()) { st.err = "Say what actually happened - ordering a thing is not doing it."; paint(); return; }
+    st.busy = true; paint();
+    apiPost("/ward/resus-mark", { orgId: st.orgId, bundleId: bundleId, key: key, event: event.trim() })
+      .then(function (r) { if (settle(r, "Recorded.")) loadResus(); else paint(); })
+      .catch(function () { st.busy = false; st.err = "Could not mark that element."; paint(); });
+  }
+  function resusVoid(bundleId) {
+    var reason = ""; try { reason = G.prompt("Why is this bundle being voided?") || ""; } catch (e) { return; }
+    if (!reason.trim()) { st.err = "Voiding a bundle needs a reason."; paint(); return; }
+    st.busy = true; paint();
+    apiPost("/ward/resus-void", { orgId: st.orgId, bundleId: bundleId, reason: reason.trim() })
+      .then(function (r) { if (settle(r, "Voided.")) loadResus(); else paint(); })
+      .catch(function () { st.busy = false; st.err = "Could not void the bundle."; paint(); });
+  }
+  // ---- ICU device association (HAZ-DEV-01) --------------------------------------------------
+  function loadDevices() {
+    var s = st.sel; if (!s) return Promise.resolve();
+    return apiGet("/ward/device-list?orgId=" + encodeURIComponent(st.orgId) + "&patientId=" + encodeURIComponent(s.patientId))
+      .then(function (r) { if (r && r.ok) st.devices = r.devices; paint(); })
+      .catch(function () {});
+  }
+  function deviceAssociate() {
+    var s = st.sel; if (!s) return;
+    var deviceId = val("wDevId"), assetTag = val("wDevTag"), wristband = val("wDevWrist");
+    if (!deviceId || !assetTag || !wristband) { st.err = "Scan the device's asset tag and the patient's wristband, and give the device an ID."; paint(); return; }
+    st.busy = true; paint();
+    apiPost("/ward/device-associate", {
+      orgId: st.orgId,
+      association: {
+        // The server looks up this patient's own MRN itself and checks the scanned wristband
+        // against IT - it never trusts an mrn/wristbandBarcode value sent from here.
+        device: { deviceId: deviceId, assetTag: assetTag },
+        patient: { id: s.patientId },
+        encounterId: s.encounterId, scannedWristband: wristband, scannedAssetTag: assetTag,
+      },
+    })
+      .then(function (r) {
+        if (r && !r.ok && r.error === "WRISTBAND_MISMATCH") { st.busy = false; st.err = "That wristband does not match this patient."; paint(); return; }
+        if (r && !r.ok && r.error === "ASSET_TAG_MISMATCH") { st.busy = false; st.err = "That asset tag does not match the device ID entered."; paint(); return; }
+        if (settle(r, "Device associated.")) loadDevices(); else paint();
+      })
+      .catch(function () { st.busy = false; st.err = "Could not associate the device."; paint(); });
+  }
+  function deviceDissociate(deviceId) {
+    st.busy = true; paint();
+    apiPost("/ward/device-dissociate", { orgId: st.orgId, deviceId: deviceId, reason: "removed from patient" })
+      .then(function (r) { if (settle(r, "Device removed.")) loadDevices(); else paint(); })
+      .catch(function () { st.busy = false; st.err = "Could not remove the device."; paint(); });
+  }
+  function edDispose(disposition, extra) {
+    var s = st.sel; if (!s) return;
+    st.busy = true; paint();
+    apiPost("/ward/ed-disposition", Object.assign({ orgId: st.orgId, encounterId: s.encounterId, disposition: disposition }, extra || {}))
+      .then(function (r) {
+        if (r && r.error === "bed_occupied") { st.busy = false; st.err = r.detail; paint(); return; }
+        if (settle(r, r && r.disposition ? "Disposition: " + r.disposition + "." : "Already closed.")) { st.sel = null; st.view = "ed"; loadEd(); }
+        else paint();
+      })
+      .catch(function () { st.busy = false; st.err = "Could not record the disposition."; paint(); });
+  }
+  function edDispositionHome(disposition) {
+    var reason = ""; try { reason = G.prompt("Reason for this disposition (optional):") || ""; } catch (e) {}
+    edDispose(disposition, reason.trim() ? { reason: reason.trim() } : {});
+  }
+  /* Admitting an ED patient reuses the SAME bed board an inpatient admission uses - the disposition
+   * itself fires only once a real bed is picked from it, exactly as any other admission does. */
+  function edDispositionAdmit() {
+    var s = st.sel; if (!s) return;
+    st.edAdmitPending = true;
+    loadBoard();
+  }
+
   /* A transfer, from the patient's own chart. The refusal a busy bed produces is the important part
    * of this flow: the server names the occupant, and that is shown as-is rather than collapsed into
    * "could not transfer", because "bed 12 already has someone in it" is what the ward has to act on. */
@@ -809,6 +1402,73 @@
         paint();
       })
       .catch(function () { st.busy = false; st.err = "Could not load the round."; paint(); });
+  }
+  /* Prescribing writes a MedicationOrder through the SAME door the round already reads from; the
+   * refusal - formulary, restricted, incomplete - is the server's own and shown verbatim, exactly
+   * like every other refusal on this screen. Nothing about the dose is computed here. */
+  function orderMedication() {
+    var s = st.sel; if (!s) return;
+    var drug = val("wMoDrug"), value = val("wMoValue"), unit = val("wMoUnit"), route = val("wMoRoute"), frequency = val("wMoFreq");
+    if (!drug || !value || !unit) { st.err = "Drug, dose and unit are required."; paint(); return; }
+    st.busy = true; paint();
+    apiPost("/ward/medication-order", {
+      orgId: st.orgId,
+      order: { patientId: s.patientId, encounterId: s.encounterId, drug: drug, dose: { value: value, unit: unit }, route: route || undefined, frequency: frequency || undefined },
+    }).then(function (r) {
+      if (settle(r, r && r.written ? "Prescribed " + drug + "." : null)) {
+        ["wMoDrug", "wMoValue", "wMoUnit", "wMoRoute", "wMoFreq"].forEach(function (id) { var el = document.getElementById(id); if (el) el.value = ""; });
+        loadRound();
+      } else paint();
+    }).catch(function () { st.busy = false; st.err = "Could not place the order."; paint(); });
+  }
+  /* Ordering an investigation, and reloading the two worklists it now shows up on: the collection
+   * board (has it been taken yet) and pending-tests (has it been reported yet). */
+  function loadInvestigations() {
+    var s = st.sel; if (!s) return Promise.resolve();
+    var q = "orgId=" + encodeURIComponent(st.orgId) + "&patientId=" + encodeURIComponent(s.patientId);
+    return Promise.all([
+      apiGet("/ward/collections?" + q), apiGet("/ward/pending-tests?" + q),
+      apiGet("/ward/fhir?" + q.replace("patientId=", "patient=") + "&_type=DiagnosticReport"),
+    ]).then(function (rs) {
+      st.investigations = (rs[0] && rs[0].ok) ? rs[0] : null;
+      if (rs[1] && rs[1].ok) st.investigations = Object.assign({}, st.investigations, { pending: rs[1].pending });
+      var bundle = rs[2];
+      st.results = (bundle && bundle.entry ? bundle.entry.map(function (e) { return e.resource; }).filter(Boolean) : [])
+        .map(function (d) {
+          return { display: (d.code && (d.code.text || (d.code.coding && d.code.coding[0] && d.code.coding[0].display))) || "Result",
+            status: d.status, conclusion: d.conclusion, reportedAt: d.effectiveDateTime };
+        });
+      paint();
+    }).catch(function () { paint(); });
+  }
+  function orderInvestigation() {
+    var s = st.sel; if (!s) return;
+    var display = val("wInvCode"), category = val("wInvCat"), priority = val("wInvPri"), reason = val("wInvReason");
+    if (!display) { st.err = "Name the test."; paint(); return; }
+    st.busy = true; paint();
+    apiPost("/ward/investigation", {
+      orgId: st.orgId, encounterId: s.encounterId, display: display, code: display, category: category, priority: priority, reason: reason || undefined,
+    }).then(function (r) {
+      if (settle(r, r && r.written ? "Ordered " + display + "." : null)) {
+        ["wInvCode", "wInvReason"].forEach(function (id) { var el = document.getElementById(id); if (el) el.value = ""; });
+        loadInvestigations();
+      } else paint();
+    }).catch(function () { st.busy = false; st.err = "Could not order that."; paint(); });
+  }
+  /* The flowsheet and NEWS2/PEWS are READ from the same vitals this chart already records - no
+   * second write path. A failure to load either is silent on the card itself (it says "loading"
+   * indefinitely rather than throwing a banner over the whole chart for a secondary panel). */
+  function loadFlowsheet() {
+    var s = st.sel; if (!s) return Promise.resolve();
+    return apiGet("/ward/flowsheet?orgId=" + encodeURIComponent(st.orgId) + "&patientId=" + encodeURIComponent(s.patientId) + "&hours=24")
+      .then(function (r) { if (r && r.ok) st.flowsheet = r.grid; paint(); })
+      .catch(function () {});
+  }
+  function loadNews2() {
+    var s = st.sel; if (!s) return Promise.resolve();
+    return apiGet("/ward/news2?orgId=" + encodeURIComponent(st.orgId) + "&patientId=" + encodeURIComponent(s.patientId))
+      .then(function (r) { if (r && r.ok) st.news2 = r; paint(); })
+      .catch(function () {});
   }
   /* Asserting a diagnosis. The screen carries the words and, if the clinician has one, the code; it
    * never derives a code from the words. An uncoded diagnosis is recorded as text and the server says
@@ -966,6 +1626,35 @@
       .then(function (r) { if (settle(r, r && r.note)) loadCosigns(); else paint(); })
       .catch(function () { st.busy = false; st.err = "Could not submit the note."; paint(); });
   }
+  /* Unlike the cosign queue, a failure here is NOT silent: held clinical data that cannot be listed
+   * must not look like nothing is held. The card says it could not load. */
+  function loadExceptions() {
+    return apiGet("/ward/fhir-exceptions?orgId=" + encodeURIComponent(st.orgId))
+      .then(function (r) {
+        if (r && r.ok) { st.xchg = r; st.xchgErr = ""; }
+        else st.xchgErr = (r && (r.detail || r.message || r.error)) ? "Could not load the exchange queue: " + (r.detail || r.message || r.error) : "Could not load the exchange queue.";
+        paint();
+      })
+      .catch(function () { st.xchgErr = "Could not reach the exchange queue."; paint(); });
+  }
+  function decideException(id) {
+    if (!id) return;
+    var resolution = val("wxR-" + id), why = val("wxW-" + id);
+    var picked = null;
+    try { var el = document.querySelector('input[name="wxP-' + id + '"]:checked'); picked = el ? String(el.value || "") : null; } catch (e) {}
+    var localPatientId = picked || val("wxPid-" + id);
+    if (!why) { st.err = "A reason is required to decide what happens to a held message."; paint(); return; }
+    if (!resolution) { st.err = "Choose a decision before deciding."; paint(); return; }
+    if (resolution === "link" && !localPatientId) { st.err = "A link needs the local patient it links to."; paint(); return; }
+    st.busy = true; paint();
+    var body = { orgId: st.orgId, exceptionId: id, resolution: resolution, reason: why };
+    if (resolution === "link") body.localPatientId = localPatientId;
+    apiPost("/ward/fhir-exception-resolve", body)
+      // The server's own sentence: what was filed, or why not. Never paraphrased into "done".
+      .then(function (r) { if (settle(r, r && (r.note || (r.written != null ? "Decided: " + r.resolution + ", " + r.written + " record" + (r.written === 1 ? "" : "s") + " filed." : "Decided.")))) loadExceptions(); else paint(); })
+      .catch(function () { st.busy = false; st.err = "Could not reach the exchange queue."; paint(); });
+  }
+
   function cosign(id) {
     if (!id) return;
     st.busy = true; paint();
@@ -1067,18 +1756,66 @@
        * throwing the selection away - and the copy itself is always dropped, because a page with
        * one patient's diagnoses left on screen is how the next person gets handed the wrong one. */
       if (st.view === "pcopy") { st.view = "chart"; st.pcopy = null; paint(); return; }
-      st.view = "list"; st.sel = null; st.due = []; st.problems = []; st.outbox = []; st.downtime = null; st.pcopy = null; paint(); return;
+      // Picking a bed to admit an ED patient opens the SAME bed board a fresh admission uses;
+      // backing out of it returns to that patient's ED chart, not the ward list, and drops the
+      // pending admit rather than leaving it to fire on some later, unrelated bed pick.
+      if (st.view === "board" && st.edAdmitPending) { st.edAdmitPending = false; st.board = null; st.admitTarget = null; st.view = "chart"; paint(); return; }
+      st.view = "list"; st.sel = null; st.due = []; st.problems = []; st.outbox = []; st.downtime = null; st.pcopy = null;
+      st.board = null; st.admitTarget = null; st.mrnLookup = null; st.mrnLookupErr = ""; st.edAdmitPending = false;
+      st.flowsheet = null; st.news2 = null; st.investigations = null; st.results = null; st.resusBundles = null;
+      st.ed = null; st.edArrivalOpen = false; st.edMrnLookup = null; st.edMrnLookupErr = "";
+      paint(); return;
     }
+    if (cmd === "board") { loadBoard(); return; }
+    if (cmd === "unpickbed") { st.admitTarget = null; st.mrnLookup = null; st.mrnLookupErr = ""; paint(); return; }
+    if (cmd === "pickbed") { var pb = arg.indexOf("|"); if (pb > 0) pickBed(arg.slice(0, pb), arg.slice(pb + 1)); return; }
+    if (cmd === "mrnlookup") { mrnLookup(); return; }
+    if (cmd === "admitconfirm") { admitConfirm(); return; }
+    if (cmd === "admitnew") { admitNew(); return; }
+    if (cmd === "medorder") { orderMedication(); return; }
+    if (cmd === "investigation") { orderInvestigation(); return; }
+    if (cmd === "investigations") { loadInvestigations(); return; }
+    if (cmd === "flowsheet") { loadFlowsheet(); loadNews2(); return; }
     if (cmd === "open") {
       var p = null;
       for (var j = 0; j < st.patients.length; j++) { if (st.patients[j].encounterId === arg) { p = st.patients[j]; break; } }
       if (!p) return;
       st.sel = p; st.view = "chart"; st.due = []; st.prn = []; st.unscheduled = []; st.problems = []; st.criticals = []; st.balance = null; st.outbox = [];
+      st.flowsheet = null; st.news2 = null; st.investigations = null; st.results = null;
+      st.err = ""; st.note = ""; st.refusal = null; st.devices = null;
+      defaultWindow();
+      st.noteTemplateId = ""; st.noteResult = null;
+      paint(); loadChart(); loadRound(); loadBalance(); loadOutbox(); loadTemplates(); loadFlowsheet(); loadNews2(); loadInvestigations();
+      if (p.class === "ICU") loadDevices();
+      return;
+    }
+    if (cmd === "openEd") {
+      var pe = null;
+      for (var k2 = 0; k2 < ((st.ed && st.ed.patients) || []).length; k2++) { if (st.ed.patients[k2].encounterId === arg) { pe = st.ed.patients[k2]; break; } }
+      if (!pe) return;
+      st.sel = Object.assign({ class: "ED" }, pe); st.view = "chart"; st.due = []; st.prn = []; st.unscheduled = []; st.problems = []; st.criticals = []; st.balance = null; st.outbox = [];
+      st.flowsheet = null; st.news2 = null; st.investigations = null; st.results = null; st.resusBundles = null;
       st.err = ""; st.note = ""; st.refusal = null;
       defaultWindow();
       st.noteTemplateId = ""; st.noteResult = null;
-      paint(); loadChart(); loadRound(); loadBalance(); loadOutbox(); loadTemplates(); return;
+      paint(); loadChart(); loadRound(); loadBalance(); loadOutbox(); loadTemplates(); loadFlowsheet(); loadNews2(); loadInvestigations(); loadResus(); return;
     }
+    if (cmd === "edboard") { loadEd(); return; }
+    if (cmd === "edarrivalopen") { st.edArrivalOpen = true; st.edMrnLookup = null; st.edMrnLookupErr = ""; paint(); return; }
+    if (cmd === "edarrivalclose") { st.edArrivalOpen = false; st.edMrnLookup = null; st.edMrnLookupErr = ""; paint(); return; }
+    if (cmd === "edmrnlookup") { edMrnLookup(); return; }
+    if (cmd === "edarriveknown") { edArriveKnown(); return; }
+    if (cmd === "edarriveunknown") { edArriveUnknown(); return; }
+    if (cmd === "triage") { recordTriage(); return; }
+    if (cmd === "resusload") { loadResus(); return; }
+    if (cmd === "resusstart") { resusStart(); return; }
+    if (cmd === "resusmark") { var rm = arg.indexOf("|"); if (rm > 0) resusMark(arg.slice(0, rm), arg.slice(rm + 1)); return; }
+    if (cmd === "resusvoid") { resusVoid(arg); return; }
+    if (cmd === "deviceload") { loadDevices(); return; }
+    if (cmd === "deviceassociate") { deviceAssociate(); return; }
+    if (cmd === "devicedissociate") { deviceDissociate(arg); return; }
+    if (cmd === "dispositionadmit") { edDispositionAdmit(); return; }
+    if (cmd === "disposition") { edDispositionHome(arg); return; }
     if (cmd === "summary") {
       var sel = st.sel; if (!sel) return;
       if (!(G.DISCHARGE && G.DISCHARGE.open)) { st.err = "The discharge summary is unavailable on this build."; paint(); return; }
@@ -1094,6 +1831,8 @@
     if (cmd === "mar") { var k = arg.indexOf("|"); if (k > 0) marAction(arg.slice(0, k), Number(arg.slice(k + 1))); return; }
     if (cmd === "outbox") { loadOutbox(); return; }
     if (cmd === "cosigns") { loadCosigns(); return; }
+    if (cmd === "xchgs") { loadExceptions(); return; }
+    if (cmd === "xchg") { decideException(arg); return; }
     if (cmd === "quality") { loadQuality(); return; }
     if (cmd === "overrides") { loadOverrides(); return; }
     if (cmd === "problem") { addProblem(); return; }
@@ -1112,9 +1851,19 @@
     if (cmd === "txr") { resolveTx(arg); return; }
   }
 
+  /* The remembered workplace, exactly as queue.js's own workplace router writes it
+   * ("wardsynq:<hospitalId>" in the SAME localStorage key) - reused, not re-derived, so this
+   * screen and the OPD desk can never disagree about which hospital is signed in. */
+  function rememberedOrgId() {
+    try {
+      var wp = localStorage.getItem("smd_opd_workplace") || "";
+      if (wp.indexOf("wardsynq:") === 0) return wp.slice(9);
+    } catch (e) {}
+    return "";
+  }
   function open(opts) {
     opts = opts || {};
-    st.orgId = opts.orgId || st.orgId || "";
+    st.orgId = opts.orgId || st.orgId || rememberedOrgId();
     if (!st.orgId) { try { G.toast && G.toast("The ward needs a hospital."); } catch (e) {} return; }
     st.view = "list"; st.sel = null; st.loaded = false; st.err = ""; st.note = ""; st.refusal = null;
     var el = root(); el.classList.add("on");

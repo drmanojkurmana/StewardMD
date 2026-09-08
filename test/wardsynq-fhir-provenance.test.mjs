@@ -75,16 +75,17 @@ test("IDENTIFIERS carry a system a receiver can match on, and a type they can fi
   assert.equal(identifier("mrn", ""), undefined);
 
   const p = toFhir({ resourceType: "Patient", id: "p1", version: 1, mrn: "MRN-001", name: "T", dob: "1980-01-01", identifiers: [{ system: "ABHA", value: "1" }], meta: {}, writtenBy: { at: "2026-09-08T00:00:00.000Z" } });
-  assert.equal(p.identifier.length, 2);
+  assert.equal(p.identifier.length, 3, "MRN, ABHA, and the canonical record id");
   assert.equal(p.identifier[0].type.coding[0].code, "MR");
   assert.equal(p.identifier[1].type.coding[0].code, "NI");
+  assert.deepEqual(p.identifier[2], { system: "urn:stewardmd:record-id", value: "p1" });
 });
 
 test("PROVENANCE is derived from the stamp on every version and never makes an AI look like its clinician", () => {
   const human = { resourceType: "Observation", id: "o1", version: 1, patientId: "p", meta: { recordedAt: "2026-09-08T10:00:00.000Z", source: { system: "wardsynq-native" } }, writtenBy: { id: "fb:dr-a", kind: "human", tier: "execute", at: "2026-09-08T10:00:00.500Z" } };
   const pr = fhirProvenance(human);
   assert.equal(pr.resourceType, "Provenance");
-  assert.equal(pr.id, "Observation-o1-v1");
+  assert.equal(pr.id, "ob-o1-v1", "a type code, so a Provenance id fits R4's 64 characters on top of any resource id");
   assert.deepEqual(pr.target, [{ reference: "Observation/o1/_history/1" }], "a VERSIONED reference: provenance is per version");
   assert.equal(pr.recorded, "2026-09-08T10:00:00.500Z");
   assert.equal(pr.activity.coding[0].code, "CREATE");
@@ -108,9 +109,10 @@ test("PROVENANCE is derived from the stamp on every version and never makes an A
   assert.equal(pi.entity[0].what.identifier.value, "lab-77");
 
   // The id round-trips, and one for a type we do not export is nothing.
-  assert.deepEqual(parseProvenanceId("Observation-o1-v1"), { fhirType: "Observation", canonical: "Observation", id: "o1", version: 1 });
-  assert.deepEqual(parseProvenanceId("MedicationRequest-wsq-rx-1-v3"), { fhirType: "MedicationRequest", canonical: "MedicationOrder", id: "wsq-rx-1", version: 3 });
-  assert.equal(parseProvenanceId("Practitioner-x-v1"), null);
+  assert.deepEqual(parseProvenanceId("ob-o1-v1"), { fhirType: "Observation", fhirId: "o1", version: 1 });
+  assert.deepEqual(parseProvenanceId("mr-wsq-rx-1-v3"), { fhirType: "MedicationRequest", fhirId: "wsq-rx-1", version: 3 });
+  assert.equal(parseProvenanceId("zz-x-v1"), null);
+  assert.equal(parseProvenanceId("Observation-o1-v1"), null, "the old long form is gone: it could not fit in 64 characters");
   assert.equal(fhirProvenance({ resourceType: "Claim", id: "c" }), null);
 });
 
@@ -158,8 +160,8 @@ test("the CapabilityStatement declares Provenance and Consent exactly as impleme
   assert.equal(parseSearch("Provenance", "target=Encounter/e1").problems.length, 0);
   assert.deepEqual(parseSearch("Provenance", "target=Encounter/e1").query.target, { type: "Encounter", id: "e1" });
   assert.equal(parseSearch("Provenance", "target=nonsense").problems[0].reason, "target must be Type/id");
-  assert.match(parseSearch("Observation", "target=Encounter/e1").problems[0].reason, /has no target/);
-  assert.deepEqual(parseSearch("Observation", "_revinclude=Provenance:target").query.revInclude, ["Provenance:target"]);
+  assert.match(parseSearch("Observation", "target=Encounter/e1").problems[0].reason, /not a search parameter/);
+  assert.deepEqual(parseSearch("Observation", "_revinclude=Provenance:target").query.revInclude.map((r) => r.key), ["Provenance:target"]);
   assert.equal(parseSearch("Provenance", "_revinclude=Provenance:target").problems.length, 1, "not on itself");
   assert.ok(declaredSearch("Consent").params.some((p) => p.name === "patient"));
 });

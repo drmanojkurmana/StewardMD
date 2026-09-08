@@ -1,0 +1,30 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>home.js: Inpatient Ward tile harness</title>
+<style>html,body{margin:0;height:100%}</style>
+</head><body>
+<script>
+/* The REAL home.js booting for real: the smd_wardsynq flag is set in localStorage BEFORE
+ * wardsynq-flags.js loads (so SMD_WARDSYNQ_FLAGS.get("smd_wardsynq") resolves truthy), window.WARD
+ * is stubbed so the real ACT.wardsynq handler in home.js has something to call, and home.js itself
+ * is loaded unmodified. home.js's start() calls build() synchronously (no auth/session gate), which
+ * appends #homeV2 with homeV4Markup() (tile included/excluded per the flag at build time) and wires
+ * the real delegated data-act click handler straight to ACT[a]().
+ * URL query ?off=1 skips setting the flag, to prove the tile is absent when the flag is off. */
+try {
+  if (/[?&]off=1\b/.test(location.search)) localStorage.removeItem("smd_wardsynq");
+  else localStorage.setItem("smd_wardsynq", "1");
+} catch (e) {}
+// The wardsynq tile lives in homeV4Markup() (tileV4). redesignNavOn() defaults ON and would render
+// homeRedesignMarkup() instead, which has no wardsynq tile at all - so pin the real, still-shipping
+// v4 home layout the same way a user opting out of the redesign nav would (localStorage, DEFAULT ON
+// per redesignNavOn() in home.js).
+try { localStorage.setItem("smd_redesign_nav", "0"); } catch (e) {}
+window.WARD = { open: function (opts) { window.__wardOpened = opts || true; } };
+</script>
+<script src="../wardsynq-flags.js"></script>
+<script src="../home.js"></script>
+<script>
+window.__ready = function () { return !!document.getElementById("homeV2"); };
+</script>
+</body></html>

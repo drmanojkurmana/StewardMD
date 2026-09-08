@@ -114,6 +114,35 @@ const INSTRUCTION_TYPES = Object.freeze([
  */
 const HUMAN_ORIGINATED = Object.freeze(["PrescriptionTransmission"]);
 
+/**
+ * THE ONE NARROW GRANT the comment above said would be needed, made explicit rather than the rule
+ * silently widened (2026-09-08, inbound exchange).
+ *
+ * A dose ANOTHER hospital gave is a record of fact, like an encounter or a laboratory value, and
+ * filing it is exactly what a feed is for. It is a record of fact ONLY when every one of these
+ * holds, and each is a distinct way the same row could instead be an instruction to this ward:
+ *   - the actor is an ADAPTER. Never an AI, whatever it runs on behalf of.
+ *   - the row is stamped from an external source (meta.source.system, not wardsynq-native).
+ *   - its status is past tense: administered, cancelled or held. Never ordered/scanned, which are
+ *     the states this eMAR acts on next.
+ *   - the order it answers is STRUCTURALLY not this hospital's: an id the same source issued, or the
+ *     explicit external:<system> marker. Every eMAR read that counts or schedules a dose keys on
+ *     orderId, so a row that can never name a native order can never make a due dose look given.
+ *   - whoever gave it is named as external. A feed cannot say a nurse here did it.
+ */
+const EXTERNAL_DOSE_STATES = Object.freeze(["administered", "cancelled", "held"]);
+function isExternalDoseRecord(actor, entity) {
+  if (!actor || actor.kind !== KIND.ADAPTER) return false;
+  if (!entity || entity.resourceType !== "MedicationAdministration") return false;
+  const system = entity.meta && entity.meta.source && entity.meta.source.system;
+  if (!system || system === "wardsynq-native") return false;
+  if (!EXTERNAL_DOSE_STATES.includes(entity.status)) return false;
+  const orderId = String(entity.orderId || "");
+  if (!(orderId.startsWith(`${system}-`) || orderId.startsWith(`external:${system}`))) return false;
+  if (!String(entity.administeredBy || "").startsWith(`external:${system}`)) return false;
+  return true;
+}
+
 class GovernanceError extends Error {
   /**
    * Carries its reasons as DATA, not only flattened into the message.
@@ -254,7 +283,7 @@ function authoriseWrite(actor, entity, ctx) {
   //    Scoped to instruction types rather than to any non-draft status: see INSTRUCTION_TYPES for
   //    why, and for the dangling-encounter defect that scoping it wrongly produced.
   const isInstruction = INSTRUCTION_TYPES.includes(entity.resourceType);
-  if (claimsActive && isInstruction && !can(actor, TIER.EXECUTE)) {
+  if (claimsActive && isInstruction && !can(actor, TIER.EXECUTE) && !isExternalDoseRecord(actor, entity)) {
     reasons.push({
       code: "EXECUTE_DENIED",
       message: `${actor.kind} actor ${actor.id} holds ${actor.tier} and cannot commit a ${entity.resourceType} with status "${entity.status}"`,
@@ -400,6 +429,45 @@ class GovernedStore {
   }
 
   /**
+   * Several writes, ALL OR NOTHING. Every entity is authorised before any is staged, so one refusal
+   * refuses the lot (and is recorded and announced exactly as a single refusal is); then every
+   * stamped record goes to the store in ONE transaction, which the backend commits as one append.
+   * A FHIR transaction Bundle is the caller this exists for: a partner's admission whose potassium
+   * lands while its encounter is refused is half a story on a chart.
+   */
+  async putMany(actor, entities, ctx) {
+    const list = Array.isArray(entities) ? entities : [];
+    const denials = [];
+    for (const entity of list) {
+      const verdict = authoriseWrite(actor, entity, ctx);
+      if (!verdict.allowed) denials.push({ resourceType: entity ? entity.resourceType : null, id: entity ? entity.id : null, patientId: entity ? entity.patientId : null, reasons: verdict.reasons });
+    }
+    if (denials.length) {
+      for (const denial of denials) {
+        const d = { at: new Date().toISOString(), actorId: actor ? actor.id : null, actorKind: actor ? actor.kind : null, resourceType: denial.resourceType, patientId: denial.patientId, reasons: denial.reasons };
+        this.denials.push(d);
+        if (this.onDenied) this.onDenied(d);
+        if (this.bus) await this.bus.emit("governance.denied", d);
+      }
+      const first = denials[0].reasons[0];
+      throw new GovernanceError(denials.map((d) => `${d.resourceType}/${d.id}: ${d.reasons.map((r) => r.message).join("; ")}`).join(" | "), first.code, denials.flatMap((d) => d.reasons.map((r) => ({ ...r, resourceType: d.resourceType, id: d.id }))));
+    }
+    const at = new Date().toISOString();
+    const stamped = list.map((entity) => ({
+      ...entity,
+      writtenBy: { id: actor.id, kind: actor.kind, tier: actor.tier, at, ...(actor.onBehalfOf ? { onBehalfOf: actor.onBehalfOf } : {}) },
+      ...(actor.kind === KIND.AI ? { aiDrafted: true } : {}),
+    }));
+    const saved = await this._store.transaction(async (tx) => {
+      const out = [];
+      for (const s of stamped) out.push(await tx.put(s));
+      return out;
+    });
+    if (this.bus) for (const entity of list) await this.bus.emit("governance.written", { actorId: actor.id, kind: actor.kind, resourceType: entity.resourceType });
+    return saved;
+  }
+
+  /**
    * A store-shaped handle bound to one actor but to NO chart, for machinery that legitimately spans
    * patients: reconciliation after an outage, a migration, a batch import.
    *
@@ -435,7 +503,7 @@ class GovernedStore {
 }
 
 export {
-  TIER, LADDER, KIND, CEILING, DEVICE_WRITABLE, INSTRUCTION_TYPES, HUMAN_ORIGINATED,
+  TIER, LADDER, KIND, CEILING, DEVICE_WRITABLE, INSTRUCTION_TYPES, HUMAN_ORIGINATED, EXTERNAL_DOSE_STATES, isExternalDoseRecord,
   GovernanceError, GovernedStore,
   makeActor, can, canRead, inScope, effectiveTier, authoriseWrite, rank,
 };

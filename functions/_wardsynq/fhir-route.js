@@ -6,7 +6,7 @@
  * WHO is asking - it is handed a context that already carries the actor or the deps to resolve one.
  */
 
-import { patientEverything, readResource, capabilityStatement, searchType, historyOf, vread, operationOutcome, provenanceRead, provenanceSearch } from "./fhir.js";
+import { patientEverything, readResource, capabilityStatement, searchType, historyOf, vread, operationOutcome, provenanceRead, provenanceSearch, validateOperation, validateCodeOperation } from "./fhir.js";
 
 const str = (v) => (v == null ? "" : String(v).trim());
 
@@ -35,9 +35,11 @@ async function dispatchRead(request, env, parts, url, fctx, prefer) {
   const strip = () => { const p = new URLSearchParams(url.searchParams); p.delete("orgId"); return p; };
   const rawQuery = url.search.replace(/^\?/, "");
 
-  if (fType === "metadata") return { obj: capabilityStatement({ date: new Date().toISOString(), version: "wardsynq-1", smart: fctx.smart || null }), status: 200 };
+  const lenient = /handling=lenient/i.test(str(prefer));
+
+  if (fType === "metadata") return { obj: capabilityStatement({ date: new Date().toISOString(), version: "wardsynq-1", smart: fctx.smart || null, inbound: fctx.inbound === true }), status: 200 };
   if (!fType) {
-    const r = await patientEverything(request, env, { ...fctx, patientId: url.searchParams.get("patient") || url.searchParams.get("patientId") || "", types: (url.searchParams.get("_type") || "").split(",").map((t) => t.trim()).filter(Boolean) });
+    const r = await patientEverything(request, env, { ...fctx, patientId: url.searchParams.get("patient") || url.searchParams.get("patientId") || "", searchParams: strip(), rawQuery, lenient });
     return { obj: r.ok ? r.bundle : r.outcome, status: r.status };
   }
   if (fType === "Provenance") {
@@ -45,15 +47,35 @@ async function dispatchRead(request, env, parts, url, fctx, prefer) {
     return { obj: r.ok ? (r.resource || r.bundle) : r.outcome, status: r.status };
   }
   if (fType === "Patient" && fId && fOp === "$everything") {
-    const r = await patientEverything(request, env, { ...fctx, patientId: fId, types: [] });
+    const r = await patientEverything(request, env, { ...fctx, patientId: fId, searchParams: strip(), rawQuery, lenient });
     return { obj: r.ok ? r.bundle : r.outcome, status: r.status };
+  }
+  if (fType === "CodeSystem" && fId === "$validate-code") {
+    const r = await validateCodeOperation(request, env, { ...fctx, searchParams: strip() });
+    return { obj: r.ok ? r.parameters : r.outcome, status: r.status };
+  }
+  if (fId && fOp === "$validate") {
+    const r = await validateOperation(request, env, { ...fctx, type: fType, id: fId });
+    return { obj: r.outcome, status: r.status };
   }
   if (fId && fOp === "_history" && fVid) { const r = await vread(request, env, { ...fctx, type: fType, id: fId, versionId: fVid }); return { obj: r.ok ? r.resource : r.outcome, status: r.status }; }
   if (fId && fOp === "_history") { const r = await historyOf(request, env, { ...fctx, type: fType, id: fId }); return { obj: r.ok ? r.bundle : r.outcome, status: r.status }; }
   if (fId && fOp) return { obj: operationOutcome("error", "not-found", `no such operation: ${fOp}`), status: 404 };
-  if (fId) { const r = await readResource(request, env, { ...fctx, type: fType, id: fId }); return { obj: r.ok ? r.resource : r.outcome, status: r.status }; }
-  const r = await searchType(request, env, { ...fctx, type: fType, searchParams: strip(), rawQuery, lenient: /handling=lenient/i.test(str(prefer)) });
+  if (fId) { const r = await readResource(request, env, { ...fctx, type: fType, id: fId, searchParams: strip() }); return { obj: r.ok ? r.resource : r.outcome, status: r.status }; }
+  const r = await searchType(request, env, { ...fctx, type: fType, searchParams: strip(), rawQuery, lenient });
   return { obj: r.ok ? r.bundle : r.outcome, status: r.status };
 }
 
-export { fhirResponse, dispatchRead };
+/**
+ * Dispatches a POST that is an OPERATION rather than a write: `$validate` and `{Type}/$validate`.
+ * Returns null when the path is not an operation, so the caller can go on to its write handling.
+ * Validation never writes, so it needs neither the inbound flag nor a write capability.
+ */
+async function dispatchOperation(request, env, parts, body, fctx) {
+  const fType = parts[0] || "", fId = parts[1] || "";
+  if (fType === "$validate" && !fId) { const r = await validateOperation(request, env, { ...fctx, body }); return { obj: r.outcome, status: r.status }; }
+  if (fType && fId === "$validate" && !parts[2]) { const r = await validateOperation(request, env, { ...fctx, body, type: fType }); return { obj: r.outcome, status: r.status }; }
+  return null;
+}
+
+export { fhirResponse, dispatchRead, dispatchOperation };

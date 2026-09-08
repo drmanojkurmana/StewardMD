@@ -4901,3 +4901,33 @@ capture UI" gap, still open; what changed is that the free text already being co
 the safety check instead of going nowhere. Also unchanged: this only runs for wardsynq-native
 assessments, never GHIS/shadow tenants, and the check itself still never gates a prescription
 (unrelated to what changed here — that boundary was set in part 4 and nothing here touches it).
+
+## 2026-09-08 — Inbound FHIR: SCCM 1.1 (administrations, service requests, consents), and the one narrow governance grant
+
+**Decision.** SCCM gains three optional collections (`administrations`, `serviceRequests`, `consents`) and two
+optional references (`diagnosticReport.basedOn`, `medicationAdministration.request`) as an ADDITIVE minor,
+`1.0 -> 1.1`; `assertConsumable` still checks the major only and connectors may declare any `1.x`. The FHIR
+normaliser and the SCCM adapter map the new types; consent is mapped in `fhir-inbound.js` because
+`PatientConsent` is a governance record owned by `consent.js`, not a clinical entity the adapter builds.
+
+**What an imported row may never do.** A dose another hospital gave is filed as a `MedicationAdministration`
+whose `orderId` is the feed's own order (or `external:<system>:unreferenced`), `administeredBy` is
+`external:<system>[:name]`, and `meta.source.system` is the feed. An imported order is `draft`, requested by
+`external:<system>`. Every reader that could act on such a row asks `isExternalRecord()` (service.js):
+charge capture lists it under `notCharged` as `external_source` and never prices it; the collection worklist
+and the pending-results list omit it; result matching never matches it.
+
+**The governance grant.** `authoriseWrite` refused the dose: `MedicationAdministration` is an instruction
+type and a non-draft status needs EXECUTE, which an adapter cannot hold. The rule's own rationale says the
+intent is that a feed never ISSUES an instruction, while recording what already happened "is exactly what a
+hospital feed is for". Rather than widen the rule, a named grant `isExternalDoseRecord(actor, entity)` was
+added: an ADAPTER (never an AI) may write a `MedicationAdministration` whose `meta.source.system` is external,
+whose status is past tense (`administered|cancelled|held`), whose `orderId` is structurally not this
+hospital's (prefixed by the same source system, or the `external:<system>` marker) and whose `administeredBy`
+is external. Every eMAR read that counts or schedules a dose keys on `orderId`, so such a row can never make
+a due dose here look given. Each condition has a negative test in `test/wardsynq-actors.test.mjs`.
+**Reversible:** delete `isExternalDoseRecord` and its one call site; inbound administrations then hold as
+exceptions again. Owner may veto.
+
+**Also found by the new validator, fixed at the FHIR boundary:** a DiagnosticReport with no observations
+exported `result: []` (R4 ele-1 forbids an empty element); now omitted.

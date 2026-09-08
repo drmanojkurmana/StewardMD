@@ -38,7 +38,7 @@ test("well-formed CSV -> valid SCCM bundle with the right counts + PHI-free audi
   assert.equal(res.rowsParsed, 2);
   assert.equal(res.columns.length, 15);
   assert.equal(validateBundle(res.bundle).ok, true);
-  assert.equal(res.bundle.sccmVersion, "1.0");
+  assert.equal(res.bundle.sccmVersion, "1.1");
   assert.equal(res.bundle.patient.gender, "female");
   assert.equal(res.bundle.observations.length, 2);
   assert.equal(res.bundle.observations[0].value.value, 9.2);

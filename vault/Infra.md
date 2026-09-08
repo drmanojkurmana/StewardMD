@@ -121,3 +121,22 @@ Verified locally on 2026-09-06 with `wrangler pages dev . --binding WARDSYNQ_REC
 miniflare D1 (schemas + a seed applied with `--local`): the full route surface, atomic batch writes,
 409 on a lost race, idempotent replay, PHI-free audit. Remember `--remote` for the real database; the
 same wrangler-4 trap as the KV list.
+
+## WardSynQ FHIR / SMART — optional bindings and the id_token signing key (added 2026-09-08)
+
+All OFF by default; each is read only when bound, and the code says which store or key it used.
+
+- `WSQ_RL` — a Workers **rate-limit binding** (exact, cross-isolate). Preferred by `functions/_wardsynq/rate-limit.js`
+  when present; the caller's limit/window then document intent and the binding's own configuration counts.
+  For a Pages project this is bound in the dashboard (Functions > Bindings), not in `wrangler.toml`.
+- `WSQ_RL_KV` — a KV namespace for the rate limiter when no binding exists. KV is eventually consistent, so a
+  concurrent burst can under-count inside one window (windows are keyed by index, so nothing sticks or runs away).
+  Absent both, the limiter is per isolate and says so (`store: "memory"`).
+- `WSQ_TX_KV` — a KV namespace caching terminology-server answers (`CodeSystem/$validate-code`, 24 h; outages
+  are never cached) and registered SMART `jwksUri` key sets (1 h). Absent, both caches are per isolate.
+- `WSQ_SMART_SIGNING_JWK` — a **secret**: the hospital's ES256 private key as a JWK JSON string (`kty: "EC"`,
+  `crv: "P-256"`, `d`, and a `kid`). Signs SMART `id_token`s; the public half is served at
+  `/api/fhir/{orgId}/.well-known/jwks.json`. Without it `openid`/`fhirUser` are not offered and are dropped from
+  any request that asks, and the consent screen says so. Set with
+  `wrangler pages secret put WSQ_SMART_SIGNING_JWK --project-name stewardmd`. Generate with WebCrypto
+  (`generateKey ECDSA P-256`, `exportKey("jwk", privateKey)`), add a `kid`, never commit it.

@@ -267,6 +267,54 @@ object into a string constructor and refused every FHIR patient, and did not rec
 treated as a replay because idempotency keyed on the resource id. The last three were in code this
 session wrote.
 
+## FHIR R4: the fresh read-only audit (2026-09-08, after #961-#966; the 85 percent baseline above stands as history)
+
+Read from the code and the tests as they are on the six stacked branches, not from memory. The
+benchmark table's interoperability row was NOT changed by this audit. Every inbound and SMART
+capability below is still OFF by default (`wardsynq.fhir.inbound.enabled`, `wardsynq.fhir.smart.enabled`,
+`wardsynq.hl7.inbound.enabled` all absent; `CONNECT_FLAG`/`CONNECT_FHIR_FLAG` unset in wrangler.toml).
+
+| FHIR capability | Implemented | Tested | Production wired | Remaining gap |
+|---|---|---|---|---|
+| Full search grammar: per-type named params (status, category, identifier on every type, name, birthdate, gender, active, class, clinical-status, verification-status, criticality, intent, based-on, result, request, context, onset-date, recorded-date, issued, authored, effective-time, scope), comma OR / & AND, `:not` `:text` `:missing` `:exact` `:contains`, typed references, implicit code systems, chaining (one hop, fixed-target refs), `_has`, generic `_revinclude`, `_include`, `_summary` (true/text/data/count/false), `_elements` with SUBSETTED tag, `_count=0`, `_total`, `_sort` by any date/string/token param, accent-folded strings, paging with links, strict 400 / lenient in-bundle | yes | 17 pure + route | yes, staff door | offset paging (a declared ceiling, not a conformance gap); no `_include:iterate`, `_contained`, composite params (none declared) |
+| `Patient/$everything`: paged searchset, Patient first, `_since`, `_type`, `_count`, `_page`, `_summary`, `_elements`, `_total`; 404 for a patient not here; `start`/`end` named unsupported | yes | pure + route | yes | none material |
+| R4 conformance validation: structure (unknown elements are errors), cardinality, datatypes, primitive formats, choice types, required bindings with their HL7 systems, reference targets, invariants obs-6/7, ext-1, ele-1, pat-1, bdl-1/3/4/5/7/8/11/12; hospital-loaded profile constraints; `$validate` (POST body, Parameters, or GET stored) and inbound 422 whole-request; every export mapper validates clean | yes | 15 pure + route | yes | no implementation guide is shipped (US Core / NDHM profiles are the hospital's to load); a declared unknown profile is an information issue, never a pass |
+| Terminology validation service: seed (LOINC vitals/lab, HL7's own code systems), hospital code lists, external `$validate-code` server through the hardened fetch with a 3 s timeout and KV/memory cache; verified / recognised / unmapped / invalid; an outage never rejects; invalid codes filed verbatim and exported marked; `$validate-code` operation; `$validate` consults it | yes | pure + route (stubbed server) | yes; server and lists are hospital config | no code release is shipped, by design (the hospital names its server); KV cache is optional (`WSQ_TX_KV`) |
+| Conformant ids: canonical ids over 64 chars exported as `wsq-<sha256>` with the canonical id as an Identifier (`urn:stewardmd:record-id`), resolved back on every read path; Provenance ids fit | yes | pure (SHA-256 test vectors) + route | yes | resolution of a hashed id not seen by this isolate scans the compartment or the type pool (declared ceiling) |
+| Inbound MedicationAdministration, ServiceRequest, Consent through SCCM 1.1 (additive minor), honestly bounded: doses only in past-tense states, against the feed's own order, performed by an external party; orders draft and external; consents witnessed elsewhere, capacity never asserted; external rows never bill, never reach the collection worklist or pending results, never match a result here | yes | pure + governance negatives + route + round trip | behind inbound flag | the ONE narrow governance grant (`isExternalDoseRecord`) is recorded in Decisions.md and is the owner's to veto |
+| Atomic `transaction` Bundles (authorise all, one append), `batch` entry by entry, `If-None-Exist` header and per-entry (0/1/many), per-entry `If-Match`, DELETE named and refused, Bundle envelope validated (bdl-3), `Prefer: return=minimal`, CapabilityStatement declares create/update/conditional/transaction only on the clinician's door with inbound on | yes | pure + governance + route | behind inbound flag | conditional update by search is not offered (declared `conditionalUpdate: false`); GET entries in a batch are not offered |
+| SMART: consent screen (CSP, no script, single-use transaction bound to the clinician), EHR launch from the ward (`POST /ward/smart-launch`), standalone `launch/patient` by MRN, `patient/` scopes fenced by the read layer (get, history, compartment, roster, `$everything`), user/system scopes lift the fence per type, refresh tokens rotated with family revocation on reuse, OpenID `id_token` (ES256, `jwks.json`, `nonce`, `fhirUser` to the subject's own Practitioner), registered `jwksUri` for backend clients through the hardened fetch with cache and one refetch, `smart-configuration` derived from what exists | yes | 18 pure + route (7 flows) | `/api/fhir/{orgId}` deployed; behind smart flag; `WSQ_SMART_SIGNING_JWK` optional and documented | no symmetric confidential clients (`client_secret`; SMART v2 recommends asymmetric and this server offers only that); no dynamic client registration by design; no writes by design |
+| Rate limiting: Workers rate-limit binding first (exact), KV with indexed windows, memory per isolate, each named in the result | yes | pure + route | code paths deployed; `WSQ_RL` / `WSQ_RL_KV` bindings are the owner's to add (Infra.md) | none in code; the exact path needs the binding bound |
+| Exception / reconciliation UI: the ward card lists held messages with reason verbatim and in plain words, candidates, our conflicting record, only the decisions that fit, a required reason, refusals verbatim, unreadable never looks empty | yes | 3 pure render + a real headless-Chrome CDP run | yes (ward.js, ward17-xchg) | none |
+| Provenance, Consent export, identifiers, media types, ETag/vread/history, tenant isolation, malformed input, audit, round trip | yes (unchanged from the 85 percent audit) | pure + route | yes | Provenance `agent.who` is a display, not a Practitioner reference: WardSynQ holds no Practitioner resources (the SMART subject-only read is the one exception) |
+
+**Within the agreed WardSynQ FHIR R4 scope there is no material implementation gap left. Every
+item of the ten was built, tested at both levels, and left OFF by default.** The remaining lines
+in the last column are declared ceilings, deliberate designs, or owner-gated deployment steps
+(bindings and a secret), each stated in the code and in Infra.md. Two things are the owner's to
+decide, not this session's: the narrow governance grant that lets a feed file a dose another
+hospital gave (Decisions.md, reversible), and whether to bind `WSQ_RL` for exact rate limiting.
+
+### HL7 v2 gateway (BUILT 2026-09-08, after FHIR reached the agreed scope; OFF by default)
+
+Built exactly as the note below prescribed, with one refinement: the gateway does not copy the FHIR
+door's landing, it CALLS it. `ingestFhir` was split into its FHIR half and `landBundle`, and the HL7
+gateway (`functions/_wardsynq/hl7-inbound.js`) parses with Connect's hardened parser, checks the
+hospital's integration profile (`wardsynq.hl7.profile`: messages, required segments, sending
+applications, processing ids, keepRaw), normalises to SCCM 1.1 (`hl7-normalize.js`: PID-3
+repetitions with authority and type, PV1-19 visit number, PV1-3 location as sent, DG1, AL1, OBR/OBX
+with NM/SN/ST/CE values, OBX-8 flags carried never recomputed, OBX-11 D/W not filed), and lands
+through `landBundle` as one transaction. ADT A01/A02/A03/A04/A08 and ORU R01 are accepted; an A02
+or A03 versions the same visit (PV1-19) rather than forking it. ACK/NACK in ER7: AA filed or
+already processed, AE held (ERR names the exception) or refused for content, AR refused by the
+profile before content; HTTP 200 whenever an ACK could be built, 4xx only when it could not.
+Z-segments ride verbatim in the exception payload (the raw message) and in the optional
+`ExchangeMessage` receipt; nothing reads them. A held HL7 message is decided from the same ward
+card and re-driven through the HL7 door. The listener is HTTPS (`POST /api/queue/ward/hl7`,
+`x-application/hl7-v2+er7`, staff session with `emr.treat`); MLLP does not exist on Pages Functions
+and is not pretended to. Tests: 7 pure, 3 route-level (link by MRN, held look-alike with Z-segment
+kept and decided, replay, A02/A03 versioning, profile AR, ORU report off the worklists, receipt).
+
 ### HL7 v2 (deferred by the owner on 2026-09-08 - after the core EMR/UI; recorded here so it is built right)
 
 HL7 v2 must NOT become a second clinical model. The design that fits what now exists: listener →

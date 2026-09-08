@@ -51,6 +51,12 @@ import { getRulePack } from "../../_wardsynq/rulepack.js";
 // Inpatient ward + eMAR (2026-09-07). Same shape as every OPD migration above: the route resolves
 // the org and the forced wardsynq migration, these do the governed record write.
 import { admitPatient, listWard, recordWardVitals, createWardMedicationOrder, transferPatient, bedBoard } from "../../_wardsynq/migrate-inpatient.js";
+// Emergency department (2026-09-09). Reuses everything above unchanged - vitals, orders, the eMAR,
+// notes, labs, NEWS2, critical results are all encounter-class-agnostic already. This adds only
+// arrival (known or unidentified), triage acuity, and a non-admitted disposition.
+import { edArrival, recordEdTriage, edDisposition, listEd } from "../../_wardsynq/migrate-ed.js";
+import { startResusBundle, markResusElement, waiveResusElement, voidResusBundle, listResusBundles } from "../../_wardsynq/migrate-resus.js";
+import { deviceAssociate, deviceDissociate, deviceIngest, deviceStatus, deviceList } from "../../_wardsynq/migrate-device.js";
 import { medicationRound, administerStep } from "../../_wardsynq/migrate-emar.js";
 import { draftDischargeSummary, signDischargeSummary, dischargePatient, readDischargeSummary } from "../../_wardsynq/migrate-discharge.js";
 import { recordProblem, listProblems } from "../../_wardsynq/migrate-problem.js";
@@ -61,8 +67,11 @@ import { giveHandover, receiveHandover, listHandovers } from "../../_wardsynq/ha
 import { verifyOrder, verificationQueue } from "../../_wardsynq/pharmacy-verify.js";
 import { dispenseOrder, returnDispense, listDispenses } from "../../_wardsynq/pharmacy-dispense.js";
 import { declareBreakGlass, openEmergencyChart, listBreakGlass } from "../../_wardsynq/break-glass.js";
-import { patientEverything, readResource, capabilityStatement, searchType, historyOf, vread, operationOutcome, provenanceRead, provenanceSearch } from "../../_wardsynq/fhir.js";
+import { operationOutcome } from "../../_wardsynq/fhir.js";
+import { dispatchRead, dispatchOperation } from "../../_wardsynq/fhir-route.js";
 import { ingestFhir, listExceptions, resolveException, inboundEnabled } from "../../_wardsynq/fhir-inbound.js";
+import { createLaunch } from "../../_wardsynq/smart-server.js";
+import { ingestHl7 } from "../../_wardsynq/hl7-inbound.js";
 import { startReconciliation, decideMedicine, readReconciliation } from "../../_wardsynq/med-reconciliation.js";
 import { wardMetrics } from "../../_wardsynq/ward-metrics.js";
 import { releaseResult, pendingRequests } from "../../_wardsynq/lab-result.js";
@@ -469,7 +478,10 @@ export async function onRequest(context) {
      */
     if (seg === "ward") {
       // PUT carries a body too, since 2026-09-08: a FHIR update is a PUT of the whole resource.
-      const body = (method === "POST" || method === "PUT") ? await readBody(request) : {};
+      // The HL7 door takes the message as text (ER7), never as JSON.
+      const isHl7 = parts[1] === "hl7";
+      const rawText = isHl7 && method === "POST" ? await request.text().catch(() => "") : null;
+      const body = isHl7 ? {} : ((method === "POST" || method === "PUT") ? await readBody(request) : {});
       const wOrgId = url.searchParams.get("orgId") || body.orgId || "";
       const capFor = {
         admit: CAPS.QUEUE_ADD, list: CAPS.QUEUE_VIEW, vitals: CAPS.EMR_VITALS,
@@ -484,6 +496,24 @@ export async function onRequest(context) {
         criticals: CAPS.EMR_VIEW, acknowledge: CAPS.EMR_TREAT, "flag-critical": CAPS.EMR_TREAT,
         // Moving a patient between beds is the same administrative act as admitting them to one.
         transfer: CAPS.QUEUE_ADD, beds: CAPS.QUEUE_VIEW,
+        /* Emergency department. Arrival is the same administrative act as admit (queue.add) - it
+         * opens a visit, it does not treat one. Triage acuity is the nurse's own record, the same
+         * authority as vitals. Disposition closes the visit - the SAME capability discharge already
+         * uses below (queue.add) - whether that closing is a discharge home or, via "admitted",
+         * a hand-off into admitPatient(), which itself needs only queue.add too. */
+        "ed-arrival": CAPS.QUEUE_ADD, "ed-triage": CAPS.EMR_VITALS, "ed-disposition": CAPS.QUEUE_ADD,
+        "ed-list": CAPS.QUEUE_VIEW,
+        /* Resuscitation bundles. Starting one is "a clinical commitment" (wardsynq-emergency.js's own
+         * words) - emr.treat. Reading a running bundle's status is emr.view, the same as the chart
+         * it hangs off. */
+        "resus-start": CAPS.EMR_TREAT, "resus-mark": CAPS.EMR_TREAT, "resus-waive": CAPS.EMR_TREAT,
+        "resus-void": CAPS.EMR_TREAT, resus: CAPS.EMR_VIEW,
+        /* ICU device association (HAZ-DEV-01). Scanning a wristband and an asset tag onto each other
+         * is the nurse's own bedside act, the same authority as charting a vital - emr.vitals, the
+         * same capability that governs everything else DeviceAssociation is granted through
+         * (VITALS_TYPES in actor.js). A reading is the same act repeated by the device's own gateway. */
+        "device-associate": CAPS.EMR_VITALS, "device-dissociate": CAPS.EMR_VITALS,
+        "device-ingest": CAPS.EMR_VITALS, "device-status": CAPS.EMR_VIEW, "device-list": CAPS.EMR_VIEW,
         // Charting fluid is the nurse's own record, the same authority as recording a vital.
         fluid: CAPS.EMR_VITALS, balance: CAPS.EMR_VIEW,
         // Handing a patient over is the clinical account of a shift: the same authority as recording
@@ -509,9 +539,11 @@ export async function onRequest(context) {
         fhir: CAPS.EMR_VIEW,
         // What another system sent that WardSynQ would not write without a person deciding.
         "fhir-exceptions": CAPS.EMR_VIEW,
+        hl7: CAPS.EMR_TREAT,
         /* DECIDING is emr.treat: "this is the same person" and "the feed's version replaces ours"
          * are clinical judgements about a chart, and they are recorded under the decider's name. */
         "fhir-exception-resolve": CAPS.EMR_TREAT,
+        "smart-launch": CAPS.EMR_VIEW,
         /* Taking a medicines history is a nurse-or-pharmacist act (emr.vitals covers the ward
          * staff who do it). DECIDING what happens to a home medicine is prescribing-adjacent and
          * belongs to the treating clinician, so it is emr.treat. */
@@ -704,6 +736,62 @@ export async function onRequest(context) {
         const r = await listWard(request, env, { ...deps, ward: url.searchParams.get("ward") || "" });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
+      if (sub === "ed-arrival" && method === "POST") {
+        const r = await edArrival(request, env, { ...deps, arrival: body.arrival || body, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "ed-triage" && method === "POST") {
+        const r = await recordEdTriage(request, env, { ...deps, encounterId: body.encounterId, acuity: body.acuity, chiefComplaint: body.chiefComplaint, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "ed-disposition" && method === "POST") {
+        const r = await edDisposition(request, env, { ...deps, encounterId: body.encounterId, disposition: body.disposition, reason: body.reason, at: body.at, admission: body.admission, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "ed-list" && method === "GET") {
+        const r = await listEd(request, env, { ...deps });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "resus-start" && method === "POST") {
+        const r = await startResusBundle(request, env, { ...deps, patientId: body.patientId, encounterId: body.encounterId, code: body.code, evidence: body.evidence, timeZero: body.timeZero, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "resus-mark" && method === "POST") {
+        const r = await markResusElement(request, env, { ...deps, bundleId: body.bundleId, key: body.key, event: body.event, at: body.at, detail: body.detail, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "resus-waive" && method === "POST") {
+        const r = await waiveResusElement(request, env, { ...deps, bundleId: body.bundleId, key: body.key, reason: body.reason, at: body.at, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "resus-void" && method === "POST") {
+        const r = await voidResusBundle(request, env, { ...deps, bundleId: body.bundleId, reason: body.reason, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "resus" && method === "GET") {
+        const r = await listResusBundles(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "" });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "device-associate" && method === "POST") {
+        const r = await deviceAssociate(request, env, { ...deps, association: body.association || body, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "device-dissociate" && method === "POST") {
+        const r = await deviceDissociate(request, env, { ...deps, deviceId: body.deviceId, reason: body.reason, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "device-ingest" && method === "POST") {
+        const r = await deviceIngest(request, env, { ...deps, reading: body.reading || body, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "device-status" && method === "GET") {
+        const r = await deviceStatus(request, env, { ...deps, deviceId: url.searchParams.get("deviceId") || "" });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "device-list" && method === "GET") {
+        const r = await deviceList(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "" });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
       if (sub === "vitals" && method === "POST") {
         const r = await recordWardVitals(request, env, { ...deps, encounterId: body.encounterId, patientId: body.patientId, vitals: body.vitals, recordedAt: body.recordedAt, idempotencyKey: body.idempotencyKey || null });
         return json(r, r.ok ? 200 : (r.status || 502), request);
@@ -736,9 +824,23 @@ export async function onRequest(context) {
         const r = await listExceptions(request, env, { ...deps, config: (wsqCfg && wsqCfg.fhir) || null });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
-      if (sub === "fhir-exception-resolve" && method === "POST") {
-        const r = await resolveException(request, env, { ...deps, config: (wsqCfg && wsqCfg.fhir) || null, base: `${url.origin}/api/queue/ward/fhir`, exceptionId: body.exceptionId, resolution: body.resolution, localPatientId: body.localPatientId, reason: body.reason });
+      if (sub === "smart-launch" && method === "POST") {
+        /* An EHR launch: this clinician starts a registered application for the patient (and
+         * encounter) they are looking at. The application then arrives at the external door's
+         * authorize endpoint with the launch token, and the consent screen already knows the patient. */
+        const r = await createLaunch(request, env, { ...deps, config: (wsqCfg && wsqCfg.fhir) || null, base: `${url.origin}/api/fhir/${wOrgId}`, clientId: body.clientId, patientId: body.patientId, encounterId: body.encounterId });
         return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "fhir-exception-resolve" && method === "POST") {
+        const r = await resolveException(request, env, { ...deps, config: (wsqCfg && wsqCfg.fhir) || null, hl7Config: (wsqCfg && wsqCfg.hl7) || null, terminology: (wsqCfg && wsqCfg.terminology) || null, profiles: (wsqCfg && wsqCfg.fhir && wsqCfg.fhir.profiles) || null, base: `${url.origin}/api/queue/ward/fhir`, exceptionId: body.exceptionId, resolution: body.resolution, localPatientId: body.localPatientId, reason: body.reason });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "hl7" && method === "POST") {
+        /* The HL7 v2 gateway. Off is a 404 before the message is looked at; a message that could be
+         * parsed is answered with an ACK in ER7, whatever became of it (see hl7-inbound.js). */
+        const r = await ingestHl7(request, env, { ...deps, config: (wsqCfg && wsqCfg.hl7) || null, hl7Config: (wsqCfg && wsqCfg.hl7) || null, terminology: (wsqCfg && wsqCfg.terminology) || null, body: rawText || "", sourceSystem: request.headers.get("X-Source-System") || "", facility: (wOrg && wOrg.name) || "", base: `${url.origin}/api/queue/ward/fhir` });
+        if (r.ack) return new Response(r.ack, { status: r.status || 200, headers: Object.assign({ "Content-Type": "x-application/hl7-v2+er7; charset=utf-8", "Cache-Control": "no-store", "X-WardSynQ-Ack": /^MSA\|(\w+)/m.exec(r.ack) ? /^MSA\|(\w+)/m.exec(r.ack)[1] : "" }, corsHeaders(request)) });
+        return fhirJson(r.outcome || operationOutcome("error", "exception", "no acknowledgement could be built"), r.status || 500, request);
       }
       if (sub === "fhir") {
         /* FHIR R4, read side. Every response is application/fhir+json and every error is an
@@ -751,7 +853,13 @@ export async function onRequest(context) {
          *   GET /ward/fhir/Patient/{id}/$everything          everything for one patient
          *   GET /ward/fhir?patient={id}[&_type=A,B]          the same, older spelling */
         const fType = parts[2] || "", fId = parts[3] || "", fOp = parts[4] || "", fVid = parts[5] || "";
-        const fctx = { ...deps, base: `${url.origin}/api/queue/ward/fhir` };
+        const fctx = { ...deps, base: `${url.origin}/api/queue/ward/fhir`, terminology: (wsqCfg && wsqCfg.terminology) || null, profiles: (wsqCfg && wsqCfg.fhir && wsqCfg.fhir.profiles) || null, inbound: inboundEnabled((wsqCfg && wsqCfg.fhir) || null) };
+        /* $validate is an operation, not a write: it files nothing, so it is open to anyone who may
+         * read, whether or not the hospital has opened the inbound door. */
+        if (method === "POST") {
+          const op = await dispatchOperation(request, env, parts.slice(2), body, fctx);
+          if (op) return fhirJson(op.obj, op.status, request);
+        }
         /* WRITES. Off unless the hospital enabled wardsynq.fhir.inbound, and only for an actor who
          * may already write the chart (emr.treat) - the FHIR sub is emr.view for reads, so the write
          * methods check the stronger capability themselves. Everything goes through fhir-inbound.js:
@@ -764,7 +872,7 @@ export async function onRequest(context) {
           if (!inboundEnabled((wsqCfg && wsqCfg.fhir) || null)) return fhirJson(operationOutcome("error", "not-supported", "not found"), 404, request);
           const wAzW = await ORG.authorizeOrg(env, actor, wOrgId, CAPS.EMR_TREAT);
           if (!wAzW.ok) return fhirJson(operationOutcome("error", "forbidden", "writing to the record needs emr.treat"), 403, request);
-          const common = { ...fctx, body, config: (wsqCfg && wsqCfg.fhir) || null, sourceSystem: request.headers.get("X-Source-System") || "", ifMatch: request.headers.get("If-Match") || "" };
+          const common = { ...fctx, body, config: (wsqCfg && wsqCfg.fhir) || null, sourceSystem: request.headers.get("X-Source-System") || "", ifMatch: request.headers.get("If-Match") || "", ifNoneExist: request.headers.get("If-None-Exist") || "", prefer: /return=minimal/i.test(request.headers.get("Prefer") || "") ? "minimal" : "representation" };
           const subjectRef = body && ((body.subject && body.subject.reference) || (body.patient && body.patient.reference) || "");
           const patientRef = (/(?:^|\/)Patient\/([^/?#]+)$/.exec(String(subjectRef || "")) || [])[1] || "";
           let r;
@@ -786,53 +894,11 @@ export async function onRequest(context) {
         if (method !== "GET") {
           return fhirJson(operationOutcome("error", "not-supported", "method not supported on this path"), 405, request, { Allow: "GET, POST, PUT" });
         }
-        if (fType === "metadata") {
-          return fhirJson(capabilityStatement({ date: new Date().toISOString(), version: "wardsynq-1" }), 200, request);
-        }
-        if (!fType) {
-          const r = await patientEverything(request, env, {
-            ...fctx, patientId: url.searchParams.get("patient") || url.searchParams.get("patientId") || "",
-            types: (url.searchParams.get("_type") || "").split(",").map((t) => t.trim()).filter(Boolean),
-          });
-          return fhirJson(r.ok ? r.bundle : r.outcome, r.status, request);
-        }
-        if (fType === "Provenance") {
-          const pParams = new URLSearchParams(url.searchParams); pParams.delete("orgId");
-          const r = fId
-            ? await provenanceRead(request, env, { ...fctx, id: fId })
-            : await provenanceSearch(request, env, { ...fctx, searchParams: pParams, rawQuery: url.search.replace(/^\?/, "") });
-          return fhirJson(r.ok ? (r.resource || r.bundle) : r.outcome, r.status, request);
-        }
-        if (fType === "Patient" && fId && fOp === "$everything") {
-          const r = await patientEverything(request, env, { ...fctx, patientId: fId, types: [] });
-          return fhirJson(r.ok ? r.bundle : r.outcome, r.status, request);
-        }
-        if (fId && fOp === "_history" && fVid) {
-          const r = await vread(request, env, { ...fctx, type: fType, id: fId, versionId: fVid });
-          return fhirJson(r.ok ? r.resource : r.outcome, r.status, request);
-        }
-        if (fId && fOp === "_history") {
-          const r = await historyOf(request, env, { ...fctx, type: fType, id: fId });
-          return fhirJson(r.ok ? r.bundle : r.outcome, r.status, request);
-        }
-        if (fId && fOp) {
-          return fhirJson(operationOutcome("error", "not-found", `no such operation: ${fOp}`), 404, request);
-        }
-        if (fId) {
-          const r = await readResource(request, env, { ...fctx, type: fType, id: fId });
-          return fhirJson(r.ok ? r.resource : r.outcome, r.status, request);
-        }
-        const prefer = request.headers.get("Prefer") || "";
-        /* `orgId` is THIS API's transport parameter, not a FHIR search parameter, and the strict
-         * parser would rightly refuse it. Stripped before parsing; kept in the Bundle links so the
-         * next page is fetchable through the same door. */
-        const fhirParams = new URLSearchParams(url.searchParams);
-        fhirParams.delete("orgId");
-        const r = await searchType(request, env, {
-          ...fctx, type: fType, searchParams: fhirParams, rawQuery: url.search.replace(/^\?/, ""),
-          lenient: /handling=lenient/i.test(prefer),
-        });
-        return fhirJson(r.ok ? r.bundle : r.outcome, r.status, request);
+        /* The read grammar lives ONCE, in fhir-route.js, shared with the external SMART door, so both
+         * doors answer the same path the same way. `orgId` is this API's transport parameter, not a
+         * FHIR one; the dispatcher strips it before parsing and keeps it in the Bundle links. */
+        const { obj, status } = await dispatchRead(request, env, parts.slice(2), url, fctx, request.headers.get("Prefer") || "");
+        return fhirJson(obj, status, request);
       }
       if (sub === "transmit" && method === "POST") {
         const r = await queueTransmission(request, env, { ...deps, orderId: body.orderId, channel: body.channel, destination: body.destination, idempotencyKey: body.idempotencyKey || null });

@@ -177,6 +177,7 @@ const RESOURCE_TYPES = Object.freeze([
    * guessed at - because the failure mode of every interface is the message that vanished and the
    * clinician who never knew it had been sent. Append-only, and resolved by a person. */
   "ExchangeException",
+  "ExchangeMessage",
   /* A person's decision that a patient in ANOTHER system is (or is not) a patient here. Recorded
    * once, by name, and consulted before any probabilistic matching on every later message from that
    * system for that patient - so the same look-alike is not held and decided again, and so the
@@ -187,12 +188,39 @@ const RESOURCE_TYPES = Object.freeze([
    * stolen table cannot be replayed as a token. Expiry is the record's, revocation is a new version
    * that cannot be deleted, and every one names the person or system it acts as. */
   "SmartGrant",
+  /* A time-critical resuscitation bundle (Code Sepsis / Code Blue / Code STEMI), the persisted state
+   * of wardsynq-emergency.js's EmergencyBundle. Its own type, not a CarePlan: a CarePlan is a plan a
+   * clinician wrote, and a bundle's elements, targets and time zero are the hospital's SEEDED,
+   * UNAPPROVED protocol content, never invented by a clinician on the screen. No grant change
+   * accompanies this: EMR_TREAT's unrestricted write already covers starting/marking a bundle (a
+   * "clinical commitment", per that file's own words - never started by a screen result alone), and
+   * EMR_VIEW's unrestricted read covers seeing one running. */
+  "ResusBundle",
+  /* A patient-device binding (HAZ-DEV-01, Task 2.2), the persisted state of wardsynq-iomt.js's
+   * DeviceGateway - keyed by deviceId, one open association at a time. Its own type, not folded
+   * into Observation: the association is the CLAIM that a monitor belongs to a patient, and the
+   * device readings it authorises are Observations in their own right, written separately, exactly
+   * like ResusBundle's elements are distinct from the bundle that governs them. Granted by
+   * EMR_VITALS (VITALS_TYPES in actor.js) - scanning a wristband and a device tag onto a patient is
+   * the nurse's own bedside act, the same authority as charting a vital. */
+  "DeviceAssociation",
 ]);
 
 const MODE = Object.freeze({ SYSTEM_OF_RECORD: "system-of-record", INTEGRATION: "integration" });
 
 /** Provenance value the model stamps on records WardSynQ itself originated. */
 const NATIVE_SYSTEM = "wardsynq-native";
+
+/**
+ * PURE. Whether a record was imported from another system (a feed, a connector, an exchange partner)
+ * rather than authored here. THE ONE QUESTION every ward workflow must ask before acting on a row:
+ * a dose another hospital gave is not one this hospital bills, an order another hospital placed is
+ * not one this ward's phlebotomist collects, a result matched to a stranger's order is a wrong chart.
+ */
+function isExternalRecord(record) {
+  const sys = record && record.meta && record.meta.source && record.meta.source.system;
+  return !!sys && sys !== NATIVE_SYSTEM;
+}
 
 class AuthorityError extends Error {
   constructor(message, code, detail) {
@@ -519,12 +547,37 @@ class RecordService {
           throw err;
         }
       },
+      /**
+       * Every entity in ONE append: one audit event naming them all, the idempotency key landing with
+       * them, and nothing landing unless everything does. The governed store authorises each first.
+       */
+      putMany: async (adapterActor, entities) => {
+        const list = Array.isArray(entities) ? entities : [];
+        if (!list.length) return [];
+        const counts = {};
+        for (const e of list) counts[e.resourceType] = (counts[e.resourceType] || 0) + 1;
+        const patients = new Set(list.map((e) => (e.resourceType === "Patient" ? e.id : e.patientId)).filter(Boolean));
+        const auditEvent = await self._audit("record.ingest", {
+          scope: { transaction: true, entities: list.map((e) => ({ resourceType: e.resourceType, id: e.id, system: e.meta && e.meta.source && e.meta.source.system })) },
+          resourceCounts: counts, patientId: patients.size === 1 ? [...patients][0] : null,
+        });
+        auditEvent.actor = adapterActor.id;
+        self.backend.withWriteContext({ audit: auditEvent, idempotencyKey: pendingKey });
+        try {
+          const saved = await self.governed.putMany(adapterActor, list);
+          pendingKey = null;
+          return saved;
+        } catch (err) {
+          self.backend.withWriteContext(null);
+          throw err;
+        }
+      },
     };
   }
 }
 
 export {
-  RESOURCE_TYPES, MODE, NATIVE_SYSTEM,
+  RESOURCE_TYPES, MODE, NATIVE_SYSTEM, isExternalRecord,
   AuthorityError, RecordRequestError,
   TenantBackend, RecordService, recordPolicy, actorForMembership, externallyOwned,
 };
