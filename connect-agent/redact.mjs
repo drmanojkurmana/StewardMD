@@ -34,17 +34,25 @@ function shape(value, depth = 0) {
 }
 
 export function responseSchema(body) {
-  try {
-    return shape(JSON.parse(body));
-  } catch {
-    return { type: 'non-json' };
+  try { return shape(JSON.parse(body)); }
+  catch { return { type: 'non-json' }; }
+}
+
+export function requestSchema(body) {
+  if (!body) return { type: 'none' };
+  try { return shape(JSON.parse(body)); }
+  catch {
+    const keys = [...String(body).matchAll(/(?:^|&)\s*([^=&\s]+)=/g)].map(m => decodeURIComponent(m[1])).slice(0, 100);
+    return keys.length ? { type: 'form', fields: Object.fromEntries(keys.map(k => [k, SENSITIVE_KEY.test(k) ? { type: 'redacted' } : { type: 'string' }])) } : { type: 'opaque' };
   }
 }
 
-export function safeUrl(raw, root) {
+export function safeUrl(raw, root, allowedOrigins = null) {
   try {
     const u = new URL(raw, root);
-    if (!sameOrigin(u.href, root)) return null;
+    const b = new URL(root);
+    const allowed = allowedOrigins instanceof Set ? allowedOrigins.has(u.origin) : sameOrigin(u.href, root);
+    if (!allowed) return null;
     return `${u.origin}${u.pathname}${u.search ? '?<query>' : ''}`;
   } catch {
     return null;
