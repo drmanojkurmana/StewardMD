@@ -213,7 +213,11 @@
         '<button class="w-ic" data-w-act="unpickbed" title="Choose a different bed">' + ms("close") + "</button></div>" +
         // Explicit, never inferred from the ward's name - the same rule migrate-inpatient.js's own
         // header states: a ward literally named "ICU" admits as IPD unless this is checked.
-        '<label class="w-chk"><input type="checkbox" id="wAdmitIcu"' + (state.admitAsIcu ? " checked" : "") + '> Critical care (ICU) admission</label>' +
+        '<label class="w-f"><span>Admission type</span><select id="wAdmitClass">' +
+          '<option value=""' + (!state.admitClass ? " selected" : "") + '>General ward</option>' +
+          '<option value="ICU"' + (state.admitClass === "ICU" ? " selected" : "") + '>Critical care (ICU)</option>' +
+          '<option value="MATERNITY"' + (state.admitClass === "MATERNITY" ? " selected" : "") + '>Maternity</option>' +
+        '</select></label>' +
         '<div class="w-sub"><h4>' + ms("badge") + "Existing patient (by MRN)</h4>" +
         '<div class="w-filter"><input id="wAdmitMrn" type="text" autocomplete="off" placeholder="MRN">' +
         '<button class="w-btn ghost" data-w-act="mrnlookup">' + ms("search") + "Find</button></div>" +
@@ -846,6 +850,7 @@
     var s = state.sel || {};
     var isEd = s.class === "ED";
     var isIcu = s.class === "ICU";
+    var isMaternity = s.class === "MATERNITY";
     var header = isEd
       ? '<div class="w-chart-h"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button>" +
         "<div><b>" + esc(s.mrn || s.patientId || "") + "</b><small>" + ms("emergency", true) + "ED" +
@@ -863,9 +868,12 @@
         '<button class="w-btn ghost" data-w-act="pcopy" title="The copy this patient can be given">' + ms("assignment_ind") + "Patient copy</button></div>";
 
     return header +
-      criticalsCard(state) + (isEd ? triageCard(state) : "") + problemsCard(state) + noteCard(state) + vitalsCard() + flowsheetCard(state) + fluidCard(state) +
-      (isEd ? resusCard(state) : "") + (isIcu ? deviceCard(state) : "") +
+      criticalsCard(state) + (isEd ? triageCard(state) : "") + (isMaternity ? pregnancyCard(state) + meowsCard(state) : "") +
+      problemsCard(state) + noteCard(state) + vitalsCard() + flowsheetCard(state) + fluidCard(state) +
+      (isMaternity ? labourCard() + bloodLossCard(state) : "") +
+      ((isEd || isMaternity) ? resusCard(state) : "") + (isIcu ? deviceCard(state) : "") +
       medOrderCard(state) + marCard(state) + outboxCard(state) + investigationsCard(state) +
+      (isMaternity ? deliveryCard(state) : "") +
       (isEd ? dispositionCard(state) : "");
   }
 
@@ -911,7 +919,7 @@
     return '<div class="w-card"><div class="w-card-h">' + ms("emergency") + "<h3>Resuscitation</h3>" +
       '<button class="w-ic" data-w-act="resusload" title="Refresh">' + ms("refresh") + "</button></div>" +
       (rows || '<p class="w-empty">No resuscitation bundle running.</p>') +
-      '<div class="w-filter"><select id="wResusCode"><option value="code-sepsis">Code Sepsis</option><option value="code-blue">Code Blue</option><option value="code-stemi">Code STEMI</option></select>' +
+      '<div class="w-filter"><select id="wResusCode"><option value="code-sepsis">Code Sepsis</option><option value="code-blue">Code Blue</option><option value="code-stemi">Code STEMI</option><option value="code-pph">Code PPH</option><option value="code-eclampsia">Code Eclampsia</option></select>' +
       '<button class="w-btn warn" data-w-act="resusstart">' + ms("add_circle") + "Start bundle</button></div>" +
       '<p class="w-hint">' + ms("info") + "Not clinically validated or approved. Records what happened and when; never doses a drug or instructs anyone." + "</p></div>";
   }
@@ -1047,6 +1055,97 @@
       '<input id="wDevWrist" type="text" placeholder="Scan wristband" autocomplete="off">' +
       '<button class="w-btn" data-w-act="deviceassociate">' + ms("sensors") + "Associate</button></div>" +
       '<p class="w-hint">' + ms("info") + "Both codes must be scanned and must match this patient - a device found in the room is not the same as a device confirmed on the patient." + "</p></div>";
+  }
+
+  /* PREGNANCY EPISODE. Gravida/para/gestation, recorded exactly as entered - para only ever changes
+   * on its own when a real delivery is recorded (migrate-maternity.js), never edited here. */
+  function pregnancyCard(state) {
+    var p = state.maternity && state.maternity.pregnancy;
+    return '<div class="w-card"><div class="w-card-h">' + ms("pregnant_woman") + "<h3>Pregnancy</h3>" +
+      '<button class="w-ic" data-w-act="maternityload" title="Refresh">' + ms("refresh") + "</button></div>" +
+      (p ? '<p class="w-hint">' + ms("info") + "Gravida " + esc(p.gravida == null ? "?" : p.gravida) + ", para " + esc(p.para == null ? "?" : p.para) +
+        (p.gestationWeeks != null ? ", " + esc(p.gestationWeeks) + " weeks gestation" : "") + (p.edd ? ", EDD " + esc(p.edd) : "") + "</p>" : '<p class="w-empty">No pregnancy episode recorded.</p>') +
+      '<div class="w-grid">' +
+      '<label class="w-f"><span>Gravida</span><input id="wPregGravida" type="text" inputmode="numeric" autocomplete="off" value="' + esc(p && p.gravida != null ? p.gravida : "") + '"></label>' +
+      '<label class="w-f"><span>Para</span><input id="wPregPara" type="text" inputmode="numeric" autocomplete="off" value="' + esc(p && p.para != null ? p.para : "") + '"></label>' +
+      '<label class="w-f"><span>Gestation (weeks)</span><input id="wPregWeeks" type="text" inputmode="numeric" autocomplete="off" value="' + esc(p && p.gestationWeeks != null ? p.gestationWeeks : "") + '"></label>' +
+      '<label class="w-f"><span>EDD</span><input id="wPregEdd" type="text" autocomplete="off" placeholder="YYYY-MM-DD" value="' + esc((p && p.edd) || "") + '"></label>' +
+      "</div>" +
+      '<button class="w-btn go" data-w-act="pregnancysave">' + ms("save") + "Save</button></div>";
+  }
+
+  /* MEOWS. Triggers, never a total - the card renders exactly what wardsynq-obstetrics.js returns
+   * and computes nothing of its own. */
+  function meowsCard(state) {
+    var m = state.maternity && state.maternity.meows;
+    if (!m) return "";
+    if (!m.applicable) return '<div class="w-card"><div class="w-card-h">' + ms("monitor_heart") + "<h3>MEOWS</h3></div><p class=\"w-hint\">" + ms("info") + esc(m.reason) + "</p></div>";
+    var red = (m.red || []).map(function (t) { return "<li class=\"lvl-escalate\">" + esc(t.label) + ": " + esc(t.value) + "</li>"; }).join("");
+    var yellow = (m.yellow || []).map(function (t) { return "<li class=\"lvl-due\">" + esc(t.label) + ": " + esc(t.value) + "</li>"; }).join("");
+    return '<div class="w-card"><div class="w-card-h">' + ms("monitor_heart") + "<h3>MEOWS</h3>" +
+      '<button class="w-ic" data-w-act="maternityload" title="Refresh">' + ms("refresh") + "</button></div>" +
+      (m.alert ? '<div class="w-news2 risk-high"><b>' + esc((m.red || []).length || (m.yellow || []).length) + "</b><span>trigger" + (((m.red || []).length + (m.yellow || []).length) === 1 ? "" : "s") + "</span></div>" : '<div class="w-news2 risk-low"><b>0</b><span>no trigger</span></div>') +
+      (red || yellow ? '<ul class="w-crit-list">' + red + yellow + "</ul>" : "") +
+      '<p class="w-hint warn">' + ms("warning") + esc(m.advice) + "</p>" +
+      (m.ageCaution ? '<p class="w-hint warn">' + ms("warning") + esc(m.ageCaution) + "</p>" : "") +
+      "</div>";
+  }
+
+  /* BLOOD LOSS. Visual vs quantitative is never blurred - the card shows what recordBloodLoss()
+   * actually returned, including the honest "plausibly double" reading of a visual estimate. */
+  function bloodLossCard(state) {
+    var losses = (state.maternity && state.maternity.losses) || [];
+    var rows = losses.map(function (l) {
+      return "<li><b>" + esc(l.ml) + " mL</b><span>" + esc(l.method) + (l.quantitative ? "" : " (visual - plausibly " + esc(l.plausibleActualMl) + " mL)") + "</span></li>";
+    }).join("");
+    return '<div class="w-card"><div class="w-card-h">' + ms("water_drop") + "<h3>Blood loss</h3></div>" +
+      (rows ? '<ul class="w-mini">' + rows + "</ul>" : '<p class="w-empty">No blood loss recorded.</p>') +
+      '<div class="w-grid">' +
+      '<label class="w-f"><span>mL</span><input id="wLossMl" type="text" inputmode="decimal" autocomplete="off"></label>' +
+      '<label class="w-f"><span>How established</span><select id="wLossMethod"><option value="weighed">Weighed</option><option value="calibrated-drape">Calibrated drape</option><option value="suction-volume">Suction volume</option><option value="visual-estimate">Visual estimate</option></select></label>' +
+      "</div>" +
+      '<button class="w-btn warn" data-w-act="bloodlosssave">' + ms("save") + "Record</button></div>";
+  }
+
+  /* DELIVERY + NEWBORN. Delivery documented first; a newborn cannot be registered before a real
+   * delivery record exists for this encounter (migrate-maternity.js refuses it). */
+  function deliveryCard(state) {
+    var d = state.maternity && state.maternity.delivery;
+    var links = (state.maternity && state.maternity.links) || [];
+    var newbornRows = links.map(function (l) {
+      return "<li><b>" + esc(l.relatedPatientId) + "</b><span>linked " + when(l.recordedAt) + "</span></li>";
+    }).join("");
+    if (!d) {
+      return '<div class="w-card"><div class="w-card-h">' + ms("child_care") + "<h3>Delivery</h3></div>" +
+        '<div class="w-grid">' +
+        '<label class="w-f"><span>Mode</span><select id="wDelMode"><option value="vaginal">Vaginal</option><option value="caesarean">Caesarean</option><option value="instrumental">Instrumental</option></select></label>' +
+        "</div>" +
+        '<label class="w-f"><span>Complications</span><textarea id="wDelComplications" rows="2"></textarea></label>' +
+        '<button class="w-btn go" data-w-act="deliverysave">' + ms("save") + "Record delivery</button></div>";
+    }
+    return '<div class="w-card"><div class="w-card-h">' + ms("child_care") + "<h3>Delivery &amp; newborn</h3></div>" +
+      '<p class="w-hint">' + ms("check_circle") + esc(d.mode) + " delivery, " + when(d.deliveredAt) + (d.complications ? " - " + esc(d.complications) : "") + "</p>" +
+      (newbornRows ? '<ul class="w-mini">' + newbornRows + "</ul>" : "") +
+      '<div class="w-grid">' +
+      '<label class="w-f"><span>Sex</span><select id="wNewbornSex"><option value="female">Female</option><option value="male">Male</option><option value="unknown">Unknown</option></select></label>' +
+      '<label class="w-f"><span>Name</span><input id="wNewbornName" type="text" autocomplete="off" placeholder="optional"></label>' +
+      "</div>" +
+      '<button class="w-btn go" data-w-act="newbornsave">' + ms("child_care") + "Register newborn</button></div>";
+  }
+
+  /* PARTOGRAM entry. Writes ordinary Observations, category "labour" - the flowsheet card already on
+   * this chart is where they are actually read back, honestly: nothing here plots an alert or action
+   * line, because that is real clinical content this build will not invent. */
+  function labourCard() {
+    return '<div class="w-card"><div class="w-card-h">' + ms("timeline") + "<h3>Labour</h3></div>" +
+      '<div class="w-grid">' +
+      '<label class="w-f"><span>Status</span><select id="wLabStatus"><option value="not-in-labour">Not in labour</option><option value="latent">Latent</option><option value="active">Active</option><option value="second-stage">Second stage</option><option value="third-stage">Third stage</option></select></label>' +
+      '<label class="w-f"><span>Cervical dilation (cm)</span><input id="wLabDilation" type="text" inputmode="decimal" autocomplete="off"></label>' +
+      '<label class="w-f"><span>Contractions /10min</span><input id="wLabContractions" type="text" inputmode="decimal" autocomplete="off"></label>' +
+      '<label class="w-f"><span>Fetal heart rate</span><input id="wLabFhr" type="text" inputmode="decimal" autocomplete="off"></label>' +
+      "</div>" +
+      '<button class="w-btn go" data-w-act="labourchart">' + ms("save") + "Chart</button>" +
+      '<p class="w-hint">' + ms("info") + "Recorded on the flowsheet below, exactly as charted. This is not a WHO partogram alert/action-line plot." + "</p></div>";
   }
 
   /* Open critical results, ABOVE everything else on the chart. A critical result that reaches a
@@ -1282,20 +1381,21 @@
     // the disposition directly, never through the admit panel's own MRN-lookup/register flow,
     // which is for a patient the board does not already have open.
     if (st.edAdmitPending) { st.edAdmitPending = false; edDispose("admitted", { admission: { ward: ward, bed: bed } }); return; }
-    st.admitTarget = { ward: ward, bed: bed }; st.mrnLookup = null; st.mrnLookupErr = ""; st.admitAsIcu = false; paint();
+    st.admitTarget = { ward: ward, bed: bed }; st.mrnLookup = null; st.mrnLookupErr = ""; st.admitClass = ""; paint();
   }
   /* The one write in this whole flow: an Encounter, exactly as /ward/transfer and every other admit
    * caller writes it. Nothing here invents a second admission path.
    *
-   * ICU is read from st.admitAsIcu, captured the moment it was checked (mrnLookup/admitNew, below) -
-   * NOT from the checkbox's live DOM state here. paint() replaces the admit panel's whole innerHTML
-   * on the way to this call (the lookup's own busy-state repaint), which silently unchecks an
-   * uncontrolled checkbox; reading the DOM at this point would quietly drop the ICU choice a nurse
-   * already made. */
+   * The class is read from st.admitClass, captured the moment it was chosen (mrnLookup/admitNew,
+   * below) - NOT from the select's live DOM state here. paint() replaces the admit panel's whole
+   * innerHTML on the way to this call (the lookup's own busy-state repaint), which silently resets
+   * an uncontrolled <select>; reading the DOM at this point would quietly drop the choice a nurse
+   * already made (Task 2.2's own report named this exact bug for the ICU checkbox that used to be
+   * here). */
   function doAdmit(mrn) {
     var t = st.admitTarget; if (!t || !mrn) return;
     st.busy = true; paint();
-    apiPost("/ward/admit", { orgId: st.orgId, mrn: mrn, ward: t.ward, bed: t.bed, admittedAt: new Date().toISOString(), class: st.admitAsIcu ? "ICU" : undefined })
+    apiPost("/ward/admit", { orgId: st.orgId, mrn: mrn, ward: t.ward, bed: t.bed, admittedAt: new Date().toISOString(), class: st.admitClass || undefined })
       .then(function (r) {
         if (r && r.error === "no_patient_identity") { st.busy = false; st.err = "That MRN is not registered here."; paint(); return; }
         if (settle(r, r && r.written ? "Admitted to " + t.ward + ", bed " + t.bed + "." : "Already admitted there.")) {
@@ -1308,8 +1408,8 @@
    * is a second, separate click (admitconfirm) once a human has read who it is. */
   function mrnLookup() {
     var mrn = val("wAdmitMrn");
-    var icuEl = document.getElementById("wAdmitIcu");
-    if (icuEl) st.admitAsIcu = !!icuEl.checked;
+    var classEl = document.getElementById("wAdmitClass");
+    if (classEl) st.admitClass = classEl.value || "";
     if (!mrn) { st.mrnLookupErr = "Enter an MRN."; st.mrnLookup = null; paint(); return; }
     st.busy = true; st.mrnLookupErr = ""; st.mrnLookup = null; paint();
     apiGet("/patient/get?orgId=" + encodeURIComponent(st.orgId) + "&mrn=" + encodeURIComponent(mrn))
@@ -1328,8 +1428,8 @@
    * never silently discarded. */
   function admitNew() {
     var t = st.admitTarget; if (!t) return;
-    var icuEl = document.getElementById("wAdmitIcu");
-    if (icuEl) st.admitAsIcu = !!icuEl.checked;
+    var classEl = document.getElementById("wAdmitClass");
+    if (classEl) st.admitClass = classEl.value || "";
     if (!(G.SMD_PATIENTREG && G.SMD_PATIENTREG.open)) { st.err = "Registration is unavailable on this build."; paint(); return; }
     G.SMD_PATIENTREG.open({
       submit: function (payload) { return apiPost("/patient/register", Object.assign({ orgId: st.orgId }, payload)); },
@@ -1607,6 +1707,83 @@
     apiPost("/ward/anesthesia-end", { orgId: st.orgId, caseId: c.id })
       .then(function (r) { if (settle(r, "Anaesthesia ended.")) loadSurgeryCase(c.id); else paint(); })
       .catch(function () { st.busy = false; st.err = "Could not end the anaesthesia record."; paint(); });
+  }
+  // ---- maternity / OB-GYN (Task 2.4) -------------------------------------------------------
+  function loadMaternity() {
+    var s = st.sel; if (!s) return Promise.resolve();
+    st.maternity = st.maternity || {};
+    return Promise.all([
+      apiGet("/ward/pregnancy-get?orgId=" + encodeURIComponent(st.orgId) + "&patientId=" + encodeURIComponent(s.patientId)).then(function (r) { if (r && r.ok) st.maternity.pregnancy = r.pregnancy; }),
+      apiGet("/ward/meows?orgId=" + encodeURIComponent(st.orgId) + "&patientId=" + encodeURIComponent(s.patientId)).then(function (r) { if (r && r.ok) st.maternity.meows = r.meows; }),
+      apiGet("/ward/blood-loss-list?orgId=" + encodeURIComponent(st.orgId) + "&patientId=" + encodeURIComponent(s.patientId)).then(function (r) { if (r && r.ok) st.maternity.losses = r.losses; }),
+      apiGet("/ward/delivery-get?orgId=" + encodeURIComponent(st.orgId) + "&patientId=" + encodeURIComponent(s.patientId)).then(function (r) { if (r && r.ok) st.maternity.delivery = r.delivery; }),
+      apiGet("/ward/family-links?orgId=" + encodeURIComponent(st.orgId) + "&patientId=" + encodeURIComponent(s.patientId)).then(function (r) { if (r && r.ok) st.maternity.links = r.links; }),
+    ]).then(function () { paint(); });
+  }
+  function pregnancySave() {
+    var s = st.sel; if (!s) return;
+    var gravida = Number(val("wPregGravida")), para = Number(val("wPregPara")), gestationWeeks = Number(val("wPregWeeks")), edd = val("wPregEdd");
+    st.busy = true; paint();
+    apiPost("/ward/pregnancy", { orgId: st.orgId, patientId: s.patientId, pregnancy: {
+      gravida: Number.isFinite(gravida) ? gravida : undefined, para: Number.isFinite(para) ? para : undefined,
+      gestationWeeks: Number.isFinite(gestationWeeks) ? gestationWeeks : undefined, edd: edd || undefined,
+    } })
+      .then(function (r) { if (settle(r, "Saved.")) loadMaternity(); else paint(); })
+      .catch(function () { st.busy = false; st.err = "Could not save the pregnancy episode."; paint(); });
+  }
+  function labourChart() {
+    var s = st.sel; if (!s) return;
+    var status = (document.getElementById("wLabStatus") || {}).value;
+    var dilation = val("wLabDilation"), contractions = val("wLabContractions"), fhr = val("wLabFhr");
+    var entries = [];
+    if (status) entries.push(["labour-status", status]);
+    if (dilation) entries.push(["dilation-cm", Number(dilation)]);
+    if (contractions) entries.push(["contractions-per-10min", Number(contractions)]);
+    if (fhr) entries.push(["fhr-bpm", Number(fhr)]);
+    if (!entries.length) { st.err = "Enter at least one value."; paint(); return; }
+    st.busy = true; paint();
+    var at = new Date().toISOString();
+    Promise.all(entries.map(function (e) {
+      return apiPost("/ward/labour", { orgId: st.orgId, encounterId: s.encounterId, patientId: s.patientId, code: e[0], value: e[1], at: at });
+    })).then(function (rs) {
+      st.busy = false;
+      if (rs.every(function (r) { return r && r.ok; })) { st.note = "Charted."; loadFlowsheet(); } else st.err = "Some values could not be charted.";
+      paint();
+    }).catch(function () { st.busy = false; st.err = "Could not chart labour observations."; paint(); });
+  }
+  function bloodLossSave() {
+    var s = st.sel; if (!s) return;
+    var ml = Number(val("wLossMl")), method = (document.getElementById("wLossMethod") || {}).value;
+    if (!Number.isFinite(ml)) { st.err = "Enter the volume in mL."; paint(); return; }
+    st.busy = true; paint();
+    apiPost("/ward/blood-loss", { orgId: st.orgId, patientId: s.patientId, encounterId: s.encounterId, loss: { ml: ml, method: method } })
+      .then(function (r) {
+        if (!r || !r.ok) { st.busy = false; st.err = (r && r.detail) || "Could not record blood loss."; paint(); return; }
+        st.note = r.recognition && r.recognition.prompt
+          ? "Recorded. " + r.recognition.reasons.join("; ") + (r.recognition.code ? " - consider starting " + r.recognition.code + "." : "")
+          : "Recorded.";
+        loadMaternity();
+      })
+      .catch(function () { st.busy = false; st.err = "Could not record blood loss."; paint(); });
+  }
+  function deliverySave() {
+    var s = st.sel; if (!s) return;
+    var mode = (document.getElementById("wDelMode") || {}).value, complications = val("wDelComplications");
+    st.busy = true; paint();
+    apiPost("/ward/delivery", { orgId: st.orgId, patientId: s.patientId, encounterId: s.encounterId, delivery: { mode: mode, complications: complications || undefined } })
+      .then(function (r) { if (settle(r, "Delivery recorded.")) loadMaternity(); else paint(); })
+      .catch(function () { st.busy = false; st.err = "Could not record the delivery."; paint(); });
+  }
+  function newbornSave() {
+    var s = st.sel; if (!s) return;
+    var sex = (document.getElementById("wNewbornSex") || {}).value, name = val("wNewbornName");
+    st.busy = true; paint();
+    apiPost("/ward/newborn", { orgId: st.orgId, motherPatientId: s.patientId, encounterId: s.encounterId, sex: sex, name: name || undefined })
+      .then(function (r) {
+        if (r && !r.ok && r.error === "no_delivery_recorded") { st.busy = false; st.err = "Record the delivery first."; paint(); return; }
+        if (settle(r, "Newborn registered.")) loadMaternity(); else paint();
+      })
+      .catch(function () { st.busy = false; st.err = "Could not register the newborn."; paint(); });
   }
   function edDispose(disposition, extra) {
     var s = st.sel; if (!s) return;
@@ -2082,6 +2259,7 @@
       st.flowsheet = null; st.news2 = null; st.investigations = null; st.results = null; st.resusBundles = null;
       st.ed = null; st.edArrivalOpen = false; st.edMrnLookup = null; st.edMrnLookupErr = "";
       st.surgBoard = null; st.surgCase = null; st.surgBookOpen = false; st.surgMrnLookup = null; st.surgMrnLookupErr = ""; st.surgErr = "";
+      st.maternity = null; st.admitClass = "";
       paint(); return;
     }
     if (cmd === "board") { loadBoard(); return; }
@@ -2100,11 +2278,12 @@
       if (!p) return;
       st.sel = p; st.view = "chart"; st.due = []; st.prn = []; st.unscheduled = []; st.problems = []; st.criticals = []; st.balance = null; st.outbox = [];
       st.flowsheet = null; st.news2 = null; st.investigations = null; st.results = null;
-      st.err = ""; st.note = ""; st.refusal = null; st.devices = null;
+      st.err = ""; st.note = ""; st.refusal = null; st.devices = null; st.maternity = null;
       defaultWindow();
       st.noteTemplateId = ""; st.noteResult = null;
       paint(); loadChart(); loadRound(); loadBalance(); loadOutbox(); loadTemplates(); loadFlowsheet(); loadNews2(); loadInvestigations();
       if (p.class === "ICU") loadDevices();
+      if (p.class === "MATERNITY") loadMaternity();
       return;
     }
     if (cmd === "openEd") {
@@ -2136,6 +2315,12 @@
     if (cmd === "anesstart") { anesStart(); return; }
     if (cmd === "anesevent") { anesEvent(); return; }
     if (cmd === "anesend") { anesEnd(); return; }
+    if (cmd === "maternityload") { loadMaternity(); return; }
+    if (cmd === "pregnancysave") { pregnancySave(); return; }
+    if (cmd === "labourchart") { labourChart(); return; }
+    if (cmd === "bloodlosssave") { bloodLossSave(); return; }
+    if (cmd === "deliverysave") { deliverySave(); return; }
+    if (cmd === "newbornsave") { newbornSave(); return; }
     if (cmd === "edarrivalopen") { st.edArrivalOpen = true; st.edMrnLookup = null; st.edMrnLookupErr = ""; paint(); return; }
     if (cmd === "edarrivalclose") { st.edArrivalOpen = false; st.edMrnLookup = null; st.edMrnLookupErr = ""; paint(); return; }
     if (cmd === "edmrnlookup") { edMrnLookup(); return; }

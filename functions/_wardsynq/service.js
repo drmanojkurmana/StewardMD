@@ -221,6 +221,26 @@ const RESOURCE_TYPES = Object.freeze([
    * against a hospital that can answer "which patients got lot X", so this is append-only and keyed
    * to the case it was placed in. */
   "ImplantRecord",
+  /* Antenatal history and gestation (Task 2.4): gravida, para, LMP/EDD, risk factors. One current
+   * episode per patient, versioned like everything else - a delivery is the fact that changes para,
+   * recorded through migrate-maternity.js's recordDelivery(), never edited by hand elsewhere. */
+  "PregnancyEpisode",
+  /* What actually happened at delivery: mode, when, complications. Its own type, not a ClinicalNote -
+   * a delivery is a discrete clinical EVENT with a machine-readable mode, not free prose, and it is
+   * what maternityView() reads to resolve the real wardsynq-obstetrics.js obstetricState() (the
+   * postpartum/puerperium window) from the actual record rather than a caller's claim. */
+  "DeliveryRecord",
+  /* Blood loss, obstetric. Its own type because pphThresholdReached()'s quantitative-vs-visual
+   * distinction (wardsynq-obstetrics.js) is load-bearing: an Observation of value+unit alone loses
+   * the "how was this established" fact a PPH threshold decision refuses to answer without. */
+  "BloodLossRecord",
+  /* A clinical relationship between two DIFFERENT patients - mother and newborn, first user (Task
+   * 2.4). Never PatientLink: that type asserts "these two records are one person", which is exactly
+   * the wrong claim for two people. No grant change accompanies any of the four types above:
+   * EMR_TREAT's unrestricted write already covers them (the same "clinical commitment" reasoning
+   * ResusBundle and SurgicalCase's own comments already give), and EMR_VIEW's unrestricted read
+   * covers seeing one. */
+  "FamilyLink",
 ]);
 
 const MODE = Object.freeze({ SYSTEM_OF_RECORD: "system-of-record", INTEGRATION: "integration" });

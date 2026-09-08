@@ -98,7 +98,7 @@ function segment(name, fields) {
  */
 function eventOf(encounter) {
   const e = encounter || {};
-  if (e.class !== "IPD" && e.class !== "ICU" && e.class !== "SURGERY" && e.class !== "PACU") return null;
+  if (e.class !== "IPD" && e.class !== "ICU" && e.class !== "SURGERY" && e.class !== "PACU" && e.class !== "MATERNITY") return null;
   if (e.status === "finished") return "A03";       // discharge
   if (e.status === "in-progress") return "A01";    // admit
   return null;
@@ -232,7 +232,7 @@ function oruMessage(input) {
     // display nicety: a downstream ADT consumer reads this to decide where the patient IS. ICU,
     // SURGERY and PACU are all "I" too - Table 0004 has no separate code for any of them; PV1-3
     // (below) carries the unit.
-    at(2, (e.class === "IPD" || e.class === "ICU" || e.class === "SURGERY" || e.class === "PACU") ? "I" : e.class === "ED" ? "E" : "O");
+    at(2, (e.class === "IPD" || e.class === "ICU" || e.class === "SURGERY" || e.class === "PACU" || e.class === "MATERNITY") ? "I" : e.class === "ED" ? "E" : "O");
     at(3, `${esc(loc.ward || "")}${COMPONENT}${esc(loc.room || "")}${COMPONENT}${esc(loc.bed || "")}`);
     at(19, esc(e.id));
     segments.push(segment("PV1", Array.from(pv1, (v) => v || "")));
