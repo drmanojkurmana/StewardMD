@@ -229,7 +229,7 @@ async function recordEdTriage(request, env, ctx) {
  * Disposition: the ED visit ends. "admitted" hands off to admitPatient() (the SAME governed,
  * bed-guarded admission door); every other disposition simply closes the encounter.
  * ctx: { migration, encounterId, disposition (required), reason?, at?,
- *   admission?: {ward, bed?} - required when disposition is "admitted", actorDeps, recordDeps }
+ *   admission?: {ward, bed?, class?} - required when disposition is "admitted", actorDeps, recordDeps }
  */
 async function edDisposition(request, env, ctx) {
   const mig = ctx.migration;
@@ -261,7 +261,11 @@ async function edDisposition(request, env, ctx) {
     const mrn = (current.identifiers || []).find((i) => i && i.system === "opd-mrn");
     if (!mrn || !str(mrn.value)) return { ...base, ok: false, status: 502, error: "record_write_failed", detail: "this ED encounter carries no MRN identifier to admit under", written: 0 };
     const admitResult = await admitPatient(request, env, {
-      ...ctx, admission: { mrn: mrn.value, ward: admission.ward, bed: admission.bed || undefined, admittedAt: at, reason: str(ctx.reason) || current.reason || undefined },
+      // class forwarded, TASK 2.9 fix: without it every ED admission silently defaulted to IPD
+      // regardless of what was requested, which blocked the master plan's own primary journey
+      // (ED -> ICU) - admitPatient()/encounterFromAdmission() already validate it against
+      // ADMISSION_CLASSES and fall back to IPD themselves, so this only forwards the request.
+      ...ctx, admission: { mrn: mrn.value, ward: admission.ward, bed: admission.bed || undefined, class: admission.class || undefined, admittedAt: at, reason: str(ctx.reason) || current.reason || undefined },
     });
     if (!admitResult.ok) return admitResult;   // the SAME bed-occupancy refusal an inpatient admit would give
     const closed = await closeEdEncounter(svc, current, disposition, at, ctx);
