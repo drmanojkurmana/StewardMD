@@ -1575,7 +1575,7 @@ export async function onRequest(context) {
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "verification-queue" && method === "GET") {
-        const r = await verificationQueue(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "" });
+        const r = await verificationQueue(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "", rulePack: getRulePack() });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "dispense" && method === "POST") {

@@ -2639,6 +2639,17 @@ test("a pharmacist verifies the ORDER, and never touches the administration", as
   assert.equal((await as(PHARM, "/ward/verify-order", "POST", { orgId: ORG, orderId: ord.orderId, outcome: "verified" })).written, 0);
 });
 
+test("TASK 3.3: the verification queue now carries the SAME safety-engine verdict the bedside eMAR runs, never a second engine", async () => {
+  seedHospital();
+  const { adm } = await admittedPatientOnDrug();
+  const q = await as(PHARM, `/ward/verification-queue?orgId=${ORG}&patientId=${adm.patientId}`);
+  assert.equal(q.__status, 200, JSON.stringify(q));
+  assert.ok(q.orders[0].safety, "every queued order carries a safety verdict, not just the raw allergy list");
+  assert.equal(typeof q.orders[0].safety.allowed, "boolean");
+  assert.ok(Array.isArray(q.orders[0].safety.blocks));
+  assert.ok(Array.isArray(q.orders[0].safety.warnings));
+});
+
 test("A VERIFICATION IS OF ONE VERSION: change the order and it is no longer verified", async () => {
   seedHospital();
   const { adm, ord } = await admittedPatientOnDrug();

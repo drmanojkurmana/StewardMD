@@ -41,6 +41,11 @@ import { VersionConflictError } from "./repository.js";
 import { resolveClinicalActor } from "./actor.js";
 import { RecordService } from "./service.js";
 import { AuthError, PermissionError } from "../_connect/permission.js";
+// TASK 3.3: the SAME safety engine the bedside eMAR hook already runs (migrate-emar.js's own
+// bedsideSafetyCheck) - reused verbatim, never reimplemented, and never a second engine. A
+// pharmacist verifying an order was, until now, reading the raw allergy list unassisted; this
+// gives them the exact interaction/dose/allergy verdict the engine already computes for the ward.
+import { bedsideSafetyCheck } from "./migrate-emar.js";
 
 const str = (v) => (v == null ? "" : String(v).trim());
 const TYPE = "MedicationVerification";
@@ -196,7 +201,14 @@ async function verificationQueue(request, env, ctx) {
     ]);
   } catch (e) { return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), orders: [] }; }
 
-  const rows = (orders || []).filter((o) => o && o.status === "active").map((o) => {
+  const active = (orders || []).filter((o) => o && o.status === "active");
+  // TASK 3.3: the SAME engine the bedside hook runs, once per queued order. Never a second engine,
+  // never silently skipped: a rule pack that fails to load or a check that throws surfaces as a
+  // NOT_CHECKED_* warning (bedsideSafetyCheck's own honesty), never as a quiet "allowed".
+  const check = bedsideSafetyCheck(svc, ctx.rulePack || null);
+  const verdicts = await Promise.all(active.map((o) => check({ order: o, patient: { id: patientId } })));
+
+  const rows = active.map((o, i) => {
     const v = verificationState(o, verifications);
     return {
       orderId: o.id, drug: o.drug, dose: o.dose || null, route: o.route || null, frequency: o.frequency || null,
@@ -207,6 +219,7 @@ async function verificationQueue(request, env, ctx) {
         verifiedBy: v.verification.verifiedBy, verifiedAt: v.verification.verifiedAt,
         orderVersion: v.verification.orderVersion,
       } : null,
+      safety: verdicts[i],
     };
   });
   const RANK = { queried: 0, stale: 1, unverified: 2, verified: 3 };
