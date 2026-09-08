@@ -266,6 +266,18 @@ const RESOURCE_TYPES = Object.freeze([
    * extravasation field. It does not re-run wardsynq-meds.js's five-rights state machine - that
    * machine is reused unchanged, through the existing /ward/mar door, for the bedside act itself. */
   "ChemoAdministrationRecord",
+  /* The KardiQ X bridge (Task 2.7). KardiQ X (kardiox*.js) is an AI ECG-photo interpreter -
+   * self-declared "clinically unvalidated, regulatory-pending" (docs/ecg-engine-roadmap.md), unlike
+   * ONCqis's owner-approved production status. Its ECG records are local-only, encrypted, with no
+   * patientId and no server-side store at all - a genuinely disconnected record, the same failure
+   * mode OncologyLink closes for ONCqis. CardiologyLink names the join; it asserts no clinical
+   * identity beyond the caller-supplied identifying facts. No grant change: EMR_TREAT's unrestricted
+   * write covers it, the same precedent as OncologyLink. */
+  "CardiologyLink",
+  /* A resolved ECG: the AI verdict/HEART-TIMI score KardiQ X already computed, referenced here, not
+   * recomputed. Recorded with an explicit unvalidated:true provenance flag reflecting KardiQ X's own
+   * regulatory status - never presented as a validated clinical finding. */
+  "ECGReference",
 ]);
 
 const MODE = Object.freeze({ SYSTEM_OF_RECORD: "system-of-record", INTEGRATION: "integration" });

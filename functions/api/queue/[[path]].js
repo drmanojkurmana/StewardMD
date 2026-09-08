@@ -76,6 +76,9 @@ import {
   recordAdverseEvent, listAdverseEvents, recordChemoAdministration,
   listChemoAdministrations, oncologyTimeline,
 } from "../../_wardsynq/migrate-oncology.js";
+import {
+  linkCardiologyRecord, getCardiologyLink, recordEcgReference, listEcgReferences, cardiologyTimeline,
+} from "../../_wardsynq/migrate-cardiology.js";
 import { medicationRound, administerStep } from "../../_wardsynq/migrate-emar.js";
 import { draftDischargeSummary, signDischargeSummary, dischargePatient, readDischargeSummary } from "../../_wardsynq/migrate-discharge.js";
 import { recordProblem, listProblems } from "../../_wardsynq/migrate-problem.js";
@@ -567,6 +570,8 @@ export async function onRequest(context) {
         "onco-link": CAPS.EMR_TREAT, "onco-link-get": CAPS.EMR_VIEW, "onco-diagnosis": CAPS.EMR_TREAT,
         "onco-ae": CAPS.EMR_TREAT, "onco-ae-list": CAPS.EMR_VIEW,
         "onco-chemo": CAPS.EMR_TREAT, "onco-chemo-list": CAPS.EMR_VIEW, "onco-timeline": CAPS.EMR_VIEW,
+        "cardio-link": CAPS.EMR_TREAT, "cardio-link-get": CAPS.EMR_VIEW, "cardio-ecg": CAPS.EMR_TREAT,
+        "cardio-ecg-list": CAPS.EMR_VIEW, "cardio-timeline": CAPS.EMR_VIEW,
         // Charting fluid is the nurse's own record, the same authority as recording a vital.
         fluid: CAPS.EMR_VITALS, balance: CAPS.EMR_VIEW,
         // Handing a patient over is the clinical account of a shift: the same authority as recording
@@ -1023,6 +1028,26 @@ export async function onRequest(context) {
       }
       if (sub === "onco-timeline" && method === "GET") {
         const r = await oncologyTimeline(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "" });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "cardio-link" && method === "POST") {
+        const r = await linkCardiologyRecord(request, env, { ...deps, encounterId: body.encounterId, link: body.link || body, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "cardio-link-get" && method === "GET") {
+        const r = await getCardiologyLink(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "" });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "cardio-ecg" && method === "POST") {
+        const r = await recordEcgReference(request, env, { ...deps, patientId: body.patientId, encounterId: body.encounterId, ecg: body.ecg || body, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "cardio-ecg-list" && method === "GET") {
+        const r = await listEcgReferences(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "" });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "cardio-timeline" && method === "GET") {
+        const r = await cardiologyTimeline(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "" });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "vitals" && method === "POST") {
