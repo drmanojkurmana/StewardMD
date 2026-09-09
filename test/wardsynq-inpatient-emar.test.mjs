@@ -3387,6 +3387,24 @@ test("reporting a study is the reporter's authority, and it answers a request th
   assert.deepEqual(stored.resultObservationIds, [], "an imaging report has no values");
 });
 
+test("TASK 3.9: protocolling a study is the SAME lab.result authority reporting one is, and nobody else's", async () => {
+  seedHospital();
+  const { adm } = await admittedPatientOnDrug();
+  const sr = await as(DOCTOR, "/ward/investigation", "POST", { orgId: ORG, encounterId: adm.encounterId, code: "CT abdomen with contrast", category: "imaging" });
+
+  // Reading the context and setting the protocol are both gated the same way reporting is - a
+  // doctor orders, a nurse charts, neither decides the protocol or reads it back.
+  assert.equal((await as(DOCTOR, `/ward/protocol-context?orgId=${ORG}&serviceRequestId=${sr.orderId}`)).__status, 403);
+  assert.equal((await as(NURSE, `/ward/protocol-context?orgId=${ORG}&serviceRequestId=${sr.orderId}`)).__status, 403);
+  assert.equal((await as(DOCTOR, "/ward/protocol-set", "POST", { orgId: ORG, serviceRequestId: sr.orderId, protocol: "CT abdomen with IV contrast" })).__status, 403);
+  assert.equal((await as(NURSE, "/ward/protocol-set", "POST", { orgId: ORG, serviceRequestId: sr.orderId, protocol: "CT abdomen with IV contrast" })).__status, 403);
+
+  const ctx = await as(LABTECH, `/ward/protocol-context?orgId=${ORG}&serviceRequestId=${sr.orderId}`);
+  assert.equal(ctx.__status, 200, JSON.stringify(ctx));
+  const set = await as(LABTECH, "/ward/protocol-set", "POST", { orgId: ORG, serviceRequestId: sr.orderId, protocol: "CT abdomen with IV contrast", contrast: true, contrastReason: "Creatinine within range." });
+  assert.equal(set.__status, 200, JSON.stringify(set));
+});
+
 test("TASK 3.2: a CRITICAL imaging finding (text, no number) opens the SAME closed loop a critical lab value does", async () => {
   seedHospital();
   const { adm } = await admittedPatientOnDrug();

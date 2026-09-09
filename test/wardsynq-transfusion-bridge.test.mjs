@@ -232,3 +232,23 @@ test("REACTION stops the episode terminally, and RBAC: a pharmacy actor cannot r
 
   assert.equal((await as(NURSE, "/ward/transfusion-request", "POST", { orgId: ORG, mrn: reg.mrn, component: "red-cells" })).__status, 403);
 });
+
+test("TASK 3.9: RBAC covers every transfusion phase, not just the request - a nurse holds neither the crossmatch nor the bedside authority", async () => {
+  seedHospital();
+  const reg = await as(DOCTOR, "/patient/register", "POST", { orgId: ORG, name: "RBAC Coverage Testcase", mobile: "9876500906", gender: "female", ageYears: 45 });
+  const req = await as(DOCTOR, "/ward/transfusion-request", "POST", { orgId: ORG, mrn: reg.mrn, component: "red-cells", aboGroup: "O", rhD: "positive" });
+  const episodeId = req.episodeId;
+
+  // A nurse holds QUEUE_VIEW/EMR_VITALS/EMR_VIEW, not EMR_TREAT - every write phase refuses, and the
+  // read routes stay open (the same "read is not the same authority as write" shape every other
+  // department's RBAC test in this session already proves).
+  assert.equal((await as(NURSE, "/ward/transfusion-crossmatch", "POST", { orgId: ORG, episodeId, unitId: "UNIT-RBAC", aboGroup: "O", rhD: "positive", component: "red-cells" })).__status, 403);
+  assert.equal((await as(NURSE, "/ward/transfusion-issue", "POST", { orgId: ORG, episodeId })).__status, 403);
+  assert.equal((await as(NURSE, "/ward/transfusion-bedside-check", "POST", { orgId: ORG, episodeId, checkerId: "a", secondCheckerId: "b", scannedPatientBarcode: reg.mrn, scannedUnitId: "UNIT-RBAC" })).__status, 403);
+  assert.equal((await as(NURSE, "/ward/transfusion-start", "POST", { orgId: ORG, episodeId })).__status, 403);
+  assert.equal((await as(NURSE, "/ward/transfusion-observe", "POST", { orgId: ORG, episodeId, vitals: { pulse: 80 } })).__status, 403);
+  assert.equal((await as(NURSE, "/ward/transfusion-reaction", "POST", { orgId: ORG, episodeId, detail: "x" })).__status, 403);
+  assert.equal((await as(NURSE, "/ward/transfusion-complete", "POST", { orgId: ORG, episodeId })).__status, 403);
+  assert.equal((await as(NURSE, `/ward/transfusion-queue?orgId=${ORG}&patientId=${req.patientId}`)).__status, 200, "EMR_VIEW still reads the queue");
+  assert.equal((await as(NURSE, `/ward/transfusion-trace?orgId=${ORG}&unitId=UNIT-RBAC`)).__status, 200, "EMR_VIEW still reads the trace");
+});
