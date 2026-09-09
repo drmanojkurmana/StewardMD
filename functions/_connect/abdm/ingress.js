@@ -205,6 +205,25 @@ export async function handleIngress(env, deps, request) {
     }
     await deps.ingestEvent(env, boundDeps, rawEvent);
 
+    /* A GRANTED consent is only half an answer: it says the patient agreed, not WHAT to. The signed
+     * artifact carrying the scope arrives only if we ask for it, and until it has been verified and
+     * persisted, every data request under this consent fails its own scope check. fetchConsentArtifact
+     * had no production caller, so a granted consent stopped here. Asking is the protocol's own next
+     * step, not a human decision.
+     *
+     * Guarded and NON-FATAL for the same reason the landing is: the notification itself was received
+     * and the status recorded, and answering the CM with a 500 because our follow-up call failed
+     * would make it re-deliver a notification we already acted on. The failure is audited. */
+    if (ev.type === "consent-notification" && deps.fetchArtifact && String(ev.status || "").toUpperCase() === "GRANTED") {
+      const consentId = corr.consentId != null ? corr.consentId : ev.consentId;
+      if (consentId != null) {
+        try { await deps.fetchArtifact({ requestId: corr.requestId, consentId }); }
+        catch (e) {
+          if (deps.audit) { try { await deps.audit({ action: "consent.fetch.failed", tenantId: corr.tenantId, outcome: "error", scope: { reason: String((e && e.name) || "error") } }); } catch { /* an audit that cannot be written does not fail the notification */ } }
+        }
+      }
+    }
+
     /* TASK 7.8: THE ENDING THIS FLOW DID NOT HAVE. Until now a transfer was buffered, acknowledged
      * and closed, and the decrypted content went NOWHERE - consumeTransfer and consumeNdhmBundle had
      * no production caller at all. `consumeAndLand` (injected by the composition root, so this file
@@ -223,7 +242,7 @@ export async function handleIngress(env, deps, request) {
           consentId: corr.consentId, onBehalfOf: corr.actor || null, sessionStatus: ev.sessionStatus || "TRANSFERRED",
         });
       } catch (e) {
-        if (deps.audit) { try { await deps.audit({ action: "abdm.land.failed", tenantId: corr.tenantId, outcome: "error", detail: String((e && e.name) || "error") }); } catch { /* an audit that cannot be written does not fail the push */ } }
+        if (deps.audit) { try { await deps.audit({ action: "abdm.land.failed", tenantId: corr.tenantId, outcome: "error", scope: { reason: String((e && e.name) || "error") } }); } catch { /* an audit that cannot be written does not fail the push */ } }
       }
     }
 
