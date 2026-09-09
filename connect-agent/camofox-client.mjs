@@ -7,6 +7,7 @@
  */
 
 const DEFAULT_BASE_URL = 'http://127.0.0.1:9377';
+const REQUIRED_OPENAPI_PATHS = ['/tabs', '/tabs/{tabId}/evaluate', '/tabs/{tabId}/wait', '/tabs/{tabId}'];
 
 function assertUrl(value, name) {
   const url = new URL(value);
@@ -47,6 +48,16 @@ export function createCamofoxClient({
 
   return Object.freeze({
     health: () => call('/health'),
+    openApi: () => call('/openapi.json'),
+    preflight: async () => {
+      const health = await call('/health');
+      if (health?.ok !== true) throw new Error('Camofox health check failed');
+      const openapi = await call('/openapi.json');
+      const paths = new Set(Object.keys(openapi?.paths || {}));
+      const missing = REQUIRED_OPENAPI_PATHS.filter(path => !paths.has(path));
+      if (missing.length) throw new Error(`Unsupported Camofox API: missing ${missing.join(', ')}`);
+      return { ok: true, api: openapi?.info?.version || null };
+    },
     createTab: ({ userId, sessionKey, url }) => call('/tabs', {
       method: 'POST',
       body: JSON.stringify({ userId, sessionKey, url, trace: false }),
@@ -71,6 +82,9 @@ export function createCamofoxClient({
     }),
     closeTab: ({ tabId, userId }) => call(`/tabs/${encodeURIComponent(tabId)}?userId=${encodeURIComponent(userId)}`, {
       method: 'DELETE',
+    }),
+    closeSession: ({ userId }) => call(`/sessions/${encodeURIComponent(userId)}`, {
+      method: 'DELETE', body: JSON.stringify({ userId }),
     }),
   });
 }
