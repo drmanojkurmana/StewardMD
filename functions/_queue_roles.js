@@ -57,6 +57,11 @@ export const CAPS = {
   // borrow a broader one's power to do its own job. Least privilege, per the plan's own text.
   HIM_ROI: "him.roi",               // decide and record a release-of-information request (HIM)
   TRANSFUSION_ISSUE: "transfusion.issue", // crossmatch/issue/administer a transfusion (blood bank)
+  // TASK 4.15 (Emergency Command Mode): declaring/deactivating a hospital-wide emergency is a
+  // governance act, not a clinical one - its own capability, held only by admin/owner, never
+  // folded into emr.treat (a doctor treating a patient is not the same authority as a hospital
+  // declaring mass-casualty mode).
+  EMERGENCY_DECLARE: "emergency.declare",
   // ---- ONCQIS (oncology protocol governance) caps -------------------------------------------
   // Strict role separation: authoring, clinical review, and institutional approval are DISTINCT
   // caps held by DISTINCT roles. Doctor/Nurse never hold any of these (they consume ACTIVE

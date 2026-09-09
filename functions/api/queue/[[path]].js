@@ -94,6 +94,7 @@ import { giveHandover, receiveHandover, listHandovers } from "../../_wardsynq/ha
 import { verifyOrder, verificationQueue } from "../../_wardsynq/pharmacy-verify.js";
 import { dispenseOrder, returnDispense, listDispenses } from "../../_wardsynq/pharmacy-dispense.js";
 import { declareBreakGlass, openEmergencyChart, listBreakGlass } from "../../_wardsynq/break-glass.js";
+import { declareEmergency, deactivateEmergency, emergencyStatus, emergencyLog } from "../../_wardsynq/emergency-mode.js";
 import { operationOutcome } from "../../_wardsynq/fhir.js";
 import { dispatchRead, dispatchOperation } from "../../_wardsynq/fhir-route.js";
 import { ingestFhir, listExceptions, resolveException, inboundEnabled } from "../../_wardsynq/fhir-inbound.js";
@@ -614,6 +615,12 @@ export async function onRequest(context) {
          * non-clinician into one. The list is deliberately readable by any clinical role - the whole
          * value of break-glass is that the ward can see it happened, not only an administrator. */
         "break-glass": CAPS.EMR_VITALS, "emergency-chart": CAPS.EMR_VITALS, "break-glass-log": CAPS.EMR_VITALS,
+        // TASK 4.15: declaring/deactivating a hospital emergency is EMERGENCY_DECLARE only - never
+        // the broader emr.vitals break-glass rides on above, which is a per-patient clinical read,
+        // not a governance act. Status/log are EMR_VIEW - the same visibility tier ward-metrics and
+        // cosign-queue already use, so most clinical roles see a live emergency banner.
+        "emergency-declare": CAPS.EMERGENCY_DECLARE, "emergency-deactivate": CAPS.EMERGENCY_DECLARE,
+        "emergency-status": CAPS.EMR_VIEW, "emergency-log": CAPS.EMR_VIEW,
         /* The FHIR export. emr.view because it renders the chart: exporting a record is reading it,
          * and an export door that was easier to open than the chart itself would be the way around
          * every other control on this file. The record service still applies the actor's own read
@@ -1784,6 +1791,22 @@ export async function onRequest(context) {
       }
       if (sub === "break-glass-log" && method === "GET") {
         const r = await listBreakGlass(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "", activeOnly: url.searchParams.get("active") === "1" });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "emergency-declare" && method === "POST") {
+        const r = await declareEmergency(request, env, { ...deps, kind: body.kind, scope: body.scope, reason: body.reason, relaxations: body.relaxations, minutes: body.minutes, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "emergency-deactivate" && method === "POST") {
+        const r = await deactivateEmergency(request, env, { ...deps, activationId: body.activationId, reason: body.reason, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "emergency-status" && method === "GET") {
+        const r = await emergencyStatus(request, env, deps);
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "emergency-log" && method === "GET") {
+        const r = await emergencyLog(request, env, { ...deps, activeOnly: url.searchParams.get("active") === "1" });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "verify-order" && method === "POST") {
