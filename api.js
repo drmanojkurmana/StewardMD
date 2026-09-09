@@ -400,6 +400,7 @@
   function renderSideList() {
     var b = listHost();
     b.innerHTML =
+      (isWide() ? '' : '<h1 class="db-bigt">Drugs</h1>') +
       '<div class="db-searchbar">' + dbIco("search", "db-search-ic") + '<input id="dbSearch" class="db-search" type="text" placeholder="Search a drug or brand (e.g. pantoprazole, augmentin, monocef)…" autocomplete="off" value="' + esc(q2) + '"></div>' +
       '<div class="db-note"><span id="dbCount">412,224</span> Indian brands · search a molecule or brand name, or browse the molecules A-Z below.</div>' +
       '<div id="dbResults" class="db-results"></div>';
@@ -966,7 +967,10 @@
       "#dbMain{min-width:0}",
       ".db-pick{display:flex;gap:12px;align-items:flex-start;border:1px dashed var(--line,#e5e5e0);border-radius:14px;background:var(--panel,#fff);padding:22px;color:var(--slate,#555);font:500 13.5px var(--sans,system-ui);margin-top:2px}",
       ".db-pick .db-ico{width:22px;height:22px;color:var(--teal,#0a9396)}",
-      ".db-pick-s{color:var(--slate-soft,#888);font-size:12.5px;margin-top:3px}"
+      ".db-pick-s{color:var(--slate-soft,#888);font-size:12.5px;margin-top:3px}",
+      // Option A on narrow screens: large title + iOS-style search field
+      ".db-bigt{font:800 30px var(--sans,system-ui);letter-spacing:-.025em;color:var(--ink,#1a1a1a);margin:6px 2px 10px}",
+      "@media(max-width:819px){.db-search{background:rgba(120,120,128,.14);border-color:transparent;border-radius:13px;padding:12px 14px}.db-searchbar .db-search{padding-left:42px}}"
     ].join("");
     var s = document.createElement("style"); s.id = "smd-db-styles"; s.textContent = css; document.head.appendChild(s);
   }
