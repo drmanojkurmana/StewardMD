@@ -548,6 +548,103 @@ function fhirCarePlan(p) {
   });
 }
 
+/* TASK 7.2. The surgical checklist's own stages into R4's procedure-status. Every one of these is a
+ * real point in the same operation, so nothing is guessed: everything before the knife is
+ * `preparation`, the incision is `in-progress`, sign-out is the end of the procedure, and a case
+ * abandoned before it started is `not-done` - which R4 means literally, and which is the honest word
+ * for a list that was cancelled rather than an operation that failed. */
+const PROCEDURE_STATUS = Object.freeze({
+  booked: "preparation", marked: "preparation", "signed-in": "preparation", "timed-out": "preparation",
+  incised: "in-progress", "signed-out": "completed", abandoned: "not-done",
+});
+
+/**
+ * TASK 7.2. A surgical case as an R4 Procedure.
+ *
+ * The procedure is the hospital's own words (a booking says "laparoscopic cholecystectomy", not a
+ * SNOMED code), so it travels as TEXT with no coding at all. Inventing a code for it is the single
+ * most dangerous thing this mapper could do: a receiving system acts on codes, and a wrong procedure
+ * code on the wrong side is the exact harm the surgical checklist exists to prevent. The SIDE is
+ * likewise text - R4 carries laterality as a qualifier on a coded body site, and this record has
+ * neither the code nor the qualifier vocabulary.
+ */
+function fhirProcedure(c) {
+  const site = [str(c.site), str(c.laterality)].filter(Boolean).join(" ");
+  const sigs = ((c.signOut && c.signOut.signatures) || (c.timeOut && c.timeOut.signatures) || (c.signIn && c.signIn.signatures) || []);
+  const start = str(c.incisionAt) || str(c.signIn && c.signIn.at);
+  const end = str(c.signOut && c.signOut.at);
+  return clean({
+    resourceType: "Procedure", id: fhirId(c.id),
+    status: PROCEDURE_STATUS[str(c.stage)] || "unknown",
+    code: str(c.procedure) ? { text: str(c.procedure) } : undefined,
+    subject: ref("Patient", c.patientId),
+    encounter: ref("Encounter", c.encounterId),
+    // A period only when there is one: a case that has not been incised has no performed time, and
+    // an operation dated to the moment it was booked would be a fabricated fact about a patient.
+    performedPeriod: start || end ? clean({ start: start || undefined, end: end || undefined }) : undefined,
+    /* Who was in theatre, in the ROLE they signed under. The checklist requires three different
+     * people in three named roles, and that is exactly what R4's performer.function is for. */
+    performer: sigs.length ? sigs.map((g) => clean({ function: str(g.role) ? { text: str(g.role) } : undefined, actor: practitioner(g.actorId) })).filter((x) => x.actor) : undefined,
+    bodySite: site ? [{ text: site }] : undefined,
+  });
+}
+
+/* TASK 7.2. WardSynQ's appointment states and R4's are the same five facts under different names,
+ * which is why this is a rename and not an interpretation. "did-not-attend" is R4's `noshow`. */
+const APPOINTMENT_STATUS = Object.freeze({ booked: "booked", arrived: "arrived", completed: "fulfilled", cancelled: "cancelled", "did-not-attend": "noshow" });
+
+/** TASK 7.2. An appointment. The slot is a start and a duration; an end is only stated when both are. */
+function fhirAppointment(a) {
+  const start = str(a.startAt);
+  const mins = Number(a.minutes);
+  const end = start && Number.isFinite(mins) && mins > 0 ? new Date(Date.parse(start) + mins * 60000).toISOString() : "";
+  return clean({
+    resourceType: "Appointment", id: fhirId(a.id),
+    status: APPOINTMENT_STATUS[str(a.state)] || "proposed",
+    start: start || undefined,
+    end: end && !Number.isNaN(Date.parse(end)) ? end : undefined,
+    minutesDuration: Number.isFinite(mins) && mins > 0 ? mins : undefined,
+    reasonCode: str(a.reason) ? [{ text: str(a.reason) }] : undefined,
+    /* An overbooking is stated rather than hidden. A real clinic overbooks; a receiving system that
+     * cannot see it will reconcile two appointments in one slot as an error. */
+    comment: a.overbooked ? `Deliberately overbooked${str(a.overbookReason) ? ": " + str(a.overbookReason) : ""}` : undefined,
+    /* R4 requires at least one participant, and the patient IS the appointment. `status: "accepted"`
+     * here means the appointment holds this participant - not that the patient confirmed anything;
+     * this record carries no patient confirmation, so none is claimed beyond the booking itself. */
+    participant: [
+      clean({ actor: ref("Patient", a.patientId), required: "required", status: "accepted" }),
+      ...(str(a.clinicianId) ? [clean({ actor: practitioner(a.clinicianId), required: "required", status: "accepted" })] : []),
+    ],
+  });
+}
+
+/**
+ * TASK 7.2. A risk assessment (Braden, Morse, falls - whatever tool the hospital loaded).
+ *
+ * THE BAND IS THE HOSPITAL'S OWN WORD and travels as text under its own tool, never mapped to a
+ * standard risk vocabulary: "high" on one hospital's falls tool is not "high" on another's, and a
+ * receiver that read a shared code would compare two different scales. The tool's name and version
+ * ride along so the number can be reconciled with the paper version the ward uses.
+ */
+function fhirRiskAssessment(r) {
+  const actions = Array.isArray(r.actions) ? r.actions.map(str).filter(Boolean) : [];
+  return clean({
+    resourceType: "RiskAssessment", id: fhirId(r.id),
+    // `final` because a saved assessment is a completed one; this record has no draft state.
+    status: "final",
+    subject: ref("Patient", r.patientId),
+    encounter: ref("Encounter", r.encounterId),
+    occurrenceDateTime: str(r.assessedAt) || undefined,
+    performer: practitioner(r.assessedBy),
+    method: str(r.toolName) || str(r.toolId) ? clean({ text: [str(r.toolName) || str(r.toolId), str(r.toolVersion) ? `v${str(r.toolVersion)}` : ""].filter(Boolean).join(" ") }) : undefined,
+    prediction: str(r.band) ? [{ outcome: { text: str(r.toolName) || str(r.toolId) || "risk" }, qualitativeRisk: { text: str(r.band) } }] : undefined,
+    /* R4's own field for what is being done about the risk. The actions the band selected are the
+     * only part of an assessment that changes anything for the patient. */
+    mitigation: actions.length ? actions.join("; ") : undefined,
+    note: Number.isFinite(Number(r.total)) && r.total !== null ? [{ text: `Score ${Number(r.total)}${str(r.toolName) ? ` on ${str(r.toolName)}` : ""}.` }] : undefined,
+  });
+}
+
 /* R4 ImagingStudy.status. WardSynQ carries the same three words, so this is a check rather than a
  * translation: a status this file does not recognise renders as "unknown", never as "available". */
 const IMAGING_STATUS = Object.freeze({ available: "available", registered: "registered", cancelled: "cancelled", "entered-in-error": "entered-in-error" });
@@ -618,6 +715,9 @@ const MAPPERS = Object.freeze({
   MedicationDispense: fhirMedicationDispense,
   CarePlan: fhirCarePlan,
   ImagingStudy: fhirImagingStudy,
+  SurgicalCase: fhirProcedure,
+  Appointment: fhirAppointment,
+  RiskAssessment: fhirRiskAssessment,
 });
 
 /** Our type name to the FHIR one it renders as. */
@@ -628,6 +728,9 @@ const FHIR_TYPE = Object.freeze({
   ServiceRequest: "ServiceRequest", DiagnosticReport: "DiagnosticReport", ClinicalNote: "DocumentReference",
   PatientConsent: "Consent", SpecimenCollection: "Specimen", MedicationDispense: "MedicationDispense",
   CarePlan: "CarePlan", ImagingStudy: "ImagingStudy",
+  /* TASK 7.2. A surgical case IS a Procedure - the resource a receiving system files an operation
+   * under. Appointment and RiskAssessment map one-to-one onto their R4 namesakes. */
+  SurgicalCase: "Procedure", Appointment: "Appointment", RiskAssessment: "RiskAssessment",
 });
 /** And back, so a caller can ask for the FHIR name. */
 const CANONICAL_TYPE = Object.freeze(Object.fromEntries(Object.entries(FHIR_TYPE).map(([k, v]) => [v, k])));
@@ -1209,7 +1312,7 @@ export {
   systemUriFor, codeable, identifier, withMeta, toFhir, bundle, capabilityStatement, operationOutcome,
   fhirPatient, fhirEncounter, fhirCondition, fhirAllergy, fhirObservation,
   fhirMedicationRequest, fhirMedicationAdministration, fhirServiceRequest,
-  fhirDiagnosticReport, fhirDocumentReference, fhirConsent, fhirProvenance, fhirImagingStudy, parseProvenanceId, compartmentOf, parseEverything, resolveId, fenced,
+  fhirDiagnosticReport, fhirDocumentReference, fhirConsent, fhirProvenance, fhirImagingStudy, fhirProcedure, fhirAppointment, fhirRiskAssessment, parseProvenanceId, compartmentOf, parseEverything, resolveId, fenced,
   patientEverything, readResource, searchType, historyOf, vread, provenanceRead, provenanceSearch,
   validateFully, validateOperation, validateCodeOperation,
 };
