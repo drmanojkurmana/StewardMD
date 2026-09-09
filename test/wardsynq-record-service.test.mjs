@@ -495,15 +495,15 @@ test("role mapping: every operational role resolves to exactly the grant its cap
   // TASK 5.14: INCIDENT_REPORT joined nurse's caps (filing an incident is broad, per
   // wardsynq-incidents.js's own header on silence being the real failure mode) and adds exactly
   // one type - IncidentReport - to the write scope, nothing else.
-  assert.deepEqual(write("nurse"), ["Observation", "ShiftHandover", "BreakGlassGrant", "MedicationReconciliation", "PatientConsent", "CarePlan", "RiskAssessment", "SpecimenCollection", "WoundAssessment", "ClinicalRead", "DeviceAssociation", "BloodLossRecord", "Patient", "Encounter", "Appointment", "PatientLink", "PrescriptionTransmission", "AdmissionRequest", "ResourceBooking", "Blackout", "MedicationAdministration", "InfusionRate", "IncidentReport"]);
+  assert.deepEqual(write("nurse"), ["Observation", "ShiftHandover", "BreakGlassGrant", "MedicationReconciliation", "PatientConsent", "CarePlan", "RiskAssessment", "SpecimenCollection", "WoundAssessment", "ClinicalRead", "DeviceAssociation", "BloodLossRecord", "PatientTag", "Patient", "Encounter", "Appointment", "PatientLink", "PrescriptionTransmission", "AdmissionRequest", "ResourceBooking", "Blackout", "MedicationAdministration", "InfusionRate", "IncidentReport"]);
   assert.equal(read("nurse"), null);
   assert.ok(!write("nurse").includes("MedicationOrder"), "a nurse who can give a dose still cannot write the order for it");
   assert.ok(!write("nurse").includes("ClinicalNote"), "nor an assessment, nor a discharge summary");
   // intern/resident hold INCIDENT_REPORT too; pg_resident does not (a PG resident's caps are
   // enumerated separately in ROLE_CAPS and were not touched by TASK 5.14).
-  for (const r of ["intern", "resident"]) { assert.equal(tier(r), TIER.EXECUTE, r); assert.deepEqual(write(r), ["Observation", "ShiftHandover", "BreakGlassGrant", "MedicationReconciliation", "PatientConsent", "CarePlan", "RiskAssessment", "SpecimenCollection", "WoundAssessment", "ClinicalRead", "DeviceAssociation", "BloodLossRecord", "Patient", "Encounter", "Appointment", "PatientLink", "PrescriptionTransmission", "AdmissionRequest", "ResourceBooking", "Blackout", "IncidentReport"], r); assert.equal(read(r), null, r); }
+  for (const r of ["intern", "resident"]) { assert.equal(tier(r), TIER.EXECUTE, r); assert.deepEqual(write(r), ["Observation", "ShiftHandover", "BreakGlassGrant", "MedicationReconciliation", "PatientConsent", "CarePlan", "RiskAssessment", "SpecimenCollection", "WoundAssessment", "ClinicalRead", "DeviceAssociation", "BloodLossRecord", "PatientTag", "Patient", "Encounter", "Appointment", "PatientLink", "PrescriptionTransmission", "AdmissionRequest", "ResourceBooking", "Blackout", "IncidentReport"], r); assert.equal(read(r), null, r); }
   assert.equal(tier("pg_resident"), TIER.EXECUTE);
-  assert.deepEqual(write("pg_resident"), ["Observation", "ShiftHandover", "BreakGlassGrant", "MedicationReconciliation", "PatientConsent", "CarePlan", "RiskAssessment", "SpecimenCollection", "WoundAssessment", "ClinicalRead", "DeviceAssociation", "BloodLossRecord", "Patient", "Encounter", "Appointment", "PatientLink", "PrescriptionTransmission", "AdmissionRequest", "ResourceBooking", "Blackout"]);
+  assert.deepEqual(write("pg_resident"), ["Observation", "ShiftHandover", "BreakGlassGrant", "MedicationReconciliation", "PatientConsent", "CarePlan", "RiskAssessment", "SpecimenCollection", "WoundAssessment", "ClinicalRead", "DeviceAssociation", "BloodLossRecord", "PatientTag", "Patient", "Encounter", "Appointment", "PatientLink", "PrescriptionTransmission", "AdmissionRequest", "ResourceBooking", "Blackout"]);
   assert.equal(read("pg_resident"), null);
   // supervisor gained INCIDENT_REPORT; reception did not (see ROLE_CAPS) - no longer the same list.
   assert.equal(tier("supervisor"), TIER.EXECUTE);
@@ -608,7 +608,7 @@ test("OPD roles at the door: doctor writes and signs, nurse records vitals and n
   const nurse = await client(h, "fb:sister-anu");
   assert.equal(nurse.descriptor.role, "nurse");
   assert.equal(nurse.descriptor.actor.tier, "execute");
-  assert.deepEqual(nurse.descriptor.actor.writable, ["Observation", "ShiftHandover", "BreakGlassGrant", "MedicationReconciliation", "PatientConsent", "CarePlan", "RiskAssessment", "SpecimenCollection", "WoundAssessment", "ClinicalRead", "DeviceAssociation", "BloodLossRecord", "Patient", "Encounter", "Appointment", "PatientLink", "PrescriptionTransmission", "AdmissionRequest", "ResourceBooking", "Blackout", "MedicationAdministration", "InfusionRate", "IncidentReport"]);
+  assert.deepEqual(nurse.descriptor.actor.writable, ["Observation", "ShiftHandover", "BreakGlassGrant", "MedicationReconciliation", "PatientConsent", "CarePlan", "RiskAssessment", "SpecimenCollection", "WoundAssessment", "ClinicalRead", "DeviceAssociation", "BloodLossRecord", "PatientTag", "Patient", "Encounter", "Appointment", "PatientLink", "PrescriptionTransmission", "AdmissionRequest", "ResourceBooking", "Blackout", "MedicationAdministration", "InfusionRate", "IncidentReport"]);
   assert.equal(nurse.descriptor.actor.canSign, false);
   const bp = await nurse.session("pat-20").put(Observation({ id: "obs-20", patientId: "pat-20", code: "85354-9", value: "142/91", category: "vital-signs" }));
   assert.equal(bp.writtenBy.id, "fb:sister-anu");
@@ -679,7 +679,7 @@ test("staff sessions: a nurse signed in with email+PIN on a hospital PC reaches 
   const nurse = await (async () => { const b = new RemoteBackend({ tenantId: "gimsr", baseUrl: "https://x", fetch: asStaff(nurseTok) }); await b.open(); return b; })();
   assert.equal(nurse.descriptor.actor.id, "nurse.anu");
   assert.equal(nurse.descriptor.role, "nurse");
-  assert.deepEqual(nurse.descriptor.actor.writable, ["Observation", "ShiftHandover", "BreakGlassGrant", "MedicationReconciliation", "PatientConsent", "CarePlan", "RiskAssessment", "SpecimenCollection", "WoundAssessment", "ClinicalRead", "DeviceAssociation", "BloodLossRecord", "Patient", "Encounter", "Appointment", "PatientLink", "PrescriptionTransmission", "AdmissionRequest", "ResourceBooking", "Blackout", "MedicationAdministration", "InfusionRate", "IncidentReport"]);
+  assert.deepEqual(nurse.descriptor.actor.writable, ["Observation", "ShiftHandover", "BreakGlassGrant", "MedicationReconciliation", "PatientConsent", "CarePlan", "RiskAssessment", "SpecimenCollection", "WoundAssessment", "ClinicalRead", "DeviceAssociation", "BloodLossRecord", "PatientTag", "Patient", "Encounter", "Appointment", "PatientLink", "PrescriptionTransmission", "AdmissionRequest", "ResourceBooking", "Blackout", "MedicationAdministration", "InfusionRate", "IncidentReport"]);
   // Staff sessions are off unless the deployment says so, and org-bound.
   assert.equal((await handle(new Request("https://x/api/wardsynq/gimsr", { headers: { "X-Staff-Token": nurseTok } }), ENV, h.deps)).status, 401);
   assert.equal((await asStaff(otherOrgTok)("https://x/api/wardsynq/gimsr")).status, 403);
@@ -732,7 +732,7 @@ test("AI drafts: written by the AI actor on the clinician's behalf, never author
   // Pure: the AI actor is DRAFT whatever it asks, and its scope is the human's.
   const human = actorFromOpdRole({ identity: { id: "fb:n" }, role: "nurse" });
   const bot = aiActorFor(human, { id: "maik" });
-  assert.equal(bot.tier, "draft"); assert.deepEqual([...bot.scope.write], ["Observation", "ShiftHandover", "BreakGlassGrant", "MedicationReconciliation", "PatientConsent", "CarePlan", "RiskAssessment", "SpecimenCollection", "WoundAssessment", "ClinicalRead", "DeviceAssociation", "BloodLossRecord", "Patient", "Encounter", "Appointment", "PatientLink", "PrescriptionTransmission", "AdmissionRequest", "ResourceBooking", "Blackout", "MedicationAdministration", "InfusionRate", "IncidentReport"]); assert.equal(bot.onBehalfOf, "fb:n");
+  assert.equal(bot.tier, "draft"); assert.deepEqual([...bot.scope.write], ["Observation", "ShiftHandover", "BreakGlassGrant", "MedicationReconciliation", "PatientConsent", "CarePlan", "RiskAssessment", "SpecimenCollection", "WoundAssessment", "ClinicalRead", "DeviceAssociation", "BloodLossRecord", "PatientTag", "Patient", "Encounter", "Appointment", "PatientLink", "PrescriptionTransmission", "AdmissionRequest", "ResourceBooking", "Blackout", "MedicationAdministration", "InfusionRate", "IncidentReport"]); assert.equal(bot.onBehalfOf, "fb:n");
 
   /* 7. AND IT STILL MAY NOT SAY A PRESCRIPTION ARRIVED. The scope above includes
    * PrescriptionTransmission, because the nurse it drafts for legitimately writes one. But that

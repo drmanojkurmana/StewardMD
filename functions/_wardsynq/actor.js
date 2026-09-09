@@ -86,7 +86,10 @@ const ORDER_TYPES = Object.freeze(["MedicationOrder", "ServiceRequest"]);
  * is all that's possible) is the midwife's own bedside quantification, the same authority as
  * charting fluid balance - not a diagnosis, and not gated behind emr.treat the way starting the PPH
  * bundle itself is. */
-const VITALS_TYPES = Object.freeze(["Observation", "ShiftHandover", "BreakGlassGrant", "MedicationReconciliation", "PatientConsent", "CarePlan", "RiskAssessment", "SpecimenCollection", "WoundAssessment", "ClinicalRead", "DeviceAssociation", "BloodLossRecord"]);
+const VITALS_TYPES = Object.freeze(["Observation", "ShiftHandover", "BreakGlassGrant", "MedicationReconciliation", "PatientConsent", "CarePlan", "RiskAssessment", "SpecimenCollection", "WoundAssessment", "ClinicalRead", "DeviceAssociation", "BloodLossRecord",
+  // TASK 6.14: PatientTag - assigning/replacing/ending a wristband is the same bedside act as
+  // DeviceAssociation, above, and the same capability governs both.
+  "PatientTag"]);
 const PATIENT_TYPE = "Patient";
 // Added 2026-09-06 (the Encounter migration), alongside PATIENT_TYPE and for the identical reason:
 // checking a patient in for today's visit is the SAME administrative act QUEUE_ADD already covers
