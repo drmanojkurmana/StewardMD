@@ -112,3 +112,26 @@ test("CHARGE CAPTURE WIDENED BILLING'S READ AND NOT ITS WRITE", () => {
   // Still not the whole chart: the notes remain out of reach.
   assert.ok(!cashier.read.includes("ClinicalNote"));
 });
+
+/* TASK 4.18's own end-to-end journey test found this: MedicationDispense (pharmacy-dispense.js) and
+ * SpecimenCollection (specimen.js) both name their lifecycle field `state`, not `status`, unlike
+ * MedicationAdministration/DiagnosticReport above. capturableFrom() read `row.status` for every
+ * type since this file was written, so a dispensed drug or a collected specimen could NEVER be
+ * captured as a charge - `row.status` was always undefined for them, and every one fell through to
+ * "did_not_happen" regardless of its real state. This gap existed because no test here ever
+ * exercised either type. Fixed via a per-type STATUS_FIELD map; these two tests are that coverage. */
+test("REGRESSION: a dispensed drug IS captured - MedicationDispense names its lifecycle field `state`, not `status`", () => {
+  const dispensed = { id: "disp-1", state: "issued", drug: "Amoxicillin", drugCode: null, patientId: "pat-1", encounterId: "enc-1", dispensedAt: "2026-09-09T09:00:00.000Z" };
+  const returned = { id: "disp-2", state: "returned", drug: "Amoxicillin", patientId: "pat-1", encounterId: "enc-1" };
+  const { items, skipped } = capturableFrom({ MedicationDispense: [dispensed, returned] });
+  assert.deepEqual(items.map((i) => i.sourceId), ["disp-1"], "the issued one is captured; the returned one is not");
+  assert.deepEqual(skipped.map((s) => s.status), ["returned"]);
+});
+
+test("REGRESSION: a collected specimen IS captured - SpecimenCollection also names its lifecycle field `state`", () => {
+  const collected = { id: "spec-1", state: "collected", code: "specimen-collection", display: "Venous blood", patientId: "pat-1", encounterId: "enc-1", collectedAt: "2026-09-09T09:00:00.000Z" };
+  const failed = { id: "spec-2", state: "failed", code: "specimen-collection", patientId: "pat-1", encounterId: "enc-1" };
+  const { items, skipped } = capturableFrom({ SpecimenCollection: [collected, failed] });
+  assert.deepEqual(items.map((i) => i.sourceId), ["spec-1"]);
+  assert.deepEqual(skipped.map((s) => s.status), ["failed"]);
+});
