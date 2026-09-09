@@ -295,3 +295,36 @@ test("the /ward/source-grant door itself is admin-only, and a non-admin's attemp
   const r = await pushFhir(DOCTOR, ORG_A, bundle("PAT-9", "MRN-9"), { "X-Source-System": "epic-a" });
   assert.equal(r.__status, 403, JSON.stringify(r), "no grant exists - a doctor could not create one for itself");
 });
+
+/* ---- TASK 7.10: the grants are now READABLE, which is what makes them manageable ----------------- */
+
+test("the grant list shows what is live and what has lapsed, and only an administrator may read it", async () => {
+  seedHospitals();
+  await grant(ADMIN, ORG_A, DOCTOR, "epic-a");
+  await grant(ADMIN, ORG_A, DOCTOR, "lab-old");
+  // One is withdrawn, and one is issued with an expiry that has already passed.
+  const rev = await as(ADMIN, `/ward/source-revoke?orgId=${ORG_A}`, "POST", { actorId: idFor(DOCTOR), sourceSystem: "lab-old", reason: "contract ended" });
+  assert.equal(rev.__status, 200, JSON.stringify(rev));
+  const lapsed = await as(ADMIN, `/ward/source-grant?orgId=${ORG_A}`, "POST", { actorId: idFor(DOCTOR2), sourceSystem: "old-his", expiresAt: "2020-01-01T00:00:00.000Z" });
+  assert.equal(lapsed.__status, 200, JSON.stringify(lapsed));
+
+  const list = await as(ADMIN, `/ward/source-grants?orgId=${ORG_A}`, "GET");
+  assert.equal(list.__status, 200, JSON.stringify(list));
+  const by = {};
+  for (const g of list.grants) by[g.sourceSystem] = g;
+  assert.equal(by["epic-a"].state, "active");
+  assert.equal(by["lab-old"].state, "revoked", "a withdrawn grant is still listed - a list that omits it cannot answer 'was this ever allowed'");
+  assert.equal(by["lab-old"].revokedReason, "contract ended");
+  assert.equal(by["old-his"].state, "expired", "an expiry in the past is EXPIRED, not active");
+  assert.equal(list.active, 1, "one live authorisation");
+
+  // It names who may push as whom, so it is administrative, not clinical.
+  const denied = await as(DOCTOR, `/ward/source-grants?orgId=${ORG_A}`, "GET");
+  assert.equal(denied.__status, 403, JSON.stringify(denied));
+  assert.ok(!denied.grants || !denied.grants.length);
+
+  // And it is this hospital's own list: the other hospital sees none of it.
+  const other = await as(ADMIN, `/ward/source-grants?orgId=${ORG_B}`, "GET");
+  assert.equal(other.__status, 200, JSON.stringify(other));
+  assert.equal(other.grants.length, 0, "hospital B holds no grants of its own");
+});

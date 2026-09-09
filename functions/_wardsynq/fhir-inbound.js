@@ -1274,6 +1274,44 @@ async function listExceptions(request, env, ctx) {
   return { ok: true, open, note: "Each of these is something another system sent that WardSynQ would not write without a person deciding. Nothing here has been filed on a chart." };
 }
 
+/**
+ * TASK 7.10: who this hospital currently believes when a feed says who it is.
+ *
+ * The grants have been writable since STEP 1 and READABLE nowhere: an administrator could issue one
+ * and then had no way to see what had been issued, which is the state in which a stale authorisation
+ * survives for years. Revoked and expired grants are returned too, and SAID to be revoked or
+ * expired - a list that quietly omits them cannot answer "was this system ever allowed to push".
+ */
+async function listSourceGrants(request, env, ctx) {
+  const mig = ctx.migration;
+  if (!mig || mig.mode === "off") return { ok: true, skipped: "off", grants: [] };
+  const { svc, error } = await openIngest(request, env, { ...ctx });
+  if (error) return { ok: false, status: error.status, error: "permission", detail: error.outcome.issue[0].diagnostics, grants: [] };
+  let rows;
+  try { rows = await svc.list(GRANT_TYPE, 200); }
+  catch (e) { return { ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), grants: [] }; }
+  const now = Date.now();
+  const grants = (rows || []).filter(Boolean).map((g) => {
+    const expiry = Date.parse(str(g.expiresAt));
+    const expired = Number.isFinite(expiry) && expiry <= now;
+    return {
+      id: g.id, sourceSystem: g.sourceSystem, actorId: g.actorId,
+      active: g.active !== false, expired, expiresAt: g.expiresAt || null,
+      // What a person reading this needs first: is this live, and if not, why not.
+      state: g.active === false ? "revoked" : expired ? "expired" : "active",
+      note: g.note || null, grantedBy: g.grantedBy || null, grantedAt: g.grantedAt || null,
+      revokedBy: g.revokedBy || null, revokedAt: g.revokedAt || null,
+      /* revokeSourceSystem writes the mandatory reason into `note` (it is the same field the grant's
+       * own note lives in, replaced at revocation). Surfaced under its real meaning here so a
+       * console does not have to know that, and null on a live grant so a note about why a system
+       * was TRUSTED never reads as a reason it was stopped. */
+      revokedReason: g.active === false ? (g.note || null) : null,
+      version: g.version,
+    };
+  }).sort((a, b) => String(a.sourceSystem).localeCompare(String(b.sourceSystem)));
+  return { ok: true, grants, active: grants.filter((g) => g.state === "active").length };
+}
+
 /** Re-drive handlers by protocol. A gateway registers itself; the FHIR door is the default. */
 const REDRIVE = {};
 function registerRedrive(protocol, fn) { if (str(protocol) && typeof fn === "function") REDRIVE[str(protocol)] = fn; }
@@ -1284,5 +1322,5 @@ export {
   tenantMismatch, encounterMismatches, staleUpdates, medicationConflicts, cancellationsWithoutTarget, drugKey, conflictDetail, LIVE_MED_STATUS,
   ExchangeException, ExchangeIdentityDecision, priorDecision,
   SourceSystemGrant, grantIdFor, authorizedSourceSystem, grantSourceSystem, revokeSourceSystem,
-  ingestFhir, landBundle, openIngest, registerRedrive, listExceptions, resolveException,
+  ingestFhir, landBundle, openIngest, registerRedrive, listExceptions, listSourceGrants, resolveException,
 };

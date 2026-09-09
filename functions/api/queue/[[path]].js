@@ -99,7 +99,7 @@ import { reportIncident, triageIncident, recordIncidentRCA, addIncidentCAPA, com
 import { assignPatientTag, verifyPatientTag, deactivatePatientTag, reportPatientTagLost, replacePatientTag, patientTagLog } from "../../_wardsynq/identity-tag.js";
 import { operationOutcome } from "../../_wardsynq/fhir.js";
 import { dispatchRead, dispatchOperation } from "../../_wardsynq/fhir-route.js";
-import { ingestFhir, listExceptions, resolveException, inboundEnabled, grantSourceSystem, revokeSourceSystem } from "../../_wardsynq/fhir-inbound.js";
+import { ingestFhir, listExceptions, listSourceGrants, resolveException, inboundEnabled, grantSourceSystem, revokeSourceSystem } from "../../_wardsynq/fhir-inbound.js";
 import { registerDestination, revokeDestination, listDestinations, queueDelivery, dispatchOutbound, listDeliveries, replayDelivery } from "../../_wardsynq/fhir-outbound.js";
 import { createLaunch } from "../../_wardsynq/smart-server.js";
 import { ingestHl7 } from "../../_wardsynq/hl7-inbound.js";
@@ -647,7 +647,7 @@ export async function onRequest(context) {
         // TASK 7 STEP 1: who WardSynQ believes when a feed says who it is. staff.admin, the same
         // capability that manages the staff->role mapping - registering a trusted source system is
         // exactly that kind of hospital-administration act, never a clinical one.
-        "source-grant": CAPS.STAFF_ADMIN, "source-revoke": CAPS.STAFF_ADMIN,
+        "source-grant": CAPS.STAFF_ADMIN, "source-revoke": CAPS.STAFF_ADMIN, "source-grants": CAPS.STAFF_ADMIN,
         /* TASK 7.4: the outbound side. ALL of it is staff.admin, including the send itself. Deciding
          * that a chart leaves this building for another organisation is an administrative and
          * information-governance act, not a bedside one - a clinician who can read a record has no
@@ -1255,6 +1255,10 @@ export async function onRequest(context) {
       }
       if (sub === "fhir-exception-resolve" && method === "POST") {
         const r = await resolveException(request, env, { ...deps, config: (wsqCfg && wsqCfg.fhir) || null, hl7Config: (wsqCfg && wsqCfg.hl7) || null, terminology: (wsqCfg && wsqCfg.terminology) || null, profiles: (wsqCfg && wsqCfg.fhir && wsqCfg.fhir.profiles) || null, base: `${url.origin}/api/queue/ward/fhir`, exceptionId: body.exceptionId, resolution: body.resolution, localPatientId: body.localPatientId, reason: body.reason });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "source-grants" && method === "GET") {
+        const r = await listSourceGrants(request, env, { ...deps });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "source-grant" && method === "POST") {

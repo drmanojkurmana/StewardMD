@@ -1,0 +1,63 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>WardSynQ ward: integration console harness</title>
+<link rel="stylesheet" href="../ward.css">
+<style>html,body{margin:0;height:100%}</style>
+</head><body>
+<script>
+/* TASK 7.10. The REAL ward.js against a stubbed transport: every call it makes is answered here and
+ * recorded, so the delegated click handlers, the prompt-for-a-reason refusals and the settle/paint
+ * cycle run in a real browser against the real stylesheet. No network, no server.
+ *
+ * The stub also models the two things the console exists to make visible: a read that FAILS (the
+ * outbound queue is unreachable until the test lets it succeed) and an action the server REFUSES. */
+window.__calls = [];
+window.__outboundDown = false;
+localStorage.setItem("smd_opd_staff_tok", "harness-token");
+
+var GRANTS = { ok: true, grants: [
+  { id: "g1", sourceSystem: "epic-a", actorId: "cfa:doc", state: "active", active: true, expired: false, grantedAt: "2026-09-01T00:00:00.000Z" },
+  { id: "g2", sourceSystem: "lab-old", actorId: "cfa:lab", state: "expired", active: true, expired: true, expiresAt: "2026-08-01T00:00:00.000Z" }
+] };
+var DESTS = { ok: true, destinations: [
+  { id: "d1", name: "partner-hospital", url: "https://fhir.partner.example/r4", resourceTypes: ["Patient"], active: true, auth: { kind: "bearer", configured: true } }
+] };
+var OUT = { ok: true, counts: { queued: 1, failed: 0, "dead-letter": 1 }, deadLetter: 1, deliveries: [
+  { id: "dl-1", state: "dead-letter", destinationName: "partner-hospital", target: { resourceType: "Patient", id: "pat-1", version: 3, fhirType: "Patient" }, attempts: [1,2,3,4,5], lastError: "the destination answered 500" },
+  { id: "q-1", state: "queued", destinationName: "partner-hospital", target: { resourceType: "Patient", id: "pat-3", version: 1, fhirType: "Patient" }, attempts: [] }
+] };
+
+window.fetch = function (url, opts) {
+  var u = String(url), body = null;
+  try { body = opts && opts.body ? JSON.parse(opts.body) : null; } catch (e) {}
+  window.__calls.push({ url: u, method: (opts && opts.method) || "GET", body: body });
+  var reply = function (obj, status) { return Promise.resolve({ ok: (status || 200) < 400, status: status || 200, json: function () { return Promise.resolve(obj); } }); };
+  if (u.indexOf("/ward/list") >= 0) return reply({ ok: true, patients: [] });
+  if (u.indexOf("/ward/fhir-exceptions") >= 0) return reply({ ok: true, open: [{ id: "x1", reason: "identity-ambiguous" }] });
+  if (u.indexOf("/ward/source-grants") >= 0) return reply(GRANTS);
+  if (u.indexOf("/ward/outbound-destinations") >= 0) return reply(DESTS);
+  if (u.indexOf("/ward/outbound-dispatch") >= 0) return reply({ ok: true, attempted: 2, due: 2, results: [] });
+  if (u.indexOf("/ward/outbound-replay") >= 0) {
+    if (!body || !body.reason) return reply({ ok: false, error: "reason_required" }, 422);
+    OUT = { ok: true, counts: { queued: 2, failed: 0, "dead-letter": 0 }, deadLetter: 0, deliveries: [
+      { id: "dl-1", state: "queued", destinationName: "partner-hospital", target: { resourceType: "Patient", id: "pat-1", version: 3, fhirType: "Patient" }, attempts: [1,2,3,4,5,6] },
+      OUT.deliveries[1]
+    ] };
+    return reply({ ok: true, delivery: { id: "dl-1", state: "queued" } });
+  }
+  if (u.indexOf("/ward/outbound-destination-revoke") >= 0) {
+    // The server refuses this one, and the screen must show ITS sentence rather than "done".
+    return reply({ ok: false, error: "permission", message: "Your role here is \"nurse\", which cannot stop a destination." }, 403);
+  }
+  if (u.indexOf("/ward/outbound") >= 0) {
+    if (window.__outboundDown) return reply({ ok: false, error: "record_read_failed" }, 502);
+    return reply(OUT);
+  }
+  return reply({ ok: true });
+};
+</script>
+<script src="../ward.js"></script>
+<script>
+window.__ready = !!(window.WARD && window.WARD.open);
+</script>
+</body></html>
