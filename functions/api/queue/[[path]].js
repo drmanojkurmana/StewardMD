@@ -100,6 +100,7 @@ import { assignPatientTag, verifyPatientTag, deactivatePatientTag, reportPatient
 import { operationOutcome } from "../../_wardsynq/fhir.js";
 import { dispatchRead, dispatchOperation } from "../../_wardsynq/fhir-route.js";
 import { ingestFhir, listExceptions, resolveException, inboundEnabled, grantSourceSystem, revokeSourceSystem } from "../../_wardsynq/fhir-inbound.js";
+import { registerDestination, revokeDestination, listDestinations, queueDelivery, dispatchOutbound, listDeliveries, replayDelivery } from "../../_wardsynq/fhir-outbound.js";
 import { createLaunch } from "../../_wardsynq/smart-server.js";
 import { ingestHl7 } from "../../_wardsynq/hl7-inbound.js";
 import { startReconciliation, decideMedicine, readReconciliation } from "../../_wardsynq/med-reconciliation.js";
@@ -646,6 +647,14 @@ export async function onRequest(context) {
         // capability that manages the staff->role mapping - registering a trusted source system is
         // exactly that kind of hospital-administration act, never a clinical one.
         "source-grant": CAPS.STAFF_ADMIN, "source-revoke": CAPS.STAFF_ADMIN,
+        /* TASK 7.4: the outbound side. ALL of it is staff.admin, including the send itself. Deciding
+         * that a chart leaves this building for another organisation is an administrative and
+         * information-governance act, not a bedside one - a clinician who can read a record has no
+         * authority to transmit it elsewhere, and an outbound door that opened at emr.view would be
+         * the easiest way around every disclosure control in this file. */
+        "outbound-destination": CAPS.STAFF_ADMIN, "outbound-destination-revoke": CAPS.STAFF_ADMIN,
+        "outbound-destinations": CAPS.STAFF_ADMIN, "outbound-send": CAPS.STAFF_ADMIN,
+        "outbound-dispatch": CAPS.STAFF_ADMIN, "outbound": CAPS.STAFF_ADMIN, "outbound-replay": CAPS.STAFF_ADMIN,
         hl7: CAPS.EMR_TREAT,
         /* DECIDING is emr.treat: "this is the same person" and "the feed's version replaces ours"
          * are clinical judgements about a chart, and they are recorded under the decider's name. */
@@ -1243,6 +1252,43 @@ export async function onRequest(context) {
       }
       if (sub === "source-revoke" && method === "POST") {
         const r = await revokeSourceSystem(request, env, { ...deps, actorId: body.actorId, sourceSystem: body.sourceSystem, reason: body.reason, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      /* TASK 7.4: WardSynQ -> another system. A destination is REGISTERED (that registration is the
+       * allowlist), a resource is QUEUED against it by name, and a dispatcher drains what is due.
+       * No route here takes a URL from the caller: the only address anything is ever posted to is
+       * one already on the record. See fhir-outbound.js. */
+      if (sub === "outbound-destination" && method === "POST") {
+        const r = await registerDestination(request, env, { ...deps, name: body.name, url: body.url, resourceTypes: body.resourceTypes, auth: body.auth, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "outbound-destination-revoke" && method === "POST") {
+        const r = await revokeDestination(request, env, { ...deps, name: body.name, reason: body.reason, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "outbound-destinations" && method === "GET") {
+        const r = await listDestinations(request, env, { ...deps });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "outbound-send" && method === "POST") {
+        const r = await queueDelivery(request, env, { ...deps, destination: body.destination, resourceType: body.resourceType, id: body.id, profiles: (wsqCfg && wsqCfg.fhir && wsqCfg.fhir.profiles) || null, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "outbound-dispatch" && method === "POST") {
+        /* WSQ_OUTBOUND_FETCH is a binding, not a parameter: it lets a deployment (and the test
+         * suite's deterministic FHIR server) supply the transport without any caller being able to
+         * choose one. Absent, the platform's own fetch is used. Either way makeSafeFetch wraps it
+         * and the destination URL still comes only from the registered record. */
+        const r = await dispatchOutbound(request, env, { ...deps, limit: body.limit, now: body.now || "",
+          fetchImpl: env && typeof env.WSQ_OUTBOUND_FETCH === "function" ? env.WSQ_OUTBOUND_FETCH : null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "outbound-replay" && method === "POST") {
+        const r = await replayDelivery(request, env, { ...deps, deliveryId: body.deliveryId, reason: body.reason, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "outbound" && method === "GET") {
+        const r = await listDeliveries(request, env, { ...deps, state: url.searchParams.get("state") || "" });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "hl7" && method === "POST") {

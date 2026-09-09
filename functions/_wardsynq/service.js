@@ -343,6 +343,17 @@ const RESOURCE_TYPES = Object.freeze([
    * capability that could be widened by accident. See fhir-inbound.js's own header for the full
    * design. */
   "SourceSystemGrant",
+  /* TASK 7.4: where this hospital may send, and what it has sent. Two types, both append-only.
+   * OutboundDestination is the ALLOWLIST ITSELF - the only way a URL can be posted to is that an
+   * administrator wrote it down here, so no request can ever talk this server into exfiltrating a
+   * chart to an address of the caller's choosing. OutboundDelivery is the QUEUE: a delivery must
+   * outlive the isolate that created it, or an outage loses a discharge summary, and its history of
+   * attempts is the only honest answer to "did the other hospital actually receive it". Neither is
+   * granted a clinical scope: like SourceSystemGrant, only `admin`'s unrestricted write reaches
+   * them, so deciding where patient data leaves the building stays an administrative act by
+   * construction. See fhir-outbound.js's header. */
+  "OutboundDestination",
+  "OutboundDelivery",
 ]);
 
 const MODE = Object.freeze({ SYSTEM_OF_RECORD: "system-of-record", INTEGRATION: "integration" });
