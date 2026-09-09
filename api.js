@@ -519,7 +519,7 @@
     var html = '<div class="db-msrc">℞ <b>' + esc(mono.source || "openFDA") + '</b><span>Verify against local guidance. Decision support only.</span></div>';
     MONO_SECS.forEach(function (s) {
       var v = mono[s[1]]; if (!v) return; var op = openKeys[s[1]];
-      html += '<div class="db-msec"><button class="db-msec-h' + (op ? " open" : "") + '">' + esc(s[0]) + '<span class="db-msec-x">' + dbIco("chev") + '</span></button>' +
+      html += '<div class="db-msec db-msec-' + s[1] + '"><button class="db-msec-h' + (op ? " open" : "") + '">' + esc(s[0]) + '<span class="db-msec-x">' + dbIco("chev") + '</span></button>' +
         '<div class="db-msec-b"' + (op ? "" : ' style="display:none"') + '>' + esc(v) + '</div></div>';
     });
     return html;
@@ -889,7 +889,12 @@
       ".db-comp{border-radius:14px;padding:13px 14px;margin-bottom:9px;box-shadow:0 1px 2px rgba(15,23,42,.04)}",
       ".db-comp-name{letter-spacing:-.01em;font-size:14px}",
       ".db-gen{letter-spacing:-.015em;font-size:22px}",
-      ".db-chip{border-radius:999px}"
+      ".db-chip{border-radius:999px}",
+      // Dose-first detail: the Dosage section reads as the hero card, price as a pill.
+      ".db-msec-dosage{border:1.5px solid var(--teal,#0a9396);background:var(--teal-soft,#e0f2f1)}",
+      ".db-brand-price{background:var(--teal-soft,#e0f2f1);color:var(--teal,#0a9396);border-radius:999px;padding:4px 11px;font-size:13px}",
+      ".db-bh-comp{font-weight:700}",
+      ".db-brandhit{border-left-width:4px}"
     ].join("");
     var s = document.createElement("style"); s.id = "smd-db-styles"; s.textContent = css; document.head.appendChild(s);
   }
