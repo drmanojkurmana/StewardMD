@@ -15,12 +15,12 @@ export const ENDPOINTS = {
 
 // ADR-2H field-name seam — VERIFY against live Postman/Swagger (OAuth2 is often snake_case; ABDM V1↔V3 differs).
 export const FIELDS = {
-  reqClientId:     "clientId",           // VERIFY session request body keys
-  reqClientSecret: "clientSecret",       // VERIFY
-  reqGrantType:    "grantType",          // VERIFY
-  grantTypeValue:  "client_credentials", // VERIFY
-  resAccessToken:  "accessToken",        // VERIFY session response keys (may be "access_token")
-  resExpiresIn:    "expiresIn",          // VERIFY (may be "expires_in")
+  reqClientId:        "clientId",           // VERIFY session request body keys
+  reqClientSecretKey: "clientSecret",       // nosec - API schema field name, not a secret value
+  reqGrantType:       "grantType",          // VERIFY
+  grantTypeValue:     "client_credentials", // VERIFY
+  resAccessToken:     "accessToken",        // VERIFY session response keys (may be "access_token")
+  resExpiresIn:       "expiresIn",          // VERIFY (may be "expires_in")
 };
 
 export function requestId() { return globalThis.crypto.randomUUID(); }
@@ -52,7 +52,7 @@ export function makeGateway({ baseUrl, cmId, hiuId, hipId, fetch, kv, now, secre
     if (!clientId || !clientSecret) throw new AbdmError("ABDM client credentials not configured");
     let res;
     try { res = await fetch(baseUrl + ENDPOINTS.sessions, { method: "POST", headers: { "content-type": "application/json" },
-      body: JSON.stringify({ [FIELDS.reqClientId]: clientId, [FIELDS.reqClientSecret]: clientSecret, [FIELDS.reqGrantType]: FIELDS.grantTypeValue }) }); }
+      body: JSON.stringify({ [FIELDS.reqClientId]: clientId, [FIELDS.reqClientSecretKey]: clientSecret, [FIELDS.reqGrantType]: FIELDS.grantTypeValue }) }); }
     catch (e) { throw new AbdmError("session request failed: " + e.message); }
     if (!res.ok) throw new AbdmError("session HTTP " + res.status);
     let j; try { j = await res.json(); } catch { throw new AbdmError("session returned invalid JSON"); }
