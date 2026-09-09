@@ -20,12 +20,22 @@
  * safety verdict and no capability to declare one - this file never touches the SafetyEngine, orders,
  * or anything maik-cds.js already governs; a hospital-operations question and a clinical-safety
  * question are different things asked of different files.
+ *
+ * THE SNAPSHOT ITSELF CARRIES UNTRUSTED TEXT, AND IS SCANNED FOR IT. Most of a twin snapshot is
+ * counts, but emergencyStatus and listBlackouts both carry a human-authored free-text `reason` - the
+ * exact same kind of content maik-chart-context.js already treats as untrusted and fences for
+ * patient-level MaiK calls. Anyone able to declare an emergency or block a period can put arbitrary
+ * text into a field this file later hands to a model. scanForInjection() (wardsynq-secops.js) is run
+ * over the assembled snapshot text before it becomes a prompt, and a hit is RECORDED on the
+ * interaction, never silently dropped and never used to block the question outright - it is
+ * evidence for the reviewer, the same discipline wardsynq-secops.js states for itself: "a signal is
+ * evidence that something in the record is trying to steer the model... not a filter".
  */
 
 import { resolveClinicalActor } from "./actor.js";
 import { RecordService } from "./service.js";
 import { AuthError, PermissionError } from "../_connect/permission.js";
-import { screenOutput, requestNonce } from "../../wardsynq/wardsynq-secops.js";
+import { screenOutput, requestNonce, scanForInjection } from "../../wardsynq/wardsynq-secops.js";
 import { TASK, invoke } from "./maik-gateway.js";
 import { makeActor, KIND, TIER } from "../../wardsynq/wardsynq-actors.js";
 import { buildTwinSnapshot } from "./digital-twin.js";
@@ -101,7 +111,13 @@ async function askAboutHospital(request, env, ctx) {
   const twin = twinResult.twin;
 
   const nonce = requestNonce(mig.tenantId);
-  const prompt = [INSTRUCTION, "", "--- HOSPITAL SNAPSHOT ---", snapshotText(twin), "", `The user asks: ${question}`].join("\n");
+  const snapshotBody = snapshotText(twin);
+  /* The scan runs over the SNAPSHOT ONLY, not the user's own question - a clinician typing "ignore
+   * previous instructions" while venting about a bad shift is not an attacker, and flagging their
+   * own words would train people to distrust the tool for the wrong reason. What is scanned is
+   * content a THIRD PARTY (whoever declared the emergency or blocked the period) could have planted. */
+  const injectionScan = scanForInjection(snapshotBody, "twin-snapshot");
+  const prompt = [INSTRUCTION, "", "--- HOSPITAL SNAPSHOT ---", snapshotBody, "", `The user asks: ${question}`].join("\n");
   const provenance = twin.provenance.map((p) => ({ resourceType: `twin:${p.section}`, id: p.section, version: null, dataSource: p.dataSource, generatedAt: p.generatedAt }));
 
   const answer = await invoke({
@@ -136,7 +152,12 @@ async function askAboutHospital(request, env, ctx) {
     task, question, instruction: INSTRUCTION,
     model: answer.model, generated: answer.generated, latencyMs: answer.latencyMs, usage: answer.usage,
     twinGeneratedAt: twin.generatedAt, sectionsProvenance: provenance,
-    security: { outputViolations: screen.violations || [], released: screen.released !== false },
+    security: {
+      outputViolations: screen.violations || [], released: screen.released !== false,
+      /* Evidence, never a filter - see the header. A hit here does not stop the question from being
+       * answered; it stays on the record for whoever reviews the answer. */
+      injectionFindings: injectionScan.suspicious ? [{ id: injectionScan.source, signals: injectionScan.signals }] : [],
+    },
     output: screen.released !== false ? answer.text : null,
     withheld: screen.released === false ? { reason: "withheld by output screening", violations: (screen.violations || []).map((v) => v.id) } : null,
     review: { state: "pending", by: null, at: null, reason: null, editedOutput: null },

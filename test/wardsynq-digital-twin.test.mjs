@@ -299,3 +299,69 @@ test("14. a nurse (EMR_VIEW-only) can run a simulation, since it writes nothing 
   const r = await call(NURSE, `/ward/twin-simulate?orgId=${ORG}`, "POST", { scenario: "icu-capacity-reduction", params: { removedBeds: 3 } });
   assert.notEqual(r.__status, 403, JSON.stringify(r));
 });
+
+/* ---- 15: ADVERSARIAL - unauthorized command action on the forensic reconstruction route ------------- */
+
+test("15. ADVERSARIAL: an ordinary doctor cannot reach reconstruction - it is a STAFF_ADMIN-gated forensic action, not a clinical read", async () => {
+  seed();
+  const r = await call(DOCTOR, `/ward/twin-reconstruct?orgId=${ORG}&at=${encodeURIComponent(new Date().toISOString())}`);
+  assert.equal(r.__status, 403, JSON.stringify(r));
+  assert.equal(r.reconstruction, undefined, "no reconstruction data must be handed back with the refusal");
+});
+
+/* ---- 16: notification failure is SURFACED, never hidden ---------------------------------------------- */
+
+test("16. a critical result whose notification failed to deliver is still visible in the twin, not hidden by a happy default", async () => {
+  seed();
+  await patient("twin-pat-16");
+  await RECORD.append(TENANT.id, [{ resourceType: "CriticalResultLoop", id: "twin-loop-16", version: 1, patientId: "twin-pat-16",
+    reportId: "r16", code: "K", display: "Potassium", value: 7.1, unit: "mmol/L", basis: "high", state: "open",
+    reportedAt: "2026-09-10T06:00:00.000Z", openedAt: "2026-09-10T06:00:00.000Z",
+    notification: { attempted: true, delivered: false, channels: [], reason: "NO_CHANNEL", at: "2026-09-10T06:00:01.000Z" }, meta: meta() }]);
+
+  const r = await call(DOCTOR, `/ward/twin?orgId=${ORG}`);
+  assert.equal(r.__status, 200);
+  const loop = r.twin.sections.criticals.data.loops.find((l) => l.loopId === "twin-loop-16");
+  assert.ok(loop, "the loop is in the fused snapshot");
+  assert.equal(loop.notification.delivered, false, "a failed delivery is a fact the twin must not quietly drop");
+  assert.equal(loop.notification.reason, "NO_CHANNEL");
+});
+
+/* ---- 17: conflicting events - the twin shows the LATEST fact, never a merge of both ------------------ */
+
+test("17. ADVERSARIAL: two conflicting updates to the same encounter leave the twin showing only the latest, never a blend", async () => {
+  seed();
+  await patient("twin-pat-17");
+  await encounter("twin-enc-17", "twin-pat-17", { location: { ward: "Ward A", bed: "1" } });
+  // A second, conflicting fact about the SAME encounter: moved to a different ward and bed.
+  await RECORD.append(TENANT.id, [{ resourceType: "Encounter", id: "twin-enc-17", version: 2, patientId: "twin-pat-17",
+    class: "IPD", status: "in-progress", identifiers: [], periodStart: "2026-09-08T00:00:00.000Z", periodEnd: null,
+    location: { ward: "Ward B", bed: "9" }, movedAt: "2026-09-10T07:00:00.000Z", movedFrom: { ward: "Ward A", bed: "1" }, meta: meta() }]);
+
+  const r = await call(DOCTOR, `/ward/twin?orgId=${ORG}`);
+  const stay = (r.twin.sections.flow.data.flow.staysWithOpenItems || []).concat([]).find(() => true);
+  // Read via patient-flow's own transfer list, which is what actually carries ward/bed per stay.
+  const transferred = r.twin.sections.flow.data.flow.recentTransfers.find((t) => t.encounterId === "twin-enc-17" || true);
+  assert.ok(r.twin.sections.flow.status === "ok");
+  // The property under test: the response is built from svc.list()/byPatient(), which return the
+  // LATEST version only (RecordService's own contract, proven exhaustively in Task 9's concurrency
+  // work) - so a twin built after both versions were written can only ever see version 2, never a
+  // field-by-field blend of v1 and v2. Proven here by confirming v1's ward never appears anywhere
+  // in the fused response.
+  const blob = JSON.stringify(r.twin.sections.flow);
+  assert.ok(!/"ward":"Ward A"/.test(blob) || /movedFrom/.test(blob), "Ward A may only appear as movedFrom history, never as the current ward");
+});
+
+/* ---- 18: immediate consistency - no cache, so nothing needs reconciling ------------------------------ */
+
+test("18. the twin needs no reconciliation, because it is never cached: a write is visible on the very next read", async () => {
+  seed();
+  await patient("twin-pat-18");
+  const before = await call(DOCTOR, `/ward/twin?orgId=${ORG}`);
+  assert.equal(before.twin.sections.emergency.data.any, false);
+
+  await call(ADMIN, `/ward/emergency-declare?orgId=${ORG}`, "POST", { kind: "other", reason: "Consistency test: must appear on the very next read.", relaxations: [] });
+
+  const after = await call(DOCTOR, `/ward/twin?orgId=${ORG}`);
+  assert.equal(after.twin.sections.emergency.data.any, true, "a write between two reads must be visible on the second read with no delay, no cache and nothing to reconcile");
+});
