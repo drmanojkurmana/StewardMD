@@ -140,3 +140,37 @@ All OFF by default; each is read only when bound, and the code says which store 
   any request that asks, and the consent screen says so. Set with
   `wrangler pages secret put WSQ_SMART_SIGNING_JWK --project-name stewardmd`. Generate with WebCrypto
   (`generateKey ECDSA P-256`, `exportKey("jwk", privateKey)`), add a `kid`, never commit it.
+
+## WardSynQ measured RPO/RTO (2026-09-10) — the number docs/BACKUP_DR.md asked for
+
+`docs/BACKUP_DR.md` step 4 of the restore drill says "Record RTO (time to restore) + RPO (data-loss
+window) and file them in vault/Infra.md". Until now this file held neither, so both objectives were
+targets nobody had measured. `test/run-wardsynq-rto.mjs` measures them by destroying a real SQLite
+database and rebuilding it — not by estimating.
+
+| Record versions | Patients | Export | Verify | **Measured RTO** | Restored rows |
+|---|---|---|---|---|---|
+| 1,800 | 200 | 9 ms | 8 ms | **0.05 s** | 1,800 ✓ |
+| 18,000 | 2,000 | 84 ms | 77 ms | **0.45 s** | 18,000 ✓ |
+| 90,000 | 10,000 | 387 ms | 349 ms | **2.19 s** | 90,000 ✓ |
+
+Roughly linear, ~24 µs per record version. Every run verifies the restore by a real clinical read
+(patient identity, a three-version amended observation resolving to its latest value, and the right
+number of medication orders) and by counting rows against the export.
+
+**WHAT THIS NUMBER IS NOT.** It is the time from "the database is gone" to "a clinical read is right
+again", on one machine, from an export already in hand. It excludes detection, the human decision to
+start, provisioning, network, credentials and DNS — every one of which is part of a real recovery.
+**Treat it as a floor.** The operational RTO is larger by whatever those cost, and nothing here
+measures them.
+
+**RPO is demonstrated, not asserted:** the drill writes clinical records *after* the export and then
+counts what the restore does not have. All of them are missing, every run. So the recovery-point
+window is exactly the age of the last export — which makes "nothing schedules an export" a data-loss
+gap rather than a paperwork one. `GET /api/queue/ward/backup-status` reports achieved RPO against
+`wardsynq.rpoMinutes`, and reports "NO BACKUP HAS EVER BEEN RECORDED" rather than a green tick when
+there has never been one.
+
+**Still unmeasured:** RTO against production Cloudflare D1 (this drill is local SQLite only), and any
+failover time — there is no standby, so an availability objective does not exist to be measured.
+

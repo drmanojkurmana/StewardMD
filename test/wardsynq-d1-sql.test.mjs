@@ -15,9 +15,15 @@
  * that does not behave as the repository assumes) was equally invisible, and that is what this
  * closes: real schema, real SQLite, real constraint violations, real rows back.
  *
- * node:sqlite is Node's own (no dependency). It needs --experimental-sqlite on Node 22, which
- * .github/workflows/ci.yml and `npm test` both pass; if it is ever unavailable the test SKIPS with a
- * reason rather than failing, so this can never become a red build for an engine-availability reason.
+ * node:sqlite is Node's own (no dependency). It needs --experimental-sqlite on Node 22 (it is
+ * unflagged from 23.4). If it is ever unavailable the test SKIPS with a reason rather than failing, so
+ * this can never become a red build for an engine-availability reason.
+ *
+ * THAT SKIP IS ALSO HOW THIS SUITE QUIETLY STOPPED RUNNING IN CI. This comment used to claim that
+ * ci.yml and `npm test` both passed the flag. `npm test` did; ci.yml did not, and CI pins Node 22 - so
+ * on every CI run this file, wardsynq-restore and wardsynq-onprem skipped and reported green while
+ * executing nothing. A test that cannot fail for an environment reason also cannot tell you it stopped
+ * running, which is why test/check-dr-suites-ran.mjs now asserts that these suites actually executed.
  */
 import { test } from "node:test";
 import assert from "node:assert/strict";

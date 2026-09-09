@@ -202,6 +202,42 @@ const HAZARDS = Object.freeze([
     caveat: "IMPLEMENTED and TESTED, not clinically validated or approved. The workstation now journals to IndexedDB while offline and reconciles on reconnect, driven end to end in a browser: an order signed during a simulated outage was held durably, was still there when a fresh journal was opened over the same store (which is the restart case), and reconciled cleanly when the network returned. REMAINING GAP: a service worker, so the app itself LOADS without a network, is separate from data survival and is not built. A ward that reboots a workstation mid-outage keeps its charting but cannot open the app until the network returns.",
   },
   {
+    /* TASK 9.12/9.13. This row did not exist, and its absence was the sharpest hole in the safety
+     * case: HAZ-DOWN-01 argues that charting SURVIVES an outage, which is a different claim from the
+     * record being RECOVERABLE after one. test/wardsynq-restore.test.mjs - a real export, a destroyed
+     * database, a real restore, every version read back - was cited by no hazard at all, so the best
+     * recovery evidence in the repository was not part of the argument it belongs to. */
+    id: "HAZ-DR-01",
+    hazard: "The record cannot be recovered after loss, or is restored incomplete without anybody noticing",
+    initialRisk: "catastrophic x remote",
+    requirement: "A backup must be restorable, and a restore that is short must be refused rather than accepted quietly.",
+    control: {
+      kind: "verified export/restore with version-chain completeness checking", adequacy: "partial",
+      module: "functions/_wardsynq/backup.js + functions/_wardsynq/backup-run.js",
+      summary: "The record store is append-only and versioned, which makes a partial restore silent: a dump missing rows restores without error, every query still answers, and latest() returns a version of the truth nobody saw. verifyPlan refuses a restore it cannot show to be complete and names what is short - a GAP IN A VERSION CHAIN (1,2,4 means a clinical fact was written and is now missing, which no row count can see), a TRUNCATED dump named by line number, and a CHANGED BODY caught by digest. It never repairs: a gap is reported, never renumbered away, because renumbering produces a chain that passes every check and describes a history that did not happen. RPO is measured against the tenant's objective from the last backup RECEIPT, and no recorded backup is reported as a failure rather than as an absence of news.",
+    },
+    verification: {
+      file: "test/wardsynq-restore.test.mjs and test/wardsynq-backup-run.test.mjs",
+      tests: [
+        "THE REHEARSAL: export, destroy, restore, and read every version back",
+        "A GAP IN A VERSION CHAIN IS REFUSED, and never renumbered away",
+        "a truncated dump and a changed body are both caught, and named by line",
+        "A SHORT EXPORT IS CAUGHT, which is why a page is not a backup",
+        "A PATIENT RECORD IS ITS OWN PATIENT, so a restored chart does not lose its owner",
+        "NO RECORDED BACKUP IS NEVER A GREEN LIGHT",
+        "RPO IS MEASURED AGAINST THE OBJECTIVE, and an unconfigured objective is not a pass",
+      ],
+      matchMode: "fragment",
+    },
+    residualRisk: "reduced: a restore that would produce a chart with a hole in it is refused and named",
+    approver: "Chief Information Officer and Disaster Committee",
+    /* ADEQUACY IS "partial" DELIBERATELY, so this row can never reach VERIFIED however many tests
+     * pass - see the STATUS block at the top of this file. The control covers restoring a record
+     * store correctly. It does not cover the operational half of disaster recovery, and the gaps
+     * below are specific rather than a general disclaimer. */
+    caveat: "IMPLEMENTED and TESTED against a real SQLite database - the rehearsal genuinely destroys the database and rebuilds it from the export. NOT rehearsed against production D1. REMAINING GAPS, each real: nothing SCHEDULES an export, so the RPO the status route reports is only as good as whoever last remembered to run one; RTO is measured by test/run-wardsynq-rto.mjs against a local restore only, which is a floor and not an operational recovery time; Cloudflare D1 has no standby, so this row argues recoverability and says nothing whatever about availability.",
+  },
+  {
     id: "HAZ-DIAG-01",
     hazard: "An unacknowledged critical result",
     initialRisk: "catastrophic x probable",
