@@ -33,7 +33,7 @@
   var st = {
     orgId: "", ward: "", patients: [], view: "list",
     sel: null,                 // the selected {encounterId, patientId, ward, bed, admittedAt}
-    problems: [], criticals: [], balance: null, outbox: [], cosign: null, downtime: null, quality: null, pcopy: null, consent: null, completion: null, emergency: null, roi: null, tpa: null, billing: null, reports: null, emergencyOverride: false, emergencyAdmin: null,
+    problems: [], criticals: [], balance: null, outbox: [], cosign: null, downtime: null, quality: null, pcopy: null, consent: null, completion: null, emergency: null, roi: null, tpa: null, billing: null, reports: null, emergencyOverride: false, emergencyAdmin: null, emergencyReconcile: null,
     /* Held from other systems. null until asked, an object once answered, and a separate error
      * string when the list could not be read: an unreadable queue of held clinical data must never
      * look like an empty one. */
@@ -1992,7 +1992,11 @@
           '<span>' + esc(when(ev.at)) + (ev.reason ? " &middot; " + esc(ev.reason) : "") + (ev.reference ? " &middot; ref " + esc(ev.reference) : "") + "</span></li>";
       }).join("");
       var receiptRows = (inv.receipts || []).map(function (r) {
-        return "<li><b>" + esc(r.receiptNumber) + "</b> " + esc(EVENT_KIND_WORDS[r.kind] || r.kind) + " " + esc(r.amount) + " " + esc(r.currency || "") + '<span>' + esc(when(r.at)) + "</span></li>";
+        // The payment-gateway adapter boundary, stated on the receipt itself: no live gateway exists
+        // in this build, so a payment/deposit is honestly shown as recorded through the hospital's
+        // own process, never as a channel it never actually went through.
+        return "<li><b>" + esc(r.receiptNumber) + "</b> " + esc(EVENT_KIND_WORDS[r.kind] || r.kind) + " " + esc(r.amount) + " " + esc(r.currency || "") + '<span>' + esc(when(r.at)) +
+          (r.adapter ? " &middot; " + esc(r.adapter.state) : "") + "</span></li>";
       }).join("");
       var live = inv.status !== "void";
       return '<div class="w-sub"><h4>' + esc(inv.invoiceId) + '<span class="w-st ' + esc(inv.status) + '">' + esc(INVOICE_STATUS_WORDS[inv.status] || inv.status) + "</span></h4>" +
@@ -2239,13 +2243,27 @@
         (a.relaxations && a.relaxations.length ? " &middot; relaxes: " + esc(a.relaxations.join(", ")) : "") +
         '<div class="w-dt-times">declared ' + when(a.declaredAt) + " &middot; until " + when(a.expiresAt) +
         (a.revokedAt ? " &middot; stood down " + when(a.revokedAt) + (a.revokedReason ? ": " + esc(a.revokedReason) : "") : "") + "</div></div>" +
-        (a.active ? '<div class="w-mini-row-act"><button class="w-btn ghost sm" data-w-act="emergencydeactivate:' + esc(a.activationId) + '">' + ms("cancel") + "Stand down</button></div>" : "") +
-        "</li>";
+        '<div class="w-mini-row-act">' +
+        (a.active ? '<button class="w-btn ghost sm" data-w-act="emergencydeactivate:' + esc(a.activationId) + '">' + ms("cancel") + "Stand down</button>" : "") +
+        '<button class="w-btn ghost sm" data-w-act="emergencyreconcile:' + esc(a.activationId) + '">' + ms("fact_check") + "Reconcile</button>" +
+        "</div></li>";
     }).join("");
+    var rec = state.emergencyReconcile;
+    var recBlock = "";
+    if (rec) {
+      var recRows = (rec.overrides || []).map(function (o) {
+        return "<li>" + esc(o.relaxation) + " overrode <b>" + esc(o.overriddenState) + "</b> on " + esc(o.sourceType) + " " + esc(o.sourceId) +
+          " &middot; by " + esc(o.by) + " &middot; " + when(o.at) + "</li>";
+      }).join("");
+      recBlock = '<div class="w-sub"><h4>Reconciliation: ' + esc(rec.activationId) + "</h4>" +
+        "<p>" + esc(rec.note || "") + "</p>" +
+        (recRows ? "<ul class=\"w-mini\">" + recRows + "</ul>" : "") + "</div>";
+    }
     return '<div class="w-card">' +
       '<div class="w-dt-bar w-noprint"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button>" +
       "<h3>Emergency mode</h3><button class=\"w-btn ghost\" data-w-act=\"emergencyadmin\">" + ms("refresh") + "Refresh</button></div>" +
       (rows ? "<ul class=\"w-mini\">" + rows + "</ul>" : '<p class="w-empty">No emergency has ever been declared here.</p>') +
+      recBlock +
       '<div class="w-sub"><h4>Declare</h4>' +
       '<select id="wEmergencyKind">' + EMERGENCY_KINDS.map(function (x) { return '<option value="' + esc(x[0]) + '">' + esc(x[1]) + "</option>"; }).join("") + "</select>" +
       '<input id="wEmergencyReason" placeholder="What is the emergency, in your own words">' +
@@ -3742,7 +3760,7 @@
       .catch(function () { st.busy = false; st.err = "Could not load the reports."; paint(); });
   }
   function emergencyAdminOpen() {
-    st.view = "emergencyadmin"; st.emergencyAdmin = null; paint(); loadEmergencyLog();
+    st.view = "emergencyadmin"; st.emergencyAdmin = null; st.emergencyReconcile = null; paint(); loadEmergencyLog();
   }
   function loadEmergencyLog() {
     st.busy = true; paint();
@@ -3767,6 +3785,12 @@
     apiPost("/ward/emergency-deactivate", { orgId: st.orgId, activationId: activationId, reason: reason })
       .then(function (r) { if (settle(r, "Stood down.")) { loadEmergencyLog(); loadEmergencyStatus(); } else paint(); })
       .catch(function () { st.busy = false; st.err = "Could not stand that down."; paint(); });
+  }
+  function emergencyReconcileAction(activationId) {
+    st.busy = true; paint();
+    apiGet("/ward/emergency-reconciliation?orgId=" + encodeURIComponent(st.orgId) + "&activationId=" + encodeURIComponent(activationId))
+      .then(function (r) { st.busy = false; if (r && r.ok) st.emergencyReconcile = r; else st.err = (r && r.detail) || "Could not reconcile that."; paint(); })
+      .catch(function () { st.busy = false; st.err = "Could not reconcile that."; paint(); });
   }
   function loadDowntime() {
     st.busy = true; st.view = "downtime"; paint();
@@ -4152,7 +4176,7 @@
       if (st.view === "scheduling") { st.scheduling = {}; st.view = "list"; paint(); return; }
       if (st.view === "cashier") { st.cashier = {}; st.view = "list"; paint(); return; }
       if (st.view === "reports") { st.reports = {}; st.view = "list"; paint(); return; }
-      if (st.view === "emergencyadmin") { st.emergencyAdmin = null; st.view = "list"; paint(); return; }
+      if (st.view === "emergencyadmin") { st.emergencyAdmin = null; st.emergencyReconcile = null; st.view = "list"; paint(); return; }
       // Picking a bed to admit an ED patient opens the SAME bed board a fresh admission uses;
       // backing out of it returns to that patient's ED chart, not the ward list, and drops the
       // pending admit rather than leaving it to fire on some later, unrelated bed pick.
@@ -4348,6 +4372,7 @@
     if (cmd === "emergencyadmin") { emergencyAdminOpen(); return; }
     if (cmd === "emergencydeclare") { emergencyDeclareAction(); return; }
     if (cmd === "emergencydeactivate") { emergencyDeactivateAction(arg); return; }
+    if (cmd === "emergencyreconcile") { emergencyReconcileAction(arg); return; }
     if (cmd === "printpack") { try { G.print(); } catch (e) {} return; }
     if (cmd === "pcopy") { loadPatientCopy(); return; }
     if (cmd === "pcopyGive") { givePatientCopy(); return; }

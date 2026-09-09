@@ -251,8 +251,65 @@ async function emergencyLog(request, env, ctx) {
   return { ...base, ok: true, activations, active: activations.filter((a) => a.active).length };
 }
 
+/**
+ * RECOVERY RECONCILIATION. The plan's own requirement this file's header once deferred as "future,
+ * explicitly scoped work" - and it is small enough to do honestly now: not a re-entry workflow for
+ * paper records (that remains genuinely out of scope, a real design decision this file still does
+ * not make unilaterally), but the raw material every such workflow needs and does not yet have -
+ * every real override an emergency declaration actually authorised, computed live from the SAME
+ * `emergencyOverride` field migrate-inpatient.js's own admitPatient/transferPatient already write
+ * on the Encounter's own append-only version history. Nothing here is stored twice: this reads what
+ * already happened, the same "IT COUNTS, IT DOES NOT JUDGE" discipline ward-metrics.js states -
+ * a human reviews the list and decides whether each override was legitimate; this file only says
+ * what occurred, never whether it should have.
+ *
+ * ctx: { migration, activationId, actorDeps, recordDeps }
+ */
+async function emergencyReconciliation(request, env, ctx) {
+  const mig = ctx.migration;
+  const base = { mode: mig && mig.mode, tenantId: (mig && mig.tenantId) || null };
+  if (!mig || mig.mode === "off") return { ...base, ok: true, skipped: "off", overrides: [] };
+
+  const activationId = str(ctx.activationId);
+  if (!activationId) return { ...base, ok: false, status: 422, error: "activation_required", overrides: [] };
+
+  const { svc, error } = await open(request, env, ctx, "record:read");
+  if (error) return { ...base, ...error, overrides: [] };
+
+  let activation;
+  try { activation = await svc.get(TYPE, activationId); }
+  catch (e) { return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), overrides: [] }; }
+  if (!activation) return { ...base, ok: false, status: 404, error: "activation_not_found", overrides: [] };
+
+  // Every resource type an override could ever be recorded on. Today that is Encounter alone
+  // (admission/transfer's own bed-assignment-conflict-override) - a second relaxation on a second
+  // type extends this list, not the shape of what it returns.
+  let encounters;
+  try { encounters = await svc.list("Encounter", 500); }
+  catch (e) { return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), overrides: [] }; }
+
+  const overrides = (encounters || []).filter(Boolean)
+    .filter((e) => e.emergencyOverride && e.emergencyOverride.activationId === activationId)
+    .map((e) => ({
+      sourceType: "Encounter", sourceId: e.id, patientId: e.patientId,
+      relaxation: e.emergencyOverride.relaxation, overriddenState: e.emergencyOverride.overriddenState,
+      by: e.emergencyOverride.by, at: e.emergencyOverride.at,
+      location: e.location || null, currentStatus: e.status,
+    }))
+    .sort((a, b) => String(a.at || "").localeCompare(String(b.at || "")));
+
+  return {
+    ...base, ok: true, activationId,
+    activation: summary(activation, Date.now()),
+    overrides, count: overrides.length,
+    note: overrides.length
+      ? `${overrides.length} real override${overrides.length > 1 ? "s" : ""} were authorised under this declaration. Each is a fact, not a judgement - review that the emergency genuinely required each one.`
+      : "No override was actually used under this declaration - the emergency was declared but the relaxation was never invoked.",
+  };
+}
+
 export {
   TYPE, SCOPE_LEVELS, DEFAULT_MINUTES, MAX_MINUTES, EmergencyActivation,
   activationIdFor, isActive, isRelaxed, minutesFor,
-  declareEmergency, deactivateEmergency, emergencyStatus, emergencyLog,
+  declareEmergency, deactivateEmergency, emergencyStatus, emergencyLog, emergencyReconciliation,
 };

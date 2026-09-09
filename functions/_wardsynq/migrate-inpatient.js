@@ -34,7 +34,7 @@ import { vitalsToObservations } from "./migrate-vitals.js";
 import { patientIdForMrn, admissionIdFor } from "./opd-identity.js";
 import { recordOverrides } from "./override-analytics.js";
 import { resolveFormulary, formularyStatus } from "./formulary.js";
-import { isRelaxed } from "./emergency-mode.js";
+import { isActive as emergencyIsActive } from "./emergency-mode.js";
 import { compileAdvisories, evaluateAdvisories } from "./advisories.js";
 import { getWardByName, getBedByName, updateBed, listWards, listBeds } from "../_opd_org_store.js";
 
@@ -169,11 +169,11 @@ async function admitPatient(request, env, ctx) {
     if (ctx.orgId) {
       let sex = null;
       try { const patient = await svc.get("Patient", candidate.patientId); sex = patient && patient.sex; } catch {}
-      const relaxed = ctx.emergencyOverride === true && await bedOverrideActive(svc, true);
-      const masterCheck = await checkMasterBed(env, ctx.orgId, candidate.location.ward, candidate.location.bed, sex, relaxed);
+      const activation = ctx.emergencyOverride === true ? await bedOverrideActive(svc, true) : null;
+      const masterCheck = await checkMasterBed(env, ctx.orgId, candidate.location.ward, candidate.location.bed, sex, !!activation);
       if (!masterCheck.ok) return { ...base, ok: false, status: masterCheck.status, error: masterCheck.error, detail: masterCheck.detail, encounterId: candidate.id, written: 0 };
       if (masterCheck.overrideUsed) {
-        admissionOverride = { relaxation: EMERGENCY_BED_RELAXATION, overriddenState: masterCheck.overriddenState, by: resolved.actor.id, at: new Date().toISOString() };
+        admissionOverride = { activationId: activation && activation.id, relaxation: EMERGENCY_BED_RELAXATION, overriddenState: masterCheck.overriddenState, by: resolved.actor.id, at: new Date().toISOString() };
         // Bolted on, the same convention encounterFromAdmission's own attendingId already uses for a
         // fact the canonical Encounter shape has no field for - auditable on the encounter's own
         // append-only version history, never a second, separate override log to keep in sync.
@@ -254,11 +254,17 @@ async function checkMasterBed(env, orgId, wardName, bedName, patientSex, relaxed
  * EmergencyActivation, so no new capability is needed for a clinical role to check this. A read
  * failure (a role with no such access) is treated as "no override" rather than surfaced as an
  * error: the ordinary refusal underneath still applies, which is the safe default either way. */
+/* Returns the ACTIVATION itself, not a bare boolean - recovery reconciliation (emergency-mode.js's
+ * emergencyReconciliation()) needs to know WHICH declaration authorised a given override, not just
+ * that one existed. The most recently declared match wins if more than one is somehow active. */
 async function bedOverrideActive(svc, wanted) {
-  if (!wanted) return false;
+  if (!wanted) return null;
   let rows;
-  try { rows = await svc.list("EmergencyActivation", 50); } catch { return false; }
-  return isRelaxed(rows || [], EMERGENCY_BED_RELAXATION, Date.now());
+  try { rows = await svc.list("EmergencyActivation", 50); } catch { return null; }
+  const nowMs = Date.now();
+  const matches = (rows || []).filter((a) => a && emergencyIsActive(a, nowMs) && (a.relaxations || []).includes(EMERGENCY_BED_RELAXATION));
+  matches.sort((a, b) => String(b.declaredAt || "").localeCompare(String(a.declaredAt || "")));
+  return matches[0] || null;
 }
 // Best-effort: a stale bed state is a workflow problem, never a reason to fail a write already
 // governed and recorded on the Encounter itself, which stays the one source of truth for occupancy.
@@ -627,11 +633,11 @@ async function transferPatient(request, env, ctx) {
     if (ctx.orgId) {
       let sex = null;
       try { const patient = await svc.get("Patient", current.patientId); sex = patient && patient.sex; } catch {}
-      const relaxed = ctx.emergencyOverride === true && await bedOverrideActive(svc, true);
-      const masterCheck = await checkMasterBed(env, ctx.orgId, ward, bed, sex, relaxed);
+      const activation = ctx.emergencyOverride === true ? await bedOverrideActive(svc, true) : null;
+      const masterCheck = await checkMasterBed(env, ctx.orgId, ward, bed, sex, !!activation);
       if (!masterCheck.ok) return { ...base, ok: false, status: masterCheck.status, error: masterCheck.error, detail: masterCheck.detail, encounterId, written: 0 };
       if (masterCheck.overrideUsed) {
-        transferOverride = { relaxation: EMERGENCY_BED_RELAXATION, overriddenState: masterCheck.overriddenState, by: resolved.actor.id, at: new Date().toISOString() };
+        transferOverride = { activationId: activation && activation.id, relaxation: EMERGENCY_BED_RELAXATION, overriddenState: masterCheck.overriddenState, by: resolved.actor.id, at: new Date().toISOString() };
       }
     }
   }

@@ -21,6 +21,7 @@ import { RecordService, isExternalRecord } from "./service.js";
 import { AuthError, PermissionError } from "../_connect/permission.js";
 import { openInvoice, postEvent, voidInvoice, reconciliationOf, receiptFor, receiptsFor, InvoiceRefusalError } from "../../wardsynq/wardsynq-invoice.js";
 import { chargesForPatient } from "./charge-capture.js";
+import { submitPaymentViaAdapter } from "../../wardsynq/wardsynq-payment-adapter.js";
 
 const str = (v) => (v == null ? "" : String(v).trim());
 const TYPE = "Invoice";
@@ -123,10 +124,19 @@ const at_ = (ctx) => str(ctx.at) || new Date().toISOString();
 
 /** ctx: { migration, invoiceId, amount, reason, actorDeps, recordDeps } */
 async function postDiscount(request, env, ctx) { return transition(request, env, ctx, (inv, actorId) => postEvent(inv, "discount", { amount: ctx.amount, actorId, at: at_(ctx), reason: ctx.reason })); }
-/** ctx: { migration, invoiceId, amount, reference?, actorDeps, recordDeps } */
-async function postDeposit(request, env, ctx) { return transition(request, env, ctx, (inv, actorId) => postEvent(inv, "deposit", { amount: ctx.amount, actorId, at: at_(ctx), reference: ctx.reference })); }
-/** ctx: { migration, invoiceId, amount, reference?, actorDeps, recordDeps } */
-async function postPayment(request, env, ctx) { return transition(request, env, ctx, (inv, actorId) => postEvent(inv, "payment", { amount: ctx.amount, actorId, at: at_(ctx), reference: ctx.reference })); }
+/** ctx: { migration, invoiceId, amount, reference?, paymentAdapter?, actorDeps, recordDeps }. The
+ * adapter call happens BEFORE transition() (its own `run` is synchronous, so the adapter's async
+ * result must already be in hand) - never blocks the deposit itself, the same "never claim more
+ * than the adapter reports" discipline wardsynq-payment-adapter.js's own header states. */
+async function postDeposit(request, env, ctx) {
+  const adapter = await submitPaymentViaAdapter({ kind: "deposit", amount: ctx.amount, reference: ctx.reference }, ctx.paymentAdapter || null);
+  return transition(request, env, ctx, (inv, actorId) => postEvent(inv, "deposit", { amount: ctx.amount, actorId, at: at_(ctx), reference: ctx.reference, adapter }));
+}
+/** ctx: { migration, invoiceId, amount, reference?, paymentAdapter?, actorDeps, recordDeps } */
+async function postPayment(request, env, ctx) {
+  const adapter = await submitPaymentViaAdapter({ kind: "payment", amount: ctx.amount, reference: ctx.reference }, ctx.paymentAdapter || null);
+  return transition(request, env, ctx, (inv, actorId) => postEvent(inv, "payment", { amount: ctx.amount, actorId, at: at_(ctx), reference: ctx.reference, adapter }));
+}
 /** ctx: { migration, invoiceId, amount, reason, reference?, actorDeps, recordDeps } */
 async function postRefund(request, env, ctx) { return transition(request, env, ctx, (inv, actorId) => postEvent(inv, "refund", { amount: ctx.amount, actorId, at: at_(ctx), reason: ctx.reason, reference: ctx.reference })); }
 /** ctx: { migration, invoiceId, amount, reason, actorDeps, recordDeps } */
