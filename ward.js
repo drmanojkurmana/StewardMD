@@ -33,7 +33,7 @@
   var st = {
     orgId: "", ward: "", patients: [], view: "list",
     sel: null,                 // the selected {encounterId, patientId, ward, bed, admittedAt}
-    problems: [], criticals: [], balance: null, outbox: [], cosign: null, downtime: null, quality: null, pcopy: null, consent: null,
+    problems: [], criticals: [], balance: null, outbox: [], cosign: null, downtime: null, quality: null, pcopy: null, consent: null, completion: null,
     /* Held from other systems. null until asked, an object once answered, and a separate error
      * string when the list could not be read: an unreadable queue of held clinical data must never
      * look like an empty one. */
@@ -902,6 +902,11 @@
         // general-purpose capture/history screen; surgery's own consent step (surgeryConsent())
         // already calls the SAME consent.js record for the "procedure" scope and is unaffected.
         '<button class="w-btn ghost" data-w-act="consentopen" title="What this patient has agreed to and refused">' + ms("fact_check") + "Consent</button>" +
+        // TASK 4.11: whatever is on this list is a real gap - an unsigned note, an open critical
+        // loop, an undecided medicine, a scope with no consent - never a manufactured checklist.
+        // Nothing here can be "completed" from this screen: it clears on its own once the
+        // underlying act happens (the note is signed, the loop acknowledged, and so on).
+        '<button class="w-btn ghost" data-w-act="completionopen" title="What is still outstanding on this chart">' + ms("checklist") + "Chart check</button>" +
         // The patient's own copy. Reachable from the patient because that is where the conversation
         // that produces it happens, not from a menu somewhere else.
         '<button class="w-btn ghost" data-w-act="pcopy" title="The copy this patient can be given">' + ms("assignment_ind") + "Patient copy</button></div>";
@@ -1088,6 +1093,26 @@
       '<label><input type="checkbox" id="wConsentCapacity" checked> Patient had capacity</label>' +
       '<input id="wConsentValidUntil" type="date" placeholder="Valid until (optional)">' +
       '<button class="w-btn" data-w-act="consentrecord">' + ms("fact_check") + "Record</button></div>" +
+      "</div>";
+  }
+
+  var COMPLETION_LABELS = {
+    "unsigned-notes": "Unsigned note", "discharge-summary": "Discharge summary",
+    "operative-documentation": "Operative documentation", "result-acknowledgement": "Result not acknowledged",
+    "medication-reconciliation": "Medication reconciliation", "consent": "Consent", "nursing-documentation": "Nursing documentation",
+  };
+  function completionView(state) {
+    var c = state.completion || {};
+    var rows = (c.items || []).map(function (i) {
+      return '<li class="w-mini-row"><div><span class="w-st ' + esc(i.escalation.level) + '">' + esc(i.escalation.level) + "</span> " +
+        "<b>" + esc(COMPLETION_LABELS[i.type] || i.type) + "</b> &middot; " + esc(i.detail || "") +
+        (i.responsibleRole ? '<div class="w-dt-times">' + esc(i.responsibleRole) + (i.escalation.hoursOpen ? " &middot; open " + i.escalation.hoursOpen + "h" : "") + "</div>" : "") +
+        "</div></li>";
+    }).join("");
+    return '<div class="w-card">' +
+      '<div class="w-dt-bar w-noprint"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button>" +
+      "<h3>Chart check</h3><button class=\"w-btn ghost\" data-w-act=\"completionopen\">" + ms("refresh") + "Refresh</button></div>" +
+      (rows ? "<ul class=\"w-mini\">" + rows + "</ul>" : '<p class="w-empty">Nothing outstanding, against what this hospital has configured to check.</p>') +
       "</div>";
   }
 
@@ -2131,6 +2156,7 @@
         : state.view === "downtime" ? downtimeView(state)
         : state.view === "pcopy" ? pcopyView(state)
         : state.view === "consent" ? consentView(state)
+        : state.view === "completion" ? completionView(state)
         : state.view === "board" ? boardView(state)
         : state.view === "ed" ? edBoardView(state)
         : state.view === "inventory" ? inventoryView(state)
@@ -3536,6 +3562,16 @@
       .then(function (r) { if (settle(r, "Withdrawn.")) loadConsent(); else paint(); })
       .catch(function () { st.busy = false; st.err = "Could not withdraw that."; paint(); });
   }
+  function completionOpen() {
+    st.view = "completion"; st.completion = null; paint(); loadCompletion();
+  }
+  function loadCompletion() {
+    if (!st.sel || !st.sel.patientId) return;
+    st.busy = true; paint();
+    return apiGet("/ward/completion-queue?orgId=" + encodeURIComponent(st.orgId) + "&patientId=" + encodeURIComponent(st.sel.patientId))
+      .then(function (r) { st.busy = false; if (r && r.ok) st.completion = r; else { st.completion = { items: [] }; st.err = "Could not build the chart check."; } paint(); })
+      .catch(function () { st.busy = false; st.completion = { items: [] }; st.err = "Could not build the chart check."; paint(); });
+  }
   function loadCosigns() {
     return apiGet("/ward/cosign-queue?orgId=" + encodeURIComponent(st.orgId))
       .then(function (r) { if (r && r.ok) st.cosign = r; paint(); })
@@ -3681,6 +3717,7 @@
        * one patient's diagnoses left on screen is how the next person gets handed the wrong one. */
       if (st.view === "pcopy") { st.view = "chart"; st.pcopy = null; paint(); return; }
       if (st.view === "consent") { st.view = "chart"; st.consent = null; paint(); return; }
+      if (st.view === "completion") { st.view = "chart"; st.completion = null; paint(); return; }
       if (st.view === "oncology") { st.view = "chart"; st.oncology = null; paint(); return; }
       if (st.view === "cardiology") { st.view = "chart"; st.cardiology = null; paint(); return; }
       if (st.view === "radiology") { st.view = "chart"; st.radiology = null; paint(); return; }
@@ -3704,7 +3741,7 @@
       st.flowsheet = null; st.news2 = null; st.investigations = null; st.results = null; st.resusBundles = null;
       st.ed = null; st.edArrivalOpen = false; st.edMrnLookup = null; st.edMrnLookupErr = "";
       st.surgBoard = null; st.surgCase = null; st.surgBookOpen = false; st.surgMrnLookup = null; st.surgMrnLookupErr = ""; st.surgErr = "";
-      st.maternity = null; st.admitClass = ""; st.ageBand = null; st.lines = null; st.rateResult = null; st.oncology = null; st.cardiology = null; st.radiology = null; st.pharmacy = null; st.transfusion = null; st.consent = null;
+      st.maternity = null; st.admitClass = ""; st.ageBand = null; st.lines = null; st.rateResult = null; st.oncology = null; st.cardiology = null; st.radiology = null; st.pharmacy = null; st.transfusion = null; st.consent = null; st.completion = null;
       paint(); return;
     }
     if (cmd === "board") { loadBoard(); return; }
@@ -3889,6 +3926,7 @@
     if (cmd === "consentopen") { consentOpen(); return; }
     if (cmd === "consentrecord") { recordConsentAction(); return; }
     if (cmd === "consentwithdraw") { var parts = arg.split("|"); withdrawConsentAction(parts[0], parts[1]); return; }
+    if (cmd === "completionopen") { completionOpen(); return; }
     if (cmd === "cosign") { cosign(arg); return; }
     if (cmd === "submitnote") { submitNote(arg); return; }
     if (cmd === "tx") { transmit(arg); return; }
