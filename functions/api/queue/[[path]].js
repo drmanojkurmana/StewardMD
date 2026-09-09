@@ -79,6 +79,11 @@ import {
 import {
   linkCardiologyRecord, getCardiologyLink, recordEcgReference, listEcgReferences, cardiologyTimeline,
 } from "../../_wardsynq/migrate-cardiology.js";
+import {
+  requestTransfusion, recordCrossmatch, issueUnit, recordBedsideCheck,
+  startTransfusion, recordTransfusionObservation, recordTransfusionReaction, completeTransfusion,
+  transfusionQueue, traceBloodUnit,
+} from "../../_wardsynq/migrate-transfusion.js";
 import { medicationRound, administerStep } from "../../_wardsynq/migrate-emar.js";
 import { draftDischargeSummary, signDischargeSummary, dischargePatient, readDischargeSummary } from "../../_wardsynq/migrate-discharge.js";
 import { recordProblem, listProblems } from "../../_wardsynq/migrate-problem.js";
@@ -572,6 +577,15 @@ export async function onRequest(context) {
         "onco-chemo": CAPS.EMR_TREAT, "onco-chemo-list": CAPS.EMR_VIEW, "onco-timeline": CAPS.EMR_VIEW,
         "cardio-link": CAPS.EMR_TREAT, "cardio-link-get": CAPS.EMR_VIEW, "cardio-ecg": CAPS.EMR_TREAT,
         "cardio-ecg-list": CAPS.EMR_VIEW, "cardio-timeline": CAPS.EMR_VIEW,
+        // TASK 3.5: role separation between blood-bank crossmatch/issue and ward-side bedside
+        // administration is NOT implemented here - every stage rides the same emr.treat capability
+        // every other "clinical commitment" resource in this file uses, stated explicitly rather
+        // than decided unilaterally (see migrate-transfusion.js's own header).
+        "transfusion-request": CAPS.EMR_TREAT, "transfusion-crossmatch": CAPS.EMR_TREAT,
+        "transfusion-issue": CAPS.EMR_TREAT, "transfusion-bedside-check": CAPS.EMR_TREAT,
+        "transfusion-start": CAPS.EMR_TREAT, "transfusion-observe": CAPS.EMR_TREAT,
+        "transfusion-reaction": CAPS.EMR_TREAT, "transfusion-complete": CAPS.EMR_TREAT,
+        "transfusion-queue": CAPS.EMR_VIEW, "transfusion-trace": CAPS.EMR_VIEW,
         // Charting fluid is the nurse's own record, the same authority as recording a vital.
         fluid: CAPS.EMR_VITALS, balance: CAPS.EMR_VIEW,
         // Handing a patient over is the clinical account of a shift: the same authority as recording
@@ -1048,6 +1062,46 @@ export async function onRequest(context) {
       }
       if (sub === "cardio-timeline" && method === "GET") {
         const r = await cardiologyTimeline(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "" });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "transfusion-request" && method === "POST") {
+        const r = await requestTransfusion(request, env, { ...deps, mrn: body.mrn, patientId: body.patientId, encounterId: body.encounterId, component: body.component, units: body.units, indication: body.indication, aboGroup: body.aboGroup, rhD: body.rhD, at: body.at, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "transfusion-crossmatch" && method === "POST") {
+        const r = await recordCrossmatch(request, env, { ...deps, episodeId: body.episodeId, unitId: body.unitId, aboGroup: body.aboGroup, rhD: body.rhD, component: body.component, expiresAt: body.expiresAt, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "transfusion-issue" && method === "POST") {
+        const r = await issueUnit(request, env, { ...deps, episodeId: body.episodeId, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "transfusion-bedside-check" && method === "POST") {
+        const r = await recordBedsideCheck(request, env, { ...deps, episodeId: body.episodeId, checkerId: body.checkerId, secondCheckerId: body.secondCheckerId, scannedPatientBarcode: body.scannedPatientBarcode, scannedUnitId: body.scannedUnitId, patient: body.patient, unitInHand: body.unitInHand, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "transfusion-start" && method === "POST") {
+        const r = await startTransfusion(request, env, { ...deps, episodeId: body.episodeId, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "transfusion-observe" && method === "POST") {
+        const r = await recordTransfusionObservation(request, env, { ...deps, episodeId: body.episodeId, vitals: body.vitals, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "transfusion-reaction" && method === "POST") {
+        const r = await recordTransfusionReaction(request, env, { ...deps, episodeId: body.episodeId, detail: body.detail, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "transfusion-complete" && method === "POST") {
+        const r = await completeTransfusion(request, env, { ...deps, episodeId: body.episodeId, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "transfusion-queue" && method === "GET") {
+        const r = await transfusionQueue(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "" });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "transfusion-trace" && method === "GET") {
+        const r = await traceBloodUnit(request, env, { ...deps, unitId: url.searchParams.get("unitId") || "" });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "vitals" && method === "POST") {
