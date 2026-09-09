@@ -62,6 +62,15 @@ const HAPPENED = Object.freeze({
   MedicationDispense: Object.freeze(["dispensed", "issued"]),
 });
 
+/* TASK 4.18's own end-to-end journey test found this: two of the four resource models here name
+ * their own lifecycle field `state`, not `status` - pharmacy-dispense.js's own MedicationDispense
+ * and specimen.js's own SpecimenCollection. This file had read `row.status` for all four since it
+ * was written, which meant a dispensed drug or a collected specimen could NEVER be captured as a
+ * charge: `row.status` was always undefined for those two types, so every one of them fell through
+ * to "did_not_happen" regardless of its real state. Named here, once, rather than guessed per call
+ * site - a second place this could drift silently if left implicit. */
+const STATUS_FIELD = Object.freeze({ MedicationDispense: "state", SpecimenCollection: "state" });
+
 /** PURE. The code an item is priced by, and what it is called on a bill. */
 function itemFrom(resourceType, row) {
   const r = row || {};
@@ -95,11 +104,12 @@ function capturableFrom(slices) {
       /* A dose another hospital gave, a report another laboratory released: real events, on this
        * chart because a feed brought them, and NOT this hospital's to bill. Named as skipped so a
        * finance office can see they were seen. */
+      const statusField = STATUS_FIELD[type] || "status";
       if (isExternalRecord(row)) {
-        skipped.push({ sourceType: type, sourceId: row.id || null, status: str(row.status) || null, reason: "external_source", system: row.meta.source.system });
+        skipped.push({ sourceType: type, sourceId: row.id || null, status: str(row[statusField]) || null, reason: "external_source", system: row.meta.source.system });
         continue;
       }
-      const status = str(row.status);
+      const status = str(row[statusField]);
       if (!HAPPENED[type].includes(status)) {
         /* Named, not silently absent. A held dose and a dose nobody charted look identical on a
          * bill that lists neither, and only one of them is a charge somebody should chase. */
