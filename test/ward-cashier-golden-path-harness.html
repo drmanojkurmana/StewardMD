@@ -1,0 +1,82 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>WardSynQ TASK 4.7: cashier golden path harness</title>
+<link rel="stylesheet" href="../ward.css">
+<style>html,body{margin:0;height:100%}</style>
+</head><body>
+<script>
+/* The REAL ward.js driven through the cashier golden path (ward list -> Cashier button -> look up
+ * a patient by MRN -> raise an invoice from today's charges -> collect a payment -> a receipt
+ * appears -> an over-refund is refused verbatim -> a discount with no reason is refused verbatim)
+ * against an in-memory stub server whose response shapes are confirmed against
+ * functions/_wardsynq/invoice.js and wardsynq/wardsynq-invoice.js, and the route-level proof in
+ * test/wardsynq-invoice-bridge.test.mjs, which proves these same contracts persist for real. This
+ * proves the CLIENT half; it is not a live server. */
+window.__calls = [];
+localStorage.setItem("smd_opd_staff_tok", "harness-token");
+
+var PATIENT_ID = "opd-pat-smd-h1-cash01";
+var INVOICE = null;
+
+function summary() {
+  if (!INVOICE) return null;
+  var charged = INVOICE.lines.reduce(function (n, l) { return n + l.line; }, 0);
+  var paidIn = INVOICE.events.filter(function (e) { return e.kind === "deposit" || e.kind === "payment"; }).reduce(function (n, e) { return n + e.amount; }, 0);
+  var refundedOut = INVOICE.events.filter(function (e) { return e.kind === "refund"; }).reduce(function (n, e) { return n + e.amount; }, 0);
+  var discounted = INVOICE.events.filter(function (e) { return e.kind === "discount"; }).reduce(function (n, e) { return n + e.amount; }, 0);
+  var balance = Math.round((charged - paidIn - discounted + refundedOut) * 100) / 100;
+  var receipts = INVOICE.events.map(function (e, i) { return { e: e, i: i }; }).filter(function (x) { return ["deposit", "payment", "refund"].indexOf(x.e.kind) >= 0; })
+    .map(function (x) { return { receiptNumber: INVOICE.id + "-" + x.i, kind: x.e.kind, amount: x.e.amount, currency: INVOICE.currency, at: x.e.at }; });
+  return { invoiceId: INVOICE.id, patientId: INVOICE.patientId, currency: INVOICE.currency, lines: INVOICE.lines, events: INVOICE.events,
+    charged: charged, paidIn: paidIn, refundedOut: refundedOut, discounted: discounted, adjusted: 0, writtenOff: 0,
+    balance: balance, creditBalance: balance < 0 ? -balance : 0, status: balance <= 0 ? "paid" : "open", void: false, receipts: receipts };
+}
+
+window.fetch = function (url, opts) {
+  var u = String(url), body = null;
+  try { body = opts && opts.body ? JSON.parse(opts.body) : null; } catch (e) {}
+  window.__calls.push({ url: u, method: (opts && opts.method) || "GET", body: body });
+  var reply = function (obj) { return Promise.resolve({ ok: true, status: 200, json: function () { return Promise.resolve(obj); } }); };
+  var refuse = function (obj) { return Promise.resolve({ ok: true, status: 200, json: function () { return Promise.resolve(Object.assign({ ok: false }, obj)); } }); };
+
+  if (u.indexOf("/ward/list") >= 0) return reply({ ok: true, patients: [] });
+  if (u.indexOf("/ward/beds") >= 0) return reply({ ok: true, wards: [] });
+
+  if (u.indexOf("/patient/get") >= 0) return reply({ ok: true, patient: { name: "Cashier Testcase", mrn: "SMD-H1-CASH01" } });
+
+  if (u.indexOf("/ward/invoice-payment") >= 0 && (opts && opts.method) === "POST") {
+    INVOICE.events.push({ kind: "payment", amount: body.amount, actorId: "cfa:cashier", at: "2026-09-09T10:00:00.000Z", reference: null, reason: null });
+    return reply(Object.assign({ ok: true, written: 1 }, summary()));
+  }
+  if (u.indexOf("/ward/invoice-deposit") >= 0 && (opts && opts.method) === "POST") {
+    INVOICE.events.push({ kind: "deposit", amount: body.amount, actorId: "cfa:cashier", at: "2026-09-09T10:00:00.000Z", reference: null, reason: null });
+    return reply(Object.assign({ ok: true, written: 1 }, summary()));
+  }
+  if (u.indexOf("/ward/invoice-discount") >= 0 && (opts && opts.method) === "POST") {
+    if (!body.reason) return refuse({ error: "invoice_refused", code: "REASON_REQUIRED", detail: "a discount must say why" });
+    INVOICE.events.push({ kind: "discount", amount: body.amount, actorId: "cfa:cashier", at: "2026-09-09T10:00:00.000Z", reason: body.reason });
+    return reply(Object.assign({ ok: true, written: 1 }, summary()));
+  }
+  if (u.indexOf("/ward/invoice-refund") >= 0 && (opts && opts.method) === "POST") {
+    var paidSoFar = INVOICE.events.filter(function (e) { return e.kind === "deposit" || e.kind === "payment"; }).reduce(function (n, e) { return n + e.amount; }, 0);
+    if (!body.reason) return refuse({ error: "invoice_refused", code: "REASON_REQUIRED", detail: "a refund must say why" });
+    if (body.amount > paidSoFar) return refuse({ error: "invoice_refused", code: "REFUND_EXCEEDS_PAID", detail: "at most " + paidSoFar + " can be refunded - that is all that was paid in and not already refunded" });
+    INVOICE.events.push({ kind: "refund", amount: body.amount, actorId: "cfa:cashier", at: "2026-09-09T10:00:00.000Z", reason: body.reason });
+    return reply(Object.assign({ ok: true, written: 1 }, summary()));
+  }
+  if (u.indexOf("/ward/invoice") >= 0 && (opts && opts.method) === "POST") {
+    INVOICE = { id: "wsq-invoice-smd-h1-cash01-1", patientId: PATIENT_ID, currency: "INR",
+      lines: [{ code: "CONSULT", display: "Consultation", quantity: 1, amount: 500, line: 500 }],
+      events: [{ kind: "raised", amount: 0, actorId: "cfa:cashier", at: "2026-09-09T09:00:00.000Z" }] };
+    return reply(Object.assign({ ok: true, written: 1 }, summary()));
+  }
+  if (u.indexOf("/ward/invoices") >= 0) return reply({ ok: true, invoices: INVOICE ? [summary()] : [], outstandingBalance: INVOICE ? summary().balance : 0 });
+
+  return reply({ ok: true });
+};
+</script>
+<script src="../ward.js"></script>
+<script>
+window.__ready = !!(window.WARD && window.WARD.open);
+</script>
+</body></html>

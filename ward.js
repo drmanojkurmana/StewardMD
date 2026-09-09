@@ -180,6 +180,7 @@
       '<button class="w-btn ghost" data-w-act="bedmgmt" title="Reserve, block for maintenance, clean-before-reuse - real bed states, server-checked">' + ms("bed") + "Bed management</button>" +
       '<button class="w-btn ghost" data-w-act="flowcommand" title="ED, beds, admissions pending, discharge, transfers - hospital-wide, live">' + ms("hub") + "Patient flow</button>" +
       '<button class="w-btn ghost" data-w-act="scheduling" title="Appointments, resource bookings, blackout periods - conflict-checked, server-side">' + ms("event") + "Scheduling</button>" +
+      '<button class="w-btn ghost" data-w-act="cashier" title="Balance, invoices, payments, refunds - no clinical detail">' + ms("point_of_sale") + "Cashier</button>" +
       // Reachable BEFORE an outage, which is the only time it can be taken. A pack you can only get
       // to while the system is up is a pack the ward has to remember to take while the system is up.
       '<button class="w-btn ghost" data-w-act="downtime" title="Printable sheet for when the system is unavailable">' + ms("print") + "Downtime pack</button></div>" +
@@ -1749,6 +1750,69 @@
       '<button class="w-btn warn" data-w-act="blackoutadd">' + ms("block") + "Block period</button></div>";
   }
 
+  /* TASK 4.7: the cashier workstation. wardsynq-invoice.js already enforces every rule that
+   * matters - a refund cannot exceed what was paid, a discount/adjustment/write-off must say why,
+   * void only before real money moves - this screen adds no logic, only a lookup, a balance, and
+   * the same actions the ledger already governs. THE CASHIER NEEDS NO CLINICAL PRIVILEGE: this
+   * view is reached from the ward list, never from inside a chart, and shows nothing clinical -
+   * only identity, invoices and money. "Refunds according to authorization" is read here as the
+   * existing billing.charge capability gate, already server-enforced - no separate approval tier
+   * is invented; if a hospital wants a threshold-based sign-off, that is a real policy decision for
+   * a later, explicitly-scoped task, not assumed here. */
+  var INVOICE_STATUS_WORDS = { open: "Open", paid: "Paid", void: "Void" };
+  var EVENT_KIND_WORDS = { raised: "Invoice raised", discount: "Discount", deposit: "Deposit", payment: "Payment", refund: "Refund", adjustment: "Adjustment", write_off: "Write-off", void: "Voided" };
+  function cashierView(state) {
+    var c = state.cashier || {};
+    var invoices = c.invoices || [];
+    var invRows = invoices.map(function (inv) {
+      var eventRows = (inv.events || []).map(function (ev) {
+        return "<li><b>" + esc(EVENT_KIND_WORDS[ev.kind] || ev.kind) + "</b> " + esc(ev.amount) + " " + esc(inv.currency || "") +
+          '<span>' + esc(when(ev.at)) + (ev.reason ? " &middot; " + esc(ev.reason) : "") + (ev.reference ? " &middot; ref " + esc(ev.reference) : "") + "</span></li>";
+      }).join("");
+      var receiptRows = (inv.receipts || []).map(function (r) {
+        return "<li><b>" + esc(r.receiptNumber) + "</b> " + esc(EVENT_KIND_WORDS[r.kind] || r.kind) + " " + esc(r.amount) + " " + esc(r.currency || "") + '<span>' + esc(when(r.at)) + "</span></li>";
+      }).join("");
+      var live = inv.status !== "void";
+      return '<div class="w-sub"><h4>' + esc(inv.invoiceId) + '<span class="w-st ' + esc(inv.status) + '">' + esc(INVOICE_STATUS_WORDS[inv.status] || inv.status) + "</span></h4>" +
+        "<p>Charged " + esc(inv.charged) + " &middot; Paid in " + esc(inv.paidIn) + " &middot; Balance " + esc(inv.balance) + (inv.creditBalance ? " &middot; Credit " + esc(inv.creditBalance) : "") + "</p>" +
+        (eventRows ? '<ul class="w-mini">' + eventRows + "</ul>" : "") +
+        (receiptRows ? "<h4>Receipts</h4><ul class=\"w-mini\">" + receiptRows + "</ul>" : "") +
+        (live ? '<div class="w-actions">' +
+          '<button class="w-btn tiny go" data-w-act="invpay:' + esc(inv.invoiceId) + '">' + ms("payments") + "Collect payment</button>" +
+          '<button class="w-btn tiny ghost" data-w-act="invdeposit:' + esc(inv.invoiceId) + '">' + ms("savings") + "Deposit</button>" +
+          '<button class="w-btn tiny ghost" data-w-act="invdiscount:' + esc(inv.invoiceId) + '">' + ms("percent") + "Discount</button>" +
+          '<button class="w-btn tiny ghost" data-w-act="invrefund:' + esc(inv.invoiceId) + '">' + ms("undo") + "Refund</button>" +
+          '<button class="w-btn tiny ghost" data-w-act="invadjust:' + esc(inv.invoiceId) + '">' + ms("tune") + "Adjustment</button>" +
+          '<button class="w-btn tiny ghost" data-w-act="invwriteoff:' + esc(inv.invoiceId) + '">' + ms("remove_circle") + "Write off</button>" +
+          "</div>" : "") + "</div>";
+    }).join("");
+
+    return '<div class="w-chart-h"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button>" +
+      "<div><b>Cashier</b><small>financial collection only - no clinical detail</small></div>" +
+      '<button class="w-ic" data-w-act="cashload" title="Refresh">' + ms("refresh") + "</button></div>" +
+      (c.err ? '<p class="w-hint warn">' + ms("warning") + esc(c.err) + "</p>" : "") +
+
+      '<div class="w-card"><div class="w-card-h">' + ms("search") + "<h3>Find patient</h3></div>" +
+      '<div class="w-grid">' +
+      '<label class="w-f"><span>MRN</span><input id="wCashMrn" type="text" autocomplete="off" value="' + esc(c.mrn || "") + '"></label>' +
+      "</div>" +
+      '<button class="w-btn go" data-w-act="cashlookup">' + ms("search") + "Look up</button>" +
+      (c.patientId ? "<p><b>" + esc(c.patientName || c.patientId) + "</b><br><small>" + esc(c.patientId) + "</small></p>" : "") + "</div>" +
+
+      (c.patientId ? '<div class="w-card"><div class="w-card-h">' + ms("account_balance") + "<h3>Outstanding balance</h3></div>" +
+        "<p><b>" + esc(c.outstandingBalance == null ? "-" : c.outstandingBalance) + "</b></p>" +
+        '<button class="w-btn" data-w-act="cashraise">' + ms("receipt_long") + "Raise invoice from today's charges</button>" +
+        (invRows || '<p class="w-empty">No invoices for this patient yet.</p>') + "</div>" : "") +
+
+      '<div class="w-card"><div class="w-card-h">' + ms("payments") + "<h3>Post an amount</h3></div>" +
+      '<p class="w-hint">Applies to whichever invoice button above you use. A discount, an adjustment and a write-off all require a reason; a plain payment or deposit does not.</p>' +
+      '<div class="w-grid">' +
+      '<label class="w-f"><span>Amount</span><input id="wCashAmount" type="text" inputmode="decimal" autocomplete="off"></label>' +
+      '<label class="w-f"><span>Reason (where required)</span><input id="wCashReason" type="text" autocomplete="off"></label>' +
+      '<label class="w-f"><span>Reference (optional)</span><input id="wCashReference" type="text" autocomplete="off"></label>' +
+      "</div></div>";
+  }
+
   /* TASK 3.5: the blood bank workstation. wardsynq-transfusion.js (HAZ-BLD-01) already enforces
    * everything hazardous here - ABO/RhD compatibility, a crossmatch bound to one patient, and a
    * two-person bedside check that re-derives compatibility from the physical unit rather than the
@@ -2032,6 +2096,7 @@
         : state.view === "bedmgmt" ? bedBoardMgmtView(state)
         : state.view === "flowcommand" ? flowCommandView(state)
         : state.view === "scheduling" ? schedulingView(state)
+        : state.view === "cashier" ? cashierView(state)
         : listView(state)) + "</div></div>";
   }
 
@@ -2732,6 +2797,62 @@
     apiPost("/ward/acknowledge", { orgId: st.orgId, loopId: loopId, action: why.trim() })
       .then(function (r) { if (settle(r, "Acknowledged.")) loadCritsBoard(); else paint(); })
       .catch(function () { st.busy = false; st.err = "Could not record the acknowledgement."; paint(); });
+  }
+  function cashierOpen() {
+    st.view = "cashier"; st.cashier = {}; paint();
+  }
+  function cashLookup() {
+    var mrn = val("wCashMrn");
+    if (!mrn) { st.cashier.err = "Enter an MRN."; paint(); return; }
+    st.cashier.mrn = mrn; st.cashier.err = ""; st.busy = true; paint();
+    // The same deterministic patientId every other ward flow derives from an MRN - never guessed,
+    // never a second identity scheme.
+    var patientId = "opd-pat-" + mrn.toLowerCase();
+    apiGet("/patient/get?orgId=" + encodeURIComponent(st.orgId) + "&mrn=" + encodeURIComponent(mrn))
+      .then(function (r) {
+        st.busy = false;
+        if (!r || !r.ok || !r.patient) { st.cashier.err = "No patient found with that MRN."; st.cashier.patientId = null; paint(); return; }
+        st.cashier.patientId = patientId; st.cashier.patientName = r.patient.name || null;
+        loadCashier();
+      })
+      .catch(function () { st.busy = false; st.cashier.err = "Could not look up that MRN."; paint(); });
+  }
+  function loadCashier() {
+    if (!st.cashier || !st.cashier.patientId) return;
+    return apiGet("/ward/invoices?orgId=" + encodeURIComponent(st.orgId) + "&patientId=" + encodeURIComponent(st.cashier.patientId))
+      .then(function (r) {
+        st.cashier.invoices = (r && r.ok && r.invoices) || [];
+        st.cashier.outstandingBalance = r && r.ok ? r.outstandingBalance : null;
+        paint();
+      })
+      .catch(function () { paint(); });
+  }
+  function cashRaise() {
+    if (!st.cashier || !st.cashier.patientId) return;
+    st.cashier.err = ""; st.busy = true; paint();
+    apiPost("/ward/invoice", { orgId: st.orgId, patientId: st.cashier.patientId })
+      .then(function (r) {
+        st.busy = false;
+        if (r && r.ok) { loadCashier(); return; }
+        st.cashier.err = (r && (r.detail || r.error)) || "Could not raise an invoice.";
+        paint();
+      })
+      .catch(function () { st.busy = false; st.cashier.err = "Could not reach the server."; paint(); });
+  }
+  var CASH_ACTION_ROUTE = { pay: "invoice-payment", deposit: "invoice-deposit", discount: "invoice-discount", refund: "invoice-refund", adjust: "invoice-adjustment", writeoff: "invoice-writeoff" };
+  function cashPost(invoiceId, kind) {
+    var amount = val("wCashAmount"), reason = val("wCashReason"), reference = val("wCashReference");
+    if (!amount || Number(amount) <= 0) { st.cashier.err = "Enter a positive amount."; paint(); return; }
+    var route = CASH_ACTION_ROUTE[kind];
+    st.cashier.err = ""; st.busy = true; paint();
+    apiPost("/ward/" + route, { orgId: st.orgId, invoiceId: invoiceId, amount: Number(amount), reason: reason || undefined, reference: reference || undefined })
+      .then(function (r) {
+        st.busy = false;
+        if (r && r.ok) { loadCashier(); return; }
+        st.cashier.err = (r && (r.detail || r.error)) || "Could not post that.";
+        paint();
+      })
+      .catch(function () { st.busy = false; st.cashier.err = "Could not reach the server."; paint(); });
   }
   function schedulingOpen() {
     st.view = "scheduling"; st.scheduling = {}; paint(); loadScheduling();
@@ -3486,6 +3607,7 @@
       if (st.view === "bedmgmt") { st.bedMgmt = {}; st.view = "list"; paint(); return; }
       if (st.view === "flowcommand") { st.flow = {}; st.view = "list"; paint(); return; }
       if (st.view === "scheduling") { st.scheduling = {}; st.view = "list"; paint(); return; }
+      if (st.view === "cashier") { st.cashier = {}; st.view = "list"; paint(); return; }
       // Picking a bed to admit an ED patient opens the SAME bed board a fresh admission uses;
       // backing out of it returns to that patient's ED chart, not the ward list, and drops the
       // pending admit rather than leaving it to fire on some later, unrelated bed pick.
@@ -3558,6 +3680,16 @@
     if (cmd === "rescancel") { resCancel(arg); return; }
     if (cmd === "blackoutadd") { blackoutAdd(); return; }
     if (cmd === "blackoutcancel") { blackoutCancel(arg); return; }
+    if (cmd === "cashier") { cashierOpen(); return; }
+    if (cmd === "cashload") { loadCashier(); return; }
+    if (cmd === "cashlookup") { cashLookup(); return; }
+    if (cmd === "cashraise") { cashRaise(); return; }
+    if (cmd === "invpay") { cashPost(arg, "pay"); return; }
+    if (cmd === "invdeposit") { cashPost(arg, "deposit"); return; }
+    if (cmd === "invdiscount") { cashPost(arg, "discount"); return; }
+    if (cmd === "invrefund") { cashPost(arg, "refund"); return; }
+    if (cmd === "invadjust") { cashPost(arg, "adjust"); return; }
+    if (cmd === "invwriteoff") { cashPost(arg, "writeoff"); return; }
     if (cmd === "bedmgmtload") { loadBedMgmt(); return; }
     if (cmd === "bedstate") { bedStateApply(arg); return; }
     if (cmd === "stockreceive") { stockReceive(); return; }
