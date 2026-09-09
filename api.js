@@ -875,7 +875,21 @@
       ".db-brand-meta{font:500 11px var(--sans,system-ui);color:var(--slate-soft,#888);margin-top:2px}",
       ".db-brand-price{font:800 15px var(--sans,system-ui);color:var(--teal,#0a9396);white-space:nowrap;flex:0 0 auto}",
       ".db-na{color:var(--slate-soft,#888);font-weight:600}",
-      ".db-more{width:100%;border:1px dashed var(--teal,#0a9396);background:var(--teal-soft,#e0f2f1);color:var(--teal,#0a9396);border-radius:10px;padding:11px;font:700 12.5px var(--sans,system-ui);cursor:pointer;margin-top:10px}"
+      ".db-more{width:100%;border:1px dashed var(--teal,#0a9396);background:var(--teal-soft,#e0f2f1);color:var(--teal,#0a9396);border-radius:10px;padding:11px;font:700 12.5px var(--sans,system-ui);cursor:pointer;margin-top:10px}",
+      // Visible Demo-A pass: segmented browse tabs, refined rows, tighter type.
+      // Pure CSS, later rules win on equal specificity; no markup or logic touched.
+      ".db-btabs{background:var(--panel,#fff);border:1px solid var(--line,#e5e5e0);border-radius:13px;padding:3px;gap:3px}",
+      ".db-btab{border:none;background:transparent;border-radius:10px;margin:0}",
+      ".db-search{border-radius:14px;padding:12px 14px}",
+      ".db-search:focus{box-shadow:0 0 0 3px rgba(10,147,150,.18)}",
+      ".db-searchbar .db-search{padding-left:44px}",
+      ".db-az{gap:6px}",
+      ".db-azb{border-radius:10px;min-width:32px;height:32px}",
+      ".db-sec-l{letter-spacing:.06em}",
+      ".db-comp{border-radius:14px;padding:13px 14px;margin-bottom:9px;box-shadow:0 1px 2px rgba(15,23,42,.04)}",
+      ".db-comp-name{letter-spacing:-.01em;font-size:14px}",
+      ".db-gen{letter-spacing:-.015em;font-size:22px}",
+      ".db-chip{border-radius:999px}"
     ].join("");
     var s = document.createElement("style"); s.id = "smd-db-styles"; s.textContent = css; document.head.appendChild(s);
   }
