@@ -369,6 +369,12 @@ const RESOURCE_TYPES = Object.freeze([
    * inventing again; a record inherits them. Readable by exactly the people who may read the patient
    * it is about, which is why patientId is on it. See maik-interaction.js. */
   "MaiKInteraction",
+  /* TASK 10.17: the same governed-AI-action discipline as MaiKInteraction, for a question about the
+   * HOSPITAL rather than one patient's chart - no patientId, because there is no one patient. Readable
+   * under the same hospital-wide EMR_VIEW capability every other operational aggregate already uses
+   * (EMR_VIEW grants read:null, every type), never patient-compartmented since it carries no patient.
+   * See twin-copilot.js. */
+  "TwinInteraction",
 ]);
 
 const MODE = Object.freeze({ SYSTEM_OF_RECORD: "system-of-record", INTEGRATION: "integration" });

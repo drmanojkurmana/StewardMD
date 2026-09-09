@@ -123,6 +123,11 @@ import { submitNote, signNote, listAwaitingCoSign } from "../../_wardsynq/note-c
 import { chartCompletionQueue } from "../../_wardsynq/chart-completion.js";
 import { patientFlowReport, clinicalOperationsReport, billingReport, claimsReport, pharmacyReport, himReport } from "../../_wardsynq/reports.js";
 import { downtimePack } from "../../_wardsynq/downtime.js";
+import { buildTwinSnapshot, reconstructTwinAsOf } from "../../_wardsynq/digital-twin.js";
+import { predictMetric } from "../../_wardsynq/twin-predict.js";
+import { simulateScenario } from "../../_wardsynq/twin-simulate.js";
+import { askAboutHospital, reviewTwinInteraction } from "../../_wardsynq/twin-copilot.js";
+import { prepareOverdueWorkQueue } from "../../_wardsynq/twin-agent.js";
 import { qualityReport } from "../../_wardsynq/quality.js";
 import { collectSpecimen, specimenOutcome, collectionList } from "../../_wardsynq/specimen.js";
 import { adtForEncounter, oruForReport } from "../../_wardsynq/hl7v2.js";
@@ -538,7 +543,7 @@ export async function onRequest(context) {
       /* TASK 9.15. Whole-hospital or whole-ward reads. Rationed tightly because they are rare and
        * deliberate, and because they are the one shape that turns an authenticated account into a
        * bulk exfiltration tool in a loop. */
-      const RL_BULK = new Set(["backup", "downtime", "analytics-extract", "roi-export"]);
+      const RL_BULK = new Set(["backup", "downtime", "analytics-extract", "roi-export", "twin-reconstruct"]);
       /* Emergency access is bounded but never scarce: the limit is here to make scripted break-glass
        * abuse visible and finite, and it sits far above the handful of declarations a real shift
        * produces. Refusing a genuine emergency to enforce a quota would be the worse failure. */
@@ -688,6 +693,17 @@ export async function onRequest(context) {
         // What is outstanding on the ward. A count of open items, naming no patient except on the
         // oldest unacknowledged critical result - so it is readable by the ward, at emr.view.
         metrics: CAPS.EMR_VIEW, "patient-flow": CAPS.EMR_VIEW,
+        /* TASK 10: the Hospital Digital Twin. Reads exactly what patient-flow/metrics/emergency-
+         * status/etc already gate at EMR_VIEW - the twin composes their answers, so it never needs a
+         * broader cap than the narrowest section it fuses. Reconstruction reads deep version history
+         * across the whole tenant, which is the same forensic-reach reasoning backup.js's own
+         * STAFF_ADMIN gate uses, so it is gated a step higher than a live read. The Copilot and agent
+         * routes write nothing clinical (a TwinInteraction and a draft list respectively) and stay at
+         * EMR_VIEW for the same reason MaiK's own patient-facing routes do: reading is the bar, the
+         * write it produces is scoped by a dedicated service actor, not by the asker's own grant. */
+        twin: CAPS.EMR_VIEW, "twin-reconstruct": CAPS.STAFF_ADMIN, "twin-predict": CAPS.EMR_VIEW,
+        "twin-simulate": CAPS.EMR_VIEW, "twin-copilot": CAPS.EMR_VIEW, "twin-review": CAPS.EMR_VIEW,
+        "twin-agent-queue": CAPS.EMR_VIEW,
         // TASK 4.12: hospital reports. Patient-flow/clinical-operations ride the same emr.view as the
         // live queues they wrap. Billing/claims/pharmacy/HIM report at the same capability their own
         // live routes already require - a report is not a way to read what the underlying route
@@ -1968,6 +1984,53 @@ export async function onRequest(context) {
       }
       if (sub === "report-clinical-operations" && method === "GET") {
         const r = await clinicalOperationsReport(request, env, { ...deps, ward: url.searchParams.get("ward") || "", escalationPolicy: (wsqCfg && wsqCfg.criticalEscalation) || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      /* TASK 10.1-10.4: the Hospital Digital Twin. Every number is a call into a file that already
+       * owns it - see digital-twin.js's own header for why this route is deliberately thin. */
+      if (sub === "twin" && method === "GET") {
+        const r = await buildTwinSnapshot(request, env, { ...deps, ward: url.searchParams.get("ward") || "",
+          escalationPolicy: (wsqCfg && wsqCfg.criticalEscalation) || null, includeFinance: url.searchParams.get("finance") === "1" });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      /* TASK 10.20: bounded point-in-time reconstruction. Gated at STAFF_ADMIN, one notch above the
+       * live twin's EMR_VIEW, for the same forensic-reach reason backup.js's own export is: a caller
+       * who can walk the full version history of every emergency/blackout/critical-result ever
+       * declared is reading something closer to an audit trail than a clinical chart. */
+      if (sub === "twin-reconstruct" && method === "GET") {
+        const r = await reconstructTwinAsOf(request, env, deps, url.searchParams.get("at") || "");
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      /* TASK 10.12: governed operational predictions. Never merged into the twin's own sections -
+       * see twin-predict.js's header for why the shapes are kept apart on purpose. */
+      if (sub === "twin-predict" && method === "GET") {
+        const r = await predictMetric(request, env, { ...deps, metric: url.searchParams.get("metric") || "",
+          lookbackDays: Number(url.searchParams.get("lookbackDays")) || undefined, horizonDays: Number(url.searchParams.get("horizonDays")) || undefined });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      /* TASK 10.19: what-if simulation. Reads a real twin, projects arithmetically, writes nothing -
+       * see twin-simulate.js's header for the structural (not just disciplinary) reason it cannot. */
+      if (sub === "twin-simulate" && method === "POST") {
+        const twinR = await buildTwinSnapshot(request, env, { ...deps, ward: body.ward || "", escalationPolicy: (wsqCfg && wsqCfg.criticalEscalation) || null });
+        if (!twinR.ok || !twinR.twin) return json({ ok: false, error: "twin_unavailable" }, 502, request);
+        const r = simulateScenario(twinR.twin, body.scenario, body.params || {});
+        return json(r, r.ok !== false ? 200 : 422, request);
+      }
+      /* TASK 10.17: MaiK Command Copilot, over the hospital's operational state. */
+      if (sub === "twin-copilot" && method === "POST") {
+        const r = await askAboutHospital(request, env, { ...deps, config: (wsqCfg && wsqCfg.maik) || null,
+          question: body.question, task: body.task, ward: body.ward, escalationPolicy: (wsqCfg && wsqCfg.criticalEscalation) || null,
+          includeFinance: body.includeFinance === true, correlationId: body.correlationId, idempotencyKey: body.idempotencyKey || null,
+          fetchImpl: env && typeof env.WSQ_MAIK_FETCH === "function" ? env.WSQ_MAIK_FETCH : null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "twin-review" && method === "POST") {
+        const r = await reviewTwinInteraction(request, env, { ...deps, interactionId: body.interactionId, decision: body.decision, reason: body.reason, editedOutput: body.editedOutput, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      /* TASK 10.18: the one governed agent - draft-only, see twin-agent.js's header. */
+      if (sub === "twin-agent-queue" && method === "GET") {
+        const r = await prepareOverdueWorkQueue(request, env, { ...deps, ward: url.searchParams.get("ward") || "", escalationPolicy: (wsqCfg && wsqCfg.criticalEscalation) || null });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "report-billing" && method === "GET") {

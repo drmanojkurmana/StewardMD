@@ -188,6 +188,11 @@
       '<button class="w-btn ghost" data-w-act="critsboard" title="Every open critical result, hospital-wide">' + ms("priority_high") + "Critical results</button>" +
       '<button class="w-btn ghost" data-w-act="bedmgmt" title="Reserve, block for maintenance, clean-before-reuse - real bed states, server-checked">' + ms("bed") + "Bed management</button>" +
       '<button class="w-btn ghost" data-w-act="flowcommand" title="ED, beds, admissions pending, discharge, transfers - hospital-wide, live">' + ms("hub") + "Patient flow</button>" +
+      // TASK 10: the Hospital Digital Twin - a fused view over patient flow, ward metrics, criticals,
+      // emergency/blackout state, pharmacy and HIM, none of it recomputed here. Not called "command
+      // center": that name already means the button above (Task 4.4), a FollowCare analytics feature
+      // and the Code Blue Watch screen.
+      '<button class="w-btn ghost" data-w-act="twin" title="Fused hospital state with freshness, provenance and a governed AI copilot">' + ms("hub") + "Digital twin</button>" +
       '<button class="w-btn ghost" data-w-act="scheduling" title="Appointments, resource bookings, blackout periods - conflict-checked, server-side">' + ms("event") + "Scheduling</button>" +
       '<button class="w-btn ghost" data-w-act="cashier" title="Balance, invoices, payments, refunds - no clinical detail">' + ms("point_of_sale") + "Cashier</button>" +
       // TASK 4.17 (Administration, scoped down per its own audit): the six hospital reports
@@ -2140,6 +2145,97 @@
       (bottlenecks ? '<ul class="w-mini">' + bottlenecks + "</ul>" : '<p class="w-empty">Nothing stands out right now.</p>') + "</div>";
   }
 
+  /* TASK 10: the Hospital Digital Twin. Every number rendered here already exists on a screen
+   * elsewhere in this file - patient-flow's beds/ED, ward-metrics' open items, critsboard's loops,
+   * the emergency/blackout screens. This view's own contribution is FUSION: one screen, each section
+   * labelled with its own freshness, "not built" named rather than shown as zero, and a governed
+   * MaiK copilot that can only speak about what this same screen already shows. */
+  var TWIN_FRESHNESS_WORDS = { live: "Live", delayed: "Delayed", stale: "Stale", unavailable: "Unavailable" };
+  function twinSectionCard(icon, title, section, body) {
+    if (!section) return "";
+    var badge = section.status === "ok"
+      ? '<span class="w-st ' + (section.freshness === "live" ? "" : "due") + '">' + esc(TWIN_FRESHNESS_WORDS[section.freshness] || section.freshness) + "</span>"
+      : '<span class="w-st overdue">' + ms("block") + "Unavailable</span>";
+    return '<div class="w-card"><div class="w-card-h">' + ms(icon) + "<h3>" + esc(title) + "</h3>" + badge + "</div>" +
+      (section.status === "ok" ? body(section.data)
+        : '<p class="w-hint warn">' + ms("warning") + esc(section.error || "unavailable") + (section.detail ? ": " + esc(section.detail) : "") + '<br><small>This section is UNAVAILABLE, not zero - the rest of this screen is unaffected.</small></p>') +
+      "</div>";
+  }
+  function twinView(state) {
+    var tw = state.twin || {};
+    var t = tw.snapshot;
+    if (!t) {
+      return '<div class="w-chart-h"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button>" +
+        "<div><b>Digital twin</b><small>hospital-wide</small></div>" +
+        '<button class="w-ic" data-w-act="twinload" title="Refresh">' + ms("refresh") + "</button></div>" +
+        '<p class="w-empty">' + (tw.loaded ? (tw.err ? esc(tw.err) : "Nothing to show yet.") : "Loading&hellip;") + "</p>";
+    }
+    var s = t.sections;
+    var notBuiltRows = Object.keys(t.notBuilt || {}).map(function (k) { return "<li><b>" + esc(k) + "</b><span>" + esc(t.notBuilt[k]) + "</span></li>"; }).join("");
+
+    var copilot = tw.copilot;
+    var copilotBody = !copilot ? "" :
+      copilot.busy ? '<p class="w-empty">Asking MaiK&hellip;</p>' :
+      copilot.err ? '<p class="w-hint warn">' + ms("warning") + esc(copilot.err) + "</p>" :
+      !copilot.answered ? '<p class="w-hint warn">' + ms("block") + "MaiK's answer was withheld or unavailable." + (copilot.note ? " " + esc(copilot.note) : "") + "</p>" :
+      '<div class="w-maik-out">' + esc(copilot.answer).replace(/\n/g, "<br>") + "</div>" +
+        '<ul class="w-maik-prov"><li>' + ms("smart_toy") + "<span>" + esc((copilot.interaction && copilot.interaction.model && copilot.interaction.model.model) || "") +
+        "</span></li><li>" + ms("schedule") + "<span>Answered from the snapshot generated " + when(t.generatedAt) + "</span></li></ul>" +
+        (copilot.interaction && copilot.interaction.review && copilot.interaction.review.state === "pending" ?
+          '<div class="w-actions"><button class="w-btn ghost tiny" data-w-act="twincopilotreview:accepted">' + ms("check") + "Helpful</button>" +
+          '<button class="w-btn ghost tiny" data-w-act="twincopilotreview:rejected">' + ms("close") + "Not helpful</button></div>" :
+          copilot.interaction && copilot.interaction.review ? '<p class="w-hint">' + ms("task_alt") + esc(copilot.interaction.review.state) + "</p>" : "");
+
+    return '<div class="w-chart-h"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button>" +
+      "<div><b>Digital twin</b><small>" + esc(t.sectionsOk) + "/" + esc(t.sectionsTotal) + " sections &middot; " + when(t.generatedAt) + "</small></div>" +
+      '<button class="w-ic" data-w-act="twinload" title="Refresh">' + ms("refresh") + "</button></div>" +
+
+      twinSectionCard("hub", "Flow &amp; capacity", s.flow, function (d) {
+        var f = d.flow;
+        return "<p>" + esc(f.beds.occupied) + " occupied &middot; " + esc(f.ed.arrivals) + " in ED &middot; " + esc(f.dischargeCandidates) + " ready to leave</p>";
+      }) +
+      twinSectionCard("monitor_heart", "Clinical operations", s.clinicalOps, function (d) {
+        var m = d.metrics;
+        return "<p>" + esc(m.open.criticalResults) + " open critical result(s) &middot; " + esc(m.open.dosesInFlight) + " dose(s) in flight &middot; " + esc(m.openItems) + " open item(s)</p>";
+      }) +
+      twinSectionCard("priority_high", "Critical results", s.criticals, function (d) {
+        return "<p>" + esc(d.open) + " open loop(s)</p>";
+      }) +
+      twinSectionCard("emergency", "Emergency", s.emergency, function (d) {
+        return d.any ? "<p>" + esc(d.active.length) + " active declaration(s): " + esc(d.active.map(function (a) { return a.kind; }).join(", ")) + "</p>" : '<p class="w-empty">None active.</p>';
+      }) +
+      twinSectionCard("event_busy", "Blackouts", s.blackouts, function (d) {
+        return d.blackouts.length ? "<p>" + esc(d.blackouts.length) + " active blackout(s)</p>" : '<p class="w-empty">None active.</p>';
+      }) +
+      twinSectionCard("medication", "Pharmacy", s.pharmacy, function (d) {
+        return "<p>" + esc(d.dispenseCount) + " dispensed &middot; " + esc(d.pendingVerification) + " pending verification &middot; " + esc((d.stock || []).filter(function (r) { return r.belowReorder; }).length) + " below reorder</p>";
+      }) +
+      twinSectionCard("folder_shared", "HIM", s.him, function (d) {
+        return "<p>" + esc(d.incompleteCharts) + " incomplete chart(s) of " + esc(d.chartsChecked) + " checked</p>";
+      }) +
+      twinSectionCard("science", "Diagnostics (LIS)", s.lis, function (d) {
+        return "<p>" + esc(d.outstanding) + " outstanding of " + esc(d.checked) + " checked</p>";
+      }) +
+
+      (notBuiltRows ? '<div class="w-card"><div class="w-card-h">' + ms("info") + "<h3>Not built</h3></div>" +
+        '<p class="w-hint">Named honestly rather than shown as a silent zero.</p><ul class="w-mini">' + notBuiltRows + "</ul></div>" : "") +
+
+      '<div class="w-card"><div class="w-card-h">' + ms("neurology") + "<h3>MaiK</h3></div>" +
+      '<p class="w-hint">Answers only from the sections above. It cannot invent a bed, a patient or a staffing figure, and has no authority over any safety verdict or order.</p>' +
+      '<div class="w-maik-acts"><button class="w-btn ghost" data-w-act="twinask">' + ms("summarize") + "Ask about this hospital</button></div>" +
+      copilotBody + "</div>" +
+
+      '<div class="w-card"><div class="w-card-h">' + ms("science") + "<h3>Simulate</h3></div>" +
+      '<p class="w-hint">SIMULATION - NOT LIVE STATE. Writes nothing.</p>' +
+      '<div class="w-actions">' +
+      '<button class="w-btn ghost tiny" data-w-act="twinsim:extra-admissions">' + ms("add") + "+10 admissions</button>" +
+      '<button class="w-btn ghost tiny" data-w-act="twinsim:icu-capacity-reduction">' + ms("bed") + "-5 ICU beds</button>" +
+      "</div>" +
+      (tw.sim ? (tw.sim.ok === false ? '<p class="w-hint warn">' + esc(tw.sim.detail || tw.sim.error) + "</p>" :
+        '<p class="w-hint"><b>' + esc(tw.sim.label) + "</b><br>" + esc(JSON.stringify(tw.sim.projected)) + "</p>") : "") +
+      "</div>";
+  }
+
   /* TASK 4.5: scheduling. scheduling.js/resource-booking.js/blackout.js already enforce every hard
    * safeguard here - a slot cannot be double-held, a blackout cannot be overridden, a resource the
    * hospital does not have cannot be booked. This screen adds no logic: it books, cancels,
@@ -2646,6 +2742,7 @@
         : state.view === "integration" ? integrationView(state)
         : state.view === "bedmgmt" ? bedBoardMgmtView(state)
         : state.view === "flowcommand" ? flowCommandView(state)
+        : state.view === "twin" ? twinView(state)
         : state.view === "scheduling" ? schedulingView(state)
         : state.view === "cashier" ? cashierView(state)
         : listView(state)) + "</div></div>";
@@ -3626,6 +3723,46 @@
       .then(function (r) { st.busy = false; if (r && r.ok) loadScheduling(); else { st.scheduling.err = (r && r.detail) || "Could not unblock that period."; paint(); } })
       .catch(function () { st.busy = false; st.scheduling.err = "Could not reach the server."; paint(); });
   }
+  function twinOpen() {
+    st.view = "twin"; st.twin = {}; paint(); loadTwin();
+  }
+  function loadTwin() {
+    if (!st.twin) st.twin = {};
+    st.twin.copilot = null; st.twin.sim = null;
+    return apiGet("/ward/twin?orgId=" + encodeURIComponent(st.orgId))
+      .then(function (r) {
+        st.twin.snapshot = (r && r.ok && r.twin) || null;
+        st.twin.err = (r && !r.ok) ? (r.detail || r.error) : "";
+        st.twin.loaded = true; paint();
+      })
+      .catch(function () { st.twin.loaded = true; st.twin.err = "Could not reach the hospital snapshot."; paint(); });
+  }
+  function twinAsk() {
+    var q = window.prompt("Ask MaiK about this hospital's current state:");
+    if (!q) return;
+    st.twin.copilot = { busy: true }; paint();
+    apiPost("/ward/twin-copilot", { orgId: st.orgId, question: q })
+      .then(function (r) {
+        if (!r || r.ok !== true) { st.twin.copilot = { busy: false, err: (r && (r.detail || r.error)) || "MaiK could not be reached." }; paint(); return; }
+        st.twin.copilot = { busy: false, answered: r.answered, answer: r.answer, note: r.note, interaction: r.interaction };
+        paint();
+      })
+      .catch(function () { st.twin.copilot = { busy: false, err: "MaiK could not be reached." }; paint(); });
+  }
+  function twinCopilotReview(decision) {
+    var c = st.twin && st.twin.copilot, i = c && c.interaction; if (!i) return;
+    var reason = decision === "rejected" ? window.prompt("Why was this not helpful?") : "";
+    if (decision === "rejected" && !String(reason || "").trim()) { st.err = "A rejection needs a reason."; paint(); return; }
+    apiPost("/ward/twin-review", { orgId: st.orgId, interactionId: i.id, decision: decision, reason: reason || undefined })
+      .then(function (r) { if (r && r.ok && r.interaction) c.interaction = r.interaction; paint(); })
+      .catch(function () { st.err = "Could not record that."; paint(); });
+  }
+  function twinSimulate(scenario) {
+    st.twin.sim = { busy: true }; paint();
+    apiPost("/ward/twin-simulate", { orgId: st.orgId, scenario: scenario, params: scenario === "extra-admissions" ? { extraAdmissions: 10 } : { removedBeds: 5 } })
+      .then(function (r) { st.twin.sim = r; paint(); })
+      .catch(function () { st.twin.sim = { ok: false, error: "Could not run the simulation." }; paint(); });
+  }
   function flowCommandOpen() {
     st.view = "flowcommand"; st.flow = {}; paint(); loadFlowCommand();
   }
@@ -4551,6 +4688,7 @@
       if (st.view === "integration") { st.integration = null; st.view = "list"; paint(); return; }
       if (st.view === "bedmgmt") { st.bedMgmt = {}; st.view = "list"; paint(); return; }
       if (st.view === "flowcommand") { st.flow = {}; st.view = "list"; paint(); return; }
+      if (st.view === "twin") { st.twin = {}; st.view = "list"; paint(); return; }
       if (st.view === "scheduling") { st.scheduling = {}; st.view = "list"; paint(); return; }
       if (st.view === "cashier") { st.cashier = {}; st.view = "list"; paint(); return; }
       if (st.view === "reports") { st.reports = {}; st.view = "list"; paint(); return; }
@@ -4633,6 +4771,11 @@
     if (cmd === "bedmgmt") { bedMgmtOpen(); return; }
     if (cmd === "flowcommand") { flowCommandOpen(); return; }
     if (cmd === "flowload") { loadFlowCommand(); return; }
+    if (cmd === "twin") { twinOpen(); return; }
+    if (cmd === "twinload") { loadTwin(); return; }
+    if (cmd === "twinask") { twinAsk(); return; }
+    if (cmd === "twincopilotreview") { twinCopilotReview(arg); return; }
+    if (cmd === "twinsim") { twinSimulate(arg); return; }
     if (cmd === "scheduling") { schedulingOpen(); return; }
     if (cmd === "schedload") { loadScheduling(); return; }
     if (cmd === "schedload2") { st.scheduling.clinicianId = val("wSchedClinician"); loadScheduling(); return; }

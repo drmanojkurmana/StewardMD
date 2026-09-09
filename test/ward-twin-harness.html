@@ -1,0 +1,58 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>WardSynQ ward: Digital Twin harness</title>
+<link rel="stylesheet" href="../ward.css">
+<style>html,body{margin:0;height:100%}</style>
+</head><body>
+<script>
+/* TASK 10. The REAL ward.js against a stubbed transport: the twin view, the Copilot ask/review, and
+ * the simulate buttons all run in a real browser against the real stylesheet. No network, no server. */
+window.__calls = [];
+localStorage.setItem("smd_opd_staff_tok", "harness-token");
+
+var PATIENTS = [{ encounterId: "enc-1", patientId: "pat-1", ward: "Ward A", bed: "07", admittedAt: "2026-09-07T04:00:00.000Z" }];
+
+var SNAPSHOT = {
+  generatedAt: "2026-09-10T08:00:00.000Z", ward: null, sectionsOk: 7, sectionsTotal: 8,
+  sections: {
+    flow: { status: "ok", freshness: "live", data: { flow: { beds: { occupied: 42, unplacedPatients: 1, states: { available: 8, reserved: 1, occupied: 42, blocked: 0, cleaning: 2, maintenance: 0 } }, ed: { arrivals: 3, untriaged: 1 }, dischargeCandidates: 2 } } },
+    clinicalOps: { status: "ok", freshness: "live", data: { metrics: { open: { criticalResults: 1, dosesInFlight: 2 }, openItems: 4 } } },
+    criticals: { status: "ok", freshness: "live", data: { open: 1 } },
+    emergency: { status: "ok", freshness: "live", data: { any: true, active: [{ kind: "icu_capacity_crisis" }] } },
+    blackouts: { status: "ok", freshness: "live", data: { blackouts: [{ resourceId: "theatre-1" }] } },
+    pharmacy: { status: "unavailable", freshness: "unavailable", error: "record_read_failed", detail: "simulated fault" },
+    him: { status: "ok", freshness: "delayed", data: { incompleteCharts: 3, chartsChecked: 20 } },
+    lis: { status: "ok", freshness: "live", data: { outstanding: 6, checked: 40 } },
+  },
+  notBuilt: { bloodBank: "no blood-product inventory module exists in this codebase", radiologyQueue: "no hospital-wide radiology/PACS backlog aggregator exists" },
+};
+
+window.fetch = function (url, opts) {
+  var u = String(url), body = null;
+  try { body = opts && opts.body ? JSON.parse(opts.body) : null; } catch (e) {}
+  window.__calls.push({ url: u, method: (opts && opts.method) || "GET", body: body });
+  var reply = function (obj, status) { return Promise.resolve({ ok: (status || 200) < 400, status: status || 200, json: function () { return Promise.resolve(obj); } }); };
+  if (u.indexOf("/ward/list") >= 0) return reply({ ok: true, patients: PATIENTS });
+  if (u.indexOf("/ward/twin?") >= 0 || /\/ward\/twin(\?|$)/.test(u)) return reply({ ok: true, twin: SNAPSHOT });
+  if (u.indexOf("/ward/twin-copilot") >= 0) {
+    if (body && /blood/i.test(body.question || "")) {
+      return reply({ ok: true, answered: false, answer: null, note: "MaiK could not answer (empty_answer). The hospital snapshot above is unaffected and unchanged." });
+    }
+    return reply({ ok: true, answered: true, answer: "One active ICU capacity crisis and one open critical result. Blood bank tracking is not built in this system.",
+      interaction: { id: "wsq-twin-1", model: { provider: "local-openai", model: "ward-model-7b", version: "ward-model-7b-q4" }, review: { state: "pending" } } });
+  }
+  if (u.indexOf("/ward/twin-review") >= 0) {
+    if (body.decision === "rejected" && !body.reason) return reply({ ok: false, error: "reason_required" }, 422);
+    return reply({ ok: true, interaction: { id: "wsq-twin-1", review: { state: body.decision, by: "cfa:doctor", reason: body.reason || null } } });
+  }
+  if (u.indexOf("/ward/twin-simulate") >= 0) {
+    return reply({ ok: true, label: "SIMULATION - NOT LIVE STATE", scenario: body.scenario, baseline: { occupied: 42 }, projected: { occupied: 52, wouldExceedCapacity: false } });
+  }
+  return reply({ ok: true });
+};
+</script>
+<script src="../ward.js"></script>
+<script>
+window.__ready = !!(window.WARD && window.WARD.open);
+</script>
+</body></html>
