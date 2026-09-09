@@ -91,7 +91,8 @@ export async function updateOrg(env, orgId, patch, actorId) {
 
 // ---- departments / OPDs (optional layers) ------------------------------------------------------
 export async function createDepartment(env, orgId, body, actorId) {
-  const id = newId(); const f = M.department({ id, orgId, name: (body || {}).name, code: (body || {}).code });
+  const b = body || {};
+  const id = newId(); const f = M.department({ id, orgId, name: b.name, code: b.code, type: b.type, active: b.active });
   await fsCommit(env, [wCreate(env, "q_departments/" + id, f)]);
   await audit(env, orgId, actorId, "dept:create", f.name); return f;
 }
@@ -100,15 +101,17 @@ export async function listDepartments(env, orgId) {
   return r.map((x) => M.department(withId(x.id, x.fields)));
 }
 export async function createOpd(env, orgId, body, actorId) {
-  const id = newId(); const f = M.opd({ id, orgId, departmentId: (body || {}).departmentId, name: (body || {}).name });
+  const b = body || {};
+  const id = newId(); const f = M.opd({ id, orgId, departmentId: b.departmentId, name: b.name, active: b.active });
   await fsCommit(env, [wCreate(env, "q_opds/" + id, f)]);
   await audit(env, orgId, actorId, "opd:create", f.name); return f;
 }
 
 // ---- rooms (room != doctor: configurable assignment) -------------------------------------------
 export async function createRoom(env, orgId, body, actorId) {
+  const b = body || {};
   const id = newId();
-  const f = M.room({ id, orgId, departmentId: (body || {}).departmentId, opdId: (body || {}).opdId, name: (body || {}).name, number: (body || {}).number, assignment: (body || {}).assignment });
+  const f = M.room({ id, orgId, departmentId: b.departmentId, opdId: b.opdId, name: b.name, number: b.number, assignment: b.assignment, active: b.active });
   await fsCommit(env, [wCreate(env, "q_rooms/" + id, f)]);
   await audit(env, orgId, actorId, "room:create", f.name); return f;
 }
@@ -126,7 +129,8 @@ export async function updateRoom(env, roomId, patch, actorId) {
 
 // ---- wards / beds (TASK 4.1: Enterprise -> ... -> Ward -> Bed) ----------------------------------
 export async function createWard(env, orgId, body, actorId) {
-  const id = newId(); const f = M.ward({ id, orgId, departmentId: (body || {}).departmentId, name: (body || {}).name, code: (body || {}).code, type: (body || {}).type });
+  const b = body || {};
+  const id = newId(); const f = M.ward({ id, orgId, departmentId: b.departmentId, name: b.name, code: b.code, type: b.type, active: b.active });
   await fsCommit(env, [wCreate(env, "q_wards/" + id, f)]);
   await audit(env, orgId, actorId, "ward:create", f.name); return f;
 }
@@ -142,7 +146,8 @@ export async function updateWard(env, wardId, patch, actorId) {
   await audit(env, cur.orgId, actorId, "ward:update", patch && patch.active === false ? "deactivated" : ""); return f;
 }
 export async function createBed(env, orgId, body, actorId) {
-  const id = newId(); const f = M.bed({ id, orgId, wardId: (body || {}).wardId, name: (body || {}).name, state: (body || {}).state, genderRestriction: (body || {}).genderRestriction, isolation: (body || {}).isolation });
+  const b = body || {};
+  const id = newId(); const f = M.bed({ id, orgId, wardId: b.wardId, name: b.name, state: b.state, genderRestriction: b.genderRestriction, isolation: b.isolation, active: b.active });
   await fsCommit(env, [wCreate(env, "q_beds/" + id, f)]);
   await audit(env, orgId, actorId, "bed:create", f.name); return f;
 }
@@ -151,6 +156,19 @@ export async function listBeds(env, orgId, wardId) {
   const r = await fsQuery(env, "q_beds", { where: { field: "orgId", value: sanitize(orgId) }, limit: 500 });
   const beds = r.map((x) => M.bed(withId(x.id, x.fields)));
   return wardId ? beds.filter((b) => b.wardId === sanitize(wardId)) : beds;
+}
+// Name-based lookups: ADT (migrate-inpatient.js) works with the free-text ward/bed NAMES a caller
+// types, never with a master record's own id - the same reason getOrgByCode() exists alongside
+// getOrg(). Case-insensitive, matching sameBed()'s own comparator in migrate-inpatient.js.
+export async function getWardByName(env, orgId, name) {
+  const want = String(name || "").trim().toLowerCase(); if (!want) return null;
+  const wards = await listWards(env, orgId);
+  return wards.find((w) => w.name.trim().toLowerCase() === want) || null;
+}
+export async function getBedByName(env, orgId, wardId, name) {
+  const want = String(name || "").trim().toLowerCase(); if (!want) return null;
+  const beds = await listBeds(env, orgId, wardId);
+  return beds.find((b) => b.name.trim().toLowerCase() === want) || null;
 }
 export async function updateBed(env, bedId, patch, actorId) {
   const cur = await getBed(env, bedId); if (!cur) return null;
