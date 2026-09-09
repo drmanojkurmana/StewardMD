@@ -231,7 +231,7 @@ test("the wrong password unlocks nothing and changes nothing", async () => {
     store.clear();                                        // the reinstall
     const bad = await BK.restoreNow({ confirmed: true, password: "not-the-password" });
     assert.equal(bad.ok, undefined === bad.ok ? undefined : false);
-    assert.equal(bad.error, "wrong_password");
+  assert.equal(bad.error, "wrong_pass");
     assert.equal(store.size, 0, "a failed unlock must not half-restore anything");
     // ...and the right one still works afterwards.
     assert.equal((await BK.restoreNow({ confirmed: true, password: PW })).added, 1);
@@ -253,13 +253,13 @@ test("each backup uses a FRESH salt, so two backups are never the same bytes", a
 test("a password is required in BOTH directions, and a typo-prone one is refused up front", async () => {
   // A lost password is unrecoverable by design, so the weak cases are refused before anything is
   // written, not discovered months later at restore time.
-  assert.equal((await BK.backupNow({ confirmed: true })).error, "password_required");
-  assert.equal((await BK.backupNow({ confirmed: true, password: "short" })).error, "weak_password");
-  assert.equal((await BK.backupNow({ confirmed: true, password: " padded123 " })).error, "password_padded");
-  assert.equal((await BK.restoreNow({ confirmed: true })).error, "password_required");
+  assert.equal((await BK.backupNow({ confirmed: true })).error, "pass_required");
+  assert.equal((await BK.backupNow({ confirmed: true, password: "short" })).error, "weak_pass");
+  assert.equal((await BK.backupNow({ confirmed: true, password: " padded123 " })).error, "pass_padded");
+  assert.equal((await BK.restoreNow({ confirmed: true })).error, "pass_required");
 
-  assert.equal(BK.checkPassword("").error, "password_required");
-  assert.equal(BK.checkPassword("abcdefg").error, "weak_password", "7 is below the floor");
+  assert.equal(BK.checkPassword("").error, "pass_required");
+  assert.equal(BK.checkPassword("abcdefg").error, "weak_pass", "7 is below the floor");
   assert.equal(BK.checkPassword("abcdefgh").ok, true, "8 is the floor");
   assert.equal(BK.MIN_PASSWORD, 8);
 });
