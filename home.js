@@ -538,7 +538,7 @@
     try { if (window.closeDrawer) window.closeDrawer(); } catch (e) {}
     // 2) Backstop — force-hide EVERY overlay/drawer/modal so nothing keeps running underneath.
     //    open-class overlays: just remove their show-class (do NOT add .hidden, or they can't reopen).
-    ["aspOverlay", "csOverlay", "eceOverlay", "infOverlay", "mcOverlay", "mdOverlay", "dxOverlay", "dbOverlay",
+    ["aspOverlay", "csOverlay", "eceOverlay", "infOverlay", "mcOverlay", "dxOverlay", "dbOverlay",
       "myCasesPanel", "smdSearchPanel", "sbrefOverlay", "ghisPanel", "dbDrawer", "dbScrim", "sbDrawer", "sbBackdrop",
       "abgOverlay", "hvSheet", "hvScrim", "swShell", "swSheet", "swScrim"].forEach(function (id) {
       var el = document.getElementById(id); if (el) el.classList.remove("open", "on", "active", "visible", "show");
@@ -974,7 +974,6 @@
     { sel: "#icuRoot.on", act: "icu" },
     { sel: "#ghisPanel.open", act: "ward" },
     { sel: "#mcOverlay.on", act: "calculators" },
-    { sel: "#mdOverlay.on", act: "drugs" },
     { sel: "#miOverlay.on", act: "interactions" },
     { sel: "#abgOverlay.on", act: "antibiogram" },
     { sel: "#eceOverlay.on", act: "electrolytes" }
@@ -6520,7 +6519,6 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
         setTimeout(function () {
           try {
             if (window.MEDDB && MEDDB.openComposition && dn) MEDDB.openComposition(dn);
-            else if (window.MEDDRUGS && MEDDRUGS.openList) MEDDRUGS.openList();
             else if (window.MEDDB && MEDDB.openList) MEDDB.openList();
             else if (window.toast) toast("Drug Index loading…");
           } catch (e) {}
