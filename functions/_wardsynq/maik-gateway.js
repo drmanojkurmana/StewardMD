@@ -143,8 +143,8 @@ function maikStatus(env, config) {
  * available here (a key, a base URL) and which may receive patient data.
  *
  * `version` is what the provider is asked for. What actually answered is reported back by the
- * adapter and recorded, because a model id is a moving target and "gemini-2.5-flash" in March is not
- * the same weights as "gemini-2.5-flash" in September.
+ * adapter and recorded, because a model id is a moving target and "gemini-3.6-flash" in March is not
+ * the same weights as "gemini-3.6-flash" in September.
  */
 const MODELS = Object.freeze([
   {
@@ -196,7 +196,12 @@ const MODELS = Object.freeze([
    * this registry does not mean patient data may go there. */
   {
     id: "gemini-flash",
-    provider: "gemini", model: "gemini-2.5-flash", version: "gemini-2.5-flash",
+    /* MODEL IDS RETIRE, AND THE REGISTRY IS WHERE THAT IS ABSORBED. `gemini-2.5-flash` began
+     * answering NOT_FOUND with "no longer available to new users - use models/gemini-3.6-flash", so
+     * the id moved and nothing else did: no caller names a model, so no caller changed. `version`
+     * is what is ASKED for; what actually answered is whatever the API reports back, and that is
+     * what gets recorded on the interaction. */
+    provider: "gemini", model: "gemini-3.6-flash", version: "gemini-3.6-flash",
     locality: LOCALITY.CLOUD,
     tasks: [TASK.SUMMARISE, TASK.DRAFT_NOTE, TASK.EXPLAIN, TASK.EXTRACT, TASK.ANSWER],
     latency: "medium", cost: "metered",
@@ -204,7 +209,8 @@ const MODELS = Object.freeze([
   },
   {
     id: "gemini-pro",
-    provider: "gemini", model: "gemini-2.5-pro", version: "gemini-2.5-pro",
+    // Retired the same way, and Google's own named replacement for it.
+    provider: "gemini", model: "gemini-3.1-pro-preview", version: "gemini-3.1-pro-preview",
     locality: LOCALITY.CLOUD,
     tasks: [TASK.SUMMARISE, TASK.DRAFT_NOTE, TASK.EXPLAIN, TASK.EXTRACT, TASK.ANSWER],
     latency: "slow", cost: "metered",
@@ -354,7 +360,7 @@ const PROVIDERS = Object.freeze({
       const cfg = maikConfig(req.config);
       const key = geminiKey(req.env);
       if (!key) throw new Error("no Gemini API key is present in the environment (GEMINI_API_KEY)");
-      const model = str(req.model && req.model.model) || "gemini-2.5-flash";
+      const model = str(req.model && req.model.model) || "gemini-3.6-flash";
       const url = `https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(model)}:generateContent`;
       const controller = typeof AbortController === "function" ? new AbortController() : null;
       const timer = controller ? setTimeout(() => controller.abort(), cfg.timeoutMs) : null;

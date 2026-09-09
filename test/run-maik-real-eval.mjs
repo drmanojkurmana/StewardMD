@@ -216,7 +216,7 @@ const str_ = (v) => String(v == null ? "" : v).trim();
 
 /** Registry id -> the model name Google is asked for. Kept in step with maik-gateway's MODELS. */
 function modelIdFor(registryId) {
-  return { "gemini-flash": "gemini-2.5-flash", "gemini-pro": "gemini-2.5-pro" }[registryId] || "gemini-2.5-flash";
+  return { "gemini-flash": "gemini-3.6-flash", "gemini-pro": "gemini-3.1-pro-preview" }[registryId] || "gemini-3.6-flash";
 }
 
 /**
@@ -226,14 +226,21 @@ function modelIdFor(registryId) {
 function diagnose(cls, msg) {
   if (/has not been used in project|is disabled/i.test(msg)) {
     const proj = (msg.match(/project (\d+)/) || [])[1];
-    return `The Generative Language API is NOT ENABLED on this Google Cloud project${proj ? " (" + proj + ")" : ""}. Enable "generativelanguage.googleapis.com" for that project in the Google Cloud console, then wait a few minutes for it to propagate. This is a project setting, not a key setting.`;
+    return `The Gemini API (generativelanguage.googleapis.com, shown as "Gemini API" in the console) is NOT ENABLED on this Google Cloud project${proj ? " (" + proj + ")" : ""}. Enable "generativelanguage.googleapis.com" for that project in the Google Cloud console, then wait a few minutes for it to propagate. This is a project setting, not a key setting.`;
   }
   if (/method .* are blocked|Requests to this API/i.test(msg)) {
     return "The API key carries an API RESTRICTION that blocks this method. In the Google Cloud console, edit the key's 'API restrictions' so the Generative Language API is permitted (or set it to 'Don't restrict key' while testing). This is a key setting, not a project setting.";
   }
-  if (cls === "RESOURCE_EXHAUSTED") return "Quota or rate limit reached for this key. Wait, or raise the quota for the project.";
+  if (/prepayment credits are depleted|billing/i.test(msg)) {
+    return "BILLING, not quota: the project's prepayment credits are exhausted. Top up or attach billing at https://ai.studio/projects. Waiting will not clear this one - a rate limit recovers on its own and a depleted balance does not, which is why they are separated here.";
+  }
+  if (cls === "RESOURCE_EXHAUSTED") return "Rate limit reached for this key. This one does recover on its own: wait and retry, or raise the quota for the project.";
+  if (cls === "NOT_FOUND" || /no longer available to new users/i.test(msg)) {
+    const rec = (msg.match(/use models\/([\w.-]+)/) || [])[1];
+    return `The model id has been RETIRED by Google${rec ? ` and it names models/${rec} as the replacement` : ""}. Model ids live in maik-gateway.js's MODELS registry - update the entry there. No caller changes, because no caller names a model.`;
+  }
   if (cls === "UNAUTHENTICATED" || /API key not valid/i.test(msg)) return "The key was rejected as invalid. Check it was copied whole and belongs to the project whose API is enabled.";
-  return "Check the key's API restrictions and that the Generative Language API is enabled for its project.";
+  return "Check the key's API restrictions and that the Gemini API (generativelanguage.googleapis.com) is enabled for its project.";
 }
 
 /** Nothing this script prints or writes may carry the credential. */

@@ -33,7 +33,7 @@ function transport(reply, opts) {
 }
 const answer = (text, over) => ({
   candidates: [{ content: { parts: [{ text }] }, finishReason: "STOP" }],
-  modelVersion: "gemini-2.5-flash-002",
+  modelVersion: "gemini-3.6-flash-002",
   usageMetadata: { promptTokenCount: 412, candidatesTokenCount: 88, totalTokenCount: 500 },
   ...(over || {}),
 });
@@ -169,8 +169,8 @@ test("14. the SERVED model version and the token usage are what get reported bac
     context: { patientId: "pat-1" }, fetchImpl: t.fetchImpl });
   assert.equal(r.ok, true);
   assert.equal(r.model.provider, "gemini");
-  assert.equal(r.model.model, "gemini-2.5-flash");
-  assert.equal(r.model.version, "gemini-2.5-flash-002", "the served version, not the pointer that was asked for");
+  assert.equal(r.model.model, "gemini-3.6-flash");
+  assert.equal(r.model.version, "gemini-3.6-flash-002", "the served version, not the pointer that was asked for");
   assert.equal(r.generated, true);
   assert.deepEqual(r.usage, { in: 412, out: 88, total: 500 });
   assert.ok(Number.isFinite(r.latencyMs));
