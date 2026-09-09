@@ -37,7 +37,7 @@ import { AuthError, PermissionError } from "../_connect/permission.js";
 import { VITAL_CODES } from "./migrate-vitals.js";
 import { problemsForSummary } from "./migrate-problem.js";
 import { reconciliationIdFor, reconciliationForSummary } from "./med-reconciliation.js";
-import { ADMISSION_CLASSES } from "./migrate-inpatient.js";
+import { ADMISSION_CLASSES, freeMasterBed } from "./migrate-inpatient.js";
 
 const str = (v) => (v == null ? "" : String(v).trim());
 const NOT_RECORDED = "Not recorded.";
@@ -383,6 +383,11 @@ async function dischargePatient(request, env, ctx) {
 
   try {
     const out = await svc.put(candidate, { expectedVersion: current.version, idempotencyKey: ctx.idempotencyKey || null });
+    // TASK 4.2: a discharge vacates the bed it leaves. Best-effort, against the real Ward/Bed
+    // master data from TASK 4.1 when the org has any - the Encounter's own status stays the
+    // authoritative record of the discharge either way.
+    const loc = current.location || {};
+    if (ctx.orgId && loc.ward && loc.bed) await freeMasterBed(env, ctx.orgId, loc.ward, loc.bed, resolved.actor.id);
     return { ...base, ok: true, written: 1, encounterId, patientId: current.patientId, status: "finished", dischargedAt, dosesInFlight: inFlight, version: out.record.version, actor: resolved.actor.id, role: resolved.role };
   } catch (e) {
     return { ...base, ...writeFailure(e, { encounterId, written: 0, actor: resolved.actor.id }) };

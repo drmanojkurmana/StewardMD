@@ -35,6 +35,7 @@ import { patientIdForMrn, admissionIdFor } from "./opd-identity.js";
 import { recordOverrides } from "./override-analytics.js";
 import { resolveFormulary, formularyStatus } from "./formulary.js";
 import { compileAdvisories, evaluateAdvisories } from "./advisories.js";
+import { getWardByName, getBedByName, updateBed, listWards, listBeds } from "../_opd_org_store.js";
 
 const IPD = "IPD";
 // ICU joined 2026-09-08 (Task 2.2). An admission is still ONE act through this ONE file - a ward
@@ -160,6 +161,16 @@ async function admitPatient(request, env, ctx) {
     const clash = (openEncounters || []).find((e) => e && e.id !== candidate.id && ADMISSION_CLASSES.includes(e.class) && e.status === OPEN && sameBed(e.location, candidate.location));
     if (clash) return bedOccupied(base, candidate);
 
+    // TASK 4.2: the bed's own administrative state (blocked/cleaning/maintenance) and any stated
+    // gender/isolation restriction, against the real Ward/Bed master data - a bed with no other
+    // patient in it is not the same as a bed the hospital has marked fit to admit into.
+    if (ctx.orgId) {
+      let sex = null;
+      try { const patient = await svc.get("Patient", candidate.patientId); sex = patient && patient.sex; } catch {}
+      const masterCheck = await checkMasterBed(env, ctx.orgId, candidate.location.ward, candidate.location.bed, sex);
+      if (!masterCheck.ok) return { ...base, ok: false, status: masterCheck.status, error: masterCheck.error, detail: masterCheck.detail, encounterId: candidate.id, written: 0 };
+    }
+
     /* THE CHECK ABOVE IS NOT THE GUARD; IT IS THE FAST PATH. Two admissions racing for the same
      * bed can both pass it, because reading "who is here" and writing "I am here now" are two
      * separate steps. The guard is this: claimBed() lands ONE atomic row per (ward, bed, version),
@@ -179,10 +190,48 @@ async function admitPatient(request, env, ctx) {
 
   try {
     const out = await svc.put(candidate, { expectedVersion: current ? current.version : undefined, idempotencyKey: ctx.idempotencyKey || null });
+    if (!out.replayed && candidate.location.bed && ctx.orgId) {
+      const w = await getWardByName(env, ctx.orgId, candidate.location.ward).catch(() => null);
+      if (w) { const b = await getBedByName(env, ctx.orgId, w.id, candidate.location.bed).catch(() => null); await occupyMasterBed(env, b, resolved.actor.id); }
+    }
     return { ...base, ok: true, written: 1, encounterId: candidate.id, patientId: candidate.patientId, version: out.record.version, replayed: out.replayed, actor: resolved.actor.id, role: resolved.role };
   } catch (e) {
     return { ...base, ...writeFailure(e, { encounterId: candidate.id, written: 0, actor: resolved.actor.id }) };
   }
+}
+
+/* TASK 4.2: the destination bed vs. the real Ward/Bed master data from TASK 4.1
+ * (_opd_org_store.js), not free text alone. UNCONFIGURED IS NOT INVALID: an org that has never
+ * created a Ward/Bed master record for a name still admits/transfers into it exactly as before -
+ * this only enforces a restriction a human actually configured, the same restraint bedBoard()'s own
+ * "beds comes from ORG configuration, none configured, still reports occupied" already applies to
+ * free-text config. A lookup failure never blocks a clinical admission - it is reported as
+ * unconfigured, not as a refusal nobody asked for. */
+async function checkMasterBed(env, orgId, wardName, bedName, patientSex) {
+  if (!orgId || !bedName) return { ok: true };
+  let masterWard;
+  try { masterWard = await getWardByName(env, orgId, wardName); } catch { return { ok: true }; }
+  if (!masterWard) return { ok: true };
+  let masterBed;
+  try { masterBed = await getBedByName(env, orgId, masterWard.id, bedName); } catch { return { ok: true }; }
+  if (!masterBed) return { ok: false, status: 422, error: "bed_not_found", detail: `${wardName} has no bed named ${bedName} in the hospital's own bed list` };
+  if (!masterBed.active) return { ok: false, status: 409, error: "bed_inactive", detail: `${wardName} bed ${bedName} is retired` };
+  if (masterBed.state !== "available") return { ok: false, status: 409, error: "bed_not_available", detail: `${wardName} bed ${bedName} is ${masterBed.state}`, bedState: masterBed.state };
+  if (masterBed.genderRestriction && patientSex && masterBed.genderRestriction !== patientSex) {
+    return { ok: false, status: 409, error: "bed_restricted", detail: `${wardName} bed ${bedName} is restricted to ${masterBed.genderRestriction} patients` };
+  }
+  return { ok: true, masterBed };
+}
+// Best-effort: a stale bed state is a workflow problem, never a reason to fail a write already
+// governed and recorded on the Encounter itself, which stays the one source of truth for occupancy.
+async function occupyMasterBed(env, bed, actorId) { if (bed) { try { await updateBed(env, bed.id, { state: "occupied" }, actorId); } catch {} } }
+async function freeMasterBed(env, orgId, wardName, bedName, actorId) {
+  if (!orgId || !bedName) return;
+  try {
+    const w = await getWardByName(env, orgId, wardName); if (!w) return;
+    const b = await getBedByName(env, orgId, w.id, bedName); if (!b) return;
+    await updateBed(env, b.id, { state: "available" }, actorId);
+  } catch {}
 }
 
 /** Same refusal shape transfer's own bed_occupied answers with, so a ward reads the two identically. */
@@ -532,6 +581,16 @@ async function transferPatient(request, env, ctx) {
         encounterId, written: 0,
       };
     }
+
+    // TASK 4.2: the destination bed's own administrative state and any stated restriction, the
+    // same check admission runs, against the real Ward/Bed master data - unconfigured wards/beds
+    // are allowed exactly as before.
+    if (ctx.orgId) {
+      let sex = null;
+      try { const patient = await svc.get("Patient", current.patientId); sex = patient && patient.sex; } catch {}
+      const masterCheck = await checkMasterBed(env, ctx.orgId, ward, bed, sex);
+      if (!masterCheck.ok) return { ...base, ok: false, status: masterCheck.status, error: masterCheck.error, detail: masterCheck.detail, encounterId, written: 0 };
+    }
   }
 
   const from = { ward: (current.location && current.location.ward) || null, bed: (current.location && current.location.bed) || null };
@@ -555,6 +614,13 @@ async function transferPatient(request, env, ctx) {
 
   try {
     const out = await svc.put(next, { expectedVersion: current.version, idempotencyKey: ctx.idempotencyKey || null });
+    if (ctx.orgId) {
+      if (from.bed) await freeMasterBed(env, ctx.orgId, from.ward, from.bed, resolved.actor.id);
+      if (bed) {
+        const w = await getWardByName(env, ctx.orgId, ward).catch(() => null);
+        if (w) { const b = await getBedByName(env, ctx.orgId, w.id, bed).catch(() => null); await occupyMasterBed(env, b, resolved.actor.id); }
+      }
+    }
     return { ...base, ok: true, written: 1, encounterId, patientId: current.patientId, from, to, movedAt, version: out.record.version, actor: resolved.actor.id, role: resolved.role };
   } catch (e) {
     return { ...base, ...writeFailure(e, { encounterId, written: 0, actor: resolved.actor.id }) };
@@ -586,7 +652,26 @@ async function bedBoard(request, env, ctx) {
   const open = (encounters || []).filter((e) => e && ADMISSION_CLASSES.includes(e.class) && e.status === OPEN)
     .filter((e) => !want || str(e.location && e.location.ward).toLowerCase() === want);
 
-  const cfg = ctx.beds && typeof ctx.beds === "object" ? ctx.beds : null;
+  // TASK 4.2: the real Ward/Bed master data from TASK 4.1 wins over the free-text org config the
+  // moment a hospital has actually created any - this is what turns the config blob's own
+  // "unlisted"/"unknown beds" self-reporting into something backed by a real record instead of a
+  // JSON array. An org with no master wards yet falls straight through to the config path,
+  // unchanged, so nothing that already worked breaks.
+  let cfg = ctx.beds && typeof ctx.beds === "object" ? ctx.beds : null;
+  const bedStateOf = new Map();   // "ward|bed" (lowercased) -> real state, only when master data exists
+  if (ctx.orgId) {
+    let masterWards = [];
+    try { masterWards = (await listWards(env, ctx.orgId)).filter((w) => w.active); } catch { masterWards = []; }
+    if (masterWards.length) {
+      cfg = {};
+      for (const w of masterWards) {
+        let beds = [];
+        try { beds = (await listBeds(env, ctx.orgId, w.id)).filter((b) => b.active); } catch { beds = []; }
+        cfg[w.name] = beds.map((b) => b.name);
+        for (const b of beds) bedStateOf.set(`${w.name.toLowerCase()}|${b.name.toLowerCase()}`, b.state);
+      }
+    }
+  }
   const byWard = new Map();
   const wardOf = (name) => {
     const key = str(name) || "(no ward recorded)";
@@ -607,7 +692,14 @@ async function bedBoard(request, env, ctx) {
     if (!list) { w.free = []; w.bedsKnown = false; continue; }
     w.bedsKnown = true;
     const taken = new Set(w.occupied.map((o) => String(o.bed).toLowerCase()));
-    w.free = list.filter((b) => !taken.has(String(b).toLowerCase()));
+    // A bed with no patient in it is not automatically free: the master record may say blocked,
+    // cleaning or maintenance, and that is the hospital's own call, not this board's to overrule.
+    w.free = list.filter((b) => {
+      const key = String(b).toLowerCase();
+      if (taken.has(key)) return false;
+      const st = bedStateOf.get(`${w.ward.toLowerCase()}|${key}`);
+      return !st || st === "available";
+    });
     // A patient in a bed the configuration does not list is REPORTED, not hidden: it is either a
     // stale bed list or somebody in a bed that should not exist, and both need a human.
     w.unlisted = w.occupied.filter((o) => !list.some((b) => String(b).toLowerCase() === String(o.bed).toLowerCase())).map((o) => o.bed);
@@ -626,4 +718,5 @@ export {
   encounterFromAdmission, sameAdmission, admitPatient, listWard,
   recordWardVitals, orderFromWardRequest, createWardMedicationOrder,
   sameBed, transferPatient, bedBoard,
+  freeMasterBed,   // TASK 4.2: discharge reuses this to release the vacated bed - see migrate-discharge.js
 };

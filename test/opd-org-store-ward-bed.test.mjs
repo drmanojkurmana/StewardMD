@@ -48,6 +48,14 @@ test("createWard/listWards: persists for real, scoped to the creating org", asyn
   assert.equal(fetched.name, "Medical A");
 });
 
+test("createWard/createBed: type/active/state/restrictions are honoured at CREATE time, not only on a later update", async () => {
+  docs.clear();
+  const w = await ORG.createWard(undefined, "org-a", { name: "Retired Ward", type: "clinical", active: false }, "actor-1");
+  assert.equal(w.type, "clinical"); assert.equal(w.active, false, "a ward can be CREATED already-inactive, not just updated into that state");
+  const b = await ORG.createBed(undefined, "org-a", { wardId: w.id, name: "1", state: "maintenance", genderRestriction: "female", isolation: true, active: false }, "actor-1");
+  assert.equal(b.state, "maintenance"); assert.equal(b.genderRestriction, "female"); assert.equal(b.isolation, true); assert.equal(b.active, false);
+});
+
 test("updateWard: a ward can be retired without deleting its history, orgId stays immutable", async () => {
   docs.clear();
   const w = await ORG.createWard(undefined, "org-a", { name: "ICU" }, "actor-1");
