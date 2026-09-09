@@ -31,6 +31,7 @@ import { resolveClinicalActor } from "./actor.js";
 import { RecordService } from "./service.js";
 import { AuthError, PermissionError } from "../_connect/permission.js";
 import { overlaps } from "./scheduling.js";
+import { blackedOutBy } from "./blackout.js";
 
 const str = (v) => (v == null ? "" : String(v).trim());
 const TYPE = "ResourceBooking";
@@ -150,9 +151,17 @@ async function bookResource(request, env, ctx) {
   const id = bookingIdFor(resourceId, startAt);
   if (!id) return { ...base, ok: false, status: 422, error: "bad_identifiers", written: 0 };
 
-  let existing;
-  try { existing = (await svc.list(TYPE, 500)) || []; }
+  let existing, blackouts;
+  try { [existing, blackouts] = await Promise.all([svc.list(TYPE, 500), svc.list("Blackout", 500).catch(() => [])]); existing = existing || []; }
   catch (e) { return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), written: 0 }; }
+
+  // A BLACKOUT IS A REFUSAL, NEVER AN OVERRIDE - the same rule scheduling.js applies to a
+  // clinician's diary, here for the resource: this file already has no override for a clash, so a
+  // blackout is refused exactly the same way a double-booking is.
+  const blocked = blackedOutBy(blackouts, resourceId, { startAt, minutes });
+  if (blocked) {
+    return { ...base, ok: false, status: 409, error: "blacked_out", detail: `${resource.name} is unavailable ${blocked.from} to ${blocked.to}: ${blocked.reason}`, blackoutId: blocked.id, resourceId, written: 0 };
+  }
 
   const candidate = ResourceBooking({
     id, resourceId, resourceName: resource.name,

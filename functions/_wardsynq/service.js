@@ -121,6 +121,11 @@ const RESOURCE_TYPES = Object.freeze([
    * and which stays visibly outstanding until a human books it - auto-booking would make the
    * promise look kept when nobody had spoken to the patient. */
   "Appointment", "AppointmentRequest",
+  // TASK 4.5: a clinician/resource is deliberately unavailable for a whole period (leave, a theatre
+  // closure) - a REFUSAL, never an override, unlike an appointment clash which a human may
+  // deliberately overbook. See blackout.js's own header for why this is never the same record as
+  // an Appointment/ResourceBooking clash.
+  "Blackout",
   /* A scored nursing risk assessment. The score selects the ACTIONS, which are the only part that
    * changes anything for the patient - so the actions and what was done about them live on the
    * record beside the number. */
