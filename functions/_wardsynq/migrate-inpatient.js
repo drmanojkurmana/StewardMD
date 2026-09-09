@@ -34,6 +34,7 @@ import { vitalsToObservations } from "./migrate-vitals.js";
 import { patientIdForMrn, admissionIdFor } from "./opd-identity.js";
 import { recordOverrides } from "./override-analytics.js";
 import { resolveFormulary, formularyStatus } from "./formulary.js";
+import { isRelaxed } from "./emergency-mode.js";
 import { compileAdvisories, evaluateAdvisories } from "./advisories.js";
 import { getWardByName, getBedByName, updateBed, listWards, listBeds } from "../_opd_org_store.js";
 
@@ -154,6 +155,7 @@ async function admitPatient(request, env, ctx) {
   /* TWO PATIENTS CANNOT OCCUPY ONE BED - admission's own version of the invariant transfer already
    * enforces (sameBed, below). A ward with no bed named cannot collide, exactly as transfer allows a
    * patient on a ward awaiting one. */
+  let admissionOverride = null;
   if (candidate.location.bed) {
     let openEncounters;
     try { openEncounters = await svc.list("Encounter", 200); }
@@ -167,8 +169,16 @@ async function admitPatient(request, env, ctx) {
     if (ctx.orgId) {
       let sex = null;
       try { const patient = await svc.get("Patient", candidate.patientId); sex = patient && patient.sex; } catch {}
-      const masterCheck = await checkMasterBed(env, ctx.orgId, candidate.location.ward, candidate.location.bed, sex);
+      const relaxed = ctx.emergencyOverride === true && await bedOverrideActive(svc, true);
+      const masterCheck = await checkMasterBed(env, ctx.orgId, candidate.location.ward, candidate.location.bed, sex, relaxed);
       if (!masterCheck.ok) return { ...base, ok: false, status: masterCheck.status, error: masterCheck.error, detail: masterCheck.detail, encounterId: candidate.id, written: 0 };
+      if (masterCheck.overrideUsed) {
+        admissionOverride = { relaxation: EMERGENCY_BED_RELAXATION, overriddenState: masterCheck.overriddenState, by: resolved.actor.id, at: new Date().toISOString() };
+        // Bolted on, the same convention encounterFromAdmission's own attendingId already uses for a
+        // fact the canonical Encounter shape has no field for - auditable on the encounter's own
+        // append-only version history, never a second, separate override log to keep in sync.
+        candidate.emergencyOverride = admissionOverride;
+      }
     }
 
     /* THE CHECK ABOVE IS NOT THE GUARD; IT IS THE FAST PATH. Two admissions racing for the same
@@ -194,7 +204,7 @@ async function admitPatient(request, env, ctx) {
       const w = await getWardByName(env, ctx.orgId, candidate.location.ward).catch(() => null);
       if (w) { const b = await getBedByName(env, ctx.orgId, w.id, candidate.location.bed).catch(() => null); await occupyMasterBed(env, b, resolved.actor.id); }
     }
-    return { ...base, ok: true, written: 1, encounterId: candidate.id, patientId: candidate.patientId, version: out.record.version, replayed: out.replayed, actor: resolved.actor.id, role: resolved.role };
+    return { ...base, ok: true, written: 1, encounterId: candidate.id, patientId: candidate.patientId, version: out.record.version, replayed: out.replayed, actor: resolved.actor.id, role: resolved.role, ...(admissionOverride ? { emergencyOverride: admissionOverride } : {}) };
   } catch (e) {
     return { ...base, ...writeFailure(e, { encounterId: candidate.id, written: 0, actor: resolved.actor.id }) };
   }
@@ -207,7 +217,18 @@ async function admitPatient(request, env, ctx) {
  * "beds comes from ORG configuration, none configured, still reports occupied" already applies to
  * free-text config. A lookup failure never blocks a clinical admission - it is reported as
  * unconfigured, not as a refusal nobody asked for. */
-async function checkMasterBed(env, orgId, wardName, bedName, patientSex) {
+/* TASK 4.15's own EmergencyActivation.relaxations names this exact case: "bed-assignment-conflict-
+ * override" is the one relaxation this codebase wires to a real route, and it is deliberately
+ * narrow. `occupied` is NEVER in this list - two real patients cannot share a bed regardless of any
+ * declaration, and that refusal happens earlier, at the clash scan, which this relaxation never
+ * touches. What IS relaxable is the bed's own ADMINISTRATIVE state: a reservation, a pending clean,
+ * a maintenance hold - real facts, but ones a hospital can choose to set aside for a declared
+ * emergency, the same way it already can by editing the bed record by hand. This makes the
+ * declaration change something real rather than being a banner with no effect. */
+const ADMIN_RELAXABLE_STATES = Object.freeze(["reserved", "blocked", "cleaning", "maintenance"]);
+const EMERGENCY_BED_RELAXATION = "bed-assignment-conflict-override";
+
+async function checkMasterBed(env, orgId, wardName, bedName, patientSex, relaxed) {
   if (!orgId || !bedName) return { ok: true };
   let masterWard;
   try { masterWard = await getWardByName(env, orgId, wardName); } catch { return { ok: true }; }
@@ -216,11 +237,28 @@ async function checkMasterBed(env, orgId, wardName, bedName, patientSex) {
   try { masterBed = await getBedByName(env, orgId, masterWard.id, bedName); } catch { return { ok: true }; }
   if (!masterBed) return { ok: false, status: 422, error: "bed_not_found", detail: `${wardName} has no bed named ${bedName} in the hospital's own bed list` };
   if (!masterBed.active) return { ok: false, status: 409, error: "bed_inactive", detail: `${wardName} bed ${bedName} is retired` };
-  if (masterBed.state !== "available") return { ok: false, status: 409, error: "bed_not_available", detail: `${wardName} bed ${bedName} is ${masterBed.state}`, bedState: masterBed.state };
+  if (masterBed.state !== "available") {
+    if (relaxed && ADMIN_RELAXABLE_STATES.includes(masterBed.state)) {
+      return { ok: true, masterBed, overrideUsed: true, overriddenState: masterBed.state };
+    }
+    return { ok: false, status: 409, error: "bed_not_available", detail: `${wardName} bed ${bedName} is ${masterBed.state}`, bedState: masterBed.state };
+  }
   if (masterBed.genderRestriction && patientSex && masterBed.genderRestriction !== patientSex) {
     return { ok: false, status: 409, error: "bed_restricted", detail: `${wardName} bed ${bedName} is restricted to ${masterBed.genderRestriction} patients` };
   }
   return { ok: true, masterBed };
+}
+
+/* Is an emergency declared, right now, with this exact relaxation named? Read via the SAME actor
+ * grant the caller already resolved - EMR_VIEW's own unrestricted read already reaches
+ * EmergencyActivation, so no new capability is needed for a clinical role to check this. A read
+ * failure (a role with no such access) is treated as "no override" rather than surfaced as an
+ * error: the ordinary refusal underneath still applies, which is the safe default either way. */
+async function bedOverrideActive(svc, wanted) {
+  if (!wanted) return false;
+  let rows;
+  try { rows = await svc.list("EmergencyActivation", 50); } catch { return false; }
+  return isRelaxed(rows || [], EMERGENCY_BED_RELAXATION, Date.now());
 }
 // Best-effort: a stale bed state is a workflow problem, never a reason to fail a write already
 // governed and recorded on the Encounter itself, which stays the one source of truth for occupancy.
@@ -571,6 +609,7 @@ async function transferPatient(request, env, ctx) {
    * Checked against every OPEN inpatient encounter, and refused with the occupant named so the ward
    * can see what the conflict actually is rather than being told "no". A move to a ward with no bed
    * named is allowed - a patient can be on a ward awaiting a bed - and cannot collide. */
+  let transferOverride = null;
   if (bed) {
     const clash = (all || []).find((e) => e && e.id !== encounterId && ADMISSION_CLASSES.includes(e.class) && e.status === OPEN && sameBed(e.location, to));
     if (clash) {
@@ -588,8 +627,12 @@ async function transferPatient(request, env, ctx) {
     if (ctx.orgId) {
       let sex = null;
       try { const patient = await svc.get("Patient", current.patientId); sex = patient && patient.sex; } catch {}
-      const masterCheck = await checkMasterBed(env, ctx.orgId, ward, bed, sex);
+      const relaxed = ctx.emergencyOverride === true && await bedOverrideActive(svc, true);
+      const masterCheck = await checkMasterBed(env, ctx.orgId, ward, bed, sex, relaxed);
       if (!masterCheck.ok) return { ...base, ok: false, status: masterCheck.status, error: masterCheck.error, detail: masterCheck.detail, encounterId, written: 0 };
+      if (masterCheck.overrideUsed) {
+        transferOverride = { relaxation: EMERGENCY_BED_RELAXATION, overriddenState: masterCheck.overriddenState, by: resolved.actor.id, at: new Date().toISOString() };
+      }
     }
   }
 
@@ -611,6 +654,7 @@ async function transferPatient(request, env, ctx) {
   next.movedFrom = from;
   const why = str(ctx.reason);
   if (why) next.moveReason = why;
+  if (transferOverride) next.emergencyOverride = transferOverride;
 
   try {
     const out = await svc.put(next, { expectedVersion: current.version, idempotencyKey: ctx.idempotencyKey || null });
@@ -621,7 +665,7 @@ async function transferPatient(request, env, ctx) {
         if (w) { const b = await getBedByName(env, ctx.orgId, w.id, bed).catch(() => null); await occupyMasterBed(env, b, resolved.actor.id); }
       }
     }
-    return { ...base, ok: true, written: 1, encounterId, patientId: current.patientId, from, to, movedAt, version: out.record.version, actor: resolved.actor.id, role: resolved.role };
+    return { ...base, ok: true, written: 1, encounterId, patientId: current.patientId, from, to, movedAt, version: out.record.version, actor: resolved.actor.id, role: resolved.role, ...(transferOverride ? { emergencyOverride: transferOverride } : {}) };
   } catch (e) {
     return { ...base, ...writeFailure(e, { encounterId, written: 0, actor: resolved.actor.id }) };
   }
@@ -719,4 +763,5 @@ export {
   recordWardVitals, orderFromWardRequest, createWardMedicationOrder,
   sameBed, transferPatient, bedBoard,
   freeMasterBed,   // TASK 4.2: discharge reuses this to release the vacated bed - see migrate-discharge.js
+  EMERGENCY_BED_RELAXATION, ADMIN_RELAXABLE_STATES, checkMasterBed,
 };

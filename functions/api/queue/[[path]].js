@@ -849,7 +849,7 @@ export async function onRequest(context) {
       const deps = { migration: mig, actorDeps: wsqActorDeps(env), recordDeps: wsqRecordDeps(env, mig.tenantId), orgId: wOrgId };
 
       if (sub === "admit" && method === "POST") {
-        const r = await admitPatient(request, env, { ...deps, admission: body.admission || body, idempotencyKey: body.idempotencyKey || null });
+        const r = await admitPatient(request, env, { ...deps, admission: body.admission || body, emergencyOverride: body.emergencyOverride === true, idempotencyKey: body.idempotencyKey || null });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "list" && method === "GET") {
@@ -1850,7 +1850,7 @@ export async function onRequest(context) {
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "transfer" && method === "POST") {
-        const r = await transferPatient(request, env, { ...deps, encounterId: body.encounterId, ward: body.ward, bed: body.bed, reason: body.reason, movedAt: body.movedAt, idempotencyKey: body.idempotencyKey || null });
+        const r = await transferPatient(request, env, { ...deps, encounterId: body.encounterId, ward: body.ward, bed: body.bed, reason: body.reason, movedAt: body.movedAt, emergencyOverride: body.emergencyOverride === true, idempotencyKey: body.idempotencyKey || null });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "beds" && method === "GET") {

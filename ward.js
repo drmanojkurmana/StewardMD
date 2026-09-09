@@ -33,7 +33,7 @@
   var st = {
     orgId: "", ward: "", patients: [], view: "list",
     sel: null,                 // the selected {encounterId, patientId, ward, bed, admittedAt}
-    problems: [], criticals: [], balance: null, outbox: [], cosign: null, downtime: null, quality: null, pcopy: null, consent: null, completion: null, emergency: null, roi: null, tpa: null, billing: null, reports: null,
+    problems: [], criticals: [], balance: null, outbox: [], cosign: null, downtime: null, quality: null, pcopy: null, consent: null, completion: null, emergency: null, roi: null, tpa: null, billing: null, reports: null, emergencyOverride: false, emergencyAdmin: null,
     /* Held from other systems. null until asked, an object once answered, and a separate error
      * string when the list could not be read: an unreadable queue of held clinical data must never
      * look like an empty one. */
@@ -196,6 +196,12 @@
       // No org-configuration screen here: nothing in the backend supports one yet, and "avoid
       // generic CRUD screens" argues against building a kitchen-sink admin console to hold it.
       '<button class="w-btn ghost" data-w-act="reports" title="Hospital reports: patient flow, clinical operations, billing, claims, pharmacy, HIM">' + ms("summarize") + "Reports</button>" +
+      // Declare/deactivate themselves - the banner (banner(), above) is read-only status shown
+      // everywhere; this is the one screen that can actually change it. EMERGENCY_DECLARE-gated
+      // server-side, same as every other capability boundary in this app - the button is offered to
+      // everyone the same way bed-management's own controls are, and a role without the capability
+      // is told so by the server's own 403, not by this screen guessing who holds it.
+      '<button class="w-btn ghost" data-w-act="emergencyadmin" title="Declare or stand down a hospital emergency">' + ms("emergency") + "Emergency</button>" +
       // Reachable BEFORE an outage, which is the only time it can be taken. A pack you can only get
       // to while the system is up is a pack the ward has to remember to take while the system is up.
       '<button class="w-btn ghost" data-w-act="downtime" title="Printable sheet for when the system is unavailable">' + ms("print") + "Downtime pack</button></div>" +
@@ -246,6 +252,11 @@
           '<option value="PEDIATRICS"' + (state.admitClass === "PEDIATRICS" ? " selected" : "") + '>Pediatrics</option>' +
           '<option value="NICU"' + (state.admitClass === "NICU" ? " selected" : "") + '>NICU</option>' +
         '</select></label>' +
+        // Shown only while a declared emergency actually names this relaxation - never a standing
+        // option, so ticking it outside a real declaration cannot do anything either (the server
+        // checks this for real; the checkbox is only hidden when it is pointless to offer).
+        ((state.emergency && (state.emergency.active || []).some(function (a) { return (a.relaxations || []).indexOf("bed-assignment-conflict-override") >= 0; })) ?
+          '<label class="w-f-check"><input type="checkbox" id="wAdmitEmergencyOverride"' + (state.emergencyOverride ? " checked" : "") + '> Use the declared emergency to admit past a blocked/cleaning/maintenance/reserved bed</label>' : "") +
         '<div class="w-sub"><h4>' + ms("badge") + "Existing patient (by MRN)</h4>" +
         '<div class="w-filter"><input id="wAdmitMrn" type="text" autocomplete="off" placeholder="MRN">' +
         '<button class="w-btn ghost" data-w-act="mrnlookup">' + ms("search") + "Find</button></div>" +
@@ -1197,6 +1208,9 @@
         (c.denialReason ? " &middot; " + esc(c.denialReason) : "") +
         (c.clinicalContentChangedAfterDenial ? '<div class="w-warn">Coding changed after denial - flagged, not blocked.</div>' : "") +
         ((c.queries || []).length ? '<div class="w-dt-times">' + c.queries.map(function (q) { return esc(q.question); }).join(" ") + "</div>" : "") +
+        // The adapter boundary, stated honestly: no live payer connector exists in this build, so a
+        // submission is queued for the hospital's own process, never shown as sent to anyone.
+        (c.adapter ? '<div class="w-dt-times">payer channel: ' + esc(c.adapter.state) + (c.adapter.note ? " - " + esc(c.adapter.note) : "") + "</div>" : "") +
         "</div>" + (actions ? '<div class="w-mini-row-act">' + actions + "</div>" : "") + "</li>";
     }).join("");
     var authRows = (t.preAuthorisations || []).map(function (a) {
@@ -2216,6 +2230,31 @@
       "</div>";
   }
 
+  var EMERGENCY_KINDS = [["mass-casualty", "Mass casualty"], ["disaster", "Disaster"], ["downtime", "Major downtime"], ["evacuation", "Evacuation"], ["surge", "Surge"], ["network-outage", "Network outage"], ["other", "Other"]];
+  function emergencyAdminView(state) {
+    var e = state.emergencyAdmin || {};
+    var rows = (e.activations || []).map(function (a) {
+      return '<li class="w-mini-row"><div><span class="w-st ' + esc(a.active ? "escalate" : a.revokedAt ? "" : "due") + '">' + esc(a.active ? "active" : (a.revokedAt ? "stood down" : "expired")) + "</span> " +
+        "<b>" + esc(a.kind) + "</b> &middot; " + esc(a.reason) +
+        (a.relaxations && a.relaxations.length ? " &middot; relaxes: " + esc(a.relaxations.join(", ")) : "") +
+        '<div class="w-dt-times">declared ' + when(a.declaredAt) + " &middot; until " + when(a.expiresAt) +
+        (a.revokedAt ? " &middot; stood down " + when(a.revokedAt) + (a.revokedReason ? ": " + esc(a.revokedReason) : "") : "") + "</div></div>" +
+        (a.active ? '<div class="w-mini-row-act"><button class="w-btn ghost sm" data-w-act="emergencydeactivate:' + esc(a.activationId) + '">' + ms("cancel") + "Stand down</button></div>" : "") +
+        "</li>";
+    }).join("");
+    return '<div class="w-card">' +
+      '<div class="w-dt-bar w-noprint"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button>" +
+      "<h3>Emergency mode</h3><button class=\"w-btn ghost\" data-w-act=\"emergencyadmin\">" + ms("refresh") + "Refresh</button></div>" +
+      (rows ? "<ul class=\"w-mini\">" + rows + "</ul>" : '<p class="w-empty">No emergency has ever been declared here.</p>') +
+      '<div class="w-sub"><h4>Declare</h4>' +
+      '<select id="wEmergencyKind">' + EMERGENCY_KINDS.map(function (x) { return '<option value="' + esc(x[0]) + '">' + esc(x[1]) + "</option>"; }).join("") + "</select>" +
+      '<input id="wEmergencyReason" placeholder="What is the emergency, in your own words">' +
+      '<input id="wEmergencyRelaxations" placeholder="Relaxations to name, comma-separated (e.g. bed-assignment-conflict-override)">' +
+      '<input id="wEmergencyMinutes" type="number" placeholder="Minutes (default 240, capped at 1440)">' +
+      '<button class="w-btn" data-w-act="emergencydeclare">' + ms("emergency") + "Declare</button></div>" +
+      "</div>";
+  }
+
   function downtimeView(state) {
     var d = state.downtime;
     if (!d) return '<div class="w-card"><p class="w-empty">Preparing the pack…</p></div>';
@@ -2320,6 +2359,7 @@
       (state.view === "chart" ? chartView(state)
         : state.view === "downtime" ? downtimeView(state)
         : state.view === "reports" ? reportsView(state)
+        : state.view === "emergencyadmin" ? emergencyAdminView(state)
         : state.view === "pcopy" ? pcopyView(state)
         : state.view === "consent" ? consentView(state)
         : state.view === "completion" ? completionView(state)
@@ -2386,7 +2426,7 @@
     // the disposition directly, never through the admit panel's own MRN-lookup/register flow,
     // which is for a patient the board does not already have open.
     if (st.edAdmitPending) { st.edAdmitPending = false; edDispose("admitted", { admission: { ward: ward, bed: bed } }); return; }
-    st.admitTarget = { ward: ward, bed: bed }; st.mrnLookup = null; st.mrnLookupErr = ""; st.admitClass = ""; paint();
+    st.admitTarget = { ward: ward, bed: bed }; st.mrnLookup = null; st.mrnLookupErr = ""; st.admitClass = ""; st.emergencyOverride = false; paint();
   }
   /* The one write in this whole flow: an Encounter, exactly as /ward/transfer and every other admit
    * caller writes it. Nothing here invents a second admission path.
@@ -2400,7 +2440,7 @@
   function doAdmit(mrn) {
     var t = st.admitTarget; if (!t || !mrn) return;
     st.busy = true; paint();
-    apiPost("/ward/admit", { orgId: st.orgId, mrn: mrn, ward: t.ward, bed: t.bed, admittedAt: new Date().toISOString(), class: st.admitClass || undefined })
+    apiPost("/ward/admit", { orgId: st.orgId, mrn: mrn, ward: t.ward, bed: t.bed, admittedAt: new Date().toISOString(), class: st.admitClass || undefined, emergencyOverride: st.emergencyOverride === true })
       .then(function (r) {
         if (r && r.error === "no_patient_identity") { st.busy = false; st.err = "That MRN is not registered here."; paint(); return; }
         if (settle(r, r && r.written ? "Admitted to " + t.ward + ", bed " + t.bed + "." : "Already admitted there.")) {
@@ -2415,6 +2455,8 @@
     var mrn = val("wAdmitMrn");
     var classEl = document.getElementById("wAdmitClass");
     if (classEl) st.admitClass = classEl.value || "";
+    var overrideEl = document.getElementById("wAdmitEmergencyOverride");
+    if (overrideEl) st.emergencyOverride = !!overrideEl.checked;
     if (!mrn) { st.mrnLookupErr = "Enter an MRN."; st.mrnLookup = null; paint(); return; }
     st.busy = true; st.mrnLookupErr = ""; st.mrnLookup = null; paint();
     apiGet("/patient/get?orgId=" + encodeURIComponent(st.orgId) + "&mrn=" + encodeURIComponent(mrn))
@@ -2426,7 +2468,15 @@
       })
       .catch(function () { st.busy = false; st.mrnLookupErr = "Could not look up that MRN."; paint(); });
   }
-  function admitConfirm() { if (st.mrnLookup) doAdmit(st.mrnLookup.mrn); }
+  function admitConfirm() {
+    if (!st.mrnLookup) return;
+    // The override checkbox is ticked AFTER the lookup's own repaint, not before it - captured here,
+    // fresh, the same reason mrnLookup/admitNew capture the class select at their own click rather
+    // than trusting a value read at an earlier one.
+    var overrideEl = document.getElementById("wAdmitEmergencyOverride");
+    if (overrideEl) st.emergencyOverride = !!overrideEl.checked;
+    doAdmit(st.mrnLookup.mrn);
+  }
   /* NEW PATIENT: the SAME check-in sheet the front desk uses (SMD_PATIENTREG), not a second form
    * that could drift from it. Registration and admission are two writes, in order - a registration
    * that succeeds but whose admit then fails still leaves a real, findable patient record; it is
@@ -2435,6 +2485,8 @@
     var t = st.admitTarget; if (!t) return;
     var classEl = document.getElementById("wAdmitClass");
     if (classEl) st.admitClass = classEl.value || "";
+    var overrideEl = document.getElementById("wAdmitEmergencyOverride");
+    if (overrideEl) st.emergencyOverride = !!overrideEl.checked;
     if (!(G.SMD_PATIENTREG && G.SMD_PATIENTREG.open)) { st.err = "Registration is unavailable on this build."; paint(); return; }
     G.SMD_PATIENTREG.open({
       submit: function (payload) { return apiPost("/patient/register", Object.assign({ orgId: st.orgId }, payload)); },
@@ -3387,14 +3439,18 @@
    * "could not transfer", because "bed 12 already has someone in it" is what the ward has to act on. */
   function transfer() {
     var s = st.sel; if (!s) return;
-    var ward = "", bed = "";
+    var ward = "", bed = "", override = false;
+    var emergencyActive = st.emergency && (st.emergency.active || []).some(function (a) { return (a.relaxations || []).indexOf("bed-assignment-conflict-override") >= 0; });
     try {
       ward = G.prompt("Transfer to which ward?", s.ward || "") || "";
       if (!ward.trim()) return;
       bed = G.prompt("Which bed? (leave blank if awaiting one)", "") || "";
+      if (emergencyActive && bed.trim()) {
+        override = /^y/i.test(G.prompt("A declared emergency permits admitting past a blocked/cleaning/maintenance/reserved bed. Use that here? (y/N)", "") || "");
+      }
     } catch (e) { return; }
     st.busy = true; paint();
-    apiPost("/ward/transfer", { orgId: st.orgId, encounterId: s.encounterId, ward: ward.trim(), bed: bed.trim() })
+    apiPost("/ward/transfer", { orgId: st.orgId, encounterId: s.encounterId, ward: ward.trim(), bed: bed.trim(), emergencyOverride: override })
       .then(function (r) {
         if (r && r.error === "bed_occupied") {
           st.busy = false;
@@ -3684,6 +3740,33 @@
         paint();
       })
       .catch(function () { st.busy = false; st.err = "Could not load the reports."; paint(); });
+  }
+  function emergencyAdminOpen() {
+    st.view = "emergencyadmin"; st.emergencyAdmin = null; paint(); loadEmergencyLog();
+  }
+  function loadEmergencyLog() {
+    st.busy = true; paint();
+    return apiGet("/ward/emergency-log?orgId=" + encodeURIComponent(st.orgId))
+      .then(function (r) { st.busy = false; if (r && r.ok) st.emergencyAdmin = r; else { st.emergencyAdmin = { activations: [] }; st.err = "Could not load the emergency log."; } paint(); })
+      .catch(function () { st.busy = false; st.emergencyAdmin = { activations: [] }; st.err = "Could not load the emergency log."; paint(); });
+  }
+  function emergencyDeclareAction() {
+    var reason = val("wEmergencyReason");
+    var relaxations = val("wEmergencyRelaxations").split(",").map(function (s) { return s.trim(); }).filter(Boolean);
+    var kind = val("wEmergencyKind"), minutesStr = val("wEmergencyMinutes");
+    if (reason.length < 10) { st.err = "Say what the emergency is, in your own words - at least 10 characters."; paint(); return; }
+    st.busy = true; paint();
+    apiPost("/ward/emergency-declare", { orgId: st.orgId, kind: kind, reason: reason, relaxations: relaxations, minutes: minutesStr ? Number(minutesStr) : undefined })
+      .then(function (r) { if (settle(r, "Declared.")) { loadEmergencyLog(); loadEmergencyStatus(); } else paint(); })
+      .catch(function () { st.busy = false; st.err = "Could not declare that."; paint(); });
+  }
+  function emergencyDeactivateAction(activationId) {
+    var reason = window.prompt("Reason for standing this emergency down:");
+    if (!reason) return;
+    st.busy = true; paint();
+    apiPost("/ward/emergency-deactivate", { orgId: st.orgId, activationId: activationId, reason: reason })
+      .then(function (r) { if (settle(r, "Stood down.")) { loadEmergencyLog(); loadEmergencyStatus(); } else paint(); })
+      .catch(function () { st.busy = false; st.err = "Could not stand that down."; paint(); });
   }
   function loadDowntime() {
     st.busy = true; st.view = "downtime"; paint();
@@ -4069,6 +4152,7 @@
       if (st.view === "scheduling") { st.scheduling = {}; st.view = "list"; paint(); return; }
       if (st.view === "cashier") { st.cashier = {}; st.view = "list"; paint(); return; }
       if (st.view === "reports") { st.reports = {}; st.view = "list"; paint(); return; }
+      if (st.view === "emergencyadmin") { st.emergencyAdmin = null; st.view = "list"; paint(); return; }
       // Picking a bed to admit an ED patient opens the SAME bed board a fresh admission uses;
       // backing out of it returns to that patient's ED chart, not the ward list, and drops the
       // pending admit rather than leaving it to fire on some later, unrelated bed pick.
@@ -4081,7 +4165,7 @@
       st.flowsheet = null; st.news2 = null; st.investigations = null; st.results = null; st.resusBundles = null;
       st.ed = null; st.edArrivalOpen = false; st.edMrnLookup = null; st.edMrnLookupErr = "";
       st.surgBoard = null; st.surgCase = null; st.surgBookOpen = false; st.surgMrnLookup = null; st.surgMrnLookupErr = ""; st.surgErr = "";
-      st.maternity = null; st.admitClass = ""; st.ageBand = null; st.lines = null; st.rateResult = null; st.oncology = null; st.cardiology = null; st.radiology = null; st.pharmacy = null; st.transfusion = null; st.consent = null; st.completion = null; st.roi = null; st.tpa = null; st.billing = null;
+      st.maternity = null; st.admitClass = ""; st.emergencyOverride = false; st.ageBand = null; st.lines = null; st.rateResult = null; st.oncology = null; st.cardiology = null; st.radiology = null; st.pharmacy = null; st.transfusion = null; st.consent = null; st.completion = null; st.roi = null; st.tpa = null; st.billing = null;
       paint(); return;
     }
     if (cmd === "board") { loadBoard(); return; }
@@ -4261,6 +4345,9 @@
     if (cmd === "resolve") { resolveProblem(arg); return; }
     if (cmd === "downtime") { loadDowntime(); return; }
     if (cmd === "reports") { loadReports(); return; }
+    if (cmd === "emergencyadmin") { emergencyAdminOpen(); return; }
+    if (cmd === "emergencydeclare") { emergencyDeclareAction(); return; }
+    if (cmd === "emergencydeactivate") { emergencyDeactivateAction(arg); return; }
     if (cmd === "printpack") { try { G.print(); } catch (e) {} return; }
     if (cmd === "pcopy") { loadPatientCopy(); return; }
     if (cmd === "pcopyGive") { givePatientCopy(); return; }

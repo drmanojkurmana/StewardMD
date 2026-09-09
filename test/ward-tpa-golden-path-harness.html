@@ -41,7 +41,7 @@ window.fetch = function (url, opts) {
     return reply({ ok: true, written: 1, claim: CLAIM });
   }
   if (u.indexOf("/ward/claim-state") >= 0 && (opts && opts.method) === "POST") {
-    if (body.action === "submit") { CLAIM.state = "submitted"; CLAIM.submittedAmount = body.submittedAmount; }
+    if (body.action === "submit") { CLAIM.state = "submitted"; CLAIM.submittedAmount = body.submittedAmount; CLAIM.adapter = { state: "not_configured", note: "No live payer connector is configured for this hospital." }; }
     else if (body.action === "deny") { CLAIM.state = "denied"; CLAIM.denialReason = body.reason; }
     else if (body.action === "resubmit") { CLAIM.state = "submitted"; CLAIM.submittedAmount = body.submittedAmount; CLAIM.history.push({ event: "resubmitted", detail: body.reason }); }
     else if (body.action === "adjudicate") { if (body.approvedAmount != null) CLAIM.approvedAmount = body.approvedAmount; if (body.deniedAmount != null) CLAIM.deniedAmount = body.deniedAmount; }

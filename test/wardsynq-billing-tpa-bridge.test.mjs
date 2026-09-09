@@ -124,6 +124,11 @@ test("TASK 4.8: a claim carries the real invoice it reconciles against, and real
   const submitted = await as(CASHIER, "/ward/claim-state", "POST", { orgId: ORG, claimId: claim.claimId, action: "submit", submittedAmount: 15000 });
   assert.equal(submitted.__status, 200, JSON.stringify(submitted));
   assert.equal(submitted.claim.submittedAmount, 15000);
+  // The adapter boundary (master plan section 2.3): no real payer connector is configured anywhere
+  // in this codebase, so this is honestly "not_configured" and queued for the hospital's own
+  // out-of-band process - never a claim that a payer was actually contacted.
+  assert.equal(submitted.claim.adapter.state, "not_configured", JSON.stringify(submitted.claim.adapter));
+  assert.equal(submitted.claim.adapter.payerReference, null);
 
   const adjudicated = await as(CASHIER, "/ward/claim-state", "POST", { orgId: ORG, claimId: claim.claimId, action: "adjudicate", approvedAmount: 12000, deniedAmount: 3000, reason: "package cap applied" });
   assert.equal(adjudicated.__status, 200, JSON.stringify(adjudicated));

@@ -48,6 +48,7 @@ import {
   mayProceedClinically, supportFor, codeClaim, detectUpcoding,
   submit, deny, resubmit, recordAdjudication, preAuthorisation, upcodingWatchlist,
 } from "../../wardsynq/wardsynq-billing.js";
+import { submitViaAdapter } from "../../wardsynq/wardsynq-tpa-adapter.js";
 
 const str = (v) => (v == null ? "" : String(v).trim());
 const slug = (v) => str(v).toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
@@ -260,6 +261,16 @@ async function claimAction(request, env, ctx) {
   } catch (e) {
     if (e instanceof BillingError) return { ...base, ok: false, status: 422, error: "billing_refused", code: e.code, detail: e.message, claim: null };
     throw e;
+  }
+
+  /* THE ADAPTER BOUNDARY (master plan section 2.3). submit/resubmit are the only actions that mean
+   * "send this to the payer" - deny/adjudicate record a fact ARRIVING, not one going out. No real
+   * adapter is configured anywhere in this codebase (ctx.tpaAdapter, if a site ever wires one in),
+   * so this defaults to NullAdapter() and the claim is honestly recorded as queued for the
+   * hospital's own existing out-of-band process - never claimed as sent to a payer that was never
+   * actually contacted. */
+  if (action === "submit" || action === "resubmit") {
+    next.adapter = await submitViaAdapter(next, ctx.tpaAdapter || null);
   }
 
   try {
