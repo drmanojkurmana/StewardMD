@@ -186,6 +186,9 @@ test("TASK 4.18: the full enterprise journey, same patient and encounter through
   assert.equal(claim.claim.invoiceId, invoiceId, "the claim carries a real reference to the SAME invoice, findable from either side");
   const submitted = await as("/ward/claim-state", "POST", { orgId: ORG, claimId: claimId, action: "submit", submittedAmount: 5000 });
   assert.equal(submitted.__status, 200, JSON.stringify(submitted));
+  // The adapter boundary this journey now runs through - no live payer connector exists anywhere in
+  // this codebase, so submission is honestly queued, never claimed as reaching a real payer.
+  assert.equal(submitted.claim.adapter.state, "not_configured", JSON.stringify(submitted.claim.adapter));
 
   // 9. Discharge, of the SAME encounter.
   const discharge = await as("/ward/discharge", "POST", { orgId: ORG, encounterId: encounterId, disposition: "home" });

@@ -97,11 +97,13 @@ const idFor = (email) => "cfa:" + createHash("sha256").update(email.toLowerCase(
 const DOCTOR = "doctor@example.test";
 const ENV = { QUEUE_ENABLED: "1", QUEUE_TOKEN_SECRET: "test-secret-that-is-long-enough-for-hmac", FOLLOWCARE_PHI_KEY: Buffer.alloc(32, 7).toString("base64url"), CONNECT_DB: tenantDb };
 
+const ADMIN = "admin@example.test";
 function seedHospital() {
   docs.clear(); clock = 1;
   RECORD = new MemoryRepository();
-  docs.set(`q_orgs/${ORG}`, { fields: { id: ORG, code: "SMD-WARD01", name: "WSQ Ward Hospital", kind: "clinic", mode: "wardsynq", connectTenantId: TENANT_ROW.id, ownerUid: "cfa:nobody", createdAt: 1, wardsynq: {} }, updateTime: "t1" });
+  docs.set(`q_orgs/${ORG}`, { fields: { id: ORG, code: "SMD-WARD01", name: "WSQ Ward Hospital", kind: "clinic", mode: "wardsynq", connectTenantId: TENANT_ROW.id, ownerUid: idFor(ADMIN), createdAt: 1, wardsynq: {} }, updateTime: "t1" });
   docs.set(`q_members/${sanitize(ORG)}__${sanitize(idFor(DOCTOR))}`, { fields: { orgId: ORG, identity: idFor(DOCTOR), role: "doctor", active: true }, updateTime: "t1" });
+  docs.set(`q_members/${sanitize(ORG)}__${sanitize(idFor(ADMIN))}`, { fields: { orgId: ORG, identity: idFor(ADMIN), role: "admin", active: true }, updateTime: "t1" });
 }
 async function as(email, path, method, body) {
   const res = await onRequest({ request: new Request("https://x/api/queue" + path, { method: method || "GET", headers: { "Cf-Access-Authenticated-User-Email": email, "Content-Type": "application/json" }, body: body ? JSON.stringify(body) : undefined }), env: ENV });
@@ -220,4 +222,86 @@ test("BED BOARD: reads real master occupancy/state once a hospital has any, not 
   assert.deepEqual(medicalA.occupied.map((o) => o.bed), ["1"]);
   // Bed 2 is in maintenance in the MASTER record, with nobody in it - it must NOT read as free.
   assert.deepEqual(medicalA.free, [], "a maintenance bed with no patient in it is still not free");
+});
+
+/* TASK 4.15's emergency-mode.js declares "bed-assignment-conflict-override" as a real relaxation.
+ * These tests prove it is actually consumed, not merely a name a screen displays. */
+test("EMERGENCY OVERRIDE: a blocked bed is refused without a declared emergency, and admitted with one", async () => {
+  seedHospital();
+  const w = await ORG_STORE.createWard(undefined, ORG, { name: "Medical A" }, "actor-1");
+  await ORG_STORE.createBed(undefined, ORG, { wardId: w.id, name: "5", state: "blocked" }, "actor-1");
+
+  n++;
+  const reg1 = await as(DOCTOR, "/patient/register", "POST", { orgId: ORG, name: "Emergency Testcase " + n, mobile: "9876500" + String(n).padStart(3, "0"), gender: "female", ageYears: 30 });
+  const refused = await as(DOCTOR, "/ward/admit", "POST", { orgId: ORG, mrn: reg1.mrn, ward: "Medical A", bed: "5", emergencyOverride: true });
+  assert.equal(refused.__status, 409, JSON.stringify(refused));
+  assert.equal(refused.error, "bed_not_available", "no emergency is declared yet - the override flag alone does nothing");
+
+  const declared = await as(ADMIN, "/ward/emergency-declare", "POST", {
+    orgId: ORG, kind: "mass-casualty", reason: "Multi-vehicle collision, every bed is needed now.",
+    relaxations: ["bed-assignment-conflict-override"],
+  });
+  assert.equal(declared.__status, 200, JSON.stringify(declared));
+
+  n++;
+  const reg2 = await as(DOCTOR, "/patient/register", "POST", { orgId: ORG, name: "Emergency Testcase " + n, mobile: "9876500" + String(n).padStart(3, "0"), gender: "female", ageYears: 30 });
+  const overridden = await as(DOCTOR, "/ward/admit", "POST", { orgId: ORG, mrn: reg2.mrn, ward: "Medical A", bed: "5", emergencyOverride: true });
+  assert.equal(overridden.__status, 200, JSON.stringify(overridden));
+  assert.equal(overridden.emergencyOverride.relaxation, "bed-assignment-conflict-override");
+  assert.equal(overridden.emergencyOverride.overriddenState, "blocked");
+
+  // Without the flag, the SAME declared emergency changes nothing - an admitting clinician must ask
+  // for the override by name, never an implicit side effect of a banner being on.
+  n++;
+  const reg3 = await as(DOCTOR, "/patient/register", "POST", { orgId: ORG, name: "Emergency Testcase " + n, mobile: "9876500" + String(n).padStart(3, "0"), gender: "male", ageYears: 30 });
+  const stillBlocked = await as(DOCTOR, "/ward/admit", "POST", { orgId: ORG, mrn: reg3.mrn, ward: "Medical A", bed: "6", emergencyOverride: false });
+  assert.equal(stillBlocked.__status, 422, JSON.stringify(stillBlocked), "bed 6 does not exist - a different real refusal, proving the flag was not the reason bed 5 worked");
+});
+
+test("EMERGENCY OVERRIDE NEVER RELAXES A REAL OCCUPANT - two patients still cannot share one bed", async () => {
+  seedHospital();
+  const w = await ORG_STORE.createWard(undefined, ORG, { name: "Medical A" }, "actor-1");
+  await ORG_STORE.createBed(undefined, ORG, { wardId: w.id, name: "7" }, "actor-1");
+
+  await as(ADMIN, "/ward/emergency-declare", "POST", {
+    orgId: ORG, kind: "mass-casualty", reason: "Multi-vehicle collision, every bed is needed now.",
+    relaxations: ["bed-assignment-conflict-override"],
+  });
+
+  const first = await registerAndAdmit("Medical A", "7");
+  assert.equal(first.adm.__status, 200, JSON.stringify(first.adm));
+
+  n++;
+  const reg2 = await as(DOCTOR, "/patient/register", "POST", { orgId: ORG, name: "Emergency Occupant Testcase " + n, mobile: "9876501" + String(n).padStart(3, "0"), gender: "female", ageYears: 30 });
+  const secondAttempt = await as(DOCTOR, "/ward/admit", "POST", { orgId: ORG, mrn: reg2.mrn, ward: "Medical A", bed: "7", emergencyOverride: true });
+  assert.equal(secondAttempt.__status, 409, JSON.stringify(secondAttempt));
+  assert.equal(secondAttempt.error, "bed_occupied", "a real occupant is refused REGARDLESS of any emergency declaration or override flag");
+});
+
+test("EMERGENCY OVERRIDE also works for TRANSFER, and expires with the declaration", async () => {
+  seedHospital();
+  const w = await ORG_STORE.createWard(undefined, ORG, { name: "Medical A" }, "actor-1");
+  await ORG_STORE.createBed(undefined, ORG, { wardId: w.id, name: "8" }, "actor-1");
+  const destBed = await ORG_STORE.createBed(undefined, ORG, { wardId: w.id, name: "9", state: "cleaning" }, "actor-1");
+
+  const declared = await as(ADMIN, "/ward/emergency-declare", "POST", {
+    orgId: ORG, kind: "surge", reason: "Ward surge, using every cleaning-hold bed on Medical A.",
+    relaxations: ["bed-assignment-conflict-override"], minutes: 60,
+  });
+
+  const { adm } = await registerAndAdmit("Medical A", "8");
+  assert.equal(adm.__status, 200, JSON.stringify(adm));
+
+  const transfer = await as(DOCTOR, "/ward/transfer", "POST", { orgId: ORG, encounterId: adm.encounterId, ward: "Medical A", bed: "9", emergencyOverride: true });
+  assert.equal(transfer.__status, 200, JSON.stringify(transfer));
+  assert.equal(transfer.emergencyOverride.overriddenState, "cleaning");
+
+  // Move off bed 9 first - transferring back to the SAME location is a no-op the route short-
+  // circuits before it ever reaches the bed check, which would prove nothing about the relaxation.
+  await as(DOCTOR, "/ward/transfer", "POST", { orgId: ORG, encounterId: adm.encounterId, ward: "Medical A" });
+  // Stand the emergency down; the SAME relaxation must stop working immediately.
+  await as(ADMIN, "/ward/emergency-deactivate", "POST", { orgId: ORG, activationId: declared.activationId, reason: "Surge resolved." });
+  await ORG_STORE.updateBed(undefined, destBed.id, { state: "cleaning" }, "actor-1");
+  const secondTransfer = await as(DOCTOR, "/ward/transfer", "POST", { orgId: ORG, encounterId: adm.encounterId, ward: "Medical A", bed: "9", emergencyOverride: true });
+  assert.equal(secondTransfer.__status, 409, JSON.stringify(secondTransfer), "the declaration was stood down - the same override flag no longer does anything");
 });

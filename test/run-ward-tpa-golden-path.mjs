@@ -55,6 +55,7 @@ try {
   await click('[data-w-act^="claimsubmit:"]');
   ok(await waitFor(`return document.body.lastElementChild.textContent.indexOf('submitted') >= 0;`), "submitting moves it to submitted");
   ok(await ev(`return document.body.lastElementChild.textContent.indexOf('5000') >= 0;`), "the real submitted amount is shown");
+  ok(await ev(`return document.body.lastElementChild.textContent.indexOf('not_configured') >= 0;`), "the real adapter-boundary state is shown honestly - no payer connector, never claimed as sent");
 
   await click('[data-w-act^="claimdeny:"]');
   ok(await waitFor(`return document.body.lastElementChild.textContent.indexOf('denied') >= 0;`), "denying moves it to denied");
