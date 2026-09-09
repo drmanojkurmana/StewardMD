@@ -69,6 +69,7 @@ class Adapter {
     this._claims = spec.claims;
     this._normalise = spec.normalise;
     this._sourceEventId = spec.sourceEventId || null;
+    this._identityStrategy = spec.identityStrategy || null;
 
     // The adapter's own actor. KIND.ADAPTER is capped at DRAFT by the actor model, so a requested
     // tier above that is clamped rather than honoured. An adapter cannot ask its way to EXECUTE.
@@ -91,6 +92,34 @@ class Adapter {
   sourceEventId(payload) {
     if (!this._sourceEventId) return null;
     try { const v = this._sourceEventId(payload); return v ? String(v) : null; } catch { return null; }
+  }
+
+  /**
+   * TASK 7 STEP 3: the same contract fields _connect/sdk/descriptor.js's describe() states for a
+   * network connector, stated here for a claim-based payload adapter - not a merged abstraction,
+   * a parallel vocabulary for a genuinely different kind of feed. See this file's header and
+   * functions/_connect/interfaces.js's own header for the boundary: THIS class routes a payload
+   * that has ALREADY arrived inside WardSynQ's own request (no network egress, no credentials, no
+   * base_url); _connect's connectors REACH OUT to a genuinely external system (network egress,
+   * credentials, SSRF exposure) to pull one. Consolidating them would force this class to declare
+   * transport/auth fields it has none of, or force a network connector into claims()-style payload
+   * sniffing that makes no sense for something it actively queries rather than merely receives.
+   */
+  contract() {
+    return {
+      id: this.system, name: this.describe,
+      direction: "inbound-event",
+      ownership: "external",                 // the actor model caps this adapter at DRAFT, always
+      readWrite: "write-via-ingest",
+      transport: "in-process",               // no network egress of its own - the payload already arrived
+      tenantScope: "delegated",              // enforced by whichever GovernedStore the caller injects, not by this class
+      // Honest per-adapter facts, not a merged guess. sourceEventId is what backs idempotency here;
+      // identityStrategy is whatever this adapter's own claims()/normalise() actually resolves
+      // identity by - stated by the adapter's own spec, never defaulted to "handled".
+      idempotency: this._sourceEventId ? "source-event-id" : null,
+      identityStrategy: this._identityStrategy || null,
+      retries: null, terminologyMappings: null, health: null, featureFlag: null,
+    };
   }
 }
 
@@ -227,6 +256,13 @@ function ghisAdapter(mapGhisBundle) {
     // A GHIS bundle is recognisable by carrying a patientId together with ward-shaped content.
     claims: (p) => !!(p && typeof p === "object" && p.patientId != null && ("labs" in p || "imaging" in p || "patient" in p)),
     sourceEventId: (p) => (p && p.patientId != null && p.ts ? `${p.patientId}:${p.ts}` : null),
+    // TASK 7 STEP 3, stated honestly rather than left silent: unlike fhir-inbound.js/hl7-inbound.js
+    // (which run every incoming Patient through wardsynq-mpi.js's findCandidates() before writing
+    // anything), THIS path trusts p.patientId directly - it never calls the MPI reconciler. That is
+    // consistent with GHIS being WardSynQ's own predecessor system rather than a genuinely external
+    // one (its patientId space is already this hospital's own), but it is a real, load-bearing
+    // architectural fact a reader of this contract needs, not something to leave implicit.
+    identityStrategy: "trusted-patientid-no-mpi-reconciliation",
     normalise: async (p) => {
       const m = mapGhisBundle(p);
       if (!m.patient) return { entities: [], issues: m.issues, reason: "no identifiable patient in the bundle" };

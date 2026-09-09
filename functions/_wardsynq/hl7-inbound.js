@@ -30,9 +30,8 @@
 
 import { parseHl7, seg, segs, field, comp } from "../_connect/connectors/hl7v2/parser.js";
 import { hl7ToSccm } from "./hl7-normalize.js";
-import { landBundle, openIngest, registerRedrive, REASON } from "./fhir-inbound.js";
+import { landBundle, openIngest, registerRedrive, REASON, authorizedSourceSystem } from "./fhir-inbound.js";
 import { resolveId, operationOutcome } from "./fhir.js";
-import { NATIVE_SYSTEM } from "./service.js";
 import { makeActor, KIND, TIER } from "../../wardsynq/wardsynq-actors.js";
 import { esc, ts } from "./hl7v2.js";
 
@@ -144,15 +143,22 @@ async function ingestHl7(request, env, ctx) {
   const problems = validateMessage(msg, kind, profile);
   if (problems.length) return { ...ackWith("AR", "rejected by the integration profile: " + problems.map((p) => p.detail).join("; "), problems.map((p) => ({ code: p.code, name: ERR_NAME[p.code], segment: p.segment, detail: p.detail })), 200), rejected: problems };
 
-  // The sender is named by the header when the bridge sets one, else by MSH-3^MSH-4. Never by nobody.
-  const system = slug(ctx.sourceSystem) || slug([kind.sendingApp, kind.sendingFacility].filter(Boolean).join("-"));
-  if (!system) return ackWith("AR", "the message names no sending application or facility (MSH-3/MSH-4), and no X-Source-System header was given", [{ code: "101", name: ERR_NAME[101], segment: "MSH", detail: "MSH-3 or MSH-4 required" }]);
-  if (system === NATIVE_SYSTEM || system === "wardsynq-native") return ackWith("AR", "a feed cannot claim to be this hospital", [{ code: "207", name: ERR_NAME[207], segment: "MSH", detail: "sender is this hospital's own name" }]);
-  const adapterSystem = `hl7v2-${system}`;
-  sccm.meta.sourceConnector = adapterSystem;
-
+  // AUTHENTICATE, THEN AUTHORIZE THE CLAIMED SOURCE - the same order and the same
+  // SourceSystemGrant check fhir-inbound.js's ingestFhir() uses, so a doctor's clinical session
+  // cannot declare itself to be a registered HL7 sending facility via MSH-3/MSH-4 any more than it
+  // could via a FHIR header - see fhir-inbound.js's own header for the vulnerability this closes.
   const { svc, resolved, error } = await openIngest(request, env, ctx);
   if (error) return { ok: false, status: error.status, outcome: error.outcome, ack: buildAck(kind, { code: "AR", text: "not authorised at this door", errors: [{ code: "207", name: ERR_NAME[207], detail: error.outcome && error.outcome.issue && error.outcome.issue[0].diagnostics }] }, { facility: ctx.facility }) };
+
+  const bodyClaim = [kind.sendingApp, kind.sendingFacility].filter(Boolean).join("-");
+  const src = await authorizedSourceSystem(svc, resolved, ctx.sourceSystem, bodyClaim);
+  if (src.error) {
+    const code = src.error.code === "source_required" ? "101" : "207";
+    return ackWith("AR", src.error.detail, [{ code, name: ERR_NAME[code], segment: "MSH", detail: src.error.detail }]);
+  }
+  const system = src.system;
+  const adapterSystem = `hl7v2-${system}`;
+  sccm.meta.sourceConnector = adapterSystem;
 
   const unsupported = (msg.segments || []).filter((s) => !/^Z/i.test(s.id) && !["MSH", "EVN", "PID", "PD1", "NK1", "PV1", "PV2", "DG1", "AL1", "OBR", "OBX", "NTE", "ORC", "ROL", "IN1", "GT1", "ZZZ"].includes(s.id)).map((s) => s.id);
   const landingProblems = [...new Set(unsupported)].map((id) => ({ reason: REASON.UNSUPPORTED, detail: `segment ${id} is not one this gateway files; carried in the raw message only` }));

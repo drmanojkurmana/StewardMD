@@ -6,8 +6,9 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import {
-  REASON, RESOLUTION, INBOUND_TYPES, inboundEnabled, sourceSystemOf, splitBundle, evaluateIfNoneExist, markTerminology,
+  REASON, RESOLUTION, INBOUND_TYPES, inboundEnabled, bodySourceOf, splitBundle, evaluateIfNoneExist, markTerminology,
   reconcileIdentity, rebind, partitionConflicts, ExchangeException, ExchangeIdentityDecision, priorDecision, EXCEPTION_TYPE, DECISION_TYPE,
+  GRANT_TYPE, SourceSystemGrant, grantIdFor, authorizedSourceSystem,
 } from "../functions/_wardsynq/fhir-inbound.js";
 import { RESOURCE_TYPES, NATIVE_SYSTEM } from "../functions/_wardsynq/service.js";
 import { normalizeFhir } from "../functions/_connect/connectors/fhir-r4/normalize.js";
@@ -99,10 +100,44 @@ test("OFF UNLESS THE HOSPITAL TURNS IT ON, and a feed must name itself", () => {
   assert.equal(inboundEnabled({ inbound: { enabled: "true" } }), false, "only a real true");
   assert.equal(inboundEnabled({ inbound: { enabled: true } }), true);
 
-  assert.equal(sourceSystemOf("His Hospital HIS", {}), "his-hospital-his", "the header wins and is slugged");
-  assert.equal(sourceSystemOf("", { meta: { source: "urn:stewardmd:source:ghis" } }), "ghis");
-  assert.equal(sourceSystemOf("", { identifier: { system: "http://partner.example/bundles" } }), "http-partner-example-bundles");
-  assert.equal(sourceSystemOf("", {}), "", "no name: refused upstream, never defaulted");
+  // bodySourceOf is BUNDLE-LEVEL ONLY (TASK 7 STEP 1): a single resource's own meta.source/
+  // identifier describe THAT RESOURCE, not who is sending the request - reading them as a sender
+  // claim would refuse a legitimate update-conflict PUT that echoes back our own "wardsynq-native"
+  // resource. Only a Bundle's top-level fields are a self-declaration.
+  assert.equal(bodySourceOf({ resourceType: "Bundle", meta: { source: "urn:stewardmd:source:ghis" } }), "ghis");
+  assert.equal(bodySourceOf({ resourceType: "Bundle", identifier: { system: "http://partner.example/bundles" } }), "http-partner-example-bundles");
+  assert.equal(bodySourceOf({ resourceType: "Bundle" }), "", "no name: refused upstream, never defaulted");
+  assert.equal(bodySourceOf({ resourceType: "Observation", meta: { source: "urn:stewardmd:source:ghis" } }), "", "a single resource's own meta is NOT a sender claim");
+});
+
+test("SOURCE-SYSTEM AUTHORIZATION: header/body must agree, a claim is required, and only a GRANTED actor is trusted - never the caller's own say-so", async () => {
+  const grants = [SourceSystemGrant({ id: grantIdFor("cfa:doc1", "epic"), actorId: "cfa:doc1", sourceSystem: "epic", active: true, grantedBy: "cfa:admin", grantedAt: "2026-01-01T00:00:00.000Z" })];
+  const svc = { list: async () => grants };
+  const doc1 = { actor: { id: "cfa:doc1" } };
+  const doc2 = { actor: { id: "cfa:doc2" } };
+
+  // 1. a granted actor claiming its own granted system succeeds.
+  const ok = await authorizedSourceSystem(svc, doc1, "epic", "");
+  assert.equal(ok.system, "epic");
+  // 2. the SAME actor claiming a DIFFERENT (unregistered) system is refused, not silently allowed
+  //    because it already holds SOME grant.
+  const other = await authorizedSourceSystem(svc, doc1, "oracle-health", "");
+  assert.equal(other.error.code, "source_unauthorized");
+  // 3. a DIFFERENT actor - even authenticated, even in the same tenant - claiming a system it was
+  //    never granted is refused. This is the exact vulnerability: an authenticated session with no
+  //    grant of its own must never be trusted on its say-so.
+  const impersonator = await authorizedSourceSystem(svc, doc2, "epic", "");
+  assert.equal(impersonator.error.code, "source_unauthorized");
+  assert.match(impersonator.error.detail, /cfa:doc2 is not registered to push data as "epic"/);
+  // 4. header and body disagreeing is refused before any grant is even consulted.
+  const mismatch = await authorizedSourceSystem(svc, doc1, "epic", "oracle-health");
+  assert.equal(mismatch.error.code, "source_mismatch");
+  // 5. no claim at all is refused.
+  const none = await authorizedSourceSystem(svc, doc1, "", "");
+  assert.equal(none.error.code, "source_required");
+  // 6. claiming to be this hospital's own name is refused, even with an (impossible) grant for it.
+  const native = await authorizedSourceSystem(svc, doc1, "wardsynq-native", "");
+  assert.equal(native.error.code, "source_native");
 });
 
 test("A BUNDLE IS SPLIT, AND AN UNSUPPORTED TYPE IS A NAMED PROBLEM, never a silent omission", () => {

@@ -99,7 +99,7 @@ import { reportIncident, triageIncident, recordIncidentRCA, addIncidentCAPA, com
 import { assignPatientTag, verifyPatientTag, deactivatePatientTag, reportPatientTagLost, replacePatientTag, patientTagLog } from "../../_wardsynq/identity-tag.js";
 import { operationOutcome } from "../../_wardsynq/fhir.js";
 import { dispatchRead, dispatchOperation } from "../../_wardsynq/fhir-route.js";
-import { ingestFhir, listExceptions, resolveException, inboundEnabled } from "../../_wardsynq/fhir-inbound.js";
+import { ingestFhir, listExceptions, resolveException, inboundEnabled, grantSourceSystem } from "../../_wardsynq/fhir-inbound.js";
 import { createLaunch } from "../../_wardsynq/smart-server.js";
 import { ingestHl7 } from "../../_wardsynq/hl7-inbound.js";
 import { startReconciliation, decideMedicine, readReconciliation } from "../../_wardsynq/med-reconciliation.js";
@@ -642,6 +642,10 @@ export async function onRequest(context) {
         fhir: CAPS.EMR_VIEW,
         // What another system sent that WardSynQ would not write without a person deciding.
         "fhir-exceptions": CAPS.EMR_VIEW,
+        // TASK 7 STEP 1: who WardSynQ believes when a feed says who it is. staff.admin, the same
+        // capability that manages the staff->role mapping - registering a trusted source system is
+        // exactly that kind of hospital-administration act, never a clinical one.
+        "source-grant": CAPS.STAFF_ADMIN,
         hl7: CAPS.EMR_TREAT,
         /* DECIDING is emr.treat: "this is the same person" and "the feed's version replaces ours"
          * are clinical judgements about a chart, and they are recorded under the decider's name. */
@@ -1231,6 +1235,10 @@ export async function onRequest(context) {
       }
       if (sub === "fhir-exception-resolve" && method === "POST") {
         const r = await resolveException(request, env, { ...deps, config: (wsqCfg && wsqCfg.fhir) || null, hl7Config: (wsqCfg && wsqCfg.hl7) || null, terminology: (wsqCfg && wsqCfg.terminology) || null, profiles: (wsqCfg && wsqCfg.fhir && wsqCfg.fhir.profiles) || null, base: `${url.origin}/api/queue/ward/fhir`, exceptionId: body.exceptionId, resolution: body.resolution, localPatientId: body.localPatientId, reason: body.reason });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "source-grant" && method === "POST") {
+        const r = await grantSourceSystem(request, env, { ...deps, actorId: body.actorId, sourceSystem: body.sourceSystem, note: body.note, idempotencyKey: body.idempotencyKey || null });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "hl7" && method === "POST") {

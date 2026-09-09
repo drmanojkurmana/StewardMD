@@ -198,6 +198,26 @@ test("ghis: the existing adapter registers as an ordinary feed", async () => {
   assert.equal(saved.writtenBy.id, "adapter:ghis", "the first integration is now an instance of the pattern");
 });
 
+/* TASK 7 STEP 3: the same contract vocabulary _connect/sdk/descriptor.js states for a network
+ * connector, stated here for a claim-based payload adapter. */
+test("contract(): structural facts are always true, and the ghis adapter states its real identity strategy honestly", () => {
+  const g = ghisAdapter(mapGhisBundle);
+  const c = g.contract();
+  assert.equal(c.direction, "inbound-event");
+  assert.equal(c.ownership, "external");
+  assert.equal(c.readWrite, "write-via-ingest");
+  assert.equal(c.transport, "in-process", "no network egress of its own - the payload already arrived");
+  assert.equal(c.tenantScope, "delegated");
+  assert.equal(c.idempotency, "source-event-id", "ghis declares a sourceEventId, so replay safety is real, not claimed");
+  assert.equal(c.identityStrategy, "trusted-patientid-no-mpi-reconciliation", "stated plainly: this path does NOT run wardsynq-mpi.js, unlike fhir-inbound.js/hl7-inbound.js");
+});
+
+test("contract(): an adapter that declares no sourceEventId honestly reports no idempotency strategy, not a fabricated one", () => {
+  const a = new Adapter({ system: "toy", claims: () => true, normalise: async () => ({ entities: [] }) });
+  assert.equal(a.contract().idempotency, null);
+  assert.equal(a.contract().identityStrategy, null);
+});
+
 test("ghis: it does not claim payloads that are not its shape", async () => {
   const { hub: h } = await hub();
   h.register(ghisAdapter(mapGhisBundle));
