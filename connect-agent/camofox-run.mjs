@@ -9,12 +9,12 @@ function arg(name, fallback = '') {
 
 const startUrl = arg('url');
 const userId = arg('user');
-const sessionKey = arg('session');
+const sessionKey = process.env.CAMOFOX_SESSION_KEY || '';
 const origins = arg('origins', startUrl ? new URL(startUrl).origin : '').split(',').map(s => s.trim()).filter(Boolean);
 const output = arg('out', 'adapter-spec.json');
 
 if (!startUrl || !userId || !sessionKey) {
-  console.error('Usage: node connect-agent/camofox-run.mjs --url <EMR_URL> --user <SESSION_OWNER> --session <EPHEMERAL_SESSION_KEY> [--origins <origin,...>] [--out adapter-spec.json]');
+  console.error('Usage: CAMOFOX_SESSION_KEY=<ephemeral-key> node connect-agent/camofox-run.mjs --url <EMR_URL> --user <SESSION_OWNER> [--origins <origin,...>] [--out adapter-spec.json]');
   process.exit(2);
 }
 
@@ -22,4 +22,4 @@ const result = await discoverAuthorizedEmr({ startUrl, allowedOrigins: origins, 
 await writeFile(output, `${JSON.stringify(result, null, 2)}\n`, { mode: 0o600 });
 console.log(`Discovery complete: ${output}`);
 console.log(`Observed interfaces: ${result.events.length}`);
-console.log('No EMR credentials are persisted by this runner. Review the adapter spec before generation/approval.');
+console.log('No EMR credentials or page snapshots are persisted by this runner. Review the interface map before generation/approval.');
