@@ -5,10 +5,15 @@
  * is unavailable - which is the right call, because an engine gap is not a broken product and a red
  * build for one teaches people to ignore red builds.
  *
- * The cost of that design is that the suites cannot tell you they stopped running. CI pins Node 22,
- * where node:sqlite needs `--experimental-sqlite`, and .github/workflows/ci.yml did not pass it. So
- * the restore rehearsal - the single best piece of recovery evidence in this repository - skipped on
- * every CI run and reported green. Nobody was lying; the report was just about nothing.
+ * The cost of that design is that the suites cannot tell you they stopped running: a future Node pin
+ * below 22.13 (where node:sqlite still needs `--experimental-sqlite`), a removed flag, or a broken
+ * engine would all turn the restore rehearsal into a silent skip with a green build.
+ *
+ * A CORRECTION: this header first claimed that had ALREADY happened - that ci.yml omitted the flag
+ * and the DR suites had skipped on every CI run. It had not. CI resolves Node 22 to 22.23.2, where the
+ * flag is unnecessary, and the pre-flag CI log (run 34401383280) shows the rehearsal executing as
+ * `ok`. The claim was inferred from the mechanism rather than checked against the outcome. This file
+ * is a FORWARD GUARD, not the fix for a present failure, and it has not found one.
  *
  * A SKIP IS NOT A PASS, AND THIS IS THE ONE PLACE THAT SAYS SO OUT LOUD. It runs the three suites and
  * fails if any of them executed zero tests, so the evidence pipeline has to be genuinely armed rather

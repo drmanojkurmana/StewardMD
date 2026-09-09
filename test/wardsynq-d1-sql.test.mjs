@@ -15,15 +15,20 @@
  * that does not behave as the repository assumes) was equally invisible, and that is what this
  * closes: real schema, real SQLite, real constraint violations, real rows back.
  *
- * node:sqlite is Node's own (no dependency). It needs --experimental-sqlite on Node 22 (it is
- * unflagged from 23.4). If it is ever unavailable the test SKIPS with a reason rather than failing, so
- * this can never become a red build for an engine-availability reason.
+ * node:sqlite is Node's own (no dependency). It needed --experimental-sqlite on Node 22 below
+ * 22.13 and is unflagged from 22.13 / 23.4 onward. If it is ever unavailable the test SKIPS with a
+ * reason rather than failing, so this can never become a red build for an engine-availability reason.
+ * `npm test` passes the flag and so does .github/workflows/ci.yml.
  *
- * THAT SKIP IS ALSO HOW THIS SUITE QUIETLY STOPPED RUNNING IN CI. This comment used to claim that
- * ci.yml and `npm test` both passed the flag. `npm test` did; ci.yml did not, and CI pins Node 22 - so
- * on every CI run this file, wardsynq-restore and wardsynq-onprem skipped and reported green while
- * executing nothing. A test that cannot fail for an environment reason also cannot tell you it stopped
- * running, which is why test/check-dr-suites-ran.mjs now asserts that these suites actually executed.
+ * A CORRECTION LIVES HERE, because a wrong claim was briefly written into this exact comment. For one
+ * merge it stated that ci.yml did not pass the flag and that this suite, wardsynq-restore and
+ * wardsynq-onprem had therefore skipped on every CI run while reporting green. That was false: CI
+ * resolves `node-version: '22'` to 22.23.2, where node:sqlite needs no flag, and the CI log for
+ * f49ece3e (run 34401383280, before any flag was added) shows this file's tenancy test and the
+ * restore rehearsal executing as `ok`. The claim was inferred from the flag's absence plus the skip
+ * guard's existence, and the actual CI outcome was never checked - which is precisely the kind of
+ * inference this file's own header warns against. test/check-dr-suites-ran.mjs remains as a forward
+ * guard against a future Node pin or flag change; it is not evidence that anything was ever broken.
  */
 import { test } from "node:test";
 import assert from "node:assert/strict";
