@@ -6,7 +6,7 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import {
   openInvoice, postEvent, voidInvoice, reconciliationOf,
-  chargeTotal, balanceOf, creditBalanceOf, statusOf, paidIn, refundedOut,
+  chargeTotal, balanceOf, creditBalanceOf, statusOf, paidIn, refundedOut, receiptFor, receiptsFor,
 } from "../wardsynq/wardsynq-invoice.js";
 
 const LINES = [{ code: "CONSULT", display: "Consultation", quantity: 1, amount: 500, line: 500 }, { code: "CBC", display: "Complete blood count", quantity: 1, amount: 300, line: 300 }];
@@ -94,6 +94,23 @@ test("reconciliationOf: the full footing, every number traceable to a real ledge
   assert.equal(r.adjusted, 20);
   assert.equal(r.balance, 330);
   assert.equal(r.status, "open");
+});
+
+test("TASK 4.7: a receipt is a presentation of a real event, not new state - only money-movement kinds are receiptable", () => {
+  const inv = newInvoice();
+  postEvent(inv, "discount", { amount: 50, actorId: "a", at: "2026-09-09T09:00:00.000Z", reason: "x" });
+  postEvent(inv, "payment", { amount: 300, actorId: "cashier-1", at: "2026-09-09T09:05:00.000Z", reference: "TXN-1" });
+  const receipts = receiptsFor(inv);
+  assert.equal(receipts.length, 1, "the discount is not a receiptable event - nothing changed hands");
+  assert.equal(receipts[0].kind, "payment");
+  assert.equal(receipts[0].amount, 300);
+  assert.equal(receipts[0].reference, "TXN-1");
+  assert.equal(receipts[0].receiptNumber, `${inv.id}-2`, "the event's own stable position in the append-only ledger");
+
+  const same = receiptFor(inv, 2);
+  assert.deepEqual(same, receipts[0], "the same index always names the same event");
+  assert.equal(receiptFor(inv, 0), null, "the raise-event itself is not a receipt");
+  assert.equal(receiptFor(inv, 99), null, "an out-of-range index is not a receipt, never a guess");
 });
 
 test("a negative or zero amount is never a valid financial event", () => {

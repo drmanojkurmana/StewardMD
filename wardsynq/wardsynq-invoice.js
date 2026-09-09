@@ -146,9 +146,35 @@ function reconciliationOf(invoice) {
   };
 }
 
+/** Money actually changed hands for these - the only kinds worth a receipt. A discount or an
+ *  adjustment happened to the BILL, not to anyone's cash or card. */
+const RECEIPTABLE_KINDS = Object.freeze(["deposit", "payment", "refund"]);
+
+/**
+ * PURE. TASK 4.7: a receipt is a presentation of a real ledger event, never new state - the event
+ * already carries everything a receipt needs (kind/amount/actor/time/reference). The event's own
+ * position in the append-only array is its stable identity: events are never reordered or removed,
+ * so the same index always names the same event.
+ */
+function receiptFor(invoice, eventIndex) {
+  const idx = Number(eventIndex);
+  const ev = Number.isInteger(idx) ? (invoice.events || [])[idx] : null;
+  if (!ev || !RECEIPTABLE_KINDS.includes(ev.kind)) return null;
+  return {
+    receiptNumber: `${invoice.id}-${idx}`,
+    invoiceId: invoice.id, patientId: invoice.patientId, encounterId: invoice.encounterId,
+    kind: ev.kind, amount: ev.amount, currency: invoice.currency,
+    actorId: ev.actorId, at: ev.at, reason: ev.reason || null, reference: ev.reference || null,
+  };
+}
+/** PURE. Every receiptable event on this invoice, in order. */
+function receiptsFor(invoice) {
+  return (invoice.events || []).map((ev, idx) => (RECEIPTABLE_KINDS.includes(ev.kind) ? receiptFor(invoice, idx) : null)).filter(Boolean);
+}
+
 export {
-  STATES, EVENT_KINDS, REDUCES_BALANCE, INCREASES_BALANCE, REASON_REQUIRED,
+  STATES, EVENT_KINDS, REDUCES_BALANCE, INCREASES_BALANCE, REASON_REQUIRED, RECEIPTABLE_KINDS,
   InvoiceRefusalError, invoiceLine, openInvoice,
-  chargeTotal, balanceOf, creditBalanceOf, statusOf, paidIn, refundedOut,
+  chargeTotal, balanceOf, creditBalanceOf, statusOf, paidIn, refundedOut, receiptFor, receiptsFor,
   postEvent, voidInvoice, reconciliationOf,
 };

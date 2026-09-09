@@ -19,7 +19,7 @@ import { VersionConflictError } from "./repository.js";
 import { resolveClinicalActor } from "./actor.js";
 import { RecordService, isExternalRecord } from "./service.js";
 import { AuthError, PermissionError } from "../_connect/permission.js";
-import { openInvoice, postEvent, voidInvoice, reconciliationOf, InvoiceRefusalError } from "../../wardsynq/wardsynq-invoice.js";
+import { openInvoice, postEvent, voidInvoice, reconciliationOf, receiptFor, receiptsFor, InvoiceRefusalError } from "../../wardsynq/wardsynq-invoice.js";
 import { chargesForPatient } from "./charge-capture.js";
 
 const str = (v) => (v == null ? "" : String(v).trim());
@@ -46,7 +46,7 @@ function writeFailure(e, extra) {
   return { ok: false, status: 502, error: "record_write_failed", detail: str(e && e.message), ...extra };
 }
 function summary(inv) {
-  return { invoiceId: inv.id, patientId: inv.patientId, encounterId: inv.encounterId, currency: inv.currency, lines: inv.lines, events: inv.events, void: inv.void, voidReason: inv.voidReason, version: inv.version, ...reconciliationOf(inv) };
+  return { invoiceId: inv.id, patientId: inv.patientId, encounterId: inv.encounterId, currency: inv.currency, lines: inv.lines, events: inv.events, void: inv.void, voidReason: inv.voidReason, version: inv.version, receipts: receiptsFor(inv), ...reconciliationOf(inv) };
 }
 
 /** ctx: { migration, patientId, encounterId?, tariff?, at?, actorDeps, recordDeps } */
