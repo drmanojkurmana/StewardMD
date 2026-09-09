@@ -12,7 +12,7 @@ import assert from "node:assert/strict";
 import {
   CLAIM_STATE, PREAUTH_STATE, SUPPORT, BillingError,
   mayProceedClinically, supportFor, codeClaim, detectUpcoding,
-  submit, deny, resubmit, preAuthorisation, upcodingWatchlist,
+  submit, deny, resubmit, recordAdjudication, preAuthorisation, upcodingWatchlist,
 } from "../wardsynq/wardsynq-billing.js";
 
 const NOW = "2026-09-04T12:00:00.000Z";
@@ -206,6 +206,54 @@ test("an approved pre-auth still does not carry a clinical opinion", () => {
 test("a pre-auth needs a treatment and a state", () => {
   assert.throws(() => preAuthorisation({ patientId: "p", state: PREAUTH_STATE.APPROVED }), (e) => e.code === "NO_TREATMENT");
   assert.throws(() => preAuthorisation({ patientId: "p", treatment: "t", state: "maybe" }), (e) => e.code === "NO_STATE");
+});
+
+/* ------------------------------------------------------------------ TASK 4.8: TPA / claims fields */
+
+test("TASK 4.8: a claim carries the invoice it reconciles against, when the hospital raised one - a plain reference, never a computed match", () => {
+  const rec = record();
+  const withInvoice = codeClaim({ encounterId: "e", patientId: "p", record: rec, codes: ["E11.9"], codedBy: "c", now: NOW, invoiceId: "wsq-invoice-p-1" });
+  assert.equal(withInvoice.invoiceId, "wsq-invoice-p-1");
+  const withoutInvoice = codeClaim({ encounterId: "e", patientId: "p", record: rec, codes: ["E11.9"], codedBy: "c", now: NOW });
+  assert.equal(withoutInvoice.invoiceId, null, "a claim raised before any invoice exists is not forced to have one");
+});
+
+test("TASK 4.8: submitted/approved/denied amounts are plain caller-supplied numbers, never computed here", () => {
+  const rec = record();
+  const claim = codeClaim({ encounterId: "e", patientId: "p", record: rec, codes: ["E11.9"], codedBy: "c", now: NOW });
+  submit(claim, { by: "coder-1", now: NOW, submittedAmount: 15000 });
+  assert.equal(claim.submittedAmount, 15000);
+
+  const claim2 = codeClaim({ encounterId: "e2", patientId: "p", record: rec, codes: ["E11.9"], codedBy: "c", now: NOW });
+  submit(claim2, { by: "coder-1", now: NOW });
+  deny(claim2, { reason: "package exceeded", by: "payer", now: NOW, deniedAmount: 15000 });
+  assert.equal(claim2.deniedAmount, 15000);
+  assert.equal(claim2.denialReason, "package exceeded");
+});
+
+test("TASK 4.8: recordAdjudication - what the payer said it will pay, never a state transition of its own", () => {
+  const rec = record();
+  const claim = codeClaim({ encounterId: "e", patientId: "p", record: rec, codes: ["E11.9"], codedBy: "c", now: NOW });
+  submit(claim, { by: "coder-1", now: NOW, submittedAmount: 15000 });
+  assert.throws(() => recordAdjudication(claim, { by: "payer-1", now: NOW }), (e) => e.code === "NO_AMOUNT");
+  assert.throws(() => recordAdjudication(claim, { approvedAmount: 12000, now: NOW }), (e) => e.code === "NO_ACTOR");
+
+  const before = claim.state;
+  recordAdjudication(claim, { approvedAmount: 12000, deniedAmount: 3000, by: "payer-1", now: NOW, reason: "package cap applied" });
+  assert.equal(claim.approvedAmount, 12000);
+  assert.equal(claim.deniedAmount, 3000);
+  assert.equal(claim.state, before, "adjudication records an amount - it never moves the claim's own workflow state");
+  assert.match(claim.history[claim.history.length - 1].detail, /approved 12000/);
+  assert.match(claim.history[claim.history.length - 1].detail, /denied 3000/);
+});
+
+test("TASK 4.8: a pre-authorisation carries the invoice it reconciles against and the authorized amount, both plain caller-supplied data", () => {
+  const p = preAuthorisation({ patientId: "p", treatment: "PCI", state: PREAUTH_STATE.APPROVED, decidedAt: NOW, invoiceId: "wsq-invoice-p-1", authorizedAmount: 250000 });
+  assert.equal(p.invoiceId, "wsq-invoice-p-1");
+  assert.equal(p.authorizedAmount, 250000);
+  const bare = preAuthorisation({ patientId: "p", treatment: "PCI", state: PREAUTH_STATE.REQUESTED, decidedAt: NOW });
+  assert.equal(bare.invoiceId, null);
+  assert.equal(bare.authorizedAmount, null, "no amount authorized yet is null, never zero - zero would read as a payer decision that happened");
 });
 
 /* ------------------------------------------------------------------ the module writes nothing */
