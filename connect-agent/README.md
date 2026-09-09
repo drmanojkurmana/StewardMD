@@ -37,6 +37,8 @@ Before discovery, create a consent receipt with:
 
 The agent must refuse to run without a valid receipt and required scope. Consent does not authorize bypassing authentication, MFA, CAPTCHA, security controls or access outside the approved origin/scope.
 
+The receipt's `signature` is a server-owned HMAC-SHA256 over the receipt, keyed by `CONNECT_CONSENT_SIGNING_KEY` — not a checksum. `assertConsent()` verifies it and fails closed (throws) if the key is missing, the signature doesn't match, or `expiresAt` is present but not a parseable date. Set `CONNECT_CONSENT_SIGNING_KEY` wherever `createConsentReceipt`/`assertConsent` run in production; there is no unkeyed fallback.
+
 ## Camofox setup
 
 Run Camofox separately and point `CAMOFOX_URL` at its REST server. The default is `http://127.0.0.1:9377`; `CAMOFOX_ACCESS_KEY` is used only to authenticate to the Camofox service.
@@ -46,6 +48,8 @@ The browser service is intentionally external to the buildless StewardMD web app
 ## Controller
 
 `connect-agent/controller.mjs` is the fail-closed human gate. It validates the generated specification and writes an approval receipt containing a SHA-256 digest of the exact spec. A changed spec invalidates the approval.
+
+`validateAdapterSpec(spec, { schemaVersion })` defaults to `schemaVersion: 1` (legacy): any clinical word (medication, allergy, encounter, ...) anywhere in a path/queryKey blocks the event, read or not — kept as-is so old approvals don't silently change meaning. `schemaVersion: 2` (used by `adapter-pipeline.mjs` for freshly-discovered specs) separates action verbs (prescribe, order, delete, update, ...), which always block, from clinical-domain nouns, which only block on a non-safe HTTP method — so `GET /patients/1/medications` validates as the read it is.
 
 Approval means **approved for conformance**, not automatic production activation. Production registration must remain behind the existing Connect registry/conformance process.
 
@@ -64,6 +68,10 @@ node connect-agent/controller.mjs adapter-spec.json adapter-approval.json <appro
 `discoverAuthorizedEmr()` requires an explicit origin allowlist. It records requests observed inside the authorized EMR page and creates an interface map. It does not attempt to defeat authentication, MFA, CAPTCHAs, browser security controls, origin restrictions, or other access controls.
 
 The output is an interface map, not a production connector. Adapter generation, conformance and production enablement remain separate stages.
+
+Each recorded event carries the explicit request `origin` the browser observed, and its `path` has identifier-shaped segments (numeric ids, UUIDs, 24-hex ids, long opaque tokens) collapsed to `{id}` — a patient/record id can live in the path even when no query value is stored, and origin is verified per-event rather than assumed from the first allowed origin.
+
+**Known limitation, unchanged by this pass:** the injected observer only captures same-origin `fetch`/`XHR` issued after it runs, and only after the tab's first navigation — no coverage of other frames, workers, or requests already in flight, and no capture across a second approved API origin. Expanding capture to genuinely multi-origin, cross-navigation observation is tracked separately; today's per-event `origin` field is honest about what it saw, not proof of broader coverage.
 
 ## Production checklist
 

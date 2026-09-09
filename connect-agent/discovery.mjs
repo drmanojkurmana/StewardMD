@@ -21,7 +21,7 @@ const OBSERVER = `(() => {
   const record = (method, input, status, contentType, responseShape) => {
     const url = safeUrl(input);
     if (!url || url.origin !== location.origin) return;
-    events.push({ method: String(method || 'GET').toUpperCase(), path: url.pathname,
+    events.push({ method: String(method || 'GET').toUpperCase(), path: url.pathname, origin: url.origin,
       queryKeys: [...url.searchParams.keys()].filter(k => !/${SENSITIVE.source}|key|id/i.test(k)).slice(0, 50),
       status: Number(status || 0), contentType: String(contentType || '').slice(0, 100), responseShape: responseShape || null });
     if (events.length > 500) events.splice(0, events.length - 500);
@@ -52,12 +52,25 @@ const OBSERVER = `(() => {
 const ALLOWED_METHODS = new Set(['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'HEAD']);
 function originOf(value) { return new URL(value).origin; }
 
+// A path segment shaped like an identifier (numeric id, UUID, Mongo-style 24-hex, or a long opaque
+// token) can itself be a patient/record identifier even though no query value was ever stored.
+// Collapse it to a typed placeholder rather than persisting it verbatim.
+const ID_SEGMENT = /^(?:\d+|[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}|[0-9a-f]{24}|[A-Za-z0-9_-]{16,})$/i;
+function redactPath(pathname) {
+  return String(pathname || '/').split('/').map(seg => (seg && ID_SEGMENT.test(seg) ? '{id}' : seg)).join('/');
+}
+
 function normalizeEvents(raw, allowedOrigins) {
   const origins = new Set(allowedOrigins.map(originOf));
   return (Array.isArray(raw) ? raw : []).filter(e => {
+    // Prefer the origin the browser observed directly on the request; only fall back to resolving
+    // the (possibly relative) path against the first allowed origin for older artifacts that never
+    // recorded one. That fallback is unreliable across multi-origin deployments, so it is legacy-only.
+    if (e && typeof e.origin === 'string') { try { return origins.has(new URL(e.origin).origin); } catch { return false; } }
     try { return origins.has(new URL(e.path, allowedOrigins[0]).origin); } catch { return false; }
   }).map(e => ({
-    method: String(e.method || 'GET').toUpperCase(), path: String(e.path || '/'),
+    method: String(e.method || 'GET').toUpperCase(), path: redactPath(e.path),
+    origin: typeof e.origin === 'string' ? originOf(e.origin) : allowedOrigins[0],
     queryKeys: Array.isArray(e.queryKeys) ? e.queryKeys.filter(k => !SENSITIVE.test(String(k))).slice(0, 50) : [],
     status: Number(e.status || 0), contentType: String(e.contentType || '').slice(0, 100), responseShape: e.responseShape || null,
   })).filter(e => ALLOWED_METHODS.has(e.method));
