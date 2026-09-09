@@ -66,9 +66,14 @@ export function org(o = {}) {
 function wardsynqConfig(w) {
   if (!w || typeof w !== "object" || Array.isArray(w)) return null;
   const pick = {};
+  // dicom joined 2026-09-09 (TASK 7.7): the hospital's own order-code to DICOM modality map. It is
+  // hospital-owned clinical content for the same reason the rest of this list is - only this
+  // hospital knows that its order code "CT-ABDO" means a CT scanner - and functions/_wardsynq/dicom.js
+  // refuses to guess a modality from an order's words, so an unlisted key here means the worklist
+  // goes out without a modality rather than with an invented one.
   // deltaLimits and autoVerify joined 2026-09-07. Both are clinical content the HOSPITAL owns: what
   // counts as an implausible change in an analyte, and which analytes may be released unread.
-  for (const k of ["criticalLimits", "criticalEscalation", "marTimes", "marGraceMinutes", "beds", "highAlertDrugs", "orderSets", "noteTemplates", "riskTools", "utcOffsetMinutes", "deltaLimits", "autoVerify", "formulary", "requireReasonOffFormulary", "advisories", "registries", "resources", "flowsheetRows", "neverRelease", "rpoMinutes", "tariff", "reorderLevels", "mpiThresholds", "transmitEndpoints", "patientAccess", "fhir", "terminology", "hl7", "chartCompletion"]) {
+  for (const k of ["criticalLimits", "criticalEscalation", "marTimes", "marGraceMinutes", "beds", "highAlertDrugs", "orderSets", "noteTemplates", "riskTools", "utcOffsetMinutes", "deltaLimits", "autoVerify", "formulary", "requireReasonOffFormulary", "advisories", "registries", "resources", "flowsheetRows", "neverRelease", "rpoMinutes", "tariff", "reorderLevels", "mpiThresholds", "transmitEndpoints", "patientAccess", "fhir", "terminology", "hl7", "chartCompletion", "dicom"]) {
     if (w[k] !== undefined && w[k] !== null) pick[k] = w[k];
   }
   return Object.keys(pick).length ? pick : null;

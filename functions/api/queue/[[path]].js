@@ -136,6 +136,7 @@ import { orderInvestigation } from "../../_wardsynq/ward-order.js";
 import { chartInfusion, listInfusions } from "../../_wardsynq/infusion.js";
 import { reportImaging } from "../../_wardsynq/radiology-report.js";
 import { protocolContext, recordProtocol } from "../../_wardsynq/radiology-protocol.js";
+import { imagingWorklist } from "../../_wardsynq/dicom.js";
 import { checkAdvisories } from "../../_wardsynq/advisory-authoring.js";
 import { cdaForEncounter } from "../../_wardsynq/cda.js";
 import { news2ForPatient } from "../../_wardsynq/news2-view.js";
@@ -729,6 +730,16 @@ export async function onRequest(context) {
         /* Protocolling is the radiology department's own act, the same authority that reports the
          * study. It decides whether contrast is given, so it is emphatically not the ward's. */
         "protocol-context": CAPS.LAB_RESULT, "protocol-set": CAPS.LAB_RESULT,
+        /* TASK 7.7: the modality worklist - what the scanner is being asked to do today.
+         *
+         * emr.view, NOT lab.result, and the reason matters. A worklist item is patient demographics
+         * (name, id, date of birth, sex) beside a requested procedure, and emr.view is exactly the
+         * capability that already reads those. lab.result would have looked stricter and been
+         * broken: the laboratory grant deliberately cannot read Patient at all ("and never reads the
+         * chart", pinned in the role-mapping test), and a worklist with no identity on it is worse
+         * than no worklist. Widening the lab grant to make this work would have overturned a
+         * considered boundary for the convenience of one feature, so it was not done. */
+        "imaging-worklist": CAPS.EMR_VIEW,
         // Charting a pump is the bedside's act, exactly like giving a dose.
         infusion: CAPS.MED_ADMINISTER, infusions: CAPS.EMR_VIEW,
         // Charting a wound is nursing work, the same authority as a vital or a fluid entry.
@@ -1668,6 +1679,10 @@ export async function onRequest(context) {
       }
       if (sub === "wounds" && method === "GET") {
         const r = await listWounds(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "" });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "imaging-worklist" && method === "GET") {
+        const r = await imagingWorklist(request, env, { ...deps, config: (wsqCfg && wsqCfg.dicom) || null, patientId: url.searchParams.get("patientId") || "" });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "report-imaging" && method === "POST") {

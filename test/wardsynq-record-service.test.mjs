@@ -423,7 +423,7 @@ test("system-of-record mode still protects feed-owned records (a LIS result is c
   assert.equal((await pc.session("pat-12").put({ ...p, name: "Native 2" })).version, 2);
 });
 
-test("SCCM adapter: stable ids, provenance stamped, nothing invented, imaging reported not dropped silently", () => {
+test("SCCM adapter: stable ids, provenance stamped, nothing invented, imaging now MAPPED rather than dropped", () => {
   const b = sccmBundle({ sourceConnector: "dicomweb", patient: sccmPatient({ id: "P/1" }), imagingStudies: [{ id: "S1", modality: "CT" }] });
   const m = mapSccmBundle(b);
   assert.equal(m.patient.id, "dicomweb-pat-p-1");
@@ -431,7 +431,16 @@ test("SCCM adapter: stable ids, provenance stamped, nothing invented, imaging re
   assert.equal(m.patient.dobIsUnknown, true);
   assert.equal(m.patient.nameIsUnknown, true);
   assert.equal(m.patient.meta.source.system, "dicomweb");
-  assert.deepEqual(m.issues.map((i) => i.code), ["SCCM_PATIENT_NO_MRN", "SCCM_PATIENT_NO_NAME", "SCCM_PATIENT_NO_DOB", "SCCM_IMAGING_NOT_MAPPED"]);
+  /* TASK 7.7 changed this line, and the change is the point: this assertion used to end in
+   * SCCM_IMAGING_NOT_MAPPED, an issue that said "this study has no WardSynQ resource and was not
+   * written". It now has one. The full inbound path is proven in test/wardsynq-dicom-imaging.test.mjs
+   * against a real DICOMweb server. */
+  assert.deepEqual(m.issues.map((i) => i.code), ["SCCM_PATIENT_NO_MRN", "SCCM_PATIENT_NO_NAME", "SCCM_PATIENT_NO_DOB"]);
+  const study = m.entities.find((e) => e.resourceType === "ImagingStudy");
+  assert.ok(study, "the study is an entity now");
+  assert.equal(study.id, "dicomweb-img-s1");
+  assert.equal(study.modality, "CT");
+  assert.equal(study.serviceRequestId, null, "no order in this bundle, so no order link is invented");
   assert.equal(mapSccmBundle(b).patient.id, m.patient.id, "same source, same id");
   assert.equal(sccmAdapter().claims({ sccmVersion: "1.0", patient: { id: "x" } }), true);
   assert.equal(sccmAdapter().claims({ patientId: 1, labs: [] }), false, "a GHIS bundle is not claimed");

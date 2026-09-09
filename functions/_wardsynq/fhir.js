@@ -512,6 +512,46 @@ function fhirCarePlan(p) {
   });
 }
 
+/* R4 ImagingStudy.status. WardSynQ carries the same three words, so this is a check rather than a
+ * translation: a status this file does not recognise renders as "unknown", never as "available". */
+const IMAGING_STATUS = Object.freeze({ available: "available", registered: "registered", cancelled: "cancelled", "entered-in-error": "entered-in-error" });
+
+/**
+ * TASK 7.7. An ImagingStudy, metadata only.
+ *
+ * NO ENDPOINT, NO INSTANCE, NO URL - and that is the point rather than an omission. R4's
+ * ImagingStudy.endpoint and .series.instance exist to point a viewer at pixel data, and WardSynQ
+ * holds none: the record says a scan exists, what it is, and the accession number that finds it in
+ * the PACS. `basedOn` carries the order it answers, which is the fact a receiving system actually
+ * needs to file it against the right request.
+ */
+function fhirImagingStudy(s) {
+  const modality = str(s.modality);
+  return clean({
+    resourceType: "ImagingStudy", id: fhirId(s.id),
+    status: IMAGING_STATUS[str(s.status)] || "unknown",
+    // The StudyInstanceUID under its own DICOM URN system, which is how a PACS recognises it.
+    identifier: [
+      str(s.studyUid) ? { system: "urn:dicom:uid", value: `urn:oid:${str(s.studyUid)}` } : null,
+      str(s.accessionNumber) ? { type: { coding: [{ system: "http://terminology.hl7.org/CodeSystem/v2-0203", code: "ACSN" }] }, value: str(s.accessionNumber) } : null,
+    ].filter(Boolean),
+    subject: ref("Patient", s.patientId),
+    encounter: ref("Encounter", s.encounterId),
+    basedOn: s.serviceRequestId ? [ref("ServiceRequest", s.serviceRequestId)] : undefined,
+    started: str(s.started) || undefined,
+    // The source's own modality string, under DICOM's own code system. Never re-coded to another.
+    modality: modality ? [{ system: "http://dicom.nema.org/resources/ontology/DCM", code: modality }] : undefined,
+    numberOfSeries: Number.isFinite(Number(s.seriesCount)) && s.seriesCount != null ? Number(s.seriesCount) : undefined,
+    numberOfInstances: Number.isFinite(Number(s.instanceCount)) && s.instanceCount != null ? Number(s.instanceCount) : undefined,
+    description: str(s.description) || undefined,
+    /* bodySite is NOT exported. R4 carries it on ImagingStudy.series.bodySite - a series this record
+     * does not model - and the study-level field that would take it, procedureCode, means the
+     * PROCEDURE performed, not the part examined. Rendering DICOM's BodyPartExamined there would be
+     * a receiving system reading a body part as a procedure code. It stays on the WardSynQ row,
+     * where it is true, rather than being exported into a field that means something else. */
+  });
+}
+
 /* NOT DONE, stated honestly rather than half-wired: RelatedPerson/FamilyLink export. FamilyLink
  * (functions/_wardsynq/migrate-maternity.js) relates TWO WardSynQ Patients (mother, newborn) -
  * which FHIR itself would model as Patient.link (R4's own "this record and that one refer to
@@ -541,6 +581,7 @@ const MAPPERS = Object.freeze({
   SpecimenCollection: fhirSpecimen,
   MedicationDispense: fhirMedicationDispense,
   CarePlan: fhirCarePlan,
+  ImagingStudy: fhirImagingStudy,
 });
 
 /** Our type name to the FHIR one it renders as. */
@@ -550,7 +591,7 @@ const FHIR_TYPE = Object.freeze({
   MedicationOrder: "MedicationRequest", MedicationAdministration: "MedicationAdministration",
   ServiceRequest: "ServiceRequest", DiagnosticReport: "DiagnosticReport", ClinicalNote: "DocumentReference",
   PatientConsent: "Consent", SpecimenCollection: "Specimen", MedicationDispense: "MedicationDispense",
-  CarePlan: "CarePlan",
+  CarePlan: "CarePlan", ImagingStudy: "ImagingStudy",
 });
 /** And back, so a caller can ask for the FHIR name. */
 const CANONICAL_TYPE = Object.freeze(Object.fromEntries(Object.entries(FHIR_TYPE).map(([k, v]) => [v, k])));
@@ -1117,7 +1158,7 @@ export {
   systemUriFor, codeable, identifier, withMeta, toFhir, bundle, capabilityStatement, operationOutcome,
   fhirPatient, fhirEncounter, fhirCondition, fhirAllergy, fhirObservation,
   fhirMedicationRequest, fhirMedicationAdministration, fhirServiceRequest,
-  fhirDiagnosticReport, fhirDocumentReference, fhirConsent, fhirProvenance, parseProvenanceId, compartmentOf, parseEverything, resolveId, fenced,
+  fhirDiagnosticReport, fhirDocumentReference, fhirConsent, fhirProvenance, fhirImagingStudy, parseProvenanceId, compartmentOf, parseEverything, resolveId, fenced,
   patientEverything, readResource, searchType, historyOf, vread, provenanceRead, provenanceSearch,
   validateFully, validateOperation, validateCodeOperation,
 };

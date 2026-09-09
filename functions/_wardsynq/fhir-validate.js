@@ -89,6 +89,7 @@ const VS = Object.freeze({
   docStatus: "current|superseded|entered-in-error",
   compStatus: "preliminary|final|amended|entered-in-error",
   carePlanStatus: "draft|active|on-hold|revoked|completed|entered-in-error|unknown",
+  imagingStudyStatus: "registered|available|cancelled|entered-in-error|unknown",
   carePlanIntent: "proposal|plan|order|option",
   carePlanActivityStatus: "not-started|scheduled|in-progress|on-hold|completed|cancelled|stopped|unknown|entered-in-error",
   relatesTo: "replaces|transforms|signs|appends",
@@ -266,6 +267,17 @@ const RESOURCES = Object.freeze({
         "scheduled[x]": { scheduledTiming: "Timing", scheduledPeriod: "Period", scheduledString: "string" }, location: "Reference(Location)", "performer[]": "Reference(Practitioner|PractitionerRole|Organization|RelatedPerson|Patient|CareTeam|Device)",
         "product[x]": { productCodeableConcept: "CodeableConcept", productReference: "Reference(Medication|Substance)" }, dailyAmount: "Quantity", quantity: "Quantity", description: "string" } },
     "note[]": "Annotation" },
+  /* TASK 7.7. The R4 shape, with `endpoint` and `series` present in the definition but never
+   * produced by this server: WardSynQ holds no pixel data and no retrieve URL, so a study exported
+   * from here carries identity, status, subject, the order it answers and counts - nothing that
+   * points at an image. */
+  ImagingStudy: { ...DOMAIN, "identifier[]": "Identifier", "status!": `code:${VS.imagingStudyStatus}`, "modality[]": "Coding",
+    "subject!": "Reference(Patient|Device|Group)", encounter: "Reference(Encounter)", started: "dateTime",
+    "basedOn[]": "Reference(CarePlan|ServiceRequest|Appointment|AppointmentResponse|Task)", referrer: "Reference(Practitioner|PractitionerRole)",
+    "interpreter[]": "Reference(Practitioner|PractitionerRole)", "endpoint[]": "Reference(Endpoint)",
+    numberOfSeries: "unsignedInt", numberOfInstances: "unsignedInt", procedureReference: "Reference(Procedure)", "procedureCode[]": "CodeableConcept",
+    location: "Reference(Location)", "reasonCode[]": "CodeableConcept", "reasonReference[]": "Reference(Condition|Observation|Media|DiagnosticReport|DocumentReference)",
+    "note[]": "Annotation", description: "string" },
   DocumentReference: { ...DOMAIN, masterIdentifier: "Identifier", "identifier[]": "Identifier", "status!": `code:${VS.docStatus}`, docStatus: `code:${VS.compStatus}`, type: "CodeableConcept", "category[]": "CodeableConcept",
     subject: "Reference(Patient|Practitioner|Group|Device)", date: "instant", "author[]": "Reference", authenticator: "Reference(Practitioner|PractitionerRole|Organization)", custodian: "Reference(Organization)",
     "relatesTo[]": { ...BACKBONE, "code!": `code:${VS.relatesTo}`, "target!": "Reference(DocumentReference)" }, description: "string", "securityLabel[]": "CodeableConcept",

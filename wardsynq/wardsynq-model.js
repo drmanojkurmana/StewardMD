@@ -303,6 +303,42 @@ function DiagnosticReport(input) {
   };
 }
 
+/**
+ * ImagingStudy: that a study EXISTS in a PACS, and what it is. TASK 7.7.
+ *
+ * METADATA ONLY, and that is a decision rather than an omission. There is no url, no binary, no
+ * instance list and no pixel data anywhere in this record: WardSynQ is a clinician's phone talking
+ * to an API that has no object storage, and a field holding a retrieve URL would become the thing
+ * every viewer, cache and log copies a patient's images through. What a clinician needs from the
+ * chart is that the scan happened, when, of what, and the accession number that finds it in the
+ * PACS viewer they already have. That is what this carries.
+ *
+ * `serviceRequestId` is the point of the whole thing: the imaging ORDER this study answers, matched
+ * on the accession number the order and the study share. Without it a chart shows a request with no
+ * scan and a scan belonging to nobody's request.
+ */
+function ImagingStudy(input) {
+  input = input || {};
+  return {
+    resourceType: "ImagingStudy",
+    id: input.id || localId("img"),
+    patientId: requireString(input.patientId, "ImagingStudy.patientId"),
+    encounterId: input.encounterId || null,
+    serviceRequestId: input.serviceRequestId || null,
+    // The PACS's own identifiers. `studyUid` is the StudyInstanceUID as a plain string, never a URL.
+    studyUid: input.studyUid || null,
+    accessionNumber: input.accessionNumber || null,
+    modality: input.modality || null,           // as the source wrote it; never mapped to another vocabulary
+    bodySite: input.bodySite || null,
+    description: input.description || null,
+    started: input.started || null,
+    seriesCount: Number.isFinite(Number(input.seriesCount)) ? Number(input.seriesCount) : null,
+    instanceCount: Number.isFinite(Number(input.instanceCount)) ? Number(input.instanceCount) : null,
+    status: input.status || "available",        // available | registered | cancelled | entered-in-error
+    meta: makeMeta(input),
+  };
+}
+
 /** CarePlan: goal-directed plan of care spanning an encounter or condition. */
 function CarePlan(input) {
   input = input || {};
@@ -348,6 +384,7 @@ export {
   MedicationAdministration,
   ServiceRequest,
   DiagnosticReport,
+  ImagingStudy,
   CarePlan,
   ClinicalNote,
 };

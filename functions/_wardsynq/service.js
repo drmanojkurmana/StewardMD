@@ -194,6 +194,14 @@ const RESOURCE_TYPES = Object.freeze([
    * against the request VERSION, so a later change to the request cannot make it look as though the
    * protocol was decided for a study nobody protocolled. */
   "ImagingProtocol",
+  /* TASK 7.7: that a study EXISTS in a PACS, and what it is. Metadata only and deliberately so -
+   * there is no url, no instance list and no pixel data on the row, because a field holding a
+   * retrieve URL becomes the thing every viewer, cache and log copies a patient's images through.
+   * What the chart needs is that the scan happened, when, of what, and the accession number that
+   * finds it in the viewer the radiologist already has. Its value is the ORDER LINK: matched to the
+   * ServiceRequest sharing its accession number, so a request and its scan stop being two unrelated
+   * rows. Before this, imaging studies reaching the SCCM adapter were counted and DROPPED. */
+  "ImagingStudy",
   /* Something another system sent that WardSynQ would not write silently: a patient who might be
    * one of two people here, a probable duplicate, a record that would overwrite one this hospital
    * authored, a resource type nothing maps. Held HERE, with the payload, rather than dropped or
