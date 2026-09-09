@@ -116,6 +116,7 @@ import { encounterIdForTicket } from "../../_wardsynq/opd-identity.js";
  * clinical acts is how the wrong one gets called. */
 import { queueTransmission, recordOutcome, resolveTransmission, listTransmissions, sendQueued } from "../../_wardsynq/prescription-transmit.js";
 import { submitNote, signNote, listAwaitingCoSign } from "../../_wardsynq/note-cosign.js";
+import { chartCompletionQueue } from "../../_wardsynq/chart-completion.js";
 import { downtimePack } from "../../_wardsynq/downtime.js";
 import { qualityReport } from "../../_wardsynq/quality.js";
 import { collectSpecimen, specimenOutcome, collectionList } from "../../_wardsynq/specimen.js";
@@ -658,6 +659,7 @@ export async function onRequest(context) {
         /* Signing and co-signing are the same act and the same capability: what separates them is
          * the actor's registration, which the store checks, not a capability a hospital can grant. */
         "note-submit": CAPS.EMR_TREAT, "note-sign": CAPS.EMR_TREAT, "cosign-queue": CAPS.EMR_VIEW,
+        "completion-queue": CAPS.EMR_VIEW,
         /* The downtime pack is the whole ward's chart on one sheet, so it needs the authority to read
          * a chart - not the lower bar that opens the bed list. It writes nothing. */
         downtime: CAPS.EMR_VIEW,
@@ -1600,6 +1602,15 @@ export async function onRequest(context) {
       }
       if (sub === "cosign-queue" && method === "GET") {
         const r = await listAwaitingCoSign(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "" });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "completion-queue" && method === "GET") {
+        const r = await chartCompletionQueue(request, env, {
+          ...deps, patientId: url.searchParams.get("patientId") || "",
+          rules: (wsqCfg && wsqCfg.chartCompletion) || null,
+          criticalPolicy: (wsqCfg && wsqCfg.criticalEscalation) || null,
+          riskTools: (wsqCfg && wsqCfg.riskTools) || [],
+        });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "care-plan" && method === "POST") {
