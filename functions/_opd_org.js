@@ -108,7 +108,11 @@ export function room(o = {}) {
 // enough that inserting them later is a data change, not a schema migration. A ward is a distinct
 // unit from a `department` (department is a SERVICE - "Laboratory"; ward is a PLACE - "Medical A") so
 // this does not fold into department, matching the plan's own Enterprise->...->Ward->Bed distinction. */
-export const BED_STATES = Object.freeze(["available", "occupied", "blocked", "cleaning", "maintenance"]);
+// "reserved" joined 2026-09-09 (TASK 4.3) - holding a bed for an incoming admission is a real,
+// named requirement distinct from "assignment" (occupied happens once the patient is actually
+// there). A reserved bed is not available (admission's own bed_not_available refusal already
+// applies to it, unchanged) and is never inferred - only a human reserving it sets this state.
+export const BED_STATES = Object.freeze(["available", "reserved", "occupied", "blocked", "cleaning", "maintenance"]);
 export function ward(o = {}) {
   requireId(o);
   return { id: s(o.id), orgId: s(o.orgId), departmentId: orNull(o.departmentId), name: s(o.name), code: s(o.code), type: s(o.type) || "general", active: o.active !== false };

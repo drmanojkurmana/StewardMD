@@ -177,6 +177,7 @@
       // patient (criticalsCard), read here with no patientId so anyone covering the ward or the lab
       // can see every open critical loop at once, not just the one chart they happen to have open.
       '<button class="w-btn ghost" data-w-act="critsboard" title="Every open critical result, hospital-wide">' + ms("priority_high") + "Critical results</button>" +
+      '<button class="w-btn ghost" data-w-act="bedmgmt" title="Reserve, block for maintenance, clean-before-reuse - real bed states, server-checked">' + ms("bed") + "Bed management</button>" +
       // Reachable BEFORE an outage, which is the only time it can be taken. A pack you can only get
       // to while the system is up is a pack the ward has to remember to take while the system is up.
       '<button class="w-btn ghost" data-w-act="downtime" title="Printable sheet for when the system is unavailable">' + ms("print") + "Downtime pack</button></div>" +
@@ -1580,6 +1581,40 @@
       "</div>";
   }
 
+  /* TASK 4.3: the bed-management workstation. Bed STATE lives in the real master record TASK 4.1
+   * built (_opd_org.js's bed()), never inferred from an Encounter - occupied happens automatically
+   * on admit/transfer/discharge (TASK 4.2); this screen is for the OTHER transitions a ward
+   * actually manages by hand: reserving a bed ahead of an arrival, blocking one for maintenance,
+   * and the clean-before-reuse turnover. No client-side state machine: every option is offered,
+   * the server's own bed:update route (TASK 4.3's CAS) is the only thing that can refuse one. */
+  var BED_STATE_WORDS = { available: "Available", reserved: "Reserved", occupied: "Occupied", blocked: "Blocked", cleaning: "Cleaning", maintenance: "Maintenance" };
+  function bedBoardMgmtView(state) {
+    var bm = state.bedMgmt || {};
+    var wards = bm.wards || [];
+    var wardRows = wards.map(function (w) {
+      var beds = (bm.bedsByWard && bm.bedsByWard[w.id]) || [];
+      var bedRows = beds.map(function (b) {
+        var opts = Object.keys(BED_STATE_WORDS).map(function (s) {
+          return '<option value="' + s + '"' + (s === b.state ? " selected" : "") + ">" + BED_STATE_WORDS[s] + "</option>";
+        }).join("");
+        return '<li class="w-bedrow"><span class="w-st ' + esc(b.state) + '">' + esc(BED_STATE_WORDS[b.state] || b.state) + "</span>" +
+          "<b>" + esc(b.name) + "</b>" +
+          (b.genderRestriction ? '<span class="w-tag">' + esc(b.genderRestriction) + " only</span>" : "") +
+          (b.isolation ? '<span class="w-tag warn">isolation</span>' : "") +
+          (b.active === false ? '<span class="w-tag warn">retired</span>' : "") +
+          '<select data-bed-state="' + esc(b.id) + '">' + opts + "</select>" +
+          '<button class="w-btn ghost tiny" data-w-act="bedstate:' + esc(b.id) + '">' + ms("check") + "Apply</button></li>";
+      }).join("");
+      return '<div class="w-card"><div class="w-card-h">' + ms("bed") + "<h3>" + esc(w.name) + (w.active === false ? " (retired)" : "") + "</h3></div>" +
+        (bedRows ? '<ul class="w-mini">' + bedRows + "</ul>" : '<p class="w-empty">No beds recorded for this ward.</p>') + "</div>";
+    }).join("");
+    return '<div class="w-chart-h"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button>" +
+      "<div><b>Bed management</b><small>hospital-wide</small></div>" +
+      '<button class="w-ic" data-w-act="bedmgmtload" title="Refresh">' + ms("refresh") + "</button></div>" +
+      (bm.conflict ? '<p class="w-hint warn">' + ms("warning") + "This bed changed under you. Reloaded - check the state before applying again." + "</p>" : "") +
+      (wardRows || '<p class="w-empty">' + (bm.loaded ? "No wards are recorded for this hospital yet." : "Loading&hellip;") + "</p>");
+  }
+
   /* TASK 3.5: the blood bank workstation. wardsynq-transfusion.js (HAZ-BLD-01) already enforces
    * everything hazardous here - ABO/RhD compatibility, a crossmatch bound to one patient, and a
    * two-person bedside check that re-derives compatibility from the physical unit rather than the
@@ -1860,6 +1895,7 @@
         : state.view === "pharmacy" ? pharmacyView(state)
         : state.view === "transfusion" ? transfusionView(state)
         : state.view === "critsboard" ? critsBoardView(state)
+        : state.view === "bedmgmt" ? bedBoardMgmtView(state)
         : listView(state)) + "</div></div>";
   }
 
@@ -2561,6 +2597,40 @@
       .then(function (r) { if (settle(r, "Acknowledged.")) loadCritsBoard(); else paint(); })
       .catch(function () { st.busy = false; st.err = "Could not record the acknowledgement."; paint(); });
   }
+  function bedMgmtOpen() {
+    st.view = "bedmgmt"; st.bedMgmt = {}; paint(); loadBedMgmt();
+  }
+  function loadBedMgmt() {
+    if (!st.bedMgmt) st.bedMgmt = {};
+    return Promise.all([
+      apiGet("/wards?orgId=" + encodeURIComponent(st.orgId)),
+      apiGet("/beds?orgId=" + encodeURIComponent(st.orgId)),
+    ]).then(function (r) {
+      var wr = r[0], br = r[1];
+      var byWard = {};
+      ((br && br.beds) || []).forEach(function (b) { (byWard[b.wardId] = byWard[b.wardId] || []).push(b); });
+      st.bedMgmt.wards = (wr && wr.wards) || [];
+      st.bedMgmt.bedsByWard = byWard;
+      st.bedMgmt.loaded = true;
+      paint();
+    }).catch(function () { st.bedMgmt.loaded = true; paint(); });
+  }
+  function bedStateApply(bedId) {
+    var sel = document.querySelector('[data-bed-state="' + bedId + '"]');
+    var state = sel ? sel.value : "";
+    if (!state) return;
+    st.bedMgmt.conflict = false; st.busy = true; paint();
+    apiPost("/bed/update", { orgId: st.orgId, bedId: bedId, state: state })
+      .then(function (r) {
+        st.busy = false;
+        if (r && r.ok) { loadBedMgmt(); return; }
+        // TASK 4.3: server-side concurrency. Another change landed first - reload the real state
+        // rather than letting this screen keep showing what was true a moment ago.
+        if (r && r.error === "bed_changed") { st.bedMgmt.conflict = true; loadBedMgmt(); return; }
+        st.err = (r && r.message) || "Could not update that bed."; paint();
+      })
+      .catch(function () { st.busy = false; st.err = "Could not reach the server."; paint(); });
+  }
   function loadInventory() {
     if (!st.inventory) st.inventory = {};
     return apiGet("/ward/stock?orgId=" + encodeURIComponent(st.orgId))
@@ -3187,6 +3257,7 @@
       if (st.view === "transfusion") { st.view = "chart"; st.transfusion = null; paint(); return; }
       if (st.view === "inventory") { st.inventory = null; st.view = "list"; paint(); return; }
       if (st.view === "critsboard") { st.critsBoard = []; st.view = "list"; paint(); return; }
+      if (st.view === "bedmgmt") { st.bedMgmt = {}; st.view = "list"; paint(); return; }
       // Picking a bed to admit an ED patient opens the SAME bed board a fresh admission uses;
       // backing out of it returns to that patient's ED chart, not the ward list, and drops the
       // pending admit rather than leaving it to fire on some later, unrelated bed pick.
@@ -3245,6 +3316,9 @@
     if (cmd === "critsboard") { critsBoardOpen(); return; }
     if (cmd === "critsboardload") { loadCritsBoard(); return; }
     if (cmd === "ackboard") { acknowledgeBoard(arg); return; }
+    if (cmd === "bedmgmt") { bedMgmtOpen(); return; }
+    if (cmd === "bedmgmtload") { loadBedMgmt(); return; }
+    if (cmd === "bedstate") { bedStateApply(arg); return; }
     if (cmd === "stockreceive") { stockReceive(); return; }
     if (cmd === "stockadjust") { stockAdjustOrWaste("adjustment"); return; }
     if (cmd === "stockwaste") { stockAdjustOrWaste("wastage"); return; }

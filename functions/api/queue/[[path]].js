@@ -2159,7 +2159,14 @@ export async function onRequest(context) {
       if (seg === "ward" && !sub) { const az = await azOrg(CAPS.STAFF_ADMIN); if (!az.ok) return deny(az); return json({ ok: true, ward: await ORG.createWard(env, body.orgId, body, actor.id) }, 200, request); }
       if (seg === "ward" && sub === "update") { const az = await azOrg(CAPS.STAFF_ADMIN); if (!az.ok) return deny(az); return json({ ok: true, ward: await ORG.updateWard(env, body.wardId, body, actor.id) }, 200, request); }
       if (seg === "bed" && !sub) { const az = await azOrg(CAPS.STAFF_ADMIN); if (!az.ok) return deny(az); return json({ ok: true, bed: await ORG.createBed(env, body.orgId, body, actor.id) }, 200, request); }
-      if (seg === "bed" && sub === "update") { const az = await azOrg(CAPS.STAFF_ADMIN); if (!az.ok) return deny(az); return json({ ok: true, bed: await ORG.updateBed(env, body.bedId, body, actor.id) }, 200, request); }
+      if (seg === "bed" && sub === "update") {
+        const az = await azOrg(CAPS.STAFF_ADMIN); if (!az.ok) return deny(az);
+        // TASK 4.3: server-side concurrency, not trust in the client. Two staff racing to
+        // assign/release/block the same bed get ONE winner; the loser is told to refetch and
+        // retry, never handed a write that silently overwrote what they thought they saw.
+        try { return json({ ok: true, bed: await ORG.updateBed(env, body.bedId, body, actor.id) }, 200, request); }
+        catch (e) { if (e && e.code === "bed_changed") return json({ ok: false, error: "bed_changed", message: "This bed changed under you - reload it and try again." }, 409, request); throw e; }
+      }
       if (seg === "member") {   // staff lifecycle (owner/admin only): invite/role/scope + credentials + enable/disable
         const az = await azOrg(CAPS.STAFF_ADMIN); if (!az.ok) return deny(az);
         if (sub === "pin") { await ORG.setMemberPin(env, body.orgId, body.identity, body.pin, actor.id); return json({ ok: true }, 200, request); }
