@@ -6247,6 +6247,17 @@ test("SMART: a backend client registered with a jwks_uri is verified against key
 
 test("SMART: the token endpoint is rate limited per client, and says so with Retry-After", async () => {
   seedHospital(); resetRateLimit();
+  /* THE BURST MUST LAND IN ONE WINDOW. functions/_wardsynq/rate-limit.js counts in FIXED 60-second
+   * buckets (`Math.floor(now / windowMs) * windowMs`), so a loop that happens to straddle a minute
+   * boundary has its counter reset half-way through and the 31st request is allowed - and this test
+   * failed roughly one run in ten for that reason alone, with nothing wrong with the limiter.
+   *
+   * The property under test is "31 requests inside ONE window are refused", not "31 requests inside
+   * any 60 seconds", so the burst starts at the top of a window. The loop itself takes tens of
+   * milliseconds; a two-second margin is ample, and the wait only happens when a run lands in the
+   * last two seconds of a window. */
+  const leftInWindow = 60000 - (Date.now() % 60000);
+  if (leftInWindow < 2000) await new Promise((r) => setTimeout(r, leftInWindow + 20));
   const lab = await smartBackendClient("lab-sys");
   enableSmart([lab.config]);
   await admittedPatientOnDrug();
