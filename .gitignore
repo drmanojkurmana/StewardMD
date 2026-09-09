@@ -119,3 +119,7 @@ local-plugins/*/android/build/
 atlas/_tmp-brain-test/
 ios/DerivedDataRelease/
 data/govschemes/extracted/
+
+# TASK 8.10: real-model evaluation run artifacts. Baselines ARE tracked (they are the
+# regression reference); per-run results are not - they carry model output and change every run.
+test/wardsynq-maik-eval/results.*.json
