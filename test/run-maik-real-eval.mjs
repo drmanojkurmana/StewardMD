@@ -180,17 +180,28 @@ async function probe() {
     const key = process.env.GEMINI_API_KEY || process.env.MAIK_GEMINI_API_KEY;
     if (!key) return { up: false, why: "GEMINI_API_KEY is not set in this environment", fix: "export GEMINI_API_KEY=... (never put it in a file this repository tracks)" };
     try {
-      /* A real, minimal call. Listing models proves the credential and the network at once, and its
-       * error CLASS is the thing worth reporting - PERMISSION_DENIED and RESOURCE_EXHAUSTED need
-       * completely different fixes. Nothing here prints the key. */
-      const res = await fetch("https://generativelanguage.googleapis.com/v1beta/models",
-        { headers: { "x-goog-api-key": key }, signal: AbortSignal.timeout(15000) });
+      /* PROBE WITH THE METHOD THE EVALUATION ACTUALLY USES.
+       *
+       * This first probed ListModels, which is a DIFFERENT method with different permissions, and it
+       * produced a misleading diagnosis: "ListModels is blocked" while the real obstacle was that
+       * generateContent was blocked for a different reason again. A health check that exercises a
+       * path the run does not take can only mislead, so this sends a real, minimal generateContent
+       * request to the model the run is about to use. Nothing here prints the key. */
+      const model = MODELS[0] && MODELS[0].startsWith("gemini-") ? modelIdFor(MODELS[0]) : "gemini-2.5-flash";
+      const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(model)}:generateContent`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", "x-goog-api-key": key },
+        body: JSON.stringify({ contents: [{ role: "user", parts: [{ text: "Reply with exactly: OK" }] }], generationConfig: { temperature: 0 } }),
+        signal: AbortSignal.timeout(30000),
+      });
       const body = await res.json().catch(() => null);
       if (!res.ok) {
         const err = body && body.error;
-        return { up: false, why: `Gemini answered HTTP ${res.status} [${(err && err.status) || "unknown"}]: ${scrub((err && err.message) || "", key)}` };
+        const cls = str_(err && err.status) || `HTTP_${res.status}`;
+        const msg = scrub(str_(err && err.message), key);
+        return { up: false, why: `Gemini answered HTTP ${res.status} [${cls}] for generateContent on ${model}: ${msg}`, fix: diagnose(cls, msg) };
       }
-      return { up: true, served: (body.models || []).map((m) => String(m.name || "").replace(/^models\//, "")).filter((n) => n.startsWith("gemini-2")).slice(0, 12) };
+      return { up: true, served: [str_(body && body.modelVersion) || model] };
     } catch (e) { return { up: false, why: scrub(String((e && e.message) || e), key) }; }
   }
   try {
@@ -199,6 +210,30 @@ async function probe() {
     const body = await res.json();
     return { up: true, served: (body.data || []).map((m) => m.id) };
   } catch (e) { return { up: false, why: String((e && e.message) || e) }; }
+}
+
+const str_ = (v) => String(v == null ? "" : v).trim();
+
+/** Registry id -> the model name Google is asked for. Kept in step with maik-gateway's MODELS. */
+function modelIdFor(registryId) {
+  return { "gemini-flash": "gemini-2.5-flash", "gemini-pro": "gemini-2.5-pro" }[registryId] || "gemini-2.5-flash";
+}
+
+/**
+ * Turn Google's error into the thing an operator has to DO. These two look identical in a log and
+ * need completely different fixes, which is why they are separated here rather than in prose.
+ */
+function diagnose(cls, msg) {
+  if (/has not been used in project|is disabled/i.test(msg)) {
+    const proj = (msg.match(/project (\d+)/) || [])[1];
+    return `The Generative Language API is NOT ENABLED on this Google Cloud project${proj ? " (" + proj + ")" : ""}. Enable "generativelanguage.googleapis.com" for that project in the Google Cloud console, then wait a few minutes for it to propagate. This is a project setting, not a key setting.`;
+  }
+  if (/method .* are blocked|Requests to this API/i.test(msg)) {
+    return "The API key carries an API RESTRICTION that blocks this method. In the Google Cloud console, edit the key's 'API restrictions' so the Generative Language API is permitted (or set it to 'Don't restrict key' while testing). This is a key setting, not a project setting.";
+  }
+  if (cls === "RESOURCE_EXHAUSTED") return "Quota or rate limit reached for this key. Wait, or raise the quota for the project.";
+  if (cls === "UNAUTHENTICATED" || /API key not valid/i.test(msg)) return "The key was rejected as invalid. Check it was copied whole and belongs to the project whose API is enabled.";
+  return "Check the key's API restrictions and that the Generative Language API is enabled for its project.";
 }
 
 /** Nothing this script prints or writes may carry the credential. */
