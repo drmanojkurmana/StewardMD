@@ -78,6 +78,15 @@ function MaiKInteraction(input) {
     /* Who asked, and which AI actor would write anything that comes of it. Two different identities
      * on purpose: the clinician is responsible for asking, the AI is the author of the answer. */
     requestedBy: i.requestedBy, requestedAt: i.requestedAt,
+    /* The SESSION the request came from, not just the person. Two answers a clinician got in one
+     * sitting are correlatable without the audit row ever holding a bearer token - sessionRef is
+     * already a short hash of one, produced by actor.js for exactly this purpose. */
+    sessionRef: i.sessionRef || null,
+    /* ONE ID THAT SPANS THE WHOLE INTERACTION, including anything written because of it. It is the
+     * idempotency key too: asking the same question twice under one correlation id is one action,
+     * not two, which is what stops a retried request producing a second answer a clinician then has
+     * to reconcile with the first. */
+    correlationId: i.correlationId || null,
     aiActor: i.aiActor || null,
     model: i.model || null,
     generated: i.generated === true,
@@ -95,6 +104,11 @@ function MaiKInteraction(input) {
     uncertainty: i.uncertainty == null ? null : i.uncertainty,
     toolCalls: Array.isArray(i.toolCalls) ? i.toolCalls : [],
     review: i.review || { state: REVIEW.PENDING, by: null, at: null, reason: null, editedOutput: null },
+    /* WHAT WOULD BE WRITTEN IF THIS WERE ACCEPTED, computed before anybody accepts anything. A
+     * clinician approving a clinical change has to be able to see the change, not a paragraph that
+     * will become one - "preview the resulting clinical change" is the difference between reviewing
+     * an answer and reviewing a WRITE. Null when accepting this task writes nothing at all. */
+    preview: i.preview || null,
     resultingChanges: Array.isArray(i.resultingChanges) ? i.resultingChanges : [],
     source: { system: NATIVE_SYSTEM, sourceId: `maik-interaction:${i.id}` },
   };
@@ -167,6 +181,21 @@ async function askAboutPatient(request, env, ctx) {
   const { svc, recorder, resolved, error } = await open(request, env, ctx, "record:read");
   if (error) return { ...base, ...error };
 
+  /* WRONG ENCOUNTER IS BLOCKED, not merely unused. An encounter that belongs to somebody else is the
+   * quiet version of the wrong-patient error: the summary would be about the right person and filed
+   * against another person's admission, and every downstream reader inherits it. Checked before any
+   * model is called. */
+  const encounterId = str(ctx.encounterId);
+  if (encounterId) {
+    let enc = null;
+    try { enc = await svc.get("Encounter", encounterId); } catch { enc = null; }
+    if (!enc) return { ...base, ok: false, status: 404, error: "encounter_unreadable", detail: "that admission is not readable by this actor" };
+    if (str(enc.patientId) !== str(ctx.patientId)) {
+      return { ...base, ok: false, status: 409, error: "encounter_mismatch",
+        detail: `that admission belongs to another patient; the right person on the wrong visit is still the wrong chart` };
+    }
+  }
+
   /* THE CONTEXT IS READ AS THIS CLINICIAN. A patient they may not see produces a refusal here, and
    * no model is called - so the AI cannot be used to learn what the chart would not show. */
   const context = await buildPatientContext(svc, patientId, {
@@ -192,8 +221,10 @@ async function askAboutPatient(request, env, ctx) {
   const id = idFor(patientId, at, built.nonce);
 
   const record = MaiKInteraction({
-    id, patientId, encounterId: str(ctx.encounterId) || null, task,
+    id, patientId, encounterId: encounterId || null, task,
     requestedBy: resolved.actor.id, requestedAt: at,
+    sessionRef: (resolved.identity && resolved.identity.sessionRef) || null,
+    correlationId: str(ctx.correlationId) || id,
     /* The actor that would author anything written from this answer. Named now, before any draft
      * exists, so the record says who the author WOULD be rather than discovering it later.
      *
@@ -218,6 +249,11 @@ async function askAboutPatient(request, env, ctx) {
     withheld: screen.released ? null : { reason: "the answer was withheld whole by output screening", violations: (screen.violations || []).map((v) => v.id) },
     uncertainty: answer.uncertainty == null ? null : answer.uncertainty,
     review: { state: REVIEW.PENDING, by: null, at: null, reason: null, editedOutput: null },
+    preview: screen.released && task === TASK.DRAFT_NOTE
+      ? { resourceType: "ClinicalNote", id: `${id}-note`, noteType: "progress", signedBy: null, aiDrafted: true,
+          authorId: "ai:maik", willBeSigned: false,
+          note: "Accepting writes this note UNSIGNED and authored by MaiK. It becomes your own words only when you sign it, through the ordinary note path." }
+      : null,
   });
 
   try {

@@ -344,3 +344,19 @@ body.dark #smdWard { --bg: #191c1e; --on-surface: #eff1f3; --on-surface-variant:
 #smdWard .w-int-list li.st-expired .w-int-tag, #smdWard .w-int-list li.st-failed .w-int-tag { background: var(--warn-container); color: var(--on-warn-container); border-color: transparent; }
 #smdWard .w-int-list li.st-revoked .w-int-tag, #smdWard .w-int-list li.st-dead-letter .w-int-tag { background: var(--error-container); color: var(--on-error-container); border-color: transparent; }
 #smdWard .w-int-list li.st-revoked b, #smdWard .w-int-list li.st-revoked small { opacity: .7; }
+
+/* TASK 8.5, MaiK on the chart. Deliberately the quietest card on the screen: it sits beside the
+   problems and the note, in the same type and the same rhythm, because an assistant that announces
+   itself with gradients and glow is one a clinician learns to skim past. The only colour belongs to
+   the two things that change what a reader should believe - text from another hospital, and a
+   document that contained something shaped like an instruction. */
+#smdWard .w-maik-out { border-left: 3px solid var(--outline); padding: 2px 0 2px 12px; margin: 2px 0 12px; font: 400 14px/1.55 var(--w-sans); }
+#smdWard .w-maik-prov { list-style: none; margin: 0 0 12px; padding: 0; display: flex; flex-direction: column; gap: 6px; }
+#smdWard .w-maik-prov li { display: flex; align-items: flex-start; gap: 7px; font: 500 12px/1.45 var(--w-sans); color: var(--on-surface-variant); }
+#smdWard .w-maik-prov li.warn { color: var(--on-warn-container); }
+#smdWard .w-maik-prov .material-symbols-outlined { font-size: 16px; flex: none; }
+#smdWard .w-maik-prev { border: 1px dashed var(--outline-variant); border-radius: 12px; padding: 10px 12px; margin-bottom: 12px; background: var(--sc-low); }
+#smdWard .w-maik-prev b { display: flex; align-items: center; gap: 6px; font: 700 12px var(--w-sans); text-transform: uppercase; letter-spacing: .05em; }
+#smdWard .w-maik-prev span { display: block; margin-top: 4px; font: 500 12.5px/1.5 var(--w-sans); color: var(--on-surface-variant); }
+#smdWard .w-maik-acts { display: flex; flex-wrap: wrap; gap: 8px; }
+#smdWard .w-maik-acts .w-btn[disabled] { opacity: .55; pointer-events: none; }

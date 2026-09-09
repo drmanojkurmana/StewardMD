@@ -416,3 +416,66 @@ test("15. text from another hospital is marked as such on the interaction record
   assert.equal(doc.origin, "fhir-partner-his", "a reader can see the summary was influenced by text this hospital did not author");
   assert.ok(!JSON.stringify(r.interaction).includes("Referral letter text."), "the note's content is not copied into a second row");
 });
+
+/* ---- 16: TASK 8.5 - the wrong VISIT is blocked, and the write is previewed before it happens ---- */
+
+test("16. an encounter belonging to another patient is refused before any model is called", async () => {
+  const s = socket("should never be reached");
+  seed(undefined, s);
+  await patient("pat-1", "GH-1", "Anjali Menon");
+  await patient("pat-2", "GH-2", "Ravi Kumar");
+  await RECORD.append(TENANT.id, [{ resourceType: "Encounter", id: "enc-2", version: 1, patientId: "pat-2",
+    class: "IPD", status: "in-progress", identifiers: [], periodStart: "2026-09-08T00:00:00.000Z", periodEnd: null, meta: meta() }]);
+
+  const r = await ask(DOCTOR, { patientId: "pat-1", encounterId: "enc-2", task: TASK.SUMMARISE });
+  assert.equal(r.__status, 409, JSON.stringify(r));
+  assert.equal(r.error, "encounter_mismatch");
+  assert.match(r.detail, /the right person on the wrong visit is still the wrong chart/);
+  assert.equal(s.seen.length, 0, "no model saw anything");
+  assert.equal((await interactions(DOCTOR, "pat-1")).interactions.length, 0, "and nothing was recorded");
+});
+
+test("17. a draft carries a PREVIEW of the write, and it says the note will be unsigned", async () => {
+  const s = socket("Ward round. Comfortable overnight.");
+  seed(undefined, s);
+  await patient("pat-1", "GH-1", "Anjali Menon");
+  const r = await ask(DOCTOR, { patientId: "pat-1", task: TASK.DRAFT_NOTE });
+  assert.equal(r.__status, 200, JSON.stringify(r));
+  const p = r.interaction.preview;
+  assert.ok(p, "a clinician approving a clinical change can see the change first");
+  assert.equal(p.resourceType, "ClinicalNote");
+  assert.equal(p.authorId, "ai:maik");
+  assert.equal(p.signedBy, null);
+  assert.equal(p.willBeSigned, false);
+  assert.match(p.note, /becomes your own words only when you sign it/);
+
+  // The preview is honest: what it described is what accepting actually wrote.
+  const acc = await review(DOCTOR, { interactionId: r.interaction.id, decision: REVIEW.ACCEPTED });
+  const wrote = acc.interaction.resultingChanges[0];
+  assert.equal(wrote.resourceType, p.resourceType);
+  assert.equal(wrote.id, p.id, "the preview named the record that was actually created");
+  const n = (await RECORD.latestByType(TENANT.id, "ClinicalNote", 10))[0];
+  assert.equal(n.signedBy, null, "and it is unsigned, as previewed");
+});
+
+test("18. a summary previews nothing, because accepting one writes nothing", async () => {
+  const s = socket("A summary.");
+  seed(undefined, s);
+  await patient("pat-1", "GH-1", "Anjali Menon");
+  const r = await ask(DOCTOR, { patientId: "pat-1", task: TASK.SUMMARISE });
+  assert.equal(r.interaction.preview, null);
+  const acc = await review(DOCTOR, { interactionId: r.interaction.id, decision: REVIEW.ACCEPTED });
+  assert.equal(acc.__status, 200, JSON.stringify(acc));
+  assert.deepEqual(acc.interaction.resultingChanges, [], "accepting a summary changes no chart");
+  assert.equal((await RECORD.latestByType(TENANT.id, "ClinicalNote", 10) || []).length, 0);
+});
+
+test("19. one correlation id spans the answer and everything written because of it", async () => {
+  const s = socket("A draft.");
+  seed(undefined, s);
+  await patient("pat-1", "GH-1", "Anjali Menon");
+  const r = await ask(DOCTOR, { patientId: "pat-1", task: TASK.DRAFT_NOTE });
+  assert.ok(r.interaction.correlationId, "every interaction carries one");
+  const acc = await review(DOCTOR, { interactionId: r.interaction.id, decision: REVIEW.ACCEPTED });
+  assert.equal(acc.interaction.correlationId, r.interaction.correlationId, "and it survives the review");
+});
