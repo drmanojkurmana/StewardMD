@@ -308,7 +308,11 @@
     if (ai) ai.addEventListener("input", function () {
       var v = ai.value.trim(); if (v.length < 3) { sg.classList.remove("on"); return; }
       var r = suggestWorkspace(v);
-      var txt = r.shared ? 'Suggested: <b>' + r.shared.label + '</b>' : 'Suggested workspace: <b>' + meta(r.id).name + '</b>';
+      var safeLabel = r.shared ? r.shared.label : meta(r.id).name;
+      safeLabel = String(safeLabel || "").replace(/[&<>"']/g, function (m) {
+        return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[m];
+      });
+      var txt = r.shared ? 'Suggested: <b>' + safeLabel + '</b>' : 'Suggested workspace: <b>' + safeLabel + '</b>';
       if (!r.score && !r.shared) txt = 'No clear specialty match — defaulting to <b>Internal Medicine</b>';
       sg.innerHTML = txt + ' — tap it above to use. <span style="color:var(--slate-soft)">(you can override)</span>';
       sg.classList.add("on");
