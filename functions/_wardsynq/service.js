@@ -149,6 +149,12 @@ const RESOURCE_TYPES = Object.freeze([
    * lines - "what was billed" and "what happened to the bill since" are different facts. A
    * financial record, like Claim/PreAuthorisation, and never read to decide anything clinical. */
   "Invoice",
+  /* TASK 4.9: a third-party request for a copy of a patient's record (HIM/ROI), distinct from the
+   * patient's own copy (PatientCopy is a receipt of a bedside handout; this is a tracked
+   * authorization + disclosure log for an attorney/other-provider/insurer/government-agency
+   * request). Append-only, one version per phase transition, the disclosure log counts what was
+   * sent and never re-stores the values. */
+  "ROIRequest",
   /* That a patient was given their own copy of the record, by a named clinician, at a time. A
    * RECEIPT and never a copy: it holds which results went and how many diagnoses, and none of their
    * values - a frozen second copy of clinical data that no correction ever reaches is a liability,
