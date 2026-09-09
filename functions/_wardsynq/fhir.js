@@ -325,6 +325,50 @@ function fhirDiagnosticReport(d) {
   });
 }
 
+/** TASK 3.7: the specimen a Patient/{id}/$everything bundle was missing. specimen.js's own rule is
+ *  that no specimen type is invented - the type goes out as CodeableConcept.text only, never coded,
+ *  the same restraint codeable() already applies to every uncoded concept in this file. */
+function fhirSpecimen(s) {
+  // R4's Specimen.status has no "unknown" - collected/received are both a specimen that exists
+  // (available); failed is the closest defined meaning to "not usable" (unsatisfactory).
+  const STATUS = { collected: "available", received: "available", failed: "unsatisfactory" };
+  return clean({
+    resourceType: "Specimen", id: fhirId(s.id),
+    status: STATUS[str(s.state)] || "unavailable",
+    type: s.specimenType ? { text: str(s.specimenType) } : undefined,
+    subject: ref("Patient", s.patientId),
+    request: s.serviceRequestId ? [ref("ServiceRequest", s.serviceRequestId)] : undefined,
+    receivedTime: str(s.receivedAt) || undefined,
+    collection: (s.collectedAt || s.collectedBy) ? clean({
+      collectedDateTime: str(s.collectedAt) || undefined,
+      collector: s.collectedBy ? { display: s.collectedBy } : undefined,
+    }) : undefined,
+    note: s.state === "failed" && s.failureReason ? [{ text: str(s.failureReason) }] : undefined,
+  });
+}
+
+/** TASK 3.7: the pharmacy supply fact a Patient/{id}/$everything bundle was missing. Batch and
+ *  expiry stay out of this export - R4 has no root-level element for them on MedicationDispense,
+ *  and inventing an extension for two facts nothing downstream asked for is not this file's job;
+ *  they remain readable through WardSynQ's own API, which is where pharmacy-dispense.js's header
+ *  already says a recall or harm investigation goes first. */
+function fhirMedicationDispense(d) {
+  // "returned" has no exact R4 status: it is a completed dispense later reversed, not one stopped
+  // mid-flight. "stopped" is the closest defined code and claims no more precision than that.
+  const STATUS = { issued: "completed", returned: "stopped" };
+  return clean({
+    resourceType: "MedicationDispense", id: fhirId(d.id),
+    status: STATUS[str(d.state)] || "unknown",
+    medicationCodeableConcept: codeable(d.drugCode || d.drug, d.drugCodeSystem, d.drug, d.sourceCoding, d.terminologyStatus),
+    subject: ref("Patient", d.patientId),
+    context: ref("Encounter", d.encounterId),
+    authorizingPrescription: d.orderId ? [ref("MedicationRequest", d.orderId)] : undefined,
+    quantity: d.quantity && typeof d.quantity.value === "number" ? clean({ value: d.quantity.value, unit: str(d.quantity.unit) || undefined, system: d.quantity.unit ? "http://unitsofmeasure.org" : undefined, code: str(d.quantity.unit) || undefined }) : undefined,
+    whenHandedOver: str(d.dispensedAt) || undefined,
+    performer: d.dispensedBy ? [{ actor: { display: d.dispensedBy } }] : undefined,
+  });
+}
+
 /** PURE. A note's sections as one plain-text document, headings in the order they were written. */
 function noteText(n) {
   const s = n && n.sections;
@@ -445,6 +489,8 @@ const MAPPERS = Object.freeze({
   ServiceRequest: fhirServiceRequest,
   DiagnosticReport: fhirDiagnosticReport,
   ClinicalNote: fhirDocumentReference,
+  SpecimenCollection: fhirSpecimen,
+  MedicationDispense: fhirMedicationDispense,
 });
 
 /** Our type name to the FHIR one it renders as. */
@@ -453,7 +499,7 @@ const FHIR_TYPE = Object.freeze({
   AllergyIntolerance: "AllergyIntolerance", Observation: "Observation",
   MedicationOrder: "MedicationRequest", MedicationAdministration: "MedicationAdministration",
   ServiceRequest: "ServiceRequest", DiagnosticReport: "DiagnosticReport", ClinicalNote: "DocumentReference",
-  PatientConsent: "Consent",
+  PatientConsent: "Consent", SpecimenCollection: "Specimen", MedicationDispense: "MedicationDispense",
 });
 /** And back, so a caller can ask for the FHIR name. */
 const CANONICAL_TYPE = Object.freeze(Object.fromEntries(Object.entries(FHIR_TYPE).map(([k, v]) => [v, k])));

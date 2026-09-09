@@ -152,6 +152,23 @@ const PARAMS = Object.freeze({
     date: { type: "date", get: (r) => r.effectiveDateTime || r.issued, doc: "effective, else issued" },
     issued: { type: "date", get: (r) => r.issued },
   },
+  Specimen: {
+    identifier: { type: "token", get: (r) => r.identifier },
+    status: { type: "token", get: (r) => r.status },
+    type: { type: "token", get: (r) => r.type },
+    subject: { type: "reference", get: (r) => r.subject, target: "Patient" },
+    request: { type: "reference", get: (r) => r.request, target: "ServiceRequest" },
+    "collected-time": { type: "date", get: (r) => r.collection && r.collection.collectedDateTime },
+  },
+  MedicationDispense: {
+    identifier: { type: "token", get: (r) => r.identifier },
+    status: { type: "token", get: (r) => r.status },
+    medication: { type: "token", get: (r) => r.medicationCodeableConcept },
+    subject: { type: "reference", get: (r) => r.subject, target: "Patient" },
+    context: { type: "reference", get: (r) => r.context, target: "Encounter" },
+    "authorizing-prescription": { type: "reference", get: (r) => r.authorizingPrescription, target: "MedicationRequest" },
+    whenhandedover: { type: "date", get: (r) => r.whenHandedOver },
+  },
   DocumentReference: {
     identifier: { type: "token", get: (r) => r.identifier },
     type: { type: "token", get: (r) => r.type },
@@ -180,6 +197,7 @@ const PATIENT_REF = Object.freeze({
   Observation: (r) => r.subject, MedicationRequest: (r) => r.subject, MedicationAdministration: (r) => r.subject,
   ServiceRequest: (r) => r.subject, DiagnosticReport: (r) => r.subject, DocumentReference: (r) => r.subject,
   Consent: (r) => r.patient, Provenance: null,
+  Specimen: (r) => r.subject, MedicationDispense: (r) => r.subject,
 });
 
 /** Kept for callers and tests that read the principal date and code of a type. Derived from PARAMS. */
