@@ -168,7 +168,13 @@ test("IT NEVER DECIDES A DOSE IS SAFE: there is no client-side safety rule anywh
   // Comments are stripped first: the file explains at length why it has no safety logic, and
   // scanning the prose would fail on the very sentences that promise the code is not there.
   const code = SRC.replace(/\/\*[\s\S]*?\*\//g, " ").replace(/^\s*\/\/.*$/gm, " ");
-  assert.ok(!/interaction|contraindicat|maxdose|ceiling|cross.?react/i.test(code), "no clinical rule logic in the UI");
+  /* `interaction` was on this list as a proxy for drug-drug interaction logic, and it stopped being a
+   * usable one when TASK 8.5 put MaiK on the chart: a MaiKInteraction is a RECORD OF ASKING A MODEL
+   * something, and the screen reads `r.interaction` off that response. The narrowing is the same move
+   * this test already made for the word "allergy" a few lines below, and for the same reason - the
+   * property being defended is that the screen never RUNS a clinical rule, not that it never contains
+   * a clinical word. Drug-interaction logic remains forbidden by name. */
+  assert.ok(!/drug.?interaction|interactionCheck|checkInteraction|contraindicat|maxdose|ceiling|cross.?react/i.test(code), "no clinical rule logic in the UI");
   /* The word "allergy" used to be on that list as a proxy, and it stopped being a usable one when the
    * downtime pack began DISPLAYING an allergy list the server assembled. Displaying is not deciding,
    * and the property this test defends is that the screen never decides. So the check now tests the

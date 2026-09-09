@@ -954,7 +954,7 @@
     return header +
       criticalsCard(state) + (isEd ? triageCard(state) : "") + (isMaternity ? pregnancyCard(state) + meowsCard(state) : "") +
       (isPediatric ? ageBandCard(state) : "") +
-      problemsCard(state) + noteCard(state) + vitalsCard() + flowsheetCard(state) + fluidCard(state) +
+      problemsCard(state) + maikCard(state) + noteCard(state) + vitalsCard() + flowsheetCard(state) + fluidCard(state) +
       (isMaternity ? labourCard() + bloodLossCard(state) : "") +
       (isNicu ? neonatalCard() + linesCard(state) : "") +
       ((isEd || isMaternity) ? resusCard(state) : "") + (isIcu ? deviceCard(state) : "") +
@@ -1885,6 +1885,95 @@
         : deliveryRows ? '<ul class="w-int-list">' + deliveryRows + "</ul>"
         : '<p class="w-empty">Nothing is waiting, retrying or stopped.</p>') +
       "</div>";
+  }
+
+  /* MAIK, ON THE PATIENT'S OWN CHART (TASK 8.5). Not a chatbot and not a dashboard: a card in the
+   * chart, beside the medicines and the results, that answers about the patient already open. There
+   * is no thread, no history of banter and nothing to converse with - a clinician asks one thing
+   * about one patient and gets one answer they can accept, edit or reject.
+   *
+   * WHAT THIS SCREEN MUST ALWAYS SHOW, because an answer without them is not reviewable:
+   *   WHAT MAIK READ - the sections and how many record versions went in, so a clinician can tell a
+   *     summary of a full chart from a summary of three rows.
+   *   WHERE IT CAME FROM - and specifically whether any of it was written by ANOTHER hospital.
+   *   WHAT IT IS NOT - MaiK states no confidence unless the model gave one, and this says so rather
+   *     than rendering an invented number next to a clinical sentence.
+   *   WHAT WOULD BE WRITTEN - before accepting, not after.
+   *
+   * ACCEPT / EDIT / REJECT ARE THE ONLY VERBS. There is no "apply", no "use this", no silent
+   * insertion into a note the clinician is typing. Rejecting needs a reason because a model that is
+   * regularly wrong about one thing is only visible if the reasons are kept. */
+  function maikCard(state) {
+    var m = state.maik || {};
+    var s = state.sel;
+    if (!s) return "";
+    var i = m.interaction;
+    var busy = m.busy === true;
+
+    var head = '<div class="w-card"><div class="w-card-h">' + ms("neurology") + "<h3>MaiK</h3>" +
+      (i ? '<button class="w-ic" data-w-act="maikclear" title="Clear">' + ms("close") + "</button>" : "") + "</div>";
+
+    if (m.err) head += '<p class="w-hint warn">' + ms("warning") + esc(m.err) + "</p>";
+
+    if (!i) {
+      return head +
+        '<p class="w-hint">MaiK reads this patient\'s chart as you, and can propose text for you to accept, edit or reject. It cannot sign, prescribe or change anything by itself.</p>' +
+        '<div class="w-maik-acts">' +
+        '<button class="w-btn" data-w-act="maikask:summarise"' + (busy ? " disabled" : "") + ">" + ms("summarize") + "Summarise this chart</button>" +
+        '<button class="w-btn ghost" data-w-act="maikask:draft-note"' + (busy ? " disabled" : "") + ">" + ms("edit_note") + "Draft a progress note</button>" +
+        "</div>" +
+        (busy ? '<p class="w-empty">Asking MaiK&hellip;</p>' : "") +
+        "</div>";
+    }
+
+    var provCount = (i.contextProvenance || []).length;
+    var external = (i.contextDocuments || []).filter(function (d) { return d && d.origin && d.origin !== "wardsynq-native"; });
+    var flagged = ((i.security || {}).injectionFindings || []).length;
+    var reviewed = i.review && i.review.state && i.review.state !== "pending";
+
+    /* THE WITHHELD CASE IS NOT AN ERROR MESSAGE. The clinician is told the answer was stopped and
+     * why, because a screen that silently shows nothing looks like a model that had nothing to say. */
+    var body = i.output
+      ? '<div class="w-maik-out">' + esc(i.output).replace(/\n/g, "<br>") + "</div>"
+      : '<p class="w-hint warn">' + ms("block") + "MaiK's answer was withheld before anybody saw it" +
+        (i.withheld && i.withheld.violations ? " (" + esc(i.withheld.violations.join(", ")) + ")" : "") +
+        ". Nothing was shown and nothing was written.</p>";
+
+    var prov = '<ul class="w-maik-prov">' +
+      "<li>" + ms("database") + "<span>Read " + provCount + " record version" + (provCount === 1 ? "" : "s") + " from this chart</span></li>" +
+      "<li>" + ms("smart_toy") + "<span>" + esc((i.model && i.model.model) || "unknown model") +
+        (i.model && i.model.version ? " &middot; " + esc(i.model.version) : "") +
+        (i.generated === false ? " &middot; assembled from the record, not generated" : "") + "</span></li>" +
+      (external.length ? "<li class=\"warn\">" + ms("warning") + "<span>Includes text written by another system: " +
+        esc(external.map(function (d) { return d.origin; }).join(", ")) + "</span></li>" : "") +
+      (flagged ? "<li class=\"warn\">" + ms("security") + "<span>" + flagged + " document" + (flagged === 1 ? "" : "s") +
+        " in this chart contained something that reads like an instruction. It was fenced as data and could not act.</span></li>" : "") +
+      "<li>" + ms("help") + "<span>" + (i.uncertainty == null
+        ? "MaiK stated no measure of its own certainty. Absence of a warning is not reassurance."
+        : "Model-stated uncertainty: " + esc(String(i.uncertainty))) + "</span></li>" +
+      "</ul>";
+
+    var preview = i.preview
+      ? '<div class="w-maik-prev"><b>' + ms("draft") + "If you accept</b>" +
+        "<span>A " + esc(i.preview.resourceType) + " will be created, authored by " + esc(i.preview.authorId) +
+        " and <b>unsigned</b>. " + esc(i.preview.note) + "</span></div>"
+      : "";
+
+    var acts = reviewed
+      ? '<p class="w-hint">' + ms("task_alt") + esc(i.review.state.charAt(0).toUpperCase() + i.review.state.slice(1)) +
+        " by " + esc(i.review.by || "") + (i.review.reason ? " &middot; " + esc(i.review.reason) : "") +
+        ((i.resultingChanges || []).length ? " &middot; wrote " + i.resultingChanges.length + " record" + (i.resultingChanges.length === 1 ? "" : "s") : "") + "</p>"
+      : (i.output ? '<div class="w-maik-acts">' +
+          '<button class="w-btn go" data-w-act="maikreview:accepted"' + (busy ? " disabled" : "") + ">" + ms("check") + "Accept</button>" +
+          '<button class="w-btn ghost" data-w-act="maikedit"' + (busy ? " disabled" : "") + ">" + ms("edit") + "Edit</button>" +
+          '<button class="w-btn ghost" data-w-act="maikreview:rejected"' + (busy ? " disabled" : "") + ">" + ms("close") + "Reject</button>" +
+          "</div>" +
+          (m.editing ? '<label class="w-f"><span>Your text (this is what will be filed)</span>' +
+            '<textarea id="wMaikEdit" rows="6">' + esc(i.output) + "</textarea></label>" +
+            '<button class="w-btn go" data-w-act="maikreview:edited">' + ms("save") + "File my edited version</button>" : "")
+        : "");
+
+    return head + body + prov + preview + acts + "</div>";
   }
 
   function critsBoardView(state) {
@@ -3202,6 +3291,48 @@
   function inventoryOpen() {
     st.view = "inventory"; st.inventory = null; paint(); loadInventory();
   }
+  /* MAIK, the controller (TASK 8.5). Every call names the patient the chart is open on - never a
+   * patient id from anywhere else - so the screen cannot ask about somebody other than the person a
+   * clinician is looking at. */
+  function maikAsk(task) {
+    var sel = st.sel; if (!sel) return;
+    st.maik = { busy: true, interaction: null, err: "" }; paint();
+    apiPost("/ward/maik-ask", { orgId: st.orgId, patientId: sel.patientId, encounterId: sel.encounterId || undefined, task: task })
+      .then(function (r) {
+        st.maik.busy = false;
+        if (r && r.ok) { st.maik.interaction = r.interaction; st.maik.err = ""; }
+        /* The server's own sentence, verbatim. "MaiK is not enabled" and "this hospital has approved
+         * no model provider" are different facts and a clinician acts on them differently; flattening
+         * both into "AI unavailable" would hide which one it is. */
+        else st.maik.err = (r && (r.detail || r.message || r.error)) || "MaiK could not be reached.";
+        paint();
+      })
+      .catch(function () { st.maik.busy = false; st.maik.err = "Could not reach MaiK."; paint(); });
+  }
+  function maikReview(decision) {
+    var m = st.maik || {}; if (!m.interaction) return;
+    var body = { orgId: st.orgId, interactionId: m.interaction.id, decision: decision };
+    if (decision === "rejected") {
+      var why = ""; try { why = G.prompt("Why are you rejecting this? A model that is regularly wrong is only visible if the reasons are kept.") || ""; } catch (e) {}
+      if (!why.trim() || why.trim().length < 5) { st.maik.err = "A rejection needs a reason."; paint(); return; }
+      body.reason = why.trim();
+    }
+    if (decision === "edited") {
+      var text = val("wMaikEdit");
+      if (!text) { st.maik.err = "An edit is the text you are keeping; it cannot be empty."; paint(); return; }
+      body.editedOutput = text;
+    }
+    st.maik.busy = true; paint();
+    apiPost("/ward/maik-review", body)
+      .then(function (r) {
+        st.maik.busy = false; st.maik.editing = false;
+        if (r && r.ok) { st.maik.interaction = r.interaction; st.maik.err = ""; }
+        else st.maik.err = (r && (r.detail || r.message || r.error)) || "That decision could not be recorded.";
+        paint();
+      })
+      .catch(function () { st.maik.busy = false; st.maik.err = "Could not record that decision."; paint(); });
+  }
+
   function critsBoardOpen() {
     st.view = "critsboard"; st.critsBoard = []; paint(); loadCritsBoard();
   }
@@ -4372,6 +4503,10 @@
       st.sel = p; st.view = "chart"; st.due = []; st.prn = []; st.unscheduled = []; st.problems = []; st.criticals = []; st.balance = null; st.outbox = [];
       st.flowsheet = null; st.news2 = null; st.investigations = null; st.results = null;
       st.err = ""; st.note = ""; st.refusal = null; st.devices = null; st.maternity = null; st.ageBand = null; st.lines = null; st.rateResult = null; st.oncology = null; st.cardiology = null; st.radiology = null; st.pharmacy = null; st.transfusion = null;
+      /* TASK 8.5: MaiK is cleared with the rest of the chart. An answer about the previous patient
+       * left on screen beside a new patient's observations is the wrong-patient error with extra
+       * steps, and it is the one this panel could most easily cause. */
+      st.maik = null;
       defaultWindow();
       st.noteTemplateId = ""; st.noteResult = null;
       paint(); loadChart(); loadRound(); loadBalance(); loadOutbox(); loadTemplates(); loadFlowsheet(); loadNews2(); loadInvestigations();
@@ -4390,11 +4525,18 @@
       st.err = ""; st.note = ""; st.refusal = null;
       defaultWindow();
       st.noteTemplateId = ""; st.noteResult = null;
+      /* MaiK's panel is cleared when the chart changes. An answer about the previous patient left on
+       * screen beside a new patient's observations is the wrong-patient error with extra steps. */
+      st.maik = null;
       paint(); loadChart(); loadRound(); loadBalance(); loadOutbox(); loadTemplates(); loadFlowsheet(); loadNews2(); loadInvestigations(); loadResus(); return;
     }
     if (cmd === "edboard") { loadEd(); return; }
     if (cmd === "inventoryboard") { inventoryOpen(); return; }
     if (cmd === "inventoryload") { loadInventory(); return; }
+    if (cmd === "maikask") { maikAsk(arg); return; }
+    if (cmd === "maikreview") { maikReview(arg); return; }
+    if (cmd === "maikedit") { st.maik.editing = true; paint(); return; }
+    if (cmd === "maikclear") { st.maik = null; paint(); return; }
     if (cmd === "integration") { integrationOpen(); return; }
     if (cmd === "intload") { loadIntegration(); return; }
     if (cmd === "outdispatch") { dispatchOutbound(); return; }
