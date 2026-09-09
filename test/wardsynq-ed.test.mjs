@@ -243,7 +243,10 @@ test("THE ED GOLDEN PATH: arrival, triage, vitals, a doctor's note, a medication
   assert.equal(inv.__status, 200, JSON.stringify(inv));
 
   // RESUSCITATION: a Code Sepsis bundle, real, through wardsynq-emergency.js's real state machine.
-  const bundle = await as(DOCTOR, "/ward/resus-start", "POST", { orgId: ORG, patientId: arr.patientId, encounterId: arr.encounterId, code: "code-sepsis" });
+  // An explicit timeZero, not the server's real clock: this test's later marks use a fixed
+  // historical timestamp ("2026-09-09T08:10:00.000Z"), and a bundle timed from the real wall clock
+  // would refuse that mark as BEFORE_TIME_ZERO the moment a real run crosses that time of day.
+  const bundle = await as(DOCTOR, "/ward/resus-start", "POST", { orgId: ORG, patientId: arr.patientId, encounterId: arr.encounterId, code: "code-sepsis", timeZero: "2026-09-09T08:09:00.000Z" });
   assert.equal(bundle.__status, 200, JSON.stringify(bundle));
   assert.equal(bundle.status.state, "running");
   // The sepsis bundle's first element is "lactate", done on "resulted" (wardsynq-emergency.js's own

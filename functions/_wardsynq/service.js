@@ -323,6 +323,16 @@ const RESOURCE_TYPES = Object.freeze([
    * conclusions cannot be edited away after the fact - the same property Claim's coding history
    * and TransfusionEpisode's traceability already depend on. */
   "IncidentReport",
+  /* TASK 6.14: a wristband/QR/NFC tag's own lifecycle - the persisted state of
+   * wardsynq-identity-tag.js's assign/verify/replace/deactivate/lost engine. Its own type, not a
+   * field mutation on Patient: wristbandBarcode has been comparable since early in this build, but a
+   * comparator that trusts whatever code is currently on the field is only as safe as the process
+   * that put it there. Multiple records ACCUMULATE per patient (one per tag ever issued), never
+   * overwritten - "which code named this patient, when, and what happened to the last one" is
+   * exactly the chain a wrong-patient investigation needs and a mutated field cannot answer.
+   * Granted by EMR_VITALS (VITALS_TYPES in actor.js), the same capability DeviceAssociation already
+   * uses - scanning a wristband onto a patient is the same kind of bedside act. */
+  "PatientTag",
 ]);
 
 const MODE = Object.freeze({ SYSTEM_OF_RECORD: "system-of-record", INTEGRATION: "integration" });

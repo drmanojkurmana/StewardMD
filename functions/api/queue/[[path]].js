@@ -96,6 +96,7 @@ import { dispenseOrder, returnDispense, listDispenses } from "../../_wardsynq/ph
 import { declareBreakGlass, openEmergencyChart, listBreakGlass } from "../../_wardsynq/break-glass.js";
 import { declareEmergency, deactivateEmergency, emergencyStatus, emergencyLog, emergencyReconciliation } from "../../_wardsynq/emergency-mode.js";
 import { reportIncident, triageIncident, recordIncidentRCA, addIncidentCAPA, completeIncidentCAPA, closeIncident, incidentLog } from "../../_wardsynq/incidents.js";
+import { assignPatientTag, verifyPatientTag, deactivatePatientTag, reportPatientTagLost, replacePatientTag, patientTagLog } from "../../_wardsynq/identity-tag.js";
 import { operationOutcome } from "../../_wardsynq/fhir.js";
 import { dispatchRead, dispatchOperation } from "../../_wardsynq/fhir-route.js";
 import { ingestFhir, listExceptions, resolveException, inboundEnabled } from "../../_wardsynq/fhir-inbound.js";
@@ -552,6 +553,10 @@ export async function onRequest(context) {
          * same capability that governs everything else DeviceAssociation is granted through
          * (VITALS_TYPES in actor.js). A reading is the same act repeated by the device's own gateway. */
         "device-associate": CAPS.EMR_VITALS, "device-dissociate": CAPS.EMR_VITALS,
+        // TASK 6.14: a wristband/QR/NFC tag is the same bedside act as a device association -
+        // assign/verify/replace/deactivate/lost/log all EMR_VITALS, same as device-* above.
+        "tag-assign": CAPS.EMR_VITALS, "tag-verify": CAPS.EMR_VITALS, "tag-replace": CAPS.EMR_VITALS,
+        "tag-deactivate": CAPS.EMR_VITALS, "tag-lost": CAPS.EMR_VITALS, "tag-log": CAPS.EMR_VITALS,
         "device-ingest": CAPS.EMR_VITALS, "device-status": CAPS.EMR_VIEW, "device-list": CAPS.EMR_VIEW,
         /* The WHO checklist gate (Task 2.3). Every write here is "a clinical commitment" in the same
          * sense wardsynq-emergency.js's own resus bundle already is - emr.treat, unrestricted.
@@ -919,6 +924,30 @@ export async function onRequest(context) {
       }
       if (sub === "device-list" && method === "GET") {
         const r = await deviceList(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "" });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "tag-assign" && method === "POST") {
+        const r = await assignPatientTag(request, env, { ...deps, patientId: body.patientId, tagType: body.tagType, code: body.code, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "tag-verify" && method === "POST") {
+        const r = await verifyPatientTag(request, env, { ...deps, patientId: body.patientId, tagType: body.tagType, scannedCode: body.scannedCode });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "tag-replace" && method === "POST") {
+        const r = await replacePatientTag(request, env, { ...deps, tagId: body.tagId, newCode: body.newCode, reason: body.reason, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "tag-deactivate" && method === "POST") {
+        const r = await deactivatePatientTag(request, env, { ...deps, tagId: body.tagId, reason: body.reason, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "tag-lost" && method === "POST") {
+        const r = await reportPatientTagLost(request, env, { ...deps, tagId: body.tagId, reason: body.reason, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "tag-log" && method === "GET") {
+        const r = await patientTagLog(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "" });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "surgery-book" && method === "POST") {
