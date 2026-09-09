@@ -22,6 +22,10 @@ const HERE = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(HERE, "..");
 
 const SUITES = [
+  /* TASK 9.12/9.20. The recovery suites were absent from this list, so the assurance table was
+   * assembled without ever running the restore rehearsal - the evidence HAZ-DR-01 now cites. */
+  "test/wardsynq-restore.test.mjs",
+  "test/wardsynq-backup-run.test.mjs",
   "test/wardsynq-p0-core.test.mjs",
   "test/wardsynq-store.test.mjs",
   "test/wardsynq-mpi.test.mjs",

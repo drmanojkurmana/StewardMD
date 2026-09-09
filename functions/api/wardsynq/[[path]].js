@@ -99,7 +99,25 @@ export async function handle(request, env, deps) {
   if (!recordFlagOn(env) && !(await wardsynqNativeTenant(env, parts[0], actorDeps(env, deps || {})))) return jsonResponse({ error: "not_found" }, { status: 404 });
   const method = request.method;
 
-  if (parts[0] === "health") return jsonResponse({ ok: true, service: "wardsynq-record", repository: "d1" });
+  /* TASK 9.16. THIS USED TO RETURN A LITERAL, and that is how a healthy-looking service served a
+   * night of failures on 2026-09-07: the schema had never been applied to the production D1, every
+   * clinical write failed on its first read, and this endpoint answered {ok:true} the entire time.
+   * A health check that cannot fail is a green light wired to nothing. It now reaches the record
+   * store, and answers 503 when the store cannot. */
+  if (parts[0] === "health") {
+    let probe;
+    try {
+      /* No tenant: a health check must answer before any tenant is resolved, and the probe reads the
+       * table definition rather than any hospital's rows. `pseudonym` is unused on this path. */
+      probe = await recordDeps(env, null, deps || {}).repository.probe();
+    } catch (e) {
+      probe = { ok: false, backend: "unknown", detail: "the repository could not be constructed" };
+    }
+    return jsonResponse(
+      { ok: probe.ok === true, service: "wardsynq-record", repository: probe.backend || "unknown",
+        checks: [{ name: "record-store", ok: probe.ok === true, ms: probe.ms ?? null, detail: probe.detail || null }] },
+      { status: probe.ok === true ? 200 : 503 });
+  }
   const tenantId = parts[0];
   if (!tenantId) return jsonResponse({ error: "not_found" }, { status: 404 });
   const rest = parts.slice(1);

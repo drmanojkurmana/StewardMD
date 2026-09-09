@@ -50,7 +50,11 @@ class RepositoryError extends Error {
   }
 }
 
-const PORT_METHODS = Object.freeze(["latest", "history", "byPatient", "latestByType", "append", "changes", "recall", "auditOnly"]);
+/* TASK 9.16. `probe` is on the port because a health check that does not reach storage is not a
+ * health check. On 2026-09-07 the schema had never been applied to the production D1: every clinical
+ * write failed on its first read, and /api/wardsynq/health answered {ok:true} throughout, because it
+ * returned a literal. An implementation that cannot answer probe() cannot be served from. */
+const PORT_METHODS = Object.freeze(["latest", "history", "byPatient", "latestByType", "append", "changes", "recall", "auditOnly", "probe"]);
 
 /** Refuses at boot rather than at the first clinical write. */
 function assertRepository(repo) {
@@ -171,6 +175,11 @@ class MemoryRepository {
   }
 
   /** Reads are audited too. Separate from append because a read writes nothing else. */
+  /** In-memory: reachable whenever the object exists. Reported honestly as such. */
+  async probe() {
+    return { ok: true, backend: "memory", detail: "in-process store; nothing is persisted and nothing can be unreachable" };
+  }
+
   async auditOnly(tenantId, event) {
     this.audit.push({ tenantId, ...clone(event) });
   }

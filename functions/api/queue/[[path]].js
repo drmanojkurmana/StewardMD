@@ -141,6 +141,7 @@ import { imagingWorklist } from "../../_wardsynq/dicom.js";
  * under /api/ai, which answer a clinician's own questions and touch no record. */
 import { askAboutPatient, reviewInteraction, listInteractions } from "../../_wardsynq/maik-interaction.js";
 import { maikStatus } from "../../_wardsynq/maik-gateway.js";
+import { hit as rateHit } from "../../_wardsynq/rate-limit.js";
 import { explainOrderSafety } from "../../_wardsynq/maik-cds.js";
 import { checkAdvisories } from "../../_wardsynq/advisory-authoring.js";
 import { cdaForEncounter } from "../../_wardsynq/cda.js";
@@ -263,7 +264,11 @@ function corsHeaders(request) {
   if (CORS_ORIGINS.indexOf(o) >= 0) { h["Access-Control-Allow-Origin"] = o; h["Access-Control-Allow-Methods"] = "POST, GET, OPTIONS"; h["Access-Control-Allow-Headers"] = "Content-Type, Authorization, X-App-Token, X-Admin-Token, X-Staff-Token"; h["Access-Control-Max-Age"] = "86400"; }
   return h;
 }
-function json(obj, status, request) { return new Response(JSON.stringify(obj), { status: status || 200, headers: Object.assign({ "Content-Type": "application/json", "Cache-Control": "no-store" }, corsHeaders(request)) }); }
+/* `extra` is optional response headers. Added for TASK 9.15's 429s: a rate-limit refusal without a
+ * Retry-After is a refusal a client has to guess at, and guessing means retrying immediately. Shaped
+ * like fhirJson's own `extra` argument below so there is one convention, and every existing
+ * three-argument caller is unaffected. */
+function json(obj, status, request, extra) { return new Response(JSON.stringify(obj), { status: status || 200, headers: Object.assign({ "Content-Type": "application/json", "Cache-Control": "no-store" }, corsHeaders(request), extra || {}) }); }
 /* FHIR's own media type, on every FHIR response including errors. The CapabilityStatement declared
  * application/fhir+json while the route served application/json, and a strict client rejects that
  * mismatch - which is how "we have a FHIR endpoint" turns out to mean "we have JSON". A single
@@ -530,6 +535,16 @@ export async function onRequest(context) {
       // ROI_SUBS/TRANSFUSION_SUBS fallback checks below, right after wAz is first computed.
       const ROI_SUBS = new Set(["roi-request", "roi-authorize", "roi-deny", "roi-cancel", "roi-fulfill", "roi", "roi-requests"]);
       const TRANSFUSION_SUBS = new Set(["transfusion-request", "transfusion-crossmatch", "transfusion-issue", "transfusion-bedside-check", "transfusion-start", "transfusion-observe", "transfusion-reaction", "transfusion-complete"]);
+      /* TASK 9.15. Whole-hospital or whole-ward reads. Rationed tightly because they are rare and
+       * deliberate, and because they are the one shape that turns an authenticated account into a
+       * bulk exfiltration tool in a loop. */
+      const RL_BULK = new Set(["backup", "downtime", "analytics-extract", "roi-export"]);
+      /* Emergency access is bounded but never scarce: the limit is here to make scripted break-glass
+       * abuse visible and finite, and it sits far above the handful of declarations a real shift
+       * produces. Refusing a genuine emergency to enforce a quota would be the worse failure. */
+      const RL_EMERGENCY = new Set(["break-glass", "emergency-chart", "emergency-declare", "emergency-deactivate"]);
+      const RL_LIMITS = { bulk: 12, emergency: 60, write: 600, read: 3000 };
+
       const capFor = {
         admit: CAPS.QUEUE_ADD, list: CAPS.QUEUE_VIEW, vitals: CAPS.EMR_VITALS,
         "medication-order": CAPS.EMR_TREAT, round: CAPS.QUEUE_VIEW, mar: CAPS.MED_ADMINISTER,
@@ -893,6 +908,38 @@ export async function onRequest(context) {
        * this does not narrow what emr.treat could already do. Same shape as the two checks above. */
       if (!wAz.ok && TRANSFUSION_SUBS.has(sub)) wAz = await ORG.authorizeOrg(env, actor, wOrgId, CAPS.TRANSFUSION_ISSUE);
       if (!wAz.ok) return json(azRefusal(wAz), wAz.reason === "org_not_found" ? 404 : 403, request);
+
+      /* TASK 9.15/9.1: A THROTTLE ON THE CLINICAL DOOR, which had none.
+       *
+       * rate-limit.js was a good limiter wired to exactly two SMART endpoints. Every route under
+       * /api/queue/ward/* was unthrottled - including GET /ward/backup, which reads the WHOLE
+       * hospital's record, and GET /ward/downtime, which reads a whole ward. An authenticated
+       * account could pull the entire record store in a loop, and nothing counted.
+       *
+       * THE LIMITS ARE ASYMMETRIC ON PURPOSE, AND THE ASYMMETRY IS THE SAFETY ARGUMENT. A limiter
+       * that stops a nurse charting during an arrest is itself a patient-safety hazard, so the
+       * clinical tiers sit far above any human rate and exist only to bound automation. The BULK
+       * tier is tight, because whole-hospital reads are rare, deliberate, and the actual thing worth
+       * rationing. Emergency declarations get their own tier: bounded against scripted abuse, and
+       * generous enough that a real emergency is never the request that gets refused.
+       *
+       * Keyed by ACTOR AND ORG, never by IP - the caller is already authenticated here, and an IP
+       * key would throttle a whole hospital behind one NAT. */
+      const rlTier = RL_BULK.has(sub) ? "bulk"
+        : RL_EMERGENCY.has(sub) ? "emergency"
+        : method === "GET" ? "read" : "write";
+      const rl = await rateHit(
+        { binding: env && env.WSQ_RL, kv: env && env.MAIK_KV },
+        { key: `wsq:${wOrgId}:${actor.id}:${rlTier}`, limit: RL_LIMITS[rlTier], windowMs: 60000 });
+      if (!rl.allowed) {
+        /* A refusal names the tier and the wait, because "429" on a ward screen with no further
+         * information is indistinguishable from the system being broken. */
+        return json({ ok: false, error: "rate_limited", tier: rlTier,
+          retryAfterSeconds: rl.retryAfterSeconds,
+          message: `Too many ${rlTier} requests from this account in one minute. This limit exists to bound automated abuse, not clinical work; if a clinical action was refused, that is a defect worth reporting.`,
+          store: rl.store },
+          429, request, { "Retry-After": String(rl.retryAfterSeconds) });
+      }
 
       const wOrg = await ORG.getOrg(env, wOrgId);
       /* The hospital's own WardSynQ configuration: critical limits, round times, beds, order sets.
