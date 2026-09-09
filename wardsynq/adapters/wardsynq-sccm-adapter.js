@@ -144,10 +144,18 @@ function mapSccmBundle(bundle) {
       source: src("enc", e.id),
     }));
   }
+  /* An encounter this bundle carries, by the id it was written under - and, failing that, the id
+   * that SAME source's encounter would have been written under by an earlier message. A feed's ADT
+   * arrives on Monday and its lab result on Tuesday; until the fallback existed the Tuesday result
+   * lost its visit entirely, because the encounter was not in the same envelope. The fallback is a
+   * derivation, not a guess: sourceId() is the identical function that minted the id in the first
+   * place. A reference to an encounter nobody has sent resolves to an id that simply is not on the
+   * record, which every reader downstream already treats as "not here". */
   const encRef = (ref) => {
     if (!ref) return null;
     const id = typeof ref === "object" ? ref.id : ref;
-    return encounterIds.get(String(id)) || null;
+    if (!String(id || "")) return null;
+    return encounterIds.get(String(id)) || sourceId(system, "enc", id) || null;
   };
 
   for (const c of bundle.conditions || []) {
@@ -191,6 +199,10 @@ function mapSccmBundle(bundle) {
     }
     entities.push(Observation({
       id: sourceId(system, "obs", o.id), patientId: patient.id,
+      // SCCM 1.1: the visit this reading belongs to, when the sender named one this bundle also
+      // carries. Resolved through the SAME encounter map every other type uses - an encounter the
+      // sender referenced but did not send is null here, exactly as it is everywhere else.
+      encounterId: encRef(o.encounter),
       category: o.category || "laboratory", code: k.code || k.display, codeSystem: k.system || "unspecified",
       value, unit, effectiveAt: o.effectiveDateTime || undefined,
       source: src("obs", o.id),
@@ -250,6 +262,7 @@ function mapSccmBundle(bundle) {
     const status = ["preliminary", "final", "corrected", "cancelled"].includes(d.status) ? d.status : "preliminary";
     entities.push(DiagnosticReport({
       id: sourceId(system, "dr", d.id), patientId: patient.id,
+      encounterId: encRef(d.encounter),   // SCCM 1.1, same rule as the observations above
       code: k.code || k.display, status, conclusion: d.conclusion || null,
       resultObservationIds: (d.results || []).map((r) => (r && r.id ? sourceId(system, "obs", r.id) : null)).filter(Boolean),
       // The order this report answers, when the source said so: its OWN order, under its own id.

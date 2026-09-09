@@ -91,6 +91,14 @@ const REASON = Object.freeze({
   CONFLICT_LOCAL_AUTHORITATIVE: "conflict-local-authoritative",
   CONFLICT_OTHER_SOURCE: "conflict-other-source",
   PATIENT_MISMATCH: "conflict-patient-mismatch",
+  /* TASK 7.13 (bidirectional safety). Four conflicts this pipeline could previously resolve
+   * SILENTLY - which is the one thing the plan forbids: "never silently choose a clinically
+   * significant conflicting value". Each is held for a person, exactly like every other conflict
+   * above, through the same ExchangeException queue. None of them decides anything clinical. */
+  ENCOUNTER_MISMATCH: "conflict-encounter-mismatch",
+  TENANT_MISMATCH: "conflict-tenant-mismatch",
+  STALE_RESULT: "conflict-stale-result",
+  MEDICATION_CONFLICT: "conflict-medication",
   VERSION_MISMATCH: "version-mismatch",
   UNSUPPORTED: "unsupported-resource",
   INVALID: "invalid-resource",
@@ -237,11 +245,57 @@ async function grantSourceSystem(request, env, ctx) {
 
   const id = grantIdFor(actorId, system);
   if (!id) return { ...base, ok: false, status: 422, error: "bad_identifiers", written: 0 };
+  /* A grant that already exists is RE-granted as its next version, never a second row: the whole
+   * point of an append-only grant is that "it was revoked on Tuesday and restored on Friday" stays
+   * readable. A first grant is version 1; a restore is version N+1 with the revocation still in the
+   * chain behind it. */
+  let current = null;
+  try { current = await svc.get(GRANT_TYPE, id); } catch { current = null; }
   const grant = SourceSystemGrant({ id, actorId, sourceSystem: system, active: true, grantedBy: resolved.actor.id, grantedAt: new Date().toISOString(), note: ctx.note || null });
   try {
-    const out = await svc.put(grant, { idempotencyKey: ctx.idempotencyKey || null });
-    return { ...base, ok: true, written: 1, grant: { ...grant, version: out.record.version } };
+    const out = await svc.put(grant, { expectedVersion: current ? current.version : undefined, idempotencyKey: ctx.idempotencyKey || null });
+    return { ...base, ok: true, written: 1, restored: !!(current && current.active === false), grant: { ...grant, version: out.record.version } };
   } catch (e) {
+    if (e instanceof VersionConflictError) return { ...base, ok: false, status: 409, error: "version_conflict", written: 0 };
+    return { ...base, ok: false, status: 502, error: "record_write_failed", detail: str(e && e.message), written: 0 };
+  }
+}
+
+/**
+ * TASK 7.13 (revoked integration). Ends a source system's authority to push, immediately and
+ * durably. The grant is not deleted - it is a new version with `active: false`, which is what makes
+ * "who could push as this partner, and when did that stop" answerable afterwards. The very next
+ * message from that feed is refused by authorizedSourceSystem(), which already reads `active`.
+ * ctx: { migration, actorId, sourceSystem, reason, actorDeps, recordDeps }
+ */
+async function revokeSourceSystem(request, env, ctx) {
+  const mig = ctx.migration;
+  const base = { mode: mig && mig.mode, tenantId: (mig && mig.tenantId) || null };
+  if (!mig || mig.mode === "off") return { ...base, ok: true, skipped: "off", written: 0 };
+
+  const actorId = str(ctx.actorId);
+  const system = slug(ctx.sourceSystem);
+  const reason = str(ctx.reason);
+  if (!actorId) return { ...base, ok: false, status: 422, error: "actor_required", written: 0 };
+  if (!system) return { ...base, ok: false, status: 422, error: "source_system_required", written: 0 };
+  // A revocation with no reason is unauditable, the same rule every other governance act here holds.
+  if (reason.length < 5) return { ...base, ok: false, status: 422, error: "reason_required", detail: "say why this integration is being revoked", written: 0 };
+
+  const { svc, resolved, error } = await openIngest(request, env, ctx);
+  if (error) return { ...base, ok: false, status: error.status, error: "auth", detail: (error.outcome && error.outcome.issue && error.outcome.issue[0].diagnostics) || null, written: 0 };
+
+  const id = grantIdFor(actorId, system);
+  let current = null;
+  try { current = await svc.get(GRANT_TYPE, id); } catch { current = null; }
+  if (!current) return { ...base, ok: false, status: 404, error: "grant_not_found", written: 0 };
+  if (current.active === false) return { ...base, ok: true, written: 0, skipped: "already_revoked", grant: current };
+
+  const next = SourceSystemGrant({ ...current, active: false, revokedBy: resolved.actor.id, revokedAt: new Date().toISOString(), note: reason });
+  try {
+    const out = await svc.put(next, { expectedVersion: current.version, idempotencyKey: ctx.idempotencyKey || null });
+    return { ...base, ok: true, written: 1, grant: { ...next, version: out.record.version } };
+  } catch (e) {
+    if (e instanceof VersionConflictError) return { ...base, ok: false, status: 409, error: "version_conflict", written: 0 };
     return { ...base, ok: false, status: 502, error: "record_write_failed", detail: str(e && e.message), written: 0 };
   }
 }
@@ -423,6 +477,138 @@ function partitionConflicts(entities, currentOf, system) {
   return { writable, conflicts };
 }
 
+/* ---- TASK 7.13: the four conflicts that used to resolve themselves silently ------------------- */
+
+/**
+ * PURE. Does this bundle claim to belong to a different hospital than the door it arrived at?
+ *
+ * Tenant isolation is already structural - TenantBackend has no parameter for another tenant, so a
+ * mis-addressed bundle could never have WRITTEN anywhere else. What it could do until now is land
+ * SILENTLY in the wrong hospital: the declared tenant was simply ignored. A sender that addressed
+ * its message to hospital B and had it filed in hospital A has been told nothing, and the message
+ * it thinks it delivered is on a stranger's chart. Refused, named, before anything is written.
+ */
+function tenantMismatch(sccm, tenantId) {
+  const declared = str(sccm && sccm.tenantId);
+  const actual = str(tenantId);
+  if (!declared || !actual || declared === actual) return null;
+  return { declared, actual };
+}
+
+/**
+ * PURE. Entities filed against an encounter that belongs to a DIFFERENT patient.
+ *
+ * The patient check (partitionConflicts) asks "is this the right person"; this asks "is this the
+ * right VISIT". A potassium filed on the right patient but another patient's admission is wrong in
+ * a way every downstream reader inherits: the ward round, the discharge summary and the bill all
+ * read by encounter. A reference to an encounter this hospital does not hold is NOT a mismatch -
+ * it may simply not have been imported - but one that resolves to somebody else's visit is.
+ * `encounterOf(id)` returns the stored Encounter or null.
+ */
+function encounterMismatches(entities, encounterOf) {
+  const out = [];
+  for (const e of entities || []) {
+    if (!e || e.resourceType === "Encounter") continue;
+    const encId = str(e.encounterId);
+    const mine = str(e.patientId);
+    if (!encId || !mine) continue;
+    const enc = encounterOf(encId);
+    const encPatient = enc ? str(enc.patientId) : "";
+    if (!encPatient || encPatient === mine) continue;
+    out.push({ entity: e, current: { id: enc.id, resourceType: "Encounter", version: enc.version, patientId: encPatient }, reason: REASON.ENCOUNTER_MISMATCH });
+  }
+  return out;
+}
+
+/**
+ * PURE. A feed's own update that describes an EARLIER moment than the version already stored.
+ *
+ * Ownership says a feed may update its own row, and until now it always won - including when the
+ * message arriving second described a moment that happened FIRST. That is the late result: a lab
+ * re-sends an 08:00 potassium after the 14:00 one has already landed, and the chart quietly goes
+ * backwards. Recorded time is not the test (the late message is genuinely newer to us); EFFECTIVE
+ * time is, because that is when the fact was clinically true. Held, never silently applied.
+ */
+function staleUpdates(writable, currentOf) {
+  const out = [];
+  for (const e of writable || []) {
+    const cur = currentOf(e);
+    if (!cur) continue;
+    const incoming = Date.parse(str(e.meta && e.meta.effectiveAt));
+    const stored = Date.parse(str(cur.meta && cur.meta.effectiveAt));
+    if (!Number.isFinite(incoming) || !Number.isFinite(stored) || incoming >= stored) continue;
+    out.push({ entity: e, current: { id: cur.id, resourceType: cur.resourceType, version: cur.version, effectiveAt: str(cur.meta.effectiveAt) },
+      incomingEffectiveAt: str(e.meta.effectiveAt), reason: REASON.STALE_RESULT });
+  }
+  return out;
+}
+
+/** PURE. The identity two systems would have to agree on to be naming the same drug. A coded
+ *  product is compared by its code IN ITS SYSTEM; an uncoded one only by the name as written.
+ *  Nothing here reasons about classes, ingredients or interactions - that is pharmacology, and
+ *  wardsynq-safety.js owns it. This answers only "did two sources name the same thing". */
+function drugKey(m) {
+  const code = str(m && m.drugCode);
+  const sys = str(m && m.drugCodeSystem);
+  if (code && sys && sys !== "unspecified" && sys !== UNMAPPED) return `${sys.toLowerCase()}|${code.toUpperCase()}`;
+  const name = str(m && m.drug).toLowerCase().replace(/\s+/g, " ");
+  return name ? `name|${name}` : "";
+}
+
+/** Statuses that mean the patient is, as far as that record says, on this drug now. */
+const LIVE_MED_STATUS = Object.freeze(["active", "on-hold", "draft"]);
+
+/**
+ * PURE. An incoming medication that a DIFFERENT source already asserts is live for this patient.
+ *
+ * Two systems asserting the same drug for one patient is the commonest real medication conflict at
+ * a hospital boundary, and the wrong answers are both easy: file it silently (the chart now shows
+ * the drug twice, and a reconciliation later cannot tell which is the truth) or drop it (the ward
+ * never learns the other system thinks the patient is on it). Held: both records survive, neither
+ * is changed, and a person reconciles them. NOTHING is stopped, started or merged here.
+ *
+ * Same-source duplicates are deliberately NOT flagged - a feed re-sending its own order under a new
+ * id is that feed's own bookkeeping, not a disagreement between systems.
+ */
+function medicationConflicts(entities, liveMeds, system) {
+  const out = [];
+  const live = (liveMeds || []).filter((m) => m && m.resourceType === "MedicationOrder" && LIVE_MED_STATUS.includes(str(m.status)));
+  for (const e of entities || []) {
+    if (!e || e.resourceType !== "MedicationOrder") continue;
+    if (!LIVE_MED_STATUS.includes(str(e.status))) continue;
+    const key = drugKey(e);
+    if (!key) continue;
+    const clash = live.find((m) => {
+      if (str(m.id) === str(e.id)) return false;                                   // the same record: an ordinary update
+      if (str(m.patientId) !== str(e.patientId)) return false;
+      const owner = str(m.meta && m.meta.source && m.meta.source.system) || NATIVE_SYSTEM;
+      if (owner === system) return false;                                          // our own feed's other order
+      return drugKey(m) === key;
+    });
+    if (!clash) continue;
+    const owner = str(clash.meta && clash.meta.source && clash.meta.source.system) || NATIVE_SYSTEM;
+    out.push({ entity: e, current: { id: clash.id, resourceType: "MedicationOrder", version: clash.version, source: owner, status: str(clash.status), drug: str(clash.drug) }, reason: REASON.MEDICATION_CONFLICT });
+  }
+  return out;
+}
+
+/** PURE. What a person opening this exception needs to read first: why it is here, in one sentence. */
+function conflictDetail(c) {
+  const cur = c.current || {};
+  switch (c.reason) {
+    case REASON.ENCOUNTER_MISMATCH:
+      return `the encounter this was filed against (${cur.id}) belongs to patient ${cur.patientId}, not to ${str(c.entity.patientId)}; the right person on the wrong visit is still the wrong chart`;
+    case REASON.STALE_RESULT:
+      return `this describes ${c.incomingEffectiveAt}, which is EARLIER than the version already stored (${cur.effectiveAt}); a late message does not silently move a chart backwards`;
+    case REASON.MEDICATION_CONFLICT:
+      return `${cur.source} already asserts this patient is on ${cur.drug} (${cur.status}); two systems disagreeing about a live medication is reconciled by a person, and nothing here was started, stopped or merged`;
+    case REASON.CONFLICT_LOCAL_AUTHORITATIVE:
+      return "this hospital authored the current version; a feed does not overwrite it";
+    default:
+      return `another feed (${cur.source}) authored the current version`;
+  }
+}
+
 /** Patient first, then encounters, then orders, then everything that points at them. */
 const ORDER = { Patient: 0, Encounter: 1, MedicationOrder: 2, ServiceRequest: 2 };
 const byDependency = (a, b) => (ORDER[a.resourceType] ?? 3) - (ORDER[b.resourceType] ?? 3);
@@ -569,6 +755,14 @@ async function landBundle(request, env, ctx) {
   const mig = ctx.migration;
   const { svc, resolved, sccm, system, adapterSystem, patient, problems, requests, bundleType, atomic } = ctx;
   const protocol = str(ctx.protocol) || "fhir";
+  /* TASK 7.13: a bundle addressed to another hospital is refused at the door, before a single row
+   * is mapped. It could never have written there (TenantBackend has no parameter for another
+   * tenant) - what it could do is land silently HERE, which tells the sender nothing. */
+  const wrongTenant = tenantMismatch(sccm, mig && mig.tenantId);
+  if (wrongTenant) {
+    return { ok: false, status: 409, outcome: operationOutcome("error", "conflict",
+      `this bundle declares tenant "${wrongTenant.declared}" and arrived at "${wrongTenant.actual}"; it is refused rather than filed at the hospital it was not addressed to`) };
+  }
   const base = sccmAdapter();
   const adapterActor = makeActor({ id: `adapter:${adapterSystem}`, kind: KIND.ADAPTER, tier: TIER.DRAFT, display: `${protocol === "hl7v2" ? "HL7 v2" : "FHIR"} from ${system}`, onBehalfOf: resolved.actor.id });
   let mapped;
@@ -706,6 +900,41 @@ async function landBundle(request, env, ctx) {
     writable = writable.concat(accepted.map((c) => ({ ...c.entity, _currentVersion: c.current.version, _acceptedOver: c.current.source })));
   }
 
+  /* TASK 7.13. Three more conflicts, decided here so every one of them inherits the machinery the
+   * ownership conflicts already have: an ExchangeException a person resolves, a 409 entry naming
+   * it, and - in a transaction - the whole message refused rather than half-filed. Anything they
+   * flag moves OUT of `writable`: a held row is not written, ever. */
+  const encounterRefs = new Map();
+  for (const e of entities) {
+    const encId = str(e.encounterId);
+    if (!encId || encounterRefs.has(encId) || entities.some((x) => x.resourceType === "Encounter" && x.id === encId)) continue;
+    try { const enc = await svc.get("Encounter", encId); if (enc) encounterRefs.set(encId, enc); }
+    catch { /* unreadable: treated as absent, exactly like the ownership reads above */ }
+  }
+  let liveMeds = [];
+  const medPatients = [...new Set(entities.filter((e) => e.resourceType === "MedicationOrder").map((e) => str(e.patientId)).filter(Boolean))];
+  for (const pid of medPatients) {
+    try { liveMeds = liveMeds.concat((await svc.byPatient("MedicationOrder", pid)) || []); }
+    catch { /* unreadable: no conflict can be asserted about what this actor cannot see */ }
+  }
+  const extra = [
+    ...encounterMismatches(writable, (id) => encounterRefs.get(id) || null),
+    ...staleUpdates(writable, (e) => currents.get(`${e.resourceType}/${e.id}`) || null),
+    ...medicationConflicts(writable, liveMeds, adapterSystem),
+  ];
+  if (extra.length) {
+    const held = new Set(extra.map((c) => `${c.entity.resourceType}/${c.entity.id}`));
+    writable = writable.filter((e) => !held.has(`${e.resourceType}/${e.id}`));
+    // One row can trip more than one rule; it is held once, under the first that caught it.
+    const seen = new Set();
+    for (const c of extra) {
+      const k = `${c.entity.resourceType}/${c.entity.id}`;
+      if (seen.has(k)) continue;
+      seen.add(k);
+      conflicts.push(c);
+    }
+  }
+
   if (ctx.mode === "update") {
     const target = writable[0] || (conflicts[0] && conflicts[0].entity);
     const cur = target && currents.get(`${target.resourceType}/${target.id}`);
@@ -769,7 +998,7 @@ async function landBundle(request, env, ctx) {
   const entries = [];
   for (const c of conflicts) {
     const exId = await raise(c.reason, { patientId: c.entity.patientId || null, conflict: c.current, entityRefs: [`${c.entity.resourceType}/${c.entity.id}`],
-      detail: c.reason === REASON.CONFLICT_LOCAL_AUTHORITATIVE ? "this hospital authored the current version; a feed does not overwrite it" : `another feed (${c.current.source}) authored the current version` });
+      detail: conflictDetail(c) });
     entries.push({ response: { status: "409 Conflict", outcome: operationOutcome("error", "conflict", `${c.entity.resourceType}/${c.entity.id}: ${c.reason}; see ExchangeException/${exId}`) } });
   }
   for (const p of preconditions) {
@@ -961,7 +1190,8 @@ function registerRedrive(protocol, fn) { if (str(protocol) && typeof fn === "fun
 export {
   EXCEPTION_TYPE, DECISION_TYPE, GRANT_TYPE, REASON, RESOLUTION, INBOUND_TYPES, CODE_FIELDS,
   inboundEnabled, bodySourceOf, splitBundle, evaluateIfNoneExist, markTerminology, markTerminologyWithService, reconcileIdentity, rebind, partitionConflicts,
+  tenantMismatch, encounterMismatches, staleUpdates, medicationConflicts, drugKey, conflictDetail, LIVE_MED_STATUS,
   ExchangeException, ExchangeIdentityDecision, priorDecision,
-  SourceSystemGrant, grantIdFor, authorizedSourceSystem, grantSourceSystem,
+  SourceSystemGrant, grantIdFor, authorizedSourceSystem, grantSourceSystem, revokeSourceSystem,
   ingestFhir, landBundle, openIngest, registerRedrive, listExceptions, resolveException,
 };

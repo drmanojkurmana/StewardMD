@@ -54,13 +54,14 @@ export function normalizeFhir(ctx, raw) {
         const referenceRange = rrIn ? { low: qOrNull(rrIn.low), high: qOrNull(rrIn.high), text: rrIn.text || null } : null;
         out.observations.push(observation({ id: r.id, category: oc.cat, code: cc(r.code, "observation"), value, referenceRange,
           interpretation: r.interpretation && r.interpretation[0] ? cc(r.interpretation[0], "interpretation") : null,
-          effectiveDateTime: r.effectiveDateTime || null, status: r.status || "unknown" })); break;
+          effectiveDateTime: r.effectiveDateTime || null, status: r.status || "unknown", encounter: encRef(r.encounter) })); break;
       }
       case "DiagnosticReport": out.diagnosticReports.push(diagnosticReport({ id: r.id, code: cc(r.code, "report"), status: r.status || "unknown",
         effectiveDateTime: r.effectiveDateTime || null, conclusion: r.conclusion || null,
         results: (r.result || []).map((x) => { const id = refIdOf(x); return id ? { type: "Observation", id } : null; }).filter(Boolean),
         // SCCM 1.1: the order this report answers, when the sender says so and it is a ServiceRequest.
-        basedOn: (r.basedOn || []).map((x) => (/(^|\/)ServiceRequest\//.test(String(x && x.reference)) ? refTo(x, "ServiceRequest") : null)).find(Boolean) || null })); break;
+        basedOn: (r.basedOn || []).map((x) => (/(^|\/)ServiceRequest\//.test(String(x && x.reference)) ? refTo(x, "ServiceRequest") : null)).find(Boolean) || null,
+        encounter: encRef(r.encounter) })); break;
       /* SCCM 1.1. A dose given (or explicitly not given) elsewhere. Carried as sent: the FHIR status
        * verbatim, the performer as the sender named them, the request when referenced. */
       case "MedicationAdministration": out.administrations.push(medicationAdministration({ id: r.id, medication: cc(r.medicationCodeableConcept, "medication"), status: r.status || "unknown",
