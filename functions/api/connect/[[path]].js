@@ -12,6 +12,13 @@ import { followcareSource } from "../../_connect/abdm/hip-sources/followcare.js"
 import { identify } from "../../_usage.js";
 import { ownerOK } from "../../_adminauth.js";
 import { sweep } from "../../_connect/abdm/state.js";
+/* TASK 7.8: the composition of the ABDM consume tail. This route is the ONE place the exchange side
+ * and the record side meet, which is why the wiring lives here and not inside either of them. */
+import { consumeTransfer } from "../../_connect/abdm/hiu.js";
+import { makeGateway } from "../../_connect/abdm/gateway.js";
+import { getConsentReqByConsentId } from "../../_connect/abdm/consent.js";
+import { makeConsumeAndLand } from "../../_wardsynq/abdm-land.js";
+import { recordDeps as wsqRecordDeps } from "../../_wardsynq/deps.js";
 import { fhirFlagOn } from "../../_connect/smart/flags.js"; // Track A: smd_connect_fhir gate (default OFF)
 import { handleFeedIngest } from "../../_connect/ingest.js"; // Track B: HMAC-gated legacy-feed ingest
 import { hl7v2Connector } from "../../_connect/connectors/hl7v2/connector.js";
@@ -26,6 +33,24 @@ import { sqlFlagOn } from "../../_connect/connectors/sql/flags.js"; // per-track
 
 const STATUS = (e) => (e instanceof AuthError ? 401 : e instanceof PermissionError ? 403 : e instanceof SandboxViolation ? 403 : 400);
 const CODE = (e) => (e && e.constructor && e.constructor.name) ? e.constructor.name.replace(/Error$/, "").toLowerCase() || "error" : "error";
+
+/* TASK 7.8. The ABDM gateway this deployment talks to, or null when it is not configured.
+ *
+ * Built ONLY from environment the operator set. A gateway invented from defaults would be a client
+ * pointed at somebody else's endpoint, so an absent base URL or an absent HIU identity means no
+ * gateway and therefore no consume tail - the push stays buffered and recoverable rather than
+ * half-consumed against a server this hospital never registered with.
+ */
+function abdmGatewayFor(env, deps) {
+  const baseUrl = String((env && env.ABDM_GATEWAY_URL) || "").trim();
+  const hiuId = String((env && env.ABDM_HIU_ID) || "").trim();
+  if (!baseUrl || !hiuId || !deps.kv) return null;
+  return makeGateway({
+    baseUrl, hiuId, cmId: String((env && env.ABDM_CM_ID) || "").trim() || null,
+    hipId: String((env && env.ABDM_HIP_ID) || "").trim() || null,
+    fetch, kv: deps.kv, secrets: deps.secrets, now: () => new Date(),
+  });
+}
 
 export async function onRequest(context) {
   const { request, env } = context;
@@ -44,6 +69,31 @@ export async function onRequest(context) {
       // second flag hipFlagOn; serveTransfer pushes sealed pages to the HIU's dataPushUrl). Tenant is the row's.
       source: followcareSource, handleDiscovery, serveTransfer, putHipConsent,
       ingestEvent, fetch, now: () => new Date().toISOString() };
+    /* TASK 7.8: the consume tail, wired. consumeTransfer and consumeNdhmBundle existed, were tested,
+     * and had NO production caller - a hospital could complete a whole ABDM exchange and have
+     * nothing on the chart. This is the missing composition: join + decrypt + file, through the same
+     * adapter, MPI and governed store every other feed uses. It is built only when the gateway this
+     * deployment needs to acknowledge a transfer is actually configured; without that, a push is
+     * still buffered durably and recovered by the reconcile pass rather than half-consumed. */
+    const abdmGateway = abdmGatewayFor(env, deps);
+    if (abdmGateway) {
+      deps.consumeAndLand = makeConsumeAndLand({
+        env,
+        consumeTransfer,
+        consumeDeps: { db: deps.db, r2: deps.r2, secrets: deps.secrets, gateway: abdmGateway, now: deps.now() },
+        recordDeps: (tenantId) => wsqRecordDeps(env, tenantId),
+        consentFor: async (consentId) => {
+          if (consentId == null) return null;
+          const row = await getConsentReqByConsentId(deps.db, consentId);
+          if (!row) return null;
+          // The purpose is stored as the JSON the VERIFIED artifact carried; it binds what this data
+          // may be used for. An unparseable one is passed through as-is rather than dropped.
+          let purpose = null;
+          try { purpose = row.purpose ? JSON.parse(row.purpose) : null; } catch { purpose = row.purpose || null; }
+          return { consentId, purpose, actor: row.actor || null };
+        },
+      });
+    }
     return handleIngress(env, deps, request);
   }
   // Track B: HMAC-gated feed ingest. No StewardMD actor; tenant from the feed row. HL7 v2 + file/CSV keep the

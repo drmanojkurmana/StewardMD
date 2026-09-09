@@ -156,7 +156,11 @@ export async function makeHiuMockGateway({ env, deps, handleIngress, tenantId = 
         if (partial && i === 0) { const raw = [...atob(e.content)]; raw[raw.length - 1] = String.fromCharCode(raw[raw.length - 1].charCodeAt(0) ^ 1); content = btoa(raw.join("")); }
         entries.push({ careContextReference: "cc-" + i, content, checksum: e.checksum });
       }
-      const payload = { type: "data-push", transactionId, entries };
+      /* TASK 7.8: the push carries its page keyMaterial, as this repository's own HIP push does
+       * (abdm/hip.js#pushPage puts { transactionId, keyMaterial, careContextReference, entries } on
+       * the wire). It was omitted here while every test passed hipKeyMaterial to consumeTransfer by
+       * hand; the ingress now reads it off the event, so the mock has to send what a real HIP sends. */
+      const payload = { type: "data-push", transactionId, entries, keyMaterial: state.hip && state.hip.keyMaterial };
       if (includeConsentId) payload.consentId = state.consentId;
       return deliverWebhook(payload);
     },
