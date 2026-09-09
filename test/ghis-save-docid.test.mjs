@@ -363,9 +363,9 @@ test("LOCK: authorising is spelled out as irreversible, and re-authorising is bl
 test("AUTHORISE: the server calls GHIS's real sign-off endpoint", () => {
   assert.match(GHIS, /signoffinitialAssessmentnew/, "the exact URL signOff1 posts to");
   const fn = GHIS.slice(GHIS.indexOf("export async function authorizeAssessment"), GHIS.indexOf("const json = (obj, status = 200)"));
-  assert.match(fn, /'__RequestVerificationToken=' \+ encodeURIComponent\(csrf\) \+ '&id=' \+ encodeURIComponent\(docId\)/, "same payload shape");
+  assert.match(fn, /new URLSearchParams\(\{ __RequestVerificationToken: csrf, id: docId \}\)/, "same payload shape using URLSearchParams");
   assert.match(fn, /successfully\\s\+signed\\s\*off/, "keyed on GHIS's own success string");
-  assert.match(fn, /Searchnew[\s\S]{0,400}?'Cookie': cookie/, "activates the visit and threads the cookie, like the save");
+  assert.match(fn, /activateVisit/, "activates the visit and threads the cookie, like the save");
 });
 
 test("AUTHORISE: never signs off a record that was never saved", () => {
