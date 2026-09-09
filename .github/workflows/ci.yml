@@ -21,8 +21,21 @@ jobs:
       # --experimental-test-module-mocks matches `npm test`: several suites use mock.module(), which
       # without the flag throws "mock.module is not a function" and fails the file rather than the
       # assertion. CI must run the suite the same way the repo's own script does.
+      #
+      # --experimental-sqlite IS LOAD-BEARING ON NODE 22, and its absence was silently disarming the
+      # disaster-recovery evidence. node:sqlite needs the flag on 22 (it is unflagged from 23.4), and
+      # wardsynq-restore / wardsynq-onprem / wardsynq-d1-sql all SKIP rather than fail when the import
+      # throws - a deliberate design so an engine gap is never a red build. The consequence on this
+      # runner was that the restore rehearsal, the on-premise boot and the tenant-isolation-in-SQL
+      # proofs reported green while executing nothing at all. `npm test` passed the flag; this
+      # workflow did not, so local runs and CI disagreed about what had been verified.
       - name: Run unit tests
-        run: node --test --experimental-test-module-mocks test/*.test.mjs
+        run: node --test --experimental-test-module-mocks --experimental-sqlite test/*.test.mjs
+
+      # A SKIPPED DR SUITE MUST NOT READ AS A PASSING ONE. The flag above is the fix; this is the
+      # tripwire that keeps it fixed, because the failure mode is invisible by construction.
+      - name: Prove the DR suites actually executed
+        run: node --experimental-test-module-mocks --experimental-sqlite test/check-dr-suites-ran.mjs
 
   atlas-checks:
     runs-on: ubuntu-latest
