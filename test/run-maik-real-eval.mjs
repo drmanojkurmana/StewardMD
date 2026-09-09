@@ -33,13 +33,15 @@ if (!globalThis.crypto) globalThis.crypto = webcrypto;
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 /* WHICH REAL PROVIDER THIS RUN EXERCISES.
- *   gemini        Google's Generative Language API, keyed from GEMINI_API_KEY in the environment.
+ *   vertex        Gemini on Vertex AI, express mode, keyed from GEMINI_API_KEY. The default.
+ *   gemini        the same weights on AI Studio's generativelanguage endpoint, same key.
  *   local-openai  an OpenAI-compatible server on this machine or this hospital's network.
  * Either way the CALLER below asks for a task and never for a model: which model answers is decided
  * by the gateway from the hospital's configuration, which is the architecture under test. */
-const PROVIDER = process.env.MAIK_EVAL_PROVIDER || "gemini";
+const PROVIDER = process.env.MAIK_EVAL_PROVIDER || "vertex";
+const GOOGLE = PROVIDER === "vertex" || PROVIDER === "gemini";
 const BASE_URL = process.env.MAIK_EVAL_BASE_URL || "http://localhost:11434/v1";
-const DEFAULT_MODELS = PROVIDER === "gemini" ? "gemini-flash" : "qwen2.5:3b-instruct";
+const DEFAULT_MODELS = PROVIDER === "vertex" ? "vertex-flash" : PROVIDER === "gemini" ? "gemini-flash" : "qwen2.5:3b-instruct";
 const MODELS = (process.env.MAIK_EVAL_MODELS || DEFAULT_MODELS).split(",").map((s) => s.trim()).filter(Boolean);
 const WRITE_BASELINE = process.argv.includes("--write-baseline");
 const RESULTS_DIR = join(HERE, "wardsynq-maik-eval");
@@ -118,14 +120,14 @@ function seedOrg(modelName) {
    * names a model: it names a TASK. Selecting WHICH model answers is done the way an operator would
    * do it - by narrowing `models` to one registry id the gateway already declares. A caller-side
    * model parameter would be exactly the bypass this architecture exists to prevent. */
-  const maik = PROVIDER === "gemini"
-    ? { enabled: true, phiApproved: ["gemini"], models: [modelName], timeoutMs: 120000 }
+  const maik = GOOGLE
+    ? { enabled: true, phiApproved: [PROVIDER], models: [modelName], timeoutMs: 120000 }
     : { enabled: true, phiApproved: ["local-openai"], localBaseUrl: BASE_URL, localModel: modelName, timeoutMs: 120000 };
   ENV = { QUEUE_ENABLED: "1", QUEUE_TOKEN_SECRET: "eval-secret-that-is-long-enough-for-hmac",
     FOLLOWCARE_PHI_KEY: Buffer.alloc(32, 7).toString("base64url"), CONNECT_DB: tenantDb,
     /* The key is passed as the deployment binding the adapter reads. It is never written to the org
      * record, never logged, and never put in a results file - see the redaction check at the end. */
-    ...(PROVIDER === "gemini" ? { GEMINI_API_KEY: process.env.GEMINI_API_KEY } : {}) };
+    ...(GOOGLE ? { GEMINI_API_KEY: process.env.GEMINI_API_KEY } : {}) };
   // NOTE: WSQ_MAIK_FETCH is deliberately absent. That is what makes this a real-model run.
   docs.set(`q_orgs/${ORG}`, { fields: { id: ORG, code: "EVAL", name: "Evaluation", kind: "clinic", mode: "wardsynq",
     connectTenantId: TENANT.id, ownerUid: "cfa:nobody", createdAt: 1, wardsynq: { maik } }, updateTime: "t1" });
@@ -176,7 +178,7 @@ async function runScenario(scenario) {
 
 /* ---- is a real provider actually there? ----------------------------------------------------------- */
 async function probe() {
-  if (PROVIDER === "gemini") {
+  if (GOOGLE) {
     const key = process.env.GEMINI_API_KEY || process.env.MAIK_GEMINI_API_KEY;
     if (!key) return { up: false, why: "GEMINI_API_KEY is not set in this environment", fix: "export GEMINI_API_KEY=... (never put it in a file this repository tracks)" };
     try {
@@ -187,8 +189,8 @@ async function probe() {
        * generateContent was blocked for a different reason again. A health check that exercises a
        * path the run does not take can only mislead, so this sends a real, minimal generateContent
        * request to the model the run is about to use. Nothing here prints the key. */
-      const model = MODELS[0] && MODELS[0].startsWith("gemini-") ? modelIdFor(MODELS[0]) : "gemini-2.5-flash";
-      const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(model)}:generateContent`, {
+      const model = modelIdFor(MODELS[0]);
+      const res = await fetch(endpointFor(PROVIDER, encodeURIComponent(model)), {
         method: "POST",
         headers: { "Content-Type": "application/json", "x-goog-api-key": key },
         body: JSON.stringify({ contents: [{ role: "user", parts: [{ text: "Reply with exactly: OK" }] }], generationConfig: { temperature: 0 } }),
@@ -199,9 +201,14 @@ async function probe() {
         const err = body && body.error;
         const cls = str_(err && err.status) || `HTTP_${res.status}`;
         const msg = scrub(str_(err && err.message), key);
-        return { up: false, why: `Gemini answered HTTP ${res.status} [${cls}] for generateContent on ${model}: ${msg}`, fix: diagnose(cls, msg) };
+        return { up: false, why: `${PROVIDER} answered HTTP ${res.status} [${cls}] for generateContent on ${model}: ${msg}`, fix: diagnose(cls, msg) };
       }
-      return { up: true, served: [str_(body && body.modelVersion) || model] };
+      /* PROOF OF SURFACE, recorded rather than assumed. `trafficType` is reported by Vertex and not
+       * by AI Studio, so it is evidence about WHICH service answered - which matters when the same
+       * key and the same model name work on both. */
+      return { up: true, served: [str_(body && body.modelVersion) || model],
+        endpoint: endpointFor(PROVIDER, model),
+        trafficType: str_(body && body.usageMetadata && body.usageMetadata.trafficType) || null };
     } catch (e) { return { up: false, why: scrub(String((e && e.message) || e), key) }; }
   }
   try {
@@ -216,7 +223,17 @@ const str_ = (v) => String(v == null ? "" : v).trim();
 
 /** Registry id -> the model name Google is asked for. Kept in step with maik-gateway's MODELS. */
 function modelIdFor(registryId) {
-  return { "gemini-flash": "gemini-3.6-flash", "gemini-pro": "gemini-3.1-pro-preview" }[registryId] || "gemini-3.6-flash";
+  return {
+    "gemini-flash": "gemini-3.6-flash", "gemini-pro": "gemini-3.1-pro-preview",
+    "vertex-flash": "gemini-3.6-flash", "vertex-pro": "gemini-3.1-pro-preview",
+  }[registryId] || "gemini-3.6-flash";
+}
+
+/** The endpoint family each Google surface uses, so a report can name it without guessing. */
+function endpointFor(provider, model) {
+  return provider === "vertex"
+    ? `https://aiplatform.googleapis.com/v1/publishers/google/models/${model}:generateContent`
+    : `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`;
 }
 
 /**
@@ -270,15 +287,18 @@ fixture's score is a fact about the fixture, and reporting it as a model
 result would be the exact claim this task forbids.
 
 To produce real results:
-  Gemini:  export GEMINI_API_KEY=...   (environment only - never a tracked file)
+  Vertex:  export GEMINI_API_KEY=...   (environment only - never a tracked file)
            node --experimental-test-module-mocks test/run-maik-real-eval.mjs
+  Studio:  MAIK_EVAL_PROVIDER=gemini node --experimental-test-module-mocks test/run-maik-real-eval.mjs
   Local:   ollama serve && ollama pull qwen2.5:3b-instruct
            MAIK_EVAL_PROVIDER=local-openai node --experimental-test-module-mocks test/run-maik-real-eval.mjs
 =========================================================================`);
   process.exit(2);
 }
 
-console.log(`Provider: ${PROVIDER}${PROVIDER === "gemini" ? " (key from GEMINI_API_KEY; never logged)" : " at " + BASE_URL}`);
+console.log(`Provider: ${PROVIDER}${GOOGLE ? " (key from GEMINI_API_KEY; never logged)" : " at " + BASE_URL}`);
+if (health.endpoint) console.log(`Endpoint: ${health.endpoint}`);
+if (health.trafficType) console.log(`Traffic type: ${health.trafficType} (a Vertex-reported field; AI Studio does not send it)`);
 console.log(`Serving: ${(health.served || []).join(", ") || "(not enumerated)"}`);
 console.log(`Evaluation set: ${EVAL_SET_VERSION} (${SCENARIOS.length} scenarios, ${SCENARIOS.filter((s) => s.adversarial).length} adversarial)`);
 console.log(`Evaluation tenant: ${TENANT_ID} (in-memory, synthetic, discarded at exit)`);
@@ -309,9 +329,10 @@ for (const modelName of MODELS) {
     model: modelName,
     modelReported: results.map((r) => r.model).find(Boolean) || null,
     provider: PROVIDER,
-    gateway: { provider: PROVIDER, baseUrl: PROVIDER === "gemini" ? "https://generativelanguage.googleapis.com/v1beta" : BASE_URL,
+    endpoint: GOOGLE ? endpointFor(PROVIDER, modelIdFor(modelName)) : `${BASE_URL}/chat/completions`,
+    gateway: { provider: PROVIDER, baseUrl: GOOGLE ? endpointFor(PROVIDER, modelIdFor(modelName)) : BASE_URL,
       timeoutMs: cfg.timeoutMs, phiApproved: cfg.phiApproved, models: cfg.models || null,
-      credentialSource: PROVIDER === "gemini" ? "GEMINI_API_KEY (environment)" : "none required",
+      credentialSource: GOOGLE ? "GEMINI_API_KEY (environment)" : "none required",
       note: "the caller names a task, never a model; the model is chosen by the gateway from this configuration" },
     tenant: TENANT_ID,
     ranAt: new Date().toISOString(),

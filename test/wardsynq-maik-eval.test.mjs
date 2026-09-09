@@ -122,6 +122,8 @@ test("7. uncertainty requires STATING the gap, and is not satisfied by hedging t
     "None recorded. This means nothing has been recorded, not that the patient has no allergies.",
     "The record does not contain this information.",
     "Allergy status is unknown.",
+    // Plural inflection. Missing "are " failed a real model that had answered correctly.
+    "No allergies are recorded in the patient's record.",
   ]) assert.equal(gradeUncertainty(rubric, good).value, 1, `"${good}" states the gap`);
   // Saying nothing about the gap is still a failure, which is the property this metric exists for.
   assert.equal(gradeUncertainty(rubric, "Day 2 after appendicectomy, apyrexial.").value, 0);

@@ -172,7 +172,8 @@ test("14. the SERVED model version and the token usage are what get reported bac
   assert.equal(r.model.model, "gemini-3.6-flash");
   assert.equal(r.model.version, "gemini-3.6-flash-002", "the served version, not the pointer that was asked for");
   assert.equal(r.generated, true);
-  assert.deepEqual(r.usage, { in: 412, out: 88, total: 500 });
+  assert.deepEqual(r.usage, { in: 412, out: 88, total: 500, thoughts: null, trafficType: null },
+    "AI Studio reports no reasoning-token count or traffic type, and null says so rather than zero");
   assert.ok(Number.isFinite(r.latencyMs));
   assert.equal(r.routedTo, "gemini-flash");
 });
@@ -224,4 +225,76 @@ test("18. the registry declares Gemini as CLOUD, which is what makes the ranking
   assert.equal(ids.length, 2);
   for (const m of ids) assert.equal(m.locality, "cloud", "somebody else's computer, and ranked accordingly");
   assert.ok(PROVIDERS.gemini && typeof PROVIDERS.gemini.generate === "function");
+});
+
+
+/* ---- 19: Vertex AI is a SEPARATE provider, not a flag on the one above ------------------------------ */
+
+test("19. Vertex and AI Studio are different providers, and approving one does not approve the other", async () => {
+  const t = transport(answer("x"));
+  /* A hospital that named "gemini" has approved AI Studio. Vertex bills a different account, under a
+   * different agreement, and must not be reachable on the strength of that approval. */
+  const r = await invoke({ task: TASK.SUMMARISE, phi: true, prefer: "vertex-flash", prompt: "p",
+    config: { enabled: true, phiApproved: ["gemini"] }, env: envWithKey, context: { patientId: "pat-1" }, fetchImpl: t.fetchImpl });
+  assert.equal(r.ok, false);
+  assert.equal(r.code, "no_phi_approved_model");
+  assert.equal(t.seen.length, 0, "and nothing was sent");
+});
+
+test("20. the Vertex adapter uses the express publisher path: no project, no region, no OAuth", async () => {
+  const t = transport(answer("A summary."));
+  const r = await invoke({ task: TASK.SUMMARISE, phi: true, prompt: "p",
+    config: { enabled: true, phiApproved: ["vertex"], models: ["vertex-flash"] }, env: envWithKey,
+    context: { patientId: "pat-1" }, fetchImpl: t.fetchImpl });
+  assert.equal(r.ok, true, JSON.stringify(r));
+  const call = t.seen[0];
+  assert.match(call.url, /^https:\/\/aiplatform\.googleapis\.com\/v1\/publishers\/google\/models\/gemini-3\.6-flash:generateContent$/);
+  assert.ok(!/\/projects\//.test(call.url), "the project-path endpoint needs an OAuth bearer token, which this adapter does not have");
+  assert.ok(!/locations/.test(call.url), "express mode is not regionally pinned");
+  assert.equal(call.headers["x-goog-api-key"], KEY);
+  assert.ok(!call.headers.Authorization, "no bearer token: this path is deliberately not the ADC path");
+  assert.equal(r.model.provider, "vertex");
+  assert.equal(r.routedTo, "vertex-flash");
+});
+
+test("21. Vertex's own usage fields survive, because reasoning tokens are billed and invisible", async () => {
+  const t = transport(answer("x", { usageMetadata: {
+    promptTokenCount: 500, candidatesTokenCount: 20, totalTokenCount: 620,
+    thoughtsTokenCount: 100, trafficType: "ON_DEMAND" } }));
+  const r = await invoke({ task: TASK.SUMMARISE, phi: true, prompt: "p",
+    config: { enabled: true, phiApproved: ["vertex"], models: ["vertex-flash"] }, env: envWithKey,
+    context: { patientId: "pat-1" }, fetchImpl: t.fetchImpl });
+  assert.deepEqual(r.usage, { in: 500, out: 20, total: 620, thoughts: 100, trafficType: "ON_DEMAND" });
+  /* The point of keeping `thoughts`: 20 output tokens looks cheap and 100 reasoning tokens is the
+   * actual bill, so a cost figure taken from output length alone would be wrong by 5x here. */
+  assert.ok(r.usage.total > r.usage.in + r.usage.out, "the total exceeds in+out precisely because of reasoning tokens");
+});
+
+test("22. an error names WHICH Google surface refused, because two separate services can both refuse", async () => {
+  const t = transport({ error: { status: "RESOURCE_EXHAUSTED", message: "credits depleted" } }, { status: 429 });
+  const vertex = await invoke({ task: TASK.SUMMARISE, phi: true, prompt: "p",
+    config: { enabled: true, phiApproved: ["vertex"], models: ["vertex-flash"] }, env: envWithKey,
+    context: { patientId: "pat-1" }, fetchImpl: t.fetchImpl });
+  assert.match(vertex.detail, /Vertex AI express mode/);
+  assert.match(vertex.detail, /aiplatform\.googleapis\.com/);
+
+  const studio = await invoke({ task: TASK.SUMMARISE, phi: true, prompt: "p",
+    config: { enabled: true, phiApproved: ["gemini"], models: ["gemini-flash"] }, env: envWithKey,
+    context: { patientId: "pat-1" }, fetchImpl: t.fetchImpl });
+  assert.match(studio.detail, /AI Studio/);
+  assert.match(studio.detail, /generativelanguage\.googleapis\.com/);
+});
+
+test("23. maikStatus distinguishes the two surfaces and still exposes no secret", () => {
+  const st = maikStatus(envWithKey, { enabled: true, phiApproved: ["vertex"] });
+  const blob = JSON.stringify(st);
+  assert.ok(!blob.includes(KEY) && !blob.includes(KEY.slice(0, 8)));
+  const v = st.providers.find((p) => p.provider === "vertex");
+  const g = st.providers.find((p) => p.provider === "gemini");
+  assert.match(v.surface, /aiplatform\.googleapis\.com/);
+  assert.match(g.surface, /generativelanguage\.googleapis\.com/);
+  assert.match(v.detail, /no service account, no ADC and no region/);
+  // Approval is per provider, and the report shows that the unapproved one is still unapproved.
+  assert.equal(st.models.find((m) => m.id === "vertex-flash").phiApproved, true);
+  assert.equal(st.models.find((m) => m.id === "gemini-flash").phiApproved, false);
 });

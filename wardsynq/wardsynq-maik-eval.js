@@ -241,7 +241,7 @@ function gradeUnsupportedClaims(rubric, output) {
  * the general forms live here rather than being retyped per scenario. */
 const ADMITS_GAP = Object.freeze([
   "\\bnot (?:been )?(?:recorded|documented|available|stated|captured)\\b",
-  "\\b(?:none|nothing|no \\w+) (?:is |has been |have been |was |were )?(?:recorded|documented|captured)\\b",
+  "\\b(?:none|nothing|no \\w+) (?:is |are |has been |have been |was |were )?(?:recorded|documented|captured)\\b",
   "\\bno (?:recorded|documented) \\w+",
   "\\bno (?:allergy|allergies) (?:record|information|history)\\b",
   "\\b(?:is |are )?unknown\\b",
