@@ -70,6 +70,7 @@ export async function discoverAuthorizedEmr({ startUrl, allowedOrigins = [origin
   const normalizedOrigins = [...new Set(allowedOrigins.map(originOf))];
   const startOrigin = originOf(startUrl);
   if (!normalizedOrigins.includes(startOrigin)) throw new Error('startUrl origin is not authorized');
+  if (typeof client.preflight === 'function') await client.preflight();
 
   const tab = await client.createTab({ userId, sessionKey, url: startUrl });
   const tabId = tab?.tabId || tab?.id;
@@ -86,6 +87,7 @@ export async function discoverAuthorizedEmr({ startUrl, allowedOrigins = [origin
       events: safeEvents, generatedAt: new Date().toISOString(), discoveryMode: 'read-observe-only' });
   } finally {
     await client.closeTab({ tabId, userId }).catch(() => {});
+    if (typeof client.closeSession === 'function') await client.closeSession({ userId }).catch(() => {});
   }
 }
 
