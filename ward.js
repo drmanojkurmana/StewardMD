@@ -33,7 +33,7 @@
   var st = {
     orgId: "", ward: "", patients: [], view: "list",
     sel: null,                 // the selected {encounterId, patientId, ward, bed, admittedAt}
-    problems: [], criticals: [], balance: null, outbox: [], cosign: null, downtime: null, quality: null, pcopy: null, consent: null, completion: null,
+    problems: [], criticals: [], balance: null, outbox: [], cosign: null, downtime: null, quality: null, pcopy: null, consent: null, completion: null, emergency: null,
     /* Held from other systems. null until asked, an object once answered, and a separate error
      * string when the list could not be read: an unreadable queue of held clinical data must never
      * look like an empty one. */
@@ -142,18 +142,27 @@
   function nextFor(status) { return NEXT[status == null ? "" : String(status).toLowerCase()] || []; }
 
   function banner(state) {
+    // TASK 4.15: on EVERY screen, not just the ward list - an emergency declared while a nurse has a
+    // chart open must still be visible without them backing out to find it.
+    var em = (state.emergency && state.emergency.active) || [];
+    var emBanner = em.length ? '<div class="w-emergency">' + ms("emergency") +
+      "<div>" + em.map(function (a) {
+        return "<p><b>" + esc(a.kind || "Emergency") + "</b> &middot; " + esc(a.reason) +
+          (a.relaxations && a.relaxations.length ? " &middot; relaxes: " + esc(a.relaxations.join(", ")) : "") +
+          '<span class="w-dt-times">declared ' + when(a.declaredAt) + " &middot; until " + when(a.expiresAt) + "</span></p>";
+      }).join("") + "</div></div>" : "";
     if (state.refusal) {
       var rs = (state.refusal.reasons || []).map(function (r) {
         return "<li>" + esc(typeof r === "string" ? r : (r.code || JSON.stringify(r))) + "</li>";
       }).join("");
-      return '<div class="w-refusal">' + ms("gpp_maybe") + "<div><h4>Refused" + (state.refusal.action ? " on " + esc(state.refusal.action) : "") + "</h4>" +
+      return emBanner + '<div class="w-refusal">' + ms("gpp_maybe") + "<div><h4>Refused" + (state.refusal.action ? " on " + esc(state.refusal.action) : "") + "</h4>" +
         (rs ? "<ul>" + rs + "</ul>" : "") +
         (state.refusal.detail ? "<p>" + esc(state.refusal.detail) + "</p>" : "") +
         '</div><button class="w-x" data-w-act="dismiss">' + ms("close") + "</button></div>";
     }
-    if (state.err) return '<div class="w-err">' + ms("error") + "<p>" + esc(state.err) + '</p><button class="w-x" data-w-act="dismiss">' + ms("close") + "</button></div>";
-    if (state.note) return '<div class="w-ok">' + ms("check_circle") + "<p>" + esc(state.note) + '</p><button class="w-x" data-w-act="dismiss">' + ms("close") + "</button></div>";
-    return "";
+    if (state.err) return emBanner + '<div class="w-err">' + ms("error") + "<p>" + esc(state.err) + '</p><button class="w-x" data-w-act="dismiss">' + ms("close") + "</button></div>";
+    if (state.note) return emBanner + '<div class="w-ok">' + ms("check_circle") + "<p>" + esc(state.note) + '</p><button class="w-x" data-w-act="dismiss">' + ms("close") + "</button></div>";
+    return emBanner;
   }
 
   function listView(state) {
@@ -2182,7 +2191,7 @@
   function loadWard() {
     st.busy = true; paint();
     return apiGet("/ward/list?orgId=" + encodeURIComponent(st.orgId) + (st.ward ? "&ward=" + encodeURIComponent(st.ward) : ""))
-      .then(function (r) { if (settle(r)) st.patients = r.patients || []; st.loaded = true; paint(); return Promise.all([loadCosigns(), loadQuality(), loadOverrides(), loadExceptions()]); })
+      .then(function (r) { if (settle(r)) st.patients = r.patients || []; st.loaded = true; paint(); return Promise.all([loadCosigns(), loadQuality(), loadOverrides(), loadExceptions(), loadEmergencyStatus()]); })
       .catch(function () { st.busy = false; st.err = "Could not reach the ward."; st.loaded = true; paint(); });
   }
   function loadChart() {
@@ -3596,6 +3605,14 @@
         paint();
       })
       .catch(function () { st.xchgErr = "Could not reach the exchange queue."; paint(); });
+  }
+  function loadEmergencyStatus() {
+    // TASK 4.15: read-only, on every screen, no matter which board a user has open - the plan's own
+    // "provide visible status" requirement. This never widens anything itself; a route that wants to
+    // honour a named relaxation checks the server's own emergency-mode.js directly.
+    return apiGet("/ward/emergency-status?orgId=" + encodeURIComponent(st.orgId))
+      .then(function (r) { if (r && r.ok) st.emergency = r; paint(); })
+      .catch(function () { paint(); });
   }
   function decideException(id) {
     if (!id) return;

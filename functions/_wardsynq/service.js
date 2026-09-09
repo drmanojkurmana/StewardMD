@@ -62,6 +62,13 @@ const RESOURCE_TYPES = Object.freeze([
    * stored here precisely so it is append-only: a break-glass grant somebody could delete afterwards
    * would defeat the entire mechanism, whose only value is being legible later. */
   "BreakGlassGrant",
+  /* TASK 4.15: a hospital-wide emergency declaration - mass casualty, disaster, evacuation, surge,
+   * network outage. The same reasoning as BreakGlassGrant, at hospital scale: the record OF the
+   * declaration, append-only, never the source of any capability itself. Nothing in actor.js's
+   * grant logic reads this type; declaring one widens no role's read/write scope automatically -
+   * see emergency-mode.js's own header for why "do not create an unrestricted admin bypass" means
+   * this file grants nothing by existing. */
+  "EmergencyActivation",
   /* Medicines reconciliation. A record of DECISIONS about medicines taken before admission - not a
    * prescription and deliberately not modelled as one: deciding to continue a home medicine records
    * the decision, and the inpatient order is still written through the ordering path with its own

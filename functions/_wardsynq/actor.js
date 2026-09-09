@@ -373,6 +373,25 @@ function grantForCaps(caps) {
     };
   }
 
+  /* TASK 4.15. Declaring/deactivating EmergencyActivation is its own narrow authority - see
+   * emergency-mode.js's own header for why this grants nothing beyond the declaration record
+   * itself: EMERGENCY_DECLARE is a governance capability, not a clinical one, and reading/writing
+   * this ONE type is all it ever confers. Admin already holds EMR_TREAT (unrestricted) so this adds
+   * nothing new for that role in practice - it exists for a site that wants to grant emergency
+   * declaration WITHOUT full clinical treat authority, the same reasoning TRANSFUSION_ISSUE/HIM_ROI
+   * already establish. */
+  if (has(CAPS.EMERGENCY_DECLARE)) {
+    const added = ["EmergencyActivation"];
+    if (!grant) grant = { tier: TIER.EXECUTE, read: added, write: added, basis: CAPS.EMERGENCY_DECLARE };
+    else grant = {
+      tier: TIER.EXECUTE,
+      read: grant.read === null ? null : [...new Set([...grant.read, ...added])],
+      write: grant.write === null ? null : [...new Set([...grant.write, ...added])],
+      writeCategories: grant.writeCategories,
+      basis: grant.basis + "+" + CAPS.EMERGENCY_DECLARE,
+    };
+  }
+
   /* An unconstrained write scope cannot be partly constrained. A role that ends up with `write: null`
    * may write every type, and leaving a category allow-list attached to that would refuse the one
    * type it names while permitting every other - a rule that reads as tighter and behaves as

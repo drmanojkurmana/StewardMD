@@ -1050,8 +1050,11 @@ test("THE PROOF: nurse enters vitals -> record stores Observations -> doctor ope
    * assertion used to stringify the whole row and failed roughly once in a thousand runs for that
    * reason alone - a flake that had nothing to do with PHI and would have eroded trust in a real
    * safety assertion. What it means is "no recorded observation value leaked", so it now looks at
-   * everything except the clock. */
-  const auditBody = JSON.stringify(reads.map(({ ts, ...rest }) => rest));
+   * everything except the clock. TASK 4.14's scope.request.correlationId is the same kind of
+   * incidental digit noise (a fresh random UUID every run) and is excluded for the same reason -
+   * it is request-tracing metadata, never a clinical value, and its own coverage lives in
+   * test/wardsynq-audit-context-4-14.test.mjs. */
+  const auditBody = JSON.stringify(reads.map(({ ts, scope, ...rest }) => ({ ...rest, scope: scope && { ...scope, request: undefined } })));
   assert.ok(!auditBody.includes("138"), "no values in the audit: " + auditBody.slice(0, 400));
   assert.ok(!auditBody.includes("96"), "nor any other reading");
 });
