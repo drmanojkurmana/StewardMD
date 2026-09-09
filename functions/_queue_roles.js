@@ -62,6 +62,15 @@ export const CAPS = {
   // folded into emr.treat (a doctor treating a patient is not the same authority as a hospital
   // declaring mass-casualty mode).
   EMERGENCY_DECLARE: "emergency.declare",
+  // ---- WardSynQ TASK 5.14 (Clinical Incident Management) ------------------------------------
+  // Filing is broad on purpose - wardsynq-incidents.js's own header names the failure mode as
+  // silence, not a bad severity matrix, and every capability check between "something happened"
+  // and "it got filed" is friction that loses the minor and near-miss reports first. Anyone
+  // clinical may report. Triage/RCA/CAPA/close is a DISTINCT, narrower authority: the
+  // investigation's own conclusions are never anonymous and never held by whoever happened to
+  // report, the same separation ONCQIS/PGLOG hold between authoring and sign-off.
+  INCIDENT_REPORT: "incident.report",
+  INCIDENT_INVESTIGATE: "incident.investigate",
   // ---- ONCQIS (oncology protocol governance) caps -------------------------------------------
   // Strict role separation: authoring, clinical review, and institutional approval are DISTINCT
   // caps held by DISTINCT roles. Doctor/Nurse never hold any of these (they consume ACTIVE
@@ -113,10 +122,11 @@ export const ROLE_CAPS = {
   admin: Object.values(CAPS).filter((c) => ONCQIS_CAPS.indexOf(c) < 0 && PGLOG_SIGNOFF_CAPS.indexOf(c) < 0),
   // Doctor: own clinical workflow + full EMR. Manages their own queue; can assign/transfer.
   doctor: [C.QUEUE_VIEW, C.QUEUE_ADD, C.QUEUE_STATUS, C.QUEUE_PRIORITY, C.QUEUE_ASSIGN, C.QUEUE_REORDER,
-           C.EMR_VITALS, C.EMR_TREAT, C.EMR_VIEW, C.SESSION_MANAGE, C.ANALYTICS_VIEW, C.ORDER_CREATE, C.ORDER_READ],
+           C.EMR_VITALS, C.EMR_TREAT, C.EMR_VIEW, C.SESSION_MANAGE, C.ANALYTICS_VIEW, C.ORDER_CREATE, C.ORDER_READ,
+           C.INCIDENT_REPORT],
   // OPD supervisor: full queue control + analytics + READ clinical notes/history. NO EMR treatment.
   supervisor: [C.QUEUE_VIEW, C.QUEUE_ADD, C.QUEUE_REORDER, C.QUEUE_STATUS, C.QUEUE_PRIORITY,
-               C.QUEUE_ASSIGN, C.QUEUE_REMOVE, C.ANALYTICS_VIEW, C.EMR_VIEW],
+               C.QUEUE_ASSIGN, C.QUEUE_REMOVE, C.ANALYTICS_VIEW, C.EMR_VIEW, C.INCIDENT_REPORT],
   // Nurse ("sister"): runs the queue at the desk — add/reorder/assign/status/priority — may record
   // vitals/temperature, and may READ a patient's clinical notes/history (view-only, e.g. from the
   // console). Explicitly NO emr.treat (no orders/prescriptions/edits). This is the owner's core ask.
@@ -124,13 +134,13 @@ export const ROLE_CAPS = {
   // nurse's job and nobody else's here. It grants the administration record ONLY - still no
   // emr.treat, so a nurse who can give a dose still cannot write the order for it.
   nurse: [C.QUEUE_VIEW, C.QUEUE_ADD, C.QUEUE_REORDER, C.QUEUE_STATUS, C.QUEUE_PRIORITY, C.QUEUE_ASSIGN,
-          C.EMR_VITALS, C.EMR_VIEW, C.MED_ADMINISTER],
+          C.EMR_VITALS, C.EMR_VIEW, C.MED_ADMINISTER, C.INCIDENT_REPORT],
   // Intern / resident: clinical trainees — see the queue, register a walk-in, advance status, record
   // vitals, view EMR. QUEUE_ADD added 2026-08-24: an intern is often the person handed a walk-in, and
   // withholding it meant they could move patients through consultation but not enter them. Reorder and
   // assign stay OFF - deciding who is seen next is the nurse's authority, not a trainee's.
-  intern: [C.QUEUE_VIEW, C.QUEUE_ADD, C.QUEUE_STATUS, C.EMR_VITALS, C.EMR_VIEW],
-  resident: [C.QUEUE_VIEW, C.QUEUE_ADD, C.QUEUE_STATUS, C.EMR_VITALS, C.EMR_VIEW],
+  intern: [C.QUEUE_VIEW, C.QUEUE_ADD, C.QUEUE_STATUS, C.EMR_VITALS, C.EMR_VIEW, C.INCIDENT_REPORT],
+  resident: [C.QUEUE_VIEW, C.QUEUE_ADD, C.QUEUE_STATUS, C.EMR_VITALS, C.EMR_VIEW, C.INCIDENT_REPORT],
   // Reception / front desk: register walk-ins, mark arrived, assign to a doctor, and READ clinical
   // notes/history (view-only). No reorder/priority, no vitals, no treat/edit.
   reception: [C.QUEUE_VIEW, C.QUEUE_ADD, C.QUEUE_STATUS, C.QUEUE_ASSIGN, C.EMR_VIEW],
@@ -201,6 +211,13 @@ export const ROLE_CAPS = {
   // trainee's clinical record.
   academic_cell: [C.PGLOG_VIEW_INSTITUTION, C.PGLOG_VIEW_DEPT, C.PGLOG_VIEW_ASSIGNED,
                   C.PGLOG_CONFIGURE, C.PGLOG_AUDIT, C.ANALYTICS_VIEW],
+  // WardSynQ TASK 5.14/23: Clinical Safety Officer. Named explicitly in the plan's own
+  // authorization section as the role that "reviews/approves governed safety content" - triages,
+  // investigates and closes incidents. Deliberately NOT full admin: a safety officer can hold
+  // this without also gaining staff/billing/technical administration, and a technical admin
+  // holding INCIDENT_INVESTIGATE via the `admin` role above is that site's own choice, not this
+  // role's default. EMR_VIEW so an investigation can read the chart an incident references.
+  safety_officer: [C.QUEUE_VIEW, C.EMR_VIEW, C.INCIDENT_REPORT, C.INCIDENT_INVESTIGATE],
   // Default for a recognised-but-unmapped login: read-only.
   viewer: [C.QUEUE_VIEW]
 };

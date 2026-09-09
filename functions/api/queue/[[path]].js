@@ -95,6 +95,7 @@ import { verifyOrder, verificationQueue } from "../../_wardsynq/pharmacy-verify.
 import { dispenseOrder, returnDispense, listDispenses } from "../../_wardsynq/pharmacy-dispense.js";
 import { declareBreakGlass, openEmergencyChart, listBreakGlass } from "../../_wardsynq/break-glass.js";
 import { declareEmergency, deactivateEmergency, emergencyStatus, emergencyLog, emergencyReconciliation } from "../../_wardsynq/emergency-mode.js";
+import { reportIncident, triageIncident, recordIncidentRCA, addIncidentCAPA, completeIncidentCAPA, closeIncident, incidentLog } from "../../_wardsynq/incidents.js";
 import { operationOutcome } from "../../_wardsynq/fhir.js";
 import { dispatchRead, dispatchOperation } from "../../_wardsynq/fhir-route.js";
 import { ingestFhir, listExceptions, resolveException, inboundEnabled } from "../../_wardsynq/fhir-inbound.js";
@@ -622,6 +623,13 @@ export async function onRequest(context) {
         "emergency-declare": CAPS.EMERGENCY_DECLARE, "emergency-deactivate": CAPS.EMERGENCY_DECLARE,
         "emergency-status": CAPS.EMR_VIEW, "emergency-log": CAPS.EMR_VIEW,
         "emergency-reconciliation": CAPS.EMERGENCY_DECLARE,
+        // TASK 5.14: filing an incident is broad (INCIDENT_REPORT); triage/RCA/CAPA/close and the
+        // ledger itself are INCIDENT_INVESTIGATE (safety_officer/admin) - the same split
+        // EMERGENCY_DECLARE's declare/deactivate hold over one shared resource scope.
+        "incident-report": CAPS.INCIDENT_REPORT,
+        "incident-triage": CAPS.INCIDENT_INVESTIGATE, "incident-rca": CAPS.INCIDENT_INVESTIGATE,
+        "incident-capa": CAPS.INCIDENT_INVESTIGATE, "incident-capa-complete": CAPS.INCIDENT_INVESTIGATE,
+        "incident-close": CAPS.INCIDENT_INVESTIGATE, "incident-log": CAPS.INCIDENT_INVESTIGATE,
         /* The FHIR export. emr.view because it renders the chart: exporting a record is reading it,
          * and an export door that was easier to open than the chart itself would be the way around
          * every other control on this file. The record service still applies the actor's own read
@@ -1812,6 +1820,34 @@ export async function onRequest(context) {
       }
       if (sub === "emergency-reconciliation" && method === "GET") {
         const r = await emergencyReconciliation(request, env, { ...deps, activationId: url.searchParams.get("activationId") || "" });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "incident-report" && method === "POST") {
+        const r = await reportIncident(request, env, { ...deps, what: body.what, when: body.when, severity: body.severity, anonymous: body.anonymous === true, reportedBy: body.reportedBy, patientId: body.patientId, likelihood: body.likelihood, contributingFactors: body.contributingFactors, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "incident-triage" && method === "POST") {
+        const r = await triageIncident(request, env, { ...deps, incidentId: body.incidentId, likelihood: body.likelihood, triagedBy: body.triagedBy });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "incident-rca" && method === "POST") {
+        const r = await recordIncidentRCA(request, env, { ...deps, incidentId: body.incidentId, rootCause: body.rootCause, contributingFactors: body.contributingFactors, method: body.method, conductedBy: body.conductedBy });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "incident-capa" && method === "POST") {
+        const r = await addIncidentCAPA(request, env, { ...deps, incidentId: body.incidentId, action: body.action, owner: body.owner, dueBy: body.dueBy, strength: body.strength });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "incident-capa-complete" && method === "POST") {
+        const r = await completeIncidentCAPA(request, env, { ...deps, incidentId: body.incidentId, capaId: body.capaId, by: body.by, evidence: body.evidence });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "incident-close" && method === "POST") {
+        const r = await closeIncident(request, env, { ...deps, incidentId: body.incidentId, by: body.by });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "incident-log" && method === "GET") {
+        const r = await incidentLog(request, env, { ...deps, state: url.searchParams.get("state") || "" });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "verify-order" && method === "POST") {

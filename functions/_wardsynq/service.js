@@ -312,6 +312,17 @@ const RESOURCE_TYPES = Object.freeze([
    * authorization decision this task states explicitly rather than making unilaterally, the same
    * restraint migrate-oncology.js's header keeps about the oncqis_* role fence. */
   "TransfusionEpisode",
+  /* TASK 5.14: a clinical incident, the persisted state of wardsynq-incidents.js's report/triage/
+   * RCA/CAPA/close lifecycle. Its own type: an incident is a report ABOUT the system, not a
+   * clinical fact about the patient it may name, and folding it into ClinicalNote would let a
+   * role with note-write silently author or edit an investigation's own conclusions. Its own
+   * capabilities (INCIDENT_REPORT to file, INCIDENT_INVESTIGATE to triage/RCA/CAPA/close) rather
+   * than EMR_TREAT, so filing a report never requires - or implies - clinical treatment
+   * authority, matching the "own authority" precedent ORDER_VERIFY/LAB_RESULT/TRANSFUSION_ISSUE
+   * already set. Append-only, one version per lifecycle transition, so an investigation's earlier
+   * conclusions cannot be edited away after the fact - the same property Claim's coding history
+   * and TransfusionEpisode's traceability already depend on. */
+  "IncidentReport",
 ]);
 
 const MODE = Object.freeze({ SYSTEM_OF_RECORD: "system-of-record", INTEGRATION: "integration" });
