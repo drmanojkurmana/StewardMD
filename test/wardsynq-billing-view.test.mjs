@@ -90,7 +90,7 @@ test("THE GRANT IS THE GUARANTEE: billing cannot write the diagnosis that justif
   /* Not a promise in a module header. A role holding BILLING_CHARGE and no EMR capability may write
    * a Claim and a funding decision, and the record service refuses everything else - so the motion
    * this whole module exists to prevent is refused one layer below it. */
-  assert.deepEqual(cashier.write, [CLAIM_TYPE, PREAUTH_TYPE]);
+  assert.deepEqual(cashier.write, [CLAIM_TYPE, PREAUTH_TYPE, "Invoice"]);
   assert.ok(!cashier.write.includes("Condition"));
   assert.ok(!cashier.write.includes("Observation"));
   assert.ok(!cashier.write.includes("ClinicalNote"));

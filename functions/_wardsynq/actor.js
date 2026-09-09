@@ -302,10 +302,16 @@ function grantForCaps(caps) {
      * the containment is that the write scope below did not move. A site wanting tighter separation
      * should hold BILLING_CHARGE for coders and leave the cashier on BILLING_VIEW. */
     const CAPTURE_TYPES = ["MedicationAdministration", "DiagnosticReport", "SpecimenCollection", "MedicationDispense"];
+    // Invoice joined 2026-09-09 (TASK 4.6): the ledger charge-capture.js's priced proposal becomes
+    // once a person raises it. Read for BOTH billing.view and billing.charge - a cashier reading a
+    // balance is not a coding act, it is the whole reason billing.view exists (see the Cashier task
+    // this grant is written to anticipate, TASK 4.7). Write is billing.charge only: raising an
+    // invoice and posting a payment against it is the SAME financial-record authority as coding a
+    // claim, not a clinical one.
     const canRead = has(CAPS.BILLING_CHARGE)
-      ? ["Condition", "Claim", "PreAuthorisation", ...CAPTURE_TYPES]
-      : ["Claim", "PreAuthorisation"];
-    const canWrite = has(CAPS.BILLING_CHARGE) ? ["Claim", "PreAuthorisation"] : [];
+      ? ["Condition", "Claim", "PreAuthorisation", "Invoice", ...CAPTURE_TYPES]
+      : ["Claim", "PreAuthorisation", "Invoice"];
+    const canWrite = has(CAPS.BILLING_CHARGE) ? ["Claim", "PreAuthorisation", "Invoice"] : [];
     if (!grant) grant = { tier: canWrite.length ? TIER.EXECUTE : TIER.READ, read: canRead, write: canWrite, basis: has(CAPS.BILLING_CHARGE) ? CAPS.BILLING_CHARGE : CAPS.BILLING_VIEW };
     else grant = {
       // Raised, never lowered - the same union rule as every branch above. A cashier who also holds
