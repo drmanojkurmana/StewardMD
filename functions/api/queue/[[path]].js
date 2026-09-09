@@ -140,6 +140,7 @@ import { imagingWorklist } from "../../_wardsynq/dicom.js";
 /* TASK 8: the governed AI layer over the clinical record. Distinct from the MaiK product routes
  * under /api/ai, which answer a clinician's own questions and touch no record. */
 import { askAboutPatient, reviewInteraction, listInteractions } from "../../_wardsynq/maik-interaction.js";
+import { maikStatus } from "../../_wardsynq/maik-gateway.js";
 import { explainOrderSafety } from "../../_wardsynq/maik-cds.js";
 import { checkAdvisories } from "../../_wardsynq/advisory-authoring.js";
 import { cdaForEncounter } from "../../_wardsynq/cda.js";
@@ -755,6 +756,10 @@ export async function onRequest(context) {
          * makes the explanation harder to reach than the finding it explains would push clinicians
          * back to the terser screen, which is the opposite of the intent. */
         "maik-explain-safety": CAPS.EMR_VIEW,
+        /* TASK 8.10. Configuration status: which providers are reachable and which may receive
+         * patient data. It returns no credential and no fingerprint of one, so emr.view is the right
+         * bar - the people who need to know whether MaiK is actually on are the ones using it. */
+        "maik-status": CAPS.EMR_VIEW,
         // Charting a pump is the bedside's act, exactly like giving a dose.
         infusion: CAPS.MED_ADMINISTER, infusions: CAPS.EMR_VIEW,
         // Charting a wound is nursing work, the same authority as a vital or a fluid entry.
@@ -1720,6 +1725,10 @@ export async function onRequest(context) {
           correlationId: body.correlationId, idempotencyKey: body.idempotencyKey || null,
           fetchImpl: env && typeof env.WSQ_MAIK_FETCH === "function" ? env.WSQ_MAIK_FETCH : null });
         return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "maik-status" && method === "GET") {
+        const st = maikStatus(env, (wsqCfg && wsqCfg.maik) || null);
+        return json({ ok: true, ...st }, 200, request);
       }
       if (sub === "maik-review" && method === "POST") {
         const r = await reviewInteraction(request, env, { ...deps, config: (wsqCfg && wsqCfg.maik) || null,

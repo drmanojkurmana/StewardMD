@@ -37,10 +37,13 @@
  * There is no de-identifier here. Stripping names out of clinical text and calling the result
  * anonymous is a research problem, and pretending to have solved it would be worse than not trying.
  *
- * STATUS: IMPLEMENTED and TESTED against deterministic in-process providers. NOT verified against
- * any live model provider from this layer - the WardSynQ record has never been connected to one, and
- * this does not connect it. Wiring a real provider is an operator act (a declared model + a declared
- * PHI approval + a key), and the refusals are what happens until then.
+ * STATUS: IMPLEMENTED and TESTED against deterministic in-process providers, and - since TASK 8.10 -
+ * EXERCISED AGAINST REAL MODELS through this layer: a local OpenAI-compatible server and Google's
+ * Gemini, both driven through the real HTTP route by test/run-maik-real-eval.mjs with no transport
+ * stub. What that establishes is that the path works and what the answers score against a written
+ * rubric; it is NOT clinical validation and nothing here claims to be. Turning a provider on remains
+ * an operator act (a declared model + a declared PHI approval + a key), and the refusals are what
+ * happens until then.
  */
 
 const str = (v) => (v == null ? "" : String(v).trim());
@@ -62,6 +65,83 @@ const LOCALITY = Object.freeze({
 });
 
 /**
+ * THE GEMINI KEY, read from the environment and from nowhere else.
+ *
+ * It is never a configuration field on the org record: an API key in Firestore is a credential in a
+ * clinical database, readable by everything that can read the org. It is a Worker/environment
+ * binding, which is where secrets live in this deployment (`vault/Infra.md`), and it is read at the
+ * moment of the call rather than captured, so rotating it does not need a redeploy of this module.
+ *
+ * `process.env` is checked only when it exists, because Cloudflare Workers has no process global -
+ * the binding is the primary path and the process variable is what makes the evaluation harness and
+ * local development work.
+ */
+function geminiKey(env) {
+  const fromEnv = env && (env.GEMINI_API_KEY || env.MAIK_GEMINI_API_KEY);
+  if (str(fromEnv)) return str(fromEnv);
+  if (typeof process !== "undefined" && process && process.env) {
+    return str(process.env.GEMINI_API_KEY || process.env.MAIK_GEMINI_API_KEY) || null;
+  }
+  return null;
+}
+
+/**
+ * PURE. Remove a secret from anything about to be surfaced.
+ *
+ * Provider errors get put into refusal messages, refusal messages get recorded on MaiKInteraction
+ * rows and printed in logs, and a provider that echoes the request back in its error body would
+ * otherwise write the key into the clinical record. This is belt and braces over never putting the
+ * key in a URL, and it is cheap.
+ */
+function scrubSecret(text, secret) {
+  const t = str(text);
+  const k = str(secret);
+  if (!k || k.length < 8) return t;
+  return t.split(k).join("[redacted]");
+}
+
+/**
+ * Configuration status, for an operator, WITHOUT the secret (TASK 8.10 requirement 7).
+ *
+ * Reports whether each provider could be reached and why not, naming the environment variable that
+ * would fix it. It deliberately returns no key material and no fingerprint of one: "is it the right
+ * key" is answered by making a call, not by comparing hashes in a status endpoint.
+ */
+function maikStatus(env, config) {
+  const cfg = maikConfig(config);
+  const keyPresent = !!geminiKey(env);
+  return {
+    enabled: cfg.enabled,
+    phiApproved: cfg.phiApproved,
+    allow: cfg.allow,
+    timeoutMs: cfg.timeoutMs,
+    providers: [
+      { provider: "wardsynq", configured: true, detail: "always available; assembles the record and generates nothing" },
+      { provider: "local-openai", configured: !!(cfg.localBaseUrl && cfg.localModel),
+        detail: cfg.localBaseUrl && cfg.localModel ? `configured for ${cfg.localModel}` : "set wardsynq.maik.localBaseUrl and localModel" },
+      { provider: "gemini", configured: keyPresent,
+        credentialSource: "GEMINI_API_KEY (environment binding)",
+        surface: "AI Studio (generativelanguage.googleapis.com)",
+        detail: keyPresent ? "an API key is present in the environment" : "no GEMINI_API_KEY is set in the environment" },
+      { provider: "vertex", configured: keyPresent,
+        credentialSource: "GEMINI_API_KEY (environment binding)",
+        surface: "Vertex AI express mode (aiplatform.googleapis.com), publisher path, no project or region in the URL",
+        detail: keyPresent
+          ? "an API key is present in the environment; express mode needs no service account, no ADC and no region"
+          : "no GEMINI_API_KEY is set in the environment" },
+    ],
+    models: MODELS.map((m) => ({
+      id: m.id, provider: m.provider, model: m.model, locality: m.locality, tasks: m.tasks,
+      available: m.serverReachable !== false && m.available(env, cfg),
+      autoSelect: m.autoSelect !== false,
+      phiApproved: m.provider === "wardsynq" || cfg.phiApproved.includes(m.provider) || cfg.phiApproved.includes(m.id),
+    })),
+    /* Said explicitly so a green status is not misread: configuration is not approval. */
+    note: "A model being available means it can be reached. Whether patient data may be sent to it is wardsynq.maik.phiApproved, which is a separate decision and defaults to none.",
+  };
+}
+
+/**
  * THE MODEL REGISTRY. Declared, never discovered.
  *
  * A model this file does not list cannot be routed to, whatever an environment variable says: a
@@ -70,8 +150,8 @@ const LOCALITY = Object.freeze({
  * available here (a key, a base URL) and which may receive patient data.
  *
  * `version` is what the provider is asked for. What actually answered is reported back by the
- * adapter and recorded, because a model id is a moving target and "gemini-2.5-flash" in March is not
- * the same weights as "gemini-2.5-flash" in September.
+ * adapter and recorded, because a model id is a moving target and "gemini-3.6-flash" in March is not
+ * the same weights as "gemini-3.6-flash" in September.
  */
 const MODELS = Object.freeze([
   {
@@ -106,6 +186,78 @@ const MODELS = Object.freeze([
      * is answered by the client or not at all. */
     available: () => false,
     serverReachable: false,
+  },
+  /* GEMINI, on Google's infrastructure. TASK 8.10 added these because the evaluation of a real model
+   * needed a real external provider, and because a hospital with no on-premises GPU has no other way
+   * to reach a capable model at all.
+   *
+   * TWO ENTRIES, NOT A CONFIGURABLE MODEL NAME. Which Gemini models exist here is a code decision,
+   * reviewed like one, exactly as the paragraph above this registry requires: a `geminiModel` string
+   * in configuration would be a registry an operator could point at any model Google ever ships,
+   * including one nobody assessed. A hospital narrows this with `wardsynq.maik.models`; it cannot
+   * widen it.
+   *
+   * CLOUD locality is the whole point of the ranking below: these sort BELOW anything running on the
+   * hospital's own hardware, so a site with a local model keeps using it, and Gemini is reached only
+   * when it is the best thing this hospital has approved. And `phiApproved` still gates it: being in
+   * this registry does not mean patient data may go there. */
+  {
+    id: "gemini-flash",
+    /* MODEL IDS RETIRE, AND THE REGISTRY IS WHERE THAT IS ABSORBED. `gemini-2.5-flash` began
+     * answering NOT_FOUND with "no longer available to new users - use models/gemini-3.6-flash", so
+     * the id moved and nothing else did: no caller names a model, so no caller changed. `version`
+     * is what is ASKED for; what actually answered is whatever the API reports back, and that is
+     * what gets recorded on the interaction. */
+    provider: "gemini", model: "gemini-3.6-flash", version: "gemini-3.6-flash",
+    locality: LOCALITY.CLOUD,
+    tasks: [TASK.SUMMARISE, TASK.DRAFT_NOTE, TASK.EXPLAIN, TASK.EXTRACT, TASK.ANSWER],
+    latency: "medium", cost: "metered",
+    available: (env) => !!geminiKey(env),
+  },
+  {
+    id: "gemini-pro",
+    // Retired the same way, and Google's own named replacement for it.
+    provider: "gemini", model: "gemini-3.1-pro-preview", version: "gemini-3.1-pro-preview",
+    locality: LOCALITY.CLOUD,
+    tasks: [TASK.SUMMARISE, TASK.DRAFT_NOTE, TASK.EXPLAIN, TASK.EXTRACT, TASK.ANSWER],
+    latency: "slow", cost: "metered",
+    /* Opt-in by name. Two models from one provider would otherwise be chosen between by latency rank
+     * alone, which is not a clinical decision this file should be making silently. */
+    available: (env) => !!geminiKey(env),
+    autoSelect: false,
+  },
+  /* THE SAME GEMINI WEIGHTS, REACHED THROUGH VERTEX AI INSTEAD OF AI STUDIO.
+   *
+   * These are a separate provider rather than a flag on the entries above, because the two are
+   * different services with different hosts, different billing and different failure modes: AI
+   * Studio bills prepaid credits on generativelanguage.googleapis.com, Vertex bills the Google Cloud
+   * project on aiplatform.googleapis.com. A hospital approving one has not approved the other, and
+   * `phiApproved` naming "gemini" must not silently permit "vertex" - which it does not, because
+   * approval matches on the provider id.
+   *
+   * EXPRESS MODE is what makes an API key work here at all. The project-path endpoints
+   * (/projects/<id>/locations/<region>/...) require an OAuth bearer token and the
+   * aiplatform.endpoints.predict permission; the publisher-path endpoint below accepts the same API
+   * key as AI Studio and needs no service account, no ADC and no region. That is a deliberate
+   * limitation to record: this adapter cannot reach a project-scoped or regionally-pinned Vertex
+   * deployment, and a hospital that needs data residency in a named region needs the OAuth path,
+   * which is a different adapter and a different credential. */
+  {
+    id: "vertex-flash",
+    provider: "vertex", model: "gemini-3.6-flash", version: "gemini-3.6-flash",
+    locality: LOCALITY.CLOUD,
+    tasks: [TASK.SUMMARISE, TASK.DRAFT_NOTE, TASK.EXPLAIN, TASK.EXTRACT, TASK.ANSWER],
+    latency: "medium", cost: "metered",
+    available: (env) => !!geminiKey(env),
+  },
+  {
+    id: "vertex-pro",
+    provider: "vertex", model: "gemini-3.1-pro-preview", version: "gemini-3.1-pro-preview",
+    locality: LOCALITY.CLOUD,
+    tasks: [TASK.SUMMARISE, TASK.DRAFT_NOTE, TASK.EXPLAIN, TASK.EXTRACT, TASK.ANSWER],
+    latency: "slow", cost: "metered",
+    available: (env) => !!geminiKey(env),
+    autoSelect: false,
   },
   {
     id: "hospital-local",
@@ -194,7 +346,17 @@ function route(ctx) {
      * not automatically approved either: "local" is an architecture, and approval is a decision. The
      * deterministic assembler is the one exception, because it sends the data nowhere at all - it
      * runs in this process, on rows the caller already read. */
+    const beforeApproval = candidates;
     candidates = candidates.filter((m) => m.provider === "wardsynq" || cfg.phiApproved.includes(m.provider) || cfg.phiApproved.includes(m.id));
+    /* A NAMED MODEL DROPPED HERE SAYS WHY IT WAS DROPPED. Without this, asking for a model the
+     * hospital has not approved for patient data falls through to "not a model this hospital can
+     * use", which sends an operator to look at the registry when the thing to change is the approval
+     * list. The REFUSAL IS IDENTICAL either way - nothing is sent - and only the sentence differs. */
+    if (wanted && beforeApproval.some((m) => m.id === wanted) && !candidates.some((m) => m.id === wanted)) {
+      const m = beforeApproval.find((x) => x.id === wanted);
+      return refuse("no_phi_approved_model",
+        `"${wanted}" runs on provider "${m.provider}", which this hospital has not approved to receive patient data. Approval is per provider under wardsynq.maik.phiApproved, so approving one provider never approves another. Nothing was sent.`);
+    }
     if (!candidates.length) {
       const floor = MODELS.find((m) => m.id === "wardsynq-deterministic" && m.tasks.includes(task));
       return refuse("no_phi_approved_model",
@@ -210,6 +372,89 @@ function route(ctx) {
   const rank = (m) => (m.locality === LOCALITY.LOCAL ? 0 : m.locality === LOCALITY.ON_DEVICE ? 1 : 2);
   const model = preferred || [...candidates].sort((a, b) => rank(a) - rank(b))[0];
   return { ok: true, model };
+}
+
+/**
+ * The Google generateContent wire format, shared by AI Studio and Vertex AI.
+ *
+ * The two services speak the SAME request and response shape and differ only in host, path and which
+ * bill they land on - so one implementation serves both, and a bug fixed in the error handling is
+ * fixed for both. `surface` is carried into error messages because "Gemini refused" is ambiguous
+ * when two entirely separate services can both refuse.
+ *
+ * THE KEY GOES IN A HEADER, NEVER IN THE URL. Google's APIs accept `?key=`, and a URL carrying a
+ * credential ends up in proxy logs, error messages, browser history and any exception that prints a
+ * request. `x-goog-api-key` keeps it out of every one of those, and scrubSecret covers the case where
+ * the provider echoes it back in an error body.
+ *
+ * A BLOCKED ANSWER IS A REFUSAL, NOT AN EMPTY ONE. Safety filters fire on clinical text more than
+ * people expect - a medication list reads like drug content to a general-purpose classifier. If
+ * nothing comes back, this says WHY, so a clinician is never shown silence that looks like "nothing
+ * to report" and an operator can tell a block from an outage.
+ */
+async function googleGenerate(req, opts) {
+  const cfg = maikConfig(req.config);
+  const key = geminiKey(req.env);
+  if (!key) throw new Error(`no Google API key is present in the environment (GEMINI_API_KEY) for ${opts.surface}`);
+  const model = str(req.model && req.model.model) || "gemini-3.6-flash";
+  const url = opts.urlFor(model);
+  const controller = typeof AbortController === "function" ? new AbortController() : null;
+  const timer = controller ? setTimeout(() => controller.abort(), cfg.timeoutMs) : null;
+  try {
+    const res = await (req.fetchImpl || fetch)(url, {
+      method: "POST",
+      headers: { "Content-Type": "application/json", "x-goog-api-key": key },
+      body: JSON.stringify({
+        ...(str(req.system) ? { systemInstruction: { parts: [{ text: str(req.system) }] } } : {}),
+        contents: [{ role: "user", parts: [{ text: str(req.prompt) }] }],
+        generationConfig: { temperature: 0 },
+      }),
+      ...(controller ? { signal: controller.signal } : {}),
+    });
+
+    const body = await res.json().catch(() => null);
+    if (!res.ok) {
+      /* The API's own error CLASS is the useful part for diagnosis - PERMISSION_DENIED and
+       * RESOURCE_EXHAUSTED need completely different fixes - so it is surfaced, scrubbed. */
+      const err = body && body.error;
+      const cls = str(err && err.status) || `HTTP_${res.status}`;
+      const msg = scrubSecret(str(err && err.message), key);
+      throw new Error(`${opts.surface} refused the request [${cls}]${msg ? ": " + msg : ""}`);
+    }
+
+    const cand = body && Array.isArray(body.candidates) ? body.candidates[0] : null;
+    const blocked = body && body.promptFeedback && str(body.promptFeedback.blockReason);
+    if (blocked) throw new Error(`${opts.surface} blocked the PROMPT before answering [${blocked}]. Nothing was generated.`);
+    const finish = str(cand && cand.finishReason);
+    const text = str(cand && cand.content && Array.isArray(cand.content.parts)
+      ? cand.content.parts.map((x) => str(x && x.text)).filter(Boolean).join("")
+      : "");
+    if (!text) {
+      throw new Error(finish && finish !== "STOP"
+        ? `${opts.surface} returned no text [${finish}] - the answer was cut off or filtered, not empty of findings`
+        : `${opts.surface} returned no text`);
+    }
+
+    const u = body && body.usageMetadata;
+    return {
+      text,
+      /* What ACTUALLY answered. `modelVersion` is Google's own report and is the thing worth
+       * recording: "gemini-3.6-flash" is a moving pointer and the served version is not. */
+      model: { provider: opts.providerId, model, version: str(body && body.modelVersion) || model },
+      usage: u ? {
+        in: u.promptTokenCount ?? null, out: u.candidatesTokenCount ?? null, total: u.totalTokenCount ?? null,
+        /* Vertex reports these and AI Studio does not. `thoughts` matters for cost: reasoning tokens
+         * are billed and are invisible in the answer, so a run that looks cheap by output length is
+         * not. `trafficType` says whether this was on-demand or provisioned throughput. */
+        thoughts: u.thoughtsTokenCount ?? null,
+        trafficType: str(u.trafficType) || null,
+      } : null,
+      generated: true,
+    };
+  } catch (e) {
+    // Last line of defence: nothing leaves this adapter carrying the key, including an abort.
+    throw new Error(scrubSecret(str(e && e.message) || `${opts.surface} could not be reached`, key));
+  } finally { if (timer) clearTimeout(timer); }
 }
 
 /* ---- providers ---------------------------------------------------------------------------------- */
@@ -231,6 +476,32 @@ const PROVIDERS = Object.freeze({
         : "Not recorded.";
       return { text: body, model: { provider: "wardsynq", model: "deterministic", version: "1" }, usage: null, generated: false };
     },
+  },
+  /* GEMINI over the Generative Language API.
+   *
+   * THE KEY GOES IN A HEADER, NEVER IN THE URL. Google's API accepts `?key=`, and a URL carrying a
+   * credential ends up in proxy logs, error messages, browser history and any exception that prints
+   * a request. `x-goog-api-key` keeps it out of every one of those, and scrubSecret covers the case
+   * where the provider echoes it back in an error body.
+   *
+   * A BLOCKED ANSWER IS A REFUSAL, NOT AN EMPTY ONE. Gemini's safety filters fire on clinical text
+   * more than people expect - a medication list reads like drug content to a general-purpose
+   * classifier. If nothing comes back, this says WHY, so a clinician is never shown silence that
+   * looks like "nothing to report" and an operator can tell a block from an outage. */
+  gemini: {
+    generate: async (req) => googleGenerate(req, {
+      providerId: "gemini",
+      urlFor: (model) => `https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(model)}:generateContent`,
+      surface: "AI Studio (generativelanguage.googleapis.com)",
+    }),
+  },
+  /* Vertex AI, express mode. Same wire format, same parsing, different host and different bill. */
+  vertex: {
+    generate: async (req) => googleGenerate(req, {
+      providerId: "vertex",
+      urlFor: (model) => `https://aiplatform.googleapis.com/v1/publishers/google/models/${encodeURIComponent(model)}:generateContent`,
+      surface: "Vertex AI express mode (aiplatform.googleapis.com)",
+    }),
   },
   /* A model on this hospital's own hardware, over the OpenAI-compatible chat API. No key is sent
    * anywhere off-site because there is no off-site: the base URL is the hospital's own. */
@@ -302,4 +573,4 @@ async function invoke(ctx) {
   };
 }
 
-export { TASK, LOCALITY, MODELS, PROVIDERS, maikConfig, looksLikePhi, route, invoke, byId };
+export { TASK, LOCALITY, MODELS, PROVIDERS, maikConfig, looksLikePhi, route, invoke, byId, maikStatus, scrubSecret, geminiKey, googleGenerate };
