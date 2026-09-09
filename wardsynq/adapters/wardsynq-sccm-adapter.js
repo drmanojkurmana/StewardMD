@@ -251,6 +251,10 @@ function mapSccmBundle(bundle) {
     req.display = k.display || k.code;
     req.externalStatus = s.status || "unknown";
     req.externalRequester = s.requester || null;
+    /* TASK 7.6: the order's PLACER and FILLER numbers as the sender wrote them. An order arrives
+     * keyed by one and its result often comes back quoting the other; keeping both is what lets a
+     * person reading the chart tie the two messages together. Never used to decide anything. */
+    if (s.identifiers && s.identifiers.length) req.externalIdentifiers = s.identifiers.filter((i) => i && i.value).map((i) => ({ system: i.system || null, type: i.type || null, value: String(i.value) }));
     if (s.authoredOn) req.authoredAt = s.authoredOn;
     entities.push(req);
   }

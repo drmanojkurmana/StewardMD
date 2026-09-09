@@ -99,6 +99,11 @@ const REASON = Object.freeze({
   TENANT_MISMATCH: "conflict-tenant-mismatch",
   STALE_RESULT: "conflict-stale-result",
   MEDICATION_CONFLICT: "conflict-medication",
+  /* TASK 7.6. A cancellation (HL7 A11/A12/A13) that names a visit this hospital does not hold.
+   * The safe answer is NOT to create it: a cancel-discharge that invents an in-progress encounter
+   * puts a patient back on a ward they were never on, and a cancel-admit that invents a cancelled
+   * one leaves a ghost visit behind. Held for a person, who can see what the sender meant. */
+  CANCEL_UNKNOWN: "conflict-cancels-unknown-encounter",
   VERSION_MISMATCH: "version-mismatch",
   UNSUPPORTED: "unsupported-resource",
   INVALID: "invalid-resource",
@@ -611,6 +616,29 @@ function medicationConflicts(entities, liveMeds, system) {
   return out;
 }
 
+/** What each cancellation trigger takes back, in the words a person reading the exception uses. */
+const CANCELLATION = Object.freeze({ A11: "an admission", A12: "a transfer", A13: "a discharge" });
+
+/**
+ * PURE. TASK 7.6. A cancellation message naming an encounter this hospital does not hold.
+ *
+ * A11/A12/A13 mean "what I told you before did not happen". They can only take something back, so
+ * they may never bring an encounter INTO existence: an A13 for an unknown visit would create an
+ * in-progress encounter - a patient apparently on a ward they were never admitted to - and an A11
+ * would leave a cancelled ghost visit that no one ordered. Both are far worse than a held message.
+ * `currentOf(entity)` returns the stored latest version or null; `trigger` is MSH-9's event code.
+ */
+function cancellationsWithoutTarget(entities, currentOf, trigger) {
+  const takes = CANCELLATION[str(trigger).toUpperCase()];
+  if (!takes) return [];
+  const out = [];
+  for (const e of entities || []) {
+    if (!e || e.resourceType !== "Encounter" || currentOf(e)) continue;
+    out.push({ entity: e, current: null, reason: REASON.CANCEL_UNKNOWN, cancels: takes, trigger: str(trigger).toUpperCase() });
+  }
+  return out;
+}
+
 /** PURE. What a person opening this exception needs to read first: why it is here, in one sentence. */
 function conflictDetail(c) {
   const cur = c.current || {};
@@ -621,6 +649,8 @@ function conflictDetail(c) {
       return `this describes ${c.incomingEffectiveAt}, which is EARLIER than the version already stored (${cur.effectiveAt}); a late message does not silently move a chart backwards`;
     case REASON.MEDICATION_CONFLICT:
       return `${cur.source} already asserts this patient is on ${cur.drug} (${cur.status}); two systems disagreeing about a live medication is reconciled by a person, and nothing here was started, stopped or merged`;
+    case REASON.CANCEL_UNKNOWN:
+      return `${c.trigger} cancels ${c.cancels} for visit ${str(c.entity.id)}, which this hospital does not hold; a cancellation can only take something back, so nothing was created - check whether the admission message was ever received`;
     case REASON.CONFLICT_LOCAL_AUTHORITATIVE:
       return "this hospital authored the current version; a feed does not overwrite it";
     default:
@@ -954,6 +984,8 @@ async function landBundle(request, env, ctx) {
     ...encounterMismatches(writable, (id) => encounterRefs.get(id) || null),
     ...staleUpdates(writable, (e) => currents.get(`${e.resourceType}/${e.id}`) || null),
     ...medicationConflicts(writable, liveMeds, adapterSystem),
+    // TASK 7.6: `trigger` is set only by the HL7 door, and only A11/A12/A13 mean anything to it.
+    ...cancellationsWithoutTarget(writable, (e) => currents.get(`${e.resourceType}/${e.id}`) || null, ctx.trigger),
   ];
   if (extra.length) {
     const held = new Set(extra.map((c) => `${c.entity.resourceType}/${c.entity.id}`));
@@ -1249,7 +1281,7 @@ function registerRedrive(protocol, fn) { if (str(protocol) && typeof fn === "fun
 export {
   EXCEPTION_TYPE, DECISION_TYPE, GRANT_TYPE, REASON, RESOLUTION, INBOUND_TYPES, CODE_FIELDS,
   inboundEnabled, bodySourceOf, splitBundle, evaluateIfNoneExist, markTerminology, markTerminologyWithService, reconcileIdentity, rebind, partitionConflicts,
-  tenantMismatch, encounterMismatches, staleUpdates, medicationConflicts, drugKey, conflictDetail, LIVE_MED_STATUS,
+  tenantMismatch, encounterMismatches, staleUpdates, medicationConflicts, cancellationsWithoutTarget, drugKey, conflictDetail, LIVE_MED_STATUS,
   ExchangeException, ExchangeIdentityDecision, priorDecision,
   SourceSystemGrant, grantIdFor, authorizedSourceSystem, grantSourceSystem, revokeSourceSystem,
   ingestFhir, landBundle, openIngest, registerRedrive, listExceptions, resolveException,

@@ -26,7 +26,11 @@ export function diagnosticReport(o = {}) { requireId(o); return putIf(putIf({ id
  * status verbatim; what WardSynQ may file is decided by the adapter, never here. */
 export function medicationAdministration(o = {}) { requireId(o); return putIf(putIf({ id: o.id, medication: o.medication || null, status: o.status || "unknown", effectiveDateTime: o.effectiveDateTime || null, performer: o.performer || null, dosage: o.dosage || null, encounter: o.encounter || null }, "request", o.request), "reason", o.reason); }
 /* SCCM 1.1. An order for something other than a medicine, as the source holds it. */
-export function serviceRequest(o = {}) { requireId(o); return putIf({ id: o.id, code: o.code || null, category: o.category || null, status: o.status || "unknown", intent: o.intent || "order", priority: o.priority || null, authoredOn: o.authoredOn || null, requester: o.requester || null, encounter: o.encounter || null }, "occurrence", o.occurrence); }
+/* SCCM 1.1 (additive, TASK 7.6). `identifiers` carries the order's PLACER and FILLER numbers as the
+ * sender wrote them. An HL7 order arrives keyed by the placer number and its result often comes back
+ * quoting only the filler; keeping both means the two ends of an order stay attributable to a person
+ * reading the record, instead of only to whichever number happened to become the id. */
+export function serviceRequest(o = {}) { requireId(o); return putIf(putIf({ id: o.id, code: o.code || null, category: o.category || null, status: o.status || "unknown", intent: o.intent || "order", priority: o.priority || null, authoredOn: o.authoredOn || null, requester: o.requester || null, encounter: o.encounter || null }, "identifiers", o.identifiers && o.identifiers.length ? o.identifiers : null), "occurrence", o.occurrence); }
 /* SCCM 1.1. A consent decision as the source recorded it. `scope` and `category` are the source's
  * codings; `decision` is permit|deny|null derived from status and provision; nothing is inferred. */
 export function consent(o = {}) { requireId(o); return { id: o.id, status: o.status || "unknown", scope: o.scope || null, category: o.category || [], decision: o.decision || null, dateTime: o.dateTime || null, performer: o.performer || null, period: o.period || null, policy: o.policy || null }; }

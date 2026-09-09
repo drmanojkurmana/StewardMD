@@ -40,12 +40,28 @@ const slug = (v) => str(v).toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-
 const MESSAGE_TYPE = "ExchangeMessage";
 
 /** The messages this gateway understands at all. A hospital's profile may narrow this, never widen it. */
-const SUPPORTED = Object.freeze(["ADT^A01", "ADT^A02", "ADT^A03", "ADT^A04", "ADT^A08", "ORU^R01"]);
+const SUPPORTED = Object.freeze([
+  "ADT^A01", "ADT^A02", "ADT^A03", "ADT^A04", "ADT^A08",
+  /* TASK 7.6. The cancellations. A ward that can be told a patient was admitted, moved and
+   * discharged but never that any of it was taken back accumulates ghosts: a bed that stays
+   * occupied, a discharge summary owed for a visit that did not happen. A11 cancel-admit,
+   * A12 cancel-transfer, A13 cancel-discharge. None of them may CREATE an encounter - see
+   * fhir-inbound.js's cancellationsWithoutTarget: a cancellation of a visit this hospital never
+   * had is held for a person, never turned into a new visit that is instantly cancelled. */
+  "ADT^A11", "ADT^A12", "ADT^A13",
+  "ORU^R01",
+  /* An order placed in another system, arriving here. ORM^O01 is the classic order message and
+   * OML^O21 its laboratory successor; both are filed as ServiceRequests, the same type the ORU
+   * path already creates for the order behind a result. */
+  "ORM^O01", "OML^O21",
+]);
 
 /** The hospital's integration profile, with the defaults any hospital gets. */
 const DEFAULT_PROFILE = Object.freeze({
   messages: SUPPORTED,
-  requiredSegments: { ADT: ["MSH", "EVN", "PID", "PV1"], ORU: ["MSH", "PID", "OBR", "OBX"] },
+  /* An order message must carry an ORC: the ORC is what says what is HAPPENING to the order (new,
+   * cancelled, held). An OBR alone describes a service with no instruction attached to it. */
+  requiredSegments: { ADT: ["MSH", "EVN", "PID", "PV1"], ORU: ["MSH", "PID", "OBR", "OBX"], ORM: ["MSH", "PID", "ORC"], OML: ["MSH", "PID", "ORC"] },
   sendingApplications: [],      // MSH-3 values allowed; empty = any named sender
   processingIds: ["P"],         // MSH-11; a T (training) message does not enter a production record
   keepRaw: false,               // store every message verbatim as an ExchangeMessage receipt
@@ -160,7 +176,7 @@ async function ingestHl7(request, env, ctx) {
   const adapterSystem = `hl7v2-${system}`;
   sccm.meta.sourceConnector = adapterSystem;
 
-  const unsupported = (msg.segments || []).filter((s) => !/^Z/i.test(s.id) && !["MSH", "EVN", "PID", "PD1", "NK1", "PV1", "PV2", "DG1", "AL1", "OBR", "OBX", "NTE", "ORC", "ROL", "IN1", "GT1", "ZZZ"].includes(s.id)).map((s) => s.id);
+  const unsupported = (msg.segments || []).filter((s) => !/^Z/i.test(s.id) && !["MSH", "EVN", "PID", "PD1", "NK1", "PV1", "PV2", "DG1", "AL1", "OBR", "OBX", "NTE", "ORC", "TQ1", "ROL", "IN1", "GT1", "ZZZ"].includes(s.id)).map((s) => s.id);
   const landingProblems = [...new Set(unsupported)].map((id) => ({ reason: REASON.UNSUPPORTED, detail: `segment ${id} is not one this gateway files; carried in the raw message only` }));
   // landBundle reads the record (identity candidates, ownership) before it writes anything, and a
   // repository failure on one of those reads is not caught inside it - it throws. EVERY message that
@@ -170,7 +186,7 @@ async function ingestHl7(request, env, ctx) {
   try {
     landed = await landBundle(request, env, {
       ...ctx, svc, resolved, sccm, system, adapterSystem, patient: sccm.patient, problems: landingProblems, requests: new Map(), bundleType: "transaction", atomic: true,
-      protocol: "hl7v2", mode: "bundle", body: raw, messageControlId: kind.controlId, targetType: undefined, targetId: undefined, patientRef: undefined, ifMatch: undefined,
+      protocol: "hl7v2", mode: "bundle", body: raw, messageControlId: kind.controlId, trigger: kind.event, targetType: undefined, targetId: undefined, patientRef: undefined, ifMatch: undefined,
     });
   } catch (e) {
     return { ...ackWith("AE", "the record could not be read to file this message: " + str(e && e.message), [{ code: "207", name: ERR_NAME[207], detail: str(e && e.message) }]) };
