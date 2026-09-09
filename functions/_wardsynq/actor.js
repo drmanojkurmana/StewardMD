@@ -392,6 +392,25 @@ function grantForCaps(caps) {
     };
   }
 
+  /* TASK 5.14. Filing (INCIDENT_REPORT) and investigating (INCIDENT_INVESTIGATE) are DISTINCT
+   * capabilities in _queue_roles.js - see incidents.js's own header for why - but both resolve to
+   * the SAME resource-type scope here: which lifecycle action a request may actually perform
+   * (report vs triage/RCA/CAPA/close) is enforced at the route, exactly as EMERGENCY_DECLARE's
+   * declare/deactivate both resolve to one EmergencyActivation scope above. A role holding either
+   * capability can read and write IncidentReport; a role holding neither cannot reach it at all. */
+  if (has(CAPS.INCIDENT_REPORT) || has(CAPS.INCIDENT_INVESTIGATE)) {
+    const added = ["IncidentReport"];
+    const basis = has(CAPS.INCIDENT_INVESTIGATE) ? CAPS.INCIDENT_INVESTIGATE : CAPS.INCIDENT_REPORT;
+    if (!grant) grant = { tier: TIER.EXECUTE, read: added, write: added, basis };
+    else grant = {
+      tier: TIER.EXECUTE,
+      read: grant.read === null ? null : [...new Set([...grant.read, ...added])],
+      write: grant.write === null ? null : [...new Set([...grant.write, ...added])],
+      writeCategories: grant.writeCategories,
+      basis: grant.basis + "+" + basis,
+    };
+  }
+
   /* An unconstrained write scope cannot be partly constrained. A role that ends up with `write: null`
    * may write every type, and leaving a category allow-list attached to that would refuse the one
    * type it names while permitting every other - a rule that reads as tighter and behaves as
