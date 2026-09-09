@@ -491,7 +491,15 @@
       note: (o.note || "").slice(0, 500) };
     try { var K = "stewardmd_ws_fb_" + uid(), log = JSON.parse(localStorage.getItem(K) || "[]"); log.push(payload); if (log.length > 200) log = log.slice(-200); localStorage.setItem(K, JSON.stringify(log)); } catch (e) {}
     try { fetch("/api/ws-feedback", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(payload), keepalive: true, cache: "no-store" }).catch(function () {}); } catch (e) {}
-    var fb = document.getElementById("swFb"); if (fb) fb.innerHTML = '<span class="sw-fbthanks">' + wsIco("check") + ' Thanks — your feedback helps improve this.</span>';
+    var fb = document.getElementById("swFb");
+    if (fb) {
+      fb.innerHTML = "";
+      var span = document.createElement("span");
+      span.className = "sw-fbthanks";
+      span.innerHTML = wsIco("check");
+      span.appendChild(document.createTextNode(" Thanks — your feedback helps improve this."));
+      fb.appendChild(span);
+    }
   }
 
   /* ───────────────────────────── sidebar switcher (wrap SB.open) ───────────────────────────── */
