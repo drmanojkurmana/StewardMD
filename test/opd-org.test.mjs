@@ -4,7 +4,7 @@ import assert from "node:assert/strict";
 import {
   org, department, opd, room, membership, thresholds, roomStatus, resolveRoomDoctor,
   isOwnerOfOrg, canAccessOrg, roleInOrg, withinScope, authorizeOrgAccess, ROOM_ASSIGN_MODES,
-  normDocId, roomForActor
+  normDocId, roomForActor, ward, bed, BED_STATES
 } from "../functions/_opd_org.js";
 
 test("org: mode/connector; native default; thresholds normalised", () => {
@@ -56,6 +56,37 @@ test("hierarchy is optional: room needs orgId; dept/opd may be absent (simple cl
   assert.equal(opd({ id: "opd1", orgId: "o1", name: "General OPD" }).departmentId, null);
   assert.equal(department({ id: "d1", orgId: "o1", name: "Cardiology", code: "CARD" }).code, "CARD");
   assert.throws(() => room({ orgId: "o1" }), /id required/);
+});
+
+test("TASK 4.1: every organizational unit carries type and active state, additive and backward-compatible", () => {
+  // Omitted on every call this file already had - so no existing document changes meaning.
+  const d = department({ id: "d1", orgId: "o1", name: "Laboratory" });
+  assert.equal(d.type, "general"); assert.equal(d.active, true);
+  const withType = department({ id: "d2", orgId: "o1", name: "Radiology", type: "clinical" });
+  assert.equal(withType.type, "clinical");
+  const retired = department({ id: "d1", orgId: "o1", name: "Laboratory", active: false });
+  assert.equal(retired.active, false, "a department once opened can be retired without deleting its history");
+  assert.equal(opd({ id: "o", orgId: "o1", name: "General OPD" }).active, true);
+  assert.equal(room({ id: "r", orgId: "o1", name: "R1" }).active, true);
+});
+
+test("TASK 4.1: ward and bed - Enterprise -> ... -> Ward -> Bed, a ward is a PLACE distinct from a department's SERVICE", () => {
+  const w = ward({ id: "w1", orgId: "o1", name: "Medical A", departmentId: "d1" });
+  assert.equal(w.name, "Medical A"); assert.equal(w.departmentId, "d1"); assert.equal(w.type, "general"); assert.equal(w.active, true);
+  assert.throws(() => ward({ orgId: "o1" }), /id required/);
+
+  const b = bed({ id: "b1", orgId: "o1", wardId: "w1", name: "1" });
+  assert.equal(b.state, "available", "a bed defaults to available, never to a state nobody set");
+  assert.deepEqual(BED_STATES, ["available", "occupied", "blocked", "cleaning", "maintenance"]);
+  assert.equal(bed({ id: "b2", orgId: "o1", wardId: "w1", name: "2", state: "not-a-real-state" }).state, "available", "an unrecognised state falls back to available, never to whatever was typed");
+  assert.equal(bed({ id: "b3", orgId: "o1", wardId: "w1", name: "3", state: "maintenance" }).state, "maintenance");
+
+  // A stated restriction, never an inferred one.
+  assert.equal(bed({ id: "b4", orgId: "o1", wardId: "w1", name: "4" }).genderRestriction, null);
+  assert.equal(bed({ id: "b5", orgId: "o1", wardId: "w1", name: "5", genderRestriction: "female" }).genderRestriction, "female");
+  assert.equal(bed({ id: "b6", orgId: "o1", wardId: "w1", name: "6", genderRestriction: "not-a-gender" }).genderRestriction, null);
+  assert.equal(bed({ id: "b7", orgId: "o1", wardId: "w1", name: "7", isolation: true }).isolation, true);
+  assert.throws(() => bed({ orgId: "o1", wardId: "w1" }), /id required/);
 });
 
 test("TENANT ISOLATION: a membership can act ONLY in its own org", () => {
