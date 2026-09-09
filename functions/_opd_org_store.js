@@ -124,6 +124,41 @@ export async function updateRoom(env, roomId, patch, actorId) {
   await audit(env, cur.orgId, actorId, "room:update", (patch && patch.assignment) ? "assignment" : ""); return f;
 }
 
+// ---- wards / beds (TASK 4.1: Enterprise -> ... -> Ward -> Bed) ----------------------------------
+export async function createWard(env, orgId, body, actorId) {
+  const id = newId(); const f = M.ward({ id, orgId, departmentId: (body || {}).departmentId, name: (body || {}).name, code: (body || {}).code, type: (body || {}).type });
+  await fsCommit(env, [wCreate(env, "q_wards/" + id, f)]);
+  await audit(env, orgId, actorId, "ward:create", f.name); return f;
+}
+export async function getWard(env, wardId) { const d = await fsGet(env, "q_wards/" + sanitize(wardId)); return d ? M.ward(withId(sanitize(wardId), d.fields)) : null; }
+export async function listWards(env, orgId) {
+  const r = await fsQuery(env, "q_wards", { where: { field: "orgId", value: sanitize(orgId) }, limit: 200 });
+  return r.map((x) => M.ward(withId(x.id, x.fields)));
+}
+export async function updateWard(env, wardId, patch, actorId) {
+  const cur = await getWard(env, wardId); if (!cur) return null;
+  const f = M.ward(Object.assign({}, cur, patch || {}, { id: cur.id, orgId: cur.orgId }));   // orgId immutable
+  await fsCommit(env, [wUpdate(env, "q_wards/" + sanitize(wardId), f)]);
+  await audit(env, cur.orgId, actorId, "ward:update", patch && patch.active === false ? "deactivated" : ""); return f;
+}
+export async function createBed(env, orgId, body, actorId) {
+  const id = newId(); const f = M.bed({ id, orgId, wardId: (body || {}).wardId, name: (body || {}).name, state: (body || {}).state, genderRestriction: (body || {}).genderRestriction, isolation: (body || {}).isolation });
+  await fsCommit(env, [wCreate(env, "q_beds/" + id, f)]);
+  await audit(env, orgId, actorId, "bed:create", f.name); return f;
+}
+export async function getBed(env, bedId) { const d = await fsGet(env, "q_beds/" + sanitize(bedId)); return d ? M.bed(withId(sanitize(bedId), d.fields)) : null; }
+export async function listBeds(env, orgId, wardId) {
+  const r = await fsQuery(env, "q_beds", { where: { field: "orgId", value: sanitize(orgId) }, limit: 500 });
+  const beds = r.map((x) => M.bed(withId(x.id, x.fields)));
+  return wardId ? beds.filter((b) => b.wardId === sanitize(wardId)) : beds;
+}
+export async function updateBed(env, bedId, patch, actorId) {
+  const cur = await getBed(env, bedId); if (!cur) return null;
+  const f = M.bed(Object.assign({}, cur, patch || {}, { id: cur.id, orgId: cur.orgId, wardId: cur.wardId }));   // orgId/wardId immutable - move a bed by retiring and recreating it, never by relabeling it into a different ward's history
+  await fsCommit(env, [wUpdate(env, "q_beds/" + sanitize(bedId), f)]);
+  await audit(env, cur.orgId, actorId, "bed:update", patch && patch.state ? "state:" + patch.state : ""); return f;
+}
+
 // ---- membership (org-based access: role + scope) -----------------------------------------------
 function memberId(orgId, identity) { return sanitize(orgId) + "__" + sanitize(identity); }
 export async function setMembership(env, orgId, identity, body, actorId) {

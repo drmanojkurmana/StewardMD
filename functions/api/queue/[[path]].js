@@ -1865,12 +1865,14 @@ export async function onRequest(context) {
     // ---- org / rooms / members config (Phase 3: multi-tenant, isolation-gated) ----
     if (method === "GET" && seg === "orgs")
       return json({ ok: true, orgs: actor.kind === "firebase" ? await ORG.listOrgsForOwner(env, actor.id) : [] }, 200, request);
-    if (method === "GET" && (seg === "org" || seg === "rooms" || seg === "members")) {
+    if (method === "GET" && (seg === "org" || seg === "rooms" || seg === "members" || seg === "wards" || seg === "beds")) {
       const orgId = url.searchParams.get("orgId") || "";
       const az = await ORG.authorizeOrg(env, actor, orgId, seg === "members" ? CAPS.STAFF_ADMIN : CAPS.QUEUE_VIEW);
       if (!az.ok) return json({ ok: false, error: az.reason || "forbidden" }, az.reason === "org_not_found" ? 404 : 403, request);
-      if (seg === "org") return json({ ok: true, org: await ORG.getOrg(env, orgId), departments: await ORG.listDepartments(env, orgId), rooms: await ORG.listRooms(env, orgId) }, 200, request);
+      if (seg === "org") return json({ ok: true, org: await ORG.getOrg(env, orgId), departments: await ORG.listDepartments(env, orgId), rooms: await ORG.listRooms(env, orgId), wards: await ORG.listWards(env, orgId) }, 200, request);
       if (seg === "rooms") return json({ ok: true, rooms: await ORG.listRooms(env, orgId) }, 200, request);
+      if (seg === "wards") return json({ ok: true, wards: await ORG.listWards(env, orgId) }, 200, request);
+      if (seg === "beds") return json({ ok: true, beds: await ORG.listBeds(env, orgId, url.searchParams.get("wardId") || "") }, 200, request);
       return json({ ok: true, members: await ORG.listMembers(env, orgId) }, 200, request);
     }
     // Native investigation/medication catalog (WardSynQ-native hospitals only, initially): a doctor
@@ -2154,6 +2156,10 @@ export async function onRequest(context) {
       if (seg === "opd") { const az = await azOrg(CAPS.STAFF_ADMIN); if (!az.ok) return deny(az); return json({ ok: true, opd: await ORG.createOpd(env, body.orgId, body, actor.id) }, 200, request); }
       if (seg === "room" && !sub) { const az = await azOrg(CAPS.STAFF_ADMIN); if (!az.ok) return deny(az); return json({ ok: true, room: await ORG.createRoom(env, body.orgId, body, actor.id) }, 200, request); }
       if (seg === "room" && sub === "update") { const az = await azOrg(CAPS.STAFF_ADMIN, { roomId: body.roomId }); if (!az.ok) return deny(az); return json({ ok: true, room: await ORG.updateRoom(env, body.roomId, body, actor.id) }, 200, request); }
+      if (seg === "ward" && !sub) { const az = await azOrg(CAPS.STAFF_ADMIN); if (!az.ok) return deny(az); return json({ ok: true, ward: await ORG.createWard(env, body.orgId, body, actor.id) }, 200, request); }
+      if (seg === "ward" && sub === "update") { const az = await azOrg(CAPS.STAFF_ADMIN); if (!az.ok) return deny(az); return json({ ok: true, ward: await ORG.updateWard(env, body.wardId, body, actor.id) }, 200, request); }
+      if (seg === "bed" && !sub) { const az = await azOrg(CAPS.STAFF_ADMIN); if (!az.ok) return deny(az); return json({ ok: true, bed: await ORG.createBed(env, body.orgId, body, actor.id) }, 200, request); }
+      if (seg === "bed" && sub === "update") { const az = await azOrg(CAPS.STAFF_ADMIN); if (!az.ok) return deny(az); return json({ ok: true, bed: await ORG.updateBed(env, body.bedId, body, actor.id) }, 200, request); }
       if (seg === "member") {   // staff lifecycle (owner/admin only): invite/role/scope + credentials + enable/disable
         const az = await azOrg(CAPS.STAFF_ADMIN); if (!az.ok) return deny(az);
         if (sub === "pin") { await ORG.setMemberPin(env, body.orgId, body.identity, body.pin, actor.id); return json({ ok: true }, 200, request); }

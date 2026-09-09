@@ -82,8 +82,13 @@ export function genSmdCode(prefix, n) {   // uses CSPRNG; prefix e.g. "SMD-" or 
   let out = ""; for (let i = 0; i < bytes.length; i++) out += SMD_ALPHABET[bytes[i] % SMD_ALPHABET.length];
   return (prefix || "SMD-") + out;
 }
-export function department(o = {}) { requireId(o); return { id: s(o.id), orgId: s(o.orgId), name: s(o.name), code: s(o.code) }; }
-export function opd(o = {}) { requireId(o); return { id: s(o.id), orgId: s(o.orgId), departmentId: orNull(o.departmentId), name: s(o.name) }; }
+// TASK 4.1: `type` and `active` joined 2026-09-09 - both were already required by every unit this
+// hierarchy needs to hold (a "Laboratory" department is not the same TYPE of thing as "Billing"),
+// and a department once opened had no way to be retired without deleting its history. Additive:
+// omitted on every call this file already had, so no existing document changes meaning - type
+// falls back to the free-text "general" it always effectively was, and active defaults true.
+export function department(o = {}) { requireId(o); return { id: s(o.id), orgId: s(o.orgId), name: s(o.name), code: s(o.code), type: s(o.type) || "general", active: o.active !== false }; }
+export function opd(o = {}) { requireId(o); return { id: s(o.id), orgId: s(o.orgId), departmentId: orNull(o.departmentId), name: s(o.name), active: o.active !== false }; }
 
 export const ROOM_ASSIGN_MODES = ["primary", "multiple", "rotating", "unassigned"];
 export function room(o = {}) {
@@ -92,8 +97,32 @@ export function room(o = {}) {
   const mode = ROOM_ASSIGN_MODES.indexOf(a.mode) > -1 ? a.mode : "unassigned";
   return {
     id: s(o.id), orgId: s(o.orgId), departmentId: orNull(o.departmentId), opdId: orNull(o.opdId),
-    name: s(o.name), number: s(o.number),
+    name: s(o.name), number: s(o.number), active: o.active !== false,
     assignment: { mode, doctors: arr(a.doctors), primary: orNull(a.primary) }
+  };
+}
+
+// ---- ward / bed (TASK 4.1: Enterprise -> Hospital -> Campus -> Building -> Floor -> Ward -> Room ->
+// Bed). Only Ward and Bed are new entities here - nothing in this task family (4.1-4.18) references
+// Campus/Building/Floor, so they are not built speculatively; `parentId`/`parentType` are generic
+// enough that inserting them later is a data change, not a schema migration. A ward is a distinct
+// unit from a `department` (department is a SERVICE - "Laboratory"; ward is a PLACE - "Medical A") so
+// this does not fold into department, matching the plan's own Enterprise->...->Ward->Bed distinction. */
+export const BED_STATES = Object.freeze(["available", "occupied", "blocked", "cleaning", "maintenance"]);
+export function ward(o = {}) {
+  requireId(o);
+  return { id: s(o.id), orgId: s(o.orgId), departmentId: orNull(o.departmentId), name: s(o.name), code: s(o.code), type: s(o.type) || "general", active: o.active !== false };
+}
+export function bed(o = {}) {
+  requireId(o);
+  return {
+    id: s(o.id), orgId: s(o.orgId), wardId: s(o.wardId), name: s(o.name),
+    state: BED_STATES.includes(o.state) ? o.state : "available",
+    // What this bed may hold - never a clinical rule engine, only a stated restriction a human
+    // configured (a bay's own gender policy, an isolation-only room), read verbatim, never inferred.
+    genderRestriction: o.genderRestriction === "male" || o.genderRestriction === "female" ? o.genderRestriction : null,
+    isolation: !!o.isolation,
+    active: o.active !== false,
   };
 }
 // The doctor "on" a room right now (pure). Rooms are never permanently one doctor's.
