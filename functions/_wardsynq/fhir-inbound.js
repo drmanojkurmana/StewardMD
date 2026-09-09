@@ -60,6 +60,20 @@ const slug = (v) => str(v).toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-
 
 const EXCEPTION_TYPE = "ExchangeException";
 const DECISION_TYPE = "ExchangeIdentityDecision";
+/* TASK 7 STEP 1: closing a real, confirmed vulnerability. `sourceSystemOf()` used to be trusted
+ * outright - a caller-supplied X-Source-System header, or the message's own body content, became
+ * the system every downstream ownership/provenance/MPI-precedent decision keyed off, with NOTHING
+ * checking that the AUTHENTICATED caller (resolveClinicalActor - a tenant member's session) was
+ * ever entitled to claim that name. Any clinician holding emr.treat could declare
+ * "X-Source-System: epic" and every safeguard below this line would believe it. GRANT_TYPE is the
+ * fix, in the SAME governed shape every other authorization decision in this codebase already
+ * uses (RecordService/actor/audit) - not a parallel auth stack: a SourceSystemGrant is a durable,
+ * admin-issued, append-only record saying "actor X may push data claiming to be source system Y",
+ * and it is CHECKED, by the resolved actor's real id, before any claimed source name is trusted.
+ * Tenant isolation is structural here for free: a grant lives in one tenant's own record store
+ * (TenantBackend), so an actor authenticated into tenant A can never see, let alone use, a grant
+ * issued under tenant B - there is no cross-tenant lookup path to close, because none exists. */
+const GRANT_TYPE = "SourceSystemGrant";
 
 /** What a person may decide about a held message. */
 const RESOLUTION = Object.freeze({
@@ -123,19 +137,113 @@ function inboundEnabled(config) {
 }
 
 /**
- * PURE. Where a bundle says it came from. The header wins; a Bundle may also carry it. A push with
- * no named source is refused upstream - an import whose origin nobody can name cannot be attributed
- * and cannot be reconciled against later.
+ * PURE. The source name a message's OWN body declares, if any - never trusted alone, only ever
+ * cross-checked against the header and, below, against who the caller actually is.
+ *
+ * BUNDLE-LEVEL ONLY. A single FHIR resource's own `meta.source`/`identifier.system` describe THAT
+ * RESOURCE's current provenance/clinical identifier - for a PUT that echoes back a record this
+ * hospital already owns (the update-conflict path below), `meta.source` correctly reads
+ * "wardsynq-native", because that IS the resource's real owner. Reading that as "who is sending
+ * this request" would refuse every legitimate update-conflict-detection PUT with a false
+ * mismatch. Only a Bundle's OWN top-level fields are a sender's self-declaration.
  */
-function sourceSystemOf(headerValue, body) {
-  const h = str(headerValue);
-  if (h) return slug(h);
+function bodySourceOf(body) {
   const b = body || {};
+  if (b.resourceType !== "Bundle") return "";
   const fromMeta = b.meta && str(b.meta.source);
   if (fromMeta) return slug(fromMeta.replace(/^urn:stewardmd:source:/, ""));
   const fromIdent = b.identifier && str(b.identifier.system);
   if (fromIdent) return slug(fromIdent);
   return "";
+}
+
+function grantIdFor(actorId, system) {
+  const a = slug(actorId), s = slug(system);
+  return a && s ? `wsq-source-grant-${a}-${s}` : null;
+}
+
+function SourceSystemGrant(input) {
+  const i = input || {};
+  return {
+    resourceType: GRANT_TYPE, id: i.id,
+    actorId: i.actorId, sourceSystem: i.sourceSystem,
+    active: i.active !== false,
+    grantedBy: i.grantedBy, grantedAt: i.grantedAt,
+    revokedBy: i.revokedBy || null, revokedAt: i.revokedAt || null,
+    note: i.note || null,
+    source: { system: NATIVE_SYSTEM, sourceId: `source-grant:${i.id}` },
+  };
+}
+
+/**
+ * THE FIX. Resolves a message's claimed source system to an AUTHORIZED one, or refuses.
+ *   1. header and body must AGREE when both are present - a message must not carry two origins.
+ *   2. a claim is required (as before) and may never be this hospital's own name (as before).
+ *   3. the AUTHENTICATED actor (resolved.actor.id, never anything the caller merely asserts) must
+ *      hold an ACTIVE SourceSystemGrant for exactly that name, in THIS tenant's own record store.
+ * `bodyClaimRaw` is whatever the MESSAGE ITSELF independently declares - `bodySourceOf(bundle)`
+ * for FHIR, MSH-3/MSH-4 for HL7 v2 - passed as a plain string so this one function serves both
+ * protocols without knowing either one's shape.
+ * Returns { system } on success, or { error: { status, code, detail } }.
+ */
+async function authorizedSourceSystem(svc, resolved, headerValue, bodyClaimRaw) {
+  const headerSystem = slug(headerValue);
+  const bodySystem = slug(bodyClaimRaw);
+  if (headerSystem && bodySystem && headerSystem !== bodySystem) {
+    return { error: { status: 400, code: "source_mismatch", detail: `the X-Source-System header ("${headerSystem}") and the message's own declared source ("${bodySystem}") disagree; a message may not carry two different origins` } };
+  }
+  const claimed = headerSystem || bodySystem;
+  if (!claimed) {
+    return { error: { status: 400, code: "source_required", detail: "name the sending system: X-Source-System header, Bundle.meta.source, or Bundle.identifier.system. An import whose origin nobody can name cannot be attributed." } };
+  }
+  if (claimed === NATIVE_SYSTEM || claimed === "wardsynq-native") {
+    return { error: { status: 400, code: "source_native", detail: "a feed cannot claim to be this hospital" } };
+  }
+
+  let grants;
+  try { grants = await svc.list(GRANT_TYPE, 500); }
+  catch (e) { return { error: { status: 502, code: "record_read_failed", detail: str(e && e.message) } }; }
+  // Tenant isolation needs no check of its own here: svc.list() only ever reads THIS tenant's own
+  // store (TenantBackend), so a grant issued under a different tenant is not merely denied, it is
+  // structurally never returned - there is nothing cross-tenant to compare against.
+  const grant = (grants || []).find((g) => g && g.actorId === resolved.actor.id && g.sourceSystem === claimed && g.active !== false);
+  if (!grant) {
+    return { error: { status: 403, code: "source_unauthorized", detail: `${resolved.actor.id} is not registered to push data as "${claimed}" for this hospital - an administrator must grant it before this feed can be accepted` } };
+  }
+  // The GRANT's own value is what gets used downstream, never the raw claim re-slugged - belt and
+  // braces against a header/grant that happen to normalise the same but aren't literally the same.
+  return { system: grant.sourceSystem };
+}
+
+/**
+ * Registers (or re-affirms) that one actor may push data claiming one source system. Deliberately
+ * narrow and admin-only: this decides who WardSynQ believes when a feed says who it is, which is
+ * exactly the decision the vulnerability this file's header describes was missing.
+ * ctx: { migration, actorId, sourceSystem, note?, actorDeps, recordDeps }
+ */
+async function grantSourceSystem(request, env, ctx) {
+  const mig = ctx.migration;
+  const base = { mode: mig && mig.mode, tenantId: (mig && mig.tenantId) || null };
+  if (!mig || mig.mode === "off") return { ...base, ok: true, skipped: "off", written: 0 };
+
+  const actorId = str(ctx.actorId);
+  const system = slug(ctx.sourceSystem);
+  if (!actorId) return { ...base, ok: false, status: 422, error: "actor_required", written: 0 };
+  if (!system) return { ...base, ok: false, status: 422, error: "source_system_required", written: 0 };
+  if (system === NATIVE_SYSTEM || system === "wardsynq-native") return { ...base, ok: false, status: 422, error: "source_native", written: 0 };
+
+  const { svc, resolved, error } = await openIngest(request, env, ctx);
+  if (error) return { ...base, ok: false, status: error.status, error: "auth", detail: (error.outcome && error.outcome.issue && error.outcome.issue[0].diagnostics) || null, written: 0 };
+
+  const id = grantIdFor(actorId, system);
+  if (!id) return { ...base, ok: false, status: 422, error: "bad_identifiers", written: 0 };
+  const grant = SourceSystemGrant({ id, actorId, sourceSystem: system, active: true, grantedBy: resolved.actor.id, grantedAt: new Date().toISOString(), note: ctx.note || null });
+  try {
+    const out = await svc.put(grant, { idempotencyKey: ctx.idempotencyKey || null });
+    return { ...base, ok: true, written: 1, grant: { ...grant, version: out.record.version } };
+  } catch (e) {
+    return { ...base, ok: false, status: 502, error: "record_write_failed", detail: str(e && e.message), written: 0 };
+  }
 }
 
 /**
@@ -393,9 +501,13 @@ async function ingestFhir(request, env, ctx) {
   if (!mig || mig.mode === "off") return { ok: false, status: 404, outcome: operationOutcome("error", "not-supported", "this hospital does not run the WardSynQ record") };
   if (!inboundEnabled(ctx.config)) return off();
 
-  const system = sourceSystemOf(ctx.sourceSystem, ctx.body);
-  if (!system) return { ok: false, status: 400, outcome: operationOutcome("error", "required", "name the sending system: X-Source-System header, Bundle.meta.source, or Bundle.identifier.system. An import whose origin nobody can name cannot be attributed.") };
-  if (system === NATIVE_SYSTEM || system === "wardsynq-native") return { ok: false, status: 400, outcome: operationOutcome("error", "invalid", "a feed cannot claim to be this hospital") };
+  // AUTHENTICATE, THEN AUTHORIZE THE CLAIMED SOURCE - in that order, before the body is even
+  // parsed. A claimed identity is metadata until the authenticated actor is checked against it.
+  const { svc: authSvc, resolved: authResolved, error: authError } = await openIngest(request, env, ctx);
+  if (authError) return { ok: false, ...authError };
+  const src = await authorizedSourceSystem(authSvc, authResolved, ctx.sourceSystem, bodySourceOf(ctx.body));
+  if (src.error) return { ok: false, status: src.error.status, outcome: operationOutcome("error", src.error.status === 403 ? "forbidden" : "invalid", src.error.detail) };
+  const system = src.system;
   const adapterSystem = `fhir-${system}`;
 
   const { patient, resources, problems, requests, bundleType, atomic } = splitBundle(ctx.body);
@@ -427,8 +539,7 @@ async function ingestFhir(request, env, ctx) {
     if (!str(ctx.ifMatch)) return { ok: false, status: 412, outcome: operationOutcome("error", "conflict", "If-Match is required on an update: an update that does not say which version it read is a guess") };
   }
 
-  const { svc, resolved, error } = await openIngest(request, env, ctx);
-  if (error) return { ok: false, ...error };
+  const svc = authSvc, resolved = authResolved;
   /* A URL names resources by their FHIR id, which for a long canonical id is a hash (fhir-id.js).
    * Resolved back here, once, so everything below reasons in canonical ids. */
   if (str(ctx.targetId) && CANONICAL_TYPE[str(ctx.targetType)]) ctx = { ...ctx, targetId: await resolveId(svc, CANONICAL_TYPE[str(ctx.targetType)], ctx.targetId) };
@@ -848,8 +959,9 @@ const REDRIVE = {};
 function registerRedrive(protocol, fn) { if (str(protocol) && typeof fn === "function") REDRIVE[str(protocol)] = fn; }
 
 export {
-  EXCEPTION_TYPE, DECISION_TYPE, REASON, RESOLUTION, INBOUND_TYPES, CODE_FIELDS,
-  inboundEnabled, sourceSystemOf, splitBundle, evaluateIfNoneExist, markTerminology, markTerminologyWithService, reconcileIdentity, rebind, partitionConflicts,
+  EXCEPTION_TYPE, DECISION_TYPE, GRANT_TYPE, REASON, RESOLUTION, INBOUND_TYPES, CODE_FIELDS,
+  inboundEnabled, bodySourceOf, splitBundle, evaluateIfNoneExist, markTerminology, markTerminologyWithService, reconcileIdentity, rebind, partitionConflicts,
   ExchangeException, ExchangeIdentityDecision, priorDecision,
+  SourceSystemGrant, grantIdFor, authorizedSourceSystem, grantSourceSystem,
   ingestFhir, landBundle, openIngest, registerRedrive, listExceptions, resolveException,
 };

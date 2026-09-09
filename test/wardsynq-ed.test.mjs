@@ -243,10 +243,16 @@ test("THE ED GOLDEN PATH: arrival, triage, vitals, a doctor's note, a medication
   assert.equal(inv.__status, 200, JSON.stringify(inv));
 
   // RESUSCITATION: a Code Sepsis bundle, real, through wardsynq-emergency.js's real state machine.
-  // An explicit timeZero, not the server's real clock: this test's later marks use a fixed
-  // historical timestamp ("2026-09-09T08:10:00.000Z"), and a bundle timed from the real wall clock
-  // would refuse that mark as BEFORE_TIME_ZERO the moment a real run crosses that time of day.
-  const bundle = await as(DOCTOR, "/ward/resus-start", "POST", { orgId: ORG, patientId: arr.patientId, encounterId: arr.encounterId, code: "code-sepsis", timeZero: "2026-09-09T08:09:00.000Z" });
+  // Both timeZero and the mark below are offsets from a real timestamp CAPTURED NOW, never a fixed
+  // calendar date: the bundle's own state/breach computation reads the server's real clock, so any
+  // fixed historical date eventually goes stale in one direction or the other as real time passes -
+  // either the mark reads as BEFORE_TIME_ZERO, or (the actual failure this replaces) enough real
+  // time has elapsed since a stale timeZero that the bundle reads as already BREACHED before the
+  // test even marks anything. Anchoring both to "now" and one minute later is timeless.
+  const t0 = new Date();
+  const timeZero = t0.toISOString();
+  const markAt = new Date(t0.getTime() + 60000).toISOString();
+  const bundle = await as(DOCTOR, "/ward/resus-start", "POST", { orgId: ORG, patientId: arr.patientId, encounterId: arr.encounterId, code: "code-sepsis", timeZero });
   assert.equal(bundle.__status, 200, JSON.stringify(bundle));
   assert.equal(bundle.status.state, "running");
   // The sepsis bundle's first element is "lactate", done on "resulted" (wardsynq-emergency.js's own
@@ -254,7 +260,7 @@ test("THE ED GOLDEN PATH: arrival, triage, vitals, a doctor's note, a medication
   // this file's design (ordering is not doing).
   const firstElement = bundle.status.elements[0];
   assert.equal(firstElement.key, "lactate");
-  const marked = await as(DOCTOR, "/ward/resus-mark", "POST", { orgId: ORG, bundleId: bundle.bundleId, key: firstElement.key, event: "resulted", at: "2026-09-09T08:10:00.000Z" });
+  const marked = await as(DOCTOR, "/ward/resus-mark", "POST", { orgId: ORG, bundleId: bundle.bundleId, key: firstElement.key, event: "resulted", at: markAt });
   assert.equal(marked.__status, 200, JSON.stringify(marked));
   assert.equal(marked.status.elements.find((e) => e.key === firstElement.key).done, true);
   // A nurse can SEE the running bundle - emr.view - without needing to hold emr.treat.

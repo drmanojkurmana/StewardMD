@@ -146,6 +146,20 @@ function seedHospital(mode = "wardsynq") {
   for (const [email, role] of [[DOCTOR, "doctor"], [NURSE, "nurse"], [PHARM, "pharmacy"], [LABTECH, "lab"], [LOCUM, "doctor"]]) {
     docs.set(`q_members/${sanitize(ORG)}__${sanitize(idFor(email))}`, { fields: { orgId: ORG, identity: idFor(email), role, active: true }, updateTime: "t1" });
   }
+  // TASK 7 STEP 1: this file's own FHIR/HL7 inbound tests push as DOCTOR, claiming a real feed
+  // (partner-his/mirror/his-genhosp/lab-genhosp) - these are the LEGITIMATE, already-onboarded
+  // cases fhir-inbound.js's SourceSystemGrant now requires. Seeded directly into the repository,
+  // the same way an admin would have registered them ahead of time through /ward/source-grant -
+  // this is test fixture setup, not a bypass: the real authorizedSourceSystem() check still runs
+  // on every push below and is what actually finds these rows. The adversarial "ROGUE"/impersonation
+  // cases are proven separately, in test/wardsynq-source-system-grant.test.mjs, precisely because
+  // pre-seeding every legitimate case here would make a vulnerability regression invisible.
+  seedGrants();
+}
+function seedGrants() {
+  for (const system of ["partner-his", "mirror", "his-genhosp", "lab-genhosp"]) {
+    RECORD.append(TENANT_ROW.id, [{ resourceType: "SourceSystemGrant", id: `test-grant-${idFor(DOCTOR)}-${system}`, version: 1, actorId: idFor(DOCTOR), sourceSystem: system, active: true, grantedBy: "test-fixture", grantedAt: "2026-01-01T00:00:00.000Z" }]);
+  }
 }
 
 async function as(email, path, method, body) {
@@ -5471,6 +5485,7 @@ test("FHIR exceptions: KEEP-LOCAL leaves ours alone; ACCEPT-FEED makes the feed'
 
 const { onRequest: fhirDoor } = await import("../functions/api/fhir/[[path]].js");
 const { resetMemory: resetRateLimit } = await import("../functions/_wardsynq/rate-limit.js");
+const { hashSecret } = await import("../functions/_wardsynq/patient-access.js");
 const b64u = (bytes) => Buffer.from(bytes).toString("base64url");
 
 async function smartBackendClient(clientId) {
@@ -5647,6 +5662,57 @@ test("SMART: a backend system proves itself with a signed assertion against its 
   assert.equal(put.headers.get("allow"), "GET");
 });
 
+/* TASK 7 STEP 2: three adversarial cases the plan names explicitly that this file's own earlier
+ * SMART tests, read closely, did not yet cover end-to-end - expired token, a cryptographically
+ * FORGED client assertion (not just a guessed bearer string), and CLIENT IMPERSONATION (one
+ * registered client's signature presented as another's identity). Every assertion below invokes
+ * the real /smart/token and /Observation doors through viaFhirDoor - never a bare helper. */
+test("SMART adversarial: expired token, a forged client assertion, and one client impersonating another are all refused", async () => {
+  seedHospital(); resetRateLimit();
+  const lab = await smartBackendClient("lab-sys");
+  const pharm = await smartBackendClient("pharm-sys");
+  enableSmart([lab.config, pharm.config]);
+  const { adm } = await admittedPatientOnDrug();
+  const tokenUrl = `https://x/api/fhir/${ORG}/smart/token`;
+  const now = Math.floor(Date.now() / 1000);
+  const cc = async (assertion) => viaFhirDoor(`${ORG}/smart/token`, form({ grant_type: "client_credentials", client_assertion_type: "urn:ietf:params:oauth:client-assertion-type:jwt-bearer", client_assertion: assertion, scope: "system/Observation.read" }));
+
+  // 1. EXPIRED TOKEN: a real one, minted through the real endpoint, then aged past its own expiry -
+  //    the record's expiry is what `resolveBearer` checks, not a client-side claim of freshness.
+  const minted = await (await cc(await lab.sign({ iss: "lab-sys", sub: "lab-sys", aud: tokenUrl, exp: now + 120, jti: "exp-j1" }))).json();
+  assert.ok(minted.access_token, JSON.stringify(minted));
+  const liveRead = await viaFhirDoor(`${ORG}/Observation?patient=${adm.patientId}`, { bearer: minted.access_token });
+  assert.equal(liveRead.status, 200, "sanity: the freshly minted token works before it is aged");
+  const grantId = `wsq-smart-token-${await hashSecret(minted.access_token, "smart:token")}`;
+  const stored = await RECORD.latest(TENANT_ROW.id, "SmartGrant", grantId);
+  assert.ok(stored, "the real grant this token maps to");
+  const { meta, version, ...rest } = stored;
+  await RECORD.append(TENANT_ROW.id, [{ ...rest, version: version + 1, expiresAt: new Date(Date.now() - 60000).toISOString() }]);
+  const expiredRead = await viaFhirDoor(`${ORG}/Observation?patient=${adm.patientId}`, { bearer: minted.access_token });
+  assert.equal(expiredRead.status, 401, "the SAME token, now past its real recorded expiry, is refused");
+  assert.match(expiredRead.headers.get("www-authenticate"), /invalid_token/);
+
+  // 2. FORGED TOKEN: a client_assertion cryptographically signed, correctly formed, claiming to be
+  //    "lab-sys" - but with a key lab-sys never registered. Not a guessed string; a real forgery
+  //    attempt against the actual signature-verification path.
+  const forger = await smartBackendClient("irrelevant-id"); // a real keypair, just never registered as anyone
+  const forged = await forger.sign({ iss: "lab-sys", sub: "lab-sys", aud: tokenUrl, exp: now + 120, jti: "forge-j1" });
+  const forgedRes = await cc(forged);
+  const forgedText = await forgedRes.text();
+  assert.equal(forgedRes.status, 401, forgedText);
+  assert.equal(JSON.parse(forgedText).error, "invalid_client");
+
+  // 3. CLIENT IMPERSONATION: lab-sys's OWN real, validly-signed assertion - but claiming to be
+  //    "pharm-sys". The signature is genuine; it is simply not pharm-sys's. pharm-sys's own
+  //    registered JWKS must be what verifies it, and lab-sys's key is not in that set.
+  const impersonation = await lab.sign({ iss: "pharm-sys", sub: "pharm-sys", aud: tokenUrl, exp: now + 120, jti: "imp-j1" });
+  const impRes = await cc(impersonation);
+  const impText = await impRes.text();
+  assert.equal(impRes.status, 401, impText);
+  assert.equal(JSON.parse(impText).error, "invalid_client");
+  assert.ok(!RECORD.audit.some((a) => a.action === "smart.token" && a.actor === "smart:pharm-sys"), "pharm-sys was never actually authenticated - no token was ever issued as it");
+});
+
 /* ---- Hardening (2026-09-08): isolation, round trip, malformed input, audit ------------------- */
 
 const ORG2 = "org-two";
@@ -5654,6 +5720,11 @@ function seedSecondHospital(clients) {
   docs.set(`q_orgs/${ORG2}`, { fields: { id: ORG2, code: "SMD-TWO", name: "Other Hospital", kind: "clinic", mode: "wardsynq", connectTenantId: TENANT_ROW2.id, ownerUid: "cfa:nobody", createdAt: 1,
     wardsynq: { fhir: { inbound: { enabled: true }, smart: { enabled: true, clients: clients || [] } } } }, updateTime: "t1" });
   docs.set(`q_members/${sanitize(ORG2)}__${sanitize(idFor(DOCTOR))}`, { fields: { orgId: ORG2, identity: idFor(DOCTOR), role: "doctor", active: true }, updateTime: "t1" });
+  // The same doctor is a legitimate member of BOTH hospitals - and this file's own ISOLATION test
+  // deliberately proves that a grant issued in hospital one does NOT authorize a push into hospital
+  // two (see fhir-inbound.js: svc.list() only ever reads the tenant it was constructed for). Hospital
+  // two's own grant is a SEPARATE administrative act, seeded here exactly as hospital one's is.
+  RECORD.append(TENANT_ROW2.id, [{ resourceType: "SourceSystemGrant", id: `test-grant-${idFor(DOCTOR)}-partner-his`, version: 1, actorId: idFor(DOCTOR), sourceSystem: "partner-his", active: true, grantedBy: "test-fixture", grantedAt: "2026-01-01T00:00:00.000Z" }]);
 }
 
 test("ISOLATION: a chart, an import and a token in one hospital do not exist in another, at either door", async () => {

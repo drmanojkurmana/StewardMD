@@ -333,6 +333,16 @@ const RESOURCE_TYPES = Object.freeze([
    * Granted by EMR_VITALS (VITALS_TYPES in actor.js), the same capability DeviceAssociation already
    * uses - scanning a wristband onto a patient is the same kind of bedside act. */
   "PatientTag",
+  /* TASK 7 STEP 1: a durable, admin-issued authorization saying "actor X may push data claiming to
+   * be source system Y". Closes a real vulnerability where any clinician holding emr.treat could
+   * declare an X-Source-System header naming ANY registered partner and every downstream
+   * ownership/provenance/MPI decision would believe it. Its own type, append-only like everything
+   * else - who may claim which external identity is exactly the kind of fact that must never be
+   * silently edited away. Granted no scope of its own: only `admin`'s pre-existing unrestricted
+   * write reaches it, so issuing a grant stays an administrative act by construction, not by a
+   * capability that could be widened by accident. See fhir-inbound.js's own header for the full
+   * design. */
+  "SourceSystemGrant",
 ]);
 
 const MODE = Object.freeze({ SYSTEM_OF_RECORD: "system-of-record", INTEGRATION: "integration" });
