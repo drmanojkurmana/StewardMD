@@ -26,6 +26,7 @@ import * as ORG from "../../_opd_org_store.js";
 import { actorDeps, recordDeps } from "../../_wardsynq/deps.js";
 import { operationOutcome } from "../../_wardsynq/fhir.js";
 import { fhirResponse, dispatchRead } from "../../_wardsynq/fhir-route.js";
+import { practitionerRead } from "../../_wardsynq/fhir-identity.js";
 import { smartEnabled, smartConfiguration, authorize, decide, token, revoke, resolveBearer, signingKey, publicJwks } from "../../_wardsynq/smart-server.js";
 
 const str = (v) => (v == null ? "" : String(v).trim());
@@ -103,11 +104,19 @@ export async function onRequest(context) {
   if (!bearer) return fhirResponse(operationOutcome("error", "login", "a SMART bearer token is required"), 401, { "WWW-Authenticate": 'Bearer realm="wardsynq"' }, cors(request));
   if (bearer.error) return fhirResponse(operationOutcome("error", "login", bearer.error.detail), bearer.error.status, { "WWW-Authenticate": `Bearer realm="wardsynq", error="${bearer.error.code}"` }, cors(request));
 
-  /* fhirUser: the bearer's own identity as a minimal Practitioner, and only its own. WardSynQ holds
-   * no Practitioner resources; this is the one URL an id_token's fhirUser claim points at. */
+  /* fhirUser: the bearer's own identity as a Practitioner, and ONLY its own. This is the one URL an
+   * id_token's fhirUser claim points at.
+   *
+   * TASK 7.11 replaced the resource this branch used to build by hand with the shared builder in
+   * _wardsynq/fhir-identity.js, so there is ONE Practitioner in this codebase rather than two that
+   * can drift. The behaviour a client sees is the same shape, with one honest addition: where a
+   * VERIFIED medical council registration exists it is now carried, and where it does not the name
+   * is labelled as the account's own rather than presented as an identity this server vouches for.
+   * The ownership check is unchanged - asking for anybody else is still a 404. */
   if (sub === "Practitioner") {
     if (!sub2 || decodeURIComponent(sub2) !== bearer.actor.id || bearer.actor.kind !== "human") return fhirResponse(operationOutcome("error", "not-found", "no such resource"), 404, null, cors(request));
-    return fhirResponse({ resourceType: "Practitioner", id: bearer.actor.id, identifier: [{ system: "urn:stewardmd:actor", value: bearer.actor.id }], active: true, name: [{ text: str(bearer.actor.display).replace(/ \(SMART\)$/, "") || bearer.actor.id }] }, 200, null, cors(request));
+    const r = await practitionerRead(request, env, { id: bearer.actor.id, accountName: str(bearer.actor.display).replace(/ \(SMART\)$/, "") || bearer.actor.id });
+    return fhirResponse(r.ok ? r.resource : r.outcome, r.status, null, cors(request));
   }
 
   const { obj, status } = await dispatchRead(request, env, parts.slice(1), url, { ...ctx, actorOverride: bearer }, request.headers.get("Prefer") || "");

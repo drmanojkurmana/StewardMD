@@ -2479,9 +2479,30 @@ test("the whole stay exports as a FHIR bundle, from the real record", async () =
   // something approximate.
   const one = await as(DOCTOR, `/ward/fhir/Encounter/${adm.encounterId}?orgId=${ORG}`);
   assert.equal(one.resourceType, "Encounter");
-  const nope = await as(DOCTOR, `/ward/fhir/Practitioner/abc?orgId=${ORG}`);
+  const nope = await as(DOCTOR, `/ward/fhir/Goal/abc?orgId=${ORG}`);
   assert.equal(nope.__status, 404);
   assert.equal(nope.resourceType, "OperationOutcome", "a FHIR client parses OperationOutcome, not our error shape");
+  /* TASK 7.11: Practitioner IS served now - derived, by id, never searched. It carries the actor
+   * identifier every exported resource references, and says in its own narrative that this server
+   * holds no verified registration for that person rather than inventing a name. */
+  const who = await as(DOCTOR, `/ward/fhir/Practitioner/abc?orgId=${ORG}`);
+  assert.equal(who.__status, 200);
+  assert.equal(who.resourceType, "Practitioner");
+  assert.deepEqual(who.identifier, [{ system: "urn:stewardmd:actor", value: "abc" }]);
+  assert.equal(who.name, undefined, "no name is invented for somebody this server knows nothing about");
+  assert.match(who.text.div, /could not be checked|holds no verified medical registration/);
+  // And it is not a directory: a search over it is refused rather than answered with an empty Bundle.
+  const roster = await as(DOCTOR, `/ward/fhir/Practitioner?orgId=${ORG}`);
+  assert.equal(roster.__status, 404);
+  assert.match(roster.issue[0].diagnostics, /holds no practitioner directory to search/);
+  /* The hospital itself, from its own org record - and only this one: a FHIR server that will
+   * describe any organisation by id is a directory, and this is not one. */
+  const org = await as(DOCTOR, `/ward/fhir/Organization/${ORG}?orgId=${ORG}`);
+  assert.equal(org.__status, 200, JSON.stringify(org));
+  assert.equal(org.resourceType, "Organization");
+  assert.equal(org.type[0].coding[0].code, "prov");
+  const elsewhere = await as(DOCTOR, `/ward/fhir/Organization/some-other-hospital?orgId=${ORG}`);
+  assert.equal(elsewhere.__status, 404);
 });
 
 test("the FHIR door is not a way around the record's own access rules", async () => {

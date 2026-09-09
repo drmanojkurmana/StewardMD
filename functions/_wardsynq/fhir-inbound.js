@@ -240,9 +240,15 @@ async function authorizedSourceSystem(svc, resolved, headerValue, bodyClaimRaw) 
   if (Number.isFinite(expiry) && expiry <= Date.now()) {
     return { error: { status: 403, code: "source_expired", detail: `the authorization for "${claimed}" expired at ${str(grant.expiresAt)}; it has lapsed rather than been withdrawn, and an administrator must renew it before this feed is accepted again` } };
   }
-  // The GRANT's own value is what gets used downstream, never the raw claim re-slugged - belt and
-  // braces against a header/grant that happen to normalise the same but aren't literally the same.
-  return { system: grant.sourceSystem };
+  /* The GRANT's own value is what gets used downstream, never the raw claim re-slugged - belt and
+   * braces against a header/grant that happen to normalise the same but aren't literally the same.
+   *
+   * TASK 7.12: the grant's ID travels too. "Under whose authority did this arrive" was answerable
+   * only by reconstructing it - the actor and the system were on the record, the authorisation that
+   * joined them was not - and an authorisation is exactly the thing that is revoked, renewed, or
+   * found to have been issued in error. It is stamped onto what lands and exported as the
+   * Provenance policy that permitted the write. */
+  return { system: grant.sourceSystem, grantId: grant.id };
 }
 
 /**
@@ -799,7 +805,7 @@ async function ingestFhir(request, env, ctx) {
    * truthful answer: the content-digest idempotency below means a re-send after a real partial
    * failure still lands exactly once. */
   try {
-    return await landBundle(request, env, { ...ctx, svc, resolved, sccm, system, adapterSystem, patient, problems, requests, bundleType, atomic, protocol: "fhir" });
+    return await landBundle(request, env, { ...ctx, svc, resolved, sccm, system, adapterSystem, patient, problems, requests, bundleType, atomic, protocol: "fhir", grantId: src.grantId || null });
   } catch (e) {
     return { ok: false, status: 503, retryable: true, outcome: operationOutcome("error", "transient",
       `the record could not be read or written to file this message (${str(e && e.message) || "unavailable"}); NOTHING was written, and this message may be sent again - a re-send of an identical message lands once`) };
@@ -844,6 +850,15 @@ async function landBundle(request, env, ctx) {
     if (rec) entities.push(rec);
     else issues.push({ code: "SCCM_CONSENT_UNDECIDED", message: `consent ${c && c.id} carries no decision (status ${c && c.status}) and was not written` });
   }
+  /* TASK 7.12: THE AUTHORITY TRAVELS WITH THE DATA. Every row already said which system it came
+   * from and who wrote it; none said under WHICH AUTHORISATION it was accepted. That is the fact
+   * that changes - a grant is revoked, renewed, or found to have been issued in error - and after
+   * the fact "what came in under that grant" was answerable only by inference from the system name
+   * and a time window. Stamped on the row's own provenance envelope, so it survives into the
+   * exported Provenance as the policy that permitted the write. Absent for anything landed by a
+   * path that has no grant (a native write, or a re-drive by a person), which is the truth. */
+  if (str(ctx.grantId)) for (const e of entities) { if (e && e.meta && e.meta.source) e.meta.source.authorizedBy = str(ctx.grantId); }
+
   const hadMrn = !(mapped.issues || []).some((i) => i.code === "SCCM_PATIENT_NO_MRN");
 
   /* REPLAY IS DECIDED BY CONTENT, NEVER BY AN ID. A resource's id is stable across updates by

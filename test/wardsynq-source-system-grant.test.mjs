@@ -328,3 +328,38 @@ test("the grant list shows what is live and what has lapsed, and only an adminis
   assert.equal(other.__status, 200, JSON.stringify(other));
   assert.equal(other.grants.length, 0, "hospital B holds no grants of its own");
 });
+
+/* ---- TASK 7.12: the authorisation that permitted the write is ON the record ---------------------- */
+
+test("the exported Provenance names the GRANT the message was accepted under", async () => {
+  seedHospitals();
+  const g = await grant(ADMIN, ORG_A, DOCTOR, "epic-a");
+  assert.equal(g.__status, 200, JSON.stringify(g));
+  const r = await pushFhir(DOCTOR, ORG_A, bundle("PAT-20", "MRN-20"), { "X-Source-System": "epic-a" });
+  assert.equal(r.__status, 200, JSON.stringify(r));
+  const landed = await RECORD.latest(TENANT_A.id, "Patient", "fhir-epic-a-pat-pat-20");
+  assert.ok(landed, "the push landed");
+
+  /* The stamp is on the row's own provenance envelope, so it survives every read of it. Before
+   * TASK 7.12 the row said WHICH SYSTEM sent it and WHO wrote it, and nothing said under whose
+   * authority it was accepted - which is the fact that is later revoked or found to be wrong. */
+  assert.equal(landed.meta.source.authorizedBy, g.grant.id, "the grant that permitted this is stamped on the record");
+
+  const prov = await as(DOCTOR, `/ward/fhir/Provenance?target=Patient/${encodeURIComponent(landed.id)}&orgId=${ORG_A}`);
+  assert.equal(prov.__status, 200, JSON.stringify(prov));
+  const entry = (prov.entry || [])[0];
+  assert.ok(entry, "a Provenance exists for the imported row");
+  assert.deepEqual(entry.resource.policy, [`urn:stewardmd:source-grant:${g.grant.id}`], "the policy is the grant that permitted it");
+});
+
+test("a record this hospital wrote itself carries NO authorising policy, because there was no grant", async () => {
+  seedHospitals();
+  await RECORD.append(TENANT_A.id, [{ resourceType: "Patient", id: "local-1", version: 1, mrn: "GH-1", name: "Local Person",
+    dob: "1980-01-01", sex: "female", identifiers: [],
+    meta: { recordedAt: "2026-01-01T00:00:00.000Z", effectiveAt: "2026-01-01T00:00:00.000Z", source: { system: "wardsynq-native", sourceId: null }, derivedFrom: [] } }]);
+  const prov = await as(DOCTOR, `/ward/fhir/Provenance?target=Patient/local-1&orgId=${ORG_A}`);
+  assert.equal(prov.__status, 200, JSON.stringify(prov));
+  const entry = (prov.entry || [])[0];
+  assert.ok(entry, JSON.stringify(prov));
+  assert.equal(entry.resource.policy, undefined, "nothing plausible is filled in where no authorisation existed");
+});

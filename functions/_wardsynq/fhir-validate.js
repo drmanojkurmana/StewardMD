@@ -278,6 +278,19 @@ const RESOURCES = Object.freeze({
     numberOfSeries: "unsignedInt", numberOfInstances: "unsignedInt", procedureReference: "Reference(Procedure)", "procedureCode[]": "CodeableConcept",
     location: "Reference(Location)", "reasonCode[]": "CodeableConcept", "reasonReference[]": "Reference(Condition|Observation|Media|DiagnosticReport|DocumentReference)",
     "note[]": "Annotation", description: "string" },
+  /* TASK 7.11. Practitioner and Organization are DERIVED (fhir-identity.js), not stored - but they
+   * are EXPORTED, and this file's whole discipline is that anything this server emits is validated
+   * against R4 rather than trusted because we wrote it. The full R4 element sets are listed, not
+   * only the ones currently emitted, so an element added later is checked rather than silently
+   * unknown. `qualification` is here and is never populated: this server holds no qualifications. */
+  Practitioner: { ...DOMAIN, "identifier[]": "Identifier", active: "boolean", "name[]": "HumanName", "telecom[]": "ContactPoint",
+    "address[]": "Address", gender: `code:${VS.gender}`, birthDate: "date", "photo[]": "Attachment",
+    "qualification[]": { ...BACKBONE, "identifier[]": "Identifier", "code!": "CodeableConcept", period: "Period", issuer: "Reference(Organization)" },
+    "communication[]": "CodeableConcept" },
+  Organization: { ...DOMAIN, "identifier[]": "Identifier", active: "boolean", "type[]": "CodeableConcept", name: "string",
+    "alias[]": "string", "telecom[]": "ContactPoint", "address[]": "Address", partOf: "Reference(Organization)",
+    "contact[]": { ...BACKBONE, purpose: "CodeableConcept", name: "HumanName", "telecom[]": "ContactPoint", address: "Address" },
+    "endpoint[]": "Reference(Endpoint)" },
   DocumentReference: { ...DOMAIN, masterIdentifier: "Identifier", "identifier[]": "Identifier", "status!": `code:${VS.docStatus}`, docStatus: `code:${VS.compStatus}`, type: "CodeableConcept", "category[]": "CodeableConcept",
     subject: "Reference(Patient|Practitioner|Group|Device)", date: "instant", "author[]": "Reference", authenticator: "Reference(Practitioner|PractitionerRole|Organization)", custodian: "Reference(Organization)",
     "relatesTo[]": { ...BACKBONE, "code!": `code:${VS.relatesTo}`, "target!": "Reference(DocumentReference)" }, description: "string", "securityLabel[]": "CodeableConcept",

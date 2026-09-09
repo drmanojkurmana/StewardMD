@@ -120,7 +120,30 @@ function identifier(systemKey, value, extra) {
   return clean({ system: isUri(systemKey) ? str(systemKey) : undefined, type, value: v });
 }
 
+/** The identifier namespace for a WardSynQ actor. fhir-identity.js serves Practitioner under it. */
+const ACTOR_SYSTEM = "urn:stewardmd:actor";
 const ref = (type, id) => (str(id) ? { reference: `${type}/${fhirId(id)}` } : undefined);
+/* TASK 7.11. A clinician, as a LOGICAL reference rather than a bare string.
+ *
+ * Every author, requester, performer and signer on every exported resource used to be
+ * `{ display: "cfa:9f2a..." }` - an opaque id sitting in a human-readable slot. A receiving system
+ * could not tell whether that was a person, a machine or a typo, and could not match the same
+ * author across two resources. Now it carries the identifier, which is exactly what makes that
+ * match possible, and keeps the display, so nothing a human reader could see before is lost.
+ *
+ * WHY A LOGICAL REFERENCE AND NOT `Practitioner/{id}`. R4 ids are [A-Za-z0-9.-]{1,64}: an actor id
+ * here is "cfa:<email>" or "fb:<uid>" and contains characters an id may not. Hashing it to fit
+ * (fhirId) is ONE-WAY, and this server holds no practitioner table to reverse it with - so a
+ * literal reference would point at a resource no isolate could resolve, which is a dangling
+ * reference dressed up as a link. R4 has an element for precisely this case: Reference.identifier,
+ * "a logical reference, when the literal reference is not known". A receiver matches on it; nothing
+ * pretends to be followable that is not. The Practitioner READ endpoint (fhir-identity.js) serves
+ * the same identity by the same actor id for a client that asks directly. */
+const practitioner = (id) => {
+  const raw = str(id);
+  if (!raw) return undefined;
+  return { identifier: { system: ACTOR_SYSTEM, value: raw }, display: raw };
+};
 const clean = (o) => { for (const k of Object.keys(o)) if (o[k] === undefined) delete o[k]; return o; };
 
 /** Our provenance namespace. It is OURS - a URN for a source system WardSynQ recorded - and so not an
@@ -266,7 +289,7 @@ function fhirMedicationRequest(m) {
     medicationCodeableConcept: codeable(m.drugCode || m.drug, m.drugCodeSystem, m.drug, m.sourceCoding, m.terminologyStatus),
     subject: ref("Patient", m.patientId),
     encounter: ref("Encounter", m.encounterId),
-    requester: m.prescriberId ? { display: m.prescriberId } : undefined,
+    requester: practitioner(m.prescriberId),
     dosageInstruction: (m.dose || m.route || m.frequency) ? [clean({
       text: [m.dose ? `${m.dose.value} ${m.dose.unit}` : null, m.route, m.frequency].filter(Boolean).join(", ") || undefined,
       route: m.route ? { text: m.route } : undefined,
@@ -290,7 +313,7 @@ function fhirMedicationAdministration(a) {
     subject: ref("Patient", a.patientId),
     context: ref("Encounter", a.encounterId),
     effectiveDateTime: str(a.administeredAt) || undefined,
-    performer: a.administeredBy ? [{ actor: { display: a.administeredBy } }] : undefined,
+    performer: a.administeredBy ? [{ actor: practitioner(a.administeredBy) }] : undefined,
     request: ref("MedicationRequest", a.orderId),
   });
 }
@@ -304,7 +327,7 @@ function fhirServiceRequest(s) {
     code: codeable(s.code, s.codeSystem, s.display, s.sourceCoding, s.terminologyStatus),
     subject: ref("Patient", s.patientId),
     encounter: ref("Encounter", s.encounterId),
-    requester: s.requesterId ? { display: s.requesterId } : undefined,
+    requester: practitioner(s.requesterId),
   });
 }
 
@@ -341,7 +364,7 @@ function fhirSpecimen(s) {
     receivedTime: str(s.receivedAt) || undefined,
     collection: (s.collectedAt || s.collectedBy) ? clean({
       collectedDateTime: str(s.collectedAt) || undefined,
-      collector: s.collectedBy ? { display: s.collectedBy } : undefined,
+      collector: practitioner(s.collectedBy),
     }) : undefined,
     note: s.state === "failed" && s.failureReason ? [{ text: str(s.failureReason) }] : undefined,
   });
@@ -365,7 +388,7 @@ function fhirMedicationDispense(d) {
     authorizingPrescription: d.orderId ? [ref("MedicationRequest", d.orderId)] : undefined,
     quantity: d.quantity && typeof d.quantity.value === "number" ? clean({ value: d.quantity.value, unit: str(d.quantity.unit) || undefined, system: d.quantity.unit ? "http://unitsofmeasure.org" : undefined, code: str(d.quantity.unit) || undefined }) : undefined,
     whenHandedOver: str(d.dispensedAt) || undefined,
-    performer: d.dispensedBy ? [{ actor: { display: d.dispensedBy } }] : undefined,
+    performer: d.dispensedBy ? [{ actor: practitioner(d.dispensedBy) }] : undefined,
   });
 }
 
@@ -394,8 +417,8 @@ function fhirDocumentReference(n) {
     type: { text: str(n.noteType) || "note" },
     subject: ref("Patient", n.patientId),
     date: str(n.meta && n.meta.recordedAt) || undefined,
-    author: n.authorId ? [{ display: n.authorId }] : undefined,
-    authenticator: n.signedBy ? { display: n.signedBy } : undefined,
+    author: n.authorId ? [practitioner(n.authorId)] : undefined,
+    authenticator: practitioner(n.signedBy),
     context: n.encounterId ? { encounter: [ref("Encounter", n.encounterId)] } : undefined,
     /* THE WORDS TRAVEL. Until 2026-09-08 this carried a title and no content, so a note left here as
      * an empty document and a receiver's normaliser dropped it as having no narrative. The text goes
@@ -463,10 +486,15 @@ function fhirProvenance(record) {
     activity: { coding: [{ system: "http://terminology.hl7.org/CodeSystem/v3-DataOperation", code: version === 1 ? "CREATE" : "UPDATE" }] },
     agent: [clean({
       type: { coding: [{ system: "http://terminology.hl7.org/CodeSystem/provenance-participant-type", code: PARTICIPANT[str(by.kind)] || "author" }] },
-      who: { display: str(by.id) || "unknown" },
+      /* TASK 7.11: a reference ONLY when the writer was a person. R4's Provenance.agent.who may be a
+       * Practitioner, a Device, an Organization or a Patient, and an adapter, an AI or a service is
+       * none of those - pointing at Practitioner/adapter:hl7v2-lab would assert that a piece of
+       * software is a clinician. A non-human agent keeps the display it always had; the `type`
+       * coding beside it already says what kind of thing wrote this. */
+      who: str(by.kind) === "human" && str(by.id) ? practitioner(by.id) : { display: str(by.id) || "unknown" },
       /* The human an AI acted for is named as EXACTLY that - the party it acted on behalf of - and
-       * never as the author. */
-      onBehalfOf: by.onBehalfOf ? { display: str(by.onBehalfOf) } : undefined,
+       * never as the author. It IS a person, so it references one. */
+      onBehalfOf: by.onBehalfOf ? practitioner(by.onBehalfOf) : undefined,
     })],
     /* TASK 7 STEP 4.3: entity[] is where R4 Provenance carries derivation - which is exactly what
      * "transformation" and "encounter" resolve to in a resource that has no dedicated fields for
@@ -476,6 +504,14 @@ function fhirProvenance(record) {
      * would be exactly the fabrication the plan forbids. The encounter entry is new: which visit
      * this fact belongs to is real, load-bearing information every other exported resource type
      * already carries as its own `encounter` field - Provenance did not, until now. */
+    /* TASK 7.12: THE AUTHORISATION THAT PERMITTED THIS WRITE. R4's Provenance.policy is exactly
+     * "the policy or plan the activity was defined by", and for an imported record that is the
+     * SourceSystemGrant an administrator issued - the thing that is later revoked, renewed, or found
+     * to have been issued in error. Until now the row said which system sent it and who wrote it,
+     * and nothing said under whose authority it was accepted, so "what came in under that grant"
+     * was answerable only by inferring from a system name and a time window. Absent for a native
+     * write, which had no grant, rather than filled in with something plausible. */
+    policy: str(src.authorizedBy) ? [`urn:stewardmd:source-grant:${str(src.authorizedBy)}`] : undefined,
     entity: (() => {
       const rows = [];
       if (external) rows.push({ role: "source", what: clean({ identifier: clean({ system: SOURCE_URN(src.system), value: str(src.sourceId) || undefined }), display: `${str(src.system)}${str(src.sourceId) ? ":" + str(src.sourceId) : ""}` }) });
@@ -501,7 +537,7 @@ function fhirCarePlan(p) {
     title: str(p.title) || undefined,
     subject: ref("Patient", p.patientId),
     encounter: ref("Encounter", p.encounterId),
-    author: p.authorId ? { display: str(p.authorId) } : undefined,
+    author: practitioner(p.authorId),
     period: str(p.reviewBy) ? { end: str(p.reviewBy) } : undefined,
     activity: goals.length ? goals.map((g) => clean({
       detail: clean({
@@ -714,6 +750,21 @@ function capabilityStatement(opts) {
           interaction: [{ code: "read" }, { code: "search-type" }],
           searchParam: declaredSearch("Provenance").params,
           documentation: "Derived from every version's writtenBy and meta.source. target is required on search.",
+        }),
+        /* TASK 7.11. Practitioner and Organization are DERIVED too, and read-only by nature: this
+         * server holds no staff directory, so there is nothing to search and nothing to write. A
+         * Practitioner is served for an actor id that appears on the record - the identifier always,
+         * a name and a council registration number only when a verified registration exists.
+         * Declared here rather than in FHIR_TYPE because neither is a stored canonical type. */
+        clean({
+          type: "Practitioner",
+          interaction: [{ code: "read" }],
+          documentation: "Derived, read-only. Identifier always; a name and a medical council registration number ONLY where a verified registration exists - never a name inferred from an account. No search: this server holds no practitioner directory.",
+        }),
+        clean({
+          type: "Organization",
+          interaction: [{ code: "read" }],
+          documentation: "Derived, read-only, and only this hospital: the organisation this door belongs to. No search: this server is not a directory of organisations.",
         }),
       ],
       operation: [

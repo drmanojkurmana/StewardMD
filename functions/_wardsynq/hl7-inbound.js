@@ -186,7 +186,7 @@ async function ingestHl7(request, env, ctx) {
   try {
     landed = await landBundle(request, env, {
       ...ctx, svc, resolved, sccm, system, adapterSystem, patient: sccm.patient, problems: landingProblems, requests: new Map(), bundleType: "transaction", atomic: true,
-      protocol: "hl7v2", mode: "bundle", body: raw, messageControlId: kind.controlId, trigger: kind.event, targetType: undefined, targetId: undefined, patientRef: undefined, ifMatch: undefined,
+      protocol: "hl7v2", mode: "bundle", body: raw, messageControlId: kind.controlId, trigger: kind.event, grantId: src.grantId || null, targetType: undefined, targetId: undefined, patientRef: undefined, ifMatch: undefined,
     });
   } catch (e) {
     return { ...ackWith("AE", "the record could not be read to file this message: " + str(e && e.message), [{ code: "207", name: ERR_NAME[207], detail: str(e && e.message) }]) };
