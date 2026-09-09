@@ -36,6 +36,12 @@
  * transports; ICD or procedure code validity, which needs a real code set; DRG grouping logic;
  * refunds, write-offs and ledgers.
  *
+ * TASK 4.16 (Downtime/Business Continuity) POLICY: CONTINUE SAFELY on a payer-system outage -
+ * stated here explicitly because there is no live payer transport in this file to fail yet. submit/
+ * resubmit only record a local state transition; a future real payer-transport integration must
+ * queue an unsent submission rather than silently mark a claim SUBMITTED before the payer actually
+ * has it. See vault/decisions/Decisions.md, 2026-09-09, for the full 6-mode matrix.
+ *
  * STATUS: IMPLEMENTED and TESTED. Not a billing system and not certified for any payer.
  *
  * node --test test/wardsynq-billing.test.mjs

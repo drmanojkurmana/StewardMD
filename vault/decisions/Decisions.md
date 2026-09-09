@@ -5,6 +5,43 @@ tags: [decisions, adr]
 
 Dated architectural calls + why. Newest first. Keep each short: **decision · why · trade-off · status**.
 
+## 2026-09-09 · WardSynQ TASK 4.16 (Downtime/Business Continuity): the 6×4 policy matrix, documented not rebuilt
+
+**Decision.** The plan asks six failure modes (network, payment gateway, payer system, LIS/RIS,
+identity service, database) to each have an EXPLICIT CONTINUE-SAFELY/QUEUE/READ-ONLY/FAIL-CLOSED
+behavior, and forbids ever silently pretending a sync succeeded. Audit found every cell already
+correctly implemented - the gap was that none of it was written down as a stated policy in one
+place. This entry IS that policy statement; no behavior changed.
+
+| Failure mode | Bucket | Evidence |
+|---|---|---|
+| Network unavailable | **READ-ONLY** | `functions/_wardsynq/downtime.js` - a stamped, staleness-aware, write-nothing paper snapshot. Its own header: "a route that mutated the record to prepare for an outage would be one more thing to go wrong during one." |
+| Database temporarily unavailable | **FAIL CLOSED, with an honest error** | Every bridge (`downtime.js`, `lab-result.js`, `critical-results.js`, and the rest) maps a repository exception to `{ok:false, status:502, error:"record_read_failed"/"record_write_failed"}` - never a swallowed failure, never a silent success. `repository-d1.js` throws `VersionConflictError`/the raw D1 error; nothing catches and proceeds. |
+| Identity service unavailable | **FAIL CLOSED** | `actor.js`'s `resolveIdentity()`/`resolveClinicalActor()` throw `AuthError`/`PermissionError` the instant an identity/auth dependency fails or returns nothing usable - no degraded-access fallback. This is the one bucket that MUST stay fail-closed: an auth outage granting access anyway is a security bug, not a continuity feature. |
+| Payment gateway fails | **CONTINUE SAFELY, by construction** (no live gateway integration exists yet) | `wardsynq-invoice.js`'s `payment` event only records a payment FACT already reported by a human/reconciliation process; there is no outbound gateway call anywhere in the invoice code today for a failure to interrupt. Named explicitly in that file's own header (see 2026-09-09 addition) so a future gateway integration is built to this policy, not against it. |
+| Payer/claims system unavailable | **CONTINUE SAFELY, by construction** (no live payer transport exists yet) | `wardsynq-billing.js`'s `submit()`/`resubmit()` are pure local state transitions (`claim.state`, `history`) with no outbound call to any payer adapter - submission-to-payer is an external step this codebase does not yet couple to a live network call. Named explicitly in that file's own header. |
+| LIS/RIS unavailable | **QUEUE** (inbound) **/ CONTINUE SAFELY** (outbound) | Inbound: `hl7-inbound.js`'s own header states the ACK/NACK contract explicitly - an uncaught failure here is a transport failure to the sending interface engine, which retries; `fhir-inbound.js`'s exception queue (`landBundle`/`registerRedrive`/`listExceptions`) holds ambiguous bundles for human resolution rather than dropping them. Outbound: `lab-result.js` never blocks an order waiting on the LIS - a `ServiceRequest` simply stays `active` until a result arrives, whenever that is. |
+
+**Why documented, not rebuilt.** No cell showed a real gap - no silent swallow, no infinite retry, no
+fabricated success anywhere in the codebase this audit swept. "Never silently pretend synchronization
+succeeded" was already true throughout, as a direct consequence of this codebase's own append-only,
+honest-error architecture (repository.js/service.js's own header commitments). Rebuilding a second
+mechanism to re-enforce an already-uniform pattern would have been unrequested infrastructure; the
+plan's own ask - "must be explicitly defined" - is satisfied by writing the definition down, citing
+the real code, not by adding a policy-engine nobody asked for.
+
+**What this task did NOT do**, and why: it did not build a live payment-gateway or payer-transport
+integration (none exists to fail; inventing one to then define its failure policy would be scope
+creep this task's own instruction doesn't ask for), and it did not touch `functions/_wardsynq/
+emergency-mode.js` (TASK 4.15) - that file already declares `"downtime"`/`"network-outage"` as
+activation *kinds*, and its own header already defers "reconcile actions after recovery" as
+separate, future work; this task's per-workflow behavior matrix is the complementary, non-
+overlapping half TASK 4.15 explicitly left open.
+
+**Reversible:** this is a documentation entry plus two one-line code comments (see `wardsynq-invoice.js`
+and `wardsynq-billing.js`); nothing here can regress by being reverted. Owner may veto or amend the
+matrix at any time - it states what the code already does, not a promise the code must be changed to keep.
+
 ## 2026-09-09 · Selected outline and glow splash finish
 
 The owner selected option B: retain logo formation, remove the solid fill, and finish with one
