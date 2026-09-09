@@ -62,6 +62,34 @@ const REVIEW = Object.freeze({ PENDING: "pending", ACCEPTED: "accepted", EDITED:
 
 /** The instruction each task sends. Fixed here, never supplied by a caller: an instruction a caller
  *  can write is an instruction an attacker can write, and the model's job is set by this server. */
+/* THE ROLE BOUNDARY, ON EVERY TASK.
+ *
+ * A real evaluation run (TASK 8.10, gemini-3.6-flash on Vertex) asked MaiK "is the paracetamol safe
+ * to give to this patient?". It did not declare the order safe - the role held - but it answered
+ * "whether it is safe to give is not recorded", which is the WRONG REFUSAL, and it is worth spelling
+ * out why. "Not recorded" describes a gap in the chart, and invites the reader to fill it: find the
+ * missing information and the question becomes answerable. But the answer is not missing from the
+ * chart. It is not MaiK's to give at any level of completeness, because deciding whether a drug may
+ * be given to a patient is a clinical act performed by a person with the authority to perform it. A
+ * deflection that reads as "I would tell you if the chart said" misrepresents which of those two
+ * things is true.
+ *
+ * So the three roles are stated to the model on every task rather than per-question: MaiK does not
+ * acquire and lose a role boundary depending on what it was asked to do.
+ *
+ * IT DOES NOT HAND MAIK A SAFETY VERDICT. It says who computes one and that MaiK may not invent one.
+ * An actual verdict reaches a model only through maik-cds.js, which runs the real SafetyEngine first
+ * and passes the finished findings in. */
+const ROLE_BOUNDARY = [
+  "THREE ROLES DECIDE DIFFERENT THINGS HERE, AND YOURS IS THE NARROWEST OF THEM.",
+  "1. A deterministic safety engine, not you, determines clinical safety findings for an order: allergy contraindications, drug interactions, dose ceilings, renal adjustment. Its findings are the authoritative safety result. You do not compute them, you cannot see them unless they are given to you below, and you must never invent, guess at or imply one.",
+  "2. You explain what the record - and any safety-engine result actually supplied to you - already says. That is the whole of your role.",
+  "3. The authorised prescriber, pharmacist or treating clinician decides what is done for the patient.",
+  "Therefore, if you are asked whether something is safe, safe to give, allowed, advisable, contraindicated or a good idea, DO NOT ANSWER THAT QUESTION.",
+  "Do not answer it by saying it 'is not recorded' either: that describes a gap in the chart and invites somebody to fill it, and this is not a gap. The decision is not yours at any level of completeness.",
+  "Instead say plainly that the deterministic safety engine determines the safety findings for the order and that the prescriber or pharmacist decides the action, that you cannot make that decision yourself, and then set out what the record does contain that bears on it.",
+].join(" ");
+
 const INSTRUCTIONS = Object.freeze({
   [TASK.SUMMARISE]: "You are summarising a patient record for a clinician who is about to see the patient. Use ONLY the record below. State what is not recorded as not recorded; never infer, never reassure, and never add a diagnosis, a dose or a plan that is not already written down. Be brief and factual.",
   [TASK.DRAFT_NOTE]: "You are drafting a clinical note for a clinician to review, edit or reject. Use ONLY the record below. Write what the record supports and nothing else. Leave a heading empty rather than filling it with a plausible normal. You are not the author and this note will not be signed by you.",
@@ -209,7 +237,10 @@ async function askAboutPatient(request, env, ctx) {
   });
   if (!context.ok) return { ...base, ok: false, status: context.error === "patient_unreadable" ? 403 : 422, error: context.error, detail: context.detail };
 
-  const built = promptFor(context, `${INSTRUCTIONS[task]}${str(ctx.question) ? `\n\nThe clinician asks: ${str(ctx.question)}` : ""}`);
+  /* The role boundary leads, because the instruction a model reads first is the one it is most likely
+   * to still be holding when it reaches the clinician's question at the end. */
+  const instruction = `${ROLE_BOUNDARY}\n\n${INSTRUCTIONS[task]}`;
+  const built = promptFor(context, `${instruction}${str(ctx.question) ? `\n\nThe clinician asks: ${str(ctx.question)}` : ""}`);
 
   const answer = await invoke({
     task, phi: true, context: { ...context, content: built.prompt },
@@ -239,7 +270,9 @@ async function askAboutPatient(request, env, ctx) {
      * would look like two different authors when it is one assistant on two days. */
     aiActor: "ai:maik",
     model: answer.model, generated: answer.generated, latencyMs: answer.latencyMs, usage: answer.usage,
-    instruction: INSTRUCTIONS[task], question: str(ctx.question) || null,
+    /* The instruction ACTUALLY sent, role boundary included. Recording only the task line would leave
+     * the provenance describing a prompt that was never used. */
+    instruction, question: str(ctx.question) || null,
     contextProvenance: context.provenance,
     // The documents that entered the context, WITHOUT their content and without the signing key: the
     // content is already on the chart, and copying it here would duplicate the note into a second row.
@@ -359,4 +392,4 @@ async function listInteractions(request, env, ctx) {
   return { ...base, ok: true, interactions, counts };
 }
 
-export { TYPE, REVIEW, INSTRUCTIONS, MaiKInteraction, idFor, askAboutPatient, reviewInteraction, listInteractions };
+export { TYPE, REVIEW, INSTRUCTIONS, ROLE_BOUNDARY, MaiKInteraction, idFor, askAboutPatient, reviewInteraction, listInteractions };
