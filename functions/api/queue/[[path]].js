@@ -138,6 +138,7 @@ import { codeClaimForEncounter, claimAction, recordPreAuth, claimsForPatient, wa
 import { patientCopy, releaseToPatient } from "../../_wardsynq/patient-record.js";
 import { exportPage, recordBackupRun, backupStatus } from "../../_wardsynq/backup-run.js";
 import { chargesForPatient } from "../../_wardsynq/charge-capture.js";
+import { raiseInvoice, postDiscount, postDeposit, postPayment, postRefund, postAdjustment, postWriteOff, voidInvoiceRoute, readInvoice, invoicesForPatient } from "../../_wardsynq/invoice.js";
 import { recordMovement, stockLevels, reconcileCount } from "../../_wardsynq/stock.js";
 import { possibleDuplicates } from "../../_wardsynq/mpi-view.js";
 import { enrolPatient, redeemCode, portalRead, revokeAccess } from "../../_wardsynq/patient-access.js";
@@ -706,6 +707,13 @@ export async function onRequest(context) {
         /* Charge capture reads what was DONE and proposes nothing binding, so it sits with the rest
          * of coding at billing.charge. It writes nothing at all - not even a Claim. */
         charges: CAPS.BILLING_CHARGE,
+        // TASK 4.6: raising an invoice and posting a financial event against it is billing.charge,
+        // the same authority as coding a claim. Reading it (a balance, a reconciliation footing) is
+        // billing.view - the actual reason that capability exists, per the note above.
+        invoice: method === "POST" ? CAPS.BILLING_CHARGE : CAPS.BILLING_VIEW, "invoice-discount": CAPS.BILLING_CHARGE, "invoice-deposit": CAPS.BILLING_CHARGE,
+        "invoice-payment": CAPS.BILLING_CHARGE, "invoice-refund": CAPS.BILLING_CHARGE, "invoice-adjustment": CAPS.BILLING_CHARGE,
+        "invoice-writeoff": CAPS.BILLING_CHARGE, "invoice-void": CAPS.BILLING_CHARGE,
+        invoices: CAPS.BILLING_VIEW,
         /* Stock control is the dispensing side of pharmacy. Nothing behind these routes can refuse a
          * dispense: a count is a belief and the box in the pharmacist's hand is the fact. */
         "stock-move": CAPS.ORDER_DISPENSE, stock: CAPS.ORDER_DISPENSE, "stock-reconcile": CAPS.ORDER_DISPENSE,
@@ -1384,6 +1392,46 @@ export async function onRequest(context) {
           encounterId: url.searchParams.get("encounterId") || "",
           tariff: (wsqCfg && wsqCfg.tariff) || null,
         });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "invoice" && method === "POST") {
+        const r = await raiseInvoice(request, env, { ...deps, patientId: body.patientId, encounterId: body.encounterId, tariff: (wsqCfg && wsqCfg.tariff) || null, at: body.at, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "invoice" && method === "GET") {
+        const r = await readInvoice(request, env, { ...deps, invoiceId: url.searchParams.get("invoiceId") || "" });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "invoices" && method === "GET") {
+        const r = await invoicesForPatient(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "" });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "invoice-discount" && method === "POST") {
+        const r = await postDiscount(request, env, { ...deps, invoiceId: body.invoiceId, amount: body.amount, reason: body.reason, at: body.at, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "invoice-deposit" && method === "POST") {
+        const r = await postDeposit(request, env, { ...deps, invoiceId: body.invoiceId, amount: body.amount, reference: body.reference, at: body.at, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "invoice-payment" && method === "POST") {
+        const r = await postPayment(request, env, { ...deps, invoiceId: body.invoiceId, amount: body.amount, reference: body.reference, at: body.at, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "invoice-refund" && method === "POST") {
+        const r = await postRefund(request, env, { ...deps, invoiceId: body.invoiceId, amount: body.amount, reason: body.reason, reference: body.reference, at: body.at, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "invoice-adjustment" && method === "POST") {
+        const r = await postAdjustment(request, env, { ...deps, invoiceId: body.invoiceId, amount: body.amount, reason: body.reason, at: body.at, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "invoice-writeoff" && method === "POST") {
+        const r = await postWriteOff(request, env, { ...deps, invoiceId: body.invoiceId, amount: body.amount, reason: body.reason, at: body.at, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "invoice-void" && method === "POST") {
+        const r = await voidInvoiceRoute(request, env, { ...deps, invoiceId: body.invoiceId, reason: body.reason, at: body.at, idempotencyKey: body.idempotencyKey || null });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "backup" && method === "GET") {

@@ -144,6 +144,11 @@ const RESOURCE_TYPES = Object.freeze([
    * one - a refused pre-auth means the payer will not pay, and it does not mean the treatment is
    * not indicated. Kept apart from the chart so nothing clinical can ever read it as an answer. */
   "PreAuthorisation",
+  /* TASK 4.6: the charge-to-reconciliation ledger. Every discount/deposit/payment/refund/
+   * adjustment/write-off is an append to the SAME invoice record, never a mutation of its charge
+   * lines - "what was billed" and "what happened to the bill since" are different facts. A
+   * financial record, like Claim/PreAuthorisation, and never read to decide anything clinical. */
+  "Invoice",
   /* That a patient was given their own copy of the record, by a named clinician, at a time. A
    * RECEIPT and never a copy: it holds which results went and how many diagnoses, and none of their
    * values - a frozen second copy of clinical data that no correction ever reaches is a liability,
