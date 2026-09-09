@@ -120,7 +120,30 @@ function identifier(systemKey, value, extra) {
   return clean({ system: isUri(systemKey) ? str(systemKey) : undefined, type, value: v });
 }
 
+/** The identifier namespace for a WardSynQ actor. fhir-identity.js serves Practitioner under it. */
+const ACTOR_SYSTEM = "urn:stewardmd:actor";
 const ref = (type, id) => (str(id) ? { reference: `${type}/${fhirId(id)}` } : undefined);
+/* TASK 7.11. A clinician, as a LOGICAL reference rather than a bare string.
+ *
+ * Every author, requester, performer and signer on every exported resource used to be
+ * `{ display: "cfa:9f2a..." }` - an opaque id sitting in a human-readable slot. A receiving system
+ * could not tell whether that was a person, a machine or a typo, and could not match the same
+ * author across two resources. Now it carries the identifier, which is exactly what makes that
+ * match possible, and keeps the display, so nothing a human reader could see before is lost.
+ *
+ * WHY A LOGICAL REFERENCE AND NOT `Practitioner/{id}`. R4 ids are [A-Za-z0-9.-]{1,64}: an actor id
+ * here is "cfa:<email>" or "fb:<uid>" and contains characters an id may not. Hashing it to fit
+ * (fhirId) is ONE-WAY, and this server holds no practitioner table to reverse it with - so a
+ * literal reference would point at a resource no isolate could resolve, which is a dangling
+ * reference dressed up as a link. R4 has an element for precisely this case: Reference.identifier,
+ * "a logical reference, when the literal reference is not known". A receiver matches on it; nothing
+ * pretends to be followable that is not. The Practitioner READ endpoint (fhir-identity.js) serves
+ * the same identity by the same actor id for a client that asks directly. */
+const practitioner = (id) => {
+  const raw = str(id);
+  if (!raw) return undefined;
+  return { identifier: { system: ACTOR_SYSTEM, value: raw }, display: raw };
+};
 const clean = (o) => { for (const k of Object.keys(o)) if (o[k] === undefined) delete o[k]; return o; };
 
 /** Our provenance namespace. It is OURS - a URN for a source system WardSynQ recorded - and so not an
@@ -266,7 +289,7 @@ function fhirMedicationRequest(m) {
     medicationCodeableConcept: codeable(m.drugCode || m.drug, m.drugCodeSystem, m.drug, m.sourceCoding, m.terminologyStatus),
     subject: ref("Patient", m.patientId),
     encounter: ref("Encounter", m.encounterId),
-    requester: m.prescriberId ? { display: m.prescriberId } : undefined,
+    requester: practitioner(m.prescriberId),
     dosageInstruction: (m.dose || m.route || m.frequency) ? [clean({
       text: [m.dose ? `${m.dose.value} ${m.dose.unit}` : null, m.route, m.frequency].filter(Boolean).join(", ") || undefined,
       route: m.route ? { text: m.route } : undefined,
@@ -290,7 +313,7 @@ function fhirMedicationAdministration(a) {
     subject: ref("Patient", a.patientId),
     context: ref("Encounter", a.encounterId),
     effectiveDateTime: str(a.administeredAt) || undefined,
-    performer: a.administeredBy ? [{ actor: { display: a.administeredBy } }] : undefined,
+    performer: a.administeredBy ? [{ actor: practitioner(a.administeredBy) }] : undefined,
     request: ref("MedicationRequest", a.orderId),
   });
 }
@@ -304,7 +327,7 @@ function fhirServiceRequest(s) {
     code: codeable(s.code, s.codeSystem, s.display, s.sourceCoding, s.terminologyStatus),
     subject: ref("Patient", s.patientId),
     encounter: ref("Encounter", s.encounterId),
-    requester: s.requesterId ? { display: s.requesterId } : undefined,
+    requester: practitioner(s.requesterId),
   });
 }
 
@@ -341,7 +364,7 @@ function fhirSpecimen(s) {
     receivedTime: str(s.receivedAt) || undefined,
     collection: (s.collectedAt || s.collectedBy) ? clean({
       collectedDateTime: str(s.collectedAt) || undefined,
-      collector: s.collectedBy ? { display: s.collectedBy } : undefined,
+      collector: practitioner(s.collectedBy),
     }) : undefined,
     note: s.state === "failed" && s.failureReason ? [{ text: str(s.failureReason) }] : undefined,
   });
@@ -365,7 +388,7 @@ function fhirMedicationDispense(d) {
     authorizingPrescription: d.orderId ? [ref("MedicationRequest", d.orderId)] : undefined,
     quantity: d.quantity && typeof d.quantity.value === "number" ? clean({ value: d.quantity.value, unit: str(d.quantity.unit) || undefined, system: d.quantity.unit ? "http://unitsofmeasure.org" : undefined, code: str(d.quantity.unit) || undefined }) : undefined,
     whenHandedOver: str(d.dispensedAt) || undefined,
-    performer: d.dispensedBy ? [{ actor: { display: d.dispensedBy } }] : undefined,
+    performer: d.dispensedBy ? [{ actor: practitioner(d.dispensedBy) }] : undefined,
   });
 }
 
@@ -394,8 +417,8 @@ function fhirDocumentReference(n) {
     type: { text: str(n.noteType) || "note" },
     subject: ref("Patient", n.patientId),
     date: str(n.meta && n.meta.recordedAt) || undefined,
-    author: n.authorId ? [{ display: n.authorId }] : undefined,
-    authenticator: n.signedBy ? { display: n.signedBy } : undefined,
+    author: n.authorId ? [practitioner(n.authorId)] : undefined,
+    authenticator: practitioner(n.signedBy),
     context: n.encounterId ? { encounter: [ref("Encounter", n.encounterId)] } : undefined,
     /* THE WORDS TRAVEL. Until 2026-09-08 this carried a title and no content, so a note left here as
      * an empty document and a receiver's normaliser dropped it as having no narrative. The text goes
@@ -463,10 +486,15 @@ function fhirProvenance(record) {
     activity: { coding: [{ system: "http://terminology.hl7.org/CodeSystem/v3-DataOperation", code: version === 1 ? "CREATE" : "UPDATE" }] },
     agent: [clean({
       type: { coding: [{ system: "http://terminology.hl7.org/CodeSystem/provenance-participant-type", code: PARTICIPANT[str(by.kind)] || "author" }] },
-      who: { display: str(by.id) || "unknown" },
+      /* TASK 7.11: a reference ONLY when the writer was a person. R4's Provenance.agent.who may be a
+       * Practitioner, a Device, an Organization or a Patient, and an adapter, an AI or a service is
+       * none of those - pointing at Practitioner/adapter:hl7v2-lab would assert that a piece of
+       * software is a clinician. A non-human agent keeps the display it always had; the `type`
+       * coding beside it already says what kind of thing wrote this. */
+      who: str(by.kind) === "human" && str(by.id) ? practitioner(by.id) : { display: str(by.id) || "unknown" },
       /* The human an AI acted for is named as EXACTLY that - the party it acted on behalf of - and
-       * never as the author. */
-      onBehalfOf: by.onBehalfOf ? { display: str(by.onBehalfOf) } : undefined,
+       * never as the author. It IS a person, so it references one. */
+      onBehalfOf: by.onBehalfOf ? practitioner(by.onBehalfOf) : undefined,
     })],
     /* TASK 7 STEP 4.3: entity[] is where R4 Provenance carries derivation - which is exactly what
      * "transformation" and "encounter" resolve to in a resource that has no dedicated fields for
@@ -476,6 +504,14 @@ function fhirProvenance(record) {
      * would be exactly the fabrication the plan forbids. The encounter entry is new: which visit
      * this fact belongs to is real, load-bearing information every other exported resource type
      * already carries as its own `encounter` field - Provenance did not, until now. */
+    /* TASK 7.12: THE AUTHORISATION THAT PERMITTED THIS WRITE. R4's Provenance.policy is exactly
+     * "the policy or plan the activity was defined by", and for an imported record that is the
+     * SourceSystemGrant an administrator issued - the thing that is later revoked, renewed, or found
+     * to have been issued in error. Until now the row said which system sent it and who wrote it,
+     * and nothing said under whose authority it was accepted, so "what came in under that grant"
+     * was answerable only by inferring from a system name and a time window. Absent for a native
+     * write, which had no grant, rather than filled in with something plausible. */
+    policy: str(src.authorizedBy) ? [`urn:stewardmd:source-grant:${str(src.authorizedBy)}`] : undefined,
     entity: (() => {
       const rows = [];
       if (external) rows.push({ role: "source", what: clean({ identifier: clean({ system: SOURCE_URN(src.system), value: str(src.sourceId) || undefined }), display: `${str(src.system)}${str(src.sourceId) ? ":" + str(src.sourceId) : ""}` }) });
@@ -501,7 +537,7 @@ function fhirCarePlan(p) {
     title: str(p.title) || undefined,
     subject: ref("Patient", p.patientId),
     encounter: ref("Encounter", p.encounterId),
-    author: p.authorId ? { display: str(p.authorId) } : undefined,
+    author: practitioner(p.authorId),
     period: str(p.reviewBy) ? { end: str(p.reviewBy) } : undefined,
     activity: goals.length ? goals.map((g) => clean({
       detail: clean({
@@ -509,6 +545,143 @@ function fhirCarePlan(p) {
         description: [str(g.title), str(g.measure)].filter(Boolean).join(" - ") || undefined,
       }),
     })) : undefined,
+  });
+}
+
+/* TASK 7.2. The surgical checklist's own stages into R4's procedure-status. Every one of these is a
+ * real point in the same operation, so nothing is guessed: everything before the knife is
+ * `preparation`, the incision is `in-progress`, sign-out is the end of the procedure, and a case
+ * abandoned before it started is `not-done` - which R4 means literally, and which is the honest word
+ * for a list that was cancelled rather than an operation that failed. */
+const PROCEDURE_STATUS = Object.freeze({
+  booked: "preparation", marked: "preparation", "signed-in": "preparation", "timed-out": "preparation",
+  incised: "in-progress", "signed-out": "completed", abandoned: "not-done",
+});
+
+/**
+ * TASK 7.2. A surgical case as an R4 Procedure.
+ *
+ * The procedure is the hospital's own words (a booking says "laparoscopic cholecystectomy", not a
+ * SNOMED code), so it travels as TEXT with no coding at all. Inventing a code for it is the single
+ * most dangerous thing this mapper could do: a receiving system acts on codes, and a wrong procedure
+ * code on the wrong side is the exact harm the surgical checklist exists to prevent. The SIDE is
+ * likewise text - R4 carries laterality as a qualifier on a coded body site, and this record has
+ * neither the code nor the qualifier vocabulary.
+ */
+function fhirProcedure(c) {
+  const site = [str(c.site), str(c.laterality)].filter(Boolean).join(" ");
+  const sigs = ((c.signOut && c.signOut.signatures) || (c.timeOut && c.timeOut.signatures) || (c.signIn && c.signIn.signatures) || []);
+  const start = str(c.incisionAt) || str(c.signIn && c.signIn.at);
+  const end = str(c.signOut && c.signOut.at);
+  return clean({
+    resourceType: "Procedure", id: fhirId(c.id),
+    status: PROCEDURE_STATUS[str(c.stage)] || "unknown",
+    code: str(c.procedure) ? { text: str(c.procedure) } : undefined,
+    subject: ref("Patient", c.patientId),
+    encounter: ref("Encounter", c.encounterId),
+    // A period only when there is one: a case that has not been incised has no performed time, and
+    // an operation dated to the moment it was booked would be a fabricated fact about a patient.
+    performedPeriod: start || end ? clean({ start: start || undefined, end: end || undefined }) : undefined,
+    /* Who was in theatre, in the ROLE they signed under. The checklist requires three different
+     * people in three named roles, and that is exactly what R4's performer.function is for. */
+    performer: sigs.length ? sigs.map((g) => clean({ function: str(g.role) ? { text: str(g.role) } : undefined, actor: practitioner(g.actorId) })).filter((x) => x.actor) : undefined,
+    bodySite: site ? [{ text: site }] : undefined,
+  });
+}
+
+/* TASK 7.2. WardSynQ's appointment states and R4's are the same five facts under different names,
+ * which is why this is a rename and not an interpretation. "did-not-attend" is R4's `noshow`. */
+const APPOINTMENT_STATUS = Object.freeze({ booked: "booked", arrived: "arrived", completed: "fulfilled", cancelled: "cancelled", "did-not-attend": "noshow" });
+
+/** TASK 7.2. An appointment. The slot is a start and a duration; an end is only stated when both are. */
+function fhirAppointment(a) {
+  const start = str(a.startAt);
+  const mins = Number(a.minutes);
+  const end = start && Number.isFinite(mins) && mins > 0 ? new Date(Date.parse(start) + mins * 60000).toISOString() : "";
+  return clean({
+    resourceType: "Appointment", id: fhirId(a.id),
+    status: APPOINTMENT_STATUS[str(a.state)] || "proposed",
+    start: start || undefined,
+    end: end && !Number.isNaN(Date.parse(end)) ? end : undefined,
+    minutesDuration: Number.isFinite(mins) && mins > 0 ? mins : undefined,
+    reasonCode: str(a.reason) ? [{ text: str(a.reason) }] : undefined,
+    /* An overbooking is stated rather than hidden. A real clinic overbooks; a receiving system that
+     * cannot see it will reconcile two appointments in one slot as an error. */
+    comment: a.overbooked ? `Deliberately overbooked${str(a.overbookReason) ? ": " + str(a.overbookReason) : ""}` : undefined,
+    /* R4 requires at least one participant, and the patient IS the appointment. `status: "accepted"`
+     * here means the appointment holds this participant - not that the patient confirmed anything;
+     * this record carries no patient confirmation, so none is claimed beyond the booking itself. */
+    participant: [
+      clean({ actor: ref("Patient", a.patientId), required: "required", status: "accepted" }),
+      ...(str(a.clinicianId) ? [clean({ actor: practitioner(a.clinicianId), required: "required", status: "accepted" })] : []),
+    ],
+  });
+}
+
+/**
+ * TASK 7.2. A risk assessment (Braden, Morse, falls - whatever tool the hospital loaded).
+ *
+ * THE BAND IS THE HOSPITAL'S OWN WORD and travels as text under its own tool, never mapped to a
+ * standard risk vocabulary: "high" on one hospital's falls tool is not "high" on another's, and a
+ * receiver that read a shared code would compare two different scales. The tool's name and version
+ * ride along so the number can be reconciled with the paper version the ward uses.
+ */
+function fhirRiskAssessment(r) {
+  const actions = Array.isArray(r.actions) ? r.actions.map(str).filter(Boolean) : [];
+  return clean({
+    resourceType: "RiskAssessment", id: fhirId(r.id),
+    // `final` because a saved assessment is a completed one; this record has no draft state.
+    status: "final",
+    subject: ref("Patient", r.patientId),
+    encounter: ref("Encounter", r.encounterId),
+    occurrenceDateTime: str(r.assessedAt) || undefined,
+    performer: practitioner(r.assessedBy),
+    method: str(r.toolName) || str(r.toolId) ? clean({ text: [str(r.toolName) || str(r.toolId), str(r.toolVersion) ? `v${str(r.toolVersion)}` : ""].filter(Boolean).join(" ") }) : undefined,
+    prediction: str(r.band) ? [{ outcome: { text: str(r.toolName) || str(r.toolId) || "risk" }, qualitativeRisk: { text: str(r.band) } }] : undefined,
+    /* R4's own field for what is being done about the risk. The actions the band selected are the
+     * only part of an assessment that changes anything for the patient. */
+    mitigation: actions.length ? actions.join("; ") : undefined,
+    note: Number.isFinite(Number(r.total)) && r.total !== null ? [{ text: `Score ${Number(r.total)}${str(r.toolName) ? ` on ${str(r.toolName)}` : ""}.` }] : undefined,
+  });
+}
+
+/* R4 ImagingStudy.status. WardSynQ carries the same three words, so this is a check rather than a
+ * translation: a status this file does not recognise renders as "unknown", never as "available". */
+const IMAGING_STATUS = Object.freeze({ available: "available", registered: "registered", cancelled: "cancelled", "entered-in-error": "entered-in-error" });
+
+/**
+ * TASK 7.7. An ImagingStudy, metadata only.
+ *
+ * NO ENDPOINT, NO INSTANCE, NO URL - and that is the point rather than an omission. R4's
+ * ImagingStudy.endpoint and .series.instance exist to point a viewer at pixel data, and WardSynQ
+ * holds none: the record says a scan exists, what it is, and the accession number that finds it in
+ * the PACS. `basedOn` carries the order it answers, which is the fact a receiving system actually
+ * needs to file it against the right request.
+ */
+function fhirImagingStudy(s) {
+  const modality = str(s.modality);
+  return clean({
+    resourceType: "ImagingStudy", id: fhirId(s.id),
+    status: IMAGING_STATUS[str(s.status)] || "unknown",
+    // The StudyInstanceUID under its own DICOM URN system, which is how a PACS recognises it.
+    identifier: [
+      str(s.studyUid) ? { system: "urn:dicom:uid", value: `urn:oid:${str(s.studyUid)}` } : null,
+      str(s.accessionNumber) ? { type: { coding: [{ system: "http://terminology.hl7.org/CodeSystem/v2-0203", code: "ACSN" }] }, value: str(s.accessionNumber) } : null,
+    ].filter(Boolean),
+    subject: ref("Patient", s.patientId),
+    encounter: ref("Encounter", s.encounterId),
+    basedOn: s.serviceRequestId ? [ref("ServiceRequest", s.serviceRequestId)] : undefined,
+    started: str(s.started) || undefined,
+    // The source's own modality string, under DICOM's own code system. Never re-coded to another.
+    modality: modality ? [{ system: "http://dicom.nema.org/resources/ontology/DCM", code: modality }] : undefined,
+    numberOfSeries: Number.isFinite(Number(s.seriesCount)) && s.seriesCount != null ? Number(s.seriesCount) : undefined,
+    numberOfInstances: Number.isFinite(Number(s.instanceCount)) && s.instanceCount != null ? Number(s.instanceCount) : undefined,
+    description: str(s.description) || undefined,
+    /* bodySite is NOT exported. R4 carries it on ImagingStudy.series.bodySite - a series this record
+     * does not model - and the study-level field that would take it, procedureCode, means the
+     * PROCEDURE performed, not the part examined. Rendering DICOM's BodyPartExamined there would be
+     * a receiving system reading a body part as a procedure code. It stays on the WardSynQ row,
+     * where it is true, rather than being exported into a field that means something else. */
   });
 }
 
@@ -541,6 +714,10 @@ const MAPPERS = Object.freeze({
   SpecimenCollection: fhirSpecimen,
   MedicationDispense: fhirMedicationDispense,
   CarePlan: fhirCarePlan,
+  ImagingStudy: fhirImagingStudy,
+  SurgicalCase: fhirProcedure,
+  Appointment: fhirAppointment,
+  RiskAssessment: fhirRiskAssessment,
 });
 
 /** Our type name to the FHIR one it renders as. */
@@ -550,7 +727,10 @@ const FHIR_TYPE = Object.freeze({
   MedicationOrder: "MedicationRequest", MedicationAdministration: "MedicationAdministration",
   ServiceRequest: "ServiceRequest", DiagnosticReport: "DiagnosticReport", ClinicalNote: "DocumentReference",
   PatientConsent: "Consent", SpecimenCollection: "Specimen", MedicationDispense: "MedicationDispense",
-  CarePlan: "CarePlan",
+  CarePlan: "CarePlan", ImagingStudy: "ImagingStudy",
+  /* TASK 7.2. A surgical case IS a Procedure - the resource a receiving system files an operation
+   * under. Appointment and RiskAssessment map one-to-one onto their R4 namesakes. */
+  SurgicalCase: "Procedure", Appointment: "Appointment", RiskAssessment: "RiskAssessment",
 });
 /** And back, so a caller can ask for the FHIR name. */
 const CANONICAL_TYPE = Object.freeze(Object.fromEntries(Object.entries(FHIR_TYPE).map(([k, v]) => [v, k])));
@@ -673,6 +853,21 @@ function capabilityStatement(opts) {
           interaction: [{ code: "read" }, { code: "search-type" }],
           searchParam: declaredSearch("Provenance").params,
           documentation: "Derived from every version's writtenBy and meta.source. target is required on search.",
+        }),
+        /* TASK 7.11. Practitioner and Organization are DERIVED too, and read-only by nature: this
+         * server holds no staff directory, so there is nothing to search and nothing to write. A
+         * Practitioner is served for an actor id that appears on the record - the identifier always,
+         * a name and a council registration number only when a verified registration exists.
+         * Declared here rather than in FHIR_TYPE because neither is a stored canonical type. */
+        clean({
+          type: "Practitioner",
+          interaction: [{ code: "read" }],
+          documentation: "Derived, read-only. Identifier always; a name and a medical council registration number ONLY where a verified registration exists - never a name inferred from an account. No search: this server holds no practitioner directory.",
+        }),
+        clean({
+          type: "Organization",
+          interaction: [{ code: "read" }],
+          documentation: "Derived, read-only, and only this hospital: the organisation this door belongs to. No search: this server is not a directory of organisations.",
         }),
       ],
       operation: [
@@ -1117,7 +1312,7 @@ export {
   systemUriFor, codeable, identifier, withMeta, toFhir, bundle, capabilityStatement, operationOutcome,
   fhirPatient, fhirEncounter, fhirCondition, fhirAllergy, fhirObservation,
   fhirMedicationRequest, fhirMedicationAdministration, fhirServiceRequest,
-  fhirDiagnosticReport, fhirDocumentReference, fhirConsent, fhirProvenance, parseProvenanceId, compartmentOf, parseEverything, resolveId, fenced,
+  fhirDiagnosticReport, fhirDocumentReference, fhirConsent, fhirProvenance, fhirImagingStudy, fhirProcedure, fhirAppointment, fhirRiskAssessment, parseProvenanceId, compartmentOf, parseEverything, resolveId, fenced,
   patientEverything, readResource, searchType, historyOf, vread, provenanceRead, provenanceSearch,
   validateFully, validateOperation, validateCodeOperation,
 };

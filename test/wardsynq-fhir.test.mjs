@@ -197,8 +197,19 @@ test("THE CAPABILITY STATEMENT DOES NOT OVERSTATE", () => {
   assert.match(c.implementation.description, /no implementation guide is carried/);
   assert.match(c.implementation.description, /conformance to US Core or a national profile is neither claimed nor checked/);
   assert.match(c.implementation.description, /never as a guessed code/);
-  // Every mapped type, plus Provenance, which is derived from each of them rather than mapped from a stored one.
-  assert.equal(c.rest[0].resource.length, Object.keys(FHIR_TYPE).length + 1, "it advertises exactly what it maps, plus derived Provenance");
+  /* Every mapped type, plus the three DERIVED ones: Provenance (from each version's own stamp), and
+   * TASK 7.11's Practitioner and Organization (from the actor id on a row and from the org record).
+   * None of the three is a stored canonical type, and each declares only what it can actually do -
+   * the two identity types are read-only and say outright that this server is not a directory. */
+  assert.equal(c.rest[0].resource.length, Object.keys(FHIR_TYPE).length + 3, "it advertises exactly what it maps, plus the three derived types");
+  const derived = c.rest[0].resource.filter((r) => ["Provenance", "Practitioner", "Organization"].includes(r.type));
+  assert.equal(derived.length, 3);
+  for (const r of derived.filter((x) => x.type !== "Provenance")) {
+    assert.deepEqual(r.interaction.map((i) => i.code), ["read"], r.type + " is read-only");
+    assert.ok(!r.searchParam, r.type + " declares no search: there is no directory to search");
+    assert.match(r.documentation, /Derived, read-only/);
+  }
+  assert.match(derived.find((r) => r.type === "Practitioner").documentation, /never a name inferred from an account/);
   assert.ok(c.rest[0].resource.some((r) => r.type === "Provenance"));
 });
 

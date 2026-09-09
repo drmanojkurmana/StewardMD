@@ -7,6 +7,7 @@
  */
 
 import { patientEverything, readResource, capabilityStatement, searchType, historyOf, vread, operationOutcome, provenanceRead, provenanceSearch, validateOperation, validateCodeOperation } from "./fhir.js";
+import { practitionerRead, organizationRead } from "./fhir-identity.js";
 
 const str = (v) => (v == null ? "" : String(v).trim());
 
@@ -45,6 +46,17 @@ async function dispatchRead(request, env, parts, url, fctx, prefer) {
   if (fType === "Provenance") {
     const r = fId ? await provenanceRead(request, env, { ...fctx, id: fId }) : await provenanceSearch(request, env, { ...fctx, searchParams: strip(), rawQuery });
     return { obj: r.ok ? (r.resource || r.bundle) : r.outcome, status: r.status };
+  }
+  /* TASK 7.11. Derived identity, served the way Provenance already is: routed before the generic
+   * read, because neither type is a stored canonical record. Read only - a search over either would
+   * be a directory this server does not have, and a 404 on the type is more honest than an empty
+   * Bundle that reads as "nobody works here". */
+  if (fType === "Practitioner" || fType === "Organization") {
+    if (!fId) return { obj: operationOutcome("error", "not-supported", `${fType} is served by id only: this server holds no ${fType === "Practitioner" ? "practitioner" : "organisation"} directory to search`), status: 404 };
+    const r = fType === "Practitioner"
+      ? await practitionerRead(request, env, { ...fctx, id: fId })
+      : await organizationRead(request, env, { ...fctx, id: fId });
+    return { obj: r.ok ? r.resource : r.outcome, status: r.status };
   }
   if (fType === "Patient" && fId && fOp === "$everything") {
     const r = await patientEverything(request, env, { ...fctx, patientId: fId, searchParams: strip(), rawQuery, lenient });

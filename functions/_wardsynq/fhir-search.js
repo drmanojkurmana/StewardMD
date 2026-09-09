@@ -191,6 +191,34 @@ const PARAMS = Object.freeze({
     encounter: { type: "reference", get: (r) => r.encounter, target: "Encounter" },
     date: { type: "date", get: (r) => r.period && r.period.end },
   },
+  /* TASK 7.2. The three types this server started exporting with the surgical, scheduling and risk
+   * work. Each is searched the way its own ward asks for it: a Procedure by patient, visit and
+   * date; an Appointment by the day and its state; a RiskAssessment by patient and visit. */
+  Procedure: {
+    status: { type: "token", get: (r) => r.status },
+    subject: { type: "reference", get: (r) => r.subject, target: "Patient" },
+    encounter: { type: "reference", get: (r) => r.encounter, target: "Encounter" },
+    date: { type: "date", get: (r) => r.performedPeriod && (r.performedPeriod.start || r.performedPeriod.end) },
+  },
+  Appointment: {
+    status: { type: "token", get: (r) => r.status },
+    date: { type: "date", get: (r) => r.start },
+  },
+  RiskAssessment: {
+    status: { type: "token", get: (r) => r.status },
+    subject: { type: "reference", get: (r) => r.subject, target: "Patient" },
+    encounter: { type: "reference", get: (r) => r.encounter, target: "Encounter" },
+    date: { type: "date", get: (r) => r.occurrenceDateTime },
+  },
+  /* TASK 7.7. An imaging study is searched the way radiology actually asks for one: by accession
+   * number (identifier), by the order it answers (basedOn), by patient, visit and date. */
+  ImagingStudy: {
+    status: { type: "token", get: (r) => r.status },
+    subject: { type: "reference", get: (r) => r.subject, target: "Patient" },
+    encounter: { type: "reference", get: (r) => r.encounter, target: "Encounter" },
+    basedOn: { type: "reference", get: (r) => r.basedOn, target: "ServiceRequest" },
+    started: { type: "date", get: (r) => r.started },
+  },
   Provenance: {
     target: { type: "reference", get: (r) => r.target, target: "*" },
     recorded: { type: "date", get: (r) => r.recorded },
@@ -205,7 +233,11 @@ const PATIENT_REF = Object.freeze({
   ServiceRequest: (r) => r.subject, DiagnosticReport: (r) => r.subject, DocumentReference: (r) => r.subject,
   Consent: (r) => r.patient, Provenance: null,
   Specimen: (r) => r.subject, MedicationDispense: (r) => r.subject,
-  CarePlan: (r) => r.subject,
+  CarePlan: (r) => r.subject, ImagingStudy: (r) => r.subject,
+  Procedure: (r) => r.subject, RiskAssessment: (r) => r.subject,
+  /* An Appointment's patient is a PARTICIPANT, not a subject: R4 models it as a list of actors, one
+   * of whom is the patient. The compartment is that actor, found rather than assumed to be first. */
+  Appointment: (r) => ((r.participant || []).map((x) => x && x.actor).find((a) => a && /^Patient\//.test(String(a.reference || ""))) || null),
 });
 
 /** Kept for callers and tests that read the principal date and code of a type. Derived from PARAMS. */
@@ -679,6 +711,10 @@ const SUMMARY = Object.freeze({
   Consent: ["identifier", "status", "scope", "category", "patient", "dateTime", "performer"],
   Provenance: ["target", "recorded", "activity", "agent"],
   CarePlan: ["identifier", "status", "intent", "title", "subject", "encounter", "period", "author"],
+  ImagingStudy: ["identifier", "status", "subject", "encounter", "basedOn", "started", "modality", "numberOfSeries"],
+  Procedure: ["identifier", "status", "code", "subject", "encounter", "performedPeriod", "performedDateTime"],
+  Appointment: ["identifier", "status", "start", "end", "participant", "reasonCode"],
+  RiskAssessment: ["identifier", "status", "subject", "encounter", "occurrenceDateTime", "prediction", "method"],
 });
 const ALWAYS = ["resourceType", "id", "meta"];
 const SUBSETTED = { system: "http://terminology.hl7.org/CodeSystem/v3-ObservationValue", code: "SUBSETTED", display: "Resource encoded in summary mode" };

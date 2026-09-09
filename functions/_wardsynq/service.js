@@ -194,6 +194,14 @@ const RESOURCE_TYPES = Object.freeze([
    * against the request VERSION, so a later change to the request cannot make it look as though the
    * protocol was decided for a study nobody protocolled. */
   "ImagingProtocol",
+  /* TASK 7.7: that a study EXISTS in a PACS, and what it is. Metadata only and deliberately so -
+   * there is no url, no instance list and no pixel data on the row, because a field holding a
+   * retrieve URL becomes the thing every viewer, cache and log copies a patient's images through.
+   * What the chart needs is that the scan happened, when, of what, and the accession number that
+   * finds it in the viewer the radiologist already has. Its value is the ORDER LINK: matched to the
+   * ServiceRequest sharing its accession number, so a request and its scan stop being two unrelated
+   * rows. Before this, imaging studies reaching the SCCM adapter were counted and DROPPED. */
+  "ImagingStudy",
   /* Something another system sent that WardSynQ would not write silently: a patient who might be
    * one of two people here, a probable duplicate, a record that would overwrite one this hospital
    * authored, a resource type nothing maps. Held HERE, with the payload, rather than dropped or
@@ -343,6 +351,17 @@ const RESOURCE_TYPES = Object.freeze([
    * capability that could be widened by accident. See fhir-inbound.js's own header for the full
    * design. */
   "SourceSystemGrant",
+  /* TASK 7.4: where this hospital may send, and what it has sent. Two types, both append-only.
+   * OutboundDestination is the ALLOWLIST ITSELF - the only way a URL can be posted to is that an
+   * administrator wrote it down here, so no request can ever talk this server into exfiltrating a
+   * chart to an address of the caller's choosing. OutboundDelivery is the QUEUE: a delivery must
+   * outlive the isolate that created it, or an outage loses a discharge summary, and its history of
+   * attempts is the only honest answer to "did the other hospital actually receive it". Neither is
+   * granted a clinical scope: like SourceSystemGrant, only `admin`'s unrestricted write reaches
+   * them, so deciding where patient data leaves the building stays an administrative act by
+   * construction. See fhir-outbound.js's header. */
+  "OutboundDestination",
+  "OutboundDelivery",
 ]);
 
 const MODE = Object.freeze({ SYSTEM_OF_RECORD: "system-of-record", INTEGRATION: "integration" });

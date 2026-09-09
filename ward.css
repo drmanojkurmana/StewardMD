@@ -320,3 +320,27 @@ body.dark #smdWard { --bg: #191c1e; --on-surface: #eff1f3; --on-surface-variant:
 #smdWard .w-devices { list-style: none; margin: 0 0 8px; padding: 0; }
 #smdWard .w-devices li { display: flex; justify-content: space-between; align-items: center; padding: 6px 0; border-top: 1px solid var(--outline-variant); gap: 8px; }
 #smdWard .w-devices li:first-child { border-top: 0; }
+
+/* TASK 7.10, the integration console. The counters are deliberately plain and the only colour on
+   the screen belongs to a number somebody has to act on: a wall of red on an operations board stops
+   being read within a shift, the same reasoning the critical-results card above is built on. A
+   count that could NOT be read renders as "?" rather than 0 - the two answers must never look
+   alike, because one of them means something is sitting undelivered and nobody knows. */
+#smdWard .w-int-stats { list-style: none; margin: 0 0 12px; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(104px, 1fr)); gap: 10px; }
+#smdWard .w-int-stat { border: 1px solid var(--outline-variant); border-radius: 12px; padding: 10px 12px; background: var(--sc-low); }
+#smdWard .w-int-stat b { display: block; font: 700 22px var(--mono, ui-monospace, Menlo, monospace); font-variant-numeric: tabular-nums; }
+#smdWard .w-int-stat span { display: block; margin-top: 2px; font: 600 10.5px var(--w-sans); text-transform: uppercase; letter-spacing: .05em; color: var(--on-surface-variant); }
+#smdWard .w-int-stat small { display: block; margin-top: 3px; font: 500 11px var(--w-sans); opacity: .85; }
+#smdWard .w-int-stat small.warn { color: var(--on-warn-container); opacity: 1; }
+#smdWard .w-int-stat.on { border-color: var(--outline); border-left-width: 3px; }
+#smdWard .w-int-list { list-style: none; margin: 0; padding: 0; }
+#smdWard .w-int-list li { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 9px 0; border-top: 1px solid var(--outline-variant); }
+#smdWard .w-int-list li:first-child { border-top: 0; }
+#smdWard .w-int-list li > div { min-width: 0; }
+#smdWard .w-int-list b { display: block; font: 700 13.5px var(--w-sans); overflow-wrap: anywhere; }
+#smdWard .w-int-list small { display: block; font: 500 11.5px var(--w-sans); color: var(--on-surface-variant); overflow-wrap: anywhere; }
+#smdWard .w-int-list small.warn { color: var(--on-warn-container); }
+#smdWard .w-int-tag { flex: none; font: 600 10.5px var(--w-sans); text-transform: uppercase; letter-spacing: .05em; padding: 3px 7px; border-radius: 999px; border: 1px solid var(--outline-variant); }
+#smdWard .w-int-list li.st-expired .w-int-tag, #smdWard .w-int-list li.st-failed .w-int-tag { background: var(--warn-container); color: var(--on-warn-container); border-color: transparent; }
+#smdWard .w-int-list li.st-revoked .w-int-tag, #smdWard .w-int-list li.st-dead-letter .w-int-tag { background: var(--error-container); color: var(--on-error-container); border-color: transparent; }
+#smdWard .w-int-list li.st-revoked b, #smdWard .w-int-list li.st-revoked small { opacity: .7; }

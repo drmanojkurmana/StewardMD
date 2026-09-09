@@ -204,6 +204,11 @@
       '<button class="w-btn ghost" data-w-act="emergencyadmin" title="Declare or stand down a hospital emergency">' + ms("emergency") + "Emergency</button>" +
       // Reachable BEFORE an outage, which is the only time it can be taken. A pack you can only get
       // to while the system is up is a pack the ward has to remember to take while the system is up.
+      /* TASK 7.10. Hospital-wide, like Reports and Emergency beside it: the interfaces are not one
+       * patient's business. It is offered to everyone the way every other control here is, and a
+       * role without the capability is told so by the server's own 403 rather than by this screen
+       * guessing who holds it. */
+      '<button class="w-btn ghost" data-w-act="integration" title="Feeds in and out: what is held, what is stuck, who may push, where this hospital sends">' + ms("hub") + "Integration</button>" +
       '<button class="w-btn ghost" data-w-act="downtime" title="Printable sheet for when the system is unavailable">' + ms("print") + "Downtime pack</button></div>" +
       (rows || (state.loaded ? '<p class="w-empty">No patients are currently admitted' + (state.ward ? " to " + esc(state.ward) : "") + ".</p>" : '<p class="w-empty">Loading the ward…</p>')) +
       "</div>" + xchgCard(state) + cosignCard(state) + qualityCard(state) + overrideCard(state);
@@ -1782,6 +1787,106 @@
    * the ordinary chart - the SAME listCriticalLoops() backend, called with no patientId, so whoever
    * is covering the ward or the lab can see every open loop at once. No new logic: same escalation
    * levels, same "acknowledging records what was done, not a way to clear the list" discipline. */
+  /* THE INTEGRATION CONSOLE (TASK 7.10). A WardSynQ workstation for the person who has to answer
+   * "is anything stuck", not an onboarding wizard: onboarding is a one-off act of connecting a
+   * hospital, and this is the screen somebody opens on a Tuesday morning because a laboratory has
+   * rung to ask why a result never arrived.
+   *
+   * IT SHOWS BOTH DIRECTIONS AND IT NEVER FLATTERS EITHER. Every count here is something a person
+   * may have to act on: messages HELD because WardSynQ would not file them without a decision;
+   * deliveries that FAILED and are backing off; deliveries that have been DEAD-LETTERED and stopped
+   * for good; authorisations that have EXPIRED or been REVOKED and would silently refuse the next
+   * message. A zero is only shown when the list was actually read - an unreachable list says so,
+   * because "nothing held" and "could not tell" are the two answers that must never look alike on
+   * an operations screen. */
+  function integrationView(state) {
+    var g = state.integration || {};
+    var errs = (g.errors || []);
+    var held = (g.exceptions && g.exceptions.open) || [];
+    var grants = (g.grants && g.grants.grants) || [];
+    var dests = (g.destinations && g.destinations.destinations) || [];
+    var deliveries = (g.outbound && g.outbound.deliveries) || [];
+    var counts = (g.outbound && g.outbound.counts) || {};
+    var unreachable = function (what) { return errs.indexOf(what) >= 0; };
+
+    var stat = function (label, n, what, hint) {
+      return '<li class="w-int-stat' + (n > 0 ? " on" : "") + '"><b>' + (unreachable(what) ? "?" : n) + "</b><span>" + esc(label) + "</span>" +
+        (unreachable(what) ? '<small class="warn">could not be read</small>' : (hint ? "<small>" + esc(hint) + "</small>" : "")) + "</li>";
+    };
+
+    var grantRows = grants.map(function (r) {
+      return '<li class="st-' + esc(r.state) + '"><div><b>' + esc(r.sourceSystem) + "</b>" +
+        "<small>" + esc(r.actorId || "") + (r.grantedAt ? " &middot; granted " + when(r.grantedAt) : "") +
+        (r.state === "expired" ? " &middot; expired " + when(r.expiresAt) : "") +
+        (r.state === "revoked" ? " &middot; revoked" + (r.revokedReason ? ": " + esc(r.revokedReason) : "") : "") + "</small></div>" +
+        '<span class="w-int-tag">' + esc(r.state) + "</span>" +
+        (r.state === "active" ? '<button class="w-btn tiny" data-w-act="srcrevoke:' + esc(r.sourceSystem) + "|" + esc(r.actorId || "") + '">' + ms("block") + "Revoke</button>" : "") +
+        "</li>";
+    }).join("");
+
+    var destRows = dests.map(function (d) {
+      return '<li class="' + (d.active ? "" : "st-revoked") + '"><div><b>' + esc(d.name) + "</b>" +
+        "<small>" + esc(d.url) + " &middot; " + esc((d.resourceTypes || []).join(", ") || "nothing") + "</small>" +
+        "<small>" + (d.auth && d.auth.kind === "bearer"
+          ? (d.auth.configured ? "authenticated &middot; credential present" : "authenticated &middot; NO CREDENTIAL CONFIGURED")
+          : "no authentication") + "</small></div>" +
+        (d.active ? '<button class="w-btn tiny" data-w-act="destrevoke:' + esc(d.name) + '">' + ms("block") + "Stop</button>"
+                  : '<span class="w-int-tag">stopped</span>') + "</li>";
+    }).join("");
+
+    // Only what a person can still do something about: what is stuck, and what has given up.
+    var stuck = deliveries.filter(function (d) { return d.state === "failed" || d.state === "dead-letter" || d.state === "queued"; });
+    var deliveryRows = stuck.map(function (d) {
+      var t = d.target || {};
+      return '<li class="st-' + esc(d.state) + '"><div><b>' + esc(t.fhirType || t.resourceType || "") + " &rarr; " + esc(d.destinationName || d.destinationId) + "</b>" +
+        "<small>" + esc(t.id || "") + " v" + esc(t.version || "") + " &middot; " + (d.attempts || []).length + " attempt" + ((d.attempts || []).length === 1 ? "" : "s") +
+        (d.nextAttemptAt ? " &middot; next " + when(d.nextAttemptAt) : "") + "</small>" +
+        (d.lastError ? '<small class="warn">' + esc(d.lastError) + "</small>" : "") + "</div>" +
+        '<span class="w-int-tag">' + esc(d.state) + "</span>" +
+        (d.state === "dead-letter" ? '<button class="w-btn tiny go" data-w-act="outreplay:' + esc(d.id) + '">' + ms("replay") + "Send again</button>" : "") +
+        "</li>";
+    }).join("");
+
+    return '<div class="w-chart-h"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button>" +
+      "<div><b>Integration</b><small>what is coming in, what is going out, and what is stuck</small></div>" +
+      '<button class="w-ic" data-w-act="intload" title="Refresh">' + ms("refresh") + "</button></div>" +
+
+      (errs.length ? '<p class="w-hint warn">' + ms("warning") + "Some of this could not be read (" + esc(errs.join(", ")) +
+        "). What is shown below is incomplete: do not read a zero here as nothing outstanding.</p>" : "") +
+
+      '<div class="w-card"><div class="w-card-h">' + ms("hub") + "<h3>Right now</h3></div>" +
+      '<ul class="w-int-stats">' +
+      stat("held for a decision", held.length, "exceptions", "nothing here is on a chart") +
+      stat("waiting to go out", (counts.queued || 0), "outbound", "") +
+      stat("retrying", (counts.failed || 0), "outbound", "backing off") +
+      stat("given up", (counts.deadLetter || counts["dead-letter"] || 0), "outbound", "needs a person") +
+      stat("lapsed authorisations", grants.filter(function (r) { return r.state !== "active"; }).length, "grants", "would refuse the next message") +
+      "</ul>" +
+      '<button class="w-btn go" data-w-act="outdispatch">' + ms("send") + "Send what is due now</button>" +
+      '<p class="w-hint">' + ms("info") + "Sending is not scheduled by this screen: it runs when this hospital's own timer calls it, or when somebody presses this.</p>" +
+      "</div>" +
+
+      '<div class="w-card"><div class="w-card-h">' + ms("login") + "<h3>Coming in &middot; who WardSynQ believes</h3></div>" +
+      '<p class="w-hint">A feed may only claim a source it has been granted. An expired or revoked authorisation refuses the next message it sends, and says which of the two it was.</p>' +
+      (unreachable("grants") ? '<p class="w-empty warn">The authorisation list could not be read.</p>'
+        : grantRows ? '<ul class="w-int-list">' + grantRows + "</ul>"
+        : '<p class="w-empty">No source system has been authorised. Nothing outside this hospital can push data in.</p>') +
+      "</div>" +
+
+      '<div class="w-card"><div class="w-card-h">' + ms("logout") + "<h3>Going out &middot; where this hospital may send</h3></div>" +
+      '<p class="w-hint">Nothing is ever sent to an address that is not on this list. Stopping a destination also stops what is already queued for it.</p>' +
+      (unreachable("destinations") ? '<p class="w-empty warn">The destination list could not be read.</p>'
+        : destRows ? '<ul class="w-int-list">' + destRows + "</ul>"
+        : '<p class="w-empty">No destination is registered. This hospital sends nothing out.</p>') +
+      "</div>" +
+
+      '<div class="w-card"><div class="w-card-h">' + ms("outbox") + "<h3>Outbound queue</h3></div>" +
+      (unreachable("outbound") ? '<p class="w-empty warn">The outbound queue could not be read.</p>'
+        : deliveryRows ? '<ul class="w-int-list">' + deliveryRows + "</ul>"
+        : '<p class="w-empty">Nothing is waiting, retrying or stopped.</p>') +
+      "</div>";
+  }
+
   function critsBoardView(state) {
     var loops = state.critsBoard || [];
     var rows = loops.map(function (c) {
@@ -2395,6 +2500,7 @@
         : state.view === "pharmacy" ? pharmacyView(state)
         : state.view === "transfusion" ? transfusionView(state)
         : state.view === "critsboard" ? critsBoardView(state)
+        : state.view === "integration" ? integrationView(state)
         : state.view === "bedmgmt" ? bedBoardMgmtView(state)
         : state.view === "flowcommand" ? flowCommandView(state)
         : state.view === "scheduling" ? schedulingView(state)
@@ -3098,6 +3204,62 @@
   }
   function critsBoardOpen() {
     st.view = "critsboard"; st.critsBoard = []; paint(); loadCritsBoard();
+  }
+  /* TASK 7.10, the integration console. Four independent reads, and a failure in ANY of them is
+   * recorded by name rather than left as an empty list: on this screen "nothing held" and "could not
+   * tell" are the two answers that must never look the same, because one of them means a result is
+   * sitting undelivered and nobody knows. */
+  function integrationOpen() { st.view = "integration"; st.integration = { errors: [] }; paint(); loadIntegration(); }
+  function loadIntegration() {
+    st.busy = true; paint();
+    var q = "orgId=" + encodeURIComponent(st.orgId);
+    var out = { errors: [] };
+    var read = function (name, path, key) {
+      return apiGet(path + "?" + q)
+        .then(function (r) { if (r && r.ok) out[key] = r; else out.errors.push(name); })
+        .catch(function () { out.errors.push(name); });
+    };
+    return Promise.all([
+      read("held messages", "/ward/fhir-exceptions", "exceptions"),
+      read("grants", "/ward/source-grants", "grants"),
+      read("destinations", "/ward/outbound-destinations", "destinations"),
+      read("outbound", "/ward/outbound", "outbound"),
+    ]).then(function () { st.busy = false; st.integration = out; paint(); });
+  }
+  function dispatchOutbound() {
+    st.busy = true; paint();
+    apiPost("/ward/outbound-dispatch", { orgId: st.orgId })
+      // The server's own count, never "sent". A delivery is only delivered when the far end says so.
+      .then(function (r) { if (settle(r, r && r.ok ? (r.attempted || 0) + " deliver" + ((r.attempted || 0) === 1 ? "y" : "ies") + " attempted." : null)) loadIntegration(); else paint(); })
+      .catch(function () { st.busy = false; st.err = "Could not reach the outbound queue."; paint(); });
+  }
+  function replayDelivery(id) {
+    if (!id) return;
+    var why = ""; try { why = G.prompt("Why is this being sent again?") || ""; } catch (e) {}
+    if (!why.trim() || why.trim().length < 5) { st.err = "Sending a stopped delivery again is a decision, and it needs a reason."; paint(); return; }
+    st.busy = true; paint();
+    apiPost("/ward/outbound-replay", { orgId: st.orgId, deliveryId: id, reason: why.trim() })
+      .then(function (r) { if (settle(r, "Queued to send again.")) loadIntegration(); else paint(); })
+      .catch(function () { st.busy = false; st.err = "Could not re-queue that delivery."; paint(); });
+  }
+  function revokeDestination(name) {
+    if (!name) return;
+    var why = ""; try { why = G.prompt("Why is this destination being stopped?") || ""; } catch (e) {}
+    if (!why.trim() || why.trim().length < 5) { st.err = "Stopping a destination needs a reason: it stops what is already queued for it."; paint(); return; }
+    st.busy = true; paint();
+    apiPost("/ward/outbound-destination-revoke", { orgId: st.orgId, name: name, reason: why.trim() })
+      .then(function (r) { if (settle(r, "Stopped.")) loadIntegration(); else paint(); })
+      .catch(function () { st.busy = false; st.err = "Could not stop that destination."; paint(); });
+  }
+  function revokeSource(arg) {
+    var parts = String(arg || "").split("|"), system = parts[0], actorId = parts[1] || "";
+    if (!system) return;
+    var why = ""; try { why = G.prompt("Why is this system's authorisation being withdrawn?") || ""; } catch (e) {}
+    if (!why.trim() || why.trim().length < 5) { st.err = "Withdrawing an authorisation needs a reason. The next message from that system will be refused."; paint(); return; }
+    st.busy = true; paint();
+    apiPost("/ward/source-revoke", { orgId: st.orgId, sourceSystem: system, actorId: actorId, reason: why.trim() })
+      .then(function (r) { if (settle(r, "Withdrawn.")) loadIntegration(); else paint(); })
+      .catch(function () { st.busy = false; st.err = "Could not withdraw that authorisation."; paint(); });
   }
   function loadCritsBoard() {
     return apiGet("/ward/criticals?orgId=" + encodeURIComponent(st.orgId))
@@ -4171,6 +4333,7 @@
       if (st.view === "transfusion") { st.view = "chart"; st.transfusion = null; paint(); return; }
       if (st.view === "inventory") { st.inventory = null; st.view = "list"; paint(); return; }
       if (st.view === "critsboard") { st.critsBoard = []; st.view = "list"; paint(); return; }
+      if (st.view === "integration") { st.integration = null; st.view = "list"; paint(); return; }
       if (st.view === "bedmgmt") { st.bedMgmt = {}; st.view = "list"; paint(); return; }
       if (st.view === "flowcommand") { st.flow = {}; st.view = "list"; paint(); return; }
       if (st.view === "scheduling") { st.scheduling = {}; st.view = "list"; paint(); return; }
@@ -4232,6 +4395,12 @@
     if (cmd === "edboard") { loadEd(); return; }
     if (cmd === "inventoryboard") { inventoryOpen(); return; }
     if (cmd === "inventoryload") { loadInventory(); return; }
+    if (cmd === "integration") { integrationOpen(); return; }
+    if (cmd === "intload") { loadIntegration(); return; }
+    if (cmd === "outdispatch") { dispatchOutbound(); return; }
+    if (cmd === "outreplay") { replayDelivery(arg); return; }
+    if (cmd === "destrevoke") { revokeDestination(arg); return; }
+    if (cmd === "srcrevoke") { revokeSource(arg); return; }
     if (cmd === "critsboard") { critsBoardOpen(); return; }
     if (cmd === "critsboardload") { loadCritsBoard(); return; }
     if (cmd === "ackboard") { acknowledgeBoard(arg); return; }

@@ -16,14 +16,21 @@ export function encounter(o = {}) { requireId(o); return putIf(putIf({ id: o.id,
 export function condition(o = {}) { requireId(o); return { id: o.id, code: o.code || null, clinicalStatus: o.clinicalStatus || "unknown", category: o.category || null, onset: o.onset || null, recordedDate: o.recordedDate || null, encounter: o.encounter || null }; }
 export function medicationStatement(o = {}) { requireId(o); return { id: o.id, medication: o.medication || null, origin: o.origin || "statement", status: o.status || "unknown", dosage: o.dosage || null, effectivePeriod: o.effectivePeriod || null, reason: o.reason || [] }; }
 export function allergyIntolerance(o = {}) { requireId(o); return { id: o.id, code: o.code || null, clinicalStatus: o.clinicalStatus || "active", criticality: o.criticality || "unable-to-assess", reactions: o.reactions || [] }; }
-export function observation(o = {}) { requireId(o); return { id: o.id, category: o.category || null, code: o.code || null, value: o.value ?? null, referenceRange: o.referenceRange || null, interpretation: o.interpretation || null, effectiveDateTime: o.effectiveDateTime || null, status: o.status || "unknown" }; }
-export function diagnosticReport(o = {}) { requireId(o); return putIf({ id: o.id, code: o.code || null, category: o.category || null, status: o.status || "unknown", effectiveDateTime: o.effectiveDateTime || null, conclusion: o.conclusion || null, results: o.results || [] }, "basedOn", o.basedOn); }
+/* `encounter` is SCCM 1.1 and ADDITIVE (a 1.0 producer that omits it still validates): an
+ * observation's VISIT used to be dropped on the way in, which lost the context every ward round,
+ * discharge summary and bill reads by - and left "is this the right visit" unanswerable. */
+export function observation(o = {}) { requireId(o); return putIf({ id: o.id, category: o.category || null, code: o.code || null, value: o.value ?? null, referenceRange: o.referenceRange || null, interpretation: o.interpretation || null, effectiveDateTime: o.effectiveDateTime || null, status: o.status || "unknown" }, "encounter", o.encounter); }
+export function diagnosticReport(o = {}) { requireId(o); return putIf(putIf({ id: o.id, code: o.code || null, category: o.category || null, status: o.status || "unknown", effectiveDateTime: o.effectiveDateTime || null, conclusion: o.conclusion || null, results: o.results || [] }, "basedOn", o.basedOn), "encounter", o.encounter); }
 /* SCCM 1.1. A dose that was GIVEN (or explicitly not) somewhere else: what, to whom, when, by whom as the
  * source names them, and the order it answered when the source says so. Status is the source's FHIR
  * status verbatim; what WardSynQ may file is decided by the adapter, never here. */
 export function medicationAdministration(o = {}) { requireId(o); return putIf(putIf({ id: o.id, medication: o.medication || null, status: o.status || "unknown", effectiveDateTime: o.effectiveDateTime || null, performer: o.performer || null, dosage: o.dosage || null, encounter: o.encounter || null }, "request", o.request), "reason", o.reason); }
 /* SCCM 1.1. An order for something other than a medicine, as the source holds it. */
-export function serviceRequest(o = {}) { requireId(o); return putIf({ id: o.id, code: o.code || null, category: o.category || null, status: o.status || "unknown", intent: o.intent || "order", priority: o.priority || null, authoredOn: o.authoredOn || null, requester: o.requester || null, encounter: o.encounter || null }, "occurrence", o.occurrence); }
+/* SCCM 1.1 (additive, TASK 7.6). `identifiers` carries the order's PLACER and FILLER numbers as the
+ * sender wrote them. An HL7 order arrives keyed by the placer number and its result often comes back
+ * quoting only the filler; keeping both means the two ends of an order stay attributable to a person
+ * reading the record, instead of only to whichever number happened to become the id. */
+export function serviceRequest(o = {}) { requireId(o); return putIf(putIf({ id: o.id, code: o.code || null, category: o.category || null, status: o.status || "unknown", intent: o.intent || "order", priority: o.priority || null, authoredOn: o.authoredOn || null, requester: o.requester || null, encounter: o.encounter || null }, "identifiers", o.identifiers && o.identifiers.length ? o.identifiers : null), "occurrence", o.occurrence); }
 /* SCCM 1.1. A consent decision as the source recorded it. `scope` and `category` are the source's
  * codings; `decision` is permit|deny|null derived from status and provision; nothing is inferred. */
 export function consent(o = {}) { requireId(o); return { id: o.id, status: o.status || "unknown", scope: o.scope || null, category: o.category || [], decision: o.decision || null, dateTime: o.dateTime || null, performer: o.performer || null, period: o.period || null, policy: o.policy || null }; }

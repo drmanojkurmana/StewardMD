@@ -91,6 +91,19 @@ const REASON = Object.freeze({
   CONFLICT_LOCAL_AUTHORITATIVE: "conflict-local-authoritative",
   CONFLICT_OTHER_SOURCE: "conflict-other-source",
   PATIENT_MISMATCH: "conflict-patient-mismatch",
+  /* TASK 7.13 (bidirectional safety). Four conflicts this pipeline could previously resolve
+   * SILENTLY - which is the one thing the plan forbids: "never silently choose a clinically
+   * significant conflicting value". Each is held for a person, exactly like every other conflict
+   * above, through the same ExchangeException queue. None of them decides anything clinical. */
+  ENCOUNTER_MISMATCH: "conflict-encounter-mismatch",
+  TENANT_MISMATCH: "conflict-tenant-mismatch",
+  STALE_RESULT: "conflict-stale-result",
+  MEDICATION_CONFLICT: "conflict-medication",
+  /* TASK 7.6. A cancellation (HL7 A11/A12/A13) that names a visit this hospital does not hold.
+   * The safe answer is NOT to create it: a cancel-discharge that invents an in-progress encounter
+   * puts a patient back on a ward they were never on, and a cancel-admit that invents a cancelled
+   * one leaves a ghost visit behind. Held for a person, who can see what the sender meant. */
+  CANCEL_UNKNOWN: "conflict-cancels-unknown-encounter",
   VERSION_MISMATCH: "version-mismatch",
   UNSUPPORTED: "unsupported-resource",
   INVALID: "invalid-resource",
@@ -169,6 +182,11 @@ function SourceSystemGrant(input) {
     actorId: i.actorId, sourceSystem: i.sourceSystem,
     active: i.active !== false,
     grantedBy: i.grantedBy, grantedAt: i.grantedAt,
+    /* TASK 7.15 (credential expiry). A partner's authority to push may be time-bounded, and when
+     * the clock passes it the feed stops - without anybody having to remember to revoke it. Absent
+     * means open-ended, which is what every grant issued before this field existed was. Expiry is
+     * COMPUTED against the clock on every message, never stored as a state that could go stale. */
+    expiresAt: i.expiresAt || null,
     revokedBy: i.revokedBy || null, revokedAt: i.revokedAt || null,
     note: i.note || null,
     source: { system: NATIVE_SYSTEM, sourceId: `source-grant:${i.id}` },
@@ -201,8 +219,12 @@ async function authorizedSourceSystem(svc, resolved, headerValue, bodyClaimRaw) 
   }
 
   let grants;
+  /* TASK 7.15: the record being DOWN is not the same as this feed being unauthorized, and a sender
+   * told "forbidden" during an outage would stop trying forever. 503 + the plain statement that
+   * nothing was written is what lets it retry safely - the content digest makes that retry land
+   * exactly once. */
   try { grants = await svc.list(GRANT_TYPE, 500); }
-  catch (e) { return { error: { status: 502, code: "record_read_failed", detail: str(e && e.message) } }; }
+  catch (e) { return { error: { status: 503, retryable: true, code: "record_read_failed", detail: `the record could not be read to check this feed's authorization (${str(e && e.message) || "unavailable"}); NOTHING was written, and this message may be sent again` } }; }
   // Tenant isolation needs no check of its own here: svc.list() only ever reads THIS tenant's own
   // store (TenantBackend), so a grant issued under a different tenant is not merely denied, it is
   // structurally never returned - there is nothing cross-tenant to compare against.
@@ -210,9 +232,23 @@ async function authorizedSourceSystem(svc, resolved, headerValue, bodyClaimRaw) 
   if (!grant) {
     return { error: { status: 403, code: "source_unauthorized", detail: `${resolved.actor.id} is not registered to push data as "${claimed}" for this hospital - an administrator must grant it before this feed can be accepted` } };
   }
-  // The GRANT's own value is what gets used downstream, never the raw claim re-slugged - belt and
-  // braces against a header/grant that happen to normalise the same but aren't literally the same.
-  return { system: grant.sourceSystem };
+  /* TASK 7.15: an EXPIRED credential is refused as distinctly as a revoked one - the two mean
+   * different things to whoever reads the refusal (one lapsed, one was withdrawn), and a feed told
+   * only "unauthorized" cannot tell whether to renew or to ask why. Never a grace period: a
+   * credential that has expired has expired. */
+  const expiry = Date.parse(str(grant.expiresAt));
+  if (Number.isFinite(expiry) && expiry <= Date.now()) {
+    return { error: { status: 403, code: "source_expired", detail: `the authorization for "${claimed}" expired at ${str(grant.expiresAt)}; it has lapsed rather than been withdrawn, and an administrator must renew it before this feed is accepted again` } };
+  }
+  /* The GRANT's own value is what gets used downstream, never the raw claim re-slugged - belt and
+   * braces against a header/grant that happen to normalise the same but aren't literally the same.
+   *
+   * TASK 7.12: the grant's ID travels too. "Under whose authority did this arrive" was answerable
+   * only by reconstructing it - the actor and the system were on the record, the authorisation that
+   * joined them was not - and an authorisation is exactly the thing that is revoked, renewed, or
+   * found to have been issued in error. It is stamped onto what lands and exported as the
+   * Provenance policy that permitted the write. */
+  return { system: grant.sourceSystem, grantId: grant.id };
 }
 
 /**
@@ -237,11 +273,59 @@ async function grantSourceSystem(request, env, ctx) {
 
   const id = grantIdFor(actorId, system);
   if (!id) return { ...base, ok: false, status: 422, error: "bad_identifiers", written: 0 };
-  const grant = SourceSystemGrant({ id, actorId, sourceSystem: system, active: true, grantedBy: resolved.actor.id, grantedAt: new Date().toISOString(), note: ctx.note || null });
+  /* A grant that already exists is RE-granted as its next version, never a second row: the whole
+   * point of an append-only grant is that "it was revoked on Tuesday and restored on Friday" stays
+   * readable. A first grant is version 1; a restore is version N+1 with the revocation still in the
+   * chain behind it. */
+  let current = null;
+  try { current = await svc.get(GRANT_TYPE, id); } catch { current = null; }
+  const expiresAt = str(ctx.expiresAt) || null;
+  if (expiresAt && !Number.isFinite(Date.parse(expiresAt))) return { ...base, ok: false, status: 422, error: "bad_expiry", detail: "expiresAt must be a real timestamp", written: 0 };
+  const grant = SourceSystemGrant({ id, actorId, sourceSystem: system, active: true, expiresAt, grantedBy: resolved.actor.id, grantedAt: new Date().toISOString(), note: ctx.note || null });
   try {
-    const out = await svc.put(grant, { idempotencyKey: ctx.idempotencyKey || null });
-    return { ...base, ok: true, written: 1, grant: { ...grant, version: out.record.version } };
+    const out = await svc.put(grant, { expectedVersion: current ? current.version : undefined, idempotencyKey: ctx.idempotencyKey || null });
+    return { ...base, ok: true, written: 1, restored: !!(current && current.active === false), grant: { ...grant, version: out.record.version } };
   } catch (e) {
+    if (e instanceof VersionConflictError) return { ...base, ok: false, status: 409, error: "version_conflict", written: 0 };
+    return { ...base, ok: false, status: 502, error: "record_write_failed", detail: str(e && e.message), written: 0 };
+  }
+}
+
+/**
+ * TASK 7.13 (revoked integration). Ends a source system's authority to push, immediately and
+ * durably. The grant is not deleted - it is a new version with `active: false`, which is what makes
+ * "who could push as this partner, and when did that stop" answerable afterwards. The very next
+ * message from that feed is refused by authorizedSourceSystem(), which already reads `active`.
+ * ctx: { migration, actorId, sourceSystem, reason, actorDeps, recordDeps }
+ */
+async function revokeSourceSystem(request, env, ctx) {
+  const mig = ctx.migration;
+  const base = { mode: mig && mig.mode, tenantId: (mig && mig.tenantId) || null };
+  if (!mig || mig.mode === "off") return { ...base, ok: true, skipped: "off", written: 0 };
+
+  const actorId = str(ctx.actorId);
+  const system = slug(ctx.sourceSystem);
+  const reason = str(ctx.reason);
+  if (!actorId) return { ...base, ok: false, status: 422, error: "actor_required", written: 0 };
+  if (!system) return { ...base, ok: false, status: 422, error: "source_system_required", written: 0 };
+  // A revocation with no reason is unauditable, the same rule every other governance act here holds.
+  if (reason.length < 5) return { ...base, ok: false, status: 422, error: "reason_required", detail: "say why this integration is being revoked", written: 0 };
+
+  const { svc, resolved, error } = await openIngest(request, env, ctx);
+  if (error) return { ...base, ok: false, status: error.status, error: "auth", detail: (error.outcome && error.outcome.issue && error.outcome.issue[0].diagnostics) || null, written: 0 };
+
+  const id = grantIdFor(actorId, system);
+  let current = null;
+  try { current = await svc.get(GRANT_TYPE, id); } catch { current = null; }
+  if (!current) return { ...base, ok: false, status: 404, error: "grant_not_found", written: 0 };
+  if (current.active === false) return { ...base, ok: true, written: 0, skipped: "already_revoked", grant: current };
+
+  const next = SourceSystemGrant({ ...current, active: false, revokedBy: resolved.actor.id, revokedAt: new Date().toISOString(), note: reason });
+  try {
+    const out = await svc.put(next, { expectedVersion: current.version, idempotencyKey: ctx.idempotencyKey || null });
+    return { ...base, ok: true, written: 1, grant: { ...next, version: out.record.version } };
+  } catch (e) {
+    if (e instanceof VersionConflictError) return { ...base, ok: false, status: 409, error: "version_conflict", written: 0 };
     return { ...base, ok: false, status: 502, error: "record_write_failed", detail: str(e && e.message), written: 0 };
   }
 }
@@ -423,6 +507,163 @@ function partitionConflicts(entities, currentOf, system) {
   return { writable, conflicts };
 }
 
+/* ---- TASK 7.13: the four conflicts that used to resolve themselves silently ------------------- */
+
+/**
+ * PURE. Does this bundle claim to belong to a different hospital than the door it arrived at?
+ *
+ * Tenant isolation is already structural - TenantBackend has no parameter for another tenant, so a
+ * mis-addressed bundle could never have WRITTEN anywhere else. What it could do until now is land
+ * SILENTLY in the wrong hospital: the declared tenant was simply ignored. A sender that addressed
+ * its message to hospital B and had it filed in hospital A has been told nothing, and the message
+ * it thinks it delivered is on a stranger's chart. Refused, named, before anything is written.
+ */
+function tenantMismatch(sccm, tenantId) {
+  const declared = str(sccm && sccm.tenantId);
+  const actual = str(tenantId);
+  if (!declared || !actual || declared === actual) return null;
+  return { declared, actual };
+}
+
+/**
+ * PURE. Entities filed against an encounter that belongs to a DIFFERENT patient.
+ *
+ * The patient check (partitionConflicts) asks "is this the right person"; this asks "is this the
+ * right VISIT". A potassium filed on the right patient but another patient's admission is wrong in
+ * a way every downstream reader inherits: the ward round, the discharge summary and the bill all
+ * read by encounter. A reference to an encounter this hospital does not hold is NOT a mismatch -
+ * it may simply not have been imported - but one that resolves to somebody else's visit is.
+ * `encounterOf(id)` returns the stored Encounter or null.
+ */
+function encounterMismatches(entities, encounterOf) {
+  const out = [];
+  for (const e of entities || []) {
+    if (!e || e.resourceType === "Encounter") continue;
+    const encId = str(e.encounterId);
+    const mine = str(e.patientId);
+    if (!encId || !mine) continue;
+    const enc = encounterOf(encId);
+    const encPatient = enc ? str(enc.patientId) : "";
+    if (!encPatient || encPatient === mine) continue;
+    out.push({ entity: e, current: { id: enc.id, resourceType: "Encounter", version: enc.version, patientId: encPatient }, reason: REASON.ENCOUNTER_MISMATCH });
+  }
+  return out;
+}
+
+/**
+ * PURE. A feed's own update that describes an EARLIER moment than the version already stored.
+ *
+ * Ownership says a feed may update its own row, and until now it always won - including when the
+ * message arriving second described a moment that happened FIRST. That is the late result: a lab
+ * re-sends an 08:00 potassium after the 14:00 one has already landed, and the chart quietly goes
+ * backwards. Recorded time is not the test (the late message is genuinely newer to us); EFFECTIVE
+ * time is, because that is when the fact was clinically true. Held, never silently applied.
+ */
+function staleUpdates(writable, currentOf) {
+  const out = [];
+  for (const e of writable || []) {
+    const cur = currentOf(e);
+    if (!cur) continue;
+    const incoming = Date.parse(str(e.meta && e.meta.effectiveAt));
+    const stored = Date.parse(str(cur.meta && cur.meta.effectiveAt));
+    if (!Number.isFinite(incoming) || !Number.isFinite(stored) || incoming >= stored) continue;
+    out.push({ entity: e, current: { id: cur.id, resourceType: cur.resourceType, version: cur.version, effectiveAt: str(cur.meta.effectiveAt) },
+      incomingEffectiveAt: str(e.meta.effectiveAt), reason: REASON.STALE_RESULT });
+  }
+  return out;
+}
+
+/** PURE. The identity two systems would have to agree on to be naming the same drug. A coded
+ *  product is compared by its code IN ITS SYSTEM; an uncoded one only by the name as written.
+ *  Nothing here reasons about classes, ingredients or interactions - that is pharmacology, and
+ *  wardsynq-safety.js owns it. This answers only "did two sources name the same thing". */
+function drugKey(m) {
+  const code = str(m && m.drugCode);
+  const sys = str(m && m.drugCodeSystem);
+  if (code && sys && sys !== "unspecified" && sys !== UNMAPPED) return `${sys.toLowerCase()}|${code.toUpperCase()}`;
+  const name = str(m && m.drug).toLowerCase().replace(/\s+/g, " ");
+  return name ? `name|${name}` : "";
+}
+
+/** Statuses that mean the patient is, as far as that record says, on this drug now. */
+const LIVE_MED_STATUS = Object.freeze(["active", "on-hold", "draft"]);
+
+/**
+ * PURE. An incoming medication that a DIFFERENT source already asserts is live for this patient.
+ *
+ * Two systems asserting the same drug for one patient is the commonest real medication conflict at
+ * a hospital boundary, and the wrong answers are both easy: file it silently (the chart now shows
+ * the drug twice, and a reconciliation later cannot tell which is the truth) or drop it (the ward
+ * never learns the other system thinks the patient is on it). Held: both records survive, neither
+ * is changed, and a person reconciles them. NOTHING is stopped, started or merged here.
+ *
+ * Same-source duplicates are deliberately NOT flagged - a feed re-sending its own order under a new
+ * id is that feed's own bookkeeping, not a disagreement between systems.
+ */
+function medicationConflicts(entities, liveMeds, system) {
+  const out = [];
+  const live = (liveMeds || []).filter((m) => m && m.resourceType === "MedicationOrder" && LIVE_MED_STATUS.includes(str(m.status)));
+  for (const e of entities || []) {
+    if (!e || e.resourceType !== "MedicationOrder") continue;
+    if (!LIVE_MED_STATUS.includes(str(e.status))) continue;
+    const key = drugKey(e);
+    if (!key) continue;
+    const clash = live.find((m) => {
+      if (str(m.id) === str(e.id)) return false;                                   // the same record: an ordinary update
+      if (str(m.patientId) !== str(e.patientId)) return false;
+      const owner = str(m.meta && m.meta.source && m.meta.source.system) || NATIVE_SYSTEM;
+      if (owner === system) return false;                                          // our own feed's other order
+      return drugKey(m) === key;
+    });
+    if (!clash) continue;
+    const owner = str(clash.meta && clash.meta.source && clash.meta.source.system) || NATIVE_SYSTEM;
+    out.push({ entity: e, current: { id: clash.id, resourceType: "MedicationOrder", version: clash.version, source: owner, status: str(clash.status), drug: str(clash.drug) }, reason: REASON.MEDICATION_CONFLICT });
+  }
+  return out;
+}
+
+/** What each cancellation trigger takes back, in the words a person reading the exception uses. */
+const CANCELLATION = Object.freeze({ A11: "an admission", A12: "a transfer", A13: "a discharge" });
+
+/**
+ * PURE. TASK 7.6. A cancellation message naming an encounter this hospital does not hold.
+ *
+ * A11/A12/A13 mean "what I told you before did not happen". They can only take something back, so
+ * they may never bring an encounter INTO existence: an A13 for an unknown visit would create an
+ * in-progress encounter - a patient apparently on a ward they were never admitted to - and an A11
+ * would leave a cancelled ghost visit that no one ordered. Both are far worse than a held message.
+ * `currentOf(entity)` returns the stored latest version or null; `trigger` is MSH-9's event code.
+ */
+function cancellationsWithoutTarget(entities, currentOf, trigger) {
+  const takes = CANCELLATION[str(trigger).toUpperCase()];
+  if (!takes) return [];
+  const out = [];
+  for (const e of entities || []) {
+    if (!e || e.resourceType !== "Encounter" || currentOf(e)) continue;
+    out.push({ entity: e, current: null, reason: REASON.CANCEL_UNKNOWN, cancels: takes, trigger: str(trigger).toUpperCase() });
+  }
+  return out;
+}
+
+/** PURE. What a person opening this exception needs to read first: why it is here, in one sentence. */
+function conflictDetail(c) {
+  const cur = c.current || {};
+  switch (c.reason) {
+    case REASON.ENCOUNTER_MISMATCH:
+      return `the encounter this was filed against (${cur.id}) belongs to patient ${cur.patientId}, not to ${str(c.entity.patientId)}; the right person on the wrong visit is still the wrong chart`;
+    case REASON.STALE_RESULT:
+      return `this describes ${c.incomingEffectiveAt}, which is EARLIER than the version already stored (${cur.effectiveAt}); a late message does not silently move a chart backwards`;
+    case REASON.MEDICATION_CONFLICT:
+      return `${cur.source} already asserts this patient is on ${cur.drug} (${cur.status}); two systems disagreeing about a live medication is reconciled by a person, and nothing here was started, stopped or merged`;
+    case REASON.CANCEL_UNKNOWN:
+      return `${c.trigger} cancels ${c.cancels} for visit ${str(c.entity.id)}, which this hospital does not hold; a cancellation can only take something back, so nothing was created - check whether the admission message was ever received`;
+    case REASON.CONFLICT_LOCAL_AUTHORITATIVE:
+      return "this hospital authored the current version; a feed does not overwrite it";
+    default:
+      return `another feed (${cur.source}) authored the current version`;
+  }
+}
+
 /** Patient first, then encounters, then orders, then everything that points at them. */
 const ORDER = { Patient: 0, Encounter: 1, MedicationOrder: 2, ServiceRequest: 2 };
 const byDependency = (a, b) => (ORDER[a.resourceType] ?? 3) - (ORDER[b.resourceType] ?? 3);
@@ -506,7 +747,10 @@ async function ingestFhir(request, env, ctx) {
   const { svc: authSvc, resolved: authResolved, error: authError } = await openIngest(request, env, ctx);
   if (authError) return { ok: false, ...authError };
   const src = await authorizedSourceSystem(authSvc, authResolved, ctx.sourceSystem, bodySourceOf(ctx.body));
-  if (src.error) return { ok: false, status: src.error.status, outcome: operationOutcome("error", src.error.status === 403 ? "forbidden" : "invalid", src.error.detail) };
+  if (src.error) {
+    const code = src.error.status === 403 ? "forbidden" : src.error.retryable ? "transient" : "invalid";
+    return { ok: false, status: src.error.status, retryable: !!src.error.retryable, outcome: operationOutcome("error", code, src.error.detail) };
+  }
   const system = src.system;
   const adapterSystem = `fhir-${system}`;
 
@@ -554,7 +798,18 @@ async function ingestFhir(request, env, ctx) {
   }
   sccm.meta.sourceConnector = adapterSystem;
 
-  return landBundle(request, env, { ...ctx, svc, resolved, sccm, system, adapterSystem, patient, problems, requests, bundleType, atomic, protocol: "fhir" });
+  /* TASK 7.15 (WardSynQ's own outage). landBundle reads the record before it writes, and a
+   * repository that is down THROWS - which reached the sender as a 500 and, worse, as nothing it
+   * could act on. The HL7 door has always caught this and answered with an AE ACK; the FHIR door
+   * did not. A 503 saying plainly that NOTHING was written and the message may be re-sent is the
+   * truthful answer: the content-digest idempotency below means a re-send after a real partial
+   * failure still lands exactly once. */
+  try {
+    return await landBundle(request, env, { ...ctx, svc, resolved, sccm, system, adapterSystem, patient, problems, requests, bundleType, atomic, protocol: "fhir", grantId: src.grantId || null });
+  } catch (e) {
+    return { ok: false, status: 503, retryable: true, outcome: operationOutcome("error", "transient",
+      `the record could not be read or written to file this message (${str(e && e.message) || "unavailable"}); NOTHING was written, and this message may be sent again - a re-send of an identical message lands once`) };
+  }
 }
 
 /**
@@ -569,6 +824,14 @@ async function landBundle(request, env, ctx) {
   const mig = ctx.migration;
   const { svc, resolved, sccm, system, adapterSystem, patient, problems, requests, bundleType, atomic } = ctx;
   const protocol = str(ctx.protocol) || "fhir";
+  /* TASK 7.13: a bundle addressed to another hospital is refused at the door, before a single row
+   * is mapped. It could never have written there (TenantBackend has no parameter for another
+   * tenant) - what it could do is land silently HERE, which tells the sender nothing. */
+  const wrongTenant = tenantMismatch(sccm, mig && mig.tenantId);
+  if (wrongTenant) {
+    return { ok: false, status: 409, outcome: operationOutcome("error", "conflict",
+      `this bundle declares tenant "${wrongTenant.declared}" and arrived at "${wrongTenant.actual}"; it is refused rather than filed at the hospital it was not addressed to`) };
+  }
   const base = sccmAdapter();
   const adapterActor = makeActor({ id: `adapter:${adapterSystem}`, kind: KIND.ADAPTER, tier: TIER.DRAFT, display: `${protocol === "hl7v2" ? "HL7 v2" : "FHIR"} from ${system}`, onBehalfOf: resolved.actor.id });
   let mapped;
@@ -587,6 +850,15 @@ async function landBundle(request, env, ctx) {
     if (rec) entities.push(rec);
     else issues.push({ code: "SCCM_CONSENT_UNDECIDED", message: `consent ${c && c.id} carries no decision (status ${c && c.status}) and was not written` });
   }
+  /* TASK 7.12: THE AUTHORITY TRAVELS WITH THE DATA. Every row already said which system it came
+   * from and who wrote it; none said under WHICH AUTHORISATION it was accepted. That is the fact
+   * that changes - a grant is revoked, renewed, or found to have been issued in error - and after
+   * the fact "what came in under that grant" was answerable only by inference from the system name
+   * and a time window. Stamped on the row's own provenance envelope, so it survives into the
+   * exported Provenance as the policy that permitted the write. Absent for anything landed by a
+   * path that has no grant (a native write, or a re-drive by a person), which is the truth. */
+  if (str(ctx.grantId)) for (const e of entities) { if (e && e.meta && e.meta.source) e.meta.source.authorizedBy = str(ctx.grantId); }
+
   const hadMrn = !(mapped.issues || []).some((i) => i.code === "SCCM_PATIENT_NO_MRN");
 
   /* REPLAY IS DECIDED BY CONTENT, NEVER BY AN ID. A resource's id is stable across updates by
@@ -706,6 +978,43 @@ async function landBundle(request, env, ctx) {
     writable = writable.concat(accepted.map((c) => ({ ...c.entity, _currentVersion: c.current.version, _acceptedOver: c.current.source })));
   }
 
+  /* TASK 7.13. Three more conflicts, decided here so every one of them inherits the machinery the
+   * ownership conflicts already have: an ExchangeException a person resolves, a 409 entry naming
+   * it, and - in a transaction - the whole message refused rather than half-filed. Anything they
+   * flag moves OUT of `writable`: a held row is not written, ever. */
+  const encounterRefs = new Map();
+  for (const e of entities) {
+    const encId = str(e.encounterId);
+    if (!encId || encounterRefs.has(encId) || entities.some((x) => x.resourceType === "Encounter" && x.id === encId)) continue;
+    try { const enc = await svc.get("Encounter", encId); if (enc) encounterRefs.set(encId, enc); }
+    catch { /* unreadable: treated as absent, exactly like the ownership reads above */ }
+  }
+  let liveMeds = [];
+  const medPatients = [...new Set(entities.filter((e) => e.resourceType === "MedicationOrder").map((e) => str(e.patientId)).filter(Boolean))];
+  for (const pid of medPatients) {
+    try { liveMeds = liveMeds.concat((await svc.byPatient("MedicationOrder", pid)) || []); }
+    catch { /* unreadable: no conflict can be asserted about what this actor cannot see */ }
+  }
+  const extra = [
+    ...encounterMismatches(writable, (id) => encounterRefs.get(id) || null),
+    ...staleUpdates(writable, (e) => currents.get(`${e.resourceType}/${e.id}`) || null),
+    ...medicationConflicts(writable, liveMeds, adapterSystem),
+    // TASK 7.6: `trigger` is set only by the HL7 door, and only A11/A12/A13 mean anything to it.
+    ...cancellationsWithoutTarget(writable, (e) => currents.get(`${e.resourceType}/${e.id}`) || null, ctx.trigger),
+  ];
+  if (extra.length) {
+    const held = new Set(extra.map((c) => `${c.entity.resourceType}/${c.entity.id}`));
+    writable = writable.filter((e) => !held.has(`${e.resourceType}/${e.id}`));
+    // One row can trip more than one rule; it is held once, under the first that caught it.
+    const seen = new Set();
+    for (const c of extra) {
+      const k = `${c.entity.resourceType}/${c.entity.id}`;
+      if (seen.has(k)) continue;
+      seen.add(k);
+      conflicts.push(c);
+    }
+  }
+
   if (ctx.mode === "update") {
     const target = writable[0] || (conflicts[0] && conflicts[0].entity);
     const cur = target && currents.get(`${target.resourceType}/${target.id}`);
@@ -769,7 +1078,7 @@ async function landBundle(request, env, ctx) {
   const entries = [];
   for (const c of conflicts) {
     const exId = await raise(c.reason, { patientId: c.entity.patientId || null, conflict: c.current, entityRefs: [`${c.entity.resourceType}/${c.entity.id}`],
-      detail: c.reason === REASON.CONFLICT_LOCAL_AUTHORITATIVE ? "this hospital authored the current version; a feed does not overwrite it" : `another feed (${c.current.source}) authored the current version` });
+      detail: conflictDetail(c) });
     entries.push({ response: { status: "409 Conflict", outcome: operationOutcome("error", "conflict", `${c.entity.resourceType}/${c.entity.id}: ${c.reason}; see ExchangeException/${exId}`) } });
   }
   for (const p of preconditions) {
@@ -783,6 +1092,7 @@ async function landBundle(request, env, ctx) {
   }
 
   const written = [];
+  const transientFailures = [];   // TASK 7.15: writes that failed for a reason a retry could fix
   const ordered = [...writable].sort(byDependency);
   const describe = (e, rec) => {
     const { _currentVersion, _acceptedOver, ...entity } = e;
@@ -812,10 +1122,35 @@ async function landBundle(request, env, ctx) {
         const saved = await ingest.put(adapterActor, entity);
         entries.push(describe(e, saved && saved.record ? saved.record : (saved || entity)));
       } catch (err) {
-        const code = err instanceof GovernanceError ? "forbidden" : "exception";
-        entries.push({ response: { status: err instanceof GovernanceError ? "403 Forbidden" : "500 Internal Server Error", outcome: operationOutcome("error", code, `${entity.resourceType}/${entity.id}: ${str(err && err.message)}`) } });
+        const governance = err instanceof GovernanceError;
+        const code = governance ? "forbidden" : "exception";
+        if (!governance) transientFailures.push({ ref: `${FHIR_TYPE[entity.resourceType] || entity.resourceType}/${entity.id}`, detail: str(err && err.message) });
+        entries.push({ response: { status: governance ? "403 Forbidden" : "500 Internal Server Error", outcome: operationOutcome("error", code, `${entity.resourceType}/${entity.id}: ${str(err && err.message)}`) } });
       }
     }
+  }
+
+  /* TASK 7.15. A TRANSIENT write failure used to be answered 200: the bundle carried a "500" inside
+   * one entry, and the HTTP status - the only thing most senders check - said the message was fine.
+   * Worse, the idempotency key lands with the FIRST entity that writes (service.js's
+   * governedForIngest), so re-sending the identical message afterwards is recognised as a REPLAY and
+   * the entries that never landed are lost for good, silently.
+   *
+   * So: a transient failure is a 5xx, and the answer names exactly what landed, what did not, and
+   * the one thing the sender must do differently - re-send the FAILED resources, not the whole
+   * message, because the whole message is now a replay. Nothing here retries on the sender's behalf:
+   * an inbound door cannot know when the sender is ready, and inventing a retry it does not control
+   * is how a queue silently doubles a chart. */
+  if (transientFailures.length) {
+    const landed = written.map((w) => `${FHIR_TYPE[w.resourceType] || w.resourceType}/${w.id}`);
+    return { ok: false, status: 503, retryable: true, written, transientFailures,
+      outcome: { resourceType: "OperationOutcome", issue: [
+        { severity: "error", code: "transient", diagnostics: `${transientFailures.length} of ${ordered.length} resource(s) could not be written: ${transientFailures.map((f) => `${f.ref} (${f.detail})`).join("; ")}` },
+        ...(landed.length ? [{ severity: "information", code: "informational", diagnostics: `these DID land and are on the chart: ${landed.join(", ")}` }] : [{ severity: "information", code: "informational", diagnostics: "nothing from this message landed" }]),
+        { severity: "information", code: "informational", diagnostics: landed.length
+          ? "re-send ONLY the resources named as failed. Re-sending this whole message again would be recognised as a replay of the part that already landed, and the failed resources would not be written."
+          : "this message may be sent again unchanged; nothing from it landed." },
+      ] } };
   }
 
   const status = ctx.mode === "create" ? (written.length ? 201 : (preconditions.some((p) => /^200/.test(p.status)) ? 200 : (conflicts.length ? 409 : (preconditionStatus || 422))))
@@ -954,6 +1289,44 @@ async function listExceptions(request, env, ctx) {
   return { ok: true, open, note: "Each of these is something another system sent that WardSynQ would not write without a person deciding. Nothing here has been filed on a chart." };
 }
 
+/**
+ * TASK 7.10: who this hospital currently believes when a feed says who it is.
+ *
+ * The grants have been writable since STEP 1 and READABLE nowhere: an administrator could issue one
+ * and then had no way to see what had been issued, which is the state in which a stale authorisation
+ * survives for years. Revoked and expired grants are returned too, and SAID to be revoked or
+ * expired - a list that quietly omits them cannot answer "was this system ever allowed to push".
+ */
+async function listSourceGrants(request, env, ctx) {
+  const mig = ctx.migration;
+  if (!mig || mig.mode === "off") return { ok: true, skipped: "off", grants: [] };
+  const { svc, error } = await openIngest(request, env, { ...ctx });
+  if (error) return { ok: false, status: error.status, error: "permission", detail: error.outcome.issue[0].diagnostics, grants: [] };
+  let rows;
+  try { rows = await svc.list(GRANT_TYPE, 200); }
+  catch (e) { return { ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), grants: [] }; }
+  const now = Date.now();
+  const grants = (rows || []).filter(Boolean).map((g) => {
+    const expiry = Date.parse(str(g.expiresAt));
+    const expired = Number.isFinite(expiry) && expiry <= now;
+    return {
+      id: g.id, sourceSystem: g.sourceSystem, actorId: g.actorId,
+      active: g.active !== false, expired, expiresAt: g.expiresAt || null,
+      // What a person reading this needs first: is this live, and if not, why not.
+      state: g.active === false ? "revoked" : expired ? "expired" : "active",
+      note: g.note || null, grantedBy: g.grantedBy || null, grantedAt: g.grantedAt || null,
+      revokedBy: g.revokedBy || null, revokedAt: g.revokedAt || null,
+      /* revokeSourceSystem writes the mandatory reason into `note` (it is the same field the grant's
+       * own note lives in, replaced at revocation). Surfaced under its real meaning here so a
+       * console does not have to know that, and null on a live grant so a note about why a system
+       * was TRUSTED never reads as a reason it was stopped. */
+      revokedReason: g.active === false ? (g.note || null) : null,
+      version: g.version,
+    };
+  }).sort((a, b) => String(a.sourceSystem).localeCompare(String(b.sourceSystem)));
+  return { ok: true, grants, active: grants.filter((g) => g.state === "active").length };
+}
+
 /** Re-drive handlers by protocol. A gateway registers itself; the FHIR door is the default. */
 const REDRIVE = {};
 function registerRedrive(protocol, fn) { if (str(protocol) && typeof fn === "function") REDRIVE[str(protocol)] = fn; }
@@ -961,7 +1334,8 @@ function registerRedrive(protocol, fn) { if (str(protocol) && typeof fn === "fun
 export {
   EXCEPTION_TYPE, DECISION_TYPE, GRANT_TYPE, REASON, RESOLUTION, INBOUND_TYPES, CODE_FIELDS,
   inboundEnabled, bodySourceOf, splitBundle, evaluateIfNoneExist, markTerminology, markTerminologyWithService, reconcileIdentity, rebind, partitionConflicts,
+  tenantMismatch, encounterMismatches, staleUpdates, medicationConflicts, cancellationsWithoutTarget, drugKey, conflictDetail, LIVE_MED_STATUS,
   ExchangeException, ExchangeIdentityDecision, priorDecision,
-  SourceSystemGrant, grantIdFor, authorizedSourceSystem, grantSourceSystem,
-  ingestFhir, landBundle, openIngest, registerRedrive, listExceptions, resolveException,
+  SourceSystemGrant, grantIdFor, authorizedSourceSystem, grantSourceSystem, revokeSourceSystem,
+  ingestFhir, landBundle, openIngest, registerRedrive, listExceptions, listSourceGrants, resolveException,
 };

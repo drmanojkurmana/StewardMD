@@ -91,6 +91,7 @@ test("PROVENANCE is derived from the stamp on every version and never makes an A
   assert.equal(pr.activity.coding[0].code, "CREATE");
   assert.equal(pr.agent[0].type.coding[0].code, "author");
   assert.equal(pr.agent[0].who.display, "fb:dr-a");
+  assert.deepEqual(pr.agent[0].who.identifier, { system: "urn:stewardmd:actor", value: "fb:dr-a" }, "a human writer is identified, not just displayed");
   assert.equal(pr.agent[0].onBehalfOf, undefined);
   assert.equal(pr.entity, undefined, "a native record has no source entity");
 
@@ -99,7 +100,11 @@ test("PROVENANCE is derived from the stamp on every version and never makes an A
   assert.equal(pa.activity.coding[0].code, "UPDATE");
   assert.equal(pa.agent[0].type.coding[0].code, "assembler", "an AI ASSEMBLED it; it did not author it");
   assert.equal(pa.agent[0].who.display, "ai:maik");
-  assert.deepEqual(pa.agent[0].onBehalfOf, { display: "fb:dr-a" }, "the human is the party acted for, never the author");
+  /* TASK 7.11: the party acted for is a person, so it carries the same logical identifier every
+   * other clinician reference now does - which is what lets a receiver match this human against the
+   * notes they signed themselves. The display it always had is unchanged. */
+  assert.deepEqual(pa.agent[0].onBehalfOf, { identifier: { system: "urn:stewardmd:actor", value: "fb:dr-a" }, display: "fb:dr-a" }, "the human is the party acted for, never the author");
+  assert.equal(pa.agent[0].who.identifier, undefined, "and the AI that wrote it is NOT given a practitioner identity");
 
   const imported = { ...human, meta: { recordedAt: "2026-09-08T10:00:00.000Z", source: { system: "ghis", sourceId: "lab-77" } }, writtenBy: { id: "adapter:ghis", kind: "adapter", at: "2026-09-08T10:00:00.000Z" } };
   const pi = fhirProvenance(imported);

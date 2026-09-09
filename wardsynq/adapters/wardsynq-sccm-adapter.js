@@ -38,7 +38,7 @@
 
 import {
   Patient, Encounter, Condition, AllergyIntolerance, Observation, MedicationOrder,
-  DiagnosticReport, ClinicalNote, MedicationAdministration, ServiceRequest,
+  DiagnosticReport, ClinicalNote, MedicationAdministration, ServiceRequest, ImagingStudy,
 } from "../wardsynq-model.js";
 import { Adapter } from "../wardsynq-interop.js";
 
@@ -144,10 +144,18 @@ function mapSccmBundle(bundle) {
       source: src("enc", e.id),
     }));
   }
+  /* An encounter this bundle carries, by the id it was written under - and, failing that, the id
+   * that SAME source's encounter would have been written under by an earlier message. A feed's ADT
+   * arrives on Monday and its lab result on Tuesday; until the fallback existed the Tuesday result
+   * lost its visit entirely, because the encounter was not in the same envelope. The fallback is a
+   * derivation, not a guess: sourceId() is the identical function that minted the id in the first
+   * place. A reference to an encounter nobody has sent resolves to an id that simply is not on the
+   * record, which every reader downstream already treats as "not here". */
   const encRef = (ref) => {
     if (!ref) return null;
     const id = typeof ref === "object" ? ref.id : ref;
-    return encounterIds.get(String(id)) || null;
+    if (!String(id || "")) return null;
+    return encounterIds.get(String(id)) || sourceId(system, "enc", id) || null;
   };
 
   for (const c of bundle.conditions || []) {
@@ -191,6 +199,10 @@ function mapSccmBundle(bundle) {
     }
     entities.push(Observation({
       id: sourceId(system, "obs", o.id), patientId: patient.id,
+      // SCCM 1.1: the visit this reading belongs to, when the sender named one this bundle also
+      // carries. Resolved through the SAME encounter map every other type uses - an encounter the
+      // sender referenced but did not send is null here, exactly as it is everywhere else.
+      encounterId: encRef(o.encounter),
       category: o.category || "laboratory", code: k.code || k.display, codeSystem: k.system || "unspecified",
       value, unit, effectiveAt: o.effectiveDateTime || undefined,
       source: src("obs", o.id),
@@ -239,6 +251,10 @@ function mapSccmBundle(bundle) {
     req.display = k.display || k.code;
     req.externalStatus = s.status || "unknown";
     req.externalRequester = s.requester || null;
+    /* TASK 7.6: the order's PLACER and FILLER numbers as the sender wrote them. An order arrives
+     * keyed by one and its result often comes back quoting the other; keeping both is what lets a
+     * person reading the chart tie the two messages together. Never used to decide anything. */
+    if (s.identifiers && s.identifiers.length) req.externalIdentifiers = s.identifiers.filter((i) => i && i.value).map((i) => ({ system: i.system || null, type: i.type || null, value: String(i.value) }));
     if (s.authoredOn) req.authoredAt = s.authoredOn;
     entities.push(req);
   }
@@ -250,6 +266,7 @@ function mapSccmBundle(bundle) {
     const status = ["preliminary", "final", "corrected", "cancelled"].includes(d.status) ? d.status : "preliminary";
     entities.push(DiagnosticReport({
       id: sourceId(system, "dr", d.id), patientId: patient.id,
+      encounterId: encRef(d.encounter),   // SCCM 1.1, same rule as the observations above
       code: k.code || k.display, status, conclusion: d.conclusion || null,
       resultObservationIds: (d.results || []).map((r) => (r && r.id ? sourceId(system, "obs", r.id) : null)).filter(Boolean),
       // The order this report answers, when the source said so: its OWN order, under its own id.
@@ -303,8 +320,41 @@ function mapSccmBundle(bundle) {
     }));
   }
 
-  const imaging = (bundle.imagingStudies || []).length;
-  if (imaging) issues.push({ code: "SCCM_IMAGING_NOT_MAPPED", message: `${imaging} imaging study record(s) have no WardSynQ resource yet and were not written` });
+  /* TASK 7.7: imaging studies, which until now were counted and DROPPED. A study from a PACS is
+   * metadata: that a scan exists, when, of what, and the accession number a clinician finds it under
+   * in the viewer they already have. No URL, no pixels - see ImagingStudy's own header.
+   *
+   * ORDER LINKAGE is the point. A study's accession number is the number the order was placed under,
+   * so a study is matched to the ServiceRequest carrying the same number - the id it was filed
+   * under, or either of the placer/filler numbers HL7 carried (TASK 7.6). Matching is EXACT and
+   * within this same source only: an accession number is unique to the system that issued it, and
+   * guessing across systems would attach a scan to another hospital's order. No match is left null,
+   * never approximated - a study belonging to no order here is still a true study. */
+  for (const st of bundle.imagingStudies || []) {
+    if (!st || !st.id) { issues.push({ code: "SCCM_IMAGING_NO_ID", message: "an imaging study had no id and was skipped" }); continue; }
+    const accession = st.accessionNumber ? String(st.accessionNumber) : null;
+    const order = accession
+      ? entities.find((e) => e && e.resourceType === "ServiceRequest" && (
+        e.id === sourceId(system, "sr", accession) ||
+        (e.externalIdentifiers || []).some((i) => i && String(i.value) === accession)))
+      : null;
+    entities.push(ImagingStudy({
+      id: sourceId(system, "img", st.id), patientId: patient.id,
+      /* The visit comes from the ORDER, never from the study: a QIDO-RS study carries no encounter,
+       * and the visit a scan belongs to is the visit its request was placed on. No order link, no
+       * encounter - a study is not attached to whichever admission happens to be open. */
+      encounterId: order ? order.encounterId || null : null,
+      serviceRequestId: order ? order.id : null,
+      studyUid: st.sourceStudyId || null, accessionNumber: accession,
+      modality: st.modality || null, bodySite: st.bodySite || null, description: st.description || null,
+      started: st.studyDate || null,
+      seriesCount: st.seriesCount, instanceCount: st.instanceCount,
+      status: "available",
+      source: src("img", st.id),
+      effectiveAt: st.studyDate || undefined,
+    }));
+    if (accession && !order) issues.push({ code: "SCCM_IMAGING_NO_ORDER", message: `study ${st.id} quotes accession ${accession}, which matches no imaging order from ${system} in this message; the study was filed without an order link` });
+  }
 
   return { patient, entities, issues };
 }

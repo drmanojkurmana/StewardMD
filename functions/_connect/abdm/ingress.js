@@ -205,6 +205,28 @@ export async function handleIngress(env, deps, request) {
     }
     await deps.ingestEvent(env, boundDeps, rawEvent);
 
+    /* TASK 7.8: THE ENDING THIS FLOW DID NOT HAVE. Until now a transfer was buffered, acknowledged
+     * and closed, and the decrypted content went NOWHERE - consumeTransfer and consumeNdhmBundle had
+     * no production caller at all. `consumeAndLand` (injected by the composition root, so this file
+     * still imports nothing from the record side) joins, decrypts and FILES what arrived, through
+     * the same adapter, MPI and governed store as every other feed.
+     *
+     * It runs AFTER ingestEvent, because the state machine must already be in RECEIVING for the
+     * transfer to be finalised from it. It is guarded and NON-FATAL by design: the entries are
+     * already buffered durably, so a failure here leaves a recoverable strand for the reconcile pass
+     * rather than turning a correctly-received push into a 500 that the gateway will re-send. The
+     * failure is surfaced to the audit sink, never swallowed silently. */
+    if (ev.type === "data-push" && deps.consumeAndLand && corr.transactionId != null) {
+      try {
+        await deps.consumeAndLand({
+          transactionId: corr.transactionId, hipKeyMaterial: ev.keyMaterial, tenantId: corr.tenantId,
+          consentId: corr.consentId, onBehalfOf: corr.actor || null, sessionStatus: ev.sessionStatus || "TRANSFERRED",
+        });
+      } catch (e) {
+        if (deps.audit) { try { await deps.audit({ action: "abdm.land.failed", tenantId: corr.tenantId, outcome: "error", detail: String((e && e.name) || "error") }); } catch { /* an audit that cannot be written does not fail the push */ } }
+      }
+    }
+
     // Record the REQUEST-ID nonce only AFTER a clean run, so a mid-flight failure is retried, not swallowed.
     if (nonceKey && deps.kv) await guardedKvPut(deps.kv, nonceKey, "1", { expirationTtl: NONCE_TTL_SEC });
     return jsonResponse({ ok: true }, { status: 202 });
