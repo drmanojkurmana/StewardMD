@@ -96,8 +96,8 @@ async function loginGhis(userId, password) {
   const jar = {};
   const lp = await raw(jar, 'GET', SSO + '/');
   const token = (lp.body.match(/name="__RequestVerificationToken"[^>]*value="([^"]+)"/) || [])[1] || '';
-  const form = `USER_ID=${encodeURIComponent(userId)}&PASSWORD=${encodeURIComponent(password)}&__RequestVerificationToken=${encodeURIComponent(token)}&X-Requested-With=XMLHttpRequest`;
-  const li = await raw(jar, 'POST', SSO + '/Index', form, { 'X-Requested-With': 'XMLHttpRequest', 'Referer': SSO + '/' });
+  const formParams = new URLSearchParams({ USER_ID: userId, PASSWORD: password, __RequestVerificationToken: token, 'X-Requested-With': 'XMLHttpRequest' });
+  const li = await raw(jar, 'POST', SSO + '/Index', formParams.toString(), { 'X-Requested-With': 'XMLHttpRequest', 'Referer': SSO + '/' });
   let ok = false; try { ok = (JSON.parse(li.body).param1 == 200); } catch {}
   if (!ok) { const e = new Error('bad_credentials'); e.code = 'bad_credentials'; throw e; }
   // SSO -> GHIS launch handoff (THE fix for empty worklists). The SSO /apps launcher links each module to
@@ -262,16 +262,13 @@ export async function getOpdPatients(env, token, sdate, debug, cb) {
 async function getDemographics(env, token, patientId, recordNo) {
   const s = await getSession(env, token); if (!s) return { unauth: true };
   if (!recordNo) return { phone: '' };   // recordNo = "<MR>-<IPMR episode>"; needed to load the patient page
-  // Rebuild a cookie JAR from the stored session so cookies set during the flow propagate across calls.
-  const jar = { 'ghis.gitam.edu': {} };
-  String(s.cookie || '').split('; ').forEach(function (p) { const i = p.indexOf('='); if (i > 0) jar['ghis.gitam.edu'][p.slice(0, i).trim()] = p.slice(i + 1).trim(); });
   const extra = { 'X-Requested-With': 'XMLHttpRequest', 'Referer': GHIS + '/Doctor/home' };
   // POST Searchnew returns the patient's full details page (the "More.." demographics) — it CONTAINS the
   // primary contact number directly, so we extract from THIS response (GetInitialAssessmentnew 302s to SSO
   // for a server session and is not needed).
-  const sr = await raw(jar, 'POST', GHIS + '/Doctor/Home/Searchnew',
-    '__RequestVerificationToken=' + encodeURIComponent(s.csrf || '') + '&recordNo=' + encodeURIComponent(recordNo), extra);
-  if (sr.status >= 300 && sr.status < 400) return { unauth: true };
+  const p = new URLSearchParams({ __RequestVerificationToken: s.csrf || '', recordNo: recordNo });
+  const sr = await ghisReq(env, token, 'POST', '/Doctor/Home/Searchnew', p.toString(), extra);
+  if (sr.unauth || (sr.status >= 300 && sr.status < 400)) return { unauth: true };
   // `region` = a short PATIENT-address snippet (state/district/city). We anchor on the patient's address
   // labels so we don't accidentally pick up the HOSPITAL's city elsewhere on the page — the client runs the
   // deterministic language detector over it. Best-effort: "" if the labels aren't found (falls back to en).
@@ -308,7 +305,8 @@ function extractRegion(body) {
 }
 async function getLabOrders(env, token, patientId) {
   const s = await getSession(env, token); if (!s) return { unauth: true };
-  const r = await ghisReq(env, token, 'POST', '/Lab/Home/GetSearchPatientId', `__RequestVerificationToken=${encodeURIComponent(s.csrf)}&patient_id=${encodeURIComponent(patientId)}&DeptID=&FDate=&EDate=`, { 'X-Requested-With': 'XMLHttpRequest' });
+  const p = new URLSearchParams({ __RequestVerificationToken: s.csrf || '', patient_id: patientId, DeptID: '', FDate: '', EDate: '' });
+  const r = await ghisReq(env, token, 'POST', '/Lab/Home/GetSearchPatientId', p.toString(), { 'X-Requested-With': 'XMLHttpRequest' });
   if (r.unauth) return r;
   return { orders: parseGhis(r.body).map(o => ({ serviceName:o.parameter_long_desc, orderDate:o.OrderDate, department:o.Department_desc, status:o.pstatus, renderId:o.ServiceRenderId, episodeId:o.episode_id, orderId:o.order_id, valueType:o.ValueType })) };
 }
@@ -356,7 +354,8 @@ async function getMedications(env, token, patientId) {
 }
 async function getLabDetail(env, token, renderId, episodeId) {
   const s = await getSession(env, token); if (!s) return { unauth: true };
-  const r = await ghisReq(env, token, 'POST', '/Lab/Home/GetPrintLabResultDetailsAuth', `__RequestVerificationToken=${encodeURIComponent(s.csrf)}&Render_ID=${encodeURIComponent(renderId)}&Episode_Id=${encodeURIComponent(episodeId)}&Result_Type=a`, { 'X-Requested-With': 'XMLHttpRequest' });
+  const p = new URLSearchParams({ __RequestVerificationToken: s.csrf || '', Render_ID: renderId, Episode_Id: episodeId, Result_Type: 'a' });
+  const r = await ghisReq(env, token, 'POST', '/Lab/Home/GetPrintLabResultDetailsAuth', p.toString(), { 'X-Requested-With': 'XMLHttpRequest' });
   if (r.unauth) return r;
   const rows = parseGhis(r.body); const h = rows[0] || {};
   return { group: h.GroupTestName || h.parameter_long_desc || '', department: h.Department || '', sampleType: h.SampleType, collected: h.date_of_collection, reported: h.ReportTime,
@@ -502,6 +501,11 @@ export async function resolveEpisode(env, token, mr, episodeId, deps) {
   return '';
 }
 
+async function activateVisit(env, token, s, mr, epi, cookie) {
+  const p = new URLSearchParams({ __RequestVerificationToken: s.csrf || '', recordNo: mr + '-' + epi });
+  return await ghisReq(env, token, 'POST', '/Doctor/Home/Searchnew', p.toString(), { 'X-Requested-With': 'XMLHttpRequest', 'Referer': GHIS + '/Doctor/home', 'Cookie': cookie });
+}
+
 async function getAssessmentForm(env, token, patientId, episodeId, dbg) {
   const s = await getSession(env, token); if (!s) return { unauth: true };
   const mrId = String(patientId || '');
@@ -515,7 +519,7 @@ async function getAssessmentForm(env, token, patientId, episodeId, dbg) {
   const load = async (epi) => {
     if (mrId && epi) {
       try {
-        const a = await ghisReq(env, token, 'POST', '/Doctor/Home/Searchnew', '__RequestVerificationToken=' + encodeURIComponent(s.csrf || '') + '&recordNo=' + encodeURIComponent(mrId + '-' + epi), { 'X-Requested-With': 'XMLHttpRequest', 'Referer': GHIS + '/Doctor/home', 'Cookie': cookie });
+        const a = await activateVisit(env, token, s, mrId, epi, cookie);
         if (a && a.setCookie && a.setCookie.length) cookie = mergeCookies(cookie, a.setCookie);
       } catch (e) {}
     }
@@ -600,7 +604,7 @@ async function getOpdHistory(env, token, patientId, visitId, episodeId, dbg) {
   const s = await getSession(env, token); if (!s) return { unauth: true };
   const mr = String(patientId || ''), vid = String(visitId || ''), epi = String(episodeId || '');
   if (!mr || !vid) return { entries: [] };
-  if (epi) { try { await ghisReq(env, token, 'POST', '/Doctor/Home/Searchnew', '__RequestVerificationToken=' + encodeURIComponent(s.csrf || '') + '&recordNo=' + encodeURIComponent(mr + '-' + epi), { 'X-Requested-With': 'XMLHttpRequest', 'Referer': GHIS + '/Doctor/home' }); } catch (e) {} }
+  if (epi) { try { await activateVisit(env, token, s, mr, epi, s.cookie); } catch (e) {} }
   const card = await ghisReq(env, token, 'GET', '/Doctor/Home/Getopcard?id=' + encodeURIComponent(vid) + '&patid=' + encodeURIComponent(mr), null, { 'X-Requested-With': 'XMLHttpRequest' });
   if (card.unauth) return card;
   let by = '';
@@ -800,7 +804,7 @@ export async function saveAssessment(env, token, body) {
       epiUsed = epi;
       epiActivated = false;
       try {
-        const a = await ghisReq(env, token, 'POST', '/Doctor/Home/Searchnew', '__RequestVerificationToken=' + encodeURIComponent(s.csrf || '') + '&recordNo=' + encodeURIComponent(mr + '-' + epi), { 'X-Requested-With': 'XMLHttpRequest', 'Referer': GHIS + '/Doctor/home', 'Cookie': cookie });
+        const a = await activateVisit(env, token, s, mr, epi, cookie);
         const sc = (a && a.setCookie) || [];
         if (sc.length) cookie = mergeCookies(cookie, sc);
         /* HTTP 200 PROVES NOTHING. Measured against the live server on 2026-08-26: an
@@ -1021,7 +1025,7 @@ export async function authorizeAssessment(env, token, body) {
   let cookie = s.cookie;
   if (mr && epi) {
     try {
-      const a = await ghisReq(env, token, 'POST', '/Doctor/Home/Searchnew', '__RequestVerificationToken=' + encodeURIComponent(s.csrf || '') + '&recordNo=' + encodeURIComponent(mr + '-' + epi), { 'X-Requested-With': 'XMLHttpRequest', 'Referer': GHIS + '/Doctor/home', 'Cookie': cookie });
+      const a = await activateVisit(env, token, s, mr, epi, cookie);
       if (a && a.setCookie && a.setCookie.length) cookie = mergeCookies(cookie, a.setCookie);
     } catch (e) {}
   }
@@ -1038,8 +1042,8 @@ export async function authorizeAssessment(env, token, body) {
     : ((body.docId != null && String(body.docId) !== '' && String(body.docId) !== '0') ? String(body.docId) : '');
   if (!docId) return { ok: false, status: 409, resp: 'no_saved_assessment: save the assessment before authorising' };
   const csrf = form['__RequestVerificationToken'] || s.csrf || '';
-  const r = await ghisReq(env, token, 'POST', '/Doctor/Home/signoffinitialAssessmentnew',
-    '__RequestVerificationToken=' + encodeURIComponent(csrf) + '&id=' + encodeURIComponent(docId),
+  const p = new URLSearchParams({ __RequestVerificationToken: csrf, id: docId });
+  const r = await ghisReq(env, token, 'POST', '/Doctor/Home/signoffinitialAssessmentnew', p.toString(),
     { 'X-Requested-With': 'XMLHttpRequest', 'Referer': GHIS + '/Doctor/home', 'Cookie': cookie });
   if (r.unauth) return r;
   const rb = String(r.body || '');
