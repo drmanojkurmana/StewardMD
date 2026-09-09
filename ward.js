@@ -888,6 +888,7 @@
         // A pharmacist's own verification/dispense screen - never a reuse of this doctor's ordering
         // view. Reachable from any patient chart, gated server-side to the pharmacy role's own caps.
         '<button class="w-btn ghost" data-w-act="pharmacyopen" title="Verification queue and dispense">' + ms("medication") + "Pharmacy</button>" +
+        '<button class="w-btn ghost" data-w-act="txopen" title="Transfusion request, crossmatch, bedside verification">' + ms("bloodtype") + "Blood bank</button>" +
         // The patient's own copy. Reachable from the patient because that is where the conversation
         // that produces it happens, not from a menu somewhere else.
         '<button class="w-btn ghost" data-w-act="pcopy" title="The copy this patient can be given">' + ms("assignment_ind") + "Patient copy</button></div>";
@@ -1547,6 +1548,91 @@
       '<p class="w-hint">' + ms("info") + "Posts the counted quantity against the derived level as an auditable adjustment naming the expected value and the variance. A matching count writes nothing." + "</p></div>";
   }
 
+  /* TASK 3.5: the blood bank workstation. wardsynq-transfusion.js (HAZ-BLD-01) already enforces
+   * everything hazardous here - ABO/RhD compatibility, a crossmatch bound to one patient, and a
+   * two-person bedside check that re-derives compatibility from the physical unit rather than the
+   * paperwork. This screen adds NO logic: it shows the server's own verdict/failure reasons verbatim
+   * and never lets the bedside-check button submit without both scans and both names present -
+   * NO ONE-CLICK TRANSFUSE, enforced here as well as on the server. */
+  var TXN_PHASE_WORDS = { requested: "Requested", crossmatched: "Crossmatched", issued: "Issued", checked: "Bedside check passed", transfusing: "Transfusing", completed: "Completed", stopped: "STOPPED" };
+  function transfusionView(state) {
+    var tx = state.transfusion || {};
+    var episodes = (tx.queue && tx.queue.episodes) || [];
+    var picked = tx.pickedEpisodeId;
+    var ep = picked ? episodes.filter(function (e) { return e.episodeId === picked; })[0] : null;
+
+    var rows = episodes.map(function (e) {
+      return '<li' + (e.episodeId === picked ? ' class="picked"' : '') + '>' +
+        '<button class="w-btn ghost tiny" data-w-act="txpick:' + esc(e.episodeId) + '"><b>' + esc(e.component || "component?") + "</b></button>" +
+        '<span class="w-st ' + esc(e.phase) + '">' + esc(TXN_PHASE_WORDS[e.phase] || e.phase) + "</span></li>";
+    }).join("");
+
+    var ledgerRows = ep ? (ep.ledger || []).map(function (l) {
+      return "<li><b>" + esc(l.event) + "</b><span>" + (l.actorId ? esc(l.actorId) + " &middot; " : "") + when(l.at) + (l.detail ? " &middot; " + esc(l.detail) : "") + "</span></li>";
+    }).join("") : "";
+
+    return '<div class="w-chart-h"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button>" +
+      "<div><b>Blood bank</b><small>" + esc((state.sel && state.sel.patientId) || "") + "</small></div>" +
+      '<button class="w-ic" data-w-act="txload" title="Refresh">' + ms("refresh") + "</button></div>" +
+
+      '<div class="w-card"><div class="w-card-h">' + ms("bloodtype") + "<h3>Requests</h3></div>" +
+      (rows ? '<ul class="w-mini">' + rows + "</ul>" : '<p class="w-empty">No transfusion requested for this patient.</p>') +
+      '<div class="w-grid">' +
+      '<label class="w-f"><span>Component</span><select id="wTxComponent"><option value="red-cells">Red cells</option><option value="plasma">Plasma</option><option value="platelets">Platelets</option></select></label>' +
+      '<label class="w-f"><span>Units</span><input id="wTxUnits" type="text" inputmode="numeric" autocomplete="off" value="1"></label>' +
+      '<label class="w-f"><span>Indication</span><input id="wTxIndication" type="text" autocomplete="off"></label>' +
+      "</div>" +
+      '<button class="w-btn go" data-w-act="txrequest">' + ms("add") + "Request</button></div>" +
+
+      (ep ? (
+        '<div class="w-card"><div class="w-card-h">' + ms("science") + "<h3>Crossmatch</h3></div>" +
+        (ep.crossmatch ? "<p><b>" + esc(ep.crossmatch.unitId) + "</b> " + esc(ep.crossmatch.verdict && ep.crossmatch.verdict.abo) + "</p>" : '<p class="w-empty">Not yet crossmatched.</p>') +
+        (ep.phase === "requested" ? (
+          '<div class="w-grid">' +
+          '<label class="w-f"><span>Unit ID</span><input id="wTxUnitId" type="text" autocomplete="off"></label>' +
+          '<label class="w-f"><span>ABO group</span><select id="wTxUnitAbo"><option>O</option><option>A</option><option>B</option><option>AB</option></select></label>' +
+          '<label class="w-f"><span>RhD</span><select id="wTxUnitRh"><option value="positive">Positive</option><option value="negative">Negative</option></select></label>' +
+          '<label class="w-f"><span>Expiry</span><input id="wTxUnitExpiry" type="date"></label>' +
+          "</div>" +
+          '<button class="w-btn go" data-w-act="txcrossmatch">' + ms("check") + "Crossmatch</button>"
+        ) : "") +
+        (ep.phase === "crossmatched" ? '<button class="w-btn go" data-w-act="txissue">' + ms("outbound") + "Issue unit</button>" : "") +
+        "</div>"
+      ) : "") +
+
+      (ep && ep.phase === "issued" ? (
+        '<div class="w-card"><div class="w-card-h">' + ms("verified") + "<h3>Bedside verification - two people, two scans</h3></div>" +
+        '<p class="w-hint warn">' + ms("warning") + "NO ONE-CLICK TRANSFUSE. Both checkers and both scans are required; compatibility is re-derived from what is scanned, never trusted from the crossmatch record." + "</p>" +
+        '<div class="w-grid">' +
+        '<label class="w-f"><span>First checker (you)</span><input id="wTxChecker1" type="text" autocomplete="off"></label>' +
+        '<label class="w-f"><span>Second checker (independent)</span><input id="wTxChecker2" type="text" autocomplete="off"></label>' +
+        '<label class="w-f"><span>Scan: patient wristband</span><input id="wTxScanPatient" type="text" autocomplete="off"></label>' +
+        '<label class="w-f"><span>Scan: unit label</span><input id="wTxScanUnit" type="text" autocomplete="off"></label>' +
+        "</div>" +
+        '<button class="w-btn go" data-w-act="txbedside">' + ms("qr_code_scanner") + "Verify at bedside</button></div>"
+      ) : "") +
+
+      (ep && ep.phase === "checked" ? '<div class="w-card"><button class="w-btn go" data-w-act="txstart">' + ms("play_arrow") + "Start transfusion</button></div>" : "") +
+
+      (ep && ep.phase === "transfusing" ? (
+        '<div class="w-card"><div class="w-card-h">' + ms("monitor_heart") + "<h3>Running - observations</h3></div>" +
+        '<div class="w-grid">' +
+        '<label class="w-f"><span>Pulse</span><input id="wTxPulse" type="text" inputmode="numeric" autocomplete="off"></label>' +
+        '<label class="w-f"><span>Temp</span><input id="wTxTemp" type="text" inputmode="decimal" autocomplete="off"></label>' +
+        '<label class="w-f"><span>SBP</span><input id="wTxSbp" type="text" inputmode="numeric" autocomplete="off"></label>' +
+        "</div>" +
+        '<button class="w-btn ghost" data-w-act="txobserve">' + ms("monitoring") + "Record observation</button>" +
+        '<div class="w-actions">' +
+        '<button class="w-btn go" data-w-act="txcomplete">' + ms("check_circle") + "Complete</button>" +
+        '<button class="w-btn warn" data-w-act="txreaction">' + ms("emergency") + "Reaction - STOP</button>" +
+        "</div></div>"
+      ) : "") +
+
+      (ep && ep.phase === "stopped" && ep.reaction ? '<div class="w-card"><div class="w-card-h">' + ms("emergency") + "<h3>STOPPED - reaction</h3></div><p>" + esc(ep.reaction.detail || "") + "</p><p><small>" + when(ep.reaction.at) + " &middot; " + esc(ep.reaction.by) + "</small></p></div>" : "") +
+
+      (ep ? ('<div class="w-card"><div class="w-card-h">' + ms("history") + "<h3>Ledger</h3></div>" + (ledgerRows ? '<ul class="w-mini">' + ledgerRows + "</ul>" : "") + "</div>") : "");
+  }
+
   /* Open critical results, ABOVE everything else on the chart. A critical result that reaches a
    * chart nobody reads is the oldest preventable death in hospital medicine, and the failure is
    * never the measurement - it is that no named human said "I have seen this". So this sits first,
@@ -1740,6 +1826,7 @@
         : state.view === "cardiology" ? cardiologyView(state)
         : state.view === "radiology" ? radiologyView(state)
         : state.view === "pharmacy" ? pharmacyView(state)
+        : state.view === "transfusion" ? transfusionView(state)
         : listView(state)) + "</div></div>";
   }
 
@@ -2468,6 +2555,100 @@
       })
       .catch(function () { st.busy = false; st.err = "Could not reconcile."; paint(); });
   }
+  function txOpen() {
+    st.view = "transfusion"; st.transfusion = null; paint(); loadTransfusion();
+  }
+  function loadTransfusion() {
+    var s = st.sel; if (!s) return Promise.resolve();
+    if (!st.transfusion) st.transfusion = {};
+    return apiGet("/ward/transfusion-queue?orgId=" + encodeURIComponent(st.orgId) + "&patientId=" + encodeURIComponent(s.patientId))
+      .then(function (r) { st.transfusion.queue = (r && r.ok) ? r : null; paint(); })
+      .catch(function () { paint(); });
+  }
+  function txPick(episodeId) {
+    if (!st.transfusion) st.transfusion = {};
+    st.transfusion.pickedEpisodeId = episodeId;
+    paint();
+  }
+  function txRequest() {
+    var s = st.sel; if (!s) return;
+    var component = val("wTxComponent"), units = val("wTxUnits"), indication = val("wTxIndication");
+    st.busy = true; paint();
+    apiPost("/ward/transfusion-request", { orgId: st.orgId, patientId: s.patientId, mrn: s.mrn, encounterId: s.encounterId, component: component, units: units ? Number(units) : 1, indication: indication || undefined })
+      .then(function (r) { if (settle(r, "Requested.")) { st.transfusion.pickedEpisodeId = r.episodeId; loadTransfusion(); } else paint(); })
+      .catch(function () { st.busy = false; st.err = "Could not record the request."; paint(); });
+  }
+  function txCrossmatch() {
+    var picked = st.transfusion && st.transfusion.pickedEpisodeId; if (!picked) return;
+    var unitId = val("wTxUnitId"), abo = val("wTxUnitAbo"), rh = val("wTxUnitRh"), expiry = val("wTxUnitExpiry");
+    if (!unitId) { st.err = "Enter the unit id."; paint(); return; }
+    st.busy = true; paint();
+    apiPost("/ward/transfusion-crossmatch", { orgId: st.orgId, episodeId: picked, unitId: unitId, aboGroup: abo, rhD: rh, component: (st.transfusion.queue.episodes.filter(function (e) { return e.episodeId === picked; })[0] || {}).component, expiresAt: expiry || undefined })
+      .then(function (r) {
+        if (r && r.error === "transfusion_refused") { st.busy = false; st.err = r.detail; paint(); return; }
+        if (settle(r, "Crossmatched.")) loadTransfusion(); else paint();
+      })
+      .catch(function () { st.busy = false; st.err = "Could not record the crossmatch."; paint(); });
+  }
+  function txIssue() {
+    var picked = st.transfusion && st.transfusion.pickedEpisodeId; if (!picked) return;
+    st.busy = true; paint();
+    apiPost("/ward/transfusion-issue", { orgId: st.orgId, episodeId: picked })
+      .then(function (r) { if (settle(r, "Issued.")) loadTransfusion(); else paint(); })
+      .catch(function () { st.busy = false; st.err = "Could not issue the unit."; paint(); });
+  }
+  function txBedsideCheck() {
+    var s = st.sel, picked = st.transfusion && st.transfusion.pickedEpisodeId; if (!s || !picked) return;
+    var checker1 = val("wTxChecker1"), checker2 = val("wTxChecker2"), scanPatient = val("wTxScanPatient"), scanUnit = val("wTxScanUnit");
+    if (!checker1 || !checker2 || !scanPatient || !scanUnit) { st.err = "NO ONE-CLICK TRANSFUSE: both checkers and both scans are required."; paint(); return; }
+    var ep = (st.transfusion.queue.episodes || []).filter(function (e) { return e.episodeId === picked; })[0];
+    var crossUnit = ep && ep.crossmatch ? { unitId: ep.crossmatch.unitId, aboGroup: ep.crossmatch.aboGroup, rhD: ep.crossmatch.rhD, component: ep.crossmatch.component } : null;
+    st.busy = true; paint();
+    apiPost("/ward/transfusion-bedside-check", {
+      orgId: st.orgId, episodeId: picked, checkerId: checker1, secondCheckerId: checker2,
+      scannedPatientBarcode: scanPatient, scannedUnitId: scanUnit,
+      patient: { id: s.patientId, mrn: s.mrn, wristbandBarcode: s.mrn },
+      unitInHand: crossUnit ? Object.assign({}, crossUnit, { unitId: scanUnit }) : { unitId: scanUnit },
+    })
+      .then(function (r) {
+        if (r && r.error === "transfusion_refused") { st.busy = false; st.err = r.detail; paint(); return; }
+        if (settle(r, "Bedside check passed.")) loadTransfusion(); else paint();
+      })
+      .catch(function () { st.busy = false; st.err = "Could not record the bedside check."; paint(); });
+  }
+  function txStart() {
+    var picked = st.transfusion && st.transfusion.pickedEpisodeId; if (!picked) return;
+    st.busy = true; paint();
+    apiPost("/ward/transfusion-start", { orgId: st.orgId, episodeId: picked })
+      .then(function (r) { if (settle(r, "Started.")) loadTransfusion(); else paint(); })
+      .catch(function () { st.busy = false; st.err = "Could not start the transfusion."; paint(); });
+  }
+  function txObserve() {
+    var picked = st.transfusion && st.transfusion.pickedEpisodeId; if (!picked) return;
+    var pulse = val("wTxPulse"), temp = val("wTxTemp"), sbp = val("wTxSbp");
+    var vitals = {};
+    if (pulse) vitals.pulse = Number(pulse); if (temp) vitals.temp = Number(temp); if (sbp) vitals.sbp = Number(sbp);
+    st.busy = true; paint();
+    apiPost("/ward/transfusion-observe", { orgId: st.orgId, episodeId: picked, vitals: vitals })
+      .then(function (r) { if (settle(r, "Recorded.")) loadTransfusion(); else paint(); })
+      .catch(function () { st.busy = false; st.err = "Could not record the observation."; paint(); });
+  }
+  function txComplete() {
+    var picked = st.transfusion && st.transfusion.pickedEpisodeId; if (!picked) return;
+    st.busy = true; paint();
+    apiPost("/ward/transfusion-complete", { orgId: st.orgId, episodeId: picked })
+      .then(function (r) { if (settle(r, "Completed.")) loadTransfusion(); else paint(); })
+      .catch(function () { st.busy = false; st.err = "Could not complete the transfusion."; paint(); });
+  }
+  function txReaction() {
+    var picked = st.transfusion && st.transfusion.pickedEpisodeId; if (!picked) return;
+    var detail = ""; try { detail = G.prompt("Describe the reaction:") || ""; } catch (e) {}
+    if (!detail.trim()) return;
+    st.busy = true; paint();
+    apiPost("/ward/transfusion-reaction", { orgId: st.orgId, episodeId: picked, detail: detail.trim() })
+      .then(function (r) { if (settle(r, "STOPPED. Reaction recorded.")) loadTransfusion(); else paint(); })
+      .catch(function () { st.busy = false; st.err = "Could not record the reaction."; paint(); });
+  }
   function edDispose(disposition, extra) {
     var s = st.sel; if (!s) return;
     st.busy = true; paint();
@@ -2954,6 +3135,7 @@
       if (st.view === "cardiology") { st.view = "chart"; st.cardiology = null; paint(); return; }
       if (st.view === "radiology") { st.view = "chart"; st.radiology = null; paint(); return; }
       if (st.view === "pharmacy") { st.view = "chart"; st.pharmacy = null; paint(); return; }
+      if (st.view === "transfusion") { st.view = "chart"; st.transfusion = null; paint(); return; }
       if (st.view === "inventory") { st.inventory = null; st.view = "list"; paint(); return; }
       // Picking a bed to admit an ED patient opens the SAME bed board a fresh admission uses;
       // backing out of it returns to that patient's ED chart, not the ward list, and drops the
@@ -2967,7 +3149,7 @@
       st.flowsheet = null; st.news2 = null; st.investigations = null; st.results = null; st.resusBundles = null;
       st.ed = null; st.edArrivalOpen = false; st.edMrnLookup = null; st.edMrnLookupErr = "";
       st.surgBoard = null; st.surgCase = null; st.surgBookOpen = false; st.surgMrnLookup = null; st.surgMrnLookupErr = ""; st.surgErr = "";
-      st.maternity = null; st.admitClass = ""; st.ageBand = null; st.lines = null; st.rateResult = null; st.oncology = null; st.cardiology = null; st.radiology = null; st.pharmacy = null;
+      st.maternity = null; st.admitClass = ""; st.ageBand = null; st.lines = null; st.rateResult = null; st.oncology = null; st.cardiology = null; st.radiology = null; st.pharmacy = null; st.transfusion = null;
       paint(); return;
     }
     if (cmd === "board") { loadBoard(); return; }
@@ -2986,7 +3168,7 @@
       if (!p) return;
       st.sel = p; st.view = "chart"; st.due = []; st.prn = []; st.unscheduled = []; st.problems = []; st.criticals = []; st.balance = null; st.outbox = [];
       st.flowsheet = null; st.news2 = null; st.investigations = null; st.results = null;
-      st.err = ""; st.note = ""; st.refusal = null; st.devices = null; st.maternity = null; st.ageBand = null; st.lines = null; st.rateResult = null; st.oncology = null; st.cardiology = null; st.radiology = null; st.pharmacy = null;
+      st.err = ""; st.note = ""; st.refusal = null; st.devices = null; st.maternity = null; st.ageBand = null; st.lines = null; st.rateResult = null; st.oncology = null; st.cardiology = null; st.radiology = null; st.pharmacy = null; st.transfusion = null;
       defaultWindow();
       st.noteTemplateId = ""; st.noteResult = null;
       paint(); loadChart(); loadRound(); loadBalance(); loadOutbox(); loadTemplates(); loadFlowsheet(); loadNews2(); loadInvestigations();
@@ -3014,6 +3196,17 @@
     if (cmd === "stockadjust") { stockAdjustOrWaste("adjustment"); return; }
     if (cmd === "stockwaste") { stockAdjustOrWaste("wastage"); return; }
     if (cmd === "stockreconcile") { stockReconcile(); return; }
+    if (cmd === "txopen") { txOpen(); return; }
+    if (cmd === "txload") { loadTransfusion(); return; }
+    if (cmd === "txpick") { txPick(arg); return; }
+    if (cmd === "txrequest") { txRequest(); return; }
+    if (cmd === "txcrossmatch") { txCrossmatch(); return; }
+    if (cmd === "txissue") { txIssue(); return; }
+    if (cmd === "txbedside") { txBedsideCheck(); return; }
+    if (cmd === "txstart") { txStart(); return; }
+    if (cmd === "txobserve") { txObserve(); return; }
+    if (cmd === "txcomplete") { txComplete(); return; }
+    if (cmd === "txreaction") { txReaction(); return; }
     if (cmd === "surgeryboard") { loadSurgeryBoard(); return; }
     if (cmd === "surgerybookopen") { surgeryBookOpen(); return; }
     if (cmd === "surgerybookclose") { surgeryBookClose(); return; }

@@ -278,6 +278,17 @@ const RESOURCE_TYPES = Object.freeze([
    * recomputed. Recorded with an explicit unvalidated:true provenance flag reflecting KardiQ X's own
    * regulatory status - never presented as a validated clinical finding. */
   "ECGReference",
+  /* TASK 3.5: the blood-bank bridge into wardsynq-transfusion.js (HAZ-BLD-01, safety-case verified).
+   * That module already implements ABO/RhD compatibility, crossmatch binding, and the two-person
+   * bedside check - it has no persistence of its own. Every phase transition
+   * (request/crossmatch/issue/bedside-check/start/observe/reaction/complete) is one version of ONE
+   * TransfusionEpisode record, the same append-only shape test/wardsynq-transfusion.test.mjs already
+   * proves against a bare store. No grant change: EMR_TREAT's unrestricted write covers it, the SAME
+   * precedent as ResusBundle/SurgicalCase/DeliveryRecord - role separation between blood-bank
+   * crossmatch/issue authority and ward-side bedside/administration authority is a real
+   * authorization decision this task states explicitly rather than making unilaterally, the same
+   * restraint migrate-oncology.js's header keeps about the oncqis_* role fence. */
+  "TransfusionEpisode",
 ]);
 
 const MODE = Object.freeze({ SYSTEM_OF_RECORD: "system-of-record", INTEGRATION: "integration" });
