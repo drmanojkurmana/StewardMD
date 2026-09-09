@@ -586,9 +586,14 @@
 <script>
 (function(){
   var $=function(id){return document.getElementById(id);};
-  var FB={apiKey:"AIzaSyCaqxRQfMtq95j0J_vLj7EF4sxrN0FhO0I",authDomain:"stewardmd-498ec.firebaseapp.com",projectId:"stewardmd-498ec",storageBucket:"stewardmd-498ec.firebasestorage.app",messagingSenderId:"911280405587",appId:"1:911280405587:web:d09038e15e98d69dc79aa6"};
-  var auth=null; try{ firebase.initializeApp(FB); auth=firebase.auth(); }catch(e){}
+  var auth=null;
   var vFilter="pending", activePane="overview", _aiStructured=null;
+  fetch('/api/firebase-config').then(function(r){return r.json();}).then(function(FB){
+    try{ firebase.initializeApp(FB); auth=firebase.auth(); }catch(e){}
+    if(auth){ auth.onAuthStateChanged(function(u){ signedInUI(u); if(u){ refresh(activePane); } }); }
+    else { var w=$("who"); if(w) w.textContent="Firebase failed to load."; }
+  }).catch(function(){ var w=$("who"); if(w) w.textContent="Failed to load config."; });
+
   var PANES=["overview","support","userctl","aictl","config","crashes","analytics","feedback","notif","sources","logs","verif","pro","ota","push","watch","ai","kardiox","xa","tenants"];
   var TITLES={overview:"Overview",support:"Support tickets",userctl:"User control",aictl:"AI control",config:"Remote config",crashes:"Crashes",analytics:"Usage analytics",feedback:"MaiK feedback",notif:"Publish & notify",sources:"Medical sources",logs:"Crawl logs",verif:"Doctor verifications",pro:"Payments & Billing",ota:"App updates (OTA)",push:"Push blast",watch:"Lab-watch",ai:"AI usage",kardiox:"KardiQ X training",xa:"Experimental Features",tenants:"Medical colleges"};
   var TYPE2CAT={guideline:"guideline",drug_approval:"approval",safety_alert:"safety",trial:"study",general:"general"};
@@ -1383,8 +1388,6 @@
   function entlReload(){ if(entlLast) entlLookup(entlLast); }
   (function(){ var b=$("entlLookup"); if(!b)return; b.onclick=function(){ var p=entlIdPayload($("entlId").value); if(!p){ say("entlMsg","err","Enter an ID, email, or reg number."); return; } entlLookup(p); }; })();
 
-  if(auth){ auth.onAuthStateChanged(function(u){ signedInUI(u); if(u){ refresh(activePane); } }); }
-  else { $("who").textContent="Firebase failed to load."; }
 })();
 </script>
 </body>

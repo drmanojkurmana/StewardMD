@@ -475,8 +475,12 @@
 (function(){
   var $=function(id){return document.getElementById(id);};
   // Same Firebase project + owner sign-in as admin/index.html.
-  var FB={apiKey:"AIzaSyCaqxRQfMtq95j0J_vLj7EF4sxrN0FhO0I",authDomain:"stewardmd-498ec.firebaseapp.com",projectId:"stewardmd-498ec",storageBucket:"stewardmd-498ec.firebasestorage.app",messagingSenderId:"911280405587",appId:"1:911280405587:web:d09038e15e98d69dc79aa6"};
-  var auth=null; try{ firebase.initializeApp(FB); auth=firebase.auth(); }catch(e){}
+  var auth=null;
+  fetch('/api/firebase-config').then(function(r){return r.json();}).then(function(FB){
+    try{ firebase.initializeApp(FB); auth=firebase.auth(); }catch(e){}
+    if(auth){ auth.onAuthStateChanged(function(u){ if(!u){$("gate").style.display="block";$("main").style.display="none";}else{$("gate").style.display="none";$("main").style.display="block";loadStats();loadConnect();loadTunnels();} }); }
+    else { $("gate").textContent="Firebase failed to load."; }
+  }).catch(function(){ $("gate").textContent="Failed to load config."; });
 
   // API base: relative on the stewardmd.in website (unchanged); absolute when this console runs INSIDE
   // the native app (Capacitor local scheme), where a relative /api would wrongly hit the local origin.
