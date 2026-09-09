@@ -451,10 +451,16 @@ class RecordService {
 
   async _audit(action, fields) {
     const patientId = fields && fields.patientId;
+    // TASK 4.14: correlationId/deviceId/sessionId - the plan's minimum-audit fields this codebase
+    // had nowhere to put. Folded into the existing free-form `scope` blob under its own `request`
+    // key rather than a new column (see actor.js's requestContextOf() for why), so every audit
+    // event this file already writes carries them with no change to any of this file's callers.
+    const rc = this.actor && this.actor.requestContext;
+    const scope = (fields && fields.scope) || null;
     const event = {
       ts: this.now(), actor: this.actor.id, connectorId: "wardsynq", action,
       resourceCounts: (fields && fields.resourceCounts) || null,
-      scope: (fields && fields.scope) || null,
+      scope: rc ? { ...(scope || {}), request: rc } : scope,
       patientRefHash: patientId ? await this.pseudonym(patientId) : null,
       outcome: (fields && fields.outcome) || "ok",
     };
