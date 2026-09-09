@@ -116,6 +116,27 @@ test("PROVENANCE is derived from the stamp on every version and never makes an A
   assert.equal(fhirProvenance({ resourceType: "Claim", id: "c" }), null);
 });
 
+/* TASK 7 STEP 4.3: which encounter a fact belongs to, on Provenance itself - real R4 has no
+ * dedicated element for it, so it rides in entity[] the same way "transformation" already does
+ * (entity.role="source" naming what this record was derived from/belongs to). */
+test("PROVENANCE names the encounter, alongside the external source when both apply, in neither's absence", () => {
+  const native = { resourceType: "Observation", id: "o2", encounterId: "enc-1", version: 1, patientId: "p", meta: { recordedAt: "2026-09-08T10:00:00.000Z", source: { system: "wardsynq-native" } }, writtenBy: { id: "fb:dr-a", kind: "human", at: "2026-09-08T10:00:00.000Z" } };
+  const pn = fhirProvenance(native);
+  assert.equal(pn.entity.length, 1, "no external source, but the encounter is still real");
+  assert.equal(pn.entity[0].role, "source");
+  assert.deepEqual(pn.entity[0].what, { reference: "Encounter/enc-1" });
+
+  const importedWithEncounter = { resourceType: "Observation", id: "o3", encounterId: "enc-2", version: 1, patientId: "p", meta: { recordedAt: "2026-09-08T10:00:00.000Z", source: { system: "hl7v2", sourceId: "msg-1" } }, writtenBy: { id: "adapter:hl7v2", kind: "adapter", at: "2026-09-08T10:00:00.000Z" } };
+  const pw = fhirProvenance(importedWithEncounter);
+  assert.equal(pw.entity.length, 2, "both the external source and the encounter ride in entity[]");
+  assert.equal(pw.entity[0].role, "source");
+  assert.equal(pw.entity[0].what.identifier.value, "msg-1", "the source entry is unchanged - external source still comes first");
+  assert.deepEqual(pw.entity[1].what, { reference: "Encounter/enc-2" });
+
+  const noEncounterNative = { resourceType: "Observation", id: "o4", version: 1, patientId: "p", meta: { recordedAt: "2026-09-08T10:00:00.000Z", source: { system: "wardsynq-native" } }, writtenBy: { id: "fb:dr-a", kind: "human", at: "2026-09-08T10:00:00.000Z" } };
+  assert.equal(fhirProvenance(noEncounterNative).entity, undefined, "no source and no encounter: entity[] is absent, not an empty array pretending to have checked");
+});
+
 test("CONSENT: a refusal is rejected with a deny provision, never an active consent whose fine print says no", () => {
   const base = { resourceType: "PatientConsent", id: "c1", version: 1, patientId: "p", scope: "share-external", givenBy: "patient", giverName: "T", recordedAt: "2026-09-08T09:00:00.000Z", validFrom: "2026-09-08", meta: {}, writtenBy: { at: "2026-09-08T09:00:00.000Z" } };
   const granted = fhirConsent({ ...base, decision: "granted" });

@@ -468,10 +468,20 @@ function fhirProvenance(record) {
        * never as the author. */
       onBehalfOf: by.onBehalfOf ? { display: str(by.onBehalfOf) } : undefined,
     })],
-    entity: external ? [{
-      role: "source",
-      what: clean({ identifier: clean({ system: SOURCE_URN(src.system), value: str(src.sourceId) || undefined }), display: `${str(src.system)}${str(src.sourceId) ? ":" + str(src.sourceId) : ""}` }),
-    }] : undefined,
+    /* TASK 7 STEP 4.3: entity[] is where R4 Provenance carries derivation - which is exactly what
+     * "transformation" and "encounter" resolve to in a resource that has no dedicated fields for
+     * either. entity.role="source" + entity.what naming the external system IS the transformation
+     * fact (this record's content was derived FROM that source, via the CREATE/UPDATE `activity`
+     * above) - R4 has no separate "transformation" element, and inventing an extension for one
+     * would be exactly the fabrication the plan forbids. The encounter entry is new: which visit
+     * this fact belongs to is real, load-bearing information every other exported resource type
+     * already carries as its own `encounter` field - Provenance did not, until now. */
+    entity: (() => {
+      const rows = [];
+      if (external) rows.push({ role: "source", what: clean({ identifier: clean({ system: SOURCE_URN(src.system), value: str(src.sourceId) || undefined }), display: `${str(src.system)}${str(src.sourceId) ? ":" + str(src.sourceId) : ""}` }) });
+      if (record.encounterId) rows.push({ role: "source", what: ref("Encounter", record.encounterId) });
+      return rows.length ? rows : undefined;
+    })(),
   });
 }
 
