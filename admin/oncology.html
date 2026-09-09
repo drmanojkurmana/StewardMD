@@ -97,8 +97,13 @@
 (function(){
   "use strict";
   var UI = window.SMD_ONCOKBADMIN;
-  var FB={apiKey:"AIzaSyCaqxRQfMtq95j0J_vLj7EF4sxrN0FhO0I",authDomain:"stewardmd-498ec.firebaseapp.com",projectId:"stewardmd-498ec",storageBucket:"stewardmd-498ec.firebasestorage.app",messagingSenderId:"911280405587",appId:"1:911280405587:web:d09038e15e98d69dc79aa6"};
-  var auth=null; try{ firebase.initializeApp(FB); auth=firebase.auth(); }catch(e){}
+  var auth=null;
+  fetch('/api/firebase-config').then(function(r){return r.json();}).then(function(FB){
+    try{ firebase.initializeApp(FB); auth=firebase.auth(); }catch(e){}
+    if(auth){ auth.onAuthStateChanged(function(u){ signedInUI(u); if(u){refresh(activePane);} }); }
+    else { msg("gateMsg","Firebase failed to load."); }
+  }).catch(function(){ msg("gateMsg","Failed to load config."); });
+
   function $(id){return document.getElementById(id);}
   function tok(){ return auth&&auth.currentUser?auth.currentUser.getIdToken():Promise.resolve(null); }
   function api(path,opts){ return tok().then(function(t){ if(!t) throw new Error("not-signed-in"); opts=opts||{}; opts.headers=Object.assign({"Authorization":"Bearer "+t,"Content-Type":"application/json"},opts.headers||{}); return fetch(path,opts).then(function(r){return r.json().then(function(d){return{s:r.status,d:d};},function(){return{s:r.status,d:{}};});}); }); }

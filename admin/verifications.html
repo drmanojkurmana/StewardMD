@@ -74,8 +74,12 @@
   var API="/api/verifications";
   var $=function(id){return document.getElementById(id);};
   var filter="pending";
-  var FB={apiKey:"AIzaSyCaqxRQfMtq95j0J_vLj7EF4sxrN0FhO0I",authDomain:"stewardmd-498ec.firebaseapp.com",projectId:"stewardmd-498ec",storageBucket:"stewardmd-498ec.firebasestorage.app",messagingSenderId:"911280405587",appId:"1:911280405587:web:d09038e15e98d69dc79aa6"};
-  var auth=null; try{ firebase.initializeApp(FB); auth=firebase.auth(); }catch(e){}
+  var auth=null;
+  fetch('/api/firebase-config').then(function(r){return r.json();}).then(function(FB){
+    try{ firebase.initializeApp(FB); auth=firebase.auth(); }catch(e){}
+    if(auth){ auth.onAuthStateChanged(function(u){ if(u){vLoad();}else{say("err","Sign in as owner.");} }); }
+    else { say("err","Firebase failed to load."); }
+  }).catch(function(){ say("err","Failed to load config."); });
 
   function esc(s){return String(s==null?"":s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");}
   function say(k,t){ var m=$("msg"); m.className="msg "+(k||""); m.textContent=t||""; }
