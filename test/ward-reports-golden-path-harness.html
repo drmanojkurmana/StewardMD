@@ -1,0 +1,42 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>WardSynQ TASK 4.17: reports golden path harness</title>
+<link rel="stylesheet" href="../ward.css">
+<style>html,body{margin:0;height:100%}</style>
+</head><body>
+<script>
+/* The REAL ward.js driven through the Reports golden path (ward list -> Reports button -> all six
+ * real report envelopes appear, each stating its own data source, period, and generated timestamp)
+ * against an in-memory stub server whose response shapes are confirmed against
+ * functions/_wardsynq/reports.js and its own route-level proof in
+ * test/wardsynq-reports-bridge.test.mjs. Proves the CLIENT half only. */
+window.__calls = [];
+localStorage.setItem("smd_opd_staff_tok", "harness-token");
+
+function envelope(dataSource, body) {
+  return Object.assign({ ok: true, dataSource: dataSource, period: { from: null, to: null }, filters: {}, generatedAt: "2026-09-09T09:00:00.000Z", scope: { role: "admin", tenantId: "tenant-wsq" } }, body);
+}
+
+window.fetch = function (url) {
+  var u = String(url);
+  window.__calls.push({ url: u });
+  var reply = function (obj) { return Promise.resolve({ ok: true, status: 200, json: function () { return Promise.resolve(obj); } }); };
+
+  if (u.indexOf("/ward/list") >= 0) return reply({ ok: true, patients: [] });
+  if (u.indexOf("/ward/beds") >= 0) return reply({ ok: true, wards: [] });
+
+  if (u.indexOf("/ward/report-patient-flow") >= 0) return reply(envelope(["Encounter"], { flow: { admissionsWaiting: 2 } }));
+  if (u.indexOf("/ward/report-clinical-operations") >= 0) return reply(envelope(["CriticalResultLoop"], { metrics: { criticalResults: 1 } }));
+  if (u.indexOf("/ward/report-billing") >= 0) return reply(envelope(["Invoice"], { invoiceCount: 7, charged: 42000, outstanding: 6100 }));
+  if (u.indexOf("/ward/report-claims") >= 0) return reply(envelope(["Claim"], { claimCount: 4, submitted: 2, denied: 1, approved: 1, outstandingAmount: 8000 }));
+  if (u.indexOf("/ward/report-pharmacy") >= 0) return reply(envelope(["MedicationDispense"], { dispenseCount: 15, pendingVerification: 3 }));
+  if (u.indexOf("/ward/report-him") >= 0) return reply(envelope(["Encounter", "ROIRequest"], { incompleteCharts: 2, disclosures: 5 }));
+
+  return reply({ ok: true });
+};
+</script>
+<script src="../ward.js"></script>
+<script>
+window.__ready = !!(window.WARD && window.WARD.open);
+</script>
+</body></html>

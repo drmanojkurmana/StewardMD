@@ -33,7 +33,7 @@
   var st = {
     orgId: "", ward: "", patients: [], view: "list",
     sel: null,                 // the selected {encounterId, patientId, ward, bed, admittedAt}
-    problems: [], criticals: [], balance: null, outbox: [], cosign: null, downtime: null, quality: null, pcopy: null, consent: null, completion: null, emergency: null,
+    problems: [], criticals: [], balance: null, outbox: [], cosign: null, downtime: null, quality: null, pcopy: null, consent: null, completion: null, emergency: null, roi: null, tpa: null, billing: null, reports: null,
     /* Held from other systems. null until asked, an object once answered, and a separate error
      * string when the list could not be read: an unreadable queue of held clinical data must never
      * look like an empty one. */
@@ -190,6 +190,12 @@
       '<button class="w-btn ghost" data-w-act="flowcommand" title="ED, beds, admissions pending, discharge, transfers - hospital-wide, live">' + ms("hub") + "Patient flow</button>" +
       '<button class="w-btn ghost" data-w-act="scheduling" title="Appointments, resource bookings, blackout periods - conflict-checked, server-side">' + ms("event") + "Scheduling</button>" +
       '<button class="w-btn ghost" data-w-act="cashier" title="Balance, invoices, payments, refunds - no clinical detail">' + ms("point_of_sale") + "Cashier</button>" +
+      // TASK 4.17 (Administration, scoped down per its own audit): the six hospital reports
+      // TASK 4.12 already built and deferred a UI for, shown verbatim - dataSource/period/filters/
+      // generatedAt/scope stated on every one, exactly as reportEnvelope() already stamps them.
+      // No org-configuration screen here: nothing in the backend supports one yet, and "avoid
+      // generic CRUD screens" argues against building a kitchen-sink admin console to hold it.
+      '<button class="w-btn ghost" data-w-act="reports" title="Hospital reports: patient flow, clinical operations, billing, claims, pharmacy, HIM">' + ms("summarize") + "Reports</button>" +
       // Reachable BEFORE an outage, which is the only time it can be taken. A pack you can only get
       // to while the system is up is a pack the ward has to remember to take while the system is up.
       '<button class="w-btn ghost" data-w-act="downtime" title="Printable sheet for when the system is unavailable">' + ms("print") + "Downtime pack</button></div>" +
@@ -916,6 +922,15 @@
         // Nothing here can be "completed" from this screen: it clears on its own once the
         // underlying act happens (the note is signed, the loop acknowledged, and so on).
         '<button class="w-btn ghost" data-w-act="completionopen" title="What is still outstanding on this chart">' + ms("checklist") + "Chart check</button>" +
+        // TASK 4.17: HIM's other half, alongside Chart check. A third-party request to see this
+        // record - never the patient's own copy (that is "Patient copy", below) and never a consent
+        // decision (that is "Consent", above): who asked, on what basis, and what was actually sent.
+        '<button class="w-btn ghost" data-w-act="roiopen" title="Third-party requests to release this record">' + ms("outbox") + "ROI</button>" +
+        // TASK 4.8's own workstation. wardsynq-billing.js's own rule stands unmoved: the clinical
+        // record is the source and this screen reads it, it never writes a diagnosis to support a code.
+        '<button class="w-btn ghost" data-w-act="tpaopen" title="Claims and pre-authorisations">' + ms("gavel") + "TPA</button>" +
+        // TASK 4.17: read-only, distinct from Cashier. See billingView's own header comment.
+        '<button class="w-btn ghost" data-w-act="billingopen" title="Charges, invoices and claims - no collection here">' + ms("request_quote") + "Billing</button>" +
         // The patient's own copy. Reachable from the patient because that is where the conversation
         // that produces it happens, not from a menu somewhere else.
         '<button class="w-btn ghost" data-w-act="pcopy" title="The copy this patient can be given">' + ms("assignment_ind") + "Patient copy</button></div>";
@@ -1122,6 +1137,117 @@
       '<div class="w-dt-bar w-noprint"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button>" +
       "<h3>Chart check</h3><button class=\"w-btn ghost\" data-w-act=\"completionopen\">" + ms("refresh") + "Refresh</button></div>" +
       (rows ? "<ul class=\"w-mini\">" + rows + "</ul>" : '<p class="w-empty">Nothing outstanding, against what this hospital has configured to check.</p>') +
+      "</div>";
+  }
+
+  var ROI_RELATIONSHIPS = [["patient", "Patient"], ["attorney", "Attorney"], ["other-provider", "Other provider"], ["insurer", "Insurer"], ["government-agency", "Government agency"], ["employer", "Employer"], ["family-member", "Family member"], ["other", "Other"]];
+  function roiView(state) {
+    var r = state.roi || {};
+    var rows = (r.requests || []).map(function (req) {
+      var actions = "";
+      if (req.state === "requested") {
+        actions = '<button class="w-btn ghost sm" data-w-act="roiauthorize:' + esc(req.roiId) + '">' + ms("check_circle") + "Authorize</button>" +
+          '<button class="w-btn ghost sm" data-w-act="roideny:' + esc(req.roiId) + '">' + ms("cancel") + "Deny</button>";
+      } else if (req.state === "authorized") {
+        actions = '<button class="w-btn ghost sm" data-w-act="roifulfill:' + esc(req.roiId) + '">' + ms("outbox") + "Fulfill</button>" +
+          '<button class="w-btn ghost sm" data-w-act="roicancel:' + esc(req.roiId) + '">' + ms("cancel") + "Cancel</button>";
+      }
+      return '<li class="w-mini-row"><div><span class="w-st ' + esc(req.state) + '">' + esc(req.state) + "</span> " +
+        "<b>" + esc(req.requester && req.requester.name) + "</b>" + (req.requester && req.requester.relationship ? " (" + esc(req.requester.relationship) + ")" : "") +
+        " &middot; " + esc(req.purpose) +
+        '<div class="w-dt-times">scope: ' + esc((req.scope && req.scope.recordTypes || []).join(", ")) +
+        (req.authorizationBasis ? " &middot; basis: " + esc(req.authorizationBasis) : "") +
+        (req.decisionReason ? " &middot; " + esc(req.decisionReason) : "") +
+        (req.disclosure ? " &middot; sent " + esc(req.disclosure.deliveredStatus) + " (" + esc(JSON.stringify(req.disclosure.resourceCounts || {})) + ")" : "") +
+        " &middot; requested " + when(req.requestedAt) + "</div></div>" +
+        (actions ? '<div class="w-mini-row-act">' + actions + "</div>" : "") +
+        "</li>";
+    }).join("");
+    return '<div class="w-card">' +
+      '<div class="w-dt-bar w-noprint"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button>" +
+      "<h3>Release of information</h3><button class=\"w-btn ghost\" data-w-act=\"roiopen\">" + ms("refresh") + "Refresh</button></div>" +
+      (r.shareExternalConsent ? '<p class="w-dt-times">Share-external consent: ' + esc(r.shareExternalConsent.status) + "</p>" : "") +
+      (rows ? "<ul class=\"w-mini\">" + rows + "</ul>" : '<p class="w-empty">No release request has ever been made for this patient.</p>') +
+      '<div class="w-sub"><h4>New request</h4>' +
+      '<input id="wRoiRequesterName" placeholder="Requester name">' +
+      '<input id="wRoiOrg" placeholder="Organization (optional)">' +
+      '<select id="wRoiRelationship">' + ROI_RELATIONSHIPS.map(function (x) { return '<option value="' + esc(x[0]) + '">' + esc(x[1]) + "</option>"; }).join("") + "</select>" +
+      '<input id="wRoiPurpose" placeholder="Purpose">' +
+      '<input id="wRoiRecipient" placeholder="Recipient (where it goes)">' +
+      '<input id="wRoiRecordTypes" placeholder="Record types, comma-separated (e.g. DiagnosticReport)">' +
+      '<button class="w-btn" data-w-act="roirequest">' + ms("outbox") + "Request</button></div>" +
+      "</div>";
+  }
+
+  var PREAUTH_STATES = [["requested", "Requested"], ["approved", "Approved"], ["refused", "Refused"], ["expired", "Expired"]];
+  function tpaView(state) {
+    var t = state.tpa || {};
+    var claimRows = (t.claims || []).map(function (c) {
+      var actions = "";
+      if (c.state === "coded") actions = '<button class="w-btn ghost sm" data-w-act="claimsubmit:' + esc(c.id) + '">' + ms("send") + "Submit</button>";
+      else if (c.state === "submitted" || c.state === "queried") {
+        actions = '<button class="w-btn ghost sm" data-w-act="claimadjudicate:' + esc(c.id) + '">' + ms("gavel") + "Adjudicate</button>" +
+          '<button class="w-btn ghost sm" data-w-act="claimdeny:' + esc(c.id) + '">' + ms("cancel") + "Deny</button>";
+      } else if (c.state === "denied") actions = '<button class="w-btn ghost sm" data-w-act="claimresubmit:' + esc(c.id) + '">' + ms("refresh") + "Resubmit</button>";
+      return '<li class="w-mini-row"><div><span class="w-st ' + esc(c.state) + '">' + esc(c.state) + "</span> " +
+        "<b>" + esc((c.codes || []).map(function (x) { return x.code; }).join(", ")) + "</b>" +
+        (c.submittedAmount != null ? " &middot; submitted " + esc(c.submittedAmount) : "") +
+        (c.approvedAmount != null ? " &middot; approved " + esc(c.approvedAmount) : "") +
+        (c.deniedAmount != null ? " &middot; denied " + esc(c.deniedAmount) : "") +
+        (c.denialReason ? " &middot; " + esc(c.denialReason) : "") +
+        (c.clinicalContentChangedAfterDenial ? '<div class="w-warn">Coding changed after denial - flagged, not blocked.</div>' : "") +
+        ((c.queries || []).length ? '<div class="w-dt-times">' + c.queries.map(function (q) { return esc(q.question); }).join(" ") + "</div>" : "") +
+        "</div>" + (actions ? '<div class="w-mini-row-act">' + actions + "</div>" : "") + "</li>";
+    }).join("");
+    var authRows = (t.preAuthorisations || []).map(function (a) {
+      return '<li class="w-mini-row"><div><span class="w-st ' + esc(a.state) + '">' + esc(a.state) + "</span> " +
+        "<b>" + esc(a.treatment) + "</b>" + (a.scheme ? " &middot; " + esc(a.scheme) : "") +
+        (a.authorizedAmount != null ? " &middot; " + esc(a.authorizedAmount) : "") +
+        (a.reason ? " &middot; " + esc(a.reason) : "") +
+        '<div class="w-dt-times">' + esc(a.note || "") + "</div></div></li>";
+    }).join("");
+    return '<div class="w-card">' +
+      '<div class="w-dt-bar w-noprint"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button>" +
+      "<h3>TPA / Claims</h3><button class=\"w-btn ghost\" data-w-act=\"tpaopen\">" + ms("refresh") + "Refresh</button></div>" +
+      '<div class="w-sub"><h4>Claims</h4>' +
+      (claimRows ? "<ul class=\"w-mini\">" + claimRows + "</ul>" : '<p class="w-empty">No claim has been coded for this patient.</p>') +
+      '<input id="wTpaCodes" placeholder="Codes to claim, comma-separated">' +
+      '<button class="w-btn" data-w-act="claimcode">' + ms("receipt_long") + "Code claim</button></div>" +
+      '<div class="w-sub"><h4>Pre-authorisations</h4>' +
+      (authRows ? "<ul class=\"w-mini\">" + authRows + "</ul>" : '<p class="w-empty">No pre-authorisation has been recorded for this patient.</p>') +
+      '<input id="wTpaTreatment" placeholder="Treatment">' +
+      '<input id="wTpaScheme" placeholder="Scheme (optional)">' +
+      '<select id="wTpaAuthState">' + PREAUTH_STATES.map(function (x) { return '<option value="' + esc(x[0]) + '">' + esc(x[1]) + "</option>"; }).join("") + "</select>" +
+      '<input id="wTpaAuthReason" placeholder="Reason (required if refused)">' +
+      '<input id="wTpaAuthAmount" placeholder="Authorized amount (if approved)">' +
+      '<button class="w-btn" data-w-act="preauth">' + ms("fact_check") + "Record</button></div>" +
+      "</div>";
+  }
+
+  /* TASK 4.17: Billing, distinct from Cashier on purpose. TASK 4.13 gave `billing` BILLING_VIEW and
+   * deliberately NOT BILLING_CHARGE - "a billing clerk who codes and reviews does not also collect
+   * payment." Cashier's own screen carries collect/refund/discount buttons a billing-only actor is
+   * not meant to see; this screen shows the SAME real invoices and claims, read-only, no button on
+   * it calls a write route. */
+  function billingView(state) {
+    var b = state.billing || {};
+    var invRows = (b.invoices || []).map(function (inv) {
+      return '<li class="w-mini-row"><div><span class="w-st ' + esc(inv.status) + '">' + esc(inv.status) + "</span> " +
+        "<b>" + esc(inv.invoiceId) + "</b> &middot; charged " + esc(inv.charged) + " &middot; balance " + esc(inv.balance) +
+        (inv.void ? " &middot; VOID" + (inv.voidReason ? ": " + esc(inv.voidReason) : "") : "") + "</div></li>";
+    }).join("");
+    var claimRows = (b.claims || []).map(function (c) {
+      return '<li class="w-mini-row"><div><span class="w-st ' + esc(c.state) + '">' + esc(c.state) + "</span> " +
+        "<b>" + esc((c.codes || []).map(function (x) { return x.code; }).join(", ")) + "</b>" +
+        (c.submittedAmount != null ? " &middot; submitted " + esc(c.submittedAmount) : "") +
+        (c.approvedAmount != null ? " &middot; approved " + esc(c.approvedAmount) : "") + "</div></li>";
+    }).join("");
+    return '<div class="w-card">' +
+      '<div class="w-dt-bar w-noprint"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button>" +
+      "<h3>Billing</h3><button class=\"w-btn ghost\" data-w-act=\"billingopen\">" + ms("refresh") + "Refresh</button></div>" +
+      (b.outstandingBalance != null ? '<p class="w-dt-times">Outstanding: ' + esc(b.outstandingBalance) + "</p>" : "") +
+      '<div class="w-sub"><h4>Invoices</h4>' + (invRows ? "<ul class=\"w-mini\">" + invRows + "</ul>" : '<p class="w-empty">No invoice has been raised for this patient.</p>') + "</div>" +
+      '<div class="w-sub"><h4>Claims</h4>' + (claimRows ? "<ul class=\"w-mini\">" + claimRows + "</ul>" : '<p class="w-empty">No claim has been coded for this patient.</p>') + "</div>" +
       "</div>";
   }
 
@@ -2060,6 +2186,36 @@
   /* The downtime pack, on screen and on paper. Every safety property of this view is about being
    * honest that it is a COPY: it is stamped, it says what it does not know, and a page with a gap in
    * it says so beside the patient's name rather than printing a reassuring blank. */
+  var REPORT_LABELS = {
+    patientFlow: "Patient flow", clinicalOperations: "Clinical operations", billing: "Billing",
+    claims: "Claims", pharmacy: "Pharmacy", him: "HIM",
+  };
+  /* TASK 4.17 (Administration, scoped down): each report is shown exactly as reportEnvelope()
+   * stamps it - data source, period, filters, generated-at, permission scope - never re-summarised
+   * into a single number this screen invented. What each report's own body contains varies (a claim
+   * count is not a stock level), so the body is listed generically as key: value rather than a
+   * bespoke layout per report, which would be six more places to keep in sync with reports.js. */
+  function reportsView(state) {
+    var r = state.reports || {};
+    var sections = Object.keys(REPORT_LABELS).map(function (key) {
+      var rep = r[key];
+      if (!rep) return "";
+      if (!rep.ok) return '<div class="w-sub"><h4>' + esc(REPORT_LABELS[key]) + "</h4><p class=\"w-empty\">Could not load: " + esc(rep.detail || rep.error || "unknown error") + "</p></div>";
+      var body = Object.keys(rep).filter(function (k) { return ["ok", "mode", "tenantId", "dataSource", "period", "filters", "generatedAt", "scope"].indexOf(k) < 0; })
+        .map(function (k) { var v = rep[k]; return "<li><b>" + esc(k) + ":</b> " + esc(typeof v === "object" ? JSON.stringify(v) : v) + "</li>"; }).join("");
+      return '<div class="w-sub"><h4>' + esc(REPORT_LABELS[key]) + "</h4>" +
+        '<p class="w-dt-times">source: ' + esc((rep.dataSource || []).join(", ")) +
+        (rep.period && (rep.period.from || rep.period.to) ? " &middot; " + esc(rep.period.from || "") + " to " + esc(rep.period.to || "") : "") +
+        " &middot; generated " + when(rep.generatedAt) + " &middot; as " + esc(rep.scope && rep.scope.role) + "</p>" +
+        "<ul class=\"w-mini-flat\">" + body + "</ul></div>";
+    }).join("");
+    return '<div class="w-card">' +
+      '<div class="w-card-h">' + ms("summarize") + "<h3>Reports</h3>" +
+      '<button class="w-ic" data-w-act="reports" title="Refresh">' + ms("refresh") + "</button></div>" +
+      (sections || '<p class="w-empty">Loading…</p>') +
+      "</div>";
+  }
+
   function downtimeView(state) {
     var d = state.downtime;
     if (!d) return '<div class="w-card"><p class="w-empty">Preparing the pack…</p></div>';
@@ -2163,9 +2319,13 @@
       '<div class="w-canvas">' + banner(state) +
       (state.view === "chart" ? chartView(state)
         : state.view === "downtime" ? downtimeView(state)
+        : state.view === "reports" ? reportsView(state)
         : state.view === "pcopy" ? pcopyView(state)
         : state.view === "consent" ? consentView(state)
         : state.view === "completion" ? completionView(state)
+        : state.view === "roi" ? roiView(state)
+        : state.view === "tpa" ? tpaView(state)
+        : state.view === "billing" ? billingView(state)
         : state.view === "board" ? boardView(state)
         : state.view === "ed" ? edBoardView(state)
         : state.view === "inventory" ? inventoryView(state)
@@ -3510,6 +3670,21 @@
       // secondary panel would not load helps nobody find a patient.
       .catch(function () {});
   }
+  function loadReports() {
+    st.busy = true; st.view = "reports"; st.reports = st.reports || {}; paint();
+    var q = "?orgId=" + encodeURIComponent(st.orgId);
+    return Promise.all([
+      apiGet("/ward/report-patient-flow" + q), apiGet("/ward/report-clinical-operations" + q),
+      apiGet("/ward/report-billing" + q), apiGet("/ward/report-claims" + q),
+      apiGet("/ward/report-pharmacy" + q), apiGet("/ward/report-him" + q),
+    ])
+      .then(function (rs) {
+        st.busy = false;
+        st.reports = { patientFlow: rs[0], clinicalOperations: rs[1], billing: rs[2], claims: rs[3], pharmacy: rs[4], him: rs[5] };
+        paint();
+      })
+      .catch(function () { st.busy = false; st.err = "Could not load the reports."; paint(); });
+  }
   function loadDowntime() {
     st.busy = true; st.view = "downtime"; paint();
     return apiGet("/ward/downtime?orgId=" + encodeURIComponent(st.orgId) + (st.ward ? "&ward=" + encodeURIComponent(st.ward) : ""))
@@ -3580,6 +3755,150 @@
     return apiGet("/ward/completion-queue?orgId=" + encodeURIComponent(st.orgId) + "&patientId=" + encodeURIComponent(st.sel.patientId))
       .then(function (r) { st.busy = false; if (r && r.ok) st.completion = r; else { st.completion = { items: [] }; st.err = "Could not build the chart check."; } paint(); })
       .catch(function () { st.busy = false; st.completion = { items: [] }; st.err = "Could not build the chart check."; paint(); });
+  }
+  function roiOpen() {
+    st.view = "roi"; st.roi = null; paint(); loadRoi();
+  }
+  function loadRoi() {
+    if (!st.sel || !st.sel.patientId) return;
+    st.busy = true; paint();
+    return apiGet("/ward/roi-requests?orgId=" + encodeURIComponent(st.orgId) + "&patientId=" + encodeURIComponent(st.sel.patientId))
+      .then(function (r) { st.busy = false; if (r && r.ok) st.roi = r; else { st.roi = { requests: [] }; st.err = "Could not load release requests."; } paint(); })
+      .catch(function () { st.busy = false; st.roi = { requests: [] }; st.err = "Could not load release requests."; paint(); });
+  }
+  function roiRequestAction() {
+    if (!st.sel || !st.sel.patientId) return;
+    var name = val("wRoiRequesterName"), purpose = val("wRoiPurpose"), recipient = val("wRoiRecipient");
+    var types = val("wRoiRecordTypes").split(",").map(function (s) { return s.trim(); }).filter(Boolean);
+    if (!name || !purpose || !recipient || !types.length) { st.err = "Requester name, purpose, recipient and at least one record type are all required."; paint(); return; }
+    st.busy = true; paint();
+    apiPost("/ward/roi-request", {
+      orgId: st.orgId, patientId: st.sel.patientId,
+      requester: { name: name, organization: val("wRoiOrg") || undefined, relationship: val("wRoiRelationship") },
+      purpose: purpose, recipient: recipient, scope: { recordTypes: types },
+    })
+      .then(function (r) { if (settle(r, "Requested.")) loadRoi(); else paint(); })
+      .catch(function () { st.busy = false; st.err = "Could not record that request."; paint(); });
+  }
+  function roiAuthorizeAction(roiId) {
+    var basis = window.prompt("Authorization basis (a signed release, a consent on record, a court order):");
+    if (!basis) return;
+    st.busy = true; paint();
+    apiPost("/ward/roi-authorize", { orgId: st.orgId, roiId: roiId, authorizationBasis: basis })
+      .then(function (r) { if (settle(r, "Authorized.")) loadRoi(); else paint(); })
+      .catch(function () { st.busy = false; st.err = "Could not authorize that."; paint(); });
+  }
+  function roiDenyAction(roiId) {
+    var reason = window.prompt("Reason for denying this request:");
+    if (!reason) return;
+    st.busy = true; paint();
+    apiPost("/ward/roi-deny", { orgId: st.orgId, roiId: roiId, reason: reason })
+      .then(function (r) { if (settle(r, "Denied.")) loadRoi(); else paint(); })
+      .catch(function () { st.busy = false; st.err = "Could not deny that."; paint(); });
+  }
+  function roiCancelAction(roiId) {
+    var reason = window.prompt("Reason for cancelling this authorization:");
+    if (!reason) return;
+    st.busy = true; paint();
+    apiPost("/ward/roi-cancel", { orgId: st.orgId, roiId: roiId, reason: reason })
+      .then(function (r) { if (settle(r, "Cancelled.")) loadRoi(); else paint(); })
+      .catch(function () { st.busy = false; st.err = "Could not cancel that."; paint(); });
+  }
+  function roiFulfillAction(roiId) {
+    var deliveredStatus = window.prompt("Delivered how (e.g. emailed, posted, handed to requester)?");
+    if (!deliveredStatus) return;
+    var countStr = window.prompt("How many records were sent?", "1");
+    var count = Number(countStr);
+    if (!Number.isFinite(count) || count < 0) { st.err = "Enter a real count of what was sent."; paint(); return; }
+    st.busy = true; paint();
+    apiPost("/ward/roi-fulfill", { orgId: st.orgId, roiId: roiId, deliveredStatus: deliveredStatus, resourceCounts: { records: count } })
+      .then(function (r) { if (settle(r, "Fulfilled.")) loadRoi(); else paint(); })
+      .catch(function () { st.busy = false; st.err = "Could not record that fulfillment."; paint(); });
+  }
+  function billingOpen() {
+    st.view = "billing"; st.billing = null; paint(); loadBilling();
+  }
+  function loadBilling() {
+    if (!st.sel || !st.sel.patientId) return;
+    st.busy = true; paint();
+    Promise.all([
+      apiGet("/ward/invoices?orgId=" + encodeURIComponent(st.orgId) + "&patientId=" + encodeURIComponent(st.sel.patientId)),
+      apiGet("/ward/claims?orgId=" + encodeURIComponent(st.orgId) + "&patientId=" + encodeURIComponent(st.sel.patientId)),
+    ])
+      .then(function (rs) {
+        st.busy = false;
+        var inv = rs[0], cl = rs[1];
+        st.billing = {
+          invoices: (inv && inv.ok) ? inv.invoices : [], outstandingBalance: (inv && inv.ok) ? inv.outstandingBalance : null,
+          claims: (cl && cl.ok) ? cl.claims : [],
+        };
+        if (!(inv && inv.ok) && !(cl && cl.ok)) st.err = "Could not load billing.";
+        paint();
+      })
+      .catch(function () { st.busy = false; st.billing = { invoices: [], claims: [] }; st.err = "Could not load billing."; paint(); });
+  }
+  function tpaOpen() {
+    st.view = "tpa"; st.tpa = null; paint(); loadTpa();
+  }
+  function loadTpa() {
+    if (!st.sel || !st.sel.patientId) return;
+    st.busy = true; paint();
+    return apiGet("/ward/claims?orgId=" + encodeURIComponent(st.orgId) + "&patientId=" + encodeURIComponent(st.sel.patientId))
+      .then(function (r) { st.busy = false; if (r && r.ok) st.tpa = r; else { st.tpa = { claims: [], preAuthorisations: [] }; st.err = "Could not load claims."; } paint(); })
+      .catch(function () { st.busy = false; st.tpa = { claims: [], preAuthorisations: [] }; st.err = "Could not load claims."; paint(); });
+  }
+  function claimCodeAction() {
+    if (!st.sel || !st.sel.patientId || !st.sel.encounterId) return;
+    var codes = val("wTpaCodes").split(",").map(function (s) { return s.trim(); }).filter(Boolean);
+    if (!codes.length) { st.err = "Enter at least one code to claim."; paint(); return; }
+    st.busy = true; paint();
+    apiPost("/ward/claim", { orgId: st.orgId, patientId: st.sel.patientId, encounterId: st.sel.encounterId, codes: codes })
+      .then(function (r) { if (settle(r, "Coded.")) loadTpa(); else paint(); })
+      .catch(function () { st.busy = false; st.err = "Could not code that claim."; paint(); });
+  }
+  function claimActionCall(claimId, action, extra) {
+    st.busy = true; paint();
+    apiPost("/ward/claim-state", Object.assign({ orgId: st.orgId, claimId: claimId, action: action }, extra || {}))
+      .then(function (r) { if (settle(r, "Done.")) loadTpa(); else paint(); })
+      .catch(function () { st.busy = false; st.err = "Could not update that claim."; paint(); });
+  }
+  function claimSubmitAction(claimId) {
+    var amount = window.prompt("Amount submitted to the payer:");
+    if (amount == null) return;
+    claimActionCall(claimId, "submit", { submittedAmount: Number(amount) || undefined });
+  }
+  function claimDenyAction(claimId) {
+    var reason = window.prompt("The payer's reason for denying this claim:");
+    if (!reason) return;
+    var amount = window.prompt("Amount denied (optional):");
+    claimActionCall(claimId, "deny", { reason: reason, deniedAmount: amount ? Number(amount) : undefined });
+  }
+  function claimAdjudicateAction(claimId) {
+    var approved = window.prompt("Amount approved (leave blank if none):");
+    var denied = window.prompt("Amount denied (leave blank if none):");
+    if (!approved && !denied) { st.err = "An adjudication needs an approved or a denied amount."; paint(); return; }
+    claimActionCall(claimId, "adjudicate", { approvedAmount: approved ? Number(approved) : undefined, deniedAmount: denied ? Number(denied) : undefined });
+  }
+  function claimResubmitAction(claimId) {
+    var reason = window.prompt("Reason for resubmitting this claim:");
+    if (!reason) return;
+    var amount = window.prompt("Amount submitted to the payer:");
+    claimActionCall(claimId, "resubmit", { reason: reason, submittedAmount: amount ? Number(amount) : undefined });
+  }
+  function preAuthAction() {
+    if (!st.sel || !st.sel.patientId) return;
+    var treatment = val("wTpaTreatment"), state = val("wTpaAuthState"), reason = val("wTpaAuthReason");
+    var scheme = val("wTpaScheme"), amountStr = val("wTpaAuthAmount");
+    if (!treatment) { st.err = "Enter the treatment this pre-authorisation is for."; paint(); return; }
+    if (state === "refused" && !reason) { st.err = "A refused pre-authorisation must say why."; paint(); return; }
+    st.busy = true; paint();
+    apiPost("/ward/preauth", {
+      orgId: st.orgId, patientId: st.sel.patientId, treatment: treatment, state: state,
+      scheme: scheme || undefined, reason: reason || undefined,
+      authorizedAmount: amountStr ? Number(amountStr) : undefined,
+    })
+      .then(function (r) { if (settle(r, "Recorded.")) loadTpa(); else paint(); })
+      .catch(function () { st.busy = false; st.err = "Could not record that pre-authorisation."; paint(); });
   }
   function loadCosigns() {
     return apiGet("/ward/cosign-queue?orgId=" + encodeURIComponent(st.orgId))
@@ -3735,6 +4054,9 @@
       if (st.view === "pcopy") { st.view = "chart"; st.pcopy = null; paint(); return; }
       if (st.view === "consent") { st.view = "chart"; st.consent = null; paint(); return; }
       if (st.view === "completion") { st.view = "chart"; st.completion = null; paint(); return; }
+      if (st.view === "roi") { st.view = "chart"; st.roi = null; paint(); return; }
+      if (st.view === "tpa") { st.view = "chart"; st.tpa = null; paint(); return; }
+      if (st.view === "billing") { st.view = "chart"; st.billing = null; paint(); return; }
       if (st.view === "oncology") { st.view = "chart"; st.oncology = null; paint(); return; }
       if (st.view === "cardiology") { st.view = "chart"; st.cardiology = null; paint(); return; }
       if (st.view === "radiology") { st.view = "chart"; st.radiology = null; paint(); return; }
@@ -3746,6 +4068,7 @@
       if (st.view === "flowcommand") { st.flow = {}; st.view = "list"; paint(); return; }
       if (st.view === "scheduling") { st.scheduling = {}; st.view = "list"; paint(); return; }
       if (st.view === "cashier") { st.cashier = {}; st.view = "list"; paint(); return; }
+      if (st.view === "reports") { st.reports = {}; st.view = "list"; paint(); return; }
       // Picking a bed to admit an ED patient opens the SAME bed board a fresh admission uses;
       // backing out of it returns to that patient's ED chart, not the ward list, and drops the
       // pending admit rather than leaving it to fire on some later, unrelated bed pick.
@@ -3758,7 +4081,7 @@
       st.flowsheet = null; st.news2 = null; st.investigations = null; st.results = null; st.resusBundles = null;
       st.ed = null; st.edArrivalOpen = false; st.edMrnLookup = null; st.edMrnLookupErr = "";
       st.surgBoard = null; st.surgCase = null; st.surgBookOpen = false; st.surgMrnLookup = null; st.surgMrnLookupErr = ""; st.surgErr = "";
-      st.maternity = null; st.admitClass = ""; st.ageBand = null; st.lines = null; st.rateResult = null; st.oncology = null; st.cardiology = null; st.radiology = null; st.pharmacy = null; st.transfusion = null; st.consent = null; st.completion = null;
+      st.maternity = null; st.admitClass = ""; st.ageBand = null; st.lines = null; st.rateResult = null; st.oncology = null; st.cardiology = null; st.radiology = null; st.pharmacy = null; st.transfusion = null; st.consent = null; st.completion = null; st.roi = null; st.tpa = null; st.billing = null;
       paint(); return;
     }
     if (cmd === "board") { loadBoard(); return; }
@@ -3937,6 +4260,7 @@
     if (cmd === "icdpick") { pickCode(Number(arg)); return; }
     if (cmd === "resolve") { resolveProblem(arg); return; }
     if (cmd === "downtime") { loadDowntime(); return; }
+    if (cmd === "reports") { loadReports(); return; }
     if (cmd === "printpack") { try { G.print(); } catch (e) {} return; }
     if (cmd === "pcopy") { loadPatientCopy(); return; }
     if (cmd === "pcopyGive") { givePatientCopy(); return; }
@@ -3944,6 +4268,20 @@
     if (cmd === "consentrecord") { recordConsentAction(); return; }
     if (cmd === "consentwithdraw") { var parts = arg.split("|"); withdrawConsentAction(parts[0], parts[1]); return; }
     if (cmd === "completionopen") { completionOpen(); return; }
+    if (cmd === "roiopen") { roiOpen(); return; }
+    if (cmd === "roirequest") { roiRequestAction(); return; }
+    if (cmd === "roiauthorize") { roiAuthorizeAction(arg); return; }
+    if (cmd === "roideny") { roiDenyAction(arg); return; }
+    if (cmd === "roicancel") { roiCancelAction(arg); return; }
+    if (cmd === "roifulfill") { roiFulfillAction(arg); return; }
+    if (cmd === "billingopen") { billingOpen(); return; }
+    if (cmd === "tpaopen") { tpaOpen(); return; }
+    if (cmd === "claimcode") { claimCodeAction(); return; }
+    if (cmd === "claimsubmit") { claimSubmitAction(arg); return; }
+    if (cmd === "claimdeny") { claimDenyAction(arg); return; }
+    if (cmd === "claimadjudicate") { claimAdjudicateAction(arg); return; }
+    if (cmd === "claimresubmit") { claimResubmitAction(arg); return; }
+    if (cmd === "preauth") { preAuthAction(); return; }
     if (cmd === "cosign") { cosign(arg); return; }
     if (cmd === "submitnote") { submitNote(arg); return; }
     if (cmd === "tx") { transmit(arg); return; }
