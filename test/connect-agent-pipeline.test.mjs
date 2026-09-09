@@ -10,8 +10,10 @@ test('consent receipt is scoped and explicitly non-credentialed', () => {
   assert.throws(() => assertConsent(receipt, ['emr:write']), /scope missing/);
 });
 
-test('adapter safety validator rejects credential material and write-like discoveries', () => {
-  assert.ok(validateAdapterSpec({ version: 1, events: [{ method: 'GET', path: '/api/patients', responseShape: { type: 'object' } }] }).length === 0);
-  assert.ok(validateAdapterSpec({ version: 1, credentials: { token: 'x' }, events: [] }).length > 0);
-  assert.ok(validateAdapterSpec({ version: 1, events: [{ method: 'POST', path: '/prescribe', responseShape: { type: 'object' } }] }).length > 0);
+test('adapter safety validator requires allowlisted origins and rejects writes by default', () => {
+  const base = { version: 1, allowedOrigins: ['https://emr.example.test'], events: [{ method: 'GET', path: '/api/patients', responseShape: { type: 'object' } }] };
+  assert.deepEqual(validateAdapterSpec(base), []);
+  assert.ok(validateAdapterSpec({ ...base, credentials: { token: 'x' } }).length > 0);
+  assert.ok(validateAdapterSpec({ ...base, events: [{ method: 'POST', path: '/api/patients' }] }).length > 0);
+  assert.ok(validateAdapterSpec({ ...base, events: [{ method: 'GET', path: '/api/patients', queryKeys: ['mrn'] }] }).length > 0);
 });
