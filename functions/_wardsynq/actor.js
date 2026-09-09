@@ -325,18 +325,53 @@ function grantForCaps(caps) {
     };
   }
 
-  /* TASK 4.9 (HIM/ROI), 2026-09-09. Releasing a patient's record to a third party is a
-   * records-custody function, and this codebase has NO dedicated HIM capability. staff.admin was
-   * considered and deliberately rejected: `hr` holds staff.admin and this file's own test suite
-   * already guarantees "HR: a hospital member with no business on the chart" - granting
-   * staff.admin any record scope here would silently break that guarantee for a capability whose
-   * job is staff->role management, not records custody. So NOTHING is added here: ROIRequest is
-   * reachable only through whatever grant a role already holds (in practice, EMR_TREAT's
-   * unrestricted write - the org owner/admin, today). Designing a real, narrower HIM role that is
-   * neither a clinician nor staff.admin is a role-design decision this task does not make
-   * unilaterally, the same restraint TASK 3.5/4.5/4.7/4.8 already state about their own boundaries.
-   * The route-level gate (functions/api/queue/[[path]].js) still requires staff.admin as an
-   * ADDITIONAL org-authorization check, so both layers must agree before an ROI route is reached. */
+  /* TASK 4.9 (HIM/ROI), 2026-09-09, NARROWED by TASK 4.13, 2026-09-09. staff.admin was considered
+   * and rejected then, for the same reason it is still rejected: `hr` holds staff.admin and this
+   * file's own test suite guarantees "HR: a hospital member with no business on the chart" -
+   * widening staff.admin here would silently break that guarantee for a capability whose job is
+   * staff->role management, not records custody. HIM_ROI is a NEW, narrow capability instead,
+   * granted to nobody by default and to the new `him` role alone (functions/_queue_roles.js) - `hr`
+   * does not hold it and gains nothing from this branch.
+   *
+   * WRITE IS ROIRequest ONLY. A HIM officer decides and records a release; this grant confers no
+   * power to write a clinical note, an order or anything else - releasing a record is not treating
+   * a patient. READ comes from the SAME role also holding EMR_VIEW (see the `him` role definition) -
+   * this branch does not itself widen read, because "may release records" and "may read the chart
+   * to decide what to release" are two different authorities the role composes explicitly, not one
+   * this branch assumes. The route-level gate (functions/api/queue/[[path]].js) still requires
+   * staff.admin OR him.roi as an alternative org-authorization check, so both layers must agree. */
+  if (has(CAPS.HIM_ROI)) {
+    const added = ["ROIRequest"];
+    if (!grant) grant = { tier: TIER.EXECUTE, read: added, write: added, basis: CAPS.HIM_ROI };
+    else grant = {
+      tier: TIER.EXECUTE,
+      read: grant.read === null ? null : [...new Set([...grant.read, ...added])],
+      write: grant.write === null ? null : [...new Set([...grant.write, ...added])],
+      writeCategories: grant.writeCategories,
+      basis: grant.basis + "+" + CAPS.HIM_ROI,
+    };
+  }
+
+  /* TASK 4.13. migrate-transfusion.js's own header states this exact gap: "role separation between
+   * blood-bank crossmatch/issue authority and ward-side bedside/administration authority is NOT
+   * implemented... every route is gated on the same emr.treat capability every other clinical-
+   * commitment resource uses." TRANSFUSION_ISSUE is that separation - a narrow authority over
+   * TransfusionEpisode alone, plus enough read (Patient, Encounter) to identify whose episode it is,
+   * granted to the new `blood_bank` role. EMR_TREAT still reaches TransfusionEpisode too (it is
+   * unrestricted, unchanged) - this is an ALTERNATIVE authority for a role that should hold nothing
+   * else clinical, never a narrowing of what a doctor can already do. */
+  if (has(CAPS.TRANSFUSION_ISSUE)) {
+    const added = ["TransfusionEpisode"];
+    const canRead = [...added, "Patient", "Encounter"];
+    if (!grant) grant = { tier: TIER.EXECUTE, read: canRead, write: added, basis: CAPS.TRANSFUSION_ISSUE };
+    else grant = {
+      tier: TIER.EXECUTE,
+      read: grant.read === null ? null : [...new Set([...grant.read, ...canRead])],
+      write: grant.write === null ? null : [...new Set([...grant.write, ...added])],
+      writeCategories: grant.writeCategories,
+      basis: grant.basis + "+" + CAPS.TRANSFUSION_ISSUE,
+    };
+  }
 
   /* An unconstrained write scope cannot be partly constrained. A role that ends up with `write: null`
    * may write every type, and leaving a category allow-list attached to that would refuse the one

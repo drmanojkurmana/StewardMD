@@ -516,6 +516,10 @@ export async function onRequest(context) {
       const rawText = isHl7 && method === "POST" ? await request.text().catch(() => "") : null;
       const body = isHl7 ? {} : ((method === "POST" || method === "PUT") ? await readBody(request) : {});
       const wOrgId = url.searchParams.get("orgId") || body.orgId || "";
+      // TASK 4.13: the subs each new narrow capability is an ALTERNATIVE authority for - see the
+      // ROI_SUBS/TRANSFUSION_SUBS fallback checks below, right after wAz is first computed.
+      const ROI_SUBS = new Set(["roi-request", "roi-authorize", "roi-deny", "roi-cancel", "roi-fulfill", "roi", "roi-requests"]);
+      const TRANSFUSION_SUBS = new Set(["transfusion-request", "transfusion-crossmatch", "transfusion-issue", "transfusion-bedside-check", "transfusion-start", "transfusion-observe", "transfusion-reaction", "transfusion-complete"]);
       const capFor = {
         admit: CAPS.QUEUE_ADD, list: CAPS.QUEUE_VIEW, vitals: CAPS.EMR_VITALS,
         "medication-order": CAPS.EMR_TREAT, round: CAPS.QUEUE_VIEW, mar: CAPS.MED_ADMINISTER,
@@ -815,6 +819,14 @@ export async function onRequest(context) {
        * and the same reason it is not a widening - lab.result grants only the narrow record scope in
        * actor.js, so this opens no other route and the store still checks the write itself. */
       if (!wAz.ok && sub === "specimen-outcome") wAz = await ORG.authorizeOrg(env, actor, wOrgId, CAPS.LAB_RESULT);
+      /* TASK 4.13: HIM_ROI is the new, narrow alternative to staff.admin for the ROI routes - the
+       * `him` role holds HIM_ROI and not staff.admin, and this does not widen staff.admin's own
+       * reach anywhere else. Same alternative-authority shape as criticals/specimen-outcome above. */
+      if (!wAz.ok && ROI_SUBS.has(sub)) wAz = await ORG.authorizeOrg(env, actor, wOrgId, CAPS.HIM_ROI);
+      /* TASK 4.13: TRANSFUSION_ISSUE is the new, narrow alternative to emr.treat for the transfusion
+       * routes - the `blood_bank` role holds TRANSFUSION_ISSUE and none of the EMR capabilities, and
+       * this does not narrow what emr.treat could already do. Same shape as the two checks above. */
+      if (!wAz.ok && TRANSFUSION_SUBS.has(sub)) wAz = await ORG.authorizeOrg(env, actor, wOrgId, CAPS.TRANSFUSION_ISSUE);
       if (!wAz.ok) return json(azRefusal(wAz), wAz.reason === "org_not_found" ? 404 : 403, request);
 
       const wOrg = await ORG.getOrg(env, wOrgId);
