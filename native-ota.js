@@ -91,7 +91,17 @@
         p.addListener("download", function (ev) { try { onProgress(Math.round((ev && ev.percent) || 0)); } catch (e) {} }).then(function (h) { offDl = h; });
       }
     } catch (e) {}
-    return p.download({ url: pending.zipUrl, version: String(pending.version), checksum: pending.zipHash || undefined })
+    // One automatic retry on a network-class download failure: a 43 MB bundle on a ward
+    // connection drops often, and the GET is idempotent with the checksum verified on every
+    // attempt, so retrying once is safe. Anything else (checksum, storage, …) fails fast.
+    function tryDownload(retriesLeft) {
+      return p.download({ url: pending.zipUrl, version: String(pending.version), checksum: pending.zipHash || undefined })
+        .then(null, function (e) {
+          if (retriesLeft > 0 && otaCode(e, "download-failed") === "network") return tryDownload(retriesLeft - 1);
+          throw e;
+        });
+    }
+    return tryDownload(1)
       .then(function (bundle) {
         cleanup();
         var applied = (immediate === false) ? p.next({ id: bundle.id }) : p.set({ id: bundle.id });
@@ -180,8 +190,18 @@
       _bannerEl.querySelector(".go").addEventListener("click", function () {
         var btn = _bannerEl.querySelector(".go"); btn.textContent = "Updating…"; btn.disabled = true;
         // set() itself reloads the WebView on success — nothing left to do here but handle failure.
+        // Phrase it from the failure CODE (same vocabulary as the Settings screen): a connection
+        // drop and a full disk need different actions, and a bare "try again" never says which.
         install(_bannerPending, null, true).then(function (res) {
-          if (!res.ok) { btn.textContent = "Update now"; btn.disabled = false; toast("Couldn't apply the update — try again later"); }
+          if (!res.ok) {
+            btn.textContent = "Update now"; btn.disabled = false;
+            var code = res && res.error;
+            toast(code === "network" ? "Download failed — check connection and try again" :
+              code === "storage" ? "Not enough space to download the update" :
+              code === "checksum" ? "Update didn't verify — try again later" :
+              code === "missing" ? "That update is no longer available" :
+              "Couldn't apply the update — try again later");
+          }
         });
       });
     }
