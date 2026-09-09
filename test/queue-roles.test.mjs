@@ -73,3 +73,32 @@ test("every role's caps are valid capability strings (no typos)", () => {
   const valid = new Set(Object.values(CAPS));
   for (const role of ROLES) for (const c of capsFor(role)) assert.equal(valid.has(c), true, role + " has bad cap " + c);
 });
+
+// TASK 4.13 (Enterprise RBAC/ABAC): billing/him/blood_bank, least-privilege by construction.
+test("billing: reads charges/invoices/claims, never collects payment or touches the chart", () => {
+  assert.equal(can("billing", CAPS.BILLING_VIEW), true);
+  assert.equal(can("billing", CAPS.ORDER_READ), true);
+  assert.equal(can("billing", CAPS.BILLING_CHARGE), false, "a billing clerk does not collect payment - that is cashier's job");
+  assert.equal(can("billing", CAPS.EMR_VIEW), false);
+  assert.equal(can("billing", CAPS.EMR_TREAT), false);
+});
+
+test("him: reads the chart to decide a release and records it, but holds no clinical or billing authority", () => {
+  assert.equal(can("him", CAPS.HIM_ROI), true);
+  assert.equal(can("him", CAPS.EMR_VIEW), true);
+  assert.equal(can("him", CAPS.EMR_TREAT), false);
+  assert.equal(can("him", CAPS.STAFF_ADMIN), false, "HIM is not staff.admin - hr's own grant is untouched by this role");
+  assert.equal(can("him", CAPS.BILLING_VIEW), false);
+});
+
+test("blood_bank: issues transfusions and holds nothing else clinical", () => {
+  assert.equal(can("blood_bank", CAPS.TRANSFUSION_ISSUE), true);
+  assert.equal(can("blood_bank", CAPS.EMR_VIEW), false);
+  assert.equal(can("blood_bank", CAPS.EMR_VITALS), false);
+  assert.equal(can("blood_bank", CAPS.EMR_TREAT), false);
+});
+
+test("hr's own grant is unwidened by TASK 4.13 - still no HIM_ROI, no TRANSFUSION_ISSUE", () => {
+  assert.equal(can("hr", CAPS.HIM_ROI), false);
+  assert.equal(can("hr", CAPS.TRANSFUSION_ISSUE), false);
+});

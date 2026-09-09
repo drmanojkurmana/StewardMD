@@ -51,6 +51,12 @@ export const CAPS = {
    * result is not a clinician treating a patient, and the two must not borrow each other's powers.
    * See _wardsynq/lab-result.js for what it grants and the one residual it does not close. */
   LAB_RESULT: "lab.result",         // release a result against an ordered test (laboratory)
+  // ---- TASK 4.13 (Enterprise RBAC/ABAC): two more record-custody/clinical-commitment authorities
+  // that this codebase folded into emr.treat/staff.admin, narrowed here for the same reason
+  // ORDER_VERIFY/LAB_RESULT/ORDER_DISPENSE were each split out - a distinct role must not have to
+  // borrow a broader one's power to do its own job. Least privilege, per the plan's own text.
+  HIM_ROI: "him.roi",               // decide and record a release-of-information request (HIM)
+  TRANSFUSION_ISSUE: "transfusion.issue", // crossmatch/issue/administer a transfusion (blood bank)
   // ---- ONCQIS (oncology protocol governance) caps -------------------------------------------
   // Strict role separation: authoring, clinical review, and institutional approval are DISTINCT
   // caps held by DISTINCT roles. Doctor/Nurse never hold any of these (they consume ACTIVE
@@ -143,6 +149,19 @@ export const ROLE_CAPS = {
   // vitals, NO EMR, NO billing. Exists so onboarding a nurse does not require handing someone full
   // admin (which carries every clinical and billing capability in the system).
   hr: [C.QUEUE_VIEW, C.STAFF_ADMIN, C.ANALYTICS_VIEW],
+  // ---- TASK 4.13 (Enterprise RBAC/ABAC) -----------------------------------------------------
+  // Billing (distinct from Cashier): reads charges/invoices/claims. No BILLING_CHARGE - a billing
+  // clerk who codes and reviews does not also collect payment; a site that separates the two desks
+  // now can. Composed entirely from existing caps - no new capability was needed for this one.
+  billing: [C.QUEUE_VIEW, C.ORDER_READ, C.BILLING_VIEW],
+  // HIM (Health Information Management): reads the chart to decide what may be released, and
+  // records the release decision itself via HIM_ROI. No EMR_TREAT, no billing, no queue control
+  // beyond viewing. See actor.js's HIM_ROI branch for exactly what this writes.
+  him: [C.QUEUE_VIEW, C.EMR_VIEW, C.HIM_ROI],
+  // Blood Bank: crossmatches, issues and administers a transfusion. No EMR_VIEW, no EMR_VITALS, no
+  // EMR_TREAT - see actor.js's TRANSFUSION_ISSUE branch for the narrow TransfusionEpisode-only
+  // scope this composes to, the separation migrate-transfusion.js's own header names as deferred.
+  blood_bank: [C.QUEUE_VIEW, C.TRANSFUSION_ISSUE],
   // ---- ONCQIS governance roles (oncology protocol lifecycle) --------------------------------
   // Protocol Author: create/edit DRAFT protocols + upload evidence. NO review, NO approval, NO
   // activation. Not a clinical or hospital approver.
