@@ -1,11 +1,11 @@
-/* functions/_wardsynq/ai-gateway.js — TASK 8: the model gateway for anything that touches the record.
+/* functions/_wardsynq/maik-gateway.js — TASK 8: how MaiK reaches a model when the record is involved.
  *
- * WHAT THIS IS NOT. It is not a rewrite of MaiK. StewardMD already has a large, careful AI product
- * (functions/api/ai/[[path]].js and the maik-* client files) with its own intent firewall, budgets,
- * quotas, circuit breakers and answer cache, talking to Gemini/Vertex, Groq, Cerebras and Workers
- * AI. That product answers a clinician's OWN questions and persists nothing clinical. It stays as it
- * is. This gateway is the path for AI that reads or proposes changes to the WARDSYNQ CLINICAL
- * RECORD, and it exists because that path needs three things the product path does not have:
+ * WHAT THIS IS NOT. It is not a rewrite of MaiK's existing paths. MaiK already answers a clinician's
+ * own questions through functions/api/ai/[[path]].js and the maik-* client files, with an intent
+ * firewall, budgets, quotas, circuit breakers and an answer cache, talking to Gemini/Vertex, Groq,
+ * Cerebras and Workers AI. That side persists nothing clinical and stays exactly as it is. This
+ * gateway is how MaiK reaches a model when it is reading or proposing changes to the WARDSYNQ
+ * CLINICAL RECORD, and it exists because that path needs three things the other one does not have:
  *
  *   1. A PROVIDER-NEUTRAL CONTRACT. Every caller in the existing tree hard-codes its provider and
  *      model - a route file is the de-facto shared library, and two separate PROVIDERS registries
@@ -18,7 +18,7 @@
  *      has DECLARED it may send patient data to.
  *
  *   3. AN ANSWER THAT CAN BE RECORDED. Every call returns the provider, the model and the version
- *      that actually answered, with timings, so ai-interaction.js can write down what happened.
+ *      that actually answered, with timings, so maik-interaction.js can write down what happened.
  *
  * PHI APPROVAL IS CONFIGURATION, NEVER CODE, AND THE DEFAULT IS NONE.
  *
@@ -27,7 +27,7 @@
  * source file can know, and a default of "approved" would be a piece of software deciding a
  * hospital's data-protection position on its behalf. So this ships with NOTHING approved: a
  * PHI-bearing task refuses until an administrator names the providers under
- * `wardsynq.ai.phiApproved`. A refusal is a sentence a person can act on, never a silent downgrade
+ * `wardsynq.maik.phiApproved`. A refusal is a sentence a person can act on, never a silent downgrade
  * to a provider that happens to be allowed - "route it somewhere else" is exactly how patient data
  * ends up where nobody agreed it could go.
  *
@@ -122,8 +122,8 @@ const MODELS = Object.freeze([
 
 const byId = (id) => MODELS.find((m) => m.id === str(id)) || null;
 
-/** PURE. This hospital's AI configuration, with every default fail-closed. */
-function aiConfig(config) {
+/** PURE. This hospital's MaiK configuration, with every default fail-closed. */
+function maikConfig(config) {
   const c = (config && typeof config === "object") ? config : {};
   return {
     enabled: c.enabled === true,
@@ -142,7 +142,7 @@ function aiConfig(config) {
 function looksLikePhi(context) {
   if (context == null) return false;
   if (typeof context === "object") {
-    /* A context built by ai-context.js carries its own provenance: if it names record versions, it
+    /* A context built by maik-chart-context.js carries its own provenance: if it names record versions, it
      * came out of a patient's chart and it is PHI, whatever the caller said. */
     if (Array.isArray(context.provenance) && context.provenance.length) return true;
     if (str(context.patientId)) return true;
@@ -169,8 +169,8 @@ const refuse = (code, detail) => ({ ok: false, code, detail });
  */
 function route(ctx) {
   const c = ctx || {};
-  const cfg = aiConfig(c.config);
-  if (!cfg.enabled) return refuse("ai_disabled", "AI is not enabled for this hospital. It is off unless wardsynq.ai.enabled is true: a clinical system does not acquire a model by default.");
+  const cfg = maikConfig(c.config);
+  if (!cfg.enabled) return refuse("maik_disabled", "MaiK is not enabled for this hospital. It is off unless wardsynq.maik.enabled is true: a clinical system does not acquire a model by default.");
   const task = str(c.task);
   if (!Object.values(TASK).includes(task)) return refuse("unknown_task", `"${task}" is not a task this gateway routes; a caller names a task, never a model`);
 
@@ -198,7 +198,7 @@ function route(ctx) {
     if (!candidates.length) {
       const floor = MODELS.find((m) => m.id === "wardsynq-deterministic" && m.tasks.includes(task));
       return refuse("no_phi_approved_model",
-        "this request carries patient data and this hospital has approved no model provider to receive it. Name the providers it has a data agreement with under wardsynq.ai.phiApproved. Nothing was sent."
+        "this request carries patient data and this hospital has approved no model provider to receive it. Name the providers it has a data agreement with under wardsynq.maik.phiApproved. Nothing was sent."
         + (floor ? " A deterministic assembly of what the record already says can run without any model and without sending anything anywhere; ask for \"wardsynq-deterministic\" by name if that is wanted." : ""));
     }
   }
@@ -236,7 +236,7 @@ const PROVIDERS = Object.freeze({
    * anywhere off-site because there is no off-site: the base URL is the hospital's own. */
   "local-openai": {
     generate: async (req) => {
-      const cfg = aiConfig(req.config);
+      const cfg = maikConfig(req.config);
       const url = `${String(cfg.localBaseUrl).replace(/\/+$/, "")}/chat/completions`;
       const controller = typeof AbortController === "function" ? new AbortController() : null;
       const timer = controller ? setTimeout(() => controller.abort(), cfg.timeoutMs) : null;
@@ -302,4 +302,4 @@ async function invoke(ctx) {
   };
 }
 
-export { TASK, LOCALITY, MODELS, PROVIDERS, aiConfig, looksLikePhi, route, invoke, byId };
+export { TASK, LOCALITY, MODELS, PROVIDERS, maikConfig, looksLikePhi, route, invoke, byId };

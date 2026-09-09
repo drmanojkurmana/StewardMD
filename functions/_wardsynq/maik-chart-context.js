@@ -1,16 +1,16 @@
-/* functions/_wardsynq/ai-context.js — what a model is allowed to see, and where it came from.
+/* functions/_wardsynq/maik-chart-context.js — what MaiK is allowed to see, and where it came from.
  *
  * THE RULE THIS FILE EXISTS FOR: there is no second patient model. Everything a model reads here is
  * read through the CALLER'S OWN governed RecordService session - the same reads the clinician's
  * screen makes, subject to the same scope, the same tenant, the same patient compartment. A clinician
- * who may not see a record cannot learn its contents by asking the AI about it, because the read
+ * who may not see a record cannot learn its contents by asking MaiK about it, because the read
  * fails for the AI exactly as it fails for them. Nothing is cached, mirrored or re-indexed into an
- * AI-shaped store: an AI store is a second copy of the chart with its own access rules, and the
+ * MaiK-shaped store: a second index is a second copy of the chart with its own access rules, and the
  * access rules are the entire point.
  *
  * PROVENANCE IS COLLECTED WHILE READING, NOT RECONSTRUCTED AFTER. Every row that goes into a context
- * contributes {resourceType, id, version} to a list that travels with it. That list is what makes an
- * AI answer auditable: "which facts, at which versions, was the model looking at" is answerable
+ * contributes {resourceType, id, version} to a list that travels with it. That list is what makes a
+ * MaiK answer auditable: "which facts, at which versions, was the model looking at" is answerable
  * exactly, months later, even after every one of those rows has changed. A summary whose inputs
  * cannot be named is a summary nobody can check.
  *
@@ -35,7 +35,7 @@ const str = (v) => (v == null ? "" : String(v).trim());
  *
  * wardsynq-secops.js REFUSES to hash until an implementation is supplied - deliberately, because a
  * silent fallback to a weak hash would leave everything downstream still using the word "integrity".
- * Nothing had ever supplied one, so the first document to enter an AI context would have thrown. That
+ * Nothing had ever supplied one, so the first document to enter a MaiK context would have thrown. That
  * was a real defect in this pipeline and this is the fix.
  *
  * The hash is HMAC-SHA256 via WebCrypto, which is ASYNC, and secops' seam is synchronous - it has to
@@ -65,7 +65,7 @@ async function precomputeMac(key, content) {
 useHmac((content, key) => {
   const hit = MACS.get(macKey(key, content));
   if (hit) return hit;
-  throw new Error("no precomputed HMAC for this content: ai-context.js computes them with WebCrypto before signing, and refuses to substitute anything weaker");
+  throw new Error("no precomputed HMAC for this content: maik-chart-context.js computes them with WebCrypto before signing, and refuses to substitute anything weaker");
 });
 const line = (label, value) => (str(value) ? `${label}: ${str(value)}` : null);
 
@@ -102,7 +102,7 @@ function recent(rows, n) {
 async function buildPatientContext(svc, patientId, opts) {
   const o = opts || {};
   const pid = str(patientId);
-  if (!pid) return { ok: false, error: "no_patient", detail: "an AI context is always about one identified patient" };
+  if (!pid) return { ok: false, error: "no_patient", detail: "a MaiK context is always about one identified patient" };
   const want = new Set(Array.isArray(o.sections) && o.sections.length ? o.sections.map(str) : DEFAULT_SECTIONS);
 
   const provenance = [];

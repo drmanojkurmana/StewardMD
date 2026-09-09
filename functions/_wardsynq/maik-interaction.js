@@ -1,19 +1,19 @@
-/* functions/_wardsynq/ai-interaction.js — TASK 8: every AI action, written down as a clinical fact.
+/* functions/_wardsynq/maik-interaction.js — TASK 8: every MaiK action, written down as a clinical fact.
  *
- * THE GAP THIS CLOSES. StewardMD's AI product meters tokens, caps spend, trips circuit breakers and
+ * THE GAP THIS CLOSES. MaiK meters tokens, caps spend, trips circuit breakers and
  * caches answers - and no file in it stores what a model was asked, what it saw, what it said, or
  * what a clinician then did about it. The one persistent write on the whole AI path is a routing
  * cache. So an answer that changed a decision at 03:00 leaves the same trace as one nobody read:
  * none. That is the fact this file changes.
  *
- * AN AI INTERACTION IS A GOVERNED RECORD, not a log line. It goes through RecordService like
+ * A MAIK INTERACTION IS A GOVERNED RECORD, not a log line. It goes through RecordService like
  * everything else, which is what gives it tenant isolation by construction, an append-only history,
  * an audit row on every change, and the patient compartment - an AI interaction about a patient is
  * readable by exactly the people who may read that patient. A log would have needed all four
  * inventing again, differently.
  *
  * WHAT EVERY INTERACTION CARRIES, and why each one is load-bearing:
- *   WHO ASKED and WHICH AI ACTOR would write - the human is never the author of what a model wrote.
+ *   WHO ASKED and WHICH ACTOR would write - the human is never the author of what a model wrote.
  *   MODEL, PROVIDER AND VERSION as reported by the thing that actually answered, plus whether text
  *     was GENERATED at all or merely assembled from the record.
  *   CONTEXT PROVENANCE - every {resourceType, id, version} the model was shown. Months later, after
@@ -33,7 +33,7 @@
  * it, through the same note-signing path every other note uses. AI-generated content never becomes
  * clinician-authored content by anybody's convenience.
  *
- * WHAT AN AI STILL CANNOT DO, unchanged and enforced elsewhere: sign a note, prescribe, administer,
+ * WHAT MAIK STILL CANNOT DO, unchanged and enforced elsewhere: sign a note, prescribe, administer,
  * merge patients, resolve an identity conflict, override a safety verdict, or commit anything at all.
  * wardsynq-actors.js caps KIND.AI at DRAFT inside can() itself, so an actor object that never passed
  * through the factory still cannot commit. This file relies on that ceiling; it does not re-implement
@@ -50,12 +50,12 @@ import { RecordService, NATIVE_SYSTEM } from "./service.js";
 import { AuthError, PermissionError } from "../_connect/permission.js";
 import { screenOutput } from "../../wardsynq/wardsynq-secops.js";
 import { makeActor, KIND, TIER } from "../../wardsynq/wardsynq-actors.js";
-import { TASK, invoke, aiConfig } from "./ai-gateway.js";
-import { buildPatientContext, promptFor, SECTION } from "./ai-context.js";
+import { TASK, invoke, maikConfig } from "./maik-gateway.js";
+import { buildPatientContext, promptFor, SECTION } from "./maik-chart-context.js";
 import { ClinicalNote } from "../../wardsynq/wardsynq-model.js";
 
 const str = (v) => (v == null ? "" : String(v).trim());
-const TYPE = "AIInteraction";
+const TYPE = "MaiKInteraction";
 
 /** Where a review can be. `pending` is a real state: it means nobody has looked yet. */
 const REVIEW = Object.freeze({ PENDING: "pending", ACCEPTED: "accepted", EDITED: "edited", REJECTED: "rejected" });
@@ -69,7 +69,7 @@ const INSTRUCTIONS = Object.freeze({
   [TASK.EXTRACT]: "Extract the requested structured fields from the record below. Return only fields the record actually contains; omit anything absent rather than guessing.",
 });
 
-function AIInteraction(input) {
+function MaiKInteraction(input) {
   const i = input || {};
   return {
     resourceType: TYPE, id: i.id,
@@ -96,7 +96,7 @@ function AIInteraction(input) {
     toolCalls: Array.isArray(i.toolCalls) ? i.toolCalls : [],
     review: i.review || { state: REVIEW.PENDING, by: null, at: null, reason: null, editedOutput: null },
     resultingChanges: Array.isArray(i.resultingChanges) ? i.resultingChanges : [],
-    source: { system: NATIVE_SYSTEM, sourceId: `ai-interaction:${i.id}` },
+    source: { system: NATIVE_SYSTEM, sourceId: `maik-interaction:${i.id}` },
   };
 }
 
@@ -106,7 +106,7 @@ const idFor = (patientId, at, nonce) =>
 /**
  * The actor that writes the BOOKKEEPING row, and nothing else.
  *
- * Recording that an AI was asked something is a fact about the system, not a clinical write by the
+ * Recording that MaiK was asked something is a fact about the system, not a clinical write by the
  * clinician who asked - and it must not require them to hold a write scope they do not have. A nurse
  * may ask the AI to summarise a patient she is looking after; she may not write to a chart, and
  * being able to ask must never quietly hand her a way to. So the interaction row is written by a
@@ -114,8 +114,8 @@ const idFor = (patientId, at, nonce) =>
  * data itself is still read through the CLINICIAN'S OWN session. This actor can reach no clinical
  * record at all: its read and write scope is the one bookkeeping type.
  */
-function aiRecordActor() {
-  return makeActor({ id: "service:ai-record", kind: KIND.SERVICE, tier: TIER.DRAFT,
+function maikRecordActor() {
+  return makeActor({ id: "service:maik-record", kind: KIND.SERVICE, tier: TIER.DRAFT,
     display: "AI interaction record", scope: { read: [TYPE], write: [TYPE] } });
 }
 
@@ -130,7 +130,7 @@ async function open(request, env, ctx, need) {
      * `recorder` writes only the interaction row. Neither can do the other's job. */
     const recorder = new RecordService({
       repository: ctx.recordDeps.repository, pseudonym: ctx.recordDeps.pseudonym,
-      tenant: resolved.tenant, actor: aiRecordActor(), role: "ai-record", roleSource: "wardsynq-ai",
+      tenant: resolved.tenant, actor: maikRecordActor(), role: "maik-record", roleSource: "wardsynq-maik",
     });
     return { svc, recorder, resolved };
   } catch (e) {
@@ -146,7 +146,7 @@ function writeFailure(e, extra) {
 }
 
 /**
- * Asks a model about one patient, and writes down what happened.
+ * Asks MaiK about one patient, and writes down what happened.
  * ctx: { migration, config (wardsynq.ai), patientId, task, question, sections?, actorDeps, recordDeps, providers?, signingKey? }
  *
  * Every exit from this function writes an interaction EXCEPT the ones where nothing was asked: a
@@ -160,9 +160,9 @@ async function askAboutPatient(request, env, ctx) {
   if (!mig || mig.mode === "off") return { ...base, ok: true, skipped: "off" };
 
   const task = str(ctx.task) || TASK.SUMMARISE;
-  if (!INSTRUCTIONS[task]) return { ...base, ok: false, status: 422, error: "unknown_task", detail: `"${task}" is not an AI task this ward performs` };
+  if (!INSTRUCTIONS[task]) return { ...base, ok: false, status: 422, error: "unknown_task", detail: `"${task}" is not a MaiK task this ward performs` };
   const patientId = str(ctx.patientId);
-  if (!patientId) return { ...base, ok: false, status: 422, error: "patient_required", detail: "an AI request is always about one identified patient" };
+  if (!patientId) return { ...base, ok: false, status: 422, error: "patient_required", detail: "a MaiK request is always about one identified patient" };
 
   const { svc, recorder, resolved, error } = await open(request, env, ctx, "record:read");
   if (error) return { ...base, ...error };
@@ -171,7 +171,7 @@ async function askAboutPatient(request, env, ctx) {
    * no model is called - so the AI cannot be used to learn what the chart would not show. */
   const context = await buildPatientContext(svc, patientId, {
     sections: Array.isArray(ctx.sections) && ctx.sections.length ? ctx.sections : undefined,
-    signingKey: str(ctx.signingKey) || str(env && env.WSQ_AI_CONTEXT_KEY) || "wardsynq-ai-context",
+    signingKey: str(ctx.signingKey) || str(env && env.WSQ_MAIK_CONTEXT_KEY) || "wardsynq-maik-chart-context",
   });
   if (!context.ok) return { ...base, ok: false, status: context.error === "patient_unreadable" ? 403 : 422, error: context.error, detail: context.detail };
 
@@ -182,21 +182,26 @@ async function askAboutPatient(request, env, ctx) {
     system: null, prompt: built.prompt,
     config: ctx.config, env, providers: ctx.providers, fetchImpl: ctx.fetchImpl,
   });
-  /* A REFUSAL TO ROUTE IS NOT AN AI ACTION. No model was asked, nothing was sent, and there is
+  /* A REFUSAL TO ROUTE IS NOT A MAIK ACTION. No model was asked, nothing was sent, and there is
    * nothing to record - the caller is told plainly why, which is the only useful thing here. */
-  if (!answer.ok) return { ...base, ok: false, status: answer.code === "no_phi_approved_model" || answer.code === "ai_disabled" ? 409 : 502, error: answer.code, detail: answer.detail };
+  if (!answer.ok) return { ...base, ok: false, status: answer.code === "no_phi_approved_model" || answer.code === "maik_disabled" ? 409 : 502, error: answer.code, detail: answer.detail };
 
   /* OUTPUT IS SCREENED BEFORE ANYBODY SEES IT, and withheld WHOLE if it fails. */
   const screen = screenOutput(answer.text, { patientId, nonce: built.nonce });
   const at = new Date().toISOString();
   const id = idFor(patientId, at, built.nonce);
 
-  const record = AIInteraction({
+  const record = MaiKInteraction({
     id, patientId, encounterId: str(ctx.encounterId) || null, task,
     requestedBy: resolved.actor.id, requestedAt: at,
     /* The actor that would author anything written from this answer. Named now, before any draft
-     * exists, so the record says who the author WOULD be rather than discovering it later. */
-    aiActor: `ai:${str(answer.model && answer.model.provider) || "wardsynq"}`,
+     * exists, so the record says who the author WOULD be rather than discovering it later.
+     *
+     * THE AUTHOR IS MAIK, NOT THE MODEL. `ai:maik` is stable whichever model answered - the model,
+     * provider and version live in `model` beside it, because those change under the same author.
+     * A chart that attributed one note to `ai:local-openai` and the next to `ai:some-other-provider`
+     * would look like two different authors when it is one assistant on two days. */
+    aiActor: "ai:maik",
     model: answer.model, generated: answer.generated, latencyMs: answer.latencyMs, usage: answer.usage,
     instruction: INSTRUCTIONS[task], question: str(ctx.question) || null,
     contextProvenance: context.provenance,
@@ -222,7 +227,7 @@ async function askAboutPatient(request, env, ctx) {
 }
 
 /**
- * A clinician decides what an AI answer was worth. ctx: { migration, interactionId, decision, editedOutput?, reason? }
+ * A clinician decides what a MaiK answer was worth. ctx: { migration, interactionId, decision, editedOutput?, reason? }
  *
  * ACCEPTING A DRAFTED NOTE WRITES ONE - as an AI-authored, UNSIGNED note. That is the only clinical
  * write this file performs, it is capped at DRAFT by the actor model, and it leaves the note
@@ -270,7 +275,7 @@ async function reviewInteraction(request, env, ctx) {
       noteType: "progress", sections: { text },
       /* The AI is the author. `aiDrafted` is set by the STORE for an AI actor, not by this claim -
        * it is here so the intent is legible, and it cannot be evaded by omitting it. */
-      authorId: `ai:${str(current.model && current.model.provider) || "wardsynq"}`,
+      authorId: "ai:maik",
       aiDrafted: true, signedBy: null,
     });
     try {
@@ -278,7 +283,7 @@ async function reviewInteraction(request, env, ctx) {
        * DRAFT, scoped no wider than they are, and stamped as AI provenance by the store. An edited
        * note is still an AI-authored note: a clinician's edits do not make them its author, and
        * signing is what does. */
-      const out = await svc.put(note, { origin: { kind: "ai", id: str(current.model && current.model.provider) || "wardsynq" }, activePatientId: current.patientId });
+      const out = await svc.put(note, { origin: { kind: "ai", id: "maik" }, activePatientId: current.patientId });
       resulting.push({ resourceType: "ClinicalNote", id: note.id, version: out.record.version, unsigned: true });
     } catch (e) { return { ...base, ...writeFailure(e, { detail: "the note could not be written; the review was not recorded either" }) }; }
   }
@@ -295,7 +300,7 @@ async function reviewInteraction(request, env, ctx) {
   } catch (e) { return { ...base, ...writeFailure(e) }; }
 }
 
-/** What the AI has been asked about this patient, and what became of each answer. */
+/** What MaiK has been asked about this patient, and what became of each answer. */
 async function listInteractions(request, env, ctx) {
   const mig = ctx.migration;
   const base = { mode: mig && mig.mode, tenantId: (mig && mig.tenantId) || null };
@@ -313,4 +318,4 @@ async function listInteractions(request, env, ctx) {
   return { ...base, ok: true, interactions, counts };
 }
 
-export { TYPE, REVIEW, INSTRUCTIONS, AIInteraction, idFor, askAboutPatient, reviewInteraction, listInteractions };
+export { TYPE, REVIEW, INSTRUCTIONS, MaiKInteraction, idFor, askAboutPatient, reviewInteraction, listInteractions };

@@ -367,8 +367,8 @@ const RESOURCE_TYPES = Object.freeze([
    * versions it was shown, what it said, and what a clinician then decided. A log line would have
    * needed tenant isolation, an append-only history, an audit row and the patient compartment all
    * inventing again; a record inherits them. Readable by exactly the people who may read the patient
-   * it is about, which is why patientId is on it. See ai-interaction.js. */
-  "AIInteraction",
+   * it is about, which is why patientId is on it. See maik-interaction.js. */
+  "MaiKInteraction",
 ]);
 
 const MODE = Object.freeze({ SYSTEM_OF_RECORD: "system-of-record", INTEGRATION: "integration" });
