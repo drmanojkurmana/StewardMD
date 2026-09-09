@@ -249,6 +249,7 @@ test("EMERGENCY OVERRIDE: a blocked bed is refused without a declared emergency,
   assert.equal(overridden.__status, 200, JSON.stringify(overridden));
   assert.equal(overridden.emergencyOverride.relaxation, "bed-assignment-conflict-override");
   assert.equal(overridden.emergencyOverride.overriddenState, "blocked");
+  assert.equal(overridden.emergencyOverride.activationId, declared.activationId, "the override names WHICH declaration authorised it - recovery reconciliation reads this");
 
   // Without the flag, the SAME declared emergency changes nothing - an admitting clinician must ask
   // for the override by name, never an implicit side effect of a banner being on.
@@ -304,4 +305,65 @@ test("EMERGENCY OVERRIDE also works for TRANSFER, and expires with the declarati
   await ORG_STORE.updateBed(undefined, destBed.id, { state: "cleaning" }, "actor-1");
   const secondTransfer = await as(DOCTOR, "/ward/transfer", "POST", { orgId: ORG, encounterId: adm.encounterId, ward: "Medical A", bed: "9", emergencyOverride: true });
   assert.equal(secondTransfer.__status, 409, JSON.stringify(secondTransfer), "the declaration was stood down - the same override flag no longer does anything");
+});
+
+/* Recovery reconciliation - the user's own explicit requirement: a real, computed account of every
+ * override a declaration actually authorised, not a re-entry workflow (still out of scope) but the
+ * raw material one needs. */
+test("RECONCILIATION: lists exactly the real overrides a declaration authorised, and none from another", async () => {
+  seedHospital();
+  const w = await ORG_STORE.createWard(undefined, ORG, { name: "Medical A" }, "actor-1");
+  await ORG_STORE.createBed(undefined, ORG, { wardId: w.id, name: "10", state: "blocked" }, "actor-1");
+  await ORG_STORE.createBed(undefined, ORG, { wardId: w.id, name: "11", state: "blocked" }, "actor-1");
+
+  const declared1 = await as(ADMIN, "/ward/emergency-declare", "POST", {
+    orgId: ORG, kind: "mass-casualty", reason: "First declaration, using every blocked bed available.",
+    relaxations: ["bed-assignment-conflict-override"],
+  });
+  n++;
+  const reg1 = await as(DOCTOR, "/patient/register", "POST", { orgId: ORG, name: "Reconcile Testcase " + n, mobile: "9876502" + String(n).padStart(3, "0"), gender: "female", ageYears: 30 });
+  const first = await as(DOCTOR, "/ward/admit", "POST", { orgId: ORG, mrn: reg1.mrn, ward: "Medical A", bed: "10", emergencyOverride: true });
+  assert.equal(first.__status, 200, JSON.stringify(first));
+
+  await as(ADMIN, "/ward/emergency-deactivate", "POST", { orgId: ORG, activationId: declared1.activationId, reason: "Stood down before second." });
+
+  const declared2 = await as(ADMIN, "/ward/emergency-declare", "POST", {
+    orgId: ORG, kind: "surge", reason: "Second, unrelated declaration for bed 11 only.",
+    relaxations: ["bed-assignment-conflict-override"],
+  });
+  n++;
+  const reg2 = await as(DOCTOR, "/patient/register", "POST", { orgId: ORG, name: "Reconcile Testcase " + n, mobile: "9876502" + String(n).padStart(3, "0"), gender: "female", ageYears: 30 });
+  const second = await as(DOCTOR, "/ward/admit", "POST", { orgId: ORG, mrn: reg2.mrn, ward: "Medical A", bed: "11", emergencyOverride: true });
+  assert.equal(second.__status, 200, JSON.stringify(second));
+
+  const rec1 = await as(ADMIN, "/ward/emergency-reconciliation?orgId=" + ORG + "&activationId=" + declared1.activationId);
+  assert.equal(rec1.__status, 200, JSON.stringify(rec1));
+  assert.equal(rec1.count, 1, JSON.stringify(rec1));
+  assert.equal(rec1.overrides[0].sourceId, first.encounterId, "reconciliation names the real encounter the override happened on");
+  assert.equal(rec1.overrides[0].overriddenState, "blocked");
+
+  const rec2 = await as(ADMIN, "/ward/emergency-reconciliation?orgId=" + ORG + "&activationId=" + declared2.activationId);
+  assert.equal(rec2.count, 1, JSON.stringify(rec2));
+  assert.equal(rec2.overrides[0].sourceId, second.encounterId);
+  assert.notEqual(rec2.overrides[0].sourceId, rec1.overrides[0].sourceId, "the second declaration's reconciliation does NOT include the first declaration's override");
+});
+
+test("RECONCILIATION: a declaration nobody ever used reports honestly, no override, no fabrication", async () => {
+  seedHospital();
+  const declared = await as(ADMIN, "/ward/emergency-declare", "POST", {
+    orgId: ORG, kind: "mass-casualty", reason: "Declared but the relaxation was never actually invoked.",
+    relaxations: ["bed-assignment-conflict-override"],
+  });
+  const rec = await as(ADMIN, "/ward/emergency-reconciliation?orgId=" + ORG + "&activationId=" + declared.activationId);
+  assert.equal(rec.__status, 200, JSON.stringify(rec));
+  assert.equal(rec.count, 0);
+  assert.deepEqual(rec.overrides, []);
+  assert.match(rec.note, /never (actually )?(invoked|used)/i);
+});
+
+test("RECONCILIATION: an unknown activation id is refused, not silently reported as empty", async () => {
+  seedHospital();
+  const rec = await as(ADMIN, "/ward/emergency-reconciliation?orgId=" + ORG + "&activationId=does-not-exist");
+  assert.equal(rec.__status, 404, JSON.stringify(rec));
+  assert.equal(rec.error, "activation_not_found");
 });

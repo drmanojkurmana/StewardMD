@@ -125,7 +125,13 @@ function postEvent(invoice, kind, opts) {
       throw new InvoiceRefusalError("REFUND_EXCEEDS_PAID", `at most ${alreadyRefundable} can be refunded - that is all that was paid in and not already refunded`);
     }
   }
-  invoice.events.push({ kind, amount: round2(amt), actorId, at, reason: reason || null, reference: str(o.reference) || null });
+  invoice.events.push({
+    kind, amount: round2(amt), actorId, at, reason: reason || null, reference: str(o.reference) || null,
+    // TASK 4/10 closeout: the payment-gateway adapter boundary's own honest record of the channel
+    // this event's money actually moved through - present only on payment/deposit events the caller
+    // ran through wardsynq-payment-adapter.js, never invented here.
+    ...(o.adapter ? { adapter: o.adapter } : {}),
+  });
   return invoice;
 }
 function voidInvoice(invoice, { actorId, at, reason }) {
@@ -172,6 +178,7 @@ function receiptFor(invoice, eventIndex) {
     invoiceId: invoice.id, patientId: invoice.patientId, encounterId: invoice.encounterId,
     kind: ev.kind, amount: ev.amount, currency: invoice.currency,
     actorId: ev.actorId, at: ev.at, reason: ev.reason || null, reference: ev.reference || null,
+    adapter: ev.adapter || null,
   };
 }
 /** PURE. Every receiptable event on this invoice, in order. */

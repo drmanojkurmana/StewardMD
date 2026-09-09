@@ -26,7 +26,7 @@ function summary() {
   var discounted = INVOICE.events.filter(function (e) { return e.kind === "discount"; }).reduce(function (n, e) { return n + e.amount; }, 0);
   var balance = Math.round((charged - paidIn - discounted + refundedOut) * 100) / 100;
   var receipts = INVOICE.events.map(function (e, i) { return { e: e, i: i }; }).filter(function (x) { return ["deposit", "payment", "refund"].indexOf(x.e.kind) >= 0; })
-    .map(function (x) { return { receiptNumber: INVOICE.id + "-" + x.i, kind: x.e.kind, amount: x.e.amount, currency: INVOICE.currency, at: x.e.at }; });
+    .map(function (x) { return { receiptNumber: INVOICE.id + "-" + x.i, kind: x.e.kind, amount: x.e.amount, currency: INVOICE.currency, at: x.e.at, adapter: x.e.adapter || null }; });
   return { invoiceId: INVOICE.id, patientId: INVOICE.patientId, currency: INVOICE.currency, lines: INVOICE.lines, events: INVOICE.events,
     charged: charged, paidIn: paidIn, refundedOut: refundedOut, discounted: discounted, adjusted: 0, writtenOff: 0,
     balance: balance, creditBalance: balance < 0 ? -balance : 0, status: balance <= 0 ? "paid" : "open", void: false, receipts: receipts };
@@ -45,7 +45,7 @@ window.fetch = function (url, opts) {
   if (u.indexOf("/patient/get") >= 0) return reply({ ok: true, patient: { name: "Cashier Testcase", mrn: "SMD-H1-CASH01" } });
 
   if (u.indexOf("/ward/invoice-payment") >= 0 && (opts && opts.method) === "POST") {
-    INVOICE.events.push({ kind: "payment", amount: body.amount, actorId: "cfa:cashier", at: "2026-09-09T10:00:00.000Z", reference: null, reason: null });
+    INVOICE.events.push({ kind: "payment", amount: body.amount, actorId: "cfa:cashier", at: "2026-09-09T10:00:00.000Z", reference: null, reason: null, adapter: { state: "not_configured" } });
     return reply(Object.assign({ ok: true, written: 1 }, summary()));
   }
   if (u.indexOf("/ward/invoice-deposit") >= 0 && (opts && opts.method) === "POST") {

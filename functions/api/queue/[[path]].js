@@ -94,7 +94,7 @@ import { giveHandover, receiveHandover, listHandovers } from "../../_wardsynq/ha
 import { verifyOrder, verificationQueue } from "../../_wardsynq/pharmacy-verify.js";
 import { dispenseOrder, returnDispense, listDispenses } from "../../_wardsynq/pharmacy-dispense.js";
 import { declareBreakGlass, openEmergencyChart, listBreakGlass } from "../../_wardsynq/break-glass.js";
-import { declareEmergency, deactivateEmergency, emergencyStatus, emergencyLog } from "../../_wardsynq/emergency-mode.js";
+import { declareEmergency, deactivateEmergency, emergencyStatus, emergencyLog, emergencyReconciliation } from "../../_wardsynq/emergency-mode.js";
 import { operationOutcome } from "../../_wardsynq/fhir.js";
 import { dispatchRead, dispatchOperation } from "../../_wardsynq/fhir-route.js";
 import { ingestFhir, listExceptions, resolveException, inboundEnabled } from "../../_wardsynq/fhir-inbound.js";
@@ -621,6 +621,7 @@ export async function onRequest(context) {
         // cosign-queue already use, so most clinical roles see a live emergency banner.
         "emergency-declare": CAPS.EMERGENCY_DECLARE, "emergency-deactivate": CAPS.EMERGENCY_DECLARE,
         "emergency-status": CAPS.EMR_VIEW, "emergency-log": CAPS.EMR_VIEW,
+        "emergency-reconciliation": CAPS.EMERGENCY_DECLARE,
         /* The FHIR export. emr.view because it renders the chart: exporting a record is reading it,
          * and an export door that was easier to open than the chart itself would be the way around
          * every other control on this file. The record service still applies the actor's own read
@@ -1807,6 +1808,10 @@ export async function onRequest(context) {
       }
       if (sub === "emergency-log" && method === "GET") {
         const r = await emergencyLog(request, env, { ...deps, activeOnly: url.searchParams.get("active") === "1" });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "emergency-reconciliation" && method === "GET") {
+        const r = await emergencyReconciliation(request, env, { ...deps, activationId: url.searchParams.get("activationId") || "" });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "verify-order" && method === "POST") {

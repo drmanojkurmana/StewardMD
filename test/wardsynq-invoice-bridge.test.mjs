@@ -153,11 +153,15 @@ test("CASHIER: deposit, payment, refund and reconciliation - every event traceab
   const deposit = await as(CASHIER, "/ward/invoice-deposit", "POST", { orgId: ORG, invoiceId, amount: 5 });
   assert.equal(deposit.__status, 200, JSON.stringify(deposit));
   assert.equal(deposit.balance, 7);
+  // The payment-gateway adapter boundary: no live gateway is configured anywhere in this codebase,
+  // so this is honestly "not_configured" - never claimed as a live capture that never happened.
+  assert.equal(deposit.receipts[deposit.receipts.length - 1].adapter.state, "not_configured", JSON.stringify(deposit.receipts));
 
   const payment = await as(CASHIER, "/ward/invoice-payment", "POST", { orgId: ORG, invoiceId, amount: 7 });
   assert.equal(payment.__status, 200, JSON.stringify(payment));
   assert.equal(payment.balance, 0);
   assert.equal(payment.status, "paid");
+  assert.equal(payment.receipts[payment.receipts.length - 1].adapter.state, "not_configured");
 
   const overRefund = await as(CASHIER, "/ward/invoice-refund", "POST", { orgId: ORG, invoiceId, amount: 100, reason: "test" });
   assert.equal(overRefund.__status, 409, JSON.stringify(overRefund));

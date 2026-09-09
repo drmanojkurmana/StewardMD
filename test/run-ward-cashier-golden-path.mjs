@@ -62,6 +62,7 @@ try {
   ok(await waitFor(`return document.body.lastElementChild.textContent.indexOf('Receipts') >= 0;`), "a real receipt appears after a real payment");
   ok(await ev(`return document.body.lastElementChild.textContent.indexOf('wsq-invoice-smd-h1-cash01-1-1') >= 0;`), "the receipt names the real ledger event it presents");
   ok(await ev(`return document.querySelector('.w-st.paid') && document.querySelector('.w-st.paid').textContent === 'Paid';`), "the invoice reads as Paid once the balance is real zero");
+  ok(await ev(`return document.body.lastElementChild.textContent.indexOf('not_configured') >= 0;`), "the receipt honestly shows the payment-gateway adapter state - no live gateway, never claimed as one");
 
   // An over-refund is refused verbatim.
   await fill("wCashAmount", "600"); await fill("wCashReason", "test");
