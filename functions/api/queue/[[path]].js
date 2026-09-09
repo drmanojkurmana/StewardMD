@@ -1238,7 +1238,7 @@ export async function onRequest(context) {
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "source-grant" && method === "POST") {
-        const r = await grantSourceSystem(request, env, { ...deps, actorId: body.actorId, sourceSystem: body.sourceSystem, note: body.note, idempotencyKey: body.idempotencyKey || null });
+        const r = await grantSourceSystem(request, env, { ...deps, actorId: body.actorId, sourceSystem: body.sourceSystem, note: body.note, expiresAt: body.expiresAt, idempotencyKey: body.idempotencyKey || null });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "source-revoke" && method === "POST") {

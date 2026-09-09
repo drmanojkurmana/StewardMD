@@ -177,6 +177,11 @@ function SourceSystemGrant(input) {
     actorId: i.actorId, sourceSystem: i.sourceSystem,
     active: i.active !== false,
     grantedBy: i.grantedBy, grantedAt: i.grantedAt,
+    /* TASK 7.15 (credential expiry). A partner's authority to push may be time-bounded, and when
+     * the clock passes it the feed stops - without anybody having to remember to revoke it. Absent
+     * means open-ended, which is what every grant issued before this field existed was. Expiry is
+     * COMPUTED against the clock on every message, never stored as a state that could go stale. */
+    expiresAt: i.expiresAt || null,
     revokedBy: i.revokedBy || null, revokedAt: i.revokedAt || null,
     note: i.note || null,
     source: { system: NATIVE_SYSTEM, sourceId: `source-grant:${i.id}` },
@@ -209,14 +214,26 @@ async function authorizedSourceSystem(svc, resolved, headerValue, bodyClaimRaw) 
   }
 
   let grants;
+  /* TASK 7.15: the record being DOWN is not the same as this feed being unauthorized, and a sender
+   * told "forbidden" during an outage would stop trying forever. 503 + the plain statement that
+   * nothing was written is what lets it retry safely - the content digest makes that retry land
+   * exactly once. */
   try { grants = await svc.list(GRANT_TYPE, 500); }
-  catch (e) { return { error: { status: 502, code: "record_read_failed", detail: str(e && e.message) } }; }
+  catch (e) { return { error: { status: 503, retryable: true, code: "record_read_failed", detail: `the record could not be read to check this feed's authorization (${str(e && e.message) || "unavailable"}); NOTHING was written, and this message may be sent again` } }; }
   // Tenant isolation needs no check of its own here: svc.list() only ever reads THIS tenant's own
   // store (TenantBackend), so a grant issued under a different tenant is not merely denied, it is
   // structurally never returned - there is nothing cross-tenant to compare against.
   const grant = (grants || []).find((g) => g && g.actorId === resolved.actor.id && g.sourceSystem === claimed && g.active !== false);
   if (!grant) {
     return { error: { status: 403, code: "source_unauthorized", detail: `${resolved.actor.id} is not registered to push data as "${claimed}" for this hospital - an administrator must grant it before this feed can be accepted` } };
+  }
+  /* TASK 7.15: an EXPIRED credential is refused as distinctly as a revoked one - the two mean
+   * different things to whoever reads the refusal (one lapsed, one was withdrawn), and a feed told
+   * only "unauthorized" cannot tell whether to renew or to ask why. Never a grace period: a
+   * credential that has expired has expired. */
+  const expiry = Date.parse(str(grant.expiresAt));
+  if (Number.isFinite(expiry) && expiry <= Date.now()) {
+    return { error: { status: 403, code: "source_expired", detail: `the authorization for "${claimed}" expired at ${str(grant.expiresAt)}; it has lapsed rather than been withdrawn, and an administrator must renew it before this feed is accepted again` } };
   }
   // The GRANT's own value is what gets used downstream, never the raw claim re-slugged - belt and
   // braces against a header/grant that happen to normalise the same but aren't literally the same.
@@ -251,7 +268,9 @@ async function grantSourceSystem(request, env, ctx) {
    * chain behind it. */
   let current = null;
   try { current = await svc.get(GRANT_TYPE, id); } catch { current = null; }
-  const grant = SourceSystemGrant({ id, actorId, sourceSystem: system, active: true, grantedBy: resolved.actor.id, grantedAt: new Date().toISOString(), note: ctx.note || null });
+  const expiresAt = str(ctx.expiresAt) || null;
+  if (expiresAt && !Number.isFinite(Date.parse(expiresAt))) return { ...base, ok: false, status: 422, error: "bad_expiry", detail: "expiresAt must be a real timestamp", written: 0 };
+  const grant = SourceSystemGrant({ id, actorId, sourceSystem: system, active: true, expiresAt, grantedBy: resolved.actor.id, grantedAt: new Date().toISOString(), note: ctx.note || null });
   try {
     const out = await svc.put(grant, { expectedVersion: current ? current.version : undefined, idempotencyKey: ctx.idempotencyKey || null });
     return { ...base, ok: true, written: 1, restored: !!(current && current.active === false), grant: { ...grant, version: out.record.version } };
@@ -692,7 +711,10 @@ async function ingestFhir(request, env, ctx) {
   const { svc: authSvc, resolved: authResolved, error: authError } = await openIngest(request, env, ctx);
   if (authError) return { ok: false, ...authError };
   const src = await authorizedSourceSystem(authSvc, authResolved, ctx.sourceSystem, bodySourceOf(ctx.body));
-  if (src.error) return { ok: false, status: src.error.status, outcome: operationOutcome("error", src.error.status === 403 ? "forbidden" : "invalid", src.error.detail) };
+  if (src.error) {
+    const code = src.error.status === 403 ? "forbidden" : src.error.retryable ? "transient" : "invalid";
+    return { ok: false, status: src.error.status, retryable: !!src.error.retryable, outcome: operationOutcome("error", code, src.error.detail) };
+  }
   const system = src.system;
   const adapterSystem = `fhir-${system}`;
 
@@ -740,7 +762,18 @@ async function ingestFhir(request, env, ctx) {
   }
   sccm.meta.sourceConnector = adapterSystem;
 
-  return landBundle(request, env, { ...ctx, svc, resolved, sccm, system, adapterSystem, patient, problems, requests, bundleType, atomic, protocol: "fhir" });
+  /* TASK 7.15 (WardSynQ's own outage). landBundle reads the record before it writes, and a
+   * repository that is down THROWS - which reached the sender as a 500 and, worse, as nothing it
+   * could act on. The HL7 door has always caught this and answered with an AE ACK; the FHIR door
+   * did not. A 503 saying plainly that NOTHING was written and the message may be re-sent is the
+   * truthful answer: the content-digest idempotency below means a re-send after a real partial
+   * failure still lands exactly once. */
+  try {
+    return await landBundle(request, env, { ...ctx, svc, resolved, sccm, system, adapterSystem, patient, problems, requests, bundleType, atomic, protocol: "fhir" });
+  } catch (e) {
+    return { ok: false, status: 503, retryable: true, outcome: operationOutcome("error", "transient",
+      `the record could not be read or written to file this message (${str(e && e.message) || "unavailable"}); NOTHING was written, and this message may be sent again - a re-send of an identical message lands once`) };
+  }
 }
 
 /**
@@ -1012,6 +1045,7 @@ async function landBundle(request, env, ctx) {
   }
 
   const written = [];
+  const transientFailures = [];   // TASK 7.15: writes that failed for a reason a retry could fix
   const ordered = [...writable].sort(byDependency);
   const describe = (e, rec) => {
     const { _currentVersion, _acceptedOver, ...entity } = e;
@@ -1041,10 +1075,35 @@ async function landBundle(request, env, ctx) {
         const saved = await ingest.put(adapterActor, entity);
         entries.push(describe(e, saved && saved.record ? saved.record : (saved || entity)));
       } catch (err) {
-        const code = err instanceof GovernanceError ? "forbidden" : "exception";
-        entries.push({ response: { status: err instanceof GovernanceError ? "403 Forbidden" : "500 Internal Server Error", outcome: operationOutcome("error", code, `${entity.resourceType}/${entity.id}: ${str(err && err.message)}`) } });
+        const governance = err instanceof GovernanceError;
+        const code = governance ? "forbidden" : "exception";
+        if (!governance) transientFailures.push({ ref: `${FHIR_TYPE[entity.resourceType] || entity.resourceType}/${entity.id}`, detail: str(err && err.message) });
+        entries.push({ response: { status: governance ? "403 Forbidden" : "500 Internal Server Error", outcome: operationOutcome("error", code, `${entity.resourceType}/${entity.id}: ${str(err && err.message)}`) } });
       }
     }
+  }
+
+  /* TASK 7.15. A TRANSIENT write failure used to be answered 200: the bundle carried a "500" inside
+   * one entry, and the HTTP status - the only thing most senders check - said the message was fine.
+   * Worse, the idempotency key lands with the FIRST entity that writes (service.js's
+   * governedForIngest), so re-sending the identical message afterwards is recognised as a REPLAY and
+   * the entries that never landed are lost for good, silently.
+   *
+   * So: a transient failure is a 5xx, and the answer names exactly what landed, what did not, and
+   * the one thing the sender must do differently - re-send the FAILED resources, not the whole
+   * message, because the whole message is now a replay. Nothing here retries on the sender's behalf:
+   * an inbound door cannot know when the sender is ready, and inventing a retry it does not control
+   * is how a queue silently doubles a chart. */
+  if (transientFailures.length) {
+    const landed = written.map((w) => `${FHIR_TYPE[w.resourceType] || w.resourceType}/${w.id}`);
+    return { ok: false, status: 503, retryable: true, written, transientFailures,
+      outcome: { resourceType: "OperationOutcome", issue: [
+        { severity: "error", code: "transient", diagnostics: `${transientFailures.length} of ${ordered.length} resource(s) could not be written: ${transientFailures.map((f) => `${f.ref} (${f.detail})`).join("; ")}` },
+        ...(landed.length ? [{ severity: "information", code: "informational", diagnostics: `these DID land and are on the chart: ${landed.join(", ")}` }] : [{ severity: "information", code: "informational", diagnostics: "nothing from this message landed" }]),
+        { severity: "information", code: "informational", diagnostics: landed.length
+          ? "re-send ONLY the resources named as failed. Re-sending this whole message again would be recognised as a replay of the part that already landed, and the failed resources would not be written."
+          : "this message may be sent again unchanged; nothing from it landed." },
+      ] } };
   }
 
   const status = ctx.mode === "create" ? (written.length ? 201 : (preconditions.some((p) => /^200/.test(p.status)) ? 200 : (conflicts.length ? 409 : (preconditionStatus || 422))))
