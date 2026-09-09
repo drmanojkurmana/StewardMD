@@ -1,0 +1,45 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>WardSynQ TASK 4.4: patient flow command center golden path harness</title>
+<link rel="stylesheet" href="../ward.css">
+<style>html,body{margin:0;height:100%}</style>
+</head><body>
+<script>
+/* The REAL ward.js driven through the patient-flow golden path (ward list -> Patient flow button
+ * -> ED/beds/admissions/discharge/transfers/bottlenecks, verbatim from the server) against an
+ * in-memory stub server whose response shape is confirmed against
+ * functions/_wardsynq/patient-flow.js and the route-level proof in
+ * test/wardsynq-patient-flow.test.mjs, which proves every number against a real record for real.
+ * This proves the CLIENT half; it is not a live server. */
+window.__calls = [];
+localStorage.setItem("smd_opd_staff_tok", "harness-token");
+
+var FLOW = {
+  computedAt: "2026-09-09T10:00:00.000Z",
+  ed: { arrivals: 3, untriaged: 1 },
+  admissionsPending: { waiting: 2, longestWaitHours: 5 },
+  beds: { occupied: 4, unplacedPatients: 1, wardsKnown: 1, states: { available: 2, reserved: 0, occupied: 4, blocked: 1, cleaning: 1, maintenance: 0 } },
+  dischargeCandidates: 1,
+  staysWithOpenItems: [{ encounterId: "enc-1", patientId: "pat-1", ward: "Medical A", bed: "3", lengthOfStayDays: 2, openItems: 2 }],
+  recentTransfers: [{ encounterId: "enc-2", ward: "Medical B", movedFrom: { ward: "Medical A", bed: "1" }, movedAt: "2026-09-09T08:00:00.000Z", moveReason: "Stepped down" }],
+  bottlenecks: [{ kind: "beds_blocked", count: 1 }, { kind: "ed_untriaged", count: 1 }, { kind: "stays_with_open_items", count: 1 }],
+};
+
+window.fetch = function (url, opts) {
+  var u = String(url), body = null;
+  try { body = opts && opts.body ? JSON.parse(opts.body) : null; } catch (e) {}
+  window.__calls.push({ url: u, method: (opts && opts.method) || "GET", body: body });
+  var reply = function (obj) { return Promise.resolve({ ok: true, status: 200, json: function () { return Promise.resolve(obj); } }); };
+
+  if (u.indexOf("/ward/list") >= 0) return reply({ ok: true, patients: [] });
+  if (u.indexOf("/ward/beds") >= 0) return reply({ ok: true, wards: [] });
+  if (u.indexOf("/ward/patient-flow") >= 0) return reply({ ok: true, flow: FLOW });
+
+  return reply({ ok: true });
+};
+</script>
+<script src="../ward.js"></script>
+<script>
+window.__ready = !!(window.WARD && window.WARD.open);
+</script>
+</body></html>
