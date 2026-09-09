@@ -1627,6 +1627,56 @@
       ) : '<p class="w-empty" style="padding:0 16px">Pick a study above to protocol or report it.</p>');
   }
 
+  /* TASK 8.9: MaiK's words about the verdict the engine computed, rendered under it and never
+   * beside it as an equal. Three things stay three things on the screen: the FINDINGS above (the
+   * engine's, authoritative), this EXPLANATION (MaiK's, never authoritative), and what the clinician
+   * then does (a separate act, on a separate record). A refusal is shown verbatim - a fail-closed
+   * safety check that renders as a blank panel reads as "nothing wrong", which is the error this
+   * whole path exists to prevent. */
+  function maikExplainBlock(state, pickedOrder) {
+    var ex = (state.pharmacy && state.pharmacy.explain) || null;
+    if (!ex || ex.orderId !== pickedOrder.orderId) {
+      return '<div class="w-maik-acts"><button class="w-btn ghost" data-w-act="maikexplain">' + ms("neurology") +
+        "Ask MaiK to explain this verdict</button></div>";
+    }
+    if (ex.busy) return '<p class="w-empty">Asking MaiK&hellip;</p>';
+    /* A REFUSAL IS SHOWN VERBATIM. The server's own sentence is the one that says which check did not
+     * run; flattening it to "unavailable" is how a fail-closed safety check comes to read as a clean
+     * one on a screen. */
+    if (ex.err) {
+      return '<div class="w-sub"><h4>' + ms("neurology") + "MaiK did not explain this</h4>" +
+        '<p class="w-hint warn">' + ms("block") + esc(ex.err) + "</p>" +
+        '<div class="w-maik-acts"><button class="w-btn ghost" data-w-act="maikexplain">' + ms("refresh") + "Try again</button></div></div>";
+    }
+    var i = ex.interaction || {};
+    var m = i.model || {};
+    var reviewed = i.review && i.review.state && i.review.state !== "pending";
+    var body = ex.explanation
+      ? '<div class="w-maik-out">' + esc(ex.explanation).replace(/\n/g, "<br>") + "</div>"
+      : '<p class="w-hint warn">' + ms("block") + "MaiK's answer was withheld before anybody saw it" +
+        (ex.withheld && ex.withheld.violations && ex.withheld.violations.length ? " (" + esc(ex.withheld.violations.join(", ")) + ")" : "") +
+        ". The findings above are the deterministic engine's own and are unaffected.</p>";
+
+    return '<div class="w-sub"><h4>' + ms("neurology") + "MaiK explains the findings above</h4>" +
+      body +
+      '<ul class="w-maik-prov">' +
+      "<li>" + ms("health_and_safety") + "<span>MaiK computed none of this. The findings above are the deterministic safety engine's, on rule pack " +
+        esc((ex.deterministic && ex.deterministic.rulePackVersion) || "unknown") + "." +
+        (ex.deterministic && ex.deterministic.unapproved ? " That content is unapproved and does not gate this order." : "") + "</span></li>" +
+      "<li>" + ms("smart_toy") + "<span>" + esc(m.model || "unknown model") +
+        (m.version ? " &middot; " + esc(m.version) : "") + "</span></li>" +
+      "<li>" + ms("gavel") + "<span>Reading or rejecting these words overrides nothing. Overriding a finding is a separate act, with its own reason, on the override record.</span></li>" +
+      "</ul>" +
+      (reviewed
+        ? '<p class="w-hint">' + ms("task_alt") + esc(i.review.state.charAt(0).toUpperCase() + i.review.state.slice(1)) +
+          " by " + esc(i.review.by || "") + (i.review.reason ? " &middot; " + esc(i.review.reason) : "") + " &middot; no finding changed.</p>"
+        : (ex.explanation ? '<div class="w-maik-acts">' +
+          '<button class="w-btn ghost" data-w-act="maikexplainreview:accepted">' + ms("thumb_up") + "Helpful</button>" +
+          '<button class="w-btn ghost" data-w-act="maikexplainreview:rejected">' + ms("thumb_down") + "Not helpful</button>" +
+          "</div>" : "")) +
+      "</div>";
+  }
+
   /* TASK 3.3: the pharmacist's own verification queue - not a reuse of the doctor's ordering view.
    * Every row carries the SAME safety-engine verdict the bedside eMAR runs (never a second engine,
    * never silently skipped - a rule pack that fails to load reads as a NOT_CHECKED_* warning, never
@@ -1687,7 +1737,11 @@
           }).join("") + "</ul>" : "") +
           (!(safety.blocks && safety.blocks.length) && !(safety.warnings && safety.warnings.length) ? '<p class="w-empty">The safety engine reports nothing against this order.</p>' : "")
         ) : '<p class="w-empty">Loading&hellip;</p>') +
-        '<p class="w-hint">' + ms("info") + "This is decision support, not a block: the pharmacist's own judgement decides the outcome." + "</p></div>" +
+        '<p class="w-hint">' + ms("info") + "This is decision support, not a block: the pharmacist's own judgement decides the outcome." + "</p>" +
+        /* TASK 8.9: MaiK explains the verdict ABOVE, inside the card that already shows it. There is
+         * deliberately no second CDS screen: the findings a clinician acts on are the engine's, and
+         * putting MaiK anywhere else would create a rival place to read them. */
+        maikExplainBlock(state, pickedOrder) + "</div>" +
 
         '<div class="w-card"><div class="w-card-h">' + ms("fact_check") + "<h3>Verify</h3></div>" +
         '<label class="w-f"><span>Query reason (required if querying)</span><input id="wPhReason" type="text" autocomplete="off"></label>' +
@@ -3247,6 +3301,7 @@
   function loadPharmacy() {
     var s = st.sel; if (!s) return Promise.resolve();
     if (!st.pharmacy) st.pharmacy = {};
+    st.pharmacy.explain = null;
     return Promise.all([
       apiGet("/ward/verification-queue?orgId=" + encodeURIComponent(st.orgId) + "&patientId=" + encodeURIComponent(s.patientId)),
       apiGet("/ward/dispenses?orgId=" + encodeURIComponent(st.orgId) + "&patientId=" + encodeURIComponent(s.patientId)),
@@ -3259,6 +3314,9 @@
   function pharmacyPick(orderId) {
     if (!st.pharmacy) st.pharmacy = {};
     st.pharmacy.pickedOrderId = orderId;
+    /* An explanation is about ONE order. Picking another must not leave the previous order's words
+     * sitting under a different drug's findings. */
+    st.pharmacy.explain = null;
     paint();
   }
   function pharmacyVerify(outcome) {
@@ -3287,6 +3345,32 @@
         if (settle(r, msg)) loadPharmacy(); else paint();
       })
       .catch(function () { st.busy = false; st.err = "Could not record the dispense."; paint(); });
+  }
+  /* TASK 8.9. The order is the one PICKED on this screen, so an explanation can only ever be about
+   * the verdict the pharmacist is looking at. A refusal is kept verbatim rather than flattened: the
+   * server's own sentence is the one that says which check did not run. */
+  function maikExplainVerdict() {
+    var picked = st.pharmacy && st.pharmacy.pickedOrderId; if (!picked) return;
+    st.pharmacy.explain = { orderId: picked, busy: true, err: "" }; paint();
+    apiPost("/ward/maik-explain-safety", { orgId: st.orgId, orderId: picked })
+      .then(function (r) {
+        if (!r || r.ok !== true) {
+          st.pharmacy.explain = { orderId: picked, busy: false, err: (r && (r.detail || r.error)) || "MaiK could not be reached." };
+        } else {
+          st.pharmacy.explain = { orderId: picked, busy: false, err: "", explanation: r.explanation,
+            deterministic: r.deterministic, withheld: r.withheld, note: r.note, interaction: r.interaction };
+        }
+        paint();
+      })
+      .catch(function () { st.pharmacy.explain = { orderId: picked, busy: false, err: "MaiK could not be reached." }; paint(); });
+  }
+  function maikExplainReview(decision) {
+    var ex = st.pharmacy && st.pharmacy.explain, i = ex && ex.interaction; if (!i) return;
+    var reason = decision === "rejected" ? window.prompt("Why was this explanation not helpful?") : "";
+    if (decision === "rejected" && !String(reason || "").trim()) { st.err = "A rejection needs a reason."; paint(); return; }
+    apiPost("/ward/maik-review", { orgId: st.orgId, interactionId: i.id, decision: decision, reason: reason || undefined })
+      .then(function (r) { if (r && r.ok && r.interaction) ex.interaction = r.interaction; paint(); })
+      .catch(function () { st.err = "Could not record that."; paint(); });
   }
   function inventoryOpen() {
     st.view = "inventory"; st.inventory = null; paint(); loadInventory();
@@ -4635,6 +4719,8 @@
     if (cmd === "pharmacyload") { loadPharmacy(); return; }
     if (cmd === "phpick") { pharmacyPick(arg); return; }
     if (cmd === "phverify") { pharmacyVerify("verified"); return; }
+    if (cmd === "maikexplain") { maikExplainVerdict(); return; }
+    if (cmd === "maikexplainreview") { maikExplainReview(arg); return; }
     if (cmd === "phquery") { pharmacyVerify("queried"); return; }
     if (cmd === "phdispense") { pharmacyDispense(); return; }
     if (cmd === "edarrivalopen") { st.edArrivalOpen = true; st.edMrnLookup = null; st.edMrnLookupErr = ""; paint(); return; }

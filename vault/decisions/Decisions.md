@@ -4987,3 +4987,41 @@ exceptions again. Owner may veto.
 
 **Also found by the new validator, fixed at the FHIR boundary:** a DiagnosticReport with no observations
 exported `result: []` (R4 ele-1 forbids an empty element); now omitted.
+
+
+## 2026-09-09 — MaiK CDS (TASK 8.9): MaiK explains the SafetyEngine's verdict, and is never a second rules engine
+
+**Decision.** `functions/_wardsynq/maik-cds.js` calls the existing deterministic `SafetyEngine` from
+`wardsynq/wardsynq-safety.js`, on the SAME compiled pack `getRulePack()` hands the prescribing and pharmacy
+paths, and passes the FINISHED verdict to the model. MaiK cannot re-run a check, add or remove a finding, or
+change a severity or disposition. The route returns three named things a reader must never merge:
+`deterministic` (the engine's findings, verbatim, with its rule-pack version and `unapproved: true`),
+`explanation` (MaiK's words, never authoritative) and `decision` (what the clinician did, carrying
+`overridesNothing: true` — overriding a finding stays a separate act on a `SafetyOverride`).
+
+**It fails closed.** No pack, an engine that throws, or a drug the content cannot resolve produces a REFUSAL
+(503 `safety_engine_unavailable` / 409 `not_checked`) naming which check did not run, and no model is called
+at all. The refusal text says "Nothing here means the order is safe; it means it was not checked", because
+calm prose about a drug reads as "checked, clean" to a clinician. `test/wardsynq-maik-cds.test.mjs` proves the
+guard is load-bearing: removing it makes the suite fail.
+
+**And it screens MaiK against the verdict it was handed.** A model given three blocking findings will still
+emit "no significant concerns" — it is trained to reassure. `contradictions()` withholds the text WHOLE when
+it reassures over existing findings, or claims a check ran that the engine said could not. This catches the
+reassuring contradictions, not all of them, and it is stated as such in the file.
+
+**UX: one CDS surface.** The explanation renders INSIDE the existing "Safety verdict" card in `pharmacyView`,
+underneath the engine's findings. There is deliberately no second CDS screen — a rival place to read findings
+is a place the two eventually disagree. Picking another order clears the explanation; MaiK being withheld,
+refused or switched off never removes the deterministic card.
+
+**Bug found on the way (`wardsynq/wardsynq-secops.js`).** The patient-boundary output screen captured the tail
+after an optional separator, so the ordinary English word "patient" matched as "pat" + "ient" and EVERY model
+output containing it was withheld as a cross-patient leak. Being fail-safe, it was invisible until MaiK needed
+to say the word. The identifier is now matched WHOLE and must contain a digit — which also fixes the opposite
+error, that "pat-1" was never detected at all (a one-character tail failed the two-character minimum).
+Regression tests both ways in `test/wardsynq-secops.test.mjs`.
+
+**NOT claimed.** No clinical validation, no certification, no real-device or production verification. The
+rule-pack content remains unapproved seed data and does not gate an order; every response says so.
+

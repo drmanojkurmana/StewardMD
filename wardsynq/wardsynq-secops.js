@@ -249,10 +249,18 @@ function screenOutput(output, { patientId, allowedPatientIds, nonce } = {}) {
     violations.push({ id: "fence-echo", why: "the response echoes the request fence, which either leaks the isolation scheme or indicates the model was instructed to reproduce it" });
   }
 
-  // The patient-boundary check: an answer about somebody who is not the patient in context.
+  /* The patient-boundary check: an answer about somebody who is not the patient in context.
+   *
+   * The identifier is matched WHOLE ("pat-77", "MRN 4412"), not as a prefix plus a tail, and it must
+   * contain a digit. The earlier form captured the tail after an optional separator, so the ordinary
+   * English word "patient" matched as "pat" + "ient" and EVERY output containing it was withheld as a
+   * cross-patient leak - which is both wrong and, being fail-safe, invisible until something needed
+   * to say "patient". Requiring a digit also tightens the check: "pat-1" was previously missed
+   * entirely, because a one-character tail failed the two-character minimum. */
   const allowed = new Set([patientId, ...(allowedPatientIds || [])].filter(Boolean));
-  const mentioned = [...text.matchAll(/\b(?:pat|patient|MRN)[-:\s]?([A-Za-z0-9]{2,})\b/gi)].map((m) => m[1]);
-  const foreign = [...new Set(mentioned.filter((m) => allowed.size && ![...allowed].some((a) => String(a).toLowerCase().includes(String(m).toLowerCase()) || String(m).toLowerCase().includes(String(a).toLowerCase()))))];
+  const norm = (v) => String(v).toLowerCase().replace(/[^a-z0-9]/g, "");
+  const mentioned = [...text.matchAll(/\b((?:pat|patient|mrn)[-:_ ]?[A-Za-z0-9]*\d[A-Za-z0-9]*)\b/gi)].map((m) => norm(m[1]));
+  const foreign = [...new Set(mentioned.filter((m) => allowed.size && ![...allowed].some((a) => norm(a).includes(m) || m.includes(norm(a)))))];
   if (foreign.length) {
     violations.push({ id: "patient-boundary", why: `names ${foreign.length} identifier${foreign.length > 1 ? "s" : ""} outside the patient in context: ${foreign.join(", ")}` });
   }

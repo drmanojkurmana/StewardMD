@@ -109,6 +109,11 @@ function MaiKInteraction(input) {
      * will become one - "preview the resulting clinical change" is the difference between reviewing
      * an answer and reviewing a WRITE. Null when accepting this task writes nothing at all. */
     preview: i.preview || null,
+    /* TASK 8.9: WHICH DETERMINISTIC SAFETY RESULT THIS WAS ABOUT, when it was about one. Carries the
+     * engine's own findings, its rule-pack version and a signature pinning the order version they
+     * were computed from - so an explanation can be told apart from a LATER verdict rather than
+     * assumed to still describe it. Null for every task that is not explaining a safety verdict. */
+    safetyVerdict: i.safetyVerdict || null,
     resultingChanges: Array.isArray(i.resultingChanges) ? i.resultingChanges : [],
     source: { system: NATIVE_SYSTEM, sourceId: `maik-interaction:${i.id}` },
   };
