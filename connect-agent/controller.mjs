@@ -15,7 +15,12 @@ function containsSensitive(value, path = '$', findings = []) {
       if (SENSITIVE_KEY.test(key)) findings.push(`${path}.${key}`);
       else containsSensitive(child, `${path}.${key}`, findings);
     }
-  } else if (typeof value === 'string' && SENSITIVE_KEY.test(path)) {
+  } else if (typeof value === 'string' && (SENSITIVE_KEY.test(path) || SENSITIVE_KEY.test(value))) {
+    // The VALUE is tested as well as the path. A spec names the identifiers it will read as string
+    // values inside arrays - `queryKeys: ['mrn']`, `fields: ['patientName']` - where the enclosing
+    // key is innocent and the path is just an index, so a check on keys and paths alone saw nothing.
+    // Only the path is recorded, never the value: a finding that echoed the sensitive string would
+    // put it in the error message.
     findings.push(path);
   }
   return findings;
