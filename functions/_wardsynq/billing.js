@@ -46,7 +46,7 @@ import { AuthError, PermissionError } from "../_connect/permission.js";
 import {
   CLAIM_STATE, PREAUTH_STATE, SUPPORT, BillingError,
   mayProceedClinically, supportFor, codeClaim, detectUpcoding,
-  submit, deny, resubmit, preAuthorisation, upcodingWatchlist,
+  submit, deny, resubmit, recordAdjudication, preAuthorisation, upcodingWatchlist,
 } from "../../wardsynq/wardsynq-billing.js";
 
 const str = (v) => (v == null ? "" : String(v).trim());
@@ -143,7 +143,7 @@ async function codeClaimForEncounter(request, env, ctx) {
 
   let claim;
   try {
-    claim = codeClaim({ encounterId, patientId, record: view, codes, codedBy: resolved.actor.id, now });
+    claim = codeClaim({ encounterId, patientId, record: view, codes, codedBy: resolved.actor.id, now, invoiceId: str(ctx.invoiceId) || null });
   } catch (e) {
     if (!(e instanceof BillingError)) throw e;
     /* The refusal names every code and what the record says about each, so the coder can see which
@@ -185,7 +185,7 @@ async function codeClaimForEncounter(request, env, ctx) {
   }
 }
 
-const ACTIONS = Object.freeze(["submit", "deny", "resubmit"]);
+const ACTIONS = Object.freeze(["submit", "deny", "resubmit", "adjudicate"]);
 
 /**
  * Moves a claim through its lifecycle.
@@ -229,11 +229,11 @@ async function claimAction(request, env, ctx) {
 
   let next;
   try {
-    if (action === "submit") next = submit(claim, { by, now });
+    if (action === "submit") next = submit(claim, { by, now, submittedAmount: ctx.submittedAmount });
     else if (action === "deny") {
       if (!reason) return { ...base, ok: false, status: 422, error: "reason_required", detail: "a denial carries the payer's reason", claim: null };
-      next = deny(claim, { reason, by, now });
-    } else {
+      next = deny(claim, { reason, by, now, deniedAmount: ctx.deniedAmount });
+    } else if (action === "resubmit") {
       if (!reason) return { ...base, ok: false, status: 422, error: "reason_required", detail: "a resubmission names why", claim: null };
       /* Re-coding on resubmission is re-checked against the CHART AS IT IS NOW, not against the view
        * taken when the claim was first coded. If a diagnosis appeared between the denial and this
@@ -246,7 +246,11 @@ async function claimAction(request, env, ctx) {
         catch (e) { return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), claim: null }; }
         view = clinicalView(conditions);
       }
-      next = resubmit(claim, { codes: ctx.codes || null, record: view, by, reason, now });
+      next = resubmit(claim, { codes: ctx.codes || null, record: view, by, reason, now, submittedAmount: ctx.submittedAmount });
+    } else {
+      // adjudicate: records what the payer said it will pay. Never moves claim.state - that stays
+      // submit/deny/resubmit's job alone.
+      next = recordAdjudication(claim, { approvedAmount: ctx.approvedAmount, deniedAmount: ctx.deniedAmount, by, now, reason });
     }
     /* Only when there was actually something to explain. A reason recorded against a clean claim
      * would put the words "unsupported severity" into the history of a claim that had none. */
@@ -299,6 +303,7 @@ async function recordPreAuth(request, env, ctx) {
     auth = preAuthorisation({
       patientId, treatment, state, decidedAt,
       scheme: str(ctx.scheme) || null, reason: str(ctx.reason) || null, requestedBy: resolved.actor.id,
+      invoiceId: str(ctx.invoiceId) || null, authorizedAmount: ctx.authorizedAmount,
     });
   } catch (e) {
     if (e instanceof BillingError) return { ...base, ok: false, status: 422, error: "preauth_refused", code: e.code, detail: e.message, preAuth: null };
