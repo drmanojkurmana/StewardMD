@@ -91,13 +91,16 @@
         p.addListener("download", function (ev) { try { onProgress(Math.round((ev && ev.percent) || 0)); } catch (e) {} }).then(function (h) { offDl = h; });
       }
     } catch (e) {}
-    // One automatic retry on a network-class download failure: a 43 MB bundle on a ward
-    // connection drops often, and the GET is idempotent with the checksum verified on every
-    // attempt, so retrying once is safe. Anything else (checksum, storage, …) fails fast.
+    // One automatic retry on a transport-class download failure. The plugin verifies the
+    // sha256 NATIVELY after fetching, so a connection that drops mid-file surfaces as
+    // "Checksum failed", not as a network error — retrying network-only would miss the most
+    // common ward-connection failure. The GET is idempotent with the checksum verified on
+    // every attempt, so one retry is safe; storage and auth failures still fail fast.
     function tryDownload(retriesLeft) {
       return p.download({ url: pending.zipUrl, version: String(pending.version), checksum: pending.zipHash || undefined })
         .then(null, function (e) {
-          if (retriesLeft > 0 && otaCode(e, "download-failed") === "network") return tryDownload(retriesLeft - 1);
+          var code = otaCode(e, "download-failed");
+          if (retriesLeft > 0 && (code === "network" || code === "checksum")) return tryDownload(retriesLeft - 1);
           throw e;
         });
     }
