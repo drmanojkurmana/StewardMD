@@ -173,6 +173,10 @@
       // Not patient-scoped: a real stock levels, receipts, adjustments and reconciliation
       // workstation, the same shape as ED/Surgery's own ward-wide boards.
       '<button class="w-btn ghost" data-w-act="inventoryboard" title="Pharmacy stock: levels, receipts, adjustments, reconciliation">' + ms("inventory_2") + "Inventory</button>" +
+      // Hospital-wide, not patient-scoped: the same listCriticalLoops() this build already uses per
+      // patient (criticalsCard), read here with no patientId so anyone covering the ward or the lab
+      // can see every open critical loop at once, not just the one chart they happen to have open.
+      '<button class="w-btn ghost" data-w-act="critsboard" title="Every open critical result, hospital-wide">' + ms("priority_high") + "Critical results</button>" +
       // Reachable BEFORE an outage, which is the only time it can be taken. A pack you can only get
       // to while the system is up is a pack the ward has to remember to take while the system is up.
       '<button class="w-btn ghost" data-w-act="downtime" title="Printable sheet for when the system is unavailable">' + ms("print") + "Downtime pack</button></div>" +
@@ -1548,6 +1552,34 @@
       '<p class="w-hint">' + ms("info") + "Posts the counted quantity against the derived level as an auditable adjustment naming the expected value and the variance. A matching count writes nothing." + "</p></div>";
   }
 
+  /* TASK 3.6: the hospital-wide critical-result queue. Not patient-scoped, unlike criticalsCard on
+   * the ordinary chart - the SAME listCriticalLoops() backend, called with no patientId, so whoever
+   * is covering the ward or the lab can see every open loop at once. No new logic: same escalation
+   * levels, same "acknowledging records what was done, not a way to clear the list" discipline. */
+  function critsBoardView(state) {
+    var loops = state.critsBoard || [];
+    var rows = loops.map(function (c) {
+      var esc_ = c.escalation || {}, mins = esc_.minutesOpen;
+      return '<li class="lvl-' + esc(esc_.level || "due") + '">' +
+        '<div class="w-crit-h"><b>' + esc(c.display || c.code) + "</b>" +
+        (c.value == null ? "" : '<span class="w-crit-v">' + esc(c.value) + (c.unit ? " " + esc(c.unit) : "") + "</span>") +
+        '<span class="w-crit-b">' + (c.basis === "lab" ? "flagged by the lab" : c.basis === "limit" ? "outside critical limit" : esc(c.basis || "")) + "</span></div>" +
+        '<div class="w-crit-m">' + ms("person") + esc(c.patientId || "") +
+        " &middot; " + ms("schedule") + (mins == null ? "" : mins + " min since reported") +
+        (esc_.level === "escalate" ? " &middot; ESCALATE" : esc_.level === "overdue" ? " &middot; overdue" : "") +
+        (c.state === "acknowledged" ? " &middot; acknowledged by " + esc(c.acknowledgedBy || "a clinician") : "") + "</div>" +
+        (c.state === "open" ? '<button class="w-btn tiny go" data-w-act="ackboard:' + esc(c.loopId) + '">' + ms("task_alt") + "Acknowledge</button>" : "") +
+      "</li>";
+    }).join("");
+    return '<div class="w-chart-h"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button>" +
+      "<div><b>Critical results</b><small>hospital-wide</small></div>" +
+      '<button class="w-ic" data-w-act="critsboardload" title="Refresh">' + ms("refresh") + "</button></div>" +
+      '<div class="w-card"><div class="w-card-h">' + ms("priority_high") + "<h3>Open loops &middot; " + loops.length + "</h3></div>" +
+      '<p class="w-hint">Acknowledging records that you have seen this and what you did. It is not a way to clear the list.</p>' +
+      (rows ? '<ul class="w-crits">' + rows + "</ul>" : '<p class="w-empty">No open critical results anywhere right now.</p>') +
+      "</div>";
+  }
+
   /* TASK 3.5: the blood bank workstation. wardsynq-transfusion.js (HAZ-BLD-01) already enforces
    * everything hazardous here - ABO/RhD compatibility, a crossmatch bound to one patient, and a
    * two-person bedside check that re-derives compatibility from the physical unit rather than the
@@ -1827,6 +1859,7 @@
         : state.view === "radiology" ? radiologyView(state)
         : state.view === "pharmacy" ? pharmacyView(state)
         : state.view === "transfusion" ? transfusionView(state)
+        : state.view === "critsboard" ? critsBoardView(state)
         : listView(state)) + "</div></div>";
   }
 
@@ -2512,6 +2545,22 @@
   function inventoryOpen() {
     st.view = "inventory"; st.inventory = null; paint(); loadInventory();
   }
+  function critsBoardOpen() {
+    st.view = "critsboard"; st.critsBoard = []; paint(); loadCritsBoard();
+  }
+  function loadCritsBoard() {
+    return apiGet("/ward/criticals?orgId=" + encodeURIComponent(st.orgId))
+      .then(function (r) { st.critsBoard = (r && r.ok && r.loops) || []; paint(); })
+      .catch(function () { paint(); });
+  }
+  function acknowledgeBoard(loopId) {
+    var why = ""; try { why = G.prompt("What did you do about this result?") || ""; } catch (e) {}
+    if (!why.trim()) { st.err = "An acknowledgement records what was done. It needs a sentence."; paint(); return; }
+    st.busy = true; paint();
+    apiPost("/ward/acknowledge", { orgId: st.orgId, loopId: loopId, action: why.trim() })
+      .then(function (r) { if (settle(r, "Acknowledged.")) loadCritsBoard(); else paint(); })
+      .catch(function () { st.busy = false; st.err = "Could not record the acknowledgement."; paint(); });
+  }
   function loadInventory() {
     if (!st.inventory) st.inventory = {};
     return apiGet("/ward/stock?orgId=" + encodeURIComponent(st.orgId))
@@ -3137,6 +3186,7 @@
       if (st.view === "pharmacy") { st.view = "chart"; st.pharmacy = null; paint(); return; }
       if (st.view === "transfusion") { st.view = "chart"; st.transfusion = null; paint(); return; }
       if (st.view === "inventory") { st.inventory = null; st.view = "list"; paint(); return; }
+      if (st.view === "critsboard") { st.critsBoard = []; st.view = "list"; paint(); return; }
       // Picking a bed to admit an ED patient opens the SAME bed board a fresh admission uses;
       // backing out of it returns to that patient's ED chart, not the ward list, and drops the
       // pending admit rather than leaving it to fire on some later, unrelated bed pick.
@@ -3192,6 +3242,9 @@
     if (cmd === "edboard") { loadEd(); return; }
     if (cmd === "inventoryboard") { inventoryOpen(); return; }
     if (cmd === "inventoryload") { loadInventory(); return; }
+    if (cmd === "critsboard") { critsBoardOpen(); return; }
+    if (cmd === "critsboardload") { loadCritsBoard(); return; }
+    if (cmd === "ackboard") { acknowledgeBoard(arg); return; }
     if (cmd === "stockreceive") { stockReceive(); return; }
     if (cmd === "stockadjust") { stockAdjustOrWaste("adjustment"); return; }
     if (cmd === "stockwaste") { stockAdjustOrWaste("wastage"); return; }

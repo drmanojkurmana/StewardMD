@@ -1,0 +1,46 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>WardSynQ TASK 3.6: hospital-wide critical results board golden path harness</title>
+<link rel="stylesheet" href="../ward.css">
+<style>html,body{margin:0;height:100%}</style>
+</head><body>
+<script>
+/* The REAL ward.js driven through the hospital-wide critical-result board golden path (ward list ->
+ * Critical results button -> the open loop for a DIFFERENT patient than any chart open on this
+ * screen -> Acknowledge) against an in-memory stub server whose response shape is confirmed against
+ * functions/_wardsynq/critical-results.js's listCriticalLoops() with no patientId, and the route
+ * itself, already exercised for real. This proves the CLIENT half; it is not a live server. */
+window.__calls = [];
+localStorage.setItem("smd_opd_staff_tok", "harness-token");
+window.prompt = function () { return "Repeated the potassium, called the ward."; };
+
+var LOOP = { loopId: "loop-1", patientId: "opd-pat-smd-h1-other", code: "K", display: "Potassium",
+  value: 6.8, unit: "mmol/L", basis: "limit", state: "open",
+  escalation: { level: "escalate", minutesOpen: 42 } };
+
+window.fetch = function (url, opts) {
+  var u = String(url), body = null;
+  try { body = opts && opts.body ? JSON.parse(opts.body) : null; } catch (e) {}
+  window.__calls.push({ url: u, method: (opts && opts.method) || "GET", body: body });
+  var reply = function (obj) { return Promise.resolve({ ok: true, status: 200, json: function () { return Promise.resolve(obj); } }); };
+
+  if (u.indexOf("/ward/list") >= 0) return reply({ ok: true, patients: [] });
+  if (u.indexOf("/ward/beds") >= 0) return reply({ ok: true, bedsConfigured: true, wards: [] });
+
+  if (u.indexOf("/ward/acknowledge") >= 0 && (opts && opts.method) === "POST") {
+    LOOP.state = "acknowledged"; LOOP.acknowledgedBy = "cfa:doctor";
+    return reply({ ok: true, written: 1, loopId: body.loopId, state: "acknowledged" });
+  }
+  // No patientId in this query - the hospital-wide branch of listCriticalLoops().
+  if (u.indexOf("/ward/criticals") >= 0 && u.indexOf("patientId=") < 0) {
+    return reply({ ok: true, loops: [LOOP], open: LOOP.state === "open" ? 1 : 0 });
+  }
+
+  return reply({ ok: true });
+};
+</script>
+<script src="../ward.js"></script>
+<script>
+window.__ready = !!(window.WARD && window.WARD.open);
+</script>
+</body></html>
