@@ -325,6 +325,19 @@ function grantForCaps(caps) {
     };
   }
 
+  /* TASK 4.9 (HIM/ROI), 2026-09-09. Releasing a patient's record to a third party is a
+   * records-custody function, and this codebase has NO dedicated HIM capability. staff.admin was
+   * considered and deliberately rejected: `hr` holds staff.admin and this file's own test suite
+   * already guarantees "HR: a hospital member with no business on the chart" - granting
+   * staff.admin any record scope here would silently break that guarantee for a capability whose
+   * job is staff->role management, not records custody. So NOTHING is added here: ROIRequest is
+   * reachable only through whatever grant a role already holds (in practice, EMR_TREAT's
+   * unrestricted write - the org owner/admin, today). Designing a real, narrower HIM role that is
+   * neither a clinician nor staff.admin is a role-design decision this task does not make
+   * unilaterally, the same restraint TASK 3.5/4.5/4.7/4.8 already state about their own boundaries.
+   * The route-level gate (functions/api/queue/[[path]].js) still requires staff.admin as an
+   * ADDITIONAL org-authorization check, so both layers must agree before an ROI route is reached. */
+
   /* An unconstrained write scope cannot be partly constrained. A role that ends up with `write: null`
    * may write every type, and leaving a category allow-list attached to that would refuse the one
    * type it names while permitting every other - a rule that reads as tighter and behaves as

@@ -135,6 +135,7 @@ import { cdaForEncounter } from "../../_wardsynq/cda.js";
 import { news2ForPatient } from "../../_wardsynq/news2-view.js";
 import { recordRead, readersToNotify } from "../../_wardsynq/read-log.js";
 import { codeClaimForEncounter, claimAction, recordPreAuth, claimsForPatient, watchlist as upcodingList } from "../../_wardsynq/billing.js";
+import { requestRelease, authorizeRelease, denyRelease, cancelRelease, fulfillRelease, readRoi, roiRequestsForPatient } from "../../_wardsynq/roi.js";
 import { patientCopy, releaseToPatient } from "../../_wardsynq/patient-record.js";
 import { exportPage, recordBackupRun, backupStatus } from "../../_wardsynq/backup-run.js";
 import { chargesForPatient } from "../../_wardsynq/charge-capture.js";
@@ -704,6 +705,11 @@ export async function onRequest(context) {
          * collections" - and billing.view is precisely the person who is. */
         claim: CAPS.BILLING_CHARGE, "claim-state": CAPS.BILLING_CHARGE, preauth: CAPS.BILLING_CHARGE,
         claims: CAPS.BILLING_VIEW, upcoding: CAPS.STAFF_ADMIN,
+        // TASK 4.9: a third-party record request is a records-custody function, not clinical or
+        // billing work - staff.admin, the same authority every other org-administration action in
+        // this file already uses, pending a real site adding a dedicated HIM role.
+        "roi-request": CAPS.STAFF_ADMIN, "roi-authorize": CAPS.STAFF_ADMIN, "roi-deny": CAPS.STAFF_ADMIN,
+        "roi-cancel": CAPS.STAFF_ADMIN, "roi-fulfill": CAPS.STAFF_ADMIN, roi: CAPS.STAFF_ADMIN, "roi-requests": CAPS.STAFF_ADMIN,
         /* Charge capture reads what was DONE and proposes nothing binding, so it sits with the rest
          * of coding at billing.charge. It writes nothing at all - not even a Claim. */
         charges: CAPS.BILLING_CHARGE,
@@ -1364,6 +1370,34 @@ export async function onRequest(context) {
       }
       if (sub === "upcoding" && method === "GET") {
         const r = await upcodingList(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "" });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "roi-request" && method === "POST") {
+        const r = await requestRelease(request, env, { ...deps, patientId: body.patientId, requester: body.requester, purpose: body.purpose, authorizationBasis: body.authorizationBasis, scope: body.scope, recipient: body.recipient, at: body.at, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "roi-authorize" && method === "POST") {
+        const r = await authorizeRelease(request, env, { ...deps, roiId: body.roiId, authorizationBasis: body.authorizationBasis, reason: body.reason, at: body.at, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "roi-deny" && method === "POST") {
+        const r = await denyRelease(request, env, { ...deps, roiId: body.roiId, reason: body.reason, at: body.at, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "roi-cancel" && method === "POST") {
+        const r = await cancelRelease(request, env, { ...deps, roiId: body.roiId, reason: body.reason, at: body.at, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "roi-fulfill" && method === "POST") {
+        const r = await fulfillRelease(request, env, { ...deps, roiId: body.roiId, deliveredStatus: body.deliveredStatus, resourceCounts: body.resourceCounts, note: body.note, at: body.at, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "roi" && method === "GET") {
+        const r = await readRoi(request, env, { ...deps, roiId: url.searchParams.get("roiId") || "" });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "roi-requests" && method === "GET") {
+        const r = await roiRequestsForPatient(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "" });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "id-match" && method === "POST") {
