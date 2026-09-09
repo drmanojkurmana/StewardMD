@@ -143,7 +143,7 @@ test("an allergy keeps 'unable-to-assess' rather than being upgraded to a certai
 test("a type with no honest mapping is not exported at all", () => {
   // Better absent than approximated: a ShiftHandover rendered as some nearby FHIR resource would be
   // read downstream as a clinical document it is not.
-  for (const t of ["ShiftHandover", "CriticalResultLoop", "BreakGlassGrant", "MedicationVerification", "CarePlan"]) {
+  for (const t of ["ShiftHandover", "CriticalResultLoop", "BreakGlassGrant", "MedicationVerification"]) {
     assert.equal(toFhir({ resourceType: t, id: "x" }), null, t);
     assert.equal(FHIR_TYPE[t], undefined, `${t} is not advertised either`);
   }
@@ -151,6 +151,35 @@ test("a type with no honest mapping is not exported at all", () => {
   assert.equal(toFhir({ resourceType: "Nonsense", id: "x" }), null);
   // And the map round-trips for everything that IS exported.
   for (const [ours, theirs] of Object.entries(FHIR_TYPE)) assert.equal(CANONICAL_TYPE[theirs], ours);
+});
+
+/* TASK 7 STEP 4.6: CarePlan, real. Goals become CarePlan.activity - not a second resource type
+ * invented to hold one string. */
+test("fhirCarePlan: goals become activity.detail, a review date becomes period.end, status maps honestly", () => {
+  const plan = {
+    resourceType: "CarePlan", id: "cp-1", patientId: "p1", encounterId: "e1",
+    state: "active", title: "Post-op mobility plan", authorId: "cfa:nurse1", reviewBy: "2026-09-10",
+    goals: [{ title: "Walk to bathroom unassisted", measure: "by day 3", state: "active" }, { title: "Off oxygen", state: "met" }],
+    meta: { recordedAt: "2026-09-07T10:00:00Z" },
+  };
+  const f = toFhir(plan);
+  assert.equal(f.resourceType, "CarePlan");
+  assert.equal(f.status, "active");
+  assert.equal(f.intent, "plan");
+  assert.equal(f.title, "Post-op mobility plan");
+  assert.deepEqual(f.subject, { reference: "Patient/p1" });
+  assert.deepEqual(f.encounter, { reference: "Encounter/e1" });
+  assert.equal(f.author.display, "cfa:nurse1");
+  assert.equal(f.period.end, "2026-09-10");
+  assert.equal(f.activity.length, 2);
+  assert.equal(f.activity[0].detail.status, "in-progress");
+  assert.match(f.activity[0].detail.description, /Walk to bathroom unassisted/);
+  assert.equal(f.activity[1].detail.status, "completed");
+
+  // An unrecognised status is "unknown", never guessed as something more reassuring.
+  assert.equal(toFhir({ resourceType: "CarePlan", id: "cp-2", patientId: "p1", authorId: "a", state: "nonsense" }).status, "unknown");
+  // No goals: no activity array at all, not an empty one masquerading as "we checked".
+  assert.equal(toFhir({ resourceType: "CarePlan", id: "cp-3", patientId: "p1", authorId: "a", state: "active" }).activity, undefined);
 });
 
 test("THE CAPABILITY STATEMENT DOES NOT OVERSTATE", () => {
