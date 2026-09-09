@@ -27,6 +27,8 @@
   // Shared inline-SVG catalog accessor → window.ICONS.get("name") yields <svg class="smd-ico">…</svg>.
   // NOTE: this module declares a LOCAL `var ICONS` (specialty path map) further below which shadows
   // the global catalog inside this IIFE, so we reach the catalog via window.ICONS explicitly here.
+  function esc(s) { return String(s == null ? "" : s).replace(/[&<>"]/g, function (c) { return ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]; }); }
+
   function wsIco(n){ return (window.ICONS && window.ICONS.get) ? window.ICONS.get(n) : ""; }
 
   function wsOn() {
@@ -283,8 +285,8 @@
     h += '<div class="sw-usefor"><label><input type="radio" name="swUse" value="case"' + (persistDefault ? '' : ' checked') + '> ' + (opts.inCase ? "Use for this case only" : "Use for my next case") + '</label>' +
       '<label><input type="radio" name="swUse" value="default"' + (persistDefault ? ' checked' : '') + '> Make my default workspace</label></div>';
     REG.forEach(function (r) {
-      h += '<button class="sw-opt" data-ws="' + r.id + '"><span class="ic">' + ic(ICONS[r.id]) + '</span>' +
-        '<span class="tx"><span class="nm">' + r.name + '</span><span class="sb">' + r.subtitle + '</span></span>' +
+      h += '<button class="sw-opt" data-ws="' + esc(r.id) + '"><span class="ic">' + ic(ICONS[r.id]) + '</span>' +
+        '<span class="tx"><span class="nm">' + esc(r.name) + '</span><span class="sb">' + esc(r.subtitle) + '</span></span>' +
         (r.status === "early_access" ? '<span class="ea">Early access</span>' : '') +
         (r.id === cur ? '<span class="ck">' + wsIco("check") + '</span>' : '') + '</button>';
     });
@@ -308,7 +310,7 @@
     if (ai) ai.addEventListener("input", function () {
       var v = ai.value.trim(); if (v.length < 3) { sg.classList.remove("on"); return; }
       var r = suggestWorkspace(v);
-      var txt = r.shared ? 'Suggested: <b>' + r.shared.label + '</b>' : 'Suggested workspace: <b>' + meta(r.id).name + '</b>';
+      var txt = r.shared ? 'Suggested: <b>' + esc(r.shared.label) + '</b>' : 'Suggested workspace: <b>' + esc(meta(r.id).name) + '</b>';
       if (!r.score && !r.shared) txt = 'No clear specialty match — defaulting to <b>Internal Medicine</b>';
       sg.innerHTML = txt + ' — tap it above to use. <span style="color:var(--slate-soft)">(you can override)</span>';
       sg.classList.add("on");
@@ -362,20 +364,20 @@
     if (!_shell) { _shell = document.createElement("div"); _shell.className = "sw-shell"; _shell.id = "swShell"; document.body.appendChild(_shell); }
     _es = null;
     var h = '<div class="sw-shead"><button class="bk" id="swShBack" aria-label="Back">‹</button>' +
-      '<div class="ti">' + r.name + '<span class="ea">Early access</span></div>' +
-      '<button class="sw-pill" id="swShPill"><span class="ic">' + ic(ICONS[id]) + '</span><span class="nm">' + r.name + '</span><span class="chev">▾</span></button></div>';
+      '<div class="ti">' + esc(r.name) + '<span class="ea">Early access</span></div>' +
+      '<button class="sw-pill" id="swShPill"><span class="ic">' + ic(ICONS[id]) + '</span><span class="nm">' + esc(r.name) + '</span><span class="chev">▾</span></button></div>';
     h += '<div class="sw-sbody"><div class="sw-wm">' + wm(WMARKS[id]) + '</div>';
     h += '<div class="sw-note">Early access — advisory decision support, not a diagnosis or drug dose. It flags danger signs, whether antibiotics/source-control are needed, and referral. Verify against local protocol, imaging &amp; the individual patient. Internal Medicine remains the fully-validated engine.</div>';
     if (eng && eng.syndromes) {
       h += '<div class="sw-card"><h4>Step 1 · Choose the presentation</h4><div class="sw-chips" id="swSyn">' +
-        eng.syndromes.map(function (s) { return '<button class="sw-synbtn" data-syn="' + s.id + '">' + s.name + '</button>'; }).join("") + '</div></div>';
+        eng.syndromes.map(function (s) { return '<button class="sw-synbtn" data-syn="' + esc(s.id) + '">' + esc(s.name) + '</button>'; }).join("") + '</div></div>';
       h += '<div id="swEngOut"></div>';
     } else {
       var steps = ["Presenting complaint / syndrome", "Focused specialty questions", "Severity / danger signs", "Differential & likely category", "Management: antibiotic need, referral, source-control / procedure"];
-      h += '<div class="sw-card"><h4>5-step specialty pathway</h4>' + steps.map(function (s, i) { return '<div class="sw-step"><div class="n">' + (i + 1) + '</div><div class="lb">' + s + '</div></div>'; }).join("") + '</div>';
-      if (r.syndromes) h += '<div class="sw-card"><h4>Syndrome entry points</h4><div class="sw-chips">' + r.syndromes.map(function (x) { return '<span class="sw-chip">' + x + '</span>'; }).join("") + '</div></div>';
-      if (r.danger) h += '<div class="sw-card sw-danger"><h4>Danger signs — escalate</h4><div class="sw-chips">' + r.danger.map(function (x) { return '<span class="sw-chip">' + x + '</span>'; }).join("") + '</div></div>';
-      h += '<div class="sw-card"><h4>Antibiotic / management ladder</h4><div class="sw-ladder">' + ABX_LADDER.map(function (x, i) { return '<div class="r"><span class="d" style="background:' + LADCOL[i] + '"></span>' + x + '</div>'; }).join("") + '</div></div>';
+      h += '<div class="sw-card"><h4>5-step specialty pathway</h4>' + steps.map(function (s, i) { return '<div class="sw-step"><div class="n">' + (i + 1) + '</div><div class="lb">' + esc(s) + '</div></div>'; }).join("") + '</div>';
+      if (r.syndromes) h += '<div class="sw-card"><h4>Syndrome entry points</h4><div class="sw-chips">' + r.syndromes.map(function (x) { return '<span class="sw-chip">' + esc(x) + '</span>'; }).join("") + '</div></div>';
+      if (r.danger) h += '<div class="sw-card sw-danger"><h4>Danger signs — escalate</h4><div class="sw-chips">' + r.danger.map(function (x) { return '<span class="sw-chip">' + esc(x) + '</span>'; }).join("") + '</div></div>';
+      h += '<div class="sw-card"><h4>Antibiotic / management ladder</h4><div class="sw-ladder">' + ABX_LADDER.map(function (x, i) { return '<div class="r"><span class="d" style="background:' + LADCOL[i] + '"></span>' + esc(x) + '</div>'; }).join("") + '</div></div>';
     }
     h += '<button class="sw-imbtn" id="swToIM">Switch to Internal Medicine (full engine)</button></div>';
     _shell.innerHTML = h;
@@ -400,8 +402,8 @@
   function renderSyndrome() {
     var out = document.getElementById("swEngOut"); if (!out || !_es) return;
     var syn = _es.syn, h = "";
-    if (syn.q && syn.q.length) h += '<div class="sw-card"><h4>Step 2 · Focused findings</h4><div class="sw-chips">' + syn.q.map(function (q) { return '<button class="sw-tog' + (_es.has(q.id) ? " on" : "") + '" data-f="' + q.id + '">' + q.label + '</button>'; }).join("") + '</div></div>';
-    if (syn.danger && syn.danger.length) h += '<div class="sw-card sw-danger"><h4>Step 3 · Danger signs</h4><div class="sw-chips">' + syn.danger.map(function (d) { return '<button class="sw-tog' + (_es.has(d.id) ? " on" : "") + '" data-f="' + d.id + '">' + d.label + '</button>'; }).join("") + '</div></div>';
+    if (syn.q && syn.q.length) h += '<div class="sw-card"><h4>Step 2 · Focused findings</h4><div class="sw-chips">' + syn.q.map(function (q) { return '<button class="sw-tog' + (_es.has(q.id) ? " on" : "") + '" data-f="' + esc(q.id) + '">' + esc(q.label) + '</button>'; }).join("") + '</div></div>';
+    if (syn.danger && syn.danger.length) h += '<div class="sw-card sw-danger"><h4>Step 3 · Danger signs</h4><div class="sw-chips">' + syn.danger.map(function (d) { return '<button class="sw-tog' + (_es.has(d.id) ? " on" : "") + '" data-f="' + esc(d.id) + '">' + esc(d.label) + '</button>'; }).join("") + '</div></div>';
     h += '<div id="swOut"></div>';
     out.innerHTML = h;
     out.querySelectorAll(".sw-tog").forEach(function (b) { b.addEventListener("click", function () { var f = b.getAttribute("data-f"); _es.sel[f] = !_es.sel[f]; b.classList.toggle("on"); renderOut(); }); });
@@ -413,23 +415,23 @@
     var lad = (typeof res.ladder === "number") ? res.ladder : -1;
     var h = '<div class="sw-card sw-out' + (res.emergency ? " emerg" : "") + '">';
     if (res.emergency) h += '<div class="sw-emerg">' + wsIco("warn") + ' Time-critical — escalate now</div>';
-    h += '<div class="sw-catg">Step 4 · ' + (res.catg || "Select findings above") + '</div>';
+    h += '<div class="sw-catg">Step 4 · ' + esc(res.catg || "Select findings above") + '</div>';
     h += '<div class="lab">Step 5 · Management</div>';
-    h += '<div class="sw-ladder">' + ABX_LADDER.map(function (x, i) { return '<div class="r ' + (i === lad ? "on" : (lad >= 0 ? "dim" : "")) + '"><span class="d" style="background:' + LADCOL[i] + '"></span>' + x + '</div>'; }).join("") + '</div>';
+    h += '<div class="sw-ladder">' + ABX_LADDER.map(function (x, i) { return '<div class="r ' + (i === lad ? "on" : (lad >= 0 ? "dim" : "")) + '"><span class="d" style="background:' + LADCOL[i] + '"></span>' + esc(x) + '</div>'; }).join("") + '</div>';
     if (res.abx && res.abx.firstLine && res.abx.firstLine.length) {
       var ab = res.abx;
-      var fmtAbx = function (x) { return '<b>' + (x.drug || "") + '</b>' + (x.dose ? " " + x.dose : "") + (x.route ? " " + x.route : "") + (x.note ? ' <span class="nt">(' + x.note + ')</span>' : ""); };
+      var fmtAbx = function (x) { return '<b>' + esc(x.drug || "") + '</b>' + (x.dose ? " " + esc(x.dose) : "") + (x.route ? " " + esc(x.route) : "") + (x.note ? ' <span class="nt">(' + esc(x.note) + ')</span>' : ""); };
       h += '<div class="sw-abx"><div class="lab">Empiric antibiotics — verify locally</div>';
       h += '<div class="k">First-line</div><ul>' + ab.firstLine.map(function (x) { return "<li>" + fmtAbx(x) + "</li>"; }).join("") + "</ul>";
       if (ab.alt && ab.alt.length) h += '<div class="k">Alternatives</div><ul>' + ab.alt.map(function (x) { return "<li>" + fmtAbx(x) + "</li>"; }).join("") + "</ul>";
-      h += '<div class="ref">' + (ab.ref ? ab.ref + " · " : "") + (ab.note || "Empiric — adjust to local antibiogram / ICMR, cultures, renal function & allergy.") + "</div></div>";
+      h += '<div class="ref">' + (ab.ref ? esc(ab.ref) + " · " : "") + esc(ab.note || "Empiric — adjust to local antibiogram / ICMR, cultures, renal function & allergy.") + "</div></div>";
     }
-    if (res.sc) { h += '<div class="lab">Source control / procedure</div><p>' + res.sc + '</p>'; }
-    if (res.ref) { h += '<div class="lab">Referral / escalation</div><p>' + res.ref + '</p>'; }
-    if (res.mgmt && res.mgmt.length) { h += '<div class="lab">Notes</div><ul>' + res.mgmt.map(function (m) { return '<li>' + m + '</li>'; }).join("") + '</ul>'; }
+    if (res.sc) { h += '<div class="lab">Source control / procedure</div><p>' + esc(res.sc) + '</p>'; }
+    if (res.ref) { h += '<div class="lab">Referral / escalation</div><p>' + esc(res.ref) + '</p>'; }
+    if (res.mgmt && res.mgmt.length) { h += '<div class="lab">Notes</div><ul>' + res.mgmt.map(function (m) { return '<li>' + esc(m) + '</li>'; }).join("") + '</ul>'; }
     if (res.shared || _es.syn.shared) {
       var sh = _es.syn.shared || {};
-      h += '<div class="sw-shared"><b>Shared condition.</b> Internal Medicine is <b>primary</b>' + (sh.role ? ' — this workspace is the ' + sh.role.toLowerCase() : '') + '. It does not overwrite the IM assessment. Antibiotic choice + ICMR precedence stay in the IM pathway.</div>';
+      h += '<div class="sw-shared"><b>Shared condition.</b> Internal Medicine is <b>primary</b>' + (sh.role ? ' — this workspace is the ' + esc(sh.role).toLowerCase() : '') + '. It does not overwrite the IM assessment. Antibiotic choice + ICMR precedence stay in the IM pathway.</div>';
       h += '<button class="sw-openim" id="swOutIM">Open Internal Medicine pathway (primary)</button>';
     }
     // Point-of-care hand-off: jump into the stewardship / knowledge tools without leaving the flow.
@@ -506,7 +508,7 @@
     for (var i = 0; i < btns.length; i++) { if (/clinical reasoning/i.test(btns[i].textContent || "")) { target = btns[i]; break; } }
     var lab = document.createElement("div"); lab.className = "sw-sblab"; lab.textContent = "Clinical workspace";
     var sw = document.createElement("button"); sw.className = "sw-sbsw";
-    sw.innerHTML = '<span class="ic">' + ic(ICONS[activeWorkspace()]) + '</span><span class="nm">' + meta(activeWorkspace()).name + '</span><span class="chev">▾</span>';
+    sw.innerHTML = '<span class="ic">' + ic(ICONS[activeWorkspace()]) + '</span><span class="nm">' + esc(meta(activeWorkspace()).name) + '</span><span class="chev">▾</span>';
     sw.addEventListener("click", function (e) { e.preventDefault(); e.stopPropagation(); openSheet({ inCase: false }); });
     if (target && target.parentNode) { target.parentNode.insertBefore(sw, target); target.parentNode.insertBefore(lab, sw); }
     else { menu.insertBefore(sw, menu.firstChild); menu.insertBefore(lab, sw); }
