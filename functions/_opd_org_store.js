@@ -170,10 +170,25 @@ export async function getBedByName(env, orgId, wardId, name) {
   const beds = await listBeds(env, orgId, wardId);
   return beds.find((b) => b.name.trim().toLowerCase() === want) || null;
 }
+// TASK 4.3: SERVER-SIDE CONCURRENCY, NOT TRUST IN THE CLIENT. Two staff assigning/releasing/
+// blocking the same bed at once is exactly the race a read-modify-write with no version check
+// allows - the second write wins silently and the first caller's premise (the state they read) is
+// now false with nobody told. Guarded here with the SAME optimistic-concurrency primitive
+// (wUpdate's opts.updateTime, _fbfirestore.js) every single-use activation record in this codebase
+// already relies on - not a new locking system. A genuine conflict throws `bed_changed` instead of
+// silently overwriting; the caller (functions/api/queue/[[path]].js's bed/update route) turns that
+// into a 409 for the client to refetch and retry.
 export async function updateBed(env, bedId, patch, actorId) {
-  const cur = await getBed(env, bedId); if (!cur) return null;
+  const id = sanitize(bedId);
+  const raw = await fsGet(env, "q_beds/" + id); if (!raw) return null;
+  const cur = M.bed(withId(id, raw.fields));
   const f = M.bed(Object.assign({}, cur, patch || {}, { id: cur.id, orgId: cur.orgId, wardId: cur.wardId }));   // orgId/wardId immutable - move a bed by retiring and recreating it, never by relabeling it into a different ward's history
-  await fsCommit(env, [wUpdate(env, "q_beds/" + sanitize(bedId), f)]);
+  try {
+    await fsCommit(env, [wUpdate(env, "q_beds/" + id, f, { updateTime: raw.updateTime })]);
+  } catch (e) {
+    if (e && e.code === "precondition") throw Object.assign(new Error("bed_changed"), { code: "bed_changed" });
+    throw e;
+  }
   await audit(env, cur.orgId, actorId, "bed:update", patch && patch.state ? "state:" + patch.state : ""); return f;
 }
 

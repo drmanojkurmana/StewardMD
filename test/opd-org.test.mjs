@@ -77,7 +77,7 @@ test("TASK 4.1: ward and bed - Enterprise -> ... -> Ward -> Bed, a ward is a PLA
 
   const b = bed({ id: "b1", orgId: "o1", wardId: "w1", name: "1" });
   assert.equal(b.state, "available", "a bed defaults to available, never to a state nobody set");
-  assert.deepEqual(BED_STATES, ["available", "occupied", "blocked", "cleaning", "maintenance"]);
+  assert.deepEqual(BED_STATES, ["available", "reserved", "occupied", "blocked", "cleaning", "maintenance"]);
   assert.equal(bed({ id: "b2", orgId: "o1", wardId: "w1", name: "2", state: "not-a-real-state" }).state, "available", "an unrecognised state falls back to available, never to whatever was typed");
   assert.equal(bed({ id: "b3", orgId: "o1", wardId: "w1", name: "3", state: "maintenance" }).state, "maintenance");
 

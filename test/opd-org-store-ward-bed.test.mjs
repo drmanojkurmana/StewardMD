@@ -11,22 +11,44 @@ import { test, mock } from "node:test";
 import assert from "node:assert/strict";
 
 const docs = new Map();
+let clock = 1;
 mock.module("../functions/_fbfirestore.js", {
   namedExports: {
-    fsGet: async (_e, path) => { const d = docs.get(path); return d ? { id: path, name: path, fields: { ...d } } : null; },
+    fsGet: async (_e, path) => { const d = docs.get(path); return d ? { id: path, name: path, fields: { ...d.fields }, updateTime: d.updateTime } : null; },
     fsQuery: async (_e, coll, opts) => {
       const where = opts && opts.where, limit = (opts && opts.limit) || 1000, out = [];
-      for (const [path, f] of docs) {
+      for (const [path, d] of docs) {
         if (!path.startsWith(coll + "/")) continue;
-        if (where && String(f[where.field]) !== String(where.value)) continue;
-        out.push({ id: path.slice(coll.length + 1), name: path, fields: { ...f } });
+        if (where && String(d.fields[where.field]) !== String(where.value)) continue;
+        out.push({ id: path.slice(coll.length + 1), name: path, fields: { ...d.fields }, updateTime: d.updateTime });
         if (out.length >= limit) break;
       }
       return out;
     },
-    fsCommit: async (_e, writes) => { for (const w of writes || []) { if (w.delete) { docs.delete(w.delete); continue; } docs.set(w.update.name, { ...(docs.get(w.update.name) || {}), ...w.update.fields }); } return { ok: true }; },
-    wCreate: (_e, path, fields) => ({ update: { name: path, fields } }),
-    wUpdate: (_e, path, fields) => ({ update: { name: path, fields } }),
+    // A real precondition check, the same shape the actual Firestore commit enforces: a write
+    // guarded on updateTime fails atomically if the document changed since it was read - this is
+    // what makes the CAS test below able to prove a real race is caught, not just call the code.
+    fsCommit: async (_e, writes) => {
+      for (const w of writes || []) {
+        if (w.delete) continue;
+        const cur = docs.get(w.update.name), cd = w.currentDocument;
+        if (cd && cd.exists === false && cur) throw Object.assign(new Error("exists"), { code: "precondition" });
+        if (cd && cd.updateTime && (!cur || cur.updateTime !== cd.updateTime)) throw Object.assign(new Error("stale"), { code: "precondition" });
+      }
+      for (const w of writes || []) {
+        if (w.delete) { docs.delete(w.delete); continue; }
+        const prev = docs.get(w.update.name);
+        docs.set(w.update.name, { fields: { ...(prev ? prev.fields : {}), ...w.update.fields }, updateTime: "t" + (++clock) });
+      }
+      return { ok: true };
+    },
+    wCreate: (_e, path, fields) => ({ update: { name: path, fields }, currentDocument: { exists: false } }),
+    wUpdate: (_e, path, fields, opts) => {
+      const w = { update: { name: path, fields } };
+      if (opts && opts.updateTime) w.currentDocument = { updateTime: opts.updateTime };
+      else if (opts && opts.exists === true) w.currentDocument = { exists: true };
+      return w;
+    },
     wDelete: (_e, path) => ({ delete: path }),
   },
 });
@@ -97,4 +119,39 @@ test("updateBed: state transitions persist for real, wardId/orgId stay immutable
   const hijack = await ORG.updateBed(undefined, b.id, { wardId: "some-other-ward" }, "actor-1");
   assert.equal(hijack.wardId, w.id);
   assert.equal(await ORG.updateBed(undefined, "no-such-bed", { state: "blocked" }, "actor-1"), null);
+});
+
+test("TASK 4.3: SERVER-SIDE CONCURRENCY - two staff racing to update the same bed get ONE winner, never a silent last-write-wins", async () => {
+  docs.clear();
+  const w = await ORG.createWard(undefined, "org-a", { name: "Medical A" }, "actor-1");
+  const b = await ORG.createBed(undefined, "org-a", { wardId: w.id, name: "1" }, "actor-1");
+
+  // Both staff read the bed at the SAME version, then both try to write. This is the real race the
+  // plan names ("two staff members must not be able to assign the same bed simultaneously") - not
+  // simulated by calling updateBed twice in sequence (which would never race), but by both writes
+  // being computed from the SAME pre-write read, exactly as two browser tabs would.
+  const results = await Promise.allSettled([
+    ORG.updateBed(undefined, b.id, { state: "occupied" }, "nurse-a"),
+    ORG.updateBed(undefined, b.id, { state: "cleaning" }, "nurse-b"),
+  ]);
+  const fulfilled = results.filter((r) => r.status === "fulfilled");
+  const rejected = results.filter((r) => r.status === "rejected");
+  assert.equal(fulfilled.length, 1, "exactly one write wins - the other is refused, not silently overwritten");
+  assert.equal(rejected.length, 1);
+  assert.equal(rejected[0].reason.code, "bed_changed", "the loser gets a real, named conflict, not a swallowed race");
+
+  // The bed's real state is whichever write actually landed - never a mix, never the loser's.
+  const finalState = (await ORG.getBed(undefined, b.id)).state;
+  assert.equal(finalState, fulfilled[0].value.state);
+});
+
+test("TASK 4.3: a real reserve/release/block/clean cycle through the bed states, server-validated (not a free-text field)", async () => {
+  docs.clear();
+  const w = await ORG.createWard(undefined, "org-a", { name: "Medical A" }, "actor-1");
+  const b = await ORG.createBed(undefined, "org-a", { wardId: w.id, name: "5" }, "actor-1");
+  assert.equal((await ORG.updateBed(undefined, b.id, { state: "reserved" }, "actor-1")).state, "reserved");
+  assert.equal((await ORG.updateBed(undefined, b.id, { state: "occupied" }, "actor-1")).state, "occupied");
+  assert.equal((await ORG.updateBed(undefined, b.id, { state: "cleaning" }, "actor-1")).state, "cleaning");
+  assert.equal((await ORG.updateBed(undefined, b.id, { state: "available" }, "actor-1")).state, "available");
+  assert.equal((await ORG.updateBed(undefined, b.id, { state: "not-a-real-state" }, "actor-1")).state, "available", "an unrecognised state falls back to available, never to whatever was typed");
 });
