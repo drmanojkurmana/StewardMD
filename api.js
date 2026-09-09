@@ -121,9 +121,10 @@
     if (root) return root;
     injectCSS();
     root = document.createElement("div");
-    root.id = "dbOverlay"; root.className = "db-overlay";
+    root.id = "dbOverlay"; root.className = "db-overlay db-sheet";
     root.innerHTML =
       '<div class="db-top">' +
+        '<div class="db-grab" id="dbGrab" aria-hidden="true"><i></i></div>' +
         '<button class="db-back" id="dbBack">‹ Back</button>' +
         '<div class="db-title" id="dbTitle">Drugs Database</div>' +
         '<button class="db-brandbtn" id="dbBrandBtn" style="display:none" aria-label="Available brands">' + dbIco("pills") + ' Brands</button>' +
@@ -147,6 +148,7 @@
     root.querySelector("#dbBack").addEventListener("click", function () {
       closeDrawer(); if (st.name) { st.name = null; renderList(); } else close();
     });
+    attachSheetGestures();
     return root;
   }
   function setTitle(t, showBack) {
@@ -584,10 +586,22 @@
     if (typeof q === "string" && q.trim()) {
       q2 = q.trim();
     }
+    root.style.transform = "";
     root.classList.add("on"); document.body.classList.add("db-lock");
     renderList();
   }
-  function close() { if (root) { closeDrawer(); var bb = root.querySelector("#dbBrandBtn"); if (bb) bb.style.display = "none"; root.classList.remove("on"); document.body.classList.remove("db-lock"); } }
+  function close() { if (root) { closeDrawer(); var bb = root.querySelector("#dbBrandBtn"); if (bb) bb.style.display = "none"; root.classList.remove("on"); document.body.classList.remove("db-lock"); root.style.transform = ""; } }
+  // Demo-A sheet gesture: 1:1 drag on the grab handle dismisses, with rubber-band resistance.
+  function attachSheetGestures() {
+    if (!root) return;
+    var grab = root.querySelector("#dbGrab");
+    if (!grab || grab._dbBound) return; grab._dbBound = true;
+    var y0 = 0, dy = 0, drag = false;
+    grab.addEventListener("pointerdown", function (e) { drag = true; y0 = e.clientY; dy = 0; try { grab.setPointerCapture(e.pointerId); } catch (x) {} });
+    grab.addEventListener("pointermove", function (e) { if (!drag) return; dy = Math.max(0, e.clientY - y0); root.style.transform = dy ? ("translateY(" + (dy * 0.7) + "px)") : ""; });
+    grab.addEventListener("pointerup", function () { drag = false; if (dy > 90) { close(); } else { root.style.transform = ""; } dy = 0; });
+    grab.addEventListener("pointercancel", function () { drag = false; root.style.transform = ""; dy = 0; });
+  }
   var dwOpen = false;
   function openDrawer() { dwOpen = true; if (!root) return; var s = root.querySelector("#dbScrim"), d = root.querySelector("#dbDrawer"); if (s) s.classList.add("on"); if (d) d.classList.add("on"); }
   function closeDrawer() { dwOpen = false; if (!root) return; var s = root.querySelector("#dbScrim"), d = root.querySelector("#dbDrawer"); if (s) s.classList.remove("on"); if (d) d.classList.remove("on"); }
@@ -611,7 +625,7 @@
     var html = '<div class="db-msrc">℞ <b>Structured from official FDA label (openFDA / DailyMed)</b><span>Faithful summary — pending clinician review; US labelling, verify against local guidance.</span></div>';
     ST_SECS.forEach(function (sec) {
       var v = s[sec[1]]; if (!v) return; var op = openKeys[sec[1]];
-      html += '<div class="db-msec"><button class="db-msec-h' + (op ? " open" : "") + '">' + esc(sec[0]) + '<span class="db-msec-x">' + dbIco("chev") + '</span></button><div class="db-msec-b"' + (op ? "" : ' style="display:none"') + '>' + esc(v) + '</div></div>';
+      html += '<div class="db-msec db-msec-' + sec[1] + '"><button class="db-msec-h' + (op ? " open" : "") + '">' + esc(sec[0]) + '<span class="db-msec-x">' + dbIco("chev") + '</span></button><div class="db-msec-b"' + (op ? "" : ' style="display:none"') + '>' + esc(v) + '</div></div>';
     });
     return html;
   }
@@ -706,12 +720,12 @@
   /* ---- GOLD-STANDARD template renderer (from curated gold JSON) ---- */
   function goldHTML(g) {
     function bl(a) { return '<ul class="gd-b">' + (a || []).map(function (x) { return '<li>' + esc(x) + '</li>'; }).join("") + '</ul>'; }
-    function S(ic, t, q, body) { return '<div class="gd-sec"><div class="gd-h">' + esc(t) + (q ? '<span class="gd-q">' + esc(q) + '</span>' : '') + '</div>' + body + '</div>'; }
+    function S(ic, t, q, body, cls) { return '<div class="gd-sec' + (cls ? ' ' + cls : '') + '"><div class="gd-h">' + esc(t) + (q ? '<span class="gd-q">' + esc(q) + '</span>' : '') + '</div>' + body + '</div>'; }
     var H = "";
     if (g.quick) H += S('⚡', 'Quick Facts', '10 seconds', '<div class="gd-qf">' + g.quick.map(function (p) { return '<div><div class="gd-qk">' + esc(p[0]) + '</div><div class="gd-qv">' + esc(p[1]) + '</div></div>'; }).join("") + '</div>');
     if (g.summary) H += S('📋', 'Summary', 'What is it?', '<div>' + esc(g.summary) + '</div>');
     if (g.indications) H += S('🎯', 'Indications', 'When?', bl(g.indications));
-    if (g.dosage) H += S('💊', 'Dosage', 'How much?', '<div class="gd-tw"><table class="gd-t"><tr><th>Condition</th><th>Route</th><th>Dose</th><th>Duration</th><th>Notes</th></tr>' + g.dosage.map(function (r) { return '<tr><td><b>' + esc(r.c) + '</b></td><td>' + esc(r.r) + '</td><td><b>' + esc(r.d) + '</b></td><td>' + esc(r.t) + '</td><td>' + esc(r.n) + '</td></tr>'; }).join("") + '</table></div>');
+    if (g.dosage) H += S('💊', 'Dosage', 'How much?', '<div class="gd-tw"><table class="gd-t"><tr><th>Condition</th><th>Route</th><th>Dose</th><th>Duration</th><th>Notes</th></tr>' + g.dosage.map(function (r) { return '<tr><td><b>' + esc(r.c) + '</b></td><td>' + esc(r.r) + '</td><td><b>' + esc(r.d) + '</b></td><td>' + esc(r.t) + '</td><td>' + esc(r.n) + '</td></tr>'; }).join("") + '</table></div>', 'gd-sec-dosage');
     if (g.admin) H += S('✓', 'Administration', 'How to give?', '<ul class="gd-chk">' + g.admin.map(function (x) { return '<li>' + esc(x) + '</li>'; }).join("") + '</ul>');
     if (g.moa) H += S('🧭', 'Mechanism', 'How it works', '<div>' + esc(g.moa) + '</div>');
     if (g.contra) H += S('⛔', 'Contraindications & Cautions', 'Avoid when?', '<div class="gd-sev red"><h4>Absolute</h4>' + bl(g.contra.absolute) + '</div><div class="gd-sev amber"><h4>Relative / precautions</h4>' + bl(g.contra.relative) + '</div><div class="gd-sev blue"><h4>Monitor</h4>' + bl(g.contra.monitor) + '</div>');
@@ -892,6 +906,15 @@
       ".db-chip{border-radius:999px}",
       // Dose-first detail: the Dosage section reads as the hero card, price as a pill.
       ".db-msec-dosage{border:1.5px solid var(--teal,#0a9396);background:var(--teal-soft,#e0f2f1)}",
+      ".db-msec-adult_dose{border:1.5px solid var(--teal,#0a9396);background:var(--teal-soft,#e0f2f1)}",
+      ".gd-sec-dosage{border:1.5px solid var(--teal,#0a9396)}",
+      // Demo-A sheet: rounded top, grab handle, drag transform lane.
+      ".db-overlay.db-sheet{border-radius:20px 20px 0 0}",
+      ".db-overlay.db-sheet .db-top{flex-wrap:wrap}",
+      ".db-grab{flex:1 1 100%;display:grid;place-items:center;padding:2px 0 6px;cursor:grab;touch-action:none}",
+      ".db-grab i{width:40px;height:5px;border-radius:3px;background:#c7c7cc;display:block}",
+      ".db-overlay.db-sheet{transition:transform 180ms ease-out}",
+      "@media(prefers-reduced-motion:reduce){.db-overlay.db-sheet{transition:none}}",
       ".db-brand-price{background:var(--teal-soft,#e0f2f1);color:var(--teal,#0a9396);border-radius:999px;padding:4px 11px;font-size:13px}",
       ".db-bh-comp{font-weight:700}",
       ".db-brandhit{border-left-width:4px}"
