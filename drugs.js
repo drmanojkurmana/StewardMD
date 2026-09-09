@@ -184,12 +184,13 @@
     if(root) return root;
     if(!document.getElementById("mc-styles") && window.MEDCALC){ try{ window.MEDCALC.openList(); window.MEDCALC.close(); }catch(e){} }
     injectFallbackCSS();
+    injectAppleCSS();
     root=document.createElement("div");
-    root.id="mdOverlay"; root.className="mc-overlay";
+    root.id="mdOverlay"; root.className="mc-overlay md-sheet";
     root.innerHTML=
-      '<div class="mc-top"><button class="mc-back" id="mdClose">‹ Close</button><div class="mc-title">Drug Doses <span class="mc-count">'+DRUGS.length+'</span></div><span style="width:64px"></span></div>'+
+      '<div class="mc-top md-top"><div class="md-grab" id="mdGrab" aria-hidden="true"><i></i></div><button class="mc-back" id="mdClose">‹ Close</button><div class="mc-title">Drug Doses <span class="mc-count">'+DRUGS.length+'</span></div><span style="width:64px"></span></div>'+
       '<div class="mc-body">'+
-        '<input id="mdSearch" class="mc-search" type="text" placeholder="Search drug or brand (e.g. pantop, lasix, statin, ppi)…" autocomplete="off">'+
+        '<input id="mdSearch" class="mc-search" type="text" placeholder="Search drug or brand (e.g. pantop, lasix, statin, ppi)…" autocomplete="off" enterkeyhint="search" aria-label="Search drugs or brands">'+
         '<div id="mdCats" class="mc-cats"></div>'+
         '<div id="mdList" class="mc-list"></div>'+
         '<button id="mdInteractionsBtn" class="mc-cat" style="margin-top:14px;width:100%;box-sizing:border-box;text-align:center">'+dIco("interact")+' Check Drug Interactions</button>'+
@@ -201,6 +202,7 @@
     var si=root.querySelector("#mdSearch");
     si.addEventListener("input", function(){ q=si.value.trim().toLowerCase(); render(); });
     si.addEventListener("keydown", function(e){ e.stopPropagation(); });
+    attachSheetGestures();
     return root;
   }
   function renderCats(){
@@ -231,10 +233,11 @@
     ensureRoot(); activeCat=(cat&&CATS.indexOf(cat)>=0)?cat:""; q=""; openName=null;
     var si=root.querySelector("#mdSearch"); if(si) si.value="";
     renderCats(); render();
+    root.style.transform="";
     root.classList.add("on"); document.body.classList.add("mc-lock");
     setTimeout(function(){ try{ root.querySelector("#mdSearch").focus(); }catch(e){} }, 60);
   }
-  function close(){ if(root){ root.classList.remove("on"); document.body.classList.remove("mc-lock"); } }
+  function close(){ if(root){ root.classList.remove("on"); document.body.classList.remove("mc-lock"); root.style.transform=""; } }
   document.addEventListener("keydown", function(e){ if(e.key==="Escape"&&root&&root.classList.contains("on")) close(); });
 
   /* ---- Drug Interactions entry point (mounts window.MEDLIST's med-list builder) ----
@@ -282,6 +285,33 @@
   function closeInteractions(){ if(interactionsRoot){ interactionsRoot.classList.remove("on"); document.body.classList.remove("mc-lock","smd-ddi-open"); } }
   document.addEventListener("keydown", function(e){ if(e.key==="Escape"&&interactionsRoot&&interactionsRoot.classList.contains("on")) closeInteractions(); });
 
+  // Apple sheet styling (Demo A): translucent top, grab handle, press feedback.
+  // Scoped to #mdOverlay so the shared calculators overlay is untouched.
+  function injectAppleCSS(){
+    if(document.getElementById("md-apple-styles")) return;
+    var css="#mdOverlay.md-sheet .md-top{flex-wrap:wrap;background:rgba(255,255,255,.72);backdrop-filter:blur(20px) saturate(180%);-webkit-backdrop-filter:blur(20px) saturate(180%)}"+
+    "#mdOverlay.md-sheet .md-grab{flex:1 1 100%;display:grid;place-items:center;padding:2px 0 6px;cursor:grab;touch-action:none}"+
+    "#mdOverlay.md-sheet .md-grab i{width:40px;height:5px;border-radius:3px;background:#c7c7cc;display:block}"+
+    "#mdOverlay.md-sheet .mc-card-head:active{background:#f2f2f7}"+
+    "#mdOverlay.md-sheet .mc-card{transition:transform 120ms ease-out,box-shadow 160ms ease-out,border-color 160ms}"+
+    "#mdOverlay.md-sheet .mc-card:active{transform:scale(.99)}"+
+    "#mdOverlay.md-sheet .mc-card-t{letter-spacing:-.01em}"+
+    "#mdOverlay.md-sheet{transition:transform 180ms ease-out}"+
+    "@media (prefers-reduced-motion: reduce){#mdOverlay.md-sheet,#mdOverlay.md-sheet .mc-card{transition:none}}"+
+    "@media (prefers-reduced-transparency: reduce){#mdOverlay.md-sheet .md-top{background:#fff;backdrop-filter:none;-webkit-backdrop-filter:none}}";
+    var st=document.createElement("style"); st.id="md-apple-styles"; st.textContent=css; document.head.appendChild(st);
+  }
+  // 1:1 drag on the grab handle to dismiss, with rubber-band resistance.
+  function attachSheetGestures(){
+    if(!root) return;
+    var grab=root.querySelector("#mdGrab");
+    if(!grab||grab._mdBound) return; grab._mdBound=true;
+    var y0=0,dy=0,drag=false;
+    grab.addEventListener("pointerdown", function(e){ drag=true; y0=e.clientY; dy=0; try{ grab.setPointerCapture(e.pointerId); }catch(x){} });
+    grab.addEventListener("pointermove", function(e){ if(!drag) return; dy=Math.max(0,e.clientY-y0); root.style.transform=dy?("translateY("+(dy*0.7)+"px)"): ""; });
+    grab.addEventListener("pointerup", function(){ drag=false; if(dy>90){ close(); } else { root.style.transform=""; } dy=0; });
+    grab.addEventListener("pointercancel", function(){ drag=false; root.style.transform=""; dy=0; });
+  }
   // minimal fallback styles in case calculators.js (mc-*) didn't load
   function injectFallbackCSS(){
     if(document.getElementById("mc-styles")||document.getElementById("md-fallback-styles")) return;
