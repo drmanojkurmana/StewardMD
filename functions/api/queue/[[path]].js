@@ -140,6 +140,7 @@ import { imagingWorklist } from "../../_wardsynq/dicom.js";
 /* TASK 8: the governed AI layer over the clinical record. Distinct from the MaiK product routes
  * under /api/ai, which answer a clinician's own questions and touch no record. */
 import { askAboutPatient, reviewInteraction, listInteractions } from "../../_wardsynq/maik-interaction.js";
+import { explainOrderSafety } from "../../_wardsynq/maik-cds.js";
 import { checkAdvisories } from "../../_wardsynq/advisory-authoring.js";
 import { cdaForEncounter } from "../../_wardsynq/cda.js";
 import { news2ForPatient } from "../../_wardsynq/news2-view.js";
@@ -748,6 +749,12 @@ export async function onRequest(context) {
          * accepting a drafted note puts an unsigned note on the chart, which is a clinical act, and
          * the AI actor it writes as is capped to no wider than the reviewer's own scope. */
         "maik-ask": CAPS.EMR_VIEW, "maik-interactions": CAPS.EMR_VIEW, "maik-review": CAPS.EMR_TREAT,
+        /* TASK 8.9. Explaining a safety verdict reads the order, the allergy list and the medicines -
+         * the same chart emr.view already reads - and writes no clinical content. It is deliberately
+         * NOT gated higher than the deterministic screens that show the same verdict: a control that
+         * makes the explanation harder to reach than the finding it explains would push clinicians
+         * back to the terser screen, which is the opposite of the intent. */
+        "maik-explain-safety": CAPS.EMR_VIEW,
         // Charting a pump is the bedside's act, exactly like giving a dose.
         infusion: CAPS.MED_ADMINISTER, infusions: CAPS.EMR_VIEW,
         // Charting a wound is nursing work, the same authority as a vital or a fluid entry.
@@ -1701,6 +1708,16 @@ export async function onRequest(context) {
         const r = await askAboutPatient(request, env, { ...deps, config: (wsqCfg && wsqCfg.maik) || null,
           patientId: body.patientId, encounterId: body.encounterId, task: body.task, question: body.question,
           sections: body.sections, idempotencyKey: body.idempotencyKey || null,
+          fetchImpl: env && typeof env.WSQ_MAIK_FETCH === "function" ? env.WSQ_MAIK_FETCH : null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "maik-explain-safety" && method === "POST") {
+        const r = await explainOrderSafety(request, env, { ...deps, config: (wsqCfg && wsqCfg.maik) || null,
+          orderId: body.orderId, patientId: body.patientId, encounterId: body.encounterId,
+          /* The SAME compiled rule pack the prescribing and pharmacy paths use. MaiK never receives a
+           * pack of its own: a second pack is a second set of clinical rules by another name. */
+          rulePack: getRulePack(),
+          correlationId: body.correlationId, idempotencyKey: body.idempotencyKey || null,
           fetchImpl: env && typeof env.WSQ_MAIK_FETCH === "function" ? env.WSQ_MAIK_FETCH : null });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }

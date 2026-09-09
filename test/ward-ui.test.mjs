@@ -194,7 +194,14 @@ test("IT NEVER DECIDES A DOSE IS SAFE: there is no client-side safety rule anywh
   );
   // The distinction it IS allowed to make, because printing them the same way is the hazard.
   assert.match(code, /p\.allergies === null/, "a failed read and an empty list stay distinguishable");
-  assert.ok(!/wardsynq-safety|SafetyEngine|resolveGeneric|rulePack/i.test(code), "the UI does not reach for the safety engine");
+  /* `rulePack` was an unanchored substring, and TASK 8.9 made it stop being a usable proxy: the
+   * verdict card now PRINTS `rulePackVersion` - the version string the server reported, so a
+   * clinician can see which content produced the findings in front of them. Displaying which pack
+   * ran is not reaching for the engine, and it is the same narrowing this test already made for
+   * "allergy" and "interaction" above. `\brulePack\b` still forbids touching a pack itself, and
+   * getRulePack/compileRulePack remain forbidden by name. */
+  assert.ok(!/wardsynq-safety|SafetyEngine|resolveGeneric|\brulePack\b|getRulePack|compileRulePack/i.test(code),
+    "the UI does not reach for the safety engine");
   // It must not decide the five rights itself either: the scans go to the server untouched, and the
   // server compares them against the order. The UI only collects and forwards.
   assert.ok(!/scan\.patient\s*[=!]==|scan\.drug\s*[=!]==/.test(code), "the UI never compares a scan itself");

@@ -159,6 +159,20 @@ test("ADVERSARIAL: an output naming another patient is WITHHELD WHOLE, not redac
   assert.match(r.reason, /withheld whole rather than redacted/);
 });
 
+/* REGRESSION. The boundary check used to capture the tail after "pat", so the ordinary English word
+ * "patient" matched as "pat" + "ient" and every output containing it was withheld as a cross-patient
+ * leak. Being fail-safe, it was invisible until MaiK needed to say the word. */
+test("REGRESSION: the word \"patient\" is not itself a foreign identifier", () => {
+  const r = screenOutput("Amoxicillin is a penicillin and this patient is documented anaphylactic to penicillin.", { patientId: "pat-1" });
+  assert.equal(r.released, true, JSON.stringify(r.violations));
+});
+
+test("a short identifier belonging to another patient is still caught", () => {
+  const r = screenOutput("Compare with pat-2, who tolerated it.", { patientId: "pat-1" });
+  assert.equal(r.released, false);
+  assert.equal(r.violations[0].id, "patient-boundary");
+});
+
 test("an output about the patient in context is released", () => {
   const r = screenOutput("Summary for pat-1: admitted with chest pain, troponin negative.", { patientId: "pat-1" });
   assert.equal(r.released, true);
