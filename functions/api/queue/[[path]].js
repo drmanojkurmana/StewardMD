@@ -101,6 +101,7 @@ import { createLaunch } from "../../_wardsynq/smart-server.js";
 import { ingestHl7 } from "../../_wardsynq/hl7-inbound.js";
 import { startReconciliation, decideMedicine, readReconciliation } from "../../_wardsynq/med-reconciliation.js";
 import { wardMetrics } from "../../_wardsynq/ward-metrics.js";
+import { patientFlow } from "../../_wardsynq/patient-flow.js";
 import { releaseResult, pendingRequests } from "../../_wardsynq/lab-result.js";
 import { mergePatients, unmergePatients, identityOf } from "../../_wardsynq/identity-merge.js";
 import { overrideReport } from "../../_wardsynq/override-analytics.js";
@@ -622,7 +623,7 @@ export async function onRequest(context) {
         "med-history": CAPS.EMR_VITALS, "med-decide": CAPS.EMR_TREAT, "med-reconciliation": CAPS.EMR_VIEW,
         // What is outstanding on the ward. A count of open items, naming no patient except on the
         // oldest unacknowledged critical result - so it is readable by the ward, at emr.view.
-        metrics: CAPS.EMR_VIEW,
+        metrics: CAPS.EMR_VIEW, "patient-flow": CAPS.EMR_VIEW,
         // The laboratory. Its own authority: releasing a result is not treating a patient.
         "release-result": CAPS.LAB_RESULT, "pending-tests": CAPS.LAB_RESULT,
         /* Resolving identity is the registration authority, not a clinical one: it is the same act
@@ -1602,6 +1603,10 @@ export async function onRequest(context) {
       }
       if (sub === "metrics" && method === "GET") {
         const r = await wardMetrics(request, env, { ...deps, ward: url.searchParams.get("ward") || "", escalationPolicy: (wsqCfg && wsqCfg.criticalEscalation) || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "patient-flow" && method === "GET") {
+        const r = await patientFlow(request, env, { ...deps, escalationPolicy: (wsqCfg && wsqCfg.criticalEscalation) || null });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "med-history" && method === "POST") {

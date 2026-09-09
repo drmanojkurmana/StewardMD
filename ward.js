@@ -178,6 +178,7 @@
       // can see every open critical loop at once, not just the one chart they happen to have open.
       '<button class="w-btn ghost" data-w-act="critsboard" title="Every open critical result, hospital-wide">' + ms("priority_high") + "Critical results</button>" +
       '<button class="w-btn ghost" data-w-act="bedmgmt" title="Reserve, block for maintenance, clean-before-reuse - real bed states, server-checked">' + ms("bed") + "Bed management</button>" +
+      '<button class="w-btn ghost" data-w-act="flowcommand" title="ED, beds, admissions pending, discharge, transfers - hospital-wide, live">' + ms("hub") + "Patient flow</button>" +
       // Reachable BEFORE an outage, which is the only time it can be taken. A pack you can only get
       // to while the system is up is a pack the ward has to remember to take while the system is up.
       '<button class="w-btn ghost" data-w-act="downtime" title="Printable sheet for when the system is unavailable">' + ms("print") + "Downtime pack</button></div>" +
@@ -1615,6 +1616,58 @@
       (wardRows || '<p class="w-empty">' + (bm.loaded ? "No wards are recorded for this hospital yet." : "Loading&hellip;") + "</p>");
   }
 
+  /* TASK 4.4: the patient flow command center. IT COUNTS, IT DOES NOT JUDGE - every number here
+   * comes verbatim from /ward/patient-flow (patient-flow.js), which states in its own header what
+   * it deliberately does not invent: no predicted/expected discharge date, no bottleneck-severity
+   * score, no transfer-approval workflow. This screen adds nothing - it renders the server's
+   * numbers, and "recent transfers" / "discharge candidates" are labelled exactly as the server
+   * means them, never dressed up as something more certain. */
+  function flowCommandView(state) {
+    var f = (state.flow && state.flow.flow) || null;
+    if (!f) {
+      return '<div class="w-chart-h"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button>" +
+        "<div><b>Patient flow</b><small>hospital-wide</small></div>" +
+        '<button class="w-ic" data-w-act="flowload" title="Refresh">' + ms("refresh") + "</button></div>" +
+        '<p class="w-empty">' + (state.flow && state.flow.loaded ? "Nothing to show yet." : "Loading&hellip;") + "</p>";
+    }
+    var bottleneckWords = { unplaced_patients: "unplaced patients on", ed_untriaged: "ED patients not yet triaged", beds_blocked: "beds blocked", beds_in_cleaning_turnover: "beds in cleaning turnover", stays_with_open_items: "stays with open items" };
+    var bottlenecks = (f.bottlenecks || []).map(function (b) {
+      return "<li><b>" + esc(b.count) + "</b> " + esc(bottleneckWords[b.kind] || b.kind) + (b.ward ? " " + esc(b.ward) : "") + "</li>";
+    }).join("");
+    var openRows = (f.staysWithOpenItems || []).map(function (s) {
+      return "<li><b>" + esc(s.openItems) + "</b> open item" + (s.openItems === 1 ? "" : "s") + '<span>' + esc(s.ward || "") + (s.bed ? " &middot; bed " + esc(s.bed) : "") + (s.lengthOfStayDays != null ? " &middot; day " + esc(s.lengthOfStayDays) : "") + "</span></li>";
+    }).join("");
+    var transferRows = (f.recentTransfers || []).map(function (t) {
+      return "<li>" + esc((t.movedFrom && t.movedFrom.ward) || "?") + " &rarr; " + esc(t.ward || "?") + '<span>' + when(t.movedAt) + (t.moveReason ? " &middot; " + esc(t.moveReason) : "") + "</span></li>";
+    }).join("");
+    return '<div class="w-chart-h"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button>" +
+      "<div><b>Patient flow</b><small>hospital-wide &middot; " + when(f.computedAt) + "</small></div>" +
+      '<button class="w-ic" data-w-act="flowload" title="Refresh">' + ms("refresh") + "</button></div>" +
+
+      '<div class="w-card"><div class="w-card-h">' + ms("emergency") + "<h3>ED</h3></div>" +
+      "<p>" + esc(f.ed.arrivals) + " in the department &middot; " + esc(f.ed.untriaged) + " not yet triaged</p></div>" +
+
+      '<div class="w-card"><div class="w-card-h">' + ms("bed") + "<h3>Beds</h3></div>" +
+      "<p>" + esc(f.beds.occupied) + " occupied &middot; " + esc(f.beds.unplacedPatients) + " admitted with no bed yet</p>" +
+      "<p class=\"w-hint\">Available " + esc(f.beds.states.available) + " &middot; Reserved " + esc(f.beds.states.reserved) +
+      " &middot; Blocked " + esc(f.beds.states.blocked) + " &middot; Cleaning " + esc(f.beds.states.cleaning) + " &middot; Maintenance " + esc(f.beds.states.maintenance) + "</p></div>" +
+
+      '<div class="w-card"><div class="w-card-h">' + ms("hourglass_top") + "<h3>Admissions pending</h3></div>" +
+      "<p>" + esc(f.admissionsPending.waiting) + " waiting &middot; longest wait " + esc(f.admissionsPending.longestWaitHours) + " h</p></div>" +
+
+      '<div class="w-card"><div class="w-card-h">' + ms("task_alt") + "<h3>Discharge</h3></div>" +
+      "<p>" + esc(f.dischargeCandidates) + " stay" + (f.dischargeCandidates === 1 ? "" : "s") + " with nothing outstanding right now</p>" +
+      '<p class="w-hint">This is a live fact, not a predicted discharge date - no expected-discharge field exists in this record.</p>' +
+      (openRows ? '<ul class="w-mini">' + openRows + "</ul>" : "") + "</div>" +
+
+      '<div class="w-card"><div class="w-card-h">' + ms("swap_horiz") + "<h3>Recent transfers</h3></div>" +
+      (transferRows ? '<ul class="w-mini">' + transferRows + "</ul>" : '<p class="w-empty">None in the last 24 hours.</p>') + "</div>" +
+
+      '<div class="w-card"><div class="w-card-h">' + ms("priority_high") + "<h3>Where to look first</h3></div>" +
+      '<p class="w-hint">Ranked by count. Nothing here is a score - a human decides what matters.</p>' +
+      (bottlenecks ? '<ul class="w-mini">' + bottlenecks + "</ul>" : '<p class="w-empty">Nothing stands out right now.</p>') + "</div>";
+  }
+
   /* TASK 3.5: the blood bank workstation. wardsynq-transfusion.js (HAZ-BLD-01) already enforces
    * everything hazardous here - ABO/RhD compatibility, a crossmatch bound to one patient, and a
    * two-person bedside check that re-derives compatibility from the physical unit rather than the
@@ -1896,6 +1949,7 @@
         : state.view === "transfusion" ? transfusionView(state)
         : state.view === "critsboard" ? critsBoardView(state)
         : state.view === "bedmgmt" ? bedBoardMgmtView(state)
+        : state.view === "flowcommand" ? flowCommandView(state)
         : listView(state)) + "</div></div>";
   }
 
@@ -2597,6 +2651,15 @@
       .then(function (r) { if (settle(r, "Acknowledged.")) loadCritsBoard(); else paint(); })
       .catch(function () { st.busy = false; st.err = "Could not record the acknowledgement."; paint(); });
   }
+  function flowCommandOpen() {
+    st.view = "flowcommand"; st.flow = {}; paint(); loadFlowCommand();
+  }
+  function loadFlowCommand() {
+    if (!st.flow) st.flow = {};
+    return apiGet("/ward/patient-flow?orgId=" + encodeURIComponent(st.orgId))
+      .then(function (r) { st.flow.flow = (r && r.ok && r.flow) || null; st.flow.loaded = true; paint(); })
+      .catch(function () { st.flow.loaded = true; paint(); });
+  }
   function bedMgmtOpen() {
     st.view = "bedmgmt"; st.bedMgmt = {}; paint(); loadBedMgmt();
   }
@@ -3258,6 +3321,7 @@
       if (st.view === "inventory") { st.inventory = null; st.view = "list"; paint(); return; }
       if (st.view === "critsboard") { st.critsBoard = []; st.view = "list"; paint(); return; }
       if (st.view === "bedmgmt") { st.bedMgmt = {}; st.view = "list"; paint(); return; }
+      if (st.view === "flowcommand") { st.flow = {}; st.view = "list"; paint(); return; }
       // Picking a bed to admit an ED patient opens the SAME bed board a fresh admission uses;
       // backing out of it returns to that patient's ED chart, not the ward list, and drops the
       // pending admit rather than leaving it to fire on some later, unrelated bed pick.
@@ -3317,6 +3381,8 @@
     if (cmd === "critsboardload") { loadCritsBoard(); return; }
     if (cmd === "ackboard") { acknowledgeBoard(arg); return; }
     if (cmd === "bedmgmt") { bedMgmtOpen(); return; }
+    if (cmd === "flowcommand") { flowCommandOpen(); return; }
+    if (cmd === "flowload") { loadFlowCommand(); return; }
     if (cmd === "bedmgmtload") { loadBedMgmt(); return; }
     if (cmd === "bedstate") { bedStateApply(arg); return; }
     if (cmd === "stockreceive") { stockReceive(); return; }
