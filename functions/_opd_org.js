@@ -66,6 +66,10 @@ export function org(o = {}) {
 function wardsynqConfig(w) {
   if (!w || typeof w !== "object" || Array.isArray(w)) return null;
   const pick = {};
+  /* ai joined 2026-09-09 (TASK 8): whether this hospital has AI on at all, and - the part that
+   * matters - which model providers it has a data agreement with (phiApproved). That is a legal fact
+   * about this hospital, not something a source file can know, so it lives here with the rest of the
+   * hospital-owned clinical content and defaults to NONE approved. */
   // dicom joined 2026-09-09 (TASK 7.7): the hospital's own order-code to DICOM modality map. It is
   // hospital-owned clinical content for the same reason the rest of this list is - only this
   // hospital knows that its order code "CT-ABDO" means a CT scanner - and functions/_wardsynq/dicom.js
@@ -73,7 +77,7 @@ function wardsynqConfig(w) {
   // goes out without a modality rather than with an invented one.
   // deltaLimits and autoVerify joined 2026-09-07. Both are clinical content the HOSPITAL owns: what
   // counts as an implausible change in an analyte, and which analytes may be released unread.
-  for (const k of ["criticalLimits", "criticalEscalation", "marTimes", "marGraceMinutes", "beds", "highAlertDrugs", "orderSets", "noteTemplates", "riskTools", "utcOffsetMinutes", "deltaLimits", "autoVerify", "formulary", "requireReasonOffFormulary", "advisories", "registries", "resources", "flowsheetRows", "neverRelease", "rpoMinutes", "tariff", "reorderLevels", "mpiThresholds", "transmitEndpoints", "patientAccess", "fhir", "terminology", "hl7", "chartCompletion", "dicom"]) {
+  for (const k of ["criticalLimits", "criticalEscalation", "marTimes", "marGraceMinutes", "beds", "highAlertDrugs", "orderSets", "noteTemplates", "riskTools", "utcOffsetMinutes", "deltaLimits", "autoVerify", "formulary", "requireReasonOffFormulary", "advisories", "registries", "resources", "flowsheetRows", "neverRelease", "rpoMinutes", "tariff", "reorderLevels", "mpiThresholds", "transmitEndpoints", "patientAccess", "fhir", "terminology", "hl7", "chartCompletion", "dicom", "ai"]) {
     if (w[k] !== undefined && w[k] !== null) pick[k] = w[k];
   }
   return Object.keys(pick).length ? pick : null;

@@ -362,6 +362,13 @@ const RESOURCE_TYPES = Object.freeze([
    * construction. See fhir-outbound.js's header. */
   "OutboundDestination",
   "OutboundDelivery",
+  /* TASK 8: one AI action, written down. Its own governed type because it is a fact ABOUT the record
+   * rather than a clinical finding in it - what a model was asked, which model answered, which row
+   * versions it was shown, what it said, and what a clinician then decided. A log line would have
+   * needed tenant isolation, an append-only history, an audit row and the patient compartment all
+   * inventing again; a record inherits them. Readable by exactly the people who may read the patient
+   * it is about, which is why patientId is on it. See ai-interaction.js. */
+  "AIInteraction",
 ]);
 
 const MODE = Object.freeze({ SYSTEM_OF_RECORD: "system-of-record", INTEGRATION: "integration" });

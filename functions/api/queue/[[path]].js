@@ -137,6 +137,9 @@ import { chartInfusion, listInfusions } from "../../_wardsynq/infusion.js";
 import { reportImaging } from "../../_wardsynq/radiology-report.js";
 import { protocolContext, recordProtocol } from "../../_wardsynq/radiology-protocol.js";
 import { imagingWorklist } from "../../_wardsynq/dicom.js";
+/* TASK 8: the governed AI layer over the clinical record. Distinct from the MaiK product routes
+ * under /api/ai, which answer a clinician's own questions and touch no record. */
+import { askAboutPatient, reviewInteraction, listInteractions } from "../../_wardsynq/ai-interaction.js";
 import { checkAdvisories } from "../../_wardsynq/advisory-authoring.js";
 import { cdaForEncounter } from "../../_wardsynq/cda.js";
 import { news2ForPatient } from "../../_wardsynq/news2-view.js";
@@ -740,6 +743,11 @@ export async function onRequest(context) {
          * than no worklist. Widening the lab grant to make this work would have overturned a
          * considered boundary for the convenience of one feature, so it was not done. */
         "imaging-worklist": CAPS.EMR_VIEW,
+        /* TASK 8. ASKING reads the chart and writes no clinical content, so it is emr.view - the same
+         * capability that reads the record it summarises, and no wider. REVIEWING is emr.treat:
+         * accepting a drafted note puts an unsigned note on the chart, which is a clinical act, and
+         * the AI actor it writes as is capped to no wider than the reviewer's own scope. */
+        "ai-ask": CAPS.EMR_VIEW, "ai-interactions": CAPS.EMR_VIEW, "ai-review": CAPS.EMR_TREAT,
         // Charting a pump is the bedside's act, exactly like giving a dose.
         infusion: CAPS.MED_ADMINISTER, infusions: CAPS.EMR_VIEW,
         // Charting a wound is nursing work, the same authority as a vital or a fluid entry.
@@ -1683,6 +1691,27 @@ export async function onRequest(context) {
       }
       if (sub === "wounds" && method === "GET") {
         const r = await listWounds(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "" });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "ai-ask" && method === "POST") {
+        /* WSQ_AI_FETCH is a BINDING, not a parameter: it lets a deployment (and this repository's own
+         * test suite) supply the transport the local-model adapter talks over, while leaving every
+         * decision about WHICH model may answer - and whether it may see patient data at all - to the
+         * gateway and the hospital's configuration. No caller can choose a provider. */
+        const r = await askAboutPatient(request, env, { ...deps, config: (wsqCfg && wsqCfg.ai) || null,
+          patientId: body.patientId, encounterId: body.encounterId, task: body.task, question: body.question,
+          sections: body.sections, idempotencyKey: body.idempotencyKey || null,
+          fetchImpl: env && typeof env.WSQ_AI_FETCH === "function" ? env.WSQ_AI_FETCH : null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "ai-review" && method === "POST") {
+        const r = await reviewInteraction(request, env, { ...deps, config: (wsqCfg && wsqCfg.ai) || null,
+          interactionId: body.interactionId, decision: body.decision, editedOutput: body.editedOutput,
+          reason: body.reason, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "ai-interactions" && method === "GET") {
+        const r = await listInteractions(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "" });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "imaging-worklist" && method === "GET") {
