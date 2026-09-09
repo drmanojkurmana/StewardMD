@@ -113,7 +113,7 @@
   function persistCaseWs() { try { caseWorkspace ? sessionStorage.setItem("smd_ws_oneshot", caseWorkspace) : sessionStorage.removeItem("smd_ws_oneshot"); } catch (e) {} }
   try { var _o1 = sessionStorage.getItem("smd_ws_oneshot"); if (_o1) caseWorkspace = _o1; } catch (e) {}
 
-  function activeWorkspace() { return caseWorkspace || prefs.defaultClinicalWorkspace || IM; }
+  function activeWorkspace() { return meta(caseWorkspace || prefs.defaultClinicalWorkspace || IM).id; }
   function setDefault(id) { prefs.defaultClinicalWorkspace = id; prefs.lastUsedClinicalWorkspace = id; prefs.lastWorkspaceChangedAt = 0; savePrefs(); }
 
   function toast(m) { try { if (window.SB && SB.toast) return SB.toast(m); } catch (e) {} var t = document.getElementById("swToast"); if (!t) { t = document.createElement("div"); t.id = "swToast"; t.className = "sw-toast"; document.body.appendChild(t); } t.textContent = m; t.classList.add("on"); clearTimeout(t._t); t._t = setTimeout(function () { t.classList.remove("on"); }, 2400); }
@@ -363,8 +363,8 @@
     _es = null;
     var h = '<div class="sw-shead"><button class="bk" id="swShBack" aria-label="Back">‹</button>' +
       '<div class="ti">' + r.name + '<span class="ea">Early access</span></div>' +
-      '<button class="sw-pill" id="swShPill"><span class="ic">' + ic(ICONS[id]) + '</span><span class="nm">' + r.name + '</span><span class="chev">▾</span></button></div>';
-    h += '<div class="sw-sbody"><div class="sw-wm">' + wm(WMARKS[id]) + '</div>';
+      '<button class="sw-pill" id="swShPill"><span class="ic">' + ic(ICONS[r.id]) + '</span><span class="nm">' + r.name + '</span><span class="chev">▾</span></button></div>';
+    h += '<div class="sw-sbody"><div class="sw-wm">' + wm(WMARKS[r.id]) + '</div>';
     h += '<div class="sw-note">Early access — advisory decision support, not a diagnosis or drug dose. It flags danger signs, whether antibiotics/source-control are needed, and referral. Verify against local protocol, imaging &amp; the individual patient. Internal Medicine remains the fully-validated engine.</div>';
     if (eng && eng.syndromes) {
       h += '<div class="sw-card"><h4>Step 1 · Choose the presentation</h4><div class="sw-chips" id="swSyn">' +
@@ -495,7 +495,7 @@
   }
 
   /* ───────────────────────────── sidebar switcher (wrap SB.open) ───────────────────────────── */
-  function refreshSidebarLabel() { var w = activeWorkspace(); var b = document.querySelector("#sbMenu .sw-sbsw .nm"); if (b) b.textContent = meta(w).name; var i2 = document.querySelector("#sbMenu .sw-sbsw .ic"); if (i2) i2.innerHTML = ic(ICONS[w]); }
+  function refreshSidebarLabel() { var w = meta(activeWorkspace()); var b = document.querySelector("#sbMenu .sw-sbsw .nm"); if (b) b.textContent = w.name; var i2 = document.querySelector("#sbMenu .sw-sbsw .ic"); if (i2) i2.innerHTML = ic(ICONS[w.id]); }
   function injectSidebarSwitcher() {
     var menu = document.getElementById("sbMenu"); if (!menu || menu.querySelector(".sw-sbsw")) return;
     // The redesigned sidebar (sidebar-redesign.js) OWNS #sbMenu and renders its own workspace row
@@ -506,7 +506,8 @@
     for (var i = 0; i < btns.length; i++) { if (/clinical reasoning/i.test(btns[i].textContent || "")) { target = btns[i]; break; } }
     var lab = document.createElement("div"); lab.className = "sw-sblab"; lab.textContent = "Clinical workspace";
     var sw = document.createElement("button"); sw.className = "sw-sbsw";
-    sw.innerHTML = '<span class="ic">' + ic(ICONS[activeWorkspace()]) + '</span><span class="nm">' + meta(activeWorkspace()).name + '</span><span class="chev">▾</span>';
+    var wMeta = meta(activeWorkspace());
+    sw.innerHTML = '<span class="ic">' + ic(ICONS[wMeta.id]) + '</span><span class="nm">' + wMeta.name + '</span><span class="chev">▾</span>';
     sw.addEventListener("click", function (e) { e.preventDefault(); e.stopPropagation(); openSheet({ inCase: false }); });
     if (target && target.parentNode) { target.parentNode.insertBefore(sw, target); target.parentNode.insertBefore(lab, sw); }
     else { menu.insertBefore(sw, menu.firstChild); menu.insertBefore(lab, sw); }
