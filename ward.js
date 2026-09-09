@@ -179,6 +179,7 @@
       '<button class="w-btn ghost" data-w-act="critsboard" title="Every open critical result, hospital-wide">' + ms("priority_high") + "Critical results</button>" +
       '<button class="w-btn ghost" data-w-act="bedmgmt" title="Reserve, block for maintenance, clean-before-reuse - real bed states, server-checked">' + ms("bed") + "Bed management</button>" +
       '<button class="w-btn ghost" data-w-act="flowcommand" title="ED, beds, admissions pending, discharge, transfers - hospital-wide, live">' + ms("hub") + "Patient flow</button>" +
+      '<button class="w-btn ghost" data-w-act="scheduling" title="Appointments, resource bookings, blackout periods - conflict-checked, server-side">' + ms("event") + "Scheduling</button>" +
       // Reachable BEFORE an outage, which is the only time it can be taken. A pack you can only get
       // to while the system is up is a pack the ward has to remember to take while the system is up.
       '<button class="w-btn ghost" data-w-act="downtime" title="Printable sheet for when the system is unavailable">' + ms("print") + "Downtime pack</button></div>" +
@@ -1668,6 +1669,86 @@
       (bottlenecks ? '<ul class="w-mini">' + bottlenecks + "</ul>" : '<p class="w-empty">Nothing stands out right now.</p>') + "</div>";
   }
 
+  /* TASK 4.5: scheduling. scheduling.js/resource-booking.js/blackout.js already enforce every hard
+   * safeguard here - a slot cannot be double-held, a blackout cannot be overridden, a resource the
+   * hospital does not have cannot be booked. This screen adds no logic: it books, cancels,
+   * reschedules-by-state-change, marks did-not-attend, and blocks/unblocks a period, and shows the
+   * server's own refusal reason verbatim on a clash or a blackout. */
+  var APPT_STATE_WORDS = { booked: "Booked", arrived: "Arrived", completed: "Completed", cancelled: "Cancelled", "did-not-attend": "Did not attend" };
+  function schedulingView(state) {
+    var sc = state.scheduling || {};
+    var diary = sc.diary || {};
+    var apptRows = (diary.appointments || []).map(function (a) {
+      var live = a.state === "booked" || a.state === "arrived";
+      return "<li><b>" + esc(when(a.startAt)) + "</b> &middot; " + esc(a.minutes) + "m &middot; " + esc(a.clinicianId) +
+        '<span class="w-st ' + esc(a.state) + '">' + esc(APPT_STATE_WORDS[a.state] || a.state) + "</span>" +
+        (a.overbooked ? '<span class="w-tag warn">overbooked: ' + esc(a.overbookReason || "") + "</span>" : "") +
+        (a.reason ? "<br><small>" + esc(a.reason) + "</small>" : "") +
+        (live ? '<div class="w-actions"><button class="w-btn tiny ghost" data-w-act="apptcancel:' + esc(a.appointmentId) + '">' + ms("close") + "Cancel</button>" +
+          '<button class="w-btn tiny ghost" data-w-act="apptdna:' + esc(a.appointmentId) + '">' + ms("event_busy") + "DNA</button></div>" : "") +
+        "</li>";
+    }).join("");
+    var recallRows = (diary.recalls || []).map(function (r) {
+      return "<li><b>" + esc(r.reason) + "</b>" + (r.state === "overdue" ? '<span class="w-st overdue">' + esc(r.overdueDays) + " days overdue</span>" : "") +
+        "<br><small>" + esc(r.patientId) + (r.dueBy ? " &middot; due " + esc(when(r.dueBy)) : "") + "</small></li>";
+    }).join("");
+    var resRows = ((sc.resources && sc.resources.resources) || []).map(function (r) {
+      var bookingRows = (r.bookings || []).filter(function (b) { return b.state === "booked"; }).map(function (b) {
+        return "<li><b>" + esc(when(b.startAt)) + "</b> &middot; " + esc(b.minutes) + "m" + (b.purpose ? " &middot; " + esc(b.purpose) : "") +
+          '<button class="w-btn tiny ghost" data-w-act="rescancel:' + esc(b.bookingId) + '">' + ms("close") + "Cancel</button></li>";
+      }).join("");
+      return '<div class="w-sub"><h4>' + esc(r.name) + " (" + esc(r.kind) + ")</h4>" + (bookingRows ? '<ul class="w-mini">' + bookingRows + "</ul>" : '<p class="w-empty">No bookings.</p>') + "</div>";
+    }).join("");
+    var blackoutRows = (sc.blackouts || []).map(function (b) {
+      return "<li><b>" + esc(b.clinicianId || b.resourceId) + "</b> " + esc(when(b.from)) + " &rarr; " + esc(when(b.to)) +
+        "<br><small>" + esc(b.reason) + "</small>" +
+        '<button class="w-btn tiny ghost" data-w-act="blackoutcancel:' + esc(b.blackoutId) + '">' + ms("close") + "Unblock</button></li>";
+    }).join("");
+
+    return '<div class="w-chart-h"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button>" +
+      "<div><b>Scheduling</b><small>hospital-wide</small></div>" +
+      '<button class="w-ic" data-w-act="schedload" title="Refresh">' + ms("refresh") + "</button></div>" +
+      (sc.err ? '<p class="w-hint warn">' + ms("warning") + esc(sc.err) + "</p>" : "") +
+
+      '<div class="w-card"><div class="w-card-h">' + ms("event") + "<h3>Appointments</h3></div>" +
+      (apptRows ? '<ul class="w-mini">' + apptRows + "</ul>" : '<p class="w-empty">No appointments loaded. Set a clinician and load.</p>') +
+      (recallRows ? '<h4>Unbooked follow-ups</h4><ul class="w-mini">' + recallRows + "</ul>" : "") +
+      '<div class="w-grid">' +
+      '<label class="w-f"><span>Clinician</span><input id="wSchedClinician" type="text" autocomplete="off" value="' + esc(sc.clinicianId || "") + '"></label>' +
+      '<label class="w-f"><span>Patient ID</span><input id="wSchedPatient" type="text" autocomplete="off"></label>' +
+      '<label class="w-f"><span>Start (ISO)</span><input id="wSchedStart" type="text" autocomplete="off" placeholder="2026-09-10T10:00:00.000Z"></label>' +
+      '<label class="w-f"><span>Minutes</span><input id="wSchedMinutes" type="text" inputmode="numeric" autocomplete="off" value="15"></label>' +
+      '<label class="w-f"><span>Reason</span><input id="wSchedReason" type="text" autocomplete="off"></label>' +
+      "</div>" +
+      '<div class="w-actions">' +
+      '<button class="w-btn go" data-w-act="schedload2">' + ms("search") + "Load this clinician's diary</button>" +
+      '<button class="w-btn" data-w-act="apptbook">' + ms("add") + "Book</button>" +
+      '<button class="w-btn ghost" data-w-act="apptoverbook">' + ms("warning") + "Book anyway (overbook)</button>" +
+      "</div></div>" +
+
+      '<div class="w-card"><div class="w-card-h">' + ms("meeting_room") + "<h3>Resources</h3></div>" +
+      (resRows || '<p class="w-empty">No bookable resources are configured for this hospital.</p>') +
+      '<div class="w-grid">' +
+      '<label class="w-f"><span>Resource ID</span><input id="wResId" type="text" autocomplete="off"></label>' +
+      '<label class="w-f"><span>Start (ISO)</span><input id="wResStart" type="text" autocomplete="off"></label>' +
+      '<label class="w-f"><span>Minutes</span><input id="wResMinutes" type="text" inputmode="numeric" autocomplete="off" value="30"></label>' +
+      '<label class="w-f"><span>Purpose</span><input id="wResPurpose" type="text" autocomplete="off"></label>' +
+      "</div>" +
+      '<button class="w-btn go" data-w-act="resbook">' + ms("add") + "Book resource</button></div>" +
+
+      '<div class="w-card"><div class="w-card-h">' + ms("block") + "<h3>Blackout periods</h3></div>" +
+      '<p class="w-hint">A blackout cannot be overridden - it is the hospital saying this slot does not exist right now.</p>' +
+      (blackoutRows ? '<ul class="w-mini">' + blackoutRows + "</ul>" : '<p class="w-empty">No active blackouts.</p>') +
+      '<div class="w-grid">' +
+      '<label class="w-f"><span>Clinician (or leave blank)</span><input id="wBoClinician" type="text" autocomplete="off"></label>' +
+      '<label class="w-f"><span>Resource (or leave blank)</span><input id="wBoResource" type="text" autocomplete="off"></label>' +
+      '<label class="w-f"><span>From (ISO)</span><input id="wBoFrom" type="text" autocomplete="off"></label>' +
+      '<label class="w-f"><span>To (ISO)</span><input id="wBoTo" type="text" autocomplete="off"></label>' +
+      '<label class="w-f"><span>Reason</span><input id="wBoReason" type="text" autocomplete="off"></label>' +
+      "</div>" +
+      '<button class="w-btn warn" data-w-act="blackoutadd">' + ms("block") + "Block period</button></div>";
+  }
+
   /* TASK 3.5: the blood bank workstation. wardsynq-transfusion.js (HAZ-BLD-01) already enforces
    * everything hazardous here - ABO/RhD compatibility, a crossmatch bound to one patient, and a
    * two-person bedside check that re-derives compatibility from the physical unit rather than the
@@ -1950,6 +2031,7 @@
         : state.view === "critsboard" ? critsBoardView(state)
         : state.view === "bedmgmt" ? bedBoardMgmtView(state)
         : state.view === "flowcommand" ? flowCommandView(state)
+        : state.view === "scheduling" ? schedulingView(state)
         : listView(state)) + "</div></div>";
   }
 
@@ -2651,6 +2733,87 @@
       .then(function (r) { if (settle(r, "Acknowledged.")) loadCritsBoard(); else paint(); })
       .catch(function () { st.busy = false; st.err = "Could not record the acknowledgement."; paint(); });
   }
+  function schedulingOpen() {
+    st.view = "scheduling"; st.scheduling = {}; paint(); loadScheduling();
+  }
+  function loadScheduling() {
+    if (!st.scheduling) st.scheduling = {};
+    var sc = st.scheduling;
+    var clinicianId = sc.clinicianId || val("wSchedClinician") || "";
+    sc.clinicianId = clinicianId;
+    return Promise.all([
+      apiGet("/ward/diary?orgId=" + encodeURIComponent(st.orgId) + (clinicianId ? "&clinicianId=" + encodeURIComponent(clinicianId) : "")),
+      apiGet("/ward/resource-schedule?orgId=" + encodeURIComponent(st.orgId)),
+      apiGet("/ward/blackouts?orgId=" + encodeURIComponent(st.orgId)),
+    ]).then(function (r) {
+      sc.diary = (r[0] && r[0].ok) ? r[0] : null;
+      sc.resources = (r[1] && r[1].ok) ? r[1] : null;
+      sc.blackouts = (r[2] && r[2].ok && r[2].blackouts) || [];
+      paint();
+    }).catch(function () { paint(); });
+  }
+  function apptBookOrOverbook(overbook) {
+    var clinicianId = val("wSchedClinician"), patientId = val("wSchedPatient"), startAt = val("wSchedStart"), minutes = val("wSchedMinutes"), reason = val("wSchedReason");
+    if (!clinicianId || !patientId || !startAt || !minutes) { st.scheduling.err = "A clinician, a patient, a start time and a length are all required."; paint(); return; }
+    st.scheduling.err = ""; st.busy = true; paint();
+    apiPost("/ward/book", { orgId: st.orgId, clinicianId: clinicianId, patientId: patientId, startAt: startAt, minutes: Number(minutes), reason: reason || undefined, overbook: !!overbook, overbookReason: overbook ? (reason || "Overbooked at the desk's request") : undefined })
+      .then(function (r) {
+        st.busy = false;
+        if (r && r.ok) { loadScheduling(); return; }
+        st.scheduling.err = r && (r.detail || r.error) || "Could not book that slot.";
+        paint();
+      })
+      .catch(function () { st.busy = false; st.scheduling.err = "Could not reach the server."; paint(); });
+  }
+  function apptSetState(appointmentId, state) {
+    var reason = ""; try { reason = G.prompt("Reason (" + state + "):") || ""; } catch (e) {}
+    if (!reason.trim()) { st.scheduling.err = "A reason is required."; paint(); return; }
+    st.busy = true; paint();
+    apiPost("/ward/appointment", { orgId: st.orgId, appointmentId: appointmentId, state: state, reason: reason.trim() })
+      .then(function (r) { st.busy = false; if (r && r.ok) loadScheduling(); else { st.scheduling.err = (r && r.detail) || "Could not update that appointment."; paint(); } })
+      .catch(function () { st.busy = false; st.scheduling.err = "Could not reach the server."; paint(); });
+  }
+  function resBook() {
+    var resourceId = val("wResId"), startAt = val("wResStart"), minutes = val("wResMinutes"), purpose = val("wResPurpose");
+    if (!resourceId || !startAt || !minutes) { st.scheduling.err = "A resource, a start time and a length are all required."; paint(); return; }
+    st.scheduling.err = ""; st.busy = true; paint();
+    apiPost("/ward/book-resource", { orgId: st.orgId, resourceId: resourceId, startAt: startAt, minutes: Number(minutes), purpose: purpose || undefined })
+      .then(function (r) {
+        st.busy = false;
+        if (r && r.ok) { loadScheduling(); return; }
+        st.scheduling.err = r && (r.detail || r.error) || "Could not book that resource.";
+        paint();
+      })
+      .catch(function () { st.busy = false; st.scheduling.err = "Could not reach the server."; paint(); });
+  }
+  function resCancel(bookingId) {
+    var reason = ""; try { reason = G.prompt("Reason for cancelling:") || ""; } catch (e) {}
+    if (!reason.trim()) { st.scheduling.err = "A reason is required."; paint(); return; }
+    st.busy = true; paint();
+    apiPost("/ward/resource-state", { orgId: st.orgId, bookingId: bookingId, state: "cancelled", reason: reason.trim() })
+      .then(function (r) { st.busy = false; if (r && r.ok) loadScheduling(); else { st.scheduling.err = (r && r.detail) || "Could not cancel that booking."; paint(); } })
+      .catch(function () { st.busy = false; st.scheduling.err = "Could not reach the server."; paint(); });
+  }
+  function blackoutAdd() {
+    var clinicianId = val("wBoClinician"), resourceId = val("wBoResource"), from = val("wBoFrom"), to = val("wBoTo"), reason = val("wBoReason");
+    if ((!clinicianId && !resourceId) || (clinicianId && resourceId)) { st.scheduling.err = "Name exactly one clinician or one resource."; paint(); return; }
+    if (!from || !to || !reason) { st.scheduling.err = "A start, an end and a reason are all required."; paint(); return; }
+    st.scheduling.err = ""; st.busy = true; paint();
+    apiPost("/ward/block-period", { orgId: st.orgId, clinicianId: clinicianId || undefined, resourceId: resourceId || undefined, from: from, to: to, reason: reason })
+      .then(function (r) {
+        st.busy = false;
+        if (r && r.ok) { loadScheduling(); return; }
+        st.scheduling.err = r && (r.detail || r.error) || "Could not block that period.";
+        paint();
+      })
+      .catch(function () { st.busy = false; st.scheduling.err = "Could not reach the server."; paint(); });
+  }
+  function blackoutCancel(blackoutId) {
+    st.busy = true; paint();
+    apiPost("/ward/cancel-blackout", { orgId: st.orgId, blackoutId: blackoutId })
+      .then(function (r) { st.busy = false; if (r && r.ok) loadScheduling(); else { st.scheduling.err = (r && r.detail) || "Could not unblock that period."; paint(); } })
+      .catch(function () { st.busy = false; st.scheduling.err = "Could not reach the server."; paint(); });
+  }
   function flowCommandOpen() {
     st.view = "flowcommand"; st.flow = {}; paint(); loadFlowCommand();
   }
@@ -3322,6 +3485,7 @@
       if (st.view === "critsboard") { st.critsBoard = []; st.view = "list"; paint(); return; }
       if (st.view === "bedmgmt") { st.bedMgmt = {}; st.view = "list"; paint(); return; }
       if (st.view === "flowcommand") { st.flow = {}; st.view = "list"; paint(); return; }
+      if (st.view === "scheduling") { st.scheduling = {}; st.view = "list"; paint(); return; }
       // Picking a bed to admit an ED patient opens the SAME bed board a fresh admission uses;
       // backing out of it returns to that patient's ED chart, not the ward list, and drops the
       // pending admit rather than leaving it to fire on some later, unrelated bed pick.
@@ -3383,6 +3547,17 @@
     if (cmd === "bedmgmt") { bedMgmtOpen(); return; }
     if (cmd === "flowcommand") { flowCommandOpen(); return; }
     if (cmd === "flowload") { loadFlowCommand(); return; }
+    if (cmd === "scheduling") { schedulingOpen(); return; }
+    if (cmd === "schedload") { loadScheduling(); return; }
+    if (cmd === "schedload2") { st.scheduling.clinicianId = val("wSchedClinician"); loadScheduling(); return; }
+    if (cmd === "apptbook") { apptBookOrOverbook(false); return; }
+    if (cmd === "apptoverbook") { apptBookOrOverbook(true); return; }
+    if (cmd === "apptcancel") { apptSetState(arg, "cancelled"); return; }
+    if (cmd === "apptdna") { apptSetState(arg, "did-not-attend"); return; }
+    if (cmd === "resbook") { resBook(); return; }
+    if (cmd === "rescancel") { resCancel(arg); return; }
+    if (cmd === "blackoutadd") { blackoutAdd(); return; }
+    if (cmd === "blackoutcancel") { blackoutCancel(arg); return; }
     if (cmd === "bedmgmtload") { loadBedMgmt(); return; }
     if (cmd === "bedstate") { bedStateApply(arg); return; }
     if (cmd === "stockreceive") { stockReceive(); return; }

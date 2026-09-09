@@ -31,6 +31,7 @@ import { VersionConflictError } from "./repository.js";
 import { resolveClinicalActor } from "./actor.js";
 import { RecordService } from "./service.js";
 import { AuthError, PermissionError } from "../_connect/permission.js";
+import { blackedOutBy } from "./blackout.js";
 
 const str = (v) => (v == null ? "" : String(v).trim());
 const TYPE = "Appointment";
@@ -180,11 +181,17 @@ async function bookAppointment(request, env, ctx) {
   const id = appointmentIdFor(clinicianId, startAt, patientId);
   if (!id) return { ...base, ok: false, status: 422, error: "bad_identifiers", written: 0 };
 
-  let all;
-  try { all = await svc.list(TYPE, 500); }
+  let all, blackouts;
+  try { [all, blackouts] = await Promise.all([svc.list(TYPE, 500), svc.list("Blackout", 500).catch(() => [])]); }
   catch (e) { return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), written: 0 }; }
 
   const candidate = { startAt, minutes };
+  /* A BLACKOUT IS A REFUSAL, NEVER AN OVERRIDE - the hospital has already said this clinician's
+   * diary does not exist for this period, so there is nothing here for ctx.overbook to override. */
+  const blocked = blackedOutBy(blackouts, clinicianId, candidate);
+  if (blocked) {
+    return { ...base, ok: false, status: 409, error: "blacked_out", detail: `${clinicianId} is unavailable ${blocked.from} to ${blocked.to}: ${blocked.reason}`, blackoutId: blocked.id, written: 0 };
+  }
   /* TWO PATIENTS CANNOT HOLD ONE SLOT. Checked against every appointment this clinician still holds,
    * and refused with the clash named so the desk can offer another time rather than being told "no". */
   const clash = (all || []).find((a) => a && a.id !== id && a.clinicianId === clinicianId

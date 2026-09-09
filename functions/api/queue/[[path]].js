@@ -124,6 +124,7 @@ import { requestAdmission, closeAdmissionRequest, admissionWaitingList } from ".
 import { registryReport } from "../../_wardsynq/registry.js";
 import { chartWound, listWounds } from "../../_wardsynq/wound.js";
 import { bookResource, setBookingState, resourceSchedule } from "../../_wardsynq/resource-booking.js";
+import { blockPeriod, cancelBlackout, listBlackouts } from "../../_wardsynq/blackout.js";
 import { flowsheet } from "../../_wardsynq/flowsheet-view.js";
 import { orderInvestigation } from "../../_wardsynq/ward-order.js";
 import { chartInfusion, listInfusions } from "../../_wardsynq/infusion.js";
@@ -747,6 +748,9 @@ export async function onRequest(context) {
         "request-admission": CAPS.QUEUE_ADD, "close-admission-request": CAPS.QUEUE_ADD, "waiting-list": CAPS.QUEUE_VIEW,
         // Booking a room is the front desk's act, the same authority as booking an appointment.
         "book-resource": CAPS.QUEUE_ADD, "resource-state": CAPS.QUEUE_ADD, "resource-schedule": CAPS.QUEUE_VIEW,
+        // TASK 4.5: blocking a diary or a resource for a period is the SAME front-desk scheduling
+        // authority as booking/cancelling one - not a clinical decision.
+        "block-period": CAPS.QUEUE_ADD, "cancel-blackout": CAPS.QUEUE_ADD, blackouts: CAPS.QUEUE_VIEW,
         // Risk assessment is nursing work, like the rest of the flowsheet.
         "risk-tools": CAPS.EMR_VIEW, assess: CAPS.EMR_VITALS, "risk-action": CAPS.EMR_VITALS, risks: CAPS.EMR_VIEW,
         /* Sending a prescription is part of prescribing, so queueing is emr.treat. Recording what
@@ -1542,6 +1546,18 @@ export async function onRequest(context) {
       }
       if (sub === "diary" && method === "GET") {
         const r = await listSchedule(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "", clinicianId: url.searchParams.get("clinicianId") || "", from: url.searchParams.get("from") || "", to: url.searchParams.get("to") || "" });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "block-period" && method === "POST") {
+        const r = await blockPeriod(request, env, { ...deps, clinicianId: body.clinicianId, resourceId: body.resourceId, from: body.from, to: body.to, reason: body.reason, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "cancel-blackout" && method === "POST") {
+        const r = await cancelBlackout(request, env, { ...deps, blackoutId: body.blackoutId, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "blackouts" && method === "GET") {
+        const r = await listBlackouts(request, env, { ...deps, clinicianId: url.searchParams.get("clinicianId") || "", resourceId: url.searchParams.get("resourceId") || "" });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "consent" && method === "POST") {
