@@ -473,19 +473,49 @@ const staffEnabled = (env) => !!(env && env.QUEUE_STAFF_ENABLED === "1");
  * org-bound by _opd_auth.js) when the deployment has staff sign-in on. A session proves identity
  * only; authority is decided below, from membership, as everywhere else in the product.
  */
+/* TASK 4.14: a session reference for the audit trail - never the raw token, a short hash of it,
+ * so two requests on the same staff login correlate without the audit event ever holding a bearer
+ * credential. Firebase identities have no per-session token surfaced this far in, so sessionRef is
+ * null for them - stated honestly as "not available", never fabricated. */
+async function sessionRefOf(tok) {
+  if (!tok || !crypto.subtle) return null;
+  const bytes = new TextEncoder().encode(tok);
+  const digest = await crypto.subtle.digest("SHA-256", bytes);
+  return [...new Uint8Array(digest)].slice(0, 8).map((b) => b.toString(16).padStart(2, "0")).join("");
+}
+
 async function resolveIdentity(request, env, deps) {
   const who = await deps.identifyFn(request, env);
   if (who && !who.guest && who.id) {
-    return { kind: "firebase", id: who.id, email: who.email ? String(who.email).toLowerCase() : null, name: who.name || null, orgId: null };
+    return { kind: "firebase", id: who.id, email: who.email ? String(who.email).toLowerCase() : null, name: who.name || null, orgId: null, sessionRef: null };
   }
   if (staffEnabled(env) && deps.staffSession) {
     const tok = request.headers.get("X-Staff-Token") || (request.headers.get("Authorization") || "").replace(/^Bearer\s+/i, "");
     if (tok) {
       const ss = await deps.staffSession(env, tok, Date.now());
-      if (ss && ss.identity && ss.orgId) return { kind: "staff", id: String(ss.identity), email: null, name: String(ss.identity), orgId: String(ss.orgId) };
+      if (ss && ss.identity && ss.orgId) return { kind: "staff", id: String(ss.identity), email: null, name: String(ss.identity), orgId: String(ss.orgId), sessionRef: await sessionRefOf(tok) };
     }
   }
   throw new AuthError("authenticated actor required");
+}
+
+/* TASK 4.14 (Audit/Financial Integrity): the plan's own minimum-audit list names "correlation ID"
+ * and "source/device/session" as required fields; this codebase's audit event (service.js's
+ * _audit()) already fully covers actor/action/object/before-after/timestamp/tenant - these three
+ * did not exist anywhere. Computed ONCE per request, here, at the one place every write and read
+ * already passes through - not threaded through the twenty-odd per-file open() helpers, which would
+ * have meant editing every bridge file for three fields three of them do not otherwise need to know
+ * about. Folded into the audit event's existing free-form `scope` blob in service.js's _audit()
+ * (see there) rather than a new column - `connect_audit_event` is a live, shared table with ABDM,
+ * and a schema migration for three optional fields is a bigger, riskier change than this task's own
+ * "smallest set of new code" instruction, when the existing scope blob already carries exactly this
+ * kind of metadata for free. */
+function requestContextOf(request, identity) {
+  return {
+    correlationId: request.headers.get("X-Correlation-Id") || (crypto.randomUUID ? crypto.randomUUID() : null),
+    deviceId: request.headers.get("X-Device-Id") || null,
+    sessionId: (identity && identity.sessionRef) || null,
+  };
 }
 
 /**
@@ -517,7 +547,9 @@ async function resolveClinicalActor(request, env, tenantId, need, deps) {
       if (!grant) throw new PermissionError(`role '${az.role}' has no clinical actor`);
       const actor = actorFromOpdRole({ identity, role: az.role, claims });
       if (need === "record:write" && !actorCan(actor, TIER.DRAFT)) throw new PermissionError(`role '${az.role}' may not write the clinical record`);
-      return { identity, tenant, role: az.role, source: "opd", org: { id: org.id, name: org.name || null }, grant, actor };
+      // actorFromOpdRole's object is frozen, like every actor this file hands out - a new object
+      // carries the request context rather than mutating a frozen one.
+      return { identity, tenant, role: az.role, source: "opd", org: { id: org.id, name: org.name || null }, grant, actor: { ...actor, requestContext: requestContextOf(request, identity) } };
     }
     // Not a member of the linked organisation. Fall through: a Connect clinician may still be one.
   }
@@ -530,7 +562,8 @@ async function resolveClinicalActor(request, env, tenantId, need, deps) {
   if (!connectCan(membership.role, need)) throw new PermissionError(`role '${membership.role}' may not perform '${need}'`);
   const actor = actorFromConnectRole({ identity, role: membership.role, claims });
   if (!actor) throw new PermissionError(`role '${membership.role}' has no clinical actor`);
-  return { identity, tenant: membership.tenant, role: membership.role, source: "connect", org: null, grant: { tier: actor.tier, read: actor.scope.read, write: actor.scope.write, basis: "connect:" + membership.role }, actor };
+  const actorWithContext = { ...actor, requestContext: requestContextOf(request, identity) };
+  return { identity, tenant: membership.tenant, role: membership.role, source: "connect", org: null, grant: { tier: actor.tier, read: actor.scope.read, write: actor.scope.write, basis: "connect:" + membership.role }, actor: actorWithContext };
 }
 
 export {
@@ -538,4 +571,5 @@ export {
   grantForCaps, grantForRole, roleMapping,
   actorFromOpdRole, actorFromConnectRole, aiActorFor, isAiOrigin,
   resolveIdentity, resolveClinicalActor,
+  sessionRefOf, requestContextOf,
 };

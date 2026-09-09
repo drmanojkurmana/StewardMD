@@ -307,7 +307,12 @@ test("every read and write leaves a PHI-free audit row; the write's row lands at
     assert.equal(a.actor, "fb:dr-menon");
   }
   const w = h.repository.audit.find((a) => a.action === "record.write");
-  assert.deepEqual(w.scope, { resourceType: "Patient", id: "pat-10", version: 1, mode: "system-of-record", idempotent: true });
+  // TASK 4.14: correlationId/deviceId/sessionId now ride along under scope.request - the plan's own
+  // "correlation ID"/"source, device, session" minimum-audit fields, folded into the existing
+  // free-form scope blob rather than a schema change. Still no PHI: asserted above already.
+  const { request: rc, ...rest } = w.scope;
+  assert.deepEqual(rest, { resourceType: "Patient", id: "pat-10", version: 1, mode: "system-of-record", idempotent: true });
+  assert.ok(rc && rc.correlationId, "a correlation id is stamped on every write: " + JSON.stringify(rc));
 });
 
 /* ------------------------------------------------------------------ the two modes and the connector boundary */
