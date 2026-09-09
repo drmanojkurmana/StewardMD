@@ -117,6 +117,7 @@ import { encounterIdForTicket } from "../../_wardsynq/opd-identity.js";
 import { queueTransmission, recordOutcome, resolveTransmission, listTransmissions, sendQueued } from "../../_wardsynq/prescription-transmit.js";
 import { submitNote, signNote, listAwaitingCoSign } from "../../_wardsynq/note-cosign.js";
 import { chartCompletionQueue } from "../../_wardsynq/chart-completion.js";
+import { patientFlowReport, clinicalOperationsReport, billingReport, claimsReport, pharmacyReport, himReport } from "../../_wardsynq/reports.js";
 import { downtimePack } from "../../_wardsynq/downtime.js";
 import { qualityReport } from "../../_wardsynq/quality.js";
 import { collectSpecimen, specimenOutcome, collectionList } from "../../_wardsynq/specimen.js";
@@ -628,6 +629,13 @@ export async function onRequest(context) {
         // What is outstanding on the ward. A count of open items, naming no patient except on the
         // oldest unacknowledged critical result - so it is readable by the ward, at emr.view.
         metrics: CAPS.EMR_VIEW, "patient-flow": CAPS.EMR_VIEW,
+        // TASK 4.12: hospital reports. Patient-flow/clinical-operations ride the same emr.view as the
+        // live queues they wrap. Billing/claims/pharmacy/HIM report at the same capability their own
+        // live routes already require - a report is not a way to read what the underlying route
+        // itself refuses.
+        "report-patient-flow": CAPS.EMR_VIEW, "report-clinical-operations": CAPS.EMR_VIEW,
+        "report-billing": CAPS.BILLING_VIEW, "report-claims": CAPS.BILLING_VIEW,
+        "report-pharmacy": CAPS.ORDER_DISPENSE, "report-him": CAPS.STAFF_ADMIN,
         // The laboratory. Its own authority: releasing a result is not treating a patient.
         "release-result": CAPS.LAB_RESULT, "pending-tests": CAPS.LAB_RESULT,
         /* Resolving identity is the registration authority, not a clinical one: it is the same act
@@ -1716,6 +1724,30 @@ export async function onRequest(context) {
       }
       if (sub === "patient-flow" && method === "GET") {
         const r = await patientFlow(request, env, { ...deps, escalationPolicy: (wsqCfg && wsqCfg.criticalEscalation) || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "report-patient-flow" && method === "GET") {
+        const r = await patientFlowReport(request, env, { ...deps, escalationPolicy: (wsqCfg && wsqCfg.criticalEscalation) || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "report-clinical-operations" && method === "GET") {
+        const r = await clinicalOperationsReport(request, env, { ...deps, ward: url.searchParams.get("ward") || "", escalationPolicy: (wsqCfg && wsqCfg.criticalEscalation) || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "report-billing" && method === "GET") {
+        const r = await billingReport(request, env, { ...deps, from: url.searchParams.get("from") || "", to: url.searchParams.get("to") || "" });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "report-claims" && method === "GET") {
+        const r = await claimsReport(request, env, { ...deps, from: url.searchParams.get("from") || "", to: url.searchParams.get("to") || "" });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "report-pharmacy" && method === "GET") {
+        const r = await pharmacyReport(request, env, { ...deps, from: url.searchParams.get("from") || "", to: url.searchParams.get("to") || "", reorderLevels: (wsqCfg && wsqCfg.reorderLevels) || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "report-him" && method === "GET") {
+        const r = await himReport(request, env, { ...deps, patientRules: (wsqCfg && wsqCfg.chartCompletion) || null, criticalPolicy: (wsqCfg && wsqCfg.criticalEscalation) || null, riskTools: (wsqCfg && wsqCfg.riskTools) || [] });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "med-history" && method === "POST") {

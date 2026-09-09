@@ -218,4 +218,4 @@ async function chartCompletionQueue(request, env, ctx) {
   return { ...base, ok: true, patientId, items, escalated: items.filter((i) => i.escalation.level === "escalate").length, overdue: items.filter((i) => i.escalation.level === "overdue").length };
 }
 
-export { ruleEscalation, chartCompletionQueue };
+export { ruleEscalation, chartCompletionQueue, DETECTORS };
