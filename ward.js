@@ -33,7 +33,7 @@
   var st = {
     orgId: "", ward: "", patients: [], view: "list",
     sel: null,                 // the selected {encounterId, patientId, ward, bed, admittedAt}
-    problems: [], criticals: [], balance: null, outbox: [], cosign: null, downtime: null, quality: null, pcopy: null,
+    problems: [], criticals: [], balance: null, outbox: [], cosign: null, downtime: null, quality: null, pcopy: null, consent: null,
     /* Held from other systems. null until asked, an object once answered, and a separate error
      * string when the list could not be read: an unreadable queue of held clinical data must never
      * look like an empty one. */
@@ -897,6 +897,11 @@
         // view. Reachable from any patient chart, gated server-side to the pharmacy role's own caps.
         '<button class="w-btn ghost" data-w-act="pharmacyopen" title="Verification queue and dispense">' + ms("medication") + "Pharmacy</button>" +
         '<button class="w-btn ghost" data-w-act="txopen" title="Transfusion request, crossmatch, bedside verification">' + ms("bloodtype") + "Blood bank</button>" +
+        // TASK 4.10: consent.js already governs every decision - treatment, sharing outside this
+        // hospital, research, photography, blood products, a specific procedure. This is the
+        // general-purpose capture/history screen; surgery's own consent step (surgeryConsent())
+        // already calls the SAME consent.js record for the "procedure" scope and is unaffected.
+        '<button class="w-btn ghost" data-w-act="consentopen" title="What this patient has agreed to and refused">' + ms("fact_check") + "Consent</button>" +
         // The patient's own copy. Reachable from the patient because that is where the conversation
         // that produces it happens, not from a menu somewhere else.
         '<button class="w-btn ghost" data-w-act="pcopy" title="The copy this patient can be given">' + ms("assignment_ind") + "Patient copy</button></div>";
@@ -1040,6 +1045,49 @@
       list(d.appointments, "No appointment is booked.", function (a) {
         return "<li>" + when(a.at) + (a.with ? " &middot; " + esc(a.with) : "") + "</li>";
       }) + "</section>" +
+      "</div>";
+  }
+
+  /* TASK 4.10: consent.js's own closed lists, mirrored here so the form can only ever submit a value
+   * the server already recognises. Free text would not be queryable server-side, so it is not offered
+   * here either - `other`/`procedure` carry a required detail field instead. */
+  var CONSENT_SCOPES = [
+    ["treatment", "General treatment"], ["share-external", "Sharing the record outside this hospital"],
+    ["share-registry", "Sharing with a registry or exchange"], ["research", "Use of the record for research"],
+    ["photography", "Clinical photography"], ["blood-products", "Transfusion of blood products"],
+    ["procedure", "A specific procedure"], ["other", "Other"],
+  ];
+  var CONSENT_GIVERS = [
+    ["patient", "Patient"], ["parent", "Parent"], ["legal-guardian", "Legal guardian"],
+    ["next-of-kin", "Next of kin"], ["power-of-attorney", "Power of attorney"], ["clinician-emergency", "Clinician (emergency)"],
+  ];
+  function consentView(state) {
+    var c = state.consent || {};
+    var opts = function (list, cur) {
+      return list.map(function (x) { return '<option value="' + esc(x[0]) + '"' + (x[0] === cur ? " selected" : "") + '>' + esc(x[1]) + "</option>"; }).join("");
+    };
+    var rows = (c.consents || []).map(function (r) {
+      var canWithdraw = r.status === "granted" || r.status === "refused";
+      return '<li class="w-mini-row"><div><b>' + esc(r.scopeLabel || r.scope) + '</b> &middot; <span class="w-st ' + esc(r.status) + '">' + esc(r.status) + "</span>" +
+        (r.detail ? " &middot; " + esc(r.detail) : "") + '<div class="w-dt-times">' + esc(r.givenBy || "") + (r.giverName ? " (" + esc(r.giverName) + ")" : "") +
+        (r.recordedAt ? " &middot; " + when(r.recordedAt) : "") + (r.validUntil ? " &middot; until " + when(r.validUntil) : "") + "</div></div>" +
+        (canWithdraw ? '<button class="w-btn ghost sm" data-w-act="consentwithdraw:' + esc(r.scope) + "|" + esc(r.detail || "") + '">' + ms("cancel") + "Withdraw</button>" : "") +
+        "</li>";
+    }).join("");
+    return '<div class="w-card">' +
+      '<div class="w-dt-bar w-noprint"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button>" +
+      "<h3>Consent</h3></div>" +
+      (c.refused ? '<p class="w-warn">' + c.refused + " refused</p>" : "") +
+      (rows ? "<ul class=\"w-mini\">" + rows + "</ul>" : '<p class="w-empty">No consent has been recorded for this patient.</p>') +
+      '<div class="w-sub"><h4>Record a decision</h4>' +
+      '<select id="wConsentScope">' + opts(CONSENT_SCOPES, c.scope) + "</select>" +
+      '<select id="wConsentDecision"><option value="granted">Granted</option><option value="refused">Refused</option></select>' +
+      '<input id="wConsentDetail" placeholder="What exactly (required for Other / a specific procedure)" value="' + esc(c.detail || "") + '">' +
+      '<select id="wConsentGivenBy">' + opts(CONSENT_GIVERS, c.givenBy) + "</select>" +
+      '<input id="wConsentGiverName" placeholder="Giver name (if not the patient)">' +
+      '<label><input type="checkbox" id="wConsentCapacity" checked> Patient had capacity</label>' +
+      '<input id="wConsentValidUntil" type="date" placeholder="Valid until (optional)">' +
+      '<button class="w-btn" data-w-act="consentrecord">' + ms("fact_check") + "Record</button></div>" +
       "</div>";
   }
 
@@ -2082,6 +2130,7 @@
       (state.view === "chart" ? chartView(state)
         : state.view === "downtime" ? downtimeView(state)
         : state.view === "pcopy" ? pcopyView(state)
+        : state.view === "consent" ? consentView(state)
         : state.view === "board" ? boardView(state)
         : state.view === "ed" ? edBoardView(state)
         : state.view === "inventory" ? inventoryView(state)
@@ -3453,6 +3502,40 @@
       .then(function (r) { if (settle(r)) { st.pcopy = r; st.ok = "Handover recorded."; } paint(); })
       .catch(function () { st.busy = false; st.err = "Could not record the handover."; paint(); });
   }
+  function consentOpen() {
+    st.view = "consent"; st.consent = {}; paint(); loadConsent();
+  }
+  function loadConsent() {
+    if (!st.sel || !st.sel.patientId) return;
+    if (!st.consent) st.consent = {};
+    return apiGet("/ward/consents?orgId=" + encodeURIComponent(st.orgId) + "&patientId=" + encodeURIComponent(st.sel.patientId))
+      .then(function (r) { if (r && r.ok) { st.consent.consents = r.consents; st.consent.refused = r.refused; } paint(); })
+      .catch(function () { paint(); });
+  }
+  function recordConsentAction() {
+    if (!st.sel || !st.sel.patientId) return;
+    var scope = val("wConsentScope"), decision = val("wConsentDecision"), detail = val("wConsentDetail");
+    if ((scope === "other" || scope === "procedure") && !detail) { st.err = "Say what this is about."; paint(); return; }
+    st.consent.scope = scope; st.consent.givenBy = val("wConsentGivenBy"); st.consent.detail = detail;
+    var capEl = document.getElementById("wConsentCapacity");
+    st.busy = true; paint();
+    apiPost("/ward/consent", {
+      orgId: st.orgId, patientId: st.sel.patientId, encounterId: st.sel.encounterId, scope: scope, decision: decision,
+      detail: detail || undefined, givenBy: st.consent.givenBy, giverName: val("wConsentGiverName") || undefined,
+      capacity: capEl ? capEl.checked : true, validUntil: val("wConsentValidUntil") || undefined,
+    })
+      .then(function (r) { if (settle(r, "Recorded.")) loadConsent(); else paint(); })
+      .catch(function () { st.busy = false; st.err = "Could not record that."; paint(); });
+  }
+  function withdrawConsentAction(scope, detail) {
+    if (!st.sel || !st.sel.patientId) return;
+    var reason = window.prompt("Reason for withdrawing this consent:");
+    if (!reason) return;
+    st.busy = true; paint();
+    apiPost("/ward/withdraw-consent", { orgId: st.orgId, patientId: st.sel.patientId, scope: scope, detail: detail || undefined, reason: reason })
+      .then(function (r) { if (settle(r, "Withdrawn.")) loadConsent(); else paint(); })
+      .catch(function () { st.busy = false; st.err = "Could not withdraw that."; paint(); });
+  }
   function loadCosigns() {
     return apiGet("/ward/cosign-queue?orgId=" + encodeURIComponent(st.orgId))
       .then(function (r) { if (r && r.ok) st.cosign = r; paint(); })
@@ -3597,6 +3680,7 @@
        * throwing the selection away - and the copy itself is always dropped, because a page with
        * one patient's diagnoses left on screen is how the next person gets handed the wrong one. */
       if (st.view === "pcopy") { st.view = "chart"; st.pcopy = null; paint(); return; }
+      if (st.view === "consent") { st.view = "chart"; st.consent = null; paint(); return; }
       if (st.view === "oncology") { st.view = "chart"; st.oncology = null; paint(); return; }
       if (st.view === "cardiology") { st.view = "chart"; st.cardiology = null; paint(); return; }
       if (st.view === "radiology") { st.view = "chart"; st.radiology = null; paint(); return; }
@@ -3620,7 +3704,7 @@
       st.flowsheet = null; st.news2 = null; st.investigations = null; st.results = null; st.resusBundles = null;
       st.ed = null; st.edArrivalOpen = false; st.edMrnLookup = null; st.edMrnLookupErr = "";
       st.surgBoard = null; st.surgCase = null; st.surgBookOpen = false; st.surgMrnLookup = null; st.surgMrnLookupErr = ""; st.surgErr = "";
-      st.maternity = null; st.admitClass = ""; st.ageBand = null; st.lines = null; st.rateResult = null; st.oncology = null; st.cardiology = null; st.radiology = null; st.pharmacy = null; st.transfusion = null;
+      st.maternity = null; st.admitClass = ""; st.ageBand = null; st.lines = null; st.rateResult = null; st.oncology = null; st.cardiology = null; st.radiology = null; st.pharmacy = null; st.transfusion = null; st.consent = null;
       paint(); return;
     }
     if (cmd === "board") { loadBoard(); return; }
@@ -3802,6 +3886,9 @@
     if (cmd === "printpack") { try { G.print(); } catch (e) {} return; }
     if (cmd === "pcopy") { loadPatientCopy(); return; }
     if (cmd === "pcopyGive") { givePatientCopy(); return; }
+    if (cmd === "consentopen") { consentOpen(); return; }
+    if (cmd === "consentrecord") { recordConsentAction(); return; }
+    if (cmd === "consentwithdraw") { var parts = arg.split("|"); withdrawConsentAction(parts[0], parts[1]); return; }
     if (cmd === "cosign") { cosign(arg); return; }
     if (cmd === "submitnote") { submitNote(arg); return; }
     if (cmd === "tx") { transmit(arg); return; }
