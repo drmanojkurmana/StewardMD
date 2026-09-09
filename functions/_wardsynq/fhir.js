@@ -475,6 +475,45 @@ function fhirProvenance(record) {
   });
 }
 
+/* TASK 7 STEP 4.6. CarePlan already exists as a real canonical resource type (functions/_wardsynq/
+ * care-plan.js), with real goal tracking and review-date staleness - only its FHIR export was
+ * missing. Goals become CarePlan.activity entries (FHIR models a plan's goal as a Goal resource
+ * proper, which this codebase does not have; activity.detail.description carries the goal's own
+ * words rather than inventing a second resource type to hold one string). */
+const CAREPLAN_ACTIVITY_STATUS = Object.freeze({ active: "in-progress", met: "completed", "not-met": "stopped", cancelled: "cancelled" });
+const CAREPLAN_STATUS = Object.freeze({ active: "active", completed: "completed", cancelled: "revoked" });
+function fhirCarePlan(p) {
+  const goals = Array.isArray(p.goals) ? p.goals : [];
+  return clean({
+    resourceType: "CarePlan", id: fhirId(p.id),
+    status: CAREPLAN_STATUS[str(p.state || p.status)] || "unknown",
+    intent: "plan",
+    title: str(p.title) || undefined,
+    subject: ref("Patient", p.patientId),
+    encounter: ref("Encounter", p.encounterId),
+    author: p.authorId ? { display: str(p.authorId) } : undefined,
+    period: str(p.reviewBy) ? { end: str(p.reviewBy) } : undefined,
+    activity: goals.length ? goals.map((g) => clean({
+      detail: clean({
+        status: CAREPLAN_ACTIVITY_STATUS[str(g.state)] || "unknown",
+        description: [str(g.title), str(g.measure)].filter(Boolean).join(" - ") || undefined,
+      }),
+    })) : undefined,
+  });
+}
+
+/* NOT DONE, stated honestly rather than half-wired: RelatedPerson/FamilyLink export. FamilyLink
+ * (functions/_wardsynq/migrate-maternity.js) relates TWO WardSynQ Patients (mother, newborn) -
+ * which FHIR itself would model as Patient.link (R4's own "this record and that one refer to
+ * related individuals" mechanism), not a standalone RelatedPerson (that resource is for someone
+ * who is NOT themselves a patient here, e.g. an emergency contact - which has no canonical
+ * WardSynQ resource today and is not invented by this file). Rendering Patient.link requires
+ * reading a patient's FamilyLink rows at export time, and toFhir() is a PURE, SYNCHRONOUS
+ * function with no store access - adding an async cross-reference read inside it would change
+ * its contract for every caller, not just this one field. Left for a dedicated pass that also
+ * decides where that read belongs (fhirPatient's caller, not this file, most likely).
+ */
+
 /** The canonical types this file can render, and the mapper for each. A type absent here is not
  *  exported at all rather than being emitted as something approximate. */
 const MAPPERS = Object.freeze({
@@ -491,6 +530,7 @@ const MAPPERS = Object.freeze({
   ClinicalNote: fhirDocumentReference,
   SpecimenCollection: fhirSpecimen,
   MedicationDispense: fhirMedicationDispense,
+  CarePlan: fhirCarePlan,
 });
 
 /** Our type name to the FHIR one it renders as. */
@@ -500,6 +540,7 @@ const FHIR_TYPE = Object.freeze({
   MedicationOrder: "MedicationRequest", MedicationAdministration: "MedicationAdministration",
   ServiceRequest: "ServiceRequest", DiagnosticReport: "DiagnosticReport", ClinicalNote: "DocumentReference",
   PatientConsent: "Consent", SpecimenCollection: "Specimen", MedicationDispense: "MedicationDispense",
+  CarePlan: "CarePlan",
 });
 /** And back, so a caller can ask for the FHIR name. */
 const CANONICAL_TYPE = Object.freeze(Object.fromEntries(Object.entries(FHIR_TYPE).map(([k, v]) => [v, k])));

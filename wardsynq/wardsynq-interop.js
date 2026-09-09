@@ -45,6 +45,12 @@ const QUARANTINE = Object.freeze({
   REJECTED: "rejected",         // the adapter looked and said no
   FAILED: "failed",             // the adapter threw
   UNWRITABLE: "unwritable",     // governance refused what it produced
+  // TASK 7 STEP 4.1: two more identity was ambiguous, not a routing failure - kept apart from
+  // AMBIGUOUS (which means "two ADAPTERS both claimed this payload") because the failure this
+  // names is different: one adapter claimed it fine, and the PATIENT inside it might be someone
+  // already on this chart, or might not - a person decides, never a guess.
+  IDENTITY_AMBIGUOUS: "identity-ambiguous",
+  IDENTITY_PROBABLE_DUPLICATE: "identity-probable-duplicate",
 });
 
 /**
@@ -139,6 +145,15 @@ class IntegrationHub {
     this.adapters = new Map();
     this.quarantine = [];
     this.seenEvents = new Set();
+    /* TASK 7 STEP 4.1: "GHIS patientId MUST NOT bypass governed MPI identity resolution" - the
+     * plan's own words. Optional and injected, never built here: THIS class stays protocol- and
+     * identity-model-agnostic (its job is claim-based routing, not MPI matching), and the actual
+     * reconciler is the SAME wardsynq-mpi.js-backed reconcileIdentity() fhir-inbound.js already
+     * uses and tests - reused by reference from the caller, never reimplemented.
+     * Signature: async (entities: object[]) => null | {decision:"new"|"link", entities} |
+     *   {decision:"ambiguous"|"probable", candidates}. Returning null skips reconciliation
+     * entirely (no Patient in this payload - nothing to reconcile). */
+    this.identityResolver = deps.identityResolver || null;
   }
 
   register(adapter) {
@@ -204,10 +219,29 @@ class IntegrationHub {
       return { ok: false, reason: QUARANTINE.FAILED, system: adapter.system, quarantined: await this._quarantine(QUARANTINE.FAILED, payload, String((err && err.message) || err), adapter.system) };
     }
 
-    const entities = (mapped && mapped.entities) || [];
+    let entities = (mapped && mapped.entities) || [];
     if (!entities.length) {
       adapter.stats.quarantined += 1;
       return { ok: false, reason: QUARANTINE.REJECTED, system: adapter.system, quarantined: await this._quarantine(QUARANTINE.REJECTED, payload, (mapped && mapped.reason) || "the adapter produced nothing", adapter.system) };
+    }
+
+    // Identity reconciliation, when the hub was given a reconciler. Never a guess: an ambiguous
+    // or merely-probable match is quarantined and NOTHING is written, the same rule
+    // fhir-inbound.js's landBundle() already holds for FHIR/HL7 feeds - this adapter is no longer
+    // an exception to it.
+    if (this.identityResolver) {
+      let resolution;
+      try { resolution = await this.identityResolver(entities); }
+      catch (err) {
+        adapter.stats.quarantined += 1;
+        return { ok: false, reason: QUARANTINE.FAILED, system: adapter.system, quarantined: await this._quarantine(QUARANTINE.FAILED, payload, `identity resolution failed: ${String((err && err.message) || err)}`, adapter.system) };
+      }
+      if (resolution && (resolution.decision === "ambiguous" || resolution.decision === "probable")) {
+        adapter.stats.quarantined += 1;
+        const reason = resolution.decision === "ambiguous" ? QUARANTINE.IDENTITY_AMBIGUOUS : QUARANTINE.IDENTITY_PROBABLE_DUPLICATE;
+        return { ok: false, reason, system: adapter.system, quarantined: await this._quarantine(reason, payload, JSON.stringify(resolution.candidates || []), adapter.system) };
+      }
+      if (resolution && Array.isArray(resolution.entities)) entities = resolution.entities;
     }
 
     // Rule 1: written as the ADAPTER, so the ceiling applies. A refusal is quarantined with its

@@ -363,6 +363,51 @@ test("integration mode: an external EMR's records cannot be overwritten natively
   assert.equal((await pc.governed.get(pc.actor, "Patient", "fhir-r4-pat-epic-77")).name, "Epic Patient");
 });
 
+/* TASK 7 STEP 4.1: "GHIS patientId MUST NOT bypass governed MPI identity resolution" - the plan's
+ * own words. /ingest/sccm now runs every incoming Patient through the SAME reconcileIdentity()
+ * fhir-inbound.js uses, real end-to-end through the actual route - never a bare helper call. */
+test("ingest/sccm: an incoming patient matching a local one by MRN is LINKED, never a duplicate Patient", async () => {
+  const h = hospital();
+  const pc = await client(h, "fb:dr-menon");
+  const local = await pc.session("pat-link-1").put(Patient({ id: "pat-link-1", mrn: "LNK-1", name: "Local Patient", dob: "1970-01-01" }));
+  assert.equal(local.version, 1);
+
+  const b = sccmBundle({
+    sourceConnector: "hl7v2", generatedAt: "2026-09-06T12:00:00Z",
+    patient: sccmPatient({ id: "EXT-9", name: "Local Patient (as sent)", identifiers: [{ system: "urn:mrn", type: "MRN", value: "LNK-1" }] }),
+    observations: [sccmObservation({ id: "OBS-LNK", category: "laboratory", code: { coding: [{ code: "2823-3" }], text: "Potassium" }, value: { value: 4.2, unit: "mmol/L" } })],
+  });
+  const res = await (await h.fetchAs("fb:dr-menon")("https://x/api/wardsynq/gimsr/ingest/sccm", { method: "POST", body: JSON.stringify(b) })).json();
+  assert.equal(res.ok, true, JSON.stringify(res));
+
+  // No second Patient was created under the feed's own id.
+  assert.equal(await pc.governed.get(pc.actor, "Patient", "hl7v2-pat-ext-9"), null, "linked, not created - the feed's own patient id never lands as a record");
+  // The observation was REBOUND onto the LOCAL patient, not the feed's.
+  const obs = await pc.governed.get(pc.actor, "Observation", "hl7v2-obs-obs-lnk");
+  assert.equal(obs.patientId, "pat-link-1", "rebound onto the existing local chart");
+  assert.equal((await pc.governed.get(pc.actor, "Patient", "pat-link-1")).version, 1, "the local patient's OWN record is untouched by the link - identity, not a merge");
+});
+
+test("ingest/sccm: an MRN matching MORE THAN ONE local patient is held ambiguous, and NOTHING is written - never a guess", async () => {
+  const h = hospital();
+  const pc = await client(h, "fb:dr-menon");
+  // An artificial but real ambiguity: two local patients that happen to carry the same MRN value
+  // (a data-quality reality this reconciler must survive, not assume away).
+  await pc.session("pat-amb-a").put(Patient({ id: "pat-amb-a", mrn: "AMB-1", name: "Patient A", dob: "1970-01-01" }));
+  await pc.session("pat-amb-b").put(Patient({ id: "pat-amb-b", mrn: "AMB-1", name: "Patient B", dob: "1980-02-02" }));
+
+  const b = sccmBundle({
+    sourceConnector: "hl7v2", generatedAt: "2026-09-06T13:00:00Z",
+    patient: sccmPatient({ id: "EXT-AMB", name: "Ambiguous Feed Patient", identifiers: [{ system: "urn:mrn", type: "MRN", value: "AMB-1" }] }),
+    observations: [sccmObservation({ id: "OBS-AMB", category: "laboratory", code: { coding: [{ code: "2823-3" }], text: "Potassium" }, value: { value: 5.5, unit: "mmol/L" } })],
+  });
+  const res = await (await h.fetchAs("fb:dr-menon")("https://x/api/wardsynq/gimsr/ingest/sccm", { method: "POST", body: JSON.stringify(b) })).json();
+  assert.equal(res.ok, false, JSON.stringify(res));
+  assert.equal(res.reason, "identity-ambiguous");
+  assert.equal(await pc.governed.get(pc.actor, "Patient", "hl7v2-pat-ext-amb"), null, "the feed's own patient was never created");
+  assert.equal(await pc.governed.get(pc.actor, "Observation", "hl7v2-obs-obs-amb"), null, "nor was the observation that would have landed under a guessed identity");
+});
+
 test("system-of-record mode still protects feed-owned records (a LIS result is corrected by the LIS)", async () => {
   const h = hospital();
   const pc = await client(h, "fb:dr-menon");

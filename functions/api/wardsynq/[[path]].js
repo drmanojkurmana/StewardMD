@@ -38,6 +38,7 @@ import { actorDeps, recordDeps } from "../../_wardsynq/deps.js";
 import { GovernanceError } from "../../../wardsynq/wardsynq-actors.js";
 import { IntegrationHub } from "../../../wardsynq/wardsynq-interop.js";
 import { sccmAdapter } from "../../../wardsynq/adapters/wardsynq-sccm-adapter.js";
+import { reconcileIdentity, rebind } from "../../_wardsynq/fhir-inbound.js";
 
 export function recordFlagOn(env) { return String(env && env.WARDSYNQ_RECORD) === "1"; }
 
@@ -151,7 +152,20 @@ export async function handle(request, env, deps) {
         if (await governed.alreadyIngested()) {
           return jsonResponse({ ok: true, system: adapter.system, written: 0, refused: 0, duplicate: true, reason: "already ingested", issues: [] });
         }
-        const hub = new IntegrationHub({ governed });
+        // TASK 7 STEP 4.1: GHIS's patientId is external (adapters/wardsynq-ghis-adapter.js's own
+        // header: "patientId doubles as the MRN" - it is not this hospital's own canonical id
+        // space by construction). Reconciled through the SAME wardsynq-mpi.js-backed
+        // reconcileIdentity() fhir-inbound.js uses for every other feed - never bypassed.
+        const identityResolver = async (entities) => {
+          const incoming = entities.find((e) => e && e.resourceType === "Patient");
+          if (!incoming) return null;
+          const locals = await svc.list("Patient", 500);
+          const decision = reconcileIdentity(incoming, locals, !!incoming.mrn);
+          if (decision.decision === "link") return { decision: "link", entities: rebind(entities, incoming.id, decision.localId) };
+          if (decision.decision === "new") return { decision: "new", entities };
+          return decision; // ambiguous / probable - the hub quarantines and writes nothing
+        };
+        const hub = new IntegrationHub({ governed, identityResolver });
         hub.register(adapter);
         const result = await hub.ingest(body);
         return jsonResponse({ ok: result.ok, system: result.system || null, written: (result.entities || []).length, refused: result.refused || 0, duplicate: !!result.duplicate, reason: result.reason || null, issues: result.issues || [] }, { status: result.ok ? 200 : 422 });
