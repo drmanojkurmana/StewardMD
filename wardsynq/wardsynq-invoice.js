@@ -22,6 +22,13 @@
  * BALANCE IS COMPUTED, NEVER STORED. The same discipline ward-metrics.js and charge-capture.js
  * already state: a stored balance goes stale the moment a payment is amended, and a stale one is
  * worse than none because somebody reconciles against it.
+ *
+ * TASK 4.16 (Downtime/Business Continuity) POLICY: CONTINUE SAFELY on a payment-gateway failure -
+ * stated here explicitly because there is no live gateway integration in this file to fail yet. A
+ * `payment` event only records a fact already reported by a human or a reconciliation process; a
+ * future real gateway integration must be built to POST here only once a capture is confirmed, and
+ * a failed/uncertain capture must never be recorded as a payment event on the strength of hope that
+ * it went through. See vault/decisions/Decisions.md, 2026-09-09, for the full 6-mode matrix.
  */
 
 const str = (v) => (v == null ? "" : String(v).trim());
