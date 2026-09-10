@@ -5127,3 +5127,10 @@ answer length alone is wrong by that factor.
 **NOT claimed:** clinical validation, production readiness, or real-device verification. An automated
 rubric passing 8/8 is not a clinical study, and this note is not evidence that it is.
 
+
+## 2026-09-11: Connect Agent browser should run on the phone, not a remote server (proposed)
+
+Full ADR: `connect-agent-phone-browser-adr-2026-09-11.md`. Discovery is already a page-realm JS shim plus six
+transport primitives, all of which WKWebView and Android WebView provide natively, with an init-script the
+Camofox REST API lacks. Proposed: Option 4 phone-first (in-app WebView + Worker control plane), existing
+Camofox runner kept only as fallback. Not yet decided by the owner; no code written.
