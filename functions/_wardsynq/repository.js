@@ -69,6 +69,30 @@ function clone(v) {
   return v === null || typeof v !== "object" ? v : JSON.parse(JSON.stringify(v));
 }
 
+/**
+ * The ceiling on a latestByType() roster, shared by every implementation so they cannot disagree.
+ *
+ * IT USED TO BE 200 AND IT WAS SILENT, which is the part that was wrong. Callers ask for what they
+ * actually need - analytics-extract.js asks for 1000, fhir-inbound.js asks for 1000 to match an
+ * inbound feed against the local patients, blackout.js and fhir-outbound.js ask for 500 - and every
+ * one of them was quietly handed 200 rows with no signal that anything had been dropped. Worse, the
+ * 200 kept were the OLDEST, because both implementations page in insertion order: on a tenant past
+ * the ceiling the most recent records - the newly registered patient, the emergency declared this
+ * morning - were the ones that fell off.
+ *
+ * ponytail: a flat ceiling, still. This raises it to what the callers already believe they get and
+ * makes it one named constant instead of two hidden magic numbers; it does NOT turn list() into a
+ * paged query. A tenant with more than MAX_ROSTER records of one type is still truncated, so
+ * list() remains a bounded roster and must not be used as the index for an identity match. That
+ * limit is real and is stated in the audit rather than papered over here.
+ */
+const MAX_ROSTER = 1000;
+const DEFAULT_ROSTER = 100;
+
+function rosterLimit(limit) {
+  return Math.max(1, Math.min(MAX_ROSTER, Number(limit) || DEFAULT_ROSTER));
+}
+
 /** What the record row carries besides the body, so an implementation can index without parsing. */
 function rowOf(tenantId, record) {
   const meta = record.meta || {};
@@ -122,7 +146,7 @@ class MemoryRepository {
   }
 
   async latestByType(tenantId, resourceType, limit) {
-    const max = Math.max(1, Math.min(200, Number(limit) || 100));
+    const max = rosterLimit(limit);
     const byId = new Map();
     for (const r of this._rows) {
       if (r.tenantId !== tenantId || r.resourceType !== resourceType) continue;
@@ -185,4 +209,4 @@ class MemoryRepository {
   }
 }
 
-export { VersionConflictError, RepositoryError, PORT_METHODS, assertRepository, rowOf, MemoryRepository };
+export { VersionConflictError, RepositoryError, PORT_METHODS, assertRepository, rowOf, MemoryRepository, MAX_ROSTER, rosterLimit };

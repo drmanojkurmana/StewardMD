@@ -2700,3 +2700,71 @@ test("wsqLinkTenantOrg: writes the reciprocal tenant->org pointer once, at link 
   const route = src.slice(src.indexOf('seg === "org" && sub === "update"'), src.indexOf('seg === "org" && sub === "delete"'));
   assert.ok(route.includes("if (body.connectTenantId) await wsqLinkTenantOrg("), "only runs when this update actually sets/changes the tenant link");
 });
+
+/* REGRESSION, 2026-09-10 whole-system audit. An idempotency key is bound to the record it first
+ * committed.
+ *
+ * BEFORE THE FIX this exact sequence returned 200 ok:true, wrote NOTHING for the second patient,
+ * and handed the caller the FIRST patient's whole record - name, MRN and date of birth - as the
+ * body of a successful write. A client that mints one key per retry-session instead of one per
+ * request (the commonest way to get idempotency wrong) therefore lost a clinical write silently
+ * AND showed a clinician another patient's demographics on the success path. */
+test("ADVERSARIAL: an idempotency key offered for a DIFFERENT record is refused, never replayed", async () => {
+  const h = hospital();
+  const f = h.fetchAs("fb:dr-menon");
+  const send = (entity) => f("https://x/api/wardsynq/gimsr/record", {
+    method: "POST", headers: { "Idempotency-Key": "one-key-two-patients" }, body: JSON.stringify({ entity }),
+  });
+
+  const first = await send(Patient({ id: "pat-idem-a", mrn: "GH-IDEM-A", name: "Asha", dob: "1970-01-01" }));
+  assert.equal(first.status, 201);
+
+  // The SAME key, a DIFFERENT patient.
+  const second = await send(Patient({ id: "pat-idem-b", mrn: "GH-IDEM-B", name: "Bhavna", dob: "1980-01-01" }));
+  assert.equal(second.status, 409, "a reused key is a conflict, not a success");
+  const body = await second.json();
+  assert.equal(body.code, "IDEMPOTENCY_KEY_REUSED");
+  assert.deepEqual(body.detail.committed, { resourceType: "Patient", id: "pat-idem-a" });
+  assert.deepEqual(body.detail.attempted, { resourceType: "Patient", id: "pat-idem-b" });
+
+  // THE TWO THINGS THAT ACTUALLY MATTERED. The refusal carries no part of the other patient's
+  // record, and the writer is told their write did not land rather than being told it did.
+  const text = JSON.stringify(body);
+  for (const leaked of ["Asha", "GH-IDEM-A", "1970-01-01"]) {
+    assert.ok(!text.includes(leaked), `the refusal must not carry the other patient's ${leaked}`);
+  }
+  assert.equal((await h.repository.history("gimsr", "Patient", "pat-idem-b")).length, 0, "and nothing was written for B");
+
+  // The honest retry - the same key for the SAME record - still replays exactly as before.
+  const replay = await send(Patient({ id: "pat-idem-a", mrn: "GH-IDEM-A", name: "Asha", dob: "1970-01-01" }));
+  assert.equal(replay.status, 200);
+  assert.equal((await replay.json()).replayed, true);
+  assert.equal((await h.repository.history("gimsr", "Patient", "pat-idem-a")).length, 1, "and it made no second version");
+});
+
+/* The same hazard on a CLINICAL record rather than on the identity itself: one key, one observation
+ * each for two different patients. This is the shape that loses a vital sign and shows it against
+ * the wrong chart. */
+test("ADVERSARIAL: one idempotency key cannot carry two patients' observations", async () => {
+  const h = hospital();
+  const f = h.fetchAs("fb:dr-menon");
+  const put = (entity, key) => f("https://x/api/wardsynq/gimsr/record", {
+    method: "POST", headers: key ? { "Idempotency-Key": key } : {}, body: JSON.stringify({ entity }),
+  });
+  await put(Patient({ id: "pat-obs-a", mrn: "GH-OBS-A", name: "Asha", dob: "1970-01-01" }));
+  await put(Patient({ id: "pat-obs-b", mrn: "GH-OBS-B", name: "Bhavna", dob: "1980-01-01" }));
+
+  const obs = (id, patientId) => Observation({ id, patientId, code: "8867-4", value: { value: 82, unit: "/min" }, effectiveAt: "2026-09-10T09:00:00.000Z" });
+  assert.equal((await put(obs("obs-a1", "pat-obs-a"), "one-key-two-charts")).status, 201);
+
+  const crossed = await put(obs("obs-b1", "pat-obs-b"), "one-key-two-charts");
+  assert.equal(crossed.status, 409, "a heart rate for another patient is not a replay of this one");
+  assert.equal((await crossed.json()).code, "IDEMPOTENCY_KEY_REUSED");
+  assert.equal((await h.repository.byPatient("gimsr", "Observation", "pat-obs-b")).length, 0);
+
+  // And the honest retry for the SAME patient still replays, even though nothing here forces the
+  // caller to reuse the same record id - that is what keeps a retried declaration from doubling.
+  const again = await put(obs("obs-a1", "pat-obs-a"), "one-key-two-charts");
+  assert.equal(again.status, 200);
+  assert.equal((await again.json()).replayed, true);
+});

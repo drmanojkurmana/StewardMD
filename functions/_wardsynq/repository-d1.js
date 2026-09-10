@@ -13,7 +13,7 @@
  * file implementing the same eight methods against its own engine.
  */
 
-import { VersionConflictError, RepositoryError, rowOf } from "./repository.js";
+import { VersionConflictError, RepositoryError, rowOf, rosterLimit } from "./repository.js";
 import { scrubPhi } from "../_connect/abdm/no-phi.js";
 
 const AUDIT_INSERT = "INSERT INTO connect_audit_event (id,tenant_id,ts,actor,connector_id,action,resource_counts,scope,patient_ref_hash,latency_ms,outcome,consent_id,transaction_id,care_context_hash) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
@@ -116,7 +116,7 @@ class D1Repository {
   }
 
   async latestByType(tenantId, resourceType, limit) {
-    const max = Math.max(1, Math.min(200, Number(limit) || 100));
+    const max = rosterLimit(limit);
     const r = await this.db
       .prepare(
         "SELECT r.body FROM wardsynq_record r " +

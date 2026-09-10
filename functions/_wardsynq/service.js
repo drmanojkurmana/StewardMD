@@ -411,6 +411,24 @@ class RecordRequestError extends Error {
 }
 
 /**
+ * An idempotency key offered for a record it did not commit.
+ *
+ * A SUBCLASS OF VersionConflictError ON PURPOSE, and this is the whole reason it is one: every
+ * caller in this codebase - a hundred-odd route handlers - already writes
+ * `if (e instanceof VersionConflictError) return 409`, and a brand-new error class would fall past
+ * all of them into their generic 502 "record_write_failed" branch. A reused key is a caller's
+ * mistake, not the store's failure, so it must read as a conflict at every existing door without
+ * one of them being edited. Its own `code` is what distinguishes it for anybody who looks.
+ */
+class IdempotencyConflictError extends VersionConflictError {
+  constructor(detail) {
+    super("this idempotency key already committed a different record", detail);
+    this.name = "IdempotencyConflictError";
+    this.code = "IDEMPOTENCY_KEY_REUSED";
+  }
+}
+
+/**
  * The ClinicalStore backend over the persistence port, fixed to one tenant. This is the whole
  * bridge: four methods the store already expects, each forwarding with the tenant prepended. The
  * store cannot address another tenant because the backend has no parameter for one.
@@ -624,10 +642,38 @@ class RecordService {
     if (key) {
       const prior = await this.repository.recall(this.tenantId, key);
       if (prior) {
-        // Same key, same outcome. The record returned is the version that write produced, so a
-        // client that lost the first response sees exactly what it would have seen.
         const versions = await this.repository.history(this.tenantId, prior.resourceType, prior.id);
         const rec = versions.find((v) => v.version === prior.version) || null;
+
+        /* A KEY IS BOUND TO THE TYPE AND THE PATIENT IT FIRST COMMITTED FOR.
+         *
+         * Without this the recall matched on the key ALONE, and a client that reused one key across
+         * two writes - a key minted per retry-session rather than per request, the commonest way
+         * there is to get idempotency wrong - had its second write silently discarded and was handed
+         * the FIRST record back under `ok: true`. When the two writes were two different patients
+         * that is both a lost clinical write and another patient's record returned as the answer: a
+         * wrong-patient disclosure arriving down the success path, where nobody is looking for one.
+         *
+         * IT IS THE PATIENT AND NOT THE ID, and the difference is load-bearing. A retried POST must
+         * still replay, and several declarations mint an id from `new Date()` - activationIdFor() in
+         * emergency-mode.js, grantIdFor() in break-glass.js - so two retries milliseconds apart
+         * produce two different ids for one logical act. Binding to the id would turn every one of
+         * those honest retries into a refusal, and the second declaration of an emergency is not a
+         * thing to invent. Binding to the SUBJECT refuses what is actually dangerous - the same key
+         * carrying a different patient, or a different kind of record entirely - and leaves the
+         * retry alone.
+         *
+         * A Patient's own subject is its id: for that one type the record IS the person. */
+        const subjectOf = (r) => (r && (r.patientId || (r.resourceType === "Patient" ? r.id : null))) || null;
+        if (prior.resourceType !== entity.resourceType || subjectOf(rec) !== subjectOf(entity)) {
+          throw new IdempotencyConflictError({
+            idempotencyKey: key,
+            committed: { resourceType: prior.resourceType, id: prior.id },
+            attempted: { resourceType: entity.resourceType, id: entity.id },
+          });
+        }
+        // Same key, same outcome. The record returned is the version that write produced, so a
+        // client that lost the first response sees exactly what it would have seen.
         return { record: rec, replayed: true };
       }
     }
@@ -755,6 +801,6 @@ class RecordService {
 
 export {
   RESOURCE_TYPES, MODE, NATIVE_SYSTEM, isExternalRecord,
-  AuthorityError, RecordRequestError,
+  AuthorityError, RecordRequestError, IdempotencyConflictError,
   TenantBackend, RecordService, recordPolicy, actorForMembership, externallyOwned,
 };

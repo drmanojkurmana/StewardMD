@@ -1040,13 +1040,28 @@ test("the discharge summary now carries the problem list instead of an empty ass
 
 test("the round is computed from the frequency the doctor already wrote, and a given dose shows as given", async () => {
   seedHospital();
-  const { adm, patient, scan } = await admittedPatientOnDrug();   // TID, ordered 2026-09-07
+  const { adm, ord, patient, scan } = await admittedPatientOnDrug();   // TID
 
-  const sched = await as(NURSE, `/ward/schedule?orgId=${ORG}&patientId=${adm.patientId}&from=2026-09-09T18:30:00.000Z&to=2026-09-10T18:30:00.000Z`);
+  /* THE WINDOW IS ANCHORED TO THE ORDER, NOT TO A CALENDAR DATE.
+   *
+   * An order is effective the instant it is written, and scheduleSlots() deliberately never places
+   * a dose before the order existed. This test used to hardcode a fixed 2026-09-09/10 window and a
+   * fixed list of three slots, which made it pass ONLY when the suite happened to run between
+   * 18:30Z and 02:30Z - about a third of the day. Run at any other hour it saw the earlier slots
+   * correctly excluded as pre-dating the order and failed. Anchoring the window to the order's own
+   * effective time asserts the real property (TID means three doses a day) at every hour. */
+  const orderedAt = (await RECORD.latest(TENANT_ROW.id, "MedicationOrder", ord.orderId)).meta.effectiveAt;
+  const from = orderedAt;
+  const to = new Date(Date.parse(orderedAt) + 86400000).toISOString();
+  const round = () => as(NURSE, `/ward/schedule?orgId=${ORG}&patientId=${adm.patientId}&from=${from}&to=${to}`);
+
+  const sched = await round();
   assert.equal(sched.__status, 200, JSON.stringify(sched));
-  // TID on the default Indian ward round: 08:00, 14:00, 22:00 IST.
-  assert.deepEqual(sched.due.map((d) => d.dueAt),
-    ["2026-09-10T02:30:00.000Z", "2026-09-10T08:30:00.000Z", "2026-09-10T16:30:00.000Z"]);
+  // TID on the default Indian ward round: 08:00, 14:00, 22:00 IST. Any 24h window holds each once.
+  const istHhmm = (iso) => new Date(Date.parse(iso) + 330 * 60000).toISOString().slice(11, 16);
+  assert.equal(sched.due.length, 3, JSON.stringify(sched.due));
+  assert.deepEqual(sched.due.map((d) => istHhmm(d.dueAt)).sort(), ["08:00", "14:00", "22:00"]);
+  assert.ok(sched.due.every((d) => d.dueAt >= from && d.dueAt < to), "and never before the order existed");
   assert.equal(sched.due[0].drug, "Paracetamol 500mg");
   assert.deepEqual(sched.due.map((d) => d.status), [null, null, null], "nothing is started, and nothing pretends to be");
   assert.deepEqual(sched.prn, []);
@@ -1063,7 +1078,7 @@ test("the round is computed from the frequency the doctor already wrote, and a g
   const given = await step("administer");
   assert.equal(given.__status, 200, JSON.stringify(given));
 
-  const after = await as(NURSE, `/ward/schedule?orgId=${ORG}&patientId=${adm.patientId}&from=2026-09-09T18:30:00.000Z&to=2026-09-10T18:30:00.000Z`);
+  const after = await round();
   assert.equal(after.due[0].status, "administered");
   assert.equal(after.due[0].administrationId, given.administrationId, "the slot and the record are the same dose");
   assert.equal(after.due[0].overdue, false, "a given dose is never chased");
