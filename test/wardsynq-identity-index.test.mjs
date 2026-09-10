@@ -26,6 +26,7 @@ import { DatabaseSync } from "node:sqlite";
 import { MemoryRepository, IdentityConflictError, VersionConflictError, MAX_ROSTER, rowOf } from "../functions/_wardsynq/repository.js";
 import { D1Repository } from "../functions/_wardsynq/repository-d1.js";
 import { patientIdentifierKeys, identifierKey, identifierValue } from "../functions/_wardsynq/identity-key.js";
+import { hashedId } from "../functions/_wardsynq/fhir-id.js";
 import { reconcileIdentity } from "../functions/_wardsynq/fhir-inbound.js";
 
 /* ------------------------------------------------------------------ the two implementations */
@@ -326,6 +327,57 @@ test("a reindex REPORTS a pre-existing duplicate identifier rather than silently
   // And the existing mapping was NOT rewritten underneath anybody.
   assert.deepEqual((await repo.patientsByIdentifier("t1", [{ systemKey: "mrn", valueNorm: "OLDDUP" }])).map((p) => p.id), ["pat-dup-1"]);
 });
+
+/* THE IDENTIFIER LIFECYCLE. Creation and lookup are covered above; this is the half that bites
+ * later - what happens when a number is taken OFF a chart. */
+for (const [label, make] of IMPLEMENTATIONS) {
+  test(`${label}: removing an identifier releases it, so its real owner is not locked out forever`, async () => {
+    const repo = make();
+    // A clerk types somebody else's ABHA onto Asha's chart.
+    const asha = patient({ id: "pat-asha", mrn: "GH-ASHA", identifiers: [{ system: "ABHA", value: "77-7777-7777-7777" }] });
+    await repo.append("t1", [asha]);
+    assert.deepEqual((await repo.patientsByIdentifier("t1", [{ systemKey: "abha", valueNorm: "77777777777777" }])).map((p) => p.id), ["pat-asha"]);
+
+    // She notices and corrects it: version 2 keeps the MRN and drops the ABHA.
+    await repo.append("t1", [{ ...asha, version: 2, identifiers: [] }]);
+    assert.deepEqual(await repo.patientsByIdentifier("t1", [{ systemKey: "abha", valueNorm: "77777777777777" }]), [],
+      "the released number identifies nobody");
+    assert.deepEqual((await repo.patientsByIdentifier("t1", patientIdentifierKeys(asha))).map((p) => p.id), ["pat-asha"],
+      "and the identifier she DID keep is untouched");
+
+    // The person it actually belongs to can now be created. Before the release they could not: the
+    // number stayed claimed by the chart it was mistyped on, and refused its owner forever.
+    await repo.append("t1", [patient({ id: "pat-real-owner", mrn: "GH-OWNER", identifiers: [{ system: "ABHA", value: "77-7777-7777-7777" }] })]);
+    assert.deepEqual((await repo.patientsByIdentifier("t1", [{ systemKey: "abha", valueNorm: "77777777777777" }])).map((p) => p.id), ["pat-real-owner"]);
+  });
+
+  test(`${label}: a release only ever gives up the releasing patient's OWN claim`, async () => {
+    const repo = make();
+    await repo.append("t1", [patient({ id: "pat-holder", mrn: "GH-HOLD" })]);
+    // A different patient whose new version happens not to carry GH-HOLD must not release it.
+    const other = patient({ id: "pat-other", mrn: "GH-OTHER", identifiers: [{ system: "ABHA", value: "88-8888-8888-8888" }] });
+    await repo.append("t1", [other]);
+    await repo.append("t1", [{ ...other, version: 2, identifiers: [] }]);
+    assert.deepEqual((await repo.patientsByIdentifier("t1", [{ systemKey: "mrn", valueNorm: "GHHOLD" }])).map((p) => p.id), ["pat-holder"],
+      "somebody else's identifier survives a neighbour's correction");
+  });
+
+  test(`${label}: a published FHIR hashed id resolves back by index, at any population`, async () => {
+    const repo = make();
+    // An id FHIR cannot carry verbatim - an external system's id with characters FHIR ids forbid.
+    const awkward = "hl7v2-pat-EXT|9931/A";
+    await repo.append("t1", [patient({ id: awkward, mrn: "GH-AWKWARD" })]);
+    for (let i = 0; i < 1100; i++) await repo.append("t1", [patient({ id: `filler-${i}`, mrn: `F-${i}` })]);
+
+    const published = hashedId(awkward);
+    const hit = await repo.idByHash("t1", published);
+    assert.deepEqual(hit, { resourceType: "Patient", id: awkward }, "resolved by seek, not by hashing a roster");
+    // Tenant-scoped like everything else.
+    assert.equal(await repo.idByHash("t2", published), null);
+    // A conforming id is published verbatim and needs no alias row at all.
+    assert.equal(await repo.idByHash("t1", hashedId("filler-1")), null, "only ids FHIR cannot carry are indexed");
+  });
+}
 
 test("the version conflict and the identity conflict are DIFFERENT errors, because the fix for each is different", async () => {
   const repo = sqliteRepo();

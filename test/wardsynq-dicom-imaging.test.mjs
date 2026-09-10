@@ -25,6 +25,7 @@ import { makeMockDb } from "../functions/_connect/testkit.js";
 import { dicomWebConnector } from "../functions/_connect/connectors/dicomweb/connector.js";
 import { mapSccmBundle } from "../wardsynq/adapters/wardsynq-sccm-adapter.js";
 import { bundle as sccmBundle, patient as sccmPatient, serviceRequest as sccmServiceRequest, encounter as sccmEncounter } from "../functions/_connect/canonical/model.js";
+import { SourceSystemGrant, grantIdFor } from "../functions/_wardsynq/fhir-inbound.js";
 import { worklistItem, modalityMapOf, isPendingImaging, dicomName, dicomDateTime } from "../functions/_wardsynq/dicom.js";
 
 const ENV = { WARDSYNQ_RECORD: "1" };
@@ -91,8 +92,20 @@ const connectorCtx = () => ({
   budget: { maxRows: 100 },
 });
 
-/** The whole inbound path: QIDO-RS over a socket -> SCCM -> the real ingest route -> the record. */
+/** The whole inbound path: QIDO-RS over a socket -> SCCM -> the real ingest route -> the record.
+ *
+ * dr-menon is granted to speak for "dicomweb" (the connector's own sourceConnector, see connector.js
+ * normalize()) the first time this runs against a given hospital - the same precondition the ingest
+ * door now requires of every caller, real or in a test. Idempotent: a second grant for the same
+ * actor+system in the same tenant is refused by the store as a duplicate write, so it is written at
+ * most once even though every test in this file calls through here. */
 async function pullAndLand(h, patientRef, extra) {
+  if (!h._sourceGranted) {
+    h._sourceGranted = true;
+    await h.repository.append(TENANT, [
+      { ...SourceSystemGrant({ id: grantIdFor("fb:dr-menon", "dicomweb"), actorId: "fb:dr-menon", sourceSystem: "dicomweb", active: true, grantedBy: "fb:admin-one", grantedAt: "2026-01-01T00:00:00.000Z" }), version: 1 },
+    ]);
+  }
   const ctx = connectorCtx();
   const raw = await dicomWebConnector.fetchPatient(ctx, patientRef);
   const bundle = await dicomWebConnector.normalize(ctx, raw);

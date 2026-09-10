@@ -35,6 +35,20 @@
  */
 
 import { patientIdentifierKeys } from "./identity-key.js";
+import { fhirId, hashedId } from "./fhir-id.js";
+
+/**
+ * PURE. The published hashed form of a record id, or null when the id is published verbatim.
+ *
+ * Only non-conforming (or over-long) ids are ever hashed, so for the overwhelming majority of rows
+ * this returns null and the alias index costs nothing.
+ */
+function aliasFor(record) {
+  const id = record && typeof record.id === "string" ? record.id : "";
+  if (!id) return null;
+  const published = fhirId(id);
+  return published && published !== id ? published : null;
+}
 
 class VersionConflictError extends Error {
   constructor(message, detail) {
@@ -57,7 +71,7 @@ class RepositoryError extends Error {
  * health check. On 2026-09-07 the schema had never been applied to the production D1: every clinical
  * write failed on its first read, and /api/wardsynq/health answered {ok:true} throughout, because it
  * returned a literal. An implementation that cannot answer probe() cannot be served from. */
-const PORT_METHODS = Object.freeze(["latest", "history", "byPatient", "latestByType", "patientsByIdentifier", "append", "changes", "recall", "auditOnly", "probe"]);
+const PORT_METHODS = Object.freeze(["latest", "history", "byPatient", "latestByType", "patientsByIdentifier", "idByHash", "append", "changes", "recall", "auditOnly", "probe"]);
 
 /**
  * One identifier was offered for a second person.
@@ -145,6 +159,9 @@ class MemoryRepository {
      * `${tenant}|${systemKey}|${valueNorm}` -> patientId. Its whole job is that a lookup costs the
      * same on a hospital of ten patients and a hospital of a hundred thousand. */
     this._ident = new Map();
+    /* The FHIR hashed-id alias index, mirroring wardsynq_id_alias.
+     * `${tenant}|${idHash}` -> {resourceType, id}. Only non-conforming ids appear here. */
+    this._alias = new Map();
     this.audit = [];            // audit events, in order, for inspection
   }
 
@@ -205,6 +222,15 @@ class MemoryRepository {
   }
 
   /**
+   * The canonical id a published `wsq-<hash>` stands for, or null. INDEX SEEK, never a scan.
+   * @returns {Promise<{resourceType: string, id: string}|null>}
+   */
+  async idByHash(tenantId, idHash) {
+    const hit = this._alias.get(`${tenantId}|${idHash}`);
+    return hit ? { ...hit } : null;
+  }
+
+  /**
    * Populates the identity index from Patient rows that were written BEFORE the index existed.
    *
    * WITHOUT THIS THE FIX IS THEORETICAL. The index is maintained on write, so on the day it ships
@@ -217,7 +243,17 @@ class MemoryRepository {
    * @returns {Promise<{scanned: number, indexed: number, conflicts: object[]}>}
    */
   async reindexPatientIdentifiers(tenantId) {
-    const out = { scanned: 0, indexed: 0, conflicts: [] };
+    const out = { scanned: 0, indexed: 0, conflicts: [], aliases: 0 };
+    /* The hashed-id alias index is rebuilt in the same pass, and over EVERY type rather than only
+     * Patient: a published id belongs to any resource FHIR can be asked to read back. */
+    for (const r of this._rows) {
+      if (r.tenantId !== tenantId) continue;
+      const alias = aliasFor(r.body);
+      if (alias && !this._alias.has(`${tenantId}|${alias}`)) {
+        this._alias.set(`${tenantId}|${alias}`, { resourceType: r.resourceType, id: r.id });
+        out.aliases += 1;
+      }
+    }
     const latest = new Map();
     for (const r of this._rows) {
       if (r.tenantId !== tenantId || r.resourceType !== "Patient") continue;
@@ -279,6 +315,34 @@ class MemoryRepository {
       this._rows.push({ seq: this._seq, ...rowOf(tenantId, clone(rec)) });
     }
     for (const [mapKey, patientId] of claims) this._ident.set(mapKey, patientId);
+    /* AN IDENTIFIER REMOVED FROM A PATIENT RELEASES ITS CLAIM.
+     *
+     * Without this, correcting a mis-typed number was permanent and it took the real owner down
+     * with it: a clerk types somebody else's ABHA onto Asha's chart, notices, and removes it - the
+     * index still says that ABHA is Asha's, so when the person it actually belongs to arrives their
+     * chart CANNOT BE CREATED, refused forever by a number nobody holds any more. Diffed against the
+     * previous version rather than scanned, so the cost is the identifiers on one patient. */
+    for (const rec of records) {
+      if (rec.resourceType !== "Patient") continue;
+      const versions = this._versionsOf(tenantId, "Patient", rec.id);
+      const prior = versions.length > 1 ? versions[versions.length - 2].body : null;
+      if (!prior) continue;
+      const kept = new Set(patientIdentifierKeys(rec).map((k) => `${k.systemKey}|${k.valueNorm}`));
+      for (const k of patientIdentifierKeys(prior)) {
+        const pair = `${k.systemKey}|${k.valueNorm}`;
+        if (kept.has(pair)) continue;
+        const mapKey = `${tenantId}|${pair}`;
+        if (this._ident.get(mapKey) === rec.id) this._ident.delete(mapKey);
+      }
+    }
+    /* The published-id alias, for the ids FHIR cannot carry verbatim. First writer wins: the hash is
+     * a function of the id, so a second entry for one hash means a SHA-256 collision, not a claim. */
+    for (const rec of records) {
+      const alias = aliasFor(rec);
+      if (alias && !this._alias.has(`${tenantId}|${alias}`)) {
+        this._alias.set(`${tenantId}|${alias}`, { resourceType: rec.resourceType, id: rec.id });
+      }
+    }
     if (ctx.idempotencyKey && records.length) {
       const r = records[records.length - 1];
       this._idem.set(`${tenantId}|${ctx.idempotencyKey}`, { resourceType: r.resourceType, id: r.id, version: r.version });
