@@ -22,7 +22,9 @@ import {
 } from "../../../_connect/agent/state.js";
 import {
   assertConsent,
+  recordConsent,
   revokeConsent,
+  AGENT_SCOPES,
 } from "../../../_connect/agent/consent.js";
 import {
   issueViewerToken,
@@ -31,6 +33,7 @@ import {
 import {
   getDeployment,
   findDeploymentByFingerprint,
+  insertDeployment,
   deploymentFingerprint,
   deploymentView,
   deploymentOrigins,
@@ -108,35 +111,87 @@ export async function onRequest(context) {
   if (method === "POST" || method === "DELETE") {
     try { body = await request.json(); } catch {}
   }
-  const tid = body.tenantId || url.searchParams.get("tenant");
+  // A doctor onboarding their own hospital knows their hospital's address, not a tenant id - that is
+  // OUR identifier and no client screen ever shows it. Every route below is tenant-scoped, so resolve
+  // it once here from the actor's own membership when the caller did not supply one; supplying it
+  // still wins, and nothing is ever guessed between several tenants.
+  let tid = body.tenantId || url.searchParams.get("tenant");
+  const resolveTid = async () => {
+    if (tid) return tid;
+    const mine = (await listMyTenants(deps, request, env)).filter((t) => canAgent(t.role, "session"));
+    if (mine.length === 1) tid = mine[0].tenantId;
+    else if (mine.length > 1) throw new OnboardError("invalid", "tenantId required: this account belongs to more than one tenant");
+    else throw new OnboardError("forbidden", "no tenant available for this actor");
+    return tid;
+  };
 
   try {
+    if (!tid && seg !== "hospitals/resolve") await resolveTid();
     // POST /sessions -- validate actor/tenant via identify()+RBAC, consent, create job/session
     if (method === "POST" && seg === "sessions") {
       if (!browserSessionFlagOn(env)) return jsonResponse({ error: "not_found" }, { status: 404 });
       if (hasCredentials(body)) throw new OnboardError("invalid", "credentials must not be supplied");
-      const { actor } = await requireAgent(deps, request, env, tid, "session");
-      const deploymentId = body.deploymentId;
-      if (!deploymentId) throw new OnboardError("invalid", "deploymentId required");
-      const deployment = await getDeployment(deps.db, tid, deploymentId);
-      const consent = await assertConsent(deps, env, {
-        tenantId: tid,
-        actorId: actor.id,
-        deploymentId: deployment.id,
-        requiredScope: ["emr:session"],
-        now: deps.now(),
-      });
+
+      // The deployment is the other identifier a first-time doctor cannot have: for a hospital nobody
+      // has onboarded yet the row does not exist at all, so it is found-or-created from emrUrl below.
+      const tenantId = await resolveTid();
+      const { actor } = await requireAgent(deps, request, env, tenantId, "session");
+
+      let deployment = null;
+      if (body.deploymentId) {
+        deployment = await getDeployment(deps.db, tenantId, body.deploymentId);
+      } else if (body.emrUrl) {
+        let origin = null;
+        try { origin = new URL(String(body.emrUrl)).origin; } catch { throw new OnboardError("invalid", "emrUrl must be an absolute URL"); }
+        // https only: the whole session rides on this origin, and the approved-origin list this
+        // deployment is pinned to is what every later read is checked against.
+        if (!/^https:$/i.test(new URL(origin).protocol)) throw new OnboardError("invalid", "emrUrl must be https");
+        const fp = await deploymentFingerprint([origin]);
+        deployment = await findDeploymentByFingerprint(deps.db, tenantId, fp);
+        if (!deployment) {
+          deployment = await insertDeployment(deps.db, {
+            tenantId,
+            hospitalId: String(body.hospitalId || new URL(origin).host),
+            name: body.name ? String(body.name).slice(0, 200) : new URL(origin).host,
+            origins: [origin],
+            vendor: null,
+            fingerprint: fp,
+            networkMode: "public",
+          });
+        }
+      } else {
+        throw new OnboardError("invalid", "deploymentId or emrUrl required");
+      }
+
+      // Consent is SERVER-owned: the client tells us the doctor agreed on the consent screen, and the
+      // server writes its own HMAC-signed record from that action. It never accepts a consent receipt
+      // from the client, and an existing valid consent is still required when none is being given now.
+      const consent = (body.consent && body.consent.agreed === true)
+        ? await recordConsent(deps, env, {
+            tenantId,
+            actorId: actor.id,
+            deploymentId: deployment.id,
+            scope: [...AGENT_SCOPES],
+            now: deps.now(),
+          })
+        : await assertConsent(deps, env, {
+            tenantId,
+            actorId: actor.id,
+            deploymentId: deployment.id,
+            requiredScope: ["emr:session"],
+            now: deps.now(),
+          });
       const nowMs = Number(deps.now());
       // Reconnect/backgrounding resumption
-      let session = await findLiveSession(deps.db, tid, actor.id, deployment.id, SESSION_LIVE, nowMs);
-      let job = session ? await findJobForSession(deps.db, tid, session.id) : null;
+      let session = await findLiveSession(deps.db, tenantId, actor.id, deployment.id, SESSION_LIVE, nowMs);
+      let job = session ? await findJobForSession(deps.db, tenantId, session.id) : null;
       if (!session) {
         const sessionId = newId("ses_");
         const sessionTtl = Number(body.ttlMs) > 0 ? Number(body.ttlMs) : 3600000;
         const sessionExpiry = Math.min(nowMs + sessionTtl, Number(consent.expires_at));
         session = await insertSession(deps.db, {
           id: sessionId,
-          tenant_id: tid,
+          tenant_id: tenantId,
           deployment_id: deployment.id,
           actor_id: actor.id,
           runner_ref: newId("run_"),
@@ -148,7 +203,7 @@ export async function onRequest(context) {
         const jobId = newId("job_");
         job = await insertJob(deps.db, {
           id: jobId,
-          tenant_id: tid,
+          tenant_id: tenantId,
           session_id: sessionId,
           deployment_id: deployment.id,
           actor_id: actor.id,

@@ -37,6 +37,12 @@ function mapSafeErrorCode(err, stage) {
   return "E_JOB_FAILED";
 }
 
+// Sessions whose login tab this process has already opened, so re-polling a still-unauthenticated job
+// does not stack a new window in front of the doctor every poll interval.
+// ponytail: per-process, so a second runner would open its own tab; move to a job column if the runner
+// is ever scaled out.
+const LOGIN_TABS = new Set();
+
 export async function processJob({ job, session, deployment }, options = {}) {
   const runnerKey = options.runnerKey || process.env.RUNNER_HMAC_KEY || process.env.CONNECT_AGENT_RUNNER_KEY;
   if (!runnerKey) throw new Error("RUNNER_HMAC_KEY missing");
@@ -78,14 +84,35 @@ export async function processJob({ job, session, deployment }, options = {}) {
     return res.json().catch(() => ({ ok: true }));
   }
 
+  const startUrl = (deployment?.origins && deployment.origins[0]) || job.startUrl;
+  if (!startUrl) throw new Error("Missing startUrl for discovery");
+  const allowedOrigins = (deployment?.origins && deployment.origins.length) ? deployment.origins : [new URL(startUrl).origin];
+
+  // Before the doctor has signed in there is nothing to discover, and the login page has to be opened
+  // by the RUNNER rather than the client: the browser context is keyed by session.runnerRef, which is
+  // deliberately never sent to a client (store.js sessionView strips it), so a client-opened tab lands
+  // in a different context and the agent later attaches to a browser that was never logged in. Opening
+  // it here puts the doctor's login window and the agent's later reads in the same cookie jar.
+  if (!session || session.state !== "AUTHENTICATED") {
+    if (session && !LOGIN_TABS.has(session.id)) {
+      LOGIN_TABS.add(session.id);
+      try {
+        await camofoxClient.createTab({ userId: session.runnerRef, sessionKey: session.runnerRef, url: startUrl });
+      } catch (err) {
+        LOGIN_TABS.delete(session.id);
+        throw err;
+      }
+    }
+    // No stage report: the job stays leasable and is picked up again once handoff marks the session
+    // AUTHENTICATED. Reporting a stage here would advance the job past a login that has not happened.
+    return { ok: true, awaitingLogin: true };
+  }
+
   try {
     // --- STAGE 1: DISCOVERING ---
     await sendReport("DISCOVERING", "progress");
 
     let spec;
-    const startUrl = (deployment?.origins && deployment.origins[0]) || job.startUrl;
-    if (!startUrl) throw new Error("Missing startUrl for discovery");
-    const allowedOrigins = (deployment?.origins && deployment.origins.length) ? deployment.origins : [new URL(startUrl).origin];
 
     if (session && session.state === "AUTHENTICATED" && session.tabId) {
       const collector = await attachToTab({
