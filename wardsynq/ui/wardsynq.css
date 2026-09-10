@@ -543,3 +543,10 @@ textarea { width: 100%; min-height: 74px; resize: vertical; line-height: 1.5; }
      page somebody has to identify by hand. */
   .brandbar { display: flex; }
 }
+
+/* The site map in the rail, shown only when the page is opened from wardsynq.com (?site=1). Same
+   voice as the chart nav above it: words, weight, no chrome. */
+.rail .sitemap { display: flex; flex-direction: column; gap: 1px; margin-top: var(--sp-5); }
+.rail .sitemap .heading { color: var(--ink-3); font-size: var(--t-micro); margin-bottom: var(--sp-2); }
+.rail .sitemap a { padding: 4px 0; color: var(--ink-2); font-size: var(--t-small); font-weight: 500; text-decoration: none; }
+.rail .sitemap a:hover { color: var(--ink); }

@@ -60,8 +60,8 @@ try {
     await b.nav(BASE + "/");
     await waitSel('[data-tab="staff"]', 15000);
     must(await text("Owner / Doctor"), "sign-in tabs missing");
-    must(await ev(`return !!document.querySelector('img.lockup')`), "brand lockup missing");
-    return { note: "3 sign-in methods offered" };
+    must(await ev(`return !!document.querySelector('img.brand-mark')`), "brand lockup missing");
+    return { note: "2 sign-in methods offered" };
   });
 
   await step("sign in", async () => {
@@ -88,7 +88,7 @@ try {
     let pick = rows.find((r) => E.WSQ_HOSPITAL && r.text.indexOf(E.WSQ_HOSPITAL) >= 0) || rows.find((r) => r.text.indexOf("WardSynQ record") >= 0) || null;
     if (!pick && (await ev(`return !!document.getElementById('mkHosp')`))) {
       await type("newHosp", "WardSynQ Acceptance Hospital"); await click("#mkHosp");
-      const ok = await until(`return location.hash === '#/home' ? 'y' : (document.getElementById('mkMsg') && document.getElementById('mkMsg').querySelector('.msg.err') ? 'err:' + document.getElementById('mkMsg').textContent : '');`, 25000);
+      const ok = await until(`return (location.pathname.indexOf('/wardsynq/ui/wardsynq') >= 0 && document.getElementById('roster')) || location.hash === '#/home' ? 'y' : '' ? 'y' : (document.getElementById('mkMsg') && document.getElementById('mkMsg').querySelector('.msg.err') ? 'err:' + document.getElementById('mkMsg').textContent : '');`, 25000);
       must(ok === "y", "creating the hospital failed: " + ok);
       hospital = "WardSynQ Acceptance Hospital (created)";
       return { note: hospital };
@@ -96,9 +96,24 @@ try {
     must(pick || rows.length, "no hospital is linked to this sign-in");
     pick = pick || rows[0];
     await ev(`document.querySelector('.hosp-row[data-org=' + JSON.stringify(${JSON.stringify(pick.id)}) + ']').click(); return 1;`);
-    await until(`return location.hash === '#/home' ? 'y' : '';`, 15000);
+    await until(`return (location.pathname.indexOf('/wardsynq/ui/wardsynq') >= 0 && document.getElementById('roster')) || location.hash === '#/home' ? 'y' : '';`, 15000);
     hospital = pick.text.trim();
     return { note: hospital };
+  });
+
+  await step("landing screen is the WardSynQ workstation with the map in its rail", async () => {
+    const onWs = await ev(`return location.pathname.indexOf('/wardsynq/ui/wardsynq') >= 0`);
+    if (!onWs) return { skip: "not a WardSynQ hospital, landed on the map" };
+    await until(`return document.getElementById('pack') && document.getElementById('pack').textContent.indexOf('Loading') < 0 ? 'y' : '';`, 20000);
+    must(await ev(`return !document.getElementById('sitemap').hidden`), "site map not shown in the rail");
+    must(await ev(`return !!document.getElementById('drug')`), "order entry missing");
+    const pack = await ev(`return document.getElementById('pack').textContent`);
+    const roster = await until(`var r=document.getElementById('roster'); return r && !r.querySelector('.wait') ? r.textContent.trim().slice(0, 80) : '';`, 15000);
+    // Back to the map through the rail, the way a person would, before judging the record.
+    await ev(`document.querySelector('#sitemap a[href="/#/home"]').click(); return 1;`);
+    await until(`return location.hash === '#/home' ? 'y' : '';`, 15000);
+    must(!/unavailable|refused|could not/i.test(pack), "workstation could not open the record: " + pack);
+    return { note: pack.slice(0, 70) + " | roster: " + (roster || "(empty)") };
   });
 
   await step("role-aware home dashboard with live counts", async () => {
