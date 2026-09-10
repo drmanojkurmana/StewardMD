@@ -107,6 +107,39 @@
   }
 
   function flagged() { return true; }  // Classic UI removed — Advanced (by MaiK) is the only UI.
+
+  /* WARD SYNC OPENS WARDSYNQ. One decision, for all three places the app offers it: the top
+   * quick-link, the Settings button and the menu tile.
+   *
+   * "Ward Sync and WardSynQ are ONE system" is the owner's decision of 2026-09-04
+   * (vault/modules/WardSynQ.md): the GHIS integration is not a parallel product, it is the first
+   * hospital-data ADAPTER under WardSynQ. Until now the app contradicted that - Ward Sync opened the
+   * GHIS import screen, and WardSynQ sat behind a separate, default-off tile - so a hospital running
+   * WardSynQ still met somebody else's EMR when it tapped the button named after its own ward.
+   *
+   * WHAT DECIDES: the workplace this device is signed in to. queue.js and ward.js already record it
+   * as "wardsynq:<orgId>" in smd_opd_workplace, and that prefix is written ONLY for a hospital whose
+   * record is WardSynQ's - so it is a fact about the hospital, not a guess about the user.
+   *
+   * GITAM KEEPS WORKING. A device with no WardSynQ workplace gets the GHIS screen exactly as before.
+   * Nothing is removed: this changes which door the button opens, and only when there is a better
+   * one to open. */
+  function wardsynqWorkplace() {
+    try { return (localStorage.getItem("smd_opd_workplace") || "").indexOf("wardsynq:") === 0; } catch (e) { return false; }
+  }
+  function openWardSync() {
+    /* Every reference goes through `window.`, and the call uses the SAME reference the guard
+     * tested. Checking window.WARD and then calling a bare WARD leans on it also being a global:
+     * where it is not, the bare name throws, the catch below swallows it, and the button does
+     * nothing at all - which is the one outcome a clinician must never get from tapping the ward. */
+    try {
+      if (wardsynqWorkplace() && window.WARD && window.WARD.open) { window.WARD.open(); return; }
+      if (window.openGHIS) { window.openGHIS(); return; }
+      if (window.GHIS && window.GHIS.open) { window.GHIS.open(); return; }
+    } catch (e) { /* fall through to the message: a thrown door is still a door that did not open */ }
+    // Nothing opened. Say which one is coming rather than a bare "loading", and never stay silent.
+    try { toast(wardsynqWorkplace() ? "The ward is still loading…" : "Ward Sync loading…"); } catch (e) {}
+  }
   var IS_V2 = flagged();
 
   // Add an "Interface: Advanced UI (by MaiK) / Classic UI" switch into the existing
@@ -182,7 +215,7 @@
       if (drugLink) drugLink.remove();
       var topFrag = document.createDocumentFragment();
       topFrag.appendChild(topBtn(svg("brain", "smd-ico"), "Dx My Patient", false, function () { try { openDxChooser(); } catch (e) {} }));
-      topFrag.appendChild(topBtn(svg("hospital", "smd-ico"), "Ward Sync", false, function () { try { if (window.openGHIS) openGHIS(); else toast("Ward Sync loading…"); } catch (e) {} }));
+      topFrag.appendChild(topBtn(svg("hospital", "smd-ico"), "Ward Sync", false, function () { openWardSync(); }));
       topFrag.appendChild(topBtn(svg("pulse", "smd-ico"), "ICU Dashboard", false, function () { try { if (window.ICU && ICU.open) ICU.open(); else if (window.INF) INF.openDashboard(); else toast("ICU loading…"); } catch (e) {} }));
       menu.insertBefore(topFrag, menu.firstChild);
 
@@ -217,7 +250,8 @@
           '<div class="smd-nav-note">AI advisory — clinician confirmation required.</div>';
         var wardBody = swRow("ghis", "GHIS Ward Sync", "Live inpatient labs & radiology", flag("smd_ghis_ward", true)) +
           (window.SMD_IS_NATIVE ? swRow("autofetch", "Auto-fetch reports", "Keep a linked patient's labs/imaging fresh on launch & resume · GHIS login stored on THIS device only (Keychain/Keystore), per-patient consent · turn on/off per patient from the Ward Sync bar", flag("smd_autofetch", false)) : "") +
-          '<button class="smd-nav-btn" data-open-ghis="1">' + svg("hospital", "smd-ico") + ' Open Ward Sync</button>';
+          '<button class="smd-nav-btn" data-open-ghis="1">' + svg("hospital", "smd-ico") + ' Open Ward Sync</button>' +
+          '<div class="smd-nav-note">Opens the WardSynQ ward when this workplace keeps a WardSynQ record; otherwise the GHIS inpatient list above.</div>';
         var toolsBody = swRow("whisper", "Clinical Dictation (Beta)", "On-device Whisper voice→text in MaiK Scribe · native app only (model downloads on first use)", flag("smd_whisper_clinical_dictation", false)) +
           ((window.SMD_IMAGE_ENGINE && SMD_IMAGE_ENGINE.settingsHTML)
             ? '<div class="smd-nav-row" style="display:block"><div class="smd-nav-lbl" style="margin-bottom:6px">Image Engine</div>' + SMD_IMAGE_ENGINE.settingsHTML() + '</div>'
@@ -293,7 +327,7 @@
           b.addEventListener("click", function () { try { if (window.SMD_setUI) SMD_setUI(b.getAttribute("data-ui") === "v2"); } catch (e) {} try { if (window.SB && SB.close) SB.close(); } catch (e) {} });
         });
         var og = setBody.querySelector("[data-open-ghis]");
-        if (og) og.addEventListener("click", function () { try { if (window.SB && SB.close) SB.close(); } catch (e) {} setTimeout(function () { try { if (window.openGHIS) openGHIS(); } catch (e) {} }, 60); });
+        if (og) og.addEventListener("click", function () { try { if (window.SB && SB.close) SB.close(); } catch (e) {} setTimeout(openWardSync, 60); });
         setBody.querySelectorAll("[data-xa-open]").forEach(function (xb) {
           xb.addEventListener("click", function () {
             var feat = xb.getAttribute("data-xa-open");
@@ -775,7 +809,7 @@
     interactions: function () { if (window.MEDDRUGS && MEDDRUGS.openInteractions) MEDDRUGS.openInteractions(); else toast("Drug interactions loading…"); },
     framework: function () { if (window.SB && SB.openRef) SB.openRef("guidelines"); else toast("Framework"); },
     icu: function () { if (window.ICU && ICU.open) ICU.open(); else if (window.INF && INF.openDashboard) INF.openDashboard(); else if (window.INF && INF.open) INF.open(); else toast("ICU loading…"); },
-    ward: function () { if (window.openGHIS) window.openGHIS(); else if (window.GHIS && GHIS.open) GHIS.open(); else toast("Ward Sync loading…"); },
+    ward: function () { openWardSync(); },
     queue: function () { if (window.QUEUE && QUEUE.open) QUEUE.open(); else toast("OPD Queue loading…"); },
     // The WardSynQ inpatient ward (window.WARD, ward.js). Distinct from `ward` above, which is the
     // older Ward Sync / GHIS import screen - this is the native admission-to-discharge record.

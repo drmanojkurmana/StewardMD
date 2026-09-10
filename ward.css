@@ -1,24 +1,76 @@
-/* ward.css — WardSynQ inpatient ward (#smdWard). Same Clinical Precision palette as queue.css so the
- * ward is visibly the same product as the OPD queue, scoped to its own root id. No emoji: icons are
- * the app's bundled Material Symbols font. Exists only when opened. */
+/* ward.css — WardSynQ inpatient ward (#smdWard), in WardSynQ's own visual language.
+ *
+ * ONE PRODUCT, ONE PALETTE. This file used to carry the "Clinical Precision" palette it shared with
+ * queue.css: a teal primary, pill buttons, Material-Design container colours. The WardSynQ
+ * workstation (wardsynq/ui/wardsynq.css) is drawn in a different language entirely - an instrument
+ * ground, near-ink actions, and colour spent ONLY where something is clinically significant - so a
+ * clinician moving between the ward and the order screen met two products. Every token below now
+ * resolves to the workstation's, and because the whole file already funnels through these variables,
+ * the ward inherits that language without a single rule below this block changing.
+ *
+ * WHY var(--token, <literal>) AND NOT A BARE var(). On wardsynq.com the site loads wardsynq.css
+ * first, so these inherit the real tokens - including its dark palette, which is driven by
+ * prefers-color-scheme, so the ward follows the system there for free. Inside the StewardMD app
+ * wardsynq.css is NOT loaded and dark mode is the app's own body.dark class, so the literals are the
+ * same values written out, and the body.dark block below carries the workstation's dark palette. One
+ * design, two hosts, no third copy of the colours to drift.
+ *
+ * The ward keeps its own layout, its Material Symbols icons and its 44px touch targets: it is a
+ * bedside screen used on a phone, and that is a different job from a seated workstation. What is
+ * shared is the palette, the type and what colour is allowed to MEAN. */
+/* The product's face, self-hosted. Declared here as well as in wardsynq/ui/wardsynq.css because the
+ * StewardMD app loads THIS file and not that one; identical family and src, so a host loading both
+ * fetches once. */
+@font-face {
+  font-family: 'Source Sans 3';
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url(/assets/fonts/source-sans-3.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Source Sans 3';
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url(/assets/fonts/source-sans-3-ext.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
 #smdWard {
-  --primary: #0e6e63; --on-primary: #fff; --primary-container: #008378; --on-primary-container: #f4fffc;
-  --error: #ba1a1a; --on-error: #fff; --error-container: #ffdad6; --on-error-container: #93000a;
-  --warn-container: #ffe9c7; --on-warn-container: #6b4400;
-  --ok-container: #cdefdf; --on-ok-container: #05513a;
-  --bg: #f7f9fb; --on-surface: #191c1e; --on-surface-variant: #3d4947;
-  --sc-lowest: #fff; --sc-low: #f2f4f6; --sc: #eceef0; --sc-high: #e6e8ea;
-  --outline: #6d7a77; --outline-variant: #bcc9c6;
-  --w-sans: 'Inter Variable', 'Noto Sans Telugu', 'Noto Sans Devanagari', var(--sans, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif);
+  /* The primary action is near-ink, not a brand colour. wardsynq.css's own reason: an interface
+   * where the primary action is a bright colour teaches the eye that colour means "clickable",
+   * which is exactly the association that must stay free for "clinically abnormal". */
+  --primary: var(--ink, #0f1613); --on-primary: var(--surface, #f8faf9);
+  --primary-container: var(--recess, #e4e8e7); --on-primary-container: var(--ink, #0f1613);
+  --error: var(--sig-stop, #8c2f22); --on-error: #fff;
+  --error-container: var(--sig-stop-wash, #f7e9e6); --on-error-container: var(--sig-stop, #8c2f22);
+  --warn-container: var(--sig-major-wash, #f8f0df); --on-warn-container: var(--sig-major, #85570c);
+  /* wardsynq.css defines no "clear" wash - nothing in the workstation fills a block to say a thing
+   * is normal. The ward does (a settled dose, a signed step), so the wash is defined HERE, in the
+   * same desaturated key as the other two, and carries the workstation's own clear signal as ink. */
+  --ok-container: var(--sig-clear-wash, #e6f0ea); --on-ok-container: var(--sig-clear, #2c6146);
+  --bg: var(--ground, #eef1f0); --on-surface: var(--ink, #0f1613); --on-surface-variant: var(--ink-2, #4a5551);
+  --sc-lowest: var(--raised, #ffffff); --sc-low: var(--surface, #f8faf9); --sc: var(--recess, #e4e8e7); --sc-high: var(--recess, #e4e8e7);
+  --outline: var(--ink-3, #5f6965); --outline-variant: var(--hair, #dbe0de);
+  /* The workstation's stack. Source Sans 3 is self-hosted next to the app's other faces, so a ward
+   * that has lost its network still renders in the product's own type rather than in whatever the
+   * device happens to have. */
+  --w-sans: var(--sans, "Source Sans 3", 'Inter Variable', 'Noto Sans Telugu', 'Noto Sans Devanagari', system-ui, -apple-system, "Segoe UI", Roboto, sans-serif);
   position: fixed; inset: 0; z-index: 12000; display: none; background: var(--bg); color: var(--on-surface); font-family: var(--w-sans);
 }
 #smdWard.on { display: block; }
-body.dark #smdWard { --bg: #191c1e; --on-surface: #eff1f3; --on-surface-variant: #bcc9c6;
-  --sc-lowest: #1f2325; --sc-low: #23272a; --sc: #272b2e; --sc-high: #2d3133; --outline-variant: #3d4947;
-  --primary: #3fc7b3; --on-primary: #04322c; --primary-container: #0d5b52; --on-primary-container: #c9fff5;
-  --error-container: #93000a; --on-error-container: #ffdad6;
-  --warn-container: #5a3a00; --on-warn-container: #ffdfa8;
-  --ok-container: #05513a; --on-ok-container: #cdefdf; }
+/* The app's own dark switch. On wardsynq.com the block above already followed the system, because
+ * wardsynq.css redefines its tokens under prefers-color-scheme; this is for the app, which has no
+ * wardsynq.css and decides dark itself. Values are the workstation's dark palette. */
+body.dark #smdWard { --bg: #0d1211; --on-surface: #e8edeb; --on-surface-variant: #a3aeaa;
+  --sc-lowest: #1a211f; --sc-low: #131917; --sc: #0a0e0d; --sc-high: #0a0e0d; --outline: #828d89; --outline-variant: #252d2b;
+  --primary: #e8edeb; --on-primary: #0d1211; --primary-container: #0a0e0d; --on-primary-container: #e8edeb;
+  --error: #e08277; --on-error: #14100a;
+  --error-container: #2b1512; --on-error-container: #e08277;
+  --warn-container: #2a2110; --on-warn-container: #dcb45a;
+  --ok-container: #10251c; --on-ok-container: #6fbb94; }
 #smdWard .material-symbols-outlined { font-family: "Material Symbols Outlined", "Material Symbols Rounded"; font-weight: normal; font-style: normal; line-height: 1; letter-spacing: normal; text-transform: none; display: inline-block; white-space: nowrap; direction: ltr; -webkit-font-feature-settings: "liga"; -webkit-font-smoothing: antialiased; font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24; vertical-align: middle; user-select: none; }
 
 #smdWard .w-shell { display: flex; flex-direction: column; height: 100%; }
