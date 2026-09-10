@@ -5,6 +5,13 @@ tags: [decisions, adr]
 
 Dated architectural calls + why. Newest first. Keep each short: **decision · why · trade-off · status**.
 
+## 2026-09-10 · Skn X calm clarity UI selected
+
+Use the calm clarity direction for Skn X: native system typography, translucent navigation, grouped
+surfaces and a clear camera-first action. It keeps the clinically important hierarchy quiet and legible
+without changing analysis or safety behavior. The local Material Symbols font is explicitly applied
+inside `#sknxRoot`, preventing raw ligature names when offline. Cache: `sknx18calm1`.
+
 ## 2026-09-09 · WardSynQ TASK 4.16 (Downtime/Business Continuity): the 6×4 policy matrix, documented not rebuilt
 
 **Decision.** The plan asks six failure modes (network, payment gateway, payer system, LIS/RIS,
@@ -5086,4 +5093,3 @@ answer length alone is wrong by that factor.
 
 **NOT claimed:** clinical validation, production readiness, or real-device verification. An automated
 rubric passing 8/8 is not a clinical study, and this note is not evidence that it is.
-

@@ -5,6 +5,18 @@ flag: smd_sknx (client, def:false) + v2beta access + smd_sknx_rx (Phase 3, def:f
 ---
 # SknX
 
+## 2026-09-10 Calm clarity UI
+
+- Selected the calm, Apple-inspired direction: system typography, translucent navigation, restrained
+  teal, grouped surfaces, generous spacing and one dominant action per step.
+- Capture now leads with the camera, keeps library/files secondary, and groups the photo-quality tips.
+  Review presents image and clinical context as a continuous task; processing uses one grouped status
+  surface; results lead with a quieter ranked differential and readable evidence sections.
+- Added the missing scoped Material Symbols declaration so the bundled offline icon font renders glyphs
+  instead of raw names such as `photo_camera` in native or disconnected use.
+- No inference, referral, evidence, history, storage or prescription gate changed. Verification remains
+  `node --test test/sknx-*.test.mjs`, then build and `node test/run-sknx-ui.mjs`.
+
 ## 2026-09-06 UI refresh (local branch `codex/sknx-ux-refresh`)
 
 - Capture now leads to a photo review with optional clinical history, then an explicit Analyze action.

@@ -62,18 +62,18 @@
       '<section class="sknx-capture" aria-labelledby="sknxCapTitle">' +
         '<header class="sknx-cap-head">' +
           '<button type="button" class="sknx-cap-close" data-act="sknx-close" aria-label="Close SknX">' + ic("close") + "</button>" +
-          mark() + '<h2 class="sknx-cap-title" id="sknxCapTitle">SknX <span class="sknx-brand-sub">Dermatology</span></h2>' +
+          mark() + '<h2 class="sknx-cap-title" id="sknxCapTitle">Skn X <span class="sknx-brand-sub">Dermatology</span></h2>' +
         "</header>" +
         '<div class="sknx-cap-body">' +
-          '<div class="sknx-intro"><span class="sknx-eyebrow">SKIN INSIGHTS, IN CONTEXT</span><h3>A clearer picture.<br>A more informed review.</h3><p>Start with a skin photo. Add what you see clinically, then explore the differential and supporting evidence.</p></div>' +
+          '<div class="sknx-intro"><span class="sknx-eyebrow">DERMATOLOGY</span><h3>A clearer view<br>of skin.</h3><p>Bring the photo and clinical story together for a more informed review.</p></div>' +
           '<ol class="sknx-journey" aria-label="Analysis steps"><li aria-current="step"><b>1</b> Add photo</li><li><b>2</b> Review</li><li><b>3</b> Explore findings</li></ol>' +
-          '<div class="sknx-section-heading"><h3>Add a skin photo</h3><span>Choose a source</span></div>' +
+          '<div class="sknx-section-heading"><h3>Start a skin review</h3><span>Photo · Context · Findings</span></div>' +
           '<div class="sknx-src-grid">' +
-            srcCard("camera", "photo_camera", "Take a photo", "Use your camera") +
-            srcCard("library", "photo_library", "Photo Library", "PNG, JPEG, HEIC") +
-            srcCard("files", "folder", "Choose a file", "Browse your device") +
+            srcCard("camera", "photo_camera", "Take a photo", "Open the camera") +
+            srcCard("library", "photo_library", "Photo Library", "Choose an existing image") +
+            srcCard("files", "folder", "Browse Files", "PNG, JPEG or HEIC") +
           "</div>" +
-          '<div class="sknx-photo-guide"><h3>A useful photo starts here</h3><div><span>' + ic("light_mode") + '<b>Even lighting</b>Use diffuse light and avoid flash glare.</span><span>' + ic("center_focus_strong") + '<b>Clear detail</b>Keep the area in focus and fill the frame.</span><span>' + ic("crop_free") + '<b>Clinical context</b>Include a little surrounding skin.</span></div></div>' +
+          '<div class="sknx-photo-guide"><h3>Before you begin</h3><div><span>' + ic("light_mode") + '<b>Even lighting</b>Use diffuse light and avoid flash glare.</span><span>' + ic("center_focus_strong") + '<b>Clear detail</b>Keep the area in focus and fill the frame.</span><span>' + ic("crop_free") + '<b>Clinical context</b>Include a little surrounding skin.</span></div></div>' +
           '<p class="sknx-cap-foot">' + ic("visibility") + '<span>You can review your photo before analysis.</span></p>' +
         "</div>" +
       "</section>";
@@ -81,7 +81,7 @@
 
   function renderReview(host) {
     host.innerHTML = '<header class="sknx-cap-head"><button type="button" class="sknx-cap-close" data-act="sknx-new" aria-label="Back to photo sources">' + ic("arrow_back") + '</button><h2 class="sknx-cap-title">Review your photo</h2><button type="button" class="sknx-cap-close" data-act="sknx-close" aria-label="Close SknX">' + ic("close") + '</button></header>' +
-      '<div class="sknx-cap-body sknx-review"><ol class="sknx-journey" aria-label="Analysis steps"><li><b>✓</b> Add photo</li><li aria-current="step"><b>2</b> Review</li><li><b>3</b> Explore findings</li></ol>' +
+      '<div class="sknx-cap-body sknx-review"><ol class="sknx-journey" aria-label="Analysis steps"><li><b>✓</b> Add photo</li><li aria-current="step"><b>2</b> Add context</li><li><b>3</b> Review findings</li></ol>' +
       '<figure class="sknx-preview"><img src="' + esc(state.previewUrl || "") + '" alt="Selected skin photo for review"><figcaption>Check focus, lighting, and the area of interest.</figcaption></figure>' +
       '<button type="button" class="sknx-btn sknx-btn-secondary" data-act="sknx-source" data-source="library">' + ic("photo_library") + 'Replace photo</button>' + hxFormHtml("capture") +
       (state.error ? '<div class="sknx-error" role="alert">' + ic("error") + '<span>' + esc(state.error) + '</span></div>' : '') +
@@ -228,7 +228,7 @@
     var head =
       '<div class="sknx-result-head">' +
         '<button class="sknx-result-back" type="button" data-act="sknx-back" aria-label="Back">' + ic("arrow_back") + "</button>" +
-        mark() + '<div class="sknx-result-title">Skin analysis<span class="sknx-brand-sub">SknX findings &amp; evidence</span></div>' +
+        mark() + '<div class="sknx-result-title">Skin review<span class="sknx-brand-sub">Skn X findings &amp; evidence</span></div>' +
         '<button class="sknx-result-close" type="button" data-act="sknx-close" aria-label="Close SknX">' + ic("close") + "</button>" +
       "</div>";
 
@@ -236,13 +236,13 @@
     // caveats live in the small footer at the very bottom.
     var body =
       '<div class="sknx-result-body">' +
-        '<div class="sknx-section-heading"><h2>Differential</h2><span>Image findings</span></div>' +
+        '<div class="sknx-section-heading"><h2>Possible conditions</h2><span>Image findings</span></div>' +
         dxHtml +
         '<div class="sknx-rerank-host" id="sknxRerankHost" aria-live="polite"></div>' +
         findingHtml +
         lesionHtml +
         heatmapHtml +
-        '<nav class="sknx-result-nav" aria-label="Result sections"><button type="button" class="sknx-btn sknx-btn-secondary" data-act="sknx-jump" data-target="sknxReportHost">' + ic("article") + 'Read report</button><button type="button" class="sknx-btn sknx-btn-secondary" data-act="sknx-jump" data-target="sknxRefine">' + ic("clinical_notes") + 'Refine history</button></nav>' +
+        '<nav class="sknx-result-nav" aria-label="Result sections"><button type="button" class="sknx-btn sknx-btn-secondary" data-act="sknx-jump" data-target="sknxReportHost">' + ic("article") + 'Clinical report</button><button type="button" class="sknx-btn sknx-btn-secondary" data-act="sknx-jump" data-target="sknxRefine">' + ic("clinical_notes") + 'Edit context</button></nav>' +
         '<div class="sknx-report-host" id="sknxReportHost" aria-live="polite"><div class="sknx-report-loading">' + ic("hourglass_empty") + "<span>Preparing educational report&hellip;</span></div></div>" +
         '<div class="sknx-actions">' +
           '<button class="sknx-btn sknx-btn-primary" type="button" data-act="sknx-save">' + ic(state.saved ? "bookmark_added" : "bookmark") + (state.saved ? "Case saved" : "Save case") + '</button><span class="sknx-save-status" role="status"></span>' +
