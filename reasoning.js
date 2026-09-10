@@ -1717,7 +1717,7 @@
       edition: "", tag: "",
       pages: "",                              // not in the header — references live in the footer
       pearls: pearls, sections: sections, fullHTML: full,
-      cite: references.length ? '<strong>Reference:</strong>' + references.map(function (name) { return '<div>' + esc(name) + '</div>'; }).join("") : ""
+      cite: '<strong>' + rIco("book") + ' ' + esc(srcName) + ' (22e)</strong>' + (pages.length ? ' — pp. ' + pages.join(", ") : "") + '<br>Reference knowledge paraphrased &amp; page-cited. Not a treatment regimen — verify against full guidelines before acting.'
     };
   }
   /* FLAGSHIP CLINICIAN-CURATED BRIEFINGS — hand-authored high-yield blocks for
@@ -2001,7 +2001,7 @@
     if (!src) return "";
     opts = opts || {};
     var open = !!opts.expanded;
-    var sub = src.srcKey === "harrison" ? "Clinical details and key points" : [src.edition, src.tag].filter(Boolean).join(" · ");
+    var sub = src.srcKey === "harrison" ? "Clinical details and key points" : [src.edition, src.tag, src.pages].filter(Boolean).join(" · ");
     return '<div class="ev-wrap' + (open ? " ev-open" : "") + '" data-ev="' + src._id + '" data-ev-src="' + (src.srcKey || "harrison") + '">' +
       '<button type="button" class="ev-top" aria-expanded="' + open + '"><span class="ev-top-ic">' + src.icon + '</span>' +
         '<span class="ev-top-main"><span class="ev-top-title">' + (src.srcKey === "harrison" ? "Know more" : esc(src.sourceName)) + '</span>' +
@@ -2781,6 +2781,7 @@
         mgmtHtml +
         (harrisonRef(id, { expanded: true }) || '<p class="dx-sel-empty">No Harrison reference loaded for this disease.</p>') +
         (refInf ? '' : '<button class="dx-select ' + (inf ? "inf" : "ni") + '" data-sel="' + id + '">Open full ' + (inf ? "stewardship" : "management") + ' page →</button>') +
+        '<div class="dx-mgmt-disc">' + rIco("warn") + ' Decision-support only. Reference knowledge is paraphrased from Harrison\'s 22e and standard guidelines. Verify against full guidelines and prescribing references before acting.</div></div>' +
         '</div>' +
       '</div>';
     var favourite = document.createElement("button"); favourite.type = "button"; favourite.className = "dx-reader-favourite";
