@@ -242,13 +242,19 @@ export async function onRequest(context) {
         }
         if (currentJob.state === "AWAITING_LOGIN") {
           assertTransition("job", "AWAITING_LOGIN", "AUTHENTICATED");
-          currentJob = await casJob(deps.db, tid, currentJob.id, currentJob.revision, { state: "AUTHENTICATED" });
-        }
-        if (currentJob.state === "AUTHENTICATED") {
-          assertTransition("job", "AUTHENTICATED", "DISCOVERING");
-          const jobSet = { state: "DISCOVERING", stage: "discovering" };
+          const jobSet = { state: "AUTHENTICATED" };
           if (idemKey && !currentJob.idempotency_key) jobSet.idempotency_key = idemKey;
           currentJob = await casJob(deps.db, tid, currentJob.id, currentJob.revision, jobSet);
+        }
+        // Handoff stops at AUTHENTICATED, deliberately: it does not itself advance the job to
+        // DISCOVERING. JOB_LEASABLE (state.js) is only ["CREATED","AUTHENTICATED"] - a job handoff
+        // pushed straight to DISCOVERING would never be leasable by a runner at all (DISCOVERING is
+        // only RECLAIMABLE, i.e. after a runner already held and lost a lease on it), so no runner
+        // could ever pick up a freshly-handed-off job. The runner's own POST .../report with
+        // stage:"DISCOVERING" is what legally makes that transition, once it has actually leased the
+        // job and started working - see functions/api/connect/agent/runner/[[path]].js.
+        else if (idemKey && currentJob.state === "AUTHENTICATED" && !currentJob.idempotency_key) {
+          currentJob = await casJob(deps.db, tid, currentJob.id, currentJob.revision, { idempotency_key: idemKey });
         }
       }
 

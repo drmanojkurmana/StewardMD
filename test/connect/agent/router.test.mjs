@@ -532,7 +532,7 @@ test("pause/resume rejected for a non-owning actor", async () => {
 
 // --- Handoff and Idempotency ---
 
-test("POST /sessions/:id/handoff transitions state to AUTHENTICATED/DISCOVERING and is idempotent", async () => {
+test("POST /sessions/:id/handoff transitions state to AUTHENTICATED and is idempotent", async () => {
   const { db, env, nowMs, doc1 } = await setupTestEnv();
 
   await recordConsent(
@@ -564,7 +564,14 @@ test("POST /sessions/:id/handoff transitions state to AUTHENTICATED/DISCOVERING 
   assert.equal(hData1.ok, true);
   assert.equal(hData1.state, "AUTHENTICATED");
   assert.equal(hData1.controlOwner, "agent");
-  assert.equal(hData1.job.state, "DISCOVERING");
+  // AUTHENTICATED, not DISCOVERING: handoff hands the job to a runner ready to lease, it does not
+  // itself advance to DISCOVERING - JOB_LEASABLE (state.js) is only CREATED/AUTHENTICATED, so a job
+  // handoff pushed straight to DISCOVERING could never actually be leased by any runner (DISCOVERING
+  // is reclaimable-after-lease-loss only). The runner's own POST .../report with stage:"DISCOVERING"
+  // is what makes that transition, once it has actually leased the job - see
+  // functions/api/connect/agent/runner/[[path]].js and the acceptance matrix (Scenario 2) that caught
+  // this the first time a runner actually tried to lease a freshly-handed-off job and got none.
+  assert.equal(hData1.job.state, "AUTHENTICATED");
 
   // Idempotent repeated handoff
   const hRes2 = await onRequest(post(`/api/connect/agent/sessions/${sessionId}/handoff`, {

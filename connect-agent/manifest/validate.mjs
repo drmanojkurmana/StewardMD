@@ -9,7 +9,7 @@
 // against a different manifest.
 import { validateManifest, manifestContentHash, canonicalJson, sha256, templatePlaceholders } from './schema.mjs';
 import { executeOperation, SessionExpiredError } from './interpret.mjs';
-import { buildBundle } from './normalize.mjs';
+import { buildBundle, evaluate } from './normalize.mjs';
 
 export { validateAdapterSpec } from '../controller.mjs';
 
@@ -82,11 +82,23 @@ export async function validateCandidate({ manifest, fixture, limits = {} }) {
   const second = await runAll({ manifest, fixture, limits });
 
   // Identity consistency: every item has a usable id, no id repeats across pages, and two identical runs
-  // produce the same id sequence (a source that reshuffles pages would fail here).
-  const idsOf = (run) => run.results.map((r) => ({
-    type: r.operationType,
-    ids: r.pages.flatMap((p) => p.items.map((i) => (i && typeof i === 'object' ? i.id ?? i.identifier ?? null : null))),
-  }));
+  // produce the same id sequence (a source that reshuffles pages would fail here). The id comes from the
+  // OPERATION'S OWN DECLARED id MAPPING (mapping.fields.id), not an assumed raw `.id`/`.identifier` key -
+  // a real EMR item has no reason to carry either literally (this is exactly why the manifest declares
+  // how to derive one). Checking the raw key instead of the mapping made this fail on every source that
+  // genuinely has no such key, which is the common case, not the exception.
+  const idExprOf = (opType) => manifest.operations.find((op) => op.type === opType)?.mapping?.fields?.id || null;
+  const idsOf = (run) => run.results.map((r) => {
+    const idExpr = idExprOf(r.operationType);
+    return {
+      type: r.operationType,
+      ids: r.pages.flatMap((p) => p.items.map((i) => {
+        if (!idExpr || !i || typeof i !== 'object') return null;
+        const v = evaluate(idExpr, i);
+        return v.present && v.value !== null && v.value !== '' ? v.value : null;
+      })),
+    };
+  });
   const idsA = idsOf(first);
   const idsB = idsOf(second);
   const missingIds = idsA.filter((e) => e.ids.some((id) => id === null || id === undefined || id === ''));
