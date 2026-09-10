@@ -236,6 +236,26 @@ test("2. the record names exactly which safety result was explained", async () =
   assert.ok(r.interaction.correlationId);
 });
 
+/* REGRESSION, 2026-09-10 MaiK safety pass: the explanation id used to be built from the patient id
+ * and a timestamp truncated to the SECOND, with no nonce - unlike maik-interaction.js's idFor(),
+ * which always mixes one in. Two explanations for the same patient inside one second collided on
+ * the identical id; the second put() carried no expectedVersion, so it landed as version 2 and
+ * SILENTLY OVERWROTE the first - which then survives only in history, not as what "the latest
+ * explanation" actually shows. */
+test("2b. two explanations requested for the same patient do not collide on one id, even inside the same second", async () => {
+  const s = socket("Explanation text.");
+  seed(undefined, s);
+  await allergicCase();
+
+  const [a, b] = await Promise.all([explain(DOCTOR, { orderId: "ord-1" }), explain(DOCTOR, { orderId: "ord-1" })]);
+  assert.equal(a.__status, 200, JSON.stringify(a));
+  assert.equal(b.__status, 200, JSON.stringify(b));
+  assert.notEqual(a.interaction.id, b.interaction.id, "two requests, two identities - never one overwriting the other");
+  // Both actually exist as version 1 of THEIR OWN record, not one record at version 2.
+  assert.equal(a.interaction.version, 1);
+  assert.equal(b.interaction.version, 1);
+});
+
 /* ---- 3: fail closed. An unavailable check must never read as a clean one. -------------------------- */
 
 test("3. with the safety engine unavailable, MaiK refuses and never reassures", async () => {

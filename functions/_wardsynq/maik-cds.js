@@ -50,9 +50,9 @@ import { SafetyEngine, SEVERITY } from "../../wardsynq/wardsynq-safety.js";
 import { resolveClinicalActor } from "./actor.js";
 import { RecordService, NATIVE_SYSTEM } from "./service.js";
 import { AuthError, PermissionError } from "../_connect/permission.js";
-import { screenOutput, requestNonce } from "../../wardsynq/wardsynq-secops.js";
+import { screenOutput, requestNonce, REASSURANCE } from "../../wardsynq/wardsynq-secops.js";
 import { TASK, invoke } from "./maik-gateway.js";
-import { MaiKInteraction, REVIEW, TYPE as INTERACTION_TYPE } from "./maik-interaction.js";
+import { MaiKInteraction, REVIEW, TYPE as INTERACTION_TYPE, idFor } from "./maik-interaction.js";
 import { makeActor, KIND, TIER } from "../../wardsynq/wardsynq-actors.js";
 
 const str = (v) => (v == null ? "" : String(v).trim());
@@ -67,18 +67,9 @@ const INSTRUCTION = [
   "Be brief. Name each finding and what it means for this patient.",
 ].join(" ");
 
-/* Words that would make an explanation contradict a verdict carrying findings. A model asked to
- * explain three interactions and answering "no significant concerns" has not explained them; it has
- * replaced them. Deliberately narrow: these are the REASSURING contradictions, which are the ones a
- * clinician acts on without checking. */
-const REASSURANCE = [
-  /\bno (?:significant |major |clinically )?(?:concern|issue|problem|interaction|contraindication|risk)s?\b/i,
-  /\b(?:is|appears|seems) (?:safe|fine|appropriate|acceptable)\b/i,
-  /\bno (?:safety )?(?:findings?|alerts?|warnings?)\b/i,
-  /\bnothing (?:of concern|to flag|significant)\b/i,
-  /\bsafe to (?:give|administer|prescribe|proceed)\b/i,
-  /\bcleared\b/i,
-];
+/* REASSURANCE moved to wardsynq-secops.js on 2026-09-10, so the ask-path (maik-interaction.js) can
+ * share it without a cycle - see that file's own header for why. The list and its meaning here are
+ * unchanged: the REASSURING contradictions, which are the ones a clinician acts on without checking. */
 
 /** PURE. Did MaiK contradict the verdict it was handed? Returns the violations, never a verdict. */
 function contradictions(text, verdict) {
@@ -254,7 +245,14 @@ async function explainOrderSafety(request, env, ctx) {
   const released = screen.released !== false && contra.length === 0;
 
   const at = new Date().toISOString();
-  const id = `wsq-maik-cds-${patientId.toLowerCase().replace(/[^a-z0-9]+/g, "-")}-${at.replace(/[^0-9]/g, "").slice(0, 14)}`;
+  /* THE SAME idFor() maik-interaction.js uses, and for the same reason: a timestamp truncated to
+   * the second is not unique, so two explanations for one patient inside one second used to collide
+   * on the SAME id - the second `put()` had no expectedVersion and landed as version 2, silently
+   * overwriting the first explanation, which then survives only in history rather than as the
+   * record anybody reading "the latest explanation" would see. The nonce this function already
+   * computes above (`nonce`, used to fence the prompt) is reused here rather than a second one
+   * minted, so one request has exactly one identity throughout. */
+  const id = idFor(patientId, at, nonce);
   const signature = verdictSignature(view, order);
 
   const record = MaiKInteraction({
