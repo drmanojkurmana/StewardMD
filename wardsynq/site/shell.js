@@ -207,6 +207,28 @@
     return (e && e.message) || "Sign-in failed.";
   }
 
+  /* What a Firebase sign-in failure MEANS, in a sentence the person reading it can act on.
+   *
+   * Firebase's own message was being shown verbatim, so a clinician met "This domain is not
+   * authorized for OAuth operations for your Firebase project. Edit the list of authorized domains
+   * from the Firebase console" - which is an instruction to somebody else entirely, on a console
+   * they cannot open, and it did not mention that email and password works on this very screen. An
+   * unmapped code still falls back to Firebase's text rather than to a shrug: a message nobody
+   * wrote is better than "Sign-in failed" with the reason thrown away.
+   */
+  function signInError(e) {
+    var code = (e && e.code) || "";
+    if (code === "auth/unauthorized-domain")
+      return "Google sign-in is not enabled for this address yet. Sign in with your email and password above, which works now. To turn Google on, an administrator adds " + location.hostname + " to the authorised domains of the StewardMD Firebase project.";
+    if (code === "auth/popup-blocked") return "Your browser blocked the Google sign-in window. Allow pop-ups for this site, or sign in with your email and password above.";
+    if (code === "auth/popup-closed-by-user" || code === "auth/cancelled-popup-request") return "The Google sign-in window closed before it finished.";
+    if (code === "auth/invalid-credential" || code === "auth/wrong-password" || code === "auth/user-not-found" || code === "auth/invalid-email") return "Wrong email or password.";
+    if (code === "auth/too-many-requests") return "Too many attempts. Wait a few minutes and try again.";
+    if (code === "auth/network-request-failed") return "Could not reach the sign-in service. Check the network and try again.";
+    if (code === "auth/user-disabled") return "This account has been disabled. Ask your hospital administrator.";
+    return (e && e.message) || "Sign-in failed.";
+  }
+
   // ---- sign in ----------------------------------------------------------------------------------
   PAGES.login = { render: function (c) {
     var el = c.el, method = st._loginTab || "account";
