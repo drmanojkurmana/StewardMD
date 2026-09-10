@@ -21,8 +21,13 @@ const OBSERVER = `(() => {
   const record = (method, input, status, contentType, responseShape) => {
     const url = safeUrl(input);
     if (!url || url.origin !== location.origin) return;
+    // forEach, NOT [...searchParams.keys()]: inside Camofox/Firefox's evaluate() realm the iterator
+    // keys() returns is dead - spreading it throws "is not iterable" and Array.from() yields []
+    // even with params present (verified live against camofox-browser 1.14.0). That single line
+    // took the whole observer down: every recorded fetch threw before events.push ran.
+    const queryKeys = []; url.searchParams.forEach((v, k) => { queryKeys.push(k); });
     events.push({ method: String(method || 'GET').toUpperCase(), path: url.pathname, origin: url.origin,
-      queryKeys: [...url.searchParams.keys()].filter(k => !/${SENSITIVE.source}|key|id/i.test(k)).slice(0, 50),
+      queryKeys: queryKeys.filter(k => !/${SENSITIVE.source}|key|id/i.test(k)).slice(0, 50),
       status: Number(status || 0), contentType: String(contentType || '').slice(0, 100), responseShape: responseShape || null });
     if (events.length > 500) events.splice(0, events.length - 500);
   };
@@ -52,10 +57,12 @@ const OBSERVER = `(() => {
 const ALLOWED_METHODS = new Set(['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'HEAD']);
 function originOf(value) { return new URL(value).origin; }
 
-// A path segment shaped like an identifier (numeric id, UUID, Mongo-style 24-hex, or a long opaque
-// token) can itself be a patient/record identifier even though no query value was ever stored.
-// Collapse it to a typed placeholder rather than persisting it verbatim.
-const ID_SEGMENT = /^(?:\d+|[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}|[0-9a-f]{24}|[A-Za-z0-9_-]{16,})$/i;
+// A path segment shaped like an identifier (numeric id, UUID, Mongo-style 24-hex, a long opaque
+// token, or a prefixed id like pt-482910 / MRN00123 - anything carrying 4+ consecutive digits) can
+// itself be a patient/record identifier even though no query value was ever stored. Collapse it to a
+// typed placeholder rather than persisting it verbatim. The 4-digit rule also catches a bare year
+// segment; that is accepted over-redaction, not a bug. Caught live: `pt-482910` reached the spec.
+const ID_SEGMENT = /^(?:\d+|[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}|[0-9a-f]{24}|[A-Za-z0-9_-]{16,}|.*\d{4,}.*)$/i;
 function redactPath(pathname) {
   return String(pathname || '/').split('/').map(seg => (seg && ID_SEGMENT.test(seg) ? '{id}' : seg)).join('/');
 }
@@ -85,14 +92,30 @@ export async function discoverAuthorizedEmr({ startUrl, allowedOrigins = [origin
   if (!normalizedOrigins.includes(startOrigin)) throw new Error('startUrl origin is not authorized');
   if (typeof client.preflight === 'function') await client.preflight();
 
+  // NOT fixable by reordering client calls, verified against a real running Camofox server (not
+  // assumed): createTab({url}) already waits for that navigation to finish before returning, and
+  // a create-blank/evaluate/navigate sequence doesn't help either - evaluate() runs in the CURRENT
+  // document, and navigate() replaces that document, wiping anything evaluate() just set (confirmed
+  // empirically: a `window.__x = 1` set on about:blank before navigate() is gone immediately after).
+  // The REST API has no init-script primitive ("run this before every page load"); this observer
+  // can only ever see requests made AFTER it installs, never the page's own onload fetch. That is a
+  // real gap in the currently available browser-provider transport, not something client code can
+  // close - see the README limitation note.
   const tab = await client.createTab({ userId, sessionKey, url: startUrl });
   const tabId = tab?.tabId || tab?.id;
   if (!tabId) throw new Error('Camofox did not return a tab id');
   try {
-    await client.evaluate({ tabId, userId, expression: OBSERVER });
+    // "mw:" (main world) on BOTH calls, not optional. Camoufox runs evaluate() in an isolated realm
+    // by design (that isolation is part of what makes it undetectable), so a `window.fetch` patched
+    // from the plain realm is invisible to page scripts - verified live: the page saw the observer as
+    // undefined and fetch as native code, and a plain-realm read of the events returned null. The
+    // server must be launched with main-world evaluation enabled (see connect-agent/camofox-plugins/
+    // main-world); without it this throws a clear "Main world evaluation is disabled" error rather
+    // than silently recording nothing.
+    await client.evaluate({ tabId, userId, expression: `mw:${OBSERVER}` });
     await client.wait({ tabId, userId, ms: Math.min(Math.max(waitMs, 0), 30000) });
     const observed = await client.evaluate({ tabId, userId,
-      expression: `JSON.stringify((window.__SMD_CONNECT_OBSERVER__?.events || []).slice(-${Math.min(Math.max(maxEvents, 1), 500)}))` });
+      expression: `mw:JSON.stringify((window.__SMD_CONNECT_OBSERVER__?.events || []).slice(-${Math.min(Math.max(maxEvents, 1), 500)}))` });
     let events = [];
     try { events = JSON.parse(observed?.result || '[]'); } catch { throw new Error('Camofox returned invalid discovery data'); }
     const safeEvents = normalizeEvents(events, normalizedOrigins).slice(-maxEvents);

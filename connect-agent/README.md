@@ -43,6 +43,10 @@ The receipt's `signature` is a server-owned HMAC-SHA256 over the receipt, keyed 
 
 Run Camofox separately and point `CAMOFOX_URL` at its REST server. The default is `http://127.0.0.1:9377`; `CAMOFOX_ACCESS_KEY` is used only to authenticate to the Camofox service.
 
+The provider is [jo-inc/camofox-browser](https://github.com/jo-inc/camofox-browser) (verified against 1.14.0 and its real `openapi.json`; every endpoint `camofox-client.mjs` calls exists with matching field names). **One prerequisite is not on by default and discovery does not work without it:** main-world evaluation. Copy `connect-agent/camofox-plugins/main-world/` to `plugins/main-world/` in the camofox-browser checkout and enable it in its `camofox.config.json` (`"plugins": { "main-world": { "enabled": true } }`). Camoufox deliberately runs `evaluate()` in an isolated JS realm (part of how it stays undetectable), so a request observer installed from there is invisible to the page; the plugin enables the documented `mw:` prefix that runs a script in the page's own realm, and `discovery.mjs` uses it on both its evaluate calls. Without the plugin discovery throws a clear "Main world evaluation is disabled" error instead of silently recording nothing. Camofox also rejects non-http(s) URLs (`about:blank` included), and its `/wait` endpoint takes `timeout` (a readiness wait, up to that many ms), not `ms`; the client maps to that.
+
+Do not enable Camofox's `trace` option for a doctor's session: a Playwright trace records the login `POST` body (the credentials, verbatim), `Cookie`/`set-cookie` headers, response bodies and screenshots of the login form, and it can only be switched on at session creation, so it necessarily spans the login. It is disqualified as a discovery channel for this use.
+
 The browser service is intentionally external to the buildless StewardMD web application. This keeps browser automation out of the Cloudflare Pages runtime and allows the same Connect Agent to run from a controlled workstation or future managed browser runner.
 
 ## Controller
@@ -71,7 +75,9 @@ The output is an interface map, not a production connector. Adapter generation, 
 
 Each recorded event carries the explicit request `origin` the browser observed, and its `path` has identifier-shaped segments (numeric ids, UUIDs, 24-hex ids, long opaque tokens) collapsed to `{id}` — a patient/record id can live in the path even when no query value is stored, and origin is verified per-event rather than assumed from the first allowed origin.
 
-**Known limitation, unchanged by this pass:** the injected observer only captures same-origin `fetch`/`XHR` issued after it runs, and only after the tab's first navigation — no coverage of other frames, workers, or requests already in flight, and no capture across a second approved API origin. Expanding capture to genuinely multi-origin, cross-navigation observation is tracked separately; today's per-event `origin` field is honest about what it saw, not proof of broader coverage.
+**Verified against a real Camofox server** (`test/run-connect-agent-camofox-continuity.mjs`): a doctor's login in one tab and the agent's later `discoverAuthorizedEmr()` call share the authenticated session when they share a `userId` — Camofox scopes cookies to the per-`userId` browser context, not the tab, and the session survives the login tab being closed — and, with the main-world plugin, the observer captures the page's own requests (path, real origin, sensitive query keys filtered, value-free response shape).
+
+**Known limitation, unchanged by this pass:** the observer only sees same-origin `fetch`/`XHR` issued *after* it is installed. Camofox's REST API has no init-script primitive and a create-blank/evaluate/navigate reordering does not help (`navigate()` replaces the document and wipes what `evaluate()` set — verified), so a request a page fires inline during its initial load is missed; requests it makes afterwards (delayed loads, polling, interaction-driven reads) are captured. No coverage of other frames, workers, or a second approved API origin. Expanding to multi-origin, cross-navigation observation is tracked separately; the per-event `origin` field is honest about what was seen, not proof of broader coverage.
 
 ## Production checklist
 

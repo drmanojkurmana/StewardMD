@@ -74,8 +74,13 @@ export function createCamofoxClient({
     navigate: ({ tabId, userId, url }) => call(`/tabs/${encodeURIComponent(tabId)}/navigate`, {
       method: 'POST', body: JSON.stringify({ userId, url: assertUrl(url, 'url') }),
     }),
+    // The server (verified against its real openapi.json, camofox-browser 1.14.0) takes `timeout`,
+    // not `ms` - a request body with `ms` is silently ignored and it falls back to its own 10s
+    // default regardless of what the caller asked for. `waitForNetwork`/`dismissConsent` are its
+    // own knobs on top of the timeout; keep the caller's plain "wait N ms" contract by disabling
+    // both so this behaves as a pure delay rather than a network-idle wait.
     wait: ({ tabId, userId, ms = 500 }) => call(`/tabs/${encodeURIComponent(tabId)}/wait`, {
-      method: 'POST', body: JSON.stringify({ userId, ms: Math.min(Math.max(ms, 0), 30000) }),
+      method: 'POST', body: JSON.stringify({ userId, timeout: Math.min(Math.max(ms, 0), 30000), waitForNetwork: false, dismissConsent: false }),
     }),
     evaluate: ({ tabId, userId, expression }) => call(`/tabs/${encodeURIComponent(tabId)}/evaluate`, {
       method: 'POST', body: JSON.stringify({ userId, expression }),
