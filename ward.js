@@ -57,6 +57,7 @@
     // board already uses - nobody arrives on a typed MRN alone.
     ed: null, edErr: "", edArrivalOpen: false, edMrnLookup: null, edMrnLookupErr: "", edAdmitPending: false,
     resusBundles: null, resusStarting: false,
+    demo: false,             // a demonstration hospital, marked on the chart; set by the caller
     busy: false, err: "", note: "", refusal: null, loaded: false
   };
 
@@ -2716,6 +2717,10 @@
   function _render(state) {
     return '<div class="w-shell"><header class="w-top"><button class="w-ic" data-w-act="close">' + ms("close") + "</button>" +
       '<span class="w-title">WardSynQ &middot; Inpatient</span>' +
+      /* A demonstration hospital says so on the chart itself. Demo and real records are separate
+       * tenants, but that separation is invisible to somebody reading a screen over a shoulder, and
+       * a fabricated patient that reads as a real one is the whole hazard. */
+      (state.demo ? '<span class="w-demo" title="Fabricated patients, for demonstration. Nothing here is a real person or a real clinical record.">DEMO</span>' : "") +
       (state.busy ? '<span class="w-busy">' + ms("progress_activity") + "</span>" : "<span></span>") + "</header>" +
       '<div class="w-canvas">' + banner(state) +
       (state.view === "chart" ? chartView(state)
@@ -4958,6 +4963,7 @@
   function open(opts) {
     opts = opts || {};
     st.orgId = opts.orgId || st.orgId || rememberedOrgId();
+    if (opts.demo !== undefined) st.demo = !!opts.demo;
     if (!st.orgId) { try { G.toast && G.toast("The ward needs a hospital."); } catch (e) {} return; }
     st.view = "list"; st.sel = null; st.loaded = false; st.err = ""; st.note = ""; st.refusal = null;
     var el = root(); el.classList.add("on");

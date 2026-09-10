@@ -56,6 +56,11 @@
       .catch(function (e) { return { ok: false, error: "network", detail: String(e && e.message || e) }; });
   }
   function can(cap) { return !!(st.who && st.who.caps && st.who.caps.indexOf(cap) >= 0); }
+  /* A demonstration hospital says so, on every screen, permanently. Demo and real tenant data are
+   * separate records, but that separation is invisible to somebody looking at a chart over a
+   * shoulder - and a fabricated patient that reads as a real one is the whole hazard. The signal is
+   * the hospital's own name, which the seeder refuses to write without it. */
+  function isDemo(org) { return /\bdemo\b/i.test(String((org && (org.name || "")) || "")); }
   function isWardsynq() { return !!(st.org && st.org.mode === "wardsynq"); }
 
   // ---- session ------------------------------------------------------------------------------
@@ -135,6 +140,7 @@
     var h = '<div class="brandbar"><img class="brand-mark" src="/wardsynq/ui/brand/wardsynq-lockup.png" alt="" aria-hidden="true" width="261" height="61" decoding="async"><span class="spring"></span>' + tools + "</div>";
     if (org) h += '<div class="hospbar"><span class="name">' + esc(org.name || org.id) + '</span><span class="facts">' + esc(org.code || org.id) +
       '<span class="sep">/</span>' + (org.mode === "wardsynq" ? "WardSynQ record" : esc(org.mode || "native") + " mode") + "</span><span class=\"spring\"></span>" +
+      (isDemo(org) ? '<span class="demo-tag" title="Fabricated patients, for demonstration. Nothing here is a real person or a real clinical record.">DEMO</span>' : "") +
       (who ? '<span class="who">' + esc(who.name || who.smdId || "") + (who.role ? ", " + esc(who.role) : "") + "</span>" : "") + "</div>";
     return h;
   }
@@ -176,7 +182,7 @@
     if (!G.WARD || !G.WARD.open) { toast("The ward is still loading. Try again in a moment."); return; }
     if (!isWardsynq()) { toast("This hospital does not keep a WardSynQ record, so the ward is not available. The OPD desk is."); return; }
     G.WARD.onClose = function () { if (parseHash().page === "ward") go("home"); };
-    G.WARD.open({ orgId: st.orgId, act: act || "" });
+    G.WARD.open({ orgId: st.orgId, act: act || "", demo: isDemo(st.org) });
   }
 
   /* What a Firebase sign-in failure MEANS, in a sentence the person reading it can act on.
