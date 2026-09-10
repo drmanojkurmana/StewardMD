@@ -2779,9 +2779,7 @@
         '</div><div class="dx-reader-content">' +
         (reason ? '<div class="dx-mgmt-sec">Why this</div><p>' + esc(reason) + '</p>' : '') +
         mgmtHtml +
-        (harrisonRef(id, { expanded: true }) || '<p class="dx-sel-empty">No Harrison reference loaded for this disease.</p>') +
-        (refInf ? '' : '<button class="dx-select ' + (inf ? "inf" : "ni") + '" data-sel="' + id + '">Open full ' + (inf ? "stewardship" : "management") + ' page →</button>') +
-        '</div>' +
+        (harrisonRef(id, { expanded: true }) || '<p class="dx-sel-empty">No Harrison reference loaded for this disease.</p>') + (refInf ? '' : '<button class="dx-select ' + (inf ? "inf" : "ni") + '" data-sel="' + id + '">Open full ' + (inf ? "stewardship" : "management") + ' page →</button>') + '<div class="dx-mgmt-disc">' + rIco("warn") + ' Decision-support only. Reference knowledge is paraphrased from Harrison\'s 22e and standard guidelines. Verify against full guidelines and prescribing references before acting.</div></div>' +
       '</div>';
     var favourite = document.createElement("button"); favourite.type = "button"; favourite.className = "dx-reader-favourite";
     function favouritePaint() { var saved = kbReadList("favourites").indexOf(id) >= 0; favourite.textContent = saved ? "★ Saved to favourites" : "☆ Add to favourites"; favourite.setAttribute("aria-pressed", String(saved)); }
