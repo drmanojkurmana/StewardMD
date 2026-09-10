@@ -34,7 +34,7 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { D1Repository } from "../functions/_wardsynq/repository-d1.js";
-import { VersionConflictError } from "../functions/_wardsynq/repository.js";
+import { VersionConflictError, MemoryRepository, MAX_ROSTER } from "../functions/_wardsynq/repository.js";
 import { RecordService } from "../functions/_wardsynq/service.js";
 import { makeActor, KIND, TIER } from "../wardsynq/wardsynq-actors.js";
 import { Patient, Observation } from "../wardsynq/wardsynq-model.js";
@@ -227,4 +227,38 @@ test("the whole record service runs on real SQL: governed writes, versioning and
   // Append-only: the store has grown, and nothing was ever mutated in place.
   assert.equal(db.prepare("SELECT COUNT(*) AS n FROM wardsynq_record").get().n, 3);
   assert.deepEqual((await svc.history("Patient", "opd-pat-x1")).map((r) => r.version), [1, 2]);
+});
+
+/* REGRESSION, 2026-09-10 whole-system audit. latestByType() honours the limit its caller asked for.
+ *
+ * BOTH implementations used to clamp silently at 200 while real callers asked for more -
+ * analytics-extract.js and fhir-inbound.js ask for 1000, blackout.js and fhir-outbound.js for 500 -
+ * and because both page in insertion order the 200 that survived were the OLDEST. On any tenant
+ * past the ceiling the newest records fell off the end with no signal: a patient registered this
+ * week was absent from the pool an inbound feed is matched against, and the emergency declared this
+ * morning was absent from the log that exists to show it.
+ *
+ * The two implementations are asserted TOGETHER because a ceiling that differs between the memory
+ * double and the real D1 store is how a test suite stays green over a defect only production has. */
+test("the roster limit is honoured up to one shared ceiling, and the memory and D1 stores agree on it", { skip: DatabaseSync ? false : SKIP }, async () => {
+  const OVER = MAX_ROSTER + 50;
+  const rowFor = (i) => ({ resourceType: "Patient", id: `pat-${String(i).padStart(5, "0")}`, version: 1, mrn: `M${i}`, meta: {} });
+
+  const mem = new MemoryRepository();
+  const sql = new D1Repository(d1(freshDb()));
+  for (let i = 0; i < OVER; i++) {
+    const row = rowFor(i);
+    await mem.append("t1", [row]);
+    await sql.append("t1", [row]);
+  }
+
+  // What the callers actually ask for now arrives, instead of 200 of it.
+  assert.equal((await mem.latestByType("t1", "Patient", 1000)).length, MAX_ROSTER);
+  assert.equal((await sql.latestByType("t1", "Patient", 1000)).length, MAX_ROSTER);
+  assert.equal((await mem.latestByType("t1", "Patient", 500)).length, 500);
+  assert.equal((await sql.latestByType("t1", "Patient", 500)).length, 500);
+
+  // The ceiling is still a ceiling, and it is the SAME one on both sides of the port.
+  assert.equal((await mem.latestByType("t1", "Patient", 99999)).length, MAX_ROSTER);
+  assert.equal((await sql.latestByType("t1", "Patient", 99999)).length, MAX_ROSTER);
 });
