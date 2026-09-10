@@ -48,10 +48,10 @@ import { VersionConflictError } from "./repository.js";
 import { resolveClinicalActor } from "./actor.js";
 import { RecordService, NATIVE_SYSTEM } from "./service.js";
 import { AuthError, PermissionError } from "../_connect/permission.js";
-import { screenOutput } from "../../wardsynq/wardsynq-secops.js";
+import { screenOutput, unsupportedSafetyClaim } from "../../wardsynq/wardsynq-secops.js";
 import { makeActor, KIND, TIER } from "../../wardsynq/wardsynq-actors.js";
 import { TASK, invoke, maikConfig } from "./maik-gateway.js";
-import { buildPatientContext, promptFor, SECTION } from "./maik-chart-context.js";
+import { buildPatientContext, promptFor, SECTION, DEFAULT_SECTIONS } from "./maik-chart-context.js";
 import { ClinicalNote } from "../../wardsynq/wardsynq-model.js";
 
 const str = (v) => (v == null ? "" : String(v).trim());
@@ -219,8 +219,8 @@ async function askAboutPatient(request, env, ctx) {
    * against another person's admission, and every downstream reader inherits it. Checked before any
    * model is called. */
   const encounterId = str(ctx.encounterId);
+  let enc = null;
   if (encounterId) {
-    let enc = null;
     try { enc = await svc.get("Encounter", encounterId); } catch { enc = null; }
     if (!enc) return { ...base, ok: false, status: 404, error: "encounter_unreadable", detail: "that admission is not readable by this actor" };
     if (str(enc.patientId) !== str(ctx.patientId)) {
@@ -231,16 +231,21 @@ async function askAboutPatient(request, env, ctx) {
 
   /* THE CONTEXT IS READ AS THIS CLINICIAN. A patient they may not see produces a refusal here, and
    * no model is called - so the AI cannot be used to learn what the chart would not show. */
+  const signingKey = str(ctx.signingKey) || str(env && env.WSQ_MAIK_CONTEXT_KEY) || "wardsynq-maik-chart-context";
+  const requestedSections = Array.isArray(ctx.sections) && ctx.sections.length ? ctx.sections : undefined;
   const context = await buildPatientContext(svc, patientId, {
-    sections: Array.isArray(ctx.sections) && ctx.sections.length ? ctx.sections : undefined,
-    signingKey: str(ctx.signingKey) || str(env && env.WSQ_MAIK_CONTEXT_KEY) || "wardsynq-maik-chart-context",
+    // A caller who named an encounter is shown that encounter's own section, not merely stamped
+    // with its id - see the ENCOUNTER section's own note in maik-chart-context.js.
+    sections: encounterId && requestedSections ? [...new Set([...requestedSections, SECTION.ENCOUNTER])] : (encounterId ? [...DEFAULT_SECTIONS, SECTION.ENCOUNTER] : requestedSections),
+    encounter: enc || undefined,
+    signingKey,
   });
   if (!context.ok) return { ...base, ok: false, status: context.error === "patient_unreadable" ? 403 : 422, error: context.error, detail: context.detail };
 
   /* The role boundary leads, because the instruction a model reads first is the one it is most likely
    * to still be holding when it reaches the clinician's question at the end. */
   const instruction = `${ROLE_BOUNDARY}\n\n${INSTRUCTIONS[task]}`;
-  const built = promptFor(context, `${instruction}${str(ctx.question) ? `\n\nThe clinician asks: ${str(ctx.question)}` : ""}`);
+  const built = await promptFor(context, `${instruction}${str(ctx.question) ? `\n\nThe clinician asks: ${str(ctx.question)}` : ""}`, { signingKey });
 
   const answer = await invoke({
     task, phi: true, context: { ...context, content: built.prompt },
@@ -251,8 +256,21 @@ async function askAboutPatient(request, env, ctx) {
    * nothing to record - the caller is told plainly why, which is the only useful thing here. */
   if (!answer.ok) return { ...base, ok: false, status: answer.code === "no_phi_approved_model" || answer.code === "maik_disabled" ? 409 : 502, error: answer.code, detail: answer.detail };
 
-  /* OUTPUT IS SCREENED BEFORE ANYBODY SEES IT, and withheld WHOLE if it fails. */
+  /* OUTPUT IS SCREENED BEFORE ANYBODY SEES IT, and withheld WHOLE if it fails.
+   *
+   * THIS PATH RUNS NO SAFETY ENGINE. maik-cds.js's explanation path checks its output against a
+   * real computed verdict (contradictions()); this path never computes one at all, so "yes, safe to
+   * give, no concerns" asked in plain conversation had nothing checking it - an answer could assert
+   * clinical reassurance with zero clinical evaluation behind it, and it would be released and
+   * stored exactly like a fact. unsupportedSafetyClaim() is the SAME reassurance vocabulary
+   * maik-cds.js screens against a verdict, reused here unconditionally: on a path with no verdict at
+   * all, there is no such thing as reassurance the evidence actually supports. */
   const screen = screenOutput(answer.text, { patientId, nonce: built.nonce });
+  const unsupportedClaim = unsupportedSafetyClaim(answer.text);
+  const violations = (screen.violations || []).concat(
+    unsupportedClaim.flagged ? [{ id: "unsupported-safety-claim", why: `the answer asserts clinical reassurance ("${unsupportedClaim.signal}") on a path that ran no safety evaluation` }] : []
+  );
+  const released = screen.released !== false && !unsupportedClaim.flagged;
   const at = new Date().toISOString();
   const id = idFor(patientId, at, built.nonce);
 
@@ -281,13 +299,13 @@ async function askAboutPatient(request, env, ctx) {
     security: {
       documentsIncluded: built.documentsIncluded, rejected: built.rejected || [],
       injectionFindings: built.injectionFindings || [],
-      outputViolations: screen.violations || [], released: screen.released !== false,
+      outputViolations: violations, released,
     },
-    output: screen.released ? answer.text : null,
-    withheld: screen.released ? null : { reason: "the answer was withheld whole by output screening", violations: (screen.violations || []).map((v) => v.id) },
+    output: released ? answer.text : null,
+    withheld: released ? null : { reason: "the answer was withheld whole by output screening", violations: violations.map((v) => v.id) },
     uncertainty: answer.uncertainty == null ? null : answer.uncertainty,
     review: { state: REVIEW.PENDING, by: null, at: null, reason: null, editedOutput: null },
-    preview: screen.released && task === TASK.DRAFT_NOTE
+    preview: released && task === TASK.DRAFT_NOTE
       ? { resourceType: "ClinicalNote", id: `${id}-note`, noteType: "progress", signedBy: null, aiDrafted: true,
           authorId: "ai:maik", willBeSigned: false,
           note: "Accepting writes this note UNSIGNED and authored by MaiK. It becomes your own words only when you sign it, through the ordinary note path." }
@@ -296,7 +314,7 @@ async function askAboutPatient(request, env, ctx) {
 
   try {
     const out = await recorder.put(record, { idempotencyKey: ctx.idempotencyKey || null });
-    return { ...base, ok: true, interaction: { ...record, version: out.record.version }, released: screen.released !== false };
+    return { ...base, ok: true, interaction: { ...record, version: out.record.version }, released };
   } catch (e) { return { ...base, ...writeFailure(e) }; }
 }
 
