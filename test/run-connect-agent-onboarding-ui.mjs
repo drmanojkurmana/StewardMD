@@ -336,8 +336,11 @@ try {
   await ev(`document.getElementById("smd-connect-rego").click(); return 1;`);
   ok(await waitFor(`var d=window.SMD_CONNECT_AGENT.__debug(); return d.screen==="login" && d.reuse===true;`, 8000), "reconnect creates a reuse session at the login viewport");
   await ev(`window.__states=[{state:"ACTIVE",hospitalName:"GIMSR Hospital",adapterVersion:"3"}]; document.getElementById("smd-connect-signedin").click(); return 1;`);
-  ok(await waitFor(`var d=window.SMD_CONNECT_AGENT.__debug(); return d.screen==="progress";`, 8000), "reconnect handoff shows progress");
-  ok(await ev(`return document.querySelector("#smd-connect-ov .smd-connect-stages")===null;`) === true, "reconnect progress shows no rediscovery stage list");
+  // The mock serves ACTIVE on the very first poll (same as the "Try again" case above, which for the
+  // same reason only waits for "done" rather than insisting on catching "progress" mid-flight) - a fast
+  // handoff can legitimately never render an observable intermediate "progress" frame. Accept either.
+  ok(await waitFor(`var d=window.SMD_CONNECT_AGENT.__debug(); return d.screen==="progress" || d.screen==="done";`, 8000), "reconnect handoff shows progress or reaches done directly");
+  ok(await ev(`return document.querySelector("#smd-connect-ov .smd-connect-stages")===null;`) === true, "reconnect never shows a rediscovery stage list");
   ok(await waitFor(`var d=window.SMD_CONNECT_AGENT.__debug(); return d.screen==="done";`, 10000), "reconnect reaches Active without rediscovery");
   ok(await ev(`var t=document.getElementById("smd-connect-ov").innerText; return t.indexOf("GIMSR Hospital")>=0 && t.indexOf("version 3")>=0;`) === true, "reconnect success names the hospital and adapter version");
 
