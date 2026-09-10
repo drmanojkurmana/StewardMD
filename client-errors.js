@@ -59,52 +59,10 @@
     try { fetch("/api/analytics", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ event: String(event || "") }), keepalive: true }).catch(function () {}); } catch (e) {}
   };
 
-  /* Connect Agent launcher.
-     This is intentionally additive: it loads the existing read-only Connect Agent console and
-     exposes one clearly labelled in-app entry point. The button never collects credentials and
-     never enables production write access. */
-  function loadConnectAgent() {
-    if (window.SMD_CONNECT_AGENT) return Promise.resolve(window.SMD_CONNECT_AGENT);
-    return new Promise(function (resolve, reject) {
-      var s = document.createElement("script");
-      s.src = "/connect-agent-ui.js?v=connect-ui1";
-      s.async = true;
-      s.onload = function () { window.SMD_CONNECT_AGENT ? resolve(window.SMD_CONNECT_AGENT) : reject(new Error("Connect Agent UI did not initialize")); };
-      s.onerror = function () { reject(new Error("Connect Agent UI failed to load")); };
-      (document.head || document.documentElement).appendChild(s);
-    });
-  }
-
-  function installConnectButton() {
-    try {
-      if (document.getElementById("smd-connect-agent-launch")) return;
-      var b = document.createElement("button");
-      b.id = "smd-connect-agent-launch";
-      b.type = "button";
-      b.setAttribute("aria-label", "Connect Hospital — test mode");
-      b.title = "Connect Hospital — read-only test mode";
-      b.textContent = "Connect Hospital";
-      b.style.cssText = [
-        "position:fixed","right:max(14px,env(safe-area-inset-right))","bottom:max(14px,env(safe-area-inset-bottom))","z-index:49",
-        "border:1px solid var(--teal,#0e6e63)","border-radius:999px","padding:10px 14px","background:var(--teal,#0e6e63)",
-        "color:#fff","font:800 12px var(--sans,system-ui)","box-shadow:0 8px 24px rgba(0,0,0,.16)","cursor:pointer"
-      ].join(";");
-      b.addEventListener("click", function () {
-        b.disabled = true;
-        loadConnectAgent().then(function (ui) {
-          if (ui && ui.open) ui.open();
-        }).catch(function (e) {
-          try { if (window.toast) window.toast("Connect Agent UI unavailable: " + (e.message || "load failed")); } catch (x) {}
-        }).finally(function () { b.disabled = false; });
-      });
-      document.body.appendChild(b);
-    } catch (e) {}
-  }
-
   try {
     window.addEventListener("load", function () {
       window.SMD_track("app_open");
-      setTimeout(installConnectButton, 1200);
     });
   } catch (e) {}
 })();
+
