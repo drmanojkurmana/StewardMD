@@ -79,6 +79,60 @@ Each recorded event carries the explicit request `origin` the browser observed, 
 
 **Known limitation, unchanged by this pass:** the observer only sees same-origin `fetch`/`XHR` issued *after* it is installed. Camofox's REST API has no init-script primitive and a create-blank/evaluate/navigate reordering does not help (`navigate()` replaces the document and wipes what `evaluate()` set — verified), so a request a page fires inline during its initial load is missed; requests it makes afterwards (delayed loads, polling, interaction-driven reads) are captured. No coverage of other frames, workers, or a second approved API origin. Expanding to multi-origin, cross-navigation observation is tracked separately; the per-event `origin` field is honest about what was seen, not proof of broader coverage.
 
+## Doctor onboarding UI (`connect-agent-onboarding.js`)
+
+Buildless ES5 IIFE, lazy-loaded by `connect-agent-boot.js` when the
+`smd_connect_agent` flag is on (same entry point as the old test console:
+`window.SMD_CONNECT_AGENT.open/close`, overlay id `smd-connect-ov`). Styles
+ship as an injected `<style>` block (id `smd-connect-css`), matching the
+previous console's convention. There is no separate CSS file.
+
+Flow: hospital picker (search or canonical EMR URL) -> plain-language
+read-only consent with an unchecked opt-in box (no pre-checked boxes) ->
+embedded sign in viewport (iframe) with pause/resume -> live job progress with
+one specific status line per job state -> success with a worklist placeholder
+button. A returning doctor at a hospital with a validated adapter gets a
+reconnect screen (re-authenticate only, no rediscovery stage list).
+
+### `api()` seam contract
+
+Every network call goes through `api(path, opts)`, which resolves
+`{ s: <http status>, d: <decoded body> }`. Production `api()` calls `fetch`
+against `/api/connect/agent` + path. Tests replace the transport with
+`window.SMD_CONNECT_AGENT.__setApi(fn)`; `window.SMD_CONNECT_AGENT.__debug()`
+reports `{ screen, sessionId, jobState, statusKind, statusText, controlOwner,
+reuse, hospitalCount }` for assertions. Mocked response shapes per step:
+
+| Call | Mocked shape |
+|---|---|
+| `POST /hospitals/resolve` `{query}` or `{emrUrl}` | `{ok:true,hospitals:[{hospitalId,name,emrUrl,hasActiveAdapter,adapterVersion}]}` |
+| `POST /sessions` `{hospitalId,emrUrl,reconnect,consent:{scope:"read",agreed:true}}` | `{ok:true,sessionId,jobId,state}` |
+| `POST /sessions/:id/viewer-token` | `{ok:true,viewerUrl,expiresInSec}` |
+| `POST /sessions/:id/handoff` | `{ok:true,state}` (idempotent) |
+| `POST /sessions/:id/pause`, `/resume` | `{ok:true,controlOwner:"clinician"\|"agent"}` |
+| `GET /sessions/:id` | `{ok:true,state,stageDetail?,controlOwner?,errorCode?,errorDetail?,hospitalName?,adapterVersion?}` |
+| `DELETE /sessions/:id` | `{ok:true}` |
+
+Job states rendered with dedicated copy: `CREATED`, `AWAITING_LOGIN`,
+`AUTHENTICATED`, `DISCOVERING`, `COMPILING`, `VALIDATING`,
+`AWAITING_APPROVAL`, `ACTIVE`, `NEEDS_REAUTH`, `NEEDS_REPAIR`, `FAILED`,
+`CANCELLED`, `EXPIRED`, `REVOKED`.
+
+### Real vs. explicitly mocked (pending the broker router)
+
+Real: the full sheet flow, spring motion, drag-to-dismiss, consent gating,
+pause/resume control transfer, per-state progress rendering, error/retry
+actions, keyboard and screen-reader support, and the `api()` call shapes above.
+Mocked: there is no broker router yet, so `viewerUrl`, session/job ids, and
+job-state transitions come from the `__setApi` mock in
+`test/run-connect-agent-onboarding-ui.mjs`, and the iframe points at the
+same-origin `test/connect-agent/viewer-fixture.html` page. Production must
+point the iframe at a broker-issued, actor-bound, short-lived viewer URL
+(noVNC-style session), never the raw EMR address. There is no
+`docs/connect/agent-contract.md` yet; the endpoint paths above are proposed
+per the hospital build brief, section 6, and must be reconciled with the real
+router when it lands.
+
 ## Production checklist
 
 A hospital adapter is not considered production-ready until all of the following are true:
