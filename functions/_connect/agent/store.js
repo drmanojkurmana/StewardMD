@@ -93,6 +93,56 @@ export async function insertVersion(db, { tenantId, deploymentId, manifestRef, s
   return await getVersion(db, tenantId, id);
 }
 
+// connect_adapter_version and connect_deployment carry no numeric `revision` column (the schema file's own
+// "additive, new tables only" convention rules out adding one to an existing table), so activation.js's CAS
+// guards the column that IS the thing being raced over: the version's own `lifecycle` (the exact state-machine
+// edge state.js just asserted), and the deployment's own `active_version_id`. Same "confirm by re-read" shape
+// as casUpdate above, for the same reason (D1 meta.changes is not available through every driver shim).
+export async function casVersionLifecycle(db, tenantId, id, expectedLifecycle, set) {
+  const cols = Object.keys(set);
+  const sql = "UPDATE connect_adapter_version SET " + cols.map((c) => c + "=?").join(", ") +
+    ", updated_at=? WHERE tenant_id=? AND id=? AND lifecycle=?";
+  await need(db).prepare(sql).bind(...cols.map((c) => set[c]), nowIso(), tenantId, id, expectedLifecycle).run();
+  const after = await getVersion(db, tenantId, id);
+  if (!after) throw new OnboardError("not-found", "version vanished during update");
+  for (const c of cols) { if (String(after[c]) !== String(set[c])) throw new OnboardError("conflict", "stale lifecycle"); }
+  return after;
+}
+
+export async function casDeploymentActiveVersion(db, tenantId, id, expectedActiveVersionId, newActiveVersionId) {
+  const guard = expectedActiveVersionId === null ? "active_version_id IS NULL" : "active_version_id=?";
+  const binds = expectedActiveVersionId === null ? [newActiveVersionId, nowIso(), tenantId, id]
+    : [newActiveVersionId, nowIso(), tenantId, id, expectedActiveVersionId];
+  await need(db).prepare(
+    "UPDATE connect_deployment SET active_version_id=?, updated_at=? WHERE tenant_id=? AND id=? AND " + guard
+  ).bind(...binds).run();
+  const after = await getDeployment(db, tenantId, id);
+  if (String(after.active_version_id || null) !== String(newActiveVersionId)) throw new OnboardError("conflict", "deployment active version changed concurrently");
+  return after;
+}
+
+// --- activation (append-only) -----------------------------------------------------------------------
+export async function insertActivation(db, { tenantId, deploymentId, versionId, approverId, policyVersion, evidenceHash }) {
+  const id = newId("act_");
+  await need(db).prepare(
+    "INSERT INTO connect_agent_activation (id,tenant_id,deployment_id,version_id,approver,policy_version,evidence_hash,activated_at,revoked_at) VALUES (?,?,?,?,?,?,?,?,?)"
+  ).bind(id, tenantId, deploymentId, versionId, approverId, policyVersion, evidenceHash, nowIso(), null).run();
+  return (await need(db).prepare("SELECT * FROM connect_agent_activation WHERE tenant_id=? AND id=?").bind(tenantId, id).first());
+}
+
+// The currently-live activation for a deployment: the newest row not yet revoked. Append-only + this
+// query is how "which version served reads, and under what evidence, at any point in time" stays answerable.
+export async function getActiveActivation(db, tenantId, deploymentId) {
+  const r = await need(db).prepare("SELECT * FROM connect_agent_activation WHERE tenant_id=? AND deployment_id=? AND revoked_at IS NULL").bind(tenantId, deploymentId).all();
+  const rows = (r.results || []).slice();
+  rows.sort((a, b) => String(b.activated_at || "").localeCompare(String(a.activated_at || "")));
+  return rows[0] || null;
+}
+
+export async function revokeActivation(db, tenantId, id, whenIso) {
+  await need(db).prepare("UPDATE connect_agent_activation SET revoked_at=? WHERE tenant_id=? AND id=? AND revoked_at IS NULL").bind(whenIso, tenantId, id).run();
+}
+
 // --- consent ----------------------------------------------------------------------------------------
 export async function insertConsent(db, row) {
   await need(db).prepare(
