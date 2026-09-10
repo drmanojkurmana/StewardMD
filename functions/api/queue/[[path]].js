@@ -2062,7 +2062,15 @@ export async function onRequest(context) {
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "break-glass" && method === "POST") {
-        const r = await declareBreakGlass(request, env, { ...deps, patientId: body.patientId, reason: body.reason, minutes: body.minutes, idempotencyKey: body.idempotencyKey || null });
+        const r = await declareBreakGlass(request, env, {
+          ...deps, patientId: body.patientId, reason: body.reason, minutes: body.minutes, idempotencyKey: body.idempotencyKey || null,
+          // Same honest gap critical-results.js already states: no real channel is wired in this
+          // build (a channel is a FUNCTION, not JSON an org's Firestore config could carry; wiring
+          // one means reusing StewardMD's existing APNs/FCM push infrastructure, future work, not
+          // fabricated here). The declaration therefore honestly records NO_CHANNEL rather than a
+          // silent "sent" - the mechanism is real and wired; the transport is the named gap.
+          notifyDeps: {},
+        });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "emergency-chart" && method === "GET") {
