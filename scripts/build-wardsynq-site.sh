@@ -42,6 +42,8 @@ printf '/*\n  X-Robots-Tag: noindex\n  X-Content-Type-Options: nosniff\n  Referr
 
 echo "built $OUT ($(find "$OUT" -type f | wc -l | tr -d ' ') files)"
 if [ "${1:-}" = "--deploy" ]; then
-  cd "$ROOT"
-  npx wrangler pages deploy "$OUT" --project-name wardsynq --branch main --commit-dirty=true
+  # From INSIDE the output directory, so the repo's wrangler.toml (the stewardmd project and its
+  # bindings) is never read for this project.
+  cd "$OUT"
+  npx --prefix "$ROOT" wrangler pages deploy . --project-name wardsynq --branch main --commit-dirty=true
 fi

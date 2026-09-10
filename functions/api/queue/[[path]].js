@@ -532,7 +532,11 @@ export async function onRequest(context) {
      *   verify / dispense   ORDER_DISPENSE           pharmacy releasing the dose
      *   scan / administer   MED_ADMINISTER           the nurse at the bedside
      */
-    if (seg === "ward") {
+    // The clinical ward block owns /ward/<sub>. The org-configuration routes POST /ward (create a
+    // ward master record) and POST /ward/update live further down with the other admin routes and
+    // were unreachable from here: every such call fell through capFor and answered not_found, so a
+    // hospital could never add a ward from the console. They are let past on purpose.
+    if (seg === "ward" && sub && !(method === "POST" && sub === "update")) {
       // PUT carries a body too, since 2026-09-08: a FHIR update is a PUT of the whole resource.
       // The HL7 door takes the message as text (ER7), never as JSON.
       const isHl7 = parts[1] === "hl7";
@@ -2372,7 +2376,11 @@ export async function onRequest(context) {
     if (method === "GET" && seg === "whoami") {
       // For non-owner/non-doctor identities, the real role is org-scoped (q_members), not the global viewer.
       let role = actor.role, orgId = actor.orgId || url.searchParams.get("orgId") || actor.hospitalId || "";
-      if (actor.kind !== "firebase" && orgId) { const az = await ORG.authorizeOrg(env, actor, orgId, null); if (az.ok) role = az.role; }
+      // For EVERY identity kind, not only staff: an account that is an invited member (or the owner)
+      // of the hospital holds that hospital's role, and a console that read the global "doctor" role
+      // instead hid the Admin Center from the person who owns the hospital. The server still
+      // re-checks every mutation; this only tells the UI what to offer.
+      if (orgId) { const az = await ORG.authorizeOrg(env, actor, orgId, null); if (az.ok && az.role) role = az.role; }
       const smdId = actor.kind === "firebase" ? await ORG.userSmdId(env, actor.id, actor.email) : "";   // StewardMD ID per account
       let orgCode = ""; if (orgId) { const o = await ORG.getOrg(env, orgId); if (o) orgCode = o.code || ""; }
       return json({ ok: true, role: role, caps: capsFor(role), kind: actor.kind, orgId: orgId, orgCode: orgCode, smdId: smdId, name: actor.name, hospitalId: actor.hospitalId || "", billing: BILL.billingEnabled(env) }, 200, request);
@@ -2380,24 +2388,24 @@ export async function onRequest(context) {
 
     // ---- org / rooms / members config (Phase 3: multi-tenant, isolation-gated) ----
     if (method === "GET" && seg === "orgs") {
-      if (actor.kind === "firebase") {
-        // Owner orgs + orgs where this account is only an invited MEMBER (q_members, by uid or email -
-        // see authorizeOrg's own uid-then-email fallback). Owner wins on a collision (a member row on
-        // an org this account also owns must never demote the doctor's own view of it to their staff role).
-        const owned = (await ORG.listOrgsForOwner(env, actor.id)).map((o) => Object.assign({}, o, { memberRole: "owner" }));
-        const member = await ORG.listOrgsForMember(env, [actor.id, actor.email]);
-        const byId = new Map();
-        for (const o of member) byId.set(o.id, o);
-        for (const o of owned) byId.set(o.id, o);
-        return json({ ok: true, orgs: Array.from(byId.values()) }, 200, request);
-      }
       if (actor.kind === "staff" && actor.orgId) {
+        // A PIN/email staff session is minted for ONE hospital.
         const org = await ORG.getOrg(env, actor.orgId);
         if (!org) return json({ ok: true, orgs: [] }, 200, request);
         const az = await ORG.authorizeOrg(env, actor, actor.orgId, null);
         return json({ ok: true, orgs: [Object.assign({}, org, { memberRole: az.role || "viewer" })] }, 200, request);
       }
-      return json({ ok: true, orgs: [] }, 200, request);
+      // Owner orgs (an account) + orgs where this identity is an invited MEMBER (q_members, by id or
+      // email - see authorizeOrg's own uid-then-email fallback), for any authenticated identity: an
+      // account, a Cloudflare Access user or a GHIS employee whose membership spans hospitals. Owner
+      // wins on a collision (a member row on an org this account also owns must never demote the
+      // doctor's own view of it to their staff role).
+      const owned = actor.kind === "firebase" ? (await ORG.listOrgsForOwner(env, actor.id)).map((o) => Object.assign({}, o, { memberRole: "owner" })) : [];
+      const member = await ORG.listOrgsForMember(env, [actor.id, actor.email]);
+      const byId = new Map();
+      for (const o of member) byId.set(o.id, o);
+      for (const o of owned) byId.set(o.id, o);
+      return json({ ok: true, orgs: Array.from(byId.values()) }, 200, request);
     }
     if (method === "GET" && (seg === "org" || seg === "rooms" || seg === "members" || seg === "wards" || seg === "beds")) {
       const orgId = url.searchParams.get("orgId") || "";

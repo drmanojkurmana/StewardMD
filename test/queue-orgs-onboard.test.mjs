@@ -236,3 +236,40 @@ test("POST /onboard/wardsynq: 503s when the record store isn't configured", asyn
   assert.equal(r.__status, 503, JSON.stringify(r));
   assert.equal(r.error, "record_store_unavailable");
 });
+
+/* ---- POST /ward and POST /ward/update (org-configuration routes) are reachable ------------------
+ * Before the 2026-09-08 guard fix these fell into the clinical /ward/<sub> block (functions/api/
+ * queue/[[path]].js ~line 539), whose capFor has no "" or "update" entry, so both answered
+ * {error:"not_found"}. */
+test("POST /ward: creates a ward master record, listed by GET /wards", async () => {
+  reset();
+  seedOrg("org-ward1", OWNER, "Ward Hospital");
+  const r = await api("/ward", "POST", { orgId: "org-ward1", name: "North", code: "N" }, asFirebase(OWNER_EMAIL));
+  assert.equal(r.__status, 200, JSON.stringify(r));
+  assert.equal(r.ok, true);
+  assert.ok(r.ward && r.ward.id, "a ward id is returned");
+  assert.equal(r.ward.name, "North");
+
+  const list = await api("/wards?orgId=org-ward1", "GET", null, asFirebase(OWNER_EMAIL));
+  assert.equal(list.__status, 200, JSON.stringify(list));
+  assert.ok(list.wards.some((w) => w.id === r.ward.id && w.name === "North"));
+});
+
+test("POST /ward/update: renames the ward", async () => {
+  reset();
+  seedOrg("org-ward2", OWNER, "Ward Hospital 2");
+  const created = await api("/ward", "POST", { orgId: "org-ward2", name: "North", code: "N" }, asFirebase(OWNER_EMAIL));
+  assert.equal(created.__status, 200, JSON.stringify(created));
+
+  const r = await api("/ward/update", "POST", { orgId: "org-ward2", wardId: created.ward.id, name: "North 2" }, asFirebase(OWNER_EMAIL));
+  assert.equal(r.__status, 200, JSON.stringify(r));
+  assert.equal(r.ok, true);
+  assert.equal(r.ward.name, "North 2");
+});
+
+test("GET /ward/list: still owned by the clinical block, not the admin-route not_found", async () => {
+  reset();
+  seedOrg("org-ward3", OWNER, "Ward Hospital 3");   // mode "native": not a WardSynQ record hospital
+  const r = await api("/ward/list?orgId=org-ward3", "GET", null, asFirebase(OWNER_EMAIL));
+  assert.notEqual(r.error, "not_found", JSON.stringify(r));
+});

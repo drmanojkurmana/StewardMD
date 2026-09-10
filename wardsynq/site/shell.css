@@ -22,7 +22,7 @@ h1,h2,h3{margin:0;line-height:1.2;text-wrap:balance}
 
 /* top bar */
 .bar{position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:12px;padding:8px 14px;background:var(--navy);color:var(--on-navy);min-height:52px}
-.bar .mark{height:28px;width:auto;display:block}
+.bar .mark{height:28px;width:auto;display:block;background:#fff;border-radius:6px;padding:2px}
 .bar .hosp{flex:1;min-width:0;display:flex;flex-direction:column;line-height:1.15}
 .bar .hosp b{font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .bar .hosp span{font-size:12px;opacity:.8;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}

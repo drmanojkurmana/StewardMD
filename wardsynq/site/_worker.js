@@ -21,15 +21,20 @@ const FORWARD = ["authorization", "x-staff-token", "x-app-token", "x-admin-token
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
-    if (url.pathname === "/api" || url.pathname.startsWith("/api/")) return forward(request, url);
+    // WSQ_UPSTREAM is set only by a local `wrangler pages dev --binding` run against a local record
+    // service (test/wardsynq-persistence-server.mjs); the deployed project has no such binding.
+    if (url.pathname === "/api" || url.pathname.startsWith("/api/")) return forward(request, url, (env && env.WSQ_UPSTREAM) || UPSTREAM);
     return env.ASSETS.fetch(request);
   },
 };
 
-async function forward(request, url) {
-  const target = UPSTREAM + url.pathname + url.search;
+async function forward(request, url, upstream) {
+  const target = upstream + url.pathname + url.search;
   const h = new Headers();
   for (const k of FORWARD) { const v = request.headers.get(k); if (v) h.set(k, v); }
+  // NEVER in production: the record service trusts this header as an identity. It is forwarded only
+  // to a LOCAL upstream (the WSQ_UPSTREAM dev binding), where the browser journey sets it on purpose.
+  if (upstream !== UPSTREAM) { const v = request.headers.get("cf-access-authenticated-user-email"); if (v) h.set("cf-access-authenticated-user-email", v); }
   const ip = request.headers.get("cf-connecting-ip"); if (ip) h.set("x-forwarded-for", ip);
   const ua = request.headers.get("user-agent"); if (ua) h.set("user-agent", ua);
   h.set("origin", "https://wardsynq.com");
