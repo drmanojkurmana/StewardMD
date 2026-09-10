@@ -34,7 +34,7 @@
     {
       "method": "GET", "path": "/api/patients/{id}/encounters", "origin": "http://127.0.0.1:8099",
       "queryKeys": [], "status": 200, "contentType": "application/json",
-      "responseShape": { "type": "object", "keys": { "items": { "type": "array", "sample": { "type": "object", "keys": { "id": "string", "status": "string", "class": "string", "start": "string", "end": "string" } } } } }
+      "responseShape": { "type": "object", "keys": { "items": { "type": "array", "sample": { "type": "object", "keys": { "id": "string", "status": "string", "start": "string", "end": "string" } } } } }
     },
     {
       "method": "POST", "path": "/api/patients/{id}/discharge", "origin": "http://127.0.0.1:8099",

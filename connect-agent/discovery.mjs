@@ -378,7 +378,12 @@ export function createCollector({
     async ensureInstalled() {
       if (detached) throw new Error('collector is detached');
       const { fresh } = await drain();
-      if (fresh) { installId = null; await install(); return { reinstalled: true }; }
+      // Do NOT reset installId here before calling install(): a fresh document has no existing
+      // window.__SMD_CONNECT_OBSERVER__ regardless, so the remote install always gets a new id on
+      // its own - but install()'s own reinstalls++ check compares against THIS local installId, and
+      // clearing it first means there is never an old id to compare against, so the count silently
+      // never moves. Leave it set; install() does the comparison and updates it.
+      if (fresh) { await install(); return { reinstalled: true }; }
       return { reinstalled: false };
     },
 

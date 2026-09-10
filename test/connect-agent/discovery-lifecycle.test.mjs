@@ -62,7 +62,11 @@ test('guard allows an approved read and records it with its real origin', async 
   assert.equal(event.origin, API);
   assert.equal(event.path, '/api/v2/labs');
   assert.equal(event.blocked, false);
-  assert.deepEqual(event.responseShape, { type: 'object', keys: { items: { type: 'array', sample: { type: 'object', keys: { id: 'number' } } } } });
+  // JSON round-trip, not a raw deepEqual: shape() deliberately builds `keys` with Object.create(null)
+  // (hostile-key/prototype-pollution protection), so its objects are null-prototype and fail
+  // deepStrictEqual against a plain `{}` even with identical own properties. Round-tripping through
+  // JSON strips prototypes on both sides and compares structure only, which is what this test wants.
+  assert.deepEqual(JSON.parse(JSON.stringify(event.responseShape)), { type: 'object', keys: { items: { type: 'array', sample: { type: 'object', keys: { id: 'number' } } } } });
 });
 
 test('guard rejects non-approved fetch, fetch(Request), XHR, beacon and form submit, and logs each block', async () => {

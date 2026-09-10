@@ -45,8 +45,19 @@ test('an endpoint the compiler cannot justify becomes an explicit unsupported ca
 
 test('the manifest contains no observed values: only shape-derived key names', async () => {
   const { manifest } = await compile();
-  const text = JSON.stringify(manifest);
-  // Every literal value that appears in the read fixture must be absent from the manifest.
+  // Compare against the manifest's own VALUES only, not raw serialized text - a fixture value like
+  // "high" (an allergy criticality) will always coincidentally substring-match an unrelated manifest
+  // KEY NAME like "referenceRange.high" (one of the compiler's candidate source-key names), which is
+  // metadata, not a leak. Collecting manifest values the same way collapses that false positive.
+  const manifestValues = [];
+  const collectValues = (v) => {
+    if (Array.isArray(v)) v.forEach(collectValues);
+    else if (v && typeof v === 'object') Object.values(v).forEach(collectValues);
+    else if (typeof v === 'string') manifestValues.push(v);
+  };
+  collectValues(manifest);
+  const manifestValueSet = new Set(manifestValues);
+
   const values = [];
   const walk = (v) => {
     if (Array.isArray(v)) v.forEach(walk);
@@ -54,9 +65,11 @@ test('the manifest contains no observed values: only shape-derived key names', a
     else if (typeof v === 'string' && v.length > 3 && !/^(GET|HEAD|status|application\/json)$/.test(v)) values.push(v);
   };
   walk(Object.values(FIXTURE.routes).map((r) => r.body));
-  const leaked = [...new Set(values)].filter((v) => text.includes(v));
+  const leaked = [...new Set(values)].filter((v) => manifestValueSet.has(v));
   assert.deepEqual(leaked, [], `manifest leaked observed values: ${leaked.join(', ')}`);
-  assert.equal(/cookie|authorization|password|token|session/i.test(text), false);
+  // Same reasoning as above: check VALUES, not raw text - "sessionExpiry" is a legitimate schema key
+  // (a capability probe field name) that would otherwise false-positive-match "session".
+  assert.equal(/cookie|authorization|password|token|session/i.test(manifestValues.join(' ')), false);
 });
 
 test('without a declared time zone every timestamp field is dropped into unsupported, never guessed', async () => {
@@ -96,8 +109,12 @@ test('the suggest hook is fixture-backed and every proposal is re-validated', as
       fields: {
         // accepted: an unmapped canonical field whose selector exists in the shape
         'period.start': { op: 'toDate', path: 'start', timezone: 'Asia/Kolkata' },
-        // rejected: references a key the observer never saw
-        status: { op: 'pick', path: 'triageLevel' },
+        // rejected: references a key the observer never saw. period.end (not period.start) because
+        // with timezone:null BOTH date fields are deterministically unmapped (dates need a timezone
+        // to compile - see the sibling test), so this exercises the hallucinated-path check on its
+        // own; a field the fixture actually observed (e.g. status) would instead be rejected for
+        // already being deterministically mapped, which is a different, also-correct, rejection.
+        'period.end': { op: 'pick', path: 'triageLevel' },
         // rejected: hostile field name (computed key, so it is a real own property)
         ['__proto__']: { op: 'pick', path: 'id' },
         // rejected: a literal outside the const allowlist (a value smuggling attempt)
@@ -116,7 +133,7 @@ test('the suggest hook is fixture-backed and every proposal is re-validated', as
   assert.equal(enc.suggested, true);
   assert.deepEqual(report.accepted.map((a) => a.field), ['period.start']);
   const rejected = Object.fromEntries(report.rejected.map((r) => [r.field, r.reason]));
-  assert.match(rejected.status, /not present in the observed shape/);
+  assert.match(rejected['period.end'], /not present in the observed shape/);
   assert.match(rejected.class, /const allowlist/);
 });
 
