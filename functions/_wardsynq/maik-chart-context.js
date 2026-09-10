@@ -31,6 +31,21 @@ import { TRUST, signDocument, buildPrompt, requestNonce, useHmac } from "../../w
 
 const str = (v) => (v == null ? "" : String(v).trim());
 
+/* A MedicationOrder's dose is the canonical {value, unit} (wardsynq-model.js), and str() turned it
+ * into "[object Object]" - so every medication MaiK was ever shown carried no dose at all, while
+ * looking as though it carried something. Found on 2026-09-11 by reading the prompt a real model
+ * actually received. A free-text dose from an external source is passed through as written, and a
+ * dose with no value renders as nothing rather than as half a number: a partial dose in a chart
+ * summary is worse than an absent one. */
+function doseText(d) {
+  if (d == null) return "";
+  if (typeof d !== "object") return str(d);
+  const value = d.value == null ? "" : str(d.value);
+  if (!value) return "";
+  const unit = str(d.unit);
+  return unit ? `${value} ${unit}` : value;
+}
+
 /* WIRING THE MAC, and why it looks like this.
  *
  * wardsynq-secops.js REFUSES to hash until an implementation is supplied - deliberately, because a
@@ -188,7 +203,7 @@ async function buildPatientContext(svc, patientId, opts) {
     const live = (rows || []).filter((m) => m && ["active", "on-hold", "draft"].includes(str(m.status)));
     live.forEach(note);
     sections.push({ title: "Medications", text: live.length
-      ? live.map((m) => `- ${str(m.drug)}${m.dose ? ` ${str(m.dose)}` : ""}${m.route ? ` ${str(m.route)}` : ""}${m.frequency ? ` ${str(m.frequency)}` : ""} [${str(m.status)}]${m.aiDrafted ? " (AI draft, unsigned)" : ""}`).join("\n")
+      ? live.map((m) => `- ${str(m.drug)}${doseText(m.dose) ? ` ${doseText(m.dose)}` : ""}${m.route ? ` ${str(m.route)}` : ""}${m.frequency ? ` ${str(m.frequency)}` : ""} [${str(m.status)}]${m.aiDrafted ? " (AI draft, unsigned)" : ""}`).join("\n")
       : "Not recorded." });
   }
 
