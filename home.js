@@ -925,18 +925,24 @@
       // Open to ANY signed-in user (P1 self-service): the console handles sign-in + create-your-hospital, and
       // the server enforces membership/RBAC on every call. Not owner-gated anymore.
       try {
-        var ex = document.getElementById("smdConnectOverlay"); if (ex && ex.parentNode) ex.parentNode.removeChild(ex);
+        var ex = document.getElementById("smdConnectOverlay"); if (ex) return;
+        var previousFocus=document.activeElement, previousOverflow=document.body.style.overflow;
         var ov = document.createElement("div"); ov.id = "smdConnectOverlay";
+        ov.setAttribute("role","dialog"); ov.setAttribute("aria-modal","true"); ov.setAttribute("aria-label","EMR Connect");
         ov.style.cssText = "position:fixed;inset:0;z-index:100000;background:var(--bg,#0b1016);display:flex;flex-direction:column";
         var bar = document.createElement("div");
         bar.style.cssText = "display:flex;align-items:center;gap:10px;padding:calc(env(safe-area-inset-top,0px) + 8px) 12px 8px;background:var(--panel,#111820);border-bottom:1px solid var(--line,#22303c)";
         var t = document.createElement("div"); t.textContent = "Connect EMR"; t.style.cssText = "flex:1;font:800 15px var(--hfont,sans-serif);color:var(--ink,#e8eef4)";
-        var x = document.createElement("button"); x.textContent = "Close"; x.style.cssText = "background:var(--tl,#0e6e63);color:#fff;border:0;border-radius:9px;padding:8px 14px;font:700 13px var(--hfont,sans-serif)";
-        x.onclick = function () { if (ov.parentNode) ov.parentNode.removeChild(ov); };
-        var fr = document.createElement("iframe"); fr.src = "connect-emr.html?v=conn2";
-        fr.style.cssText = "flex:1;width:100%;border:0;background:#fff";
+        var x = document.createElement("button"); x.textContent = "Done"; x.type="button"; x.style.cssText = "background:var(--panel,#fff);color:var(--ink,#17252b);border:1px solid var(--line,#dfe6e4);border-radius:12px;min-height:44px;padding:8px 18px;font:600 15px -apple-system,system-ui";
+        function closeConnect(){if(ov.parentNode)ov.parentNode.removeChild(ov);document.body.style.overflow=previousOverflow;if(previousFocus&&previousFocus.isConnected)previousFocus.focus();}
+        x.onclick=closeConnect;
+        ov.addEventListener("keydown",function(e){if(e.key==="Escape"){e.preventDefault();closeConnect();}else if(e.key==="Tab"&&e.shiftKey&&e.target===x){e.preventDefault();fr.focus();}});
+        var fr = document.createElement("iframe"); fr.src = "connect-emr.html?v=conn3-calm"; fr.title="EMR connection settings";
+        fr.style.cssText = "flex:1;min-height:0;width:100%;border:0;background:var(--panel,#fff)";
+        fr.onload=function(){try{fr.contentDocument.addEventListener("keydown",function(e){if(e.key==="Escape"){e.preventDefault();closeConnect();}else if(e.key==="Tab"){var controls=[].slice.call(fr.contentDocument.querySelectorAll('button:not(:disabled),a[href],input:not(:disabled),select:not(:disabled),textarea:not(:disabled)')).filter(function(n){return n.getClientRects().length;});if((e.shiftKey&&e.target===controls[0])||(!e.shiftKey&&e.target===controls[controls.length-1])){e.preventDefault();x.focus();}}});}catch(e){}};
         bar.appendChild(t); bar.appendChild(x); ov.appendChild(bar); ov.appendChild(fr);
         document.body.appendChild(ov);
+        document.body.style.overflow="hidden"; x.focus();
       } catch (e) { if (window.toast) toast("Connect failed to open"); }
     },
     connectpatient: function () { try { if (window.CONNECTPT && CONNECTPT.open) CONNECTPT.open(); else toast("Connect patient loading…"); } catch (e) {} },
