@@ -1343,3 +1343,32 @@ pass. Test-only; the golden path itself was not touched.
 
 **Still OPEN, honestly:** a live Cloudflare Pages deployment and a physical iOS/Android device.
 Neither was safely reachable from this session (no production credentials, no device present).
+
+## wardsynq.com is now the product door (added 2026-09-10)
+
+`wardsynq.com` is the Cloudflare Pages project **`wardsynq`** (direct upload, no git build), a
+separate project from `stewardmd` (which serves stewardmd.in and holds every binding and secret).
+It contains only static files plus `_worker.js`, which forwards `/api/*` server-side to
+`https://stewardmd.in`. One origin for the browser, no duplicated bindings, no CORS.
+
+- Source: `wardsynq/site/` (`index.html`, `shell.js`, `shell.css`, `_worker.js`, `pages/*.js`).
+- Build + publish: `scripts/build-wardsynq-site.sh --deploy` (assembles `dist-wardsynq/`, gitignored;
+  deploys from inside that directory so the repo's `wrangler.toml` is never read for this project).
+- The shell adds only sign-in (account / staff email-or-PIN / GHIS, the same endpoints as opd.html),
+  hospital selection (`GET /api/queue/orgs`, owner + member hospitals; `POST /onboard/wardsynq` creates
+  a WardSynQ hospital = record tenant + org in mode `wardsynq`), a role-aware home, and four pages
+  (Patients, MaiK, Admin Center, Audit). Every clinical surface is the SAME code the app runs:
+  `ward.js` (`WARD.open({orgId, act})` opens a hospital-level view directly), `discharge.js`,
+  `patient-register.js`, `/opd.html`, `/wardsynq/ui/wardsynq.html?record=<tenant>`.
+- Session keys are the ones ward.js and opd.html already read (`smd_opd_staff_tok`,
+  `smd_opd_toktype`, `smd_opd_hospital`, `smd_opd_workplace`), so the three never disagree.
+- Proof: `test/run-wardsynq-site-smoke.mjs` (no credentials, live) and
+  `test/run-wardsynq-com-journey.mjs` (one real-browser journey; `BASE=` + `WSQ_EMAIL/WSQ_PASSWORD`
+  or `WSQ_CODE/WSQ_STAFF/WSQ_PIN`; locally `WSQ_ACCESS_EMAIL=admin@example.test` against
+  `test/wardsynq-persistence-server.mjs` behind `wrangler pages dev dist-wardsynq --binding
+  WSQ_UPSTREAM=http://localhost:8799`).
+- Gotchas found while driving it: `POST /api/queue/ward` (create a ward) was shadowed by the clinical
+  `/ward/*` block until 2026-09-10; `whoami` reported the global role for account sign-ins, hiding the
+  Admin Center from a hospital's owner. Both fixed in PR #1063.
+- Upgrade path: move the wardsynq.com custom domain onto the `stewardmd` project and serve the site by
+  host from `_middleware.js`; until then the proxy hop is the only cost.

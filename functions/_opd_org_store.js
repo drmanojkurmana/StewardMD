@@ -76,6 +76,27 @@ export async function listOrgsForOwner(env, ownerUid) {
   const r = await fsQuery(env, "q_orgs", { where: { field: "ownerUid", value: String(ownerUid) }, limit: 100 });
   return r.filter((x) => !(x.fields && x.fields.deleted)).map((x) => M.org(withId(x.id, x.fields)));
 }
+// Orgs where `identities` (uid and/or email) hold an ACTIVE q_members row, for a doctor invited to
+// a hospital they don't own. Multiple identities can name the same org (uid AND email both enrolled,
+// or the same org via two identities) so dedupe by org id; the FIRST identity's membership wins, and
+// the caller (GET /api/queue/orgs) passes [uid, email] in that priority order.
+export async function listOrgsForMember(env, identities) {
+  const ids = Array.from(new Set((identities || []).map((x) => String(x || "").trim()).filter(Boolean)));
+  const seen = new Set(); const out = [];
+  for (const id of ids) {
+    const rows = await fsQuery(env, "q_members", { where: { field: "identity", value: id }, limit: 100 });
+    for (const row of rows) {
+      const f = row.fields || {};
+      if (f.active === false) continue;
+      const orgId = f.orgId; if (!orgId || seen.has(orgId)) continue;
+      seen.add(orgId);
+      const d = await fsGet(env, "q_orgs/" + sanitize(orgId));
+      if (!d || (d.fields && d.fields.deleted)) continue;   // dropped/missing org: no dangling membership shown
+      out.push(Object.assign({}, M.org(withId(sanitize(orgId), d.fields)), { memberRole: f.role || "viewer" }));
+    }
+  }
+  return out;
+}
 export async function deleteOrg(env, orgId, actorId) {
   await fsCommit(env, [wUpdate(env, "q_orgs/" + sanitize(orgId), { deleted: true, deletedAt: now() })]);   // soft-delete
   await audit(env, orgId, actorId, "org:delete", "");
