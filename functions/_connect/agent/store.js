@@ -25,10 +25,16 @@ async function casUpdate(db, table, tenantId, id, expectedRevision, set) {
   const sql = "UPDATE " + table + " SET " + cols.map((c) => c + "=?").join(", ") +
     ", revision=?, updated_at=? WHERE tenant_id=? AND id=? AND revision=?";
   const binds = cols.map((c) => set[c]).concat([Number(expectedRevision) + 1, nowIso(), tenantId, id, Number(expectedRevision)]);
-  await need(db).prepare(sql).bind(...binds).run();
+  const res = await need(db).prepare(sql).bind(...binds).run();
   const after = await db.prepare("SELECT * FROM " + table + " WHERE tenant_id=? AND id=?").bind(tenantId, id).first();
   if (!after) throw new OnboardError("not-found", "row vanished during update");
+  if (res && ((res.meta && typeof res.meta.changes === "number" && res.meta.changes === 0) || res.changes === 0)) {
+    throw new OnboardError("conflict", "stale revision");
+  }
   if (Number(after.revision) !== Number(expectedRevision) + 1) throw new OnboardError("conflict", "stale revision");
+  for (const c of cols) {
+    if (String(after[c]) !== String(set[c])) throw new OnboardError("conflict", "stale revision");
+  }
   return after;
 }
 
