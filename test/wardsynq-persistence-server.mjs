@@ -106,7 +106,17 @@ mock.module("../functions/_wardsynq/deps.js", {
       db: tenantDb, identifyFn: identify, staffSession: verifyStaffSession, orgForTenant, authorizeOrg,
       claimsFn: async (request) => {
         const who = String(request.headers.get("Cf-Access-Authenticated-User-Email") || "").toLowerCase();
-        return who === "doctor@example.test" ? { regNo: "TSMC-2019-44821", name: "Dr Test" } : who === "admin@example.test" ? { regNo: "TSMC-2012-10077", name: "Dr Admin" } : {};
+        if (who === "doctor@example.test") return { regNo: "TSMC-2019-44821", name: "Dr Test" };
+        if (who === "admin@example.test") return { regNo: "TSMC-2012-10077", name: "Dr Admin" };
+        /* Stands in for the Firebase custom claim a registered practitioner carries in production
+         * (functions/_wardsynq/deps.js claimsOf -> verifyFirebaseClaims). Cf-Access identities carry
+         * no claims at all, so without this NOTHING signable can be written locally - see
+         * NO_CREDENTIAL in wardsynq-actors.js. Opt-in, and deliberately only for the local-parts a
+         * registered clinician would use, so an unregistered actor still cannot sign. */
+        if (process.env.WSQ_LOCAL_REGNO === "1" && /^(dr|res)\./.test(who)) {
+          return { regNo: "DEMO-" + createHash("sha256").update(who).digest("hex").slice(0, 10).toUpperCase(), name: who.split("@")[0] };
+        }
+        return {};
       },
     }),
     recordDeps: () => ({ repository: RECORD, pseudonym: async () => null }),

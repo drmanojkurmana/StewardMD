@@ -224,6 +224,15 @@ test("the whole inpatient vertical: admit, ward vitals, order, and a governed ad
     { encounterId: list.patients[0].encounterId, bed: list.patients[0].bed },
     { encounterId: adm.encounterId, bed: "12" },
   );
+  /* REGRESSION, 2026-09-11: the row must NAME the patient.
+   *
+   * This projected the encounter alone, so every row carried a record id where a name belongs and
+   * the ward screen printed that: a round reading "opd-pat-smd-demo-00001" down the list. A nurse
+   * identifies a patient by name and MRN, and the record id is the one identifier on the row that
+   * cannot be checked against a wristband. Invisible on a two-patient fixture; obvious the moment a
+   * 100-bed hospital was seeded. */
+  assert.equal(list.patients[0].name, reg.patient.name, "the ward list names its patients");
+  assert.equal(list.patients[0].mrn, reg.mrn, "and carries the MRN a wristband is checked against");
 
   // 3. WARD VITALS, by the nurse, coded exactly as the OPD path codes them.
   const vit = await as(NURSE, "/ward/vitals", "POST", {

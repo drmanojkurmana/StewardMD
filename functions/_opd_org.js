@@ -173,6 +173,19 @@ export function membership(o = {}) {
   return {
     id: s(o.id), orgId: s(o.orgId), identity: s(o.identity), role,
     scope: { departments: arr(o.scope && o.scope.departments), opds: arr(o.scope && o.scope.opds), rooms: arr(o.scope && o.scope.rooms) },
+    /* THE HOSPITAL'S OWN ASSERTION that this member is a registered practitioner. Until this
+     * existed, a signing credential could come from ONE place: a verified Firebase custom claim. A
+     * doctor who signed in the way hospital staff actually sign in - email and password, or clinic
+     * code and PIN - carried no claims, so they could write the chart and could not SIGN anything:
+     * every prescription, every templated note, every discharge summary refused with NO_CREDENTIAL.
+     * That made the whole prescribing surface unreachable for any hospital not using StewardMD
+     * accounts.
+     *
+     * A hospital knows who its consultants are, and it is accountable for saying so - only an
+     * admin can set this. It is a WEAKER assertion than the platform's own verification, which is
+     * why the actor records WHICH of the two vouched (wardsynq-actors.js credentialSource) and
+     * every signed record carries that word. Empty means this member cannot sign, as before. */
+    regNo: s(o.regNo),
     active: o.active !== false, createdAt: Number(o.createdAt) || 0
   };
 }
@@ -203,5 +216,8 @@ export function authorizeOrgAccess(orgDoc, membershipDoc, actorId, orgId, cap, t
   if (!canAccessOrg(m, orgId)) return { ok: false, reason: "not_a_member" };
   if (cap && !can(m.role, cap)) return { ok: false, reason: "forbidden", role: m.role };
   if (target && !withinScope(m, target)) return { ok: false, reason: "out_of_scope", role: m.role };
-  return { ok: true, role: m.role };
+  // regNo travels with the authorisation so resolveClinicalActor can build a signing credential
+  // from the hospital's own staff registry without a second read. Empty for an owner, who is
+  // authorised by ownership rather than by a membership row and therefore asserts no registration.
+  return { ok: true, role: m.role, regNo: m.regNo || "" };
 }

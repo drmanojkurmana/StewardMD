@@ -336,14 +336,38 @@ async function listWard(request, env, ctx) {
   }
 
   const want = str(ctx.ward).toLowerCase();
-  const patients = (encounters || [])
+  const open = (encounters || [])
     .filter((e) => e && ADMISSION_CLASSES.includes(e.class) && e.status === OPEN)
-    .filter((e) => !want || str(e.location && e.location.ward).toLowerCase() === want)
-    .map((e) => ({
+    .filter((e) => !want || str(e.location && e.location.ward).toLowerCase() === want);
+
+  /* THE WARD LIST NAMES ITS PATIENTS.
+   *
+   * This projected the encounter and nothing else, so every row carried a record id where a name
+   * belongs and the screen fell back to printing it: a ward round reading
+   * "opd-pat-smd-demo-00001" down the list. Nurses identify patients by name and MRN; an id is the
+   * one thing on the row nobody can check against a wristband. Found 2026-09-11 on a 100-bed
+   * hospital, where it is obvious, and invisible on the two-patient fixtures the tests used.
+   *
+   * ONE extra read, not one per patient: the roster is fetched once and joined in memory. A name
+   * that cannot be read stays null and the caller falls back as before - a missing name must never
+   * turn a readable ward list into an error. */
+  let byId = new Map();
+  try {
+    const roster = await svc.list("Patient", 400);
+    byId = new Map((roster || []).filter((p) => p && p.id).map((p) => [p.id, p]));
+  } catch (e) { /* the encounters are still worth showing; the rows simply carry no name */ }
+
+  const patients = open.map((e) => {
+    const p = byId.get(e.patientId) || null;
+    return {
       encounterId: e.id, patientId: e.patientId, class: e.class,
+      // What a human on the ward actually reads. Null rather than invented when the chart has none.
+      name: (p && (p.name || p.display)) || null,
+      mrn: (p && p.mrn) || null,
       ward: (e.location && e.location.ward) || null, bed: (e.location && e.location.bed) || null,
       admittedAt: e.periodStart || null, attendingId: e.attendingId || null, version: e.version,
-    }));
+    };
+  });
   return { ...base, ok: true, patients };
 }
 

@@ -170,7 +170,10 @@
     var rows = (state.patients || []).map(function (p) {
       return '<button class="w-bed" data-w-act="open:' + esc(p.encounterId) + '">' +
         '<span class="w-bed-no">' + esc(p.bed || "-") + "</span>" +
-        '<span class="w-bed-b"><b>' + esc(p.patientId) + "</b><small>" + esc(p.ward || "") + " &middot; admitted " + when(p.admittedAt) + "</small></span>" +
+        /* Name first, then the MRN a wristband can be checked against. The record id is the last
+         * resort, not the default: it is the one identifier on the row nobody can verify against
+         * the patient in front of them. */
+        '<span class="w-bed-b"><b>' + esc(p.name || p.mrn || p.patientId) + "</b><small>" + esc(p.mrn && p.name ? p.mrn + " · " : "") + esc(p.ward || "") + " &middot; admitted " + when(p.admittedAt) + "</small></span>" +
         ms("chevron_right") + "</button>";
     }).join("");
     return '<div class="w-card"><div class="w-card-h">' + ms("bed") + "<h3>Ward" + (state.ward ? ": " + esc(state.ward) : "") + "</h3>" +
