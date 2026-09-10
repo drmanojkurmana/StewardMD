@@ -27,6 +27,7 @@ import * as QT from "../../_queue_timeline.js";
 import { notifyTimeline } from "../../_queue_notify.js";
 import { importRoster, importFromSource } from "../../_queue_ghis.js";
 import * as ORG from "../../_opd_org_store.js";
+import { selfCreateTenant } from "../../_connect/enterprise/org.js";
 import * as PAT from "../../_opd_patient_store.js";
 import { resolveRoomDoctor, roomStatus, roomForActor } from "../../_opd_org.js";
 import { brandingFor, putBranding, validateLogo, logoKey, bucket as brandBucket } from "../../_clinic_branding.js";
@@ -264,7 +265,7 @@ function clientProtocolTemplate(t) {
 import ONCORECOMMEND from "../../../onco-recommend.js";
 function activeStandardProtocols() { return Object.keys(ONCO_PROTOCOLS).map(function (k) { return ONCO_PROTOCOLS[k]; }).filter(function (p) { return p && p.status === "ACTIVE"; }); }
 
-const CORS_ORIGINS = ["https://localhost", "capacitor://localhost", "http://localhost", "ionic://localhost", "https://stewardmd.in", "https://www.stewardmd.in"];
+const CORS_ORIGINS = ["https://localhost", "capacitor://localhost", "http://localhost", "ionic://localhost", "https://stewardmd.in", "https://www.stewardmd.in", "https://wardsynq.com", "https://www.wardsynq.com"];
 function corsHeaders(request) {
   const o = request.headers.get("Origin") || ""; const h = { "Vary": "Origin" };
   if (CORS_ORIGINS.indexOf(o) >= 0) { h["Access-Control-Allow-Origin"] = o; h["Access-Control-Allow-Methods"] = "POST, GET, OPTIONS"; h["Access-Control-Allow-Headers"] = "Content-Type, Authorization, X-App-Token, X-Admin-Token, X-Staff-Token"; h["Access-Control-Max-Age"] = "86400"; }
@@ -2378,8 +2379,26 @@ export async function onRequest(context) {
     }
 
     // ---- org / rooms / members config (Phase 3: multi-tenant, isolation-gated) ----
-    if (method === "GET" && seg === "orgs")
-      return json({ ok: true, orgs: actor.kind === "firebase" ? await ORG.listOrgsForOwner(env, actor.id) : [] }, 200, request);
+    if (method === "GET" && seg === "orgs") {
+      if (actor.kind === "firebase") {
+        // Owner orgs + orgs where this account is only an invited MEMBER (q_members, by uid or email -
+        // see authorizeOrg's own uid-then-email fallback). Owner wins on a collision (a member row on
+        // an org this account also owns must never demote the doctor's own view of it to their staff role).
+        const owned = (await ORG.listOrgsForOwner(env, actor.id)).map((o) => Object.assign({}, o, { memberRole: "owner" }));
+        const member = await ORG.listOrgsForMember(env, [actor.id, actor.email]);
+        const byId = new Map();
+        for (const o of member) byId.set(o.id, o);
+        for (const o of owned) byId.set(o.id, o);
+        return json({ ok: true, orgs: Array.from(byId.values()) }, 200, request);
+      }
+      if (actor.kind === "staff" && actor.orgId) {
+        const org = await ORG.getOrg(env, actor.orgId);
+        if (!org) return json({ ok: true, orgs: [] }, 200, request);
+        const az = await ORG.authorizeOrg(env, actor, actor.orgId, null);
+        return json({ ok: true, orgs: [Object.assign({}, org, { memberRole: az.role || "viewer" })] }, 200, request);
+      }
+      return json({ ok: true, orgs: [] }, 200, request);
+    }
     if (method === "GET" && (seg === "org" || seg === "rooms" || seg === "members" || seg === "wards" || seg === "beds")) {
       const orgId = url.searchParams.get("orgId") || "";
       const az = await ORG.authorizeOrg(env, actor, orgId, seg === "members" ? CAPS.STAFF_ADMIN : CAPS.QUEUE_VIEW);
@@ -2705,6 +2724,20 @@ export async function onRequest(context) {
         if (needAccount()) return json({ ok: false, error: "account_required" }, 403, request);
         const o = await ORG.createOrg(env, { id: body.hospitalId || undefined, name: body.name || "Hospital", mode: "connect", connectorId: body.connectorId || null }, actor.id);
         return json({ ok: true, org: o }, 200, request);
+      }
+      if (seg === "onboard" && sub === "wardsynq") {   // self-service: a WardSynQ-native hospital (org + its own clinical-record tenant)
+        if (needAccount()) return json({ ok: false, error: "account_required" }, 403, request);
+        if (!env.CONNECT_DB) return json({ ok: false, error: "record_store_unavailable" }, 503, request);
+        const t = await selfCreateTenant({ db: env.CONNECT_DB, identifyFn: identify }, request, env, { name: body.name });
+        try {
+          let o = await ORG.createOrg(env, { name: body.name, mode: "wardsynq" }, actor.id);
+          o = await ORG.updateOrg(env, o.id, { connectTenantId: t.id }, actor.id);
+          await wsqLinkTenantOrg(env, o);
+          return json({ ok: true, org: o, tenantId: t.id }, 200, request);
+        } catch (e) {
+          // The tenant already exists at this point - never leave it silently unlinked without saying so.
+          return json({ ok: false, error: "org_create_failed", tenantId: t.id }, 500, request);
+        }
       }
       if (seg === "migrate" && sub === "backfill") {  // idempotent legacy hospitalId -> org
         if (needAccount()) return json({ ok: false, error: "account_required" }, 403, request);

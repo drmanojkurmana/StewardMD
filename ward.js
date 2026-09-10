@@ -4663,7 +4663,12 @@
 
   function onClick(e) {
     var b = e.target.closest && e.target.closest("[data-w-act]"); if (!b) return;
-    var a = b.getAttribute("data-w-act"), i = a.indexOf(":"), cmd = i < 0 ? a : a.slice(0, i), arg = i < 0 ? "" : a.slice(i + 1);
+    dispatch(b.getAttribute("data-w-act"));
+  }
+  /* One dispatcher for a click on a data-w-act button AND for the wardsynq.com shell, which opens
+   * a hospital-level view directly (open({act:"twin"})) with the SAME verb a click would send. */
+  function dispatch(a) {
+    var i = a.indexOf(":"), cmd = i < 0 ? a : a.slice(0, i), arg = i < 0 ? "" : a.slice(i + 1);
     if (cmd === "close") { close(); return; }
     if (cmd === "dismiss") { st.err = ""; st.note = ""; st.refusal = null; paint(); return; }
     if (cmd === "reload") { loadWard(); return; }
@@ -4958,8 +4963,12 @@
     var el = root(); el.classList.add("on");
     el.removeEventListener("click", onClick); el.addEventListener("click", onClick);
     paint(); loadWard();
+    // A hospital-level view requested by the shell (bed board, ED, twin...). Only the verbs the ward
+    // list's own toolbar offers: a chart-scoped verb needs a selected patient and is not honoured.
+    if (opts.act && HOSPITAL_ACTS.indexOf(opts.act) >= 0) dispatch(opts.act);
   }
-  function close() { var el = root(); el.classList.remove("on"); el.innerHTML = ""; }
+  var HOSPITAL_ACTS = ["board", "edboard", "surgeryboard", "inventoryboard", "critsboard", "bedmgmt", "flowcommand", "twin", "scheduling", "cashier", "reports", "emergencyadmin", "integration", "downtime"];
+  function close() { var el = root(); el.classList.remove("on"); el.innerHTML = ""; if (G.WARD && typeof G.WARD.onClose === "function") { try { G.WARD.onClose(); } catch (e) {} } }
 
   G.WARD = { open: open, close: close, _render: _render, _st: st, _nextFor: nextFor, _problem: problem };
 })();
