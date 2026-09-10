@@ -1122,8 +1122,13 @@ test("a finished course stops appearing, and the window is bounded", async () =>
 
 test("reading the round is a view, and it grants nothing: it cannot move a dose", async () => {
   seedHospital();
-  const { adm } = await admittedPatientOnDrug();
-  const q = `?orgId=${ORG}&patientId=${adm.patientId}&from=2026-09-09T18:30:00.000Z&to=2026-09-10T18:30:00.000Z`;
+  const { adm, ord } = await admittedPatientOnDrug();
+  /* Anchored to the order, not to a calendar date, for the reason the TID test above states in
+   * full: scheduleSlots() never places a dose before the order existed, so a hardcoded
+   * 2026-09-09/10 window stops containing any dose the moment the clock passes it. It did, on
+   * 2026-09-10T18:30Z, and this test then failed on main for every run after that instant. */
+  const orderedAt = (await RECORD.latest(TENANT_ROW.id, "MedicationOrder", ord.orderId)).meta.effectiveAt;
+  const q = `?orgId=${ORG}&patientId=${adm.patientId}&from=${orderedAt}&to=${new Date(Date.parse(orderedAt) + 86400000).toISOString()}`;
   // The doctor and the pharmacist can both READ what is due.
   assert.equal((await as(DOCTOR, "/ward/schedule" + q)).__status, 200);
   assert.equal((await as(PHARM, "/ward/schedule" + q)).__status, 200);
