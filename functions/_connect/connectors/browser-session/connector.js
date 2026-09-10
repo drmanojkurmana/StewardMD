@@ -191,53 +191,48 @@ function makeExec(ctx, session) {
   if (ctx.exec && typeof ctx.exec.request === "function") return ctx.exec;
   if (ctx.config && ctx.config.exec && typeof ctx.config.exec.request === "function") return ctx.config.exec;
 
-  let cookieHeader = "";
-  if (session && session.cookie) cookieHeader = String(session.cookie);
-  else if (session && session.cookies) {
-    if (typeof session.cookies === "string") cookieHeader = session.cookies;
-    else if (Array.isArray(session.cookies)) {
-      cookieHeader = session.cookies.map((c) => (typeof c === "string" ? c : `${c.name}=${c.value}`)).join("; ");
-    }
-  } else if (ctx.config && ctx.config.cookie) {
-    cookieHeader = String(ctx.config.cookie);
-  }
+  // NO cookie-header fallback here, deliberately - a prior version of this function read
+  // `session.cookie`/`session.cookies`/`ctx.config.cookie`, found none of them ever populated
+  // (connect_agent_session, store.js, stores no such column - cookies live ONLY inside the Camofox
+  // browser process, per this project's security model and its live-verified transport: an
+  // authenticated read only ever works as a fetch() run INSIDE the browser's own main-world realm,
+  // see connect-agent/discovery.mjs's evaluate("mw:...") pattern and connect-agent/README.md - Camofox's
+  // REST API has no server-side "proxy a request through this session's cookies" endpoint at all), and
+  // fell through to an UNAUTHENTICATED ctx.fetch() anyway - a real outbound request to the hospital's
+  // origin from the server, not the doctor's browser, that looked like it had succeeded. Fail closed
+  // instead: refuse until a caller injects a real transport (ctx.exec / ctx.config.exec) that actually
+  // executes inside the authenticated browser session - that transport is Track M's runner.mjs's job.
+  void session;
+  throw new UpstreamError("no browser-session execution transport configured: inject ctx.exec (or ctx.config.exec) that runs the request inside the authenticated browser context - a direct server-side fetch cannot authenticate as this session");
+}
 
+// Adapts any fetch-shaped function into the { request({method,url,headers}) -> {status,headers,bodyText} }
+// shape connect-agent/manifest/interpret.mjs's executeOperation() expects. NOT wired in automatically
+// (see makeExec above) - a caller that legitimately has an authenticated fetch (the synthetic-manifest
+// conformance harness against a fixture EMR; a future runner transport that proxies through the browser
+// context and hands back a real Response) opts in explicitly via ctx.exec / ctx.config.exec = this.
+export function execFromFetch(fetchFn) {
   return {
     async request({ method, url, headers = {} }) {
-      const reqHeaders = Object.assign({}, headers);
-      if (cookieHeader && !reqHeaders.cookie && !reqHeaders.Cookie) {
-        reqHeaders.cookie = cookieHeader;
-      }
       let res;
       try {
-        res = await ctx.fetch(url, { method, headers: reqHeaders, redirect: "manual" });
+        res = await fetchFn(url, { method, headers, redirect: "manual" });
       } catch (err) {
         if (err && err.name && !["Error", "TypeError", "RangeError", "ReferenceError", "SyntaxError"].includes(err.name)) throw err;
         throw new UpstreamError("browser session fetch failed: " + (err ? err.message : "network error"));
       }
-
       const status = res.status;
       const resHeaders = {};
       if (res.headers && typeof res.headers.forEach === "function") {
         res.headers.forEach((v, k) => { resHeaders[k.toLowerCase()] = v; });
       } else if (res.headers && typeof res.headers === "object") {
-        for (const [k, v] of Object.entries(res.headers)) {
-          resHeaders[k.toLowerCase()] = v;
-        }
+        for (const [k, v] of Object.entries(res.headers)) resHeaders[k.toLowerCase()] = v;
       }
-
       let bodyText = "";
       try {
         bodyText = typeof res.text === "function" ? await res.text() : (typeof res.json === "function" ? JSON.stringify(await res.json()) : "");
-      } catch {
-        bodyText = "";
-      }
-
-      return {
-        status,
-        headers: resHeaders,
-        bodyText,
-      };
+      } catch { bodyText = ""; }
+      return { status, headers: resHeaders, bodyText };
     },
   };
 }

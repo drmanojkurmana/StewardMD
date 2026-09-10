@@ -6,6 +6,7 @@ import {
   ManifestPolicyError,
   resolveManifest,
   resolveSession,
+  execFromFetch,
 } from "../../../../functions/_connect/connectors/browser-session/connector.js";
 import {
   assertConnector,
@@ -123,8 +124,13 @@ function makeDeps(db, over = {}) {
 test("1. assertConnector() and interfaces.runConformance() pass against synthetic manifest and fake exec", async () => {
   assert.doesNotThrow(() => assertConnector(browserSessionConnector));
 
+  // The connector deliberately refuses to execute through a bare ctx.fetch (see connector.js's makeExec:
+  // no session ever carries a real cookie, so a fallback fetch would be a silent unauthenticated request
+  // to the hospital's own origin). A real caller injects a transport that actually runs inside the
+  // browser session; here that is execFromFetch(syntheticFetch), fed to the harness via opts.exec.
   const res = await interfacesRunConformance(browserSessionConnector, {
     fetch: syntheticFetch,
+    exec: execFromFetch(syntheticFetch),
     fixtures: { patientRef: "P1" },
   });
   assert.equal(res.passed, true, "interfaces.runConformance failed: " + JSON.stringify(res.checks.filter((c) => !c.ok)));
@@ -133,6 +139,7 @@ test("1. assertConnector() and interfaces.runConformance() pass against syntheti
 test("2. sdk.runConformance() passes against synthetic manifest and fake exec (all 10 checks)", async () => {
   const res = await sdkRunConformance(browserSessionConnector, {
     fetch: syntheticFetch,
+    exec: execFromFetch(syntheticFetch),
     fixtures: { patientRef: "P1" },
   });
   assert.equal(res.passed, true, "sdk.runConformance failed: " + JSON.stringify(res.checks.filter((c) => !c.ok)));
@@ -189,6 +196,7 @@ test("3. fetchPatient only calls declared operations; requesting undeclared oper
 test("4. normalize output passes validateBundle(bundle) with ok === true", async () => {
   const ctx = {
     fetch: syntheticFetch,
+    exec: execFromFetch(syntheticFetch),
     tenant: { id: "t1" },
     scope: ["Patient", "Observation"],
   };
@@ -221,7 +229,7 @@ test("5. worklist() dispatch through functions/_connect/onboard/worklist.js#pull
     status: "active",
   });
 
-  const deps = makeDeps(db);
+  const deps = makeDeps(db, { exec: execFromFetch(syntheticFetch) });
   const res = await pullWorklist(deps, req, env, "t1", "conn-browser-1", { date: "2026-09-10" });
 
   assert.equal(res.ok, true);
@@ -443,6 +451,7 @@ test("8. Budgets are respected (ctx.budget.maxSubrequests limits executeOperatio
     manifest: paginatedManifest,
     operations: ["list_results"],
     fetch: countingFetch,
+    exec: execFromFetch(countingFetch),
     budget: { maxSubrequests: 1 },
   };
 

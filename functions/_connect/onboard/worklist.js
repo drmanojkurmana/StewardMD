@@ -126,6 +126,11 @@ export async function pullWorklist(deps, request, env, tenantId, connectionId, o
     row,
     connectionId,
     fetch: safeFetch,
+    // In-process only, like fetch/secrets/db above - never round-tripped through the JSON-serialized
+    // `config` column, so a real function value can actually survive. The browser-session connector's
+    // worklist() needs this (see its makeExec(): it refuses to execute through a bare ctx.fetch); every
+    // other connector kind ignores it.
+    exec: deps && deps.exec,
     secrets: deps && deps.secrets,
     db: deps && deps.db,
     kv: deps && deps.kv,
