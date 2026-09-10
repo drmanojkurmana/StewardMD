@@ -140,3 +140,7 @@ td.num { font-variant-numeric: tabular-nums lining-nums; text-align: right; }
 /* ---- toast ---- */
 #wsqToast { position: fixed; left: 50%; bottom: 18px; transform: translateX(-50%); background: var(--ink); color: var(--surface); padding: 8px 14px; border-radius: var(--r); font-size: var(--t-small); z-index: 13000; max-width: 92vw; opacity: 0; transition: opacity var(--dur) var(--ease); pointer-events: none; }
 #wsqToast.on { opacity: 1; }
+
+/* A demonstration hospital, marked permanently. Warn-coloured because it is not an error and not
+   normal: it is a standing caution that these patients are fabricated. */
+.hospbar .demo-tag { font-size: var(--t-micro); font-weight: 700; letter-spacing: .08em; padding: 1px 7px; border-radius: var(--r); background: var(--sig-major-wash, #f8f0df); color: var(--sig-major, #85570c); }

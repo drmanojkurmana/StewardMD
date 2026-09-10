@@ -56,6 +56,11 @@
       .catch(function (e) { return { ok: false, error: "network", detail: String(e && e.message || e) }; });
   }
   function can(cap) { return !!(st.who && st.who.caps && st.who.caps.indexOf(cap) >= 0); }
+  /* A demonstration hospital says so, on every screen, permanently. Demo and real tenant data are
+   * separate records, but that separation is invisible to somebody looking at a chart over a
+   * shoulder - and a fabricated patient that reads as a real one is the whole hazard. The signal is
+   * the hospital's own name, which the seeder refuses to write without it. */
+  function isDemo(org) { return /\bdemo\b/i.test(String((org && (org.name || "")) || "")); }
   function isWardsynq() { return !!(st.org && st.org.mode === "wardsynq"); }
 
   // ---- session ------------------------------------------------------------------------------
@@ -135,6 +140,7 @@
     var h = '<div class="brandbar"><img class="brand-mark" src="/wardsynq/ui/brand/wardsynq-lockup.png" alt="" aria-hidden="true" width="261" height="61" decoding="async"><span class="spring"></span>' + tools + "</div>";
     if (org) h += '<div class="hospbar"><span class="name">' + esc(org.name || org.id) + '</span><span class="facts">' + esc(org.code || org.id) +
       '<span class="sep">/</span>' + (org.mode === "wardsynq" ? "WardSynQ record" : esc(org.mode || "native") + " mode") + "</span><span class=\"spring\"></span>" +
+      (isDemo(org) ? '<span class="demo-tag" title="Fabricated patients, for demonstration. Nothing here is a real person or a real clinical record.">DEMO</span>' : "") +
       (who ? '<span class="who">' + esc(who.name || who.smdId || "") + (who.role ? ", " + esc(who.role) : "") + "</span>" : "") + "</div>";
     return h;
   }
@@ -176,7 +182,29 @@
     if (!G.WARD || !G.WARD.open) { toast("The ward is still loading. Try again in a moment."); return; }
     if (!isWardsynq()) { toast("This hospital does not keep a WardSynQ record, so the ward is not available. The OPD desk is."); return; }
     G.WARD.onClose = function () { if (parseHash().page === "ward") go("home"); };
-    G.WARD.open({ orgId: st.orgId, act: act || "" });
+    G.WARD.open({ orgId: st.orgId, act: act || "", demo: isDemo(st.org) });
+  }
+
+  /* What a Firebase sign-in failure MEANS, in a sentence the person reading it can act on.
+   *
+   * Firebase's own message was being shown verbatim, so a clinician met "This domain is not
+   * authorized for OAuth operations for your Firebase project. Edit the list of authorized domains
+   * from the Firebase console" - which is an instruction to somebody else entirely, on a console
+   * they cannot open, and it did not mention that email and password works on this very screen. An
+   * unmapped code still falls back to Firebase's text rather than to a shrug: a message nobody
+   * wrote is better than "Sign-in failed" with the reason thrown away.
+   */
+  function signInError(e) {
+    var code = (e && e.code) || "";
+    if (code === "auth/unauthorized-domain")
+      return "Google sign-in is not enabled for this address yet. Sign in with your email and password above, which works now. To turn Google on, an administrator adds " + location.hostname + " to the authorised domains of the StewardMD Firebase project.";
+    if (code === "auth/popup-blocked") return "Your browser blocked the Google sign-in window. Allow pop-ups for this site, or sign in with your email and password above.";
+    if (code === "auth/popup-closed-by-user" || code === "auth/cancelled-popup-request") return "The Google sign-in window closed before it finished.";
+    if (code === "auth/invalid-credential" || code === "auth/wrong-password" || code === "auth/user-not-found" || code === "auth/invalid-email") return "Wrong email or password.";
+    if (code === "auth/too-many-requests") return "Too many attempts. Wait a few minutes and try again.";
+    if (code === "auth/network-request-failed") return "Could not reach the sign-in service. Check the network and try again.";
+    if (code === "auth/user-disabled") return "This account has been disabled. Ask your hospital administrator.";
+    return (e && e.message) || "Sign-in failed.";
   }
 
   /* What a Firebase sign-in failure MEANS, in a sentence the person reading it can act on.

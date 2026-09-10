@@ -57,6 +57,7 @@
     // board already uses - nobody arrives on a typed MRN alone.
     ed: null, edErr: "", edArrivalOpen: false, edMrnLookup: null, edMrnLookupErr: "", edAdmitPending: false,
     resusBundles: null, resusStarting: false,
+    demo: false,             // a demonstration hospital, marked on the chart; set by the caller
     busy: false, err: "", note: "", refusal: null, loaded: false
   };
 
@@ -169,7 +170,10 @@
     var rows = (state.patients || []).map(function (p) {
       return '<button class="w-bed" data-w-act="open:' + esc(p.encounterId) + '">' +
         '<span class="w-bed-no">' + esc(p.bed || "-") + "</span>" +
-        '<span class="w-bed-b"><b>' + esc(p.patientId) + "</b><small>" + esc(p.ward || "") + " &middot; admitted " + when(p.admittedAt) + "</small></span>" +
+        /* Name first, then the MRN a wristband can be checked against. The record id is the last
+         * resort, not the default: it is the one identifier on the row nobody can verify against
+         * the patient in front of them. */
+        '<span class="w-bed-b"><b>' + esc(p.name || p.mrn || p.patientId) + "</b><small>" + esc(p.mrn && p.name ? p.mrn + " · " : "") + esc(p.ward || "") + " &middot; admitted " + when(p.admittedAt) + "</small></span>" +
         ms("chevron_right") + "</button>";
     }).join("");
     return '<div class="w-card"><div class="w-card-h">' + ms("bed") + "<h3>Ward" + (state.ward ? ": " + esc(state.ward) : "") + "</h3>" +
@@ -2716,6 +2720,10 @@
   function _render(state) {
     return '<div class="w-shell"><header class="w-top"><button class="w-ic" data-w-act="close">' + ms("close") + "</button>" +
       '<span class="w-title">WardSynQ &middot; Inpatient</span>' +
+      /* A demonstration hospital says so on the chart itself. Demo and real records are separate
+       * tenants, but that separation is invisible to somebody reading a screen over a shoulder, and
+       * a fabricated patient that reads as a real one is the whole hazard. */
+      (state.demo ? '<span class="w-demo" title="Fabricated patients, for demonstration. Nothing here is a real person or a real clinical record.">DEMO</span>' : "") +
       (state.busy ? '<span class="w-busy">' + ms("progress_activity") + "</span>" : "<span></span>") + "</header>" +
       '<div class="w-canvas">' + banner(state) +
       (state.view === "chart" ? chartView(state)
@@ -4958,6 +4966,7 @@
   function open(opts) {
     opts = opts || {};
     st.orgId = opts.orgId || st.orgId || rememberedOrgId();
+    if (opts.demo !== undefined) st.demo = !!opts.demo;
     if (!st.orgId) { try { G.toast && G.toast("The ward needs a hospital."); } catch (e) {} return; }
     st.view = "list"; st.sel = null; st.loaded = false; st.err = ""; st.note = ""; st.refusal = null;
     var el = root(); el.classList.add("on");

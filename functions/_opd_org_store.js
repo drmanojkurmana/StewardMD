@@ -242,6 +242,11 @@ export async function setMembership(env, orgId, identity, body, actorId) {
     id, orgId, identity,
     role: role,
     scope: b.scope !== undefined ? b.scope : (prev && prev.scope),
+    /* Falls back to the stored value for the same reason role and scope do: an edit that was about
+     * something else must never silently strip a doctor's registration and leave them unable to
+     * sign. Sending an explicit empty string DOES clear it, which is how a hospital withdraws the
+     * assertion. */
+    regNo: b.regNo !== undefined ? b.regNo : (prev && prev.regNo),
     active: b.active !== undefined ? b.active !== false : (prev ? prev.active !== false : true),
     createdAt: (prev && prev.createdAt) || now(),
   });
@@ -255,7 +260,7 @@ export async function getMembership(env, orgId, identity) {
 // Public projection — NEVER leak secret hashes to the client. `email`/`hasPin` are safe hints.
 function publicMember(id, f) {
   const m = M.membership(withId(id, f));
-  return { id: m.id, orgId: m.orgId, identity: m.identity, role: m.role, scope: m.scope, active: m.active, email: (f && f.email) || "", hasPin: !!(f && f.pinHash), createdAt: m.createdAt };
+  return { id: m.id, orgId: m.orgId, identity: m.identity, role: m.role, scope: m.scope, active: m.active, regNo: m.regNo, email: (f && f.email) || "", hasPin: !!(f && f.pinHash), createdAt: m.createdAt };
 }
 export async function listMembers(env, orgId) {
   const r = await fsQuery(env, "q_members", { where: { field: "orgId", value: sanitize(orgId) }, limit: 300 });

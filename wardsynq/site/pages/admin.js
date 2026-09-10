@@ -227,7 +227,14 @@
         '<div class="card"><h2>Add or update a staff member</h2><p class="quiet">Hospital code for sign-in: <span class="mono">' + c.esc((c.state.org && c.state.org.code) || "") + "</span></p>" +
         '<div class="row"><label class="f"><span>Identity (staff ID or email)</span><input id="admMemberIdentity"></label>' +
         '<label class="f"><span>Role</span><select id="admMemberRole">' + roleOpts + "</select></label>" +
+        /* The hospital vouching that this person is a registered practitioner. Without it a doctor
+         * who signs in as hospital staff can write the chart and cannot SIGN anything - no
+         * prescription, no note, no discharge summary - because the only other source of a signing
+         * credential is a StewardMD account's verified claim. Every signed record records which of
+         * the two vouched, so this is an assertion the hospital makes and is accountable for. */
+        '<label class="f"><span>Registration number (prescribers)</span><input id="admMemberRegNo" placeholder="leave blank if not a prescriber"></label>' +
         '<button class="btn" id="admMemberAdd" type="button">Save membership</button></div><div id="admMemMsg"></div>' +
+        '<p class="quiet">A member with no registration number can use WardSynQ but cannot sign a prescription, a note or a discharge summary. The hospital is asserting this number; a StewardMD account that is already verified uses its own instead.</p>' +
         '<h3>Set PIN</h3><div class="row"><label class="f"><span>Identity</span><input id="admPinId"></label>' +
         '<label class="f"><span>PIN</span><input id="admPinVal" type="password"></label>' +
         '<button class="btn quiet" id="admPinSave" type="button">Set PIN</button></div><div id="admPinMsg"></div>' +
@@ -248,7 +255,7 @@
       document.getElementById("admMemberAdd").onclick = function () {
         var id = (document.getElementById("admMemberIdentity").value || "").trim();
         if (!id) { document.getElementById("admMemMsg").innerHTML = '<div class="msg err">Enter the staff ID or email.</div>'; return; }
-        c.api("/member", { orgId: c.state.orgId, identity: id, role: document.getElementById("admMemberRole").value }).then(function (r) {
+        c.api("/member", { orgId: c.state.orgId, identity: id, role: document.getElementById("admMemberRole").value, regNo: (document.getElementById("admMemberRegNo").value || "").trim() }).then(function (r) {
           if (!r || !r.ok) { document.getElementById("admMemMsg").innerHTML = '<div class="msg err">' + c.esc(refusal(r)) + "</div>"; return; }
           c.toast("Staff saved."); WSQ.render("admin");
         });
