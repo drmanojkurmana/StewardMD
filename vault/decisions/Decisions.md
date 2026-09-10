@@ -5,6 +5,46 @@ tags: [decisions, adr]
 
 Dated architectural calls + why. Newest first. Keep each short: **decision · why · trade-off · status**.
 
+## 2026-09-10 · Browser provider for Connect Agent: jo-inc/camofox-browser over REST API
+
+**Decision:** Browser provider for Connect Agent = jo-inc/camofox-browser (Camoufox engine), driven over its REST API by connect-agent/camofox-client.mjs.
+
+**Why:** Bot-detection resistance on real hospital EMRs; endpoints verified against its openapi.json.
+
+**Status:** Decided; verified against a running jo-inc/camofox-browser 1.14.0 server.
+
+## 2026-09-10 · Main-world evaluation prerequisite for Connect discovery
+
+**Decision:** Main-world evaluation is a hard prerequisite: discovery installs and reads its observer with the "mw:" prefix, enabled by the connect-agent/camofox-plugins/main-world plugin.
+
+**Why:** Camoufox isolates evaluate() by design, so a plain-realm observer is invisible to page scripts (verified live).
+
+**Status:** Decided; verified against a running jo-inc/camofox-browser 1.14.0 server.
+
+## 2026-09-10 · Disqualification of Camofox Playwright tracing for doctor sessions
+
+**Decision:** Camofox Playwright tracing is disqualified for doctor sessions.
+
+**Why:** It records the login POST body (credentials), cookies, bodies and screenshots, and can only be enabled at session creation.
+
+**Status:** Decided; verified against a running jo-inc/camofox-browser 1.14.0 server.
+
+## 2026-09-10 · HMAC-SHA256 signature verification for consent receipts
+
+**Decision:** Consent receipts are HMAC-SHA256 signed with CONNECT_CONSENT_SIGNING_KEY and verified server-side; no unkeyed fallback.
+
+**Why:** The previous unkeyed digest was never verified and was forgeable.
+
+**Status:** Decided; verified against a running jo-inc/camofox-browser 1.14.0 server.
+
+## 2026-09-10 · Versioned adapter spec validation (schemaVersion 1 and 2)
+
+**Decision:** Adapter spec validation is versioned: schemaVersion 1 (legacy, default) keeps keyword blocking; schemaVersion 2 separates action verbs from clinical-domain nouns so read endpoints validate.
+
+**Why:** v1 rejected ordinary reads like GET /patients/{id}/medications.
+
+**Status:** Decided; verified against a running jo-inc/camofox-browser 1.14.0 server.
+
 ## 2026-09-09 · WardSynQ TASK 4.16 (Downtime/Business Continuity): the 6×4 policy matrix, documented not rebuilt
 
 **Decision.** The plan asks six failure modes (network, payment gateway, payer system, LIS/RIS,
