@@ -174,3 +174,29 @@ there has never been one.
 **Still unmeasured:** RTO against production Cloudflare D1 (this drill is local SQLite only), and any
 failover time — there is no standby, so an availability objective does not exist to be measured.
 
+
+## Firebase Auth authorised domains (wardsynq.com added 2026-09-11)
+
+Google sign-in (`signInWithPopup`) fails with `auth/unauthorized-domain` on any origin not in the
+Firebase project's authorised list. `wardsynq.com` was missing, so "Continue with Google" was dead
+on the live site while **email and password worked normally** (that path does not consult the list).
+
+Project `stewardmd-498ec` now authorises:
+`localhost`, `stewardmd-498ec.firebaseapp.com`, `stewardmd-498ec.web.app`, `stewardmd.in`,
+`www.stewardmd.in`, `stewardmd.pages.dev`, `wardsynq.com`, `www.wardsynq.com`, `wardsynq.pages.dev`.
+
+Read or change it without the console (gcloud must be the project owner):
+
+```bash
+TOKEN=$(gcloud auth print-access-token)
+curl -sS -H "Authorization: Bearer $TOKEN" -H "x-goog-user-project: stewardmd-498ec" \
+  https://identitytoolkit.googleapis.com/admin/v2/projects/stewardmd-498ec/config
+# PATCH the same URL with ?updateMask=authorizedDomains and {"authorizedDomains":[...]} to change it.
+```
+
+The `x-goog-user-project` header is required: without it the admin API answers 403 "requires a quota
+project". ALWAYS re-read the list and append; the field is replaced wholesale, so a hand-typed array
+silently drops every domain omitted from it.
+
+A NEW HOST NEEDS THIS TOO. Anything served on a fresh domain that offers Google sign-in must be
+added here, or its Google button is dead while every other sign-in method looks fine.

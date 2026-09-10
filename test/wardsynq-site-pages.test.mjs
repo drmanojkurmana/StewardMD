@@ -65,6 +65,37 @@ function ctxFor(env, el) {
   };
 }
 
+/* REGRESSION, 2026-09-11: the door showed Firebase's own words.
+ *
+ * Google sign-in on wardsynq.com failed with auth/unauthorized-domain, and the screen printed
+ * "This domain is not authorized for OAuth operations for your Firebase project. Edit the list of
+ * authorized domains from the Firebase console" - an instruction addressed to somebody else, on a
+ * console the reader cannot open, while omitting that email and password works on that same screen.
+ */
+test("a sign-in failure is said in words the person reading it can act on", () => {
+  const env = loadEnv();
+  const say = env.win.WSQ._signInError;
+
+  const domain = say({ code: "auth/unauthorized-domain", message: "This domain is not authorized for OAuth operations for your Firebase project. Edit the list of authorized domains from the Firebase console." });
+  // Naming the Firebase project is useful - it is what an administrator opens. Telling the person
+  // in front of the screen to go and edit a console is not: that is not their job and not their
+  // access. What they need is the method that works right now.
+  assert.ok(!/console/i.test(domain), `it must not send the reader to a console they cannot open: ${domain}`);
+  assert.ok(!domain.includes(String(say({ code: "x", message: "unused" }))), "it must not fall through to Firebase's own text");
+  assert.ok(/email and password/i.test(domain), `it must name the method that does work: ${domain}`);
+  assert.ok(/administrator/i.test(domain), `it must say who can turn Google on: ${domain}`);
+
+  assert.match(say({ code: "auth/popup-blocked" }), /pop-ups/i);
+  assert.equal(say({ code: "auth/invalid-credential" }), "Wrong email or password.");
+  assert.equal(say({ code: "auth/wrong-password" }), "Wrong email or password.");
+  assert.match(say({ code: "auth/too-many-requests" }), /Wait a few minutes/i);
+  assert.match(say({ code: "auth/user-disabled" }), /administrator/i);
+
+  // An unmapped code keeps the reason rather than throwing it away for a shrug.
+  assert.equal(say({ code: "auth/something-new", message: "a message nobody here wrote" }), "a message nobody here wrote");
+  assert.equal(say(null), "Sign-in failed.");
+});
+
 test("admin and audit both register on WSQ", () => {
   const env = loadEnv();
   assert.equal(typeof env.registry.admin.render, "function");
