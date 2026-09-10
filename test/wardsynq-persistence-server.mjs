@@ -114,6 +114,9 @@ mock.module("../functions/_wardsynq/deps.js", {
 });
 
 const { onRequest } = await import("../functions/api/queue/[[path]].js");
+// The record service door too (/api/wardsynq/*): the order-safety workstation and the audit page's
+// change feed read the tenant through it. Same mocked deps, same sqlite repository.
+const { onRequest: onRecordRequest } = await import("../functions/api/wardsynq/[[path]].js");
 
 const ORG = "org-wsq";
 const sanitize = (x) => String(x == null ? "" : x).replace(/[^A-Za-z0-9_-]/g, "-").slice(0, 80);
@@ -153,14 +156,14 @@ const server = createServer(async (req, res) => {
       res.end(readFileSync(join(ROOT, staticName)));
       return;
     }
-    if (url.pathname.startsWith("/api/queue")) {
+    if (url.pathname.startsWith("/api/queue") || url.pathname.startsWith("/api/wardsynq")) {
       const chunks = [];
       for await (const c of req) chunks.push(c);
       const body = chunks.length ? Buffer.concat(chunks) : undefined;
       const headers = new Headers();
       for (const [k, v] of Object.entries(req.headers)) if (typeof v === "string") headers.set(k, v);
       const request = new Request(`http://localhost:${PORT}${req.url}`, { method: req.method, headers, body: (req.method === "GET" || req.method === "HEAD") ? undefined : body });
-      const out = await onRequest({ request, env: ENV });
+      const out = await (url.pathname.startsWith("/api/wardsynq") ? onRecordRequest : onRequest)({ request, env: ENV });
       const outHeaders = {}; out.headers.forEach((v, k) => { outHeaders[k] = v; });
       res.writeHead(out.status, outHeaders);
       res.end(Buffer.from(await out.arrayBuffer()));

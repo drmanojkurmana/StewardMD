@@ -67,7 +67,7 @@
   function selectOrg(orgId, quiet) {
     st.orgId = orgId; st.org = null;
     lsSet(LS.hosp, orgId); lsSet(LS.wp, orgId ? "wardsynq:" + orgId : "");
-    if (!quiet) go("home");
+    if (!quiet) go("landing");
   }
   function signOut() {
     var wasAccount = st.tokType === "account";
@@ -96,13 +96,15 @@
     if (r.page === "hospitals") return render("hospitals");
     if (!st.orgId) return render("hospitals");
     if (!st.org) return loadOrg().then(function () { return st.org ? route() : render("hospitals"); });
+    if (r.page === "landing") { if (isWardsynq() && st.org.connectTenantId) { location.replace(workstationUrl()); return; } return go("home"); }
     if (!r.page || r.page === "home") return render("home");
     if (r.page === "ward") return openWard(r.arg);
     if (r.page === "opd") { location.href = "/opd.html"; return; }
-    if (r.page === "workstation") { location.href = "/wardsynq/ui/wardsynq.html?record=" + encodeURIComponent(st.org.connectTenantId || ""); return; }
+    if (r.page === "workstation") { location.href = workstationUrl(); return; }
     if (PAGES[r.page]) return render(r.page);
     return render("home");
   }
+  function workstationUrl() { return "/wardsynq/ui/wardsynq.html?record=" + encodeURIComponent(st.org.connectTenantId || "") + "&site=1"; }
   function whoami() {
     return api("/whoami" + (st.orgId ? "?orgId=" + encodeURIComponent(st.orgId) : "")).then(function (r) {
       if (!r || !r.ok) {
@@ -126,20 +128,35 @@
   // ---- chrome --------------------------------------------------------------------------------
   function bar() {
     var who = st.who, org = st.org;
-    return '<header class="bar">' +
-      '<img class="mark" src="/wardsynq/ui/brand/wardsynq-mark.png" alt="WardSynQ" width="28" height="28">' +
-      '<div class="hosp">' + (org ? "<b>" + esc(org.name || org.id) + "</b><span>" + esc(org.code || org.id) + (org.mode === "wardsynq" ? " · WardSynQ record" : " · " + esc(org.mode || "") + " mode") + "</span>" : "<b>WardSynQ</b><span>Clinical operating system</span>") + "</div>" +
-      (who ? '<div class="who">' + esc(who.name || who.smdId || "") + (who.role ? " · " + esc(who.role) : "") + "</div>" : "") +
-      (st.tokType ? '<button type="button" data-go="home" title="Home">' + ms("home") + "</button>" +
-        '<button type="button" data-go="hospitals" title="Switch hospital">' + ms("domain") + "</button>" +
-        '<button type="button" data-go="logout" title="Sign out">' + ms("logout") + "</button>" : "") +
-      "</header>";
+    var tools = st.tokType ? '<div class="tools">' +
+      (org ? '<button class="btn" type="button" data-go="home">Map</button>' : "") +
+      '<button class="btn" type="button" data-go="hospitals">Hospital</button>' +
+      '<button class="btn" type="button" data-go="logout">Sign out</button></div>' : "";
+    var h = '<div class="brandbar"><img class="brand-mark" src="/wardsynq/ui/brand/wardsynq-lockup.png" alt="" aria-hidden="true" width="261" height="61" decoding="async"><span class="spring"></span>' + tools + "</div>";
+    if (org) h += '<div class="hospbar"><span class="name">' + esc(org.name || org.id) + '</span><span class="facts">' + esc(org.code || org.id) +
+      '<span class="sep">/</span>' + (org.mode === "wardsynq" ? "WardSynQ record" : esc(org.mode || "native") + " mode") + "</span><span class=\"spring\"></span>" +
+      (who ? '<span class="who">' + esc(who.name || who.smdId || "") + (who.role ? ", " + esc(who.role) : "") + "</span>" : "") + "</div>";
+    return h;
+  }
+  /* The rail: the map of surfaces, the same list the home page states in full. */
+  function rail(page) {
+    if (!st.org) return "";
+    var native = isWardsynq();
+    var item = function (go, label) { return '<a href="#/' + go.replace(/^ward:/, "ward/") + '"' + (page === go ? ' aria-current="page"' : "") + ">" + esc(label) + "</a>"; };
+    var h = '<div class="rail"><div class="heading">WardSynQ</div>' + item("home", "Map");
+    if (native) h += item("workstation", "Workstation") + item("ward:", "Ward") + item("ward:board", "Bed board") + item("ward:edboard", "Emergency") + item("ward:critsboard", "Critical results");
+    h += item("opd", "OPD desk") + item("patients", "Patients");
+    if (native) h += '<div class="heading">Command</div>' + item("ward:flowcommand", "Command center") + item("ward:twin", "Digital twin") + item("ward:reports", "Reports") + item("ward:cashier", "Billing") + item("ward:integration", "Integration") + item("maik", "MaiK");
+    h += '<div class="heading">Administration</div>' + item("admin", "Admin Center") + item("audit", "Audit and security") + "</div>";
+    return h;
   }
   function render(page, extra) {
     var app = $("app"); if (!app) return;
     var def = PAGES[page]; if (!def) return;
     st.page = page;
-    app.innerHTML = bar() + '<div class="wrap" id="page"></div>';
+    app.className = "shell";
+    if (page === "login") app.innerHTML = bar() + '<div id="page"></div>';
+    else app.innerHTML = bar() + '<div class="wrap">' + rail(page) + '<main class="work" id="page"></main></div>';
     var el = $("page");
     var ctx = { el: el, api: api, esc: esc, ms: ms, go: go, can: can, toast: toast, state: st, isWardsynq: isWardsynq, selectOrg: selectOrg, setSession: setSession, when: when };
     try { var out = def.render(ctx, extra); if (out && typeof out.then === "function") out.catch(function (e) { el.innerHTML += '<div class="msg err">' + esc(String(e && e.message || e)) + "</div>"; }); }
@@ -165,28 +182,23 @@
   // ---- sign in ----------------------------------------------------------------------------------
   PAGES.login = { render: function (c) {
     var el = c.el, method = st._loginTab || "account";
-    var tabs = [["account", "Owner / Doctor"], ["staff", "Hospital staff"], ["ghis", "GITAM / GHIS"]];
+    var tabs = [["account", "Owner / Doctor"], ["staff", "Hospital staff"]];
     var form;
     if (method === "account") form =
       '<p class="lead">Sign in with your StewardMD account.</p>' +
       '<label class="f"><span>Email</span><input id="fe" type="email" autocomplete="username" inputmode="email" autocapitalize="none"></label>' +
       '<label class="f"><span>Password</span><input id="fp" type="password" autocomplete="current-password"></label>' +
       '<button class="btn" id="goAccount" type="button">Sign in</button>' +
-      '<div class="or">or</div><button class="btn ghost" id="goGoogle" type="button">' + ms("account_circle") + "Continue with Google</button>";
-    else if (method === "staff") form =
+      '<div class="or">or</div><button class="btn ghost" id="goGoogle" type="button">Continue with Google</button>';
+    else form =
       '<p class="lead">Front desk, nursing, pharmacy, lab and billing staff.</p>' +
       '<label class="f"><span>Hospital code</span><input id="sorg" placeholder="SMD-XXXXXX" value="' + esc(st._lastCode || "") + '" autocapitalize="characters"></label>' +
       '<label class="f"><span>Staff ID or email</span><input id="sid" autocomplete="username" autocapitalize="none" autocorrect="off" spellcheck="false"></label>' +
       '<label class="f"><span>PIN or password</span><input id="spw" type="password" autocomplete="current-password"></label>' +
       '<button class="btn" id="goStaff" type="button">Unlock</button>' +
       '<p class="quiet" style="margin-top:10px">Hospital code + staff ID + PIN, or just your email + password. Your hospital admin sets these in the Admin Center.</p>';
-    else form =
-      '<p class="lead">GITAM (GIMSR) staff sign in with the GHIS employee ID.</p>' +
-      '<label class="f"><span>Employee ID</span><input id="uid" inputmode="numeric" autocomplete="username"></label>' +
-      '<label class="f"><span>Password</span><input id="pwd" type="password" autocomplete="current-password"></label>' +
-      '<button class="btn" id="goGhis" type="button">Sign in</button>';
     el.innerHTML = '<div class="door"><div class="card">' +
-      '<img class="lockup" src="/wardsynq/ui/brand/wardsynq-lockup.png" alt="WardSynQ" width="261" height="61">' +
+
       '<div class="tabs" role="tablist">' + tabs.map(function (t) { return '<button type="button" role="tab" data-tab="' + t[0] + '" aria-selected="' + (t[0] === method) + '">' + esc(t[1]) + "</button>"; }).join("") + "</div>" +
       '<div id="loginForm">' + form + '</div><div id="loginMsg"></div>' +
       '<p class="foot">Clinical operating system and EMR. Clinical content in this build is not yet signed off by a hospital committee.</p>' +
@@ -216,22 +228,10 @@
         fetch(API + (isEmail ? "/auth/email" : "/auth/pin"), { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(isEmail ? { email: id, password: pw } : { clinicCode: code, identity: id, pin: pw }) })
           .then(function (r) { return r.json(); }).then(function (r) {
             if (!r || !r.ok || !r.token) { msg(r && r.error === "locked" ? "Too many attempts. Try again later." : r && r.error === "staff_disabled" ? "Staff access is not enabled on this server." : isEmail ? "Wrong email or password." : "Wrong hospital code, staff ID or PIN."); return; }
-            setSession("staff", r.token, r.orgId || ""); st.who = null; go(r.orgId ? "home" : "hospitals");
+            setSession("staff", r.token, r.orgId || ""); st.who = null; go(r.orgId ? "landing" : "hospitals");
           }).catch(function () { msg("Could not reach the server."); });
       };
       $("goStaff").onclick = staff; onEnter("spw", staff);
-    } else {
-      var ghis = function () {
-        var uid = ($("uid").value || "").trim(), pwd = $("pwd").value;
-        if (!uid || !pwd) { msg("Enter your employee ID and password."); return; }
-        msg("Signing in.", "note");
-        fetch("/api/ghis/staff-login", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ userId: uid, password: pwd }) })
-          .then(function (r) { return r.json(); }).then(function (r) {
-            if (!r || !r.token) { msg(r && r.error === "staff_disabled" ? "Staff access is not enabled on this server." : r && r.error === "bad_credentials" ? "Wrong employee ID or password." : "Sign-in failed."); return; }
-            setSession("staff", r.token, ""); st.who = null; go("hospitals");
-          }).catch(function () { msg("Could not reach the server."); });
-      };
-      $("goGhis").onclick = ghis; onEnter("pwd", ghis);
     }
   } };
 
@@ -267,14 +267,14 @@
   // ---- home: the role-aware map -----------------------------------------------------------------------
   function tile(opts) {
     var dis = opts.need && !can(opts.need);
-    return '<button type="button" class="tile" data-go="' + esc(opts.go) + '"' + (dis ? ' disabled title="Your role (' + esc(st.who && st.who.role || "") + ') does not include ' + esc(opts.need) + '"' : "") + ">" + ms(opts.icon) +
+    return '<button type="button" class="tile" data-go="' + esc(opts.go) + '"' + (dis ? ' disabled title="Your role (' + esc(st.who && st.who.role || "") + ') does not include ' + esc(opts.need) + '"' : "") + ">" +
       "<div><b>" + esc(opts.title) + "</b><span>" + esc(opts.sub) + "</span>" + (opts.liveId ? '<span class="live" id="' + opts.liveId + '"></span>' : "") + "</div></button>";
   }
   PAGES.home = { render: function (c) {
     var el = c.el, o = st.org, w = st.who, native = isWardsynq();
     var head = '<div class="title"><h1>' + esc(o.name || o.id) + '</h1><span class="sub">' + esc(w.name || "") + (w.role ? " · " + esc(w.role) : "") + " · " + esc(o.code || o.id) + "</span></div>";
     if (!native) head += '<div class="msg note">This hospital runs in ' + esc(o.mode || "native") + " mode: the OPD desk and its EMR are available, the inpatient ward, command center and Digital Twin need a WardSynQ record. An owner can create a WardSynQ hospital from the hospital list.</div>";
-    var sec = function (t, tiles, note) { return '<div class="sec"><h2>' + t + "</h2>" + (note ? '<span class="n">' + note + "</span>" : "") + '</div><div class="grid">' + tiles.join("") + "</div>"; };
+    var sec = function (t, tiles, note) { return '<div class="sec"><div class="signal"></div><div class="said"><h2>' + t + (note ? '<span class="n">' + note + "</span>" : "") + '</h2><div class="grid">' + tiles.join("") + "</div></div></div>"; };
     var wardTiles = native ? [
       tile({ go: "ward:", icon: "bed", title: "Inpatient ward", sub: "Ward list, charts, vitals, eMAR round, notes, discharge", need: "queue.view", liveId: "lvWard" }),
       tile({ go: "ward:board", icon: "hotel", title: "Admission and bed board", sub: "Admit by MRN, place in a bed, transfer", need: "queue.view", liveId: "lvBeds" }),

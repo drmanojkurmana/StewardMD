@@ -106,6 +106,8 @@ function cohort() {
 async function connectRecord() {
   const params = recordParams();
   if (!params) return null;
+  // Opened from wardsynq.com as the hospital's landing screen: the rest of WardSynQ is in the rail.
+  if (new URLSearchParams(location.search).get("site") === "1") { const nav = $("sitemap"); if (nav) nav.hidden = false; }
   const record = await openRecordDeployment({ tenantId: params.tenantId, token: shellToken, nodeId: "workstation", onDenied: showDenial });
   CLINICIAN = record.actor;
   S.bus = record.bus;
