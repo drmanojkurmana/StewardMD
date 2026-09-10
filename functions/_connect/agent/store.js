@@ -1,10 +1,10 @@
-// functions/_connect/agent/store.js — D1 access for the Connect Hospital agent broker.
+// functions/_connect/agent/store.js -- D1 access for the Connect Hospital agent broker.
 // Follows the existing onboard store idiom (functions/_connect/onboard/store.js): plain prepare/bind,
 // tenant id on EVERY statement, client-safe projections that never surface an internal reference, and
 // OnboardError klasses as the only thing that reaches a client.
 //
 // Deliberate SQL restraint: every WHERE is `col = ?` equality, ANDed. No ranges, no ORDER BY/LIMIT
-// semantics are relied on — range filtering (expiry, lease lapse) happens in JS on a state-narrowed read.
+// semantics are relied on -- range filtering (expiry, lease lapse) happens in JS on a state-narrowed read.
 // That keeps the statements inside what test/connect/onboard/onboard-db.mjs (the shared D1-shaped mock)
 // executes faithfully, so the tests exercise the REAL statements rather than test-only variants.
 import { OnboardError } from "../onboard/errors.js";
@@ -239,6 +239,19 @@ export async function findJobForSession(db, tenantId, sessionId) {
 
 export async function casJob(db, tenantId, id, expectedRevision, set) {
   return casUpdate(db, "connect_agent_job", tenantId, id, expectedRevision, set);
+}
+
+export async function casJobLease(db, tenantId, id, expectedRevision, { leaseOwner, leaseExpiresAt, attempts } = {}) {
+  const set = {
+    lease_owner: leaseOwner,
+    lease_expires_at: leaseExpiresAt,
+  };
+  if (attempts !== undefined) set.attempts = attempts;
+  return casJob(db, tenantId, id, expectedRevision, set);
+}
+
+export async function casRenewJobLease(db, tenantId, id, expectedRevision, leaseExpiresAt) {
+  return casJob(db, tenantId, id, expectedRevision, { lease_expires_at: leaseExpiresAt });
 }
 
 // Candidate jobs for a lease sweep: read by STATE (equality, index-friendly) and filter the time ranges
