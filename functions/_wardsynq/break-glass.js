@@ -189,7 +189,12 @@ async function declareBreakGlass(request, env, ctx) {
   let notification;
   try {
     const dispatcher = new Dispatcher(ctx.notifyDeps || {});
-    const sent = await dispatcher.send({ grantId: id, patientId, actorId: resolved.actor.id, role: resolved.role || null, reason, expiresAt: new Date(Date.parse(grantedAt) + minutes * 60000).toISOString() });
+    // Retried up to twice: an emergency alert failing on a momentary network blip is exactly the
+    // case retry exists for - see wardsynq-notify.js's own note on why this changes nothing for a
+    // caller that never asks for it, and never fakes delivery for one that fails every attempt.
+    const sent = await dispatcher.send(
+      { grantId: id, patientId, actorId: resolved.actor.id, role: resolved.role || null, reason, expiresAt: new Date(Date.parse(grantedAt) + minutes * 60000).toISOString() },
+      undefined, { retries: 2 });
     notification = { attempted: true, delivered: sent.delivered, channels: sent.attempts.map((a) => ({ channel: a.channel, delivered: a.delivered, detail: a.detail })), at: grantedAt };
   } catch (e) {
     notification = { attempted: true, delivered: false, reason: e instanceof NotifyError ? e.code : "NOTIFY_ERROR", detail: str(e && e.message), at: grantedAt };

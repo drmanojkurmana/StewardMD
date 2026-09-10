@@ -101,10 +101,11 @@ test("3. the shape never resembles a twin snapshot 'sections' object - a caller 
 
 /* ---- 4: honest inventory ----------------------------------------------------------------------------- */
 
-test("4. only two of the seven named metrics are wired, and the other five say so honestly", () => {
-  assert.equal(PREDICTORS["discharge-volume"].wired, true);
-  assert.equal(PREDICTORS["critical-backlog"].wired, true);
-  for (const key of ["bed-demand", "ed-load", "diagnostic-workload", "pharmacy-workload", "blood-demand", "ot-delays"]) {
+test("4. five of the seven named metrics are wired, from real data; the remaining two say why honestly", () => {
+  for (const key of ["discharge-volume", "critical-backlog", "bed-demand", "ed-load", "diagnostic-workload", "pharmacy-workload"]) {
+    assert.equal(PREDICTORS[key].wired, true, key);
+  }
+  for (const key of ["blood-demand", "ot-delays"]) {
     assert.equal(PREDICTORS[key].wired, false, key);
     assert.ok(PREDICTORS[key].reason, key);
   }
@@ -120,6 +121,66 @@ test("5. discharge-volume is predicted from REAL Encounter periodEnd dates, thro
     await RECORD.append(TENANT.id, [{ resourceType: "Encounter", id: `predict-enc-${d}`, version: 1, patientId: `predict-pat-${d}`, class: "IPD", status: "discharged", identifiers: [], periodStart: dischargedAt, periodEnd: dischargedAt, meta: meta() }]);
   }
   const r = await call(DOCTOR, `/ward/twin-predict?orgId=${ORG}&metric=discharge-volume&lookbackDays=14`);
+  assert.equal(r.__status, 200, JSON.stringify(r));
+  assert.equal(r.ok, true);
+  assert.ok(r.prediction.pointEstimate >= 0);
+  assert.equal(r.prediction.inputWindow.sampleSize > 0, true);
+});
+
+/* ---- 5b-5e: the four predictors wired 2026-09-10, the same real-data-through-the-real-route proof --- */
+
+test("5b. bed-demand is predicted from REAL Encounter periodStart dates, through the real route", async () => {
+  seed();
+  const now = Date.parse("2026-09-10T08:00:00.000Z");
+  for (let d = 0; d < 10; d++) {
+    const admittedAt = new Date(now - d * 86400000).toISOString();
+    await RECORD.append(TENANT.id, [{ resourceType: "Encounter", id: `predict-bed-${d}`, version: 1, patientId: `predict-bed-pat-${d}`, class: "IPD", status: "in-progress", identifiers: [], periodStart: admittedAt, periodEnd: null, meta: meta() }]);
+  }
+  const r = await call(DOCTOR, `/ward/twin-predict?orgId=${ORG}&metric=bed-demand&lookbackDays=14`);
+  assert.equal(r.__status, 200, JSON.stringify(r));
+  assert.equal(r.ok, true);
+  assert.ok(r.prediction.pointEstimate >= 0);
+  assert.equal(r.prediction.inputWindow.sampleSize > 0, true);
+});
+
+test("5c. ed-load is predicted from REAL ED-class Encounters, and a non-ED admission never counts", async () => {
+  seed();
+  const now = Date.parse("2026-09-10T08:00:00.000Z");
+  for (let d = 0; d < 10; d++) {
+    const arrivedAt = new Date(now - d * 86400000).toISOString();
+    await RECORD.append(TENANT.id, [{ resourceType: "Encounter", id: `predict-ed-${d}`, version: 1, patientId: `predict-ed-pat-${d}`, class: "ED", status: "in-progress", identifiers: [], periodStart: arrivedAt, periodEnd: null, meta: meta() }]);
+    // An IPD admission on the SAME day must not inflate the ED count.
+    await RECORD.append(TENANT.id, [{ resourceType: "Encounter", id: `predict-ipd-${d}`, version: 1, patientId: `predict-ipd-pat-${d}`, class: "IPD", status: "in-progress", identifiers: [], periodStart: arrivedAt, periodEnd: null, meta: meta() }]);
+  }
+  const r = await call(DOCTOR, `/ward/twin-predict?orgId=${ORG}&metric=ed-load&lookbackDays=14`);
+  assert.equal(r.__status, 200, JSON.stringify(r));
+  assert.equal(r.ok, true);
+  assert.equal(r.prediction.pointEstimate, 1, "one ED arrival a day, never the two encounters combined");
+});
+
+test("5d. diagnostic-workload is predicted from REAL ServiceRequest lab/imaging orders, and other categories are excluded", async () => {
+  seed();
+  const now = Date.parse("2026-09-10T08:00:00.000Z");
+  for (let d = 0; d < 10; d++) {
+    const orderedAt = new Date(now - d * 86400000).toISOString();
+    await RECORD.append(TENANT.id, [{ resourceType: "ServiceRequest", id: `predict-lab-${d}`, version: 1, patientId: `predict-dx-pat-${d}`, code: "58410-2", category: "laboratory", priority: "routine", requesterId: "cfa:doc", status: "active", meta: { ...meta(), effectiveAt: orderedAt } }]);
+    // A referral is a real ServiceRequest too, but is not diagnostic workload and must not count.
+    await RECORD.append(TENANT.id, [{ resourceType: "ServiceRequest", id: `predict-ref-${d}`, version: 1, patientId: `predict-dx-pat-${d}`, code: "REF-1", category: "referral", priority: "routine", requesterId: "cfa:doc", status: "active", meta: { ...meta(), effectiveAt: orderedAt } }]);
+  }
+  const r = await call(DOCTOR, `/ward/twin-predict?orgId=${ORG}&metric=diagnostic-workload&lookbackDays=14`);
+  assert.equal(r.__status, 200, JSON.stringify(r));
+  assert.equal(r.ok, true);
+  assert.equal(r.prediction.pointEstimate, 1, "one lab order a day, never the referral alongside it");
+});
+
+test("5e. pharmacy-workload is predicted from REAL MedicationDispense.dispensedAt, not the order date", async () => {
+  seed();
+  const now = Date.parse("2026-09-10T08:00:00.000Z");
+  for (let d = 0; d < 10; d++) {
+    const dispensedAt = new Date(now - d * 86400000).toISOString();
+    await RECORD.append(TENANT.id, [{ resourceType: "MedicationDispense", id: `predict-disp-${d}`, version: 1, patientId: `predict-rx-pat-${d}`, orderId: `predict-ord-${d}`, drug: "Amoxicillin", quantity: { value: 30, unit: "tablet" }, state: "issued", dispensedBy: "cfa:pharm", dispensedAt, source: { system: "wardsynq-native", sourceId: `predict-disp-${d}` } }]);
+  }
+  const r = await call(DOCTOR, `/ward/twin-predict?orgId=${ORG}&metric=pharmacy-workload&lookbackDays=14`);
   assert.equal(r.__status, 200, JSON.stringify(r));
   assert.equal(r.ok, true);
   assert.ok(r.prediction.pointEstimate >= 0);

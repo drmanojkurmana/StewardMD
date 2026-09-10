@@ -90,3 +90,40 @@ test("named channels are attempted in the order given, and only those", async ()
   await d.send({}, ["c", "a"]);
   assert.deepEqual(order, ["c", "a"]);
 });
+
+/* ---- retry, added 2026-09-10: opt-in, bounded, and provably zero-impact when not asked for ------ */
+
+test("RETRY: with no opts, behaviour is EXACTLY as before - one attempt, no retriesUsed field at all", async () => {
+  let calls = 0;
+  const d = new Dispatcher({ now, channels: { pager: async () => { calls++; return { delivered: false }; } } });
+  const { attempts } = await d.send({});
+  assert.equal(calls, 1, "no retry happened just because the feature exists");
+  assert.equal("retriesUsed" in attempts[0], false, "the shape is unchanged for a caller that never asked for retry - every existing consumer of this file sees nothing new");
+});
+
+test("RETRY: a channel that fails twice then succeeds is recorded as DELIVERED, with the real attempt count", async () => {
+  let calls = 0;
+  const d = new Dispatcher({ now, channels: { pager: async () => { calls++; return calls < 3 ? { delivered: false, detail: "transient" } : { delivered: true, receipt: "OK-3" }; } } });
+  const { delivered, attempts } = await d.send({}, undefined, { retries: 3 });
+  assert.equal(delivered, true, "the eventual success is what gets recorded, not the earlier failures");
+  assert.equal(calls, 3);
+  assert.equal(attempts[0].receipt, "OK-3", "the DELIVERING attempt's own receipt, not a stale one from an earlier failure");
+  assert.equal(attempts[0].retriesUsed, 2, "two retries were actually needed before it landed");
+});
+
+test("RETRY: a channel that fails every time is STILL recorded as failed, honestly - retry never fakes delivery", async () => {
+  let calls = 0;
+  const d = new Dispatcher({ now, channels: { pager: async () => { calls++; throw new Error("gateway down"); } } });
+  const { delivered, attempts } = await d.send({}, undefined, { retries: 3 });
+  assert.equal(delivered, false);
+  assert.equal(calls, 4, "the original attempt plus all 3 retries were genuinely made");
+  assert.equal(attempts[0].retriesUsed, 3);
+  assert.match(attempts[0].detail, /gateway down/);
+});
+
+test("RETRY: the count is clamped, so a caller cannot turn one notification into an unbounded loop", async () => {
+  let calls = 0;
+  const d = new Dispatcher({ now, channels: { pager: async () => { calls++; return { delivered: false }; } } });
+  await d.send({}, undefined, { retries: 999 });
+  assert.ok(calls <= 6, `clamped to a small bound, not ${calls} real attempts against a real provider`);
+});

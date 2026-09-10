@@ -365,3 +365,83 @@ test("18. the twin needs no reconciliation, because it is never cached: a write 
   const after = await call(DOCTOR, `/ward/twin?orgId=${ORG}`);
   assert.equal(after.twin.sections.emergency.data.any, true, "a write between two reads must be visible on the second read with no delay, no cache and nothing to reconcile");
 });
+
+/* ---- 19: OT utilisation, real, moved out of NOT_BUILT 2026-09-10 -------------------------------- */
+
+test("19. OT utilisation distinguishes NOT CONFIGURED from CONFIGURED-BUT-IDLE from REAL BOOKED TIME", async () => {
+  // No theatres configured at all: an honest zero-configured state, never confused with idle ones.
+  seed();
+  const noneConfigured = await call(DOCTOR, `/ward/twin?orgId=${ORG}`);
+  assert.equal(noneConfigured.twin.sections.otUtilisation.data.theatresConfigured, 0);
+  assert.equal(noneConfigured.twin.sections.otUtilisation.data.overallUtilisation, null, "no theatres means no utilisation FIGURE, not a fabricated zero");
+  assert.ok(!("otUtilisation" in noneConfigured.twin.notBuilt), "it left the NOT_BUILT list: this IS built now, whatever this hospital has configured");
+
+  // A theatre IS configured, but nothing has been booked in the last 24h: a real, honest zero.
+  seed({ wardsynq: { resources: [{ id: "ot-1", name: "Theatre 1", kind: "theatre" }] } });
+  const idle = await call(DOCTOR, `/ward/twin?orgId=${ORG}`);
+  assert.equal(idle.twin.sections.otUtilisation.data.theatresConfigured, 1);
+  assert.equal(idle.twin.sections.otUtilisation.data.overallUtilisation, 0, "configured and genuinely idle IS zero, distinct from not-configured's null");
+
+  // A real booking exists NOW, inside the trailing-24h window: real utilisation, computed from a
+  // real ResourceBooking row - never fabricated, never a second source of truth.
+  const startAt = new Date(Date.now() - 30 * 60000).toISOString();   // started 30 minutes ago
+  const booked = await call(DOCTOR, "/ward/book-resource", "POST", { orgId: ORG, resourceId: "ot-1", startAt, minutes: 120 });
+  assert.equal(booked.__status, 200, JSON.stringify(booked));
+
+  const live = await call(DOCTOR, `/ward/twin?orgId=${ORG}`);
+  const ot = live.twin.sections.otUtilisation.data;
+  assert.equal(ot.perTheatre[0].resourceId, "ot-1");
+  assert.equal(ot.perTheatre[0].bookedMinutes, 120, "the twin's minutes ARE the booking's own minutes, not re-derived");
+  assert.ok(ot.overallUtilisation > 0 && ot.overallUtilisation <= 1, `real committed time now shows as real utilisation: ${ot.overallUtilisation}`);
+
+  // A CANCELLED booking never counts - it never occupied the theatre, whatever its length was.
+  // Non-overlapping with the live booking above (ends 3h before it starts), or the write itself
+  // would be refused as a clash - resource-booking.js's own real concurrency rule, unrelated to
+  // what this test is proving.
+  await call(DOCTOR, "/ward/book-resource", "POST", { orgId: ORG, resourceId: "ot-1", startAt: new Date(Date.now() - 8 * 3600000).toISOString(), minutes: 300 });
+  const cancelId = (await call(DOCTOR, `/ward/resource-schedule?orgId=${ORG}`)).resources[0].bookings.find((b) => b.minutes === 300).bookingId;
+  await call(DOCTOR, "/ward/resource-state", "POST", { orgId: ORG, bookingId: cancelId, state: "cancelled", reason: "Case postponed." });
+  const afterCancel = await call(DOCTOR, `/ward/twin?orgId=${ORG}`);
+  assert.equal(afterCancel.twin.sections.otUtilisation.data.perTheatre[0].bookedMinutes, 120, "the cancelled 600-minute booking contributes NOTHING to utilisation");
+});
+
+/* ---- 20: the operational health / SLO report, real, over records already written --------------- */
+
+test("20. operational health reports REAL notification delivery, from the SAME records break-glass and critical-results already stamped", async () => {
+  seed();
+  await patient("twin-pat-20");
+
+  // Nothing has happened yet: real zero-sample, not a fabricated rate.
+  const empty = await call(ADMIN, `/ward/operational-health?orgId=${ORG}`);
+  assert.equal(empty.__status, 200, JSON.stringify(empty));
+  assert.equal(empty.health.notifications.count, 0);
+  assert.equal(empty.health.notifications.rate, null, "no sample means no rate, never a fabricated 0% or 100%");
+
+  // A break-glass declaration with no channel wired: honestly attempted, honestly undelivered - the
+  // SAME record wardsynq-inpatient-emar.test.mjs's own notification tests already proved.
+  await call(DOCTOR, "/ward/break-glass", "POST", { orgId: ORG, patientId: "twin-pat-20", reason: "Found unresponsive, treating team unreachable." });
+
+  const after = await call(ADMIN, `/ward/operational-health?orgId=${ORG}`);
+  assert.equal(after.health.notifications.count, 1);
+  assert.equal(after.health.notifications.rate, 0, "one attempt, honestly undelivered with no channel configured");
+});
+
+test("21. operational health names its own gap rather than pretending to cover request-level metrics", async () => {
+  seed();
+  const r = await call(ADMIN, `/ward/operational-health?orgId=${ORG}`);
+  assert.deepEqual(r.health.excludedFromThisReport, ["request-error-rate", "request-latency"]);
+});
+
+test("22. operational health is STAFF_ADMIN-gated, not an ordinary clinical read", async () => {
+  seed();
+  const asDoctor = await call(DOCTOR, `/ward/operational-health?orgId=${ORG}`);
+  assert.equal(asDoctor.__status, 403, "an ordinary clinician - EMR_VIEW/EMR_TREAT - cannot read this; it is forensic reach, the same tier twin-reconstruct already uses");
+  const asAdmin = await call(ADMIN, `/ward/operational-health?orgId=${ORG}`);
+  assert.equal(asAdmin.__status, 200);
+});
+
+test("23. ADVERSARIAL: operational health never carries another hospital's state - it inherits tenant isolation, never re-implements it", async () => {
+  seed();
+  const outsider = await call(OUTSIDER, `/ward/operational-health?orgId=${ORG}`);
+  assert.equal(outsider.__status, 403, "hospital B has no membership in hospital A's org - refused before any capability is even checked");
+});

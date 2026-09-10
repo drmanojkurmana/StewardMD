@@ -124,16 +124,122 @@ async function predictCriticalBacklog(svc, { lookbackDays = 7, horizonDays = 1, 
   return governedPrediction({ metric: "critical-backlog", samples, horizonDays, generatedAt: new Date(nowMs).toISOString() });
 }
 
-/** The honest inventory. Every key the plan names; only the ones with a real function are wired. */
+/**
+ * TASK-10.12, wired 2026-09-10: bed demand. Samples = one point per day, value = count of Encounter
+ * rows whose periodStart falls on that day - the admission's own real timestamp, the mirror of
+ * predictDischargeVolume's periodEnd above.
+ */
+async function predictBedDemand(svc, { lookbackDays = 14, horizonDays = 1, now } = {}) {
+  const nowMs = Number.isFinite(now) ? now : Date.now();
+  const fromMs = nowMs - lookbackDays * 86400000;
+  let encounters;
+  try { encounters = await svc.list("Encounter", 2000); }
+  catch (e) { return { ok: false, metric: "bed-demand", error: "record_read_failed", detail: str(e && e.message), prediction: null }; }
+
+  const byDay = new Map();
+  for (const e of (encounters || [])) {
+    if (!e || !e.periodStart) continue;
+    const t = Date.parse(e.periodStart);
+    if (!Number.isFinite(t) || t < fromMs || t > nowMs) continue;
+    const day = new Date(t).toISOString().slice(0, 10);
+    byDay.set(day, (byDay.get(day) || 0) + 1);
+  }
+  const samples = [...byDay.entries()].sort(([a], [b]) => a.localeCompare(b)).map(([day, count]) => ({ atIso: `${day}T00:00:00.000Z`, value: count }));
+  return governedPrediction({ metric: "bed-demand", samples, horizonDays, generatedAt: new Date(nowMs).toISOString() });
+}
+
+/**
+ * TASK-10.12, wired 2026-09-10: ED load. The SAME periodStart the bed-demand predictor reads, once
+ * more filtered to `class === "ED"` - an ED arrival IS an Encounter with that class, the same fact
+ * migrate-ed.js's own admission already asserts; never a second detection rule for what counts.
+ */
+async function predictEdLoad(svc, { lookbackDays = 14, horizonDays = 1, now } = {}) {
+  const nowMs = Number.isFinite(now) ? now : Date.now();
+  const fromMs = nowMs - lookbackDays * 86400000;
+  let encounters;
+  try { encounters = await svc.list("Encounter", 2000); }
+  catch (e) { return { ok: false, metric: "ed-load", error: "record_read_failed", detail: str(e && e.message), prediction: null }; }
+
+  const byDay = new Map();
+  for (const e of (encounters || [])) {
+    if (!e || e.class !== "ED" || !e.periodStart) continue;
+    const t = Date.parse(e.periodStart);
+    if (!Number.isFinite(t) || t < fromMs || t > nowMs) continue;
+    const day = new Date(t).toISOString().slice(0, 10);
+    byDay.set(day, (byDay.get(day) || 0) + 1);
+  }
+  const samples = [...byDay.entries()].sort(([a], [b]) => a.localeCompare(b)).map(([day, count]) => ({ atIso: `${day}T00:00:00.000Z`, value: count }));
+  return governedPrediction({ metric: "ed-load", samples, horizonDays, generatedAt: new Date(nowMs).toISOString() });
+}
+
+/**
+ * TASK-10.12, wired 2026-09-10: diagnostic workload. Samples = one point per day, value = count of
+ * ServiceRequest rows dated that day whose category is laboratory or imaging - the SAME category
+ * field the LIS/radiology routes already read, never a second classification.
+ */
+async function predictDiagnosticWorkload(svc, { lookbackDays = 14, horizonDays = 1, now } = {}) {
+  const nowMs = Number.isFinite(now) ? now : Date.now();
+  const fromMs = nowMs - lookbackDays * 86400000;
+  let orders;
+  try { orders = await svc.list("ServiceRequest", 2000); }
+  catch (e) { return { ok: false, metric: "diagnostic-workload", error: "record_read_failed", detail: str(e && e.message), prediction: null }; }
+
+  const byDay = new Map();
+  for (const o of (orders || [])) {
+    if (!o || (o.category !== "laboratory" && o.category !== "imaging")) continue;
+    const t = Date.parse((o.meta && o.meta.effectiveAt) || (o.meta && o.meta.recordedAt) || "");
+    if (!Number.isFinite(t) || t < fromMs || t > nowMs) continue;
+    const day = new Date(t).toISOString().slice(0, 10);
+    byDay.set(day, (byDay.get(day) || 0) + 1);
+  }
+  const samples = [...byDay.entries()].sort(([a], [b]) => a.localeCompare(b)).map(([day, count]) => ({ atIso: `${day}T00:00:00.000Z`, value: count }));
+  return governedPrediction({ metric: "diagnostic-workload", samples, horizonDays, generatedAt: new Date(nowMs).toISOString() });
+}
+
+/**
+ * TASK-10.12, wired 2026-09-10: pharmacy workload. Samples = one point per day, value = count of
+ * MedicationDispense rows whose OWN dispensedAt falls on that day - pharmacy-dispense.js's real
+ * bedside-verified issue timestamp, never an order date standing in for it.
+ */
+async function predictPharmacyWorkload(svc, { lookbackDays = 14, horizonDays = 1, now } = {}) {
+  const nowMs = Number.isFinite(now) ? now : Date.now();
+  const fromMs = nowMs - lookbackDays * 86400000;
+  let dispenses;
+  try { dispenses = await svc.list("MedicationDispense", 2000); }
+  catch (e) { return { ok: false, metric: "pharmacy-workload", error: "record_read_failed", detail: str(e && e.message), prediction: null }; }
+
+  const byDay = new Map();
+  for (const d of (dispenses || [])) {
+    if (!d || !d.dispensedAt) continue;
+    const t = Date.parse(d.dispensedAt);
+    if (!Number.isFinite(t) || t < fromMs || t > nowMs) continue;
+    const day = new Date(t).toISOString().slice(0, 10);
+    byDay.set(day, (byDay.get(day) || 0) + 1);
+  }
+  const samples = [...byDay.entries()].sort(([a], [b]) => a.localeCompare(b)).map(([day, count]) => ({ atIso: `${day}T00:00:00.000Z`, value: count }));
+  return governedPrediction({ metric: "pharmacy-workload", samples, horizonDays, generatedAt: new Date(nowMs).toISOString() });
+}
+
+/** The honest inventory. Every key the plan names; only the ones with a real function are wired.
+ *
+ * FIVE OF SEVEN WIRED as of 2026-09-10, using the SAME primitive and the SAME technique as the
+ * original two - a real per-day count from a field this codebase already writes, never a second
+ * detection rule and never a fabricated number. blood-demand and ot-delays remain honestly unwired:
+ * blood-demand because no blood-inventory data exists anywhere to predict FROM (digital-twin.js's
+ * own NOT_BUILT.bloodBank names the same gap). ot-delays is NOT the same metric digital-twin.js's
+ * new otUtilisation section computes - a DELAY is actual start minus SCHEDULED start, and nothing in
+ * this codebase records a surgical case's actual incision time in a form this file can read
+ * alongside its own booking; wiring it against booking volume instead would be answering a
+ * question nobody asked under the name of the one that was. */
 const PREDICTORS = Object.freeze({
   "discharge-volume": { wired: true, fn: predictDischargeVolume },
   "critical-backlog": { wired: true, fn: predictCriticalBacklog },
-  "bed-demand": { wired: false, reason: "not built - the primitive (governedPrediction) is proven by the two metrics above; this instance is not wired." },
-  "ed-load": { wired: false, reason: "not built" },
-  "diagnostic-workload": { wired: false, reason: "not built" },
-  "pharmacy-workload": { wired: false, reason: "not built" },
+  "bed-demand": { wired: true, fn: predictBedDemand },
+  "ed-load": { wired: true, fn: predictEdLoad },
+  "diagnostic-workload": { wired: true, fn: predictDiagnosticWorkload },
+  "pharmacy-workload": { wired: true, fn: predictPharmacyWorkload },
   "blood-demand": { wired: false, reason: "not built - no blood-inventory data source exists to predict from (see digital-twin.js NOT_BUILT.bloodBank)" },
-  "ot-delays": { wired: false, reason: "not built - no theatre-utilisation data source exists to predict from" },
+  "ot-delays": { wired: false, reason: "not built - this is SCHEDULED-vs-ACTUAL start, not booking volume (digital-twin.js's otUtilisation, added 2026-09-10, answers volume/utilisation, a different question); no field records a case's actual incision time for this file to compare against its booking" },
 });
 
 /**
@@ -170,4 +276,4 @@ async function predictMetric(request, env, ctx) {
   return { ...base, ...r };
 }
 
-export { MODEL_ID, governedPrediction, predictDischargeVolume, predictCriticalBacklog, PREDICTORS, predictMetric };
+export { MODEL_ID, governedPrediction, predictDischargeVolume, predictCriticalBacklog, predictBedDemand, predictEdLoad, predictDiagnosticWorkload, predictPharmacyWorkload, PREDICTORS, predictMetric };

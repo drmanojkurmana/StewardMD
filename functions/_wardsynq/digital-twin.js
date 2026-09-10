@@ -41,6 +41,7 @@ import { emergencyStatus, emergencyLog } from "./emergency-mode.js";
 import { listBlackouts } from "./blackout.js";
 import { listCriticalLoops } from "./critical-results.js";
 import { isOutstanding } from "./specimen.js";
+import { resourceSchedule } from "./resource-booking.js";
 import { resolveClinicalActor } from "./actor.js";
 import { RecordService } from "./service.js";
 import { AuthError, PermissionError } from "../_connect/permission.js";
@@ -68,11 +69,16 @@ function freshnessOf(ageMs, thresholds) {
 
 /** Sections that were never built. Named individually, with WHY - the same discipline patient-flow.js
  *  already applies to "no expected discharge date" and "no bottleneck-severity algorithm". A reader
- *  must never be able to mistake "we didn't build this" for "we checked, and it's zero". */
+ *  must never be able to mistake "we didn't build this" for "we checked, and it's zero".
+ *
+ *  otUtilisation MOVED OUT of this list on 2026-09-10: resource-booking.js's ResourceBooking rows
+ *  carry a real `kind` ("theatre" among them) and a real committed duration, which is enough to
+ *  compute utilisation honestly - see the otUtilisation section below. bloodBank and radiologyQueue
+ *  remain here because no such data exists anywhere in this codebase to compute from; ResourceBooking
+ *  covers rooms/theatres/equipment BOOKINGS, never a blood-product count or an imaging backlog. */
 const NOT_BUILT = Object.freeze({
   bloodBank: "no blood-product inventory module exists in this codebase - migrate-transfusion.js records transfusions given, not units held.",
   radiologyQueue: "no hospital-wide radiology/PACS backlog aggregator exists - radiology-protocol.js works per-study, and building a second queue model here would duplicate whatever the real one turns out to need.",
-  otUtilisation: "no theatre-utilisation aggregator exists - resource-booking.js records individual bookings and would need its own utilisation logic; that belongs in that file, not invented here as a shortcut.",
 });
 
 /**
@@ -147,7 +153,36 @@ async function buildTwinSnapshot(request, env, ctx) {
     return { ok: true, generatedAt: new Date().toISOString(), outstanding: outstanding.length, checked: (rows || []).length };
   }, request, env, ctx);
 
-  const sections = { flow, clinicalOps, criticals, emergency, blackouts, pharmacy, him, lis };
+  /* OT UTILISATION, real, from resource-booking.js's own ResourceBooking rows - reused, never
+   * recomputed. "Configured" and "no bookings" are kept visibly apart: a hospital that has not
+   * entered its theatres in wsqCfg.resources must never read the same as one with three idle
+   * theatres, and an org that HAS theatres but genuinely booked none in the window is a real,
+   * honest zero - not the same thing as either. A committed booking counts ("booked" or
+   * "completed"); a cancelled one does not, because it never occupied the theatre. The window is
+   * the trailing 24h ending now, a live operational snapshot rather than a historical report. */
+  const otUtilisation = await section("otUtilisation", ["ResourceBooking"], async (rq, e, c) => {
+    const to = new Date();
+    const from = new Date(to.getTime() - 24 * 3600000);
+    const r = await resourceSchedule(rq, e, { ...c, resourceId: "", from: from.toISOString(), to: to.toISOString() });
+    if (!r.ok) return r;
+    const theatres = (r.resources || []).filter((res) => res.kind === "theatre");
+    const windowMinutes = (to.getTime() - from.getTime()) / 60000;
+    const perTheatre = theatres.map((t) => {
+      const bookedMinutes = (t.bookings || []).filter((b) => b.state === "booked" || b.state === "completed")
+        .reduce((sum, b) => sum + (Number(b.minutes) || 0), 0);
+      return { resourceId: t.id, name: t.name, bookedMinutes, utilisation: windowMinutes > 0 ? Math.min(1, bookedMinutes / windowMinutes) : null };
+    });
+    const totalBooked = perTheatre.reduce((s, t) => s + t.bookedMinutes, 0);
+    return {
+      ok: true, generatedAt: new Date().toISOString(),
+      theatresConfigured: theatres.length,
+      windowFrom: from.toISOString(), windowTo: to.toISOString(),
+      perTheatre,
+      overallUtilisation: theatres.length > 0 ? Math.min(1, totalBooked / (windowMinutes * theatres.length)) : null,
+    };
+  }, request, env, ctx);
+
+  const sections = { flow, clinicalOps, criticals, emergency, blackouts, pharmacy, him, lis, otUtilisation };
 
   if (ctx.includeFinance) {
     const [billing, claims] = await Promise.all([
@@ -248,4 +283,99 @@ async function reconstructTwinAsOf(request, env, ctx, atIso) {
   };
 }
 
-export { FRESHNESS, NOT_BUILT, freshnessOf, buildTwinSnapshot, reconstructTwinAsOf };
+/**
+ * TASK 10 observability pass, 2026-09-10: the application-side SLO/health contract, over what this
+ * codebase ALREADY DURABLY RECORDS.
+ *
+ * THIS IS NOT A SECOND DATASTORE, and the distinction matters: observability.js emits transient,
+ * PHI-free lines for Cloudflare's own log capture to hold (request errors, latency) - correctly NOT
+ * re-persisted here, because a second store of THAT is exactly the duplicate infrastructure this
+ * codebase refuses to invent. What follows is different: MaiKInteraction, BreakGlassGrant and
+ * CriticalResultLoop are ALREADY governed clinical records, written once, for their own reasons, and
+ * this composes real ratios OVER them - the same fusion discipline buildTwinSnapshot() already
+ * applies to census and criticals, extended to "is the service itself healthy" rather than "what is
+ * the hospital state". Nothing here is a new field, a new write, or a new resource type.
+ *
+ * EVERY NUMBER NAMES ITS OWN SAMPLE SIZE. A 0% delivery rate over zero notifications is not the same
+ * fact as 0% over five hundred, and collapsing them would be the exact "counted vs. judged" mistake
+ * the rest of this file already refuses to make.
+ */
+async function operationalHealthReport(request, env, ctx) {
+  const mig = ctx.migration;
+  const base = { mode: mig && mig.mode, tenantId: (mig && mig.tenantId) || null };
+  if (!mig || mig.mode === "off") return { ...base, ok: true, skipped: "off", health: null };
+
+  let resolved;
+  try {
+    resolved = await resolveClinicalActor(request, env, mig.tenantId, "record:read", ctx.actorDeps);
+  } catch (e) {
+    const status = e instanceof AuthError ? 401 : e instanceof PermissionError ? 403 : 502;
+    return { ...base, ok: false, status, error: e instanceof AuthError ? "auth" : e instanceof PermissionError ? "permission" : "error", detail: str(e && e.message) };
+  }
+  const svc = new RecordService({
+    repository: ctx.recordDeps.repository, pseudonym: ctx.recordDeps.pseudonym,
+    tenant: resolved.tenant, actor: resolved.actor, role: resolved.role, roleSource: resolved.source,
+  });
+
+  const rate = (numerator, denominator) => ({
+    count: denominator,
+    // null, never 0/0 presented as a healthy zero: "no sample" and "sampled and perfect" must not
+    // read the same to whoever is watching this number.
+    rate: denominator > 0 ? Math.round((numerator / denominator) * 1000) / 1000 : null,
+  });
+
+  /* AI RELIABILITY, over MaiKInteraction rows this codebase already writes for accountability. A
+   * routing refusal (no approved model, MaiK disabled) is NEVER recorded - maik-interaction.js's own
+   * header states why: "there is nothing to record" - so this counts what IS recorded: an output the
+   * security screen withheld, and an injection signal a retrieved document tripped. Both are real
+   * near-misses this file did not invent a category for; they were always on the record. */
+  let ai = { status: "unavailable", error: null };
+  try {
+    const interactions = (await svc.list("MaiKInteraction", 1000)) || [];
+    const withheld = interactions.filter((i) => i && i.security && i.security.released === false).length;
+    const injectionSignals = interactions.reduce((n, i) => n + ((i && i.security && i.security.injectionFindings) || []).length, 0);
+    ai = { status: "ok", interactionsSampled: interactions.length, withheldRate: rate(withheld, interactions.length), injectionSignalsObserved: injectionSignals };
+  } catch (e) { ai = { status: "unavailable", error: str(e && e.message) }; }
+
+  /* NOTIFICATION RELIABILITY, over the SAME `notification` shape wardsynq-notify.js's Dispatcher
+   * already stamps onto BreakGlassGrant and CriticalResultLoop - never re-derived, the exact object
+   * each write already recorded before this report ever ran. */
+  let notifications = { status: "unavailable", error: null };
+  try {
+    const [grants, loops] = await Promise.all([
+      svc.list("BreakGlassGrant", 500).catch(() => []),
+      svc.list("CriticalResultLoop", 500).catch(() => []),
+    ]);
+    const attempts = [...grants, ...loops].filter((r) => r && r.notification && r.notification.attempted);
+    const delivered = attempts.filter((r) => r.notification.delivered === true).length;
+    notifications = { status: "ok", ...rate(delivered, attempts.length) };
+  } catch (e) { notifications = { status: "unavailable", error: str(e && e.message) }; }
+
+  /* DIGITAL TWIN FRESHNESS, from a REAL live twin read taken for this report - not a cached number,
+   * because there is no twin store to cache from (see this file's own header). sectionsOk/Total are
+   * already the twin's own counted-not-judged health figure; this just names it as one. */
+  let twin = { status: "unavailable", error: null };
+  try {
+    const snap = await buildTwinSnapshot(request, env, ctx);
+    twin = snap.ok && snap.twin
+      ? { status: "ok", sectionsOk: snap.twin.sectionsOk, sectionsTotal: snap.twin.sectionsTotal, unavailable: snap.twin.unavailable }
+      : { status: "unavailable", error: snap.error || "twin_unavailable" };
+  } catch (e) { twin = { status: "unavailable", error: str(e && e.message) }; }
+
+  return {
+    ...base, ok: true,
+    health: {
+      generatedAt: new Date().toISOString(),
+      ai, notifications, twin,
+      /* WHAT THIS DOES NOT COVER, stated rather than left silent: request-level error rate and
+       * latency across the whole router are emitted by observability.js as transient log lines
+       * (Cloudflare's own capture, not a second store) and are NOT aggregated back into this report
+       * - doing so would mean this application re-implementing the log platform it already sits on.
+       * A hospital's Ops team consuming Cloudflare Logpush/Analytics Engine gets that half; this
+       * report is the half computed from WardSynQ's own governed records. */
+      excludedFromThisReport: ["request-error-rate", "request-latency"],
+    },
+  };
+}
+
+export { FRESHNESS, NOT_BUILT, freshnessOf, buildTwinSnapshot, reconstructTwinAsOf, operationalHealthReport };
