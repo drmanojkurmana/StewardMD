@@ -82,6 +82,31 @@ CREATE INDEX IF NOT EXISTS idx_wardsynq_patient_identifier_patient
 -- a records officer to merge, because silently choosing one of two charts is the failure this whole
 -- mechanism exists to prevent.
 
+-- THE FHIR HASHED-ID ALIAS INDEX (2026-09-10).
+--
+-- A canonical WardSynQ id that does not fit FHIR's id rules (or is longer than 64 characters) is
+-- published to the outside world as `wsq-<48 hex>`, a SHA-256 prefix - see functions/_wardsynq/
+-- fhir-id.js. That is a ONE-WAY function, so when the id comes back in on a read, a search or an
+-- If-None-Exist, it has to be turned back into the canonical id somehow.
+--
+-- Until this table it was turned back by SCANNING the latest SEARCH_POOL records of the type and
+-- hashing each one looking for a match - the same bounded-roster mistake the patient identity index
+-- exists to retire, and fhir.js's own comment predicted this table by name ("a persisted alias index
+-- if a hospital's roster outgrows it"). A resource outside the pool simply did not resolve: the read
+-- 404'd for a record that is right there. It fails CLOSED, so it never returned the WRONG record -
+-- but "we cannot find your patient" is still the wrong answer.
+--
+-- Written on append for exactly the ids that get hashed, so the common case (an id that conforms and
+-- is published verbatim) costs nothing at all.
+CREATE TABLE IF NOT EXISTS wardsynq_id_alias (
+  tenant_id     TEXT NOT NULL,
+  id_hash       TEXT NOT NULL,   -- the published `wsq-<48 hex>` form
+  resource_type TEXT NOT NULL,
+  id            TEXT NOT NULL,   -- the canonical WardSynQ id it stands for
+  first_seen    TEXT NOT NULL,
+  PRIMARY KEY (tenant_id, id_hash)
+);
+
 -- Idempotency: a client that retries a write after a lost response gets the SAME outcome, not a
 -- second version. Keyed per tenant so one hospital's keys can never collide with another's.
 CREATE TABLE IF NOT EXISTS wardsynq_idempotency (

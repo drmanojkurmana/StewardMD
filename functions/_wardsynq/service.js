@@ -622,6 +622,19 @@ class RecordService {
     return rows;
   }
 
+  /**
+   * The canonical id behind a published `wsq-<hash>` FHIR id, or null.
+   *
+   * Reading is NOT authorised here and deliberately so: this resolves an id to an id, discloses no
+   * record content, and every caller immediately does a governed get()/byPatient() that applies the
+   * actor's own read scope. Gating the lookup itself would only turn "you may not read this" into
+   * "no such resource", which is a worse answer to the same question.
+   */
+  async resolveIdHash(idHash) {
+    const hit = await this.repository.idByHash(this.tenantId, String(idHash || ""));
+    return hit || null;
+  }
+
   /** The whole chart: latest version of every resource in the patient's compartment. */
   async chart(patientId) {
     const out = {};

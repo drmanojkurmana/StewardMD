@@ -752,14 +752,30 @@ function toFhir(record) {
 
 /**
  * A FHIR id back to the canonical id it stands for, through the governed reads: verbatim when it
- * was never hashed, from the alias cache when this isolate exported it, else by scanning what the
- * actor may read (the patient's compartment when one is known, otherwise the latest SEARCH_POOL of
- * the type). ponytail: pool scan; a persisted alias index if a hospital's roster outgrows it.
+ * was never hashed, from the alias cache when this isolate exported it, then from the PERSISTED
+ * alias index (wardsynq_id_alias), and only then by scanning what the actor may read.
+ *
+ * The persisted index arrived 2026-09-10 and is what this file's own note asked for. The pool scan
+ * is kept behind it as a fallback for rows written before the index existed and not yet reindexed;
+ * it is no longer the only way a published id can be resolved.
  */
 async function resolveId(svc, canonical, fid, hint) {
   const id = str(fid);
   if (!id || !isHashedId(id)) return id;
   if (ALIASES.has(id)) return ALIASES.get(id);
+
+  /* THE PERSISTED ALIAS INDEX, which is what the pool scan below was always a stand-in for. An
+   * index seek, tenant-scoped, and the same cost whatever the hospital holds - so a resource that
+   * simply fell outside the roster stops resolving to nothing and 404-ing for a record that is
+   * right there. The type is checked: a hash that names a resource of ANOTHER type is not this
+   * resource, and returning it would hand a caller the wrong record under a right-looking id. */
+  if (typeof svc.resolveIdHash === "function") {
+    try {
+      const hit = await svc.resolveIdHash(id);
+      if (hit && hit.id && (!canonical || hit.resourceType === canonical)) { remember(id, str(hit.id)); return str(hit.id); }
+    } catch { /* an unreadable index falls through to the scan below, never to a wrong answer */ }
+  }
+
   const rows = [];
   try {
     if (hint && str(hint.patientId) && canonical !== "Patient") rows.push(...((await svc.byPatient(canonical, str(hint.patientId))) || []));

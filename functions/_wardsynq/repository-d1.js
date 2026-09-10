@@ -15,6 +15,15 @@
 
 import { VersionConflictError, IdentityConflictError, RepositoryError, rowOf, rosterLimit } from "./repository.js";
 import { patientIdentifierKeys } from "./identity-key.js";
+import { fhirId } from "./fhir-id.js";
+
+/** PURE. The published hashed form of a record id, or null when it is published verbatim. */
+function aliasFor(record) {
+  const id = record && typeof record.id === "string" ? record.id : "";
+  if (!id) return null;
+  const published = fhirId(id);
+  return published && published !== id ? published : null;
+}
 import { scrubPhi } from "../_connect/abdm/no-phi.js";
 
 const AUDIT_INSERT = "INSERT INTO connect_audit_event (id,tenant_id,ts,actor,connector_id,action,resource_counts,scope,patient_ref_hash,latency_ms,outcome,consent_id,transaction_id,care_context_hash) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
@@ -232,6 +241,17 @@ class D1Repository {
   }
 
   /**
+   * The canonical id a published `wsq-<hash>` stands for, or null. INDEX SEEK on the primary key.
+   * @returns {Promise<{resourceType: string, id: string}|null>}
+   */
+  async idByHash(tenantId, idHash) {
+    const row = await this.db
+      .prepare("SELECT resource_type, id FROM wardsynq_id_alias WHERE tenant_id=? AND id_hash=?")
+      .bind(tenantId, idHash).first();
+    return row ? { resourceType: row.resource_type, id: row.id } : null;
+  }
+
+  /**
    * Populates the identity index from Patient rows written BEFORE the index existed. See the
    * MemoryRepository twin for why this is not optional.
    *
@@ -242,7 +262,29 @@ class D1Repository {
    */
   async reindexPatientIdentifiers(tenantId, opts) {
     const page = Math.max(1, Math.min(1000, Number(opts && opts.pageSize) || 500));
-    const out = { scanned: 0, indexed: 0, conflicts: [] };
+    const out = { scanned: 0, indexed: 0, conflicts: [], aliases: 0 };
+
+    /* The hashed-id alias index, rebuilt in the same run and over EVERY type rather than only
+     * Patient: a published id belongs to any resource FHIR can be asked to read back. Paged the
+     * same way, so a backfill is never itself the bounded scan it exists to retire. */
+    let aliasAfter = 0;
+    for (;;) {
+      const r = await this.db
+        .prepare("SELECT seq, resource_type, id FROM wardsynq_record WHERE tenant_id=? AND seq>? ORDER BY seq ASC LIMIT ?")
+        .bind(tenantId, aliasAfter, page).all();
+      const rows = r.results || [];
+      if (!rows.length) break;
+      for (const row of rows) {
+        aliasAfter = row.seq;
+        const alias = aliasFor({ id: row.id });
+        if (!alias) continue;
+        await this.db
+          .prepare("INSERT OR IGNORE INTO wardsynq_id_alias (tenant_id,id_hash,resource_type,id,first_seen) VALUES (?,?,?,?,?)")
+          .bind(tenantId, alias, row.resource_type, row.id, new Date().toISOString()).run();
+        out.aliases += 1;
+      }
+    }
+
     let after = 0;
     for (;;) {
       const r = await this.db
@@ -290,6 +332,17 @@ class D1Repository {
     }
     if (ctx.audit) stmts.push(this._auditStatement(tenantId, ctx.audit));
 
+    /* The published-id alias, for the ids FHIR cannot carry verbatim. OR IGNORE because the hash is
+     * a function of the id: a second row for one hash would mean a SHA-256 collision, not a claim,
+     * and it must never fail a clinical write. */
+    for (const rec of records) {
+      const alias = aliasFor(rec);
+      if (!alias) continue;
+      stmts.push(this.db
+        .prepare("INSERT OR IGNORE INTO wardsynq_id_alias (tenant_id,id_hash,resource_type,id,first_seen) VALUES (?,?,?,?,?)")
+        .bind(tenantId, alias, rec.resourceType, rec.id, new Date().toISOString()));
+    }
+
     /* THE IDENTITY INDEX. One indexed read for everything being claimed, then an insert per key
      * that nobody holds yet - inside the SAME atomic batch as the record rows, so the index and the
      * record can never disagree about who exists.
@@ -314,6 +367,25 @@ class D1Repository {
         stmts.push(this.db
           .prepare("INSERT INTO wardsynq_patient_identifier (tenant_id,system_key,value_norm,patient_id,first_seen) VALUES (?,?,?,?,?)")
           .bind(tenantId, w.systemKey, w.valueNorm, w.patientId, now));
+      }
+    }
+
+    /* AN IDENTIFIER REMOVED FROM A PATIENT RELEASES ITS CLAIM. Without this, correcting a mis-typed
+     * number was permanent and took the real owner down with it - the number stays claimed by the
+     * chart it was typed on by mistake, so the person it belongs to can never be created. Scoped to
+     * rows this patient owns (the (tenant_id, patient_id) index), so it is bounded and can never
+     * release somebody else's identifier. */
+    for (const rec of records) {
+      if (rec.resourceType !== "Patient") continue;
+      const kept = new Set(patientIdentifierKeys(rec).map((k) => `${k.systemKey}|${k.valueNorm}`));
+      const mine = await this.db
+        .prepare("SELECT system_key, value_norm FROM wardsynq_patient_identifier WHERE tenant_id=? AND patient_id=?")
+        .bind(tenantId, rec.id).all();
+      for (const row of mine.results || []) {
+        if (kept.has(`${row.system_key}|${row.value_norm}`)) continue;
+        stmts.push(this.db
+          .prepare("DELETE FROM wardsynq_patient_identifier WHERE tenant_id=? AND system_key=? AND value_norm=? AND patient_id=?")
+          .bind(tenantId, row.system_key, row.value_norm, rec.id));
       }
     }
 
