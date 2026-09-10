@@ -1,4 +1,4 @@
-// functions/api/connect/[[path]].js — StewardMD Connect HTTP surface (spec §8). Flag-gated; server-derived identity; no-store.
+// functions/api/connect/[[path]].js -- StewardMD Connect HTTP surface (spec §8). Flag-gated; server-derived identity; no-store.
 import { flagOn, jsonResponse } from "../../_connect/testkit.js";
 import { loadPatientContext, searchPatients, searchPractitioners, ingestEvent } from "../../_connect/engine.js";
 import { fhirR4Connector } from "../../_connect/connectors/fhir-r4/connector.js";
@@ -30,6 +30,7 @@ import { restFlagOn } from "../../_connect/connectors/rest-json/flags.js"; // pe
 import { dicomFlagOn } from "../../_connect/connectors/dicomweb/flags.js"; // per-track gate: smd_connect_dicom
 import { graphqlFlagOn } from "../../_connect/connectors/graphql/flags.js"; // per-track gate: smd_connect_graphql
 import { sqlFlagOn } from "../../_connect/connectors/sql/flags.js"; // per-track gate: smd_connect_sql
+import { browserSessionFlagOn } from "../../_connect/agent/flags.js"; // per-track gate: smd_connect_browser_session
 
 /* An ABDM gateway that did not accept is an UPSTREAM failure, not a bad request: 400 would tell a
  * caller to change something it got right, and would make a gateway outage look like a client bug. */
@@ -62,7 +63,7 @@ export async function onRequest(context) {
 
   if (path === "/health") return jsonResponse({ ok: true, service: "stewardmd-connect", phase: 0 });
   // ABDM HIU inbound webhook (Stage-4 Task-4, R6): ABDM-authenticated (no StewardMD actor). Identity is the
-  // verified body-signature + the correlation row — tenant from the row, never the body. Fetch is wired for
+  // verified body-signature + the correlation row -- tenant from the row, never the body. Fetch is wired for
   // getPinnedJwks; jwks is left unset so it is fetched+pinned per env.ABDM_JWKS_URL (fail-closed if unset).
   if (/^\/ingress\/abdm/.test(path)) {
     const deps = { db: env.CONNECT_DB, r2: env.CONNECT_R2, kv: env.MAIK_KV, secrets: makeSecrets(env),
@@ -179,7 +180,7 @@ export async function onRequest(context) {
 
   // ABDM HIP care-context REGISTRATION (Stage-5 Task-8, gated on the SECOND flag). Server-DERIVED identity:
   // linkCareContext resolves the actor + tenant membership (AuthError/PermissionError before any write) and
-  // HMACs the raw ABHA before D1 — the body carries the ABHA once, never a trusted tenant/actor. Idempotent.
+  // HMACs the raw ABHA before D1 -- the body carries the ABHA once, never a trusted tenant/actor. Idempotent.
   if (path === "/hip/care-contexts" && request.method === "POST") {
     if (!hipFlagOn(env)) return jsonResponse({ error: "not_found" }, { status: 404 });
     let body = {}; try { body = await request.json(); } catch {}
@@ -238,6 +239,8 @@ export async function onRequest(context) {
     if (req.connectorId === "graphql" && !graphqlFlagOn(env)) return jsonResponse({ error: "not_found" }, { status: 404 });
     // Track: a sql context request requires smd_connect_sql too, same per-track gate idiom.
     if (req.connectorId === "sql" && !sqlFlagOn(env)) return jsonResponse({ error: "not_found" }, { status: 404 });
+    // Track: a browser-session context request requires smd_connect_browser_session too.
+    if (req.connectorId === "browser-session" && !browserSessionFlagOn(env)) return jsonResponse({ error: "not_found" }, { status: 404 });
     // NOTE: engine derives actor via identify(request) and verifies membership for tenantId;
     // a body tenantId the actor is not a member of => PermissionError (no cross-tenant read).
     try {
