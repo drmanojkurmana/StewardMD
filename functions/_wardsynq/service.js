@@ -32,6 +32,7 @@
 import { ClinicalStore } from "../../wardsynq/wardsynq-store.js";
 import { GovernedStore, GovernanceError, canRead } from "../../wardsynq/wardsynq-actors.js";
 import { VersionConflictError, assertRepository } from "./repository.js";
+import { patientIdentifierKeys } from "./identity-key.js";
 import { actorFromConnectRole, aiActorFor, isAiOrigin } from "./actor.js";
 
 /** The canonical resource types. Mirrors wardsynq-model.js; a type not listed here is refused. */
@@ -590,6 +591,34 @@ class RecordService {
     this.governed._assertRead(this.actor, resourceType);
     const rows = await this.repository.latestByType(this.tenantId, resourceType, limit);
     await this.repository.auditOnly(this.tenantId, await this._audit("record.list", { scope: { resourceType, limit: Number(limit) || null }, resourceCounts: { [resourceType]: rows.length } }));
+    return rows;
+  }
+
+  /**
+   * Every local Patient that already carries one of this patient's identifiers.
+   *
+   * THE POINT IS WHAT THIS IS NOT. Identity reconciliation used to ask list("Patient", N) for a
+   * roster and scan it, so on a hospital with more patients than N a returning patient outside the
+   * roster was not found and a SECOND chart was created for them. This is an index seek whose cost
+   * is the number of identifiers offered - two or three - and is the same on a hospital of ten
+   * patients and a hospital of a hundred thousand.
+   *
+   * It answers with CANDIDATES, not with a decision. The decision stays where it was, in
+   * reconcileIdentity()'s own rules, which this only feeds.
+   *
+   * @param {object} patientLike anything with `mrn` and/or `identifiers[]`
+   * @returns {Promise<object[]>} matching Patients this actor may read
+   */
+  async findPatientsByIdentifier(patientLike) {
+    this._assertType("Patient");
+    this.governed._assertRead(this.actor, "Patient");
+    const keys = patientIdentifierKeys({ ...(patientLike || {}), resourceType: "Patient" });
+    if (!keys.length) return [];
+    const rows = await this.repository.patientsByIdentifier(this.tenantId, keys);
+    await this.repository.auditOnly(this.tenantId, await this._audit("record.identity-lookup", {
+      // The KEYS are not logged, only how many were offered: an identifier is the patient.
+      scope: { identifiersOffered: keys.length }, resourceCounts: { Patient: rows.length },
+    }));
     return rows;
   }
 

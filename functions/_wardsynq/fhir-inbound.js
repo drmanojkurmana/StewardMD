@@ -47,6 +47,7 @@ import { PatientConsent } from "./consent.js";
 import { makeActor, KIND, TIER, GovernanceError } from "../../wardsynq/wardsynq-actors.js";
 import { findCandidates } from "../../wardsynq/wardsynq-mpi.js";
 import { classifyCoding, unmappedCoding, UNMAPPED, INVALID, identifierKey, validateCode } from "./terminology.js";
+import { identifierValue } from "./identity-key.js";
 import { validateResource } from "./fhir-validate.js";
 import { makeSafeFetch } from "../_connect/onboard/net.js";
 import { resolveClinicalActor } from "./actor.js";
@@ -444,8 +445,41 @@ async function markTerminologyWithService(entity, deps) {
   return marked;
 }
 
-/** PURE. Normalised identifier for deterministic comparison. */
-const normId = (v) => str(v).toUpperCase().replace(/[\s-]+/g, "");
+/* Normalised identifier for deterministic comparison. Re-exported from identity-key.js rather than
+ * spelled again here, because the SAME canonicalisation now decides what goes into the patient
+ * identity index at write time; two copies of this one line drifting apart would make the index
+ * confidently answer "no such patient" for somebody who is right there. */
+const normId = identifierValue;
+
+/**
+ * Who this hospital already holds that could be the incoming patient.
+ *
+ * THE INDEX FIRST, ALWAYS. An identifier match is exact and must never depend on how many patients
+ * the hospital has - that dependency was the 2026-09-10 audit's remaining CRITICAL finding: a
+ * roster of the latest N patients, scanned in JavaScript, silently failed to find a returning
+ * patient who happened to sit outside it, and a second chart was created for them.
+ *
+ * The roster is still fetched and still unioned in, unchanged, and that is deliberate: the fuzzy
+ * name-and-date-of-birth pass in reconcileIdentity() has no index to seek on, and dropping the
+ * roster would have QUIETLY WEAKENED the probable-duplicate hold, trading one silent duplicate for
+ * another. So the exact path became structurally sound and the probabilistic path kept exactly the
+ * reach it had. What the roster can no longer do is decide an identifier match by itself.
+ */
+async function identityCandidates(svc, incoming, rosterLimit) {
+  /* NEITHER READ IS ALLOWED TO FAIL QUIETLY, and this is not defensiveness, it is the whole point.
+   * A swallowed error here returns an EMPTY candidate list, which reconcileIdentity() reads as "this
+   * hospital has never seen this person" and answers "new" - so a database that was merely briefly
+   * unreachable would produce a duplicate chart rather than an error somebody notices. The callers
+   * all already turn a thrown read failure into a refusal the sender can retry (an HL7 ACK, a 502),
+   * which is the correct outcome: nothing written, and the feed knows to send it again. */
+  const [indexed, roster] = await Promise.all([
+    svc.findPatientsByIdentifier(incoming),
+    svc.list("Patient", rosterLimit || 1000),
+  ]);
+  const byId = new Map();
+  for (const p of [...(indexed || []), ...(roster || [])]) if (p && p.id) byId.set(p.id, p);
+  return [...byId.values()];
+}
 
 /**
  * PURE. Who an incoming patient is, among this hospital's own.
@@ -907,7 +941,7 @@ async function landBundle(request, env, ctx) {
   } else if (incoming) {
     let locals = [], decisions = [];
     try {
-      [locals, decisions] = await Promise.all([svc.list("Patient", 1000), svc.list(DECISION_TYPE, 1000).catch(() => [])]);
+      [locals, decisions] = await Promise.all([identityCandidates(svc, incoming, 1000), svc.list(DECISION_TYPE, 1000).catch(() => [])]);
     } catch (e) { if (e instanceof GovernanceError) return { ok: false, status: 403, outcome: operationOutcome("error", "forbidden", "cannot read the patient register to reconcile identity") }; throw e; }
     /* A decision a person already made for THIS source patient outranks the matcher: the same
      * look-alike is not held and decided again on every message. A prior "reject" holds again -
@@ -1053,9 +1087,25 @@ async function landBundle(request, env, ctx) {
       try {
         const canonical = e.resourceType;
         const pid = canonical === "Patient" ? null : str(e.patientId);
-        const list = canonical === "Patient" ? await svc.list("Patient", SEARCH_POOL) : (pid ? await svc.byPatient(canonical, pid) : []);
+        /* CONDITIONAL CREATE IS THE OTHER PLACE A ROSTER SCAN MINTS A DUPLICATE. "Create this
+         * patient unless one already matches" answered against the latest SEARCH_POOL patients
+         * alone would answer "no match" for anybody outside it and create the second chart itself -
+         * the same defect as reconciliation, reached through If-None-Exist instead of through the
+         * matcher. The identity index is unioned in so an identifier condition is decided on the
+         * whole register; the roster remains for the conditions that are not identifier-based. */
+        const list = canonical === "Patient"
+          ? await identityCandidates(svc, e, SEARCH_POOL)
+          : (pid ? await svc.byPatient(canonical, pid) : []);
         rows = (list || []).map(toFhir).filter(Boolean);
-      } catch { rows = []; }
+      } catch (readErr) {
+        /* A CONDITION NOBODY COULD EVALUATE IS NOT A CONDITION THAT PASSED. This used to fall back
+         * to an empty row set, which reads as "nothing matches" and creates the resource - so a
+         * momentarily unreadable register answered "create" and minted the duplicate the
+         * If-None-Exist was sent to prevent. Refused instead, so the sender retries. */
+        preconditions.push({ entity: e, status: "412 Precondition Failed",
+          outcome: operationOutcome("error", "exception", `${fhirType}/${e.id}: the record could not be read to evaluate If-None-Exist "${req.ifNoneExist}"; nothing was created. Retry.`) });
+        continue;
+      }
       const v = evaluateIfNoneExist(fhirType, req.ifNoneExist, rows);
       if (v.outcome === "invalid") { preconditions.push({ entity: e, status: "400 Bad Request", outcome: { resourceType: "OperationOutcome", issue: v.problems.map((p) => ({ severity: "error", code: "not-supported", diagnostics: `If-None-Exist ${p.param}: ${p.reason}` })) } }); continue; }
       if (v.outcome === "ambiguous") { preconditions.push({ entity: e, status: "412 Precondition Failed", outcome: operationOutcome("error", "multiple-matches", `${fhirType}/${e.id}: If-None-Exist "${req.ifNoneExist}" matches ${v.matches.length} resources; the condition is ambiguous`) }); continue; }
@@ -1333,7 +1383,7 @@ function registerRedrive(protocol, fn) { if (str(protocol) && typeof fn === "fun
 
 export {
   EXCEPTION_TYPE, DECISION_TYPE, GRANT_TYPE, REASON, RESOLUTION, INBOUND_TYPES, CODE_FIELDS,
-  inboundEnabled, bodySourceOf, splitBundle, evaluateIfNoneExist, markTerminology, markTerminologyWithService, reconcileIdentity, rebind, partitionConflicts,
+  inboundEnabled, bodySourceOf, splitBundle, evaluateIfNoneExist, markTerminology, markTerminologyWithService, reconcileIdentity, identityCandidates, rebind, partitionConflicts,
   tenantMismatch, encounterMismatches, staleUpdates, medicationConflicts, cancellationsWithoutTarget, drugKey, conflictDetail, LIVE_MED_STATUS,
   ExchangeException, ExchangeIdentityDecision, priorDecision,
   SourceSystemGrant, grantIdFor, authorizedSourceSystem, grantSourceSystem, revokeSourceSystem,

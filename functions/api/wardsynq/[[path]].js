@@ -38,7 +38,7 @@ import { actorDeps, recordDeps } from "../../_wardsynq/deps.js";
 import { GovernanceError } from "../../../wardsynq/wardsynq-actors.js";
 import { IntegrationHub } from "../../../wardsynq/wardsynq-interop.js";
 import { sccmAdapter } from "../../../wardsynq/adapters/wardsynq-sccm-adapter.js";
-import { reconcileIdentity, rebind } from "../../_wardsynq/fhir-inbound.js";
+import { reconcileIdentity, identityCandidates, rebind } from "../../_wardsynq/fhir-inbound.js";
 
 export function recordFlagOn(env) { return String(env && env.WARDSYNQ_RECORD) === "1"; }
 
@@ -177,7 +177,8 @@ export async function handle(request, env, deps) {
         const identityResolver = async (entities) => {
           const incoming = entities.find((e) => e && e.resourceType === "Patient");
           if (!incoming) return null;
-          const locals = await svc.list("Patient", 500);
+          // Index-backed candidates, then the SAME reconciliation rules. See identityCandidates().
+          const locals = await identityCandidates(svc, incoming, 500);
           const decision = reconcileIdentity(incoming, locals, !!incoming.mrn);
           if (decision.decision === "link") return { decision: "link", entities: rebind(entities, incoming.id, decision.localId) };
           if (decision.decision === "new") return { decision: "new", entities };

@@ -43,7 +43,7 @@ import { makeActor, KIND, TIER, GovernanceError } from "../../wardsynq/wardsynq-
 import { IntegrationHub } from "../../wardsynq/wardsynq-interop.js";
 import { sccmAdapter } from "../../wardsynq/adapters/wardsynq-sccm-adapter.js";
 import { RecordService } from "./service.js";
-import { reconcileIdentity, rebind } from "./fhir-inbound.js";
+import { reconcileIdentity, identityCandidates, rebind } from "./fhir-inbound.js";
 import { consumeNdhmBundle } from "../_connect/engine.js";
 
 const str = (v) => (v == null ? "" : String(v).trim());
@@ -137,7 +137,8 @@ async function landNdhmDocuments(env, deps, input) {
     const identityResolver = async (entities) => {
       const incoming = entities.find((e) => e && e.resourceType === "Patient");
       if (!incoming) return null;
-      const locals = await svc.list("Patient", 500);
+      // Index-backed candidates, then the SAME reconciliation rules. See identityCandidates().
+      const locals = await identityCandidates(svc, incoming, 500);
       const decision = reconcileIdentity(incoming, locals, !!incoming.mrn);
       if (decision.decision === "link") return { decision: "link", entities: rebind(entities, incoming.id, decision.localId) };
       if (decision.decision === "new") return { decision: "new", entities };
