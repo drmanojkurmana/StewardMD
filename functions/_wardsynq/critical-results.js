@@ -294,7 +294,9 @@ async function openCriticalLoops(request, env, ctx) {
     let notification;
     try {
       const dispatcher = new Dispatcher(ctx.notifyDeps || {});
-      const sent = await dispatcher.send({ loopId: id, patientId: report.patientId, code: hit.code, display: hit.display, value: hit.value, unit: hit.unit });
+      // Retried up to twice: a critical result failing to notify on a momentary network blip is
+      // exactly the case retry exists for - see wardsynq-notify.js's own note.
+      const sent = await dispatcher.send({ loopId: id, patientId: report.patientId, code: hit.code, display: hit.display, value: hit.value, unit: hit.unit }, undefined, { retries: 2 });
       notification = { attempted: true, delivered: sent.delivered, channels: sent.attempts.map((a) => ({ channel: a.channel, delivered: a.delivered, detail: a.detail })), at: new Date().toISOString() };
     } catch (e) {
       notification = { attempted: true, delivered: false, reason: e instanceof NotifyError ? e.code : "NOTIFY_ERROR", detail: str(e && e.message), at: new Date().toISOString() };
