@@ -2655,6 +2655,83 @@ test("ONLY A CLINICIAN, AND ONLY A HUMAN, may declare an emergency", async () =>
   assert.equal(new Set(log.grants.map((x) => x.actorId)).size, 2);
 });
 
+/* REGRESSION, 2026-09-10 break-glass phase: DECLARATION -> AUTHORIZATION -> REAL-TIME NOTIFICATION
+ * -> AUDIT -> REVIEW is now one coherent chain. The prior audit found the accountability surface was
+ * entirely pull-based - the log exists and somebody must choose to read it, with nobody told AT THE
+ * TIME an emergency chart was opened. This wires the SAME Dispatcher primitive critical-results.js
+ * already uses for exactly the same reason, attempted before the grant is written and recorded ON
+ * the grant itself - never a second system, never gating the declaration. */
+test("BREAK-GLASS NOTIFICATION: a declaration attempts real-time notification and records the outcome, honestly, without ever blocking the read", async () => {
+  seedHospital();
+  const { adm } = await admittedPatientOnDrug();
+
+  // No channel is wired in this build (the same honest gap critical-results.js's own route states),
+  // so the attempt is made and the honest outcome is NO_CHANNEL - never a silent "sent".
+  const g = await as(NURSE, "/ward/break-glass", "POST", {
+    orgId: ORG, patientId: adm.patientId, reason: "Found unresponsive on the ward, treating team unreachable.",
+  });
+  assert.equal(g.__status, 200, JSON.stringify(g));
+  assert.equal(g.notification.attempted, true, "a real attempt was made, not skipped");
+  assert.equal(g.notification.delivered, false, "honestly: nothing is configured to deliver to");
+  assert.equal(g.notification.reason, "NO_CHANNEL");
+
+  // The declaration was NOT blocked by the absent channel - the clinician is mid-emergency, and
+  // refusing the read because a pager did not answer would be the worse failure.
+  const chart = await as(NURSE, `/ward/emergency-chart?orgId=${ORG}&patientId=${adm.patientId}`);
+  assert.equal(chart.__status, 200, JSON.stringify(chart));
+
+  // The outcome is on the REVIEW surface too, not only the declaration's own response - a reader of
+  // the log can tell "declared and told nobody" without cross-referencing anything else.
+  const log = await as(DOCTOR, `/ward/break-glass-log?orgId=${ORG}`);
+  assert.equal(log.grants[0].notification.attempted, true);
+  assert.equal(log.grants[0].notification.delivered, false);
+
+  // And it survives on the record itself, append-only, same as everything else about the grant.
+  const hist = await RECORD.history(TENANT_ROW.id, "BreakGlassGrant", g.grantId);
+  assert.equal(hist[0].notification.attempted, true);
+});
+
+test("BREAK-GLASS NOTIFICATION: when a channel IS configured, delivery is recorded, and a failing channel still never blocks the declaration", async () => {
+  seedHospital();
+  const { adm } = await admittedPatientOnDrug();
+
+  // The exact deps the router itself builds for this call - actorDeps()/recordDeps() are the SAME
+  // mocked factories mock.module wired at the top of this file, called the same way the router
+  // calls them. Only notifyDeps differs: a channel is a FUNCTION, injected through deps, never JSON
+  // an org's config could carry, mirroring critical-results.js's own wiring exactly.
+  const depsMod = await import("../functions/_wardsynq/deps.js");
+  const { declareBreakGlass } = await import("../functions/_wardsynq/break-glass.js");
+  const ctxFor = (channels) => ({
+    migration: { mode: "authoritative", tenantId: TENANT_ROW.id },
+    patientId: adm.patientId, reason: "Found unresponsive on the ward, treating team unreachable.",
+    actorDeps: depsMod.actorDeps(ENV), recordDeps: depsMod.recordDeps(ENV, TENANT_ROW.id),
+    notifyDeps: { channels },
+  });
+  const asReq = (email) => new Request("https://x/break-glass", { headers: { "Cf-Access-Authenticated-User-Email": email } });
+
+  const paged = [];
+  const delivering = await declareBreakGlass(
+    asReq(NURSE), ENV,
+    ctxFor({ pager: async (payload) => { paged.push(payload); return { delivered: true, receipt: "PAGE-1" }; } }),
+  );
+  assert.equal(delivering.ok, true, JSON.stringify(delivering));
+  assert.equal(delivering.notification.delivered, true);
+  assert.equal(delivering.notification.channels[0].channel, "pager");
+  assert.equal(delivering.notification.channels[0].delivered, true);
+  assert.equal(paged[0].patientId, adm.patientId, "the channel actually received the declaration's own facts");
+  assert.equal(paged[0].reason, "Found unresponsive on the ward, treating team unreachable.");
+
+  // A channel that FAILS is a recorded failed attempt, and the declaration still succeeds - the
+  // read is never held hostage to a broken pager.
+  const failing = await declareBreakGlass(
+    asReq(DOCTOR), ENV,
+    ctxFor({ pager: async () => { throw new Error("pager gateway unreachable"); } }),
+  );
+  assert.equal(failing.ok, true, JSON.stringify(failing));
+  assert.equal(failing.notification.delivered, false);
+  assert.match(failing.notification.channels[0].detail, /pager gateway unreachable/);
+});
+
 /* ---- pharmacy verification ----------------------------------------------------------------------
  *
  * The eMAR's `verify` step required MED_ADMINISTER - the NURSE's authority - because granting it to
