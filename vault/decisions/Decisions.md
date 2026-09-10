@@ -5134,3 +5134,16 @@ Full ADR: `connect-agent-phone-browser-adr-2026-09-11.md`. Discovery is already 
 transport primitives, all of which WKWebView and Android WebView provide natively, with an init-script the
 Camofox REST API lacks. Proposed: Option 4 phone-first (in-app WebView + Worker control plane), existing
 Camofox runner kept only as fallback. Not yet decided by the owner; no code written.
+
+## 2026-09-11: Connect Hospital phone-first implementation shipped (behind flags)
+
+Built the phone-first architecture from the ADR. Native ConnectBrowser plugin (WKWebView + Android WebView),
+phone discovery engine over the plugin, broker phone-runner routes (plan/progress/discovery/evidence/approve/
+reject/connections + adapter reuse), pure-JS SHA-256 so the compiler runs in Pages Functions, and the doctor
+UI. Commit c341a51f. Verified: 208 connect-agent tests pass; phone engine proven end to end vs a synthetic EMR
+over headless Chrome; acceptance report 17 PASS / 0 FAIL / 3 BLOCKED; Android full-app APK builds with the
+plugin in the dex; iOS ConnectBrowser package builds and links for the device SDK against real Capacitor.
+BLOCKED (environment, not code): iOS full-app link needs the llama.xcframework simulator slice (pre-existing,
+unrelated) or device signing; live-GHIS on-device run needs the broker deployed to stewardmd.in (feature
+branch, behind flag) plus a doctor's own authorised GHIS login. Feature stays behind CONNECT_AGENT_FLAG +
+client smd_connect_agent (default off).
