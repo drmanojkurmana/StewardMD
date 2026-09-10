@@ -147,6 +147,7 @@ import { imagingWorklist } from "../../_wardsynq/dicom.js";
 import { askAboutPatient, reviewInteraction, listInteractions } from "../../_wardsynq/maik-interaction.js";
 import { maikStatus } from "../../_wardsynq/maik-gateway.js";
 import { hit as rateHit } from "../../_wardsynq/rate-limit.js";
+import { KIND, logEvent } from "../../_wardsynq/observability.js";
 import { explainOrderSafety } from "../../_wardsynq/maik-cds.js";
 import { checkAdvisories } from "../../_wardsynq/advisory-authoring.js";
 import { cdaForEncounter } from "../../_wardsynq/cda.js";
@@ -419,6 +420,7 @@ function opdOrgFor(env, hospitalId) {
 }
 
 export async function onRequest(context) {
+  const __t0 = Date.now();
   const { request, env } = context;
   if (request.method === "OPTIONS") return new Response(null, { status: 204, headers: corsHeaders(request) });
   const url = new URL(request.url);
@@ -3003,6 +3005,14 @@ export async function onRequest(context) {
 
     return json({ ok: false, error: "not_found" }, 404, request);
   } catch (e) {
-    return json({ ok: false, error: (e && e.message) || "error" }, (e && e.status) || 500, request);
+    const status = (e && e.status) || 500;
+    /* OBSERVABILITY, 2026-09-10. The single choke point every unhandled exception on this router
+     * already passes through - the one place a request-error + latency line can be emitted with no
+     * new plumbing and no new risk to the response itself. PHI-free by construction: `seg` is a URL
+     * PATH SEGMENT ("ward", "auth", "patient" - a route name, never patient content), and
+     * observability.js's own allow-list refuses anything else. Never blocks or alters the response -
+     * logEvent() cannot throw, and is called AFTER the response is already decided. */
+    logEvent(KIND.REQUEST_ERROR, { route: seg, status, durationMs: Date.now() - __t0, code: e && e.name });
+    return json({ ok: false, error: (e && e.message) || "error" }, status, request);
   }
 }
