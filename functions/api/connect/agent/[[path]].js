@@ -33,6 +33,7 @@ import {
   findDeploymentByFingerprint,
   deploymentFingerprint,
   deploymentView,
+  deploymentOrigins,
   getVersion,
   insertSession,
   getSessionRow,
@@ -330,6 +331,7 @@ export async function onRequest(context) {
       const targetTenantId = body.tenantId || null;
       const origins = Array.isArray(body.origins) ? body.origins : null;
       const fingerprint = body.fingerprint || (origins ? await deploymentFingerprint(origins) : null);
+      const emrUrl = body.emrUrl || null;
       const deploymentId = body.deploymentId || null;
       const hospitalId = body.hospitalId || null;
 
@@ -359,6 +361,44 @@ export async function onRequest(context) {
 
       // No tenant specified: search caller's own accessible tenants without cross-tenant leak
       const myTenants = await listMyTenants(deps, request, env);
+
+      // A doctor picking their hospital, or typing their hospital's EMR address, is the PRIMARY
+      // onboarding path (brief section 5: "select hospital or enter canonical EMR deployment URL").
+      // Both answer with a LIST, and an empty list is a normal, successful answer meaning "no
+      // deployment of yours matches" - which is exactly the first-time case for a hospital nobody has
+      // onboarded yet. It must not be a 404: the client dead-ends on the new-hospital path otherwise,
+      // which is what it did. An empty list is also what a caller who simply is not a member of the
+      // owning tenant gets, so "exists but not yours" and "does not exist" stay indistinguishable.
+      const wantsList = emrUrl != null || body.query != null || (!deploymentId && !fingerprint && !hospitalId);
+      if (wantsList) {
+        let wantFingerprint = fingerprint;
+        if (!wantFingerprint && emrUrl) {
+          try { wantFingerprint = await deploymentFingerprint([new URL(String(emrUrl)).origin]); }
+          catch { throw new OnboardError("invalid", "emrUrl must be an absolute http(s) URL"); }
+        }
+        const needle = String(body.query || "").trim().toLowerCase();
+        const hospitals = [];
+        for (const t of myTenants) {
+          if (!canAgent(t.role, "read")) continue;
+          const r = await deps.db.prepare("SELECT * FROM connect_deployment WHERE tenant_id=?").bind(t.tenantId).all();
+          for (const dep of (r.results || [])) {
+            if (String(dep.status || "active") !== "active") continue;
+            if (wantFingerprint && String(dep.fingerprint) !== String(wantFingerprint)) continue;
+            if (needle && !(`${dep.name || ""} ${dep.hospital_id || ""}`.toLowerCase().includes(needle))) continue;
+            const ver = dep.active_version_id ? await getVersion(deps.db, t.tenantId, dep.active_version_id) : null;
+            hospitals.push({
+              deploymentId: dep.id,
+              hospitalId: dep.hospital_id,
+              name: dep.name || dep.hospital_id,
+              emrUrl: deploymentOrigins(dep)[0] || null,
+              hasActiveAdapter: !!ver,
+              adapterVersion: ver ? ver.id : null,
+            });
+          }
+        }
+        return jsonResponse({ ok: true, hospitals });
+      }
+
       let foundDep = null;
       let foundTenantId = null;
       for (const t of myTenants) {

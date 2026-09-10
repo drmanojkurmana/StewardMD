@@ -451,17 +451,21 @@
       var useq = (S.resolveSeq = (S.resolveSeq || 0) + 1);
       api("/hospitals/resolve", { method: "POST", body: JSON.stringify({ emrUrl: url }) }).then(function (r) {
         if (!overlay() || !S || useq !== S.resolveSeq) return;
-        if (r.s === 200 && r.d && r.d.ok) {
-          if (r.d.hospitals && r.d.hospitals.length) {
-            S.hospitals = r.d.hospitals;
-            S.listNote = "";
-            show("hospitals");
-          } else {
-            S.selected = { hospitalId: null, name: "New hospital deployment", emrUrl: url, hasActiveAdapter: false };
-            show("consent");
-          }
+        // A hospital nobody has onboarded yet is the NORMAL first-time case, not an error: the lookup
+        // answering "no deployment of yours matches" (an empty list, or a not-found) is exactly how a
+        // brand-new hospital looks, and it must continue to consent. Treating that as a failure
+        // dead-ended the primary "enter my hospital's EMR address" path entirely. Only a genuine
+        // transport/server fault is an error worth stopping on.
+        var notFound = r.s === 404 || (r.s === 200 && r.d && r.d.ok && !(r.d.hospitals && r.d.hospitals.length));
+        if (r.s === 200 && r.d && r.d.ok && r.d.hospitals && r.d.hospitals.length) {
+          S.hospitals = r.d.hospitals;
+          S.listNote = "";
+          show("hospitals");
+        } else if (notFound) {
+          S.selected = { hospitalId: null, name: "New hospital deployment", emrUrl: url, hasActiveAdapter: false };
+          show("consent");
         } else {
-          setStatus("bad", "Address lookup failed. Check the address and try again.");
+          setStatus("bad", "Could not reach StewardMD to check this address. Check your connection and try again.");
         }
       });
     };

@@ -43,52 +43,16 @@
     });
   }
 
-  function installConnectButton() {
-    try {
-      if (document.getElementById("smd-connect-agent-launch")) return;
-      var b = document.createElement("button");
-      b.id = "smd-connect-agent-launch";
-      b.type = "button";
-      b.setAttribute("aria-label", "Connect Hospital - test mode");
-      b.title = "Connect Hospital - read-only test mode";
-      b.textContent = "Connect Hospital";
-      b.style.cssText = [
-        "position:fixed",
-        "right:max(14px,env(safe-area-inset-right))",
-        "bottom:max(14px,env(safe-area-inset-bottom))",
-        "z-index:49",
-        "border:1px solid var(--teal,#0e6e63)",
-        "border-radius:999px",
-        "padding:10px 14px",
-        "background:var(--teal,#0e6e63)",
-        "color:#fff",
-        "font:800 12px var(--sans,system-ui)",
-        "box-shadow:0 8px 24px rgba(0,0,0,.16)",
-        "cursor:pointer"
-      ].join(";");
-      b.addEventListener("click", function () {
-        b.disabled = true;
-        loadConnectAgent().then(function (ui) {
-          if (ui && ui.open) ui.open();
-        }).catch(function (e) {
-          try {
-            if (window.toast) window.toast("Connect Agent UI unavailable: " + (e.message || "load failed"));
-          } catch (x) {}
-        }).finally(function () {
-          b.disabled = false;
-        });
-      });
-      document.body.appendChild(b);
-    } catch (e) {}
+  /* The doctor-facing entry point is the "Agent Connect" row in the More sheet and the tile in the
+   * tools sheet (both in home.js), which open the onboarding UI through this object. There is no
+   * floating launcher pill: it was a leftover from the test-console era, it duplicated the real
+   * control, and it read as debug UI to a doctor. Any other surface can open the flow the same way
+   * home.js does, via window.SMD_CONNECT_AGENT_BOOT.open(). */
+  function openAgent() {
+    return loadConnectAgent().then(function (ui) {
+      if (ui && ui.open) ui.open();
+      return ui;
+    });
   }
-
-  try {
-    if (document.readyState === "complete") {
-      setTimeout(installConnectButton, 1200);
-    } else {
-      window.addEventListener("load", function () {
-        setTimeout(installConnectButton, 1200);
-      });
-    }
-  } catch (e) {}
+  window.SMD_CONNECT_AGENT_BOOT = { enabled: true, open: openAgent };
 })();

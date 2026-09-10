@@ -198,13 +198,30 @@ try {
   await ev(`localStorage.setItem("smd_connect_agent", "1"); return 1;`);
   await call("Page.navigate", { url: BASE + "index.html" });
 
+  // This suite exercises the SHEET's own behaviour given some trigger: where it anchors its
+  // open/close animation, and that it returns focus to whatever opened it. The app's real trigger is
+  // the "Agent Connect" row in the More sheet, and that the row exists and opens this UI is covered
+  // by test/run-connect-agent-boot-ui.mjs. Opening from the More sheet here would close that sheet
+  // and take the trigger element out of the DOM, leaving the focus-return assertions with nothing to
+  // return to, so this suite supplies its own stable trigger and drives the same public opener
+  // (SMD_CONNECT_AGENT_BOOT.open) that home.js calls.
   let launcherAppeared = false;
   for (let i = 0; i < 40; i++) {
     await sleep(300);
-    const btn = await ev(`var b=document.getElementById("smd-connect-agent-launch"); return !!(b && b.textContent.indexOf("Connect Hospital")>=0);`);
-    if (btn === true) { launcherAppeared = true; break; }
+    const ready = await ev(`return !!(window.SMD_CONNECT_AGENT_BOOT && window.SMD_CONNECT_AGENT_BOOT.enabled);`);
+    if (ready === true) { launcherAppeared = true; break; }
   }
-  ok(launcherAppeared, "with the flag ON the launcher appears");
+  ok(launcherAppeared, "with the flag ON the boot module publishes its opener");
+  await ev(`
+    var b = document.createElement("button");
+    b.id = "smd-connect-agent-launch";
+    b.type = "button";
+    b.textContent = "Connect Hospital";
+    b.style.cssText = "position:fixed;right:14px;bottom:14px;z-index:49";
+    b.addEventListener("click", function () { window.SMD_CONNECT_AGENT_BOOT.open(); });
+    document.body.appendChild(b);
+    return 1;
+  `);
 
   // Open the sheet via the launcher.
   await ev(`document.getElementById("smd-connect-agent-launch").click(); return 1;`);
@@ -259,7 +276,10 @@ try {
   // Login viewport: session created, iframe points at the same-origin fixture.
   ok(await waitFor(`var d=window.SMD_CONNECT_AGENT.__debug(); return d.screen==="login" && d.sessionId==="sess-1";`, 8000), "consent creates the session and shows the login viewport");
   ok(await ev(`var f=document.getElementById("smd-connect-frame"); return !!f && f.src.indexOf("test/connect-agent/viewer-fixture.html")>=0;`) === true, "login iframe points at the same-origin test viewport page");
-  ok(await ev(`var f=document.getElementById("smd-connect-frame"); try{ return f.contentDocument.getElementById("viewer-marker")!==null; }catch(x){ return false; }`) === true, "login iframe content is same-origin and readable");
+  // Poll: the iframe is created with the login screen but has not necessarily finished loading
+  // viewer-fixture.html by the time that screen renders, so reading contentDocument immediately is a
+  // race (it passed only on timing luck before).
+  ok(await waitFor(`var f=document.getElementById("smd-connect-frame"); try{ return f.contentDocument.getElementById("viewer-marker")!==null; }catch(x){ return false; }`, 8000), "login iframe content is same-origin and readable");
   ok(await ev(noDash) === true, "login copy has no em-dash");
 
   // Pause/resume posts the right paths and flips control text.
