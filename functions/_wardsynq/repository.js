@@ -18,6 +18,7 @@
  *   history(tenantId, resourceType, id)              -> record[]            every version, ascending
  *   byPatient(tenantId, resourceType, patientId)     -> record[]            latest version per id
  *   latestByType(tenantId, resourceType, limit)      -> record[]            latest per id, a roster
+ *   patientsByIdentifier(tenantId, keys)             -> Patient[]           an INDEX SEEK, not a scan
  *   append(tenantId, records, ctx)                   -> {seq}               ATOMIC; see below
  *   changes(tenantId, sinceSeq, limit)               -> {records, cursor}   ascending by seq
  *   recall(tenantId, idempotencyKey)                 -> {resourceType,id,version} | null
@@ -32,6 +33,8 @@
  * Every method takes tenantId FIRST and every implementation must scope by it. There is no
  * cross-tenant method and there never will be one at this layer.
  */
+
+import { patientIdentifierKeys } from "./identity-key.js";
 
 class VersionConflictError extends Error {
   constructor(message, detail) {
@@ -54,7 +57,25 @@ class RepositoryError extends Error {
  * health check. On 2026-09-07 the schema had never been applied to the production D1: every clinical
  * write failed on its first read, and /api/wardsynq/health answered {ok:true} throughout, because it
  * returned a literal. An implementation that cannot answer probe() cannot be served from. */
-const PORT_METHODS = Object.freeze(["latest", "history", "byPatient", "latestByType", "append", "changes", "recall", "auditOnly", "probe"]);
+const PORT_METHODS = Object.freeze(["latest", "history", "byPatient", "latestByType", "patientsByIdentifier", "append", "changes", "recall", "auditOnly", "probe"]);
+
+/**
+ * One identifier was offered for a second person.
+ *
+ * Not a VersionConflictError, and deliberately not a subclass of one: a version conflict means "you
+ * read a stale copy, read again and retry", which a caller may safely automate. This means "the
+ * number you are claiming already belongs to somebody else", and retrying it is exactly the wrong
+ * response - the caller must go and look at who that somebody is. Different problem, different
+ * error, different thing to do about it.
+ */
+class IdentityConflictError extends Error {
+  constructor(message, detail) {
+    super(message);
+    this.name = "IdentityConflictError";
+    this.code = "IDENTITY_CONFLICT";
+    this.detail = detail || null;
+  }
+}
 
 /** Refuses at boot rather than at the first clinical write. */
 function assertRepository(repo) {
@@ -120,6 +141,10 @@ class MemoryRepository {
     this._rows = [];            // every version ever written, in seq order
     this._seq = 0;
     this._idem = new Map();     // `${tenant}|${key}` -> {resourceType,id,version}
+    /* The patient identity index, mirroring the wardsynq_patient_identifier table exactly.
+     * `${tenant}|${systemKey}|${valueNorm}` -> patientId. Its whole job is that a lookup costs the
+     * same on a hospital of ten patients and a hospital of a hundred thousand. */
+    this._ident = new Map();
     this.audit = [];            // audit events, in order, for inspection
   }
 
@@ -156,6 +181,63 @@ class MemoryRepository {
   }
 
   /**
+   * Every local Patient carrying any of these identifiers. An INDEX SEEK per identifier, never a
+   * scan: the cost is the number of identifiers on the incoming patient, which is a handful, and is
+   * completely independent of how many patients the hospital holds.
+   *
+   * @param {string} tenantId
+   * @param {{systemKey: string, valueNorm: string}[]} keys
+   * @returns {Promise<object[]>} the latest version of each matching Patient, de-duplicated
+   */
+  async patientsByIdentifier(tenantId, keys) {
+    const ids = new Set();
+    for (const k of keys || []) {
+      if (!k || !k.systemKey || !k.valueNorm) continue;
+      const hit = this._ident.get(`${tenantId}|${k.systemKey}|${k.valueNorm}`);
+      if (hit) ids.add(hit);
+    }
+    const out = [];
+    for (const id of ids) {
+      const v = this._versionsOf(tenantId, "Patient", id);
+      if (v.length) out.push(clone(v[v.length - 1].body));
+    }
+    return out;
+  }
+
+  /**
+   * Populates the identity index from Patient rows that were written BEFORE the index existed.
+   *
+   * WITHOUT THIS THE FIX IS THEORETICAL. The index is maintained on write, so on the day it ships
+   * every patient a hospital already holds has no entry in it - and identity reconciliation would
+   * go on missing exactly the people it was built to find, while looking like it worked. It is
+   * idempotent and safe to re-run: an identifier already recorded for the same patient is left
+   * alone, and one recorded for a DIFFERENT patient is REPORTED rather than overwritten, because
+   * that is a pre-existing duplicate in the data and a backfill must not silently pick a winner.
+   *
+   * @returns {Promise<{scanned: number, indexed: number, conflicts: object[]}>}
+   */
+  async reindexPatientIdentifiers(tenantId) {
+    const out = { scanned: 0, indexed: 0, conflicts: [] };
+    const latest = new Map();
+    for (const r of this._rows) {
+      if (r.tenantId !== tenantId || r.resourceType !== "Patient") continue;
+      latest.set(r.id, r.body);                 // rows are in seq order, so the last wins
+    }
+    for (const body of latest.values()) {
+      out.scanned += 1;
+      for (const k of patientIdentifierKeys(body)) {
+        const mapKey = `${tenantId}|${k.systemKey}|${k.valueNorm}`;
+        const owner = this._ident.get(mapKey);
+        if (owner && owner !== body.id) { out.conflicts.push({ ...k, heldBy: owner, alsoClaimedBy: body.id }); continue; }
+        if (owner) continue;
+        this._ident.set(mapKey, body.id);
+        out.indexed += 1;
+      }
+    }
+    return out;
+  }
+
+  /**
    * @param {string} tenantId
    * @param {object[]} records  canonical entities, each already carrying its version
    * @param {{idempotencyKey?: string, audit?: object}} [ctx]
@@ -172,12 +254,31 @@ class MemoryRepository {
     if (ctx.idempotencyKey && this._idem.has(`${tenantId}|${ctx.idempotencyKey}`)) {
       throw new VersionConflictError("idempotency key already used", { idempotencyKey: ctx.idempotencyKey });
     }
+    /* THE IDENTITY CHECK, in the same all-or-nothing phase as the version check above and for the
+     * same reason: an identifier that lands while a sibling row is refused would leave the index
+     * claiming a patient the record does not have. Claiming an identifier that already belongs to a
+     * DIFFERENT patient is refused; re-claiming your own (every new version of a Patient re-offers
+     * its identifiers) is a no-op. */
+    const claims = [];
+    for (const rec of records) {
+      for (const k of patientIdentifierKeys(rec)) {
+        const mapKey = `${tenantId}|${k.systemKey}|${k.valueNorm}`;
+        const owner = this._ident.get(mapKey);
+        if (owner && owner !== rec.id) {
+          throw new IdentityConflictError(
+            `${k.systemKey} ${k.valueNorm} already identifies ${owner}`,
+            { systemKey: k.systemKey, valueNorm: k.valueNorm, heldBy: owner, offeredFor: rec.id });
+        }
+        if (!owner) claims.push([mapKey, rec.id]);
+      }
+    }
     let last = this._seq;
     for (const rec of records) {
       this._seq += 1;
       last = this._seq;
       this._rows.push({ seq: this._seq, ...rowOf(tenantId, clone(rec)) });
     }
+    for (const [mapKey, patientId] of claims) this._ident.set(mapKey, patientId);
     if (ctx.idempotencyKey && records.length) {
       const r = records[records.length - 1];
       this._idem.set(`${tenantId}|${ctx.idempotencyKey}`, { resourceType: r.resourceType, id: r.id, version: r.version });
@@ -209,4 +310,4 @@ class MemoryRepository {
   }
 }
 
-export { VersionConflictError, RepositoryError, PORT_METHODS, assertRepository, rowOf, MemoryRepository, MAX_ROSTER, rosterLimit };
+export { VersionConflictError, IdentityConflictError, RepositoryError, PORT_METHODS, assertRepository, rowOf, MemoryRepository, MAX_ROSTER, rosterLimit };

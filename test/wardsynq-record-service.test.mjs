@@ -391,14 +391,23 @@ test("ingest/sccm: an incoming patient matching a local one by MRN is LINKED, ne
 test("ingest/sccm: an MRN matching MORE THAN ONE local patient is held ambiguous, and NOTHING is written - never a guess", async () => {
   const h = hospital();
   const pc = await client(h, "fb:dr-menon");
-  // An artificial but real ambiguity: two local patients that happen to carry the same MRN value
-  // (a data-quality reality this reconciler must survive, not assume away).
+  /* A REAL ambiguity, and note how it is built. Until 2026-09-10 this test made two local patients
+   * carry the SAME MRN, which the patient identity index now refuses outright at the write door
+   * (proven by its own test below). The ambiguity it exists to check is still entirely reachable and
+   * is still exactly the same production branch: an incoming patient whose identifiers point at TWO
+   * DIFFERENT local people - its MRN is Patient A's, its ABHA is Patient B's. That is a genuine
+   * data-quality reality, it cannot be constrained away, and the reconciler must still refuse to
+   * guess between them. */
   await pc.session("pat-amb-a").put(Patient({ id: "pat-amb-a", mrn: "AMB-1", name: "Patient A", dob: "1970-01-01" }));
-  await pc.session("pat-amb-b").put(Patient({ id: "pat-amb-b", mrn: "AMB-1", name: "Patient B", dob: "1980-02-02" }));
+  await pc.session("pat-amb-b").put(Patient({ id: "pat-amb-b", mrn: "AMB-2", name: "Patient B", dob: "1980-02-02",
+    identifiers: [{ system: "ABHA", value: "11-2222-3333-4444" }] }));
 
   const b = sccmBundle({
     sourceConnector: "hl7v2", generatedAt: "2026-09-06T13:00:00Z",
-    patient: sccmPatient({ id: "EXT-AMB", name: "Ambiguous Feed Patient", identifiers: [{ system: "urn:mrn", type: "MRN", value: "AMB-1" }] }),
+    patient: sccmPatient({ id: "EXT-AMB", name: "Ambiguous Feed Patient", identifiers: [
+      { system: "urn:mrn", type: "MRN", value: "AMB-1" },
+      { system: "ABHA", type: "NI", value: "11-2222-3333-4444" },
+    ] }),
     observations: [sccmObservation({ id: "OBS-AMB", category: "laboratory", code: { coding: [{ code: "2823-3" }], text: "Potassium" }, value: { value: 5.5, unit: "mmol/L" } })],
   });
   const res = await (await h.fetchAs("fb:dr-menon")("https://x/api/wardsynq/gimsr/ingest/sccm", { method: "POST", body: JSON.stringify(b) })).json();

@@ -110,13 +110,30 @@ async function possibleDuplicates(request, env, ctx) {
   const { svc, error } = await open_(request, env, ctx, "record:read");
   if (error) return { ...base, ...error, candidates: [] };
 
-  let pool;
-  try { pool = await svc.list("Patient", POOL); }
-  catch (e) {
+  /* An identifier the searcher actually typed is resolved through the identity INDEX and unioned in,
+   * so a search by MRN or ABHA finds the patient whether or not they fall inside the roster. This is
+   * the tool a records officer uses to find duplicates; one that answers "no candidates" for a
+   * patient who is in the register is worse than no tool, because it reads as an answer. The roster
+   * stays exactly as it was - the name-and-date-of-birth scoring below has no index to seek on, and
+   * narrowing it would trade a found duplicate for a missed one.
+   *
+   * Both reads share the one failure path below: a search that could not read the register must say
+   * so, never come back empty as though it had looked and found nobody. */
+  let pool, indexed = [];
+  try {
+    [pool, indexed] = await Promise.all([
+      svc.list("Patient", POOL),
+      candidate.identifiers.length || candidate.mrn
+        ? svc.findPatientsByIdentifier({ mrn: candidate.mrn, identifiers: candidate.identifiers })
+        : Promise.resolve([]),
+    ]);
+  } catch (e) {
     if (e instanceof GovernanceError) return { ...base, ok: false, status: 403, error: "permission", reasons: (e.reasons || []).map((r) => r.code), candidates: [] };
     return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), candidates: [] };
   }
-  const existing = (pool || []).filter(Boolean);
+  const byId = new Map();
+  for (const p of [...(pool || []), ...(indexed || [])]) if (p && p.id) byId.set(p.id, p);
+  const existing = [...byId.values()];
 
   /* Searching FROM an existing record: the module refuses to match a record against itself, and the
    * record's own fields are what we score with. */

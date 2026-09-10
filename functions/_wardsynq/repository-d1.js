@@ -13,7 +13,8 @@
  * file implementing the same eight methods against its own engine.
  */
 
-import { VersionConflictError, RepositoryError, rowOf, rosterLimit } from "./repository.js";
+import { VersionConflictError, IdentityConflictError, RepositoryError, rowOf, rosterLimit } from "./repository.js";
+import { patientIdentifierKeys } from "./identity-key.js";
 import { scrubPhi } from "../_connect/abdm/no-phi.js";
 
 const AUDIT_INSERT = "INSERT INTO connect_audit_event (id,tenant_id,ts,actor,connector_id,action,resource_counts,scope,patient_ref_hash,latency_ms,outcome,consent_id,transaction_id,care_context_hash) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
@@ -26,6 +27,13 @@ function parseBody(row) {
 function isUniqueViolation(err) {
   const m = String((err && err.message) || err || "");
   return /UNIQUE constraint failed|SQLITE_CONSTRAINT/i.test(m);
+}
+
+/* Which table lost. A batch carries both the record insert and the identity-index insert, and the
+ * two failures mean completely different things to the caller - "read again and retry" versus "this
+ * number belongs to someone else, go and look at who" - so they must not arrive as one error. */
+function isIdentityViolation(err) {
+  return isUniqueViolation(err) && /wardsynq_patient_identifier/i.test(String((err && err.message) || err || ""));
 }
 
 function newId() {
@@ -185,6 +193,85 @@ class D1Repository {
     );
   }
 
+  /**
+   * INTERNAL. Who currently holds each of these identifiers, as `${systemKey}|${valueNorm}` -> patientId.
+   * One statement, one index seek per key, bounded by the identifiers on the patient in hand.
+   */
+  async _identifierOwners(tenantId, keys) {
+    const out = new Map();
+    const list = (keys || []).filter((k) => k && k.systemKey && k.valueNorm);
+    if (!list.length) return out;
+    const where = list.map(() => "(system_key=? AND value_norm=?)").join(" OR ");
+    const binds = [tenantId];
+    for (const k of list) binds.push(k.systemKey, k.valueNorm);
+    const r = await this.db
+      .prepare(`SELECT system_key, value_norm, patient_id FROM wardsynq_patient_identifier WHERE tenant_id=? AND (${where})`)
+      .bind(...binds).all();
+    for (const row of r.results || []) out.set(`${row.system_key}|${row.value_norm}`, row.patient_id);
+    return out;
+  }
+
+  /**
+   * Every local Patient carrying any of these identifiers. INDEX SEEK, never a scan: the cost is the
+   * number of identifiers offered, not the number of patients the hospital holds. Tenant-scoped by
+   * the leading column of the primary key, so an identifier can never match across hospitals.
+   */
+  async patientsByIdentifier(tenantId, keys) {
+    const owners = await this._identifierOwners(tenantId, keys);
+    const ids = [...new Set(owners.values())];
+    if (!ids.length) return [];
+    const marks = ids.map(() => "?").join(",");
+    const r = await this.db
+      .prepare(
+        "SELECT r.body FROM wardsynq_record r " +
+        "JOIN (SELECT id, MAX(version) AS v FROM wardsynq_record WHERE tenant_id=? AND resource_type='Patient' AND id IN (" + marks + ") GROUP BY id) m " +
+        "ON m.id = r.id AND m.v = r.version WHERE r.tenant_id=? AND r.resource_type='Patient'"
+      )
+      .bind(tenantId, ...ids, tenantId).all();
+    return (r.results || []).map(parseBody);
+  }
+
+  /**
+   * Populates the identity index from Patient rows written BEFORE the index existed. See the
+   * MemoryRepository twin for why this is not optional.
+   *
+   * PAGED BY seq, deliberately, so the backfill is not itself the bounded scan it exists to retire:
+   * it walks the whole table a page at a time and finishes whatever the hospital's size.
+   *
+   * @returns {Promise<{scanned: number, indexed: number, conflicts: object[]}>}
+   */
+  async reindexPatientIdentifiers(tenantId, opts) {
+    const page = Math.max(1, Math.min(1000, Number(opts && opts.pageSize) || 500));
+    const out = { scanned: 0, indexed: 0, conflicts: [] };
+    let after = 0;
+    for (;;) {
+      const r = await this.db
+        .prepare(
+          "SELECT r.seq, r.id, r.body FROM wardsynq_record r " +
+          "JOIN (SELECT id, MAX(version) AS v FROM wardsynq_record WHERE tenant_id=? AND resource_type='Patient' GROUP BY id) m " +
+          "ON m.id=r.id AND m.v=r.version WHERE r.tenant_id=? AND r.resource_type='Patient' AND r.seq>? ORDER BY r.seq ASC LIMIT ?"
+        )
+        .bind(tenantId, tenantId, after, page).all();
+      const rows = r.results || [];
+      if (!rows.length) break;
+      for (const row of rows) {
+        after = row.seq;
+        out.scanned += 1;
+        const body = parseBody(row);
+        for (const k of patientIdentifierKeys(body)) {
+          const owner = (await this._identifierOwners(tenantId, [k])).get(`${k.systemKey}|${k.valueNorm}`);
+          if (owner && owner !== body.id) { out.conflicts.push({ ...k, heldBy: owner, alsoClaimedBy: body.id }); continue; }
+          if (owner) continue;
+          await this.db
+            .prepare("INSERT INTO wardsynq_patient_identifier (tenant_id,system_key,value_norm,patient_id,first_seen) VALUES (?,?,?,?,?)")
+            .bind(tenantId, k.systemKey, k.valueNorm, body.id, new Date().toISOString()).run();
+          out.indexed += 1;
+        }
+      }
+    }
+    return out;
+  }
+
   async append(tenantId, records, ctx) {
     ctx = ctx || {};
     if (!records || !records.length) return { seq: null };
@@ -203,10 +290,42 @@ class D1Repository {
     }
     if (ctx.audit) stmts.push(this._auditStatement(tenantId, ctx.audit));
 
+    /* THE IDENTITY INDEX. One indexed read for everything being claimed, then an insert per key
+     * that nobody holds yet - inside the SAME atomic batch as the record rows, so the index and the
+     * record can never disagree about who exists.
+     *
+     * The read is a pre-check, not the guarantee. The guarantee is the PRIMARY KEY: for a key this
+     * read found absent the statement is a PLAIN insert, so if a concurrent writer claimed it in
+     * between, the constraint fires, the whole batch rolls back, and the racer that lost creates no
+     * duplicate patient. A key this patient ALREADY holds gets no statement at all, which is what
+     * lets every later version of a Patient re-offer its own identifiers harmlessly. */
+    const wanted = [];
+    for (const rec of records) for (const k of patientIdentifierKeys(rec)) wanted.push({ ...k, patientId: rec.id });
+    if (wanted.length) {
+      const held = await this._identifierOwners(tenantId, wanted);
+      const now = new Date().toISOString();
+      for (const w of wanted) {
+        const owner = held.get(`${w.systemKey}|${w.valueNorm}`);
+        if (owner && owner !== w.patientId) {
+          throw new IdentityConflictError(`${w.systemKey} ${w.valueNorm} already identifies ${owner}`,
+            { systemKey: w.systemKey, valueNorm: w.valueNorm, heldBy: owner, offeredFor: w.patientId });
+        }
+        if (owner) continue;                                   // already ours, nothing to write
+        stmts.push(this.db
+          .prepare("INSERT INTO wardsynq_patient_identifier (tenant_id,system_key,value_norm,patient_id,first_seen) VALUES (?,?,?,?,?)")
+          .bind(tenantId, w.systemKey, w.valueNorm, w.patientId, now));
+      }
+    }
+
     let results;
     try {
       results = await this.db.batch(stmts);
     } catch (err) {
+      // The identity index first: a batch can only violate one constraint, and mislabelling this
+      // one as a version conflict would tell the caller to retry a write that must never be retried.
+      if (isIdentityViolation(err)) {
+        throw new IdentityConflictError("another client claimed this identifier first", { records: records.map((r) => ({ resourceType: r.resourceType, id: r.id })) });
+      }
       if (isUniqueViolation(err)) {
         throw new VersionConflictError("another client wrote this version first", { records: records.map((r) => ({ resourceType: r.resourceType, id: r.id, version: r.version })) });
       }
