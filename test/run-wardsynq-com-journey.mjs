@@ -4,6 +4,11 @@
  *   BASE=https://wardsynq.com WSQ_CODE=SMD-XXXX WSQ_STAFF=id WSQ_PIN=1234   (a staff session)
  *   BASE=http://localhost:8790 WSQ_ACCESS_EMAIL=doctor@example.test         (local: Cloudflare-Access-style identity header)
  *
+ * WSQ_LOCAL_MODEL=<base url> configures this hospital's ON-PREMISES model through the Admin Center
+ * first (test/wardsynq-local-model-stub.mjs presents one), so the MaiK step drives the real gateway,
+ * the real provider and the real review instead of skipping. Without it the hospital's own MaiK
+ * settings are left exactly as its admin set them.
+ *
  * Optional: WSQ_HOSPITAL=<name substring> picks the hospital; otherwise the first WardSynQ-native one,
  * and with an account and none available, one named "WardSynQ Acceptance Hospital" is created.
  * SHOTS=<dir> saves a screenshot after every step.
@@ -207,7 +212,7 @@ try {
     await until(`return document.body.textContent.indexOf('118') >= 0 && !WARD._st.busy ? 'y' : '';`, 15000);
     const orderInput = await ev(`return !!document.getElementById('wMoDrug')`);
     if (!orderInput) return { note: "vitals recorded; this role cannot prescribe (no order form)" };
-    await ev(`document.getElementById('wMoDrug').value='Paracetamol 500mg'; document.getElementById('wMoValue').value='500'; document.getElementById('wMoUnit').value='mg'; document.getElementById('wMoRoute').value='oral'; document.getElementById('wMoFreq').value='BD'; document.querySelector('[data-w-act="medorder"]').click(); return 1;`);
+    await ev(`document.getElementById('wMoDrug').value='Paracetamol'; document.getElementById('wMoValue').value='500'; document.getElementById('wMoUnit').value='mg'; document.getElementById('wMoRoute').value='oral'; document.getElementById('wMoFreq').value='BD'; document.querySelector('[data-w-act="medorder"]').click(); return 1;`);
     await until(`return !WARD._st.busy ? 'y' : '';`, 15000);
     const refused = await ev(`return WARD._st.refusal ? 'refused:' + JSON.stringify(WARD._st.refusal).slice(0,200) : ''`);
     if (refused) return { note: "order refused by the safety engine, verbatim: " + refused };
@@ -270,17 +275,49 @@ try {
     await wardBack();
   });
 
-  await step("MaiK clinical AI on the live encounter", async () => {
+  await step("turn MaiK on for this hospital from the Admin Center", async () => {
+    if (!native) return { skip: "not a WardSynQ hospital" };
+    if (!E.WSQ_LOCAL_MODEL) return { skip: "no on-premises model offered (set WSQ_LOCAL_MODEL to configure one); this hospital's MaiK settings are left as its admin set them" };
+    await ev(`location.hash='#/admin'; return 1;`);
+    await until(`return document.querySelector('[data-tab="maik"]') || document.querySelector('#page .msg') ? 'y' : '';`, 15000);
+    if (!(await ev(`return !!document.querySelector('[data-tab="maik"]')`))) return { skip: "role has no staff.admin, so MaiK cannot be configured here" };
+    await click('[data-tab="maik"]');
+    await waitSel("#admMaikSave", 15000);
+    const before = await ev(`return document.querySelector('#adminBody .kv dd').textContent`);
+    await type("admMaikLocalUrl", E.WSQ_LOCAL_MODEL);
+    await type("admMaikLocalModel", "wardsynq-local-stub");
+    await ev(`document.getElementById('admMaikEnabled').checked = true; document.getElementById('admMaikPhiLocal').checked = true; return 1;`);
+    await click("#admMaikSave");
+    await until(`return document.querySelector('[data-tab="maik"][aria-selected="true"]') && document.getElementById('admMaikSave') && !document.getElementById('admMaikSave').disabled ? 'y' : '';`, 20000);
+    const err = await ev(`var m=document.getElementById('admMaikMsg'); return m && m.querySelector('.msg.err') ? m.textContent : ''`);
+    must(!err, "saving the MaiK settings was refused: " + err);
+    const after = await ev(`return document.querySelector('#adminBody .kv dd').textContent`);
+    must(String(after).indexOf("yes") >= 0, `MaiK still reads "${after}" after enabling it (was "${before}")`);
+    const prov = await ev(`return [].map.call(document.querySelectorAll('#adminBody tbody tr'), function(r){ return r.cells[0].textContent + '=' + r.cells[1].textContent; }).join(', ')`);
+    return { note: "enabled; providers " + prov };
+  });
+
+  await step("MaiK answers on the live encounter, and the clinician reviews it", async () => {
     if (!native) return { skip: "not a WardSynQ hospital" };
     await ev(`location.hash='#/maik'; return 1;`);
     await until(`return document.querySelector('[data-ix]') || document.querySelector('#mkList .msg') ? 'y' : '';`, 15000);
     if (!(await ev(`return !!document.querySelector('[data-ix]')`))) return { skip: await ev(`return document.querySelector('#mkList .msg').textContent`) };
     await ev(`document.querySelectorAll('[data-ix]')[document.querySelectorAll('[data-ix]').length-1].click(); return 1;`);
     await waitSel("#mkGo"); await click("#mkGo");
-    const out = await until(`var o=document.getElementById('mkOut'); var e=document.querySelector('#mkAsk .msg.err'); return (!o.hidden) ? 'answer' : (e ? 'err:' + e.textContent : '');`, 60000);
+    const out = await until(`var o=document.getElementById('mkOut'); var e=document.querySelector('#mkAsk .msg.err'); return (!o.hidden) ? 'answer' : (e ? 'err:' + e.textContent : '');`, 90000);
     must(out, "MaiK never answered");
-    if (out !== "answer") return { skip: "MaiK not available on this deployment: " + out.slice(4, 160) };
-    return { note: await ev(`return document.querySelector('#mkOut h2').textContent`) };
+    if (out !== "answer") return { skip: "MaiK not available on this deployment: " + out.slice(4, 200) };
+    const shown = await ev(`return document.querySelector('#mkOut h2').textContent`);
+    const model = await ev(`var d=document.querySelectorAll('#mkOut .kv dd'); return d.length > 1 ? d[1].textContent : ''`);
+    // An answer the screen shows must be a released one, and it must carry the model that answered.
+    must(String(shown).indexOf("released") >= 0 || String(shown).indexOf("withheld") >= 0, "the answer did not state whether it was released or withheld");
+    if (String(shown).indexOf("withheld") >= 0) return { note: "MaiK WITHHELD this answer, and the screen said so: " + shown };
+    // The clinician's review is what turns a draft into something the record can carry.
+    if (!(await ev(`return !!document.getElementById('mkAcc')`))) return { note: shown + " (this role may read MaiK but not review it)" };
+    await click("#mkAcc");
+    const reviewed = await until(`var d=document.querySelectorAll('#mkOut .pill'); return d.length > 1 && d[1].textContent.indexOf('accepted') >= 0 ? d[1].textContent : '';`, 20000);
+    must(reviewed, "the review was never recorded on the interaction");
+    return { note: shown + "; model " + (model || "not stated") + "; " + reviewed };
   });
 
   await step("Digital Twin", async () => {

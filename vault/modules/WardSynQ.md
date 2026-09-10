@@ -1372,3 +1372,29 @@ It contains only static files plus `_worker.js`, which forwards `/api/*` server-
   Admin Center from a hospital's owner. Both fixed in PR #1063.
 - Upgrade path: move the wardsynq.com custom domain onto the `stewardmd` project and serve the site by
   host from `_middleware.js`; until then the proxy hop is the only cost.
+
+## MaiK on wardsynq.com: how a hospital turns it on (added 2026-09-11)
+
+MaiK is OFF for every hospital until its admin switches it on. Admin Center -> MaiK clinical AI:
+
+- **MaiK enabled** writes `wardsynq.maik.enabled`. Off, the ask route refuses with a sentence, not
+  an error.
+- **On-premises model**: `localBaseUrl` + `localModel`, any OpenAI-compatible server (llama.cpp's
+  server, vLLM, Ollama). The gateway RANKS a local model above every cloud one, so a hospital that
+  runs its own never sends a chart off-site.
+- **Patient data approval is PER PROVIDER** (`wardsynq.maik.phiApproved`, an array, never a
+  boolean). The tab writes `["local-openai"]` and/or `["gemini","vertex"]`. Empty means no provider
+  may receive patient data, which is what a hospital that has not thought about it gets.
+- The cloud providers need `GEMINI_API_KEY` on the Pages project. It IS set on `stewardmd`
+  (checked 2026-09-11); the MaiK tab's provider table says so per provider, without the value.
+
+Proof, end to end: `test/wardsynq-local-model-stub.mjs` presents the OpenAI-compatible endpoint a
+hospital's own GPU presents, and `test/run-wardsynq-com-journey.mjs` with `WSQ_LOCAL_MODEL=<base
+url>` configures it through the real Admin Center, asks on a live encounter and records the
+clinician's review. The stub GENERATES NOTHING; it proves the plumbing, never clinical quality.
+The real Gemini round trip remains unexercised from here.
+
+Gotcha found 2026-09-11 by reading the prompt a real model received: a MedicationOrder's dose is
+`{value, unit}` and `maik-chart-context.js` stringified it to `[object Object]`, so every chart
+summary looked as though it stated a dose and stated none. `doseText()` fixes it; the regression is
+`6f.` in `test/wardsynq-maik-interaction.test.mjs`.

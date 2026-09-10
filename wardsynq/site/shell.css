@@ -80,6 +80,9 @@
 .f { display: flex; flex-direction: column; gap: 5px; min-width: 0; flex: 1 1 180px; }
 .f > span { font-size: var(--t-micro); color: var(--ink-3); }
 input, select, textarea { width: 100%; }
+/* A checkbox is not a field: it takes its own size, and its label sits beside it on one line. */
+input[type="checkbox"], input[type="radio"] { width: auto; min-height: 0; margin: 0 8px 0 0; }
+.f:has(> input[type="checkbox"]) { flex-direction: row; align-items: center; flex: 0 1 auto; }
 .btn { display: inline-flex; align-items: center; gap: 6px; }
 .btn.ghost { background: var(--raised); }
 .btn.quiet { color: var(--ink-2); }

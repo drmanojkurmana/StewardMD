@@ -283,7 +283,12 @@
       // wardsynq.maik.phiApproved is a per-provider allowlist (see maik-gateway.js maikConfig), not a
       // plain flag. The switch below is a yes/no simplification over "gemini" + "vertex", the two
       // providers that leave the hospital; it never touches the local/on-prem entries.
-      var cloudApproved = Array.isArray(r.phiApproved) && r.phiApproved.length > 0;
+      var approved = Array.isArray(r.phiApproved) ? r.phiApproved : [];
+      var cloudApproved = approved.indexOf("gemini") >= 0 || approved.indexOf("vertex") >= 0;
+      var localApproved = approved.indexOf("local-openai") >= 0;
+      // The on-premises endpoint is configuration, not status, so it comes from the org document.
+      var curMaik = ((c.state.org && c.state.org.wardsynq) || {}).maik || {};
+      var localUrl = curMaik.localBaseUrl || "", localModel = curMaik.localModel || "";
       body.innerHTML = '<div class="card"><h2>MaiK clinical AI</h2>' +
         '<div class="kv"><dt>Enabled</dt><dd>' + (r.enabled ? "yes" : "no") + "</dd>" +
         "<dt>Patient data approved for a cloud model</dt><dd>" + (cloudApproved ? "yes (" + c.esc(r.phiApproved.join(", ")) + ")" : "no") + "</dd>" +
@@ -294,7 +299,15 @@
           return "<tr><td>" + c.esc(p.provider) + '</td><td><span class="pill' + (p.configured ? " ok" : " stop") + '">' + (p.configured ? "yes" : "no") + "</span></td><td>" + c.esc(p.detail || "") + "</td><td>" + c.esc(p.credentialSource || "") + "</td></tr>";
         }).join("") + "</tbody></table></div>" +
         '<h3>Settings</h3><div class="row">' +
-        '<label class="f"><input type="checkbox" id="admMaikEnabled"' + (r.enabled ? " checked" : "") + "> MaiK enabled</label>" +
+        '<label class="f"><input type="checkbox" id="admMaikEnabled"' + (r.enabled ? " checked" : "") + "> MaiK enabled</label></div>" +
+        /* The on-premises model. The gateway ranks a model on the hospital's own hardware ABOVE any
+         * cloud one, so a hospital that runs its own never sends a chart off-site. It was reachable
+         * only by editing the org document by hand until this existed. */
+        '<h3>On-premises model</h3><div class="row">' +
+        '<label class="f"><span>Base URL (OpenAI-compatible)</span><input id="admMaikLocalUrl" placeholder="http://10.0.0.5:8000/v1" value="' + c.esc(localUrl) + '"></label>' +
+        '<label class="f"><span>Model name</span><input id="admMaikLocalModel" placeholder="the name the server answers to" value="' + c.esc(localModel) + '"></label></div>' +
+        '<div class="row"><label class="f"><input type="checkbox" id="admMaikPhiLocal"' + (localApproved ? " checked" : "") + "> Patient data may be sent to the on-premises model</label></div>" +
+        '<h3>Cloud model</h3><div class="row">' +
         '<label class="f"><input type="checkbox" id="admMaikPhi"' + (cloudApproved ? " checked" : "") + "> Patient data may be sent to an approved cloud model</label>" +
         '<button class="btn" id="admMaikSave" type="button">Save</button></div><div id="admMaikMsg"></div>' +
         '<div class="msg note">Enabling MaiK uses the providers listed above. A cloud provider only answers when the environment holds its key (named under Credential). Patient data leaves the hospital only when the second switch is on. Clinical content from MaiK is not signed off.</div>' +
@@ -303,9 +316,17 @@
         var btn = document.getElementById("admMaikSave");
         var enabled = document.getElementById("admMaikEnabled").checked;
         var phi = document.getElementById("admMaikPhi").checked;
+        var phiLocal = document.getElementById("admMaikPhiLocal").checked;
+        var lUrl = (document.getElementById("admMaikLocalUrl").value || "").trim();
+        var lModel = (document.getElementById("admMaikLocalModel").value || "").trim();
+        // Approval is PER PROVIDER in the gateway, never a single flag: approving the hospital's own
+        // model must not silently approve a cloud one, which is exactly what one boolean would do.
+        var approve = [];
+        if (phiLocal) approve.push("local-openai");
+        if (phi) { approve.push("gemini"); approve.push("vertex"); }
         var existing = (c.state.org && c.state.org.wardsynq) || {};
         var wsq = Object.assign({}, existing, { maik: Object.assign({}, existing.maik, {
-          enabled: enabled, phiApproved: phi ? ["gemini", "vertex"] : []
+          enabled: enabled, phiApproved: approve, localBaseUrl: lUrl || null, localModel: lModel || null
         }) });
         btn.disabled = true;
         c.api("/org/update", { orgId: c.state.orgId, wardsynq: wsq }).then(function (ur) {

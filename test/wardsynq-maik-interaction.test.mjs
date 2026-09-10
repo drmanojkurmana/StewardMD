@@ -329,6 +329,31 @@ test("6c. with NO signing key, the structured chart is refused rather than trust
   assert.ok(!built.prompt.includes("penicillin"), "and its content never reaches the model at all");
 });
 
+/* REGRESSION, 2026-09-11: the medication list MaiK is shown carried no dose.
+ *
+ * A MedicationOrder's dose is the canonical {value, unit}; the section builder ran it through str(),
+ * which produced "[object Object]". Every medication in every chart summary therefore looked as
+ * though it stated a dose and stated none, which is the worst of the three possible outcomes. Found
+ * by reading the prompt a real model received through the real route, not by inspection. */
+test("6f. the medication list states the real dose, never [object Object] and never half a number", async () => {
+  const { buildPatientContext } = await import("../functions/_wardsynq/maik-chart-context.js");
+  const meds = [
+    { resourceType: "MedicationOrder", id: "mo-1", drug: "Paracetamol", dose: { value: 500, unit: "mg" }, route: "oral", frequency: "BD", status: "active" },
+    // A dose with no value renders as nothing: a partial dose is more dangerous than an absent one.
+    { resourceType: "MedicationOrder", id: "mo-2", drug: "Enoxaparin", dose: { unit: "mg" }, route: "sc", status: "active" },
+    // An external source may store the dose as free text; it is passed through as written.
+    { resourceType: "MedicationOrder", id: "mo-3", drug: "Insulin", dose: "per sliding scale", status: "active" },
+  ];
+  const svc = { get: async () => ({ resourceType: "Patient", id: "pat-1", dob: "1970-01-01", sex: "female" }),
+    byPatient: async (t) => (t === "MedicationOrder" ? meds : []) };
+  const ctx = await buildPatientContext(svc, "pat-1", { sections: ["medications"] });
+  const text = (ctx.sections.find((s) => s.title === "Medications") || {}).text || "";
+  assert.ok(!text.includes("[object Object]"), `the dose object leaked into the prompt: ${text}`);
+  assert.ok(text.includes("Paracetamol 500 mg oral BD"), `the real dose is stated: ${text}`);
+  assert.ok(text.includes("- Enoxaparin sc"), `a dose with no value states nothing: ${text}`);
+  assert.ok(text.includes("Insulin per sliding scale"), `free text is passed through as written: ${text}`);
+});
+
 /* REGRESSION, 2026-09-10 MaiK safety pass: an ask-path answer asserting clinical safety is withheld,
  * because this path runs NO SafetyEngine at all. maik-cds.js's explanation path checks its text
  * against a real computed verdict; this one had nothing checking it, so "yes, safe to give, no
