@@ -139,7 +139,14 @@ export function startSyntheticEmr({ port = 0, apiPort = 0 } = {}) {
       return res.end();
     }
     if (url.pathname === '/api/v2/labs' && req.method === 'GET') {
-      return sendJson(res, 200, { items: [{ test: 'HbA1c', value: 6.4, unit: '%' }] });
+      // A wildcard ACAO cannot be paired with credentialed (cookie-bearing) cross-origin requests -
+      // browsers reject the response outright. Echo the request origin instead so a real credentialed
+      // GET (e.g. the connect-agent phone probe) succeeds exactly as a real hospital API's CORS
+      // configuration would need to.
+      const cors = req.headers.origin
+        ? { 'access-control-allow-origin': req.headers.origin, 'access-control-allow-credentials': 'true' }
+        : {};
+      return sendJson(res, 200, { items: [{ id: 'lab-1', test: 'HbA1c', value: 6.4, unit: '%' }] }, cors);
     }
     // Write trap on the second approved origin. Must stay at zero hits.
     if (url.pathname === '/api/v2/orders' && req.method === 'POST') {

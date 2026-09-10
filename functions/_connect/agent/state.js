@@ -99,13 +99,21 @@ export function assertTransition(machine, from, to) {
 // super-admin handling) as the rest of Connect — and this explicit deny-by-default matrix then decides
 // the agent tier. // VERIFY: fold these into rbac.js as "agent:read"/"agent:session"/"agent:activate"
 // when the enterprise track next revises the matrix; the semantics below are the intended entries.
-export const AGENT_NEEDS = Object.freeze(["read", "session", "activate"]);
+// "approve" (added for the phone-runner broker's POST /versions/:id/approve|reject -- CONTRACT.md calls
+// it out as canAgent(role, "approve") in functions/_connect/permission.js, but that file holds only the
+// shared error classes + enforceScope; the agent role tiers live HERE, same place "activate" already
+// does, so this follows the existing convention rather than the literal file name) is deliberately its
+// OWN tier, not folded into "activate": "activate" (unused by the phone route; kept for the Camofox path)
+// and "approve" carry the same owner/admin/superadmin-only shape today, but a future split (e.g. a
+// reviewer role that may approve a phone-discovered candidate without holding full Camofox activation
+// rights) should not have to touch every existing "activate" call site to get there.
+export const AGENT_NEEDS = Object.freeze(["read", "session", "activate", "approve"]);
 export const AGENT_MATRIX = Object.freeze({
-  owner: Object.freeze(["read", "session", "activate"]),
-  admin: Object.freeze(["read", "session", "activate"]),
+  owner: Object.freeze(["read", "session", "activate", "approve"]),
+  admin: Object.freeze(["read", "session", "activate", "approve"]),
   clinician: Object.freeze(["read", "session"]),      // a doctor onboards their own hospital; cannot activate
   auditor: Object.freeze(["read"]),                   // read-only oversight, never a browser session
-  superadmin: Object.freeze(["read", "session", "activate"]),
+  superadmin: Object.freeze(["read", "session", "activate", "approve"]),
 });
 
 export function canAgent(role, need) {

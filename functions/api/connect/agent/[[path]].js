@@ -37,19 +37,31 @@ import {
   deploymentFingerprint,
   deploymentView,
   deploymentOrigins,
+  updateDeploymentOrigins,
+  listDeploymentsForTenant,
   getVersion,
+  insertVersion,
+  casVersionLifecycle,
+  findVersionByLifecycle,
   insertSession,
   getSessionRow,
   findLiveSession,
+  findLatestSessionForDeployment,
   casSession,
   sessionView,
   insertJob,
   findJobForSession,
+  findJobByCandidateVersion,
   casJob,
+  getActiveActivation,
   revokeSessionViewerTokens,
   newId,
   nowIso,
 } from "../../../_connect/agent/store.js";
+import { activateVersion } from "../../../_connect/agent/activation.js";
+import { compileManifest } from "../../../../connect-agent/manifest/compile.mjs";
+import { validateCandidate } from "../../../../connect-agent/manifest/validate.mjs";
+import { sha256, canonicalJson, findHostileKeys } from "../../../../connect-agent/manifest/schema.mjs";
 
 export { agentFlagOn, browserSessionFlagOn } from "../../../_connect/agent/flags.js";
 
@@ -86,6 +98,106 @@ function hasCredentials(body) {
     if (body[k] !== undefined && body[k] !== null) return true;
   }
   return false;
+}
+
+function safeJsonParse(text) {
+  try { return JSON.parse(text); } catch { return null; }
+}
+
+// A discovery-spec event's redacted path (connect-agent/discovery.mjs's redactPath) always writes the
+// generic token `{id}`; a compiled operation's pathTemplate (connect-agent/manifest/compile.mjs's
+// templateFromRedactedPath) renames that to a semantic placeholder ("{patientId}") derived from the
+// parent segment. Same path, different placeholder spelling -- genericize both sides before comparing
+// "was this operation's path actually observed".
+function genericizePath(path) {
+  return String(path || "").replace(/\{[^}/]*\}/g, "{id}");
+}
+
+// --- phone-runner handoff: registrable-domain origin matching (CONTRACT.md) --------------------------
+// Same-registrable-domain origins observed during handoff merge into the deployment's approved set
+// automatically (an SSO/API subdomain of a hospital's own domain); anything else is held as a
+// doctor-confirmable pending origin. The 3-label suffix list covers the common two-label ccTLD SLDs
+// where the registrable domain is actually 3 labels (co.in, co.uk, ...) -- a plain "last 2 labels" rule
+// would treat "hospital.co.in" and "other.co.in" as the same registrable domain.
+const THREE_LABEL_SUFFIXES = new Set(["co.in", "ac.in", "edu.in", "org.in", "gov.in", "net.in", "res.in", "co.uk", "ac.uk"]);
+function registrableDomain(hostname) {
+  const labels = String(hostname || "").toLowerCase().split(".").filter(Boolean);
+  if (labels.length < 2) return labels.join(".");
+  const last2 = labels.slice(-2).join(".");
+  if (labels.length >= 3 && THREE_LABEL_SUFFIXES.has(last2)) return labels.slice(-3).join(".");
+  return last2;
+}
+function sameRegistrableDomain(originA, originB) {
+  try {
+    return registrableDomain(new URL(originA).hostname) === registrableDomain(new URL(originB).hostname);
+  } catch { return false; }
+}
+
+// --- phone-runner capability resource names --------------------------------------------------------
+// The UI's capability list is keyed by a FIXED vocabulary distinct from the manifest's own canonical
+// `mapping.resource` (connect-agent/manifest/schema.mjs RESOURCES: patient/worklist/encounters/
+// medications/allergies/observations/documents -- the SCCM-facing name) and from OPERATION_TYPES (the
+// compiler-facing name). One deterministic table, in one place, from operation TYPE -> UI resource name,
+// so a capability never carries two different resource spellings depending on which route built it.
+// `patient_lookup` and `result_detail` are reserved slots in the UI vocabulary with no compiler operation
+// type that produces them today (the compiler has only ONE patient-read type, get_patient_summary, and
+// ONE results-read type, list_results) -- `other` is the fail-closed default for anything unmapped,
+// never a guess at which of those two names would apply.
+const CAPABILITY_RESOURCE = Object.freeze({
+  list_worklist: "worklist",
+  get_patient_summary: "patient_summary",
+  list_medications: "medications",
+  list_allergies: "allergies",
+  list_results: "results",
+  list_encounters: "encounters",
+  list_notes: "notes",
+});
+function capabilityResource(operationType) {
+  return Object.prototype.hasOwnProperty.call(CAPABILITY_RESOURCE, operationType) ? CAPABILITY_RESOURCE[operationType] : "other";
+}
+
+// --- phone-runner deterministic planner (CONTRACT.md "POST /sessions/:id/plan") ------------------------
+// No LLM in v1. A prompt-injection line ("click logout", "Ignore previous instructions...") is defeated
+// structurally, not semantically: SKIP_LABEL matches the substring regardless of the rest of the label,
+// and every candidate must ALSO come from a real `[ref=...]` line the phone actually rendered -- text in
+// a label can only ever narrow the candidate set, never point at an arbitrary ref. Ported verbatim from
+// connect-agent/discovery.mjs's SKIP_LABEL (same list, same intent: never click something destructive/
+// irreversible).
+const PLAN_SKIP_LABEL = /sign\s?out|log\s?out|logout|delete|remove|discharge|export|download|order|prescribe|submit|save|new\b|create/i;
+const PLAN_CLICKABLE_ROLE = /^(?:link|button|menuitem|tab|option|row|cell)$/i;
+const PLAN_LINE_RE = /^\s*- (\w+) "(.*)" \[ref=([A-Za-z0-9_-]{1,32})\]$/;
+const PLAN_TIER1 = /doctor|physician|clinical|ward|inpatient|\bipd\b|\bopd\b|patient|worklist|census|dashboard/i;
+const PLAN_TIER2 = /lab|result|investigation|radiolog|report|medic|drug|medicine|allerg|encounter|visit|note|summary|history|vital|diagnos/i;
+
+function planNext({ url, lines, visited, depth, events }) {
+  const visitedSet = new Set((Array.isArray(visited) ? visited : []).map(String));
+  const candidates = [];
+  for (const raw of Array.isArray(lines) ? lines : []) {
+    const m = PLAN_LINE_RE.exec(String(raw));
+    if (!m) continue;
+    const [, role, label, ref] = m;
+    if (!PLAN_CLICKABLE_ROLE.test(role)) continue;
+    if (PLAN_SKIP_LABEL.test(label)) continue;
+    if (visitedSet.has(`${url}|${label}`)) continue;
+    candidates.push({ label, ref });
+  }
+
+  const tier1 = candidates.find((c) => PLAN_TIER1.test(c.label));
+  if (tier1) return { action: "click", ref: tier1.ref, label: tier1.label, reason: "tier1 keyword match" };
+
+  const tier2 = candidates.find((c) => PLAN_TIER2.test(c.label));
+  if (tier2) return { action: "click", ref: tier2.ref, label: tier2.label, reason: "tier2 keyword match" };
+
+  const sawArrayJson = (Array.isArray(events) ? events : []).some(
+    (e) => e && Number(e.status) >= 200 && Number(e.status) < 300 && /json/i.test(String(e.contentType || ""))
+  );
+  if (sawArrayJson) {
+    const row = candidates.find((c) => c.label.indexOf("#") !== -1);
+    if (row) return { action: "click", ref: row.ref, label: row.label, reason: "row after list detected" };
+  }
+
+  if (Number(depth) > 0) return { action: "back", reason: "no candidate on this page" };
+  return { action: "stop", reason: "no candidate and at root depth" };
 }
 
 export async function onRequest(context) {
@@ -182,6 +294,7 @@ export async function onRequest(context) {
             now: deps.now(),
           });
       const nowMs = Number(deps.now());
+      const runnerPhone = body.runner === "phone";
       // Reconnect/backgrounding resumption
       let session = await findLiveSession(deps.db, tenantId, actor.id, deployment.id, SESSION_LIVE, nowMs);
       let job = session ? await findJobForSession(deps.db, tenantId, session.id) : null;
@@ -200,20 +313,30 @@ export async function onRequest(context) {
           control_owner: "clinician",
           expires_at: sessionExpiry,
         });
-        const jobId = newId("job_");
-        job = await insertJob(deps.db, {
-          id: jobId,
-          tenant_id: tenantId,
-          session_id: sessionId,
-          deployment_id: deployment.id,
-          actor_id: actor.id,
-          state: "CREATED",
-          idempotency_key: body.idempotencyKey || null,
-          deadline_at: sessionExpiry,
-          max_attempts: Number(body.maxAttempts) || 3,
-        });
+        // Phone runner reuse: the deployment already has a live, approved adapter -- this session is for
+        // reauth/use of that adapter, not for onboarding a new one, so no job is created at all. The
+        // existing Camofox path (runner absent) is unchanged: it always onboards, active version or not.
+        if (!(runnerPhone && deployment.active_version_id)) {
+          const jobId = newId("job_");
+          job = await insertJob(deps.db, {
+            id: jobId,
+            tenant_id: tenantId,
+            session_id: sessionId,
+            deployment_id: deployment.id,
+            actor_id: actor.id,
+            state: "CREATED",
+            idempotency_key: body.idempotencyKey || null,
+            deadline_at: sessionExpiry,
+            max_attempts: Number(body.maxAttempts) || 3,
+          });
+        }
       }
-      return jsonResponse(Object.assign({ ok: true }, sessionView(session, job)));
+      const sessionResp = Object.assign({ ok: true }, sessionView(session, job));
+      if (runnerPhone) {
+        sessionResp.deployment = { id: deployment.id, origins: deploymentOrigins(deployment), activeVersionId: deployment.active_version_id || null };
+        sessionResp.reuse = !job && !!deployment.active_version_id;
+      }
+      return jsonResponse(sessionResp);
     }
 
     // POST /sessions/:id/viewer-token -- short-lived, actor-bound, single-use viewer authorization
@@ -250,24 +373,66 @@ export async function onRequest(context) {
       const session = await getSessionRow(deps.db, tid, sessionId);
       assertOwnership(session, tid, actor.id);
       const job = await findJobForSession(deps.db, tid, sessionId);
-      return jsonResponse(Object.assign({ ok: true }, sessionView(session, job)));
+      const dep = await getDeployment(deps.db, tid, session.deployment_id);
+      const view = Object.assign({ ok: true }, sessionView(session, job));
+      view.deployment = { id: dep.id, origins: deploymentOrigins(dep), activeVersionId: dep.active_version_id || null };
+      view.candidateVersionId = job && job.candidate_version_id ? job.candidate_version_id : null;
+      if (job && job.candidate_version_id) {
+        const ver = await getVersion(deps.db, tid, job.candidate_version_id);
+        if (ver) view.capabilities = safeJsonParse(ver.capabilities) || [];
+      }
+      return jsonResponse(view);
     }
 
     // POST /sessions/:id/handoff -- idempotent handoff to agent
     if (method === "POST" && parts.length === 3 && parts[0] === "sessions" && parts[2] === "handoff") {
       const sessionId = parts[1];
       const { actor } = await requireAgent(deps, request, env, tid, "session");
-      const session = await getSessionRow(deps.db, tid, sessionId);
+      let session = await getSessionRow(deps.db, tid, sessionId);
       assertOwnership(session, tid, actor.id);
       let job = await findJobForSession(deps.db, tid, sessionId);
       const idemKey = body.idempotencyKey || request.headers.get("Idempotency-Key") || null;
 
+      // Phone-runner: origins the doctor's web view actually visited (CONTRACT.md). Same-registrable-
+      // domain origins merge into the deployment's approved set automatically; anything else is held as
+      // a doctor-confirmable pending origin (POST .../origins). Idempotent by construction (Set-based),
+      // so it runs before the idempotency short-circuits below and is safe to reprocess on a replay.
+      let deploymentRow = await getDeployment(deps.db, tid, session.deployment_id);
+      if (Array.isArray(body.visitedOrigins)) {
+        const currentOrigins = deploymentOrigins(deploymentRow);
+        const firstOrigin = currentOrigins[0];
+        const existing = new Set(currentOrigins);
+        const toAppend = [];
+        const pendingBefore = safeJsonParse(session.pending_origins) || [];
+        const pendingSet = new Set(pendingBefore);
+        for (const raw of body.visitedOrigins.slice(0, 50)) {
+          let o = null;
+          try { o = new URL(String(raw)).origin; } catch { continue; }
+          if (!/^https:$/i.test(new URL(o).protocol)) continue;
+          if (existing.has(o)) continue;
+          if (firstOrigin && sameRegistrableDomain(o, firstOrigin)) { toAppend.push(o); existing.add(o); }
+          else pendingSet.add(o);
+        }
+        if (toAppend.length) {
+          deploymentRow = await updateDeploymentOrigins(deps.db, tid, deploymentRow.id, [...currentOrigins, ...toAppend]);
+        }
+        const pendingAfter = [...pendingSet];
+        if (pendingAfter.length !== pendingBefore.length) {
+          session = await casSession(deps.db, tid, session.id, session.revision, { pending_origins: JSON.stringify(pendingAfter) });
+        }
+      }
+      const withOrigins = (resp) => {
+        resp.origins = deploymentOrigins(deploymentRow);
+        resp.pendingOrigins = safeJsonParse(session.pending_origins) || [];
+        return resp;
+      };
+
       // Idempotency check
       if (idemKey && job && job.idempotency_key === idemKey) {
-        return jsonResponse(Object.assign({ ok: true, idempotent: true }, sessionView(session, job)));
+        return jsonResponse(withOrigins(Object.assign({ ok: true, idempotent: true }, sessionView(session, job))));
       }
       if (session.control_owner === "agent" && (session.state === "AUTHENTICATED" || (job && job.state === "DISCOVERING"))) {
-        return jsonResponse(Object.assign({ ok: true, idempotent: true }, sessionView(session, job)));
+        return jsonResponse(withOrigins(Object.assign({ ok: true, idempotent: true }, sessionView(session, job))));
       }
 
       await assertConsent(deps, env, {
@@ -314,7 +479,35 @@ export async function onRequest(context) {
         }
       }
 
-      return jsonResponse(Object.assign({ ok: true }, sessionView(currentSession, currentJob)));
+      return jsonResponse(withOrigins(Object.assign({ ok: true }, sessionView(currentSession, currentJob))));
+    }
+
+    // POST /sessions/:id/origins -- doctor confirms a pending (non-registrable-domain) origin
+    if (method === "POST" && parts.length === 3 && parts[0] === "sessions" && parts[2] === "origins") {
+      const sessionId = parts[1];
+      const { actor } = await requireAgent(deps, request, env, tid, "session");
+      const session = await getSessionRow(deps.db, tid, sessionId);
+      assertOwnership(session, tid, actor.id);
+      const pending = safeJsonParse(session.pending_origins) || [];
+      const pendingSet = new Set(pending);
+      const approveList = Array.isArray(body.approve) ? body.approve.slice(0, 50) : [];
+      const toApprove = [];
+      for (const raw of approveList) {
+        const o = String(raw);
+        if (!pendingSet.has(o)) throw new OnboardError("invalid", "origin was not offered for confirmation");
+        let parsed = null;
+        try { parsed = new URL(o); } catch { throw new OnboardError("invalid", "malformed origin"); }
+        if (!/^https:$/i.test(parsed.protocol)) throw new OnboardError("invalid", "origin must be https");
+        toApprove.push(o);
+      }
+      let deploymentRow = await getDeployment(deps.db, tid, session.deployment_id);
+      if (toApprove.length) {
+        const merged = [...new Set([...deploymentOrigins(deploymentRow), ...toApprove])];
+        deploymentRow = await updateDeploymentOrigins(deps.db, tid, deploymentRow.id, merged);
+        const remaining = pending.filter((o) => toApprove.indexOf(o) === -1);
+        await casSession(deps.db, tid, session.id, session.revision, { pending_origins: JSON.stringify(remaining) });
+      }
+      return jsonResponse({ ok: true, origins: deploymentOrigins(deploymentRow) });
     }
 
     // POST /sessions/:id/pause -- explicit ownership transfer to clinician
@@ -378,6 +571,286 @@ export async function onRequest(context) {
         try { await revokeConsent(deps, env, { tenantId: tid, consentId: session.consent_id, now: nowMs }); } catch {}
       }
       return jsonResponse(Object.assign({ ok: true, cancelled: true }, sessionView(updatedSession, updatedJob)));
+    }
+
+    // POST /sessions/:id/plan -- deterministic keyword planner (no LLM). Lines are NEVER persisted or
+    // logged: they are parsed, used to answer this one request, and discarded.
+    if (method === "POST" && parts.length === 3 && parts[0] === "sessions" && parts[2] === "plan") {
+      const sessionId = parts[1];
+      const { actor } = await requireAgent(deps, request, env, tid, "session");
+      const session = await getSessionRow(deps.db, tid, sessionId);
+      assertOwnership(session, tid, actor.id);
+      if (findHostileKeys(body).length) throw new OnboardError("invalid", "hostile key in request body");
+      if (typeof body.url !== "string" || !body.url) throw new OnboardError("invalid", "url required");
+      const lines = Array.isArray(body.lines) ? body.lines : [];
+      const events = Array.isArray(body.events) ? body.events : [];
+      if (lines.length > 400) throw new OnboardError("invalid", "too many lines");
+      if (events.length > 200) throw new OnboardError("invalid", "too many events");
+      for (const l of lines) if (typeof l !== "string" || l.length > 200) throw new OnboardError("invalid", "line too long");
+      const visited = Array.isArray(body.visited) ? body.visited : [];
+      const plan = planNext({ url: body.url, lines, visited, depth: body.depth, events });
+      return jsonResponse(Object.assign({ ok: true }, plan));
+    }
+
+    // POST /sessions/:id/progress -- AUTHENTICATED -> DISCOVERING (idempotent)
+    if (method === "POST" && parts.length === 3 && parts[0] === "sessions" && parts[2] === "progress") {
+      const sessionId = parts[1];
+      const { actor } = await requireAgent(deps, request, env, tid, "session");
+      const session = await getSessionRow(deps.db, tid, sessionId);
+      assertOwnership(session, tid, actor.id);
+      if (body.stage !== "DISCOVERING") throw new OnboardError("invalid", "unsupported progress stage");
+      let job = await findJobForSession(deps.db, tid, sessionId);
+      if (!job) throw new OnboardError("not-found", "job not found");
+      if (job.state === "AUTHENTICATED") {
+        assertTransition("job", "AUTHENTICATED", "DISCOVERING");
+        job = await casJob(deps.db, tid, job.id, job.revision, { state: "DISCOVERING", stage: "discovering" });
+      }
+      return jsonResponse(Object.assign({ ok: true }, sessionView(session, job)));
+    }
+
+    // POST /sessions/:id/discovery -- compile + offline-validate the candidate manifest, issue GET probes
+    if (method === "POST" && parts.length === 3 && parts[0] === "sessions" && parts[2] === "discovery") {
+      const sessionId = parts[1];
+      const { actor } = await requireAgent(deps, request, env, tid, "session");
+      const session = await getSessionRow(deps.db, tid, sessionId);
+      assertOwnership(session, tid, actor.id);
+      const bodyBytes = new TextEncoder().encode(JSON.stringify(body)).length;
+      if (bodyBytes > 512 * 1024) throw new OnboardError("too-large", "discovery payload exceeds 512 KB");
+      if (findHostileKeys(body).length) throw new OnboardError("invalid", "hostile key in request body");
+      const spec = body.spec;
+      if (!spec || typeof spec !== "object" || Array.isArray(spec)) throw new OnboardError("invalid", "spec required");
+
+      let job = await findJobForSession(deps.db, tid, sessionId);
+      if (!job) throw new OnboardError("not-found", "job not found");
+      if (["DISCOVERING", "COMPILING", "VALIDATING"].indexOf(job.state) === -1) {
+        throw new OnboardError("conflict", "job is not in discovery");
+      }
+      const deployment = await getDeployment(deps.db, tid, session.deployment_id);
+
+      if (job.state === "DISCOVERING") {
+        assertTransition("job", "DISCOVERING", "COMPILING");
+        job = await casJob(deps.db, tid, job.id, job.revision, { state: "COMPILING", stage: "compiling" });
+      }
+
+      // connect-agent/discovery.mjs's createCollector().collect() (the shape CONTRACT.md says this body's
+      // `spec` is, unchanged) stamps version:3; compileManifest now accepts both 2 and 3 (identical
+      // handling -- see connect-agent/manifest/compile.mjs).
+      let manifest;
+      try {
+        const compiled = await compileManifest(spec, {
+          manifestId: `manifest-${deployment.id}-${job.id}`,
+          timezone: (env && env.CONNECT_AGENT_MANIFEST_TIMEZONE) || "Asia/Kolkata",
+        });
+        manifest = compiled.manifest;
+      } catch (e) {
+        throw new OnboardError("invalid", "spec could not be compiled");
+      }
+
+      if (job.state === "COMPILING") {
+        assertTransition("job", "COMPILING", "VALIDATING");
+        job = await casJob(deps.db, tid, job.id, job.revision, { state: "VALIDATING", stage: "validating" });
+      }
+
+      // Offline: no live network call to the hospital from the server. Runs the schema/structural checks
+      // against an empty fixture; real capability proof comes from the phone's own live probes at
+      // POST .../evidence.
+      const offlineValidation = await validateCandidate({ manifest, fixture: { routes: {} } });
+
+      const depOrigins = new Set(deploymentOrigins(deployment));
+      const observedPaths = new Set(
+        (Array.isArray(spec.events) ? spec.events : [])
+          .filter((e) => e && String(e.method || "").toUpperCase() === "GET")
+          .map((e) => `${e.origin}|${genericizePath(e.path)}`)
+      );
+      const probes = [];
+      for (const op of manifest.operations) {
+        if (op.method !== "GET") continue;
+        const originRow = manifest.origins.find((o) => o.id === op.originId);
+        if (!originRow || !depOrigins.has(originRow.origin)) continue;
+        if (!observedPaths.has(`${originRow.origin}|${genericizePath(op.pathTemplate)}`)) continue;
+        probes.push({ opId: op.type, method: "GET", url: originRow.origin + op.pathTemplate });
+      }
+
+      const phoneState = {
+        manifest, probes,
+        offlineValidation,
+        observedEvents: (Array.isArray(spec.events) ? spec.events : []).slice(0, 200),
+      };
+      job = await casJob(deps.db, tid, job.id, job.revision, { phone_state: JSON.stringify(phoneState) });
+
+      return jsonResponse({ ok: true, candidateVersionId: job.candidate_version_id || null, manifest, probes, capabilities: null });
+    }
+
+    // POST /sessions/:id/evidence -- phone reports live probe results for opIds this server issued
+    if (method === "POST" && parts.length === 3 && parts[0] === "sessions" && parts[2] === "evidence") {
+      const sessionId = parts[1];
+      const { actor } = await requireAgent(deps, request, env, tid, "session");
+      const session = await getSessionRow(deps.db, tid, sessionId);
+      assertOwnership(session, tid, actor.id);
+      if (findHostileKeys(body).length) throw new OnboardError("invalid", "hostile key in request body");
+
+      let job = await findJobForSession(deps.db, tid, sessionId);
+      if (!job) throw new OnboardError("not-found", "job not found");
+      if (job.state !== "VALIDATING" && job.state !== "AWAITING_APPROVAL") {
+        throw new OnboardError("conflict", "job is not awaiting evidence");
+      }
+      const phoneState = safeJsonParse(job.phone_state);
+      if (!phoneState || !phoneState.manifest) throw new OnboardError("conflict", "no candidate manifest on this job");
+      const manifest = phoneState.manifest;
+      const issuedOpIds = new Set((phoneState.probes || []).map((p) => p.opId));
+
+      const reportedProbes = Array.isArray(body.probes) ? body.probes : [];
+      if (reportedProbes.length > 200) throw new OnboardError("invalid", "too many probe results");
+      const cleanProbes = [];
+      for (const p of reportedProbes) {
+        if (!p || typeof p !== "object" || !issuedOpIds.has(p.opId)) {
+          throw new OnboardError("invalid", "probe opId was not issued by this server");
+        }
+        cleanProbes.push({
+          opId: String(p.opId),
+          status: Number.isInteger(p.status) ? p.status : 0,
+          contentType: p.contentType != null ? String(p.contentType).slice(0, 100) : null,
+          responseShape: (p.responseShape && typeof p.responseShape === "object" && !Array.isArray(p.responseShape)) ? p.responseShape : null,
+          itemCount: Number.isInteger(p.itemCount) ? p.itemCount : null,
+        });
+      }
+      const probeByOp = new Map(cleanProbes.map((p) => [p.opId, p]));
+      const observedByKey = new Map(
+        (phoneState.observedEvents || []).map((e) => [`${String(e.method || "").toUpperCase()} ${e.origin}|${genericizePath(e.path)}`, e])
+      );
+
+      const capabilities = manifest.operations.map((op) => {
+        const probe = probeByOp.get(op.type);
+        let proven = false, how = "none";
+        if (probe && probe.status >= 200 && probe.status < 300 && probe.responseShape != null) {
+          proven = true; how = "probe";
+        } else if (op.method !== "GET") {
+          const originRow = manifest.origins.find((o) => o.id === op.originId);
+          const observed = observedByKey.get(`${op.method} ${originRow ? originRow.origin : ""}|${genericizePath(op.pathTemplate)}`);
+          if (observed && Number(observed.status) >= 200 && Number(observed.status) < 300 && /json/i.test(String(observed.contentType || ""))) {
+            proven = true; how = "observed";
+          }
+        }
+        return { operation: op.type, resource: capabilityResource(op.type), proven, how };
+      });
+
+      const evidenceHash = sha256(canonicalJson({ offlineValidation: phoneState.offlineValidation, probes: cleanProbes }));
+
+      let candidateVersionId = job.candidate_version_id;
+      let versionState;
+      if (!candidateVersionId) {
+        let version = await insertVersion(deps.db, {
+          tenantId: tid,
+          deploymentId: session.deployment_id,
+          manifestRef: "manifest:" + manifest.contentHash,
+          schemaVersion: manifest.schemaVersion,
+          contentHash: manifest.contentHash,
+          capabilities,
+          parentVersionId: null,
+          evidenceHash,
+        });
+        candidateVersionId = version.id;
+        assertTransition("adapter", "CREATED", "VALIDATING");
+        version = await casVersionLifecycle(deps.db, tid, version.id, "CREATED", { lifecycle: "VALIDATING" });
+        assertTransition("adapter", "VALIDATING", "AWAITING_APPROVAL");
+        version = await casVersionLifecycle(deps.db, tid, version.id, "VALIDATING", { lifecycle: "AWAITING_APPROVAL" });
+        versionState = version.lifecycle;
+      } else {
+        const version = await getVersion(deps.db, tid, candidateVersionId);
+        versionState = version ? version.lifecycle : "AWAITING_APPROVAL";
+      }
+
+      if (job.state === "VALIDATING") {
+        assertTransition("job", "VALIDATING", "AWAITING_APPROVAL");
+        job = await casJob(deps.db, tid, job.id, job.revision, { state: "AWAITING_APPROVAL", candidate_version_id: candidateVersionId });
+      }
+
+      return jsonResponse({ ok: true, candidateVersionId, capabilities, evidenceHash, state: versionState });
+    }
+
+    // GET /versions/:id
+    if (method === "GET" && parts.length === 2 && parts[0] === "versions") {
+      const versionId = parts[1];
+      await requireAgent(deps, request, env, tid, "read");
+      const version = await getVersion(deps.db, tid, versionId);
+      if (!version) throw new OnboardError("not-found", "adapter version not found");
+      const job = await findJobByCandidateVersion(deps.db, tid, versionId);
+      let operations = [];
+      const phoneState = job ? safeJsonParse(job.phone_state) : null;
+      if (phoneState && phoneState.manifest && Array.isArray(phoneState.manifest.operations)) {
+        operations = phoneState.manifest.operations.map((op) => ({
+          opId: op.type, type: op.type, resource: capabilityResource(op.type),
+          method: op.method, pathTemplate: op.pathTemplate,
+        }));
+      }
+      return jsonResponse({
+        ok: true, id: version.id, state: version.lifecycle, deploymentId: version.deployment_id,
+        operations, capabilities: safeJsonParse(version.capabilities) || [],
+        evidenceHash: version.evidence_hash || null, createdAt: version.created_at,
+      });
+    }
+
+    // POST /versions/:id/approve -- owner/admin only; activates the candidate
+    if (method === "POST" && parts.length === 3 && parts[0] === "versions" && parts[2] === "approve") {
+      const versionId = parts[1];
+      const { actor, role } = await requireAgent(deps, request, env, tid, "approve");
+      const version = await getVersion(deps.db, tid, versionId);
+      if (!version) throw new OnboardError("not-found", "adapter version not found");
+      const { version: activated, activation } = await activateVersion(deps.db, {
+        tenantId: tid,
+        deploymentId: version.deployment_id,
+        versionId,
+        actorId: actor.id,
+        role,
+        policyVersion: "connect-agent-phone/1",
+        evidenceHash: version.evidence_hash,
+      });
+      const job = await findJobByCandidateVersion(deps.db, tid, versionId);
+      if (job && canTransition("job", job.state, "ACTIVE")) {
+        assertTransition("job", job.state, "ACTIVE");
+        await casJob(deps.db, tid, job.id, job.revision, { state: "ACTIVE", completed_at: nowIso() });
+      }
+      return jsonResponse({ ok: true, state: activated.lifecycle, activationId: activation.id });
+    }
+
+    // POST /versions/:id/reject -- owner/admin only; revokes the candidate
+    if (method === "POST" && parts.length === 3 && parts[0] === "versions" && parts[2] === "reject") {
+      const versionId = parts[1];
+      await requireAgent(deps, request, env, tid, "approve");
+      const version = await getVersion(deps.db, tid, versionId);
+      if (!version) throw new OnboardError("not-found", "adapter version not found");
+      assertTransition("adapter", version.lifecycle, "REVOKED");
+      const updated = await casVersionLifecycle(deps.db, tid, versionId, version.lifecycle, {
+        lifecycle: "REVOKED",
+        policy_version: "reject:" + String(body.reason || "unspecified").slice(0, 200),
+      });
+      const job = await findJobByCandidateVersion(deps.db, tid, versionId);
+      if (job && canTransition("job", job.state, "FAILED")) {
+        assertTransition("job", job.state, "FAILED");
+        await casJob(deps.db, tid, job.id, job.revision, { state: "FAILED", stage_code: "E_REJECTED", completed_at: nowIso() });
+      }
+      return jsonResponse({ ok: true, state: updated.lifecycle });
+    }
+
+    // GET /connections -- this tenant's deployments, one row each
+    if (method === "GET" && seg === "connections") {
+      await requireAgent(deps, request, env, tid, "read");
+      const deployments = await listDeploymentsForTenant(deps.db, tid);
+      const connections = [];
+      for (const dep of deployments) {
+        const activation = dep.active_version_id ? await getActiveActivation(deps.db, tid, dep.id) : null;
+        const pending = await findVersionByLifecycle(deps.db, tid, dep.id, "AWAITING_APPROVAL");
+        const lastSession = await findLatestSessionForDeployment(deps.db, tid, dep.id);
+        connections.push({
+          deploymentId: dep.id,
+          origins: deploymentOrigins(dep),
+          activeVersionId: dep.active_version_id || null,
+          activeSince: activation ? activation.activated_at : null,
+          pendingVersionId: pending ? pending.id : null,
+          lastSessionState: lastSession ? lastSession.state : null,
+        });
+      }
+      return jsonResponse({ ok: true, connections });
     }
 
     // POST /hospitals/resolve -- resolve deployment by metadata without leaking membership

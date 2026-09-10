@@ -832,7 +832,7 @@
         // check and only publishes SMD_CONNECT_AGENT_BOOT when it passes, so the tile cannot appear
         // without it and the flag logic is not duplicated here.
         ((window.SMD_CONNECT_AGENT_BOOT && window.SMD_CONNECT_AGENT_BOOT.enabled)
-          ? tile("hospital", "Agent Connect", "Onboard your hospital EMR", "agentconnect") : "") +
+          ? tile("hospital", "Connect Hospital", "Onboard your hospital EMR", "agentconnect") : "") +
         '</div>');
       sheetEl().querySelectorAll("[data-mi]").forEach(function (b) {
         b.addEventListener("click", function () {
@@ -953,10 +953,10 @@
       try {
         if (window.SMD_CONNECT_AGENT_BOOT && SMD_CONNECT_AGENT_BOOT.open) {
           SMD_CONNECT_AGENT_BOOT.open().catch(function (e) {
-            if (window.toast) toast("Agent Connect unavailable: " + (e && e.message ? e.message : "load failed"));
+            if (window.toast) toast("Connect Hospital unavailable: " + (e && e.message ? e.message : "load failed"));
           });
-        } else if (window.toast) { toast("Agent Connect is not enabled"); }
-      } catch (e) { if (window.toast) toast("Agent Connect unavailable"); }
+        } else if (window.toast) { toast("Connect Hospital is not enabled"); }
+      } catch (e) { if (window.toast) toast("Connect Hospital unavailable"); }
     },
     followcare: function () { if (window.FollowCare && FollowCare.open) FollowCare.open(); else toast("FollowCare loading…"); },
     maitri: function () { if (window.FollowCare && FollowCare.maitri) FollowCare.maitri(); else if (window.FollowCare && FollowCare.open) FollowCare.open(); else toast("MAiTRI loading…"); },
@@ -2198,7 +2198,7 @@
       // rather than an admin wiring a connection up front. Flag-gated by the boot module
       // (smd_connect_agent, default OFF), which only publishes SMD_CONNECT_AGENT_BOOT when it passes.
       ((window.SMD_CONNECT_AGENT_BOOT && window.SMD_CONNECT_AGENT_BOOT.enabled)
-        ? mi("hospital", "Agent Connect", "Onboard your hospital by signing in yourself", "agentconnect") : "") +
+        ? mi("hospital", "Connect Hospital", "Onboard your hospital by signing in yourself", "agentconnect") : "") +
       mi("framework", "Connect patient", "Pull a patient from a connected hospital", "connectpatient") +
       mi("settings", "Display &amp; Accessibility", "Font size, density, auto-fit", "display") +
       mi("bell", "Notification preferences", "Control tasks, labs, guidelines &amp; more", "notifprefs") +

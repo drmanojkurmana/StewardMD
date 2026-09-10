@@ -21,6 +21,7 @@ public class MainActivity extends BridgeActivity {
         registerPlugin(SafeFirebaseAuthenticationPlugin.class);
         registerPlugin(SpeechRecognition.class);
         registerPlugin(AppOrientationPlugin.class);
+        registerPlugin(ConnectBrowserPlugin.class);
         registerPlugin(FundxDepthPlugin.class);
         // Built (native whisper.cpp JNI, gradle-wired), never registered - which is the whole
         // reason voice.js's whisperAvailable() gate has been silently false on every Android

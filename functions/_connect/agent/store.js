@@ -68,6 +68,22 @@ export async function insertDeployment(db, { tenantId, hospitalId, name, origins
 
 export function deploymentOrigins(row) { return json(row && row.origins, []) || []; }
 
+// Phone-runner handoff: extend the deployment's own approved-origin set (same-registrable-domain origins
+// merge automatically; see [[path]].js#sameRegistrableDomain). No `revision` column exists on this table
+// (see casVersionLifecycle's comment above) so this is a plain last-write-wins UPDATE, same posture as the
+// rest of this table's mutation helpers -- acceptable because only the session's own actor ever appends to
+// it (one doctor's handoff at a time).
+export async function updateDeploymentOrigins(db, tenantId, id, origins) {
+  await need(db).prepare("UPDATE connect_deployment SET origins=?, updated_at=? WHERE tenant_id=? AND id=?")
+    .bind(JSON.stringify(origins), nowIso(), tenantId, id).run();
+  return await getDeployment(db, tenantId, id);
+}
+
+export async function listDeploymentsForTenant(db, tenantId) {
+  const r = await need(db).prepare("SELECT * FROM connect_deployment WHERE tenant_id=?").bind(tenantId).all();
+  return r.results || [];
+}
+
 // Client-safe deployment projection. Carries no membership signal about any OTHER tenant.
 export function deploymentView(row, activeVersion) {
   return {
@@ -98,6 +114,16 @@ export async function insertVersion(db, { tenantId, deploymentId, manifestRef, s
 // guards the column that IS the thing being raced over: the version's own `lifecycle` (the exact state-machine
 // edge state.js just asserted), and the deployment's own `active_version_id`. Same "confirm by re-read" shape
 // as casUpdate above, for the same reason (D1 meta.changes is not available through every driver shim).
+// The newest version of a deployment currently in a given lifecycle -- used by GET /connections
+// (pendingVersionId = the AWAITING_APPROVAL candidate, if any).
+export async function findVersionByLifecycle(db, tenantId, deploymentId, lifecycle) {
+  const r = await need(db).prepare("SELECT * FROM connect_adapter_version WHERE tenant_id=? AND deployment_id=? AND lifecycle=?")
+    .bind(tenantId, deploymentId, lifecycle).all();
+  const rows = (r.results || []).slice();
+  rows.sort((a, b) => String(b.created_at || "").localeCompare(String(a.created_at || "")));
+  return rows[0] || null;
+}
+
 export async function casVersionLifecycle(db, tenantId, id, expectedLifecycle, set) {
   const cols = Object.keys(set);
   const sql = "UPDATE connect_adapter_version SET " + cols.map((c) => c + "=?").join(", ") +
@@ -168,9 +194,9 @@ export async function revokeConsentRow(db, tenantId, id, whenMs) {
 // --- session ----------------------------------------------------------------------------------------
 export async function insertSession(db, row) {
   await need(db).prepare(
-    "INSERT INTO connect_agent_session (id,tenant_id,deployment_id,actor_id,runner_ref,runner_id,consent_id,state,control_owner,revision,expires_at,cleanup_after,closed_at,created_at,updated_at) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)"
+    "INSERT INTO connect_agent_session (id,tenant_id,deployment_id,actor_id,runner_ref,runner_id,consent_id,state,control_owner,revision,expires_at,cleanup_after,closed_at,created_at,updated_at,pending_origins) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)"
   ).bind(row.id, row.tenant_id, row.deployment_id, row.actor_id, row.runner_ref, null, row.consent_id,
-    row.state, row.control_owner, 1, row.expires_at, null, null, nowIso(), nowIso()).run();
+    row.state, row.control_owner, 1, row.expires_at, null, null, nowIso(), nowIso(), null).run();
   return await getSessionRow(db, row.tenant_id, row.id);
 }
 
@@ -189,6 +215,15 @@ export async function findLiveSession(db, tenantId, actorId, deploymentId, liveS
 
 export async function casSession(db, tenantId, id, expectedRevision, set) {
   return casUpdate(db, "connect_agent_session", tenantId, id, expectedRevision, set);
+}
+
+// GET /connections' lastSessionState: any actor's most recent session against this deployment, not just
+// the caller's own -- a tenant-wide connection status, not a per-doctor one.
+export async function findLatestSessionForDeployment(db, tenantId, deploymentId) {
+  const r = await need(db).prepare("SELECT * FROM connect_agent_session WHERE tenant_id=? AND deployment_id=?").bind(tenantId, deploymentId).all();
+  const rows = (r.results || []).slice();
+  rows.sort((a, b) => String(b.created_at || "").localeCompare(String(a.created_at || "")));
+  return rows[0] || null;
 }
 
 // Client-safe session projection. runner_ref, runner_id and any browser identifier are structurally
@@ -210,10 +245,10 @@ export function sessionView(session, job) {
 // --- job --------------------------------------------------------------------------------------------
 export async function insertJob(db, row) {
   await need(db).prepare(
-    "INSERT INTO connect_agent_job (id,tenant_id,session_id,deployment_id,actor_id,state,revision,idempotency_key,lease_owner,lease_expires_at,attempts,max_attempts,deadline_at,stage,stage_code,candidate_version_id,completed_at,created_at,updated_at) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)"
+    "INSERT INTO connect_agent_job (id,tenant_id,session_id,deployment_id,actor_id,state,revision,idempotency_key,lease_owner,lease_expires_at,attempts,max_attempts,deadline_at,stage,stage_code,candidate_version_id,completed_at,created_at,updated_at,phone_state) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)"
   ).bind(row.id, row.tenant_id, row.session_id, row.deployment_id, row.actor_id, row.state, 1,
     row.idempotency_key || null, null, null, 0, Number(row.max_attempts) || 3, row.deadline_at,
-    null, null, null, null, nowIso(), nowIso()).run();
+    null, null, null, null, nowIso(), nowIso(), null).run();
   return await getJobRow(db, row.tenant_id, row.id);
 }
 
@@ -232,6 +267,15 @@ export async function findJobByIdempotencyKey(db, tenantId, key) {
 
 export async function findJobForSession(db, tenantId, sessionId) {
   const r = await need(db).prepare("SELECT * FROM connect_agent_job WHERE tenant_id=? AND session_id=?").bind(tenantId, sessionId).all();
+  const rows = (r.results || []).slice();
+  rows.sort((a, b) => String(b.created_at || "").localeCompare(String(a.created_at || "")));
+  return rows[0] || null;
+}
+
+// GET /versions/:id and POST /versions/:id/approve|reject reach the job by its produced version, not by
+// session -- a reviewer looking at a candidate version has no session id in hand.
+export async function findJobByCandidateVersion(db, tenantId, versionId) {
+  const r = await need(db).prepare("SELECT * FROM connect_agent_job WHERE tenant_id=? AND candidate_version_id=?").bind(tenantId, versionId).all();
   const rows = (r.results || []).slice();
   rows.sort((a, b) => String(b.created_at || "").localeCompare(String(a.created_at || "")));
   return rows[0] || null;

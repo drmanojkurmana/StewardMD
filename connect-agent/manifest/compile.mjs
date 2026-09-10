@@ -209,7 +209,14 @@ export async function compileManifest(spec, {
   generatedAt = new Date().toISOString(), suggest = null, fixtures = {},
 } = {}) {
   if (!manifestId) throw new Error('manifestId is required');
-  if (!spec || typeof spec !== 'object' || Number(spec.version) !== 2) throw new Error('compileManifest requires a discovery spec of version 2');
+  // Versions 2 and 3 carry the identical fields this compiler reads (allowedOrigins/startOrigin/events,
+  // same per-event shape); v3 (connect-agent/discovery.mjs's createCollector().collect(), also the
+  // phone-runner spec shape per connect-agent/phone/CONTRACT.md) additionally carries blockedEvents/
+  // reinstalls, which this compiler has never read. Accepting both is a label match, not a behavior
+  // change for either.
+  if (!spec || typeof spec !== 'object' || [2, 3].indexOf(Number(spec.version)) === -1) {
+    throw new Error('compileManifest requires a discovery spec of version 2 or 3');
+  }
   if (!Array.isArray(spec.allowedOrigins) || spec.allowedOrigins.length === 0) throw new Error('discovery spec carries no allowed origins');
 
   const discoverySpecHash = sha256(canonicalJson(spec));
@@ -304,7 +311,7 @@ export async function compileManifest(spec, {
   const manifest = {
     schemaVersion: 3, manifestId, origins, operations,
     capabilityProbes, unsupported: dedupeUnsupported(unsupported),
-    provenance: { discoverySpecHash, compilerVersion: COMPILER_VERSION, generatedAt, discoverySchemaVersion: 2 },
+    provenance: { discoverySpecHash, compilerVersion: COMPILER_VERSION, generatedAt, discoverySchemaVersion: Number(spec.version) },
     contentHash: 'sha256:'.padEnd(71, '0'),
   };
   manifest.contentHash = manifestContentHash(manifest);

@@ -2,10 +2,10 @@
  *
  * Verifies:
  * 1. Page loads with zero console errors and zero uncaught exceptions.
- * 2. With the flag OFF, the boot module publishes no entry point, the More sheet has no Agent Connect
+ * 2. With the flag OFF, the boot module publishes no entry point, the More sheet has no Connect Hospital
  *    row, and the onboarding UI is not loaded.
  * 3. With the flag ON (set via localStorage), the boot module publishes its opener, the More sheet
- *    offers an "Agent Connect" row, and clicking it lazily loads the onboarding UI and opens it.
+ *    offers a "Connect Hospital" row, and clicking it lazily loads the onboarding UI and opens it.
  * 4. Error reporting from client-errors.js still functions (trigger a caught test error
  *    and assert its existing handler ran).
  *
@@ -130,7 +130,7 @@ try {
 
   // Check 2: with flag OFF the boot module publishes nothing, so no entry point can exist anywhere
   // and the onboarding UI is not loaded. (There is no floating launcher pill any more - the entry
-  // point is the "Agent Connect" row in the More sheet, rendered by home.js only when the boot
+  // point is the "Connect Hospital" row in the More sheet, rendered by home.js only when the boot
   // module has published SMD_CONNECT_AGENT_BOOT. The pill was a test-console leftover that
   // duplicated the real control and read as debug UI to a doctor.)
   const bootAbsent = await ev(`return typeof window.SMD_CONNECT_AGENT_BOOT === "undefined";`);
@@ -146,7 +146,7 @@ try {
     if (more) more.click();
     return document.querySelector('[data-mi="agentconnect"]') === null;
   `);
-  ok(rowAbsentOff === true, "with the flag OFF the More sheet has no Agent Connect row");
+  ok(rowAbsentOff === true, "with the flag OFF the More sheet has no Connect Hospital row");
 
   // Check 3: with the flag ON, the boot module publishes its opener and the More sheet offers the row
   await ev(`localStorage.setItem("smd_connect_agent", "1"); return 1;`);
@@ -174,11 +174,11 @@ try {
     await sleep(300);
     const found = await ev(`
       var row = document.querySelector('[data-mi="agentconnect"]');
-      return !!(row && row.innerText.indexOf("Agent Connect") >= 0);
+      return !!(row && row.innerText.indexOf("Connect Hospital") >= 0);
     `);
     if (found === true) { rowAppeared = true; break; }
   }
-  ok(rowAppeared, "the More sheet offers an Agent Connect row a doctor can find");
+  ok(rowAppeared, "the More sheet offers a Connect Hospital row a doctor can find");
 
   // Clicking the row lazily loads the onboarding UI and opens the sheet - the real doctor path.
   const clickOk = await ev(`
@@ -196,7 +196,7 @@ try {
       break;
     }
   }
-  ok(clickOk && uiLoaded, "clicking Agent Connect loads connect-agent-onboarding.js and opens the sheet");
+  ok(clickOk && uiLoaded, "clicking Connect Hospital loads connect-agent-onboarding.js and opens the sheet");
 
   // Close the sheet
   await ev(`if (window.SMD_CONNECT_AGENT && window.SMD_CONNECT_AGENT.close) window.SMD_CONNECT_AGENT.close(); return 1;`);

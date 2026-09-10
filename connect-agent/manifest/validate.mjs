@@ -11,7 +11,17 @@ import { validateManifest, manifestContentHash, canonicalJson, sha256, templateP
 import { executeOperation, SessionExpiredError } from './interpret.mjs';
 import { buildBundle, evaluate } from './normalize.mjs';
 
-export { validateAdapterSpec } from '../controller.mjs';
+// Lazy, NOT a top-level re-export: controller.mjs imports node:fs/promises and node:crypto, which are
+// unavailable to Cloudflare Pages Functions (no nodejs_compat -- see wrangler.toml). A top-level
+// `export { validateAdapterSpec } from '../controller.mjs'` pulls that whole chain in at MODULE
+// INSTANTIATION, before this function is ever called, which would break every functions/ import of this
+// file (it only actually needs validateCandidate/createFixtureExec). Nothing imports validateAdapterSpec
+// through this module today (callers use it via connect-agent/controller.mjs directly), so this stays a
+// same-behavior lazy shim for anyone who does.
+export async function validateAdapterSpec(...args) {
+  const controller = await import('../controller.mjs');
+  return controller.validateAdapterSpec(...args);
+}
 
 const ISO = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d{3})?Z$/;
 const MED_STATUS = new Set(['active', 'inactive', 'completed', 'stopped', 'on-hold', 'not-taken', 'entered-in-error', 'unknown']);

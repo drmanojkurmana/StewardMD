@@ -70,7 +70,14 @@ CREATE TABLE IF NOT EXISTS connect_agent_session (
   cleanup_after  INTEGER,                         -- epoch ms; browser cleanup may run from here
   closed_at      TEXT,
   created_at     TEXT,
-  updated_at     TEXT
+  updated_at     TEXT,
+  -- Phone-runner (additive): origins the doctor's own web view visited during handoff that do NOT share
+  -- the deployment's registrable domain, offered back to the doctor for one-tap confirmation (POST
+  -- .../origins accepts ONLY an origin that appears here). JSON array of https origin strings; NULL until
+  -- the first handoff with visitedOrigins. NOTE: CREATE-IF-NOT-EXISTS adds this only on a FRESH D1; a
+  -- provisioned D1 needs `ALTER TABLE connect_agent_session ADD COLUMN pending_origins TEXT;` (SQLite has
+  -- no ADD-COLUMN-IF-NOT-EXISTS).
+  pending_origins TEXT
 );
 CREATE INDEX IF NOT EXISTS idx_connect_agent_session_live ON connect_agent_session (tenant_id, actor_id, deployment_id, state);
 CREATE INDEX IF NOT EXISTS idx_connect_agent_session_expiry ON connect_agent_session (expires_at);
@@ -97,7 +104,14 @@ CREATE TABLE IF NOT EXISTS connect_agent_job (
   candidate_version_id TEXT,
   completed_at         TEXT,                      -- set once, on the FIRST terminal report (dedupe guard)
   created_at           TEXT,
-  updated_at           TEXT
+  updated_at           TEXT,
+  -- Phone-runner (additive): the compiled candidate manifest + issued GET probes + offline validateCandidate
+  -- output for THIS job, set by POST .../discovery and read back by POST .../evidence and GET
+  -- /versions/:id. JSON object, no PHI/secrets (manifest carries no observed values, only shapes/paths).
+  -- Deliberately NOT surfaced by sessionView/store's client-safe projections. NOTE: CREATE-IF-NOT-EXISTS
+  -- adds this only on a FRESH D1; a provisioned D1 needs `ALTER TABLE connect_agent_job ADD COLUMN
+  -- phone_state TEXT;` (SQLite has no ADD-COLUMN-IF-NOT-EXISTS).
+  phone_state           TEXT
 );
 CREATE UNIQUE INDEX IF NOT EXISTS idx_connect_agent_job_idem ON connect_agent_job (tenant_id, idempotency_key);
 CREATE INDEX IF NOT EXISTS idx_connect_agent_job_lease ON connect_agent_job (state, lease_expires_at);

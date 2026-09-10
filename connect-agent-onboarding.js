@@ -1,21 +1,32 @@
-/* StewardMD Connect Agent onboarding and session UI.
+/* StewardMD Connect Hospital onboarding and session UI.
  *
- * Doctor-facing replacement for the old read-only test console. Flow:
- * hospital picker -> explicit consent -> embedded sign in viewport ->
- * live job progress -> success, plus a returning-doctor reconnect path.
+ * Doctor-facing flow: connections list -> hospital URL -> explicit consent ->
+ * sign in (native in-app browser on phone, embedded iframe elsewhere) -> live
+ * discovery progress -> capabilities result with reviewer approval, plus an
+ * "already connected" reuse shortcut and a returning-doctor reconnect path.
  *
- * Buildless ES5 IIFE. Styles ship as an injected <style> block (same convention
- * as the console this file replaces). No frameworks, no dependencies.
+ * Buildless ES5 IIFE. Styles ship as an injected <style> block. No frameworks,
+ * no dependencies. Coded against connect-agent/phone/CONTRACT.md (broker
+ * routes) and local-plugins/capacitor-connect-browser/README.md (native
+ * ConnectBrowser plugin). Those two files are the source of truth for wire
+ * shapes; this file never guesses at either without a re-read.
  *
  * API SEAM: every network call goes through api(path, opts), which resolves
  * {s: <http status>, d: <decoded body>}. Production api() calls fetch() against
  * /api/connect/agent (the broker router owns those routes). Tests replace the
  * transport with window.SMD_CONNECT_AGENT.__setApi(fn); no backend needed.
  *
- * LOGIN VIEWPORT: the iframe src is set from POST /sessions/:id/viewer-token.
- * In production that URL is a broker-issued, actor-bound, short-lived viewer
- * URL (noVNC-style session). It is never the raw EMR address and never carries
- * credentials. Tests point it at a same-origin fixture page.
+ * PHONE RUNNER: when window.Capacitor.Plugins.ConnectBrowser exists, sign in
+ * and discovery run through that native plugin (see hasPlugin()/getPlugin()).
+ * Discovery itself is driven by connect-agent/phone/index.mjs's
+ * runPhoneDiscovery({plugin, api, session, deployment, startUrl, onProgress}),
+ * loaded lazily via loadPhoneEngine() (an ES5-safe wrapper around import(),
+ * per repo convention: `new Function('p','return import(p)')`). Tests stub the
+ * engine with window.__SMD_PHONE_ENGINE_TEST__ so no real .mjs file is needed.
+ *
+ * WEB/DESKTOP FALLBACK: when the plugin is absent, sign in and discovery keep
+ * using the pre-existing iframe viewer + server-driven (Camofox) job-state
+ * polling, unchanged from before this rewrite.
  */
 (function () {
   "use strict";
@@ -29,11 +40,21 @@
     });
   }
 
+  function enc(s) { return encodeURIComponent(String(s == null ? "" : s)); }
+
   function toast(m) { try { if (window.toast) window.toast(m); } catch (e) {} }
 
   function reducedMotion() {
     try { return !!(window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches); }
     catch (e) { return false; }
+  }
+
+  function originOf(url) {
+    try { return new URL(url).origin; } catch (e) { return null; }
+  }
+
+  function hostOf(url) {
+    try { return new URL(url).host; } catch (e) { return String(url || ""); }
   }
 
   /* Transport seam. fn(path, opts) must return a Promise of {s, d}. */
@@ -55,6 +76,29 @@
   };
 
   function api(path, opts) { return apiImpl(path, opts || {}); }
+
+  /* ---- Native ConnectBrowser plugin (phone runner) ---- */
+  function hasPlugin() {
+    try { return !!(window.Capacitor && window.Capacitor.Plugins && window.Capacitor.Plugins.ConnectBrowser); }
+    catch (e) { return false; }
+  }
+  function getPlugin() {
+    try { return (window.Capacitor && window.Capacitor.Plugins && window.Capacitor.Plugins.ConnectBrowser) || null; }
+    catch (e) { return null; }
+  }
+
+  /* ES5-safe dynamic import (import() is not valid ES5 syntax to parse). Tests
+   * stub the module directly so no real connect-agent/phone/index.mjs file is
+   * required to exercise the UI. */
+  function loadPhoneEngine() {
+    if (window.__SMD_PHONE_ENGINE_TEST__) return Promise.resolve(window.__SMD_PHONE_ENGINE_TEST__);
+    try {
+      var imp = new Function("p", "return import(p)");
+      return imp("/connect-agent/phone/index.mjs");
+    } catch (e) {
+      return Promise.reject(e);
+    }
+  }
 
   function injectCSS() {
     if (document.getElementById("smd-connect-css")) return;
@@ -82,12 +126,15 @@
       ".smd-connect-btn:active{transform:scale(.97);transition:transform 100ms ease-out}",
       ".smd-connect-x:active{background:var(--paper,#f6f7f5)}",
       ".smd-connect-btn:focus-visible,.smd-connect-x:focus-visible,.smd-connect-input:focus-visible,.smd-connect-hosp:focus-visible,.smd-connect-check:focus-visible{outline:2px solid var(--teal,#0e6e63);outline-offset:2px}",
-      ".smd-connect-hosp{display:flex;align-items:center;gap:0.75rem;width:100%;box-sizing:border-box;text-align:left;border:1px solid var(--line,#d7dee3);border-radius:0.875rem;padding:0.875rem;background:var(--panel,#fff);color:var(--ink,#14202b);font:600 0.9375rem var(--sans,system-ui);cursor:pointer;margin:0.5rem 0;min-height:3.25rem;letter-spacing:0}",
-      ".smd-connect-hosp:active{transform:scale(.98);transition:transform 100ms ease-out}",
+      ".smd-connect-hosp{display:flex;align-items:center;gap:0.75rem;width:100%;box-sizing:border-box;text-align:left;border:1px solid var(--line,#d7dee3);border-radius:0.875rem;padding:0.875rem;background:var(--panel,#fff);color:var(--ink,#14202b);font:600 0.9375rem var(--sans,system-ui);margin:0.5rem 0;min-height:3.25rem;letter-spacing:0}",
+      "button.smd-connect-hosp{cursor:pointer}",
+      "button.smd-connect-hosp:active{transform:scale(.98);transition:transform 100ms ease-out}",
       ".smd-connect-hosp small{display:block;font-weight:400;font-size:0.75rem;color:var(--slate-soft,#5a7184);margin-top:0.125rem}",
       ".smd-connect-badge{display:inline-flex;align-items:center;gap:0.375rem;padding:0.4375rem 0.625rem;border-radius:999px;background:var(--teal-soft,#e3f1ee);color:var(--teal,#0e6e63);font-size:0.75rem;font-weight:800;white-space:nowrap}",
       ".smd-connect-badge.new{background:var(--paper,#f6f7f5);color:var(--slate,#2d4356);border:1px solid var(--line,#d7dee3)}",
+      ".smd-connect-badge.warn{background:var(--amber-soft,#fdf0d5);color:var(--amber,#92620a)}",
       ".smd-connect-scope{margin:0.625rem 0 0;padding-left:1.25rem;color:var(--slate,#2d4356);font-size:0.875rem;line-height:1.6;letter-spacing:0}",
+      ".smd-connect-caps{margin:0.625rem 0 0;padding-left:0;list-style:none;color:var(--slate,#2d4356);font-size:0.875rem;line-height:1.8;letter-spacing:0}",
       ".smd-connect-checkrow{display:flex;gap:0.625rem;align-items:flex-start;margin-top:0.875rem;font-size:0.875rem;line-height:1.5}",
       ".smd-connect-check{width:1.375rem;height:1.375rem;margin-top:0.125rem;accent-color:var(--teal,#0e6e63);flex-shrink:0}",
       ".smd-connect-view{width:100%;box-sizing:border-box;height:16rem;border:1px solid var(--line,#d7dee3);border-radius:0.875rem;background:var(--paper,#f6f7f5);margin-top:0.625rem}",
@@ -103,6 +150,7 @@
       ".smd-connect-stages li.on .smd-connect-dot{background:var(--teal,#0e6e63)}",
       ".smd-connect-stages li.ok .smd-connect-dot{background:var(--green,#1c7a4a)}",
       ".smd-connect-note{font-size:0.6875rem;line-height:1.5;letter-spacing:0;color:var(--slate-soft,#5a7184);margin-top:0.625rem}",
+      ".smd-connect-counts{display:flex;justify-content:space-between;margin-top:0}",
       ".smd-connect-ov[data-motion=\"fade\"] .smd-connect-sheet{transition:opacity 160ms ease;transform:none!important}",
       "@media (prefers-reduced-motion: reduce){.smd-connect-sheet{transition:opacity 160ms ease;transform:none!important}.smd-connect-btn:active,.smd-connect-hosp:active,.smd-connect-x:active{transform:none}}",
       "@media (prefers-reduced-transparency: reduce){.smd-connect-bar{background:var(--panel,#fff);backdrop-filter:none;-webkit-backdrop-filter:none}.smd-connect-ov{background:rgba(7,17,25,.72)}}",
@@ -163,7 +211,8 @@
     return (overshoot * dimension * c) / (dimension + c * m);
   }
 
-  /* Per-state clinician copy. Four kinds: status (default), done, warn, bad. */
+  /* Per-state clinician copy for the fallback (server-driven / Camofox) job
+   * poll. Four kinds: status (default), done, warn, bad. */
   var STATE_COPY = {
     CREATED: ["Request created. Preparing your secure session.", ""],
     AWAITING_LOGIN: ["Waiting for sign in. Complete sign in in the frame above, then choose I have signed in.", ""],
@@ -189,6 +238,20 @@
     ["AWAITING_APPROVAL", "Hospital approval"],
     ["ACTIVE", "Active"]
   ];
+
+  /* Capability resource keys shown on the result screen, in a fixed clinical
+   * order. Matches the CONTRACT's evidence/versions "capabilities" shape:
+   * [{operation, resource, proven, how}]. */
+  var CAP_ORDER = ["worklist", "patient_summary", "medications", "allergies", "results", "encounters", "notes"];
+  var CAP_LABELS = {
+    worklist: "Worklist",
+    patient_summary: "Patient summary",
+    medications: "Medications",
+    allergies: "Allergies",
+    results: "Results",
+    encounters: "Encounters",
+    notes: "Notes"
+  };
 
   var S = null; /* per-open session state, reset in open() */
 
@@ -367,6 +430,11 @@
 
   function finishClose() {
     stopPoll();
+    removePluginListeners();
+    var plugin = getPlugin();
+    if (S && (S.screen === "login" || S.screen === "progress" || S.screen === "origins") && plugin && plugin.close) {
+      try { plugin.close(); } catch (e) {}
+    }
     if (S && S.anim) { S.anim.cancel(); S.anim = null; }
     document.removeEventListener("keydown", onKey, true);
     var ov = overlay();
@@ -386,11 +454,14 @@
   function show(screen) {
     if (S) S.screen = screen;
     var render = {
-      hospitals: renderHospitals,
-      reconnect: renderReconnect,
+      connections: renderConnections,
+      url: renderUrl,
       consent: renderConsent,
+      reuse: renderReuse,
       login: renderLogin,
+      origins: renderOrigins,
       progress: renderProgress,
+      result: renderResult,
       done: renderDone
     }[screen];
     if (render) render();
@@ -400,176 +471,165 @@
     if (S) show(S.screen);
   }
 
-  /* ---- Screen 1: hospital picker ---- */
-  function renderHospitals() {
+  /* ---- Plugin event wiring (phone runner) ---- */
+  function bindPluginListeners(plugin) {
+    removePluginListeners();
+    if (!plugin || !plugin.addListener) return;
+    S.pluginListeners = [];
+    function on(name, fn) {
+      try { S.pluginListeners.push(plugin.addListener(name, fn)); } catch (e) {}
+    }
+    on("navigated", function (e) {
+      var o = e && e.url ? originOf(e.url) : null;
+      if (o && S && S.visitedOrigins.indexOf(o) < 0) S.visitedOrigins.push(o);
+    });
+    on("loggedIn", function () {
+      if (!S || S.loginHandled) return;
+      S.loginHandled = true;
+      doHandoff();
+    });
+    on("stopped", function () {
+      if (S && S.screen === "progress") stopDiscovery();
+    });
+  }
+
+  function removePluginListeners() {
+    if (S && S.pluginListeners) {
+      for (var i = 0; i < S.pluginListeners.length; i++) {
+        try { S.pluginListeners[i].remove(); } catch (e) {}
+      }
+    }
+    if (S) S.pluginListeners = [];
+  }
+
+  /* ---- Screen 1: connections list ---- */
+  function pillFor(c) {
+    if (c && c.lastSessionState === "NEEDS_REAUTH") return { cls: "warn", label: "Needs sign-in" };
+    if (c && c.activeVersionId) return { cls: "", label: "Active" };
+    if (c && c.pendingVersionId) return { cls: "warn", label: "Pending approval" };
+    return { cls: "new", label: "Not connected" };
+  }
+
+  function connectionHost(c) {
+    var o = c && c.origins && c.origins[0];
+    return o ? hostOf(o) : ((c && c.deploymentId) || "Hospital");
+  }
+
+  function connectionRow(c) {
+    var pill = pillFor(c);
+    return '<div class="smd-connect-hosp"><span style="flex:1"><span>' + esc(connectionHost(c)) + '</span></span>' +
+      '<span class="smd-connect-badge' + (pill.cls ? " " + pill.cls : "") + '">' + esc(pill.label) + '</span></div>';
+  }
+
+  function loadConnections() {
+    S.connLoading = true;
+    S.connError = false;
+    if (S.screen === "connections") renderConnections();
+    var seq = (S.connSeq = (S.connSeq || 0) + 1);
+    api("/connections", {}).then(function (r) {
+      if (!overlay() || !S || seq !== S.connSeq) return;
+      S.connLoading = false;
+      if (r.s === 200 && r.d) {
+        S.connections = Array.isArray(r.d) ? r.d : (r.d.connections || []);
+      } else {
+        S.connections = [];
+        S.connError = true;
+      }
+      if (S.screen === "connections") renderConnections();
+    });
+  }
+
+  function renderConnections() {
     var b = body();
     if (!b) return;
-    var items = "";
-    for (var i = 0; i < S.hospitals.length; i++) {
-      items += hospitalRow(S.hospitals[i]);
-    }
+    var rows = "";
+    for (var i = 0; i < S.connections.length; i++) rows += connectionRow(S.connections[i]);
     b.innerHTML =
-      '<h2 class="smd-connect-display">Choose your hospital</h2>' +
-      '<p class="smd-connect-lead">Pick your hospital to begin. Search by name, or enter the hospital EMR address below.</p>' +
-      '<div class="smd-connect-card"><label class="smd-connect-label" for="smd-connect-q">Search hospitals</label>' +
-      '<div class="smd-connect-row" style="margin-top:0"><input id="smd-connect-q" class="smd-connect-input" type="search" autocomplete="off" placeholder="Hospital name" value="' + esc(S.query) + '"/>' +
-      '<button id="smd-connect-search" class="smd-connect-btn primary" type="button">Search</button></div></div>' +
-      '<div id="smd-connect-list">' + (items || '<p class="smd-connect-note">No hospitals found. Try another search, or enter the EMR address.</p>') + '</div>' +
-      '<div class="smd-connect-card"><label class="smd-connect-label" for="smd-connect-url">Hospital EMR address</label>' +
-      '<input id="smd-connect-url" class="smd-connect-input" type="url" inputmode="url" autocomplete="off" placeholder="https://emr.hospital.example"/>' +
-      '<div class="smd-connect-row"><button id="smd-connect-urlgo" class="smd-connect-btn" type="button">Continue with this address</button></div>' +
-      '<div class="smd-connect-note">Use a hospital-authorized address. Entering an address does not grant access. Access is checked after you sign in. Never enter passwords or patient data here.</div></div>';
-    setStatus("", S.listNote || "");
+      '<h2 class="smd-connect-display">Your hospitals</h2>' +
+      (S.connLoading
+        ? '<p class="smd-connect-lead">Loading your connections.</p>'
+        : (S.connections.length
+            ? '<div id="smd-connect-connlist">' + rows + '</div>'
+            : '<p class="smd-connect-lead">You have not connected a hospital yet. Connect your hospital so StewardMD can read your worklist safely, once a reviewer approves it.</p>')) +
+      '<div class="smd-connect-row"><button id="smd-connect-add" class="smd-connect-btn primary" type="button">Connect a hospital</button></div>';
+    setStatus(S.connError ? "bad" : "", S.connError ? "Could not load your connections. Check your connection and try again." : "");
+    b.querySelector("#smd-connect-add").onclick = function () {
+      S.selected = null; S.emrUrl = "";
+      show("url");
+    };
+    var first = b.querySelector("#smd-connect-add");
+    if (first && !reducedMotion() && !S.connLoading) { try { first.focus(); } catch (e) {} }
+  }
 
-    bindHospitalList(b);
-    var q = b.querySelector("#smd-connect-q");
-    function doSearch() {
-      S.query = q.value;
-      setStatus("", "Searching hospitals.");
-      var seq = (S.resolveSeq = (S.resolveSeq || 0) + 1);
-      api("/hospitals/resolve", { method: "POST", body: JSON.stringify({ query: S.query }) }).then(function (r) {
-        if (!overlay() || !S || seq !== S.resolveSeq) return;
-        if (r.s === 200 && r.d && r.d.ok && r.d.hospitals) {
-          S.hospitals = r.d.hospitals;
-          S.listNote = "";
-          show("hospitals");
-        } else {
-          setStatus("bad", "Hospital lookup failed. Check your connection and try again.");
-        }
-      });
-    }
-    b.querySelector("#smd-connect-search").onclick = doSearch;
-    q.onkeydown = function (e) { if (e.key === "Enter") { e.preventDefault(); doSearch(); } };
-    q.oninput = function () { filterHospitalList(q.value); };
-    b.querySelector("#smd-connect-urlgo").onclick = function () {
-      var url = (b.querySelector("#smd-connect-url").value || "").trim();
+  /* ---- Screen 2: hospital URL ---- */
+  function renderUrl() {
+    var b = body();
+    if (!b) return;
+    b.innerHTML =
+      '<h2 class="smd-connect-display">Connect a hospital</h2>' +
+      '<p class="smd-connect-lead">Enter your hospital EMR address to begin.</p>' +
+      '<div class="smd-connect-card"><label class="smd-connect-label" for="smd-connect-url">Hospital EMR address</label>' +
+      '<input id="smd-connect-url" class="smd-connect-input" type="url" inputmode="url" autocomplete="off" placeholder="https://emr.hospital.example" value="' + esc(S.emrUrl || "") + '"/>' +
+      '<div class="smd-connect-note">Use a hospital-authorized address. Entering an address does not grant access; access is checked after you sign in.</div></div>' +
+      '<div class="smd-connect-row"><button id="smd-connect-urlgo" class="smd-connect-btn primary" type="button">Continue</button>' +
+      '<button id="smd-connect-urlback" class="smd-connect-btn" type="button">Back</button></div>';
+    setStatus("", "");
+    var input = b.querySelector("#smd-connect-url");
+    function go() {
+      var url = (input.value || "").trim();
       if (!/^https:\/\//i.test(url)) {
-        setStatus("bad", "Enter an HTTPS EMR address first, for example https://emr.hospital.example.");
+        setStatus("bad", "Enter an HTTPS hospital address, for example https://emr.hospital.example.");
         return;
       }
-      setStatus("", "Checking this address.");
-      var useq = (S.resolveSeq = (S.resolveSeq || 0) + 1);
-      api("/hospitals/resolve", { method: "POST", body: JSON.stringify({ emrUrl: url }) }).then(function (r) {
-        if (!overlay() || !S || useq !== S.resolveSeq) return;
-        // A hospital nobody has onboarded yet is the NORMAL first-time case, not an error: the lookup
-        // answering "no deployment of yours matches" (an empty list, or a not-found) is exactly how a
-        // brand-new hospital looks, and it must continue to consent. Treating that as a failure
-        // dead-ended the primary "enter my hospital's EMR address" path entirely. Only a genuine
-        // transport/server fault is an error worth stopping on.
-        var notFound = r.s === 404 || (r.s === 200 && r.d && r.d.ok && !(r.d.hospitals && r.d.hospitals.length));
-        if (r.s === 200 && r.d && r.d.ok && r.d.hospitals && r.d.hospitals.length) {
-          S.hospitals = r.d.hospitals;
-          S.listNote = "";
-          show("hospitals");
-        } else if (notFound) {
-          S.selected = { hospitalId: null, name: "New hospital deployment", emrUrl: url, hasActiveAdapter: false };
-          show("consent");
-        } else {
-          setStatus("bad", "Could not reach StewardMD to check this address. Check your connection and try again.");
-        }
-      });
-    };
-    var first = b.querySelector("#smd-connect-q");
-    if (first && !reducedMotion()) { try { first.focus(); } catch (e) {} }
-  }
-
-  function hospitalRow(h) {
-    var badge = h.hasActiveAdapter
-      ? '<span class="smd-connect-badge">Connected</span>'
-      : '<span class="smd-connect-badge new">New</span>';
-    return '<button class="smd-connect-hosp" type="button" data-hosp="' + esc(h.hospitalId || "") + '" data-url="' + esc(h.emrUrl || "") + '" data-name="' + esc(h.name || "") + '" data-ver="' + esc(h.adapterVersion || "") + '" data-active="' + (h.hasActiveAdapter ? "1" : "") + '">' +
-      '<span style="flex:1"><span>' + esc(h.name || "Unnamed hospital") + '</span>' +
-      (h.emrUrl ? '<small>' + esc(h.emrUrl) + '</small>' : '') + '</span>' + badge + '</button>';
-  }
-
-  function bindHospitalList(b) {
-    var nodes = b.querySelectorAll(".smd-connect-hosp");
-    for (var i = 0; i < nodes.length; i++) {
-      nodes[i].onclick = function () {
-        var active = this.getAttribute("data-active") === "1";
-        S.selected = {
-          hospitalId: this.getAttribute("data-hosp") || null,
-          name: this.getAttribute("data-name"),
-          emrUrl: this.getAttribute("data-url"),
-          adapterVersion: this.getAttribute("data-ver"),
-          hasActiveAdapter: active
-        };
-        show(active ? "reconnect" : "consent");
-      };
+      S.emrUrl = url;
+      S.selected = { emrUrl: url };
+      show("consent");
     }
+    b.querySelector("#smd-connect-urlgo").onclick = go;
+    input.onkeydown = function (e) { if (e.key === "Enter") { e.preventDefault(); go(); } };
+    b.querySelector("#smd-connect-urlback").onclick = function () { show("connections"); };
+    if (!reducedMotion()) { try { input.focus(); } catch (e) {} }
   }
 
-  function filterHospitalList(q) {
-    var b = body();
-    if (!b) return;
-    q = (q || "").toLowerCase();
-    var nodes = b.querySelectorAll(".smd-connect-hosp");
-    for (var i = 0; i < nodes.length; i++) {
-      var t = (nodes[i].textContent || "").toLowerCase();
-      nodes[i].style.display = t.indexOf(q) >= 0 ? "" : "none";
-    }
-  }
-
-  /* ---- Returning-doctor path: existing adapter, re-authenticate only ---- */
-  function renderReconnect() {
-    var b = body();
-    if (!b || !S.selected) return;
-    b.innerHTML =
-      '<h2 class="smd-connect-display">Welcome back</h2>' +
-      '<p class="smd-connect-lead">' + esc(S.selected.name) + ' already has a validated connection' +
-      (S.selected.adapterVersion ? ' (version ' + esc(S.selected.adapterVersion) + ')' : '') +
-      '. Sign in again to reuse it. Discovery is skipped.</p>' +
-      '<div class="smd-connect-row"><button id="smd-connect-rego" class="smd-connect-btn primary" type="button">Sign in to reconnect</button>' +
-      '<button id="smd-connect-back1" class="smd-connect-btn" type="button">Back</button></div>';
-    setStatus("", "");
-    b.querySelector("#smd-connect-rego").onclick = function () {
-      S.reuse = true;
-      createSession();
-    };
-    b.querySelector("#smd-connect-back1").onclick = function () { show("hospitals"); };
-  }
-
-  /* ---- Screen 2: explicit consent, no pre-checked boxes ---- */
+  /* ---- Screen 3: explicit consent, no pre-checked boxes ---- */
   function renderConsent() {
     var b = body();
     if (!b || !S.selected) return;
     b.innerHTML =
-      '<h2 class="smd-connect-display">How this connection works</h2>' +
-      '<p class="smd-connect-lead">Before you sign in, here is exactly what the Connect Agent will do at ' + esc(S.selected.name) + '.</p>' +
+      '<h2 class="smd-connect-display">Before you sign in</h2>' +
       '<div class="smd-connect-card"><ul class="smd-connect-scope">' +
-      '<li>Read only. The agent reads the worklist and patient summaries. It cannot order, prescribe, or edit records.</li>' +
-      '<li>You sign in yourself. Sign in happens in a hospital sign in frame. StewardMD never asks for your EMR password.</li>' +
-      '<li>You stay in control. Pause the agent any time and take over the session.</li>' +
+      '<li>You sign in yourself. StewardMD never asks for or stores your EMR password.</li>' +
+      '<li>The agent only reads. It cannot order, prescribe, or edit records.</li>' +
+      '<li>You can stop the agent at any time.</li>' +
+      '<li>A human reviewer approves the connection before another doctor can use it.</li>' +
       '</ul>' +
       '<label class="smd-connect-checkrow"><input id="smd-connect-agree" class="smd-connect-check" type="checkbox"/>' +
-      '<span>I understand this connection is read only, and I agree to continue.</span></label>' +
-      '<div class="smd-connect-row"><button id="smd-connect-consentgo" class="smd-connect-btn primary" type="button" disabled>Agree and continue</button>' +
+      '<span>I agree to continue.</span></label>' +
+      '<div class="smd-connect-row"><button id="smd-connect-consentgo" class="smd-connect-btn primary" type="button" disabled>I agree, continue</button>' +
       '<button id="smd-connect-back2" class="smd-connect-btn" type="button">Back</button></div></div>';
     setStatus("", "");
     var box = b.querySelector("#smd-connect-agree");
     var go = b.querySelector("#smd-connect-consentgo");
     box.onchange = function () { go.disabled = !box.checked; };
-    b.querySelector("#smd-connect-back2").onclick = function () { show(S.selected.hasActiveAdapter ? "reconnect" : "hospitals"); };
+    b.querySelector("#smd-connect-back2").onclick = function () { show("url"); };
     go.onclick = function () {
       if (!box.checked) return;
       go.disabled = true;
-      setStatus("", "Recording your consent.");
-      api("/sessions", {
-        method: "POST",
-        body: JSON.stringify({
-          hospitalId: S.selected.hospitalId,
-          emrUrl: S.selected.emrUrl,
-          reconnect: !!S.reuse,
-          consent: { scope: "read", agreed: true }
-        })
-      }).then(function (r) {
-        if (!overlay()) return;
-        if (r.s === 200 && r.d && r.d.ok && r.d.sessionId) {
-          S.sessionId = r.d.sessionId;
-          S.jobId = r.d.jobId || null;
-          S.reuse = !!S.reuse;
-          show("login");
-          loadViewer();
+      setStatus("", "Starting your session.");
+      S.runner = hasPlugin() ? "phone" : null;
+      var payload = { emrUrl: S.selected.emrUrl, consent: { agreed: true } };
+      if (S.runner === "phone") payload.runner = "phone";
+      api("/sessions", { method: "POST", body: JSON.stringify(payload) }).then(function (r) {
+        if (!overlay() || !S) return;
+        if (r.s === 200 && r.d && r.d.ok !== false && r.d.session) {
+          S.session = r.d.session;
+          S.deployment = r.d.deployment || null;
+          S.reuse = !!r.d.reuse;
+          S.visitedOrigins = [];
+          S.pendingOrigins = [];
+          S.loginOpened = false;
+          S.loginHandled = false;
+          show(S.reuse ? "reuse" : "login");
         } else if (r.s === 404) {
           setStatus("bad", "Connections are not enabled yet. Try again later.");
           go.disabled = false;
@@ -581,38 +641,81 @@
     };
   }
 
-  function createSession() {
-    setStatus("", "Starting your session.");
-    api("/sessions", {
-      method: "POST",
-      body: JSON.stringify({
-        hospitalId: S.selected.hospitalId,
-        emrUrl: S.selected.emrUrl,
-        reconnect: true,
-        consent: { scope: "read", agreed: true }
-      })
-    }).then(function (r) {
-      if (!overlay()) return;
-      if (r.s === 200 && r.d && r.d.ok && r.d.sessionId) {
-        S.sessionId = r.d.sessionId;
-        S.jobId = r.d.jobId || null;
-        show("login");
-        loadViewer();
-      } else {
-        setStatus("bad", "Could not start the session. Check your connection and try again.");
-        show("reconnect");
-      }
-    });
+  /* ---- Screen 4: already-connected shortcut (reuse:true) ---- */
+  function renderReuse() {
+    var b = body();
+    if (!b || !S.selected) return;
+    b.innerHTML =
+      '<h2 class="smd-connect-display">Already connected</h2>' +
+      '<p class="smd-connect-lead">This hospital is already connected (adapter active).</p>' +
+      '<div class="smd-connect-row"><button id="smd-connect-reusego" class="smd-connect-btn primary" type="button">Sign in to use it</button>' +
+      '<button id="smd-connect-reuseback" class="smd-connect-btn" type="button">Back</button></div>';
+    setStatus("", "");
+    b.querySelector("#smd-connect-reuseback").onclick = function () { resetToConnections(""); };
+    b.querySelector("#smd-connect-reusego").onclick = function () {
+      S.loginOpened = false;
+      S.loginHandled = false;
+      show("login");
+    };
   }
 
-  /* ---- Screen 3: embedded sign in viewport with pause/resume ---- */
+  function finishReuse() {
+    var plugin = getPlugin();
+    if (plugin && plugin.close) { try { plugin.close(); } catch (e) {} }
+    show("done");
+  }
+
+  /* ---- Screen 5: sign in ---- */
   function renderLogin() {
     var b = body();
     if (!b) return;
+    if (S.runner === "phone") { renderLoginPhone(b); return; }
+    renderLoginFallback(b);
+  }
+
+  function renderLoginPhone(b) {
+    var host = hostOf(S.selected.emrUrl);
+    b.innerHTML =
+      '<h2 class="smd-connect-display">Sign in to ' + esc(host) + '</h2>' +
+      '<p class="smd-connect-lead">Sign in yourself inside the hospital website that just opened. StewardMD never asks for or stores your password.</p>' +
+      '<div class="smd-connect-note">Come back here once you have signed in.</div>' +
+      '<div class="smd-connect-row"><button id="smd-connect-cancel" class="smd-connect-btn danger" type="button">Cancel connection</button></div>';
+    setStatus("", S.statusText || "Opening the hospital website.");
+    b.querySelector("#smd-connect-cancel").onclick = cancelSession;
+    openLoginPlugin();
+  }
+
+  function openLoginPlugin() {
+    if (S.loginOpened) return;
+    S.loginOpened = true;
+    var plugin = getPlugin();
+    if (!plugin) { setStatus("bad", "The in-app browser is unavailable on this device."); return; }
+    var host = hostOf(S.selected.emrUrl);
+    bindPluginListeners(plugin);
+    loadPhoneEngine().then(function (engine) {
+      S.engine = engine;
+      if (engine && engine.createPluginClient) {
+        var client = engine.createPluginClient({ plugin: plugin, storeId: S.deployment.id, origins: S.deployment.origins, title: host });
+        S.pluginClient = client;
+        return client.createTab({ url: S.selected.emrUrl });
+      }
+      /* ENGINE HOOK: the phone engine has not loaded yet, so there is no
+       * observer install script to inject. Open with none; runPhoneDiscovery
+       * installs its own observer once discovery actually starts. */
+      return plugin.open({ url: S.selected.emrUrl, origins: S.deployment.origins, storeId: S.deployment.id, title: host, initScript: "" });
+    }).catch(function () {
+      return plugin.open({ url: S.selected.emrUrl, origins: S.deployment.origins, storeId: S.deployment.id, title: host, initScript: "" });
+    }).catch(function () {
+      if (overlay() && S) setStatus("bad", "Could not open the hospital website. Try again.");
+    });
+  }
+
+  function renderLoginFallback(b) {
     var paused = S.controlOwner === "clinician";
     b.innerHTML =
       '<h2 class="smd-connect-display">Sign in to the hospital EMR</h2>' +
       '<p class="smd-connect-lead">Complete sign in in the frame below. The agent is paused and cannot see what you type.</p>' +
+      '<div class="smd-connect-note">On your phone this opens the hospital website inside StewardMD.</div>' +
       '<iframe id="smd-connect-frame" class="smd-connect-view" title="Hospital sign in" src="about:blank"></iframe>' +
       '<div class="smd-connect-row"><button id="smd-connect-signedin" class="smd-connect-btn primary" type="button">I have signed in</button>' +
       '<button id="smd-connect-pause" class="smd-connect-btn" type="button">' + (paused ? "Resume agent" : "Pause agent") + '</button>' +
@@ -622,15 +725,16 @@
       if (f) f.src = S.viewerUrl;
     }
     setStatus(paused ? "warn" : "", paused ? "Agent paused. You control the session." : (S.statusText || ""));
-    b.querySelector("#smd-connect-signedin").onclick = handoff;
+    b.querySelector("#smd-connect-signedin").onclick = doHandoff;
     b.querySelector("#smd-connect-pause").onclick = togglePause;
     b.querySelector("#smd-connect-cancel").onclick = cancelSession;
+    loadViewer();
   }
 
   function loadViewer() {
-    if (!S.sessionId) return;
+    if (!S.session) return;
     setStatus("", "Preparing the secure sign in frame.");
-    api("/sessions/" + encodeURIComponent(S.sessionId) + "/viewer-token", { method: "POST", body: "{}" }).then(function (r) {
+    api("/sessions/" + enc(S.session.id) + "/viewer-token", { method: "POST", body: "{}" }).then(function (r) {
       if (!overlay() || !S) return;
       if (r.s === 200 && r.d && r.d.ok && r.d.viewerUrl) {
         S.viewerUrl = r.d.viewerUrl;
@@ -646,9 +750,9 @@
   }
 
   function togglePause() {
-    if (!S.sessionId) return;
+    if (!S.session) return;
     var pausing = S.controlOwner !== "clinician";
-    var path = "/sessions/" + encodeURIComponent(S.sessionId) + (pausing ? "/pause" : "/resume");
+    var path = "/sessions/" + enc(S.session.id) + (pausing ? "/pause" : "/resume");
     var btn = body() && body().querySelector("#smd-connect-pause");
     if (btn) btn.disabled = true;
     setStatus("", pausing ? "Pausing the agent." : "Resuming the agent.");
@@ -670,12 +774,22 @@
     });
   }
 
-  function handoff() {
-    if (!S.sessionId) return;
-    setStatus("", "Confirming sign in and starting discovery.");
-    api("/sessions/" + encodeURIComponent(S.sessionId) + "/handoff", { method: "POST", body: "{}" }).then(function (r) {
+  /* ---- Handoff: doctor confirmed sign in (either runner) ---- */
+  function doHandoff() {
+    if (!S || !S.session) return;
+    setStatus("", "Confirming sign in.");
+    api("/sessions/" + enc(S.session.id) + "/handoff", {
+      method: "POST",
+      body: JSON.stringify({ visitedOrigins: S.visitedOrigins || [] })
+    }).then(function (r) {
       if (!overlay() || !S) return;
-      if (r.s === 200 && r.d && r.d.ok) {
+      if (r.s === 200 && r.d && r.d.ok !== false) {
+        S.deployment = S.deployment || {};
+        S.deployment.origins = r.d.origins || S.deployment.origins;
+        S.pendingOrigins = r.d.pendingOrigins || [];
+        if (S.reuse) { finishReuse(); return; }
+        if (S.pendingOrigins.length) { show("origins"); return; }
+        if (S.runner === "phone") { beginAgentMode(); return; }
         show("progress");
         fetchStatus();
         startPoll();
@@ -683,28 +797,226 @@
         setStatus("bad", "Connections are not enabled yet. Try again later.");
       } else {
         setStatus("bad", "Sign in was not detected yet. Finish signing in, then try again.");
+        S.loginHandled = false;
       }
     });
   }
 
   function cancelSession() {
-    if (!S.sessionId) { show("hospitals"); return; }
+    removePluginListeners();
+    var plugin = getPlugin();
+    if (plugin && plugin.close) { try { plugin.close(); } catch (e) {} }
+    if (!S.session) { resetToConnections(""); return; }
     setStatus("", "Cancelling the session.");
-    api("/sessions/" + encodeURIComponent(S.sessionId), { method: "DELETE" }).then(function () {
+    api("/sessions/" + enc(S.session.id), { method: "DELETE" }).then(function () {
       if (!overlay() || !S) return;
-      stopPoll();
-      S.sessionId = null;
-      S.viewerUrl = null;
-      S.controlOwner = "agent";
-      show("hospitals");
-      setStatus("warn", "Connection cancelled. The session was closed.");
+      resetToConnections("Connection cancelled. The session was closed.");
     });
   }
 
-  /* ---- Screen 4: live job progress with honest per-state copy ---- */
+  function resetToConnections(msg) {
+    stopPoll();
+    removePluginListeners();
+    S.session = null;
+    S.deployment = null;
+    S.reuse = false;
+    S.visitedOrigins = [];
+    S.pendingOrigins = [];
+    S.result = null;
+    S.versionId = null;
+    S.jobState = null;
+    S.runner = hasPlugin() ? "phone" : null;
+    S.loginOpened = false;
+    S.loginHandled = false;
+    show("connections");
+    loadConnections();
+    if (msg) setStatus("warn", msg);
+  }
+
+  /* ---- Screen 6a: pending-origin confirm (phone runner) ---- */
+  function renderOrigins() {
+    var b = body();
+    if (!b) return;
+    var items = "";
+    for (var i = 0; i < S.pendingOrigins.length; i++) items += "<li>" + esc(S.pendingOrigins[i]) + "</li>";
+    b.innerHTML =
+      '<h2 class="smd-connect-display">Another website was used</h2>' +
+      '<p class="smd-connect-lead">The sign in used another website:</p>' +
+      '<ul class="smd-connect-scope">' + items + '</ul>' +
+      '<p class="smd-connect-lead">Allow StewardMD to read from it too?</p>' +
+      '<div class="smd-connect-row"><button id="smd-connect-originsyes" class="smd-connect-btn primary" type="button">Allow</button>' +
+      '<button id="smd-connect-originsno" class="smd-connect-btn" type="button">Not now</button></div>';
+    setStatus("", "");
+    b.querySelector("#smd-connect-originsyes").onclick = function () {
+      api("/sessions/" + enc(S.session.id) + "/origins", {
+        method: "POST",
+        body: JSON.stringify({ approve: S.pendingOrigins })
+      }).then(function (r) {
+        if (!overlay() || !S) return;
+        if (r.s === 200 && r.d && r.d.ok !== false) {
+          S.deployment.origins = r.d.origins || S.deployment.origins;
+          S.pendingOrigins = [];
+          beginAgentMode();
+        } else {
+          setStatus("bad", "Could not confirm the extra website. Try again.");
+        }
+      });
+    };
+    b.querySelector("#smd-connect-originsno").onclick = function () {
+      S.pendingOrigins = [];
+      beginAgentMode();
+    };
+  }
+
+  function beginAgentMode() {
+    var plugin = getPlugin();
+    if (plugin && plugin.setMode) {
+      try { plugin.setMode({ mode: "agent", origins: S.deployment.origins }); } catch (e) {}
+    }
+    startPhoneDiscovery();
+  }
+
+  /* ---- Screen 6b: live discovery progress ---- */
+  function phoneApi(sessionId) {
+    function call(path, body) {
+      return api("/sessions/" + enc(sessionId) + path, { method: "POST", body: JSON.stringify(body || {}) }).then(function (r) {
+        if (r.s === 401 || (r.d && r.d.error === "NEEDS_REAUTH")) {
+          var e = new Error("reauth"); e.reauth = true; throw e;
+        }
+        if (r.s < 200 || r.s >= 300 || !r.d || r.d.ok === false) {
+          throw new Error((r.d && r.d.error) || "request-failed");
+        }
+        return r.d;
+      });
+    }
+    return {
+      plan: function (body) { return call("/plan", body); },
+      progress: function (body) { return call("/progress", body); },
+      discovery: function (body) { return call("/discovery", body); },
+      evidence: function (body) { return call("/evidence", body); }
+    };
+  }
+
+  function startPhoneDiscovery() {
+    S.progressCounts = { pages: 0, requests: 0, phase: "DISCOVERING" };
+    S.progressFailed = false;
+    show("progress");
+    loadPhoneEngine().then(function (engine) {
+      if (!engine || !engine.runPhoneDiscovery) throw new Error("engine-unavailable");
+      S.engine = engine;
+      // The engine needs the six-method client built at login (evaluate/snapshot/click over the
+      // plugin), not the raw Capacitor plugin. Build one here only if login never created it.
+      if (!S.pluginClient && engine.createPluginClient) {
+        S.pluginClient = engine.createPluginClient({ plugin: getPlugin(), storeId: S.deployment.id, origins: S.deployment.origins, title: hostOf(S.selected.emrUrl) });
+      }
+      return engine.runPhoneDiscovery({
+        plugin: S.pluginClient || getPlugin(),
+        api: phoneApi(S.session.id),
+        session: S.session,
+        deployment: S.deployment,
+        startUrl: S.selected.emrUrl,
+        onProgress: function (p) {
+          if (!S || S.screen !== "progress") return;
+          // The engine reports {phase, steps, events}: steps are pages the agent opened, events are
+          // requests it observed.
+          S.progressCounts = {
+            pages: (p && p.steps != null) ? p.steps : (p && p.pages != null) ? p.pages : S.progressCounts.pages,
+            requests: (p && p.events != null) ? p.events : (p && p.requests != null) ? p.requests : S.progressCounts.requests,
+            phase: (p && p.phase) || S.progressCounts.phase
+          };
+          paintProgress();
+        }
+      });
+    }).then(function (result) {
+      if (!overlay() || !S) return;
+      S.result = result || {};
+      S.versionId = (result && result.candidateVersionId) || null;
+      loadVersionAndShowResult();
+    }).catch(function (e) {
+      if (!overlay() || !S) return;
+      if (e && e.reauth) {
+        stopDiscoveryPlugin();
+        show("login");
+        S.loginOpened = false;
+        S.loginHandled = false;
+        setStatus("warn", "The hospital session expired. Sign in again to continue. The existing connection is kept.");
+        return;
+      }
+      S.progressFailed = true;
+      setStatus("bad", "Discovery could not complete. You can try again.");
+      paintProgress();
+    });
+  }
+
+  function stopDiscoveryPlugin() {
+    var plugin = getPlugin();
+    if (plugin && plugin.close) { try { plugin.close(); } catch (e) {} }
+    removePluginListeners();
+  }
+
+  function stopDiscovery() {
+    setStatus("", "Stopping.");
+    stopDiscoveryPlugin();
+    if (!S.session) { resetToConnections(""); return; }
+    api("/sessions/" + enc(S.session.id), { method: "DELETE" }).then(function () {
+      if (!overlay() || !S) return;
+      resetToConnections("Connection cancelled.");
+    });
+  }
+
+  function phaseLabel(p) {
+    if (p === "COMPILING") return "Building the connection draft.";
+    if (p === "VALIDATING") return "Checking the draft for safety and completeness.";
+    return "Discovering read-only workflows. The agent makes no changes to the EMR.";
+  }
+
   function renderProgress() {
     var b = body();
     if (!b) return;
+    if (S.runner !== "phone") { renderProgressFallback(b); return; }
+    var c = S.progressCounts || { pages: 0, requests: 0, phase: "DISCOVERING" };
+    b.innerHTML =
+      '<h2 class="smd-connect-display">Reading ' + esc(hostOf(S.selected.emrUrl)) + '</h2>' +
+      '<p class="smd-connect-lead">' + phaseLabel(c.phase) + '</p>' +
+      '<div class="smd-connect-card">' +
+      '<div class="smd-connect-row smd-connect-counts"><span>Pages visited</span><strong id="smd-connect-pages">' + c.pages + '</strong></div>' +
+      '<div class="smd-connect-row smd-connect-counts"><span>Requests observed</span><strong id="smd-connect-reqs">' + c.requests + '</strong></div>' +
+      '</div>' +
+      '<div class="smd-connect-note">Keep StewardMD open. This takes a few minutes.</div>' +
+      '<div class="smd-connect-row"><button id="smd-connect-stop" class="smd-connect-btn danger" type="button">Stop</button>' +
+      '<button id="smd-connect-progretry" class="smd-connect-btn primary" type="button" style="display:' + (S.progressFailed ? "" : "none") + '">Try again</button></div>';
+    setStatus(S.progressFailed ? "bad" : "", S.statusText || "");
+    b.querySelector("#smd-connect-stop").onclick = stopDiscovery;
+    b.querySelector("#smd-connect-progretry").onclick = function () { beginAgentMode(); };
+  }
+
+  function paintProgress() {
+    var b = body();
+    if (!b || !S || S.screen !== "progress" || S.runner !== "phone") return;
+    var c = S.progressCounts;
+    var p1 = b.querySelector("#smd-connect-pages"); if (p1) p1.textContent = c.pages;
+    var p2 = b.querySelector("#smd-connect-reqs"); if (p2) p2.textContent = c.requests;
+    var lead = b.querySelector(".smd-connect-lead"); if (lead) lead.textContent = phaseLabel(c.phase);
+    var retry = b.querySelector("#smd-connect-progretry"); if (retry) retry.style.display = S.progressFailed ? "" : "none";
+  }
+
+  /* ---- Fallback (no plugin): server-driven job-state polling, unchanged. ---- */
+  function stageList(st) {
+    var order = ["AUTHENTICATED", "DISCOVERING", "COMPILING", "VALIDATING", "AWAITING_APPROVAL", "ACTIVE"];
+    var idx = order.indexOf(st);
+    var failed = (st === "FAILED" || st === "NEEDS_REPAIR");
+    var out = "";
+    for (var i = 0; i < STAGES.length; i++) {
+      var cls = "";
+      if (!failed && (i < idx || st === "ACTIVE")) cls = "ok";
+      else if (!failed && (i === idx || (idx < 0 && i === 0))) cls = "on";
+      else if (failed && i === 0) cls = "ok";
+      out += '<li class="' + cls + '"><span class="smd-connect-dot"></span><span>' + STAGES[i][1] + '</span></li>';
+    }
+    return out;
+  }
+
+  function renderProgressFallback(b) {
     var st = S.jobState || "CREATED";
     var head, lead;
     if (S.reuse) {
@@ -726,34 +1038,18 @@
       '<button id="smd-connect-cancel2" class="smd-connect-btn danger" type="button">Cancel connection</button></div>';
     b.innerHTML = html;
     b.querySelector("#smd-connect-cancel2").onclick = cancelSession;
-    b.querySelector("#smd-connect-retry").onclick = handoff;
+    b.querySelector("#smd-connect-retry").onclick = doHandoff;
     b.querySelector("#smd-connect-reauth").onclick = function () {
       stopPoll();
+      S.loginOpened = false;
+      S.loginHandled = false;
       show("login");
-      loadViewer();
     };
     b.querySelector("#smd-connect-startover").onclick = function () {
       stopPoll();
-      S.sessionId = null;
-      S.jobState = null;
-      show("hospitals");
+      resetToConnections("");
     };
     paintJobState();
-  }
-
-  function stageList(st) {
-    var order = ["AUTHENTICATED", "DISCOVERING", "COMPILING", "VALIDATING", "AWAITING_APPROVAL", "ACTIVE"];
-    var idx = order.indexOf(st);
-    var failed = (st === "FAILED" || st === "NEEDS_REPAIR");
-    var out = "";
-    for (var i = 0; i < STAGES.length; i++) {
-      var cls = "";
-      if (!failed && (i < idx || st === "ACTIVE")) cls = "ok";
-      else if (!failed && (i === idx || (idx < 0 && i === 0))) cls = "on";
-      else if (failed && i === 0) cls = "ok";
-      out += '<li class="' + cls + '"><span class="smd-connect-dot"></span><span>' + STAGES[i][1] + '</span></li>';
-    }
-    return out;
   }
 
   function paintJobState() {
@@ -778,8 +1074,8 @@
   }
 
   function fetchStatus() {
-    if (!S || !S.sessionId) return;
-    api("/sessions/" + encodeURIComponent(S.sessionId), {}).then(function (r) {
+    if (!S || !S.session) return;
+    api("/sessions/" + enc(S.session.id), {}).then(function (r) {
       if (!overlay() || !S) return;
       if (r.s === 200 && r.d && r.d.ok) {
         S.jobState = r.d.state || "CREATED";
@@ -816,46 +1112,130 @@
     }, POLL_MS);
   }
 
-  /* ---- Screen 5: success with a path back to the clinical surface ---- */
+  /* ---- Screen 7: result (capabilities + reviewer approval) ---- */
+  function loadVersionAndShowResult() {
+    show("result");
+    S.canApprove = true; /* optimistic; server enforces on approve/reject, see below */
+    if (!S.versionId) { paintResult(); return; }
+    api("/versions/" + enc(S.versionId), {}).then(function (r) {
+      if (!overlay() || !S) return;
+      if (r.s === 200 && r.d && r.d.ok !== false) {
+        S.result.capabilities = r.d.capabilities || S.result.capabilities;
+        S.result.state = r.d.state;
+      }
+      if (S.screen === "result") paintResult();
+    });
+  }
+
+  function renderResult() {
+    var b = body();
+    if (!b) return;
+    b.innerHTML =
+      '<h2 class="smd-connect-display">What the agent can read</h2>' +
+      '<p class="smd-connect-lead">Proven at ' + esc(hostOf((S.selected && S.selected.emrUrl) || "")) + '.</p>' +
+      '<ul id="smd-connect-caps" class="smd-connect-caps"></ul>' +
+      '<div class="smd-connect-note">Awaiting approval. A StewardMD reviewer approves before other doctors can use this.</div>' +
+      '<div id="smd-connect-approverow" class="smd-connect-row" style="display:none">' +
+      '<button id="smd-connect-approve" class="smd-connect-btn primary" type="button">Approve</button>' +
+      '<button id="smd-connect-reject" class="smd-connect-btn danger" type="button">Reject</button></div>' +
+      '<div class="smd-connect-row"><button id="smd-connect-resultdone" class="smd-connect-btn" type="button">Done</button></div>';
+    setStatus("warn", "Awaiting approval.");
+    b.querySelector("#smd-connect-resultdone").onclick = function () { resetToConnections(""); };
+    b.querySelector("#smd-connect-approve").onclick = function () {
+      api("/versions/" + enc(S.versionId) + "/approve", { method: "POST", body: "{}" }).then(function (r) {
+        if (!overlay() || !S) return;
+        if (r.s === 200 && r.d && r.d.ok !== false) {
+          show("done");
+        } else if (r.s === 403) {
+          S.canApprove = false;
+          paintResult();
+          toast("You do not have permission to approve connections.");
+        } else {
+          setStatus("bad", "Could not approve. Try again.");
+        }
+      });
+    };
+    b.querySelector("#smd-connect-reject").onclick = function () {
+      if (!window.confirm("Reject this connection? The draft will be discarded.")) return;
+      api("/versions/" + enc(S.versionId) + "/reject", { method: "POST", body: JSON.stringify({}) }).then(function (r) {
+        if (!overlay() || !S) return;
+        if (r.s === 200 && r.d && r.d.ok !== false) {
+          resetToConnections("Connection rejected.");
+        } else if (r.s === 403) {
+          S.canApprove = false;
+          paintResult();
+          toast("You do not have permission to reject connections.");
+        } else {
+          setStatus("bad", "Could not reject. Try again.");
+        }
+      });
+    };
+    paintResult();
+  }
+
+  function paintResult() {
+    var b = body();
+    if (!b || !S || !S.result) return;
+    var caps = S.result.capabilities || [];
+    var byResource = {};
+    for (var i = 0; i < caps.length; i++) { if (caps[i] && caps[i].resource) byResource[caps[i].resource] = caps[i]; }
+    var html = "";
+    for (var j = 0; j < CAP_ORDER.length; j++) {
+      var key = CAP_ORDER[j];
+      var c = byResource[key];
+      var proven = !!(c && c.proven);
+      html += '<li class="' + (proven ? "" : "smd-connect-note") + '">' +
+        (proven ? "✓ " : "") + esc(CAP_LABELS[key]) + (proven ? "" : " (not found at this hospital)") + '</li>';
+    }
+    var list = b.querySelector("#smd-connect-caps");
+    if (list) list.innerHTML = html;
+    var row = b.querySelector("#smd-connect-approverow");
+    if (row) row.style.display = S.canApprove ? "" : "none";
+  }
+
+  /* ---- Screen 8: connected ---- */
   function renderDone() {
     var b = body();
     if (!b) return;
-    var name = (S.selected && S.selected.name) || "Your hospital";
+    var name = hostOf((S.selected && S.selected.emrUrl) || "");
+    var msg = S.reuse ? "Signed in. You can use this connection now." : "Approved. This connection is now active.";
     b.innerHTML =
-      '<h2 class="smd-connect-display">Connection active</h2>' +
-      '<p class="smd-connect-lead">' + esc(name) + ' is connected' +
-      (S.selected && S.selected.adapterVersion ? ' (version ' + esc(S.selected.adapterVersion) + ')' : '') +
-      '. Your worklist now uses this connection.</p>' +
-      '<div class="smd-connect-row"><button id="smd-connect-open" class="smd-connect-btn primary" type="button">Open worklist</button>' +
-      '<button id="smd-connect-done" class="smd-connect-btn" type="button">Done</button></div>' +
-      '<div class="smd-connect-note">Worklist integration lands separately. This button is a placeholder and does not open patient data yet.</div>';
-    setStatus("done", "Connection active. You can close this panel.");
-    /* Placeholder path back to the clinical surface. connect-source.js
-     * integration is deliberately out of scope for this UI. */
-    b.querySelector("#smd-connect-open").onclick = function () {
-      toast("Worklist integration lands separately. This button is a placeholder.");
-      setStatus("done", "Connection active. Worklist integration lands separately.");
-    };
-    b.querySelector("#smd-connect-done").onclick = function () { close(); };
+      '<h2 class="smd-connect-display">Connected</h2>' +
+      '<p class="smd-connect-lead">' + esc(name) + '. ' + msg + '</p>' +
+      '<div class="smd-connect-row"><button id="smd-connect-donebtn" class="smd-connect-btn primary" type="button">Done</button></div>';
+    setStatus("done", "Connection active.");
+    b.querySelector("#smd-connect-donebtn").onclick = function () { close(); };
   }
 
   function open() {
     injectCSS();
     if (overlay()) close(true);
     S = {
-      screen: "hospitals",
-      hospitals: [],
-      query: "",
-      listNote: "Loading hospitals.",
+      screen: "connections",
+      connections: [],
+      connLoading: true,
+      connError: false,
+      emrUrl: "",
       selected: null,
-      sessionId: null,
-      jobId: null,
+      runner: hasPlugin() ? "phone" : null,
+      session: null,
+      deployment: null,
+      reuse: false,
+      visitedOrigins: [],
+      pendingOrigins: [],
+      loginOpened: false,
+      loginHandled: false,
+      pluginListeners: [],
+      progressCounts: { pages: 0, requests: 0, phase: "DISCOVERING" },
+      progressFailed: false,
+      result: null,
+      versionId: null,
+      canApprove: false,
       jobState: null,
       jobError: null,
       jobDetail: null,
       viewerUrl: null,
       controlOwner: "agent",
-      reuse: false,
       statusKind: "",
       statusText: "",
       pollTimer: null,
@@ -870,7 +1250,7 @@
       '<section class="smd-connect-sheet" role="dialog" aria-modal="true" aria-labelledby="smd-connect-title">' +
       '<div class="smd-connect-bar" id="smd-connect-bar"><span class="smd-connect-grip" aria-hidden="true"></span>' +
       '<div><div class="smd-connect-title" id="smd-connect-title">Connect Hospital</div>' +
-      '<div class="smd-connect-sub">Connect Agent onboarding</div></div>' +
+      '<div class="smd-connect-sub">Sign in yourself. StewardMD reads only.</div></div>' +
       '<button class="smd-connect-x" type="button" aria-label="Close">×</button></div>' +
       '<div class="smd-connect-body" id="smd-connect-body"></div>' +
       '<div style="padding:0 1.125rem calc(1rem + env(safe-area-inset-bottom))"><div id="smd-connect-status" class="smd-connect-status" role="status" aria-live="polite"></div></div>' +
@@ -880,23 +1260,10 @@
     ov.addEventListener("click", function (e) { if (e.target === ov) close(); });
     document.addEventListener("keydown", onKey, true);
     bindDrag(ov.querySelector("#smd-connect-bar"));
-    show("hospitals");
+    show("connections");
     anchorToLauncher();
     animateOpen();
-    /* Initial hospital list. A real backend router may not exist yet; the
-     * mocked api() seam in tests answers this call. */
-    var iseq = (S.resolveSeq = (S.resolveSeq || 0) + 1);
-    api("/hospitals/resolve", { method: "POST", body: JSON.stringify({ query: "" }) }).then(function (r) {
-      if (!overlay() || !S || iseq !== S.resolveSeq) return;
-      if (r.s === 200 && r.d && r.d.ok && r.d.hospitals) {
-        S.hospitals = r.d.hospitals;
-        S.listNote = "";
-        if (S.screen === "hospitals") show("hospitals");
-      } else {
-        S.listNote = "Hospital list is unavailable. You can still enter an EMR address below.";
-        if (S.screen === "hospitals") show("hospitals");
-      }
-    });
+    loadConnections();
   }
 
   window.SMD_CONNECT_AGENT = {
@@ -909,13 +1276,17 @@
       return {
         open: !!overlay(),
         screen: S.screen,
-        sessionId: S.sessionId,
+        runner: S.runner,
+        sessionId: S.session && S.session.id,
+        reuse: S.reuse,
+        pendingOrigins: S.pendingOrigins,
+        visitedOrigins: S.visitedOrigins,
         jobState: S.jobState,
         statusKind: S.statusKind,
         statusText: S.statusText,
         controlOwner: S.controlOwner,
-        reuse: S.reuse,
-        hospitalCount: S.hospitals.length
+        connectionCount: S.connections.length,
+        canApprove: S.canApprove
       };
     }
   };
