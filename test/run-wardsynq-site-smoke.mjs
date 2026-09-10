@@ -9,7 +9,7 @@ const b = await launch({ port: Number(process.env.CDP_PORT || 9471) });
 try {
   await b.nav(BASE + "/");
   ok(await b.until(`return document.querySelector('[data-tab="staff"]') ? 'y' : '';`, 15000), "sign-in screen renders (account and hospital staff)");
-  ok(await b.ev(`return getComputedStyle(document.querySelector('.bar')).position === 'sticky'`), "shell stylesheet applied");
+  ok(await b.ev(`var e=document.querySelector('.brandbar'); return !!e && getComputedStyle(e).display === 'flex'`) === true, "workstation stylesheet applied to the door");
   await b.click('[data-tab="staff"]'); await b.until(`return document.getElementById('goStaff') ? 'y' : '';`, 3000);
   await b.type("sorg", "SMD-NOPE01"); await b.type("sid", "nobody"); await b.type("spw", "0000"); await b.click("#goStaff");
   const msg = await b.until(`var m=document.getElementById('loginMsg'); return m && m.querySelector('.msg.err') ? m.textContent : '';`, 15000);
