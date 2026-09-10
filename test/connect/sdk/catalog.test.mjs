@@ -1,4 +1,4 @@
-// test/connect/sdk/catalog.test.mjs — Task 4: built-in catalog + defaultRegistry + barrel.
+// test/connect/sdk/catalog.test.mjs -- Task 4: built-in catalog + defaultRegistry + barrel.
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { defaultRegistry, BUILTIN } from "../../../functions/_connect/sdk/catalog.js";
@@ -12,13 +12,15 @@ test("defaultRegistry has all built-ins with the right profiles", () => {
   assert.equal(r.has("dicomweb"), true);
   assert.equal(r.has("graphql"), true);
   assert.equal(r.has("sql"), true);
+  assert.equal(r.has("browser-session"), true);
   assert.equal(r.resolve("fhir-r4").meta.profile, "pull");
   assert.equal(r.resolve("abdm").meta.profile, "event");
   assert.equal(r.resolve("rest-json").meta.profile, "pull");
   assert.equal(r.resolve("dicomweb").meta.profile, "pull");
   assert.equal(r.resolve("graphql").meta.profile, "pull");
   assert.equal(r.resolve("sql").meta.profile, "pull");
-  assert.deepEqual(Object.keys(r.asConnectorMap()).sort(), ["abdm", "dicomweb", "fhir-r4", "graphql", "rest-json", "sql"]);
+  assert.equal(r.resolve("browser-session").meta.profile, "pull");
+  assert.deepEqual(Object.keys(r.asConnectorMap()).sort(), ["abdm", "browser-session", "dicomweb", "fhir-r4", "graphql", "rest-json", "sql"]);
 });
 
 test("each defaultRegistry() call is a DISTINCT instance (per-request isolation)", () => {
