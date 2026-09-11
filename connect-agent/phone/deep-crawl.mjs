@@ -75,12 +75,22 @@ export function buildTableView(raw, resourceHint, pathTemplate) {
 function CRAWL_RAW_TABLE() {
   var tables = document.querySelectorAll('table');
   var best = null, bestScore = -1;
+  var DAY = /^(su|mo|tu|we|th|fr|sa|sun|mon|tue|wed|thu|fri|sat)$/i;
   for (var i = 0; i < tables.length; i++) {
     var t = tables[i];
-    var thCount = t.querySelectorAll('th').length;
-    var rows = t.querySelectorAll('tbody tr');
-    if (!rows.length) rows = t.querySelectorAll('tr');
-    var score = (thCount ? 2 : 0) + (rows.length ? 1 : 0);
+    var cls = (t.getAttribute('class') || '') + ' ' + (t.getAttribute('id') || '');
+    // Skip a jQuery UI date-picker / calendar widget: it has <th> and rows but is chrome, not data.
+    if (/datepicker|calendar/i.test(cls)) continue;
+    var thEls0 = t.querySelectorAll('th');
+    var dayHeaders = 0;
+    for (var d = 0; d < thEls0.length; d++) { if (DAY.test((thEls0[d].textContent || '').trim())) dayHeaders++; }
+    if (thEls0.length >= 3 && dayHeaders >= Math.ceil(thEls0.length / 2)) continue; // weekday header row = calendar
+    var bodyRows = t.querySelectorAll('tbody tr');
+    var dataRows = 0;
+    var scan = bodyRows.length ? bodyRows : t.querySelectorAll('tr');
+    for (var b = 0; b < scan.length; b++) { if (scan[b].querySelectorAll('td').length >= 1) dataRows++; }
+    // Prefer a table with header labels AND real data rows; break ties by number of data rows.
+    var score = (thEls0.length ? 1000 : 0) + Math.min(dataRows, 999);
     if (score > bestScore) { bestScore = score; best = t; }
   }
   if (!best) return JSON.stringify(null);
