@@ -19,7 +19,7 @@
 (function () {
   "use strict";
   function ic(name) { return '<span class="material-symbols-rounded" aria-hidden="true">' + name + '</span>'; }
-  function mark() { return '<img class="sknx-mark" src="/sknx-mark.svg?v=sx16-ux" alt="" width="38" height="38">'; }
+  function mark() { return '<img class="sknx-brand-logo" src="/sknx-logo-full.png?v=sx1" alt="SknX AI Dermatology Intelligence" style="height:34px;width:auto;max-width:240px;object-fit:contain;display:block;">'; }
   function esc(s) { return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); }
   function haptic(k) { try { if (window.SMD_SKNX_FLAGS && window.SMD_SKNX_FLAGS.bool("smd_sknx_haptics") && window.SMD_HAPTICS && window.SMD_HAPTICS[k]) window.SMD_HAPTICS[k](); } catch (e) {} }
   function toast(m) { try { if (window.toast) window.toast(m); else if (window.SMD_toast) window.SMD_toast(m); } catch (e) {} }
@@ -62,7 +62,7 @@
       '<section class="sknx-capture" aria-labelledby="sknxCapTitle">' +
         '<header class="sknx-cap-head">' +
           '<button type="button" class="sknx-cap-close" data-act="sknx-close" aria-label="Close SknX">' + ic("close") + "</button>" +
-          mark() + '<h2 class="sknx-cap-title" id="sknxCapTitle">Skn X <span class="sknx-brand-sub">Dermatology</span></h2>' +
+          '<div style="flex:1;display:flex;align-items:center;min-width:0;">' + mark() + '<h2 class="sr-only" id="sknxCapTitle">SknX AI Dermatology Intelligence</h2></div>' +
         "</header>" +
         '<div class="sknx-cap-body">' +
           '<div class="sknx-intro"><span class="sknx-eyebrow">DERMATOLOGY</span><h3>A clearer view<br>of skin.</h3><p>Bring the photo and clinical story together for a more informed review.</p></div>' +

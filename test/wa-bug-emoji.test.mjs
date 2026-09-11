@@ -58,7 +58,7 @@ test("index.html: the contribution CTA box carries no emoji", () => {
 test("antibiogram.js: no rotate emoji in the 'rotate your phone' tooltip", () => {
   const s = read("antibiogram.js");
   assert.ok(!s.includes("🔄"), "rotate emoji should be gone from antibiogram.js");
-  assert.ok(s.includes('abg-rotate-phone'), "tooltip now uses an inline SVG phone rotation icon");
+  assert.ok(s.includes('abIco("refresh")'), "tooltip now uses the shared icon set instead");
 });
 
 test("api.js: Drugs Database detail-page close button states what it does (home, not a bare X)", () => {
