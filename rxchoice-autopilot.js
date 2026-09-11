@@ -102,7 +102,7 @@
     return core().choose(rx, cands);
   }
 
-  function card(category, o, rec) {
+  function card(category, o) {
     if (!o) return '<div class="rxc-auto-card"><div class="rxc-auto-cat">' + esc(category) + '</div><div class="rxc-auto-note">No validated match</div></div>';
     var isRec = category === "BALANCED ⭐";
     var label = category === "DOCTOR PRESCRIBED" ? "DOCTOR PRESCRIBED" : category;
@@ -123,13 +123,13 @@
     }
     if (result.blocked) {
       wrap.innerHTML = '<div class="rxc-auto-head"><span class="rxc-auto-title">RxChoice™</span><span class="rxc-auto-status">Original prescription retained</span></div>' +
-        '<div class="rxc-auto-note">' + esc(result.reason || "This medicine is not offered as a price substitution.") + '</div>' + card("DOCTOR PRESCRIBED", result.prescribed, result);
+        '<div class="rxc-auto-note">' + esc(result.reason || "This medicine is not offered as a price substitution.") + '</div>' + card("DOCTOR PRESCRIBED", result.prescribed);
       row.line.appendChild(wrap); return;
     }
     wrap.innerHTML = '<div class="rxc-auto-head"><span class="rxc-auto-title">RxChoice™ · Same Prescription. Smarter Price.</span><span class="rxc-auto-status">Validated from Drug Database</span></div>' +
       '<div class="rxc-auto-grid">' +
-      card("GENERIC", result.generic, result) + card("BALANCED ⭐", result.balanced, result) +
-      card("PREMIUM", result.premium, result) + card("DOCTOR PRESCRIBED", result.prescribed, result) + '</div>';
+      card("GENERIC", result.generic) + card("BALANCED ⭐", result.balanced) +
+      card("PREMIUM", result.premium) + card("DOCTOR PRESCRIBED", result.prescribed) + '</div>';
     row.line.appendChild(wrap);
 
     Array.from(wrap.querySelectorAll("[data-rxc-auto='1']")).forEach(function (btn) {
@@ -147,12 +147,6 @@
           if (!sh._rxChoice) sh._rxChoice = {};
           sh._rxChoice[row.drug || ("line" + Date.now())] = opt;
         }
-        try {
-          var a = (G.SMD_RXCHOICE_UI && G.SMD_RXCHOICE_UI.audit) ? G.SMD_RXCHOICE_UI.audit() : [];
-          // The canonical UI owns audit writes. This adapter only keeps the selected product on the
-          // prescription sheet; no PHI is written here.
-          void a;
-        } catch (e) {}
         setTimeout(schedule, 0);
       });
     });
@@ -190,10 +184,14 @@
     document.addEventListener("change", function (e) {
       if (e.target && e.target.closest && e.target.closest('#rxSheet [data-f]')) schedule();
     }, true);
+    // The adapter can load before MEDAPI/core because the app boot order is intentionally modular.
+    // Polling is only a readiness check; once choices are rendered, run() becomes a no-op until the
+    // prescription changes.
+    setInterval(schedule, 1000);
     schedule();
   }
 
-  G.SMD_RXCHOICE_AUTOPILOT = { refresh: schedule, _version: 1 };
+  G.SMD_RXCHOICE_AUTOPILOT = { refresh: schedule, _version: 2 };
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", boot);
   else setTimeout(boot, 0);
 })();
