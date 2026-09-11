@@ -31,7 +31,7 @@
   var LS_STAFF = "smd_opd_staff_tok";
 
   var st = {
-    orgId: "", ward: "", patients: [], view: "list",
+    orgId: "", ward: "", q: "", cls: "", patients: [], view: "list",
     sel: null,                 // the selected {encounterId, patientId, ward, bed, admittedAt}
     problems: [], criticals: [], balance: null, outbox: [], cosign: null, downtime: null, quality: null, pcopy: null, consent: null, completion: null, emergency: null, roi: null, tpa: null, billing: null, reports: null, emergencyOverride: false, emergencyAdmin: null, emergencyReconcile: null,
     /* Held from other systems. null until asked, an object once answered, and a separate error
@@ -170,20 +170,72 @@
     return emBanner;
   }
 
-  function listView(state) {
-    var rows = (state.patients || []).map(function (p) {
-      return '<button class="w-bed" data-w-act="open:' + esc(p.encounterId) + '">' +
-        '<span class="w-bed-no">' + esc(p.bed || "-") + "</span>" +
-        /* Name first, then the MRN a wristband can be checked against. The record id is the last
-         * resort, not the default: it is the one identifier on the row nobody can verify against
-         * the patient in front of them. */
-        '<span class="w-bed-b"><b>' + esc(p.name || p.mrn || p.patientId) + "</b><small>" + esc(p.mrn && p.name ? p.mrn + " · " : "") + esc(p.ward || "") + " &middot; admitted " + when(p.admittedAt) + "</small></span>" +
-        ms("chevron_right") + "</button>";
+  /* THE WARD ROUND LIST. Grouped by ward, ordered by bed, filtered by admission class and a live
+   * search over name / MRN / bed - the way a round is actually walked, not one flat list of every
+   * admission in the hospital. Every fact on a row comes from /ward/list as the server projected it
+   * (name, MRN, ward, bed, class, admission time); nothing is inferred here. The hospital-wide
+   * boards (bed board, ED, surgery, twin...) live in their own card below the round, not in the
+   * filter row. */
+  var CLASS_LABEL = { IPD: "General", ICU: "ICU", MATERNITY: "Maternity", PEDIATRICS: "Paediatrics", NICU: "NICU" };
+  var CLASS_ORDER = ["IPD", "ICU", "MATERNITY", "PEDIATRICS", "NICU"];
+  function bedKey(b) { var m = /^(\D*)(\d+)(.*)$/.exec(String(b || "")); return m ? [m[1], Number(m[2]), m[3]] : [String(b || "~"), 0, ""]; }
+  function bedCompare(a, b) {
+    var ka = bedKey(a.bed), kb = bedKey(b.bed);
+    return ka[0] < kb[0] ? -1 : ka[0] > kb[0] ? 1 : ka[1] - kb[1] || (ka[2] < kb[2] ? -1 : ka[2] > kb[2] ? 1 : 0);
+  }
+  function stayDay(iso) {
+    var t = Date.parse(iso || ""); if (!isFinite(t)) return "";
+    var d = Math.floor((Date.now() - t) / 86400000) + 1;
+    return d < 1 ? "" : "day " + d;
+  }
+  /* Pure: which rows survive the class chip and the search. Exposed as WARD.filterRoster for tests. */
+  function filterRoster(patients, cls, q) {
+    var needle = String(q || "").trim().toLowerCase();
+    return (patients || []).filter(function (p) {
+      if (cls && p.class !== cls) return false;
+      if (!needle) return true;
+      return [p.name, p.mrn, p.bed, p.ward, p.patientId].some(function (v) { return v != null && String(v).toLowerCase().indexOf(needle) >= 0; });
+    });
+  }
+  function rosterHtml(state) {
+    var all = state.patients || [];
+    var shown = filterRoster(all, state.cls, state.q);
+    var counts = {}; all.forEach(function (p) { counts[p.class] = (counts[p.class] || 0) + 1; });
+    var chips = '<div class="w-chips" role="tablist">' +
+      '<button class="w-chip' + (!state.cls ? " on" : "") + '" data-w-act="setcls:" type="button">All <b>' + all.length + "</b></button>" +
+      CLASS_ORDER.filter(function (c) { return counts[c]; }).map(function (c) {
+        return '<button class="w-chip' + (state.cls === c ? " on" : "") + '" data-w-act="setcls:' + c + '" type="button">' + esc(CLASS_LABEL[c] || c) + " <b>" + counts[c] + "</b></button>";
+      }).join("") + "</div>";
+    var byWard = {}; shown.forEach(function (p) { var w = p.ward || "No ward assigned"; (byWard[w] = byWard[w] || []).push(p); });
+    var wards = Object.keys(byWard).sort(function (a, b) { return a === "No ward assigned" ? 1 : b === "No ward assigned" ? -1 : a.localeCompare(b); });
+    var groups = wards.map(function (w) {
+      var rows = byWard[w].sort(bedCompare).map(function (p) {
+        var day = stayDay(p.admittedAt);
+        return '<button class="w-bed" data-w-act="open:' + esc(p.encounterId) + '" type="button">' +
+          '<span class="w-bed-no">' + esc(p.bed || "-") + "</span>" +
+          /* Name first, then the MRN a wristband can be checked against. The record id is the last
+           * resort, not the default: it is the one identifier on the row nobody can verify against
+           * the patient in front of them. */
+          '<span class="w-bed-b"><b>' + esc(p.name || p.mrn || p.patientId) + "</b><small>" +
+            esc(p.mrn && p.name ? p.mrn + " · " : "") + esc(CLASS_LABEL[p.class] || p.class || "") +
+            (day ? " · " + esc(day) : "") + " · admitted " + when(p.admittedAt) + "</small></span>" +
+          ms("chevron_right") + "</button>";
+      }).join("");
+      return '<div class="w-wardrow"><h4>' + esc(w) + "<small>" + byWard[w].length + (byWard[w].length === 1 ? " patient" : " patients") + "</small></h4>" + rows + "</div>";
     }).join("");
-    return '<div class="w-card"><div class="w-card-h">' + ms("bed") + "<h3>Ward" + (state.ward ? ": " + esc(state.ward) : "") + "</h3>" +
+    var empty = !state.loaded ? '<p class="w-empty">Loading the ward…</p>'
+      : !all.length ? '<p class="w-empty">No patients are currently admitted' + (state.ward ? " to " + esc(state.ward) : "") + ".</p>"
+      : !shown.length ? '<p class="w-empty">No patients match. Clear the search or the filter.</p>' : "";
+    return '<p class="w-count">' + shown.length + " of " + all.length + (all.length === 1 ? " patient" : " patients") + (wards.length ? " · " + wards.length + (wards.length === 1 ? " ward" : " wards") : "") + "</p>" + chips + (groups || empty);
+  }
+  function listView(state) {
+    return '<div class="w-card"><div class="w-card-h">' + ms("bed") + "<h3>Ward round" + (state.ward ? ": " + esc(state.ward) : "") + "</h3>" +
       '<button class="w-ic" data-w-act="reload" title="Refresh">' + ms("refresh") + "</button></div>" +
-      '<div class="w-filter"><input id="wWard" type="text" placeholder="Filter by ward (blank = all)" value="' + esc(state.ward) + '">' +
-      '<button class="w-btn ghost" data-w-act="setward">Apply</button>' +
+      '<div class="w-filter"><input id="wQ" type="search" autocomplete="off" placeholder="Search name, MRN or bed" value="' + esc(state.q || "") + '">' +
+      '<input id="wWard" type="text" placeholder="Ward (blank = all)" value="' + esc(state.ward) + '">' +
+      '<button class="w-btn ghost" data-w-act="setward" type="button">Apply</button></div>' +
+      '<div id="wRoster">' + rosterHtml(state) + "</div></div>" +
+      '<div class="w-card"><div class="w-card-h">' + ms("hub") + '<h3>Boards and tools</h3></div><div class="w-tools">' +
       '<button class="w-btn" data-w-act="board" title="Admit a patient to a bed">' + ms("add_circle") + "Admit</button>" +
       '<button class="w-btn ghost" data-w-act="edboard" title="Emergency department">' + ms("emergency") + "ED</button>" +
       '<button class="w-btn ghost" data-w-act="surgeryboard" title="Surgery / OT / PACU">' + ms("medical_services") + "Surgery</button>" +
@@ -222,9 +274,8 @@
        * role without the capability is told so by the server's own 403 rather than by this screen
        * guessing who holds it. */
       '<button class="w-btn ghost" data-w-act="integration" title="Feeds in and out: what is held, what is stuck, who may push, where this hospital sends">' + ms("hub") + "Integration</button>" +
-      '<button class="w-btn ghost" data-w-act="downtime" title="Printable sheet for when the system is unavailable">' + ms("print") + "Downtime pack</button></div>" +
-      (rows || (state.loaded ? '<p class="w-empty">No patients are currently admitted' + (state.ward ? " to " + esc(state.ward) : "") + ".</p>" : '<p class="w-empty">Loading the ward…</p>')) +
-      "</div>" + xchgCard(state) + cosignCard(state) + qualityCard(state) + overrideCard(state);
+      '<button class="w-btn ghost" data-w-act="downtime" title="Printable sheet for when the system is unavailable">' + ms("print") + "Downtime pack</button></div></div>" +
+      xchgCard(state) + cosignCard(state) + qualityCard(state) + overrideCard(state);
   }
 
   /* THE BED BOARD. Every configured ward, every bed, occupied or free - from the record itself
@@ -4762,6 +4813,7 @@
     if (cmd === "dismiss") { st.err = ""; st.note = ""; st.refusal = null; paint(); return; }
     if (cmd === "reload") { loadWard(); return; }
     if (cmd === "setward") { st.ward = val("wWard"); loadWard(); return; }
+    if (cmd === "setcls") { st.cls = arg; var r0 = document.getElementById("wRoster"); if (r0) r0.innerHTML = rosterHtml(st); else paint(); return; }
     if (cmd === "back") {
       /* The patient's copy is opened FROM a chart, so back returns to that chart rather than
        * throwing the selection away - and the copy itself is always dropped, because a page with
@@ -5044,6 +5096,11 @@
     } catch (e) {}
     return "";
   }
+  function onInput(e) {
+    if (!e.target || e.target.id !== "wQ") return;
+    st.q = String(e.target.value || "");
+    var r0 = document.getElementById("wRoster"); if (r0) r0.innerHTML = rosterHtml(st);
+  }
   function open(opts) {
     opts = opts || {};
     st.orgId = opts.orgId || st.orgId || rememberedOrgId();
@@ -5052,6 +5109,8 @@
     st.view = "list"; st.sel = null; st.loaded = false; st.err = ""; st.note = ""; st.refusal = null;
     var el = root(); el.classList.add("on");
     el.removeEventListener("click", onClick); el.addEventListener("click", onClick);
+    // Live search: re-render only the roster so the search box keeps focus and its caret.
+    el.removeEventListener("input", onInput); el.addEventListener("input", onInput);
     paint(); loadWard();
     // A hospital-level view requested by the shell (bed board, ED, twin...). Only the verbs the ward
     // list's own toolbar offers: a chart-scoped verb needs a selected patient and is not honoured.
@@ -5060,5 +5119,5 @@
   var HOSPITAL_ACTS = ["board", "edboard", "surgeryboard", "inventoryboard", "critsboard", "bedmgmt", "flowcommand", "twin", "scheduling", "cashier", "reports", "emergencyadmin", "integration", "downtime"];
   function close() { var el = root(); el.classList.remove("on"); el.innerHTML = ""; if (G.WARD && typeof G.WARD.onClose === "function") { try { G.WARD.onClose(); } catch (e) {} } }
 
-  G.WARD = { open: open, close: close, _render: _render, _st: st, _nextFor: nextFor, _problem: problem };
+  G.WARD = { filterRoster: filterRoster, open: open, close: close, _render: _render, _st: st, _nextFor: nextFor, _problem: problem };
 })();

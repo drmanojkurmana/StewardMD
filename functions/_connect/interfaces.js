@@ -39,7 +39,10 @@ export async function runConformance(connector, opts = {}) {
   const add = (name, ok, detail) => checks.push({ name, ok, detail: detail || "" });
   try { assertConnector(connector); add("contract", true); } catch (e) { add("contract", false, e.message); }
 
-  const ctx = makeCtx({ fetch: opts.fetch });
+  // opts.exec is additive and opt-in: only a connector that cannot execute through a plain ctx.fetch
+  // (the browser-session connector - see its makeExec()) ever needs it; every other connector type is
+  // unaffected since it never sets this.
+  const ctx = makeCtx({ fetch: opts.fetch, config: opts.exec ? { exec: opts.exec } : undefined });
   try { await connector.authenticate(ctx); add("authenticate", true); } catch (e) { add("authenticate", false, e.message); }
   try { const c = await connector.capabilities(ctx); add("capabilities", !!c); } catch (e) { add("capabilities", false, e.message); }
 

@@ -67,6 +67,9 @@ dependencies {
     implementation "androidx.core:core-splashscreen:$coreSplashScreenVersion"
     implementation project(':capacitor-android')
     implementation "com.google.firebase:firebase-common:21.0.0"
+    // ConnectBrowserPlugin — WebViewCompat.addDocumentStartJavaScript / WebViewFeature for the
+    // Connect Agent's document-start init script injection.
+    implementation "androidx.webkit:webkit:$androidxWebkitVersion"
     // FundX hybrid depth fusion (Phase 2) — ARCore + Depth API. Optional at runtime
     // (com.google.ar.core=optional in the manifest); the app falls back to the monocular
     // pipeline when ARCore / the Depth API is unavailable.

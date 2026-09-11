@@ -1,4 +1,4 @@
-// functions/_connect/sdk/descriptor.js — Track C: connector lifecycle/capability descriptor.
+// functions/_connect/sdk/descriptor.js: Track C: connector lifecycle/capability descriptor.
 // Pure (reads connector.meta only; no env/fetch/global state). Inference defaults (spec §3.1):
 //   pull  -> lifecycle "ga",       emitsBundle true
 //   event -> lifecycle "skeleton", emitsBundle false
@@ -45,6 +45,7 @@ export function describe(connector) {
       authKinds: caps.authKinds || [],
       eventTypes: caps.eventTypes || [],
       emitsBundle: typeof caps.emitsBundle === "boolean" ? caps.emitsBundle : emitsDefault,
+      worklist: typeof caps.worklist === "boolean" ? caps.worklist : (Array.isArray(caps.operations) && caps.operations.includes("worklist")),
     },
     // Structural facts, true for every connector this shape governs - see the file header.
     ownership: "external",

@@ -15,7 +15,7 @@ export async function runConnectPipeline({ client, actorId, hospitalName, emrUrl
     sessionKey,
     client,
   });
-  const errors = validateAdapterSpec(spec);
+  const errors = validateAdapterSpec(spec, { schemaVersion: 2 });
   if (errors.length) throw new Error(`Generated specification failed safety validation: ${errors.join('; ')}`);
   const safeSpec = { ...spec, consent: { receiptId: consent.receiptId, scope: consent.scope, emrOrigin: consent.emrOrigin },
     browserSession: { userId: browserUserId, ephemeral: true } };

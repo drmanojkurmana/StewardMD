@@ -49,6 +49,18 @@ done
 # icu.js / medlist.js, which try /vendor/pdfjs/ before the CDN fallback). ──────
 [ -d vendor ] && cp -R vendor "$WWW/"
 
+# ── 2e. Connect Hospital phone discovery engine (ES modules loaded via dynamic
+# import() in the app WebView; connect-agent-onboarding.js is the only caller).
+# Only the phone-runtime pieces ship: the phone engine itself, plus the shared
+# discovery/policy/camofox-transport modules connect-agent/phone/** imports from.
+if [ -d connect-agent/phone ]; then
+  mkdir -p "$WWW/connect-agent/phone"
+  cp connect-agent/phone/*.mjs "$WWW/connect-agent/phone/"
+fi
+for f in connect-agent/discovery.mjs connect-agent/policy.mjs connect-agent/camofox-client.mjs; do
+  [ -f "$f" ] && mkdir -p "$WWW/connect-agent" && cp "$f" "$WWW/connect-agent/"
+done
+
 # ── 3. Manifest + service worker ──────────────────────────────────────────────
 [ -f site.webmanifest ] && cp site.webmanifest "$WWW/"
 [ -f sw.js ] && cp sw.js "$WWW/"
