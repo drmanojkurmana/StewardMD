@@ -179,10 +179,37 @@ const WSQ_CONFIG = {
     ...LABS.map((l) => ({ [l.code]: { amount: 320, currency: "INR", description: l.test + " (DEMO price)" } })),
     { "CXR-PA": { amount: 550, currency: "INR", description: "Chest radiograph (DEMO price)" } },
   ),
-  // MaiK stays OFF: no model is configured for this demo tenant and a fabricated AI answer on a
-  // fabricated chart would be the one thing here that could mislead.
-  maik: { enabled: false },
+  /* MaiK is OFF unless WSQ_DEMO_MAIK=1.
+   *
+   * Off by default because a fabricated AI answer on a fabricated chart is the one artefact here
+   * that could mislead somebody reading over a shoulder, and because a local run has no model at all.
+   * On for a live demonstration, where a real model is configured and MaiK is one of the things
+   * worth demonstrating: it is gated by the same per-provider PHI approval a real hospital sets, and
+   * every answer it gives is marked an unsigned AI draft awaiting a clinician's review. */
+  maik: E.WSQ_DEMO_MAIK === "1"
+    ? { enabled: true, phiApproved: ["gemini", "vertex"] }
+    : { enabled: false },
 };
+
+/* THE LOGIN SHEET. One member of each role, with the three things a sign-in actually needs: the
+ * hospital code, the staff id and the PIN. Printed at the end because a seeded demonstration nobody
+ * can sign into is not a demonstration. These are DEMONSTRATION credentials into a hospital of
+ * fabricated patients; they are not secrets and they are not a real person's login. */
+function printLogins(orgCode) {
+  const staff = buildStaff();
+  const seen = new Set();
+  const rows = [];
+  for (const s of staff) {
+    if (seen.has(s.role)) continue;
+    seen.add(s.role);
+    rows.push(s);
+  }
+  console.log("\nSIGN IN AT " + BASE + "  ->  \"Hospital staff\"");
+  console.log("  Hospital code: " + orgCode);
+  console.log("  " + "ROLE".padEnd(16) + "STAFF ID".padEnd(34) + "PIN");
+  for (const r of rows) console.log("  " + String(r.role).padEnd(16) + String(r.identity).padEnd(34) + r.pin);
+  console.log("  Every role above is one of " + staff.length + " demonstration staff. Same code, same PIN pattern.");
+}
 
 // ---------------------------------------------------------------------------------------------
 // HTTP: one session helper, one call helper, all failures collected
@@ -969,6 +996,7 @@ async function main() {
   } else {
     console.log("\nNo failed calls.");
   }
+  printLogins(org.code || orgId);
   console.log(`\nBed board as the server reports it: ${JSON.stringify((board.body && board.body.wards || []).map((w) => ({ ward: w.ward, occupied: (w.occupied || []).length, free: (w.free || []).length })))}`);
   // A fresh seed that did not reach the shape it promised is a failed seed, and says so.
   if (problems.length && !FORCE) process.exitCode = 1;
