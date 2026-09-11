@@ -5203,7 +5203,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       // disease names, so "hi <anything clinical>" wrongly got the canned reply.)
       var afterGreet = n
         .replace(/^(hi+|hey+|hello|helo|yo|hiya|sup|namaste|hai|greetings|good (morning|afternoon|evening|night))\b/i, "")
-        .replace(/^\s*(there|doc|doctor|team|everyone|all|maik|sir|ma'?am|maam)\b/i, "")
+        .replace(/^\s*(there|doc|doctor|team|everyone|all|maik|sir|ma'?am|maam|dude|bro|man|buddy)\b/i, "")
         .replace(/[\s,!.?]+/g, " ").trim();
       var greetOnly = afterGreet.split(" ").filter(function (w) { return w.length >= 2 && MAIK_CASUAL.indexOf(w) < 0; }).length === 0;
       /* A GREETING IS ROUTED BY WHO PAYS FOR IT.
@@ -5226,6 +5226,15 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
         if (_eng === "local") return { kind: "clinical" };          // free and offline: let it answer
         if (byeHit) return { kind: "casual", reply: "Goodbye." };
         return { kind: "casual", reply: "Hello. What would you like to look at?" };
+      }
+      // Complaint about MaiK's OWN last answer/behaviour, not a new clinical question. Owner report
+      // (2026-09-11): "What the fuck i asked how to diagnose pneumonia why are you missing continuity"
+      // and "When asked you to show answer with doses earlier why didn't you..." both contain real
+      // clinical words (pneumonia, doses), so the Intent Firewall correctly calls them medical - and
+      // both went straight to RAG, which answered an unrelated drug because there was no real question
+      // in them to retrieve. Caught here, before retrieval, so it costs nothing and never mismatches.
+      if (/\b(why (are|is|did|didn'?t|do|does|doesn'?t|would|wouldn'?t) you\b|you already know|missing continuity|you'?re wrong|you are wrong|that'?s wrong|that is wrong|not what i asked)\b/i.test(n)) {
+        return { kind: "casual", reply: "Sorry about that. Could you ask the question again, in one line? I'll stay on that topic this time." };
       }
       // Thanks and acknowledgements: same reasoning, same split.
       if (isShort && /^(thanks|thank you|thankyou|thx|ty|ok|okay|got it|cool|great)\b/.test(n)) {
@@ -5281,7 +5290,11 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       }
       if (/^(dose|dosage|doses|how much)\b/.test(n) || (/\bdose\b/.test(n) && wc <= 6)) {
         var _pop = /\b(paediatric|pediatric|child|neonat)/i.test(n) ? "Paediatric" : (/\b(renal|dialysis|ckd)\b/i.test(n) ? "Renal-adjusted" : (/\b(hepatic|liver)\b/i.test(n) ? "Hepatic-adjusted" : (/\bpregnan/i.test(n) ? "Pregnancy" : "Adult")));
-        var _drug = q.replace(/\?+/g, " ").replace(/\b(dose|dosage|doses|dosing|of|the|a|an|in|for|adult|paediatric|pediatric|child|neonatal|neonate|renal|dialysis|ckd|hepatic|liver|pregnancy|pregnant|how|much|what|whats|is|are|please|pls|give|me|and|standard|its|it|treatment|treatments|therapy|regimen|regimens|drug|drugs|medication|medications|agent|agents|antibiotic|antibiotics)\b/gi, " ").replace(/\s+/g, " ").trim();
+        // Owner report (2026-09-11): "Ok tell me dose of metoprolol" gate-failed while "Metoprolol
+        // dose" answered fine - this stopword list stripped "dose/of/me" but left "Ok tell" glued
+        // onto the drug name, so retrieval searched for "Ok tell metoprolol" instead of "metoprolol".
+        // Request-frame words added so any phrasing of the same question extracts the same drug.
+        var _drug = q.replace(/\?+/g, " ").replace(/\b(dose|dosage|doses|dosing|of|the|a|an|in|for|adult|paediatric|pediatric|child|neonatal|neonate|renal|dialysis|ckd|hepatic|liver|pregnancy|pregnant|how|much|what|whats|is|are|please|pls|plz|give|me|and|standard|its|it|treatment|treatments|therapy|regimen|regimens|drug|drugs|medication|medications|agent|agents|antibiotic|antibiotics|tell|ok|okay|so|can|could|you|show|us|kindly)\b/gi, " ").replace(/\s+/g, " ").trim();
         _drug = _drug || t.lastDrug;
         if (_drug) return { question: _pop + " dosing of " + _drug + " for " + t.topic + " \u2014 dose, route, titration and renal-adjustment principles. Verify locally.", depth: "concise", topic: "dose of " + _drug, retrieval: _drug + " " + t.topic + " dose dosing route renal adjustment" };
         // No drug named and none remembered: "and the dose?" right after a treatment answer means the
@@ -5314,7 +5327,11 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       // keyword-matched a random disease (a real case: "Ok First Line Treatment?" after
       // an ascites answer retrieved FIRST Bite Syndrome). Any non-generic token means
       // the clinician may be naming a NEW topic → fall through to normal routing.
-      var GENERIC_FU = /^(ok(ay)?|yes|yeah|yep|sure|please|pls|go|ahead|and|so|also|what|whats|about|the|of|for|in|a|an|is|are|its|tell|me|give|now|then|this|that|first|second|third|line|initial|choice|best|treatment|treat|therapy|therapies|management|manage|mx|rx|drug|drugs|medication|medications|medicine|medicines|med|meds|recommend|recommended|suggest|suggested|suggestion|suggestions|prescribe|prescribed|prescription|write|writing|should|shall|can|could|would|will|you|we|i|need|use|used|using|which|when|why|how|better|safe|safer|safety|alternative|alternatives|avoid|contraindication|contraindications|interaction|interactions|side|effect|effects|adverse|acute|chronic|severe|mild|moderate|start|starting|begin|prefer|preferred|do|does|to|with|on|or|as|at|than|vs|any|renal|hepatic|kidney|liver|pregnancy|pregnant|elderly|adult|child|children|paediatric|pediatric|neonatal|neonate|geriatric|dose|doses|dosing|option|options|step|steps|investigation|investigations|workup|work-up|test|tests|lab|labs|complication|complications|cause|causes|sign|signs|symptom|symptoms|prognosis|criteria|classification|type|types|feature|features|diagnosis|differential|differentials|monitoring|follow|followup|up|red|flag|flags)$/;
+      // "it"/"them" (pronouns referring back to the topic) and "diagnose"/"diagnostic" (verb/adjective
+      // forms - only the noun "diagnosis" was covered) added after the owner report (2026-09-11):
+      // "How to diagnose it" failed every token here ("diagnose" and "it" both unmatched), so it was
+      // treated as a brand-new topic-less query and drifted onto an unrelated malnutrition chapter.
+      var GENERIC_FU = /^(ok(ay)?|yes|yeah|yep|sure|please|pls|go|ahead|and|so|also|what|whats|about|the|of|for|in|a|an|is|are|its|it|them|tell|me|give|now|then|this|that|first|second|third|line|initial|choice|best|treatment|treat|therapy|therapies|management|manage|mx|rx|drug|drugs|medication|medications|medicine|medicines|med|meds|recommend|recommended|suggest|suggested|suggestion|suggestions|prescribe|prescribed|prescription|write|writing|should|shall|can|could|would|will|you|we|i|need|use|used|using|which|when|why|how|better|safe|safer|safety|alternative|alternatives|avoid|contraindication|contraindications|interaction|interactions|side|effect|effects|adverse|acute|chronic|severe|mild|moderate|start|starting|begin|prefer|preferred|do|does|to|with|on|or|as|at|than|vs|any|renal|hepatic|kidney|liver|pregnancy|pregnant|elderly|adult|child|children|paediatric|pediatric|neonatal|neonate|geriatric|dose|doses|dosing|option|options|step|steps|investigation|investigations|workup|work-up|test|tests|lab|labs|complication|complications|cause|causes|sign|signs|symptom|symptoms|prognosis|criteria|classification|type|types|feature|features|diagnosis|diagnose|diagnosed|diagnostic|differential|differentials|monitoring|follow|followup|up|red|flag|flags)$/;
       if (wc <= 7) {
         var toksF = n.replace(/\?/g, "").split(" ").filter(Boolean);   // maikNorm keeps '?' — drop it for token matching
         if (toksF.length && toksF.every(function (w) { return GENERIC_FU.test(w); })) {
@@ -5584,7 +5601,13 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
              "Tap the model name at the top to finish installing it, or choose <b>MaiK Cloud</b>.";
     }
     if (/cancel/i.test(e)) return "That answer was cancelled.";
-    return "MaiK is unavailable right now.the deterministic StewardMD engine, calculators and reference tools remain available." +
+    // Owner report (2026-09-11): the FIRST message after opening MaiK ("Hi") hit this raw native code
+    // with no guidance, then every later message that turn worked fine - a transient race (the model
+    // was still being mapped into memory) read as a permanent failure. One retry costs nothing.
+    if (/model-missing/i.test(e)) {
+      return "The on-device model was still loading. Please ask again - it usually answers on the next try.";
+    }
+    return "MaiK is unavailable right now. The deterministic StewardMD engine, calculators and reference tools remain available." +
            (e ? '<br><br><span style="opacity:.7;font-size:12.5px">Reason: ' + maikEscH(e) + "</span>" : "");
   }
 
