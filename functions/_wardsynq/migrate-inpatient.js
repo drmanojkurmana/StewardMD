@@ -368,7 +368,10 @@ async function listWard(request, env, ctx) {
       admittedAt: e.periodStart || null, attendingId: e.attendingId || null, version: e.version,
     };
   });
-  return { ...base, ok: true, patients };
+  /* The hospital's country, so the ward screen can LABEL a temperature box with the unit this
+   * server will store it in. Without it the two were inferred separately and disagreed: the box
+   * said Fahrenheit, the server stored Celsius, and 98.6 went into the record as 98.6 Cel. */
+  return { ...base, ok: true, patients, region: str(ctx.region) || "IN" };
 }
 
 /**
@@ -402,6 +405,10 @@ async function recordWardVitals(request, env, ctx) {
   const observations = vitalsToObservations({
     vitals: ctx.vitals, patientId, ticketId: encounterId, encounterId,
     recordedAt: ctx.recordedAt || new Date().toISOString(), idPrefix: "wsq-ward-vitals",
+    // What a clinician in THIS hospital's country writes a temperature in, when the caller did not
+    // say. Without it every ward temperature was stored as Fahrenheit: 37.1 charted in an Indian
+    // hospital became "37.1 [degF]", which is profound hypothermia. See functions/_region.js.
+    defaultTempUnit: ctx.tempUnit || null,
   });
   if (!observations.length) return { ...base, ok: true, written: 0, skipped: "no_numeric_values" };
 

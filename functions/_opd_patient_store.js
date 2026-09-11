@@ -54,7 +54,8 @@ export async function nextSeq(env, orgId, series) {
 // org: { id, code, mode }  ("native" | "connect"; a GHIS workplace passes mode "ghis")
 // Returns { ok, patient, mrn, mrSource, pending, duplicateOf? } or { ok:false, errors }.
 export async function registerPatient(env, org, body, actorId) {
-  const v = validateRegistration(body || {}, now());
+  // The hospital's own country decides what a valid phone number is. See functions/_region.js.
+  const v = validateRegistration(body || {}, now(), org && org.region);
   if (!v.ok) return { ok: false, error: "invalid", errors: v.errors };
   const p = v.patient;
   const orgId = String((org && org.id) || "");

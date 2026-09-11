@@ -37,6 +37,10 @@ const FRESHNESS_MS = 4 * 60 * 60 * 1000;
 function gatherVitals(observations, { codeMap, now, freshnessMs = FRESHNESS_MS } = {}) {
   const nowMs = Date.parse(now || new Date().toISOString());
   const values = {};
+  /* The unit each value was RECORDED in. It used to be discarded here, and a scorer that assumes
+   * one unit then reads a number charted in another - see scoreTemperature - produces a confident
+   * wrong answer rather than an obviously missing one. */
+  const units = {};
   const sources = {};
   const rejected = [];
 
@@ -72,9 +76,14 @@ function gatherVitals(observations, { codeMap, now, freshnessMs = FRESHNESS_MS }
     }
     if (sources[param] && sources[param].at >= at) continue; // an older reading never replaces a newer one
     values[param] = o.value;
-    sources[param] = { id: o.id, at, atIso: new Date(at).toISOString(), code: o.code };
+    /* THE UNIT TRAVELS WITH THE VALUE. It was dropped here, so a temperature charted in Fahrenheit
+     * reached NEWS2's Celsius bands as a bare number: 98.6 scored 2 ("above 39"), and so did a
+     * genuinely febrile 102 and a hypothermic 94. The temperature subscore was noise on every
+     * F-charted patient. Nothing here converts - see scoreTemperature, which refuses instead. */
+    units[param] = o.unit || null;
+    sources[param] = { id: o.id, at, atIso: new Date(at).toISOString(), code: o.code, unit: o.unit || null };
   }
-  return { values, sources, rejected };
+  return { values, units, sources, rejected };
 }
 
 export { FRESHNESS_MS, gatherVitals };
