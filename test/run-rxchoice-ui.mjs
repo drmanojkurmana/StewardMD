@@ -15,12 +15,18 @@
  *   CHROME=/opt/pw-browsers/chromium node test/run-rxchoice-ui.mjs
  */
 import { spawn } from "node:child_process";
+import { rmSync } from "node:fs";
 import { setTimeout as sleep } from "node:timers/promises";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 const HERE = dirname(fileURLToPath(import.meta.url));
 const BASE = (process.env.BASE || "http://localhost:8998/").replace(/\/?$/, "/");
 const PORT = 9404, userDir = (process.env.CLAUDE_JOB_DIR || "/tmp") + "/rxc-chrome";
+/* A FRESH profile every run. Phase 2 below turns the master flag OFF by writing smd_rxchoice=0 into
+ * localStorage, and Chrome keeps that localStorage in this fixed user-data-dir - so the NEXT run
+ * booted with the flag already off, rendered no button, and failed 12 checks that have nothing to
+ * do with the code under test. The first run on a clean machine passes and every later one lies. */
+rmSync(userDir, { recursive: true, force: true });
 const CHROME = process.env.CHROME || "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome";
 
 let serveProc = null;
