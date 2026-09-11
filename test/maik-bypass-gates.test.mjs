@@ -57,6 +57,19 @@ test("voice: the tier-3 cloud transcriber is gated on the policy before the reco
   assert.match(VOICE.slice(gate, tier3), /stt-unavailable-offline/, "with a distinct reason when the clinician chose Cloud and is merely offline");
 });
 
+test("per-phone cloud kill switch: every SMD_AI cloud method builds its URL from aiBase(), which the switch redirects and counts", () => {
+  const body = REASON.slice(REASON.indexOf("function cloudBlocked()"), REASON.indexOf("function aiBase()") + 600);
+  assert.match(body, /smd_ai_cloud_block/); assert.match(body, /__SMD_CLOUD_ATTEMPTS/); assert.match(body, /api\/ai-blocked-by-test-switch/);
+  // Every cloud method must go through aiBase(): count the methods that fetch an AI path and the ones that call aiBase().
+  const methods = ["explain:", "explainGrounded:", "explainGroundedStream:", "refine:", "vivaJudge:", "research:", "researchSnippets:", "visionText:", "extract:", "maik:", "translate:", "transcribe:", "vision:", "summary:", "imagingSummary:", "correlate:", "evidence:"];
+  for (const m of methods) {
+    const i = REASON.indexOf("    " + m + " function");
+    assert.ok(i > 0, m + " exists");
+    assert.match(REASON.slice(i, i + 400), /aiBase\(\)/, m + " calls aiBase() before any fetch");
+  }
+  assert.match(ENGINE, /data-me-cloudblock/, "the engine panel exposes the switch and the counter");
+});
+
 test("verifyGrounding (server model check of the answer text) honours the policy", () => {
   const i = REASON.indexOf("verifyGrounding: function (text, pkg)");
   assert.match(REASON.slice(i, i + 800), /SMD_MAIK_ENGINE\.cloudAllowed/);

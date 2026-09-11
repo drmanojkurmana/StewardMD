@@ -3747,7 +3747,17 @@
   // "localhost" — that must NOT take the dev branch (returns "" → every AI method
   // short-circuits to {error:"ai-off"} and the calls would hit https://localhost anyway).
   // Native uses /api/ai (native-bridge rewrites → stewardmd.in via CapacitorHttp → Vertex).
-  function aiBase() { var h = location.hostname; return window.AI_PROXY || ((!window.SMD_IS_NATIVE && (h === "localhost" || h === "127.0.0.1")) ? "" : "/api/ai"); }
+  /* TEST SWITCH (owner, 2026-09-11): "turn off Gemini and see what still works". Server-side that
+   * would mean pulling production credentials for everyone, so it is done per phone instead: with
+   * localStorage smd_ai_cloud_block = "1", EVERY cloud AI request built from this base goes to a dead
+   * path and fails loudly as { error: "server" }, and the attempt is counted. Every SMD_AI cloud
+   * method calls aiBase() first, so nothing can reach Gemini past this line. Web-snippet retrieval
+   * shares the base and is blocked too; that is the one known cost of the switch. */
+  function cloudBlocked() { try { return localStorage.getItem("smd_ai_cloud_block") === "1"; } catch (e) { return false; } }
+  function aiBase() {
+    if (cloudBlocked()) { try { window.__SMD_CLOUD_ATTEMPTS = (window.__SMD_CLOUD_ATTEMPTS || 0) + 1; } catch (e) {} return "/api/ai-blocked-by-test-switch"; }
+    var h = location.hostname; return window.AI_PROXY || ((!window.SMD_IS_NATIVE && (h === "localhost" || h === "127.0.0.1")) ? "" : "/api/ai");
+  }
   // Attach the Firebase ID token so the server can derive the user's identity for
   // usage metering / quotas (server verifies it; browser userId is never trusted).
   // No signed-in user → plain headers (server applies a small guest quota by IP).

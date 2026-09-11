@@ -623,6 +623,22 @@
       '<div data-me-device style="font:500 11.5px/1.5 var(--sans,system-ui);color:var(--slate-soft,#5a7184);margin-top:8px">' + esc(devLine) + '</div>' +
       (up ? '<div style="font:700 13px/1.3 var(--sans,system-ui);margin-top:12px">Other models</div>' + up : "") +
       '<div style="font:500 11.5px/1.5 var(--sans,system-ui);color:var(--slate-soft,#5a7184);margin-top:8px">Nothing downloads without your tap. A "May run slowly" model works but with the limitation shown.</div>' +
+      cloudBlockHTML() +
+    '</div>';
+  }
+  /* The per-phone cloud kill switch (reasoning.js aiBase). Shown so the tester can flip it and read
+   * the count: with it ON, any feature that reports "Could not reach MaiK" while the Local engine is
+   * selected is a leak, and the counter says how many attempts were stopped. */
+  function cloudBlockHTML() {
+    var on = lget("smd_ai_cloud_block") === "1";
+    var n = 0; try { n = window.__SMD_CLOUD_ATTEMPTS || 0; } catch (e) {}
+    return '<div style="border-top:1px solid var(--line,#e2e8f0);margin-top:10px;padding-top:10px">' +
+      '<div style="font:700 13px/1.3 var(--sans,system-ui)">Test: block cloud AI on this phone</div>' +
+      '<div style="font:500 12px/1.5 var(--sans,system-ui);color:var(--slate,#2d4356);margin-top:3px">' +
+        (on ? 'ON. Every cloud AI request from this phone is stopped and counted. Attempts stopped this session: <b>' + n + '</b>. With the on-device engine selected this number should stay at 0.'
+            : 'OFF. Turn on to prove nothing reaches the cloud: any cloud attempt then fails visibly and is counted here.') +
+      '</div>' +
+      '<button type="button" class="smd-nav-btn" data-me-cloudblock="' + (on ? "0" : "1") + '" style="margin:8px 0 0;width:100%">' + (on ? "Turn off the block" : "Block cloud AI (test)") + '</button>' +
     '</div>';
   }
 
@@ -917,6 +933,14 @@
         // (see KEY_PENDING at the top of this file); adoptPackWhenReady() promotes it when done.
         lset(KEY_PENDING, id);
         startDownload(b, root, id);
+      });
+    });
+    root.querySelectorAll("[data-me-cloudblock]").forEach(function (b) {
+      b.addEventListener("click", function () {
+        var v = b.getAttribute("data-me-cloudblock");
+        if (v === "1") lset("smd_ai_cloud_block", "1"); else lrem("smd_ai_cloud_block");
+        try { window.__SMD_CLOUD_ATTEMPTS = 0; } catch (e) {}
+        rerender(b, root);
       });
     });
     // A fresh device snapshot for the panel (the bridge answers asynchronously); patch the line in place.
