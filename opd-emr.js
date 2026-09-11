@@ -775,7 +775,7 @@
       '</div>';
     }
 
-    if (!st.writeOn) return consultBar(st) + triageHtml + allergyHtml + '<div class="oe-accwrap">' + body + '</div><div class="oe-actions">' + writeNote() + "</div>";
+    if (!st.writeOn) return triageHtml + allergyHtml + '<div class="oe-accwrap">' + body + '</div><div class="oe-actions">' + writeNote() + "</div>";
     // Ask MaiK: its own glowing AI banner (Option C), separate from the save actions.
     var maikCta = (maikOn() && G.DX) ?
       '<button class="oe-maik-cta' + (st.maikBusy ? " busy" : "") + '" data-oe-act="assess-maik"' + (st.maikBusy ? " disabled" : "") + ' aria-label="Ask MaiK">' +
