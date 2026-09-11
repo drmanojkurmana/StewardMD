@@ -68,10 +68,17 @@
       '<div class="kv"><dt>Name</dt><dd>' + c.esc(o.name || "") + "</dd>" +
       '<dt>Code</dt><dd class="mono">' + c.esc(o.code || "") + "</dd>" +
       "<dt>Mode</dt><dd>" + c.esc(o.mode || "") + "</dd>" +
+      "<dt>Country</dt><dd>" + (o.region === "US" ? "United States" : "India") + "</dd>" +
       '<dt>Id</dt><dd class="mono">' + c.esc(o.id || "") + "</dd>" +
       '<dt>Connect tenant</dt><dd class="mono">' + c.esc(o.connectTenantId || "none") + "</dd></div>" +
-      '<h3>Rename</h3><div class="row"><label class="f"><span>Hospital name</span><input id="admHospName" value="' + c.esc(o.name || "") + '"></label>' +
-      '<button class="btn" id="admHospSave" type="button">Save</button></div><div id="admHospMsg"></div>' +
+      '<h3>Name and country</h3><div class="row"><label class="f"><span>Hospital name</span><input id="admHospName" value="' + c.esc(o.name || "") + '"></label>' +
+      '<label class="f" style="flex:0 1 180px"><span>Country</span><select id="admHospRegion">' +
+        '<option value="IN"' + (o.region === "US" ? "" : " selected") + ">India</option>" +
+        '<option value="US"' + (o.region === "US" ? " selected" : "") + ">United States</option></select></label>" +
+      '<button class="btn" id="admHospSave" type="button">Save</button></div>' +
+      /* Said plainly, because it changes how numbers already on the chart are READ, not what they
+       * say: nothing is converted, and nothing already recorded is rewritten. */
+      '<p class="quiet">The country decides what counts as a valid phone number and the unit a temperature is charted in from now on. Readings already recorded keep the unit they were recorded in.</p><div id="admHospMsg"></div>' +
       (c.isWardsynq() ? "" : '<div class="msg note">Inpatient features (ward, beds, theatre, Digital Twin) need a WardSynQ hospital. Create one from the hospital list.</div>') +
       "</div>";
     document.getElementById("admHospSave").onclick = function () {
@@ -79,7 +86,7 @@
       var name = (document.getElementById("admHospName").value || "").trim();
       if (!name) { document.getElementById("admHospMsg").innerHTML = '<div class="msg err">Give the hospital a name.</div>'; return; }
       btn.disabled = true;
-      c.api("/org/update", { orgId: c.state.orgId, name: name }).then(function (r) {
+      c.api("/org/update", { orgId: c.state.orgId, name: name, region: document.getElementById("admHospRegion").value }).then(function (r) {
         btn.disabled = false;
         if (!r || !r.ok) { document.getElementById("admHospMsg").innerHTML = '<div class="msg err">' + c.esc(refusal(r)) + "</div>"; return; }
         c.state.org = r.org; c.toast("Hospital updated."); WSQ.render("admin");

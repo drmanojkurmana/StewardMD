@@ -300,13 +300,16 @@
       }).join("") + "</div>" : '<div class="msg note">No hospital is linked to this sign-in yet.' + (st.who && st.who.kind === "firebase" ? " Create one below, or ask a hospital admin to add you as a member." : " Ask your hospital admin to add you as a member.") + "</div>";
       if (st.who && st.who.kind === "firebase") html +=
         '<div class="card" style="margin-top:18px"><h2>Create a WardSynQ hospital</h2><p class="quiet">Creates the hospital, its clinical record and makes you its owner. Wards, beds, departments and staff are set up next in the Admin Center.</p>' +
-        '<div class="row"><label class="f"><span>Hospital name</span><input id="newHosp" maxlength="120" placeholder="e.g. City General Hospital"></label><button class="btn" id="mkHosp" type="button">' + ms("add_business") + "Create</button></div><div id=\"mkMsg\"></div></div>";
+        '<div class="row"><label class="f"><span>Hospital name</span><input id="newHosp" maxlength="120" placeholder="e.g. City General Hospital"></label>' +
+        '<label class="f" style="flex:0 1 160px"><span>Country</span><select id="newHospRegion"><option value="IN">India</option><option value="US">United States</option></select></label>' +
+        '<button class="btn" id="mkHosp" type="button">' + ms("add_business") + "Create</button></div>" +
+        '<p class="quiet">The country decides what counts as a valid phone number and which unit a temperature is charted in. It can be changed later in the Admin Center.</p><div id="mkMsg"></div></div>';
       $("hospList").innerHTML = html;
       el.querySelectorAll("[data-org]").forEach(function (b) { b.onclick = function () { selectOrg(b.getAttribute("data-org")); }; });
       var mk = $("mkHosp"); if (mk) mk.onclick = function () {
         var name = ($("newHosp").value || "").trim(); if (!name) { $("mkMsg").innerHTML = '<div class="msg err">Give the hospital a name.</div>'; return; }
         mk.disabled = true; $("mkMsg").innerHTML = '<div class="msg note">Creating the hospital and its record.</div>';
-        api("/onboard/wardsynq", { name: name }).then(function (r) {
+        api("/onboard/wardsynq", { name: name, region: document.getElementById("newHospRegion").value }).then(function (r) {
           if (!r || !r.ok || !r.org) { mk.disabled = false; $("mkMsg").innerHTML = '<div class="msg err">' + esc(r && (r.error === "account_required" ? "A StewardMD account is needed to create a hospital." : r.error || "failed")) + "</div>"; return; }
           toast("Hospital created."); selectOrg(r.org.id);
         });

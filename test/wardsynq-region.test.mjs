@@ -79,3 +79,41 @@ test("the form asks for the right thing, and money is not converted", () => {
   assert.equal(currency("US").code, "USD");
   assert.equal(currency("IN").code, "INR");
 });
+
+/* THE END-TO-END PATH, which the pure tests above do not prove.
+ *
+ * The module can be right and the product still broken: what matters is that an org created as a US
+ * hospital reaches registration carrying its region, and that a US number is then accepted there.
+ * Before the region existed this was impossible - every +1 number was refused outright.
+ */
+import { org as makeOrg } from "../functions/_opd_org.js";
+import { validateRegistration } from "../functions/_opd_patient.js";
+
+const US_PATIENT = { name: "Jane Roe", gender: "female", ageYears: "44", visitType: "new" };
+
+test("a hospital created as a US one registers a US patient, which used to be impossible", () => {
+  const us = makeOrg({ id: "o-us", name: "Bayview General", mode: "wardsynq", region: "US" });
+  assert.equal(us.region, "US", "the org must carry the region it was created with");
+
+  const ok = validateRegistration({ ...US_PATIENT, mobile: "4155550142" }, Date.now(), us.region);
+  assert.equal(ok.ok, true, JSON.stringify(ok.errors));
+  assert.equal(ok.patient.mobile, "+14155550142");
+
+  // The refusal, when it comes, names the country the desk is actually in.
+  const bad = validateRegistration({ ...US_PATIENT, mobile: "12345" }, Date.now(), us.region);
+  assert.equal(bad.ok, false);
+  assert.match(bad.errors.mobile, /US phone number/);
+});
+
+test("an Indian hospital is unchanged, and still refuses a US number rather than storing it", () => {
+  const india = makeOrg({ id: "o-in", name: "City General", mode: "wardsynq" });
+  assert.equal(india.region, "IN", "a hospital created without a region is an Indian one");
+
+  const ok = validateRegistration({ ...US_PATIENT, mobile: "9876543210" }, Date.now(), india.region);
+  assert.equal(ok.ok, true, JSON.stringify(ok.errors));
+  assert.equal(ok.patient.mobile, "+919876543210");
+
+  const bad = validateRegistration({ ...US_PATIENT, mobile: "4155550142" }, Date.now(), india.region);
+  assert.equal(bad.ok, false, "a US number is not quietly stored as an Indian one");
+  assert.match(bad.errors.mobile, /Indian mobile/);
+});

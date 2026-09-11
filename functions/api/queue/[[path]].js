@@ -2741,7 +2741,8 @@ export async function onRequest(context) {
         if (!env.CONNECT_DB) return json({ ok: false, error: "record_store_unavailable" }, 503, request);
         const t = await selfCreateTenant({ db: env.CONNECT_DB, identifyFn: identify }, request, env, { name: body.name });
         try {
-          let o = await ORG.createOrg(env, { name: body.name, mode: "wardsynq" }, actor.id);
+          // The hospital's country, chosen at creation. Absent means India, as everywhere else.
+          let o = await ORG.createOrg(env, { name: body.name, mode: "wardsynq", region: body.region }, actor.id);
           o = await ORG.updateOrg(env, o.id, { connectTenantId: t.id }, actor.id);
           await wsqLinkTenantOrg(env, o);
           return json({ ok: true, org: o, tenantId: t.id }, 200, request);
