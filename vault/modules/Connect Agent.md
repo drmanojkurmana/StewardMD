@@ -1,6 +1,6 @@
 ---
 tags: [module, connect]
-status: full stack implemented and tested locally (broker, runner, manifest, activation, connector, doctor UI, acceptance matrix); browser continuity and discovery verified against a real Camofox server; never deployed, never run against a real hospital, never activated in production
+status: full stack implemented and tested locally; PHONE runner (Connect Hospital) live-proven on GHIS 2026-09-11/12 (doctor signs in, agent auto-builds a validated worklist+labs+meds adapter on the Pixel); explore-then-ask (exhaustive crawl, report blocks, guided asks, progress screen) built and tested 2026-09-12; never deployed to production, never activated
 flag: smd_connect_agent (client launcher, def:FALSE, ?connect_agent=1), CONNECT_AGENT_FLAG (provisional, def:FALSE), CONNECT_BROWSER_SESSION_FLAG (provisional, def:FALSE), CONNECT_AGENT_AUTO_ACTIVATE_FLAG (provisional, def:FALSE)
 ---
 # Connect Agent
@@ -56,6 +56,16 @@ version with a fresh session - no rediscovery.
   pause/resume, hospitals/resolve).
 - `functions/api/connect/agent/runner/[[path]].js`: runner-facing router (job lease/renew, HMAC +
   nonce + timestamp-window replay-resistant report callback).
+
+**Phone runner (Connect Hospital, the path that is live-proven)**
+- `local-plugins/capacitor-connect-browser/` (iOS) + `android/.../ConnectBrowserPlugin.java`: native in-app
+  browser the doctor signs into; modes `login` / `agent` (banner + Stop, touch overlay, origins enforced) /
+  `guide` (banner carries a question, Done button, NO overlay, origins enforced).
+- `connect-agent/phone/index.mjs`: one run = explore (JSON observer) -> deep crawl -> ask the doctor for
+  gaps -> discovery -> probes -> evidence. `connect-agent/phone/deep-crawl.mjs`: exhaustive read-only crawl
+  of one patient record capturing table + report-block STRUCTURE only. Contract: `connect-agent/phone/CONTRACT.md`.
+- Broker route `POST /sessions/:id/discovery` runs `manifest/infer-html.mjs` server-side over the observed
+  views and keeps them on the job's `phone_state` (replay pattern for the runtime).
 
 **Runner and connector**
 - `connect-agent/runner.mjs`: the actual long-lived process - leases a job, drives discovery through
@@ -121,3 +131,16 @@ session does not have.
   handoff could never be leased by a runner (`JOB_LEASABLE` is only `CREATED`/`AUTHENTICATED`). The
   runner's own progress/success report is what legally advances the job once it has actually leased and
   started work - a real cross-track bug the acceptance matrix caught on its first end-to-end run.
+- **Unstable ids.** GHIS accordion ids embed a date and visit number (`#hospital_accordion_<date>_<visit>`).
+  Any id/class with a run of 3+ digits is never a selector anchor and never leaves the phone (crawler
+  `UNSTABLE`, server refuses digit runs in endpoints/tap paths).
+- **Label/value grids are report blocks, not data tables.** A 2-column `<td>Label</td><td>Value</td>` table
+  must be skipped by the table capture: header recovery would otherwise send the first row's VALUE as a
+  column header (caught by the real-DOM test; fixed 2026-09-12).
+- **One `list_notes` per manifest.** The schema forbids duplicate operation types, so radiology, discharge
+  and history all compete for `documents`; the first equally-rich view wins and the rest are noted as
+  duplicates. Extending the schema to several document operations is the runtime session's call.
+- **Touch overlay only in `agent` mode.** Never while waiting for the doctor (it blocked the login form
+  once); the guided ask uses `guide` mode, which has no overlay.
+- **Inline report lines extract whole.** `<p><b>Study:</b> CT BRAIN</p>` yields "Study: CT BRAIN" (the
+  closed transforms cannot strip the label); acceptable for documents, note it when mapping.

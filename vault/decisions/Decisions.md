@@ -5,6 +5,16 @@ tags: [decisions, adr]
 
 Dated architectural calls + why. Newest first. Keep each short: **decision · why · trade-off · status**.
 
+## 2026-09-12 · Connect Hospital: explore everything, then ask the doctor
+
+**Decision:** The phone crawl is exhaustive (every control under one patient record, read-only SKIP list, keywords only order the walk) and captures label/value report blocks as well as tables; whatever is still missing is asked of the doctor in a new plugin `guide` mode (question banner, Done, no touch overlay) and the tap path is saved as the replay pattern. Details in `connect-hospital-next-2026-09-12.md`.
+
+**Why:** On GHIS radiology, discharge and history sit inside "Patient profile" as report blocks a keyword-gated, table-only crawler never reached; a doctor can show the agent in seconds what heuristics miss.
+
+**Trade-off:** One `list_notes` per manifest (schema uniqueness), so radiology/discharge/history compete; ids with digit runs are refused as anchors even when stable. Inline report lines keep their label text.
+
+**Status:** Built and tested (unit, real-DOM Chrome, broker, UI harness); awaiting the on-phone autonomous run after PR #1038 merges.
+
 ## 2026-09-10 · Browser provider for Connect Agent: jo-inc/camofox-browser over REST API
 
 **Decision:** Browser provider for Connect Agent = jo-inc/camofox-browser (Camoufox engine), driven over its REST API by connect-agent/camofox-client.mjs.

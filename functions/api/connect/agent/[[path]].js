@@ -143,6 +143,38 @@ function cleanObservedViews(raw) {
       if (v.method !== "GET" && v.method !== "HEAD") throw new OnboardError("invalid", "observedViews: method invalid");
       clean.method = v.method;
     }
+    // Report block (label/value view): one positional selector per header, relative to rowsSelector.
+    if (v.cellSelectors !== undefined) {
+      if (!Array.isArray(v.cellSelectors) || v.cellSelectors.length !== clean.headers.length || v.cellSelectors.some((s) => typeof s !== "string" || s.length > 200)) {
+        throw new OnboardError("invalid", "observedViews: cellSelectors invalid");
+      }
+      clean.cellSelectors = v.cellSelectors.slice();
+    }
+    if (v.block !== undefined) {
+      if (typeof v.block !== "boolean") throw new OnboardError("invalid", "observedViews: block invalid");
+      clean.block = v.block;
+    }
+    // Same-origin endpoints the click triggered (redacted on the phone: no query values, digit runs -> #).
+    if (v.endpoints !== undefined) {
+      if (!Array.isArray(v.endpoints) || v.endpoints.length > 8) throw new OnboardError("invalid", "observedViews: endpoints invalid");
+      clean.endpoints = v.endpoints.map((e) => {
+        if (!e || typeof e !== "object" || (e.method !== "GET" && e.method !== "POST") || typeof e.path !== "string" || e.path.length > 512 || /\d{3,}/.test(e.path)) {
+          throw new OnboardError("invalid", "observedViews: endpoint invalid");
+        }
+        return { method: e.method, path: e.path };
+      });
+    }
+    // Guided step: the doctor showed the agent where this lives; the tap path is the replay pattern.
+    if (v.guided !== undefined) {
+      if (typeof v.guided !== "boolean") throw new OnboardError("invalid", "observedViews: guided invalid");
+      clean.guided = v.guided;
+    }
+    if (v.guidedPath !== undefined) {
+      if (!Array.isArray(v.guidedPath) || v.guidedPath.length > 20 || v.guidedPath.some((s) => typeof s !== "string" || s.length > 120 || /\d{3,}/.test(s))) {
+        throw new OnboardError("invalid", "observedViews: guidedPath invalid");
+      }
+      clean.guidedPath = v.guidedPath.slice();
+    }
     return clean;
   });
 }
@@ -756,10 +788,13 @@ export async function onRequest(context) {
         probes.push({ opId: op.type, method: "GET", url: originRow.origin + op.pathTemplate });
       }
 
+      // observedViews are kept on the job (PHI-free structure: selectors, labels, redacted endpoints and
+      // the doctor's guided tap paths) as the replay pattern for the phone-side runtime.
       const phoneState = {
         manifest, probes,
         offlineValidation,
         observedEvents: (Array.isArray(spec.events) ? spec.events : []).slice(0, 200),
+        observedViews,
       };
       job = await casJob(deps.db, tid, job.id, job.revision, { phone_state: JSON.stringify(phoneState) });
 

@@ -8,7 +8,7 @@ import { existsSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { setTimeout as sleep } from 'node:timers/promises';
-import { buildTableView, deepCrawlClinical } from '../../connect-agent/phone/deep-crawl.mjs';
+import { buildTableView, buildBlockView, deepCrawlClinical, redactEndpoints, hintFromHeaders } from '../../connect-agent/phone/deep-crawl.mjs';
 import { inferHtmlOperations } from '../../connect-agent/manifest/infer-html.mjs';
 import { extractRecords, isValidSelector } from '../../connect-agent/manifest/html.mjs';
 
@@ -84,7 +84,7 @@ function makePages() {
       controls: [
         { index: 2, label: 'Medications' },
         { index: 3, label: 'Lab reports' },
-        { index: 4, label: 'Home' }, // not a clinical keyword match — excluded by CRAWL_FIND_CONTROLS itself
+        // 'Home' / 'Logout' never appear: CRAWL_FIND_CONTROLS drops SKIP-list labels in the page realm.
       ],
     },
     medications: {
@@ -118,8 +118,11 @@ function fakeClient(pages, { onClickControl } = {}) {
       if (expression.includes('function CRAWL_FIND_PATIENT_ROW')) return { result: JSON.stringify(page.patientRow) };
       if (expression.includes('function CRAWL_CLICK_ROW')) { current = 'patient'; return { result: 'ok' }; }
       if (expression.includes('function CRAWL_FIND_CONTROLS')) return { result: JSON.stringify(page.controls) };
+      // This fake models a navigation-style EMR (each sub-view is its own URL): the crawler must come back
+      // to the patient hub after capturing a view.
+      if (expression === 'history.back()') { current = 'patient'; return { result: null }; }
       if (expression.includes('function CRAWL_CLICK_CONTROL')) {
-        const m = /\)\((\d+)\)\s*$/.exec(expression);
+        const m = /\)\((\d+),/.exec(expression);
         const idx = m ? Number(m[1]) : -1;
         const label = (page.controls.find((c) => c.index === idx) || {}).label;
         if (onClickControl) onClickControl(label);
@@ -150,7 +153,7 @@ test('deepCrawlClinical: captures worklist, opens patient, then medications and 
   assert.deepEqual(meds.headers, ['Date', 'Drug', 'Dose']);
   assert.deepEqual(labs.headers, ['Date', 'Test', 'Result Flag']);
 
-  assert.deepEqual(trail, ['patient-record', 'Medications', 'Lab reports']);
+  assert.deepEqual(trail, ['patient-record', 'Medications', 'back', 'Lab reports', 'back']);
   assert.equal(stopReason, 'no-candidate');
 
   const dump = JSON.stringify(observedViews);
@@ -208,7 +211,7 @@ test('deepCrawlClinical: (A) locked device: no table has layout, but the walk st
   pages.worklist.pageState = { textLen: 4200, hasPasswordInput: false, dataTableCount: 1, anyVisible: false };
   const { observedViews, trail, stopReason } = await deepCrawlClinical({ client: fakeClient(pages), caps: { maxMs: 60000 } });
   assert.equal(stopReason, 'no-candidate');
-  assert.deepEqual(trail, ['patient-record', 'Medications', 'Lab reports']);
+  assert.deepEqual(trail, ['patient-record', 'Medications', 'back', 'Lab reports', 'back']);
   assert.equal(observedViews.length, 3);
   assert.ok(observedViews.every((v) => v.resourceHint === 'worklist' || v.rowsSelector));
 });
@@ -324,7 +327,7 @@ function accordionClient(log) {
       if (expression.includes('function CRAWL_CLICK_ROW')) { current = 'patient'; return { result: 'ok' }; }
       if (expression.includes('function CRAWL_FIND_CONTROLS')) return { result: JSON.stringify(current === 'worklist' ? [] : controls) };
       if (expression.includes('function CRAWL_CLICK_CONTROL')) {
-        const m = /\)\((\d+)\)\s*$/.exec(expression);
+        const m = /\)\((\d+),/.exec(expression);
         const label = (controls.find((c) => c.index === Number(m[1])) || {}).label;
         log.push('click:' + label);
         lastLoaded = label === 'Lab reports' ? 'labs' : label === 'Medications' ? 'meds' : 'discharge';
@@ -349,10 +352,12 @@ test('deepCrawlClinical: accordion: medications captures the MED panel table, no
   assert.deepEqual(meds.headers, MED_LABELS);
   assert.equal(meds.rowsSelector, '#panel-meds table.tbl-bordered:nth-of-type(2) tbody tr');
   assert.equal(meds.singleRecord, false);
-  assert.deepEqual(dis, { resourceHint: 'discharge', pathTemplate: '/doctor/patient', method: 'GET', singleRecord: true });
+  assert.equal(dis, undefined); // a narrative with neither a table nor label/value pairs yields no view
 
-  // Observer armed immediately before EVERY sub-view click, capture only after it; never for the worklist.
-  assert.deepEqual(log, ['capture', 'arm', 'click:Lab reports', 'capture', 'arm', 'click:Medications', 'capture', 'arm', 'click:Discharge summary', 'capture']);
+  // Observer armed immediately before the patient-row click and EVERY sub-view click, capture only after
+  // it; never for the worklist. (The patient hub capture is block-only, so no table capture follows the
+  // row click.)
+  assert.deepEqual(log, ['capture', 'arm', 'arm', 'click:Lab reports', 'capture', 'arm', 'click:Medications', 'capture', 'arm', 'click:Discharge summary', 'capture']);
 
   // Downstream: inference now builds the medications AND labs operations from this crawl.
   const { operations } = inferHtmlOperations(observedViews, { originId: 'o1' });
@@ -384,7 +389,10 @@ ${CALENDAR}
 <div id="patient" style="display:none">
 <ul class="nav"><li><a href="#" onclick="loadView('42');return false">Lab reports</a></li>
 <li><a href="#" onclick="loadView('4');return false">Medications</a></li>
-<li><a href="#" onclick="loadView('9');return false">Discharge summary</a></li></ul>
+<li><a href="#" onclick="loadView('9');return false">Discharge summary</a></li>
+<li><a href="#" onclick="loadView('pp');return false">Patient profile</a></li>
+<li><a href="#" onclick="window.__writes++;return false">Logout</a></li><li><button type="button" onclick="window.__writes++">Print</button></li></ul>
+<div id="hospital_accordion_2026-09-11_48213" class="panel-collapse"></div>
 <div id="panel-labs" class="panel-body"></div><div id="panel-meds" class="panel-body"></div><div id="panel-dis" class="panel-body"></div>
 </div>
 <script>
@@ -394,7 +402,9 @@ var VIEWS={
  '4':['panel-meds','<table class="tbl-head"><thead><tr><th>Prod. Code</th><th>Drug Name</th><th>Route</th><th>Dosage</th><th>Qty</th><th>Freq</th><th>Duration</th></tr></thead></table>'
   +'<table class="tbl-bordered"><tbody><tr><td>P1</td><td>SECRETVAL</td><td>Oral</td><td>500</td><td>10</td><td>BD</td><td>5</td></tr></tbody></table>'
   +'<table id="tblmedicines"><tbody><tr><td><select><option>x</option></select></td><td><input type="text"></td><td><button type="submit">Add</button></td></tr></tbody></table>'],
- '9':['panel-dis','<div class="narrative">Discharge summary narrative, no table.</div>']};
+ '9':['panel-dis','<div class="dsum"><table><tr><td>Diagnosis</td><td>SECRETDX</td></tr><tr><td>Admission date</td><td>01-02-2026</td></tr><tr><td>Summary</td><td>SECRETSUM</td></tr></table></div>'],
+ 'pp':['hospital_accordion_2026-09-11_48213','<div id="divPrint"><div class="rreport"><p><b>Study:</b> CT BRAIN</p><p><b>Reported on:</b> 02-02-2026</p><p><b>Impression:</b> SECRETIMP1</p></div><div class="rreport"><p><b>Study:</b> XRAY CHEST</p><p><b>Reported on:</b> 03-02-2026</p><p><b>Impression:</b> SECRETIMP2</p></div></div>']};
+window.__writes=0;
 function loadView(id){var v=VIEWS[id];setTimeout(function(){document.getElementById(v[0]).innerHTML=v[1];},30);}
 </script></body></html>`;
 
@@ -437,9 +447,12 @@ async function withChrome(fn, html = ACCORDION_HTML) {
 test('deepCrawlClinical: real DOM accordion (headless Chrome): panel attribution + header recovery', { skip: !HAVE_CHROME && 'Chrome not available' }, async () => {
   await withChrome(async (evaluate) => {
     const client = { evaluate, async wait({ ms }) { await sleep(Math.min(ms, 200)); }, async currentUrl() { return { url: 'https://emr.example/doctor/index' }; } };
-    const { observedViews, trail, stopReason } = await deepCrawlClinical({ client, caps: { maxMs: 60000, waitMs: 200 } });
-    assert.deepEqual(trail, ['patient-record', 'Lab reports', 'Medications', 'Discharge summary']);
+    const { observedViews, trail, stopReason, found } = await deepCrawlClinical({ client, caps: { maxMs: 60000, waitMs: 200 } });
+    assert.deepEqual(trail, ['patient-record', 'Lab reports', 'Medications', 'Discharge summary', 'Patient profile']);
     assert.equal(stopReason, 'no-candidate');
+    // Read-only SKIP list: Logout and Print were never clicked.
+    assert.equal((await evaluate({ expression: 'window.__writes' })).result, 0);
+    assert.deepEqual([...found].sort(), ['discharge', 'labs', 'medications', 'radiology', 'worklist']);
 
     // (C) the digit-bearing layout rows come first in DOM order; the onclick row of #data_tables1 was opened.
     assert.equal((await evaluate({ expression: 'window.__opened === true' })).result, true);
@@ -460,24 +473,103 @@ test('deepCrawlClinical: real DOM accordion (headless Chrome): panel attribution
     assert.ok(!meds.rowsSelector.includes('tblmedicines'));
     assert.equal(meds.singleRecord, false);
 
+    // Discharge summary: a label/value REPORT BLOCK, not a headed table. Labels come back as headers, each
+    // value as a positional selector relative to the block root; the lingering tables are not reused.
     const dis = observedViews.find((v) => v.resourceHint === 'discharge');
+    assert.equal(dis.block, true);
     assert.equal(dis.singleRecord, true);
-    assert.equal(dis.rowsSelector, undefined); // no table in the changed panel; lingering tables not reused
+    assert.deepEqual(dis.headers, ['Diagnosis', 'Admission date', 'Summary']);
+    assert.equal(dis.rowsSelector, '#panel-dis div:nth-of-type(1) table:nth-of-type(1)');
+    assert.deepEqual(dis.cellSelectors, ['tr:nth-of-type(1) td:nth-of-type(2)', 'tr:nth-of-type(2) td:nth-of-type(2)', 'tr:nth-of-type(3) td:nth-of-type(2)']);
+
+    // Patient profile: two same-shaped radiology reports under an accordion whose id embeds a date and a
+    // visit number. The UNSTABLE id is never an anchor; the repeated blocks come back as one repeated view.
+    const rad = observedViews.find((v) => v.resourceHint === 'radiology');
+    assert.equal(rad.block, true);
+    assert.equal(rad.singleRecord, false);
+    assert.equal(rad.rowsSelector, '#divPrint > div.rreport');
+    assert.deepEqual(rad.headers, ['Study', 'Reported on', 'Impression']);
+    assert.ok(!JSON.stringify(rad).includes('hospital_accordion'));
 
     const dump = JSON.stringify(observedViews);
-    for (const secret of [SENTINEL, 'SECRETVAL', '48213', 'Hb', 'Oral']) assert.ok(!dump.includes(secret), secret + ' leaked');
+    for (const secret of [SENTINEL, 'SECRETVAL', '48213', 'Hb', 'Oral', 'SECRETDX', 'SECRETSUM', 'SECRETIMP', 'CT BRAIN', '2026-09-11']) assert.ok(!dump.includes(secret), secret + ' leaked');
 
     // End to end: inference emits list_medications, and its htmlExtract pulls the med data row (only) from
     // the final page HTML, proving the selector is unambiguous among the three tables in the panel.
     const { operations, unsupported } = inferHtmlOperations(observedViews, { originId: 'o1' });
-    assert.deepEqual(operations.map((o) => o.type).sort(), ['list_medications', 'list_results', 'list_worklist'], JSON.stringify(unsupported));
+    assert.deepEqual(operations.map((o) => o.type).sort(), ['list_medications', 'list_notes', 'list_results', 'list_worklist'], JSON.stringify(unsupported));
     const medOp = operations.find((o) => o.type === 'list_medications');
     const html = (await evaluate({ expression: 'document.documentElement.outerHTML' })).result;
     const recs = extractRecords(html, medOp.htmlExtract);
     assert.equal(recs.length, 1);
     assert.equal(recs[0].drugName, 'SECRETVAL');
     assert.equal(recs[0].prodCode, 'P1');
+    // Report blocks extract by positional selectors. One list_notes per manifest (schema: unique operation
+    // types), so the discharge block (captured first, equally rich) holds the type and radiology is noted
+    // as a duplicate; each block extracts correctly on its own.
+    const noteOp = operations.find((o) => o.type === 'list_notes');
+    assert.equal(noteOp.htmlExtract.rows, dis.rowsSelector);
+    const disRecs = extractRecords(html, noteOp.htmlExtract);
+    assert.equal(disRecs.length, 1);
+    assert.equal(disRecs[0].report, 'SECRETSUM');
+    assert.equal(disRecs[0].date, '01-02-2026');
+    const radOnly = inferHtmlOperations([rad], { originId: 'o1' }).operations[0];
+    assert.equal(radOnly.htmlExtract.rows, '#divPrint > div.rreport');
+    const notes = extractRecords(html, radOnly.htmlExtract);
+    assert.equal(notes.length, 2);
+    // Inline "<b>Label:</b> value" pairs extract the whole line (the label text rides along).
+    assert.equal(notes[0].title, 'Study: CT BRAIN');
+    assert.equal(notes[0].date, 'Reported on: 02-02-2026');
+    assert.equal(notes[0].report, 'Impression: SECRETIMP1');
+    assert.equal(notes[1].title, 'Study: XRAY CHEST');
   });
+});
+
+// --- buildBlockView / redactEndpoints / unstable anchors (pure) ---------------------------------------------
+
+test('buildTableView: an id embedding a date or visit number is UNSTABLE and never anchors the selector', () => {
+  const raw = { id: 'hospital_accordion_2026-09-11_48213', class: 'tbl-bordered', headers: ['A', 'B'], rows: [{ isHeader: false, onclick: null }], container: { id: 'visit_2026', class: 'panel-body' }, tableNth: 0 };
+  const view = buildTableView(raw, 'medications', '/v');
+  assert.equal(view.rowsSelector, 'table.tbl-bordered tbody tr');
+  assert.ok(!JSON.stringify(view).includes('2026'));
+});
+
+test('buildBlockView: labels become headers, selectors kept, colon stripped; too few pairs or an unstable root -> null', () => {
+  const view = buildBlockView({ rootSelector: '#sb7', labels: ['Study:', 'Reported on', 'Impression:'], selectors: ['p:nth-of-type(1)', 'p:nth-of-type(2)', 'p:nth-of-type(3)'], repeated: false }, 'radiology', 'https://h/x?y=1');
+  assert.deepEqual(view.headers, ['Study', 'Reported on', 'Impression']);
+  assert.equal(view.rowsSelector, '#sb7');
+  assert.equal(view.singleRecord, true);
+  assert.equal(view.block, true);
+  assert.ok(view.cellSelectors.every(isValidSelector));
+  assert.equal(buildBlockView({ rootSelector: '#sb7', labels: ['Study'], selectors: ['p'], repeated: false }, 'radiology', '/'), null);
+  assert.equal(buildBlockView({ rootSelector: '#hospital_accordion_2026 div', labels: ['A', 'B'], selectors: ['p', 'p'], repeated: false }, 'radiology', '/'), null);
+});
+
+test('redactEndpoints: same-origin non-asset requests only, query values dropped, digit runs redacted, capped at 8', () => {
+  const reqs = [
+    { method: 'GET', url: 'https://emr.example/Doctor/GetLabs?patientId=MR900001&visit=12345' },
+    { method: 'POST', url: 'https://emr.example/Doctor/Meds/2012130687' },
+    { method: 'GET', url: 'https://emr.example/Doctor/Meds/2012130687' }, // same path, different method: kept
+    { method: 'GET', url: 'https://emr.example/Content/site.css?v=3' },
+    { method: 'GET', url: 'https://other.example/api' },
+    { method: 'GET', url: 'not a url' },
+  ];
+  const out = redactEndpoints(reqs, 'https://emr.example/Doctor/Home');
+  assert.deepEqual(out, [
+    { method: 'GET', path: '/Doctor/GetLabs?patientId&visit' },
+    { method: 'POST', path: '/Doctor/Meds/#' },
+    { method: 'GET', path: '/Doctor/Meds/#' },
+  ]);
+  assert.ok(!JSON.stringify(out).includes('MR900001'));
+  const many = Array.from({ length: 20 }, (_, i) => ({ method: 'GET', url: `https://emr.example/p${i}` }));
+  assert.equal(redactEndpoints(many, 'https://emr.example/').length, 8);
+});
+
+test('hintFromHeaders: a container label ("Patient profile") is re-hinted from what the block actually holds', () => {
+  assert.equal(hintFromHeaders(['Study', 'Reported on', 'Impression']), 'radiology');
+  assert.equal(hintFromHeaders(['Diagnosis', 'Admission date', 'Summary']), 'discharge');
+  assert.equal(hintFromHeaders(['UHID', 'Patient name', 'Gender', 'Age']), 'patient');
+  assert.equal(hintFromHeaders(['Foo', 'Bar']), 'unknown');
 });
 
 // (A) Locked / backgrounded WebView: nothing has layout, every table reports zero client rects (simulated with
@@ -491,7 +583,7 @@ test('deepCrawlClinical: real DOM, locked device (zero rects everywhere): data t
     const client = { evaluate, async wait({ ms }) { await sleep(Math.min(ms, 200)); }, async currentUrl() { return { url: 'https://emr.example/doctor/index' }; } };
     const { observedViews, trail, stopReason } = await deepCrawlClinical({ client, caps: { maxMs: 60000, waitMs: 200 } });
     assert.equal(stopReason, 'no-candidate');
-    assert.deepEqual(trail, ['patient-record', 'Lab reports', 'Medications', 'Discharge summary']);
+    assert.deepEqual(trail, ['patient-record', 'Lab reports', 'Medications', 'Discharge summary', 'Patient profile']);
     assert.equal((await evaluate({ expression: 'window.__opened === true' })).result, true);
 
     assert.equal(observedViews[0].rowsSelector, '#data_tables1 tbody tr'); // not a #patient_details_table layout table

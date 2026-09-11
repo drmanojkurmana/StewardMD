@@ -40,3 +40,18 @@ Executed in the page realm of the authenticated web view: `fetch(url, {credentia
 ## Caps
 
 Exploration: max 40 steps, max 4 minutes, max depth 8, wait 1200 ms after each click. Any `blocked` event or `stopped` event ends exploration immediately and the spec so far is submitted.
+
+Deep crawl (`deep-crawl.mjs`): max 40 views, max 60 clicks, max 4 minutes, wait 1500 ms after each click. Exhaustive under the patient record (every tab, button, accordion / section header, menu item, once, dedup by redacted label; clinical keywords only order the walk); a read-only SKIP list (logout, save, print, send, delete, order, ...) is enforced in the page realm. A click that navigates away is undone with `history.back()`.
+
+## observedViews (phone -> `POST /sessions/:id/discovery`, max 40)
+
+`{ resourceHint, pathTemplate, method:"GET", rowsSelector, headers:[label], singleRecord, onclickTemplate?, cellSelectors?, block?, endpoints?:[{method:"GET"|"POST", path}], guided?, guidedPath?:[string] }`
+
+- Table view: `headers` are the column labels, `rowsSelector` the row selector (id / stable-id container / class anchored). Ids or classes containing a run of 3+ digits (a date or visit number) are UNSTABLE: never an anchor, never sent.
+- Report block (`block:true`): a label/value section (radiology report, discharge summary, visit history). `headers` are the label names, `cellSelectors[i]` the positional selector of the value element relative to `rowsSelector` (tag:nth-of-type chain, descendant combinators, no `tbody`). `singleRecord:false` means repeated sibling blocks (several reports). Values never leave the page; an inline `<b>Label:</b> value` pair extracts the whole line.
+- `endpoints`: the same-origin, non-asset requests the click triggered (Android `drainRequests`), query VALUES dropped (keys kept), digit runs of 3+ replaced by `#`. Max 8. The server refuses any digit run.
+- `guided:true` + `guidedPath`: the doctor showed the agent where this lives (plugin `guide` mode); `guidedPath` is the redacted tap trail (`tag#id.class "label"`, max 20). The server keeps observedViews on the job's `phone_state` as the replay pattern for the runtime.
+
+## Explore-then-ask (engine -> UI)
+
+`runPhoneDiscovery({ ..., onProgress, askDoctor, stopSignal })`. `onProgress` phases: DISCOVERING, EXPLORED, CRAWLING (`opening`, `found`, `looking`), CRAWLED, ASKING (`gap`, `text`), COMPILING, VALIDATING, DONE. For each canonical view still missing after the crawl (worklist, patient, medications, labs, radiology, discharge, history; max 4 asks) the engine sets the plugin to `guide` mode with the question as the banner (Done button, NO touch overlay) and awaits `askDoctor({gap, text})` -> `{done}`; the UI resolves on the plugin's `loggedIn` (Done) or its own Skip. The touch overlay is armed only in `agent` mode, i.e. only while the agent itself clicks.

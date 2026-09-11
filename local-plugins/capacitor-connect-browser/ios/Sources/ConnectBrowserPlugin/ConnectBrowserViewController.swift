@@ -183,12 +183,17 @@ final class ConnectBrowserViewController: UIViewController {
             allowedOrigins = Set(origins)
         }
 
+        // login: doctor drives, Done button, no banner. agent: banner + Stop, touch overlay ON, origins
+        // enforced. guide: the agent asks the doctor to show it something: banner with the question, Done
+        // button, NO touch overlay (the doctor must be able to tap), origins enforced.
         let isAgent = mode == "agent"
-        subtitleLabel.text = isAgent ? "" : "Sign in yourself. StewardMD never sees your password."
+        let isGuide = mode == "guide"
+        subtitleLabel.text = (isAgent || isGuide) ? "" : "Sign in yourself. StewardMD never sees your password."
         doneButton.isHidden = isAgent
+        doneButton.setTitle(isGuide ? "Done" : "Done, I'm signed in", for: .normal)
         bannerLabel.text = banner ?? "StewardMD is reading \(hostTitle) on your behalf. Tap Stop to end."
-        bannerHeightConstraint.constant = isAgent ? 44 : 0
-        bannerView.isHidden = !isAgent
+        bannerHeightConstraint.constant = (isAgent || isGuide) ? 44 : 0
+        bannerView.isHidden = !(isAgent || isGuide)
         touchBlockerView.isUserInteractionEnabled = isAgent
         UIView.animate(withDuration: 0.2) { self.view.layoutIfNeeded() }
     }

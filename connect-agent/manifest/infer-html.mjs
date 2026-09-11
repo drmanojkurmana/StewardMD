@@ -54,8 +54,11 @@ const HEADER_RULES = [
   [/gender|^sex/, 'sex'],
   [/bed/, 'bed'],
   [/visittype|optype/, 'visitType'],
-  [/report|impression|finding/, 'report'],
-  [/title|subject/, 'title'],
+  // Report-block labels (radiology / discharge / history): a "Reported on" or "Admission date" label is
+  // a DATE, checked before the generic report rule would claim it as the report body.
+  [/reportedon|reportdate|dateof|admissiondate|dischargedate|studydate|performedon|visitdate/, 'date'],
+  [/study|modality|examination|procedure|title|subject/, 'title'],
+  [/report|impression|finding|summary|conclusion/, 'report'],
   [/date/, 'date'],
 ];
 
@@ -206,12 +209,22 @@ function buildForView(view, ctx) {
   if (m.missing.length) return { unsupported: uns(plan.type, `cannot produce required canonical field(s): ${m.missing.join(', ')}`, observedPath) };
 
   // htmlExtract: one {cell:i} per recognized column (the 'doctor' guard is not extracted), then the id
-  // override (onclickArg) where the id comes from an on-click handler rather than a cell.
+  // override (onclickArg) where the id comes from an on-click handler rather than a cell. A report block
+  // (crawler `cellSelectors`) addresses each value by a positional selector relative to the row instead.
+  const cellSelectors = Array.isArray(view.cellSelectors) ? view.cellSelectors : null;
   const hxFields = Object.create(null);
   for (const role of Object.keys(roles)) {
     if (role === 'doctor') continue;
-    addKey(hxFields, role, { cell: roles[role] });
+    const i = roles[role];
+    if (cellSelectors) {
+      const sel = cellSelectors[i];
+      if (typeof sel !== 'string' || !isValidSelector(sel)) continue;
+      addKey(hxFields, role, { selector: sel, attr: 'text' });
+    } else {
+      addKey(hxFields, role, { cell: i });
+    }
   }
+  if (Object.keys(hxFields).length === 0) return { unsupported: uns(plan.type, 'no extractable field selector', observedPath) };
   if (m.idField) addKey(hxFields, m.idField.name, m.idField.rule);
 
   // The crawler reports a view's location as a full URL; the schema wants an absolute PATH only (no

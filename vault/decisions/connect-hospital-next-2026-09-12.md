@@ -63,5 +63,26 @@ remaining work is a design change (explore everything + ask the doctor) plus dep
    Approve in app). Then build the phone-side runtime that executes an approved adapter against
    the doctor's session so StewardMD screens show hospital data.
 
+## Built later on 2026-09-12 (same branch): steps 1-4 of the design above
+- Step 1 exhaustive exploration: `deep-crawl.mjs` clicks every control under the record (clinical
+  keywords order, read-only SKIP list gates), captures tables and label/value report blocks
+  (`CRAWL_RAW_BLOCK`: labels + positional value selectors, values never leave the page), attaches the
+  redacted endpoints each click triggered, undoes navigation with `history.back()`.
+- Step 2 inference: `infer-html.mjs` builds `{selector, attr:"text"}` rules from `cellSelectors`;
+  "Reported on" / "Admission date" classify as dates before the report rule; study/modality/examination
+  are titles. Container labels ("Patient profile") are re-hinted from the block's own labels.
+- Step 3 ask the doctor: `index.mjs` compares found vs target (worklist, patient, medications, labs,
+  radiology, discharge, history), and for up to 4 gaps switches the plugin to the new `guide` mode
+  (banner question, Done, no overlay), records the tap path, captures the view, marks it `guided`.
+  The broker validates the new fields (refuses any digit run) and keeps observedViews on
+  `phone_state` as the replay pattern.
+- Step 4 progress screen: opening / found / still looking for / pages / requests, the guided
+  instruction with Skip, Stop wired into the crawl and the ask loop via `stopSignal`.
+- Defect fixed: unstable ids (3+ digit runs) are never anchors; a 2-column label/value grid is never a
+  data table (its first-row VALUE was reaching the header list in the real-DOM test).
+- Not done: step 5. Merge PR #1038, D1 columns, flags, then the on-phone autonomous run and the
+  phone-side runtime. Rebuilt APK installed on the Pixel from this branch (see session report).
+
 ## Test state
-connect-agent + broker suites green at last run (137 connect-agent, 90 router, 1132 connect).
+connect-agent + broker suites green at last run (271 tests: connect-agent dirs + broker router +
+acceptance matrix, 3 honestly skipped); onboarding UI CDP harness green including the guided step.

@@ -7,7 +7,7 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import { onRequest } from "../../../functions/api/connect/agent/[[path]].js";
 import { makeAgentDb } from "./agent-db.mjs";
-import { deploymentFingerprint, getJobRow, getSessionRow } from "../../../functions/_connect/agent/store.js";
+import { deploymentFingerprint, findJobForSession, getJobRow, getSessionRow } from "../../../functions/_connect/agent/store.js";
 import { sha256hex } from "../../../functions/_connect/agent/hmac.js";
 import { validateManifest, manifestContentHash } from "../../../connect-agent/manifest/schema.mjs";
 
@@ -183,6 +183,48 @@ test("discovery infers html operations from observedViews and merges them into t
 
   assert.deepEqual(validateManifest(disBody.manifest), []);
   assert.equal(disBody.manifest.contentHash, manifestContentHash(disBody.manifest));
+});
+
+test("discovery accepts a report-block view (cellSelectors) and keeps guided tap paths + endpoints on the job", async () => {
+  const { env, doc1 } = await setupTestEnv();
+  const sRes = await onRequest(post("/api/connect/agent/sessions", { tenantId: "t1", emrUrl: DEP_ORIGIN, runner: "phone", consent: { agreed: true } }, env, doc1.headers));
+  const sessionId = (await sRes.json()).sessionId;
+  await onRequest(post(`/api/connect/agent/sessions/${sessionId}/handoff`, { tenantId: "t1" }, env, doc1.headers));
+  await onRequest(post(`/api/connect/agent/sessions/${sessionId}/progress`, { tenantId: "t1", stage: "DISCOVERING" }, env, doc1.headers));
+
+  const block = {
+    resourceHint: "radiology", pathTemplate: "/Doctor/Home", rowsSelector: "#divPrint > div.rreport",
+    headers: ["Study", "Reported on", "Impression"], cellSelectors: ["p:nth-of-type(1)", "p:nth-of-type(2)", "p:nth-of-type(3)"],
+    singleRecord: false, block: true, guided: true, guidedPath: ['a "Patient profile"', 'h5#sb7 "Radiology"'],
+    endpoints: [{ method: "GET", path: "/Doctor/GetRadiology?pid" }],
+  };
+  const disRes = await onRequest(post(`/api/connect/agent/sessions/${sessionId}/discovery`, {
+    tenantId: "t1", spec: minimalSpec(), steps: [], observedViews: [block],
+  }, env, doc1.headers));
+  assert.equal(disRes.status, 200);
+  const disBody = await disRes.json();
+  assert.ok(disBody.htmlOperationsAdded.includes("list_notes"), JSON.stringify(disBody));
+  const op = disBody.manifest.operations.find((o) => o.type === "list_notes");
+  assert.deepEqual(op.htmlExtract.fields.title, { selector: "p:nth-of-type(1)", attr: "text" });
+  assert.deepEqual(validateManifest(disBody.manifest), []);
+
+  // The replay pattern (PHI-free structure) is kept on the job's phone_state for the runtime.
+  const job = await findJobForSession(env.CONNECT_DB, "t1", sessionId);
+  const phoneState = JSON.parse(job.phone_state);
+  assert.deepEqual(phoneState.observedViews[0].guidedPath, block.guidedPath);
+  assert.deepEqual(phoneState.observedViews[0].endpoints, block.endpoints);
+
+  // An endpoint or tap path that still carries an identifier-shaped digit run is refused (fail closed).
+  const leaky = Object.assign({}, block, { endpoints: [{ method: "GET", path: "/Doctor/GetRadiology/2012130687" }] });
+  const leakRes = await onRequest(post(`/api/connect/agent/sessions/${sessionId}/discovery`, { tenantId: "t1", spec: minimalSpec(), observedViews: [leaky] }, env, doc1.headers));
+  assert.equal(leakRes.status, 400);
+  const leakyPath = Object.assign({}, block, { guidedPath: ['tr "MR900001 JANE"'] });
+  const leakRes2 = await onRequest(post(`/api/connect/agent/sessions/${sessionId}/discovery`, { tenantId: "t1", spec: minimalSpec(), observedViews: [leakyPath] }, env, doc1.headers));
+  assert.equal(leakRes2.status, 400);
+  // cellSelectors must line up with headers.
+  const mismatch = Object.assign({}, block, { cellSelectors: ["p"] });
+  const mmRes = await onRequest(post(`/api/connect/agent/sessions/${sessionId}/discovery`, { tenantId: "t1", spec: minimalSpec(), observedViews: [mismatch] }, env, doc1.headers));
+  assert.equal(mmRes.status, 400);
 });
 
 test("discovery observedViews validation: hostile key, oversize, and unmappable headers", async () => {

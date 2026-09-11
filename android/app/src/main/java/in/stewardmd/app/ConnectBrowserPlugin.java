@@ -351,8 +351,8 @@ public class ConnectBrowserPlugin extends Plugin {
             return;
         }
         final String newMode = call.getString("mode");
-        if (!"login".equals(newMode) && !"agent".equals(newMode)) {
-            call.reject("mode must be login or agent");
+        if (!"login".equals(newMode) && !"agent".equals(newMode) && !"guide".equals(newMode)) {
+            call.reject("mode must be login, agent or guide");
             return;
         }
         final String banner = call.getString("banner");
@@ -541,13 +541,20 @@ public class ConnectBrowserPlugin extends Plugin {
         applyModeUi(null);
     }
 
+    // login: doctor drives, Done button, no banner. agent: banner + Stop, touch overlay ON, origins enforced.
+    // guide: the agent asks the doctor to show it something: banner with the question, Done button,
+    // NO touch overlay (the doctor must be able to tap), origins enforced.
     private void applyModeUi(String bannerText) {
         boolean agent = "agent".equals(mode);
+        boolean guide = "guide".equals(mode);
         if (subtitleLabel != null) {
-            subtitleLabel.setText(agent ? "" : "Sign in yourself. StewardMD never sees your password.");
+            subtitleLabel.setText(agent || guide ? "" : "Sign in yourself. StewardMD never sees your password.");
         }
-        if (doneButton != null) doneButton.setVisibility(agent ? View.GONE : View.VISIBLE);
-        if (bannerView != null) bannerView.setVisibility(agent ? View.VISIBLE : View.GONE);
+        if (doneButton != null) {
+            doneButton.setVisibility(agent ? View.GONE : View.VISIBLE);
+            doneButton.setText(guide ? "Done" : "Done, I'm signed in");
+        }
+        if (bannerView != null) bannerView.setVisibility(agent || guide ? View.VISIBLE : View.GONE);
         if (bannerLabel != null) {
             bannerLabel.setText(bannerText != null
                 ? bannerText
@@ -607,7 +614,7 @@ public class ConnectBrowserPlugin extends Plugin {
     // Returns true to BLOCK the navigation (shouldOverrideUrlLoading semantics: true = we handled it, don't load).
     private boolean blockIfDisallowed(Uri uri, boolean mainFrame) {
         boolean https = "https".equalsIgnoreCase(uri.getScheme());
-        if (mainFrame && "agent".equals(mode)) {
+        if (mainFrame && ("agent".equals(mode) || "guide".equals(mode))) {
             if (!https || !allowedOrigins.contains(originOf(uri))) {
                 JSObject data = new JSObject();
                 data.put("url", uri.toString());

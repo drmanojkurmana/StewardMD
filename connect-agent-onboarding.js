@@ -484,11 +484,16 @@
       if (o && S && S.visitedOrigins.indexOf(o) < 0) S.visitedOrigins.push(o);
     });
     on("loggedIn", function () {
-      if (!S || S.loginHandled) return;
+      if (!S) return;
+      /* Guided step: the agent asked the doctor to show it a screen; Done resolves that ask. */
+      if (S.guideResolve) { var r = S.guideResolve; S.guideResolve = null; S.guide = null; r({ done: true }); paintProgress(); return; }
+      if (S.loginHandled) return;
       S.loginHandled = true;
       doHandoff();
     });
     on("stopped", function () {
+      if (S) S.stopRequested = true;
+      if (S && S.guideResolve) { var r2 = S.guideResolve; S.guideResolve = null; S.guide = null; r2({ done: false }); }
       if (S && S.screen === "progress") stopDiscovery();
     });
   }
@@ -898,8 +903,11 @@
   }
 
   function startPhoneDiscovery() {
-    S.progressCounts = { pages: 0, requests: 0, phase: "DISCOVERING" };
+    S.progressCounts = { pages: 0, requests: 0, phase: "DISCOVERING", opening: "", found: [], looking: [] };
     S.progressFailed = false;
+    S.stopRequested = false;
+    S.guide = null;
+    S.guideResolve = null;
     show("progress");
     loadPhoneEngine().then(function (engine) {
       if (!engine || !engine.runPhoneDiscovery) throw new Error("engine-unavailable");
@@ -915,14 +923,30 @@
         session: S.session,
         deployment: S.deployment,
         startUrl: S.selected.emrUrl,
+        stopSignal: function () { return !!(S && S.stopRequested); },
+        /* The agent could not find something: hand the screen to the doctor (plugin guide mode) and
+         * resolve when they tap Done in the browser header, or Skip here. */
+        askDoctor: function (q) {
+          return new Promise(function (resolve) {
+            if (!S || S.screen !== "progress" || S.stopRequested) { resolve({ done: false }); return; }
+            S.guide = { gap: q.gap, text: q.text };
+            S.guideResolve = resolve;
+            paintProgress();
+          });
+        },
         onProgress: function (p) {
           if (!S || S.screen !== "progress") return;
-          // The engine reports {phase, steps, events}: steps are pages the agent opened, events are
-          // requests it observed.
+          // The engine reports {phase, steps, events, opening, found, looking}: steps are pages the
+          // agent opened, events are requests it observed, opening is the control it is clicking now,
+          // found / looking are the canonical views captured so far / still missing.
+          var c = S.progressCounts;
           S.progressCounts = {
-            pages: (p && p.steps != null) ? p.steps : (p && p.pages != null) ? p.pages : S.progressCounts.pages,
-            requests: (p && p.events != null) ? p.events : (p && p.requests != null) ? p.requests : S.progressCounts.requests,
-            phase: (p && p.phase) || S.progressCounts.phase
+            pages: (p && p.steps != null) ? p.steps : (p && p.pages != null) ? p.pages : c.pages,
+            requests: (p && p.events != null) ? p.events : (p && p.requests != null) ? p.requests : c.requests,
+            phase: (p && p.phase) || c.phase,
+            opening: (p && p.phase === "CRAWLING") ? (p.opening || "") : "",
+            found: (p && p.found) || c.found || [],
+            looking: (p && p.looking) || c.looking || []
           };
           paintProgress();
         }
@@ -967,36 +991,67 @@
   function phaseLabel(p) {
     if (p === "COMPILING") return "Building the connection draft.";
     if (p === "VALIDATING") return "Checking the draft for safety and completeness.";
+    if (p === "CRAWLING") return "Opening every view of one patient record, read-only.";
+    if (p === "ASKING") return "The agent needs your help to find a view.";
     return "Discovering read-only workflows. The agent makes no changes to the EMR.";
+  }
+
+  var VIEW_NAMES = { worklist: "Worklist", patient: "Patient details", medications: "Medications", labs: "Lab results", radiology: "Radiology reports", discharge: "Discharge summary", history: "Visit history" };
+  function viewNames(list) {
+    var out = [];
+    for (var i = 0; i < (list || []).length; i++) out.push(esc(VIEW_NAMES[list[i]] || list[i]));
+    return out.length ? out.join(", ") : "none yet";
+  }
+  function progressDetail() {
+    var c = S.progressCounts || {};
+    if (S.guide) {
+      return '<div class="smd-connect-card"><p class="smd-connect-lead">' + esc(S.guide.text) + '</p>' +
+        '<div class="smd-connect-note">Tap inside the hospital website, then tap Done at the top. Skip if your hospital has no such view.</div>' +
+        '<div class="smd-connect-row"><button id="smd-connect-guideskip" class="smd-connect-btn" type="button">Skip</button></div></div>';
+    }
+    return '<div class="smd-connect-card">' +
+      (c.opening ? '<div class="smd-connect-row smd-connect-counts"><span>Opening</span><strong>' + esc(c.opening) + '</strong></div>' : "") +
+      '<div class="smd-connect-row smd-connect-counts"><span>Found</span><strong>' + viewNames(c.found) + '</strong></div>' +
+      '<div class="smd-connect-row smd-connect-counts"><span>Still looking for</span><strong>' + viewNames(c.looking) + '</strong></div>' +
+      '<div class="smd-connect-row smd-connect-counts"><span>Pages visited</span><strong id="smd-connect-pages">' + c.pages + '</strong></div>' +
+      '<div class="smd-connect-row smd-connect-counts"><span>Requests observed</span><strong id="smd-connect-reqs">' + c.requests + '</strong></div>' +
+      '</div>';
   }
 
   function renderProgress() {
     var b = body();
     if (!b) return;
     if (S.runner !== "phone") { renderProgressFallback(b); return; }
-    var c = S.progressCounts || { pages: 0, requests: 0, phase: "DISCOVERING" };
+    var c = S.progressCounts || { pages: 0, requests: 0, phase: "DISCOVERING", found: [], looking: [] };
     b.innerHTML =
       '<h2 class="smd-connect-display">Reading ' + esc(hostOf(S.selected.emrUrl)) + '</h2>' +
-      '<p class="smd-connect-lead">' + phaseLabel(c.phase) + '</p>' +
-      '<div class="smd-connect-card">' +
-      '<div class="smd-connect-row smd-connect-counts"><span>Pages visited</span><strong id="smd-connect-pages">' + c.pages + '</strong></div>' +
-      '<div class="smd-connect-row smd-connect-counts"><span>Requests observed</span><strong id="smd-connect-reqs">' + c.requests + '</strong></div>' +
-      '</div>' +
+      '<p id="smd-connect-phase" class="smd-connect-lead">' + phaseLabel(S.guide ? "ASKING" : c.phase) + '</p>' +
+      '<div id="smd-connect-detail">' + progressDetail() + '</div>' +
       '<div class="smd-connect-note">Keep StewardMD open. This takes a few minutes.</div>' +
       '<div class="smd-connect-row"><button id="smd-connect-stop" class="smd-connect-btn danger" type="button">Stop</button>' +
       '<button id="smd-connect-progretry" class="smd-connect-btn primary" type="button" style="display:' + (S.progressFailed ? "" : "none") + '">Try again</button></div>';
     setStatus(S.progressFailed ? "bad" : "", S.statusText || "");
-    b.querySelector("#smd-connect-stop").onclick = stopDiscovery;
+    b.querySelector("#smd-connect-stop").onclick = function () { S.stopRequested = true; stopDiscovery(); };
     b.querySelector("#smd-connect-progretry").onclick = function () { beginAgentMode(); };
+    wireGuideSkip(b);
+  }
+
+  function wireGuideSkip(b) {
+    var skip = b.querySelector("#smd-connect-guideskip");
+    if (skip) skip.onclick = function () {
+      if (!S || !S.guideResolve) return;
+      var r = S.guideResolve; S.guideResolve = null; S.guide = null;
+      r({ done: false });
+      paintProgress();
+    };
   }
 
   function paintProgress() {
     var b = body();
     if (!b || !S || S.screen !== "progress" || S.runner !== "phone") return;
     var c = S.progressCounts;
-    var p1 = b.querySelector("#smd-connect-pages"); if (p1) p1.textContent = c.pages;
-    var p2 = b.querySelector("#smd-connect-reqs"); if (p2) p2.textContent = c.requests;
-    var lead = b.querySelector(".smd-connect-lead"); if (lead) lead.textContent = phaseLabel(c.phase);
+    var lead = b.querySelector("#smd-connect-phase"); if (lead) lead.textContent = phaseLabel(S.guide ? "ASKING" : c.phase);
+    var detail = b.querySelector("#smd-connect-detail"); if (detail) { detail.innerHTML = progressDetail(); wireGuideSkip(b); }
     var retry = b.querySelector("#smd-connect-progretry"); if (retry) retry.style.display = S.progressFailed ? "" : "none";
   }
 

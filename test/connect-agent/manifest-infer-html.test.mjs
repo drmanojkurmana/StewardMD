@@ -210,3 +210,24 @@ test('duplicate operation type is de-duped, richer kept', () => {
   assert.ok(notes.some((n) => /duplicate list_worklist/.test(n)));
   assert.doesNotThrow(() => assertValidManifest(wrap(operations)));
 });
+
+test('report block view (cellSelectors) -> list_notes with {selector,attr:text} rules; "Reported on" is the date, not the report', () => {
+  const view = {
+    resourceHint: 'radiology', pathTemplate: 'https://ghis.gitam.edu/Doctor/Home', method: 'GET',
+    rowsSelector: '#divPrint > div.rreport', headers: ['Study', 'Reported on', 'Impression'],
+    cellSelectors: ['p:nth-of-type(1)', 'p:nth-of-type(2)', 'p:nth-of-type(3)'], singleRecord: false, block: true,
+  };
+  const { operations, unsupported } = inferHtmlOperations([view], { originId: ORIGIN_ID });
+  assert.equal(unsupported.length, 0, JSON.stringify(unsupported));
+  const op = operations[0];
+  assert.equal(op.type, 'list_notes');
+  assert.deepEqual(op.htmlExtract.fields.title, { selector: 'p:nth-of-type(1)', attr: 'text' });
+  assert.deepEqual(op.htmlExtract.fields.date, { selector: 'p:nth-of-type(2)', attr: 'text' });
+  assert.deepEqual(op.htmlExtract.fields.report, { selector: 'p:nth-of-type(3)', attr: 'text' });
+  assert.deepEqual(op.mapping.fields.date, { op: 'pick', path: 'date' });
+  assert.doesNotThrow(() => assertValidManifest(wrap(operations)));
+  // A malformed selector never reaches the op: that field is dropped; a view with none is unsupported.
+  const bad = Object.assign({}, view, { cellSelectors: ['p:nth-of-type(1)', 'p:hover', '<script>'] });
+  const r2 = inferHtmlOperations([bad], { originId: ORIGIN_ID });
+  assert.deepEqual(Object.keys(r2.operations[0].htmlExtract.fields), ['title']);
+});

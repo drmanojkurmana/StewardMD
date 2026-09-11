@@ -151,8 +151,8 @@ public class ConnectBrowserPlugin: CAPPlugin, CAPBridgedPlugin {
             call.reject("not-open")
             return
         }
-        guard let mode = call.getString("mode"), mode == "login" || mode == "agent" else {
-            call.reject("mode must be login or agent")
+        guard let mode = call.getString("mode"), mode == "login" || mode == "agent" || mode == "guide" else {
+            call.reject("mode must be login, agent or guide")
             return
         }
         let banner = call.getString("banner")
@@ -256,7 +256,7 @@ extension ConnectBrowserPlugin: WKNavigationDelegate {
         let isMainFrame = navigationAction.targetFrame?.isMainFrame ?? true
         let isHttps = url.scheme?.lowercased() == "https"
 
-        if isMainFrame && vc.mode == "agent" {
+        if isMainFrame && (vc.mode == "agent" || vc.mode == "guide") {
             if !isHttps || !vc.allowedOrigins.contains(Self.origin(of: url)) {
                 decisionHandler(.cancel)
                 notifyListeners("blocked", data: ["url": url.absoluteString, "reason": "origin"])

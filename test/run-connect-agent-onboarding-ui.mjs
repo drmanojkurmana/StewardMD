@@ -356,6 +356,34 @@ try {
   ok(await waitFor(`return document.getElementById("smd-connect-pages").textContent==="3" && document.getElementById("smd-connect-reqs").textContent==="12";`, 4000), "onProgress updates the live page/request counters");
   ok(await ev(noDash) === true, "progress copy has no em-dash");
 
+  // 6b. Crawl progress: what the agent is opening, what it found, what it is still looking for.
+  await ev(`window.__lastOnProgress({phase:"CRAWLING", steps:3, events:12, opening:"Lab reports", found:["worklist"], looking:["labs","radiology"]}); return 1;`);
+  ok(await waitFor(`var t=document.getElementById("smd-connect-detail").textContent; return t.indexOf("Opening")>=0 && t.indexOf("Lab reports")>=0 && t.indexOf("Worklist")>=0 && t.indexOf("Radiology reports")>=0;`, 3000), "crawl progress shows the control being opened, the views found and the views still missing");
+  ok(await ev(`return document.getElementById("smd-connect-phase").textContent.indexOf("read-only")>=0;`) === true, "crawl phase copy says read-only");
+
+  // 6c. Guided step: the engine asks the doctor for a missing view. The sheet shows the instruction
+  // and a Skip button; Skip resolves {done:false}; the plugin's Done (loggedIn) resolves {done:true}.
+  await ev(`
+    var call = window.__engineCalls[window.__engineCalls.length - 1];
+    window.__ask1 = null; window.__ask2 = null;
+    call.askDoctor({gap:"radiology", text:"I could not find your radiology reports. Tap where they live, then tap Done."}).then(function (r) { window.__ask1 = r; });
+    return typeof call.askDoctor === "function" && typeof call.stopSignal === "function";
+  `).then((v) => ok(v === true, "runPhoneDiscovery receives askDoctor and stopSignal"));
+  ok(await waitFor(`var t=document.getElementById("smd-connect-detail").textContent; return t.indexOf("radiology reports")>=0 && !!document.getElementById("smd-connect-guideskip");`, 3000), "guided step renders the question and a Skip button");
+  ok(await ev(`return document.getElementById("smd-connect-phase").textContent.indexOf("needs your help")>=0;`) === true, "guided step phase copy asks for help");
+  await ev(`document.getElementById("smd-connect-guideskip").click(); return 1;`);
+  ok(await waitFor(`return window.__ask1 && window.__ask1.done === false && !document.getElementById("smd-connect-guideskip");`, 3000), "Skip resolves the ask with done:false and removes the instruction");
+  await ev(`
+    var call = window.__engineCalls[window.__engineCalls.length - 1];
+    call.askDoctor({gap:"discharge", text:"I could not find the discharge summary. Tap where it lives, then tap Done."}).then(function (r) { window.__ask2 = r; });
+    return 1;
+  `);
+  ok(await waitFor(`return !!document.getElementById("smd-connect-guideskip");`, 3000), "second ask renders");
+  await ev(`window.Capacitor.Plugins.ConnectBrowser.__fire("loggedIn", {url:"https://emr.newcity.example/home"}); return 1;`);
+  ok(await waitFor(`return window.__ask2 && window.__ask2.done === true;`, 3000), "the plugin's Done (loggedIn) during a guided step resolves the ask with done:true, not a second handoff");
+  ok(await ev(`return window.__calls.filter(function(x){return x.path==="/sessions/sess-1/handoff";}).length === 1;`) === true, "no extra handoff was posted by the guided Done");
+  ok(await ev(noDash) === true, "guided-step copy has no em-dash");
+
   // Resolve discovery: result screen with proven/unproven capabilities. The first run above left
   // runPhoneDiscovery's promise deliberately unresolved (__engineOutcome's default), so this next
   // scenario opens a fresh session with __engineOutcome pre-armed to resolve immediately - matching
