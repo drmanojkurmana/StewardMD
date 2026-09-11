@@ -117,6 +117,15 @@
   var THINK_OPEN = /<\s*(think|thinking|thought|reason|reasoning|scratchpad)\s*>[\s\S]*$/i;   // unterminated
   var GEMMA_CTRL = /<\s*(start_of_turn|end_of_turn|unused\d+|eos|bos|pad)\s*>/gi;
   var LEAD_THOUGHT = /^\s*(thought|thinking|reasoning|analysis|plan)\b\s*[:\-]?\s*/i;
+  // A brainstorm-then-pick leak ("Plan: ... Possible responses: 'A' 'B' ... Let's go with 'C'") ends
+  // with this marker before the one line that was actually meant for the doctor.
+  var LEAD_PICK = /\b(?:let'?s go with|i'?ll (?:go with|answer|respond|say)|final answer(?: is)?|so my answer is|the answer is)\s*[:\-]?\s*"?([^"\n.]{3,200})"?/i;
+  // A verbatim echo of MaiK's OWN system prompt (owner report, 2026-09-11: "H" answered with the raw
+  // prompt text, "Give the final answer only, never your reasoning...", pasted back before an unrelated
+  // drug monograph). These two sentences are unique to that prompt and would never appear in a genuine
+  // clinical answer, so their presence means the whole output is compromised - there is no reliable
+  // point to cut from, so it is treated the same as no answer at all.
+  var SYSTEM_LEAK = /give the final answer only,?\s*never your reasoning|open with one plain sentence answering the question/i;
 
   // Bracket citation markers like [1] or [2,3]. MaiK Lite was trained to cite numbered evidence
   // passages; on-device there is no evidence list for the numbers to point at, and the owner's rule
@@ -131,6 +140,8 @@
 
   function stripReasoning(t) {
     var out = String(t == null ? "" : t);
+    // A verbatim echo of our own system prompt has no answer worth recovering from it - see SYSTEM_LEAK.
+    if (SYSTEM_LEAK.test(out)) return "";
     out = out.replace(THINK_TAG, "").replace(GEMMA_CTRL, "").replace(CITE_MARK, "");
     // An unterminated <think> means the budget ran out mid-reasoning: there is no answer after it,
     // so keep whatever came BEFORE rather than shipping raw reasoning.
@@ -139,9 +150,29 @@
     // first paragraph break, so a genuine answer that merely starts with the word is not eaten.
     if (LEAD_THOUGHT.test(out)) {
       var brk = out.search(/\n\s*\n/);
-      out = brk > -1 ? out.slice(brk) : out.replace(LEAD_THOUGHT, "");
+      if (brk > -1) {
+        out = out.slice(brk);
+      } else {
+        // No blank line to cut at. If the model named what it settled on ("Let's go with ...") this is
+        // a brainstorm-then-pick leak (owner report, 2026-09-11: "Plan:" followed by single-newline
+        // bullets, no paragraph break before the real answer) - recover that one line, not the whole
+        // plan. Otherwise this may just be a genuine answer that happens to start with a trigger word
+        // ("Plan the airway first: ..."), so fall back to only stripping the label, as before.
+        var pick = out.match(LEAD_PICK);
+        out = pick ? pick[1].trim() : out.replace(LEAD_THOUGHT, "");
+      }
     }
-    return out.replace(/^\s+/, "").replace(/\s+$/, "");
+    out = out.replace(/^\s+/, "").replace(/\s+$/, "");
+    // A small model repeating its whole answer verbatim (owner report, 2026-09-11: the heart-failure
+    // dosing answer appeared twice back to back). If the second half re-opens with the first ~40 chars
+    // of the first half, it is a repeat - drop it rather than show the doctor the same paragraph twice.
+    var half = out.length >> 1;
+    if (half > 60) {
+      var head = out.slice(0, 40);
+      var repeatAt = out.indexOf(head, half - 40);
+      if (repeatAt > 0) out = out.slice(0, repeatAt).replace(/\s+$/, "");
+    }
+    return out;
   }
 
   /* IMAGE ANSWERS.
@@ -469,7 +500,7 @@
    * Zero anchored passages means "not grounded", never "grounded in the wrong chapter". Same model,
    * same speed: this is a filter after search, and it SHRINKS the prompt (700-char passages, a weak
    * third passage dropped), which is where on-device latency actually goes. */
-  var GENERIC_Q = /^(management|treatment|treat|therapy|regimen|regimens|dose|dosing|dosage|doses|route|duration|first|line|drug|drugs|agent|agents|class|choice|adult|patient|patients|clinical|answer|complete|detailed|provide|considerations|principles|verify|locally|empiric|severity|host|adjustment|culture|directed|escalation|steps|monitoring|ongoing|next|approach|options|guideline|guidelines|what|when|which|how|should|give|use|used|with|without|versus|compare|comparison|prefer|each|non|woman|women|man|men|male|female|young|old|older|year|years|uncomplicated|complicated|simple|case|cases|standard|usual|typical|common)$/;
+  var GENERIC_Q = /^(management|treatment|treat|therapy|regimen|regimens|dose|dosing|dosage|doses|route|duration|first|line|drug|drugs|agent|agents|class|choice|adult|patient|patients|clinical|medical|topic|topics|learn|learning|teach|today|question|questions|answer|complete|detailed|provide|considerations|principles|verify|locally|empiric|severity|host|adjustment|culture|directed|escalation|steps|monitoring|ongoing|next|approach|options|guideline|guidelines|what|when|which|how|should|give|use|used|with|without|versus|compare|comparison|prefer|each|non|woman|women|man|men|male|female|young|old|older|year|years|uncomplicated|complicated|simple|case|cases|standard|usual|typical|common)$/;
   var MODIFIER_Q = /^(pregnancy|pregnant|lactation|lactating|breastfeeding|renal|hepatic|liver|kidney|paediatric|pediatric|child|children|neonate|neonatal|elderly|geriatric|dialysis|ckd|impairment|failure|obese|obesity)$/;
   var INTRO_HEAD = /definition|glossary|introduction|epidemiolog|etiolog|pathogenesis|classification|history|overview/i;
   var TREAT_Q = /\b(treat|treatment|therapy|manage|management|dose|dosing|regimen|first.?line|drug|antibiotic|prescri)/i;
@@ -520,13 +551,21 @@
       var A = anchorsFor(bk, RAG, question);
       if (!A || !A.topic) A = { topic: A || [], drugs: [], mods: [] };
       var need = A.topic.length ? A.topic : A.drugs;
+      // Owner report (2026-09-11): "Teach me Pneumonia atoz" and "Can I learn a new medical topic
+      // today" both had NO real topic or drug anchor (every content word was generic filler, or "atoz"
+      // and "topic" simply are not in the book's vocabulary at all) - a topic-less question has no
+      // way to tell a relevant passage from an irrelevant one, so falling through to the raw top BM25
+      // hits grounded a fabricated "Pneumonia atoz" monograph on an unrelated chapter and "teach me a
+      // topic" on a machine-learning chapter. Zero anchors now means "not covered", never "grounded in
+      // whatever scored highest" - a passage's relevance can never be established without one.
+      if (!need.length) return null;
       var anchors = A.topic.concat(A.drugs);
       var cited = hits.map(function (h) { var p = bk.cite(h[1]); return { score: h[0], p: p, hay: ((p.heading || "") + " " + (p.text || "")).toLowerCase() }; });
       // Count anchors per passage. With two or more topic anchors, a passage matching two beats one
       // matching one ("community" alone let a typhoid epidemiology passage stand in for CAP); when
       // nothing matches two, one is enough.
       cited.forEach(function (c) { c.n = need.filter(function (a) { return c.hay.indexOf(a) !== -1; }).length; });
-      var kept = need.length ? cited.filter(function (c) { return c.n > 0; }) : cited;
+      var kept = cited.filter(function (c) { return c.n > 0; });
       if (!kept.length) return null;
       if (need.length > 1 && kept.some(function (c) { return c.n > 1; })) kept = kept.filter(function (c) { return c.n > 1; });
       // "…in pregnancy": among the on-topic passages, the ones that mention the modifier win when any
