@@ -55,7 +55,15 @@
       }).join("") + "</div>";
   }
 
+  /* region-aware copy. functions/_region.js is the one place country rules LIVE (validation stays
+   * server-side there), but this plain <script> tag is not a module and cannot import it - so this
+   * is label/placeholder/maxlength text only, never a rule the server could disagree with. Region
+   * joined 2026-09-11: was hardcoded to India (a 6-digit PIN, a "98765 43210" mobile), so a US
+   * hospital could not even TYPE the field it needed. Unset means IN - no existing caller changes. */
+  function isUS(o) { return String(o && o.region).toUpperCase() === "US"; }
+
   function sheetHtml(o) {
+    var us = isUS(o);
     var mrLine = o.mode === "native"
       ? "A StewardMD MR number is assigned automatically."
       : "The hospital EMR issues the MR number. Leave it blank if it has not been issued yet.";
@@ -79,7 +87,7 @@
           "</div>" +
 
           '<h3 class="pr-sec">Contact</h3>' +
-          field("mobile", "Mobile number", { req: true, mode: "tel", max: 15, ph: "98765 43210", auto: "tel", hint: "Queue updates are sent here" }) +
+          field("mobile", us ? "Mobile number (US)" : "Mobile number", { req: true, mode: "tel", max: 15, ph: us ? "(415) 555-0142" : "98765 43210", auto: "tel", hint: "Queue updates are sent here" }) +
 
           '<h3 class="pr-sec">Visit</h3>' +
           '<div class="pr-f" data-f="visitType"><label>Visit type</label>' + seg("visitType", VISITS, "new") + "</div>" +
@@ -98,7 +106,8 @@
             field("address", "Address", { max: 200, ph: "House, street, area" }) +
             '<div class="pr-row">' +
               field("district", "District", { max: 60 }) +
-              field("pincode", "PIN code", { mode: "numeric", max: 6, ph: "530045" }) +
+              // "tel" (not "numeric") for a US ZIP so the keypad offers "-" for the optional +4.
+              field("pincode", us ? "ZIP code" : "PIN code", { mode: us ? "tel" : "numeric", max: us ? 10 : 6, ph: us ? "90210 or 90210-1234" : "530045" }) +
             "</div>" +
             field("state", "State", { max: 60 }) +
             '<h3 class="pr-sec">Referral</h3>' +
@@ -177,9 +186,13 @@
       var ok = true;
       if (val("name").length < 2) { setErr("name", "Enter the patient's full name."); ok = false; }
       if (!state.gender) { setErr("gender", "Select the patient's gender."); ok = false; }
-      var d = val("mobile").replace(/\D/g, "");
-      if (!d) { setErr("mobile", "Mobile number is required."); ok = false; }
-      else if (d.replace(/^(91|0)/, "").length !== 10) { setErr("mobile", "Enter a 10-digit mobile number."); ok = false; }
+      /* Digit-count check DROPPED (not region-swapped): it hardcoded India's "strip a leading 91/0,
+       * want 10 digits" shape, so a correct "+14155550132" (US, 11 digits, no 91/0 to strip) failed
+       * here even though the server now accepts it. functions/_region.js is the one place country
+       * phone rules live, and this plain script can't import it - duplicating the US rule here in a
+       * second, ES5 copy is exactly the drift this file's own header warns about. Required-ness is
+       * still worth catching locally; the shape is the server's answer, per the comment up top. */
+      if (!val("mobile")) { setErr("mobile", "Mobile number is required."); ok = false; }
       if (!val("ageYears") && !val("ageMonths")) { setErr("ageYears", "Enter the patient's age."); ok = false; }
       return ok;
     }

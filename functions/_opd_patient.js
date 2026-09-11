@@ -20,7 +20,7 @@
  */
 
 // ---- small helpers ---------------------------------------------------------------------------
-import { normalizePhone, regionOf } from "./_region.js";
+import { normalizePhone, regionOf, isValidPostcode } from "./_region.js";
 
 const s = (x) => String(x == null ? "" : x).trim();
 const digits = (x) => s(x).replace(/\D/g, "");
@@ -150,10 +150,20 @@ export function mrSourceFor(workplaceMode) {
 }
 // Decide what MR this registration gets. Returns { mrn, mrSource, needsAllocation, pending }.
 // `allocatedMrn`/`provisionalMrn` are supplied by the store when this says it needs one.
-export function resolveMrn(workplaceMode, suppliedMrn) {
+// `externalMrn` is org.wardsynq.externalMrn (functions/_opd_org.js): a native/stewardmd hospital that
+// opts in numbers its OWN patients, so a supplied MRN IS the identity - never demoted to hospitalRef
+// and minted over. Default false so minting stays the behaviour for every clinic that never set it.
+export function resolveMrn(workplaceMode, suppliedMrn, externalMrn) {
   const source = mrSourceFor(workplaceMode);
   const supplied = s(suppliedMrn);
   if (source === "stewardmd") {
+    if (externalMrn) {
+      // A blank/whitespace MRN has nothing to accept, so it still falls back to minting rather than
+      // ever writing an empty MRN.
+      return supplied
+        ? { mrSource: "stewardmd", needsAllocation: false, mrn: supplied, pending: false, hospitalRef: "" }
+        : { mrSource: "stewardmd", needsAllocation: true, mrn: "", pending: false, hospitalRef: "" };
+    }
     // A clinic patient never carries a hospital number: if one was typed, keep it as a reference only.
     return { mrSource: "stewardmd", needsAllocation: !supplied || !isClinicMrn(supplied), mrn: isClinicMrn(supplied) ? supplied : "", pending: false, hospitalRef: isClinicMrn(supplied) ? "" : supplied };
   }
@@ -211,8 +221,14 @@ export function validateRegistration(input, nowMs, region) {
     abhaAddress = normalizeAbhaAddress(o.abhaAddress);
     if (!abhaAddress) errors.abhaAddress = "An ABHA address looks like name@abdm.";
   }
+  /* pincode was 6-digits-or-refuse everywhere, which made a US ZIP (5) or ZIP+4 (9, "90210-1234")
+   * unregisterable. The length now comes from the region, same as the phone rule above. */
   const pincode = digits(o.pincode);
-  if (s(o.pincode) && pincode.length !== 6) errors.pincode = "A PIN code is 6 digits.";
+  if (s(o.pincode) && !isValidPostcode(o.pincode, region)) {
+    errors.pincode = regionOf({ region }) === "US"
+      ? "Enter a valid ZIP code (5 digits, or 9 with the +4)."
+      : "A PIN code is 6 digits.";
+  }
 
   const visitType = VISIT_TYPES.indexOf(s(o.visitType).toLowerCase()) > -1 ? s(o.visitType).toLowerCase() : "new";
 

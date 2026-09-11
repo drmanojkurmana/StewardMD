@@ -53,7 +53,7 @@ const VITAL_CODES = Object.freeze({
   temp:   Object.freeze({ code: "8310-5",  display: "Body temperature",         unit: null }),   // from tempUnit
   spo2:   Object.freeze({ code: "59408-5", display: "Oxygen saturation (pulse oximetry)", unit: "%" }),
   rr:     Object.freeze({ code: "9279-1",  display: "Respiratory rate",         unit: "/min" }),
-  weight: Object.freeze({ code: "29463-7", display: "Body weight",              unit: "kg" }),
+  weight: Object.freeze({ code: "29463-7", display: "Body weight",              unit: null }),   // from weightUnit
   /* Supplemental oxygen: a FLAG, 1 or 0. "On oxygen" is a yes/no for NEWS2 and the litres are a
    * separate fact this form does not claim to hold. Without it an early warning score can never
    * complete, however many observations a ward charts. */
@@ -105,6 +105,19 @@ function vitalsToObservations(input) {
   const hospital = String((input && input.defaultTempUnit) || "").toUpperCase();
   const tempUnit = (said || hospital || "F") === "C" ? "Cel" : "[degF]";
 
+  /* WEIGHT'S UNIT IS STATED TOO, and for a sharper reason than temperature's.
+   *
+   * This was hard-coded "kg". A US ward charts in pounds, so a nurse reading a box labelled kg and
+   * typing 154 stored 154 KILOGRAMS - and nothing caught it: the adult plausibility band in
+   * wardsynq-paediatrics.js is 25 to 300 kg, which 154 passes cleanly. Every weight-based infusion
+   * rate computed from it would then be 2.2 times the intended dose.
+   *
+   * Same order of authority as temperature: what the caller said, else this hospital's country,
+   * else kilograms, which is what every weight written before this existed actually was. */
+  const saidW = String(v.weightUnit || "").toLowerCase();
+  const hospitalW = String((input && input.defaultWeightUnit) || "").toLowerCase();
+  const weightUnit = (saidW || hospitalW || "kg") === "lb" ? "[lb_av]" : "kg";
+
   /* The two NEWS2 parameters that are not plain numbers, normalised before the numeric loop.
    *
    * NOT RECORDED AND "NO" ARE DIFFERENT. "Not on supplemental oxygen" is a real NEWS2 input worth 0;
@@ -128,7 +141,7 @@ function vitalsToObservations(input) {
       encounterId: input.encounterId || null,
       category: "vital-signs",
       code: spec.code, codeSystem: "http://loinc.org",
-      value, unit: key === "temp" ? tempUnit : spec.unit,
+      value, unit: key === "temp" ? tempUnit : key === "weight" ? weightUnit : spec.unit,
       effectiveAt: at,
       source: { system: "wardsynq-native", sourceId: `opd-ticket:${input.ticketId}` },
     });
@@ -187,7 +200,7 @@ async function recordVitals(request, env, ctx) {
     encounterId: encounterIdForTicket(ctx.ticket),
     recordedAt: ctx.recordedAt, note: ctx.note,
     // What a clinician in THIS hospital's country writes a temperature in. See functions/_region.js.
-    defaultTempUnit: ctx.tempUnit || null,
+    defaultTempUnit: ctx.tempUnit || null, defaultWeightUnit: ctx.weightUnit || null,
   });
   if (!observations.length) return { ...base, ok: false, status: 422, error: "no_structured_vitals", written: 0, patientId };
 
