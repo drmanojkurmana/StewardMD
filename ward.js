@@ -2882,6 +2882,10 @@
     if (overrideEl) st.emergencyOverride = !!overrideEl.checked;
     if (!(G.SMD_PATIENTREG && G.SMD_PATIENTREG.open)) { st.err = "Registration is unavailable on this build."; paint(); return; }
     G.SMD_PATIENTREG.open({
+      /* The hospital's country, so the sheet asks for the right phone and postcode shapes. st.region
+       * comes from GET /ward/list; without it a US hospital admitting from the bed board would be
+       * handed an Indian mobile field and could not complete the registration. */
+      region: st.region,
       submit: function (payload) { return apiPost("/patient/register", Object.assign({ orgId: st.orgId }, payload)); },
       onAdded: function (r) { if (r && r.mrn) doAdmit(r.mrn); },
     });

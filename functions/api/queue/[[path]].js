@@ -180,7 +180,7 @@ async function syncEncounter(request, env, s, ticket) {
     const mig = (await wsqForcedMigration(env, await ORG.getOrg(env, s.orgId || s.hospitalId))) || await encounterMigration(env, s, { getOrg: ORG.getOrg, tenantRow: wsqTenantRow });
     if (!mig || mig.mode === "off") return null;
     if (mig.error) return null;   // wardsynq org with no tenant linked yet — best-effort, silent, like every other syncEncounter failure
-    return await recordEncounterSync(request, env, { migration: mig, ticket, session: s, actorDeps: wsqActorDeps(env), recordDeps: wsqRecordDeps(env, mig.tenantId) });
+    return await recordEncounterSync(request, env, { migration: mig, ticket, session: s, actorDeps: wsqActorDeps(env, { orgForTenant: () => org }), recordDeps: wsqRecordDeps(env, mig.tenantId) });
   } catch (e) {
     return null;
   }
@@ -2322,8 +2322,35 @@ export async function onRequest(context) {
         const org = await ORG.getOrg(env, pOrg);
         if (!org) return json({ ok: false, error: "org_not_found" }, 404, request);
         const r = await PAT.registerPatient(env, org, body, actor.id || "");
-        // invalid / duplicate are EXPECTED outcomes the form renders, not server errors.
-        if (!r.ok) return json(r, 200, request);
+        /* A PATIENT WHO IS ALREADY REGISTERED STILL NEEDS A CLINICAL RECORD MASTER.
+         *
+         * This used to return here on "duplicate" / "mrn_taken", which is right for the form (the
+         * receptionist is told the patient exists) but left a real hole: if the record write ever
+         * failed once - a timeout, a refusal, a tenant not yet migrated - the patient existed in the
+         * register with a name and a number, and had no Patient master at all. The ward list joins
+         * names off that master, so the bed showed a record id instead of a human being, forever:
+         * re-registering was the obvious repair and it was refused before it could repair anything.
+         *
+         * So a duplicate now RECONCILES. The registration itself is still refused and still reported
+         * exactly as before; what changes is that the already-stored patient is read back and its
+         * record master is written if it is missing. The write is the same idempotent one the first
+         * registration does (unchanged records are skipped), so repeating it costs nothing and
+         * cannot invent a second identity - the id is derived from the MR number. */
+        if (!r.ok) {
+          const dupMrn = (r.duplicateOf && r.duplicateOf.mrn) || (r.error === "mrn_taken" ? (body.mrn || "") : "");
+          if (!dupMrn) return json(r, 200, request);
+          const existing = await PAT.getPatient(env, pOrg, dupMrn).catch(() => null);
+          if (!existing) return json(r, 200, request);
+          const dupMig = (await wsqForcedMigration(env, org)) || await registrationMigration(env, { orgId: pOrg }, { getOrg: ORG.getOrg, tenantRow: wsqTenantRow });
+          if (!dupMig || dupMig.error || dupMig.mode === "off") return json(r, 200, request);
+          const rec = await registerPatientRecord(request, env, {
+            migration: dupMig,
+            registration: { mrn: existing.mrn, mrSource: existing.mrSource, pending: existing.pending, patient: existing },
+            actorDeps: wsqActorDeps(env, { orgForTenant: () => org }), recordDeps: wsqRecordDeps(env, dupMig.tenantId),
+          }).catch((e) => ({ ok: false, error: "record_write_failed", detail: String((e && e.message) || e) }));
+          // The registration outcome is unchanged. The reconcile is reported alongside it.
+          return json(Object.assign({}, r, { reconciled: rec }), 200, request);
+        }
         // WardSynQ record: the patient-identity migration (functions/_wardsynq/migrate-registration.js).
         // The MR number above is ALREADY allocated by this point in every mode — that allocation is
         // the one thing this migration is told to never touch. Off (every tenant today): none of this

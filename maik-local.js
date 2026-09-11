@@ -1388,9 +1388,24 @@
    * The cloud re-reads the whole transcript on every refine. That cannot fit here after a few
    * minutes of dictation, so the engine keeps what it has already captured and asks the model
    * only about the text it has not seen (plus a short overlap), merging deterministically. */
-  var EMR_FIELD_KEYS = ["cc", "presentHx", "pastHx", "comorbidsNote", "dm", "htn", "cardiac", "asthma", "tb", "thyroid", "epilepsy",
-    "habits", "alcohol", "smoking", "recDrug", "tobacco"];
-  var YES_NO_KEYS = { dm: 1, htn: 1, cardiac: 1, asthma: 1, tb: 1, thyroid: 1, epilepsy: 1, habits: 1, alcohol: 1, smoking: 1, recDrug: 1, tobacco: 1 };
+  var EMR_FIELD_KEYS = [
+    "cc", "presentHx", "pastHx", "treatmentReceived", "comorbidsNote",
+    "dm", "dmDetails", "htn", "htnDetails", "cardiac", "cardiacDetails",
+    "asthma", "asthmaDetails", "tb", "tbDetails", "thyroid", "thyroidDetails",
+    "epilepsy", "epilepsyDetails", "habits", "alcohol", "smoking", "recDrug", "tobacco",
+    "habitsDetails", "familyHistory", "familyDiabetes", "familyHtn", "familyHeart",
+    "familyCancer", "familyTb", "familyAsthma", "familyDetails",
+    "allergies", "lmp", "immunization", "nutrition", "hydration", "systemicExam",
+    "tenderness", "tendernessDetails", "abdoMass", "abdoMassDetails",
+    "provisionalDx", "managementPlan"
+  ];
+  var YES_NO_KEYS = {
+    dm: 1, htn: 1, cardiac: 1, asthma: 1, tb: 1, thyroid: 1, epilepsy: 1,
+    habits: 1, alcohol: 1, smoking: 1, recDrug: 1, tobacco: 1,
+    familyHistory: 1, familyDiabetes: 1, familyHtn: 1, familyHeart: 1,
+    familyCancer: 1, familyTb: 1, familyAsthma: 1,
+    tenderness: 1, abdoMass: 1
+  };
   var SCRIBE_SYS =
     "You are an OPD scribe turning a doctor-patient consultation transcript into a structured note. " +
     "Return ONLY JSON: {\"en\":\"\", \"emrFields\":{...}, \"suggestions\":{\"provisionalDx\":\"\",\"ddx\":[],\"investigations\":[]}}.\n" +
@@ -1399,8 +1414,9 @@
     "Keep drug names, doses, units, numbers and abbreviations (BP, IV, BD, OD) exactly as stated.\n" +
     "ASR NOISE: the transcript is on-device speech recognition of possibly code-switched speech. De-duplicate repeats, drop filler, " +
     "normalise ONLY an unambiguous mis-recognition. If a garbled word could be more than one drug or finding, keep it verbatim or omit it. NEVER guess a dose.\n" +
-    "emrFields keys allowed: cc, presentHx, pastHx, comorbidsNote (+ dm/htn/cardiac/asthma/tb/thyroid/epilepsy as 'Yes'/'No' only if clearly stated). " +
-    "Habits: alcohol, smoking, recDrug, tobacco as 'Yes' only when explicitly affirmed, and habits='Yes' if any is; add top-level \"alcoholDetail\" with the exact amount and type stated.\n" +
+    "emrFields keys allowed: cc, presentHx, pastHx, treatmentReceived, comorbidsNote, dm, dmDetails, htn, htnDetails, cardiac, cardiacDetails, asthma, asthmaDetails, tb, tbDetails, thyroid, thyroidDetails, epilepsy, epilepsyDetails, familyHistory, familyDiabetes, familyHtn, familyHeart, familyCancer, familyTb, familyAsthma, familyDetails, allergies, lmp, immunization, nutrition, hydration, systemicExam, tenderness, tendernessDetails, abdoMass, abdoMassDetails, provisionalDx, managementPlan. " +
+    "(dm/htn/cardiac/asthma/tb/thyroid/epilepsy/familyHistory/familyDiabetes/familyHtn/familyHeart/familyCancer/familyTb/familyAsthma/tenderness/abdoMass as 'Yes'/'No' if stated).\n" +
+    "Habits: alcohol, smoking, recDrug, tobacco as 'Yes'/'No', habitsDetails for details; set habits='Yes' if any is; add top-level \"alcoholDetail\" with the exact amount and type stated.\n" +
     "If ALREADY CAPTURED fields are given, output ONLY additions or corrections from the NEW text; do not repeat captured content.\n" +
     "RULES: use ONLY what is explicitly said; NEVER invent a diagnosis, symptom, finding, drug, dose or investigation. provisionalDx ONLY if the clinician stated it. " +
     "ddx = a short reasonable differential FOR THE DOCTOR TO CONSIDER. investigations = tests a clinician would reasonably consider. No prose outside JSON.";
@@ -1411,9 +1427,13 @@
     if (typeof parsed.alcoholDetail === "string" && parsed.alcoholDetail.trim()) out.alcoholDetail = tidy(parsed.alcoholDetail, 200);
     var ef = parsed.emrFields || {};
     EMR_FIELD_KEYS.forEach(function (k) {
-      var v = ef[k]; if (typeof v !== "string" && typeof v !== "number") return;
+      var v = ef[k]; if (typeof v !== "string" && typeof v !== "number" && typeof v !== "boolean") return;
       var s = stripIndic(tidy(v, 2000)); if (!s) return;
-      if (YES_NO_KEYS[k]) { if (/^yes$/i.test(s)) out.emrFields[k] = "Yes"; else if (/^no$/i.test(s)) out.emrFields[k] = "No"; return; }
+      if (YES_NO_KEYS[k]) {
+        if (/^(?:yes|y|true)$/i.test(s)) out.emrFields[k] = "Yes";
+        else if (/^(?:no|n|false)$/i.test(s)) out.emrFields[k] = "No";
+        return;
+      }
       out.emrFields[k] = s;
     });
     var sg = parsed.suggestions || {};

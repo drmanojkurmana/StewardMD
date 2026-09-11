@@ -23,12 +23,17 @@ const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 /* Globals the app assigns anywhere at the top level: `window.X =` / `G.X =` / `globalThis.X =`. */
 function definedGlobals() {
   const found = new Set();
-  for (const f of readdirSync(ROOT)) {
-    if (!f.endsWith(".js")) continue;
-    let src;
-    try { src = readFileSync(join(ROOT, f), "utf8"); } catch { continue; }
-    for (const m of src.matchAll(/\b(?:window|globalThis|G)\s*\.\s*([A-Z][A-Za-z0-9_]*)\s*=(?!=)/g)) {
-      found.add(m[1]);
+  const searchDirs = [ROOT, join(ROOT, "kb", "ai")];
+  for (const dir of searchDirs) {
+    let files;
+    try { files = readdirSync(dir); } catch { continue; }
+    for (const f of files) {
+      if (!f.endsWith(".js")) continue;
+      let src;
+      try { src = readFileSync(join(dir, f), "utf8"); } catch { continue; }
+      for (const m of src.matchAll(/\b(?:window|globalThis|G)\s*\.\s*([A-Z][A-Za-z0-9_]*)\s*=(?!=)/g)) {
+        found.add(m[1]);
+      }
     }
   }
   return found;

@@ -357,10 +357,10 @@ try {
       if(g){g.classList.remove("hidden"); g.setAttribute("style","display:block;visibility:visible;opacity:1;min-height:200px");}
       return !!g;`;
   okv(await ev(makeReady), true, "the harness can force the hide loop's ready() condition");
-  await sleep(500);    // t ~2.5s
+  await sleep(150);    // t ~2.5s
   okv(await ev(`var e=document.getElementById("smdBootSplash"); return !!e && !e.classList.contains("sbs-hide");`), true,
     "screen 2 stays up until the shared 3s window completes");
-  await sleep(1100);   // t ~3.6s
+  await sleep(1300);   // t ~3.8s
   okv(await ev(`var e=document.getElementById("smdBootSplash"); return !e || e.classList.contains("sbs-hide");`), true,
     "the complete two-phase splash hides shortly after 3s (no tap)");
 

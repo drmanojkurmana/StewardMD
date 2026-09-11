@@ -553,14 +553,23 @@
       if (P && P.SplashScreen) P.SplashScreen.hide();
     } catch (e) { /* no-op */ }
   }
-  // Hide the native splash on window 'load' — the only reliable signal that the WebView's
-  // content is actually COMPOSITED to screen. (rAF/DOMContentLoaded fire while the WebView
-  // still paints behind the native splash, so hiding then reveals an un-composited black
-  // frame.) The native surface is now plain white, so the only visible logo is the animated
-  // #smdBootSplash (logo + progress + MaiK), followed by home with no duplicate mark. The KB is
-  // lazy-loaded after first paint, so 'load' now fires quickly. Timeout is a hard backstop.
-  window.addEventListener("load", hideNativeSplash);
-  setTimeout(hideNativeSplash, 4000);
+  // Hand off from the native splash as soon as #smdBootSplash has painted (double rAF from index.html)
+  // or on DOMContentLoaded/load. This avoids sitting behind the native splash for 4s while hundreds of
+  // deferred scripts and images finish downloading.
+  if (window.__smdBootPainted) {
+    hideNativeSplash();
+  } else {
+    window.addEventListener("smd-boot-painted", hideNativeSplash, { once: true });
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", function () {
+        requestAnimationFrame(function () { requestAnimationFrame(hideNativeSplash); });
+      }, { once: true });
+    } else {
+      requestAnimationFrame(function () { requestAnimationFrame(hideNativeSplash); });
+    }
+    window.addEventListener("load", hideNativeSplash, { once: true });
+    setTimeout(hideNativeSplash, 1200);
+  }
 
   function absolutize(u) {
     // Only rewrite root-relative API paths; leave everything else (assets, absolute URLs) as-is.

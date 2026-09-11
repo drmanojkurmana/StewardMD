@@ -5143,6 +5143,36 @@ answer length alone is wrong by that factor.
 **NOT claimed:** clinical validation, production readiness, or real-device verification. An automated
 rubric passing 8/8 is not a clinical study, and this note is not evidence that it is.
 
+## 2026-09-11 - the demonstration hospital stays a script, and what seeding it exposed
+
+A one-click "Create a demonstration hospital" button was built on the wardsynq.com hospital list and
+then REMOVED the same day: it was never asked for, and it duplicated
+`scripts/wardsynq-demo-hospital.mjs` in a second language with a second set of guards to keep
+correct. The seeder remains the one way to build a demo hospital. Recorded here so the idea is not
+rebuilt by someone reading only the shape of the problem.
+
+Two real defects the seeding exposed, both of which outlive the button:
+
+**An allocated MR number is not always the one the caller asked for.** `patient/register` allocates
+it, so a later specimen collection that scans the REQUESTED number is refused as a
+`wrong_patient_scan` - the safety control working exactly as intended, against a caller that had
+assumed its own number was authoritative. Any client driving registration must carry the ALLOCATED
+MRN forward. The seeder does not yet, and reports the refusals as a finding.
+
+**The clinical record write re-finds the hospital it was already given.** Opening the record resolves
+the governed actor from scratch, and that resolution locates the organisation again by a Firestore
+field query - the slowest lookup in the chain, and one the calling route had already performed. The
+lookups stack until a single write runs past its request budget and Cloudflare answers 502 with the
+first half of the work already committed. On the demo hospital this left 83 encounters standing over
+zero patient identities: registration wrote the OPD register, died before writing the clinical
+identity, and could never repair itself because re-registering was refused as a duplicate. The fix
+hands the record write the org the route already holds, and makes a duplicate registration reconcile
+a missing identity rather than return early.
+
+**Also fixed, root cause not symptom:** `render()` in shell.js emitted the two-column `.wrap` grid
+even with an empty rail, so every page shown before a hospital is chosen (the hospital list included)
+was squeezed into the 178px rail column. `.wrap.norail` now collapses to one column.
+
 ## 2026-09-11 — "Local AI" becomes a hard policy: no silent cloud inference, capability-matched packs, no unsuitable downloads
 
 **The problem the owner named.** A clinician who chose the on-device engine still spent Gemini on
