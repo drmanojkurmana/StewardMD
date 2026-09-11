@@ -26,6 +26,16 @@ for f in *.js; do
   esac
 done
 
+# ── 2a. Root ES modules. prescription.js dynamic-imports /rx-build.mjs at runtime, so the native
+# bundle needs it too; the *.js loop above never matched .mjs, which left that import unresolvable
+# inside the app. ─────────────────────────────────────────────────────────────
+for f in *.mjs; do
+  case "$f" in
+    *.test.mjs) : ;;          # node tests are not web assets
+    *) cp "$f" "$WWW/" ;;
+  esac
+done
+
 # ── 2b. Stylesheets (buildless CSS referenced by index.html / home.js) ────────
 # index.html + home.js load /ui-v3.css at runtime (the whole .v3/.v4 home layout
 # + base font-family live here). On web these are served from the repo root; the
