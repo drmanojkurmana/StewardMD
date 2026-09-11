@@ -58,6 +58,35 @@ function ghisManifest() {
         },
       },
       sessionExpiry: { statusCodes: [401, 403], redirectPatterns: ['gimsrlogin', '/Index'] },
+    }, {
+      // Medications: the GHIS meds sub-view is a `.tbl-bordered` table (the write-entry form is a
+      // separate #tblmedicines table, excluded by class). Headers observed live: Prod. Code, Drug Name,
+      // Route, Dosage, Qty, Freq, Duration, ... The last "gen by" column is intentionally not mapped.
+      type: 'list_medications',
+      method: 'GET',
+      responseFormat: 'html',
+      originId: 'origin:ghis',
+      pathTemplate: '/Doctor/Home/GetMedicines/{patientId}',
+      placeholders: { patientId: { type: 'id' } },
+      allowedQueryKeys: [],
+      pagination: { style: 'none', maxPages: 1, maxItems: 500 },
+      htmlExtract: {
+        rows: 'table.tbl-bordered tbody tr',
+        fields: {
+          prodCode: { cell: 0 }, drug: { cell: 1 }, route: { cell: 2 },
+          dose: { cell: 3 }, freq: { cell: 5 }, duration: { cell: 6 },
+        },
+      },
+      mapping: {
+        resource: 'medications',
+        fields: {
+          id: { op: 'pick', path: 'prodCode' },
+          'medication.text': { op: 'pick', path: 'drug' },
+          status: { op: 'const', value: 'active' },
+          dosage: { op: 'pick', path: 'dose' },
+        },
+      },
+      sessionExpiry: { statusCodes: [401, 403], redirectPatterns: ['gimsrlogin', '/Index'] },
     }],
     unsupported: [],
     capabilityProbes: [{ operationType: 'list_worklist', expect: { minItems: 1, requiredFields: ['id', 'name'] } }],
