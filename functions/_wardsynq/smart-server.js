@@ -567,7 +567,14 @@ async function decide(request, env, ctx) {
     let found = null;
     if (wanted) {
       try { found = await reader.get("Patient", await resolveId(reader, "Patient", wanted)); } catch { found = null; }
-      if (!found) { try { found = ((await reader.list("Patient", 1000)) || []).find((x) => x && str(x.mrn) && str(x.mrn).toUpperCase() === wanted.toUpperCase()) || null; } catch { found = null; } }
+      /* An MRN is an IDENTIFIER, so it is resolved through the identity index rather than by
+       * scanning a roster of the latest 1000 patients. The scan told a clinician "No patient here
+       * matches that MRN" for anybody who happened to sit outside that roster - on a hospital of any
+       * real size, most of the register - and the app then launched with no patient context at all.
+       * The lookup is exact, tenant-scoped, and costs the same at any population. */
+      if (!found) {
+        try { found = ((await reader.findPatientsByIdentifier({ mrn: wanted })) || [])[0] || null; } catch { found = null; }
+      }
     }
     if (!found) {
       const ttl = Math.min(MAX_TOKEN_TTL_SECONDS, Math.max(60, Number(ctx.config.smart.tokenTtlSeconds) || DEFAULT_TOKEN_TTL_SECONDS));

@@ -32,6 +32,7 @@
 import { ClinicalStore } from "../../wardsynq/wardsynq-store.js";
 import { GovernedStore, GovernanceError, canRead } from "../../wardsynq/wardsynq-actors.js";
 import { VersionConflictError, assertRepository } from "./repository.js";
+import { patientIdentifierKeys } from "./identity-key.js";
 import { actorFromConnectRole, aiActorFor, isAiOrigin } from "./actor.js";
 
 /** The canonical resource types. Mirrors wardsynq-model.js; a type not listed here is refused. */
@@ -369,6 +370,12 @@ const RESOURCE_TYPES = Object.freeze([
    * inventing again; a record inherits them. Readable by exactly the people who may read the patient
    * it is about, which is why patientId is on it. See maik-interaction.js. */
   "MaiKInteraction",
+  /* TASK 10.17: the same governed-AI-action discipline as MaiKInteraction, for a question about the
+   * HOSPITAL rather than one patient's chart - no patientId, because there is no one patient. Readable
+   * under the same hospital-wide EMR_VIEW capability every other operational aggregate already uses
+   * (EMR_VIEW grants read:null, every type), never patient-compartmented since it carries no patient.
+   * See twin-copilot.js. */
+  "TwinInteraction",
 ]);
 
 const MODE = Object.freeze({ SYSTEM_OF_RECORD: "system-of-record", INTEGRATION: "integration" });
@@ -401,6 +408,24 @@ class RecordRequestError extends Error {
     super(message);
     this.name = "RecordRequestError";
     this.code = code || "BAD_REQUEST";
+  }
+}
+
+/**
+ * An idempotency key offered for a record it did not commit.
+ *
+ * A SUBCLASS OF VersionConflictError ON PURPOSE, and this is the whole reason it is one: every
+ * caller in this codebase - a hundred-odd route handlers - already writes
+ * `if (e instanceof VersionConflictError) return 409`, and a brand-new error class would fall past
+ * all of them into their generic 502 "record_write_failed" branch. A reused key is a caller's
+ * mistake, not the store's failure, so it must read as a conflict at every existing door without
+ * one of them being edited. Its own `code` is what distinguishes it for anybody who looks.
+ */
+class IdempotencyConflictError extends VersionConflictError {
+  constructor(detail) {
+    super("this idempotency key already committed a different record", detail);
+    this.name = "IdempotencyConflictError";
+    this.code = "IDEMPOTENCY_KEY_REUSED";
   }
 }
 
@@ -569,6 +594,47 @@ class RecordService {
     return rows;
   }
 
+  /**
+   * Every local Patient that already carries one of this patient's identifiers.
+   *
+   * THE POINT IS WHAT THIS IS NOT. Identity reconciliation used to ask list("Patient", N) for a
+   * roster and scan it, so on a hospital with more patients than N a returning patient outside the
+   * roster was not found and a SECOND chart was created for them. This is an index seek whose cost
+   * is the number of identifiers offered - two or three - and is the same on a hospital of ten
+   * patients and a hospital of a hundred thousand.
+   *
+   * It answers with CANDIDATES, not with a decision. The decision stays where it was, in
+   * reconcileIdentity()'s own rules, which this only feeds.
+   *
+   * @param {object} patientLike anything with `mrn` and/or `identifiers[]`
+   * @returns {Promise<object[]>} matching Patients this actor may read
+   */
+  async findPatientsByIdentifier(patientLike) {
+    this._assertType("Patient");
+    this.governed._assertRead(this.actor, "Patient");
+    const keys = patientIdentifierKeys({ ...(patientLike || {}), resourceType: "Patient" });
+    if (!keys.length) return [];
+    const rows = await this.repository.patientsByIdentifier(this.tenantId, keys);
+    await this.repository.auditOnly(this.tenantId, await this._audit("record.identity-lookup", {
+      // The KEYS are not logged, only how many were offered: an identifier is the patient.
+      scope: { identifiersOffered: keys.length }, resourceCounts: { Patient: rows.length },
+    }));
+    return rows;
+  }
+
+  /**
+   * The canonical id behind a published `wsq-<hash>` FHIR id, or null.
+   *
+   * Reading is NOT authorised here and deliberately so: this resolves an id to an id, discloses no
+   * record content, and every caller immediately does a governed get()/byPatient() that applies the
+   * actor's own read scope. Gating the lookup itself would only turn "you may not read this" into
+   * "no such resource", which is a worse answer to the same question.
+   */
+  async resolveIdHash(idHash) {
+    const hit = await this.repository.idByHash(this.tenantId, String(idHash || ""));
+    return hit || null;
+  }
+
   /** The whole chart: latest version of every resource in the patient's compartment. */
   async chart(patientId) {
     const out = {};
@@ -618,10 +684,38 @@ class RecordService {
     if (key) {
       const prior = await this.repository.recall(this.tenantId, key);
       if (prior) {
-        // Same key, same outcome. The record returned is the version that write produced, so a
-        // client that lost the first response sees exactly what it would have seen.
         const versions = await this.repository.history(this.tenantId, prior.resourceType, prior.id);
         const rec = versions.find((v) => v.version === prior.version) || null;
+
+        /* A KEY IS BOUND TO THE TYPE AND THE PATIENT IT FIRST COMMITTED FOR.
+         *
+         * Without this the recall matched on the key ALONE, and a client that reused one key across
+         * two writes - a key minted per retry-session rather than per request, the commonest way
+         * there is to get idempotency wrong - had its second write silently discarded and was handed
+         * the FIRST record back under `ok: true`. When the two writes were two different patients
+         * that is both a lost clinical write and another patient's record returned as the answer: a
+         * wrong-patient disclosure arriving down the success path, where nobody is looking for one.
+         *
+         * IT IS THE PATIENT AND NOT THE ID, and the difference is load-bearing. A retried POST must
+         * still replay, and several declarations mint an id from `new Date()` - activationIdFor() in
+         * emergency-mode.js, grantIdFor() in break-glass.js - so two retries milliseconds apart
+         * produce two different ids for one logical act. Binding to the id would turn every one of
+         * those honest retries into a refusal, and the second declaration of an emergency is not a
+         * thing to invent. Binding to the SUBJECT refuses what is actually dangerous - the same key
+         * carrying a different patient, or a different kind of record entirely - and leaves the
+         * retry alone.
+         *
+         * A Patient's own subject is its id: for that one type the record IS the person. */
+        const subjectOf = (r) => (r && (r.patientId || (r.resourceType === "Patient" ? r.id : null))) || null;
+        if (prior.resourceType !== entity.resourceType || subjectOf(rec) !== subjectOf(entity)) {
+          throw new IdempotencyConflictError({
+            idempotencyKey: key,
+            committed: { resourceType: prior.resourceType, id: prior.id },
+            attempted: { resourceType: entity.resourceType, id: entity.id },
+          });
+        }
+        // Same key, same outcome. The record returned is the version that write produced, so a
+        // client that lost the first response sees exactly what it would have seen.
         return { record: rec, replayed: true };
       }
     }
@@ -749,6 +843,6 @@ class RecordService {
 
 export {
   RESOURCE_TYPES, MODE, NATIVE_SYSTEM, isExternalRecord,
-  AuthorityError, RecordRequestError,
+  AuthorityError, RecordRequestError, IdempotencyConflictError,
   TenantBackend, RecordService, recordPolicy, actorForMembership, externallyOwned,
 };

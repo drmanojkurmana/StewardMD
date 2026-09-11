@@ -163,7 +163,25 @@ function scorePulse(v) {
   return band(v, [[(x) => x <= 40, 3], [(x) => x <= 50, 1], [(x) => x <= 90, 0], [(x) => x <= 110, 1], [(x) => x <= 130, 2], [() => true, 3]]);
 }
 
-function scoreTemperature(v) {
+/* THESE BANDS ARE CELSIUS, AND THE SCORER REFUSES ANYTHING ELSE RATHER THAN CONVERTING.
+ *
+ * Until 2026-09-11 the unit was discarded before it got here (wardsynq-vitals.js), so a temperature
+ * charted in Fahrenheit was scored against these numbers as a bare figure: 98.6, a normal
+ * temperature, scored 2 for "above 39"; a genuinely febrile 102 scored 2; a hypothermic 94 scored 2.
+ * The subscore was noise on every F-charted patient, and noise that reads as a real number.
+ *
+ * WHY REFUSE RATHER THAN CONVERT. This module's own rule is that a missing parameter is never zero -
+ * it makes the score INCOMPLETE and says which parameter is missing, which is the honest outcome and
+ * one the escalation path already handles. Converting would mean this file silently re-deriving a
+ * clinical value somebody else recorded, and a conversion bug here would be invisible where a
+ * refusal is not. A hospital that charts in Fahrenheit gets an incomplete NEWS2 and is told why.
+ *
+ * The unit is UCUM as the record stores it: "Cel" or "[degF]". Null means nobody recorded one, which
+ * for a chart whose bands are Celsius is treated as Celsius - that is the pre-existing behaviour for
+ * every value written before units travelled, and changing it would retroactively blank them. */
+function scoreTemperature(v, unit) {
+  const u = String(unit == null ? "" : unit).trim();
+  if (u && u !== "Cel" && u.toUpperCase() !== "C") return null;
   return band(v, [[(x) => x <= 35.0, 3], [(x) => x <= 36.0, 1], [(x) => x <= 38.0, 0], [(x) => x <= 39.0, 1], [() => true, 2]]);
 }
 
@@ -223,8 +241,9 @@ function news2(input) {
 
   const gathered = input.observations
     ? gather(input.observations, { now, freshnessMs: input.freshnessMs })
-    : { values: input.values || {}, sources: {}, rejected: [] };
+    : { values: input.values || {}, units: input.units || {}, sources: {}, rejected: [] };
   const v = gathered.values;
+  const vUnits = gathered.units || {};
 
   const scale = input.scale === 2 ? 2 : 1;
   if (input.scale === 2 && !(patient && patient.spo2ScaleTwoPrescribed === true)) {
@@ -252,7 +271,7 @@ function news2(input) {
   put(PARAM.PULSE, v[PARAM.PULSE], num(v[PARAM.PULSE]) === null ? null : scorePulse(v[PARAM.PULSE]));
   const acvpu = typeof v[PARAM.CONSCIOUSNESS] === "string" ? v[PARAM.CONSCIOUSNESS].trim().toUpperCase() : null;
   put(PARAM.CONSCIOUSNESS, v[PARAM.CONSCIOUSNESS], acvpu && ACVPU.includes(acvpu) ? (acvpu === "A" ? 0 : 3) : null);
-  put(PARAM.TEMPERATURE, v[PARAM.TEMPERATURE], num(v[PARAM.TEMPERATURE]) === null ? null : scoreTemperature(v[PARAM.TEMPERATURE]));
+  put(PARAM.TEMPERATURE, v[PARAM.TEMPERATURE], num(v[PARAM.TEMPERATURE]) === null ? null : scoreTemperature(v[PARAM.TEMPERATURE], vUnits[PARAM.TEMPERATURE]));
 
   const total = Object.values(parameters).reduce((sum, p) => sum + p.points, 0);
   const singleParameterThree = Object.keys(parameters).filter((k) => parameters[k].points === 3);

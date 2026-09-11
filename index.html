@@ -70,7 +70,7 @@ try{var _sq=location.search||"";var _sv=!/[?&]splashv2=0\b/.test(_sq)&&(/[?&]spl
 <link rel="stylesheet" href="/abx-redesign.css?v=gold432">
 <link rel="stylesheet" href="/abx-wizard.css?v=bug809-build7">
 <link rel="stylesheet" href="/queue.css?v=q10-staffadmin">
-<link rel="stylesheet" href="/ward.css?v=ward20-maik">
+<link rel="stylesheet" href="/ward.css?v=ward21-timeline">
 <link rel="stylesheet" href="/discharge.css?v=dis1">
 <link rel="stylesheet" href="/opd-emr.css?v=voicenote1-micbar1-auth2-icdsug1">
 <link rel="stylesheet" href="/atlas.css?v=atlas2">
@@ -84,7 +84,7 @@ try{var _sq=location.search||"";var _sv=!/[?&]splashv2=0\b/.test(_sq)&&(/[?&]spl
 <link rel="stylesheet" href="/kardiox-screens.css?v=kx7">
 <link rel="stylesheet" href="/thorex.css?v=tx2">
 <link rel="stylesheet" href="/thorex-screens.css?v=tx12">
-<link rel="stylesheet" href="/sknx-screens.css?v=sx17-appshell">
+<link rel="stylesheet" href="/sknx-screens.css?v=sx18-calm">
 <link rel="stylesheet" href="/insulin.css?v=ins15">
 <link rel="stylesheet" href="/clinix.css?v=cx17-annex">
 <link rel="stylesheet" href="/surgx.css?v=sg9-bkenc-md1">
@@ -94,7 +94,7 @@ try{var _sq=location.search||"";var _sv=!/[?&]splashv2=0\b/.test(_sq)&&(/[?&]spl
 <!-- App-wide Liquid Glass appearance (Display & Accessibility → App appearance). Sets
      html[data-appearance] before paint so glass surfaces don't flash. ICU/GHIS never touched. -->
 <link rel="stylesheet" href="/appearance.css?v=appx5-flatsquare">
-<link rel="stylesheet" href="/graphite-dark.css?v=graphite2">
+<link rel="stylesheet" href="/graphite-dark.css?v=black1">
 <!-- Horizontal-slide lock: a device sub-pixel / vw / safe-area overflow was letting full-screen
      overlays scroll sideways, dragging the page and exposing the dark scrim on the right. Lock the
      horizontal axis on the app's scroll surfaces (vertical scroll kept). Nested horizontal scrollers
@@ -2086,7 +2086,14 @@ window.openExternal = function (u) {
 <!-- lazy loaded: html2canvas -->
 <!-- lazy loaded: jspdf -->
 <script src="/rx-brand-match.js?v=rxb1" defer></script>
-<script src="/prescription.js?v=gold982-brandsearch-dict1-ui1-rxscan1-why1-pdfqr1-always1-qrfix1-mask1" defer></script>
+<!-- RxChoice - cost-optimization layer over a FINISHED prescription. Load order matters: the flags
+     registry and the deterministic core must exist before prescription.js renders its button, and
+     rxchoice-ui.js needs MEDAPI (api.js, loaded earlier) for the Drug Database. Defer keeps them in
+     document order. With smd_rxchoice off all three are inert and the pad renders no button. -->
+<script src="/rxchoice-flags.js?v=rxc1" defer></script>
+<script src="/rxchoice-core.js?v=rxc1" defer></script>
+<script src="/rxchoice-ui.js?v=rxc1" defer></script>
+<script src="/prescription.js?v=gold982-brandsearch-dict1-ui1-rxscan1-why1-pdfqr1-always1-qrfix1-mask1-rxc1" defer></script>
 <script src="/ku.js?v=gold434-thread" defer></script>
 <!-- Learning-streak active-time engine, achievement share card, and the Clinical Progress
      dashboard (levels / quests / badges / stats / timeline). Load after ku.js + account.js. -->
@@ -2115,7 +2122,7 @@ window.openExternal = function (u) {
 <script src="/drugs.js?v=gold978-sheet1-universal1" defer></script>
 <!-- lazy loaded: interaction-rules -->
 <script defer src="/kb/ai/drug-fuzzy.js?v=gold1047"></script>
-<script defer src="/medlist.js?v=gold1049-scan-choose-brands1"></script>
+<script defer src="/medlist.js?v=hardlocal3"></script>
 <script defer src="/ghis-meds.js?v=gold363"></script>
 <script defer src="/interactions.js"></script>
 <script src="/api.js?v=gold465-azclass-sheet4" defer></script>
@@ -2134,7 +2141,7 @@ window.openExternal = function (u) {
 <script src="/id-token.js?v=idtok2" defer></script>
 <link rel="stylesheet" href="/reasoning-workspace.css?v=dxfit8">
 <link rel="stylesheet" href="/knowledge-library.css?v=klall5">
-<script src="/reasoning.js?v=nstream1-clinix3-rail1-dxux3-klall9" defer></script>
+<script src="/reasoning.js?v=hardlocal3" defer></script>
 <script src="/renal-dose.js?v=rd1" defer></script>
 <!-- Privacy PR-A: SMD_PRIVACY config (version constants) + consent gate / versioned Privacy Notice
      (SMD_CONSENT). Loads after reasoning.js so it can guard SMD_AI. Reversible via localStorage
@@ -2143,22 +2150,22 @@ window.openExternal = function (u) {
 <script src="/privacy.js?v=gold363" defer></script>
 <!-- Image Engine chooser for ICU Snapshot (Private Device OCR vs AI Vision). Needs SMD_AI
      (reasoning.js) at runtime; used by icu.js + the Settings section in home.js. -->
-<script src="/image-engine.js?v=ie-local3-choose" defer></script>
+<script src="/image-engine.js?v=hardlocal3" defer></script>
 <!-- MaiK Answer Engine chooser (KB only · Cloud · On-device). DECORATES window.SMD_AI, so it must
      load after reasoning.js; the Settings row is rendered by home.js. Default pref is "cloud", so
      an untouched install is byte-for-byte the current behaviour. -->
-<script src="/maik-engine.js?v=mxgate4-dark" defer></script>
+<script src="/maik-engine.js?v=hardlocal3" defer></script>
 <!-- On-device MaiK: model pack download/cache (SMD_MAIK_MODELS) + llama.cpp inference
      (SMD_MAIK_LOCAL). Native-only in effect; both are inert on the web PWA because the
      capacitor-llama plugin is absent, which is what keeps the picker's third option hidden there. -->
-<script src="/maik-models.js?v=ux1-polish-lite" defer></script>
+<script src="/maik-models.js?v=hardlocal3" defer></script>
 <!-- MaiK Lite on-device RAG (window.SMD_MAIK_RAG / SMD_MAIK_KB_STORE): BM25 over the book chunks +
      evidence gate, ported from the server pipeline, so MaiK Lite's answers are checked against the
      actual book text instead of trusting its own recollection. Loaded before maik-local.js, which
      reads these globals lazily (only when a maik-lite question is actually asked). -->
 <script src="/kb/ai/maik-lite-rag.js?v=rag1" defer></script>
 <script src="/kb/ai/maik-lite-kb-store.js?v=rag1" defer></script>
-<script src="/maik-local.js?v=mxfix4-greet" defer></script>
+<script src="/maik-local.js?v=hardlocal3-opdcols1" defer></script>
 <script src="/kb/ai/steward-ai.browser.js?v=gold1034" defer></script>
 <!-- MaiK V2 — deterministic KB Answer Engine (window.MaiKKB). Retrieval-first: answers KB
      knowledge questions locally with citations, no Gemini. Loads before home.js. -->
@@ -2172,7 +2179,7 @@ window.openExternal = function (u) {
 <script src="/kb/ai/maik-copilot.js?v=gold1053-calcfix" defer></script>
 <script src="/electrolytes.js?v=bug808-nodupe-focus1" defer></script>
 <script src="/caseshare.js?v=gold363" defer></script>
-<!-- lazy loaded: hospitals-in --><script src="/connect-source.js?v=cs3docs" defer></script><script src="/connect-patient.js?v=cp4" defer></script><script src="/connect-agent-boot.js?v=cab3" defer></script><script src="/queue-flags.js?v=q5-all-on" defer></script><script src="/govschemes-flags.js?v=gs2-defaulton" defer></script><script src="/home.js?v=nstream1-clinix5-surgx2-logo-aiu1-profile2-rxtile-glyphs-maikart2-pglog1-ack1-otasay-oncqis-sync1-prompt1-about1-icons1-rxv1-applock3-afoptin-gsrename1-icdtile1-hvtilealign1-sknx16-wsqtile1-universal1-connecthosp1" defer></script><script src="/profile-setup.js?v=pfs1" defer></script><script src="/syndromes-motion.js?v=synmo5" defer></script><script src="/dialog-motion.js?v=dm2" defer></script>
+<!-- lazy loaded: hospitals-in --><script src="/connect-source.js?v=cs3docs" defer></script><script src="/connect-patient.js?v=cp4" defer></script><script src="/connect-agent-boot.js?v=cab3" defer></script><script src="/queue-flags.js?v=q5-all-on" defer></script><script src="/govschemes-flags.js?v=gs2-defaulton" defer></script><script src="/home.js?v=surgx1-hardlocal3-hint10s-connecthosp1" defer></script><script src="/profile-setup.js?v=pfs1" defer></script><script src="/syndromes-motion.js?v=synmo5" defer></script><script src="/dialog-motion.js?v=dm2" defer></script>
 <!-- Lean sidebar redesign (Tools / Reference & Help / Settings / Advanced / Experimental). Additive; wraps
      SB.open and rebuilds #sbMenu, superseding home.js's legacy reorganizer (which stands down
      via window.SMD_SBR). Must load AFTER home.js. -->
@@ -2191,7 +2198,7 @@ window.openExternal = function (u) {
 <script src="/haptics.js?v=gold348" defer></script>
 <script src="/antibiogram.js?v=gold992" defer></script>
 <script src="/govschemes.js?v=gs4-catsearch" defer></script>
-<script src="/icd.js?v=icd1" defer></script>
+<script src="/icd.js?v=hardlocal3" defer></script>
 <script src="/asp-region.js?v=gold363" defer></script>
 <script src="/swipe-back.js?v=gold482-edgeback-gestnav1" defer></script>
 <script src="/workspaces.js?v=gold1051-wsroute-surgx1" defer></script>
@@ -2205,7 +2212,7 @@ window.openExternal = function (u) {
 <!-- Clinical vocabulary registry (SMD_VOCAB) - deterministic offline finding autocomplete for the
      ICU complaint/finding picker. Separate from disease scoring; maps to existing canonical finding IDs. -->
 <script src="/clinical-vocab.js?v=gold363" defer></script>
-<script src="/icu.js?v=gold999-askmaik-think1-lytes1-micuvit1-proto3-icdsug1" defer></script>
+<script src="/icu.js?v=hardlocal3" defer></script>
 <script src="/discharge-ghis.js?v=dg1" defer></script>
 
 <!-- WardSynQ shadow observation of GHIS ingest. BOTH DEFAULT OFF and neither ships enabled.
@@ -2265,7 +2272,7 @@ window.openExternal = function (u) {
 <script src="/infusion-actions.js?v=gold363" defer></script>
 <!-- MaiK Scribe voice intake (SMD_VOICE): capture → /api/ai/extract → review-first autofill.
      Loads after icu.js/reasoning.js/native-bridge/api.js - only invoked on user tap, so order is safe. -->
-<script src="/voice.js?v=mkfast1-vtiers2-stt1" defer></script>
+<script src="/voice.js?v=hardlocal3" defer></script>
 <!-- Ambient voice extraction engine (window.SMD_VVITALS / SMD_EMRMAP / SMD_AMBIENT). Deterministic,
      zero-token, offline: spoken vitals/exam -> structured assessment fields, with a patient-speech +
      manual-override safety gate. A building block for autofilling the OPD assessment (opd-emr.js);
@@ -2275,7 +2282,7 @@ window.openExternal = function (u) {
 <script src="/voice-emr-map.js?v=gold1" defer></script>
 <script src="/voice-ambient.js?v=gold1723-mix-pauseflush1" defer></script>
 <script src="/voice-diarize.js?v=gold1" defer></script>
-<script src="/maik-reasoning.js?v=maik3" defer></script>
+<script src="/maik-reasoning.js?v=hardlocal3" defer></script>
 <script src="/maik-pathways.js?v=maik1" defer></script>
 <script src="/maik-ask.js?v=mkfast2" defer></script>
 <script src="/voice-scribe-ground.js?v=gold1" defer></script>
@@ -2341,7 +2348,7 @@ window.openExternal = function (u) {
 <script src="/thorex-ort.js?v=gold1084-modeldl" defer></script>
 <script src="/thorex-providers.js?v=bothengines" defer></script>
 <script src="/thorex-report.js?v=tx8" defer></script>
-<script src="/thorex-llm.js?v=tx2" defer></script>
+<script src="/thorex-llm.js?v=hardlocal3" defer></script>
 <script src="/thorex-correlate.js?v=tx1" defer></script>
 <script src="/thorex-screens.js?v=tx15-wipe" defer></script>
 <script src="/thorex.js?v=tx1" defer></script>
@@ -2362,12 +2369,12 @@ window.openExternal = function (u) {
 <script src="/sknx-providers.js?v=sx13" defer></script>
 <script src="/sknx-store.js?v=sx16-ux" defer></script>
 <script src="/sknx-evidence.js?v=sx13" defer></script>
-<script src="/sknx-llm.js?v=sx13" defer></script>
+<script src="/sknx-llm.js?v=hardlocal3" defer></script>
 <script src="/sknx-report.js?v=sx13" defer></script>
 <script src="/sknx-compare.js?v=sx13" defer></script>
 <script src="/sknx-rx.js?v=sx13" defer></script>
 <script src="/sknx.js?v=sx16-ux" defer></script>
-<script src="/sknx-screens.js?v=sx16-ux" defer></script>
+<script src="/sknx-screens.js?v=sx17-calm" defer></script>
 <!-- CliniX · clinical learning for medical students (additive, flag-gated smd_clinix, DEFAULT ON
      for testers per the 2026-08-23 owner decision - see clinix-flags.js, which is the authority;
      force either way with ?clinix=1 / ?clinix=0 or Settings → Experimental). Scoped #clinixRoot + .cx-* + SMD_CLINIX_*
@@ -2405,9 +2412,9 @@ window.openExternal = function (u) {
 <script src="/surgx-patient.js?v=sg14-create" defer></script>
 <script src="/surgx-destinations.js?v=sg6-bk" defer></script>
 <script src="/surgx-backup.js?v=sgbk2-enc" defer></script>
-<script src="/surgx-evidence.js?v=sg1" defer></script>
+<script src="/surgx-evidence.js?v=hardlocal3" defer></script>
 <script src="/surgx-diagrams.js?v=sg1" defer></script>
-<script src="/surgx-screens.js?v=sg25-signsend-md2" defer></script>
+<script src="/surgx-screens.js?v=hardlocal3" defer></script>
 <script src="/surgx.js?v=sg1" defer></script>
 <!-- NMC Logbook (PG digital logbook) - additive, flag-gated smd_pglog, DEFAULT ON for testers, same
      owner decision as clinix/surgx (see pglog-flags.js, which is the authority); force either way
@@ -2434,7 +2441,7 @@ window.openExternal = function (u) {
      QR and how long they stay valid; the QR itself is encoded by pglog-qr.js above. -->
 <script src="/rx-validity.js?v=rxv3-brands" defer></script>
 <script src="/pglog-reports.js?v=pgl5-diag" defer></script>
-<script src="/pglog-ai.js?v=pgl4" defer></script>
+<script src="/pglog-ai.js?v=hardlocal3" defer></script>
 <script src="/pglog-screens.js?v=pgl26-del" defer></script>
 <script src="/pglog.js?v=pgl5" defer></script>
 <!-- Insulin dose CDSS · additive, flag-gated smd_insulin (DEFAULT OFF; reveal with ?insulin=1). Pure
@@ -2477,7 +2484,7 @@ window.openExternal = function (u) {
      Self-mounting overlay. Reached from the home screen's "Inpatient Ward" tile (flag
      smd_wardsynq, DEFAULT OFF - see home.js) or directly via WARD.open({orgId}); with no orgId
      given it falls back to the workplace queue.js already remembers ("wardsynq:<hospitalId>"). -->
-<script src="/ward.js?v=ward20-maik" defer></script>
+<script src="/ward.js?v=ward21-timeline" defer></script>
 <!-- Discharge summary workstation (window.DISCHARGE). Reads the assembled summary, lets a treating
      clinician correct it section by section, and signs it into an immutable version. Opened from a
      discharged patient on the ward screen: DISCHARGE.open({orgId, encounterId}). -->
@@ -2499,7 +2506,7 @@ window.openExternal = function (u) {
 <script src="/onco-protocol-report.js?v=onco1" defer></script>
 <!-- OPD patient profile + reports (flag smd_opd_emr, default OFF). Read-only view over the existing GHIS
      read proxy; inert unless the flag is on + OPDEMR.openProfile() is called from a queue ticket. -->
-<script src="/opd-emr.js?v=mkfast1-scribeloud2-ghisdoc3-mic1-auth3-oncqis-scroll1-icdsug1-opdnote1" defer></script>
+<script src="/opd-emr.js?v=hardlocal3-opdcols1" defer></script>
 <!-- My Clinic — on-device EMR for personal clinics (reuses opd-emr's form; flag smd_personal_clinic). -->
 <script src="/personal-clinic.js?v=gold6" defer></script>
 <!-- Shared Clinic — multi-device encrypted EMR for clinics/small hospitals with no EMR (flag
@@ -2544,7 +2551,7 @@ window.openExternal = function (u) {
      every proposed dose comes from SMD_ONCODOSE with the full lineage visible. Reuses SMD_ONCORECOMMEND
      (Phase B), SMD_ONCOEV (Phase C), SMD_ONCOUI matrix/drawer + SMD_ONCODOSE. Loaded before onco-home.js. -->
 <script src="/onco-plan-flow.js?v=op1" defer></script>
-<script src="/onco-home.js?v=op6-oncqis-open1" defer></script>
+<script src="/onco-home.js?v=hardlocal3" defer></script>
 <!-- ONCOTREE navigator (flag smd_onco_navigator, DEFAULT OFF): deterministic disease pathway
      (phenotype -> APPLICABLE EXISTING Standard Protocols by reference). Decision-support only; never a
      second protocol DB, never auto-selects/doses. engine + recommend loaded before the UI. -->

@@ -360,12 +360,47 @@
     else azLoad(az.letter, fresh !== false);
   }
 
-  /* ---- list/search view ---- */
-  function renderList() {
-    st.name = null; setTitle("Drugs Database", false);
-    var bb = root.querySelector("#dbBrandBtn"); if (bb) bb.style.display = "none"; closeDrawer();
+  /* ---- adaptive layout: split view (option C) on wide screens, single pane (option A) otherwise ----
+   * Wide = min-width 820px: iPads (either orientation), landscape phones, large foldables.
+   * Only one of #dbBody / (#dbSide + #dbMain) exists at a time, so the shared IDs
+   * (#dbSearch, #dbResults, #dbCount) keep resolving without duplication. */
+  function isWide() { try { return !!(window.matchMedia && matchMedia("(min-width: 820px)").matches); } catch (e) { return false; } }
+  function ensureSplit() {
     var b = root.querySelector("#dbBody");
+    if (!b.querySelector("#dbSplit")) b.innerHTML = '<div class="db-split" id="dbSplit"><aside id="dbSide" aria-label="Browse molecules"></aside><main id="dbMain"></main></div>';
+    b.classList.add("db-widebody");
+  }
+  function clearSplit() {
+    var b = root.querySelector("#dbBody");
+    if (b.querySelector("#dbSplit")) b.innerHTML = "";
+    b.classList.remove("db-widebody");
+  }
+  function listHost() { if (isWide()) { ensureSplit(); return root.querySelector("#dbSide"); } clearSplit(); return root.querySelector("#dbBody"); }
+  function detailHost() { if (isWide()) { ensureSplit(); return root.querySelector("#dbMain"); } clearSplit(); return root.querySelector("#dbBody"); }
+  function renderMainPlaceholder() {
+    var m = root.querySelector("#dbMain"); if (!m) return;
+    m.innerHTML = '<div class="db-pick">' + dbIco("flask") + '<div><b>Select a molecule</b><div class="db-pick-s">Search or browse the list — details open here.</div></div></div>';
+  }
+  // Re-render the current view when crossing the breakpoint (rotation, fold, resize).
+  function trackWide() {
+    try {
+      if (!window.matchMedia) return;
+      var mq = matchMedia("(min-width: 820px)");
+      var onChange = function () {
+        if (!root || !root.classList.contains("on")) return;
+        if (st.name) openComposition(st.name, st.sort, st.tier);
+        else { st.name = null; renderList(); }
+      };
+      if (mq.addEventListener) mq.addEventListener("change", onChange);
+      else if (mq.addListener) mq.addListener(onChange);
+    } catch (e) {}
+  }
+
+  /* ---- list/search view ---- */
+  function renderSideList() {
+    var b = listHost();
     b.innerHTML =
+      (isWide() ? '' : '<h1 class="db-bigt">Drugs</h1>') +
       '<div class="db-searchbar">' + dbIco("search", "db-search-ic") + '<input id="dbSearch" class="db-search" type="text" placeholder="Search a drug or brand (e.g. pantoprazole, augmentin, monocef)…" autocomplete="off" value="' + esc(q2) + '"></div>' +
       '<div class="db-note"><span id="dbCount">412,224</span> Indian brands · search a molecule or brand name, or browse the molecules A-Z below.</div>' +
       '<div id="dbResults" class="db-results"></div>';
@@ -373,9 +408,15 @@
     var si = b.querySelector("#dbSearch");
     si.addEventListener("input", function () { onListInput(si.value); });
     si.addEventListener("keydown", function (e) { e.stopPropagation(); });
-    setTimeout(function () { try { si.focus(); } catch (e) {} }, 50);
+    if (!isWide()) setTimeout(function () { try { si.focus(); } catch (e) {} }, 50);
     if (q2.length >= MINLEN) runList(q2);
     else renderBrowse(true);                 // no query → the browser (A-Z or by class), never an empty screen
+  }
+  function renderList() {
+    st.name = null; setTitle("Drugs Database", false);
+    var bb = root.querySelector("#dbBrandBtn"); if (bb) bb.style.display = "none"; closeDrawer();
+    renderSideList();
+    if (isWide()) renderMainPlaceholder();
   }
   function onListInput(v) {
     q2 = (v || "").trim();
@@ -404,7 +445,7 @@
     // brand-name hits + molecule/composition hits in parallel; brands shown first
     // so doctors who type a brand (e.g. "pantocid") see the brand itself on top.
     Promise.all([MEDAPI.searchBrands(q, 12), MEDAPI.searchCompositions(q, 30)]).then(function (arr) {
-      if (q !== q2 || st.name) return;
+      if (q !== q2 || (st.name && !isWide())) return;
       var r = root.querySelector("#dbResults"); if (!r) return;
       var brands = (arr[0] && arr[0].results) || [], comps = (arr[1] && arr[1].results) || [];
       if (!brands.length && !comps.length) { r.innerHTML = '<div class="db-empty">No drugs match “' + esc(q) + '”.</div>'; return; }
@@ -423,7 +464,8 @@
     if (st.name !== name) st.bq = "";   // fresh molecule → clear the brand filter; sort/tier changes keep it
     st.name = name; st.sort = sort || "relevance"; st.tier = tier || "all"; st.info = null; st.brands = []; st.total = 0; st.offset = 0;
     setTitle(name, true);
-    root.querySelector("#dbBody").innerHTML = '<div class="db-empty">Loading ' + esc(name) + '…</div>';
+    detailHost().innerHTML = '<div class="db-empty">Loading ' + esc(name) + '…</div>';
+    if (isWide() && !root.querySelector("#dbSide #dbSearch")) renderSideList();
     loadComposition(true);
   }
   function loadComposition(first) {
@@ -462,7 +504,7 @@
       '</div>';
   }
   function renderDetail() {
-    var d = st.info, b = root.querySelector("#dbBody");
+    var d = st.info, b = detailHost();
     var chips = [d["class"], d.action_class].filter(Boolean).map(function (c) { return '<span class="db-chip">' + esc(c) + '</span>'; }).join("");
     var brandsBody = st.brands.length ? st.brands.map(brandHTML).join("")
       : '<div class="db-empty">No ' + (TIER_LABEL[st.tier] ? TIER_LABEL[st.tier] + " " : "") + 'brands listed for this generic.</div>';
@@ -917,7 +959,18 @@
       "@media(prefers-reduced-motion:reduce){.db-overlay.db-sheet{transition:none}}",
       ".db-brand-price{background:var(--teal-soft,#e0f2f1);color:var(--teal,#0a9396);border-radius:999px;padding:4px 11px;font-size:13px}",
       ".db-bh-comp{font-weight:700}",
-      ".db-brandhit{border-left-width:4px}"
+      ".db-brandhit{border-left-width:4px}",
+      // adaptive split view (option C): persistent browse sidebar + detail pane on wide screens
+      ".db-body.db-widebody{max-width:1180px}",
+      ".db-split{display:grid;grid-template-columns:300px minmax(0,1fr);gap:16px;align-items:start}",
+      "#dbSide{position:sticky;top:0;max-height:calc(100dvh - 130px);overflow-y:auto;-webkit-overflow-scrolling:touch;background:var(--panel,#fff);border:1px solid var(--line,#e5e5e0);border-radius:14px;padding:12px;box-sizing:border-box}",
+      "#dbMain{min-width:0}",
+      ".db-pick{display:flex;gap:12px;align-items:flex-start;border:1px dashed var(--line,#e5e5e0);border-radius:14px;background:var(--panel,#fff);padding:22px;color:var(--slate,#555);font:500 13.5px var(--sans,system-ui);margin-top:2px}",
+      ".db-pick .db-ico{width:22px;height:22px;color:var(--teal,#0a9396)}",
+      ".db-pick-s{color:var(--slate-soft,#888);font-size:12.5px;margin-top:3px}",
+      // Option A on narrow screens: large title + iOS-style search field
+      ".db-bigt{font:800 30px var(--sans,system-ui);letter-spacing:-.025em;color:var(--ink,#1a1a1a);margin:6px 2px 10px}",
+      "@media(max-width:819px){.db-search{background:rgba(120,120,128,.14);border-color:transparent;border-radius:13px;padding:12px 14px}.db-searchbar .db-search{padding-left:42px}}"
     ].join("");
     var s = document.createElement("style"); s.id = "smd-db-styles"; s.textContent = css; document.head.appendChild(s);
   }
@@ -925,6 +978,7 @@
   /* ---- init ---- */
   function init() {
     injectCSS();
+    trackWide();
     var inp = el("smdSearchInput");
     if (inp) {
       ensureBox();

@@ -149,6 +149,28 @@
     });
     return { name: name, age: age, dx: dx, complaints: cc, vitals: vitals, lines: lines };
   }
+  /* The RxChoice section of the printout: a SEPARATE block under the conventional prescription,
+   * which is unchanged above it. It lists the four options that were shown and names the product the
+   * doctor finally selected, so the pharmacy and the patient can both see what was chosen and what
+   * the alternatives were. Empty (and absent from the page) when RxChoice was never opened or the
+   * PDF flag is off. */
+  function rxcPrintSection() {
+    var sel = sheet && sheet._rxChoice;
+    if (!sel) return "";
+    try { if (!(window.SMD_RXCHOICE_FLAGS && SMD_RXCHOICE_FLAGS.bool("smd_rxchoice_pdf"))) return ""; } catch (e) { return ""; }
+    var keys = Object.keys(sel); if (!keys.length) return "";
+    var cost = function (o) { return (o && o.courseCost != null) ? (" &middot; \u20b9" + o.courseCost + " for this course") : ""; };
+    var rows = keys.map(function (k) {
+      var o = sel[k]; if (!o) return "";
+      var cat = o.category === "prescribed" ? "Doctor Prescribed" : (o.category.charAt(0).toUpperCase() + o.category.slice(1));
+      return '<div class="rxcline"><b>' + esc(k) + '</b> &nbsp;<span class="rxccat">' + esc(cat) + '</span><br>' +
+        'Prescribed therapy: ' + esc(o.composition || "") + '<br>' +
+        'Final selected product: <b>' + esc(o.brand || "") + '</b>' + (o.manufacturer ? ' (' + esc(o.manufacturer) + ')' : '') + cost(o) + '</div>';
+    }).join("");
+    if (!rows) return "";
+    return '<section class="rxcsec"><h3>RxChoice&trade;</h3>' + rows +
+      '<div class="rxcnote">The therapy above is the doctor\u2019s. RxChoice lists products from the StewardMD Drug Database carrying that same therapy at different prices. A lower price is not a claim that a product is clinically better. Prices are list MRP for the prescribed course, not a pharmacy quote.</div></section>';
+  }
   /* ---- Verifiable prescriptions (habit-forming drugs + antibiotics) --------------------------
    * A printed prescription is trivially forged: a name, a registration number and a drug list on
    * paper. For the two classes where that does the most harm, the sheet now carries an opaque code
@@ -477,6 +499,9 @@
       '.adv{padding:6px 0;color:#475569;font-size:13px}' +
       '.sign{margin-top:34px;text-align:right}.sign .nm{font-weight:700}.sign .mt{color:#64748b;font-size:12px}' +
       '.disc{margin-top:22px;padding-top:12px;border-top:1px solid #e2e8f0;font-size:11px;color:#64748b;line-height:1.5}' +
+      '.rxcsec{margin-top:20px;padding-top:10px;border-top:1px dashed #0e6e63}.rxcsec h3{margin:0 0 6px;font-size:13px;color:#0e6e63;text-transform:uppercase;letter-spacing:.05em}' +
+      '.rxcline{font-size:12.5px;color:#334155;padding:5px 0;border-bottom:1px solid #f1f5f4}.rxccat{font-size:10.5px;font-weight:700;color:#0e6e63;text-transform:uppercase}' +
+      '.rxcnote{margin-top:7px;font-size:10.5px;color:#64748b;line-height:1.5}' +
       // The verification block sits with the signature: a reader checking authenticity is already
       // looking at who signed it. Kept off the page break so the QR is never split in half.
       '.rxv{display:flex;gap:12px;align-items:center;margin-top:18px;padding-top:14px;border-top:1px solid #e2e8f0;break-inside:avoid;page-break-inside:avoid}' +
@@ -489,6 +514,7 @@
       '<div class="clinic">StewardMD' + (topic ? ' &middot; ' + esc(topic) : '') + '</div>' +
       ((d.name || d.age) ? '<div class="pt">' + esc(d.name) + (d.age ? '  &middot;  ' + esc(d.age) : '') + '</div>' : '') +
       '<div class="rxsym">&#8478;</div><main>' + (rows || '<div class="adv">No items.</div>') + '</main>' +
+      rxcPrintSection() +
       '<div class="sign"><div class="nm">Dr. ' + esc(docName() || "—") + '</div><div class="mt">NMC Reg: ' + esc(regNo || "—") + '  &middot;  ' + esc(date) + '</div></div>' +
       rxQrBlock(rxv) +
       '<div class="disc">Draft prescription generated with StewardMD. Verify every drug, dose, route and interaction against the patient and local protocol. The prescriber is responsible for what they sign.</div>' +
@@ -854,6 +880,47 @@
     }).catch(function () { hint.textContent = ""; });
   }
 
+  /* ── RxChoice™ (rxchoice-ui.js, flag smd_rxchoice) ───────────────────────────────────────────────
+   * An opt-in layer ON TOP of this pad, opened only from the button below and only once the doctor
+   * has written the prescription. It reads the finished lines, asks the StewardMD Drug Database for
+   * products carrying the SAME therapy, and shows four ways to fill it (Generic / Balanced /
+   * Premium / Doctor Prescribed). Selecting one writes the BRAND field of that line and nothing
+   * else - the drug, dose, frequency and duration stay exactly as written, and the doctor's own
+   * product is always on screen. With the flag off this whole block is inert: no button renders and
+   * the pad behaves precisely as it did before RxChoice existed. */
+  function rxcOn() { try { return !!(window.SMD_RXCHOICE_FLAGS && SMD_RXCHOICE_FLAGS.on() && window.SMD_RXCHOICE_UI && SMD_RXCHOICE_UI.available()); } catch (e) { return false; } }
+  function openRxChoice() {
+    if (!rxcOn()) return;
+    var d = collectRx();
+    var rows = [], map = [];
+    var els = sheet ? sheet.querySelectorAll("#rxLines .rx-line") : [];
+    Array.prototype.forEach.call(els, function (ln) {
+      if (ln.style.display === "none" || ln.classList.contains("adv")) return;
+      var g = ((ln.querySelector('[data-f="drug"]') || {}).value || "").trim();
+      if (!g) return;
+      rows.push({
+        drug: g,
+        brand: ((ln.querySelector('[data-f="brand"]') || {}).value || "").trim(),
+        dose: ((ln.querySelector('[data-f="dose"]') || {}).value || "").trim(),
+        freq: ((ln.querySelector('[data-f="freq"]') || {}).value || "").trim(),
+        duration: ((ln.querySelector('[data-f="duration"]') || {}).value || "").trim()
+      });
+      map.push(ln);
+    });
+    SMD_RXCHOICE_UI.open({
+      lines: rows,
+      // The doctor tapped SELECT / KEEP. Write the brand field of THAT line, record the choice for
+      // the printout, and leave everything else alone.
+      onSelect: function (i, opt) {
+        var ln = map[i]; if (!ln) return;
+        var bi = ln.querySelector('[data-f="brand"]');
+        if (bi && opt && opt.brand) { bi.value = opt.brand; try { bi.dispatchEvent(new Event("input", { bubbles: true })); } catch (e) {} }
+        if (!sheet._rxChoice) sheet._rxChoice = {};
+        sheet._rxChoice[(rows[i] && rows[i].drug) || ("line" + i)] = opt;
+      }
+    });
+  }
+
   // ---- Rx templates / favourites: save the current drug set under a name (e.g. "URI", "UTI") and re-apply
   // it in one tap. Local to this device (localStorage). Doctors prescribe the same handful of sets daily. ----
   function rxTemplates() { try { return JSON.parse(localStorage.getItem("smd_rx_templates") || "[]"); } catch (e) { return []; } }
@@ -920,7 +987,8 @@
       '<div id="rxLines">' + lines.map(lineHTML).join("") + '</div>' +
       '<div class="rx-safety" id="rxSafety"></div>' +
       '<div style="display:flex;gap:8px;margin:6px 0 2px"><select id="rxTpl" style="flex:1;padding:9px 10px;border:1px solid #d7dee3;border-radius:9px;font-size:13px;background:#fff;color:#14202b">' + tplOptions() + '</select><button class="rx-btn" id="rxTplSave" style="width:auto;margin:0;white-space:nowrap;padding:9px 12px;font-size:13px">Save set</button></div>' +
-      '<div class="rx-row"><button class="rx-btn rx-add" id="rxAdd">+ Add drug</button><button class="rx-btn" id="rxMic" title="Dictate a drug, e.g. amox 500 TDS 5 days">'+rxIco("mic")+' Dictate</button><button class="rx-btn rx-print" id="rxExport">'+rxIco("print")+' Sign &amp; Export</button></div>' +
+      '<div class="rx-row"><button class="rx-btn rx-add" id="rxAdd">+ Add drug</button><button class="rx-btn" id="rxMic" title="Dictate a drug, e.g. amox 500 TDS 5 days">'+rxIco("mic")+' Dictate</button><button class="rx-btn rx-print" id="rxExport">'+rxIco("print")+' Sign &amp; Export</button>' +
+      (rxcOn() ? '<button class="rx-btn" id="rxcOpen" style="background:rgba(14,110,99,.12);color:var(--teal,#0e6e63)" title="Same prescription, smarter price">RxChoice™</button>' : "") + '</div>' +
       '<div class="rx-sign">Dr. ' + esc(docName() || "—") + '<br><small>Reg. No: ' + esc(regNo || "—") + ' · ' + esc(date) + '</small></div>';
     show(body);
     sheet.querySelector("#rxX").addEventListener("click", close);
@@ -936,6 +1004,7 @@
       refreshSafety();
     });
     sheet.querySelector("#rxExport").addEventListener("click", function () { try { signAndExport(topic, regNo); } catch (e) {} });
+    var _rxc = sheet.querySelector("#rxcOpen"); if (_rxc) _rxc.addEventListener("click", function () { try { openRxChoice(); } catch (e) {} });
     bindDel();
     // Drug autocomplete (generic + DB dose, local) AND the live brand picker (MEDAPI brands + prices).
     sheet.querySelectorAll("#rxLines .rx-line").forEach(function (ln) { acAttach(ln); rxBrandAC(ln); });

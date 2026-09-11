@@ -106,7 +106,17 @@ mock.module("../functions/_wardsynq/deps.js", {
       db: tenantDb, identifyFn: identify, staffSession: verifyStaffSession, orgForTenant, authorizeOrg,
       claimsFn: async (request) => {
         const who = String(request.headers.get("Cf-Access-Authenticated-User-Email") || "").toLowerCase();
-        return who === "doctor@example.test" ? { regNo: "TSMC-2019-44821", name: "Dr Test" } : {};
+        if (who === "doctor@example.test") return { regNo: "TSMC-2019-44821", name: "Dr Test" };
+        if (who === "admin@example.test") return { regNo: "TSMC-2012-10077", name: "Dr Admin" };
+        /* Stands in for the Firebase custom claim a registered practitioner carries in production
+         * (functions/_wardsynq/deps.js claimsOf -> verifyFirebaseClaims). Cf-Access identities carry
+         * no claims at all, so without this NOTHING signable can be written locally - see
+         * NO_CREDENTIAL in wardsynq-actors.js. Opt-in, and deliberately only for the local-parts a
+         * registered clinician would use, so an unregistered actor still cannot sign. */
+        if (process.env.WSQ_LOCAL_REGNO === "1" && /^(dr|res)\./.test(who)) {
+          return { regNo: "DEMO-" + createHash("sha256").update(who).digest("hex").slice(0, 10).toUpperCase(), name: who.split("@")[0] };
+        }
+        return {};
       },
     }),
     recordDeps: () => ({ repository: RECORD, pseudonym: async () => null }),
@@ -114,20 +124,29 @@ mock.module("../functions/_wardsynq/deps.js", {
 });
 
 const { onRequest } = await import("../functions/api/queue/[[path]].js");
+// The record service door too (/api/wardsynq/*): the order-safety workstation and the audit page's
+// change feed read the tenant through it. Same mocked deps, same sqlite repository.
+const { onRequest: onRecordRequest } = await import("../functions/api/wardsynq/[[path]].js");
 
 const ORG = "org-wsq";
 const sanitize = (x) => String(x == null ? "" : x).replace(/[^A-Za-z0-9_-]/g, "-").slice(0, 80);
 const idFor = (email) => "cfa:" + createHash("sha256").update(email.toLowerCase()).digest("hex").slice(0, 24);
-const DOCTOR = "doctor@example.test", NURSE = "nurse@example.test", LABTECH = "lab@example.test", PHARM = "pharmacy@example.test";
+const DOCTOR = "doctor@example.test", NURSE = "nurse@example.test", LABTECH = "lab@example.test", PHARM = "pharmacy@example.test", ADMIN = "admin@example.test";
 const ENV = {
   QUEUE_ENABLED: "1", QUEUE_TOKEN_SECRET: "test-secret-that-is-long-enough-for-hmac",
+  /* Staff PIN sign-in, on. The demo seeder mints one session PER MEMBER OF STAFF and makes every
+   * clinical call through it, so that each action is performed by the role that would really
+   * perform it. With this off the whole path answers staff_disabled and cannot be exercised
+   * locally at all. The deployed service sets this by configuration, and production currently does
+   * NOT, which is why the seeder's per-role sessions are refused there. */
+  QUEUE_STAFF_ENABLED: "1",
   FOLLOWCARE_PHI_KEY: Buffer.alloc(32, 7).toString("base64url"), CONNECT_DB: tenantDb,
 };
 
 // A fresh org + staff roster EVERY time this script starts, so a restart proves the CLINICAL
 // record (the sqlite file) survived even though the org/membership scaffolding was rebuilt.
 docs.set(`q_orgs/${ORG}`, { fields: { id: ORG, code: "SMD-WARD01", name: "WSQ Ward Hospital", kind: "clinic", mode: "wardsynq", connectTenantId: TENANT_ROW.id, ownerUid: "cfa:nobody", createdAt: 1, wardsynq: {} }, updateTime: "t1" });
-for (const [email, role] of [[DOCTOR, "doctor"], [NURSE, "nurse"], [LABTECH, "lab"], [PHARM, "pharmacy"]]) {
+for (const [email, role] of [[DOCTOR, "doctor"], [NURSE, "nurse"], [LABTECH, "lab"], [PHARM, "pharmacy"], [ADMIN, "admin"]]) {
   docs.set(`q_members/${sanitize(ORG)}__${sanitize(idFor(email))}`, { fields: { orgId: ORG, identity: idFor(email), role, active: true }, updateTime: "t1" });
 }
 console.error(`[persistence-server] org ${ORG}: doctor=${DOCTOR} nurse=${NURSE} lab=${LABTECH} pharmacy=${PHARM}`);
@@ -153,14 +172,14 @@ const server = createServer(async (req, res) => {
       res.end(readFileSync(join(ROOT, staticName)));
       return;
     }
-    if (url.pathname.startsWith("/api/queue")) {
+    if (url.pathname.startsWith("/api/queue") || url.pathname.startsWith("/api/wardsynq")) {
       const chunks = [];
       for await (const c of req) chunks.push(c);
       const body = chunks.length ? Buffer.concat(chunks) : undefined;
       const headers = new Headers();
       for (const [k, v] of Object.entries(req.headers)) if (typeof v === "string") headers.set(k, v);
       const request = new Request(`http://localhost:${PORT}${req.url}`, { method: req.method, headers, body: (req.method === "GET" || req.method === "HEAD") ? undefined : body });
-      const out = await onRequest({ request, env: ENV });
+      const out = await (url.pathname.startsWith("/api/wardsynq") ? onRecordRequest : onRequest)({ request, env: ENV });
       const outHeaders = {}; out.headers.forEach((v, k) => { outHeaders[k] = v; });
       res.writeHead(out.status, outHeaders);
       res.end(Buffer.from(await out.arrayBuffer()));

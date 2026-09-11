@@ -40,7 +40,13 @@ export function org(o = {}) {
    * way behaviour for every org that predates "wardsynq" is unchanged; only a document explicitly
    * stamped mode:"wardsynq" gets it, so no existing org silently changes meaning. */
   const MODE = o.mode === "connect" ? "connect" : o.mode === "wardsynq" ? "wardsynq" : "native";
-  return { id: s(o.id), code: s(o.code), name: s(o.name), kind: o.kind === "institution" ? "institution" : "clinic",
+  /* WHICH COUNTRY THIS HOSPITAL IS IN. Top-level beside kind and mode, NOT inside the wardsynq
+   * config, because it governs the OPD registration desk (what a valid phone number is) just as much
+   * as it governs the ward. Unrecognised or absent means India - every hospital that exists today
+   * was created without this field and is an Indian one, so not a single record changes meaning.
+   * What it actually implies lives in functions/_region.js and nowhere else. */
+  const REGION = String(o.region || "").toUpperCase() === "US" ? "US" : "IN";
+  return { id: s(o.id), code: s(o.code), name: s(o.name), kind: o.kind === "institution" ? "institution" : "clinic", region: REGION,
            mode: MODE, connectorId: orNull(o.connectorId), connectTenantId: orNull(o.connectTenantId), connectConnectionId: orNull(o.connectConnectionId), ownerUid: s(o.ownerUid), thresholds: thresholds(o.thresholds),
            wardsynq: wardsynqConfig(o.wardsynq), createdAt: Number(o.createdAt) || 0 };
 }
@@ -75,9 +81,24 @@ function wardsynqConfig(w) {
   // hospital knows that its order code "CT-ABDO" means a CT scanner - and functions/_wardsynq/dicom.js
   // refuses to guess a modality from an order's words, so an unlisted key here means the worklist
   // goes out without a modality rather than with an invented one.
+  /* timeZone joined 2026-09-11: an IANA name ("America/New_York") beside utcOffsetMinutes, for a
+   * hospital whose clock MOVES. One offset cannot describe such a site - it is an hour wrong for
+   * eight months of the year whichever value is chosen - so the medication round resolves the offset
+   * per dose instant from it. Purely additive: a hospital without one keeps running on its offset. */
   // deltaLimits and autoVerify joined 2026-09-07. Both are clinical content the HOSPITAL owns: what
   // counts as an implausible change in an analyte, and which analytes may be released unread.
-  for (const k of ["criticalLimits", "criticalEscalation", "marTimes", "marGraceMinutes", "beds", "highAlertDrugs", "orderSets", "noteTemplates", "riskTools", "utcOffsetMinutes", "deltaLimits", "autoVerify", "formulary", "requireReasonOffFormulary", "advisories", "registries", "resources", "flowsheetRows", "neverRelease", "rpoMinutes", "tariff", "reorderLevels", "mpiThresholds", "transmitEndpoints", "patientAccess", "fhir", "terminology", "hl7", "chartCompletion", "dicom", "maik"]) {
+  // readLogRetentionDays joined 2026-09-11 (clinical read-log audit trail, HAZ-FLUID-01's
+  // notification list): how many days wardsynq-readlog.js keeps a decisive read before it drops
+  // out of "who to tell". Defaults to 90 in wardsynq-readlog.js itself when unset here - HIPAA
+  // requires 6 years, but 90 is what every hospital already runs on, and changing that default
+  // silently would shorten or lengthen retention nobody asked to change. A US hospital must set
+  // this explicitly.
+  // externalMrn joined 2026-09-11: opt-in for a hospital with its own MR numbering (every US
+  // hospital, plenty of Indian ones too) so resolveMrn() (functions/_opd_patient.js) accepts a
+  // supplied MRN AS the MRN instead of demoting it to hospitalRef and minting an SMD-... over it.
+  // Absent/false is the existing minting behaviour, unchanged - opt-in because minting is the right
+  // default for a clinic with no numbering of its own.
+  for (const k of ["criticalLimits", "criticalEscalation", "marTimes", "marGraceMinutes", "beds", "highAlertDrugs", "orderSets", "noteTemplates", "riskTools", "utcOffsetMinutes", "timeZone", "deltaLimits", "autoVerify", "formulary", "requireReasonOffFormulary", "advisories", "registries", "resources", "flowsheetRows", "neverRelease", "rpoMinutes", "tariff", "reorderLevels", "mpiThresholds", "transmitEndpoints", "patientAccess", "fhir", "terminology", "hl7", "chartCompletion", "dicom", "maik", "readLogRetentionDays", "externalMrn"]) {
     if (w[k] !== undefined && w[k] !== null) pick[k] = w[k];
   }
   return Object.keys(pick).length ? pick : null;
@@ -173,6 +194,19 @@ export function membership(o = {}) {
   return {
     id: s(o.id), orgId: s(o.orgId), identity: s(o.identity), role,
     scope: { departments: arr(o.scope && o.scope.departments), opds: arr(o.scope && o.scope.opds), rooms: arr(o.scope && o.scope.rooms) },
+    /* THE HOSPITAL'S OWN ASSERTION that this member is a registered practitioner. Until this
+     * existed, a signing credential could come from ONE place: a verified Firebase custom claim. A
+     * doctor who signed in the way hospital staff actually sign in - email and password, or clinic
+     * code and PIN - carried no claims, so they could write the chart and could not SIGN anything:
+     * every prescription, every templated note, every discharge summary refused with NO_CREDENTIAL.
+     * That made the whole prescribing surface unreachable for any hospital not using StewardMD
+     * accounts.
+     *
+     * A hospital knows who its consultants are, and it is accountable for saying so - only an
+     * admin can set this. It is a WEAKER assertion than the platform's own verification, which is
+     * why the actor records WHICH of the two vouched (wardsynq-actors.js credentialSource) and
+     * every signed record carries that word. Empty means this member cannot sign, as before. */
+    regNo: s(o.regNo),
     active: o.active !== false, createdAt: Number(o.createdAt) || 0
   };
 }
@@ -203,5 +237,8 @@ export function authorizeOrgAccess(orgDoc, membershipDoc, actorId, orgId, cap, t
   if (!canAccessOrg(m, orgId)) return { ok: false, reason: "not_a_member" };
   if (cap && !can(m.role, cap)) return { ok: false, reason: "forbidden", role: m.role };
   if (target && !withinScope(m, target)) return { ok: false, reason: "out_of_scope", role: m.role };
-  return { ok: true, role: m.role };
+  // regNo travels with the authorisation so resolveClinicalActor can build a signing credential
+  // from the hospital's own staff registry without a second read. Empty for an owner, who is
+  // authorised by ownership rather than by a membership row and therefore asserts no registration.
+  return { ok: true, role: m.role, regNo: m.regNo || "" };
 }

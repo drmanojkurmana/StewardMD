@@ -34,6 +34,7 @@ import { MedicationAdministrationRecord, STATES, MedicationSafetyError } from ".
 import { SafetyEngine } from "../../wardsynq/wardsynq-safety.js";
 import { GovernanceError } from "../../wardsynq/wardsynq-actors.js";
 import { VersionConflictError } from "./repository.js";
+import { weightInKg } from "../../wardsynq/wardsynq-vitals.js";
 import { resolveClinicalActor } from "./actor.js";
 import { RecordService } from "./service.js";
 import { AuthError, PermissionError } from "../_connect/permission.js";
@@ -53,9 +54,14 @@ async function latestWeightKg(svc, patientId) {
   try {
     const obs = await svc.byPatient("Observation", patientId);
     const weights = (obs || [])
-      .filter((o) => o && o.code === BODY_WEIGHT_LOINC && typeof o.value === "number" && String(o.unit).toLowerCase() === "kg")
+      /* THROUGH THE ONE CONVERSION, never a bare number. This required unit === "kg" and was safe
+       * only because kg was the single unit the recorder could produce; now that a US ward can chart
+       * pounds, a filter would silently drop that patient's weight and a bare read would be 2.2
+       * times wrong. weightInKg is exact for kg and pounds and returns null for anything else, so an
+       * unreadable unit still means "the ward has not weighed them" rather than a wrong number. */
+      .filter((o) => o && o.code === BODY_WEIGHT_LOINC && weightInKg(o.value, o.unit) !== null)
       .sort((a, b) => String((b.meta && b.meta.effectiveAt) || "").localeCompare(String((a.meta && a.meta.effectiveAt) || "")));
-    return weights.length ? weights[0].value : undefined;
+    return weights.length ? weightInKg(weights[0].value, weights[0].unit) : undefined;
   } catch { return undefined; }
 }
 

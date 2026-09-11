@@ -116,6 +116,32 @@ test("REGRESSION: the app no longer registers patients through prompt() boxes", 
   assert.match(fn, /workplaceMode/, "the workplace decides who issues the MR");
 });
 
+test("the sheet asks for a ZIP in a US org, a PIN in an Indian one - was hardcoded to India", () => {
+  const us = API._sheetHtml({ mode: "native", region: "US" });
+  assert.match(us, /ZIP code/);
+  assert.ok(us.includes('maxlength="10"'), "must fit a ZIP+4 like 90210-1234");
+  assert.equal(us.includes('maxlength="6"'), false);
+
+  const india = API._sheetHtml({ mode: "native" });   // no region -> default IN, unchanged
+  assert.match(india, /PIN code/);
+  assert.ok(india.includes('maxlength="6"'));
+  assert.equal(india.includes("ZIP code"), false);
+});
+
+test("the mobile field is labelled for a US org too, not a fixed Indian placeholder", () => {
+  const us = API._sheetHtml({ mode: "native", region: "US" });
+  assert.match(us, /Mobile number \(US\)/);
+  const india = API._sheetHtml({ mode: "native" });
+  assert.equal(india.includes("Mobile number (US)"), false);
+  assert.match(india, /98765 43210/, "the Indian placeholder is unchanged");
+});
+
+test("REGRESSION: the local phone check no longer hardcodes India's 91/0-stripped 10-digit shape", () => {
+  // That regex refused a valid "+14155550132" (11 digits, nothing to strip) even though the server
+  // accepts it - the file's own comment says local checks are UX hints, not a second authority.
+  assert.equal(/replace\(\/\^\(91\|0\)\//.test(SRC), false, "the India-only local mobile regex must be gone");
+});
+
 test("the client does not re-implement the server's validation rules", () => {
   // Local checks are UX hints; the authority is the server, whose field-keyed errors are rendered inline.
   assert.equal(/verhoeff|Verhoeff/.test(SRC), false, "ABHA checksum stays server-side, in one place");

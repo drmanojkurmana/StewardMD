@@ -89,6 +89,9 @@
   // Resolves { ok, provider, text } from the server, or throws so the caller can fall back.
   function post(kind, payload, opts) {
     opts = opts || {};
+    // Answer-engine policy (2026-09-11): with the Local or KB-only engine selected, no cloud AI
+    // provider may be called. One choke point for every caller in this file.
+    try { if (window.SMD_MAIK_ENGINE && window.SMD_MAIK_ENGINE.cloudAllowed && !window.SMD_MAIK_ENGINE.cloudAllowed()) return Promise.reject(new Error("thorex-llm local-engine")); } catch (e) {}
     var body = Object.assign({ kind: kind }, payload);
     return idToken().then(function (tok) {
       return doFetch(opts.fetchImpl, body, tok);

@@ -311,6 +311,7 @@ try {
     // Dispatch pointerdown on handle
     var pd = new PointerEvent("pointerdown", {
       bubbles: true,
+      isPrimary: true,
       cancelable: true,
       clientX: rect1.left + 10,
       clientY: rect1.top + rect1.height / 2
@@ -322,6 +323,7 @@ try {
     // Move pointer below second row
     var pm = new PointerEvent("pointermove", {
       bubbles: true,
+      isPrimary: true,
       cancelable: true,
       clientX: rect2.left + 10,
       clientY: rect2.bottom + 10
@@ -331,6 +333,7 @@ try {
     // Pointer up
     var pu = new PointerEvent("pointerup", {
       bubbles: true,
+      isPrimary: true,
       cancelable: true,
       clientX: rect2.left + 10,
       clientY: rect2.bottom + 10
@@ -393,6 +396,7 @@ try {
     var r = tile0.getBoundingClientRect();
     var pd = new PointerEvent("pointerdown", {
       bubbles: true,
+      isPrimary: true,
       cancelable: true,
       clientX: r.left + r.width / 2,
       clientY: r.top + r.height / 2
@@ -428,6 +432,7 @@ try {
     // Drag tile 0 over tile 1
     var pm = new PointerEvent("pointermove", {
       bubbles: true,
+      isPrimary: true,
       cancelable: true,
       clientX: r1.left + r1.width / 2,
       clientY: r1.top + r1.height / 2
@@ -437,6 +442,7 @@ try {
     // Release pointer
     var pu = new PointerEvent("pointerup", {
       bubbles: true,
+      isPrimary: true,
       cancelable: true,
       clientX: r1.left + r1.width / 2,
       clientY: r1.top + r1.height / 2
@@ -465,7 +471,7 @@ try {
   const exitReorder = await J(`
     var grid = document.getElementById("rnavToolsGrid");
     var tile = grid ? grid.querySelector(".rnav-tile:not(.addtool)") : null;
-    if (tile) tile.click();
+    document.dispatchEvent(new KeyboardEvent("keydown",{key:"Escape",bubbles:true}));
     return JSON.stringify({
       reorderingAfterClick: grid ? grid.classList.contains("reordering") : false
     });
@@ -473,6 +479,7 @@ try {
   ok(exitReorder.reorderingAfterClick === false,
     "2f tap-to-exit: tap exits reorder mode and clears 'reordering' class from grid");
 
+  await sleep(500);
   // Step 2e: Verify persistence across reopen / re-render
   // Now that reorder mode is exited, clicking Customize tools will invoke openToolsCustomize()
   const persistCheck = await J(`

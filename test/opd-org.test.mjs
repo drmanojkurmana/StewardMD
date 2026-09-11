@@ -29,6 +29,18 @@ test("org: mode 'wardsynq' is a third, explicit value - never inferred, never co
   assert.equal(org({ id: "o", mode: "wardsynq", connectTenantId: "t1" }).connectTenantId, "t1");
 });
 
+// readLogRetentionDays: a hospital's own clinical read-log audit retention (HIPAA needs 6 years,
+// the built-in default is 90). wardsynqConfig() is a WHITELIST - an unlisted key is silently
+// dropped, which is exactly how six earlier pieces of hospital config went unread. This proves the
+// key survives the projection.
+test("org.wardsynq: readLogRetentionDays passes through the wardsynqConfig whitelist", () => {
+  const o = org({ id: "o", mode: "wardsynq", wardsynq: { readLogRetentionDays: 2190 } });
+  assert.equal(o.wardsynq.readLogRetentionDays, 2190);
+  // Unset stays unset - a hospital that never configured it must not have a value invented here;
+  // the 90-day default lives in wardsynq-readlog.js, not in this projection.
+  assert.equal(org({ id: "o", mode: "wardsynq", wardsynq: { criticalLimits: {} } }).wardsynq.readLogRetentionDays, undefined);
+});
+
 test("roomStatus honours editable thresholds", () => {
   const t = { moderate: 3, busy: 6 };
   assert.equal(roomStatus(0, false, t), "normal");

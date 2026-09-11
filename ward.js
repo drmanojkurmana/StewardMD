@@ -57,6 +57,11 @@
     // board already uses - nobody arrives on a typed MRN alone.
     ed: null, edErr: "", edArrivalOpen: false, edMrnLookup: null, edMrnLookupErr: "", edAdmitPending: false,
     resusBundles: null, resusStarting: false,
+    demo: false,             // a demonstration hospital, marked on the chart; set by the caller
+    /* Which country this hospital is in, from /ward/list. It decides the unit a temperature box is
+     * LABELLED with, and the unit that box then SENDS - so the screen and the record can never
+     * disagree about whether 98.6 is Fahrenheit. "IN" until the server answers. */
+    region: "IN",
     busy: false, err: "", note: "", refusal: null, loaded: false
   };
 
@@ -169,7 +174,10 @@
     var rows = (state.patients || []).map(function (p) {
       return '<button class="w-bed" data-w-act="open:' + esc(p.encounterId) + '">' +
         '<span class="w-bed-no">' + esc(p.bed || "-") + "</span>" +
-        '<span class="w-bed-b"><b>' + esc(p.patientId) + "</b><small>" + esc(p.ward || "") + " &middot; admitted " + when(p.admittedAt) + "</small></span>" +
+        /* Name first, then the MRN a wristband can be checked against. The record id is the last
+         * resort, not the default: it is the one identifier on the row nobody can verify against
+         * the patient in front of them. */
+        '<span class="w-bed-b"><b>' + esc(p.name || p.mrn || p.patientId) + "</b><small>" + esc(p.mrn && p.name ? p.mrn + " · " : "") + esc(p.ward || "") + " &middot; admitted " + when(p.admittedAt) + "</small></span>" +
         ms("chevron_right") + "</button>";
     }).join("");
     return '<div class="w-card"><div class="w-card-h">' + ms("bed") + "<h3>Ward" + (state.ward ? ": " + esc(state.ward) : "") + "</h3>" +
@@ -188,6 +196,11 @@
       '<button class="w-btn ghost" data-w-act="critsboard" title="Every open critical result, hospital-wide">' + ms("priority_high") + "Critical results</button>" +
       '<button class="w-btn ghost" data-w-act="bedmgmt" title="Reserve, block for maintenance, clean-before-reuse - real bed states, server-checked">' + ms("bed") + "Bed management</button>" +
       '<button class="w-btn ghost" data-w-act="flowcommand" title="ED, beds, admissions pending, discharge, transfers - hospital-wide, live">' + ms("hub") + "Patient flow</button>" +
+      // TASK 10: the Hospital Digital Twin - a fused view over patient flow, ward metrics, criticals,
+      // emergency/blackout state, pharmacy and HIM, none of it recomputed here. Not called "command
+      // center": that name already means the button above (Task 4.4), a FollowCare analytics feature
+      // and the Code Blue Watch screen.
+      '<button class="w-btn ghost" data-w-act="twin" title="Fused hospital state with freshness, provenance and a governed AI copilot">' + ms("hub") + "Digital twin</button>" +
       '<button class="w-btn ghost" data-w-act="scheduling" title="Appointments, resource bookings, blackout periods - conflict-checked, server-side">' + ms("event") + "Scheduling</button>" +
       '<button class="w-btn ghost" data-w-act="cashier" title="Balance, invoices, payments, refunds - no clinical detail">' + ms("point_of_sale") + "Cashier</button>" +
       // TASK 4.17 (Administration, scoped down per its own audit): the six hospital reports
@@ -726,19 +739,71 @@
       "</div></div>";
   }
 
+  /* ACTIVE MEDICATIONS. What is running right now, in one place - filtered server-side to
+   * status==="active" MedicationOrder (functions/_wardsynq/migrate-inpatient.js timelineFromChart),
+   * the same field "New medication order" writes and "Medication round" administers against. This
+   * card writes nothing; it is the missing answer to "what drugs is this patient currently on",
+   * which used to mean reading the round and the order form and holding the rest in your head. */
+  function activeMedsCard(state) {
+    var meds = state.activeMeds;
+    if (meds == null) return "";
+    var rows = meds.map(function (m) {
+      return "<li><b>" + esc(m.drug) + "</b>" +
+        (m.dose && m.dose.value != null ? " <span>" + esc(m.dose.value) + esc(m.dose.unit || "") + "</span>" : "") +
+        (m.route ? " <span>" + esc(m.route) + "</span>" : "") +
+        (m.frequency ? " <span>" + esc(m.frequency) + "</span>" : "") +
+        (m.since ? "<small>since " + when(m.since) + "</small>" : "") +
+        "</li>";
+    }).join("");
+    return '<div class="w-card"><div class="w-card-h">' + ms("pill") + "<h3>Active medications</h3></div>" +
+      (rows ? "<ul class=\"w-mini\">" + rows + "</ul>" : '<p class="w-empty">Nothing currently active.</p>') + "</div>";
+  }
+
+  /* THE TIMELINE. Every readable resource on this chart, in one chronological list - the same
+   * governed read every section above already does, merged server-side
+   * (functions/_wardsynq/migrate-inpatient.js patientTimeline) rather than left for a clinician to
+   * reconstruct by reading nine separate cards. Nothing here is a second copy of the record: the
+   * events are labels over the SAME rows the cards above render, ordered by when each actually
+   * happened. A resource with no timestamp is counted, never silently dropped - see w-hint below. */
+  function timelineCard(state) {
+    var t = state.timeline;
+    if (t == null) return "";
+    var rows = t.map(function (e) {
+      return '<li><span class="w-tl-t">' + when(e.at) + '</span><span class="w-tl-k">' + esc(e.resourceType) + "</span><span>" + esc(e.label) + "</span></li>";
+    }).join("");
+    return '<div class="w-card"><div class="w-card-h">' + ms("history") + "<h3>Timeline</h3>" +
+      '<button class="w-ic" data-w-act="open:' + esc((state.sel || {}).encounterId || "") + '" title="Refresh">' + ms("refresh") + "</button></div>" +
+      (rows ? "<ul class=\"w-timeline\">" + rows + "</ul>" : '<p class="w-empty">Nothing recorded yet.</p>') +
+      (state.timelineGap ? '<p class="w-hint warn">' + ms("warning") + esc(state.timelineGap) + " record" + (state.timelineGap === 1 ? "" : "s") + " on this chart carry no timestamp and are not shown here.</p>" : "") +
+      "</div>";
+  }
+
   var VITALS = [
     { k: "sbp", l: "Systolic", u: "mmHg" }, { k: "dbp", l: "Diastolic", u: "mmHg" },
     { k: "pulse", l: "Pulse", u: "/min" }, { k: "rr", l: "Resp rate", u: "/min" },
-    { k: "temp", l: "Temp", u: "°F" }, { k: "spo2", l: "SpO₂", u: "%" },
-    { k: "weight", l: "Weight", u: "kg" }
+    /* Temperature's unit is resolved when the card is DRAWN (tempUnitLabel), never here: it depends
+     * on which hospital is open, and this array is built once when the file loads. A box labelled
+     * one unit whose value is stored as the other is a false number in a clinical record - 98.6
+     * recorded as Celsius, or 37.1 as Fahrenheit - and it is invisible to whoever reads the chart
+     * next. The value is sent WITH its unit, so the two cannot drift again. */
+    { k: "temp", l: "Temp", u: null }, { k: "spo2", l: "SpO₂", u: "%" },
+    { k: "weight", l: "Weight", u: null }
   ];
   /* The two an early warning score cannot do without. They are not numbers, so they sit beside the
    * numeric grid rather than in it - and leaving them blank leaves the score INCOMPLETE, which is
    * the honest outcome rather than a reassuring total about a patient nobody finished examining. */
   var ACVPU = [["", "Consciousness: not assessed"], ["A", "A - alert"], ["C", "C - new confusion"], ["V", "V - responds to voice"], ["P", "P - responds to pain"], ["U", "U - unresponsive"]];
+  /* The unit this hospital's country writes a temperature in, and therefore the unit the server
+   * will store it in. st.region comes from GET /ward/list. */
+  function tempUnitLabel() { return st.region === "US" ? "°F" : "°C"; }
+  /* The unit this hospital weighs in. A box labelled kg receiving a pounds value is not a display
+   * problem: nothing downstream can tell, the adult plausibility band (25 to 300 kg) passes 154,
+   * and every weight-based infusion rate computed from it is 2.2 times out. */
+  function weightUnitLabel() { return st.region === "US" ? "lb" : "kg"; }
   function vitalsCard() {
     var f = VITALS.map(function (v) {
-      return '<label class="w-f"><span>' + esc(v.l) + ' <i>' + esc(v.u) + "</i></span>" +
+      var unit = v.u !== null ? v.u : v.k === "weight" ? weightUnitLabel() : tempUnitLabel();
+      return '<label class="w-f"><span>' + esc(v.l) + ' <i>' + esc(unit) + "</i></span>" +
         '<input id="wv_' + v.k + '" type="text" inputmode="decimal" autocomplete="off"></label>';
     }).join("");
     return '<div class="w-card"><div class="w-card-h">' + ms("monitor_heart") + "<h3>Vitals</h3></div>" +
@@ -793,6 +858,10 @@
       return '<li' + (d.overdue ? ' class="overdue"' : "") + '><div class="w-dose-h"><b>' + esc(d.drug) + "</b> <span>" + dose(d.dose) + (d.route ? " &middot; " + esc(d.route) : "") + (d.frequency ? " &middot; " + esc(d.frequency) : "") + "</span></div>" +
         '<div class="w-dose-s"><span class="w-due">' + ms("schedule") + when(d.dueAt) + "</span>" +
         (d.overdue ? '<span class="w-st overdue">overdue</span>' : "") +
+        /* The clock changed and this dose is NOT at the time the ward's policy names. The server
+         * decided that and said so; the screen only repeats it. A nurse handed a time the policy
+         * does not contain, with no reason on the row, would be right to distrust the whole round. */
+        (d.adjusted ? "<small>clock change: " + esc(d.adjusted.from) + " does not exist today, moved to " + esc(d.adjusted.to) + "</small>" : "") +
         '<span class="w-st ' + esc(String(d.status || "notstarted").toLowerCase()) + '">' + esc(d.status || "not started") + "</span>" +
         (d.administeredAt ? "<small>given " + when(d.administeredAt) + "</small>" : "") + "</div>" +
         '<div class="w-dose-a">' + (acts || '<small class="w-empty">No further action.</small>') + "</div></li>";
@@ -909,7 +978,11 @@
         (s.chiefComplaint ? " &middot; " + esc(s.chiefComplaint) : "") + " &middot; arrived " + when(s.arrivedAt) + "</small></div>" +
         '<button class="w-btn ghost" data-w-act="pcopy" title="The copy this patient can be given">' + ms("assignment_ind") + "Patient copy</button></div>"
       : '<div class="w-chart-h"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button>" +
-        "<div><b>" + esc(s.patientId || "") + "</b><small>" + esc(s.ward || "") + (s.bed ? " &middot; bed " + esc(s.bed) : "") + " &middot; admitted " + when(s.admittedAt) + "</small></div>" +
+        // A human on the ward reads a name and an MR number, not a record id: the ward list's own
+        // roster join (functions/_wardsynq/migrate-inpatient.js listWard) already carries both on
+        // this same object, and the header is now the second of two places that used to ignore them
+        // - found 2026-09-12, same defect, different screen.
+        "<div><b>" + esc(s.name || s.patientId || "") + "</b><small>" + (s.name && s.mrn ? esc(s.mrn) + " &middot; " : "") + esc(s.ward || "") + (s.bed ? " &middot; bed " + esc(s.bed) : "") + " &middot; admitted " + when(s.admittedAt) + "</small></div>" +
         // The summary is reachable from the patient, not from a menu somewhere else. A planned
         // discharge is prepared while the patient is still on the ward, so this is not gated on the
         // stay being closed - the summary screen states plainly when a stay is still open.
@@ -954,7 +1027,7 @@
     return header +
       criticalsCard(state) + (isEd ? triageCard(state) : "") + (isMaternity ? pregnancyCard(state) + meowsCard(state) : "") +
       (isPediatric ? ageBandCard(state) : "") +
-      problemsCard(state) + maikCard(state) + noteCard(state) + vitalsCard() + flowsheetCard(state) + fluidCard(state) +
+      problemsCard(state) + activeMedsCard(state) + timelineCard(state) + maikCard(state) + noteCard(state) + vitalsCard() + flowsheetCard(state) + fluidCard(state) +
       (isMaternity ? labourCard() + bloodLossCard(state) : "") +
       (isNicu ? neonatalCard() + linesCard(state) : "") +
       ((isEd || isMaternity) ? resusCard(state) : "") + (isIcu ? deviceCard(state) : "") +
@@ -2140,6 +2213,97 @@
       (bottlenecks ? '<ul class="w-mini">' + bottlenecks + "</ul>" : '<p class="w-empty">Nothing stands out right now.</p>') + "</div>";
   }
 
+  /* TASK 10: the Hospital Digital Twin. Every number rendered here already exists on a screen
+   * elsewhere in this file - patient-flow's beds/ED, ward-metrics' open items, critsboard's loops,
+   * the emergency/blackout screens. This view's own contribution is FUSION: one screen, each section
+   * labelled with its own freshness, "not built" named rather than shown as zero, and a governed
+   * MaiK copilot that can only speak about what this same screen already shows. */
+  var TWIN_FRESHNESS_WORDS = { live: "Live", delayed: "Delayed", stale: "Stale", unavailable: "Unavailable" };
+  function twinSectionCard(icon, title, section, body) {
+    if (!section) return "";
+    var badge = section.status === "ok"
+      ? '<span class="w-st ' + (section.freshness === "live" ? "" : "due") + '">' + esc(TWIN_FRESHNESS_WORDS[section.freshness] || section.freshness) + "</span>"
+      : '<span class="w-st overdue">' + ms("block") + "Unavailable</span>";
+    return '<div class="w-card"><div class="w-card-h">' + ms(icon) + "<h3>" + esc(title) + "</h3>" + badge + "</div>" +
+      (section.status === "ok" ? body(section.data)
+        : '<p class="w-hint warn">' + ms("warning") + esc(section.error || "unavailable") + (section.detail ? ": " + esc(section.detail) : "") + '<br><small>This section is UNAVAILABLE, not zero - the rest of this screen is unaffected.</small></p>') +
+      "</div>";
+  }
+  function twinView(state) {
+    var tw = state.twin || {};
+    var t = tw.snapshot;
+    if (!t) {
+      return '<div class="w-chart-h"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button>" +
+        "<div><b>Digital twin</b><small>hospital-wide</small></div>" +
+        '<button class="w-ic" data-w-act="twinload" title="Refresh">' + ms("refresh") + "</button></div>" +
+        '<p class="w-empty">' + (tw.loaded ? (tw.err ? esc(tw.err) : "Nothing to show yet.") : "Loading&hellip;") + "</p>";
+    }
+    var s = t.sections;
+    var notBuiltRows = Object.keys(t.notBuilt || {}).map(function (k) { return "<li><b>" + esc(k) + "</b><span>" + esc(t.notBuilt[k]) + "</span></li>"; }).join("");
+
+    var copilot = tw.copilot;
+    var copilotBody = !copilot ? "" :
+      copilot.busy ? '<p class="w-empty">Asking MaiK&hellip;</p>' :
+      copilot.err ? '<p class="w-hint warn">' + ms("warning") + esc(copilot.err) + "</p>" :
+      !copilot.answered ? '<p class="w-hint warn">' + ms("block") + "MaiK's answer was withheld or unavailable." + (copilot.note ? " " + esc(copilot.note) : "") + "</p>" :
+      '<div class="w-maik-out">' + esc(copilot.answer).replace(/\n/g, "<br>") + "</div>" +
+        '<ul class="w-maik-prov"><li>' + ms("smart_toy") + "<span>" + esc((copilot.interaction && copilot.interaction.model && copilot.interaction.model.model) || "") +
+        "</span></li><li>" + ms("schedule") + "<span>Answered from the snapshot generated " + when(t.generatedAt) + "</span></li></ul>" +
+        (copilot.interaction && copilot.interaction.review && copilot.interaction.review.state === "pending" ?
+          '<div class="w-actions"><button class="w-btn ghost tiny" data-w-act="twincopilotreview:accepted">' + ms("check") + "Helpful</button>" +
+          '<button class="w-btn ghost tiny" data-w-act="twincopilotreview:rejected">' + ms("close") + "Not helpful</button></div>" :
+          copilot.interaction && copilot.interaction.review ? '<p class="w-hint">' + ms("task_alt") + esc(copilot.interaction.review.state) + "</p>" : "");
+
+    return '<div class="w-chart-h"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button>" +
+      "<div><b>Digital twin</b><small>" + esc(t.sectionsOk) + "/" + esc(t.sectionsTotal) + " sections &middot; " + when(t.generatedAt) + "</small></div>" +
+      '<button class="w-ic" data-w-act="twinload" title="Refresh">' + ms("refresh") + "</button></div>" +
+
+      twinSectionCard("hub", "Flow &amp; capacity", s.flow, function (d) {
+        var f = d.flow;
+        return "<p>" + esc(f.beds.occupied) + " occupied &middot; " + esc(f.ed.arrivals) + " in ED &middot; " + esc(f.dischargeCandidates) + " ready to leave</p>";
+      }) +
+      twinSectionCard("monitor_heart", "Clinical operations", s.clinicalOps, function (d) {
+        var m = d.metrics;
+        return "<p>" + esc(m.open.criticalResults) + " open critical result(s) &middot; " + esc(m.open.dosesInFlight) + " dose(s) in flight &middot; " + esc(m.openItems) + " open item(s)</p>";
+      }) +
+      twinSectionCard("priority_high", "Critical results", s.criticals, function (d) {
+        return "<p>" + esc(d.open) + " open loop(s)</p>";
+      }) +
+      twinSectionCard("emergency", "Emergency", s.emergency, function (d) {
+        return d.any ? "<p>" + esc(d.active.length) + " active declaration(s): " + esc(d.active.map(function (a) { return a.kind; }).join(", ")) + "</p>" : '<p class="w-empty">None active.</p>';
+      }) +
+      twinSectionCard("event_busy", "Blackouts", s.blackouts, function (d) {
+        return d.blackouts.length ? "<p>" + esc(d.blackouts.length) + " active blackout(s)</p>" : '<p class="w-empty">None active.</p>';
+      }) +
+      twinSectionCard("medication", "Pharmacy", s.pharmacy, function (d) {
+        return "<p>" + esc(d.dispenseCount) + " dispensed &middot; " + esc(d.pendingVerification) + " pending verification &middot; " + esc((d.stock || []).filter(function (r) { return r.belowReorder; }).length) + " below reorder</p>";
+      }) +
+      twinSectionCard("folder_shared", "HIM", s.him, function (d) {
+        return "<p>" + esc(d.incompleteCharts) + " incomplete chart(s) of " + esc(d.chartsChecked) + " checked</p>";
+      }) +
+      twinSectionCard("science", "Diagnostics (LIS)", s.lis, function (d) {
+        return "<p>" + esc(d.outstanding) + " outstanding of " + esc(d.checked) + " checked</p>";
+      }) +
+
+      (notBuiltRows ? '<div class="w-card"><div class="w-card-h">' + ms("info") + "<h3>Not built</h3></div>" +
+        '<p class="w-hint">Named honestly rather than shown as a silent zero.</p><ul class="w-mini">' + notBuiltRows + "</ul></div>" : "") +
+
+      '<div class="w-card"><div class="w-card-h">' + ms("neurology") + "<h3>MaiK</h3></div>" +
+      '<p class="w-hint">Answers only from the sections above. It cannot invent a bed, a patient or a staffing figure, and has no authority over any safety verdict or order.</p>' +
+      '<div class="w-maik-acts"><button class="w-btn ghost" data-w-act="twinask">' + ms("summarize") + "Ask about this hospital</button></div>" +
+      copilotBody + "</div>" +
+
+      '<div class="w-card"><div class="w-card-h">' + ms("science") + "<h3>Simulate</h3></div>" +
+      '<p class="w-hint">SIMULATION - NOT LIVE STATE. Writes nothing.</p>' +
+      '<div class="w-actions">' +
+      '<button class="w-btn ghost tiny" data-w-act="twinsim:extra-admissions">' + ms("add") + "+10 admissions</button>" +
+      '<button class="w-btn ghost tiny" data-w-act="twinsim:icu-capacity-reduction">' + ms("bed") + "-5 ICU beds</button>" +
+      "</div>" +
+      (tw.sim ? (tw.sim.ok === false ? '<p class="w-hint warn">' + esc(tw.sim.detail || tw.sim.error) + "</p>" :
+        '<p class="w-hint"><b>' + esc(tw.sim.label) + "</b><br>" + esc(JSON.stringify(tw.sim.projected)) + "</p>") : "") +
+      "</div>";
+  }
+
   /* TASK 4.5: scheduling. scheduling.js/resource-booking.js/blackout.js already enforce every hard
    * safeguard here - a slot cannot be double-held, a blackout cannot be overridden, a resource the
    * hospital does not have cannot be booked. This screen adds no logic: it books, cancels,
@@ -2620,6 +2784,10 @@
   function _render(state) {
     return '<div class="w-shell"><header class="w-top"><button class="w-ic" data-w-act="close">' + ms("close") + "</button>" +
       '<span class="w-title">WardSynQ &middot; Inpatient</span>' +
+      /* A demonstration hospital says so on the chart itself. Demo and real records are separate
+       * tenants, but that separation is invisible to somebody reading a screen over a shoulder, and
+       * a fabricated patient that reads as a real one is the whole hazard. */
+      (state.demo ? '<span class="w-demo" title="Fabricated patients, for demonstration. Nothing here is a real person or a real clinical record.">DEMO</span>' : "") +
       (state.busy ? '<span class="w-busy">' + ms("progress_activity") + "</span>" : "<span></span>") + "</header>" +
       '<div class="w-canvas">' + banner(state) +
       (state.view === "chart" ? chartView(state)
@@ -2646,6 +2814,7 @@
         : state.view === "integration" ? integrationView(state)
         : state.view === "bedmgmt" ? bedBoardMgmtView(state)
         : state.view === "flowcommand" ? flowCommandView(state)
+        : state.view === "twin" ? twinView(state)
         : state.view === "scheduling" ? schedulingView(state)
         : state.view === "cashier" ? cashierView(state)
         : listView(state)) + "</div></div>";
@@ -2658,20 +2827,25 @@
   function loadWard() {
     st.busy = true; paint();
     return apiGet("/ward/list?orgId=" + encodeURIComponent(st.orgId) + (st.ward ? "&ward=" + encodeURIComponent(st.ward) : ""))
-      .then(function (r) { if (settle(r)) st.patients = r.patients || []; st.loaded = true; paint(); return Promise.all([loadCosigns(), loadQuality(), loadOverrides(), loadExceptions(), loadEmergencyStatus()]); })
+      .then(function (r) { if (settle(r)) { st.patients = r.patients || []; if (r.region) st.region = r.region; } st.loaded = true; paint(); return Promise.all([loadCosigns(), loadQuality(), loadOverrides(), loadExceptions(), loadEmergencyStatus()]); })
       .catch(function () { st.busy = false; st.err = "Could not reach the ward."; st.loaded = true; paint(); });
   }
   function loadChart() {
     var s = st.sel; if (!s) return Promise.resolve();
     st.busy = true; paint();
     var q = "orgId=" + encodeURIComponent(st.orgId) + "&patientId=" + encodeURIComponent(s.patientId);
-    return Promise.all([apiGet("/ward/problems?" + q), apiGet("/ward/criticals?" + q)])
+    return Promise.all([apiGet("/ward/problems?" + q), apiGet("/ward/criticals?" + q), apiGet("/ward/timeline?" + q)])
       .then(function (rs) {
         if (settle(rs[0])) st.problems = rs[0].problems || [];
         // A failure to READ the critical list must not be silent: an empty list and an unreachable
         // one look identical on screen, and that is the difference between calm and dangerous.
         if (rs[1] && rs[1].ok) st.criticals = rs[1].loops || [];
         else st.err = st.err || "Could not load critical results. Do not read this chart as clear.";
+        // The timeline is a READ of records already shown elsewhere on this chart, merged into one
+        // order - a failure here is never worse than not having merged them, so it degrades to
+        // "not shown" rather than joining the critical-results error above.
+        if (rs[2] && rs[2].ok) { st.timeline = rs[2].events || []; st.activeMeds = rs[2].activeMedications || []; st.timelineGap = rs[2].withoutTimestamp || 0; }
+        else { st.timeline = null; st.activeMeds = null; }
         paint();
       })
       .catch(function () { st.busy = false; st.err = "Could not load the chart."; paint(); });
@@ -2756,6 +2930,10 @@
     if (overrideEl) st.emergencyOverride = !!overrideEl.checked;
     if (!(G.SMD_PATIENTREG && G.SMD_PATIENTREG.open)) { st.err = "Registration is unavailable on this build."; paint(); return; }
     G.SMD_PATIENTREG.open({
+      /* The hospital's country, so the sheet asks for the right phone and postcode shapes. st.region
+       * comes from GET /ward/list; without it a US hospital admitting from the bed board would be
+       * handed an Indian mobile field and could not complete the registration. */
+      region: st.region,
       submit: function (payload) { return apiPost("/patient/register", Object.assign({ orgId: st.orgId }, payload)); },
       onAdded: function (r) { if (r && r.mrn) doAdmit(r.mrn); },
     });
@@ -3626,6 +3804,46 @@
       .then(function (r) { st.busy = false; if (r && r.ok) loadScheduling(); else { st.scheduling.err = (r && r.detail) || "Could not unblock that period."; paint(); } })
       .catch(function () { st.busy = false; st.scheduling.err = "Could not reach the server."; paint(); });
   }
+  function twinOpen() {
+    st.view = "twin"; st.twin = {}; paint(); loadTwin();
+  }
+  function loadTwin() {
+    if (!st.twin) st.twin = {};
+    st.twin.copilot = null; st.twin.sim = null;
+    return apiGet("/ward/twin?orgId=" + encodeURIComponent(st.orgId))
+      .then(function (r) {
+        st.twin.snapshot = (r && r.ok && r.twin) || null;
+        st.twin.err = (r && !r.ok) ? (r.detail || r.error) : "";
+        st.twin.loaded = true; paint();
+      })
+      .catch(function () { st.twin.loaded = true; st.twin.err = "Could not reach the hospital snapshot."; paint(); });
+  }
+  function twinAsk() {
+    var q = window.prompt("Ask MaiK about this hospital's current state:");
+    if (!q) return;
+    st.twin.copilot = { busy: true }; paint();
+    apiPost("/ward/twin-copilot", { orgId: st.orgId, question: q })
+      .then(function (r) {
+        if (!r || r.ok !== true) { st.twin.copilot = { busy: false, err: (r && (r.detail || r.error)) || "MaiK could not be reached." }; paint(); return; }
+        st.twin.copilot = { busy: false, answered: r.answered, answer: r.answer, note: r.note, interaction: r.interaction };
+        paint();
+      })
+      .catch(function () { st.twin.copilot = { busy: false, err: "MaiK could not be reached." }; paint(); });
+  }
+  function twinCopilotReview(decision) {
+    var c = st.twin && st.twin.copilot, i = c && c.interaction; if (!i) return;
+    var reason = decision === "rejected" ? window.prompt("Why was this not helpful?") : "";
+    if (decision === "rejected" && !String(reason || "").trim()) { st.err = "A rejection needs a reason."; paint(); return; }
+    apiPost("/ward/twin-review", { orgId: st.orgId, interactionId: i.id, decision: decision, reason: reason || undefined })
+      .then(function (r) { if (r && r.ok && r.interaction) c.interaction = r.interaction; paint(); })
+      .catch(function () { st.err = "Could not record that."; paint(); });
+  }
+  function twinSimulate(scenario) {
+    st.twin.sim = { busy: true }; paint();
+    apiPost("/ward/twin-simulate", { orgId: st.orgId, scenario: scenario, params: scenario === "extra-admissions" ? { extraAdmissions: 10 } : { removedBeds: 5 } })
+      .then(function (r) { st.twin.sim = r; paint(); })
+      .catch(function () { st.twin.sim = { ok: false, error: "Could not run the simulation." }; paint(); });
+  }
   function flowCommandOpen() {
     st.view = "flowcommand"; st.flow = {}; paint(); loadFlowCommand();
   }
@@ -3784,7 +4002,10 @@
     var picked = st.transfusion && st.transfusion.pickedEpisodeId; if (!picked) return;
     var pulse = val("wTxPulse"), temp = val("wTxTemp"), sbp = val("wTxSbp");
     var vitals = {};
-    if (pulse) vitals.pulse = Number(pulse); if (temp) vitals.temp = Number(temp); if (sbp) vitals.sbp = Number(sbp);
+    if (pulse) vitals.pulse = Number(pulse);
+    // Always stated, never inferred: the unit the box was labelled with is the unit that is stored.
+    if (temp) { vitals.temp = Number(temp); vitals.tempUnit = st.region === "US" ? "F" : "C"; }
+    if (sbp) vitals.sbp = Number(sbp);
     st.busy = true; paint();
     apiPost("/ward/transfusion-observe", { orgId: st.orgId, episodeId: picked, vitals: vitals })
       .then(function (r) { if (settle(r, "Recorded.")) loadTransfusion(); else paint(); })
@@ -4477,6 +4698,11 @@
     var s = st.sel; if (!s) return;
     var v = {}, any = false;
     VITALS.forEach(function (f) { var x = val("wv_" + f.k); if (x) { v[f.k] = x; any = true; } });
+    /* THE UNITS THE BOXES WERE LABELLED WITH travel with the values. Without this the server had to
+     * infer them, and an inference that disagrees with the label on screen is a false number in a
+     * clinical record: 98.6 stored as Celsius, or a pounds weight read as kilograms. */
+    if (v.temp) v.tempUnit = st.region === "US" ? "F" : "C";
+    if (v.weight) v.weightUnit = st.region === "US" ? "lb" : "kg";
     // Not recorded and "no" are different: an empty select writes nothing, "0" records breathing air.
     var o2 = val("wv_o2"); if (o2 !== "") { v.o2 = o2; any = true; }
     var ac = val("wv_acvpu"); if (ac) { v.acvpu = ac; any = true; }
@@ -4526,7 +4752,12 @@
 
   function onClick(e) {
     var b = e.target.closest && e.target.closest("[data-w-act]"); if (!b) return;
-    var a = b.getAttribute("data-w-act"), i = a.indexOf(":"), cmd = i < 0 ? a : a.slice(0, i), arg = i < 0 ? "" : a.slice(i + 1);
+    dispatch(b.getAttribute("data-w-act"));
+  }
+  /* One dispatcher for a click on a data-w-act button AND for the wardsynq.com shell, which opens
+   * a hospital-level view directly (open({act:"twin"})) with the SAME verb a click would send. */
+  function dispatch(a) {
+    var i = a.indexOf(":"), cmd = i < 0 ? a : a.slice(0, i), arg = i < 0 ? "" : a.slice(i + 1);
     if (cmd === "close") { close(); return; }
     if (cmd === "dismiss") { st.err = ""; st.note = ""; st.refusal = null; paint(); return; }
     if (cmd === "reload") { loadWard(); return; }
@@ -4551,6 +4782,7 @@
       if (st.view === "integration") { st.integration = null; st.view = "list"; paint(); return; }
       if (st.view === "bedmgmt") { st.bedMgmt = {}; st.view = "list"; paint(); return; }
       if (st.view === "flowcommand") { st.flow = {}; st.view = "list"; paint(); return; }
+      if (st.view === "twin") { st.twin = {}; st.view = "list"; paint(); return; }
       if (st.view === "scheduling") { st.scheduling = {}; st.view = "list"; paint(); return; }
       if (st.view === "cashier") { st.cashier = {}; st.view = "list"; paint(); return; }
       if (st.view === "reports") { st.reports = {}; st.view = "list"; paint(); return; }
@@ -4585,7 +4817,7 @@
       for (var j = 0; j < st.patients.length; j++) { if (st.patients[j].encounterId === arg) { p = st.patients[j]; break; } }
       if (!p) return;
       st.sel = p; st.view = "chart"; st.due = []; st.prn = []; st.unscheduled = []; st.problems = []; st.criticals = []; st.balance = null; st.outbox = [];
-      st.flowsheet = null; st.news2 = null; st.investigations = null; st.results = null;
+      st.flowsheet = null; st.news2 = null; st.investigations = null; st.results = null; st.timeline = null; st.activeMeds = null;
       st.err = ""; st.note = ""; st.refusal = null; st.devices = null; st.maternity = null; st.ageBand = null; st.lines = null; st.rateResult = null; st.oncology = null; st.cardiology = null; st.radiology = null; st.pharmacy = null; st.transfusion = null;
       /* TASK 8.5: MaiK is cleared with the rest of the chart. An answer about the previous patient
        * left on screen beside a new patient's observations is the wrong-patient error with extra
@@ -4633,6 +4865,11 @@
     if (cmd === "bedmgmt") { bedMgmtOpen(); return; }
     if (cmd === "flowcommand") { flowCommandOpen(); return; }
     if (cmd === "flowload") { loadFlowCommand(); return; }
+    if (cmd === "twin") { twinOpen(); return; }
+    if (cmd === "twinload") { loadTwin(); return; }
+    if (cmd === "twinask") { twinAsk(); return; }
+    if (cmd === "twincopilotreview") { twinCopilotReview(arg); return; }
+    if (cmd === "twinsim") { twinSimulate(arg); return; }
     if (cmd === "scheduling") { schedulingOpen(); return; }
     if (cmd === "schedload") { loadScheduling(); return; }
     if (cmd === "schedload2") { st.scheduling.clinicianId = val("wSchedClinician"); loadScheduling(); return; }
@@ -4810,13 +5047,18 @@
   function open(opts) {
     opts = opts || {};
     st.orgId = opts.orgId || st.orgId || rememberedOrgId();
+    if (opts.demo !== undefined) st.demo = !!opts.demo;
     if (!st.orgId) { try { G.toast && G.toast("The ward needs a hospital."); } catch (e) {} return; }
     st.view = "list"; st.sel = null; st.loaded = false; st.err = ""; st.note = ""; st.refusal = null;
     var el = root(); el.classList.add("on");
     el.removeEventListener("click", onClick); el.addEventListener("click", onClick);
     paint(); loadWard();
+    // A hospital-level view requested by the shell (bed board, ED, twin...). Only the verbs the ward
+    // list's own toolbar offers: a chart-scoped verb needs a selected patient and is not honoured.
+    if (opts.act && HOSPITAL_ACTS.indexOf(opts.act) >= 0) dispatch(opts.act);
   }
-  function close() { var el = root(); el.classList.remove("on"); el.innerHTML = ""; }
+  var HOSPITAL_ACTS = ["board", "edboard", "surgeryboard", "inventoryboard", "critsboard", "bedmgmt", "flowcommand", "twin", "scheduling", "cashier", "reports", "emergencyadmin", "integration", "downtime"];
+  function close() { var el = root(); el.classList.remove("on"); el.innerHTML = ""; if (G.WARD && typeof G.WARD.onClose === "function") { try { G.WARD.onClose(); } catch (e) {} } }
 
   G.WARD = { open: open, close: close, _render: _render, _st: st, _nextFor: nextFor, _problem: problem };
 })();

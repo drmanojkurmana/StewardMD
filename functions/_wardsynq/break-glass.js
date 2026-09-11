@@ -42,6 +42,7 @@
 
 import { GovernanceError, makeActor, TIER, KIND } from "../../wardsynq/wardsynq-actors.js";
 import { VersionConflictError } from "./repository.js";
+import { Dispatcher, NotifyError } from "../../wardsynq/wardsynq-notify.js";
 import { resolveClinicalActor } from "./actor.js";
 import { RecordService } from "./service.js";
 import { AuthError, PermissionError } from "../_connect/permission.js";
@@ -77,6 +78,11 @@ function BreakGlassGrant(input) {
      * but the count, so "declared and never used" and "declared and read forty times" are visibly
      * different afterwards. */
     reads: Number.isFinite(i.reads) ? i.reads : 0,
+    /* Whether, and how, this declaration was told to anybody AT THE TIME, not merely logged for
+     * later. {attempted, delivered, channels[], at} on success; {attempted, delivered:false,
+     * reason, detail, at} when there was nothing to tell it to or every channel failed. Never
+     * gates the grant itself - see declareBreakGlass's own note on why. */
+    notification: i.notification || null,
     source: { system: "wardsynq-native", sourceId: `break-glass:${i.id}` },
   };
 }
@@ -123,6 +129,10 @@ function summary(g, nowMs) {
     reason: g.reason, grantedAt: g.grantedAt, expiresAt: g.expiresAt,
     revokedAt: g.revokedAt || null, revokedBy: g.revokedBy || null,
     reads: g.reads || 0, active: isActive(g, nowMs), version: g.version,
+    // On the REVIEW surface too, not only the declaration's own response: whoever reads the log
+    // afterwards can tell "declared and paged" from "declared and told nobody" without cross-
+    // referencing anything else.
+    notification: g.notification || null,
   };
 }
 
@@ -160,13 +170,44 @@ async function declareBreakGlass(request, env, ctx) {
   const id = grantIdFor(resolved.actor.id, patientId, grantedAt);
   if (!id) return { ...base, ok: false, status: 422, error: "bad_identifiers", written: 0 };
 
+  /* REAL-TIME NOTIFICATION, added 2026-09-10. THE ACCOUNTABILITY SURFACE this file's own header
+   * describes was entirely pull-based: the log exists and somebody must choose to read it. That is
+   * real accountability, but it is weaker than it looks for the one thing break-glass exists to
+   * bound - an emergency-access grant being used as cover for ordinary browsing, or genuinely
+   * abused - because nobody is told AT THE MOMENT it happens. A hospital's compliance/security
+   * function finding out a week later, on a routine review, is not the same control as being told
+   * now, while the grant is still live and the reader can decide whether to act.
+   *
+   * THE SAME PRIMITIVE critical-results.js ALREADY USES, wired the same way: attempted BEFORE the
+   * grant is written, and the outcome is RECORDED ON THE GRANT ITSELF rather than in a second
+   * system - so "declared and told nobody" and "declared and the on-call officer was paged" are
+   * visibly different on the one record that already exists for the accountability surface. A site
+   * that has wired no channel gets NO_CHANNEL recorded, never a silent "sent" - the same honesty
+   * critical-results.js already insists on, and the declaration is NEVER blocked by a failed or
+   * absent notification: the clinician is mid-emergency, and refusing the read because a pager did
+   * not answer would be the worse failure. */
+  let notification;
+  try {
+    const dispatcher = new Dispatcher(ctx.notifyDeps || {});
+    // Retried up to twice: an emergency alert failing on a momentary network blip is exactly the
+    // case retry exists for - see wardsynq-notify.js's own note on why this changes nothing for a
+    // caller that never asks for it, and never fakes delivery for one that fails every attempt.
+    const sent = await dispatcher.send(
+      { grantId: id, patientId, actorId: resolved.actor.id, role: resolved.role || null, reason, expiresAt: new Date(Date.parse(grantedAt) + minutes * 60000).toISOString() },
+      undefined, { retries: 2 });
+    notification = { attempted: true, delivered: sent.delivered, channels: sent.attempts.map((a) => ({ channel: a.channel, delivered: a.delivered, detail: a.detail })), at: grantedAt };
+  } catch (e) {
+    notification = { attempted: true, delivered: false, reason: e instanceof NotifyError ? e.code : "NOTIFY_ERROR", detail: str(e && e.message), at: grantedAt };
+  }
+
   const grant = BreakGlassGrant({
     id, patientId, actorId: resolved.actor.id, role: resolved.role || null,
     reason, grantedAt, expiresAt: new Date(Date.parse(grantedAt) + minutes * 60000).toISOString(),
+    notification,
   });
   try {
     const out = await svc.put(grant, { idempotencyKey: ctx.idempotencyKey || null });
-    return { ...base, ok: true, written: 1, ...summary({ ...grant, version: out.record.version }, Date.parse(grantedAt)), minutes };
+    return { ...base, ok: true, written: 1, ...summary({ ...grant, version: out.record.version }, Date.parse(grantedAt)), minutes, notification };
   } catch (e) {
     if (e instanceof GovernanceError) return { ...base, ok: false, status: 403, error: "governance", reasons: e.reasons.map((r) => r.code), written: 0 };
     if (e instanceof VersionConflictError) return { ...base, ok: false, status: 409, error: "version_conflict", written: 0 };

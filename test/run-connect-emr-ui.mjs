@@ -27,6 +27,7 @@ import { spawn } from "node:child_process";
 import { setTimeout as sleep } from "node:timers/promises";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
+import { mkdir, writeFile } from "node:fs/promises";
 const HERE = dirname(fileURLToPath(import.meta.url));
 const PORT = 8793, DBG = 9384, userDir = (process.env.CLAUDE_JOB_DIR || "/tmp") + "/connect-emr-chrome";
 const BASE = `http://localhost:${PORT}/`;
@@ -790,7 +791,39 @@ try {
   await ev(`document.getElementById("membersFlagOff").style.display="none"; return 1;`);
   await ev(`window.ConnectEMR.setSection("onboard"); return 1;`);
 
+  // Exercise the actual responsive screens with synthetic connection metadata.
+  await ev(`document.getElementById('gate').style.display='none';document.getElementById('work').style.display='';document.getElementById('opsArea').style.display='';document.getElementById('noTenant').style.display='none';ConnectEMR.setTenant('ui-hospital');ConnectEMR.setSection('onboard');document.getElementById('aType').value='fhir';ConnectEMR.applyType();return 1;`);
+  for(const width of [320,390,768,1280]){
+    await call('Emulation.setDeviceMetricsOverride',{width,height:900,deviceScaleFactor:1,mobile:width<700});
+    ok(await ev(`return document.documentElement.scrollWidth<=window.innerWidth;`)===true,`setup fits ${width}px without page overflow`);
+  }
+  await call('Emulation.setDeviceMetricsOverride',{width:390,height:900,deviceScaleFactor:1,mobile:true});
+  if(process.env.CONNECT_SHOTS){await mkdir(process.env.CONNECT_SHOTS,{recursive:true});const r=await call('Page.captureScreenshot',{format:'png'});await writeFile(join(process.env.CONNECT_SHOTS,'setup.png'),Buffer.from(r.result.data,'base64'));}
+  await ev(`ConnectEMR.setSection('connections');ConnectEMR.renderDash([{connectionId:'ui-1',name:'Hospital FHIR',type:'fhir',fhirBaseUrl:'https://emr.example.org/fhir',lastTest:{ok:true}}],[],null,[]);return 1;`);
+  ok(await ev(`return document.querySelectorAll('#dash td[data-label]').length===5&&document.documentElement.scrollWidth<=window.innerWidth;`)===true,'mobile connections have labeled fields without page overflow');
+  ok(await ev(`return document.querySelector('[data-nav="connections"]').getAttribute('aria-pressed')==='true';`)===true,'active section is exposed to assistive technology');
+  if(process.env.CONNECT_SHOTS){const r=await call('Page.captureScreenshot',{format:'png'});await writeFile(join(process.env.CONNECT_SHOTS,'connections.png'),Buffer.from(r.result.data,'base64'));}
+  await ev(`ConnectEMR.renderDash([],[],null,[]);document.getElementById('startConnection').click();return 1;`);
+  ok(await ev(`return document.activeElement.id==='aName'&&document.querySelector('[data-nav="onboard"]').getAttribute('aria-pressed')==='true';`)===true,'empty connections leads directly to focused setup');
+  await ev(`window.__requests=[];ConnectEMR.__setApi(function(){return new Promise(function(resolve){window.__requests.push(resolve);});});ConnectEMR.setTenant('old-hospital');ConnectEMR.loadDashboard();ConnectEMR.setTenant('new-hospital');ConnectEMR.loadDashboard();window.__requests[1]({s:200,d:{ok:true,fhir:[{connectionId:'new',name:'Current hospital',type:'fhir'}]}});return 1;`);
+  await sleep(50);
+  await ev(`window.__requests[0]({s:200,d:{ok:true,fhir:[{connectionId:'old',name:'Old hospital',type:'fhir'}]}});return 1;`);
+  await sleep(50);
+  ok(await ev(`var t=document.getElementById('dash').textContent;return t.indexOf('Current hospital')>=0&&t.indexOf('Old hospital')<0;`)===true,'late response cannot overwrite the selected hospital connections');
   ok(consoleErrors.length === 0, "zero console errors / uncaught exceptions" + (consoleErrors.length ? " -> " + JSON.stringify(consoleErrors.slice(0, 4)) : ""));
+
+  // The built native entry must open the bundled console and restore the app on dismissal.
+  await call('Page.navigate',{url:BASE+'www/index.html'});
+  for(let i=0;i<60;i++){if(await ev(`return typeof window.SMD_openConnectEmr==='function';`))break;await sleep(300);}
+  await ev(`['introPoster','splash','accountGate','introOverlay','smdBootSplash'].forEach(function(id){var n=document.getElementById(id);if(n)n.remove();});window.__authSubscriptions=0;window.SMD_AUTH={currentUser:null,onAuthStateChanged:function(cb){window.__authSubscriptions++;cb(null);return function(){};}};var launch=document.createElement('button');launch.id='emr-test-launch';launch.textContent='Open EMR';document.body.appendChild(launch);launch.focus();window.__overflowBefore=document.body.style.overflow;SMD_openConnectEmr();return 1;`);
+  for(let i=0;i<60;i++){if(await ev(`var f=document.querySelector('#smdConnectOverlay iframe');return !!(f&&f.contentWindow.ConnectEMR);`))break;await sleep(300);}
+  ok(await ev(`var o=document.getElementById('smdConnectOverlay'),f=o&&o.querySelector('iframe');return !!f&&f.title==='EMR connection settings'&&!!f.contentWindow.ConnectEMR&&document.body.style.overflow==='hidden';`)===true,'in-app launcher opens the built console and locks background scrolling');
+  const authSubscriptions=await ev(`return window.__authSubscriptions;`);
+  ok(authSubscriptions>=1,'embedded console subscribes to the app session (subscriptions: '+authSubscriptions+')');
+  await ev(`SMD_openConnectEmr();return 1;`);
+  ok(await ev(`return document.querySelectorAll('#smdConnectOverlay').length===1;`)===true,'reopening does not duplicate the connection window');
+  await ev(`document.querySelector('#smdConnectOverlay iframe').contentDocument.dispatchEvent(new KeyboardEvent('keydown',{key:'Escape',bubbles:true}));return 1;`);
+  ok(await ev(`return !document.getElementById('smdConnectOverlay')&&document.body.style.overflow===window.__overflowBefore&&document.activeElement.id==='emr-test-launch';`)===true,'Escape inside the console restores scrolling and launcher focus');
 
   console.log(fails === 0 ? "\nALL GREEN - Connect EMR admin page smoke test passed" : `\n${fails} FAILED`);
 } catch (e) { console.error("HARNESS ERROR:", e && e.message); fails++; }

@@ -28,7 +28,33 @@
  * language covers OPD, IPD, ED, ICU, OR, pharmacy, laboratory and the specialty modules.
  */
 
-@import url('https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Source+Code+Pro:wght@400;500&display=swap');
+/* SELF-HOSTED, 2026-09-11, which is what the note above always said production needed.
+ *
+ * This was an @import from fonts.googleapis.com, so every rationale in this file about a ward in a
+ * basement was contradicted by its own first line: the face was fetched across the internet at
+ * first paint, and the page rendered in whatever the machine had until it arrived. The two latin
+ * subsets are now next to the app's other faces and cached with everything else, so the ward, the
+ * workstation and wardsynq.com all render in the product's own type with no network at all.
+ *
+ * Source Code Pro went with the import rather than being self-hosted too: --mono is used for one
+ * thing, an identifier a human reads back character by character, and the ui-monospace stack under
+ * it does that job on every platform without a second file to ship. */
+@font-face {
+  font-family: 'Source Sans 3';
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url(/assets/fonts/source-sans-3.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Source Sans 3';
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url(/assets/fonts/source-sans-3-ext.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
 
 /* ================================================================ tokens */
 
@@ -54,6 +80,9 @@
   --sig-clear: #2c6146;
   --sig-stop-wash: #f7e9e6;
   --sig-major-wash: #f8f0df;
+  /* Added 2026-09-11 for ward.css, which DOES fill a block to say a thing is settled (a signed step,
+   * a given dose) where the workstation never does. Same desaturated key as the two washes above. */
+  --sig-clear-wash: #e6f0ea;
 
   /* Interaction. Deliberately near-ink: an interface where the primary action is a bright brand
    * colour teaches the eye that colour means "clickable", which is exactly the association that
@@ -125,6 +154,7 @@
     --sig-clear: #6fbb94;
     --sig-stop-wash: #2b1512;
     --sig-major-wash: #2a2110;
+    --sig-clear-wash: #10251c;
     --focus: #6fb6d1;
     --focus-wash: #10303b;
     --on-signal: #14100a;
@@ -543,3 +573,10 @@ textarea { width: 100%; min-height: 74px; resize: vertical; line-height: 1.5; }
      page somebody has to identify by hand. */
   .brandbar { display: flex; }
 }
+
+/* The site map in the rail, shown only when the page is opened from wardsynq.com (?site=1). Same
+   voice as the chart nav above it: words, weight, no chrome. */
+.rail .sitemap { display: flex; flex-direction: column; gap: 1px; margin-top: var(--sp-5); }
+.rail .sitemap .heading { color: var(--ink-3); font-size: var(--t-micro); margin-bottom: var(--sp-2); }
+.rail .sitemap a { padding: 4px 0; color: var(--ink-2); font-size: var(--t-small); font-weight: 500; text-decoration: none; }
+.rail .sitemap a:hover { color: var(--ink); }

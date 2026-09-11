@@ -107,6 +107,39 @@
   }
 
   function flagged() { return true; }  // Classic UI removed — Advanced (by MaiK) is the only UI.
+
+  /* WARD SYNC OPENS WARDSYNQ. One decision, for all three places the app offers it: the top
+   * quick-link, the Settings button and the menu tile.
+   *
+   * "Ward Sync and WardSynQ are ONE system" is the owner's decision of 2026-09-04
+   * (vault/modules/WardSynQ.md): the GHIS integration is not a parallel product, it is the first
+   * hospital-data ADAPTER under WardSynQ. Until now the app contradicted that - Ward Sync opened the
+   * GHIS import screen, and WardSynQ sat behind a separate, default-off tile - so a hospital running
+   * WardSynQ still met somebody else's EMR when it tapped the button named after its own ward.
+   *
+   * WHAT DECIDES: the workplace this device is signed in to. queue.js and ward.js already record it
+   * as "wardsynq:<orgId>" in smd_opd_workplace, and that prefix is written ONLY for a hospital whose
+   * record is WardSynQ's - so it is a fact about the hospital, not a guess about the user.
+   *
+   * GITAM KEEPS WORKING. A device with no WardSynQ workplace gets the GHIS screen exactly as before.
+   * Nothing is removed: this changes which door the button opens, and only when there is a better
+   * one to open. */
+  function wardsynqWorkplace() {
+    try { return (localStorage.getItem("smd_opd_workplace") || "").indexOf("wardsynq:") === 0; } catch (e) { return false; }
+  }
+  function openWardSync() {
+    /* Every reference goes through `window.`, and the call uses the SAME reference the guard
+     * tested. Checking window.WARD and then calling a bare WARD leans on it also being a global:
+     * where it is not, the bare name throws, the catch below swallows it, and the button does
+     * nothing at all - which is the one outcome a clinician must never get from tapping the ward. */
+    try {
+      if (wardsynqWorkplace() && window.WARD && window.WARD.open) { window.WARD.open(); return; }
+      if (window.openGHIS) { window.openGHIS(); return; }
+      if (window.GHIS && window.GHIS.open) { window.GHIS.open(); return; }
+    } catch (e) { /* fall through to the message: a thrown door is still a door that did not open */ }
+    // Nothing opened. Say which one is coming rather than a bare "loading", and never stay silent.
+    try { toast(wardsynqWorkplace() ? "The ward is still loading…" : "Ward Sync loading…"); } catch (e) {}
+  }
   var IS_V2 = flagged();
 
   // Add an "Interface: Advanced UI (by MaiK) / Classic UI" switch into the existing
@@ -182,7 +215,7 @@
       if (drugLink) drugLink.remove();
       var topFrag = document.createDocumentFragment();
       topFrag.appendChild(topBtn(svg("brain", "smd-ico"), "Dx My Patient", false, function () { try { openDxChooser(); } catch (e) {} }));
-      topFrag.appendChild(topBtn(svg("hospital", "smd-ico"), "Ward Sync", false, function () { try { if (window.openGHIS) openGHIS(); else toast("Ward Sync loading…"); } catch (e) {} }));
+      topFrag.appendChild(topBtn(svg("hospital", "smd-ico"), "Ward Sync", false, function () { openWardSync(); }));
       topFrag.appendChild(topBtn(svg("pulse", "smd-ico"), "ICU Dashboard", false, function () { try { if (window.ICU && ICU.open) ICU.open(); else if (window.INF) INF.openDashboard(); else toast("ICU loading…"); } catch (e) {} }));
       menu.insertBefore(topFrag, menu.firstChild);
 
@@ -217,7 +250,8 @@
           '<div class="smd-nav-note">AI advisory — clinician confirmation required.</div>';
         var wardBody = swRow("ghis", "GHIS Ward Sync", "Live inpatient labs & radiology", flag("smd_ghis_ward", true)) +
           (window.SMD_IS_NATIVE ? swRow("autofetch", "Auto-fetch reports", "Keep a linked patient's labs/imaging fresh on launch & resume · GHIS login stored on THIS device only (Keychain/Keystore), per-patient consent · turn on/off per patient from the Ward Sync bar", flag("smd_autofetch", false)) : "") +
-          '<button class="smd-nav-btn" data-open-ghis="1">' + svg("hospital", "smd-ico") + ' Open Ward Sync</button>';
+          '<button class="smd-nav-btn" data-open-ghis="1">' + svg("hospital", "smd-ico") + ' Open Ward Sync</button>' +
+          '<div class="smd-nav-note">Opens the WardSynQ ward when this workplace keeps a WardSynQ record; otherwise the GHIS inpatient list above.</div>';
         var toolsBody = swRow("whisper", "Clinical Dictation (Beta)", "On-device Whisper voice→text in MaiK Scribe · native app only (model downloads on first use)", flag("smd_whisper_clinical_dictation", false)) +
           ((window.SMD_IMAGE_ENGINE && SMD_IMAGE_ENGINE.settingsHTML)
             ? '<div class="smd-nav-row" style="display:block"><div class="smd-nav-lbl" style="margin-bottom:6px">Image Engine</div>' + SMD_IMAGE_ENGINE.settingsHTML() + '</div>'
@@ -293,7 +327,7 @@
           b.addEventListener("click", function () { try { if (window.SMD_setUI) SMD_setUI(b.getAttribute("data-ui") === "v2"); } catch (e) {} try { if (window.SB && SB.close) SB.close(); } catch (e) {} });
         });
         var og = setBody.querySelector("[data-open-ghis]");
-        if (og) og.addEventListener("click", function () { try { if (window.SB && SB.close) SB.close(); } catch (e) {} setTimeout(function () { try { if (window.openGHIS) openGHIS(); } catch (e) {} }, 60); });
+        if (og) og.addEventListener("click", function () { try { if (window.SB && SB.close) SB.close(); } catch (e) {} setTimeout(openWardSync, 60); });
         setBody.querySelectorAll("[data-xa-open]").forEach(function (xb) {
           xb.addEventListener("click", function () {
             var feat = xb.getAttribute("data-xa-open");
@@ -775,7 +809,7 @@
     interactions: function () { if (window.MEDDRUGS && MEDDRUGS.openInteractions) MEDDRUGS.openInteractions(); else toast("Drug interactions loading…"); },
     framework: function () { if (window.SB && SB.openRef) SB.openRef("guidelines"); else toast("Framework"); },
     icu: function () { if (window.ICU && ICU.open) ICU.open(); else if (window.INF && INF.openDashboard) INF.openDashboard(); else if (window.INF && INF.open) INF.open(); else toast("ICU loading…"); },
-    ward: function () { if (window.openGHIS) window.openGHIS(); else if (window.GHIS && GHIS.open) GHIS.open(); else toast("Ward Sync loading…"); },
+    ward: function () { openWardSync(); },
     queue: function () { if (window.QUEUE && QUEUE.open) QUEUE.open(); else toast("OPD Queue loading…"); },
     // The WardSynQ inpatient ward (window.WARD, ward.js). Distinct from `ward` above, which is the
     // older Ward Sync / GHIS import screen - this is the native admission-to-discharge record.
@@ -932,18 +966,24 @@
       // Open to ANY signed-in user (P1 self-service): the console handles sign-in + create-your-hospital, and
       // the server enforces membership/RBAC on every call. Not owner-gated anymore.
       try {
-        var ex = document.getElementById("smdConnectOverlay"); if (ex && ex.parentNode) ex.parentNode.removeChild(ex);
+        var ex = document.getElementById("smdConnectOverlay"); if (ex) return;
+        var previousFocus=document.activeElement, previousOverflow=document.body.style.overflow;
         var ov = document.createElement("div"); ov.id = "smdConnectOverlay";
+        ov.setAttribute("role","dialog"); ov.setAttribute("aria-modal","true"); ov.setAttribute("aria-label","EMR Connect");
         ov.style.cssText = "position:fixed;inset:0;z-index:100000;background:var(--bg,#0b1016);display:flex;flex-direction:column";
         var bar = document.createElement("div");
         bar.style.cssText = "display:flex;align-items:center;gap:10px;padding:calc(env(safe-area-inset-top,0px) + 8px) 12px 8px;background:var(--panel,#111820);border-bottom:1px solid var(--line,#22303c)";
         var t = document.createElement("div"); t.textContent = "Connect EMR"; t.style.cssText = "flex:1;font:800 15px var(--hfont,sans-serif);color:var(--ink,#e8eef4)";
-        var x = document.createElement("button"); x.textContent = "Close"; x.style.cssText = "background:var(--tl,#0e6e63);color:#fff;border:0;border-radius:9px;padding:8px 14px;font:700 13px var(--hfont,sans-serif)";
-        x.onclick = function () { if (ov.parentNode) ov.parentNode.removeChild(ov); };
-        var fr = document.createElement("iframe"); fr.src = "connect-emr.html?v=conn2";
-        fr.style.cssText = "flex:1;width:100%;border:0;background:#fff";
+        var x = document.createElement("button"); x.textContent = "Done"; x.type="button"; x.style.cssText = "background:var(--panel,#fff);color:var(--ink,#17252b);border:1px solid var(--line,#dfe6e4);border-radius:12px;min-height:44px;padding:8px 18px;font:600 15px -apple-system,system-ui";
+        function closeConnect(){if(ov.parentNode)ov.parentNode.removeChild(ov);document.body.style.overflow=previousOverflow;if(previousFocus&&previousFocus.isConnected)previousFocus.focus();}
+        x.onclick=closeConnect;
+        ov.addEventListener("keydown",function(e){if(e.key==="Escape"){e.preventDefault();closeConnect();}else if(e.key==="Tab"&&e.shiftKey&&e.target===x){e.preventDefault();fr.focus();}});
+        var fr = document.createElement("iframe"); fr.src = "connect-emr.html?v=conn3-calm"; fr.title="EMR connection settings";
+        fr.style.cssText = "flex:1;min-height:0;width:100%;border:0;background:var(--panel,#fff)";
+        fr.onload=function(){try{fr.contentDocument.addEventListener("keydown",function(e){if(e.key==="Escape"){e.preventDefault();closeConnect();}else if(e.key==="Tab"){var controls=[].slice.call(fr.contentDocument.querySelectorAll('button:not(:disabled),a[href],input:not(:disabled),select:not(:disabled),textarea:not(:disabled)')).filter(function(n){return n.getClientRects().length;});if((e.shiftKey&&e.target===controls[0])||(!e.shiftKey&&e.target===controls[controls.length-1])){e.preventDefault();x.focus();}}});}catch(e){}};
         bar.appendChild(t); bar.appendChild(x); ov.appendChild(bar); ov.appendChild(fr);
         document.body.appendChild(ov);
+        document.body.style.overflow="hidden"; x.focus();
       } catch (e) { if (window.toast) toast("Connect failed to open"); }
     },
     connectpatient: function () { try { if (window.CONNECTPT && CONNECTPT.open) CONNECTPT.open(); else toast("Connect patient loading…"); } catch (e) {} },
@@ -1424,7 +1464,7 @@
       ".rnav-grid.reordering .rnav-tile{touch-action:none}",
       ".rnav-grid.reordering .rnav-tile:not(.addtool):not(.dragging){animation:rnavJiggle .28s ease-in-out infinite alternate}",
       ".rnav-grid.reordering .rnav-tile.addtool{opacity:.35;pointer-events:none}",
-      ".rnav-tile.dragging{opacity:.6;transform:scale(1.05);z-index:5}",
+      "#rnavToolsGrid .rnav-tile.dragging{opacity:.18!important;transform:none!important;animation:none!important}#rnavToolsGrid .rnav-tile{-webkit-touch-callout:none;user-select:none;-webkit-user-select:none}.rnav-drag-ghost{will-change:transform;filter:drop-shadow(0 14px 18px #0004)}#rnavReorderHint{font-size:12px;color:var(--slate);margin:0 0 14px}",
       "@keyframes rnavJiggle{from{transform:rotate(-1deg)}to{transform:rotate(1deg)}}",
       "@media(prefers-reduced-motion:reduce){#homeV2 *{transition:none!important;animation:none!important}}"
     ].join("\n");
@@ -1669,61 +1709,92 @@
   // Drops `dragEl` into `container` (list or 2D grid) at whichever slot the pointer is over, on
   // every move, and persists the resulting order on release. Shared by the Customize-tools sheet
   // (vertical list) and the home tool grid (2D) - one implementation, no per-surface duplicate.
-  function beginDrag(dragEl, container, itemSelector, dataAttr) {
-    dragEl.classList.add("dragging");
-    var isGrid = container.id === "rnavToolsGrid";
-    function onMove(ev) {
-      var items = [].slice.call(container.querySelectorAll(itemSelector)).filter(function (n) { return n !== dragEl; });
-      if (isGrid) {
-        var best = null, bestD = Infinity;
-        items.forEach(function (n) {
-          var r = n.getBoundingClientRect(), cx = r.left + r.width / 2, cy = r.top + r.height / 2;
-          var d = Math.hypot(ev.clientX - cx, ev.clientY - cy);
-          if (d < bestD) { bestD = d; best = n; }
-        });
-        if (best) {
-          var br = best.getBoundingClientRect();
-          container.insertBefore(dragEl, (ev.clientY < br.top + br.height / 2) ? best : best.nextSibling);
-        }
-      } else {
-        for (var i = 0; i < items.length; i++) {
-          var r = items[i].getBoundingClientRect();
-          if (ev.clientY < r.top + r.height / 2) { container.insertBefore(dragEl, items[i]); return; }
-        }
-        container.appendChild(dragEl);
-      }
-    }
-    function onUp() {
-      document.removeEventListener("pointermove", onMove);
-      document.removeEventListener("pointerup", onUp);
-      dragEl.classList.remove("dragging");
-      var order = [].slice.call(container.querySelectorAll(itemSelector)).map(function (n) { return n.getAttribute(dataAttr); });
-      setToolOrder(order);
-    }
-    document.addEventListener("pointermove", onMove);
-    document.addEventListener("pointerup", onUp);
+  var _dragCancel=null, _dragActive=false, _suppressToolClickUntil=0;
+  function homeEditMode(on){
+    _reorderMode=on;
+    var grid=document.getElementById("rnavToolsGrid");
+    if(grid)grid.classList.toggle("reordering",on);
   }
-  // Drag-to-reorder entry point: the Customize-tools sheet list is armed immediately (its handle
-  // signals intent); the home tool grid needs a 500ms long-press first, matching iOS's
-  // press-and-hold icon rearrange so a normal tap still opens the tool. Delegated on `root` so
-  // it keeps working across every re-render of either surface without re-wiring.
+  function beginDrag(dragEl, container, itemSelector, dataAttr, initial) {
+    if(_dragCancel)_dragCancel();
+    var isGrid=container.id==="rnavToolsGrid", original=[].slice.call(container.querySelectorAll(itemSelector));
+    var rect=dragEl.getBoundingClientRect(), x=initial.clientX,y=initial.clientY, ox=x-rect.left,oy=y-rect.top, pointer=initial.pointerId;
+    var ghost=dragEl.cloneNode(true),frame=0,lastTime=0,ended=false,moved=false;
+    ghost.removeAttribute("id");ghost.removeAttribute(dataAttr);ghost.classList.remove("dragging");ghost.classList.add("rnav-drag-ghost");ghost.setAttribute("aria-hidden","true");ghost.tabIndex=-1;
+    ghost.style.cssText+=";position:fixed!important;width:"+rect.width+"px!important;height:"+rect.height+"px!important;left:0!important;top:0!important;margin:0!important;pointer-events:none!important;z-index:20000!important;animation:none!important;opacity:.96!important;";
+    // Preserve theme scope; the marker excludes the floating copy from slot calculations.
+    ghost.setAttribute("data-reorder-ghost","1");
+    container.appendChild(ghost);dragEl.classList.add("dragging");_dragActive=true;
+    var scroll=container.parentElement;
+    while(scroll&&scroll!==document.body){var cs=getComputedStyle(scroll);if(/auto|scroll/.test(cs.overflowY)&&scroll.scrollHeight>scroll.clientHeight)break;scroll=scroll.parentElement;}
+    if(!scroll||scroll===document.body)scroll=document.scrollingElement;
+    function items(){return [].slice.call(container.querySelectorAll(itemSelector)).filter(function(n){return n!==ghost;});}
+    function place(){
+      var all=items(),best=dragEl,dist=Infinity;
+      all.forEach(function(n){var r=n.getBoundingClientRect(),dx=x-(r.left+r.width/2),dy=y-(r.top+r.height/2),d=isGrid?dx*dx+dy*dy:dy*dy;if(d<dist){dist=d;best=n;}});
+      if(best===dragEl)return;
+      var br=best.getBoundingClientRect();
+      if(isGrid&&(x<br.left-12||x>br.right+12||y<br.top-12||y>br.bottom+12))return;
+      var from=all.indexOf(dragEl),to=all.indexOf(best),before=all.map(function(n){return n.getBoundingClientRect();});
+      container.insertBefore(dragEl,from<to?best.nextSibling:best);
+      if(!window.matchMedia("(prefers-reduced-motion: reduce)").matches)all.forEach(function(n,i){if(n===dragEl||!n.animate)return;var after=n.getBoundingClientRect(),dx=before[i].left-after.left,dy=before[i].top-after.top;if(dx||dy)n.animate([{translate:dx+"px "+dy+"px"},{translate:"0px 0px"}],{duration:170,easing:"cubic-bezier(.2,.8,.2,1)"});});
+    }
+    function tick(time){
+      if(ended)return;
+      ghost.style.setProperty("transform","translate3d("+(x-ox)+"px,"+(y-oy)+"px,0) scale(1.06)","important");
+      var bounds=scroll===document.scrollingElement?{top:90,bottom:innerHeight-100}:scroll.getBoundingClientRect();
+      var speed=y<bounds.top+55?-Math.min(12,(bounds.top+55-y)/5):y>bounds.bottom-55?Math.min(12,(y-bounds.bottom+55)/5):0;
+      if(speed&&moved){scroll.scrollTop+=speed*Math.min(2,(time-lastTime||16)/16);place();}
+      lastTime=time;frame=requestAnimationFrame(tick);
+    }
+    function onMove(ev){if(ev.pointerId!==pointer)return; x=ev.clientX;y=ev.clientY;moved=true;if(ev.cancelable)ev.preventDefault();place();}
+    function finish(cancel){
+      if(ended)return;ended=true;cancelAnimationFrame(frame);
+      document.removeEventListener("pointermove",onMove);document.removeEventListener("pointerup",onUp);document.removeEventListener("pointercancel",onCancel);window.removeEventListener("blur",onCancel);
+      ghost.remove();dragEl.classList.remove("dragging");_dragActive=false;_dragCancel=null;_suppressToolClickUntil=Date.now()+450;
+      if(cancel){var anchor=container.querySelector(".addtool");original.forEach(function(n){container.insertBefore(n,anchor);});}
+      else {var order=items().map(function(n){return n.getAttribute(dataAttr);});var previous=orderedHomeTools().map(function(t){return t.act;});var next=order.slice();previous.forEach(function(id){if(next.indexOf(id)<0)next.push(id);});setToolOrder(next);}
+    }
+    function onUp(ev){if(ev.pointerId===pointer)finish(false);}
+    function onCancel(){finish(true);}
+    _dragCancel=onCancel;
+    document.addEventListener("pointermove",onMove,{passive:false});document.addEventListener("pointerup",onUp);document.addEventListener("pointercancel",onCancel);window.addEventListener("blur",onCancel);
+    frame=requestAnimationFrame(tick);
+  }
   function wireHomeDragReorder(root) {
-    root.addEventListener("pointerdown", function (e) {
-      var handle = e.target.closest(".hv-drag");
-      if (handle) {
-        var row = handle.closest(".hv-tool-tog"); if (!row) return;
-        e.preventDefault();
-        return beginDrag(row, row.parentElement, ".hv-tool-tog", "data-tool");
+    // Start the hint's ten seconds only once it enters the visible home viewport.
+    var hintObserver=window.IntersectionObserver?new IntersectionObserver(function(entries){entries.forEach(function(entry){if(entry.isIntersecting){hintObserver.unobserve(entry.target);var hint=entry.target;setTimeout(function(){hint.remove();},10000);}});}):null;
+    function watchHint(){var hint=document.getElementById("rnavReorderHint");if(!hint||hint.dataset.watched)return;hint.dataset.watched="1";if(hintObserver)hintObserver.observe(hint);else setTimeout(function(){hint.remove();},10000);}
+    var homeRoot=document.getElementById("homeV2");if(homeRoot)new MutationObserver(watchHint).observe(homeRoot,{childList:true,subtree:true});watchHint();
+    var pending=null;
+    function clearPress(){clearTimeout(_pressT);_pressT=null;pending=null;}
+    root.addEventListener("contextmenu",function(e){if(e.target.closest("#rnavToolsGrid"))e.preventDefault();});
+    root.addEventListener("touchmove",function(e){if(_dragActive&&e.cancelable)e.preventDefault();},{passive:false});
+    root.addEventListener("pointermove",function(e){if(pending&&e.pointerId===pending.id&&Math.hypot(e.clientX-pending.x,e.clientY-pending.y)>9)clearPress();},{passive:true});
+    root.addEventListener("pointerup",clearPress);root.addEventListener("pointercancel",clearPress);window.addEventListener("blur",clearPress);
+    root.addEventListener("pointerdown",function(e){
+      if(e.isPrimary===false){clearPress();if(_dragCancel)_dragCancel();return;}if(e.button>0)return;
+      var handle=e.target.closest(".hv-drag"),row=handle&&handle.closest(".hv-tool-tog");
+      if(row){e.preventDefault();return beginDrag(row,row.parentElement,".hv-tool-tog","data-tool",e);}
+      var tile=e.target.closest("#rnavToolsGrid .rnav-tile:not(.addtool):not([data-reorder-ghost])"),grid=tile&&tile.parentElement;
+      if(!grid)return;clearPress();
+      function start(){clearPress();homeEditMode(true);beginDrag(tile,grid,".rnav-tile:not(.addtool):not([data-reorder-ghost])","data-act",e);}
+      if(_reorderMode){e.preventDefault();start();return;}
+      pending={id:e.pointerId,x:e.clientX,y:e.clientY};_pressT=setTimeout(start,450);
+    });
+    root.addEventListener("click",function(e){
+      if(_reorderMode&&Date.now()>=_suppressToolClickUntil&&!e.target.closest("#rnavToolsGrid .rnav-tile")){if(_dragCancel)_dragCancel();homeEditMode(false);}
+      if((Date.now()<_suppressToolClickUntil||_reorderMode)&&e.target.closest("#rnavToolsGrid,.hv-tool-tog")){
+        e.preventDefault();e.stopImmediatePropagation();
       }
-      var tile = e.target.closest(".rnav-tile:not(.addtool)");
-      var grid = tile && document.getElementById("rnavToolsGrid");
-      if (!grid) return;
-      clearTimeout(_pressT);
-      _pressT = setTimeout(function () {
-        _reorderMode = true; grid.classList.add("reordering");
-        beginDrag(tile, grid, ".rnav-tile:not(.addtool)", "data-act");
-      }, 500);
-      document.addEventListener("pointerup", function cancel() { clearTimeout(_pressT); document.removeEventListener("pointerup", cancel); }, { once: true });
+    },true);
+    root.addEventListener("keydown",function(e){
+      if(e.key==="Escape"&&_reorderMode){if(_dragCancel)_dragCancel();homeEditMode(false);return;}
+      var tile=e.target.closest("#rnavToolsGrid .rnav-tile:not(.addtool)");
+      if(tile&&e.key===" "&&!_reorderMode){e.preventDefault();homeEditMode(true);return;}
+      if(!_reorderMode||!tile||!/^Arrow/.test(e.key))return;
+      e.preventDefault();var grid=tile.parentElement,list=[].slice.call(grid.querySelectorAll(".rnav-tile:not(.addtool)")),at=list.indexOf(tile),cols=getComputedStyle(grid).gridTemplateColumns.split(" ").length,delta=e.key==="ArrowLeft"?-1:e.key==="ArrowRight"?1:e.key==="ArrowUp"?-cols:cols,target=list[at+delta];
+      if(target){grid.insertBefore(tile,delta>0?target.nextSibling:target);var next=list.map(function(n){return n.getAttribute("data-act");});next=[].slice.call(grid.querySelectorAll(".rnav-tile:not(.addtool)")).map(function(n){return n.getAttribute("data-act");});orderedHomeTools().forEach(function(t){if(next.indexOf(t.act)<0)next.push(t.act);});setToolOrder(next);tile.focus();}
     });
   }
   function homeToolPrefs() { try { return JSON.parse(localStorage.getItem("smd_home_tools") || "{}") || {}; } catch (e) { return {}; } }
@@ -1813,7 +1884,7 @@
           '<button class="rnav-qc" data-act="dosing" aria-label="Dosing: insulin &amp; electrolytes">' + ric("medication") + '<span>Dosing</span></button>' +
           '<button class="rnav-qc" data-act="hospital" aria-label="Hospital: OPD, ICU, Ward, FollowCare">' + ric("local_hospital") + '<span>Hospital+</span></button>' +
         '</div>' +
-        '<div class="rds-section-header"><span class="rds-section-title">Clinical tools</span></div>' +
+        '<div class="rds-section-header"><span class="rds-section-title">Clinical tools</span></div><p id="rnavReorderHint" role="status">Touch and hold a tool to rearrange.</p>' +
         '<div class="rnav-grid" id="rnavToolsGrid">' + renderHomeToolsGrid() + '</div>' +
         '<div id="rnavRecent"></div>' +
         '<div class="v4-foot rnav-foot"><div class="disc">Only for qualified clinicians</div>' +
@@ -2052,9 +2123,9 @@
     root.addEventListener("click", function (e) {
       var b = e.target.closest("[data-act]"); if (!b) return;
       var a = b.getAttribute("data-act");
-      // Long-press grid reorder mode: any tap while active exits it instead of navigating -
-      // tap-anywhere-to-exit, matching iOS's "tap away to stop jiggling" without extra chrome.
-      if (_reorderMode) { _reorderMode = false; var g0 = document.getElementById("rnavToolsGrid"); if (g0) g0.classList.remove("reordering"); return; }
+      // Grid taps are intercepted while editing. Navigation outside the grid ends editing.
+      if (Date.now() < _suppressToolClickUntil) return;
+      if (_reorderMode) { homeEditMode(false); }
       if (a === "about") e.stopPropagation();   // hero banner → About & Acknowledgements; keep the StewardMD logo tap from also firing goHome
       if (a === "notifications") return openNotifications();
       if (a === "ku") return openKuPanel();
@@ -5395,7 +5466,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
           think.innerHTML = '<div class="maik-attr" style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;font:600 11px var(--sans,system-ui);color:var(--slate-soft,#94a3b8);margin-bottom:6px">' + svg("spark", "smd-ico") + '<span>MaiK Evidence Review</span><span style="opacity:.7">· trusted literature, verify independently</span>' + meta + '</div>' + bd + srcHTML;
           try { _maikTurns.push({ q: q, a: String(r.text).replace(/\s+/g, " ").slice(0, 320) }); if (_maikTurns.length > 8) _maikTurns.shift(); } catch (e) {}
         } else {
-          think.innerHTML = '<div class="maik-welcome">Evidence review is unavailable right now' + ((r && r.reason === "quota") ? ' (usage limit reached)' : '') + '. Please verify against a reference source.</div>';
+          think.innerHTML = '<div class="maik-welcome">' + ((r && r.error === "LOCAL_CAPABILITY_REQUIRED" && r.message) ? maikEscH(r.message) : 'Evidence review is unavailable right now') + ((r && r.reason === "quota") ? ' (usage limit reached)' : '') + '. Please verify against a reference source.</div>';
         }
         try { scroll(); } catch (e) {}
         try { _maikBodyHTML = body.innerHTML; maikSaveThread(_maikBodyHTML); } catch (e) {}
@@ -5505,6 +5576,17 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
    * maik-engine.js localAnswer() maps any rejection to { error: <message> }. */
   function maikErrorNotice(r) {
     var e = String((r && r.error) || "");
+    // The on-device engine refused for a NAMED reason (2026-09-11): what is missing, and what
+    // unlocks it on this phone. Never a silent cloud call; cloud is offered as an explicit choice.
+    if (e === "LOCAL_CAPABILITY_REQUIRED") {
+      var recs = (r.recommendedModels || []).slice(0, 3).map(function (m) {
+        return "<b>" + maikEscH(m.label) + "</b> (" + maikEscH(m.size || "") + (m.installed ? ", installed" : "") + (m.level === "warn" ? ", may run slowly" : "") + ")";
+      }).join(", ");
+      return maikEscH(r.message || "This needs a different on-device model.") +
+        (recs ? "<br><br>Unlocks on this phone with: " + recs + ". Open <b>Settings, AI Assistant, Answer engine</b> to download or select one." : "") +
+        (r.offline ? "" : "<br><br>Or tap the model name at the top and choose <b>MaiK Cloud</b>.");
+    }
+    if (e === "kb-only") return maikEscH(r.message || "KB-only mode makes no AI calls.");
     var mem = e.match(/^not-enough-memory:(.+)$/);
     if (mem) {
       return "There is not enough free memory to load the on-device model right now (" + maikEscH(mem[1]) + ").<br><br>" +
@@ -5534,6 +5616,21 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       // until the next turn cleared it ("tapped First-line treatment, nothing; sent Hi, then it worked").
       _maikBusy = false; maikSetSendMode(false);
       if (r && r.error === "quota") { think.innerHTML = '<div class="maik-welcome">' + (r.reason === "module-daily" && r.message ? String(r.message) : r.reason === "rate" ? 'One moment — you’re asking questions quickly. Please try again in a few seconds.' : 'MaiK usage limit reached for now. Clinical reasoning, calculators, and reference tools remain available.') + '</div>'; return; }
+      if (r && r.error === "LOCAL_CAPABILITY_REQUIRED") {
+        // Explicit cloud alternative (owner, 2026-09-11): the chip CHANGES the engine, it does not
+        // sneak one question past the clinician's choice.
+        think.innerHTML = '<div class="maik-welcome">' + maikErrorNotice(r) + '</div>';
+        if (!r.offline) {   // offline: they already chose Cloud; the chip would re-send into the same refusal
+          var cloudBtn = document.createElement("button"); cloudBtn.className = "maik-chip"; cloudBtn.style.marginTop = "8px"; cloudBtn.textContent = "Switch to MaiK Cloud and ask again";
+          cloudBtn.addEventListener("click", function () {
+            try { if (window.SMD_MAIK_ENGINE && SMD_MAIK_ENGINE.setPref) SMD_MAIK_ENGINE.setPref("cloud"); } catch (e) {}
+            try { qEl.value = question || ""; } catch (e) {}
+            send();
+          });
+          think.appendChild(cloudBtn);
+        }
+        scroll(); return;
+      }
       if (r && r.error === "ai-off") {
         think.innerHTML = '<div class="maik-welcome">MaiK is switched off. Turn it on to get grounded clinical answers.</div>';
         var onBtn = document.createElement("button"); onBtn.className = "maik-chip"; onBtn.style.marginTop = "8px"; onBtn.textContent = "Turn on MaiK";
@@ -8190,15 +8287,10 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
     try { initResume(); } catch (e) {}
     try { installSbScrollGuard(); } catch (e) {}
     if (IS_V2) {
-      // show the new home as soon as the user is past splash/login, COVERING the app's own
-      // Simple/Advanced screen so it isn't seen twice. Theme applies then (never on splash/consent).
-      var tries = 0;
-      var iv = setInterval(function () {
-        tries++;
-        var ms = document.getElementById("modeSelect"), sh = document.querySelector(".shell");
-        var entered = (ms && !ms.classList.contains("hidden")) || (sh && sh.offsetParent !== null);
-        if (entered || tries > 60) { clearInterval(iv); document.body.classList.add("ui-v2"); suppressModeSelect(); showV2(); try { resumeRestore(); } catch (e) {} }
-      }, 120);
+      document.body.classList.add("ui-v2");
+      suppressModeSelect();
+      showV2();
+      try { resumeRestore(); } catch (e) {}
     }
   }
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", start); else start();

@@ -200,6 +200,12 @@ function makeActor(spec) {
     clamped: granted !== asked,
     // A human's signature is only valid if they hold a credential. Absent for non-humans by design.
     credential: spec.kind === KIND.HUMAN ? (spec.credential || null) : null,
+    /* WHO VOUCHED FOR THAT CREDENTIAL. Two things can put a registration number on an actor, and
+     * they are not equally strong: the platform's own verified claim, or the hospital asserting it
+     * in its staff registry. Both are legitimate - a hospital knows who its consultants are - but a
+     * record must never lose which one it was, so the signature carries it and a reader can tell.
+     * Null whenever there is no credential at all. */
+    credentialSource: spec.kind === KIND.HUMAN && spec.credential ? (spec.credentialSource || "unstated") : null,
     // Resource-type allow-lists. null = every type (the pre-scope behaviour); [] = none.
     scope: Object.freeze({
       read: scopeList(spec.scope && spec.scope.read),
@@ -420,6 +426,9 @@ class GovernedStore {
         // Present only when the actor acted for somebody else. An AI draft names its clinician here
         // and nowhere else; the human is NOT the author of a record the human did not write.
         ...(actor.onBehalfOf ? { onBehalfOf: actor.onBehalfOf } : {}),
+        // Who vouched for the signing registration, when there was one. A record that carries a
+        // signature must say on whose word the number stands; see makeActor.
+        ...(actor.credential && actor.credentialSource ? { credentialSource: actor.credentialSource } : {}),
       },
     };
     if (actor.kind === KIND.AI) stamped.aiDrafted = true;

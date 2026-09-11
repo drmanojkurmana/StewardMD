@@ -569,6 +569,9 @@
       : retrieveGrounding(packId, pkg && pkg.question);
 
     return groundingP.then(function (grounding) {
+    // Queued like every other local generation, and NOT background: the clinician is watching this
+    // one, so it goes ahead of any queued Scribe drafting (it cannot interrupt one already running).
+    return serial(function () {
     return ensureLoaded(packId).then(function () {
       var prompt = buildPrompt(pkg, packId);
       if (!prompt) return { error: "no-package" };
@@ -619,6 +622,10 @@
            *   SYSTEM_IMAGE    a first look at an image: findings, then interpretation.
            */
           system: (opts && opts.systemOverride) ? opts.systemOverride
+                // A PERSONA mode (clinix-tutor, surgx-mentor): the cloud picks its prompt from
+                // opts.mode server-side; the local engine used to ignore mode and teach a student
+                // like a reference page. Text path only: an image question keeps the image prompts.
+                : (!images.length && opts && opts.mode && MODE_SYS[opts.mode]) ? MODE_SYS[opts.mode]
                 // A greeting with no image: answer it as a greeting, not as a clinical question.
                 : (!images.length && isGreeting(pkg && pkg.question)) ? SYSTEM_GREET
                 // A pack can carry its own system prompt (registry-driven, like noThink).
@@ -727,6 +734,7 @@
       if (sub && sub.remove) { try { sub.remove(); } catch (e) {} }
       return out;
     });
+    }, { reentrant: !!(opts && (opts._retried || opts._ungrounded)) });
     });
   }
 
@@ -835,6 +843,75 @@
     try { if (_idleT && typeof _idleT.unref === "function") _idleT.unref(); } catch (e) {}
   }
   function settle() { if (_inflight === 0) scheduleRelease(_sheetOpen === false ? _closeMs : _idleMs); }
+  /* ── ONE GENERATION AT A TIME (owner bug report, 2026-09-11) ────────────────────────────────
+   * The native engine is single-threaded and says so: LlamaEngine.swift generateSync throws
+   * LlamaError(.busy, "a generation is already running"), and the Android JNI behaves the same.
+   * Until the hard Local policy, only the MaiK sheet ever called it, so nothing collided. Now
+   * Scribe, Ask MaiK Pro, ICD, assessment, the summary and the ICU advisories all share that one
+   * engine, and Scribe refines on a timer (every refineEveryChunks windows AND again on Stop)
+   * while the clinician taps other things. The second caller got `busy`, which surfaced as
+   * "Could not draft the note from this dictation" with no reason. Reported from a real consult.
+   *
+   * So every local generation now queues here. A generation cannot be interrupted once it has
+   * started (the native call owns the context), but a job the clinician is WATCHING goes ahead of
+   * background drafting in the queue, because a 4B model can take tens of seconds per pass.
+   *
+   * ponytail: a plain FIFO with one priority tier. A real scheduler would need the engine to
+   * support pre-emption, which it does not. */
+  var _running = false, _waiting = [];
+  var JOB_TIMEOUT_MS = 180000;   // a wedged native call must not stall every later one forever
+  function serial(fn, opts) {
+    opts = opts || {};
+    /* RE-ENTRANCY. answer() calls ITSELF for the blank-answer retry (_retried) and the no-coverage
+     * ungrounded retry (_ungrounded), from inside its own running job. Queueing that inner call
+     * would wait for a job that cannot finish until the inner call returns: a deadlock, and on a
+     * phone an answer that never arrives. The engine is already ours at that point, so run inline. */
+    if (opts.reentrant && _running) return Promise.resolve().then(fn);
+    var job = { fn: fn, bg: !!opts.background };
+    job.promise = new Promise(function (resolve, reject) {
+      job.resolve = resolve; job.reject = reject;
+      // Interactive work jumps ahead of queued background drafting, never ahead of a running job.
+      if (!job.bg) {
+        var i = 0;
+        while (i < _waiting.length && !_waiting[i].bg) i++;
+        _waiting.splice(i, 0, job);
+      } else _waiting.push(job);
+      pump();
+    });
+    return job.promise;
+  }
+  function pump() {
+    if (_running || !_waiting.length) return;
+    var job = _waiting.shift();
+    _running = true;
+    var done = false, timer = null;
+    function finish(ok, v) {
+      if (done) return; done = true;
+      if (timer) { clearTimeout(timer); timer = null; }
+      _running = false;
+      if (ok) job.resolve(v); else job.reject(v);
+      // Fire-and-forget callers (warm, a background refine whose screen has gone) attach no
+      // handler; a queue failure must not become an unhandled rejection that takes down the page.
+      try { job.promise.catch(function () {}); } catch (e) {}
+      pump();
+    }
+    try {
+      timer = setTimeout(function () {
+        // Free the engine so the rest of the queue can run, and say which call gave up.
+        try { var L = llama(); if (L && L.cancel) L.cancel(); } catch (e) {}
+        finish(false, new Error("on-device generation timed out"));
+      }, JOB_TIMEOUT_MS);
+      // A pending timeout must never be a reason for the host to stay alive (it kept `node --test`
+      // running for the full three minutes, then fired into a finished test). No-op in a WebView.
+      if (timer && typeof timer.unref === "function") timer.unref();
+    } catch (e) {}
+    Promise.resolve().then(job.fn).then(function (r) { finish(true, r); }, function (e) { finish(false, e); });
+  }
+  /** Queue depth, for tests and diagnostics. */
+  function queueState() { return { running: _running, waiting: _waiting.length }; }
+  /** Test hook: shorten the per-job timeout (the real one is three minutes). */
+  function setJobTimeoutMs(ms) { JOB_TIMEOUT_MS = Math.max(1, Number(ms) || 1); return JOB_TIMEOUT_MS; }
+
   function tracked(fn) {
     return function () {
       clearIdle(); _inflight++;
@@ -926,14 +1003,16 @@
     var L = llama();
     if (!L) return Promise.reject(new Error("on-device inference needs the native app"));
     var packId = (opts && opts.pack) || currentPack();
-    return ensureLoaded(packId).then(function () {
-      return L.generate({ prompt: prompt, system: system, nPredict: nPredict,
-                          temperature: (opts && typeof opts.temperature === "number") ? opts.temperature : 0.2,
-                          stream: false, prefillEmptyThink: noThinkPack(packId) });
-    }).then(function (r) {
-      if (r && r.error) throw new Error(String(r.error));
-      return stripReasoning((r && r.text) || "");
-    });
+    return serial(function () {
+      return ensureLoaded(packId).then(function () {
+        return L.generate({ prompt: prompt, system: system, nPredict: nPredict,
+                            temperature: (opts && typeof opts.temperature === "number") ? opts.temperature : 0.2,
+                            stream: false, prefillEmptyThink: noThinkPack(packId) });
+      }).then(function (r) {
+        if (r && r.error) throw new Error(String(r.error));
+        return stripReasoning((r && r.text) || "");
+      });
+    }, { background: !!(opts && opts.background) });
   }
   /** Turn TinyFish's raw sources into a web-research answer on device. sources:
    * [{title,url,site,snippet}] (the exact shape SMD_AI.researchSnippets resolves). No sources -> the
@@ -985,6 +1064,7 @@
         return { parsed: parseJsonLoose(text), text: text };
       });
     }
+    return serial(function () {
     return ensureLoaded(packId).then(function () { return once(prompt, 0); }).then(function (a) {
       if (a.parsed) return a.parsed;
       // A 1.7B answers the same prompt as JSON one minute and as prose the next (seen live on MaiK
@@ -997,6 +1077,7 @@
         var e = new Error("parse"); e.sample = b.text.slice(0, 240); throw e;
       });
     });
+    }, { background: !!(opts && opts.background) });
   }
   function parseFailure(err) {
     if (err && err.message === "parse") return { error: "parse", sample: err.sample || "" };
@@ -1075,8 +1156,723 @@
     }).join("\n");
   }
 
+  /* ═══════════════════════════════════════════════════════════════════════════════════════════
+   * LOCAL TASK LAYER (owner directive, 2026-09-11: "Local AI" is a hard policy; every feature that
+   * can reasonably run on-device must, and a missing local implementation must never fall through
+   * to the cloud). Before this, the engine had four task functions (answer, webAnswer, vivaJudge,
+   * opdSuggest) and maik-engine.js sent everything else to Gemini regardless of the engine chosen.
+   *
+   * Every prompt below is ported from the server module that owns the same kind, so a caller sees
+   * the same JSON shape whichever engine wrote it, and every output passes the same whitelist the
+   * server applies (functions/api/ai/_assessment-extract.js, _opd-scribe.js, _surgx-note.js,
+   * _icd-suggest.js, _maik-ask.js, and the IMAGING/CORRELATE prompts in [[path]].js). The model is
+   * untrusted on both engines; the sanitizer is the contract.
+   * ═══════════════════════════════════════════════════════════════════════════════════════════ */
+
+  /* ── persona modes ──
+   * TUTOR_SYS is the server's TUTOR_SYS minus the @@MORE@@ marker rule (this engine emits none).
+   * SURG_SYS is new: the server's "surgx-mentor" mode only selects a quota bucket. */
+  var TUTOR_SYS =
+    "You are MaiK, teaching a MEDICAL STUDENT at the bedside inside StewardMD's CliniX module. " +
+    "Talk like a good registrar on a ward round: warm, direct, and brief. You are a teacher, not a reference page.\n" +
+    "CONTEXT: the student is part-way through a specific lesson; the lesson, the skill and the step they are on are given " +
+    "in the question. Answer THEIR question in THAT context.\n" +
+    "HOW TO TEACH:\n" +
+    "- Keep it SHORT. Two to five sentences. This is a conversation inside a lesson, not an article.\n" +
+    "- Answer the question first, then give the ONE mechanism or principle that makes it stick.\n" +
+    "- Where it genuinely helps, end with ONE short question back to them. One question, never a quiz, and never when they asked something simple and factual.\n" +
+    "- Prefer the concrete and the bedside: what you would see, feel, hear, and what it would mean.\n" +
+    "- If they are wrong, say so plainly and kindly, then explain the correction.\n" +
+    "- No markdown headings. Plain prose, or at most a few short bullets.\n" +
+    "SAFETY - NON-NEGOTIABLE:\n" +
+    "1. NEVER give a drug dose, a prescription, a regimen with numbers, or an oxygen prescription, even when asked directly. " +
+    "Teach the PRINCIPLE and the drug CLASS, and say the dose is in the lesson's clinician-reviewed treatment section.\n" +
+    "2. NEVER give advice about a real, identifiable patient. If the question is about someone they are treating, say so in one line and tell them to ask their supervising clinician.\n" +
+    "3. Never invent a citation, a guideline number, a criterion or a threshold. If you are not sure, say so and say what IS established.\n" +
+    "4. Do not mention the AI provider, model, retrieval or any internal detail.";
+  var SURG_SYS =
+    "You are MaiK in Senior Surgeon Mode inside StewardMD's SURGX module: a senior consultant surgeon mentoring a " +
+    "surgical trainee through a case. Be direct, precise and Socratic: challenge their plan, ask what they would do next, " +
+    "and correct errors plainly. Prefer operative and perioperative specifics: indications, contraindications, anatomy, " +
+    "steps, complications and their recognition, when to convert or call for help.\n" +
+    "RULES:\n" +
+    "- Keep each turn short (three to six sentences). End most turns with ONE pointed question.\n" +
+    "- Never invent a guideline number, trial result or threshold. Say when something is institution-dependent.\n" +
+    "- Doses and regimens are the clinician's responsibility: name the drug class and principle, and point to the local protocol for numbers.\n" +
+    "- Never give advice about a real, identifiable patient; this is teaching and decision support, not care.\n" +
+    "- Do not mention the AI provider, model or any internal detail.";
+  var MODE_SYS = { "clinix-tutor": TUTOR_SYS, "surgx-mentor": SURG_SYS };
+
+  /* ── shared guards (deterministic, no model) ── */
+  var INDIC_RE = /[ऀ-ॿঀ-৿਀-੿઀-૿଀-୿஀-௿ఀ-౿ಀ-೿ഀ-ൿ]/;
+  function stripIndic(s) {
+    return String(s || "").replace(/[ऀ-ॿঀ-৿਀-੿઀-૿଀-୿஀-௿ఀ-౿ಀ-೿ഀ-ൿ]/g, "")
+      .replace(/\(\s*\)|\[\s*\]/g, "").replace(/\s{2,}/g, " ").replace(/\s+([.,;:)\]])/g, "$1")
+      .replace(/[\s,;:\-]+$/, "").replace(/^[\s,;:\-]+/, "").trim();
+  }
+  function tidy(s, max) { return String(s == null ? "" : s).replace(/\s+/g, " ").trim().slice(0, max || 2000); }
+  function strList(a, max, each) { return (Array.isArray(a) ? a : []).map(function (x) { return tidy(x, each || 240); }).filter(Boolean).slice(0, max || 12); }
+  /** Every digit-string in `text`, commas stripped ("1,500" -> "1500"). surgx-model.js numbersIn(),
+   * with word boundaries so the digit inside a unit name (SpO2, HbA1c, FiO2) is not a clinical number.
+   * Same rule as test/run-local-translate-eval.mjs, so the guard and the eval agree. */
+  function numbersIn(text, loose) {
+    // `loose` (the SOURCE side) takes every digit run, so "x3 days", "T101F", "BP120/80" all count
+    // as said. The model side keeps the boundary (and accepts an ordinal suffix) so a fabricated
+    // "3rd dose" is still caught while "SpO2" contributes nothing.
+    var out = [], m, s = String(text || "");
+    var re = loose ? /\d+(?:[.,]\d+)*/g : /\b\d+(?:[.,]\d+)*(?=\b|(?:st|nd|rd|th)\b)/g;
+    while ((m = re.exec(s)) !== null) out.push(m[0].replace(/,/g, ""));
+    return out;
+  }
+  /** "05" and "5", "3.0" and "3", ".5" and "0.5" are the same number. Review found zero-padded
+   * dates (fmtClinicDate) killing every summary line the model wrote a date into. */
+  function canonNum(n) { var f = parseFloat(String(n).replace(/,/g, "")); return isNaN(f) ? String(n) : String(f); }
+  function numberPool(source) { var p = {}; numbersIn(source, true).forEach(function (n) { p[canonNum(n)] = 1; }); return p; }
+  /** A number the model states that the source never did is a fabricated clinical fact. Drops the
+   * offending LINE (or list item) rather than the whole answer; returns { text|items, dropped }. */
+  function dropUnsupportedNumbers(out, source) {
+    var pool = numberPool(source), dropped = 0;
+    function okLine(l) { var ns = numbersIn(l); for (var i = 0; i < ns.length; i++) if (!pool[canonNum(ns[i])]) return false; return true; }
+    if (Array.isArray(out)) { var kept = out.filter(function (l) { var k = okLine(l); if (!k) dropped++; return k; }); return { items: kept, dropped: dropped }; }
+    var lines = String(out || "").split("\n").filter(function (l) { var k = okLine(l); if (!k) dropped++; return k; });
+    return { text: lines.join("\n"), dropped: dropped };
+  }
+
+  /* ── LONG INPUT (Phase 6) ──
+   * Every pack loads at 4096 tokens (llama_jni.cpp keeps n_ctx deliberately small), whatever the
+   * model card says. A whole patient timeline or a 30-minute dictation does not fit, and silently
+   * truncating it would drop the clinically important tail. So: split on entry, then sentence,
+   * boundaries into windows that fit beside the system prompt and the output budget; process each;
+   * carry the intermediate result forward. chars/3.6 is a deliberately pessimistic token estimate
+   * for clinical English on these tokenizers (measured 3.5 to 4), so windows err on the small side. */
+  function estTokens(s) {
+    // Indic script tokenises at roughly one token per character on Qwen3 (worse on some), and a
+    // prompt over n_ctx is a hard generation failure, so non-ASCII counts at 1.2 per character.
+    s = String(s || ""); var non = (s.match(/[^\x00-\x7f]/g) || []).length;
+    return Math.ceil((s.length - non) / 3.6 + non * 1.2);
+  }
+  function windowBudget(packId, systemText, nPredict) {
+    var pk = (models() && models().PACKS[packId]) || {}; var ctx = pk.nCtx || 4096;
+    return Math.max(400, ctx - estTokens(systemText) - (nPredict || 512) - 160);   // 160: chat template + margin
+  }
+  function splitWindows(text, tokenBudget) {
+    var parts = String(text || "").split(/\n(?=\S)/), out = [], cur = "";
+    for (var i = 0; i < parts.length; i++) {
+      var units = estTokens(parts[i]) > tokenBudget ? (parts[i].match(/[^.!?\n]+[.!?]*\s*/g) || [parts[i]]) : [parts[i]];
+      for (var j = 0; j < units.length; j++) {
+        var u = units[j];
+        if (estTokens(u) > tokenBudget) {   // one sentence longer than a window: hard-cut, never silently drop
+          for (var k = 0; k < u.length; k += tokenBudget * 3) { if (cur) { out.push(cur); cur = ""; } out.push(u.slice(k, k + tokenBudget * 3)); }
+          continue;
+        }
+        if (cur && estTokens(cur + "\n" + u) > tokenBudget) { out.push(cur); cur = u; }
+        else cur = cur ? cur + (j ? " " : "\n") + u : u;
+      }
+    }
+    if (cur) out.push(cur);
+    return out;
+  }
+  /** Run `fn(window, index, total)` over the windows in order (one model at a time), collecting results.
+   * If the runtime rejects a window as too long for the context (the token estimate is an estimate),
+   * that window is split in half and both halves run; nothing is dropped. */
+  var TOO_LONG_RE = /n_ctx|too long|GENERATION_FAILURE|prompt.*>=|exceeds/i;
+  function eachWindow(wins, fn) {
+    var results = [], chain = Promise.resolve();
+    wins.forEach(function (w, i) {
+      chain = chain.then(function () {
+        return Promise.resolve().then(function () { return fn(w, i, wins.length); }).then(function (r) { results.push(r); }, function (e) {
+          var tok = estTokens(w);
+          if (!TOO_LONG_RE.test(String((e && e.message) || e)) || tok < 200) throw e;
+          return eachWindow(splitWindows(w, Math.ceil(tok / 2)), fn).then(function (rs) { rs.forEach(function (r) { results.push(r); }); });
+        });
+      });
+    });
+    return chain.then(function () { return results; });
+  }
+
+  /* ── patient timeline summary (was a raw fetch("/summary") in opd-emr.js; no local path at all) ── */
+  var SUMMARY_SYS =
+    "You are MaiK, a clinical assistant. Summarise this patient's longitudinal record for the treating doctor, using " +
+    "ONLY the entries provided. Do NOT invent any finding, diagnosis, drug, dose or date. Be concise. Structure with " +
+    "short headed lines: Problems, Course, Current medications, Pending, Red flags. Keep every date, figure, drug and " +
+    "dose exactly as written. No preamble.";
+  function summarize(text, opts, origSrc) {
+    var src = String(text || "").trim();
+    if (!src) return Promise.resolve({ error: "no-text" });
+    // The number guard always checks against the ORIGINAL record, never against an intermediate
+    // summary (which is model output and could carry an invented figure into the pool).
+    var orig = origSrc || src;
+    var packId = (opts && opts.pack) || currentPack();
+    var budget = windowBudget(packId, SUMMARY_SYS, 400);
+    var wins = splitWindows(src, budget);
+    var droppedTotal = 0;
+    return eachWindow(wins, function (w, i, n) {
+      var prompt = (n > 1 ? "PART " + (i + 1) + " of " + n + " of the record.\n" : "") + "=== ENTRIES ===\n" + w;
+      return generateText(prompt, SUMMARY_SYS, 400, opts).then(function (t) { var g = dropUnsupportedNumbers(t, orig); droppedTotal += g.dropped; return g.text; });
+    }).then(function (parts) {
+      function finish(t, windows) {
+        var g = dropUnsupportedNumbers(t, orig);
+        // Plain text: opd-emr.js renders this escaped, so markdown emphasis would show as asterisks.
+        return { text: g.text, mode: "summary", engine: "local", windows: windows, droppedLines: g.dropped + droppedTotal };
+      }
+      if (parts.length === 1) return finish(parts[0], 1);
+      var joined = parts.map(function (t, i) { return "[Part " + (i + 1) + "]\n" + t; }).join("\n\n");
+      var prompt = "These are summaries of consecutive parts of ONE patient's record. Merge them into a single concise " +
+        "summary, keeping every dated finding, diagnosis, drug and dose exactly as written. Do NOT invent anything.\n\n" + joined;
+      if (estTokens(prompt) > budget) {   // still too long: reduce the reductions, same original source
+        return summarize(joined, opts, orig).then(function (r) { r.windows = wins.length; return r; });
+      }
+      return generateText(prompt, SUMMARY_SYS, 500, opts).then(function (t) { return finish(t, wins.length); });
+    });
+  }
+
+  /* ── assessment extraction (kind "assessment"): _assessment-extract.js ── */
+  var ASSESSMENT_FIELDS = ["cc", "presentHx", "pastHx", "provisionalDx", "managementPlan"];
+  var ASSESS_SYS =
+    "You are transcribing a clinician's spoken consultation into an initial-assessment note. " +
+    "OUTPUT LANGUAGE - CRITICAL: write every value in clear clinical ENGLISH. The transcript may be Telugu, Hindi or " +
+    "code-switched Indian English; translate the clinical meaning to English and never output Telugu or Devanagari script. " +
+    "Keep drug names, doses, units, numbers and standard abbreviations exact.\n" +
+    "Return ONLY JSON containing any of these keys, each a short plain-text string (in English): " +
+    "{\"cc\": chief complaints and their duration, \"presentHx\": history of present illness, \"pastHx\": past medical / surgical history, " +
+    "\"provisionalDx\": the clinician's explicitly stated provisional diagnosis, \"managementPlan\": the clinician's explicitly stated plan}\n" +
+    "STRICT RULES:\n" +
+    "- Use ONLY what is EXPLICITLY stated. Never infer, complete, summarise beyond what was said, or invent.\n" +
+    "- NEVER generate a diagnosis, symptom, finding, drug, dose or investigation that was not spoken. Include provisionalDx and " +
+    "managementPlan ONLY if the clinician clearly stated their own assessment or plan; otherwise OMIT those keys.\n" +
+    "- Do NOT put vitals or physical-examination findings here (captured separately).\n" +
+    "- Omit any key not clearly stated. No prose outside the JSON.";
+  function sanitizeAssessment(parsed) {
+    var out = {};
+    if (!parsed || typeof parsed !== "object") return out;
+    ASSESSMENT_FIELDS.forEach(function (k) {
+      var v = parsed[k]; if (typeof v !== "string" && typeof v !== "number") return;
+      var s = stripIndic(tidy(v, 2000)); if (s) out[k] = s;
+    });
+    return out;
+  }
+  /* Accumulate narrative across windows/refines without duplicating it. Substring containment
+   * missed every rewording ("fever 3 days" vs "fever for 3 days") and grew the field forever
+   * (review); token containment (four fifths of the new text's words already present) catches
+   * those, and the field is capped like the server's. */
+  function words(s) { return (String(s || "").toLowerCase().match(/[a-z0-9]{3,}/g) || []); }
+  function mostlyContained(a, b) {
+    var wb = words(b); if (!wb.length) return true;
+    var have = {}; words(a).forEach(function (w) { have[w] = 1; });
+    var hit = 0; wb.forEach(function (w) { if (have[w]) hit++; });
+    return hit / wb.length >= 0.8;
+  }
+  function mergeText(a, b) { a = a || ""; b = b || ""; if (!a) return b; if (!b || mostlyContained(a, b)) return a; return (a + "; " + b).slice(0, 2000); }
+  function assess(transcript, opts) {
+    var t = String(transcript == null ? "" : transcript).trim();
+    if (!t) return Promise.resolve({ error: "no-text" });
+    var packId = (opts && opts.pack) || currentPack();
+    var wins = splitWindows(t, windowBudget(packId, ASSESS_SYS, 400));
+    // Ambient, like Scribe: queued behind anything the clinician is waiting on.
+    var bg = { background: true, pack: packId };
+    if (opts) { for (var ak in opts) if (Object.prototype.hasOwnProperty.call(opts, ak) && !(ak in bg)) bg[ak] = opts[ak]; }
+    return eachWindow(wins, function (w) {
+      return generateJSON("=== TRANSCRIPT ===\n" + w, ASSESS_SYS, 400, bg).then(sanitizeAssessment, function (e) { if (e && e.message === "parse") return {}; throw e; });
+    }).then(function (parts) {
+      var fields = {};
+      // Narrative accumulates; the clinician's stated diagnosis and plan are single statements, so
+      // the latest window that states one wins (never "viral fever; dengue" as one "stated" dx).
+      parts.forEach(function (p) { ASSESSMENT_FIELDS.forEach(function (k) { if (p[k]) fields[k] = (k === "provisionalDx" || k === "managementPlan") ? p[k] : mergeText(fields[k], p[k]); }); });
+      // The same guard the server leaves to the app: no figure the clinician did not say.
+      ASSESSMENT_FIELDS.forEach(function (k) { if (fields[k] && !dropUnsupportedNumbers(fields[k], t).text) delete fields[k]; });
+      return { kind: "assessment", fields: fields, mode: "assessment", engine: "local", windows: wins.length };
+    });
+  }
+
+  /* ── OPD Scribe (kind "opd-scribe"): _opd-scribe.js, as a ROLLING WINDOW with running state ──
+   * The cloud re-reads the whole transcript on every refine. That cannot fit here after a few
+   * minutes of dictation, so the engine keeps what it has already captured and asks the model
+   * only about the text it has not seen (plus a short overlap), merging deterministically. */
+  var EMR_FIELD_KEYS = [
+    "cc", "presentHx", "pastHx", "surgicalHistory", "homeMeds", "treatmentReceived", "comorbidsNote",
+    "dm", "dmDetails", "htn", "htnDetails", "cardiac", "cardiacDetails",
+    "asthma", "asthmaDetails", "tb", "tbDetails", "thyroid", "thyroidDetails",
+    "epilepsy", "epilepsyDetails",
+    "ckd", "ckdDetails", "cld", "cldDetails", "cancer", "cancerDetails", "cva", "cvaDetails",
+    "dyslipidemia", "dyslipidemiaDetails",
+    "habits", "alcohol", "smoking", "recDrug", "tobacco", "habitsDetails",
+    "familyHistory", "familyDiabetes", "familyHtn", "familyHeart",
+    "familyCancer", "familyTb", "familyAsthma", "familyDetails",
+    "allergies", "diet", "sleep", "lmp", "immunization", "nutrition", "hydration",
+    "systemicExam", "respiratoryExam", "cvsExam", "abdoExam", "localExam",
+    "tenderness", "tendernessDetails", "abdoMass", "abdoMassDetails",
+    "provisionalDx", "managementPlan", "advice"
+  ];
+  var YES_NO_KEYS = {
+    dm: 1, htn: 1, cardiac: 1, asthma: 1, tb: 1, thyroid: 1, epilepsy: 1,
+    ckd: 1, cld: 1, cancer: 1, cva: 1, dyslipidemia: 1,
+    habits: 1, alcohol: 1, smoking: 1, recDrug: 1, tobacco: 1,
+    familyHistory: 1, familyDiabetes: 1, familyHtn: 1, familyHeart: 1,
+    familyCancer: 1, familyTb: 1, familyAsthma: 1,
+    tenderness: 1, abdoMass: 1
+  };
+  var SCRIBE_SYS =
+    "You are an OPD scribe turning a doctor-patient consultation transcript into a structured note. " +
+    "Return ONLY JSON: {\"en\":\"\", \"emrFields\":{...}, \"suggestions\":{\"provisionalDx\":\"\",\"ddx\":[],\"investigations\":[]}}.\n" +
+    "\"en\" = a FAITHFUL English translation of the NEW transcript text, keeping ALL spoken vitals/numbers/units exactly; do not summarise it.\n" +
+    "OUTPUT LANGUAGE - CRITICAL: every emrFields value and every suggestion in clear clinical ENGLISH; never Telugu or Devanagari script. " +
+    "Keep drug names, doses, units, numbers and abbreviations (BP, IV, BD, OD) exactly as stated.\n" +
+    "ASR NOISE: the transcript is on-device speech recognition of possibly code-switched speech. De-duplicate repeats, drop filler, " +
+    "normalise ONLY an unambiguous mis-recognition. If a garbled word could be more than one drug or finding, keep it verbatim or omit it. NEVER guess a dose.\n" +
+    "emrFields keys allowed: cc, presentHx, pastHx, surgicalHistory, homeMeds, treatmentReceived, comorbidsNote, dm, dmDetails, htn, htnDetails, cardiac, cardiacDetails, asthma, asthmaDetails, tb, tbDetails, thyroid, thyroidDetails, epilepsy, epilepsyDetails, ckd, ckdDetails, cld, cldDetails, cancer, cancerDetails, cva, cvaDetails, dyslipidemia, dyslipidemiaDetails, familyHistory, familyDiabetes, familyHtn, familyHeart, familyCancer, familyTb, familyAsthma, familyDetails, allergies, diet, sleep, lmp, immunization, nutrition, hydration, systemicExam, respiratoryExam, cvsExam, abdoExam, localExam, tenderness, tendernessDetails, abdoMass, abdoMassDetails, provisionalDx, managementPlan, advice. " +
+    "(dm/htn/cardiac/asthma/tb/thyroid/epilepsy/ckd/cld/cancer/cva/dyslipidemia/familyHistory/familyDiabetes/familyHtn/familyHeart/familyCancer/familyTb/familyAsthma/tenderness/abdoMass as 'Yes'/'No' if stated).\n" +
+    "Habits: alcohol, smoking, recDrug, tobacco as 'Yes'/'No', habitsDetails for details; set habits='Yes' if any is; add top-level \"alcoholDetail\" with the exact amount and type stated.\n" +
+    "If ALREADY CAPTURED fields are given, output ONLY additions or corrections from the NEW text; do not repeat captured content.\n" +
+    "RULES: use ONLY what is explicitly said; NEVER invent a diagnosis, symptom, finding, drug, dose or investigation. provisionalDx ONLY if the clinician stated it. " +
+    "ddx = a short reasonable differential FOR THE DOCTOR TO CONSIDER. investigations = tests a clinician would reasonably consider. No prose outside JSON.";
+  function sanitizeScribe(parsed) {
+    var out = { emrFields: {}, suggestions: { ddx: [], investigations: [] } };
+    if (!parsed || typeof parsed !== "object") return out;
+    if (typeof parsed.en === "string" && parsed.en.trim()) out.en = tidy(parsed.en, 6000);
+    if (typeof parsed.alcoholDetail === "string" && parsed.alcoholDetail.trim()) out.alcoholDetail = tidy(parsed.alcoholDetail, 200);
+    var ef = parsed.emrFields || {};
+    EMR_FIELD_KEYS.forEach(function (k) {
+      var v = ef[k]; if (typeof v !== "string" && typeof v !== "number" && typeof v !== "boolean") return;
+      var s = stripIndic(tidy(v, 2000)); if (!s) return;
+      if (YES_NO_KEYS[k]) {
+        if (/^(?:yes|y|true)$/i.test(s)) out.emrFields[k] = "Yes";
+        else if (/^(?:no|n|false)$/i.test(s)) out.emrFields[k] = "No";
+        return;
+      }
+      out.emrFields[k] = s;
+    });
+    var sg = parsed.suggestions || {};
+    if (typeof sg.provisionalDx === "string" && stripIndic(sg.provisionalDx)) out.suggestions.provisionalDx = stripIndic(sg.provisionalDx).slice(0, 300);
+    var clean = function (a) { return (Array.isArray(a) ? a : []).map(function (x) { return stripIndic(tidy(x, 200)); }).filter(Boolean).slice(0, 12); };
+    out.suggestions.ddx = clean(sg.ddx); out.suggestions.investigations = clean(sg.investigations);
+    return out;
+  }
+  var SCRIBE_OVERLAP = 400;   // chars re-shown so a sentence split across two refines is not lost
+  var _scribe = { prefix: "", covered: 0, acc: null };
+  // A refine that has been overtaken by a newer transcript must not spend a generation drafting
+  // from stale text: on a 4B model each pass costs tens of seconds, so a long consult would queue
+  // one refine per window and never catch up.
+  var _scribeSeq = 0;
+  function scribeReset() { _scribe = { prefix: "", covered: 0, acc: null }; _scribeSeq++; }
+  function unionList(a, b) {
+    var seen = {}, out = [];
+    (a || []).concat(b || []).forEach(function (x) { var k = String(x).toLowerCase(); if (!seen[k]) { seen[k] = 1; out.push(x); } });
+    return out.slice(0, 12);
+  }
+  function scribeMerge(acc, nu) {
+    acc = acc || { en: "", emrFields: {}, suggestions: { ddx: [], investigations: [] } };
+    var out = { en: acc.en, emrFields: {}, suggestions: { ddx: [], investigations: [] }, alcoholDetail: acc.alcoholDetail };
+    for (var k in acc.emrFields) if (Object.prototype.hasOwnProperty.call(acc.emrFields, k)) out.emrFields[k] = acc.emrFields[k];
+    EMR_FIELD_KEYS.forEach(function (k) {
+      var v = nu.emrFields[k]; if (!v) return;
+      // Narrative fields accumulate. A yes/no: "Yes" is a positive history the patient stated and a
+      // later window that never mentions the condition must not flip it to "No" (a small model
+      // re-emitting every key is exactly how that happened in review). "No" -> "Yes" is accepted.
+      if (YES_NO_KEYS[k]) { if (v === "No" && out.emrFields[k] === "Yes") return; out.emrFields[k] = v; return; }
+      out.emrFields[k] = mergeText(out.emrFields[k], v);
+    });
+    if (nu.en && !mostlyContained(out.en, nu.en)) out.en = (out.en ? out.en + " " + nu.en : nu.en).slice(0, 6000);
+    if (nu.alcoholDetail) out.alcoholDetail = nu.alcoholDetail;
+    out.suggestions.provisionalDx = nu.suggestions.provisionalDx || acc.suggestions.provisionalDx;
+    out.suggestions.ddx = unionList(acc.suggestions.ddx, nu.suggestions.ddx);
+    out.suggestions.investigations = unionList(acc.suggestions.investigations, nu.suggestions.investigations);
+    return out;
+  }
+  function scribeFill(transcript, opts) {
+    var t = String(transcript == null ? "" : transcript);
+    if (!t.trim()) return Promise.resolve({ error: "no-text" });
+    // Continue the rolling state only if this transcript extends the one we have covered; a new
+    // consult (or an edited transcript) starts clean.
+    if (!_scribe.acc || t.indexOf(_scribe.prefix) !== 0) scribeReset();
+    var from = Math.max(0, _scribe.covered - SCRIBE_OVERLAP);
+    var fresh = t.slice(from);
+    if (!fresh.trim() && _scribe.acc) return Promise.resolve(finishScribe(_scribe.acc, 0));
+    var packId = (opts && opts.pack) || currentPack();
+    var captured = _scribe.acc ? "=== ALREADY CAPTURED ===\n" + JSON.stringify({ emrFields: _scribe.acc.emrFields, suggestions: _scribe.acc.suggestions }).slice(0, 1500) + "\n\n" : "";
+    var budget = windowBudget(packId, SCRIBE_SYS + captured, 600);
+    var wins = splitWindows(fresh, budget);
+    var acc = _scribe.acc;
+    var mySeq = ++_scribeSeq;
+    var bg = { background: true, pack: packId };
+    if (opts) { for (var k in opts) if (Object.prototype.hasOwnProperty.call(opts, k) && !(k in bg)) bg[k] = opts[k]; }
+    // A model that answered in prose is not a model that captured nothing: count the misses so a
+    // run that produced NO structure can say so instead of leaving the form silently empty (owner
+    // report, 2026-09-11: "no autopopulation of drafting", with no message either way).
+    var unparsed = 0, ran = 0;
+    return eachWindow(wins, function (w) {
+      if (mySeq !== _scribeSeq) return null;   // a newer refine arrived while this one waited its turn
+      ran++;
+      return generateJSON(captured + "=== NEW TRANSCRIPT ===\n" + w, SCRIBE_SYS, 600, bg)
+        .then(sanitizeScribe, function (e) { if (e && e.message === "parse") { unparsed++; return sanitizeScribe(null); } throw e; })
+        .then(function (nu) { acc = scribeMerge(acc, nu); });
+    }).then(function () {
+      if (ran && unparsed === ran && !hasScribeContent(acc)) {
+        return { error: "draft-unparsed", unparsed: unparsed, engine: "local", mode: "opd-scribe",
+                 message: "The on-device model answered in prose instead of a structured note, so nothing could be filled in. The transcript is kept. A larger pack (MAiK MxCore or Neural) is better at this, or use MaiK Cloud." };
+      }
+      return null;
+    }).then(function (bail) {
+      if (bail) return bail;
+      return afterScribe();
+    });
+    function afterScribe() {
+      // Superseded: leave the rolling state to the newer refine and report what we already have,
+      // so the caller shows the fields captured so far rather than an error.
+      if (mySeq !== _scribeSeq) return finishScribe(_scribe.acc || acc || { en: "", emrFields: {}, suggestions: { ddx: [], investigations: [] } }, 0);
+      _scribe = { prefix: t, covered: t.length, acc: acc };
+      return finishScribe(acc, wins.length);
+    }
+  }
+  function finishScribe(acc, windows) {
+    return { kind: "opd-scribe", en: acc.en, emrFields: acc.emrFields, suggestions: acc.suggestions, alcoholDetail: acc.alcoholDetail, mode: "opd-scribe", engine: "local", windows: windows };
+  }
+  /** Did this pass actually capture anything the form can use? */
+  function hasScribeContent(acc) {
+    if (!acc) return false;
+    if (acc.en) return true;
+    if (acc.emrFields && Object.keys(acc.emrFields).length) return true;
+    var s = acc.suggestions || {};
+    return !!(s.provisionalDx || (s.ddx && s.ddx.length) || (s.investigations && s.investigations.length));
+  }
+
+  /* ── SURGX note structuring (kind "surgx-note"): _surgx-note.js ── */
+  var NEVER_AI_FILLABLE = ["counts", "specimens", "implants", "consent", "meds", "side", "cultureSent",
+    "patientRef", "age", "sex", "date", "admitDate", "dischargeDate", "surgeon", "assistants", "anaesthetist", "doctor"];
+  function surgxNoteSys(fieldList, noteType) {
+    return "You are structuring a surgeon's own dictation into a " + tidy(noteType || "operative", 24) + " note. " +
+      "Return ONLY JSON: {\"fields\":{\"<key>\":\"<text>\"}}. No prose outside the JSON.\n" +
+      "YOUR ONLY JOB is to decide which field each thing the surgeon SAID belongs in, and to tidy the wording into clinical " +
+      "English. You are a typist with anatomy knowledge, not a clinician.\n" +
+      "ABSOLUTE RULES - a breach is a patient-safety event:\n" +
+      "1. NEVER invent, infer, estimate, complete or 'make consistent' any clinical fact.\n" +
+      "2. If the surgeon did not say it, OMIT THE FIELD ENTIRELY. Do NOT write 'nil', 'none', 'routine' or 'not stated' unless said.\n" +
+      "3. NEVER write a number that is not spoken. No unit conversion, rounding, totals or inferred sizes.\n" +
+      "4. Do not add a normal finding or a usual step because it is usually present or performed.\n" +
+      "5. Use only these field keys; anything else is discarded:\n" + fieldList + "\n" +
+      "6. Preserve the surgeon's own clinical terms, drug names, laterality and anatomical detail exactly.\n" +
+      "DICTATION NOISE: de-duplicate repeats and drop filler. Normalise ONLY an unambiguous mis-recognition; if a garbled word " +
+      "could be more than one structure, drug or instrument, keep it VERBATIM or omit it. Never guess a number.";
+  }
+  function sanitizeSurgxNote(parsed, allowedKeys) {
+    var out = { fields: {}, dropped: [] }, allow = {};
+    (Array.isArray(allowedKeys) ? allowedKeys : []).slice(0, 40).forEach(function (k) { var key = (k && typeof k === "object") ? String(k.k || "") : String(k || ""); if (key) allow[key] = 1; });
+    NEVER_AI_FILLABLE.forEach(function (k) { delete allow[k]; });
+    if (!parsed || typeof parsed !== "object") return out;
+    var src = (parsed.fields && typeof parsed.fields === "object") ? parsed.fields : parsed;
+    Object.keys(src).forEach(function (k) {
+      if (!allow[k]) { out.dropped.push(k); return; }
+      var v = src[k]; if (typeof v !== "string" && typeof v !== "number") { out.dropped.push(k); return; }
+      var s = tidy(v, 4000); if (!s) { out.dropped.push(k); return; }
+      if (/^(n\/?a|none stated|not stated|not mentioned|unknown|unspecified|-{1,3})$/i.test(s)) { out.dropped.push(k); return; }
+      out.fields[k] = s;
+    });
+    return out;
+  }
+  function noteStructure(transcript, allowedFields, noteType, opts) {
+    var t = String(transcript == null ? "" : transcript).trim();
+    if (!t) return Promise.resolve({ error: "no-text" });
+    var keys = (Array.isArray(allowedFields) ? allowedFields : []).map(function (f) { return (f && typeof f === "object") ? f : { k: String(f), label: String(f) }; }).slice(0, 40);
+    if (!keys.length) return Promise.resolve({ error: "no allowedFields" });
+    var fieldList = keys.map(function (f) { return "  - " + f.k + ": " + (f.label || f.k); }).join("\n");
+    var sys = surgxNoteSys(fieldList, noteType);
+    var packId = (opts && opts.pack) || currentPack();
+    var wins = splitWindows(t, windowBudget(packId, sys, 700));
+    var fields = {}, dropped = [];
+    return eachWindow(wins, function (w) {
+      return generateJSON("=== TRANSCRIPT ===\n" + w, sys, 700, opts)
+        .then(function (p) { return sanitizeSurgxNote(p, keys); }, function (e) { if (e && e.message === "parse") return { fields: {}, dropped: [] }; throw e; })
+        .then(function (c) {
+          Object.keys(c.fields).forEach(function (k) { fields[k] = fields[k] ? fields[k] + " " + c.fields[k] : c.fields[k]; });
+          c.dropped.forEach(function (k) { if (dropped.indexOf(k) < 0) dropped.push(k); });
+        });
+    }).then(function () {
+      // surgx-model.js applyExtraction() runs numericGuard again on the client; this is the same
+      // rule applied one step earlier so a fabricated number never leaves the engine at all.
+      Object.keys(fields).forEach(function (k) { if (!dropUnsupportedNumbers(fields[k], t).text) { delete fields[k]; if (dropped.indexOf(k) < 0) dropped.push(k); } });
+      return { kind: "surgx-note", fields: fields, dropped: dropped, mode: "surgx-note", engine: "local", windows: wins.length };
+    });
+  }
+
+  /* ── ICD ranking (kind "icd-suggest"): _icd-suggest.js. The model ONLY orders candidates the
+   * caller retrieved from the real ICD table; an id it did not copy exactly is dropped, never
+   * corrected. No candidates, no suggestions: this engine never generates a code. ── */
+  var ICD_SYS =
+    "You are a clinical coder helping a doctor attach ICD-10/ICD-11 codes to a diagnosis. You are given the doctor's text " +
+    "and a candidate list of REAL codes already retrieved from the ICD database. Select ONLY from the candidate list; never " +
+    "invent, alter or guess a code or id.\n" +
+    "Return ONLY JSON: {\"suggestions\":[{\"id\":\"\",\"confidence\":\"high|medium|low\",\"why\":\"\"}]}.\n" +
+    "RULES: id MUST be copied EXACTLY from a candidate's id. Prefer one good ICD-10 AND one good ICD-11 match when both fit. " +
+    "Order by relevance, most likely first, max 6. why = one short clinical justification. If nothing fits, return " +
+    "{\"suggestions\":[]}. Output ONLY the JSON.";
+  function sanitizeIcd(parsed, candidates) {
+    var byId = {}; (candidates || []).forEach(function (c) { if (c && c.id) byId[c.id] = c; });
+    var out = [], seen = {}, list = (parsed && Array.isArray(parsed.suggestions)) ? parsed.suggestions : [];
+    for (var i = 0; i < list.length && out.length < 6; i++) {
+      var s = list[i]; if (!s || typeof s !== "object") continue;
+      var id = String(s.id || ""), cand = byId[id]; if (!cand || seen[id]) continue; seen[id] = 1;
+      var conf = ["high", "medium", "low"].indexOf(String(s.confidence || "").toLowerCase()) >= 0 ? String(s.confidence).toLowerCase() : "medium";
+      out.push({ id: cand.id, system: cand.system, code: cand.code, title: cand.title, confidence: conf, why: tidy(s.why, 200) });
+    }
+    return { suggestions: out };
+  }
+  function icdRank(text, candidates, opts) {
+    var t = String(text == null ? "" : text).slice(0, 4000).trim();
+    var cands = (Array.isArray(candidates) ? candidates : []).filter(function (c) { return c && c.id && c.code; }).slice(0, 30);
+    if (!t) return Promise.resolve({ error: "no-text" });
+    if (!cands.length) return Promise.resolve({ kind: "icd-suggest", suggestions: [], mode: "icd-suggest", engine: "local", candidates: 0 });
+    var rows = cands.map(function (c) { return c.id + " | " + c.system + " | " + c.code + " | " + c.title; }).join("\n");
+    var prompt = "=== DOCTOR'S TEXT ===\n" + t + "\n\n=== CANDIDATE CODES (id | system | code | title) ===\n" + rows;
+    return generateJSON(prompt, ICD_SYS, 400, opts).then(function (p) {
+      var r = sanitizeIcd(p, cands); r.kind = "icd-suggest"; r.mode = "icd-suggest"; r.engine = "local"; r.candidates = cands.length; return r;
+    }, parseFailure);
+  }
+
+  /* ── Dx My Patient voice extract (kind "reasoning"): catalog-only findings ── */
+  var REASON_SYS =
+    "You are extracting structured clinical findings from a doctor's spoken description of ONE patient. Below is a CONTROLLED " +
+    "FINDING CATALOG (key = human label). Map the transcript to findings using ONLY keys that appear in this catalog; NEVER invent, " +
+    "guess or modify a key. Return ONLY JSON: {\"findings\":[\"<exact catalog key>\"], \"patient\":{\"age\":<number|null>,\"sex\":\"male\"|\"female\"|null}, " +
+    "\"unmatched\":[\"<short phrase you heard but could not map>\"]}. Include a finding ONLY if the transcript clearly asserts it is PRESENT; " +
+    "never one the clinician denies. No prose outside the JSON.";
+  function sanitizeReasoning(parsed, catalog) {
+    var valid = {}; (catalog || []).forEach(function (c) { if (c && c.key) valid[c.key] = 1; });
+    var seen = {}, findings = [];
+    (parsed && Array.isArray(parsed.findings) ? parsed.findings : []).forEach(function (k) { if (valid[k] && !seen[k]) { seen[k] = 1; findings.push(k); } });
+    var unmatched = (parsed && Array.isArray(parsed.unmatched) ? parsed.unmatched : []).map(function (s) { return String(s).slice(0, 80); }).filter(Boolean).slice(0, 20);
+    var patient;
+    if (parsed && parsed.patient && typeof parsed.patient === "object") {
+      var age = Number(parsed.patient.age), sex = String(parsed.patient.sex || "").toLowerCase();
+      patient = {}; if (!isNaN(age) && age > 0 && age < 130) patient.age = age; if (sex === "male" || sex === "female") patient.sex = sex;
+      if (!Object.keys(patient).length) patient = undefined;
+    }
+    return { findings: findings, patient: patient, unmatched: unmatched };
+  }
+  function reasoningExtract(transcript, catalog, opts) {
+    var t = String(transcript == null ? "" : transcript).slice(0, 8000).trim();
+    if (!t) return Promise.resolve({ error: "no-text" });
+    var cat = (Array.isArray(catalog) ? catalog : []).filter(function (c) { return c && c.key; }).slice(0, 500);
+    var packId = (opts && opts.pack) || currentPack();
+    var budget = windowBudget(packId, REASON_SYS, 300);
+    // The catalog can be larger than the window on its own (500 keys). Slice it so every pass sees
+    // the whole transcript and a part of the catalog, and union the keys found.
+    var tTok = estTokens(t), catBudget = Math.max(150, budget - tTok - 40);
+    var slices = [], cur = [], curTok = 0;
+    cat.forEach(function (c) { var line = c.key + " = " + (c.label || c.key); var n = estTokens(line) + 1; if (cur.length && curTok + n > catBudget) { slices.push(cur); cur = []; curTok = 0; } cur.push(line); curTok += n; });
+    if (cur.length) slices.push(cur);
+    if (!slices.length) slices.push([]);
+    var findings = [], seen = {}, unmatched = [], patient;
+    return eachWindow(slices, function (lines) {
+      var prompt = "=== FINDING CATALOG (key = label) ===\n" + lines.join("\n") + "\n\n=== TRANSCRIPT ===\n" + t;
+      return generateJSON(prompt, REASON_SYS, 300, opts).then(function (p) { return sanitizeReasoning(p, cat); }, function (e) { if (e && e.message === "parse") return sanitizeReasoning(null, cat); throw e; })
+        .then(function (r) {
+          r.findings.forEach(function (k) { if (!seen[k]) { seen[k] = 1; findings.push(k); } });
+          r.unmatched.forEach(function (u) { if (unmatched.indexOf(u) < 0 && unmatched.length < 20) unmatched.push(u); });
+          if (r.patient && !patient) patient = r.patient;
+        });
+    }).then(function () {
+      // A phrase "unmatched" in one slice may have matched in another.
+      var lower = {}; cat.forEach(function (c) { lower[String(c.label || c.key).toLowerCase()] = c.key; });
+      unmatched = unmatched.filter(function (u) { var k = lower[u.toLowerCase()]; return !(k && seen[k]); });
+      return { findings: findings, patient: patient, unmatched: unmatched, mode: "reasoning", engine: "local", passes: slices.length };
+    });
+  }
+
+  /* ── MaiK Ask (kinds "maik-ask-next" / "maik-ask-extract"): _maik-ask.js ── */
+  var ALLOWED_ACTIONS = { ask: 1, clarify: 1, finish: 1, alert_doctor: 1 }, ALLOWED_PRIORITY = { high: 1, normal: 1, low: 1 };
+  function maikNextSys(ctx) {
+    var known = (ctx.known && typeof ctx.known === "object") ? ctx.known : {};
+    var lang = ctx.language ? String(ctx.language) : "en";
+    return "You are MaiK, helping a doctor take a patient's history. You are NOT a doctor: you do NOT diagnose, prescribe, advise, " +
+      "reassure, order tests, or tell the patient anything about their condition. You ONLY ask ONE short, natural history question.\n" +
+      "Return ONLY JSON: {\"action\":\"ask\",\"question\":\"\",\"language\":\"\",\"targetField\":\"\",\"priority\":\"\",\"reason\":\"\"}.\n" +
+      "action MUST be one of: ask | clarify | finish | alert_doctor.\n" +
+      "Ask about EXACTLY this one missing piece of history: \"" + tidy(ctx.targetHint || ctx.targetField, 200) + "\" (targetField=\"" + tidy(ctx.targetField, 60) + "\"). ONE question only.\n" +
+      "Complaint: " + tidy(ctx.complaint || ctx.pathwayLabel, 200) + ".\n" +
+      "Already known, do NOT ask again: " + JSON.stringify(known).slice(0, 600) + ".\n" +
+      "LANGUAGE - MANDATORY: ask in \"" + lang + "\" (en = plain English; te/te-en = Telugu or Telugu-English; hi/hi-en = Hindi or Hinglish), " +
+      "phrased naturally the way an Indian clinician speaks to a patient.\n" +
+      "Keep targetField = \"" + tidy(ctx.targetField, 60) + "\". Set language to the code you used. priority = high | normal | low. reason = one short phrase.";
+  }
+  function sanitizeMaikNext(parsed) {
+    var out = { action: "finish", question: "", language: "", targetField: "", priority: "normal", reason: "" };
+    if (!parsed || typeof parsed !== "object" || !ALLOWED_ACTIONS[parsed.action]) return out;
+    out.action = parsed.action;
+    if (typeof parsed.question === "string") out.question = tidy(parsed.question, 400);
+    if (typeof parsed.language === "string") out.language = parsed.language.replace(/[^a-z\-]/gi, "").slice(0, 10);
+    if (typeof parsed.targetField === "string") out.targetField = parsed.targetField.slice(0, 60);
+    if (ALLOWED_PRIORITY[parsed.priority]) out.priority = parsed.priority;
+    if (typeof parsed.reason === "string") out.reason = tidy(parsed.reason, 200);
+    if ((out.action === "ask" || out.action === "clarify") && !out.question) out.action = "finish";
+    return out;
+  }
+  function maikNext(ctx, opts) {
+    ctx = (ctx && typeof ctx === "object") ? ctx : {};
+    return generateJSON("Produce the next question now.", maikNextSys(ctx), 200, opts).then(function (p) {
+      var r = sanitizeMaikNext(p); r.kind = "maik-ask-next"; r.mode = "maik-ask-next"; r.engine = "local"; return r;
+    }, parseFailure);
+  }
+  function maikExtractSys(ctx) {
+    var allowed = Array.isArray(ctx.allowedFields) ? ctx.allowedFields : [];
+    return "You are MaiK, extracting ONLY explicitly-stated history from a patient's spoken answer. You do NOT infer, diagnose, or add " +
+      "anything the patient did not clearly say.\nThe patient was just asked about: \"" + tidy(ctx.targetHint || ctx.targetField, 200) + "\".\n" +
+      "Return ONLY JSON: {\"findings\":[{\"field\":\"\",\"value\":\"\",\"confidence\":0.0}]}.\n" +
+      "field MUST be one of these allowed field names: " + JSON.stringify(allowed).slice(0, 500) + ".\n" +
+      ((ctx.targetKind === "redflag" || ctx.targetKind === "associated")
+        ? "This was a yes/no screening question: the value for \"" + tidy(ctx.targetField, 60) + "\" MUST be exactly \"present\" or \"absent\".\n" : "") +
+      "value = a SHORT clinical value in ENGLISH. confidence = 0..1. Include a finding ONLY if the patient explicitly stated it; " +
+      "if nothing was clearly stated return {\"findings\":[]}. The answer may be Telugu, Hindi, English or code-switched; output English values.";
+  }
+  function sanitizeMaikExtract(parsed, allowedFields) {
+    var out = { findings: [] };
+    if (!parsed || typeof parsed !== "object" || !Array.isArray(parsed.findings)) return out;
+    var allow = null; if (Array.isArray(allowedFields) && allowedFields.length) { allow = {}; allowedFields.forEach(function (f) { allow[String(f)] = 1; }); }
+    parsed.findings.forEach(function (f) {
+      if (!f || typeof f.field !== "string" || !f.field) return;
+      var field = f.field.split(".").pop();
+      if (allow && !allow[field]) return;
+      if (f.value == null || String(f.value).trim() === "") return;
+      var c = Number(f.confidence); if (!(c >= 0 && c <= 1)) c = 0.5;
+      out.findings.push({ field: field, value: stripIndic(tidy(f.value, 200)), confidence: c });
+    });
+    out.findings = out.findings.filter(function (f) { return f.value; }).slice(0, 20);
+    return out;
+  }
+  function maikExtract(ctx, transcript, opts) {
+    ctx = (ctx && typeof ctx === "object") ? ctx : {};
+    var t = String(transcript == null ? "" : transcript).slice(0, 4000).trim();
+    if (!t) return Promise.resolve({ error: "no-text" });
+    var prompt = "=== QUESTION ASKED ===\n" + tidy(ctx.question, 400) + "\n=== PATIENT ANSWER ===\n" + t;
+    return generateJSON(prompt, maikExtractSys(ctx), 300, opts).then(function (p) {
+      var r = sanitizeMaikExtract(p, ctx.allowedFields); r.kind = "maik-ask-extract"; r.mode = "maik-ask-extract"; r.engine = "local"; return r;
+    }, parseFailure);
+  }
+
+  /* ── ICU imaging summary / clinical correlation: the IMAGING_* and CORRELATE_* prompts ── */
+  var IMAGING_SYS =
+    "You are a clinical decision-support assistant summarizing ONE radiology report for a doctor. You are NOT the diagnostic " +
+    "authority: a deterministic engine owns the diagnosis; your output is an advisory DRAFT the clinician must verify. Reason ONLY " +
+    "from the report text and the de-identified context provided. NEVER invent findings, values, measurements or history not in the " +
+    "report. Use hedged wording only ('Imaging is suggestive of', 'Consider correlation with', 'Differential considerations include'). " +
+    "NEVER write 'confirmed diagnosis', 'the patient definitely has', 'no emergency', 'rule out completely' or 'safe to discharge'.\n" +
+    "Return ONLY JSON with EXACTLY these keys: {\"summary\":string, \"positives\":[string], \"negatives\":[string], \"significance\":[string], " +
+    "\"differentials\":[string], \"correlateWith\":[string], \"redFlags\":[string], \"nextChecks\":[string]}. summary is ONE sentence. " +
+    "Arrays hold short phrases ([] if none).";
+  var IMAGING_KEYS = ["positives", "negatives", "significance", "differentials", "correlateWith", "redFlags", "nextChecks"];
+  var CORRELATE_SYS =
+    "You are a clinical decision-support assistant correlating a patient's imaging concepts, laboratory abnormalities and recorded " +
+    "findings for a doctor. You are NOT the diagnostic authority; your output is advisory and must be verified. Reason ONLY from the " +
+    "de-identified evidence provided; never invent findings, values or history. Use hedged wording only. NEVER write 'confirmed " +
+    "diagnosis', 'definitely has', 'no emergency' or 'safe to discharge'. If the evidence is too sparse to correlate, say so plainly in " +
+    "clinicalCorrelation and return empty arrays.\n" +
+    "Return ONLY JSON with EXACTLY these keys: {\"clinicalCorrelation\":string, \"topConsiderations\":[string], \"whyFit\":[string], " +
+    "\"alternatives\":[string], \"whatDoesntFit\":[string], \"missing\":[string], \"redFlags\":[string], \"nextChecks\":[string], " +
+    "\"protocols\":[string]}. clinicalCorrelation is 1-2 sentences. Arrays hold short phrases ([] if none).";
+  var CORRELATE_KEYS = ["topConsiderations", "whyFit", "alternatives", "whatDoesntFit", "missing", "redFlags", "nextChecks", "protocols"];
+  var FORBIDDEN_RE = /confirmed diagnosis|definitely has|no emergency|rule out completely|safe to discharge/i;
+  function sanitizeAdvisory(parsed, textKey, arrayKeys, source) {
+    var out = {}; if (!parsed || typeof parsed !== "object") parsed = {};
+    var s = tidy(parsed[textKey], 600); if (FORBIDDEN_RE.test(s)) s = "";
+    out[textKey] = dropUnsupportedNumbers(s, source).text;
+    arrayKeys.forEach(function (k) { out[k] = dropUnsupportedNumbers(strList(parsed[k], 12, 200).filter(function (x) { return !FORBIDDEN_RE.test(x); }), source).items; });
+    return out;
+  }
+  function imagingSummary(packet, opts) {
+    var pkt = packet || {}; var report = String(pkt.reportText || "").slice(0, 12000).trim();
+    if (!report) return Promise.resolve({ error: "no-report" });
+    var ctx = [];
+    if (pkt.modality) ctx.push("Modality: " + tidy(pkt.modality, 80));
+    if (pkt.studyName) ctx.push("Study: " + tidy(pkt.studyName, 160));
+    if (pkt.indication) ctx.push("Indication: " + tidy(pkt.indication, 300));
+    if (pkt.ageBand) ctx.push("Age band: " + tidy(pkt.ageBand, 20));
+    if (pkt.sex) ctx.push("Sex: " + tidy(pkt.sex, 12));
+    if (pkt.workingDx) ctx.push("Working diagnosis (clinician, not authoritative): " + tidy(pkt.workingDx, 160));
+    if (Array.isArray(pkt.symptoms) && pkt.symptoms.length) ctx.push("Relevant clinical findings: " + tidy(pkt.symptoms.join("; "), 400));
+    if (Array.isArray(pkt.labs) && pkt.labs.length) ctx.push("Relevant labs: " + tidy(pkt.labs.join(", "), 400));
+    var head = "=== CONTEXT (de-identified) ===\n" + ctx.join("\n") + "\n\n=== RADIOLOGY REPORT TEXT ===\n";
+    var source = ctx.join("\n") + "\n" + report;
+    var packId = (opts && opts.pack) || currentPack();
+    var wins = splitWindows(report, windowBudget(packId, IMAGING_SYS + head, 500));
+    return eachWindow(wins, function (w) {
+      return generateJSON(head + w, IMAGING_SYS, 500, opts).then(function (p) { return sanitizeAdvisory(p, "summary", IMAGING_KEYS, source); },
+        function (e) { if (e && e.message === "parse") return null; throw e; });
+    }).then(function (parts) {
+      parts = parts.filter(Boolean); if (!parts.length) return { error: "parse", mode: "imaging", engine: "local" };
+      var merged = { summary: parts.map(function (p) { return p.summary; }).filter(Boolean).join(" ") };
+      IMAGING_KEYS.forEach(function (k) { merged[k] = []; parts.forEach(function (p) { merged[k] = unionList(merged[k], p[k]); }); });
+      return { summary: merged, mode: "imaging", engine: "local", windows: wins.length };
+    });
+  }
+  function correlate(packet, opts) {
+    var pkt = packet || {};
+    var img = (pkt.imaging && pkt.imaging.concepts) || [], labs = (pkt.labs && pkt.labs.abnormalities) || [];
+    if (!img.length && !labs.length) return Promise.resolve({ error: "no-evidence" });
+    var pc = pkt.patientContext || {};
+    var flags = (pkt.imaging && pkt.imaging.criticalFlags) || [];
+    var found = (pkt.clinical && pkt.clinical.approvedFindings) || [];
+    var packId = (opts && opts.pack) || currentPack();
+    var budget = windowBudget(packId, CORRELATE_SYS, 500);
+    // Fit the evidence to the window by shortening the two LISTS from their tails, never the
+    // clinician-recorded findings or the critical flags (review: a byte-level cut lost the last
+    // section first, which was the clinician's own words). What was left out is reported by count.
+    var imgN = img.length, labN = labs.length;
+    function build() {
+      var L = ["=== PATIENT (de-identified) ==="];
+      if (pc.ageBand) L.push("Age band: " + tidy(pc.ageBand, 20));
+      if (pc.sex) L.push("Sex: " + tidy(pc.sex, 12));
+      if (pc.careSetting) L.push("Care setting: " + tidy(pc.careSetting, 24));
+      L.push("\n=== IMAGING CONCEPTS ===\n" + (img.slice(0, imgN).map(function (x) { return "- " + tidy(x, 120); }).join("\n") || "none"));
+      if (flags.length) L.push("Critical imaging flags: " + tidy(flags.join(", "), 300));
+      L.push("\n=== LABORATORY ABNORMALITIES ===\n" + (labs.slice(0, labN).map(function (x) { return "- " + tidy(x, 120); }).join("\n") || "none"));
+      if (found.length) L.push("\n=== CLINICIAN-RECORDED FINDINGS ===\n" + tidy(found.join("; "), 500));
+      return L.join("\n");
+    }
+    var body = build();
+    while (estTokens(body) > budget && (imgN > 3 || labN > 3)) {
+      if (labN >= imgN && labN > 3) labN--; else imgN--;
+      body = build();
+    }
+    var omitted = { imaging: img.length - imgN, labs: labs.length - labN };
+    return generateJSON(body, CORRELATE_SYS, 500, opts).then(function (p) {
+      var out = { correlation: sanitizeAdvisory(p, "clinicalCorrelation", CORRELATE_KEYS, body), mode: "correlate", engine: "local" };
+      if (omitted.imaging || omitted.labs) { out.truncated = true; out.omitted = omitted; out.correlation.missing = unionList(out.correlation.missing, [(omitted.imaging ? omitted.imaging + " imaging concept(s)" : "") + (omitted.imaging && omitted.labs ? " and " : "") + (omitted.labs ? omitted.labs + " lab abnormality(ies)" : "") + " not reviewed (did not fit the on-device window)"]); }
+      return out;
+    }, function (e) { if (e && e.message === "parse") return { error: "parse", mode: "correlate", engine: "local" }; throw e; });
+  }
+
+  /* ── translate (kind "translate"). The prompt is the server's. The GUARD is what makes it safe
+   * to run on a small model at all: no Indic script may survive, every number in the input must
+   * survive, and no number may appear that was not in the input. Whether a language is offered
+   * offline at all is decided by the registry's caps.lang (maik-engine.js), which is filled ONLY
+   * from a passing test/run-local-translate-eval.mjs run. ── */
+  var TRANSLATE_SYS =
+    "Translate this clinical dictation to clear clinical ENGLISH. Keep drug names, doses, units, numbers and standard abbreviations " +
+    "(BP, IV, BD, OD) exactly. If it is already English, return it unchanged. Output ONLY the translation, no preamble, labels or quotes.";
+  function translate(text, opts) {
+    var t = String(text == null ? "" : text).slice(0, 8000).trim();
+    if (!t) return Promise.resolve({ error: "no-text" });
+    return generateText("=== TEXT ===\n" + t, TRANSLATE_SYS, Math.min(1000, Math.max(120, estTokens(t) * 2)), opts).then(function (out) {
+      out = tidy(out, 8000);
+      if (!out) return { error: "no-answer" };
+      if (INDIC_RE.test(out)) return { error: "translate-guard", reason: "native-script" };
+      var inN = numbersIn(t, true).map(canonNum), outN = numbersIn(out).map(canonNum);
+      for (var i = 0; i < inN.length; i++) if (outN.indexOf(inN[i]) < 0) return { error: "translate-guard", reason: "number-lost", number: inN[i] };
+      for (var j = 0; j < outN.length; j++) if (inN.indexOf(outN[j]) < 0) return { error: "translate-guard", reason: "number-added", number: outN[j] };
+      return { text: out, mode: "translate", engine: "local" };
+    });
+  }
+
   var API = {
     SYSTEM: SYSTEM, DEFAULT_PACK: DEFAULT_PACK, emphasize: emphasize,
+    // local task layer (2026-09-11)
+    TUTOR_SYS: TUTOR_SYS, SURG_SYS: SURG_SYS, MODE_SYS: MODE_SYS,
+    estTokens: estTokens, splitWindows: splitWindows, windowBudget: windowBudget, numbersIn: numbersIn, canonNum: canonNum, dropUnsupportedNumbers: dropUnsupportedNumbers, stripIndic: stripIndic, mergeText: mergeText,
+    queueState: queueState, setJobTimeoutMs: setJobTimeoutMs,
+    summarize: tracked(summarize), assess: tracked(assess), scribeFill: tracked(scribeFill), scribeReset: scribeReset,
+    noteStructure: tracked(noteStructure), icdRank: tracked(icdRank), reasoningExtract: tracked(reasoningExtract),
+    maikNext: tracked(maikNext), maikExtract: tracked(maikExtract), imagingSummary: tracked(imagingSummary), correlate: tracked(correlate),
+    translate: tracked(translate),
+    sanitizeAssessment: sanitizeAssessment, sanitizeScribe: sanitizeScribe, scribeMerge: scribeMerge, sanitizeSurgxNote: sanitizeSurgxNote, NEVER_AI_FILLABLE: NEVER_AI_FILLABLE,
+    sanitizeIcd: sanitizeIcd, sanitizeReasoning: sanitizeReasoning, sanitizeMaikNext: sanitizeMaikNext, sanitizeMaikExtract: sanitizeMaikExtract, sanitizeAdvisory: sanitizeAdvisory,
     HISTORY_TURNS: HISTORY_TURNS, buildPrompt: buildPrompt, answer: tracked(answer), available: available, currentPack: currentPack,
     isFollowUp: isFollowUp, isGreeting: isGreeting, SYSTEM_GREET: SYSTEM_GREET, stripReasoning: stripReasoning,
     visionReady: visionReady, visionPathFor: visionPathFor, MAX_IMAGES: MAX_IMAGES, SYSTEM_IMAGE: SYSTEM_IMAGE,

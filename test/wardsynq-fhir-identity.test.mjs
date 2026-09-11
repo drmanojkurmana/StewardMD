@@ -63,6 +63,20 @@ test("5. both shapes are R4-conformant", () => {
   }
 });
 
+test("5b. a US prescriber's identifier is an NPI under the standard system, not a council namespace", () => {
+  const p = fhirPractitioner("fb:dr-menon", VERIFIED, { region: "US" });
+  const reg = p.identifier[1];
+  assert.equal(reg.system, "http://hl7.org/fhir/sid/us-npi", "the standard NPI system HL7 publishes, not urn:stewardmd:council:*");
+  assert.equal(reg.type.coding[0].code, "NPI", "the v2-0203 code for a national provider identifier, not MD");
+  assert.equal(reg.value, "AP-12345");
+  assert.equal(reg.assigner, undefined, "there is no council to assign it: the system itself says who issues it");
+
+  // An Indian hospital (the default region, and every hospital that predates region) is unchanged.
+  const india = fhirPractitioner("fb:dr-menon", VERIFIED);
+  assert.match(india.identifier[1].system, /urn:stewardmd:council:/);
+  assert.equal(india.identifier[1].type.coding[0].code, "MD");
+});
+
 /* ---- 6: the hospital ----------------------------------------------------------------------------- */
 
 test("6. the organisation is the hospital's own record, with a real code and an honest local one", () => {

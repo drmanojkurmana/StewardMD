@@ -443,15 +443,25 @@ function roleMapping() {
  * only source of a signing credential. A staff PIN session carries none, so a doctor who signed in
  * with a PIN can write and cannot sign, and the record will say so.
  */
-function actorFromOpdRole({ identity, role, claims }) {
+function actorFromOpdRole({ identity, role, claims, memberRegNo }) {
   claims = claims || {};
   if (!identity || !identity.id) return null;
   const grant = grantForRole(role);
   if (!grant) return null;
+  /* TWO SOURCES, AND THE RECORD KEEPS WHICH. The platform's verified claim is the stronger one and
+   * wins whenever it is present. Failing that, the hospital's own staff registry (q_members.regNo,
+   * settable only by an admin) - because a doctor signing in the way hospital staff actually sign
+   * in carries no claims at all, and before this could write the chart but never sign a single
+   * prescription, note or discharge summary. Neither: no credential, and the store refuses the
+   * signature exactly as it always did. */
+  const platform = claims.regNo ? String(claims.regNo) : "";
+  const hospital = memberRegNo ? String(memberRegNo) : "";
+  const credential = platform || hospital || null;
   return makeActor({
     id: identity.id, kind: KIND.HUMAN, tier: grant.tier,
     display: claims.name || identity.name || identity.email || identity.id,
-    credential: claims.regNo ? String(claims.regNo) : null,
+    credential,
+    credentialSource: credential ? (platform ? "platform-verified" : "hospital-asserted") : null,
     scope: { read: grant.read, write: grant.write, writeCategories: grant.writeCategories || null },
   });
 }
@@ -586,7 +596,7 @@ async function resolveClinicalActor(request, env, tenantId, need, deps) {
     if (az && az.ok) {
       const grant = grantForRole(az.role);
       if (!grant) throw new PermissionError(`role '${az.role}' has no clinical actor`);
-      const actor = actorFromOpdRole({ identity, role: az.role, claims });
+      const actor = actorFromOpdRole({ identity, role: az.role, claims, memberRegNo: az.regNo });
       if (need === "record:write" && !actorCan(actor, TIER.DRAFT)) throw new PermissionError(`role '${az.role}' may not write the clinical record`);
       // actorFromOpdRole's object is frozen, like every actor this file hands out - a new object
       // carries the request context rather than mutating a frozen one.

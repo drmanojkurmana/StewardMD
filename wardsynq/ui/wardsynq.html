@@ -14,7 +14,7 @@
      the network being up at exactly the moment a ward has lost it. The stack in --sans is now the
      design rather than a fallback from one. Production step, if the face is wanted: self-host a
      subset alongside the CSS with font-display: swap, so it is cached with everything else. -->
-<link rel="stylesheet" href="wardsynq.css?v=8">
+<link rel="stylesheet" href="wardsynq.css?v=10">
 <link rel="icon" type="image/png" sizes="32x32" href="brand/icon-32.png">
 <link rel="apple-touch-icon" sizes="180x180" href="brand/icon-180.png">
 <link rel="manifest" href="brand/wardsynq.webmanifest">
@@ -50,6 +50,24 @@
       <button class="link" type="button" data-go="ledger">Record <span class="k">R</span></button>
       <button class="link" type="button" disabled>Notes</button>
       <button class="link" type="button" disabled>Handover</button>
+    </nav>
+    <!-- The rest of WardSynQ, when this page is the hospital's landing screen on wardsynq.com
+         (opened with ?site=1 by the site shell). Hidden everywhere else: inside the StewardMD app
+         these links would point at nothing. -->
+    <nav class="sitemap" id="sitemap" hidden aria-label="WardSynQ">
+      <div class="heading">WardSynQ</div>
+      <a href="/#/home">Map</a>
+      <a href="/#/ward/">Ward</a>
+      <a href="/#/ward/board">Bed board</a>
+      <a href="/#/ward/edboard">Emergency</a>
+      <a href="/#/ward/critsboard">Critical results</a>
+      <a href="/#/ward/flowcommand">Command center</a>
+      <a href="/#/ward/twin">Digital twin</a>
+      <a href="/#/patients">Patients</a>
+      <a href="/#/maik">MaiK</a>
+      <a href="/#/admin">Admin Center</a>
+      <a href="/#/audit">Audit</a>
+      <a href="/#/logout">Sign out</a>
     </nav>
     <div class="roster">
       <div class="heading">Ward</div>
@@ -125,7 +143,7 @@
 
 <footer class="foot">WardSynQ demonstration build. Real deterministic safety engine, unapproved clinical content. Not for clinical use.</footer>
 
-<script type="module" src="wardsynq-app.js?v=5"></script>
+<script type="module" src="wardsynq-app.js?v=6"></script>
 <script type="module">
   // Offline shell. Registered separately from the app so a caching failure never stops the
   // workstation loading: an app that says it is offline is more use than one that will not open.

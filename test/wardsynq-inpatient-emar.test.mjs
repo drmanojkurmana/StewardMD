@@ -137,12 +137,12 @@ const NOTE_TEMPLATES = [{
   ],
 }];
 
-function seedHospital(mode = "wardsynq") {
+function seedHospital(mode = "wardsynq", region) {
   docs.clear(); clock = 1;
   RECORD = new MemoryRepository();
   // ownerUid is nobody on this ward: an owner resolves to `admin` and holds every capability, which
   // would make every separation assertion below vacuous.
-  docs.set(`q_orgs/${ORG}`, { fields: { id: ORG, code: "SMD-WARD01", name: "WSQ Ward Hospital", kind: "clinic", mode, connectTenantId: TENANT_ROW.id, ownerUid: "cfa:nobody", createdAt: 1, wardsynq: { orderSets: ORDER_SETS, noteTemplates: NOTE_TEMPLATES } }, updateTime: "t1" });
+  docs.set(`q_orgs/${ORG}`, { fields: { id: ORG, code: "SMD-WARD01", name: "WSQ Ward Hospital", kind: "clinic", mode, ...(region ? { region } : {}), connectTenantId: TENANT_ROW.id, ownerUid: "cfa:nobody", createdAt: 1, wardsynq: { orderSets: ORDER_SETS, noteTemplates: NOTE_TEMPLATES } }, updateTime: "t1" });
   for (const [email, role] of [[DOCTOR, "doctor"], [NURSE, "nurse"], [PHARM, "pharmacy"], [LABTECH, "lab"], [LOCUM, "doctor"]]) {
     docs.set(`q_members/${sanitize(ORG)}__${sanitize(idFor(email))}`, { fields: { orgId: ORG, identity: idFor(email), role, active: true }, updateTime: "t1" });
   }
@@ -224,6 +224,15 @@ test("the whole inpatient vertical: admit, ward vitals, order, and a governed ad
     { encounterId: list.patients[0].encounterId, bed: list.patients[0].bed },
     { encounterId: adm.encounterId, bed: "12" },
   );
+  /* REGRESSION, 2026-09-11: the row must NAME the patient.
+   *
+   * This projected the encounter alone, so every row carried a record id where a name belongs and
+   * the ward screen printed that: a round reading "opd-pat-smd-demo-00001" down the list. A nurse
+   * identifies a patient by name and MRN, and the record id is the one identifier on the row that
+   * cannot be checked against a wristband. Invisible on a two-patient fixture; obvious the moment a
+   * 100-bed hospital was seeded. */
+  assert.equal(list.patients[0].name, reg.patient.name, "the ward list names its patients");
+  assert.equal(list.patients[0].mrn, reg.mrn, "and carries the MRN a wristband is checked against");
 
   // 3. WARD VITALS, by the nurse, coded exactly as the OPD path codes them.
   const vit = await as(NURSE, "/ward/vitals", "POST", {
@@ -235,6 +244,15 @@ test("the whole inpatient vertical: admit, ward vitals, order, and a governed ad
   const obs = await RECORD.byPatient(TENANT_ROW.id, "Observation", adm.patientId);
   assert.equal(obs.find((o) => o.code === "8480-6").value, 126, "systolic recorded as reported");
   assert.ok(obs.every((o) => o.encounterId === adm.encounterId), "every ward reading is anchored to the admission");
+
+  /* REGRESSION, 2026-09-11: A TEMPERATURE IS STORED IN THE UNIT IT WAS TAKEN IN.
+   *
+   * migrate-vitals.js defaulted tempUnit to "F" and ward.js never sent one, so a nurse in an Indian
+   * hospital charting 37.1 stored "37.1 [degF]" - profound hypothermia - to be read later by
+   * somebody who was not in the room. The unit now comes from the hospital's own country
+   * (functions/_region.js) whenever the caller does not state one. */
+  const tempObs = obs.find((o) => o.code === "8310-5");
+  assert.equal(tempObs.unit, "[degF]", "this hospital sent F explicitly, so F is what is stored");
 
   // 4. THE ORDER, by the doctor, carrying a real dose the bedside can check against.
   assert.equal(ord.__status, 200, JSON.stringify(ord));
@@ -1040,13 +1058,28 @@ test("the discharge summary now carries the problem list instead of an empty ass
 
 test("the round is computed from the frequency the doctor already wrote, and a given dose shows as given", async () => {
   seedHospital();
-  const { adm, patient, scan } = await admittedPatientOnDrug();   // TID, ordered 2026-09-07
+  const { adm, ord, patient, scan } = await admittedPatientOnDrug();   // TID
 
-  const sched = await as(NURSE, `/ward/schedule?orgId=${ORG}&patientId=${adm.patientId}&from=2026-09-09T18:30:00.000Z&to=2026-09-10T18:30:00.000Z`);
+  /* THE WINDOW IS ANCHORED TO THE ORDER, NOT TO A CALENDAR DATE.
+   *
+   * An order is effective the instant it is written, and scheduleSlots() deliberately never places
+   * a dose before the order existed. This test used to hardcode a fixed 2026-09-09/10 window and a
+   * fixed list of three slots, which made it pass ONLY when the suite happened to run between
+   * 18:30Z and 02:30Z - about a third of the day. Run at any other hour it saw the earlier slots
+   * correctly excluded as pre-dating the order and failed. Anchoring the window to the order's own
+   * effective time asserts the real property (TID means three doses a day) at every hour. */
+  const orderedAt = (await RECORD.latest(TENANT_ROW.id, "MedicationOrder", ord.orderId)).meta.effectiveAt;
+  const from = orderedAt;
+  const to = new Date(Date.parse(orderedAt) + 86400000).toISOString();
+  const round = () => as(NURSE, `/ward/schedule?orgId=${ORG}&patientId=${adm.patientId}&from=${from}&to=${to}`);
+
+  const sched = await round();
   assert.equal(sched.__status, 200, JSON.stringify(sched));
-  // TID on the default Indian ward round: 08:00, 14:00, 22:00 IST.
-  assert.deepEqual(sched.due.map((d) => d.dueAt),
-    ["2026-09-10T02:30:00.000Z", "2026-09-10T08:30:00.000Z", "2026-09-10T16:30:00.000Z"]);
+  // TID on the default Indian ward round: 08:00, 14:00, 22:00 IST. Any 24h window holds each once.
+  const istHhmm = (iso) => new Date(Date.parse(iso) + 330 * 60000).toISOString().slice(11, 16);
+  assert.equal(sched.due.length, 3, JSON.stringify(sched.due));
+  assert.deepEqual(sched.due.map((d) => istHhmm(d.dueAt)).sort(), ["08:00", "14:00", "22:00"]);
+  assert.ok(sched.due.every((d) => d.dueAt >= from && d.dueAt < to), "and never before the order existed");
   assert.equal(sched.due[0].drug, "Paracetamol 500mg");
   assert.deepEqual(sched.due.map((d) => d.status), [null, null, null], "nothing is started, and nothing pretends to be");
   assert.deepEqual(sched.prn, []);
@@ -1063,7 +1096,7 @@ test("the round is computed from the frequency the doctor already wrote, and a g
   const given = await step("administer");
   assert.equal(given.__status, 200, JSON.stringify(given));
 
-  const after = await as(NURSE, `/ward/schedule?orgId=${ORG}&patientId=${adm.patientId}&from=2026-09-09T18:30:00.000Z&to=2026-09-10T18:30:00.000Z`);
+  const after = await round();
   assert.equal(after.due[0].status, "administered");
   assert.equal(after.due[0].administrationId, given.administrationId, "the slot and the record are the same dose");
   assert.equal(after.due[0].overdue, false, "a given dose is never chased");
@@ -1107,8 +1140,13 @@ test("a finished course stops appearing, and the window is bounded", async () =>
 
 test("reading the round is a view, and it grants nothing: it cannot move a dose", async () => {
   seedHospital();
-  const { adm } = await admittedPatientOnDrug();
-  const q = `?orgId=${ORG}&patientId=${adm.patientId}&from=2026-09-09T18:30:00.000Z&to=2026-09-10T18:30:00.000Z`;
+  const { adm, ord } = await admittedPatientOnDrug();
+  /* Anchored to the order, not to a calendar date, for the reason the TID test above states in
+   * full: scheduleSlots() never places a dose before the order existed, so a hardcoded
+   * 2026-09-09/10 window stops containing any dose the moment the clock passes it. It did, on
+   * 2026-09-10T18:30Z, and this test then failed on main for every run after that instant. */
+  const orderedAt = (await RECORD.latest(TENANT_ROW.id, "MedicationOrder", ord.orderId)).meta.effectiveAt;
+  const q = `?orgId=${ORG}&patientId=${adm.patientId}&from=${orderedAt}&to=${new Date(Date.parse(orderedAt) + 86400000).toISOString()}`;
   // The doctor and the pharmacist can both READ what is due.
   assert.equal((await as(DOCTOR, "/ward/schedule" + q)).__status, 200);
   assert.equal((await as(PHARM, "/ward/schedule" + q)).__status, 200);
@@ -1116,6 +1154,48 @@ test("reading the round is a view, and it grants nothing: it cannot move a dose"
   const s = await as(NURSE, "/ward/schedule" + q);
   const bad = await as(PHARM, "/ward/mar", "POST", { orgId: ORG, action: "verify", orderId: s.due[0].orderId, dueAt: s.due[0].dueAt, patient: { id: adm.patientId } });
   assert.equal(bad.__status, 403);
+});
+
+/* THE UNIT A TEMPERATURE IS STORED IN, WHEN NOBODY SAID.
+ *
+ * This is the case that was actually wrong in production shape: ward.js sends no tempUnit at all, so
+ * every ward temperature fell to the hard-coded Fahrenheit default. In an Indian hospital - which is
+ * every hospital using this product today - a nurse charting 37.1 stored "37.1 [degF]". That is not
+ * a display preference; it is a wrong number in a clinical record, and 37.1 degF reads as profound
+ * hypothermia to whoever opens the chart next. */
+test("an unstated temperature is stored in the unit this hospital's country actually writes", async () => {
+  // India: no region set, which is every hospital that predates the field.
+  seedHospital();
+  const a = await admittedPatientOnDrug();
+  await as(NURSE, "/ward/vitals", "POST", {
+    orgId: ORG, encounterId: a.adm.encounterId, patientId: a.adm.patientId,
+    vitals: { temp: "37.1" },   // exactly what ward.js sends: a number, no unit
+  });
+  const inObs = await RECORD.byPatient(TENANT_ROW.id, "Observation", a.adm.patientId);
+  const inTemp = inObs.find((o) => o.code === "8310-5");
+  assert.equal(inTemp.value, 37.1);
+  assert.equal(inTemp.unit, "Cel", "37.1 in an Indian hospital is Celsius, not profound hypothermia");
+
+  // The United States, where 99.4 with no unit is Fahrenheit and Celsius would be absurd.
+  seedHospital("wardsynq", "US");
+  const b = await admittedPatientOnDrug();
+  await as(NURSE, "/ward/vitals", "POST", {
+    orgId: ORG, encounterId: b.adm.encounterId, patientId: b.adm.patientId,
+    vitals: { temp: "99.4" },
+  });
+  const usObs = await RECORD.byPatient(TENANT_ROW.id, "Observation", b.adm.patientId);
+  assert.equal(usObs.find((o) => o.code === "8310-5").unit, "[degF]");
+
+  // And an explicit unit always wins over the hospital's default: a thermometer that reads in one
+  // unit is a fact about the reading, not about the country.
+  seedHospital();
+  const c = await admittedPatientOnDrug();
+  await as(NURSE, "/ward/vitals", "POST", {
+    orgId: ORG, encounterId: c.adm.encounterId, patientId: c.adm.patientId,
+    vitals: { temp: "99.4", tempUnit: "F" },
+  });
+  const cObs = await RECORD.byPatient(TENANT_ROW.id, "Observation", c.adm.patientId);
+  assert.equal(cObs.find((o) => o.code === "8310-5").unit, "[degF]", "what the caller said wins");
 });
 
 /* ---- the discharge screen, end to end -----------------------------------------------------------
@@ -2640,6 +2720,83 @@ test("ONLY A CLINICIAN, AND ONLY A HUMAN, may declare an emergency", async () =>
   assert.equal(new Set(log.grants.map((x) => x.actorId)).size, 2);
 });
 
+/* REGRESSION, 2026-09-10 break-glass phase: DECLARATION -> AUTHORIZATION -> REAL-TIME NOTIFICATION
+ * -> AUDIT -> REVIEW is now one coherent chain. The prior audit found the accountability surface was
+ * entirely pull-based - the log exists and somebody must choose to read it, with nobody told AT THE
+ * TIME an emergency chart was opened. This wires the SAME Dispatcher primitive critical-results.js
+ * already uses for exactly the same reason, attempted before the grant is written and recorded ON
+ * the grant itself - never a second system, never gating the declaration. */
+test("BREAK-GLASS NOTIFICATION: a declaration attempts real-time notification and records the outcome, honestly, without ever blocking the read", async () => {
+  seedHospital();
+  const { adm } = await admittedPatientOnDrug();
+
+  // No channel is wired in this build (the same honest gap critical-results.js's own route states),
+  // so the attempt is made and the honest outcome is NO_CHANNEL - never a silent "sent".
+  const g = await as(NURSE, "/ward/break-glass", "POST", {
+    orgId: ORG, patientId: adm.patientId, reason: "Found unresponsive on the ward, treating team unreachable.",
+  });
+  assert.equal(g.__status, 200, JSON.stringify(g));
+  assert.equal(g.notification.attempted, true, "a real attempt was made, not skipped");
+  assert.equal(g.notification.delivered, false, "honestly: nothing is configured to deliver to");
+  assert.equal(g.notification.reason, "NO_CHANNEL");
+
+  // The declaration was NOT blocked by the absent channel - the clinician is mid-emergency, and
+  // refusing the read because a pager did not answer would be the worse failure.
+  const chart = await as(NURSE, `/ward/emergency-chart?orgId=${ORG}&patientId=${adm.patientId}`);
+  assert.equal(chart.__status, 200, JSON.stringify(chart));
+
+  // The outcome is on the REVIEW surface too, not only the declaration's own response - a reader of
+  // the log can tell "declared and told nobody" without cross-referencing anything else.
+  const log = await as(DOCTOR, `/ward/break-glass-log?orgId=${ORG}`);
+  assert.equal(log.grants[0].notification.attempted, true);
+  assert.equal(log.grants[0].notification.delivered, false);
+
+  // And it survives on the record itself, append-only, same as everything else about the grant.
+  const hist = await RECORD.history(TENANT_ROW.id, "BreakGlassGrant", g.grantId);
+  assert.equal(hist[0].notification.attempted, true);
+});
+
+test("BREAK-GLASS NOTIFICATION: when a channel IS configured, delivery is recorded, and a failing channel still never blocks the declaration", async () => {
+  seedHospital();
+  const { adm } = await admittedPatientOnDrug();
+
+  // The exact deps the router itself builds for this call - actorDeps()/recordDeps() are the SAME
+  // mocked factories mock.module wired at the top of this file, called the same way the router
+  // calls them. Only notifyDeps differs: a channel is a FUNCTION, injected through deps, never JSON
+  // an org's config could carry, mirroring critical-results.js's own wiring exactly.
+  const depsMod = await import("../functions/_wardsynq/deps.js");
+  const { declareBreakGlass } = await import("../functions/_wardsynq/break-glass.js");
+  const ctxFor = (channels) => ({
+    migration: { mode: "authoritative", tenantId: TENANT_ROW.id },
+    patientId: adm.patientId, reason: "Found unresponsive on the ward, treating team unreachable.",
+    actorDeps: depsMod.actorDeps(ENV), recordDeps: depsMod.recordDeps(ENV, TENANT_ROW.id),
+    notifyDeps: { channels },
+  });
+  const asReq = (email) => new Request("https://x/break-glass", { headers: { "Cf-Access-Authenticated-User-Email": email } });
+
+  const paged = [];
+  const delivering = await declareBreakGlass(
+    asReq(NURSE), ENV,
+    ctxFor({ pager: async (payload) => { paged.push(payload); return { delivered: true, receipt: "PAGE-1" }; } }),
+  );
+  assert.equal(delivering.ok, true, JSON.stringify(delivering));
+  assert.equal(delivering.notification.delivered, true);
+  assert.equal(delivering.notification.channels[0].channel, "pager");
+  assert.equal(delivering.notification.channels[0].delivered, true);
+  assert.equal(paged[0].patientId, adm.patientId, "the channel actually received the declaration's own facts");
+  assert.equal(paged[0].reason, "Found unresponsive on the ward, treating team unreachable.");
+
+  // A channel that FAILS is a recorded failed attempt, and the declaration still succeeds - the
+  // read is never held hostage to a broken pager.
+  const failing = await declareBreakGlass(
+    asReq(DOCTOR), ENV,
+    ctxFor({ pager: async () => { throw new Error("pager gateway unreachable"); } }),
+  );
+  assert.equal(failing.ok, true, JSON.stringify(failing));
+  assert.equal(failing.notification.delivered, false);
+  assert.match(failing.notification.channels[0].detail, /pager gateway unreachable/);
+});
+
 /* ---- pharmacy verification ----------------------------------------------------------------------
  *
  * The eMAR's `verify` step required MED_ADMINISTER - the NURSE's authority - because granting it to
@@ -3226,6 +3383,18 @@ test("THERE IS NO 'WHAT DID THIS PERSON READ' QUERY, and retention is enforced o
   assert.deepEqual(stale.people, [], "a read log that grows forever becomes a dossier");
   assert.equal(stale.outsideRetention, 1, "and it says how many it would not answer with");
   assert.ok(await RECORD.byPatient(TENANT_ROW.id, "ClinicalRead", adm.patientId), "the row itself is untouched");
+
+  // A hospital that has configured its OWN retention (HIPAA needs 6 years; the built-in default
+  // above is only 90) must actually get a wider window - functions/_opd_org.js wardsynqConfig's
+  // readLogRetentionDays, threaded through to wardsynq-readlog.js. Same read, same ~8-month gap
+  // that was outside the 90-day default above; 400 days keeps it.
+  const org = docs.get(`q_orgs/${ORG}`);
+  org.fields.wardsynq = { ...org.fields.wardsynq, readLogRetentionDays: 400 };
+  docs.set(`q_orgs/${ORG}`, org);
+  const kept = await as(NURSE, `/ward/readers?orgId=${ORG}&patientId=${adm.patientId}&valueId=old-value&supersededVersion=1&correctedAt=${encodeURIComponent("2026-09-07T08:00:00.000Z")}`);
+  assert.equal(kept.people.length, 1, "a hospital's own longer retention must actually widen what readersToNotify answers with");
+  assert.equal(kept.people[0].person, idFor(NURSE));
+  assert.ok(!kept.outsideRetention, "not dropped as outside retention when the hospital configured a wider window");
 });
 
 /* ---- the early warning score ---------------------------------------------------------------------- */
@@ -3254,7 +3423,14 @@ test("AN INCOMPLETE NEWS2 IS NEVER REASSURING, however low the partial total", a
     orgId: ORG, encounterId: adm.encounterId, patientId: adm.patientId,
     // All six numeric parameters PLUS the two NEWS2 could never record before: supplemental oxygen
     // and level of consciousness. Without them no early warning score can ever complete.
-    vitals: { rr: "18", spo2: "97", sbp: "126", pulse: "78", temp: "98.6", tempUnit: "F", o2: false, acvpu: "A" },
+    /* CHARTED IN CELSIUS, because this hospital is an Indian one and NEWS2's bands are Celsius.
+     * This fixture used to send 98.6 F and still assert a COMPLETE score - which passed only
+     * because the unit was discarded before scoring and 98.6 was read against the Celsius bands as
+     * "above 39", contributing 2 points to a patient with a normal temperature. The assertion
+     * below is unchanged: a full set of observations scores. What changed is that the set is now
+     * clinically coherent. A Fahrenheit temperature is refused outright, which
+     * test/wardsynq-deterioration.test.mjs pins directly. */
+    vitals: { rr: "18", spo2: "97", sbp: "126", pulse: "78", temp: "37.0", tempUnit: "C", o2: false, acvpu: "A" },
   });
   const scored = await as(NURSE, `/ward/news2?orgId=${ORG}&patientId=${adm.patientId}`);
   assert.equal(scored.score.scorable, true, JSON.stringify(scored.score));
@@ -6268,4 +6444,31 @@ test("SMART: the token endpoint is rate limited per client, and says so with Ret
   assert.equal(last.status, 429);
   assert.ok(Number(last.headers.get("retry-after")) >= 1);
   assert.equal((await last.json()).error, "temporarily_unavailable");
+});
+
+/* ---- the chart's timeline: every readable resource, in one chronological order ------------------ */
+
+test("timeline: admission, the problem, the order and the given dose all appear, most recent first", async () => {
+  seedHospital();
+  const { adm } = await admittedPatientOnDrug();
+  await as(DOCTOR, "/ward/problem", "POST", { orgId: ORG, problem: { patientId: adm.patientId, encounterId: adm.encounterId, code: "Community-acquired pneumonia", verificationStatus: "provisional" } });
+
+  const tl = await as(DOCTOR, `/ward/timeline?orgId=${ORG}&patientId=${adm.patientId}`);
+  assert.equal(tl.__status, 200);
+  assert.ok(tl.events.length >= 3, "at least the admission, the problem and the order appear");
+  const types = tl.events.map((e) => e.resourceType);
+  assert.ok(types.includes("Encounter"));
+  assert.ok(types.includes("Condition"));
+  assert.ok(types.includes("MedicationOrder"));
+  // Descending: each event is no more recent than the one before it.
+  for (let i = 1; i < tl.events.length; i++) assert.ok(tl.events[i - 1].at >= tl.events[i].at, "sorted most-recent-first");
+  // The order IS the drug currently running, surfaced as its own board.
+  assert.ok(tl.activeMedications.some((m) => m.drug === "Paracetamol 500mg" && m.since));
+});
+
+test("timeline: pharmacy cannot see it — the same emr.view gate the flowsheet already enforces", async () => {
+  seedHospital();
+  const { adm } = await admittedPatientOnDrug();
+  const r = await as(PHARM, `/ward/timeline?orgId=${ORG}&patientId=${adm.patientId}`);
+  assert.equal(r.__status, 403);
 });

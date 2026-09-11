@@ -38,6 +38,7 @@ import { operationOutcome } from "./fhir.js";
 import { fhirId } from "./fhir-id.js";
 import { signerSnapshot } from "../_pglog_signer.js";
 import { getOrg } from "../_opd_org_store.js";
+import { regionOf } from "../_region.js";
 
 const str = (v) => (v == null ? "" : String(v).trim());
 
@@ -46,6 +47,8 @@ const ACTOR_SYSTEM = "urn:stewardmd:actor";
 /** A medical council's own register. The council NAME is the namespace: India has many, and a
  *  registration number is only unique within one. Never flattened into a single national system. */
 const councilSystem = (council) => (str(council) ? `urn:stewardmd:council:${str(council).toLowerCase().replace(/[^a-z0-9]+/g, "-")}` : "urn:stewardmd:council:unstated");
+/** The standard system for a US prescriber's National Provider Identifier. Not ours - HL7's own. */
+const US_NPI_SYSTEM = "http://hl7.org/fhir/sid/us-npi";
 
 const narrative = (text) => ({ status: "generated", div: `<div xmlns="http://www.w3.org/1999/xhtml">${String(text).replace(/[<>&]/g, (c) => ({ "<": "&lt;", ">": "&gt;", "&": "&amp;" }[c]))}</div>` });
 
@@ -69,7 +72,16 @@ function fhirPractitioner(actorId, snapshot, opts) {
     identifier: [{ system: ACTOR_SYSTEM, value: id }],
   };
   if (s && str(s.regNo)) {
-    out.identifier.push({
+    /* A US prescriber's identifier is a National Provider Identifier, not a medical council
+     * registration - India has many councils and a registration is only unique within one, but
+     * the US has one standard system for exactly this fact, and HL7 publishes its URI. Region
+     * comes from the caller (the hospital's own org.region, functions/_region.js), never guessed
+     * here: this file has no hospital record of its own to check it against. */
+    const isUs = regionOf({ region: o.region }) === "US";
+    out.identifier.push(isUs ? {
+      type: { coding: [{ system: "http://terminology.hl7.org/CodeSystem/v2-0203", code: "NPI", display: "National provider identifier" }] },
+      system: US_NPI_SYSTEM, value: str(s.regNo),
+    } : {
       // MD: the v2-0203 code for a medical licence number. A standard code for exactly this fact.
       type: { coding: [{ system: "http://terminology.hl7.org/CodeSystem/v2-0203", code: "MD", display: "Medical License number" }] },
       system: councilSystem(s.council), value: str(s.regNo),
@@ -146,7 +158,7 @@ async function practitionerRead(request, env, ctx) {
     unchecked = !!(e && e.status === 503);
     snapshot = null;
   }
-  const resource = fhirPractitioner(wanted, snapshot, { id: str(ctx.id), accountName: ctx.accountName, unchecked });
+  const resource = fhirPractitioner(wanted, snapshot, { id: str(ctx.id), accountName: ctx.accountName, unchecked, region: ctx.region });
   if (!resource) return { ok: false, status: 404, outcome: operationOutcome("error", "not-found", "no such practitioner") };
   return { ok: true, status: 200, resource };
 }

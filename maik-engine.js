@@ -165,71 +165,318 @@
     };
   }
 
-  // ── ROUTER ──
-  // opts/onDelta are passed straight through so the local path can reuse home.js's replay()
-  // typewriter exactly as the cloud path does.
-  function route(kind, orig, self, args) {
-    var e = effective();
-    // Structured calls with an on-device version (owner, 2026-09-04): the CliniX viva judge and the
-    // OPD "Ask MaiK Pro" differential (extract kind "opd-suggest"). They go local ONLY when the
-    // effective engine is local; every other extract kind (voice, translate, MaiK Ask) has no local
-    // implementation and keeps today's cloud behaviour regardless of engine. KB-only mode has no
-    // model to judge or suggest with, so it also stays on the cloud path here rather than dead-ending.
-    // Web research (owner, 2026-09-04): "we can't charge them for snippet conversion into clean
-    // language" for anything but MaiK Cloud. The search itself (TinyFish) is free either way; on the
-    // local engine, fetch the raw sources via SMD_AI.researchSnippets (no Gemini call, no quota) and
-    // have the ON-DEVICE model write the answer instead. Evidence Review (mode "evidence-review") is
-    // a distinct paid PubMed-synthesis feature, untouched, always cloud.
-    if (kind === "research") {
-      var mode = args[1];
-      var Lw = window.SMD_MAIK_LOCAL, Aw = window.SMD_AI;
-      var wantLocalWeb = e === "local" && mode !== "evidence-review" && !!Lw && !!Lw.webAnswer &&
-        !!Aw && typeof Aw.researchSnippets === "function";
-      if (!wantLocalWeb) return orig.apply(self, args);
-      return Aw.researchSnippets(args[0], args[2]).then(function (snip) {
-        if (!snip || snip.error) return { error: (snip && snip.error) || "no-results" };
-        return Lw.webAnswer(args[0], snip.sources || []);
-      }).catch(function (err) { return { error: String((err && err.message) || err || "local-failed") }; });
+  // ── HARD LOCAL / CLOUD POLICY (owner directive, 2026-09-11) ──
+  //
+  // ONE decision, made here, for every AI call the app makes:
+  //   cloud  -> the original SMD_AI method, untouched. Cloud mode is exactly what it was.
+  //   rag    -> no model, no spend. Answer kinds get the KB-only notice; structured kinds get
+  //             { error: "kb-only" } instead of the silent cloud call they used to make.
+  //   local  -> the on-device engine, or a structured LOCAL_CAPABILITY_REQUIRED result. NEVER
+  //             orig.apply(): before this, every extract kind without a local function, and the
+  //             maik / summary / imaging / correlate / translate / transcribe / vision methods,
+  //             went to Gemini while the picker said "On-device". A clinician who chose Local
+  //             and has the network on must see NO cloud inference. That is the acceptance test.
+  //
+  // smd_maik_hard_local="0" restores the pre-2026-09-11 fall-through. It is a recovery switch for
+  // one release, not a mode: it exists so a broken local path can be worked around without a
+  // rebuild, and it should be deleted once the policy has lived in production for a while.
+  var KEY_HARD = "smd_maik_hard_local";
+  function hardLocal() { return lget(KEY_HARD) !== "0"; }
+  function policy() { return effective(); }
+  /** May a CLOUD AI PROVIDER be called right now? False in Local and KB-only. image-engine.js and
+   * voice.js ask this before their own cloud stages, which never passed through SMD_AI. */
+  function cloudAllowed() { return effective() === "cloud"; }
+  /** WHY the cloud is not allowed, for wording: "local" (chosen), "rag" (chosen), "offline" (the
+   * clinician chose Cloud but has no connection and the installed model is standing in). A refusal
+   * in the offline case must not say "switch to MaiK Cloud": they already did. */
+  function policyReason() { var e = effective(); if (e === "cloud") return "cloud"; if (getPref() === "cloud" && offlineStandIn()) return "offline"; return e; }
+
+  /* What each feature needs from a pack (maik-models.js CAPS is the other half).
+   *   json 2     strict structured output (Bonsai Swift is 1 and is never picked for these)
+   *   min        the reasoning floor a pack must meet; prefer = the tier to pick when installed
+   *   medical    rank medical packs first (never a hard filter)
+   *   vision     needs a projector on the pack, downloaded
+   *   langFrom   the INPUT decides the language (translate): Indic script -> that language
+   *   langCtx    ctx.language decides it (MaiK Ask asks the patient in their language)
+   *   cloudOnly  a MaiK Cloud feature by product decision: refused in Local with a cloud
+   *              suggestion, never run against Gemini silently
+   *   noModel    not a MaiK-model job at all (speech-to-text is Whisper's), so nothing to match */
+  var REQ = {
+    "explain":                  { min: 1, medical: true },
+    "explainGrounded":          { min: 1, medical: true },
+    "explainGroundedStream":    { min: 1, medical: true },
+    "vivaJudge":                { json: 2, min: 1 },
+    "research":                 { min: 1 },
+    "research:evidence-review": { cloudOnly: "Evidence Review synthesises PubMed literature in MaiK Cloud." },
+    "extract:opd-suggest":      { json: 2, min: 1, medical: true },
+    "extract:assessment":       { json: 2, min: 1, medical: true },
+    "extract:opd-scribe":       { json: 2, min: 1, medical: true },
+    "extract:surgx-note":       { json: 2, min: 1 },
+    "extract:icd-suggest":      { json: 2, min: 1, medical: true },
+    "extract:reasoning":        { json: 2, min: 1 },
+    "extract:translate":        { min: 1, langFrom: true },
+    "translate":                { min: 1, langFrom: true },
+    "maik:maik-ask-next":       { json: 2, min: 1, langCtx: true },
+    "maik:maik-ask-extract":    { json: 2, min: 1 },
+    "summary":                  { min: 1, prefer: 2, medical: true },
+    "imagingSummary":           { json: 2, min: 1, prefer: 2, medical: true },
+    "correlate":                { json: 2, min: 1, prefer: 2, medical: true },
+    "vision":                   { vision: true, min: 1 },
+    "visionText":               { onDevice: "In Local AI, fields are read by the on-device parser; cloud text extraction is off." },
+    "transcribe":               { noModel: "Speech-to-text runs on the phone's own Whisper engine (Clinical dictation), not on a MaiK model." }
+  };
+  var FEATURE_LABEL = {
+    "explain": "MaiK", "explainGrounded": "MaiK", "explainGroundedStream": "MaiK", "vivaJudge": "Viva examiner",
+    "research": "Web research", "research:evidence-review": "Evidence Review", "extract:opd-suggest": "Ask MaiK Pro",
+    "extract:assessment": "Assessment extraction", "extract:opd-scribe": "MaiK Scribe", "extract:surgx-note": "SURGX note structuring",
+    "extract:icd-suggest": "ICD suggestions", "extract:reasoning": "Dx My Patient", "extract:translate": "Translation", "translate": "Translation",
+    "maik:maik-ask-next": "MaiK Ask", "maik:maik-ask-extract": "MaiK Ask", "summary": "Patient summary", "imagingSummary": "Imaging Assist",
+    "correlate": "Clinical correlation", "vision": "Image reading", "visionText": "Image field extraction", "transcribe": "Speech-to-text"
+  };
+  var LANG_LABEL = { te: "Telugu", hi: "Hindi", indic: "this language" };
+  function featureOf(kind, args) {
+    if (kind === "extract") return "extract:" + String(args[1] || "");
+    if (kind === "maik") return "maik:" + String(args[0] || "");
+    if (kind === "research" && args[1] === "evidence-review") return "research:evidence-review";
+    return kind;
+  }
+  function langNeed(need, args) {
+    if (need.langFrom) {
+      var t = String(args[0] || "");
+      return /[ఀ-౿]/.test(t) ? "te" : /[ऀ-ॿ]/.test(t) ? "hi" : /[ঀ-৿਀-੿઀-૿଀-୿஀-௿ಀ-೿ഀ-ൿ]/.test(t) ? "indic" : null;
     }
-    if (kind === "vivaJudge" || kind === "extract") {
-      var Lc = window.SMD_MAIK_LOCAL;
-      var wantLocal = e === "local" && !!Lc && (kind === "vivaJudge" ? !!Lc.vivaJudge : (args[1] === "opd-suggest" && !!Lc.opdSuggest));
-      if (!wantLocal) return orig.apply(self, args);
-      var pl = kind === "vivaJudge" ? Lc.vivaJudge(args[0], args[1], args[2]) : Lc.opdSuggest(args[0]);
-      return Promise.resolve(pl).catch(function (err) { return { error: String((err && err.message) || err || "local-failed") }; });
+    if (need.langCtx) { var c = args[1] || {}; var l = String(c.language || "").toLowerCase().split("-")[0]; return (l && l !== "en") ? l : null; }
+    return null;
+  }
+  /** What a pack unlocks, in the clinician's words. Derived from caps, so it cannot drift from them. */
+  function unlocksFor(c) {
+    var u = [];
+    if (c.vision) u.push("Offline image and document reading");
+    if (c.json >= 2) u.push("Scribe, note structuring, ICD ranking, assessment extraction");
+    if (c.reasoning >= 2) u.push("Case reasoning, imaging summaries, patient summaries");
+    if (c.medical) u.push("Medical fine-tune");
+    if (c.kb) u.push("Answers checked against the Knowledge Base");
+    return u;
+  }
+
+  /* The structured refusal. Everything the UI needs to say what is missing and what to do:
+   * the current model, the capabilities the feature needs, the models that would unlock it on THIS
+   * phone (suitability-ranked, never a pack that is unlikely to run well), the models that would
+   * unlock it but are unsuitable here and why, and cloud as an explicit alternative. */
+  function capabilityError(feature, need, info) {
+    need = need || {}; info = info || {};
+    var M = window.SMD_MAIK_MODELS, pid = activePack();
+    var cur = (M && M.PACKS && M.PACKS[pid]) ? M.PACKS[pid].label : "none";
+    var label = FEATURE_LABEL[feature] || feature;
+    var required = [];
+    if (need.vision) required.push("vision");
+    if (need.json >= 2) required.push("structured-output");
+    if (need.min >= 2) required.push("reasoning:" + need.min);
+    if (info.lang) required.push("language:" + info.lang);
+    if (need.medical) required.push("medical (preferred)");
+    var r = (!info.noImpl && info.recommend) || { recommended: [], unsuitable: [] };
+    var rec = r.recommended.filter(function (x) { return !(x.installed && x.id === pid); }).map(function (x) {
+      return { id: x.id, label: x.label, size: x.size, bytes: x.bytes, level: x.level, reasons: x.reasons, installed: x.installed,
+               vision: x.vision, medical: x.medical, ramGB: x.ramGB, unlocks: unlocksFor((M && M.caps && M.caps(x.id)) || x) };
+    });
+    var uns = r.unsuitable.map(function (x) { return { id: x.id, label: x.label, size: x.size, level: "no", reasons: x.reasons }; });
+    var offline = policyReason() === "offline";
+    var msg;
+    if (info.cloudOnly) msg = label + " is a MaiK Cloud feature. " + need.cloudOnly + (offline ? "" : " Switch the answer engine to MaiK Cloud to use it.");
+    else if (info.noImpl) msg = label + " has no on-device implementation yet, so it cannot run on the Local engine." + (offline ? "" : " Switch the answer engine to MaiK Cloud to use it.");
+    else if (need.noModel) msg = need.noModel + " It is not available on this device right now.";
+    else if (need.onDevice) msg = need.onDevice;
+    else if (info.reason === "runtime") msg = "On-device answering is not available in this build." + (offline ? "" : " Switch to MaiK Cloud.");
+    else if (info.lang) msg = "No on-device model has passed StewardMD's " + (LANG_LABEL[info.lang] || info.lang) + " check yet, so " + label + " stays in English offline. Use MaiK Cloud for " + (LANG_LABEL[info.lang] || info.lang) + " here.";
+    else {
+      var needs = required.filter(function (x) { return x.indexOf("(preferred)") < 0; }).join(", ") || "an on-device model";
+      msg = label + " needs " + needs + ". Your current model (" + cur + ") cannot do it.";
+      var first = rec.filter(function (x) { return !x.installed; })[0], inst = rec.filter(function (x) { return x.installed; })[0];
+      if (inst) msg += " " + inst.label + " is installed and can: select it as the on-device model.";
+      else if (first) msg += " Download " + first.label + " (" + first.size + ") to use it offline" + (first.level === "warn" ? ", noting: " + first.reasons.join(" ") : "") + ".";
+      else if (uns.length) msg += " The models that could (" + uns.map(function (x) { return x.label; }).join(", ") + ") are not suitable for this phone: " + uns[0].reasons[0];
+      if (!offline) msg += " Or switch to MaiK Cloud.";
     }
-    if (e === "cloud") return orig.apply(self, args);
-    if (e === "rag") {
-      // refine() is a paid Gemini round-trip whose callers all treat null as "no refinement".
-      if (kind === "refine") return Promise.resolve(null);
-      return Promise.resolve(kbOnlyNotice());
+    if (offline) msg += " You are offline; MaiK Cloud will answer this when the connection returns.";
+    return { error: "LOCAL_CAPABILITY_REQUIRED", feature: feature, featureLabel: label, currentModel: cur, currentPack: pid,
+             requiredCapabilities: required, recommendedModels: rec, unsuitableModels: uns, cloud: !offline, cloudOnly: !!info.cloudOnly,
+             offline: offline, noImpl: !!info.noImpl, language: info.lang || null, message: msg, engine: "local" };
+  }
+  /* Features with a local implementation (the cases in localCall). Anything else asked of the Local
+   * engine is refused as "no on-device implementation", with NO model recommendation: no pack
+   * unlocks code that does not exist. (Found in review: the ICU voice kinds monitor/labs/abg/
+   * ventilator used to get a fabricated "download X" recommendation.) */
+  var LOCAL_IMPL = { "explain": 1, "explainGrounded": 1, "explainGroundedStream": 1, "vivaJudge": 1, "research": 1,
+    "extract:opd-suggest": 1, "extract:assessment": 1, "extract:opd-scribe": 1, "extract:surgx-note": 1, "extract:icd-suggest": 1,
+    "extract:reasoning": 1, "extract:translate": 1, "translate": 1, "maik:maik-ask-next": 1, "maik:maik-ask-extract": 1,
+    "summary": 1, "imagingSummary": 1, "correlate": 1 };
+
+  /* The capability matcher. Installed packs that satisfy the feature on this device, the pinned pack
+   * first when it qualifies, else the smallest that does (or the `prefer` tier when one is installed).
+   * No qualifying installed pack -> LOCAL_CAPABILITY_REQUIRED with recommendations from the registry. */
+  function match(feature, need, args) {
+    need = need || {};
+    var M = window.SMD_MAIK_MODELS, L = window.SMD_MAIK_LOCAL;
+    if (!M || !L) return capabilityError(feature, need, { reason: "runtime" });
+    if (!M.recommend) {
+      // An older registry (one file behind after an OTA) has no capability API. The honest
+      // fallback is the clinician's pinned pack when it is installed, never the cloud.
+      return packInstalled() ? { pack: activePack(), row: null } : capabilityError(feature, need, { reason: "runtime" });
     }
-    // local
-    if (kind === "refine") return Promise.resolve(null);          // no local router; KB terms are enough
-    var pkg = args[0], opts = args[1], onDelta = args[2];
-    if (kind === "explain") { pkg = { summary: args[0], question: args[1] || "" }; opts = null; onDelta = null; }
-    /* Attach the staged image, and KEEP it for follow-ups.
-     *
-     * It used to be consumed on send, so the picture was gone by the time the doctor asked the obvious
-     * next question - "is this normal?" reached the model with no image and could not be answered
-     * about it. An image stays attached to the conversation until it is replaced or cleared, exactly
-     * as it does in any chat assistant.
-     *
-     * The SECOND and later questions about the same image are flagged imageFollowUp so the prompt can
-     * answer the question instead of re-reading the whole report.
-     */
+    var req = { vision: !!need.vision, json: need.json, reasoning: need.min, medical: !!need.medical };
+    var lang = langNeed(need, args); if (lang) req.lang = lang;
+    var r = M.recommend(req, M.device ? M.device() : null);
+    var inst = r.recommended.filter(function (x) { return x.installed; });
+    var pinned = activePack(), pick = null;
+    for (var i = 0; i < inst.length; i++) if (inst[i].id === pinned) pick = inst[i];
+    if (!pick && inst.length) {
+      var pref = need.prefer ? inst.filter(function (x) { return x.reasoning >= need.prefer; }) : [];
+      pick = (pref.length ? pref : inst)[0];
+    }
+    if (pick) return { pack: pick.id, row: pick };
+    return capabilityError(feature, need, { recommend: r, lang: lang });
+  }
+
+  /* ICD candidates come from the ICD DATABASE (functions/_icd_repo.js, D1), not from any model,
+   * on either engine. That lookup is a plain reference-data query with no AI provider behind it, so
+   * Local mode makes it; what the on-device model does is ORDER the rows it gets. There is no
+   * on-device ICD index yet (the source tables are not in the repo, see scripts/icd/README.md), so
+   * with no network the honest answer is "no candidates", never a generated code. */
+  // The search route's validQuery() rejects anything over 80 characters (functions/api/icd/[[path]].js).
+  function icdCandidates(text) {
+    var q = String(text || "").replace(/\s+/g, " ").trim().slice(0, 80);
+    var nav = (typeof navigator !== "undefined") ? navigator : null;
+    var W = (typeof window !== "undefined") ? window : null;
+    // Offline (or the server fetch failed below): try the on-device index (icd.js's
+    // window.SMD_ICD.localSearch, built from icd/icd10.min.json) before giving up. Only when
+    // that is also unavailable does this surface the ICD_INDEX_OFFLINE error.
+    function offline(message) {
+      if (W && W.SMD_ICD && typeof W.SMD_ICD.localSearch === "function") {
+        return Promise.resolve(W.SMD_ICD.localSearch(q, 30)).then(function (candidates) {
+          return { candidates: Array.isArray(candidates) ? candidates : [], source: "on-device" };
+        });
+      }
+      return Promise.resolve({ error: "ICD_INDEX_OFFLINE", message: message });
+    }
+    if (nav && nav.onLine === false) {
+      return offline("ICD codes are looked up in StewardMD's ICD database (no AI); offline, the on-device ICD index is missing on this phone. Connect to the network to fetch candidates, or install a model pack that carries the on-device index.");
+    }
+    // Online: still prefer the server (it has ICD-11 and the full CM set), falling back to the
+    // on-device index only if the fetch itself fails.
+    var base = (W && W.AI_PROXY) ? String(W.AI_PROXY).replace(/\/api\/ai$/, "") : "";
+    var f = (W && W.fetch) ? function (u) { return W.fetch(u); } : fetch;
+    return f(base + "/api/icd/search?q=" + encodeURIComponent(q) + "&limit=30")
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (j) { return { candidates: (j && Array.isArray(j.results)) ? j.results : [] }; },
+            function () { return offline("The ICD database could not be reached, and the on-device ICD index is missing on this phone. Connect to the network to fetch candidates, or install a model pack that carries the on-device index."); });
+  }
+
+  /* The local implementation of each feature, given the matched pack. Returns a promise. */
+  function localCall(feature, kind, args, packId) {
+    var L = window.SMD_MAIK_LOCAL, o = { pack: packId };
+    switch (feature) {
+      case "explain": return localAnswer({ summary: args[0], question: args[1] || "" }, null, null, packId);
+      case "explainGrounded": case "explainGroundedStream": return localAnswer(args[0], args[1], args[2], packId);
+      case "vivaJudge": return L.vivaJudge(args[0], args[1], args[2], o);
+      case "research": return localWeb(args, o);
+      case "extract:opd-suggest": return L.opdSuggest(args[0], o);
+      case "extract:assessment": return L.assess(args[0], o);
+      case "extract:opd-scribe": return L.scribeFill(args[0], o);
+      case "extract:surgx-note": { var x = (args[2] && !Array.isArray(args[2])) ? args[2] : {}; return L.noteStructure(args[0], x.allowedFields, x.noteType, o); }
+      case "extract:icd-suggest": return icdCandidates(args[0]).then(function (c) { return c.error ? c : L.icdRank(args[0], c.candidates, o); });
+      case "extract:reasoning": return L.reasoningExtract(args[0], Array.isArray(args[2]) ? args[2] : [], o);
+      case "extract:translate": case "translate": return L.translate(args[0], o);
+      case "maik:maik-ask-next": return L.maikNext(args[1], o);
+      case "maik:maik-ask-extract": return L.maikExtract(args[1], args[2], o);
+      case "summary": return L.summarize(args[0], o);
+      case "imagingSummary": return L.imagingSummary(args[0], o);
+      case "correlate": return L.correlate(args[0], o);
+      default: return Promise.resolve(capabilityError(feature, REQ[feature], {}));
+    }
+  }
+  /* Web research on the local engine (owner, 2026-09-04): the search itself (TinyFish) costs nothing
+   * server-side and is retrieval, not inference; the on-device model writes the answer. */
+  function localWeb(args, o) {
+    var Lw = window.SMD_MAIK_LOCAL, Aw = window.SMD_AI;
+    if (!Lw || !Lw.webAnswer || !Aw || typeof Aw.researchSnippets !== "function") return Promise.resolve(capabilityError("research", REQ.research, { reason: "runtime" }));
+    return Aw.researchSnippets(args[0], args[2]).then(function (snip) {
+      if (!snip || snip.error) return { error: (snip && snip.error) || "no-results" };
+      return Lw.webAnswer(args[0], snip.sources || [], o);
+    });
+  }
+  /* The MaiK answer on the local engine: opts/onDelta pass straight through so home.js's replay()
+   * typewriter works exactly as it does for the cloud; the staged image stays attached to the
+   * conversation for follow-ups (see the comment in git history for why it used to be consumed). */
+  function localAnswer(pkg, opts, onDelta, packId) {
+    opts = opts || {};
+    var o = {}; for (var k in opts) if (Object.prototype.hasOwnProperty.call(opts, k)) o[k] = opts[k];
+    if (packId) o.pack = packId;
     try {
       var IM = window.__MAIK_IMAGES;
       if (IM && IM.attached) {
         var imgs = IM.attached();
-        if (imgs && imgs.length) {
-          opts = Object.assign({}, opts || {}, { images: imgs, imageFollowUp: !!IM.asked() });
-          if (IM.markAsked) IM.markAsked();
-        }
+        if (imgs && imgs.length) { o.images = imgs; o.imageFollowUp = !!IM.asked(); if (IM.markAsked) IM.markAsked(); }
       }
     } catch (e) {}
-    return Promise.resolve(window.SMD_MAIK_LOCAL.answer(pkg, opts, onDelta))
-      .catch(function (err) { return { error: String((err && err.message) || err || "local-failed") }; });
+    if (o.images && o.images.length) {
+      // An image question needs a pack that can SEE. The matcher was asked for text; re-check here.
+      var L = window.SMD_MAIK_LOCAL, pid = o.pack || activePack();
+      if (!(L && L.visionReady && L.visionReady(pid))) {
+        var need = { vision: true, min: 1 };
+        var M = window.SMD_MAIK_MODELS;
+        return Promise.resolve(capabilityError("vision", need, { recommend: (M && M.recommend) ? M.recommend({ vision: true }, M.device ? M.device() : null) : null }));
+      }
+    }
+    return Promise.resolve(window.SMD_MAIK_LOCAL.answer(pkg, o, onDelta));
+  }
+
+  // ── ROUTER ──
+  function route(kind, orig, self, args) {
+    var e = effective();
+    if (e === "cloud") return orig.apply(self, args);                                   // CLOUD MODE: untouched
+    if (kind === "refine") return Promise.resolve(null);                                 // no local router; callers treat null as "no refinement"
+    var feature = featureOf(kind, args);
+    var answerKind = /^explain/.test(kind) || kind === "research";
+    if (e === "rag") {
+      // KB only never spends and never runs a model. Answer kinds render the notice as an answer;
+      // structured kinds get an error their callers already know how to show.
+      if (answerKind) return Promise.resolve(kbOnlyNotice());
+      return Promise.resolve({ error: "kb-only", message: (FEATURE_LABEL[feature] || feature) + " needs an AI model. KB-only mode makes no AI calls: pick MaiK Cloud or an on-device model in Settings." });
+    }
+    // LOCAL
+    var need = REQ[feature] || null;
+    if (!hardLocal()) {
+      // Recovery switch: the pre-2026-09-11 behaviour, kept only so a broken local path can be
+      // routed around without a rebuild. Every feature with a local implementation still runs locally.
+      var m0 = match(feature, need, args);
+      if (!m0.error && !(need && (need.cloudOnly || need.noModel || need.onDevice)) && feature !== "vision" && feature !== "visionText") {
+        return Promise.resolve().then(function () { return localCall(feature, kind, args, m0.pack); })
+          .catch(function (err) { return { error: String((err && err.message) || err || "local-failed"), engine: "local" }; });
+      }
+      return orig.apply(self, args);
+    }
+    if (need && (need.cloudOnly || need.noModel || need.onDevice)) return Promise.resolve(capabilityError(feature, need, { cloudOnly: !!need.cloudOnly }));
+    if (feature === "vision") {
+      // SMD_AI.vision is the CLOUD image path (POST { image }). In Local mode images are read
+      // on-device through SMD_IMAGE_ENGINE, which never calls this; a direct call is a bypass and
+      // is refused with the projector state so the UI can offer the right download.
+      var Lv = window.SMD_MAIK_LOCAL, Mv = window.SMD_MAIK_MODELS, pidv = activePack();
+      var ready = !!(Lv && Lv.visionReady && Lv.visionReady(pidv));
+      var ce = capabilityError("vision", need, { recommend: (Mv && Mv.recommend) ? Mv.recommend({ vision: true }, Mv.device ? Mv.device() : null) : null });
+      if (ready) { ce.localVisionReady = true; ce.message = "In Local AI, images are read on the phone through the image engine, not this cloud path."; }
+      return Promise.resolve(ce);
+    }
+    if (!LOCAL_IMPL[feature]) return Promise.resolve(capabilityError(feature, need || {}, { noImpl: true }));
+    // Everything below runs inside the promise so a synchronous throw (a malformed device snapshot in
+    // match(), say) reaches the caller's .catch instead of escaping a timer.
+    var packUsed = null;
+    return Promise.resolve().then(function () {
+      var m = match(feature, need, args);
+      if (m.error) return m;
+      packUsed = m.pack;
+      return Promise.resolve(localCall(feature, kind, args, m.pack))
+        .then(function (res) { if (res && typeof res === "object" && !res.pack && !res.error) res.pack = m.pack; return res; });
+    }).catch(function (err) { return { error: String((err && err.message) || err || "local-failed"), engine: "local", pack: packUsed }; });
   }
 
   // If on-device is already the chosen engine at startup, warm it before the first question.
@@ -245,7 +492,11 @@
     if (_installed) return false;
     var A = window.SMD_AI;
     if (!A || typeof A.explainGrounded !== "function") return false;
-    ["explain", "explainGrounded", "explainGroundedStream", "refine", "vivaJudge", "extract", "research"].forEach(function (name) {
+    // Every SMD_AI method that can reach an AI provider. evidence (PubMed lookup) and
+    // researchSnippets (TinyFish search) are retrieval with no model behind them and stay undecorated;
+    // readImage does its OCR on-device and asks cloudAllowed() itself before its cloud stage.
+    ["explain", "explainGrounded", "explainGroundedStream", "refine", "vivaJudge", "extract", "research",
+     "maik", "summary", "imagingSummary", "correlate", "translate", "transcribe", "vision", "visionText"].forEach(function (name) {
       var orig = A[name];
       if (typeof orig !== "function") return;
       A[name] = function () { return route(name, orig, A, arguments); };
@@ -315,8 +566,80 @@
       opt("local", "On-device model", pill("Pro", "#fef3c7", "#92400e") + " " + pill("Beta", "#e0e7ff", "#3730a3"),
           localDesc, false, localDisabled) +
       '</div>' +
-      (gated && rt ? modelRowHTML() : "") +
+      (gated && rt ? capsHTML() + modelRowHTML() : "") +
       '</div>';
+  }
+
+  /* ── Current AI mode, model, capabilities and upgrade options (owner, 2026-09-11) ──
+   * Capability-based recommendations are the primary UX; the manual pack list below it stays.
+   * Suitability is decided by maik-models.js suitability(): a pack that is unlikely to run well on
+   * THIS phone is shown as "Not for this phone" with the reason and gets no download button. No
+   * upstream model names, no emoji (house rules). */
+  function levelPill(level) {
+    return level === "ok" ? pill("Runs well", "#dcfce7", "#166534")
+      : level === "warn" ? pill("May run slowly", "#fef3c7", "#92400e")
+      : pill("Not for this phone", "#fee2e2", "#991b1b");
+  }
+  function capsHTML() {
+    var M = window.SMD_MAIK_MODELS;
+    if (!M || !M.caps || !M.recommend) return "";
+    var e = effective(), pid = activePack(), c = M.caps(pid) || {}, have = packInstalled();
+    var L = window.SMD_MAIK_LOCAL, vis = !!(have && L && L.visionReady && L.visionReady(pid));
+    var dev = (M.device && M.device()) || {};
+    var modeLabel = e === "cloud" ? "CLOUD AI" : e === "local" ? "LOCAL AI" : (getPref() === "local" ? "LOCAL AI (not ready)" : "KB ONLY");
+    var tier = { 1: "Low", 2: "Medium", 3: "High" }[c.reasoning] || "Low";
+    var langs = ["English"].concat((c.lang || []).map(function (l) { return { te: "Telugu", hi: "Hindi" }[l] || l; }));
+    function row(ok, t) {
+      return '<div style="display:flex;gap:8px;align-items:baseline;font:500 12.5px/1.5 var(--sans,system-ui);color:var(--slate,#2d4356)">' +
+        '<span aria-hidden="true" style="flex:0 0 14px;font-weight:800;color:' + (ok ? "var(--teal,#0e6e63)" : "var(--slate-soft,#8aa0b0)") + '">' + (ok ? "✓" : "✗") + '</span>' +
+        '<span>' + esc(t) + '</span></div>';
+    }
+    var capRows = row(!!c.medical, "Medical fine-tune") + row(!!c.kb, "Answers checked against the Knowledge Base") + row(true, "Works offline") +
+      row(vis, c.vision ? (vis ? "Image reading (projector installed)" : "Image reading (add the image-reading download below)") : "Image reading (this model cannot see)") +
+      row((c.json || 0) >= 2, "Structured output: Scribe, notes, ICD ranking, extraction") +
+      row(true, "Reasoning: " + tier) + row(true, "Offline languages: " + langs.join(", "));
+    var devLine = "This phone: " + (dev.ramGB != null ? dev.ramGB + (dev.ramGBMin ? "+" : "") + " GB memory" : "total memory not readable by the app") +
+      (dev.availGB != null ? ", " + dev.availGB.toFixed(1) + " GB free now" : "") + (dev.freeGB != null ? ", " + dev.freeGB.toFixed(1) + " GB storage free" : "") +
+      ". Heat and battery drain cannot be read by the app; a large model warms the phone.";
+    var r = M.recommend({}, dev);
+    var all = r.recommended.concat(r.unsuitable).filter(function (x) { return x.id !== pid; });
+    var up = all.map(function (x) {
+      var cx = M.caps(x.id) || {};
+      var unlocks = unlocksFor(cx).filter(function (u) { return unlocksFor(c).indexOf(u) < 0; });
+      var btn = x.level === "no" ? '<div style="font:600 12px/1.4 var(--sans,system-ui);color:#991b1b;margin-top:6px">Not recommended for this phone. MaiK Cloud can do this instead.</div>'
+        : x.installed ? '<button type="button" class="smd-nav-btn" data-me-pack="' + x.id + '" style="margin:6px 0 0;width:100%">Use this model</button>'
+        : '<button type="button" class="smd-nav-btn" data-me-upgrade="' + x.id + '" data-me-level="' + x.level + '" style="margin:6px 0 0;width:100%">Download and install (' + esc(x.size) + ')</button>';
+      return '<div style="padding:10px 0;border-top:1px solid var(--line,#e2e8f0)">' +
+        '<div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap"><span style="font:700 13.5px/1.3 var(--sans,system-ui)">' + esc(x.label) + '</span>' + levelPill(x.level) +
+          '<span style="font:500 12px/1.3 var(--sans,system-ui);color:var(--slate-soft,#5a7184)">' + esc(x.size) + (x.ramGB ? " · needs " + x.ramGB + " GB phone" : "") + '</span></div>' +
+        (unlocks.length ? '<div style="font:500 12px/1.5 var(--sans,system-ui);color:var(--slate,#2d4356);margin-top:4px">Unlocks: ' + esc(unlocks.join("; ")) + '</div>' : "") +
+        (x.reasons.length ? '<div style="font:500 12px/1.5 var(--sans,system-ui);color:' + (x.level === "no" ? "#991b1b" : "var(--yellow,#92620a)") + ';margin-top:4px">' + esc(x.reasons.join(" ")) + '</div>' : "") +
+        btn + '</div>';
+    }).join("");
+    return '<div data-me-caps style="border:1px solid var(--line,#e2e8f0);border-radius:14px;background:var(--panel,#fff);padding:12px 14px;margin:0 0 10px">' +
+      '<div style="display:flex;align-items:baseline;gap:8px;flex-wrap:wrap"><span style="font:800 11px/1 var(--sans,system-ui);letter-spacing:.06em;color:var(--teal,#0e6e63)">' + esc(modeLabel) + '</span>' +
+        '<span style="font:700 14px/1.3 var(--sans,system-ui)">' + esc(c.label || "No on-device model") + '</span>' + (have ? "" : pill("Not downloaded", "#e2e8f0", "#334155")) + '</div>' +
+      '<div style="margin-top:8px">' + capRows + '</div>' +
+      '<div data-me-device style="font:500 11.5px/1.5 var(--sans,system-ui);color:var(--slate-soft,#5a7184);margin-top:8px">' + esc(devLine) + '</div>' +
+      (up ? '<div style="font:700 13px/1.3 var(--sans,system-ui);margin-top:12px">Other models</div>' + up : "") +
+      '<div style="font:500 11.5px/1.5 var(--sans,system-ui);color:var(--slate-soft,#5a7184);margin-top:8px">Nothing downloads without your tap. A "May run slowly" model works but with the limitation shown.</div>' +
+      cloudBlockHTML() +
+    '</div>';
+  }
+  /* The per-phone cloud kill switch (reasoning.js aiBase). Shown so the tester can flip it and read
+   * the count: with it ON, any feature that reports "Could not reach MaiK" while the Local engine is
+   * selected is a leak, and the counter says how many attempts were stopped. */
+  function cloudBlockHTML() {
+    var on = lget("smd_ai_cloud_block") === "1";
+    var n = 0; try { n = window.__SMD_CLOUD_ATTEMPTS || 0; } catch (e) {}
+    return '<div style="border-top:1px solid var(--line,#e2e8f0);margin-top:10px;padding-top:10px">' +
+      '<div style="font:700 13px/1.3 var(--sans,system-ui)">Test: block cloud AI on this phone</div>' +
+      '<div style="font:500 12px/1.5 var(--sans,system-ui);color:var(--slate,#2d4356);margin-top:3px">' +
+        (on ? 'ON. Every cloud AI request from this phone is stopped and counted. Attempts stopped this session: <b>' + n + '</b>. With the on-device engine selected this number should stay at 0.'
+            : 'OFF. Turn on to prove nothing reaches the cloud: any cloud attempt then fails visibly and is counted here.') +
+      '</div>' +
+      '<button type="button" class="smd-nav-btn" data-me-cloudblock="' + (on ? "0" : "1") + '" style="margin:8px 0 0;width:100%">' + (on ? "Turn off the block" : "Block cloud AI (test)") + '</button>' +
+    '</div>';
   }
 
   /* ── On-device model section ────────────────────────────────────────────────
@@ -595,6 +918,39 @@
         rerender(b, root);
       });
     });
+    // Capability-panel upgrade: the tap IS the approval. A "May run slowly" pack asks once more with
+    // its limitation spelled out; a "Not for this phone" pack has no button at all.
+    root.querySelectorAll("[data-me-upgrade]").forEach(function (b) {
+      b.addEventListener("click", function () {
+        var id = b.getAttribute("data-me-upgrade"), M = window.SMD_MAIK_MODELS;
+        if (!M || !M.PACKS || !M.PACKS[id]) return;
+        if (b.getAttribute("data-me-level") === "warn") {
+          var s = M.suitability ? M.suitability(id, M.device ? M.device() : null) : { reasons: [] };
+          var okGo = true; try { okGo = window.confirm(M.PACKS[id].label + " may run slowly on this phone. " + s.reasons.join(" ") + "\n\nDownload it anyway?"); } catch (e) {}
+          if (!okGo) return;
+        }
+        // PENDING, not active: the answering pack must keep answering while this one downloads
+        // (see KEY_PENDING at the top of this file); adoptPackWhenReady() promotes it when done.
+        lset(KEY_PENDING, id);
+        startDownload(b, root, id);
+      });
+    });
+    root.querySelectorAll("[data-me-cloudblock]").forEach(function (b) {
+      b.addEventListener("click", function () {
+        var v = b.getAttribute("data-me-cloudblock");
+        if (v === "1") lset("smd_ai_cloud_block", "1"); else lrem("smd_ai_cloud_block");
+        try { window.__SMD_CLOUD_ATTEMPTS = 0; } catch (e) {}
+        rerender(b, root);
+      });
+    });
+    // A fresh device snapshot for the panel (the bridge answers asynchronously); patch the line in place.
+    try {
+      var Md = window.SMD_MAIK_MODELS;
+      if (Md && Md.refreshDevice) Md.refreshDevice().then(function () {
+        var host = root.querySelector ? root : document; var line = host.querySelector("[data-me-device]");
+        if (line) { var tmp = document.createElement("div"); tmp.innerHTML = capsHTML(); var fresh = tmp.querySelector("[data-me-device]"); if (fresh) line.textContent = fresh.textContent; }
+      }, function () {});
+    } catch (e) {}
     // The guide is a plain expander rather than a modal: rerender() replaces this whole section on
     // every pack change, and a modal would have to be torn down and re-opened around that.
     root.querySelectorAll("[data-me-guide]").forEach(function (b) {
@@ -915,6 +1271,9 @@
     selectOption: selectOption, adoptPackWhenReady: adoptPackWhenReady, pendingPack: pendingPack,
     discLabel: discLabel, syncDisc: syncDisc,
     warmIfLocal: warmIfLocal,
+    // hard Local/Cloud policy + capability matcher (2026-09-11)
+    KEY_HARD: KEY_HARD, hardLocal: hardLocal, policy: policy, policyReason: policyReason, cloudAllowed: cloudAllowed, REQ: REQ, LOCAL_IMPL: LOCAL_IMPL, FEATURE_LABEL: FEATURE_LABEL,
+    featureOf: featureOf, match: match, capabilityError: capabilityError, unlocksFor: unlocksFor, capsHTML: capsHTML,
     KEY_PENDING: KEY_PENDING, openPicker: openPicker, closePicker: closePicker, wireChip: wireChip, syncChip: syncChip
   };
   if (typeof module !== "undefined" && module.exports) module.exports = API;

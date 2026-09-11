@@ -14,6 +14,7 @@ import { handle } from "../functions/api/wardsynq/[[path]].js";
 import { MemoryRepository, VersionConflictError, assertRepository } from "../functions/_wardsynq/repository.js";
 import { D1Repository } from "../functions/_wardsynq/repository-d1.js";
 import { RecordService, actorForMembership, recordPolicy, AuthorityError, MODE } from "../functions/_wardsynq/service.js";
+import { SourceSystemGrant, grantIdFor } from "../functions/_wardsynq/fhir-inbound.js";
 import { grantForRole, roleMapping, aiActorFor, actorFromOpdRole } from "../functions/_wardsynq/actor.js";
 import { ROLES, CAPS, can as roleCan } from "../functions/_queue_roles.js";
 import { mintStaffSession, verifyStaffSession } from "../functions/_opd_auth.js";
@@ -88,6 +89,18 @@ async function client(h, user, opts = {}) {
   const actor = makeActor({ id: d.actor.id, kind: KIND.HUMAN, tier: d.actor.tier, display: d.actor.display, credential: d.actor.canSign ? "held-by-server" : null });
   const governed = new GovernedStore({ store });
   return { backend, store, governed, actor, descriptor: d, session: (pid) => governed.session(actor, pid) };
+}
+
+/* Models "an admin already granted this actor the authority to speak for this source system" -
+ * exactly the state authorizedSourceSystem() requires before /ingest/sccm will file anything under
+ * that system's name. Written straight into the repository, the same way the repository's own
+ * guard tests seed state: this is test setup for a precondition, not the thing under test, and the
+ * real grant-creation route (queue router, STAFF_ADMIN) has its own coverage elsewhere. */
+async function grantSource(h, tenantId, actorId, system) {
+  const id = grantIdFor(actorId, system);
+  await h.repository.append(tenantId, [
+    { ...SourceSystemGrant({ id, actorId, sourceSystem: system, active: true, grantedBy: "fb:admin-one", grantedAt: "2026-01-01T00:00:00.000Z" }), version: 1 },
+  ]);
 }
 
 /* ------------------------------------------------------------------ the success criterion */
@@ -326,6 +339,8 @@ test("integration mode: an external EMR's records cannot be overwritten natively
   // WardSynQ does not mint a patient the hospital's EMR does not know about.
   await assert.rejects(pc.session("pat-11").put(Patient({ id: "pat-11", mrn: "GH-11", name: "N", dob: "1970-01-01" })), (e) => e instanceof RemoteRefusedError && e.code === "EXTERNAL_CREATE");
 
+  // dr-menon must be GRANTED to speak for fhir-r4 before the door will believe the bundle's claim.
+  await grantSource(h, "gimsr", "fb:dr-menon", "fhir-r4");
   // The external EMR's bundle arrives through the connector boundary and lands as adapter writes.
   const b = sccmBundle({
     tenantId: "gimsr", sourceConnector: "fhir-r4", generatedAt: "2026-09-06T10:00:00Z",
@@ -366,11 +381,63 @@ test("integration mode: an external EMR's records cannot be overwritten natively
 /* TASK 7 STEP 4.1: "GHIS patientId MUST NOT bypass governed MPI identity resolution" - the plan's
  * own words. /ingest/sccm now runs every incoming Patient through the SAME reconcileIdentity()
  * fhir-inbound.js uses, real end-to-end through the actual route - never a bare helper call. */
+/* SECURITY REGRESSION, 2026-09-10 whole-system audit: /ingest/sccm authorizes the SOURCE, not only
+ * the caller.
+ *
+ * BEFORE THIS FIX any authenticated actor who could write the clinical record (an ordinary nurse
+ * holding EMR_VITALS was enough) could name the sending system THEMSELVES in `meta.sourceConnector`
+ * and every row landed carrying that provenance - no grant, no check, nothing. Reproduced below: an
+ * ungranted actor claims to be "epic", exactly as the FHIR and HL7 doors already refuse the same
+ * claim from an ungranted caller (see fhir-inbound.js's own "SOURCE-SYSTEM AUTHORIZATION" test).
+ * externallyOwned() then treats a forged row as another organisation's authority - uneditable
+ * natively, excluded from local-record workflows, exported in Provenance as a partner that never
+ * sent anything. */
+test("SECURITY: /ingest/sccm refuses a claimed source system the caller was never granted", async () => {
+  const h = hospital();
+  const b = sccmBundle({
+    sourceConnector: "epic", generatedAt: "2026-09-06T14:00:00Z",
+    patient: sccmPatient({ id: "FORGED-1", name: "Forged Patient", identifiers: [{ system: "urn:mrn", type: "MRN", value: "FG-1" }] }),
+    observations: [sccmObservation({ id: "FORGED-OBS", category: "laboratory", code: { coding: [{ code: "2823-3" }], text: "Potassium" }, value: { value: 5.0, unit: "mmol/L" } })],
+  });
+  // dr-menon can write the clinical record (EMR_TREAT-equivalent, clinician role) but was never
+  // granted to speak for "epic" - exactly the caller the old code trusted on its own say-so.
+  const res = await h.fetchAs("fb:dr-menon")("https://x/api/wardsynq/gimsr/ingest/sccm", { method: "POST", body: JSON.stringify(b) });
+  assert.equal(res.status, 403, "refused, not silently filed under a forged origin");
+  const out = await res.json();
+  assert.equal(out.error, "source_unauthorized");
+  assert.equal(out.written, 0);
+
+  // NOTHING was written under the forged identity - not the patient, not the observation.
+  assert.equal(await h.repository.latest("gimsr", "Patient", "epic-pat-forged-1"), null);
+  assert.equal(await h.repository.latest("gimsr", "Observation", "epic-obs-forged-obs"), null);
+
+  // Granting the SAME actor for "epic" now, the identical bundle succeeds - proving the refusal was
+  // about the missing grant, not about the bundle itself.
+  await grantSource(h, "gimsr", "fb:dr-menon", "epic");
+  const again = await (await h.fetchAs("fb:dr-menon")("https://x/api/wardsynq/gimsr/ingest/sccm", { method: "POST", body: JSON.stringify(b) })).json();
+  assert.equal(again.ok, true, JSON.stringify(again));
+  const pat = await h.repository.latest("gimsr", "Patient", "epic-pat-forged-1");
+  assert.equal(pat.meta.source.system, "epic");
+});
+
+test("SECURITY: a missing source claim is refused, never defaulted to a trusted name", async () => {
+  const h = hospital();
+  // meta.sourceConnector omitted entirely - the adapter's own fallback is "sccm", which must not be
+  // treated as an implicitly-authorized system just because nobody named one.
+  const b = sccmBundle({ generatedAt: "2026-09-06T15:00:00Z", patient: sccmPatient({ id: "NOSRC-1", name: "No Source" }),
+    observations: [sccmObservation({ id: "NS-OBS", category: "laboratory", code: { coding: [{ code: "2823-3" }], text: "Potassium" }, value: { value: 4.5, unit: "mmol/L" } })] });
+  delete b.meta.sourceConnector;
+  const res = await h.fetchAs("fb:dr-menon")("https://x/api/wardsynq/gimsr/ingest/sccm", { method: "POST", body: JSON.stringify(b) });
+  assert.equal(res.status, 400);
+  assert.equal((await res.json()).error, "source_required");
+});
+
 test("ingest/sccm: an incoming patient matching a local one by MRN is LINKED, never a duplicate Patient", async () => {
   const h = hospital();
   const pc = await client(h, "fb:dr-menon");
   const local = await pc.session("pat-link-1").put(Patient({ id: "pat-link-1", mrn: "LNK-1", name: "Local Patient", dob: "1970-01-01" }));
   assert.equal(local.version, 1);
+  await grantSource(h, "gimsr", "fb:dr-menon", "hl7v2");
 
   const b = sccmBundle({
     sourceConnector: "hl7v2", generatedAt: "2026-09-06T12:00:00Z",
@@ -391,14 +458,24 @@ test("ingest/sccm: an incoming patient matching a local one by MRN is LINKED, ne
 test("ingest/sccm: an MRN matching MORE THAN ONE local patient is held ambiguous, and NOTHING is written - never a guess", async () => {
   const h = hospital();
   const pc = await client(h, "fb:dr-menon");
-  // An artificial but real ambiguity: two local patients that happen to carry the same MRN value
-  // (a data-quality reality this reconciler must survive, not assume away).
+  /* A REAL ambiguity, and note how it is built. Until 2026-09-10 this test made two local patients
+   * carry the SAME MRN, which the patient identity index now refuses outright at the write door
+   * (proven by its own test below). The ambiguity it exists to check is still entirely reachable and
+   * is still exactly the same production branch: an incoming patient whose identifiers point at TWO
+   * DIFFERENT local people - its MRN is Patient A's, its ABHA is Patient B's. That is a genuine
+   * data-quality reality, it cannot be constrained away, and the reconciler must still refuse to
+   * guess between them. */
   await pc.session("pat-amb-a").put(Patient({ id: "pat-amb-a", mrn: "AMB-1", name: "Patient A", dob: "1970-01-01" }));
-  await pc.session("pat-amb-b").put(Patient({ id: "pat-amb-b", mrn: "AMB-1", name: "Patient B", dob: "1980-02-02" }));
+  await pc.session("pat-amb-b").put(Patient({ id: "pat-amb-b", mrn: "AMB-2", name: "Patient B", dob: "1980-02-02",
+    identifiers: [{ system: "ABHA", value: "11-2222-3333-4444" }] }));
+  await grantSource(h, "gimsr", "fb:dr-menon", "hl7v2");
 
   const b = sccmBundle({
     sourceConnector: "hl7v2", generatedAt: "2026-09-06T13:00:00Z",
-    patient: sccmPatient({ id: "EXT-AMB", name: "Ambiguous Feed Patient", identifiers: [{ system: "urn:mrn", type: "MRN", value: "AMB-1" }] }),
+    patient: sccmPatient({ id: "EXT-AMB", name: "Ambiguous Feed Patient", identifiers: [
+      { system: "urn:mrn", type: "MRN", value: "AMB-1" },
+      { system: "ABHA", type: "NI", value: "11-2222-3333-4444" },
+    ] }),
     observations: [sccmObservation({ id: "OBS-AMB", category: "laboratory", code: { coding: [{ code: "2823-3" }], text: "Potassium" }, value: { value: 5.5, unit: "mmol/L" } })],
   });
   const res = await (await h.fetchAs("fb:dr-menon")("https://x/api/wardsynq/gimsr/ingest/sccm", { method: "POST", body: JSON.stringify(b) })).json();
@@ -413,6 +490,7 @@ test("system-of-record mode still protects feed-owned records (a LIS result is c
   const pc = await client(h, "fb:dr-menon");
   assert.doesNotThrow(() => new IntegrationHub({}).register(sccmAdapter()), "the adapter registers on the hub like the GHIS one");
   await pc.session("pat-12").put(Patient({ id: "pat-12", mrn: "GH-12", name: "Native", dob: "1970-01-01" }));
+  await grantSource(h, "gimsr", "fb:dr-menon", "hl7v2");
   const b = sccmBundle({ sourceConnector: "hl7v2", generatedAt: "2026-09-06T11:00:00Z", patient: sccmPatient({ id: "H-1", name: "Lab Feed" }),
     observations: [sccmObservation({ id: "K-1", category: "laboratory", code: { coding: [{ code: "2823-3" }], text: "Potassium" }, value: { value: 4.0, unit: "mmol/L" } })] });
   assert.equal((await h.fetchAs("fb:dr-menon")("https://x/api/wardsynq/gimsr/ingest/sccm", { method: "POST", body: JSON.stringify(b) })).status, 200);
@@ -2699,4 +2777,72 @@ test("wsqLinkTenantOrg: writes the reciprocal tenant->org pointer once, at link 
   // unrelated org edit (name change, threshold tweak, ...).
   const route = src.slice(src.indexOf('seg === "org" && sub === "update"'), src.indexOf('seg === "org" && sub === "delete"'));
   assert.ok(route.includes("if (body.connectTenantId) await wsqLinkTenantOrg("), "only runs when this update actually sets/changes the tenant link");
+});
+
+/* REGRESSION, 2026-09-10 whole-system audit. An idempotency key is bound to the record it first
+ * committed.
+ *
+ * BEFORE THE FIX this exact sequence returned 200 ok:true, wrote NOTHING for the second patient,
+ * and handed the caller the FIRST patient's whole record - name, MRN and date of birth - as the
+ * body of a successful write. A client that mints one key per retry-session instead of one per
+ * request (the commonest way to get idempotency wrong) therefore lost a clinical write silently
+ * AND showed a clinician another patient's demographics on the success path. */
+test("ADVERSARIAL: an idempotency key offered for a DIFFERENT record is refused, never replayed", async () => {
+  const h = hospital();
+  const f = h.fetchAs("fb:dr-menon");
+  const send = (entity) => f("https://x/api/wardsynq/gimsr/record", {
+    method: "POST", headers: { "Idempotency-Key": "one-key-two-patients" }, body: JSON.stringify({ entity }),
+  });
+
+  const first = await send(Patient({ id: "pat-idem-a", mrn: "GH-IDEM-A", name: "Asha", dob: "1970-01-01" }));
+  assert.equal(first.status, 201);
+
+  // The SAME key, a DIFFERENT patient.
+  const second = await send(Patient({ id: "pat-idem-b", mrn: "GH-IDEM-B", name: "Bhavna", dob: "1980-01-01" }));
+  assert.equal(second.status, 409, "a reused key is a conflict, not a success");
+  const body = await second.json();
+  assert.equal(body.code, "IDEMPOTENCY_KEY_REUSED");
+  assert.deepEqual(body.detail.committed, { resourceType: "Patient", id: "pat-idem-a" });
+  assert.deepEqual(body.detail.attempted, { resourceType: "Patient", id: "pat-idem-b" });
+
+  // THE TWO THINGS THAT ACTUALLY MATTERED. The refusal carries no part of the other patient's
+  // record, and the writer is told their write did not land rather than being told it did.
+  const text = JSON.stringify(body);
+  for (const leaked of ["Asha", "GH-IDEM-A", "1970-01-01"]) {
+    assert.ok(!text.includes(leaked), `the refusal must not carry the other patient's ${leaked}`);
+  }
+  assert.equal((await h.repository.history("gimsr", "Patient", "pat-idem-b")).length, 0, "and nothing was written for B");
+
+  // The honest retry - the same key for the SAME record - still replays exactly as before.
+  const replay = await send(Patient({ id: "pat-idem-a", mrn: "GH-IDEM-A", name: "Asha", dob: "1970-01-01" }));
+  assert.equal(replay.status, 200);
+  assert.equal((await replay.json()).replayed, true);
+  assert.equal((await h.repository.history("gimsr", "Patient", "pat-idem-a")).length, 1, "and it made no second version");
+});
+
+/* The same hazard on a CLINICAL record rather than on the identity itself: one key, one observation
+ * each for two different patients. This is the shape that loses a vital sign and shows it against
+ * the wrong chart. */
+test("ADVERSARIAL: one idempotency key cannot carry two patients' observations", async () => {
+  const h = hospital();
+  const f = h.fetchAs("fb:dr-menon");
+  const put = (entity, key) => f("https://x/api/wardsynq/gimsr/record", {
+    method: "POST", headers: key ? { "Idempotency-Key": key } : {}, body: JSON.stringify({ entity }),
+  });
+  await put(Patient({ id: "pat-obs-a", mrn: "GH-OBS-A", name: "Asha", dob: "1970-01-01" }));
+  await put(Patient({ id: "pat-obs-b", mrn: "GH-OBS-B", name: "Bhavna", dob: "1980-01-01" }));
+
+  const obs = (id, patientId) => Observation({ id, patientId, code: "8867-4", value: { value: 82, unit: "/min" }, effectiveAt: "2026-09-10T09:00:00.000Z" });
+  assert.equal((await put(obs("obs-a1", "pat-obs-a"), "one-key-two-charts")).status, 201);
+
+  const crossed = await put(obs("obs-b1", "pat-obs-b"), "one-key-two-charts");
+  assert.equal(crossed.status, 409, "a heart rate for another patient is not a replay of this one");
+  assert.equal((await crossed.json()).code, "IDEMPOTENCY_KEY_REUSED");
+  assert.equal((await h.repository.byPatient("gimsr", "Observation", "pat-obs-b")).length, 0);
+
+  // And the honest retry for the SAME patient still replays, even though nothing here forces the
+  // caller to reuse the same record id - that is what keeps a retried declaration from doubling.
+  const again = await put(obs("obs-a1", "pat-obs-a"), "one-key-two-charts");
+  assert.equal(again.status, 200);
+  assert.equal((await again.json()).replayed, true);
 });

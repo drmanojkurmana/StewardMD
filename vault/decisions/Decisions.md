@@ -54,6 +54,12 @@ Dated architectural calls + why. Newest first. Keep each short: **decision · wh
 **Why:** v1 rejected ordinary reads like GET /patients/{id}/medications.
 
 **Status:** Decided; verified against a running jo-inc/camofox-browser 1.14.0 server.
+## 2026-09-10 · Skn X calm clarity UI selected
+
+Use the calm clarity direction for Skn X: native system typography, translucent navigation, grouped
+surfaces and a clear camera-first action. It keeps the clinically important hierarchy quiet and legible
+without changing analysis or safety behavior. The local Material Symbols font is explicitly applied
+inside `#sknxRoot`, preventing raw ligature names when offline. Cache: `sknx18calm1`.
 
 ## 2026-09-09 · WardSynQ TASK 4.16 (Downtime/Business Continuity): the 6×4 policy matrix, documented not rebuilt
 
@@ -1990,6 +1996,55 @@ renders as a `<button>` with the right label at a 44px+ target in both themes, t
 releases and reveals, that a mid-boot tap yields "Opening...", and that guests and `?splashv2=0` are
 neither gated nor shown the button and still auto-hide.
 
+---
+
+## 2026-09-11 — RxChoice™: strength certainty, not strength assumption
+
+RxChoice shows alternative PRODUCTS for a prescription the doctor has already written. Everything
+about its design follows from one property of the Drug Database: **`composition` carries per-ingredient
+strengths only sometimes.** `Amoxycillin (500mg) + Clavulanic Acid (125mg)` has 845 brands; the bare
+`Amoxycillin + Clavulanic Acid` has 5795, with the strength in the brand name ("Augmentin 625 Tablet",
+"Augmentin 1000 Duo Tablet"). A matcher that read `composition` alone would have offered 625 against
+1000 as "the same therapy".
+
+**Decision: eligibility is gated on strength CERTAINTY, via a provenance-tagged key.**
+`comp:amoxycillin=500mg|clavulanic acid=125mg` (parsed from the composition) or `brand:625mg` (parsed
+from the brand name, and only when the composition carries no strengths at all). Keys must be
+identical, and a `comp:` key never matches a `brand:` key. **A product whose strength cannot be
+established either way is not shown** — "when uncertain, no substitution" is a code path, not a
+promise. Same for form family, release tokens (IR ≠ XR), and an unreadable price or pack.
+
+**The single product truth is `window.MEDAPI`.** No RxChoice brand list, no second dataset, no
+AI-generated product. `offline-db.js` already routes those calls to the on-device SQLite copy with an
+identical record shape, so online and offline results agree for free. Manufacturer tiers MIRROR
+`worker/src/index.js` and `offline-db.js` rather than introducing a third opinion on "established
+manufacturer"; the three must be kept in step.
+
+**Course cost is unit-dispensing for countable oral solids, whole-pack for everything else.** The
+written spec contradicts itself here: it gives both `ceil(qty/pack) × packPrice` (₹150) and ₹75 for
+the same worked example (a 20-tablet pack at ₹150, a 10-tablet course). The unit reading is the one
+that matches both its own headline figure and an Indian pharmacy counter, where a strip is cut — and
+it is what makes a bigger pack able to be the cheaper course, which is the feature's whole point. A
+vial, bottle, tube or inhaler cannot be cut, so those cost whole packs and the leftover is real waste.
+Both numbers are always returned (`courseCost`, `wholePackCost`, `dispensing`) so no caller has to
+guess which model produced a figure.
+
+**BALANCED is allowed to coincide with GENERIC or PREMIUM.** When the cheapest product is also the
+best value, the honest output is to say so (`balanced.sameAs` → "also the lowest cost" on the card).
+Forcing a different product into the Recommended Value slot would mean recommending one the score
+ranked lower, purely so four cards look different.
+
+**AI is not in the decision path.** `smd_rxchoice_ai_normalization` ships **def:false**, and even on it
+may only normalize free text *before* the deterministic lookup. Eligibility, matching, pricing and
+ranking are deterministic whatever that flag says, so an AI answer can never promote a product.
+
+Also fixed here, found during the audit: `scripts/build-www.sh` never copied root `*.mjs`, so
+`prescription.js`'s `import("/rx-build.mjs")` was unresolvable inside the native bundle. RxChoice's own
+core is deliberately plain `.js` (dual-export, like `rx-brand-match.js`) so it needs no ESM plumbing,
+loads offline and is directly `require()`-able from node tests.
+
+Tests: `test/rxchoice-core.test.mjs` (15) + `test/run-rxchoice-ui.mjs` (30 browser checks, including
+flag-off restoring the pad byte-for-byte behaviourally). See [[RxChoice]].
 ## 2026-08-29 — App Lock: PIN / Face ID·Touch ID / no-lock, chosen once at first login
 Owner ask, after seeing the "Open Workspace" welcome-back splash (build 3464): add a real lock in
 front of it. Three options, offered once right after the first-run profile step (email-auth.js's
@@ -5157,3 +5212,78 @@ BLOCKED (environment, not code): iOS full-app link needs the llama.xcframework s
 unrelated) or device signing; live-GHIS on-device run needs the broker deployed to stewardmd.in (feature
 branch, behind flag) plus a doctor's own authorised GHIS login. Feature stays behind CONNECT_AGENT_FLAG +
 client smd_connect_agent (default off).
+## 2026-09-11 - the demonstration hospital stays a script, and what seeding it exposed
+
+A one-click "Create a demonstration hospital" button was built on the wardsynq.com hospital list and
+then REMOVED the same day: it was never asked for, and it duplicated
+`scripts/wardsynq-demo-hospital.mjs` in a second language with a second set of guards to keep
+correct. The seeder remains the one way to build a demo hospital. Recorded here so the idea is not
+rebuilt by someone reading only the shape of the problem.
+
+Two real defects the seeding exposed, both of which outlive the button:
+
+**An allocated MR number is not always the one the caller asked for.** `patient/register` allocates
+it, so a later specimen collection that scans the REQUESTED number is refused as a
+`wrong_patient_scan` - the safety control working exactly as intended, against a caller that had
+assumed its own number was authoritative. Any client driving registration must carry the ALLOCATED
+MRN forward. The seeder does not yet, and reports the refusals as a finding.
+
+**The clinical record write re-finds the hospital it was already given.** Opening the record resolves
+the governed actor from scratch, and that resolution locates the organisation again by a Firestore
+field query - the slowest lookup in the chain, and one the calling route had already performed. The
+lookups stack until a single write runs past its request budget and Cloudflare answers 502 with the
+first half of the work already committed. On the demo hospital this left 83 encounters standing over
+zero patient identities: registration wrote the OPD register, died before writing the clinical
+identity, and could never repair itself because re-registering was refused as a duplicate. The fix
+hands the record write the org the route already holds, and makes a duplicate registration reconcile
+a missing identity rather than return early.
+
+**Also fixed, root cause not symptom:** `render()` in shell.js emitted the two-column `.wrap` grid
+even with an empty rail, so every page shown before a hospital is chosen (the hospital list included)
+was squeezed into the 178px rail column. `.wrap.norail` now collapses to one column.
+
+## 2026-09-11 — "Local AI" becomes a hard policy: no silent cloud inference, capability-matched packs, no unsuitable downloads
+
+**The problem the owner named.** A clinician who chose the on-device engine still spent Gemini on
+every Scribe refine, ICD suggestion, note structuring, MaiK Ask turn, timeline summary and ICU
+correlation, because the router only had local implementations for four tasks and fell through to
+`orig.apply()` for the rest. Five calls never went through the router at all (`SMD_AI.maik`, a raw
+`/summary` fetch, `voice.js` tier-3 transcribe, the ICU imaging/correlate calls, `readImage`'s cloud
+stage). KB-only mode sent the viva judge and the OPD differential to the cloud too.
+
+**Decision.** One policy decision in `maik-engine.js route()`: cloud -> untouched; rag -> no model,
+no spend; local -> the on-device engine or a structured `LOCAL_CAPABILITY_REQUIRED` refusal. Never
+the cloud. `SMD_MAIK_ENGINE.cloudAllowed()` is the single signal for the on-device-first paths
+(image engine, voice, readImage). Evidence Review is Cloud-only by product decision and is REFUSED in
+Local mode with cloud offered, rather than run silently. Speech-to-text is Whisper's job, not a
+MaiK model's. `smd_maik_hard_local="0"` is a one-release recovery switch, not a mode.
+
+**Capability matching lives in the registry, not a second one.** `maik-models.js` gains `CAPS`
+(medical, KB-grounded, JSON reliability, reasoning tier, RAM floor, KV at 4K, verified languages)
+and `suitability()` / `recommend()`. The matcher respects the pinned pack when it qualifies, then a
+feature's preferred tier if installed, then the SMALLEST qualifying pack. Bonsai Swift (`json: 1`)
+is never used for structured output.
+
+**Never recommend a download that will not run well.** Verdicts are ok / warn / no. Unknown RAM
+never upgrades a verdict; a 12 GB-floor pack on a phone whose total cannot be confirmed is "no"; an
+iOS jetsam budget below the need is "no"; short storage is "no"; free-memory-now and battery are
+warnings with the limitation named. "No" packs get no download button and MaiK Cloud is named as the
+alternative. Nothing downloads without a tap; a warn-level pack asks once more.
+
+**Languages are verified, not assumed.** `CAPS.lang` is empty everywhere. A language is added only
+from a passing `test/run-local-translate-eval.mjs` run (numbers, drugs, doses, units must survive;
+no native script may). Until then Indic input in Local mode is refused with the reason.
+
+**The 4K context is the runtime's, not the model's.** Every pack loads at `nCtx 4096`. Long inputs
+are windowed and reduced (`summarize`, `assess`, `noteStructure`, `reasoningExtract`, rolling
+`scribeFill` with running state); nothing is silently truncated. The local sanitizers are the
+server's, ported: the model orders ICD candidates the database supplied and can never emit a code
+the database did not; a figure the source never stated is dropped, never corrected.
+
+**Evidence.** `test/maik-policy.test.mjs`: Local + network ON, every decorated method, zero cloud AI
+calls. 653 test files, 0 failures. Recovery tag `pre-hard-local`. Handoff:
+[[2026-09-11-hard-local-policy]].
+
+**NOT claimed:** any on-device run of the new task functions on a phone (tests use a fake plugin),
+Indic offline translation, a client screen for Senior Surgeon Mode, or clinical validation of
+anything here.

@@ -336,15 +336,42 @@ async function listWard(request, env, ctx) {
   }
 
   const want = str(ctx.ward).toLowerCase();
-  const patients = (encounters || [])
+  const open = (encounters || [])
     .filter((e) => e && ADMISSION_CLASSES.includes(e.class) && e.status === OPEN)
-    .filter((e) => !want || str(e.location && e.location.ward).toLowerCase() === want)
-    .map((e) => ({
+    .filter((e) => !want || str(e.location && e.location.ward).toLowerCase() === want);
+
+  /* THE WARD LIST NAMES ITS PATIENTS.
+   *
+   * This projected the encounter and nothing else, so every row carried a record id where a name
+   * belongs and the screen fell back to printing it: a ward round reading
+   * "opd-pat-smd-demo-00001" down the list. Nurses identify patients by name and MRN; an id is the
+   * one thing on the row nobody can check against a wristband. Found 2026-09-11 on a 100-bed
+   * hospital, where it is obvious, and invisible on the two-patient fixtures the tests used.
+   *
+   * ONE extra read, not one per patient: the roster is fetched once and joined in memory. A name
+   * that cannot be read stays null and the caller falls back as before - a missing name must never
+   * turn a readable ward list into an error. */
+  let byId = new Map();
+  try {
+    const roster = await svc.list("Patient", 400);
+    byId = new Map((roster || []).filter((p) => p && p.id).map((p) => [p.id, p]));
+  } catch (e) { /* the encounters are still worth showing; the rows simply carry no name */ }
+
+  const patients = open.map((e) => {
+    const p = byId.get(e.patientId) || null;
+    return {
       encounterId: e.id, patientId: e.patientId, class: e.class,
+      // What a human on the ward actually reads. Null rather than invented when the chart has none.
+      name: (p && (p.name || p.display)) || null,
+      mrn: (p && p.mrn) || null,
       ward: (e.location && e.location.ward) || null, bed: (e.location && e.location.bed) || null,
       admittedAt: e.periodStart || null, attendingId: e.attendingId || null, version: e.version,
-    }));
-  return { ...base, ok: true, patients };
+    };
+  });
+  /* The hospital's country, so the ward screen can LABEL a temperature box with the unit this
+   * server will store it in. Without it the two were inferred separately and disagreed: the box
+   * said Fahrenheit, the server stored Celsius, and 98.6 went into the record as 98.6 Cel. */
+  return { ...base, ok: true, patients, region: str(ctx.region) || "IN" };
 }
 
 /**
@@ -378,6 +405,10 @@ async function recordWardVitals(request, env, ctx) {
   const observations = vitalsToObservations({
     vitals: ctx.vitals, patientId, ticketId: encounterId, encounterId,
     recordedAt: ctx.recordedAt || new Date().toISOString(), idPrefix: "wsq-ward-vitals",
+    // What a clinician in THIS hospital's country writes a temperature in, when the caller did not
+    // say. Without it every ward temperature was stored as Fahrenheit: 37.1 charted in an Indian
+    // hospital became "37.1 [degF]", which is profound hypothermia. See functions/_region.js.
+    defaultTempUnit: ctx.tempUnit || null, defaultWeightUnit: ctx.weightUnit || null,
   });
   if (!observations.length) return { ...base, ok: true, written: 0, skipped: "no_numeric_values" };
 
@@ -763,6 +794,86 @@ async function bedBoard(request, env, ctx) {
   };
 }
 
+/* THE CHART HAD NINE SEPARATE BOXES AND NO SINGLE STORY OF THE STAY (2026-09-12).
+ *
+ * A clinician opening a patient found a problem list, an order form, a dose round and a results
+ * queue - four true things, in four places, in no shared order. Reconstructing "what happened to
+ * this patient" meant reading all four and doing the sequencing by hand. This is that sequencing,
+ * done once, from records that already exist: nothing here is a new store, a new write path, or a
+ * fact invented for the view. It is `RecordService.chart()` - the same governed, role-scoped read
+ * the FHIR $everything operation already uses - flattened into one list ordered by when each thing
+ * actually happened, with an "on now" board pulled from the same read.
+ *
+ * "Every minute detail" is only as fine as what was actually charted. This does not interpolate a
+ * reading between two real ones, and a resource with no timestamp is counted and named, never
+ * silently dropped - a timeline that quietly loses events is worse than a shorter one that says so.
+ */
+const TIMELINE_LABEL = {
+  Encounter: (r) => `${r.class || "Encounter"} ${r.status || ""}${r.location && r.location.ward ? ` — ${r.location.ward}${r.location.bed ? ` bed ${r.location.bed}` : ""}` : ""}`.trim(),
+  Condition: (r) => `Problem: ${r.display || r.code}${r.clinicalStatus ? ` (${r.clinicalStatus})` : ""}`,
+  Observation: (r) => `${r.category || "Observation"}: ${r.code}${r.value != null ? ` = ${r.value}${r.unit ? ` ${r.unit}` : ""}` : ""}`,
+  MedicationOrder: (r) => `Prescribed ${r.drug}${r.dose && r.dose.value != null ? ` ${r.dose.value}${r.dose.unit || ""}` : ""}${r.route ? ` ${r.route}` : ""}${r.frequency ? ` ${r.frequency}` : ""} — ${r.status || "draft"}`,
+  MedicationAdministration: (r) => `${r.drug || "Medication"} — ${r.status || "ordered"}${r.holdReason ? ` (${r.holdReason})` : ""}`,
+  ServiceRequest: (r) => `Ordered ${r.code}${r.category ? ` (${r.category})` : ""} — ${r.status || "draft"}${r.priority === "stat" ? " STAT" : r.priority === "urgent" ? " urgent" : ""}`,
+  DiagnosticReport: (r) => `Result: ${r.code} — ${r.status || "preliminary"}${r.critical ? " CRITICAL" : ""}`,
+  CarePlan: (r) => `Care plan — ${r.status || "draft"}`,
+  ClinicalNote: (r) => `${r.noteType || "progress"} note${r.signedBy ? " signed" : r.aiDrafted ? " (AI-drafted, unsigned)" : " drafted"}`,
+  ImagingStudy: (r) => `Imaging: ${r.modality || "study"}${r.bodySite ? ` — ${r.bodySite}` : ""} — ${r.status || "available"}`,
+  AllergyIntolerance: (r) => `Allergy recorded: ${r.substance}${r.severity ? ` (${r.severity})` : ""}`,
+};
+
+/**
+ * PURE. Every resource in a chart(), as one chronologically ordered list, plus the medications
+ * currently active. `chart` is `RecordService.chart()`'s own shape: `{ [resourceType]: resource[] }`,
+ * already scoped to what this actor may read - nothing here widens or re-checks that.
+ */
+function timelineFromChart(chart) {
+  const events = [];
+  let withoutTimestamp = 0;
+  for (const resourceType of Object.keys(chart || {})) {
+    const rows = chart[resourceType] || [];
+    const label = TIMELINE_LABEL[resourceType] || ((r) => `${resourceType} recorded`);
+    for (const r of rows) {
+      const at = (r.meta && (r.meta.effectiveAt || r.meta.recordedAt)) || null;
+      if (!at) { withoutTimestamp++; continue; }
+      events.push({ at, resourceType, id: r.id, label: label(r) });
+    }
+  }
+  events.sort((a, b) => (a.at < b.at ? 1 : a.at > b.at ? -1 : 0)); // most recent first
+  const activeMedications = (chart.MedicationOrder || [])
+    .filter((o) => o && o.status === "active")
+    .map((o) => ({
+      orderId: o.id, drug: o.drug, dose: o.dose || null, route: o.route || null, frequency: o.frequency || null,
+      prescriberId: o.prescriberId || null, since: (o.meta && (o.meta.effectiveAt || o.meta.recordedAt)) || null,
+    }))
+    .sort((a, b) => (a.since || "") < (b.since || "") ? 1 : -1);
+  return { events, withoutTimestamp, activeMedications };
+}
+
+/**
+ * The route handler. ctx: { migration, patientId, actorDeps, recordDeps }. A role with no read grant
+ * on a resource type simply never sees it in `chart` — the same silent narrowing `chart()` already
+ * does for every other reader; this does not loosen or re-decide that.
+ */
+async function patientTimeline(request, env, ctx) {
+  const mig = ctx.migration;
+  const base = { mode: mig && mig.mode, tenantId: (mig && mig.tenantId) || null };
+  if (!mig || mig.mode === "off") return { ...base, ok: true, skipped: "off", events: [], activeMedications: [] };
+
+  const patientId = str(ctx.patientId);
+  if (!patientId) return { ...base, ok: false, status: 422, error: "patient_id_required", events: [], activeMedications: [] };
+
+  const { svc, error } = await openService(request, env, ctx, "record:read");
+  if (error) return { ...base, ...error, events: [], activeMedications: [] };
+
+  let chart;
+  try { chart = await svc.chart(patientId); }
+  catch (e) { return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), events: [], activeMedications: [] }; }
+
+  const { events, withoutTimestamp, activeMedications } = timelineFromChart(chart);
+  return { ...base, ok: true, patientId, events, activeMedications, ...(withoutTimestamp ? { withoutTimestamp } : {}) };
+}
+
 export {
   IPD, ICU, MATERNITY, PEDIATRICS, NICU, ADMISSION_CLASSES, OPEN,
   encounterFromAdmission, sameAdmission, admitPatient, listWard,
@@ -770,4 +881,5 @@ export {
   sameBed, transferPatient, bedBoard,
   freeMasterBed,   // TASK 4.2: discharge reuses this to release the vacated bed - see migrate-discharge.js
   EMERGENCY_BED_RELAXATION, ADMIN_RELAXABLE_STATES, checkMasterBed,
+  timelineFromChart, patientTimeline,
 };

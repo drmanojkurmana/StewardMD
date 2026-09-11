@@ -27,6 +27,8 @@ import * as QT from "../../_queue_timeline.js";
 import { notifyTimeline } from "../../_queue_notify.js";
 import { importRoster, importFromSource } from "../../_queue_ghis.js";
 import * as ORG from "../../_opd_org_store.js";
+import { selfCreateTenant } from "../../_connect/enterprise/org.js";
+import { unitsFor } from "../../_region.js";
 import * as PAT from "../../_opd_patient_store.js";
 import { resolveRoomDoctor, roomStatus, roomForActor } from "../../_opd_org.js";
 import { brandingFor, putBranding, validateLogo, logoKey, bucket as brandBucket } from "../../_clinic_branding.js";
@@ -50,7 +52,7 @@ import { checkPrescriptionSafety } from "../../_wardsynq/rx-safety.js";
 import { getRulePack } from "../../_wardsynq/rulepack.js";
 // Inpatient ward + eMAR (2026-09-07). Same shape as every OPD migration above: the route resolves
 // the org and the forced wardsynq migration, these do the governed record write.
-import { admitPatient, listWard, recordWardVitals, createWardMedicationOrder, transferPatient, bedBoard } from "../../_wardsynq/migrate-inpatient.js";
+import { admitPatient, listWard, recordWardVitals, createWardMedicationOrder, transferPatient, bedBoard, patientTimeline } from "../../_wardsynq/migrate-inpatient.js";
 // Emergency department (2026-09-09). Reuses everything above unchanged - vitals, orders, the eMAR,
 // notes, labs, NEWS2, critical results are all encounter-class-agnostic already. This adds only
 // arrival (known or unidentified), triage acuity, and a non-admitted disposition.
@@ -123,6 +125,11 @@ import { submitNote, signNote, listAwaitingCoSign } from "../../_wardsynq/note-c
 import { chartCompletionQueue } from "../../_wardsynq/chart-completion.js";
 import { patientFlowReport, clinicalOperationsReport, billingReport, claimsReport, pharmacyReport, himReport } from "../../_wardsynq/reports.js";
 import { downtimePack } from "../../_wardsynq/downtime.js";
+import { buildTwinSnapshot, reconstructTwinAsOf, operationalHealthReport } from "../../_wardsynq/digital-twin.js";
+import { predictMetric } from "../../_wardsynq/twin-predict.js";
+import { simulateScenario } from "../../_wardsynq/twin-simulate.js";
+import { askAboutHospital, reviewTwinInteraction } from "../../_wardsynq/twin-copilot.js";
+import { prepareOverdueWorkQueue } from "../../_wardsynq/twin-agent.js";
 import { qualityReport } from "../../_wardsynq/quality.js";
 import { collectSpecimen, specimenOutcome, collectionList } from "../../_wardsynq/specimen.js";
 import { adtForEncounter, oruForReport } from "../../_wardsynq/hl7v2.js";
@@ -142,6 +149,7 @@ import { imagingWorklist } from "../../_wardsynq/dicom.js";
 import { askAboutPatient, reviewInteraction, listInteractions } from "../../_wardsynq/maik-interaction.js";
 import { maikStatus } from "../../_wardsynq/maik-gateway.js";
 import { hit as rateHit } from "../../_wardsynq/rate-limit.js";
+import { KIND, logEvent } from "../../_wardsynq/observability.js";
 import { explainOrderSafety } from "../../_wardsynq/maik-cds.js";
 import { checkAdvisories } from "../../_wardsynq/advisory-authoring.js";
 import { cdaForEncounter } from "../../_wardsynq/cda.js";
@@ -172,7 +180,7 @@ async function syncEncounter(request, env, s, ticket) {
     const mig = (await wsqForcedMigration(env, await ORG.getOrg(env, s.orgId || s.hospitalId))) || await encounterMigration(env, s, { getOrg: ORG.getOrg, tenantRow: wsqTenantRow });
     if (!mig || mig.mode === "off") return null;
     if (mig.error) return null;   // wardsynq org with no tenant linked yet — best-effort, silent, like every other syncEncounter failure
-    return await recordEncounterSync(request, env, { migration: mig, ticket, session: s, actorDeps: wsqActorDeps(env), recordDeps: wsqRecordDeps(env, mig.tenantId) });
+    return await recordEncounterSync(request, env, { migration: mig, ticket, session: s, actorDeps: wsqActorDeps(env, { orgForTenant: () => org }), recordDeps: wsqRecordDeps(env, mig.tenantId) });
   } catch (e) {
     return null;
   }
@@ -258,7 +266,7 @@ function clientProtocolTemplate(t) {
 import ONCORECOMMEND from "../../../onco-recommend.js";
 function activeStandardProtocols() { return Object.keys(ONCO_PROTOCOLS).map(function (k) { return ONCO_PROTOCOLS[k]; }).filter(function (p) { return p && p.status === "ACTIVE"; }); }
 
-const CORS_ORIGINS = ["https://localhost", "capacitor://localhost", "http://localhost", "ionic://localhost", "https://stewardmd.in", "https://www.stewardmd.in"];
+const CORS_ORIGINS = ["https://localhost", "capacitor://localhost", "http://localhost", "ionic://localhost", "https://stewardmd.in", "https://www.stewardmd.in", "https://wardsynq.com", "https://www.wardsynq.com"];
 function corsHeaders(request) {
   const o = request.headers.get("Origin") || ""; const h = { "Vary": "Origin" };
   if (CORS_ORIGINS.indexOf(o) >= 0) { h["Access-Control-Allow-Origin"] = o; h["Access-Control-Allow-Methods"] = "POST, GET, OPTIONS"; h["Access-Control-Allow-Headers"] = "Content-Type, Authorization, X-App-Token, X-Admin-Token, X-Staff-Token"; h["Access-Control-Max-Age"] = "86400"; }
@@ -414,6 +422,7 @@ function opdOrgFor(env, hospitalId) {
 }
 
 export async function onRequest(context) {
+  const __t0 = Date.now();
   const { request, env } = context;
   if (request.method === "OPTIONS") return new Response(null, { status: 204, headers: corsHeaders(request) });
   const url = new URL(request.url);
@@ -524,7 +533,11 @@ export async function onRequest(context) {
      *   verify / dispense   ORDER_DISPENSE           pharmacy releasing the dose
      *   scan / administer   MED_ADMINISTER           the nurse at the bedside
      */
-    if (seg === "ward") {
+    // The clinical ward block owns /ward/<sub>. The org-configuration routes POST /ward (create a
+    // ward master record) and POST /ward/update live further down with the other admin routes and
+    // were unreachable from here: every such call fell through capFor and answered not_found, so a
+    // hospital could never add a ward from the console. They are let past on purpose.
+    if (seg === "ward" && sub && !(method === "POST" && sub === "update")) {
       // PUT carries a body too, since 2026-09-08: a FHIR update is a PUT of the whole resource.
       // The HL7 door takes the message as text (ER7), never as JSON.
       const isHl7 = parts[1] === "hl7";
@@ -538,7 +551,7 @@ export async function onRequest(context) {
       /* TASK 9.15. Whole-hospital or whole-ward reads. Rationed tightly because they are rare and
        * deliberate, and because they are the one shape that turns an authenticated account into a
        * bulk exfiltration tool in a loop. */
-      const RL_BULK = new Set(["backup", "downtime", "analytics-extract", "roi-export"]);
+      const RL_BULK = new Set(["backup", "downtime", "analytics-extract", "roi-export", "twin-reconstruct", "operational-health"]);
       /* Emergency access is bounded but never scarce: the limit is here to make scripted break-glass
        * abuse visible and finite, and it sits far above the handful of declarations a real shift
        * produces. Refusing a genuine emergency to enforce a quota would be the worse failure. */
@@ -551,6 +564,10 @@ export async function onRequest(context) {
         // Reading what is due is reading the ward, not acting on it: the same view capability the
         // ward list uses. Nothing here writes, so this grants no ability to move a dose.
         schedule: CAPS.QUEUE_VIEW,
+        // The chart's own timeline: the same governed read every one of its sections already uses,
+        // just merged and ordered. Seeing it is emr.view, same as flowsheet/criticals — it writes
+        // nothing and grants no new authority over the chart.
+        timeline: CAPS.EMR_VIEW,
         /* Critical results. SEEING the list is emr.view - a ward that cannot see its open critical
          * results is the failure this whole path exists to prevent, so it is not gated behind the
          * authority to act. ACKNOWLEDGING is emr.treat: it is a clinical decision recorded against a
@@ -688,6 +705,21 @@ export async function onRequest(context) {
         // What is outstanding on the ward. A count of open items, naming no patient except on the
         // oldest unacknowledged critical result - so it is readable by the ward, at emr.view.
         metrics: CAPS.EMR_VIEW, "patient-flow": CAPS.EMR_VIEW,
+        /* TASK 10: the Hospital Digital Twin. Reads exactly what patient-flow/metrics/emergency-
+         * status/etc already gate at EMR_VIEW - the twin composes their answers, so it never needs a
+         * broader cap than the narrowest section it fuses. Reconstruction reads deep version history
+         * across the whole tenant, which is the same forensic-reach reasoning backup.js's own
+         * STAFF_ADMIN gate uses, so it is gated a step higher than a live read. The Copilot and agent
+         * routes write nothing clinical (a TwinInteraction and a draft list respectively) and stay at
+         * EMR_VIEW for the same reason MaiK's own patient-facing routes do: reading is the bar, the
+         * write it produces is scoped by a dedicated service actor, not by the asker's own grant. */
+        twin: CAPS.EMR_VIEW, "twin-reconstruct": CAPS.STAFF_ADMIN, "twin-predict": CAPS.EMR_VIEW,
+        /* TASK 10 observability pass: the health report reads across MaiKInteraction and
+         * BreakGlassGrant rosters tenant-wide, the same forensic reach twin-reconstruct's own
+         * STAFF_ADMIN gate exists for - never a clinical read, so never EMR_VIEW. */
+        "operational-health": CAPS.STAFF_ADMIN,
+        "twin-simulate": CAPS.EMR_VIEW, "twin-copilot": CAPS.EMR_VIEW, "twin-review": CAPS.EMR_VIEW,
+        "twin-agent-queue": CAPS.EMR_VIEW,
         // TASK 4.12: hospital reports. Patient-flow/clinical-operations ride the same emr.view as the
         // live queues they wrap. Billing/claims/pharmacy/HIM report at the same capability their own
         // live routes already require - a report is not a way to read what the underlying route
@@ -951,14 +983,14 @@ export async function onRequest(context) {
       const mig = await wsqForcedMigration(env, wOrg);
       if (!mig) return json({ ok: false, error: "not_a_wardsynq_hospital", message: "The inpatient ward is only available for a WardSynQ-native hospital." }, 409, request);
       if (mig.error) return json({ ok: false, error: mig.error }, 409, request);
-      const deps = { migration: mig, actorDeps: wsqActorDeps(env), recordDeps: wsqRecordDeps(env, mig.tenantId), orgId: wOrgId };
+      const deps = { migration: mig, actorDeps: wsqActorDeps(env), recordDeps: wsqRecordDeps(env, mig.tenantId), orgId: wOrgId, wsqCfg };
 
       if (sub === "admit" && method === "POST") {
         const r = await admitPatient(request, env, { ...deps, admission: body.admission || body, emergencyOverride: body.emergencyOverride === true, idempotencyKey: body.idempotencyKey || null });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "list" && method === "GET") {
-        const r = await listWard(request, env, { ...deps, ward: url.searchParams.get("ward") || "" });
+        const r = await listWard(request, env, { ...deps, ward: url.searchParams.get("ward") || "", region: (wOrg && wOrg.region) || "IN" });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "ed-arrival" && method === "POST") {
@@ -1282,7 +1314,10 @@ export async function onRequest(context) {
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "vitals" && method === "POST") {
-        const r = await recordWardVitals(request, env, { ...deps, encounterId: body.encounterId, patientId: body.patientId, vitals: body.vitals, recordedAt: body.recordedAt, idempotencyKey: body.idempotencyKey || null });
+        const r = await recordWardVitals(request, env, { ...deps, encounterId: body.encounterId, patientId: body.patientId, vitals: body.vitals, recordedAt: body.recordedAt,
+          // What a clinician HERE writes a vital in, when the caller did not say. See _region.js.
+          tempUnit: unitsFor(wOrg && wOrg.region).temp, weightUnit: unitsFor(wOrg && wOrg.region).weight,
+          idempotencyKey: body.idempotencyKey || null });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "medication-order" && method === "POST") {
@@ -1391,7 +1426,7 @@ export async function onRequest(context) {
          *   GET /ward/fhir/Patient/{id}/$everything          everything for one patient
          *   GET /ward/fhir?patient={id}[&_type=A,B]          the same, older spelling */
         const fType = parts[2] || "", fId = parts[3] || "", fOp = parts[4] || "", fVid = parts[5] || "";
-        const fctx = { ...deps, base: `${url.origin}/api/queue/ward/fhir`, terminology: (wsqCfg && wsqCfg.terminology) || null, profiles: (wsqCfg && wsqCfg.fhir && wsqCfg.fhir.profiles) || null, inbound: inboundEnabled((wsqCfg && wsqCfg.fhir) || null) };
+        const fctx = { ...deps, base: `${url.origin}/api/queue/ward/fhir`, terminology: (wsqCfg && wsqCfg.terminology) || null, profiles: (wsqCfg && wsqCfg.fhir && wsqCfg.fhir.profiles) || null, inbound: inboundEnabled((wsqCfg && wsqCfg.fhir) || null), region: (wOrg && wOrg.region) || "" };
         /* $validate is an operation, not a write: it files nothing, so it is open to anyone who may
          * read, whether or not the hospital has opened the inbound door. */
         if (method === "POST") {
@@ -1744,6 +1779,10 @@ export async function onRequest(context) {
         });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
+      if (sub === "timeline" && method === "GET") {
+        const r = await patientTimeline(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "" });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
       if (sub === "wound" && method === "POST") {
         const r = await chartWound(request, env, { ...deps, patientId: body.patientId, encounterId: body.encounterId, site: body.site, kind: body.kind, stage: body.stage, origin: body.origin, lengthCm: body.lengthCm, widthCm: body.widthCm, depthCm: body.depthCm, tissue: body.tissue, exudate: body.exudate, infectionSigns: body.infectionSigns, dressing: body.dressing, note: body.note, assessedAt: body.assessedAt, photo: body.photo, image: body.image, idempotencyKey: body.idempotencyKey || null });
         return json(r, r.ok ? 200 : (r.status || 502), request);
@@ -1840,7 +1879,16 @@ export async function onRequest(context) {
       if (sub === "downtime" && method === "GET") {
         const r = await downtimePack(request, env, {
           ...deps, ward: url.searchParams.get("ward") || "", hours: url.searchParams.get("hours") || "",
-          marTimes: (wsqCfg && wsqCfg.marTimes) || null, offsetMinutes: (wsqCfg && wsqCfg.utcOffsetMinutes) || 0,
+          marTimes: (wsqCfg && wsqCfg.marTimes) || null,
+          /* THE SAME CLOCK THE LIVE ROUND USES. This read `|| 0`, so a hospital that had not
+           * configured an offset got UTC here and mar-schedule.js's own default (330) everywhere
+           * else - the downtime pack printed every dose time 5h30m from the screen it replaces.
+           * The downtime pack is the PAPER SHEET a ward uses when the system is down, which makes
+           * it the single worst place in the product for a wrong dose clock. */
+          offsetMinutes: Number.isFinite(wsqCfg && wsqCfg.utcOffsetMinutes) ? wsqCfg.utcOffsetMinutes : undefined,
+          // And the zone, where the hospital has one: the sheet a ward uses when the system is down
+          // must print the same dose times the live round does, on both sides of a clock change.
+          timeZone: (wsqCfg && wsqCfg.timeZone) || undefined,
         });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
@@ -1970,6 +2018,61 @@ export async function onRequest(context) {
         const r = await clinicalOperationsReport(request, env, { ...deps, ward: url.searchParams.get("ward") || "", escalationPolicy: (wsqCfg && wsqCfg.criticalEscalation) || null });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
+      /* TASK 10.1-10.4: the Hospital Digital Twin. Every number is a call into a file that already
+       * owns it - see digital-twin.js's own header for why this route is deliberately thin. */
+      if (sub === "twin" && method === "GET") {
+        const r = await buildTwinSnapshot(request, env, { ...deps, ward: url.searchParams.get("ward") || "",
+          escalationPolicy: (wsqCfg && wsqCfg.criticalEscalation) || null, includeFinance: url.searchParams.get("finance") === "1",
+          resources: (wsqCfg && wsqCfg.resources) || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      /* TASK 10.20: bounded point-in-time reconstruction. Gated at STAFF_ADMIN, one notch above the
+       * live twin's EMR_VIEW, for the same forensic-reach reason backup.js's own export is: a caller
+       * who can walk the full version history of every emergency/blackout/critical-result ever
+       * declared is reading something closer to an audit trail than a clinical chart. */
+      if (sub === "twin-reconstruct" && method === "GET") {
+        const r = await reconstructTwinAsOf(request, env, deps, url.searchParams.get("at") || "");
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      /* TASK 10 observability pass: the application-side SLO/health contract, composed from
+       * records this tenant already writes - see digital-twin.js's own header for what this is
+       * and, just as deliberately, is NOT. */
+      if (sub === "operational-health" && method === "GET") {
+        const r = await operationalHealthReport(request, env, { ...deps, ward: url.searchParams.get("ward") || "", escalationPolicy: (wsqCfg && wsqCfg.criticalEscalation) || null, resources: (wsqCfg && wsqCfg.resources) || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      /* TASK 10.12: governed operational predictions. Never merged into the twin's own sections -
+       * see twin-predict.js's header for why the shapes are kept apart on purpose. */
+      if (sub === "twin-predict" && method === "GET") {
+        const r = await predictMetric(request, env, { ...deps, metric: url.searchParams.get("metric") || "",
+          lookbackDays: Number(url.searchParams.get("lookbackDays")) || undefined, horizonDays: Number(url.searchParams.get("horizonDays")) || undefined });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      /* TASK 10.19: what-if simulation. Reads a real twin, projects arithmetically, writes nothing -
+       * see twin-simulate.js's header for the structural (not just disciplinary) reason it cannot. */
+      if (sub === "twin-simulate" && method === "POST") {
+        const twinR = await buildTwinSnapshot(request, env, { ...deps, ward: body.ward || "", escalationPolicy: (wsqCfg && wsqCfg.criticalEscalation) || null, resources: (wsqCfg && wsqCfg.resources) || null });
+        if (!twinR.ok || !twinR.twin) return json({ ok: false, error: "twin_unavailable" }, 502, request);
+        const r = simulateScenario(twinR.twin, body.scenario, body.params || {});
+        return json(r, r.ok !== false ? 200 : 422, request);
+      }
+      /* TASK 10.17: MaiK Command Copilot, over the hospital's operational state. */
+      if (sub === "twin-copilot" && method === "POST") {
+        const r = await askAboutHospital(request, env, { ...deps, config: (wsqCfg && wsqCfg.maik) || null,
+          question: body.question, task: body.task, ward: body.ward, escalationPolicy: (wsqCfg && wsqCfg.criticalEscalation) || null,
+          includeFinance: body.includeFinance === true, correlationId: body.correlationId, idempotencyKey: body.idempotencyKey || null,
+          fetchImpl: env && typeof env.WSQ_MAIK_FETCH === "function" ? env.WSQ_MAIK_FETCH : null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "twin-review" && method === "POST") {
+        const r = await reviewTwinInteraction(request, env, { ...deps, interactionId: body.interactionId, decision: body.decision, reason: body.reason, editedOutput: body.editedOutput, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      /* TASK 10.18: the one governed agent - draft-only, see twin-agent.js's header. */
+      if (sub === "twin-agent-queue" && method === "GET") {
+        const r = await prepareOverdueWorkQueue(request, env, { ...deps, ward: url.searchParams.get("ward") || "", escalationPolicy: (wsqCfg && wsqCfg.criticalEscalation) || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
       if (sub === "report-billing" && method === "GET") {
         const r = await billingReport(request, env, { ...deps, from: url.searchParams.get("from") || "", to: url.searchParams.get("to") || "" });
         return json(r, r.ok ? 200 : (r.status || 502), request);
@@ -1999,7 +2102,15 @@ export async function onRequest(context) {
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "break-glass" && method === "POST") {
-        const r = await declareBreakGlass(request, env, { ...deps, patientId: body.patientId, reason: body.reason, minutes: body.minutes, idempotencyKey: body.idempotencyKey || null });
+        const r = await declareBreakGlass(request, env, {
+          ...deps, patientId: body.patientId, reason: body.reason, minutes: body.minutes, idempotencyKey: body.idempotencyKey || null,
+          // Same honest gap critical-results.js already states: no real channel is wired in this
+          // build (a channel is a FUNCTION, not JSON an org's Firestore config could carry; wiring
+          // one means reusing StewardMD's existing APNs/FCM push infrastructure, future work, not
+          // fabricated here). The declaration therefore honestly records NO_CHANNEL rather than a
+          // silent "sent" - the mechanism is real and wired; the transport is the named gap.
+          notifyDeps: {},
+        });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "emergency-chart" && method === "GET") {
@@ -2035,11 +2146,16 @@ export async function onRequest(context) {
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "incident-triage" && method === "POST") {
-        const r = await triageIncident(request, env, { ...deps, incidentId: body.incidentId, likelihood: body.likelihood, triagedBy: body.triagedBy });
+        // triagedBy is the authenticated actor, never the body: an investigation's conclusions
+        // are never anonymous (wardsynq-incidents.js header), and a body field lets a safety
+        // officer file the conclusion under any name they type. A conflicting body.triagedBy is
+        // ignored, same as updatedBy/actor.id elsewhere in this router.
+        const r = await triageIncident(request, env, { ...deps, incidentId: body.incidentId, likelihood: body.likelihood, triagedBy: actor.id || "" });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "incident-rca" && method === "POST") {
-        const r = await recordIncidentRCA(request, env, { ...deps, incidentId: body.incidentId, rootCause: body.rootCause, contributingFactors: body.contributingFactors, method: body.method, conductedBy: body.conductedBy });
+        // conductedBy: the authenticated actor, not the body — same reasoning as triagedBy above.
+        const r = await recordIncidentRCA(request, env, { ...deps, incidentId: body.incidentId, rootCause: body.rootCause, contributingFactors: body.contributingFactors, method: body.method, conductedBy: actor.id || "" });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "incident-capa" && method === "POST") {
@@ -2150,6 +2266,9 @@ export async function onRequest(context) {
           // caller who could pass these could move every dose on the chart by asking differently.
           marTimes: (wsqCfg && wsqCfg.marTimes) || null,
           offsetMinutes: Number.isFinite(wsqCfg && wsqCfg.utcOffsetMinutes) ? wsqCfg.utcOffsetMinutes : undefined,
+          /* The hospital's IANA zone, when it has one. It WINS over the offset for named ward times,
+           * because a site that observes DST has no single correct offset to be given. */
+          timeZone: (wsqCfg && wsqCfg.timeZone) || undefined,
           graceMinutes: Number.isFinite(wsqCfg && wsqCfg.marGraceMinutes) ? wsqCfg.marGraceMinutes : undefined,
         });
         return json(r, r.ok ? 200 : (r.status || 502), request);
@@ -2211,8 +2330,35 @@ export async function onRequest(context) {
         const org = await ORG.getOrg(env, pOrg);
         if (!org) return json({ ok: false, error: "org_not_found" }, 404, request);
         const r = await PAT.registerPatient(env, org, body, actor.id || "");
-        // invalid / duplicate are EXPECTED outcomes the form renders, not server errors.
-        if (!r.ok) return json(r, 200, request);
+        /* A PATIENT WHO IS ALREADY REGISTERED STILL NEEDS A CLINICAL RECORD MASTER.
+         *
+         * This used to return here on "duplicate" / "mrn_taken", which is right for the form (the
+         * receptionist is told the patient exists) but left a real hole: if the record write ever
+         * failed once - a timeout, a refusal, a tenant not yet migrated - the patient existed in the
+         * register with a name and a number, and had no Patient master at all. The ward list joins
+         * names off that master, so the bed showed a record id instead of a human being, forever:
+         * re-registering was the obvious repair and it was refused before it could repair anything.
+         *
+         * So a duplicate now RECONCILES. The registration itself is still refused and still reported
+         * exactly as before; what changes is that the already-stored patient is read back and its
+         * record master is written if it is missing. The write is the same idempotent one the first
+         * registration does (unchanged records are skipped), so repeating it costs nothing and
+         * cannot invent a second identity - the id is derived from the MR number. */
+        if (!r.ok) {
+          const dupMrn = (r.duplicateOf && r.duplicateOf.mrn) || (r.error === "mrn_taken" ? (body.mrn || "") : "");
+          if (!dupMrn) return json(r, 200, request);
+          const existing = await PAT.getPatient(env, pOrg, dupMrn).catch(() => null);
+          if (!existing) return json(r, 200, request);
+          const dupMig = (await wsqForcedMigration(env, org)) || await registrationMigration(env, { orgId: pOrg }, { getOrg: ORG.getOrg, tenantRow: wsqTenantRow });
+          if (!dupMig || dupMig.error || dupMig.mode === "off") return json(r, 200, request);
+          const rec = await registerPatientRecord(request, env, {
+            migration: dupMig,
+            registration: { mrn: existing.mrn, mrSource: existing.mrSource, pending: existing.pending, patient: existing },
+            actorDeps: wsqActorDeps(env, { orgForTenant: () => org }), recordDeps: wsqRecordDeps(env, dupMig.tenantId),
+          }).catch((e) => ({ ok: false, error: "record_write_failed", detail: String((e && e.message) || e) }));
+          // The registration outcome is unchanged. The reconcile is reported alongside it.
+          return json(Object.assign({}, r, { reconciled: rec }), 200, request);
+        }
         // WardSynQ record: the patient-identity migration (functions/_wardsynq/migrate-registration.js).
         // The MR number above is ALREADY allocated by this point in every mode — that allocation is
         // the one thing this migration is told to never touch. Off (every tenant today): none of this
@@ -2286,15 +2432,37 @@ export async function onRequest(context) {
     if (method === "GET" && seg === "whoami") {
       // For non-owner/non-doctor identities, the real role is org-scoped (q_members), not the global viewer.
       let role = actor.role, orgId = actor.orgId || url.searchParams.get("orgId") || actor.hospitalId || "";
-      if (actor.kind !== "firebase" && orgId) { const az = await ORG.authorizeOrg(env, actor, orgId, null); if (az.ok) role = az.role; }
+      // For EVERY identity kind, not only staff: an account that is an invited member (or the owner)
+      // of the hospital holds that hospital's role, and a console that read the global "doctor" role
+      // instead hid the Admin Center from the person who owns the hospital. The server still
+      // re-checks every mutation; this only tells the UI what to offer.
+      if (orgId) { const az = await ORG.authorizeOrg(env, actor, orgId, null); if (az.ok && az.role) role = az.role; }
       const smdId = actor.kind === "firebase" ? await ORG.userSmdId(env, actor.id, actor.email) : "";   // StewardMD ID per account
       let orgCode = ""; if (orgId) { const o = await ORG.getOrg(env, orgId); if (o) orgCode = o.code || ""; }
       return json({ ok: true, role: role, caps: capsFor(role), kind: actor.kind, orgId: orgId, orgCode: orgCode, smdId: smdId, name: actor.name, hospitalId: actor.hospitalId || "", billing: BILL.billingEnabled(env) }, 200, request);
     }
 
     // ---- org / rooms / members config (Phase 3: multi-tenant, isolation-gated) ----
-    if (method === "GET" && seg === "orgs")
-      return json({ ok: true, orgs: actor.kind === "firebase" ? await ORG.listOrgsForOwner(env, actor.id) : [] }, 200, request);
+    if (method === "GET" && seg === "orgs") {
+      if (actor.kind === "staff" && actor.orgId) {
+        // A PIN/email staff session is minted for ONE hospital.
+        const org = await ORG.getOrg(env, actor.orgId);
+        if (!org) return json({ ok: true, orgs: [] }, 200, request);
+        const az = await ORG.authorizeOrg(env, actor, actor.orgId, null);
+        return json({ ok: true, orgs: [Object.assign({}, org, { memberRole: az.role || "viewer" })] }, 200, request);
+      }
+      // Owner orgs (an account) + orgs where this identity is an invited MEMBER (q_members, by id or
+      // email - see authorizeOrg's own uid-then-email fallback), for any authenticated identity: an
+      // account, a Cloudflare Access user or a GHIS employee whose membership spans hospitals. Owner
+      // wins on a collision (a member row on an org this account also owns must never demote the
+      // doctor's own view of it to their staff role).
+      const owned = actor.kind === "firebase" ? (await ORG.listOrgsForOwner(env, actor.id)).map((o) => Object.assign({}, o, { memberRole: "owner" })) : [];
+      const member = await ORG.listOrgsForMember(env, [actor.id, actor.email]);
+      const byId = new Map();
+      for (const o of member) byId.set(o.id, o);
+      for (const o of owned) byId.set(o.id, o);
+      return json({ ok: true, orgs: Array.from(byId.values()) }, 200, request);
+    }
     if (method === "GET" && (seg === "org" || seg === "rooms" || seg === "members" || seg === "wards" || seg === "beds")) {
       const orgId = url.searchParams.get("orgId") || "";
       const az = await ORG.authorizeOrg(env, actor, orgId, seg === "members" ? CAPS.STAFF_ADMIN : CAPS.QUEUE_VIEW);
@@ -2621,6 +2789,21 @@ export async function onRequest(context) {
         const o = await ORG.createOrg(env, { id: body.hospitalId || undefined, name: body.name || "Hospital", mode: "connect", connectorId: body.connectorId || null }, actor.id);
         return json({ ok: true, org: o }, 200, request);
       }
+      if (seg === "onboard" && sub === "wardsynq") {   // self-service: a WardSynQ-native hospital (org + its own clinical-record tenant)
+        if (needAccount()) return json({ ok: false, error: "account_required" }, 403, request);
+        if (!env.CONNECT_DB) return json({ ok: false, error: "record_store_unavailable" }, 503, request);
+        const t = await selfCreateTenant({ db: env.CONNECT_DB, identifyFn: identify }, request, env, { name: body.name });
+        try {
+          // The hospital's country, chosen at creation. Absent means India, as everywhere else.
+          let o = await ORG.createOrg(env, { name: body.name, mode: "wardsynq", region: body.region }, actor.id);
+          o = await ORG.updateOrg(env, o.id, { connectTenantId: t.id }, actor.id);
+          await wsqLinkTenantOrg(env, o);
+          return json({ ok: true, org: o, tenantId: t.id }, 200, request);
+        } catch (e) {
+          // The tenant already exists at this point - never leave it silently unlinked without saying so.
+          return json({ ok: false, error: "org_create_failed", tenantId: t.id }, 500, request);
+        }
+      }
       if (seg === "migrate" && sub === "backfill") {  // idempotent legacy hospitalId -> org
         if (needAccount()) return json({ ok: false, error: "account_required" }, 403, request);
         return json({ ok: true, org: await ORG.backfillOrg(env, body.hospitalId, actor.id, body.mode, body.connectorId) }, 200, request);
@@ -2932,6 +3115,14 @@ export async function onRequest(context) {
 
     return json({ ok: false, error: "not_found" }, 404, request);
   } catch (e) {
-    return json({ ok: false, error: (e && e.message) || "error" }, (e && e.status) || 500, request);
+    const status = (e && e.status) || 500;
+    /* OBSERVABILITY, 2026-09-10. The single choke point every unhandled exception on this router
+     * already passes through - the one place a request-error + latency line can be emitted with no
+     * new plumbing and no new risk to the response itself. PHI-free by construction: `seg` is a URL
+     * PATH SEGMENT ("ward", "auth", "patient" - a route name, never patient content), and
+     * observability.js's own allow-list refuses anything else. Never blocks or alters the response -
+     * logEvent() cannot throw, and is called AFTER the response is already decided. */
+    logEvent(KIND.REQUEST_ERROR, { route: seg, status, durationMs: Date.now() - __t0, code: e && e.name });
+    return json({ ok: false, error: (e && e.message) || "error" }, status, request);
   }
 }

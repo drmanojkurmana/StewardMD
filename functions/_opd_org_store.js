@@ -27,7 +27,9 @@ export async function createOrg(env, body, ownerUid) {
   body = body || {};
   const id = body.id ? sanitize(body.id) : newId();
   const code = await uniqueOrgCode(env);
-  const f = M.org({ id, code, name: body.name, kind: body.kind, mode: body.mode, connectorId: body.connectorId, ownerUid, thresholds: body.thresholds, createdAt: now() });
+  // region: which country this hospital is in. Absent means India (M.org decides), so every existing
+  // caller is unchanged; a US hospital has to be created as one, which was impossible before.
+  const f = M.org({ id, code, name: body.name, kind: body.kind, mode: body.mode, region: body.region, connectorId: body.connectorId, ownerUid, thresholds: body.thresholds, createdAt: now() });
   await fsCommit(env, [wCreate(env, "q_orgs/" + id, f)]);
   await audit(env, id, ownerUid, "org:create", f.mode + " " + code);
   return f;
@@ -75,6 +77,27 @@ export async function listAllOrgs(env, limit) {
 export async function listOrgsForOwner(env, ownerUid) {
   const r = await fsQuery(env, "q_orgs", { where: { field: "ownerUid", value: String(ownerUid) }, limit: 100 });
   return r.filter((x) => !(x.fields && x.fields.deleted)).map((x) => M.org(withId(x.id, x.fields)));
+}
+// Orgs where `identities` (uid and/or email) hold an ACTIVE q_members row, for a doctor invited to
+// a hospital they don't own. Multiple identities can name the same org (uid AND email both enrolled,
+// or the same org via two identities) so dedupe by org id; the FIRST identity's membership wins, and
+// the caller (GET /api/queue/orgs) passes [uid, email] in that priority order.
+export async function listOrgsForMember(env, identities) {
+  const ids = Array.from(new Set((identities || []).map((x) => String(x || "").trim()).filter(Boolean)));
+  const seen = new Set(); const out = [];
+  for (const id of ids) {
+    const rows = await fsQuery(env, "q_members", { where: { field: "identity", value: id }, limit: 100 });
+    for (const row of rows) {
+      const f = row.fields || {};
+      if (f.active === false) continue;
+      const orgId = f.orgId; if (!orgId || seen.has(orgId)) continue;
+      seen.add(orgId);
+      const d = await fsGet(env, "q_orgs/" + sanitize(orgId));
+      if (!d || (d.fields && d.fields.deleted)) continue;   // dropped/missing org: no dangling membership shown
+      out.push(Object.assign({}, M.org(withId(sanitize(orgId), d.fields)), { memberRole: f.role || "viewer" }));
+    }
+  }
+  return out;
 }
 export async function deleteOrg(env, orgId, actorId) {
   await fsCommit(env, [wUpdate(env, "q_orgs/" + sanitize(orgId), { deleted: true, deletedAt: now() })]);   // soft-delete
@@ -221,6 +244,11 @@ export async function setMembership(env, orgId, identity, body, actorId) {
     id, orgId, identity,
     role: role,
     scope: b.scope !== undefined ? b.scope : (prev && prev.scope),
+    /* Falls back to the stored value for the same reason role and scope do: an edit that was about
+     * something else must never silently strip a doctor's registration and leave them unable to
+     * sign. Sending an explicit empty string DOES clear it, which is how a hospital withdraws the
+     * assertion. */
+    regNo: b.regNo !== undefined ? b.regNo : (prev && prev.regNo),
     active: b.active !== undefined ? b.active !== false : (prev ? prev.active !== false : true),
     createdAt: (prev && prev.createdAt) || now(),
   });
@@ -234,7 +262,7 @@ export async function getMembership(env, orgId, identity) {
 // Public projection — NEVER leak secret hashes to the client. `email`/`hasPin` are safe hints.
 function publicMember(id, f) {
   const m = M.membership(withId(id, f));
-  return { id: m.id, orgId: m.orgId, identity: m.identity, role: m.role, scope: m.scope, active: m.active, email: (f && f.email) || "", hasPin: !!(f && f.pinHash), createdAt: m.createdAt };
+  return { id: m.id, orgId: m.orgId, identity: m.identity, role: m.role, scope: m.scope, active: m.active, regNo: m.regNo, email: (f && f.email) || "", hasPin: !!(f && f.pinHash), createdAt: m.createdAt };
 }
 export async function listMembers(env, orgId) {
   const r = await fsQuery(env, "q_members", { where: { field: "orgId", value: sanitize(orgId) }, limit: 300 });

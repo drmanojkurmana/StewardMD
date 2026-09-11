@@ -22,7 +22,10 @@ import { ClinicalEventBus } from "../wardsynq-events.js";
  */
 async function openRecordDeployment(opts) {
   opts = opts || {};
-  const backend = new RemoteBackend({ tenantId: opts.tenantId, token: opts.token, baseUrl: opts.baseUrl || "" });
+  // A hospital staff session (wardsynq.com / OPD console sign-in) is the same localStorage key
+  // ward.js reads; it travels as X-Staff-Token. Absent on a doctor's account session.
+  const staffToken = opts.staffToken || (async () => { try { return localStorage.getItem("smd_opd_staff_tok") || null; } catch { return null; } });
+  const backend = new RemoteBackend({ tenantId: opts.tenantId, token: opts.token, staffToken, baseUrl: opts.baseUrl || "" });
   const bus = opts.bus || new ClinicalEventBus({ nodeId: opts.nodeId || "workstation" });
   const store = new ClinicalStore({ backend, bus });
   await store.open();                                 // the server decides whether this client may open

@@ -54,7 +54,8 @@ export async function nextSeq(env, orgId, series) {
 // org: { id, code, mode }  ("native" | "connect"; a GHIS workplace passes mode "ghis")
 // Returns { ok, patient, mrn, mrSource, pending, duplicateOf? } or { ok:false, errors }.
 export async function registerPatient(env, org, body, actorId) {
-  const v = validateRegistration(body || {}, now());
+  // The hospital's own country decides what a valid phone number is. See functions/_region.js.
+  const v = validateRegistration(body || {}, now(), org && org.region);
   if (!v.ok) return { ok: false, error: "invalid", errors: v.errors };
   const p = v.patient;
   const orgId = String((org && org.id) || "");
@@ -72,8 +73,9 @@ export async function registerPatient(env, org, body, actorId) {
     return { ok: false, error: "duplicate", duplicateOf };
   }
 
-  // WHO issues the MR — the workplace decides, never the presence of a typed number.
-  const r = resolveMrn(mode, (body && body.mrn) || "");
+  // WHO issues the MR — the workplace decides, never the presence of a typed number. externalMrn
+  // (org.wardsynq.externalMrn) is the hospital opting into its own numbering; see resolveMrn().
+  const r = resolveMrn(mode, (body && body.mrn) || "", !!(org && org.wardsynq && org.wardsynq.externalMrn));
   let mrn = r.mrn, mrSource = r.mrSource;
   if (r.needsAllocation) {
     if (mrSource === "stewardmd") mrn = makeClinicMrn((org && org.code) || orgId, await nextSeq(env, orgId, "mrn"));
@@ -95,9 +97,20 @@ export async function registerPatient(env, org, body, actorId) {
     referredBy: p.referredBy || "",
     createdBy: actorId || "", createdAt: now(), updatedAt: now()
   };
-  const writes = [wUpdate(env, "q_patients/" + id, fields)];
+  /* MRN UNIQUENESS. A minted MR (nextSeq's atomic counter) can never collide, so this guard never
+   * fires for one. A SUPPLIED one can: ghis/connect always supply their own, and now so does a
+   * native hospital with wardsynq.externalMrn on. Before this, the patient doc was written with a
+   * plain wUpdate - a second registration under the SAME supplied MRN silently overwrote the first
+   * patient's record instead of failing. wCreate's exists:false guard makes that collision fail the
+   * commit instead, which fsCommit turns into a "precondition" error caught below. */
+  const writes = [wCreate(env, "q_patients/" + id, fields)];
   if (dupKey) writes.push(wUpdate(env, "q_patient_index/" + sanitize(dupKey), { orgId, mrn, patientId: id, updatedAt: now() }));
-  await fsCommit(env, writes);
+  try {
+    await fsCommit(env, writes);
+  } catch (e) {
+    if (e && e.code === "precondition") return { ok: false, error: "mrn_taken", message: "MR number " + mrn + " is already in use at this hospital." };
+    throw e;
+  }
   await qAudit(env, { hospitalId: orgId, ticketId: id, actor: actorId || "", action: "patient:register", meta: mrSource + " " + mrn });
   return { ok: true, patientId: id, mrn, mrSource, pending: !!r.pending, patient: Object.assign({}, p, { mrn, mrSource }) };
 }

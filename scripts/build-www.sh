@@ -26,6 +26,16 @@ for f in *.js; do
   esac
 done
 
+# ── 2a. Root ES modules. prescription.js dynamic-imports /rx-build.mjs at runtime, so the native
+# bundle needs it too; the *.js loop above never matched .mjs, which left that import unresolvable
+# inside the app. ─────────────────────────────────────────────────────────────
+for f in *.mjs; do
+  case "$f" in
+    *.test.mjs) : ;;          # node tests are not web assets
+    *) cp "$f" "$WWW/" ;;
+  esac
+done
+
 # ── 2b. Stylesheets (buildless CSS referenced by index.html / home.js) ────────
 # index.html + home.js load /ui-v3.css at runtime (the whole .v3/.v4 home layout
 # + base font-family live here). On web these are served from the repo root; the
@@ -137,6 +147,13 @@ fi
 # assets/kardiox-learn/, they stay on Pages and clinix-content.js cxMedia() rewrites their URLs
 # natively, so the native bundle never carries them.
 [ -d clinix ] && mkdir -p "$WWW/clinix" && cp -R clinix/. "$WWW/clinix/"
+
+# Offline ICD-10 index (icd/icd10.min.json, built by scripts/icd/build-offline-index.mjs) - the
+# on-device fallback icd.js's window.SMD_ICD.localSearch() serves when maik-engine.js
+# icdCandidates() can't reach /api/icd/search. Same rule and failure mode as clinix above: the
+# root *.js glob copies icd.js, DATA DIRECTORIES ARE NOT COPIED - without this line the offline
+# ICD lookup silently returns nothing on-device.
+[ -d icd ] && mkdir -p "$WWW/icd" && cp -R icd/. "$WWW/icd/"
 
 # SURGX content (protocols / procedures / steps / cases / evidence / media manifest). Same rule and
 # the same failure mode as clinix above: root *.js and *.css are globbed, DATA DIRECTORIES ARE NOT.

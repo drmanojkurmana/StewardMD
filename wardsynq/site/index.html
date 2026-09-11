@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>WardSynQ</title>
+<!-- wardsynq.com - the hospital's front door to WardSynQ.
+     Sign in, pick the hospital, and every surface below is the SAME code the StewardMD app runs:
+     ward.js (inpatient, ED, theatre, pharmacy, billing, twin...), discharge.js, patient-register.js
+     and the OPD console. This page adds only the door and the map, never a second copy of a workflow.
+     Every request goes to /api/* on this origin, which _worker.js forwards to the record service. -->
+<link rel="icon" type="image/png" sizes="32x32" href="/wardsynq/ui/brand/icon-32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/wardsynq/ui/brand/icon-180.png">
+<link rel="manifest" href="/wardsynq/site/site.webmanifest">
+<meta name="theme-color" content="#1c3048">
+<link rel="stylesheet" href="/wardsynq/ui/wardsynq.css?v=10">
+<link rel="stylesheet" href="/wardsynq/site/shell.css?v=4">
+<link rel="stylesheet" href="/ward.css?v=site4">
+<link rel="stylesheet" href="/patient-register.css?v=site1">
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+<script>
+  // StewardMD account sign-in (owner / doctor). Best-effort: if the SDK fails to load the staff
+  // sign-in (email or clinic code + PIN) still works, exactly as on the OPD console.
+  try { firebase.initializeApp({ apiKey: "AIzaSyCaqxRQfMtq95j0J_vLj7EF4sxrN0FhO0I", authDomain: "stewardmd-498ec.firebaseapp.com", projectId: "stewardmd-498ec", appId: "1:911280405587:web:d09038e15e98d69dc79aa6" }); } catch (e) {}
+</script>
+</head>
+<body>
+<div id="app" aria-live="polite"></div>
+<script src="/wardsynq/site/shell.js?v=9"></script>
+<script src="/wardsynq/site/pages/patients.js?v=1"></script>
+<script src="/wardsynq/site/pages/admin.js?v=3"></script>
+<script src="/wardsynq/site/pages/audit.js?v=1"></script>
+<script src="/wardsynq/site/pages/maik.js?v=1"></script>
+<script src="/patient-register.js?v=site1"></script>
+<script src="/ward.js?v=site5"></script>
+<script src="/discharge.js?v=site1"></script>
+</body>
+</html>

@@ -38,7 +38,7 @@ import { actorDeps, recordDeps } from "../../_wardsynq/deps.js";
 import { GovernanceError } from "../../../wardsynq/wardsynq-actors.js";
 import { IntegrationHub } from "../../../wardsynq/wardsynq-interop.js";
 import { sccmAdapter } from "../../../wardsynq/adapters/wardsynq-sccm-adapter.js";
-import { reconcileIdentity, rebind } from "../../_wardsynq/fhir-inbound.js";
+import { reconcileIdentity, identityCandidates, rebind, authorizedSourceSystem } from "../../_wardsynq/fhir-inbound.js";
 
 export function recordFlagOn(env) { return String(env && env.WARDSYNQ_RECORD) === "1"; }
 
@@ -164,6 +164,24 @@ export async function handle(request, env, deps) {
         return jsonResponse({ ok: true, replayed: out.replayed, record: out.record, actor: out.actor || null }, { status: out.replayed ? 200 : 201 });
       }
       if (rest[0] === "ingest" && rest[1] === "sccm" && rest.length === 2) {
+        /* WHO THIS FEED CLAIMS TO BE IS CHECKED HERE, exactly as it is on the FHIR and HL7 doors.
+         *
+         * The sending system's name is taken from the message - `meta.sourceConnector` - and the
+         * SCCM adapter stamps it onto meta.source.system of every entity it maps. So until this
+         * check, any authenticated caller who could write the record could name the origin
+         * themselves: post a bundle claiming `sourceConnector: "epic"` and the rows land carrying
+         * another organisation's provenance. That is not a small mislabel. externallyOwned() then
+         * treats those rows as somebody else's authority - they become uneditable by the native
+         * door, they are excluded from the workflows that act on local records, and the FHIR
+         * Provenance export names a partner that never sent anything.
+         *
+         * fhir-inbound.js's own header describes this exact hole and closed it there; this door was
+         * left open. It is the same gate, the same grants, the same refusals. */
+        const claimed = await authorizedSourceSystem(svc, { actor: svc.actor }, request.headers.get("X-Source-System"), body && body.meta && body.meta.sourceConnector);
+        if (claimed.error) {
+          return jsonResponse({ ok: false, error: claimed.error.code, detail: claimed.error.detail, written: 0 },
+            { status: claimed.error.status });
+        }
         const adapter = sccmAdapter();
         const eventId = adapter.sourceEventId(body);
         const governed = svc.governedForIngest({ idempotencyKey: eventId ? `ingest:${adapter.system}:${eventId}` : null });
@@ -177,7 +195,8 @@ export async function handle(request, env, deps) {
         const identityResolver = async (entities) => {
           const incoming = entities.find((e) => e && e.resourceType === "Patient");
           if (!incoming) return null;
-          const locals = await svc.list("Patient", 500);
+          // Index-backed candidates, then the SAME reconciliation rules. See identityCandidates().
+          const locals = await identityCandidates(svc, incoming, 500);
           const decision = reconcileIdentity(incoming, locals, !!incoming.mrn);
           if (decision.decision === "link") return { decision: "link", entities: rebind(entities, incoming.id, decision.localId) };
           if (decision.decision === "new") return { decision: "new", entities };

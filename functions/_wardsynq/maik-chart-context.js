@@ -31,6 +31,21 @@ import { TRUST, signDocument, buildPrompt, requestNonce, useHmac } from "../../w
 
 const str = (v) => (v == null ? "" : String(v).trim());
 
+/* A MedicationOrder's dose is the canonical {value, unit} (wardsynq-model.js), and str() turned it
+ * into "[object Object]" - so every medication MaiK was ever shown carried no dose at all, while
+ * looking as though it carried something. Found on 2026-09-11 by reading the prompt a real model
+ * actually received. A free-text dose from an external source is passed through as written, and a
+ * dose with no value renders as nothing rather than as half a number: a partial dose in a chart
+ * summary is worse than an absent one. */
+function doseText(d) {
+  if (d == null) return "";
+  if (typeof d !== "object") return str(d);
+  const value = d.value == null ? "" : str(d.value);
+  if (!value) return "";
+  const unit = str(d.unit);
+  return unit ? `${value} ${unit}` : value;
+}
+
 /* WIRING THE MAC, and why it looks like this.
  *
  * wardsynq-secops.js REFUSES to hash until an implementation is supplied - deliberately, because a
@@ -96,7 +111,10 @@ function recent(rows, n) {
  *
  * @param {object} svc  a RecordService already bound to the tenant AND the calling actor
  * @param {string} patientId
- * @param {{sections?: string[], notesLimit?: number, signingKey?: string}} [opts]
+ * @param {{sections?: string[], notesLimit?: number, signingKey?: string, encounter?: object}} [opts]
+ *   encounter  a caller-validated Encounter row for this patient. When given, SECTION.ENCOUNTER
+ *              renders exactly this admission - never a different one filtered from the patient's
+ *              others, however plausible a substitute it looks.
  * @returns {Promise<{ok: boolean, patientId, sections, documents, provenance, unreadable, phi}>}
  */
 async function buildPatientContext(svc, patientId, opts) {
@@ -134,11 +152,30 @@ async function buildPatientContext(svc, patientId, opts) {
   }
 
   if (want.has(SECTION.ENCOUNTER)) {
-    const encs = await read("encounter", () => svc.byPatient("Encounter", pid));
-    const open = (encs || []).filter((e) => e && e.status === "in-progress");
-    open.forEach(note);
-    sections.push({ title: "Current admission", text: open.length
-      ? open.map((e) => [e.class, e.location && e.location.ward, e.location && e.location.bed ? `bed ${e.location.bed}` : null, e.periodStart ? `since ${e.periodStart}` : null].filter(Boolean).join(" · ")).join("\n")
+    /* SCOPED TO THE ENCOUNTER THE CALLER ACTUALLY NAMED, when they named one.
+     *
+     * maik-interaction.js validates a supplied encounterId belongs to this patient BEFORE calling
+     * here, and used to discard the row it just read: this section then filtered independently for
+     * "any currently open encounter" and showed THAT instead. A patient with a closed admission a
+     * clinician is specifically asking about, and a DIFFERENT open one for an unrelated visit, got
+     * the wrong one rendered - the section named the right patient and the wrong visit, while the
+     * interaction record was stamped with the encounter id the caller actually asked about. That is
+     * the encounter-drift failure this section exists to prevent, produced by this section itself.
+     *
+     * The fix passes the validated row straight through rather than re-deriving it by a filter:
+     * `opts.encounter`, when given, IS the answer - not a candidate to search for again. */
+    const scoped = o.encounter && str(o.encounter.patientId) === pid ? o.encounter : null;
+    let shown;
+    if (scoped) {
+      note(scoped);
+      shown = [scoped];
+    } else {
+      const encs = await read("encounter", () => svc.byPatient("Encounter", pid));
+      shown = (encs || []).filter((e) => e && e.status === "in-progress");
+      shown.forEach(note);
+    }
+    sections.push({ title: "Current admission", text: shown.length
+      ? shown.map((e) => [e.class, e.location && e.location.ward, e.location && e.location.bed ? `bed ${e.location.bed}` : null, e.periodStart ? `since ${e.periodStart}` : null, e.status && e.status !== "in-progress" ? `(${e.status})` : null].filter(Boolean).join(" · ")).join("\n")
       : "Not recorded." });
   }
 
@@ -166,7 +203,7 @@ async function buildPatientContext(svc, patientId, opts) {
     const live = (rows || []).filter((m) => m && ["active", "on-hold", "draft"].includes(str(m.status)));
     live.forEach(note);
     sections.push({ title: "Medications", text: live.length
-      ? live.map((m) => `- ${str(m.drug)}${m.dose ? ` ${str(m.dose)}` : ""}${m.route ? ` ${str(m.route)}` : ""}${m.frequency ? ` ${str(m.frequency)}` : ""} [${str(m.status)}]${m.aiDrafted ? " (AI draft, unsigned)" : ""}`).join("\n")
+      ? live.map((m) => `- ${str(m.drug)}${doseText(m.dose) ? ` ${doseText(m.dose)}` : ""}${m.route ? ` ${str(m.route)}` : ""}${m.frequency ? ` ${str(m.frequency)}` : ""} [${str(m.status)}]${m.aiDrafted ? " (AI draft, unsigned)" : ""}`).join("\n")
       : "Not recorded." });
   }
 
@@ -233,14 +270,43 @@ async function makeDoc(id, content, key, row) {
 /**
  * Assembles the fenced prompt for a context. Returns what secops decided as well as the prompt, so
  * the interaction record can carry which documents were REFUSED and which tripped a signal.
+ *
+ * STRUCTURAL FIX, 2026-09-10 MaiK safety pass. `context.sections` used to be concatenated straight
+ * into `instruction` - the ONE channel buildPrompt() never fences, scans or requires a signature
+ * for, because it is the channel meant for this file's own words. But every section is built from
+ * record free text: an allergy's substance and reaction, a medication's drug/dose/route/frequency,
+ * an observation's display and value, a condition's display, an encounter's ward and bed, even the
+ * patient's own sex field. A single crafted allergy note landed in the instruction channel with
+ * `injectionFindings` staying EMPTY, because nothing there was ever scanned - the fence, the MAC and
+ * the scan all exist one function away and were never reached.
+ *
+ * The fix is not a regex added around the problem; it is routing this exact same content through
+ * the exact same signed-document path DiagnosticReport.conclusion and ClinicalNote already use. The
+ * assembled sections become ONE MORE fenced RETRIEVED document, MAC-signed if a key is supplied,
+ * scanned for injection signals like every other document, and it is REFUSED like any unsigned
+ * document when no key is supplied - the model then sees no chart at all rather than an unfenced
+ * one. `instruction` becomes what its name always claimed: this file's own words, and the caller's
+ * own words, never a byte of the patient's record.
  */
-function promptFor(context, instruction, opts) {
+async function promptFor(context, instruction, opts) {
   const o = opts || {};
   const nonce = str(o.nonce) || requestNonce(context.patientId);
+  const key = str(o.signingKey) || null;
   const structured = (context.sections || []).map((s) => `${s.title}\n${s.text}`).join("\n\n");
+  const documents = [...(context.documents || [])];
+  if (structured) {
+    if (!key) {
+      // The same rule an unsigned document already gets: it does not enter the context, and the
+      // refusal is recorded rather than silently dropped, so a caller can tell "no chart" from
+      // "empty chart".
+      documents.push({ id: "chart/structured", content: structured, trust: TRUST.RETRIEVED, origin: "wardsynq-native", key: null });
+    } else {
+      documents.push(await makeDoc("chart/structured", structured, key, null));
+    }
+  }
   const built = buildPrompt({
-    instruction: `${str(instruction)}\n\n--- RECORD (structured) ---\n${structured}`,
-    documents: context.documents || [],
+    instruction: str(instruction),
+    documents,
     patientId: context.patientId,
     nonce,
   });
