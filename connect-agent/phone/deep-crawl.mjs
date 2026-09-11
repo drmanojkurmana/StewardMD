@@ -190,8 +190,15 @@ export async function deepCrawlClinical({ client, caps = {} } = {}) {
   // 1. worklist (the client is already attached to it).
   await captureView('worklist');
 
-  // Open the first patient row.
-  const row = await evalJson(client, `(${FIND_PATIENT_ROW_SRC})()`, null);
+  // Open the first patient row. Legacy worklists (e.g. GHIS DataTables) populate their rows by an AJAX
+  // call AFTER the page and its headers render, so poll a few times before concluding there is no row.
+  let row = null;
+  for (let attempt = 0; attempt < 8; attempt += 1) {
+    row = await evalJson(client, `(${FIND_PATIENT_ROW_SRC})()`, null);
+    if (row) break;
+    if (Date.now() >= deadline) break;
+    await client.wait({ ms: waitMs });
+  }
   if (!row) return { observedViews, trail, stopReason: 'no-patient-row' };
   await client.evaluate({ expression: `(${CLICK_ROW_SRC})(${row.index})` });
   await client.wait({ ms: waitMs });

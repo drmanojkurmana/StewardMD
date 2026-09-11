@@ -17,6 +17,14 @@ const FORBIDDEN_KEYS = new Set(['__proto__', 'constructor', 'prototype']);
 
 // Assign only vetted keys onto an emitted object. Header text never reaches here as a key -- roles and
 // canonical field names are fixed literals -- but this refuses a forbidden key as defense in depth.
+// The schema requires pathTemplate to be an absolute path (no scheme/host/query/fragment). The crawler
+// reports a view's location as a full URL, so reduce it to its pathname; anything unparseable falls to '/'.
+function toPathTemplate(raw) {
+  if (typeof raw !== 'string' || !raw) return '/';
+  if (raw[0] === '/' && !/[?#]/.test(raw)) return raw;
+  try { return new URL(raw).pathname || '/'; } catch { return '/'; }
+}
+
 function addKey(obj, key, value) {
   if (FORBIDDEN_KEYS.has(key)) return;
   obj[key] = value;
@@ -206,7 +214,9 @@ function buildForView(view, ctx) {
   }
   if (m.idField) addKey(hxFields, m.idField.name, m.idField.rule);
 
-  const pathTemplate = typeof view.pathTemplate === 'string' && view.pathTemplate ? view.pathTemplate : '/';
+  // The crawler reports a view's location as a full URL; the schema wants an absolute PATH only (no
+  // scheme/host/query/fragment). Reduce it here so an inferred op always validates.
+  const pathTemplate = toPathTemplate(view.pathTemplate);
   const placeholders = Object.create(null);
   for (const name of templatePlaceholders(pathTemplate)) addKey(placeholders, name, { type: 'id' });
 

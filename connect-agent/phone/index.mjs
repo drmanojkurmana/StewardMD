@@ -2,6 +2,10 @@
 // See connect-agent/phone/CONTRACT.md. Loaded via dynamic import() in the app WebView.
 import { createCollector, PHASE_AGENT_READ } from '../discovery.mjs';
 import { explorePhone, probePhone } from './explore.mjs';
+import { deepCrawlClinical } from './deep-crawl.mjs';
+// NB: HTML operation inference (infer-html.mjs) runs SERVER-SIDE in the broker's discovery route, not
+// on the phone. The phone only crawls and sends the observed view STRUCTURE; the server infers the
+// adapter from it (same split as compile/validate). Keeping the manifest modules off the phone bundle.
 
 function browserOf(plugin) {
   if (plugin && plugin.platform === 'android') return 'phone-android';
@@ -51,7 +55,17 @@ export async function runPhoneDiscovery({ plugin, api, session, deployment, star
   // than mutating it in place.
   const spec = { ...collector.collect({ allowedOrigins: origins }), browser: browserOf(plugin) };
 
-  const discoveryResult = await api.discovery({ spec, steps: explored.steps, nativeRequests });
+  // Server-rendered EMRs (e.g. GHIS) hand back HTML, not JSON, so the JSON observer above sees little.
+  // Walk the patient's clinical sub-views for their table STRUCTURE (headers only, no values) and infer
+  // responseFormat:'html' operations from it. Never breaks the run: any failure yields no html ops.
+  let observedViews = [];
+  try {
+    const crawl = await deepCrawlClinical({ client: plugin, caps });
+    observedViews = crawl.observedViews || [];
+    if (observedViews.length) notify('CRAWLED', { views: observedViews.length });
+  } catch { /* html discovery is best-effort; the JSON path still stands */ }
+
+  const discoveryResult = await api.discovery({ spec, steps: explored.steps, nativeRequests, observedViews });
   notify('COMPILING', { steps: explored.steps.length, events: collector.raw().length });
 
   const probeList = Array.isArray(discoveryResult?.probes) ? discoveryResult.probes : [];
@@ -66,6 +80,7 @@ export async function runPhoneDiscovery({ plugin, api, session, deployment, star
   return Object.freeze({
     spec, steps: explored.steps, stopReason: explored.stopReason, visitedUrls: explored.visitedUrls,
     candidateVersionId: discoveryResult?.candidateVersionId, manifest: discoveryResult?.manifest,
+    observedViews,
     probes: probed.probes, capabilities: evidenceResult?.capabilities, evidenceHash: evidenceResult?.evidenceHash,
     state: evidenceResult?.state,
   });
