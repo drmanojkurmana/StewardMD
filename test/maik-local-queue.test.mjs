@@ -56,11 +56,21 @@ function load({ genMs = 5, hang = false } = {}) {
     localStorage: { getItem: () => null, setItem() {}, removeItem() {} },
     Capacitor: { isNativePlatform: () => true, Plugins: { Llama } },
     SMD_MAIK_MODELS: { PACKS, activePack: () => "maik-lite", installedCached: () => true, pathFor: async () => "/m.gguf",
-      totalBytes: () => PACKS["maik-lite"].files[0].bytes, hasVision: () => false, visionIdOf: (i) => i + "#vision", baseIdOf: (i) => i.split("#")[0] },
-    setTimeout, clearTimeout
+      totalBytes: () => PACKS["maik-lite"].files[0].bytes, hasVision: () => false, visionIdOf: (i) => i + "#vision", baseIdOf: (i) => i.split("#")[0] }
   };
+  const wrapSetTimeout = (fn, ms) => {
+    const t = setTimeout(fn, ms);
+    return {
+      _t: t,
+      unref() {},
+      ref() { if (t && t.ref) t.ref(); }
+    };
+  };
+  const wrapClearTimeout = (t) => clearTimeout(t && t._t ? t._t : t);
+  win.setTimeout = wrapSetTimeout;
+  win.clearTimeout = wrapClearTimeout;
   win.window = win;
-  new Function("window", "document", "setTimeout", "clearTimeout", SRC)(win, { addEventListener() {} }, setTimeout, clearTimeout);
+  new Function("window", "document", "setTimeout", "clearTimeout", SRC)(win, { addEventListener() {} }, wrapSetTimeout, wrapClearTimeout);
   const L = win.SMD_MAIK_LOCAL;
   L.setIdleMs(100000, 100000);   // never release the model mid-test
   return { L, log, setReply: (f) => { reply = f; } };
