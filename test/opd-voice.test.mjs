@@ -206,7 +206,59 @@ test("detects critical physiological red flags and triage emergencies", () => {
   assert.equal(normal.length, 0);
 });
 
-test("generates bilingual patient visit summary with vitals and warning advice", () => {
+test("maps spo2, grbs, pain score, surgical history, home medications, CKD/CLD, and exam columns", () => {
+  const r = _voiceMerge({}, {}, [
+    u("spo2", 97),
+    u("grbs", 115),
+    u("pain", 4),
+    u("pulseRhythm", "Regular"),
+    u("genCondition", "Fair"),
+    u("diet", "Vegetarian"),
+    u("sleep", "Normal"),
+    u("surgicalHistory", "Laparoscopic cholecystectomy in 2021"),
+    u("homeMeds", "Tab Telma 40mg OD, Tab Metformin 500mg BD"),
+    u("ckd", "Yes"),
+    u("ckdDetails", "CKD Stage 3, baseline creatinine 1.8"),
+    u("cld", "No"),
+    u("cancer", "No"),
+    u("respiratoryExam", "B/L air entry equal, fine bibasal crepitations"),
+    u("cvsExam", "Apex in 5th ICS, S1 S2 heard, no murmurs"),
+    u("ddx", "Community acquired pneumonia vs acute bronchitis"),
+    u("advice", "Review in OPD after 3 days or earlier if breathlessness increases")
+  ]);
+
+  assert.equal(r.vals.spo2, "97");
+  assert.equal(r.vals.grbs, "115");
+  assert.equal(r.vals.pain_score, "4");
+  assert.equal(r.vals.pulse_rhythm, "Regular");
+  assert.equal(r.vals.general_condition, "Fair");
+  assert.equal(r.vals.Diet, "Vegetarian");
+  assert.equal(r.vals.Sleep, "Normal");
+  assert.equal(r.vals.surgical_history, "Laparoscopic cholecystectomy in 2021");
+  assert.equal(r.vals.home_medications, "Tab Telma 40mg OD, Tab Metformin 500mg BD");
+  assert.equal(r.vals.Renal_yesNo, "Y");
+  assert.equal(r.vals.Renal_details, "CKD Stage 3, baseline creatinine 1.8");
+  assert.equal(r.vals.Liver_yesNo, "N");
+  assert.equal(r.vals.Cancer_yesNo, "N");
+  assert.equal(r.vals.respiratory_exam, "B/L air entry equal, fine bibasal crepitations");
+  assert.equal(r.vals.cvs_exam, "Apex in 5th ICS, S1 S2 heard, no murmurs");
+  assert.equal(r.vals.differential_diagnosis, "Community acquired pneumonia vs acute bronchitis");
+  assert.equal(r.vals.follow_up_advice, "Review in OPD after 3 days or earlier if breathlessness increases");
+  assert.ok(r.filled.includes("spo2") && r.filled.includes("grbs") && r.filled.includes("surgical_history"));
+});
+
+test("detects critical hypoxemia (SpO2 < 90%) and severe hypoglycemia (GRBS < 55 mg/dL) in triage", () => {
+  const hypoxia = OPD._detectTriageRedFlags({ spo2: "87" });
+  assert.ok(hypoxia.some(f => f.includes("Critical Hypoxemia")));
+
+  const hypoGly = OPD._detectTriageRedFlags({ grbs: "42" });
+  assert.ok(hypoGly.some(f => f.includes("Critical Hypoglycemia")));
+
+  const dka = OPD._detectTriageRedFlags({ grbs: "520" });
+  assert.ok(dka.some(f => f.includes("Severe Hyperglycemia")));
+});
+
+test("generates bilingual patient visit summary with vitals, SpO2, GRBS, and warning advice", () => {
   const st = {
     patient: { name: "Ramesh Rao", mrn: "MR1001" },
     author: "Dr. Rao",
@@ -217,12 +269,17 @@ test("generates bilingual patient visit summary with vitals and warning advice",
       BP_SYS: "120",
       BP_dia: "80",
       Pulse: "88",
+      spo2: "96",
+      grbs: "110",
+      pain_score: "3",
       Height: "170",
       Weight: "68",
       BMI: "23.5",
+      surgical_history: "Appendectomy 2018",
       Known_allergies_details: "Penicillin",
-      "val.treatment_received": "Paracetamol 650mg",
+      home_medications: "Metformin 500mg BD",
       provisional_diagnosis: "Viral fever",
+      differential_diagnosis: "Dengue vs Malaria",
       management_plan: "Rx: Tab Paracetamol 650mg TDS\nAdvice: Hydration, rest"
     }
   };
@@ -230,9 +287,12 @@ test("generates bilingual patient visit summary with vitals and warning advice",
   assert.match(html, /Ramesh Rao/);
   assert.match(html, /Temp: 101\.2°F/);
   assert.match(html, /BP: 120\/80 mmHg/);
-  assert.match(html, /BMI: 23\.5/);
-  assert.match(html, /Penicillin/);
-  assert.match(html, /Paracetamol 650mg/);
+  assert.match(html, /SpO2: 96%/);
+  assert.match(html, /GRBS: 110 mg\/dL/);
+  assert.match(html, /Pain: 3\/10/);
+  assert.match(html, /Appendectomy 2018/);
+  assert.match(html, /Metformin 500mg BD/);
+  assert.match(html, /Dengue vs Malaria/);
   assert.match(html, /అత్యవసర సంకేతాలు/); // Telugu warning signs
 });
 

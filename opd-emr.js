@@ -273,12 +273,14 @@
   // textarea|yesno(Y/N)|check(true/false)|select(rendered as a plain text input — no GHIS option values captured).
   // OMITTED radio groups (write field names NOT captured — do not guess): level of consciousness, neck stiffness,
   // dyspnoea, abdomen shape, pain scale, birth history, general condition, diet, menstrual status/cycles/flow.
-  function F(n, l, k, req, ph) { return { n: n, l: l, k: k || "text", r: !!req, p: ph || "" }; }
+  function F(n, l, k, req, ph, opts) { return { n: n, l: l, k: k || "text", r: !!req, p: ph || "", opts: opts || null }; }
   var ASSESS_SCHEMA = [
     { t: "History", i: "description", f: [
       F("Chief_complaints_duration", "Chief complaints", "textarea", true),
       F("History_present_illness", "Present history", "textarea", true),
-      F("History_past_illness", "Past history", "textarea", true) ] },
+      F("History_past_illness", "Past history", "textarea", true),
+      F("surgical_history", "Past surgical history / Operations", "textarea"),
+      F("home_medications", "Current / Home medications", "textarea") ] },
     { t: "Pre-admission investigation / treatment", i: "biotech", f: [
       F("val.investigation_desc", "Investigation"), F("val.investigation_diagnostic", "Diagnostics"), F("val.investigation_date", "Date"),
       F("val.treatment_received", "Treatment received"), F("val.treatment_received_date", "Date"), F("val.treatment_received_hospital", "Hospital") ] },
@@ -290,12 +292,23 @@
       F("Tuberculosis_yesNo", "Tuberculosis", "yesno"), F("Tuberculosis_details", "Tuberculosis details"),
       F("Thyroid_yesNo", "Thyroid disorder", "yesno"), F("Thyroid_details", "Thyroid details"),
       F("Epilepsy_yesNo", "Epilepsy", "yesno"), F("Epilepsy_details", "Epilepsy details"),
+      F("Renal_yesNo", "Kidney disease (CKD)", "yesno"), F("Renal_details", "Kidney details"),
+      F("Liver_yesNo", "Liver disease (CLD)", "yesno"), F("Liver_details", "Liver details"),
+      F("Cancer_yesNo", "Malignancy / Cancer", "yesno"), F("Cancer_details", "Cancer details"),
+      F("Cva_yesNo", "Stroke / CVA / TIA", "yesno"), F("Cva_details", "Stroke details"),
+      F("Dyslipidemia_yesNo", "Dyslipidemia", "yesno"), F("Dyslipidemia_details", "Lipid details"),
       F("Others_details", "Others") ] },
     { t: "Immunisation status", i: "vaccines", f: [
       F("immunization_status", "Immunisation status", "text", false, "IAP guidelines") ] },
     { t: "Personal history", i: "person", f: [
-      F("Single_married", "Marital status", "select"), F("No_of_children", "Children", "select"), F("Consanguinity", "Consanguinity", "select"),
-      F("Appetite", "Appetite", "select"), F("Bowels", "Bowels", "select"), F("Micturition", "Micturition", "select"),
+      F("Single_married", "Marital status", "select", false, "", ["", "Single", "Married", "Widowed", "Divorced"]),
+      F("No_of_children", "Children", "select", false, "", ["", "0", "1", "2", "3", "4+"]),
+      F("Consanguinity", "Consanguinity", "select", false, "", ["", "Non-consanguineous", "1st degree", "2nd degree"]),
+      F("Diet", "Diet", "select", false, "", ["", "Vegetarian", "Non-vegetarian", "Eggetarian"]),
+      F("Sleep", "Sleep", "select", false, "", ["", "Normal", "Disturbed", "Insomnia"]),
+      F("Appetite", "Appetite", "select", false, "", ["", "Normal", "Reduced", "Increased"]),
+      F("Bowels", "Bowels", "select", false, "", ["", "Regular", "Constipated", "Loose stools"]),
+      F("Micturition", "Micturition", "select", false, "", ["", "Normal", "Dysuria", "Frequency", "Hesitancy"]),
       F("Mic_abnorml_details", "Micturition details"), F("Known_allergies_details", "Known allergies"),
       F("Habitat_addiction_yesno", "Habits", "yesno"),
       F("Habitat_addiction_alcohol", "Alcohol", "check"), F("Habitat_addiction_smoking", "Smoking", "check"),
@@ -319,15 +332,25 @@
       F("breast_feeding", "Breast feeding"), F("feeding_duration", "Duration"), F("molar_pregnancy", "Molar pregnancy"),
       F("pregnancy_comlications", "Pregnancy complications"), F("contracception", "Contraception"), F("sterilization", "Sterilization") ] },
     { t: "Nutritional screening", i: "monitor_weight", f: [
-      F("Height", "Height (cms)", "number"), F("Weight", "Weight (kgs)", "number"), F("BMI", "BMI"), F("bsa", "BSA (m2)") ] },
+      F("Height", "Height (cms)", "number"), F("Weight", "Weight (kgs)", "number"), F("BMI", "BMI"), F("bsa", "BSA (m2)"),
+      F("waist_cm", "Waist circumference (cm)", "number"), F("muac_cm", "MUAC (cm)", "number") ] },
     { t: "Physical examination - vital parameters", i: "vital_signs", f: [
       F("Temp", "Temperature (F)", "number", true), F("BP_SYS", "BP systolic", "number", true), F("BP_dia", "BP diastolic", "number", true),
+      F("Pulse", "Pulse rate /min", "number", true), F("pulse_rhythm", "Pulse rhythm", "select", false, "", ["", "Regular", "Irregular"]),
+      F("respiratory", "Respiratory rate /min", "number", true),
+      F("spo2", "Oxygen saturation (%)", "number", false, "95-100%"),
+      F("grbs", "GRBS / Blood sugar (mg/dL)", "number", false, "mg/dL"),
+      F("pain_score", "Pain score (0-10)", "number", false, "0-10"),
+      F("general_condition", "General condition", "select", false, "", ["", "Good", "Fair", "Sick / Poor", "Moribund"]),
       F("Nutrtion", "Nutrition"), F("hydration", "Hydration"),
-      F("Pulse", "Pulse rate /min", "number", true), F("respiratory", "Respiratory rate /min", "number", true),
       F("pallor", "Pallor", "check"), F("icterus", "Icterus", "check"), F("cyanosis", "Cyanosis", "check"), F("clubbing", "Clubbing", "check"),
       F("Oedema", "Oedema", "check"), F("Lymphadenopathy", "Lymphadenopathy", "check"), F("Rash", "Rash", "check"), F("goitre", "Goitre", "check"),
       F("sys_examination", "Systemic examination", "textarea") ] },
     { t: "Examination", i: "stethoscope", f: [
+      F("respiratory_exam", "Respiratory system (air entry / sounds)", "textarea"),
+      F("cvs_exam", "Cardiovascular system (apex / sounds / murmurs)", "textarea"),
+      F("per_abdomen_exam", "Per abdomen (soft / distension / organomegaly)", "textarea"),
+      F("local_examination", "Local examination (site of lesion / wound)", "textarea"),
       F("cranial_nerves", "Cranial nerves"), F("sensory_sys", "Sensory system"), F("gait", "Gait"), F("motor_sys", "Motor system"),
       F("speech", "Speech"), F("reflexes", "Reflexes"), F("plantar", "Plantars"), F("glasgow_scale", "Glasgow scale"),
       F("cerebellar_sign", "Cerebellar signs"), F("cardiac_sound", "Cardiac sounds"), F("JVP", "JVP"),
@@ -339,8 +362,12 @@
       F("hernial_orifices", "Hernial orifices normal", "yesno"), F("hernial_orifices_details", "Hernial orifices details"),
       F("genital", "Genitalia"), F("external_genitilia_perineum", "External genital & perineum"), F("examination", "P/R examination") ] },
     { t: "Diagnosis & plan", i: "assignment_turned_in", f: [
-      F("provisional_diagnosis", "Provisional diagnosis", "textarea"), F("management_plan", "Management plan", "textarea"),
+      F("provisional_diagnosis", "Provisional diagnosis", "textarea"),
+      F("differential_diagnosis", "Differential diagnosis", "textarea"),
+      F("management_plan", "Management plan", "textarea"),
       F("refered_management_plan", "Referred to & management plan", "textarea"),
+      F("diet_lifestyle_advice", "Diet & lifestyle advice", "textarea"),
+      F("follow_up_advice", "Follow-up instructions", "textarea"),
       F("informany_attendant", "Informant name"), F("informant_relation", "Relation with attendant", "select") ] }
   ];
   function defVal(k) { return k === "yesno" ? "N" : (k === "check" ? "false" : ""); }
@@ -384,6 +411,12 @@
       return fieldRow(f.l, '<span class="oe-inp-wrap"><textarea class="oe-inp" data-oe-inp="' + esc(id) + '">' + esc(val) + "</textarea>" + fmicBtn(f.n) + extra + "</span>" + panel, f.r, re);
     }
     if (f.k === "yesno") return ynRow(f, val);
+    if (f.k === "select" && f.opts && f.opts.length) {
+      var optHtml = f.opts.map(function (o) {
+        return '<option value="' + esc(o) + '"' + (val === o ? ' selected' : '') + '>' + esc(o || '-- Select --') + '</option>';
+      }).join('');
+      return fieldRow(f.l, '<span class="oe-inp-wrap"><select class="oe-inp oe-sel" data-oe-inp="' + esc(id) + '">' + optHtml + '</select>' + fmicBtn(f.n) + '</span>', f.r, re);
+    }
     var type = f.k === "number" ? "number" : "text";
     return fieldRow(f.l, '<span class="oe-inp-wrap"><input class="oe-inp" type="' + type + '" data-oe-inp="' + esc(id) + '" value="' + esc(val) + '" placeholder="' + esc(f.p) + '">' + fmicBtn(f.n) + "</span>", f.r, re);
   }
@@ -424,16 +457,21 @@
   function fieldLabel(n) { return OPD_LABEL[n] || n; }
   var VOICE_MAP = {
     cc: "Chief_complaints_duration", presentHx: "History_present_illness", pastHx: "History_past_illness",
-    treatmentReceived: "val.treatment_received",
+    treatmentReceived: "val.treatment_received", homeMeds: "home_medications", surgicalHistory: "surgical_history",
     temp: "Temp", bpSys: "BP_SYS", bpDia: "BP_dia", pulse: "Pulse", rr: "respiratory",
+    spo2: "spo2", saturation: "spo2", grbs: "grbs", cbg: "grbs", rbs: "grbs",
+    pain: "pain_score", painScore: "pain_score",
+    pulseRhythm: "pulse_rhythm", genCondition: "general_condition",
     pallor: "pallor", icterus: "icterus", cyanosis: "cyanosis", clubbing: "clubbing",
     oedema: "Oedema", lymphadenopathy: "Lymphadenopathy", rash: "Rash", goitre: "goitre",
     nutrition: "Nutrtion", hydration: "hydration",
     systemicExam: "sys_examination", gcs: "glasgow_scale", cardiacSounds: "cardiac_sound",
+    respiratoryExam: "respiratory_exam", cvsExam: "cvs_exam", abdoExam: "per_abdomen_exam", localExam: "local_examination",
     tenderness: "tenderness_yesNo", tendernessDetails: "tenderness_details",
     abdoMass: "palpable_mass_yesNo", abdoMassDetails: "palpable_mass_details",
-    provisionalDx: "provisional_diagnosis", managementPlan: "management_plan",
-    heightCm: "Height", weightKg: "Weight",
+    provisionalDx: "provisional_diagnosis", ddx: "differential_diagnosis", differentialDiagnosis: "differential_diagnosis",
+    managementPlan: "management_plan", advice: "follow_up_advice", lifestyleAdvice: "diet_lifestyle_advice",
+    heightCm: "Height", weightKg: "Weight", waistCm: "waist_cm", muacCm: "muac_cm",
     dm: "Diabetes_yesNo", dmDetails: "Diabetes_details",
     htn: "Hypertension_yesNo", htnDetails: "Hypertension_details",
     cardiac: "Cardiac_yesNo", cardiacDetails: "Cardiac_details",
@@ -441,12 +479,18 @@
     tb: "Tuberculosis_yesNo", tbDetails: "Tuberculosis_details",
     thyroid: "Thyroid_yesNo", thyroidDetails: "Thyroid_details",
     epilepsy: "Epilepsy_yesNo", epilepsyDetails: "Epilepsy_details",
+    ckd: "Renal_yesNo", ckdDetails: "Renal_details",
+    cld: "Liver_yesNo", cldDetails: "Liver_details",
+    cancer: "Cancer_yesNo", cancerDetails: "Cancer_details",
+    cva: "Cva_yesNo", cvaDetails: "Cva_details",
+    dyslipidemia: "Dyslipidemia_yesNo", dyslipidemiaDetails: "Dyslipidemia_details",
     comorbidsNote: "Others_details",
     familyHistory: "Family_history_yesno", familyDiabetes: "Family_history_diabetics",
     familyHtn: "Family_history_hypertension", familyHeart: "Family_history_Heart",
     familyCancer: "Family_history_cancer", familyTb: "Family_history_TB",
     familyAsthma: "Family_history_asthma", familyDetails: "Family_history_othersdetails",
     lmp: "LMP", immunization: "immunization_status",
+    diet: "Diet", sleep: "Sleep",
     allergies: "Known_allergies_details",
     habits: "Habitat_addiction_yesno", habitsDetails: "Habitat_addiction_others",
     alcohol: "Habitat_addiction_alcohol", smoking: "Habitat_addiction_smoking",
@@ -2021,6 +2065,9 @@
       (v.BP_SYS && v.BP_dia) ? ("BP: " + v.BP_SYS + "/" + v.BP_dia + " mmHg") : "",
       v.Pulse ? ("Pulse: " + v.Pulse + " /min") : "",
       v.respiratory ? ("RR: " + v.respiratory + " /min") : "",
+      v.spo2 ? ("SpO2: " + v.spo2 + "%") : "",
+      v.grbs ? ("GRBS: " + v.grbs + " mg/dL") : "",
+      v.pain_score ? ("Pain: " + v.pain_score + "/10") : "",
       v.Height ? ("Height: " + v.Height + " cm") : "",
       v.Weight ? ("Weight: " + v.Weight + " kg") : "",
       v.BMI ? ("BMI: " + v.BMI) : "",
@@ -2037,10 +2084,12 @@
       row("Patient", (p.name || "Patient") + (p.displayId || p.mrn ? "  (ID: " + (p.displayId || p.mrn) + ")" : "")) +
       row("Chief complaints", v.Chief_complaints_duration) +
       row("History", v.History_present_illness) +
+      row("Surgical History", v.surgical_history) +
       row("Vitals & Nutrition", vit) +
       row("Known Allergies", v.Known_allergies_details) +
-      row("Ongoing Medications", v["val.treatment_received"]) +
+      row("Ongoing Medications", v.home_medications || v["val.treatment_received"]) +
       row("Diagnosis", v.provisional_diagnosis) +
+      row("Differential Diagnosis", v.differential_diagnosis) +
       list("Investigations", parts.ix) +
       list("Medications Prescribed", meds) +
       list("Advice", parts.adv) +
@@ -2606,6 +2655,8 @@
   function assessFindingsText(v) {
     v = v || {};
     var parts = [v.Chief_complaints_duration, v.History_present_illness, v.History_past_illness, v.sys_examination, v.provisional_diagnosis];
+    if (v.surgical_history) parts.push("Surgical history: " + v.surgical_history);
+    if (v.home_medications) parts.push("Home medications: " + v.home_medications);
     if (v["val.treatment_received"]) parts.push("Current medications: " + v["val.treatment_received"]);
     if (v.Known_allergies_details) parts.push("Allergies: " + v.Known_allergies_details);
     if (v.Diabetes_yesNo === "Y") parts.push(v.Diabetes_details ? ("diabetes: " + v.Diabetes_details) : "diabetes");
@@ -2615,8 +2666,17 @@
     if (v.Tuberculosis_yesNo === "Y") parts.push(v.Tuberculosis_details ? ("tuberculosis: " + v.Tuberculosis_details) : "tuberculosis");
     if (v.Thyroid_yesNo === "Y") parts.push(v.Thyroid_details ? ("thyroid disorder: " + v.Thyroid_details) : "thyroid disorder");
     if (v.Epilepsy_yesNo === "Y") parts.push(v.Epilepsy_details ? ("epilepsy: " + v.Epilepsy_details) : "epilepsy");
+    if (v.Renal_yesNo === "Y") parts.push(v.Renal_details ? ("chronic kidney disease: " + v.Renal_details) : "chronic kidney disease");
+    if (v.Liver_yesNo === "Y") parts.push(v.Liver_details ? ("chronic liver disease: " + v.Liver_details) : "chronic liver disease");
+    if (v.Cancer_yesNo === "Y") parts.push(v.Cancer_details ? ("malignancy: " + v.Cancer_details) : "malignancy");
+    if (v.Cva_yesNo === "Y") parts.push(v.Cva_details ? ("stroke CVA: " + v.Cva_details) : "stroke CVA");
+    if (v.Dyslipidemia_yesNo === "Y") parts.push(v.Dyslipidemia_details ? ("dyslipidemia: " + v.Dyslipidemia_details) : "dyslipidemia");
     if (v.Others_details) parts.push(v.Others_details);
     if (v.Family_history_othersdetails) parts.push("Family history: " + v.Family_history_othersdetails);
+    if (v.respiratory_exam) parts.push("Respiratory: " + v.respiratory_exam);
+    if (v.cvs_exam) parts.push("CVS: " + v.cvs_exam);
+    if (v.per_abdomen_exam) parts.push("Abdomen: " + v.per_abdomen_exam);
+    if (v.local_examination) parts.push("Local exam: " + v.local_examination);
     if (v.tenderness_yesNo === "Y") parts.push(v.tenderness_details ? ("abdominal tenderness: " + v.tenderness_details) : "abdominal tenderness");
     if (v.palpable_mass_yesNo === "Y") parts.push(v.palpable_mass_details ? ("palpable mass: " + v.palpable_mass_details) : "palpable mass");
     return parts.filter(function (x) { return x && String(x).trim(); }).map(function (x) { return String(x).trim(); }).join(". ");
@@ -2675,6 +2735,13 @@
     }
     var temp = parseFloat(vals.Temp);
     if (temp >= 104) flags.push("Hyperpyrexia: Temp " + temp + "°F");
+    var spo2 = parseFloat(vals.spo2 || vals.Spo2 || vals.SPO2 || vals.saturation);
+    if (spo2 > 0 && spo2 < 90) flags.push("Critical Hypoxemia: SpO2 " + spo2 + "% (<90%)");
+    var grbs = parseFloat(vals.grbs || vals.blood_sugar || vals.rbs);
+    if (grbs > 0) {
+      if (grbs < 55) flags.push("Critical Hypoglycemia: GRBS " + grbs + " mg/dL (<55 mg/dL)");
+      else if (grbs >= 450) flags.push("Severe Hyperglycemia / DKA alert: GRBS " + grbs + " mg/dL (>=450 mg/dL)");
+    }
 
     var dx = String(vals.provisional_diagnosis || "").toLowerCase();
     var cc = String(vals.Chief_complaints_duration || "").toLowerCase();
@@ -2986,6 +3053,11 @@
       yn("Tuberculosis_yesNo", "Tuberculosis_details", "TB"),
       yn("Thyroid_yesNo", "Thyroid_details", "thyroid disorder"),
       yn("Epilepsy_yesNo", "Epilepsy_details", "epilepsy"),
+      yn("Renal_yesNo", "Renal_details", "CKD"),
+      yn("Liver_yesNo", "Liver_details", "CLD/cirrhosis"),
+      yn("Cancer_yesNo", "Cancer_details", "cancer"),
+      yn("Cva_yesNo", "Cva_details", "stroke"),
+      yn("Dyslipidemia_yesNo", "Dyslipidemia_details", "dyslipidemia"),
       (v.Others_details ? ("other: " + v.Others_details) : "")
     ].filter(Boolean).join(", ");
     var vit = [
@@ -2993,10 +3065,17 @@
       (v.BP_SYS && v.BP_dia) ? ("BP " + v.BP_SYS + "/" + v.BP_dia) : "",
       v.Pulse ? ("Pulse " + v.Pulse) : "",
       v.respiratory ? ("RR " + v.respiratory) : "",
+      v.spo2 ? ("SpO2 " + v.spo2 + "%") : "",
+      v.grbs ? ("GRBS " + v.grbs + " mg/dL") : "",
+      v.pain_score ? ("Pain " + v.pain_score + "/10") : "",
       v.BMI ? ("BMI " + v.BMI) : ""
     ].filter(Boolean).join(", ");
     var exam = [
       v.sys_examination || "",
+      v.respiratory_exam ? ("Chest: " + v.respiratory_exam) : "",
+      v.cvs_exam ? ("CVS: " + v.cvs_exam) : "",
+      v.per_abdomen_exam ? ("Abdomen: " + v.per_abdomen_exam) : "",
+      v.local_examination ? ("Local: " + v.local_examination) : "",
       v.tenderness_yesNo === "Y" ? (v.tenderness_details ? ("Tenderness: " + v.tenderness_details) : "Tenderness: Yes") : "",
       v.palpable_mass_yesNo === "Y" ? (v.palpable_mass_details ? ("Mass: " + v.palpable_mass_details) : "Mass: Yes") : ""
     ].filter(Boolean).join("; ");
@@ -3004,13 +3083,15 @@
       ln("Chief complaint", v.Chief_complaints_duration),
       ln("History of present illness", v.History_present_illness),
       ln("Past history", v.History_past_illness),
-      ln("Ongoing medications", v["val.treatment_received"]),
+      ln("Surgical history", v.surgical_history),
+      ln("Ongoing medications", v.home_medications || v["val.treatment_received"]),
       ln("Known allergies", v.Known_allergies_details),
       co ? ("Comorbidities: " + co) : "",
       vit ? ("Vitals: " + vit) : "",
       exam ? ("Examination: " + exam) : "",
       ln("Family history", v.Family_history_othersdetails),
-      ln("Provisional diagnosis (doctor)", v.provisional_diagnosis)
+      ln("Provisional diagnosis (doctor)", v.provisional_diagnosis),
+      ln("Differential diagnosis", v.differential_diagnosis)
     ].filter(Boolean).join("\n");
   }
 
