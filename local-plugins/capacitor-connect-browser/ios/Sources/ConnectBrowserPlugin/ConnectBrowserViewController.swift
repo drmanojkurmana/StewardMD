@@ -43,6 +43,18 @@ final class ConnectBrowserViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
 
+    // A locked or dimmed phone stops the web view laying out and can drop the hospital session: keep
+    // the screen awake for as long as the browser is presented.
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        UIApplication.shared.isIdleTimerDisabled = true
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        UIApplication.shared.isIdleTimerDisabled = false
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground

@@ -683,7 +683,7 @@
     b.innerHTML =
       '<h2 class="smd-connect-display">Sign in to ' + esc(host) + '</h2>' +
       '<p class="smd-connect-lead">Sign in yourself inside the hospital website that just opened. StewardMD never asks for or stores your password.</p>' +
-      '<div class="smd-connect-note">Come back here once you have signed in.</div>' +
+      '<div class="smd-connect-note">Keep your phone unlocked and StewardMD open until the connection finishes. The screen stays awake while the hospital website is open.</div>' +
       '<div class="smd-connect-row"><button id="smd-connect-cancel" class="smd-connect-btn danger" type="button">Cancel connection</button></div>';
     setStatus("", S.statusText || "Opening the hospital website.");
     b.querySelector("#smd-connect-cancel").onclick = cancelSession;
@@ -1027,7 +1027,7 @@
       '<h2 class="smd-connect-display">Reading ' + esc(hostOf(S.selected.emrUrl)) + '</h2>' +
       '<p id="smd-connect-phase" class="smd-connect-lead">' + phaseLabel(S.guide ? "ASKING" : c.phase) + '</p>' +
       '<div id="smd-connect-detail">' + progressDetail() + '</div>' +
-      '<div class="smd-connect-note">Keep StewardMD open. This takes a few minutes.</div>' +
+      '<div class="smd-connect-note">Keep your phone unlocked and StewardMD open. Do not switch apps or lock the screen: a locked phone stops the agent and can sign you out of the hospital. This takes a few minutes.</div>' +
       '<div class="smd-connect-row"><button id="smd-connect-stop" class="smd-connect-btn danger" type="button">Stop</button>' +
       '<button id="smd-connect-progretry" class="smd-connect-btn primary" type="button" style="display:' + (S.progressFailed ? "" : "none") + '">Try again</button></div>';
     setStatus(S.progressFailed ? "bad" : "", S.statusText || "");

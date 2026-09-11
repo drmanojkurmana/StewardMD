@@ -355,6 +355,7 @@ try {
   await ev(`window.__lastOnProgress({pages:3,requests:12,phase:"DISCOVERING"}); return 1;`);
   ok(await waitFor(`return document.getElementById("smd-connect-pages").textContent==="3" && document.getElementById("smd-connect-reqs").textContent==="12";`, 4000), "onProgress updates the live page/request counters");
   ok(await ev(noDash) === true, "progress copy has no em-dash");
+  ok(await ev(`return document.getElementById("smd-connect-body").textContent.indexOf("Keep your phone unlocked")>=0;`) === true, "progress screen tells the doctor to keep the phone unlocked and the app open");
 
   // 6b. Crawl progress: what the agent is opening, what it found, what it is still looking for.
   await ev(`window.__lastOnProgress({phase:"CRAWLING", steps:3, events:12, opening:"Lab reports", found:["worklist"], looking:["labs","radiology"]}); return 1;`);

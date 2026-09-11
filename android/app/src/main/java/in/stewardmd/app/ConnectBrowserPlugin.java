@@ -531,6 +531,11 @@ public class ConnectBrowserPlugin extends Plugin {
             ViewGroup.LayoutParams.MATCH_PARENT, 0, 1f));
 
         dialog.setContentView(root);
+        // A locked or dimmed phone stops the WebView laying out (zero client rects everywhere) and can
+        // drop the hospital session: keep the screen on for as long as the browser is open.
+        if (dialog.getWindow() != null) {
+            dialog.getWindow().addFlags(android.view.WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+        }
         dialog.setOnCancelListener(new android.content.DialogInterface.OnCancelListener() {
             @Override
             public void onCancel(android.content.DialogInterface d) {

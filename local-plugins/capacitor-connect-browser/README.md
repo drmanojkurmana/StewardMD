@@ -34,6 +34,7 @@ Plugin name: `ConnectBrowser`. iOS = WKWebView, Android = android.webkit.WebView
 - In `login` mode any https origin may load (hospital SSO redirects, e.g. ghis.gitam.edu -> gimsrlogin.gitam.edu). Every main-frame origin is reported via `navigated`; the app decides what to allowlist.
 - In `agent` and `guide` mode the allowlist is enforced natively on main-frame navigations. This is policy outside the AI: no JavaScript, and no planner, can widen it.
 - http (non-TLS) URLs are refused by `open` and `navigate`.
+- The screen is kept awake while the browser is open (Android `FLAG_KEEP_SCREEN_ON`, iOS `isIdleTimerDisabled`): a locked phone stops layout and can drop the hospital session.
 - Nothing is persisted by the plugin except the web view's own cookie/storage jar under `storeId`.
 - The plugin never reads, logs or exposes cookies, form values or headers.
 
