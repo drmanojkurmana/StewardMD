@@ -9,6 +9,7 @@ import { onRequest } from "../../../functions/api/connect/agent/[[path]].js";
 import { makeAgentDb } from "./agent-db.mjs";
 import { deploymentFingerprint, getJobRow, getSessionRow } from "../../../functions/_connect/agent/store.js";
 import { sha256hex } from "../../../functions/_connect/agent/hmac.js";
+import { validateManifest, manifestContentHash } from "../../../connect-agent/manifest/schema.mjs";
 
 const post = (path, body, env, headers = {}) => ({
   request: new Request("https://x" + path, {
@@ -130,6 +131,91 @@ function synthSpec() {
     ],
   };
 }
+
+// Minimal spec: no events, so the compiled manifest claims no operation types itself (avoids colliding
+// with html-inferred list_worklist/list_medications -- /api/patients in synthSpec() classifies as
+// list_worklist by JSON path shape, which would then win precedence over the inferred op).
+function minimalSpec() {
+  return {
+    version: 3, browser: "phone-ios", allowedOrigins: [DEP_ORIGIN], startOrigin: DEP_ORIGIN,
+    discoveryMode: "read-observe-only", generatedAt: new Date().toISOString(),
+    blockedEvents: [], reinstalls: 0, events: [],
+  };
+}
+
+function observedViews() {
+  return [
+    {
+      resourceHint: "worklist", pathTemplate: "/Doctor/Home", rowsSelector: "#data_tables1 tbody tr",
+      headers: ["Patient ID", "Visit ID", "Patient name", "Department", "Age", "Gender", "Doctor name", "Bed"],
+      onclickTemplate: "searchPatient('#','#','#','#')",
+    },
+    {
+      resourceHint: "medications", pathTemplate: "/Doctor/Home/GetMedicines/{patientId}", rowsSelector: "table.tbl-bordered tbody tr",
+      headers: ["Prod. Code", "Drug Name", "Route", "Dosage", "Qty", "Freq", "Duration"],
+    },
+  ];
+}
+
+test("discovery infers html operations from observedViews and merges them into the manifest", async () => {
+  const { env, doc1 } = await setupTestEnv();
+  const sRes = await onRequest(post("/api/connect/agent/sessions", { tenantId: "t1", emrUrl: DEP_ORIGIN, runner: "phone", consent: { agreed: true } }, env, doc1.headers));
+  const sessionId = (await sRes.json()).sessionId;
+  await onRequest(post(`/api/connect/agent/sessions/${sessionId}/handoff`, { tenantId: "t1" }, env, doc1.headers));
+  await onRequest(post(`/api/connect/agent/sessions/${sessionId}/progress`, { tenantId: "t1", stage: "DISCOVERING" }, env, doc1.headers));
+
+  const disRes = await onRequest(post(`/api/connect/agent/sessions/${sessionId}/discovery`, {
+    tenantId: "t1", spec: minimalSpec(), steps: [], observedViews: observedViews(),
+  }, env, doc1.headers));
+  assert.equal(disRes.status, 200);
+  const disBody = await disRes.json();
+  assert.equal(disBody.ok, true);
+  assert.ok(disBody.htmlOperationsAdded.includes("list_worklist"));
+  assert.ok(disBody.htmlOperationsAdded.includes("list_medications"));
+
+  const worklistOp = disBody.manifest.operations.find((o) => o.type === "list_worklist");
+  const medsOp = disBody.manifest.operations.find((o) => o.type === "list_medications");
+  assert.ok(worklistOp && medsOp);
+  assert.equal(worklistOp.responseFormat, "html");
+  assert.ok(worklistOp.htmlExtract);
+  assert.equal(medsOp.responseFormat, "html");
+  assert.ok(medsOp.htmlExtract);
+
+  assert.deepEqual(validateManifest(disBody.manifest), []);
+  assert.equal(disBody.manifest.contentHash, manifestContentHash(disBody.manifest));
+});
+
+test("discovery observedViews validation: hostile key, oversize, and unmappable headers", async () => {
+  const { env, doc1 } = await setupTestEnv();
+  const sRes = await onRequest(post("/api/connect/agent/sessions", { tenantId: "t1", emrUrl: DEP_ORIGIN, runner: "phone", consent: { agreed: true } }, env, doc1.headers));
+  const sessionId = (await sRes.json()).sessionId;
+  await onRequest(post(`/api/connect/agent/sessions/${sessionId}/handoff`, { tenantId: "t1" }, env, doc1.headers));
+  await onRequest(post(`/api/connect/agent/sessions/${sessionId}/progress`, { tenantId: "t1", stage: "DISCOVERING" }, env, doc1.headers));
+
+  // hostile key inside an observed view
+  const hostileBody = JSON.parse(
+    `{"tenantId":"t1","spec":${JSON.stringify(minimalSpec())},"observedViews":[{"__proto__":{"polluted":true},"resourceHint":"worklist","pathTemplate":"/x","headers":[]}]}`
+  );
+  const hostileRes = await onRequest(post(`/api/connect/agent/sessions/${sessionId}/discovery`, hostileBody, env, doc1.headers));
+  assert.equal(hostileRes.status, 400);
+  assert.equal({}.polluted, undefined, "Object.prototype must never be polluted");
+
+  // 41 observed views -> rejected
+  const tooMany = Array.from({ length: 41 }, (_, i) => ({ resourceHint: "worklist", pathTemplate: `/x/${i}`, headers: [] }));
+  const tooManyRes = await onRequest(post(`/api/connect/agent/sessions/${sessionId}/discovery`, {
+    tenantId: "t1", spec: minimalSpec(), observedViews: tooMany,
+  }, env, doc1.headers));
+  assert.equal(tooManyRes.status, 400);
+
+  // headers that cannot be mapped to any recognized role -> no op added, response still ok
+  const unmappableRes = await onRequest(post(`/api/connect/agent/sessions/${sessionId}/discovery`, {
+    tenantId: "t1", spec: minimalSpec(), observedViews: [{ resourceHint: "worklist", pathTemplate: "/x", rowsSelector: "tr", headers: ["Su", "Mo", "Tu"] }],
+  }, env, doc1.headers));
+  assert.equal(unmappableRes.status, 200);
+  const unmappableBody = await unmappableRes.json();
+  assert.deepEqual(unmappableBody.htmlOperationsAdded, []);
+  assert.ok(!unmappableBody.manifest.operations.some((o) => o.type === "list_worklist"));
+});
 
 test("full phone onboarding flow: session -> handoff -> origins -> plan -> progress -> discovery -> evidence -> approve", async () => {
   const { env, doc1, owner1 } = await setupTestEnv();

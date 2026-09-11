@@ -61,7 +61,15 @@ import {
 import { activateVersion } from "../../../_connect/agent/activation.js";
 import { compileManifest } from "../../../../connect-agent/manifest/compile.mjs";
 import { validateCandidate } from "../../../../connect-agent/manifest/validate.mjs";
-import { sha256, canonicalJson, findHostileKeys } from "../../../../connect-agent/manifest/schema.mjs";
+import {
+  sha256,
+  canonicalJson,
+  findHostileKeys,
+  manifestContentHash,
+  validateManifest,
+  templatePlaceholders,
+} from "../../../../connect-agent/manifest/schema.mjs";
+import { inferHtmlOperations } from "../../../../connect-agent/manifest/infer-html.mjs";
 
 export { agentFlagOn, browserSessionFlagOn } from "../../../_connect/agent/flags.js";
 
@@ -102,6 +110,41 @@ function hasCredentials(body) {
 
 function safeJsonParse(text) {
   try { return JSON.parse(text); } catch { return null; }
+}
+
+// Validates+strips body.observedViews (crawler-observed server-rendered views) for inferHtmlOperations.
+// Fail-closed: an out-of-shape entry throws "invalid" rather than silently dropping fields. Hostile keys
+// (__proto__/constructor/prototype) are already rejected on the whole body upstream of this call.
+function cleanObservedViews(raw) {
+  if (raw === undefined || raw === null) return [];
+  if (!Array.isArray(raw)) throw new OnboardError("invalid", "observedViews must be an array");
+  if (raw.length > 40) throw new OnboardError("invalid", "observedViews: too many entries");
+  return raw.map((v) => {
+    if (!v || typeof v !== "object" || Array.isArray(v)) throw new OnboardError("invalid", "observedViews: view must be an object");
+    if (typeof v.resourceHint !== "string" || v.resourceHint.length > 32) throw new OnboardError("invalid", "observedViews: resourceHint invalid");
+    if (typeof v.pathTemplate !== "string" || v.pathTemplate.length > 512) throw new OnboardError("invalid", "observedViews: pathTemplate invalid");
+    if (!Array.isArray(v.headers) || v.headers.length > 24 || v.headers.some((h) => typeof h !== "string" || h.length > 120)) {
+      throw new OnboardError("invalid", "observedViews: headers invalid");
+    }
+    const clean = { resourceHint: v.resourceHint, pathTemplate: v.pathTemplate, headers: v.headers.slice() };
+    if (v.rowsSelector !== undefined) {
+      if (typeof v.rowsSelector !== "string" || v.rowsSelector.length > 200) throw new OnboardError("invalid", "observedViews: rowsSelector invalid");
+      clean.rowsSelector = v.rowsSelector;
+    }
+    if (v.onclickTemplate !== undefined) {
+      if (typeof v.onclickTemplate !== "string" || v.onclickTemplate.length > 120) throw new OnboardError("invalid", "observedViews: onclickTemplate invalid");
+      clean.onclickTemplate = v.onclickTemplate;
+    }
+    if (v.singleRecord !== undefined) {
+      if (typeof v.singleRecord !== "boolean") throw new OnboardError("invalid", "observedViews: singleRecord invalid");
+      clean.singleRecord = v.singleRecord;
+    }
+    if (v.method !== undefined) {
+      if (v.method !== "GET" && v.method !== "HEAD") throw new OnboardError("invalid", "observedViews: method invalid");
+      clean.method = v.method;
+    }
+    return clean;
+  });
 }
 
 // A discovery-spec event's redacted path (connect-agent/discovery.mjs's redactPath) always writes the
@@ -619,6 +662,7 @@ export async function onRequest(context) {
       if (findHostileKeys(body).length) throw new OnboardError("invalid", "hostile key in request body");
       const spec = body.spec;
       if (!spec || typeof spec !== "object" || Array.isArray(spec)) throw new OnboardError("invalid", "spec required");
+      const observedViews = cleanObservedViews(body.observedViews);
 
       let job = await findJobForSession(deps.db, tid, sessionId);
       if (!job) throw new OnboardError("not-found", "job not found");
@@ -646,6 +690,38 @@ export async function onRequest(context) {
         throw new OnboardError("invalid", "spec could not be compiled");
       }
 
+      // HTML-operation inference: merge crawler-observed views into the compiled manifest so a phone that
+      // only crawls (no JSON API discovered) still gets a full adapter. JSON-discovered operations always
+      // win a type collision. Never let inference break the JSON-only path -- a merge that fails
+      // validation is dropped and reported, not stored.
+      let htmlOperationsAdded = [];
+      let htmlInferenceError = null;
+      let addedHtmlOps = [];
+      if (observedViews.length) {
+        const primaryOrigin = manifest.origins[0]; // compile.mjs always assigns origins[0] the primary origin
+        const inferred = inferHtmlOperations(observedViews, { originId: primaryOrigin.id });
+        const existingTypes = new Set(manifest.operations.map((op) => op.type));
+        const toAdd = inferred.operations.filter((op) => !existingTypes.has(op.type));
+        if (toAdd.length || inferred.unsupported.length) {
+          const merged = Object.assign({}, manifest, {
+            operations: manifest.operations.concat(toAdd),
+            unsupported: manifest.unsupported.concat(inferred.unsupported),
+            capabilityProbes: Array.isArray(manifest.capabilityProbes)
+              ? manifest.capabilityProbes.concat(toAdd.map((op) => ({ operationType: op.type, expect: { minItems: 0 } })))
+              : manifest.capabilityProbes,
+          });
+          merged.contentHash = manifestContentHash(merged);
+          const mergeErrors = validateManifest(merged);
+          if (mergeErrors.length === 0) {
+            manifest = merged;
+            addedHtmlOps = toAdd;
+            htmlOperationsAdded = toAdd.map((op) => op.type);
+          } else {
+            htmlInferenceError = "html-inferred manifest failed validation; kept JSON-only manifest";
+          }
+        }
+      }
+
       if (job.state === "COMPILING") {
         assertTransition("job", "COMPILING", "VALIDATING");
         job = await casJob(deps.db, tid, job.id, job.revision, { state: "VALIDATING", stage: "validating" });
@@ -670,6 +746,15 @@ export async function onRequest(context) {
         if (!observedPaths.has(`${originRow.origin}|${genericizePath(op.pathTemplate)}`)) continue;
         probes.push({ opId: op.type, method: "GET", url: originRow.origin + op.pathTemplate });
       }
+      // Added html ops: safe to probe directly (no observed-event match needed) since they are GET-only,
+      // placeholder-free, and scoped to an allowlisted origin.
+      for (const op of addedHtmlOps) {
+        if (op.method !== "GET") continue;
+        if (templatePlaceholders(op.pathTemplate).length) continue;
+        const originRow = manifest.origins.find((o) => o.id === op.originId);
+        if (!originRow || !depOrigins.has(originRow.origin)) continue;
+        probes.push({ opId: op.type, method: "GET", url: originRow.origin + op.pathTemplate });
+      }
 
       const phoneState = {
         manifest, probes,
@@ -678,7 +763,10 @@ export async function onRequest(context) {
       };
       job = await casJob(deps.db, tid, job.id, job.revision, { phone_state: JSON.stringify(phoneState) });
 
-      return jsonResponse({ ok: true, candidateVersionId: job.candidate_version_id || null, manifest, probes, capabilities: null });
+      return jsonResponse({
+        ok: true, candidateVersionId: job.candidate_version_id || null, manifest, probes, capabilities: null,
+        htmlOperationsAdded, htmlInferenceError,
+      });
     }
 
     // POST /sessions/:id/evidence -- phone reports live probe results for opIds this server issued
