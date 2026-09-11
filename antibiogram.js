@@ -1026,20 +1026,33 @@
     if (_isPortrait()) { if (root && root.classList.contains("on")) showRotateHint(); }
     else hideRotateHint();   // rotated to landscape — the hint has done its job
   }
+  var _rotateTimer = null;
   function showRotateHint() {
     if (!root || root.querySelector("#abgRotate")) return;
     var h = document.createElement("div");
     h.className = "abg-rotate"; h.id = "abgRotate";
-    h.innerHTML = '<span class="abg-rotate-ic">' + abIco("refresh") + '</span><span class="abg-rotate-tx">Rotate your phone for a wider view of the grid.</span><button class="abg-rotate-x" data-act="rotate-dismiss" aria-label="Dismiss">' + abIco("close") + '</button>';
+    h.innerHTML = '<div class="abg-rotate-pill">' +
+      '<svg class="abg-rotate-phone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="3"/><path d="M12 18h.01"/><path class="abg-rotate-arrow" d="M20 8l2-2m0 0l-2-2m2 2h-4a4 4 0 00-4 4" stroke-width="1.6"/></svg>' +
+      '<span class="abg-rotate-tx">Rotate for a wider view</span>' +
+      '</div>' +
+      '<div class="abg-rotate-progress"><div class="abg-rotate-bar"></div></div>';
     root.appendChild(h);
+    /* swipe-up dismiss */
+    var startY = 0;
+    h.addEventListener("touchstart", function (e) { startY = e.touches[0].clientY; }, {passive: true});
+    h.addEventListener("touchend", function (e) { if (startY - e.changedTouches[0].clientY > 20) hideRotateHint(); }, {passive: true});
+    h.addEventListener("click", function () { hideRotateHint(); });
     requestAnimationFrame(function () { h.classList.add("on"); });
-    h.addEventListener("click", function (e) { if (e.target.closest("[data-act='rotate-dismiss']")) hideRotateHint(); });
+    /* auto-dismiss after 4s */
+    if (_rotateTimer) clearTimeout(_rotateTimer);
+    _rotateTimer = setTimeout(function () { _rotateTimer = null; hideRotateHint(); }, 4000);
   }
   function hideRotateHint() {
+    if (_rotateTimer) { clearTimeout(_rotateTimer); _rotateTimer = null; }
     var h = root && root.querySelector("#abgRotate");
     if (!h) return;
     h.classList.remove("on");
-    setTimeout(function () { if (h && h.parentNode) h.parentNode.removeChild(h); }, 220);
+    setTimeout(function () { if (h && h.parentNode) h.parentNode.removeChild(h); }, 400);
   }
 
   function shell() {
@@ -1855,12 +1868,17 @@
       /* System Toasts & Rotate Hint */
       ".abg-toast{position:fixed;left:50%;bottom:40px;transform:translateX(-50%) translateY(10px);background:#0F172A;color:#fff;font:600 13px var(--f);padding:11px 18px;border-radius:12px;z-index:970;opacity:0;transition:.2s;pointer-events:none;max-width:88vw;text-align:center;box-shadow:0 8px 24px rgba(0,0,0,.3)}",
       ".abg-toast.on{opacity:1;transform:translateX(-50%)}",
-      ".abg-rotate{position:fixed;left:50%;top:calc(14px + env(safe-area-inset-top));transform:translateX(-50%) translateY(-8px);display:flex;align-items:center;gap:9px;background:var(--tl);color:#fff;font:600 13px/1.35 var(--f);padding:10px 14px;border-radius:12px;z-index:990;opacity:0;transition:opacity .2s,transform .2s;box-shadow:0 8px 26px rgba(8,15,26,.32);max-width:92vw}",
-      ".abg-rotate.on{opacity:1;transform:translateX(-50%)}",
-      ".abg-rotate-ic{display:flex;animation:abgrot 1.6s ease-in-out infinite}.abg-rotate-ic svg{width:16px;height:16px}",
-      "@keyframes abgrot{0%,60%,100%{transform:rotate(0)}75%{transform:rotate(-28deg)}88%{transform:rotate(8deg)}}",
-      ".abg-rotate-tx{flex:1}",
-      ".abg-rotate-x{border:none;background:rgba(255,255,255,.22);color:#fff;width:22px;height:22px;border-radius:50%;font:700 12px var(--f);cursor:pointer;line-height:1;flex:none}",
+      /* Rotate Hint — Apple Dynamic Island capsule */
+      ".abg-rotate{position:fixed;left:50%;top:calc(12px + env(safe-area-inset-top));transform:translateX(-50%) translateY(-60px) scale(.85);display:flex;flex-direction:column;align-items:stretch;background:#1C1C1E;border-radius:22px;z-index:990;opacity:0;transition:opacity .35s cubic-bezier(.4,.0,.2,1),transform .5s cubic-bezier(.175,.885,.32,1.275);max-width:88vw;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,.35),0 0 0 .5px rgba(255,255,255,.08) inset;cursor:pointer;-webkit-tap-highlight-color:transparent;will-change:transform,opacity}",
+      ".abg-rotate.on{opacity:1;transform:translateX(-50%) translateY(0) scale(1)}",
+      ".abg-rotate-pill{display:flex;align-items:center;gap:10px;padding:11px 16px 9px}",
+      ".abg-rotate-phone{width:20px;height:20px;color:rgba(255,255,255,.9);flex:none;animation:abgPhoneRock 2s ease-in-out infinite}",
+      ".abg-rotate-arrow{opacity:.7}",
+      "@keyframes abgPhoneRock{0%,100%{transform:rotate(0)}25%{transform:rotate(-20deg)}50%{transform:rotate(0)}75%{transform:rotate(20deg)}}",
+      ".abg-rotate-tx{font:600 13.5px/1 -apple-system,BlinkMacSystemFont,var(--f);color:rgba(255,255,255,.92);letter-spacing:-.01em;white-space:nowrap}",
+      ".abg-rotate-progress{height:3px;background:rgba(255,255,255,.08);border-radius:0 0 22px 22px;overflow:hidden}",
+      ".abg-rotate-bar{height:100%;width:100%;background:rgba(255,255,255,.28);border-radius:0 0 22px 22px;animation:abgBar 4s linear forwards}",
+      "@keyframes abgBar{from{width:100%}to{width:0%}}",
       /* Drug DB Overlay Integration */
       ".db-overlay{position:fixed;inset:0;z-index:1000!important;background:var(--paper,#f7f7f5);display:none;flex-direction:column;overflow:hidden}",
       ".db-overlay.on{display:flex!important;z-index:1000!important}"
