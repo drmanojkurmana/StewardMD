@@ -147,6 +147,10 @@ try {
   const position=async(i)=>J('var g=document.getElementById("rnavToolsGrid");var n=g.querySelectorAll(".rnav-tile:not(.addtool):not([data-reorder-ghost])")['+i+'];var r=n.getBoundingClientRect();return JSON.stringify({x:r.left+r.width/2,y:r.top+r.height/2});');
   await ev('document.querySelector("#rnavToolsGrid .rnav-tile").scrollIntoView({block:"center"});return true;');
   await sleep(300);
+  ok(await ev('return !document.getElementById("rnavReorderDone");'),'Edit/Done button is absent');
+  ok(await ev('return !!document.getElementById("rnavReorderHint");'),'long-press hint is initially visible');
+  await sleep(10200);
+  ok(await ev('return !document.getElementById("rnavReorderHint");'),'hint disappears after ten visible seconds');
   var p=await position(0);
   await touch('touchStart',p);await sleep(80);await touch('touchMove',{x:p.x,y:p.y-60});await sleep(500);await touch('touchEnd');
   ok(await ev('return !document.getElementById("rnavToolsGrid").classList.contains("reordering");'),'ordinary touch scrolling cancels the hold timer');
@@ -159,12 +163,16 @@ try {
   await touch('touchEnd');await sleep(200);
   ok(await ev('return document.querySelector("#rnavToolsGrid .rnav-tile").dataset.act;')!==before,'horizontal touch drag changes order');
   ok(await ev('return document.getElementById("rnavToolsGrid").classList.contains("reordering")&&!document.querySelector("[data-reorder-ghost]");'),'release cleans up ghost and keeps edit mode active');
+  await sleep(500);
+  await ev('document.querySelector("#homeV2 .rds-section-header").click();return true;');
+  ok(await ev('return !document.getElementById("rnavToolsGrid").classList.contains("reordering");'),'tapping outside icons finishes rearranging');
+  await ev('document.querySelector("#rnavToolsGrid .rnav-tile").dispatchEvent(new KeyboardEvent("keydown",{key:" ",bubbles:true}));return true;');
   var saved=await ev('return localStorage.getItem("smd_home_tools_order");');
   p=await position(0);q=await position(2);await touch('touchStart',p);await touch('touchMove',q);await touch('touchCancel');await sleep(100);
   ok(await ev('return localStorage.getItem("smd_home_tools_order");')===saved,'cancelled touch does not persist a partial order');
   ok(await ev('return !document.querySelector("[data-reorder-ghost],.rnav-tile.dragging");'),'touch cancellation leaves no stuck dragged icon');
-  await ev('document.getElementById("rnavReorderDone").click();return true;');
-  ok(await ev('return !document.getElementById("rnavToolsGrid").classList.contains("reordering");'),'Done ends editing explicitly');
+  await ev('document.dispatchEvent(new KeyboardEvent("keydown",{key:"Escape",bubbles:true}));return true;');
+  ok(await ev('return !document.getElementById("rnavToolsGrid").classList.contains("reordering");'),'Escape ends editing without a visible button');
 
   await sleep(500);
   await ev('document.querySelector("#rnavToolsGrid .rnav-tile").scrollIntoView({block:"center"});return true;');await sleep(150);
@@ -174,10 +182,10 @@ try {
   var scrollAfter=await ev('return Array.from(document.querySelectorAll("*")).reduce((n,e)=>n+e.scrollTop,0);');
   ok(scrollAfter>scrollBefore,'holding a dragged icon near the bottom scrolls toward lower tools');
   await touch('touchCancel');
-  await ev('document.getElementById("rnavReorderDone").click();document.getElementById("rnavReorderDone").click();var t=document.querySelector("#rnavToolsGrid .rnav-tile");t.focus();t.dispatchEvent(new KeyboardEvent("keydown",{key:"ArrowRight",bubbles:true}));return true;');
+  await ev('document.dispatchEvent(new KeyboardEvent("keydown",{key:"Escape",bubbles:true}));document.querySelector("#rnavToolsGrid .rnav-tile").dispatchEvent(new KeyboardEvent("keydown",{key:" ",bubbles:true}));var t=document.querySelector("#rnavToolsGrid .rnav-tile");t.focus();t.dispatchEvent(new KeyboardEvent("keydown",{key:"ArrowRight",bubbles:true}));return true;');
   var keyboardOrder=await ev('return localStorage.getItem("smd_home_tools_order");');
-  ok(keyboardOrder!==saved,'Edit and arrow keys provide a keyboard rearranging option');
-  await ev('document.getElementById("rnavReorderDone").click();return true;');
+  ok(keyboardOrder!==saved,'Space and arrow keys provide a keyboard rearranging option');
+  await ev('document.dispatchEvent(new KeyboardEvent("keydown",{key:"Escape",bubbles:true}));return true;');
   await mkdir('/tmp/stewardmd-reorder',{recursive:true});
   var shot=await call('Page.captureScreenshot',{format:'png'});await writeFile('/tmp/stewardmd-reorder/home.png',Buffer.from(shot.result.data,'base64'));
   console.log(fails?fails+' failures':'All real-touch checks pass');

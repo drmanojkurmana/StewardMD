@@ -2446,7 +2446,7 @@
   }
 
   // ---- voice fill (ambient dictation -> assessVals + live DOM, doctor edits protected) ----------
-  var _amb = null, _elapsedTmr = null, _lastFullTranscript = "", _procTmr = null, _priorTranscript = "", _scribeCapToasted = false;
+  var _amb = null, _elapsedTmr = null, _lastFullTranscript = "", _procTmr = null, _priorTranscript = "", _scribeCapToasted = "";
   // Clear the "Finishing your dictation…" state once the last chunk + refine have landed (or on a safety timeout).
   function finishProcessing() { if (_procTmr) { clearTimeout(_procTmr); _procTmr = null; } _finishPending = false; if (!st.voiceProcessing) return; st.voiceProcessing = false; paint(); }
   function setVoiceStatus(t) { st.voiceStatus = t; try { var e = document.getElementById("oeVoiceStatus"); if (e) e.textContent = t; } catch (x) {} }
@@ -3073,8 +3073,30 @@
       // The engine refused for a named reason (Local mode, model lacks the capability): say it ONCE
       // per session rather than on every refine tick, and keep dictating (the deterministic vitals
       // extractor and the transcript are unaffected).
-      if (r && (r.error === "LOCAL_CAPABILITY_REQUIRED" || r.error === "kb-only") && !_scribeCapToasted) { _scribeCapToasted = true; try { toast(r.message || "On-device Scribe needs a different model."); } catch (e) {} return; }
-      if (!r || r.error) { if (_finishPending) { try { toast("Could not draft the note from this dictation - the transcript is kept, try Stop again."); } catch (e) {} } return; }
+      // A named refusal (Local mode, model lacks the capability): say it once per distinct reason.
+      // It used to be once per SESSION, so every later refine fell through to the generic message
+      // below and the actual reason was never seen again (owner report, 2026-09-11).
+      if (r && (r.error === "LOCAL_CAPABILITY_REQUIRED" || r.error === "kb-only")) {
+        var cm = r.message || "On-device Scribe needs a different model.";
+        if (_scribeCapToasted !== cm) { _scribeCapToasted = cm; try { toast(cm); } catch (e) {} }
+        return;
+      }
+      // Anything else: say WHY. The generic line hid a real, actionable engine error (the on-device
+      // engine runs one generation at a time, so a refine landing on a busy engine reported "busy"
+      // and the doctor was told only that drafting failed).
+      if (!r || r.error) {
+        if (_finishPending) {
+          var e0 = String((r && r.error) || "");
+          var why = (r && r.error === "draft-unparsed" && r.message) ? r.message
+            : /busy|already running/i.test(e0) ? "MaiK was still drafting the previous part. Tap Stop again in a moment."
+            : /timed out/i.test(e0) ? "On-device drafting took too long and was stopped. The transcript is kept - tap Stop again, or switch to MaiK Cloud."
+            : /not-enough-memory|low-memory/i.test(e0) ? "Not enough free memory to draft on this phone right now. Close other apps and tap Stop again."
+            : e0 ? "Could not draft the note: " + e0 + ". The transcript is kept."
+            : "Could not draft the note from this dictation - the transcript is kept, try Stop again.";
+          try { toast(why); } catch (e) {}
+        }
+        return;
+      }
       var sg = r.suggestions || {};
       var grounded = (G.SMD_SCRIBEGROUND && G.SMD_SCRIBEGROUND.ground) ? G.SMD_SCRIBEGROUND.ground(transcript, sg, groundOpts(transcript))
         : { ddx: (sg.ddx || []).map(function (l) { return { label: l, source: "ai" }; }), investigations: (sg.investigations || []).map(function (l) { return { label: l, source: "ai" }; }) };

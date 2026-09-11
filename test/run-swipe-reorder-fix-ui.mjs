@@ -471,7 +471,7 @@ try {
   const exitReorder = await J(`
     var grid = document.getElementById("rnavToolsGrid");
     var tile = grid ? grid.querySelector(".rnav-tile:not(.addtool)") : null;
-    document.getElementById("rnavReorderDone").click();
+    document.dispatchEvent(new KeyboardEvent("keydown",{key:"Escape",bubbles:true}));
     return JSON.stringify({
       reorderingAfterClick: grid ? grid.classList.contains("reordering") : false
     });
