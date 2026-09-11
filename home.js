@@ -1783,6 +1783,7 @@
       pending={id:e.pointerId,x:e.clientX,y:e.clientY};_pressT=setTimeout(start,450);
     });
     root.addEventListener("click",function(e){
+      if(!e.target||!e.target.closest)return; // a document-targeted synthetic event has no Element API
       if(_reorderMode&&Date.now()>=_suppressToolClickUntil&&!e.target.closest("#rnavToolsGrid .rnav-tile")){if(_dragCancel)_dragCancel();homeEditMode(false);}
       if((Date.now()<_suppressToolClickUntil||_reorderMode)&&e.target.closest("#rnavToolsGrid,.hv-tool-tog")){
         e.preventDefault();e.stopImmediatePropagation();
@@ -1790,6 +1791,7 @@
     },true);
     root.addEventListener("keydown",function(e){
       if(e.key==="Escape"&&_reorderMode){if(_dragCancel)_dragCancel();homeEditMode(false);return;}
+      if(!e.target||!e.target.closest)return;
       var tile=e.target.closest("#rnavToolsGrid .rnav-tile:not(.addtool)");
       if(tile&&e.key===" "&&!_reorderMode){e.preventDefault();homeEditMode(true);return;}
       if(!_reorderMode||!tile||!/^Arrow/.test(e.key))return;

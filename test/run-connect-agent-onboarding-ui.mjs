@@ -245,7 +245,8 @@ try {
       consoleErrors.push((m.params.args || []).map(a => a.value || a.description || "").join(" "));
     }
     if (m.method === "Runtime.exceptionThrown") {
-      consoleErrors.push("EXCEPTION: " + (((m.params || {}).exceptionDetails || {}).text || "thrown"));
+      const d = (m.params || {}).exceptionDetails || {};
+      consoleErrors.push("EXCEPTION: " + (d.text || "thrown") + " " + ((d.exception || {}).description || "") + " @" + (d.url || "") + ":" + (d.lineNumber != null ? d.lineNumber + 1 : "?"));
     }
   };
 
