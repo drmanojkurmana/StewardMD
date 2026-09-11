@@ -1,6 +1,8 @@
 /* connect-agent-boot.js - Connect Agent in-app launcher boot module.
- * ES5 IIFE. Flag-gated behind smd_connect_agent (default OFF).
- * When the flag is off, this module does nothing observable and does not load connect-agent-ui.js.
+ * ES5 IIFE. Flag smd_connect_agent, default ON since 2026-09-12 (owner decision: the doctor-facing
+ * entry point must be visible; the server still gates every broker call behind CONNECT_AGENT_FLAG).
+ * `?connect_agent=0` or localStorage smd_connect_agent = "0" hides it. When off, this module does
+ * nothing observable and does not load the onboarding UI.
  */
 (function () {
   "use strict";
@@ -15,12 +17,13 @@
         if (v === "0" || v === "false" || v === "off" || v === "no") return false;
       }
       var ls = localStorage;
-      if (!ls) return false;
+      if (!ls) return true;
       var val = ls.getItem("smd_connect_agent");
       if (val === null) val = ls.getItem("CONNECT_AGENT_FLAG");
-      return val === "1" || val === "true" || val === "on";
+      if (val === null) return true; // default ON
+      return !(val === "0" || val === "false" || val === "off");
     } catch (e) {
-      return false;
+      return true;
     }
   }
 
