@@ -8262,15 +8262,10 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
     try { initResume(); } catch (e) {}
     try { installSbScrollGuard(); } catch (e) {}
     if (IS_V2) {
-      // show the new home as soon as the user is past splash/login, COVERING the app's own
-      // Simple/Advanced screen so it isn't seen twice. Theme applies then (never on splash/consent).
-      var tries = 0;
-      var iv = setInterval(function () {
-        tries++;
-        var ms = document.getElementById("modeSelect"), sh = document.querySelector(".shell");
-        var entered = (ms && !ms.classList.contains("hidden")) || (sh && sh.offsetParent !== null);
-        if (entered || tries > 60) { clearInterval(iv); document.body.classList.add("ui-v2"); suppressModeSelect(); showV2(); try { resumeRestore(); } catch (e) {} }
-      }, 120);
+      document.body.classList.add("ui-v2");
+      suppressModeSelect();
+      showV2();
+      try { resumeRestore(); } catch (e) {}
     }
   }
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", start); else start();
