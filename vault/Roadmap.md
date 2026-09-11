@@ -66,6 +66,10 @@ Pending / deferred, by area. `- [ ]` so Obsidian renders checkboxes (Tasks/Datav
 - [ ] [[KardiQ X]] photo-dx pivot (image-based model) — ≤$35 GPU-VM overnight build
 - [ ] [[Medical Knowledge Base]] — Obsidian → build pipeline for clinical content; dx-mgmt enrichment merge
 - [ ] [[FollowCare]] owner TODOs (clinician thresholds, translations, R2 bind, WhatsApp BSP)
+- [ ] [[RxChoice]] Phase 2 — pharmacy availability + live prices (MRP is a list price today), patient
+      selection (`smd_rxchoice_patient_selection`), refill savings. Also: per-brand strength is only
+      recoverable from the brand NAME for most combination rows, so a `strength_mg` column on `drugs`
+      would let RxChoice match combinations on the composition instead of on naming convention.
 
 ## [[WardSynQ]] — blocked on people, not on code
 

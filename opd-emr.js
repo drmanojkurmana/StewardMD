@@ -223,7 +223,7 @@
       '<button class="oe-btn primary" data-oe-act="clinic-rx-add">' + ms("add") + "Add to record</button></div>";
     var list = (_localStore && _localStore.listPrescriptions) ? _localStore.listPrescriptions(st.patient.mrn) : [];
     var rows = list.map(function (x) { return '<div class="oe-row"><span class="oe-row-ic">' + ms("medication") + '</span><span class="oe-row-b"><span class="oe-row-t">' + esc([x.drug, x.dose].filter(Boolean).join(" ")) + '</span><span class="oe-row-s">' + esc([x.freq, x.duration, fmtClinicDate(x.ts), x.author].filter(Boolean).join(" · ")) + "</span></span></div>"; }).join("");
-    return form + section("pill", "Medications prescribed", list.length + " on record", rows, "No medications recorded yet.");
+    return form + section("pill", "Medications prescribed", list.length + " on record", rows, "No medications recorded yet.") + rxcButton();
   }
   function invTab(st) {
     if (usesLocal(st.source)) return clinicInvTab(st);
@@ -259,7 +259,7 @@
         action + "</div>";
     }
     var current = section("pill", "Current medications", "", (st.medications || []).map(medRow).join(""), "No current medications on record.");
-    return searchBox("med", st.medQuery, "Search medications…") + '<div class="oe-searchout" id="oe-out-med">' + resultList("med", st.medResults) + searchStatus(st, "med") + "</div>" + draft + current;
+    return searchBox("med", st.medQuery, "Search medications…") + '<div class="oe-searchout" id="oe-out-med">' + resultList("med", st.medResults) + searchStatus(st, "med") + "</div>" + draft + current + rxcButton();
   }
   // ---- GHIS Initial Assessment schema (field names VERBATIM from a live CreateinitialAssessmentnew capture,
   // 2026-08-07). `val.*` names keep their prefix; bare names get `assessment.` server-side. kind: text|number|
@@ -766,6 +766,7 @@
       '<button class="oe-btn primary" data-oe-act="consult-authorise">' + ms("verified") + "Authorise &amp; sign off</button>" +
       '<div class="oe-swipe" id="oeSwipe" role="button" tabindex="0" aria-label="Close consult — swipe, or press Enter"><div class="oe-swipe-fill"></div><span class="oe-swipe-txt">Swipe to close consult</span><div class="oe-swipe-knob" id="oeSwipeKnob">' + ms("chevron_right") + "</div></div>" +
       '<button class="oe-btn" data-oe-act="rx-share">' + ms("share") + "Share prescription (WhatsApp / print)</button>" +
+      rxcButton() +
       '<button class="oe-btn" data-oe-act="rx-refer">' + ms("forward") + "Refer patient</button>" +
       '<button class="oe-btn" data-oe-act="rx-summary">' + ms("description") + "Visit summary</button>" +
       ((G.SMD_FOLLOWCARE && G.SMD_FOLLOWCARE.enabled && G.SMD_FOLLOWCARE.enabled()) ? '<button class="oe-btn" data-oe-act="rx-followup">' + ms("event_repeat") + "Set follow-up</button>" : "") +   // enrol this patient into FollowCare -> pulls them back for a check-in
@@ -1244,6 +1245,7 @@
     if (cmd === "icdaccept") return acceptIcdSuggestion(+arg);
     if (cmd === "consult-authorise") return authoriseConsult();
     if (cmd === "consult-er") return consultToER();
+    if (cmd === "rx-rxchoice") return openRxChoice(st);
     if (cmd === "rx-share") return shareRx();
     if (cmd === "rx-refer") return shareReferral();
     if (cmd === "rx-summary") return shareSummary();
@@ -1750,6 +1752,67 @@
   // print (the browser print dialog offers "Save as PDF"). Copied verbatim (~15 lines) from
   // thorex-screens.js's exportHtmlDoc - the ~15-line dual-path pipeline the plan called for reusing.
   // The native path is device-only (per the iOS build gotcha); this file only wires it, never tests it.
+  /* ── RxChoice™ in the OPD consult (rxchoice-ui.js, flag smd_rxchoice) ───────────────────────────
+   * The same opt-in layer the prescription pad offers, over the consult's OWN medication list. It
+   * reads what has been prescribed and shows products from the StewardMD Drug Database carrying the
+   * same therapy at different prices. It writes NOTHING back into the EMR: the OPD medication fields
+   * are a write-back surface that is server-gated (QUEUE_EMR_WRITE, with PRESCRIBE server-blocked),
+   * so a brand chosen here is recorded in the RxChoice audit trail and shown to the doctor, and the
+   * doctor changes the order themselves if they want it. Inert with the flag off: no button renders.
+   *
+   * In OPD a medication is a single text string ("Tab Paracetamol 650", or a GHIS drug name), which
+   * is also the product name, so it is passed as BOTH the drug and the brand - the brand-name
+   * endpoint is what resolves it to a database record. A line it cannot resolve says so per line. */
+  function rxcAvailable() { try { return !!(G.SMD_RXCHOICE_FLAGS && G.SMD_RXCHOICE_FLAGS.on() && G.SMD_RXCHOICE_UI && G.SMD_RXCHOICE_UI.available()); } catch (e) { return false; } }
+  function rxcButton() {
+    return rxcAvailable() ? '<button class="oe-btn" data-oe-act="rx-rxchoice">' + ms("savings") + "RxChoice\u2122 - same therapy, smarter price</button>" : "";
+  }
+  /* One RxChoice line per prescribed medication. Sources, in order: the assessment plan's "Rx:" lines
+   * (what the doctor wrote this visit), else the medication list on record, else the open draft. */
+  function rxcLines(st) {
+    var out = [];
+    var split = function (text) {
+      // "Tab Paracetamol 650 1 tab TDS 5 days" -> product text + the dose/freq/duration tail.
+      var t = String(text || "").trim(), low = t.toLowerCase();
+      var fm = low.match(/\b(od|bd|bid|tds|tid|qid|qds|hs|sos|prn|q4h|q6h|q8h|q12h)\b/);
+      var dm = low.match(/(\d+(?:\.\d+)?)\s*(days?|weeks?|months?)/);
+      var dzm = t.match(/(\d+(?:\.\d+)?\s*(?:ml|tabs?|tablets?|caps?|capsules?|puffs?|drops?))/i);
+      var head = t;
+      if (fm) head = t.slice(0, fm.index).trim();
+      head = head.replace(/(\d+(?:\.\d+)?\s*(?:ml|tabs?|tablets?|caps?|capsules?|puffs?|drops?))\s*$/i, "").trim();
+      return { product: head || t, dose: dzm ? dzm[1] : "", freq: fm ? fm[1].toUpperCase() : "", duration: dm ? (dm[1] + " " + dm[2]) : "" };
+    };
+    var plan = rxLinesFromPlan(st.assessVals || {}).rx;
+    plan.forEach(function (l) { var p = split(l); out.push({ drug: p.product, brand: p.product, dose: p.dose, freq: p.freq, duration: p.duration }); });
+    if (!out.length) (st.medications || []).forEach(function (m) {
+      var nm = String(m.drugText || m.drug || "").trim(); if (!nm) return;
+      out.push({ drug: nm, brand: nm, dose: m.dosage || m.dose || "", freq: m.frequency || "", duration: m.duration || "" });
+    });
+    // Clinic (local/shared) patients keep their prescriptions in the on-device store, not in GHIS.
+    if (!out.length && typeof usesLocal === "function" && usesLocal(st.source) && _localStore && _localStore.listPrescriptions) {
+      try {
+        (_localStore.listPrescriptions((st.patient || {}).mrn) || []).forEach(function (x) {
+          var nm = String(x.drug || "").trim(); if (!nm) return;
+          out.push({ drug: nm, brand: nm, dose: x.dose || "", freq: x.freq || "", duration: x.duration || "" });
+        });
+      } catch (e) {}
+    }
+    if (!out.length) {
+      var d = st.medDraft || {};
+      var nm2 = String((d.drug && d.drug.name) || d.drug || "").trim();
+      if (nm2) out.push({ drug: nm2, brand: nm2, dose: d.dose || d.qty || "", freq: d.frequency || "", duration: d.duration || "" });
+    }
+    return out;
+  }
+  function openRxChoice(st) {
+    if (!rxcAvailable()) return;
+    var lines = rxcLines(st);
+    if (!lines.length) { try { G.toast && G.toast("Prescribe a medication first"); } catch (e) {} return; }
+    // onSelect is deliberately absent: there is no EMR field for RxChoice to write. The panel records
+    // the doctor's choice in its own audit trail and shows it; the order itself stays the doctor's.
+    G.SMD_RXCHOICE_UI.open({ lines: lines, prescriptionId: (typeof oeDocId === "function" ? oeDocId() : null) || null });
+  }
+
   // ---- One-tap prescription sheet: build a branded Rx from the consult, share to WhatsApp / print / PDF.
   // Reuses oncoExportHtmlDoc (native real-PDF share sheet -> WhatsApp, else share-HTML, else web print). No
   // server, no PHI in logs: the doctor picks WhatsApp in the OS share sheet. ----

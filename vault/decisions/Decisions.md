@@ -1947,6 +1947,55 @@ renders as a `<button>` with the right label at a 44px+ target in both themes, t
 releases and reveals, that a mid-boot tap yields "Opening...", and that guests and `?splashv2=0` are
 neither gated nor shown the button and still auto-hide.
 
+---
+
+## 2026-09-11 — RxChoice™: strength certainty, not strength assumption
+
+RxChoice shows alternative PRODUCTS for a prescription the doctor has already written. Everything
+about its design follows from one property of the Drug Database: **`composition` carries per-ingredient
+strengths only sometimes.** `Amoxycillin (500mg) + Clavulanic Acid (125mg)` has 845 brands; the bare
+`Amoxycillin + Clavulanic Acid` has 5795, with the strength in the brand name ("Augmentin 625 Tablet",
+"Augmentin 1000 Duo Tablet"). A matcher that read `composition` alone would have offered 625 against
+1000 as "the same therapy".
+
+**Decision: eligibility is gated on strength CERTAINTY, via a provenance-tagged key.**
+`comp:amoxycillin=500mg|clavulanic acid=125mg` (parsed from the composition) or `brand:625mg` (parsed
+from the brand name, and only when the composition carries no strengths at all). Keys must be
+identical, and a `comp:` key never matches a `brand:` key. **A product whose strength cannot be
+established either way is not shown** — "when uncertain, no substitution" is a code path, not a
+promise. Same for form family, release tokens (IR ≠ XR), and an unreadable price or pack.
+
+**The single product truth is `window.MEDAPI`.** No RxChoice brand list, no second dataset, no
+AI-generated product. `offline-db.js` already routes those calls to the on-device SQLite copy with an
+identical record shape, so online and offline results agree for free. Manufacturer tiers MIRROR
+`worker/src/index.js` and `offline-db.js` rather than introducing a third opinion on "established
+manufacturer"; the three must be kept in step.
+
+**Course cost is unit-dispensing for countable oral solids, whole-pack for everything else.** The
+written spec contradicts itself here: it gives both `ceil(qty/pack) × packPrice` (₹150) and ₹75 for
+the same worked example (a 20-tablet pack at ₹150, a 10-tablet course). The unit reading is the one
+that matches both its own headline figure and an Indian pharmacy counter, where a strip is cut — and
+it is what makes a bigger pack able to be the cheaper course, which is the feature's whole point. A
+vial, bottle, tube or inhaler cannot be cut, so those cost whole packs and the leftover is real waste.
+Both numbers are always returned (`courseCost`, `wholePackCost`, `dispensing`) so no caller has to
+guess which model produced a figure.
+
+**BALANCED is allowed to coincide with GENERIC or PREMIUM.** When the cheapest product is also the
+best value, the honest output is to say so (`balanced.sameAs` → "also the lowest cost" on the card).
+Forcing a different product into the Recommended Value slot would mean recommending one the score
+ranked lower, purely so four cards look different.
+
+**AI is not in the decision path.** `smd_rxchoice_ai_normalization` ships **def:false**, and even on it
+may only normalize free text *before* the deterministic lookup. Eligibility, matching, pricing and
+ranking are deterministic whatever that flag says, so an AI answer can never promote a product.
+
+Also fixed here, found during the audit: `scripts/build-www.sh` never copied root `*.mjs`, so
+`prescription.js`'s `import("/rx-build.mjs")` was unresolvable inside the native bundle. RxChoice's own
+core is deliberately plain `.js` (dual-export, like `rx-brand-match.js`) so it needs no ESM plumbing,
+loads offline and is directly `require()`-able from node tests.
+
+Tests: `test/rxchoice-core.test.mjs` (15) + `test/run-rxchoice-ui.mjs` (30 browser checks, including
+flag-off restoring the pad byte-for-byte behaviourally). See [[RxChoice]].
 ## 2026-08-29 — App Lock: PIN / Face ID·Touch ID / no-lock, chosen once at first login
 Owner ask, after seeing the "Open Workspace" welcome-back splash (build 3464): add a real lock in
 front of it. Three options, offered once right after the first-run profile step (email-auth.js's
