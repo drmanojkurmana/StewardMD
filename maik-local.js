@@ -569,6 +569,9 @@
       : retrieveGrounding(packId, pkg && pkg.question);
 
     return groundingP.then(function (grounding) {
+    // Queued like every other local generation, and NOT background: the clinician is watching this
+    // one, so it goes ahead of any queued Scribe drafting (it cannot interrupt one already running).
+    return serial(function () {
     return ensureLoaded(packId).then(function () {
       var prompt = buildPrompt(pkg, packId);
       if (!prompt) return { error: "no-package" };
@@ -731,6 +734,7 @@
       if (sub && sub.remove) { try { sub.remove(); } catch (e) {} }
       return out;
     });
+    }, { reentrant: !!(opts && (opts._retried || opts._ungrounded)) });
     });
   }
 
@@ -839,6 +843,75 @@
     try { if (_idleT && typeof _idleT.unref === "function") _idleT.unref(); } catch (e) {}
   }
   function settle() { if (_inflight === 0) scheduleRelease(_sheetOpen === false ? _closeMs : _idleMs); }
+  /* ── ONE GENERATION AT A TIME (owner bug report, 2026-09-11) ────────────────────────────────
+   * The native engine is single-threaded and says so: LlamaEngine.swift generateSync throws
+   * LlamaError(.busy, "a generation is already running"), and the Android JNI behaves the same.
+   * Until the hard Local policy, only the MaiK sheet ever called it, so nothing collided. Now
+   * Scribe, Ask MaiK Pro, ICD, assessment, the summary and the ICU advisories all share that one
+   * engine, and Scribe refines on a timer (every refineEveryChunks windows AND again on Stop)
+   * while the clinician taps other things. The second caller got `busy`, which surfaced as
+   * "Could not draft the note from this dictation" with no reason. Reported from a real consult.
+   *
+   * So every local generation now queues here. A generation cannot be interrupted once it has
+   * started (the native call owns the context), but a job the clinician is WATCHING goes ahead of
+   * background drafting in the queue, because a 4B model can take tens of seconds per pass.
+   *
+   * ponytail: a plain FIFO with one priority tier. A real scheduler would need the engine to
+   * support pre-emption, which it does not. */
+  var _running = false, _waiting = [];
+  var JOB_TIMEOUT_MS = 180000;   // a wedged native call must not stall every later one forever
+  function serial(fn, opts) {
+    opts = opts || {};
+    /* RE-ENTRANCY. answer() calls ITSELF for the blank-answer retry (_retried) and the no-coverage
+     * ungrounded retry (_ungrounded), from inside its own running job. Queueing that inner call
+     * would wait for a job that cannot finish until the inner call returns: a deadlock, and on a
+     * phone an answer that never arrives. The engine is already ours at that point, so run inline. */
+    if (opts.reentrant && _running) return Promise.resolve().then(fn);
+    var job = { fn: fn, bg: !!opts.background };
+    job.promise = new Promise(function (resolve, reject) {
+      job.resolve = resolve; job.reject = reject;
+      // Interactive work jumps ahead of queued background drafting, never ahead of a running job.
+      if (!job.bg) {
+        var i = 0;
+        while (i < _waiting.length && !_waiting[i].bg) i++;
+        _waiting.splice(i, 0, job);
+      } else _waiting.push(job);
+      pump();
+    });
+    return job.promise;
+  }
+  function pump() {
+    if (_running || !_waiting.length) return;
+    var job = _waiting.shift();
+    _running = true;
+    var done = false, timer = null;
+    function finish(ok, v) {
+      if (done) return; done = true;
+      if (timer) { clearTimeout(timer); timer = null; }
+      _running = false;
+      if (ok) job.resolve(v); else job.reject(v);
+      // Fire-and-forget callers (warm, a background refine whose screen has gone) attach no
+      // handler; a queue failure must not become an unhandled rejection that takes down the page.
+      try { job.promise.catch(function () {}); } catch (e) {}
+      pump();
+    }
+    try {
+      timer = setTimeout(function () {
+        // Free the engine so the rest of the queue can run, and say which call gave up.
+        try { var L = llama(); if (L && L.cancel) L.cancel(); } catch (e) {}
+        finish(false, new Error("on-device generation timed out"));
+      }, JOB_TIMEOUT_MS);
+      // A pending timeout must never be a reason for the host to stay alive (it kept `node --test`
+      // running for the full three minutes, then fired into a finished test). No-op in a WebView.
+      if (timer && typeof timer.unref === "function") timer.unref();
+    } catch (e) {}
+    Promise.resolve().then(job.fn).then(function (r) { finish(true, r); }, function (e) { finish(false, e); });
+  }
+  /** Queue depth, for tests and diagnostics. */
+  function queueState() { return { running: _running, waiting: _waiting.length }; }
+  /** Test hook: shorten the per-job timeout (the real one is three minutes). */
+  function setJobTimeoutMs(ms) { JOB_TIMEOUT_MS = Math.max(1, Number(ms) || 1); return JOB_TIMEOUT_MS; }
+
   function tracked(fn) {
     return function () {
       clearIdle(); _inflight++;
@@ -930,14 +1003,16 @@
     var L = llama();
     if (!L) return Promise.reject(new Error("on-device inference needs the native app"));
     var packId = (opts && opts.pack) || currentPack();
-    return ensureLoaded(packId).then(function () {
-      return L.generate({ prompt: prompt, system: system, nPredict: nPredict,
-                          temperature: (opts && typeof opts.temperature === "number") ? opts.temperature : 0.2,
-                          stream: false, prefillEmptyThink: noThinkPack(packId) });
-    }).then(function (r) {
-      if (r && r.error) throw new Error(String(r.error));
-      return stripReasoning((r && r.text) || "");
-    });
+    return serial(function () {
+      return ensureLoaded(packId).then(function () {
+        return L.generate({ prompt: prompt, system: system, nPredict: nPredict,
+                            temperature: (opts && typeof opts.temperature === "number") ? opts.temperature : 0.2,
+                            stream: false, prefillEmptyThink: noThinkPack(packId) });
+      }).then(function (r) {
+        if (r && r.error) throw new Error(String(r.error));
+        return stripReasoning((r && r.text) || "");
+      });
+    }, { background: !!(opts && opts.background) });
   }
   /** Turn TinyFish's raw sources into a web-research answer on device. sources:
    * [{title,url,site,snippet}] (the exact shape SMD_AI.researchSnippets resolves). No sources -> the
@@ -989,6 +1064,7 @@
         return { parsed: parseJsonLoose(text), text: text };
       });
     }
+    return serial(function () {
     return ensureLoaded(packId).then(function () { return once(prompt, 0); }).then(function (a) {
       if (a.parsed) return a.parsed;
       // A 1.7B answers the same prompt as JSON one minute and as prose the next (seen live on MaiK
@@ -1001,6 +1077,7 @@
         var e = new Error("parse"); e.sample = b.text.slice(0, 240); throw e;
       });
     });
+    }, { background: !!(opts && opts.background) });
   }
   function parseFailure(err) {
     if (err && err.message === "parse") return { error: "parse", sample: err.sample || "" };
@@ -1291,8 +1368,11 @@
     if (!t) return Promise.resolve({ error: "no-text" });
     var packId = (opts && opts.pack) || currentPack();
     var wins = splitWindows(t, windowBudget(packId, ASSESS_SYS, 400));
+    // Ambient, like Scribe: queued behind anything the clinician is waiting on.
+    var bg = { background: true, pack: packId };
+    if (opts) { for (var ak in opts) if (Object.prototype.hasOwnProperty.call(opts, ak) && !(ak in bg)) bg[ak] = opts[ak]; }
     return eachWindow(wins, function (w) {
-      return generateJSON("=== TRANSCRIPT ===\n" + w, ASSESS_SYS, 400, opts).then(sanitizeAssessment, function (e) { if (e && e.message === "parse") return {}; throw e; });
+      return generateJSON("=== TRANSCRIPT ===\n" + w, ASSESS_SYS, 400, bg).then(sanitizeAssessment, function (e) { if (e && e.message === "parse") return {}; throw e; });
     }).then(function (parts) {
       var fields = {};
       // Narrative accumulates; the clinician's stated diagnosis and plan are single statements, so
@@ -1344,7 +1424,11 @@
   }
   var SCRIBE_OVERLAP = 400;   // chars re-shown so a sentence split across two refines is not lost
   var _scribe = { prefix: "", covered: 0, acc: null };
-  function scribeReset() { _scribe = { prefix: "", covered: 0, acc: null }; }
+  // A refine that has been overtaken by a newer transcript must not spend a generation drafting
+  // from stale text: on a 4B model each pass costs tens of seconds, so a long consult would queue
+  // one refine per window and never catch up.
+  var _scribeSeq = 0;
+  function scribeReset() { _scribe = { prefix: "", covered: 0, acc: null }; _scribeSeq++; }
   function unionList(a, b) {
     var seen = {}, out = [];
     (a || []).concat(b || []).forEach(function (x) { var k = String(x).toLowerCase(); if (!seen[k]) { seen[k] = 1; out.push(x); } });
@@ -1383,17 +1467,47 @@
     var budget = windowBudget(packId, SCRIBE_SYS + captured, 600);
     var wins = splitWindows(fresh, budget);
     var acc = _scribe.acc;
+    var mySeq = ++_scribeSeq;
+    var bg = { background: true, pack: packId };
+    if (opts) { for (var k in opts) if (Object.prototype.hasOwnProperty.call(opts, k) && !(k in bg)) bg[k] = opts[k]; }
+    // A model that answered in prose is not a model that captured nothing: count the misses so a
+    // run that produced NO structure can say so instead of leaving the form silently empty (owner
+    // report, 2026-09-11: "no autopopulation of drafting", with no message either way).
+    var unparsed = 0, ran = 0;
     return eachWindow(wins, function (w) {
-      return generateJSON(captured + "=== NEW TRANSCRIPT ===\n" + w, SCRIBE_SYS, 600, opts)
-        .then(sanitizeScribe, function (e) { if (e && e.message === "parse") return sanitizeScribe(null); throw e; })
+      if (mySeq !== _scribeSeq) return null;   // a newer refine arrived while this one waited its turn
+      ran++;
+      return generateJSON(captured + "=== NEW TRANSCRIPT ===\n" + w, SCRIBE_SYS, 600, bg)
+        .then(sanitizeScribe, function (e) { if (e && e.message === "parse") { unparsed++; return sanitizeScribe(null); } throw e; })
         .then(function (nu) { acc = scribeMerge(acc, nu); });
     }).then(function () {
+      if (ran && unparsed === ran && !hasScribeContent(acc)) {
+        return { error: "draft-unparsed", unparsed: unparsed, engine: "local", mode: "opd-scribe",
+                 message: "The on-device model answered in prose instead of a structured note, so nothing could be filled in. The transcript is kept. A larger pack (MAiK MxCore or Neural) is better at this, or use MaiK Cloud." };
+      }
+      return null;
+    }).then(function (bail) {
+      if (bail) return bail;
+      return afterScribe();
+    });
+    function afterScribe() {
+      // Superseded: leave the rolling state to the newer refine and report what we already have,
+      // so the caller shows the fields captured so far rather than an error.
+      if (mySeq !== _scribeSeq) return finishScribe(_scribe.acc || acc || { en: "", emrFields: {}, suggestions: { ddx: [], investigations: [] } }, 0);
       _scribe = { prefix: t, covered: t.length, acc: acc };
       return finishScribe(acc, wins.length);
-    });
+    }
   }
   function finishScribe(acc, windows) {
     return { kind: "opd-scribe", en: acc.en, emrFields: acc.emrFields, suggestions: acc.suggestions, alcoholDetail: acc.alcoholDetail, mode: "opd-scribe", engine: "local", windows: windows };
+  }
+  /** Did this pass actually capture anything the form can use? */
+  function hasScribeContent(acc) {
+    if (!acc) return false;
+    if (acc.en) return true;
+    if (acc.emrFields && Object.keys(acc.emrFields).length) return true;
+    var s = acc.suggestions || {};
+    return !!(s.provisionalDx || (s.ddx && s.ddx.length) || (s.investigations && s.investigations.length));
   }
 
   /* ── SURGX note structuring (kind "surgx-note"): _surgx-note.js ── */
@@ -1727,6 +1841,7 @@
     // local task layer (2026-09-11)
     TUTOR_SYS: TUTOR_SYS, SURG_SYS: SURG_SYS, MODE_SYS: MODE_SYS,
     estTokens: estTokens, splitWindows: splitWindows, windowBudget: windowBudget, numbersIn: numbersIn, canonNum: canonNum, dropUnsupportedNumbers: dropUnsupportedNumbers, stripIndic: stripIndic, mergeText: mergeText,
+    queueState: queueState, setJobTimeoutMs: setJobTimeoutMs,
     summarize: tracked(summarize), assess: tracked(assess), scribeFill: tracked(scribeFill), scribeReset: scribeReset,
     noteStructure: tracked(noteStructure), icdRank: tracked(icdRank), reasoningExtract: tracked(reasoningExtract),
     maikNext: tracked(maikNext), maikExtract: tracked(maikExtract), imagingSummary: tracked(imagingSummary), correlate: tracked(correlate),

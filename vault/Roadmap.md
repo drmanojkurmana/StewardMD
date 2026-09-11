@@ -100,3 +100,7 @@ Engineering that is deliberately NOT started:
 - [ ] Remove the `smd_maik_hard_local="0"` recovery switch in maik-engine.js after one release in production (it restores the pre-2026-09-11 cloud fall-through; a recovery switch that survives becomes a mode)
 - [ ] Native `totalMemory` + `freeDisk` in capacitor-llama available() (Android StatFs/MemoryInfo.totalMem, iOS physicalMemory/volumeAvailableCapacityForImportantUsage); the JS already reads both
 - [ ] Run test/run-local-translate-eval.mjs against MAiK Horizon (Gemma 4 E2B) and fill CAPS.lang only from a passing run
+
+## On-device engine concurrency (2026-09-11, from a real consult)
+- [ ] The 4B packs take tens of seconds per structured pass on an iPhone 15 Pro. Measure Scribe refine latency on device and consider raising refineEveryChunks (or drafting only on Stop) for packs above ~2 GB
+- [ ] MedGemma 4B returned prose instead of JSON for a Telugu Scribe dictation in at least one run; measure the JSON-adherence rate per pack and record it as a caps.json score rather than the current 0/1/2 guess
