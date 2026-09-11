@@ -43,6 +43,87 @@
     code: function (id) { return api("/api/icd/code/" + encodeURIComponent(id)); }
   };
 
+  /* ---------------- offline index (window.SMD_ICD.localSearch) ----------------
+     Used by maik-engine.js icdCandidates() when offline / the server is unreachable, so the
+     on-device model still has real ICD rows to rank instead of ICD_INDEX_OFFLINE. Data is
+     icd/icd10.min.json (built by scripts/icd/build-offline-index.mjs, see icd/README.md) - a
+     compact [[code,title],...] array of the WHO 4-character ICD-10 set, lazily fetched once and
+     cached. Matching/ranking mirrors functions/_icd_repo.js's searchCodes() intent (code-prefix
+     for code-like queries, token-prefix title ranking otherwise) so offline results look like the
+     server's. Pure ES5 - this file loads without a build step, same as the rest of the app. */
+  var DATA_URL = "icd/icd10.min.json";
+  var localData = null; // null = not loaded yet, [] = load failed, else the [[code,title],...] array
+  var localLoading = null;
+
+  // Same shape as _icd_repo.js isCodeLike(): a short letter+digit token, not a free-text phrase.
+  function isCodeLike(q) {
+    var s = String(q || "").trim();
+    return /^[A-Za-z0-9][A-Za-z0-9.]{1,9}$/.test(s) && /[0-9]/.test(s);
+  }
+  // Short medical abbreviations that are meaningful under 3 characters - kept even though the
+  // general token filter below drops anything shorter than that.
+  var SHORT_OK = { dm: 1, tb: 1, mi: 1, pe: 1, cva: 1, uti: 1, cad: 1, ckd: 1, chf: 1, dvt: 1, htn: 1, dka: 1, ibs: 1, ibd: 1 };
+  var ALL_DIGITS = /^[0-9]+$/;
+  function tokens(q) {
+    var all = String(q || "").toLowerCase().match(/[a-z0-9]+/g) || [];
+    var out = [];
+    for (var i = 0; i < all.length; i++) {
+      var t = all[i];
+      // A bare number is never noise here - it is what tells "type 1" from "type 2" diabetes
+      // (E10 vs E11), so it is kept regardless of length; short words are dropped unless listed.
+      if (t.length >= 3 || SHORT_OK[t] || ALL_DIGITS.test(t)) out.push(t);
+    }
+    return out;
+  }
+  function titleWords(title) { return String(title || "").toLowerCase().match(/[a-z0-9]+/g) || []; }
+  function anyWordPrefixed(words, tok) {
+    for (var i = 0; i < words.length; i++) if (words[i].indexOf(tok) === 0) return true;
+    return false;
+  }
+  function toRow(pair) {
+    var code = pair[0], title = pair[1];
+    return { id: "icd10:" + code, system: "ICD-10", code: code, title: title, chapter: code.slice(0, 3), is_leaf: 1 };
+  }
+  function loadLocalData() {
+    if (localData) return Promise.resolve(localData);
+    if (localLoading) return localLoading;
+    if (!window.fetch) return Promise.resolve([]);
+    localLoading = window.fetch(DATA_URL)
+      .then(function (r) { return r.ok ? r.json() : []; })
+      .then(function (rows) { localData = Array.isArray(rows) ? rows : []; return localData; },
+            function () { localData = []; return localData; });
+    return localLoading;
+  }
+  function localSearch(q, limit) {
+    var lim = limit || 30;
+    var query = String(q || "").trim();
+    return loadLocalData().then(function (rows) {
+      if (!query || !rows.length) return [];
+      var out = [], i;
+      if (isCodeLike(query)) {
+        var pfx = query.toUpperCase();
+        for (i = 0; i < rows.length && out.length < lim; i++) {
+          if (rows[i][0].indexOf(pfx) === 0) out.push(toRow(rows[i]));
+        }
+        return out;
+      }
+      var toks = tokens(query);
+      if (!toks.length) return [];
+      var scored = [];
+      for (i = 0; i < rows.length; i++) {
+        var words = titleWords(rows[i][1]), hit = 0;
+        for (var j = 0; j < toks.length; j++) if (anyWordPrefixed(words, toks[j])) hit++;
+        if (hit > 0) scored.push({ row: rows[i], hit: hit });
+      }
+      scored.sort(function (a, b) {
+        if (b.hit !== a.hit) return b.hit - a.hit;
+        return a.row[1].length - b.row[1].length;
+      });
+      for (i = 0; i < scored.length && i < lim; i++) out.push(toRow(scored[i].row));
+      return out;
+    });
+  }
+
   var root = null, timer = null, seq = 0;
   var st = { view: "list", q: "", system: "", onSelect: null };
 
@@ -165,5 +246,5 @@
     document.body.classList.remove("icd-lock");
   }
 
-  window.SMD_ICD = { open: open, pick: pick, close: close };
+  window.SMD_ICD = { open: open, pick: pick, close: close, localSearch: localSearch };
 })();

@@ -95,3 +95,8 @@ Engineering that is deliberately NOT started:
 ## Security / ops
 - [ ] Rotate: Mac pw, admin token (done?), 2Factor, Green-API, GHIS, Resend, keystore; move+rotate the Firebase-admin JSON out of ~/Downloads
 - [ ] Gemini model migration before 2027-01-28 (env-swappable)
+
+## MaiK Local/Cloud policy (added 2026-09-11, PR #1072)
+- [ ] Remove the `smd_maik_hard_local="0"` recovery switch in maik-engine.js after one release in production (it restores the pre-2026-09-11 cloud fall-through; a recovery switch that survives becomes a mode)
+- [ ] Native `totalMemory` + `freeDisk` in capacitor-llama available() (Android StatFs/MemoryInfo.totalMem, iOS physicalMemory/volumeAvailableCapacityForImportantUsage); the JS already reads both
+- [ ] Run test/run-local-translate-eval.mjs against MAiK Horizon (Gemma 4 E2B) and fill CAPS.lang only from a passing run

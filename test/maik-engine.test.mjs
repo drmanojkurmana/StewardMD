@@ -648,8 +648,11 @@ ok("...and warms the model once the gate opens", /warmIfLocal\(\)/.test(SRC.slic
   ok("local engine: the viva judge runs on device", v.engine === "local" && v.verdict === "partial" && loc.calls.some((c) => c[0] === "localViva"));
   const o = await loc.win.SMD_AI.extract("complaint text", "opd-suggest");
   ok("local engine: the OPD differential runs on device", o.engine === "local" && loc.calls.some((c) => c[0] === "localOpd"));
+  // HARD POLICY (2026-09-11): a kind with no local implementation is REFUSED with a structured
+  // reason, never sent to the cloud while the picker says "On-device". (Before this date it fell
+  // through to Gemini; test/maik-policy.test.mjs covers the full matrix.)
   const voice = await loc.win.SMD_AI.extract("dictation", "voice");
-  ok("every other extract kind stays on the cloud even with the local engine", voice.engine === "cloud" && voice.kind === "voice");
+  ok("an extract kind with no local implementation is refused, not sent to the cloud", voice.error === "LOCAL_CAPABILITY_REQUIRED" && !loc.calls.some((c) => c[0] === "extract"));
   const cl = load({ gate: true, runtime: true, pack: true });
   const v2 = await cl.win.SMD_AI.vivaJudge("Q", "K", "A");
   ok("cloud pref: viva judge stays on the cloud", v2.feedback === "CLOUD judge");
@@ -658,7 +661,7 @@ ok("...and warms the model once the gate opens", /warmIfLocal\(\)/.test(SRC.slic
   const rag = load({ gate: true, runtime: true, pack: true });
   rag.ls.setItem("stewardmd.maikEngine", "rag");
   const v3 = await rag.win.SMD_AI.vivaJudge("Q", "K", "A");
-  ok("KB-only pref: no model to judge with, so the cloud judge is used rather than dead-ending", v3.feedback === "CLOUD judge");
+  ok("KB-only pref: no model to judge with and no spend either, so a kb-only error (the caller shows it)", v3.error === "kb-only" && !rag.calls.some((c) => c[0] === "vivaJudge"));
 }
 
 // ── web research (owner, 2026-09-04): the local engine fetches snippets for free, then the
@@ -678,22 +681,24 @@ ok("...and warms the model once the gate opens", /warmIfLocal\(\)/.test(SRC.slic
   const rag = load({ gate: true, runtime: true, pack: true });
   rag.ls.setItem("stewardmd.maikEngine", "rag");
   const rr = await rag.win.SMD_AI.research("Treatment of pneumonia");
-  ok("KB-only pref: research is not the local engine's job either, stays cloud", rr.text === "CLOUD web answer");
+  ok("KB-only pref: research makes no AI call; the KB-only notice is rendered as the answer", rr.engine === "rag" && !rag.calls.some((c) => c[0] === "research"));
 
-  // Evidence Review is a distinct paid PubMed-synthesis feature and is never diverted to the on-device model.
+  // Evidence Review is a distinct paid PubMed-synthesis feature. It is never diverted to the
+  // on-device model, and since 2026-09-11 it is not silently sent to the cloud from the local
+  // engine either: it is refused as a Cloud-only feature with cloud offered explicitly.
   const locER = load({ gate: true, runtime: true, pack: true });
   locER.ls.setItem("stewardmd.maikEngine", "local");
   const er = await locER.win.SMD_AI.research("Best evidence for X", "evidence-review");
-  ok("Evidence Review always stays on the cloud, even with the local engine selected",
-     er.mode === "evidence-review" && !locER.calls.some((c) => c[0] === "researchSnippets"));
+  ok("Evidence Review on the local engine is refused as Cloud-only, never run on device or silently on the cloud",
+     er.error === "LOCAL_CAPABILITY_REQUIRED" && er.cloudOnly === true && !locER.calls.some((c) => c[0] === "researchSnippets" || c[0] === "research"));
 
-  // A local engine without a webAnswer implementation (older bundle, or research not yet supported)
-  // must fall through to cloud rather than throwing.
+  // A local engine without a webAnswer implementation (older bundle) must not throw, and since
+  // 2026-09-11 must not fall through to the cloud either: a structured refusal.
   const locNoWeb = load({ gate: true, runtime: true, pack: true });
   delete locNoWeb.win.SMD_MAIK_LOCAL.webAnswer;
   locNoWeb.ls.setItem("stewardmd.maikEngine", "local");
   const rnw = await locNoWeb.win.SMD_AI.research("Treatment of pneumonia");
-  ok("no local webAnswer -> falls through to cloud cleanly", rnw.text === "CLOUD web answer");
+  ok("no local webAnswer -> a structured refusal, not a silent cloud call", rnw.error === "LOCAL_CAPABILITY_REQUIRED" && !locNoWeb.calls.some((c) => c[0] === "research"));
 }
 
 console.log(`\nmaik-engine: ${pass} passed, ${fail} failed`);

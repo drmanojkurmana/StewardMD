@@ -398,6 +398,166 @@
     return Object.keys(PACKS).sort(function (a, b) { return rank(a) - rank(b); });
   }
 
+  /* ── CAPABILITIES + DEVICE SUITABILITY (owner directive, 2026-09-11) ──────────────────────────
+   * "Local AI" is now a hard policy (maik-engine.js), and a feature that the selected pack cannot
+   * do must name a pack that can. That needs the registry to SAY what each pack can do, and to say
+   * whether a pack will run WELL on this phone before it is ever offered as a download. Both live
+   * here, next to the packs, so there is one registry and not a second one.
+   *
+   * CAPS, keyed by pack id. Values are relative within this lineup and come from the registry
+   * notes above, not from benchmarks nobody has run:
+   *   medical    tuned on medical text (Lite, MedGemma, MedPsy). Bonsai and Gemma 4 are general.
+   *   kb         answers are checked against the Knowledge Base (Lite only, see GUIDE_INTRO).
+   *   json       strict structured-output reliability: 0 none, 1 weak, 2 good. Bonsai Swift's own
+   *              note says "weaker at following strict formats", so it is 1 and never picked for
+   *              extraction work.
+   *   reasoning  1 low, 2 mid, 3 high, relative. Max > Apex ~ Bonsai > MedGemma ~ Horizon > Lite.
+   *   ramGB      the total-RAM floor the pack is known to run on with the app alive beside it.
+   *              Max: "needs a 12 GB phone" (its note). The two ~1.1 GB packs are the 6 GB ones.
+   *   kvGBat4k   KV cache at the 4096 context every pack loads with (llama_jni.cpp keeps n_ctx
+   *              deliberately small). f16 cache (llama_jni.cpp sets no type_k/type_v): 2 * layers *
+   *              kvHeads * headDim * 2 B per token. Qwen3-1.7B 28x8x128 -> 0.47; Gemma 3 4B 34x4x256
+   *              -> 0.57 full (less with its sliding-window cache); Qwen3-4B/8B 36x8x128 -> 0.60; the
+   *              27B hybrid is not derivable this way, 1.30 fits PrismML's 5.2 GB peak figure.
+   *              Nothing here reads a model's "128K" and believes it.
+   *   lang       languages with a PASSING offline eval (test/run-local-translate-eval.mjs). Empty
+   *              until measured: a model that technically emits Telugu is not thereby safe for a
+   *              prescription line, and nobody has measured that yet. Fill in from the eval only.
+   * vision is not repeated here: a pack can see iff it has a `vision` projector entry above. */
+  var CAPS = {
+    "maik-lite":         { medical: true,  kb: true,  json: 2, reasoning: 1, ramGB: 6,  kvGBat4k: 0.47, lang: [] },
+    "maik-mxcore":       { medical: true,  kb: false, json: 2, reasoning: 2, ramGB: 8,  kvGBat4k: 0.55, lang: [] },
+    "maik-neural":       { medical: true,  kb: false, json: 2, reasoning: 2, ramGB: 8,  kvGBat4k: 0.55, lang: [] },
+    "maik-horizon":      { medical: false, kb: false, json: 2, reasoning: 2, ramGB: 8,  kvGBat4k: 0.55, lang: [],
+                           warn8: "On an 8 GB phone this pack needs the increased-memory entitlement and is unloaded whenever you switch apps." },
+    "maik-apex":         { medical: true,  kb: false, json: 2, reasoning: 3, ramGB: 8,  kvGBat4k: 0.60, lang: [],
+                           warn8: "Flagship phones only: the slowest of the medical packs, with little headroom on 8 GB." },
+    "bonsai-ternary-8b": { medical: false, kb: false, json: 2, reasoning: 3, ramGB: 8,  kvGBat4k: 0.60, lang: [] },
+    "bonsai-8b":         { medical: false, kb: false, json: 1, reasoning: 2, ramGB: 6,  kvGBat4k: 0.60, lang: [] },
+    "bonsai-27b":        { medical: false, kb: false, json: 2, reasoning: 3, ramGB: 12, kvGBat4k: 1.30, lang: [] }
+  };
+  // ponytail: one constant for llama.cpp scratch + the app beside the weights. Tune from device data.
+  var RUNTIME_GB = 0.4;
+
+  /** Everything a feature needs to decide whether pack `id` can do its job. Null for an unknown id. */
+  function caps(id) {
+    var base = baseIdOf(id), p = PACKS[base], c = CAPS[base] || {};
+    if (!p) return null;
+    var out = {};
+    for (var k in c) if (Object.prototype.hasOwnProperty.call(c, k)) out[k] = c[k];
+    out.id = base; out.label = p.label; out.vision = !!p.vision; out.nCtx = p.nCtx || 4096;
+    out.bytes = totalBytes(base); out.visionBytes = p.vision ? (p.vision.bytes || 0) : 0;
+    return out;
+  }
+  function fmtGB(bytes) { var gb = bytes / 1e9; return gb >= 1 ? gb.toFixed(2) + " GB" : Math.round(bytes / 1e6) + " MB"; }
+
+  /* What this phone can carry. Every source is a bridge call, so the profile is refreshed
+   * asynchronously and READ synchronously from the cached snapshot (the matcher cannot await).
+   * refreshDevice() runs at load and again when Settings opens. Sources, and how far to trust each:
+   *   ramGB    Android: navigator.deviceMemory. Chromium caps it at 8, so 8 means "8 or more" and
+   *            ramGBMin says so. iOS exposes no total-RAM API to JS, so ramGB stays null there and
+   *            the jetsam budget below gates instead. Unknown never UPGRADES a verdict.
+   *   availGB  capacitor-llama available(): iOS os_proc_available_memory (HARD, jetsam enforces it),
+   *            Android availMem (SOFT, mmap survives it). The same numbers ensureLoaded() refuses on.
+   *   freeGB   only if the plugin's available() reports freeDisk (bytes). navigator.storage.estimate()
+   *            was tried and rejected in review: it is the ORIGIN quota, not free disk, and the
+   *            packs are written by the native Filesystem; on WKWebView it is small and fixed and
+   *            would have refused every pack. Unknown storage is no opinion. Native follow-up:
+   *            report StatFs / volumeAvailableCapacityForImportantUsage from available().
+   *   battery  navigator.getBattery() where the WebView has it (Android). iOS: null.
+   *   thermal  no WebView API on either platform. Not modelled, and the UI says so rather than guess. */
+  var _device = { platform: platformName(), ramGB: null, ramGBMin: false, availGB: null, hardLimit: false, freeGB: null, battery: null, at: 0 };
+  function platformName() { try { var c = cap(); return (c && c.getPlatform) ? c.getPlatform() : "web"; } catch (e) { return "web"; } }
+  function device() { return _device; }
+  function refreshDevice() {
+    var d = { platform: platformName(), ramGB: null, ramGBMin: false, availGB: null, hardLimit: false, freeGB: null, battery: null, at: Date.now() };
+    var nav = (typeof navigator !== "undefined") ? navigator : null;
+    try { var dm = nav && nav.deviceMemory; if (dm) { d.ramGB = Number(dm); d.ramGBMin = d.ramGB >= 8; } } catch (e) {}
+    var L = llama();
+    var pA = (L && L.available) ? Promise.resolve().then(function () { return L.available(); }).then(function (a) {
+      var v = a && Number(a.availableMemory); if (v > 0) { d.availGB = v / 1e9; d.hardLimit = !!a.memoryIsHardLimit; }
+      var t = a && Number(a.totalMemory); if (t > 0) { d.ramGB = Math.round(t / 1e9 * 10) / 10; d.ramGBMin = false; }   // a real total beats the deviceMemory class
+      var fd = a && Number(a.freeDisk); if (fd > 0) d.freeGB = fd / 1e9;
+    }, function () {}) : Promise.resolve();
+    var pB = Promise.resolve();
+    try { if (nav && nav.getBattery) pB = nav.getBattery().then(function (b) { if (b) d.battery = { level: Number(b.level), charging: !!b.charging }; }, function () {}); } catch (e) {}
+    return Promise.all([pA, pB]).then(function () { _device = d; return d; });
+  }
+  /** Test hook / manual override: replace the cached snapshot (a simulated 6, 8 or 12 GB phone). */
+  function setDevice(d) { _device = d || _device; return _device; }
+
+  /* Will pack `id` run WELL on this phone, not merely download? { level: "ok"|"warn"|"no", reasons, needGB }.
+   *   ok    recommended.
+   *   warn  offered, with the limitation to expect named in `reasons`.
+   *   no    never offered as a recommendation; the UI names the smallest suitable alternative.
+   * Rules (owner, 2026-09-11): unknown RAM never upgrades a verdict; a 12 GB-floor pack on a phone
+   * whose total cannot be confirmed is "no"; what is free RIGHT NOW is a warning (it changes), but
+   * a hard jetsam budget below the need is "no" (it will not load, closing other apps does not help). */
+  function suitability(id, dev, opts) {
+    dev = dev || _device; opts = opts || {};
+    var c = caps(id); if (!c) return { level: "no", reasons: ["Unknown model pack."], needGB: 0 };
+    var withVision = !!(opts.vision && c.vision);
+    var needGB = c.bytes / 1e9 + (withVision ? c.visionBytes / 1e9 : 0) + (c.kvGBat4k || 0.5) * (c.nCtx / 4096) + RUNTIME_GB;
+    var level = "ok", reasons = [];
+    function worse(l, why) { if (l === "no" || (l === "warn" && level === "ok")) level = l; reasons.push(why); }
+    var ram = dev.ramGB, exact = ram != null && !dev.ramGBMin;
+    var hardKnown = !!(dev.hardLimit && dev.availGB != null);
+    // deviceMemory is a power-of-two CLASS (a 6 GB phone reports 4 or 8), hence "reports", not "has".
+    if (exact && ram < c.ramGB) worse("no", "Needs a " + c.ramGB + " GB phone; this one reports " + ram + " GB.");
+    else if (c.ramGB > 8 && (ram == null || dev.ramGBMin)) {
+      // Neither platform lets JS read a total above 8. Only a generous free-memory reading argues for it.
+      if (dev.availGB != null && dev.availGB >= c.ramGB * 0.4) worse("warn", "Needs a " + c.ramGB + " GB phone. Total memory could not be read, but " + dev.availGB.toFixed(1) + " GB is free right now.");
+      else worse("no", "Needs a " + c.ramGB + " GB phone, and this phone's total memory could not be confirmed.");
+    }
+    else if (ram == null && c.ramGB >= 8 && !hardKnown) worse("warn", "Needs an 8 GB phone; this phone's total memory could not be read.");
+    else if (ram != null && needGB > ram * 0.5) worse("warn", "Uses about " + needGB.toFixed(1) + " GB of " + ram + (dev.ramGBMin ? "+" : "") + " GB: little headroom, unloaded whenever you switch apps.");
+    if (c.warn8 && (ram == null || ram <= 8)) worse("warn", c.warn8);
+    if (dev.availGB != null) {
+      // "no" uses the SAME test ensureLoaded() applies before a load (weights x 1.15 against a hard
+      // budget), so the panel never refuses a pack that the loader accepts; the fuller estimate
+      // with KV cache and runtime on top is a warning, because that is where eviction starts.
+      var weightsGB = (c.bytes + (withVision ? c.visionBytes : 0)) / 1e9;
+      if (dev.hardLimit && dev.availGB < weightsGB * 1.15) worse("no", "This phone can hold about " + dev.availGB.toFixed(1) + " GB in memory for the app; this model needs about " + needGB.toFixed(1) + " GB. (If another model is loaded, remove it first.)");
+      else if (dev.hardLimit && dev.availGB < needGB * 1.15) worse("warn", "About " + dev.availGB.toFixed(1) + " GB of memory is available to the app; with its working memory this model wants about " + needGB.toFixed(1) + " GB, so expect it to be unloaded when you switch apps.");
+      else if (!dev.hardLimit && dev.availGB < needGB * 0.35) worse("warn", "Only " + dev.availGB.toFixed(1) + " GB free right now; close other apps before using it.");
+    }
+    if (dev.freeGB != null) {
+      var diskNeed = (c.bytes + (withVision ? c.visionBytes : 0)) / 1e9 * 1.1;
+      if (dev.freeGB < diskNeed) worse("no", "Needs about " + diskNeed.toFixed(1) + " GB free storage; about " + dev.freeGB.toFixed(1) + " GB is free.");
+    }
+    if (dev.battery && dev.battery.level >= 0 && dev.battery.level < 0.15 && !dev.battery.charging && c.bytes > 1.5e9) worse("warn", "Battery is low; a large model drains it quickly. Plug in first.");
+    return { level: level, reasons: reasons, needGB: Math.round(needGB * 10) / 10, vision: withVision };
+  }
+
+  /* Packs that satisfy `need` on this device, best first: { recommended: [...], unsuitable: [...] }.
+   * need: { vision, json, reasoning, medical, lang }. Ranking: level ok before warn; medical when the
+   * feature asked for it; then the SMALLEST download (owner: never automatically the biggest).
+   * Level "no" packs are returned separately with their reason so the UI can say why. */
+  function recommend(need, dev, opts) {
+    need = need || {}; opts = opts || {};
+    var rec = [], no = [];
+    packIds().forEach(function (id) {
+      var c = caps(id); if (!c) return;
+      if (need.vision && !c.vision) return;
+      if (need.json != null && (c.json || 0) < need.json) return;
+      if (need.reasoning != null && (c.reasoning || 0) < need.reasoning) return;
+      if (need.lang && (c.lang || []).indexOf(need.lang) < 0) return;
+      if (opts.exclude && opts.exclude.indexOf(id) >= 0) return;
+      var s = suitability(id, dev, { vision: !!need.vision });
+      var bytes = c.bytes + (need.vision ? c.visionBytes : 0);
+      var have = false; try { have = installedCached(id) && (!need.vision || installedCached(visionIdOf(id))); } catch (e) {}
+      var row = { id: id, label: c.label, bytes: bytes, size: fmtGB(bytes), medical: !!c.medical, kb: !!c.kb, vision: c.vision,
+                  reasoning: c.reasoning, ramGB: c.ramGB, level: s.level, reasons: s.reasons, needGB: s.needGB, installed: have };
+      (s.level === "no" ? no : rec).push(row);
+    });
+    rec.sort(function (a, b) {
+      if (a.level !== b.level) return a.level === "ok" ? -1 : 1;
+      if (need.medical && a.medical !== b.medical) return a.medical ? -1 : 1;
+      return a.bytes - b.bytes;
+    });
+    return { recommended: rec, unsuitable: no };
+  }
+
   /* VISION AS A SUB-PACK, "<packId>#vision".
    *
    * The projector (mmproj) is a second, optional file: 851 MB for MxCore/Neural, 986 MB for Horizon,
@@ -1031,6 +1191,9 @@
     state: state, subscribe: subscribe,
     activePack: activePack, setActivePack: setActivePack,
     resumeUiForBackgroundDownloads: resumeUiForBackgroundDownloads,
+    // capability + device suitability (2026-09-11)
+    CAPS: CAPS, caps: caps, device: device, refreshDevice: refreshDevice, setDevice: setDevice,
+    suitability: suitability, recommend: recommend, fmtGB: fmtGB,
     _abToB64: abToB64
   };
   if (typeof module !== "undefined" && module.exports) module.exports = API;
@@ -1038,5 +1201,7 @@
     window.SMD_MAIK_MODELS = API;
     // Deferred so it never competes with first paint.
     try { if (typeof setTimeout === "function") setTimeout(function () { resumeUiForBackgroundDownloads(); }, 3000); } catch (e) {}
+    // A first device snapshot for the capability matcher, after the plugin bridge is up.
+    try { if (typeof setTimeout === "function") setTimeout(function () { refreshDevice().catch(function () {}); }, 1500); } catch (e) {}
   }
 })();

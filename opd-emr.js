@@ -1081,15 +1081,18 @@
       "</div></section>";
   }
   // Pro: send the whole timeline to MaiK for a deeper AI summary (module "summary", 15/day cap server-side).
+  // Through SMD_AI.summary (2026-09-11), never a raw fetch: the answer-engine chooser decides whether
+  // this runs on Gemini, on the on-device model (windowed over the 4K context), or is refused with a
+  // named reason. The raw fetch here was the one MaiK call the "On-device" picker could not see.
   function maikSummarise(tl) {
     var text = tl.map(function (e) { return fmtClinicDate(e.ts) + (e.by ? " (" + e.by + ")" : "") + ": " + String(e.text || "").replace(/\s*\n\s*/g, "; "); }).join("\n").slice(0, 14000);
-    var base = (typeof window !== "undefined" && window.AI_PROXY) || "/api/ai";
-    var tokP; try { var cu = window.SMD_AUTH && SMD_AUTH.currentUser; tokP = (cu && cu.getIdToken) ? cu.getIdToken() : Promise.resolve(null); } catch (e) { tokP = Promise.resolve(null); }
-    return tokP.then(function (t) {
-      var h = { "Content-Type": "application/json" }; if (t) h["Authorization"] = "Bearer " + t;
-      return fetch(base + "/summary", { method: "POST", headers: h, credentials: "same-origin", body: JSON.stringify({ text: text }) });
-    }).then(function (r) { return r ? r.json().then(function (d) { return { ok: r.ok, d: d || {} }; }, function () { return { ok: false, d: {} }; }) : { ok: false, d: {} }; })
-      .then(function (res) { return (res.ok && res.d.text) ? { text: res.d.text } : (res.d && res.d.reason === "module-daily" ? { over: true } : null); });
+    if (!(G.SMD_AI && G.SMD_AI.summary)) return Promise.resolve(null);
+    return G.SMD_AI.summary(text).then(function (r) {
+      if (r && r.text && !r.error) return { text: r.text, engine: r.engine || "cloud" };
+      if (r && r.error === "quota" && (r.reason === "module-daily" || r.over)) return { over: true };
+      if (r && (r.error === "LOCAL_CAPABILITY_REQUIRED" || r.error === "kb-only")) return { capability: r.message || "On-device summary is not available with the selected model." };
+      return null;
+    }, function () { return null; });
   }
   function summariseClinic() {
     var tl = st.timeline || []; if (!tl.length) { toast("No consults to summarise yet."); return; }
@@ -1098,7 +1101,8 @@
       st.clinicSummary = { loading: true }; paint();
       maikSummarise(tl).then(function (r) {
         if (r && r.text) st.clinicSummary = { ai: true, text: r.text, consults: tl.length };
-        else { st.clinicSummary = buildClinicSummary(tl); if (st.clinicSummary && r && r.over) st.clinicSummary.capNote = "Daily MaiK summary limit reached (15/day) — showing the on-device overview."; }
+        else { st.clinicSummary = buildClinicSummary(tl); if (st.clinicSummary && r && r.over) st.clinicSummary.capNote = "Daily MaiK summary limit reached (15/day) — showing the on-device overview.";
+               else if (st.clinicSummary && r && r.capability) st.clinicSummary.capNote = r.capability + " Showing the deterministic overview."; }
         paint();
       }, function () { st.clinicSummary = buildClinicSummary(tl); paint(); });
       return;
@@ -2313,7 +2317,7 @@
   }
 
   // ---- voice fill (ambient dictation -> assessVals + live DOM, doctor edits protected) ----------
-  var _amb = null, _elapsedTmr = null, _lastFullTranscript = "", _procTmr = null, _priorTranscript = "";
+  var _amb = null, _elapsedTmr = null, _lastFullTranscript = "", _procTmr = null, _priorTranscript = "", _scribeCapToasted = false;
   // Clear the "Finishing your dictation…" state once the last chunk + refine have landed (or on a safety timeout).
   function finishProcessing() { if (_procTmr) { clearTimeout(_procTmr); _procTmr = null; } _finishPending = false; if (!st.voiceProcessing) return; st.voiceProcessing = false; paint(); }
   function setVoiceStatus(t) { st.voiceStatus = t; try { var e = document.getElementById("oeVoiceStatus"); if (e) e.textContent = t; } catch (x) {} }
@@ -2364,7 +2368,7 @@
     G.SMD_AI.extract(text, "icd-suggest").then(function (r) {
       if (mySeq !== _oeIcdSeq) return;
       var p = document.querySelector("#smdOpdEmr #oeIcdSug"); if (!p) return;
-      if (!r || r.error) { p.innerHTML = '<div class="oe-icdsug-hint">' + esc(r && r.error === "quota" ? (r.message || "MaiK is a StewardMD Pro feature.") : "Could not reach MaiK. Try again.") + '</div>'; return; }
+      if (!r || r.error) { p.innerHTML = '<div class="oe-icdsug-hint">' + esc(r && r.error === "quota" ? (r.message || "MaiK is a StewardMD Pro feature.") : (r && r.message && /^(LOCAL_CAPABILITY_REQUIRED|ICD_INDEX_OFFLINE|kb-only)$/.test(r.error)) ? r.message : "Could not reach MaiK. Try again.") + '</div>'; return; }
       _oeIcdSug = r.suggestions || [];
       if (!_oeIcdSug.length) { p.innerHTML = '<div class="oe-icdsug-hint">No confident ICD match found - try the search icon instead.</div>'; return; }
       p.innerHTML = _oeIcdSug.map(function (s, i) {
@@ -2790,7 +2794,9 @@
       if (st !== forPatient) return;
       st.maikProBusy = false;
       if (!r || r.error || !(r.provisionalDx || (r.ddx && r.ddx.length))) {
-        toast(r && r.error === "quota" ? "Daily AI limit reached. Use the on-device result or try again tomorrow." : "MaiK Pro is unavailable right now; the on-device result stands.");
+        toast(r && r.error === "quota" ? "Daily AI limit reached. Use the on-device result or try again tomorrow."
+          : (r && r.message && (r.error === "LOCAL_CAPABILITY_REQUIRED" || r.error === "kb-only")) ? r.message
+          : "MaiK Pro is unavailable right now; the on-device result stands.");
         paint(); return;
       }
       var ddx = (r.ddx || []).map(function (d) { return { label: cleanClinical(d.dx), dx: cleanClinical(d.dx), source: "ai", why: cleanClinical(d.why || "") }; }).filter(function (d) { return d.dx; });
@@ -2829,6 +2835,10 @@
     _lastRefinedTranscript = transcript;
     G.SMD_AI.extract(transcript, "opd-scribe").then(function (r) {
       if (r && r.error === "quota") { toast(r.message || "MaiK Scribe limit reached. Try again later."); try { stopVoice(); } catch (e) {} return; }
+      // The engine refused for a named reason (Local mode, model lacks the capability): say it ONCE
+      // per session rather than on every refine tick, and keep dictating (the deterministic vitals
+      // extractor and the transcript are unaffected).
+      if (r && (r.error === "LOCAL_CAPABILITY_REQUIRED" || r.error === "kb-only") && !_scribeCapToasted) { _scribeCapToasted = true; try { toast(r.message || "On-device Scribe needs a different model."); } catch (e) {} return; }
       if (!r || r.error) { if (_finishPending) { try { toast("Could not draft the note from this dictation - the transcript is kept, try Stop again."); } catch (e) {} } return; }
       var sg = r.suggestions || {};
       var grounded = (G.SMD_SCRIBEGROUND && G.SMD_SCRIBEGROUND.ground) ? G.SMD_SCRIBEGROUND.ground(transcript, sg, groundOpts(transcript))
@@ -3164,7 +3174,12 @@
         // GHIS + MaiK must be English — if the dictation is Telugu/Hindi, translate the final before filling.
         if (/[ऀ-ॿఀ-౿]/.test(s) && G.SMD_AI && G.SMD_AI.translate) {
           setVoiceStatus("Translating…");
-          G.SMD_AI.translate(s).then(function (r) { put((r && r.text && !r.error) ? r.text : s, true); setVoiceStatus(""); })
+          G.SMD_AI.translate(s).then(function (r) {
+            put((r && r.text && !r.error) ? r.text : s, true); setVoiceStatus("");
+            // Refused by the engine (Local mode, language not yet verified offline): the dictation is
+            // kept as spoken and the doctor is told why, instead of a silent native-script field.
+            if (r && (r.error === "LOCAL_CAPABILITY_REQUIRED" || r.error === "kb-only") && r.message) { try { toast(r.message); } catch (e) {} }
+          })
             .catch(function () { put(s, true); setVoiceStatus(""); });
         } else { put(s, true); }
       },
