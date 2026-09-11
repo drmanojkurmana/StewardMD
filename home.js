@@ -1446,7 +1446,7 @@
       ".rnav-grid.reordering .rnav-tile{touch-action:none}",
       ".rnav-grid.reordering .rnav-tile:not(.addtool):not(.dragging){animation:rnavJiggle .28s ease-in-out infinite alternate}",
       ".rnav-grid.reordering .rnav-tile.addtool{opacity:.35;pointer-events:none}",
-      "#rnavToolsGrid .rnav-tile.dragging{opacity:.18!important;transform:none!important;animation:none!important}#rnavToolsGrid .rnav-tile{-webkit-touch-callout:none;user-select:none;-webkit-user-select:none}.rnav-drag-ghost{will-change:transform;filter:drop-shadow(0 14px 18px #0004)}#rnavReorderDone{margin-left:auto;min-height:44px;padding:8px 18px;border:1px solid var(--line);border-radius:14px;background:var(--panel);color:var(--teal);font:600 14px var(--sans,system-ui)}#rnavReorderHint{font-size:12px;color:var(--slate);margin:0 0 14px}",
+      "#rnavToolsGrid .rnav-tile.dragging{opacity:.18!important;transform:none!important;animation:none!important}#rnavToolsGrid .rnav-tile{-webkit-touch-callout:none;user-select:none;-webkit-user-select:none}.rnav-drag-ghost{will-change:transform;filter:drop-shadow(0 14px 18px #0004)}#rnavReorderHint{font-size:12px;color:var(--slate);margin:0 0 14px}",
       "@keyframes rnavJiggle{from{transform:rotate(-1deg)}to{transform:rotate(1deg)}}",
       "@media(prefers-reduced-motion:reduce){#homeV2 *{transition:none!important;animation:none!important}}"
     ].join("\n");
@@ -1694,10 +1694,8 @@
   var _dragCancel=null, _dragActive=false, _suppressToolClickUntil=0;
   function homeEditMode(on){
     _reorderMode=on;
-    var grid=document.getElementById("rnavToolsGrid"),done=document.getElementById("rnavReorderDone"),hint=document.getElementById("rnavReorderHint");
+    var grid=document.getElementById("rnavToolsGrid");
     if(grid)grid.classList.toggle("reordering",on);
-    if(done){done.textContent=on?"Done":"Edit";done.setAttribute("aria-pressed",String(on));}
-    if(hint)hint.textContent=on?"Drag tools to rearrange. Tap Done when finished.":"Touch and hold a tool to rearrange.";
   }
   function beginDrag(dragEl, container, itemSelector, dataAttr, initial) {
     if(_dragCancel)_dragCancel();
@@ -1746,6 +1744,10 @@
     frame=requestAnimationFrame(tick);
   }
   function wireHomeDragReorder(root) {
+    // Start the hint's ten seconds only once it enters the visible home viewport.
+    var hintObserver=window.IntersectionObserver?new IntersectionObserver(function(entries){entries.forEach(function(entry){if(entry.isIntersecting){hintObserver.unobserve(entry.target);var hint=entry.target;setTimeout(function(){hint.remove();},10000);}});}):null;
+    function watchHint(){var hint=document.getElementById("rnavReorderHint");if(!hint||hint.dataset.watched)return;hint.dataset.watched="1";if(hintObserver)hintObserver.observe(hint);else setTimeout(function(){hint.remove();},10000);}
+    var homeRoot=document.getElementById("homeV2");if(homeRoot)new MutationObserver(watchHint).observe(homeRoot,{childList:true,subtree:true});watchHint();
     var pending=null;
     function clearPress(){clearTimeout(_pressT);_pressT=null;pending=null;}
     root.addEventListener("contextmenu",function(e){if(e.target.closest("#rnavToolsGrid"))e.preventDefault();});
@@ -1763,8 +1765,7 @@
       pending={id:e.pointerId,x:e.clientX,y:e.clientY};_pressT=setTimeout(start,450);
     });
     root.addEventListener("click",function(e){
-      var done=e.target.closest("#rnavReorderDone");
-      if(done){e.preventDefault();e.stopPropagation();if(_dragCancel)_dragCancel();homeEditMode(!_reorderMode);return;}
+      if(_reorderMode&&Date.now()>=_suppressToolClickUntil&&!e.target.closest("#rnavToolsGrid .rnav-tile")){if(_dragCancel)_dragCancel();homeEditMode(false);}
       if((Date.now()<_suppressToolClickUntil||_reorderMode)&&e.target.closest("#rnavToolsGrid,.hv-tool-tog")){
         e.preventDefault();e.stopImmediatePropagation();
       }
@@ -1772,6 +1773,7 @@
     root.addEventListener("keydown",function(e){
       if(e.key==="Escape"&&_reorderMode){if(_dragCancel)_dragCancel();homeEditMode(false);return;}
       var tile=e.target.closest("#rnavToolsGrid .rnav-tile:not(.addtool)");
+      if(tile&&e.key===" "&&!_reorderMode){e.preventDefault();homeEditMode(true);return;}
       if(!_reorderMode||!tile||!/^Arrow/.test(e.key))return;
       e.preventDefault();var grid=tile.parentElement,list=[].slice.call(grid.querySelectorAll(".rnav-tile:not(.addtool)")),at=list.indexOf(tile),cols=getComputedStyle(grid).gridTemplateColumns.split(" ").length,delta=e.key==="ArrowLeft"?-1:e.key==="ArrowRight"?1:e.key==="ArrowUp"?-cols:cols,target=list[at+delta];
       if(target){grid.insertBefore(tile,delta>0?target.nextSibling:target);var next=list.map(function(n){return n.getAttribute("data-act");});next=[].slice.call(grid.querySelectorAll(".rnav-tile:not(.addtool)")).map(function(n){return n.getAttribute("data-act");});orderedHomeTools().forEach(function(t){if(next.indexOf(t.act)<0)next.push(t.act);});setToolOrder(next);tile.focus();}
@@ -1864,7 +1866,7 @@
           '<button class="rnav-qc" data-act="dosing" aria-label="Dosing: insulin &amp; electrolytes">' + ric("medication") + '<span>Dosing</span></button>' +
           '<button class="rnav-qc" data-act="hospital" aria-label="Hospital: OPD, ICU, Ward, FollowCare">' + ric("local_hospital") + '<span>Hospital+</span></button>' +
         '</div>' +
-        '<div class="rds-section-header"><span class="rds-section-title">Clinical tools</span><button id="rnavReorderDone" aria-pressed="false">Edit</button></div><p id="rnavReorderHint" role="status">Touch and hold a tool to rearrange.</p>' +
+        '<div class="rds-section-header"><span class="rds-section-title">Clinical tools</span></div><p id="rnavReorderHint" role="status">Touch and hold a tool to rearrange.</p>' +
         '<div class="rnav-grid" id="rnavToolsGrid">' + renderHomeToolsGrid() + '</div>' +
         '<div id="rnavRecent"></div>' +
         '<div class="v4-foot rnav-foot"><div class="disc">Only for qualified clinicians</div>' +
