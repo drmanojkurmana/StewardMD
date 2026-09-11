@@ -321,14 +321,6 @@
         '<label class="f" style="flex:0 1 160px"><span>Country</span><select id="newHospRegion"><option value="IN">India</option><option value="US">United States</option></select></label>' +
         '<button class="btn" id="mkHosp" type="button">' + ms("add_business") + "Create</button></div>" +
         '<p class="quiet">The country decides what counts as a valid phone number and which unit a temperature is charted in. It can be changed later in the Admin Center.</p><div id="mkMsg"></div></div>';
-      /* An empty hospital demonstrates nothing, and the seeder that fills one needed Node, a
-       * terminal and a Firebase token - which is why this is a button. Offered to every sign-in,
-       * not only an account: whether THIS identity may create or adopt a hospital is the server's
-       * answer to give, and the demo page reports that answer in the server's own words rather
-       * than hiding the door and leaving the person to guess. */
-      html += '<div class="card" style="margin-top:18px"><h2>Create a demonstration hospital</h2>' +
-        '<p class="quiet">Creates a hospital of fabricated patients so you can walk through wards, charts, the medication round, the laboratory and billing with something in them. It takes about a minute.</p>' +
-        '<div class="row"><button class="btn ghost" type="button" data-go="demo">' + ms("science") + "Create a demonstration hospital</button></div></div>";
       $("hospList").innerHTML = html;
       el.querySelectorAll("[data-org]").forEach(function (b) { b.onclick = function () { selectOrg(b.getAttribute("data-org")); }; });
       var mk = $("mkHosp"); if (mk) mk.onclick = function () {
