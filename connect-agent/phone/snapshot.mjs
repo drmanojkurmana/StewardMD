@@ -71,6 +71,12 @@ function SMD_CONNECT_SNAPSHOT() {
         var name = nameOf(el);
         var indent = new Array(depth + 1).join('  ');
         var clickable = role === 'link' || role === 'button' || role === 'menuitem' || role === 'tab' || role === 'option';
+        // A data table row (a <tr> with 2+ data cells, not a header row) is treated as clickable: legacy
+        // EMRs (e.g. GHIS) open a patient by a delegated click handler on the whole row, with no <a> to
+        // detect. This is what lets the agent walk from a worklist into a patient record.
+        if (!clickable && role === 'row') {
+          try { if (el.querySelectorAll && el.querySelectorAll('td').length >= 2) clickable = true; } catch (e) {}
+        }
         if (clickable || role === 'textbox' || role === 'checkbox' || role === 'radio' || role === 'combobox') {
           refN++;
           var ref = 'e' + refN;

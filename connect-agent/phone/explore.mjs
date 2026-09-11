@@ -5,13 +5,13 @@ import { LIMITS } from '../discovery.mjs';
 // discovery.mjs's SKIP_LABEL/CANDIDATE_REF/CLICKABLE are module-local (not exported), so they are
 // copied here rather than imported. Keep in sync with connect-agent/discovery.mjs if it changes.
 const CANDIDATE_REF = /\[ref=([A-Za-z0-9_-]{1,32})\]/;
-const CLICKABLE = /\b(link|button|menuitem|tab|option)\b/i;
+const CLICKABLE = /\b(link|button|menuitem|tab|option|row)\b/i;
 const SKIP_LABEL = /sign\s?out|log\s?out|logout|delete|remove|discharge|export|download|order|prescribe|submit|save|new\b|create/i;
 
 const TIER1 = /doctor|physician|clinical|ward|inpatient|\bipd\b|\bopd\b|patient|worklist|census|dashboard/i;
 const TIER2 = /lab|result|investigation|radiolog|report|medic|drug|medicine|allerg|encounter|visit|note|summary|history|vital|diagnos/i;
 
-const CAPS_DEFAULT = { maxSteps: 40, maxMs: 240000, maxDepth: 8, waitMs: 1200 };
+const CAPS_DEFAULT = { maxSteps: 60, maxMs: 240000, maxDepth: 20, waitMs: 1200 };
 
 function parseCandidates(lines) {
   const out = [];
@@ -41,14 +41,19 @@ function lastEventWasArrayShaped(events) {
  * only picks among refs `explorePhone`'s caller already snapshotted, exactly like discovery.mjs's
  * `candidateRefs()`.
  */
-export async function defaultPlanner({ lines = [], depth = 0, events = [] } = {}) {
-  const candidates = parseCandidates(lines);
+export async function defaultPlanner({ lines = [], depth = 0, events = [], visited = [] } = {}) {
+  // Dedup by label: refs are regenerated each snapshot (position-based), so a ref is not stable across
+  // snapshots, but a redacted label is. This keeps the walk from re-clicking the same tab or row.
+  const seenLabels = new Set((visited || []).filter((v) => typeof v === 'string' && v.indexOf('label:') === 0).map((v) => v.slice(6)));
+  const candidates = parseCandidates(lines).filter((c) => !seenLabels.has(c.label));
   if (!candidates.length) return depth > 0 ? { action: 'back', reason: 'no-candidate' } : { action: 'stop', reason: 'no-candidate' };
 
-  if (lastEventWasArrayShaped(events)) {
-    const patientRow = candidates.find((c) => c.label.includes('#'));
-    if (patientRow) return { action: 'click', ref: patientRow.ref, label: patientRow.label, reason: 'patient-row' };
-  }
+  // Prefer opening a record whose label carries a redacted id "#", to go one level deeper. Fires when
+  // the list arrived as a JSON array (SPA) OR when the candidate is a table row (server-rendered HTML,
+  // e.g. GHIS, where no array event is ever observed). Either signal alone is enough.
+  const arrayShaped = lastEventWasArrayShaped(events);
+  const patientRow = candidates.find((c) => c.label.includes('#') && (arrayShaped || /\brow\b/i.test(c.line)));
+  if (patientRow) return { action: 'click', ref: patientRow.ref, label: patientRow.label, reason: 'patient-row' };
 
   const tier1 = candidates.find((c) => TIER1.test(c.label));
   if (tier1) return { action: 'click', ref: tier1.ref, label: tier1.label, reason: 'tier1-keyword' };
@@ -56,6 +61,8 @@ export async function defaultPlanner({ lines = [], depth = 0, events = [] } = {}
   const tier2 = candidates.find((c) => TIER2.test(c.label));
   if (tier2) return { action: 'click', ref: tier2.ref, label: tier2.label, reason: 'tier2-keyword' };
 
+  // Shallow dead-end: click the first unseen candidate to keep exploring rather than stopping cold.
+  if (depth < 2 && candidates[0]) return { action: 'click', ref: candidates[0].ref, label: candidates[0].label, reason: 'explore-first' };
   return depth > 0 ? { action: 'back', reason: 'no-candidate' } : { action: 'stop', reason: 'no-candidate' };
 }
 
@@ -79,6 +86,7 @@ export async function explorePhone({ client, collector, planner, startUrl, caps 
 
   const steps = [];
   const visitedUrls = [];
+  const clickedLabels = [];
   let depth = 0;
   let stopReason = 'step-cap';
   const deadline = Date.now() + maxMs;
@@ -107,7 +115,7 @@ export async function explorePhone({ client, collector, planner, startUrl, caps 
 
     let decision;
     try {
-      decision = await planner({ url, lines, visited: [...visitedUrls], depth, events });
+      decision = await planner({ url, lines, visited: [...visitedUrls, ...clickedLabels], depth, events });
     } catch {
       stopReason = 'planner-error';
       break;
@@ -128,6 +136,7 @@ export async function explorePhone({ client, collector, planner, startUrl, caps 
       const ref = decision.ref;
       if (!ref || !lines.some((l) => l.includes(`[ref=${ref}]`))) { stopReason = 'invalid-ref'; break; }
       await client.click({ ref });
+      if (decision.label) clickedLabels.push('label:' + decision.label);
       depth += 1;
       await collector.observe({ ms: waitMs });
       const toUrl = await noteUrl();
