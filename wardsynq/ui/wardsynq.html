@@ -143,7 +143,27 @@
 
 <footer class="foot">WardSynQ demonstration build. Real deterministic safety engine, unapproved clinical content. Not for clinical use.</footer>
 
-<script type="module" src="wardsynq-app.js?v=6"></script>
+<!-- The doctor's StewardMD account. Same Firebase project and the SAME persisted sign-in the shell
+     (wardsynq.com, stewardmd.in) uses, so opening this page after signing in there finds the user.
+     Without this the workstation had no bearer at all on an account session and the record service
+     answered 401 ("refused to open") for every doctor who did not sign in with a staff PIN. -->
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+<script>
+  (function () {
+    var ready;
+    try {
+      firebase.initializeApp({ apiKey: "AIzaSyCaqxRQfMtq95j0J_vLj7EF4sxrN0FhO0I", authDomain: "stewardmd-498ec.firebaseapp.com", projectId: "stewardmd-498ec", appId: "1:911280405587:web:d09038e15e98d69dc79aa6" });
+      ready = new Promise(function (res) {
+        var done = false; var fin = function (u) { if (done) return; done = true; window.SMD_AUTH.currentUser = u || null; res(u || null); };
+        try { firebase.auth().onAuthStateChanged(fin); } catch (e) { fin(null); }
+        setTimeout(function () { fin(firebase.auth().currentUser); }, 4000);
+      });
+    } catch (e) { ready = Promise.resolve(null); }
+    window.SMD_AUTH = { currentUser: null, ready: ready, token: function () { var u = window.SMD_AUTH.currentUser; return u && u.getIdToken ? u.getIdToken() : Promise.resolve(null); } };
+  })();
+</script>
+<script type="module" src="wardsynq-app.js?v=7"></script>
 <script type="module">
   // Offline shell. Registered separately from the app so a caching failure never stops the
   // workstation loading: an app that says it is offline is more use than one that will not open.

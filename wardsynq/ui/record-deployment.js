@@ -53,11 +53,15 @@ function recordParams(search) {
 }
 
 /** The bearer the StewardMD shell exposes, when this page runs inside it. Null on a bare hospital PC with Access. */
-function shellToken() {
+async function shellToken() {
   try {
-    const u = typeof window !== "undefined" && window.SMD_AUTH && window.SMD_AUTH.currentUser;
-    return u && u.getIdToken ? u.getIdToken() : Promise.resolve(null);
-  } catch { return Promise.resolve(null); }
+    const auth = typeof window !== "undefined" && window.SMD_AUTH;
+    if (!auth) return null;
+    // A fresh page load knows its user only once Firebase has restored the session; wait for it.
+    if (auth.ready && typeof auth.ready.then === "function") await auth.ready;
+    const u = auth.currentUser;
+    return u && u.getIdToken ? u.getIdToken() : null;
+  } catch { return null; }
 }
 
 export { openRecordDeployment, recordParams, shellToken };
