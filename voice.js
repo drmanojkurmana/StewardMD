@@ -228,6 +228,17 @@
     // On-device-only callers (the ambient consultation scribe) must never ship audio to the cloud
     // recorder below: if no on-device engine was available, report unavailable and stop.
     if (opts.noCloud) { if (opts.onError) opts.onError("stt-unavailable"); return null; }
+    // The clinician chose the Local (or KB-only) answer engine (2026-09-11): audio may not go to a
+    // cloud AI transcriber either, whatever the network says. Same signal as noCloud, named so the
+    // UI can say WHY and offer Clinical dictation (Whisper, on the phone) instead.
+    try {
+      var ME = window.SMD_MAIK_ENGINE;
+      if (ME && ME.cloudAllowed && !ME.cloudAllowed()) {
+        // "offline" = the clinician chose Cloud and simply has no connection; do not tell them to switch.
+        if (opts.onError) opts.onError((ME.policyReason && ME.policyReason() === "offline") ? "stt-unavailable-offline" : "stt-unavailable-local");
+        return null;
+      }
+    } catch (e) {}
     // 3) AI STT fallback — record mic, transcribe on stop via /api/ai/transcribe.
     if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia && window.MediaRecorder) {
       var chunks = [], mr = null, stream = null, stopped = false;
@@ -500,6 +511,9 @@
             // the generic fallback. Every code this file can emit now names itself: the Rx pad used
             // to keep a SECOND copy of this mapping, and two copies drift.
             err === "stt-unavailable" ? "Dictation isn't available on this build of the app." :
+            // Local answer engine selected: audio may not go to a cloud transcriber (2026-09-11).
+            err === "stt-unavailable-local" ? "Cloud dictation is off while the on-device answer engine is selected. Use Clinical dictation (on the phone), or switch the answer engine to MaiK Cloud in Settings." :
+            err === "stt-unavailable-offline" ? "No connection for cloud dictation. Use Clinical dictation (on the phone) until the network is back." :
             "Couldn't capture audio — tap to try again.");
         },
         onState: onEngineState
@@ -526,7 +540,7 @@
       (window.SMD_AI && window.SMD_AI.extract ? window.SMD_AI.extract(transcript, kind, catalog) : Promise.resolve({ error: "no-ai" }))
         .then(function (res) {
           extractBtn.textContent = "Extract & fill";
-          if (!res || res.error) { reviewEl.innerHTML = '<div class="smdv-err">' + esc(errMsg(res && res.error)) + '</div>'; extractBtn.disabled = false; return; }
+          if (!res || res.error) { reviewEl.innerHTML = '<div class="smdv-err">' + esc((res && res.message && (res.error === "LOCAL_CAPABILITY_REQUIRED" || res.error === "kb-only")) ? res.message : errMsg(res && res.error)) + '</div>'; extractBtn.disabled = false; return; }
           if (target === "reasoning") reviewReasoning(res, catalog, reviewEl, opts);
           else reviewIcu(res, kind, opts);
         });

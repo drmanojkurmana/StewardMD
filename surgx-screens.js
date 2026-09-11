@@ -1048,6 +1048,39 @@
     }
   }
 
+  /* Dictation -> fields, through SMD_AI.extract("surgx-note"). The answer-engine chooser decides
+   * local or cloud (or refuses with a named reason). applyExtraction() in surgx-model.js is the
+   * ONLY path from a model's output into a note: schema, never-AI-fillable, confirmed-field and
+   * numeric guards, in that order. Everything that survives is amber until the surgeon confirms it. */
+  function structureNote() {
+    var n = state.note, schema = state.noteSchema, mm = M();
+    if (!n || !schema || !mm || !mm.applyExtraction) return;
+    var ta = document.getElementById("sgxDictation");
+    var text = String((ta && ta.value) || "").trim();
+    n.dictation = text;
+    if (!text) { toast("Type or paste what you did first."); return; }
+    var AI = window.SMD_AI;
+    if (!(AI && AI.extract)) { toast("MaiK is not available on this build."); return; }
+    var allowed = [];
+    (schema.sections || []).forEach(function (sec) { (sec.fields || []).forEach(function (f) { if (f && f.k && f.aiFillable !== false) allowed.push({ k: f.k, label: f.label || f.k }); }); });
+    n.structureNote = "Structuring your dictation…"; render();
+    AI.extract(text, "surgx-note", { allowedFields: allowed, noteType: schema.typeId || schema.title || "operative" }).then(function (r) {
+      if (state.note !== n) return;
+      if (!r || r.error) {
+        n.structureNote = (r && r.message) || (r && r.error === "quota" ? "MaiK limit reached for today." : "Could not structure this dictation.");
+        render(); return;
+      }
+      var res = mm.applyExtraction(schema.sections, n.values, n.provenance, r.fields || {}, text, "ai");
+      n.values = res.values; n.provenance = res.provenance;
+      n.audit = n.audit || []; n.audit.push({ a: "structure", applied: res.applied.map(function (x) { return x.k; }), rejected: res.rejected.length, engine: r.engine || "cloud" });
+      var parts = [res.applied.length + " field" + (res.applied.length === 1 ? "" : "s") + " filled from your dictation, amber until you confirm each"];
+      if (res.fabricated.length) parts.push(res.fabricated.length + " dropped for a number you did not say");
+      if ((r.dropped || []).length) parts.push(r.dropped.length + " not allowed for AI");
+      n.structureNote = parts.join(". ") + ".";
+      haptic("light"); render();
+    }, function () { if (state.note === n) { n.structureNote = "Could not structure this dictation."; render(); } });
+  }
+
   function createNote(typeId, templateId) {
     var schema = NS().schemaFor(typeId, templateId);
     if (!schema) { toast("Unknown note type"); return; }
@@ -1316,6 +1349,17 @@
       body += "</div>";
     });
 
+    if (!n.finalized) {
+      // Dictation -> fields (2026-09-11). Until now the server's "surgx-note" structuring had no
+      // client caller at all. The text is kept on the note so a re-render does not lose it.
+      body += '<div class="sgx-card"><h4>Dictation</h4>' +
+        '<div class="n">Type or paste what you did. MaiK only decides which field each thing you said belongs in. It never adds a fact, ' +
+        'and a field with a number you did not say is dropped, not corrected.</div>' +
+        '<textarea id="sgxDictation" rows="4" placeholder="e.g. Under GA, supine, right subcostal incision. Findings: ...">' + esc(n.dictation || "") + '</textarea>' +
+        '<div class="sgx-btnrow"><button class="sgx-btn" data-sgx="notestructure">' + ic("auto_awesome") + " Structure with MaiK</button></div>" +
+        (n.structureNote ? '<div class="n">' + esc(n.structureNote) + "</div>" : "") +
+        "</div>";
+    }
     body += '<div class="sgx-card"><h4>Preview</h4><pre class="sgx-pre" id="sgxNotePreview">' +
       esc(mm.renderNoteText(schema.sections, n.values, n.provenance, {
         title: schema.title, finalized: n.finalized, finalizedBy: n.finalizedBy, finalizedAt: n.finalizedAt
@@ -1645,6 +1689,7 @@
         return;
       }
       if (act === "mknote") { createNote(t.getAttribute("data-t"), t.getAttribute("data-tpl")); return; }
+      if (act === "notestructure") { structureNote(); return; }
       if (act === "confirm") {
         var fk = t.getAttribute("data-k");
         if (!state.note) return;

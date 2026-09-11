@@ -3950,6 +3950,8 @@
     // Fire-and-forget from the UI; never blocks or alters an answer. Inert until deliberately enabled.
     verifyGrounding: function (text, pkg) {
       try { if (localStorage.getItem("smd_maik_verify") !== "1") return Promise.resolve({ checked: false }); } catch (e) { return Promise.resolve({ checked: false }); }
+      // A server-side model check of the answer text: a cloud AI call, so it honours the engine policy.
+      try { if (window.SMD_MAIK_ENGINE && window.SMD_MAIK_ENGINE.cloudAllowed && !window.SMD_MAIK_ENGINE.cloudAllowed()) return Promise.resolve({ checked: false }); } catch (e) {}
       var b = aiBase(); if (!b || !aiOn() || !text) return Promise.resolve({ checked: false });
       return aiHeaders().then(function (h) { return fetch(b + "/verify", { method: "POST", headers: h, body: JSON.stringify({ text: text, package: pkg || {} }) }); }).then(function (r) { return r.json(); }).catch(function () { return { checked: false }; });
     },
@@ -4337,10 +4339,23 @@
     },
     // MaiK Scribe — extract structured data from a spoken transcript. kind ∈ ICU kinds → { fields };
     // "reasoning" (with catalog=[{key,label}]) → { findings, patient?, unmatched }. Never invents.
+    // Whole-timeline patient summary (module "summary", 15/day). Was a raw fetch in opd-emr.js, which
+    // is exactly how it slipped past the engine chooser; as an SMD_AI method it is routed like the rest.
+    summary: function (text) {
+      var b = aiBase(); if (!b) return Promise.resolve({ error: "ai-off" });
+      var t = String(text == null ? "" : text).slice(0, 16000).trim(); if (!t) return Promise.resolve({ error: "no-text" });
+      return raceTimeout(aiHeaders().then(function (h) { return fetch(b + "/summary", { method: "POST", headers: h, credentials: "same-origin", body: JSON.stringify({ text: t }) }); })
+        .then(function (r) { return r.json().then(function (d) { return (r.ok && d && d.text) ? { text: d.text, mode: "summary" } : ((d && d.reason === "module-daily") ? { error: "quota", reason: "module-daily", over: true, message: d.message } : { error: (d && d.error) || "server" }); }, function () { return { error: "server" }; }); })
+        .catch(function (e) { return { error: String(e && e.message || e) }; }), 60000, { error: "timeout" });
+    },
+    // `catalog` is the finding catalog (an array) for kind "reasoning"; an OBJECT carries per-kind
+    // options instead ({ allowedFields, noteType } for "surgx-note"), merged into the body as-is.
     extract: function (transcript, kind, catalog) {
       var b = aiBase(); if (!b) return Promise.resolve({ error: "ai-off" });
       var t = String(transcript == null ? "" : transcript).slice(0, 8000); if (!t) return Promise.resolve({ error: "no-text" });
-      var body = { transcript: t, kind: kind }; if (catalog) body.catalog = catalog;
+      var body = { transcript: t, kind: kind };
+      if (Array.isArray(catalog)) body.catalog = catalog;
+      else if (catalog && typeof catalog === "object") { for (var ok in catalog) if (Object.prototype.hasOwnProperty.call(catalog, ok) && !(ok in body)) body[ok] = catalog[ok]; }
       return raceTimeout(aiHeaders().then(function (h) { return fetch(b + "/extract", { method: "POST", headers: h, body: JSON.stringify(body) }); })
         .then(function (r) { if (r.status === 402 || r.status === 429) return r.json().then(function (j) { return { error: "quota", needsPro: r.status === 402, message: (j && j.message) || "" }; }, function () { return { error: "quota", needsPro: r.status === 402 }; }); if (!r.ok) return { error: "server" }; return r.json(); })
         .catch(function (e) { return { error: String(e && e.message || e) }; }), 45000, { error: "timeout" });
@@ -4430,7 +4445,10 @@
           if (Object.keys(localFields).length) return { mode: "fields", fields: localFields, lines: lines, source: "on-device", reason: reason };
           return { mode: "lines", lines: lines, reason: reason };
         }
-        if (!visionAiOn() || !online) { diag({ stage: "on-device-only", ocrMs: ocrMs, lines: lines.length, reason: visionAiOn() ? "offline" : "ai-off" }); return onDevice(visionAiOn() ? "offline" : "ai-off"); }
+        // Local / KB-only engine (2026-09-11): the cloud stage is a cloud AI call, so it is off; the
+        // on-device fields ARE the result. Not an error: the deterministic parser did its job.
+        var cloudOk = true; try { cloudOk = !(window.SMD_MAIK_ENGINE && window.SMD_MAIK_ENGINE.cloudAllowed) || window.SMD_MAIK_ENGINE.cloudAllowed(); } catch (e) {}
+        if (!visionAiOn() || !online || !cloudOk) { var why = !cloudOk ? "local-engine" : visionAiOn() ? "offline" : "ai-off"; diag({ stage: "on-device-only", ocrMs: ocrMs, lines: lines.length, reason: why }); return onDevice(why); }
         var scrubbed = redactPHI(text);
         var _tc = Date.now();
         return window.SMD_AI.visionText(scrubbed, kind).then(function (r) {

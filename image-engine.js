@@ -29,8 +29,14 @@
   function setPref(v) { lset(KEY_ENGINE, v === "ai" ? "ai" : "device"); }
   function getConsent() { return lget(KEY_CONSENT) === "true"; }
   function setConsent(on) { if (on) lset(KEY_CONSENT, "true"); else lrem(KEY_CONSENT); }
-  // AI Vision availability (matches reasoning.js visionAiOn; default on = current beta behavior).
-  function aiAvailable() { try { return lget("smd_ai_vision") !== "0"; } catch (e) { return true; } }
+  // AI Vision availability (matches reasoning.js visionAiOn; default on = current beta behavior),
+  // AND the answer-engine policy (2026-09-11): with the Local or KB-only engine selected, AI Vision
+  // is a cloud AI call and is therefore not available, network or no network. Every dialog and
+  // recommendation in this file reads availability through here, so one gate covers them all.
+  function aiAvailable() {
+    try { if (window.SMD_MAIK_ENGINE && window.SMD_MAIK_ENGINE.cloudAllowed && !window.SMD_MAIK_ENGINE.cloudAllowed()) return false; } catch (e) {}
+    try { return lget("smd_ai_vision") !== "0"; } catch (e) { return true; }
+  }
   function deviceOcrAvailable() { return !!(window.SMD_NATIVE && window.SMD_NATIVE.ocr); }
   // Pro entitlement — delegates to the app's single source of truth (SMD_PRO). For LABELLING
   // only here (AI Vision never hard-blocks; consent is the real gate). Beta/test allowed.

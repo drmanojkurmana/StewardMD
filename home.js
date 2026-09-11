@@ -5412,7 +5412,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
           think.innerHTML = '<div class="maik-attr" style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;font:600 11px var(--sans,system-ui);color:var(--slate-soft,#94a3b8);margin-bottom:6px">' + svg("spark", "smd-ico") + '<span>MaiK Evidence Review</span><span style="opacity:.7">· trusted literature, verify independently</span>' + meta + '</div>' + bd + srcHTML;
           try { _maikTurns.push({ q: q, a: String(r.text).replace(/\s+/g, " ").slice(0, 320) }); if (_maikTurns.length > 8) _maikTurns.shift(); } catch (e) {}
         } else {
-          think.innerHTML = '<div class="maik-welcome">Evidence review is unavailable right now' + ((r && r.reason === "quota") ? ' (usage limit reached)' : '') + '. Please verify against a reference source.</div>';
+          think.innerHTML = '<div class="maik-welcome">' + ((r && r.error === "LOCAL_CAPABILITY_REQUIRED" && r.message) ? maikEscH(r.message) : 'Evidence review is unavailable right now') + ((r && r.reason === "quota") ? ' (usage limit reached)' : '') + '. Please verify against a reference source.</div>';
         }
         try { scroll(); } catch (e) {}
         try { _maikBodyHTML = body.innerHTML; maikSaveThread(_maikBodyHTML); } catch (e) {}
@@ -5522,6 +5522,17 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
    * maik-engine.js localAnswer() maps any rejection to { error: <message> }. */
   function maikErrorNotice(r) {
     var e = String((r && r.error) || "");
+    // The on-device engine refused for a NAMED reason (2026-09-11): what is missing, and what
+    // unlocks it on this phone. Never a silent cloud call; cloud is offered as an explicit choice.
+    if (e === "LOCAL_CAPABILITY_REQUIRED") {
+      var recs = (r.recommendedModels || []).slice(0, 3).map(function (m) {
+        return "<b>" + maikEscH(m.label) + "</b> (" + maikEscH(m.size || "") + (m.installed ? ", installed" : "") + (m.level === "warn" ? ", may run slowly" : "") + ")";
+      }).join(", ");
+      return maikEscH(r.message || "This needs a different on-device model.") +
+        (recs ? "<br><br>Unlocks on this phone with: " + recs + ". Open <b>Settings, AI Assistant, Answer engine</b> to download or select one." : "") +
+        (r.offline ? "" : "<br><br>Or tap the model name at the top and choose <b>MaiK Cloud</b>.");
+    }
+    if (e === "kb-only") return maikEscH(r.message || "KB-only mode makes no AI calls.");
     var mem = e.match(/^not-enough-memory:(.+)$/);
     if (mem) {
       return "There is not enough free memory to load the on-device model right now (" + maikEscH(mem[1]) + ").<br><br>" +
@@ -5551,6 +5562,21 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       // until the next turn cleared it ("tapped First-line treatment, nothing; sent Hi, then it worked").
       _maikBusy = false; maikSetSendMode(false);
       if (r && r.error === "quota") { think.innerHTML = '<div class="maik-welcome">' + (r.reason === "module-daily" && r.message ? String(r.message) : r.reason === "rate" ? 'One moment — you’re asking questions quickly. Please try again in a few seconds.' : 'MaiK usage limit reached for now. Clinical reasoning, calculators, and reference tools remain available.') + '</div>'; return; }
+      if (r && r.error === "LOCAL_CAPABILITY_REQUIRED") {
+        // Explicit cloud alternative (owner, 2026-09-11): the chip CHANGES the engine, it does not
+        // sneak one question past the clinician's choice.
+        think.innerHTML = '<div class="maik-welcome">' + maikErrorNotice(r) + '</div>';
+        if (!r.offline) {   // offline: they already chose Cloud; the chip would re-send into the same refusal
+          var cloudBtn = document.createElement("button"); cloudBtn.className = "maik-chip"; cloudBtn.style.marginTop = "8px"; cloudBtn.textContent = "Switch to MaiK Cloud and ask again";
+          cloudBtn.addEventListener("click", function () {
+            try { if (window.SMD_MAIK_ENGINE && SMD_MAIK_ENGINE.setPref) SMD_MAIK_ENGINE.setPref("cloud"); } catch (e) {}
+            try { qEl.value = question || ""; } catch (e) {}
+            send();
+          });
+          think.appendChild(cloudBtn);
+        }
+        scroll(); return;
+      }
       if (r && r.error === "ai-off") {
         think.innerHTML = '<div class="maik-welcome">MaiK is switched off. Turn it on to get grounded clinical answers.</div>';
         var onBtn = document.createElement("button"); onBtn.className = "maik-chip"; onBtn.style.marginTop = "8px"; onBtn.textContent = "Turn on MaiK";

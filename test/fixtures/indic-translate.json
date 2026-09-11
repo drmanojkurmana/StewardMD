@@ -1,0 +1,28 @@
+[
+  { "id": "te-01", "lang": "te", "text": "రోగికి జ్వరం 3 రోజుల నుండి ఉంది, temperature 101 F ఉంది.", "expect": ["fever", "3", "days", "temperature", "101", "F"], "numbers": ["3", "101"] },
+  { "id": "te-02", "lang": "te", "text": "BP 140/90 undi, pulse 88 undi, patient ki paracetamol 500 mg TDS ivvandi.", "expect": ["BP", "140", "90", "pulse", "88", "paracetamol", "500", "mg", "TDS"], "numbers": ["140", "90", "88", "500"] },
+  { "id": "te-03", "lang": "te", "text": "మధుమేహం ఉంది, HbA1c 8.2 vachindi, metformin 500 mg BD start cheyandi.", "expect": ["HbA1c", "8.2", "metformin", "500", "mg", "BD"], "numbers": ["8.2", "500"] },
+  { "id": "te-04", "lang": "te", "text": "SpO2 96 percent undi, amoxicillin 500 mg TDS 5 rojula paatu ivvandi.", "expect": ["SpO2", "96", "amoxicillin", "500", "mg", "TDS", "5", "days"], "numbers": ["96", "500", "5"] },
+  { "id": "te-05", "lang": "te", "text": "gunde nokka undi, BP 150/95, amlodipine 5 mg OD start cheyandi.", "expect": ["chest pain", "BP", "150", "95", "amlodipine", "5", "mg", "OD"], "numbers": ["150", "95", "5"] },
+  { "id": "te-06", "lang": "te", "text": "kadupu noppi 2 rojula nundi undi, pantoprazole 40 mg OD ivvandi.", "expect": ["abdominal pain", "2", "days", "pantoprazole", "40", "mg", "OD"], "numbers": ["2", "40"] },
+  { "id": "te-07", "lang": "te", "text": "cholesterol ekkuva undi, atorvastatin 10 mg OD raatra pettandi, follow up 2 weeks lo.", "expect": ["cholesterol", "atorvastatin", "10", "mg", "OD", "night", "follow up", "2", "weeks"], "numbers": ["10", "2"] },
+  { "id": "te-08", "lang": "te", "text": "type 2 diabetes patient ki insulin 10 units రాత్రి ivvandi, blood sugar fasting 180 undi.", "expect": ["type 2 diabetes", "insulin", "10", "units", "night", "blood sugar", "fasting", "180"], "numbers": ["2", "10", "180"] },
+
+  { "id": "hi-01", "lang": "hi", "text": "मरीज़ को 3 दिन से बुखार है, temperature 101 F है, BP 140/90 है.", "expect": ["fever", "3", "days", "temperature", "101", "F", "BP", "140", "90"], "numbers": ["3", "101", "140", "90"] },
+  { "id": "hi-02", "lang": "hi", "text": "pulse 88 hai, paracetamol 500 mg TDS 2 din ke liye दें.", "expect": ["pulse", "88", "paracetamol", "500", "mg", "TDS", "2", "days"], "numbers": ["88", "500", "2"] },
+  { "id": "hi-03", "lang": "hi", "text": "मधुमेह है, HbA1c 8.2 आया है, metformin 500 mg BD शुरू करें.", "expect": ["diabetes", "HbA1c", "8.2", "metformin", "500", "mg", "BD"], "numbers": ["8.2", "500"] },
+  { "id": "hi-04", "lang": "hi", "text": "SpO2 96 percent hai, amoxicillin 500 mg TDS 5 din ke liye दें.", "expect": ["SpO2", "96", "amoxicillin", "500", "mg", "TDS", "5", "days"], "numbers": ["96", "500", "5"] },
+  { "id": "hi-05", "lang": "hi", "text": "सीने में दर्द है, BP 150/95 है, amlodipine 5 mg OD शुरू करें.", "expect": ["chest pain", "BP", "150", "95", "amlodipine", "5", "mg", "OD"], "numbers": ["150", "95", "5"] },
+  { "id": "hi-06", "lang": "hi", "text": "pet mein dard 2 din se hai, pantoprazole 40 mg OD दें.", "expect": ["abdominal pain", "2", "days", "pantoprazole", "40", "mg", "OD"], "numbers": ["2", "40"] },
+  { "id": "hi-07", "lang": "hi", "text": "कोलेस्ट्रॉल ज़्यादा है, atorvastatin 10 mg OD रात को दें, 2 हफ़्ते में follow up.", "expect": ["cholesterol", "atorvastatin", "10", "mg", "OD", "night", "follow up", "2", "weeks"], "numbers": ["10", "2"] },
+  { "id": "hi-08", "lang": "hi", "text": "type 2 diabetes है, insulin 10 units रात को दें, fasting sugar 180 है.", "expect": ["type 2 diabetes", "insulin", "10", "units", "night", "fasting", "sugar", "180"], "numbers": ["2", "10", "180"] },
+
+  { "id": "mix-01", "lang": "mixed", "text": "Patient ko fever hai 3 din se, temperature 101 F, BP check karo 140/90.", "expect": ["fever", "3", "days", "temperature", "101", "F", "BP", "140", "90"], "numbers": ["3", "101", "140", "90"] },
+  { "id": "mix-02", "lang": "mixed", "text": "Pulse 88 hai, paracetamol 500 mg TDS de do, 2 dino ke liye.", "expect": ["pulse", "88", "paracetamol", "500", "mg", "TDS", "2", "days"], "numbers": ["88", "500", "2"] },
+  { "id": "mix-03", "lang": "mixed", "text": "Diabetes ka case hai, HbA1c 8.2 aaya hai, metformin 500 mg BD start karo.", "expect": ["diabetes", "HbA1c", "8.2", "metformin", "500", "mg", "BD"], "numbers": ["8.2", "500"] },
+  { "id": "mix-04", "lang": "mixed", "text": "SpO2 96 percent hai, amoxicillin 500 mg TDS 5 din ke liye de do.", "expect": ["SpO2", "96", "amoxicillin", "500", "mg", "TDS", "5", "days"], "numbers": ["96", "500", "5"] },
+  { "id": "mix-05", "lang": "mixed", "text": "Chest pain hai, BP 150/95 hai, amlodipine 5 mg OD start karo.", "expect": ["chest pain", "BP", "150", "95", "amlodipine", "5", "mg", "OD"], "numbers": ["150", "95", "5"] },
+  { "id": "mix-06", "lang": "mixed", "text": "Abdomen mein pain hai 2 din se, pantoprazole 40 mg OD de do.", "expect": ["abdominal pain", "2", "days", "pantoprazole", "40", "mg", "OD"], "numbers": ["2", "40"] },
+  { "id": "mix-07", "lang": "mixed", "text": "Cholesterol high hai, atorvastatin 10 mg OD raat ko de do, 2 weeks mein follow up.", "expect": ["cholesterol", "atorvastatin", "10", "mg", "OD", "night", "follow up", "2", "weeks"], "numbers": ["10", "2"] },
+  { "id": "mix-08", "lang": "mixed", "text": "Type 2 diabetes hai, insulin 10 units raat ko de do, fasting sugar 180 hai.", "expect": ["type 2 diabetes", "insulin", "10", "units", "night", "fasting", "sugar", "180"], "numbers": ["2", "10", "180"] }
+]
