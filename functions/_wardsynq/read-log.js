@@ -41,6 +41,17 @@ import { ReadLog, READ_KIND, RETENTION_DAYS } from "../../wardsynq/wardsynq-read
 const str = (v) => (v == null ? "" : String(v).trim());
 const TYPE = "ClinicalRead";
 
+/* The default (90 days, wardsynq-readlog.js's own RETENTION_DAYS) is well below what HIPAA
+ * requires for a clinical audit record (6 years) - it is what every hospital already runs on, not
+ * an endorsement. A hospital sets its own retention via wardsynqConfig().readLogRetentionDays
+ * (_opd_org.js); leaving it unset changes nothing for hospitals that never configured it, because
+ * shortening or lengthening retention for an existing hospital is their decision, not ours. */
+function retentionDaysFor(ctx) {
+  const cfg = ctx && ctx.wsqCfg;
+  const d = cfg && Number(cfg.readLogRetentionDays);
+  return Number.isFinite(d) && d > 0 ? d : undefined;
+}
+
 const slug = (v) => str(v).toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
 
 /**
@@ -128,7 +139,7 @@ async function recordRead(request, env, ctx) {
    * copy of its rules, and the two would drift the first time either changed. */
   let entry;
   try {
-    entry = new ReadLog().record({
+    entry = new ReadLog({ retentionDays: retentionDaysFor(ctx) }).record({
       valueId, version, value: ctx.value, by: resolved.actor.id, kind,
       patientId, at, context: str(ctx.context) || null,
     });
@@ -146,7 +157,7 @@ async function recordRead(request, env, ctx) {
       ...base, ok: true, written: 1, readId: id, valueId, valueVersion: version, kind,
       by: resolved.actor.id, at, recordVersion: out.record.version,
       purpose: entry.purpose,
-      note: `Recorded so this reader can be told if the value is later corrected. Kept for ${RETENTION_DAYS} days.`,
+      note: `Recorded so this reader can be told if the value is later corrected. Kept for ${retentionDaysFor(ctx) || RETENTION_DAYS} days.`,
       actor: resolved.actor.id,
     };
   } catch (e) {
@@ -183,7 +194,7 @@ async function readersToNotify(request, env, ctx) {
   /* Rehydrated into the module, which owns every rule about which reads count. `prune` enforces the
    * retention on the way in, so a read past the window is not returned even though its row survives -
    * the bound is on what the log will ANSWER with, not only on what a cleanup job got round to. */
-  const log = new ReadLog();
+  const log = new ReadLog({ retentionDays: retentionDaysFor(ctx) });
   log.entries = (rows || []).filter(Boolean).map((r) => ({
     // Back to the module's own field name. `r.version` is the RECORD's version and is not this.
     valueId: r.valueId, version: r.valueVersion, value: r.value, by: r.by, kind: r.kind,

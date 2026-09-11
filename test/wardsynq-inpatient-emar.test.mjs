@@ -3383,6 +3383,18 @@ test("THERE IS NO 'WHAT DID THIS PERSON READ' QUERY, and retention is enforced o
   assert.deepEqual(stale.people, [], "a read log that grows forever becomes a dossier");
   assert.equal(stale.outsideRetention, 1, "and it says how many it would not answer with");
   assert.ok(await RECORD.byPatient(TENANT_ROW.id, "ClinicalRead", adm.patientId), "the row itself is untouched");
+
+  // A hospital that has configured its OWN retention (HIPAA needs 6 years; the built-in default
+  // above is only 90) must actually get a wider window - functions/_opd_org.js wardsynqConfig's
+  // readLogRetentionDays, threaded through to wardsynq-readlog.js. Same read, same ~8-month gap
+  // that was outside the 90-day default above; 400 days keeps it.
+  const org = docs.get(`q_orgs/${ORG}`);
+  org.fields.wardsynq = { ...org.fields.wardsynq, readLogRetentionDays: 400 };
+  docs.set(`q_orgs/${ORG}`, org);
+  const kept = await as(NURSE, `/ward/readers?orgId=${ORG}&patientId=${adm.patientId}&valueId=old-value&supersededVersion=1&correctedAt=${encodeURIComponent("2026-09-07T08:00:00.000Z")}`);
+  assert.equal(kept.people.length, 1, "a hospital's own longer retention must actually widen what readersToNotify answers with");
+  assert.equal(kept.people[0].person, idFor(NURSE));
+  assert.ok(!kept.outsideRetention, "not dropped as outside retention when the hospital configured a wider window");
 });
 
 /* ---- the early warning score ---------------------------------------------------------------------- */

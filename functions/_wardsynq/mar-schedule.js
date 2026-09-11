@@ -121,11 +121,101 @@ function timesFor(key, overrides) {
 
 /* The hospital's wall clock. An offset in minutes rather than a timezone name: the standard times
  * are wall-clock, and turning "08:00 on the 9th" into an instant needs the offset that applies then.
- * ponytail: a fixed offset is exact for India (no DST) and for every fixed-offset site; a site that
- * observes DST needs a real tz database here, and should not use this until it has one. */
+ * A fixed offset is exact for India (no DST) and for every fixed-offset site, and it is still the
+ * whole story for a hospital that has configured nothing else - which is every hospital that existed
+ * before the zone support below did, so this path must keep computing exactly what it always did.
+ *
+ * A site that observes DST cannot be described by one number at all: -300 puts every named dose an
+ * hour late for eight months of the year and -240 an hour early for the other four. Such a site
+ * configures a `timeZone` (an IANA name) as well, and the offset is then resolved PER SLOT INSTANT
+ * from Intl's own tz data. `utcOffsetMinutes` remains the fallback for a zone Intl cannot read. */
 function slotInstant(y, m, d, hhmm, offsetMinutes) {
   const [hh, mm] = hhmm.split(":").map(Number);
   return Date.UTC(y, m, d, hh, mm) - offsetMinutes * 60000;
+}
+
+/* One formatter per zone, built once. `new Intl.DateTimeFormat` with an unknown zone THROWS, and a
+ * typo in a hospital's configuration must never take the medication round down, so the throw is
+ * caught here and the zone cached as unusable; every caller then falls back to the numeric offset. */
+const ZONE_FORMATTERS = new Map();
+function zoneFormatter(timeZone) {
+  const tz = str(timeZone);
+  if (!tz) return null;
+  if (ZONE_FORMATTERS.has(tz)) return ZONE_FORMATTERS.get(tz);
+  let f = null;
+  try {
+    f = new Intl.DateTimeFormat("en-US", {
+      timeZone: tz, hourCycle: "h23",
+      year: "numeric", month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit",
+    });
+    f.formatToParts(0);   // a name Intl accepts but cannot format is not a zone this file can use
+  } catch { f = null; }
+  ZONE_FORMATTERS.set(tz, f);
+  return f;
+}
+
+/**
+ * PURE. The zone's UTC offset in minutes AT a given instant, or null when the zone is unusable.
+ *
+ * Nothing in the platform will simply tell you a zone's offset, so this asks the only question Intl
+ * does answer: what does this instant read as, there? Formatting the instant in the zone gives its
+ * wall clock; reading that wall clock back as though it were UTC and subtracting the instant gives
+ * the offset in force AT THAT MOMENT - which is the entire point, because in a DST zone it differs
+ * between two instants six months apart, and between two instants one hour apart.
+ */
+function zoneOffsetAt(timeZone, instantMs) {
+  const f = zoneFormatter(timeZone);
+  if (!f) return null;
+  const p = {};
+  for (const part of f.formatToParts(instantMs)) p[part.type] = part.value;
+  if (!p.year || !p.month || !p.day || p.hour === undefined || p.minute === undefined) return null;
+  // h23 should never emit 24, but a runtime that did would otherwise move the day by a whole hour.
+  const asUTC = Date.UTC(Number(p.year), Number(p.month) - 1, Number(p.day), Number(p.hour) % 24, Number(p.minute));
+  if (!Number.isFinite(asUTC)) return null;
+  return Math.round((asUTC - instantMs) / 60000);
+}
+
+/** Why a slot is not at the time the ward's policy names. Stated on the slot, never inferred. */
+const SPRING_FORWARD = "clock_skipped_forward";
+
+/**
+ * PURE. The instant at which the wall clock reads `hhmm` on y-m-d in `timeZone`.
+ * Returns { at, adjustedFrom?, adjustedTo?, reason? }, or null when the zone is unusable.
+ *
+ * Two guesses, because the offset needed to convert a wall clock is the offset in force at the
+ * instant the conversion produces, which is not known until it has been produced. Guess with the
+ * offset at the nominal instant, then re-check with the offset actually in force there.
+ *
+ * SPRING FORWARD - the wall clock never happens (02:30, where 02:00-03:00 is skipped). No instant
+ * reads 02:30, so neither guess round-trips. The dose is SHIFTED FORWARD by the size of the gap -
+ * 02:30 becomes 03:30, the first instant past it - rather than dropped: on the one night a year the
+ * clock moves, a dose given an hour off its policy time is a far smaller harm than a missed one.
+ * It is never silent. `adjustedFrom`/`adjustedTo` ride back with the slot and out to the ward,
+ * because a nurse reading a time that is not the one the policy names must be told why.
+ *
+ * FALL BACK - the wall clock happens twice (01:30 EDT, then 01:30 EST an hour later). The FIRST
+ * occurrence wins, and only it: one dose, not two and not zero. First because it is the one the
+ * interval since the previous dose actually points at, and because taking the earlier of the two
+ * leaves every later dose that day at its normal spacing. It needs no flag - the time a nurse reads
+ * is the time the policy names; only which of two identical clock readings it is has been decided.
+ */
+function zonedSlotInstant(y, m, d, hhmm, timeZone) {
+  const [hh, mm] = hhmm.split(":").map(Number);
+  const wall = Date.UTC(y, m, d, hh, mm);
+  const first = zoneOffsetAt(timeZone, wall);
+  if (first == null) return null;
+  const at = wall - first * 60000;
+  const actual = zoneOffsetAt(timeZone, at);
+  if (actual == null) return null;
+  if (actual === first) return { at };                   // one offset applies; nothing to disambiguate
+  const second = wall - actual * 60000;
+  if (zoneOffsetAt(timeZone, second) !== actual) {
+    // The re-checked instant reads back as a DIFFERENT wall clock: the requested one does not exist.
+    const shifted = new Date(at + actual * 60000);
+    const to = String(shifted.getUTCHours()).padStart(2, "0") + ":" + String(shifted.getUTCMinutes()).padStart(2, "0");
+    return { at, adjustedFrom: hhmm, adjustedTo: to, reason: SPRING_FORWARD };
+  }
+  return { at: second };
 }
 
 /**
@@ -139,6 +229,9 @@ function slotInstant(y, m, d, hhmm, offsetMinutes) {
 function scheduleSlots(order, opts) {
   const o = opts || {};
   const offset = Number.isFinite(o.offsetMinutes) ? o.offsetMinutes : 330;   // +05:30, the app's home ward
+  /* A zone the runtime cannot read is not an error the ward should ever see. It falls back to the
+   * offset, which is what every hospital without a zone is already running on. */
+  const zone = zoneFormatter(o.timeZone) ? str(o.timeZone) : null;
   const spec = parseFrequency(order && order.frequency);
   const out = { due: [], truncated: false };
   if (!spec || spec.kind === "prn") return out;
@@ -180,15 +273,32 @@ function scheduleSlots(order, opts) {
   // Walk calendar days across the window in the hospital's own clock, one day either side so a slot
   // near a boundary is not lost to the offset.
   const dayMs = 86400000;
+  const adjusted = [];
   for (let day = from - dayMs; day < to + dayMs && !out.truncated; day += dayMs) {
-    const local = new Date(day + offset * 60000);
+    // Which calendar day this is, in the hospital's clock. Read from the zone when there is one, so
+    // the day does not shift by an hour either side of a transition.
+    const dayOffset = zone ? zoneOffsetAt(zone, day) : null;
+    const local = new Date(day + (dayOffset == null ? offset : dayOffset) * 60000);
     const y = local.getUTCFullYear(), m = local.getUTCMonth(), d = local.getUTCDate();
     for (const hhmm of times) {
-      const t = slotInstant(y, m, d, hhmm, offset);
-      if (keep(t) && out.due.indexOf(t) < 0) push(t);
+      const z = zone ? zonedSlotInstant(y, m, d, hhmm, zone) : null;
+      const t = z ? z.at : slotInstant(y, m, d, hhmm, offset);
+      // The dedupe is what keeps a repeated wall clock (fall back) to exactly one dose: the day walk
+      // can reach the same instant twice, and two chart rows an hour apart for one scheduled dose is
+      // a double dose waiting to be given.
+      if (keep(t) && out.due.indexOf(t) < 0) {
+        const before = out.due.length;
+        push(t);
+        if (z && z.adjustedFrom && out.due.length > before) {
+          adjusted.push({ at: t, from: z.adjustedFrom, to: z.adjustedTo, reason: z.reason });
+        }
+      }
     }
   }
   out.due.sort((a, b) => a - b);
+  // Present only when something WAS adjusted: a hospital with no zone, or a zone with no transition
+  // in the window, gets back exactly the object it got before this existed.
+  if (adjusted.length) out.adjusted = adjusted;
   return out;
 }
 
@@ -226,7 +336,7 @@ async function openService(request, env, ctx, need) {
 /**
  * The patient's medication schedule over a window, with each slot's administration state.
  *
- * ctx: { migration, patientId, from, to?, now?, marTimes?, offsetMinutes?, graceMinutes?,
+ * ctx: { migration, patientId, from, to?, now?, marTimes?, offsetMinutes?, timeZone?, graceMinutes?,
  *        actorDeps, recordDeps }
  */
 async function marSchedule(request, env, ctx) {
@@ -254,7 +364,7 @@ async function marSchedule(request, env, ctx) {
   catch (e) { return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), due: [], prn: [], unscheduled: [] }; }
 
   const nowMs = Date.parse(str(ctx.now)) || Date.now();
-  const opts = { from: new Date(fromMs).toISOString(), to: new Date(toMs).toISOString(), times: ctx.marTimes, offsetMinutes: ctx.offsetMinutes };
+  const opts = { from: new Date(fromMs).toISOString(), to: new Date(toMs).toISOString(), times: ctx.marTimes, offsetMinutes: ctx.offsetMinutes, timeZone: ctx.timeZone };
   const due = [], prn = [], unscheduled = [];
   let truncated = false;
 
@@ -270,6 +380,7 @@ async function marSchedule(request, env, ctx) {
 
     const slots = scheduleSlots(o, opts);
     if (slots.truncated) truncated = true;
+    const moved = new Map((slots.adjusted || []).map((a) => [a.at, a]));
     for (const t of slots.due) {
       const dueAt = new Date(t).toISOString();
       const administrationId = medicationAdministrationIdFor(o.id, dueAt);
@@ -281,6 +392,9 @@ async function marSchedule(request, env, ctx) {
         administeredAt: (mar && mar.administeredAt) || null,
         administeredBy: (mar && mar.administeredBy) || null,
         overdue: isOverdue(t, mar && mar.status, nowMs, ctx.graceMinutes),
+        /* Only when this dose is NOT at the time the ward's policy names. A nurse handed a time the
+         * policy does not contain is owed the reason on the same row, not in a release note. */
+        ...(moved.has(t) ? { adjusted: { from: moved.get(t).from, to: moved.get(t).to, reason: moved.get(t).reason } } : {}),
       });
     }
   }
@@ -293,4 +407,4 @@ async function marSchedule(request, env, ctx) {
   };
 }
 
-export { DEFAULT_MAR_TIMES, ALIASES, MAX_SLOTS, MAX_WINDOW_DAYS, parseFrequency, timesFor, scheduleSlots, isOverdue, marSchedule };
+export { DEFAULT_MAR_TIMES, ALIASES, MAX_SLOTS, MAX_WINDOW_DAYS, SPRING_FORWARD, parseFrequency, timesFor, zoneOffsetAt, zonedSlotInstant, scheduleSlots, isOverdue, marSchedule };

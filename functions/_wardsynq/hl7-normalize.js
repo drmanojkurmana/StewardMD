@@ -26,7 +26,12 @@ import { bundle, patient, encounter, condition, allergyIntolerance, observation,
 const str = (v) => (v == null ? "" : String(v).trim());
 
 /** HL7 table 0396 names this server recognises as published vocabularies. Everything else is the sender's own table. */
-const CODING_SYSTEMS = Object.freeze({ LN: "http://loinc.org", SCT: "http://snomed.info/sct", SNM: "http://snomed.info/sct", I10: "http://hl7.org/fhir/sid/icd-10", ICD10: "http://hl7.org/fhir/sid/icd-10", "I10P": "http://hl7.org/fhir/sid/icd-10-cm", RXNORM: "http://www.nlm.nih.gov/research/umls/rxnorm", ATC: "http://www.whocc.no/atc", UCUM: "http://unitsofmeasure.org" });
+// I10P is HL7 table 0396's name for ICD-10-PCS (procedure coding), NOT ICD-10-CM (I10/I10C) -
+// two different code systems. terminology.js has no registered URI for ICD-10-PCS, so it is left
+// UNMAPPED here rather than mapped to the wrong system: that module already carries an unmapped
+// coding verbatim (system, code, display) instead of guessing, which is the honest thing to do
+// until ICD-10-PCS is registered there too.
+const CODING_SYSTEMS = Object.freeze({ LN: "http://loinc.org", SCT: "http://snomed.info/sct", SNM: "http://snomed.info/sct", I10: "http://hl7.org/fhir/sid/icd-10", ICD10: "http://hl7.org/fhir/sid/icd-10", RXNORM: "http://www.nlm.nih.gov/research/umls/rxnorm", ATC: "http://www.whocc.no/atc", UCUM: "http://unitsofmeasure.org" });
 
 /** PURE. An HL7 TS/DTM (YYYYMMDD[HHMM[SS]][+ZZZZ]) into ISO 8601, or null. Never a default. */
 function hl7Date(v) {

@@ -748,7 +748,7 @@
      * recorded as Celsius, or 37.1 as Fahrenheit - and it is invisible to whoever reads the chart
      * next. The value is sent WITH its unit, so the two cannot drift again. */
     { k: "temp", l: "Temp", u: null }, { k: "spo2", l: "SpO₂", u: "%" },
-    { k: "weight", l: "Weight", u: "kg" }
+    { k: "weight", l: "Weight", u: null }
   ];
   /* The two an early warning score cannot do without. They are not numbers, so they sit beside the
    * numeric grid rather than in it - and leaving them blank leaves the score INCOMPLETE, which is
@@ -757,9 +757,13 @@
   /* The unit this hospital's country writes a temperature in, and therefore the unit the server
    * will store it in. st.region comes from GET /ward/list. */
   function tempUnitLabel() { return st.region === "US" ? "°F" : "°C"; }
+  /* The unit this hospital weighs in. A box labelled kg receiving a pounds value is not a display
+   * problem: nothing downstream can tell, the adult plausibility band (25 to 300 kg) passes 154,
+   * and every weight-based infusion rate computed from it is 2.2 times out. */
+  function weightUnitLabel() { return st.region === "US" ? "lb" : "kg"; }
   function vitalsCard() {
     var f = VITALS.map(function (v) {
-      var unit = v.u === null ? tempUnitLabel() : v.u;
+      var unit = v.u !== null ? v.u : v.k === "weight" ? weightUnitLabel() : tempUnitLabel();
       return '<label class="w-f"><span>' + esc(v.l) + ' <i>' + esc(unit) + "</i></span>" +
         '<input id="wv_' + v.k + '" type="text" inputmode="decimal" autocomplete="off"></label>';
     }).join("");
@@ -815,6 +819,10 @@
       return '<li' + (d.overdue ? ' class="overdue"' : "") + '><div class="w-dose-h"><b>' + esc(d.drug) + "</b> <span>" + dose(d.dose) + (d.route ? " &middot; " + esc(d.route) : "") + (d.frequency ? " &middot; " + esc(d.frequency) : "") + "</span></div>" +
         '<div class="w-dose-s"><span class="w-due">' + ms("schedule") + when(d.dueAt) + "</span>" +
         (d.overdue ? '<span class="w-st overdue">overdue</span>' : "") +
+        /* The clock changed and this dose is NOT at the time the ward's policy names. The server
+         * decided that and said so; the screen only repeats it. A nurse handed a time the policy
+         * does not contain, with no reason on the row, would be right to distrust the whole round. */
+        (d.adjusted ? "<small>clock change: " + esc(d.adjusted.from) + " does not exist today, moved to " + esc(d.adjusted.to) + "</small>" : "") +
         '<span class="w-st ' + esc(String(d.status || "notstarted").toLowerCase()) + '">' + esc(d.status || "not started") + "</span>" +
         (d.administeredAt ? "<small>given " + when(d.administeredAt) + "</small>" : "") + "</div>" +
         '<div class="w-dose-a">' + (acts || '<small class="w-empty">No further action.</small>') + "</div></li>";
@@ -4638,6 +4646,11 @@
     var s = st.sel; if (!s) return;
     var v = {}, any = false;
     VITALS.forEach(function (f) { var x = val("wv_" + f.k); if (x) { v[f.k] = x; any = true; } });
+    /* THE UNITS THE BOXES WERE LABELLED WITH travel with the values. Without this the server had to
+     * infer them, and an inference that disagrees with the label on screen is a false number in a
+     * clinical record: 98.6 stored as Celsius, or a pounds weight read as kilograms. */
+    if (v.temp) v.tempUnit = st.region === "US" ? "F" : "C";
+    if (v.weight) v.weightUnit = st.region === "US" ? "lb" : "kg";
     // Not recorded and "no" are different: an empty select writes nothing, "0" records breathing air.
     var o2 = val("wv_o2"); if (o2 !== "") { v.o2 = o2; any = true; }
     var ac = val("wv_acvpu"); if (ac) { v.acvpu = ac; any = true; }

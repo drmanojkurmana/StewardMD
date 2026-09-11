@@ -979,7 +979,7 @@ export async function onRequest(context) {
       const mig = await wsqForcedMigration(env, wOrg);
       if (!mig) return json({ ok: false, error: "not_a_wardsynq_hospital", message: "The inpatient ward is only available for a WardSynQ-native hospital." }, 409, request);
       if (mig.error) return json({ ok: false, error: mig.error }, 409, request);
-      const deps = { migration: mig, actorDeps: wsqActorDeps(env), recordDeps: wsqRecordDeps(env, mig.tenantId), orgId: wOrgId };
+      const deps = { migration: mig, actorDeps: wsqActorDeps(env), recordDeps: wsqRecordDeps(env, mig.tenantId), orgId: wOrgId, wsqCfg };
 
       if (sub === "admit" && method === "POST") {
         const r = await admitPatient(request, env, { ...deps, admission: body.admission || body, emergencyOverride: body.emergencyOverride === true, idempotencyKey: body.idempotencyKey || null });
@@ -1311,8 +1311,9 @@ export async function onRequest(context) {
       }
       if (sub === "vitals" && method === "POST") {
         const r = await recordWardVitals(request, env, { ...deps, encounterId: body.encounterId, patientId: body.patientId, vitals: body.vitals, recordedAt: body.recordedAt,
-          // What a clinician HERE writes a temperature in, when the caller did not say. See _region.js.
-          tempUnit: unitsFor(wOrg && wOrg.region).temp, idempotencyKey: body.idempotencyKey || null });
+          // What a clinician HERE writes a vital in, when the caller did not say. See _region.js.
+          tempUnit: unitsFor(wOrg && wOrg.region).temp, weightUnit: unitsFor(wOrg && wOrg.region).weight,
+          idempotencyKey: body.idempotencyKey || null });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "medication-order" && method === "POST") {
@@ -1421,7 +1422,7 @@ export async function onRequest(context) {
          *   GET /ward/fhir/Patient/{id}/$everything          everything for one patient
          *   GET /ward/fhir?patient={id}[&_type=A,B]          the same, older spelling */
         const fType = parts[2] || "", fId = parts[3] || "", fOp = parts[4] || "", fVid = parts[5] || "";
-        const fctx = { ...deps, base: `${url.origin}/api/queue/ward/fhir`, terminology: (wsqCfg && wsqCfg.terminology) || null, profiles: (wsqCfg && wsqCfg.fhir && wsqCfg.fhir.profiles) || null, inbound: inboundEnabled((wsqCfg && wsqCfg.fhir) || null) };
+        const fctx = { ...deps, base: `${url.origin}/api/queue/ward/fhir`, terminology: (wsqCfg && wsqCfg.terminology) || null, profiles: (wsqCfg && wsqCfg.fhir && wsqCfg.fhir.profiles) || null, inbound: inboundEnabled((wsqCfg && wsqCfg.fhir) || null), region: (wOrg && wOrg.region) || "" };
         /* $validate is an operation, not a write: it files nothing, so it is open to anyone who may
          * read, whether or not the hospital has opened the inbound door. */
         if (method === "POST") {
@@ -1877,6 +1878,9 @@ export async function onRequest(context) {
            * The downtime pack is the PAPER SHEET a ward uses when the system is down, which makes
            * it the single worst place in the product for a wrong dose clock. */
           offsetMinutes: Number.isFinite(wsqCfg && wsqCfg.utcOffsetMinutes) ? wsqCfg.utcOffsetMinutes : undefined,
+          // And the zone, where the hospital has one: the sheet a ward uses when the system is down
+          // must print the same dose times the live round does, on both sides of a clock change.
+          timeZone: (wsqCfg && wsqCfg.timeZone) || undefined,
         });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
@@ -2134,11 +2138,16 @@ export async function onRequest(context) {
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "incident-triage" && method === "POST") {
-        const r = await triageIncident(request, env, { ...deps, incidentId: body.incidentId, likelihood: body.likelihood, triagedBy: body.triagedBy });
+        // triagedBy is the authenticated actor, never the body: an investigation's conclusions
+        // are never anonymous (wardsynq-incidents.js header), and a body field lets a safety
+        // officer file the conclusion under any name they type. A conflicting body.triagedBy is
+        // ignored, same as updatedBy/actor.id elsewhere in this router.
+        const r = await triageIncident(request, env, { ...deps, incidentId: body.incidentId, likelihood: body.likelihood, triagedBy: actor.id || "" });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "incident-rca" && method === "POST") {
-        const r = await recordIncidentRCA(request, env, { ...deps, incidentId: body.incidentId, rootCause: body.rootCause, contributingFactors: body.contributingFactors, method: body.method, conductedBy: body.conductedBy });
+        // conductedBy: the authenticated actor, not the body — same reasoning as triagedBy above.
+        const r = await recordIncidentRCA(request, env, { ...deps, incidentId: body.incidentId, rootCause: body.rootCause, contributingFactors: body.contributingFactors, method: body.method, conductedBy: actor.id || "" });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "incident-capa" && method === "POST") {
@@ -2249,6 +2258,9 @@ export async function onRequest(context) {
           // caller who could pass these could move every dose on the chart by asking differently.
           marTimes: (wsqCfg && wsqCfg.marTimes) || null,
           offsetMinutes: Number.isFinite(wsqCfg && wsqCfg.utcOffsetMinutes) ? wsqCfg.utcOffsetMinutes : undefined,
+          /* The hospital's IANA zone, when it has one. It WINS over the offset for named ward times,
+           * because a site that observes DST has no single correct offset to be given. */
+          timeZone: (wsqCfg && wsqCfg.timeZone) || undefined,
           graceMinutes: Number.isFinite(wsqCfg && wsqCfg.marGraceMinutes) ? wsqCfg.marGraceMinutes : undefined,
         });
         return json(r, r.ok ? 200 : (r.status || 502), request);

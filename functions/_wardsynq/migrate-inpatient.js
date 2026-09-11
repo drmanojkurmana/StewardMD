@@ -408,7 +408,7 @@ async function recordWardVitals(request, env, ctx) {
     // What a clinician in THIS hospital's country writes a temperature in, when the caller did not
     // say. Without it every ward temperature was stored as Fahrenheit: 37.1 charted in an Indian
     // hospital became "37.1 [degF]", which is profound hypothermia. See functions/_region.js.
-    defaultTempUnit: ctx.tempUnit || null,
+    defaultTempUnit: ctx.tempUnit || null, defaultWeightUnit: ctx.weightUnit || null,
   });
   if (!observations.length) return { ...base, ok: true, written: 0, skipped: "no_numeric_values" };
 

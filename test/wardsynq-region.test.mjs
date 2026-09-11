@@ -10,6 +10,7 @@ import assert from "node:assert/strict";
 import {
   regionOf, DEFAULT_REGION, normalizePhone, isValidPhone, formatPhone,
   unitsFor, isValidPrescriberId, prescriberIdLabel, dateOrder, currency,
+  isValidPostcode, postcodeLabel,
 } from "../functions/_region.js";
 
 test("an org with no region is India, so no existing hospital changes meaning", () => {
@@ -69,6 +70,18 @@ test("a US prescriber id is checked offline; an Indian one is taken as written a
   assert.equal(isValidPrescriberId("TSMC-2019-44821", "IN"), true);
   assert.equal(isValidPrescriberId("  ", "IN"), false, "but blank is still nobody");
   assert.equal(isValidPrescriberId("", "US"), false);
+});
+
+test("a postcode's valid length comes from the region - was hardcoded to India's 6 digits", () => {
+  assert.equal(isValidPostcode("530045", "IN"), true);
+  assert.equal(isValidPostcode("90210", "IN"), false, "not 6 digits");
+  assert.equal(isValidPostcode("90210", "US"), true, "a plain 5-digit ZIP");
+  assert.equal(isValidPostcode("90210-1234", "US"), true, "ZIP+4, the shape that used to be impossible to even type");
+  assert.equal(isValidPostcode("902101234", "US"), true, "the hyphen is cosmetic, not the rule");
+  assert.equal(isValidPostcode("530045", "US"), false, "an Indian PIN is not a US ZIP");
+  assert.equal(isValidPostcode("1234", "US"), false, "too short for either shape");
+  assert.match(postcodeLabel("US"), /ZIP/);
+  assert.match(postcodeLabel("IN"), /PIN/i);
 });
 
 test("the form asks for the right thing, and money is not converted", () => {

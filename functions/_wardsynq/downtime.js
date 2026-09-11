@@ -70,13 +70,20 @@ function patientPage(input) {
     .map((o) => {
       const spec = parseFrequency(o.frequency);
       let due = [];
+      let moved = [];
       if (spec && spec.kind !== "prn" && i.from && i.to) {
-        try { due = (scheduleSlots(o, { from: i.from, to: i.to, times: i.marTimes, offsetMinutes: i.offsetMinutes }).due || []).map((t) => new Date(t).toISOString()); }
-        catch { due = []; }
+        try {
+          const s = scheduleSlots(o, { from: i.from, to: i.to, times: i.marTimes, offsetMinutes: i.offsetMinutes, timeZone: i.timeZone });
+          due = (s.due || []).map((t) => new Date(t).toISOString());
+          // A dose the clock change moved off its policy time says so on the printed sheet too. The
+          // pack is read with no system to ask, so an unexplained time here has nowhere to be explained.
+          moved = (s.adjusted || []).map((a) => ({ at: new Date(a.at).toISOString(), from: a.from, to: a.to, reason: a.reason }));
+        } catch { due = []; moved = []; }
       }
       return {
         drug: o.drug, dose: o.dose || null, route: o.route || null, frequency: o.frequency || null,
         asNeeded: !!(spec && spec.kind === "prn"),
+        ...(moved.length ? { adjusted: moved } : {}),
         // An order whose frequency the schedule cannot read gets no times, and SAYS it has none. A
         // blank time column would read as "nothing due today".
         due, scheduleKnown: !!spec && spec.kind !== "prn",
@@ -124,7 +131,7 @@ async function safely(svc, type, patientId) {
 
 /**
  * The downtime pack for a ward. READ ONLY.
- * ctx: { migration, ward?, hours?, now?, marTimes?, offsetMinutes?, actorDeps, recordDeps }
+ * ctx: { migration, ward?, hours?, now?, marTimes?, offsetMinutes?, timeZone?, actorDeps, recordDeps }
  */
 async function downtimePack(request, env, ctx) {
   const mig = ctx.migration;
@@ -185,7 +192,7 @@ async function downtimePack(request, env, ctx) {
       ward: (e.location && e.location.ward) || null, bed: (e.location && e.location.bed) || null,
       admittedAt: e.periodStart || null,
       allergies, orders, criticals, lastVitals,
-      generatedAt, from, to, marTimes: ctx.marTimes, offsetMinutes: ctx.offsetMinutes,
+      generatedAt, from, to, marTimes: ctx.marTimes, offsetMinutes: ctx.offsetMinutes, timeZone: ctx.timeZone,
     }));
   }
   patients.sort((a, b) => String(a.bed || "~").localeCompare(String(b.bed || "~"), undefined, { numeric: true }));
