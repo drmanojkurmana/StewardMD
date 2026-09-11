@@ -27,19 +27,29 @@ const SRC = readFileSync(new URL("../maik-local.js", import.meta.url), "utf8");
 function load({ genMs = 5, hang = false } = {}) {
   const log = [];
   let busy = false, reply = () => "ok";
+  let pendingReject = null;
   function generate(p) {
     if (busy) return Promise.reject(Object.assign(new Error("a generation is already running"), { code: "busy" }));
     busy = true;
     log.push({ start: Date.now(), prompt: p.prompt, system: p.system });
-    return new Promise((resolve) => {
-      if (hang) return;                       // never settles: the timeout must free the queue
+    return new Promise((resolve, reject) => {
+      pendingReject = reject;
+      if (hang) return;                       // never settles on its own: the timeout + cancel frees it
       setTimeout(() => { busy = false; resolve({ text: reply(p) }); }, genMs);
     });
   }
   const Llama = {
     available: async () => ({ available: true, loaded: true, debugBuild: true, availableMemory: 0 }),
     load: async () => ({}), generate, release: async () => ({}),
-    cancel: async () => { busy = false; return {}; }
+    cancel: async () => {
+      busy = false;
+      if (pendingReject) {
+        const r = pendingReject;
+        pendingReject = null;
+        r(Object.assign(new Error("cancelled"), { code: "cancelled" }));
+      }
+      return {};
+    }
   };
   const PACKS = { "maik-lite": { label: "MAiK Lite", nCtx: 4096, nPredict: 512, files: [{ bytes: 1107408704 }] } };
   const win = {
