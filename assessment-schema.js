@@ -29,6 +29,8 @@
       { id: "pulseRhythm", label: "Pulse rhythm",           type: "radio", opts: ["Regular", "Irregular"], voice: true, ghis: null },
       { id: "rr",          label: "Respiratory rate (/min)",type: "num",   required: true, voice: true, min: 4, max: 80, ghis: null },
       { id: "rrRhythm",    label: "Respiration rhythm",     type: "radio", opts: ["Regular", "Irregular"], voice: true, ghis: null },
+      { id: "spo2",        label: "Oxygen saturation (%)",  type: "num",   voice: true, min: 40, max: 100, ghis: null },
+      { id: "grbs",        label: "GRBS / Blood sugar (mg/dL)", type: "num", voice: true, min: 20, max: 600, ghis: null },
       { id: "nutrition",   label: "Nutrition",              type: "text",  ghis: null },
       { id: "hydration",   label: "Hydration",              type: "text",  ghis: null },
       { id: "genCondition",label: "General condition",      type: "select",opts: ["", "Fair", "Poor", "Moribund"], voice: true, ghis: null }

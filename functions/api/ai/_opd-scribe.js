@@ -8,19 +8,24 @@
  */
 
 export const EMR_FIELD_KEYS = [
-  "cc", "presentHx", "pastHx", "treatmentReceived", "comorbidsNote",
+  "cc", "presentHx", "pastHx", "surgicalHistory", "homeMeds", "treatmentReceived", "comorbidsNote",
   "dm", "dmDetails", "htn", "htnDetails", "cardiac", "cardiacDetails",
   "asthma", "asthmaDetails", "tb", "tbDetails", "thyroid", "thyroidDetails",
-  "epilepsy", "epilepsyDetails", "habits", "alcohol", "smoking", "recDrug", "tobacco",
-  "habitsDetails", "familyHistory", "familyDiabetes", "familyHtn", "familyHeart",
+  "epilepsy", "epilepsyDetails",
+  "ckd", "ckdDetails", "cld", "cldDetails", "cancer", "cancerDetails", "cva", "cvaDetails",
+  "dyslipidemia", "dyslipidemiaDetails",
+  "habits", "alcohol", "smoking", "recDrug", "tobacco", "habitsDetails",
+  "familyHistory", "familyDiabetes", "familyHtn", "familyHeart",
   "familyCancer", "familyTb", "familyAsthma", "familyDetails",
-  "allergies", "lmp", "immunization", "nutrition", "hydration", "systemicExam",
+  "allergies", "diet", "sleep", "lmp", "immunization", "nutrition", "hydration",
+  "systemicExam", "respiratoryExam", "cvsExam", "abdoExam", "localExam",
   "tenderness", "tendernessDetails", "abdoMass", "abdoMassDetails",
-  "provisionalDx", "managementPlan"
+  "provisionalDx", "managementPlan", "advice"
 ];
 
 const YES_NO_KEYS = new Set([
   "dm", "htn", "cardiac", "asthma", "tb", "thyroid", "epilepsy",
+  "ckd", "cld", "cancer", "cva", "dyslipidemia",
   "habits", "alcohol", "smoking", "recDrug", "tobacco",
   "familyHistory", "familyDiabetes", "familyHtn", "familyHeart",
   "familyCancer", "familyTb", "familyAsthma",
