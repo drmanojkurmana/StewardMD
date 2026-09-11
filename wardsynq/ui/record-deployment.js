@@ -52,10 +52,23 @@ function recordParams(search) {
   return tenantId ? { tenantId, patientId: q.get("patient") || null } : null;
 }
 
-/** The bearer the StewardMD shell exposes, when this page runs inside it. Null on a bare hospital PC with Access. */
+/* The bearer the StewardMD shell exposes, when this page runs inside it. Null on a bare hospital PC
+ * with Access.
+ *
+ * TWO SHAPES, BECAUSE TWO SHELLS PUBLISH TWO DIFFERENT ONES. This read `SMD_AUTH.currentUser` only,
+ * which is the shape the native StewardMD app exposes. wardsynq.com's own shell (wardsynq/site/
+ * shell.js) publishes `SMD_AUTH.token()` instead, and has since it was written. So on wardsynq.com
+ * this returned null for a fully signed-in doctor, every call went out with no bearer, and the
+ * order-safety workstation opened onto "record service refused to open (401). Safety checking is
+ * unavailable, so ordering is disabled." with the drug field, Sign order, Notes and Handover all
+ * disabled. Found 2026-09-12 by clicking Ward on the live site. Accepting both shapes is the fix:
+ * neither shell is wrong, they were simply never reconciled. */
 function shellToken() {
   try {
-    const u = typeof window !== "undefined" && window.SMD_AUTH && window.SMD_AUTH.currentUser;
+    const a = typeof window !== "undefined" ? window.SMD_AUTH : null;
+    if (!a) return Promise.resolve(null);
+    if (typeof a.token === "function") return Promise.resolve(a.token()).catch(() => null);
+    const u = a.currentUser;
     return u && u.getIdToken ? u.getIdToken() : Promise.resolve(null);
   } catch { return Promise.resolve(null); }
 }
