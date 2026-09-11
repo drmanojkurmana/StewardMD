@@ -739,6 +739,45 @@
       "</div></div>";
   }
 
+  /* ACTIVE MEDICATIONS. What is running right now, in one place - filtered server-side to
+   * status==="active" MedicationOrder (functions/_wardsynq/migrate-inpatient.js timelineFromChart),
+   * the same field "New medication order" writes and "Medication round" administers against. This
+   * card writes nothing; it is the missing answer to "what drugs is this patient currently on",
+   * which used to mean reading the round and the order form and holding the rest in your head. */
+  function activeMedsCard(state) {
+    var meds = state.activeMeds;
+    if (meds == null) return "";
+    var rows = meds.map(function (m) {
+      return "<li><b>" + esc(m.drug) + "</b>" +
+        (m.dose && m.dose.value != null ? " <span>" + esc(m.dose.value) + esc(m.dose.unit || "") + "</span>" : "") +
+        (m.route ? " <span>" + esc(m.route) + "</span>" : "") +
+        (m.frequency ? " <span>" + esc(m.frequency) + "</span>" : "") +
+        (m.since ? "<small>since " + when(m.since) + "</small>" : "") +
+        "</li>";
+    }).join("");
+    return '<div class="w-card"><div class="w-card-h">' + ms("pill") + "<h3>Active medications</h3></div>" +
+      (rows ? "<ul class=\"w-mini\">" + rows + "</ul>" : '<p class="w-empty">Nothing currently active.</p>') + "</div>";
+  }
+
+  /* THE TIMELINE. Every readable resource on this chart, in one chronological list - the same
+   * governed read every section above already does, merged server-side
+   * (functions/_wardsynq/migrate-inpatient.js patientTimeline) rather than left for a clinician to
+   * reconstruct by reading nine separate cards. Nothing here is a second copy of the record: the
+   * events are labels over the SAME rows the cards above render, ordered by when each actually
+   * happened. A resource with no timestamp is counted, never silently dropped - see w-hint below. */
+  function timelineCard(state) {
+    var t = state.timeline;
+    if (t == null) return "";
+    var rows = t.map(function (e) {
+      return '<li><span class="w-tl-t">' + when(e.at) + '</span><span class="w-tl-k">' + esc(e.resourceType) + "</span><span>" + esc(e.label) + "</span></li>";
+    }).join("");
+    return '<div class="w-card"><div class="w-card-h">' + ms("history") + "<h3>Timeline</h3>" +
+      '<button class="w-ic" data-w-act="open:' + esc((state.sel || {}).encounterId || "") + '" title="Refresh">' + ms("refresh") + "</button></div>" +
+      (rows ? "<ul class=\"w-timeline\">" + rows + "</ul>" : '<p class="w-empty">Nothing recorded yet.</p>') +
+      (state.timelineGap ? '<p class="w-hint warn">' + ms("warning") + esc(state.timelineGap) + " record" + (state.timelineGap === 1 ? "" : "s") + " on this chart carry no timestamp and are not shown here.</p>" : "") +
+      "</div>";
+  }
+
   var VITALS = [
     { k: "sbp", l: "Systolic", u: "mmHg" }, { k: "dbp", l: "Diastolic", u: "mmHg" },
     { k: "pulse", l: "Pulse", u: "/min" }, { k: "rr", l: "Resp rate", u: "/min" },
@@ -939,7 +978,11 @@
         (s.chiefComplaint ? " &middot; " + esc(s.chiefComplaint) : "") + " &middot; arrived " + when(s.arrivedAt) + "</small></div>" +
         '<button class="w-btn ghost" data-w-act="pcopy" title="The copy this patient can be given">' + ms("assignment_ind") + "Patient copy</button></div>"
       : '<div class="w-chart-h"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button>" +
-        "<div><b>" + esc(s.patientId || "") + "</b><small>" + esc(s.ward || "") + (s.bed ? " &middot; bed " + esc(s.bed) : "") + " &middot; admitted " + when(s.admittedAt) + "</small></div>" +
+        // A human on the ward reads a name and an MR number, not a record id: the ward list's own
+        // roster join (functions/_wardsynq/migrate-inpatient.js listWard) already carries both on
+        // this same object, and the header is now the second of two places that used to ignore them
+        // - found 2026-09-12, same defect, different screen.
+        "<div><b>" + esc(s.name || s.patientId || "") + "</b><small>" + (s.name && s.mrn ? esc(s.mrn) + " &middot; " : "") + esc(s.ward || "") + (s.bed ? " &middot; bed " + esc(s.bed) : "") + " &middot; admitted " + when(s.admittedAt) + "</small></div>" +
         // The summary is reachable from the patient, not from a menu somewhere else. A planned
         // discharge is prepared while the patient is still on the ward, so this is not gated on the
         // stay being closed - the summary screen states plainly when a stay is still open.
@@ -984,7 +1027,7 @@
     return header +
       criticalsCard(state) + (isEd ? triageCard(state) : "") + (isMaternity ? pregnancyCard(state) + meowsCard(state) : "") +
       (isPediatric ? ageBandCard(state) : "") +
-      problemsCard(state) + maikCard(state) + noteCard(state) + vitalsCard() + flowsheetCard(state) + fluidCard(state) +
+      problemsCard(state) + activeMedsCard(state) + timelineCard(state) + maikCard(state) + noteCard(state) + vitalsCard() + flowsheetCard(state) + fluidCard(state) +
       (isMaternity ? labourCard() + bloodLossCard(state) : "") +
       (isNicu ? neonatalCard() + linesCard(state) : "") +
       ((isEd || isMaternity) ? resusCard(state) : "") + (isIcu ? deviceCard(state) : "") +
@@ -2791,13 +2834,18 @@
     var s = st.sel; if (!s) return Promise.resolve();
     st.busy = true; paint();
     var q = "orgId=" + encodeURIComponent(st.orgId) + "&patientId=" + encodeURIComponent(s.patientId);
-    return Promise.all([apiGet("/ward/problems?" + q), apiGet("/ward/criticals?" + q)])
+    return Promise.all([apiGet("/ward/problems?" + q), apiGet("/ward/criticals?" + q), apiGet("/ward/timeline?" + q)])
       .then(function (rs) {
         if (settle(rs[0])) st.problems = rs[0].problems || [];
         // A failure to READ the critical list must not be silent: an empty list and an unreachable
         // one look identical on screen, and that is the difference between calm and dangerous.
         if (rs[1] && rs[1].ok) st.criticals = rs[1].loops || [];
         else st.err = st.err || "Could not load critical results. Do not read this chart as clear.";
+        // The timeline is a READ of records already shown elsewhere on this chart, merged into one
+        // order - a failure here is never worse than not having merged them, so it degrades to
+        // "not shown" rather than joining the critical-results error above.
+        if (rs[2] && rs[2].ok) { st.timeline = rs[2].events || []; st.activeMeds = rs[2].activeMedications || []; st.timelineGap = rs[2].withoutTimestamp || 0; }
+        else { st.timeline = null; st.activeMeds = null; }
         paint();
       })
       .catch(function () { st.busy = false; st.err = "Could not load the chart."; paint(); });
@@ -4769,7 +4817,7 @@
       for (var j = 0; j < st.patients.length; j++) { if (st.patients[j].encounterId === arg) { p = st.patients[j]; break; } }
       if (!p) return;
       st.sel = p; st.view = "chart"; st.due = []; st.prn = []; st.unscheduled = []; st.problems = []; st.criticals = []; st.balance = null; st.outbox = [];
-      st.flowsheet = null; st.news2 = null; st.investigations = null; st.results = null;
+      st.flowsheet = null; st.news2 = null; st.investigations = null; st.results = null; st.timeline = null; st.activeMeds = null;
       st.err = ""; st.note = ""; st.refusal = null; st.devices = null; st.maternity = null; st.ageBand = null; st.lines = null; st.rateResult = null; st.oncology = null; st.cardiology = null; st.radiology = null; st.pharmacy = null; st.transfusion = null;
       /* TASK 8.5: MaiK is cleared with the rest of the chart. An answer about the previous patient
        * left on screen beside a new patient's observations is the wrong-patient error with extra

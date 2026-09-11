@@ -794,6 +794,86 @@ async function bedBoard(request, env, ctx) {
   };
 }
 
+/* THE CHART HAD NINE SEPARATE BOXES AND NO SINGLE STORY OF THE STAY (2026-09-12).
+ *
+ * A clinician opening a patient found a problem list, an order form, a dose round and a results
+ * queue - four true things, in four places, in no shared order. Reconstructing "what happened to
+ * this patient" meant reading all four and doing the sequencing by hand. This is that sequencing,
+ * done once, from records that already exist: nothing here is a new store, a new write path, or a
+ * fact invented for the view. It is `RecordService.chart()` - the same governed, role-scoped read
+ * the FHIR $everything operation already uses - flattened into one list ordered by when each thing
+ * actually happened, with an "on now" board pulled from the same read.
+ *
+ * "Every minute detail" is only as fine as what was actually charted. This does not interpolate a
+ * reading between two real ones, and a resource with no timestamp is counted and named, never
+ * silently dropped - a timeline that quietly loses events is worse than a shorter one that says so.
+ */
+const TIMELINE_LABEL = {
+  Encounter: (r) => `${r.class || "Encounter"} ${r.status || ""}${r.location && r.location.ward ? ` — ${r.location.ward}${r.location.bed ? ` bed ${r.location.bed}` : ""}` : ""}`.trim(),
+  Condition: (r) => `Problem: ${r.display || r.code}${r.clinicalStatus ? ` (${r.clinicalStatus})` : ""}`,
+  Observation: (r) => `${r.category || "Observation"}: ${r.code}${r.value != null ? ` = ${r.value}${r.unit ? ` ${r.unit}` : ""}` : ""}`,
+  MedicationOrder: (r) => `Prescribed ${r.drug}${r.dose && r.dose.value != null ? ` ${r.dose.value}${r.dose.unit || ""}` : ""}${r.route ? ` ${r.route}` : ""}${r.frequency ? ` ${r.frequency}` : ""} — ${r.status || "draft"}`,
+  MedicationAdministration: (r) => `${r.drug || "Medication"} — ${r.status || "ordered"}${r.holdReason ? ` (${r.holdReason})` : ""}`,
+  ServiceRequest: (r) => `Ordered ${r.code}${r.category ? ` (${r.category})` : ""} — ${r.status || "draft"}${r.priority === "stat" ? " STAT" : r.priority === "urgent" ? " urgent" : ""}`,
+  DiagnosticReport: (r) => `Result: ${r.code} — ${r.status || "preliminary"}${r.critical ? " CRITICAL" : ""}`,
+  CarePlan: (r) => `Care plan — ${r.status || "draft"}`,
+  ClinicalNote: (r) => `${r.noteType || "progress"} note${r.signedBy ? " signed" : r.aiDrafted ? " (AI-drafted, unsigned)" : " drafted"}`,
+  ImagingStudy: (r) => `Imaging: ${r.modality || "study"}${r.bodySite ? ` — ${r.bodySite}` : ""} — ${r.status || "available"}`,
+  AllergyIntolerance: (r) => `Allergy recorded: ${r.substance}${r.severity ? ` (${r.severity})` : ""}`,
+};
+
+/**
+ * PURE. Every resource in a chart(), as one chronologically ordered list, plus the medications
+ * currently active. `chart` is `RecordService.chart()`'s own shape: `{ [resourceType]: resource[] }`,
+ * already scoped to what this actor may read - nothing here widens or re-checks that.
+ */
+function timelineFromChart(chart) {
+  const events = [];
+  let withoutTimestamp = 0;
+  for (const resourceType of Object.keys(chart || {})) {
+    const rows = chart[resourceType] || [];
+    const label = TIMELINE_LABEL[resourceType] || ((r) => `${resourceType} recorded`);
+    for (const r of rows) {
+      const at = (r.meta && (r.meta.effectiveAt || r.meta.recordedAt)) || null;
+      if (!at) { withoutTimestamp++; continue; }
+      events.push({ at, resourceType, id: r.id, label: label(r) });
+    }
+  }
+  events.sort((a, b) => (a.at < b.at ? 1 : a.at > b.at ? -1 : 0)); // most recent first
+  const activeMedications = (chart.MedicationOrder || [])
+    .filter((o) => o && o.status === "active")
+    .map((o) => ({
+      orderId: o.id, drug: o.drug, dose: o.dose || null, route: o.route || null, frequency: o.frequency || null,
+      prescriberId: o.prescriberId || null, since: (o.meta && (o.meta.effectiveAt || o.meta.recordedAt)) || null,
+    }))
+    .sort((a, b) => (a.since || "") < (b.since || "") ? 1 : -1);
+  return { events, withoutTimestamp, activeMedications };
+}
+
+/**
+ * The route handler. ctx: { migration, patientId, actorDeps, recordDeps }. A role with no read grant
+ * on a resource type simply never sees it in `chart` — the same silent narrowing `chart()` already
+ * does for every other reader; this does not loosen or re-decide that.
+ */
+async function patientTimeline(request, env, ctx) {
+  const mig = ctx.migration;
+  const base = { mode: mig && mig.mode, tenantId: (mig && mig.tenantId) || null };
+  if (!mig || mig.mode === "off") return { ...base, ok: true, skipped: "off", events: [], activeMedications: [] };
+
+  const patientId = str(ctx.patientId);
+  if (!patientId) return { ...base, ok: false, status: 422, error: "patient_id_required", events: [], activeMedications: [] };
+
+  const { svc, error } = await openService(request, env, ctx, "record:read");
+  if (error) return { ...base, ...error, events: [], activeMedications: [] };
+
+  let chart;
+  try { chart = await svc.chart(patientId); }
+  catch (e) { return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), events: [], activeMedications: [] }; }
+
+  const { events, withoutTimestamp, activeMedications } = timelineFromChart(chart);
+  return { ...base, ok: true, patientId, events, activeMedications, ...(withoutTimestamp ? { withoutTimestamp } : {}) };
+}
+
 export {
   IPD, ICU, MATERNITY, PEDIATRICS, NICU, ADMISSION_CLASSES, OPEN,
   encounterFromAdmission, sameAdmission, admitPatient, listWard,
@@ -801,4 +881,5 @@ export {
   sameBed, transferPatient, bedBoard,
   freeMasterBed,   // TASK 4.2: discharge reuses this to release the vacated bed - see migrate-discharge.js
   EMERGENCY_BED_RELAXATION, ADMIN_RELAXABLE_STATES, checkMasterBed,
+  timelineFromChart, patientTimeline,
 };

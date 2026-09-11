@@ -6445,3 +6445,30 @@ test("SMART: the token endpoint is rate limited per client, and says so with Ret
   assert.ok(Number(last.headers.get("retry-after")) >= 1);
   assert.equal((await last.json()).error, "temporarily_unavailable");
 });
+
+/* ---- the chart's timeline: every readable resource, in one chronological order ------------------ */
+
+test("timeline: admission, the problem, the order and the given dose all appear, most recent first", async () => {
+  seedHospital();
+  const { adm } = await admittedPatientOnDrug();
+  await as(DOCTOR, "/ward/problem", "POST", { orgId: ORG, problem: { patientId: adm.patientId, encounterId: adm.encounterId, code: "Community-acquired pneumonia", verificationStatus: "provisional" } });
+
+  const tl = await as(DOCTOR, `/ward/timeline?orgId=${ORG}&patientId=${adm.patientId}`);
+  assert.equal(tl.__status, 200);
+  assert.ok(tl.events.length >= 3, "at least the admission, the problem and the order appear");
+  const types = tl.events.map((e) => e.resourceType);
+  assert.ok(types.includes("Encounter"));
+  assert.ok(types.includes("Condition"));
+  assert.ok(types.includes("MedicationOrder"));
+  // Descending: each event is no more recent than the one before it.
+  for (let i = 1; i < tl.events.length; i++) assert.ok(tl.events[i - 1].at >= tl.events[i].at, "sorted most-recent-first");
+  // The order IS the drug currently running, surfaced as its own board.
+  assert.ok(tl.activeMedications.some((m) => m.drug === "Paracetamol 500mg" && m.since));
+});
+
+test("timeline: pharmacy cannot see it — the same emr.view gate the flowsheet already enforces", async () => {
+  seedHospital();
+  const { adm } = await admittedPatientOnDrug();
+  const r = await as(PHARM, `/ward/timeline?orgId=${ORG}&patientId=${adm.patientId}`);
+  assert.equal(r.__status, 403);
+});

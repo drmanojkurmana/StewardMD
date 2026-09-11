@@ -124,9 +124,16 @@ body.dark #smdWard { --bg: #0d1211; --on-surface: #e8edeb; --on-surface-variant:
 #smdWard .w-bed-b b { font-size: 14px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 #smdWard .w-bed-b small { color: var(--on-surface-variant); font-size: 12px; }
 
-/* chart header */
-#smdWard .w-chart-h { display: flex; align-items: center; gap: 10px; }
-#smdWard .w-chart-h b { display: block; font-size: 15px; }
+/* chart header
+ *
+ * flex-wrap was missing, so the 13 action buttons never wrapped: they ran off the right edge of the
+ * viewport instead, and four of them (ROI, TPA, Billing, Patient copy) landed entirely off-screen
+ * with nothing telling a clinician they existed. The identity block had no minimum width either, so
+ * it shrank along with everything else and a long id with no spaces (opd-pat-smd-demo-00001) wrapped
+ * one syllable per line, six lines tall. Both found 2026-09-12 walking the deployed chart. */
+#smdWard .w-chart-h { display: flex; align-items: center; flex-wrap: wrap; gap: 10px; }
+#smdWard .w-chart-h > div { flex: 1 1 220px; min-width: 180px; }
+#smdWard .w-chart-h b { display: block; font-size: 15px; overflow-wrap: anywhere; }
 #smdWard .w-chart-h small { color: var(--on-surface-variant); font-size: 12px; }
 
 /* problem list */
@@ -199,6 +206,15 @@ body.dark #smdWard { --bg: #0d1211; --on-surface: #e8edeb; --on-surface-variant:
 #smdWard .w-mini { list-style: none; margin: 8px 0 0; padding: 0; display: flex; flex-direction: column; gap: 6px; font-size: 14px; }
 #smdWard .w-mini span { color: var(--on-surface-variant); font-size: 13px; }
 #smdWard .w-sub.warn .w-mini span, #smdWard .w-sub.warn .w-hint { color: inherit; opacity: .85; }
+
+/* Timeline. One row per event, oldest styling reused (w-mini's spacing/type scale) rather than a
+   third list style invented for one card - the kind label is the only new visual: a small pill so a
+   long scroll of mixed resource types stays scannable. */
+#smdWard .w-timeline { list-style: none; margin: 8px 0 0; padding: 0; display: flex; flex-direction: column; gap: 8px; font-size: 14px; max-height: 420px; overflow-y: auto; }
+#smdWard .w-timeline li { display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px; padding: 6px 0; border-top: 1px solid var(--outline-variant); }
+#smdWard .w-timeline li:first-child { border-top: 0; }
+#smdWard .w-tl-t { color: var(--on-surface-variant); font-size: 12px; flex: 0 0 auto; white-space: nowrap; }
+#smdWard .w-tl-k { font-size: 11px; text-transform: uppercase; letter-spacing: .4px; padding: 2px 8px; border-radius: 999px; background: var(--sc); color: var(--on-surface-variant); flex: 0 0 auto; }
 
 /* Prescription outbox. Only "confirmed received" is styled as finished; queued, sent and failed all
    read as unfinished work, because they are. Restrained on purpose: this is a worklist, not an

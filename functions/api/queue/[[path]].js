@@ -52,7 +52,7 @@ import { checkPrescriptionSafety } from "../../_wardsynq/rx-safety.js";
 import { getRulePack } from "../../_wardsynq/rulepack.js";
 // Inpatient ward + eMAR (2026-09-07). Same shape as every OPD migration above: the route resolves
 // the org and the forced wardsynq migration, these do the governed record write.
-import { admitPatient, listWard, recordWardVitals, createWardMedicationOrder, transferPatient, bedBoard } from "../../_wardsynq/migrate-inpatient.js";
+import { admitPatient, listWard, recordWardVitals, createWardMedicationOrder, transferPatient, bedBoard, patientTimeline } from "../../_wardsynq/migrate-inpatient.js";
 // Emergency department (2026-09-09). Reuses everything above unchanged - vitals, orders, the eMAR,
 // notes, labs, NEWS2, critical results are all encounter-class-agnostic already. This adds only
 // arrival (known or unidentified), triage acuity, and a non-admitted disposition.
@@ -564,6 +564,10 @@ export async function onRequest(context) {
         // Reading what is due is reading the ward, not acting on it: the same view capability the
         // ward list uses. Nothing here writes, so this grants no ability to move a dose.
         schedule: CAPS.QUEUE_VIEW,
+        // The chart's own timeline: the same governed read every one of its sections already uses,
+        // just merged and ordered. Seeing it is emr.view, same as flowsheet/criticals — it writes
+        // nothing and grants no new authority over the chart.
+        timeline: CAPS.EMR_VIEW,
         /* Critical results. SEEING the list is emr.view - a ward that cannot see its open critical
          * results is the failure this whole path exists to prevent, so it is not gated behind the
          * authority to act. ACKNOWLEDGING is emr.treat: it is a clinical decision recorded against a
@@ -1773,6 +1777,10 @@ export async function onRequest(context) {
           from: url.searchParams.get("from") || "", to: url.searchParams.get("to") || "", hours: url.searchParams.get("hours") || "",
           rows: (wsqCfg && wsqCfg.flowsheetRows) || null,
         });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "timeline" && method === "GET") {
+        const r = await patientTimeline(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "" });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "wound" && method === "POST") {
