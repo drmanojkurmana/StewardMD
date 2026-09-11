@@ -1667,19 +1667,36 @@
     var pkt = packet || {};
     var img = (pkt.imaging && pkt.imaging.concepts) || [], labs = (pkt.labs && pkt.labs.abnormalities) || [];
     if (!img.length && !labs.length) return Promise.resolve({ error: "no-evidence" });
-    var pc = pkt.patientContext || {}, L = ["=== PATIENT (de-identified) ==="];
-    if (pc.ageBand) L.push("Age band: " + tidy(pc.ageBand, 20));
-    if (pc.sex) L.push("Sex: " + tidy(pc.sex, 12));
-    if (pc.careSetting) L.push("Care setting: " + tidy(pc.careSetting, 24));
-    L.push("\n=== IMAGING CONCEPTS ===\n" + (img.map(function (x) { return "- " + tidy(x, 120); }).join("\n") || "none"));
-    if (pkt.imaging && (pkt.imaging.criticalFlags || []).length) L.push("Critical imaging flags: " + tidy(pkt.imaging.criticalFlags.join(", "), 300));
-    L.push("\n=== LABORATORY ABNORMALITIES ===\n" + (labs.map(function (x) { return "- " + tidy(x, 120); }).join("\n") || "none"));
-    if (pkt.clinical && (pkt.clinical.approvedFindings || []).length) L.push("\n=== CLINICIAN-RECORDED FINDINGS ===\n" + tidy(pkt.clinical.approvedFindings.join("; "), 500));
-    var body = L.join("\n"), packId = (opts && opts.pack) || currentPack();
+    var pc = pkt.patientContext || {};
+    var flags = (pkt.imaging && pkt.imaging.criticalFlags) || [];
+    var found = (pkt.clinical && pkt.clinical.approvedFindings) || [];
+    var packId = (opts && opts.pack) || currentPack();
     var budget = windowBudget(packId, CORRELATE_SYS, 500);
-    if (estTokens(body) > budget) body = body.slice(0, budget * 3);   // evidence lists, not narrative: a cut here loses list tail only, and is reported
+    // Fit the evidence to the window by shortening the two LISTS from their tails, never the
+    // clinician-recorded findings or the critical flags (review: a byte-level cut lost the last
+    // section first, which was the clinician's own words). What was left out is reported by count.
+    var imgN = img.length, labN = labs.length;
+    function build() {
+      var L = ["=== PATIENT (de-identified) ==="];
+      if (pc.ageBand) L.push("Age band: " + tidy(pc.ageBand, 20));
+      if (pc.sex) L.push("Sex: " + tidy(pc.sex, 12));
+      if (pc.careSetting) L.push("Care setting: " + tidy(pc.careSetting, 24));
+      L.push("\n=== IMAGING CONCEPTS ===\n" + (img.slice(0, imgN).map(function (x) { return "- " + tidy(x, 120); }).join("\n") || "none"));
+      if (flags.length) L.push("Critical imaging flags: " + tidy(flags.join(", "), 300));
+      L.push("\n=== LABORATORY ABNORMALITIES ===\n" + (labs.slice(0, labN).map(function (x) { return "- " + tidy(x, 120); }).join("\n") || "none"));
+      if (found.length) L.push("\n=== CLINICIAN-RECORDED FINDINGS ===\n" + tidy(found.join("; "), 500));
+      return L.join("\n");
+    }
+    var body = build();
+    while (estTokens(body) > budget && (imgN > 3 || labN > 3)) {
+      if (labN >= imgN && labN > 3) labN--; else imgN--;
+      body = build();
+    }
+    var omitted = { imaging: img.length - imgN, labs: labs.length - labN };
     return generateJSON(body, CORRELATE_SYS, 500, opts).then(function (p) {
-      return { correlation: sanitizeAdvisory(p, "clinicalCorrelation", CORRELATE_KEYS, L.join("\n")), mode: "correlate", engine: "local", truncated: estTokens(L.join("\n")) > budget };
+      var out = { correlation: sanitizeAdvisory(p, "clinicalCorrelation", CORRELATE_KEYS, body), mode: "correlate", engine: "local" };
+      if (omitted.imaging || omitted.labs) { out.truncated = true; out.omitted = omitted; out.correlation.missing = unionList(out.correlation.missing, [(omitted.imaging ? omitted.imaging + " imaging concept(s)" : "") + (omitted.imaging && omitted.labs ? " and " : "") + (omitted.labs ? omitted.labs + " lab abnormality(ies)" : "") + " not reviewed (did not fit the on-device window)"]); }
+      return out;
     }, function (e) { if (e && e.message === "parse") return { error: "parse", mode: "correlate", engine: "local" }; throw e; });
   }
 

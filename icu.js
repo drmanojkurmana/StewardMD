@@ -7163,7 +7163,9 @@
     SMD_AI.extract(text, "icd-suggest").then(function (r) {
       var body = modalEl.querySelector("#icuIcdSugBody"); if (!body) return;
       if (!r || r.error) {
-        body.innerHTML = '<div class="icu-dx-hint">' + esc(r && r.error === "quota" ? (r.message || "MaiK is a StewardMD Pro feature.") : "Could not reach MaiK. Check your connection and try again.") + '</div>';
+        body.innerHTML = '<div class="icu-dx-hint">' + esc(r && r.error === "quota" ? (r.message || "MaiK is a StewardMD Pro feature.")
+          : (r && r.message && /^(LOCAL_CAPABILITY_REQUIRED|ICD_INDEX_OFFLINE|kb-only)$/.test(r.error)) ? r.message
+          : "Could not reach MaiK. Check your connection and try again.") + '</div>';
         return;
       }
       _icuIcdSug = r.suggestions || [];
@@ -7299,6 +7301,8 @@
     if (!res || res.error) {
       var msg = (res && res.error === "ai-off") ? "AI summary is turned off (cloud text disabled in Settings). Use the deterministic extract instead."
         : (res && res.error === "quota") ? "AI usage limit reached for now — try again later, or use the deterministic extract."
+        // The answer engine refused for a named reason (Local mode, model lacks the capability): say it.
+        : (res && res.message && (res.error === "LOCAL_CAPABILITY_REQUIRED" || res.error === "kb-only")) ? res.message + " The deterministic extract is unaffected."
         : "Couldn’t generate an AI summary right now. Use the deterministic extract instead.";
       return '<div class="icu-assist-msg">' + esc(msg) + "</div>";
     }
@@ -7911,6 +7915,8 @@
       var msg = res && res.error === "ai-off" ? "Deep review is turned off (cloud text disabled in Settings)."
         : res && res.error === "quota" ? "AI usage limit reached — try again later. Your findings remain saved."
         : res && res.error === "timeout" ? "Deep review timed out. Your findings remain saved — tap Deep clinical review to retry, or review/edit the context."
+        // The answer engine refused for a named reason (Local mode, model lacks the capability): say it.
+        : res && res.message && (res.error === "LOCAL_CAPABILITY_REQUIRED" || res.error === "kb-only") ? res.message + " Your findings remain saved."
         : "Deep review could not be completed. Your findings remain saved. Retry, or review/edit the context.";
       return '<div class="icu-assist-msg">' + ico("warn", "⚠️") + " " + esc(msg) + "</div>";
     }

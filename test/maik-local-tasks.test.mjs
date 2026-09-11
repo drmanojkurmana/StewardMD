@@ -210,6 +210,22 @@ test("imagingSummary / correlate: forbidden certainty phrases and unsupported fi
   assert.deepEqual(await L.correlate({}), { error: "no-evidence" });
 });
 
+test("correlate(): evidence that does not fit the window is trimmed from the list tails, never the clinician's findings, and the omission is reported", async () => {
+  const { L, gen, setReply } = load();
+  setReply(() => json({ clinicalCorrelation: "Findings are suggestive of sepsis.", topConsiderations: ["sepsis"], whyFit: [], alternatives: [], whatDoesntFit: [], missing: [], redFlags: [], nextChecks: [], protocols: [] }));
+  const img = []; for (let i = 0; i < 120; i++) img.push("imaging concept number " + i + " with a long descriptive phrase attached to it");
+  const labs = []; for (let i = 0; i < 120; i++) labs.push("laboratory abnormality number " + i + " with a long descriptive phrase attached");
+  const r = await L.correlate({ imaging: { concepts: img, criticalFlags: ["free air"] }, labs: { abnormalities: labs }, clinical: { approvedFindings: ["rigid abdomen", "rebound tenderness"] } });
+  assert.equal(r.truncated, true); assert.ok(r.omitted.imaging + r.omitted.labs > 0);
+  const prompt = gen[gen.length - 1].prompt;
+  assert.ok(prompt.indexOf("rigid abdomen") >= 0 && prompt.indexOf("rebound tenderness") >= 0, "clinician-recorded findings always reach the model");
+  assert.ok(prompt.indexOf("free air") >= 0, "critical flags always reach the model");
+  assert.ok(L.estTokens(prompt) <= L.windowBudget("maik-lite", "", 500) + 200, "prompt fits the window");
+  assert.ok(r.correlation.missing.some((m) => /not reviewed/.test(m)), "the omission is surfaced in the advisory's own 'missing' list");
+  const small = await L.correlate({ imaging: { concepts: ["consolidation"] }, labs: { abnormalities: ["WBC 18000"] } });
+  assert.equal(small.truncated, undefined);
+});
+
 test("translate(): the guard refuses native script, lost numbers and invented numbers", async () => {
   const { L, setReply } = load();
   setReply(() => "Fever for 3 days, paracetamol 500 mg BD");

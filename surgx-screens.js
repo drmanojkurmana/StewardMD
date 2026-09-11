@@ -782,6 +782,47 @@
     return renderCase(state.kase);
   }
 
+  /* One mentor turn. The prompt carries the case stem, what the trainee has answered so far and their
+   * question; mode "surgx-mentor" selects the persona (SURG_SYS on device; the surgx_case quota bucket
+   * on the cloud). Mirrors clinix-tutor.js: a grounded package when StewardRAG is present, a plain
+   * explain() otherwise, and { error } rendered as text, never swallowed. */
+  function askMentor() {
+    var k = state.kase; if (!k) return;
+    var ta = document.getElementById("sgxMentorQ");
+    var q = String((ta && ta.value) || "").trim().slice(0, 600);
+    state.mentor = { q: q, a: (state.mentor || {}).a, busy: false, err: "" };
+    if (!q) { toast("Type your question first."); return; }
+    var AI = window.SMD_AI;
+    if (!(AI && (AI.explainGrounded || AI.explain))) { state.mentor.err = "MaiK is not available on this build."; render(); return; }
+    var answered = (k.decisionPoints || []).filter(function (d) { return state.caseAnswers && state.caseAnswers[d.id]; }).map(function (d) {
+      var o = (d.options || []).filter(function (x) { return x.id === state.caseAnswers[d.id]; })[0];
+      return d.phase + ": asked '" + d.prompt + "', trainee chose '" + (o ? o.text : state.caseAnswers[d.id]) + "'" + (o && o.correct === false ? " (not the preferred option)" : "");
+    });
+    var prompt = "SURGICAL TEACHING CASE (simulated, not a real patient).\nLevel: " + String(k.level || "") + "\nStem: " + String(k.stem || "") +
+      (answered.length ? "\nDecisions so far:\n- " + answered.join("\n- ") : "") + "\n\nTrainee's question: " + q;
+    state.mentor.busy = true; render();
+    var me = state.mentor;
+    var call;
+    try {
+      if (window.StewardRAG && window.StewardRAG.buildPackage && AI.explainGrounded) {
+        call = Promise.resolve(window.StewardRAG.buildPackage({ infectious: [], nonInfectious: [] }, { question: prompt })).then(function (pkg) {
+          if (!pkg) return { error: "no-package" };
+          pkg.question = prompt;
+          return AI.explainGrounded(pkg, { depth: "concise", mode: "surgx-mentor" });
+        });
+      } else {
+        call = AI.explain(prompt, q);
+      }
+    } catch (e) { call = Promise.resolve({ error: "server" }); }
+    call.then(function (r) {
+      if (state.mentor !== me) return;
+      me.busy = false;
+      if (!r || r.error) { me.err = (r && r.message) || (r && r.error === "quota" ? "MaiK limit reached for today." : "The senior surgeon is unavailable right now."); }
+      else { me.a = String(r.text || "").trim(); me.err = ""; }
+      render();
+    }, function () { if (state.mentor === me) { me.busy = false; me.err = "The senior surgeon is unavailable right now."; render(); } });
+  }
+
   function renderCase(k) {
     var dps = k.decisionPoints || [];
     if (!dps.length) {
@@ -819,6 +860,19 @@
     });
 
     if (done) body += renderCaseResult(k, dps);
+
+    // Senior Surgeon Mode (2026-09-11): the "surgx-mentor" persona existed as a quota bucket and,
+    // since the hard Local policy, as an on-device system prompt, but had no screen. One question at
+    // a time, about THIS case, through the same SMD_AI transport as CliniX's tutor, so the answer
+    // engine chooser (Cloud / Local / KB-only) governs it like everything else.
+    var mt = state.mentor || {};
+    body += '<div class="sgx-card"><h4>' + ic("psychology") + " Ask the senior surgeon</h4>" +
+      '<div class="n">Challenge your plan on this case. Teaching and decision support only: no doses, no advice about a real patient.</div>' +
+      '<textarea id="sgxMentorQ" rows="2" placeholder="e.g. Would you convert to open here, and what would make you decide?">' + esc(mt.q || "") + "</textarea>" +
+      '<div class="sgx-btnrow"><button class="sgx-btn" data-sgx="mentor"' + (mt.busy ? " disabled" : "") + ">" + ic("auto_awesome") + (mt.busy ? " Thinking…" : " Ask") + "</button></div>" +
+      (mt.a ? '<div class="sgx-why"><div class="h">Senior surgeon</div>' + esc(mt.a).replace(/\n/g, "<br>") + "</div>" : "") +
+      (mt.err ? '<div class="n">' + esc(mt.err) + "</div>" : "") +
+      "</div>";
 
     body += '<div class="sgx-btnrow">' +
       '<button class="sgx-btn" data-sgx="caseReset">' + ic("restart_alt") + " Start again</button>" +
@@ -1674,7 +1728,8 @@
         render();
         return;
       }
-      if (act === "caseReset") { state.caseAnswers = {}; render(); try { state.host.scrollTop = 0; } catch (er) {} return; }
+      if (act === "caseReset") { state.caseAnswers = {}; state.mentor = null; render(); try { state.host.scrollTop = 0; } catch (er) {} return; }
+      if (act === "mentor") { askMentor(); return; }
 
       // notes
       if (act === "newnote") { startNote(t.getAttribute("data-id")); return; }

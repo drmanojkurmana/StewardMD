@@ -342,16 +342,33 @@
    * Local mode makes it; what the on-device model does is ORDER the rows it gets. There is no
    * on-device ICD index yet (the source tables are not in the repo, see scripts/icd/README.md), so
    * with no network the honest answer is "no candidates", never a generated code. */
+  // The search route's validQuery() rejects anything over 80 characters (functions/api/icd/[[path]].js).
   function icdCandidates(text) {
+    var q = String(text || "").replace(/\s+/g, " ").trim().slice(0, 80);
     var nav = (typeof navigator !== "undefined") ? navigator : null;
-    if (nav && nav.onLine === false) return Promise.resolve({ error: "ICD_INDEX_OFFLINE", message: "ICD codes are looked up in StewardMD's ICD database (no AI). Connect to the network to fetch candidates; the on-device model only ranks them." });
-    var base = (typeof window !== "undefined" && window.AI_PROXY) ? String(window.AI_PROXY).replace(/\/api\/ai$/, "") : "";
-    var f = (typeof window !== "undefined" && window.fetch) ? function (u) { return window.fetch(u); } : fetch;
-    // The search route's validQuery() rejects anything over 80 characters (functions/api/icd/[[path]].js).
-    return f(base + "/api/icd/search?q=" + encodeURIComponent(String(text || "").replace(/\s+/g, " ").trim().slice(0, 80)) + "&limit=30")
+    var W = (typeof window !== "undefined") ? window : null;
+    // Offline (or the server fetch failed below): try the on-device index (icd.js's
+    // window.SMD_ICD.localSearch, built from icd/icd10.min.json) before giving up. Only when
+    // that is also unavailable does this surface the ICD_INDEX_OFFLINE error.
+    function offline(message) {
+      if (W && W.SMD_ICD && typeof W.SMD_ICD.localSearch === "function") {
+        return Promise.resolve(W.SMD_ICD.localSearch(q, 30)).then(function (candidates) {
+          return { candidates: Array.isArray(candidates) ? candidates : [], source: "on-device" };
+        });
+      }
+      return Promise.resolve({ error: "ICD_INDEX_OFFLINE", message: message });
+    }
+    if (nav && nav.onLine === false) {
+      return offline("ICD codes are looked up in StewardMD's ICD database (no AI); offline, the on-device ICD index is missing on this phone. Connect to the network to fetch candidates, or install a model pack that carries the on-device index.");
+    }
+    // Online: still prefer the server (it has ICD-11 and the full CM set), falling back to the
+    // on-device index only if the fetch itself fails.
+    var base = (W && W.AI_PROXY) ? String(W.AI_PROXY).replace(/\/api\/ai$/, "") : "";
+    var f = (W && W.fetch) ? function (u) { return W.fetch(u); } : fetch;
+    return f(base + "/api/icd/search?q=" + encodeURIComponent(q) + "&limit=30")
       .then(function (r) { return r.ok ? r.json() : null; })
       .then(function (j) { return { candidates: (j && Array.isArray(j.results)) ? j.results : [] }; },
-            function () { return { error: "ICD_INDEX_OFFLINE", message: "The ICD database could not be reached. Connect to the network to fetch candidates; the on-device model only ranks them." }; });
+            function () { return offline("The ICD database could not be reached, and the on-device ICD index is missing on this phone. Connect to the network to fetch candidates, or install a model pack that carries the on-device index."); });
   }
 
   /* The local implementation of each feature, given the matched pack. Returns a promise. */

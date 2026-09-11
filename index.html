@@ -2122,7 +2122,7 @@ window.openExternal = function (u) {
 <script src="/drugs.js?v=gold978-sheet1-universal1" defer></script>
 <!-- lazy loaded: interaction-rules -->
 <script defer src="/kb/ai/drug-fuzzy.js?v=gold1047"></script>
-<script defer src="/medlist.js?v=gold1049-scan-choose-brands1"></script>
+<script defer src="/medlist.js?v=hardlocal1"></script>
 <script defer src="/ghis-meds.js?v=gold363"></script>
 <script defer src="/interactions.js"></script>
 <script src="/api.js?v=gold465-azclass-sheet4" defer></script>
@@ -2141,7 +2141,7 @@ window.openExternal = function (u) {
 <script src="/id-token.js?v=idtok2" defer></script>
 <link rel="stylesheet" href="/reasoning-workspace.css?v=dxfit8">
 <link rel="stylesheet" href="/knowledge-library.css?v=klall5">
-<script src="/reasoning.js?v=nstream1-clinix3-rail1-dxux3-klall9" defer></script>
+<script src="/reasoning.js?v=hardlocal1" defer></script>
 <script src="/renal-dose.js?v=rd1" defer></script>
 <!-- Privacy PR-A: SMD_PRIVACY config (version constants) + consent gate / versioned Privacy Notice
      (SMD_CONSENT). Loads after reasoning.js so it can guard SMD_AI. Reversible via localStorage
@@ -2150,22 +2150,22 @@ window.openExternal = function (u) {
 <script src="/privacy.js?v=gold363" defer></script>
 <!-- Image Engine chooser for ICU Snapshot (Private Device OCR vs AI Vision). Needs SMD_AI
      (reasoning.js) at runtime; used by icu.js + the Settings section in home.js. -->
-<script src="/image-engine.js?v=ie-local3-choose" defer></script>
+<script src="/image-engine.js?v=hardlocal1" defer></script>
 <!-- MaiK Answer Engine chooser (KB only · Cloud · On-device). DECORATES window.SMD_AI, so it must
      load after reasoning.js; the Settings row is rendered by home.js. Default pref is "cloud", so
      an untouched install is byte-for-byte the current behaviour. -->
-<script src="/maik-engine.js?v=mxgate4-dark" defer></script>
+<script src="/maik-engine.js?v=hardlocal1" defer></script>
 <!-- On-device MaiK: model pack download/cache (SMD_MAIK_MODELS) + llama.cpp inference
      (SMD_MAIK_LOCAL). Native-only in effect; both are inert on the web PWA because the
      capacitor-llama plugin is absent, which is what keeps the picker's third option hidden there. -->
-<script src="/maik-models.js?v=ux1-polish-lite" defer></script>
+<script src="/maik-models.js?v=hardlocal1" defer></script>
 <!-- MaiK Lite on-device RAG (window.SMD_MAIK_RAG / SMD_MAIK_KB_STORE): BM25 over the book chunks +
      evidence gate, ported from the server pipeline, so MaiK Lite's answers are checked against the
      actual book text instead of trusting its own recollection. Loaded before maik-local.js, which
      reads these globals lazily (only when a maik-lite question is actually asked). -->
 <script src="/kb/ai/maik-lite-rag.js?v=rag1" defer></script>
 <script src="/kb/ai/maik-lite-kb-store.js?v=rag1" defer></script>
-<script src="/maik-local.js?v=mxfix4-greet" defer></script>
+<script src="/maik-local.js?v=hardlocal1" defer></script>
 <script src="/kb/ai/steward-ai.browser.js?v=gold1034" defer></script>
 <!-- MaiK V2 — deterministic KB Answer Engine (window.MaiKKB). Retrieval-first: answers KB
      knowledge questions locally with citations, no Gemini. Loads before home.js. -->
@@ -2179,7 +2179,7 @@ window.openExternal = function (u) {
 <script src="/kb/ai/maik-copilot.js?v=gold1053-calcfix" defer></script>
 <script src="/electrolytes.js?v=bug808-nodupe-focus1" defer></script>
 <script src="/caseshare.js?v=gold363" defer></script>
-<!-- lazy loaded: hospitals-in --><script src="/connect-source.js?v=cs3docs" defer></script><script src="/connect-patient.js?v=cp4" defer></script><script src="/queue-flags.js?v=q5-all-on" defer></script><script src="/govschemes-flags.js?v=gs2-defaulton" defer></script><script src="/home.js?v=nstream1-clinix5-surgx2-logo-aiu1-profile2-rxtile-glyphs-maikart2-pglog1-ack1-otasay-oncqis-sync1-prompt1-about1-icons1-rxv1-applock3-afoptin-gsrename1-icdtile1-hvtilealign1-sknx16-wsqtile1-universal1-emrux1" defer></script><script src="/profile-setup.js?v=pfs1" defer></script><script src="/syndromes-motion.js?v=synmo5" defer></script><script src="/dialog-motion.js?v=dm2" defer></script>
+<!-- lazy loaded: hospitals-in --><script src="/connect-source.js?v=cs3docs" defer></script><script src="/connect-patient.js?v=cp4" defer></script><script src="/queue-flags.js?v=q5-all-on" defer></script><script src="/govschemes-flags.js?v=gs2-defaulton" defer></script><script src="/home.js?v=hardlocal1" defer></script><script src="/profile-setup.js?v=pfs1" defer></script><script src="/syndromes-motion.js?v=synmo5" defer></script><script src="/dialog-motion.js?v=dm2" defer></script>
 <!-- Lean sidebar redesign (Tools / Reference & Help / Settings / Advanced / Experimental). Additive; wraps
      SB.open and rebuilds #sbMenu, superseding home.js's legacy reorganizer (which stands down
      via window.SMD_SBR). Must load AFTER home.js. -->
@@ -2198,7 +2198,7 @@ window.openExternal = function (u) {
 <script src="/haptics.js?v=gold348" defer></script>
 <script src="/antibiogram.js?v=gold992" defer></script>
 <script src="/govschemes.js?v=gs4-catsearch" defer></script>
-<script src="/icd.js?v=icd1" defer></script>
+<script src="/icd.js?v=hardlocal1" defer></script>
 <script src="/asp-region.js?v=gold363" defer></script>
 <script src="/swipe-back.js?v=gold482-edgeback-gestnav1" defer></script>
 <script src="/workspaces.js?v=gold1051-wsroute-surgx1" defer></script>
@@ -2212,7 +2212,7 @@ window.openExternal = function (u) {
 <!-- Clinical vocabulary registry (SMD_VOCAB) - deterministic offline finding autocomplete for the
      ICU complaint/finding picker. Separate from disease scoring; maps to existing canonical finding IDs. -->
 <script src="/clinical-vocab.js?v=gold363" defer></script>
-<script src="/icu.js?v=gold999-askmaik-think1-lytes1-micuvit1-proto3-icdsug1" defer></script>
+<script src="/icu.js?v=hardlocal1" defer></script>
 <script src="/discharge-ghis.js?v=dg1" defer></script>
 
 <!-- WardSynQ shadow observation of GHIS ingest. BOTH DEFAULT OFF and neither ships enabled.
@@ -2272,7 +2272,7 @@ window.openExternal = function (u) {
 <script src="/infusion-actions.js?v=gold363" defer></script>
 <!-- MaiK Scribe voice intake (SMD_VOICE): capture → /api/ai/extract → review-first autofill.
      Loads after icu.js/reasoning.js/native-bridge/api.js - only invoked on user tap, so order is safe. -->
-<script src="/voice.js?v=mkfast1-vtiers2-stt1" defer></script>
+<script src="/voice.js?v=hardlocal1" defer></script>
 <!-- Ambient voice extraction engine (window.SMD_VVITALS / SMD_EMRMAP / SMD_AMBIENT). Deterministic,
      zero-token, offline: spoken vitals/exam -> structured assessment fields, with a patient-speech +
      manual-override safety gate. A building block for autofilling the OPD assessment (opd-emr.js);
@@ -2282,7 +2282,7 @@ window.openExternal = function (u) {
 <script src="/voice-emr-map.js?v=gold1" defer></script>
 <script src="/voice-ambient.js?v=gold1723-mix-pauseflush1" defer></script>
 <script src="/voice-diarize.js?v=gold1" defer></script>
-<script src="/maik-reasoning.js?v=maik3" defer></script>
+<script src="/maik-reasoning.js?v=hardlocal1" defer></script>
 <script src="/maik-pathways.js?v=maik1" defer></script>
 <script src="/maik-ask.js?v=mkfast2" defer></script>
 <script src="/voice-scribe-ground.js?v=gold1" defer></script>
@@ -2348,7 +2348,7 @@ window.openExternal = function (u) {
 <script src="/thorex-ort.js?v=gold1084-modeldl" defer></script>
 <script src="/thorex-providers.js?v=bothengines" defer></script>
 <script src="/thorex-report.js?v=tx8" defer></script>
-<script src="/thorex-llm.js?v=tx2" defer></script>
+<script src="/thorex-llm.js?v=hardlocal1" defer></script>
 <script src="/thorex-correlate.js?v=tx1" defer></script>
 <script src="/thorex-screens.js?v=tx15-wipe" defer></script>
 <script src="/thorex.js?v=tx1" defer></script>
@@ -2369,7 +2369,7 @@ window.openExternal = function (u) {
 <script src="/sknx-providers.js?v=sx13" defer></script>
 <script src="/sknx-store.js?v=sx16-ux" defer></script>
 <script src="/sknx-evidence.js?v=sx13" defer></script>
-<script src="/sknx-llm.js?v=sx13" defer></script>
+<script src="/sknx-llm.js?v=hardlocal1" defer></script>
 <script src="/sknx-report.js?v=sx13" defer></script>
 <script src="/sknx-compare.js?v=sx13" defer></script>
 <script src="/sknx-rx.js?v=sx13" defer></script>
@@ -2412,9 +2412,9 @@ window.openExternal = function (u) {
 <script src="/surgx-patient.js?v=sg14-create" defer></script>
 <script src="/surgx-destinations.js?v=sg6-bk" defer></script>
 <script src="/surgx-backup.js?v=sgbk2-enc" defer></script>
-<script src="/surgx-evidence.js?v=sg1" defer></script>
+<script src="/surgx-evidence.js?v=hardlocal1" defer></script>
 <script src="/surgx-diagrams.js?v=sg1" defer></script>
-<script src="/surgx-screens.js?v=sg25-signsend-md2" defer></script>
+<script src="/surgx-screens.js?v=hardlocal1" defer></script>
 <script src="/surgx.js?v=sg1" defer></script>
 <!-- NMC Logbook (PG digital logbook) - additive, flag-gated smd_pglog, DEFAULT ON for testers, same
      owner decision as clinix/surgx (see pglog-flags.js, which is the authority); force either way
@@ -2441,7 +2441,7 @@ window.openExternal = function (u) {
      QR and how long they stay valid; the QR itself is encoded by pglog-qr.js above. -->
 <script src="/rx-validity.js?v=rxv3-brands" defer></script>
 <script src="/pglog-reports.js?v=pgl5-diag" defer></script>
-<script src="/pglog-ai.js?v=pgl4" defer></script>
+<script src="/pglog-ai.js?v=hardlocal1" defer></script>
 <script src="/pglog-screens.js?v=pgl26-del" defer></script>
 <script src="/pglog.js?v=pgl5" defer></script>
 <!-- Insulin dose CDSS · additive, flag-gated smd_insulin (DEFAULT OFF; reveal with ?insulin=1). Pure
@@ -2506,7 +2506,7 @@ window.openExternal = function (u) {
 <script src="/onco-protocol-report.js?v=onco1" defer></script>
 <!-- OPD patient profile + reports (flag smd_opd_emr, default OFF). Read-only view over the existing GHIS
      read proxy; inert unless the flag is on + OPDEMR.openProfile() is called from a queue ticket. -->
-<script src="/opd-emr.js?v=mkfast1-scribeloud2-ghisdoc3-mic1-auth3-oncqis-scroll1-icdsug1-opdnote1" defer></script>
+<script src="/opd-emr.js?v=hardlocal1" defer></script>
 <!-- My Clinic — on-device EMR for personal clinics (reuses opd-emr's form; flag smd_personal_clinic). -->
 <script src="/personal-clinic.js?v=gold6" defer></script>
 <!-- Shared Clinic — multi-device encrypted EMR for clinics/small hospitals with no EMR (flag
@@ -2551,7 +2551,7 @@ window.openExternal = function (u) {
      every proposed dose comes from SMD_ONCODOSE with the full lineage visible. Reuses SMD_ONCORECOMMEND
      (Phase B), SMD_ONCOEV (Phase C), SMD_ONCOUI matrix/drawer + SMD_ONCODOSE. Loaded before onco-home.js. -->
 <script src="/onco-plan-flow.js?v=op1" defer></script>
-<script src="/onco-home.js?v=op6-oncqis-open1" defer></script>
+<script src="/onco-home.js?v=hardlocal1" defer></script>
 <!-- ONCOTREE navigator (flag smd_onco_navigator, DEFAULT OFF): deterministic disease pathway
      (phenotype -> APPLICABLE EXISTING Standard Protocols by reference). Decision-support only; never a
      second protocol DB, never auto-selects/doses. engine + recommend loaded before the UI. -->

@@ -165,7 +165,29 @@ refusal; `correlate()` truncates from the tail when the evidence lists exceed th
 - Full repository run: 0 failures by exit code, counter summary and TAP (see the commit message for
   the file count of the final run).
 
-## 6. Not done, said plainly
+## 6. Second round (same day, after the phone build)
+- ICU (ICD suggest, Imaging Assist, Deep review) and Scan Meds now show the engine's refusal
+  message instead of "Could not reach MaiK".
+- `correlate()` fits evidence to the window by shortening the imaging and lab LISTS from their
+  tails; clinician-recorded findings and critical flags always reach the model; the omission is
+  reported by count and added to the advisory's own `missing` list.
+- Senior Surgeon Mode has a screen: an "Ask the senior surgeon" card on the SURGX case view, one
+  question at a time with the case stem and the trainee's decisions, through `SMD_AI` with mode
+  `surgx-mentor` (so the engine chooser governs it). `test/surgx-mentor.test.mjs`.
+- Offline ICD-10 index: `icd/icd10.min.json` (11,758 WHO 4-character codes, 656 KB, built by
+  `scripts/icd/build-offline-index.mjs` from the same public CM source the D1 table was loaded
+  from), `SMD_ICD.localSearch()`, and `icdCandidates()` falls back to it when offline or the
+  server fails. ICD-11 is still server-only. `test/icd-offline-index.test.mjs`,
+  `test/maik-icd-offline.test.mjs`.
+- Roadmap: remove the recovery switch after one release; native `totalMemory`/`freeDisk`; run the
+  Indic eval on Horizon.
+- Phone: a Debug build was installed in place on the owner's iPhone 15 Pro (`?v=hardlocal1`, sw.js
+  CACHE tagged) with Xcode-beta 2 via `DEVELOPER_DIR`; that install predates the ICD index.
+- NOT done, by the owner's own runbook: `AI_COST_CAP_ON` must not be flipped until the role-based
+  cap is wired or the global cap raised (`vault/runbooks/Enable-AI-Cost-Cap.md`);
+  `MAIK_ENFORCE_CAPS` is the owner's call via the `/admin` KV flags, not a code change.
+
+## 7. Not done, said plainly
 - No on-device run of the new local tasks on a phone yet (the fake plugin answers in tests).
   `test/run-local-translate-eval.mjs` and `test/run-maik-real-eval.mjs` are the instruments.
 - Indic offline translation is refused, not supported, until the eval passes.
