@@ -10,6 +10,7 @@
 // The interpreter never sets a cookie or an authorization header itself; the session lives in the runner's
 // browser context and the transport attaches it.
 import { assertValidManifest, templatePlaceholders } from './schema.mjs';
+import { extractRecords } from './html.mjs';
 
 export class ManifestPolicyError extends Error { constructor(m) { super(m); this.name = 'ManifestPolicyError'; } }
 export class ResourceLimitError extends Error { constructor(m) { super(m); this.name = 'ResourceLimitError'; } }
@@ -132,13 +133,25 @@ export async function executeOperation({
     state.bytes += Buffer.byteLength(text, 'utf8');
     if (state.bytes > lim.maxBytes) throw new ResourceLimitError(`byte limit (${lim.maxBytes}) exceeded during '${operationType}'`);
 
-    let payload;
-    try { payload = text ? JSON.parse(text, (k, v) => (k === '__proto__' ? undefined : v)) : null; } catch {
-      partial = true;
-      warnings.push(`page ${i + 1} was not valid JSON`);
-      break;
+    // Server-rendered EMRs (e.g. GHIS) return markup, not JSON. When the operation declares
+    // responseFormat 'html', the body is parsed and flattened to string records by html.mjs BEFORE the
+    // mapping runs; the mapping's pick/toDate/toNumber then transform those records exactly as for JSON.
+    let payload = null;
+    let items;
+    if (op.responseFormat === 'html') {
+      try { items = extractRecords(text, op.htmlExtract, { maxBytes: lim.maxBytes }); } catch (err) {
+        partial = true;
+        warnings.push(`page ${i + 1} html extract failed: ${String(err && err.message ? err.message : err).slice(0, 120)}`);
+        break;
+      }
+    } else {
+      try { payload = text ? JSON.parse(text, (k, v) => (k === '__proto__' ? undefined : v)) : null; } catch {
+        partial = true;
+        warnings.push(`page ${i + 1} was not valid JSON`);
+        break;
+      }
+      items = selectItems(op, payload);
     }
-    const items = selectItems(op, payload);
     pages.push({ index: i, url, payload, items });
     itemCount += items.length;
     if (itemCount >= op.pagination.maxItems) { partial = true; warnings.push(`item limit (${op.pagination.maxItems}) reached`); break; }

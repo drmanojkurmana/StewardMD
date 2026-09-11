@@ -16,6 +16,7 @@
     ],
     "methods": ["GET", "HEAD"],
     "transforms": ["pick", "map", "toDate", "toNumber", "coalesce", "const"],
+    "responseFormats": ["json", "html"],
     "placeholderTypes": ["id", "int", "token"],
     "resources": [
       "patient",
@@ -45,7 +46,10 @@
       "maxItemsCeiling": 2000,
       "maxCoalesceBranches": 4,
       "maxMapTableEntries": 32,
-      "maxSelectorDepth": 6
+      "maxSelectorDepth": 6,
+      "maxHtmlSelectorLength": 200,
+      "maxHtmlCellIndex": 200,
+      "maxHtmlOnclickArg": 20
     },
     "forbiddenKeys": ["__proto__", "constructor", "prototype"]
   },
@@ -81,6 +85,17 @@
         "properties": {
           "type": { "enum": ["list_worklist", "get_patient_summary", "list_medications", "list_allergies", "list_results", "list_encounters", "list_notes"] },
           "method": { "enum": ["GET", "HEAD"] },
+          "responseFormat": { "enum": ["json", "html"], "description": "How the response body is parsed. 'json' (default when absent) parses JSON and selects items via mapping.itemsSelector. 'html' parses the markup and extracts records via htmlExtract, for legacy server-rendered EMRs." },
+          "htmlExtract": {
+            "type": "object",
+            "additionalProperties": false,
+            "description": "Required when responseFormat is 'html'. Turns markup into flat string records the mapping then transforms. rows selects each record's container; fields pull raw strings by cell index, a scoped selector, or a quoted argument of an on* handler.",
+            "required": ["rows", "fields"],
+            "properties": {
+              "rows": { "type": "string", "maxLength": 200 },
+              "fields": { "type": "object", "additionalProperties": { "$ref": "#/$defs/htmlRule" } }
+            }
+          },
           "originId": { "type": "string" },
           "pathTemplate": {
             "type": "string",
@@ -187,6 +202,15 @@
     "contentHash": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" }
   },
   "$defs": {
+    "htmlRule": {
+      "type": "object",
+      "description": "Exactly one extraction: a table cell by index, a scoped selector's text/html/@attr, or a quoted argument of an on* handler. No code, no regular expressions.",
+      "oneOf": [
+        { "type": "object", "additionalProperties": false, "required": ["cell"], "properties": { "cell": { "type": "integer", "minimum": 0, "maximum": 200 } } },
+        { "type": "object", "additionalProperties": false, "required": ["selector", "attr"], "properties": { "selector": { "type": "string", "maxLength": 200 }, "attr": { "type": "string", "maxLength": 48 } } },
+        { "type": "object", "additionalProperties": false, "required": ["onclickArg"], "properties": { "onclickArg": { "type": "integer", "minimum": 0, "maximum": 20 }, "source": { "type": "string", "maxLength": 48 } } }
+      ]
+    },
     "selector": {
       "type": "string",
       "description": "Dot path over the response object. Segments are literal keys or non-negative array indices. No wildcards, no expressions, no function calls.",

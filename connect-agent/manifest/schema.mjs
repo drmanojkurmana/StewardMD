@@ -91,6 +91,7 @@ export const RESOURCES = Object.freeze([...X.resources]);
 export const CONST_ALLOWLIST = Object.freeze([...X.constAllowlist]);
 export const LIMITS = Object.freeze({ ...X.limits });
 const METHODS = new Set(X.methods);
+const RESPONSE_FORMATS = new Set(X.responseFormats || ['json']);
 const PLACEHOLDER_TYPES = new Set(X.placeholderTypes);
 const PAGINATION_STYLES = new Set(X.paginationStyles);
 const FORBIDDEN_KEYS = new Set(X.forbiddenKeys);
@@ -99,6 +100,13 @@ const OP_SET = new Set(OPERATION_TYPES);
 const RESOURCE_SET = new Set(RESOURCES);
 
 const SELECTOR_RE = /^[A-Za-z0-9_-]+(\.[A-Za-z0-9_-]+)*$/;
+// Bounded charset guard for an htmlExtract CSS selector (restricted grammar: tag, #id, .class,
+// [attr="v"], descendant space, child >, :nth-of-type(n)). This is a static gate only; html.mjs is
+// the real matcher and fail-closes (no matches) on anything outside the grammar it implements.
+const HTML_SELECTOR_RE = /^[A-Za-z0-9_.#>[\]="':()\- ]{1,200}$/;
+const HTML_ATTR_RE = /^(text|html|@[A-Za-z_][A-Za-z0-9_-]{0,40})$/;
+const HTML_SOURCE_RE = /^@[A-Za-z_][A-Za-z0-9_-]{0,40}$/;
+const HTML_FIELD_RE = /^[a-zA-Z][A-Za-z0-9_]*$/;
 const ORIGIN_ID_RE = /^origin:[a-z0-9][a-z0-9._-]{0,31}$/;
 const MANIFEST_ID_RE = /^[a-z0-9][a-z0-9._-]{0,63}$/;
 const PATH_RE = /^\/[^?#\s]*$/;
@@ -306,7 +314,7 @@ function validateOperation(op, where, originIds, seen, errors) {
   if (!isPlainObject(op)) { errors.push(`${where}: must be an object`); return; }
   checkKeys(op, where,
     ['type', 'method', 'originId', 'pathTemplate', 'placeholders', 'allowedQueryKeys', 'pagination', 'mapping', 'sessionExpiry'],
-    ['suggested'], errors);
+    ['suggested', 'responseFormat', 'htmlExtract'], errors);
 
   if (!OP_SET.has(op.type)) errors.push(`${where}.type: '${String(op.type)}' is not a declared operation type`);
   else if (seen.has(op.type)) errors.push(`${where}.type: duplicate operation type`);
@@ -386,6 +394,18 @@ function validateOperation(op, where, originIds, seen, errors) {
     }
   }
 
+  // Response format + HTML extraction. Absent responseFormat means 'json' (the historical behavior).
+  // 'html' requires an htmlExtract block and forbids mapping.itemsSelector, since records then come from
+  // htmlExtract.rows, not a JSON path. 'json' forbids htmlExtract.
+  const rf = op.responseFormat === undefined ? 'json' : op.responseFormat;
+  if (op.responseFormat !== undefined && !RESPONSE_FORMATS.has(op.responseFormat)) errors.push(`${where}.responseFormat: unknown format`);
+  if (rf === 'html') {
+    if (isPlainObject(op.mapping) && op.mapping.itemsSelector !== undefined) errors.push(`${where}.mapping.itemsSelector: not allowed when responseFormat is html`);
+    validateHtmlExtract(op.htmlExtract, `${where}.htmlExtract`, errors);
+  } else if (op.htmlExtract !== undefined) {
+    errors.push(`${where}.htmlExtract: only allowed when responseFormat is html`);
+  }
+
   const se = op.sessionExpiry;
   if (!isPlainObject(se)) errors.push(`${where}.sessionExpiry: must be an object`);
   else {
@@ -401,6 +421,41 @@ function validateOperation(op, where, originIds, seen, errors) {
   }
 
   if (op.suggested !== undefined && typeof op.suggested !== 'boolean') errors.push(`${where}.suggested: must be a boolean`);
+}
+
+/** Validate an htmlExtract block: a `rows` selector and 1..N flat string-field rules. */
+function validateHtmlExtract(hx, where, errors) {
+  if (!isPlainObject(hx)) { errors.push(`${where}: required when responseFormat is html`); return; }
+  checkKeys(hx, where, ['rows', 'fields'], [], errors);
+  if (typeof hx.rows !== 'string' || !HTML_SELECTOR_RE.test(hx.rows)) errors.push(`${where}.rows: invalid selector`);
+  if (!isPlainObject(hx.fields)) { errors.push(`${where}.fields: must be an object`); return; }
+  const names = Object.keys(hx.fields);
+  if (names.length === 0) errors.push(`${where}.fields: at least one field is required`);
+  if (names.length > LIMITS.maxFieldsPerOperation) errors.push(`${where}.fields: too many fields`);
+  for (const name of names) {
+    if (FORBIDDEN_KEYS.has(name)) { errors.push(`${where}.fields: forbidden key '${name}'`); continue; }
+    if (!HTML_FIELD_RE.test(name)) errors.push(`${where}.fields: invalid field name '${name}'`);
+    validateHtmlRule(hx.fields[name], `${where}.fields['${name}']`, errors);
+  }
+}
+
+/** Exactly one of {cell}, {selector,attr}, {onclickArg[,source]}. No code, no regex, no other keys. */
+function validateHtmlRule(rule, where, errors) {
+  if (!isPlainObject(rule)) { errors.push(`${where}: must be an object`); return; }
+  if (rule.cell !== undefined) {
+    checkKeys(rule, where, ['cell'], [], errors);
+    if (!Number.isInteger(rule.cell) || rule.cell < 0 || rule.cell > LIMITS.maxHtmlCellIndex) errors.push(`${where}.cell: out of range`);
+  } else if (rule.selector !== undefined || rule.attr !== undefined) {
+    checkKeys(rule, where, ['selector', 'attr'], [], errors);
+    if (typeof rule.selector !== 'string' || !HTML_SELECTOR_RE.test(rule.selector)) errors.push(`${where}.selector: invalid`);
+    if (typeof rule.attr !== 'string' || !HTML_ATTR_RE.test(rule.attr)) errors.push(`${where}.attr: must be text, html, or @attrName`);
+  } else if (rule.onclickArg !== undefined || rule.source !== undefined) {
+    checkKeys(rule, where, ['onclickArg'], ['source'], errors);
+    if (!Number.isInteger(rule.onclickArg) || rule.onclickArg < 0 || rule.onclickArg > LIMITS.maxHtmlOnclickArg) errors.push(`${where}.onclickArg: out of range`);
+    if (rule.source !== undefined && (typeof rule.source !== 'string' || !HTML_SOURCE_RE.test(rule.source))) errors.push(`${where}.source: must be @attrName`);
+  } else {
+    errors.push(`${where}: must be one of {cell}, {selector,attr}, {onclickArg}`);
+  }
 }
 
 export function assertValidManifest(manifest, opts) {
