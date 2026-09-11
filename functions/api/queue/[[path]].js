@@ -1870,7 +1870,13 @@ export async function onRequest(context) {
       if (sub === "downtime" && method === "GET") {
         const r = await downtimePack(request, env, {
           ...deps, ward: url.searchParams.get("ward") || "", hours: url.searchParams.get("hours") || "",
-          marTimes: (wsqCfg && wsqCfg.marTimes) || null, offsetMinutes: (wsqCfg && wsqCfg.utcOffsetMinutes) || 0,
+          marTimes: (wsqCfg && wsqCfg.marTimes) || null,
+          /* THE SAME CLOCK THE LIVE ROUND USES. This read `|| 0`, so a hospital that had not
+           * configured an offset got UTC here and mar-schedule.js's own default (330) everywhere
+           * else - the downtime pack printed every dose time 5h30m from the screen it replaces.
+           * The downtime pack is the PAPER SHEET a ward uses when the system is down, which makes
+           * it the single worst place in the product for a wrong dose clock. */
+          offsetMinutes: Number.isFinite(wsqCfg && wsqCfg.utcOffsetMinutes) ? wsqCfg.utcOffsetMinutes : undefined,
         });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
