@@ -1398,3 +1398,20 @@ Gotcha found 2026-09-11 by reading the prompt a real model received: a Medicatio
 `{value, unit}` and `maik-chart-context.js` stringified it to `[object Object]`, so every chart
 summary looked as though it stated a dose and stated none. `doseText()` fixes it; the regression is
 `6f.` in `test/wardsynq-maik-interaction.test.mjs`.
+
+## 2026-09-12: the workstation 401, and the ward list becomes a round
+
+- **"record service refused to open (401)" on wardsynq.com.** `/wardsynq/ui/wardsynq.html` never loaded
+  Firebase, so on an ACCOUNT sign-in `shellToken()` found no `window.SMD_AUTH`, sent no bearer, and
+  `resolveIdentity()` threw. Only staff-PIN sessions (X-Staff-Token) ever worked there. The page now
+  initialises the same Firebase project as the shell (persisted sign-in is shared per origin), exposes
+  `SMD_AUTH.ready`, and `shellToken()` awaits it before reading the user. `opd.html` has its own
+  sign-in and was not touched. Deployed to wardsynq.com (site build v=7).
+- **Ward list.** One flat list with fourteen board buttons in the filter row was the owner's complaint
+  ("all patients as a list with no categories, filters"). `ward.js listView` is now: grouped by ward
+  with counts, ordered by bed number, admission-class chips with counts, live search (name / MRN /
+  bed; only `#wRoster` re-renders so the box keeps focus), day of stay on every row, boards in their
+  own card. Pure filter exposed as `WARD.filterRoster`. Proof: `test/run-ward-roster-golden-path.mjs`.
+  What the row still cannot show, because `/ward/list` does not carry it: NEWS2 / acuity, open
+  criticals, pending tasks, attending name, diagnosis. Those are the next joins for an Epic-grade
+  round (server: `migrate-inpatient.js listWard`).
