@@ -1,0 +1,17 @@
+{
+  "name": "@stewardmd/capacitor-connect-browser",
+  "version": "1.0.0",
+  "description": "Native in-app browser for StewardMD Connect Hospital. The doctor signs into their hospital EMR inside a full-screen WKWebView/WebView; afterwards the Connect Agent drives the SAME web view (same cookies, same session) to discover read-only workflows. StewardMD never sees the password. iOS via this plugin package; Android is an app-target plugin (see android/app/src/main/java/in/stewardmd/app/ConnectBrowserPlugin.java).",
+  "capacitor": {
+    "ios": {
+      "src": "ios"
+    }
+  },
+  "files": [
+    "ios/Sources",
+    "Package.swift",
+    "package.json"
+  ],
+  "author": "StewardMD",
+  "license": "MIT"
+}

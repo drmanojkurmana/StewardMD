@@ -545,16 +545,30 @@
   function findOrgIdByName(name) {
     if (!name) return null;
     var n = String(name).toLowerCase().trim();
-    if (n.indexOf("a. baumannii") !== -1 || n.indexOf("acinetobacter") !== -1) return "acineto";
+    if (n.indexOf("a. baumannii") !== -1 || n.indexOf("acinetobacter") !== -1 || n.indexOf("crab") !== -1) return "acineto";
     if (n.indexOf("p. aeruginosa") !== -1 || n.indexOf("pseudomonas") !== -1) return "pseud";
     if (n.indexOf("e. coli") !== -1 || n.indexOf("escherichia") !== -1) return "ecoli";
-    if (n.indexOf("klebsiella") !== -1) return "kleb";
-    if (n.indexOf("s. aureus") !== -1 || n.indexOf("staph") !== -1) return "mrsa";
-    if (n.indexOf("streptococc") !== -1 || n.indexOf("pneumococc") !== -1) return "strep";
-    if (n.indexOf("enterococc") !== -1 || n.indexOf("faecium") !== -1 || n.indexOf("faecalis") !== -1) return "efaecium";
-    if (n.indexOf("proteus") !== -1) return "pmir";
-    if (n.indexOf("stenotrophomonas") !== -1) return "steno";
+    if (n.indexOf("klebsiella") !== -1 || n.indexOf("k. pneumoniae") !== -1 || n.indexOf("k. oxytoca") !== -1) return "kleb";
+    if (n.indexOf("mrsa") !== -1) return "mrsa";
+    if (n.indexOf("mssa") !== -1) return "mssa";
+    if (n.indexOf("s. aureus") !== -1 || n.indexOf("staphylococcus aureus") !== -1 || n.indexOf("staph aureus") !== -1) return "mrsa";
+    if (n.indexOf("pneumococc") !== -1 || n.indexOf("s. pneumoniae") !== -1 || n.indexOf("streptococc") !== -1 || n.indexOf("pyogenes") !== -1 || n.indexOf("agalactiae") !== -1) return "strep";
+    if (n.indexOf("faecium") !== -1 || n.indexOf("vre") !== -1) return "efaecium";
+    if (n.indexOf("faecalis") !== -1 || n.indexOf("enterococc") !== -1) return "efaecalis";
+    if (n.indexOf("proteus") !== -1 || n.indexOf("p. mirabilis") !== -1) return "pmir";
+    if (n.indexOf("stenotrophomonas") !== -1 || n.indexOf("s. maltophilia") !== -1) return "steno";
     if (n.indexOf("salmonella") !== -1 || n.indexOf("shigella") !== -1) return "ecoli";
+    if (n.indexOf("listeria") !== -1 || n.indexOf("l. monocytogenes") !== -1) return "listeria";
+    if (n.indexOf("haemophilus") !== -1 || n.indexOf("h. influenzae") !== -1) return "hflu";
+    if (n.indexOf("moraxella") !== -1 || n.indexOf("m. catarrhalis") !== -1) return "morax";
+    if (n.indexOf("gonorrh") !== -1 || n.indexOf("n. gonorrhoeae") !== -1) return "ngon";
+    if (n.indexOf("meningit") !== -1 || n.indexOf("n. meningitidis") !== -1) return "nmen";
+    if (n.indexOf("bacteroides") !== -1 || n.indexOf("b. fragilis") !== -1) return "bfrag";
+    if (n.indexOf("mycoplasma") !== -1 || n.indexOf("chlamydia") !== -1) return "atyp";
+    if (n.indexOf("legionella") !== -1 || n.indexOf("l. pneumophila") !== -1) return "legio";
+    if (n.indexOf("enterobacter") !== -1 || n.indexOf("serratia") !== -1 || n.indexOf("citrobacter") !== -1 || n.indexOf("ampc") !== -1) return "escappm";
+    if (n.indexOf("esbl") !== -1) return "esbl";
+    if (n.indexOf("cre") !== -1 || n.indexOf("carbapenem-resistant") !== -1) return "cre";
     return null;
   }
 
@@ -583,12 +597,12 @@
     if (!q) return;
     try {
       if (window.MEDDB) {
-        if (typeof window.MEDDB.openList === "function") {
-          window.MEDDB.openList(q);
-          return;
-        }
         if (typeof window.MEDDB.openComposition === "function") {
           window.MEDDB.openComposition(q);
+          return;
+        }
+        if (typeof window.MEDDB.openList === "function") {
+          window.MEDDB.openList(q);
           return;
         }
       }
@@ -600,17 +614,7 @@
 
   function openAntibiotic(agentStr) {
     if (!agentStr) return;
-    var raw = String(agentStr).trim();
-    // Check if it contains multiple molecules separated by slash "/"
-    if (raw.indexOf("/") !== -1) {
-      var parts = raw.split("/").map(function (p) { return p.trim(); }).filter(Boolean);
-      if (parts.length > 1) {
-        showDrugPicker(raw, parts);
-        return;
-      }
-    }
-    var clean = cleanSingleDrugName(raw);
-    redirectDrugDB(clean || raw);
+    showDrugModal(agentStr);
   }
 
   function showDrugPicker(title, drugs) {
@@ -646,12 +650,177 @@
     }
   }
 
+  /* ─────────────── ANTIBIOTIC COVERAGE & DRUG DB MODAL ─────────────── */
+  function showDrugModal(drugIndexOrName) {
+    if (!root) return;
+    var el = root.querySelector("#abgDrugModal");
+    if (!el) return;
+    var d = null, di = -1;
+    if (typeof drugIndexOrName === "number") {
+      di = drugIndexOrName;
+      d = COVERAGE[di];
+    } else {
+      var searchName = String(drugIndexOrName).toLowerCase().trim();
+      for (var i = 0; i < COVERAGE.length; i++) {
+        if (COVERAGE[i].agent.toLowerCase().indexOf(searchName) !== -1 ||
+            searchName.indexOf(COVERAGE[i].agent.toLowerCase()) !== -1) {
+          di = i;
+          d = COVERAGE[i];
+          break;
+        }
+      }
+    }
+    if (!d) return;
+
+    var clean = cleanSingleDrugName(d.agent) || d.agent;
+    var raw = String(d.agent).trim();
+    var multiParts = [];
+    if (raw.indexOf("/") !== -1) {
+      multiParts = raw.split("/").map(function (p) { return p.trim(); }).filter(Boolean);
+    }
+
+    var keys = Object.keys(d.cov || {});
+    var relOrgs = keys.filter(function (id) { return d.cov[id] === 2; });
+    var partOrgs = keys.filter(function (id) { return d.cov[id] === 1; });
+
+    var h = '<div class="abg-dossier-card">' +
+      '<div class="abg-dossier-head g-drug">' +
+        '<div class="abg-dossier-meta">' +
+          '<span class="abg-dossier-badge">' + esc(d.cls) + '</span>' +
+          '<span class="abg-dossier-gram">Antimicrobial Agent</span>' +
+        '</div>' +
+        '<div class="abg-dossier-title">' + esc(d.agent) + '</div>' +
+        '<button class="abg-dossier-close" data-act="dismiss-drug-modal" aria-label="Close">' + abIco("close") + '</button>' +
+      '</div>' +
+      '<div class="abg-dossier-body">';
+
+    // HERO CTA: Know More - Open in Drug Database
+    h += '<button class="abg-know-more-hero" data-act="open-abx-direct" data-agent="' + esc(clean) + '">' +
+      abIco("pills") + ' <span>Know More — Open ' + esc(clean) + ' in Drug Database</span> ↗' +
+    '</button>';
+
+    if (multiParts.length > 1) {
+      h += '<div class="abg-multi-molecules">' +
+        '<span class="abg-multi-lbl">Specific Molecules in Drug Database:</span>' +
+        '<div class="abg-multi-btns">' +
+        multiParts.map(function (p) {
+          var cp = cleanSingleDrugName(p);
+          return '<button class="abg-multi-btn" data-act="open-abx-direct" data-agent="' + esc(cp || p) + '">' +
+            abIco("pills") + ' ' + esc(p) + ' ↗</button>';
+        }).join("") +
+        '</div></div>';
+    }
+
+    if (d.note) {
+      h += '<div class="abg-dossier-section pearls">' +
+        '<div class="abg-dossier-sec-h">' + abIco("info") + ' Spectrum Highlights &amp; Clinical Note</div>' +
+        '<div class="abg-dossier-sec-p">' + esc(d.note) + '</div>' +
+      '</div>';
+    }
+
+    // Organisms Covered Section
+    h += '<div class="abg-dossier-section">' +
+      '<div class="abg-dossier-sec-h">' + abIco("microbe") + ' Organisms Covered by ' + esc(d.agent) + '</div>' +
+      '<div class="abg-dossier-sec-p" style="margin-bottom:8px">Tap any organism below to inspect complete microbiology, intrinsic resistance, and treatment regimens:</div>';
+
+    if (relOrgs.length) {
+      h += '<div class="abg-cov-group-lbl"><b>Reliably Active (First-line / High Susceptibility):</b></div>' +
+        '<div class="abg-tags" style="margin-bottom:10px">' +
+        relOrgs.map(function (id) {
+          return '<em class="abg-tag-org rel" data-act="dossier-open-org" data-org-id="' + esc(id) + '" title="View complete pathogen dossier">' +
+            '✓ ' + esc(colLabel(id)) + ' <i class="abg-tag-info">' + abIco("microbe") + '</i></em>';
+        }).join("") + '</div>';
+    }
+
+    if (partOrgs.length) {
+      h += '<div class="abg-cov-group-lbl"><b>Variable / Inducible / Partial Activity:</b></div>' +
+        '<div class="abg-tags">' +
+        partOrgs.map(function (id) {
+          return '<em class="abg-tag-org part" data-act="dossier-open-org" data-org-id="' + esc(id) + '" title="View complete pathogen dossier">' +
+            '◐ ' + esc(colLabel(id)) + ' <i class="abg-tag-info">' + abIco("microbe") + '</i></em>';
+        }).join("") + '</div>';
+    }
+
+    if (!relOrgs.length && !partOrgs.length) {
+      h += '<span class="abg-note-sm">No coverage defined in standard spectrum.</span>';
+    }
+    h += '</div>';
+
+    // Highlight on Spectrum Grid button + Done button
+    h += '<div class="abg-dossier-actions">' +
+      '<button class="abg-dossier-btn-isolate" data-act="isolate-drug-from-modal" data-drug-idx="' + di + '">Highlight on Spectrum Grid</button>' +
+      '<button class="abg-dossier-btn-done" data-act="dismiss-drug-modal">Done</button>' +
+    '</div>';
+
+    h += '</div></div>';
+    el.innerHTML = h;
+    el.classList.add("on");
+  }
+
+  function hideDrugModal() {
+    if (!root) return;
+    var el = root.querySelector("#abgDrugModal");
+    if (el) {
+      el.classList.remove("on");
+      setTimeout(function () { if (!el.classList.contains("on")) el.innerHTML = ""; }, 220);
+    }
+  }
+
+  /* ─────────────── CELL CLICK ACTION MODAL ─────────────── */
+  function showCellAction(di, orgId) {
+    if (!root) return;
+    var el = root.querySelector("#abgCellAction");
+    if (!el) return;
+    var d = COVERAGE[di];
+    if (!d) return;
+    var st = (d.cov && d.cov[orgId]) || 0; // 2 = reliable, 1 = variable, 0 = not active
+    var statusClass = st === 2 ? "on" : st === 1 ? "part" : "no";
+    var statusIcon = st === 2 ? abIco("check") : st === 1 ? "◐" : "✕";
+    var statusText = st === 2 ? "Reliably Active (First-line spectrum)" :
+                     st === 1 ? "Variable / Partial Activity (Verify against local susceptibility)" :
+                     "Not Active (No activity or inherent resistance)";
+
+    var h = '<div class="abg-cell-action-card">' +
+      '<div class="abg-cell-action-head">' +
+        '<div class="abg-cell-action-title">' + esc(d.agent) + ' × ' + esc(colLabel(orgId)) + '</div>' +
+        '<button class="abg-picker-close" data-act="dismiss-cell-action" aria-label="Close">' + abIco("close") + '</button>' +
+      '</div>' +
+      '<div class="abg-cell-banner ' + statusClass + '">' +
+        '<span style="display:inline-flex;align-items:center">' + statusIcon + '</span>' +
+        '<span>' + esc(statusText) + '</span>' +
+      '</div>' +
+      '<div class="abg-cell-actions">' +
+        '<button class="abg-cell-btn-dossier" data-act="cell-open-org" data-org-id="' + esc(orgId) + '">' +
+          abIco("microbe") + ' View ' + esc(colLabel(orgId)) + ' Pathogen &amp; AMR Dossier ↗' +
+        '</button>' +
+        '<button class="abg-cell-btn-drug" data-act="cell-open-drug" data-drug-idx="' + di + '">' +
+          abIco("pills") + ' View ' + esc(d.agent) + ' Spectrum &amp; Drug Database ↗' +
+        '</button>' +
+      '</div>' +
+    '</div>';
+    el.innerHTML = h;
+    el.classList.add("on");
+  }
+
+  function hideCellAction() {
+    if (!root) return;
+    var el = root.querySelector("#abgCellAction");
+    if (el) {
+      el.classList.remove("on");
+      setTimeout(function () { if (!el.classList.contains("on")) el.innerHTML = ""; }, 220);
+    }
+  }
+
   /* ─────────────── ORGANISM MICROBIOLOGY DOSSIER MODAL ─────────────── */
   function showOrgDossier(orgId) {
     if (!root) return;
     var el = root.querySelector("#abgOrgDossier");
     if (!el) return;
     var d = getOrgDossierData(orgId);
+    var hits = COVERAGE.filter(function (x) { return x.cov && x.cov[orgId]; }).sort(function (a, b) { return (b.cov[orgId] || 0) - (a.cov[orgId] || 0); });
+    var relHits = hits.filter(function (x) { return x.cov[orgId] === 2; });
+    var partHits = hits.filter(function (x) { return x.cov[orgId] === 1; });
+
     var h = '<div class="abg-dossier-card">' +
       '<div class="abg-dossier-head g-' + esc(d.groupClass || "gpc") + '">' +
         '<div class="abg-dossier-meta">' +
@@ -671,20 +840,20 @@
     }
 
     h += '<div class="abg-dossier-section">' +
-      '<div class="abg-dossier-sec-h">' + abIco("microbe") + ' Microbiology, Morphology & Virulence</div>' +
+      '<div class="abg-dossier-sec-h">' + abIco("microbe") + ' Microbiology, Morphology &amp; Virulence</div>' +
       '<div class="abg-dossier-sec-p">' + esc(d.microbiology) + '</div>' +
     '</div>';
 
     if (d.mechanism) {
       h += '<div class="abg-dossier-section">' +
-        '<div class="abg-dossier-sec-h">' + abIco("flask") + ' AMR Mechanisms & Phenotypes</div>' +
+        '<div class="abg-dossier-sec-h">' + abIco("flask") + ' AMR Mechanisms &amp; Phenotypes</div>' +
         '<div class="abg-dossier-sec-p">' + esc(d.mechanism) + '</div>' +
       '</div>';
     }
 
     if (d.regimens && d.regimens.length) {
       h += '<div class="abg-dossier-section">' +
-        '<div class="abg-dossier-sec-h">' + abIco("pills") + ' Clinical Regimens & Targeted Therapy</div>' +
+        '<div class="abg-dossier-sec-h">' + abIco("pills") + ' Clinical Regimens &amp; Targeted Therapy</div>' +
         '<div class="abg-dossier-regimens">';
       d.regimens.forEach(function (r) {
         h += '<div class="abg-dossier-reg-item">' +
@@ -698,23 +867,35 @@
 
     if (d.pearls) {
       h += '<div class="abg-dossier-section pearls">' +
-        '<div class="abg-dossier-sec-h">' + abIco("info") + ' Clinical Pearls for Clinicians & Microbiologists</div>' +
+        '<div class="abg-dossier-sec-h">' + abIco("info") + ' Clinical Pearls for Clinicians &amp; Microbiologists</div>' +
         '<div class="abg-dossier-sec-p">' + esc(d.pearls) + '</div>' +
       '</div>';
     }
 
-    var hits = COVERAGE.filter(function (x) { return x.cov[orgId]; }).sort(function (a, b) { return (b.cov[orgId] || 0) - (a.cov[orgId] || 0); });
     if (hits.length) {
       h += '<div class="abg-dossier-section">' +
         '<div class="abg-dossier-sec-h">' + abIco("pills") + ' Active Antibiotics from Spectrum Grid</div>' +
-        '<div class="abg-dossier-sec-p" style="margin-bottom:8px">Tap any antibiotic to open full dosing, monograph, and brands in the Drug Database:</div>' +
-        '<div class="abg-tags">' +
-        hits.map(function (x) {
-          var rel = x.cov[orgId] === 2;
-          return '<em class="abg-tag-drug ' + (rel ? "rel" : "part") + '" data-act="dossier-open-abx" data-agent="' + esc(x.agent) + '" title="Open in Drug Database">' +
-            (rel ? "✓ " : "◐ ") + esc(x.agent) + ' <i class="abg-tag-arrow">↗</i></em>';
-        }).join("") +
-        '</div></div>';
+        '<div class="abg-dossier-sec-p" style="margin-bottom:8px">Tap any antibiotic to inspect coverage details &amp; open in Drug Database:</div>';
+
+      if (relHits.length) {
+        h += '<div class="abg-cov-group-lbl"><b>Reliably Active (First-line):</b></div>' +
+          '<div class="abg-tags" style="margin-bottom:8px">' +
+          relHits.map(function (x) {
+            return '<em class="abg-tag-drug rel" data-act="dossier-open-abx" data-agent="' + esc(x.agent) + '" title="Inspect ' + esc(x.agent) + ' &amp; open in Drug DB">' +
+              '✓ ' + esc(x.agent) + ' <i class="abg-tag-arrow">↗</i></em>';
+          }).join("") + '</div>';
+      }
+
+      if (partHits.length) {
+        h += '<div class="abg-cov-group-lbl"><b>Variable / Second-line:</b></div>' +
+          '<div class="abg-tags">' +
+          partHits.map(function (x) {
+            return '<em class="abg-tag-drug part" data-act="dossier-open-abx" data-agent="' + esc(x.agent) + '" title="Inspect ' + esc(x.agent) + ' &amp; open in Drug DB">' +
+              '◐ ' + esc(x.agent) + ' <i class="abg-tag-arrow">↗</i></em>';
+          }).join("") + '</div>';
+      }
+
+      h += '</div>';
     }
 
     h += '<div class="abg-dossier-actions">' +
@@ -751,6 +932,11 @@
     if (!root) return;
     var el = root.querySelector("#abgOrgDossier");
     if (!el) return;
+    var hits = COVERAGE.filter(function (x) {
+      var oid = findOrgIdByName(d.name);
+      return oid && x.cov && x.cov[oid];
+    });
+
     var h = '<div class="abg-dossier-card">' +
       '<div class="abg-dossier-head g-' + esc(d.groupClass || "gpc") + '">' +
         '<div class="abg-dossier-meta">' +
@@ -760,19 +946,42 @@
         '<div class="abg-dossier-title">' + esc(d.name) + '</div>' +
         '<button class="abg-dossier-close" data-act="dismiss-dossier" aria-label="Close">' + abIco("close") + '</button>' +
       '</div>' +
-      '<div class="abg-dossier-body">' +
-      '<div class="abg-dossier-section">' +
-        '<div class="abg-dossier-sec-h">' + abIco("microbe") + ' Microbiology & Clinical Summary</div>' +
-        '<div class="abg-dossier-sec-p">' + esc(d.microbiology) + '</div>' +
-      '</div>' +
-      '<div class="abg-dossier-section pearls">' +
+      '<div class="abg-dossier-body">';
+
+    if (d.intrinsic) {
+      h += '<div class="abg-dossier-alert">' +
+        '<div class="abg-dossier-alert-title">' + abIco("warn") + ' Intrinsic / Inherent Resistance</div>' +
+        '<div class="abg-dossier-alert-text">' + esc(d.intrinsic) + '</div>' +
+      '</div>';
+    }
+
+    h += '<div class="abg-dossier-section">' +
+      '<div class="abg-dossier-sec-h">' + abIco("microbe") + ' Microbiology &amp; Clinical Summary</div>' +
+      '<div class="abg-dossier-sec-p">' + esc(d.microbiology) + '</div>' +
+    '</div>';
+
+    if (d.pearls) {
+      h += '<div class="abg-dossier-section pearls">' +
         '<div class="abg-dossier-sec-h">' + abIco("info") + ' Clinical Pearls</div>' +
         '<div class="abg-dossier-sec-p">' + esc(d.pearls) + '</div>' +
-      '</div>' +
-      '<div class="abg-dossier-actions">' +
-        '<button class="abg-dossier-btn-done" data-act="dismiss-dossier">Done</button>' +
-      '</div>' +
-      '</div></div>';
+      '</div>';
+    }
+
+    if (hits.length) {
+      h += '<div class="abg-dossier-section">' +
+        '<div class="abg-dossier-sec-h">' + abIco("pills") + ' Active Antibiotics from Spectrum Grid</div>' +
+        '<div class="abg-tags">' +
+        hits.map(function (x) {
+          return '<em class="abg-tag-drug rel" data-act="dossier-open-abx" data-agent="' + esc(x.agent) + '" title="View coverage &amp; Drug DB">' +
+            '✓ ' + esc(x.agent) + ' <i class="abg-tag-arrow">↗</i></em>';
+        }).join("") +
+        '</div></div>';
+    }
+
+    h += '<div class="abg-dossier-actions">' +
+      '<button class="abg-dossier-btn-done" data-act="dismiss-dossier">Done</button>' +
+    '</div>' +
+    '</div></div>';
     el.innerHTML = h;
     el.classList.add("on");
   }
@@ -839,6 +1048,8 @@
       '</div>' +
       '<div class="abg-body" id="abgBody"></div>' +
       '<div class="abg-modal-sheet" id="abgDrugPicker"></div>' +
+      '<div class="abg-modal-sheet" id="abgCellAction"></div>' +
+      '<div class="abg-modal-sheet" id="abgDrugModal"></div>' +
       '<div class="abg-modal-sheet" id="abgOrgDossier"></div>';
   }
 
@@ -1082,7 +1293,12 @@
         if (act === "clearcov") { covSel = null; covSelType = null; return render(); }
         if (act === "open-abx") {
           var ag = btn.getAttribute("data-agent");
-          if (ag) openAntibiotic(ag);
+          if (ag) showDrugModal(ag);
+          return;
+        }
+        if (act === "open-abx-direct") {
+          var agDirect = btn.getAttribute("data-agent");
+          if (agDirect) redirectDrugDB(agDirect);
           return;
         }
         if (act === "select-org-show") {
@@ -1103,19 +1319,24 @@
                 covSel = ki;
                 covSelType = "drug";
                 render();
-                var sumEl = root.querySelector("#abgSum");
-                if (sumEl) sumEl.scrollIntoView({ behavior: "smooth", block: "nearest" });
+                showDrugModal(ki);
                 return;
               }
             }
-            openAntibiotic(agName);
+            showDrugModal(agName);
           }
           return;
         }
         if (act === "dossier-open-abx") {
           var doAg = btn.getAttribute("data-agent");
           hideOrgDossier();
-          if (doAg) openAntibiotic(doAg);
+          if (doAg) showDrugModal(doAg);
+          return;
+        }
+        if (act === "dossier-open-org") {
+          var doOid = btn.getAttribute("data-org-id");
+          hideDrugModal();
+          if (doOid) showOrgDossier(doOid);
           return;
         }
         if (act === "show-org-dossier") {
@@ -1137,6 +1358,26 @@
           hideOrgDossier();
           return;
         }
+        if (act === "dismiss-drug-modal") {
+          hideDrugModal();
+          return;
+        }
+        if (act === "dismiss-cell-action") {
+          hideCellAction();
+          return;
+        }
+        if (act === "cell-open-org") {
+          var cellOid = btn.getAttribute("data-org-id");
+          hideCellAction();
+          if (cellOid) showOrgDossier(cellOid);
+          return;
+        }
+        if (act === "cell-open-drug") {
+          var cellDi = +btn.getAttribute("data-drug-idx");
+          hideCellAction();
+          showDrugModal(cellDi);
+          return;
+        }
         if (act === "dismiss-picker") {
           hideDrugPicker();
           return;
@@ -1147,6 +1388,17 @@
           if (targetAbx) redirectDrugDB(targetAbx);
           return;
         }
+        if (act === "isolate-drug-from-modal") {
+          var isDrugIdx = +btn.getAttribute("data-drug-idx");
+          hideDrugModal();
+          tab = "coverage";
+          covSel = isDrugIdx;
+          covSelType = "drug";
+          render();
+          var sumEl = root.querySelector("#abgSum");
+          if (sumEl) sumEl.scrollIntoView({ behavior: "smooth", block: "nearest" });
+          return;
+        }
         if (act === "isolate-from-dossier") {
           var isOrgId = btn.getAttribute("data-org-id");
           hideOrgDossier();
@@ -1154,6 +1406,8 @@
           covSel = isOrgId;
           covSelType = "org";
           render();
+          var sumEl = root.querySelector("#abgSum");
+          if (sumEl) sumEl.scrollIntoView({ behavior: "smooth", block: "nearest" });
           return;
         }
       }
@@ -1176,19 +1430,29 @@
           showOrgDossier(oid);
           return;
         }
+        var cell = e.target.closest(".abg-cell");
+        if (cell) {
+          var tr = cell.closest("tr[data-drug]");
+          if (tr) {
+            var di = +tr.getAttribute("data-drug");
+            var colIndex = cell.cellIndex - 1; // index 0 is antibiotic name column
+            if (colIndex >= 0 && colIndex < COLS.length) {
+              var targetCol = COLS[colIndex];
+              covSel = di;
+              covSelType = "drug";
+              render();
+              showCellAction(di, targetCol.id);
+              return;
+            }
+          }
+        }
         var dr = e.target.closest("[data-drug]");
         if (dr && dr.classList.contains("abg-drow")) {
-          if (e.target.closest(".abg-drug-link-btn")) {
-            var agBtn = dr.querySelector("[data-agent]");
-            var ag = agBtn ? agBtn.getAttribute("data-agent") : null;
-            if (ag) { openAntibiotic(ag); return; }
-          }
           var di = +dr.getAttribute("data-drug");
           covSel = di;
           covSelType = "drug";
           render();
-          var sumEl = root.querySelector("#abgSum");
-          if (sumEl) sumEl.scrollIntoView({ behavior: "smooth", block: "nearest" });
+          showDrugModal(di);
           return;
         }
       }
@@ -1424,7 +1688,36 @@
       ".abg-sum-cov-label{font:700 11.5px var(--f);color:var(--mut);margin-bottom:5px}",
       ".abg-sum-note{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:7px 10px;font:500 12px/1.4 var(--f);color:var(--ink);margin-bottom:8px}",
       ".abg-tags em.rel{background:var(--panel);border-color:#059669;color:#047857}",
-      "body.dark .abg-tags em.rel{background:#0d281e;border-color:#059669;color:#34d399}"
+      "body.dark .abg-tags em.rel{background:#0d281e;border-color:#059669;color:#34d399}",
+      ".abg-dossier-head.g-drug{background:linear-gradient(135deg,#0F766E 0%,#115E59 100%)}",
+      ".abg-multi-molecules{background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:8px 12px;margin:6px 0 12px}",
+      ".abg-multi-lbl{font:700 11px var(--f);color:var(--mut);display:block;margin-bottom:6px}",
+      ".abg-multi-btns{display:flex;flex-wrap:wrap;gap:6px}",
+      ".abg-multi-btn{display:inline-flex;align-items:center;gap:5px;background:var(--panel);border:1px solid var(--line);color:var(--tl);font:600 12px var(--f);padding:5px 9px;border-radius:7px;cursor:pointer}",
+      ".abg-multi-btn:active{background:var(--tls)}",
+      ".abg-multi-btn svg{width:12px;height:12px}",
+      ".abg-cov-group-lbl{font:700 11.5px var(--f);color:var(--mut);margin:8px 0 4px}",
+      ".abg-cell{cursor:pointer;user-select:none}",
+      ".abg-cell:active{opacity:.65}",
+      ".abg-cell-action-card{background:var(--panel);border-radius:20px 20px 0 0;padding:18px 20px calc(24px + env(safe-area-inset-bottom));max-height:80vh;display:flex;flex-direction:column;transform:translateY(100%);transition:transform .24s cubic-bezier(.2,.8,.2,1);box-shadow:0 -10px 30px rgba(0,0,0,.25)}",
+      ".abg-modal-sheet.on .abg-cell-action-card{transform:translateY(0)}",
+      ".abg-cell-action-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}",
+      ".abg-cell-action-title{font:800 16px var(--f);color:var(--ink)}",
+      ".abg-cell-banner{padding:10px 12px;border-radius:10px;font:700 12.5px/1.4 var(--f);margin-bottom:14px;display:flex;align-items:center;gap:8px}",
+      ".abg-cell-banner.on{background:#ECFDF5;border:1px solid #10B981;color:#047857}",
+      "body.dark .abg-cell-banner.on{background:#064E3B;border-color:#059669;color:#6EE7B7}",
+      ".abg-cell-banner.part{background:#FFFBEB;border:1px solid #F59E0B;color:#B45309}",
+      "body.dark .abg-cell-banner.part{background:#78350F;border-color:#D97706;color:#FDE68A}",
+      ".abg-cell-banner.no{background:#FEF2F2;border:1px solid #EF4444;color:#B91C1C}",
+      "body.dark .abg-cell-banner.no{background:#7F1D1D;border-color:#DC2626;color:#FCA5A5}",
+      ".abg-cell-banner svg{width:15px;height:15px;flex:none}",
+      ".abg-cell-actions{display:flex;flex-direction:column;gap:9px}",
+      ".abg-cell-btn-dossier{display:flex;align-items:center;justify-content:center;gap:7px;background:#2563EB;color:#fff;font:700 13px var(--f);padding:11px 14px;border:none;border-radius:10px;cursor:pointer}",
+      ".abg-cell-btn-dossier:active{background:#1d4ed8}",
+      ".abg-cell-btn-dossier svg{width:15px;height:15px}",
+      ".abg-cell-btn-drug{display:flex;align-items:center;justify-content:center;gap:7px;background:#0F766E;color:#fff;font:700 13px var(--f);padding:11px 14px;border:none;border-radius:10px;cursor:pointer}",
+      ".abg-cell-btn-drug:active{background:#0d635c}",
+      ".abg-cell-btn-drug svg{width:15px;height:15px}"
     ].join("");
     (document.head || document.documentElement).appendChild(s);
   }

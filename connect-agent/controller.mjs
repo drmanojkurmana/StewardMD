@@ -3,7 +3,14 @@ import { readFile, writeFile } from 'node:fs/promises';
 
 const FORBIDDEN = /(^|\/)(password|passwd|credentials|secrets?|cookies?|tokens?|raw-?responses?|patient-?data|session|authorization|csrf|jwt)(\/|$)/i;
 const SENSITIVE_KEY = /password|passwd|secret|cookie|token|authorization|session|csrf|jwt|mrn|patient.?name|phone|email|dob|address|ssn|national.?id/i;
-const WRITE_WORDS = /prescrib|medicat|order|delete|update|create.?patient|write.?back|allerg|diagnos|procedure|appointment|encounter|result.?entry/i;
+// Action verbs: these mean a mutation is happening, regardless of what method label the endpoint
+// carries, so they stay forbidden even for a nominally-safe method.
+const ACTION_WORDS = /prescrib|order|delete|update|create.?patient|write.?back/i;
+// Domain nouns: legitimate categories of data a READ endpoint returns (GET /patients/1/medications
+// is a read, not a write). Schema v1 conflated these with ACTION_WORDS and rejected ordinary reads;
+// v2 only treats them as a write signal when the request isn't GET/HEAD.
+const DOMAIN_WORDS = /medicat|allerg|diagnos|procedure|appointment|encounter|result.?entry/i;
+const WRITE_WORDS = new RegExp(`${ACTION_WORDS.source}|${DOMAIN_WORDS.source}`, 'i');
 const SAFE_METHODS = new Set(['GET', 'HEAD']);
 
 function digest(value) { return createHash('sha256').update(value).digest('hex'); }
@@ -26,7 +33,7 @@ function containsSensitive(value, path = '$', findings = []) {
   return findings;
 }
 
-export function validateAdapterSpec(spec, { allowWrites = false } = {}) {
+export function validateAdapterSpec(spec, { allowWrites = false, schemaVersion = 1 } = {}) {
   const errors = [];
   if (!spec || typeof spec !== 'object' || Array.isArray(spec)) errors.push('spec must be an object');
   if (!spec?.version) errors.push('missing version');
@@ -34,10 +41,18 @@ export function validateAdapterSpec(spec, { allowWrites = false } = {}) {
   if (!Array.isArray(spec?.allowedOrigins) || spec.allowedOrigins.length === 0) errors.push('allowedOrigins must be non-empty');
   if (Array.isArray(spec?.events)) for (const [i, e] of spec.events.entries()) {
     const method = String(e?.method || '').toUpperCase();
+    const isSafeMethod = SAFE_METHODS.has(method);
     if (!['GET','POST','PUT','PATCH','DELETE','HEAD'].includes(method)) errors.push(`events[${i}] invalid method`);
     if (FORBIDDEN.test(String(e?.path || ''))) errors.push(`events[${i}] forbidden path`);
-    if (!allowWrites && !SAFE_METHODS.has(method)) errors.push(`events[${i}] non-read operation requires explicit write approval`);
-    if (WRITE_WORDS.test(`${e?.path || ''} ${JSON.stringify(e?.queryKeys || [])}`)) errors.push(`events[${i}] possible clinical write/sensitive operation`);
+    if (!allowWrites && !isSafeMethod) errors.push(`events[${i}] non-read operation requires explicit write approval`);
+    const haystack = `${e?.path || ''} ${JSON.stringify(e?.queryKeys || [])}`;
+    // v1 (legacy artifacts): any clinical word blocks, read or not - preserved so old approvals
+    // don't silently change meaning. v2: action verbs always block; domain nouns only block when
+    // the method itself isn't a safe read (see ACTION_WORDS/DOMAIN_WORDS above).
+    const flagged = schemaVersion >= 2
+      ? (ACTION_WORDS.test(haystack) || (!isSafeMethod && DOMAIN_WORDS.test(haystack)))
+      : WRITE_WORDS.test(haystack);
+    if (flagged) errors.push(`events[${i}] possible clinical write/sensitive operation`);
     if (containsSensitive(e).length) errors.push(`events[${i}] sensitive field metadata present`);
   }
   if (containsSensitive(spec).length) errors.push('sensitive credential/PHI metadata present');

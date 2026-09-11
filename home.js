@@ -861,6 +861,12 @@
         (govschemesOn() ? tile("hospital", "Scheme Search", "Package codes and rates", "govschemes") : "") +
         tile("search", "Search ICD", "ICD-10 / ICD-11 diagnosis codes", "icdsearch") +
         tile("share", "Connect", "Link your hospital EMR", "connect") +
+        // Agent Connect: the doctor onboards their OWN hospital by signing in to its EMR themselves.
+        // Same flag as the boot module (smd_connect_agent, default OFF) - the boot module owns that
+        // check and only publishes SMD_CONNECT_AGENT_BOOT when it passes, so the tile cannot appear
+        // without it and the flag logic is not duplicated here.
+        ((window.SMD_CONNECT_AGENT_BOOT && window.SMD_CONNECT_AGENT_BOOT.enabled)
+          ? tile("hospital", "Connect Hospital", "Onboard your hospital EMR", "agentconnect") : "") +
         '</div>');
       sheetEl().querySelectorAll("[data-mi]").forEach(function (b) {
         b.addEventListener("click", function () {
@@ -870,6 +876,7 @@
             if (a === "rxverify") { ACT.prescriptionVerify(); return; }
             if (a === "govschemes") { ACT.govschemes(); return; }
             if (a === "icdsearch") { ACT.icdsearch(); return; }
+            if (a === "agentconnect") { ACT.agentconnect(); return; }
             ((a === "opd" || a === "protocol") ? ACT.queue : a === "icu" ? ACT.icu : a === "ward" ? ACT.ward : a === "oncotree" ? ACT.oncotree : a === "fc" ? ACT.followcare : ACT.connect)();
           }, 70);
         });
@@ -980,6 +987,17 @@
       } catch (e) { if (window.toast) toast("Connect failed to open"); }
     },
     connectpatient: function () { try { if (window.CONNECTPT && CONNECTPT.open) CONNECTPT.open(); else toast("Connect patient loading…"); } catch (e) {} },
+    // Agent Connect: doctor-driven hospital onboarding. The boot module (connect-agent-boot.js) owns
+    // the smd_connect_agent flag check and the lazy load of the onboarding UI; this only opens it.
+    agentconnect: function () {
+      try {
+        if (window.SMD_CONNECT_AGENT_BOOT && SMD_CONNECT_AGENT_BOOT.open) {
+          SMD_CONNECT_AGENT_BOOT.open().catch(function (e) {
+            if (window.toast) toast("Connect Hospital unavailable: " + (e && e.message ? e.message : "load failed"));
+          });
+        } else if (window.toast) { toast("Connect Hospital is not enabled"); }
+      } catch (e) { if (window.toast) toast("Connect Hospital unavailable"); }
+    },
     followcare: function () { if (window.FollowCare && FollowCare.open) FollowCare.open(); else toast("FollowCare loading…"); },
     maitri: function () { if (window.FollowCare && FollowCare.maitri) FollowCare.maitri(); else if (window.FollowCare && FollowCare.open) FollowCare.open(); else toast("MAiTRI loading…"); },
     customizetools: function () { openToolsCustomize(); }
@@ -1765,6 +1783,7 @@
       pending={id:e.pointerId,x:e.clientX,y:e.clientY};_pressT=setTimeout(start,450);
     });
     root.addEventListener("click",function(e){
+      if(!e.target||!e.target.closest)return; // a document-targeted synthetic event has no Element API
       if(_reorderMode&&Date.now()>=_suppressToolClickUntil&&!e.target.closest("#rnavToolsGrid .rnav-tile")){if(_dragCancel)_dragCancel();homeEditMode(false);}
       if((Date.now()<_suppressToolClickUntil||_reorderMode)&&e.target.closest("#rnavToolsGrid,.hv-tool-tog")){
         e.preventDefault();e.stopImmediatePropagation();
@@ -1772,6 +1791,7 @@
     },true);
     root.addEventListener("keydown",function(e){
       if(e.key==="Escape"&&_reorderMode){if(_dragCancel)_dragCancel();homeEditMode(false);return;}
+      if(!e.target||!e.target.closest)return;
       var tile=e.target.closest("#rnavToolsGrid .rnav-tile:not(.addtool)");
       if(tile&&e.key===" "&&!_reorderMode){e.preventDefault();homeEditMode(true);return;}
       if(!_reorderMode||!tile||!/^Arrow/.test(e.key))return;
@@ -2247,6 +2267,11 @@
       mi("trend", "AI Usage", "MaiK Tokens, today&rsquo;s spend &amp; rate card", "aiusage") +
       (nIsOwner() ? mi("framework", "AI Control Center", "Models, usage &amp; quotas (owner)", "aictl") : "") +
       mi("framework", "Connect EMR", "Onboard a hospital or EMR", "connect") +
+      // Agent Connect: the doctor onboards their OWN hospital by signing in to its EMR themselves,
+      // rather than an admin wiring a connection up front. Flag-gated by the boot module
+      // (smd_connect_agent, default OFF), which only publishes SMD_CONNECT_AGENT_BOOT when it passes.
+      ((window.SMD_CONNECT_AGENT_BOOT && window.SMD_CONNECT_AGENT_BOOT.enabled)
+        ? mi("hospital", "Connect Hospital", "Onboard your hospital by signing in yourself", "agentconnect") : "") +
       mi("framework", "Connect patient", "Pull a patient from a connected hospital", "connectpatient") +
       mi("settings", "Display &amp; Accessibility", "Font size, density, auto-fit", "display") +
       mi("bell", "Notification preferences", "Control tasks, labs, guidelines &amp; more", "notifprefs") +
