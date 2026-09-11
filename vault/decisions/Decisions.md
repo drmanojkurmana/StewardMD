@@ -5218,3 +5218,55 @@ calls. 653 test files, 0 failures. Recovery tag `pre-hard-local`. Handoff:
 **NOT claimed:** any on-device run of the new task functions on a phone (tests use a fake plugin),
 Indic offline translation, a client screen for Senior Surgeon Mode, or clinical validation of
 anything here.
+
+## 2026-09-12 MaiK Lite: 12 gaps from two live owner transcripts (PR maik-lite-battery-0911)
+
+Owner ran MaiK Lite live and shared two full transcripts (2026-09-11 evening) plus screenshots of
+raw reasoning leaking into the chat. Asked to "find the gaps", then "fix all". Same model/quant/
+prompt throughout; every fix is in retrieval, the follow-up resolver, the router, or a
+post-generation safety net (`stripReasoning`).
+
+Root causes, grouped:
+1. **Router misses** (home.js `maikRoute`): "Hello dude" (address word not in the greeting strip
+   list), meta-complaints about MaiK's own last answer ("why are you missing continuity", "you are
+   wrong") being sent to retrieval as new clinical questions instead of short-circuited, "How to
+   diagnose it" (a follow-up) losing continuity because `GENERIC_FU` had the noun "diagnosis" but not
+   the verb "diagnose" or the pronoun "it"/"them", and "Ok tell me dose of metoprolol" gate-failing
+   while "Metoprolol dose" worked because the dose-follow-up drug extractor left "Ok tell" glued onto
+   the drug name (the stopword list had no request-frame words).
+2. **Zero-anchor grounding** (maik-local.js `retrieveGrounding`): "Teach me Pneumonia atoz" and "Can
+   I learn a new topic today" had no real topic/drug anchor at all (every content word was generic or
+   simply absent from the book), so the anchor filter's `need.length ? filter : cited` fallback used
+   the UNFILTERED top BM25 hits - grounding a fabricated disease and an unrelated ML chapter
+   respectively. Fixed: zero anchors now means "not covered", never "whatever scored highest".
+   "medical/topic/learn/teach/today" added to the generic-word list (near-universal in a medical KB,
+   so treating them as real anchors was nearly as bad as no anchor).
+3. **Reasoning/prompt leaks** (`stripReasoning`, new class): a bare "H" answered with MaiK's own
+   SYSTEM prompt pasted back verbatim ("Give the final answer only, never your reasoning...") before
+   an unrelated drug monograph - a 4B model occasionally fails to distinguish "these are your
+   instructions" from "please continue this text". Verbatim presence of that unique sentence is now
+   treated as no answer (there is no reliable place to cut the echo from, so it does not try).
+   Separately, "Hi" leaked a full "Plan: ... Possible responses: ... Let's go with X" brainstorm with
+   no blank line before the real line, defeating the existing `LEAD_THOUGHT` blank-line-cut guard
+   (added earlier for a tagged/paragraph-separated version of the same failure). Now recovers the
+   picked line via a `LEAD_PICK` marker when present, and only falls back to the old
+   strip-the-label behaviour otherwise - so a genuine answer starting with a trigger word ("Plan the
+   airway first: ...") is still untouched. Also added: de-duplication when a small model repeats its
+   whole answer verbatim (seen on the heart-failure dosing answer).
+4. **model-missing on the first message**: the native plugin's `model-missing` error code (a
+   transient load race, not a real failure - every later message that session worked) had no branch
+   in `maikErrorNotice`, so the clinician got a dead-end with no next step on their very first
+   message. Now told to simply ask again.
+
+Tests: `test/maik-router-gaps-0911.test.mjs` (new, source-level per home.js convention), 7 new cases
+in `test/maik-local.test.mjs`. The older `loadWithRag` test fixture needed a real tokenizer/idfOf on
+its fake RAG/book (it previously had none, same gap class as the drift-guard fix on 2026-09-04) so
+the new zero-anchor guard does not blind every pre-existing grounding test. Full suite green.
+
+Not fixed, flagged for later: the underlying cause of the reasoning/prompt leaks may go deeper than
+JS-side stripping - MaiK MxCore (MedGemma, no `noThink`) has no thinking-suppression prefill trick at
+all (only Lite/Apex/Bonsai have `noThink: true`), so a stronger fix would give MxCore/Neural/Horizon
+their own leak-resistant system prompt or verify on-device whether `stripReasoning` alone is enough
+in practice. `LlamaEngine.swift`'s chat-template application (`llama_chat_apply_template`) looks
+correct on inspection, so this reads as an instruction-following limit at 4B scale, not a template
+bug - not re-verified live on device this session.
