@@ -99,9 +99,19 @@
     if (r.page === "logout") return signOut();
     if (!st.who) return whoami().then(route);
     if (r.page === "hospitals") return render("hospitals");
+    /* The demonstration-hospital builder runs BEFORE a hospital is chosen, because its whole job is
+     * to create one. Every other page below needs st.org loaded; this one would be bounced straight
+     * back to the hospital list by the next line and could never run. */
     if (!st.orgId) return render("hospitals");
     if (!st.org) return loadOrg().then(function () { return st.org ? route() : render("hospitals"); });
-    if (r.page === "landing") { if (isWardsynq() && st.org.connectTenantId) { location.replace(workstationUrl()); return; } return go("home"); }
+    /* LAND ON THE MAP, not the order-safety workstation.
+     *
+     * The workstation is a separate page that does NOT initialise Firebase, so an account sign-in
+     * reaches it with no bearer at all and the record service answers 401: "record service refused
+     * to open (401). Safety checking is unavailable, so ordering is disabled." That is the first
+     * thing a new user saw after signing in. The map works for every sign-in, and the workstation is
+     * still one click away from it once its own auth is wired. */
+    if (r.page === "landing") return go("home");
     if (!r.page || r.page === "home") return render("home");
     if (r.page === "ward") return openWard(r.arg);
     if (r.page === "opd") { location.href = "/opd.html"; return; }
@@ -162,7 +172,14 @@
     st.page = page;
     app.className = "shell";
     if (page === "login") app.innerHTML = bar() + '<div id="page"></div>';
-    else app.innerHTML = bar() + '<div class="wrap">' + rail(page) + '<main class="work" id="page"></main></div>';
+    else {
+      /* No rail means no rail COLUMN either. .wrap is a two-column grid, so with an empty rail the
+       * only child landed in the 178px first column and every page shown before a hospital is
+       * chosen - the hospital list, and the demonstration builder - was squeezed into a strip a
+       * third the width of its own text. */
+      var railHtml = rail(page);
+      app.innerHTML = bar() + '<div class="wrap' + (railHtml ? "" : " norail") + '">' + railHtml + '<main class="work" id="page"></main></div>';
+    }
     var el = $("page");
     var ctx = { el: el, api: api, esc: esc, ms: ms, go: go, can: can, toast: toast, state: st, isWardsynq: isWardsynq, selectOrg: selectOrg, setSession: setSession, when: when };
     try { var out = def.render(ctx, extra); if (out && typeof out.then === "function") out.catch(function (e) { el.innerHTML += '<div class="msg err">' + esc(String(e && e.message || e)) + "</div>"; }); }
@@ -304,6 +321,14 @@
         '<label class="f" style="flex:0 1 160px"><span>Country</span><select id="newHospRegion"><option value="IN">India</option><option value="US">United States</option></select></label>' +
         '<button class="btn" id="mkHosp" type="button">' + ms("add_business") + "Create</button></div>" +
         '<p class="quiet">The country decides what counts as a valid phone number and which unit a temperature is charted in. It can be changed later in the Admin Center.</p><div id="mkMsg"></div></div>';
+      /* An empty hospital demonstrates nothing, and the seeder that fills one needed Node, a
+       * terminal and a Firebase token - which is why this is a button. Offered to every sign-in,
+       * not only an account: whether THIS identity may create or adopt a hospital is the server's
+       * answer to give, and the demo page reports that answer in the server's own words rather
+       * than hiding the door and leaving the person to guess. */
+      html += '<div class="card" style="margin-top:18px"><h2>Create a demonstration hospital</h2>' +
+        '<p class="quiet">Creates a hospital of fabricated patients so you can walk through wards, charts, the medication round, the laboratory and billing with something in them. It takes about a minute.</p>' +
+        '<div class="row"><button class="btn ghost" type="button" data-go="demo">' + ms("science") + "Create a demonstration hospital</button></div></div>";
       $("hospList").innerHTML = html;
       el.querySelectorAll("[data-org]").forEach(function (b) { b.onclick = function () { selectOrg(b.getAttribute("data-org")); }; });
       var mk = $("mkHosp"); if (mk) mk.onclick = function () {
